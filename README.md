@@ -313,3 +313,72 @@ python scripts/validate_fact_anchor_bank.py
 - `backups/`
 - 사용자 답안 이미지
 - 사용자 답안 텍스트
+
+---
+
+## Rubric Authoring Workflow
+
+평가 기준과 유형별 모범 답안은 JSON으로 관리한다.
+
+핵심 원칙:
+
+- 문제 유형은 별도 점수 체계가 아니라 C항목 평가 렌즈이다.
+- 모범 답안은 정답 문장 매칭용이 아니라 구조·깊이·현장 적용성 기준이다.
+- D/E는 모든 문제 유형에서 현장 적용성, 설계 판단, 제언, 독창성을 공통 평가한다.
+
+주요 파일:
+
+```text
+rubric_registry.py
+question_type_router.py
+model_answer_router.py
+rubrics/question_types/default.json
+rubrics/model_answers/industrial_instrumentation_control.json
+docs/rubric_authoring_guide.md
+scripts/rubric_manager.py
+```
+
+자주 쓰는 명령:
+
+```bash
+python3 scripts/rubric_manager.py list-types
+python3 scripts/rubric_manager.py list-model-answers
+python3 scripts/rubric_manager.py validate-all
+```
+
+새 모범 답안 후보 생성:
+
+```bash
+python3 scripts/rubric_manager.py new-model-answer \
+  --topic-id cv_valve_flow_coefficient \
+  --question-type COMPARE \
+  --title "Cv 비교·선정형 모범 답안" \
+  --question "Cv와 Kv를 비교하고 적용 기준을 설명하시오." \
+  --alias "Cv" \
+  --alias "Kv" \
+  --field "밸브 사이징" \
+  --field "제조사 data"
+```
+
+후보 편집 후 승격:
+
+```bash
+vim rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json
+
+python3 scripts/rubric_manager.py promote-model-answer \
+  --candidate rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json
+
+python3 scripts/rubric_manager.py validate-all
+```
+
+현재 구현 단계:
+
+```text
+phase8  : 독창성·기술사적 판단성 평가
+phase8b : 독창성 반영 후 최종 volume cap 강제
+phase9  : question_type을 C항목 평가 렌즈로 적용
+phase10 : model answer bank를 기준 답안으로 참조
+phase11 : B/C 명칭을 문제 요구·유형별 Fact 설명으로 정리
+phase12 : D/E 표현을 현장 적용·설계 판단·제언 중심으로 정리
+phase13 : rubric_registry와 rubric_manager로 기준 작성 workflow 정리
+```

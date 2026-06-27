@@ -2632,6 +2632,8 @@ def _phase2_postprocess_grade(legacy_result):
     grade = _phase8_merge_originality_feedback(grade, originality_eval)
     grade = _phase8b_enforce_final_volume_cap(grade)
     grade = _phase11_normalize_requirement_fact_labels(grade)
+    grade = _phase14_compact_feedback_output(grade)
+    grade = _phase15_hide_internal_metric_dict(grade)
     grade = _phase2_add_display_aliases(grade)
 
     _phase2_json_write(session_dir / "grade.json", grade)
@@ -3432,4 +3434,126 @@ def _phase11_normalize_requirement_fact_labels(grade):
                         row[key] = fix_text(row.get(key))
 
     return grade
+
+
+
+# ============================================================
+# PHASE14_COMPACT_FEEDBACK_OUTPUT
+# Telegram 출력용 피드백 중복 제거 및 표현 정리
+# 점수 계산에는 관여하지 않는다.
+# ============================================================
+
+def _phase14_compact_feedback_output(grade):
+    if not isinstance(grade, dict):
+        return grade
+
+    replace_map = {
+        "대책은 비용, 시간, 적용 가능성, 기존 설비 영향, 운전 리스크까지 연결하세요.":
+            "현장 적용·제언은 비용, 시간, 적용 가능성, 기존 설비 영향, 운전 리스크까지 연결하세요.",
+        "problem_link": "requirement_link",
+        "문제점": "문제 요구",
+        "Fact 기반 문제 요구 설명": "유형별 Fact 기반 내용 설명"
+    }
+
+    def fix_text(x):
+        if not isinstance(x, str):
+            return x
+        for old, new in replace_map.items():
+            x = x.replace(old, new)
+        return x
+
+    def fix_obj(obj):
+        if isinstance(obj, dict):
+            for k, v in list(obj.items()):
+                obj[k] = fix_obj(v)
+            return obj
+        if isinstance(obj, list):
+            return [fix_obj(v) for v in obj]
+        return fix_text(obj)
+
+    grade = fix_obj(grade)
+
+    # rewrite_advice가 너무 길어지는 문제를 완화한다.
+    advice = grade.get("rewrite_advice")
+    if isinstance(advice, list):
+        cleaned = []
+        seen = set()
+
+        # 같은 의미의 안내가 여러 source에서 반복되는 경우 첫 항목만 유지
+        for item in advice:
+            if not isinstance(item, str):
+                continue
+
+            text = item.strip()
+            if not text:
+                continue
+
+            # 지나치게 일반적인 반복 문구는 뒤쪽에서 우선 제거
+            weak_generic = [
+                "A/B/C/D/E 각 단계의 충분한 전개",
+                "현장 조건, 대안별 trade-off",
+                "기술사 답안은 '무엇인가'",
+            ]
+
+            key = text
+            if key in seen:
+                continue
+
+            if any(w in text for w in weak_generic) and len(cleaned) >= 8:
+                continue
+
+            cleaned.append(text)
+            seen.add(key)
+
+        # Telegram 가독성을 위해 최대 10개로 제한
+        grade["rewrite_advice"] = cleaned[:10]
+
+    return grade
+
+
+# ============================================================
+# PHASE15_HIDE_INTERNAL_METRIC_DICT
+# Telegram 출력에서 내부 fact metric dict 노출 제거
+# 점수 계산에는 관여하지 않는다.
+# ============================================================
+
+def _phase15_hide_internal_metric_dict(grade):
+    if not isinstance(grade, dict):
+        return grade
+
+    import re
+
+    def fix_text(x):
+        if not isinstance(x, str):
+            return x
+
+        # 내부 Python dict 형태의 세부 지표는 Telegram 출력에서 제거
+        x = re.sub(
+            r"\s*세부:\s*\{[^}]*\}",
+            " 세부 지표는 핵심개념·정확성·요구 연결성·간결성을 종합 평가함.",
+            x
+        )
+
+        # 어색한 표현 보정
+        x = x.replace(
+            "답안 분량이 지나치게 짧아 기술사 시험의 요구 수준을 충족하지 못함(과소평가 위험).",
+            "답안 분량이 지나치게 짧아 기술사 시험의 요구 수준을 충족하지 못함."
+        )
+        x = x.replace(
+            "답안 분량이 지나치게 짧아 기술사 시험의 요구 수준을 충족하지 못함(과소평가 위험)",
+            "답안 분량이 지나치게 짧아 기술사 시험의 요구 수준을 충족하지 못함"
+        )
+
+        return x
+
+    def walk(obj):
+        if isinstance(obj, dict):
+            for k, v in list(obj.items()):
+                obj[k] = walk(v)
+            return obj
+        if isinstance(obj, list):
+            return [walk(v) for v in obj]
+        return fix_text(obj)
+
+    return walk(grade)
 
