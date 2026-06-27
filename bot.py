@@ -7,6 +7,7 @@ import urllib.parse
 import urllib.request
 from datetime import datetime
 from pathlib import Path
+from grading_agents import run_agent_pipeline
 
 BASE_DIR = Path("/workspace/prof_eng_answer")
 DATA_DIR = BASE_DIR / "data"
@@ -24,6 +25,7 @@ TELEGRAM_TOKEN = (
 
 OLLAMA_URL = os.getenv("OLLAMA_URL", "http://ollama:11434").rstrip("/")
 OLLAMA_MODEL = os.getenv("OLLAMA_MODEL", "hermes3:latest")
+OLLAMA_TIMEOUT = int(os.getenv("OLLAMA_TIMEOUT", "900"))
 AUTHORIZED_CHAT_ID = os.getenv("PROF_ENG_CHAT_ID", "").strip()
 
 
@@ -289,6 +291,11 @@ def call_ollama(prompt):
     payload = {
         "model": OLLAMA_MODEL,
         "stream": False,
+        "format": "json",
+        "options": {
+            "temperature": 0.1,
+            "num_predict": 4096
+        },
         "messages": [
             {
                 "role": "system",
@@ -308,7 +315,7 @@ def call_ollama(prompt):
         method="POST"
     )
 
-    with urllib.request.urlopen(req, timeout=300) as resp:
+    with urllib.request.urlopen(req, timeout=OLLAMA_TIMEOUT) as resp:
         data = json.loads(resp.read().decode("utf-8"))
 
     return data.get("message", {}).get("content", "")
@@ -345,15 +352,17 @@ def grade_answer(chat_id, raw_text, state):
     image_count = len(meta.get("images", []))
     rubric = load_rubric()
 
-    prompt = build_prompt(raw_text, rubric, sid, image_count)
-
     (session_dir / "input.txt").write_text(raw_text, encoding="utf-8")
-    (session_dir / "prompt.txt").write_text(prompt, encoding="utf-8")
 
-    raw_result = call_ollama(prompt)
-    (session_dir / "grade_raw.txt").write_text(raw_result, encoding="utf-8")
+    raw_result, parsed = run_agent_pipeline(
+        call_ollama_fn=call_ollama,
+        raw_text=raw_text,
+        rubric=rubric,
+        sid=sid,
+        image_count=image_count,
+        session_dir=session_dir
+    )
 
-    parsed = extract_json(raw_result)
     if parsed:
         parsed["backend"] = "ollama"
         parsed["model"] = OLLAMA_MODEL
@@ -365,6 +374,7 @@ def grade_answer(chat_id, raw_text, state):
     meta["status"] = "graded"
     meta["graded_at"] = datetime.now().isoformat(timespec="seconds")
     meta["model"] = OLLAMA_MODEL
+    meta["agent_pipeline"] = "2026-06-27-agent-v1"
     save_meta(sid, meta)
 
     return sid, raw_result, parsed
