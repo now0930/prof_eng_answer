@@ -1,0 +1,11 @@
+.env
+__pycache__/
+*.pyc
+logs/*.log
+data/state.json
+data/sessions/
+*.jpg
+*.jpeg
+*.png
+*.webp
+*.pdf
