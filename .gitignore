@@ -9,3 +9,30 @@ data/sessions/
 *.png
 *.webp
 *.pdf
+
+# Runtime / cache
+__pycache__/
+*.pyc
+*.pyo
+
+# Logs
+logs/*.log
+
+# Local state and private answer sessions
+data/state.json
+data/sessions/
+
+# Backups and temporary files
+backups/
+*.backup.*
+*.broken.*
+
+# Runtime/private
+data/sessions/
+data/state.json
+logs/*.log
+backups/
+__pycache__/
+*.pyc
+*.backup.*
+*.broken.*

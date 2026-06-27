@@ -1,0 +1,13 @@
+{
+  "version": "2026-06-27-active-profile-v1",
+  "description": "현재 채점 엔진이 사용할 기준 파일 묶음이다.",
+  "active": true,
+  "scoring_model": "rubrics/scoring_model/default.json",
+  "subject_rubric": "rubrics/subjects/industrial_instrumentation_control.json",
+  "rater_profile": "rubrics/raters/layered_default.json",
+  "legacy_rubric": "rubrics/default.json",
+  "notes": [
+    "legacy_rubric은 기존 grading_agents.py 호환을 위해 당분간 유지한다.",
+    "새 채점 구조는 scoring_model, subject_rubric, rater_profile을 기준으로 한다."
+  ]
+}

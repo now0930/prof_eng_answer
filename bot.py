@@ -380,50 +380,230 @@ def grade_answer(chat_id, raw_text, state):
     return sid, raw_result, parsed
 
 
-def format_result(parsed, raw):
-    if not parsed:
-        return "채점 결과 JSON 파싱 실패. 원문 결과:\n\n" + raw[:3500]
+
+def normalize_grade_for_display(parsed):
+    """
+    phase2_layered_scoring_v1 결과가 기존 format_result에서 빈칸으로 표시되지 않도록
+    summary/confidence/rater comment alias를 보강한다.
+    """
+    if not isinstance(parsed, dict):
+        return parsed
+
+    summary = (
+        parsed.get("summary")
+        or parsed.get("overall_comment")
+        or parsed.get("overall_summary")
+        or parsed.get("rater_summary")
+        or parsed.get("comment")
+        or ""
+    )
+
+    confidence = (
+        parsed.get("confidence")
+        or parsed.get("grade_confidence")
+        or parsed.get("confidence_level")
+        or "medium"
+    )
+
+    if not summary and parsed.get("version") == "phase2_layered_scoring_v1":
+        total = parsed.get("total_score")
+        max_score = parsed.get("max_score")
+        volume = parsed.get("volume_evaluation") or {}
+        level = volume.get("level", "unknown")
+        summary = f"A/B/C/D/E 구조와 답안지 분량 정책을 적용해 {total}/{max_score}점으로 재산정했습니다. 분량 판단: {level}."
+
+    parsed["summary"] = summary
+    parsed["overall_comment"] = summary
+    parsed["overall_summary"] = summary
+    parsed["rater_summary"] = parsed.get("rater_summary") or summary
+    parsed["comment"] = summary
+
+    parsed["confidence"] = confidence
+    parsed["grade_confidence"] = confidence
+    parsed["confidence_level"] = confidence
+
+    for r in parsed.get("rater_results", []):
+        perspective = (
+            r.get("perspective")
+            or r.get("comment")
+            or r.get("reason")
+            or r.get("character")
+            or ""
+        )
+
+        if not perspective:
+            rid = r.get("rater_id")
+            if rid == "professor":
+                perspective = "개념, 용어, fact 설명의 정확성을 중심으로 본 평가입니다."
+            elif rid == "professional_engineer":
+                perspective = "문제점, fact, 대책의 현장 연결성을 중심으로 본 평가입니다."
+            elif rid == "executive":
+                perspective = "비용, 시간, 적용 가능성, 기존 설비 영향 등 현실성을 중심으로 본 평가입니다."
+
+        r["perspective"] = perspective
+        r["comment"] = perspective
+        r["reason"] = perspective
+        r["character"] = r.get("character") or perspective
+
+    return parsed
+
+
+def format_result(parsed, sid=None):
+    """
+    Telegram 표시용 채점 결과 포맷터.
+    legacy grade와 phase2_layered_scoring_v1 grade를 모두 처리한다.
+    """
+    if not isinstance(parsed, dict):
+        return "채점 결과 형식이 올바르지 않습니다."
+
+    def yn(v):
+        return "달성" if bool(v) else "미달"
+
+    def pick(*values, default=""):
+        for v in values:
+            if v is not None and v != "":
+                return v
+        return default
+
+    total = pick(parsed.get("total_score"), parsed.get("score"), default=0)
+    max_score = pick(parsed.get("max_score"), parsed.get("total_points"), default=25)
+    score_range = pick(parsed.get("score_range"), parsed.get("estimated_score_range"), default=f"{total}~{total}")
+
+    confidence = pick(
+        parsed.get("confidence"),
+        parsed.get("grade_confidence"),
+        parsed.get("confidence_level"),
+        default="medium"
+    )
+
+    summary = pick(
+        parsed.get("summary"),
+        parsed.get("overall_comment"),
+        parsed.get("overall_summary"),
+        parsed.get("total_comment"),
+        parsed.get("comment"),
+        parsed.get("rater_summary"),
+        default=""
+    )
+
+    if not summary and parsed.get("version") == "phase2_layered_scoring_v1":
+        volume = parsed.get("volume_evaluation") or {}
+        level = volume.get("level", "unknown")
+        summary = f"A/B/C/D/E 구조와 답안지 분량 정책을 적용해 {total}/{max_score}점으로 재산정했습니다. 분량 판단: {level}."
+
+    official = pick(parsed.get("official_pass_score"), default=round(float(max_score) * 0.60, 2))
+    practical = pick(parsed.get("practical_target_score"), default=round(float(max_score) * 0.70, 2))
+    high = pick(parsed.get("high_score_target"), default=round(float(max_score) * 0.80, 2))
+
+    official_met = parsed.get("official_pass_met", float(total) >= float(official))
+    practical_met = parsed.get("practical_target_met", float(total) >= float(practical))
+    high_met = parsed.get("high_score_met", float(total) >= float(high))
 
     lines = []
-    lines.append(f"채점 완료: {parsed.get('total_score')}/{parsed.get('max_score')}")
-    lines.append(f"예상 점수대: {parsed.get('score_range')}")
-    lines.append(f"신뢰도: {parsed.get('grade_confidence')}")
+    lines.append(f"채점 완료: {total}/{max_score:g}")
+    lines.append(f"예상 점수대: {score_range}")
+    lines.append(f"신뢰도: {confidence}")
+    lines.append(f"공식 합격선: {official:g}점 ({yn(official_met)})")
+    lines.append(f"실전 목표선: {practical:g}점 ({yn(practical_met)})")
+    lines.append(f"고득점 기준: {high:g}점 ({yn(high_met)})")
     lines.append("")
-    lines.append(f"총평: {parsed.get('one_line_summary')}")
+
+    rater_summary = parsed.get("rater_summary")
+    if rater_summary and rater_summary != summary:
+        lines.append(f"3인 채점 요약: {rater_summary}")
+        lines.append("")
+
+    lines.append(f"총평: {summary}")
     lines.append("")
 
-    lines.append("[항목별 점수]")
-    for item in parsed.get("breakdown", []):
-        lines.append(f"- {item.get('item')}: {item.get('score')}/{item.get('max')}")
-        lines.append(f"  사유: {item.get('reason')}")
+    rater_results = parsed.get("rater_results") or parsed.get("raters") or []
+    if rater_results:
+        lines.append("[3인 채점위원 점수]")
+        for r in rater_results:
+            name = pick(r.get("rater_name"), r.get("name"), r.get("id"), default="채점자")
+            r_total = pick(r.get("total_score"), r.get("score"), default=total)
+            r_max = pick(r.get("max_score"), default=max_score)
 
-    lines.append("")
-    lines.append("[장점]")
-    for x in parsed.get("strengths", []):
-        lines.append(f"- {x}")
+            r_official = pick(r.get("official_pass_score"), default=official)
+            r_practical = pick(r.get("practical_target_score"), default=practical)
+            r_high = pick(r.get("high_score_target"), default=high)
 
-    lines.append("")
-    lines.append("[약점]")
-    for x in parsed.get("weaknesses", []):
-        lines.append(f"- {x}")
+            r_official_met = r.get("official_pass_met", float(r_total) >= float(r_official))
+            r_practical_met = r.get("practical_target_met", float(r_total) >= float(r_practical))
+            r_high_met = r.get("high_score_met", float(r_total) >= float(r_high))
 
-    lines.append("")
-    lines.append("[누락 키워드]")
-    for x in parsed.get("missing_keywords", []):
-        lines.append(f"- {x}")
+            perspective = pick(
+                r.get("perspective"),
+                r.get("comment"),
+                r.get("reason"),
+                r.get("character"),
+                default=""
+            )
 
-    lines.append("")
-    lines.append("[보완 방향]")
-    for x in parsed.get("rewrite_advice", []):
-        lines.append(f"- {x}")
+            lines.append(f"- {name}: {r_total}/{float(r_max):g}")
+            lines.append(f"  공식 {float(r_official):g}점: {yn(r_official_met)}")
+            lines.append(f"  실전 {float(r_practical):g}점: {yn(r_practical_met)}")
+            lines.append(f"  고득점 {float(r_high):g}점: {yn(r_high_met)}")
+            if perspective:
+                lines.append(f"  관점: {perspective}")
+        lines.append("")
 
-    lines.append("")
-    lines.append("[다음 연습 포인트]")
-    for x in parsed.get("next_practice_focus", []):
-        lines.append(f"- {x}")
+    breakdown = parsed.get("breakdown") or parsed.get("items") or []
+    if breakdown:
+        lines.append("[항목별 평균 점수]")
+        for b in breakdown:
+            item = pick(b.get("item"), b.get("name"), b.get("criterion"), default="항목")
+            score = pick(b.get("score"), default=0)
+            bmax = pick(b.get("max"), b.get("max_score"), b.get("points"), default="")
+            reason = pick(b.get("reason"), b.get("comment"), default="")
 
-    return "\n".join(lines)
+            if bmax != "":
+                try:
+                    lines.append(f"- {item}: {score}/{float(bmax):g}")
+                except Exception:
+                    lines.append(f"- {item}: {score}/{bmax}")
+            else:
+                lines.append(f"- {item}: {score}")
 
+            if reason:
+                lines.append(f"  사유: {reason}")
+        lines.append("")
+
+    strengths = parsed.get("strengths") or []
+    if strengths:
+        lines.append("[장점]")
+        for x in strengths:
+            lines.append(f"- {x}")
+        lines.append("")
+
+    weaknesses = parsed.get("weaknesses") or []
+    if weaknesses:
+        lines.append("[약점]")
+        for x in weaknesses:
+            lines.append(f"- {x}")
+        lines.append("")
+
+    missing = parsed.get("missing_keywords") or parsed.get("missing_points") or []
+    if missing:
+        lines.append("[누락/보완 키워드]")
+        for x in missing:
+            lines.append(f"- {x}")
+        lines.append("")
+
+    advice = parsed.get("rewrite_advice") or parsed.get("improvement_advice") or []
+    if advice:
+        lines.append("[보완 방향]")
+        for x in advice:
+            lines.append(f"- {x}")
+        lines.append("")
+
+    focus = parsed.get("next_practice_focus") or []
+    if focus:
+        lines.append("[다음 연습 포인트]")
+        for x in focus:
+            lines.append(f"- {x}")
+
+    return "\n".join(lines).strip()
 
 def handle_text(message, chat_id, state):
     text = message.get("text", "")
