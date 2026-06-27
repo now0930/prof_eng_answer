@@ -61,11 +61,11 @@ def build_gemini_grading_prompt(
 - 답안이 짧으면 짧다는 사실은 반영하되, Python의 volume cap과 중복으로 과도하게 깎지는 않는다.
 - 하지만 키워드만 있고 설명이 없으면 높은 점수를 주면 안 된다.
 - fact가 틀리면 대책 점수도 보수적으로 본다.
-- 기술사 답안은 배경 → 문제점 → fact 설명 → 현실적 대책 → 연결성/면접 방어 가능성이 중요하다.
+- 기술사 답안은 배경 → 문제점 → fact 설명 → 현장 적용·제언 → 연결성/면접 방어 가능성이 중요하다.
 
 채점 철학:
 1. 문제 의도 파악이 중요하다.
-2. 문제점 정의가 정확해야 한다.
+2. 문제 요구 파악이 정확해야 한다.
 3. fact 기반 설명은 핵심 개념을 정확하고 간결하게 설명하는지 본다.
 4. 대책은 현실적이어야 한다. 비용, 시간, 적용 가능성, 기존 설비 영향, 운전 리스크를 고려한다.
 5. 개인 의견은 문제점과 fact에서 논리적으로 도출되어야 한다.
@@ -111,7 +111,7 @@ def build_gemini_grading_prompt(
       "layer_id": "B",
       "score": 0.0,
       "max": 5.0,
-      "reason": "문제점 정의 평가 사유",
+      "reason": "문제 요구 파악 평가 사유",
       "evidence": []
     }},
     {{
@@ -125,7 +125,7 @@ def build_gemini_grading_prompt(
       "layer_id": "D",
       "score": 0.0,
       "max": 6.0,
-      "reason": "현실적 대책 평가 사유",
+      "reason": "현장 적용·제언 평가 사유",
       "evidence": []
     }},
     {{
@@ -278,3 +278,288 @@ def gemini_semantic_grade(
         "raw_text": raw_text,
         "raw_response": data
     }
+
+
+# ============================================================
+# PHASE9_QUESTION_TYPE_LENS_PROMPT_WRAPPER
+# question_type은 C항목의 Fact 설명 방식 렌즈로만 사용한다.
+# ============================================================
+
+_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT = build_gemini_grading_prompt
+
+
+def build_gemini_grading_prompt(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval
+):
+    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT(
+        question_text,
+        answer_text,
+        scoring_model,
+        subject_rubric,
+        rater_profile,
+        volume,
+        fact_eval,
+        connection_eval
+    )
+
+    qte = {}
+    if isinstance(subject_rubric, dict):
+        qte = subject_rubric.get("question_type_evaluation") or {}
+
+    if not qte:
+        return base_prompt
+
+    primary = qte.get("primary_type") or {}
+    policy = qte.get("policy") or {}
+
+    lens_text = f"""
+
+[문제 유형 기반 C항목 평가 렌즈]
+
+중요 원칙:
+- 문제 유형은 별도 채점 체계가 아니다.
+- 기존 A/B/C/D/E 25점 구조는 유지한다.
+- question_type은 C항목의 Fact 기반 설명 방식을 결정하는 렌즈로만 사용한다.
+- A/B/D/E는 모든 문제 유형에 공통 적용한다.
+- 특히 D/E에서는 모든 유형에 대해 현실 적용성, 현장 문제 연결, 개선 제언, 기술사적 판단성을 평가한다.
+
+선택된 문제 유형:
+- ID: {primary.get("id")}
+- 이름: {primary.get("name")}
+- 신뢰도: {qte.get("confidence")}
+
+C항목 평가 렌즈:
+{primary.get("c_lens")}
+
+C항목에서 확인할 필수 요소:
+{primary.get("c_required_elements")}
+
+낮은 답안 패턴:
+{primary.get("weak_answer_pattern")}
+
+높은 답안 패턴:
+{primary.get("high_score_pattern")}
+
+채점 지시:
+- C항목은 위 문제 유형 렌즈에 따라 평가하라.
+- 단순 키워드 나열은 낮게 평가하라.
+- 유형별 Fact 설명이 충분하더라도 D/E에서 현실 적용성, 해결 제언, 기술사적 판단이 부족하면 고득점으로 보지 마라.
+- 계산·설계형도 별도 예외가 아니라 C항목 렌즈 중 하나로만 본다.
+- 평가형, 절차형, 비교형도 마찬가지로 C항목의 설명 방식 차이로만 본다.
+""".strip()
+
+    return base_prompt + "\n\n" + lens_text
+
+
+# ============================================================
+# PHASE10_MODEL_ANSWER_REFERENCE_PROMPT_WRAPPER
+# 모범 답안은 정답 매칭용이 아니라 구조·깊이·현장 적용성 기준으로만 사용
+# ============================================================
+
+_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE10 = build_gemini_grading_prompt
+
+
+def build_gemini_grading_prompt(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval
+):
+    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE10(
+        question_text,
+        answer_text,
+        scoring_model,
+        subject_rubric,
+        rater_profile,
+        volume,
+        fact_eval,
+        connection_eval
+    )
+
+    model_ref = {}
+    if isinstance(subject_rubric, dict):
+        model_ref = subject_rubric.get("model_answer_reference") or {}
+
+    if not model_ref or not model_ref.get("matched"):
+        return base_prompt
+
+    ref = model_ref.get("primary_reference") or {}
+    policy = model_ref.get("policy") or {}
+
+    ref_text = f"""
+
+[모범 답안 Bank 참조 기준]
+
+중요 원칙:
+- 모범 답안은 정답 문장 매칭용이 아니다.
+- 동일 문장을 요구하지 마라.
+- 표현이나 순서가 달라도 핵심 fact, 논리, 구조, 현장 적용성, 제언이 충분하면 인정하라.
+- 모범 답안보다 더 나은 현장 판단, 적용 조건, 비용·운전·안전 고려가 있으면 긍정적으로 평가하라.
+- 모범 답안은 부족 요소 탐지와 보완 방향 제시를 위한 기준 답안이다.
+- 기존 A/B/C/D/E 25점 구조와 답안 분량 cap을 유지하라.
+
+선택된 모범 답안:
+- ID: {ref.get("id")}
+- topic_id: {ref.get("topic_id")}
+- question_type: {ref.get("question_type")}
+- title: {ref.get("title")}
+- match_confidence: {model_ref.get("confidence")}
+- match_reasons: {model_ref.get("match_reasons")}
+
+모범 답안 사용 정책:
+{policy}
+
+기대 답안 구조:
+{ref.get("expected_structure")}
+
+모범 답안 outline:
+{ref.get("model_answer_outline")}
+
+고득점 특징:
+{ref.get("high_score_features")}
+
+저득점 패턴:
+{ref.get("low_score_patterns")}
+
+현장 연결 포인트:
+{ref.get("field_connection_points")}
+
+채점 지시:
+- C항목에서는 위 모범 답안을 참고하여 Fact 설명의 구조와 깊이를 평가하라.
+- D/E항목에서는 현장 적용성, 문제 해결, 제언, 기술사적 판단성을 평가하라.
+- 모범 답안에 없는 문장이라도 기술적으로 타당하고 현장성이 높으면 인정하라.
+- 모범 답안과 문장이 비슷하더라도 현장 적용성이나 논리 연결이 부족하면 고득점으로 보지 마라.
+- 피드백에는 모범 답안 기준에서 부족한 구조, fact, 현장 연결 포인트를 구체적으로 제시하라.
+""".strip()
+
+    return base_prompt + "\n\n" + ref_text
+
+
+# ============================================================
+# PHASE11_REQUIREMENT_AND_TYPE_FACT_PROMPT_WRAPPER
+# B/C 항목 의미 정리:
+# B = 문제 요구 파악
+# C = 유형별 Fact 기반 내용 설명
+# ============================================================
+
+_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE11 = build_gemini_grading_prompt
+
+
+def build_gemini_grading_prompt(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval
+):
+    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE11(
+        question_text,
+        answer_text,
+        scoring_model,
+        subject_rubric,
+        rater_profile,
+        volume,
+        fact_eval,
+        connection_eval
+    )
+
+    phase11_text = """
+
+[B/C 항목 평가 의미 정리]
+
+중요:
+- B항목은 '문제점 정의'가 아니라 '문제 요구 파악'이다.
+- C항목은 'Fact 기반 문제점 설명'이 아니라 '유형별 Fact 기반 내용 설명'이다.
+- DEFINE, PRINCIPLE, STRUCTURE, COMPARE, PROCEDURE, CALC_DESIGN, APPLICATION, EVALUATION 문제에서 억지로 문제점을 찾지 마라.
+- 문제 유형에 따라 C항목의 Fact 전개 방식이 달라진다.
+- 다만 모든 기술사 답안은 D/E에서 현실 적용성, 현장 문제 연결, 제언, 기술사적 판단성을 평가한다.
+
+B. 문제 요구 파악 평가 기준:
+- 답안자가 문제에서 요구한 설명 방향을 정확히 잡았는가?
+- DEFINE이면 정의와 개념 설명 요구를 파악했는가?
+- COMPARE이면 비교 대상과 선정 기준 요구를 파악했는가?
+- PROCEDURE이면 절차와 판정 기준 요구를 파악했는가?
+- CALC_DESIGN이면 공식, 변수, 계산 과정, 설계 기준 설명 요구를 파악했는가?
+- EVALUATION이면 평가 지표, 효과 분석, 한계 분석 요구를 파악했는가?
+
+C. 유형별 Fact 기반 내용 설명 평가 기준:
+- 선택된 question_type lens에 맞게 Fact를 전개했는가?
+- 단순 키워드 나열이 아니라 구조, 인과관계, 절차, 비교축, 계산 의미, 평가 지표 등을 설명했는가?
+- Fact Anchor와 Model Answer Bank가 제공된 경우, 동일 문장을 요구하지 말고 구조·깊이·현장 적용성 기준으로 참고하라.
+
+채점 표현 지시:
+- DEFINE 문제에서 '문제점 정의가 부족하다'라고 쓰지 말고 '문제 요구에 따른 표준 정의 조건과 실무 의미 설명이 부족하다'라고 써라.
+- STRUCTURE 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '구성요소, 분류 기준, 역할 관계 설명이 부족하다'라고 써라.
+- COMPARE 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '비교축, 적용 조건, 선정 기준 설명이 부족하다'라고 써라.
+- PROCEDURE 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '절차 순서, 입력 자료, 판정 기준, 산출물 설명이 부족하다'라고 써라.
+- CALC_DESIGN 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '공식, 변수, 단위, 계산 결과 해석, 설계 기준 설명이 부족하다'라고 써라.
+- EVALUATION 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '평가 지표, 전후 비교, 정량·정성 효과, 한계 분석이 부족하다'라고 써라.
+""".strip()
+
+    return base_prompt + "\n\n" + phase11_text
+
+
+# ============================================================
+# PHASE12_FIELD_APPLICATION_LABEL_PROMPT_WRAPPER
+# D항목을 '대책' 중심이 아니라 현장 적용·설계 판단·제언으로 표현
+# ============================================================
+
+_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE12 = build_gemini_grading_prompt
+
+
+def build_gemini_grading_prompt(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval
+):
+    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE12(
+        question_text,
+        answer_text,
+        scoring_model,
+        subject_rubric,
+        rater_profile,
+        volume,
+        fact_eval,
+        connection_eval
+    )
+
+    phase12_text = """
+
+[D/E 항목 표현 원칙]
+
+- D항목은 '현실적 대책'만을 의미하지 않는다.
+- D항목은 모든 문제 유형에서 '현장 적용성, 설계 판단, 운영 조건, 비용·안전·유지보수 고려, 제언'을 평가한다.
+- DEFINE 문제에서는 대책이 없다고 쓰기보다 '정의가 현장 적용 의미, 선정 기준, 운전 리스크, 제언으로 확장되지 않았다'라고 평가하라.
+- COMPARE 문제에서는 '선정 기준과 적용 조건이 부족하다'라고 평가하라.
+- PROCEDURE 문제에서는 '절차의 판정 기준, 산출물, 기록·검증이 부족하다'라고 평가하라.
+- CALC_DESIGN 문제에서는 '계산 결과 해석과 설계 기준, 현장 적용 의미가 부족하다'라고 평가하라.
+- EVALUATION 문제에서는 '평가 지표, 전후 비교, 효과와 한계, 후속 조치가 부족하다'라고 평가하라.
+
+연결성 표현:
+- 배경→문제 요구
+- 문제 요구→유형별 Fact 설명
+- Fact→현장 적용·제언
+- 제언→문제 요구 충족
+""".strip()
+
+    return base_prompt + "\n\n" + phase12_text
+

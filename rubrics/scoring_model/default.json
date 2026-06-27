@@ -2,7 +2,7 @@
   "name": "layered_gate_scoring_model",
   "version": "2026-06-27-v1-discussion-based",
   "editable": true,
-  "description": "기술사 답안 채점용 단계형 게이트 모델. 키워드 기반 채점이 아니라 문제점 중심, fact anchor 기반 설명, 현실적 대책, 연결성, 면접 방어 가능성을 평가한다.",
+  "description": "기술사 답안 채점용 단계형 게이트 모델. 키워드 기반 채점이 아니라 문제점 중심, fact anchor 기반 설명, 현장 적용·제언, 연결성, 면접 방어 가능성을 평가한다.",
   "total_points": 25,
   "scale_reference": {
     "exam_total_points": 100,
@@ -43,14 +43,14 @@
       {
         "id": "fact_explanation",
         "order": 3,
-        "name": "Fact 기반 문제점 설명",
+        "name": "유형별 Fact 기반 내용 설명",
         "fixed_or_flexible": "fixed",
         "description": "문제점을 설명하는 핵심 개념과 원리를 정확하고 간결하게 설명한다."
       },
       {
         "id": "professional_opinion",
         "order": 4,
-        "name": "기술사적 의견과 현실적 대책",
+        "name": "기술사적 의견과 현장 적용·제언",
         "fixed_or_flexible": "flexible",
         "description": "문제에 직접 제시되지 않아도 고득점 요소다. 단, 문제점과 fact에서 논리적으로 도출되어야 한다."
       }
@@ -99,7 +99,7 @@
     },
     {
       "id": "B",
-      "name": "문제점 정의",
+      "name": "문제 요구 파악",
       "points": 5,
       "main_raters": [
         "professor",
@@ -114,7 +114,7 @@
     },
     {
       "id": "C",
-      "name": "Fact 기반 문제점 설명",
+      "name": "유형별 Fact 기반 내용 설명",
       "points": 8,
       "main_raters": [
         "professor",
@@ -155,7 +155,7 @@
     },
     {
       "id": "D",
-      "name": "현실적 대책·설계 판단",
+      "name": "현장 적용·설계 판단·제언",
       "points": 6,
       "main_raters": [
         "professional_engineer",
@@ -243,7 +243,7 @@
   "cap_rules": [
     {
       "id": "fact_error_limits_solution_and_opinion",
-      "description": "Fact 기반 설명이 약하면 현실적 대책과 면접 방어 가능성 점수를 제한한다.",
+      "description": "Fact 기반 설명이 약하면 현장 적용·제언과 면접 방어 가능성 점수를 제한한다.",
       "if_layer": "C",
       "ranges": [
         {
@@ -274,7 +274,7 @@
     },
     {
       "id": "fact_only_total_cap",
-      "description": "Fact가 모두 맞아도 문제점 진단과 현실적 대책, 연결성이 부족하면 41~42점대로 제한한다.",
+      "description": "Fact가 모두 맞아도 문제점 진단과 현장 적용·제언, 연결성이 부족하면 41~42점대로 제한한다.",
       "if": {
         "C_gte": 7.0,
         "D_plus_E_lt": 2.5
@@ -318,7 +318,7 @@
     "enabled": true,
     "basis": "기술사 답안지 쪽수 기준",
     "expected_answer_sheet_pages_per_25_point_question": 3,
-    "description": "25점 문항은 일반 A4 타이핑 문서 기준이 아니라 기술사 답안지 약 3쪽 수준의 손글씨 전개를 평균적인 답안량으로 본다. 단, 쪽수만으로 점수를 주지 않고 문제점, fact anchor, 현실적 대책, 연결성을 함께 평가한다.",
+    "description": "25점 문항은 일반 A4 타이핑 문서 기준이 아니라 기술사 답안지 약 3쪽 수준의 손글씨 전개를 평균적인 답안량으로 본다. 단, 쪽수만으로 점수를 주지 않고 문제점, fact anchor, 현장 적용·제언, 연결성을 함께 평가한다.",
     "evaluation_inputs": [
       "uploaded_answer_image_count",
       "answer_sheet_page_count",
@@ -355,7 +355,7 @@
       },
       {
         "id": "three_page_level_high_score_allowed",
-        "condition": "답안지 약 3쪽 수준이며 구조, fact, 현실적 대책, 연결성이 우수한 경우",
+        "condition": "답안지 약 3쪽 수준이며 구조, fact, 현장 적용·제언, 연결성이 우수한 경우",
         "high_score_allowed": true,
         "reason": "25점 문항 평균 답안량을 충족한 것으로 보고 20점 이상 고득점 평가가 가능하다."
       }

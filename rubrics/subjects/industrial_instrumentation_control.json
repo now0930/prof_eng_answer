@@ -15,16 +15,16 @@
     "preferred_structure": [
       "배경",
       "문제점",
-      "Fact 기반 문제점 설명",
-      "기술사적 의견과 현실적 대책"
+      "유형별 Fact 기반 내용 설명",
+      "기술사적 의견과 현장 적용·제언"
     ],
     "fixed_parts": [
       "문제점",
-      "Fact 기반 문제점 설명"
+      "유형별 Fact 기반 내용 설명"
     ],
     "flexible_parts": [
       "배경",
-      "기술사적 의견과 현실적 대책"
+      "기술사적 의견과 현장 적용·제언"
     ],
     "connection_rules": [
       "배경은 문제점으로 자연스럽게 연결되어야 한다.",
@@ -120,7 +120,7 @@
       "방화벽",
       "위험성 평가"
     ],
-    "현실적 대책 판단": [
+    "현장 적용·제언 판단": [
       "비용",
       "시간",
       "적용 가능성",
@@ -245,5 +245,7 @@
   ],
   "user_added_keywords": [],
   "user_added_fact_anchors": [],
-  "fact_anchor_bank": "rubrics/fact_anchors/industrial_instrumentation_control.json"
+  "fact_anchor_bank": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+  "question_type_profile": "rubrics/question_types/default.json",
+  "model_answer_bank": "rubrics/model_answers/industrial_instrumentation_control.json"
 }

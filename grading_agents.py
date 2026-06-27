@@ -1409,7 +1409,7 @@ def _phase2_add_display_aliases(grade):
 
 
 # PHASE3_FACT_ANCHOR_SCORING
-# C. Fact 기반 문제점 설명을 단순 키워드 매칭이 아니라 문제별 Fact Anchor 5개로 평가한다.
+# C. 유형별 Fact 기반 내용 설명을 단순 키워드 매칭이 아니라 문제별 Fact Anchor 5개로 평가한다.
 
 def _phase3_extract_question_text(raw_text):
     text = raw_text or ""
@@ -1931,10 +1931,10 @@ def _phase3_evaluate_connections(raw_text):
             return 0.3, f"{name} 한쪽 요소만 확인됨."
         return 0.0, f"{name} 연결 근거 부족."
 
-    b_to_p, b_to_p_reason = score_pair(has_background, has_problem, "배경→문제점")
-    p_to_f, p_to_f_reason = score_pair(has_problem, has_fact, "문제점→Fact")
-    f_to_s, f_to_s_reason = score_pair(has_fact, has_solution, "Fact→대책")
-    s_to_p, s_to_p_reason = score_pair(has_solution, has_problem, "대책→문제점 해결")
+    b_to_p, b_to_p_reason = score_pair(has_background, has_problem, "배경→문제 요구")
+    p_to_f, p_to_f_reason = score_pair(has_problem, has_fact, "문제 요구→Fact")
+    f_to_s, f_to_s_reason = score_pair(has_fact, has_solution, "Fact→현장 적용·제언")
+    s_to_p, s_to_p_reason = score_pair(has_solution, has_problem, "제언→문제 요구 충족")
 
     avg = round((b_to_p + p_to_f + f_to_s + s_to_p) / 4, 3)
 
@@ -2057,7 +2057,7 @@ def _phase4_rater_layer_comment(rater_id, layer_id):
     comments = {
         "professor": {
             "A": "문제 진입과 개념 정의의 적절성을 봄.",
-            "B": "문제점 정의의 개념적 정확성을 중점 평가함.",
+            "B": "문제 요구 파악의 개념적 정확성을 중점 평가함.",
             "C": "핵심 fact anchor와 용어 정확성을 중점 평가함.",
             "D": "대책의 이론적 타당성은 보되 현실 제약 평가는 제한적으로 반영함.",
             "E": "논리 연결과 설명 일관성을 평가함."
@@ -2427,6 +2427,8 @@ def _phase6_run_gemini_semantic_grader(
 
         try:
             _phase2_json_write(session_dir / "gemini_semantic_evaluation.json", result)
+            _phase2_json_write(session_dir / "question_type_evaluation.json", grade.get("question_type_evaluation", {}))
+            _phase2_json_write(session_dir / "model_answer_reference.json", grade.get("model_answer_reference", {}))
             _phase2_json_write(session_dir / "originality_evaluation.json", grade.get("originality_evaluation", {}))
         except Exception:
             pass
@@ -2499,11 +2501,37 @@ def _phase2_postprocess_grade(legacy_result):
     layer_scores = _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval)
     layer_scores = _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval)
 
+    question_type_eval = _phase9_run_question_type_lens(
+        input_text=input_text,
+        answer_text=answer_text,
+        subject_rubric=subject_rubric,
+        session_dir=session_dir
+    )
+
+    subject_rubric_for_gemini = _phase9_subject_rubric_with_question_type_lens(
+        subject_rubric,
+        question_type_eval
+    )
+
+    model_answer_ref = _phase10_run_model_answer_reference(
+        input_text=input_text,
+        answer_text=answer_text,
+        question_type_eval=question_type_eval,
+        fact_eval=fact_eval,
+        subject_rubric=subject_rubric,
+        session_dir=session_dir
+    )
+
+    subject_rubric_for_gemini = _phase10_subject_rubric_with_model_answer_reference(
+        subject_rubric_for_gemini,
+        model_answer_ref
+    )
+
     gemini_eval = _phase6_run_gemini_semantic_grader(
         input_text=input_text,
         answer_text=answer_text,
         scoring_model=scoring_model,
-        subject_rubric=subject_rubric,
+        subject_rubric=subject_rubric_for_gemini,
         rater_profile=rater_profile,
         volume=volume,
         fact_eval=fact_eval,
@@ -2570,6 +2598,8 @@ def _phase2_postprocess_grade(legacy_result):
         "connection_evaluation": connection_eval,
         "interview_followup": interview_followup,
         "gemini_semantic_evaluation": gemini_eval,
+        "question_type_evaluation": question_type_eval,
+        "model_answer_reference": model_answer_ref,
         "originality_evaluation": originality_eval,
         "total_before_cap": total_before_cap,
         "applied_caps": applied_caps,
@@ -2584,21 +2614,24 @@ def _phase2_postprocess_grade(legacy_result):
         ],
         "missing_keywords": [],
         "rewrite_advice": [
-            "배경 → 문제점 → Fact 기반 설명 → 현실적 대책 순서로 답안을 확장하세요.",
+            "배경 → 문제 요구 → 유형별 Fact 기반 내용 설명 → 현장 적용·설계 판단·제언 순서로 답안을 확장하세요.",
             "대책은 비용, 시간, 적용 가능성, 기존 설비 영향, 운전 리스크까지 연결하세요."
         ],
         "next_practice_focus": [
-            "문제점 정의",
-            "Fact anchor 5개 설명",
-            "현실적 대책의 조건과 한계 제시"
+            "문제 요구 파악",
+            "유형별 Fact anchor 5개 설명",
+            "현장 적용성, 제언, 기술사적 판단 제시"
         ],
         "legacy_grade_reference": legacy_result
     }
 
     grade = _phase4_apply_rater_weighted_scoring(grade, scoring_model, rater_profile)
     grade = _phase6_merge_gemini_feedback(grade, gemini_eval)
+    grade = _phase9_merge_question_type_feedback(grade, question_type_eval)
+    grade = _phase10_merge_model_answer_feedback(grade, model_answer_ref)
     grade = _phase8_merge_originality_feedback(grade, originality_eval)
     grade = _phase8b_enforce_final_volume_cap(grade)
+    grade = _phase11_normalize_requirement_fact_labels(grade)
     grade = _phase2_add_display_aliases(grade)
 
     _phase2_json_write(session_dir / "grade.json", grade)
@@ -2921,7 +2954,7 @@ def _phase8_apply_originality_to_layer_scores(layer_scores, originality_eval, vo
         applied_caps.append({
             "type": "countermeasure_gate",
             "cap": 0.8,
-            "reason": "D 현실적 대책 점수가 2/6 미만이므로 독창성 가점을 제한함."
+            "reason": "D 현장 적용·제언 점수가 2/6 미만이므로 독창성 가점을 제한함."
         })
 
     level = ""
@@ -3098,3 +3131,305 @@ def _phase8b_enforce_final_volume_cap(grade):
             grade["summary"] = (summary + note).strip()
 
     return grade
+
+
+# ============================================================
+# PHASE9_QUESTION_TYPE_C_LENS
+# 문제 유형은 C항목의 Fact 설명 방식 렌즈로만 사용
+# ============================================================
+
+def _phase9_run_question_type_lens(input_text, answer_text, subject_rubric=None, session_dir=None):
+    try:
+        from question_type_router import detect_question_type, load_question_type_profile
+
+        question_text = _phase3_extract_question_text(input_text)
+
+        profile_path = None
+        if isinstance(subject_rubric, dict):
+            profile_path = subject_rubric.get("question_type_profile")
+
+        profile = load_question_type_profile(profile_path)
+
+        result = detect_question_type(
+            question_text=question_text,
+            answer_text=answer_text,
+            profile=profile
+        )
+
+        if session_dir is not None:
+            try:
+                _phase2_json_write(session_dir / "question_type_evaluation.json", result)
+            except Exception:
+                pass
+
+        try:
+            p = result.get("primary_type", {})
+            _phase2_log(f"[agent] phase9 question type lens selected: {p.get('id')} ({p.get('name')})")
+        except Exception:
+            pass
+
+        return result
+
+    except Exception as e:
+        fallback = {
+            "version": "question_type_lens_v1_fallback",
+            "confidence": "low",
+            "primary_type": {
+                "id": "GENERAL",
+                "name": "일반 설명형",
+                "c_lens": "문제 요구에 맞는 핵심 fact, 적용 범위, 한계, 실무 의미를 설명했는가",
+                "c_required_elements": ["핵심 fact", "적용 범위", "한계", "실무 의미"],
+                "weak_answer_pattern": "키워드만 나열하고 설명 구조와 현장 의미가 부족함",
+                "high_score_pattern": "핵심 fact를 구조적으로 설명하고 현실 적용 의미까지 연결함"
+            },
+            "candidates": [],
+            "error": repr(e),
+            "interpretation": "문제 유형 렌즈 선택 실패로 GENERAL 렌즈를 적용함."
+        }
+
+        try:
+            _phase2_log(f"[agent] phase9 question type lens failed: {e!r}")
+        except Exception:
+            pass
+
+        return fallback
+
+
+def _phase9_subject_rubric_with_question_type_lens(subject_rubric, question_type_eval):
+    import copy
+
+    if isinstance(subject_rubric, dict):
+        data = copy.deepcopy(subject_rubric)
+    else:
+        data = {}
+
+    data["question_type_evaluation"] = question_type_eval
+    return data
+
+
+def _phase9_merge_question_type_feedback(grade, question_type_eval):
+    if not isinstance(grade, dict):
+        return grade
+
+    grade["question_type_evaluation"] = question_type_eval
+
+    primary = (question_type_eval or {}).get("primary_type") or {}
+    qid = primary.get("id")
+    qname = primary.get("name")
+    lens = primary.get("c_lens")
+
+    if qid and qname:
+        grade["question_type"] = qid
+        grade["question_type_name"] = qname
+
+    summary = str(grade.get("summary") or "")
+    msg = f" 문제 유형은 {qid}({qname})로 판단하고, C항목은 해당 유형의 Fact 설명 렌즈로 평가했습니다."
+    if qid and "문제 유형은" not in summary:
+        grade["summary"] = (summary + msg).strip()
+
+    advice = grade.get("rewrite_advice")
+    if not isinstance(advice, list):
+        advice = []
+
+    if lens:
+        tip = f"C항목 보완: {qname} 유형에서는 '{lens}'를 충족하도록 답안을 전개하세요."
+        if tip not in advice:
+            advice.append(tip)
+
+    common_tip = "D/E항목 보완: 모든 문제 유형에서 현장 적용성, 문제 해결, 제언, 기술사적 판단성을 반드시 연결하세요."
+    if common_tip not in advice:
+        advice.append(common_tip)
+
+    grade["rewrite_advice"] = advice
+
+    return grade
+
+
+# ============================================================
+# PHASE10_MODEL_ANSWER_REFERENCE
+# 모범 답안 Bank를 정답 매칭이 아니라 기준 답안으로 참조
+# ============================================================
+
+def _phase10_run_model_answer_reference(
+    input_text,
+    answer_text,
+    question_type_eval,
+    fact_eval,
+    subject_rubric=None,
+    session_dir=None
+):
+    try:
+        from model_answer_router import load_model_answer_bank, find_model_answer_reference
+
+        question_text = _phase3_extract_question_text(input_text)
+
+        bank_path = None
+        if isinstance(subject_rubric, dict):
+            bank_path = subject_rubric.get("model_answer_bank")
+
+        bank = load_model_answer_bank(bank_path)
+
+        result = find_model_answer_reference(
+            question_text=question_text,
+            answer_text=answer_text,
+            question_type_eval=question_type_eval,
+            fact_eval=fact_eval,
+            bank=bank
+        )
+
+        if session_dir is not None:
+            try:
+                _phase2_json_write(session_dir / "model_answer_reference.json", result)
+            except Exception:
+                pass
+
+        try:
+            ref = result.get("primary_reference") or {}
+            if result.get("matched"):
+                _phase2_log(
+                    f"[agent] phase10 model answer reference selected: "
+                    f"{ref.get('id')} ({ref.get('topic_id')} / {ref.get('question_type')})"
+                )
+            else:
+                _phase2_log("[agent] phase10 model answer reference not matched.")
+        except Exception:
+            pass
+
+        return result
+
+    except Exception as e:
+        fallback = {
+            "version": "model_answer_reference_v1_fallback",
+            "matched": False,
+            "primary_reference": None,
+            "candidates": [],
+            "error": repr(e),
+            "usage": "모범 답안 참조 실패. 기존 채점 기준만 적용함."
+        }
+
+        try:
+            _phase2_log(f"[agent] phase10 model answer reference failed: {e!r}")
+        except Exception:
+            pass
+
+        return fallback
+
+
+def _phase10_subject_rubric_with_model_answer_reference(subject_rubric, model_answer_ref):
+    import copy
+
+    if isinstance(subject_rubric, dict):
+        data = copy.deepcopy(subject_rubric)
+    else:
+        data = {}
+
+    data["model_answer_reference"] = model_answer_ref
+    return data
+
+
+def _phase10_merge_model_answer_feedback(grade, model_answer_ref):
+    if not isinstance(grade, dict):
+        return grade
+
+    grade["model_answer_reference"] = model_answer_ref
+
+    if not isinstance(model_answer_ref, dict) or not model_answer_ref.get("matched"):
+        return grade
+
+    ref = model_answer_ref.get("primary_reference") or {}
+
+    grade["model_answer_id"] = ref.get("id")
+    grade["model_answer_topic_id"] = ref.get("topic_id")
+    grade["model_answer_question_type"] = ref.get("question_type")
+
+    summary = str(grade.get("summary") or "")
+    title = ref.get("title") or ref.get("id")
+    msg = f" 모범 답안 Bank에서는 '{title}'를 기준 답안으로 참조했으며, 동일 문장 매칭이 아니라 구조·깊이·현장 적용성 기준으로 활용했습니다."
+
+    if "모범 답안 Bank" not in summary:
+        grade["summary"] = (summary + msg).strip()
+
+    advice = grade.get("rewrite_advice")
+    if not isinstance(advice, list):
+        advice = []
+
+    expected = ref.get("expected_structure") or []
+    if expected:
+        tip = "모범 답안 구조 참고: " + " → ".join(str(x) for x in expected)
+        if tip not in advice:
+            advice.append(tip)
+
+    field_points = ref.get("field_connection_points") or []
+    if field_points:
+        tip = "현장 연결 포인트 보완: " + ", ".join(str(x) for x in field_points[:8])
+        if tip not in advice:
+            advice.append(tip)
+
+    low_patterns = ref.get("low_score_patterns") or []
+    if low_patterns:
+        tip = "피해야 할 저득점 패턴: " + " / ".join(str(x) for x in low_patterns[:3])
+        if tip not in advice:
+            advice.append(tip)
+
+    grade["rewrite_advice"] = advice
+    return grade
+
+
+# ============================================================
+# PHASE11_DISPLAY_LABEL_NORMALIZER
+# 과거 '문제점' 중심 layer 명칭을 최종 표시에서 정규화
+# ============================================================
+
+def _phase11_normalize_requirement_fact_labels(grade):
+    if not isinstance(grade, dict):
+        return grade
+
+    replace_map = {
+        "B. 문제점 정의": "B. 문제 요구 파악",
+        "C. Fact 기반 문제점 설명": "C. 유형별 Fact 기반 내용 설명",
+        "문제 요구 파악": "문제 요구 파악",
+        "Fact 기반 문제점 설명": "유형별 Fact 기반 내용 설명",
+        "D. 현실적 대책·설계 판단": "D. 현장 적용·설계 판단·제언",
+        "현실적 대책·설계 판단": "현장 적용·설계 판단·제언",
+        "배경 → 문제점 → Fact 기반 설명 → 현실적 대책": "배경 → 문제 요구 → 유형별 Fact 기반 내용 설명 → 현장 적용·설계 판단·제언",
+        "배경→문제점": "배경→문제 요구",
+        "문제점→Fact": "문제 요구→Fact",
+        "Fact→대책": "Fact→현장 적용·제언",
+        "대책→문제점 해결": "제언→문제 요구 충족",
+        "현실적 대책이 없음": "현장 적용성, 설계 판단, 제언이 부족함"
+    }
+
+    def fix_text(x):
+        if not isinstance(x, str):
+            return x
+        for old, new in replace_map.items():
+            x = x.replace(old, new)
+        return x
+
+    for key in ["summary", "overall_comment", "confidence_reason"]:
+        if key in grade:
+            grade[key] = fix_text(grade.get(key))
+
+    for list_key in ["strengths", "weaknesses", "rewrite_advice", "next_practice_points"]:
+        value = grade.get(list_key)
+        if isinstance(value, list):
+            grade[list_key] = [fix_text(v) for v in value]
+
+    breakdown = grade.get("breakdown")
+    if isinstance(breakdown, list):
+        for row in breakdown:
+            if isinstance(row, dict):
+                for key in ["item", "name", "reason", "comment"]:
+                    if key in row:
+                        row[key] = fix_text(row.get(key))
+
+    rater_scores = grade.get("rater_scores")
+    if isinstance(rater_scores, list):
+        for row in rater_scores:
+            if isinstance(row, dict):
+                for key in ["comment", "viewpoint", "reason", "summary"]:
+                    if key in row:
+                        row[key] = fix_text(row.get(key))
+
+    return grade
+
