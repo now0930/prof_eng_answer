@@ -2427,6 +2427,7 @@ def _phase6_run_gemini_semantic_grader(
 
         try:
             _phase2_json_write(session_dir / "gemini_semantic_evaluation.json", result)
+            _phase2_json_write(session_dir / "originality_evaluation.json", grade.get("originality_evaluation", {}))
         except Exception:
             pass
 
@@ -2446,6 +2447,7 @@ def _phase6_run_gemini_semantic_grader(
         }
         try:
             _phase2_json_write(session_dir / "gemini_semantic_evaluation.json", result)
+            _phase2_json_write(session_dir / "originality_evaluation.json", grade.get("originality_evaluation", {}))
         except Exception:
             pass
         print(f"[agent] Gemini semantic grader exception: {e!r}")
@@ -2511,6 +2513,22 @@ def _phase2_postprocess_grade(legacy_result):
 
     layer_scores = _phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model)
 
+    originality_eval = _phase8_run_originality_evaluator(
+        input_text=input_text,
+        answer_text=answer_text,
+        layer_scores=layer_scores,
+        volume=volume,
+        fact_eval=fact_eval,
+        connection_eval=connection_eval,
+        session_dir=session_dir
+    )
+
+    layer_scores = _phase8_apply_originality_to_layer_scores(
+        layer_scores=layer_scores,
+        originality_eval=originality_eval,
+        volume=volume
+    )
+
     total_before_cap, total_after_cap, applied_caps = _phase2_apply_caps(layer_scores, volume)
 
     max_score = float(scoring_model.get("total_points", 25))
@@ -2552,6 +2570,7 @@ def _phase2_postprocess_grade(legacy_result):
         "connection_evaluation": connection_eval,
         "interview_followup": interview_followup,
         "gemini_semantic_evaluation": gemini_eval,
+        "originality_evaluation": originality_eval,
         "total_before_cap": total_before_cap,
         "applied_caps": applied_caps,
         "breakdown": layer_scores,
@@ -2578,6 +2597,8 @@ def _phase2_postprocess_grade(legacy_result):
 
     grade = _phase4_apply_rater_weighted_scoring(grade, scoring_model, rater_profile)
     grade = _phase6_merge_gemini_feedback(grade, gemini_eval)
+    grade = _phase8_merge_originality_feedback(grade, originality_eval)
+    grade = _phase8b_enforce_final_volume_cap(grade)
     grade = _phase2_add_display_aliases(grade)
 
     _phase2_json_write(session_dir / "grade.json", grade)
@@ -2674,3 +2695,406 @@ def run_agent_pipeline(*args, **kwargs):
     except Exception as e:
         print(f"[agent] phase2 postprocess failed: {e!r}")
         return legacy_result
+
+
+
+# ============================================================
+# PHASE8_ORIGINALITY_JUDGMENT
+# 기술사적 판단성 / 독창성 평가
+# ============================================================
+
+def _phase8_clamp(value, low=0.0, high=1.0):
+    try:
+        v = float(value)
+    except Exception:
+        return low
+    return max(low, min(high, v))
+
+
+def _phase8_get_layer_id(row):
+    if not isinstance(row, dict):
+        return ""
+    for key in ("layer_id", "id", "code"):
+        v = row.get(key)
+        if isinstance(v, str) and v.strip():
+            return v.strip().upper()
+
+    item = str(row.get("item") or row.get("name") or "")
+    if item:
+        first = item.strip()[:1].upper()
+        if first in ("A", "B", "C", "D", "E"):
+            return first
+    return ""
+
+
+def _phase8_find_layer(layer_scores, layer_id):
+    target = str(layer_id).upper()
+    for row in layer_scores or []:
+        if _phase8_get_layer_id(row) == target:
+            return row
+    return None
+
+
+def _phase8_layer_score(layer_scores, layer_id, default=0.0):
+    row = _phase8_find_layer(layer_scores, layer_id)
+    if not row:
+        return default
+    try:
+        return float(row.get("score", default))
+    except Exception:
+        return default
+
+
+def _phase8_layer_max(row, default):
+    try:
+        return float(row.get("max", default))
+    except Exception:
+        return default
+
+
+def _phase8_add_reason(row, text):
+    if not isinstance(row, dict):
+        return
+    old = str(row.get("reason") or "")
+    if old:
+        row["reason"] = old + " / " + text
+    else:
+        row["reason"] = text
+
+
+def _phase8_fallback_originality_evaluation(answer_text):
+    text = answer_text or ""
+
+    checks = [
+        (
+            "O1",
+            "문제 재해석 능력",
+            ["단순히", "선정", "제어성", "운전성", "개도", "오선정", "정상 유량", "최소 유량", "최대 유량"]
+        ),
+        (
+            "O2",
+            "현장 조건 반영",
+            ["기존 설비", "실제", "운전 개도", "설치 조건", "운전 조건", "배관 손실", "점도", "캐비테이션", "초크"]
+        ),
+        (
+            "O3",
+            "대안 비교와 trade-off",
+            ["비용", "리스크", "공기", "교체", "수정", "trim", "트림", "튜닝", "차압 조정", "대안"]
+        ),
+        (
+            "O4",
+            "적용 우선순위 제시",
+            ["우선", "먼저", "필요 시", "순서", "단계", "검토", "확인하고"]
+        ),
+        (
+            "O5",
+            "검증 가능성",
+            ["확인", "검증", "trend", "트렌드", "hunting", "헌팅", "시험", "판정", "측정"]
+        ),
+    ]
+
+    anchors = []
+    levels = []
+
+    for oid, name, terms in checks:
+        found = [t for t in terms if t.lower() in text.lower()]
+        if len(found) >= 4:
+            level = 0.7
+        elif len(found) >= 2:
+            level = 0.5
+        elif len(found) >= 1:
+            level = 0.3
+        else:
+            level = 0.0
+
+        anchors.append({
+            "id": oid,
+            "name": name,
+            "level": level,
+            "reason": "Gemini 독창성 평가 실패 시 사용한 보수적 fallback 평가입니다.",
+            "evidence": found
+        })
+        levels.append(level)
+
+    avg = sum(levels) / len(levels) if levels else 0.0
+
+    return {
+        "version": "originality_evaluator_v1_fallback",
+        "confidence": "low",
+        "overall_comment": "Gemini 독창성 평가를 사용할 수 없어 키워드 기반 보수 평가를 적용했습니다.",
+        "anchors": anchors,
+        "average_level": round(avg, 3),
+        "raw_originality_score": round(avg * 2.0, 2),
+        "technical_error_risk": False,
+        "technical_error_reason": "",
+        "false_originality_risk": False,
+        "false_originality_reason": "",
+        "improvement_advice": []
+    }
+
+
+def _phase8_run_originality_evaluator(input_text, answer_text, layer_scores, volume, fact_eval, connection_eval, session_dir=None):
+    try:
+        from originality_grader import gemini_originality_evaluate
+
+        question_text = _phase3_extract_question_text(input_text)
+
+        result = gemini_originality_evaluate(
+            question_text=question_text,
+            answer_text=answer_text,
+            layer_scores=layer_scores,
+            volume=volume,
+            fact_eval=fact_eval,
+            connection_eval=connection_eval,
+        )
+
+        if result.get("ok") and result.get("parsed"):
+            parsed = result.get("parsed") or {}
+        else:
+            parsed = _phase8_fallback_originality_evaluation(answer_text)
+
+        eval_data = {
+            "ok": result.get("ok"),
+            "error": result.get("error", ""),
+            "model": result.get("model", ""),
+            "raw_text": result.get("raw_text", ""),
+            "parsed": parsed
+        }
+
+        if session_dir is not None:
+            try:
+                _phase2_json_write(session_dir / "originality_evaluation.json", eval_data)
+            except Exception:
+                pass
+
+        try:
+            _phase2_log("[agent] phase8 originality evaluator applied.")
+        except Exception:
+            pass
+
+        return eval_data
+
+    except Exception as e:
+        parsed = _phase8_fallback_originality_evaluation(answer_text)
+        eval_data = {
+            "ok": False,
+            "error": repr(e),
+            "model": "",
+            "raw_text": "",
+            "parsed": parsed
+        }
+
+        try:
+            _phase2_log(f"[agent] phase8 originality evaluator failed: {e!r}")
+        except Exception:
+            pass
+
+        return eval_data
+
+
+def _phase8_apply_originality_to_layer_scores(layer_scores, originality_eval, volume):
+    parsed = (originality_eval or {}).get("parsed") or {}
+
+    raw_score = parsed.get("raw_originality_score")
+    if raw_score is None:
+        avg = parsed.get("average_level", 0.0)
+        raw_score = _phase8_clamp(avg, 0.0, 1.0) * 2.0
+
+    raw_score = _phase8_clamp(raw_score, 0.0, 2.0)
+
+    c_score = _phase8_layer_score(layer_scores, "C", 0.0)
+    d_score = _phase8_layer_score(layer_scores, "D", 0.0)
+
+    applied_caps = []
+    max_allowed = 2.0
+
+    if c_score < 4.0:
+        max_allowed = min(max_allowed, 0.5)
+        applied_caps.append({
+            "type": "fact_gate",
+            "cap": 0.5,
+            "reason": "C Fact 기반 설명이 4/8 미만이므로 독창성 가점을 제한함."
+        })
+
+    if d_score < 2.0:
+        max_allowed = min(max_allowed, 0.8)
+        applied_caps.append({
+            "type": "countermeasure_gate",
+            "cap": 0.8,
+            "reason": "D 현실적 대책 점수가 2/6 미만이므로 독창성 가점을 제한함."
+        })
+
+    level = ""
+    if isinstance(volume, dict):
+        level = str(volume.get("level") or "")
+
+    if level == "text_only_short_answer":
+        max_allowed = min(max_allowed, 0.7)
+        applied_caps.append({
+            "type": "short_answer_gate",
+            "cap": 0.7,
+            "reason": "짧은 텍스트 답안은 독창성 판단 근거가 제한적이므로 가점을 제한함."
+        })
+
+    if parsed.get("technical_error_risk") is True:
+        max_allowed = min(max_allowed, 0.0)
+        applied_caps.append({
+            "type": "technical_error_gate",
+            "cap": 0.0,
+            "reason": parsed.get("technical_error_reason") or "명백한 기술 오류 위험이 있어 독창성 가점을 인정하지 않음."
+        })
+
+    final_score = min(raw_score, max_allowed)
+
+    target_d_bonus = round(final_score * 0.6, 3)
+    target_e_bonus = round(final_score * 0.4, 3)
+
+    d_row = _phase8_find_layer(layer_scores, "D")
+    e_row = _phase8_find_layer(layer_scores, "E")
+
+    actual_d_bonus = 0.0
+    actual_e_bonus = 0.0
+
+    if d_row is not None and target_d_bonus > 0:
+        before = float(d_row.get("score", 0.0))
+        maxv = _phase8_layer_max(d_row, 6.0)
+        after = min(maxv, before + target_d_bonus)
+        actual_d_bonus = round(after - before, 3)
+        d_row["score"] = round(after, 3)
+        _phase8_add_reason(
+            d_row,
+            f"독창성/기술사적 판단성 보정 +{actual_d_bonus:.2f}: {parsed.get('overall_comment', '')}"
+        )
+
+    if e_row is not None and target_e_bonus > 0:
+        before = float(e_row.get("score", 0.0))
+        maxv = _phase8_layer_max(e_row, 2.0)
+        after = min(maxv, before + target_e_bonus)
+        actual_e_bonus = round(after - before, 3)
+        e_row["score"] = round(after, 3)
+        _phase8_add_reason(
+            e_row,
+            f"독창성/기술사적 판단성 보정 +{actual_e_bonus:.2f}: {parsed.get('overall_comment', '')}"
+        )
+
+    parsed["raw_originality_score"] = round(raw_score, 3)
+    parsed["max_allowed_after_gates"] = round(max_allowed, 3)
+    parsed["final_originality_score"] = round(final_score, 3)
+    parsed["applied_caps"] = applied_caps
+    parsed["final_bonus_to_D"] = actual_d_bonus
+    parsed["final_bonus_to_E"] = actual_e_bonus
+    parsed["bonus_policy"] = "독창성은 별도 가산 총점이 아니라 D/E layer 안에서만 보정하며, 총점 25점을 초과하지 않는다."
+
+    return layer_scores
+
+
+def _phase8_merge_originality_feedback(grade, originality_eval):
+    if not isinstance(grade, dict):
+        return grade
+
+    grade["originality_evaluation"] = originality_eval
+
+    parsed = (originality_eval or {}).get("parsed") or {}
+    final_score = parsed.get("final_originality_score")
+    raw_score = parsed.get("raw_originality_score")
+    comment = parsed.get("overall_comment") or ""
+
+    if final_score is not None:
+        grade["originality_score"] = final_score
+        grade["originality_raw_score"] = raw_score
+
+    if comment:
+        old_summary = str(grade.get("summary") or "")
+        add = f" 독창성/기술사적 판단성 평가는 {final_score}/2.0점으로 D/E 항목에 반영했습니다."
+        if "독창성/기술사적 판단성" not in old_summary:
+            grade["summary"] = (old_summary + add).strip()
+
+    strengths = grade.get("strengths")
+    if not isinstance(strengths, list):
+        strengths = []
+    weaknesses = grade.get("weaknesses")
+    if not isinstance(weaknesses, list):
+        weaknesses = []
+    advice = grade.get("rewrite_advice")
+    if not isinstance(advice, list):
+        advice = []
+
+    if final_score is not None:
+        try:
+            fs = float(final_score)
+        except Exception:
+            fs = 0.0
+
+        if fs >= 1.2:
+            strengths.append(f"독창성/기술사적 판단성: {final_score}/2.0 - {comment}")
+        elif fs <= 0.5:
+            weaknesses.append(f"독창성/기술사적 판단성 부족: {final_score}/2.0 - 현장 조건, 대안 비교, 우선순위, 검증 기준이 부족합니다.")
+        else:
+            weaknesses.append(f"독창성/기술사적 판단성 보통: {final_score}/2.0 - 일부 판단은 있으나 구체성이 더 필요합니다.")
+
+    for item in parsed.get("improvement_advice") or []:
+        if item and item not in advice:
+            advice.append(item)
+
+    if "현장 조건, 대안별 trade-off, 적용 우선순위, 검증 기준을 포함해 기술사적 판단성을 강화하세요." not in advice:
+        advice.append("현장 조건, 대안별 trade-off, 적용 우선순위, 검증 기준을 포함해 기술사적 판단성을 강화하세요.")
+
+    grade["strengths"] = strengths
+    grade["weaknesses"] = weaknesses
+    grade["rewrite_advice"] = advice
+
+    return grade
+
+
+
+
+# ============================================================
+# PHASE8B_FINAL_CAP_ENFORCER
+# 독창성/3인 가중 합성 이후에도 답안 분량 cap을 최종 강제 적용
+# ============================================================
+
+def _phase8b_enforce_final_volume_cap(grade):
+    if not isinstance(grade, dict):
+        return grade
+
+    volume = grade.get("volume_evaluation") or {}
+    cap = volume.get("cap")
+
+    try:
+        cap = float(cap)
+    except Exception:
+        return grade
+
+    if cap <= 0:
+        return grade
+
+    try:
+        total = float(grade.get("total_score", 0.0))
+    except Exception:
+        return grade
+
+    if total > cap:
+        before = total
+        grade["total_score_before_final_cap"] = round(before, 3)
+        grade["total_score"] = round(cap, 2)
+
+        applied_caps = grade.get("applied_caps")
+        if not isinstance(applied_caps, list):
+            applied_caps = []
+
+        applied_caps.append({
+            "type": "final_volume_cap_after_originality",
+            "cap": cap,
+            "before": round(before, 3),
+            "after": round(cap, 3),
+            "reason": "독창성 보정 및 3인 가중 합성 이후에도 답안 분량 cap을 최종 점수에 강제 적용함."
+        })
+
+        grade["applied_caps"] = applied_caps
+
+        summary = str(grade.get("summary") or "")
+        note = f" 최종 점수는 답안 분량 상한 {cap:g}점을 초과하지 않도록 보정했습니다."
+        if "답안 분량 상한" not in summary:
+            grade["summary"] = (summary + note).strip()
+
+    return grade

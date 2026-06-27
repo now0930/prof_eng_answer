@@ -1,0 +1,72 @@
+{
+  "version": "originality_judgment_v1",
+  "name": "기술사적 판단성 평가 기준",
+  "description": "독창성은 새로운 이론 창작이 아니라, 정확한 fact를 기반으로 문제를 실제 설비 조건으로 재해석하고, 대안·제약·우선순위·검증 기준을 제시하는 정도로 평가한다.",
+  "max_score": 2.0,
+  "allocation": {
+    "D": 1.2,
+    "E": 0.8
+  },
+  "anchors": [
+    {
+      "id": "O1",
+      "name": "문제 재해석 능력",
+      "weight": 0.2,
+      "description": "문제를 단순 정의로 끝내지 않고 실제 설계·운전·유지보수 문제로 확장했는가"
+    },
+    {
+      "id": "O2",
+      "name": "현장 조건 반영",
+      "weight": 0.2,
+      "description": "기존 설비, 운전 조건, 유량 범위, 설치 조건, 제약 조건을 고려했는가"
+    },
+    {
+      "id": "O3",
+      "name": "대안 비교와 trade-off",
+      "weight": 0.2,
+      "description": "여러 대안을 비교하고 비용, 리스크, 공기, 효과의 차이를 고려했는가"
+    },
+    {
+      "id": "O4",
+      "name": "적용 우선순위 제시",
+      "weight": 0.2,
+      "description": "진단, 조정, 부분 변경, 설비 변경 등 현실적인 적용 순서를 제시했는가"
+    },
+    {
+      "id": "O5",
+      "name": "검증 가능성",
+      "weight": 0.2,
+      "description": "운전 데이터, trend, 시험, 판정 기준 등 실제 확인 가능한 검증 방법을 제시했는가"
+    }
+  ],
+  "level_scale": {
+    "0.0": "없음",
+    "0.3": "키워드만 있음",
+    "0.5": "일반론 수준",
+    "0.7": "문제와 연결된 판단 있음",
+    "0.9": "현장 조건과 trade-off가 구체적",
+    "1.0": "대안, 제약, 검증, 우선순위가 모두 명확"
+  },
+  "gates": {
+    "fact_gate": {
+      "condition": "C score < 4.0 / 8.0",
+      "max_originality_score": 0.5,
+      "reason": "Fact 기반 설명이 부족하면 독창성 가점을 제한한다."
+    },
+    "countermeasure_gate": {
+      "condition": "D score < 2.0 / 6.0",
+      "max_originality_score": 0.8,
+      "reason": "대책이 부족하면 독창성 가점을 제한한다."
+    },
+    "short_answer_gate": {
+      "condition": "text_only_short_answer",
+      "max_originality_score": 0.7,
+      "reason": "짧은 답안은 판단 근거가 충분히 드러나기 어렵다."
+    },
+    "technical_error_gate": {
+      "condition": "명백히 틀린 기술 주장 포함",
+      "max_originality_score": 0.0,
+      "reason": "Fact를 벗어난 창작은 독창성이 아니라 오류로 본다."
+    }
+  }
+}
