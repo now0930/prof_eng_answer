@@ -244,5 +244,6 @@
     }
   ],
   "user_added_keywords": [],
-  "user_added_fact_anchors": []
+  "user_added_fact_anchors": [],
+  "fact_anchor_bank": "rubrics/fact_anchors/industrial_instrumentation_control.json"
 }

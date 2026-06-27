@@ -1,124 +1,71 @@
 {
-  "version": "2026-06-27-rater-template-v2-common-criteria",
-  "description": "기술사 답안 채점위원 명세. 3인 공통 기준은 고정하고, 각 채점자 character/focus/scoring_style은 추후 상세화한다.",
-  "scoring_targets": {
-    "official_pass_ratio": 0.6,
-    "practical_target_ratio": 0.7,
-    "high_score_ratio": 0.8,
-    "note": "25점 문항 기준 공식 합격선 15점, 실전 목표 17.5점, 고득점 기준 20점"
-  },
-  "source_basis": [
-    {
-      "id": "qnet_exam_method",
-      "type": "official",
-      "summary": "기술사 필기시험은 단답형 또는 주관식 논문형이며 100점 만점 60점 이상 기준"
-    },
-    {
-      "id": "qnet_exam_standards",
-      "type": "official",
-      "summary": "종목별 출제기준 자료실을 1차 기준으로 사용"
-    },
-    {
-      "id": "qnet_past_questions",
-      "type": "official",
-      "summary": "기술사 기출문제 자료실을 문제 유형과 반복 주제 분석에 사용"
-    },
-    {
-      "id": "three_rater_operation",
-      "type": "legal_or_operational",
-      "summary": "기술사 필기 채점은 객관성과 공정성을 위해 매 교시 3명의 채점위원을 위촉한다는 사례 기준"
-    }
-  ],
-  "common_criteria": [
-    {
-      "id": "answer_relevance",
-      "name": "문제 요구사항 충족",
-      "description": "문제가 요구한 설명, 비교, 논의, 대책, 원인, 절차에 직접 답했는지 본다.",
-      "common_to_all_raters": true,
-      "priority": 1,
-      "weight_hint": 20
-    },
-    {
-      "id": "official_scope_alignment",
-      "name": "출제기준·기출 범위 부합",
-      "description": "Q-Net 출제기준과 기술사 기출문제의 범위, 주제, 요구 수준에 맞는지 본다.",
-      "common_to_all_raters": true,
-      "priority": 2,
-      "weight_hint": 15
-    },
-    {
-      "id": "technical_accuracy",
-      "name": "전문용어·핵심 키워드 정확성",
-      "description": "핵심 기술용어, 개념, 법령·기준·표준 명칭을 정확히 사용했는지 본다.",
-      "common_to_all_raters": true,
-      "priority": 3,
-      "weight_hint": 15
-    },
-    {
-      "id": "logical_structure",
-      "name": "논리 구조와 답안 구성",
-      "description": "개요, 본론, 세부 항목, 결론이 체계적으로 구성되어 채점자가 빠르게 파악할 수 있는지 본다.",
-      "common_to_all_raters": true,
-      "priority": 4,
-      "weight_hint": 15
-    },
-    {
-      "id": "practical_application",
-      "name": "실무 적용성",
-      "description": "현장 적용 방법, 시공성, 운영상 유의점, 리스크 대응이 포함되었는지 본다.",
-      "common_to_all_raters": true,
-      "priority": 5,
-      "weight_hint": 15
-    },
-    {
-      "id": "multi_perspective",
-      "name": "다각도 관리 관점",
-      "description": "품질, 안전, 공정, 원가, 유지관리 관점 중 문제에 필요한 관점을 균형 있게 반영했는지 본다.",
-      "common_to_all_raters": true,
-      "priority": 6,
-      "weight_hint": 10
-    },
-    {
-      "id": "judgment_and_conclusion",
-      "name": "기술사적 판단과 결론",
-      "description": "단순 나열이 아니라 한계, 개선 방향, 적용 조건, 결론을 제시했는지 본다.",
-      "common_to_all_raters": true,
-      "priority": 7,
-      "weight_hint": 7
-    },
-    {
-      "id": "readability_completion",
-      "name": "표현, 가독성, 답안 완성도",
-      "description": "문장 표현, 분량, 소제목, 번호화, 마무리의 완성도를 본다.",
-      "common_to_all_raters": true,
-      "priority": 8,
-      "weight_hint": 3
-    }
-  ],
+  "version": "2026-06-27-v1-layer-weighted-raters",
+  "editable": true,
+  "description": "3인 채점자 역할 정의. 최종 점수는 단순 평균이 아니라 scoring_model의 항목별 가중치에 따라 합성한다.",
   "raters": [
     {
       "id": "professor",
       "name": "교수 채점자",
-      "character": "",
-      "focus": [],
-      "scoring_style": "",
-      "enabled": true
+      "enabled": true,
+      "role": "개념적 정확성, 용어, 기본 원리, fact 설명의 정확성을 중시한다.",
+      "primary_layers": [
+        "B",
+        "C"
+      ],
+      "focus": [
+        "문제점 정의의 개념적 정확성",
+        "핵심 개념 인지",
+        "용어와 원리의 오류 여부",
+        "불필요한 수식 유도보다 정확하고 간결한 설명"
+      ],
+      "weak_focus": [
+        "비용",
+        "정기보수 일정",
+        "조직 적용 가능성"
+      ]
     },
     {
       "id": "professional_engineer",
       "name": "기술사 채점자",
-      "character": "",
-      "focus": [],
-      "scoring_style": "",
-      "enabled": true
+      "enabled": true,
+      "role": "문제점의 현장성, fact와 대책의 연결, 설계·운전·유지보전 가능성을 중시한다.",
+      "primary_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "focus": [
+        "문제점의 현장적 의미",
+        "fact 설명이 실제 문제를 설명하는 데 충분한지",
+        "대책의 설계 가능성",
+        "운전·유지보전 관점",
+        "전체 논리 연결성",
+        "면접 방어 가능성"
+      ]
     },
     {
       "id": "executive",
-      "name": "회사 임원 채점자",
-      "character": "",
-      "focus": [],
-      "scoring_style": "",
-      "enabled": true
+      "name": "기업 임원 채점자",
+      "enabled": true,
+      "role": "대책의 비용, 시간, 적용 가능성, 기존 설비 영향, 운영 리스크를 중시한다.",
+      "primary_layers": [
+        "D"
+      ],
+      "focus": [
+        "현실적 적용 가능성",
+        "비용 대비 효과",
+        "정지 시간과 일정 영향",
+        "기존 설비와의 충돌",
+        "운영 리스크 감소",
+        "단기·중기·장기 우선순위"
+      ],
+      "weak_focus": [
+        "세부 이론 유도",
+        "수식 전개",
+        "과도한 학술적 설명"
+      ]
     }
   ]
 }

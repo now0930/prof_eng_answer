@@ -634,7 +634,7 @@ def handle_text(message, chat_id, state):
             send_message(chat_id, "사용법:\n/grade\n문제: ...\n배점: 25\n답안:\nGoogle OCR 텍스트...")
             return
 
-        send_message(chat_id, f"채점을 시작합니다.\n모델: {OLLAMA_MODEL}")
+        send_message(chat_id, f"채점을 시작합니다.\n채점 엔진: Gemini semantic grader + Python scoring rules\n보조 모델: {OLLAMA_MODEL}")
         sid, raw_result, parsed = grade_answer(chat_id, raw, state)
         send_message(chat_id, format_result(parsed, raw_result))
         send_message(chat_id, f"저장 위치: /workspace/prof_eng_answer/data/sessions/{sid}")

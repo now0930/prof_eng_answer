@@ -1445,10 +1445,159 @@ def _phase3_find_terms(text, terms):
     return found
 
 
+
+def _phase3_load_fact_anchor_bank(subject_rubric=None):
+    import json
+    from pathlib import Path
+
+    candidates = []
+
+    if isinstance(subject_rubric, dict):
+        p = subject_rubric.get("fact_anchor_bank")
+        if p:
+            candidates.append(Path(p))
+
+    candidates.extend([
+        Path("rubrics/fact_anchors/industrial_instrumentation_control.json"),
+        Path(__file__).resolve().parent / "rubrics" / "fact_anchors" / "industrial_instrumentation_control.json",
+    ])
+
+    for p in candidates:
+        try:
+            if p.exists():
+                return json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+
+    return {"topics": []}
+
+
+def _phase3_norm_text_for_anchor(text):
+    return (text or "").lower().replace(" ", "").replace("_", "").replace("-", "")
+
+
+def _phase3_anchor_term_matches(text, terms):
+    raw = text or ""
+    norm = _phase3_norm_text_for_anchor(raw)
+
+    hits = []
+    for term in terms or []:
+        if not term:
+            continue
+        t_raw = str(term)
+        t_norm = _phase3_norm_text_for_anchor(t_raw)
+
+        if t_raw in raw or t_raw.lower() in raw.lower() or t_norm in norm:
+            hits.append(t_raw)
+
+    return hits
+
+
+def _phase3_select_fact_anchors_from_bank(question_text, answer_text, subject_rubric=None):
+    bank = _phase3_load_fact_anchor_bank(subject_rubric)
+    topics = bank.get("topics", [])
+
+    combined = (question_text or "") + "\n" + (answer_text or "")
+
+    scored = []
+    for topic in topics:
+        trigger_hits = _phase3_anchor_term_matches(combined, topic.get("triggers", []))
+        alias_hits = _phase3_anchor_term_matches(combined, topic.get("aliases", []))
+
+        if not trigger_hits:
+            continue
+
+        score = len(trigger_hits) * 10 + len(alias_hits) + int(topic.get("priority", 0)) / 100.0
+
+        scored.append({
+            "score": score,
+            "topic": topic,
+            "trigger_hits": trigger_hits,
+            "alias_hits": alias_hits
+        })
+
+    if not scored:
+        return None
+
+    scored.sort(key=lambda x: x["score"], reverse=True)
+    selected = scored[0]
+    topic = selected["topic"]
+
+    anchors = []
+    for a in topic.get("anchors", []):
+        aa = dict(a)
+        aa["topic_id"] = topic.get("topic_id")
+        aa["topic_name"] = topic.get("name")
+        anchors.append(aa)
+
+    return {
+        "topic_id": topic.get("topic_id"),
+        "topic_name": topic.get("name"),
+        "source": "fact_anchor_bank",
+        "trigger_hits": selected["trigger_hits"],
+        "alias_hits": selected["alias_hits"],
+        "anchors": anchors
+    }
+
 def _phase3_select_fact_anchors(question_text, answer_text, subject_rubric=None):
     q = question_text or ""
     a = answer_text or ""
     combined = q + "\n" + a
+
+    bank_selected = _phase3_select_fact_anchors_from_bank(q, a, subject_rubric)
+    if bank_selected:
+        return bank_selected["anchors"]
+
+
+
+    # Cv_VALVE_FLOW_COEFFICIENT_ANCHORS
+    # Cv(Valve Flow Coefficient, 밸브 유량계수) 문제 전용 Fact Anchor
+    combined_lower = combined.lower()
+    if (
+        "cv" in combined_lower
+        or "c_v" in combined_lower
+        or "유량계수" in combined
+        or "flow coefficient" in combined_lower
+        or "valve coefficient" in combined_lower
+        or "밸브 coefficient" in combined_lower
+    ):
+        return [
+            {
+                "id": "F1",
+                "name": "Cv의 정의",
+                "expected": "Cv는 밸브의 유량 용량을 나타내는 유량계수이며, 밸브 사이징과 선정의 핵심 지표임을 설명한다.",
+                "core_terms": ["Cv", "유량계수", "flow coefficient", "밸브 계수", "유량 용량", "용량계수"],
+                "support_terms": ["제어밸브", "밸브", "사이징", "선정", "용량"]
+            },
+            {
+                "id": "F2",
+                "name": "표준 정의 조건",
+                "expected": "Cv는 60°F 물이 밸브 전후 1 psi 차압에서 1분 동안 흐르는 US gpm 유량으로 정의된다는 표준 조건을 설명한다.",
+                "core_terms": ["60°F", "60F", "물", "1 psi", "1psi", "gpm", "US gallon", "갤런"],
+                "support_terms": ["차압", "분", "표준", "정의", "조건"]
+            },
+            {
+                "id": "F3",
+                "name": "유량·차압·비중 관계",
+                "expected": "액체 기준 Q = Cv × sqrt(ΔP/SG) 또는 Cv = Q × sqrt(SG/ΔP) 관계를 설명하고, 유량은 Cv와 차압에 비례하고 비중에 영향을 받음을 설명한다.",
+                "core_terms": ["Q", "ΔP", "차압", "SG", "비중", "sqrt", "제곱근", "루트"],
+                "support_terms": ["유량", "압력강하", "압력 손실", "계산", "공식"]
+            },
+            {
+                "id": "F4",
+                "name": "밸브 선정과 제어성 영향",
+                "expected": "Cv가 밸브 사이징, 개도, 제어성, 압력손실, 과대·과소 선정 문제와 연결됨을 설명한다.",
+                "core_terms": ["사이징", "개도", "제어성", "압력손실", "과대", "과소", "선정"],
+                "support_terms": ["헌팅", "분해능", "rangeability", "제어 불안정", "여유율"]
+            },
+            {
+                "id": "F5",
+                "name": "실무 적용 시 주의사항",
+                "expected": "실제 적용에서는 유체 종류, 점도, 온도, 캐비테이션, 초크 유동, 배관 조건, 제조사 데이터, Kv와 단위 차이를 함께 검토해야 함을 설명한다.",
+                "core_terms": ["점도", "온도", "캐비테이션", "초크", "choked", "배관", "제조사", "Kv", "단위"],
+                "support_terms": ["실무", "검토", "보정", "조건", "데이터"]
+            }
+        ]
 
     # 1차 구현: 제어밸브 캐비테이션 문제를 명시 anchor로 처리.
     if _phase3_contains_any(combined, ["캐비테이션", "cavitation", "공동현상"]) and _phase3_contains_any(combined, ["제어밸브", "조절밸브", "Control Valve", "밸브"]):
@@ -2128,6 +2277,180 @@ def _phase4_apply_rater_weighted_scoring(grade, scoring_model, rater_profile):
 
     return grade
 
+
+# PHASE6_GEMINI_SEMANTIC_GRADER
+# Gemini가 A/B/C/D/E 의미 기반 원점수를 평가하고, Python은 cap/검증/3인 가중치를 적용한다.
+
+def _phase6_clamp_score(score, max_score):
+    try:
+        score = float(score)
+        max_score = float(max_score)
+    except Exception:
+        return 0.0
+    return round(max(0.0, min(score, max_score)), 2)
+
+
+def _phase6_get_layer_max(scoring_model):
+    return {
+        str(x.get("id")): float(x.get("points", 0))
+        for x in scoring_model.get("layers", [])
+    }
+
+
+def _phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model):
+    if not gemini_eval or not gemini_eval.get("ok"):
+        return layer_scores
+
+    parsed = gemini_eval.get("parsed") or {}
+    gemini_layers = parsed.get("layers") or []
+    max_by_layer = _phase6_get_layer_max(scoring_model)
+
+    gemini_by_id = {
+        str(x.get("layer_id")): x
+        for x in gemini_layers
+        if x.get("layer_id")
+    }
+
+    out = []
+    for layer in layer_scores:
+        layer_id = str(layer.get("layer_id"))
+        g = gemini_by_id.get(layer_id)
+        new_layer = dict(layer)
+
+        if g:
+            max_score = max_by_layer.get(layer_id, float(layer.get("max", 0)))
+            g_score = _phase6_clamp_score(g.get("score", 0), max_score)
+
+            new_layer["score_before_gemini"] = layer.get("score")
+            new_layer["score"] = g_score
+            new_layer["gemini_semantic_score"] = g_score
+            new_layer["gemini_reason"] = g.get("reason", "")
+            new_layer["gemini_evidence"] = g.get("evidence", [])
+            new_layer["reason"] = (
+                f"Gemini 의미 평가: {g.get('reason', '')} "
+                f"/ 기존 휴리스틱 근거: {layer.get('reason', '')}"
+            )
+
+        out.append(new_layer)
+
+    return out
+
+
+def _phase6_merge_gemini_feedback(grade, gemini_eval):
+    if not gemini_eval or not gemini_eval.get("ok"):
+        grade["gemini_semantic_evaluation"] = gemini_eval or {
+            "ok": False,
+            "error": "Gemini evaluation was not executed."
+        }
+        return grade
+
+    parsed = gemini_eval.get("parsed") or {}
+
+    grade["gemini_semantic_evaluation"] = {
+        "ok": True,
+        "model": gemini_eval.get("model"),
+        "parsed": parsed,
+        "raw_text": gemini_eval.get("raw_text", "")
+    }
+
+    if parsed.get("overall_comment"):
+        grade["summary"] = parsed.get("overall_comment")
+
+    if parsed.get("confidence"):
+        # Gemini confidence는 "채점 판단 신뢰도"로 별도 보관한다.
+        # OCR warning 등 시스템 신뢰도 low를 무조건 덮어쓰지 않는다.
+        grade["gemini_confidence"] = parsed.get("confidence")
+
+        volume = grade.get("volume_evaluation") or {}
+        if not volume.get("ocr_warning"):
+            grade["confidence"] = parsed.get("confidence")
+
+    if parsed.get("improvement_advice"):
+        existing = grade.get("rewrite_advice") or []
+        merged = list(existing)
+        for x in parsed.get("improvement_advice", []):
+            if x not in merged:
+                merged.append(x)
+        grade["rewrite_advice"] = merged
+
+    if parsed.get("risks"):
+        existing = grade.get("weaknesses") or []
+        merged = list(existing)
+        for x in parsed.get("risks", []):
+            if x not in merged:
+                merged.append(x)
+        grade["weaknesses"] = merged
+
+    rater_comments = {
+        x.get("rater_id"): x.get("comment")
+        for x in parsed.get("rater_comments", [])
+        if x.get("rater_id")
+    }
+
+    for r in grade.get("rater_results", []):
+        rid = r.get("rater_id")
+        if rid in rater_comments and rater_comments[rid]:
+            r["gemini_comment"] = rater_comments[rid]
+            r["perspective"] = rater_comments[rid]
+            r["comment"] = rater_comments[rid]
+            r["reason"] = rater_comments[rid]
+
+    return grade
+
+
+def _phase6_run_gemini_semantic_grader(
+    input_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval,
+    session_dir
+):
+    try:
+        from gemini_grader import gemini_semantic_grade
+
+        question_text = _phase3_extract_question_text(input_text)
+
+        result = gemini_semantic_grade(
+            question_text=question_text,
+            answer_text=answer_text,
+            scoring_model=scoring_model,
+            subject_rubric=subject_rubric,
+            rater_profile=rater_profile,
+            volume=volume,
+            fact_eval=fact_eval,
+            connection_eval=connection_eval,
+        )
+
+        try:
+            _phase2_json_write(session_dir / "gemini_semantic_evaluation.json", result)
+        except Exception:
+            pass
+
+        if result.get("ok"):
+            print("[agent] Gemini semantic grader applied.")
+        else:
+            print(f"[agent] Gemini semantic grader failed: {result.get('error')}")
+
+        return result
+
+    except Exception as e:
+        result = {
+            "ok": False,
+            "error": f"Gemini semantic grader exception: {e!r}",
+            "parsed": None,
+            "raw_text": ""
+        }
+        try:
+            _phase2_json_write(session_dir / "gemini_semantic_evaluation.json", result)
+        except Exception:
+            pass
+        print(f"[agent] Gemini semantic grader exception: {e!r}")
+        return result
+
 def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
     from grading_config import load_active_config, save_active_config_snapshots
@@ -2174,6 +2497,20 @@ def _phase2_postprocess_grade(legacy_result):
     layer_scores = _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval)
     layer_scores = _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval)
 
+    gemini_eval = _phase6_run_gemini_semantic_grader(
+        input_text=input_text,
+        answer_text=answer_text,
+        scoring_model=scoring_model,
+        subject_rubric=subject_rubric,
+        rater_profile=rater_profile,
+        volume=volume,
+        fact_eval=fact_eval,
+        connection_eval=connection_eval,
+        session_dir=session_dir
+    )
+
+    layer_scores = _phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model)
+
     total_before_cap, total_after_cap, applied_caps = _phase2_apply_caps(layer_scores, volume)
 
     max_score = float(scoring_model.get("total_points", 25))
@@ -2214,6 +2551,7 @@ def _phase2_postprocess_grade(legacy_result):
         "fact_anchor_evaluation": fact_eval,
         "connection_evaluation": connection_eval,
         "interview_followup": interview_followup,
+        "gemini_semantic_evaluation": gemini_eval,
         "total_before_cap": total_before_cap,
         "applied_caps": applied_caps,
         "breakdown": layer_scores,
@@ -2239,6 +2577,7 @@ def _phase2_postprocess_grade(legacy_result):
     }
 
     grade = _phase4_apply_rater_weighted_scoring(grade, scoring_model, rater_profile)
+    grade = _phase6_merge_gemini_feedback(grade, gemini_eval)
     grade = _phase2_add_display_aliases(grade)
 
     _phase2_json_write(session_dir / "grade.json", grade)

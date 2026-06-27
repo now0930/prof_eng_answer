@@ -1,0 +1,41 @@
+{
+  "description": "answer_structure.json 권장 구조",
+  "type": "object",
+  "properties": {
+    "blocks": {
+      "type": "object",
+      "properties": {
+        "background": {
+          "type": "object"
+        },
+        "problem": {
+          "type": "object"
+        },
+        "fact_explanation": {
+          "type": "object"
+        },
+        "professional_opinion": {
+          "type": "object"
+        }
+      }
+    },
+    "detected_order": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "missing_blocks": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "notes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  }
+}

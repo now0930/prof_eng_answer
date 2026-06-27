@@ -1,0 +1,105 @@
+{
+  "description": "최종 grade.json 권장 구조",
+  "type": "object",
+  "required": [
+    "session_id",
+    "total_score",
+    "max_score",
+    "score_per_100",
+    "layer_scores",
+    "cap_rules_applied",
+    "summary",
+    "strengths",
+    "weaknesses",
+    "interview_followup"
+  ],
+  "properties": {
+    "session_id": {
+      "type": "string"
+    },
+    "total_score": {
+      "type": "number"
+    },
+    "max_score": {
+      "type": "number"
+    },
+    "score_per_100": {
+      "type": "number"
+    },
+    "official_pass_met": {
+      "type": "boolean"
+    },
+    "practical_target_met": {
+      "type": "boolean"
+    },
+    "high_score_met": {
+      "type": "boolean"
+    },
+    "layer_scores": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "id",
+          "name",
+          "score",
+          "max_score",
+          "reason"
+        ],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number"
+          },
+          "max_score": {
+            "type": "number"
+          },
+          "reason": {
+            "type": "string"
+          },
+          "weighted_rater_notes": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "fact_anchor_evaluation": {
+      "type": "object"
+    },
+    "connection_evaluation": {
+      "type": "object"
+    },
+    "cap_rules_applied": {
+      "type": "array"
+    },
+    "summary": {
+      "type": "string"
+    },
+    "strengths": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "weaknesses": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "rewrite_advice": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "interview_followup": {
+      "type": "array"
+    }
+  }
+}
