@@ -36,3 +36,13 @@ __pycache__/
 *.pyc
 *.backup.*
 *.broken.*
+
+# Runtime/private
+data/sessions/
+data/state.json
+logs/*.log
+backups/
+__pycache__/
+*.pyc
+*.backup.*
+*.broken.*

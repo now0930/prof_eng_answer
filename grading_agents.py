@@ -1407,6 +1407,727 @@ def _phase2_add_display_aliases(grade):
 
     return grade
 
+
+# PHASE3_FACT_ANCHOR_SCORING
+# C. Fact 기반 문제점 설명을 단순 키워드 매칭이 아니라 문제별 Fact Anchor 5개로 평가한다.
+
+def _phase3_extract_question_text(raw_text):
+    text = raw_text or ""
+    if "답안:" in text:
+        before = text.split("답안:", 1)[0]
+    else:
+        before = text
+
+    if "문제:" in before:
+        return before.split("문제:", 1)[1].strip()
+
+    return before.strip()
+
+
+def _phase3_extract_answer_text(raw_text):
+    text = raw_text or ""
+    if "답안:" in text:
+        return text.split("답안:", 1)[1].strip()
+    return text.strip()
+
+
+def _phase3_contains_any(text, terms):
+    text = text or ""
+    return any(t in text for t in terms if t)
+
+
+def _phase3_find_terms(text, terms):
+    text = text or ""
+    found = []
+    for t in terms:
+        if t and t in text and t not in found:
+            found.append(t)
+    return found
+
+
+def _phase3_select_fact_anchors(question_text, answer_text, subject_rubric=None):
+    q = question_text or ""
+    a = answer_text or ""
+    combined = q + "\n" + a
+
+    # 1차 구현: 제어밸브 캐비테이션 문제를 명시 anchor로 처리.
+    if _phase3_contains_any(combined, ["캐비테이션", "cavitation", "공동현상"]) and _phase3_contains_any(combined, ["제어밸브", "조절밸브", "Control Valve", "밸브"]):
+        return [
+            {
+                "id": "F1",
+                "name": "국부 압력 저하",
+                "expected": "제어밸브 고차압 또는 유로 축소부에서 유속 증가로 국부 압력이 낮아지는 현상을 설명한다.",
+                "core_terms": ["국부 압력", "압력 저하", "압력이 낮", "차압", "고차압", "유속", "축소부", "vena contracta"],
+                "support_terms": ["제어밸브", "밸브", "유로", "압력"]
+            },
+            {
+                "id": "F2",
+                "name": "포화증기압 이하 기포 발생",
+                "expected": "국부 압력이 액체의 포화증기압 이하가 되면 기포 또는 공동이 발생한다고 설명한다.",
+                "core_terms": ["포화증기압", "증기압", "기포", "공동", "cavity", "발생"],
+                "support_terms": ["액체", "압력", "낮"]
+            },
+            {
+                "id": "F3",
+                "name": "하류 압력 회복부 기포 붕괴",
+                "expected": "하류 압력 회복 구간에서 기포가 급격히 붕괴하는 메커니즘을 설명한다.",
+                "core_terms": ["하류", "압력 회복", "회복부", "기포 붕괴", "붕괴", "소멸"],
+                "support_terms": ["압력", "기포"]
+            },
+            {
+                "id": "F4",
+                "name": "손상과 제어 문제",
+                "expected": "기포 붕괴가 소음, 진동, 트림 침식, 밸브 손상, 제어 불안정을 유발한다고 설명한다.",
+                "core_terms": ["소음", "진동", "침식", "손상", "트림", "제어 불안정", "불안정", "erosion"],
+                "support_terms": ["밸브", "기포", "붕괴"]
+            },
+            {
+                "id": "F5",
+                "name": "방지대책의 설계 방향",
+                "expected": "차압 분산, 다단 감압, anti-cavitation trim, 적정 사이징, 운전 조건 검토 등을 대책으로 연결한다.",
+                "core_terms": ["차압", "다단", "감압", "방지 트림", "anti-cavitation", "사이징", "운전 조건", "트림"],
+                "support_terms": ["대책", "방지", "적용", "검토"]
+            }
+        ]
+
+    # 기본 anchor: 다른 문제에도 최소한 구조적으로 동작하게 한다.
+    return [
+        {
+            "id": "F1",
+            "name": "핵심 개념 정의",
+            "expected": "문제의 핵심 기술 개념을 정확히 정의한다.",
+            "core_terms": ["정의", "개념", "원리", "목적"],
+            "support_terms": ["설명", "기술"]
+        },
+        {
+            "id": "F2",
+            "name": "발생 원인 또는 작동 원리",
+            "expected": "문제에서 요구한 원인 또는 작동 원리를 인과관계로 설명한다.",
+            "core_terms": ["원인", "발생", "원리", "메커니즘", "조건"],
+            "support_terms": ["때문", "의해", "따라"]
+        },
+        {
+            "id": "F3",
+            "name": "문제점 또는 영향",
+            "expected": "기술적 문제점, 품질·안전·운전 영향을 설명한다.",
+            "core_terms": ["문제점", "영향", "위험", "고장", "품질", "안전", "운전"],
+            "support_terms": ["리스크", "손실", "불안정"]
+        },
+        {
+            "id": "F4",
+            "name": "개선 또는 대책",
+            "expected": "기술적으로 타당한 개선책 또는 대책을 제시한다.",
+            "core_terms": ["대책", "개선", "방안", "방지", "설계", "관리"],
+            "support_terms": ["적용", "검토", "선정"]
+        },
+        {
+            "id": "F5",
+            "name": "현실 적용 조건",
+            "expected": "비용, 시간, 적용 가능성, 기존 설비 영향, 유지보수 조건을 고려한다.",
+            "core_terms": ["비용", "시간", "적용 가능", "기존 설비", "유지보수", "정기보수"],
+            "support_terms": ["현실", "우선순위", "리스크"]
+        }
+    ]
+
+
+
+def _phase3_score_one_anchor(answer_text, anchor):
+    """
+    Fact Anchor 엄격 평가.
+
+    0.0: 언급 없음
+    0.3: 주변 키워드만 있음
+    0.5: 핵심 키워드 일부만 있음
+    0.6: 핵심 개념은 있으나 필수 조건/인과관계 부족
+    0.8: 필수 조건과 인과관계가 대체로 맞음
+    1.0: 핵심 개념, 조건, 인과관계, 문제 연결이 정확하고 간결함
+    """
+    text = answer_text or ""
+    name = anchor.get("name", "")
+    aid = anchor.get("id", "")
+
+    core_found = _phase3_find_terms(text, anchor.get("core_terms", []))
+    support_found = _phase3_find_terms(text, anchor.get("support_terms", []))
+
+    def has_any(terms):
+        return _phase3_contains_any(text, terms)
+
+    level = 0.0
+    judgement = "미언급"
+
+    # F1. 국부 압력 저하
+    if aid == "F1" or "국부 압력" in name:
+        pressure_drop = has_any(["국부 압력", "압력 저하", "압력이 낮", "차압", "고차압"])
+        mechanism = has_any(["유속", "축소부", "유로", "vena contracta"])
+
+        if pressure_drop and mechanism:
+            level = 0.9
+            judgement = "압력 저하와 발생 조건을 대체로 설명"
+        elif pressure_drop:
+            level = 0.7
+            judgement = "압력 저하 핵심은 언급했으나 메커니즘 설명은 부족"
+        elif core_found:
+            level = 0.5
+            judgement = "관련 키워드 일부 언급"
+        else:
+            level = 0.0
+            judgement = "미언급"
+
+    # F2. 포화증기압 이하 기포 발생
+    elif aid == "F2" or "포화증기압" in name:
+        vapor_pressure = has_any(["포화증기압", "증기압"])
+        bubble = has_any(["기포", "공동", "cavity"])
+        below_condition = has_any(["이하", "낮", "저하"])
+
+        if vapor_pressure and bubble and below_condition:
+            level = 0.9
+            judgement = "포화증기압 이하 조건과 기포 발생을 설명"
+        elif vapor_pressure and bubble:
+            level = 0.8
+            judgement = "포화증기압과 기포 발생을 연결"
+        elif bubble:
+            level = 0.5
+            judgement = "기포 발생은 언급했으나 포화증기압 조건 설명 부족"
+        elif core_found:
+            level = 0.4
+            judgement = "관련 키워드 일부 언급"
+        else:
+            level = 0.0
+            judgement = "미언급"
+
+    # F3. 하류 압력 회복부 기포 붕괴
+    elif aid == "F3" or "압력 회복" in name or "기포 붕괴" in name:
+        collapse = has_any(["붕괴", "소멸", "collapse"])
+        recovery = has_any(["하류", "압력 회복", "회복부"])
+        rapid = has_any(["급격", "순간", "충격"])
+
+        if collapse and recovery and rapid:
+            level = 0.9
+            judgement = "하류 압력 회복부의 급격한 기포 붕괴를 설명"
+        elif collapse and recovery:
+            level = 0.8
+            judgement = "기포 붕괴 위치와 압력 회복 조건을 설명"
+        elif collapse:
+            level = 0.5
+            judgement = "기포 붕괴는 언급했으나 하류 압력 회복 조건 설명 부족"
+        elif core_found:
+            level = 0.4
+            judgement = "관련 키워드 일부 언급"
+        else:
+            level = 0.0
+            judgement = "미언급"
+
+    # F4. 손상과 제어 문제
+    elif aid == "F4" or "손상" in name or "제어 문제" in name:
+        symptom = _phase3_find_terms(text, ["소음", "진동"])
+        damage = _phase3_find_terms(text, ["침식", "손상", "트림", "erosion"])
+        control = _phase3_find_terms(text, ["제어 불안정", "불안정", "헌팅", "품질"])
+
+        if symptom and damage and control:
+            level = 0.9
+            judgement = "소음·진동, 물리적 손상, 제어 문제를 모두 연결"
+        elif symptom and damage:
+            level = 0.75
+            judgement = "소음·진동과 손상 영향을 설명"
+        elif symptom:
+            level = 0.6
+            judgement = "소음·진동 영향은 설명했으나 손상·제어 문제 전개 부족"
+        elif damage or control:
+            level = 0.5
+            judgement = "영향 일부 언급"
+        else:
+            level = 0.0
+            judgement = "미언급"
+
+    # F5. 방지대책의 설계 방향
+    elif aid == "F5" or "방지대책" in name or "설계 방향" in name:
+        pressure_solution = _phase3_find_terms(text, ["차압", "다단", "감압"])
+        valve_solution = _phase3_find_terms(text, ["방지 트림", "anti-cavitation", "트림"])
+        design_solution = _phase3_find_terms(text, ["사이징", "운전 조건", "밸브 선정", "Cv"])
+        practical_solution = _phase3_find_terms(text, ["비용", "시간", "정기보수", "적용 가능", "기존 설비"])
+
+        solution_groups = 0
+        if pressure_solution:
+            solution_groups += 1
+        if valve_solution:
+            solution_groups += 1
+        if design_solution:
+            solution_groups += 1
+        if practical_solution:
+            solution_groups += 1
+
+        if solution_groups >= 4:
+            level = 1.0
+            judgement = "설계·운전·현실 적용 조건까지 대책을 제시"
+        elif solution_groups == 3:
+            level = 0.85
+            judgement = "복수 대책과 설계 조건을 제시"
+        elif solution_groups == 2:
+            level = 0.65
+            judgement = "대책 일부는 타당하나 설계 조건과 현실성 전개 부족"
+        elif solution_groups == 1:
+            level = 0.45
+            judgement = "단일 대책 수준으로 제시"
+        else:
+            level = 0.0
+            judgement = "미언급"
+
+    # 일반 문제용 fallback
+    else:
+        core_count = len(core_found)
+        support_count = len(support_found)
+
+        if core_count == 0 and support_count == 0:
+            level = 0.0
+            judgement = "미언급"
+        elif core_count == 0 and support_count > 0:
+            level = 0.3
+            judgement = "주변 키워드만 언급"
+        elif core_count == 1:
+            level = 0.5
+            judgement = "핵심 일부 언급"
+        elif core_count >= 2 and support_count >= 1:
+            level = 0.7
+            judgement = "핵심 개념 대체로 설명"
+        elif core_count >= 2:
+            level = 0.6
+            judgement = "핵심 키워드는 있으나 설명 부족"
+
+    # 매우 짧은 답안은 완전한 fact 설명으로 보지 않음
+    if len(text.strip()) < 500:
+        level = min(level, 0.8)
+
+    return {
+        "id": anchor.get("id"),
+        "name": anchor.get("name"),
+        "expected": anchor.get("expected"),
+        "level": round(level, 2),
+        "judgement": judgement,
+        "core_terms_found": core_found,
+        "support_terms_found": support_found
+    }
+
+def _phase3_evaluate_fact_anchors(raw_text, subject_rubric=None):
+    question_text = _phase3_extract_question_text(raw_text)
+    answer_text = _phase3_extract_answer_text(raw_text)
+
+    anchors = _phase3_select_fact_anchors(question_text, answer_text, subject_rubric)
+    results = [_phase3_score_one_anchor(answer_text, a) for a in anchors]
+
+    avg = round(sum(x["level"] for x in results) / len(results), 3) if results else 0.0
+
+    # C항목 8점 구성:
+    # 핵심 개념 인지 3점, 정확한 설명 3점, 문제점 연결 1.5점, 간결성 0.5점
+    concept_score = round(3.0 * avg, 2)
+
+    accuracy_factor = avg
+    if _phase3_contains_any(answer_text, ["포화증기압", "압력 회복", "하류", "침식", "사이징", "운전 조건"]):
+        accuracy_factor = min(1.0, accuracy_factor + 0.1)
+    accuracy_score = round(3.0 * accuracy_factor, 2)
+
+    problem_link_factor = 0.0
+    if _phase3_contains_any(answer_text, ["소음", "진동", "손상", "침식", "제어 불안정", "문제", "위험"]):
+        problem_link_factor += 0.7
+    if _phase3_contains_any(answer_text, ["따라서", "때문", "이로 인해", "유발", "발생"]):
+        problem_link_factor += 0.3
+    problem_link_score = round(1.5 * min(problem_link_factor, 1.0), 2)
+
+    compactness_score = 0.5
+    if len(answer_text.strip()) > 2500:
+        compactness_score = 0.4
+    if len(answer_text.strip()) < 80:
+        compactness_score = 0.2
+
+    total = round(concept_score + accuracy_score + problem_link_score + compactness_score, 2)
+    total = min(total, 8.0)
+
+    return {
+        "version": "phase3_fact_anchor_v1",
+        "question_text": question_text,
+        "answer_char_count": len(answer_text.strip()),
+        "anchor_count": len(results),
+        "average_anchor_level": avg,
+        "c_score": total,
+        "c_score_detail": {
+            "core_concept": concept_score,
+            "accuracy": accuracy_score,
+            "problem_link": problem_link_score,
+            "compactness": compactness_score
+        },
+        "anchors": results
+    }
+
+
+def _phase3_evaluate_connections(raw_text):
+    answer_text = _phase3_extract_answer_text(raw_text)
+
+    background_terms = ["배경", "최근", "공정", "운전", "필요", "중요"]
+    problem_terms = ["문제", "문제점", "원인", "소음", "진동", "손상", "불안정", "위험"]
+    fact_terms = ["압력", "차압", "포화증기압", "기포", "붕괴", "원리", "메커니즘"]
+    solution_terms = ["대책", "방지", "개선", "설계", "적용", "검토", "사이징", "운전 조건"]
+    connector_terms = ["따라서", "그러므로", "이로 인해", "때문", "결과", "이를 위해", "우선"]
+
+    has_background = _phase3_contains_any(answer_text, background_terms)
+    has_problem = _phase3_contains_any(answer_text, problem_terms)
+    has_fact = _phase3_contains_any(answer_text, fact_terms)
+    has_solution = _phase3_contains_any(answer_text, solution_terms)
+    has_connector = _phase3_contains_any(answer_text, connector_terms)
+
+    def score_pair(a, b, name):
+        if a and b and has_connector:
+            return 1.0, f"{name} 연결이 명시적으로 드러남."
+        if a and b:
+            return 0.7, f"{name} 요소는 있으나 연결어가 약함."
+        if a or b:
+            return 0.3, f"{name} 한쪽 요소만 확인됨."
+        return 0.0, f"{name} 연결 근거 부족."
+
+    b_to_p, b_to_p_reason = score_pair(has_background, has_problem, "배경→문제점")
+    p_to_f, p_to_f_reason = score_pair(has_problem, has_fact, "문제점→Fact")
+    f_to_s, f_to_s_reason = score_pair(has_fact, has_solution, "Fact→대책")
+    s_to_p, s_to_p_reason = score_pair(has_solution, has_problem, "대책→문제점 해결")
+
+    avg = round((b_to_p + p_to_f + f_to_s + s_to_p) / 4, 3)
+
+    return {
+        "version": "phase3_connection_v1",
+        "average_connection_level": avg,
+        "e_score": round(2.0 * avg, 2),
+        "checks": [
+            {"id": "background_to_problem", "level": b_to_p, "reason": b_to_p_reason},
+            {"id": "problem_to_fact", "level": p_to_f, "reason": p_to_f_reason},
+            {"id": "fact_to_solution", "level": f_to_s, "reason": f_to_s_reason},
+            {"id": "solution_to_problem", "level": s_to_p, "reason": s_to_p_reason}
+        ]
+    }
+
+
+def _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval):
+    for item in layer_scores:
+        if item.get("layer_id") == "C":
+            item["score_before_fact_anchor"] = item.get("score")
+            item["score"] = round(float(fact_eval.get("c_score", 0)), 2)
+            item["reason"] = (
+                f"Fact Anchor {fact_eval.get('anchor_count')}개 평가 평균 "
+                f"{fact_eval.get('average_anchor_level')} 기준. "
+                f"세부: {fact_eval.get('c_score_detail')}"
+            )
+            item["fact_anchor_summary"] = [
+                {
+                    "id": a.get("id"),
+                    "name": a.get("name"),
+                    "level": a.get("level"),
+                    "judgement": a.get("judgement")
+                }
+                for a in fact_eval.get("anchors", [])
+            ]
+    return layer_scores
+
+
+def _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval):
+    for item in layer_scores:
+        if item.get("layer_id") == "E":
+            item["score_before_connection_eval"] = item.get("score")
+            item["score"] = round(float(connection_eval.get("e_score", 0)), 2)
+            item["reason"] = (
+                f"연결성 평균 {connection_eval.get('average_connection_level')} 기준. "
+                + " / ".join(x.get("reason", "") for x in connection_eval.get("checks", []))
+            )
+    return layer_scores
+
+
+def _phase3_make_interview_followup(fact_eval, connection_eval):
+    questions = []
+
+    for a in fact_eval.get("anchors", []):
+        if float(a.get("level", 0)) < 0.8:
+            questions.append(
+                f"{a.get('name')}에 대해 면접에서 재질문 가능: {a.get('expected')}"
+            )
+
+    if float(connection_eval.get("average_connection_level", 0)) < 0.7:
+        questions.append(
+            "제시한 대책이 어떤 문제점을 해결하는지, 비용·시간·적용 가능성 관점에서 설명하시오."
+        )
+
+    return {
+        "version": "phase3_interview_followup_v1",
+        "questions": questions[:5]
+    }
+
+
+# PHASE4_RATER_WEIGHTED_SCORING
+# 교수/기술사/기업 임원 점수를 동일 복사하지 않고 layer별 관점 차이를 반영한다.
+
+def _phase4_rater_multiplier(rater_id, layer_id, grade):
+    """
+    rater별 layer 해석 차이.
+    최종점수는 scoring_model.rater_weights_by_layer로 합성한다.
+    """
+    # 기본값
+    table = {
+        "professor": {
+            "A": 1.00,
+            "B": 1.08,
+            "C": 1.10,
+            "D": 0.85,
+            "E": 0.95
+        },
+        "professional_engineer": {
+            "A": 1.05,
+            "B": 1.05,
+            "C": 1.03,
+            "D": 1.03,
+            "E": 1.08
+        },
+        "executive": {
+            "A": 0.95,
+            "B": 0.85,
+            "C": 0.82,
+            "D": 1.10,
+            "E": 1.02
+        }
+    }
+
+    mult = table.get(rater_id, {}).get(layer_id, 1.0)
+
+    # 현실성 요소가 거의 없으면 임원 D 점수는 가중을 낮춘다.
+    if rater_id == "executive" and layer_id == "D":
+        text_stats = grade.get("answer_text_stats") or {}
+        weaknesses = " ".join(str(x) for x in grade.get("weaknesses", []))
+        if text_stats.get("char_count", 0) < 500:
+            mult = min(mult, 0.90)
+        if "비용" not in weaknesses and "시간" not in weaknesses:
+            # 약점 문구가 아니라 실제 답안에서 현실성 부족을 더 엄격히 보는 용도
+            pass
+
+    return mult
+
+
+def _phase4_rater_layer_comment(rater_id, layer_id):
+    comments = {
+        "professor": {
+            "A": "문제 진입과 개념 정의의 적절성을 봄.",
+            "B": "문제점 정의의 개념적 정확성을 중점 평가함.",
+            "C": "핵심 fact anchor와 용어 정확성을 중점 평가함.",
+            "D": "대책의 이론적 타당성은 보되 현실 제약 평가는 제한적으로 반영함.",
+            "E": "논리 연결과 설명 일관성을 평가함."
+        },
+        "professional_engineer": {
+            "A": "현장 문제로 들어가는 흐름을 평가함.",
+            "B": "문제점이 실제 설비·운전 문제로 정의되었는지 평가함.",
+            "C": "fact 설명이 현장 문제를 설명하기에 충분한지 평가함.",
+            "D": "대책이 설계·운전·유지보전에 적용 가능한지 평가함.",
+            "E": "문제점, fact, 대책의 연결성과 면접 방어 가능성을 평가함."
+        },
+        "executive": {
+            "A": "문제의 사업·운영상 중요성을 봄.",
+            "B": "문제점이 운영 리스크로 명확히 드러나는지 평가함.",
+            "C": "세부 이론보다 의사결정에 필요한 fact인지 평가함.",
+            "D": "비용, 시간, 적용 가능성, 기존 설비 영향, 리스크 저감을 중점 평가함.",
+            "E": "대책이 실제 문제 해결과 우선순위 판단으로 연결되는지 평가함."
+        }
+    }
+    return comments.get(rater_id, {}).get(layer_id, "")
+
+
+def _phase4_cap_layer_score(score, max_score):
+    try:
+        score = float(score)
+        max_score = float(max_score)
+    except Exception:
+        return 0.0
+    return round(max(0.0, min(score, max_score)), 2)
+
+
+def _phase4_make_weighted_rater_matrix(grade, scoring_model, rater_profile):
+    layer_scores = grade.get("breakdown", [])
+    raters = []
+    if rater_profile:
+        raters = [r for r in rater_profile.get("raters", []) if r.get("enabled", True)]
+
+    rater_layer_map = {}
+    rater_results = []
+
+    max_score = float(scoring_model.get("total_points", grade.get("max_score", 25)))
+    official = round(max_score * 0.60, 2)
+    practical = round(max_score * 0.70, 2)
+    high = round(max_score * 0.80, 2)
+
+    volume = grade.get("volume_evaluation") or {}
+    volume_cap = volume.get("cap")
+
+    for r in raters:
+        rid = r.get("id")
+        rname = r.get("name", rid)
+        r_layers = []
+        r_total = 0.0
+
+        for layer in layer_scores:
+            layer_id = layer.get("layer_id")
+            base_score = float(layer.get("score", 0))
+            layer_max = float(layer.get("max", 0))
+            mult = _phase4_rater_multiplier(rid, layer_id, grade)
+            r_score = _phase4_cap_layer_score(base_score * mult, layer_max)
+
+            r_layers.append({
+                "layer_id": layer_id,
+                "item": layer.get("item"),
+                "score": r_score,
+                "max": layer_max,
+                "base_score": base_score,
+                "multiplier": mult,
+                "comment": _phase4_rater_layer_comment(rid, layer_id)
+            })
+            r_total += r_score
+
+        # 짧은 답안 volume cap은 채점자별 총점에도 적용
+        if volume_cap is not None and r_total > float(volume_cap):
+            scale = float(volume_cap) / r_total if r_total > 0 else 0
+            for x in r_layers:
+                x["score_before_volume_cap"] = x["score"]
+                x["score"] = round(x["score"] * scale, 2)
+            r_total = sum(x["score"] for x in r_layers)
+
+        r_total = round(r_total, 2)
+        rater_layer_map[rid] = r_layers
+
+        if rid == "professor":
+            perspective = "개념, 용어, fact anchor의 정확성을 중심으로 평가했습니다."
+        elif rid == "professional_engineer":
+            perspective = "문제점, fact, 대책의 현장 연결성과 설계 가능성을 중심으로 평가했습니다."
+        elif rid == "executive":
+            perspective = "비용, 시간, 적용 가능성, 기존 설비 영향, 운영 리스크 관점에서 평가했습니다."
+        else:
+            perspective = r.get("role", "")
+
+        rater_results.append({
+            "rater_id": rid,
+            "rater_name": rname,
+            "total_score": r_total,
+            "max_score": max_score,
+            "character": r.get("role", perspective),
+            "perspective": perspective,
+            "layer_scores": r_layers,
+            "official_pass_score": official,
+            "official_pass_met": r_total >= official,
+            "practical_target_score": practical,
+            "practical_target_met": r_total >= practical,
+            "high_score_target": high,
+            "high_score_met": r_total >= high
+        })
+
+    return rater_results, rater_layer_map
+
+
+def _phase4_apply_rater_weighted_scoring(grade, scoring_model, rater_profile):
+    if not isinstance(grade, dict):
+        return grade
+
+    weights_by_layer = scoring_model.get("rater_weights_by_layer", {})
+    layer_scores = grade.get("breakdown", [])
+
+    if not weights_by_layer or not layer_scores or not rater_profile:
+        return grade
+
+    rater_results, rater_layer_map = _phase4_make_weighted_rater_matrix(
+        grade,
+        scoring_model,
+        rater_profile
+    )
+
+    # layer별 3인 가중 합성
+    weighted_layers = []
+    for layer in layer_scores:
+        layer_id = layer.get("layer_id")
+        weights = weights_by_layer.get(layer_id, {})
+
+        weighted_score = 0.0
+        weight_sum = 0.0
+
+        for rid, w in weights.items():
+            r_layers = rater_layer_map.get(rid, [])
+            match = next((x for x in r_layers if x.get("layer_id") == layer_id), None)
+            if match:
+                weighted_score += float(match.get("score", 0)) * float(w)
+                weight_sum += float(w)
+
+        if weight_sum > 0:
+            weighted_score = weighted_score / weight_sum
+        else:
+            weighted_score = float(layer.get("score", 0))
+
+        new_layer = dict(layer)
+        new_layer["score_before_rater_weight"] = layer.get("score")
+        new_layer["score"] = round(weighted_score, 2)
+        new_layer["rater_weighted"] = True
+        new_layer["reason"] = (
+            str(layer.get("reason", ""))
+            + " / 3인 채점자 layer 가중 합성을 적용함."
+        )
+        weighted_layers.append(new_layer)
+
+    weighted_total = round(sum(float(x.get("score", 0)) for x in weighted_layers), 2)
+
+    # 최종 점수도 volume cap 초과 금지
+    volume = grade.get("volume_evaluation") or {}
+    volume_cap = volume.get("cap")
+    applied = list(grade.get("applied_caps", []))
+
+    if volume_cap is not None and weighted_total > float(volume_cap):
+        scale = float(volume_cap) / weighted_total if weighted_total > 0 else 0
+        for x in weighted_layers:
+            x["score_before_final_volume_cap"] = x["score"]
+            x["score"] = round(float(x["score"]) * scale, 2)
+
+        weighted_total = round(sum(float(x.get("score", 0)) for x in weighted_layers), 2)
+        applied.append({
+            "id": "phase4_final_volume_cap",
+            "cap": float(volume_cap),
+            "reason": "3인 가중 합성 후에도 답안지 분량 상한을 초과하지 않도록 최종 cap을 적용함."
+        })
+
+    max_score = float(scoring_model.get("total_points", grade.get("max_score", 25)))
+    official = round(max_score * 0.60, 2)
+    practical = round(max_score * 0.70, 2)
+    high = round(max_score * 0.80, 2)
+
+    grade["version"] = "phase4_rater_weighted_v1"
+    grade["breakdown"] = weighted_layers
+    grade["rater_results"] = rater_results
+    grade["rater_weighted_evaluation"] = {
+        "version": "phase4_rater_weighted_v1",
+        "weights_by_layer": weights_by_layer,
+        "rater_layer_map": rater_layer_map,
+        "weighted_layers": weighted_layers
+    }
+
+    grade["total_score"] = weighted_total
+    grade["score_range"] = f"{int(weighted_total)}~{int(weighted_total)}"
+    grade["official_pass_score"] = official
+    grade["official_pass_met"] = weighted_total >= official
+    grade["practical_target_score"] = practical
+    grade["practical_target_met"] = weighted_total >= practical
+    grade["high_score_target"] = high
+    grade["high_score_met"] = weighted_total >= high
+    grade["applied_caps"] = applied
+
+    avg_rater = round(
+        sum(float(r.get("total_score", 0)) for r in rater_results) / len(rater_results),
+        2
+    ) if rater_results else weighted_total
+
+    grade["rater_summary"] = (
+        f"교수·기술사·기업 임원 관점을 layer별 가중치로 합성했습니다. "
+        f"3인 단순 평균은 {avg_rater}/{max_score}점, 최종 가중 점수는 {weighted_total}/{max_score}점입니다."
+    )
+    grade["summary"] = (
+        f"A/B/C/D/E 구조, fact anchor, 연결성, 답안지 분량 cap, 3인 layer 가중 합성을 적용해 "
+        f"{weighted_total}/{max_score}점으로 산정했습니다."
+    )
+
+    return grade
+
 def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
     from grading_config import load_active_config, save_active_config_snapshots
@@ -1439,10 +2160,20 @@ def _phase2_postprocess_grade(legacy_result):
     if input_path.exists():
         input_text = input_path.read_text(encoding="utf-8", errors="ignore")
 
-    image_count = _phase2_image_count(session_dir)
-    volume = _phase2_estimate_volume_level(input_text, image_count)
+    answer_text = _phase3_extract_answer_text(input_text)
 
-    layer_scores = _phase2_layer_scores(input_text, scoring_model)
+    image_count = _phase2_image_count(session_dir)
+    volume = _phase2_estimate_volume_level(answer_text, image_count)
+
+    layer_scores = _phase2_layer_scores(answer_text, scoring_model)
+
+    fact_eval = _phase3_evaluate_fact_anchors(input_text, subject_rubric)
+    connection_eval = _phase3_evaluate_connections(input_text)
+    interview_followup = _phase3_make_interview_followup(fact_eval, connection_eval)
+
+    layer_scores = _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval)
+    layer_scores = _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval)
+
     total_before_cap, total_after_cap, applied_caps = _phase2_apply_caps(layer_scores, volume)
 
     max_score = float(scoring_model.get("total_points", 25))
@@ -1479,6 +2210,10 @@ def _phase2_postprocess_grade(legacy_result):
             f"현재 점수는 {total_score}/{max_score}점입니다."
         ),
         "volume_evaluation": volume,
+        "answer_text_stats": _phase2_text_stats(answer_text),
+        "fact_anchor_evaluation": fact_eval,
+        "connection_evaluation": connection_eval,
+        "interview_followup": interview_followup,
         "total_before_cap": total_before_cap,
         "applied_caps": applied_caps,
         "breakdown": layer_scores,
@@ -1503,10 +2238,15 @@ def _phase2_postprocess_grade(legacy_result):
         "legacy_grade_reference": legacy_result
     }
 
+    grade = _phase4_apply_rater_weighted_scoring(grade, scoring_model, rater_profile)
     grade = _phase2_add_display_aliases(grade)
 
     _phase2_json_write(session_dir / "grade.json", grade)
     _phase2_json_write(session_dir / "volume_evaluation.json", volume)
+    _phase2_json_write(session_dir / "fact_anchor_evaluation.json", fact_eval)
+    _phase2_json_write(session_dir / "connection_evaluation.json", connection_eval)
+    _phase2_json_write(session_dir / "interview_followup.json", interview_followup)
+    _phase2_json_write(session_dir / "rater_weighted_evaluation.json", grade.get("rater_weighted_evaluation", {}))
 
     print(
         "[agent] phase2 layered scoring applied: "
