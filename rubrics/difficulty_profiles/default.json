@@ -1,0 +1,100 @@
+{
+  "schema_version": "difficulty_profiles_v1",
+  "description": "산업계측제어기술사 답안 채점용 난이도 Profile. 기존 A/B/C/D/E 25점 구조를 유지하고, 난이도별 ceiling, unlock, fatal error 정책만 보조 적용한다.",
+  "profiles": {
+    "BASIC_CONCEPT": {
+      "label": "기본 개념형",
+      "description": "정의, 개념, 구성, 적용 범위 중심의 문제",
+      "default_score_ceiling": 19,
+      "high_score_band": [18, 19],
+      "fatal_error_policy": "weak",
+      "scoring_policy": {
+        "selected_bonus": false,
+        "ceiling_applies_to_high_score": true,
+        "requires_band_unlock": false
+      },
+      "requirements": [
+        "정의",
+        "핵심 개념",
+        "구성 요소",
+        "적용 범위",
+        "한계 또는 실무 의미"
+      ]
+    },
+    "FIELD_APPLICATION": {
+      "label": "현장 적용형",
+      "description": "현장 적용, 선정, 문제점, 개선방안 중심의 문제",
+      "default_score_ceiling": 21,
+      "high_score_band": [20, 21],
+      "fatal_error_policy": "medium",
+      "scoring_policy": {
+        "selected_bonus": false,
+        "ceiling_applies_to_high_score": true,
+        "requires_band_unlock": false
+      },
+      "requirements": [
+        "정의 또는 원리",
+        "선정 기준",
+        "현장 조건",
+        "문제점 또는 리스크",
+        "개선방안",
+        "비용·유지보수·기존 설비 영향"
+      ]
+    },
+    "DESIGN_EVALUATION": {
+      "label": "설계·평가형",
+      "description": "설계, 평가, 효과분석, 지표, 경제성 중심의 문제",
+      "default_score_ceiling": 22,
+      "high_score_band": [21, 22],
+      "fatal_error_policy": "medium",
+      "scoring_policy": {
+        "selected_bonus": false,
+        "ceiling_applies_to_high_score": true,
+        "requires_band_unlock": false
+      },
+      "requirements": [
+        "평가 기준",
+        "정량 또는 정성 지표",
+        "설계 조건",
+        "대안 비교",
+        "효과 분석",
+        "한계와 검증 방법"
+      ]
+    },
+    "THEORY_CORE": {
+      "label": "핵심 이론 변별형",
+      "description": "제어이론, feedback system, 2차 시스템, 안정도, 응답특성처럼 수식과 원리 정확성이 핵심인 문제",
+      "default_score_ceiling": 25,
+      "high_score_band": [21, 25],
+      "fatal_error_policy": "strong",
+      "scoring_policy": {
+        "selected_bonus": false,
+        "ceiling_applies_to_high_score": false,
+        "requires_band_unlock": true,
+        "band_unlock_condition": "core_prerequisite_accuracy_high_and_no_fatal_error"
+      },
+      "band_caps": {
+        "missing_core_model_or_equation": 10,
+        "partial_model_but_weak_interpretation": 14,
+        "core_model_and_response_mostly_correct": 20,
+        "model_response_field_judgement_connected": 25
+      },
+      "requirements": [
+        "표준 모델 또는 특성방정식",
+        "핵심 변수 정의",
+        "수식 관계",
+        "조건별 해석",
+        "응답특성",
+        "안정성 또는 물리 의미",
+        "현장 tuning 또는 제어 loop 영향"
+      ],
+      "fatal_errors": [
+        "감쇠비 구간별 응답특성 반대 설명",
+        "안정과 불안정 반대 판단",
+        "극점 위치와 응답특성의 잘못된 연결",
+        "전달함수 또는 특성방정식 핵심 관계 오류",
+        "오버슈트, 감쇠, 진동성 관계 반대 설명"
+      ]
+    }
+  }
+}

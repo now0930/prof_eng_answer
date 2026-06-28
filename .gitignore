@@ -46,3 +46,6 @@ __pycache__/
 *.pyc
 *.backup.*
 *.broken.*
+
+# user runtime settings
+data/user_settings/

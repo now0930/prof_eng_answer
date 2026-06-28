@@ -1,0 +1,81 @@
+{
+  "schema_version": "exam_selection_policy_v1",
+  "description": "6문제 중 4문제를 선택하는 기술사 시험 전략 평가 기준.",
+  "exam_format": {
+    "offered_questions": 6,
+    "selected_questions": 4
+  },
+  "selection_principles": [
+    "개별 답안 점수와 문항 선택 전략 평가는 분리한다.",
+    "어려운 문제를 선택했다는 사실만으로 가산점을 주지 않는다.",
+    "THEORY_CORE 문제는 정확히 풀었을 때만 고득점 band가 열린다.",
+    "BASIC_CONCEPT 문제는 안정 점수형이지만 고득점 ceiling이 낮다.",
+    "CORE_MUST_PREPARE 문항을 회피하면 직접 감점이 아니라 selection risk로 표시한다."
+  ],
+  "difficulty_score_bands": {
+    "BASIC_CONCEPT": {
+      "safe_score_range": [14, 17],
+      "excellent_score_range": [18, 19],
+      "ceiling": 19,
+      "risk": "low",
+      "reward": "low"
+    },
+    "FIELD_APPLICATION": {
+      "safe_score_range": [14, 18],
+      "excellent_score_range": [20, 21],
+      "ceiling": 21,
+      "risk": "medium",
+      "reward": "medium"
+    },
+    "DESIGN_EVALUATION": {
+      "safe_score_range": [14, 18],
+      "excellent_score_range": [21, 22],
+      "ceiling": 22,
+      "risk": "medium",
+      "reward": "medium_high"
+    },
+    "THEORY_CORE": {
+      "safe_score_range": [12, 15],
+      "excellent_score_range": [21, 25],
+      "ceiling": 25,
+      "risk": "high",
+      "reward": "high",
+      "unlock_required": true
+    }
+  },
+  "selection_risk_rules": [
+    {
+      "rule_id": "core_must_prepare_omitted",
+      "condition": "CORE_MUST_PREPARE question is offered but not selected",
+      "severity": "high",
+      "message": "반복 출제되는 핵심 변별 문항을 회피한 선택입니다. 직접 감점은 아니지만 고득점 안정성이 낮아질 수 있습니다."
+    },
+    {
+      "rule_id": "all_safe_low_ceiling",
+      "condition": "selected questions are mostly BASIC_CONCEPT or low ceiling topics",
+      "severity": "medium",
+      "message": "안정적인 선택이지만 선택한 문제들의 고득점 ceiling이 낮을 수 있습니다."
+    },
+    {
+      "rule_id": "theory_selected_but_floor_not_met",
+      "condition": "THEORY_CORE selected but expected score is below minimum_attempt_floor",
+      "severity": "high",
+      "message": "제어이론 핵심 문항을 선택한 방향은 타당하지만, 최소 득점 floor를 충족하지 못하면 실전 선택 위험이 큽니다."
+    },
+    {
+      "rule_id": "balanced_selection",
+      "condition": "selection includes at least one high reward topic and stable supporting topics",
+      "severity": "positive",
+      "message": "고득점 가능성과 안정성을 함께 고려한 균형형 선택입니다."
+    }
+  ],
+  "strict_mode": {
+    "enabled_by_default": false,
+    "description": "strict mode에서는 개별 답안 점수는 변경하지 않고, 전체 세트 평가에 고득점 가능성 제한 또는 전략 위험을 표시한다.",
+    "rules": {
+      "omit_core_must_prepare": "mark_high_selection_risk",
+      "select_only_low_ceiling_questions": "mark_low_high_score_potential",
+      "select_theory_below_floor": "mark_execution_failure"
+    }
+  }
+}

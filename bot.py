@@ -8,6 +8,7 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 from grading_agents import run_agent_pipeline
+from llm_provider_settings import get_chat_provider, set_chat_provider, reset_chat_provider, provider_label
 
 BASE_DIR = Path("/workspace/prof_eng_answer")
 DATA_DIR = BASE_DIR / "data"
@@ -56,6 +57,8 @@ HELP_TEXT = """
 /status  현재 세션 상태
 /rubric  현재 채점 기준 보기
 /help    도움말
+/provider 현재 LLM Provider 확인
+/provider auto|gemini|clova|reset
 """.strip()
 
 
@@ -626,6 +629,55 @@ def handle_text(message, chat_id, state):
     if text.startswith("/rubric"):
         rubric = load_rubric()
         send_message(chat_id, json.dumps(rubric, ensure_ascii=False, indent=2)[:3800])
+        return
+
+
+    if text.startswith("/provider"):
+        raw = text[len("/provider"):].strip()
+
+        if not raw:
+            current = get_chat_provider(chat_id)
+            send_message(
+                chat_id,
+                "현재 채점 LLM Provider: " + provider_label(current) + "\n\n"
+                "사용 가능한 명령:\n"
+                "/provider auto   - Gemini 우선, 실패 시 Clova fallback\n"
+                "/provider gemini - Gemini만 사용\n"
+                "/provider clova  - Clova만 사용\n"
+                "/provider reset  - 기본값으로 초기화"
+            )
+            return
+
+        value = raw.split()[0].strip().lower()
+
+        if value in ("reset", "default"):
+            current = reset_chat_provider(chat_id)
+            send_message(
+                chat_id,
+                "LLM Provider 설정을 기본값으로 초기화했습니다.\n"
+                "현재 Provider: " + provider_label(current)
+            )
+            return
+
+        try:
+            current = set_chat_provider(chat_id, value)
+        except Exception:
+            send_message(
+                chat_id,
+                "지원하지 않는 Provider입니다.\n"
+                "사용 가능: auto, gemini, clova\n\n"
+                "예:\n"
+                "/provider auto\n"
+                "/provider gemini\n"
+                "/provider clova"
+            )
+            return
+
+        send_message(
+            chat_id,
+            "LLM Provider를 변경했습니다.\n"
+            "현재 Provider: " + provider_label(current)
+        )
         return
 
     if text.startswith("/grade"):
