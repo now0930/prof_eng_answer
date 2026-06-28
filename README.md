@@ -1,175 +1,265 @@
-# 기술사 답안 채점 Telegram Bot
+# Prof Eng Answer
 
-산업계측제어기술사 답안을 Telegram으로 입력받아 기술사 답안지 기준에 맞춰 채점하는 프로젝트이다.
+산업계측제어기술사 답안 채점 Telegram Bot입니다.
 
-현재 채점 방식은 단순 키워드 매칭이 아니라 다음 요소를 결합한다.
+이 프로젝트는 기술사 답안을 다음 기준으로 평가합니다.
 
-- A/B/C/D/E 25점 채점 구조
-- Fact Anchor 기반 핵심 개념 평가
-- Question Type Lens 기반 유형별 C항목 평가
-- Model Answer Bank 기반 답안 구조·깊이 참조
-- 교수·기술사·기업 임원 관점의 3인 layer 가중 합성
-- Gemini 또는 Naver CLOVA 기반 LLM 의미 평가
-- Python rule 기반 volume cap, fallback, 후처리, Telegram 출력
+- 문제 의도 파악
+- Fact 기반 기술 설명
+- 문제점, 리스크, 적용상 쟁점 진단
+- 개선방안, 설계 판단, 현장 제언
+- 답안 연결성 및 면접 방어 가능성
 
-## 1. 핵심 구조
+기본 채점 구조는 A/B/C/D/E 25점 체계입니다.
 
-25점 문항은 다음 5개 항목으로 평가한다.
+| 항목 | 배점 | 의미 |
+|---|---:|---|
+| A | 4 | 배경과 문제 진입 |
+| B | 5 | 문제 요구 파악 |
+| C | 8 | 유형별 Fact 기반 내용 설명 |
+| D | 6 | 현장 적용, 설계 판단, 제언 |
+| E | 2 | 연결성, 면접 방어 가능성 |
 
-| 항목 | 설명 | 배점 |
-|---|---|---:|
-| A | 배경과 문제 진입 | 4 |
-| B | 문제 요구 파악 | 5 |
-| C | 유형별 Fact 기반 내용 설명 | 8 |
-| D | 현장 적용·설계 판단·제언 | 6 |
-| E | 연결성·면접 방어 가능성 | 2 |
-| 합계 |  | 25 |
+---
 
-기준선은 다음과 같다.
+## 빠른 실행
 
-- 공식 합격선: 15점
-- 실전 목표선: 17.5점
-- 고득점 기준: 20점
+운영 환경에서는 상위 `~/hermes/docker-compose.yml`에서 실행합니다.
 
-상세 채점 구조는 `docs/grading_architecture.md`를 참고한다.
+~~bash
+cd ~/hermes
+docker compose up -d
+docker compose ps
+~~
 
-## 2. LLM Provider
+정상 상태:
 
-의미 평가 LLM Provider는 Telegram 명령으로 선택할 수 있다.
-
-    /provider
-    /provider auto
-    /provider gemini
-    /provider clova
-    /provider reset
-
-Provider 모드는 다음과 같다.
-
-| 모드 | 의미 |
-|---|---|
-| auto | Gemini 우선 사용, 실패 시 CLOVA fallback |
-| gemini | Gemini만 사용 |
-| clova | Naver CLOVA만 사용 |
-
-상세 설정은 `docs/llm_provider.md`를 참고한다.
-
-## 3. Telegram 사용법
-
-짧은 답안 채점 예시는 다음과 같다.
-
-    /grade
-    문제: Cv(Valve Flow Coefficient)를 설명하시오.
-    배점: 25
-    답안:
-    Cv는 밸브의 유량계수로 밸브를 통과할 수 있는 유량의 크기를 나타낸다. Cv가 크면 유량이 많이 흐르고, 밸브 선정에 사용된다.
-
-새 세션 시작:
-
-    /new
-
-현재 상태 확인:
-
-    /status
-
-Rubric 정보 확인:
-
-    /rubric
-
-Provider 확인:
-
-    /provider
-
-## 4. 주요 문서
-
-| 문서 | 내용 |
-|---|---|
-| `docs/grading_architecture.md` | A/B/C/D/E 채점 구조와 phase 흐름 |
-| `docs/llm_provider.md` | Gemini + Naver CLOVA provider 설정 |
-| `docs/rubric_authoring_guide.md` | 문제유형, Fact Anchor, Model Answer 작성 방법 |
-| `docs/docker_compose_usage.md` | Docker Compose 실행 예시 |
-| `docs/migration_plan.md` | 구조 변경 또는 마이그레이션 계획 |
-| `docs/structure_review.md` | 과거 구조 검토 문서. 현재는 deprecated |
-
-## 5. 주요 파일
-
-| 파일 | 역할 |
-|---|---|
-| `bot.py` | Telegram Bot 입출력 처리 |
-| `grading_agents.py` | 채점 파이프라인 |
-| `llm_provider_router.py` | Gemini, CLOVA, auto fallback 분기 |
-| `gemini_grader.py` | Gemini 의미 평가 호출 |
-| `clova_grader.py` | Naver CLOVA 의미 평가 호출 |
-| `llm_provider_settings.py` | 채팅방별 provider 설정 저장 |
-| `question_type_router.py` | 문제 유형 판정 |
-| `model_answer_router.py` | 모범 답안 Bank 참조 |
-| `rubric_registry.py` | Rubric JSON 로드·검증·관리 |
-| `scripts/rubric_manager.py` | Rubric 관리 CLI |
-
-## 6. 환경변수
-
-실제 운영 환경에서는 `.env`에 API key와 token을 넣는다.
-
-    GEMINI_API_KEY=
-    GEMINI_MODEL=gemini-3.1-flash-lite
-
-    CLOVA_API_KEY=
-    CLOVA_MODEL=HCX-003
-    CLOVA_HOST=https://clovastudio.stream.ntruss.com
-    CLOVA_ENDPOINT=/v1/chat-completions/HCX-003
-
-    TELEGRAM_TOKEN=
-    OLLAMA_URL=http://ollama:11434
-    OLLAMA_MODEL=gemma4:e4b
-
-`.env`는 Git에 커밋하지 않는다.
-
-## 7. 실행
-
-Bot 재시작 예시는 다음과 같다.
-
-    cd ~/hermes/workspace/prof_eng_answer
-
-    docker exec hermes_agent bash -lc 'pkill -f "python.*bot.py" || true'
-
-    mkdir -p logs
-    : > logs/prof_eng_answer.log
-
-    docker exec -d hermes_agent bash -lc '
-    cd /workspace/prof_eng_answer &&
-    mkdir -p logs &&
-    nohup python bot.py >> logs/prof_eng_answer.log 2>&1 &
-    '
+~~text
+hermes_agent          Up
+prof_eng_answer_bot   Up
+~~
 
 로그 확인:
 
-    tail -n 120 logs/prof_eng_answer.log
+~~bash
+tail -n 120 ~/hermes/workspace/prof_eng_answer/logs/prof_eng_answer.log
+~~
 
-## 8. 검증
+봇만 재시작:
 
-호스트 검증:
+~~bash
+cd ~/hermes
+docker compose restart prof-eng-answer-bot
+~~
 
-    python3 -m py_compile bot.py grading_agents.py gemini_grader.py clova_grader.py llm_provider_router.py llm_provider_settings.py
-    python3 scripts/rubric_manager.py validate-all
+---
 
-컨테이너 검증:
+## Docker 자동 실행 구조
 
-    docker exec -it hermes_agent bash -lc '
-    cd /workspace/prof_eng_answer &&
-    python -m py_compile bot.py grading_agents.py gemini_grader.py clova_grader.py llm_provider_router.py llm_provider_settings.py &&
-    python scripts/rubric_manager.py validate-all
-    '
+운영 환경은 두 컨테이너로 분리합니다.
 
-## 9. Git에 커밋하지 않는 항목
+| 서비스 | 역할 |
+|---|---|
+| `hermes` | Hermes agent 기본 컨테이너 |
+| `prof-eng-answer-bot` | Telegram 채점 Bot 자동 실행 컨테이너 |
 
-다음 항목은 Git에 커밋하지 않는다.
+`prof-eng-answer-bot`은 Docker 시작 시 자동으로 `bot.py`를 실행합니다.
 
-- `.env`
-- API key
-- Telegram token
-- `logs/`
-- `data/sessions/`
-- `data/user_settings/`
-- `backups/`
-- `__pycache__/`
-- 사용자 답안 이미지
-- 사용자 답안 텍스트
+실행 스크립트:
+
+~~text
+scripts/run_prof_eng_bot.sh
+~~
+
+중복 polling을 막기 위해 `hermes_agent` 안에서 수동으로 `nohup python bot.py`를 실행하지 않습니다.
+
+---
+
+## 환경변수
+
+운영 환경변수는 상위 디렉터리의 `.env`에서 관리합니다.
+
+~~text
+~/hermes/.env
+~~
+
+주요 변수:
+
+| 변수 | 설명 |
+|---|---|
+| `TELEGRAM_BOT_TOKEN` 또는 `BOT_TOKEN` | Telegram Bot token |
+| `OLLAMA_URL` | Ollama API URL |
+| `OLLAMA_MODEL` | 로컬 분석 모델 |
+| `GEMINI_API_KEY` | Gemini API key |
+| `GEMINI_MODEL` | Gemini 채점 모델 |
+| `LLM_PROVIDER` | `auto`, `gemini`, `clova` |
+| `LLM_PRIMARY` | 기본 LLM provider |
+| `LLM_FALLBACK` | fallback LLM provider |
+| `CLOVA_API_KEY` | Naver CLOVA Studio API key |
+| `CLOVA_MODEL` | CLOVA 모델명 |
+| `DIFFICULTY_CEILING_MODE` | `warn` 또는 `strict` |
+
+`.env`는 Git에 올리지 않습니다.
+
+---
+
+## LLM Provider
+
+Telegram에서 provider를 선택할 수 있습니다.
+
+~~text
+/provider
+/provider auto
+/provider gemini
+/provider clova
+/provider reset
+~~
+
+| 모드 | 의미 |
+|---|---|
+| `auto` | Gemini 우선, 실패 시 CLOVA fallback |
+| `gemini` | Gemini만 사용 |
+| `clova` | CLOVA만 사용 |
+
+---
+
+## 채점 Pipeline
+
+현재 주요 순서는 다음과 같습니다.
+
+~~text
+1. 기본 채점자별 분석
+2. Gemini 또는 CLOVA semantic grader 적용
+3. phase2 layered scoring 적용
+4. phase20 difficulty strategy 출력
+5. phase21 difficulty ceiling 적용
+~~
+
+정상 로그 예시:
+
+~~text
+[agent] phase2 layered scoring applied: ...
+[agent] phase20 final difficulty strategy applied: ...
+[agent] phase21 final difficulty ceiling evaluated: ...
+~~
+
+중요한 순서:
+
+~~text
+phase2 -> phase20 -> phase21
+~~
+
+---
+
+## 난이도와 점수 Ceiling
+
+문제 난이도는 기존 A/B/C/D/E 점수를 대체하지 않습니다.  
+채점 엄격도, 고득점 가능성, 선택 전략 평가에 보조로 사용합니다.
+
+| Profile | 의미 | 기본 ceiling |
+|---|---|---:|
+| `BASIC_CONCEPT` | 정의, 개념, 구성 중심 | 19 |
+| `FIELD_APPLICATION` | 현장 적용, 선정, 개선방안 중심 | 21 |
+| `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 | 22 |
+| `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 | 25 |
+
+기본 모드:
+
+~~env
+DIFFICULTY_CEILING_MODE=warn
+~~
+
+`warn` 모드는 cap 후보만 계산하고 실제 점수는 바꾸지 않습니다.
+
+실제 점수를 제한하려면:
+
+~~env
+DIFFICULTY_CEILING_MODE=strict
+~~
+
+`strict` 모드에서는 ceiling을 초과한 점수를 실제로 제한합니다.
+
+제어이론 문제는 선택 자체로 가산점을 주지 않습니다.  
+정확히 풀었을 때만 21~25점 고득점 band가 열립니다.
+
+---
+
+## 문항 선택 전략
+
+기술사 시험은 여러 문제 중 일부를 선택해 답안을 작성합니다.  
+따라서 Bot은 개별 답안 점수와 문항 선택 전략을 분리합니다.
+
+핵심 원칙:
+
+~~text
+쉬운 문제 = 안정 점수형, ceiling 낮음
+제어이론 문제 = 고위험·고보상형
+제어이론 선택 자체 = 가산점 없음
+제어이론 정확 풀이 = 고득점 band unlock
+제어이론 회피 = 개별 감점이 아니라 선택 전략 risk
+~~
+
+제어이론, feedback system, 2차 시스템, 안정도, 과도응답 계열은 `CORE_MUST_PREPARE`로 관리합니다.
+
+---
+
+## 주요 파일
+
+| 파일 | 역할 |
+|---|---|
+| `bot.py` | Telegram Bot 진입점 |
+| `grading_agents.py` | 채점 pipeline |
+| `difficulty_strategy.py` | 문제 난이도와 선택 중요도 분류 |
+| `difficulty_output_adapter.py` | phase20 난이도 설명 출력 |
+| `difficulty_score_ceiling.py` | phase21 ceiling 계산 및 strict 적용 |
+| `scripts/run_prof_eng_bot.sh` | Docker 자동 실행 스크립트 |
+| `rubrics/difficulty_profiles/default.json` | 난이도 Profile 정의 |
+| `rubrics/topic_importance/industrial_instrumentation_control.json` | topic별 난이도와 선택 중요도 |
+| `rubrics/exam_selection/default.json` | 시험 문항 선택 전략 기준 |
+
+---
+
+## 검증 명령
+
+Python 문법 확인:
+
+~~bash
+python3 -m py_compile \
+  bot.py \
+  grading_agents.py \
+  difficulty_strategy.py \
+  difficulty_output_adapter.py \
+  difficulty_score_ceiling.py
+~~
+
+난이도 전략 검증:
+
+~~bash
+python3 scripts/validate_difficulty_strategy.py
+~~
+
+Docker 상태 확인:
+
+~~bash
+cd ~/hermes
+docker compose ps
+~~
+
+Bot 프로세스 중복 확인:
+
+~~bash
+docker exec prof_eng_answer_bot bash -lc 'pgrep -af "python.*bot.py" || true'
+docker exec hermes_agent bash -lc 'pgrep -af "python.*bot.py" || true'
+~~
+
+---
+
+## 상세 문서
+
+| 문서 | 설명 |
+|---|---|
+| `docs/grading_architecture.md` | A/B/C/D/E 채점 구조 |
+| `docs/llm_provider.md` | Gemini, CLOVA provider 구조 |
+| `docs/rubric_authoring_guide.md` | Rubric, Question Type, Model Answer 작성 |
+| `docs/difficulty_and_selection_strategy.md` | 난이도, ceiling, 문항 선택 전략 |
+| `docs/docker_compose_usage.md` | Docker compose 운영 방식 |
