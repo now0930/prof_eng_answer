@@ -389,6 +389,26 @@ git push origin main
 
 ---
 
+<!-- LLM_PROVIDER_WORKFLOW_START -->
+## LLM Provider 운영
+
+이 프로젝트는 Gemini와 Naver CLOVA를 채점 의미 평가 Provider로 선택해 사용할 수 있다.
+
+자세한 설정, Telegram 명령, 환경변수, CLOVA compact prompt, 검증 방법은 다음 문서를 참고한다.
+
+- docs/llm_provider.md
+
+핵심 명령은 다음과 같다.
+
+    /provider
+    /provider auto
+    /provider gemini
+    /provider clova
+    /provider reset
+
+현재 구현은 기존 A/B/C/D/E 25점 채점 구조를 유지하면서 LLM 의미 평가 Provider만 Gemini 또는 CLOVA로 분기한다.
+<!-- LLM_PROVIDER_WORKFLOW_END -->
+
 ## 13. 기출 트렌드 기반 키워드·예상문제·예상답안 업데이트 흐름
 
 이 프로젝트는 기출 데이터 분석 결과를 바탕으로 키워드별 예상 문제유형, 평가 기준, 예상문제, 예상답안을 확장할 수 있다.
