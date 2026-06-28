@@ -151,3 +151,39 @@ layered_rater.json
 ```
 
 파일명에 `gemini`가 남아 있어도 내부 `llm_provider` 값으로 실제 provider를 판단한다.
+---
+
+## Question Type v2
+
+기존의 세분화된 문제 유형은 4개 대분류로 통합한다.
+
+| question_type | 의미 |
+|---|---|
+| `PRINCIPLE_INTERPRETATION` | 원리·동작·계산·설계·수식 해석형 |
+| `DIAGNOSIS_ACTION` | 문제·원인·영향·대책·개선 실행형 |
+| `COMPARE_SELECTION` | 비교·분류·선정 판단형 |
+| `IMPLEMENTATION_EVALUATION` | 적용·절차·방법·평가형 |
+
+`question_type`은 별도 점수체계가 아니다.  
+C항목 Fact 기반 설명과 D항목 현장 적용·판단·제언을 보강하는 lens이다.
+
+Semantic grader는 `question_type_coverage`를 생성하고, Bot은 이를 피드백과 보정 후보에 반영한다.
+
+기본 모드:
+
+```env
+QUESTION_TYPE_COVERAGE_SCORE_MODE=warn
+```
+
+`warn` 모드에서는 점수를 변경하지 않고 보정 후보만 표시한다.
+
+실제 약한 보정을 적용하려면 다음을 사용한다.
+
+```env
+QUESTION_TYPE_COVERAGE_SCORE_MODE=strict
+```
+
+strict 모드에서도 최대 보정은 0.75점으로 제한한다.
+
+상세 기준은 `docs/question_type_taxonomy.md`를 참고한다.
+

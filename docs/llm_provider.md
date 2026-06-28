@@ -95,3 +95,28 @@ CLOVA 사용 시 session JSON 내부에 다음과 같은 값이 기록된다.
 - `.env`는 commit하지 않는다.
 - Provider 실패는 전체 채점 실패가 아닐 수 있다.
 - 파일명이 `gemini_semantic_evaluation.json`이어도 내부 `llm_provider`가 실제 provider 기준이다.
+---
+
+## Question Type Coverage
+
+Gemini와 CLOVA semantic grader는 A/B/C/D/E 평가와 함께 `question_type_coverage`를 출력하도록 요청받는다.
+
+`question_type_coverage`는 다음을 평가한다.
+
+- question_type v2 대분류
+- sub_criteria 충족 여부
+- C항목 Fact 설명의 부족 관점
+- D항목 현장 판단의 부족 관점
+- 보수적으로 볼 점수 항목에 대한 scoring hint
+
+이 결과는 기본적으로 점수를 직접 바꾸지 않는다.  
+`QUESTION_TYPE_COVERAGE_SCORE_MODE=warn`에서는 보정 후보만 표시한다.
+
+실제 약한 보정을 적용하려면 다음을 사용한다.
+
+```env
+QUESTION_TYPE_COVERAGE_SCORE_MODE=strict
+```
+
+strict 모드에서도 최대 보정은 0.75점으로 제한한다.
+

@@ -104,6 +104,7 @@ scripts/run_prof_eng_bot.sh
 | `CLOVA_API_KEY` | Naver CLOVA Studio API key |
 | `CLOVA_MODEL` | CLOVA 모델명 |
 | `DIFFICULTY_CEILING_MODE` | `warn` 또는 `strict` |
+| `QUESTION_TYPE_COVERAGE_SCORE_MODE` | question_type coverage 보정 모드. `warn`, `strict`, `off` |
 
 `.env`는 Git에 올리지 않습니다.
 
@@ -271,6 +272,35 @@ docker exec hermes_agent bash -lc 'pgrep -af "python.*bot.py" || true'
 
 ---
 
+
+---
+
+## Question Type v2
+
+2~4교시 답안 채점에서는 단답식 `DEFINE` 유형을 사용하지 않습니다.  
+대신 C항목 Fact 설명과 D항목 현장 판단을 보강하기 위해 4개 question_type lens를 사용합니다.
+
+| question_type | 의미 |
+|---|---|
+| `PRINCIPLE_INTERPRETATION` | 원리·동작·계산·설계·수식 해석형 |
+| `DIAGNOSIS_ACTION` | 문제·원인·영향·대책·개선 실행형 |
+| `COMPARE_SELECTION` | 비교·분류·선정 판단형 |
+| `IMPLEMENTATION_EVALUATION` | 적용·절차·방법·평가형 |
+
+coverage 결과는 기본적으로 `warn` 모드에서 보정 후보만 표시합니다.
+
+```env
+QUESTION_TYPE_COVERAGE_SCORE_MODE=warn
+```
+
+실제 약한 보정을 적용하려면 다음을 사용합니다.
+
+```env
+QUESTION_TYPE_COVERAGE_SCORE_MODE=strict
+```
+
+자세한 내용은 `docs/question_type_taxonomy.md`를 참고합니다.
+
 ## 상세 문서
 
 | 문서 | 설명 |
@@ -280,3 +310,4 @@ docker exec hermes_agent bash -lc 'pgrep -af "python.*bot.py" || true'
 | `docs/rubric_authoring_guide.md` | Rubric, Question Type, Model Answer 작성 |
 | `docs/difficulty_and_selection_strategy.md` | 난이도, ceiling, 문항 선택 전략 |
 | `docs/docker_compose_usage.md` | Docker compose 운영 방식 |
+| `docs/question_type_taxonomy.md` | question_type v2, sub_criteria, coverage 보정 방식 |
