@@ -1,6 +1,6 @@
 {
   "name": "industrial_instrumentation_control_professional_engineer_rubric",
-  "version": "2026-06-27-industrial-instrumentation-control-v1",
+  "version": "2026-06-28-industrial-instrumentation-control-v2-demand-axis-json-only",
   "description": "산업계측제어기술사 답안 채점 기준. Q-Net 출제과목, 기출문제, 계측제어 실무 키워드, 산업자동화 표준 키워드를 반영한 훈련용 채점 기준이다.",
   "total_points": 25,
   "score_targets": {
@@ -67,7 +67,22 @@
           "MPC",
           "Dead Time",
           "Time Constant",
-          "Tuning"
+          "Tuning",
+          "2차 지연시스템",
+          "감쇠비",
+          "ζ",
+          "고유진동수",
+          "ωn",
+          "무감쇠",
+          "부족감쇠",
+          "임계감쇠",
+          "과감쇠",
+          "오버슈트",
+          "정착시간",
+          "상승시간",
+          "피크시간",
+          "순수 시간지연",
+          "dead time"
         ]
       },
       {
@@ -258,7 +273,24 @@
       "계측 대상과 제어 목적을 구분할 것",
       "센서, 신호, 제어기, 조작부, 상위 시스템의 흐름을 설명할 것",
       "정확도, 응답성, 안정성, 신뢰성, 안전성 중 관련 관점을 포함할 것",
-      "현장 적용 시 교정, 유지보전, 노이즈, 방폭, 안전, 보안을 고려할 것"
+      "현장 적용 시 교정, 유지보전, 노이즈, 방폭, 안전, 보안을 고려할 것",
+      "문제에서 제시한 기준축, 비교축, 분류축, 절차축을 답안 중심으로 삼을 것",
+      "2차 지연시스템은 순수 시간지연이 아니라 감쇠비 ζ와 고유진동수 ωn으로 설명되는 표준 2차 동특성으로 구분할 것"
+    ],
+    "user_added_fact_anchors": [
+      {
+        "id": "second_order_lag_response_by_damping_ratio",
+        "question_pattern": "2차 지연시스템의 응답특성을 감쇠비에 따라 구분하고 비교",
+        "required_axis": "감쇠비 ζ별 응답특성",
+        "high_score_required": [
+          "표준 2차 전달함수",
+          "ζ별 응답 구분",
+          "오버슈트·진동·정착시간 비교",
+          "순수 시간지연과 구분",
+          "제어계 안정성·튜닝 의미"
+        ],
+        "low_score_warning": "시간지연, σ, λ, 일반 안정도 설명만으로는 낮게 평가"
+      }
     ]
   },
   "items": [

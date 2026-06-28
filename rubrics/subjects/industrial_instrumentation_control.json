@@ -1,7 +1,7 @@
 {
   "name": "industrial_instrumentation_control",
   "subject_name": "산업계측제어기술사",
-  "version": "2026-06-27-v1-structured-subject-rubric",
+  "version": "2026-06-28-v2-demand-axis-json-only",
   "editable": true,
   "description": "산업계측제어기술사 채점용 종목 기준. 출제범위, 기출 키워드, fact anchor 후보, 모범답안 작성 기준을 관리한다.",
   "exam_scope": [
@@ -31,6 +31,11 @@
       "Fact 설명은 문제점을 설명하는 근거여야 한다.",
       "기술사적 의견은 fact에서 도출되고 문제점 해결로 돌아와야 한다.",
       "대책은 현실의 한계, 비용, 시간, 적용 가능성을 고려해야 한다."
+    ],
+    "demand_alignment_rules": [
+      "문제문에 제시된 기준축을 답안 목차의 중심으로 삼는다.",
+      "감쇠비, 비교축, 절차, 판정기준, 설치조건 등 출제자가 지정한 축을 누락하면 관련 설명이 맞아도 낮게 평가한다.",
+      "유사 개념으로 치환하지 않는다. 예: 2차 지연시스템은 표준 2차 동특성 모델이며 순수 시간지연 dead time이 아니다."
     ]
   },
   "fact_explanation_policy": {
@@ -41,7 +46,15 @@
       "정확한 설명",
       "문제점과의 연결",
       "간결성"
-    ]
+    ],
+    "question_demand_alignment": {
+      "description": "Fact 설명은 단순히 맞는 지식을 쓰는 것이 아니라 문제에서 요구한 형태로 설명되어야 한다. 출제자가 '감쇠비에 따라', '비교하여', '절차를', '판별하시오'라고 제시하면 그 요구가 C항목의 중심 평가축이다.",
+      "low_score_cases": [
+        "문제는 감쇠비별 응답특성인데 답안은 시간지연 dead time 중심으로 설명",
+        "문제는 비교인데 장단점 나열만 있고 비교축이 없음",
+        "문제는 절차인데 순서, 입력자료, 판정기준, 산출물이 없음"
+      ]
+    }
   },
   "keyword_groups": {
     "자동제어": [
@@ -53,7 +66,26 @@
       "응답성",
       "정상상태 오차",
       "제어 루프",
-      "제어 로직"
+      "제어 로직",
+      "2차 시스템",
+      "2차 지연시스템",
+      "감쇠비",
+      "ζ",
+      "zeta",
+      "고유진동수",
+      "ωn",
+      "표준 2차 전달함수",
+      "부족감쇠",
+      "임계감쇠",
+      "과감쇠",
+      "무감쇠",
+      "오버슈트",
+      "정착시간",
+      "상승시간",
+      "피크시간",
+      "순수 시간지연",
+      "dead time",
+      "e^{-Ls}"
     ],
     "계측·센서": [
       "압력",
@@ -244,7 +276,20 @@
     }
   ],
   "user_added_keywords": [],
-  "user_added_fact_anchors": [],
+  "user_added_fact_anchors": [
+    {
+      "id": "second_order_lag_response_by_damping_ratio",
+      "question_pattern": "2차 지연시스템의 응답특성을 감쇠비에 따라 구분하고 비교",
+      "problem_anchors": [
+        "2차 지연시스템을 순수 시간지연과 구분",
+        "표준 2차 전달함수 제시",
+        "감쇠비 ζ에 따른 응답 분류",
+        "오버슈트·진동·정착시간 비교",
+        "실제 제어계 응답성·안정성 의미"
+      ],
+      "low_score_warning": "σ, λ, 시간지연 e^{-Ls}, 일반 안정도 설명만 중심으로 쓰면 관련 지식은 일부 맞아도 출제 요구인 감쇠비별 응답특성 비교를 충족하지 못한다."
+    }
+  ],
   "fact_anchor_bank": "rubrics/fact_anchors/industrial_instrumentation_control.json",
   "question_type_profile": "rubrics/question_types/default.json",
   "model_answer_bank": "rubrics/model_answers/industrial_instrumentation_control.json"
