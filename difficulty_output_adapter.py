@@ -1,3 +1,5 @@
+from question_type_output_adapter import attach_question_type_v2_to_grade
+
 #!/usr/bin/env python3
 from typing import Any, Dict, List, Optional
 
@@ -133,6 +135,7 @@ def attach_difficulty_strategy_to_grade(
     grade: Dict[str, Any],
     question_text: Optional[str] = None
 ) -> Dict[str, Any]:
+    grade = attach_question_type_v2_to_grade(grade, question_text=question_text)
     if not isinstance(grade, dict):
         return grade
 
