@@ -384,3 +384,230 @@ git push origin main
 - Gemini API가 503, timeout, connection reset을 반환할 수 있으므로 retry wrapper가 적용되어야 합니다.
 - Gemini 실패 시 Python fallback 채점으로 전환될 수 있으며, 이 경우 신뢰도와 총평이 달라질 수 있습니다.
 - 짧은 답안은 `text_only_short_answer`로 분류되어 최종 점수 상한이 적용됩니다.
+
+<!-- EXAM_TREND_WORKFLOW_START -->
+
+---
+
+## 13. 기출 트렌드 기반 키워드·예상문제·예상답안 업데이트 흐름
+
+이 프로젝트는 기출 데이터 분석 결과를 바탕으로 키워드별 예상 문제유형, 평가 기준, 예상문제, 예상답안을 확장할 수 있다.
+
+기본 흐름은 다음과 같다.
+
+    외부 기출 분석 사이트 JSON
+        ↓
+    scripts/import_exam_trend_keywords.py
+        ↓
+    rubrics/exam_trends/industrial_instrumentation_control_raw.json
+        ↓
+    rubrics/keyword_question_profiles/industrial_instrumentation_control.json
+        ↓
+    키워드별 예상 문제유형 확인
+        ↓
+    예상문제 작성
+        ↓
+    예상답안 작성
+        ↓
+    model answer bank 또는 별도 예상문제 bank에 반영
+        ↓
+    Telegram 채점/연습에 활용
+
+---
+
+### 13.1 직접 수정하는 파일
+
+키워드별 예상 문제유형과 핵심 Fact를 수정할 때는 아래 파일을 수정한다.
+
+    rubrics/keyword_rules/industrial_instrumentation_control.json
+
+예를 들어 스마트 팩토리, IIoT, 디지털 트윈의 예상 문제유형을 바꾸고 싶으면 이 파일에서 해당 rule의 `types`와 `facts`를 수정한다.
+
+문제유형별 평가 기준 문구를 수정할 때는 아래 파일을 수정한다.
+
+    rubrics/question_type_criteria/default.json
+
+이 파일은 DEFINE, COMPARE, APPLICATION, EVALUATION 등 문제유형별 C항목 평가 기준을 관리한다.
+
+---
+
+### 13.2 자동 생성되는 파일
+
+기출 분석 사이트에서 추출한 원본 JSON은 아래 파일에 저장된다.
+
+    rubrics/exam_trends/industrial_instrumentation_control_raw.json
+
+키워드별 예상 문제유형, 우선순위, Fact focus, 유형별 평가 기준을 조립한 최종 결과는 아래 파일에 저장된다.
+
+    rubrics/keyword_question_profiles/industrial_instrumentation_control.json
+
+이 두 파일은 사람이 직접 수정하기보다 스크립트 실행으로 갱신하는 것을 원칙으로 한다.
+
+---
+
+### 13.3 기출 트렌드 재생성 명령
+
+사이트의 기출 분석 JSON을 다시 가져와 최신 키워드 profile을 생성할 때는 다음 명령을 실행한다.
+
+    python3 scripts/import_exam_trend_keywords.py
+
+실행 결과 예시는 다음과 같다.
+
+    JSON candidates found: 2
+    keywords imported: 20
+    raw json saved: rubrics/exam_trends/industrial_instrumentation_control_raw.json
+    keyword profiles saved: rubrics/keyword_question_profiles/industrial_instrumentation_control.json
+
+다른 URL을 사용하려면 다음처럼 실행한다.
+
+    python3 scripts/import_exam_trend_keywords.py --url "https://example.com/your-analysis-page"
+
+JSON 후보가 여러 개 있을 때 전체 count가 큰 JSON을 우선 사용하려면 다음처럼 실행한다.
+
+    python3 scripts/import_exam_trend_keywords.py --prefer max-count
+
+---
+
+### 13.4 키워드별 예상문제 작성 흐름
+
+예상문제는 `keyword_question_profiles`에서 다음 정보를 확인한 뒤 작성한다.
+
+    keyword
+    aliases
+    priority_band
+    expected_question_types
+    fact_focus
+    type_profiles
+
+예를 들어 스마트 팩토리 키워드는 다음과 같이 해석한다.
+
+    keyword: 인공지능/빅데이터/IoT 또는 스마트팩토리 계열
+    expected_question_types:
+      - DEFINE
+      - STRUCTURE
+      - APPLICATION
+      - EVALUATION
+      - PROBLEM_SOLVE
+    fact_focus:
+      - IT/OT 연계
+      - 데이터 수집
+      - 엣지
+      - 디지털트윈
+      - 보안
+
+따라서 예상문제는 다음 유형으로 만든다.
+
+    1. 개념·구성형
+       스마트 팩토리의 개념과 구성요소를 설명하시오.
+
+    2. 적용·사례형
+       산업계측제어 분야에서 스마트 팩토리 적용 방안을 설명하시오.
+
+    3. 문제점·개선방안형
+       스마트 팩토리 구축 시 문제점과 개선방안을 설명하시오.
+
+    4. 평가·효과분석형
+       스마트 팩토리 도입 효과를 평가하는 방법을 설명하시오.
+
+    5. 비교·선정형
+       Edge, Cloud, On-premise 기반 스마트 팩토리 구축 방식을 비교하시오.
+
+---
+
+### 13.5 예상답안 작성 흐름
+
+예상답안은 기존 기술사 답안 구조를 유지한다.
+
+    1. 배경
+    2. 내용 또는 핵심 Fact
+    3. 문제점 또는 적용상 쟁점
+    4. 개선방안 또는 설계 판단
+    5. 결론 및 면접 방어 포인트
+
+키워드별 예상답안을 작성할 때는 다음 기준을 반드시 포함한다.
+
+    - 문제유형에 맞는 C항목 전개 방식
+    - keyword_rules의 fact_focus
+    - 현장 적용 조건
+    - 기존 설비와의 연관성
+    - 비용, 일정, 리스크
+    - 보안, 유지보수, 검증 기준
+    - 면접에서 방어 가능한 판단 근거
+
+---
+
+### 13.6 예상답안 반영 위치
+
+예상답안이 채점 기준으로도 활용될 수준이면 Model Answer Bank에 반영한다.
+
+    rubrics/model_answers/industrial_instrumentation_control.json
+
+후보로 먼저 만들고 검토한 뒤 승격하는 흐름을 권장한다.
+
+    python3 scripts/rubric_manager.py new-model-answer ...
+    vim rubrics/model_answers/candidates/<candidate>.json
+    python3 scripts/rubric_manager.py promote-model-answer --candidate <candidate>.json
+    python3 scripts/rubric_manager.py validate-all
+
+단순 연습문제나 예상문제 묶음으로만 관리하려면 별도 디렉터리를 사용할 수 있다.
+
+    rubrics/expected_questions/
+
+이 경우 예상문제와 예상답안을 채점 기준과 분리하여 관리할 수 있다.
+
+---
+
+### 13.7 업데이트 판단 기준
+
+새 키워드를 추가할 때는 다음 기준으로 판단한다.
+
+    high priority:
+      - 최근 회차 출현 빈도가 높음
+      - 여러 문제유형으로 변형 가능
+      - 산업계측제어 실무와 직접 연결됨
+      - 모범답안 Bank로 만들 가치가 있음
+
+    medium priority:
+      - 출제 가능성은 있으나 특정 유형에 치우침
+      - 예상문제 2~3개 정도 작성
+
+    low priority:
+      - 단독 주제보다 다른 주제의 하위 항목으로 관리
+      - Fact Anchor 보강 위주로 관리
+
+---
+
+### 13.8 최종 검증
+
+키워드, 예상 문제유형, 예상답안 관련 파일을 수정한 뒤에는 다음을 실행한다.
+
+    python3 scripts/import_exam_trend_keywords.py
+    python3 scripts/rubric_manager.py validate-all
+
+컨테이너 기준 검증은 다음과 같이 수행한다.
+
+    docker exec -it hermes_agent bash -lc '
+    cd /workspace/prof_eng_answer &&
+    python scripts/import_exam_trend_keywords.py &&
+    python scripts/rubric_manager.py validate-all &&
+    echo "exam trend workflow validation OK"
+    '
+
+---
+
+### 13.9 Git 반영 예시
+
+    git status --short
+
+    git add scripts/import_exam_trend_keywords.py \
+            rubrics/keyword_rules/industrial_instrumentation_control.json \
+            rubrics/question_type_criteria/default.json \
+            rubrics/exam_trends/industrial_instrumentation_control_raw.json \
+            rubrics/keyword_question_profiles/industrial_instrumentation_control.json \
+            rubrics/model_answers/industrial_instrumentation_control.json \
+            README.md
+
+    git commit -m "Document exam trend keyword workflow"
+    git push origin main
+
+<!-- EXAM_TREND_WORKFLOW_END -->
