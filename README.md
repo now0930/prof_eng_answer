@@ -1,395 +1,21 @@
-# 기술사 답안 채점 Telegram Bot MVP
+# 기술사 답안 채점 Telegram Bot
 
-산업계측제어기술사 답안을 Telegram으로 입력받아 기술사 답안지 기준에 맞춰 채점하는 MVP 프로젝트이다.
+산업계측제어기술사 답안을 Telegram에서 입력받아 채점하는 프로젝트입니다.
 
-현재 채점 방식은 단순 키워드 매칭이 아니라 다음 두 축을 결합한다.
+이 프로젝트는 단순 키워드 매칭 채점기가 아니라, 다음 요소를 함께 평가하는 구조를 목표로 합니다.
 
-- Gemini: A/B/C/D/E 의미 기반 원점수와 정성 사유 평가
-- Python: 채점 규정, 답안지 분량 cap, Fact 부족 cap, 3인 채점자 가중 합성, 결과 저장과 Telegram 출력
-
----
-
-## 1. 채점 구조
-
-25점 문항을 다음 5개 Layer로 평가한다.
-
-| Layer | 항목 | 배점 |
-|---|---|---:|
-| A | 배경과 문제 진입 | 4 |
-| B | 문제 요구 파악 | 5 |
-| C | 유형별 Fact 기반 내용 설명 | 8 |
-| D | 현장 적용·설계 판단·제언 | 6 |
-| E | 연결성·면접 방어 가능성 | 2 |
-| 합계 |  | 25 |
-
-기준선은 다음과 같다.
-
-- 공식 합격선: 15점
-- 실전 목표선: 17.5점
-- 고득점 기준: 20점
+- 문제 요구 파악
+- 유형별 Fact 기반 내용 설명
+- 현장 적용성
+- 설계 판단과 제언
+- 기술사적 독창성
+- 답안 분량과 면접 방어 가능성
 
 ---
 
-## 2. 답안지 분량 정책
+## 1. 현재 채점 구조
 
-기술사 25점 문항은 답안지 약 3쪽 수준의 전개를 기준으로 본다.
-
-| 답안 상태 | 판단 | 상한 |
-|---|---|---:|
-| 사진 없음 + 짧은 텍스트 | `text_only_short_answer` | 9점 |
-| 답안지 1쪽 수준 | `one_page_level` | 13점 |
-| 답안지 2쪽 수준 | `two_page_level` | 17점 |
-| 답안지 3쪽 수준 | `three_page_level` | 고득점 가능 |
-
-사진 3장이 있으나 OCR 텍스트가 짧은 경우에는 OCR 누락 가능성을 표시하고 잠정 평가한다.
-
----
-
-## 3. 채점 파이프라인
-
-현재 흐름은 다음과 같다.
-
-1. Telegram `/grade` 입력 수신
-2. 세션 생성 및 입력 저장
-3. active profile 기준 설정 로드
-4. Ollama/Gemma 보조 분석
-5. Python A/B/C/D/E 기본 구조 분석
-6. Fact Anchor 평가
-7. Connection 평가
-8. Gemini 의미 기반 A/B/C/D/E 원점수 평가
-9. Python volume cap 적용
-10. Fact 부족 시 D/E 상한 적용
-11. 교수·기술사·기업 임원 layer 가중 합성
-12. Telegram 결과 출력
-13. 세션별 JSON 산출물 저장
-
-정상 로그 예:
-
-```text
-[agent] Gemini semantic grader applied.
-```
-
----
-
-## 4. 3인 채점자
-
-| 채점자 | 핵심 관점 |
-|---|---|
-| 교수 채점자 | 개념, 용어, fact 설명의 정확성 |
-| 기술사 채점자 | 문제점, fact, 대책의 현장 연결성 |
-| 기업 임원 채점자 | 비용, 시간, 적용 가능성, 기존 설비 영향, 운영 리스크 |
-
-설정 파일:
-
-```text
-rubrics/raters/layered_default.json
-```
-
----
-
-## 5. Fact Anchor Bank
-
-기출 분석 기반 주요 주제별 Fact Anchor를 JSON으로 관리한다.
-
-```text
-rubrics/fact_anchors/industrial_instrumentation_control.json
-```
-
-예시 주제:
-
-- 제어밸브 캐비테이션
-- Cv 밸브 유량계수
-- PID 제어
-- 전달함수·상태방정식
-- 온도센서 열전대·RTD
-- 유량계·차압식 유량측정
-- 압력·차압전송기
-- PLC/DCS 및 Remote I/O
-- 산업통신·네트워크·프로토콜
-- 방폭·SIL·SIS 안전
-- 계측 오차·정확도·정밀도·교정
-- 노이즈·접지·서지 대책
-- 스마트팩토리·IIoT·디지털트윈
-- HMI/SCADA
-- 모터·인버터·구동계
-
-Fact Anchor Bank 검증:
-
-```bash
-python3 scripts/validate_fact_anchor_bank.py
-```
-
----
-
-## 6. 주요 파일 구조
-
-```text
-prof_eng_answer/
-├── README.md
-├── bot.py
-├── gemini_grader.py
-├── grading_agents.py
-├── grading_config.py
-├── rubrics/
-│   ├── active_profile.json
-│   ├── default.json
-│   ├── fact_anchors/
-│   │   └── industrial_instrumentation_control.json
-│   ├── raters/
-│   │   ├── default.json
-│   │   └── layered_default.json
-│   ├── scoring_model/
-│   │   └── default.json
-│   └── subjects/
-│       └── industrial_instrumentation_control.json
-├── scripts/
-│   ├── gemini_audit_grading_engine.py
-│   ├── validate_config.py
-│   └── validate_fact_anchor_bank.py
-├── docs/
-├── examples/
-├── schemas/
-├── data/
-└── logs/
-```
-
-다음 항목은 Git에 커밋하지 않는다.
-
-```text
-data/sessions/
-data/audits/
-logs/
-backups/
-__pycache__/
-*.pyc
-*.backup.*
-*.broken.*
-.env
-test_assets/
-```
-
----
-
-## 7. 환경변수
-
-컨테이너는 `~/hermes/.env`를 사용한다.
-
-필수 값:
-
-```env
-GEMINI_API_KEY=...
-GEMINI_MODEL=gemini-3.1-flash-lite
-OLLAMA_URL=http://ollama:11434
-OLLAMA_MODEL=gemma4:e4b
-TELEGRAM_TOKEN=...
-PROF_ENG_CHAT_ID=...
-```
-
-API key와 Telegram token은 절대 커밋하지 않는다.
-
----
-
-## 8. 실행
-
-봇 재시작:
-
-```bash
-cd ~/hermes/workspace/prof_eng_answer
-
-docker exec hermes_agent bash -lc 'pkill -f "python.*bot.py" || true'
-
-docker exec -d hermes_agent bash -lc '
-cd /workspace/prof_eng_answer &&
-nohup python bot.py >> logs/prof_eng_answer.log 2>&1 &
-'
-```
-
-로그 확인:
-
-```bash
-tail -n 120 logs/prof_eng_answer.log
-```
-
----
-
-## 9. Telegram 사용법
-
-짧은 답안 채점:
-
-```text
-/grade
-문제: Cv(Valve Flow Coefficient)를 설명하시오.
-
-답안:
-Cv는 밸브의 유량계수로 밸브를 통과할 수 있는 유량의 크기를 나타낸다.
-```
-
-새 세션 시작:
-
-```text
-/new
-```
-
-답안지 사진을 올린 뒤 `/grade`를 실행하면 이미지 수와 OCR 텍스트 길이를 함께 고려한다.
-
----
-
-## 10. 검증
-
-호스트 검증:
-
-```bash
-cd ~/hermes/workspace/prof_eng_answer
-
-python3 scripts/validate_config.py
-python3 scripts/validate_fact_anchor_bank.py
-python3 -m py_compile gemini_grader.py grading_config.py grading_agents.py bot.py
-```
-
-컨테이너 검증:
-
-```bash
-docker exec -it hermes_agent bash -lc '
-cd /workspace/prof_eng_answer &&
-python -m py_compile gemini_grader.py grading_config.py grading_agents.py bot.py &&
-python scripts/validate_config.py &&
-python scripts/validate_fact_anchor_bank.py
-'
-```
-
----
-
-## 11. 세션 산출물
-
-각 채점 세션은 `data/sessions/`에 저장된다.
-
-주요 산출물:
-
-- `grade.json`
-- `volume_evaluation.json`
-- `fact_anchor_evaluation.json`
-- `connection_evaluation.json`
-- `interview_followup.json`
-- `rater_weighted_evaluation.json`
-- `gemini_semantic_evaluation.json`
-
-세션 파일에는 사용자 답안과 이미지가 포함될 수 있으므로 커밋하지 않는다.
-
----
-
-## 12. 현재 구현 단계
-
-- phase1: active_profile 및 설정 snapshot
-- phase2: A/B/C/D/E layer scoring
-- phase3: Fact Anchor scoring
-- phase3.1: Fact Anchor 엄격화
-- phase4: 교수·기술사·기업 임원 layer 가중 합성
-- phase5: 답안지 이미지 수 + OCR 분량 판단
-- phase6: Gemini semantic grader 적용
-- phase7: Fact Anchor Bank JSON 분리
-
----
-
-## 13. 남은 개선 과제
-
-- 실제 답안지 사진 3장 + OCR 테스트 확대
-- OCR 품질이 낮을 때 Gemini Vision 또는 별도 OCR 보정 검토
-- 기출 주제별 Fact Anchor Bank 지속 확장
-- Blind Test 세트 구축
-- 키워드 나열 답안과 구조화 답안의 점수 차이 검증
-- 이의제기/재채점 인터페이스 추가
-
----
-
-## 14. 보안 주의
-
-다음 값과 파일은 외부 공유 및 커밋 금지이다.
-
-- `.env`
-- `GEMINI_API_KEY`
-- `TELEGRAM_TOKEN`
-- `data/sessions/`
-- `logs/`
-- `backups/`
-- 사용자 답안 이미지
-- 사용자 답안 텍스트
-
----
-
-## Rubric Authoring Workflow
-
-평가 기준과 유형별 모범 답안은 JSON으로 관리한다.
-
-핵심 원칙:
-
-- 문제 유형은 별도 점수 체계가 아니라 C항목 평가 렌즈이다.
-- 모범 답안은 정답 문장 매칭용이 아니라 구조·깊이·현장 적용성 기준이다.
-- D/E는 모든 문제 유형에서 현장 적용성, 설계 판단, 제언, 독창성을 공통 평가한다.
-
-주요 파일:
-
-```text
-rubric_registry.py
-question_type_router.py
-model_answer_router.py
-rubrics/question_types/default.json
-rubrics/model_answers/industrial_instrumentation_control.json
-docs/rubric_authoring_guide.md
-scripts/rubric_manager.py
-```
-
-자주 쓰는 명령:
-
-```bash
-python3 scripts/rubric_manager.py list-types
-python3 scripts/rubric_manager.py list-model-answers
-python3 scripts/rubric_manager.py validate-all
-```
-
-새 모범 답안 후보 생성:
-
-```bash
-python3 scripts/rubric_manager.py new-model-answer \
-  --topic-id cv_valve_flow_coefficient \
-  --question-type COMPARE \
-  --title "Cv 비교·선정형 모범 답안" \
-  --question "Cv와 Kv를 비교하고 적용 기준을 설명하시오." \
-  --alias "Cv" \
-  --alias "Kv" \
-  --field "밸브 사이징" \
-  --field "제조사 data"
-```
-
-후보 편집 후 승격:
-
-```bash
-vim rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json
-
-python3 scripts/rubric_manager.py promote-model-answer \
-  --candidate rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json
-
-python3 scripts/rubric_manager.py validate-all
-```
-
-현재 구현 단계:
-
-```text
-phase8  : 독창성·기술사적 판단성 평가
-phase8b : 독창성 반영 후 최종 volume cap 강제
-phase9  : question_type을 C항목 평가 렌즈로 적용
-phase10 : model answer bank를 기준 답안으로 참조
-phase11 : B/C 명칭을 문제 요구·유형별 Fact 설명으로 정리
-phase12 : D/E 표현을 현장 적용·설계 판단·제언 중심으로 정리
-phase13 : rubric_registry와 rubric_manager로 기준 작성 workflow 정리
-```
-
-<!-- CURRENT_GRADING_ARCHITECTURE_START -->
-
-## Current Grading Architecture
-
-현재 채점 구조는 산업계측제어기술사 답안의 구조, Fact 정확성, 현장 적용성, 기술사적 판단성을 함께 평가하도록 구성되어 있다.
-
-### 1. 기본 채점 구조
+현재 채점 구조는 산업계측제어기술사 답안의 구조, Fact 정확성, 현장 적용성, 기술사적 판단성을 함께 평가하도록 구성되어 있습니다.
 
 ```text
 A. 배경과 문제 진입: 4점
@@ -400,7 +26,7 @@ E. 연결성·면접 방어 가능성: 2점
 총점: 25점
 ```
 
-핵심 원칙은 다음과 같다.
+핵심 원칙은 다음과 같습니다.
 
 ```text
 - 문제 유형은 별도 점수 체계가 아니라 C항목 평가 렌즈로 사용한다.
@@ -410,9 +36,11 @@ E. 연결성·면접 방어 가능성: 2점
 - Python rule은 volume cap, 3인 layer 가중치, originality gate, fallback, 출력 후처리를 관리한다.
 ```
 
-### 2. 문제 유형 렌즈
+---
 
-문제 유형은 다음 10개를 사용한다.
+## 2. 문제 유형 렌즈
+
+문제 유형은 다음 10개를 사용합니다.
 
 ```text
 DEFINE        : 정의·개념 설명형
@@ -427,9 +55,28 @@ APPLICATION   : 사례·적용형
 EVALUATION    : 평가·효과 분석형
 ```
 
-이 유형들은 별도 agent가 아니라 `C. 유형별 Fact 기반 내용 설명`의 평가 방식만 결정한다.
+이 유형들은 별도 채점 agent가 아닙니다.  
+문제 유형은 `C. 유형별 Fact 기반 내용 설명`의 평가 방식만 결정합니다.
 
-### 3. 주요 평가 구성요소
+예시는 다음과 같습니다.
+
+```text
+DEFINE
+= 정의, 핵심 개념, 적용 범위, 한계, 실무 의미를 설명했는가
+
+COMPARE
+= 비교 대상, 비교축, 장단점, 적용 조건, 선정 기준을 설명했는가
+
+CALC_DESIGN
+= 공식, 변수, 단위, 계산 과정, 결과 해석, 설계 기준을 설명했는가
+
+EVALUATION
+= 평가 지표, 평가 방법, before/after, 정량·정성 효과, 한계를 설명했는가
+```
+
+---
+
+## 3. 주요 평가 구성요소
 
 ```text
 Fact Anchor Bank
@@ -453,7 +100,9 @@ Volume Cap
 = 교수, 기술사, 기업 임원 관점의 layer별 가중 합성
 ```
 
-### 4. 현재 주요 Phase
+---
+
+## 4. 현재 주요 Phase
 
 ```text
 phase8  : 독창성·기술사적 판단성 평가
@@ -470,26 +119,77 @@ phase17 : 잔여 표현 정리
 phase18 : Gemini 503/timeout retry wrapper
 ```
 
-### 5. Rubric Authoring Workflow
+---
 
-평가 기준 및 유형별 모범 답안은 JSON으로 관리한다.
-
-주요 파일은 다음과 같다.
+## 5. 프로젝트 구조
 
 ```text
-rubric_registry.py
-question_type_router.py
-model_answer_router.py
-rubrics/question_types/default.json
-rubrics/fact_anchors/industrial_instrumentation_control.json
-rubrics/model_answers/industrial_instrumentation_control.json
-rubrics/originality/default.json
-rubrics/scoring_model/default.json
-scripts/rubric_manager.py
-docs/rubric_authoring_guide.md
+.
+├── bot.py
+├── gemini_grader.py
+├── grading_agents.py
+├── grading_config.py
+├── model_answer_router.py
+├── originality_grader.py
+├── question_type_router.py
+├── rubric_registry.py
+├── rubrics/
+│   ├── active_profile.json
+│   ├── default.json
+│   ├── fact_anchors/
+│   │   └── industrial_instrumentation_control.json
+│   ├── model_answers/
+│   │   ├── industrial_instrumentation_control.json
+│   │   └── candidates/
+│   ├── originality/
+│   │   └── default.json
+│   ├── question_types/
+│   │   └── default.json
+│   ├── raters/
+│   │   ├── default.json
+│   │   └── layered_default.json
+│   ├── scoring_model/
+│   │   └── default.json
+│   └── subjects/
+│       └── industrial_instrumentation_control.json
+├── scripts/
+│   ├── gemini_audit_grading_engine.py
+│   ├── rubric_manager.py
+│   ├── show_model_answer.py
+│   ├── validate_config.py
+│   ├── validate_fact_anchor_bank.py
+│   ├── validate_model_answer_bank.py
+│   └── validate_question_type_profile.py
+└── docs/
+    └── rubric_authoring_guide.md
 ```
 
-자주 쓰는 명령은 다음과 같다.
+---
+
+## 6. 주요 파일 역할
+
+| 파일 | 역할 |
+|---|---|
+| `bot.py` | Telegram Bot 진입점 |
+| `grading_agents.py` | 채점 파이프라인 및 phase orchestration |
+| `gemini_grader.py` | Gemini semantic grader prompt 및 API 호출 |
+| `question_type_router.py` | 문제 유형 판정 및 C항목 평가 렌즈 선택 |
+| `model_answer_router.py` | 주제 + 문제유형 기준 모범 답안 참조 |
+| `originality_grader.py` | 독창성·기술사적 판단성 평가 |
+| `rubric_registry.py` | rubric/model answer 공통 로딩·검증·template 관리 |
+| `scripts/rubric_manager.py` | 모범 답안 후보 생성, 승격, 검증 CLI |
+| `rubrics/question_types/default.json` | 문제 유형별 C항목 평가 기준 |
+| `rubrics/fact_anchors/industrial_instrumentation_control.json` | 주제별 핵심 Fact Anchor |
+| `rubrics/model_answers/industrial_instrumentation_control.json` | 주제 + 문제유형별 모범 답안 Bank |
+| `docs/rubric_authoring_guide.md` | 평가 기준과 모범 답안 작성 가이드 |
+
+---
+
+## 7. Rubric Authoring Workflow
+
+평가 기준 및 유형별 모범 답안은 JSON으로 관리합니다.
+
+자주 쓰는 명령은 다음과 같습니다.
 
 ```bash
 python3 scripts/rubric_manager.py list-types
@@ -497,7 +197,7 @@ python3 scripts/rubric_manager.py list-model-answers
 python3 scripts/rubric_manager.py validate-all
 ```
 
-새 모범 답안 후보 생성 예시는 다음과 같다.
+새 모범 답안 후보 생성 예시는 다음과 같습니다.
 
 ```bash
 python3 scripts/rubric_manager.py new-model-answer \
@@ -511,17 +211,176 @@ python3 scripts/rubric_manager.py new-model-answer \
   --field "제조사 data"
 ```
 
-후보 편집 후 승격한다.
+후보 파일을 편집합니다.
 
 ```bash
 vim rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json
+```
 
+검증 후 본 Bank로 승격합니다.
+
+```bash
 python3 scripts/rubric_manager.py promote-model-answer \
   --candidate rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json
 
 python3 scripts/rubric_manager.py validate-all
 ```
 
-자세한 작성 가이드는 `docs/rubric_authoring_guide.md`를 참조한다.
+자세한 작성 가이드는 `docs/rubric_authoring_guide.md`를 참조합니다.
 
-<!-- CURRENT_GRADING_ARCHITECTURE_END -->
+---
+
+## 8. 모범 답안 작성 원칙
+
+모범 답안은 정답 문장 매칭용이 아닙니다.
+
+좋은 모범 답안은 다음을 포함해야 합니다.
+
+```text
+1. 문제 유형에 맞는 C항목 전개 방식
+2. 반드시 들어갈 핵심 Fact
+3. 현장 적용 의미
+4. 설계 판단 또는 제언
+5. 저득점 패턴
+6. 현장 연결 포인트
+```
+
+Model Answer Bank는 다음 기준으로만 사용합니다.
+
+```text
+- 답안 구조 기준
+- 설명 깊이 기준
+- Fact 누락 확인
+- 현장 적용성 보완 방향
+- 저득점 패턴 피드백
+```
+
+다음 용도로 사용하지 않습니다.
+
+```text
+- 동일 문장 매칭
+- 표현이 다르다는 이유만으로 감점
+- 모범 답안에 없는 현장적으로 타당한 설명 배제
+```
+
+---
+
+## 9. 실행 및 검증
+
+문법 및 rubric 검증:
+
+```bash
+python3 scripts/rubric_manager.py validate-all
+```
+
+Docker 컨테이너 기준 검증:
+
+```bash
+docker exec -it hermes_agent bash -lc '
+cd /workspace/prof_eng_answer &&
+python scripts/rubric_manager.py validate-all &&
+echo "container validation OK"
+'
+```
+
+Bot 재시작:
+
+```bash
+docker exec hermes_agent bash -lc 'pkill -f "python.*bot.py" || true'
+
+: > logs/prof_eng_answer.log
+
+docker exec -d hermes_agent bash -lc '
+cd /workspace/prof_eng_answer &&
+nohup python bot.py >> logs/prof_eng_answer.log 2>&1 &
+'
+
+docker exec hermes_agent bash -lc 'ps aux | grep "[b]ot.py"'
+```
+
+Gemini 적용 로그 확인:
+
+```bash
+tail -n 120 logs/prof_eng_answer.log | grep -Ei "gemini|semantic|retry|failed|503|timeout|applied" || true
+```
+
+정상 로그 예시:
+
+```text
+[agent] Gemini semantic grader applied.
+```
+
+일시 장애 후 재시도 성공 예시:
+
+```text
+[agent] Gemini semantic grader retry 1/4: ...
+[agent] Gemini semantic grader applied.
+```
+
+---
+
+## 10. Telegram 사용 예시
+
+```text
+/grade
+문제: Cv(Valve Flow Coefficient)를 설명하시오.
+
+답안:
+Cv는 밸브의 유량계수로 밸브를 통과할 수 있는 유량의 크기를 나타낸다.
+Cv가 크면 유량이 많이 흐르고, 밸브 선정에 사용된다.
+```
+
+정상 평가 흐름:
+
+```text
+문제 유형: DEFINE
+모범 답안 Bank: Cv 밸브 유량계수 정의형 모범 답안 참조
+C항목: 정의·개념 설명형 렌즈로 평가
+D/E항목: 현장 적용성, 설계 판단, 제언, 독창성 평가
+```
+
+---
+
+## 11. Git 관리
+
+작업 전 상태 확인:
+
+```bash
+git status --short
+git log --oneline -5
+```
+
+일반 커밋:
+
+```bash
+git add <changed files>
+git commit -m "Describe change"
+git push origin main
+```
+
+이번 구조 정리 이후 주요 커밋 대상 예시는 다음과 같습니다.
+
+```bash
+git add README.md \
+        grading_agents.py \
+        gemini_grader.py \
+        question_type_router.py \
+        model_answer_router.py \
+        rubric_registry.py \
+        scripts/rubric_manager.py \
+        docs/rubric_authoring_guide.md \
+        rubrics/model_answers/industrial_instrumentation_control.json
+
+git commit -m "Finalize grading architecture and rubric workflow"
+git push origin main
+```
+
+---
+
+## 12. 주의사항
+
+- `.env`, API key, Telegram token은 커밋하지 않습니다.
+- `data/sessions/`, `logs/`, `backups/`, `__pycache__/`는 커밋 대상에서 제외합니다.
+- Gemini API가 503, timeout, connection reset을 반환할 수 있으므로 retry wrapper가 적용되어야 합니다.
+- Gemini 실패 시 Python fallback 채점으로 전환될 수 있으며, 이 경우 신뢰도와 총평이 달라질 수 있습니다.
+- 짧은 답안은 `text_only_short_answer`로 분류되어 최종 점수 상한이 적용됩니다.
