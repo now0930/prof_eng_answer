@@ -1,0 +1,292 @@
+{
+  "schema_version": "keyword_rules_v1",
+  "default": {
+    "types": [
+      "DEFINE",
+      "PRINCIPLE",
+      "APPLICATION",
+      "PROBLEM_SOLVE"
+    ],
+    "facts": [
+      "정의",
+      "동작 원리",
+      "적용 조건",
+      "현장 주의사항",
+      "개선 방향"
+    ]
+  },
+  "rules": [
+    {
+      "match": [
+        "제어/제어시스템",
+        "제어이론",
+        "상태방정식",
+        "전달함수",
+        "안정도"
+      ],
+      "types": [
+        "PRINCIPLE",
+        "CALC_DESIGN",
+        "EVALUATION",
+        "APPLICATION",
+        "DEFINE"
+      ],
+      "facts": [
+        "전달함수",
+        "상태공간",
+        "안정도",
+        "응답특성",
+        "제어 성능"
+      ]
+    },
+    {
+      "match": [
+        "PID",
+        "보상기"
+      ],
+      "types": [
+        "PRINCIPLE",
+        "CALC_DESIGN",
+        "PROBLEM_SOLVE",
+        "APPLICATION",
+        "EVALUATION"
+      ],
+      "facts": [
+        "P/I/D 동작",
+        "튜닝",
+        "안정도",
+        "오버슈트",
+        "정상상태오차"
+      ]
+    },
+    {
+      "match": [
+        "계측/센서",
+        "센서",
+        "RTD",
+        "열전대",
+        "온도"
+      ],
+      "types": [
+        "DEFINE",
+        "PRINCIPLE",
+        "COMPARE",
+        "PROCEDURE",
+        "APPLICATION"
+      ],
+      "facts": [
+        "측정 원리",
+        "정확도",
+        "응답성",
+        "설치 조건",
+        "교정"
+      ]
+    },
+    {
+      "match": [
+        "밸브",
+        "Control Valve",
+        "제어밸브",
+        "Cv",
+        "캐비테이션",
+        "포지셔너"
+      ],
+      "types": [
+        "DEFINE",
+        "CALC_DESIGN",
+        "CAUSE_ACTION",
+        "PROBLEM_SOLVE",
+        "APPLICATION"
+      ],
+      "facts": [
+        "Cv",
+        "밸브 특성",
+        "캐비테이션",
+        "포지셔너",
+        "사이징"
+      ]
+    },
+    {
+      "match": [
+        "유량계",
+        "오리피스",
+        "위어",
+        "차압"
+      ],
+      "types": [
+        "DEFINE",
+        "PRINCIPLE",
+        "CALC_DESIGN",
+        "COMPARE",
+        "APPLICATION"
+      ],
+      "facts": [
+        "유량 방정식",
+        "차압",
+        "설치 직관부",
+        "탭 위치",
+        "보정계수"
+      ]
+    },
+    {
+      "match": [
+        "통신",
+        "네트워크",
+        "프로토콜",
+        "TCP/IP",
+        "필드버스",
+        "무선통신"
+      ],
+      "types": [
+        "DEFINE",
+        "STRUCTURE",
+        "COMPARE",
+        "PROBLEM_SOLVE",
+        "APPLICATION"
+      ],
+      "facts": [
+        "OSI 계층",
+        "프로토콜",
+        "지연",
+        "신뢰성",
+        "보안"
+      ]
+    },
+    {
+      "match": [
+        "스마트팩토리",
+        "IIoT",
+        "IoT",
+        "인공지능",
+        "빅데이터",
+        "디지털트윈"
+      ],
+      "types": [
+        "DEFINE",
+        "STRUCTURE",
+        "APPLICATION",
+        "EVALUATION",
+        "PROBLEM_SOLVE"
+      ],
+      "facts": [
+        "IT/OT 연계",
+        "데이터 수집",
+        "엣지",
+        "디지털트윈",
+        "보안"
+      ]
+    },
+    {
+      "match": [
+        "오차",
+        "정밀도",
+        "정확도",
+        "교정",
+        "보정"
+      ],
+      "types": [
+        "DEFINE",
+        "COMPARE",
+        "CALC_DESIGN",
+        "PROCEDURE",
+        "CAUSE_ACTION"
+      ],
+      "facts": [
+        "정확도",
+        "정밀도",
+        "불확도",
+        "교정 절차",
+        "오차 원인"
+      ]
+    },
+    {
+      "match": [
+        "방폭",
+        "안전",
+        "SIL",
+        "SIS",
+        "본질안전"
+      ],
+      "types": [
+        "DEFINE",
+        "STRUCTURE",
+        "PROCEDURE",
+        "APPLICATION",
+        "EVALUATION"
+      ],
+      "facts": [
+        "위험장소",
+        "방폭구조",
+        "SIL",
+        "SIS",
+        "안전무결성"
+      ]
+    },
+    {
+      "match": [
+        "PLC",
+        "DCS",
+        "SCADA",
+        "HMI",
+        "Remote I/O"
+      ],
+      "types": [
+        "STRUCTURE",
+        "COMPARE",
+        "APPLICATION",
+        "PROBLEM_SOLVE",
+        "PROCEDURE"
+      ],
+      "facts": [
+        "제어 구조",
+        "I/O",
+        "중앙/분산 제어",
+        "감시제어",
+        "유지보수"
+      ]
+    },
+    {
+      "match": [
+        "노이즈",
+        "접지",
+        "서지"
+      ],
+      "types": [
+        "CAUSE_ACTION",
+        "PROBLEM_SOLVE",
+        "PROCEDURE",
+        "APPLICATION",
+        "EVALUATION"
+      ],
+      "facts": [
+        "노이즈 원인",
+        "접지 방식",
+        "차폐",
+        "서지보호",
+        "EMI"
+      ]
+    },
+    {
+      "match": [
+        "모터",
+        "인버터",
+        "전동기",
+        "서보"
+      ],
+      "types": [
+        "DEFINE",
+        "PRINCIPLE",
+        "COMPARE",
+        "CALC_DESIGN",
+        "APPLICATION"
+      ],
+      "facts": [
+        "구동 원리",
+        "속도 제어",
+        "토크",
+        "인버터",
+        "보호"
+      ]
+    }
+  ]
+}
