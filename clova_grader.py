@@ -1,3 +1,5 @@
+from semantic_question_type_prompt import build_question_type_semantic_guidance
+
 #!/usr/bin/env python3
 import json
 import os
@@ -282,6 +284,34 @@ def clova_semantic_grade(*args, **kwargs) -> Dict[str, Any]:
         "error": str(last_error),
     }
 
+
+
+
+
+# === qtype semantic result postprocess wrapper v2 ===
+_ORIGINAL_CLOVA_SEMANTIC_GRADE_QTYPE_V2 = clova_semantic_grade
+
+def clova_semantic_grade(*args, **kwargs):
+    from semantic_question_type_postprocess import ensure_question_type_coverage
+
+    result = _ORIGINAL_CLOVA_SEMANTIC_GRADE_QTYPE_V2(*args, **kwargs)
+
+    question_text = (
+        kwargs.get("question_text")
+        or kwargs.get("question")
+        or (args[0] if args else None)
+    )
+    existing_question_type = (
+        kwargs.get("question_type")
+        or kwargs.get("detected_question_type")
+        or kwargs.get("legacy_question_type")
+    )
+
+    return ensure_question_type_coverage(
+        result,
+        question_text=question_text,
+        existing_question_type=existing_question_type,
+    )
 
 if __name__ == "__main__":
     content = _clova_chat('{"test": true} 형태의 JSON만 출력해.')

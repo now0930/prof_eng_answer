@@ -1,3 +1,5 @@
+from semantic_question_type_prompt import build_question_type_semantic_guidance
+
 import os
 import re
 import json
@@ -669,3 +671,28 @@ def gemini_semantic_grade(*args, **kwargs):
         }
     }
 
+
+# === qtype semantic result postprocess wrapper v2 ===
+_ORIGINAL_GEMINI_SEMANTIC_GRADE_QTYPE_V2 = gemini_semantic_grade
+
+def gemini_semantic_grade(*args, **kwargs):
+    from semantic_question_type_postprocess import ensure_question_type_coverage
+
+    result = _ORIGINAL_GEMINI_SEMANTIC_GRADE_QTYPE_V2(*args, **kwargs)
+
+    question_text = (
+        kwargs.get("question_text")
+        or kwargs.get("question")
+        or (args[0] if args else None)
+    )
+    existing_question_type = (
+        kwargs.get("question_type")
+        or kwargs.get("detected_question_type")
+        or kwargs.get("legacy_question_type")
+    )
+
+    return ensure_question_type_coverage(
+        result,
+        question_text=question_text,
+        existing_question_type=existing_question_type,
+    )
