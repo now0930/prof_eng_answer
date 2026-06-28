@@ -608,6 +608,130 @@ def format_result(parsed, sid=None):
 
     return "\n".join(lines).strip()
 
+
+# === qtype coverage display wrapper v2 ===
+_ORIGINAL_FORMAT_RESULT_QTYPE_COVERAGE_V2 = format_result
+
+def _qtype_find_grade_for_display(args, kwargs):
+    candidates = []
+
+    candidates.extend(kwargs.values())
+    candidates.extend(args)
+
+    for obj in candidates:
+        if isinstance(obj, dict) and (
+            "total_score" in obj
+            or "question_type_coverage_summary" in obj
+            or "question_type_coverage_score_adjustment" in obj
+            or "question_type_v2" in obj
+        ):
+            return obj
+
+    return None
+
+def _qtype_short_join(values, limit=3):
+    if not isinstance(values, list):
+        return ""
+
+    cleaned = [str(x).strip() for x in values if str(x).strip()]
+    if not cleaned:
+        return ""
+
+    shown = cleaned[:limit]
+    suffix = ""
+    if len(cleaned) > limit:
+        suffix = f" 외 {len(cleaned) - limit}개"
+
+    return ", ".join(shown) + suffix
+
+def _format_question_type_coverage_display(grade):
+    if not isinstance(grade, dict):
+        return ""
+
+    qtype_v2 = grade.get("question_type_v2")
+    coverage_summary = grade.get("question_type_coverage_summary")
+    adjustment = grade.get("question_type_coverage_score_adjustment")
+
+    if not isinstance(qtype_v2, dict):
+        qtype_v2 = {}
+
+    if not isinstance(coverage_summary, dict):
+        coverage_summary = {}
+
+    if not isinstance(adjustment, dict):
+        adjustment = {}
+
+    question_type = (
+        coverage_summary.get("question_type")
+        or qtype_v2.get("question_type")
+        or grade.get("question_type")
+    )
+    name_ko = coverage_summary.get("name_ko") or qtype_v2.get("name_ko")
+    overall = coverage_summary.get("overall_coverage")
+
+    c_missing = coverage_summary.get("c_fact_focus_missing_text")
+    d_missing = coverage_summary.get("d_field_judgement_focus_missing_text")
+    missing_sub = coverage_summary.get("missing_sub_criteria_text")
+
+    lines = []
+
+    if question_type or name_ko:
+        label = name_ko or question_type
+        if question_type and name_ko:
+            label = f"{name_ko}({question_type})"
+        lines.append(f"문제 유형 lens: {label}")
+
+    if overall:
+        lines.append(f"세부 요구 충족도: {overall}")
+
+    if missing_sub:
+        lines.append(f"부족한 세부 범주: {missing_sub}")
+
+    if c_missing:
+        lines.append(f"C항목 보완 필요: {c_missing}")
+
+    if d_missing:
+        lines.append(f"D항목 보완 필요: {d_missing}")
+
+    if adjustment:
+        mode = adjustment.get("mode")
+        penalty = adjustment.get("recommended_penalty")
+        applied = adjustment.get("applied")
+
+        if penalty is not None:
+            try:
+                penalty_value = float(penalty)
+            except Exception:
+                penalty_value = 0.0
+
+            if penalty_value > 0:
+                if mode == "strict" and applied:
+                    lines.append(f"coverage 보정 적용: -{penalty_value:g}점")
+                else:
+                    lines.append(f"coverage 보정 후보: -{penalty_value:g}점, mode={mode}")
+
+    if not lines:
+        return ""
+
+    return "\n\n[Question Type Coverage]\n" + "\n".join(f"- {line}" for line in lines)
+
+def format_result(*args, **kwargs):
+    text = _ORIGINAL_FORMAT_RESULT_QTYPE_COVERAGE_V2(*args, **kwargs)
+
+    grade = _qtype_find_grade_for_display(args, kwargs)
+    extra = _format_question_type_coverage_display(grade)
+
+    if not extra:
+        return text
+
+    if not isinstance(text, str):
+        return text
+
+    if "[Question Type Coverage]" in text:
+        return text
+
+    return text.rstrip() + extra
+
 def handle_text(message, chat_id, state):
     text = message.get("text", "")
 
