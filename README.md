@@ -168,10 +168,10 @@ phase2 -> phase20 -> phase21
 
 | Profile | 의미 | 기본 ceiling |
 |---|---|---:|
-| `BASIC_CONCEPT` | 정의, 개념, 구성 중심 | 19 |
-| `FIELD_APPLICATION` | 현장 적용, 선정, 개선방안 중심 | 21 |
-| `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 | 22 |
-| `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 | 25 |
+| `BASIC_CONCEPT` | 정의, 개념, 구성 중심 | 15.00 |
+| `FIELD_APPLICATION` | 현장 적용, 선정, 개선방안 중심 | 15.75 |
+| `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 | 16.50 |
+| `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 | 17.50 |
 
 기본 모드:
 
@@ -192,7 +192,7 @@ DIFFICULTY_CEILING_MODE=strict
 `strict` 모드에서는 ceiling을 초과한 점수를 실제로 제한합니다.
 
 제어이론 문제는 선택 자체로 가산점을 주지 않습니다.  
-정확히 풀었을 때만 21~25점 고득점 band가 열립니다.
+정확히 풀었을 때만 16.5~17.5점 상위 band가 열립니다.
 
 ---
 

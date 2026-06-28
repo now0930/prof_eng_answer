@@ -1,12 +1,15 @@
 {
   "schema_version": "difficulty_profiles_v1",
-  "description": "산업계측제어기술사 답안 채점용 난이도 Profile. 기존 A/B/C/D/E 25점 구조를 유지하고, 난이도별 ceiling, unlock, fatal error 정책만 보조 적용한다.",
+  "description": "산업계측제어기술사 답안 채점용 난이도 Profile. 25점 만점 기준에서 BASIC_CONCEPT는 15.0점(60점 환산), THEORY_CORE는 17.5점(70점 환산)을 현실적 ceiling으로 본다.",
   "profiles": {
     "BASIC_CONCEPT": {
       "label": "기본 개념형",
       "description": "정의, 개념, 구성, 적용 범위 중심의 문제",
-      "default_score_ceiling": 19,
-      "high_score_band": [18, 19],
+      "default_score_ceiling": 15.0,
+      "high_score_band": [
+        14.0,
+        15.0
+      ],
       "fatal_error_policy": "weak",
       "scoring_policy": {
         "selected_bonus": false,
@@ -24,8 +27,11 @@
     "FIELD_APPLICATION": {
       "label": "현장 적용형",
       "description": "현장 적용, 선정, 문제점, 개선방안 중심의 문제",
-      "default_score_ceiling": 21,
-      "high_score_band": [20, 21],
+      "default_score_ceiling": 15.75,
+      "high_score_band": [
+        15.0,
+        15.75
+      ],
       "fatal_error_policy": "medium",
       "scoring_policy": {
         "selected_bonus": false,
@@ -44,8 +50,11 @@
     "DESIGN_EVALUATION": {
       "label": "설계·평가형",
       "description": "설계, 평가, 효과분석, 지표, 경제성 중심의 문제",
-      "default_score_ceiling": 22,
-      "high_score_band": [21, 22],
+      "default_score_ceiling": 16.5,
+      "high_score_band": [
+        15.75,
+        16.5
+      ],
       "fatal_error_policy": "medium",
       "scoring_policy": {
         "selected_bonus": false,
@@ -64,8 +73,11 @@
     "THEORY_CORE": {
       "label": "핵심 이론 변별형",
       "description": "제어이론, feedback system, 2차 시스템, 안정도, 응답특성처럼 수식과 원리 정확성이 핵심인 문제",
-      "default_score_ceiling": 25,
-      "high_score_band": [21, 25],
+      "default_score_ceiling": 17.5,
+      "high_score_band": [
+        16.5,
+        17.5
+      ],
       "fatal_error_policy": "strong",
       "scoring_policy": {
         "selected_bonus": false,
@@ -74,10 +86,10 @@
         "band_unlock_condition": "core_prerequisite_accuracy_high_and_no_fatal_error"
       },
       "band_caps": {
-        "missing_core_model_or_equation": 10,
-        "partial_model_but_weak_interpretation": 14,
-        "core_model_and_response_mostly_correct": 20,
-        "model_response_field_judgement_connected": 25
+        "missing_core_model_or_equation": 10.0,
+        "partial_model_but_weak_interpretation": 14.0,
+        "core_model_and_response_mostly_correct": 16.5,
+        "model_response_field_judgement_connected": 17.5
       },
       "requirements": [
         "표준 모델 또는 특성방정식",

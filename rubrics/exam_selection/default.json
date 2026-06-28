@@ -8,36 +8,60 @@
   "selection_principles": [
     "개별 답안 점수와 문항 선택 전략 평가는 분리한다.",
     "어려운 문제를 선택했다는 사실만으로 가산점을 주지 않는다.",
-    "THEORY_CORE 문제는 정확히 풀었을 때만 고득점 band가 열린다.",
-    "BASIC_CONCEPT 문제는 안정 점수형이지만 고득점 ceiling이 낮다.",
+    "BASIC_CONCEPT의 현실적 ceiling은 15.0점, THEORY_CORE의 현실적 ceiling은 17.5점으로 본다.",
+    "THEORY_CORE 문제는 정확히 풀었을 때만 16.5~17.5점 band가 열린다.",
     "CORE_MUST_PREPARE 문항을 회피하면 직접 감점이 아니라 selection risk로 표시한다."
   ],
   "difficulty_score_bands": {
     "BASIC_CONCEPT": {
-      "safe_score_range": [14, 17],
-      "excellent_score_range": [18, 19],
-      "ceiling": 19,
+      "safe_score_range": [
+        12.0,
+        15.0
+      ],
+      "excellent_score_range": [
+        14.0,
+        15.0
+      ],
+      "ceiling": 15.0,
       "risk": "low",
       "reward": "low"
     },
     "FIELD_APPLICATION": {
-      "safe_score_range": [14, 18],
-      "excellent_score_range": [20, 21],
-      "ceiling": 21,
+      "safe_score_range": [
+        13.0,
+        15.0
+      ],
+      "excellent_score_range": [
+        15.0,
+        15.75
+      ],
+      "ceiling": 15.75,
       "risk": "medium",
       "reward": "medium"
     },
     "DESIGN_EVALUATION": {
-      "safe_score_range": [14, 18],
-      "excellent_score_range": [21, 22],
-      "ceiling": 22,
+      "safe_score_range": [
+        13.5,
+        15.5
+      ],
+      "excellent_score_range": [
+        15.75,
+        16.5
+      ],
+      "ceiling": 16.5,
       "risk": "medium",
       "reward": "medium_high"
     },
     "THEORY_CORE": {
-      "safe_score_range": [12, 15],
-      "excellent_score_range": [21, 25],
-      "ceiling": 25,
+      "safe_score_range": [
+        12.0,
+        15.0
+      ],
+      "excellent_score_range": [
+        16.5,
+        17.5
+      ],
+      "ceiling": 17.5,
       "risk": "high",
       "reward": "high",
       "unlock_required": true

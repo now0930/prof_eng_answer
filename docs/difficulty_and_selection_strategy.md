@@ -7,43 +7,63 @@
 
 ---
 
-## 1. 기본 원칙
+## 1. 환산 기준
+
+25점 만점 기준에서 15점은 100점 환산 시 60점이다.
+
+| 25점 기준 | 100점 환산 |
+|---:|---:|
+| 15.00 | 60점 |
+| 15.75 | 63점 |
+| 16.50 | 66점 |
+| 17.50 | 70점 |
+
+따라서 난이도별 현실적 ceiling은 `BASIC_CONCEPT` 60점에서 `THEORY_CORE` 70점 사이에 배치한다.
+
+---
+
+## 2. 기본 원칙
 
 | 구분 | 의미 |
 |---|---|
 | Answer Difficulty | 선택한 문제 자체의 난이도와 채점 엄격도 |
 | Selection Importance | 시험에서 반드시 준비해야 할 핵심 주제인지 여부 |
-| Score Ceiling | 쉬운 문제의 고득점 상한 |
-| Band Unlock | 어려운 문제에서 고득점 band가 열리는 조건 |
+| Score Ceiling | 문제 난이도별 현실적 고득점 상한 |
+| Band Unlock | 어려운 문제에서 상위 band가 열리는 조건 |
 
 핵심 원칙:
 
 ```text
+
 쉬운 문제 = 안정 점수형, ceiling 낮음
 제어이론 문제 = 고위험·고보상형
 제어이론 선택 자체 = 가산점 없음
-제어이론 정확 풀이 = 고득점 band unlock
+제어이론 정확 풀이 = 상위 band unlock
 제어이론 회피 = 개별 감점이 아니라 선택 전략 risk
 ```
 
 ---
 
-## 2. 난이도 Profile
+## 3. 난이도 Profile
 
-| Profile | 의미 | 기본 ceiling |
-|---|---|---:|
-| `BASIC_CONCEPT` | 정의, 개념, 구성 중심 | 19 |
-| `FIELD_APPLICATION` | 현장 적용, 선정, 개선방안 중심 | 21 |
-| `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 | 22 |
-| `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 | 25 |
+| Profile | 의미 | 현실적 ceiling | 100점 환산 |
+|---|---|---:|---:|
+| `BASIC_CONCEPT` | 정의, 개념, 구성 중심 | 15.00 | 60점 |
+| `FIELD_APPLICATION` | 현장 적용, 선정, 개선방안 중심 | 15.75 | 63점 |
+| `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 | 16.50 | 66점 |
+| `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 | 17.50 | 70점 |
+
+이 ceiling은 이론상 만점 가능성을 부정하는 의미가 아니다.  
+기술사 실전 채점에서 일반 답안이 도달할 수 있는 현실적 상한을 보수적으로 잡은 값이다.
 
 ---
 
-## 3. Ceiling Mode
+## 4. Ceiling Mode
 
 기본값은 `warn`이다.
 
 ```env
+
 DIFFICULTY_CEILING_MODE=warn
 ```
 
@@ -52,27 +72,29 @@ DIFFICULTY_CEILING_MODE=warn
 실제 점수를 제한하려면 `strict`를 사용한다.
 
 ```env
+
 DIFFICULTY_CEILING_MODE=strict
 ```
 
-`strict` 모드에서는 다음을 적용한다.
+`strict` 모드에서는 다음 정책이 적용된다.
 
 | Profile | 적용 |
 |---|---|
-| `BASIC_CONCEPT` | 19점 초과 시 19점 cap |
-| `FIELD_APPLICATION` | 21점 초과 시 21점 cap |
-| `DESIGN_EVALUATION` | 22점 초과 시 22점 cap |
-| `THEORY_CORE` | unlock 부족 시 20점 cap 후보 |
-| `THEORY_CORE` fatal error | 더 강한 cap 후보 |
+| `BASIC_CONCEPT` | 15.00점 초과 시 15.00점 cap |
+| `FIELD_APPLICATION` | 15.75점 초과 시 15.75점 cap |
+| `DESIGN_EVALUATION` | 16.50점 초과 시 16.50점 cap |
+| `THEORY_CORE` | 17.50점 초과 시 17.50점 cap |
+| `THEORY_CORE` unlock 부족 | 16.50점 cap 후보 |
+| `THEORY_CORE` fatal error | 10.00점 cap 후보 |
 
 ---
 
-## 4. THEORY_CORE
+## 5. THEORY_CORE
 
 `THEORY_CORE`는 제어이론, feedback system, 2차 시스템, 안정도, 과도응답 같은 핵심 이론 문제이다.
 
 이 문제는 선택 자체로 가산점을 주지 않는다.  
-정확히 풀었을 때만 21~25점 고득점 band가 열린다.
+정확히 풀었을 때만 16.5~17.5점 band가 열린다.
 
 고득점 unlock 조건:
 
@@ -95,7 +117,7 @@ DIFFICULTY_CEILING_MODE=strict
 
 ---
 
-## 5. Selection Importance
+## 6. Selection Importance
 
 | Importance | 의미 |
 |---|---|
@@ -108,7 +130,7 @@ DIFFICULTY_CEILING_MODE=strict
 
 ---
 
-## 6. 문항 선택 전략
+## 7. 문항 선택 전략
 
 기술사 시험은 여러 문제 중 일부를 선택해 답안을 작성한다.  
 따라서 개별 답안 점수와 문항 선택 전략은 분리한다.
@@ -118,11 +140,30 @@ DIFFICULTY_CEILING_MODE=strict
 | 쉬운 문제 4개로 평균 통과 | 가능하지만 고득점 ceiling 낮음 |
 | 제어이론 선택 후 낮은 점수 | 선택 방향은 타당할 수 있으나 실행력 부족 |
 | 제어이론 회피 | 직접 감점이 아니라 selection risk |
-| 제어이론 정확 풀이 | 고득점 band unlock |
+| 제어이론 정확 풀이 | 상위 band unlock |
 
 ---
 
-## 7. 관련 파일
+## 8. Pipeline 반영
+
+난이도와 ceiling은 다음 순서로 적용한다.
+
+```text
+
+phase2 -> phase20 -> phase21
+```
+
+| Phase | 역할 |
+|---|---|
+| phase2 | 최종 점수 계산 |
+| phase20 | 난이도 Profile, 선택 중요도, 고득점 조건 설명 |
+| phase21 | 난이도별 ceiling 또는 THEORY_CORE unlock 조건 적용 |
+
+phase21은 최종 점수 계산 이후 실행되어야 한다.
+
+---
+
+## 9. 관련 파일
 
 | 파일 | 역할 |
 |---|---|

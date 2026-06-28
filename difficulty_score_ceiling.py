@@ -1,0 +1,335 @@
+#!/usr/bin/env python3
+import os
+import re
+from typing import Any, Dict, List, Optional
+
+from difficulty_strategy import summarize_question_strategy
+
+
+def _to_float(value, default=None):
+    try:
+        if value is None:
+            return default
+        return float(value)
+    except Exception:
+        return default
+
+
+def _normalize(text: str) -> str:
+    text = str(text or "").lower()
+    text = text.replace("ζ", "zeta")
+    text = text.replace("ω", "omega")
+    text = re.sub(r"\s+", " ", text)
+    return text.strip()
+
+
+def _as_text(value: Any) -> str:
+    if value is None:
+        return ""
+    if isinstance(value, str):
+        return value
+    if isinstance(value, (list, tuple)):
+        return "\n".join(_as_text(x) for x in value)
+    if isinstance(value, dict):
+        return "\n".join(f"{k}: {_as_text(v)}" for k, v in value.items())
+    return str(value)
+
+
+def _extract_score(grade: Dict[str, Any]) -> Optional[float]:
+    for key in ["total_score", "final_score", "score", "weighted_score"]:
+        score = _to_float(grade.get(key))
+        if score is not None:
+            return score
+    return None
+
+
+def _set_score(grade: Dict[str, Any], score: float) -> None:
+    for key in ["total_score", "final_score", "score", "weighted_score"]:
+        if key in grade:
+            grade[key] = round(float(score), 2)
+            return
+    grade["total_score"] = round(float(score), 2)
+
+
+def _append_unique(items: List[str], text: str) -> List[str]:
+    text = str(text or "").strip()
+    if text and text not in items:
+        items.append(text)
+    return items
+
+
+def _get_list(grade: Dict[str, Any], key: str) -> List[str]:
+    value = grade.get(key)
+    if value is None:
+        return []
+    if isinstance(value, list):
+        return [str(x) for x in value if str(x).strip()]
+    text = str(value).strip()
+    return [text] if text else []
+
+
+def _theory_core_evidence(answer_text: str, grade: Dict[str, Any]) -> Dict[str, Any]:
+    """
+    THEORY_CORE 고득점 band unlock 판단용 evidence.
+
+    여기서는 최종 정답성을 판정하지 않는다.
+    이미 계산된 LLM/휴리스틱 채점 결과와 답안 내용을 참고하여,
+    21~25점 band를 열 수 있는 최소 근거가 있는지만 보수적으로 본다.
+    """
+    combined = "\n".join([
+        answer_text or "",
+        _as_text(grade.get("summary")),
+        _as_text(grade.get("improvement_points")),
+        _as_text(grade.get("weaknesses")),
+        _as_text(grade.get("difficulty_strategy")),
+    ])
+
+    t = _normalize(combined)
+
+    groups = {
+        "core_model_or_equation": [
+            "전달함수",
+            "특성방정식",
+            "s^2",
+            "s²",
+            "분모",
+            "표준 2차",
+            "omega",
+            "omega_n",
+            "wn",
+            "고유진동수",
+            "자연진동수"
+        ],
+        "damping_ratio": [
+            "감쇠비",
+            "zeta",
+            "제타"
+        ],
+        "pole_or_root_interpretation": [
+            "극점",
+            "pole",
+            "근",
+            "중근",
+            "실근",
+            "복소근",
+            "판별식",
+            "root"
+        ],
+        "response_characteristics": [
+            "오버슈트",
+            "overshoot",
+            "정착시간",
+            "settling",
+            "상승시간",
+            "rise time",
+            "진동",
+            "과도응답",
+            "응답특성"
+        ],
+        "field_judgement": [
+            "튜닝",
+            "tuning",
+            "pid",
+            "loop",
+            "루프",
+            "공정",
+            "안정성",
+            "제어기",
+            "현장",
+            "운전",
+            "품질"
+        ]
+    }
+
+    hits = {}
+    for group, keywords in groups.items():
+        hits[group] = [kw for kw in keywords if _normalize(kw) in t]
+
+    hit_count = sum(1 for v in hits.values() if v)
+
+    fatal_patterns = [
+        r"zeta\s*=\s*1.{0,20}중근.{0,10}아니",
+        r"감쇠비.{0,20}반대",
+        r"안정.{0,10}불안정.{0,10}반대",
+        r"underdamped.{0,20}overdamped.{0,20}혼동",
+        r"오버슈트.{0,20}반대",
+        r"극점.{0,20}반대"
+    ]
+
+    fatal_detected = any(re.search(p, t) for p in fatal_patterns)
+
+    return {
+        "groups": hits,
+        "hit_count": hit_count,
+        "fatal_error_suspected": fatal_detected,
+        "unlock_high_band": hit_count >= 4 and not fatal_detected
+    }
+
+
+def _build_ceiling_decision(
+    score: float,
+    strategy: Dict[str, Any],
+    answer_text: str,
+    grade: Dict[str, Any]
+) -> Dict[str, Any]:
+    difficulty = strategy.get("difficulty")
+    ceiling = _to_float(strategy.get("default_score_ceiling"))
+
+    decision = {
+        "mode": os.getenv("DIFFICULTY_CEILING_MODE", "warn").strip().lower(),
+        "difficulty": difficulty,
+        "topic_id": strategy.get("topic_id"),
+        "selection_importance": strategy.get("selection_importance"),
+        "original_score": round(score, 2),
+        "cap_applied": False,
+        "recommended_cap": None,
+        "capped_score": round(score, 2),
+        "reason": "",
+        "note": (
+            "선택 자체 가산점은 없으며, 난이도별 ceiling과 "
+            "THEORY_CORE high band unlock 조건만 평가한다."
+        )
+    }
+
+    if difficulty == "THEORY_CORE":
+        evidence = _theory_core_evidence(answer_text, grade)
+        decision["theory_core_evidence"] = evidence
+
+        theory_cap = ceiling if ceiling is not None else 17.5
+        no_unlock_cap = min(16.5, theory_cap)
+        fatal_cap = min(10.0, no_unlock_cap)
+
+        if evidence["fatal_error_suspected"]:
+            decision["recommended_cap"] = fatal_cap
+            decision["reason"] = (
+                "THEORY_CORE 핵심 이론 오류가 의심되어 "
+                f"{fatal_cap:g}점 cap 후보를 적용합니다."
+            )
+        elif not evidence["unlock_high_band"] and score > no_unlock_cap:
+            decision["recommended_cap"] = no_unlock_cap
+            decision["reason"] = (
+                "THEORY_CORE 고득점 band unlock 근거가 부족하여 "
+                f"{no_unlock_cap:g}점 cap 후보를 적용합니다."
+            )
+        elif score > theory_cap:
+            decision["recommended_cap"] = theory_cap
+            decision["reason"] = (
+                "THEORY_CORE 현실적 ceiling을 초과하여 "
+                f"{theory_cap:g}점 cap 후보를 적용합니다."
+            )
+        else:
+            decision["reason"] = (
+                "THEORY_CORE 현실적 ceiling 범위 안에 있거나 "
+                "고득점 band unlock 조건을 충족한 상태입니다."
+            )
+
+        if decision["recommended_cap"] is not None:
+            decision["capped_score"] = min(score, float(decision["recommended_cap"]))
+
+        return decision
+
+    if ceiling is not None and score > ceiling:
+        decision["recommended_cap"] = ceiling
+        decision["capped_score"] = min(score, ceiling)
+        decision["reason"] = (
+            f"{difficulty} 문제는 안정 득점형 또는 현장 적용형으로 판단되어 "
+            f"고득점 ceiling {ceiling:g}점 후보를 적용합니다."
+        )
+    else:
+        decision["reason"] = (
+            f"{difficulty} 문제의 현재 점수는 ceiling 적용 대상이 아닙니다."
+        )
+
+    return decision
+
+
+def apply_difficulty_score_ceiling(
+    grade: Dict[str, Any],
+    question_text: Optional[str] = None,
+    answer_text: Optional[str] = None
+) -> Dict[str, Any]:
+    """
+    난이도별 score ceiling 적용 함수.
+
+    기본값:
+      DIFFICULTY_CEILING_MODE=warn
+
+    warn:
+      recommended_cap만 계산하고 점수는 그대로 둔다.
+
+    strict:
+      recommended_cap이 있고 현재 점수가 cap보다 높으면 실제 점수를 제한한다.
+    """
+    if not isinstance(grade, dict):
+        return grade
+
+    score = _extract_score(grade)
+
+    if score is None:
+        grade["difficulty_ceiling_evaluation"] = {
+            "cap_applied": False,
+            "reason": "score not found"
+        }
+        return grade
+
+    strategy = grade.get("difficulty_strategy")
+
+    if not isinstance(strategy, dict) or not strategy.get("difficulty"):
+        if not question_text:
+            grade["difficulty_ceiling_evaluation"] = {
+                "cap_applied": False,
+                "reason": "difficulty strategy not found and question text unavailable"
+            }
+            return grade
+
+        strategy = summarize_question_strategy(question_text)
+        grade["difficulty_strategy"] = strategy
+
+    decision = _build_ceiling_decision(
+        score=score,
+        strategy=strategy,
+        answer_text=answer_text or "",
+        grade=grade
+    )
+
+    mode = decision.get("mode")
+    recommended_cap = decision.get("recommended_cap")
+
+    if (
+        mode == "strict"
+        and recommended_cap is not None
+        and decision["capped_score"] < score
+    ):
+        _set_score(grade, decision["capped_score"])
+        decision["cap_applied"] = True
+
+        summary = str(grade.get("summary") or "").strip()
+        cap_text = (
+            f" 난이도 ceiling 정책에 따라 최종 점수를 "
+            f"{decision['original_score']}/25에서 {decision['capped_score']}/25로 제한했습니다. "
+            f"사유: {decision['reason']}"
+        )
+
+        if cap_text.strip() not in summary:
+            grade["summary"] = summary + cap_text if summary else cap_text.strip()
+
+    warnings = _get_list(grade, "strategy_warnings")
+
+    if recommended_cap is not None:
+        if mode == "strict":
+            warnings = _append_unique(
+                warnings,
+                f"난이도 ceiling strict 모드: 권장 cap {recommended_cap}점, "
+                f"적용 여부={decision['cap_applied']}."
+            )
+        else:
+            warnings = _append_unique(
+                warnings,
+                f"난이도 ceiling warn 모드: 권장 cap {recommended_cap}점 후보가 "
+                "계산되었으나 실제 점수에는 반영하지 않았습니다."
+            )
+
+    grade["strategy_warnings"] = warnings
+    grade["difficulty_ceiling_evaluation"] = decision
+
+    return grade
