@@ -26,31 +26,35 @@
 
 운영 환경에서는 상위 `~/hermes/docker-compose.yml`에서 실행합니다.
 
-~~bash
+```bash
+
 cd ~/hermes
 docker compose up -d
 docker compose ps
-~~
+```
 
 정상 상태:
 
-~~text
+```text
+
 hermes_agent          Up
 prof_eng_answer_bot   Up
-~~
+```
 
 로그 확인:
 
-~~bash
+```bash
+
 tail -n 120 ~/hermes/workspace/prof_eng_answer/logs/prof_eng_answer.log
-~~
+```
 
 봇만 재시작:
 
-~~bash
+```bash
+
 cd ~/hermes
 docker compose restart prof-eng-answer-bot
-~~
+```
 
 ---
 
@@ -67,9 +71,10 @@ docker compose restart prof-eng-answer-bot
 
 실행 스크립트:
 
-~~text
+```text
+
 scripts/run_prof_eng_bot.sh
-~~
+```
 
 중복 polling을 막기 위해 `hermes_agent` 안에서 수동으로 `nohup python bot.py`를 실행하지 않습니다.
 
@@ -79,9 +84,10 @@ scripts/run_prof_eng_bot.sh
 
 운영 환경변수는 상위 디렉터리의 `.env`에서 관리합니다.
 
-~~text
+```text
+
 ~/hermes/.env
-~~
+```
 
 주요 변수:
 
@@ -107,13 +113,14 @@ scripts/run_prof_eng_bot.sh
 
 Telegram에서 provider를 선택할 수 있습니다.
 
-~~text
+```text
+
 /provider
 /provider auto
 /provider gemini
 /provider clova
 /provider reset
-~~
+```
 
 | 모드 | 의미 |
 |---|---|
@@ -127,27 +134,30 @@ Telegram에서 provider를 선택할 수 있습니다.
 
 현재 주요 순서는 다음과 같습니다.
 
-~~text
+```text
+
 1. 기본 채점자별 분석
 2. Gemini 또는 CLOVA semantic grader 적용
 3. phase2 layered scoring 적용
 4. phase20 difficulty strategy 출력
 5. phase21 difficulty ceiling 적용
-~~
+```
 
 정상 로그 예시:
 
-~~text
+```text
+
 [agent] phase2 layered scoring applied: ...
 [agent] phase20 final difficulty strategy applied: ...
 [agent] phase21 final difficulty ceiling evaluated: ...
-~~
+```
 
 중요한 순서:
 
-~~text
+```text
+
 phase2 -> phase20 -> phase21
-~~
+```
 
 ---
 
@@ -165,17 +175,19 @@ phase2 -> phase20 -> phase21
 
 기본 모드:
 
-~~env
+```env
+
 DIFFICULTY_CEILING_MODE=warn
-~~
+```
 
 `warn` 모드는 cap 후보만 계산하고 실제 점수는 바꾸지 않습니다.
 
 실제 점수를 제한하려면:
 
-~~env
+```env
+
 DIFFICULTY_CEILING_MODE=strict
-~~
+```
 
 `strict` 모드에서는 ceiling을 초과한 점수를 실제로 제한합니다.
 
@@ -191,13 +203,14 @@ DIFFICULTY_CEILING_MODE=strict
 
 핵심 원칙:
 
-~~text
+```text
+
 쉬운 문제 = 안정 점수형, ceiling 낮음
 제어이론 문제 = 고위험·고보상형
 제어이론 선택 자체 = 가산점 없음
 제어이론 정확 풀이 = 고득점 band unlock
 제어이론 회피 = 개별 감점이 아니라 선택 전략 risk
-~~
+```
 
 제어이론, feedback system, 2차 시스템, 안정도, 과도응답 계열은 `CORE_MUST_PREPARE`로 관리합니다.
 
@@ -223,34 +236,38 @@ DIFFICULTY_CEILING_MODE=strict
 
 Python 문법 확인:
 
-~~bash
+```bash
+
 python3 -m py_compile \
   bot.py \
   grading_agents.py \
   difficulty_strategy.py \
   difficulty_output_adapter.py \
   difficulty_score_ceiling.py
-~~
+```
 
 난이도 전략 검증:
 
-~~bash
+```bash
+
 python3 scripts/validate_difficulty_strategy.py
-~~
+```
 
 Docker 상태 확인:
 
-~~bash
+```bash
+
 cd ~/hermes
 docker compose ps
-~~
+```
 
 Bot 프로세스 중복 확인:
 
-~~bash
+```bash
+
 docker exec prof_eng_answer_bot bash -lc 'pgrep -af "python.*bot.py" || true'
 docker exec hermes_agent bash -lc 'pgrep -af "python.*bot.py" || true'
-~~
+```
 
 ---
 
