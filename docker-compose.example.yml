@@ -1,0 +1,40 @@
+# Example only.
+# 실제 실행 시 이 파일을 docker-compose.yml로 복사한 뒤 사용하세요.
+#
+# cp docker-compose.example.yml docker-compose.yml
+# cp .env.example .env
+# vim .env
+# docker compose up -d
+
+services:
+  prof-eng-answer:
+    image: nousresearch/hermes-agent:latest
+    container_name: prof_eng_answer_bot
+    restart: unless-stopped
+    stdin_open: true
+    tty: true
+
+    env_file:
+      - .env
+
+    environment:
+      - HERMES_HOME=/hermes_home
+      - GEMINI_API_KEY=${GEMINI_API_KEY}
+      - GEMINI_MODEL=${GEMINI_MODEL}
+      - OLLAMA_URL=${OLLAMA_URL}
+      - OLLAMA_MODEL=${OLLAMA_MODEL}
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+
+    volumes:
+      - .:/workspace/prof_eng_answer
+      - ./hermes_home:/hermes_home
+
+    working_dir: /workspace/prof_eng_answer
+    command: bash -lc "python bot.py"
+
+    networks:
+      - ai_net
+
+networks:
+  ai_net:
+    external: true
