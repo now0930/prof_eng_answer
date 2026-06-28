@@ -2634,6 +2634,8 @@ def _phase2_postprocess_grade(legacy_result):
     grade = _phase11_normalize_requirement_fact_labels(grade)
     grade = _phase14_compact_feedback_output(grade)
     grade = _phase15_hide_internal_metric_dict(grade)
+    grade = _phase16_polish_final_output(grade)
+    grade = _phase17_final_phrase_cleanup(grade)
     grade = _phase2_add_display_aliases(grade)
 
     _phase2_json_write(session_dir / "grade.json", grade)
@@ -3451,7 +3453,6 @@ def _phase14_compact_feedback_output(grade):
         "대책은 비용, 시간, 적용 가능성, 기존 설비 영향, 운전 리스크까지 연결하세요.":
             "현장 적용·제언은 비용, 시간, 적용 가능성, 기존 설비 영향, 운전 리스크까지 연결하세요.",
         "problem_link": "requirement_link",
-        "문제점": "문제 요구",
         "Fact 기반 문제 요구 설명": "유형별 Fact 기반 내용 설명"
     }
 
@@ -3543,6 +3544,113 @@ def _phase15_hide_internal_metric_dict(grade):
             "답안 분량이 지나치게 짧아 기술사 시험의 요구 수준을 충족하지 못함(과소평가 위험)",
             "답안 분량이 지나치게 짧아 기술사 시험의 요구 수준을 충족하지 못함"
         )
+
+        return x
+
+    def walk(obj):
+        if isinstance(obj, dict):
+            for k, v in list(obj.items()):
+                obj[k] = walk(v)
+            return obj
+        if isinstance(obj, list):
+            return [walk(v) for v in obj]
+        return fix_text(obj)
+
+    return walk(grade)
+
+
+# ============================================================
+# PHASE16_POLISH_FINAL_OUTPUT
+# 최종 Telegram 출력 문구 보정
+# 점수 계산에는 관여하지 않는다.
+# ============================================================
+
+def _phase16_polish_final_output(grade):
+    if not isinstance(grade, dict):
+        return grade
+
+    def fix_text(x):
+        if not isinstance(x, str):
+            return x
+
+        x = x.replace(
+            "답안 분량 부족으로 인한 과소평가 위험이 있으나, 내용 자체가 기술사 수준의 깊이를 갖추지 못함",
+            "답안 분량이 부족하고, 내용 자체도 기술사 수준의 깊이를 갖추지 못함"
+        )
+        x = x.replace(
+            "답안 분량 부족으로 인한 과소평가 위험",
+            "답안 분량 부족"
+        )
+        x = x.replace(
+            "과소평가 위험이 있으나",
+            "감점 요인이며"
+        )
+        x = x.replace(
+            "과소평가 위험",
+            "감점 요인"
+        )
+
+        x = x.replace(
+            "기존 휴리스틱 근거: 확인된 요소: 설명",
+            "기존 휴리스틱 근거: 일부 관련 표현만 확인됨"
+        )
+        x = x.replace(
+            "기존 휴리스틱 근거: 확인된 요소: 문제",
+            "기존 휴리스틱 근거: 문제 요구와 관련된 표현이 일부 확인됨"
+        )
+
+        x = x.replace(
+            "유형별 Fact anchor 5개 설명",
+            "유형별 핵심 Fact 5개 설명"
+        )
+
+        return x
+
+    def walk(obj):
+        if isinstance(obj, dict):
+            for k, v in list(obj.items()):
+                obj[k] = walk(v)
+            return obj
+        if isinstance(obj, list):
+            return [walk(v) for v in obj]
+        return fix_text(obj)
+
+    return walk(grade)
+
+
+# ============================================================
+# PHASE17_FINAL_PHRASE_CLEANUP
+# 최종 잔여 표현 정리
+# 점수 계산에는 관여하지 않는다.
+# ============================================================
+
+def _phase17_final_phrase_cleanup(grade):
+    if not isinstance(grade, dict):
+        return grade
+
+    def fix_text(x):
+        if not isinstance(x, str):
+            return x
+
+        replacements = {
+            "답안의 분량이 매우 짧고 핵심 Fact가 누락되어 과소평가될 위험이 있음.":
+                "답안의 분량이 매우 짧고 핵심 Fact가 누락되어 기술사 답안 요구 수준에 미달함.",
+            "답안의 분량이 매우 짧고 핵심 Fact가 누락되어 과소평가될 위험이 있음":
+                "답안의 분량이 매우 짧고 핵심 Fact가 누락되어 기술사 답안 요구 수준에 미달함",
+            "핵심 Fact가 누락되어 과소평가될 위험이 있음":
+                "핵심 Fact가 누락되어 기술사 답안 요구 수준에 미달함",
+            "과소평가될 위험이 있음":
+                "기술사 답안 요구 수준에 미달함",
+            "과소평가될 위험":
+                "기술사 답안 요구 수준 미달",
+            "과소평가 위험":
+                "감점 요인",
+            "감점 요인이 있으나":
+                "감점 요인이며",
+        }
+
+        for old, new in replacements.items():
+            x = x.replace(old, new)
 
         return x
 

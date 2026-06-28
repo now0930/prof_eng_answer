@@ -563,3 +563,109 @@ def build_gemini_grading_prompt(
 
     return base_prompt + "\n\n" + phase12_text
 
+
+
+# ============================================================
+
+
+# ============================================================
+# PHASE18_GEMINI_SEMANTIC_RETRY_WRAPPER
+# Gemini 503, timeout, connection reset 등 일시 장애 시 재시도
+# 점수 계산 로직은 바꾸지 않고 Gemini 호출 안정성만 높인다.
+# ============================================================
+
+_ORIGINAL_GEMINI_SEMANTIC_GRADE_PHASE18 = gemini_semantic_grade
+
+
+def _phase18_is_retryable_gemini_error(err_text):
+    text = str(err_text or "").lower()
+    retryable_markers = [
+        "503",
+        "service unavailable",
+        "temporarily unavailable",
+        "timeout",
+        "timed out",
+        "connection reset",
+        "connectionreseterror",
+        "ssl",
+        "handshake",
+        "rate limit",
+        "resource exhausted",
+        "deadline",
+        "unavailable",
+    ]
+    return any(m in text for m in retryable_markers)
+
+
+def gemini_semantic_grade(*args, **kwargs):
+    import json
+    import time
+
+    delays = [2, 5, 10]
+    last_result = None
+    last_error = None
+
+    total_attempts = len(delays) + 1
+
+    for attempt_idx, delay in enumerate([0] + delays, start=1):
+        if delay:
+            time.sleep(delay)
+
+        try:
+            result = _ORIGINAL_GEMINI_SEMANTIC_GRADE_PHASE18(*args, **kwargs)
+            last_result = result
+
+            # dict가 아니면 기존 동작 유지
+            if not isinstance(result, dict):
+                return result
+
+            # ok가 없거나 ok=True이면 성공으로 간주
+            if result.get("ok", True) is not False:
+                if attempt_idx > 1:
+                    result.setdefault("retry_info", {})
+                    result["retry_info"].update({
+                        "retried": True,
+                        "attempts": attempt_idx
+                    })
+                return result
+
+            # ok=False인 경우 retry 가능한 에러인지 확인
+            err_text = json.dumps(result, ensure_ascii=False)
+            last_error = err_text
+
+            if _phase18_is_retryable_gemini_error(err_text) and attempt_idx < total_attempts:
+                print(f"[agent] Gemini semantic grader retry {attempt_idx}/{total_attempts}: {err_text[:300]}")
+                continue
+
+            return result
+
+        except Exception as e:
+            last_error = repr(e)
+
+            if _phase18_is_retryable_gemini_error(last_error) and attempt_idx < total_attempts:
+                print(f"[agent] Gemini semantic grader retry {attempt_idx}/{total_attempts}: {last_error[:300]}")
+                continue
+
+            raise
+
+    # 재시도 후에도 실패한 경우 기존 pipeline fallback을 타도록 ok=False 반환
+    if isinstance(last_result, dict):
+        last_result.setdefault("retry_info", {})
+        last_result["retry_info"].update({
+            "retried": True,
+            "attempts": total_attempts,
+            "final_error": last_error,
+            "exhausted": True
+        })
+        return last_result
+
+    return {
+        "ok": False,
+        "error": f"Gemini semantic grader failed after retries: {last_error}",
+        "retry_info": {
+            "retried": True,
+            "attempts": total_attempts,
+            "exhausted": True
+        }
+    }
+
