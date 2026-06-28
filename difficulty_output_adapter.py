@@ -1,3 +1,5 @@
+from question_type_coverage_adapter import attach_question_type_coverage_feedback
+
 from question_type_output_adapter import attach_question_type_v2_to_grade
 
 #!/usr/bin/env python3
@@ -136,6 +138,7 @@ def attach_difficulty_strategy_to_grade(
     question_text: Optional[str] = None
 ) -> Dict[str, Any]:
     grade = attach_question_type_v2_to_grade(grade, question_text=question_text)
+    grade = attach_question_type_coverage_feedback(grade)
     if not isinstance(grade, dict):
         return grade
 
