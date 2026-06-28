@@ -1,275 +1,223 @@
 {
-  "version": "question_type_lens_v1",
-  "name": "기술사 문제 유형별 C항목 평가 렌즈",
-  "policy": {
-    "main_principle": "문제 유형은 별도 채점 체계가 아니라 C항목의 Fact 전개 방식을 결정하는 평가 렌즈이다.",
-    "common_structure": {
-      "A": "배경과 문제 진입",
-      "B": "문제 요구 파악",
-      "C": "문제 유형별 Fact 기반 설명",
-      "D": "현실 적용, 문제 해결, 설계 판단, 제언",
-      "E": "연결성, 독창성, 면접 방어 가능성"
-    },
-    "common_D_E_rule": "모든 문제 유형은 현실 적용성, 현장 문제 연결, 개선 제언, 기술사적 판단성을 D/E에서 공통 평가한다.",
-    "no_separate_total_score": "문제 유형별 별도 총점 체계는 만들지 않고 기존 25점 A/B/C/D/E 구조를 유지한다.",
-    "demand_axis_rule": "문제문이 특정 기준축을 제시하면 해당 기준축을 C항목 평가 렌즈의 중심으로 삼는다. 관련 지식이 맞더라도 요구축을 벗어나면 낮게 평가한다."
+  "version": "2.0",
+  "description": "산업계측제어기술사 2~4교시 답안용 question_type 대분류와 세부 채점 lens. question_type은 A/B/C/D/E 점수체계를 대체하지 않고 C항목 Fact 전개와 D항목 현장 판단을 보완한다.",
+  "scoring_principle": {
+    "common_structure": [
+      "A. 배경과 문제 진입",
+      "B. 문제 요구 파악",
+      "C. Fact 기반 설명",
+      "D. 현장 적용·판단·제언",
+      "E. 연결성·면접 방어 가능성"
+    ],
+    "question_type_role": "question_type은 별도 점수체계가 아니라 C항목의 fact 설명 방향과 D항목의 현장 판단 방향을 정하는 lens이다.",
+    "first_period_policy": "1교시 단답형은 분석 대상에서 제외한다. DEFINE은 신규 체계에서 사용하지 않는다."
   },
-  "types": [
-    {
-      "id": "DEFINE",
-      "name": "정의·개념 설명형",
-      "triggers": [
-        "정의",
-        "개념",
-        "의미",
-        "설명하시오",
-        "무엇인가",
-        "란"
+  "types": {
+    "PRINCIPLE_INTERPRETATION": {
+      "name_ko": "원리·해석형",
+      "absorbs_legacy_types": [
+        "PRINCIPLE",
+        "CALC_DESIGN"
       ],
-      "c_lens": "정의, 핵심 개념, 구성요소, 적용 범위, 한계, 실무 의미를 fact 기반으로 설명했는가",
-      "c_required_elements": [
-        "정의",
-        "핵심 개념",
-        "적용 범위",
-        "한계",
-        "실무 의미"
-      ],
-      "weak_answer_pattern": "정의 한 줄 또는 용어 풀이만 있고 적용 범위와 현장 의미가 없음",
-      "high_score_pattern": "정의에서 출발해 적용 범위, 한계, 설비·운전상 의미까지 연결함"
-    },
-    {
-      "id": "PRINCIPLE",
-      "name": "원리·메커니즘형",
-      "triggers": [
+      "intent": "원리, 동작, 계산, 설계, 수식, 모델, 계측·제어 원리 해석이 핵심인 문제",
+      "selection_signals": [
         "원리",
-        "메커니즘",
         "동작",
-        "작동",
-        "발생 과정",
-        "왜",
-        "어떻게",
+        "계산",
+        "구하시오",
+        "산출",
+        "설계",
+        "전달함수",
+        "상태방정식",
+        "안정도",
         "응답특성",
-        "과도응답",
-        "시간응답",
-        "감쇠비",
-        "오버슈트",
-        "정착시간",
-        "고유진동수"
+        "감도",
+        "분해능",
+        "오차",
+        "모델",
+        "회로",
+        "제어",
+        "계측원리"
       ],
-      "c_lens": "발생 조건, 원리, 중간 메커니즘, 인과관계, 결과 현상, 공정 영향을 설명했는가",
-      "c_required_elements": [
-        "발생 조건",
-        "원리",
-        "메커니즘",
-        "인과관계",
-        "결과 현상",
-        "공정 영향",
-        "문제문 기준축",
-        "표준식 또는 기준 모델",
-        "응답특성",
-        "결과 비교"
+      "c_fact_focus": [
+        "대상 시스템·계기·회로·제어 loop의 구성요소",
+        "동작 원리와 물리적 의미",
+        "수식·모델·변수·단위",
+        "계산 또는 해석 과정",
+        "결과값 또는 응답특성의 의미"
       ],
-      "weak_answer_pattern": "원리 키워드만 나열하고 선후관계와 인과관계가 약함",
-      "high_score_pattern": "조건 → 원리 → 현상 → 설비·제어 영향까지 흐름이 명확함"
+      "d_field_judgement_focus": [
+        "선정 또는 설계 판단",
+        "tuning, 안정성, 제어성, 오차 영향",
+        "현장 적용 한계",
+        "유지보수와 운전 조건",
+        "비용·성능 trade-off"
+      ],
+      "sub_criteria": [
+        "background_need",
+        "structure_components",
+        "principle_mechanism",
+        "formula_model_variables",
+        "calculation_or_interpretation",
+        "result_meaning",
+        "field_judgement"
+      ]
     },
-    {
-      "id": "STRUCTURE",
-      "name": "구성·분류형",
-      "triggers": [
-        "구성",
-        "구조",
-        "분류",
-        "종류",
-        "요소",
-        "계층",
-        "아키텍처"
+    "DIAGNOSIS_ACTION": {
+      "name_ko": "진단·대책형",
+      "absorbs_legacy_types": [
+        "PROBLEM_SOLVE",
+        "CAUSE_ACTION"
       ],
-      "c_lens": "구성요소, 분류 기준, 계층 구조, 각 요소의 역할, 요소 간 관계와 인터페이스를 설명했는가",
-      "c_required_elements": [
-        "구성요소",
-        "분류 기준",
-        "계층 구조",
-        "역할",
-        "상호관계",
-        "인터페이스"
+      "intent": "문제점, 원인, 영향, 대책, 개선방안, 고려사항, 방지대책이 핵심인 문제",
+      "selection_signals": [
+        "문제점",
+        "원인",
+        "발생원인",
+        "대책",
+        "개선방안",
+        "고려사항",
+        "유의사항",
+        "방지",
+        "저감",
+        "영향",
+        "리스크",
+        "장애",
+        "고장"
       ],
-      "weak_answer_pattern": "구성요소를 단순 나열하고 분류 기준과 역할 관계가 없음",
-      "high_score_pattern": "분류 기준과 계층 관계를 제시하고 설계·운영 의미까지 설명함"
+      "c_fact_focus": [
+        "무엇이 문제인지",
+        "왜 발생하는지",
+        "발생 메커니즘",
+        "품질·안전·신뢰성·제어성·유지보수 영향",
+        "기술적 대책"
+      ],
+      "d_field_judgement_focus": [
+        "대책의 실현 가능성",
+        "비용과 기존 설비 영향",
+        "운전·정비 측면 적용성",
+        "우선순위",
+        "trade-off와 검증 방법"
+      ],
+      "sub_criteria": [
+        "background_need",
+        "problem_definition",
+        "cause_mechanism",
+        "impact_risk",
+        "action_countermeasure",
+        "feasibility_tradeoff",
+        "priority_and_verification"
+      ]
     },
-    {
-      "id": "COMPARE",
-      "name": "비교·선정형",
-      "triggers": [
+    "COMPARE_SELECTION": {
+      "name_ko": "비교·선정형",
+      "absorbs_legacy_types": [
+        "COMPARE",
+        "STRUCTURE"
+      ],
+      "intent": "비교, 종류, 분류, 형식, 특징, 장단점, 선정 기준이 핵심인 문제",
+      "selection_signals": [
         "비교",
-        "차이",
+        "차이점",
         "장단점",
+        "종류",
+        "분류",
+        "형식",
+        "특징",
         "선정",
         "선택",
         "구분",
-        "대비",
+        "방식"
+      ],
+      "c_fact_focus": [
         "분류 기준",
-        "특성을 비교",
-        "감쇠비에 따라",
-        "응답특성을 비교"
-      ],
-      "c_lens": "비교 대상, 비교축, 장단점, 적용 조건, 선정 기준, trade-off를 설명했는가",
-      "c_required_elements": [
-        "비교 대상",
+        "각 방식의 구조·기능·특징",
         "비교축",
-        "장단점",
-        "적용 조건",
-        "선정 기준",
-        "trade-off",
-        "출제자가 제시한 비교축",
-        "구분 기준",
-        "특성 비교표"
+        "장점과 한계",
+        "적용 조건"
       ],
-      "weak_answer_pattern": "장단점만 나열하고 어떤 조건에서 무엇을 선택할지 기준이 없음",
-      "high_score_pattern": "비교축과 적용 조건을 근거로 선정 기준과 최종 판단을 제시함"
+      "d_field_judgement_focus": [
+        "현장 조건별 선정 판단",
+        "비용·정확도·응답속도·유지보수성 trade-off",
+        "안전성·신뢰성 판단",
+        "최종 선택 기준"
+      ],
+      "sub_criteria": [
+        "background_need",
+        "classification_axis",
+        "structure_features",
+        "comparison_axis",
+        "pros_cons_limits",
+        "application_conditions",
+        "selection_judgement"
+      ]
     },
-    {
-      "id": "PROBLEM_SOLVE",
-      "name": "문제점·개선방안형",
-      "triggers": [
-        "문제점",
-        "개선",
-        "개선방안",
-        "해결",
-        "보완",
-        "개선 대책"
+    "IMPLEMENTATION_EVALUATION": {
+      "name_ko": "적용·평가형",
+      "absorbs_legacy_types": [
+        "PROCEDURE",
+        "APPLICATION",
+        "EVALUATION",
+        "STRUCTURE"
       ],
-      "c_lens": "문제 현상, 문제 요구 파악, 원인, 영향, 개선 방향, 한계를 fact 기반으로 설명했는가",
-      "c_required_elements": [
-        "문제 현상",
-        "문제 요구 파악",
-        "원인",
-        "영향",
-        "개선 방향",
-        "한계"
-      ],
-      "weak_answer_pattern": "문제점과 개선방안을 나열하지만 원인과 개선안의 연결이 약함",
-      "high_score_pattern": "문제점 → 원인 → 개선방안 → 효과와 한계가 연결됨"
-    },
-    {
-      "id": "CAUSE_ACTION",
-      "name": "원인·대책형",
-      "triggers": [
-        "원인",
-        "대책",
-        "방지",
-        "예방",
-        "조치",
-        "발생 원인"
-      ],
-      "c_lens": "직접 원인, 근본 원인, 발생 메커니즘, 영향, 원인별 대책을 설명했는가",
-      "c_required_elements": [
-        "직접 원인",
-        "근본 원인",
-        "발생 메커니즘",
-        "영향",
-        "원인별 대책"
-      ],
-      "weak_answer_pattern": "원인과 대책을 각각 나열하지만 원인별 대책 매칭이 약함",
-      "high_score_pattern": "원인별로 대책이 대응되고 재발 방지까지 설명함"
-    },
-    {
-      "id": "PROCEDURE",
-      "name": "절차·방법론형",
-      "triggers": [
+      "intent": "적용, 사례, 절차, 방법, 시험, 교정, 시스템 구성, 평가, 효과 분석이 핵심인 문제",
+      "selection_signals": [
+        "적용",
+        "사례",
+        "활용",
         "절차",
         "방법",
-        "방법론",
-        "순서",
-        "수행",
-        "작성",
-        "시험 방법"
-      ],
-      "c_lens": "절차 순서, 입력 자료, 수행 방법, 판단 기준, 산출물, 기록·검증을 설명했는가",
-      "c_required_elements": [
-        "절차 순서",
-        "입력 자료",
-        "수행 방법",
-        "판단 기준",
-        "산출물",
-        "기록",
+        "교정",
+        "시험",
+        "검사",
+        "설치",
+        "구성도",
+        "시스템 구성",
+        "평가",
+        "성능지표",
+        "효과",
         "검증"
       ],
-      "weak_answer_pattern": "절차명을 나열하지만 선후관계, 판정 기준, 산출물이 없음",
-      "high_score_pattern": "입력 → 수행 → 판정 → 산출물 → 기록·검증이 절차적으로 연결됨"
-    },
-    {
-      "id": "CALC_DESIGN",
-      "name": "계산·설계형",
-      "triggers": [
-        "계산",
-        "산정",
-        "설계",
-        "용량",
-        "선정",
-        "공식",
-        "수식",
-        "계수",
-        "사이징"
-      ],
-      "c_lens": "공식, 변수, 단위, 계산 과정, 결과 해석, 설계 기준을 설명했는가",
-      "c_required_elements": [
-        "공식",
-        "변수 정의",
-        "단위",
-        "계산 과정",
-        "결과 해석",
-        "설계 기준"
-      ],
-      "weak_answer_pattern": "수식만 제시하고 변수, 단위, 결과 해석, 설계 기준 설명이 없음",
-      "high_score_pattern": "공식과 계산값의 의미를 설비 선정, 운전 조건, 설계 기준과 연결함"
-    },
-    {
-      "id": "APPLICATION",
-      "name": "사례·적용형",
-      "triggers": [
-        "사례",
-        "적용",
-        "활용",
-        "도입",
-        "현장 적용",
-        "응용"
-      ],
-      "c_lens": "적용 대상, 적용 조건, 제약, 적용 방식, 기대 효과를 fact 기반으로 설명했는가",
-      "c_required_elements": [
+      "c_fact_focus": [
         "적용 대상",
-        "적용 조건",
-        "제약",
-        "적용 방식",
-        "기대 효과"
-      ],
-      "weak_answer_pattern": "적용하면 좋다는 일반론만 있고 대상 공정과 조건이 없음",
-      "high_score_pattern": "구체적 공정, 적용 조건, 도입 방식, 리스크와 효과를 설명함"
-    },
-    {
-      "id": "EVALUATION",
-      "name": "평가·효과 분석형",
-      "triggers": [
-        "평가",
-        "효과",
-        "분석",
-        "성과",
-        "검증",
-        "타당성",
-        "경제성",
-        "ROI"
-      ],
-      "c_lens": "평가 대상, 평가 지표, 평가 방법, before/after, 정량·정성 효과, 한계를 설명했는가",
-      "c_required_elements": [
-        "평가 대상",
+        "시스템 구성",
+        "절차·방법",
+        "선정 기준",
         "평가 지표",
-        "평가 방법",
-        "before/after",
-        "정량 효과",
-        "정성 효과",
-        "한계"
+        "효과와 한계"
       ],
-      "weak_answer_pattern": "효과가 있다는 일반론만 있고 평가 지표와 비교 기준이 없음",
-      "high_score_pattern": "평가 지표와 전후 비교, 효과, 한계, 후속 조치를 제시함"
+      "d_field_judgement_focus": [
+        "기존 설비와의 연계",
+        "적용 조건",
+        "비용·효과",
+        "운영 리스크",
+        "유지보수성",
+        "적용 후 검증 방법",
+        "개선·확장 방향"
+      ],
+      "sub_criteria": [
+        "background_need",
+        "target_scope",
+        "system_configuration",
+        "procedure_method",
+        "selection_criteria",
+        "evaluation_metrics",
+        "operation_improvement_judgement"
+      ]
     }
-  ]
+  },
+  "legacy_mapping": {
+    "DEFINE": null,
+    "PRINCIPLE": "PRINCIPLE_INTERPRETATION",
+    "CALC_DESIGN": "PRINCIPLE_INTERPRETATION",
+    "PROBLEM_SOLVE": "DIAGNOSIS_ACTION",
+    "CAUSE_ACTION": "DIAGNOSIS_ACTION",
+    "COMPARE": "COMPARE_SELECTION",
+    "STRUCTURE": "COMPARE_SELECTION",
+    "PROCEDURE": "IMPLEMENTATION_EVALUATION",
+    "APPLICATION": "IMPLEMENTATION_EVALUATION",
+    "EVALUATION": "IMPLEMENTATION_EVALUATION"
+  },
+  "fallback_type": "PRINCIPLE_INTERPRETATION",
+  "structure_policy": "STRUCTURE는 독립 question_type이 아니다. 구성·구조·기능·종류는 각 대분류의 fact 설명 요소로 흡수한다."
 }
