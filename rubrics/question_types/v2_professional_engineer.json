@@ -1,0 +1,223 @@
+{
+  "version": "2.0",
+  "description": "산업계측제어기술사 2~4교시 답안용 question_type 대분류와 세부 채점 lens. question_type은 A/B/C/D/E 점수체계를 대체하지 않고 C항목 Fact 전개와 D항목 현장 판단을 보완한다.",
+  "scoring_principle": {
+    "common_structure": [
+      "A. 배경과 문제 진입",
+      "B. 문제 요구 파악",
+      "C. Fact 기반 설명",
+      "D. 현장 적용·판단·제언",
+      "E. 연결성·면접 방어 가능성"
+    ],
+    "question_type_role": "question_type은 별도 점수체계가 아니라 C항목의 fact 설명 방향과 D항목의 현장 판단 방향을 정하는 lens이다.",
+    "first_period_policy": "1교시 단답형은 분석 대상에서 제외한다. DEFINE은 신규 체계에서 사용하지 않는다."
+  },
+  "types": {
+    "PRINCIPLE_INTERPRETATION": {
+      "name_ko": "원리·해석형",
+      "absorbs_legacy_types": [
+        "PRINCIPLE",
+        "CALC_DESIGN"
+      ],
+      "intent": "원리, 동작, 계산, 설계, 수식, 모델, 계측·제어 원리 해석이 핵심인 문제",
+      "selection_signals": [
+        "원리",
+        "동작",
+        "계산",
+        "구하시오",
+        "산출",
+        "설계",
+        "전달함수",
+        "상태방정식",
+        "안정도",
+        "응답특성",
+        "감도",
+        "분해능",
+        "오차",
+        "모델",
+        "회로",
+        "제어",
+        "계측원리"
+      ],
+      "c_fact_focus": [
+        "대상 시스템·계기·회로·제어 loop의 구성요소",
+        "동작 원리와 물리적 의미",
+        "수식·모델·변수·단위",
+        "계산 또는 해석 과정",
+        "결과값 또는 응답특성의 의미"
+      ],
+      "d_field_judgement_focus": [
+        "선정 또는 설계 판단",
+        "tuning, 안정성, 제어성, 오차 영향",
+        "현장 적용 한계",
+        "유지보수와 운전 조건",
+        "비용·성능 trade-off"
+      ],
+      "sub_criteria": [
+        "background_need",
+        "structure_components",
+        "principle_mechanism",
+        "formula_model_variables",
+        "calculation_or_interpretation",
+        "result_meaning",
+        "field_judgement"
+      ]
+    },
+    "DIAGNOSIS_ACTION": {
+      "name_ko": "진단·대책형",
+      "absorbs_legacy_types": [
+        "PROBLEM_SOLVE",
+        "CAUSE_ACTION"
+      ],
+      "intent": "문제점, 원인, 영향, 대책, 개선방안, 고려사항, 방지대책이 핵심인 문제",
+      "selection_signals": [
+        "문제점",
+        "원인",
+        "발생원인",
+        "대책",
+        "개선방안",
+        "고려사항",
+        "유의사항",
+        "방지",
+        "저감",
+        "영향",
+        "리스크",
+        "장애",
+        "고장"
+      ],
+      "c_fact_focus": [
+        "무엇이 문제인지",
+        "왜 발생하는지",
+        "발생 메커니즘",
+        "품질·안전·신뢰성·제어성·유지보수 영향",
+        "기술적 대책"
+      ],
+      "d_field_judgement_focus": [
+        "대책의 실현 가능성",
+        "비용과 기존 설비 영향",
+        "운전·정비 측면 적용성",
+        "우선순위",
+        "trade-off와 검증 방법"
+      ],
+      "sub_criteria": [
+        "background_need",
+        "problem_definition",
+        "cause_mechanism",
+        "impact_risk",
+        "action_countermeasure",
+        "feasibility_tradeoff",
+        "priority_and_verification"
+      ]
+    },
+    "COMPARE_SELECTION": {
+      "name_ko": "비교·선정형",
+      "absorbs_legacy_types": [
+        "COMPARE",
+        "STRUCTURE"
+      ],
+      "intent": "비교, 종류, 분류, 형식, 특징, 장단점, 선정 기준이 핵심인 문제",
+      "selection_signals": [
+        "비교",
+        "차이점",
+        "장단점",
+        "종류",
+        "분류",
+        "형식",
+        "특징",
+        "선정",
+        "선택",
+        "구분",
+        "방식"
+      ],
+      "c_fact_focus": [
+        "분류 기준",
+        "각 방식의 구조·기능·특징",
+        "비교축",
+        "장점과 한계",
+        "적용 조건"
+      ],
+      "d_field_judgement_focus": [
+        "현장 조건별 선정 판단",
+        "비용·정확도·응답속도·유지보수성 trade-off",
+        "안전성·신뢰성 판단",
+        "최종 선택 기준"
+      ],
+      "sub_criteria": [
+        "background_need",
+        "classification_axis",
+        "structure_features",
+        "comparison_axis",
+        "pros_cons_limits",
+        "application_conditions",
+        "selection_judgement"
+      ]
+    },
+    "IMPLEMENTATION_EVALUATION": {
+      "name_ko": "적용·평가형",
+      "absorbs_legacy_types": [
+        "PROCEDURE",
+        "APPLICATION",
+        "EVALUATION",
+        "STRUCTURE"
+      ],
+      "intent": "적용, 사례, 절차, 방법, 시험, 교정, 시스템 구성, 평가, 효과 분석이 핵심인 문제",
+      "selection_signals": [
+        "적용",
+        "사례",
+        "활용",
+        "절차",
+        "방법",
+        "교정",
+        "시험",
+        "검사",
+        "설치",
+        "구성도",
+        "시스템 구성",
+        "평가",
+        "성능지표",
+        "효과",
+        "검증"
+      ],
+      "c_fact_focus": [
+        "적용 대상",
+        "시스템 구성",
+        "절차·방법",
+        "선정 기준",
+        "평가 지표",
+        "효과와 한계"
+      ],
+      "d_field_judgement_focus": [
+        "기존 설비와의 연계",
+        "적용 조건",
+        "비용·효과",
+        "운영 리스크",
+        "유지보수성",
+        "적용 후 검증 방법",
+        "개선·확장 방향"
+      ],
+      "sub_criteria": [
+        "background_need",
+        "target_scope",
+        "system_configuration",
+        "procedure_method",
+        "selection_criteria",
+        "evaluation_metrics",
+        "operation_improvement_judgement"
+      ]
+    }
+  },
+  "legacy_mapping": {
+    "DEFINE": null,
+    "PRINCIPLE": "PRINCIPLE_INTERPRETATION",
+    "CALC_DESIGN": "PRINCIPLE_INTERPRETATION",
+    "PROBLEM_SOLVE": "DIAGNOSIS_ACTION",
+    "CAUSE_ACTION": "DIAGNOSIS_ACTION",
+    "COMPARE": "COMPARE_SELECTION",
+    "STRUCTURE": "COMPARE_SELECTION",
+    "PROCEDURE": "IMPLEMENTATION_EVALUATION",
+    "APPLICATION": "IMPLEMENTATION_EVALUATION",
+    "EVALUATION": "IMPLEMENTATION_EVALUATION"
+  },
+  "fallback_type": "PRINCIPLE_INTERPRETATION",
+  "structure_policy": "STRUCTURE는 독립 question_type이 아니다. 구성·구조·기능·종류는 각 대분류의 fact 설명 요소로 흡수한다."
+}
