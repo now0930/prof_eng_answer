@@ -1,91 +1,153 @@
-# 채점 구조: A/B/C/D/E Architecture
+# 채점 구조
 
 이 문서는 산업계측제어기술사 답안 채점 구조를 설명한다.
 
-README는 프로젝트 개요와 실행 방법만 제공하고, 채점 구조 상세 설명은 이 문서에서 관리한다.
+기본 채점 체계는 A/B/C/D/E 25점 구조이다.  
+난이도, 문제유형, 모범답안, LLM semantic grader는 이 구조를 대체하지 않고 보조한다.
 
-## 1. 기본 채점 구조
+---
 
-25점 문항은 다음 5개 항목으로 평가한다.
+## 1. 기본 점수 구조
 
-| 항목 | 설명 | 배점 |
-|---|---|---:|
-| A | 배경과 문제 진입 | 4 |
-| B | 문제 요구 파악 | 5 |
-| C | 유형별 Fact 기반 내용 설명 | 8 |
-| D | 현장 적용·설계 판단·제언 | 6 |
-| E | 연결성·면접 방어 가능성 | 2 |
-| 합계 |  | 25 |
+| 항목 | 배점 | 의미 |
+|---|---:|---|
+| A | 4 | 배경과 문제 진입 |
+| B | 5 | 문제 요구 파악 |
+| C | 8 | 유형별 Fact 기반 내용 설명 |
+| D | 6 | 현장 적용, 설계 판단, 제언 |
+| E | 2 | 연결성, 면접 방어 가능성 |
 
-핵심 원칙은 다음과 같다.
+총점은 25점이다.
 
-- 문제 유형은 별도 점수 체계가 아니라 C항목 평가 렌즈로 사용한다.
-- Fact Anchor Bank는 주제별 핵심 Fact를 확인하는 기준이다.
-- Model Answer Bank는 동일 문장 매칭용이 아니라 구조, 깊이, 현장 적용성 기준으로 사용한다.
-- D/E는 모든 문제 유형에서 현장 적용성, 설계 판단, 제언, 독창성을 공통 평가한다.
-- LLM semantic grader는 의미 평가를 수행한다.
-- Python rule은 volume cap, 3인 layer 가중치, originality gate, fallback, 출력 후처리를 관리한다.
+---
 
-## 2. 문제 유형 Lens
+## 2. 평가 핵심
 
-문제 유형은 다음 10개를 사용한다.
+채점은 다음을 본다.
 
-| 유형 | 설명 |
+- 문제 의도 파악
+- 기술사가 알아야 할 fact 기반 설명
+- 문제점, 리스크, 적용상 쟁점 진단
+- 해결책, 설계안, 대책 또는 제언
+- 본인 판단, 현장 노하우, 적용 조건, trade-off
+- 배경에서 제언까지의 연결성
+
+---
+
+## 3. Question Type Lens
+
+문제 유형은 별도 채점 agent가 아니다.  
+기존 A/B/C/D/E 구조를 유지하면서 C항목의 Fact 설명 방식을 보정하는 lens로 사용한다.
+
+| Type | 의미 |
 |---|---|
-| DEFINE | 정의·개념 설명형 |
-| PRINCIPLE | 원리·메커니즘형 |
-| STRUCTURE | 구성·분류형 |
-| COMPARE | 비교·선정형 |
-| PROBLEM_SOLVE | 문제점·개선방안형 |
-| CAUSE_ACTION | 원인·대책형 |
-| PROCEDURE | 절차·방법론형 |
-| CALC_DESIGN | 계산·설계형 |
-| APPLICATION | 사례·적용형 |
-| EVALUATION | 평가·효과 분석형 |
+| `DEFINE` | 정의·개념 설명형 |
+| `PRINCIPLE` | 원리·메커니즘형 |
+| `STRUCTURE` | 구성·분류형 |
+| `COMPARE` | 비교·선정형 |
+| `PROBLEM_SOLVE` | 문제점·개선방안형 |
+| `CAUSE_ACTION` | 원인·대책형 |
+| `PROCEDURE` | 절차·방법론형 |
+| `CALC_DESIGN` | 계산·설계형 |
+| `APPLICATION` | 사례·적용형 |
+| `EVALUATION` | 평가·효과 분석형 |
 
-이 유형들은 별도 agent가 아니라 `C. 유형별 Fact 기반 내용 설명`의 평가 방식만 결정한다.
+---
 
-## 3. 주요 평가 구성요소
+## 4. Model Answer Bank
 
-| 구성요소 | 역할 |
+모범 답안은 문장 매칭용 정답지가 아니다.
+
+사용 목적:
+
+- 답안 구조 기준
+- 설명 깊이 기준
+- 현장 적용성 기준
+- 보완 피드백 기준
+
+사용하지 않는 방식:
+
+- 문장 그대로 매칭
+- 모범 답안과 다르면 감점
+- 키워드 개수만으로 점수 산정
+
+---
+
+## 5. 현재 Pipeline 순서
+
+현재 주요 채점 pipeline은 다음 순서를 따른다.
+
+```text
+1. 기본 채점자별 분석
+2. Gemini 또는 CLOVA semantic grader 적용
+3. phase2 layered scoring 적용
+4. phase20 difficulty strategy 출력
+5. phase21 difficulty ceiling 적용
+```
+
+정상 로그 예:
+
+```text
+[agent] phase2 layered scoring applied: ...
+[agent] phase20 final difficulty strategy applied: ...
+[agent] phase21 final difficulty ceiling evaluated: ...
+```
+
+중요 순서:
+
+```text
+phase2 -> phase20 -> phase21
+```
+
+이 순서가 중요한 이유는 phase21이 최종 점수를 기준으로 ceiling을 적용하기 때문이다.  
+phase21이 phase2보다 먼저 실행되면 phase2가 점수를 다시 덮어쓸 수 있다.
+
+---
+
+## 6. Phase 역할
+
+| Phase | 역할 |
 |---|---|
-| Fact Anchor Bank | 주제별로 반드시 들어가야 할 핵심 Fact 확인 |
-| Question Type Lens | 문제 유형에 따라 C항목의 Fact 전개 방식 결정 |
-| Model Answer Bank | 주제 + 문제유형별 기준 답안 참조 |
-| Originality | 현장 조건, 대안 비교, 적용 우선순위, 검증 기준 평가 |
-| Volume Cap | 답안 분량이 지나치게 짧을 경우 최종 점수 상한 적용 |
-| 3인 Layer Weighting | 교수, 기술사, 기업 임원 관점의 layer별 가중 합성 |
+| phase2 | layered scoring으로 최종 점수 계산 |
+| phase20 | 난이도 Profile, 선택 중요도, 고득점 조건 설명 |
+| phase21 | 난이도별 ceiling 또는 THEORY_CORE unlock 조건 적용 |
 
-## 4. 현재 주요 Phase
+phase20은 설명 layer이다.  
+phase21은 `DIFFICULTY_CEILING_MODE=strict`일 때 실제 점수를 제한할 수 있다.
 
-| Phase | 내용 |
-|---|---|
-| phase8 | 독창성·기술사적 판단성 평가 |
-| phase8b | 독창성 반영 후 최종 volume cap 강제 |
-| phase9 | question_type을 C항목 평가 렌즈로 적용 |
-| phase10 | model answer bank를 기준 답안으로 참조 |
-| phase11 | B/C 명칭을 문제 요구·유형별 Fact 설명으로 정리 |
-| phase12 | D/E 표현을 현장 적용·설계 판단·제언 중심으로 정리 |
-| phase13 | rubric_registry와 rubric_manager로 기준 작성 workflow 정리 |
-| phase14 | Telegram 보완 방향 중복 제거 |
-| phase15 | 내부 metric dict 숨김 |
-| phase16 | 최종 사용자 문구 polish |
-| phase17 | 잔여 표현 정리 |
-| phase18 | Gemini 503/timeout retry wrapper |
-| phase19 | Gemini + CLOVA provider 선택 구조 |
+---
 
-## 5. 산출물
+## 7. Fallback 채점
 
-각 채점 세션은 `data/sessions/`에 저장된다.
+로그에 다음이 나올 수 있다.
 
-주요 산출물은 다음과 같다.
+```text
+모델 분석 JSON 파싱에 실패하여 fallback 채점을 적용합니다.
+```
 
-- `grade.json`
-- `volume_evaluation.json`
-- `fact_anchor_evaluation.json`
-- `connection_evaluation.json`
-- `interview_followup.json`
-- `rater_weighted_evaluation.json`
-- `gemini_semantic_evaluation.json`
+이는 초기 로컬 모델 분석 단계에서 JSON 파싱이 실패했다는 의미이다.  
+이후 Gemini 또는 CLOVA semantic grader가 정상 적용되면 전체 채점은 계속 진행된다.
 
-주의: 기존 호환성 때문에 semantic evaluation 파일명은 `gemini_semantic_evaluation.json`으로 남아 있을 수 있다. 실제 provider는 파일 내부의 `llm_provider` 값을 확인한다.
+fallback 로그는 곧바로 전체 채점 실패를 의미하지 않는다.
+
+---
+
+## 8. Session 산출물
+
+채점 결과는 session 디렉터리에 저장된다.
+
+```text
+data/sessions/<session_id>/
+```
+
+주요 산출물 예:
+
+```text
+gemini_semantic_evaluation.json
+active_profile.json
+scoring_model.json
+subject_rubric.json
+layered_rater.json
+```
+
+파일명에 `gemini`가 남아 있어도 내부 `llm_provider` 값으로 실제 provider를 판단한다.

@@ -17,7 +17,7 @@ if [ -z "${BOT_TOKEN:-}" ] && [ -n "${TELEGRAM_BOT_TOKEN:-}" ]; then
 fi
 
 if [ -z "${TELEGRAM_BOT_TOKEN:-}" ] && [ -z "${BOT_TOKEN:-}" ]; then
-  echo "[$(date -Is)] ERROR: Telegram bot token is not set. Set TELEGRAM_BOT_TOKEN or BOT_TOKEN in ~/hermes/.env" >> logs/prof_eng_answer.log
+  echo "[$(date -Is)] ERROR: Telegram bot token is not set. Set TELEGRAM_BOT_TOKEN or BOT_TOKEN in .env" >> logs/prof_eng_answer.log
   exit 1
 fi
 

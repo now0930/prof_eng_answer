@@ -1,88 +1,200 @@
-# Docker Compose 사용 예시
+# Docker Compose 운영 방식
 
-이 문서는 prof_eng_answer 프로젝트를 다른 환경에서 받을 때 Docker Compose로 실행하는 방법을 설명한다.
+이 문서는 `prof_eng_answer` Telegram Bot의 Docker 실행 구조를 설명한다.
 
-실제 운영 환경의 docker-compose.yml은 사용자마다 경로, Docker network, Ollama 위치, API key 설정이 다를 수 있으므로 GitHub에는 docker-compose.example.yml만 포함한다.
-
----
-
-## 1. 기본 사용 순서
-
-아래 흐름으로 사용한다.
-
-    git clone https://github.com/now0930/prof_eng_answer.git
-    cd prof_eng_answer
-
-    cp docker-compose.example.yml docker-compose.yml
-    cp .env.example .env
-
-    vim .env
-    docker compose up -d
+운영 환경에서는 상위 `~/hermes/docker-compose.yml`을 사용한다.  
+Repo 내부의 `docker-compose.yaml`은 단독 실행 또는 예시용이다.
 
 ---
 
-## 2. .env 설정
+## 1. 운영 구조
 
-.env에는 실제 key와 모델 정보를 입력한다.
+운영 환경은 두 컨테이너로 분리한다.
 
-예시:
+| 서비스 | 컨테이너 | 역할 |
+|---|---|---|
+| `hermes` | `hermes_agent` | Hermes agent 기본 컨테이너 |
+| `prof-eng-answer-bot` | `prof_eng_answer_bot` | Telegram 채점 Bot 자동 실행 |
 
-    GEMINI_API_KEY=your_gemini_api_key
-    GEMINI_MODEL=gemini-3.1-flash-lite
-
-    OLLAMA_URL=http://ollama:11434
-    OLLAMA_MODEL=
-
-    TELEGRAM_BOT_TOKEN=your_telegram_bot_token
-
-.env는 민감정보를 포함하므로 Git에 커밋하지 않는다.
+`hermes` 서비스는 Telegram Bot용 `.env`를 직접 사용하지 않는다.  
+Telegram token, Gemini, CLOVA, difficulty ceiling 설정은 `prof-eng-answer-bot` 서비스에서 사용한다.
 
 ---
 
-## 3. Ollama 연결 방식
+## 2. 운영 compose 위치
 
-### Ollama가 같은 Docker network에 있는 경우
+운영 compose 파일 위치:
 
-OLLAMA_URL은 다음처럼 둔다.
+```text
+~/hermes/docker-compose.yml
+```
 
-    OLLAMA_URL=http://ollama:11434
+프로젝트 mount 위치:
 
-이 경우 ai_net 네트워크가 필요하다.
+```text
+/home/now0930/hermes/workspace:/workspace
+```
 
-    docker network create ai_net
+Bot 실행 경로:
 
-이미 존재하면 생성하지 않아도 된다.
-
-### Ollama가 host에서 실행 중인 경우
-
-환경에 따라 아래처럼 바꿀 수 있다.
-
-    OLLAMA_URL=http://host.docker.internal:11434
-
-Linux에서 이 방식을 쓰려면 docker-compose.yml에 다음 설정이 필요할 수 있다.
-
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
+```text
+/workspace/prof_eng_answer
+```
 
 ---
 
-## 4. 실행
+## 3. Bot 자동 실행
 
-    docker compose up -d
-    docker ps
-    docker logs -f prof_eng_answer_bot
+`prof-eng-answer-bot`은 Docker 시작 시 다음 스크립트를 실행한다.
+
+```text
+scripts/run_prof_eng_bot.sh
+```
+
+스크립트 역할:
+
+- `/workspace/prof_eng_answer`로 이동
+- `logs/prof_eng_answer.log` 생성
+- `TELEGRAM_BOT_TOKEN`, `BOT_TOKEN`, `TELEGRAM_TOKEN` 호환 처리
+- `DIFFICULTY_CEILING_MODE` 로그 출력
+- `python -u bot.py` 실행
+
+수동으로 `hermes_agent` 안에서 `nohup python bot.py`를 실행하지 않는다.  
+수동 실행하면 Telegram polling이 중복될 수 있다.
 
 ---
 
-## 5. 중지
+## 4. 실행 명령
 
-    docker compose down
+전체 실행:
+
+```bash
+cd ~/hermes
+docker compose up -d
+```
+
+상태 확인:
+
+```bash
+cd ~/hermes
+docker compose ps
+```
+
+정상 예:
+
+```text
+hermes_agent          Up
+prof_eng_answer_bot   Up
+```
+
+Bot만 재시작:
+
+```bash
+cd ~/hermes
+docker compose restart prof-eng-answer-bot
+```
+
+전체 재생성:
+
+```bash
+cd ~/hermes
+docker compose up -d --force-recreate hermes prof-eng-answer-bot
+```
 
 ---
 
-## 6. 주의사항
+## 5. 로그 확인
 
-- 실제 운영용 docker-compose.yml은 사용자 환경에 맞게 수정한다.
-- GitHub에는 docker-compose.example.yml만 커밋한다.
-- .env, logs/, data/sessions/, backups/, hermes_home/은 커밋하지 않는다.
-- Telegram token, Gemini API key 등 민감정보는 절대 README나 코드에 직접 쓰지 않는다.
+Host 로그:
+
+```bash
+tail -n 120 ~/hermes/workspace/prof_eng_answer/logs/prof_eng_answer.log
+```
+
+Docker 로그:
+
+```bash
+docker logs --tail=120 prof_eng_answer_bot
+```
+
+컨테이너 상태:
+
+```bash
+docker inspect prof_eng_answer_bot --format 'Status={{{{.State.Status}}}} Restarting={{{{.State.Restarting}}}} ExitCode={{{{.State.ExitCode}}}}'
+```
+
+---
+
+## 6. 중복 실행 확인
+
+정상 상태에서는 `bot.py`가 `prof_eng_answer_bot`에만 있어야 한다.
+
+```bash
+docker exec prof_eng_answer_bot bash -lc 'pgrep -af "python.*bot.py" || true'
+docker exec hermes_agent bash -lc 'pgrep -af "python.*bot.py" || true'
+```
+
+정상 기준:
+
+| 컨테이너 | 기대 상태 |
+|---|---|
+| `prof_eng_answer_bot` | `python -u bot.py` 1개 |
+| `hermes_agent` | 없음 |
+
+`hermes_agent`에 bot.py가 떠 있으면 중지한다.
+
+```bash
+docker exec hermes_agent bash -lc 'pkill -f "python.*bot.py" || true'
+```
+
+---
+
+## 7. 환경변수
+
+운영 환경변수는 상위 `.env`에서 관리한다.
+
+```text
+~/hermes/.env
+```
+
+Repo 단독 실행 시에는 repo 루트의 `.env`를 사용할 수 있다.
+
+```text
+./.env
+```
+
+중요 변수:
+
+| 변수 | 설명 |
+|---|---|
+| `TELEGRAM_BOT_TOKEN` 또는 `BOT_TOKEN` | Telegram Bot token |
+| `OLLAMA_URL` | Ollama API URL |
+| `OLLAMA_MODEL` | 로컬 분석 모델 |
+| `GEMINI_API_KEY` | Gemini API key |
+| `GEMINI_MODEL` | Gemini 채점 모델 |
+| `LLM_PROVIDER` | `auto`, `gemini`, `clova` |
+| `CLOVA_API_KEY` | CLOVA Studio API key |
+| `DIFFICULTY_CEILING_MODE` | `warn` 또는 `strict` |
+
+`.env`는 Git에 올리지 않는다.
+
+---
+
+## 8. Repo compose 파일
+
+Repo 내부 compose 파일:
+
+```text
+docker-compose.yaml
+docker-compose.example.yml
+```
+
+Repo compose는 단독 실행 또는 예시용이다.
+
+```bash
+cd ~/hermes/workspace/prof_eng_answer
+docker compose -f docker-compose.yaml config
+docker compose -f docker-compose.yaml up -d
+```
+
+운영에서는 상위 `~/hermes/docker-compose.yml`을 우선 사용한다.
