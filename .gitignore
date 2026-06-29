@@ -49,3 +49,9 @@ __pycache__/
 
 # user runtime settings
 data/user_settings/
+
+# WordPress export and LLM working files
+wordpress_docs/
+
+# Temporary rubric content candidates
+rubrics/content_candidates/
