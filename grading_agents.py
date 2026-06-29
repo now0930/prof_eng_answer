@@ -2636,28 +2636,6 @@ def _phase2_postprocess_grade(legacy_result):
     grade = _phase15_hide_internal_metric_dict(grade)
     grade = _phase16_polish_final_output(grade)
     grade = _phase17_final_phrase_cleanup(grade)
-    # PHASE20_DIFFICULTY_SELECTION_OUTPUT
-    try:
-        from difficulty_output_adapter import attach_difficulty_strategy_to_grade
-        _question_for_difficulty = (
-            locals().get("question")
-            or locals().get("question_text")
-            or locals().get("problem")
-            or locals().get("exam_question")
-        )
-        grade = attach_difficulty_strategy_to_grade(
-            grade,
-            question_text=_question_for_difficulty
-        )
-        _ds = grade.get("difficulty_strategy", {})
-        print(
-            "[agent] phase20 difficulty strategy applied: "
-            f"difficulty={_ds.get('difficulty')}, "
-            f"importance={_ds.get('selection_importance')}, "
-            f"topic={_ds.get('topic_id')}"
-        )
-    except Exception as e:
-        print(f"[agent] phase20 difficulty strategy skipped: {e}")
 
     grade = _phase2_add_display_aliases(grade)
 
@@ -2672,6 +2650,57 @@ def _phase2_postprocess_grade(legacy_result):
         "[agent] phase2 layered scoring applied: "
         f"{total_score}/{max_score}, volume={volume.get('level')}, session={session_dir.name}"
     )
+
+    # PHASE20_DIFFICULTY_SELECTION_OUTPUT_FINAL
+    try:
+        from difficulty_output_adapter import attach_difficulty_strategy_to_grade
+        _question_for_difficulty_final = (
+            locals().get("question")
+            or locals().get("question_text")
+            or locals().get("problem")
+            or locals().get("exam_question")
+        )
+        grade = attach_difficulty_strategy_to_grade(
+            grade,
+            question_text=_question_for_difficulty_final
+        )
+        _ds = grade.get("difficulty_strategy", {})
+        print(
+            "[agent] phase20 final difficulty strategy applied: "
+            f"difficulty={_ds.get('difficulty')}, "
+            f"importance={_ds.get('selection_importance')}, "
+            f"topic={_ds.get('topic_id')}"
+        )
+    except Exception as e:
+        print(f"[agent] phase20 final difficulty strategy skipped: {e}")
+
+    # PHASE21_DIFFICULTY_SCORE_CEILING_FINAL_ORDERED
+    try:
+        from difficulty_score_ceiling import apply_difficulty_score_ceiling
+        _answer_for_difficulty_final = (
+            locals().get("answer")
+            or locals().get("answer_text")
+            or locals().get("student_answer")
+            or locals().get("ocr_text")
+            or locals().get("raw_text")
+        )
+        grade = apply_difficulty_score_ceiling(
+            grade,
+            question_text=_question_for_difficulty_final,
+            answer_text=_answer_for_difficulty_final
+        )
+        _cap = grade.get("difficulty_ceiling_evaluation", {})
+        print(
+            "[agent] phase21 final difficulty ceiling evaluated: "
+            f"mode={_cap.get('mode')}, "
+            f"difficulty={_cap.get('difficulty')}, "
+            f"original_score={_cap.get('original_score')}, "
+            f"recommended_cap={_cap.get('recommended_cap')}, "
+            f"capped_score={_cap.get('capped_score')}, "
+            f"applied={_cap.get('cap_applied')}"
+        )
+    except Exception as e:
+        print(f"[agent] phase21 final difficulty ceiling skipped: {e}")
 
     return grade
 

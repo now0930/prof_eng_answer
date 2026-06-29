@@ -14,7 +14,7 @@
     {
       "id": "cv_valve_flow_coefficient_DEFINE_v1",
       "topic_id": "cv_valve_flow_coefficient",
-      "question_type": "DEFINE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
       "title": "Cv 밸브 유량계수 정의형 모범 답안",
       "question_examples": [
         "밸브 계수(Cv)에 대해 설명하시오.",
@@ -58,12 +58,13 @@
       ],
       "revision_notes": [
         "초기 샘플 답안. 향후 실제 채점 사례를 반영해 개도 범위, 제조사 sizing sheet, FL/FP/Fd 계수까지 확장 가능."
-      ]
+      ],
+      "legacy_question_type": "DEFINE"
     },
     {
       "id": "cv_valve_flow_coefficient_CALC_DESIGN_v1",
       "topic_id": "cv_valve_flow_coefficient",
-      "question_type": "CALC_DESIGN",
+      "question_type": "PRINCIPLE_INTERPRETATION",
       "title": "Cv 계산·설계형 모범 답안",
       "question_examples": [
         "Cv 계산식을 이용한 밸브 선정 방법을 설명하시오.",
@@ -110,12 +111,13 @@
       ],
       "revision_notes": [
         "계산형도 C항목의 평가 렌즈로만 사용한다. 별도 총점 체계는 만들지 않는다."
-      ]
+      ],
+      "legacy_question_type": "CALC_DESIGN"
     },
     {
       "id": "control_valve_cavitation_CAUSE_ACTION_v1",
       "topic_id": "control_valve_cavitation",
-      "question_type": "CAUSE_ACTION",
+      "question_type": "DIAGNOSIS_ACTION",
       "title": "제어밸브 캐비테이션 원인·대책형 모범 답안",
       "question_examples": [
         "제어밸브 캐비테이션의 발생 원인과 대책을 설명하시오.",
@@ -161,12 +163,13 @@
       ],
       "revision_notes": [
         "Fact Anchor Bank의 cavitation anchor와 직접 연결되는 샘플 답안."
-      ]
+      ],
+      "legacy_question_type": "CAUSE_ACTION"
     },
     {
       "id": "temperature_sensor_thermocouple_rtd_COMPARE_v1",
       "topic_id": "temperature_sensor_thermocouple_rtd",
-      "question_type": "COMPARE",
+      "question_type": "COMPARE_SELECTION",
       "title": "열전대와 RTD 비교·선정형 모범 답안",
       "question_examples": [
         "열전대와 RTD를 비교하고 선정 기준을 설명하시오.",
@@ -212,12 +215,13 @@
       ],
       "revision_notes": [
         "COMPARE 유형 샘플. 향후 IEC/KS 센서 등급, 2선식/3선식/4선식 보상 내용을 추가 가능."
-      ]
+      ],
+      "legacy_question_type": "COMPARE"
     },
     {
       "id": "calibration_error_accuracy_precision_PROCEDURE_v1",
       "topic_id": "calibration_error_accuracy_precision",
-      "question_type": "PROCEDURE",
+      "question_type": "IMPLEMENTATION_EVALUATION",
       "title": "계측기 교정 절차형 모범 답안",
       "question_examples": [
         "계측기 교정 절차를 설명하시오.",
@@ -268,12 +272,13 @@
       ],
       "revision_notes": [
         "PROCEDURE 유형 샘플. 교정 대상별 압력/온도/유량/전기 신호 절차로 확장 가능."
-      ]
+      ],
+      "legacy_question_type": "PROCEDURE"
     },
     {
       "id": "smart_factory_iiot_digital_twin_EVALUATION_v1",
       "topic_id": "smart_factory_iiot_digital_twin",
-      "question_type": "EVALUATION",
+      "question_type": "IMPLEMENTATION_EVALUATION",
       "title": "스마트팩토리 도입 효과 평가형 모범 답안",
       "question_examples": [
         "스마트팩토리 도입 효과를 평가하시오.",
@@ -324,12 +329,13 @@
       ],
       "revision_notes": [
         "EVALUATION 유형 샘플. 차체공장, 조립공장, 공정별 지표로 세분화 가능."
-      ]
+      ],
+      "legacy_question_type": "EVALUATION"
     },
     {
       "id": "cv_valve_flow_coefficient_COMPARE_v1",
       "topic_id": "cv_valve_flow_coefficient",
-      "question_type": "COMPARE",
+      "question_type": "COMPARE_SELECTION",
       "title": "Cv 비교·선정형 모범 답안",
       "question_examples": [
         "Cv와 Kv를 비교하고 적용 기준을 설명하시오.",
@@ -403,12 +409,13 @@
         "Cv/Kv 비교형 초기 모범 답안.",
         "모범 답안은 정답 문장 매칭용이 아니라 구조·깊이·현장 적용성 기준으로 사용한다.",
         "향후 제조사 sizing sheet, IEC/ISA 기준, 액체/기체/증기 sizing 차이를 추가 가능."
-      ]
+      ],
+      "legacy_question_type": "COMPARE"
     },
     {
       "id": "second_order_lag_response_COMPARE_v1",
       "topic_id": "second_order_lag_response_by_damping_ratio",
-      "question_type": "COMPARE",
+      "question_type": "COMPARE_SELECTION",
       "title": "2차 지연시스템 감쇠비별 응답특성 비교형 모범 답안",
       "topic_aliases": [
         "2차 지연시스템",
@@ -473,7 +480,8 @@
       "revision_notes": [
         "139회 산업계측제어기술사 3교시 1번 채점 피드백 반영.",
         "관련 이론이 맞더라도 출제자가 제시한 응답축을 충분히 설명하지 않으면 낮게 평가하도록 추가."
-      ]
+      ],
+      "legacy_question_type": "COMPARE"
     }
   ]
 }

@@ -699,3 +699,130 @@ def gemini_semantic_grade(*args, **kwargs):
         question_text=question_text,
         existing_question_type=existing_question_type,
     )
+
+# === final qtype semantic prompt wrapper v4 EOF ===
+# This wrapper must stay near the end of this file because build_gemini_grading_prompt
+# is redefined multiple times by phase wrappers.
+try:
+    from semantic_question_type_prompt import (
+        build_question_type_json_contract,
+        build_question_type_semantic_guidance,
+    )
+
+    _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_QTYPE_V4_EOF = build_gemini_grading_prompt
+
+    def build_gemini_grading_prompt(question_text, answer_text, *args, **kwargs):
+        base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_QTYPE_V4_EOF(
+            question_text,
+            answer_text,
+            *args,
+            **kwargs,
+        )
+
+        if not isinstance(base_prompt, str):
+            return base_prompt
+
+        if (
+            "Question Type v2 평가 지침" in base_prompt
+            and "MANDATORY QUESTION_TYPE_COVERAGE OUTPUT CONTRACT" in base_prompt
+            and "QTYPE_HARD_JSON_TEMPLATE_V4" in base_prompt
+        ):
+            return base_prompt
+
+        existing_question_type = (
+            kwargs.get("question_type")
+            or kwargs.get("detected_question_type")
+            or kwargs.get("legacy_question_type")
+        )
+
+        try:
+            qtype_guidance = build_question_type_semantic_guidance(
+                question_text,
+                existing_question_type=existing_question_type,
+            )
+            qtype_contract = build_question_type_json_contract(
+                question_text,
+                existing_question_type=existing_question_type,
+            )
+        except Exception as exc:
+            qtype_guidance = (
+                "[Question Type v2 평가 지침]\n"
+                "question_type 세부 평가 지침 생성에 실패했습니다. "
+                f"기존 A/B/C/D/E 기준으로 평가하세요. error={exc}"
+            )
+            qtype_contract = (
+                "[MANDATORY QUESTION_TYPE_COVERAGE OUTPUT CONTRACT]\n"
+                "최종 JSON root object에 question_type_coverage 필드를 반드시 포함하세요."
+            )
+
+        qtype_template = """
+[QTYPE_HARD_JSON_TEMPLATE_V4]
+
+너는 반드시 JSON object 하나만 반환해야 한다.
+최상위 JSON에는 반드시 다음 key가 있어야 한다.
+
+- version
+- confidence
+- overall_comment
+- layers
+- fact_anchor_review
+- connection_review
+- rater_comments
+- risks
+- improvement_advice
+- question_type_coverage
+
+question_type_coverage는 절대 생략하지 마라.
+question_type_coverage는 raw_text 문자열 내부가 아니라 최상위 JSON field여야 한다.
+coverage_source는 반드시 "semantic_grader"로 둔다.
+overall_coverage에는 unknown, fallback, not_evaluated를 쓰지 마라.
+
+반드시 다음 구조를 포함하라.
+
+"question_type_coverage": {
+  "question_type": "문제 유형",
+  "name_ko": "한글 유형명",
+  "coverage_source": "semantic_grader",
+  "sub_criteria_coverage": [
+    {
+      "criterion": "sub_criteria 이름",
+      "status": "present | partial | missing",
+      "evidence": "답안 근거 또는 누락 설명",
+      "impact": "C 또는 D 점수 판단 영향"
+    }
+  ],
+  "c_fact_focus_coverage": {
+    "covered": [],
+    "missing": []
+  },
+  "d_field_judgement_focus_coverage": {
+    "covered": [],
+    "missing": []
+  },
+  "missing_sub_criteria": [],
+  "overall_coverage": "strong | adequate | weak | poor",
+  "scoring_hint": "C/D 항목을 어떻게 보수적으로 볼지 설명"
+}
+
+금지:
+- question_type_coverage 생략 금지
+- coverage_source를 fallback으로 쓰기 금지
+- overall_coverage를 unknown으로 쓰기 금지
+- markdown 코드블록 출력 금지
+"""
+
+        return (
+            qtype_template
+            + "\n\n"
+            + base_prompt
+            + "\n\n"
+            + qtype_guidance
+            + "\n\n"
+            + qtype_contract
+            + "\n\n"
+            + qtype_template
+        )
+
+except Exception as _qtype_wrapper_exc:
+    # Do not break the grader import if the optional qtype wrapper fails.
+    pass

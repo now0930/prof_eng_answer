@@ -45,7 +45,25 @@ def main():
     allowed_types = set()
     if QUESTION_TYPE_PATH.exists():
         qtypes = load_json(QUESTION_TYPE_PATH)
-        allowed_types = {x.get("id") for x in qtypes.get("types", []) if x.get("id")}
+        raw_types = qtypes.get("types", [])
+
+    if isinstance(raw_types, dict):
+        allowed_types = set(raw_types.keys())
+    elif isinstance(raw_types, list):
+        allowed_types = {
+            x.get("id")
+            for x in raw_types
+            if isinstance(x, dict) and x.get("id")
+        }
+    else:
+        allowed_types = set()
+
+    legacy_mapping = qtypes.get("legacy_mapping", {})
+    if isinstance(legacy_mapping, dict):
+        allowed_types.update(
+            v for v in legacy_mapping.values()
+            if isinstance(v, str) and v
+        )
 
     seen_ids = set()
     seen_pair = set()
