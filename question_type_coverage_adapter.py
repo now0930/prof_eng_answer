@@ -333,3 +333,90 @@ try:
 
 except Exception:
     pass
+
+# === qtype legacy GENERAL cleanup wrapper v1 EOF ===
+# Remove old GENERAL(일반 설명형) phrases after question_type_v2 is resolved.
+try:
+    import re
+
+    def _cleanup_legacy_general_text_v1(grade: dict[str, Any]) -> dict[str, Any]:
+        if not isinstance(grade, dict):
+            return grade
+
+        qtype = grade.get("question_type")
+        qv2 = grade.get("question_type_v2") or {}
+
+        if not isinstance(qv2, dict):
+            qv2 = {}
+
+        name_ko = qv2.get("name_ko") or ""
+        c_focus = qv2.get("c_fact_focus") or []
+
+        legacy_sentence_patterns = [
+            r"\s*문제 유형은\s*GENERAL\(일반 설명형\)로 판단하고,\s*C항목은 해당 유형의 Fact 설명 렌즈로 평가했습니다\.?",
+            r"\s*문제 유형은\s*GENERAL\(일반 설명형\)로 판단했습니다\.?",
+        ]
+
+        for key in ["summary", "overall_comment"]:
+            value = grade.get(key)
+            if not isinstance(value, str):
+                continue
+
+            text = value
+            for pattern in legacy_sentence_patterns:
+                text = re.sub(pattern, "", text)
+
+            text = re.sub(r"\s{2,}", " ", text).strip()
+            grade[key] = text
+
+        replacement_c = None
+        if qtype and name_ko and c_focus:
+            replacement_c = (
+                f"C항목 보완: {name_ko} 유형에서는 "
+                f"{', '.join(c_focus)}를 문제 요구에 맞게 구조적으로 설명하도록 답안을 전개하세요."
+            )
+
+        for key in ["improvement_points", "weaknesses", "strategy_warnings"]:
+            values = grade.get(key)
+            if not isinstance(values, list):
+                continue
+
+            cleaned = []
+            for item in values:
+                if (
+                    isinstance(item, str)
+                    and "일반 설명형 유형에서는" in item
+                    and "C항목 보완" in item
+                    and replacement_c
+                ):
+                    cleaned.append(replacement_c)
+                else:
+                    cleaned.append(item)
+
+            grade[key] = cleaned
+
+        return grade
+
+
+    _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_CLEAN_GENERAL_V1 = attach_question_type_coverage_feedback
+
+    def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, Any]:
+        grade = _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_CLEAN_GENERAL_V1(grade)
+        return _cleanup_legacy_general_text_v1(grade)
+
+
+    if "ensure_grade_question_type_coverage" in globals():
+        _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_CLEAN_GENERAL_V1 = ensure_grade_question_type_coverage
+
+        def ensure_grade_question_type_coverage(
+            grade: dict[str, Any],
+            question_text: str | None = None,
+        ) -> dict[str, Any]:
+            grade = _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_CLEAN_GENERAL_V1(
+                grade,
+                question_text=question_text,
+            )
+            return _cleanup_legacy_general_text_v1(grade)
+
+except Exception:
+    pass
