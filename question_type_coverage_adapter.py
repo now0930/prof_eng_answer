@@ -205,3 +205,65 @@ def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, A
                 )
 
     return grade
+
+def ensure_grade_question_type_coverage(
+    grade: dict[str, Any],
+    question_text: str | None = None,
+) -> dict[str, Any]:
+    """Ensure grade has question_type_coverage.
+
+    If semantic grader coverage is missing after merge, create fallback coverage.
+    This fallback is for display/checking and does not pretend Gemini/CLOVA
+    actually evaluated every sub_criteria.
+    """
+    if not isinstance(grade, dict):
+        return grade
+
+    existing = _walk_find_question_type_coverage(grade)
+    if isinstance(existing, dict):
+        return grade
+
+    try:
+        from semantic_question_type_prompt import empty_question_type_coverage
+
+        qtype_v2 = grade.get("question_type_v2")
+        existing_question_type = None
+
+        if isinstance(qtype_v2, dict):
+            existing_question_type = qtype_v2.get("question_type")
+
+        existing_question_type = (
+            existing_question_type
+            or grade.get("question_type")
+            or grade.get("legacy_question_type")
+        )
+
+        coverage = empty_question_type_coverage(
+            question_text=question_text,
+            existing_question_type=existing_question_type,
+        )
+
+        coverage["overall_coverage"] = "unknown"
+        coverage["coverage_source"] = "fallback_missing_grade_field"
+        coverage["sub_criteria_coverage"] = []
+        coverage["missing_sub_criteria"] = []
+        coverage["c_fact_focus_coverage"] = {
+            "covered": [],
+            "missing": [],
+        }
+        coverage["d_field_judgement_focus_coverage"] = {
+            "covered": [],
+            "missing": [],
+        }
+        coverage["scoring_hint"] = (
+            "semantic grader의 question_type_coverage가 결과에서 확인되지 않아 "
+            "fallback coverage를 생성했습니다. 이 값은 점수 보정에 사용하지 않습니다."
+        )
+
+        grade["question_type_coverage"] = coverage
+        return grade
+
+    except Exception as exc:
+        grade["question_type_coverage_error"] = f"fallback coverage generation failed: {exc}"
+        return grade
+

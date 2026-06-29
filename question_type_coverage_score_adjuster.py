@@ -164,6 +164,21 @@ def evaluate_question_type_coverage_score_adjustment(
     decision["overall_coverage"] = overall or None
 
     sub_penalty, counts = _sub_criteria_penalty(coverage)
+    decision["coverage_counts"] = counts
+
+    coverage_source = str(coverage.get("coverage_source", "")).strip().lower()
+    if overall in {"unknown", "not_evaluated"} or coverage_source.startswith("fallback"):
+        decision["recommended_penalty"] = 0.0
+        decision["adjusted_score"] = score
+        decision["suggested_layer_penalties"] = {
+            "C": 0.0,
+            "D": 0.0,
+        }
+        decision["reason"] = (
+            "question_type_coverage가 fallback/unknown 상태이므로 "
+            "점수 보정 후보를 계산하지 않습니다."
+        )
+        return decision
 
     c_missing_count = _focus_missing_count(coverage, "c_fact_focus_coverage")
     d_missing_count = _focus_missing_count(coverage, "d_field_judgement_focus_coverage")
