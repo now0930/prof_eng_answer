@@ -77,7 +77,7 @@
 | `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 |
 | `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 |
 
-Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다.  
+Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다.
 고득점 가능성, ceiling 후보, 문항 선택 전략을 설명하는 보조 lens이다.
 
 ## 7. 운영상 중요한 주의

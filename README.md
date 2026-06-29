@@ -164,7 +164,7 @@ phase2 -> phase20 -> phase21
 
 ## 난이도와 점수 Ceiling
 
-문제 난이도는 기존 A/B/C/D/E 점수를 대체하지 않습니다.  
+문제 난이도는 기존 A/B/C/D/E 점수를 대체하지 않습니다.
 채점 엄격도, 고득점 가능성, 선택 전략 평가에 보조로 사용합니다.
 
 | Profile | 의미 | 기본 ceiling |
@@ -192,14 +192,14 @@ DIFFICULTY_CEILING_MODE=strict
 
 `strict` 모드에서는 ceiling을 초과한 점수를 실제로 제한합니다.
 
-제어이론 문제는 선택 자체로 가산점을 주지 않습니다.  
+제어이론 문제는 선택 자체로 가산점을 주지 않습니다.
 정확히 풀었을 때만 16.5~17.5점 상위 band가 열립니다.
 
 ---
 
 ## 문항 선택 전략
 
-기술사 시험은 여러 문제 중 일부를 선택해 답안을 작성합니다.  
+기술사 시험은 여러 문제 중 일부를 선택해 답안을 작성합니다.
 따라서 Bot은 개별 답안 점수와 문항 선택 전략을 분리합니다.
 
 핵심 원칙:
@@ -277,7 +277,7 @@ docker exec hermes_agent bash -lc 'pgrep -af "python.*bot.py" || true'
 
 ## Question Type v2
 
-2~4교시 답안 채점에서는 단답식 `DEFINE` 유형을 사용하지 않습니다.  
+2~4교시 답안 채점에서는 단답식 `DEFINE` 유형을 사용하지 않습니다.
 대신 C항목 Fact 설명과 D항목 현장 판단을 보강하기 위해 4개 question_type lens를 사용합니다.
 
 | question_type | 의미 |
