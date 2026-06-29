@@ -23,10 +23,103 @@ from rubric_registry import (  # noqa: E402
 )
 
 
+def _coerce_question_type_row(key, item):
+    if isinstance(item, dict):
+        row = dict(item)
+        if key is not None:
+            row.setdefault("id", str(key))
+        qid = str(row.get("id") or row.get("question_type") or key or "")
+        row["id"] = qid
+        row["name"] = (
+            row.get("name")
+            or row.get("name_ko")
+            or row.get("title")
+            or ""
+        )
+        c_lens = (
+            row.get("c_lens")
+            or row.get("c_fact_focus")
+            or row.get("description")
+            or row.get("note")
+            or ""
+        )
+        if isinstance(c_lens, list):
+            c_lens = ", ".join(str(x) for x in c_lens)
+        row["c_lens"] = str(c_lens)
+        return row
+
+    qid = str(key if key is not None else item)
+    row = {"id": qid, "name": "", "c_lens": ""}
+
+    try:
+        from question_type_taxonomy import get_question_type_profile
+
+        profile = get_question_type_profile(qid) or {}
+        row["name"] = (
+            profile.get("name")
+            or profile.get("name_ko")
+            or profile.get("title")
+            or ""
+        )
+        c_lens = (
+            profile.get("c_lens")
+            or profile.get("c_fact_focus")
+            or profile.get("description")
+            or ""
+        )
+        if isinstance(c_lens, list):
+            c_lens = ", ".join(str(x) for x in c_lens)
+        row["c_lens"] = str(c_lens)
+    except Exception:
+        pass
+
+    return row
+
+
+def _iter_question_type_rows(profile):
+    types = profile.get("types", [])
+
+    if isinstance(types, dict):
+        for key in sorted(types):
+            yield _coerce_question_type_row(key, types[key])
+        return
+
+    if isinstance(types, list):
+        for item in types:
+            yield _coerce_question_type_row(None, item)
+        return
+
+
+def _model_answer_aliases(item):
+    aliases = []
+
+    for key in ("topic_aliases", "aliases"):
+        value = item.get(key, [])
+        if isinstance(value, str):
+            value = [value]
+        if isinstance(value, list):
+            for alias in value:
+                alias = str(alias).strip()
+                if alias and alias not in aliases:
+                    aliases.append(alias)
+
+    return aliases
+
+
 def cmd_list_types(_args: argparse.Namespace) -> int:
     profile = load_question_type_profile()
-    for item in profile.get("types", []):
-        print(f"{item.get('id'):14} | {item.get('name')} | {item.get('c_lens')}")
+    rows = list(_iter_question_type_rows(profile))
+
+    if not rows:
+        print("NO QUESTION TYPES")
+        return 0
+
+    for item in rows:
+        qid = str(item.get("id") or "")
+        name = str(item.get("name") or "")
+        c_lens = str(item.get("c_lens") or "")
+        print(f"{qid:32} | {name} | {c_lens}")
+
     return 0
 
 
@@ -35,12 +128,17 @@ def cmd_list_model_answers(args: argparse.Namespace) -> int:
     rows = bank.get("answers", [])
 
     for item in rows:
+        if not isinstance(item, dict):
+            continue
+
         if args.topic and item.get("topic_id") != args.topic:
             continue
+
         if args.type and item.get("question_type") != args.type:
             continue
 
-        aliases = ", ".join(item.get("topic_aliases", [])[:5])
+        aliases = ", ".join(_model_answer_aliases(item)[:8])
+
         print(
             f"{item.get('topic_id')} | {item.get('question_type')} | "
             f"{item.get('id')} | {item.get('title')} | aliases=[{aliases}]"

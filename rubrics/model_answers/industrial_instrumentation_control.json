@@ -488,16 +488,6 @@
       "topic_id": "differential_pressure_transmitter_calibration",
       "question_type": "IMPLEMENTATION_EVALUATION",
       "title": "차압전송기 교정회로와 교정절차 모범 답안",
-      "aliases": [
-        "차압전송기",
-        "DP transmitter",
-        "differential pressure transmitter",
-        "교정회로",
-        "교정절차",
-        "zero span",
-        "4-20mA",
-        "HART communicator"
-      ],
       "question_examples": [
         "차압전송기의 교정회로와 교정절차를 설명하시오.",
         "차압전송기의 zero/span 교정 방법과 현장 적용 시 유의사항을 설명하시오.",
@@ -559,6 +549,16 @@
         "Question Type v2 기준으로 IMPLEMENTATION_EVALUATION에 배치한다.",
         "절차 나열만이 아니라 교정회로, 판정 기준, 현장 오차 요인, 유지보수 판단을 함께 평가한다.",
         "짧은 답안의 경우 일부 키워드가 있어도 C항목과 D항목 누락으로 낮게 평가한다."
+      ],
+      "topic_aliases": [
+        "차압전송기",
+        "DP transmitter",
+        "differential pressure transmitter",
+        "교정회로",
+        "교정절차",
+        "zero span",
+        "4-20mA",
+        "HART communicator"
       ]
     }
   ]

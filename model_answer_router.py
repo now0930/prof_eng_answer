@@ -20,7 +20,7 @@ def _compact_reference(answer: Dict[str, Any] | None) -> Dict[str, Any] | None:
         "question_type": answer.get("question_type"),
         "title": answer.get("title"),
         "question_examples": answer.get("question_examples", []),
-        "topic_aliases": answer.get("topic_aliases", []),
+        "topic_aliases": answer.get("topic_aliases", []) or answer.get("aliases", []),
         "expected_structure": answer.get("expected_structure", []),
         "model_answer_outline": answer.get("model_answer_outline", []),
         "high_score_features": answer.get("high_score_features", []),
@@ -67,7 +67,7 @@ def find_model_answer_reference(
         qtype_matched = primary_type != "GENERAL" and item_qtype == primary_type
 
         question_hits = text_hits(question, item.get("question_examples", []))
-        alias_hits = text_hits(combined, item.get("topic_aliases", []))
+        alias_hits = text_hits(combined, item.get("topic_aliases", []) or item.get("aliases", []))
         field_hits = text_hits(combined, item.get("field_connection_points", []))
 
         topic_from_fact_matched = item_topic in topic_ids_from_fact
