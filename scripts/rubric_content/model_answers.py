@@ -124,8 +124,8 @@ def cmd_promote_model_answer(args: argparse.Namespace) -> int:
     pair = model_answer_key(entry)
 
     if pair in before_pairs and not args.replace:
-        print(f"ERROR: topic_id + question_type already exists: {pair}", file=sys.stderr)
-        print("Use --replace to overwrite the existing entry.", file=sys.stderr)
+        print(f"ERROR: model_answer id already exists: {pair}", file=sys.stderr)
+        print("Use --replace to overwrite the existing entry with the same id.", file=sys.stderr)
         return 1
 
     if args.backup:

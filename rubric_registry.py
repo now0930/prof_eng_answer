@@ -96,17 +96,42 @@ def load_question_type_profile(path: str | Path | None = None) -> Dict[str, Any]
 
 def question_type_ids(profile: Optional[Dict[str, Any]] = None) -> List[str]:
     profile = profile or load_question_type_profile()
-    return [
-        str(x.get("id"))
-        for x in profile.get("types", [])
-        if isinstance(x, dict) and x.get("id")
-    ]
+    types = profile.get("types", [])
+
+    if isinstance(types, dict):
+        return [str(key) for key in types.keys() if str(key).strip()]
+
+    ids: List[str] = []
+    if isinstance(types, list):
+        for item in types:
+            if isinstance(item, dict):
+                qid = item.get("id") or item.get("question_type")
+                if qid:
+                    ids.append(str(qid))
+            elif isinstance(item, str) and item.strip():
+                ids.append(item.strip())
+
+    return ids
 
 
 def get_question_type(profile: Dict[str, Any], type_id: str) -> Optional[Dict[str, Any]]:
-    for item in profile.get("types", []):
-        if isinstance(item, dict) and item.get("id") == type_id:
-            return item
+    types = profile.get("types", [])
+
+    if isinstance(types, dict):
+        item = types.get(type_id)
+        if isinstance(item, dict):
+            row = dict(item)
+            row.setdefault("id", type_id)
+            return row
+        return None
+
+    if isinstance(types, list):
+        for item in types:
+            if isinstance(item, dict) and (
+                item.get("id") == type_id or item.get("question_type") == type_id
+            ):
+                return item
+
     return None
 
 
@@ -135,8 +160,14 @@ def save_model_answer_bank(data: Dict[str, Any], path: str | Path | None = None)
     return write_json(path or MODEL_ANSWER_BANK, data)
 
 
-def model_answer_key(item: Dict[str, Any]) -> Tuple[str, str]:
-    return str(item.get("topic_id", "")), str(item.get("question_type", ""))
+def model_answer_key(entry: Dict[str, Any]) -> str:
+    """Return the stable unique key for a model answer.
+
+    Model Answer Bank can contain multiple entries with the same
+    topic_id + question_type after legacy types are normalized to v2.
+    Therefore the stable unique key is id.
+    """
+    return str(entry.get("id", "")).strip()
 
 
 def build_model_answer_id(topic_id: str, question_type: str, version: str = "v1") -> str:
@@ -250,7 +281,7 @@ def validate_model_answer_bank(
 
         pair = model_answer_key(item)
         if pair in seen_pairs:
-            errors.append(f"{prefix}: duplicated topic_id + question_type: {pair}")
+            errors.append(f"{prefix}: duplicated model_answer id: {pair}")
         seen_pairs.add(pair)
 
         for list_key in [
