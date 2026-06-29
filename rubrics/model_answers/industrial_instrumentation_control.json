@@ -482,6 +482,84 @@
         "관련 이론이 맞더라도 출제자가 제시한 응답축을 충분히 설명하지 않으면 낮게 평가하도록 추가."
       ],
       "legacy_question_type": "COMPARE"
+    },
+    {
+      "id": "differential_pressure_transmitter_calibration_PROCEDURE_v1",
+      "topic_id": "differential_pressure_transmitter_calibration",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "title": "차압전송기 교정회로와 교정절차 모범 답안",
+      "aliases": [
+        "차압전송기",
+        "DP transmitter",
+        "differential pressure transmitter",
+        "교정회로",
+        "교정절차",
+        "zero span",
+        "4-20mA",
+        "HART communicator"
+      ],
+      "question_examples": [
+        "차압전송기의 교정회로와 교정절차를 설명하시오.",
+        "차압전송기의 zero/span 교정 방법과 현장 적용 시 유의사항을 설명하시오.",
+        "차압전송기의 교정 장비 구성과 교정 후 판정 기준을 설명하시오."
+      ],
+      "expected_structure": [
+        "차압전송기의 역할과 교정 필요성을 배경으로 제시한다.",
+        "교정회로의 구성 요소를 설명한다.",
+        "표준 압력 발생기, 전류계, 전원, HART communicator 또는 communicator의 연결 관계를 설명한다.",
+        "zero, span, LRV, URV, 4~20mA 출력의 관계를 설명한다.",
+        "0%, 25%, 50%, 75%, 100% 등 다점 교정 절차를 단계적으로 설명한다.",
+        "상승·하강 교정을 통해 선형성, 반복성, 히스테리시스를 확인한다.",
+        "임펄스 라인, 정압 영향, 설치 위치, 온도, 영점 이동 등 현장 오차 요인을 설명한다.",
+        "교정 후 허용오차 판정, 기록 관리, 재교정 주기, 유지보수 관점을 제시한다."
+      ],
+      "model_answer_outline": [
+        "차압전송기는 공정의 차압을 전기 신호로 변환하여 유량, 액위, 필터 막힘, 압력 손실 등을 감시·제어하는 계측기이다.",
+        "교정은 기준 입력 차압에 대해 4~20mA 출력이 LRV와 URV에 맞게 선형적으로 대응하는지 확인하고 zero/span을 조정하는 작업이다.",
+        "교정회로는 표준 압력 발생기 또는 dead weight tester, 차압전송기, 24V DC 전원, 정밀 전류계 또는 loop calibrator, HART communicator, vent/drain 및 배관 연결부로 구성한다.",
+        "저압측과 고압측 연결 방향을 확인하고, 필요 시 manifold를 사용하여 equalizing, venting, isolation 상태를 안전하게 만든다.",
+        "교정 전에는 전원 극성, 배선, range 설정, LRV/URV, damping 설정, 단위, zero suppression/elevation 여부를 확인한다.",
+        "0% 입력에서 출력이 4mA인지 확인하고 zero를 조정한다.",
+        "100% 입력에서 출력이 20mA인지 확인하고 span을 조정한다.",
+        "0%, 25%, 50%, 75%, 100% 입력을 순차적으로 인가하여 각 지점의 출력을 확인한다.",
+        "필요 시 하강 방향으로도 반복하여 히스테리시스와 반복성을 확인한다.",
+        "각 점의 출력 오차가 허용오차 이내인지 판정하고, 벗어나면 조정 후 재교정한다.",
+        "현장 설치 후에는 임펄스 라인 막힘, 기포, 응축수, 누설, 정압 영향, 설치 높이 차에 따른 영점 이동을 고려한다.",
+        "교정 결과는 as-found, as-left 값으로 기록하고, 이력 관리를 통해 재교정 주기와 예방정비 기준을 정한다."
+      ],
+      "high_score_features": [
+        "교정회로 구성 요소와 연결 관계를 명확히 설명한다.",
+        "zero/span, LRV/URV, 4~20mA 출력의 관계를 정확히 설명한다.",
+        "0~100% 다점 교정 절차를 단계적으로 제시한다.",
+        "상승·하강 교정으로 선형성, 반복성, 히스테리시스를 확인한다고 쓴다.",
+        "HART communicator 또는 loop calibrator를 이용한 range 확인과 trimming 개념을 설명한다.",
+        "현장 오차 요인으로 임펄스 라인 막힘, 누설, 기포, 응축수, 정압 영향, 설치 높이 차를 제시한다.",
+        "교정 후 허용오차 판정, as-found/as-left 기록, 재교정 주기 관리까지 연결한다.",
+        "운전 중 분리 가능 여부, bypass, isolation, safety permit 등 현장 작업 조건을 언급한다."
+      ],
+      "low_score_patterns": [
+        "기준 압력을 넣고 4~20mA를 확인한다고만 쓰고 회로 구성이 없다.",
+        "zero/span 조정만 언급하고 다점 교정 절차가 없다.",
+        "LRV, URV, 4mA, 20mA의 관계가 불명확하다.",
+        "교정 장비와 배선 구성이 빠져 있다.",
+        "상승·하강 교정, 히스테리시스, 반복성, 선형성 확인이 없다.",
+        "현장 오차 요인과 설치 조건을 설명하지 않는다.",
+        "교정 후 판정 기준과 기록 관리가 없다.",
+        "스마트 전송기와 일반 아날로그 전송기의 차이를 고려하지 않는다."
+      ],
+      "field_connection_points": [
+        "운전 중 교정 시 공정 격리, bypass, permit, vent/drain 안전 조치가 필요하다.",
+        "임펄스 라인 막힘이나 누설은 전송기 자체 교정보다 더 큰 측정 오차를 만들 수 있다.",
+        "액위 측정에서는 zero elevation 또는 zero suppression을 고려해야 한다.",
+        "고정압 조건에서는 정압 영향과 제조사 정확도 specification을 확인해야 한다.",
+        "중요 loop는 교정 전후 제어계 영향과 alarm/interlock bypass 여부를 검토해야 한다.",
+        "교정 결과는 설비 신뢰성, 품질 감사, 계측기 이력 관리와 연결된다."
+      ],
+      "revision_notes": [
+        "Question Type v2 기준으로 IMPLEMENTATION_EVALUATION에 배치한다.",
+        "절차 나열만이 아니라 교정회로, 판정 기준, 현장 오차 요인, 유지보수 판단을 함께 평가한다.",
+        "짧은 답안의 경우 일부 키워드가 있어도 C항목과 D항목 누락으로 낮게 평가한다."
+      ]
     }
   ]
 }
