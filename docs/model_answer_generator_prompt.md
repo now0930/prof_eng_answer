@@ -72,7 +72,7 @@ LLM은 다음을 출력해야 한다.
     - COMPARE_SELECTION
     - IMPLEMENTATION_EVALUATION
 
-    legacy question type을 새 항목의 question_type으로 쓰지 마십시오.
+    legacy question type을 새 항목의 question_type으로 쓰지 마십시오. 새 항목은 v2 4개 중 하나를 사용합니다.
     예를 들어 DEFINE, PROCEDURE, COMPARE, CAUSE_ACTION 같은 legacy 값은 id나 과거 기록에는 남아 있을 수 있지만, 새 모범 답안의 question_type에는 v2 값을 사용해야 합니다.
 
     표준 alias 필드는 topic_aliases입니다.
@@ -173,9 +173,9 @@ LLM은 다음을 출력해야 한다.
     각 필드 작성 기준은 다음과 같습니다.
 
     id:
-    - topic_id + "_" + 대표 legacy 성격 + "_v1" 형식으로 작성할 수 있습니다.
+    - topic_id + "_" + v2 question_type 또는 명확한 주제 suffix + "_v1" 형식으로 작성합니다.
     - 단 question_type 필드는 반드시 v2 값을 사용합니다.
-    - 예: differential_pressure_transmitter_calibration_PROCEDURE_v1
+    - 예: differential_pressure_transmitter_calibration_IMPLEMENTATION_EVALUATION_v1
 
     topic_aliases:
     - 한글명, 영문명, 약어, 현장 용어를 포함합니다.

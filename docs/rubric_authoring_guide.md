@@ -16,7 +16,7 @@
 
 | 파일 | 역할 |
 |---|---|
-| `rubrics/question_types/default.json` | DEFINE, COMPARE, CALC_DESIGN 등 문제 유형별 C항목 평가 렌즈 |
+| `rubrics/question_types/default.json` | Question Type v2 4개 lens와 C/D항목 coverage 기준 |
 | `rubrics/fact_anchors/industrial_instrumentation_control.json` | 주제별 핵심 Fact Anchor |
 | `rubrics/model_answers/industrial_instrumentation_control.json` | 주제 + 문제유형별 기준 답안 |
 | `rubrics/originality/default.json` | 독창성·기술사적 판단성 평가 기준 |
@@ -72,13 +72,12 @@ python3 scripts/rubric_manager.py validate-all
 
 | 유형 | C항목에서 보는 것 |
 |---|---|
-| DEFINE | 정의, 핵심 개념, 적용 범위, 한계, 실무 의미 |
-| PRINCIPLE | 발생 조건, 원리, 메커니즘, 인과관계, 결과 현상 |
-| STRUCTURE | 구성요소, 분류 기준, 계층 구조, 역할 관계 |
-| COMPARE | 비교 대상, 비교축, 장단점, 적용 조건, 선정 기준 |
-| PROBLEM_SOLVE | 문제 현상, 요구 파악, 원인, 개선 방향, 한계 |
-| CAUSE_ACTION | 직접 원인, 근본 원인, 발생 메커니즘, 원인별 대책 |
-| PROCEDURE | 절차 순서, 입력 자료, 수행 방법, 판단 기준, 산출물 |
+| Question Type v2 | C/D항목 평가 lens |
+|---|---|
+| PRINCIPLE_INTERPRETATION | 원리, 메커니즘, 수식, 계산, 결과 해석 |
+| DIAGNOSIS_ACTION | 문제 정의, 원인, 영향, 대책, 검증 |
+| COMPARE_SELECTION | 비교축, 장단점, 적용 조건, 선정 판단 |
+| IMPLEMENTATION_EVALUATION | 적용 대상, 시스템 구성, 절차, 평가 지표, 운영 개선 |
 | CALC_DESIGN | 공식, 변수, 단위, 계산 과정, 결과 해석, 설계 기준 |
 | APPLICATION | 적용 대상, 적용 조건, 제약, 적용 방식, 기대 효과 |
 | EVALUATION | 평가 대상, 지표, 방법, before/after, 효과, 한계 |
@@ -149,7 +148,7 @@ Question Type v2 값은 다음 중 하나를 사용한다.
     COMPARE_SELECTION
     IMPLEMENTATION_EVALUATION
 
-예를 들어 차압전송기 교정회로와 교정절차 문제는 보통 다음처럼 둔다.
+예를 들어 차압전송기 교정회로와 교정절차 문제는 다음처럼 둔다.
 
     question_type: IMPLEMENTATION_EVALUATION
 

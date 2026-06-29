@@ -1,5 +1,7 @@
 # Docs Index
 
+이 문서: `README.md`
+
 이 디렉터리는 `prof_eng_answer`의 운영, 채점 구조, question type, difficulty, rubric 관련 문서를 정리한다.
 
 현재 운영 기준은 다음과 같다.
@@ -39,9 +41,9 @@
 
 운영 중 문제가 생기면 다음 순서로 확인한다.
 
-1. `operation_runbook.md`
-2. `docker_compose_usage.md`
-3. `grading_architecture.md`
+    operation_runbook.md
+    docker_compose_usage.md
+    grading_architecture.md
 
 ## 4. 현재 채점 구조 요약
 
@@ -78,7 +80,7 @@
 | `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 |
 | `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 |
 
-Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다.
+Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다.  
 고득점 가능성, ceiling 후보, 문항 선택 전략을 설명하는 보조 lens이다.
 
 ## 7. 운영상 중요한 주의
@@ -129,6 +131,15 @@ README가 참조하는 docs 파일이 실제 존재하는지 확인한다.
       [ -f "$f" ] || echo "MISSING: $f"
     done
 
+docs README가 docs 디렉터리의 모든 문서를 설명하는지도 확인한다.
+
+    echo
+    echo "[docs files not mentioned in docs/README.md]"
+    for f in $(find docs -maxdepth 1 -type f -name '*.md' -printf '%f\n' | sort); do
+      grep -q "\`$f\`" docs/README.md || echo "MISSING_IN_DOCS_README: $f"
+    done
+
 정상 기준:
 
     MISSING 출력 없음
+    MISSING_IN_DOCS_README 출력 없음
