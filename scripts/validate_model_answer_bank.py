@@ -88,9 +88,14 @@ def main():
         if allowed_types and qtype not in allowed_types:
             errors.append(f"{prefix}: unknown question_type: {qtype}")
 
-        pair = (item.get("topic_id"), qtype)
+        legacy_qtype = item.get("legacy_question_type") or ""
+        pair = (item.get("topic_id"), qtype, legacy_qtype)
+
         if pair in seen_pair:
-            errors.append(f"{prefix}: duplicated topic_id + question_type pair: {pair}")
+            errors.append(
+                f"{prefix}: duplicated topic_id + question_type + legacy_question_type pair: {pair}"
+            )
+
         seen_pair.add(pair)
 
         for list_key in [
