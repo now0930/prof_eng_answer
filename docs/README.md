@@ -27,8 +27,8 @@
 | `question_type_taxonomy.md` | Question Type v2 taxonomy, sub criteria, coverage |
 | `difficulty_and_selection_strategy.md` | Difficulty Profile, ceiling, 문항 선택 전략 |
 | `llm_provider.md` | Gemini, CLOVA provider 설정 |
-| `rubric_authoring_guide.md` | Rubric, Fact Anchor, Model Answer 추가·수정·삭제 절차 |
-| `model_answer_generator_prompt.md` | 키워드 기반 Model Answer Bank 초안 생성 LLM 프롬프트 |
+| `rubric_authoring_guide.md` | Rubric, Fact Anchor, Model Answer Bank 실제 수정·검증·커밋 절차 |
+| `model_answer_generator_prompt.md` | 키워드만으로 Model Answer JSON 초안을 생성하는 LLM 프롬프트 |
 
 ## 2. 보조 문서
 
