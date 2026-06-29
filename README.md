@@ -326,6 +326,7 @@ QUESTION_TYPE_COVERAGE_SCORE_MODE=strict
 | `docs/difficulty_and_selection_strategy.md` | Difficulty Profile, ceiling, 문항 선택 전략 |
 | `docs/llm_provider.md` | Gemini/CLOVA provider 설정 |
 | `docs/rubric_authoring_guide.md` | Rubric, Fact Anchor, Model Answer 작성법 |
+| `docs/model_answer_generator_prompt.md` | 키워드 기반 Model Answer Bank 초안 생성 LLM 프롬프트 |
 
 운영 중 문제가 생기면 먼저 `docs/operation_runbook.md`를 확인한다.
 
