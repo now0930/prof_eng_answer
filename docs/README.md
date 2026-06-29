@@ -25,7 +25,7 @@
 | `question_type_taxonomy.md` | Question Type v2 taxonomy, sub criteria, coverage |
 | `difficulty_and_selection_strategy.md` | Difficulty Profile, ceiling, 문항 선택 전략 |
 | `llm_provider.md` | Gemini, CLOVA provider 설정 |
-| `rubric_authoring_guide.md` | Rubric, Fact Anchor, Model Answer 작성법 |
+| `rubric_authoring_guide.md` | Rubric, Fact Anchor, Model Answer 추가·수정·삭제 절차 |
 
 ## 2. 보조 문서
 
