@@ -1,4 +1,7 @@
-from semantic_question_type_prompt import build_question_type_semantic_guidance
+from semantic_question_type_prompt import (
+    build_question_type_json_contract,
+    build_question_type_semantic_guidance,
+)
 
 #!/usr/bin/env python3
 import json

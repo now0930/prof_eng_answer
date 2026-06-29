@@ -124,3 +124,74 @@ def empty_question_type_coverage(
         "overall_coverage": "weak",
         "scoring_hint": "question_type coverage was not evaluated by semantic grader",
     }
+
+
+def build_question_type_json_contract(
+    question_text: str | None,
+    existing_question_type: str | None = None,
+) -> str:
+    """Return a short hard JSON contract for semantic grader output.
+
+    This block is intentionally short and should be appended at the very end
+    of the prompt, after all other scoring instructions.
+    """
+    if existing_question_type:
+        question_type = normalize_question_type(existing_question_type)
+    else:
+        question_type = detect_question_type_from_text(question_text or "")
+
+    profile = get_question_type_profile(question_type)
+    sub_criteria = profile.get("sub_criteria", [])
+
+    return f"""
+[MANDATORY QUESTION_TYPE_COVERAGE OUTPUT CONTRACT]
+
+반드시 최종 JSON root object에 아래 key를 포함하라.
+
+"question_type_coverage"
+
+이 key를 생략하면 응답은 실패한 것으로 간주한다.
+이 key는 markdown이나 문자열 안이 아니라 JSON object의 최상위 필드여야 한다.
+
+반드시 아래 구조를 지켜라.
+
+{{
+  "question_type_coverage": {{
+    "question_type": "{question_type}",
+    "name_ko": "{profile.get("name_ko")}",
+    "coverage_source": "semantic_grader",
+    "sub_criteria_coverage": [
+      {{
+        "criterion": "sub_criteria 이름",
+        "status": "present | partial | missing",
+        "evidence": "답안에서 확인한 근거 또는 누락 설명",
+        "impact": "C 또는 D 점수 판단에 주는 영향"
+      }}
+    ],
+    "c_fact_focus_coverage": {{
+      "covered": [],
+      "missing": []
+    }},
+    "d_field_judgement_focus_coverage": {{
+      "covered": [],
+      "missing": []
+    }},
+    "missing_sub_criteria": [],
+    "overall_coverage": "strong | adequate | weak | poor",
+    "scoring_hint": "C/D 항목을 어떻게 보수적으로 볼지 설명"
+  }}
+}}
+
+반드시 평가해야 할 sub_criteria:
+{sub_criteria}
+
+규칙:
+1. 모든 sub_criteria를 sub_criteria_coverage에 하나씩 포함한다.
+2. 답안에 명확히 있으면 present.
+3. 키워드는 있으나 설명이 부족하면 partial.
+4. 답안에 없으면 missing.
+5. coverage_source는 반드시 "semantic_grader"로 둔다.
+6. fallback, unknown, not_evaluated를 사용하지 않는다.
+7. 기존 layers, fact_anchor_review, connection_review도 유지하되 question_type_coverage를 반드시 추가한다.
+""".strip()
+
