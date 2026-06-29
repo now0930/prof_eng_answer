@@ -334,12 +334,14 @@ try:
 except Exception:
     pass
 
-# === qtype legacy GENERAL cleanup wrapper v1 EOF ===
+# === qtype legacy GENERAL cleanup wrapper v2 EOF ===
 # Remove old GENERAL(일반 설명형) phrases after question_type_v2 is resolved.
+# This wrapper captures original functions via default arguments to avoid recursion
+# if the file is patched more than once.
 try:
-    import re
+    import re as _qtype_cleanup_re_v2
 
-    def _cleanup_legacy_general_text_v1(grade: dict[str, Any]) -> dict[str, Any]:
+    def _cleanup_legacy_general_text_v2(grade):
         if not isinstance(grade, dict):
             return grade
 
@@ -353,8 +355,9 @@ try:
         c_focus = qv2.get("c_fact_focus") or []
 
         legacy_sentence_patterns = [
-            r"\s*문제 유형은\s*GENERAL\(일반 설명형\)로 판단하고,\s*C항목은 해당 유형의 Fact 설명 렌즈로 평가했습니다\.?",
+            r"\s*문제 유형은\s*GENERAL\(일반 설명형\)로 판단하고,\s*C항목은 해당 유형의 Fact 설명 렌즈로 평가했습니\s*다\.?",
             r"\s*문제 유형은\s*GENERAL\(일반 설명형\)로 판단했습니다\.?",
+            r"\s*문제 유형은\s*GENERAL\(일반 설명형\)로 판단하고[^.]*평가했습니\s*다\.?",
         ]
 
         for key in ["summary", "overall_comment"]:
@@ -364,9 +367,9 @@ try:
 
             text = value
             for pattern in legacy_sentence_patterns:
-                text = re.sub(pattern, "", text)
+                text = _qtype_cleanup_re_v2.sub(pattern, "", text)
 
-            text = re.sub(r"\s{2,}", " ", text).strip()
+            text = _qtype_cleanup_re_v2.sub(r"\s{2,}", " ", text).strip()
             grade[key] = text
 
         replacement_c = None
@@ -398,25 +401,32 @@ try:
         return grade
 
 
-    _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_CLEAN_GENERAL_V1 = attach_question_type_coverage_feedback
+    if "_QTYPE_CLEAN_GENERAL_V2_INSTALLED" not in globals():
+        _QTYPE_CLEAN_GENERAL_V2_INSTALLED = True
 
-    def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, Any]:
-        grade = _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_CLEAN_GENERAL_V1(grade)
-        return _cleanup_legacy_general_text_v1(grade)
+        _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_CLEAN_GENERAL_V2 = attach_question_type_coverage_feedback
+
+        def attach_question_type_coverage_feedback(
+            grade,
+            _orig=_ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_CLEAN_GENERAL_V2,
+        ):
+            grade = _orig(grade)
+            return _cleanup_legacy_general_text_v2(grade)
 
 
-    if "ensure_grade_question_type_coverage" in globals():
-        _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_CLEAN_GENERAL_V1 = ensure_grade_question_type_coverage
+        if "ensure_grade_question_type_coverage" in globals():
+            _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_CLEAN_GENERAL_V2 = ensure_grade_question_type_coverage
 
-        def ensure_grade_question_type_coverage(
-            grade: dict[str, Any],
-            question_text: str | None = None,
-        ) -> dict[str, Any]:
-            grade = _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_CLEAN_GENERAL_V1(
+            def ensure_grade_question_type_coverage(
                 grade,
-                question_text=question_text,
-            )
-            return _cleanup_legacy_general_text_v1(grade)
+                question_text=None,
+                _orig=_ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_CLEAN_GENERAL_V2,
+            ):
+                grade = _orig(
+                    grade,
+                    question_text=question_text,
+                )
+                return _cleanup_legacy_general_text_v2(grade)
 
 except Exception:
     pass
