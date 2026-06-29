@@ -2,9 +2,16 @@
 
 이 문서: `README.md`
 
-이 디렉터리는 `prof_eng_answer`의 운영, 채점 구조, question type, difficulty, rubric, JSON Bank 관리 문서를 정리한다.
+이 디렉터리는 `prof_eng_answer`의 운영, 채점 구조, Question Type, Difficulty, Rubric JSON Bank 관리 문서를 정리한다.
 
-현재 운영 기준은 다음과 같다.
+문서는 두 종류로 구분한다.
+
+| 구분 | 의미 |
+|---|---|
+| 코드 연계 문서 | 현재 Python 코드, JSON 설정, CLI 명령과 직접 연결되는 문서 |
+| 구조 참고 문서 | 현재 동작을 직접 설명하지는 않지만, migration 이력이나 전체 구조 이해에 도움이 되는 문서 |
+
+## 1. 현재 운영 기준
 
 | 항목 | 기준 |
 |---|---|
@@ -17,49 +24,42 @@
 | Question Type coverage | `warn` 기본 |
 | Difficulty ceiling | `warn` 기본 |
 
-## 1. 핵심 문서
+## 2. 코드 연계 핵심 문서
 
-| 문서 | 목적 |
+| 문서 | 코드·JSON 근거 | 목적 |
+|---|---|---|
+| `operation_runbook.md` | `bot.py`, Docker Compose, 로그 확인 명령 | 운영 점검, 재시작, 장애 대응 |
+| `docker_compose_usage.md` | `docker-compose.yaml`, `docker-compose.example.yml`, `scripts/run_prof_eng_bot.sh` | Docker Compose 운영 방식 |
+| `grading_architecture.md` | `grading_agents.py`, `grading_config.py`, `rubrics/scoring_model/default.json`, `rubrics/raters/layered_default.json` | A/B/C/D/E 25점 채점 구조와 pipeline |
+| `question_type_taxonomy.md` | `question_type_taxonomy.py`, `question_type_output_adapter.py`, `question_type_coverage_adapter.py`, `rubrics/question_types/default.json` | Question Type v2 taxonomy, sub criteria, coverage |
+| `difficulty_and_selection_strategy.md` | `difficulty_strategy.py`, `difficulty_output_adapter.py`, `difficulty_score_ceiling.py`, `rubrics/difficulty_profiles/default.json`, `rubrics/topic_importance/industrial_instrumentation_control.json`, `rubrics/exam_selection/default.json` | Difficulty Profile, ceiling, 문항 선택 전략 |
+| `llm_provider.md` | `llm_provider_router.py`, `llm_provider_settings.py`, `gemini_grader.py`, `clova_grader.py` | Gemini, CLOVA provider 설정 |
+| `rubric_authoring_guide.md` | `rubric_registry.py`, `scripts/rubric_manager.py`, `rubrics/model_answers/industrial_instrumentation_control.json`, `rubrics/fact_anchors/industrial_instrumentation_control.json`, `rubrics/topic_importance/industrial_instrumentation_control.json` | Rubric JSON Bank 실제 수정·검증·커밋 절차 |
+
+## 3. LLM 생성 프롬프트 문서
+
+이 문서들은 코드가 직접 실행하는 문서가 아니다.  
+사용자가 키워드를 입력했을 때 LLM으로 JSON 초안을 만들기 위한 작업 보조 문서이다.
+
+| 문서 | 연결되는 JSON | 연결되는 CLI |
+|---|---|---|
+| `model_answer_generator_prompt.md` | `rubrics/model_answers/industrial_instrumentation_control.json` | `new-model-answer`, `promote-model-answer`, `validate-model-answers` |
+| `fact_anchor_generator_prompt.md` | `rubrics/fact_anchors/industrial_instrumentation_control.json` | `new-fact-anchor-topic`, `promote-fact-anchor-topic`, `validate-fact-anchors` |
+| `topic_importance_generator_prompt.md` | `rubrics/topic_importance/industrial_instrumentation_control.json` | `new-topic-importance`, `promote-topic-importance`, `validate-topic-importance` |
+
+## 4. 구조 참고 문서
+
+아래 문서는 현재 실행 코드와 1:1로 연결되는 active 문서가 아니다.  
+다만 사용자가 전체 구조와 migration 흐름을 이해하는 데 도움이 되므로 reference 문서로 유지한다.
+
+| 문서 | 유지 이유 |
 |---|---|
-| `operation_runbook.md` | 운영 점검, 재시작, 장애 대응 |
-| `docker_compose_usage.md` | Docker Compose 운영 방식 |
-| `grading_architecture.md` | A/B/C/D/E 25점 채점 구조와 pipeline |
-| `question_type_taxonomy.md` | Question Type v2 taxonomy, sub criteria, coverage |
-| `difficulty_and_selection_strategy.md` | Difficulty Profile, ceiling, 문항 선택 전략 |
-| `llm_provider.md` | Gemini, CLOVA provider 설정 |
-| `rubric_authoring_guide.md` | Rubric, Fact Anchor, Model Answer Bank 실제 수정·검증·커밋 절차 |
+| `migration_plan.md` | 구조 변경과 migration 기록 확인용 |
+| `structure_review.md` | 과거 구조 검토와 설계 판단 흐름 확인용 |
 
-## 2. LLM 생성 프롬프트 문서
+이 두 문서는 현재 코드 기준과 다를 수 있으므로, 운영 판단은 핵심 문서를 우선한다.
 
-| 문서 | 목적 |
-|---|---|
-| `model_answer_generator_prompt.md` | 키워드만으로 Model Answer JSON 초안을 생성하는 LLM 프롬프트 |
-| `fact_anchor_generator_prompt.md` | 키워드만으로 Fact Anchor JSON 초안을 생성하는 LLM 프롬프트 |
-| `topic_importance_generator_prompt.md` | 키워드만으로 Topic Importance JSON 초안을 생성하는 LLM 프롬프트 |
-
-## 3. 보조 문서
-
-| 문서 | 성격 |
-|---|---|
-| `migration_plan.md` | 구조 변경 및 migration 기록 |
-| `structure_review.md` | 과거 구조 검토 문서. 현재 기준과 다를 수 있음 |
-
-## 4. 가장 먼저 볼 문서
-
-운영 중 문제가 생기면 다음 순서로 확인한다.
-
-    operation_runbook.md
-    docker_compose_usage.md
-    grading_architecture.md
-
-Rubric 또는 JSON Bank를 수정할 때는 다음 순서로 확인한다.
-
-    rubric_authoring_guide.md
-    model_answer_generator_prompt.md
-    fact_anchor_generator_prompt.md
-    topic_importance_generator_prompt.md
-
-## 5. 현재 채점 구조 요약
+## 5. 현재 채점 pipeline 요약
 
 채점 구조는 다음 흐름을 따른다.
 
@@ -131,14 +131,6 @@ Rubric 또는 JSON Bank를 수정할 때는 다음 순서로 확인한다.
 | `schemas/grade_schema.json` | grade output schema | 수정하지 않음 |
 | `schemas/answer_structure_schema.json` | answer structure schema | 수정하지 않음 |
 
-사용자가 주로 수정하는 파일은 다음 3개이다.
-
-    Model Answer Bank
-    Fact Anchor Bank
-    Topic Importance
-
-단, Topic Importance는 시험 선택 전략에 영향을 주므로 Model Answer보다 신중하게 수정한다.
-
 ## 8. 사용자가 수정하는 3개 JSON의 관계
 
 세 JSON은 같은 topic을 서로 다른 관점에서 설명한다.
@@ -176,112 +168,37 @@ Rubric 또는 JSON Bank를 수정할 때는 다음 순서로 확인한다.
 | 단순 세부 절차만 추가됨 | Model Answer만 수정하고 Fact Anchor/Topic Importance는 유지 가능 |
 | 기존 topic 안에 흡수 가능함 | 새 topic을 만들지 않고 기존 JSON 수정 |
 
-## 9. Model Answer Bank 관리 함수
+## 9. Rubric JSON Bank 관리 CLI
 
-Model Answer Bank는 다음 CLI로 관리한다.
-
-| 명령 | 역할 |
-|---|---|
-| `list-model-answers` | 현재 Model Answer 목록 확인 |
-| `new-model-answer` | editable candidate JSON 생성 |
-| `promote-model-answer` | candidate를 bank에 추가 또는 수정 |
-| `delete-model-answer` | Model Answer 삭제 |
-| `validate-model-answers` | Model Answer Bank 검증 |
-
-예시:
+Model Answer Bank 관리:
 
     python3 scripts/rubric_manager.py list-model-answers
-
-    python3 scripts/rubric_manager.py new-model-answer \
-      --topic-id differential_pressure_transmitter_calibration \
-      --question-type IMPLEMENTATION_EVALUATION \
-      --title "차압전송기 교정회로와 교정절차 모범 답안" \
-      --alias "차압전송기" \
-      --alias "DP transmitter"
-
-    python3 scripts/rubric_manager.py promote-model-answer \
-      --candidate rubrics/content_candidates/model_answers/<candidate>.json \
-      --replace
-
-    python3 scripts/rubric_manager.py delete-model-answer \
-      --id differential_pressure_transmitter_calibration_PROCEDURE_v1
-
+    python3 scripts/rubric_manager.py new-model-answer
+    python3 scripts/rubric_manager.py promote-model-answer
+    python3 scripts/rubric_manager.py delete-model-answer
     python3 scripts/rubric_manager.py validate-model-answers
 
-Model Answer Bank의 고유키는 `id`이다.  
-`topic_id + question_type`은 검색·분류 기준이지 고유키가 아니다.
-
-## 10. Fact Anchor Bank 관리 함수
-
-Fact Anchor Bank는 다음 CLI로 관리한다.
-
-| 명령 | 역할 |
-|---|---|
-| `list-fact-anchors` | Fact Anchor topic 목록 확인 |
-| `new-fact-anchor-topic` | editable candidate JSON 생성 |
-| `promote-fact-anchor-topic` | candidate를 bank에 추가 또는 수정 |
-| `delete-fact-anchor-topic` | Fact Anchor topic 삭제 |
-| `validate-fact-anchors` | Fact Anchor Bank 검증 |
-
-예시:
+Fact Anchor Bank 관리:
 
     python3 scripts/rubric_manager.py list-fact-anchors
-
-    python3 scripts/rubric_manager.py new-fact-anchor-topic \
-      --topic-id differential_pressure_transmitter_calibration \
-      --name "차압전송기 교정" \
-      --alias "차압전송기" \
-      --alias "DP transmitter"
-
-    python3 scripts/rubric_manager.py promote-fact-anchor-topic \
-      --candidate rubrics/content_candidates/fact_anchors/<candidate>.json \
-      --replace
-
-    python3 scripts/rubric_manager.py delete-fact-anchor-topic \
-      --topic-id differential_pressure_transmitter_calibration
-
+    python3 scripts/rubric_manager.py new-fact-anchor-topic
+    python3 scripts/rubric_manager.py promote-fact-anchor-topic
+    python3 scripts/rubric_manager.py delete-fact-anchor-topic
     python3 scripts/rubric_manager.py validate-fact-anchors
 
-Fact Anchor topic은 `anchors` 5개를 가져야 한다.  
-각 anchor는 `id`, `name`, `expected`, `core_terms`, `support_terms`를 포함해야 한다.
-
-## 11. Topic Importance 관리 함수
-
-Topic Importance는 다음 CLI로 관리한다.
-
-| 명령 | 역할 |
-|---|---|
-| `list-topic-importance` | Topic Importance 목록 확인 |
-| `new-topic-importance` | editable candidate JSON 생성 |
-| `promote-topic-importance` | candidate를 bank에 추가 또는 수정 |
-| `delete-topic-importance` | Topic Importance 삭제 |
-| `validate-topic-importance` | Topic Importance Bank 검증 |
-
-예시:
+Topic Importance 관리:
 
     python3 scripts/rubric_manager.py list-topic-importance
-
-    python3 scripts/rubric_manager.py new-topic-importance \
-      --topic-id differential_pressure_transmitter_calibration \
-      --label "차압전송기 교정" \
-      --difficulty FIELD_APPLICATION \
-      --selection-importance NORMAL \
-      --alias "차압전송기" \
-      --alias "DP transmitter"
-
-    python3 scripts/rubric_manager.py promote-topic-importance \
-      --candidate rubrics/content_candidates/topic_importance/<candidate>.json \
-      --replace
-
-    python3 scripts/rubric_manager.py delete-topic-importance \
-      --topic-id differential_pressure_transmitter_calibration
-
+    python3 scripts/rubric_manager.py new-topic-importance
+    python3 scripts/rubric_manager.py promote-topic-importance
+    python3 scripts/rubric_manager.py delete-topic-importance
     python3 scripts/rubric_manager.py validate-topic-importance
 
-Topic Importance는 개별 답안 품질보다 시험 선택 전략과 난이도 판단에 가깝다.  
-따라서 새 Model Answer를 추가할 때마다 자동으로 추가하지 말고, 필요할 때만 별도 topic으로 관리한다.
+전체 검증:
 
-## 12. CRUD 검증 함수
+    python3 scripts/rubric_manager.py validate-all
+
+## 10. CRUD 검증
 
 추가·수정·삭제 스크립트는 실제 bank를 직접 건드리지 않고 임시 복사본에서 검증한다.
 
@@ -301,17 +218,9 @@ Topic Importance는 개별 답안 품질보다 시험 선택 전략과 난이도
 
     CRUD TESTS PASSED
 
-주의:
+## 11. LLM 프롬프트 사용법
 
-실제 운영 JSON이 변경되면 안 된다.
-
-    rubrics/model_answers/industrial_instrumentation_control.json
-    rubrics/fact_anchors/industrial_instrumentation_control.json
-    rubrics/topic_importance/industrial_instrumentation_control.json
-
-## 13. LLM 프롬프트 사용법
-
-사용자가 키워드만 줄 경우, 다음 순서로 진행한다.
+사용자가 키워드만 줄 경우 다음 순서로 진행한다.
 
     1. Model Answer JSON 초안 생성
     2. Fact Anchor JSON 초안 필요 여부 검토
@@ -322,61 +231,28 @@ Topic Importance는 개별 답안 품질보다 시험 선택 전략과 난이도
     7. validate-all 실행
     8. commit
 
-### 13.1 Model Answer 생성
-
-사용 문서:
+Model Answer 생성:
 
     model_answer_generator_prompt.md
-
-사용 상황:
-
-- 새 주제의 답안 구조가 필요함
-- 고득점 요소와 저득점 패턴을 만들고 싶음
-- 현장 적용 포인트를 답안 기준에 넣고 싶음
-
-반영 CLI:
-
     python3 scripts/rubric_manager.py new-model-answer ...
     python3 scripts/rubric_manager.py promote-model-answer --candidate <candidate> --replace
     python3 scripts/rubric_manager.py validate-model-answers
 
-### 13.2 Fact Anchor 생성
-
-사용 문서:
+Fact Anchor 생성:
 
     fact_anchor_generator_prompt.md
-
-사용 상황:
-
-- 새 topic의 핵심 fact 기준이 필요함
-- 기존 Fact Anchor에 해당 주제의 core term이 부족함
-- 답안에서 반드시 확인할 fact 기준을 만들고 싶음
-
-반영 CLI:
-
     python3 scripts/rubric_manager.py new-fact-anchor-topic ...
     python3 scripts/rubric_manager.py promote-fact-anchor-topic --candidate <candidate> --replace
     python3 scripts/rubric_manager.py validate-fact-anchors
 
-### 13.3 Topic Importance 생성
-
-사용 문서:
+Topic Importance 생성:
 
     topic_importance_generator_prompt.md
-
-사용 상황:
-
-- 새 topic이 문항 선택 전략에 영향을 줌
-- difficulty, target score, ceiling 판단이 필요함
-- 회피 위험이나 치명 오답 위험을 관리해야 함
-
-반영 CLI:
-
     python3 scripts/rubric_manager.py new-topic-importance ...
     python3 scripts/rubric_manager.py promote-topic-importance --candidate <candidate> --replace
     python3 scripts/rubric_manager.py validate-topic-importance
 
-## 14. Question Type v2 요약
+## 12. Question Type v2 요약
 
 현재 question type은 4개 lens로 정리한다.
 
@@ -389,7 +265,7 @@ Topic Importance는 개별 답안 품질보다 시험 선택 전략과 난이도
 
 `DEFINE`은 독립 유형으로 사용하지 않고, legacy mapping을 통해 v2 유형으로 흡수한다.
 
-## 15. Difficulty Profile 요약
+## 13. Difficulty Profile 요약
 
 | Profile | 의미 |
 |---|---|
@@ -401,7 +277,7 @@ Topic Importance는 개별 답안 품질보다 시험 선택 전략과 난이도
 Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다.  
 고득점 가능성, ceiling 후보, 문항 선택 전략을 설명하는 보조 lens이다.
 
-## 16. 운영상 중요한 주의
+## 14. 운영상 중요한 주의
 
 `bot.py`는 운영 시 다음 방식으로 실행된다.
 
@@ -416,7 +292,7 @@ Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다.
 
 따라서 최종 Telegram 출력 정리는 `send_message()` boundary에서 처리해야 한다.
 
-## 17. 대표 smoke test
+## 15. 대표 smoke test
 
 Telegram에서 다음을 보낸다.
 
@@ -434,9 +310,15 @@ Telegram에서 다음을 보낸다.
 - `C항목 보완: 일반 설명형 유형에서는 ...` 문구가 없어야 한다.
 - `C항목 보완: 문제 유형 lens에 맞는 핵심 fact...` 문구가 나와야 한다.
 
-## 18. 전체 검증
+## 16. 문서/코드 정합성 검증
+
+문서와 코드 설명이 맞는지 확인한다.
 
     cd ~/hermes/workspace/prof_eng_answer
+
+    python3 scripts/audit_docs_against_code.py
+
+전체 기능 검증:
 
     python3 -m py_compile \
       rubric_registry.py \
@@ -450,33 +332,6 @@ Telegram에서 다음을 보낸다.
 
 정상 기준:
 
+    DOC AUDIT PASSED
     CRUD TESTS PASSED
     ALL VALID
-
-## 19. 문서 정합성 확인
-
-README가 참조하는 docs 파일이 실제 존재하는지 확인한다.
-
-    cd ~/hermes/workspace/prof_eng_answer
-
-    echo "[README referenced docs]"
-    grep -oE 'docs/[A-Za-z0-9_./-]+\.md' README.md | sort -u
-
-    echo
-    echo "[missing referenced docs]"
-    for f in $(grep -oE 'docs/[A-Za-z0-9_./-]+\.md' README.md | sort -u); do
-      [ -f "$f" ] || echo "MISSING: $f"
-    done
-
-docs README가 docs 디렉터리의 모든 문서를 설명하는지도 확인한다.
-
-    echo
-    echo "[docs files not mentioned in docs/README.md]"
-    for f in $(find docs -maxdepth 1 -type f -name '*.md' -printf '%f\n' | sort); do
-      grep -q "\`$f\`" docs/README.md || echo "MISSING_IN_DOCS_README: $f"
-    done
-
-정상 기준:
-
-    MISSING 출력 없음
-    MISSING_IN_DOCS_README 출력 없음
