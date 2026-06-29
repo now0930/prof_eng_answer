@@ -881,3 +881,48 @@ def main():
 
 if __name__ == "__main__":
     main()
+
+# === final Telegram legacy GENERAL cleanup wrapper v1 EOF ===
+# Last-mile cleanup for user-visible output. This prevents legacy GENERAL wording
+# from appearing even if an older pipeline field still contains it.
+try:
+    import re as _telegram_general_cleanup_re_v1
+
+    def _cleanup_legacy_general_output_text_v1(text: str) -> str:
+        if not isinstance(text, str):
+            return text
+
+        replacements = [
+            (
+                r"\s*문제 유형은\s*GENERAL\(일반 설명형\)로 판단하고,\s*C항목은 해당 유형의 Fact 설명 렌즈로 평가했습니\s*다\.?",
+                "",
+            ),
+            (
+                r"\s*문제 유형은\s*GENERAL\(일반 설명형\)로 판단했습니다\.?",
+                "",
+            ),
+            (
+                r"C항목 보완:\s*일반 설명형 유형에서는\s*'문제 요구에 맞는 핵심 fact, 적용 범위, 한계, 실무 의미를 설명했는가'를 충족하도록 답안을 전개하세요\.",
+                "C항목 보완: 문제 유형 lens에 맞는 핵심 fact, 적용 범위, 구성·절차·판정 기준, 실무 의미를 구조적으로 설명하세요.",
+            ),
+        ]
+
+        out = text
+        for pattern, repl in replacements:
+            out = _telegram_general_cleanup_re_v1.sub(pattern, repl, out)
+
+        out = _telegram_general_cleanup_re_v1.sub(r"[ \t]{2,}", " ", out)
+        out = _telegram_general_cleanup_re_v1.sub(r"\n{3,}", "\n\n", out)
+        return out.strip()
+
+
+    if "_TELEGRAM_GENERAL_CLEANUP_V1_INSTALLED" not in globals():
+        _TELEGRAM_GENERAL_CLEANUP_V1_INSTALLED = True
+        _ORIGINAL_FORMAT_RESULT_GENERAL_CLEANUP_V1 = format_result
+
+        def format_result(*args, **kwargs):
+            text = _ORIGINAL_FORMAT_RESULT_GENERAL_CLEANUP_V1(*args, **kwargs)
+            return _cleanup_legacy_general_output_text_v1(text)
+
+except Exception:
+    pass
