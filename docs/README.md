@@ -29,6 +29,8 @@
 | `llm_provider.md` | Gemini, CLOVA provider 설정 |
 | `rubric_authoring_guide.md` | Rubric, Fact Anchor, Model Answer Bank 실제 수정·검증·커밋 절차 |
 | `model_answer_generator_prompt.md` | 키워드만으로 Model Answer JSON 초안을 생성하는 LLM 프롬프트 |
+| `topic_importance_generator_prompt.md` | 키워드만으로 Topic Importance JSON 초안을 생성하는 LLM 프롬프트 |
+| `fact_anchor_generator_prompt.md` | 키워드만으로 Fact Anchor JSON 초안을 생성하는 LLM 프롬프트 |
 
 ## 2. 보조 문서
 
