@@ -311,3 +311,21 @@ QUESTION_TYPE_COVERAGE_SCORE_MODE=strict
 | `docs/difficulty_and_selection_strategy.md` | 난이도, ceiling, 문항 선택 전략 |
 | `docs/docker_compose_usage.md` | Docker compose 운영 방식 |
 | `docs/question_type_taxonomy.md` | question_type v2, sub_criteria, coverage 보정 방식 |
+
+## 문서
+
+현재 구조와 운영 절차는 `docs` 디렉터리에 정리한다.
+
+| 문서 | 목적 |
+|---|---|
+| `docs/README.md` | 문서 인덱스 |
+| `docs/operation_runbook.md` | 운영 점검, 재시작, 장애 대응 |
+| `docs/docker_compose_usage.md` | Docker Compose 운영 방식 |
+| `docs/grading_architecture.md` | A/B/C/D/E 채점 구조와 pipeline |
+| `docs/question_type_taxonomy.md` | Question Type v2 taxonomy와 coverage |
+| `docs/difficulty_and_selection_strategy.md` | Difficulty Profile, ceiling, 문항 선택 전략 |
+| `docs/llm_provider.md` | Gemini/CLOVA provider 설정 |
+| `docs/rubric_authoring_guide.md` | Rubric, Fact Anchor, Model Answer 작성법 |
+
+운영 중 문제가 생기면 먼저 `docs/operation_runbook.md`를 확인한다.
+
