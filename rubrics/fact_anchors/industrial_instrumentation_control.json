@@ -5666,109 +5666,127 @@
     {
       "topic_id": "vibration_measurement_condition_monitoring",
       "priority": "high",
-      "name": "진동 측정과 상태감시",
+      "name": "회전체 진동 측정과 상태감시",
       "aliases": [
-        "진동측정",
-        "상태감시",
+        "진동 측정",
+        "진동 감시",
+        "vibration monitoring",
         "condition monitoring",
+        "변위 센서",
+        "속도 센서",
+        "가속도 센서",
         "shaft vibration",
+        "housing vibration",
         "bearing fault"
       ],
       "triggers": [
         "진동",
-        "진동측정",
-        "상태감시",
+        "진동감시",
+        "condition monitoring",
         "변위센서",
         "속도센서",
         "가속도센서",
         "shaft vibration",
-        "bearing fault",
-        "trip"
+        "housing vibration",
+        "bearing",
+        "trip relay"
       ],
       "anchors": [
         {
           "id": "vibration_measurement_condition_monitoring_anchor_1",
-          "name": "센서별 측정 대상",
-          "expected": "변위 센서는 축 상대변위와 저주파 대진폭 진동, 속도 센서는 housing의 중간 주파수 진동, 가속도 센서는 고주파 충격과 베어링 결함 진단에 주로 적용된다.",
+          "name": "센서별 측정 대상 구분",
+          "expected": "변위 센서는 주로 축 상대변위와 저속 대형 회전체 shaft vibration 감시에, 속도 센서는 housing vibration의 진동 심각도 평가에, 가속도 센서는 고주파 bearing fault와 충격성 진동 진단에 적합하다고 구분해야 한다.",
           "core_terms": [
-            "변위",
-            "속도",
-            "가속도",
-            "주파수 대역"
+            "변위 센서",
+            "속도 센서",
+            "가속도 센서",
+            "shaft vibration",
+            "housing vibration",
+            "bearing fault"
           ],
           "support_terms": [
-            "저주파",
-            "중간 주파수",
-            "고주파",
-            "상대변위",
-            "충격"
+            "proximity probe",
+            "velocity pickup",
+            "accelerometer",
+            "relative vibration",
+            "absolute vibration"
           ]
         },
         {
           "id": "vibration_measurement_condition_monitoring_anchor_2",
-          "name": "shaft vibration과 housing vibration",
-          "expected": "shaft vibration은 주로 비접촉 변위 probe로 축의 상대 운동을 감시하고, housing vibration은 하우징에 부착한 속도 또는 가속도 센서로 구조물 전달 진동을 감시한다.",
+          "name": "주파수 대역과 신호 특성",
+          "expected": "저주파·대변위 영역은 변위, 중간 주파수 기계 진동 심각도는 속도, 고주파 결함과 충격 검출은 가속도가 유리하며 적분·미분 변환만으로 모든 센서를 대체할 수 없다고 설명해야 한다.",
           "core_terms": [
-            "shaft vibration",
-            "housing vibration",
-            "비접촉 변위 probe"
+            "저주파",
+            "중간 주파수",
+            "고주파",
+            "적분",
+            "미분"
           ],
           "support_terms": [
-            "proximity probe",
-            "bearing housing",
-            "velocity pickup",
-            "accelerometer"
+            "frequency range",
+            "noise",
+            "mounting",
+            "signal conditioning",
+            "filter"
           ]
         },
         {
           "id": "vibration_measurement_condition_monitoring_anchor_3",
-          "name": "베어링 결함 진단",
-          "expected": "베어링 결함은 고주파 충격 성분과 반복 주파수 특성이 중요하므로 accelerometer, FFT, envelope analysis, trend를 이용해 진단한다.",
+          "name": "보호용 trip과 진단용 monitoring 구분",
+          "expected": "보호용 trip은 설비 손상 방지를 위한 신뢰성 높은 alarm/trip 설정과 오동작 방지가 핵심이고, 진단용 monitoring은 trend, spectrum, FFT, envelope 등으로 원인 분석과 예방정비를 수행하는 기능이라고 구분해야 한다.",
           "core_terms": [
-            "베어링 결함",
-            "고주파",
-            "FFT",
-            "envelope"
+            "trip",
+            "monitoring",
+            "alarm",
+            "trend",
+            "FFT"
           ],
           "support_terms": [
-            "내륜",
-            "외륜",
-            "ball pass frequency",
-            "trend"
+            "envelope",
+            "spectrum",
+            "setpoint",
+            "relay",
+            "preventive maintenance"
           ]
         },
         {
           "id": "vibration_measurement_condition_monitoring_anchor_4",
-          "name": "보호 trip과 진단 monitoring",
-          "expected": "보호용 trip은 과진동 시 설비 손상을 방지하는 한계 동작이고, 진단용 monitoring은 spectrum과 trend로 원인을 분석하는 기능이다.",
+          "name": "설치와 계측 신뢰성",
+          "expected": "센서 선정만이 아니라 설치 위치, mounting 강성, 케이블·접지·노이즈, 간극 조정, 온도 환경, 교정과 loop test가 진동 감시 신뢰도에 영향을 준다고 설명해야 한다.",
           "core_terms": [
-            "trip",
-            "monitoring",
-            "보호",
-            "진단"
+            "설치 위치",
+            "mounting",
+            "노이즈",
+            "간극",
+            "교정"
           ],
           "support_terms": [
-            "alarm",
-            "setpoint",
-            "false trip",
-            "spectrum"
+            "grounding",
+            "cable",
+            "loop test",
+            "temperature",
+            "gap voltage"
           ]
         },
         {
           "id": "vibration_measurement_condition_monitoring_anchor_5",
-          "name": "현장 적용 조건",
-          "expected": "진동 계측은 설치 강성, 센서 방향, 케이블 노이즈, 접지, alarm/trip 설정, 기존 DCS·보호시스템 연계를 함께 고려해야 한다.",
+          "name": "현장 적용과 유지보수 판단",
+          "expected": "회전체 중요도, 운전 속도, 베어링 형식, 위험도, 기존 DCS/PLC/SIS 연계, 예비품과 유지보수 비용을 고려하여 보호와 진단의 목적에 맞게 센서와 시스템을 선정해야 한다.",
           "core_terms": [
-            "설치",
-            "노이즈",
-            "접지",
-            "setpoint"
+            "회전체 중요도",
+            "운전 속도",
+            "베어링",
+            "DCS",
+            "PLC",
+            "SIS"
           ],
           "support_terms": [
-            "mounting",
-            "shield",
-            "DCS",
-            "protection system"
+            "예비품",
+            "유지보수",
+            "risk",
+            "redundancy",
+            "cost"
           ]
         }
       ]
@@ -5778,98 +5796,116 @@
       "priority": "high",
       "name": "도플러 효과와 속도·유량 측정",
       "aliases": [
-        "도플러",
-        "Doppler",
+        "도플러 효과",
+        "Doppler effect",
         "도플러 유량계",
-        "초음파 도플러"
+        "Doppler flowmeter",
+        "초음파 도플러",
+        "레이더 속도계",
+        "주파수 편이",
+        "frequency shift"
       ],
       "triggers": [
         "도플러",
         "Doppler",
+        "주파수 편이",
+        "접근 시 주파수",
+        "이격 시 주파수",
         "도플러 유량계",
         "초음파 도플러",
-        "주파수 편이",
-        "속도 측정"
+        "레이더 속도"
       ],
       "anchors": [
         {
           "id": "doppler_effect_velocity_flow_measurement_anchor_1",
-          "name": "도플러 효과 정의",
-          "expected": "도플러 효과는 파원, 관측자 또는 반사체의 상대운동 때문에 수신 주파수가 송신 주파수와 달라지는 현상이다.",
-          "core_terms": [
-            "도플러 효과",
-            "상대운동",
-            "수신 주파수"
-          ],
-          "support_terms": [
-            "송신 주파수",
-            "주파수 편이",
-            "반사체"
-          ]
-        },
-        {
-          "id": "doppler_effect_velocity_flow_measurement_anchor_2",
-          "name": "접근·이격 주파수 변화",
-          "expected": "반사체가 접근하면 수신 주파수는 증가하고, 이격하면 수신 주파수는 감소한다.",
+          "name": "도플러 주파수 변화 방향",
+          "expected": "송신원 또는 반사체가 관측자 쪽으로 접근하면 수신 주파수는 증가하고, 멀어지면 수신 주파수는 감소한다고 설명해야 한다.",
           "core_terms": [
             "접근",
             "주파수 증가",
             "이격",
-            "주파수 감소"
+            "주파수 감소",
+            "Doppler shift"
           ],
           "support_terms": [
-            "approach",
-            "recede",
-            "frequency shift"
+            "상대속도",
+            "파동",
+            "반사파",
+            "수신 주파수"
+          ]
+        },
+        {
+          "id": "doppler_effect_velocity_flow_measurement_anchor_2",
+          "name": "반사파 기반 속도 산출",
+          "expected": "도플러 속도 측정은 송신파와 이동 물체 또는 유체 내 산란체에서 돌아온 반사파의 주파수 차이를 이용해 속도 성분을 산출한다.",
+          "core_terms": [
+            "송신파",
+            "반사파",
+            "주파수 차",
+            "속도"
+          ],
+          "support_terms": [
+            "입사각",
+            "cosine",
+            "radar",
+            "ultrasonic",
+            "scatterer"
           ]
         },
         {
           "id": "doppler_effect_velocity_flow_measurement_anchor_3",
-          "name": "속도 산출 원리",
-          "expected": "도플러 측정은 송신파와 반사파의 주파수 차이를 이용하여 반사체의 속도 성분을 계산한다.",
+          "name": "도플러 초음파 유량계의 반사체 조건",
+          "expected": "도플러 초음파 유량계는 유체 내 입자, 기포, 슬러리 등 초음파를 산란시키는 반사체가 필요하며 깨끗한 단상 액체에는 transit-time 방식이 더 적합할 수 있다.",
           "core_terms": [
-            "송신파",
-            "반사파",
-            "주파수 차이",
-            "속도"
+            "입자",
+            "기포",
+            "반사체",
+            "산란체",
+            "transit-time"
           ],
           "support_terms": [
-            "incident wave",
-            "reflected wave",
-            "velocity component"
+            "슬러리",
+            "탁도",
+            "single-phase",
+            "ultrasonic flowmeter"
           ]
         },
         {
           "id": "doppler_effect_velocity_flow_measurement_anchor_4",
-          "name": "초음파 도플러 유량계 조건",
-          "expected": "도플러 초음파 유량계는 유체 내 입자, 기포, 슬러리 등 초음파를 산란·반사하는 반사체가 있어야 안정적으로 동작한다.",
+          "name": "적용 분야 구분",
+          "expected": "레이다는 주로 비접촉 거리·속도 측정에, 초음파 도플러는 유체 속 산란체 속도 측정에, 유량계는 관 단면적과 평균 유속을 이용한 유량 산정에 적용된다고 구분해야 한다.",
           "core_terms": [
+            "레이다",
             "초음파",
-            "입자",
-            "기포",
-            "반사체"
+            "유량",
+            "평균 유속",
+            "관 단면적"
           ],
           "support_terms": [
-            "slurry",
-            "scatter",
-            "dirty liquid"
+            "non-contact",
+            "velocity",
+            "flow rate",
+            "profile",
+            "installation"
           ]
         },
         {
           "id": "doppler_effect_velocity_flow_measurement_anchor_5",
-          "name": "적용 구분",
-          "expected": "깨끗한 액체에는 transit-time 방식이 유리한 경우가 많고, 도플러 방식은 반사체가 있는 유체에 적합하며 레이다는 전자파 반사를 이용한다.",
+          "name": "한계와 설치 조건",
+          "expected": "도플러 측정은 입사각, 반사 신호 세기, 유속 분포, 배관 충만 상태, 기포·입자 농도, 직관거리, 노이즈에 영향을 받으므로 적용 조건 검토가 필요하다.",
           "core_terms": [
-            "transit-time",
-            "도플러",
-            "레이다",
-            "초음파"
+            "입사각",
+            "신호 세기",
+            "유속 분포",
+            "직관거리",
+            "노이즈"
           ],
           "support_terms": [
-            "clean liquid",
-            "radar",
-            "매질",
-            "설치각"
+            "SNR",
+            "pipe full",
+            "concentration",
+            "alignment",
+            "calibration"
           ]
         }
       ]
@@ -5877,14 +5913,16 @@
     {
       "topic_id": "adc_dac_signal_conversion_interface",
       "priority": "high",
-      "name": "ADC/DAC 신호 변환 인터페이스",
+      "name": "ADC/DAC 신호 변환과 계측 인터페이스",
       "aliases": [
         "ADC",
         "DAC",
         "A/D 변환",
         "D/A 변환",
-        "표본화",
-        "양자화"
+        "sampling",
+        "quantization",
+        "LSB",
+        "샘플링 지터"
       ],
       "triggers": [
         "ADC",
@@ -5894,94 +5932,103 @@
         "표본화",
         "양자화",
         "부호화",
+        "해상도",
         "샘플링",
-        "sampling",
-        "quantization"
+        "jitter"
       ],
       "anchors": [
         {
           "id": "adc_dac_signal_conversion_interface_anchor_1",
-          "name": "ADC 변환 과정",
-          "expected": "ADC는 아날로그 신호를 표본화, 양자화, 부호화 과정을 거쳐 디지털 코드로 변환한다.",
+          "name": "ADC 변환 단계",
+          "expected": "ADC는 아날로그 입력을 일정 주기로 표본화하고, 각 표본값을 유한한 단계로 양자화한 뒤, 디지털 코드로 부호화하는 과정이라고 설명해야 한다.",
           "core_terms": [
             "ADC",
             "표본화",
             "양자화",
-            "부호화"
+            "부호화",
+            "디지털 코드"
           ],
           "support_terms": [
             "sample and hold",
-            "binary code",
-            "digital conversion"
+            "sampling period",
+            "LSB",
+            "binary code"
           ]
         },
         {
           "id": "adc_dac_signal_conversion_interface_anchor_2",
-          "name": "DAC 변환 과정",
-          "expected": "DAC는 디지털 코드를 디코딩하고 가중 합성한 뒤 필터링을 통해 아날로그 출력으로 복원한다.",
+          "name": "DAC 변환 단계",
+          "expected": "DAC는 디지털 코드를 디코딩하고 저항 가중합, 전류 가중합 또는 스위치드 커패시터 방식 등으로 아날로그 값을 합성한 뒤, 필요 시 reconstruction filter로 계단파 성분을 완화한다.",
           "core_terms": [
             "DAC",
             "디코딩",
             "가중 합성",
-            "필터링"
+            "필터링",
+            "아날로그 출력"
           ],
           "support_terms": [
-            "R-2R ladder",
-            "current source",
+            "R-2R",
+            "current steering",
+            "zero-order hold",
             "reconstruction filter"
           ]
         },
         {
           "id": "adc_dac_signal_conversion_interface_anchor_3",
-          "name": "해상도와 정확도 구분",
-          "expected": "bit 수 증가는 LSB를 작게 하여 해상도를 높이지만 기준전압, 노이즈, 선형성, offset/gain error가 나쁘면 정확도는 보장되지 않는다.",
+          "name": "해상도와 정확도의 구분",
+          "expected": "bit 수가 증가하면 LSB가 작아져 해상도는 좋아지지만, offset error, gain error, noise, 기준전압, 비선형성이 나쁘면 전체 정확도가 항상 좋아지는 것은 아니다.",
           "core_terms": [
-            "bit",
+            "bit 수",
             "해상도",
             "정확도",
-            "LSB"
+            "LSB",
+            "offset error",
+            "gain error"
           ],
           "support_terms": [
             "reference voltage",
             "noise",
-            "offset",
-            "gain"
+            "accuracy",
+            "resolution"
           ]
         },
         {
           "id": "adc_dac_signal_conversion_interface_anchor_4",
           "name": "오차 요인",
-          "expected": "ADC/DAC 품질은 양자화 오차, 오프셋 오차, 이득 오차, INL/DNL, 샘플링 지터의 영향을 받는다.",
+          "expected": "양자화 오차, 오프셋 오차, 이득 오차, INL/DNL, 샘플링 지터, 기준전압 불안정, 노이즈가 계측 신호 품질에 영향을 준다고 설명해야 한다.",
           "core_terms": [
             "양자화 오차",
             "오프셋 오차",
             "이득 오차",
             "INL",
             "DNL",
-            "지터"
+            "샘플링 지터"
           ],
           "support_terms": [
+            "reference",
+            "noise",
             "linearity",
-            "sampling jitter",
-            "error budget"
+            "calibration"
           ]
         },
         {
           "id": "adc_dac_signal_conversion_interface_anchor_5",
-          "name": "현장 인터페이스 고려사항",
-          "expected": "계측 인터페이스에서는 anti-aliasing filter, 기준전압 안정도, 접지, 차폐, 절연, PLC scan time, 제어 주기와의 정합성을 고려해야 한다.",
+          "name": "계측 인터페이스 적용 조건",
+          "expected": "실제 PLC/DCS/DAQ 인터페이스에서는 anti-aliasing filter, 샘플링 주기, 입력 범위, 절연, 접지, shield, common-mode noise, 보정과 진단 기능을 함께 고려해야 한다.",
           "core_terms": [
             "anti-aliasing",
-            "기준전압",
-            "접지",
+            "샘플링 주기",
+            "입력 범위",
             "절연",
-            "scan time"
+            "접지"
           ],
           "support_terms": [
+            "DCS",
+            "PLC",
+            "DAQ",
             "shield",
-            "grounding",
-            "control period",
-            "DAQ"
+            "common-mode",
+            "calibration"
           ]
         }
       ]
@@ -5989,108 +6036,118 @@
     {
       "topic_id": "temperature_sensor_thermowell_material_selection",
       "priority": "high",
-      "name": "온도센서 Thermowell 재질·형상 선정",
+      "name": "온도센서 보호관 thermowell 재질·형상 선정",
       "aliases": [
         "thermowell",
-        "써모웰",
-        "온도센서 보호관",
         "보호관",
-        "삽입길이"
+        "온도계 보호관",
+        "wake frequency",
+        "삽입 길이",
+        "보호관 재질"
       ],
       "triggers": [
         "thermowell",
-        "써모웰",
-        "온도센서 보호관",
         "보호관",
+        "온도센서 보호",
         "삽입 길이",
         "wake frequency",
-        "온도센서 재질"
+        "보호관 파손",
+        "재질 선정"
       ],
       "anchors": [
         {
           "id": "temperature_sensor_thermowell_material_selection_anchor_1",
           "name": "thermowell 목적",
-          "expected": "Thermowell은 온도센서를 압력, 부식, 침식, 유속, 충격으로부터 보호하고 운전 중 센서 교체성을 확보하는 압력 경계 부품이다.",
+          "expected": "Thermowell은 온도센서를 공정 유체의 압력, 부식, 침식, 유속, 충격으로부터 보호하고 압력 경계를 유지하면서 운전 중 센서 교체성을 확보하는 부품이라고 설명해야 한다.",
           "core_terms": [
             "thermowell",
-            "보호",
+            "센서 보호",
             "압력 경계",
-            "센서 교체"
+            "센서 교체",
+            "공정 유체"
           ],
           "support_terms": [
-            "부식",
-            "침식",
-            "유속",
-            "process connection"
+            "RTD",
+            "thermocouple",
+            "maintenance",
+            "process isolation"
           ]
         },
         {
           "id": "temperature_sensor_thermowell_material_selection_anchor_2",
-          "name": "재질 선정",
-          "expected": "재질은 온도, 압력, 부식성, 침식성, 유체 조성, 기존 배관 재질과의 적합성에 따라 SS316, Hastelloy, Inconel, Monel, Titanium 등을 검토한다.",
+          "name": "재질 선정 기준",
+          "expected": "재질은 공정 온도, 압력, 부식성, 침식성, 유체 조성, 유속, 기계적 강도와 기존 배관 재질을 고려하여 선정해야 하며 SS316, Hastelloy, Monel, Inconel 등은 조건과 연결해 제시해야 한다.",
           "core_terms": [
             "재질",
             "온도",
             "압력",
-            "부식",
-            "SS316"
+            "부식성",
+            "침식성",
+            "SS316",
+            "Hastelloy"
           ],
           "support_terms": [
-            "Hastelloy",
-            "Inconel",
             "Monel",
-            "Titanium",
-            "galvanic corrosion"
+            "Inconel",
+            "compatibility",
+            "wetted part",
+            "pipe material"
           ]
         },
         {
           "id": "temperature_sensor_thermowell_material_selection_anchor_3",
           "name": "형상과 삽입 길이",
-          "expected": "형상과 삽입 길이는 대표 온도 측정, 응답성, 강도, 압력손실, 설치 공간을 고려하여 결정한다.",
+          "expected": "Straight, tapered, stepped 등 형상과 삽입 길이는 강도, 응답성, 유동 방해, 설치 공간, 센서 tip 위치와 연결되며 길수록 항상 좋은 것은 아니라고 설명해야 한다.",
           "core_terms": [
             "형상",
             "삽입 길이",
-            "응답성",
-            "강도"
-          ],
-          "support_terms": [
             "straight",
             "tapered",
             "stepped",
-            "immersion length"
+            "응답성"
+          ],
+          "support_terms": [
+            "tip position",
+            "immersion",
+            "strength",
+            "flow disturbance"
           ]
         },
         {
           "id": "temperature_sensor_thermowell_material_selection_anchor_4",
-          "name": "진동·파손 위험",
-          "expected": "유속이 큰 배관에서는 vortex shedding과 wake frequency가 thermowell 고유진동수와 근접하면 피로 파손 위험이 있으므로 진동 검토가 필요하다.",
+          "name": "wake frequency와 진동 파손",
+          "expected": "유속이 큰 배관에서는 vortex shedding에 따른 wake frequency가 thermowell 고유진동수와 가까워지면 공진과 피로 파손이 발생할 수 있으므로 진동 검토와 공진 회피가 필요하다.",
           "core_terms": [
-            "vortex shedding",
             "wake frequency",
+            "vortex shedding",
             "고유진동수",
+            "공진",
             "피로 파손"
           ],
           "support_terms": [
-            "유속",
-            "resonance",
-            "ASME PTC 19.3 TW"
+            "ASME PTC 19.3 TW",
+            "flow velocity",
+            "fatigue",
+            "stress"
           ]
         },
         {
           "id": "temperature_sensor_thermowell_material_selection_anchor_5",
           "name": "응답 지연과 유지보수",
-          "expected": "Thermowell은 센서 보호와 교체성을 높이지만 열용량 증가로 응답 지연을 유발할 수 있어 보호성, 응답성, 유지보수, 비용을 함께 평가해야 한다.",
+          "expected": "Thermowell은 센서를 보호하지만 열용량과 전도 경로 때문에 응답 지연을 증가시킬 수 있으므로 제어 루프 응답, 교정, 청소, 교체성, 예비품 표준화를 함께 고려해야 한다.",
           "core_terms": [
             "응답 지연",
-            "유지보수",
-            "비용",
-            "교체성"
+            "열용량",
+            "제어 루프",
+            "교정",
+            "유지보수"
           ],
           "support_terms": [
-            "thermal lag",
+            "response time",
+            "cleaning",
+            "replacement",
             "spare",
-            "standardization",
-            "shutdown"
+            "standardization"
           ]
         }
       ]
@@ -6098,111 +6155,122 @@
     {
       "topic_id": "level_measurement_sensor_selection",
       "priority": "high",
-      "name": "레벨 측정 센서 비교·선정",
+      "name": "레벨 측정 센서 선정",
       "aliases": [
-        "레벨 측정",
         "level measurement",
-        "GWR",
-        "초음파 레벨계",
-        "정전용량식 레벨계"
-      ],
-      "triggers": [
-        "레벨",
-        "level",
+        "레벨계",
         "초음파 레벨",
-        "플로트",
+        "플로트 레벨",
         "GWR",
         "가이드웨이브 레이더",
         "레이저 레벨",
+        "정전용량식 레벨"
+      ],
+      "triggers": [
+        "레벨 측정",
+        "레벨계",
+        "초음파 레벨",
+        "플로트",
+        "GWR",
+        "가이드웨이브",
+        "레이저 레벨",
         "정전용량식",
-        "액위"
+        "level sensor"
       ],
       "anchors": [
         {
           "id": "level_measurement_sensor_selection_anchor_1",
-          "name": "접촉·비접촉 분류",
-          "expected": "초음파와 레이저는 비접촉식, 플로트와 정전용량식은 접촉식이며, GWR은 probe를 따라 전자파가 진행하므로 접촉식 계열로 보는 것이 적절하다.",
+          "name": "접촉식·비접촉식 분류",
+          "expected": "초음파와 비접촉 레이더·레이저는 비접촉식, 플로트와 정전용량식 및 GWR probe 방식은 공정과 접촉하는 방식으로 분류하고 각 방식의 설치 조건을 구분해야 한다.",
           "core_terms": [
             "접촉식",
             "비접촉식",
             "초음파",
+            "플로트",
             "GWR",
-            "플로트"
+            "정전용량식"
           ],
           "support_terms": [
+            "radar",
             "laser",
-            "capacitance",
             "probe",
-            "guided wave radar"
+            "installation",
+            "tank"
           ]
         },
         {
           "id": "level_measurement_sensor_selection_anchor_2",
-          "name": "초음파·레이저 한계",
-          "expected": "초음파와 레이저 레벨계는 비접촉 장점이 있으나 거품, 증기, 분진, 표면 난반사, 내부 구조물 영향을 받을 수 있다.",
+          "name": "초음파·레이저·비접촉 레이더 한계",
+          "expected": "비접촉식 계기는 탱크 상부 설치와 유지보수 장점이 있으나 거품, 증기, 분진, 난반사, 온도층, 압력 조건, 표면 상태에 의해 오차가 발생할 수 있다.",
           "core_terms": [
-            "초음파",
-            "레이저",
             "거품",
             "증기",
-            "분진"
+            "분진",
+            "난반사",
+            "비접촉식"
           ],
           "support_terms": [
-            "non-contact",
-            "reflection",
-            "false echo",
-            "vapor"
+            "ultrasonic",
+            "laser",
+            "radar",
+            "surface",
+            "temperature gradient"
           ]
         },
         {
           "id": "level_measurement_sensor_selection_anchor_3",
-          "name": "플로트 방식 조건",
-          "expected": "플로트 방식은 구조가 단순하고 저비용이나 점도, 고착, 슬러지, 부식, 기계적 마모에 취약하다.",
-          "core_terms": [
-            "플로트",
-            "점도",
-            "고착",
-            "부식"
-          ],
-          "support_terms": [
-            "sludge",
-            "mechanical wear",
-            "maintenance"
-          ]
-        },
-        {
-          "id": "level_measurement_sensor_selection_anchor_4",
-          "name": "GWR·정전용량식 조건",
-          "expected": "GWR은 유전율, probe 부착물, 계면 조건을 고려해야 하고 정전용량식은 유전율, coating, 접지, interface 조건의 영향을 크게 받는다.",
+          "name": "GWR와 정전용량식 조건",
+          "expected": "GWR은 probe를 따라 전자파가 진행하므로 유전율, 부착물, probe 형상, 설치 간섭을 고려해야 하며, 정전용량식은 유전율 변화, coating, interface 측정 조건에 민감하다고 설명해야 한다.",
           "core_terms": [
             "GWR",
-            "정전용량식",
+            "probe",
             "유전율",
-            "부착물"
+            "부착물",
+            "정전용량식"
           ],
           "support_terms": [
-            "interface",
+            "guided wave radar",
             "coating",
-            "grounding",
+            "interface",
             "dielectric constant"
           ]
         },
         {
-          "id": "level_measurement_sensor_selection_anchor_5",
-          "name": "현장 선정 기준",
-          "expected": "레벨 센서는 압력·온도, 거품·증기·분진, 점도, 부식성, 방폭, 세정성, calibration, 기존 nozzle과 wiring, 비용을 종합해 선정한다.",
+          "id": "level_measurement_sensor_selection_anchor_4",
+          "name": "플로트와 접촉식 한계",
+          "expected": "플로트식은 구조가 단순하고 직관적이지만 점도, 고착, 부식성, 밀도 변화, 기계적 마모, 난류에 영향을 받으므로 공정 유체 조건을 확인해야 한다.",
           "core_terms": [
-            "압력",
-            "온도",
-            "방폭",
+            "플로트",
+            "점도",
+            "고착",
             "부식성",
-            "비용"
+            "밀도"
           ],
           "support_terms": [
-            "nozzle",
-            "wiring",
-            "calibration",
-            "cleaning"
+            "mechanical wear",
+            "turbulence",
+            "float",
+            "maintenance"
+          ]
+        },
+        {
+          "id": "level_measurement_sensor_selection_anchor_5",
+          "name": "선정 기준과 안전 조건",
+          "expected": "레벨 센서 선정은 측정 범위, 정확도, 탱크 형상, 거품·증기·유전율·점도·부식성, 방폭, SIL/인터록, 유지보수 접근성, 비용과 기존 DCS/PLC 연계를 함께 판단해야 한다.",
+          "core_terms": [
+            "측정 범위",
+            "정확도",
+            "방폭",
+            "유지보수",
+            "DCS",
+            "PLC"
+          ],
+          "support_terms": [
+            "SIL",
+            "interlock",
+            "cost",
+            "compatibility",
+            "process condition"
           ]
         }
       ]
@@ -6210,13 +6278,15 @@
     {
       "topic_id": "continuous_discrete_control_model_comparison",
       "priority": "high",
-      "name": "연속시간·이산시간·이산사건 제어모델 비교",
+      "name": "연속시간·이산시간·이산사건 제어 모델 비교",
       "aliases": [
-        "연속시간 모델",
+        "continuous model",
+        "discrete model",
         "이산시간 모델",
         "이산사건 모델",
         "z 변환",
-        "차분방정식"
+        "차분방정식",
+        "sampling"
       ],
       "triggers": [
         "연속시간",
@@ -6224,90 +6294,98 @@
         "이산사건",
         "차분방정식",
         "z 변환",
-        "sampling period",
+        "sampling",
         "aliasing",
-        "디지털 제어 모델"
+        "digital control"
       ],
       "anchors": [
         {
           "id": "continuous_discrete_control_model_comparison_anchor_1",
           "name": "연속시간 모델",
-          "expected": "연속시간 모델은 시간 변수가 연속이고 미분방정식, 전달함수, Laplace 변환으로 표현되며 물리계 동특성 해석에 적합하다.",
+          "expected": "연속시간 모델은 시간 변수가 연속이며 미분방정식, Laplace 변환, 전달함수, 상태방정식으로 공정 동특성을 표현한다고 설명해야 한다.",
           "core_terms": [
             "연속시간",
             "미분방정식",
+            "Laplace",
             "전달함수",
-            "Laplace"
+            "상태방정식"
           ],
           "support_terms": [
-            "continuous time",
-            "frequency response",
-            "analog"
+            "s-domain",
+            "dynamic system",
+            "continuous control"
           ]
         },
         {
           "id": "continuous_discrete_control_model_comparison_anchor_2",
           "name": "이산시간 모델",
-          "expected": "이산시간 모델은 sampling period마다 값이 갱신되며 차분방정식과 z 변환으로 표현되어 디지털 제어기 구현에 적합하다.",
+          "expected": "이산시간 모델은 샘플링 주기마다 갱신되는 신호를 차분방정식, z 변환, pulse transfer function 등으로 표현하며 디지털 제어기 구현과 직접 연결된다.",
           "core_terms": [
             "이산시간",
-            "sampling period",
+            "샘플링 주기",
             "차분방정식",
-            "z 변환"
+            "z 변환",
+            "디지털 제어"
           ],
           "support_terms": [
-            "discrete time",
-            "pulse transfer function",
-            "digital control"
+            "sampled-data",
+            "pulse transfer",
+            "ZOH",
+            "controller implementation"
           ]
         },
         {
           "id": "continuous_discrete_control_model_comparison_anchor_3",
           "name": "이산사건 모델",
-          "expected": "이산사건 모델은 연속량보다 이벤트 발생과 상태 전이가 중요하며 PLC sequence, interlock, batch process에 적합하다.",
+          "expected": "이산사건 모델은 연속 신호값보다 상태, 이벤트, 조건, 논리 전이를 중심으로 설비 sequence, interlock, PLC logic, batch process를 표현한다고 구분해야 한다.",
           "core_terms": [
             "이산사건",
+            "상태",
             "이벤트",
-            "상태 전이",
+            "논리 전이",
             "PLC"
           ],
           "support_terms": [
             "sequence",
             "interlock",
             "batch",
-            "finite state"
+            "state machine",
+            "Petri net"
           ]
         },
         {
           "id": "continuous_discrete_control_model_comparison_anchor_4",
-          "name": "디지털 제어 영향",
-          "expected": "디지털 제어에서는 zero-order hold, computation delay, quantization, phase lag가 안정성과 응답성에 영향을 준다.",
+          "name": "샘플링과 aliasing",
+          "expected": "아날로그 신호를 이산화할 때 샘플링 주기와 Nyquist 조건, anti-aliasing filter를 고려하지 않으면 aliasing과 정보 손실이 발생한다고 설명해야 한다.",
           "core_terms": [
-            "zero-order hold",
-            "계산 지연",
-            "quantization",
-            "phase lag"
+            "샘플링",
+            "Nyquist",
+            "aliasing",
+            "anti-aliasing"
           ],
           "support_terms": [
-            "scan time",
-            "sampled-data",
-            "stability"
+            "sampling frequency",
+            "filter",
+            "information loss",
+            "discretization"
           ]
         },
         {
           "id": "continuous_discrete_control_model_comparison_anchor_5",
-          "name": "aliasing과 샘플링",
-          "expected": "샘플링 주기가 부적절하면 aliasing이 발생하므로 신호 대역폭, anti-aliasing filter, 제어 주기, 통신 지연을 고려해야 한다.",
+          "name": "디지털 제어 적용 한계",
+          "expected": "디지털 제어에서는 ZOH, 계산 지연, 통신 지연, quantization, sampling jitter가 위상 지연과 안정도 여유에 영향을 주므로 연속 제어식을 단순히 코드로 옮기는 것으로 보아서는 안 된다.",
           "core_terms": [
-            "aliasing",
-            "anti-aliasing",
-            "샘플링",
-            "통신 지연"
+            "ZOH",
+            "계산 지연",
+            "위상 지연",
+            "안정도 여유",
+            "quantization"
           ],
           "support_terms": [
-            "bandwidth",
-            "control period",
-            "sampling theorem"
+            "communication delay",
+            "jitter",
+            "phase margin",
+            "implementation"
           ]
         }
       ]
@@ -6315,96 +6393,116 @@
     {
       "topic_id": "second_order_system_resonance_frequency_response",
       "priority": "high",
-      "name": "2차 시스템 주파수응답과 공진주파수",
+      "name": "2차 시스템 주파수응답과 공진",
       "aliases": [
         "2차 시스템",
-        "공진주파수",
-        "resonance frequency",
+        "second order system",
         "frequency response",
-        "감쇠비"
+        "resonance",
+        "공진 주파수",
+        "감쇠비",
+        "zeta",
+        "omega_n"
       ],
       "triggers": [
         "2차 시스템",
-        "2차계",
-        "공진주파수",
         "주파수응답",
-        "resonance",
+        "공진",
+        "공진 주파수",
+        "resonant peak",
         "감쇠비",
         "zeta",
-        "omega r"
+        "omega"
       ],
       "anchors": [
         {
           "id": "second_order_system_resonance_frequency_response_anchor_1",
           "name": "표준 2차 전달함수",
-          "expected": "표준 2차 시스템은 G(s)=Kωn²/(s²+2ζωns+ωn²) 형태로 표현하며 ωn은 고유진동수, ζ는 감쇠비이다.",
+          "expected": "표준 2차계는 보통 G(s)=Kωn²/(s²+2ζωn s+ωn²)로 표현하며, ωn은 고유진동수, ζ는 감쇠비라고 설명해야 한다.",
           "core_terms": [
-            "2차 전달함수",
+            "G(s)",
             "ωn",
             "ζ",
+            "고유진동수",
             "감쇠비"
           ],
           "support_terms": [
+            "second order",
+            "transfer function",
             "natural frequency",
-            "standard second-order system"
+            "damping ratio"
           ]
         },
         {
           "id": "second_order_system_resonance_frequency_response_anchor_2",
           "name": "주파수응답 크기식",
-          "expected": "s=jω를 대입하면 정규화 크기는 |G(jω)|/K = 1 / sqrt((1-(ω/ωn)²)² + (2ζω/ωn)²)로 표현된다.",
+          "expected": "s=jω를 대입하면 2차계 주파수응답 크기는 주파수비 r=ω/ωn에 대해 분모 √((1-r²)²+(2ζr)²)의 형태로 해석된다고 설명해야 한다.",
           "core_terms": [
+            "s=jω",
             "주파수응답",
+            "r=ω/ωn",
             "크기식",
-            "s=jω"
+            "분모"
           ],
           "support_terms": [
-            "normalized frequency",
-            "magnitude response"
+            "magnitude",
+            "frequency ratio",
+            "Bode",
+            "amplitude ratio"
           ]
         },
         {
           "id": "second_order_system_resonance_frequency_response_anchor_3",
-          "name": "공진주파수와 조건",
-          "expected": "표준 2차계의 공진주파수는 ζ < 1/sqrt(2)일 때 ωr = ωn sqrt(1 - 2ζ²)로 주어진다.",
+          "name": "공진 주파수와 조건",
+          "expected": "표준 2차 저역통과계의 공진 주파수는 ωr=ωn√(1−2ζ²)이며, 실수 공진 주파수가 존재하려면 ζ<1/√2 조건을 만족해야 한다.",
           "core_terms": [
-            "공진주파수",
             "ωr",
-            "ζ < 1/sqrt(2)"
+            "ωn√(1−2ζ²)",
+            "ζ<1/√2",
+            "공진 주파수"
           ],
           "support_terms": [
-            "resonant peak",
-            "omega r"
+            "resonance",
+            "resonant frequency",
+            "low-pass",
+            "condition"
           ]
         },
         {
           "id": "second_order_system_resonance_frequency_response_anchor_4",
-          "name": "감쇠비와 공진 peak",
-          "expected": "감쇠비가 작을수록 공진 peak가 커지고, ζ ≥ 1/sqrt(2)에서는 뚜렷한 공진 peak가 나타나지 않는다.",
-          "core_terms": [
-            "감쇠비",
-            "공진 peak",
-            "ζ"
-          ],
-          "support_terms": [
-            "resonant peak",
-            "damping ratio"
-          ]
-        },
-        {
-          "id": "second_order_system_resonance_frequency_response_anchor_5",
-          "name": "overshoot와 resonance 구분",
-          "expected": "시간응답 overshoot는 step response에서 목표값을 초과하는 현상이고, 주파수응답 resonance는 특정 주파수 입력에서 이득이 커지는 현상이며 ζ=1 임계감쇠는 공진 조건이 아니다.",
+          "name": "시간응답과 주파수응답 구분",
+          "expected": "시간응답의 overshoot와 주파수응답의 resonance는 관련은 있지만 같은 개념이 아니며, ζ=1은 임계감쇠 조건이지 공진 조건이 아니라고 명확히 구분해야 한다.",
           "core_terms": [
             "overshoot",
             "resonance",
             "ζ=1",
-            "임계감쇠"
+            "임계감쇠",
+            "공진 조건"
           ],
           "support_terms": [
-            "step response",
+            "time response",
             "frequency response",
-            "critical damping"
+            "critical damping",
+            "confusion"
+          ]
+        },
+        {
+          "id": "second_order_system_resonance_frequency_response_anchor_5",
+          "name": "제어·계측 적용 판단",
+          "expected": "공진은 진동 증폭, 노이즈 증폭, 제어루프 불안정, 센서·기계 구조물 손상 위험과 연결되므로 감쇠비, bandwidth, loop tuning, mechanical resonance 회피를 함께 고려해야 한다.",
+          "core_terms": [
+            "진동 증폭",
+            "노이즈 증폭",
+            "제어루프",
+            "bandwidth",
+            "loop tuning"
+          ],
+          "support_terms": [
+            "mechanical resonance",
+            "stability",
+            "sensor",
+            "damping",
+            "design"
           ]
         }
       ]

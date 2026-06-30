@@ -57,7 +57,8 @@
         "기존 설비 교체 비용"
       ],
       "revision_notes": [
-        "초기 샘플 답안. 향후 실제 채점 사례를 반영해 개도 범위, 제조사 sizing sheet, FL/FP/Fd 계수까지 확장 가능."
+        "초기 샘플 답안. 향후 실제 채점 사례를 반영해 개도 범위, 제조사 sizing sheet, FL/FP/Fd 계수까지 확장 가능.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ],
       "legacy_question_type": "DEFINE"
     },
@@ -110,7 +111,8 @@
         "기존 설비 변경 비용"
       ],
       "revision_notes": [
-        "계산형도 C항목의 평가 렌즈로만 사용한다. 별도 총점 체계는 만들지 않는다."
+        "계산형도 C항목의 평가 렌즈로만 사용한다. 별도 총점 체계는 만들지 않는다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ],
       "legacy_question_type": "CALC_DESIGN"
     },
@@ -162,7 +164,8 @@
         "유지보수 비용"
       ],
       "revision_notes": [
-        "Fact Anchor Bank의 cavitation anchor와 직접 연결되는 샘플 답안."
+        "Fact Anchor Bank의 cavitation anchor와 직접 연결되는 샘플 답안.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ],
       "legacy_question_type": "CAUSE_ACTION"
     },
@@ -214,7 +217,8 @@
         "교정 주기"
       ],
       "revision_notes": [
-        "COMPARE 유형 샘플. 향후 IEC/KS 센서 등급, 2선식/3선식/4선식 보상 내용을 추가 가능."
+        "COMPARE 유형 샘플. 향후 IEC/KS 센서 등급, 2선식/3선식/4선식 보상 내용을 추가 가능.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ],
       "legacy_question_type": "COMPARE"
     },
@@ -271,7 +275,8 @@
         "성적서"
       ],
       "revision_notes": [
-        "PROCEDURE 유형 샘플. 교정 대상별 압력/온도/유량/전기 신호 절차로 확장 가능."
+        "PROCEDURE 유형 샘플. 교정 대상별 압력/온도/유량/전기 신호 절차로 확장 가능.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ],
       "legacy_question_type": "PROCEDURE"
     },
@@ -328,7 +333,8 @@
         "기존 PLC/DCS 연계"
       ],
       "revision_notes": [
-        "EVALUATION 유형 샘플. 차체공장, 조립공장, 공정별 지표로 세분화 가능."
+        "EVALUATION 유형 샘플. 차체공장, 조립공장, 공정별 지표로 세분화 가능.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ],
       "legacy_question_type": "EVALUATION"
     },
@@ -408,7 +414,8 @@
       "revision_notes": [
         "Cv/Kv 비교형 초기 모범 답안.",
         "모범 답안은 정답 문장 매칭용이 아니라 구조·깊이·현장 적용성 기준으로 사용한다.",
-        "향후 제조사 sizing sheet, IEC/ISA 기준, 액체/기체/증기 sizing 차이를 추가 가능."
+        "향후 제조사 sizing sheet, IEC/ISA 기준, 액체/기체/증기 sizing 차이를 추가 가능.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ],
       "legacy_question_type": "COMPARE"
     },
@@ -479,7 +486,8 @@
       ],
       "revision_notes": [
         "139회 산업계측제어기술사 3교시 1번 채점 피드백 반영.",
-        "관련 이론이 맞더라도 출제자가 제시한 응답축을 충분히 설명하지 않으면 낮게 평가하도록 추가."
+        "관련 이론이 맞더라도 출제자가 제시한 응답축을 충분히 설명하지 않으면 낮게 평가하도록 추가.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ],
       "legacy_question_type": "COMPARE"
     },
@@ -548,7 +556,8 @@
       "revision_notes": [
         "Question Type v2 기준으로 IMPLEMENTATION_EVALUATION에 배치한다.",
         "절차 나열만이 아니라 교정회로, 판정 기준, 현장 오차 요인, 유지보수 판단을 함께 평가한다.",
-        "짧은 답안의 경우 일부 키워드가 있어도 C항목과 D항목 누락으로 낮게 평가한다."
+        "짧은 답안의 경우 일부 키워드가 있어도 C항목과 D항목 누락으로 낮게 평가한다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ],
       "topic_aliases": [
         "차압전송기",
@@ -606,7 +615,7 @@
         "금속제 외함, 외피, 철대, 노출 비충전 금속체의 접지와 접지 연속성 점검을 설명한다.",
         "전기적 용량, 기계적 강도, 습기·분진 등 주위 환경, 방호수단, 제조자 설치조건을 설치 기준으로 제시한다.",
         "누전차단기, 과전류 차단장치, 비상전원 조건을 계기함 회로의 감전·사고 예방과 연결한다.",
-        "70cm 작업공간 확보와 점검·보수 접근성을 유지보수 안전 기준으로 설명한다.",
+        "관계 법령과 전기설비 기준에 따른 조작·점검 작업공간 확보와 점검·보수 접근성을 유지보수 안전 기준으로 설명한다.",
         "가스·분진 폭발위험장소에서는 적합한 방폭구조 전기기계·기구 선정 및 유지관리까지 제시한다.",
         "KS 번호를 암기식으로 나열하지 않고, 법령 설치조건이 감전 방지, 화재·폭발 방지, 유지보수 안전, 운전 신뢰성에 어떻게 연결되는지 설명한다."
       ],
@@ -640,7 +649,8 @@
         "updated_at=2026-06-29T23:05:52",
         "Fact Anchor를 법령 설치조건 중심으로 정리한 내용에 맞추어 Model Answer Bank entry를 재정렬했다.",
         "핵심 축은 충전부 방호, 금속제 외함 접지, 설치환경과 방호수단, 누전·과전류·비상전원, 작업공간과 방폭조건이다.",
-        "표준번호 암기형이 아니라 법령상 설치조건을 답안 구조와 채점 기준으로 활용하도록 수정했다."
+        "표준번호 암기형이 아니라 법령상 설치조건을 답안 구조와 채점 기준으로 활용하도록 수정했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -704,7 +714,8 @@
         "created_at=2026-06-29T23:40:59",
         "WordPress post 9161과 9123을 병합하여 생성했다.",
         "센서 종류 비교가 아니라 열전달 기반 온도 측정오차와 저감 대책 topic으로 한정했다.",
-        "question_type normalized from active profile: temperature_measurement_error_heat_transfer_CAUSE_ACTION_v1 -> temperature_measurement_error_heat_transfer_DIAGNOSIS_ACTION_v1"
+        "question_type normalized from active profile: temperature_measurement_error_heat_transfer_CAUSE_ACTION_v1 -> temperature_measurement_error_heat_transfer_DIAGNOSIS_ACTION_v1",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -768,7 +779,8 @@
         "created_at=2026-06-29T23:40:59",
         "WordPress post 9040과 9030을 병합하여 생성했다.",
         "post 9040의 제목은 인버터이나 본문은 정류기 커뮤테이션 중첩이므로 정류기 topic으로 재분류했다.",
-        "question_type normalized from active profile: rectifier_source_inductance_commutation_overlap_PRINCIPLE_v1 -> rectifier_source_inductance_commutation_overlap_PRINCIPLE_INTERPRETATION_v1"
+        "question_type normalized from active profile: rectifier_source_inductance_commutation_overlap_PRINCIPLE_v1 -> rectifier_source_inductance_commutation_overlap_PRINCIPLE_INTERPRETATION_v1",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -831,7 +843,8 @@
       "revision_notes": [
         "created_at=2026-06-30T11:26:59",
         "imported_from=wordpress_docs/review_designs/batch_002_design_2topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -898,7 +911,8 @@
       "revision_notes": [
         "created_at=2026-06-30T11:26:59",
         "imported_from=wordpress_docs/review_designs/batch_002_design_2topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -966,7 +980,8 @@
       "revision_notes": [
         "created_at=2026-06-30T11:41:15",
         "imported_from=wordpress_docs/review_designs/batch_003_design_1topic.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -986,7 +1001,7 @@
       ],
       "expected_structure": [
         "배경과 최종제어요소 역할",
-        "I/P converter의 4~20mA to 3~15 psi 변환",
+        "I/P converter의 4-20 mA to 3-15 psi 변환",
         "포지셔너 구성: diaphragm/capsule, pilot valve, actuator",
         "feedback spring/linkage에 의한 위치 피드백",
         "힘 평형과 목표 위치 정지",
@@ -1039,7 +1054,8 @@
       "revision_notes": [
         "created_at=2026-06-30T12:24:55",
         "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1101,7 +1117,8 @@
       "revision_notes": [
         "created_at=2026-06-30T12:24:55",
         "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1162,7 +1179,8 @@
       "revision_notes": [
         "created_at=2026-06-30T12:24:55",
         "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1224,7 +1242,8 @@
       "revision_notes": [
         "created_at=2026-06-30T12:24:55",
         "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1286,7 +1305,8 @@
       "revision_notes": [
         "created_at=2026-06-30T12:24:55",
         "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1353,7 +1373,8 @@
       "revision_notes": [
         "created_at=2026-06-30T14:21:02",
         "imported_from=wordpress_docs/review_designs/batch_005_design_3topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1421,7 +1442,8 @@
       "revision_notes": [
         "created_at=2026-06-30T14:21:02",
         "imported_from=wordpress_docs/review_designs/batch_005_design_3topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1488,7 +1510,8 @@
       "revision_notes": [
         "created_at=2026-06-30T14:21:02",
         "imported_from=wordpress_docs/review_designs/batch_005_design_3topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1556,7 +1579,8 @@
       "revision_notes": [
         "created_at=2026-06-30T16:22:58",
         "imported_from=wordpress_docs/review_designs/batch_006_design_2topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1626,7 +1650,8 @@
       "revision_notes": [
         "created_at=2026-06-30T16:22:58",
         "imported_from=wordpress_docs/review_designs/batch_006_design_2topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1697,7 +1722,8 @@
       "revision_notes": [
         "created_at=2026-06-30T16:30:25",
         "imported_from=wordpress_docs/review_designs/batch_007_design_1topic.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1765,7 +1791,8 @@
       "revision_notes": [
         "created_at=2026-06-30T16:52:46",
         "imported_from=wordpress_docs/review_designs/batch_008_design_3topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1834,7 +1861,8 @@
       "revision_notes": [
         "created_at=2026-06-30T16:52:46",
         "imported_from=wordpress_docs/review_designs/batch_008_design_3topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1904,7 +1932,8 @@
       "revision_notes": [
         "created_at=2026-06-30T16:52:46",
         "imported_from=wordpress_docs/review_designs/batch_008_design_3topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -1971,7 +2000,8 @@
       "revision_notes": [
         "created_at=2026-06-30T17:26:57",
         "imported_from=wordpress_docs/review_designs/batch_009_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2041,7 +2071,8 @@
       "revision_notes": [
         "created_at=2026-06-30T17:26:57",
         "imported_from=wordpress_docs/review_designs/batch_009_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2111,7 +2142,8 @@
       "revision_notes": [
         "created_at=2026-06-30T17:26:57",
         "imported_from=wordpress_docs/review_designs/batch_009_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2180,7 +2212,8 @@
       "revision_notes": [
         "created_at=2026-06-30T17:26:57",
         "imported_from=wordpress_docs/review_designs/batch_009_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2249,7 +2282,8 @@
       "revision_notes": [
         "created_at=2026-06-30T17:26:57",
         "imported_from=wordpress_docs/review_designs/batch_009_design_5topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2316,7 +2350,8 @@
       "revision_notes": [
         "created_at=2026-06-30T17:46:57",
         "imported_from=wordpress_docs/review_designs/batch_010_design_2topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2386,7 +2421,8 @@
       "revision_notes": [
         "created_at=2026-06-30T17:46:57",
         "imported_from=wordpress_docs/review_designs/batch_010_design_2topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2440,7 +2476,8 @@
       "revision_notes": [
         "created_at=2026-06-30T18:31:23",
         "imported_from=wordpress_docs/review_designs/batch_011_design_4topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2494,7 +2531,8 @@
       "revision_notes": [
         "created_at=2026-06-30T18:31:23",
         "imported_from=wordpress_docs/review_designs/batch_011_design_4topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2549,7 +2587,8 @@
       "revision_notes": [
         "created_at=2026-06-30T18:31:23",
         "imported_from=wordpress_docs/review_designs/batch_011_design_4topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2604,7 +2643,8 @@
       "revision_notes": [
         "created_at=2026-06-30T18:31:23",
         "imported_from=wordpress_docs/review_designs/batch_011_design_4topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다.",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2628,11 +2668,13 @@
         "bearing fault"
       ],
       "expected_structure": [
-        "진동 측정 목적과 보호·진단 목적 구분",
-        "변위·속도·가속도 센서의 측정 대상과 주파수 대역 비교",
-        "shaft vibration, housing vibration, bearing fault 적용 구분",
-        "보호용 trip과 진단용 monitoring의 기능 차이",
-        "설치 위치, 신호처리, alarm/trip 설정, 유지보수 고려사항"
+        "배경",
+        "진동감시설비 구성",
+        "변위 센서",
+        "속도 센서",
+        "가속도 센서",
+        "보호용 trip과 진단용 monitoring 구분",
+        "선정 및 유지보수 고려사항"
       ],
       "model_answer_outline": [
         "진동 측정은 회전체의 이상을 조기에 파악하고 설비 보호, 상태진단, 예방보전 기준을 확보하기 위한 계측이다.",
@@ -2650,25 +2692,21 @@
         "설치, 노이즈, setpoint, false trip, 유지보수까지 현장 적용으로 연결한다."
       ],
       "low_score_patterns": [
-        "진동센서를 모두 같은 용도로 설명한다.",
-        "가속도 센서가 항상 모든 진동 측정에 가장 좋다고 단정한다.",
-        "변위, 속도, 가속도를 단순 미분·적분 관계로만 설명하고 실제 적용 위치를 구분하지 않는다.",
-        "trip과 monitoring을 구분하지 않는다."
+        "변위, 속도, 가속도 센서를 모두 같은 진동 센서로만 설명하면 안 된다.",
+        "센서별 주파수 대역과 측정 위치를 구분하지 않으면 안 된다.",
+        "shaft vibration, housing vibration, bearing fault 적용 차이를 빠뜨리면 안 된다.",
+        "보호용 trip과 진단용 monitoring의 목적 차이를 빠뜨리면 안 된다."
       ],
       "field_connection_points": [
-        "proximity probe",
-        "velocity pickup",
-        "accelerometer",
-        "FFT",
-        "envelope analysis",
-        "alarm setpoint",
-        "trip setpoint",
-        "false trip",
-        "predictive maintenance"
+        "shaft vibration과 housing vibration 측정 위치를 구분한다.",
+        "bearing fault 진단에는 고주파 가속도, envelope, FFT, trend 분석을 검토한다.",
+        "보호용 trip setpoint와 진단용 monitoring alarm을 분리해 관리한다.",
+        "센서 mounting, cable, grounding, gap, 온도 환경과 loop test를 확인한다."
       ],
       "revision_notes": [
         "created_at=2026-06-30T23:35:58",
-        "review_fix: model_answers와 fact_anchors 동기화 보강"
+        "review_fix: model_answers와 fact_anchors 동기화 보강",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2690,11 +2728,11 @@
         "radar speed measurement"
       ],
       "expected_structure": [
-        "도플러 효과 정의",
-        "접근·이격에 따른 주파수 변화",
-        "반사파를 이용한 속도 산출 원리",
-        "도플러 초음파 유량계의 적용 조건",
-        "레이다·초음파·유량 측정 적용 구분과 한계"
+        "배경",
+        "도플러 효과 원리",
+        "접근·이격 시 주파수 변화",
+        "초음파 도플러 유량계",
+        "적용 분야와 한계"
       ],
       "model_answer_outline": [
         "도플러 효과는 파원과 관측자 또는 반사체 사이의 상대속도 때문에 수신 주파수가 송신 주파수와 달라지는 현상이다.",
@@ -2718,20 +2756,15 @@
         "반사체 조건, 설치각, 배관 충만 조건을 고려하지 않는다."
       ],
       "field_connection_points": [
-        "송신 주파수",
-        "수신 주파수",
-        "주파수 편이",
-        "반사체",
-        "입자",
-        "기포",
-        "slurry",
-        "transit-time",
-        "radar",
-        "초음파 센서 설치각"
+        "입사각과 반사체 농도에 따른 Doppler shift 신뢰성을 확인한다.",
+        "깨끗한 단상 액체에는 Doppler 방식보다 transit-time 방식이 적합할 수 있다.",
+        "배관 충만 상태, 직관거리, SNR, 유속 분포와 설치 방향을 검토한다.",
+        "레이다 속도 측정, 초음파 유량 측정, 일반 유량계 적용 범위를 구분한다."
       ],
       "revision_notes": [
         "created_at=2026-06-30T23:35:58",
-        "review_fix: model_answers와 fact_anchors 동기화 보강"
+        "review_fix: model_answers와 fact_anchors 동기화 보강",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2755,11 +2788,12 @@
         "quantization"
       ],
       "expected_structure": [
-        "계측 인터페이스에서 ADC/DAC의 역할",
-        "ADC의 표본화·양자화·부호화 과정",
-        "DAC의 디코딩·가중합성·필터링 과정",
-        "해상도와 정확도의 차이",
-        "주요 오차 요인과 현장 적용 고려사항"
+        "배경",
+        "ADC 변환 과정",
+        "DAC 변환 과정",
+        "해상도와 정확도",
+        "오차 요인",
+        "계측 인터페이스 적용 고려사항"
       ],
       "model_answer_outline": [
         "ADC는 센서 또는 transmitter의 아날로그 전압·전류 신호를 디지털 제어기나 DAQ가 처리할 수 있는 코드로 변환하는 장치이다.",
@@ -2783,21 +2817,15 @@
         "aliasing, jitter, 기준전압, 노이즈 등 실제 오차 요인을 누락한다."
       ],
       "field_connection_points": [
-        "4~20mA",
-        "1~5V",
-        "LSB",
-        "anti-aliasing filter",
-        "reference voltage",
-        "offset error",
-        "gain error",
-        "INL",
-        "DNL",
-        "sampling jitter",
-        "PLC scan time"
+        "sampling period와 anti-aliasing filter를 함께 검토한다.",
+        "resolution, accuracy, offset, gain, INL/DNL, jitter를 구분한다.",
+        "reference voltage 안정도, isolation, grounding, shield, common-mode noise를 확인한다.",
+        "PLC/DCS/DAQ 입력 범위와 기존 loop compatibility를 검토한다."
       ],
       "revision_notes": [
         "created_at=2026-06-30T23:35:58",
-        "review_fix: model_answers와 fact_anchors 동기화 보강"
+        "review_fix: model_answers와 fact_anchors 동기화 보강",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2815,14 +2843,17 @@
         "온도센서 보호관",
         "보호관",
         "wake frequency",
-        "삽입길이"
+        "삽입길이",
+        "vortex shedding",
+        "ASME PTC 19.3 TW"
       ],
       "expected_structure": [
-        "thermowell의 목적",
-        "재질 선정 기준",
-        "형상과 삽입 길이 선정",
-        "진동·파손 위험과 wake frequency 검토",
-        "응답 지연, 유지보수, 비용 고려"
+        "배경",
+        "thermowell 목적",
+        "재질 선정",
+        "형상과 삽입 길이",
+        "wake frequency와 파손 위험",
+        "응답 지연과 유지보수"
       ],
       "model_answer_outline": [
         "Thermowell은 온도센서를 공정 유체의 압력, 부식, 침식, 유속, 기계적 충격으로부터 보호하고 운전 중 센서 교체성을 확보하는 압력 경계 부품이다.",
@@ -2846,22 +2877,15 @@
         "진동, wake frequency, 응답 지연, 유지보수성을 누락한다."
       ],
       "field_connection_points": [
-        "공정 유체",
-        "부식",
-        "침식",
-        "SS316",
-        "Hastelloy",
-        "Inconel",
-        "삽입 길이",
-        "tapered thermowell",
-        "wake frequency",
-        "vortex shedding",
-        "응답 지연",
-        "센서 교체"
+        "공정 유체의 온도, 압력, 부식성, 침식성에 맞춰 wetted material을 선정한다.",
+        "삽입 길이, 형상, wake frequency, vortex shedding, 피로 파손 위험을 검토한다.",
+        "응답 지연이 온도 제어루프와 alarm 동작에 미치는 영향을 확인한다.",
+        "운전 중 센서 교체성, 예비품 표준화, 청소·교정 접근성을 고려한다."
       ],
       "revision_notes": [
         "created_at=2026-06-30T23:35:58",
-        "review_fix: model_answers와 fact_anchors 동기화 보강"
+        "review_fix: model_answers와 fact_anchors 동기화 보강",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2881,14 +2905,17 @@
         "가이드웨이브 레이더",
         "GWR",
         "레이저 레벨계",
-        "정전용량식 레벨계"
+        "정전용량식 레벨계",
+        "guided wave radar",
+        "probe radar"
       ],
       "expected_structure": [
-        "레벨 측정 목적과 선정 기준",
+        "배경",
         "접촉식·비접촉식 분류",
-        "초음파, 플로트, GWR, 레이저, 정전용량식 비교",
-        "거품, 증기, 유전율, 점도, 부식성, 방폭 조건 영향",
-        "유지보수, 비용, 기존 설비 연계 판단"
+        "초음파·레이더·레이저",
+        "플로트·GWR·정전용량식",
+        "공정 조건별 선정",
+        "방폭·유지보수·비용"
       ],
       "model_answer_outline": [
         "레벨 측정은 탱크 재고, overflow 방지, pump 보호, 공정 안정화를 위해 액체 또는 고체의 높이를 계측하는 것이다.",
@@ -2912,23 +2939,15 @@
         "거품, 증기, 점도, 부식성, 방폭 조건을 고려하지 않는다."
       ],
       "field_connection_points": [
-        "non-contact",
-        "contact",
-        "ultrasonic",
-        "float",
-        "guided wave radar",
-        "laser",
-        "capacitance",
-        "foam",
-        "vapor",
-        "dielectric constant",
-        "viscosity",
-        "corrosion",
-        "explosion proof"
+        "초음파, 비접촉 레이더, 레이저, 플로트, GWR, 정전용량식의 접촉 여부를 구분한다.",
+        "거품, 증기, 분진, 유전율, 점도, 부식성, 부착물 조건을 확인한다.",
+        "GWR probe 형상, tank 내부 간섭, interface 측정 가능성을 검토한다.",
+        "방폭, SIL/interlock, 유지보수 접근성, 기존 DCS/PLC 연계를 고려한다."
       ],
       "revision_notes": [
         "created_at=2026-06-30T23:35:58",
-        "review_fix: model_answers와 fact_anchors 동기화 보강"
+        "review_fix: model_answers와 fact_anchors 동기화 보강",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -2950,11 +2969,12 @@
         "aliasing"
       ],
       "expected_structure": [
-        "모델 구분 목적",
-        "연속시간 모델의 표현과 적용",
-        "이산시간 모델의 표현과 적용",
-        "이산사건 모델의 표현과 적용",
-        "디지털 제어 적용 시 sampling, aliasing, 지연 고려"
+        "배경",
+        "연속시간 모델",
+        "이산시간 모델",
+        "이산사건 모델",
+        "샘플링·z 변환·aliasing",
+        "디지털 제어 적용 기준"
       ],
       "model_answer_outline": [
         "제어모델은 대상 시스템의 시간 특성과 사건 발생 방식을 어떻게 표현하는지에 따라 연속시간, 이산시간, 이산사건 모델로 구분할 수 있다.",
@@ -2978,21 +2998,15 @@
         "연속 제어식을 그대로 디지털 제어에 적용해도 된다고 설명한다."
       ],
       "field_connection_points": [
-        "Laplace transform",
-        "z transform",
-        "difference equation",
-        "sampling period",
-        "zero-order hold",
-        "aliasing",
-        "anti-aliasing filter",
-        "phase lag",
-        "PLC sequence",
-        "interlock",
-        "scan time"
+        "연속시간 모델은 미분방정식/Laplace, 이산시간 모델은 차분방정식/z 변환으로 구분한다.",
+        "이산사건 모델은 sequence, interlock, PLC logic, batch process와 연결한다.",
+        "sampling period, ZOH, aliasing, anti-aliasing filter, phase delay를 검토한다.",
+        "계산 지연, 통신 지연, quantization, jitter가 안정도 여유에 미치는 영향을 확인한다."
       ],
       "revision_notes": [
         "created_at=2026-06-30T23:35:58",
-        "review_fix: model_answers와 fact_anchors 동기화 보강"
+        "review_fix: model_answers와 fact_anchors 동기화 보강",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     },
     {
@@ -3013,14 +3027,20 @@
         "frequency response",
         "감쇠비",
         "zeta",
-        "omega r"
+        "omega r",
+        "ωr",
+        "ωn",
+        "ζ",
+        "resonant peak",
+        "공진 peak"
       ],
       "expected_structure": [
+        "배경",
         "표준 2차 전달함수",
         "주파수응답 크기식",
-        "공진 발생 조건과 공진주파수",
-        "감쇠비가 공진 peak에 미치는 영향",
-        "시간응답 overshoot와 주파수응답 resonance 구분"
+        "공진 주파수와 조건",
+        "시간응답과 주파수응답 구분",
+        "현장 적용"
       ],
       "model_answer_outline": [
         "표준 2차 시스템은 보통 G(s)=Kωn²/(s²+2ζωns+ωn²) 형태로 나타내며, ωn은 고유진동수, ζ는 감쇠비이다.",
@@ -3039,27 +3059,21 @@
         "ζ=1 임계감쇠를 공진 조건처럼 오해하지 않는다."
       ],
       "low_score_patterns": [
-        "ζ=1을 공진 조건처럼 설명한다.",
-        "공진주파수 조건 ζ < 1/sqrt(2)를 누락한다.",
-        "ωd = ωn sqrt(1-ζ²)와 ωr = ωn sqrt(1-2ζ²)를 혼동한다.",
-        "step overshoot와 frequency resonance를 같은 개념으로 설명한다.",
-        "2차 전달함수의 분모 감쇠항 2ζωn s를 잘못 쓴다."
+        "ζ=1 임계감쇠를 공진 조건처럼 설명하면 안 된다.",
+        "시간응답 overshoot와 주파수응답 resonance를 같은 개념으로 쓰면 안 된다.",
+        "ωr=ωn√(1−2ζ²)의 존재 조건 ζ<1/√2를 빠뜨리면 안 된다.",
+        "수식만 쓰고 감쇠비, bandwidth, 제어루프 영향 등 해석을 빠뜨리면 안 된다."
       ],
       "field_connection_points": [
-        "natural frequency",
-        "damping ratio",
-        "frequency response",
-        "resonant peak",
-        "resonance frequency",
-        "overshoot",
-        "critical damping",
-        "servo system",
-        "mechanical vibration",
-        "control loop tuning"
+        "고유진동수 ωn, 감쇠비 ζ, 공진 주파수 ωr, resonant peak를 구분한다.",
+        "ζ<1/√2에서 공진 peak가 존재한다는 조건을 확인한다.",
+        "시간응답 overshoot와 주파수응답 resonance를 혼동하지 않는다.",
+        "기계 공진, 센서 노이즈 증폭, 제어 loop tuning, bandwidth 설계와 연결한다."
       ],
       "revision_notes": [
         "created_at=2026-06-30T23:35:58",
-        "review_fix: model_answers와 fact_anchors 동기화 보강"
+        "review_fix: model_answers와 fact_anchors 동기화 보강",
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
       ]
     }
   ]
