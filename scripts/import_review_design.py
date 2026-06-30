@@ -192,6 +192,24 @@ META = {
             "spline approximation"
         ],
     },
+    "sensor_static_dynamic_performance_characteristics": {
+        "question_type": "COMPARE_SELECTION",
+        "title": "센서 정특성·동특성과 선정 기준",
+        "questions": [
+            "센서에 요구되는 정특성 및 동특성을 설명하고, 센서 선정 시 감도, 분해능, 선형성, 안정도, 응답시간 등을 어떻게 고려해야 하는지 설명하시오."
+        ],
+        "aliases": [
+            "센서 특성",
+            "sensor characteristics",
+            "감도",
+            "분해능",
+            "선형성",
+            "안정도",
+            "응답시간",
+            "정특성",
+            "동특성"
+        ],
+    },
 }
 
 STOP = {"설명", "한다", "해야", "있다", "있는", "통해", "경우", "고려", "주요", "핵심"}

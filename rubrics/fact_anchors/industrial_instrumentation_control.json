@@ -3802,6 +3802,133 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "sensor_static_dynamic_performance_characteristics",
+      "name": "센서 정특성·동특성과 선정 기준",
+      "aliases": [
+        "센서 특성",
+        "sensor characteristics",
+        "감도",
+        "분해능",
+        "선형성",
+        "안정도",
+        "응답시간",
+        "정특성",
+        "동특성"
+      ],
+      "anchors": [
+        {
+          "id": "sensor_static_dynamic_performance_characteristics_anchor_1",
+          "name": "센서 정특성의 의미",
+          "expected": "감도, 정확성, 분해능, 선형성, 범위가 센서의 정상상태 입력-출력 성능을 나타내는 핵심 정특성임을 설명해야 한다.",
+          "core_terms": [
+            "센서",
+            "정특성의",
+            "의미",
+            "감도",
+            "정확성"
+          ],
+          "support_terms": [
+            "감도",
+            "정확성",
+            "분해능",
+            "선형성",
+            "범위가",
+            "센서의",
+            "정상상태",
+            "입력-출력"
+          ]
+        },
+        {
+          "id": "sensor_static_dynamic_performance_characteristics_anchor_2",
+          "name": "감도와 분해능의 차이",
+          "expected": "감도는 입력 변화에 대한 출력 변화 비율이고, 분해능은 구분 가능한 최소 입력 변화임을 구분해야 한다.",
+          "core_terms": [
+            "감도와",
+            "분해능의",
+            "차이",
+            "감도는",
+            "입력"
+          ],
+          "support_terms": [
+            "감도는",
+            "입력",
+            "변화에",
+            "대한",
+            "출력",
+            "변화",
+            "비율이고",
+            "분해능은"
+          ]
+        },
+        {
+          "id": "sensor_static_dynamic_performance_characteristics_anchor_3",
+          "name": "선택도, 안정도, 복귀도",
+          "expected": "선택도는 원하는 자극에 대한 반응성, 안정도는 시간 경과에 따른 출력 유지성, 복귀도는 반복 입력에 대한 일관성을 의미함을 설명해야 한다.",
+          "core_terms": [
+            "선택도",
+            "안정도",
+            "복귀도",
+            "선택도는",
+            "원하는"
+          ],
+          "support_terms": [
+            "선택도는",
+            "원하는",
+            "자극에",
+            "대한",
+            "반응성",
+            "안정도는",
+            "시간",
+            "경과에"
+          ]
+        },
+        {
+          "id": "sensor_static_dynamic_performance_characteristics_anchor_4",
+          "name": "동특성의 중요성",
+          "expected": "응답시간, 지연, 시정수, 대역폭 같은 동특성이 빠른 공정과 제어 루프의 측정 성능에 영향을 줌을 설명해야 한다.",
+          "core_terms": [
+            "동특성의",
+            "중요성",
+            "응답시간",
+            "지연",
+            "시정수"
+          ],
+          "support_terms": [
+            "응답시간",
+            "지연",
+            "시정수",
+            "대역폭",
+            "같은",
+            "동특성이",
+            "빠른",
+            "공정과"
+          ]
+        },
+        {
+          "id": "sensor_static_dynamic_performance_characteristics_anchor_5",
+          "name": "센서 선정 기준",
+          "expected": "측정 범위, 요구 정확도, 응답속도, 환경조건, 출력 형식, 인터페이스, 신뢰성, 비용을 종합적으로 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "센서",
+            "선정",
+            "기준",
+            "측정",
+            "범위"
+          ],
+          "support_terms": [
+            "측정",
+            "범위",
+            "요구",
+            "정확도",
+            "응답속도",
+            "환경조건",
+            "출력",
+            "형식"
+          ]
+        }
+      ]
     }
   ]
 }
