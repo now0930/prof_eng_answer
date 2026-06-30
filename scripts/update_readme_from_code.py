@@ -1,4 +1,111 @@
-# prof_eng_answer
+#!/usr/bin/env python3
+"""Generate README.md from current code and Rubric Bank JSON files."""
+
+from __future__ import annotations
+
+import argparse
+import json
+from pathlib import Path
+from typing import Any
+
+
+ROOT = Path(__file__).resolve().parents[1]
+
+MODEL_PATH = ROOT / "rubrics/model_answers/industrial_instrumentation_control.json"
+FACT_PATH = ROOT / "rubrics/fact_anchors/industrial_instrumentation_control.json"
+QTYPE_PATH = ROOT / "rubrics/question_types/default.json"
+README_PATH = ROOT / "README.md"
+
+
+def load_json(path: Path, default: Any) -> Any:
+    if not path.exists():
+        return default
+    return json.loads(path.read_text(encoding="utf-8"))
+
+
+def question_types() -> list[tuple[str, str]]:
+    data = load_json(QTYPE_PATH, {"types": []})
+    types = data.get("types", [])
+    result: list[tuple[str, str]] = []
+
+    if isinstance(types, dict):
+        iterable = types.values()
+    else:
+        iterable = types
+
+    for item in iterable:
+        if not isinstance(item, dict):
+            continue
+        type_id = item.get("id") or item.get("type") or item.get("name")
+        label = item.get("name") or item.get("label") or item.get("description") or ""
+        if isinstance(type_id, str) and type_id:
+            result.append((type_id, str(label)))
+
+    return result
+
+
+def existing_docs() -> list[str]:
+    candidates = [
+        "docs/README.md",
+        "docs/operation_runbook.md",
+        "docs/docker_compose_usage.md",
+        "docs/grading_architecture.md",
+        "docs/question_type_taxonomy.md",
+        "docs/difficulty_and_selection_strategy.md",
+        "docs/llm_provider.md",
+        "docs/rubric_authoring_guide.md",
+        "docs/model_answer_generator_prompt.md",
+        "docs/fact_anchor_generator_prompt.md",
+        "docs/topic_importance_generator_prompt.md",
+    ]
+    return [item for item in candidates if (ROOT / item).exists()]
+
+
+def render_question_types(items: list[tuple[str, str]]) -> str:
+    if not items:
+        return "- 현재 question type 파일을 확인해야 한다."
+    lines = []
+    for type_id, label in items:
+        if label and label != type_id:
+            lines.append(f"- `{type_id}`: {label}")
+        else:
+            lines.append(f"- `{type_id}`")
+    return "\n".join(lines)
+
+
+def render_docs(items: list[str]) -> str:
+    if not items:
+        return "- docs 문서 없음"
+    return "\n".join(f"- `{item}`" for item in items)
+
+
+def generate() -> str:
+    model = load_json(MODEL_PATH, {"answers": []})
+    fact = load_json(FACT_PATH, {"topics": []})
+
+    answers = model.get("answers", []) if isinstance(model, dict) else []
+    topics = fact.get("topics", []) if isinstance(fact, dict) else []
+
+    model_topics = sorted(
+        {
+            answer.get("topic_id")
+            for answer in answers
+            if isinstance(answer, dict) and isinstance(answer.get("topic_id"), str)
+        }
+    )
+    fact_topics = sorted(
+        {
+            topic.get("topic_id")
+            for topic in topics
+            if isinstance(topic, dict) and isinstance(topic.get("topic_id"), str)
+        }
+    )
+
+    qtype_block = render_question_types(question_types())
+    doc_block = render_docs(existing_docs())
+    shared_count = len(set(model_topics) & set(fact_topics))
+
+    return f"""# prof_eng_answer
 
 산업계측제어기술사 답안 평가와 Rubric Bank 관리를 위한 프로젝트이다.
 
@@ -16,14 +123,14 @@
 
 ## 현재 Bank 규모
 
-- model answers: 57
-- model topics: 55
-- fact topics: 55
-- shared topics: 55
+- model answers: {len(answers)}
+- model topics: {len(model_topics)}
+- fact topics: {len(fact_topics)}
+- shared topics: {shared_count}
 
 ## 현재 Question Type
 
-- 현재 question type 파일을 확인해야 한다.
+{qtype_block}
 
 신규 모범답안은 위 question type 중 하나를 사용해야 한다. 오래된 legacy type은 신규 항목에 사용하지 않는다.
 
@@ -199,17 +306,7 @@ python3 scripts/rubric_manager.py validate-all
 
 현재 활성 문서:
 
-- `docs/README.md`
-- `docs/operation_runbook.md`
-- `docs/docker_compose_usage.md`
-- `docs/grading_architecture.md`
-- `docs/question_type_taxonomy.md`
-- `docs/difficulty_and_selection_strategy.md`
-- `docs/llm_provider.md`
-- `docs/rubric_authoring_guide.md`
-- `docs/model_answer_generator_prompt.md`
-- `docs/fact_anchor_generator_prompt.md`
-- `docs/topic_importance_generator_prompt.md`
+{doc_block}
 
 오래된 문서는 삭제하지 않고 `docs/archive/` 아래로 이동한다.
 
@@ -228,3 +325,30 @@ python3 scripts/update_readme_from_code.py --write
 python3 scripts/cleanup_stale_docs.py --dry-run
 python3 scripts/cleanup_stale_docs.py --apply
 ```
+"""
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser()
+    group = parser.add_mutually_exclusive_group(required=True)
+    group.add_argument("--check", action="store_true")
+    group.add_argument("--write", action="store_true")
+    args = parser.parse_args()
+
+    text = generate()
+
+    if args.check:
+        old = README_PATH.read_text(encoding="utf-8") if README_PATH.exists() else ""
+        if old == text:
+            print("README.md is up to date")
+        else:
+            print("README.md would be updated")
+        return 0
+
+    README_PATH.write_text(text, encoding="utf-8")
+    print("wrote: README.md")
+    return 0
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())
