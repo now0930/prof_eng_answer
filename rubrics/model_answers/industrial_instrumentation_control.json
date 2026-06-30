@@ -305,14 +305,24 @@
         "정량 효과는 불량률 감소, 정지시간 감소, 생산성 향상, 에너지 절감, 유지보수 비용 절감으로 분석한다.",
         "정성 효과는 이상 조기 감지, 의사결정 속도 향상, 작업 표준화, 데이터 기반 개선 문화 형성으로 평가한다.",
         "다만 초기 투자비, 데이터 품질, 센서 신뢰성, 기존 PLC/DCS 연계 안정성, 운영 인력 숙련도에 따라 효과가 제한될 수 있다.",
-        "따라서 전면 도입보다 불량률이나 정지 손실이 큰 공정에 pilot 적용 후 ROI와 운영 안정성을 확인하고 단계적으로 확대하는 것이 현실적이다."
+        "따라서 전면 도입보다 불량률이나 정지 손실이 큰 공정에 pilot 적용 후 ROI와 운영 안정성을 확인하고 단계적으로 확대하는 것이 현실적이다.",
+        "IIoT 기반 지능화는 sensor, edge gateway, PLC/DCS, historian, MES/ERP, analytics, digital twin으로 이어지는 데이터 흐름의 신뢰성이 전제되어야 한다.",
+        "digital twin은 단순 3D 모델이 아니라 설비·공정 데이터를 이용해 상태 추정, 이상 감지, what-if 분석, 예지보전에 활용되는 모델이다.",
+        "성과 평가는 OEE, availability, performance, quality, MTBF, MTTR, downtime, energy intensity, alarm response time, ROI로 정량화한다.",
+        "데이터 품질, time synchronization, sensor calibration, cybersecurity, model drift, 운영자 수용성, 기존 PLC/DCS 변경 리스크를 함께 평가해야 한다.",
+        "현장 설비와 가상 모델을 데이터로 동기화하여 시뮬레이션, 예측, 최적화에 활용함을 설명한다.",
+        "연결 확대에 따른 사이버보안, 망분리, 접근제어, 데이터 무결성, 가용성 문제를 설명한다."
       ],
       "high_score_features": [
         "평가 지표가 구체적이다.",
         "before/after 비교 기준이 있다.",
         "정량 효과와 정성 효과를 구분한다.",
         "투자비, 데이터 품질, 기존 제어시스템 영향 등 한계를 설명한다.",
-        "pilot 적용과 단계적 확대 같은 후속 조치를 제시한다."
+        "pilot 적용과 단계적 확대 같은 후속 조치를 제시한다.",
+        "sensor-edge-PLC/DCS-historian-analytics의 데이터 흐름을 설명한다.",
+        "digital twin을 상태 추정, 예지보전, what-if 분석과 연결한다.",
+        "OEE, MTBF, MTTR, downtime, energy, ROI 등 정량 지표를 사용한다.",
+        "cybersecurity, data governance, model drift, 기존 제어계 영향까지 평가한다."
       ],
       "low_score_patterns": [
         "생산성과 품질이 좋아진다는 일반론만 있다.",
@@ -330,11 +340,49 @@
         "에너지 사용량",
         "ROI",
         "pilot 적용",
-        "기존 PLC/DCS 연계"
+        "기존 PLC/DCS 연계",
+        "sensor reliability",
+        "edge gateway",
+        "PLC/DCS integration",
+        "historian",
+        "MES",
+        "ERP",
+        "digital twin",
+        "predictive maintenance",
+        "availability",
+        "performance",
+        "quality",
+        "downtime",
+        "energy intensity",
+        "time synchronization",
+        "data governance",
+        "cybersecurity",
+        "model drift",
+        "디지털트윈",
+        "가상 모델",
+        "동기화",
+        "시뮬레이션",
+        "예측",
+        "최적화",
+        "설비",
+        "데이터",
+        "모델",
+        "what-if analysis",
+        "사이버보안",
+        "망분리",
+        "접근제어",
+        "무결성",
+        "가용성",
+        "OT",
+        "보안",
+        "위험",
+        "관리"
       ],
       "revision_notes": [
         "EVALUATION 유형 샘플. 차체공장, 조립공장, 공정별 지표로 세분화 가능.",
-        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup"
+        "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
+        "deep_relation_cleanup: strengthened smart factory/IIoT/digital twin relationship.",
+        "deep_relation_cleanup_v2: mirrored under-covered fact anchors into model answer outline/field points."
       ],
       "legacy_question_type": "EVALUATION"
     },
@@ -3276,12 +3324,18 @@
         "Modbus는 단순성과 범용성이 장점이나 고급 진단과 실시간성이 제한될 수 있고, HART는 4~20mA 위에 디지털 진단 정보를 중첩한다.",
         "Profibus/Fieldbus 계열은 field device 통합과 진단에 강하고, Profinet/EtherNet/IP 같은 Industrial Ethernet은 고속·대용량·상위 연계에 유리하다.",
         "프로토콜 선정은 update time, determinism, topology, redundancy, cable distance, noise immunity, device support, vendor compatibility를 기준으로 한다.",
-        "현장 적용에서는 network segmentation, firewall, account 관리, time synchronization, packet capture, spare module, 장애 진단 절차를 포함해야 한다."
+        "현장 적용에서는 network segmentation, firewall, account 관리, time synchronization, packet capture, spare module, 장애 진단 절차를 포함해야 한다.",
+        "산업용 통신은 물리계층, 데이터링크, 응용계층 기능이 결합되어 현장 신호의 실시간성, 결정성, 진단성, 상호운용성을 확보해야 한다.",
+        "프로토콜 비교 시 Modbus RTU/TCP, HART, Foundation Fieldbus, Profibus, Profinet, EtherNet/IP, OPC UA의 적용 위치와 update time, jitter, topology를 구분해야 한다.",
+        "무선통신은 배선 절감 장점이 있으나 전원, 간섭, 지연, 보안, 신뢰성 조건이 다르므로 일반 유선 산업통신과 같은 trigger로 처리하지 않는 것이 안전하다."
       ],
       "high_score_features": [
         "프로토콜별 장단점과 적용 위치를 구체적으로 비교한다.",
         "실시간성, 결정성, 노이즈, 이중화, 보안을 함께 평가한다.",
-        "4~20mA/HART와 Fieldbus/Ethernet 계열의 차이를 설명한다."
+        "4~20mA/HART와 Fieldbus/Ethernet 계열의 차이를 설명한다.",
+        "OSI/TCP-IP 계층, 물리 매체, topology, update time, jitter, determinism을 비교한다.",
+        "HART/Fieldbus 계열과 Industrial Ethernet 계열의 역할 차이를 설명한다.",
+        "무선 통신은 별도 적용 조건과 보안·신뢰성 검토가 필요함을 구분한다."
       ],
       "low_score_patterns": [
         "모든 통신을 Ethernet으로만 설명하면 부족하다.",
@@ -3297,11 +3351,23 @@
         "OPC UA",
         "determinism",
         "redundancy",
-        "OT security"
+        "OT security",
+        "OSI 계층",
+        "TCP/IP",
+        "physical layer",
+        "topology",
+        "Modbus RTU",
+        "Modbus TCP",
+        "Foundation Fieldbus",
+        "update time",
+        "jitter",
+        "network segmentation",
+        "OT 보안"
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py"
+        "Created by scripts/apply_relation_completion_patch.py",
+        "deep_relation_cleanup: strengthened communication protocol model/fact term alignment."
       ]
     },
     {
@@ -3391,12 +3457,20 @@
         "주요 원인은 전력선과 신호선 병행 포설, 인버터 스위칭, 낙뢰, 접지 루프, shield 양단 접지 오류, 절연 불량, 공통모드 전압이다.",
         "대책은 전력선·신호선 분리, twisted pair, shield 단일점 또는 설계 기준에 맞는 접지, 절연 amplifier, filter, surge protective device 적용이다.",
         "통신선과 아날로그 신호는 접지 기준, cable tray 분리, bonding, gland 처리, intrinsic safety 접지 조건을 함께 검토해야 한다.",
-        "진단은 trend, oscilloscope, loop calibrator, insulation test, grounding resistance, event log, noise source on/off test로 원인을 좁힌다."
+        "진단은 trend, oscilloscope, loop calibrator, insulation test, grounding resistance, event log, noise source on/off test로 원인을 좁힌다.",
+        "노이즈는 차동모드와 공통모드로 유입될 수 있으며, 접지 전위차와 ground loop는 저준위 아날로그 신호와 통신 신호의 오동작 원인이 된다.",
+        "차폐선은 cable shield, drain wire, gland 처리, 단일점 또는 다점 접지 원칙을 현장 주파수와 설비 기준에 맞게 적용해야 한다.",
+        "서지는 낙뢰, 개폐, 대전력 부하 전환에서 발생할 수 있으므로 SPD, bonding, equipotential grounding, 절연, 필터를 조합해 보호한다.",
+        "전자유도, 정전유도, 공통임피던스, 전원 노이즈, 접지 루프 등 노이즈 원인을 설명한다.",
+        "노이즈가 계측 신호 오차, 통신 오류, 오동작, 제어 불안정을 유발함을 설명한다."
       ],
       "high_score_features": [
         "노이즈 유입 경로와 신호 종류별 영향 차이를 설명한다.",
         "shield, grounding, isolation, SPD, filtering을 목적별로 구분한다.",
-        "진단 절차와 시공 기준을 함께 제시한다."
+        "진단 절차와 시공 기준을 함께 제시한다.",
+        "차동모드 노이즈와 공통모드 노이즈를 구분한다.",
+        "ground loop, shield 접지, SPD, isolation, filtering을 원인별 대책으로 연결한다.",
+        "oscilloscope, trend, insulation test, 접지저항 측정 등 진단 방법을 포함한다."
       ],
       "low_score_patterns": [
         "무조건 접지를 많이 하면 좋다고 쓰면 안 된다.",
@@ -3412,11 +3486,40 @@
         "SPD",
         "isolation",
         "common mode",
-        "bonding"
+        "bonding",
+        "differential mode",
+        "shield grounding",
+        "drain wire",
+        "single-point grounding",
+        "multi-point grounding",
+        "surge",
+        "equipotential grounding",
+        "isolation amplifier",
+        "filter",
+        "oscilloscope",
+        "insulation test",
+        "전자유도",
+        "정전유도",
+        "공통임피던스",
+        "전원 노이즈",
+        "접지 루프",
+        "노이즈",
+        "잡음",
+        "원인",
+        "계측 신호",
+        "오차",
+        "통신 오류",
+        "오동작",
+        "제어 불안정",
+        "영향",
+        "문제",
+        "장애"
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py"
+        "Created by scripts/apply_relation_completion_patch.py",
+        "deep_relation_cleanup: strengthened noise/grounding/surge model-to-anchor alignment.",
+        "deep_relation_cleanup_v2: mirrored under-covered fact anchors into model answer outline/field points."
       ]
     },
     {
@@ -3449,12 +3552,18 @@
         "P 동작은 오차에 비례한 즉각적 조작을 제공하지만 단독으로는 offset이 남을 수 있다.",
         "I 동작은 오차를 누적하여 정상상태 offset을 제거하지만 과도하게 크면 overshoot와 hunting을 유발할 수 있다.",
         "D 동작은 오차 변화율에 반응하여 예측적 감쇠를 제공하지만 측정 노이즈와 derivative kick에 민감하다.",
-        "현장 튜닝은 공정 dead time, time constant, valve stiction, sensor noise, sampling time, anti-windup, manual/auto 전환을 함께 고려해야 한다."
+        "현장 튜닝은 공정 dead time, time constant, valve stiction, sensor noise, sampling time, anti-windup, manual/auto 전환을 함께 고려해야 한다.",
+        "PID 파라미터는 gain 또는 proportional band, integral time/reset, derivative time/rate로 표현되며 공정 gain, time constant, dead time에 따라 튜닝한다.",
+        "Ziegler-Nichols, Cohen-Coon, IMC tuning 등은 초기값 산정에 활용할 수 있으나 현장에서는 valve stiction, noise, actuator saturation을 반영해 보정해야 한다.",
+        "anti-reset windup, bumpless transfer, derivative filtering, setpoint weighting은 실제 DCS/PLC PID 구현에서 안정 운전에 중요하다."
       ],
       "high_score_features": [
         "P/I/D 각각이 응답에 미치는 영향을 구분한다.",
         "offset, overshoot, hunting, settling time을 연결해 설명한다.",
-        "anti-windup, derivative filtering, 현장 밸브 문제를 포함한다."
+        "anti-windup, derivative filtering, 현장 밸브 문제를 포함한다.",
+        "proportional band, integral time, derivative time의 현장 parameter 의미를 설명한다.",
+        "Ziegler-Nichols, IMC 등 tuning 방법과 현장 보정 필요성을 구분한다.",
+        "anti-reset windup, bumpless transfer, derivative filtering을 포함한다."
       ],
       "low_score_patterns": [
         "P, I, D를 단순 약어로만 나열하면 안 된다.",
@@ -3469,11 +3578,27 @@
         "anti-windup",
         "derivative kick",
         "sampling time",
-        "valve stiction"
+        "valve stiction",
+        "proportional band",
+        "integral time",
+        "reset",
+        "derivative time",
+        "rate",
+        "Ziegler-Nichols",
+        "Cohen-Coon",
+        "IMC tuning",
+        "anti-reset windup",
+        "bumpless transfer",
+        "derivative filter",
+        "setpoint weighting",
+        "actuator saturation",
+        "process gain",
+        "time constant"
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py"
+        "Created by scripts/apply_relation_completion_patch.py",
+        "deep_relation_cleanup: strengthened PID tuning and implementation alignment."
       ]
     },
     {
@@ -3560,7 +3685,9 @@
         "차압전송기는 두 압력 포트의 차이를 측정하며 유량, 액위, 필터 막힘, 밀도 측정 등에 활용된다.",
         "LRV/URV는 측정 범위의 하한과 상한이고, zero/span 조정은 4~20mA 출력과 공정 압력의 대응을 맞추는 작업이다.",
         "설치 시 impulse line 기울기, 막힘, 기포·응축수, freezing, wet leg/dry leg, zero elevation/suppression을 검토해야 한다.",
-        "고온·부식·점성 유체에는 diaphragm seal과 capillary를 적용할 수 있으나 응답 지연과 온도 영향을 함께 고려해야 한다."
+        "고온·부식·점성 유체에는 diaphragm seal과 capillary를 적용할 수 있으나 응답 지연과 온도 영향을 함께 고려해야 한다.",
+        "압력전송기 topic은 일반 압력이라는 넓은 개념보다 압력·차압 전송기의 센싱 원리, range 설정, 설치 오차, impulse line 조건에 초점을 둔다.",
+        "static pressure effect, overpressure protection, diaphragm seal, capillary temperature effect는 현장 선정과 오차 평가의 핵심이다."
       ],
       "high_score_features": [
         "게이지압, 절대압, 차압의 차이를 구분한다.",
@@ -3581,11 +3708,19 @@
         "zero/span",
         "impulse line",
         "wet leg",
-        "remote seal"
+        "remote seal",
+        "static pressure effect",
+        "overpressure protection",
+        "diaphragm seal",
+        "capillary temperature effect",
+        "zero elevation",
+        "zero suppression",
+        "dry leg"
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py"
+        "Created by scripts/apply_relation_completion_patch.py",
+        "deep_relation_cleanup: clarified pressure transmitter scope and field points."
       ]
     },
     {
@@ -3616,12 +3751,21 @@
         "전달함수는 SISO 시스템, 주파수응답, root locus, Bode plot, classic control 해석에 직관적이다.",
         "상태공간 모델은 내부 상태변수와 입력·출력 관계를 미분방정식 형태로 표현하며 MIMO 시스템과 현대제어 설계에 적합하다.",
         "전달함수의 극점은 상태행렬의 고유값과 연결되어 안정도와 동특성을 나타내지만, 상태공간은 controllability와 observability까지 평가할 수 있다.",
-        "현장 적용에서는 모델 식별 정확도, 선형화 범위, 센서·actuator 제한, digital implementation, 유지보수자가 이해 가능한 표현을 고려한다."
+        "현장 적용에서는 모델 식별 정확도, 선형화 범위, 센서·actuator 제한, digital implementation, 유지보수자가 이해 가능한 표현을 고려한다.",
+        "전달함수는 영초기조건에서 입력과 출력의 라플라스 변환 비로 정의되며, pole-zero, Bode, Nyquist, root locus 해석에 유리하다.",
+        "상태공간은 xdot = Ax + Bu, y = Cx + Du 형태로 내부 상태를 표현하고 MIMO, 상태피드백, observer 설계에 적합하다.",
+        "전달함수의 극점은 상태행렬 A의 고유값과 대응되지만, 상태공간은 controllability, observability, minimal realization 평가가 가능하다.",
+        "비선형 공정에는 운전점 주변 선형화가 필요하며, 모델의 유효 범위와 parameter uncertainty를 함께 고려해야 한다.",
+        "상태방정식에서 G(s)=C(sI-A)^-1B+D 관계로 전달함수를 구할 수 있음을 설명한다.",
+        "공정 모델링, 제어기 설계, 시뮬레이션, 디지털 제어 적용에서의 의미와 한계를 설명한다."
       ],
       "high_score_features": [
         "전달함수와 상태공간의 수학적 정의를 구분한다.",
         "SISO/MIMO, 초기조건, 내부상태, 관측·제어 가능성을 비교한다.",
-        "고전제어와 현대제어 적용 차이를 설명한다."
+        "고전제어와 현대제어 적용 차이를 설명한다.",
+        "zero initial condition, Laplace transform, pole-zero, frequency response를 전달함수 특징으로 제시한다.",
+        "state variable, A/B/C/D matrix, MIMO, controllability, observability를 상태공간 특징으로 제시한다.",
+        "고전제어와 현대제어 적용 차이, 선형화 범위와 모델 불확실성을 언급한다."
       ],
       "low_score_patterns": [
         "상태공간을 전달함수의 다른 표기라고만 설명하면 부족하다.",
@@ -3637,11 +3781,43 @@
         "controllability",
         "observability",
         "MIMO",
-        "linearization"
+        "linearization",
+        "zero initial condition",
+        "pole-zero",
+        "Bode plot",
+        "Nyquist",
+        "root locus",
+        "state variable",
+        "B matrix",
+        "C matrix",
+        "D matrix",
+        "state feedback",
+        "observer",
+        "minimal realization",
+        "parameter uncertainty",
+        "sI-A",
+        "역행렬",
+        "C(sI-A)",
+        "G(s)",
+        "변환",
+        "전달함수",
+        "상태방정식",
+        "행렬",
+        "모델링",
+        "제어기 설계",
+        "시뮬레이션",
+        "디지털 제어",
+        "식별",
+        "공정",
+        "적용",
+        "한계",
+        "검증"
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py"
+        "Created by scripts/apply_relation_completion_patch.py",
+        "deep_relation_cleanup: strengthened transfer-function/state-space alignment.",
+        "deep_relation_cleanup_v2: mirrored under-covered fact anchors into model answer outline/field points."
       ]
     }
   ]

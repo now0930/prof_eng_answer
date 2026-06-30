@@ -294,7 +294,16 @@
             "P",
             "I",
             "D",
-            "제어기"
+            "제어기",
+            "proportional band",
+            "gain",
+            "process gain",
+            "integral time",
+            "reset",
+            "anti-reset windup",
+            "derivative time",
+            "rate",
+            "derivative filter"
           ]
         },
         {
@@ -332,7 +341,10 @@
             "파라미터",
             "Kp",
             "Ti",
-            "Td"
+            "Td",
+            "Ziegler-Nichols",
+            "Cohen-Coon",
+            "IMC tuning"
           ]
         },
         {
@@ -351,7 +363,11 @@
             "필터",
             "anti-windup",
             "현장",
-            "제약"
+            "제약",
+            "bumpless transfer",
+            "setpoint weighting",
+            "actuator saturation",
+            "valve stiction"
           ]
         },
         {
@@ -373,6 +389,9 @@
             "한계"
           ]
         }
+      ],
+      "revision_notes": [
+        "deep_relation_cleanup: added PID implementation/tuning support terms."
       ]
     },
     {
@@ -408,7 +427,10 @@
             "G(s)",
             "Y(s)",
             "U(s)",
-            "시스템"
+            "시스템",
+            "zero initial condition",
+            "Laplace transform",
+            "pole-zero"
           ]
         },
         {
@@ -428,7 +450,12 @@
             "입력",
             "출력",
             "행렬",
-            "상태공간"
+            "상태공간",
+            "state variable",
+            "A matrix",
+            "B matrix",
+            "C matrix",
+            "D matrix"
           ]
         },
         {
@@ -463,7 +490,12 @@
           "support_terms": [
             "pole",
             "eigenvalue",
-            "시간응답"
+            "시간응답",
+            "A matrix",
+            "controllability",
+            "observability",
+            "observer",
+            "state feedback"
           ]
         },
         {
@@ -481,9 +513,15 @@
             "공정",
             "적용",
             "한계",
-            "검증"
+            "검증",
+            "MIMO",
+            "minimal realization",
+            "linearization"
           ]
         }
+      ],
+      "revision_notes": [
+        "deep_relation_cleanup: added transfer/state-space support terms."
       ]
     },
     {
@@ -711,10 +749,12 @@
       "triggers": [
         "압력전송기",
         "차압전송기",
-        "압력",
         "차압",
         "DP transmitter",
-        "Pressure Transmitter"
+        "Pressure Transmitter",
+        "pressure transmitter",
+        "remote seal",
+        "impulse line"
       ],
       "aliases": [
         "압력계측",
@@ -788,7 +828,13 @@
           "support_terms": [
             "오차",
             "현장",
-            "배관"
+            "배관",
+            "wet leg",
+            "dry leg",
+            "zero elevation",
+            "zero suppression",
+            "static pressure effect",
+            "capillary temperature effect"
           ]
         },
         {
@@ -806,9 +852,14 @@
           "support_terms": [
             "실무",
             "검토",
-            "안전"
+            "안전",
+            "overpressure protection",
+            "diaphragm seal"
           ]
         }
+      ],
+      "revision_notes": [
+        "deep_relation_cleanup: removed overly broad trigger and added transmitter support terms."
       ]
     },
     {
@@ -925,14 +976,20 @@
       "priority": 80,
       "name": "산업통신·네트워크·프로토콜",
       "triggers": [
-        "산업통신",
         "프로토콜",
         "TCP/IP",
         "OSI",
         "필드버스",
-        "무선통신",
         "Zigbee",
-        "SNMP"
+        "SNMP",
+        "산업용 통신 프로토콜",
+        "Modbus",
+        "HART",
+        "Fieldbus",
+        "Profibus",
+        "Profinet",
+        "EtherNet/IP",
+        "OPC UA"
       ],
       "aliases": [
         "네트워크",
@@ -956,7 +1013,11 @@
           "support_terms": [
             "계층",
             "역할",
-            "프로토콜"
+            "프로토콜",
+            "OSI",
+            "TCP/IP",
+            "physical layer",
+            "application layer"
           ]
         },
         {
@@ -992,7 +1053,11 @@
           "support_terms": [
             "신뢰성",
             "제어",
-            "성능"
+            "성능",
+            "update time",
+            "jitter",
+            "determinism",
+            "real-time"
           ]
         },
         {
@@ -1010,7 +1075,12 @@
           "support_terms": [
             "보안",
             "OT",
-            "위협"
+            "위협",
+            "network segmentation",
+            "firewall",
+            "zone",
+            "conduit",
+            "OT security"
           ]
         },
         {
@@ -1031,6 +1101,9 @@
             "검토"
           ]
         }
+      ],
+      "revision_notes": [
+        "deep_relation_cleanup: narrowed broad triggers and added protocol support terms."
       ]
     },
     {
@@ -1285,7 +1358,14 @@
           "support_terms": [
             "노이즈",
             "잡음",
-            "원인"
+            "원인",
+            "differential mode",
+            "common mode",
+            "EMI",
+            "RFI",
+            "ground loop",
+            "equipotential grounding",
+            "bonding"
           ]
         },
         {
@@ -1338,7 +1418,11 @@
           "support_terms": [
             "대책",
             "방지",
-            "저감"
+            "저감",
+            "cable shield",
+            "drain wire",
+            "single-point grounding",
+            "multi-point grounding"
           ]
         },
         {
@@ -1356,9 +1440,20 @@
           "support_terms": [
             "현장",
             "실무",
-            "점검"
+            "점검",
+            "SPD",
+            "surge protective device",
+            "lightning",
+            "switching surge",
+            "oscilloscope",
+            "trend",
+            "insulation test",
+            "grounding resistance"
           ]
         }
+      ],
+      "revision_notes": [
+        "deep_relation_cleanup: added support terms for noise/grounding/surge relation."
       ]
     },
     {
@@ -1396,7 +1491,11 @@
           "support_terms": [
             "스마트팩토리",
             "IIoT",
-            "목적"
+            "목적",
+            "edge gateway",
+            "historian",
+            "time synchronization",
+            "data governance"
           ]
         },
         {
@@ -1415,7 +1514,10 @@
           "support_terms": [
             "아키텍처",
             "계층",
-            "플랫폼"
+            "플랫폼",
+            "PLC/DCS integration",
+            "cybersecurity",
+            "change management"
           ]
         },
         {
@@ -1433,7 +1535,10 @@
           "support_terms": [
             "설비",
             "데이터",
-            "모델"
+            "모델",
+            "digital twin",
+            "model drift",
+            "what-if analysis"
           ]
         },
         {
@@ -1469,9 +1574,18 @@
           "support_terms": [
             "도입",
             "전략",
-            "실무"
+            "실무",
+            "OEE",
+            "MTBF",
+            "MTTR",
+            "downtime",
+            "ROI",
+            "energy intensity"
           ]
         }
+      ],
+      "revision_notes": [
+        "deep_relation_cleanup: added smart factory support terms matching model answer."
       ]
     },
     {
