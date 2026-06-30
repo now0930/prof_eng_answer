@@ -188,7 +188,7 @@
         "비교축은 측정 온도 범위, 정확도, 응답속도, 내구성, 배선 방식, 보상 필요성, 유지보수 비용으로 설정할 수 있다.",
         "RTD는 정확도와 선형성이 우수하고 중저온 정밀 측정에 적합하지만, 고온 한계와 진동 취약성, 상대적으로 느린 응답이 단점이다.",
         "열전대는 고온 측정, 넓은 온도 범위, 빠른 응답, 내구성 측면에서 유리하지만, 냉접점 보상, 보상도선, 노이즈, 장기 안정성 관리가 중요하다.",
-        "따라서 300℃ 이하의 정밀 온도 제어, 품질 관리, 저온 공정에는 RTD가 적합하고, 고온 furnace, 배관 표면 온도, 빠른 응답이 필요한 공정에는 열전대가 적합하다.",
+        "따라서 중저온 정밀 온도 제어, 품질 관리, 저온 공정에는 RTD가 유리한 경우가 많고, 고온 furnace, 배관 표면 온도, 빠른 응답이 필요한 공정에는 열전대가 적합한 경우가 많다.",
         "기존 설비에서는 transmitter 입력 타입, 배선 방식, 보상도선, 방폭 요구, 유지보수 인력 숙련도, 교정 주기를 함께 고려해 선정해야 한다."
       ],
       "high_score_features": [
@@ -564,7 +564,7 @@
     {
       "id": "local_instrument_cabinet_installation_DIAGNOSIS_ACTION_v1",
       "topic_id": "local_instrument_cabinet_installation",
-      "question_type": "DIAGNOSIS_ACTION",
+      "question_type": "IMPLEMENTATION_EVALUATION",
       "title": "현장 계기함(Local Instrument Cabinet) 시공 시 법령 기반 주의사항",
       "question_examples": [
         "현장 계기함(Local Instrument Cabinet)의 시공 시 주의사항에 대하여 설명하시오.",
@@ -583,11 +583,11 @@
         "배전반"
       ],
       "expected_structure": [
-        "1. 배경: 현장 계기함은 계측·제어 장비를 보호하는 설비이지만, 동시에 충전부, 금속제 외함, 습기·분진, 누전, 점검작업, 폭발위험장소와 관련된 법령상 설치조건을 만족해야 함을 설명한다.",
-        "2. 내용: 산업안전보건기준에 관한 규칙의 충전부 방호, 전기기계·기구 접지, 적정설치, 누전차단, 과전류 차단, 비상전원, 조작·점검 작업공간, 방폭기기 선정 조건을 구조적으로 설명한다.",
-        "3. 문제점: 법령상 설치조건을 일반 시공 체크리스트로만 처리하면 감전, 누전, 과전류, 정전 시 위험, 작업공간 부족, 방폭 부적합, 유지보수 불량으로 이어질 수 있음을 설명한다.",
-        "4. 개선방안: 폐쇄형 외함과 문 고정, 금속제 외함 접지, 습기·분진 환경 고려, 누전차단기와 과전류 차단장치 적용, 비상전원 검토, 70cm 작업공간 확보, 폭발위험장소 방폭구조 선정·유지관리를 제시한다.",
-        "5. 기술사적 판단: 단순히 KS 번호를 나열하지 않고, 현장 조건별로 어떤 법령 설치조건이 계기함 시공 품질과 안전 확보에 연결되는지 설명한다."
+        "설치 목적과 적용 범위",
+        "전원·접지·보호장치 검토",
+        "방폭·충전부 방호·작업공간 등 안전 기준 검토",
+        "배선, gland, shield, 접지, 노이즈 대책",
+        "점검·유지보수·기존 설비 연계 조건"
       ],
       "model_answer_outline": [
         "현장 계기함은 계측기, 변환기, 단자대, 전원장치, 통신장치, 보호장치를 수납하는 설비이므로 장비 보호뿐 아니라 감전 방지, 누전 방지, 작업자 안전, 유지보수성, 방폭 적합성을 함께 만족해야 한다고 설명한다.",
@@ -596,7 +596,7 @@
         "설치 환경 관점에서는 전기적 용량, 기계적 강도, 습기·분진 등 사용장소의 주위 환경, 전기적·기계적 방호수단의 적정성, 인증 제품의 제조자 설치조건을 고려해야 한다고 설명한다.",
         "감전·과전류 보호 관점에서는 습윤장소나 감전 위험이 있는 계기함 회로에 누전차단기를 검토하고, 과전류 차단장치는 접지선이 아닌 전로에 설치하여 단락·지락 사고 시 전로가 자동 차단되도록 해야 한다고 설명한다.",
         "비상전원 관점에서는 정전으로 화재·폭발 등 재해가 우려되는 설비에 연결된 계기함일 경우 비상발전기, 비상전원 수전설비, 축전지 설비, 전기저장장치 등 비상전원 필요성을 검토해야 한다고 설명한다.",
-        "유지보수 작업공간 관점에서는 계기함의 조작부, 단자대, 차단기, 보호장치를 점검·보수할 때 작업자가 안전하게 접근할 수 있도록 전기기계·기구로부터 폭 70cm 이상의 작업공간 확보를 검토해야 한다고 설명한다.",
+        "계장반은 관계 법령과 전기설비 기준에 따른 조작·점검 작업공간을 확보하고, 설비 전압·위험도·점검 방식에 맞게 접근성을 검토해야 한다.",
         "폭발위험장소 관점에서는 가스폭발 또는 분진폭발 위험장소에 설치되는 계기함과 내부 전기기계·기구는 해당 위험 분위기에 적합한 방폭성능을 가진 방폭구조로 선정하고 정상 작동 상태가 유지되도록 관리해야 한다고 설명한다.",
         "결론에서는 현장 계기함 시공의 핵심이 IP 등급이나 케이블 정리 같은 일반사항에 그치지 않고, 충전부 방호·접지·설치환경·보호장치·작업공간·방폭조건을 법령 설치조건과 연결하여 검토하는 것이라고 정리한다."
       ],
@@ -621,14 +621,16 @@
         "표준번호나 법령명을 의미 없이 나열하고, 해당 기준이 실제 시공 판단에 어떻게 쓰이는지 설명하지 못한다."
       ],
       "field_connection_points": [
-        "기존 현장 계기함을 증설하거나 개조할 때는 먼저 충전부 노출 여부와 제어반 문·패널 고정 상태를 확인한다.",
-        "금속제 계기함은 외함 접지, 보호접지 도체, 접지 연속성, 접지 단자 체결 상태를 확인하여 누전 시 감전 위험을 줄인다.",
-        "옥외·습윤·분진 환경에서는 보호등급만 보는 것이 아니라 습기·분진 등 사용장소 주위 환경과 전기적·기계적 방호수단의 적정성을 함께 검토한다.",
-        "감전 위험이 있는 회로나 습윤 장소의 전기기계·기구에는 누전차단기 적용 여부와 작동상태 점검을 검토한다.",
-        "계기함 전원 회로에는 과전류 차단장치가 접지선이 아닌 전로에 적절히 배치되어 단락·지락 사고 시 차단되도록 확인한다.",
-        "정전으로 화재·폭발 등 재해 우려가 있는 공정 계장설비는 UPS, 축전지, 비상전원 수전설비 등 비상전원 필요성을 검토한다.",
-        "점검·보수 빈도가 높은 계기함은 문 개방과 작업 자세를 고려하여 폭 70cm 이상의 작업공간 확보 여부를 확인한다.",
-        "가스 또는 분진 폭발위험장소의 계기함은 일반 외함을 적용하지 않고 위험 분위기에 적합한 방폭구조와 유지관리 조건을 확인한다."
+        "panel grounding",
+        "shield grounding",
+        "cable gland",
+        "IP 등급",
+        "방폭",
+        "작업공간",
+        "ventilation",
+        "condensation",
+        "loop check",
+        "maintenance access"
       ],
       "revision_notes": [
         "created_at=2026-06-29T22:20:42",
@@ -952,9 +954,14 @@
         "부호는 교환법칙이 아니라 T T^{-1}=I의 미분 항등식에서 나온다는 점을 명확히 해야 한다."
       ],
       "field_connection_points": [
-        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
-        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
-        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        "벡터제어",
+        "d축 자속 제어",
+        "q축 토크 전류 제어",
+        "좌표계 부호",
+        "속도기전력 보상",
+        "전류제어기 설계",
+        "인버터 구동",
+        "센서리스 제어"
       ],
       "revision_notes": [
         "created_at=2026-06-30T11:41:15",
@@ -978,11 +985,12 @@
         "feedback spring"
       ],
       "expected_structure": [
-        "1. 배경",
-        "제어밸브는 조절계 출력에 따라 유체 유량을 조절하는 최종제어요소이다.",
-        "실제 밸브 위치가 명령과 다르면 유량 제어 오차, 마찰, 히스테리시스 문제가 생긴다.",
-        "2. I/P converter와 입력 신호",
-        "I/P converter는 전류 신호를 공압 신호로 변환한다."
+        "배경과 최종제어요소 역할",
+        "I/P converter의 4~20mA to 3~15 psi 변환",
+        "포지셔너 구성: diaphragm/capsule, pilot valve, actuator",
+        "feedback spring/linkage에 의한 위치 피드백",
+        "힘 평형과 목표 위치 정지",
+        "마찰·히스테리시스·air supply·fail action 등 현장 문제"
       ],
       "model_answer_outline": [
         "1. 배경",
@@ -1015,9 +1023,18 @@
         "smart positioner 통신 진단은 보조 내용이며 핵심은 입력 신호, 파일럿 밸브, 액추에이터, 피드백 균형이다."
       ],
       "field_connection_points": [
-        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
-        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
-        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        "I/P converter",
+        "4~20mA",
+        "3~15 psi",
+        "pilot valve",
+        "feedback spring",
+        "linkage",
+        "stiction",
+        "dead band",
+        "air supply",
+        "fail open",
+        "fail close",
+        "smart positioner"
       ],
       "revision_notes": [
         "created_at=2026-06-30T12:24:55",
@@ -2594,380 +2611,455 @@
       "id": "vibration_measurement_condition_monitoring_COMPARE_SELECTION_v1",
       "topic_id": "vibration_measurement_condition_monitoring",
       "question_type": "COMPARE_SELECTION",
-      "title": "회전체 진동 측정과 상태감시 센서 선정",
+      "title": "진동 측정과 상태감시 센서 선정형 모범 답안",
       "question_examples": [
-        "회전체의 진동 감시 및 기기 보호를 위한 진동감시설비의 구성요소와 변위, 속도, 가속도 진동센서의 장단점 및 적용 기준을 설명하시오."
+        "진동 측정에서 변위, 속도, 가속도 센서의 적용 기준을 설명하시오.",
+        "회전체 상태감시에서 shaft vibration, housing vibration, bearing fault 진단 방법을 비교하시오.",
+        "진동 보호용 trip과 진단용 monitoring의 차이를 설명하시오."
       ],
       "topic_aliases": [
-        "진동 측정",
-        "진동 감시",
-        "vibration monitoring",
+        "진동측정",
+        "상태감시",
         "condition monitoring",
-        "변위 센서",
-        "속도 센서",
-        "가속도 센서",
+        "변위센서",
+        "속도센서",
+        "가속도센서",
         "shaft vibration",
-        "bearing vibration"
+        "bearing fault"
       ],
       "expected_structure": [
-        "배경",
-        "진동감시설비 구성",
-        "변위 센서",
-        "속도 센서",
-        "가속도 센서와 선정 기준"
+        "진동 측정 목적과 보호·진단 목적 구분",
+        "변위·속도·가속도 센서의 측정 대상과 주파수 대역 비교",
+        "shaft vibration, housing vibration, bearing fault 적용 구분",
+        "보호용 trip과 진단용 monitoring의 기능 차이",
+        "설치 위치, 신호처리, alarm/trip 설정, 유지보수 고려사항"
       ],
       "model_answer_outline": [
-        "회전체 설비는 불평형, 축정렬 불량, 베어링 손상, 공진 등에 의해 진동이 증가할 수 있으므로 진동 감시가 필요하다.",
-        "진동감시설비는 진동센서, 신호변환기, 모니터링 장치, alarm 또는 trip relay, DCS 또는 PLC 연계, 진단 시스템으로 구성된다.",
-        "변위 센서는 축 상대 변위와 저속 대형 회전체 감시에 유리하지만 간극, 표면 상태, 주파수 추종성에 영향을 받는다.",
-        "속도 센서는 기계 진동 심각도 평가와 중간 주파수 housing vibration 감시에 적합하지만 설치 고정과 주파수 한계를 고려해야 한다.",
-        "가속도 센서는 넓은 주파수 범위와 베어링 결함, 충격성 진동 검출에 유리하지만 mounting, 적분, 노이즈, 온도 영향을 고려해야 한다."
+        "진동 측정은 회전체의 이상을 조기에 파악하고 설비 보호, 상태진단, 예방보전 기준을 확보하기 위한 계측이다.",
+        "변위 센서는 축의 상대변위와 저주파·대진폭 진동, 속도 센서는 베어링 하우징의 중간 주파수 진동, 가속도 센서는 고주파 충격과 베어링 결함 진단에 주로 사용된다.",
+        "shaft vibration은 비접촉 변위 probe로 축 중심 이동, unbalance, oil whirl 등을 감시하는 경우가 많고, housing vibration은 velocity pickup 또는 accelerometer로 구조물 전달 진동을 본다.",
+        "bearing fault는 내륜·외륜·볼 결함에 의한 고주파 충격 성분이 중요하므로 accelerometer, FFT, envelope analysis, trend monitoring을 함께 적용한다.",
+        "보호용 trip은 과진동 시 설비 손상을 막기 위한 신뢰성 높은 한계 동작이고, 진단용 monitoring은 spectrum, trend, phase, envelope 등으로 원인을 해석하는 기능이다.",
+        "현장에서는 센서 설치 강성, 케이블 노이즈, 접지, alarm/trip setpoint, false trip 방지, 기존 보호계전·DCS 연계, 유지보수 접근성을 함께 고려해야 한다."
       ],
       "high_score_features": [
-        "진동 감시 목적을 설비 보호, 예방정비, 고장 조기 발견과 연결한다.",
-        "변위, 속도, 가속도 센서의 측정 대상과 주파수 대역을 구분한다.",
-        "보호용 trip과 진단용 monitoring의 목적 차이를 설명한다."
+        "변위·속도·가속도 센서의 측정 대상과 주파수 대역을 구분한다.",
+        "shaft vibration과 housing vibration의 계측 위치와 의미를 분리한다.",
+        "bearing fault 진단에서 고주파 충격, FFT, envelope, trend를 언급한다.",
+        "보호용 trip과 진단용 monitoring의 목적과 신뢰성 요구 차이를 설명한다.",
+        "설치, 노이즈, setpoint, false trip, 유지보수까지 현장 적용으로 연결한다."
       ],
       "low_score_patterns": [
-        "변위, 속도, 가속도 센서를 모두 같은 진동 센서로만 설명하면 안 된다.",
-        "센서별 주파수 대역과 측정 위치를 구분하지 않으면 안 된다.",
-        "보호용 trip과 진단용 monitoring의 목적 차이를 빠뜨리면 안 된다.",
-        "## 2. doppler_effect_velocity_flow_measurement"
+        "진동센서를 모두 같은 용도로 설명한다.",
+        "가속도 센서가 항상 모든 진동 측정에 가장 좋다고 단정한다.",
+        "변위, 속도, 가속도를 단순 미분·적분 관계로만 설명하고 실제 적용 위치를 구분하지 않는다.",
+        "trip과 monitoring을 구분하지 않는다."
       ],
       "field_connection_points": [
-        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
-        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
-        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        "proximity probe",
+        "velocity pickup",
+        "accelerometer",
+        "FFT",
+        "envelope analysis",
+        "alarm setpoint",
+        "trip setpoint",
+        "false trip",
+        "predictive maintenance"
       ],
       "revision_notes": [
-        "created_at=2026-06-30T19:19:23",
-        "imported_from=wordpress_docs/review_designs/batch_012_design_2topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "created_at=2026-06-30T23:35:58",
+        "review_fix: model_answers와 fact_anchors 동기화 보강"
       ]
     },
     {
       "id": "doppler_effect_velocity_flow_measurement_PRINCIPLE_INTERPRETATION_v1",
       "topic_id": "doppler_effect_velocity_flow_measurement",
       "question_type": "PRINCIPLE_INTERPRETATION",
-      "title": "도플러 효과와 속도·유량 측정 원리",
+      "title": "도플러 효과와 속도·유량 측정 원리 모범 답안",
       "question_examples": [
-        "주파수 측정에서 도플러 효과의 원리를 설명하고, 속도, 유량, 거리 측정에서의 활용 및 적용 시 고려사항을 설명하시오."
+        "도플러 효과와 이를 이용한 속도 측정 원리를 설명하시오.",
+        "도플러 초음파 유량계의 원리와 적용 조건을 설명하시오.",
+        "도플러 방식과 transit-time 초음파 유량계를 비교하시오."
       ],
       "topic_aliases": [
-        "도플러 효과",
-        "Doppler Effect",
-        "도플러 주파수",
-        "주파수 편이",
-        "속도 측정",
-        "유속 측정",
+        "도플러",
+        "Doppler",
         "도플러 유량계",
         "초음파 도플러",
-        "레이더 속도계"
+        "Doppler flowmeter",
+        "radar speed measurement"
       ],
       "expected_structure": [
-        "배경",
-        "도플러 효과 원리",
-        "속도 측정",
-        "유속·유량 측정",
-        "적용 고려사항"
+        "도플러 효과 정의",
+        "접근·이격에 따른 주파수 변화",
+        "반사파를 이용한 속도 산출 원리",
+        "도플러 초음파 유량계의 적용 조건",
+        "레이다·초음파·유량 측정 적용 구분과 한계"
       ],
       "model_answer_outline": [
-        "레이다, 초음파 유량계, 속도계는 파동의 송신과 반사를 이용하여 대상의 운동 상태를도계는 파동의 송신과 반사를 이용하여 대상의 운동 상태를 측정한다.",
-        "도플러 효과는 파원과 관찰자의 상대 운동에 의해 관측 주파수와 파장이 변하는 현상이다.",
-        "대상이 접근하면 수신 주파수는 증가하고 멀어지면 수신 주파수는 감소한다.",
-        "송신파와 반사파의 주파수 차이를 이용하여 물체 속도나 유체 유속을 계산할 수 있다.",
-        "도플러 초음파 유량계는 유체 내 입자나 기포의 반사파 주파수 편이를 이용하며, 입사 각도, 반사체, 신호 품질, 유체 상태를 고려해야 한다."
+        "도플러 효과는 파원과 관측자 또는 반사체 사이의 상대속도 때문에 수신 주파수가 송신 주파수와 달라지는 현상이다.",
+        "반사체가 송신기 또는 수신기에 접근하면 수신 주파수는 증가하고, 멀어지면 수신 주파수는 감소한다.",
+        "도플러 속도 측정은 송신파와 반사파의 주파수 차이를 측정하여 반사체의 속도 성분을 계산하는 방식이다.",
+        "도플러 초음파 유량계는 유체 내 입자, 기포, 슬러리 등 초음파를 산란·반사할 수 있는 반사체가 있어야 안정적으로 동작한다.",
+        "깨끗한 액체에는 일반적으로 transit-time 방식이 더 적합하고, 도플러 방식은 오염수, 슬러리, 기포가 포함된 유체에 유리하다.",
+        "레이다 속도계는 전자파 반사를 이용하고 초음파 유량계는 음파 전파를 이용하므로 매질, 반사 조건, 설치각, 유동 상태, 배관 충만 여부를 함께 검토해야 한다."
       ],
       "high_score_features": [
-        "접근과 이격에 따른 주파수 변화 방향을 정확히 설명한다.",
-        "주파수 편이와 상대 속도의 관계를 계측 원리로 연결한다.",
-        "도플러 유량 측정의 반사체, 입사 각도, 신호 대 잡음비, 유체 조건 한계를 포함한다."
+        "접근 시 주파수 증가, 이격 시 주파수 감소를 정확히 설명한다.",
+        "송신파와 반사파의 주파수 차이를 속도와 연결한다.",
+        "도플러 초음파 유량계의 반사체 조건을 명확히 제시한다.",
+        "Doppler 방식과 transit-time 방식을 구분한다.",
+        "레이다, 초음파, 유량 측정의 적용 조건과 한계를 구분한다."
       ],
       "low_score_patterns": [
-        "도플러 효과를 단순히 소리가 높아지고 낮아지는 현상으로만 설명하면 안 된다.",
-        "접근 시 주파수 증가, 이격 시 주파수 감소의 방향을 반대로 쓰면 안 된다.",
-        "도플러 유량 측정에서 반사체, 입사 각도, 신호 품질, 유체 조건을 빠뜨리면 안 된다."
+        "접근과 이격의 주파수 변화를 반대로 설명한다.",
+        "초음파 유량계를 모두 도플러 방식으로 설명한다.",
+        "깨끗한 물에서도 도플러 방식이 항상 적합하다고 단정한다.",
+        "반사체 조건, 설치각, 배관 충만 조건을 고려하지 않는다."
       ],
       "field_connection_points": [
-        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
-        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
-        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        "송신 주파수",
+        "수신 주파수",
+        "주파수 편이",
+        "반사체",
+        "입자",
+        "기포",
+        "slurry",
+        "transit-time",
+        "radar",
+        "초음파 센서 설치각"
       ],
       "revision_notes": [
-        "created_at=2026-06-30T19:19:23",
-        "imported_from=wordpress_docs/review_designs/batch_012_design_2topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "created_at=2026-06-30T23:35:58",
+        "review_fix: model_answers와 fact_anchors 동기화 보강"
       ]
     },
     {
       "id": "adc_dac_signal_conversion_interface_PRINCIPLE_INTERPRETATION_v1",
       "topic_id": "adc_dac_signal_conversion_interface",
       "question_type": "PRINCIPLE_INTERPRETATION",
-      "title": "A/D·D/A 변환과 계측제어 신호 인터페이스",
+      "title": "ADC/DAC 신호 변환 인터페이스 원리 모범 답안",
       "question_examples": [
-        "컴퓨터를 이용한 프로세스 제어 시스템에서 필요한 A/D 변환기와 D/A 변환기의 동작 원리, 주요 오차 및 적용 시 고려사항을 설명하시오."
+        "ADC와 DAC의 동작 원리와 오차 요인을 설명하시오.",
+        "아날로그 계측 신호의 디지털 변환 과정과 주의사항을 설명하시오."
       ],
       "topic_aliases": [
-        "A/D 변환",
-        "D/A 변환",
         "ADC",
         "DAC",
-        "아날로그 디지털 변환",
-        "디지털 아날로그 변환",
+        "A/D 변환",
+        "D/A 변환",
+        "표본화",
+        "양자화",
+        "부호화",
         "sampling",
-        "quantization",
-        "signal conversion"
+        "quantization"
       ],
       "expected_structure": [
-        "배경",
-        "A/D 변환 원리",
-        "D/A 변환 원리",
-        "주요 성능과 오차",
-        "적용 고려사항"
+        "계측 인터페이스에서 ADC/DAC의 역할",
+        "ADC의 표본화·양자화·부호화 과정",
+        "DAC의 디코딩·가중합성·필터링 과정",
+        "해상도와 정확도의 차이",
+        "주요 오차 요인과 현장 적용 고려사항"
       ],
       "model_answer_outline": [
-        "프로세스 제어 시스템에서는 현장 아날로그 신호를 컴퓨터, PLC, DCS가 처리할 수 있는 디지털 값으로 변환해야 한다.",
-        "A/D 변환은 표본화, 양자화, 부호화 과정을 통해 연속 신호를 이산적인 디지털 값으로 변환한다.",
-        "D/A 변환은 디지털 값을 디코딩하고 가중 합성, 보간 또는 필터링을 통해 아날로그 전압이나 전류로 변환한다.",
-        "ADC 성능은 해상도, 변환 속도, 기준전압 안정도, 양자화 오차, 오프셋 오차, 이득 오차, 비선형성 오차, 샘플링 지터에 영향을 받는다.",
-        "현장 적용 시 샘플링 주기, 제어 주기, 노이즈, 절연, 접지, 필터링, calibration, 비용을 함께 고려해야 한다."
+        "ADC는 센서 또는 transmitter의 아날로그 전압·전류 신호를 디지털 제어기나 DAQ가 처리할 수 있는 코드로 변환하는 장치이다.",
+        "ADC 과정은 시간축에서 신호를 일정 주기로 취하는 표본화, 진폭축을 유한 단계로 나누는 양자화, 양자화된 값을 binary code로 표현하는 부호화로 설명할 수 있다.",
+        "DAC는 디지털 코드를 디코딩하여 저항 ladder, current source, PWM 등으로 가중 합성하고, 필요 시 reconstruction filter로 아날로그 출력 리플을 줄인다.",
+        "bit 수가 증가하면 LSB 크기가 작아져 해상도는 좋아지지만, 기준전압, noise, offset error, gain error, INL/DNL, jitter가 나쁘면 전체 정확도는 보장되지 않는다.",
+        "샘플링 주기는 신호 대역폭보다 충분히 빨라야 하며 aliasing을 막기 위해 anti-aliasing filter와 적절한 grounding, shielding, isolation을 검토해야 한다.",
+        "현장에서는 4~20mA, 1~5V, thermocouple/RTD 입력, 절연 모듈, 기준전압 안정도, PLC scan time, 제어 주기와의 정합성을 함께 검토한다."
       ],
       "high_score_features": [
-        "표본화, 양자화, 부호화의 역할을 구분한다.",
-        "A/D와 D/A를 입력 계측과 출력 제어 인터페이스로 연결한다.",
-        "해상도뿐 아니라 오차, 노이즈, 기준전압, 샘플링 조건을 함께 설명한다."
+        "ADC의 표본화, 양자화, 부호화를 순서대로 설명한다.",
+        "DAC의 디코딩, 가중 합성, 필터링을 구분한다.",
+        "해상도와 정확도가 다르다는 점을 명확히 설명한다.",
+        "양자화 오차, offset, gain, INL/DNL, sampling jitter를 언급한다.",
+        "anti-aliasing, 기준전압, 노이즈, 접지, 절연, scan time을 현장 조건과 연결한다."
       ],
       "low_score_patterns": [
-        "A/D와 D/A를 단순히 아날로그와 디지털의 방향만 바꾸는 장치로 설명하면 안 된다.",
-        "표본화, 양자화, 부호화의 차이를 구분하지 않으면 안 된다.",
-        "해상도만 높으면 정확도가 항상 좋아진다고 설명하면 안 된다. 오차, 노이즈, 기준전압, 샘플링 조건도 함께 고려해야 한다."
+        "ADC는 아날로그를 디지털로 바꾼다고만 설명한다.",
+        "bit 수가 높으면 항상 정확하다고 설명한다.",
+        "sampling과 quantization을 구분하지 않는다.",
+        "aliasing, jitter, 기준전압, 노이즈 등 실제 오차 요인을 누락한다."
       ],
       "field_connection_points": [
-        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
-        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
-        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        "4~20mA",
+        "1~5V",
+        "LSB",
+        "anti-aliasing filter",
+        "reference voltage",
+        "offset error",
+        "gain error",
+        "INL",
+        "DNL",
+        "sampling jitter",
+        "PLC scan time"
       ],
       "revision_notes": [
-        "created_at=2026-06-30T19:51:06",
-        "imported_from=wordpress_docs/review_designs/batch_013_design_4topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "created_at=2026-06-30T23:35:58",
+        "review_fix: model_answers와 fact_anchors 동기화 보강"
       ]
     },
     {
       "id": "temperature_sensor_thermowell_material_selection_COMPARE_SELECTION_v1",
       "topic_id": "temperature_sensor_thermowell_material_selection",
       "question_type": "COMPARE_SELECTION",
-      "title": "온도 측정용 보호관 재질과 설치 선정",
+      "title": "온도센서 Thermowell 재질·형상 선정형 모범 답안",
       "question_examples": [
-        "온도 측정용 보호관의 목적과 기능을 설명하고, 공정 조건에 따른 보호관 재질, 형상, 길이 및 설치 방법의 선정 기준을 설명하시오."
+        "Thermowell의 목적과 재질 선정 기준을 설명하시오.",
+        "온도센서 보호관 선정 시 고려사항을 설명하시오."
       ],
       "topic_aliases": [
-        "보호관 재질",
         "thermowell",
-        "온도 보호관",
-        "보호관 선정",
-        "온도계 보호관",
-        "thermowell material",
-        "보호관 형상",
-        "보호관 설치"
+        "써모웰",
+        "온도센서 보호관",
+        "보호관",
+        "wake frequency",
+        "삽입길이"
       ],
       "expected_structure": [
-        "배경",
-        "보호관의 기능",
+        "thermowell의 목적",
         "재질 선정 기준",
-        "형상·길이·직경 선정",
-        "설치 및 적용 고려사항"
+        "형상과 삽입 길이 선정",
+        "진동·파손 위험과 wake frequency 검토",
+        "응답 지연, 유지보수, 비용 고려"
       ],
       "model_answer_outline": [
-        "보호관은 온도소자를 고온, 고압, 부식성, 마모성 유체로부터 보호하고 센서 교체와 점검을 용이하게 한다.",
-        "보호관은 공정 누설 위험을 줄이지만 열전달 지연을 만들 수 있으므로 응답속도와 측정 오차를 고려해야 한다.",
-        "재질은 유체의 화학적 성질, 부식성, 온도, 압력, 유속, 마모성, 위생 조건에 따라 선정한다.",
-        "원통형, 테이퍼형, 스텝형 등 형상과 삽입 길이, 직경은 강도, 응답속도, 대표성, 진동 위험에 영향을 준다.",
-        "설치 방법은 나사식, 플랜지식, 용접식, 클램프식 등으로 구분되며 배관 조건, 유지보수성, 비용, 예비품을 함께 고려해야 한다."
+        "Thermowell은 온도센서를 공정 유체의 압력, 부식, 침식, 유속, 기계적 충격으로부터 보호하고 운전 중 센서 교체성을 확보하는 압력 경계 부품이다.",
+        "재질은 온도, 압력, 유체 부식성, 침식성, 오염 가능성, 위생 요구, 기존 배관 재질과의 galvanic corrosion 가능성을 고려하여 선정한다.",
+        "일반 수계·약부식 환경에는 SS304/316 계열이 쓰일 수 있으나, 고온·고압·염소·산·알칼리·해수 등에서는 Hastelloy, Inconel, Monel, Titanium 등 공정 조건에 맞는 재질 검토가 필요하다.",
+        "형상은 직선형, 테이퍼형, 스텝형 등이 있으며 강도, 응답성, 압력손실, 유속 조건을 함께 고려해야 한다.",
+        "삽입 길이는 대표 온도를 얻을 만큼 충분해야 하지만 너무 길면 응답 지연과 vortex shedding에 의한 진동·피로 파손 위험이 증가한다.",
+        "현장에서는 wake frequency 계산, nozzle 위치, 유속, 보호관 강도, sensor 교체성, spare 표준화, 비용과 납기까지 함께 검토한다."
       ],
       "high_score_features": [
-        "보호관의 보호 기능과 유지보수 기능을 동시에 설명한다.",
-        "재질을 유체 부식성, 온도, 압력, 유속, 마모성과 연결해 선정한다.",
-        "응답 지연, 삽입 길이, 와류 진동, 피로 파손 위험까지 포함한다."
+        "thermowell의 보호, 압력 경계, 운전 중 교체 목적을 설명한다.",
+        "재질을 온도, 압력, 부식, 침식, 유체 조건과 연결한다.",
+        "형상과 삽입 길이를 응답성, 강도, 대표성으로 비교한다.",
+        "wake frequency, vortex shedding, 피로 파손 위험을 언급한다.",
+        "응답 지연, 유지보수, 표준화, 비용을 실무 판단으로 연결한다."
       ],
       "low_score_patterns": [
-        "보호관 재질을 단순히 스테인리스강이 좋다고만 설명하면 안 된다.",
-        "재질 선정에서 유체 부식성, 온도, 압력, 유속, 마모성을 빠뜨리면 안 된다.",
-        "보호관이 측정 응답속도와 진동 파손 위험에 영향을 준다는 점을 누락하면 안 된다."
+        "thermowell을 단순한 센서 커버로만 설명한다.",
+        "SS316이면 대부분 충분하다고 단정한다.",
+        "삽입 길이는 길수록 좋다고 설명한다.",
+        "진동, wake frequency, 응답 지연, 유지보수성을 누락한다."
       ],
       "field_connection_points": [
-        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
-        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
-        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        "공정 유체",
+        "부식",
+        "침식",
+        "SS316",
+        "Hastelloy",
+        "Inconel",
+        "삽입 길이",
+        "tapered thermowell",
+        "wake frequency",
+        "vortex shedding",
+        "응답 지연",
+        "센서 교체"
       ],
       "revision_notes": [
-        "created_at=2026-06-30T19:51:06",
-        "imported_from=wordpress_docs/review_designs/batch_013_design_4topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "created_at=2026-06-30T23:35:58",
+        "review_fix: model_answers와 fact_anchors 동기화 보강"
       ]
     },
     {
       "id": "level_measurement_sensor_selection_COMPARE_SELECTION_v1",
       "topic_id": "level_measurement_sensor_selection",
       "question_type": "COMPARE_SELECTION",
-      "title": "액체 레벨 측정기 종류와 선정 기준",
+      "title": "레벨 측정 센서 비교·선정형 모범 답안",
       "question_examples": [
-        "액체 레벨 측정계기의 주요 종류를 설명하고, 탱크 조건과 유체 특성에 따른 수위 측정 방식의 선정 기준을 설명하시오."
+        "레벨 측정 센서의 종류와 선정 기준을 설명하시오.",
+        "초음파, 플로트, GWR, 레이저, 정전용량식 레벨계의 특징을 비교하시오."
       ],
       "topic_aliases": [
-        "수위 측정",
         "레벨 측정",
         "level measurement",
-        "level meter",
-        "초음파 수위계",
-        "플로트식 수위계",
-        "정전용량식 레벨계",
-        "레이더 레벨계",
-        "레이저 레벨계"
+        "초음파 레벨계",
+        "플로트 레벨계",
+        "가이드웨이브 레이더",
+        "GWR",
+        "레이저 레벨계",
+        "정전용량식 레벨계"
       ],
       "expected_structure": [
-        "배경",
-        "초음파식 수위계",
-        "플로트식 수위계",
-        "레이더·레이저식 수위계",
-        "정전용량식 및 선정 기준"
+        "레벨 측정 목적과 선정 기준",
+        "접촉식·비접촉식 분류",
+        "초음파, 플로트, GWR, 레이저, 정전용량식 비교",
+        "거품, 증기, 유전율, 점도, 부식성, 방폭 조건 영향",
+        "유지보수, 비용, 기존 설비 연계 판단"
       ],
       "model_answer_outline": [
-        "레벨 측정은 재고 관리, 공정 제어, overflow 방지, 펌프 보호, 안전 운전에 중요하다.",
-        "초음파식은 액면 반사파의 왕복 시간을 이용하는 비접촉식이며 거품, 증기, 난류, 온도 변화, 장애물에 영향을 받을 수 있다.",
-        "플로트식은 액면을 따라 움직이는 부자를 이용하는 접촉식으로 구조가 단순하지만 점착성 유체, 슬러리, 부식, 마모에 취약할 수 있다.",
-        "레이더와 레이저 방식은 전자파 또는 광 펄스의 반사 시간을 이용하며 설치 조건과 유체 특성에 따라 장단점이 달라진다.",
-        "선정 시 접촉 여부, 측정 범위, 정확도, 부식성, 점도, 거품, 증기, 압력, 온도, 방폭, 유지보수, 비용을 고려해야 한다."
+        "레벨 측정은 탱크 재고, overflow 방지, pump 보호, 공정 안정화를 위해 액체 또는 고체의 높이를 계측하는 것이다.",
+        "초음파와 레이저 레벨계는 비접촉식으로 설치·유지보수가 유리하나, 거품, 증기, 분진, 표면 난반사, 탱크 내부 구조물의 영향을 받을 수 있다.",
+        "플로트 방식은 접촉식으로 원리가 단순하고 비용이 낮지만 점도, 고착, 부식, 슬러지, 기계적 마모에 취약하다.",
+        "가이드웨이브 레이더는 probe를 따라 전자파가 진행하는 접촉식 계열로 볼 수 있으며 증기 영향은 비교적 작지만 유전율, probe 부착물, 설치 공간, 계면 조건을 검토해야 한다.",
+        "정전용량식은 probe와 탱크 사이 정전용량 변화를 이용하므로 유전율, coating, 부착물, interface, 접지 조건의 영향이 크다.",
+        "선정 시 측정 대상, 접촉 허용 여부, 압력·온도, 거품·증기·분진, 점도, 부식성, 방폭, 세정성, calibration, 기존 nozzle과 wiring, 비용을 종합 판단한다."
       ],
       "high_score_features": [
-        "수위계 종류를 원리와 적용 조건 중심으로 비교한다.",
-        "초음파, 플로트, 레이더, 레이저, 정전용량식의 한계를 구분한다.",
-        "유체 특성, 탱크 조건, 방폭, 유지보수, 비용을 선정 기준으로 연결한다."
+        "접촉식과 비접촉식 분류를 정확히 제시한다.",
+        "각 센서의 원리와 취약 조건을 공정 조건과 연결한다.",
+        "GWR을 일반 비접촉식 radar와 구분한다.",
+        "거품, 증기, 유전율, 점도, 부식성, 방폭 조건을 선정 기준으로 사용한다.",
+        "유지보수, 기존 nozzle, wiring, 비용까지 판단한다."
       ],
       "low_score_patterns": [
-        "수위계 종류만 나열하고 적용 조건을 비교하지 않으면 안 된다.",
-        "초음파식, 레이더식, 레이저식을 모두 같은 비접촉 시간차 방식으로만 뭉뚱그리면 안 된다.",
-        "거품, 증기, 부식성, 점도, 압력, 온도, 방폭, 유지보수 조건을 빠뜨리면 현장성이 떨어진다."
+        "초음파가 모든 탱크에 범용 적용 가능하다고 설명한다.",
+        "GWR을 비접촉식이라고 단정한다.",
+        "정전용량식에서 유전율 영향을 누락한다.",
+        "거품, 증기, 점도, 부식성, 방폭 조건을 고려하지 않는다."
       ],
       "field_connection_points": [
-        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
-        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
-        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        "non-contact",
+        "contact",
+        "ultrasonic",
+        "float",
+        "guided wave radar",
+        "laser",
+        "capacitance",
+        "foam",
+        "vapor",
+        "dielectric constant",
+        "viscosity",
+        "corrosion",
+        "explosion proof"
       ],
       "revision_notes": [
-        "created_at=2026-06-30T19:51:06",
-        "imported_from=wordpress_docs/review_designs/batch_013_design_4topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "created_at=2026-06-30T23:35:58",
+        "review_fix: model_answers와 fact_anchors 동기화 보강"
       ]
     },
     {
       "id": "continuous_discrete_control_model_comparison_COMPARE_SELECTION_v1",
       "topic_id": "continuous_discrete_control_model_comparison",
       "question_type": "COMPARE_SELECTION",
-      "title": "연속모델과 이산모델의 제어시스템 적용 비교",
+      "title": "연속시간·이산시간·이산사건 제어모델 비교형 모범 답안",
       "question_examples": [
-        "제어 시스템 해석과 시뮬레이션에서 연속모델과 이산모델의 개념, 장단점 및 적용 기준을 비교하여 설명하시오."
+        "연속시간 모델과 이산시간 모델, 이산사건 모델을 비교하시오.",
+        "디지털 제어에서 이산시간 모델 적용 시 고려사항을 설명하시오."
       ],
       "topic_aliases": [
-        "연속모델",
-        "이산모델",
-        "continuous model",
-        "discrete model",
+        "연속시간 모델",
         "이산시간 모델",
         "이산사건 모델",
-        "디지털 제어 모델",
         "z 변환",
-        "샘플링"
+        "차분방정식",
+        "sampling period",
+        "aliasing"
       ],
       "expected_structure": [
-        "배경",
-        "연속모델 개념",
-        "이산모델 개념",
-        "장단점 비교",
-        "적용 기준"
+        "모델 구분 목적",
+        "연속시간 모델의 표현과 적용",
+        "이산시간 모델의 표현과 적용",
+        "이산사건 모델의 표현과 적용",
+        "디지털 제어 적용 시 sampling, aliasing, 지연 고려"
       ],
       "model_answer_outline": [
-        "제어 시스템은 실제 설비 실험이 어렵거나 위험한 경우 모델을 이용해 해석, 설계, 검증, 시뮬레이션을 수행한다.",
-        "연속모델은 시간과 상태가 연속적으로 변한다고 보고 미분방정식, 전달함수, 상태방정식 등으로 표현한다.",
-        "이산모델은 일정 샘플링 주기 또는 사건 발생 시점에서 상태가 갱신되는 모델이며 차분방정식, z 변환, 이산사건 모델로 표현될 수 있다.",
-        "연속모델은 물리적 의미와 제어 이론 적용이 명확하지만 복잡한 이벤트 시스템 표현에는 한계가 있다.",
-        "이산모델은 컴퓨터 구현, 디지털 제어, 시뮬레이션에 유리하지만 샘플링 주기와 이산화 방법에 따라 정확도와 안정도가 달라진다."
+        "제어모델은 대상 시스템의 시간 특성과 사건 발생 방식을 어떻게 표현하는지에 따라 연속시간, 이산시간, 이산사건 모델로 구분할 수 있다.",
+        "연속시간 모델은 시간 변수가 연속이고 미분방정식, 전달함수, Laplace 변환으로 표현되며 아날로그 공정, 물리계 동특성, 주파수응답 해석에 적합하다.",
+        "이산시간 모델은 일정 sampling period마다 상태와 출력이 갱신되며 차분방정식, pulse transfer function, z 변환으로 표현되어 디지털 제어기와 DAQ 구현에 적합하다.",
+        "이산사건 모델은 연속량보다 상태 전이와 이벤트 발생 순서가 중요하며 PLC sequence, interlock, batch process, discrete manufacturing 제어에 적합하다.",
+        "디지털 제어에서는 sampling period, zero-order hold, computation delay, quantization, phase lag, aliasing, anti-aliasing filter가 제어 안정성과 응답성에 영향을 준다.",
+        "따라서 연속시간 설계식을 그대로 코드화하는 것이 아니라 대상 bandwidth, scan time, actuator 응답, 통신 지연, 안전 logic과의 연계를 고려하여 모델을 선택해야 한다."
       ],
       "high_score_features": [
-        "연속시간 모델, 이산시간 모델, 이산사건 모델을 구분한다.",
-        "샘플링 주기, aliasing, 위상 지연, 안정도 저하를 설명한다.",
-        "모델 목적, 시간 스케일, 계산 부하, 실시간성, 검증 가능성을 적용 기준으로 제시한다."
+        "연속시간, 이산시간, 이산사건 모델의 수학적 표현을 구분한다.",
+        "미분방정식/Laplace, 차분방정식/z 변환, 상태전이/이벤트를 정확히 연결한다.",
+        "디지털 제어에서 sampling period와 zero-order hold 영향을 설명한다.",
+        "aliasing, anti-aliasing, phase lag, computation delay를 언급한다.",
+        "PLC sequence와 연속 제어 loop의 적용 차이를 구분한다."
       ],
       "low_score_patterns": [
-        "연속모델과 이산모델을 단순히 아날로그와 디지털의 차이로만 설명하면 안 된다.",
-        "이산시간 모델과 이산사건 모델을 구분하지 않으면 안 된다.",
-        "샘플링 주기, aliasing, 위상 지연, 안정도 저하 같은 디지털 제어 적용 위험을 빠뜨리면 안 된다."
+        "연속 모델과 이산 모델을 단순히 아날로그/디지털 정도로만 설명한다.",
+        "이산시간 모델과 이산사건 모델을 혼동한다.",
+        "z 변환, sampling period, aliasing, phase lag를 누락한다.",
+        "연속 제어식을 그대로 디지털 제어에 적용해도 된다고 설명한다."
       ],
       "field_connection_points": [
-        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
-        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
-        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        "Laplace transform",
+        "z transform",
+        "difference equation",
+        "sampling period",
+        "zero-order hold",
+        "aliasing",
+        "anti-aliasing filter",
+        "phase lag",
+        "PLC sequence",
+        "interlock",
+        "scan time"
       ],
       "revision_notes": [
-        "created_at=2026-06-30T19:51:06",
-        "imported_from=wordpress_docs/review_designs/batch_013_design_4topics.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "created_at=2026-06-30T23:35:58",
+        "review_fix: model_answers와 fact_anchors 동기화 보강"
       ]
     },
     {
       "id": "second_order_system_resonance_frequency_response_PRINCIPLE_INTERPRETATION_v1",
       "topic_id": "second_order_system_resonance_frequency_response",
       "question_type": "PRINCIPLE_INTERPRETATION",
-      "title": "2차 시스템 공진 주파수와 주파수응답 해석",
+      "title": "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안",
       "question_examples": [
-        "표준 2차 시스템의 주파수 응답에서 공진 주파수와 공진 피크의 의미를 설명하고, 공진 주파수 공식 및 공진 발생 조건을 유도하시오."
+        "표준 2차 시스템의 주파수응답과 공진주파수를 설명하시오.",
+        "2차계에서 감쇠비와 공진주파수의 관계를 설명하시오.",
+        "시간응답 overshoot와 주파수응답 resonance의 차이를 설명하시오."
       ],
       "topic_aliases": [
-        "2차 시스템 공진 주파수",
-        "second order system resonance",
-        "resonant frequency",
-        "resonant peak",
+        "2차 시스템",
+        "second order system",
+        "공진주파수",
+        "resonance frequency",
         "frequency response",
-        "제동비",
         "감쇠비",
         "zeta",
-        "natural frequency",
-        "공진 피크"
+        "omega r"
       ],
       "expected_structure": [
-        "배경",
-        "표준 2차 시스템",
-        "주파수 응답 크기",
-        "공진 주파수 유도",
-        "공진 발생 조건과 해석"
+        "표준 2차 전달함수",
+        "주파수응답 크기식",
+        "공진 발생 조건과 공진주파수",
+        "감쇠비가 공진 peak에 미치는 영향",
+        "시간응답 overshoot와 주파수응답 resonance 구분"
       ],
       "model_answer_outline": [
-        "2차 시스템은 질량-스프링-댐퍼, 서보계, 제어루프, 계측 동특성에서 자주 나타나는 기본 동특성 모델이다.",
-        "표준 2차 전달함수는 H(s) = wn^2 / (s^2 + 2zetawns + wn^2) 형태로 표현하며, wn은 고유진동수, zeta는 제동비이다.",
-        "s = jw를 대입하면 크기 응답은 wn^2 / sqrt((wn^2 - w^2)^2 + (2zetawnw)^2)로 표현된다.",
-        "공진은 크기 응답이 최대가 되는 주파수에서 발생하므로 분모 제곱항을 최소화하여 wr = wnsqrt(1 - 2zeta^2)를 유도한다.",
-        "공진 주파수가 실수가 되려면 zeta < 1/sqrt(2)이어야 하며, 제동비가 증가하면 공진 피크는 작아지고 공진 특성은 약해진다."
+        "표준 2차 시스템은 보통 G(s)=Kωn²/(s²+2ζωns+ωn²) 형태로 나타내며, ωn은 고유진동수, ζ는 감쇠비이다.",
+        "주파수응답은 s=jω를 대입하여 얻고, 정규화하면 크기는 |G(jω)|/K = 1 / sqrt((1-(ω/ωn)²)² + (2ζω/ωn)²)로 표현할 수 있다.",
+        "공진주파수는 주파수응답 크기가 최대가 되는 주파수이며, 표준 2차계에서는 ζ < 1/sqrt(2)일 때 ωr = ωn sqrt(1 - 2ζ²)로 주어진다.",
+        "ζ가 작을수록 공진 peak가 커지고, ζ가 증가하면 peak가 감소하며 ζ ≥ 1/sqrt(2)에서는 뚜렷한 공진 peak가 나타나지 않는다.",
+        "시간응답 overshoot는 step response에서 목표값을 초과하는 현상이고, 주파수응답 resonance는 특정 주파수 입력에서 이득이 커지는 현상이므로 서로 구분해야 한다.",
+        "ζ=1은 임계감쇠로 시간응답에서 오버슈트 없이 빠르게 수렴하는 조건이지, 주파수응답 공진 조건이 아니다."
       ],
       "high_score_features": [
-        "표준 2차 전달함수에서 wn과 zeta의 의미를 정확히 설명한다.",
-        "주파수 응답 크기식의 분모 최소화 과정을 통해 공진 주파수를 유도한다.",
-        "zeta < 1/sqrt(2) 조건과 공진 피크의 물리적 의미를 제어계 안정성, 진동, 노이즈 증폭과 연결한다."
+        "표준 2차 전달함수를 정확히 쓴다.",
+        "주파수응답 크기식을 정규화 형태로 설명한다.",
+        "ωr = ωn sqrt(1 - 2ζ²)와 조건 ζ < 1/sqrt(2)를 정확히 제시한다.",
+        "감쇠비 증가에 따른 공진 peak 감소를 설명한다.",
+        "시간응답 overshoot와 주파수응답 resonance를 명확히 구분한다.",
+        "ζ=1 임계감쇠를 공진 조건처럼 오해하지 않는다."
       ],
       "low_score_patterns": [
-        "wr = wnsqrt(1 - 2zeta^2) 공식만 쓰고 유도 과정을 생략하면 안 된다.",
-        "zeta < 1/sqrt(2) 조건을 빠뜨리면 안 된다.",
-        "시간응답의 overshoot와 주파수응답의 resonance를 혼동하면 안 된다.",
-        "zeta = 1인 임계감쇠 조건을 공진 조건처럼 설명하면 안 된다."
+        "ζ=1을 공진 조건처럼 설명한다.",
+        "공진주파수 조건 ζ < 1/sqrt(2)를 누락한다.",
+        "ωd = ωn sqrt(1-ζ²)와 ωr = ωn sqrt(1-2ζ²)를 혼동한다.",
+        "step overshoot와 frequency resonance를 같은 개념으로 설명한다.",
+        "2차 전달함수의 분모 감쇠항 2ζωn s를 잘못 쓴다."
       ],
       "field_connection_points": [
-        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
-        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
-        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        "natural frequency",
+        "damping ratio",
+        "frequency response",
+        "resonant peak",
+        "resonance frequency",
+        "overshoot",
+        "critical damping",
+        "servo system",
+        "mechanical vibration",
+        "control loop tuning"
       ],
       "revision_notes": [
-        "created_at=2026-06-30T20:37:01",
-        "imported_from=wordpress_docs/review_designs/batch_014_design_1topic.md",
-        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        "created_at=2026-06-30T23:35:58",
+        "review_fix: model_answers와 fact_anchors 동기화 보강"
       ]
     }
   ]
