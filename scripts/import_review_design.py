@@ -110,6 +110,54 @@ META = {
             "RTD",
         ],
     },
+    "photodiode_light_sensor_operation_modes": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "포토다이오드 광센서 동작 모드",
+        "questions": [
+            "포토다이오드의 동작 원리와 광전지 모드, 광전도 모드의 차이 및 적용 시 고려사항을 설명하시오."
+        ],
+        "aliases": [
+            "포토다이오드",
+            "photodiode",
+            "광전지 모드",
+            "광전도 모드",
+            "광전류",
+            "암전류",
+            "접합 커패시턴스"
+        ],
+    },
+    "classification_model_precision_recall_f1_evaluation": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "분류 모델 Precision, Recall, F1-score 성능평가",
+        "questions": [
+            "분류 모델 성능평가에서 Precision, Recall, F1-score의 의미와 불균형 데이터에서의 적용 기준을 설명하시오."
+        ],
+        "aliases": [
+            "Precision",
+            "Recall",
+            "F1-score",
+            "혼동행렬",
+            "confusion matrix",
+            "분류 모델 성능평가",
+            "불균형 데이터"
+        ],
+    },
+    "mems_comb_drive_electrostatic_actuator": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "MEMS comb-drive 정전기 액추에이터",
+        "questions": [
+            "MEMS electrostatic actuator와 comb-drive actuator의 동작 원리, 장단점 및 적용 시 고려사항을 설명하시오."
+        ],
+        "aliases": [
+            "MEMS actuator",
+            "electrostatic actuator",
+            "comb-drive actuator",
+            "정전기 액추에이터",
+            "컴브 드라이브",
+            "pull-in",
+            "stiction"
+        ],
+    },
 }
 
 STOP = {"설명", "한다", "해야", "있다", "있는", "통해", "경우", "고려", "주요", "핵심"}

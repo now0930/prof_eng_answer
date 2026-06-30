@@ -1271,6 +1271,208 @@
         "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
         "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
       ]
+    },
+    {
+      "id": "photodiode_light_sensor_operation_modes_PRINCIPLE_INTERPRETATION_v1",
+      "topic_id": "photodiode_light_sensor_operation_modes",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "title": "포토다이오드 광센서 동작 모드",
+      "question_examples": [
+        "포토다이오드의 동작 원리와 광전지 모드, 광전도 모드의 차이 및 적용 시 고려사항을 설명하시오."
+      ],
+      "topic_aliases": [
+        "포토다이오드",
+        "photodiode",
+        "광전지 모드",
+        "광전도 모드",
+        "광전류",
+        "암전류",
+        "접합 커패시턴스"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "포토다이오드는 빛의 세기를 전류 또는 전압 신호로 변환하는 광센서이다.",
+        "산업 계측에서는 광검출, 위치검출, 엔코더, 화염검출, 광통신 수신 등에 사용된다.",
+        "2. 기본 구조와 광전류",
+        "포토다이오드는 p-n 접합 구조를 가지며 p형은 양극, n형은 음극이다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "포토다이오드는 빛의 세기를 전류 또는 전압 신호로 변환하는 광센서이다.",
+        "산업 계측에서는 광검출, 위치검출, 엔코더, 화염검출, 광통신 수신 등에 사용된다.",
+        "2. 기본 구조와 광전류",
+        "포토다이오드는 p-n 접합 구조를 가지며 p형은 양극, n형은 음극이다.",
+        "접합부에 빛이 입사하면 전자-정공 쌍이 생성되고 내부 전기장에 의해 분리되어 광전류가 흐른다.",
+        "빛이 없을 때도 암전류가 존재하며 이는 오차와 노이즈 요인이 된다.",
+        "3. 등가회로와 특성",
+        "등가회로는 광전류원, 다이오드, 접합 커패시턴스, 암전류, 부하저항으로 표현할 수 있다.",
+        "접합 커패시턴스는 응답속도와 주파수 특성에 영향을 준다.",
+        "빛의 세기가 증가하면 광전류가 증가하고 V-I 특성이 이동한다.",
+        "4. 동작 모드 비교",
+        "광전지 모드는 외부 바이어스 없이 빛에 의해 발생한 전압 또는 전류를 이용한다.",
+        "광전도 모드는 역바이어스를 인가하여 공핍층을 넓히고 접합 커패시턴스를 줄여 빠른 응답과 선형성을 얻는다.",
+        "광전지 모드는 저노이즈·자가발전 특성에 유리하고, 광전도 모드는 고속 응답과 넓은 동적 범위에 유리하다.",
+        "5. 적용 시 고려사항",
+        "극성, 역바이어스 전압, 암전류, 접합 커패시턴스, 응답속도, 온도 drift, 증폭기 입력 특성을 고려해야 한다.",
+        "데이터시트의 극성 표시와 최대 역전압을 확인하고, transimpedance amplifier 등 신호처리 회로를 적절히 설계해야 한다."
+      ],
+      "high_score_features": [
+        "p-n 접합에 빛이 입사하면 전자-정공 쌍이 생성되고 광전류가 발생하여 광량을 전기신호로 변환함을 설명해야 한다.",
+        "p형 영역은 양극, n형 영역은 음극이며 실제 회로에서는 패키지 마킹과 데이터시트로 극성을 확인해야 함을 설명해야 한다.",
+        "광전류원, 다이오드, 암전류, 접합 커패시턴스, 부하저항으로 포토다이오드의 정적·동적 특성을 설명할 수 있어야 한다.",
+        "광전지 모드는 무바이어스 또는 제로바이어스 동작이고, 광전도 모드는 역바이어스 동작이며 응답속도와 노이즈 특성이 다름을 설명해야 한다.",
+        "암전류, 접합 커패시턴스, 역바이어스 전압, 온도 drift, 응답속도, 증폭기 회로가 측정 정확도와 동특성에 영향을 줌을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "일반 정류 다이오드 설명으로 끝나면 안 된다.",
+        "광전지 모드와 광전도 모드의 차이를 바이어스 조건, 응답속도, 노이즈 관점에서 구분해야 한다.",
+        "빛이 세면 전류가 증가한다는 설명만으로는 약하다. 등가회로, 암전류, 접합 커패시턴스를 함께 설명해야 한다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T14:21:02",
+        "imported_from=wordpress_docs/review_designs/batch_005_design_3topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
+    },
+    {
+      "id": "classification_model_precision_recall_f1_evaluation_PRINCIPLE_INTERPRETATION_v1",
+      "topic_id": "classification_model_precision_recall_f1_evaluation",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "title": "분류 모델 Precision, Recall, F1-score 성능평가",
+      "question_examples": [
+        "분류 모델 성능평가에서 Precision, Recall, F1-score의 의미와 불균형 데이터에서의 적용 기준을 설명하시오."
+      ],
+      "topic_aliases": [
+        "Precision",
+        "Recall",
+        "F1-score",
+        "혼동행렬",
+        "confusion matrix",
+        "분류 모델 성능평가",
+        "불균형 데이터"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "산업 현장의 AI 진단 모델은 정상과 이상, 양품과 불량, 고장과 정상 등을 분류하는 데 사용된다.",
+        "단순 Accuracy만 보면 데이터 불균형 상황에서 실제 성능을 잘못 판단할 수 있다.",
+        "2. 혼동행렬 기반 평가",
+        "분류 결과는 TP, FP, FN, TN으로 구분한다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "산업 현장의 AI 진단 모델은 정상과 이상, 양품과 불량, 고장과 정상 등을 분류하는 데 사용된다.",
+        "단순 Accuracy만 보면 데이터 불균형 상황에서 실제 성능을 잘못 판단할 수 있다.",
+        "2. 혼동행렬 기반 평가",
+        "분류 결과는 TP, FP, FN, TN으로 구분한다.",
+        "TP는 실제 양성을 양성으로 맞춘 경우, FP는 실제 음성을 양성으로 잘못 판단한 경우이다.",
+        "FN은 실제 양성을 놓친 경우, TN은 실제 음성을 음성으로 맞춘 경우이다.",
+        "3. Precision과 Recall",
+        "Precision은 양성으로 예측한 것 중 실제 양성의 비율이다.",
+        "Recall은 실제 양성 중 모델이 양성으로 검출한 비율이다.",
+        "Precision은 오경보를 줄이는 능력, Recall은 미검출을 줄이는 능력으로 해석할 수 있다.",
+        "4. F1-score",
+        "F1-score는 Precision과 Recall의 조화평균이다.",
+        "두 지표 중 하나가 낮으면 F1-score도 낮아지므로, Precision과 Recall의 균형을 평가하는 데 유용하다.",
+        "불량률이 낮거나 고장 데이터가 적은 불균형 데이터에서 Accuracy보다 유용할 수 있다.",
+        "5. 적용 기준과 한계",
+        "안전·고장 진단처럼 놓치면 큰 손실이 발생하는 문제는 Recall을 중시한다.",
+        "불필요한 정지, 재검사, 폐기 비용이 큰 문제는 Precision을 중시한다.",
+        "F1-score는 단일 지표로 편리하지만 비용, 위험도, class imbalance, threshold 설정을 함께 고려해야 한다."
+      ],
+      "high_score_features": [
+        "TP, FP, FN, TN의 의미를 구분하고 분류 모델 성능지표가 이 값들에서 계산됨을 설명해야 한다.",
+        "Precision은 모델이 양성이라고 예측한 사례 중 실제 양성의 비율이며 오경보 또는 false alarm과 관련됨을 설명해야 한다.",
+        "Recall은 실제 양성 사례 중 모델이 양성으로 검출한 비율이며 미검출 또는 missed detection과 관련됨을 설명해야 한다.",
+        "F1-score는 Precision과 Recall의 조화평균으로 두 지표의 균형을 평가하는 지표임을 설명해야 한다.",
+        "Accuracy는 class imbalance에서 왜곡될 수 있으며, 문제의 비용 구조에 따라 Precision, Recall, F1-score를 선택적으로 해석해야 함을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "Accuracy와 Precision을 혼동하면 안 된다.",
+        "F1-score가 항상 최적 지표라고 쓰면 안 된다. 현장 비용과 위험도에 따라 Precision 또는 Recall을 더 중시할 수 있다.",
+        "수식만 쓰면 약하다. 설비 이상진단, 품질검사, 고장 예측에서 FP와 FN의 의미를 연결해야 한다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T14:21:02",
+        "imported_from=wordpress_docs/review_designs/batch_005_design_3topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
+    },
+    {
+      "id": "mems_comb_drive_electrostatic_actuator_PRINCIPLE_INTERPRETATION_v1",
+      "topic_id": "mems_comb_drive_electrostatic_actuator",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "title": "MEMS comb-drive 정전기 액추에이터",
+      "question_examples": [
+        "MEMS electrostatic actuator와 comb-drive actuator의 동작 원리, 장단점 및 적용 시 고려사항을 설명하시오."
+      ],
+      "topic_aliases": [
+        "MEMS actuator",
+        "electrostatic actuator",
+        "comb-drive actuator",
+        "정전기 액추에이터",
+        "컴브 드라이브",
+        "pull-in",
+        "stiction"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "MEMS 장치는 마이크로 스케일에서 센서, 광학계, 마이크로 로봇, 미세 위치 제어 등에 사용된다.",
+        "이때 전기 에너지를 기계적 변위로 바꾸는 초소형 액추에이터가 필요하다.",
+        "2. 정전기 구동 원리",
+        "electrostatic actuator는 전극 사이에 전압을 인가하여 발생하는 정전기력을 이용한다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "MEMS 장치는 마이크로 스케일에서 센서, 광학계, 마이크로 로봇, 미세 위치 제어 등에 사용된다.",
+        "이때 전기 에너지를 기계적 변위로 바꾸는 초소형 액추에이터가 필요하다.",
+        "2. 정전기 구동 원리",
+        "electrostatic actuator는 전극 사이에 전압을 인가하여 발생하는 정전기력을 이용한다.",
+        "전압이 증가하면 전극 사이 인력이 증가하고, 구조물은 전기장 에너지가 감소하는 방향으로 이동한다.",
+        "기계적 스프링 복원력과 정전기력이 평형을 이루는 위치에서 변위가 결정된다.",
+        "3. 주요 구조",
+        "parallel-plate actuator는 마주 보는 두 전극 사이의 인력을 이용한다.",
+        "comb-drive actuator는 서로 맞물린 빗살형 전극 사이의 정전기력을 이용한다.",
+        "회전형 actuator는 전극 배치와 구조를 변형하여 회전 운동을 만든다.",
+        "4. comb-drive 특징",
+        "comb-drive는 전극 간격보다 겹침 길이 변화에 의해 힘을 얻는 구조로 미세 위치 제어에 적합하다.",
+        "작은 전력으로 빠른 응답을 얻을 수 있고, MEMS 공정으로 집적화하기 쉽다.",
+        "다만 변위 범위, 전압 요구조건, pull-in, stiction, 제작 공차, 공진 특성을 고려해야 한다.",
+        "5. 적용 및 설계 고려",
+        "광학 미러, 마이크로 로봇, 미세 위치 제어, 약물 전달, RF MEMS 등에 활용된다.",
+        "전극 간격, 구동 전압, 스프링 강성, 변위 범위, 절연, 패키징, 신뢰성, 오염과 습도 영향을 함께 검토한다."
+      ],
+      "high_score_features": [
+        "전극 사이에 전압을 인가하여 발생하는 정전기력으로 미세 구조물을 움직이는 장치임을 설명해야 한다.",
+        "정전기력과 기계적 스프링 복원력이 평형을 이루는 위치에서 변위가 결정됨을 설명해야 한다.",
+        "서로 맞물린 빗살형 전극의 겹침 변화와 전기장에 의해 선형 또는 회전 변위를 만드는 구조임을 설명해야 한다.",
+        "MEMS 집적화, 저전력, 빠른 응답, 정밀 위치 제어에 유리함을 설명해야 한다.",
+        "pull-in, stiction, 구동 전압, 전극 간격, 제작 공차, 공진, 오염과 습도 영향이 성능과 신뢰성에 영향을 줌을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "일반 공압·유압 actuator 설명으로 흐르면 안 된다.",
+        "comb-drive의 핵심은 정전기력과 빗살형 전극 구조이므로 단순 전동 actuator처럼 설명하면 안 된다.",
+        "장점만 쓰면 약하다. pull-in, stiction, 제작 공차, 공진 같은 MEMS 고유 한계를 함께 설명해야 한다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T14:21:02",
+        "imported_from=wordpress_docs/review_designs/batch_005_design_3topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
     }
   ]
 }

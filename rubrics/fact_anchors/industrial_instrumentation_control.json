@@ -3175,6 +3175,381 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "photodiode_light_sensor_operation_modes",
+      "name": "포토다이오드 광센서 동작 모드",
+      "aliases": [
+        "포토다이오드",
+        "photodiode",
+        "광전지 모드",
+        "광전도 모드",
+        "광전류",
+        "암전류",
+        "접합 커패시턴스"
+      ],
+      "anchors": [
+        {
+          "id": "photodiode_light_sensor_operation_modes_anchor_1",
+          "name": "포토다이오드의 기본 원리",
+          "expected": "p-n 접합에 빛이 입사하면 전자-정공 쌍이 생성되고 광전류가 발생하여 광량을 전기신호로 변환함을 설명해야 한다.",
+          "core_terms": [
+            "포토다이오드의",
+            "기본",
+            "원리",
+            "p-n",
+            "접합에"
+          ],
+          "support_terms": [
+            "p-n",
+            "접합에",
+            "빛이",
+            "입사하면",
+            "전자-정공",
+            "쌍이",
+            "생성되고",
+            "광전류가"
+          ]
+        },
+        {
+          "id": "photodiode_light_sensor_operation_modes_anchor_2",
+          "name": "극성과 p-n 접합 구조",
+          "expected": "p형 영역은 양극, n형 영역은 음극이며 실제 회로에서는 패키지 마킹과 데이터시트로 극성을 확인해야 함을 설명해야 한다.",
+          "core_terms": [
+            "극성과",
+            "p-n",
+            "접합",
+            "구조",
+            "p형"
+          ],
+          "support_terms": [
+            "p형",
+            "영역은",
+            "양극",
+            "n형",
+            "음극이며",
+            "실제",
+            "회로에서는",
+            "패키지"
+          ]
+        },
+        {
+          "id": "photodiode_light_sensor_operation_modes_anchor_3",
+          "name": "등가회로 구성",
+          "expected": "광전류원, 다이오드, 암전류, 접합 커패시턴스, 부하저항으로 포토다이오드의 정적·동적 특성을 설명할 수 있어야 한다.",
+          "core_terms": [
+            "등가회로",
+            "구성",
+            "광전류원",
+            "다이오드",
+            "암전류"
+          ],
+          "support_terms": [
+            "광전류원",
+            "다이오드",
+            "암전류",
+            "접합",
+            "커패시턴스",
+            "부하저항으로",
+            "포토다이오드의",
+            "정적·동적"
+          ]
+        },
+        {
+          "id": "photodiode_light_sensor_operation_modes_anchor_4",
+          "name": "광전지 모드와 광전도 모드",
+          "expected": "광전지 모드는 무바이어스 또는 제로바이어스 동작이고, 광전도 모드는 역바이어스 동작이며 응답속도와 노이즈 특성이 다름을 설명해야 한다.",
+          "core_terms": [
+            "광전지",
+            "모드와",
+            "광전도",
+            "모드",
+            "모드는"
+          ],
+          "support_terms": [
+            "광전지",
+            "모드는",
+            "무바이어스",
+            "또는",
+            "제로바이어스",
+            "동작이고",
+            "광전도",
+            "역바이어스"
+          ]
+        },
+        {
+          "id": "photodiode_light_sensor_operation_modes_anchor_5",
+          "name": "설계 고려사항",
+          "expected": "암전류, 접합 커패시턴스, 역바이어스 전압, 온도 drift, 응답속도, 증폭기 회로가 측정 정확도와 동특성에 영향을 줌을 설명해야 한다.",
+          "core_terms": [
+            "설계",
+            "고려사항",
+            "암전류",
+            "접합",
+            "커패시턴스"
+          ],
+          "support_terms": [
+            "암전류",
+            "접합",
+            "커패시턴스",
+            "역바이어스",
+            "전압",
+            "온도",
+            "drift",
+            "응답속도"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "classification_model_precision_recall_f1_evaluation",
+      "name": "분류 모델 Precision, Recall, F1-score 성능평가",
+      "aliases": [
+        "Precision",
+        "Recall",
+        "F1-score",
+        "혼동행렬",
+        "confusion matrix",
+        "분류 모델 성능평가",
+        "불균형 데이터"
+      ],
+      "anchors": [
+        {
+          "id": "classification_model_precision_recall_f1_evaluation_anchor_1",
+          "name": "혼동행렬의 기본 구성",
+          "expected": "TP, FP, FN, TN의 의미를 구분하고 분류 모델 성능지표가 이 값들에서 계산됨을 설명해야 한다.",
+          "core_terms": [
+            "혼동행렬의",
+            "기본",
+            "구성",
+            "TP",
+            "FP"
+          ],
+          "support_terms": [
+            "TP",
+            "FP",
+            "FN",
+            "TN의",
+            "의미를",
+            "구분하고",
+            "분류",
+            "모델"
+          ]
+        },
+        {
+          "id": "classification_model_precision_recall_f1_evaluation_anchor_2",
+          "name": "Precision의 의미",
+          "expected": "Precision은 모델이 양성이라고 예측한 사례 중 실제 양성의 비율이며 오경보 또는 false alarm과 관련됨을 설명해야 한다.",
+          "core_terms": [
+            "Precision의",
+            "의미",
+            "Precision은",
+            "모델이",
+            "양성이라고"
+          ],
+          "support_terms": [
+            "Precision은",
+            "모델이",
+            "양성이라고",
+            "예측한",
+            "사례",
+            "실제",
+            "양성의",
+            "비율이며"
+          ]
+        },
+        {
+          "id": "classification_model_precision_recall_f1_evaluation_anchor_3",
+          "name": "Recall의 의미",
+          "expected": "Recall은 실제 양성 사례 중 모델이 양성으로 검출한 비율이며 미검출 또는 missed detection과 관련됨을 설명해야 한다.",
+          "core_terms": [
+            "Recall의",
+            "의미",
+            "Recall은",
+            "실제",
+            "양성"
+          ],
+          "support_terms": [
+            "Recall은",
+            "실제",
+            "양성",
+            "사례",
+            "모델이",
+            "양성으로",
+            "검출한",
+            "비율이며"
+          ]
+        },
+        {
+          "id": "classification_model_precision_recall_f1_evaluation_anchor_4",
+          "name": "F1-score의 의미",
+          "expected": "F1-score는 Precision과 Recall의 조화평균으로 두 지표의 균형을 평가하는 지표임을 설명해야 한다.",
+          "core_terms": [
+            "F1-score의",
+            "의미",
+            "F1-score는",
+            "Precision과",
+            "Recall의"
+          ],
+          "support_terms": [
+            "F1-score는",
+            "Precision과",
+            "Recall의",
+            "조화평균으로",
+            "지표의",
+            "균형을",
+            "평가하는",
+            "지표임을"
+          ]
+        },
+        {
+          "id": "classification_model_precision_recall_f1_evaluation_anchor_5",
+          "name": "불균형 데이터에서의 해석",
+          "expected": "Accuracy는 class imbalance에서 왜곡될 수 있으며, 문제의 비용 구조에 따라 Precision, Recall, F1-score를 선택적으로 해석해야 함을 설명해야 한다.",
+          "core_terms": [
+            "불균형",
+            "데이터에서의",
+            "해석",
+            "Accuracy는",
+            "class"
+          ],
+          "support_terms": [
+            "Accuracy는",
+            "class",
+            "imbalance에서",
+            "왜곡될",
+            "있으며",
+            "문제의",
+            "비용",
+            "구조에"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "mems_comb_drive_electrostatic_actuator",
+      "name": "MEMS comb-drive 정전기 액추에이터",
+      "aliases": [
+        "MEMS actuator",
+        "electrostatic actuator",
+        "comb-drive actuator",
+        "정전기 액추에이터",
+        "컴브 드라이브",
+        "pull-in",
+        "stiction"
+      ],
+      "anchors": [
+        {
+          "id": "mems_comb_drive_electrostatic_actuator_anchor_1",
+          "name": "electrostatic actuator의 원리",
+          "expected": "전극 사이에 전압을 인가하여 발생하는 정전기력으로 미세 구조물을 움직이는 장치임을 설명해야 한다.",
+          "core_terms": [
+            "electrostatic",
+            "actuator의",
+            "원리",
+            "전극",
+            "사이에"
+          ],
+          "support_terms": [
+            "전극",
+            "사이에",
+            "전압을",
+            "인가하여",
+            "발생하는",
+            "정전기력으로",
+            "미세",
+            "구조물을"
+          ]
+        },
+        {
+          "id": "mems_comb_drive_electrostatic_actuator_anchor_2",
+          "name": "힘의 평형",
+          "expected": "정전기력과 기계적 스프링 복원력이 평형을 이루는 위치에서 변위가 결정됨을 설명해야 한다.",
+          "core_terms": [
+            "힘의",
+            "평형",
+            "정전기력과",
+            "기계적",
+            "스프링"
+          ],
+          "support_terms": [
+            "정전기력과",
+            "기계적",
+            "스프링",
+            "복원력이",
+            "평형을",
+            "이루는",
+            "위치에서",
+            "변위가"
+          ]
+        },
+        {
+          "id": "mems_comb_drive_electrostatic_actuator_anchor_3",
+          "name": "comb-drive 구조",
+          "expected": "서로 맞물린 빗살형 전극의 겹침 변화와 전기장에 의해 선형 또는 회전 변위를 만드는 구조임을 설명해야 한다.",
+          "core_terms": [
+            "comb-drive",
+            "구조",
+            "서로",
+            "맞물린",
+            "빗살형"
+          ],
+          "support_terms": [
+            "서로",
+            "맞물린",
+            "빗살형",
+            "전극의",
+            "겹침",
+            "변화와",
+            "전기장에",
+            "의해"
+          ]
+        },
+        {
+          "id": "mems_comb_drive_electrostatic_actuator_anchor_4",
+          "name": "장점",
+          "expected": "MEMS 집적화, 저전력, 빠른 응답, 정밀 위치 제어에 유리함을 설명해야 한다.",
+          "core_terms": [
+            "장점",
+            "MEMS",
+            "집적화",
+            "저전력",
+            "빠른"
+          ],
+          "support_terms": [
+            "MEMS",
+            "집적화",
+            "저전력",
+            "빠른",
+            "응답",
+            "정밀",
+            "위치",
+            "제어에"
+          ]
+        },
+        {
+          "id": "mems_comb_drive_electrostatic_actuator_anchor_5",
+          "name": "한계와 설계 고려",
+          "expected": "pull-in, stiction, 구동 전압, 전극 간격, 제작 공차, 공진, 오염과 습도 영향이 성능과 신뢰성에 영향을 줌을 설명해야 한다.",
+          "core_terms": [
+            "한계와",
+            "설계",
+            "pull-in",
+            "stiction",
+            "구동"
+          ],
+          "support_terms": [
+            "pull-in",
+            "stiction",
+            "구동",
+            "전압",
+            "전극",
+            "간격",
+            "제작",
+            "공차"
+          ]
+        }
+      ]
     }
   ]
 }
