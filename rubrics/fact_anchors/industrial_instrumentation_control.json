@@ -5194,6 +5194,472 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "reliability_maintainability_availability_ram",
+      "name": "신뢰도·정비도·가용도와 RAM 설계",
+      "aliases": [
+        "Reliability",
+        "Maintainability",
+        "Availability",
+        "시스템 신뢰성",
+        "보전도"
+      ],
+      "anchors": [
+        {
+          "id": "F1",
+          "name": "신뢰도의 정의",
+          "expected": "신뢰도는 시스템이나 부품이 정해진 운용 조건과 시간 동안 요구 기능을 수행할 확률임을 설명한다.",
+          "core_terms": [
+            "신뢰도",
+            "Reliability",
+            "요구 기능",
+            "확률",
+            "운용 조건",
+            "시간"
+          ],
+          "support_terms": [
+            "고장",
+            "부품",
+            "시스템",
+            "설계"
+          ]
+        },
+        {
+          "id": "F2",
+          "name": "정비도의 정의",
+          "expected": "정비도는 고장 발생 후 정해진 시간 내에 정상 상태로 복구할 수 있는 용이성 또는 확률임을 설명한다.",
+          "core_terms": [
+            "정비도",
+            "Maintainability",
+            "복구",
+            "수리",
+            "정해진 시간",
+            "용이성"
+          ],
+          "support_terms": [
+            "고장",
+            "정비",
+            "보전",
+            "유지보수"
+          ]
+        },
+        {
+          "id": "F3",
+          "name": "가용도와 기본식",
+          "expected": "가용도는 필요한 시점에 시스템이 정상 운전 가능한 확률 또는 시간 비율이며 MTBF / (MTBF + MTTR)로 설명할 수 있음을 제시한다.",
+          "core_terms": [
+            "가용도",
+            "Availability",
+            "MTBF",
+            "MTTR",
+            "MTBF + MTTR",
+            "운전 가능"
+          ],
+          "support_terms": [
+            "시간 비율",
+            "정상 운전",
+            "평균 고장 간격",
+            "평균 수리 시간"
+          ]
+        },
+        {
+          "id": "F4",
+          "name": "MTBF와 MTTR의 영향",
+          "expected": "MTBF가 증가하고 MTTR이 감소할수록 시스템 가용도가 향상됨을 설명한다.",
+          "core_terms": [
+            "MTBF 증가",
+            "MTTR 감소",
+            "가용도 향상",
+            "평균 고장 간격",
+            "평균 수리 시간"
+          ],
+          "support_terms": [
+            "신뢰도",
+            "정비도",
+            "고장 빈도",
+            "복구 시간"
+          ]
+        },
+        {
+          "id": "F5",
+          "name": "RAM 설계 개선",
+          "expected": "이중화, 모듈화, 진단 기능, 예비품, 접근성, 예방정비, 환경 보호 등을 RAM 개선 방법으로 연결한다.",
+          "core_terms": [
+            "이중화",
+            "모듈화",
+            "진단",
+            "예비품",
+            "예방정비",
+            "접근성"
+          ],
+          "support_terms": [
+            "유지보수",
+            "설계",
+            "가용성",
+            "환경 보호"
+          ]
+        }
+      ],
+      "triggers": [
+        "신뢰도",
+        "정비도",
+        "가용도",
+        "RAM",
+        "MTBF",
+        "MTTR"
+      ]
+    },
+    {
+      "topic_id": "wirelesshart_isa100_wireless_instrument_network",
+      "name": "WirelessHART와 ISA100.11a 무선 계장 네트워크 비교",
+      "aliases": [
+        "industrial wireless",
+        "wireless instrument network",
+        "IEEE 802.15.4",
+        "무선 프로세스 계측"
+      ],
+      "anchors": [
+        {
+          "id": "F1",
+          "name": "무선 계장 표준의 목적",
+          "expected": "WirelessHART와 ISA100.11a가 공정 산업의 현장 계기와 센서를 무선으로 연결하기 위한 산업용 무선 계장 네트워크임을 설명한다.",
+          "core_terms": [
+            "WirelessHART",
+            "ISA100.11a",
+            "현장 계기",
+            "센서",
+            "무선",
+            "계장 네트워크"
+          ],
+          "support_terms": [
+            "공정 산업",
+            "프로세스 계측",
+            "게이트웨이",
+            "감시"
+          ]
+        },
+        {
+          "id": "F2",
+          "name": "공통 기반",
+          "expected": "두 표준이 IEEE 802.15.4 기반 저전력 무선, 메시 네트워크, 게이트웨이, 보안 기능을 사용한다는 공통점을 설명한다.",
+          "core_terms": [
+            "IEEE 802.15.4",
+            "저전력",
+            "메시 네트워크",
+            "게이트웨이",
+            "보안"
+          ],
+          "support_terms": [
+            "경로 이중화",
+            "신뢰성",
+            "네트워크 관리자",
+            "무선 센서"
+          ]
+        },
+        {
+          "id": "F3",
+          "name": "WirelessHART 특징",
+          "expected": "WirelessHART는 기존 HART 기반 계기의 무선 확장으로 계기 진단과 유지보수 연계에 강점이 있음을 설명한다.",
+          "core_terms": [
+            "WirelessHART",
+            "HART",
+            "IEC 62591",
+            "무선 확장",
+            "진단",
+            "유지보수"
+          ],
+          "support_terms": [
+            "기존 설비",
+            "호환성",
+            "현장 계기",
+            "표준화"
+          ]
+        },
+        {
+          "id": "F4",
+          "name": "ISA100.11a 특징",
+          "expected": "ISA100.11a는 다양한 역할 구성, IPv6 주소 체계, 확장성 등 유연한 산업용 무선 적용에 강점이 있음을 설명한다.",
+          "core_terms": [
+            "ISA100.11a",
+            "역할",
+            "IPv6",
+            "확장성",
+            "유연성"
+          ],
+          "support_terms": [
+            "대규모 네트워크",
+            "애플리케이션",
+            "라우터",
+            "주소 체계"
+          ]
+        },
+        {
+          "id": "F5",
+          "name": "적용 고려사항",
+          "expected": "기존 계기 호환성, 네트워크 규모, 배터리 수명, 전파 간섭, 보안, 지연, 게이트웨이 연계, 제어 루프 적용 가능성을 고려해야 함을 설명한다.",
+          "core_terms": [
+            "호환성",
+            "배터리",
+            "전파 간섭",
+            "보안",
+            "지연",
+            "제어 루프"
+          ],
+          "support_terms": [
+            "네트워크 규모",
+            "게이트웨이",
+            "안전",
+            "금속 구조물"
+          ]
+        }
+      ],
+      "triggers": [
+        "WirelessHART",
+        "ISA100.11a",
+        "ISA 100.11a",
+        "무선 계장",
+        "IEC 62591"
+      ]
+    },
+    {
+      "topic_id": "hart_fims_field_instrument_management",
+      "name": "HART 프로토콜과 FIMS 계기 관리",
+      "aliases": [
+        "Highway Addressable Remote Transducer",
+        "지능형 전송기",
+        "계기 관리 시스템",
+        "스마트 계기"
+      ],
+      "anchors": [
+        {
+          "id": "F1",
+          "name": "HART 기본 원리",
+          "expected": "HART는 기존 4-20 mA 전류 루프에 Bell 202 FSK 디지털 신호를 중첩하여 통신하는 방식임을 설명한다.",
+          "core_terms": [
+            "HART",
+            "4-20 mA",
+            "Bell 202",
+            "FSK",
+            "디지털 신호",
+            "중첩"
+          ],
+          "support_terms": [
+            "전류 루프",
+            "아날로그",
+            "프로토콜",
+            "계기"
+          ]
+        },
+        {
+          "id": "F2",
+          "name": "아날로그와 디지털 역할",
+          "expected": "4-20 mA 신호는 주 공정값을 전달하고 디지털 신호는 설정, 진단, 보조 변수, 계기 정보를 전달함을 구분한다.",
+          "core_terms": [
+            "공정값",
+            "설정",
+            "진단",
+            "보조 변수",
+            "계기 정보"
+          ],
+          "support_terms": [
+            "아날로그",
+            "디지털",
+            "전송기",
+            "루프"
+          ]
+        },
+        {
+          "id": "F3",
+          "name": "FIMS의 목적",
+          "expected": "FIMS는 지능형 전송기와 스마트 포지셔너의 설정, 진단, 교정 이력, 상태 감시, 유지보수를 통합 관리하는 시스템임을 설명한다.",
+          "core_terms": [
+            "FIMS",
+            "지능형 전송기",
+            "스마트 포지셔너",
+            "설정",
+            "진단",
+            "교정 이력",
+            "상태 감시"
+          ],
+          "support_terms": [
+            "유지보수",
+            "계기 자산",
+            "관리",
+            "시스템"
+          ]
+        },
+        {
+          "id": "F4",
+          "name": "주요 구성 요소",
+          "expected": "지능형 전송기, HART communicator, HART modem, multiplexer, I/O card, FIMS 서버 또는 engineering station을 구성 요소로 설명한다.",
+          "core_terms": [
+            "communicator",
+            "modem",
+            "multiplexer",
+            "I/O card",
+            "FIMS 서버",
+            "engineering station"
+          ],
+          "support_terms": [
+            "전송기",
+            "계기",
+            "서버",
+            "통신"
+          ]
+        },
+        {
+          "id": "F5",
+          "name": "현장 적용 고려사항",
+          "expected": "기존 DCS/PLC 호환성, loop 저항, 전원, 접지, 노이즈, 방폭, 보안, 계기 database, 작업자 교육을 고려해야 함을 설명한다.",
+          "core_terms": [
+            "DCS",
+            "PLC",
+            "호환성",
+            "loop 저항",
+            "노이즈",
+            "방폭",
+            "보안"
+          ],
+          "support_terms": [
+            "전원",
+            "접지",
+            "database",
+            "교육",
+            "유지보수"
+          ]
+        }
+      ],
+      "triggers": [
+        "HART",
+        "FIMS",
+        "Field Instrument Management System",
+        "4-20 mA",
+        "Bell 202",
+        "FSK"
+      ]
+    },
+    {
+      "topic_id": "pressure_transmitter_datasheet_specification",
+      "name": "압력 전송기 데이터시트 작성과 구매 사양 검토",
+      "aliases": [
+        "pressure transmitter specification",
+        "process connection",
+        "wetted part",
+        "diaphragm seal",
+        "calibration certificate"
+      ],
+      "anchors": [
+        {
+          "id": "F1",
+          "name": "데이터시트의 목적",
+          "expected": "압력 전송기 데이터시트가 구매, 제작, 설치, 시운전, 유지보수의 기준 문서임을 설명한다.",
+          "core_terms": [
+            "데이터시트",
+            "구매",
+            "제작",
+            "설치",
+            "시운전",
+            "유지보수",
+            "기준 문서"
+          ],
+          "support_terms": [
+            "압력 전송기",
+            "사양",
+            "검수",
+            "문서"
+          ]
+        },
+        {
+          "id": "F2",
+          "name": "공정 조건 항목",
+          "expected": "측정 유체, 압력 범위, 온도, 압력 종류, 부식성, 맥동, 진동, 막힘 가능성 등 공정 조건을 포함해야 함을 설명한다.",
+          "core_terms": [
+            "측정 유체",
+            "압력 범위",
+            "온도",
+            "압력 종류",
+            "부식성",
+            "맥동",
+            "진동"
+          ],
+          "support_terms": [
+            "막힘",
+            "공정 조건",
+            "게이지압",
+            "절대압",
+            "차압"
+          ]
+        },
+        {
+          "id": "F3",
+          "name": "성능 및 출력 사양",
+          "expected": "정확도, 응답시간, turndown ratio, overpressure limit, 출력 신호, 전원, 부하 저항 등 성능과 전기 사양을 명시해야 함을 설명한다.",
+          "core_terms": [
+            "정확도",
+            "응답시간",
+            "turndown",
+            "overpressure",
+            "출력 신호",
+            "전원",
+            "부하 저항"
+          ],
+          "support_terms": [
+            "4-20 mA",
+            "HART",
+            "Fieldbus",
+            "반복성"
+          ]
+        },
+        {
+          "id": "F4",
+          "name": "접속 및 재질 조건",
+          "expected": "process connection, wetted part 재질, diaphragm seal, enclosure, mounting, manifold 등 기계적 조건을 검토해야 함을 설명한다.",
+          "core_terms": [
+            "process connection",
+            "wetted part",
+            "재질",
+            "diaphragm seal",
+            "enclosure",
+            "manifold"
+          ],
+          "support_terms": [
+            "flange",
+            "thread",
+            "mounting",
+            "부식",
+            "접속"
+          ]
+        },
+        {
+          "id": "F5",
+          "name": "안전 및 구매 조건",
+          "expected": "방폭, 보호 등급, 인증, 검사 성적서, 교정 성적서, tag, 도면, 유지보수성, 기존 시스템 호환성을 고려해야 함을 설명한다.",
+          "core_terms": [
+            "방폭",
+            "보호 등급",
+            "인증",
+            "검사 성적서",
+            "교정 성적서",
+            "tag",
+            "호환성"
+          ],
+          "support_terms": [
+            "도면",
+            "유지보수성",
+            "기존 시스템",
+            "납기",
+            "spare part"
+          ]
+        }
+      ],
+      "triggers": [
+        "압력 전송기 데이터시트",
+        "pressure transmitter datasheet",
+        "압력전송기",
+        "구매 사양",
+        "계기 데이터시트"
+      ]
     }
   ]
 }
