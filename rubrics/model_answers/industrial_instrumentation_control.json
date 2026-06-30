@@ -1473,6 +1473,144 @@
         "imported_from=wordpress_docs/review_designs/batch_005_design_3topics.md",
         "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
       ]
+    },
+    {
+      "id": "control_valve_body_trim_selection_COMPARE_SELECTION_v1",
+      "topic_id": "control_valve_body_trim_selection",
+      "question_type": "COMPARE_SELECTION",
+      "title": "제어밸브 body와 trim 구조 선정",
+      "question_examples": [
+        "제어밸브의 body 형식과 trim 구조를 비교하고, balanced trim, unbalanced trim, butterfly valve 선정 시 고려사항을 설명하시오."
+      ],
+      "topic_aliases": [
+        "control valve body",
+        "valve trim",
+        "balanced trim",
+        "unbalanced trim",
+        "globe valve",
+        "butterfly valve",
+        "plug profile",
+        "seat leakage"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "제어밸브는 유량 조절 성능뿐 아니라 압력강하, 누설, 작동력, 유지보수성에 따라 body와 trim을 선정해야 한다.",
+        "같은 Cv를 만족하더라도 globe valve, butterfly valve, balanced trim, unbalanced trim의 적용성은 다르다.",
+        "2. Globe valve와 trim 구조",
+        "globe valve는 plug, seat, stem, cage 등 trim 구조를 통해 유량 특성과 차압을 제어한다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "제어밸브는 유량 조절 성능뿐 아니라 압력강하, 누설, 작동력, 유지보수성에 따라 body와 trim을 선정해야 한다.",
+        "같은 Cv를 만족하더라도 globe valve, butterfly valve, balanced trim, unbalanced trim의 적용성은 다르다.",
+        "2. Globe valve와 trim 구조",
+        "globe valve는 plug, seat, stem, cage 등 trim 구조를 통해 유량 특성과 차압을 제어한다.",
+        "plug profile과 trim 형식은 유량 특성, 누설, 소음, 캐비테이션, actuator force에 영향을 준다.",
+        "3. Balanced trim과 unbalanced trim",
+        "unbalanced trim은 차압에 의한 힘이 plug에 크게 작용하여 actuator force가 커질 수 있다.",
+        "balanced trim은 plug에 작용하는 유체력을 줄여 actuator 크기와 조작력을 줄일 수 있다.",
+        "다만 balanced trim은 내부 seal, 누설 경로, 오염 유체에 대한 취약성, 유지보수 부담을 고려해야 한다.",
+        "4. Butterfly valve 선정",
+        "butterfly valve는 compact하고 대구경에 유리하며, wafer, lug, double offset, triple offset 등 구조가 있다.",
+        "offset 구조와 seat 설계는 밀봉성, 마찰, 수명, 조작 토크, pressure recovery에 영향을 준다.",
+        "mechanical preloading이나 탄성 seat는 닫힘 시 밀봉성을 높일 수 있으나 마모와 온도 조건을 검토해야 한다.",
+        "5. 선정 및 현장 고려사항",
+        "유체 성상, 차압, 온도, 압력, 허용 누설량, 요구 shutoff class, actuator 공간, 유지보수성, 비용을 함께 검토한다.",
+        "깨끗한 유체와 고차압에서는 balanced trim이 유리할 수 있으나, 누설 허용 여부와 seal 수명을 반드시 확인해야 한다.",
+        "대구경·저압손실·공간 제약 조건에서는 butterfly valve가 유리할 수 있다."
+      ],
+      "high_score_features": [
+        "제어밸브 body와 trim은 Cv뿐 아니라 차압, 누설, 작동력, 유량 특성, 유지보수 조건을 만족하도록 선정해야 함을 설명해야 한다.",
+        "plug, seat, stem, cage 등 trim 요소가 유량 조절, seat leakage, actuator force, 소음과 캐비테이션 특성에 영향을 줌을 설명해야 한다.",
+        "unbalanced trim은 plug에 작용하는 유체력이 커 actuator force가 커질 수 있고, balanced trim은 이를 줄이지만 seal과 누설, 오염 유체 문제가 생길 수 있음을 설명해야 한다.",
+        "butterfly valve는 대구경, compact 구조, 낮은 압력손실에 유리하며 offset과 seat 설계가 밀봉성, 토크, pressure recovery에 영향을 줌을 설명해야 한다.",
+        "유체 성상, 차압, 온도·압력, 허용 누설량, actuator 크기, 설치 공간, 유지보수성, 비용을 종합적으로 고려해야 함을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "Cv 계산 topic으로 흐르면 안 된다.",
+        "캐비테이션 대책만 설명하면 기존 control_valve_cavitation topic과 중복된다.",
+        "balanced trim은 항상 좋은 선택이라고 쓰면 안 된다. 누설 경로, seal 수명, 오염 유체 취약성을 함께 설명해야 한다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T16:22:58",
+        "imported_from=wordpress_docs/review_designs/batch_006_design_2topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
+    },
+    {
+      "id": "sensor_linearization_transfer_function_approximation_PRINCIPLE_INTERPRETATION_v1",
+      "topic_id": "sensor_linearization_transfer_function_approximation",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "title": "센서 전달함수와 선형화 근사 방법",
+      "question_examples": [
+        "센서의 입력-출력 전달함수와 선형화, 구간별 선형근사, 다항식 근사, spline 근사 방법을 설명하시오."
+      ],
+      "topic_aliases": [
+        "sensor linearization",
+        "센서 선형화",
+        "static transfer function",
+        "dynamic transfer function",
+        "linear regression",
+        "piecewise linear approximation",
+        "lookup table",
+        "spline approximation"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "센서는 온도, 압력, 변위, 유량 등 물리량을 전압, 전류, 저항 같은 전기신호로 변환한다.",
+        "실제 센서의 입력-출력 관계는 완전 선형이 아닌 경우가 많아 보정과 근사가 필요하다.",
+        "2. 전달함수 개념",
+        "static transfer function은 시간 변화가 없는 정상상태 입력-출력 관계를 나타낸다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "센서는 온도, 압력, 변위, 유량 등 물리량을 전압, 전류, 저항 같은 전기신호로 변환한다.",
+        "실제 센서의 입력-출력 관계는 완전 선형이 아닌 경우가 많아 보정과 근사가 필요하다.",
+        "2. 전달함수 개념",
+        "static transfer function은 시간 변화가 없는 정상상태 입력-출력 관계를 나타낸다.",
+        "dynamic transfer function은 시간에 따라 변하는 입력에 대한 센서의 동특성과 응답을 나타낸다.",
+        "센서 모델은 입력 자극 s와 출력 E의 관계로 표현할 수 있다.",
+        "3. 선형근사",
+        "선형근사는 E = As + B 형태로 입력과 출력을 1차식으로 표현한다.",
+        "least square 방법을 사용하여 측정 데이터에 가장 잘 맞는 계수를 구할 수 있다.",
+        "파라미터 수가 적어 구현과 보정이 쉽지만 비선형성이 큰 구간에서는 오차가 커질 수 있다.",
+        "4. 비선형 및 구간별 근사",
+        "비선형 센서는 지수형, 로그형, 다항식 형태로 근사할 수 있다.",
+        "구간별 선형근사는 입력 범위를 여러 구간으로 나누고 각 구간마다 다른 선형식을 적용한다.",
+        "lookup table은 미리 계산한 보정값을 저장하여 빠르게 보정하는 방법이다.",
+        "spline 근사는 knot 사이를 다항식으로 연결하여 매끄러운 보정 곡선을 만든다.",
+        "5. 적용 및 고려사항",
+        "근사 방법은 정확도, 계산량, 보정 시간, 메모리, 실시간 처리 가능성에 따라 선택한다.",
+        "다차원 전달함수는 온도 보상처럼 입력 변수가 2개 이상일 때 사용한다.",
+        "과도한 차수의 다항식은 과적합과 외삽 오차를 만들 수 있으므로 측정 범위와 검증 데이터가 필요하다."
+      ],
+      "high_score_features": [
+        "센서 전달함수는 물리량 입력과 전기신호 출력 사이의 관계를 나타내며 static과 dynamic 특성으로 구분할 수 있음을 설명해야 한다.",
+        "E = As + B 같은 1차식으로 입력-출력 관계를 근사하고 least square로 계수를 구할 수 있음을 설명해야 한다.",
+        "입력 범위를 여러 구간으로 나누어 각 구간마다 다른 선형식을 적용하거나 lookup table로 보정값을 저장할 수 있음을 설명해야 한다.",
+        "지수형, 로그형, 다항식, spline 근사 등을 사용하여 비선형 센서 특성을 모델링할 수 있음을 설명해야 한다.",
+        "정확도, 보정 비용, 계산량, 메모리, 실시간성, 과적합, 외삽 오차를 고려하여 근사 방법을 선택해야 함을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "일반 제어 전달함수 이론으로만 설명하면 안 된다.",
+        "선형근사가 항상 충분하다고 쓰면 안 된다. 센서 비선형성과 측정 구간에 따라 오차가 달라진다.",
+        "다항식 차수를 높이면 항상 좋아진다고 쓰면 안 된다. 과적합, 외삽 오차, 보정 데이터 품질을 함께 고려해야 한다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T16:22:58",
+        "imported_from=wordpress_docs/review_designs/batch_006_design_2topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
     }
   ]
 }

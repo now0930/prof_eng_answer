@@ -3550,6 +3550,258 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "control_valve_body_trim_selection",
+      "name": "제어밸브 body와 trim 구조 선정",
+      "aliases": [
+        "control valve body",
+        "valve trim",
+        "balanced trim",
+        "unbalanced trim",
+        "globe valve",
+        "butterfly valve",
+        "plug profile",
+        "seat leakage"
+      ],
+      "anchors": [
+        {
+          "id": "control_valve_body_trim_selection_anchor_1",
+          "name": "body와 trim 선정의 목적",
+          "expected": "제어밸브 body와 trim은 Cv뿐 아니라 차압, 누설, 작동력, 유량 특성, 유지보수 조건을 만족하도록 선정해야 함을 설명해야 한다.",
+          "core_terms": [
+            "body와",
+            "trim",
+            "선정의",
+            "목적",
+            "제어밸브"
+          ],
+          "support_terms": [
+            "제어밸브",
+            "body와",
+            "trim은",
+            "Cv뿐",
+            "아니라",
+            "차압",
+            "누설",
+            "작동력"
+          ]
+        },
+        {
+          "id": "control_valve_body_trim_selection_anchor_2",
+          "name": "globe valve trim 구성",
+          "expected": "plug, seat, stem, cage 등 trim 요소가 유량 조절, seat leakage, actuator force, 소음과 캐비테이션 특성에 영향을 줌을 설명해야 한다.",
+          "core_terms": [
+            "globe",
+            "valve",
+            "trim",
+            "구성",
+            "plug"
+          ],
+          "support_terms": [
+            "plug",
+            "seat",
+            "stem",
+            "cage",
+            "trim",
+            "요소가",
+            "유량",
+            "조절"
+          ]
+        },
+        {
+          "id": "control_valve_body_trim_selection_anchor_3",
+          "name": "balanced trim과 unbalanced trim 차이",
+          "expected": "unbalanced trim은 plug에 작용하는 유체력이 커 actuator force가 커질 수 있고, balanced trim은 이를 줄이지만 seal과 누설, 오염 유체 문제가 생길 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "balanced",
+            "trim과",
+            "unbalanced",
+            "trim",
+            "차이"
+          ],
+          "support_terms": [
+            "unbalanced",
+            "trim은",
+            "plug에",
+            "작용하는",
+            "유체력이",
+            "actuator",
+            "force가",
+            "커질"
+          ]
+        },
+        {
+          "id": "control_valve_body_trim_selection_anchor_4",
+          "name": "butterfly valve 특성",
+          "expected": "butterfly valve는 대구경, compact 구조, 낮은 압력손실에 유리하며 offset과 seat 설계가 밀봉성, 토크, pressure recovery에 영향을 줌을 설명해야 한다.",
+          "core_terms": [
+            "butterfly",
+            "valve",
+            "특성",
+            "valve는",
+            "대구경"
+          ],
+          "support_terms": [
+            "butterfly",
+            "valve는",
+            "대구경",
+            "compact",
+            "구조",
+            "낮은",
+            "압력손실에",
+            "유리하며"
+          ]
+        },
+        {
+          "id": "control_valve_body_trim_selection_anchor_5",
+          "name": "선정 기준",
+          "expected": "유체 성상, 차압, 온도·압력, 허용 누설량, actuator 크기, 설치 공간, 유지보수성, 비용을 종합적으로 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "선정",
+            "기준",
+            "유체",
+            "성상",
+            "차압"
+          ],
+          "support_terms": [
+            "유체",
+            "성상",
+            "차압",
+            "온도·압력",
+            "허용",
+            "누설량",
+            "actuator",
+            "크기"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "sensor_linearization_transfer_function_approximation",
+      "name": "센서 전달함수와 선형화 근사 방법",
+      "aliases": [
+        "sensor linearization",
+        "센서 선형화",
+        "static transfer function",
+        "dynamic transfer function",
+        "linear regression",
+        "piecewise linear approximation",
+        "lookup table",
+        "spline approximation"
+      ],
+      "anchors": [
+        {
+          "id": "sensor_linearization_transfer_function_approximation_anchor_1",
+          "name": "센서 전달함수의 의미",
+          "expected": "센서 전달함수는 물리량 입력과 전기신호 출력 사이의 관계를 나타내며 static과 dynamic 특성으로 구분할 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "센서",
+            "전달함수의",
+            "의미",
+            "전달함수는",
+            "물리량"
+          ],
+          "support_terms": [
+            "센서",
+            "전달함수는",
+            "물리량",
+            "입력과",
+            "전기신호",
+            "출력",
+            "사이의",
+            "관계를"
+          ]
+        },
+        {
+          "id": "sensor_linearization_transfer_function_approximation_anchor_2",
+          "name": "선형근사",
+          "expected": "E = As + B 같은 1차식으로 입력-출력 관계를 근사하고 least square로 계수를 구할 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "선형근사",
+            "As",
+            "같은",
+            "1차식으로",
+            "입력-출력"
+          ],
+          "support_terms": [
+            "As",
+            "같은",
+            "1차식으로",
+            "입력-출력",
+            "관계를",
+            "근사하고",
+            "least",
+            "square로"
+          ]
+        },
+        {
+          "id": "sensor_linearization_transfer_function_approximation_anchor_3",
+          "name": "구간별 선형근사와 lookup table",
+          "expected": "입력 범위를 여러 구간으로 나누어 각 구간마다 다른 선형식을 적용하거나 lookup table로 보정값을 저장할 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "구간별",
+            "선형근사와",
+            "lookup",
+            "table",
+            "입력"
+          ],
+          "support_terms": [
+            "입력",
+            "범위를",
+            "여러",
+            "구간으로",
+            "나누어",
+            "구간마다",
+            "다른",
+            "선형식을"
+          ]
+        },
+        {
+          "id": "sensor_linearization_transfer_function_approximation_anchor_4",
+          "name": "비선형 근사",
+          "expected": "지수형, 로그형, 다항식, spline 근사 등을 사용하여 비선형 센서 특성을 모델링할 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "비선형",
+            "근사",
+            "지수형",
+            "로그형",
+            "다항식"
+          ],
+          "support_terms": [
+            "지수형",
+            "로그형",
+            "다항식",
+            "spline",
+            "근사",
+            "등을",
+            "사용하여",
+            "비선형"
+          ]
+        },
+        {
+          "id": "sensor_linearization_transfer_function_approximation_anchor_5",
+          "name": "선정 기준과 오차",
+          "expected": "정확도, 보정 비용, 계산량, 메모리, 실시간성, 과적합, 외삽 오차를 고려하여 근사 방법을 선택해야 함을 설명해야 한다.",
+          "core_terms": [
+            "선정",
+            "기준과",
+            "오차",
+            "정확도",
+            "보정"
+          ],
+          "support_terms": [
+            "정확도",
+            "보정",
+            "비용",
+            "계산량",
+            "메모리",
+            "실시간성",
+            "과적합",
+            "외삽"
+          ]
+        }
+      ]
     }
   ]
 }

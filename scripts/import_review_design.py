@@ -158,6 +158,40 @@ META = {
             "stiction"
         ],
     },
+    "control_valve_body_trim_selection": {
+        "question_type": "COMPARE_SELECTION",
+        "title": "제어밸브 body와 trim 구조 선정",
+        "questions": [
+            "제어밸브의 body 형식과 trim 구조를 비교하고, balanced trim, unbalanced trim, butterfly valve 선정 시 고려사항을 설명하시오."
+        ],
+        "aliases": [
+            "control valve body",
+            "valve trim",
+            "balanced trim",
+            "unbalanced trim",
+            "globe valve",
+            "butterfly valve",
+            "plug profile",
+            "seat leakage"
+        ],
+    },
+    "sensor_linearization_transfer_function_approximation": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "센서 전달함수와 선형화 근사 방법",
+        "questions": [
+            "센서의 입력-출력 전달함수와 선형화, 구간별 선형근사, 다항식 근사, spline 근사 방법을 설명하시오."
+        ],
+        "aliases": [
+            "sensor linearization",
+            "센서 선형화",
+            "static transfer function",
+            "dynamic transfer function",
+            "linear regression",
+            "piecewise linear approximation",
+            "lookup table",
+            "spline approximation"
+        ],
+    },
 }
 
 STOP = {"설명", "한다", "해야", "있다", "있는", "통해", "경우", "고려", "주요", "핵심"}
