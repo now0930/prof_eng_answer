@@ -26,6 +26,20 @@ META = {
         ],
         "aliases": ["전력반도체 소자", "스위칭 소자", "다이오드 역회복", "SCR", "MOSFET", "IGBT", "SOA"],
     },
+    "induction_motor_dq_reference_frame_equivalent_circuit": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "유도전동기의 d-q 좌표변환과 회전좌표계 등가회로",
+        "questions": [
+            "유도전동기의 d-q 좌표변환과 회전좌표계 등가회로의 전압방정식 및 토크식을 설명하시오."
+        ],
+        "aliases": [
+            "d-q 좌표변환",
+            "회전좌표계",
+            "유도전동기 등가회로",
+            "벡터제어",
+            "토크 방정식"
+        ],
+    },
 }
 
 STOP = {"설명", "한다", "해야", "있다", "있는", "통해", "경우", "고려", "주요", "핵심"}

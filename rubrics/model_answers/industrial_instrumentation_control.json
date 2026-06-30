@@ -898,6 +898,69 @@
         "imported_from=wordpress_docs/review_designs/batch_002_design_2topics.md",
         "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
       ]
+    },
+    {
+      "id": "induction_motor_dq_reference_frame_equivalent_circuit_PRINCIPLE_INTERPRETATION_v1",
+      "topic_id": "induction_motor_dq_reference_frame_equivalent_circuit",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "title": "유도전동기의 d-q 좌표변환과 회전좌표계 등가회로",
+      "question_examples": [
+        "유도전동기의 d-q 좌표변환과 회전좌표계 등가회로의 전압방정식 및 토크식을 설명하시오."
+      ],
+      "topic_aliases": [
+        "d-q 좌표변환",
+        "회전좌표계",
+        "유도전동기 등가회로",
+        "벡터제어",
+        "토크 방정식"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "3상 교류 전동기의 전압·전류·자속은 시간에 따라 변하므로 직접 해석이 복잡하다.",
+        "d-q 좌표변환은 3상 물리량을 정지 또는 회전 좌표계의 직교 성분으로 변환하여 제어와 해석을 단순화한다.",
+        "2. 좌표변환 원리",
+        "회전행렬 T와 역행렬 T^{-1}을 이용하여 좌표계를 변환한다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "3상 교류 전동기의 전압·전류·자속은 시간에 따라 변하므로 직접 해석이 복잡하다.",
+        "d-q 좌표변환은 3상 물리량을 정지 또는 회전 좌표계의 직교 성분으로 변환하여 제어와 해석을 단순화한다.",
+        "2. 좌표변환 원리",
+        "회전행렬 T와 역행렬 T^{-1}을 이용하여 좌표계를 변환한다.",
+        "T T^{-1}=I 이므로 이를 시간 미분하면 역행렬 미분항과 부호가 바뀐 회전항이 나타난다.",
+        "행렬의 교환법칙이 아니라 단위행렬 미분 항등식으로 유도해야 한다.",
+        "3. 회전좌표계 전압방정식",
+        "회전좌표계에서는 저항전압, 자속 미분항 외에 좌표계 회전에 의한 속도기전력 항이 추가된다.",
+        "d축 전압방정식에는 -omega lambda_q 항, q축 전압방정식에는 +omega lambda_d 항이 나타난다.",
+        "4. 토크식 해석",
+        "전자기 토크는 d-q 자속과 전류의 벡터곱 형태로 해석할 수 있다.",
+        "일반식은 T_e = 3/2 p(lambda_d i_q - lambda_q i_d)이며, 자속 기준 좌표계에서 lambda_q=0이면 T_e = 3/2 p lambda_d i_q로 단순화된다.",
+        "5. 현장 적용 의미",
+        "d축은 자속 성분, q축은 토크 성분으로 해석되어 벡터제어와 인버터 구동 제어의 기초가 된다.",
+        "속도기전력 항, 좌표계 부호, 단위 해석을 잘못 이해하면 전압방정식, 토크 제어, 전류제어기 설계 해석이 틀어질 수 있다."
+      ],
+      "high_score_features": [
+        "3상 시간변화 전압·전류·자속을 직교 좌표계로 변환하여 유도전동기의 해석과 제어를 단순화하는 방법임을 설명해야 한다.",
+        "T T^{-1}=I를 시간 미분하면 dT/dt T^{-1} + T dT^{-1}/dt = 0이 되며, 이 관계로 회전항의 부호가 결정됨을 설명해야 한다.",
+        "회전좌표계 전압방정식에는 저항전압과 자속 미분항 외에 -omega lambda_q, +omega lambda_d 같은 속도기전력 결합항이 포함됨을 설명해야 한다.",
+        "d축은 자속 성분, q축은 토크 성분으로 해석되며, 두 축의 결합을 분리하여 전동기 제어를 용이하게 함을 설명해야 한다.",
+        "T_e = 3/2 p(lambda_d i_q - lambda_q i_d)이고, 자속 기준 좌표계에서 lambda_q=0이면 토크가 q축 전류에 비례하여 제어될 수 있음을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "모터·인버터 일반론으로 넓히면 기존 motor_inverter_drive topic과 중복된다.",
+        "수식만 나열하면 약하다. 좌표변환이 왜 필요한지, 회전항이 왜 생기는지, d-q축이 제어에서 어떤 의미인지 설명해야 한다.",
+        "부호는 교환법칙이 아니라 T T^{-1}=I의 미분 항등식에서 나온다는 점을 명확히 해야 한다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T11:41:15",
+        "imported_from=wordpress_docs/review_designs/batch_003_design_1topic.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
     }
   ]
 }

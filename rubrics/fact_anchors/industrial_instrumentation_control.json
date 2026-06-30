@@ -2437,6 +2437,129 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "induction_motor_dq_reference_frame_equivalent_circuit",
+      "name": "유도전동기의 d-q 좌표변환과 회전좌표계 등가회로",
+      "aliases": [
+        "d-q 좌표변환",
+        "회전좌표계",
+        "유도전동기 등가회로",
+        "벡터제어",
+        "토크 방정식"
+      ],
+      "anchors": [
+        {
+          "id": "induction_motor_dq_reference_frame_equivalent_circuit_anchor_1",
+          "name": "d-q 좌표변환의 목적",
+          "expected": "3상 시간변화 전압·전류·자속을 직교 좌표계로 변환하여 유도전동기의 해석과 제어를 단순화하는 방법임을 설명해야 한다.",
+          "core_terms": [
+            "d-q",
+            "좌표변환의",
+            "목적",
+            "3상",
+            "시간변화"
+          ],
+          "support_terms": [
+            "3상",
+            "시간변화",
+            "전압·전류·자속을",
+            "직교",
+            "좌표계로",
+            "변환하여",
+            "유도전동기의",
+            "해석과"
+          ]
+        },
+        {
+          "id": "induction_motor_dq_reference_frame_equivalent_circuit_anchor_2",
+          "name": "회전행렬과 역행렬 미분 항등식",
+          "expected": "T T^{-1}=I를 시간 미분하면 dT/dt T^{-1} + T dT^{-1}/dt = 0이 되며, 이 관계로 회전항의 부호가 결정됨을 설명해야 한다.",
+          "core_terms": [
+            "회전행렬과",
+            "역행렬",
+            "미분",
+            "항등식",
+            "-1"
+          ],
+          "support_terms": [
+            "-1",
+            "I를",
+            "시간",
+            "미분하면",
+            "dT/dt",
+            "dT",
+            "/dt",
+            "0이"
+          ]
+        },
+        {
+          "id": "induction_motor_dq_reference_frame_equivalent_circuit_anchor_3",
+          "name": "회전좌표계 전압방정식의 속도기전력 항",
+          "expected": "회전좌표계 전압방정식에는 저항전압과 자속 미분항 외에 -omega lambda_q, +omega lambda_d 같은 속도기전력 결합항이 포함됨을 설명해야 한다.",
+          "core_terms": [
+            "회전좌표계",
+            "전압방정식의",
+            "속도기전력",
+            "전압방정식에는",
+            "저항전압과"
+          ],
+          "support_terms": [
+            "회전좌표계",
+            "전압방정식에는",
+            "저항전압과",
+            "자속",
+            "미분항",
+            "외에",
+            "-omega",
+            "lambda"
+          ]
+        },
+        {
+          "id": "induction_motor_dq_reference_frame_equivalent_circuit_anchor_4",
+          "name": "d축·q축 물리적 의미",
+          "expected": "d축은 자속 성분, q축은 토크 성분으로 해석되며, 두 축의 결합을 분리하여 전동기 제어를 용이하게 함을 설명해야 한다.",
+          "core_terms": [
+            "d축·q축",
+            "물리적",
+            "의미",
+            "d축은",
+            "자속"
+          ],
+          "support_terms": [
+            "d축은",
+            "자속",
+            "성분",
+            "q축은",
+            "토크",
+            "성분으로",
+            "해석되며",
+            "축의"
+          ]
+        },
+        {
+          "id": "induction_motor_dq_reference_frame_equivalent_circuit_anchor_5",
+          "name": "전자기 토크식과 벡터제어 의미",
+          "expected": "T_e = 3/2 p(lambda_d i_q - lambda_q i_d)이고, 자속 기준 좌표계에서 lambda_q=0이면 토크가 q축 전류에 비례하여 제어될 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "전자기",
+            "토크식과",
+            "벡터제어",
+            "의미",
+            "3/2"
+          ],
+          "support_terms": [
+            "3/2",
+            "lambda",
+            "이고",
+            "자속",
+            "기준",
+            "좌표계에서",
+            "0이면",
+            "토크가"
+          ]
+        }
+      ]
     }
   ]
 }
