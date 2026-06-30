@@ -4940,6 +4940,260 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "industrial_ethernet_realtime_network",
+      "name": "리얼타임 산업용 이더넷 비교와 선정",
+      "aliases": [
+        "산업용 이더넷",
+        "Industrial Ethernet",
+        "Real-time Ethernet",
+        "EtherCAT",
+        "PROFINET RT",
+        "PROFINET IRT",
+        "EtherNet/IP",
+        "TSN",
+        "SERCOS III"
+      ],
+      "anchors": [
+        {
+          "id": "industrial_ethernet_realtime_network_anchor_1",
+          "name": "산업용 이더넷의 목적",
+          "expected": "산업용 이더넷은 자동화 장비 간 제어 데이터, 상태 데이터, 진단 데이터를 교환하기 위한 산업 네트워크임을 설명해야 한다.",
+          "core_terms": [
+            "산업용",
+            "이더넷의",
+            "목적",
+            "이더넷은",
+            "자동화"
+          ],
+          "support_terms": [
+            "산업용",
+            "이더넷은",
+            "자동화",
+            "장비",
+            "제어",
+            "데이터",
+            "상태",
+            "진단"
+          ]
+        },
+        {
+          "id": "industrial_ethernet_realtime_network_anchor_2",
+          "name": "실시간 성능 기준",
+          "expected": "지연시간, jitter, cycle time, 시간동기, 결정성이 리얼타임 성능 평가의 핵심 기준임을 설명해야 한다.",
+          "core_terms": [
+            "실시간",
+            "성능",
+            "기준",
+            "지연시간",
+            "jitter"
+          ],
+          "support_terms": [
+            "지연시간",
+            "jitter",
+            "cycle",
+            "time",
+            "시간동기",
+            "결정성이",
+            "리얼타임",
+            "성능"
+          ]
+        },
+        {
+          "id": "industrial_ethernet_realtime_network_anchor_3",
+          "name": "비동기식과 소프트 리얼타임",
+          "expected": "EtherNet/IP, Modbus/TCP 등은 범용 제어·감시에 적합하고, PROFINET RT는 일정 수준의 실시간성을 제공함을 설명해야 한다.",
+          "core_terms": [
+            "비동기식과",
+            "소프트",
+            "리얼타임",
+            "EtherNet/IP",
+            "Modbus/TCP"
+          ],
+          "support_terms": [
+            "EtherNet/IP",
+            "Modbus/TCP",
+            "등은",
+            "범용",
+            "제어·감시에",
+            "적합하고",
+            "PROFINET",
+            "RT는"
+          ]
+        },
+        {
+          "id": "industrial_ethernet_realtime_network_anchor_4",
+          "name": "하드 리얼타임 프로토콜",
+          "expected": "EtherCAT, PROFINET IRT, SERCOS III, POWERLINK는 낮은 지연과 시간동기를 요구하는 모션 제어에 적합함을 설명해야 한다.",
+          "core_terms": [
+            "하드",
+            "리얼타임",
+            "프로토콜",
+            "EtherCAT",
+            "PROFINET"
+          ],
+          "support_terms": [
+            "EtherCAT",
+            "PROFINET",
+            "IRT",
+            "SERCOS",
+            "III",
+            "POWERLINK는",
+            "낮은",
+            "지연과"
+          ]
+        },
+        {
+          "id": "industrial_ethernet_realtime_network_anchor_5",
+          "name": "선정 기준",
+          "expected": "응답시간, 동기 정밀도, 네트워크 부하, 장비 호환성, 비용, 유지보수성, 기존 시스템 연계를 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "선정",
+            "기준",
+            "응답시간",
+            "동기",
+            "정밀도"
+          ],
+          "support_terms": [
+            "응답시간",
+            "동기",
+            "정밀도",
+            "네트워크",
+            "부하",
+            "장비",
+            "호환성",
+            "비용"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "camera_lidar_radar_sensor_comparison",
+      "name": "카메라·라이다·레이다 센서 비교와 선정",
+      "aliases": [
+        "카메라 라이다 레이다",
+        "camera lidar radar",
+        "자율주행 센서",
+        "LiDAR",
+        "Radar",
+        "vision sensor",
+        "센서 융합",
+        "object detection",
+        "3D point cloud"
+      ],
+      "anchors": [
+        {
+          "id": "camera_lidar_radar_sensor_comparison_anchor_1",
+          "name": "카메라의 특성",
+          "expected": "카메라는 색상과 형상 등 시각 정보와 객체 분류에 유리하지만 조명과 기상 조건에 취약하고 거리 측정에 한계가 있음을 설명해야 한다.",
+          "core_terms": [
+            "카메라의",
+            "특성",
+            "카메라는",
+            "색상과",
+            "형상"
+          ],
+          "support_terms": [
+            "카메라는",
+            "색상과",
+            "형상",
+            "시각",
+            "정보와",
+            "객체",
+            "분류에",
+            "유리하지만"
+          ]
+        },
+        {
+          "id": "camera_lidar_radar_sensor_comparison_anchor_2",
+          "name": "라이다의 특성",
+          "expected": "라이다는 레이저 기반 거리 측정과 3D point cloud 생성에 유리하지만 비용과 환경 영향이 크다는 점을 설명해야 한다.",
+          "core_terms": [
+            "라이다의",
+            "특성",
+            "라이다는",
+            "레이저",
+            "기반"
+          ],
+          "support_terms": [
+            "라이다는",
+            "레이저",
+            "기반",
+            "거리",
+            "측정과",
+            "3D",
+            "point",
+            "cloud"
+          ]
+        },
+        {
+          "id": "camera_lidar_radar_sensor_comparison_anchor_3",
+          "name": "레이다의 특성",
+          "expected": "레이다는 전파 기반으로 거리와 상대 속도 측정, 장거리 탐지, 악천후 대응에 유리하지만 공간 해상도가 낮음을 설명해야 한다.",
+          "core_terms": [
+            "레이다의",
+            "특성",
+            "레이다는",
+            "전파",
+            "기반으로"
+          ],
+          "support_terms": [
+            "레이다는",
+            "전파",
+            "기반으로",
+            "거리와",
+            "상대",
+            "속도",
+            "측정",
+            "장거리"
+          ]
+        },
+        {
+          "id": "camera_lidar_radar_sensor_comparison_anchor_4",
+          "name": "센서별 비교 기준",
+          "expected": "해상도, 거리 측정, 속도 측정, 객체 분류, 기상 영향, 비용, 계산량을 기준으로 비교해야 함을 설명해야 한다.",
+          "core_terms": [
+            "센서별",
+            "비교",
+            "기준",
+            "해상도",
+            "거리"
+          ],
+          "support_terms": [
+            "해상도",
+            "거리",
+            "측정",
+            "속도",
+            "객체",
+            "분류",
+            "기상",
+            "영향"
+          ]
+        },
+        {
+          "id": "camera_lidar_radar_sensor_comparison_anchor_5",
+          "name": "센서 융합 고려사항",
+          "expected": "센서 융합은 상호 보완성이 있지만 시간 동기화, 좌표계 정합, 캘리브레이션, 데이터 처리 복잡도를 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "센서",
+            "융합",
+            "고려사항",
+            "융합은",
+            "상호"
+          ],
+          "support_terms": [
+            "센서",
+            "융합은",
+            "상호",
+            "보완성이",
+            "있지만",
+            "시간",
+            "동기화",
+            "좌표계"
+          ]
+        }
+      ]
     }
   ]
 }

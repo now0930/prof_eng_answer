@@ -349,6 +349,42 @@ META = {
             "fail close"
         ],
     },
+    "industrial_ethernet_realtime_network": {
+        "question_type": "COMPARE_SELECTION",
+        "title": "리얼타임 산업용 이더넷 비교와 선정",
+        "questions": [
+            "리얼타임 산업용 이더넷을 성능에 따라 분류하고, EtherNet/IP, PROFINET RT/IRT, EtherCAT, TSN 등의 특징과 적용 시 고려사항을 설명하시오."
+        ],
+        "aliases": [
+            "산업용 이더넷",
+            "Industrial Ethernet",
+            "Real-time Ethernet",
+            "EtherCAT",
+            "PROFINET RT",
+            "PROFINET IRT",
+            "EtherNet/IP",
+            "TSN",
+            "SERCOS III"
+        ],
+    },
+    "camera_lidar_radar_sensor_comparison": {
+        "question_type": "COMPARE_SELECTION",
+        "title": "카메라·라이다·레이다 센서 비교와 선정",
+        "questions": [
+            "자율주행 및 산업 자동화에서 사용하는 카메라, 라이다, 레이다 센서의 원리와 장단점을 비교하고, 센서 선정 및 융합 시 고려사항을 설명하시오."
+        ],
+        "aliases": [
+            "카메라 라이다 레이다",
+            "camera lidar radar",
+            "자율주행 센서",
+            "LiDAR",
+            "Radar",
+            "vision sensor",
+            "센서 융합",
+            "object detection",
+            "3D point cloud"
+        ],
+    },
 }
 
 STOP = {"설명", "한다", "해야", "있다", "있는", "통해", "경우", "고려", "주요", "핵심"}
