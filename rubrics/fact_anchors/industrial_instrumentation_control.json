@@ -6347,6 +6347,116 @@
         "discrete model",
         "이산시간 모델"
       ]
+    },
+    {
+      "topic_id": "second_order_system_resonance_frequency_response",
+      "name": "2차 시스템 공진 주파수와 주파수응답 해석",
+      "aliases": [
+        "제동비",
+        "감쇠비",
+        "zeta",
+        "natural frequency",
+        "공진 피크",
+        "주파수응답"
+      ],
+      "anchors": [
+        {
+          "id": "F1",
+          "name": "표준 2차 전달함수",
+          "expected": "표준 2차 시스템을 H(s) = wn^2 / (s^2 + 2zetawns + wn^2)로 표현하고 wn과 zeta의 의미를 설명한다.",
+          "core_terms": [
+            "2차 시스템",
+            "전달함수",
+            "wn",
+            "zeta",
+            "고유진동수",
+            "제동비"
+          ],
+          "support_terms": [
+            "natural frequency",
+            "damping ratio",
+            "표준형"
+          ]
+        },
+        {
+          "id": "F2",
+          "name": "주파수 응답 크기",
+          "expected": "s = jw 대입 후 M(w) = wn^2 / sqrt((wn^2 - w^2)^2 + (2zetawnw)^2) 형태의 크기 응답을 설명한다.",
+          "core_terms": [
+            "s = jw",
+            "주파수 응답",
+            "크기 응답",
+            "분모",
+            "복소수"
+          ],
+          "support_terms": [
+            "real part",
+            "imaginary part",
+            "magnitude"
+          ]
+        },
+        {
+          "id": "F3",
+          "name": "공진 주파수 유도",
+          "expected": "크기 응답을 최대화하기 위해 분모 제곱항을 최소화하고 미분 조건에서 wr = wnsqrt(1 - 2zeta^2)를 유도한다.",
+          "core_terms": [
+            "공진 주파수",
+            "분모 최소화",
+            "미분",
+            "wr",
+            "sqrt",
+            "1 - 2*zeta^2"
+          ],
+          "support_terms": [
+            "최대 크기",
+            "g(w)",
+            "유도"
+          ]
+        },
+        {
+          "id": "F4",
+          "name": "공진 발생 조건",
+          "expected": "공진 주파수가 실수가 되려면 zeta < 1/sqrt(2)이어야 하며, 그 이상에서는 0이 아닌 공진 피크가 나타나지 않음을 설명한다.",
+          "core_terms": [
+            "공진 조건",
+            "zeta",
+            "1/sqrt(2)",
+            "실수",
+            "공진 피크"
+          ],
+          "support_terms": [
+            "0.707",
+            "감쇠",
+            "peak"
+          ]
+        },
+        {
+          "id": "F5",
+          "name": "제어계 해석",
+          "expected": "제동비가 작을수록 공진 피크가 커지고 공진은 진동 증폭, 노이즈 증폭, actuator 부담, 안정도 저하와 연결될 수 있음을 설명한다.",
+          "core_terms": [
+            "제동비",
+            "공진 피크",
+            "진동 증폭",
+            "노이즈 증폭",
+            "actuator",
+            "안정도"
+          ],
+          "support_terms": [
+            "대역폭",
+            "필터",
+            "구조 공진",
+            "제어루프"
+          ]
+        }
+      ],
+      "triggers": [
+        "2차 시스템 공진 주파수",
+        "second order system resonance",
+        "resonant frequency",
+        "resonant peak",
+        "frequency response"
+      ]
     }
   ]
 }
