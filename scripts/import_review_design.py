@@ -210,6 +210,58 @@ META = {
             "동특성"
         ],
     },
+    "smart_mcc_motor_control_center_monitoring": {
+        "question_type": "IMPLEMENTATION_EVALUATION",
+        "title": "스마트 MCC 전동기 제어반 감시와 진단",
+        "questions": [
+            "스마트 전동기 제어반(Smart MCC)의 구성, 특징, 장단점 및 도입 시 고려사항을 설명하시오."
+        ],
+        "aliases": [
+            "Smart MCC",
+            "스마트 MCC",
+            "Motor Control Center",
+            "전동기 제어반",
+            "전동기 상태감시",
+            "예지보전",
+            "전력품질 감시",
+            "motor monitoring"
+        ],
+    },
+    "industrial_robot_degrees_of_freedom": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "산업용 로봇 자유도와 작업 능력",
+        "questions": [
+            "산업용 로봇에서 자유도(DOF)의 의미를 설명하고, 3자유도, 6자유도, 7자유도 이상 로봇의 특징과 선정 시 고려사항을 설명하시오."
+        ],
+        "aliases": [
+            "산업용 로봇 자유도",
+            "robot degree of freedom",
+            "DOF",
+            "3자유도",
+            "6자유도",
+            "7자유도",
+            "위치 자유도",
+            "자세 자유도"
+        ],
+    },
+    "frame_grounding_shielding_noise_control": {
+        "question_type": "DIAGNOSIS_ACTION",
+        "title": "프레임 그라운드와 전자기파 차폐 대책",
+        "questions": [
+            "제어기 설계에서 프레임 그라운드의 목적을 설명하고, 전자기파 차폐와 노이즈 저감을 위한 적용 방법 및 주의사항을 설명하시오."
+        ],
+        "aliases": [
+            "프레임 그라운드",
+            "frame ground",
+            "chassis ground",
+            "전자기파 차폐",
+            "EMI",
+            "EMC",
+            "shield grounding",
+            "ground loop",
+            "노이즈 접지"
+        ],
+    },
 }
 
 STOP = {"설명", "한다", "해야", "있다", "있는", "통해", "경우", "고려", "주요", "핵심"}

@@ -3929,6 +3929,385 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "smart_mcc_motor_control_center_monitoring",
+      "name": "스마트 MCC 전동기 제어반 감시와 진단",
+      "aliases": [
+        "Smart MCC",
+        "스마트 MCC",
+        "Motor Control Center",
+        "전동기 제어반",
+        "전동기 상태감시",
+        "예지보전",
+        "전력품질 감시",
+        "motor monitoring"
+      ],
+      "anchors": [
+        {
+          "id": "smart_mcc_motor_control_center_monitoring_anchor_1",
+          "name": "Smart MCC의 정의",
+          "expected": "Smart MCC는 기존 전동기 제어반에 통신, 계측, 상태감시, 이력관리, 진단 기능을 결합한 지능형 전동기 제어반임을 설명해야 한다.",
+          "core_terms": [
+            "Smart",
+            "MCC의",
+            "정의",
+            "MCC는",
+            "기존"
+          ],
+          "support_terms": [
+            "Smart",
+            "MCC는",
+            "기존",
+            "전동기",
+            "제어반에",
+            "통신",
+            "계측",
+            "상태감시"
+          ]
+        },
+        {
+          "id": "smart_mcc_motor_control_center_monitoring_anchor_2",
+          "name": "기본 구성 요소",
+          "expected": "MCCB, 전자접촉기, 보호계전기, 계측기, 조작·표시기기와 통신·감시 모듈의 관계를 설명해야 한다.",
+          "core_terms": [
+            "기본",
+            "구성",
+            "요소",
+            "MCCB",
+            "전자접촉기"
+          ],
+          "support_terms": [
+            "MCCB",
+            "전자접촉기",
+            "보호계전기",
+            "계측기",
+            "조작·표시기기와",
+            "통신·감시",
+            "모듈의",
+            "관계를"
+          ]
+        },
+        {
+          "id": "smart_mcc_motor_control_center_monitoring_anchor_3",
+          "name": "감시 및 진단 기능",
+          "expected": "전류, 전압, 전력, 운전시간, trip 이력, 부하율, 전력품질 데이터를 이용해 상태감시와 예방정비를 수행함을 설명해야 한다.",
+          "core_terms": [
+            "감시",
+            "진단",
+            "기능",
+            "전류",
+            "전압"
+          ],
+          "support_terms": [
+            "전류",
+            "전압",
+            "전력",
+            "운전시간",
+            "trip",
+            "이력",
+            "부하율",
+            "전력품질"
+          ]
+        },
+        {
+          "id": "smart_mcc_motor_control_center_monitoring_anchor_4",
+          "name": "시스템 연계",
+          "expected": "PLC, DCS, SCADA와 통신하여 원격 감시, 제어, 이력관리가 가능함을 설명해야 한다.",
+          "core_terms": [
+            "시스템",
+            "연계",
+            "PLC",
+            "DCS",
+            "SCADA와"
+          ],
+          "support_terms": [
+            "PLC",
+            "DCS",
+            "SCADA와",
+            "통신하여",
+            "원격",
+            "감시",
+            "제어",
+            "이력관리가"
+          ]
+        },
+        {
+          "id": "smart_mcc_motor_control_center_monitoring_anchor_5",
+          "name": "도입 고려사항",
+          "expected": "비용, 통신 호환성, 사이버 보안, 유지보수 역량, 기존 설비와의 단계적 연계가 필요함을 설명해야 한다.",
+          "core_terms": [
+            "도입",
+            "고려사항",
+            "비용",
+            "통신",
+            "호환성"
+          ],
+          "support_terms": [
+            "비용",
+            "통신",
+            "호환성",
+            "사이버",
+            "보안",
+            "유지보수",
+            "역량",
+            "기존"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "industrial_robot_degrees_of_freedom",
+      "name": "산업용 로봇 자유도와 작업 능력",
+      "aliases": [
+        "산업용 로봇 자유도",
+        "robot degree of freedom",
+        "DOF",
+        "3자유도",
+        "6자유도",
+        "7자유도",
+        "위치 자유도",
+        "자세 자유도"
+      ],
+      "anchors": [
+        {
+          "id": "industrial_robot_degrees_of_freedom_anchor_1",
+          "name": "자유도의 정의",
+          "expected": "자유도는 로봇이 독립적으로 움직일 수 있는 운동축 또는 운동 방향의 수임을 설명해야 한다.",
+          "core_terms": [
+            "자유도의",
+            "정의",
+            "자유도는",
+            "로봇이",
+            "독립적으로"
+          ],
+          "support_terms": [
+            "자유도는",
+            "로봇이",
+            "독립적으로",
+            "움직일",
+            "운동축",
+            "또는",
+            "운동",
+            "방향의"
+          ]
+        },
+        {
+          "id": "industrial_robot_degrees_of_freedom_anchor_2",
+          "name": "이동 자유도와 회전 자유도",
+          "expected": "직선 이동 자유도와 회전 자유도를 구분하고, 위치와 자세 제어에 각각 필요함을 설명해야 한다.",
+          "core_terms": [
+            "이동",
+            "자유도와",
+            "회전",
+            "자유도",
+            "직선"
+          ],
+          "support_terms": [
+            "직선",
+            "이동",
+            "자유도와",
+            "회전",
+            "자유도를",
+            "구분하고",
+            "위치와",
+            "자세"
+          ]
+        },
+        {
+          "id": "industrial_robot_degrees_of_freedom_anchor_3",
+          "name": "6자유도의 의미",
+          "expected": "공간에서 말단 장치의 위치 3축과 자세 3축을 제어하기 위해 일반적으로 6자유도가 필요함을 설명해야 한다.",
+          "core_terms": [
+            "6자유도의",
+            "의미",
+            "공간에서",
+            "말단",
+            "장치의"
+          ],
+          "support_terms": [
+            "공간에서",
+            "말단",
+            "장치의",
+            "위치",
+            "3축과",
+            "자세",
+            "3축을",
+            "제어하기"
+          ]
+        },
+        {
+          "id": "industrial_robot_degrees_of_freedom_anchor_4",
+          "name": "자유도와 작업 능력",
+          "expected": "자유도가 증가하면 복잡한 작업과 다양한 자세 제어가 가능하지만 제어와 프로그래밍 복잡성이 증가함을 설명해야 한다.",
+          "core_terms": [
+            "자유도와",
+            "작업",
+            "능력",
+            "자유도가",
+            "증가하면"
+          ],
+          "support_terms": [
+            "자유도가",
+            "증가하면",
+            "복잡한",
+            "작업과",
+            "다양한",
+            "자세",
+            "제어가",
+            "가능하지만"
+          ]
+        },
+        {
+          "id": "industrial_robot_degrees_of_freedom_anchor_5",
+          "name": "로봇 선정 기준",
+          "expected": "작업 내용, 작업 공간, 요구 자세, 정밀도, payload, cycle time, 비용, 안전성을 고려하여 자유도를 선정해야 함을 설명해야 한다.",
+          "core_terms": [
+            "로봇",
+            "선정",
+            "기준",
+            "작업",
+            "내용"
+          ],
+          "support_terms": [
+            "작업",
+            "내용",
+            "공간",
+            "요구",
+            "자세",
+            "정밀도",
+            "payload",
+            "cycle"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "frame_grounding_shielding_noise_control",
+      "name": "프레임 그라운드와 전자기파 차폐 대책",
+      "aliases": [
+        "프레임 그라운드",
+        "frame ground",
+        "chassis ground",
+        "전자기파 차폐",
+        "EMI",
+        "EMC",
+        "shield grounding",
+        "ground loop",
+        "노이즈 접지"
+      ],
+      "anchors": [
+        {
+          "id": "frame_grounding_shielding_noise_control_anchor_1",
+          "name": "프레임 그라운드의 정의",
+          "expected": "프레임 그라운드는 장비의 금속 프레임 또는 샤시를 접지하여 안전과 노이즈 저감에 사용하는 접지 방식임을 설명해야 한다.",
+          "core_terms": [
+            "프레임",
+            "그라운드의",
+            "정의",
+            "그라운드는",
+            "장비의"
+          ],
+          "support_terms": [
+            "프레임",
+            "그라운드는",
+            "장비의",
+            "금속",
+            "또는",
+            "샤시를",
+            "접지하여",
+            "안전과"
+          ]
+        },
+        {
+          "id": "frame_grounding_shielding_noise_control_anchor_2",
+          "name": "차폐와 접지의 관계",
+          "expected": "금속 샤시와 케이블 실드를 프레임 그라운드에 접속하여 전자기파 유입과 방사를 줄임을 설명해야 한다.",
+          "core_terms": [
+            "차폐와",
+            "접지의",
+            "관계",
+            "금속",
+            "샤시와"
+          ],
+          "support_terms": [
+            "금속",
+            "샤시와",
+            "케이블",
+            "실드를",
+            "프레임",
+            "그라운드에",
+            "접속하여",
+            "전자기파"
+          ]
+        },
+        {
+          "id": "frame_grounding_shielding_noise_control_anchor_3",
+          "name": "저임피던스 접지 경로",
+          "expected": "고주파 노이즈 저감을 위해 접지 경로는 짧고 넓게 구성하여 임피던스를 낮춰야 함을 설명해야 한다.",
+          "core_terms": [
+            "저임피던스",
+            "접지",
+            "경로",
+            "고주파",
+            "노이즈"
+          ],
+          "support_terms": [
+            "고주파",
+            "노이즈",
+            "저감을",
+            "위해",
+            "접지",
+            "경로는",
+            "짧고",
+            "넓게"
+          ]
+        },
+        {
+          "id": "frame_grounding_shielding_noise_control_anchor_4",
+          "name": "ground loop 위험",
+          "expected": "부적절한 다중 접지점은 순환전류와 노이즈를 유발할 수 있으므로 접지 구조를 검토해야 함을 설명해야 한다.",
+          "core_terms": [
+            "ground",
+            "loop",
+            "위험",
+            "부적절한",
+            "다중"
+          ],
+          "support_terms": [
+            "부적절한",
+            "다중",
+            "접지점은",
+            "순환전류와",
+            "노이즈를",
+            "유발할",
+            "있으므로",
+            "접지"
+          ]
+        },
+        {
+          "id": "frame_grounding_shielding_noise_control_anchor_5",
+          "name": "현장 적용 고려사항",
+          "expected": "케이블 실드 처리, 접지 bar, bonding, 전력선·신호선 분리, 체결 상태, 기존 설비와의 연계를 함께 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "현장",
+            "적용",
+            "고려사항",
+            "케이블",
+            "실드"
+          ],
+          "support_terms": [
+            "케이블",
+            "실드",
+            "처리",
+            "접지",
+            "bar",
+            "bonding",
+            "전력선·신호선",
+            "분리"
+          ]
+        }
+      ]
     }
   ]
 }
