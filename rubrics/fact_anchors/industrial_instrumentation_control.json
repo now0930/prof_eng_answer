@@ -2560,6 +2560,621 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter",
+      "name": "Control valve positioner와 I/P converter",
+      "aliases": [
+        "positioner",
+        "I/P converter",
+        "control valve",
+        "pilot valve",
+        "feedback spring"
+      ],
+      "anchors": [
+        {
+          "id": "control_valve_positioner_ip_converter_anchor_1",
+          "name": "포지셔너의 목적",
+          "expected": "제어 신호와 실제 밸브 위치를 비교하여 액추에이터 공압을 조절하는 폐루프 장치임을 설명해야 한다.",
+          "core_terms": [
+            "포지셔너의",
+            "목적",
+            "제어",
+            "신호와",
+            "실제"
+          ],
+          "support_terms": [
+            "제어",
+            "신호와",
+            "실제",
+            "밸브",
+            "위치를",
+            "비교하여",
+            "액추에이터",
+            "공압을"
+          ]
+        },
+        {
+          "id": "control_valve_positioner_ip_converter_anchor_2",
+          "name": "I/P converter와 3-15 psi",
+          "expected": "I/P converter는 전류 신호를 공압 신호로 변환하며 3-15 psi는 밸브 위치 명령으로 쓰일 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "I/P",
+            "converter와",
+            "3-15",
+            "psi",
+            "converter는"
+          ],
+          "support_terms": [
+            "I/P",
+            "converter는",
+            "전류",
+            "신호를",
+            "공압",
+            "신호로",
+            "변환하며",
+            "3-15"
+          ]
+        },
+        {
+          "id": "control_valve_positioner_ip_converter_anchor_3",
+          "name": "파일럿 밸브와 액추에이터",
+          "expected": "파일럿 밸브가 공급 공압을 조절하고 액추에이터가 밸브 스템을 이동시킴을 설명해야 한다.",
+          "core_terms": [
+            "파일럿",
+            "밸브와",
+            "액추에이터",
+            "밸브가",
+            "공급"
+          ],
+          "support_terms": [
+            "파일럿",
+            "밸브가",
+            "공급",
+            "공압을",
+            "조절하고",
+            "액추에이터가",
+            "밸브",
+            "스템을"
+          ]
+        },
+        {
+          "id": "control_valve_positioner_ip_converter_anchor_4",
+          "name": "기계적 피드백",
+          "expected": "follower arm, take-off arm, feedback spring 등이 실제 위치를 되먹임함을 설명해야 한다.",
+          "core_terms": [
+            "기계적",
+            "피드백",
+            "follower",
+            "arm",
+            "take-off"
+          ],
+          "support_terms": [
+            "follower",
+            "arm",
+            "take-off",
+            "feedback",
+            "spring",
+            "등이",
+            "실제",
+            "위치를"
+          ]
+        },
+        {
+          "id": "control_valve_positioner_ip_converter_anchor_5",
+          "name": "균형 상태와 고장 요인",
+          "expected": "입력 힘과 피드백 힘이 균형이면 밸브가 정지하며 마찰, 누설, 유격, drift가 위치 오차를 만든다는 점을 설명해야 한다.",
+          "core_terms": [
+            "균형",
+            "상태와",
+            "고장",
+            "요인",
+            "입력"
+          ],
+          "support_terms": [
+            "입력",
+            "힘과",
+            "피드백",
+            "힘이",
+            "균형이면",
+            "밸브가",
+            "정지하며",
+            "마찰"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "reference_tracking_prefilter_steady_state_error_control",
+      "name": "상태피드백 기준입력 추종과 정상상태 오차 보상",
+      "aliases": [
+        "reference tracking",
+        "prefilter",
+        "feedforward",
+        "steady-state error",
+        "integral control"
+      ],
+      "anchors": [
+        {
+          "id": "reference_tracking_prefilter_steady_state_error_control_anchor_1",
+          "name": "상태피드백의 역할과 한계",
+          "expected": "상태피드백은 주로 폐루프 pole과 과도응답을 조정하지만 기준입력 정상상태 추종을 자동 보장하지 않음을 설명해야 한다.",
+          "core_terms": [
+            "상태피드백의",
+            "역할과",
+            "한계",
+            "상태피드백은",
+            "주로"
+          ],
+          "support_terms": [
+            "상태피드백은",
+            "주로",
+            "폐루프",
+            "pole과",
+            "과도응답을",
+            "조정하지만",
+            "기준입력",
+            "정상상태"
+          ]
+        },
+        {
+          "id": "reference_tracking_prefilter_steady_state_error_control_anchor_2",
+          "name": "정상상태 오차 원인",
+          "expected": "참조 입력 주입 방식과 폐루프 정적 이득이 맞지 않으면 step reference에서도 steady-state error가 남을 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "정상상태",
+            "오차",
+            "원인",
+            "참조",
+            "입력"
+          ],
+          "support_terms": [
+            "참조",
+            "입력",
+            "주입",
+            "방식과",
+            "폐루프",
+            "정적",
+            "이득이",
+            "맞지"
+          ]
+        },
+        {
+          "id": "reference_tracking_prefilter_steady_state_error_control_anchor_3",
+          "name": "prefilter F의 역할",
+          "expected": "prefilter F는 기준입력을 전처리하여 reference-to-output 전달함수를 조정하는 설계 파라미터임을 설명해야 한다.",
+          "core_terms": [
+            "prefilter",
+            "F의",
+            "역할",
+            "F는",
+            "기준입력을"
+          ],
+          "support_terms": [
+            "prefilter",
+            "F는",
+            "기준입력을",
+            "전처리하여",
+            "reference-to-output",
+            "전달함수를",
+            "조정하는",
+            "설계"
+          ]
+        },
+        {
+          "id": "reference_tracking_prefilter_steady_state_error_control_anchor_4",
+          "name": "feedforward/reference gain",
+          "expected": "정상상태에서 출력이 기준값과 일치하도록 입력 크기 또는 기준 이득을 보정하는 방법임을 설명해야 한다.",
+          "core_terms": [
+            "feedforward/reference",
+            "gain",
+            "정상상태에서",
+            "출력이",
+            "기준값과"
+          ],
+          "support_terms": [
+            "정상상태에서",
+            "출력이",
+            "기준값과",
+            "일치하도록",
+            "입력",
+            "크기",
+            "또는",
+            "기준"
+          ]
+        },
+        {
+          "id": "reference_tracking_prefilter_steady_state_error_control_anchor_5",
+          "name": "적분 제어 trade-off",
+          "expected": "적분 제어는 정상상태 오차 제거에 효과적이지만 안정도 저하, 포화, windup 문제를 함께 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "적분",
+            "제어",
+            "trade-off",
+            "제어는",
+            "정상상태"
+          ],
+          "support_terms": [
+            "적분",
+            "제어는",
+            "정상상태",
+            "오차",
+            "제거에",
+            "효과적이지만",
+            "안정도",
+            "저하"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "thermopile_noncontact_ir_temperature_sensor",
+      "name": "써모파일 비접촉 적외선 온도센서",
+      "aliases": [
+        "thermopile",
+        "IR temperature sensor",
+        "noncontact temperature",
+        "radiation",
+        "emissivity"
+      ],
+      "anchors": [
+        {
+          "id": "thermopile_noncontact_ir_temperature_sensor_anchor_1",
+          "name": "thermopile 구조",
+          "expected": "여러 열전대를 직렬 연결하여 Seebeck 전압을 합산하고 감도를 높이는 센서임을 설명해야 한다.",
+          "core_terms": [
+            "thermopile",
+            "구조",
+            "여러",
+            "열전대를",
+            "직렬"
+          ],
+          "support_terms": [
+            "여러",
+            "열전대를",
+            "직렬",
+            "연결하여",
+            "Seebeck",
+            "전압을",
+            "합산하고",
+            "감도를"
+          ]
+        },
+        {
+          "id": "thermopile_noncontact_ir_temperature_sensor_anchor_2",
+          "name": "비접촉 IR 원리",
+          "expected": "대상의 적외선 방사 에너지를 흡수해 접점 간 온도차와 전압을 만드는 원리를 설명해야 한다.",
+          "core_terms": [
+            "비접촉",
+            "IR",
+            "원리",
+            "대상의",
+            "적외선"
+          ],
+          "support_terms": [
+            "대상의",
+            "적외선",
+            "방사",
+            "에너지를",
+            "흡수해",
+            "접점",
+            "온도차와",
+            "전압을"
+          ]
+        },
+        {
+          "id": "thermopile_noncontact_ir_temperature_sensor_anchor_3",
+          "name": "접촉식 센서와 차이",
+          "expected": "열전대와 RTD는 접촉식, thermopile은 방사 에너지 기반 비접촉식 측정에 적합함을 설명해야 한다.",
+          "core_terms": [
+            "접촉식",
+            "센서와",
+            "차이",
+            "열전대와",
+            "RTD는"
+          ],
+          "support_terms": [
+            "열전대와",
+            "RTD는",
+            "접촉식",
+            "thermopile은",
+            "방사",
+            "에너지",
+            "기반",
+            "비접촉식"
+          ]
+        },
+        {
+          "id": "thermopile_noncontact_ir_temperature_sensor_anchor_4",
+          "name": "오차 요인",
+          "expected": "방사율, 시야각, 거리, 렌즈 오염, 주변 온도, 배경 복사가 오차 요인임을 설명해야 한다.",
+          "core_terms": [
+            "오차",
+            "요인",
+            "방사율",
+            "시야각",
+            "거리"
+          ],
+          "support_terms": [
+            "방사율",
+            "시야각",
+            "거리",
+            "렌즈",
+            "오염",
+            "주변",
+            "온도",
+            "배경"
+          ]
+        },
+        {
+          "id": "thermopile_noncontact_ir_temperature_sensor_anchor_5",
+          "name": "선정 기준",
+          "expected": "대상 온도, 접촉 가능성, 응답속도, 설치 환경, 방사율 보정 가능성, 비용을 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "선정",
+            "기준",
+            "대상",
+            "온도",
+            "접촉"
+          ],
+          "support_terms": [
+            "대상",
+            "온도",
+            "접촉",
+            "가능성",
+            "응답속도",
+            "설치",
+            "환경",
+            "방사율"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "psd_position_sensitive_detector_optical_sensor",
+      "name": "PSD 선형 광학 위치검출 센서",
+      "aliases": [
+        "PSD",
+        "position sensitive detector",
+        "optical sensor",
+        "current ratio",
+        "position measurement"
+      ],
+      "anchors": [
+        {
+          "id": "psd_position_sensitive_detector_optical_sensor_anchor_1",
+          "name": "PSD의 역할",
+          "expected": "입사한 빛의 위치를 전기적 전류 신호로 변환하는 연속형 위치검출 광센서임을 설명해야 한다.",
+          "core_terms": [
+            "PSD의",
+            "역할",
+            "입사한",
+            "빛의",
+            "위치를"
+          ],
+          "support_terms": [
+            "입사한",
+            "빛의",
+            "위치를",
+            "전기적",
+            "전류",
+            "신호로",
+            "변환하는",
+            "연속형"
+          ]
+        },
+        {
+          "id": "psd_position_sensitive_detector_optical_sensor_anchor_2",
+          "name": "양 전극 전류 분배",
+          "expected": "생성 전하가 양쪽 전극으로 분배되어 I_A, I_B 전류가 위치에 따라 달라짐을 설명해야 한다.",
+          "core_terms": [
+            "전극",
+            "전류",
+            "분배",
+            "생성",
+            "전하가"
+          ],
+          "support_terms": [
+            "생성",
+            "전하가",
+            "양쪽",
+            "전극으로",
+            "분배되어",
+            "전류가",
+            "위치에",
+            "따라"
+          ]
+        },
+        {
+          "id": "psd_position_sensitive_detector_optical_sensor_anchor_3",
+          "name": "전류비 기반 위치 계산",
+          "expected": "I_A/I_B 또는 정규화 전류차 같은 비율 정보로 광점 위치를 계산함을 설명해야 한다.",
+          "core_terms": [
+            "전류비",
+            "기반",
+            "위치",
+            "계산",
+            "A/I"
+          ],
+          "support_terms": [
+            "A/I",
+            "또는",
+            "정규화",
+            "전류차",
+            "같은",
+            "비율",
+            "정보로",
+            "광점"
+          ]
+        },
+        {
+          "id": "psd_position_sensitive_detector_optical_sensor_anchor_4",
+          "name": "비접촉 측정 장점",
+          "expected": "기계적 접촉 없이 위치, 변위, 광축 정렬 등을 빠르게 측정할 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "비접촉",
+            "측정",
+            "장점",
+            "기계적",
+            "접촉"
+          ],
+          "support_terms": [
+            "기계적",
+            "접촉",
+            "없이",
+            "위치",
+            "변위",
+            "광축",
+            "정렬",
+            "등을"
+          ]
+        },
+        {
+          "id": "psd_position_sensitive_detector_optical_sensor_anchor_5",
+          "name": "오차와 보정",
+          "expected": "광량 변화, 배경광, spot size, 비선형성, 온도 drift, offset을 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "오차와",
+            "보정",
+            "광량",
+            "변화",
+            "배경광"
+          ],
+          "support_terms": [
+            "광량",
+            "변화",
+            "배경광",
+            "spot",
+            "size",
+            "비선형성",
+            "온도",
+            "drift"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "wheatstone_bridge_null_balance_measurement",
+      "name": "Wheatstone bridge와 null balance 측정",
+      "aliases": [
+        "Wheatstone bridge",
+        "null balance",
+        "bridge balance",
+        "strain gage",
+        "RTD"
+      ],
+      "anchors": [
+        {
+          "id": "wheatstone_bridge_null_balance_measurement_anchor_1",
+          "name": "Wheatstone bridge 평형 조건",
+          "expected": "Z1/Z2 = Z3/Z4 또는 Z1 Z4 = Z2 Z3일 때 검출기 전압이 0이 되는 평형 상태임을 설명해야 한다.",
+          "core_terms": [
+            "Wheatstone",
+            "bridge",
+            "평형",
+            "조건",
+            "Z1/Z2"
+          ],
+          "support_terms": [
+            "Z1/Z2",
+            "Z3/Z4",
+            "또는",
+            "Z1",
+            "Z4",
+            "Z2",
+            "Z3일",
+            "검출기"
+          ]
+        },
+        {
+          "id": "wheatstone_bridge_null_balance_measurement_anchor_2",
+          "name": "null balance 측정 원리",
+          "expected": "브리지 불평형을 가변 임피던스나 피드백으로 조정하여 검출기 출력을 0으로 만드는 방식임을 설명해야 한다.",
+          "core_terms": [
+            "null",
+            "balance",
+            "측정",
+            "원리",
+            "브리지"
+          ],
+          "support_terms": [
+            "브리지",
+            "불평형을",
+            "가변",
+            "임피던스나",
+            "피드백으로",
+            "조정하여",
+            "검출기",
+            "출력을"
+          ]
+        },
+        {
+          "id": "wheatstone_bridge_null_balance_measurement_anchor_3",
+          "name": "센서 저항 변화 검출",
+          "expected": "strain gage, RTD, 압저항 센서 등 작은 저항 변화를 측정할 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "센서",
+            "저항",
+            "변화",
+            "검출",
+            "strain"
+          ],
+          "support_terms": [
+            "strain",
+            "gage",
+            "RTD",
+            "압저항",
+            "센서",
+            "작은",
+            "저항",
+            "변화를"
+          ]
+        },
+        {
+          "id": "wheatstone_bridge_null_balance_measurement_anchor_4",
+          "name": "감도와 브리지 구성",
+          "expected": "quarter, half, full bridge 구성에 따라 감도, 온도보상, 선형성, 노이즈 특성이 달라짐을 설명해야 한다.",
+          "core_terms": [
+            "감도와",
+            "브리지",
+            "구성",
+            "quarter",
+            "half"
+          ],
+          "support_terms": [
+            "quarter",
+            "half",
+            "full",
+            "bridge",
+            "구성에",
+            "따라",
+            "감도",
+            "온도보상"
+          ]
+        },
+        {
+          "id": "wheatstone_bridge_null_balance_measurement_anchor_5",
+          "name": "오차 보상",
+          "expected": "리드선 저항, 온도 변화, 접촉저항, 전원 변동, offset을 고려하고 보상해야 함을 설명해야 한다.",
+          "core_terms": [
+            "오차",
+            "보상",
+            "리드선",
+            "저항",
+            "온도"
+          ],
+          "support_terms": [
+            "리드선",
+            "저항",
+            "온도",
+            "변화",
+            "접촉저항",
+            "전원",
+            "변동",
+            "offset을"
+          ]
+        }
+      ]
     }
   ]
 }

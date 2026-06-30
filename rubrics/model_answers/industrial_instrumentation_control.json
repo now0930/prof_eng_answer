@@ -961,6 +961,316 @@
         "imported_from=wordpress_docs/review_designs/batch_003_design_1topic.md",
         "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
       ]
+    },
+    {
+      "id": "control_valve_positioner_ip_converter_PRINCIPLE_INTERPRETATION_v1",
+      "topic_id": "control_valve_positioner_ip_converter",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "title": "Control valve positioner와 I/P converter",
+      "question_examples": [
+        "Control valve positioner와 I/P converter의 동작 원리 및 피드백에 의한 밸브 위치 제어 과정을 설명하시오."
+      ],
+      "topic_aliases": [
+        "positioner",
+        "I/P converter",
+        "control valve",
+        "pilot valve",
+        "feedback spring"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "제어밸브는 조절계 출력에 따라 유체 유량을 조절하는 최종제어요소이다.",
+        "실제 밸브 위치가 명령과 다르면 유량 제어 오차, 마찰, 히스테리시스 문제가 생긴다.",
+        "2. I/P converter와 입력 신호",
+        "I/P converter는 전류 신호를 공압 신호로 변환한다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "제어밸브는 조절계 출력에 따라 유체 유량을 조절하는 최종제어요소이다.",
+        "실제 밸브 위치가 명령과 다르면 유량 제어 오차, 마찰, 히스테리시스 문제가 생긴다.",
+        "2. I/P converter와 입력 신호",
+        "I/P converter는 전류 신호를 공압 신호로 변환한다.",
+        "3-15 psi 공압 신호는 밸브 위치 명령으로 사용될 수 있다.",
+        "3. 포지셔너 구성",
+        "instrument signal capsule 또는 다이어프램은 입력 신호를 기계적 힘으로 바꾼다.",
+        "파일럿 밸브 스풀은 공급 공압을 조절하여 액추에이터에 전달한다.",
+        "4. 피드백 동작",
+        "follower arm, take-off arm, feedback spring은 실제 밸브 위치를 되먹임한다.",
+        "입력 힘과 피드백 힘이 불균형이면 파일럿 밸브가 움직여 액추에이터 압력을 조정한다.",
+        "두 힘이 균형을 이루면 파일럿 밸브가 중립이 되고 밸브는 목표 위치에 정지한다.",
+        "5. 문제점과 개선",
+        "마찰, stiction, 공압 누설, 링크 유격, 스프링 불량, I/P drift가 위치 오차를 만든다.",
+        "zero/span 교정, air supply 관리, linkage 점검, smart positioner 진단으로 신뢰성을 높인다."
+      ],
+      "high_score_features": [
+        "제어 신호와 실제 밸브 위치를 비교하여 액추에이터 공압을 조절하는 폐루프 장치임을 설명해야 한다.",
+        "I/P converter는 전류 신호를 공압 신호로 변환하며 3-15 psi는 밸브 위치 명령으로 쓰일 수 있음을 설명해야 한다.",
+        "파일럿 밸브가 공급 공압을 조절하고 액추에이터가 밸브 스템을 이동시킴을 설명해야 한다.",
+        "follower arm, take-off arm, feedback spring 등이 실제 위치를 되먹임함을 설명해야 한다.",
+        "입력 힘과 피드백 힘이 균형이면 밸브가 정지하며 마찰, 누설, 유격, drift가 위치 오차를 만든다는 점을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "Cv topic으로 흐르면 안 된다.",
+        "I/P converter만 설명하면 약하다. 포지셔너의 폐루프 위치 피드백까지 설명해야 한다.",
+        "smart positioner 통신 진단은 보조 내용이며 핵심은 입력 신호, 파일럿 밸브, 액추에이터, 피드백 균형이다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T12:24:55",
+        "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
+    },
+    {
+      "id": "reference_tracking_prefilter_steady_state_error_control_PRINCIPLE_INTERPRETATION_v1",
+      "topic_id": "reference_tracking_prefilter_steady_state_error_control",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "title": "상태피드백 기준입력 추종과 정상상태 오차 보상",
+      "question_examples": [
+        "상태피드백 제어에서 기준입력 추종 시 정상상태 오차가 발생하는 이유와 prefilter, feedforward, 적분 제어에 의한 보상 방법을 설명하시오."
+      ],
+      "topic_aliases": [
+        "reference tracking",
+        "prefilter",
+        "feedforward",
+        "steady-state error",
+        "integral control"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "상태피드백은 극 배치를 통해 과도응답과 안정도를 조정한다.",
+        "그러나 u=-Kx+r만으로는 기준입력과 출력의 정적 이득이 맞지 않아 정상상태 오차가 남을 수 있다.",
+        "2. 정상상태 오차 원인",
+        "극 배치는 transient response를 설계하지만 reference tracking의 steady-state gain을 자동으로 1로 만들지는 않는다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "상태피드백은 극 배치를 통해 과도응답과 안정도를 조정한다.",
+        "그러나 u=-Kx+r만으로는 기준입력과 출력의 정적 이득이 맞지 않아 정상상태 오차가 남을 수 있다.",
+        "2. 정상상태 오차 원인",
+        "극 배치는 transient response를 설계하지만 reference tracking의 steady-state gain을 자동으로 1로 만들지는 않는다.",
+        "참조 입력 주입 방식, 출력행렬, 피드백 이득, 플랜트 모델이 맞지 않으면 y가 r을 정확히 추종하지 못한다.",
+        "3. prefilter와 feedforward",
+        "prefilter F는 기준입력 r을 폐루프에 넣기 전에 전처리하여 reference-to-output 전달함수를 조정한다.",
+        "feedforward 또는 reference gain은 정상상태에서 출력이 기준값과 일치하도록 입력 크기를 보정한다.",
+        "4. 적분 제어",
+        "적분 제어는 오차를 누적하여 steady-state error를 제거한다.",
+        "적분기를 추가하면 차수와 극이 변하므로 안정도, 포화, windup, 과도응답 악화를 고려해야 한다.",
+        "5. 설계 고려사항",
+        "기준입력 추종, 외란 억제, 노이즈 민감도, actuator saturation, 모델 오차를 함께 검토해야 한다.",
+        "K만 설계하지 말고 reference gain, prefilter, integral action의 필요성을 구분해야 한다."
+      ],
+      "high_score_features": [
+        "상태피드백은 주로 폐루프 pole과 과도응답을 조정하지만 기준입력 정상상태 추종을 자동 보장하지 않음을 설명해야 한다.",
+        "참조 입력 주입 방식과 폐루프 정적 이득이 맞지 않으면 step reference에서도 steady-state error가 남을 수 있음을 설명해야 한다.",
+        "prefilter F는 기준입력을 전처리하여 reference-to-output 전달함수를 조정하는 설계 파라미터임을 설명해야 한다.",
+        "정상상태에서 출력이 기준값과 일치하도록 입력 크기 또는 기준 이득을 보정하는 방법임을 설명해야 한다.",
+        "적분 제어는 정상상태 오차 제거에 효과적이지만 안정도 저하, 포화, windup 문제를 함께 고려해야 함을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "일반 feedback 설명으로 쓰면 중복된다.",
+        "pole placement가 steady-state error를 항상 없앤다고 쓰면 틀린다.",
+        "prefilter가 모든 외란과 노이즈를 해결한다고 쓰면 안 된다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T12:24:55",
+        "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
+    },
+    {
+      "id": "thermopile_noncontact_ir_temperature_sensor_COMPARE_SELECTION_v1",
+      "topic_id": "thermopile_noncontact_ir_temperature_sensor",
+      "question_type": "COMPARE_SELECTION",
+      "title": "써모파일 비접촉 적외선 온도센서",
+      "question_examples": [
+        "써모파일의 비접촉 적외선 온도측정 원리와 열전대, RTD 등 접촉식 온도센서와의 차이 및 선정 기준을 설명하시오."
+      ],
+      "topic_aliases": [
+        "thermopile",
+        "IR temperature sensor",
+        "noncontact temperature",
+        "radiation",
+        "emissivity"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "회전체, 이동 물체, 고온 물체, 오염 우려가 있는 대상은 접촉식 센서 설치가 어렵다.",
+        "이 경우 대상이 방사하는 적외선 에너지를 이용한 비접촉 온도측정이 필요하다.",
+        "2. thermopile 원리",
+        "thermopile은 여러 열전대를 직렬 연결하여 작은 열기전력을 합산한다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "회전체, 이동 물체, 고온 물체, 오염 우려가 있는 대상은 접촉식 센서 설치가 어렵다.",
+        "이 경우 대상이 방사하는 적외선 에너지를 이용한 비접촉 온도측정이 필요하다.",
+        "2. thermopile 원리",
+        "thermopile은 여러 열전대를 직렬 연결하여 작은 열기전력을 합산한다.",
+        "적외선 흡수막이 방사 에너지를 흡수하면 hot junction과 cold junction 사이 온도차가 생기고 Seebeck 전압이 발생한다.",
+        "3. 비접촉 측정 특성",
+        "측정 대상과 직접 접촉하지 않고 방사 에너지를 검출한다.",
+        "방사율, 시야각, 거리, 렌즈 오염, 주변 온도, 배경 복사 영향을 받는다.",
+        "4. 접촉식 센서와 비교",
+        "열전대와 RTD는 직접 접촉 측정에 적합하다.",
+        "thermopile은 비접촉 고온·이동체 측정에 유리하지만 방사율 보정과 광학계 관리가 중요하다.",
+        "5. 선정 기준",
+        "온도 범위, 접촉 가능 여부, 응답속도, 표면 방사율, 측정 거리, 주변 복사, 오염 환경, 비용을 고려한다."
+      ],
+      "high_score_features": [
+        "여러 열전대를 직렬 연결하여 Seebeck 전압을 합산하고 감도를 높이는 센서임을 설명해야 한다.",
+        "대상의 적외선 방사 에너지를 흡수해 접점 간 온도차와 전압을 만드는 원리를 설명해야 한다.",
+        "열전대와 RTD는 접촉식, thermopile은 방사 에너지 기반 비접촉식 측정에 적합함을 설명해야 한다.",
+        "방사율, 시야각, 거리, 렌즈 오염, 주변 온도, 배경 복사가 오차 요인임을 설명해야 한다.",
+        "대상 온도, 접촉 가능성, 응답속도, 설치 환경, 방사율 보정 가능성, 비용을 고려해야 함을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "thermopile을 일반 접촉식 열전대로 설명하면 안 된다.",
+        "IR 비접촉 측정에서 방사율과 시야각을 빼면 약하다.",
+        "열전대/RTD와 비교하되 비접촉 IR 측정 원리로 범위를 좁혀야 한다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T12:24:55",
+        "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
+    },
+    {
+      "id": "psd_position_sensitive_detector_optical_sensor_PRINCIPLE_INTERPRETATION_v1",
+      "topic_id": "psd_position_sensitive_detector_optical_sensor",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "title": "PSD 선형 광학 위치검출 센서",
+      "question_examples": [
+        "PSD(Position Sensitive Detector) 선형 광학 센서의 위치 검출 원리와 전류비를 이용한 위치 산출 방법을 설명하시오."
+      ],
+      "topic_aliases": [
+        "PSD",
+        "position sensitive detector",
+        "optical sensor",
+        "current ratio",
+        "position measurement"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "변위, 위치, 진동, 광축 정렬 등을 비접촉 방식으로 측정해야 하는 경우가 있다.",
+        "PSD는 광점의 위치를 연속 전기 신호로 변환하는 위치 검출 센서이다.",
+        "2. 구조와 원리",
+        "PSD 표면에 빛이 입사하면 광전효과로 전하가 생성된다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "변위, 위치, 진동, 광축 정렬 등을 비접촉 방식으로 측정해야 하는 경우가 있다.",
+        "PSD는 광점의 위치를 연속 전기 신호로 변환하는 위치 검출 센서이다.",
+        "2. 구조와 원리",
+        "PSD 표면에 빛이 입사하면 광전효과로 전하가 생성된다.",
+        "생성 전하는 양쪽 전극으로 분배되어 I_A, I_B 전류로 검출된다.",
+        "3. 위치 산출",
+        "두 전극 전류의 비 또는 정규화 차이를 이용해 입사 위치를 계산한다.",
+        "단순 광량이 아니라 전류 분포 비율을 이용한다는 점이 핵심이다.",
+        "4. 장점과 한계",
+        "연속 위치 측정, 빠른 응답, 비접촉 측정이 가능하다.",
+        "광량 변화, 배경광, spot size, 선형성, 온도 drift, 증폭기 offset이 오차 요인이다.",
+        "5. 적용 및 보정",
+        "레이저 변위계, 위치 정렬, 진동 측정, 광학식 위치 제어에 적용된다.",
+        "기준 위치 교정, 광량 안정화, 차광, 온도 보상, offset 보정이 필요하다."
+      ],
+      "high_score_features": [
+        "입사한 빛의 위치를 전기적 전류 신호로 변환하는 연속형 위치검출 광센서임을 설명해야 한다.",
+        "생성 전하가 양쪽 전극으로 분배되어 I_A, I_B 전류가 위치에 따라 달라짐을 설명해야 한다.",
+        "I_A/I_B 또는 정규화 전류차 같은 비율 정보로 광점 위치를 계산함을 설명해야 한다.",
+        "기계적 접촉 없이 위치, 변위, 광축 정렬 등을 빠르게 측정할 수 있음을 설명해야 한다.",
+        "광량 변화, 배경광, spot size, 비선형성, 온도 drift, offset을 고려해야 함을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "단순 포토다이오드 설명으로 축소하면 안 된다.",
+        "위치 산출 핵심은 전류 절대값이 아니라 두 전극 전류의 비율 또는 정규화 차이다.",
+        "제시된 P=I_A/I_B 식은 특정 정의이므로 일반 답안에서는 전류비 기반 위치 산출 원리로 설명해야 한다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T12:24:55",
+        "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
+    },
+    {
+      "id": "wheatstone_bridge_null_balance_measurement_PRINCIPLE_INTERPRETATION_v1",
+      "topic_id": "wheatstone_bridge_null_balance_measurement",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "title": "Wheatstone bridge와 null balance 측정",
+      "question_examples": [
+        "Wheatstone bridge의 평형 조건과 null balance 측정 원리 및 센서 계측에서의 적용 방법을 설명하시오."
+      ],
+      "topic_aliases": [
+        "Wheatstone bridge",
+        "null balance",
+        "bridge balance",
+        "strain gage",
+        "RTD"
+      ],
+      "expected_structure": [
+        "1. 배경",
+        "변형률 게이지, RTD, 압저항 센서 등은 물리량 변화에 따라 작은 저항 변화를 만든다.",
+        "Wheatstone bridge는 작은 임피던스 변화를 전압 불평형 또는 null balance 조건으로 측정하는 회로이다.",
+        "2. 브리지 평형 조건",
+        "네 임피던스가 브리지 형태로 연결되고 중간 검출기 전압이 0이면 평형 상태이다."
+      ],
+      "model_answer_outline": [
+        "1. 배경",
+        "변형률 게이지, RTD, 압저항 센서 등은 물리량 변화에 따라 작은 저항 변화를 만든다.",
+        "Wheatstone bridge는 작은 임피던스 변화를 전압 불평형 또는 null balance 조건으로 측정하는 회로이다.",
+        "2. 브리지 평형 조건",
+        "네 임피던스가 브리지 형태로 연결되고 중간 검출기 전압이 0이면 평형 상태이다.",
+        "평형 조건은 Z1/Z2 = Z3/Z4 또는 Z1 Z4 = Z2 Z3이다.",
+        "3. null balance 원리",
+        "센서 임피던스가 변하면 브리지가 불평형이 되어 검출기 전압이 발생한다.",
+        "가변 임피던스 또는 피드백으로 검출기 전압을 0으로 만들고 그 조정값으로 미지 값을 구한다.",
+        "4. 센서 계측 적용",
+        "strain gage, RTD, 압저항 센서 등의 작은 저항 변화 측정에 사용된다.",
+        "quarter, half, full bridge 구성으로 감도, 온도보상, 선형성, 노이즈 특성을 개선할 수 있다.",
+        "5. 오차와 보상",
+        "리드선 저항, 온도 변화, 접촉저항, 전원 안정도, 검출기 offset, 브리지 비선형성이 오차를 만든다.",
+        "3선식/4선식 보상, dummy gauge, 차동 증폭기, 안정한 excitation, calibration을 적용한다."
+      ],
+      "high_score_features": [
+        "Z1/Z2 = Z3/Z4 또는 Z1 Z4 = Z2 Z3일 때 검출기 전압이 0이 되는 평형 상태임을 설명해야 한다.",
+        "브리지 불평형을 가변 임피던스나 피드백으로 조정하여 검출기 출력을 0으로 만드는 방식임을 설명해야 한다.",
+        "strain gage, RTD, 압저항 센서 등 작은 저항 변화를 측정할 수 있음을 설명해야 한다.",
+        "quarter, half, full bridge 구성에 따라 감도, 온도보상, 선형성, 노이즈 특성이 달라짐을 설명해야 한다.",
+        "리드선 저항, 온도 변화, 접촉저항, 전원 변동, offset을 고려하고 보상해야 함을 설명해야 한다."
+      ],
+      "low_score_patterns": [
+        "Z1과 Z2가 항상 같아야 한다고 일반화하면 안 된다.",
+        "null balance는 고정저항을 센서와 같게 만드는 것이 아니라 검출기 출력을 0으로 만드는 조정 방식이다.",
+        "strain gage 전용 topic으로 좁히지 말고 계측 브리지 일반 원리로 유지해야 한다."
+      ],
+      "field_connection_points": [
+        "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+        "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+        "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+      ],
+      "revision_notes": [
+        "created_at=2026-06-30T12:24:55",
+        "imported_from=wordpress_docs/review_designs/batch_004_design_5topics.md",
+        "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+      ]
     }
   ]
 }

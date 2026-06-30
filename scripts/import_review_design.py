@@ -40,6 +40,76 @@ META = {
             "토크 방정식"
         ],
     },
+    "control_valve_positioner_ip_converter": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "Control valve positioner와 I/P converter",
+        "questions": [
+            "Control valve positioner와 I/P converter의 동작 원리 및 피드백에 의한 밸브 위치 제어 과정을 설명하시오."
+        ],
+        "aliases": [
+            "positioner",
+            "I/P converter",
+            "control valve",
+            "pilot valve",
+            "feedback spring",
+        ],
+    },
+    "reference_tracking_prefilter_steady_state_error_control": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "상태피드백 기준입력 추종과 정상상태 오차 보상",
+        "questions": [
+            "상태피드백 제어에서 기준입력 추종 시 정상상태 오차가 발생하는 이유와 prefilter, feedforward, 적분 제어에 의한 보상 방법을 설명하시오."
+        ],
+        "aliases": [
+            "reference tracking",
+            "prefilter",
+            "feedforward",
+            "steady-state error",
+            "integral control",
+        ],
+    },
+    "thermopile_noncontact_ir_temperature_sensor": {
+        "question_type": "COMPARE_SELECTION",
+        "title": "써모파일 비접촉 적외선 온도센서",
+        "questions": [
+            "써모파일의 비접촉 적외선 온도측정 원리와 열전대, RTD 등 접촉식 온도센서와의 차이 및 선정 기준을 설명하시오."
+        ],
+        "aliases": [
+            "thermopile",
+            "IR temperature sensor",
+            "noncontact temperature",
+            "radiation",
+            "emissivity",
+        ],
+    },
+    "psd_position_sensitive_detector_optical_sensor": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "PSD 선형 광학 위치검출 센서",
+        "questions": [
+            "PSD(Position Sensitive Detector) 선형 광학 센서의 위치 검출 원리와 전류비를 이용한 위치 산출 방법을 설명하시오."
+        ],
+        "aliases": [
+            "PSD",
+            "position sensitive detector",
+            "optical sensor",
+            "current ratio",
+            "position measurement",
+        ],
+    },
+    "wheatstone_bridge_null_balance_measurement": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "Wheatstone bridge와 null balance 측정",
+        "questions": [
+            "Wheatstone bridge의 평형 조건과 null balance 측정 원리 및 센서 계측에서의 적용 방법을 설명하시오."
+        ],
+        "aliases": [
+            "Wheatstone bridge",
+            "null balance",
+            "bridge balance",
+            "strain gage",
+            "RTD",
+        ],
+    },
 }
 
 STOP = {"설명", "한다", "해야", "있다", "있는", "통해", "경우", "고려", "주요", "핵심"}
