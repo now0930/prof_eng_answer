@@ -1,58 +1,44 @@
-import json
 import os
 
 def fix_mojibake(text):
-    """다중으로 잘못 인코딩된 문자열을 원래의 UTF-8 한글로 복구합니다."""
-    if not isinstance(text, str):
-        return text
-    
-    fixed_text = text
-    # 다중으로 깨졌을 가능성을 고려해 최대 10번 반복 복구 시도
+    """문자열이 더 이상 변하지 않거나 에러가 발생할 때까지 반복해서 디코딩을 시도합니다."""
+    current_text = text
+    # 중첩된 깨짐(ÃƒÂƒ...)을 고려해 최대 10번 반복
     for _ in range(10):
         try:
-            # 깨진 문자를 1바이트(latin1)로 다시 변환 후 UTF-8로 디코딩
-            new_text = fixed_text.encode('latin1').decode('utf-8')
-            if new_text == fixed_text:
+            # 1바이트 문자열을 다시 바이트로 변환 후 UTF-8로 해석
+            new_text = current_text.encode('latin1').decode('utf-8')
+            if new_text == current_text:
                 break
-            fixed_text = new_text
+            current_text = new_text
         except (UnicodeEncodeError, UnicodeDecodeError):
-            # 더 이상 복구할 수 없거나 정상 문자열에 도달하면 중단
+            # 복구가 완료되어 한글 등 2바이트 이상 문자가 정상 등장하면 latin1 인코딩 시 에러 발생 -> 루프 종료
             break
             
-    return fixed_text
-
-def process_data(data):
-    """JSON 구조를 순회하며 문자열 값만 찾아 복구 함수를 적용합니다."""
-    if isinstance(data, dict):
-        return {k: process_data(v) for k, v in data.items()}
-    elif isinstance(data, list):
-        return [process_data(item) for item in data]
-    elif isinstance(data, str):
-        return fix_mojibake(data)
-    else:
-        return data
+    return current_text
 
 def main():
-    input_file = "rubrics/model_answers/industrial_instrumentation_control.json"
-    output_file = "rubrics/model_answers/industrial_instrumentation_control_fixed.json"
+    input_file = "./scripts/import_review_design.py"
+    output_file = "./scripts/import_review_design_fixed.py"
 
-    print(f"[{input_file}] 파일을 읽어 인코딩 복구를 시도합니다...")
+    print(f"[{input_file}] 파일을 읽어 다중 인코딩 복구를 시작합니다...")
 
     try:
         with open(input_file, 'r', encoding='utf-8') as f:
-            data = json.load(f)
+            content = f.read()
             
-        fixed_data = process_data(data)
+        fixed_content = fix_mojibake(content)
         
         with open(output_file, 'w', encoding='utf-8') as f:
-            json.dump(fixed_data, f, ensure_ascii=False, indent=2)
+            f.write(fixed_content)
             
-        print(f"완료되었습니다. 복구된 파일이 [{output_file}]로 저장되었습니다.")
+        print(f"완료되었습니다! 복구된 파이썬 스크립트가 [{output_file}]로 저장되었습니다.")
+        print("파일을 열어 딕셔너리 내부의 한글(예: DC-DC 쵸퍼 등)이 정상적으로 보이는지 확인하세요.")
         
     except FileNotFoundError:
-        print("입력 파일을 찾을 수 없습니다. 경로를 확인해 주세요.")
+        print(f"오류: {input_file} 파일을 찾을 수 없습니다. 경로를 확인해 주세요.")
     except Exception as e:
-        print(f"오류가 발생했습니다: {e}")
+        print(f"예기치 않은 오류가 발생했습니다: {e}")
 
 if __name__ == "__main__":
     main()
