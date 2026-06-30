@@ -262,6 +262,93 @@ META = {
             "노이즈 접지"
         ],
     },
+    "measurement_repeatability_reproducibility": {
+        "question_type": "COMPARE_SELECTION",
+        "title": "측정 반복성과 재현성 비교",
+        "questions": [
+            "측정에서 반복성(Repeatability)과 재현성(Reproducibility)을 비교하고, 품질관리 및 계측 시스템 평가에서의 의미를 설명하시오."
+        ],
+        "aliases": [
+            "반복성",
+            "재현성",
+            "repeatability",
+            "reproducibility",
+            "Gage R&R",
+            "측정 시스템 분석",
+            "측정 일관성",
+            "measurement variation"
+        ],
+    },
+    "energy_harvesting_wireless_sensor_power": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "에너지 하베스팅과 무선 센서 전원",
+        "questions": [
+            "에너지 하베스팅(Energy Harvesting) 기술의 원리, 에너지 소스, 응용 분야 및 적용 시 고려사항을 설명하시오."
+        ],
+        "aliases": [
+            "에너지 하베스팅",
+            "Energy Harvesting",
+            "무선 센서 전원",
+            "self powered sensor",
+            "태양광 하베스팅",
+            "열전 발전",
+            "진동 에너지",
+            "RF energy harvesting"
+        ],
+    },
+    "gpib_scpi_instrumentation_communication": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "GPIB와 SCPI 계측 장비 통신",
+        "questions": [
+            "GPIB와 SCPI의 개념, 구성, 동작 방식 및 계측 장비 자동화에서의 활용과 한계를 설명하시오."
+        ],
+        "aliases": [
+            "GPIB",
+            "SCPI",
+            "IEEE 488",
+            "계측 장비 통신",
+            "instrumentation communication",
+            "Talker",
+            "Listener",
+            "Controller",
+            "자동시험장비"
+        ],
+    },
+    "pressure_gauge_accessories_installation": {
+        "question_type": "COMPARE_SELECTION",
+        "title": "공정용 압력계 액세서리와 설치 기준",
+        "questions": [
+            "공정용 압력계 설치 시 사용하는 주요 액세서리의 종류, 기능, 선정 기준 및 설치 시 주의사항을 설명하시오."
+        ],
+        "aliases": [
+            "압력계 액세서리",
+            "pressure gauge accessory",
+            "snubber",
+            "pressure dampener",
+            "overpressure protector",
+            "isolating valve",
+            "siphon",
+            "diaphragm seal",
+            "chemical seal"
+        ],
+    },
+    "control_valve_actuator_types_selection": {
+        "question_type": "COMPARE_SELECTION",
+        "title": "밸브 액추에이터 종류와 선정 기준",
+        "questions": [
+            "밸브 액추에이터의 종류와 특징을 비교하고, 전기식, 공압식, 유압식, 수동식 액추에이터 선정 시 고려사항을 설명하시오."
+        ],
+        "aliases": [
+            "밸브 액추에이터",
+            "valve actuator",
+            "electric actuator",
+            "pneumatic actuator",
+            "hydraulic actuator",
+            "manual actuator",
+            "fail open",
+            "fail close"
+        ],
+    },
 }
 
 STOP = {"설명", "한다", "해야", "있다", "있는", "통해", "경우", "고려", "주요", "핵심"}

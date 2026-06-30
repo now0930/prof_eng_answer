@@ -4308,6 +4308,638 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "measurement_repeatability_reproducibility",
+      "name": "측정 반복성과 재현성 비교",
+      "aliases": [
+        "반복성",
+        "재현성",
+        "repeatability",
+        "reproducibility",
+        "Gage R&R",
+        "측정 시스템 분석",
+        "측정 일관성",
+        "measurement variation"
+      ],
+      "anchors": [
+        {
+          "id": "measurement_repeatability_reproducibility_anchor_1",
+          "name": "반복성의 정의",
+          "expected": "반복성은 동일 장비, 동일 작업자, 동일 시료, 동일 조건에서 반복 측정한 결과의 일치도임을 설명해야 한다.",
+          "core_terms": [
+            "반복성의",
+            "정의",
+            "반복성은",
+            "동일",
+            "장비"
+          ],
+          "support_terms": [
+            "반복성은",
+            "동일",
+            "장비",
+            "작업자",
+            "시료",
+            "조건에서",
+            "반복",
+            "측정한"
+          ]
+        },
+        {
+          "id": "measurement_repeatability_reproducibility_anchor_2",
+          "name": "재현성의 정의",
+          "expected": "재현성은 작업자, 장비, 장소, 시간 등 조건이 달라져도 측정 결과가 일관되는 정도임을 설명해야 한다.",
+          "core_terms": [
+            "재현성의",
+            "정의",
+            "재현성은",
+            "작업자",
+            "장비"
+          ],
+          "support_terms": [
+            "재현성은",
+            "작업자",
+            "장비",
+            "장소",
+            "시간",
+            "조건이",
+            "달라져도",
+            "측정"
+          ]
+        },
+        {
+          "id": "measurement_repeatability_reproducibility_anchor_3",
+          "name": "반복성과 재현성의 차이",
+          "expected": "반복성은 동일 조건 내 변동, 재현성은 조건 변화에 따른 변동을 평가한다는 차이를 설명해야 한다.",
+          "core_terms": [
+            "반복성과",
+            "재현성의",
+            "차이",
+            "반복성은",
+            "동일"
+          ],
+          "support_terms": [
+            "반복성은",
+            "동일",
+            "조건",
+            "변동",
+            "재현성은",
+            "변화에",
+            "따른",
+            "변동을"
+          ]
+        },
+        {
+          "id": "measurement_repeatability_reproducibility_anchor_4",
+          "name": "계측 품질 평가 활용",
+          "expected": "반복성·재현성은 품질관리, 측정 시스템 분석, 교정 절차 검증, 시험실 간 비교에 활용됨을 설명해야 한다.",
+          "core_terms": [
+            "계측",
+            "품질",
+            "평가",
+            "활용",
+            "반복성·재현성은"
+          ],
+          "support_terms": [
+            "반복성·재현성은",
+            "품질관리",
+            "측정",
+            "시스템",
+            "분석",
+            "교정",
+            "절차",
+            "검증"
+          ]
+        },
+        {
+          "id": "measurement_repeatability_reproducibility_anchor_5",
+          "name": "개선 방법",
+          "expected": "장비 분해능, 교정, 환경 안정화, 표준작업서, 작업자 교육, 측정 절차 표준화를 통해 개선할 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "개선",
+            "방법",
+            "장비",
+            "분해능",
+            "교정"
+          ],
+          "support_terms": [
+            "장비",
+            "분해능",
+            "교정",
+            "환경",
+            "안정화",
+            "표준작업서",
+            "작업자",
+            "교육"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "energy_harvesting_wireless_sensor_power",
+      "name": "에너지 하베스팅과 무선 센서 전원",
+      "aliases": [
+        "에너지 하베스팅",
+        "Energy Harvesting",
+        "무선 센서 전원",
+        "self powered sensor",
+        "태양광 하베스팅",
+        "열전 발전",
+        "진동 에너지",
+        "RF energy harvesting"
+      ],
+      "anchors": [
+        {
+          "id": "energy_harvesting_wireless_sensor_power_anchor_1",
+          "name": "에너지 하베스팅의 정의",
+          "expected": "주변의 빛, 열, 진동, RF 등 미소 에너지를 수집하여 전기 에너지로 변환·저장하는 기술임을 설명해야 한다.",
+          "core_terms": [
+            "에너지",
+            "하베스팅의",
+            "정의",
+            "주변의",
+            "진동"
+          ],
+          "support_terms": [
+            "주변의",
+            "진동",
+            "RF",
+            "미소",
+            "에너지를",
+            "수집하여",
+            "전기",
+            "에너지로"
+          ]
+        },
+        {
+          "id": "energy_harvesting_wireless_sensor_power_anchor_2",
+          "name": "전력 변환과 저장",
+          "expected": "변환 소자, 전력관리회로, 저장장치, DC-DC 변환을 통해 부하에 필요한 전원을 공급함을 설명해야 한다.",
+          "core_terms": [
+            "전력",
+            "변환과",
+            "저장",
+            "변환",
+            "소자"
+          ],
+          "support_terms": [
+            "변환",
+            "소자",
+            "전력관리회로",
+            "저장장치",
+            "DC-DC",
+            "변환을",
+            "부하에",
+            "필요한"
+          ]
+        },
+        {
+          "id": "energy_harvesting_wireless_sensor_power_anchor_3",
+          "name": "주요 에너지 소스",
+          "expected": "태양광, 열전, 진동·운동, RF 에너지 등 대표 소스와 변환 방식을 설명해야 한다.",
+          "core_terms": [
+            "에너지",
+            "소스",
+            "태양광",
+            "열전",
+            "진동·운동"
+          ],
+          "support_terms": [
+            "태양광",
+            "열전",
+            "진동·운동",
+            "RF",
+            "에너지",
+            "대표",
+            "소스와",
+            "변환"
+          ]
+        },
+        {
+          "id": "energy_harvesting_wireless_sensor_power_anchor_4",
+          "name": "무선 센서 응용",
+          "expected": "배터리 교체가 어려운 무선 센서, 원격 계측, 설비 상태감시, 구조물 감시에 유용함을 설명해야 한다.",
+          "core_terms": [
+            "무선",
+            "센서",
+            "응용",
+            "배터리",
+            "교체가"
+          ],
+          "support_terms": [
+            "배터리",
+            "교체가",
+            "어려운",
+            "무선",
+            "센서",
+            "원격",
+            "계측",
+            "설비"
+          ]
+        },
+        {
+          "id": "energy_harvesting_wireless_sensor_power_anchor_5",
+          "name": "적용 한계",
+          "expected": "에너지 밀도, 환경 변동, 부하 소비전력, duty cycle, 저장 용량, 비용을 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "적용",
+            "한계",
+            "에너지",
+            "밀도",
+            "환경"
+          ],
+          "support_terms": [
+            "에너지",
+            "밀도",
+            "환경",
+            "변동",
+            "부하",
+            "소비전력",
+            "duty",
+            "cycle"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "gpib_scpi_instrumentation_communication",
+      "name": "GPIB와 SCPI 계측 장비 통신",
+      "aliases": [
+        "GPIB",
+        "SCPI",
+        "IEEE 488",
+        "계측 장비 통신",
+        "instrumentation communication",
+        "Talker",
+        "Listener",
+        "Controller",
+        "자동시험장비"
+      ],
+      "anchors": [
+        {
+          "id": "gpib_scpi_instrumentation_communication_anchor_1",
+          "name": "GPIB의 정의",
+          "expected": "GPIB는 IEEE 488 기반의 계측 장비용 디지털 병렬 통신 인터페이스임을 설명해야 한다.",
+          "core_terms": [
+            "GPIB의",
+            "정의",
+            "GPIB는",
+            "IEEE",
+            "488"
+          ],
+          "support_terms": [
+            "GPIB는",
+            "IEEE",
+            "488",
+            "기반의",
+            "계측",
+            "장비용",
+            "디지털",
+            "병렬"
+          ]
+        },
+        {
+          "id": "gpib_scpi_instrumentation_communication_anchor_2",
+          "name": "GPIB 구성과 488 기반의 계측 장비용 디지털 병렬 통신 인터페이스임을 설명해야 한다.",
+          "expected": "GPIB 구성과 488 기반의 계측 장비용 디지털 병렬 통신 인터페이스임을 설명해야 한다.을 설명해야 한다.",
+          "core_terms": [
+            "GPIB",
+            "구성과",
+            "488",
+            "기반의",
+            "계측"
+          ],
+          "support_terms": [
+            "GPIB",
+            "구성과",
+            "488",
+            "기반의",
+            "계측",
+            "장비용",
+            "디지털",
+            "병렬"
+          ]
+        },
+        {
+          "id": "gpib_scpi_instrumentation_communication_anchor_3",
+          "name": "GPIB 구성과 역할",
+          "expected": "Controller, Talker, Listener, Device의 역할과 버스 구조 연결을 설명해야 한다.",
+          "core_terms": [
+            "GPIB",
+            "구성과",
+            "역할",
+            "Controller",
+            "Talker"
+          ],
+          "support_terms": [
+            "Controller",
+            "Talker",
+            "Listener",
+            "Device의",
+            "역할과",
+            "버스",
+            "구조",
+            "연결을"
+          ]
+        },
+        {
+          "id": "gpib_scpi_instrumentation_communication_anchor_4",
+          "name": "SCPI의 정의",
+          "expected": "SCPI는 프로그래밍 가능한 계측 장비를 제어하기 위한 표준 문자 기반 명령어 체계임을 설명해야 한다.",
+          "core_terms": [
+            "SCPI의",
+            "정의",
+            "SCPI는",
+            "프로그래밍",
+            "가능한"
+          ],
+          "support_terms": [
+            "SCPI는",
+            "프로그래밍",
+            "가능한",
+            "계측",
+            "장비를",
+            "제어하기",
+            "위한",
+            "표준"
+          ]
+        },
+        {
+          "id": "gpib_scpi_instrumentation_communication_anchor_5",
+          "name": "인터페이스와 명령어의 구분",
+          "expected": "GPIB는 통신 인터페이스이고 SCPI는 장비 제어 명령어 체계이며, SCPI는 GPIB 외에도 RS-232, USB, LAN에서 사용할 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "인터페이스와",
+            "명령어의",
+            "구분",
+            "GPIB는",
+            "통신"
+          ],
+          "support_terms": [
+            "GPIB는",
+            "통신",
+            "인터페이스이고",
+            "SCPI는",
+            "장비",
+            "제어",
+            "명령어",
+            "체계이며"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "pressure_gauge_accessories_installation",
+      "name": "공정용 압력계 액세서리와 설치 기준",
+      "aliases": [
+        "압력계 액세서리",
+        "pressure gauge accessory",
+        "snubber",
+        "pressure dampener",
+        "overpressure protector",
+        "isolating valve",
+        "siphon",
+        "diaphragm seal",
+        "chemical seal"
+      ],
+      "anchors": [
+        {
+          "id": "pressure_gauge_accessories_installation_anchor_1",
+          "name": "압력계 액세서리의 목적",
+          "expected": "압력계 액세서리는 압력계를 공정 조건으로부터 보호하고 유지보수성, 안전성, 측정 안정성을 높이기 위해 사용됨을 설명해야 한다.",
+          "core_terms": [
+            "압력계",
+            "액세서리의",
+            "목적",
+            "액세서리는",
+            "압력계를"
+          ],
+          "support_terms": [
+            "압력계",
+            "액세서리는",
+            "압력계를",
+            "공정",
+            "조건으로부터",
+            "보호하고",
+            "유지보수성",
+            "안전성"
+          ]
+        },
+        {
+          "id": "pressure_gauge_accessories_installation_anchor_2",
+          "name": "차단 밸브와 유지보수",
+          "expected": "아이솔레이팅 밸브, 블록 밸브, 벤트 밸브는 압력계를 공정에서 분리하고 교정·교체·점검을 가능하게 함을 설명해야 한다.",
+          "core_terms": [
+            "차단",
+            "밸브와",
+            "유지보수",
+            "아이솔레이팅",
+            "밸브"
+          ],
+          "support_terms": [
+            "아이솔레이팅",
+            "밸브",
+            "블록",
+            "벤트",
+            "밸브는",
+            "압력계를",
+            "공정에서",
+            "분리하고"
+          ]
+        },
+        {
+          "id": "pressure_gauge_accessories_installation_anchor_3",
+          "name": "맥동·진동·과압 보호",
+          "expected": "스누버, 댐프너, 과압 보호기, 압력 리미터가 맥동, 진동, 과압으로부터 압력계를 보호함을 설명해야 한다.",
+          "core_terms": [
+            "맥동·진동·과압",
+            "보호",
+            "스누버",
+            "댐프너",
+            "과압"
+          ],
+          "support_terms": [
+            "스누버",
+            "댐프너",
+            "과압",
+            "보호기",
+            "압력",
+            "리미터가",
+            "맥동",
+            "진동"
+          ]
+        },
+        {
+          "id": "pressure_gauge_accessories_installation_anchor_4",
+          "name": "고온·부식성 유체 보호",
+          "expected": "사이펀은 고온 증기 영향을 줄이고, 다이아프램 씰은 부식성·점성·오염 유체를 압력계와 격리함을 설명해야 한다.",
+          "core_terms": [
+            "고온·부식성",
+            "유체",
+            "보호",
+            "사이펀은",
+            "고온"
+          ],
+          "support_terms": [
+            "사이펀은",
+            "고온",
+            "증기",
+            "영향을",
+            "줄이고",
+            "다이아프램",
+            "씰은",
+            "부식성·점성·오염"
+          ]
+        },
+        {
+          "id": "pressure_gauge_accessories_installation_anchor_5",
+          "name": "선정 기준",
+          "expected": "압력, 온도, 유체 성상, 맥동, 진동, 유지보수성, 누설 위험, 응답 지연, 비용을 고려하여 선정해야 함을 설명해야 한다.",
+          "core_terms": [
+            "선정",
+            "기준",
+            "압력",
+            "온도",
+            "유체"
+          ],
+          "support_terms": [
+            "압력",
+            "온도",
+            "유체",
+            "성상",
+            "맥동",
+            "진동",
+            "유지보수성",
+            "누설"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "control_valve_actuator_types_selection",
+      "name": "밸브 액추에이터 종류와 선정 기준",
+      "aliases": [
+        "밸브 액추에이터",
+        "valve actuator",
+        "electric actuator",
+        "pneumatic actuator",
+        "hydraulic actuator",
+        "manual actuator",
+        "fail open",
+        "fail close"
+      ],
+      "anchors": [
+        {
+          "id": "control_valve_actuator_types_selection_anchor_1",
+          "name": "밸브 액추에이터의 정의",
+          "expected": "밸브 액추에이터는 밸브를 개폐하거나 위치를 조절하기 위해 동력을 제공하는 구동장치임을 설명해야 한다.",
+          "core_terms": [
+            "밸브",
+            "액추에이터의",
+            "정의",
+            "액추에이터는",
+            "밸브를"
+          ],
+          "support_terms": [
+            "밸브",
+            "액추에이터는",
+            "밸브를",
+            "개폐하거나",
+            "위치를",
+            "조절하기",
+            "위해",
+            "동력을"
+          ]
+        },
+        {
+          "id": "control_valve_actuator_types_selection_anchor_2",
+          "name": "전기식 액추에이터",
+          "expected": "전기식은 전동기를 이용하며 원격 제어와 정밀 위치 제어에 유리하지만 전원, 방폭, fail-safe를 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "전기식",
+            "액추에이터",
+            "전기식은",
+            "전동기를",
+            "이용하며"
+          ],
+          "support_terms": [
+            "전기식은",
+            "전동기를",
+            "이용하며",
+            "원격",
+            "제어와",
+            "정밀",
+            "위치",
+            "제어에"
+          ]
+        },
+        {
+          "id": "control_valve_actuator_types_selection_anchor_3",
+          "name": "공압식 액추에이터",
+          "expected": "공압식은 압축공기를 이용하며 응답이 빠르고 방폭 환경에 유리하지만 air supply와 fail action을 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "공압식",
+            "액추에이터",
+            "공압식은",
+            "압축공기를",
+            "이용하며"
+          ],
+          "support_terms": [
+            "공압식은",
+            "압축공기를",
+            "이용하며",
+            "응답이",
+            "빠르고",
+            "방폭",
+            "환경에",
+            "유리하지만"
+          ]
+        },
+        {
+          "id": "control_valve_actuator_types_selection_anchor_4",
+          "name": "유압식 및 수동식",
+          "expected": "유압식은 큰 토크가 필요한 대형·고압 밸브에 적합하고, 수동식은 단순하지만 자동 제어에는 한계가 있음을 설명해야 한다.",
+          "core_terms": [
+            "유압식",
+            "수동식",
+            "유압식은",
+            "토크가",
+            "필요한"
+          ],
+          "support_terms": [
+            "유압식은",
+            "토크가",
+            "필요한",
+            "대형·고압",
+            "밸브에",
+            "적합하고",
+            "수동식은",
+            "단순하지만"
+          ]
+        },
+        {
+          "id": "control_valve_actuator_types_selection_anchor_5",
+          "name": "선정 기준",
+          "expected": "요구 토크, 밸브 크기, 차압, 응답속도, 제어 정밀도, 동력원, 방폭, 안전 동작, 유지보수, 비용을 종합적으로 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "선정",
+            "기준",
+            "요구",
+            "토크",
+            "밸브"
+          ],
+          "support_terms": [
+            "요구",
+            "토크",
+            "밸브",
+            "크기",
+            "차압",
+            "응답속도",
+            "제어",
+            "정밀도"
+          ]
+        }
+      ]
     }
   ]
 }
