@@ -1,0 +1,162 @@
+#!/usr/bin/env python3
+import json
+import re
+import sys
+from datetime import datetime
+from pathlib import Path
+
+ROOT = Path(".").resolve()
+MODEL_BANK = ROOT / "rubrics/model_answers/industrial_instrumentation_control.json"
+FACT_BANK = ROOT / "rubrics/fact_anchors/industrial_instrumentation_control.json"
+
+META = {
+    "dc_dc_chopper_buck_converter": {
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "title": "DC-DC 초퍼와 Buck/Boost 컨버터의 동작 원리",
+        "questions": [
+            "DC-DC 초퍼의 동작 원리와 Buck/Boost 컨버터에서 PWM 듀티비가 출력전압에 미치는 영향을 설명하시오."
+        ],
+        "aliases": ["DC-DC 초퍼", "Chopper", "Buck 컨버터", "Boost 컨버터", "PWM 듀티비"],
+    },
+    "power_semiconductor_switching_device_characteristics": {
+        "question_type": "COMPARE_SELECTION",
+        "title": "전력반도체 스위칭 소자의 특성과 선정 기준",
+        "questions": [
+            "전력반도체 스위칭 소자의 주요 특성과 선정 시 고려사항을 설명하시오."
+        ],
+        "aliases": ["전력반도체 소자", "스위칭 소자", "다이오드 역회복", "SCR", "MOSFET", "IGBT", "SOA"],
+    },
+}
+
+STOP = {"설명", "한다", "해야", "있다", "있는", "통해", "경우", "고려", "주요", "핵심"}
+
+def grab_section(md, topic_id):
+    m = re.search(rf"\n##\s+\d+\.\s+{re.escape(topic_id)}\n(.*?)(?=\n---\n|\Z)", md, re.S)
+    return m.group(1).strip() if m else ""
+
+def grab_sub(sec, title):
+    m = re.search(rf"\n###\s+{re.escape(title)}\n(.*?)(?=\n###\s+|\Z)", "\n" + sec, re.S)
+    return m.group(1).strip() if m else ""
+
+def clean_line(s):
+    return re.sub(r"\s+", " ", s.strip(" -\t")).strip()
+
+def parse_outline(sec):
+    txt = grab_sub(sec, "Model Answer 핵심 구조")
+    out = []
+    for line in txt.splitlines():
+        s = clean_line(line)
+        if s:
+            out.append(s)
+    return out[:20]
+
+def parse_risk(sec):
+    txt = grab_sub(sec, "risk")
+    return [clean_line(x) for x in txt.splitlines() if clean_line(x)][:8]
+
+def parse_anchors(sec, topic_id):
+    txt = grab_sub(sec, "Fact Anchor 후보")
+    anchors = []
+    cur = None
+    for line in txt.splitlines():
+        s = clean_line(line)
+        m = re.match(r"^(\d+)\.\s*(.+)", s)
+        if m:
+            cur = {"name": m.group(2), "expected": ""}
+            anchors.append(cur)
+        elif cur and s:
+            cur["expected"] = s
+    result = []
+    for i, a in enumerate(anchors[:5], 1):
+        expected = a["expected"] or f"{a['name']}을 설명해야 한다."
+        result.append({
+            "id": f"{topic_id}_anchor_{i}",
+            "name": a["name"],
+            "expected": expected,
+            "core_terms": terms(a["name"] + " " + expected, 5),
+            "support_terms": terms(expected, 8),
+        })
+    return result
+
+def terms(text, n):
+    words = re.findall(r"[A-Za-z0-9가-힣·/-]{2,}", text)
+    out = []
+    for w in words:
+        if w in STOP:
+            continue
+        if w not in out:
+            out.append(w)
+    return out[:n] or ["핵심용어"]
+
+def upsert_model(entry):
+    data = json.loads(MODEL_BANK.read_text(encoding="utf-8"))
+    items = data["answers"] if isinstance(data, dict) else data
+    items[:] = [x for x in items if x.get("topic_id") != entry["topic_id"]]
+    items.append(entry)
+    MODEL_BANK.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print("model upserted:", entry["id"])
+
+def upsert_fact(entry):
+    data = json.loads(FACT_BANK.read_text(encoding="utf-8"))
+    items = data["topics"] if isinstance(data, dict) else data
+    items[:] = [x for x in items if x.get("topic_id") != entry["topic_id"]]
+    items.append(entry)
+    FACT_BANK.write_text(json.dumps(data, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+    print("fact upserted:", entry["topic_id"])
+
+def build(md, topic_id):
+    sec = grab_section(md, topic_id)
+    if not sec:
+        print("skip, section not found:", topic_id)
+        return
+
+    meta = META[topic_id]
+    qtype = meta["question_type"]
+    outline = parse_outline(sec)
+    anchors = parse_anchors(sec, topic_id)
+    risk = parse_risk(sec)
+    now = datetime.now().isoformat(timespec="seconds")
+
+    model = {
+        "id": f"{topic_id}_{qtype}_v1",
+        "topic_id": topic_id,
+        "question_type": qtype,
+        "title": meta["title"],
+        "question_examples": meta["questions"],
+        "topic_aliases": meta["aliases"],
+        "expected_structure": outline[:5],
+        "model_answer_outline": outline,
+        "high_score_features": [a["expected"] for a in anchors],
+        "low_score_patterns": risk or ["핵심 원리와 선정 기준 없이 용어만 나열한다."],
+        "field_connection_points": [
+            "현장 적용 시 정격, 손실, 발열, 파형, 보호회로를 함께 검토한다.",
+            "측정 시 전압 파형과 전류 파형을 함께 확인한다.",
+            "설계 변경 시 효율, 신뢰성, 비용, 유지보수성을 함께 판단한다."
+        ],
+        "revision_notes": [
+            f"created_at={now}",
+            f"imported_from={sys.argv[1]}",
+            "review design markdown에서 Model Answer와 Fact Anchor를 생성했다."
+        ]
+    }
+
+    fact = {
+        "topic_id": topic_id,
+        "name": meta["title"],
+        "aliases": meta["aliases"],
+        "anchors": anchors,
+    }
+
+    upsert_model(model)
+    upsert_fact(fact)
+
+def main():
+    if len(sys.argv) != 2:
+        raise SystemExit("usage: import_review_design.py <design.md>")
+    p = Path(sys.argv[1])
+    md = p.read_text(encoding="utf-8")
+    for topic_id in META:
+        build(md, topic_id)
+
+if __name__ == "__main__":
+    main()

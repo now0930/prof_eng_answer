@@ -2189,6 +2189,254 @@
           ]
         }
       ]
+    },
+    {
+      "topic_id": "dc_dc_chopper_buck_converter",
+      "name": "DC-DC 초퍼와 Buck/Boost 컨버터의 동작 원리",
+      "aliases": [
+        "DC-DC 초퍼",
+        "Chopper",
+        "Buck 컨버터",
+        "Boost 컨버터",
+        "PWM 듀티비"
+      ],
+      "anchors": [
+        {
+          "id": "dc_dc_chopper_buck_converter_anchor_1",
+          "name": "DC-DC 초퍼의 정의",
+          "expected": "DC 입력을 스위칭하여 원하는 평균 DC 출력전압으로 변환하는 장치임을 설명해야 한다.",
+          "core_terms": [
+            "DC-DC",
+            "초퍼의",
+            "정의",
+            "DC",
+            "입력을"
+          ],
+          "support_terms": [
+            "DC",
+            "입력을",
+            "스위칭하여",
+            "원하는",
+            "평균",
+            "출력전압으로",
+            "변환하는",
+            "장치임을"
+          ]
+        },
+        {
+          "id": "dc_dc_chopper_buck_converter_anchor_2",
+          "name": "PWM 듀티비와 평균전압",
+          "expected": "PWM 듀티비가 ON 시간 비율을 의미하며 평균 출력전압 제어의 핵심 변수임을 설명해야 한다.",
+          "core_terms": [
+            "PWM",
+            "듀티비와",
+            "평균전압",
+            "듀티비가",
+            "ON"
+          ],
+          "support_terms": [
+            "PWM",
+            "듀티비가",
+            "ON",
+            "시간",
+            "비율을",
+            "의미하며",
+            "평균",
+            "출력전압"
+          ]
+        },
+        {
+          "id": "dc_dc_chopper_buck_converter_anchor_3",
+          "name": "인덕터와 커패시터의 역할",
+          "expected": "인덕터는 전류 연속성과 에너지 저장을 담당하고, 커패시터는 출력전압 리플을 줄이는 역할을 함을 설명해야 한다.",
+          "core_terms": [
+            "인덕터와",
+            "커패시터의",
+            "역할",
+            "인덕터는",
+            "전류"
+          ],
+          "support_terms": [
+            "인덕터는",
+            "전류",
+            "연속성과",
+            "에너지",
+            "저장을",
+            "담당하고",
+            "커패시터는",
+            "출력전압"
+          ]
+        },
+        {
+          "id": "dc_dc_chopper_buck_converter_anchor_4",
+          "name": "Buck과 Boost 동작 차이",
+          "expected": "Buck은 입력보다 낮은 전압, Boost는 입력보다 높은 전압을 얻으며, 차이는 스위칭 구간의 에너지 전달 경로에서 발생함을 설명해야 한다.",
+          "core_terms": [
+            "Buck과",
+            "Boost",
+            "동작",
+            "차이",
+            "Buck은"
+          ],
+          "support_terms": [
+            "Buck은",
+            "입력보다",
+            "낮은",
+            "전압",
+            "Boost는",
+            "높은",
+            "전압을",
+            "얻으며"
+          ]
+        },
+        {
+          "id": "dc_dc_chopper_buck_converter_anchor_5",
+          "name": "설계상 고려사항",
+          "expected": "스위칭 손실, 리플, 인덕터 포화, 소자 정격, 열, EMI, 보호회로를 고려해야 함을 설명해야 한다.",
+          "core_terms": [
+            "설계상",
+            "고려사항",
+            "스위칭",
+            "손실",
+            "리플"
+          ],
+          "support_terms": [
+            "스위칭",
+            "손실",
+            "리플",
+            "인덕터",
+            "포화",
+            "소자",
+            "정격",
+            "EMI"
+          ]
+        }
+      ]
+    },
+    {
+      "topic_id": "power_semiconductor_switching_device_characteristics",
+      "name": "전력반도체 스위칭 소자의 특성과 선정 기준",
+      "aliases": [
+        "전력반도체 소자",
+        "스위칭 소자",
+        "다이오드 역회복",
+        "SCR",
+        "MOSFET",
+        "IGBT",
+        "SOA"
+      ],
+      "anchors": [
+        {
+          "id": "power_semiconductor_switching_device_characteristics_anchor_1",
+          "name": "전력반도체 소자의 역할",
+          "expected": "전력변환 회로에서 전압·전류를 개폐하여 정류, 변환, 제어를 수행하는 핵심 스위칭 소자임을 설명해야 한다.",
+          "core_terms": [
+            "전력반도체",
+            "소자의",
+            "역할",
+            "전력변환",
+            "회로에서"
+          ],
+          "support_terms": [
+            "전력변환",
+            "회로에서",
+            "전압·전류를",
+            "개폐하여",
+            "정류",
+            "변환",
+            "제어를",
+            "수행하는"
+          ]
+        },
+        {
+          "id": "power_semiconductor_switching_device_characteristics_anchor_2",
+          "name": "다이오드 역회복 특성",
+          "expected": "순방향 도통 후 역방향 전압이 인가되면 저장전하 제거 동안 역회복 전류가 흐르고, 역회복 시간과 최대 역회복 전류가 손실과 스파이크에 영향을 줌을 설명해야 한다.",
+          "core_terms": [
+            "다이오드",
+            "역회복",
+            "특성",
+            "순방향",
+            "도통"
+          ],
+          "support_terms": [
+            "순방향",
+            "도통",
+            "역방향",
+            "전압이",
+            "인가되면",
+            "저장전하",
+            "제거",
+            "동안"
+          ]
+        },
+        {
+          "id": "power_semiconductor_switching_device_characteristics_anchor_3",
+          "name": "SCR의 턴온·턴오프 특성",
+          "expected": "SCR은 게이트 신호로 턴온되지만 홀딩 전류 이상에서는 계속 도통하며, 일반적으로 턴오프에는 전류 감소 또는 역전압 조건이 필요함을 설명해야 한다.",
+          "core_terms": [
+            "SCR의",
+            "턴온·턴오프",
+            "특성",
+            "SCR은",
+            "게이트"
+          ],
+          "support_terms": [
+            "SCR은",
+            "게이트",
+            "신호로",
+            "턴온되지만",
+            "홀딩",
+            "전류",
+            "이상에서는",
+            "계속"
+          ]
+        },
+        {
+          "id": "power_semiconductor_switching_device_characteristics_anchor_4",
+          "name": "소자 비교와 선정 기준",
+          "expected": "MOSFET, BJT, IGBT, SCR, 다이오드는 구동 방식, 스위칭 속도, 전압·전류 정격, 손실 특성이 다르므로 용도에 맞게 선정해야 함을 설명해야 한다.",
+          "core_terms": [
+            "소자",
+            "비교와",
+            "선정",
+            "기준",
+            "MOSFET"
+          ],
+          "support_terms": [
+            "MOSFET",
+            "BJT",
+            "IGBT",
+            "SCR",
+            "다이오드는",
+            "구동",
+            "방식",
+            "스위칭"
+          ]
+        },
+        {
+          "id": "power_semiconductor_switching_device_characteristics_anchor_5",
+          "name": "SOA, 손실, 보호설계",
+          "expected": "안전동작영역, 열저항, 스위칭 손실, 회로 인덕턴스, 스너버, 게이트 보호를 고려하지 않으면 발열, 과전압, 소자 파괴가 발생할 수 있음을 설명해야 한다.",
+          "core_terms": [
+            "SOA",
+            "손실",
+            "보호설계",
+            "안전동작영역",
+            "열저항"
+          ],
+          "support_terms": [
+            "안전동작영역",
+            "열저항",
+            "스위칭",
+            "손실",
+            "회로",
+            "인덕턴스",
+            "스너버",
+            "게이트"
+          ]
+        }
+      ]
     }
   ]
 }
