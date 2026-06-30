@@ -34,7 +34,7 @@ GENERIC_FIELD_POINTS = {
 }
 
 MOJIBAKE_PATTERNS = [
-    "Ã", "Â", "í", "ì", "ë", "ð", "�",
+    chr(0x00C3), chr(0x00C2), chr(0x00ED), chr(0x00EC), chr(0x00EB), chr(0x00F0), chr(0xFFFD),
 ]
 
 MARKDOWN_LEAK_PATTERNS = [

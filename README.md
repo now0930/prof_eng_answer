@@ -443,7 +443,7 @@ git diff --check
 인코딩 깨짐 확인:
 
 ```bash
-grep -nE 'Ã|Â|�' README.md docs/*.md scripts/*.py rubrics/model_answers/industrial_instrumentation_control.json rubrics/fact_anchors/industrial_instrumentation_control.json || echo "OK: visible mojibake 없음"
+python3 scripts/scan_visible_mojibake.py README.md docs/*.md scripts/*.py rubrics/model_answers/industrial_instrumentation_control.json rubrics/fact_anchors/industrial_instrumentation_control.json || echo "OK: visible mojibake 없음"
 ```
 
 ---
