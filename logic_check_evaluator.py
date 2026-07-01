@@ -325,6 +325,69 @@ def _evaluate_second_order_deterministic_checks(text: str) -> list[dict[str, Any
 
 
 
+
+def _apply_second_order_claim_evaluator(text: str, findings: list[dict[str, Any]]) -> list[dict[str, Any]]:
+    """
+    Second-order damping topic uses hybrid verification:
+    - Python extracts only candidate evidence.
+    - LLM verifies whether the candidate contains a direct contradiction.
+    - Legacy regex/claim fatal findings are removed to prevent false caps.
+    - Non-fatal major/minor findings remain as supplemental feedback.
+    """
+    legacy_second_order_fatal_ids = {
+        "critical_damping_wrong_07_threshold",
+        "overdamped_wrong_less_than_one_region",
+        "underdamped_wrong_07_boundary",
+        "damping_region_table_inverted",
+        "angle_relation_sin_cos_mismatch",
+        "step_response_region_inversion",
+        "critical_damping_step_response_inversion",
+        "overdamped_step_response_inversion",
+    }
+
+    filtered: list[dict[str, Any]] = []
+
+    for finding in findings:
+        if not isinstance(finding, dict):
+            continue
+
+        fid = str(finding.get("id") or "")
+        severity = finding.get("severity")
+
+        # Remove old deterministic/claim fatal checks for this topic.
+        # Fatal authority now belongs to LLM verifier.
+        if severity == "fatal" and (
+            fid in legacy_second_order_fatal_ids
+            or fid.startswith("claim_")
+        ):
+            continue
+
+        filtered.append(finding)
+
+    try:
+        from logic_llm_verifier import verify_second_order_logic_with_llm
+        llm_eval = verify_second_order_logic_with_llm(text)
+    except Exception as exc:
+        filtered.append(
+            {
+                "id": "llm_second_order_verifier_error",
+                "severity": "minor",
+                "message": f"2차 시스템 LLM verifier 실행 오류: {exc}",
+                "correct_rule": "LLM verifier 실패 시 fatal cap을 적용하지 않습니다.",
+                "affected_layers": ["C"],
+            }
+        )
+        return filtered
+
+    for finding in llm_eval.get("findings") or []:
+        if not isinstance(finding, dict):
+            continue
+        filtered.append(finding)
+
+    return filtered
+
+
+
 def _mode_from_findings(findings: list[dict[str, Any]]) -> str:
     severities = {f.get("severity") for f in findings}
     if "fatal" in severities:
@@ -491,6 +554,27 @@ def evaluate_logic_checks(
             _append_unique(next_practice_points, point)
 
         break
+
+    findings = _apply_second_order_claim_evaluator(text, findings)
+
+    # Rebuild deduction/cap state after claim-based fatal arbitration.
+    deduction_elements = []
+    recommended_ceiling = None
+    for finding in findings:
+        if not isinstance(finding, dict):
+            continue
+
+        msg = str(finding.get("message") or "").strip()
+        if msg:
+            _append_unique(deduction_elements, msg)
+
+        ceiling = finding.get("recommended_ceiling")
+        if finding.get("severity") == "fatal" and isinstance(ceiling, (int, float)):
+            recommended_ceiling = (
+                float(ceiling)
+                if recommended_ceiling is None
+                else min(recommended_ceiling, float(ceiling))
+            )
 
     mode = _mode_from_findings(findings)
     fatal_error_detected = any(f.get("severity") == "fatal" for f in findings)

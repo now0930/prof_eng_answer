@@ -331,6 +331,93 @@ def build_prompt(raw_text, rubric, sid, image_count):
 """.strip()
 
 
+
+def _logic_check_display_items(parsed):
+    logic_eval = parsed.get("logic_check_evaluation") or {}
+    if not isinstance(logic_eval, dict) or not logic_eval.get("applicable"):
+        return [], False
+
+    findings = logic_eval.get("findings") or []
+    fatal_items = [
+        f for f in findings
+        if isinstance(f, dict) and f.get("severity") == "fatal"
+    ]
+
+    if fatal_items:
+        return fatal_items[:5], True
+
+    warn_items = [
+        f for f in findings
+        if isinstance(f, dict) and f.get("severity") in ("major", "minor")
+    ]
+    return warn_items[:5], False
+
+
+def _filter_weaknesses_for_logic_check(weaknesses, has_logic_check_items):
+    if not weaknesses:
+        return []
+
+    if isinstance(weaknesses, str):
+        weaknesses = [weaknesses]
+
+    if not has_logic_check_items:
+        return [str(x).strip() for x in weaknesses if str(x).strip()]
+
+    duplicate_markers = [
+        "[Logic Check/",
+        "감쇠비 관계식 오류:",
+        "부족감쇠 해석 오류:",
+        "감쇠비 구간 구분 부족:",
+        "극점 공식 또는 감쇠진동수",
+        "비교·선정형 문제임에도 정량 비교축",
+    ]
+
+    filtered = []
+    for item in weaknesses:
+        text = str(item).strip()
+        if not text:
+            continue
+        if any(marker in text for marker in duplicate_markers):
+            continue
+        if text not in filtered:
+            filtered.append(text)
+
+    return filtered
+
+
+def _filter_advice_for_logic_check(advice, has_logic_check_items):
+    if not advice:
+        return []
+
+    if isinstance(advice, str):
+        advice = [advice]
+
+    if not has_logic_check_items:
+        return [str(x).strip() for x in advice if str(x).strip()]
+
+    duplicate_markers = [
+        "[Logic Check]",
+        "2차 표준형 s²",
+        "2차 표준형 s^2",
+        "감쇠비별 응답을 ζ=0",
+        "감쇠비별 응답을 무감쇠",
+        "부족감쇠는 오버슈트",
+        "피해야 할 저득점 패턴:",
+    ]
+
+    filtered = []
+    for item in advice:
+        text = str(item).strip()
+        if not text:
+            continue
+        if any(marker in text for marker in duplicate_markers):
+            continue
+        if text not in filtered:
+            filtered.append(text)
+
+    return filtered
+
+
 def call_ollama(prompt):
     url = OLLAMA_URL + "/api/chat"
     payload = {
@@ -641,7 +728,27 @@ def format_result(parsed, sid=None):
             lines.append(f"- {x}")
         lines.append("")
 
-    weaknesses = parsed.get("weaknesses") or []
+    logic_items, logic_has_fatal = _logic_check_display_items(parsed)
+    if logic_items:
+        lines.append("[Logic Check 검증]")
+        if logic_has_fatal:
+            lines.append("- mode: fatal")
+            lines.append("- 판정: THEORY_CORE 핵심 이론 오류로 최종 cap 후보")
+        else:
+            lines.append("- mode: warn")
+            lines.append("- 판정: 치명 오류는 아니지만 보완 필요")
+
+        for item in logic_items:
+            severity = item.get("severity", "warn")
+            message = item.get("message", "")
+            if message:
+                lines.append(f"- [{severity}] {message}")
+        lines.append("")
+
+    weaknesses = _filter_weaknesses_for_logic_check(
+        parsed.get("weaknesses") or [],
+        bool(logic_items)
+    )
     if weaknesses:
         lines.append("[약점]")
         for x in weaknesses:
@@ -655,7 +762,10 @@ def format_result(parsed, sid=None):
             lines.append(f"- {x}")
         lines.append("")
 
-    advice = parsed.get("rewrite_advice") or parsed.get("improvement_advice") or []
+    advice = _filter_advice_for_logic_check(
+        parsed.get("rewrite_advice") or parsed.get("improvement_advice") or [],
+        bool(logic_items)
+    )
     if advice:
         lines.append("[보완 방향]")
         for x in advice:
