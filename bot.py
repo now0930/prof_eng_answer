@@ -540,9 +540,11 @@ def format_result(parsed, sid=None):
     practical = pick(parsed.get("practical_target_score"), default=round(float(max_score) * 0.70, 2))
     high = pick(parsed.get("high_score_target"), default=round(float(max_score) * 0.80, 2))
 
-    official_met = parsed.get("official_pass_met", float(total) >= float(official))
-    practical_met = parsed.get("practical_target_met", float(total) >= float(practical))
-    high_met = parsed.get("high_score_met", float(total) >= float(high))
+    # Pass/fail display must be based on the final displayed total score.
+    # Upstream flags may still reflect pre-ceiling scores.
+    official_met = float(total) >= float(official)
+    practical_met = float(total) >= float(practical)
+    high_met = float(total) >= float(high)
 
     lines = []
     lines.append(f"채점 완료: {total}/{max_score:g}")

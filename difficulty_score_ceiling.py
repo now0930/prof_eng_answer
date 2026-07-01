@@ -193,6 +193,26 @@ def _build_ceiling_decision(
 
     if difficulty == "THEORY_CORE":
         evidence = _theory_core_evidence(answer_text, grade)
+
+        # Topic-specific Logic Check is more reliable than broad text heuristics.
+        # If it was applied, use its fatal flag as the authoritative signal.
+        logic_eval = grade.get("logic_check_evaluation") or {}
+        if isinstance(logic_eval, dict) and logic_eval.get("applicable"):
+            evidence["logic_check_override"] = True
+            evidence["logic_check_mode"] = logic_eval.get("mode")
+            evidence["logic_check_fatal_error_detected"] = bool(
+                logic_eval.get("fatal_error_detected")
+            )
+
+            evidence["fatal_error_suspected"] = bool(
+                logic_eval.get("fatal_error_detected")
+            )
+
+            if not evidence["fatal_error_suspected"]:
+                evidence["unlock_high_band"] = True
+                evidence["fatal_error_reason"] = ""
+                evidence["fatal_evidence"] = []
+
         decision["theory_core_evidence"] = evidence
 
         theory_cap = ceiling if ceiling is not None else 17.5

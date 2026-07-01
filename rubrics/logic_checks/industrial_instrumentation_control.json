@@ -46,11 +46,10 @@
           "id": "underdamped_as_divergence",
           "severity": "fatal",
           "wrong_patterns": [
-            "부족\\s*감쇠.{0,20}발산",
-            "under\\s*damp(?:ed|ing)?.{0,20}발산",
-            "0\\s*<\\s*ζ\\s*<\\s*1.{0,20}발산",
-            "0\\s*<\\s*zeta\\s*<\\s*1.{0,20}발산",
-            "ζ\\s*<\\s*1.{0,20}발산"
+            "부족\\s*감쇠\\s*(?:는|은|이면|일\\s*때|:).{0,40}발산",
+            "under\\s*damp(?:ed|ing)?\\s*(?:is|as|이면|:).{0,40}발산",
+            "ζ\\s*<\\s*1\\s*(?:이면|일\\s*때|:).{0,40}발산",
+            "0\\s*<\\s*ζ\\s*<\\s*1\\s*(?:이면|일\\s*때|:).{0,40}발산"
           ],
           "message": "0<ζ<1 부족감쇠를 발산 조건처럼 설명하여 안정한 감쇠진동 응답과 불안정 조건을 혼동했다.",
           "correct_rule": "0<ζ<1 부족감쇠는 좌반평면 복소극점에 의한 안정한 감쇠진동 응답이다. 발산은 우반평면 극점, 음의 감쇠, 불안정 조건과 별도로 구분해야 한다.",
@@ -73,6 +72,88 @@
           ],
           "message": "감쇠 조건을 σ와 ωd의 단순 크기 비교로 구분하여 표준 ζ 구간 정의와 충돌한다.",
           "correct_rule": "감쇠 조건은 ζ=0, 0<ζ<1, ζ=1, ζ>1 기준으로 구분한다.",
+          "affected_layers": [
+            "C"
+          ],
+          "recommended_ceiling": 10.0
+        },
+        {
+          "id": "critical_damping_wrong_07_threshold",
+          "severity": "fatal",
+          "wrong_patterns": [
+            "임계\\s*감쇠.{0,80}ζ\\s*=\\s*0\\.7",
+            "critical\\s*damp(?:ed|ing)?.{0,80}ζ\\s*=\\s*0\\.7",
+            "ζ\\s*=\\s*0\\.7.{0,80}임계\\s*감쇠",
+            "ζ\\s*=\\s*0\\.7.{0,80}critical\\s*damp"
+          ],
+          "message": "임계감쇠를 ζ=0.7로 정의하여 표준 감쇠비 구간 정의와 충돌한다.",
+          "correct_rule": "임계감쇠는 ζ=1이다. ζ≈0.707은 실무적 최적 타협점 또는 45° 극점 배치 예시일 수 있으나 임계감쇠가 아니다.",
+          "affected_layers": [
+            "C"
+          ],
+          "recommended_ceiling": 10.0
+        },
+        {
+          "id": "overdamped_wrong_less_than_one_region",
+          "severity": "fatal",
+          "wrong_patterns": [
+            "과\\s*감쇠.{0,80}0\\.7\\s*(?:≤|<=)\\s*ζ\\s*<\\s*1",
+            "over\\s*damp(?:ed|ing)?.{0,80}0\\.7\\s*(?:≤|<=)\\s*ζ\\s*<\\s*1",
+            "0\\.7\\s*(?:≤|<=)\\s*ζ\\s*<\\s*1.{0,80}과\\s*감쇠",
+            "0\\.7\\s*(?:≤|<=)\\s*ζ\\s*<\\s*1.{0,80}over\\s*damp"
+          ],
+          "message": "과감쇠를 0.7≤ζ<1로 정의하여 표준 정의와 충돌한다.",
+          "correct_rule": "과감쇠는 ζ>1이다. 0<ζ<1은 모두 부족감쇠 영역이다.",
+          "affected_layers": [
+            "C"
+          ],
+          "recommended_ceiling": 10.0
+        },
+        {
+          "id": "underdamped_wrong_07_boundary",
+          "severity": "fatal",
+          "wrong_patterns": [
+            "부족\\s*감쇠.{0,80}ζ\\s*<\\s*0\\.7",
+            "under\\s*damp(?:ed|ing)?.{0,80}ζ\\s*<\\s*0\\.7",
+            "ζ\\s*<\\s*0\\.7.{0,80}부족\\s*감쇠",
+            "ζ\\s*<\\s*0\\.7.{0,80}under\\s*damp"
+          ],
+          "message": "부족감쇠 영역을 ζ<0.7로 제한하여 표준 정의와 충돌한다.",
+          "correct_rule": "부족감쇠는 0<ζ<1 전체 영역이다. ζ≈0.707은 부족감쇠 영역 안의 실무적 타협점일 뿐이다.",
+          "affected_layers": [
+            "C"
+          ],
+          "recommended_ceiling": 10.0
+        },
+        {
+          "id": "angle_relation_sin_cos_mismatch",
+          "severity": "fatal",
+          "wrong_patterns": [
+            "음의\\s*실수축.{0,120}sin\\s*θ\\s*=\\s*[^\\n]{0,30}σ\\s*/\\s*ωn",
+            "음의\\s*실수축.{0,120}sin\\\\theta\\s*=\\s*[^\\n]{0,30}σ\\s*/\\s*ωn",
+            "실수축.{0,120}sin\\s*θ\\s*=\\s*[^\\n]{0,30}ζ",
+            "실수축.{0,120}sin\\\\theta\\s*=\\s*[^\\n]{0,30}ζ"
+          ],
+          "message": "θ를 음의 실수축과 극점 사이각으로 정의한 뒤 sinθ=σ/ωn=ζ로 표현하여 기하학적 관계가 충돌한다.",
+          "correct_rule": "θ를 음의 실수축 기준으로 정의하면 ζ=cosθ이다. sinθ 관계를 쓰려면 θ를 허수축 기준 각도로 정의해야 한다.",
+          "affected_layers": [
+            "C",
+            "E"
+          ],
+          "recommended_ceiling": 10.0
+        },
+        {
+          "id": "step_response_region_inversion",
+          "severity": "fatal",
+          "wrong_patterns": [
+            "critical\\s*damp.{0,120}진동",
+            "임계\\s*감쇠.{0,120}진동",
+            "over\\s*damp.{0,120}overshot",
+            "과\\s*감쇠.{0,120}오버\\s*슈트",
+            "과\\s*감쇠.{0,120}충돌\\s*위험"
+          ],
+          "message": "감쇠비별 Step 응답 특성이 표준 정의와 반대로 서술되었다.",
+          "correct_rule": "부족감쇠는 오버슈트와 감쇠진동, 임계감쇠는 무오버슈트 최속 수렴, 과감쇠는 무오버슈트 느린 수렴이다.",
           "affected_layers": [
             "C"
           ],
@@ -101,8 +182,7 @@
           "severity": "major",
           "required_patterns": [
             "ωd\\s*=\\s*ωn",
-            "omega_d\\s*=\\s*omega_n",
-            "sqrt\\s*\\(?\\s*1\\s*-\\s*ζ",
+            "ωd\\s*=\\s*ωn\\s*√",
             "√\\s*\\(?\\s*1\\s*-\\s*ζ",
             "감쇠\\s*진동수"
           ],
