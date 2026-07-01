@@ -1,255 +1,140 @@
 # Docker Compose Usage
 
-## 1. 목적
+이 문서는 `prof_eng_answer` Telegram Bot의 Docker Compose 운영 방식만 설명한다. 장애 대응 전체 절차는 `operation_runbook.md`를 우선한다.
 
-이 문서는 `prof_eng_answer` Telegram 채점 Bot의 Docker Compose 운영 방식을 설명한다.
-
-현재 운영 기준은 다음과 같다.
+## 1. 운영 기준
 
 | 항목 | 기준 |
 |---|---|
-| Compose 위치 | `~/hermes/docker-compose.yml` |
+| Compose 위치 | `~/hermes` |
 | Repository 위치 | `~/hermes/workspace/prof_eng_answer` |
-| Bot 전용 컨테이너 | `prof_eng_answer_bot` |
+| 컨테이너 내부 경로 | `/workspace/prof_eng_answer` |
+| Bot 컨테이너 | `prof_eng_answer_bot` |
+| Compose 서비스명 | 보통 `prof-eng-answer-bot` |
 | Bot 실행 방식 | `python -u bot.py` |
 | 수동 nohup 실행 | 사용하지 않음 |
-| 중복 polling 방지 | 필수 |
 
-## 2. 운영 구조
+## 2. 상태 확인
 
-운영은 상위 `~/hermes` 디렉터리에서 수행한다.
+```bash
+cd ~/hermes
 
-    cd ~/hermes
-    docker compose ps
+docker compose ps
+docker compose ps prof-eng-answer-bot
+docker logs --tail=120 prof_eng_answer_bot
+```
 
-주요 컨테이너:
-
-| 컨테이너 | 역할 |
-|---|---|
-| `hermes_agent` | Hermes agent 기본 컨테이너 |
-| `prof_eng_answer_bot` | 기술사 답안 채점 Telegram Bot 전용 컨테이너 |
-
-`prof_eng_answer_bot`이 Telegram Bot의 유일한 실행 주체여야 한다.
-
-`hermes_agent` 내부에서 `nohup python bot.py`를 수동 실행하지 않는다.
-
-## 3. 시작
+## 3. 시작과 재시작
 
 전체 compose 시작:
 
-    cd ~/hermes
-    docker compose up -d
-    docker compose ps
+```bash
+cd ~/hermes
+docker compose up -d
+docker compose ps
+```
 
-Bot 컨테이너만 시작:
+Bot만 시작:
 
-    cd ~/hermes
-    docker compose up -d prof-eng-answer-bot
-
-## 4. 재시작
+```bash
+cd ~/hermes
+docker compose up -d prof-eng-answer-bot
+```
 
 일반 재시작:
 
-    cd ~/hermes
-    docker compose restart prof-eng-answer-bot
+```bash
+cd ~/hermes
+docker compose restart prof-eng-answer-bot
+```
 
 완전 재기동:
 
-    cd ~/hermes
-    docker compose stop prof-eng-answer-bot
-    sleep 3
-    docker compose up -d prof-eng-answer-bot
+```bash
+cd ~/hermes
+docker compose stop prof-eng-answer-bot
+sleep 3
+docker compose up -d prof-eng-answer-bot
+```
 
-코드 import 상태가 꼬였거나, `bot.py` 실행 흐름을 수정한 뒤에는 완전 재기동을 권장한다.
+`bot.py`, formatter, provider, `send_message()` boundary를 수정한 뒤에는 완전 재기동을 권장한다.
 
-## 5. 상태 확인
+## 4. 로그 확인
 
-    cd ~/hermes
-    docker compose ps prof-eng-answer-bot
+```bash
+docker logs --tail=120 prof_eng_answer_bot
+docker logs -f --tail=80 prof_eng_answer_bot
+```
 
-로그 확인:
+정상 로그 예:
 
-    docker logs --tail=120 prof_eng_answer_bot
+```text
+prof_eng_answer_bot service started
+cwd=/workspace/prof_eng_answer
+bot started. ollama=http://ollama:11434, model=...
+```
 
-실시간 로그:
+채점 중 정상 로그 예:
 
-    docker logs -f --tail=80 prof_eng_answer_bot
+```text
+[agent] phase2 wrapper entered.
+[agent] Gemini semantic grader applied.
+[agent] phase2 layered scoring applied: ...
+[agent] phase21 final difficulty ceiling evaluated: ...
+```
 
-## 6. 컨테이너 내부 코드 위치
+## 5. 컨테이너 내부 확인
 
-일반 운영 경로:
+```bash
+cd ~/hermes
 
-    /workspace/prof_eng_answer
+docker exec prof_eng_answer_bot bash -lc '
+  cd /workspace/prof_eng_answer 2>/dev/null || cd /app 2>/dev/null || exit 1
+  pwd
+  git log --oneline --decorate -5 2>/dev/null || true
+  git status --short 2>/dev/null || true
+'
+```
 
-확인 명령:
+## 6. 실행 명령 확인
 
-    docker exec prof_eng_answer_bot bash -lc '
-    cd /workspace/prof_eng_answer 2>/dev/null || cd /app 2>/dev/null || exit 1
-    pwd
-    ls -la
-    '
+```bash
+cd ~/hermes
 
-## 7. Git 최신 상태 확인
+docker inspect prof_eng_answer_bot \
+  --format 'Entrypoint={{json .Config.Entrypoint}} Cmd={{json .Config.Cmd}}'
 
-로컬 repository 기준:
-
-    cd ~/hermes/workspace/prof_eng_answer
-
-    git fetch origin main
-
-    echo "[HEAD]"
-    git rev-parse --short HEAD
-
-    echo "[origin/main]"
-    git rev-parse --short origin/main
-
-    git status --short
-    git log --oneline --decorate -5
-
-정상 기준:
-
-    HEAD == origin/main
-    git status --short 출력 없음
-
-컨테이너 내부 확인:
-
-    docker exec prof_eng_answer_bot bash -lc '
-    cd /workspace/prof_eng_answer 2>/dev/null || cd /app 2>/dev/null || exit 1
-    git log --oneline --decorate -5 2>/dev/null || true
-    git status --short 2>/dev/null || true
-    '
-
-## 8. 중복 polling 확인
-
-Telegram Bot은 동일 token으로 여러 프로세스가 polling하면 응답 충돌이 발생할 수 있다.
-
-Host와 컨테이너 전체 확인:
-
-    cd ~/hermes
-
-    echo "[containers]"
-    docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Command}}' \
-      | grep -E 'prof|hermes|bot|agent' || true
-
-    echo
-    echo "[host python bot processes]"
-    ps -ef \
-      | grep -E 'prof_eng|run_prof_eng_bot|bot.py|telegram' \
-      | grep -v grep || true
-
-    echo
-    echo "[prof_eng_answer_bot processes]"
-    docker exec prof_eng_answer_bot bash -lc '
-    ps -ef | grep -E "python|bot.py|run_prof_eng_bot|telegram" | grep -v grep || true
-    '
-
-    echo
-    echo "[hermes_agent processes]"
-    docker exec hermes_agent bash -lc '
-    ps -ef | grep -E "prof_eng|bot.py|run_prof_eng_bot|telegram" | grep -v grep || true
-    ' 2>/dev/null || true
+docker compose config | sed -n '/prof-eng-answer-bot:/,/^[^ ]/p'
+```
 
 정상 기준:
 
-    prof_eng_answer_bot 내부에 python -u bot.py 1개
-    hermes_agent 내부에는 prof_eng_answer bot.py 없음
-    host에서 보이는 python -u bot.py는 컨테이너 프로세스일 수 있음
+- `prof_eng_answer_bot`이 `python -u bot.py` 또는 동등한 명령으로 실행
+- `hermes_agent` 내부에서 별도 `nohup python bot.py` 실행 없음
 
-주의사항:
+## 7. 중복 polling 방지
 
-- `hermes_agent` 내부에서 `nohup python bot.py &`를 실행하지 않는다.
-- 같은 Telegram token을 쓰는 다른 Bot 컨테이너가 있는지 확인한다.
-- `telegram_bot_prod` 같은 별도 컨테이너가 있으면 같은 token 사용 여부를 점검한다.
+```bash
+cd ~/hermes
 
-## 9. 실행 명령 확인
+docker ps --format 'table {{.Names}}\t{{.Status}}\t{{.Command}}' \
+  | grep -E 'prof|hermes|bot|agent' || true
 
-컨테이너가 어떤 명령으로 실행되는지 확인한다.
+ps -ef | grep -E 'prof_eng|bot.py|telegram' | grep -v grep || true
 
-    cd ~/hermes
-
-    docker inspect prof_eng_answer_bot \
-      --format 'Entrypoint={{json .Config.Entrypoint}} Cmd={{json .Config.Cmd}}'
-
-    docker compose config | sed -n '/prof-eng-answer-bot:/,/^[^ ]/p'
+docker exec prof_eng_answer_bot bash -lc '
+  ps -ef | grep -E "python|bot.py|telegram" | grep -v grep || true
+'
+```
 
 정상 기준:
 
-    prof_eng_answer_bot이 bot.py를 실행
-    수동 nohup 실행 없음
+- 같은 Telegram token으로 polling하는 Bot은 하나
+- `prof_eng_answer_bot` 내부의 Python Bot process는 하나
 
-## 10. bot.py 실행 흐름 주의
+## 8. 환경변수
 
-운영 시 `bot.py`는 다음 방식으로 실행된다.
-
-    python -u bot.py
-
-그리고 파일 내부에서 다음 흐름으로 진입한다.
-
-    if __name__ == "__main__":
-        main()
-
-`main()` 내부에는 polling loop가 있다.
-
-    while True:
-        ...
-
-따라서 `if __name__ == "__main__": main()` 아래쪽에 append한 wrapper 코드는 실행되지 않는다.
-
-잘못된 방식:
-
-    if __name__ == "__main__":
-        main()
-
-    # 이 아래 wrapper는 실행형 bot.py에서는 실행되지 않음
-    def format_result(...):
-        ...
-
-올바른 방식:
-
-    main()보다 위에 함수 정의
-    또는 send_message() 경계에서 최종 출력 정리
-
-현재 legacy `GENERAL(일반 설명형)` 문구 정리는 `send_message()` 내부의 send boundary cleanup에서 처리한다.
-
-## 11. send boundary cleanup 확인
-
-현재 Bot은 Telegram 송신 직전에 legacy 문구를 정리한다.
-
-확인 명령:
-
-    cd ~/hermes
-
-    docker exec prof_eng_answer_bot bash -lc '
-    cd /workspace/prof_eng_answer 2>/dev/null || cd /app 2>/dev/null || exit 1
-
-    grep -nE "send boundary legacy GENERAL|final Telegram legacy GENERAL cleanup wrapper|_cleanup_legacy_general_text_for_send|def send_message|if __name__|main\(|while True" bot.py | sed -n "1,220p"
-    '
-
-정상 기준:
-
-    send boundary legacy GENERAL cleanup v1 있음
-    _cleanup_legacy_general_text_for_send 있음
-    def send_message 내부에서 cleanup 호출함
-    final Telegram legacy GENERAL cleanup wrapper 없음
-
-예상 형태:
-
-    110:# === send boundary legacy GENERAL cleanup v1 ===
-    111:def _cleanup_legacy_general_text_for_send(text):
-    150:def send_message(chat_id, text):
-    151:    text = _cleanup_legacy_general_text_for_send(text)
-    886:def main():
-    896:    while True:
-    924:if __name__ == "__main__":
-    925:    main()
-
-## 12. 환경변수
-
-환경변수는 상위 `~/hermes/.env`에서 관리한다.
-
-    ~/hermes/.env
-
-주요 변수:
+환경변수는 상위 `.env`에서 관리한다.
 
 | 변수 | 의미 |
 |---|---|
@@ -266,68 +151,23 @@ Host와 컨테이너 전체 확인:
 | `DIFFICULTY_CEILING_MODE` | `warn`, `strict`, `off` |
 | `QUESTION_TYPE_COVERAGE_SCORE_MODE` | `warn`, `strict`, `off` |
 
-주의:
+민감 정보는 출력하거나 commit하지 않는다.
 
-    .env
-    API key
-    Telegram token
+## 9. 코드 변경 후 최소 검증
 
-위 항목은 Git에 커밋하지 않는다.
+```bash
+cd ~/hermes/workspace/prof_eng_answer
+python3 -m py_compile bot.py grading_agents.py difficulty_score_ceiling.py
+python3 scripts/rubric_manager.py validate-all
 
-## 13. 대표 smoke test
+git diff --check
+git status --short
+```
 
-Telegram에서 다음을 보낸다.
+Bot 실행 코드 변경 후:
 
-    /grade
-    문제: 차압전송기의 교정회로와 교정절차를 설명하시오.
-
-    답안:
-    차압전송기는 기준 압력을 인가하고 4~20mA 출력을 확인하여 zero와 span을 조정한다.
-
-정상 확인:
-
-- 채점 완료 메시지가 온다.
-- `[Question Type Coverage]`가 출력된다.
-- 문제 유형 lens가 `적용·평가형(IMPLEMENTATION_EVALUATION)`로 표시된다.
-- `[보완 방향]`에 `C항목 보완: 일반 설명형 유형에서는 ...` 문구가 없어야 한다.
-- 대신 `C항목 보완: 문제 유형 lens에 맞는 핵심 fact...` 문구가 나와야 한다.
-
-## 14. 코드 검증
-
-Bot 관련 Python 문법 확인:
-
-    cd ~/hermes/workspace/prof_eng_answer
-
-    python3 -m py_compile \
-      bot.py \
-      grading_agents.py \
-      gemini_grader.py \
-      clova_grader.py \
-      difficulty_strategy.py \
-      difficulty_output_adapter.py \
-      difficulty_score_ceiling.py \
-      question_type_taxonomy.py \
-      question_type_coverage_adapter.py \
-      question_type_coverage_score_adjuster.py \
-      semantic_question_type_prompt.py \
-      semantic_question_type_postprocess.py \
-      scripts/validate_model_answer_bank.py
-
-Rubric 전체 검증:
-
-    python3 scripts/rubric_manager.py validate-all
-
-## 15. 문서 변경 후 반영 절차
-
-    cd ~/hermes/workspace/prof_eng_answer
-
-    python3 scripts/rubric_manager.py validate-all
-    git diff --check
-    git status --short
-
-    git add docs/docker_compose_usage.md
-    git commit -m "Update Docker Compose operation documentation"
-    git push origin main
-
-문서 변경 후 Bot 컨테이너 재시작은 필수는 아니다.
-단, 운영 문서와 실제 컨테이너 상태가 맞는지 smoke test는 수행하는 것이 좋다.
+```bash
+cd ~/hermes
+docker compose restart prof-eng-answer-bot
+docker logs --tail=120 prof_eng_answer_bot
+```

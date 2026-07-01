@@ -1,50 +1,53 @@
 # Difficulty and Selection Strategy
 
-## 1. 목적
+Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다. 이 문서는 문항 난이도, 고득점 가능성, ceiling 후보, 문항 선택 전략을 설명한다.
 
-Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다.
+## 1. 위치
 
-이 문서는 답안의 고득점 가능성, 문항 선택 전략, ceiling 후보, 운영상 해석 기준을 설명한다.
+```text
+A/B/C/D/E 25점 구조 = 기본 점수 체계
+Question Type v2 = C/D 항목 보완 lens
+Difficulty Profile = 고득점 가능성·선택 전략·ceiling lens
+Fact Anchor = 핵심 fact 기준
+Model Answer Bank = 대표 답안 구조와 패턴
+```
 
-Difficulty Profile은 다음 질문에 답하기 위한 보조 lens이다.
+Difficulty Profile은 다음을 하지 않는다.
 
-- 이 문제는 안정 점수형인가, 고위험·고보상형인가?
-- 우수 답안을 써도 어느 정도 점수대가 자연스러운가?
-- 답안이 짧을 때 ceiling을 어떻게 해석할 것인가?
-- 제어이론 문제를 선택해야 하는 상황은 언제인가?
-- Difficulty와 Question Type v2는 어떻게 구분되는가?
+- A/B/C/D/E 점수를 직접 대체하지 않음
+- Question Type을 대체하지 않음
+- 어려운 문제 선택 자체에 가산점을 주지 않음
+- 쉬운 문제라는 이유만으로 자동 감점하지 않음
 
-## 2. Difficulty Profile의 위치
+## 2. Profile 종류
 
-전체 채점 구조에서 Difficulty Profile은 다음 위치에 있다.
+| Profile | 의미 | 기본 ceiling |
+|---|---|---:|
+| `BASIC_CONCEPT` | 정의, 개념, 구성 중심 | 15.0 |
+| `FIELD_APPLICATION` | 현장 적용, 선정, 개선방안 중심 | 15.75 |
+| `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 | 16.5 |
+| `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 | 17.5 |
 
-    A/B/C/D/E 25점 구조 = 기본 점수 체계
-    Question Type v2 = C/D 항목 보완 lens
-    Difficulty Profile = 고득점 가능성·선택 전략 lens
-    Fact Anchor = 핵심 개념 포함 여부 보조 평가
-    Model Answer Bank = 대표 답안 구조 참조
+기본 ceiling은 고득점 가능성 해석 기준이다. 실제 점수 제한 여부는 `DIFFICULTY_CEILING_MODE`에 따른다.
 
-따라서 Difficulty Profile은 다음을 하지 않는다.
+## 3. Ceiling mode
 
-- A/B/C/D/E 점수를 직접 대체하지 않는다.
-- Question Type v2를 대체하지 않는다.
-- 제어이론 문제 선택 자체에 가산점을 주지 않는다.
-- 쉬운 문제라는 이유만으로 자동 감점하지 않는다.
+| 모드 | 의미 |
+|---|---|
+| `warn` | ceiling 후보만 계산하고 점수는 변경하지 않음 |
+| `strict` | recommended cap이 현재 점수보다 낮으면 실제 제한 |
+| `off` | difficulty ceiling 계산/출력 비활성 |
 
-## 3. Difficulty Profile 종류
+운영 환경이 `strict`이면 Telegram 출력에서 다음을 구분해야 한다.
 
-현재 사용 중인 profile은 다음 4개이다.
-
-| Profile | 의미 | 기본 ceiling | 해석 |
-|---|---|---:|---|
-| `BASIC_CONCEPT` | 정의, 개념, 구성 중심 | 15.00 | 안정적으로 쓸 수 있으나 고득점 ceiling이 낮음 |
-| `FIELD_APPLICATION` | 현장 적용, 선정, 개선방안 중심 | 15.75 | 실무 조건과 제언이 중요함 |
-| `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 | 16.50 | 설계 판단과 평가 지표가 중요함 |
-| `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 | 17.50 | 정확하면 고득점 가능, 틀리면 위험함 |
+- ceiling 적용 전 단순 평균
+- ceiling 적용 전 가중 점수
+- difficulty ceiling 적용 후 최종 점수
+- cap 사유
 
 ## 4. BASIC_CONCEPT
 
-정의, 개념, 구성, 기본 기능 설명 중심의 문제이다.
+정의, 개념, 구성, 기본 기능 설명 중심 문제다.
 
 대표 신호:
 
@@ -55,17 +58,13 @@ Difficulty Profile은 다음 질문에 답하기 위한 보조 lens이다.
 
 채점 특징:
 
-- 기본 개념을 정확히 쓰면 안정 점수 확보가 가능하다.
-- 그러나 답안이 정의 수준에 머물면 고득점이 어렵다.
-- 현장 적용, 한계, 실무 의미를 연결해야 15점 이상을 기대할 수 있다.
-
-기본 ceiling:
-
-    15.00점
+- 기본 개념을 정확히 쓰면 안정 점수 확보 가능
+- 정의 수준에 머물면 고득점 어려움
+- 현장 적용, 한계, 실무 의미를 연결해야 합격권 접근
 
 ## 5. FIELD_APPLICATION
 
-현장 적용, 선정, 개선방안, 유지보수, 운전 리스크가 중요한 문제이다.
+현장 적용, 선정, 개선방안, 유지보수, 운전 리스크가 중요한 문제다.
 
 대표 신호:
 
@@ -74,35 +73,16 @@ Difficulty Profile은 다음 질문에 답하기 위한 보조 lens이다.
 - 선정 기준을 설명하시오
 - 현장 적용 시 고려사항
 - 교정 절차를 설명하시오
-- 유지보수 방안을 설명하시오
 
 채점 특징:
 
-- 정의나 원리만으로는 부족하다.
-- 기존 설비 영향, 적용 조건, 비용, 유지보수성, 검증 기준을 연결해야 한다.
-- 답안이 실제 현장에 적용 가능한지 판단하는 D항목 비중이 커진다.
-
-기본 ceiling:
-
-    15.75점
-
-예시:
-
-차압전송기의 교정회로와 교정절차 문제는 보통 `FIELD_APPLICATION` 성격을 가진다.
-
-이 경우 답안에는 다음이 필요하다.
-
-- 교정회로 구성
-- 표준 압력 발생기, 전류계, HART communicator 등 장비 연결
-- zero/span 조정
-- 5점 교정
-- 히스테리시스와 선형성 확인
-- 임펄스 라인, 정압 영향, 영점 이동 등 현장 오차 요인
-- 교정 후 판정 기준과 기록 관리
+- 정의나 원리만으로 부족
+- 기존 설비 영향, 적용 조건, 비용, 유지보수성, 검증 기준 필요
+- D항목 현장 판단 비중이 커짐
 
 ## 6. DESIGN_EVALUATION
 
-설계안, 시스템 구성, 성능 평가, 효과 분석이 중요한 문제이다.
+설계안, 시스템 구성, 성능 평가, 효과 분석이 중요한 문제다.
 
 대표 신호:
 
@@ -114,17 +94,13 @@ Difficulty Profile은 다음 질문에 답하기 위한 보조 lens이다.
 
 채점 특징:
 
-- 단순 절차가 아니라 설계 근거와 평가 지표가 필요하다.
-- 대안 비교, 적용 조건, 성능 지표, 비용·효과 분석을 포함해야 한다.
-- 결론에서 어떤 설계안이 적합한지 판단해야 한다.
-
-기본 ceiling:
-
-    16.50점
+- 설계 근거와 평가 지표 필요
+- 대안 비교, 적용 조건, 성능 지표, 비용·효과 분석 필요
+- 결론에서 어떤 설계안이 적합한지 판단해야 함
 
 ## 7. THEORY_CORE
 
-제어이론, 동특성, 안정도, 전달함수, 상태방정식, 2차 시스템 등 이론 핵심 문제이다.
+제어이론, 동특성, 안정도, 전달함수, 상태방정식, 2차 시스템 등 이론 핵심 문제다.
 
 대표 신호:
 
@@ -137,141 +113,84 @@ Difficulty Profile은 다음 질문에 답하기 위한 보조 lens이다.
 
 채점 특징:
 
-- 정확히 풀면 고득점 가능성이 높다.
-- 수식, 변수, 단위, 조건, 해석을 틀리면 큰 감점 위험이 있다.
-- 제어이론 문제를 선택했다는 사실 자체가 가산점은 아니다.
-- 정확한 풀이와 해석이 있어야 고득점 band가 열린다.
+- 정확히 쓰면 고득점 가능
+- 수식, 변수, 조건, 해석을 틀리면 큰 감점 위험
+- 선택 자체 가산점 없음
+- 정확한 표준 모델·변수·응답특성·현장 해석이 연결되어야 high band unlock
 
-기본 ceiling:
+## 8. THEORY_CORE high band unlock
 
-    17.50점
+`THEORY_CORE`는 고위험·고보상형이다. 고득점 band를 열려면 다음이 필요하다.
 
-## 8. Ceiling mode
+- 표준 모델 또는 특성방정식
+- 핵심 변수 정의
+- 수식 관계
+- 조건별 해석
+- 응답특성
+- 안정성 또는 물리적 의미
+- 현장 tuning 또는 제어 loop 영향
 
-Difficulty ceiling은 다음 환경변수로 제어한다.
+fatal error 예:
 
-    DIFFICULTY_CEILING_MODE=warn
+- 감쇠비 구간별 응답특성 반대 설명
+- 안정과 불안정 반대 판단
+- 극점 위치와 응답특성의 잘못된 연결
+- 전달함수 또는 특성방정식 핵심 관계 오류
+- 오버슈트, 감쇠, 진동성 관계 반대 설명
 
-| 모드 | 의미 |
-|---|---|
-| `warn` | ceiling 후보만 계산하고 점수는 변경하지 않음 |
-| `strict` | ceiling 초과 점수를 실제 제한 |
-| `off` | ceiling 계산과 출력 비활성 |
+`strict` 모드에서는 fatal error가 감지되면 10점 cap 후보가 실제 적용될 수 있다.
 
-현재 운영 기본값은 `warn`이다.
+## 9. 2차 시스템 예시
 
-`warn` 모드에서는 Telegram 출력에 다음과 같이 표시될 수 있다.
+2차 시스템 감쇠비 문제에서 다음 오류는 fatal candidate다.
 
-    우수 답안의 ceiling은 약 15.75점 수준으로 보았습니다.
+- `ζ = sin^-1(ωd/ωn)`처럼 잘못된 관계식 사용
+- `0 < ζ < 1` 부족감쇠를 단순 발산으로 설명
+- 무감쇠, 부족감쇠, 임계감쇠, 과감쇠, 불안정 조건을 구분하지 않음
 
-이는 실제 점수를 잘랐다는 뜻이 아니라, 해당 문항의 고득점 가능성 해석을 제공한다는 의미이다.
+보완 방향:
 
-## 9. strict mode 해석
-
-`strict` 모드는 운영 안정화 이후 제한적으로 사용한다.
-
-적용 전에는 다음을 충분히 확인해야 한다.
-
-- 같은 문제를 여러 번 채점했을 때 점수 편차
-- 우수 답안이 ceiling 때문에 과도하게 눌리는지 여부
-- 쉬운 문제라도 현장 판단을 잘 쓴 답안이 부당하게 낮아지는지 여부
-- Question Type coverage 보정과 중복 감점이 발생하지 않는지 여부
-
-운영 기본값은 `warn`을 유지한다.
+- `s² + 2ζωn s + ωn² = 0` 기준으로 설명
+- `ωd = ωn√(1-ζ²)` 관계 명시
+- 감쇠비별 상승시간, 피크시간, 오버슈트율, 정착시간 비교
+- PID tuning, hunting, servo, 압력/유량/온도 control loop와 연결
 
 ## 10. 문항 선택 전략
 
-기술사 시험은 여러 문제 중 일부를 선택하므로, 개별 문제 점수와 문항 선택 전략을 분리해야 한다.
-
-핵심 원칙은 다음과 같다.
-
-    쉬운 문제 = 안정 점수형, ceiling 낮음
-    현장 적용 문제 = 실무 경험을 쓰면 안정적으로 15점 접근 가능
-    설계·평가 문제 = 구조화하면 중상위 점수 가능
-    제어이론 문제 = 고위험·고보상형
-    제어이론 선택 자체 = 가산점 없음
-    제어이론 정확 풀이 = 고득점 band unlock
-    제어이론 회피 = 개별 감점이 아니라 선택 전략 risk
-
-## 11. 제어이론 문제 선택 기준
+| 선택 상황 | 전략 |
+|---|---|
+| 쉬운 개념 문제만 선택 | 안정적이나 고득점 ceiling 낮음 |
+| 현장 적용 문제 선택 | 실무 경험으로 합격권 접근 가능 |
+| 설계·평가 문제 선택 | 구조화하면 중상위 점수 가능 |
+| 제어이론 문제 선택 | 정확하면 고득점, 오류 시 위험 |
 
 제어이론 문제는 다음 조건을 만족할 때 선택하는 것이 좋다.
 
-- 전달함수, 안정도, 감쇠비, 주파수 응답 등 핵심 개념을 정확히 설명할 수 있음
-- 수식 전개와 변수 의미를 빠르게 쓸 수 있음
-- 계산 결과를 물리적 의미와 현장 적용으로 해석할 수 있음
-- 실수했을 때 부분점수 방어가 가능한 구조를 알고 있음
+- 수식과 변수 의미를 빠르게 쓸 수 있음
+- 조건별 해석을 정확히 설명 가능
+- 결과를 현장 tuning 또는 제어성으로 연결 가능
+- 부분점수 방어 구조를 알고 있음
 
-다음 상태라면 회피하는 것이 안전하다.
-
-- 공식만 암기했고 조건 해석이 약함
-- 계산 과정이 길어 시간 소모가 큼
-- 결과의 현장 의미를 설명하기 어려움
-- 오답 시 방어할 Fact가 부족함
-
-## 12. Question Type v2와의 차이
-
-Difficulty Profile과 Question Type v2는 서로 다른 축이다.
-
-| 구분 | 목적 | 예시 |
-|---|---|---|
-| Question Type v2 | C/D 항목에서 무엇을 써야 하는지 판단 | 적용·평가형, 진단·대책형 |
-| Difficulty Profile | 고득점 가능성과 선택 전략 판단 | 현장 적용형, 이론 핵심형 |
-
-예를 들어 차압전송기 교정 문제는 다음처럼 동시에 분류될 수 있다.
-
-    Question Type v2: IMPLEMENTATION_EVALUATION
-    Difficulty Profile: FIELD_APPLICATION
-
-의미는 다음과 같다.
-
-- Question Type v2 관점: 교정회로 구성, 절차, 평가 지표가 필요하다.
-- Difficulty 관점: 현장 적용 조건, 유지보수성, 검증 기준을 써야 안정 점수가 가능하다.
-
-## 13. 답안 길이와 volume cap
+## 11. 답안 길이와 volume cap
 
 짧은 답안은 Difficulty와 별개로 volume cap이 적용될 수 있다.
 
 대표 조건:
 
-- 답안 이미지 없이 텍스트가 1~5줄
-- 500자 미만
+- 답안 이미지 없이 텍스트가 매우 짧음
 - A/B/C/D/E 구조가 거의 없음
-- Fact는 일부 있으나 현장 판단이 없음
-
-Telegram 출력 예시:
-
-    답안 이미지 없이 텍스트가 1~5줄 또는 500자 미만이므로 요약 답안 상한을 적용한다.
+- fact는 일부 있으나 현장 판단 없음
+- 25점 문항 평균 전개량에 미달
 
 이 경우 점수가 낮은 이유는 Difficulty가 높아서가 아니라, 기술사 답안으로 필요한 전개량이 부족하기 때문이다.
 
-## 14. 동일 답안 점수 편차 해석
-
-Semantic grader를 사용하는 구조에서는 같은 짧은 답안을 여러 번 채점할 때 점수 편차가 발생할 수 있다.
-
-운영 해석 원칙:
-
-- 짧은 답안은 점수대가 낮게 유지되는지가 중요하다.
-- 세부 점수 숫자보다 A/B/C/D/E 누락 사유가 일관적인지 확인한다.
-- 대표 smoke test는 legacy 문구 제거와 coverage 출력 여부를 확인하는 용도로 사용한다.
-- 점수 안정화가 필요하면 semantic grader temperature, rubric prompt, Python cap rule을 별도로 조정한다.
-
-## 15. Telegram 출력 예시
-
-    본 문항은 현장 적용형 문제로 판단했습니다.
-    난이도 Profile은 FIELD_APPLICATION(현장 적용형)이며,
-    정의나 원리뿐 아니라 선정 기준, 현장 조건, 문제점, 개선방안,
-    비용·유지보수·기존 설비 영향을 연결해야 합니다.
-    우수 답안의 ceiling은 약 15.75점 수준으로 보았습니다.
-
-이 문구는 해당 문제의 scoring context를 설명하는 것이며, `warn` 모드에서는 실제 점수 제한을 의미하지 않는다.
-
-## 16. 관련 파일
+## 12. 관련 파일
 
 | 파일 | 역할 |
 |---|---|
-| `difficulty_strategy.py` | Difficulty Profile 분류 |
-| `difficulty_output_adapter.py` | Difficulty 설명을 grade에 attach |
-| `difficulty_score_ceiling.py` | ceiling 후보 계산과 strict 적용 |
-| `grading_agents.py` | 채점 pipeline에서 difficulty 정보 결합 |
-| `bot.py` | Telegram 출력 |
+| `rubrics/difficulty_profiles/default.json` | Profile 정의와 기본 ceiling |
+| `difficulty_strategy.py` | 문제 난이도 분류 |
+| `difficulty_output_adapter.py` | grade에 difficulty 설명 attach |
+| `difficulty_score_ceiling.py` | recommended cap 계산 및 strict 적용 |
+| `grading_agents.py` | phase2 pipeline에서 difficulty 결합 |
+| `bot.py` | Telegram 출력에서 ceiling 전/후 점수 표시 |

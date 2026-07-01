@@ -1,38 +1,86 @@
-# Documentation Index
+# Docs Index
 
-이 디렉터리는 현재 코드와 직접 연결되는 운영 문서를 중심으로 유지한다.
+이 디렉터리는 `prof_eng_answer`의 운영, 채점 구조, provider, Question Type, Difficulty, Rubric Bank 문서를 보관한다.
 
-## 현재 기준 문서
+## 1. 문서 우선순위
 
-| 문서 | 역할 |
-|---|---|
-| `operation_runbook.md` | Bot 운영, 재시작, 장애 대응 |
-| `docker_compose_usage.md` | Docker Compose 기반 실행 방식 |
-| `grading_architecture.md` | A/B/C/D/E 25점 채점 구조 |
-| `question_type_taxonomy.md` | Question Type v2 기준 |
-| `difficulty_and_selection_strategy.md` | 난이도와 문항 선택 전략 |
-| `llm_provider.md` | Gemini/CLOVA provider 설정 |
-| `rubric_authoring_guide.md` | Rubric Bank 작성과 수정 방법 |
-| `model_answer_generator_prompt.md` | Model Answer 초안 생성 프롬프트 |
-| `fact_anchor_generator_prompt.md` | Fact Anchor 초안 생성 프롬프트 |
-| `topic_importance_generator_prompt.md` | Topic importance 초안 생성 프롬프트 |
-
-## Archive
-
-오래된 구조 설명, migration 기록, 현재 코드와 충돌할 수 있는 문서는 `docs/archive/` 아래로 이동한다.
-
-현재 기준은 다음 순서로 판단한다.
+문서끼리 설명이 충돌하면 다음 순서로 판단한다.
 
 1. 현재 Python 코드
 2. 현재 JSON Rubric Bank
-3. `README.md`
+3. 루트 `README.md`
 4. `docs/README.md`
 5. 각 세부 docs 문서
+6. migration/reference 문서
 
-## 검증 명령
+현재 실행 코드와 충돌하는 오래된 설계 설명은 운영 기준으로 사용하지 않는다.
+
+## 2. 현재 기준 문서
+
+| 문서 | 단일 책임 | 주요 근거 파일 |
+|---|---|---|
+| `operation_runbook.md` | 운영 점검, 재시작, 장애 대응 | `bot.py`, Docker Compose, logs |
+| `docker_compose_usage.md` | Compose 기반 실행 방식 | `docker-compose.*`, `prof_eng_answer_bot` |
+| `grading_architecture.md` | 채점 pipeline과 A/B/C/D/E 구조 | `grading_agents.py`, `rubrics/scoring_model/default.json` |
+| `question_type_taxonomy.md` | Question Type v2 taxonomy와 coverage | `question_type_taxonomy.py`, `rubrics/question_types/default.json` |
+| `difficulty_and_selection_strategy.md` | Difficulty Profile, ceiling, 문항 선택 전략 | `difficulty_strategy.py`, `difficulty_score_ceiling.py`, `rubrics/difficulty_profiles/default.json` |
+| `llm_provider.md` | Gemini/CLOVA/Ollama provider 구조 | `llm_provider_router.py`, `llm_provider_settings.py`, `gemini_grader.py`, `clova_grader.py` |
+| `rubric_authoring_guide.md` | Rubric JSON Bank 수정·검증 절차 | `scripts/rubric_manager.py`, `rubrics/*` |
+
+## 3. LLM 생성 보조 문서
+
+아래 문서는 코드가 직접 실행하는 문서가 아니라, JSON 초안을 만들 때 쓰는 작업 보조 문서다.
+
+| 문서 | 대상 JSON |
+|---|---|
+| `model_answer_generator_prompt.md` | `rubrics/model_answers/industrial_instrumentation_control.json` |
+| `fact_anchor_generator_prompt.md` | `rubrics/fact_anchors/industrial_instrumentation_control.json` |
+| `topic_importance_generator_prompt.md` | `rubrics/topic_importance/industrial_instrumentation_control.json` |
+
+## 4. Reference 문서
+
+| 문서 | 성격 |
+|---|---|
+| `migration_plan.md` | 구조 변경 및 migration 기록 |
+| `structure_review.md` | 과거 구조 검토와 설계 판단 기록 |
+
+이 문서들은 현재 실행 코드와 1:1로 맞지 않을 수 있다. 운영 판단에는 현재 기준 문서를 우선한다.
+
+## 5. 문서 중복 관리 원칙
+
+- 루트 `README.md`는 전체 지도와 빠른 기준만 둔다.
+- `docs/README.md`는 문서 목록과 우선순위만 둔다.
+- 운영 명령은 `operation_runbook.md`를 기준으로 한다.
+- Compose 세부 명령은 `docker_compose_usage.md`에 둔다.
+- 채점 로직 설명은 `grading_architecture.md`에 둔다.
+- Question Type 설명은 `question_type_taxonomy.md`에 둔다.
+- Difficulty와 ceiling 설명은 `difficulty_and_selection_strategy.md`에 둔다.
+- Rubric Bank 수정 절차는 `rubric_authoring_guide.md`에 둔다.
+
+## 6. 문서 정합성 점검
 
 ```bash
-python3 scripts/validate_model_fact_consistency.py
+cd ~/hermes/workspace/prof_eng_answer
+
+# README가 참조하는 docs 파일 존재 여부 확인
+grep -oE 'docs/[A-Za-z0-9_./-]+\.md' README.md | sort -u | while read -r f; do
+  [ -f "$f" ] || echo "MISSING: $f"
+done
+
+# Markdown fence 균형 확인
+python3 - <<'PY'
+from pathlib import Path
+import re
+bad = False
+for p in [Path("README.md")] + sorted(Path("docs").glob("*.md")):
+    s = p.read_text(encoding="utf-8")
+    ticks = len(re.findall(r"^```", s, flags=re.MULTILINE))
+    if ticks % 2:
+        print(f"ERROR: unbalanced fences in {p}")
+        bad = True
+raise SystemExit(1 if bad else 0)
+PY
+
 python3 scripts/rubric_manager.py validate-all
 git diff --check
 ```
