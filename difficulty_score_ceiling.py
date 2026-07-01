@@ -243,6 +243,75 @@ def _build_ceiling_decision(
     return decision
 
 
+
+
+def _append_unique_messages(grade: Dict[str, Any], key: str, messages: list[str]) -> None:
+    current = grade.get(key)
+
+    if isinstance(current, list):
+        items = [str(x) for x in current if str(x).strip()]
+    elif isinstance(current, str) and current.strip():
+        items = [current.strip()]
+    else:
+        items = []
+
+    for msg in messages:
+        msg = str(msg).strip()
+        if msg and msg not in items:
+            items.append(msg)
+
+    grade[key] = items
+
+
+def _attach_theory_core_fatal_feedback(
+    grade: Dict[str, Any],
+    decision: Dict[str, Any],
+) -> None:
+    """
+    THEORY_CORE에서 fatal_error_suspected가 true이면,
+    단순히 '핵심 이론 오류 의심'이라고만 쓰지 않고
+    약점/보완 방향에 구체적인 이론 오류 후보를 명시한다.
+    """
+    if decision.get("difficulty") != "THEORY_CORE":
+        return
+
+    evidence = decision.get("theory_core_evidence") or {}
+
+    if not evidence.get("fatal_error_suspected"):
+        return
+
+    strategy = grade.get("difficulty_strategy") or {}
+    topic_id = (
+        decision.get("topic_id")
+        or strategy.get("topic_id")
+        or ""
+    )
+
+    if topic_id == "second_order_system":
+        weaknesses = [
+            "감쇠비 관계식 오류: ζ는 sin^-1(ωd/ωn)로 표현하지 않으며, 부족감쇠 영역에서는 ωd = ωn√(1-ζ²) 관계로 설명해야 한다.",
+            "부족감쇠 해석 오류: 0 < ζ < 1은 일반적으로 안정한 감쇠진동 응답이며, 이를 단순히 발산으로 표현하면 안정/불안정 구분이 흐려진다.",
+            "감쇠비 구간 구분 부족: ζ = 0, 0 < ζ < 1, ζ = 1, ζ > 1 및 우반평면 극점에 의한 불안정 조건을 구분해야 한다.",
+        ]
+
+        advice = [
+            "2차 표준형 s² + 2ζωn s + ωn² = 0에서 극점, 감쇠비 ζ, 고유진동수 ωn, 감쇠진동수 ωd의 관계를 정확히 정리하세요.",
+            "감쇠비별 응답을 무감쇠(ζ=0), 부족감쇠(0<ζ<1), 임계감쇠(ζ=1), 과감쇠(ζ>1), 불안정 영역으로 구분해 표로 비교하세요.",
+            "부족감쇠는 오버슈트와 진동이 발생하지만 안정한 경우가 많으므로, 발산 조건과 분리해서 설명하세요.",
+        ]
+    else:
+        weaknesses = [
+            "THEORY_CORE 문항에서 핵심 수식·변수 관계·응답 해석 중 중대한 오류 가능성이 감지되었다.",
+        ]
+
+        advice = [
+            "핵심 이론 문항은 표준 모델, 핵심 변수, 수식 관계, 물리적 의미, 현장 판단을 순서대로 검증해 재작성하세요.",
+        ]
+
+    _append_unique_messages(grade, "weaknesses", weaknesses)
+    _append_unique_messages(grade, "rewrite_advice", advice)
+
+
 def apply_difficulty_score_ceiling(
     grade: Dict[str, Any],
     question_text: Optional[str] = None,
@@ -292,6 +361,8 @@ def apply_difficulty_score_ceiling(
         grade=grade
     )
 
+    _attach_theory_core_fatal_feedback(grade, decision)
+
     mode = decision.get("mode")
     recommended_cap = decision.get("recommended_cap")
 
@@ -300,7 +371,22 @@ def apply_difficulty_score_ceiling(
         and recommended_cap is not None
         and decision["capped_score"] < score
     ):
+        # Preserve pre-ceiling score for explanation, but keep user-facing
+        # final score fields consistent with the capped score.
+        grade["pre_ceiling_total_score"] = round(float(score), 2)
+
         _set_score(grade, decision["capped_score"])
+
+        capped_score = round(float(decision["capped_score"]), 2)
+        capped_int = int(capped_score)
+        grade["score_range"] = f"{capped_int}~{capped_int}"
+
+        # If the grade object has committee summary fields based on the
+        # pre-ceiling score, keep the raw values but expose explicit labels.
+        grade["final_total_score"] = capped_score
+
+        capped_int = int(float(decision["capped_score"]))
+        grade["score_range"] = f"{capped_int}~{capped_int}"
         decision["cap_applied"] = True
 
         summary = str(grade.get("summary") or "").strip()
