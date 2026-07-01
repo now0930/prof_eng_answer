@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import json
 import re
+import traceback
 from datetime import datetime
 from pathlib import Path
 from grading_config import load_active_config, save_active_config_snapshots
@@ -151,56 +152,308 @@ def common_criteria_prompt_block(common_criteria):
 
 
 def extract_json(text):
-    if not text:
+    """
+    LLM 응답에서 JSON object를 최대한 견고하게 추출한다.
+
+    지원 범위:
+    - raw JSON
+    - ```json fenced block
+    - 설명문 안에 포함된 첫 번째 {...}
+    - 배열/객체 닫힘 누락 같은 일부 malformed JSON 자동 보정
+
+    실패 시 None을 반환한다.
+    """
+    import json
+    import re
+
+    if text is None:
         return None
 
-    text = str(text).strip()
-    text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.I)
-    text = re.sub(r"\s*```$", "", text)
-
-    try:
-        return json.loads(text)
-    except Exception:
-        pass
-
-    start = text.find("{")
-    if start < 0:
+    raw = str(text).strip()
+    if not raw:
         return None
 
-    in_string = False
-    escape = False
-    depth = 0
+    def strip_fence(value: str) -> str:
+        value = value.strip()
 
-    for i in range(start, len(text)):
-        ch = text[i]
+        fenced = re.search(
+            r"```(?:json|JSON)?\s*(.*?)```",
+            value,
+            flags=re.DOTALL,
+        )
+        if fenced:
+            return fenced.group(1).strip()
+
+        if value.startswith("```") and value.endswith("```"):
+            lines = value.splitlines()
+            if len(lines) >= 3:
+                return "\n".join(lines[1:-1]).strip()
+
+        return value
+
+    def find_balanced_object(value: str) -> str | None:
+        start_pos = value.find("{")
+        if start_pos < 0:
+            return None
+
+        depth = 0
+        in_string = False
+        escape = False
+
+        for i in range(start_pos, len(value)):
+            ch = value[i]
+
+            if escape:
+                escape = False
+                continue
+
+            if ch == "\\":
+                escape = True
+                continue
+
+            if ch == '"':
+                in_string = not in_string
+                continue
+
+            if in_string:
+                continue
+
+            if ch == "{":
+                depth += 1
+            elif ch == "}":
+                depth -= 1
+                if depth == 0:
+                    return value[start_pos:i + 1]
+
+        return value[start_pos:]
+
+    def remove_trailing_commas(value: str) -> str:
+        return re.sub(r",\s*([}\]])", r"\1", value)
+
+    def escape_latex_backslashes_in_strings(value: str) -> str:
+        """
+        LLM이 JSON 문자열 안에 LaTeX 수식(\\omega, \\zeta, \\frac 등)을
+        그대로 넣는 경우 json.loads가 실패하거나 문자열이 깨진다.
+
+        JSON 문자열 내부에서 LaTeX 명령으로 보이는 backslash를
+        literal backslash로 보존하기 위해 \\ 로 보정한다.
+        단, quote/backslash/slash/unicode escape는 유지한다.
+        """
+        out = []
+        in_string = False
+        escape = False
+        i = 0
+
+        while i < len(value):
+            ch = value[i]
+
+            if escape:
+                prev = "\\"
+                nxt = ch
+                after = value[i + 1] if i + 1 < len(value) else ""
+
+                # JSON structural escapes that should remain as-is.
+                if nxt in ['"', "\\", "/"]:
+                    out.append(prev)
+                    out.append(nxt)
+
+                # Keep valid unicode escape as-is: \uXXXX
+                elif nxt == "u" and i + 4 < len(value):
+                    hex_part = value[i + 1:i + 5]
+                    if all(c in "0123456789abcdefABCDEF" for c in hex_part):
+                        out.append(prev)
+                        out.append(nxt)
+                    else:
+                        out.append("\\\\")
+                        out.append(nxt)
+
+                # LaTeX commands such as \frac, \theta, \beta, \nu, \rho.
+                # Some first letters overlap with JSON escapes.
+                elif nxt.isalpha():
+                    out.append("\\\\")
+                    out.append(nxt)
+
+                # Standard JSON escapes for non-LaTeX content.
+                elif nxt in ["b", "f", "n", "r", "t"]:
+                    out.append(prev)
+                    out.append(nxt)
+
+                # Invalid JSON escape: preserve literal backslash.
+                else:
+                    out.append("\\\\")
+                    out.append(nxt)
+
+                escape = False
+                i += 1
+                continue
+
+            if ch == "\\" and in_string:
+                escape = True
+                i += 1
+                continue
+
+            if ch == '"':
+                in_string = not in_string
+
+            out.append(ch)
+            i += 1
 
         if escape:
-            escape = False
+            out.append("\\\\")
+
+        return "".join(out)
+
+    def close_missing_containers(value: str) -> str:
+        """
+        모델이 배열을 닫지 않고 객체를 닫는 경우를 보정한다.
+        예:
+            "items": [
+              "a",
+              "b"
+            },
+        가 되어야 하는데
+            "items": [
+              "a",
+              "b"
+            },
+        에서 ]가 빠져
+            "items": [
+              "a",
+              "b"
+            },
+        비슷한 형태로 깨지는 경우를 복구한다.
+
+        실제 동작:
+        - '}'를 만났는데 stack top이 '['이면 먼저 ']'를 삽입한다.
+        - 파일 끝에서 남은 stack을 닫는다.
+        """
+        out = []
+        stack = []
+        in_string = False
+        escape = False
+
+        for ch in value:
+            if escape:
+                out.append(ch)
+                escape = False
+                continue
+
+            if ch == "\\":
+                out.append(ch)
+                escape = True
+                continue
+
+            if ch == '"':
+                out.append(ch)
+                in_string = not in_string
+                continue
+
+            if in_string:
+                out.append(ch)
+                continue
+
+            if ch == "{":
+                stack.append("{")
+                out.append(ch)
+                continue
+
+            if ch == "[":
+                stack.append("[")
+                out.append(ch)
+                continue
+
+            if ch == "}":
+                while stack and stack[-1] == "[":
+                    out.append("]")
+                    stack.pop()
+
+                if stack and stack[-1] == "{":
+                    stack.pop()
+
+                out.append(ch)
+                continue
+
+            if ch == "]":
+                while stack and stack[-1] == "{":
+                    out.append("}")
+                    stack.pop()
+
+                if stack and stack[-1] == "[":
+                    stack.pop()
+
+                out.append(ch)
+                continue
+
+            out.append(ch)
+
+        while stack:
+            opener = stack.pop()
+            out.append("}" if opener == "{" else "]")
+
+        return "".join(out)
+
+    def try_load(value: str):
+        value = value.strip()
+        if not value:
+            return None
+
+        try:
+            return json.loads(value)
+        except Exception:
+            return None
+
+    candidates = []
+
+    fenced = strip_fence(raw)
+    candidates.append(raw)
+    candidates.append(fenced)
+
+    obj = find_balanced_object(fenced)
+    if obj:
+        candidates.append(obj)
+
+    obj_raw = find_balanced_object(raw)
+    if obj_raw:
+        candidates.append(obj_raw)
+
+    expanded = []
+
+    for candidate in candidates:
+        if not candidate:
             continue
 
-        if ch == "\\":
-            escape = True
+        repaired = close_missing_containers(candidate)
+        repaired_no_trailing = remove_trailing_commas(repaired)
+
+        expanded.append(candidate)
+        expanded.append(remove_trailing_commas(candidate))
+        expanded.append(repaired)
+        expanded.append(repaired_no_trailing)
+
+        escaped = escape_latex_backslashes_in_strings(candidate)
+        escaped_repaired = close_missing_containers(escaped)
+        escaped_repaired_no_trailing = remove_trailing_commas(escaped_repaired)
+
+        expanded.append(escaped)
+        expanded.append(remove_trailing_commas(escaped))
+        expanded.append(escaped_repaired)
+        expanded.append(escaped_repaired_no_trailing)
+
+    seen = set()
+
+    for candidate in expanded:
+        candidate = candidate.strip()
+        if not candidate or candidate in seen:
             continue
 
-        if ch == '"':
-            in_string = not in_string
-            continue
+        seen.add(candidate)
 
-        if in_string:
-            continue
-
-        if ch == "{":
-            depth += 1
-        elif ch == "}":
-            depth -= 1
-            if depth == 0:
-                candidate = text[start:i + 1]
-                try:
-                    return json.loads(candidate)
-                except Exception:
-                    return None
+        parsed = try_load(candidate)
+        if parsed is not None:
+            return parsed
 
     return None
+
 
 
 def write_json(path, data):
@@ -1493,6 +1746,49 @@ def _phase3_anchor_term_matches(text, terms):
     return hits
 
 
+
+def _phase3_priority_value(value):
+    """
+    Fact Anchor topic priority를 정렬용 숫자로 변환한다.
+
+    subject_rubric의 priority는 과거에는 숫자였지만,
+    현재 profile에서는 "high" / "medium" / "low" 문자열일 수 있다.
+    이 값은 anchor 후보 정렬의 tie-breaker로만 사용되므로
+    실패시키지 않고 보수적으로 숫자화한다.
+    """
+    if value is None:
+        return 0.0
+
+    if isinstance(value, bool):
+        return 1.0 if value else 0.0
+
+    if isinstance(value, (int, float)):
+        return float(value)
+
+    text = str(value).strip().lower()
+
+    label_map = {
+        "critical": 4.0,
+        "very_high": 4.0,
+        "very-high": 4.0,
+        "highest": 4.0,
+        "high": 3.0,
+        "medium": 2.0,
+        "mid": 2.0,
+        "normal": 2.0,
+        "low": 1.0,
+        "none": 0.0,
+    }
+
+    if text in label_map:
+        return label_map[text]
+
+    try:
+        return float(text)
+    except (TypeError, ValueError):
+        return 0.0
+
+
 def _phase3_select_fact_anchors_from_bank(question_text, answer_text, subject_rubric=None):
     bank = _phase3_load_fact_anchor_bank(subject_rubric)
     topics = bank.get("topics", [])
@@ -1507,7 +1803,7 @@ def _phase3_select_fact_anchors_from_bank(question_text, answer_text, subject_ru
         if not trigger_hits:
             continue
 
-        score = len(trigger_hits) * 10 + len(alias_hits) + int(topic.get("priority", 0)) / 100.0
+        score = len(trigger_hits) * 10 + len(alias_hits) + _phase3_priority_value(topic.get("priority", 0)) / 100.0
 
         scored.append({
             "score": score,
@@ -2783,6 +3079,7 @@ def run_agent_pipeline(*args, **kwargs):
 
     except Exception as e:
         print(f"[agent] phase2 postprocess failed: {e!r}")
+        print(traceback.format_exc())
         return legacy_result
 
 

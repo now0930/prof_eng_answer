@@ -554,8 +554,26 @@ def format_result(parsed, sid=None):
     lines.append("")
 
     rater_summary = parsed.get("rater_summary")
-    if rater_summary and rater_summary != summary:
-        lines.append(f"3인 채점 요약: {rater_summary}")
+    cap_eval = parsed.get("difficulty_ceiling_evaluation") or {}
+
+    if rater_summary and cap_eval.get("cap_applied"):
+        display_rater_summary = str(rater_summary)
+
+        # rater_summary is assembled before difficulty ceiling is applied.
+        # Therefore its weighted score is a pre-ceiling score, not the final score.
+        display_rater_summary = display_rater_summary.replace(
+            "최종 가중 점수는",
+            "ceiling 적용 전 가중 점수는",
+        )
+
+        display_rater_summary += (
+            f" 난이도 ceiling 적용 후 최종 점수는 {total}/{max_score:g}점입니다."
+        )
+    else:
+        display_rater_summary = rater_summary
+
+    if display_rater_summary and display_rater_summary != summary:
+        lines.append(f"3인 채점 요약: {display_rater_summary}")
         lines.append("")
 
     lines.append(f"총평: {summary}")
