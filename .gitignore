@@ -59,3 +59,7 @@ rubrics/content_candidates/
 # Editor swap files
 *.swp
 *.swo
+
+# Editor swap files
+*.swp
+*.swo
