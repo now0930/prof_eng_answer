@@ -3479,7 +3479,7 @@ def _phase8b_enforce_final_volume_cap(grade):
         grade["applied_caps"] = applied_caps
 
         summary = str(grade.get("summary") or "")
-        note = f" 최종 점수는 답안 분량 상한 {cap:g}점을 초과하지 않도록 보정했습니다."
+        note = f" ceiling 적용 전 가중 점수는 답안 분량 상한 {cap:g}점을 초과하지 않도록 보정했습니다."
         if "답안 분량 상한" not in summary:
             grade["summary"] = (summary + note).strip()
 
