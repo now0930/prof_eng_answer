@@ -1,4 +1,14 @@
-# Docs Index
+from __future__ import annotations
+
+from datetime import datetime
+from pathlib import Path
+
+
+ROOT = Path(__file__).resolve().parents[2]
+DOCS_README = ROOT / "docs" / "README.md"
+
+
+CANONICAL = """# Docs Index
 
 이 디렉터리는 `prof_eng_answer`의 운영, 채점 구조, provider, Question Type, Difficulty, Rubric Bank 문서를 보관한다.
 
@@ -65,7 +75,7 @@
 cd ~/hermes/workspace/prof_eng_answer
 
 # README가 참조하는 docs 파일 존재 여부 확인
-grep -oE 'docs/[A-Za-z0-9_./-]+\.md' README.md | sort -u | while read -r f; do
+grep -oE 'docs/[A-Za-z0-9_./-]+\\.md' README.md | sort -u | while read -r f; do
   [ -f "$f" ] || echo "MISSING: $f"
 done
 
@@ -83,8 +93,3 @@ for p in [Path("README.md")] + sorted(Path("docs").glob("*.md")):
         bad = True
 
 raise SystemExit(1 if bad else 0)
-PY
-
-python3 scripts/rubric_manager.py validate-all
-git diff --check
-```
