@@ -338,19 +338,60 @@ def _logic_check_display_items(parsed):
         return [], False
 
     findings = logic_eval.get("findings") or []
+
+    def canonical_key(item):
+        severity = str(item.get("severity") or "warn").strip()
+        message = " ".join(str(item.get("message") or "").split()).strip()
+        evidence = " ".join(str(item.get("evidence") or "").split()).strip()
+        combined = f"{message} {evidence}"
+
+        if (
+            "Under damp =>" in combined
+            and "Critical damp =>" in combined
+            and "Over damp =>" in combined
+        ):
+            return (severity, "second_order_zeta_region_mapping_conflict")
+
+        if "sinθ" in combined and "음의 실수축" in combined:
+            return (severity, "second_order_angle_reference_conflict")
+
+        return (severity, message)
+
+    def dedupe(items):
+        out = []
+        seen = set()
+
+        for item in items:
+            if not isinstance(item, dict):
+                continue
+
+            message = " ".join(str(item.get("message") or "").split()).strip()
+            if not message:
+                continue
+
+            key = canonical_key(item)
+            if key in seen:
+                continue
+
+            seen.add(key)
+            out.append(item)
+
+        return out
+
     fatal_items = [
         f for f in findings
         if isinstance(f, dict) and f.get("severity") == "fatal"
     ]
 
     if fatal_items:
-        return fatal_items[:5], True
+        return dedupe(fatal_items)[:3], True
 
     warn_items = [
         f for f in findings
         if isinstance(f, dict) and f.get("severity") in ("major", "minor")
     ]
-    return warn_items[:5], False
+
+    return dedupe(warn_items)[:3], False
 
 
 def _filter_weaknesses_for_logic_check(weaknesses, has_logic_check_items):
@@ -416,6 +457,70 @@ def _filter_advice_for_logic_check(advice, has_logic_check_items):
             filtered.append(text)
 
     return filtered
+
+
+
+def _logic_check_has_fatal(parsed):
+    logic_eval = parsed.get("logic_check_evaluation") or {}
+    if not isinstance(logic_eval, dict):
+        return False
+    if logic_eval.get("fatal_error_detected"):
+        return True
+    return any(
+        isinstance(x, dict) and x.get("severity") == "fatal"
+        for x in (logic_eval.get("findings") or [])
+    )
+
+
+def _filter_strengths_for_logic_check(strengths, has_logic_fatal):
+    if not strengths:
+        return []
+
+    if isinstance(strengths, str):
+        strengths = [strengths]
+
+    filtered = []
+
+    for item in strengths:
+        text = str(item).strip()
+        if not text:
+            continue
+
+        if text in {"없음", "없습니다", "해당 없음", "None", "null"}:
+            continue
+
+        if has_logic_fatal:
+            if "독창성/기술사적 판단성" in text:
+                continue
+            if "이론적 배경은 충실" in text:
+                continue
+            if "우수" in text and "부족" in text:
+                continue
+
+        if text not in filtered:
+            filtered.append(text)
+
+    return filtered
+
+
+def _clean_display_list(items):
+    if not items:
+        return []
+
+    if isinstance(items, str):
+        items = [items]
+
+    cleaned = []
+    for item in items:
+        text = str(item).strip()
+        if not text:
+            continue
+        if text in {"없음", "없습니다", "해당 없음", "None", "null", "-"}:
+            continue
+        if text not in cleaned:
+            cleaned.append(text)
+
+    return cleaned
 
 
 def call_ollama(prompt):
@@ -670,6 +775,8 @@ def format_result(parsed, sid=None):
 
     rater_results = parsed.get("rater_results") or parsed.get("raters") or []
     if rater_results:
+        if _logic_check_has_fatal(parsed):
+            lines.append("※ 아래 3인 채점위원 평가는 ceiling 적용 전 의미 평가입니다. Logic Check fatal이 있는 경우 최종 점수는 핵심 이론 오류 cap을 우선 적용합니다.")
         lines.append("[3인 채점위원 점수]")
         for r in rater_results:
             name = pick(r.get("rater_name"), r.get("name"), r.get("id"), default="채점자")
@@ -721,7 +828,12 @@ def format_result(parsed, sid=None):
                 lines.append(f"  사유: {reason}")
         lines.append("")
 
-    strengths = parsed.get("strengths") or []
+    has_logic_fatal = _logic_check_has_fatal(parsed)
+
+    strengths = _filter_strengths_for_logic_check(
+        parsed.get("strengths") or [],
+        has_logic_fatal
+    )
     if strengths:
         lines.append("[장점]")
         for x in strengths:

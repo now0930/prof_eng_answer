@@ -391,6 +391,34 @@ fatal 판정 조건:
 """.strip()
 
 
+
+def _canonical_logic_finding_key(finding: dict[str, Any]) -> tuple[str, str]:
+    severity = str(finding.get("severity") or "").strip()
+    message = re.sub(r"\s+", " ", str(finding.get("message") or "")).strip()
+    evidence = re.sub(r"\s+", " ", str(finding.get("evidence") or "")).strip()
+
+    combined = f"{message} {evidence}"
+
+    # Same logical contradiction can be phrased multiple ways by the LLM.
+    if (
+        "Under damp =>" in combined
+        and "Critical damp =>" in combined
+        and "Over damp =>" in combined
+    ):
+        return (severity, "second_order_zeta_region_mapping_conflict")
+
+    if "sinθ" in combined and ("음의 실수축" in combined or "negative real" in combined):
+        return (severity, "second_order_angle_reference_conflict")
+
+    if "임계감쇠" in combined and ("진동" in combined or "오버" in combined):
+        return (severity, "second_order_critical_step_response_conflict")
+
+    if "과감쇠" in combined and ("오버" in combined or "충돌" in combined or "최속" in combined):
+        return (severity, "second_order_overdamped_step_response_conflict")
+
+    return (severity, message)
+
+
 def verify_logic_with_llm(answer_text: str, topic_id: str) -> dict[str, Any]:
     profile = load_logic_check_profile(topic_id)
     cap_policy = profile.get("cap_policy") or {}
@@ -489,6 +517,31 @@ def verify_logic_with_llm(answer_text: str, topic_id: str) -> dict[str, Any]:
             finding["recommended_ceiling"] = fatal_ceiling
 
         normalized_findings.append(finding)
+
+    # De-duplicate LLM verifier findings.
+    # The LLM may return the same contradiction for multiple nearby candidates.
+    deduped_findings: list[dict[str, Any]] = []
+    seen_finding_keys: set[tuple[str, str, str]] = set()
+
+    for finding in normalized_findings:
+        key = _canonical_logic_finding_key(finding)
+
+        if key in seen_finding_keys:
+            continue
+
+        seen_finding_keys.add(key)
+        deduped_findings.append(finding)
+
+    # Keep fatal feedback focused.
+    fatal_findings = [f for f in deduped_findings if f.get("severity") == "fatal"]
+    nonfatal_findings = [f for f in deduped_findings if f.get("severity") != "fatal"]
+
+    if fatal_findings:
+        deduped_findings = fatal_findings[:3] + nonfatal_findings[:2]
+    else:
+        deduped_findings = deduped_findings[:5]
+
+    normalized_findings = deduped_findings
 
     fatal = any(f.get("severity") == "fatal" for f in normalized_findings)
     mode = "fatal" if fatal else ("warn" if normalized_findings else "pass")
