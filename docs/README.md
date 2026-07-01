@@ -33,9 +33,6 @@
 
 | 문서 | 대상 JSON |
 |---|---|
-| `model_answer_generator_prompt.md` | `rubrics/model_answers/industrial_instrumentation_control.json` |
-| `fact_anchor_generator_prompt.md` | `rubrics/fact_anchors/industrial_instrumentation_control.json` |
-| `topic_importance_generator_prompt.md` | `rubrics/topic_importance/industrial_instrumentation_control.json` |
 
 ## 4. Reference 문서
 
@@ -84,3 +81,20 @@ PY
 python3 scripts/rubric_manager.py validate-all
 git diff --check
 ```
+
+## Archived prompt/reference documents
+
+생성 프롬프트와 일회성 문서 정리 노트는 active 문서에서 제외하고 `docs/archive/20260701_193514/` 아래로 이동했다.
+
+- `prompt_templates/model_answer_generator_prompt.md`
+- `prompt_templates/fact_anchor_generator_prompt.md`
+- `prompt_templates/topic_importance_generator_prompt.md`
+- `DOCS_UPDATE_NOTES.md`
+
+현재 문서의 판단 기준은 다음 순서로 둔다.
+
+1. 현재 Python 코드
+2. 현재 JSON Rubric Bank
+3. `README.md`
+4. `docs/README.md`
+5. 각 세부 docs 문서
