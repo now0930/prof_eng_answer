@@ -208,7 +208,7 @@ Model Answer Bank는 다음 CLI로 관리한다.
 
     python3 scripts/rubric_manager.py validate-model-answers
 
-Model Answer Bank의 고유키는 `id`이다.  
+Model Answer Bank의 고유키는 `id`이다.
 `topic_id + question_type`은 검색·분류 기준이지 고유키가 아니다.
 
 ## 10. Fact Anchor Bank 관리 함수
@@ -242,7 +242,7 @@ Fact Anchor Bank는 다음 CLI로 관리한다.
 
     python3 scripts/rubric_manager.py validate-fact-anchors
 
-Fact Anchor topic은 `anchors` 5개를 가져야 한다.  
+Fact Anchor topic은 `anchors` 5개를 가져야 한다.
 각 anchor는 `id`, `name`, `expected`, `core_terms`, `support_terms`를 포함해야 한다.
 
 ## 11. Topic Importance 관리 함수
@@ -278,7 +278,7 @@ Topic Importance는 다음 CLI로 관리한다.
 
     python3 scripts/rubric_manager.py validate-topic-importance
 
-Topic Importance는 개별 답안 품질보다 시험 선택 전략과 난이도 판단에 가깝다.  
+Topic Importance는 개별 답안 품질보다 시험 선택 전략과 난이도 판단에 가깝다.
 따라서 새 Model Answer를 추가할 때마다 자동으로 추가하지 말고, 필요할 때만 별도 topic으로 관리한다.
 
 ## 12. CRUD 검증 함수
@@ -398,7 +398,7 @@ Topic Importance는 개별 답안 품질보다 시험 선택 전략과 난이도
 | `DESIGN_EVALUATION` | 설계, 평가, 효과 분석 중심 |
 | `THEORY_CORE` | 제어이론, 2차 시스템, 안정도 등 핵심 이론 |
 
-Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다.  
+Difficulty Profile은 A/B/C/D/E 점수를 대체하지 않는다.
 고득점 가능성, ceiling 후보, 문항 선택 전략을 설명하는 보조 lens이다.
 
 ## 16. 운영상 중요한 주의
