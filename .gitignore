@@ -55,3 +55,7 @@ wordpress_docs/
 
 # Temporary rubric content candidates
 rubrics/content_candidates/
+
+# Editor swap files
+*.swp
+*.swo

@@ -655,19 +655,20 @@
         "temperature measurement error"
       ],
       "expected_structure": [
-        "개요",
-        "현상 및 원인",
-        "영향 분석",
-        "대책 및 개선",
-        "현장 적용 및 결론"
+        "온도 측정오차 개요",
+        "열전달 경로와 오차 원인",
+        "담금 깊이와 줄기 전도",
+        "보호관·유속·설치 조건",
+        "조건부 계산과 저감 대책",
+        "현장 적용 결론"
       ],
       "model_answer_outline": [
-        "현상과 문제 발생 조건을 정의한다.",
-        "주요 원인과 발생 메커니즘을 설명한다.",
-        "설비, 제어, 품질, 안전 측면의 영향을 정리한다.",
-        "진단 방법과 확인 항목을 제시한다.",
-        "원인별 대책과 개선 방안을 연결한다.",
-        "현장 적용 우선순위와 유지보수 관점의 결론을 제시한다."
+        "온도 측정오차의 배경을 제시하고 전도·대류·복사 열전달 경로를 구분한다.",
+        "담금 깊이 부족과 줄기 전도 오차가 측정값에 미치는 영향을 연결하여 설명한다.",
+        "감지부 길이, 센서 지름, 보호관, 유속, 목표 오차를 담금 깊이 선정 요소로 정리한다.",
+        "보호관 재질·형상, 설치 위치, 응답 지연이 현장 측정오차에 미치는 영향을 설명한다.",
+        "80 mm 등 예제 수치는 일반 기준으로 단정하지 않고 조건부 계산 예시로 다룬다.",
+        "오차 저감 대책과 보정·검증 방법을 현장 유지보수 관점에서 정리한다."
       ],
       "high_score_features": [
         "전도, 대류, 복사를 온도 측정오차의 원인으로 구분하여 설명한다.",
@@ -697,7 +698,8 @@
         "센서 종류 비교가 아니라 열전달 기반 온도 측정오차와 저감 대책 topic으로 한정했다.",
         "question_type normalized from active profile: temperature_measurement_error_heat_transfer_CAUSE_ACTION_v1 -> temperature_measurement_error_heat_transfer_DIAGNOSIS_ACTION_v1",
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items."
       ]
     },
     {
@@ -718,17 +720,20 @@
         "source inductance rectifier"
       ],
       "expected_structure": [
-        "개요",
-        "원리 및 구성",
-        "주요 특성",
-        "한계 및 유의점",
-        "현장 적용 및 결론"
+        "전원 인덕턴스가 있는 정류기 커뮤테이션 중첩 현상 한정",
+        "전원 인덕턴스와 인덕터 전류 연속성",
+        "두 소자 동시 도통과 전류 전환 회로 경로",
+        "중첩 구간 출력전압 저하 메커니즘",
+        "평균 출력전압 저하·전류 왜곡·소자 스트레스",
+        "전원 임피던스·부하전류·점호각 설계 유의점"
       ],
       "model_answer_outline": [
-        "개요를 통해 전원 인덕턴스가 있는 정류기의 커뮤테이션 중첩 현상의 개념과 출제 배경을 제시한다.",
-        "원리 및 구성·주요 특성를 중심으로 핵심 원리와 구성 관계를 설명한다.",
-        "한계 및 유의점를 구분하여 성능 저하, 오차, 한계 또는 운전 영향을 설명한다.",
-        "현장 적용 및 결론에 따라 적용 절차와 개선 방향을 제시한다."
+        "주제를 인버터 일반론으로 확장하지 않고 전원 인덕턴스가 있는 정류기 커뮤테이션 중첩 현상으로 한정한다.",
+        "전원 인덕턴스와 인덕터 전류 연속성이 커뮤테이션 중첩의 근본 원인임을 설명한다.",
+        "중첩 구간에서 두 소자가 동시에 도통되는 회로 경로와 전류 전환 과정을 정리한다.",
+        "커뮤테이션 중첩 동안 전류 전환 경로가 겹치면서 출력전압이 0 또는 낮은 값으로 떨어지는 메커니즘을 설명한다.",
+        "평균 출력전압 저하, 전류 왜곡, 소자 스트레스, 손실 증가를 주요 영향으로 제시한다.",
+        "전원 임피던스, 부하전류, 점호각 조건을 고려한 설계·운전 유의점을 정리한다."
       ],
       "high_score_features": [
         "전원 인덕턴스와 인덕터 전류 연속성을 커뮤테이션 중첩의 근본 원인으로 설명한다.",
@@ -758,7 +763,10 @@
         "post 9040의 제목은 인버터이나 본문은 정류기 커뮤테이션 중첩이므로 정류기 topic으로 재분류했다.",
         "question_type normalized from active profile: rectifier_source_inductance_commutation_overlap_PRINCIPLE_v1 -> rectifier_source_inductance_commutation_overlap_PRINCIPLE_INTERPRETATION_v1",
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items.",
+        "2026-07-01 relationship_fix: aligned expected_structure keywords with model_answer_outline flow.",
+        "2026-07-01 relationship_minor_fix: resolved P1 priority relationship warnings while keeping outline high-level and max 6 items."
       ]
     },
     {
@@ -777,17 +785,20 @@
         "PWM 듀티비"
       ],
       "expected_structure": [
-        "개요",
-        "원리 및 구성",
-        "주요 특성",
-        "한계 및 유의점",
-        "현장 적용 및 결론"
+        "DC-DC chopper와 Buck·Boost converter의 목적",
+        "스위치 ON/OFF와 인덕터 에너지 저장·방출",
+        "Buck 저전압 변환과 Boost 승압 변환의 에너지 전달 경로",
+        "duty ratio·출력전압·리플·연속/불연속 전류 모드",
+        "스위칭 손실·인덕터 포화·소자 정격·열·EMI·보호회로",
+        "전원장치·구동계 적용과 설계 유의점"
       ],
       "model_answer_outline": [
-        "개요를 통해 DC-DC 초퍼와 Buck/Boost 컨버터의 동작 원리의 개념과 출제 배경을 제시한다.",
-        "원리 및 구성·주요 특성를 중심으로 핵심 원리와 구성 관계를 설명한다.",
-        "한계 및 유의점를 구분하여 성능 저하, 오차, 한계 또는 운전 영향을 설명한다.",
-        "현장 적용 및 결론에 따라 적용 절차와 개선 방향을 제시한다."
+        "DC-DC chopper와 Buck·Boost converter의 목적을 직류 전압 변환과 전력 제어 관점에서 제시한다.",
+        "스위치 ON/OFF에 따른 인덕터 에너지 저장·방출 과정과 전류 연속성을 설명한다.",
+        "Buck은 입력보다 낮은 전압, Boost는 입력보다 높은 전압을 얻으며 차이는 스위칭 구간의 에너지 전달 경로에서 발생함을 설명한다.",
+        "duty ratio와 출력전압 관계, 리플, 연속/불연속 전류 모드가 설계와 동작에 미치는 영향을 정리한다.",
+        "스위칭 손실, 인덕터 포화, 소자 정격, 열, EMI, 보호회로를 설계 유의점으로 제시한다.",
+        "전원장치, 배터리 시스템, 모터 구동계 적용 시 효율·응답·안전성을 함께 검토한다."
       ],
       "high_score_features": [
         "DC 입력을 스위칭하여 원하는 평균 DC 출력전압으로 변환하는 장치임을 설명해야 한다.",
@@ -820,7 +831,8 @@
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
         "2026-07-01T08:57:20 content_fix_v2: replaced generic field_connection_points with topic-specific points.",
         "2026-07-01 content_style_fix: normalized expected_structure and removed numbered headings from model_answer_outline.",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_minor_fix: resolved P1 priority relationship warnings while keeping outline high-level and max 6 items."
       ]
     },
     {
@@ -841,19 +853,20 @@
         "SOA"
       ],
       "expected_structure": [
-        "개요",
-        "비교 대상 정의",
-        "비교 기준",
-        "선정 기준",
-        "현장 적용 및 결론"
+        "전력반도체 스위칭 소자 비교 목적",
+        "다이오드 역회복 전류·시간과 손실·스파이크 영향",
+        "SCR 턴온·홀딩 전류·턴오프 조건",
+        "MOSFET·IGBT·SCR의 전압·전류·속도·손실 비교",
+        "SOA·열저항·스위칭 손실·회로 인덕턴스·스너버·게이트 보호",
+        "전력변환 회로 조건별 소자 선정"
       ],
       "model_answer_outline": [
-        "비교 대상과 적용 배경을 제시한다.",
-        "비교 기준과 판단 축을 먼저 설정한다.",
-        "각 방식의 핵심 특성과 장단점을 정리한다.",
-        "공정 조건에 따른 선정 기준을 제시한다.",
-        "기존 설비, 비용, 유지보수 조건을 함께 검토한다.",
-        "최종 선정 방향과 현장 적용 시 유의점을 정리한다."
+        "전력반도체 스위칭 소자의 비교 목적을 전압·전류 정격, 스위칭 속도, 손실, 구동 방식 관점에서 제시한다.",
+        "다이오드는 순방향 도통 후 역방향 전압 인가 시 저장전하 제거 동안 역회복 전류가 흐르며 역회복 시간과 최대 역회복 전류가 손실과 스파이크에 영향을 줌을 설명한다.",
+        "SCR은 게이트 신호로 턴온되지만 홀딩 전류 이상에서는 계속 도통하며 일반적으로 턴오프에는 전류 감소 또는 역전압 조건이 필요함을 정리한다.",
+        "MOSFET, IGBT, SCR의 전압·전류 영역, 스위칭 속도, 도통손실, 구동회로 특성을 비교한다.",
+        "SOA, 열저항, 스위칭 손실, 회로 인덕턴스, 스너버, 게이트 보호를 고려하지 않으면 발열, 과전압, 소자 파괴가 발생할 수 있음을 제시한다.",
+        "정류, 인버터, DC-DC converter, motor drive 등 회로 조건에 따라 소자 선정 기준을 연결한다."
       ],
       "high_score_features": [
         "전력변환 회로에서 전압·전류를 개폐하여 정류, 변환, 제어를 수행하는 핵심 스위칭 소자임을 설명해야 한다.",
@@ -885,7 +898,8 @@
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
         "2026-07-01T08:57:20 content_fix_v2: replaced generic field_connection_points with topic-specific points.",
         "2026-07-01 content_style_fix: normalized expected_structure and removed numbered headings from model_answer_outline.",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_minor_fix: resolved P1 priority relationship warnings while keeping outline high-level and max 6 items."
       ]
     },
     {
@@ -904,17 +918,20 @@
         "토크 방정식"
       ],
       "expected_structure": [
-        "개요",
-        "원리 및 구성",
-        "주요 특성",
-        "한계 및 유의점",
-        "현장 적용 및 결론"
+        "3상 시간변화 전압·전류·자속의 d-q 좌표변환 목적",
+        "정지좌표계와 회전좌표계 변환 및 해석 단순화",
+        "회전좌표계 전압방정식과 속도기전력 결합항",
+        "d-q 등가회로와 자속·전류 관계",
+        "전자기 토크식과 자속 기준 좌표계의 q축 전류 제어",
+        "벡터제어·인버터 구동 적용과 한계"
       ],
       "model_answer_outline": [
-        "개요를 통해 유도전동기의 d-q 좌표변환과 회전좌표계 등가회로의 개념과 출제 배경을 제시한다.",
-        "원리 및 구성·주요 특성를 중심으로 핵심 원리와 구성 관계를 설명한다.",
-        "한계 및 유의점를 구분하여 성능 저하, 오차, 한계 또는 운전 영향을 설명한다.",
-        "현장 적용 및 결론에 따라 적용 절차와 개선 방향을 제시한다."
+        "3상 시간변화 전압·전류·자속을 d-q 직교 좌표계로 변환하여 유도전동기 해석과 제어를 단순화하는 목적을 제시한다.",
+        "정지좌표계와 회전좌표계의 차이를 설명하고 회전좌표계에서 정상상태 교류량을 직류량처럼 다룰 수 있음을 정리한다.",
+        "회전좌표계 전압방정식에는 저항전압과 자속 미분항 외에 -ωλq, +ωλd 같은 속도기전력 결합항이 포함됨을 설명한다.",
+        "d-q 등가회로에서 고정자·회전자 저항, 누설인덕턴스, 자화인덕턴스와 자속·전류 관계를 연결한다.",
+        "Te = 3/2 p(λd iq - λq id)이고 자속 기준 좌표계에서 λq=0이면 토크가 q축 전류에 비례함을 설명한다.",
+        "벡터제어, 인버터 구동, 전동기 상태 추정에 적용하되 파라미터 변화와 포화 영향을 유의점으로 제시한다."
       ],
       "high_score_features": [
         "3상 시간변화 전압·전류·자속을 직교 좌표계로 변환하여 유도전동기의 해석과 제어를 단순화하는 방법임을 설명해야 한다.",
@@ -945,7 +962,8 @@
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
         "2026-07-01T08:08:19 content_fix: replaced topic-mismatched field_connection_points.",
         "2026-07-01 content_style_fix: normalized expected_structure and removed numbered headings from model_answer_outline.",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_minor_fix: resolved P1 priority relationship warnings while keeping outline high-level and max 6 items."
       ]
     },
     {
@@ -1338,17 +1356,20 @@
         "불균형 데이터"
       ],
       "expected_structure": [
-        "개요",
-        "원리 및 구성",
-        "주요 특성",
-        "한계 및 유의점",
-        "현장 적용 및 결론"
+        "분류 모델 성능평가 목적과 혼동행렬 TP·FP·FN·TN 관계",
+        "Precision과 양성 예측 사례·실제 양성 비율·오경보 false alarm",
+        "Recall과 실제 양성 사례·양성 검출 비율·미검출 missed detection",
+        "F1-score와 Precision·Recall 조화평균 및 균형 평가",
+        "불량 검출·안전 감시·경보 시스템의 오경보와 미검출 비용",
+        "업무 목적에 따른 Precision·Recall·F1-score 우선 지표 선정"
       ],
       "model_answer_outline": [
-        "개요를 통해 분류 모델 Precision, Recall, F1-score 성능평가의 개념과 출제 배경을 제시한다.",
-        "원리 및 구성·주요 특성를 중심으로 핵심 원리와 구성 관계를 설명한다.",
-        "한계 및 유의점를 구분하여 성능 저하, 오차, 한계 또는 운전 영향을 설명한다.",
-        "현장 적용 및 결론에 따라 적용 절차와 개선 방향을 제시한다."
+        "분류 모델 성능평가의 목적을 제시하고 혼동행렬 기반의 TP, FP, FN, TN 관계를 정리한다.",
+        "Precision은 모델이 양성이라고 예측한 사례 중 실제 양성의 비율이며 오경보 또는 false alarm과 관련됨을 설명한다.",
+        "Recall은 실제 양성 사례 중 모델이 양성으로 검출한 비율이며 미검출 또는 missed detection과 관련됨을 설명한다.",
+        "F1-score는 Precision과 Recall의 조화평균으로 두 지표의 균형을 평가하는 지표임을 설명한다.",
+        "불량 검출, 안전 감시, 경보 시스템처럼 오경보와 미검출 비용이 다른 사례를 연결한다.",
+        "업무 목적에 따라 Precision, Recall, F1-score 중 어떤 지표를 우선할지 판단 기준을 제시한다."
       ],
       "high_score_features": [
         "TP, FP, FN, TN의 의미를 구분하고 분류 모델 성능지표가 이 값들에서 계산됨을 설명해야 한다.",
@@ -1381,7 +1402,10 @@
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
         "2026-07-01T08:08:19 content_fix: replaced topic-mismatched field_connection_points.",
         "2026-07-01 content_style_fix: normalized expected_structure and removed numbered headings from model_answer_outline.",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items.",
+        "2026-07-01 relationship_fix: aligned expected_structure keywords with model_answer_outline flow.",
+        "2026-07-01 relationship_fix: final alignment of expected_structure with model_answer_outline for remaining MAJOR cases."
       ]
     },
     {
@@ -2062,19 +2086,20 @@
         "chemical seal"
       ],
       "expected_structure": [
-        "개요",
-        "비교 대상 정의",
-        "비교 기준",
-        "선정 기준",
-        "현장 적용 및 결론"
+        "압력계 액세서리 목적과 선정 배경",
+        "스누버·댐프너·과압 보호기·압력 리미터 보호 기능",
+        "사이펀·다이아프램 씰 격리 기능",
+        "아이솔레이팅 밸브·블록 밸브·벤트 밸브 점검 기능",
+        "압력·온도·부식성·점도·맥동 조건별 선정",
+        "설치 방향·막힘·누설·유지보수·비용 고려"
       ],
       "model_answer_outline": [
-        "비교 대상과 적용 배경을 제시한다.",
-        "비교 기준과 판단 축을 먼저 설정한다.",
-        "각 방식의 핵심 특성과 장단점을 정리한다.",
-        "공정 조건에 따른 선정 기준을 제시한다.",
-        "기존 설비, 비용, 유지보수 조건을 함께 검토한다.",
-        "최종 선정 방향과 현장 적용 시 유의점을 정리한다."
+        "압력계 액세서리의 목적을 압력계 보호, 공정 유체 격리, 점검·교정 편의성 관점에서 제시한다.",
+        "스누버, 댐프너, 과압 보호기, 압력 리미터가 맥동, 진동, 과압으로부터 압력계를 보호함을 설명한다.",
+        "사이펀은 고온 증기 영향을 줄이고, 다이아프램 씰은 부식성·점성·오염 유체를 압력계와 격리함을 설명한다.",
+        "아이솔레이팅 밸브, 블록 밸브, 벤트 밸브가 압력계를 공정에서 분리하고 교정·교체·점검을 가능하게 함을 정리한다.",
+        "압력 범위, 온도, 부식성, 점도, 맥동, 위생 요구조건에 따라 액세서리 선정 기준을 비교한다.",
+        "설치 방향, 막힘, 누설, 유지보수 접근성, 비용을 고려한 현장 적용 결론을 제시한다."
       ],
       "high_score_features": [
         "압력계 액세서리는 압력계를 공정 조건으로부터 보호하고 유지보수성, 안전성, 측정 안정성을 높이기 위해 사용됨을 설명해야 한다.",
@@ -2107,7 +2132,9 @@
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
         "2026-07-01T08:08:19 content_fix: replaced topic-mismatched field_connection_points.",
         "2026-07-01 content_style_fix: normalized expected_structure and removed numbered headings from model_answer_outline.",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items.",
+        "2026-07-01 relationship_fix: aligned expected_structure keywords with model_answer_outline flow."
       ]
     },
     {
@@ -2646,17 +2673,20 @@
         "radar speed measurement"
       ],
       "expected_structure": [
-        "개요",
-        "원리 및 구성",
-        "주요 특성",
-        "한계 및 유의점",
-        "현장 적용 및 결론"
+        "도플러 효과 개념과 상대 운동에 따른 주파수 변화",
+        "접근 시 주파수 증가와 이격 시 주파수 감소",
+        "송신파·반사파 주파수 차이와 속도 산출",
+        "유체·입자 속도와 배관 단면적을 이용한 유량 측정",
+        "도플러 초음파 유량계의 기포·입자·슬러리 반사체 조건",
+        "청정 유체·설치 각도·배관 조건에 따른 적용 한계"
       ],
       "model_answer_outline": [
-        "개요를 통해 도플러 효과와 속도·유량 측정 원리의 개념과 출제 배경을 제시한다.",
-        "원리 및 구성·주요 특성를 중심으로 핵심 원리와 구성 관계를 설명한다.",
-        "한계 및 유의점를 구분하여 성능 저하, 오차, 한계 또는 운전 영향을 설명한다.",
-        "현장 적용 및 결론에 따라 적용 절차와 개선 방향을 제시한다."
+        "도플러 효과 개념을 제시하고 상대 운동에 따른 주파수 변화로 속도 측정이 가능함을 설명한다.",
+        "접근 시 주파수 증가와 이격 시 주파수 감소를 구분하여 도플러 주파수 변화 방향을 정리한다.",
+        "송신파·반사파 주파수 차이를 유체 또는 입자 속도 산출 원리와 연결한다.",
+        "유체·입자 속도와 배관 단면적, 유속 분포 조건을 이용해 유량 측정 원리로 확장한다.",
+        "도플러 초음파 유량계는 기포·입자·슬러리 등 반사체 조건이 필요함을 제시한다.",
+        "청정 유체, 설치 각도, 배관 조건, 반사체 농도에 따른 적용 한계를 정리한다."
       ],
       "high_score_features": [
         "접근 시 주파수 증가, 이격 시 주파수 감소를 정확히 설명한다.",
@@ -2681,7 +2711,11 @@
         "created_at=2026-06-30T23:35:58",
         "review_fix: model_answers와 fact_anchors 동기화 보강",
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items.",
+        "2026-07-01 relationship_fix: aligned expected_structure keywords with model_answer_outline flow.",
+        "2026-07-01 relationship_fix: final alignment of expected_structure with model_answer_outline for remaining MAJOR cases.",
+        "2026-07-01 relationship_fix: final doppler expected_structure and model_answer_outline alignment."
       ]
     },
     {
@@ -2705,17 +2739,20 @@
         "quantization"
       ],
       "expected_structure": [
-        "개요",
-        "원리 및 구성",
-        "주요 특성",
-        "한계 및 유의점",
-        "현장 적용 및 결론"
+        "신호 변환 개요",
+        "ADC 변환 순서",
+        "DAC 변환 순서",
+        "해상도와 정확도",
+        "오차와 동특성",
+        "계측 인터페이스 적용"
       ],
       "model_answer_outline": [
-        "개요를 통해 ADC/DAC 신호 변환 인터페이스 원리의 개념과 출제 배경을 제시한다.",
-        "원리 및 구성·주요 특성를 중심으로 핵심 원리와 구성 관계를 설명한다.",
-        "한계 및 유의점를 구분하여 성능 저하, 오차, 한계 또는 운전 영향을 설명한다.",
-        "현장 적용 및 결론에 따라 적용 절차와 개선 방향을 제시한다."
+        "ADC/DAC의 역할을 아날로그 공정 신호와 디지털 제어·계측 시스템 사이의 인터페이스 관점에서 제시한다.",
+        "ADC의 표본화, 양자화, 부호화 과정을 순서대로 설명한다.",
+        "DAC의 디코딩, 가중 합성, 출력 필터링 과정을 구분한다.",
+        "해상도와 정확도가 다르다는 점을 명확히 설명하고 bit 수, LSB, full scale 관계를 정리한다.",
+        "양자화 오차, offset, gain, INL/DNL, sampling jitter가 측정 정확도와 신호 품질에 미치는 영향을 설명한다.",
+        "샘플링 주파수, anti-aliasing filter, 접지·노이즈 조건을 포함한 계측 인터페이스 적용 기준을 제시한다."
       ],
       "high_score_features": [
         "ADC의 표본화, 양자화, 부호화를 순서대로 설명한다.",
@@ -2740,7 +2777,8 @@
         "created_at=2026-06-30T23:35:58",
         "review_fix: model_answers와 fact_anchors 동기화 보강",
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items."
       ]
     },
     {
@@ -2763,19 +2801,20 @@
         "ASME PTC 19.3 TW"
       ],
       "expected_structure": [
-        "개요",
-        "비교 대상 정의",
-        "비교 기준",
-        "선정 기준",
-        "현장 적용 및 결론"
+        "Thermowell의 보호 목적과 선정 배경",
+        "재질과 온도·압력·부식·침식·유체 조건 연결",
+        "형상·삽입 길이·응답성·강도 비교",
+        "wake frequency·vortex shedding·피로 파손 위험",
+        "공정 조건·기존 설비·유지보수성 검토",
+        "재질·형상 선정과 적용 결론"
       ],
       "model_answer_outline": [
-        "비교 대상과 적용 배경을 제시한다.",
-        "비교 기준과 판단 축을 먼저 설정한다.",
-        "각 방식의 핵심 특성과 장단점을 정리한다.",
-        "공정 조건에 따른 선정 기준을 제시한다.",
-        "기존 설비, 비용, 유지보수 조건을 함께 검토한다.",
-        "최종 선정 방향과 현장 적용 시 유의점을 정리한다."
+        "Thermowell의 목적을 온도센서 보호, 공정 압력 유지, 교체·정비 편의성 관점에서 제시한다.",
+        "재질 선정은 온도, 압력, 부식, 침식, 유체 조건과 연결하여 검토한다.",
+        "형상, 삽입 길이, 벽 두께, 응답성, 기계적 강도의 trade-off를 비교한다.",
+        "wake frequency, vortex shedding, 피로 파손 위험을 검토하여 유속 조건에서 구조 안전성을 확인한다.",
+        "기존 nozzle, 배관 진동, 설치 공간, 유지보수 접근성, 비용을 현장 제약으로 함께 검토한다.",
+        "공정 유체와 운전 조건에 맞는 재질·형상 선정 기준과 적용 결론을 제시한다."
       ],
       "high_score_features": [
         "thermowell의 보호, 압력 경계, 운전 중 교체 목적을 설명한다.",
@@ -2800,7 +2839,8 @@
         "created_at=2026-06-30T23:35:58",
         "review_fix: model_answers와 fact_anchors 동기화 보강",
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_minor_fix: resolved P1 priority relationship warnings while keeping outline high-level and max 6 items."
       ]
     },
     {
@@ -2884,19 +2924,20 @@
         "aliasing"
       ],
       "expected_structure": [
-        "개요",
-        "비교 대상 정의",
-        "비교 기준",
-        "선정 기준",
-        "현장 적용 및 결론"
+        "연속시간·이산시간·이산사건 제어 모델의 적용 대상 구분",
+        "미분방정식·Laplace, 차분방정식·z 변환, 상태전이·이벤트 표현 비교",
+        "sampling period와 zero-order hold가 디지털 제어 응답에 미치는 영향",
+        "aliasing·anti-aliasing·phase lag·computation delay 영향",
+        "PLC sequence와 연속 제어 loop 적용 차이",
+        "공정 동특성·제어 주기·이벤트성 기준의 모델 선정"
       ],
       "model_answer_outline": [
-        "비교 대상과 적용 배경을 제시한다.",
-        "비교 기준과 판단 축을 먼저 설정한다.",
-        "각 방식의 핵심 특성과 장단점을 정리한다.",
-        "공정 조건에 따른 선정 기준을 제시한다.",
-        "기존 설비, 비용, 유지보수 조건을 함께 검토한다.",
-        "최종 선정 방향과 현장 적용 시 유의점을 정리한다."
+        "연속시간, 이산시간, 이산사건 제어 모델의 개념과 적용 대상을 먼저 구분한다.",
+        "연속시간은 미분방정식·Laplace, 이산시간은 차분방정식·z 변환, 이산사건은 상태전이·이벤트로 수학적 표현을 비교한다.",
+        "디지털 제어에서 sampling period와 zero-order hold가 제어 응답과 안정성에 미치는 영향을 설명한다.",
+        "aliasing, anti-aliasing, phase lag, computation delay가 성능 저하와 설계 제약으로 작용함을 정리한다.",
+        "PLC sequence와 연속 제어 loop의 적용 차이를 공정 자동화 사례와 연결한다.",
+        "공정 동특성, 제어 주기, 이벤트성, 구현 장치, 유지보수성을 기준으로 모델 선정 방향을 제시한다."
       ],
       "high_score_features": [
         "연속시간, 이산시간, 이산사건 모델의 수학적 표현을 구분한다.",
@@ -2921,7 +2962,9 @@
         "created_at=2026-06-30T23:35:58",
         "review_fix: model_answers와 fact_anchors 동기화 보강",
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items.",
+        "2026-07-01 relationship_minor_fix: resolved P1 priority relationship warnings while keeping outline high-level and max 6 items."
       ]
     },
     {
@@ -2950,17 +2993,20 @@
         "공진 peak"
       ],
       "expected_structure": [
-        "개요",
-        "원리 및 구성",
-        "주요 특성",
-        "한계 및 유의점",
-        "현장 적용 및 결론"
+        "표준 2차 전달함수와 고유진동수·감쇠비·이득 정의",
+        "주파수응답에서 공진 peak 발생 의미와 해석 목적",
+        "공진주파수 ωr = ωn sqrt(1 - 2ζ²) 관계",
+        "공진 조건 ζ < 1/sqrt(2) 성립 범위",
+        "감쇠비 증가에 따른 공진 peak 감소와 응답 완만화",
+        "ζ=1 임계감쇠와 시간응답 중근 조건·공진 조건 구분"
       ],
       "model_answer_outline": [
-        "개요를 통해 2차 시스템 주파수응답과 공진주파수 해석형의 개념과 출제 배경을 제시한다.",
-        "원리 및 구성·주요 특성를 중심으로 핵심 원리와 구성 관계를 설명한다.",
-        "한계 및 유의점를 구분하여 성능 저하, 오차, 한계 또는 운전 영향을 설명한다.",
-        "현장 적용 및 결론에 따라 적용 절차와 개선 방향을 제시한다."
+        "표준 2차 전달함수를 정확히 쓰고 고유진동수, 감쇠비, 이득의 의미를 정의한다.",
+        "주파수응답에서 공진 peak가 발생하는 물리적 의미와 해석 목적을 설명한다.",
+        "공진주파수는 ωr = ωn sqrt(1 - 2ζ²)이며 조건 ζ < 1/sqrt(2)에서 성립함을 제시한다.",
+        "감쇠비 증가에 따라 공진 peak가 감소하고 응답이 완만해지는 경향을 설명한다.",
+        "ζ=1 임계감쇠는 시간응답의 중근 조건이지 공진 조건이 아님을 명확히 구분한다.",
+        "기계 진동, 센서 동특성, 제어계 튜닝에서 공진 회피와 감쇠 확보 기준을 연결한다."
       ],
       "high_score_features": [
         "표준 2차 전달함수를 정확히 쓴다.",
@@ -2986,7 +3032,10 @@
         "created_at=2026-06-30T23:35:58",
         "review_fix: model_answers와 fact_anchors 동기화 보강",
         "updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items.",
+        "2026-07-01 relationship_fix: aligned expected_structure keywords with model_answer_outline flow.",
+        "2026-07-01 relationship_fix: final alignment of expected_structure with model_answer_outline for remaining MAJOR cases."
       ]
     },
     {
@@ -3402,17 +3451,20 @@
         "공정 제어에서 PID 제어기의 역할과 현장 적용 문제를 설명하시오."
       ],
       "expected_structure": [
-        "개요",
-        "원리 및 구성",
-        "주요 특성",
-        "한계 및 유의점",
-        "현장 적용 및 결론"
+        "PID 제어 개요",
+        "P/I/D 동작 영향",
+        "응답 특성 지표",
+        "현장 parameter 의미",
+        "실무 보완 기능",
+        "튜닝·적용 결론"
       ],
       "model_answer_outline": [
-        "개요를 통해 PID 제어 동작과 튜닝의 개념과 출제 배경을 제시한다.",
-        "원리 및 구성·주요 특성를 중심으로 핵심 원리와 구성 관계를 설명한다.",
-        "한계 및 유의점를 구분하여 성능 저하, 오차, 한계 또는 운전 영향을 설명한다.",
-        "현장 적용 및 결론에 따라 적용 절차와 개선 방향을 제시한다."
+        "PID 제어의 목적을 set point 추종, 외란 억제, 정상상태 오차 개선 관점에서 제시한다.",
+        "P/I/D 각각이 응답에 미치는 영향을 구분하고 비례, 적분, 미분 동작의 역할을 설명한다.",
+        "offset, overshoot, hunting, settling time을 PID 조정 결과와 연결하여 설명한다.",
+        "proportional band, integral time, derivative time의 현장 parameter 의미를 정리한다.",
+        "anti-reset windup, bumpless transfer, derivative filtering을 실무 보완 기능으로 포함한다.",
+        "공정 동특성, actuator 제한, 노이즈, 안전성을 고려한 튜닝 및 적용 결론을 제시한다."
       ],
       "high_score_features": [
         "P/I/D 각각이 응답에 미치는 영향을 구분한다.",
@@ -3456,7 +3508,8 @@
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
         "Created by scripts/apply_relation_completion_patch.py",
         "deep_relation_cleanup: strengthened PID tuning and implementation alignment.",
-        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
+        "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
+        "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items."
       ]
     },
     {

@@ -8,20 +8,25 @@ from rubric_content.common import ROOT
 from rubric_content.topic_importance import cmd_validate_topic_importance
 
 
-def run_script(path: str) -> int:
+def run_script(entry) -> int:
+    if isinstance(entry, tuple):
+        path, extra_args = entry
+    else:
+        path, extra_args = entry, []
+
     script = ROOT / path
     if not script.exists():
         print("SKIP missing:", path)
         return 0
 
     print("RUN:", path)
-    return subprocess.call([sys.executable, str(script)], cwd=str(ROOT))
-
+    return subprocess.call([sys.executable, str(script), *extra_args], cwd=str(ROOT))
 
 def cmd_validate_all(_args: argparse.Namespace) -> int:
     scripts = [
         "scripts/validate_question_type_profile.py",
         "scripts/validate_model_answer_bank.py",
+        ("scripts/validate_model_answer_relationships.py", ["--fail-on-major"]),
         "scripts/validate_config.py",
         "scripts/validate_fact_anchor_bank.py",
     ]
