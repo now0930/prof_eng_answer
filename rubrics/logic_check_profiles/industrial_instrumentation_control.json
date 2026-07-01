@@ -1,0 +1,121 @@
+{
+  "version": "logic_check_profile_v1",
+  "subject": "industrial_instrumentation_control",
+  "description": "산업계측제어기술사 Logic Check LLM verifier profiles",
+  "profiles": [
+    {
+      "topic_id": "second_order_lag_response_by_damping_ratio",
+      "display_name": "2차 표준형 시스템 감쇠비별 응답 특성",
+      "difficulty": "THEORY_CORE",
+      "cap_policy": {
+        "fatal_recommended_ceiling": 10.0,
+        "fatal_confidence_threshold": 0.75
+      },
+      "candidate_extraction": {
+        "max_candidates": 12,
+        "nearby_window": 1,
+        "key_terms": [
+          "무감쇠",
+          "부족감쇠",
+          "임계감쇠",
+          "과감쇠",
+          "under damp",
+          "critical damp",
+          "over damp",
+          "un-damped",
+          "ζ",
+          "zeta",
+          "theta",
+          "θ",
+          "sin",
+          "cos",
+          "실수축",
+          "허수축",
+          "오버슈트",
+          "overshoot",
+          "정착시간",
+          "발산",
+          "불안정"
+        ],
+        "rules": [
+          {
+            "kind": "structured_damping_region_table",
+            "type": "structured_mapping",
+            "label_regex": "(under\\s*damp(?:ed|ing)?|부족\\s*감쇠|critical\\s*damp(?:ed|ing)?|임계\\s*감쇠|over\\s*damp(?:ed|ing)?|과\\s*감쇠|un[-\\s]*damped|무\\s*감쇠)",
+            "range_regex": "(ζ\\s*<\\s*0\\.70?7?|ζ\\s*=\\s*0\\.70?7?|0\\.70?7?\\s*<=\\s*ζ\\s*<\\s*1|0\\s*<\\s*ζ\\s*<\\s*1|ζ\\s*=\\s*1|ζ\\s*>\\s*1|ζ\\s*=\\s*0|ζ\\s*<\\s*0)",
+            "label_map": {
+              "under": "Under damp",
+              "부족": "Under damp",
+              "critical": "Critical damp",
+              "임계": "Critical damp",
+              "over": "Over damp",
+              "과": "Over damp",
+              "un": "Un-damped",
+              "무": "Un-damped"
+            }
+          },
+          {
+            "kind": "zeta_0_7_context",
+            "type": "nearby_regex",
+            "regex": "0\\.70?7?"
+          },
+          {
+            "kind": "angle_relation_context",
+            "type": "nearby_regex",
+            "regex": "(θ|theta|sin|cos|실수축|허수축|real\\s*axis|imaginary\\s*axis)"
+          },
+          {
+            "kind": "step_response_context",
+            "type": "nearby_regex",
+            "regex": "(진동|오버\\s*슈트|overshoot|overshot|충돌|최속|느리|수렴|발산)"
+          },
+          {
+            "kind": "standard_zeta_classification",
+            "type": "line_regex",
+            "regex": "ζ\\s*=\\s*0.*0\\s*<\\s*ζ\\s*<\\s*1.*ζ\\s*=\\s*1.*ζ\\s*>\\s*1"
+          }
+        ]
+      },
+      "truth_schema": [
+        "ζ=0은 무감쇠이다.",
+        "0<ζ<1은 부족감쇠이다.",
+        "ζ=1은 임계감쇠이다.",
+        "ζ>1은 과감쇠이다.",
+        "부족감쇠는 오버슈트와 감쇠진동을 동반할 수 있으나 좌반면 극점이면 안정 수렴한다.",
+        "임계감쇠는 오버슈트 없이 가장 빠른 무진동 수렴이다.",
+        "과감쇠는 오버슈트 없이 느리게 수렴한다.",
+        "θ를 음의 실수축 기준으로 정의하면 ζ=cosθ이다. sinθ 관계는 허수축 기준 각도일 때 가능하다.",
+        "시간지연은 위상여유를 줄여 불안정을 유발할 수 있으나, 부족감쇠 자체와 발산은 구분해야 한다."
+      ],
+      "fatal_conditions": [
+        "명시적으로 임계감쇠=ζ=0.7 또는 ζ=0.707이라고 정의함",
+        "명시적으로 과감쇠=0.7≤ζ<1이라고 정의함",
+        "명시적으로 부족감쇠=ζ<0.7로 제한함",
+        "명시적으로 임계감쇠가 진동 또는 오버슈트 응답이라고 함",
+        "명시적으로 과감쇠가 오버슈트, 충돌위험 또는 최속 응답이라고 함",
+        "θ를 음의 실수축 기준으로 정의하고 sinθ=ζ 또는 sinθ=σ/ωn이라고 함"
+      ],
+      "safe_conditions": [
+        "ζ≈0.707 언급 자체는 fatal이 아니다.",
+        "ζ≈0.707을 부족감쇠 영역의 실무적 타협점, 45도 극점, 속도와 안정성의 튜닝점으로 설명하면 정상이다.",
+        "정답 구분 ζ=1 임계감쇠와 ζ≈0.707 실무 타협점을 명확히 구분하면 fatal이 아니다.",
+        "단순 누락, 애매함, 설명 부족은 fatal이 아니라 major 또는 minor이다.",
+        "candidate evidence에 없는 내용을 추론하여 fatal로 만들면 안 된다."
+      ],
+      "output_contract": {
+        "json_only": true,
+        "required_fields": [
+          "verdict",
+          "confidence",
+          "reason",
+          "findings"
+        ],
+        "verdict_values": [
+          "pass",
+          "warn",
+          "fatal"
+        ]
+      }
+    }
+  ]
+}

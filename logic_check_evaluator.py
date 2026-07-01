@@ -328,10 +328,11 @@ def _evaluate_second_order_deterministic_checks(text: str) -> list[dict[str, Any
 
 def _apply_second_order_claim_evaluator(text: str, findings: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """
-    Second-order damping topic uses hybrid verification:
-    - Python extracts only candidate evidence.
+    Second-order damping topic uses JSON-profile LLM verification:
+    - JSON profile defines truth_schema, fatal_conditions, safe_conditions, and candidate rules.
+    - Python extracts only candidate evidence from the profile.
     - LLM verifies whether the candidate contains a direct contradiction.
-    - Legacy regex/claim fatal findings are removed to prevent false caps.
+    - Legacy hard-coded fatal findings are removed to prevent false caps.
     - Non-fatal major/minor findings remain as supplemental feedback.
     """
     legacy_second_order_fatal_ids = {
@@ -354,8 +355,6 @@ def _apply_second_order_claim_evaluator(text: str, findings: list[dict[str, Any]
         fid = str(finding.get("id") or "")
         severity = finding.get("severity")
 
-        # Remove old deterministic/claim fatal checks for this topic.
-        # Fatal authority now belongs to LLM verifier.
         if severity == "fatal" and (
             fid in legacy_second_order_fatal_ids
             or fid.startswith("claim_")
@@ -365,8 +364,12 @@ def _apply_second_order_claim_evaluator(text: str, findings: list[dict[str, Any]
         filtered.append(finding)
 
     try:
-        from logic_llm_verifier import verify_second_order_logic_with_llm
-        llm_eval = verify_second_order_logic_with_llm(text)
+        from logic_llm_verifier import verify_logic_with_llm
+
+        llm_eval = verify_logic_with_llm(
+            text,
+            "second_order_lag_response_by_damping_ratio",
+        )
     except Exception as exc:
         filtered.append(
             {
@@ -380,9 +383,8 @@ def _apply_second_order_claim_evaluator(text: str, findings: list[dict[str, Any]
         return filtered
 
     for finding in llm_eval.get("findings") or []:
-        if not isinstance(finding, dict):
-            continue
-        filtered.append(finding)
+        if isinstance(finding, dict):
+            filtered.append(finding)
 
     return filtered
 
@@ -577,6 +579,10 @@ def evaluate_logic_checks(
             )
 
     mode = _mode_from_findings(findings)
+
+    # Safety net: any fatal finding in logic check should carry a ceiling.
+    if mode == "fatal" and recommended_ceiling is None:
+        recommended_ceiling = 10.0
     fatal_error_detected = any(f.get("severity") == "fatal" for f in findings)
 
     result = {
