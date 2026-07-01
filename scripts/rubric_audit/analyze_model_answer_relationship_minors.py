@@ -6,7 +6,7 @@ import re
 from collections import Counter
 from pathlib import Path
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 IN_CSV = ROOT / "reports/model_answer_relationship_validation.csv"
 OUT_CSV = ROOT / "reports/model_answer_relationship_minor_analysis.csv"
 OUT_MD = ROOT / "reports/model_answer_relationship_minor_analysis.md"

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1]
+ROOT = Path(__file__).resolve().parents[2]
 MODEL_PATH = ROOT / "rubrics/model_answers/industrial_instrumentation_control.json"
 MINOR_CSV = ROOT / "reports/model_answer_relationship_minor_analysis.csv"
 
