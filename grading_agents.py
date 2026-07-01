@@ -2791,6 +2791,7 @@ def _phase2_postprocess_grade(legacy_result):
     layer_scores = _phase2_layer_scores(answer_text, scoring_model)
 
     fact_eval = _phase3_evaluate_fact_anchors(input_text, subject_rubric)
+
     connection_eval = _phase3_evaluate_connections(input_text)
     interview_followup = _phase3_make_interview_followup(fact_eval, connection_eval)
 
@@ -2929,6 +2930,28 @@ def _phase2_postprocess_grade(legacy_result):
     grade = _phase8b_enforce_final_volume_cap(grade)
     grade = _phase11_normalize_requirement_fact_labels(grade)
     grade = _phase14_compact_feedback_output(grade)
+    try:
+        from logic_check_evaluator import attach_logic_check_to_grade
+
+        grade = attach_logic_check_to_grade(grade, input_text)
+        logic_eval = grade.get("logic_check_evaluation")
+
+        if isinstance(logic_eval, dict):
+            print(
+                "[agent] phase3b logic check applied: "
+                f"topic={logic_eval.get('topic_id')}, "
+                f"mode={logic_eval.get('mode')}, "
+                f"fatal={logic_eval.get('fatal_error_detected')}"
+            )
+
+            try:
+                _phase2_json_write(session_dir / "logic_check_evaluation.json", logic_eval)
+            except Exception:
+                pass
+
+    except Exception as e:
+        print(f"[agent] phase3b logic check failed: {e!r}")
+
     grade = _phase15_hide_internal_metric_dict(grade)
     grade = _phase16_polish_final_output(grade)
     grade = _phase17_final_phrase_cleanup(grade)

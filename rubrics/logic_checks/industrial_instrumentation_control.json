@@ -1,0 +1,176 @@
+{
+  "version": "2026-07-01-logic-check-v1",
+  "description": "Fact Anchor 5개 체계를 유지하면서, 핵심 이론 문항의 치명적 수식·정의·논리 오류를 별도로 검증하는 Logic Check Bank.",
+  "scope_policy": {
+    "fact_anchor_policy": "Fact Anchor는 전체 topic의 기본 coverage 평가 기준으로 유지한다.",
+    "logic_check_policy": "Logic Check는 모든 topic에 만들지 않고, 치명 오류가 자주 발생하는 핵심 이론 topic에만 적용한다.",
+    "first_target_topic": "second_order_lag_response_by_damping_ratio"
+  },
+  "topic_logic_checks": [
+    {
+      "topic_id": "second_order_lag_response_by_damping_ratio",
+      "topic_name": "2차 지연시스템 감쇠비별 응답특성",
+      "enabled": true,
+      "question_type": "COMPARE_SELECTION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "2차 지연 시스템",
+        "2차 지연시스템",
+        "2차 시스템",
+        "second order system",
+        "second-order system",
+        "감쇠비",
+        "damping ratio",
+        "ζ",
+        "zeta"
+      ],
+      "fatal_checks": [
+        {
+          "id": "zeta_wrong_inverse_sine_definition",
+          "severity": "fatal",
+          "wrong_patterns": [
+            "ζ\\s*=\\s*\\\\?sin\\s*\\^\\s*-?1",
+            "\\\\zeta\\s*=\\s*\\\\?sin\\s*\\^\\s*-?1",
+            "zeta\\s*=\\s*\\\\?sin\\s*\\^\\s*-?1",
+            "감쇠비.*sin\\s*\\^\\s*-?1",
+            "sin\\s*\\^\\s*-?1\\s*\\(?\\s*ωd\\s*/\\s*ωn"
+          ],
+          "message": "감쇠비 ζ를 sin^-1(ωd/ωn)로 표현하여 표준 감쇠비 정의와 충돌한다.",
+          "correct_rule": "부족감쇠 영역에서는 ωd = ωn√(1-ζ²) 관계로 설명해야 한다. s-평면 극점각을 사용할 경우 각도 정의에 따라 ζ=cosθ 관계를 쓸 수 있다.",
+          "affected_layers": [
+            "C"
+          ],
+          "recommended_ceiling": 10.0
+        },
+        {
+          "id": "underdamped_as_divergence",
+          "severity": "fatal",
+          "wrong_patterns": [
+            "부족\\s*감쇠.{0,20}발산",
+            "under\\s*damp(?:ed|ing)?.{0,20}발산",
+            "0\\s*<\\s*ζ\\s*<\\s*1.{0,20}발산",
+            "0\\s*<\\s*zeta\\s*<\\s*1.{0,20}발산",
+            "ζ\\s*<\\s*1.{0,20}발산"
+          ],
+          "message": "0<ζ<1 부족감쇠를 발산 조건처럼 설명하여 안정한 감쇠진동 응답과 불안정 조건을 혼동했다.",
+          "correct_rule": "0<ζ<1 부족감쇠는 좌반평면 복소극점에 의한 안정한 감쇠진동 응답이다. 발산은 우반평면 극점, 음의 감쇠, 불안정 조건과 별도로 구분해야 한다.",
+          "affected_layers": [
+            "C",
+            "E"
+          ],
+          "recommended_ceiling": 10.0
+        },
+        {
+          "id": "sigma_omega_d_region_misclassification",
+          "severity": "fatal",
+          "wrong_patterns": [
+            "critical.{0,20}σ\\s*=\\s*ωd",
+            "임계\\s*감쇠.{0,20}σ\\s*=\\s*ωd",
+            "under.{0,20}σ\\s*>\\s*ωd",
+            "over.{0,20}σ\\s*<\\s*ωd",
+            "부족\\s*감쇠.{0,20}σ\\s*>\\s*ωd",
+            "과\\s*감쇠.{0,20}σ\\s*<\\s*ωd"
+          ],
+          "message": "감쇠 조건을 σ와 ωd의 단순 크기 비교로 구분하여 표준 ζ 구간 정의와 충돌한다.",
+          "correct_rule": "감쇠 조건은 ζ=0, 0<ζ<1, ζ=1, ζ>1 기준으로 구분한다.",
+          "affected_layers": [
+            "C"
+          ],
+          "recommended_ceiling": 10.0
+        }
+      ],
+      "major_checks": [
+        {
+          "id": "missing_zeta_region_classification",
+          "severity": "major",
+          "required_patterns": [
+            "ζ\\s*=\\s*0|zeta\\s*=\\s*0|무\\s*감쇠",
+            "0\\s*<\\s*ζ\\s*<\\s*1|0\\s*<\\s*zeta\\s*<\\s*1|부족\\s*감쇠",
+            "ζ\\s*=\\s*1|zeta\\s*=\\s*1|임계\\s*감쇠",
+            "ζ\\s*>\\s*1|zeta\\s*>\\s*1|과\\s*감쇠"
+          ],
+          "min_required": 3,
+          "message": "감쇠비 구간 구분이 부족하다. ζ=0, 0<ζ<1, ζ=1, ζ>1 조건을 명확히 구분해야 한다.",
+          "correct_rule": "무감쇠, 부족감쇠, 임계감쇠, 과감쇠를 ζ 기준으로 구분한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "missing_damped_frequency_relation",
+          "severity": "major",
+          "required_patterns": [
+            "ωd\\s*=\\s*ωn",
+            "omega_d\\s*=\\s*omega_n",
+            "sqrt\\s*\\(?\\s*1\\s*-\\s*ζ",
+            "√\\s*\\(?\\s*1\\s*-\\s*ζ",
+            "감쇠\\s*진동수"
+          ],
+          "min_required": 2,
+          "message": "극점 공식 또는 감쇠진동수 ωd = ωn√(1-ζ²) 관계가 부족하다.",
+          "correct_rule": "부족감쇠 극점과 감쇠진동수 관계를 함께 제시해야 한다.",
+          "affected_layers": [
+            "C"
+          ]
+        }
+      ],
+      "question_type_checks": [
+        {
+          "id": "compare_selection_axis_missing",
+          "severity": "minor",
+          "question_type": "COMPARE_SELECTION",
+          "required_axes": [
+            "극점",
+            "오버슈트",
+            "상승시간",
+            "피크시간",
+            "정착시간",
+            "현장 선정 기준"
+          ],
+          "min_required": 3,
+          "message": "비교·선정형 문제임에도 정량 비교축이 부족하다. 극점 위치, 오버슈트, 상승시간, 피크시간, 정착시간, 현장 선정 기준을 표로 비교해야 한다.",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "advanced_tradeoff_checks": [
+        {
+          "id": "advanced_keyword_without_tradeoff",
+          "severity": "minor",
+          "trigger_patterns": [
+            "TSN",
+            "EtherCAT",
+            "Smith",
+            "스미스",
+            "IMC",
+            "deterministic"
+          ],
+          "required_context_patterns": [
+            "비용",
+            "호환",
+            "리스크",
+            "한계",
+            "모델\\s*불일치",
+            "기존\\s*설비",
+            "정지\\s*시간",
+            "trade[- ]?off",
+            "트레이드\\s*오프"
+          ],
+          "message": "고급 기술 키워드를 언급했지만 비용, 호환성, 기존 설비 영향, 모델 불일치, 운전 리스크 등 trade-off 설명이 부족하다.",
+          "affected_layers": [
+            "D",
+            "E"
+          ]
+        }
+      ],
+      "next_practice_points": [
+        "2차 표준형 s² + 2ζωn s + ωn² = 0, 극점 공식, 감쇠진동수 관계를 먼저 정확히 작성한다.",
+        "감쇠비별 응답을 ζ=0, 0<ζ<1, ζ=1, ζ>1, 불안정 조건으로 구분해 표로 정리한다.",
+        "현장 적용에서는 PID/서보 튜닝, 시간지연, TSN/EtherCAT을 쓰되 비용·호환성·리스크까지 함께 쓴다."
+      ]
+    }
+  ]
+}
