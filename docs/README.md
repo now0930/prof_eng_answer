@@ -82,19 +82,14 @@ python3 scripts/rubric_manager.py validate-all
 git diff --check
 ```
 
-## Archived prompt/reference documents
+### 3. LLM 생성 보조 문서
 
-생성 프롬프트와 일회성 문서 정리 노트는 active 문서에서 제외하고 `docs/archive/20260701_193514/` 아래로 이동했다.
+아래 문서는 코드가 직접 실행하는 문서가 아니라, JSON 초안을 만들 때 쓰는 작업 보조 문서다.
 
-- `prompt_templates/model_answer_generator_prompt.md`
-- `prompt_templates/fact_anchor_generator_prompt.md`
-- `prompt_templates/topic_importance_generator_prompt.md`
-- `DOCS_UPDATE_NOTES.md`
+| 문서 | 대상 JSON | 설명 |
+|---|---|---|
+| `fact_anchor_generator_prompt.md` | `rubrics/fact_anchors/` | 주제별 핵심 Fact, 수식, 판정 기준, 감점 위험 요소 초안 작성용 |
+| `model_answer_generator_prompt.md` | `rubrics/model_answers/` | 모범 답안 Bank 초안, 답안 구조, 고득점 요소 작성용 |
+| `topic_importance_generator_prompt.md` | `rubrics/topic_importance/` | 주제 중요도, 선택 전략, 반복 출제 가능성 초안 작성용 |
 
-현재 문서의 판단 기준은 다음 순서로 둔다.
-
-1. 현재 Python 코드
-2. 현재 JSON Rubric Bank
-3. `README.md`
-4. `docs/README.md`
-5. 각 세부 docs 문서
+이 문서들은 현재 채점 코드가 직접 읽는 기준 문서는 아니므로 active 문서 목록에서는 제외하고 `docs/archive/`에 보관한다.
