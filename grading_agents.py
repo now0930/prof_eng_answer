@@ -1362,70 +1362,133 @@ def _phase2_image_count(session_dir):
     return len([p for p in img_dir.iterdir() if p.suffix.lower() in exts])
 
 
-def _phase2_estimate_volume_level(text, image_count):
-    stats = _phase2_text_stats(text)
-    chars = stats["char_count"]
-    lines = stats["line_count"]
+def _phase2_estimate_volume_level(answer_text, image_count=0):
+    """답안 분량을 추정한다.
 
-    # 사진이 있으면 답안지 쪽수 근거로 우선 반영한다.
-    # 단, 사진 3장이 있어도 OCR 텍스트 내용이 부족하면 내용 점수는 별도로 낮게 나온다.
-    if image_count >= 3:
-        return {
-            "level": "three_page_level",
-            "estimated_answer_sheet_pages": image_count,
-            "cap": None,
-            "reason": "답안 이미지 3장 이상으로 25점 문항 평균 분량 충족 가능성이 있다."
-        }
-    if image_count == 2:
-        return {
-            "level": "two_page_level",
-            "estimated_answer_sheet_pages": 2,
-            "cap": 17.0,
-            "reason": "답안 이미지 2장 수준으로 기본 전개는 가능하나 25점 문항 평균 분량에는 다소 부족하다."
-        }
-    if image_count == 1:
-        return {
-            "level": "one_page_level",
-            "estimated_answer_sheet_pages": 1,
-            "cap": 13.0,
-            "reason": "답안 이미지 1장 수준으로 부분 답안 상한을 적용한다."
-        }
+    정책:
+    - 실제 업로드 이미지 장수(image_count)는 분량 계산에서 사용하지 않는다.
+    - 답안 텍스트 안의 ASCII 표/도해 1개를 이미지 1장 분량으로 환산한다.
+    - ASCII 표/도해 이미지 2장 분량을 답안지 1쪽으로 환산한다.
+    - 1쪽 이하 또는 매우 짧은 텍스트는 cap 적용
+    - 2쪽 이상으로 볼 수 있는 텍스트/ASCII 도해 답안은 분량만으로 감점하지 않음
+    - Logic Check fatal cap은 이 함수가 아니라 별도 정책에서 처리함
+    """
+    _ = image_count  # 실제 업로드 이미지는 분량 계산에서 제외한다.
 
-    # 이미지가 없으면 OCR/텍스트 길이로 보조 판단한다.
-    if lines <= 5 or chars < 500:
+    text = str(answer_text or "").strip()
+    lines = [line.rstrip() for line in text.splitlines()]
+    nonempty_lines = [line.strip() for line in lines if line.strip()]
+    line_count = len(nonempty_lines)
+    compact_chars = len("".join(text.split()))
+
+    def _is_ascii_visual_line(line):
+        stripped = str(line or "").rstrip()
+        if not stripped:
+            return False
+
+        if "+---" in stripped or "---+" in stripped:
+            return True
+        if stripped.count("|") >= 2:
+            return True
+        if "----" in stripped and ("+" in stripped or ">" in stripped):
+            return True
+        if "^ Im" in stripped or "-> Re" in stripped:
+            return True
+
+        visual_chars = sum(stripped.count(ch) for ch in "+-|_\\/^><")
+        density = visual_chars / max(1, len(stripped))
+
+        if len(stripped) >= 8 and density >= 0.28:
+            return True
+
+        return False
+
+    def _count_ascii_visual_units(lines):
+        """연속된 ASCII 표/도해 block을 이미지 장수로 환산한다.
+
+        기준:
+        - 감쇠비 비교 ASCII 표 정도를 이미지 1장으로 본다.
+        - 큰 표/도해는 약 22줄당 이미지 1장으로 추가 환산한다.
+        """
+        units = 0
+        block_lines = 0
+        border_lines = 0
+
+        def flush():
+            nonlocal units, block_lines, border_lines
+            if block_lines >= 6 or border_lines >= 3:
+                units += max(1, (block_lines + 21) // 22)
+            block_lines = 0
+            border_lines = 0
+
+        for line in list(lines) + [""]:
+            if _is_ascii_visual_line(line):
+                block_lines += 1
+                if "+---" in line or "---+" in line or str(line).count("|") >= 2:
+                    border_lines += 1
+            else:
+                flush()
+
+        return units
+
+    ascii_visual_units = _count_ascii_visual_units(lines)
+    visual_pages = ascii_visual_units / 2.0
+
+    if compact_chars < 500 and line_count <= 5 and ascii_visual_units == 0:
         return {
             "level": "text_only_short_answer",
             "estimated_answer_sheet_pages": 0,
             "cap": 9.0,
-            "reason": "답안 이미지 없이 텍스트가 1~5줄 또는 500자 미만이므로 요약 답안 상한을 적용한다."
+            "reason": "텍스트가 1~5줄 또는 500자 미만이므로 요약 답안 상한을 적용한다."
         }
-    if chars < 1000:
+
+    if compact_chars < 900 and line_count < 20:
+        text_pages = 0.5
+    elif compact_chars < 1500 and line_count < 45:
+        text_pages = 1.0
+    elif compact_chars < 2800 and line_count < 80:
+        text_pages = 2.0
+    else:
+        text_pages = 3.0
+
+    estimated_pages = max(text_pages, visual_pages)
+
+    visual_note = ""
+    if ascii_visual_units:
+        visual_note = (
+            f" ASCII 표/도해 {ascii_visual_units}개를 이미지 {ascii_visual_units}장 분량으로 환산하고, "
+            f"ASCII 이미지 2장=답안지 1쪽 기준을 적용했다."
+        )
+
+    if estimated_pages < 1.0:
         return {
-            "level": "less_than_one_page_text",
-            "estimated_answer_sheet_pages": 0,
+            "level": "less_than_one_page_text_ascii",
+            "estimated_answer_sheet_pages": estimated_pages,
             "cap": 10.5,
-            "reason": "답안 이미지 없이 텍스트 분량이 1쪽 미만 수준으로 판단되어 상한을 적용한다."
+            "reason": "답안 분량이 1쪽 미만 수준으로 판단되어 상한을 적용한다." + visual_note
         }
-    if chars < 1800:
+
+    if estimated_pages < 2.0:
         return {
-            "level": "one_page_text",
-            "estimated_answer_sheet_pages": 1,
+            "level": "one_page_text_ascii",
+            "estimated_answer_sheet_pages": estimated_pages,
             "cap": 13.0,
-            "reason": "텍스트 기준 답안지 1쪽 수준으로 판단되어 부분 답안 상한을 적용한다."
+            "reason": "답안 분량이 1쪽 수준으로 판단되어 부분 답안 상한을 적용한다." + visual_note
         }
-    if chars < 3000:
+
+    if estimated_pages < 3.0:
         return {
-            "level": "two_page_text",
-            "estimated_answer_sheet_pages": 2,
-            "cap": 17.0,
-            "reason": "텍스트 기준 답안지 2쪽 수준으로 판단되어 고득점 상한을 적용한다."
+            "level": "two_page_text_ascii",
+            "estimated_answer_sheet_pages": estimated_pages,
+            "cap": None,
+            "reason": "답안 분량이 2쪽 수준으로 판단되며, 내용이 명확하면 분량만으로 감점하지 않는다." + visual_note
         }
 
     return {
-        "level": "three_page_text",
-        "estimated_answer_sheet_pages": 3,
+        "level": "three_page_text_ascii",
+        "estimated_answer_sheet_pages": estimated_pages,
         "cap": None,
-        "reason": "텍스트 분량상 답안지 3쪽 수준의 전개 가능성이 있다."
+        "reason": "답안 분량이 3쪽 이상 수준으로 판단되며, 분량만으로 감점하지 않는다." + visual_note
     }
 
 
@@ -2905,8 +2968,11 @@ def _phase2_postprocess_grade(legacy_result):
         "strengths": [
             "핵심 용어가 일부 포함되어 있음" if input_text.strip() else "답안 내용 확인 필요"
         ],
-        "weaknesses": [
-            volume.get("reason", "답안 분량 판단 정보 부족"),
+        "weaknesses": (
+            [volume.get("reason", "답안 분량 판단 정보 부족")]
+            if volume.get("cap") is not None
+            else []
+        ) + [
             "A/B/C/D/E 각 단계의 충분한 전개가 필요함"
         ],
         "missing_keywords": [],
