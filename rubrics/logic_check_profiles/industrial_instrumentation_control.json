@@ -1,5 +1,5 @@
 {
-  "version": "logic_check_profile_v2",
+  "version": "logic_check_profile_v3_second_order_sign_stability",
   "subject": "industrial_instrumentation_control",
   "description": "산업계측제어기술사 Logic Check LLM verifier profiles",
   "profiles": [
@@ -35,7 +35,34 @@
           "overshoot",
           "정착시간",
           "발산",
-          "불안정"
+          "불안정",
+          "양수",
+          "음수",
+          "부호",
+          "positive",
+          "negative",
+          "ζ > 0",
+          "ζ = 0",
+          "ζ < 0",
+          "zeta > 0",
+          "zeta = 0",
+          "zeta < 0",
+          "임계 안정",
+          "marginally stable",
+          "marginal stable",
+          "점근 안정",
+          "asymptotically stable",
+          "stable",
+          "unstable",
+          "좌반평면",
+          "우반평면",
+          "Left-Half Plane",
+          "Right-Half Plane",
+          "LHP",
+          "RHP",
+          "수렴",
+          "지속진동",
+          "발진"
         ],
         "rules": [
           {
@@ -73,6 +100,26 @@
             "kind": "standard_zeta_classification",
             "type": "line_regex",
             "regex": "ζ\\s*=\\s*0.*0\\s*<\\s*ζ\\s*<\\s*1.*ζ\\s*=\\s*1.*ζ\\s*>\\s*1"
+          },
+          {
+            "kind": "zeta_sign_stability_context",
+            "type": "nearby_regex",
+            "regex": "(ζ|zeta|댐핑비|감쇠비).{0,80}(>|<|=|양수|음수|positive|negative|stable|unstable|안정|불안정|임계\\s*안정|marginal)"
+          },
+          {
+            "kind": "s_plane_half_plane_stability_context",
+            "type": "nearby_regex",
+            "regex": "(좌반평면|우반평면|Left[-\\s]*Half[-\\s]*Plane|Right[-\\s]*Half[-\\s]*Plane|LHP|RHP|극점|pole).{0,80}(안정|불안정|stable|unstable|발산|수렴)"
+          },
+          {
+            "kind": "zeta_zero_marginal_stability_context",
+            "type": "nearby_regex",
+            "regex": "(ζ\\s*=\\s*0|zeta\\s*=\\s*0|감쇠비.{0,20}0).{0,80}(임계\\s*안정|marginal(?:ly)?\\s*stable|무감쇠|지속\\s*진동|발진)"
+          },
+          {
+            "kind": "positive_zeta_performance_not_boundary_context",
+            "type": "nearby_regex",
+            "regex": "(ζ\\s*>\\s*0|zeta\\s*>\\s*0|양수|positive).{0,120}(오버\\s*슈트|overshoot|정착\\s*시간|settling|감쇠|진동|성능|performance)"
           }
         ]
       },
@@ -86,7 +133,14 @@
         "과감쇠는 오버슈트 없이 느리게 수렴한다.",
         "θ를 음의 실수축 기준으로 정의하면 ζ=cosθ이다. sinθ 관계는 허수축 기준 각도일 때 가능하다.",
         "ζ≈0.707은 부족감쇠 영역 안의 실무적 속도·안정성 타협점이지 임계감쇠 정의가 아니다.",
-        "시간지연은 위상여유를 줄여 불안정을 유발할 수 있으나, 부족감쇠 자체와 발산은 구분해야 한다."
+        "시간지연은 위상여유를 줄여 불안정을 유발할 수 있으나, 부족감쇠 자체와 발산은 구분해야 한다.",
+        "표준 2차 시스템 s² + 2ζωn s + ωn² = 0에서 ωn>0이면 극점 실수부는 -ζωn이다.",
+        "표준 2차 시스템에서 ζ>0이면 극점 실수부가 음수이므로 좌반평면 극점이 되어 점근 안정이다.",
+        "표준 2차 시스템에서 ζ=0이면 극점은 ±jωn이 되어 무감쇠 지속진동을 하며 임계 안정 또는 marginal stability로 본다.",
+        "표준 2차 시스템에서 ζ<0이면 극점 실수부가 양수이므로 우반평면 극점이 되어 불안정하고 진동 진폭이 증가할 수 있다.",
+        "ζ>0은 안정성의 부호 조건이고, ζ의 크기는 오버슈트, 진동성, 정착시간, 위상여유 등 성능 특성을 좌우한다.",
+        "작은 양의 ζ도 표준 2차 시스템에서는 안정하지만 오버슈트와 진동이 커질 수 있다. 따라서 작은 양의 ζ를 불안정으로 분류하면 안 된다.",
+        "ζ≈0.707은 부족감쇠 영역 안의 실무적 성능 타협점이며, ζ>0 안정성 조건 및 ζ=1 임계감쇠 정의와 구분해야 한다."
       ],
       "fatal_conditions": [
         "명시적으로 임계감쇠=ζ=0.7 또는 ζ=0.707이라고 정의함",
@@ -95,7 +149,15 @@
         "명시적으로 임계감쇠가 진동 또는 오버슈트 응답이라고 함",
         "명시적으로 과감쇠가 오버슈트, 충돌위험 또는 최속 응답이라고 함",
         "θ를 음의 실수축 기준으로 정의하고 sinθ=ζ 또는 sinθ=σ/ωn이라고 함",
-        "표에서 Under damp => ζ<0.7, Critical damp => ζ=0.7, Over damp => 0.7≤ζ<1 형태로 감쇠구간을 배치함"
+        "표에서 Under damp => ζ<0.7, Critical damp => ζ=0.7, Over damp => 0.7≤ζ<1 형태로 감쇠구간을 배치함",
+        "명시적으로 ζ<0 또는 음의 감쇠비를 안정 조건이라고 설명함",
+        "명시적으로 ζ<0에서 시간이 지나며 진동이 줄어들어 수렴한다고 설명함",
+        "명시적으로 ζ=0을 점근 안정 또는 하나의 값으로 수렴하는 안정 상태라고 설명함",
+        "명시적으로 ζ=0 무감쇠 지속진동을 발산 불안정으로만 분류함",
+        "명시적으로 ζ>0인 표준 2차 시스템을 부호 조건만으로 불안정 또는 발산이라고 설명함",
+        "명시적으로 작은 양의 ζ, 즉 0<ζ<1 영역을 안정하지 않다고 분류함",
+        "명시적으로 ζ>0 전체를 임계감쇠 또는 과감쇠로 분류함",
+        "표준 2차형에서 좌반평면 극점을 불안정, 우반평면 극점을 안정이라고 반대로 설명함"
       ],
       "safe_conditions": [
         "ζ≈0.707 언급 자체는 fatal이 아니다.",
@@ -103,7 +165,13 @@
         "ζ=1 임계감쇠와 ζ≈0.707 실무 타협점을 명확히 구분하면 fatal이 아니다.",
         "θ를 허수축 기준으로 정의한 경우 ζ=sinθ 표현은 가능하다.",
         "단순 누락, 애매함, 설명 부족은 fatal이 아니라 major 또는 minor이다.",
-        "candidate evidence에 없는 내용을 추론하여 fatal로 만들면 안 된다."
+        "candidate evidence에 없는 내용을 추론하여 fatal로 만들면 안 된다.",
+        "표준 2차 시스템에서 ζ>0이면 안정, ζ=0이면 임계 안정, ζ<0이면 불안정이라고 설명하는 것은 정상이다.",
+        "ζ=0을 marginally stable, 임계 안정, 무감쇠 지속진동, 발진 지속으로 설명하는 것은 fatal이 아니다.",
+        "ζ<0을 우반평면 극점, 음의 감쇠, 진폭 증가, 발산 가능성으로 설명하는 것은 정상이다.",
+        "ζ>0을 안정 조건으로 설명하면서도 ζ가 작으면 진동과 오버슈트가 커진다고 설명하는 것은 정상이다.",
+        "양의 ζ가 '충분히 커야 안정적 운전 또는 실무적으로 양호한 응답'이라고 표현한 경우, 작은 양의 ζ를 불안정으로 명시하지 않았다면 fatal이 아니라 표현상 보완 대상으로 본다.",
+        "ζ≈0.707을 실무적 최적 타협점으로 설명하는 것은 fatal이 아니다. 단, 이를 임계감쇠 정의로 오용하면 fatal이다."
       ],
       "output_contract": {
         "json_only": true,
@@ -118,7 +186,51 @@
           "warn",
           "fatal"
         ]
-      }
+      },
+      "major_checks": [
+        {
+          "id": "missing_zeta_sign_stability_classification",
+          "severity": "major",
+          "required_patterns": [
+            "ζ\\s*>\\s*0|zeta\\s*>\\s*0|양수|positive",
+            "ζ\\s*=\\s*0|zeta\\s*=\\s*0|임계\\s*안정|marginal",
+            "ζ\\s*<\\s*0|zeta\\s*<\\s*0|음수|negative",
+            "좌반평면|우반평면|LHP|RHP"
+          ],
+          "min_required": 3,
+          "message": "댐핑비 부호에 따른 안정성 설명이 부족하다. ζ>0 안정, ζ=0 임계 안정, ζ<0 불안정과 s-평면 좌반/우반평면 관계를 구분해야 한다.",
+          "correct_rule": "표준 2차 시스템에서 ωn>0이면 극점 실수부는 -ζωn이므로 ζ>0은 좌반평면 안정, ζ=0은 순허수축 임계 안정, ζ<0은 우반평면 불안정이다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "positive_zeta_performance_distinction_missing",
+          "severity": "major",
+          "required_patterns": [
+            "ζ\\s*>\\s*0|zeta\\s*>\\s*0|양수",
+            "오버\\s*슈트|overshoot|진동|정착\\s*시간|settling",
+            "성능|응답\\s*특성|감쇠\\s*정도|위상\\s*여유"
+          ],
+          "min_required": 2,
+          "message": "ζ>0의 안정성 조건과 ζ 크기에 따른 응답 성능 차이를 분리 설명해야 한다.",
+          "correct_rule": "ζ>0은 안정 조건이며, ζ의 크기는 오버슈트, 진동성, 정착시간 같은 성능을 결정한다.",
+          "affected_layers": [
+            "C",
+            "E"
+          ]
+        }
+      ],
+      "feedback_templates": {
+        "c_sign_stability_positive": "댐핑비 부호에 따른 안정성 설명은 표준 2차 시스템 기준으로 적절하다. ζ>0은 좌반평면 안정, ζ=0은 무감쇠 임계 안정, ζ<0은 우반평면 불안정으로 해석한다.",
+        "c_sign_stability_minor": "다만 ζ>0은 안정성 조건이고, ζ의 크기는 오버슈트·진동성·정착시간 등 성능 조건이라는 점을 분리해 쓰면 더 정확하다.",
+        "c_sign_stability_fatal": "댐핑비 부호와 s-평면 안정성 관계를 반대로 설명하여 표준 2차 시스템의 극점 안정성 조건과 충돌한다."
+      },
+      "next_practice_points": [
+        "댐핑비 부호 안정성은 먼저 ζ>0 안정, ζ=0 임계 안정, ζ<0 불안정으로 구분한다.",
+        "표준 2차형에서는 극점 실수부 -ζωn을 이용해 좌반평면/우반평면 안정성을 설명한다.",
+        "ζ>0 안정성 조건과 ζ 크기에 따른 오버슈트·정착시간·감쇠 정도의 성능 조건을 분리해서 쓴다."
+      ]
     }
   ]
 }
