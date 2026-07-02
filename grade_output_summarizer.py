@@ -1,0 +1,409 @@
+#!/usr/bin/env python3
+from __future__ import annotations
+
+import json
+import os
+import re
+from pathlib import Path
+from typing import Any, Callable
+
+
+BASE_DIR = Path(__file__).resolve().parent
+DEFAULT_PROMPT_PATH = BASE_DIR / "rubrics" / "output_prompts" / "compact_grade_summary.json"
+
+
+def _txt(value: Any, limit: int = 260) -> str:
+    text = " ".join(str(value or "").split()).strip()
+    if len(text) > limit:
+        return text[: limit - 1].rstrip() + "…"
+    return text
+
+
+def _items(value: Any, limit: int = 4, text_limit: int = 220) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, str):
+        value = [value]
+    if not isinstance(value, list):
+        return []
+
+    result: list[str] = []
+    for item in value:
+        if isinstance(item, dict):
+            text = _txt(
+                item.get("message")
+                or item.get("reason")
+                or item.get("comment")
+                or item.get("evidence")
+                or item.get("text")
+                or item,
+                text_limit,
+            )
+        else:
+            text = _txt(item, text_limit)
+
+        if text and text not in result:
+            result.append(text)
+        if len(result) >= limit:
+            break
+
+    return result
+
+
+def _as_float(value: Any, default: float = 0.0) -> float:
+    try:
+        return float(value)
+    except Exception:
+        return default
+
+
+def _load_prompt_config(path: Path | None = None) -> dict[str, Any]:
+    prompt_path = path or DEFAULT_PROMPT_PATH
+    try:
+        data = json.loads(prompt_path.read_text(encoding="utf-8"))
+    except Exception:
+        return {}
+
+    return data if isinstance(data, dict) else {}
+
+
+def _extract_logic(grade: dict[str, Any]) -> dict[str, Any]:
+    logic = grade.get("logic_check_evaluation") or {}
+    if not isinstance(logic, dict):
+        return {"fatal": False, "mode": "", "findings": []}
+
+    findings = []
+    for item in logic.get("findings") or []:
+        if not isinstance(item, dict):
+            continue
+        findings.append({
+            "severity": str(item.get("severity") or ""),
+            "message": _txt(item.get("message") or item.get("evidence") or "", 320),
+            "evidence": _txt(item.get("evidence") or "", 180),
+        })
+
+    fatal = bool(logic.get("fatal_error_detected"))
+    fatal = fatal or any(x.get("severity") == "fatal" for x in findings)
+
+    return {
+        "fatal": fatal,
+        "mode": logic.get("mode") or ("fatal" if fatal else ""),
+        "findings": findings[:5],
+    }
+
+
+def _extract_breakdown(grade: dict[str, Any]) -> list[dict[str, Any]]:
+    rows = grade.get("breakdown") or grade.get("layer_scores") or []
+    if not isinstance(rows, list):
+        return []
+
+    result = []
+    for row in rows[:5]:
+        if not isinstance(row, dict):
+            continue
+        result.append({
+            "item": _txt(row.get("item") or row.get("layer_id") or row.get("name") or "", 80),
+            "score": row.get("score"),
+            "max": row.get("max") or row.get("max_score"),
+            "reason": _txt(row.get("reason") or "", 220),
+        })
+
+    return result
+
+
+def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
+    logic = _extract_logic(grade)
+
+    total = grade.get("total_score", grade.get("score", 0))
+    max_score = grade.get("max_score", 25)
+
+    official = grade.get("official_pass_score", 15)
+    practical = grade.get("practical_target_score", 17.5)
+    high = grade.get("high_score_target", 20)
+
+    ceiling = grade.get("difficulty_ceiling_evaluation") or {}
+    if not isinstance(ceiling, dict):
+        ceiling = {}
+
+    volume = grade.get("volume_evaluation") or {}
+    if not isinstance(volume, dict):
+        volume = {}
+
+    qtype = grade.get("question_type_coverage") or grade.get("question_type_evaluation") or {}
+    if not isinstance(qtype, dict):
+        qtype = {}
+
+    score_range = grade.get("score_range") or grade.get("estimated_score_range") or f"{total}~{total}"
+    if logic.get("fatal") or ceiling.get("cap_applied"):
+        score_range = f"{total}점 cap 적용"
+
+    return {
+        "score": {
+            "total": total,
+            "max": max_score,
+            "score_range": score_range,
+            "confidence": grade.get("confidence") or grade.get("confidence_level") or "medium",
+            "official_pass_score": official,
+            "official_pass_met": _as_float(total) >= _as_float(official, 15),
+            "practical_target_score": practical,
+            "practical_target_met": _as_float(total) >= _as_float(practical, 17.5),
+            "high_score_target": high,
+            "high_score_met": _as_float(total) >= _as_float(high, 20),
+        },
+        "logic_check": logic,
+        "ceiling": {
+            "cap_applied": bool(ceiling.get("cap_applied")) or bool(logic.get("fatal")),
+            "reason": _txt(
+                ceiling.get("reason")
+                or ceiling.get("fatal_error_reason")
+                or "",
+                320,
+            ),
+        },
+        "volume": {
+            "level": volume.get("level"),
+            "pages": volume.get("estimated_answer_sheet_pages"),
+            "cap": volume.get("cap"),
+            "reason": _txt(volume.get("reason") or "", 260),
+        },
+        "question_type": {
+            "lens": qtype.get("question_type_lens") or qtype.get("lens") or qtype.get("type") or "",
+            "coverage": qtype.get("coverage") or qtype.get("requirement_coverage") or "",
+            "missing": _items(qtype.get("missing_categories") or qtype.get("missing") or [], 3),
+        },
+        "summary": _txt(
+            grade.get("summary")
+            or grade.get("overall_comment")
+            or grade.get("overall_summary")
+            or grade.get("comment")
+            or "",
+            500,
+        ),
+        "strengths": _items(grade.get("strengths"), 4),
+        "weaknesses": _items(grade.get("weaknesses"), 5),
+        "improvements": _items(grade.get("rewrite_advice") or grade.get("advice"), 5),
+        "breakdown": _extract_breakdown(grade),
+    }
+
+
+def _parse_llm_json(raw: str) -> dict[str, Any] | None:
+    text = str(raw or "").strip()
+    if not text:
+        return None
+
+    fenced = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.S)
+    if fenced:
+        try:
+            return json.loads(fenced.group(1))
+        except Exception:
+            pass
+
+    start = text.find("{")
+    end = text.rfind("}")
+    if start >= 0 and end > start:
+        try:
+            return json.loads(text[start : end + 1])
+        except Exception:
+            return None
+
+    return None
+
+
+def _fatal_messages(payload: dict[str, Any]) -> list[str]:
+    logic = payload.get("logic_check") or {}
+    findings = logic.get("findings") or []
+
+    result = []
+    for item in findings:
+        if not isinstance(item, dict):
+            continue
+        if item.get("severity") != "fatal":
+            continue
+        message = _txt(item.get("message") or item.get("evidence") or "", 280)
+        if message:
+            result.append(message)
+
+    return result[:3]
+
+
+def _fallback_section_basis(payload: dict[str, Any]) -> list[str]:
+    result = []
+    for row in payload.get("breakdown") or []:
+        item = _txt(row.get("item") or "", 80)
+        score = row.get("score")
+        max_score = row.get("max")
+        reason = _txt(row.get("reason") or "", 150)
+        if item:
+            result.append(f"{item}: {score}/{max_score} - {reason}")
+
+    return result[:5]
+
+
+def _normalise_summary(llm_obj: dict[str, Any] | None, payload: dict[str, Any]) -> dict[str, Any]:
+    llm_obj = llm_obj if isinstance(llm_obj, dict) else {}
+
+    fatal = bool((payload.get("logic_check") or {}).get("fatal"))
+
+    if fatal:
+        key_reasons = _fatal_messages(payload) or ["Logic Check에서 핵심 이론 오류가 확인되었습니다."]
+        return {
+            "headline": "THEORY_CORE 핵심 이론 오류 cap 적용",
+            "overall": "핵심 이론 오류가 확인되어 최종 cap이 적용되었습니다.",
+            "key_reasons": key_reasons,
+            "section_basis": [
+                "C항목: 핵심 이론 정의 오류로 내용 점수가 제한됩니다.",
+                "D/E항목: 현장 적용 설명은 일부 장점이나 fatal 오류를 보완하지 못합니다.",
+            ],
+            "improvements": [
+                "감쇠비 구간 정의를 정답 기준과 일치시키세요.",
+                "극점식과 응답 특성을 연결하세요.",
+                "실무적 절충값과 이론적 임계조건을 구분하세요.",
+            ],
+        }
+
+    section_basis = _items(
+        llm_obj.get("section_basis")
+        or llm_obj.get("항목별 핵심 근거")
+        or llm_obj.get("basis")
+        or [],
+        5,
+        240,
+    )
+    if not section_basis:
+        section_basis = _fallback_section_basis(payload)
+
+    improvements = _items(
+        llm_obj.get("improvements")
+        or llm_obj.get("보완 방향")
+        or llm_obj.get("advice")
+        or payload.get("improvements")
+        or payload.get("weaknesses")
+        or [],
+        4,
+        240,
+    )
+
+    return {
+        "headline": _txt(
+            llm_obj.get("headline")
+            or llm_obj.get("판정")
+            or llm_obj.get("judgement")
+            or "채점 결과 요약",
+            120,
+        ),
+        "overall": _txt(
+            llm_obj.get("overall")
+            or llm_obj.get("총평")
+            or llm_obj.get("summary")
+            or payload.get("summary")
+            or "",
+            520,
+        ),
+        "key_reasons": _items(
+            llm_obj.get("key_reasons")
+            or llm_obj.get("핵심 판정 근거")
+            or llm_obj.get("reasons")
+            or [],
+            4,
+            240,
+        ),
+        "section_basis": section_basis,
+        "improvements": improvements,
+    }
+
+
+def _status(flag: bool) -> str:
+    return "달성" if bool(flag) else "미달"
+
+
+def _build_prompt(payload: dict[str, Any]) -> str:
+    config = _load_prompt_config()
+    system = config.get("system") or "너는 채점 결과 출력 편집기다."
+    rules = config.get("rules") or []
+    schema = config.get("output_schema") or {}
+    template = config.get("user_template") or "입력 JSON:\n{{GRADE_PAYLOAD_JSON}}"
+
+    prompt_parts = [str(system).strip()]
+
+    if rules:
+        prompt_parts.append("규칙:")
+        for rule in rules:
+            prompt_parts.append(f"- {rule}")
+
+    if schema:
+        prompt_parts.append("출력 JSON 스키마:")
+        prompt_parts.append(json.dumps(schema, ensure_ascii=False, indent=2))
+
+    user_part = str(template).replace(
+        "{{GRADE_PAYLOAD_JSON}}",
+        json.dumps(payload, ensure_ascii=False, indent=2),
+    )
+    prompt_parts.append(user_part)
+
+    return "\n\n".join(x for x in prompt_parts if x)
+
+
+def _render(summary: dict[str, Any], payload: dict[str, Any]) -> str:
+    score = payload["score"]
+
+    lines = [
+        f"채점 완료: {score['total']}/{score['max']}",
+        f"예상 점수대: {score['score_range']}",
+        f"신뢰도: {score['confidence']}",
+        f"공식 합격선: {score['official_pass_score']}점 ({_status(score['official_pass_met'])})",
+        f"실전 목표선: {score['practical_target_score']}점 ({_status(score['practical_target_met'])})",
+        f"고득점 기준: {score['high_score_target']}점 ({_status(score['high_score_met'])})",
+        "",
+        f"판정: {summary.get('headline') or '채점 결과 요약'}",
+        "",
+    ]
+
+    overall = _txt(summary.get("overall") or "", 520)
+    if overall:
+        lines.append(f"총평: {overall}")
+        lines.append("")
+
+    key_reasons = _items(summary.get("key_reasons"), 4, 260)
+    if key_reasons:
+        lines.append("[핵심 판정 근거]")
+        for item in key_reasons:
+            lines.append(f"- {item}")
+        lines.append("")
+
+    section_basis = _items(summary.get("section_basis"), 5, 260)
+    if section_basis:
+        lines.append("[항목별 핵심 근거]")
+        for item in section_basis:
+            lines.append(f"- {item}")
+        lines.append("")
+
+    improvements = _items(summary.get("improvements"), 4, 260)
+    if improvements:
+        lines.append("[보완 방향]")
+        for item in improvements:
+            lines.append(f"- {item}")
+
+    return "\n".join(lines).strip()
+
+
+def summarize_grade_for_telegram(
+    grade: dict[str, Any],
+    call_ollama_fn: Callable[[str], str] | None,
+) -> str | None:
+    """Build compact Telegram output. Return None to use legacy fallback."""
+    if os.getenv("GRADE_OUTPUT_LLM_SUMMARY", "1").strip().lower() in {"0", "false", "off", "no"}:
+        return None
+    if not isinstance(grade, dict) or call_ollama_fn is None:
+        return None
+
+    payload = _build_payload(grade)
+    prompt = _build_prompt(payload)
+
+    try:
+        raw = str(call_ollama_fn(prompt) or "").strip()
+    except Exception:
+        return None
+
+    llm_obj = _parse_llm_json(raw)
+    summary = _normalise_summary(llm_obj, payload)
+    return _render(summary, payload)

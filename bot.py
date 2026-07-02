@@ -8,6 +8,7 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 from grading_agents import run_agent_pipeline
+from grade_output_summarizer import summarize_grade_for_telegram
 from llm_provider_settings import get_chat_provider, set_chat_provider, reset_chat_provider, provider_label
 
 BASE_DIR = Path("/workspace/prof_eng_answer")
@@ -685,6 +686,7 @@ def normalize_grade_for_display(parsed):
     return parsed
 
 
+
 def format_result(parsed, sid=None):
     """
     Telegram 표시용 채점 결과 포맷터.
@@ -692,6 +694,10 @@ def format_result(parsed, sid=None):
     """
     if not isinstance(parsed, dict):
         return "채점 결과 형식이 올바르지 않습니다."
+
+    compact_output = summarize_grade_for_telegram(parsed, call_ollama_fn=call_ollama)
+    if compact_output:
+        return compact_output
 
     def yn(v):
         return "달성" if bool(v) else "미달"
