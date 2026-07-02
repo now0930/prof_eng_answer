@@ -1,6 +1,6 @@
 {
-  "version": "2026-07-01-logic-check-v1",
-  "description": "Fact Anchor 5개 체계를 유지하면서, 핵심 이론 문항의 치명적 수식·정의·논리 오류를 별도로 검증하는 Logic Check Bank.",
+  "version": "2026-07-02-logic-check-v2",
+  "description": "Fact Anchor 5개 체계를 유지하면서, 핵심 이론 문항의 치명적 수식·정의·논리 오류를 검증한다. 2차 시스템 fatal 판정은 rubrics/logic_check_profiles의 LLM verifier profile을 우선한다.",
   "scope_policy": {
     "fact_anchor_policy": "Fact Anchor는 전체 topic의 기본 coverage 평가 기준으로 유지한다.",
     "logic_check_policy": "Logic Check는 모든 topic에 만들지 않고, 치명 오류가 자주 발생하는 핵심 이론 topic에만 적용한다.",
