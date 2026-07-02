@@ -33,6 +33,8 @@
 | `model_answer_generator_prompt.md` | Model Answer Bank 초안 생성 프롬프트 |
 | `fact_anchor_generator_prompt.md` | Fact Anchor Bank 초안 생성 프롬프트 |
 | `logic_check_profiles_readme.md` | 표, 도면, 수식, 비교 구조의 Logic Check 반영 기준 |
+| `logic_check_profile_generator_prompt.md` | Logic Check Profile JSON 초안 생성 프롬프트 |
+| `logic_check_json_generator_prompt.md` | Logic Check Bank JSON 초안 생성 프롬프트 |
 | `archive/` | 과거 문서와 참고용 이력 문서 |
 
 ## 3. 코드와 직접 연결되는 기준 파일
@@ -91,7 +93,24 @@
 | Logic Check 문서 | `logic_check_profiles` JSON과 evaluator 코드 기준으로 유지 |
 | Archive 문서 | 참고용으로만 유지하고 현재 기준으로 인용하지 않음 |
 
-## 6. README 관리 원칙
+## 6. Logic Check 문서 작성 기준
+
+Logic Check 관련 문서는 다음 기준으로 분리한다.
+
+| 문서 | 기준 |
+|---|---|
+| `logic_check_profiles_readme.md` | Logic Check Profile 운영 원칙과 표·도면·수식 반영 기준 |
+| `logic_check_profile_generator_prompt.md` | `rubrics/logic_check_profiles/...json`에 넣을 LLM verifier profile 생성 프롬프트 |
+| `logic_check_json_generator_prompt.md` | `rubrics/logic_checks/...json`에 넣을 rule bank 생성 프롬프트 |
+
+역할 구분:
+
+| 구분 | 역할 |
+|---|---|
+| Logic Check Profile | candidate evidence, truth schema, fatal/safe condition 등 LLM verifier용 지식 |
+| Logic Check Bank | regex 기반 fatal/major/minor check, question type check, D/E feedback check |
+
+## 7. README 관리 원칙
 
 루트 README는 다음 내용을 중심으로 유지한다.
 
@@ -108,25 +127,34 @@
 
 루트 README에는 과거 migration log나 긴 검증 로그를 누적하지 않는다.
 
-## 7. 검증 명령
+## 8. 검증 명령
 
 기본 검증:
 
-    cd ~/hermes/workspace/prof_eng_answer
+```bash
+cd ~/hermes/workspace/prof_eng_answer
 
-    python3 -m py_compile       bot.py       grading_agents.py       difficulty_score_ceiling.py       logic_check_evaluator.py       logic_llm_verifier.py
+python3 -m py_compile \
+  bot.py \
+  grading_agents.py \
+  difficulty_score_ceiling.py \
+  logic_check_evaluator.py \
+  logic_llm_verifier.py
 
-    python3 -m json.tool rubrics/logic_check_profiles/industrial_instrumentation_control.json >/tmp/logic_profile_check.json
-
-    python3 scripts/validate_logic_check_bank.py
-    python3 scripts/rubric_manager.py validate-all
-    python3 scripts/rubric_audit/run_rubric_audit.py
-    git diff --check
+python3 -m json.tool rubrics/logic_check_profiles/industrial_instrumentation_control.json >/tmp/logic_profile_check.json
+python3 scripts/validate_logic_check_bank.py
+python3 scripts/rubric_manager.py validate-all
+python3 scripts/rubric_audit/run_rubric_audit.py
+git diff --check
+```
 
 문서 변경 후 확인:
 
-    grep -n 'model_answer_generator_prompt\|fact_anchor_generator_prompt' README.md docs/README.md
-    grep -n 'PRINCIPLE_INTERPRETATION\|DEFINE\|legacy question type\|STRUCTURE' README.md docs/README.md
-    grep -n 'logic_check_profiles_readme.md' README.md docs/README.md
-    git diff --check
-    git diff --stat
+```bash
+grep -n 'logic_check_profile_generator_prompt\|logic_check_json_generator_prompt' README.md docs/README.md
+grep -n 'PRINCIPLE_INTERPRETATION\|DEFINE\|legacy question type\|STRUCTURE' README.md docs/README.md
+grep -n 'logic_check_profiles_readme.md' README.md docs/README.md
+
+git diff --check
+git diff --stat
+```
