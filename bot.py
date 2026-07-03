@@ -10,6 +10,7 @@ from pathlib import Path
 from grading_agents import run_agent_pipeline
 from grade_output_summarizer import summarize_grade_for_telegram
 from llm_provider_settings import get_chat_provider, set_chat_provider, reset_chat_provider, provider_label
+from grade_score_reconciler import reconcile_grade_score
 
 BASE_DIR = Path("/workspace/prof_eng_answer")
 DATA_DIR = BASE_DIR / "data"
@@ -602,8 +603,14 @@ def grade_answer(chat_id, raw_text, state):
     )
 
     if parsed:
+        parsed = reconcile_grade_score(
+            parsed=parsed,
+            raw_text=raw_text,
+            call_llm_fn=call_ollama,
+        )
         parsed["backend"] = "ollama"
         parsed["model"] = OLLAMA_MODEL
+
         (session_dir / "grade.json").write_text(
             json.dumps(parsed, ensure_ascii=False, indent=2),
             encoding="utf-8"
