@@ -2,45 +2,19 @@
 
 `prof_eng_answer`는 산업계측제어기술사 2~4교시 논술형 답안을 Telegram Bot으로 입력받아, 25점 문항 기준으로 채점하고 보완 방향을 제시하는 답안 평가 시스템이다.
 
-이 README는 과거 문서 복구본이 아니라 현재 코드 구조와 현재 docs 디렉터리 구성을 기준으로 작성한 문서다. 오래된 migration 기록, 임시 테스트 로그, 과거 README 조각은 포함하지 않는다.
+이 문서는 repository의 루트 안내서다. 목적은 다음 세 가지다.
 
-## 1. 현재 시스템 개요
+1. 시스템이 무엇을 하는지 빠르게 설명한다.
+2. Bot 실행과 검증 방법을 바로 제공한다.
+3. 세부 설계 문서가 어디에 있는지 연결한다.
 
-이 프로젝트는 단순 키워드 채점기가 아니다. 현재 구조는 다음 layer를 함께 사용한다.
+상세한 채점 구조, question type, rubric 작성법, Logic Check 작성법은 `docs/` 하위 문서에서 관리한다.
 
-| Layer | 역할 |
-|---|---|
-| Telegram Bot | 사용자의 답안 입력 수신과 채점 결과 출력 |
-| LLM semantic grading | Gemini 또는 fallback provider를 통한 의미 평가 |
-| A/B/C/D/E scoring model | 25점 문항 기준의 계층형 점수 평가 |
-| Rater profile | 교수, 기술사, 기업 임원 관점의 layer별 평가 |
-| Question Type lens | 문제 유형별로 C/D 평가 방향 보정 |
-| Model Answer Bank | 고득점 답안의 구조와 전개 기준 |
-| Fact Anchor Bank | topic별 핵심 fact coverage 기준 |
-| Topic Importance | 핵심 topic의 난이도와 출제 중요도 |
-| Difficulty Strategy | 문항 난이도와 선택 전략 판단 |
-| Logic Check | topic별 핵심 이론 오류 검증과 fatal cap 판단 |
-| D/E Claim Trust | Logic Check topic을 기반으로 한 D/E 주장 신뢰도 metadata |
-| Bot Output Formatter | Telegram 사용자에게 보여줄 결과 정리 |
+## 1. 빠른 실행
 
-핵심 원칙은 다음과 같다.
+Docker Compose 기준 서비스 이름은 `prof-eng-answer-bot`이고 컨테이너 이름은 `prof_eng_answer_bot`이다.
 
-| 구분 | 의미 |
-|---|---|
-| Model Answer | 고득점 답안의 구조와 서술 방향 |
-| Fact Anchor | 무엇을 썼는가, 즉 정답 요소 coverage |
-| Logic Check | 맞게 썼는가, 즉 정답과 충돌하는 핵심 오류 |
-| D/E Claim Trust | Logic Check를 통과한 topic 기반 D/E 주장의 이론적 신뢰도 |
-| Question Type | 문제 요구 방식 충족 여부 |
-| Difficulty Ceiling | 난이도와 fatal 오류에 따른 최종 점수 상한 |
-
-## 2. 실행 구조
-
-Docker Compose 기준 서비스는 `prof-eng-answer-bot`이고 컨테이너 이름은 `prof_eng_answer_bot`이다.
-
-Compose 설정은 repository를 `/workspace/prof_eng_answer`로 mount하고, `scripts/run_prof_eng_bot.sh`를 entrypoint로 실행한다.
-
-일반 실행:
+실행:
 
     cd ~/hermes
     docker compose up -d prof-eng-answer-bot
@@ -52,60 +26,54 @@ Compose 설정은 repository를 `/workspace/prof_eng_answer`로 mount하고, `sc
     docker compose restart prof-eng-answer-bot
     docker logs --tail=100 prof_eng_answer_bot
 
-로컬 검증:
+로컬 기본 검증:
 
     cd ~/hermes/workspace/prof_eng_answer
-    python3 -m py_compile bot.py grading_agents.py difficulty_score_ceiling.py logic_check_evaluator.py logic_llm_verifier.py
+
+    python3 -m py_compile \
+      bot.py \
+      grading_agents.py \
+      difficulty_score_ceiling.py \
+      logic_check_evaluator.py \
+      logic_llm_verifier.py
+
+    python3 scripts/validate_logic_check_de_policy.py
+    python3 scripts/check_logic_check_de_claim_trust_regression.py
+    python3 scripts/validate_logic_check_bank.py
     python3 scripts/rubric_manager.py validate-all
+    python3 scripts/rubric_manager.py validate-topic-importance
+    python3 scripts/validate_question_type_profile.py
     git diff --check
 
-## 3. 주요 코드 파일
+## 2. 시스템 개요
 
-| 파일 | 역할 |
+이 프로젝트는 단순 키워드 채점기가 아니다. 현재 채점 흐름은 다음 layer를 함께 사용한다.
+
+| Layer | 역할 |
 |---|---|
-| `bot.py` | Telegram Bot entrypoint, 입력 처리, 결과 출력 |
-| `grading_agents.py` | LLM 기반 semantic grading orchestration |
-| `gemini_grader.py` | Gemini provider 기반 채점 호출 |
-| `clova_grader.py` | CLOVA provider fallback |
-| `llm_provider_router.py` | LLM provider 선택과 routing |
-| `grading_config.py` | scoring model, rater profile, subject rubric 설정 로딩 |
-| `rubric_registry.py` | rubric JSON 로딩과 참조 |
-| `model_answer_router.py` | Model Answer Bank 검색 |
-| `question_type_router.py` | 문제 유형 추론 |
-| `question_type_coverage_adapter.py` | question type별 coverage 평가 |
-| `difficulty_strategy.py` | 난이도와 문항 선택 전략 판단 |
-| `difficulty_score_ceiling.py` | 분량, 난이도, fatal 오류 기반 점수 상한 적용 |
-| `logic_check_evaluator.py` | Logic Check 적용 여부 판단, 결과 병합, D/E claim trust metadata 생성 |
-| `logic_llm_verifier.py` | JSON profile 기반 이론 오류 검증 |
-| `scripts/validate_*.py` | rubric, question type, model answer, fact anchor 검증 |
-| `scripts/validate_logic_check_de_policy.py` | Logic Check가 D/E를 직접 평가하지 않는지 검증 |
-| `scripts/check_logic_check_de_claim_trust_regression.py` | D/E claim trust 회귀 테스트 |
-| `scripts/rubric_audit/` | rubric 관계와 품질 audit |
+| Telegram Bot | 사용자의 답안 입력 수신과 채점 결과 출력 |
+| LLM semantic grading | Gemini 또는 fallback provider를 통한 의미 평가 |
+| A/B/C/D/E scoring model | 25점 문항 기준의 계층형 점수 평가 |
+| Rater profile | 교수, 기술사, 기업 임원 관점의 layer별 평가 |
+| Question Type lens | 문제 유형별 C/D 평가 방향 보정 |
+| Model Answer Bank | 고득점 답안의 구조와 전개 기준 |
+| Fact Anchor Bank | topic별 핵심 fact coverage 기준 |
+| Topic Importance | 고빈도·고변별 topic 가중 판단 |
+| Difficulty Strategy | 문항 난이도와 선택 전략 판단 |
+| Logic Check | 핵심 이론 오류, fatal cap, D/E claim trust 판단 |
+| Bot Output Formatter | Telegram 사용자에게 보여줄 결과 정리 |
 
-## 4. Rubric Bank 구조
+핵심 원칙:
 
-| 구분 | 파일 |
+| 구분 | 의미 |
 |---|---|
-| Scoring Model | `rubrics/scoring_model/default.json` |
-| Rater Profile | `rubrics/raters/layered_default.json` |
-| Question Type Profile | `rubrics/question_types/default.json` |
-| Model Answer Bank | `rubrics/model_answers/industrial_instrumentation_control.json` |
-| Fact Anchor Bank | `rubrics/fact_anchors/industrial_instrumentation_control.json` |
-| Topic Importance | `rubrics/topic_importance/industrial_instrumentation_control.json` |
-| Logic Check Bank | `rubrics/logic_checks/industrial_instrumentation_control.json` |
-| Logic Check Profile | `rubrics/logic_check_profiles/industrial_instrumentation_control.json` |
+| Model Answer | 고득점 답안의 구조와 서술 방향 |
+| Fact Anchor | 무엇을 썼는가, 즉 정답 요소 coverage |
+| Logic Check | 맞게 썼는가, 즉 정답과 충돌하는 핵심 오류 |
+| Question Type | 문제 요구 방식 충족 여부 |
+| Difficulty Ceiling | 난이도와 fatal 오류에 따른 최종 점수 상한 |
 
-Rubric 운영 원칙:
-
-1. 채점 정책은 가능한 JSON rubric으로 관리한다.
-2. Python 코드는 routing, parsing, validation, score postprocess에 집중한다.
-3. Model Answer는 답안 구조와 고득점 요소를 정의한다.
-4. Fact Anchor는 topic별 핵심 fact coverage를 정의한다.
-5. Logic Check는 정답과 직접 충돌하는 핵심 이론 오류만 다룬다.
-6. Question Type은 A/B/C/D/E 점수체계를 대체하지 않고 C/D 평가 방향을 보정한다.
-7. D/E claim trust는 D/E 점수를 산정하지 않고, Logic Check topic 기반 D/E 주장의 이론적 신뢰도만 표시한다.
-
-## 5. A/B/C/D/E scoring model
+## 3. 채점 기준 요약
 
 총점은 25점이다.
 
@@ -125,195 +93,106 @@ Rubric 운영 원칙:
 | 실전 목표선 | 17.5 / 25 |
 | 고득점 기준 | 20 / 25 |
 
-D/E 점수는 A/B/C/D/E scoring model에서만 산정한다. Logic Check는 D/E 점수를 직접 감점하거나 가점하지 않는다.
+상세 기준은 `docs/grading_architecture.md`에서 관리한다.
 
-## 6. Question Type lens
+## 4. 현재 Question Type 요약
 
-현재 코드의 question type 체계는 `rubrics/question_types/default.json` 기준이다.
+현재 `rubrics/question_types/default.json` 기준 question type은 4개 active 대분류와 10개 legacy type mapping으로 구성된다.
 
-구조는 4개 active 대분류와 10개 legacy type mapping으로 나뉜다.
-
-Question Type은 별도 채점표가 아니다. 기존 A/B/C/D/E 점수체계를 유지하면서, 문제 유형에 따라 C항목의 fact 전개와 D항목의 현장 판단 방향을 보정한다.
-
-### 6.1 Active question type 4개
-
-| Active Type | 한국어명 | absorbs_legacy_types | 주요 의미 |
-|---|---|---|---|
-| `PRINCIPLE_INTERPRETATION` | 원리·해석형 | `PRINCIPLE`, `CALC_DESIGN` | 원리, 동작, 계산, 설계, 수식, 모델, 계측·제어 원리 해석 |
-| `DIAGNOSIS_ACTION` | 진단·대책형 | `PROBLEM_SOLVE`, `CAUSE_ACTION` | 문제점, 원인, 영향, 대책, 개선방안, 고려사항 |
-| `COMPARE_SELECTION` | 비교·선정형 | `COMPARE`, `STRUCTURE` | 비교, 종류, 분류, 형식, 특징, 장단점, 선정 기준 |
-| `IMPLEMENTATION_EVALUATION` | 적용·평가형 | `PROCEDURE`, `APPLICATION`, `EVALUATION`, `STRUCTURE` | 적용, 사례, 절차, 방법, 시험, 교정, 시스템 구성, 평가, 효과 분석 |
-
-### 6.2 Legacy question type 10개
-
-아래 10개는 과거 또는 사용자 표현에서 사용할 수 있는 legacy type이다. 현재 profile에서는 이들을 active 대분류로 매핑한다.
-
-| Legacy Type | 한국어명 | legacy_mapping 기준 |
+| Active Type | 한국어명 | 주요 의미 |
 |---|---|---|
-| `DEFINE` | 정의·개념 설명형 | `null`, 즉 신규 체계에서 독립 active type으로 사용하지 않음 |
-| `PRINCIPLE` | 원리·메커니즘형 | `PRINCIPLE_INTERPRETATION` |
-| `STRUCTURE` | 구성·분류형 | 기본 매핑은 `COMPARE_SELECTION`; 단 `IMPLEMENTATION_EVALUATION`도 absorbs_legacy_types에 `STRUCTURE`를 포함 |
-| `COMPARE` | 비교·선정형 | `COMPARE_SELECTION` |
-| `PROBLEM_SOLVE` | 문제점·개선방안형 | `DIAGNOSIS_ACTION` |
-| `CAUSE_ACTION` | 원인·대책형 | `DIAGNOSIS_ACTION` |
-| `PROCEDURE` | 절차·방법론형 | `IMPLEMENTATION_EVALUATION` |
-| `CALC_DESIGN` | 계산·설계형 | `PRINCIPLE_INTERPRETATION` |
-| `APPLICATION` | 사례·적용형 | `IMPLEMENTATION_EVALUATION` |
-| `EVALUATION` | 평가·효과 분석형 | `IMPLEMENTATION_EVALUATION` |
+| `PRINCIPLE_INTERPRETATION` | 원리·해석형 | 원리, 동작, 계산, 설계, 수식, 모델 해석 |
+| `DIAGNOSIS_ACTION` | 진단·대책형 | 문제점, 원인, 영향, 대책, 개선방안 |
+| `COMPARE_SELECTION` | 비교·선정형 | 비교, 종류, 분류, 장단점, 선정 기준 |
+| `IMPLEMENTATION_EVALUATION` | 적용·평가형 | 적용, 사례, 절차, 시험, 교정, 평가 |
 
-정확한 표현:
+상세 기준은 `docs/question_type_taxonomy.md`에서 관리한다.
 
-| 표현 | 코드 기준 판단 |
-|---|---|
-| active question type은 4개다 | 맞음 |
-| legacy question type은 10개이며 active 4개로 매핑된다 | 맞음 |
-| DEFINE은 신규 체계에서 독립 active type으로 사용한다 | 틀림 |
-| STRUCTURE의 legacy_mapping 기본값은 `COMPARE_SELECTION`이다 | 맞음 |
-| STRUCTURE는 독립 question_type이 아니라 fact 설명 요소로 흡수된다 | 맞음 |
+## 5. Logic Check 운영 요약
 
-## 7. Logic Check 운영
+Logic Check는 단순 누락이나 표현 부족을 잡는 기능이 아니다. 정답과 직접 충돌하는 핵심 이론 오류를 검출하고, 필요한 경우 최종 점수 상한을 적용하기 위한 안전장치다.
 
-Logic Check는 단순 누락이나 표현 부족을 잡는 기능이 아니다. 정답과 직접 충돌하는 핵심 이론 오류를 검출하고, 필요한 경우 최종 점수 상한을 적용하기 위한 layer다.
+현재 원칙:
 
-현재 핵심 적용 대상은 `second_order_lag_response_by_damping_ratio` 같은 THEORY_CORE 주제다.
+1. Logic Check는 topic truth gate다.
+2. Logic Check finding의 `affected_layers`는 A/B/C까지만 사용한다.
+3. D/E 점수는 Logic Check가 직접 감점·가점하지 않는다.
+4. D/E와의 연결은 `de_claim_trust` metadata로만 표현한다.
+5. fatal 오류가 있으면 `difficulty_score_ceiling.py`에서 최종 score cap을 적용한다.
+6. LLM verifier 실패 또는 confidence 부족 시 fatal을 강제하지 않는다.
 
-운영 원칙:
-
-1. Fact Anchor는 넓게 둔다.
-2. Logic Check는 깊게 둔다.
-3. Logic Check 지식은 Python 코드가 아니라 JSON bank와 JSON profile에 둔다.
-4. LLM verifier는 answer에서 candidate evidence만 보고 truth_schema와 비교한다.
-5. LLM 실패 또는 confidence 부족 시 fatal을 강제하지 않는다.
-6. 좋은 답안에도 등장하는 표현은 safe_conditions 또는 required pattern 확장으로 오탐을 막는다.
-7. THEORY_CORE fatal이면 `difficulty_score_ceiling.py`에서 최종 score cap을 적용한다.
-8. Logic Check finding의 `affected_layers`에는 원칙적으로 `A`, `B`, `C`만 사용한다.
-9. D/E는 `affected_layers`가 아니라 `de_claim_trust.target_layers`로만 연결한다.
-
-세부 문서:
-
-- `docs/logic_check_profiles_readme.md`
-- `docs/logic_check_profile_generator_prompt.md`
-- `docs/logic_check_json_generator_prompt.md`
-
-## 8. D/E claim trust 정책
-
-이번 구조에서 Logic Check는 D/E를 직접 평가하지 않는다.
-
-D/E 점수는 A/B/C/D/E scoring model에서만 산정한다. Logic Check는 topic truth gate로 동작하며, 해당 topic을 기반으로 한 D/E 현장 적용 주장과 결론 주장의 이론적 신뢰도를 metadata로 제공한다.
-
-| status | 의미 |
-|---|---|
-| `trusted` | Logic Check finding이 없어 해당 topic 기반 D/E 주장을 이론적으로 신뢰 가능 |
-| `trusted_with_notes` | fatal/major는 없고 minor 보완만 있어 대체로 신뢰 가능 |
-| `not_invalidated` | fatal은 없지만 major gap이 있어 반증되지는 않았으나 충분히 입증된 것으로 보지는 않음 |
-| `limited` | fatal이 있어 해당 topic 기반 D/E 주장을 제한적으로만 신뢰 |
-
-예시는 다음과 같다.
-
-| 답안 유형 | Logic Check | D/E claim trust |
-|---|---|---|
-| 정상 2차 시스템 답안 | pass | `trusted` |
-| `ζ=0.7`을 임계감쇠로 정의 | fatal | `limited` |
-| 고급 키워드만 나열 | warn 또는 major gap | `not_invalidated` |
-
-정책 요약:
-
-1. Logic Check 통과 topic 기반 D/E 주장은 이론적 전제가 유효한 것으로 본다.
-2. Logic Check fatal topic 기반 D/E 주장은 강한 설계 판단이나 면접 방어 근거로 신뢰하지 않는다.
-3. keyword-only 답안은 fatal이 없더라도 fully trusted로 보지 않는다.
-4. D/E 점수 자체는 scoring model에서만 산정한다.
-
-## 9. 문서 구조
-
-현재 `docs/` 디렉터리에 존재하는 기준 문서는 다음과 같다.
+관련 문서:
 
 | 문서 | 역할 |
 |---|---|
-| `docs/README.md` | docs 디렉터리 인덱스 |
-| `docs/operation_runbook.md` | 운영, 재시작, 장애 대응 |
-| `docs/docker_compose_usage.md` | Docker Compose 실행 방식 |
-| `docs/grading_architecture.md` | A/B/C/D/E 채점 구조 |
-| `docs/question_type_taxonomy.md` | Question Type 기준 |
-| `docs/difficulty_and_selection_strategy.md` | 난이도와 문항 선택 전략 |
-| `docs/llm_provider.md` | LLM provider 설정 |
-| `docs/rubric_authoring_guide.md` | rubric 작성 방법 |
-| `docs/model_answer_generator_prompt.md` | Model Answer Bank 초안 생성 프롬프트 |
-| `docs/fact_anchor_generator_prompt.md` | Fact Anchor Bank 초안 생성 프롬프트 |
-| `docs/logic_check_profiles_readme.md` | 표, 도면, 수식, 비교 구조의 Logic Check 반영 기준 |
-| `docs/logic_check_profile_generator_prompt.md` | Logic Check Profile JSON 초안 생성 프롬프트 |
-| `docs/logic_check_json_generator_prompt.md` | Logic Check Bank JSON 초안 생성 프롬프트 |
-| `docs/archive/` | 과거 문서와 참고용 이력 문서 |
+| `docs/logic_check_profiles_readme.md` | Logic Check Profile 운영 가이드 |
+| `docs/logic_check_profile_generator_prompt.md` | LLM verifier profile 생성 프롬프트 |
+| `docs/logic_check_json_generator_prompt.md` | Logic Check Bank 생성 프롬프트 |
 
-## 10. 검증 명령
+## 6. 주요 코드 파일
 
-기본 검증:
+| 파일 | 역할 |
+|---|---|
+| `bot.py` | Telegram Bot entrypoint, 입력 처리, 결과 출력 |
+| `grading_agents.py` | LLM 기반 semantic grading orchestration |
+| `gemini_grader.py` | Gemini provider 기반 채점 호출 |
+| `clova_grader.py` | CLOVA provider fallback |
+| `llm_provider_router.py` | LLM provider 선택과 routing |
+| `grading_config.py` | scoring model, rater profile, subject rubric 설정 로딩 |
+| `rubric_registry.py` | rubric JSON 로딩과 참조 |
+| `model_answer_router.py` | Model Answer Bank 검색 |
+| `question_type_router.py` | 문제 유형 추론 |
+| `question_type_coverage_adapter.py` | question type별 coverage 평가 |
+| `difficulty_strategy.py` | 난이도와 문항 선택 전략 판단 |
+| `difficulty_score_ceiling.py` | 분량, 난이도, fatal 오류 기반 점수 상한 적용 |
+| `logic_check_evaluator.py` | Logic Check 적용 여부 판단과 결과 병합 |
+| `logic_llm_verifier.py` | JSON profile 기반 이론 오류 검증 |
+| `scripts/validate_*.py` | rubric, question type, model answer, fact anchor 검증 |
 
-    cd ~/hermes/workspace/prof_eng_answer
+## 7. Rubric Bank 구조
 
-    python3 -m py_compile \
-      bot.py \
-      grading_agents.py \
-      difficulty_score_ceiling.py \
-      logic_check_evaluator.py \
-      logic_llm_verifier.py \
-      scripts/validate_logic_check_de_policy.py \
-      scripts/check_logic_check_de_claim_trust_regression.py
+| 구분 | 파일 |
+|---|---|
+| Scoring Model | `rubrics/scoring_model/default.json` |
+| Rater Profile | `rubrics/raters/layered_default.json` |
+| Question Type Profile | `rubrics/question_types/default.json` |
+| Model Answer Bank | `rubrics/model_answers/industrial_instrumentation_control.json` |
+| Fact Anchor Bank | `rubrics/fact_anchors/industrial_instrumentation_control.json` |
+| Topic Importance | `rubrics/topic_importance/industrial_instrumentation_control.json` |
+| Logic Check Bank | `rubrics/logic_checks/industrial_instrumentation_control.json` |
+| Logic Check Profile | `rubrics/logic_check_profiles/industrial_instrumentation_control.json` |
 
-    python3 -m json.tool \
-      rubrics/logic_checks/industrial_instrumentation_control.json \
-      >/tmp/logic_check_bank_check.json
+운영 원칙:
 
-    python3 scripts/validate_logic_check_de_policy.py
-    python3 scripts/check_logic_check_de_claim_trust_regression.py
-    python3 scripts/validate_logic_check_bank.py
-    python3 scripts/rubric_manager.py validate-all
-    python3 scripts/rubric_manager.py validate-topic-importance
-    python3 scripts/validate_question_type_profile.py
+1. 채점 정책은 가능한 JSON rubric으로 관리한다.
+2. Python 코드는 routing, parsing, validation, score postprocess에 집중한다.
+3. Model Answer는 답안 구조와 고득점 요소를 정의한다.
+4. Fact Anchor는 topic별 핵심 fact coverage를 정의한다.
+5. Logic Check는 정답과 직접 충돌하는 핵심 이론 오류만 다룬다.
+6. Question Type은 A/B/C/D/E 점수체계를 대체하지 않고 C/D 평가 방향을 보정한다.
 
-    git diff --check
+## 8. 문서 위치
 
-문서만 수정했을 때:
+`docs/README.md`는 문서 인덱스와 문서별 책임 범위를 관리한다.
 
-    git diff --check
-    git diff --stat
-    git status --short
+자주 보는 문서:
 
-Logic Check D/E 정책만 확인할 때:
+| 목적 | 문서 |
+|---|---|
+| 전체 문서 목록 | `docs/README.md` |
+| 운영, 재시작, 장애 대응 | `docs/operation_runbook.md` |
+| Docker Compose 실행 | `docs/docker_compose_usage.md` |
+| A/B/C/D/E 채점 구조 | `docs/grading_architecture.md` |
+| Question Type 기준 | `docs/question_type_taxonomy.md` |
+| 난이도와 문항 선택 전략 | `docs/difficulty_and_selection_strategy.md` |
+| LLM provider 설정 | `docs/llm_provider.md` |
+| Rubric 작성 | `docs/rubric_authoring_guide.md` |
+| Logic Check 운영 | `docs/logic_check_profiles_readme.md` |
 
-    python3 scripts/validate_logic_check_de_policy.py
-    python3 scripts/check_logic_check_de_claim_trust_regression.py
+## 9. README 유지 원칙
 
-금지 구조 확인:
-
-    python3 scripts/validate_logic_check_de_policy.py
-
-## 11. Commit 절차
-
-이번 변경을 커밋할 때:
-
-    cd ~/hermes/workspace/prof_eng_answer
-
-    git add \
-      README.md \
-      docs/README.md \
-      docs/logic_check_json_generator_prompt.md \
-      logic_check_evaluator.py \
-      rubrics/logic_checks/industrial_instrumentation_control.json \
-      scripts/validate_logic_check_de_policy.py \
-      scripts/check_logic_check_de_claim_trust_regression.py
-
-    git diff --cached --stat
-    git diff --cached --check
-
-    git commit -m "Refactor logic check as topic truth gate with D/E claim trust"
-
-    git status --short
-
-## 12. README 유지 원칙
-
-1. README는 현재 코드 기준으로 유지한다.
-2. 과거 migration log를 README에 누적하지 않는다.
-3. 검증 결과 reports는 README에 붙이지 않는다.
-4. 상세한 운영 절차는 docs 하위 문서로 분리한다.
-5. 오래된 문서는 삭제하지 않고 필요 시 `docs/archive/`로 이동한다.
-6. README와 docs/README는 append 방식이 아니라 필요 시 완전 재작성한다.
+1. 루트 README는 프로젝트 소개, 실행, 검증, 핵심 구조 요약만 유지한다.
+2. 세부 설계와 작성 규칙은 `docs/` 하위 문서로 분리한다.
+3. 과거 migration log와 긴 검증 로그는 README에 누적하지 않는다.
+4. README와 `docs/README.md`는 append 방식이 아니라 필요 시 완전 재작성한다.
+5. 문서와 코드가 충돌하면 현재 Python 코드와 JSON Rubric Bank를 우선한다.
