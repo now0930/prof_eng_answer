@@ -197,7 +197,7 @@ def audit_rubric_quality() -> RubricAuditSummary:
 
     steps: list[tuple[str, list[str], bool]] = [
         ("validate_fact_anchor_bank", ["python3", "scripts/validate_fact_anchor_bank.py"], False),
-        ("audit_fact_anchor_quality", ["python3", "scripts/audit_fact_anchor_quality.py"], False),
+        ("audit_fact_anchor_quality", ["python3", "scripts/rubric_audit/audit_fact_anchor_quality.py"], False),
         ("validate_model_answer_bank", ["python3", "scripts/validate_model_answer_bank.py"], False),
         ("validate_model_answer_relationships", ["python3", "scripts/validate_model_answer_relationships.py"], False),
         (
@@ -206,7 +206,7 @@ def audit_rubric_quality() -> RubricAuditSummary:
             False,
         ),
         ("validate_all", ["python3", "scripts/rubric_manager.py", "validate-all"], False),
-        ("report_priority_minor_relationships", ["python3", "scripts/report_priority_minor_relationships.py"], True),
+        ("report_priority_minor_relationships", ["python3", "scripts/rubric_audit/report_priority_minor_relationships.py"], True),
     ]
 
     for name, args, allow_failure in steps:
