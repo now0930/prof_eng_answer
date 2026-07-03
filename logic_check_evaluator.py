@@ -274,7 +274,7 @@ def _evaluate_second_order_deterministic_checks(text: str) -> list[dict[str, Any
             "angle_relation_sin_cos_mismatch",
             "θ를 음의 실수축과 극점 사이각으로 정의한 뒤 sinθ=σ/ωn=ζ로 표현하여 기하학적 관계가 충돌한다.",
             "θ를 음의 실수축 기준으로 정의하면 ζ=cosθ이다. sinθ 관계를 쓰려면 θ를 허수축 기준 각도로 정의해야 한다.",
-            layers=["C", "E"],
+            layers=["C"],
         )
 
     # 6) Step response inversion.
@@ -532,32 +532,20 @@ def evaluate_logic_checks(
                 )
                 _append_unique(deduction_elements, check.get("message", "비교축 부족"))
 
-        for check in topic_check.get("advanced_tradeoff_checks", []):
-            triggers = check.get("trigger_patterns", [])
-            context_patterns = check.get("required_context_patterns", [])
-
-            trigger_count, trigger_hits = _count_required_patterns(text, triggers)
-            context_count, context_hits = _count_required_patterns(text, context_patterns)
-
-            if trigger_count > 0 and context_count == 0:
-                findings.append(
-                    {
-                        "id": check.get("id"),
-                        "severity": check.get("severity", "minor"),
-                        "message": check.get("message"),
-                        "affected_layers": check.get("affected_layers", []),
-                        "trigger_hits": trigger_hits,
-                        "context_hits": context_hits,
-                    }
-                )
-                _append_unique(deduction_elements, check.get("message", "고급 기술 trade-off 설명 부족"))
-
         for point in topic_check.get("next_practice_points", []):
             _append_unique(next_practice_points, point)
 
         break
 
     findings = _apply_second_order_claim_evaluator(text, findings)
+    # Logic Check는 D/E를 직접 평가하지 않는다.
+    # D/E는 de_claim_trust metadata의 target일 뿐 finding affected layer가 아니다.
+    for _finding in findings:
+        if isinstance(_finding, dict):
+            _layers = _finding.get("affected_layers")
+            if isinstance(_layers, list):
+                _clean_layers = [layer for layer in _layers if layer in ("A", "B", "C")]
+                _finding["affected_layers"] = _clean_layers or ["C"]
 
     # Rebuild deduction/cap state after claim-based fatal arbitration.
     deduction_elements = []
@@ -600,6 +588,41 @@ def evaluate_logic_checks(
             "recommended_ceiling": recommended_ceiling,
             "reason": "Logic Check에서 THEORY_CORE 핵심 이론 오류가 감지됨" if fatal_error_detected else "",
         },
+    }
+
+    major_error_detected = any(f.get("severity") == "major" for f in findings)
+    minor_or_warn_detected = any(
+        f.get("severity") in {"minor", "warn", "warning"} for f in findings
+    )
+
+    if fatal_error_detected:
+        de_claim_trust_status = "limited"
+        de_claim_trust_message = (
+            "Logic Check fatal이 감지되어 이 topic을 전제로 한 D/E 현장 적용·결론 주장은 제한적으로 신뢰합니다."
+        )
+    elif major_error_detected:
+        de_claim_trust_status = "not_invalidated"
+        de_claim_trust_message = (
+            "Logic Check fatal은 없지만 major gap이 남아 있어, 이 topic 기반 D/E 주장은 반증되지는 않았으나 충분히 입증된 것으로 보지는 않습니다."
+        )
+    elif minor_or_warn_detected:
+        de_claim_trust_status = "trusted_with_notes"
+        de_claim_trust_message = (
+            "Logic Check fatal/major는 없어 이 topic 기반 D/E 주장은 대체로 신뢰 가능하나, 일부 보완 지점이 있습니다."
+        )
+    else:
+        de_claim_trust_status = "trusted"
+        de_claim_trust_message = (
+            "Logic Check finding이 없어 이 topic을 기반으로 한 D/E 현장 적용·결론 주장은 이론적으로 신뢰 가능합니다."
+        )
+
+    result["de_claim_trust_evaluation"] = {
+        "enabled": topic_id is not None,
+        "target_layers": ["D", "E"],
+        "score_effect": "none",
+        "status": de_claim_trust_status,
+        "message": de_claim_trust_message,
+        "rule": "D/E 점수는 A/B/C/D/E scoring model에서만 산정하며 Logic Check는 D/E claim trust만 제공합니다.",
     }
 
     return result

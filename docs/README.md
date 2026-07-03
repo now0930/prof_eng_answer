@@ -2,7 +2,7 @@
 
 이 디렉터리는 `prof_eng_answer`의 운영 문서와 rubric 작성 문서를 보관한다.
 
-이 문서는 과거 문서 조각을 이어 붙인 파일이 아니라, 현재 코드 구조와 현재 docs 디렉터리 구성을 기준으로 새로 작성한 문서 인덱스다.
+이 문서는 과거 문서 조각을 이어 붙인 파일이 아니라, 현재 코드 구조와 현재 docs 디렉터리 구성을 기준으로 작성한 문서 인덱스다.
 
 ## 1. 문서 우선순위
 
@@ -19,7 +19,7 @@
 
 ## 2. 현재 기준 문서
 
-현재 main의 `docs/` 디렉터리에 존재하는 기준 문서는 다음과 같다.
+현재 `docs/` 디렉터리에 존재하는 기준 문서는 다음과 같다.
 
 | 문서 | 역할 |
 |---|---|
@@ -80,20 +80,9 @@
 | `APPLICATION` | 사례·적용형 | `IMPLEMENTATION_EVALUATION` |
 | `EVALUATION` | 평가·효과 분석형 | `IMPLEMENTATION_EVALUATION` |
 
-문서에 “10개 active type”이라고 쓰지 않는다. 정확한 표현은 “10개 legacy type을 4개 active type으로 매핑한다”이다.
+정확한 표현은 “10개 legacy type을 4개 active type으로 매핑한다”이다.
 
-## 5. 문서별 유지 원칙
-
-| 문서 유형 | 유지 원칙 |
-|---|---|
-| 운영 runbook | 실제 Docker Compose와 컨테이너 이름 기준으로 유지 |
-| 채점 구조 문서 | `rubrics/scoring_model/default.json` 기준으로 유지 |
-| Question Type 문서 | `rubrics/question_types/default.json` 기준으로 유지 |
-| Rubric 작성 문서 | Model Answer Bank와 Fact Anchor Bank schema 기준으로 유지 |
-| Logic Check 문서 | `logic_check_profiles` JSON과 evaluator 코드 기준으로 유지 |
-| Archive 문서 | 참고용으로만 유지하고 현재 기준으로 인용하지 않음 |
-
-## 6. Logic Check 문서 작성 기준
+## 5. Logic Check 문서 작성 기준
 
 Logic Check 관련 문서는 다음 기준으로 분리한다.
 
@@ -103,14 +92,51 @@ Logic Check 관련 문서는 다음 기준으로 분리한다.
 | `logic_check_profile_generator_prompt.md` | `rubrics/logic_check_profiles/...json`에 넣을 LLM verifier profile 생성 프롬프트 |
 | `logic_check_json_generator_prompt.md` | `rubrics/logic_checks/...json`에 넣을 rule bank 생성 프롬프트 |
 
-역할 구분:
+역할 구분은 다음과 같다.
 
 | 구분 | 역할 |
 |---|---|
 | Logic Check Profile | candidate evidence, truth schema, fatal/safe condition 등 LLM verifier용 지식 |
-| Logic Check Bank | regex 기반 fatal/major/minor check, question type check, D/E feedback check |
+| Logic Check Bank | regex 기반 fatal/major/minor topic truth check, question type 보조 check, D/E claim trust metadata |
+| Logic Check Evaluator | Logic Check 적용 여부 판단, finding 정리, fatal ceiling 정보 생성, D/E claim trust metadata 생성 |
 
-## 7. README 관리 원칙
+## 6. Logic Check와 D/E 관계
+
+Logic Check는 D/E를 직접 평가하지 않는다.
+
+D/E 점수는 A/B/C/D/E scoring model에서만 산정한다. Logic Check의 topic은 D/E 주장과 연결될 수 있지만, 그 역할은 감점이나 가점이 아니라 이론적 신뢰도 검증이다.
+
+정책은 다음과 같다.
+
+| 상태 | 의미 |
+|---|---|
+| `trusted` | Logic Check finding이 없어 해당 topic 기반 D/E 주장을 이론적으로 신뢰 가능 |
+| `trusted_with_notes` | fatal/major는 없고 minor 보완만 있어 대체로 신뢰 가능 |
+| `not_invalidated` | fatal은 없지만 major gap이 있어 반증되지는 않았으나 충분히 입증된 것으로 보지는 않음 |
+| `limited` | fatal이 있어 해당 topic 기반 D/E 주장을 제한적으로만 신뢰 |
+
+핵심 원칙은 다음과 같다.
+
+1. Logic Check finding의 `affected_layers`에는 원칙적으로 `A`, `B`, `C`만 사용한다.
+2. `D`, `E`는 `affected_layers`가 아니라 `de_claim_trust.target_layers`로만 연결한다.
+3. D/E 점수는 scoring model이 평가한다.
+4. Logic Check는 D/E claim trust만 제공한다.
+5. THEORY_CORE fatal은 기존 score cap 정책을 유지한다.
+6. C 영역 fatal이 있더라도 D/E 현장 적용 시도 자체는 scoring model에서 별도 평가한다.
+7. keyword-only 답안은 fatal이 없더라도 fully trusted로 보지 않는다.
+
+## 7. 문서별 유지 원칙
+
+| 문서 유형 | 유지 원칙 |
+|---|---|
+| 운영 runbook | 실제 Docker Compose와 컨테이너 이름 기준으로 유지 |
+| 채점 구조 문서 | `rubrics/scoring_model/default.json` 기준으로 유지 |
+| Question Type 문서 | `rubrics/question_types/default.json` 기준으로 유지 |
+| Rubric 작성 문서 | Model Answer Bank와 Fact Anchor Bank schema 기준으로 유지 |
+| Logic Check 문서 | `logic_check_profiles` JSON, `logic_checks` JSON, evaluator 코드 기준으로 유지 |
+| Archive 문서 | 참고용으로만 유지하고 현재 기준으로 인용하지 않음 |
+
+## 8. README 관리 원칙
 
 루트 README는 다음 내용을 중심으로 유지한다.
 
@@ -121,40 +147,48 @@ Logic Check 관련 문서는 다음 기준으로 분리한다.
 5. A/B/C/D/E scoring model
 6. Question Type lens
 7. Logic Check 운영 구조
-8. 문서 인덱스
-9. 검증 명령
-10. commit 절차
+8. D/E claim trust 정책
+9. 문서 인덱스
+10. 검증 명령
+11. commit 절차
 
 루트 README에는 과거 migration log나 긴 검증 로그를 누적하지 않는다.
 
-## 8. 검증 명령
+## 9. 검증 명령
 
-기본 검증:
+기본 검증은 다음 순서로 수행한다.
 
-```bash
-cd ~/hermes/workspace/prof_eng_answer
+    cd ~/hermes/workspace/prof_eng_answer
 
-python3 -m py_compile \
-  bot.py \
-  grading_agents.py \
-  difficulty_score_ceiling.py \
-  logic_check_evaluator.py \
-  logic_llm_verifier.py
+    python3 -m py_compile \
+      bot.py \
+      grading_agents.py \
+      difficulty_score_ceiling.py \
+      logic_check_evaluator.py \
+      logic_llm_verifier.py \
+      scripts/validate_logic_check_de_policy.py \
+      scripts/check_logic_check_de_claim_trust_regression.py
 
-python3 -m json.tool rubrics/logic_check_profiles/industrial_instrumentation_control.json >/tmp/logic_profile_check.json
-python3 scripts/validate_logic_check_bank.py
-python3 scripts/rubric_manager.py validate-all
-python3 scripts/rubric_audit/run_rubric_audit.py
-git diff --check
-```
+    python3 -m json.tool \
+      rubrics/logic_checks/industrial_instrumentation_control.json \
+      >/tmp/logic_check_bank_check.json
 
-문서 변경 후 확인:
+    python3 scripts/validate_logic_check_de_policy.py
+    python3 scripts/check_logic_check_de_claim_trust_regression.py
+    python3 scripts/validate_logic_check_bank.py
+    python3 scripts/rubric_manager.py validate-all
+    python3 scripts/rubric_manager.py validate-topic-importance
+    python3 scripts/validate_question_type_profile.py
 
-```bash
-grep -n 'logic_check_profile_generator_prompt\|logic_check_json_generator_prompt' README.md docs/README.md
-grep -n 'PRINCIPLE_INTERPRETATION\|DEFINE\|legacy question type\|STRUCTURE' README.md docs/README.md
-grep -n 'logic_check_profiles_readme.md' README.md docs/README.md
+    git diff --check
 
-git diff --check
-git diff --stat
-```
+문서 변경 후 확인은 다음을 사용한다.
+
+    grep -n 'D/E feedback check\|field_application_checks\|coherence_defense_checks\|d_e_feedback_templates\|advanced_tradeoff_checks' \
+      README.md docs/README.md docs/logic_check_json_generator_prompt.md || true
+
+    grep -n 'de_claim_trust\|D/E claim trust\|topic truth gate' \
+      README.md docs/README.md docs/logic_check_json_generator_prompt.md
+
+    git diff --check
+    git diff --stat

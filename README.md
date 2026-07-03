@@ -2,7 +2,7 @@
 
 `prof_eng_answer`는 산업계측제어기술사 2~4교시 논술형 답안을 Telegram Bot으로 입력받아, 25점 문항 기준으로 채점하고 보완 방향을 제시하는 답안 평가 시스템이다.
 
-이 README는 과거 문서 복구본이 아니라 현재 코드 구조와 현재 docs 디렉터리 구성을 기준으로 새로 작성한 문서다. 오래된 migration 기록, 임시 테스트 로그, 과거 README 조각은 포함하지 않는다.
+이 README는 과거 문서 복구본이 아니라 현재 코드 구조와 현재 docs 디렉터리 구성을 기준으로 작성한 문서다. 오래된 migration 기록, 임시 테스트 로그, 과거 README 조각은 포함하지 않는다.
 
 ## 1. 현재 시스템 개요
 
@@ -17,8 +17,10 @@
 | Question Type lens | 문제 유형별로 C/D 평가 방향 보정 |
 | Model Answer Bank | 고득점 답안의 구조와 전개 기준 |
 | Fact Anchor Bank | topic별 핵심 fact coverage 기준 |
+| Topic Importance | 핵심 topic의 난이도와 출제 중요도 |
 | Difficulty Strategy | 문항 난이도와 선택 전략 판단 |
-| Logic Check | 핵심 이론 오류와 fatal cap 판단 |
+| Logic Check | topic별 핵심 이론 오류 검증과 fatal cap 판단 |
+| D/E Claim Trust | Logic Check topic을 기반으로 한 D/E 주장 신뢰도 metadata |
 | Bot Output Formatter | Telegram 사용자에게 보여줄 결과 정리 |
 
 핵심 원칙은 다음과 같다.
@@ -28,44 +30,34 @@
 | Model Answer | 고득점 답안의 구조와 서술 방향 |
 | Fact Anchor | 무엇을 썼는가, 즉 정답 요소 coverage |
 | Logic Check | 맞게 썼는가, 즉 정답과 충돌하는 핵심 오류 |
+| D/E Claim Trust | Logic Check를 통과한 topic 기반 D/E 주장의 이론적 신뢰도 |
 | Question Type | 문제 요구 방식 충족 여부 |
 | Difficulty Ceiling | 난이도와 fatal 오류에 따른 최종 점수 상한 |
 
 ## 2. 실행 구조
 
-Docker Compose 기준 서비스는 `prof-eng-answer-bot`이고 컨테이너 이름은 `prof_eng_answer_bot`이다. Compose 설정은 repository를 `/workspace/prof_eng_answer`로 mount하고, `scripts/run_prof_eng_bot.sh`를 entrypoint로 실행한다.
+Docker Compose 기준 서비스는 `prof-eng-answer-bot`이고 컨테이너 이름은 `prof_eng_answer_bot`이다.
+
+Compose 설정은 repository를 `/workspace/prof_eng_answer`로 mount하고, `scripts/run_prof_eng_bot.sh`를 entrypoint로 실행한다.
 
 일반 실행:
 
-```bash
-cd ~/hermes
-docker compose up -d prof-eng-answer-bot
-docker logs --tail=100 prof_eng_answer_bot
-```
+    cd ~/hermes
+    docker compose up -d prof-eng-answer-bot
+    docker logs --tail=100 prof_eng_answer_bot
 
 재시작:
 
-```bash
-cd ~/hermes
-docker compose restart prof-eng-answer-bot
-docker logs --tail=100 prof_eng_answer_bot
-```
+    cd ~/hermes
+    docker compose restart prof-eng-answer-bot
+    docker logs --tail=100 prof_eng_answer_bot
 
 로컬 검증:
 
-```bash
-cd ~/hermes/workspace/prof_eng_answer
-
-python3 -m py_compile \
-  bot.py \
-  grading_agents.py \
-  difficulty_score_ceiling.py \
-  logic_check_evaluator.py \
-  logic_llm_verifier.py
-
-python3 scripts/rubric_manager.py validate-all
-git diff --check
-```
+    cd ~/hermes/workspace/prof_eng_answer
+    python3 -m py_compile bot.py grading_agents.py difficulty_score_ceiling.py logic_check_evaluator.py logic_llm_verifier.py
+    python3 scripts/rubric_manager.py validate-all
+    git diff --check
 
 ## 3. 주요 코드 파일
 
@@ -83,9 +75,11 @@ git diff --check
 | `question_type_coverage_adapter.py` | question type별 coverage 평가 |
 | `difficulty_strategy.py` | 난이도와 문항 선택 전략 판단 |
 | `difficulty_score_ceiling.py` | 분량, 난이도, fatal 오류 기반 점수 상한 적용 |
-| `logic_check_evaluator.py` | Logic Check 적용 여부 판단과 결과 병합 |
+| `logic_check_evaluator.py` | Logic Check 적용 여부 판단, 결과 병합, D/E claim trust metadata 생성 |
 | `logic_llm_verifier.py` | JSON profile 기반 이론 오류 검증 |
 | `scripts/validate_*.py` | rubric, question type, model answer, fact anchor 검증 |
+| `scripts/validate_logic_check_de_policy.py` | Logic Check가 D/E를 직접 평가하지 않는지 검증 |
+| `scripts/check_logic_check_de_claim_trust_regression.py` | D/E claim trust 회귀 테스트 |
 | `scripts/rubric_audit/` | rubric 관계와 품질 audit |
 
 ## 4. Rubric Bank 구조
@@ -109,6 +103,7 @@ Rubric 운영 원칙:
 4. Fact Anchor는 topic별 핵심 fact coverage를 정의한다.
 5. Logic Check는 정답과 직접 충돌하는 핵심 이론 오류만 다룬다.
 6. Question Type은 A/B/C/D/E 점수체계를 대체하지 않고 C/D 평가 방향을 보정한다.
+7. D/E claim trust는 D/E 점수를 산정하지 않고, Logic Check topic 기반 D/E 주장의 이론적 신뢰도만 표시한다.
 
 ## 5. A/B/C/D/E scoring model
 
@@ -130,9 +125,13 @@ Rubric 운영 원칙:
 | 실전 목표선 | 17.5 / 25 |
 | 고득점 기준 | 20 / 25 |
 
+D/E 점수는 A/B/C/D/E scoring model에서만 산정한다. Logic Check는 D/E 점수를 직접 감점하거나 가점하지 않는다.
+
 ## 6. Question Type lens
 
-현재 코드의 question type 체계는 `rubrics/question_types/default.json` 기준이다. 구조는 **4개 active 대분류**와 **10개 legacy type mapping**으로 나뉜다.
+현재 코드의 question type 체계는 `rubrics/question_types/default.json` 기준이다.
+
+구조는 4개 active 대분류와 10개 legacy type mapping으로 나뉜다.
 
 Question Type은 별도 채점표가 아니다. 기존 A/B/C/D/E 점수체계를 유지하면서, 문제 유형에 따라 C항목의 fact 전개와 D항목의 현장 판단 방향을 보정한다.
 
@@ -182,21 +181,51 @@ Logic Check는 단순 누락이나 표현 부족을 잡는 기능이 아니다. 
 
 1. Fact Anchor는 넓게 둔다.
 2. Logic Check는 깊게 둔다.
-3. Logic Check 지식은 Python 코드가 아니라 JSON profile에 둔다.
+3. Logic Check 지식은 Python 코드가 아니라 JSON bank와 JSON profile에 둔다.
 4. LLM verifier는 answer에서 candidate evidence만 보고 truth_schema와 비교한다.
 5. LLM 실패 또는 confidence 부족 시 fatal을 강제하지 않는다.
-6. 좋은 답안에도 등장하는 표현은 safe_conditions로 오탐을 막는다.
+6. 좋은 답안에도 등장하는 표현은 safe_conditions 또는 required pattern 확장으로 오탐을 막는다.
 7. THEORY_CORE fatal이면 `difficulty_score_ceiling.py`에서 최종 score cap을 적용한다.
+8. Logic Check finding의 `affected_layers`에는 원칙적으로 `A`, `B`, `C`만 사용한다.
+9. D/E는 `affected_layers`가 아니라 `de_claim_trust.target_layers`로만 연결한다.
 
 세부 문서:
 
-- [Logic Check JSON Profile 운영 가이드](docs/logic_check_profiles_readme.md)
-- [Logic Check Profile Generator Prompt](docs/logic_check_profile_generator_prompt.md)
-- [Logic Check JSON Bank Generator Prompt](docs/logic_check_json_generator_prompt.md)
+- `docs/logic_check_profiles_readme.md`
+- `docs/logic_check_profile_generator_prompt.md`
+- `docs/logic_check_json_generator_prompt.md`
 
-## 8. 문서 구조
+## 8. D/E claim trust 정책
 
-현재 main의 `docs/` 디렉터리에 존재하는 기준 문서는 다음과 같다.
+이번 구조에서 Logic Check는 D/E를 직접 평가하지 않는다.
+
+D/E 점수는 A/B/C/D/E scoring model에서만 산정한다. Logic Check는 topic truth gate로 동작하며, 해당 topic을 기반으로 한 D/E 현장 적용 주장과 결론 주장의 이론적 신뢰도를 metadata로 제공한다.
+
+| status | 의미 |
+|---|---|
+| `trusted` | Logic Check finding이 없어 해당 topic 기반 D/E 주장을 이론적으로 신뢰 가능 |
+| `trusted_with_notes` | fatal/major는 없고 minor 보완만 있어 대체로 신뢰 가능 |
+| `not_invalidated` | fatal은 없지만 major gap이 있어 반증되지는 않았으나 충분히 입증된 것으로 보지는 않음 |
+| `limited` | fatal이 있어 해당 topic 기반 D/E 주장을 제한적으로만 신뢰 |
+
+예시는 다음과 같다.
+
+| 답안 유형 | Logic Check | D/E claim trust |
+|---|---|---|
+| 정상 2차 시스템 답안 | pass | `trusted` |
+| `ζ=0.7`을 임계감쇠로 정의 | fatal | `limited` |
+| 고급 키워드만 나열 | warn 또는 major gap | `not_invalidated` |
+
+정책 요약:
+
+1. Logic Check 통과 topic 기반 D/E 주장은 이론적 전제가 유효한 것으로 본다.
+2. Logic Check fatal topic 기반 D/E 주장은 강한 설계 판단이나 면접 방어 근거로 신뢰하지 않는다.
+3. keyword-only 답안은 fatal이 없더라도 fully trusted로 보지 않는다.
+4. D/E 점수 자체는 scoring model에서만 산정한다.
+
+## 9. 문서 구조
+
+현재 `docs/` 디렉터리에 존재하는 기준 문서는 다음과 같다.
 
 | 문서 | 역할 |
 |---|---|
@@ -215,70 +244,74 @@ Logic Check는 단순 누락이나 표현 부족을 잡는 기능이 아니다. 
 | `docs/logic_check_json_generator_prompt.md` | Logic Check Bank JSON 초안 생성 프롬프트 |
 | `docs/archive/` | 과거 문서와 참고용 이력 문서 |
 
-## 9. 검증 명령
+## 10. 검증 명령
 
 기본 검증:
 
-```bash
-cd ~/hermes/workspace/prof_eng_answer
+    cd ~/hermes/workspace/prof_eng_answer
 
-python3 -m py_compile \
-  bot.py \
-  grading_agents.py \
-  difficulty_score_ceiling.py \
-  logic_check_evaluator.py \
-  logic_llm_verifier.py
+    python3 -m py_compile \
+      bot.py \
+      grading_agents.py \
+      difficulty_score_ceiling.py \
+      logic_check_evaluator.py \
+      logic_llm_verifier.py \
+      scripts/validate_logic_check_de_policy.py \
+      scripts/check_logic_check_de_claim_trust_regression.py
 
-python3 -m json.tool rubrics/logic_check_profiles/industrial_instrumentation_control.json >/tmp/logic_profile_check.json
-python3 scripts/validate_logic_check_bank.py
-python3 scripts/rubric_manager.py validate-all
-python3 scripts/rubric_audit/run_rubric_audit.py
-git diff --check
-```
+    python3 -m json.tool \
+      rubrics/logic_checks/industrial_instrumentation_control.json \
+      >/tmp/logic_check_bank_check.json
+
+    python3 scripts/validate_logic_check_de_policy.py
+    python3 scripts/check_logic_check_de_claim_trust_regression.py
+    python3 scripts/validate_logic_check_bank.py
+    python3 scripts/rubric_manager.py validate-all
+    python3 scripts/rubric_manager.py validate-topic-importance
+    python3 scripts/validate_question_type_profile.py
+
+    git diff --check
 
 문서만 수정했을 때:
 
-```bash
-git diff --check
-git diff --stat
-git status --short
-```
+    git diff --check
+    git diff --stat
+    git status --short
 
-## 10. Commit 절차
+Logic Check D/E 정책만 확인할 때:
 
-문서만 커밋할 때:
+    python3 scripts/validate_logic_check_de_policy.py
+    python3 scripts/check_logic_check_de_claim_trust_regression.py
 
-```bash
-cd ~/hermes/workspace/prof_eng_answer
+금지 구조 확인:
 
-git add README.md docs/README.md \
-  docs/logic_check_profile_generator_prompt.md \
-  docs/logic_check_json_generator_prompt.md
+    grep -RInE 'field_application_checks|coherence_defense_checks|d_e_feedback_templates|advanced_tradeoff_checks|affected_layers.*["'\'']D|affected_layers.*["'\'']E|layers=\["C", "E"\]|layers=\["C","E"\]' \
+      rubrics/logic_checks/industrial_instrumentation_control.json \
+      logic_check_evaluator.py || true
 
-git diff --cached --stat
-git diff --cached --check
+## 11. Commit 절차
 
-git commit -m "Add logic check generator prompt docs"
-git push
-```
+이번 변경을 커밋할 때:
 
-문서와 Logic Check guide까지 함께 커밋할 때:
+    cd ~/hermes/workspace/prof_eng_answer
 
-```bash
-git add README.md \
-  docs/README.md \
-  docs/logic_check_profiles_readme.md \
-  docs/logic_check_profile_generator_prompt.md \
-  docs/logic_check_json_generator_prompt.md
+    git add \
+      README.md \
+      docs/README.md \
+      docs/logic_check_json_generator_prompt.md \
+      logic_check_evaluator.py \
+      rubrics/logic_checks/industrial_instrumentation_control.json \
+      scripts/validate_logic_check_de_policy.py \
+      scripts/check_logic_check_de_claim_trust_regression.py
 
-git diff --cached --stat
-git diff --cached --check
+    git diff --cached --stat
+    git diff --cached --check
 
-git commit -m "Refresh logic check documentation"
-git push
-```
+    git commit -m "Refactor logic check as topic truth gate with D/E claim trust"
 
-## 11. README 유지 원칙
+    git status --short
+
+## 12. README 유지 원칙
 
 1. README는 현재 코드 기준으로 유지한다.
 2. 과거 migration log를 README에 누적하지 않는다.

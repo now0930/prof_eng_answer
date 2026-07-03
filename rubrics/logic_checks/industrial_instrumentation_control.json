@@ -1,10 +1,11 @@
 {
-  "version": "2026-07-02-logic-check-v2-de-feedback",
-  "description": "Fact Anchor 5개 체계를 유지하면서, 핵심 이론 문항의 치명적 수식·정의·논리 오류를 검증한다. 2차 시스템 fatal 판정은 rubrics/logic_check_profiles의 LLM verifier profile을 우선한다.",
+  "version": "2026-07-03-logic-check-v3-topic-truth-de-claim-trust",
+  "description": "Fact Anchor 체계를 유지하면서, 핵심 이론 문항의 치명적 수식·정의·논리 오류를 topic truth gate로 검증한다. Logic Check는 D/E를 직접 평가하지 않고, 통과한 topic에 기반한 D/E 현장 적용·결론 주장의 이론적 신뢰도를 보강한다.",
   "scope_policy": {
     "fact_anchor_policy": "Fact Anchor는 전체 topic의 기본 coverage 평가 기준으로 유지한다.",
-    "logic_check_policy": "Logic Check는 모든 topic에 만들지 않고, 치명 오류가 자주 발생하는 핵심 이론 topic에만 적용한다.",
-    "first_target_topic": "second_order_lag_response_by_damping_ratio"
+    "logic_check_policy": "Logic Check는 모든 topic에 만들지 않고, 치명 오류가 자주 발생하는 핵심 이론 topic에만 적용한다. Logic Check는 D/E 점수를 산정하지 않는다.",
+    "first_target_topic": "second_order_lag_response_by_damping_ratio",
+    "d_e_claim_trust_policy": "D/E 점수는 A/B/C/D/E scoring model에서만 산정한다. Logic Check를 통과한 topic 기반 D/E 주장은 이론적 전제가 유효한 것으로 신뢰한다. Logic Check fatal이 발생한 topic 기반 D/E 주장은 현장 적용 시도 자체는 별도 평가하되, 강한 설계 판단이나 면접 방어 근거로는 제한적으로 신뢰한다."
   },
   "topic_logic_checks": [
     {
@@ -54,8 +55,7 @@
           "message": "0<ζ<1 부족감쇠를 발산 조건처럼 설명하여 안정한 감쇠진동 응답과 불안정 조건을 혼동했다.",
           "correct_rule": "0<ζ<1 부족감쇠는 좌반평면 복소극점에 의한 안정한 감쇠진동 응답이다. 발산은 우반평면 극점, 음의 감쇠, 불안정 조건과 별도로 구분해야 한다.",
           "affected_layers": [
-            "C",
-            "E"
+            "C"
           ],
           "recommended_ceiling": 10.0
         },
@@ -137,8 +137,7 @@
           "message": "θ를 음의 실수축과 극점 사이각으로 정의한 뒤 sinθ=σ/ωn=ζ로 표현하여 기하학적 관계가 충돌한다.",
           "correct_rule": "θ를 음의 실수축 기준으로 정의하면 ζ=cosθ이다. sinθ 관계를 쓰려면 θ를 허수축 기준 각도로 정의해야 한다.",
           "affected_layers": [
-            "C",
-            "E"
+            "C"
           ],
           "recommended_ceiling": 10.0
         },
@@ -184,7 +183,12 @@
             "ωd\\s*=\\s*ωn",
             "ωd\\s*=\\s*ωn\\s*√",
             "√\\s*\\(?\\s*1\\s*-\\s*ζ",
-            "감쇠\\s*진동수"
+            "감쇠\\s*진동수",
+            "w[dD]\\s*=\\s*w[nN]\\s*\\*?\\s*sqrt\\s*\\(\\s*1\\s*-\\s*zeta\\s*\\^?\\s*2\\s*\\)",
+            "wd\\s*=\\s*wn\\s*\\*?\\s*sqrt\\s*\\(\\s*1\\s*-\\s*zeta\\s*\\^?\\s*2\\s*\\)",
+            "ωd\\s*=\\s*ωn\\s*√\\s*\\(?\\s*1\\s*-\\s*ζ\\s*\\^?\\s*2\\s*\\)?",
+            "감쇠\\s*진동수.{0,40}w[dD]\\s*=\\s*w[nN]",
+            "감쇠\\s*진동수.{0,40}sqrt\\s*\\(\\s*1\\s*-\\s*zeta"
           ],
           "min_required": 2,
           "message": "극점 공식 또는 감쇠진동수 ωd = ωn√(1-ζ²) 관계가 부족하다.",
@@ -211,38 +215,7 @@
           "message": "비교·선정형 문제임에도 정량 비교축이 부족하다. 극점 위치, 오버슈트, 상승시간, 피크시간, 정착시간, 현장 선정 기준을 표로 비교해야 한다.",
           "affected_layers": [
             "B",
-            "C",
-            "D"
-          ]
-        }
-      ],
-      "advanced_tradeoff_checks": [
-        {
-          "id": "advanced_keyword_without_tradeoff",
-          "severity": "minor",
-          "trigger_patterns": [
-            "TSN",
-            "EtherCAT",
-            "Smith",
-            "스미스",
-            "IMC",
-            "deterministic"
-          ],
-          "required_context_patterns": [
-            "비용",
-            "호환",
-            "리스크",
-            "한계",
-            "모델\\s*불일치",
-            "기존\\s*설비",
-            "정지\\s*시간",
-            "trade[- ]?off",
-            "트레이드\\s*오프"
-          ],
-          "message": "EtherCAT, TSN, Smith Predictor, IMC 등 고급 기술 키워드를 언급했지만 비용, 호환성, 기존 설비 영향, 정지시간, 모델 불일치, 운전 리스크 등 trade-off 설명이 부족하다.",
-          "affected_layers": [
-            "D",
-            "E"
+            "C"
           ]
         }
       ],
@@ -254,175 +227,17 @@
         "E영역은 이론식, 응답특성, 현장 문제, 개선 대책, 검증 기준을 하나의 인과 사슬로 연결한다.",
         "EtherCAT/TSN을 쓸 때는 기존 통신망 호환성, 정지시간, 투자비, 단계적 적용, 유지보수 리스크를 함께 제시한다."
       ],
-      "field_application_checks": [
-        {
-          "id": "time_delay_phase_margin_field_link_present",
-          "severity": "positive",
-          "question_type": "COMPARE_SELECTION",
-          "evidence_patterns": [
-            "시간\\s*지연.{0,80}안정성",
-            "phase\\s*margin|위상\\s*margin|위상\\s*여유",
-            "EtherCAT|TSN",
-            "기존\\s*통신|호환|비용"
-          ],
-          "min_required": 3,
-          "message": "시간지연이 위상여유를 감소시키고, EtherCAT/TSN 및 비용·호환성 문제로 연결되어 현장 적용성 일부를 인정한다.",
-          "affected_layers": [
-            "D",
-            "E"
-          ],
-          "scoring_hint": {
-            "d_credit": "partial_positive",
-            "e_credit": "partial_positive",
-            "note": "C 영역 fatal이 있더라도 D/E의 현장 적용 시도는 ceiling 적용 전 의미 평가에 반영한다."
-          }
-        },
-        {
-          "id": "communication_solution_without_control_tuning",
-          "severity": "minor",
-          "trigger_patterns": [
-            "EtherCAT",
-            "TSN",
-            "시간\\s*지연",
-            "위상\\s*margin|phase\\s*margin"
-          ],
-          "required_context_patterns": [
-            "PID",
-            "헌팅",
-            "오버\\s*슈트|overshoot",
-            "정착\\s*시간",
-            "압력",
-            "유량",
-            "온도",
-            "서보",
-            "튜닝",
-            "검증",
-            "trade[- ]?off|트레이드\\s*오프"
-          ],
-          "min_required": 3,
-          "message": "시간지연 대책이 통신 기술 중심으로 제시되었으나, PID 튜닝·헌팅·공정별 감쇠비 선정·검증 기준과의 연결이 부족하다.",
-          "affected_layers": [
-            "D",
-            "E"
-          ]
-        },
-        {
-          "id": "process_specific_selection_judgement_missing",
-          "severity": "minor",
-          "question_type": "COMPARE_SELECTION",
-          "required_context_patterns": [
-            "압력",
-            "유량",
-            "온도",
-            "위치",
-            "서보",
-            "밸브",
-            "모터",
-            "부하\\s*변동",
-            "외란",
-            "선정\\s*기준",
-            "운전\\s*조건"
-          ],
-          "min_required": 3,
-          "message": "비교·선정형 답안에서 공정별 운전 조건에 따른 감쇠비 선정 기준이 부족하다.",
-          "affected_layers": [
-            "D"
-          ]
-        },
-        {
-          "id": "implementation_tradeoff_depth_missing",
-          "severity": "minor",
-          "trigger_patterns": [
-            "EtherCAT",
-            "TSN",
-            "Smith",
-            "스미스",
-            "IMC",
-            "시간\\s*지연\\s*보상"
-          ],
-          "required_context_patterns": [
-            "비용",
-            "호환",
-            "기존\\s*설비",
-            "정지\\s*시간",
-            "리스크",
-            "단계적",
-            "검증",
-            "ROI",
-            "유지\\s*보수",
-            "모델\\s*불일치"
-          ],
-          "min_required": 3,
-          "message": "고급 대책을 언급한 경우 비용, 호환성, 기존 설비 영향, 정지시간, 유지보수, 검증 리스크까지 설명해야 한다.",
-          "affected_layers": [
-            "D",
-            "E"
-          ]
-        }
-      ],
-      "coherence_defense_checks": [
-        {
-          "id": "theory_to_field_chain_present",
-          "severity": "positive",
-          "chain_patterns": [
-            "2차\\s*시스템|감쇠비|damping\\s*ratio|ζ",
-            "시간\\s*지연|phase\\s*margin|위상\\s*여유",
-            "안정성|오버\\s*슈트|헌팅|정착\\s*시간",
-            "EtherCAT|TSN|PID|튜닝|보상",
-            "비용|호환|기존\\s*설비|리스크",
-            "결론|필수\\s*조건|선정\\s*기준"
-          ],
-          "min_required": 4,
-          "message": "이론, 시간지연, 현장 대책, 비용·호환성, 결론이 일정 수준 연결되어 있으면 E 영역에서 부분 인정한다.",
-          "affected_layers": [
-            "E"
-          ]
-        },
-        {
-          "id": "conclusion_without_selection_or_verification",
-          "severity": "minor",
-          "trigger_patterns": [
-            "결론",
-            "필수\\s*조건",
-            "안정적인\\s*시스템"
-          ],
-          "required_context_patterns": [
-            "선정\\s*기준",
-            "검증",
-            "시험",
-            "튜닝\\s*절차",
-            "오버\\s*슈트",
-            "정착\\s*시간",
-            "위상\\s*여유",
-            "허용\\s*범위"
-          ],
-          "min_required": 2,
-          "message": "결론이 일반론으로 끝나고 선정 기준, 검증 기준, 튜닝 절차로 닫히지 않아 면접 방어 가능성이 제한된다.",
-          "affected_layers": [
-            "E"
-          ]
-        },
-        {
-          "id": "fatal_theory_but_field_credit_preserved",
-          "severity": "policy",
-          "message": "C 영역 fatal이 있더라도 D/E의 현장 적용 시도는 별도 피드백으로 보존한다. 단 최종 점수는 THEORY_CORE fatal ceiling을 우선 적용한다.",
-          "affected_layers": [
-            "D",
-            "E"
-          ],
-          "scoring_policy": {
-            "preserve_pre_ceiling_feedback": true,
-            "do_not_override_c_fatal_cap": true,
-            "executive_summary_rule": "현장 적용 시도는 인정되나 핵심 이론 오류로 최종 cap 적용이라고 설명한다."
-          }
-        }
-      ],
-      "d_e_feedback_templates": {
-        "d_positive": "시간지연이 위상여유를 감소시키고 EtherCAT/TSN 등 실시간 통신 대책으로 연결한 점은 현장 적용성 측면에서 인정된다.",
-        "d_minor": "다만 감쇠비를 PID 튜닝, 헌팅 방지, 압력·유량·온도·서보 등 공정별 선정 기준과 연결하지 못해 기술사적 설계 판단은 제한적이다.",
-        "e_positive": "배경→이론→시간지연→현장 대책→비용·호환성으로 이어지는 기본 흐름은 있어 면접 방어의 골격은 갖추었다.",
-        "e_minor": "그러나 감쇠비 구간 정의 오류가 핵심 이론 방어력을 크게 낮추며, 결론도 검증 기준이나 선정 기준으로 닫히지 않아 E 영역은 부분 인정에 그친다.",
-        "ceiling_note": "D/E의 부분 장점은 ceiling 적용 전 의미 평가에 반영하되, C 영역 THEORY_CORE fatal이 있으면 최종 점수 cap은 유지한다."
+      "de_claim_trust": {
+        "enabled": true,
+        "target_layers": [
+          "D",
+          "E"
+        ],
+        "score_effect": "none",
+        "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+        "pass_meaning": "이 topic의 핵심 이론·정의·수식 주장이 정답과 직접 충돌하지 않으므로, 이를 기반으로 한 D/E 현장 적용 주장과 결론 주장은 이론적으로 신뢰할 수 있다.",
+        "fatal_meaning": "이 topic의 핵심 이론 주장이 정답과 충돌하므로, 이를 기반으로 한 D/E 현장 적용 주장과 결론 주장은 강하게 신뢰하지 않는다.",
+        "rule": "Logic Check는 D/E를 직접 평가하지 않는다. D/E 점수는 A/B/C/D/E scoring model에서만 산정한다."
       }
     }
   ]
