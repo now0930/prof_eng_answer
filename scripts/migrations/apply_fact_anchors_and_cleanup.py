@@ -5,7 +5,7 @@ rubrics/model_answers/industrial_instrumentation_control.json and
 rubrics/fact_anchors/industrial_instrumentation_control.json.
 
 Run from the repository root:
-    python3 scripts/apply_fact_anchors_and_cleanup.py
+    python3 scripts/migrations/apply_fact_anchors_and_cleanup.py
     python3 scripts/rubric_manager.py validate-all
 
 This script is idempotent: it upserts fact_anchor topics by topic_id and only

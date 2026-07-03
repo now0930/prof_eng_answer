@@ -271,7 +271,7 @@ def import_design(path):
 
 def main():
     if len(sys.argv) != 2:
-        print("usage: python3 scripts/import_review_design.py <review_design.md>")
+        print("usage: python3 scripts/maintenance/import_review_design.py <review_design.md>")
         raise SystemExit(2)
     import_design(sys.argv[1])
 

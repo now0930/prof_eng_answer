@@ -67,7 +67,7 @@ def model_entry(
         "field_connection_points": field_points,
         "revision_notes": [
             "Added to align model_answers with existing fact_anchors topic_id relationship.",
-            "Created by scripts/apply_relation_completion_patch.py",
+            "Created by scripts/migrations/apply_relation_completion_patch.py",
         ],
     }
 

@@ -18,7 +18,7 @@ def fix_mojibake(text):
     return current_text
 
 def main():
-    input_file = "./scripts/import_review_design.py"
+    input_file = "./scripts/maintenance/import_review_design.py"
     output_file = "./scripts/import_review_design_fixed.py"
 
     print(f"[{input_file}] 파일을 읽어 다중 인코딩 복구를 시작합니다...")

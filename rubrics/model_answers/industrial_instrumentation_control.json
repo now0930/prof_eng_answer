@@ -3102,7 +3102,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
       ]
     },
@@ -3157,7 +3157,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
       ]
     },
@@ -3213,7 +3213,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
       ]
     },
@@ -3288,7 +3288,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "deep_relation_cleanup: strengthened communication protocol model/fact term alignment.",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
       ]
@@ -3346,7 +3346,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
       ]
     },
@@ -3436,7 +3436,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "deep_relation_cleanup: strengthened noise/grounding/surge model-to-anchor alignment.",
         "deep_relation_cleanup_v2: mirrored under-covered fact anchors into model answer outline/field points.",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
@@ -3516,7 +3516,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "deep_relation_cleanup: strengthened PID tuning and implementation alignment.",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail.",
         "2026-07-01 relationship_fix: aligned expected_structure and model_answer_outline with high_score_features using high-level flow, max 6 items."
@@ -3576,7 +3576,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
       ]
     },
@@ -3641,7 +3641,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "deep_relation_cleanup: clarified pressure transmitter scope and field points.",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
       ]
@@ -3733,7 +3733,7 @@
       ],
       "revision_notes": [
         "Added to align model_answers with existing fact_anchors topic_id relationship.",
-        "Created by scripts/apply_relation_completion_patch.py",
+        "Created by scripts/migrations/apply_relation_completion_patch.py",
         "deep_relation_cleanup: strengthened transfer-function/state-space alignment.",
         "deep_relation_cleanup_v2: mirrored under-covered fact anchors into model answer outline/field points.",
         "2026-07-01 content_style_fix: compacted model_answer_outline to high-level flow, max 6 items, removed duplicated detail."
