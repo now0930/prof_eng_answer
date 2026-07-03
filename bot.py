@@ -1022,6 +1022,109 @@ def format_result(*args, **kwargs):
 
     return text.rstrip() + extra
 
+
+GRADE_END_MARKERS = {"끝", "끝.", "/end", "/done"}
+GRADE_CANCEL_MARKERS = {"/cancel", "/grade_cancel"}
+
+
+def _norm_line(value):
+    return str(value or "").strip()
+
+
+def _contains_grade_end_marker(text):
+    lines = [_norm_line(line) for line in str(text or "").splitlines()]
+    return any(line in GRADE_END_MARKERS for line in lines)
+
+
+def _remove_grade_end_markers(text):
+    kept = []
+    for line in str(text or "").splitlines():
+        if _norm_line(line) in GRADE_END_MARKERS:
+            continue
+        kept.append(line)
+    return "\n".join(kept).strip()
+
+
+def _chat_state(state, chat_id):
+    state.setdefault("chats", {})
+    return state["chats"].setdefault(str(chat_id), {})
+
+
+def _has_pending_grade(chat_id, state):
+    chat = _chat_state(state, chat_id)
+    pending = chat.get("pending_grade")
+    return (
+        isinstance(pending, dict)
+        and pending.get("active") is True
+        and isinstance(pending.get("parts"), list)
+    )
+
+
+def _start_pending_grade(chat_id, state, first_text=""):
+    chat = _chat_state(state, chat_id)
+    parts = []
+    if str(first_text or "").strip():
+        parts.append(str(first_text).strip())
+
+    chat["pending_grade"] = {
+        "active": True,
+        "parts": parts,
+        "started_at": datetime.now().isoformat(timespec="seconds"),
+    }
+    save_state(state)
+
+
+def _append_pending_grade(chat_id, state, text):
+    chat = _chat_state(state, chat_id)
+    pending = chat.get("pending_grade")
+    if not isinstance(pending, dict):
+        pending = {
+            "active": True,
+            "parts": [],
+            "started_at": datetime.now().isoformat(timespec="seconds"),
+        }
+        chat["pending_grade"] = pending
+
+    pending.setdefault("parts", [])
+    pending["parts"].append(str(text or ""))
+    pending["updated_at"] = datetime.now().isoformat(timespec="seconds")
+    save_state(state)
+
+
+def _clear_pending_grade(chat_id, state):
+    chat = _chat_state(state, chat_id)
+    chat.pop("pending_grade", None)
+    save_state(state)
+
+
+def _finalize_pending_grade(chat_id, state):
+    chat = _chat_state(state, chat_id)
+    pending = chat.pop("pending_grade", None)
+    save_state(state)
+
+    if not isinstance(pending, dict):
+        send_message(chat_id, "현재 수집 중인 답안이 없습니다. /grade 로 새 채점을 시작하세요.")
+        return
+
+    parts = pending.get("parts") or []
+    full_answer = _remove_grade_end_markers("\n\n".join(str(x) for x in parts)).strip()
+
+    if not full_answer:
+        send_message(chat_id, "채점할 답안 내용이 없습니다. /grade 로 다시 시작하세요.")
+        return
+
+    send_message(
+        chat_id,
+        "채점을 시작합니다.\n"
+        "채점 엔진: Gemini semantic grader + Python scoring rules\n"
+        f"보조 모델: {OLLAMA_MODEL}",
+    )
+
+    sid, raw_result, parsed = grade_answer(chat_id, full_answer, state)
+    send_message(chat_id, format_result(parsed, raw_result))
+    send_message(chat_id, f"저장 위치: /workspace/prof_eng_answer/data/sessions/{sid}")
+
+
 def handle_text(message, chat_id, state):
     text = message.get("text", "")
 
@@ -1031,7 +1134,7 @@ def handle_text(message, chat_id, state):
 
     if text.startswith("/new"):
         sid = new_session(chat_id, state)
-        send_message(chat_id, f"새 채점 세션을 만들었습니다.\n세션: {sid}\n\n사진 3장을 올리고, OCR 텍스트는 /grade 뒤에 붙여 보내세요.")
+        send_message(chat_id, f"새 채점 세션을 만들었습니다.\n세션: {sid}\n\n사진 3장을 올리고, OCR 텍스트는 /grade 뒤에 붙여 보내고, 여러 메시지로 나눌 때는 마지막 줄에 '끝.'을 보내세요.")
         return
 
     if text.startswith("/status"):
@@ -1094,16 +1197,56 @@ def handle_text(message, chat_id, state):
         )
         return
 
+    if text.strip() in GRADE_CANCEL_MARKERS:
+        if _has_pending_grade(chat_id, state):
+            _clear_pending_grade(chat_id, state)
+            send_message(chat_id, "진행 중인 답안 수집을 취소했습니다.")
+        else:
+            send_message(chat_id, "현재 수집 중인 답안이 없습니다.")
+        return
+
     if text.startswith("/grade"):
         raw = text[len("/grade"):].strip()
+
+        _start_pending_grade(chat_id, state, raw)
+
         if not raw:
-            send_message(chat_id, "사용법:\n/grade\n문제: ...\n배점: 25\n답안:\nGoogle OCR 텍스트...")
+            send_message(
+                chat_id,
+                "답안 수신을 시작했습니다.\n"
+                "여러 메시지로 이어서 보내고, 마지막 줄에 '끝.'을 보내면 채점합니다.\n"
+                "취소하려면 /cancel 을 입력하세요.",
+            )
             return
 
-        send_message(chat_id, f"채점을 시작합니다.\n채점 엔진: Gemini semantic grader + Python scoring rules\n보조 모델: {OLLAMA_MODEL}")
-        sid, raw_result, parsed = grade_answer(chat_id, raw, state)
-        send_message(chat_id, format_result(parsed, raw_result))
-        send_message(chat_id, f"저장 위치: /workspace/prof_eng_answer/data/sessions/{sid}")
+        if _contains_grade_end_marker(raw):
+            _finalize_pending_grade(chat_id, state)
+            return
+
+        send_message(
+            chat_id,
+            "답안 앞부분을 수신했습니다.\n"
+            "이어서 보내고, 마지막 줄에 '끝.'을 보내면 전체 답안을 채점합니다.\n"
+            "취소하려면 /cancel 을 입력하세요.",
+        )
+        return
+
+    if _has_pending_grade(chat_id, state):
+        _append_pending_grade(chat_id, state, text)
+
+        if _contains_grade_end_marker(text):
+            _finalize_pending_grade(chat_id, state)
+            return
+
+        send_message(
+            chat_id,
+            "답안 일부를 추가했습니다.\n"
+            "마지막 줄에 '끝.'을 보내면 전체 답안을 채점합니다.",
+        )
+        return
+
+    if text.strip() in GRADE_END_MARKERS:
+        send_message(chat_id, "현재 수집 중인 답안이 없습니다. /grade 로 새 채점을 시작하세요.")
         return
 
     send_message(chat_id, "알 수 없는 명령입니다. /help 를 입력하세요.")
