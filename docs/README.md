@@ -141,6 +141,7 @@ Question Type 또는 Rubric 관련 문서를 수정했을 때:
     cd ~/hermes/workspace/prof_eng_answer
 
     python3 scripts/validate_rubric_bank_format.py
+    python3 scripts/validate_rubric_bank_content.py
     python3 scripts/rubric_manager.py validate-all
     python3 scripts/rubric_manager.py validate-topic-importance
     python3 scripts/validate_question_type_profile.py

@@ -175,6 +175,10 @@ Logic Check는 단순 누락이나 표현 부족을 잡는 기능이 아니다. 
 
     python3 scripts/validate_rubric_bank_format.py
 
+내용 검증:
+
+    python3 scripts/validate_rubric_bank_content.py
+
 ## 8. 문서 위치
 
 `docs/README.md`는 문서 인덱스와 문서별 책임 범위를 관리한다.
