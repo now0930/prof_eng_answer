@@ -35,6 +35,10 @@ def cmd_validate_all(_args: argparse.Namespace) -> int:
     for script in scripts:
         rc = max(rc, run_script(script))
 
+    print("RUN: scripts/validate_rubric_bank_format.py")
+    subprocess.run([sys.executable, "scripts/validate_rubric_bank_format.py"], check=True)
+    print("RUN: scripts/validate_rubric_bank_content.py")
+    subprocess.run([sys.executable, "scripts/validate_rubric_bank_content.py"], check=True)
     print("RUN: validate-topic-importance")
     rc = max(rc, cmd_validate_topic_importance(argparse.Namespace(bank=None)))
 
