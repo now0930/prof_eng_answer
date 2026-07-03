@@ -6,6 +6,7 @@ from pathlib import Path
 JSON_PATH = Path("rubrics/logic_checks/industrial_instrumentation_control.json")
 EVALUATOR_PATH = Path("logic_check_evaluator.py")
 PROMPT_PATH = Path("docs/logic_check_json_generator_prompt.md")
+PROFILE_PROMPT_PATH = Path("docs/logic_check_profile_generator_prompt.md")
 
 FORBIDDEN_TOPIC_KEYS = {
     "advanced_tradeoff_checks",
@@ -15,6 +16,14 @@ FORBIDDEN_TOPIC_KEYS = {
 }
 
 FORBIDDEN_AFFECTED_LAYERS = {"D", "E"}
+
+FORBIDDEN_DOC_PHRASES = [
+    "D/E feedback check",
+    "Field Application Checks",
+    "Coherence Defense Checks",
+    "Feedback Templates",
+    "D/E는 감점",
+]
 
 errors = []
 
@@ -66,13 +75,28 @@ if 'layers=["C", "E"]' in evaluator_text or 'layers=["C","E"]' in evaluator_text
     errors.append("logic_check_evaluator.py still contains layers=['C', 'E']")
 
 prompt_text = PROMPT_PATH.read_text(encoding="utf-8")
+profile_prompt_text = PROFILE_PROMPT_PATH.read_text(encoding="utf-8")
 
 for forbidden in FORBIDDEN_TOPIC_KEYS:
     occurrences = prompt_text.count(forbidden)
+    if occurrences > 0:
+        errors.append(
+            f"json generator prompt must not mention deprecated field {forbidden}: {occurrences}"
+        )
 
-    # docs/logic_check_json_generator_prompt.md에서는 금지 필드 목록에 1회 등장하는 것은 허용한다.
-    if occurrences > 1:
-        errors.append(f"prompt mentions {forbidden} too many times: {occurrences}")
+    profile_occurrences = profile_prompt_text.count(forbidden)
+    if profile_occurrences > 0:
+        errors.append(
+            f"profile prompt must not mention deprecated field {forbidden}: {profile_occurrences}"
+        )
+
+import re
+
+for phrase in FORBIDDEN_DOC_PHRASES:
+    if re.search(phrase, prompt_text):
+        errors.append(f"json generator prompt contains deprecated D/E phrase: {phrase}")
+    if re.search(phrase, profile_prompt_text):
+        errors.append(f"profile generator prompt contains deprecated D/E phrase: {phrase}")
 
 if errors:
     print("INVALID")

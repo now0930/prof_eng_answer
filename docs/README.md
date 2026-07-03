@@ -184,8 +184,7 @@ D/E 점수는 A/B/C/D/E scoring model에서만 산정한다. Logic Check의 topi
 
 문서 변경 후 확인은 다음을 사용한다.
 
-    grep -n 'D/E feedback check\|field_application_checks\|coherence_defense_checks\|d_e_feedback_templates\|advanced_tradeoff_checks' \
-      README.md docs/README.md docs/logic_check_json_generator_prompt.md || true
+    python3 scripts/validate_logic_check_de_policy.py
 
     grep -n 'de_claim_trust\|D/E claim trust\|topic truth gate' \
       README.md docs/README.md docs/logic_check_json_generator_prompt.md

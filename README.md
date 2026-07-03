@@ -285,9 +285,7 @@ Logic Check D/E 정책만 확인할 때:
 
 금지 구조 확인:
 
-    grep -RInE 'field_application_checks|coherence_defense_checks|d_e_feedback_templates|advanced_tradeoff_checks|affected_layers.*["'\'']D|affected_layers.*["'\'']E|layers=\["C", "E"\]|layers=\["C","E"\]' \
-      rubrics/logic_checks/industrial_instrumentation_control.json \
-      logic_check_evaluator.py || true
+    python3 scripts/validate_logic_check_de_policy.py
 
 ## 11. Commit 절차
 
