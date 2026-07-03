@@ -63,3 +63,6 @@ rubrics/content_candidates/
 # Editor swap files
 *.swp
 *.swo
+
+# Generated Rubric Bank validator reports
+reports/rubric_bank/*.json

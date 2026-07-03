@@ -171,6 +171,10 @@ Logic Check는 단순 누락이나 표현 부족을 잡는 기능이 아니다. 
 5. Logic Check는 정답과 직접 충돌하는 핵심 이론 오류만 다룬다.
 6. Question Type은 A/B/C/D/E 점수체계를 대체하지 않고 C/D 평가 방향을 보정한다.
 
+형식 검증:
+
+    python3 scripts/validate_rubric_bank_format.py
+
 ## 8. 문서 위치
 
 `docs/README.md`는 문서 인덱스와 문서별 책임 범위를 관리한다.
