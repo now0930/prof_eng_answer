@@ -1,0 +1,470 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "second_order_lag_response_by_damping_ratio",
+  "source_policy": {
+    "role": "topic_pack_source",
+    "runtime_files_are_not_modified_by_this_file": true,
+    "deterministic_checks_target": "rubrics/generated/logic_checks.generated.json",
+    "llm_profile_target": "rubrics/generated/logic_check_profiles.generated.json",
+    "note": "이 파일은 topic 단위 source이다. 현재 runtime JSON을 직접 대체하지 않는다."
+  },
+  "deterministic_checks": {
+    "enabled": true,
+    "topic_name": "2차 지연시스템 감쇠비별 응답특성",
+    "question_type": "COMPARE_SELECTION",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [
+      "2차 지연 시스템",
+      "2차 지연시스템",
+      "2차 시스템",
+      "second order system",
+      "second-order system",
+      "감쇠비",
+      "damping ratio",
+      "ζ",
+      "zeta"
+    ],
+    "fatal_checks": [
+      {
+        "id": "zeta_wrong_inverse_sine_definition",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "ζ\\s*=\\s*\\\\?sin\\s*\\^\\s*-?1",
+          "\\\\zeta\\s*=\\s*\\\\?sin\\s*\\^\\s*-?1",
+          "zeta\\s*=\\s*\\\\?sin\\s*\\^\\s*-?1",
+          "감쇠비.*sin\\s*\\^\\s*-?1",
+          "sin\\s*\\^\\s*-?1\\s*\\(?\\s*ωd\\s*/\\s*ωn"
+        ],
+        "message": "감쇠비 ζ를 sin^-1(ωd/ωn)로 표현하여 표준 감쇠비 정의와 충돌한다.",
+        "correct_rule": "부족감쇠 영역에서는 ωd = ωn√(1-ζ²) 관계로 설명해야 한다. s-평면 극점각을 사용할 경우 각도 정의에 따라 ζ=cosθ 관계를 쓸 수 있다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "underdamped_as_divergence",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "부족\\s*감쇠\\s*(?:는|은|이면|일\\s*때|:).{0,40}발산",
+          "under\\s*damp(?:ed|ing)?\\s*(?:is|as|이면|:).{0,40}발산",
+          "ζ\\s*<\\s*1\\s*(?:이면|일\\s*때|:).{0,40}발산",
+          "0\\s*<\\s*ζ\\s*<\\s*1\\s*(?:이면|일\\s*때|:).{0,40}발산"
+        ],
+        "message": "0<ζ<1 부족감쇠를 발산 조건처럼 설명하여 안정한 감쇠진동 응답과 불안정 조건을 혼동했다.",
+        "correct_rule": "0<ζ<1 부족감쇠는 좌반평면 복소극점에 의한 안정한 감쇠진동 응답이다. 발산은 우반평면 극점, 음의 감쇠, 불안정 조건과 별도로 구분해야 한다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "sigma_omega_d_region_misclassification",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "critical.{0,20}σ\\s*=\\s*ωd",
+          "임계\\s*감쇠.{0,20}σ\\s*=\\s*ωd",
+          "under.{0,20}σ\\s*>\\s*ωd",
+          "over.{0,20}σ\\s*<\\s*ωd",
+          "부족\\s*감쇠.{0,20}σ\\s*>\\s*ωd",
+          "과\\s*감쇠.{0,20}σ\\s*<\\s*ωd"
+        ],
+        "message": "감쇠 조건을 σ와 ωd의 단순 크기 비교로 구분하여 표준 ζ 구간 정의와 충돌한다.",
+        "correct_rule": "감쇠 조건은 ζ=0, 0<ζ<1, ζ=1, ζ>1 기준으로 구분한다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "critical_damping_wrong_07_threshold",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "임계\\s*감쇠.{0,80}ζ\\s*=\\s*0\\.7",
+          "critical\\s*damp(?:ed|ing)?.{0,80}ζ\\s*=\\s*0\\.7",
+          "ζ\\s*=\\s*0\\.7.{0,80}임계\\s*감쇠",
+          "ζ\\s*=\\s*0\\.7.{0,80}critical\\s*damp"
+        ],
+        "message": "임계감쇠를 ζ=0.7로 정의하여 표준 감쇠비 구간 정의와 충돌한다.",
+        "correct_rule": "임계감쇠는 ζ=1이다. ζ≈0.707은 실무적 최적 타협점 또는 45° 극점 배치 예시일 수 있으나 임계감쇠가 아니다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "overdamped_wrong_less_than_one_region",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "과\\s*감쇠.{0,80}0\\.7\\s*(?:≤|<=)\\s*ζ\\s*<\\s*1",
+          "over\\s*damp(?:ed|ing)?.{0,80}0\\.7\\s*(?:≤|<=)\\s*ζ\\s*<\\s*1",
+          "0\\.7\\s*(?:≤|<=)\\s*ζ\\s*<\\s*1.{0,80}과\\s*감쇠",
+          "0\\.7\\s*(?:≤|<=)\\s*ζ\\s*<\\s*1.{0,80}over\\s*damp"
+        ],
+        "message": "과감쇠를 0.7≤ζ<1로 정의하여 표준 정의와 충돌한다.",
+        "correct_rule": "과감쇠는 ζ>1이다. 0<ζ<1은 모두 부족감쇠 영역이다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "underdamped_wrong_07_boundary",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "부족\\s*감쇠.{0,80}ζ\\s*<\\s*0\\.7",
+          "under\\s*damp(?:ed|ing)?.{0,80}ζ\\s*<\\s*0\\.7",
+          "ζ\\s*<\\s*0\\.7.{0,80}부족\\s*감쇠",
+          "ζ\\s*<\\s*0\\.7.{0,80}under\\s*damp"
+        ],
+        "message": "부족감쇠 영역을 ζ<0.7로 제한하여 표준 정의와 충돌한다.",
+        "correct_rule": "부족감쇠는 0<ζ<1 전체 영역이다. ζ≈0.707은 부족감쇠 영역 안의 실무적 타협점일 뿐이다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "angle_relation_sin_cos_mismatch",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "음의\\s*실수축.{0,120}sin\\s*θ\\s*=\\s*[^\\n]{0,30}σ\\s*/\\s*ωn",
+          "음의\\s*실수축.{0,120}sin\\\\theta\\s*=\\s*[^\\n]{0,30}σ\\s*/\\s*ωn",
+          "실수축.{0,120}sin\\s*θ\\s*=\\s*[^\\n]{0,30}ζ",
+          "실수축.{0,120}sin\\\\theta\\s*=\\s*[^\\n]{0,30}ζ"
+        ],
+        "message": "θ를 음의 실수축과 극점 사이각으로 정의한 뒤 sinθ=σ/ωn=ζ로 표현하여 기하학적 관계가 충돌한다.",
+        "correct_rule": "θ를 음의 실수축 기준으로 정의하면 ζ=cosθ이다. sinθ 관계를 쓰려면 θ를 허수축 기준 각도로 정의해야 한다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "step_response_region_inversion",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "critical\\s*damp.{0,120}진동",
+          "임계\\s*감쇠.{0,120}진동",
+          "over\\s*damp.{0,120}overshot",
+          "과\\s*감쇠.{0,120}오버\\s*슈트",
+          "과\\s*감쇠.{0,120}충돌\\s*위험"
+        ],
+        "message": "감쇠비별 Step 응답 특성이 표준 정의와 반대로 서술되었다.",
+        "correct_rule": "부족감쇠는 오버슈트와 감쇠진동, 임계감쇠는 무오버슈트 최속 수렴, 과감쇠는 무오버슈트 느린 수렴이다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      }
+    ],
+    "major_checks": [
+      {
+        "id": "missing_zeta_region_classification",
+        "severity": "major",
+        "required_patterns": [
+          "ζ\\s*=\\s*0|zeta\\s*=\\s*0|무\\s*감쇠",
+          "0\\s*<\\s*ζ\\s*<\\s*1|0\\s*<\\s*zeta\\s*<\\s*1|부족\\s*감쇠",
+          "ζ\\s*=\\s*1|zeta\\s*=\\s*1|임계\\s*감쇠",
+          "ζ\\s*>\\s*1|zeta\\s*>\\s*1|과\\s*감쇠"
+        ],
+        "min_required": 3,
+        "message": "감쇠비 구간 구분이 부족하다. ζ=0, 0<ζ<1, ζ=1, ζ>1 조건을 명확히 구분해야 한다.",
+        "correct_rule": "무감쇠, 부족감쇠, 임계감쇠, 과감쇠를 ζ 기준으로 구분한다.",
+        "affected_layers": [
+          "C"
+        ]
+      },
+      {
+        "id": "missing_damped_frequency_relation",
+        "severity": "major",
+        "required_patterns": [
+          "ωd\\s*=\\s*ωn",
+          "ωd\\s*=\\s*ωn\\s*√",
+          "√\\s*\\(?\\s*1\\s*-\\s*ζ",
+          "감쇠\\s*진동수",
+          "w[dD]\\s*=\\s*w[nN]\\s*\\*?\\s*sqrt\\s*\\(\\s*1\\s*-\\s*zeta\\s*\\^?\\s*2\\s*\\)",
+          "wd\\s*=\\s*wn\\s*\\*?\\s*sqrt\\s*\\(\\s*1\\s*-\\s*zeta\\s*\\^?\\s*2\\s*\\)",
+          "ωd\\s*=\\s*ωn\\s*√\\s*\\(?\\s*1\\s*-\\s*ζ\\s*\\^?\\s*2\\s*\\)?",
+          "감쇠\\s*진동수.{0,40}w[dD]\\s*=\\s*w[nN]",
+          "감쇠\\s*진동수.{0,40}sqrt\\s*\\(\\s*1\\s*-\\s*zeta"
+        ],
+        "min_required": 2,
+        "message": "극점 공식 또는 감쇠진동수 ωd = ωn√(1-ζ²) 관계가 부족하다.",
+        "correct_rule": "부족감쇠 극점과 감쇠진동수 관계를 함께 제시해야 한다.",
+        "affected_layers": [
+          "C"
+        ]
+      }
+    ],
+    "question_type_checks": [
+      {
+        "id": "compare_selection_axis_missing",
+        "severity": "minor",
+        "question_type": "COMPARE_SELECTION",
+        "required_axes": [
+          "극점",
+          "오버슈트",
+          "상승시간",
+          "피크시간",
+          "정착시간",
+          "현장 선정 기준"
+        ],
+        "min_required": 3,
+        "message": "비교·선정형 문제임에도 정량 비교축이 부족하다. 극점 위치, 오버슈트, 상승시간, 피크시간, 정착시간, 현장 선정 기준을 표로 비교해야 한다.",
+        "affected_layers": [
+          "B",
+          "C"
+        ]
+      }
+    ],
+    "next_practice_points": [
+      "2차 표준형 s² + 2ζωn s + ωn² = 0, 극점 공식, 감쇠진동수 관계를 먼저 정확히 작성한다.",
+      "감쇠비별 응답을 ζ=0, 0<ζ<1, ζ=1, ζ>1, 불안정 조건으로 구분해 표로 정리한다.",
+      "현장 적용에서는 PID/서보 튜닝, 시간지연, TSN/EtherCAT을 쓰되 비용·호환성·리스크까지 함께 쓴다.",
+      "D영역은 시간지연→위상여유 감소→헌팅/오버슈트/정착시간 악화→PID 또는 통신·보상 대책→비용·호환성·리스크 순서로 쓴다.",
+      "E영역은 이론식, 응답특성, 현장 문제, 개선 대책, 검증 기준을 하나의 인과 사슬로 연결한다.",
+      "EtherCAT/TSN을 쓸 때는 기존 통신망 호환성, 정지시간, 투자비, 단계적 적용, 유지보수 리스크를 함께 제시한다."
+    ],
+    "de_claim_trust": {
+      "enabled": true,
+      "target_layers": [
+        "D",
+        "E"
+      ],
+      "score_effect": "none",
+      "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+      "pass_meaning": "이 topic의 핵심 이론·정의·수식 주장이 정답과 직접 충돌하지 않으므로, 이를 기반으로 한 D/E 현장 적용 주장과 결론 주장은 이론적으로 신뢰할 수 있다.",
+      "fatal_meaning": "이 topic의 핵심 이론 주장이 정답과 충돌하므로, 이를 기반으로 한 D/E 현장 적용 주장과 결론 주장은 강하게 신뢰하지 않는다.",
+      "rule": "Logic Check는 D/E를 직접 평가하지 않는다. D/E 점수는 A/B/C/D/E scoring model에서만 산정한다."
+    }
+  },
+  "llm_profile": {
+    "display_name": "2차 표준형 시스템 감쇠비별 응답 특성",
+    "difficulty": "THEORY_CORE",
+    "cap_policy": {
+      "fatal_recommended_ceiling": 10.0,
+      "fatal_confidence_threshold": 0.75
+    },
+    "candidate_extraction": {
+      "max_candidates": 12,
+      "nearby_window": 1,
+      "key_terms": [
+        "무감쇠",
+        "부족감쇠",
+        "임계감쇠",
+        "과감쇠",
+        "under damp",
+        "critical damp",
+        "over damp",
+        "un-damped",
+        "ζ",
+        "zeta",
+        "theta",
+        "θ",
+        "sin",
+        "cos",
+        "실수축",
+        "허수축",
+        "오버슈트",
+        "overshoot",
+        "정착시간",
+        "발산",
+        "불안정",
+        "양수",
+        "음수",
+        "부호",
+        "positive",
+        "negative",
+        "ζ > 0",
+        "ζ = 0",
+        "ζ < 0",
+        "zeta > 0",
+        "zeta = 0",
+        "zeta < 0",
+        "임계 안정",
+        "marginally stable",
+        "marginal stable",
+        "점근 안정",
+        "asymptotically stable",
+        "stable",
+        "unstable",
+        "좌반평면",
+        "우반평면",
+        "Left-Half Plane",
+        "Right-Half Plane",
+        "LHP",
+        "RHP",
+        "수렴",
+        "지속진동",
+        "발진"
+      ],
+      "rules": [
+        {
+          "kind": "structured_damping_region_table",
+          "type": "structured_mapping",
+          "label_regex": "(under\\s*damp(?:ed|ing)?|부족\\s*감쇠|critical\\s*damp(?:ed|ing)?|임계\\s*감쇠|over\\s*damp(?:ed|ing)?|과\\s*감쇠|un[-\\s]*damped|무\\s*감쇠)",
+          "range_regex": "(ζ\\s*<\\s*0\\.70?7?|ζ\\s*=\\s*0\\.70?7?|0\\.70?7?\\s*(?:<=|≤)\\s*ζ\\s*<\\s*1|0\\s*<\\s*ζ\\s*<\\s*1|ζ\\s*=\\s*1|ζ\\s*>\\s*1|ζ\\s*=\\s*0|ζ\\s*<\\s*0)",
+          "label_map": {
+            "under": "Under damp",
+            "부족": "Under damp",
+            "critical": "Critical damp",
+            "임계": "Critical damp",
+            "over": "Over damp",
+            "과": "Over damp",
+            "un": "Un-damped",
+            "무": "Un-damped"
+          }
+        },
+        {
+          "kind": "zeta_0_7_context",
+          "type": "nearby_regex",
+          "regex": "0\\.70?7?"
+        },
+        {
+          "kind": "angle_relation_context",
+          "type": "nearby_regex",
+          "regex": "(θ|theta|sin|cos|실수축|허수축|real\\s*axis|imaginary\\s*axis)"
+        },
+        {
+          "kind": "step_response_context",
+          "type": "nearby_regex",
+          "regex": "(진동|오버\\s*슈트|overshoot|overshot|충돌|최속|느리|수렴|발산)"
+        },
+        {
+          "kind": "standard_zeta_classification",
+          "type": "line_regex",
+          "regex": "ζ\\s*=\\s*0.*0\\s*<\\s*ζ\\s*<\\s*1.*ζ\\s*=\\s*1.*ζ\\s*>\\s*1"
+        },
+        {
+          "kind": "zeta_sign_stability_context",
+          "type": "nearby_regex",
+          "regex": "(ζ|zeta|댐핑비|감쇠비).{0,80}(>|<|=|양수|음수|positive|negative|stable|unstable|안정|불안정|임계\\s*안정|marginal)"
+        },
+        {
+          "kind": "s_plane_half_plane_stability_context",
+          "type": "nearby_regex",
+          "regex": "(좌반평면|우반평면|Left[-\\s]*Half[-\\s]*Plane|Right[-\\s]*Half[-\\s]*Plane|LHP|RHP|극점|pole).{0,80}(안정|불안정|stable|unstable|발산|수렴)"
+        },
+        {
+          "kind": "zeta_zero_marginal_stability_context",
+          "type": "nearby_regex",
+          "regex": "(ζ\\s*=\\s*0|zeta\\s*=\\s*0|감쇠비.{0,20}0).{0,80}(임계\\s*안정|marginal(?:ly)?\\s*stable|무감쇠|지속\\s*진동|발진)"
+        },
+        {
+          "kind": "positive_zeta_performance_not_boundary_context",
+          "type": "nearby_regex",
+          "regex": "(ζ\\s*>\\s*0|zeta\\s*>\\s*0|양수|positive).{0,120}(오버\\s*슈트|overshoot|정착\\s*시간|settling|감쇠|진동|성능|performance)"
+        }
+      ]
+    },
+    "truth_schema": [
+      "ζ=0은 무감쇠이다.",
+      "0<ζ<1은 부족감쇠이다.",
+      "ζ=1은 임계감쇠이다.",
+      "ζ>1은 과감쇠이다.",
+      "부족감쇠는 오버슈트와 감쇠진동을 동반할 수 있으나 좌반면 극점이면 안정 수렴한다.",
+      "임계감쇠는 오버슈트 없이 가장 빠른 무진동 수렴이다.",
+      "과감쇠는 오버슈트 없이 느리게 수렴한다.",
+      "θ를 음의 실수축 기준으로 정의하면 ζ=cosθ이다. sinθ 관계는 허수축 기준 각도일 때 가능하다.",
+      "ζ≈0.707은 부족감쇠 영역 안의 실무적 속도·안정성 타협점이지 임계감쇠 정의가 아니다.",
+      "시간지연은 위상여유를 줄여 불안정을 유발할 수 있으나, 부족감쇠 자체와 발산은 구분해야 한다.",
+      "표준 2차 시스템 s² + 2ζωn s + ωn² = 0에서 ωn>0이면 극점 실수부는 -ζωn이다.",
+      "표준 2차 시스템에서 ζ>0이면 극점 실수부가 음수이므로 좌반평면 극점이 되어 점근 안정이다.",
+      "표준 2차 시스템에서 ζ=0이면 극점은 ±jωn이 되어 무감쇠 지속진동을 하며 임계 안정 또는 marginal stability로 본다.",
+      "표준 2차 시스템에서 ζ<0이면 극점 실수부가 양수이므로 우반평면 극점이 되어 불안정하고 진동 진폭이 증가할 수 있다.",
+      "ζ>0은 안정성의 부호 조건이고, ζ의 크기는 오버슈트, 진동성, 정착시간, 위상여유 등 성능 특성을 좌우한다.",
+      "작은 양의 ζ도 표준 2차 시스템에서는 안정하지만 오버슈트와 진동이 커질 수 있다. 따라서 작은 양의 ζ를 불안정으로 분류하면 안 된다.",
+      "ζ≈0.707은 부족감쇠 영역 안의 실무적 성능 타협점이며, ζ>0 안정성 조건 및 ζ=1 임계감쇠 정의와 구분해야 한다."
+    ],
+    "fatal_conditions": [
+      "명시적으로 임계감쇠=ζ=0.7 또는 ζ=0.707이라고 정의함",
+      "명시적으로 과감쇠=0.7≤ζ<1이라고 정의함",
+      "명시적으로 부족감쇠=ζ<0.7로 제한함",
+      "명시적으로 임계감쇠가 진동 또는 오버슈트 응답이라고 함",
+      "명시적으로 과감쇠가 오버슈트, 충돌위험 또는 최속 응답이라고 함",
+      "θ를 음의 실수축 기준으로 정의하고 sinθ=ζ 또는 sinθ=σ/ωn이라고 함",
+      "표에서 Under damp => ζ<0.7, Critical damp => ζ=0.7, Over damp => 0.7≤ζ<1 형태로 감쇠구간을 배치함",
+      "명시적으로 ζ<0 또는 음의 감쇠비를 안정 조건이라고 설명함",
+      "명시적으로 ζ<0에서 시간이 지나며 진동이 줄어들어 수렴한다고 설명함",
+      "명시적으로 ζ=0을 점근 안정 또는 하나의 값으로 수렴하는 안정 상태라고 설명함",
+      "명시적으로 ζ=0 무감쇠 지속진동을 발산 불안정으로만 분류함",
+      "명시적으로 ζ>0인 표준 2차 시스템을 부호 조건만으로 불안정 또는 발산이라고 설명함",
+      "명시적으로 작은 양의 ζ, 즉 0<ζ<1 영역을 안정하지 않다고 분류함",
+      "명시적으로 ζ>0 전체를 임계감쇠 또는 과감쇠로 분류함",
+      "표준 2차형에서 좌반평면 극점을 불안정, 우반평면 극점을 안정이라고 반대로 설명함"
+    ],
+    "safe_conditions": [
+      "ζ≈0.707 언급 자체는 fatal이 아니다.",
+      "ζ≈0.707을 부족감쇠 영역의 실무적 타협점, 45도 극점, 속도와 안정성의 튜닝점으로 설명하면 정상이다.",
+      "ζ=1 임계감쇠와 ζ≈0.707 실무 타협점을 명확히 구분하면 fatal이 아니다.",
+      "θ를 허수축 기준으로 정의한 경우 ζ=sinθ 표현은 가능하다.",
+      "단순 누락, 애매함, 설명 부족은 fatal이 아니라 major 또는 minor이다.",
+      "candidate evidence에 없는 내용을 추론하여 fatal로 만들면 안 된다.",
+      "표준 2차 시스템에서 ζ>0이면 안정, ζ=0이면 임계 안정, ζ<0이면 불안정이라고 설명하는 것은 정상이다.",
+      "ζ=0을 marginally stable, 임계 안정, 무감쇠 지속진동, 발진 지속으로 설명하는 것은 fatal이 아니다.",
+      "ζ<0을 우반평면 극점, 음의 감쇠, 진폭 증가, 발산 가능성으로 설명하는 것은 정상이다.",
+      "ζ>0을 안정 조건으로 설명하면서도 ζ가 작으면 진동과 오버슈트가 커진다고 설명하는 것은 정상이다.",
+      "양의 ζ가 '충분히 커야 안정적 운전 또는 실무적으로 양호한 응답'이라고 표현한 경우, 작은 양의 ζ를 불안정으로 명시하지 않았다면 fatal이 아니라 표현상 보완 대상으로 본다.",
+      "ζ≈0.707을 실무적 최적 타협점으로 설명하는 것은 fatal이 아니다. 단, 이를 임계감쇠 정의로 오용하면 fatal이다."
+    ],
+    "output_contract": {
+      "json_only": true,
+      "required_fields": [
+        "verdict",
+        "confidence",
+        "reason",
+        "findings"
+      ],
+      "verdict_values": [
+        "pass",
+        "warn",
+        "fatal"
+      ]
+    },
+    "major_checks": [
+      {
+        "id": "missing_zeta_sign_stability_classification",
+        "severity": "major",
+        "required_patterns": [
+          "ζ\\s*>\\s*0|zeta\\s*>\\s*0|양수|positive",
+          "ζ\\s*=\\s*0|zeta\\s*=\\s*0|임계\\s*안정|marginal",
+          "ζ\\s*<\\s*0|zeta\\s*<\\s*0|음수|negative",
+          "좌반평면|우반평면|LHP|RHP"
+        ],
+        "min_required": 3,
+        "message": "댐핑비 부호에 따른 안정성 설명이 부족하다. ζ>0 안정, ζ=0 임계 안정, ζ<0 불안정과 s-평면 좌반/우반평면 관계를 구분해야 한다.",
+        "correct_rule": "표준 2차 시스템에서 ωn>0이면 극점 실수부는 -ζωn이므로 ζ>0은 좌반평면 안정, ζ=0은 순허수축 임계 안정, ζ<0은 우반평면 불안정이다.",
+        "affected_layers": [
+          "C"
+        ]
+      },
+      {
+        "id": "positive_zeta_performance_distinction_missing",
+        "severity": "major",
+        "required_patterns": [
+          "ζ\\s*>\\s*0|zeta\\s*>\\s*0|양수",
+          "오버\\s*슈트|overshoot|진동|정착\\s*시간|settling",
+          "성능|응답\\s*특성|감쇠\\s*정도|위상\\s*여유"
+        ],
+        "min_required": 2,
+        "message": "ζ>0의 안정성 조건과 ζ 크기에 따른 응답 성능 차이를 분리 설명해야 한다.",
+        "correct_rule": "ζ>0은 안정 조건이며, ζ의 크기는 오버슈트, 진동성, 정착시간 같은 성능을 결정한다.",
+        "affected_layers": [
+          "C",
+          "E"
+        ]
+      }
+    ],
+    "feedback_templates": {
+      "c_sign_stability_positive": "댐핑비 부호에 따른 안정성 설명은 표준 2차 시스템 기준으로 적절하다. ζ>0은 좌반평면 안정, ζ=0은 무감쇠 임계 안정, ζ<0은 우반평면 불안정으로 해석한다.",
+      "c_sign_stability_minor": "다만 ζ>0은 안정성 조건이고, ζ의 크기는 오버슈트·진동성·정착시간 등 성능 조건이라는 점을 분리해 쓰면 더 정확하다.",
+      "c_sign_stability_fatal": "댐핑비 부호와 s-평면 안정성 관계를 반대로 설명하여 표준 2차 시스템의 극점 안정성 조건과 충돌한다."
+    },
+    "next_practice_points": [
+      "댐핑비 부호 안정성은 먼저 ζ>0 안정, ζ=0 임계 안정, ζ<0 불안정으로 구분한다.",
+      "표준 2차형에서는 극점 실수부 -ζωn을 이용해 좌반평면/우반평면 안정성을 설명한다.",
+      "ζ>0 안정성 조건과 ζ 크기에 따른 오버슈트·정착시간·감쇠 정도의 성능 조건을 분리해서 쓴다."
+    ]
+  }
+}

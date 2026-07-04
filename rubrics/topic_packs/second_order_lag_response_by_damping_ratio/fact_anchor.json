@@ -1,0 +1,112 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "second_order_lag_response_by_damping_ratio",
+  "title_ko": "감쇠비에 따른 2차 지연시스템 응답 특성",
+  "question_type_hint": "COMPARE_SELECTION",
+  "anchors": [
+    {
+      "anchor_id": "so2_standard_transfer_function",
+      "importance": "must",
+      "core_terms": [
+        "2차 시스템",
+        "전달함수",
+        "고유진동수",
+        "감쇠비"
+      ],
+      "statement": "표준 2차 지연시스템은 보통 G(s)=Kω_n^2/(s^2+2ζω_n s+ω_n^2) 형태로 표현하며, ζ와 ω_n이 과도응답 특성을 결정한다.",
+      "scoring_focus": "전달함수와 특성방정식 구조를 통해 감쇠비의 역할을 설명하는지 확인한다."
+    },
+    {
+      "anchor_id": "so2_damping_ratio_definition",
+      "importance": "must",
+      "core_terms": [
+        "감쇠비",
+        "ζ",
+        "damping ratio",
+        "진동성",
+        "정착특성"
+      ],
+      "statement": "감쇠비 ζ는 2차 시스템 응답의 진동성, 오버슈트, 정착시간, 감쇠 정도를 결정하는 무차원 지표이다.",
+      "scoring_focus": "감쇠비를 단순 기호가 아니라 응답 특성과 연결해 설명하는지 확인한다."
+    },
+    {
+      "anchor_id": "so2_pole_response_relationship",
+      "importance": "must",
+      "core_terms": [
+        "극점",
+        "근",
+        "복소근",
+        "실근",
+        "중근",
+        "s평면"
+      ],
+      "statement": "2차 시스템의 극점 위치는 감쇠비에 따라 달라지며, 극점의 실수부와 허수부가 감쇠 속도와 진동성을 결정한다.",
+      "scoring_focus": "감쇠비별 응답 차이를 극점 위치와 연결하는지 확인한다."
+    },
+    {
+      "anchor_id": "so2_underdamped_response",
+      "importance": "must",
+      "core_terms": [
+        "0<ζ<1",
+        "부족감쇠",
+        "underdamped",
+        "오버슈트",
+        "진동"
+      ],
+      "statement": "0<ζ<1인 부족감쇠 영역에서는 복소공액 극점이 형성되어 진동과 오버슈트가 나타나며, ζ가 작을수록 진동성과 오버슈트가 커진다.",
+      "scoring_focus": "부족감쇠의 응답 특성을 오버슈트, 진동, 정착시간과 함께 설명하는지 확인한다."
+    },
+    {
+      "anchor_id": "so2_critical_damping_response",
+      "importance": "must",
+      "core_terms": [
+        "ζ=1",
+        "임계감쇠",
+        "critically damped",
+        "중근",
+        "오버슈트 없음"
+      ],
+      "statement": "ζ=1인 임계감쇠에서는 중근이 형성되며, 오버슈트 없이 목표값에 접근하는 대표적인 경계 응답이다.",
+      "scoring_focus": "ζ=1이 중근 조건임을 설명하되, 모든 현장에서 항상 최적이라고 단정하지 않는지 확인한다."
+    },
+    {
+      "anchor_id": "so2_overdamped_response",
+      "importance": "must",
+      "core_terms": [
+        "ζ>1",
+        "과대감쇠",
+        "overdamped",
+        "실근",
+        "느린 응답"
+      ],
+      "statement": "ζ>1인 과대감쇠 영역에서는 서로 다른 두 실근이 형성되어 오버슈트는 없지만 응답이 느려진다.",
+      "scoring_focus": "안정하지만 느린 응답이라는 trade-off를 설명하는지 확인한다."
+    },
+    {
+      "anchor_id": "so2_zero_negative_damping",
+      "importance": "important",
+      "core_terms": [
+        "ζ=0",
+        "ζ<0",
+        "무감쇠",
+        "불안정",
+        "발산"
+      ],
+      "statement": "ζ=0은 감쇠가 없는 진동 또는 한계 안정 응답으로 볼 수 있고, ζ<0은 에너지가 증가하는 발산 응답으로 불안정하다.",
+      "scoring_focus": "감쇠비 부호와 안정성을 잘못 연결하지 않는지 확인한다."
+    },
+    {
+      "anchor_id": "so2_design_tradeoff",
+      "importance": "important",
+      "core_terms": [
+        "오버슈트",
+        "정착시간",
+        "상승시간",
+        "튜닝",
+        "trade-off"
+      ],
+      "statement": "현장 설계에서는 오버슈트, 상승시간, 정착시간, 외란 응답, 구동기 한계 사이의 trade-off를 고려해 목표 감쇠비를 정한다.",
+      "scoring_focus": "이론적 분류를 현장 튜닝 및 설계 판단으로 연결하는지 확인한다."
+    }
+  ]
+}
