@@ -14,6 +14,7 @@ from rubric_content import model_answers  # noqa: E402
 from rubric_content import question_types  # noqa: E402
 from rubric_content import topic_importance  # noqa: E402
 from rubric_content import validators  # noqa: E402
+from rubric_content import topic_pack_pipeline  # noqa: E402
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -27,6 +28,7 @@ def build_parser() -> argparse.ArgumentParser:
     fact_anchors.add_parsers(sub)
     topic_importance.add_parsers(sub)
     validators.add_parser(sub)
+    topic_pack_pipeline.add_parser(sub)
 
     return parser
 

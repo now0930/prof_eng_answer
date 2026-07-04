@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-04T01:33:34Z-generated-topic-pack-fact-anchors",
+  "version": "2026-07-04T01:36:03Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json",
