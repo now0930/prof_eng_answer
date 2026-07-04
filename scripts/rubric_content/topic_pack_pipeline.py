@@ -18,6 +18,7 @@ OPTIONAL_AUDIT_SCRIPTS = {
     "audit-topic-id-consistency": "scripts/audit_topic_id_consistency.py",
     "audit-generated-runtime-schema": "scripts/audit_generated_runtime_schema.py",
     "audit-rubric-path-usage": "scripts/audit_rubric_path_usage.py",
+    "check-rubric-bank-paths": "scripts/check_rubric_bank_paths.py",
 }
 
 
@@ -115,6 +116,13 @@ def cmd_audit_rubric_path_usage(_args: argparse.Namespace) -> int:
     return rc
 
 
+def cmd_check_rubric_bank_paths(_args: argparse.Namespace) -> int:
+    path = OPTIONAL_AUDIT_SCRIPTS["check-rubric-bank-paths"]
+    rc = py_compile_existing_scripts(["rubric_bank_paths.py", path])
+    rc = max(rc, run_script(path))
+    return rc
+
+
 def add_parser(sub) -> None:
     p = sub.add_parser(
         "validate-topic-packs",
@@ -163,3 +171,10 @@ def add_parser(sub) -> None:
         help="Audit source files for direct runtime rubric JSON path usage",
     )
     p.set_defaults(func=cmd_audit_rubric_path_usage)
+
+
+    p = sub.add_parser(
+        "check-rubric-bank-paths",
+        help="Check rubric bank path resolver for legacy or generated mode",
+    )
+    p.set_defaults(func=cmd_check_rubric_bank_paths)
