@@ -4,9 +4,11 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
+from rubric_registry import load_topic_importance_bank
+
 
 DIFFICULTY_PROFILE_PATH = Path("rubrics/difficulty_profiles/default.json")
-TOPIC_IMPORTANCE_PATH = Path("rubrics/topic_importance/industrial_instrumentation_control.json")
+TOPIC_IMPORTANCE_PATH = None  # deprecated: use load_topic_importance_bank()
 EXAM_SELECTION_PATH = Path("rubrics/exam_selection/default.json")
 
 
@@ -23,15 +25,15 @@ def _normalize(text: str) -> str:
 
 
 def load_difficulty_profiles() -> Dict[str, Any]:
-    return _load_json(DIFFICULTY_PROFILE_PATH)
+    return _load_topic_importance_bank()
 
 
 def load_topic_importance() -> Dict[str, Any]:
-    return _load_json(TOPIC_IMPORTANCE_PATH)
+    return _load_topic_importance_bank()
 
 
 def load_exam_selection_policy() -> Dict[str, Any]:
-    return _load_json(EXAM_SELECTION_PATH)
+    return _load_topic_importance_bank()
 
 
 def classify_question_difficulty(question_text: str) -> Dict[str, Any]:
