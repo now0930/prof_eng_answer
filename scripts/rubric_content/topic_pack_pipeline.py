@@ -19,6 +19,7 @@ OPTIONAL_AUDIT_SCRIPTS = {
     "audit-generated-runtime-schema": "scripts/audit_generated_runtime_schema.py",
     "audit-rubric-path-usage": "scripts/audit_rubric_path_usage.py",
     "check-rubric-bank-paths": "scripts/check_rubric_bank_paths.py",
+    "audit-fact-anchor-usage": "scripts/audit_fact_anchor_usage.py",
 }
 
 
@@ -123,6 +124,13 @@ def cmd_check_rubric_bank_paths(_args: argparse.Namespace) -> int:
     return rc
 
 
+def cmd_audit_fact_anchor_usage(_args: argparse.Namespace) -> int:
+    path = OPTIONAL_AUDIT_SCRIPTS["audit-fact-anchor-usage"]
+    rc = py_compile_existing_scripts([path])
+    rc = max(rc, run_script(path))
+    return rc
+
+
 def add_parser(sub) -> None:
     p = sub.add_parser(
         "validate-topic-packs",
@@ -178,3 +186,10 @@ def add_parser(sub) -> None:
         help="Check rubric bank path resolver for legacy or generated mode",
     )
     p.set_defaults(func=cmd_check_rubric_bank_paths)
+
+
+    p = sub.add_parser(
+        "audit-fact-anchor-usage",
+        help="Audit source files for fact anchor runtime path usage",
+    )
+    p.set_defaults(func=cmd_audit_fact_anchor_usage)

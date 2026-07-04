@@ -1,0 +1,4143 @@
+{
+  "generated_at": "20260704_112341",
+  "hit_count": 589,
+  "summary_by_classification": {
+    "direct_runtime_candidate": 284,
+    "reference_only": 269,
+    "registry_loader": 17,
+    "uses_registry_loader": 19
+  },
+  "summary_by_pattern": {
+    "direct_fact_anchor_runtime_path": 27,
+    "fact_anchor_constant": 239,
+    "fact_anchor_loader": 21,
+    "fact_anchor_text": 275,
+    "industrial_fact_anchor_file": 26,
+    "resolver_fact_anchors": 1
+  },
+  "hits": [
+    {
+      "file": "gemini_grader.py",
+      "line": 89,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "현재 Python fact anchor 평가:"
+    },
+    {
+      "file": "gemini_grader.py",
+      "line": 144,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_review\": ["
+    },
+    {
+      "file": "gemini_grader.py",
+      "line": 144,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_review\": ["
+    },
+    {
+      "file": "gemini_grader.py",
+      "line": 148,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"reason\": \"fact anchor 평가\""
+    },
+    {
+      "file": "gemini_grader.py",
+      "line": 507,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "- Fact Anchor와 Model Answer Bank가 제공된 경우, 동일 문장을 요구하지 말고 구조·깊이·현장 적용성 기준으로 참고하라."
+    },
+    {
+      "file": "gemini_grader.py",
+      "line": 768,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "- fact_anchor_review"
+    },
+    {
+      "file": "gemini_grader.py",
+      "line": 768,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "- fact_anchor_review"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1727,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "# PHASE3_FACT_ANCHOR_SCORING"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1727,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "# PHASE3_FACT_ANCHOR_SCORING"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1728,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "# C. 유형별 Fact 기반 내용 설명을 단순 키워드 매칭이 아니라 문제별 Fact Anchor 5개로 평가한다."
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1765,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def _phase3_load_fact_anchor_bank(subject_rubric=None):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1765,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "def _phase3_load_fact_anchor_bank(subject_rubric=None):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1765,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def _phase3_load_fact_anchor_bank(subject_rubric=None):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1772,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p = subject_rubric.get(\"fact_anchor_bank\")"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1772,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p = subject_rubric.get(\"fact_anchor_bank\")"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1777,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\"),"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1777,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\"),"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1777,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\"),"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1777,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\"),"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1778,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "Path(__file__).resolve().parent / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1778,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "Path(__file__).resolve().parent / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1778,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "Path(__file__).resolve().parent / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1778,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "Path(__file__).resolve().parent / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1815,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "Fact Anchor topic priority를 정렬용 숫자로 변환한다."
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1855,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def _phase3_select_fact_anchors_from_bank(question_text, answer_text, subject_rubric=None):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1855,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def _phase3_select_fact_anchors_from_bank(question_text, answer_text, subject_rubric=None):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1856,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = _phase3_load_fact_anchor_bank(subject_rubric)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1856,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = _phase3_load_fact_anchor_bank(subject_rubric)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1856,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank = _phase3_load_fact_anchor_bank(subject_rubric)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1895,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"source\": \"fact_anchor_bank\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1895,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"source\": \"fact_anchor_bank\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1901,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def _phase3_select_fact_anchors(question_text, answer_text, subject_rubric=None):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1901,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def _phase3_select_fact_anchors(question_text, answer_text, subject_rubric=None):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1906,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank_selected = _phase3_select_fact_anchors_from_bank(q, a, subject_rubric)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1906,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank_selected = _phase3_select_fact_anchors_from_bank(q, a, subject_rubric)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1913,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "# Cv(Valve Flow Coefficient, 밸브 유량계수) 문제 전용 Fact Anchor"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2044,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "Fact Anchor 엄격 평가."
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2218,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def _phase3_evaluate_fact_anchors(raw_text, subject_rubric=None):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2218,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def _phase3_evaluate_fact_anchors(raw_text, subject_rubric=None):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2222,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "anchors = _phase3_select_fact_anchors(question_text, answer_text, subject_rubric)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2222,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "anchors = _phase3_select_fact_anchors(question_text, answer_text, subject_rubric)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2253,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"version\": \"phase3_fact_anchor_v1\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2253,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"version\": \"phase3_fact_anchor_v1\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2313,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2313,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval):"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2316,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "item[\"score_before_fact_anchor\"] = item.get(\"score\")"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2316,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "item[\"score_before_fact_anchor\"] = item.get(\"score\")"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2319,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "f\"Fact Anchor {fact_eval.get('anchor_count')}개 평가 평균 \""
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2323,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "item[\"fact_anchor_summary\"] = ["
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2323,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "item[\"fact_anchor_summary\"] = ["
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2420,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"C\": \"핵심 fact anchor와 용어 정확성을 중점 평가함.\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2504,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "perspective = \"개념, 용어, fact anchor의 정확성을 중심으로 평가했습니다.\""
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2633,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "f\"A/B/C/D/E 구조, fact anchor, 연결성, 답안지 분량 cap, 3인 layer 가중 합성을 적용해 \""
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2856,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_eval = _phase3_evaluate_fact_anchors(input_text, subject_rubric)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2856,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_eval = _phase3_evaluate_fact_anchors(input_text, subject_rubric)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2861,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "layer_scores = _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2861,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "layer_scores = _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2957,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_evaluation\": fact_eval,"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2957,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_evaluation\": fact_eval,"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 2985,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"유형별 Fact anchor 5개 설명\","
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 3031,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "_phase2_json_write(session_dir / \"fact_anchor_evaluation.json\", fact_eval)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 3031,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "_phase2_json_write(session_dir / \"fact_anchor_evaluation.json\", fact_eval)"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 4043,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"유형별 Fact anchor 5개 설명\","
+    },
+    {
+      "file": "originality_grader.py",
+      "line": 140,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "Fact Anchor 평가 참고:"
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 15,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 15,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 15,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 15,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchors\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 23,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": \"rubrics/generated/fact_anchors.generated.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 23,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchors\": \"rubrics/generated/fact_anchors.generated.json\","
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 16,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "registry_loader",
+      "text": "FACT_ANCHOR_BANK = BASE_DIR / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 16,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "registry_loader",
+      "text": "FACT_ANCHOR_BANK = BASE_DIR / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 16,
+      "pattern": "fact_anchor_constant",
+      "classification": "registry_loader",
+      "text": "FACT_ANCHOR_BANK = BASE_DIR / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 16,
+      "pattern": "fact_anchor_text",
+      "classification": "registry_loader",
+      "text": "FACT_ANCHOR_BANK = BASE_DIR / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 168,
+      "pattern": "fact_anchor_constant",
+      "classification": "registry_loader",
+      "text": "def load_fact_anchor_bank(path: str | Path | None = None) -> Dict[str, Any]:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 168,
+      "pattern": "fact_anchor_loader",
+      "classification": "registry_loader",
+      "text": "def load_fact_anchor_bank(path: str | Path | None = None) -> Dict[str, Any]:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 168,
+      "pattern": "fact_anchor_text",
+      "classification": "registry_loader",
+      "text": "def load_fact_anchor_bank(path: str | Path | None = None) -> Dict[str, Any]:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 174,
+      "pattern": "fact_anchor_constant",
+      "classification": "registry_loader",
+      "text": "candidates.append(resolve_rubric_bank_path(\"fact_anchors\"))"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 174,
+      "pattern": "fact_anchor_text",
+      "classification": "registry_loader",
+      "text": "candidates.append(resolve_rubric_bank_path(\"fact_anchors\"))"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 174,
+      "pattern": "resolver_fact_anchors",
+      "classification": "registry_loader",
+      "text": "candidates.append(resolve_rubric_bank_path(\"fact_anchors\"))"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 184,
+      "pattern": "fact_anchor_constant",
+      "classification": "registry_loader",
+      "text": "\"version\": \"fact_anchor_bank_empty\","
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 184,
+      "pattern": "fact_anchor_text",
+      "classification": "registry_loader",
+      "text": "\"version\": \"fact_anchor_bank_empty\","
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 191,
+      "pattern": "fact_anchor_constant",
+      "classification": "registry_loader",
+      "text": "def save_fact_anchor_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 191,
+      "pattern": "fact_anchor_loader",
+      "classification": "registry_loader",
+      "text": "def save_fact_anchor_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 191,
+      "pattern": "fact_anchor_text",
+      "classification": "registry_loader",
+      "text": "def save_fact_anchor_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 192,
+      "pattern": "fact_anchor_constant",
+      "classification": "registry_loader",
+      "text": "return write_json(path or FACT_ANCHOR_BANK, data)"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 192,
+      "pattern": "fact_anchor_text",
+      "classification": "registry_loader",
+      "text": "return write_json(path or FACT_ANCHOR_BANK, data)"
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 14,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"direct_fact_anchor_runtime_path\": r\"rubrics[/\\\"]\\s*/?\\s*[\\\"']?fact_anchors|rubrics/fact_anchors\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 14,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"direct_fact_anchor_runtime_path\": r\"rubrics[/\\\"]\\s*/?\\s*[\\\"']?fact_anchors|rubrics/fact_anchors\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 14,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"direct_fact_anchor_runtime_path\": r\"rubrics[/\\\"]\\s*/?\\s*[\\\"']?fact_anchors|rubrics/fact_anchors\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 15,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"industrial_fact_anchor_file\": r\"fact_anchors.+industrial_instrumentation_control\\.json|industrial_instrumentation_control\\.json.+fact_anchors\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 15,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"industrial_fact_anchor_file\": r\"fact_anchors.+industrial_instrumentation_control\\.json|industrial_instrumentation_control\\.json.+fact_anchors\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 16,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_constant\": r\"FACT_ANCHOR|ANCHOR_BANK|FACT_BANK\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 16,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_constant\": r\"FACT_ANCHOR|ANCHOR_BANK|FACT_BANK\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 17,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_loader\": r\"load_fact_anchor_bank|save_fact_anchor_bank\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 17,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "\"fact_anchor_loader\": r\"load_fact_anchor_bank|save_fact_anchor_bank\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 17,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_loader\": r\"load_fact_anchor_bank|save_fact_anchor_bank\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 18,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_text\": r\"fact_anchor|fact anchors|Fact Anchor|FACT ANCHOR\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 18,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_text\": r\"fact_anchor|fact anchors|Fact Anchor|FACT ANCHOR\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 19,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"resolver_fact_anchors\": r\"resolve_rubric_bank_path\\([\\\"']fact_anchors[\\\"']\\)\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 19,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"resolver_fact_anchors\": r\"resolve_rubric_bank_path\\([\\\"']fact_anchors[\\\"']\\)\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 49,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"direct_fact_anchor_runtime_path\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 49,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"direct_fact_anchor_runtime_path\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 50,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"industrial_fact_anchor_file\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 50,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"industrial_fact_anchor_file\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 51,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_constant\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 51,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_constant\","
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 55,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "if pattern == \"resolver_fact_anchors\":"
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 55,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "if pattern == \"resolver_fact_anchors\":"
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 58,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "if pattern == \"fact_anchor_loader\":"
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 58,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "if pattern == \"fact_anchor_loader\":"
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 101,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "lines.append(\"# Fact Anchor Usage Audit\")"
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 104,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "lines.append(\"- purpose: fact anchor runtime path를 직접 읽는 코드와 resolver 적용 후보를 찾는다.\")"
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 176,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "json_path = REPORT_DIR / f\"fact_anchor_usage_audit_{timestamp}.json\""
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 176,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "json_path = REPORT_DIR / f\"fact_anchor_usage_audit_{timestamp}.json\""
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 177,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "md_path = REPORT_DIR / f\"fact_anchor_usage_audit_{timestamp}.md\""
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 177,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "md_path = REPORT_DIR / f\"fact_anchor_usage_audit_{timestamp}.md\""
+    },
+    {
+      "file": "scripts/audit_fact_anchor_usage.py",
+      "line": 183,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(\"FACT ANCHOR USAGE AUDIT OK\")"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 13,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": {"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 13,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchors\": {"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 14,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 14,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 14,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 14,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 15,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"generated\": ROOT / \"rubrics\" / \"generated\" / \"fact_anchors.generated.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 15,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"generated\": ROOT / \"rubrics\" / \"generated\" / \"fact_anchors.generated.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 16,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"candidate_containers\": [\"topics\", \"anchors\", \"fact_anchors\"],"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 16,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"candidate_containers\": [\"topics\", \"anchors\", \"fact_anchors\"],"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 14,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 14,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 14,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 14,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchors\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 22,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": GENERATED_DIR / \"fact_anchors.generated.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 22,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchors\": GENERATED_DIR / \"fact_anchors.generated.json\","
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 26,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors_runtime\": r\"rubrics/(?:fact_anchors|fact_anchor)\","
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 26,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchors_runtime\": r\"rubrics/(?:fact_anchors|fact_anchor)\","
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 83,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "if pattern in {\"logic_checks_runtime\", \"logic_check_profiles_runtime\", \"fact_anchors_runtime\", \"model_answers_runtime\", \"topic_importance_runtime\"}:"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 83,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "if pattern in {\"logic_checks_runtime\", \"logic_check_profiles_runtime\", \"fact_anchors_runtime\", \"model_answers_runtime\", \"topic_importance_runtime\"}:"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 18,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "ROOT / \"rubrics\" / \"generated\" / \"fact_anchors.generated.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 18,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "ROOT / \"rubrics\" / \"generated\" / \"fact_anchors.generated.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 25,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 25,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 25,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 25,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 51,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_anchor = load_json(pack_dir / \"fact_anchor.json\")"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 51,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_anchor = load_json(pack_dir / \"fact_anchor.json\")"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 57,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "(\"fact_anchor.json\", fact_anchor),"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 57,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "(\"fact_anchor.json\", fact_anchor),"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 67,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor\": fact_anchor,"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 67,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor\": fact_anchor,"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 74,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def build_fact_anchors(packs: list[dict[str, Any]], version: str) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 74,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def build_fact_anchors(packs: list[dict[str, Any]], version: str) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 78,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"schema_version\": \"generated.fact_anchors.v1\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 78,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"schema_version\": \"generated.fact_anchors.v1\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 79,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"source\": \"rubrics/topic_packs/*/fact_anchor.json\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 79,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"source\": \"rubrics/topic_packs/*/fact_anchor.json\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 82,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "pack[\"fact_anchor\"]"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 82,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "pack[\"fact_anchor\"]"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 184,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor.json\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 184,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor.json\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 215,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "write_json(OUT_DIR / \"fact_anchors.generated.json\", build_fact_anchors(packs, version))"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 215,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "write_json(OUT_DIR / \"fact_anchors.generated.json\", build_fact_anchors(packs, version))"
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 9,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 9,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 9,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 9,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 24,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 24,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 29,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "raise SystemExit(\"ERROR: unsupported fact anchor json structure\")"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 12,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 12,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 12,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 12,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 21,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 21,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 26,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "raise SystemExit(\"ERROR: unsupported fact anchor json structure\")"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 70,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_calibration_sentence_cleanup.{ts}.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 70,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_calibration_sentence_cleanup.{ts}.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 14,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_removed_support_terms.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 14,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_removed_support_terms.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 46,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 46,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 51,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "raise SystemExit(\"ERROR: unsupported fact anchor json structure\")"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 59,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "# 너무 긴 문장형 support term은 fact anchor의 보조 용어 역할을 벗어났다고 본다."
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 151,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_support_cleanup.{ts}.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 151,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_support_cleanup.{ts}.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/classify_fact_anchor_support_rewrite_candidates.py",
+      "line": 9,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "IN_CSV = ROOT / \"reports/fact_anchor_support_term_rewrite_candidates.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/classify_fact_anchor_support_rewrite_candidates.py",
+      "line": 9,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "IN_CSV = ROOT / \"reports/fact_anchor_support_term_rewrite_candidates.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/classify_fact_anchor_support_rewrite_candidates.py",
+      "line": 10,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_term_rewrite_candidates_strict.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/classify_fact_anchor_support_rewrite_candidates.py",
+      "line": 10,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_term_rewrite_candidates_strict.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 13,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 13,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 13,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 13,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 14,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_removed_term_overlap.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 14,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_removed_term_overlap.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 20,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 20,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 25,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "raise SystemExit(\"ERROR: unsupported fact anchor json structure\")"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 88,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_overlap_cleanup.{ts}.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 88,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_overlap_cleanup.{ts}.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_final_fact_anchor_support_review.py",
+      "line": 9,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "AUDIT_CSV = ROOT / \"reports/fact_anchor_quality_audit.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_final_fact_anchor_support_review.py",
+      "line": 9,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "AUDIT_CSV = ROOT / \"reports/fact_anchor_quality_audit.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_final_fact_anchor_support_review.py",
+      "line": 10,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_terms_final_review.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_final_fact_anchor_support_review.py",
+      "line": 10,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_terms_final_review.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_final_fact_anchor_support_review.py",
+      "line": 11,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_MD = ROOT / \"reports/fact_anchor_support_terms_final_review.md\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_final_fact_anchor_support_review.py",
+      "line": 11,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_MD = ROOT / \"reports/fact_anchor_support_terms_final_review.md\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_final_fact_anchor_support_review.py",
+      "line": 71,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "lines.append(\"# Final Fact Anchor Support Terms Review\")"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_remaining_fact_anchor_support_review.py",
+      "line": 9,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "AUDIT_CSV = ROOT / \"reports/fact_anchor_quality_audit.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_remaining_fact_anchor_support_review.py",
+      "line": 9,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "AUDIT_CSV = ROOT / \"reports/fact_anchor_quality_audit.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_remaining_fact_anchor_support_review.py",
+      "line": 10,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_terms_manual_review.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_remaining_fact_anchor_support_review.py",
+      "line": 10,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_terms_manual_review.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_remaining_fact_anchor_support_review.py",
+      "line": 11,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_MD = ROOT / \"reports/fact_anchor_support_terms_manual_review.md\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_remaining_fact_anchor_support_review.py",
+      "line": 11,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_MD = ROOT / \"reports/fact_anchor_support_terms_manual_review.md\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/export_remaining_fact_anchor_support_review.py",
+      "line": 84,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "lines.append(\"# Fact Anchor Support Terms Manual Review\")"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 14,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 14,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 14,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 14,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 15,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_id_normalization_with_refs.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 15,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_id_normalization_with_refs.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 28,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 28,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 33,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "raise SystemExit(\"ERROR: unsupported fact anchor json structure\")"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 160,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_id_normalization_with_refs.{ts}.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 160,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_id_normalization_with_refs.{ts}.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 164,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "backup = backup_dir / f\"{path.name}.before_fact_anchor_id_refs.{ts}.bak\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 164,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "backup = backup_dir / f\"{path.name}.before_fact_anchor_id_refs.{ts}.bak\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 169,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "# main fact anchor id 변경"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/prepare_fact_anchor_manual_review_resolution.py",
+      "line": 10,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "IN_CSV = ROOT / \"reports/fact_anchor_support_terms_manual_review.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/prepare_fact_anchor_manual_review_resolution.py",
+      "line": 10,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "IN_CSV = ROOT / \"reports/fact_anchor_support_terms_manual_review.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/prepare_fact_anchor_manual_review_resolution.py",
+      "line": 11,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_terms_manual_review_resolved.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/prepare_fact_anchor_manual_review_resolution.py",
+      "line": 11,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_terms_manual_review_resolved.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/propose_fact_anchor_support_term_rewrites.py",
+      "line": 9,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "AUDIT_CSV = ROOT / \"reports/fact_anchor_quality_audit.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/propose_fact_anchor_support_term_rewrites.py",
+      "line": 9,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "AUDIT_CSV = ROOT / \"reports/fact_anchor_quality_audit.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/propose_fact_anchor_support_term_rewrites.py",
+      "line": 10,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_term_rewrite_candidates.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/propose_fact_anchor_support_term_rewrites.py",
+      "line": 10,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_support_term_rewrite_candidates.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 14,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_final_support_resolution_applied.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 14,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "OUT_CSV = ROOT / \"reports/fact_anchor_final_support_resolution_applied.csv\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 98,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 98,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "for key in [\"topics\", \"fact_anchors\", \"items\", \"data\"]:"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 103,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "raise SystemExit(\"ERROR: unsupported fact anchor json structure\")"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 184,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_final_support_resolution.{ts}.json\""
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 184,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "backup = backup_dir / f\"industrial_instrumentation_control.fact_anchors.before_final_support_resolution.{ts}.json\""
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 54,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 54,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 54,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 54,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 61,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_generator_prompt.md\": ["
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 61,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_generator_prompt.md\": ["
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 63,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 63,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 63,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 63,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 82,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 82,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 82,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 82,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 10,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 10,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 10,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 10,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 109,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def parse_fact_anchors(block: str, topic_id: str):"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 109,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def parse_fact_anchors(block: str, topic_id: str):"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 172,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def existing_fact_by_topic(fact_bank):"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 174,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "for topic in fact_bank.get(\"topics\", []):"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 204,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"review design markdown에서 Model Answer와 Fact Anchor를 생성함.\","
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 216,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def upsert_fact(fact_bank, topic_id, question, anchors):"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 217,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "old = existing_fact_by_topic(fact_bank).get(topic_id, {})"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 225,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topics = fact_bank.setdefault(\"topics\", [])"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 237,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_bank = load_json(FACT_PATH)"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 253,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_block = extract_subsection(section, \"Fact Anchor 후보\")"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 257,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "anchors = parse_fact_anchors(fact_block, topic_id)"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 257,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "anchors = parse_fact_anchors(fact_block, topic_id)"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 261,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "upsert_fact(fact_bank, topic_id, question, anchors)"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 268,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "save_json(FACT_PATH, fact_bank)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 3,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "Add missing fact_anchor topics and clean related model_answer entries for"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 3,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "Add missing fact_anchor topics and clean related model_answer entries for"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 5,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json."
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 5,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json."
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 5,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json."
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 5,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json."
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 8,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "python3 scripts/migrations/apply_fact_anchors_and_cleanup.py"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 8,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "python3 scripts/migrations/apply_fact_anchors_and_cleanup.py"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 11,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "This script is idempotent: it upserts fact_anchor topics by topic_id and only"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 11,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "This script is idempotent: it upserts fact_anchor topics by topic_id and only"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 28,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_ANCHOR_BANK,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 28,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_ANCHOR_BANK,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 34,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "from rubric_content.fact_anchors import (  # noqa: E402"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 34,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "from rubric_content.fact_anchors import (  # noqa: E402"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 35,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "load_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 35,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "load_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 35,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "load_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 36,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "save_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 36,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "save_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 36,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "save_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 37,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "upsert_fact_anchor_topic,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 37,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "upsert_fact_anchor_topic,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 38,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "validate_fact_anchor_bank_data,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 38,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "validate_fact_anchor_bank_data,"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 54,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "REVISION_NOTE = \"updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup\""
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 54,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "REVISION_NOTE = \"updated_by=apply_fact_anchors_and_cleanup.py; reason=align model_answers with fact_anchors and review cleanup\""
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 614,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = load_fact_anchor_bank(FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 614,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = load_fact_anchor_bank(FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 614,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank = load_fact_anchor_bank(FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 619,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "upsert_fact_anchor_topic(bank, topic)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 619,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "upsert_fact_anchor_topic(bank, topic)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 624,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "# Also remove clear ultrasonic/Doppler misrouting from DP/orifice fact anchor triggers/aliases."
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 639,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "errors = validate_fact_anchor_bank_data(bank)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 639,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "errors = validate_fact_anchor_bank_data(bank)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 641,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(\"INVALID fact anchor bank after update\", file=sys.stderr)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 646,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "save_fact_anchor_bank(bank, FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 646,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "save_fact_anchor_bank(bank, FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 646,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "save_fact_anchor_bank(bank, FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 653,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(\"fact bank:\", FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 653,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(\"fact bank:\", FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 656,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(\"backup fact:\", backup_file(FACT_ANCHOR_BANK))"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 656,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(\"backup fact:\", backup_file(FACT_ANCHOR_BANK))"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 678,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(f\" - {tid}: fact_anchor upserted\")"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 678,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(f\" - {tid}: fact_anchor upserted\")"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 682,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "print(\"  git diff -- rubrics/fact_anchors/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 682,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "print(\"  git diff -- rubrics/fact_anchors/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 682,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(\"  git diff -- rubrics/fact_anchors/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 682,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(\"  git diff -- rubrics/fact_anchors/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 24,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "from rubric_content.fact_anchors import (  # type: ignore"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 24,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "from rubric_content.fact_anchors import (  # type: ignore"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 25,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "load_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 25,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "load_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 25,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "load_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 26,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "save_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 26,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "save_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 26,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "save_fact_anchor_bank,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 27,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "upsert_fact_anchor_topic,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 27,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "upsert_fact_anchor_topic,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 28,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "validate_fact_anchor_bank_data,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 28,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "validate_fact_anchor_bank_data,"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 32,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 32,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 32,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 32,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 69,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"Added to align model_answers with existing fact_anchors topic_id relationship.\","
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 69,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"Added to align model_answers with existing fact_anchors topic_id relationship.\","
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 474,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def sanitize_flowmeter_triggers(fact_bank: dict[str, Any]) -> bool:"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 485,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "for topic in fact_bank.get(\"topics\", []):"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 497,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def relationship_report(model_bank: dict[str, Any], fact_bank: dict[str, Any]) -> None:"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 499,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topics = fact_bank.get(\"topics\", [])"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 520,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(f\"fact_anchors topics 수          : {len(topics)}\")"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 520,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(f\"fact_anchors topics 수          : {len(topics)}\")"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 521,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(f\"fact_anchors unique topic_id 수 : {len(fact_set)}\")"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 521,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(f\"fact_anchors unique topic_id 수 : {len(fact_set)}\")"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 533,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(\"\\nfact_anchors에만 있는 topic_id:\")"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 533,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(\"\\nfact_anchors에만 있는 topic_id:\")"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 562,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_bank = load_fact_anchor_bank(FACT_PATH)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 562,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "fact_bank = load_fact_anchor_bank(FACT_PATH)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 562,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_bank = load_fact_anchor_bank(FACT_PATH)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 568,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_bank = upsert_fact_anchor_topic(fact_bank, DIFF_PRESSURE_CAL_FACT)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 568,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_bank = upsert_fact_anchor_topic(fact_bank, DIFF_PRESSURE_CAL_FACT)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 569,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(\"upsert fact_anchor :\", DIFF_PRESSURE_CAL_FACT[\"topic_id\"])"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 569,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(\"upsert fact_anchor :\", DIFF_PRESSURE_CAL_FACT[\"topic_id\"])"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 571,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "if sanitize_flowmeter_triggers(fact_bank):"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 572,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(\"cleanup fact_anchor: flowmeter_dp_orifice triggers sanitized\")"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 572,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(\"cleanup fact_anchor: flowmeter_dp_orifice triggers sanitized\")"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 575,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_errors = validate_fact_anchor_bank_data(fact_bank)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 575,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_errors = validate_fact_anchor_bank_data(fact_bank)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 586,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "save_fact_anchor_bank(fact_bank, FACT_PATH)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 586,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "save_fact_anchor_bank(fact_bank, FACT_PATH)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 586,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "save_fact_anchor_bank(fact_bank, FACT_PATH)"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 592,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "relationship_report(model_bank, fact_bank)"
+    },
+    {
+      "file": "scripts/rubric_audit/analyze_model_answer_relationship_minors.py",
+      "line": 65,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "return \"fact_alignment_review\", \"fact anchor와 model answer 연결성 검토\""
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 56,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_evaluation.json\","
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 56,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_evaluation.json\","
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 90,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "7. C항목은 단순 키워드가 아니라 문제별 Fact Anchor로 평가해야 한다."
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 97,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "- fact anchor scoring"
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 106,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "- fact_anchor_evaluation.json"
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 106,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "- fact_anchor_evaluation.json"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 17,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_ANCHOR_AUDIT_CSV = REPORT_DIR / \"fact_anchor_quality_audit.csv\""
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 17,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_ANCHOR_AUDIT_CSV = REPORT_DIR / \"fact_anchor_quality_audit.csv\""
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 46,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_anchor: SeverityCount"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 46,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_anchor: SeverityCount"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 151,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"## Fact Anchor quality\","
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 153,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "f\"- MAJOR: {summary.fact_anchor.major}\","
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 153,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "f\"- MAJOR: {summary.fact_anchor.major}\","
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 154,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "f\"- MINOR: {summary.fact_anchor.minor}\","
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 154,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "f\"- MINOR: {summary.fact_anchor.minor}\","
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 155,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "f\"- total rows: {summary.fact_anchor.total}\","
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 155,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "f\"- total rows: {summary.fact_anchor.total}\","
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 178,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"1. Fact Anchor MAJOR = 0\","
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 199,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "(\"validate_fact_anchor_bank\", [\"python3\", \"scripts/validate_fact_anchor_bank.py\"], False),"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 199,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "(\"validate_fact_anchor_bank\", [\"python3\", \"scripts/validate_fact_anchor_bank.py\"], False),"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 200,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "(\"audit_fact_anchor_quality\", [\"python3\", \"scripts/rubric_audit/audit_fact_anchor_quality.py\"], False),"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 200,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "(\"audit_fact_anchor_quality\", [\"python3\", \"scripts/rubric_audit/audit_fact_anchor_quality.py\"], False),"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 223,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_anchor = count_severity_csv(FACT_ANCHOR_AUDIT_CSV)"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 223,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_anchor = count_severity_csv(FACT_ANCHOR_AUDIT_CSV)"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 237,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_anchor.major == 0"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 237,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_anchor.major == 0"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 244,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_anchor=fact_anchor,"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 244,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_anchor=fact_anchor,"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 258,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "print(f\"Fact Anchor: MAJOR={fact_anchor.major}, MINOR={fact_anchor.minor}\")"
+    },
+    {
+      "file": "scripts/rubric_audit/run_rubric_audit.py",
+      "line": 258,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(f\"Fact Anchor: MAJOR={fact_anchor.major}, MINOR={fact_anchor.minor}\")"
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 11,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_ANCHOR_BANK = ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 11,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_ANCHOR_BANK = ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 11,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_ANCHOR_BANK = ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 11,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_ANCHOR_BANK = ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 9,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_ANCHOR_BANK,"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 9,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_ANCHOR_BANK,"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 21,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def load_fact_anchor_bank(path: str | Path | None = None) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 21,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "def load_fact_anchor_bank(path: str | Path | None = None) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 21,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def load_fact_anchor_bank(path: str | Path | None = None) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 22,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "return read_json(project_path(path, FACT_ANCHOR_BANK))"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 22,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "return read_json(project_path(path, FACT_ANCHOR_BANK))"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 25,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def save_fact_anchor_bank(data: dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 25,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "def save_fact_anchor_bank(data: dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 25,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def save_fact_anchor_bank(data: dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 26,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "return write_json(project_path(path, FACT_ANCHOR_BANK), data)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 26,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "return write_json(project_path(path, FACT_ANCHOR_BANK), data)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 29,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def build_fact_anchor_topic_template(topic_id: str, name: str) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 29,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def build_fact_anchor_topic_template(topic_id: str, name: str) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 47,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def validate_fact_anchor_bank_data(data: dict[str, Any]) -> list[str]:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 47,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def validate_fact_anchor_bank_data(data: dict[str, Any]) -> list[str]:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 108,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def upsert_fact_anchor_topic(bank: dict[str, Any], topic: dict[str, Any]) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 108,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def upsert_fact_anchor_topic(bank: dict[str, Any], topic: dict[str, Any]) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 123,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_list_fact_anchors(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 123,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def cmd_list_fact_anchors(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 124,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = load_fact_anchor_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 124,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = load_fact_anchor_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 124,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank = load_fact_anchor_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 146,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_new_fact_anchor_topic(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 146,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def cmd_new_fact_anchor_topic(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 147,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "entry = build_fact_anchor_topic_template(args.topic_id, args.name)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 147,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "entry = build_fact_anchor_topic_template(args.topic_id, args.name)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 151,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "out = Path(args.out) if args.out else candidate_path(\"fact_anchors\", entry[\"topic_id\"])"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 151,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "out = Path(args.out) if args.out else candidate_path(\"fact_anchors\", entry[\"topic_id\"])"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 157,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_promote_fact_anchor_topic(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 157,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def cmd_promote_fact_anchor_topic(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 171,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank_path = project_path(args.bank, FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 171,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank_path = project_path(args.bank, FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 172,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = load_fact_anchor_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 172,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = load_fact_anchor_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 172,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank = load_fact_anchor_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 180,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "errors = validate_fact_anchor_bank_data(temp)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 180,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "errors = validate_fact_anchor_bank_data(temp)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 199,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "upsert_fact_anchor_topic(bank, entry)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 199,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "upsert_fact_anchor_topic(bank, entry)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 200,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "save_fact_anchor_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 200,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "save_fact_anchor_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 200,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "save_fact_anchor_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 206,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_delete_fact_anchor_topic(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 206,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def cmd_delete_fact_anchor_topic(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 207,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank_path = project_path(args.bank, FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 207,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank_path = project_path(args.bank, FACT_ANCHOR_BANK)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 208,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = load_fact_anchor_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 208,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = load_fact_anchor_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 208,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank = load_fact_anchor_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 222,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "errors = validate_fact_anchor_bank_data(bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 222,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "errors = validate_fact_anchor_bank_data(bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 232,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "save_fact_anchor_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 232,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "save_fact_anchor_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 232,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "save_fact_anchor_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 238,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_validate_fact_anchors(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 238,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def cmd_validate_fact_anchors(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 239,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = load_fact_anchor_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 239,
+      "pattern": "fact_anchor_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = load_fact_anchor_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 239,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank = load_fact_anchor_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 240,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "errors = validate_fact_anchor_bank_data(bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 240,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "errors = validate_fact_anchor_bank_data(bank)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 254,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p = sub.add_parser(\"list-fact-anchors\", help=\"List fact anchor topics\")"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 258,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_list_fact_anchors)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 258,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_list_fact_anchors)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 265,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_new_fact_anchor_topic)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 265,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_new_fact_anchor_topic)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 267,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p = sub.add_parser(\"promote-fact-anchor-topic\", help=\"Promote candidate into fact anchor bank\")"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 272,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_promote_fact_anchor_topic, backup=True)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 272,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_promote_fact_anchor_topic, backup=True)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 274,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p = sub.add_parser(\"delete-fact-anchor-topic\", help=\"Delete fact anchor topic\")"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 278,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_delete_fact_anchor_topic, backup=True)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 278,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_delete_fact_anchor_topic, backup=True)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 280,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p = sub.add_parser(\"validate-fact-anchors\", help=\"Validate fact anchor bank\")"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 282,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_validate_fact_anchors)"
+    },
+    {
+      "file": "scripts/rubric_content/fact_anchors.py",
+      "line": 282,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_validate_fact_anchors)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 22,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"audit-fact-anchor-usage\": \"scripts/audit_fact_anchor_usage.py\","
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 22,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"audit-fact-anchor-usage\": \"scripts/audit_fact_anchor_usage.py\","
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 127,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_audit_fact_anchor_usage(_args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 127,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def cmd_audit_fact_anchor_usage(_args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 193,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "help=\"Audit source files for fact anchor runtime path usage\","
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 195,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_audit_fact_anchor_usage)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 195,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_audit_fact_anchor_usage)"
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 31,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"scripts/validate_fact_anchor_bank.py\","
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 31,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"scripts/validate_fact_anchor_bank.py\","
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 66,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"scripts/rubric_content/fact_anchors.py\","
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 66,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"scripts/rubric_content/fact_anchors.py\","
+    },
+    {
+      "file": "scripts/rubric_manager.py",
+      "line": 12,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "from rubric_content import fact_anchors  # noqa: E402"
+    },
+    {
+      "file": "scripts/rubric_manager.py",
+      "line": 12,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "from rubric_content import fact_anchors  # noqa: E402"
+    },
+    {
+      "file": "scripts/rubric_manager.py",
+      "line": 28,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_anchors.add_parsers(sub)"
+    },
+    {
+      "file": "scripts/rubric_manager.py",
+      "line": 28,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_anchors.add_parsers(sub)"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 15,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_BANK = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 15,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_BANK = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 15,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_BANK = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 15,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_BANK = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 143,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def fact_anchor_candidate() -> dict:"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 143,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def fact_anchor_candidate() -> dict:"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 144,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topic_id = \"crud_test_fact_anchor\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 144,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "topic_id = \"crud_test_fact_anchor\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 147,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"name\": \"[CRUD TEST] Fact Anchor\","
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 148,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"aliases\": [\"CRUD TEST\", \"Fact Anchor CRUD 검증\"],"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 242,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def test_fact_anchor(tmp: Path) -> None:"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 242,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def test_fact_anchor(tmp: Path) -> None:"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 243,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "print(\"\\n=== TEST Fact Anchor CRUD ===\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 245,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = tmp / \"fact_anchors.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 245,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "bank = tmp / \"fact_anchors.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 246,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "cand = tmp / \"fact_anchor_candidate.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 246,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "cand = tmp / \"fact_anchor_candidate.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 247,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "shutil.copy2(FACT_BANK, bank)"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 250,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "entry = fact_anchor_candidate()"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 250,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "entry = fact_anchor_candidate()"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 271,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "raise AssertionError(\"fact anchor add did not increase count\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 272,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "assert_topic_exists(bank, target_id, \"name\", \"[CRUD TEST] Fact Anchor\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 274,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "entry[\"name\"] = \"[CRUD TEST] Fact Anchor Updated\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 287,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "raise AssertionError(\"fact anchor update created duplicate\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 288,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "assert_topic_exists(bank, target_id, \"name\", \"[CRUD TEST] Fact Anchor Updated\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 299,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "raise AssertionError(\"fact anchor delete did not restore count\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 371,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "test_fact_anchor(tmp)"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 371,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "test_fact_anchor(tmp)"
+    },
+    {
+      "file": "scripts/validate_fact_anchor_bank.py",
+      "line": 4,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "path = Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "scripts/validate_fact_anchor_bank.py",
+      "line": 4,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "path = Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "scripts/validate_fact_anchor_bank.py",
+      "line": 4,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "path = Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "scripts/validate_fact_anchor_bank.py",
+      "line": 4,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "path = Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 13,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors.generated.json\","
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 13,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchors.generated.json\","
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 91,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact = load_json(GENERATED_DIR / \"fact_anchors.generated.json\")"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 91,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact = load_json(GENERATED_DIR / \"fact_anchors.generated.json\")"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 99,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "require_list(fact.get(\"topics\"), \"fact_anchors.generated.json topics\"),"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 99,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "require_list(fact.get(\"topics\"), \"fact_anchors.generated.json topics\"),"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 100,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors.generated.json topics\","
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 100,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchors.generated.json topics\","
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 124,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchors\": fact_ids,"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 124,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchors\": fact_ids,"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 9,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 9,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 9,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 9,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 39,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "errors.append(\"fact_anchors JSON must contain list field: topics\")"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 39,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "errors.append(\"fact_anchors JSON must contain list field: topics\")"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 165,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "errors.append(f\"topic_id exists in model_answers but not in fact_anchors: {tid}\")"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 165,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "errors.append(f\"topic_id exists in model_answers but not in fact_anchors: {tid}\")"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 168,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "warnings.append(f\"topic_id exists in fact_anchors but has no model_answer: {tid}\")"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 168,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "warnings.append(f\"topic_id exists in fact_anchors but has no model_answer: {tid}\")"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 74,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def validate_fact_anchor(pack_dir: Path, topic_id: str, global_anchor_ids: set[str]) -> set[str]:"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 74,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "def validate_fact_anchor(pack_dir: Path, topic_id: str, global_anchor_ids: set[str]) -> set[str]:"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 75,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "path = pack_dir / \"fact_anchor.json\""
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 75,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "path = pack_dir / \"fact_anchor.json\""
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 77,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fail(f\"{pack_dir}: missing fact_anchor.json\")"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 77,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fail(f\"{pack_dir}: missing fact_anchor.json\")"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 294,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "anchor_ids = validate_fact_anchor(pack_dir, topic_id, global_anchor_ids)"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 294,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "anchor_ids = validate_fact_anchor(pack_dir, topic_id, global_anchor_ids)"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 22,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 22,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 22,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 22,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 41,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "(\"fact_anchor_bank\", [\"scripts/validate_fact_anchor_bank.py\"]),"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 41,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "(\"fact_anchor_bank\", [\"scripts/validate_fact_anchor_bank.py\"]),"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 255,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_anchor_bank: dict[str, Any],"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 255,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_anchor_bank: dict[str, Any],"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 258,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topics = collection(fact_anchor_bank, \"topics\")"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 258,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "topics = collection(fact_anchor_bank, \"topics\")"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 342,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "# than a single Fact Anchor topic. Existing validate-topic-importance"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 349,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "f\"{topic_id} is not a fact_anchor topic_id; treated as umbrella/strategy topic\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 349,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "f\"{topic_id} is not a fact_anchor topic_id; treated as umbrella/strategy topic\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 501,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fact_topic_ids = validate_fact_topics(data[\"fact_anchor_bank\"], errors)"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 501,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "fact_topic_ids = validate_fact_topics(data[\"fact_anchor_bank\"], errors)"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 541,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"fact_anchor_bank\": {"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 541,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "\"fact_anchor_bank\": {"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 61,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "name=\"fact_anchor_bank\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 61,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "name=\"fact_anchor_bank\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 62,
+      "pattern": "direct_fact_anchor_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "path=\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 62,
+      "pattern": "industrial_fact_anchor_file",
+      "classification": "direct_runtime_candidate",
+      "text": "path=\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 62,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "path=\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 62,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "path=\"rubrics/fact_anchors/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 63,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "required_any_keys=(\"topics\", \"fact_anchors\"),"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 63,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "required_any_keys=(\"topics\", \"fact_anchors\"),"
+    },
+    {
+      "file": "semantic_question_type_prompt.py",
+      "line": 195,
+      "pattern": "fact_anchor_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "7. 기존 layers, fact_anchor_review, connection_review도 유지하되 question_type_coverage를 반드시 추가한다."
+    },
+    {
+      "file": "semantic_question_type_prompt.py",
+      "line": 195,
+      "pattern": "fact_anchor_text",
+      "classification": "reference_only",
+      "text": "7. 기존 layers, fact_anchor_review, connection_review도 유지하되 question_type_coverage를 반드시 추가한다."
+    }
+  ]
+}
