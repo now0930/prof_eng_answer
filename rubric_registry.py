@@ -14,6 +14,7 @@ BASE_DIR = Path(__file__).resolve().parent
 QUESTION_TYPE_PROFILE = BASE_DIR / "rubrics" / "question_types" / "default.json"
 MODEL_ANSWER_BANK = BASE_DIR / "rubrics" / "model_answers" / "industrial_instrumentation_control.json"
 FACT_ANCHOR_BANK = BASE_DIR / "rubrics" / "fact_anchors" / "industrial_instrumentation_control.json"
+TOPIC_IMPORTANCE_BANK = BASE_DIR / "rubrics" / "topic_importance" / "industrial_instrumentation_control.json"
 
 
 def project_path(path: str | Path) -> Path:
@@ -190,6 +191,33 @@ def load_fact_anchor_bank(path: str | Path | None = None) -> Dict[str, Any]:
 
 def save_fact_anchor_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:
     return write_json(path or FACT_ANCHOR_BANK, data)
+
+
+def load_topic_importance_bank(path: str | Path | None = None) -> Dict[str, Any]:
+    candidates = []
+
+    if path:
+        candidates.append(project_path(path))
+    else:
+        candidates.append(resolve_rubric_bank_path("topic_importance"))
+
+    for p in candidates:
+        try:
+            if p.exists():
+                return json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+
+    return {
+        "version": "topic_importance_bank_empty",
+        "subject": "unknown",
+        "policy": {},
+        "topics": [],
+    }
+
+
+def save_topic_importance_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:
+    return write_json(path or TOPIC_IMPORTANCE_BANK, data)
 
 
 def model_answer_key(entry: Dict[str, Any]) -> str:
