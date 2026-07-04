@@ -1,0 +1,15 @@
+{
+  "topic_id": "second_order_lag_response_by_damping_ratio",
+  "status": "frozen",
+  "review_state": "not_reviewed",
+  "content_hash": "sha256:d41ca97125f10f1f331192b0d8d536507f2f98c07d095666fbff0603c18974b5",
+  "last_validated_at": "2026-07-04T10:00:05",
+  "last_reviewed_at": "",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-07-04T10:00:05",
+  "frozen_at": "2026-07-04T10:00:05",
+  "notes": [
+    "2026-07-04T10:00:05: initial frozen topic pack"
+  ]
+}

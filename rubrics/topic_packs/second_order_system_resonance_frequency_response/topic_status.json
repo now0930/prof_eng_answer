@@ -1,0 +1,15 @@
+{
+  "topic_id": "second_order_system_resonance_frequency_response",
+  "status": "frozen",
+  "review_state": "reviewed",
+  "content_hash": "sha256:977fcbb4ac86b1117a90d77004318ecfc7b360331b18e9c8e74963226193eff4",
+  "last_validated_at": "2026-07-04T10:00:05",
+  "last_reviewed_at": "2026-07-04T10:00:05",
+  "last_review_model": "gemini-2.5-flash",
+  "last_review_report": "",
+  "approved_at": "2026-07-04T10:00:05",
+  "frozen_at": "2026-07-04T10:00:05",
+  "notes": [
+    "2026-07-04T10:00:05: initial frozen topic pack"
+  ]
+}

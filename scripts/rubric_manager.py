@@ -29,6 +29,30 @@ except Exception as _ctpg_exc:
     raise SystemExit(f"create-topic-pack dispatch failed: {_ctpg_exc}")
 # END_CREATE_TOPIC_PACK_COMMAND_PATCH
 
+# TOPIC_PACK_STATUS_AND_REVIEW_ALL_COMMAND_PATCH
+# Lightweight early dispatch for topic status and bulk review commands.
+try:
+    import sys as _tps_sys
+    if len(_tps_sys.argv) > 1 and _tps_sys.argv[1] in {"topic-pack-status", "review-topic-pack-all"}:
+        import importlib.util as _tps_importlib_util
+        from pathlib import Path as _tps_Path
+
+        _tps_command = _tps_sys.argv[1]
+        _tps_module_name = "topic_pack_status.py" if _tps_command == "topic-pack-status" else "review_topic_pack_all.py"
+        _tps_path = _tps_Path(__file__).resolve().parent / _tps_module_name
+        _tps_spec = _tps_importlib_util.spec_from_file_location("_topic_pack_status_dispatch_module", _tps_path)
+        if _tps_spec is None or _tps_spec.loader is None:
+            raise RuntimeError(f"cannot load {_tps_path}")
+        _tps_mod = _tps_importlib_util.module_from_spec(_tps_spec)
+        _tps_spec.loader.exec_module(_tps_mod)
+        raise SystemExit(_tps_mod.main(_tps_sys.argv[2:]))
+except SystemExit:
+    raise
+except Exception as _tps_exc:
+    raise SystemExit(f"topic-pack status/review-all dispatch failed: {_tps_exc}")
+# END_TOPIC_PACK_STATUS_AND_REVIEW_ALL_COMMAND_PATCH
+
+
 # REVIEW_TOPIC_PACK_COMMAND_PATCH
 # Lightweight early dispatch for Ollama topic-pack review.
 try:
