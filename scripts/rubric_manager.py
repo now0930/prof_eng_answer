@@ -29,6 +29,33 @@ except Exception as _ctpg_exc:
     raise SystemExit(f"create-topic-pack dispatch failed: {_ctpg_exc}")
 # END_CREATE_TOPIC_PACK_COMMAND_PATCH
 
+# VALIDATE_TOPIC_PACK_QUALITY_COMMAND_PATCH
+# Lightweight early dispatch for topic_pack authoring quality validation.
+try:
+    import sys as _vtpq_sys
+    if len(_vtpq_sys.argv) > 1 and _vtpq_sys.argv[1] == "validate-topic-pack-quality":
+        import importlib.util as _vtpq_importlib_util
+        from pathlib import Path as _vtpq_Path
+
+        _vtpq_path = _vtpq_Path(__file__).resolve().parent / "validate_topic_pack_quality.py"
+        _vtpq_spec = _vtpq_importlib_util.spec_from_file_location(
+            "_validate_topic_pack_quality_module",
+            _vtpq_path,
+        )
+        if _vtpq_spec is None or _vtpq_spec.loader is None:
+            raise RuntimeError(f"cannot load {_vtpq_path}")
+
+        _vtpq_mod = _vtpq_importlib_util.module_from_spec(_vtpq_spec)
+        _vtpq_spec.loader.exec_module(_vtpq_mod)
+
+        raise SystemExit(_vtpq_mod.main(_vtpq_sys.argv[2:]))
+except SystemExit:
+    raise
+except Exception as _vtpq_exc:
+    raise SystemExit(f"validate-topic-pack-quality dispatch failed: {_vtpq_exc}")
+# END_VALIDATE_TOPIC_PACK_QUALITY_COMMAND_PATCH
+
+
 # SMOKE_TOPIC_PACK_COMMAND_PATCH
 # Lightweight early dispatch for topic-pack routing smoke.
 try:
