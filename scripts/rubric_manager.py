@@ -29,6 +29,33 @@ except Exception as _ctpg_exc:
     raise SystemExit(f"create-topic-pack dispatch failed: {_ctpg_exc}")
 # END_CREATE_TOPIC_PACK_COMMAND_PATCH
 
+# SMOKE_TOPIC_PACK_COMMAND_PATCH
+# Lightweight early dispatch for topic-pack routing smoke.
+try:
+    import sys as _stpg_sys
+    if len(_stpg_sys.argv) > 1 and _stpg_sys.argv[1] == "smoke-topic-pack":
+        import importlib.util as _stpg_importlib_util
+        from pathlib import Path as _stpg_Path
+
+        _stpg_path = _stpg_Path(__file__).resolve().parent / "smoke_topic_pack.py"
+        _stpg_spec = _stpg_importlib_util.spec_from_file_location(
+            "_smoke_topic_pack_module",
+            _stpg_path,
+        )
+        if _stpg_spec is None or _stpg_spec.loader is None:
+            raise RuntimeError(f"cannot load {_stpg_path}")
+
+        _stpg_mod = _stpg_importlib_util.module_from_spec(_stpg_spec)
+        _stpg_spec.loader.exec_module(_stpg_mod)
+
+        raise SystemExit(_stpg_mod.main(_stpg_sys.argv[2:]))
+except SystemExit:
+    raise
+except Exception as _stpg_exc:
+    raise SystemExit(f"smoke-topic-pack dispatch failed: {_stpg_exc}")
+# END_SMOKE_TOPIC_PACK_COMMAND_PATCH
+
+
 
 import argparse
 import sys
