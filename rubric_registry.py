@@ -6,11 +6,14 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
+from rubric_bank_paths import resolve_rubric_bank_path
+
 
 BASE_DIR = Path(__file__).resolve().parent
 
 QUESTION_TYPE_PROFILE = BASE_DIR / "rubrics" / "question_types" / "default.json"
 MODEL_ANSWER_BANK = BASE_DIR / "rubrics" / "model_answers" / "industrial_instrumentation_control.json"
+FACT_ANCHOR_BANK = BASE_DIR / "rubrics" / "fact_anchors" / "industrial_instrumentation_control.json"
 
 
 def project_path(path: str | Path) -> Path:
@@ -137,9 +140,11 @@ def get_question_type(profile: Dict[str, Any], type_id: str) -> Optional[Dict[st
 
 def load_model_answer_bank(path: str | Path | None = None) -> Dict[str, Any]:
     candidates = []
+
     if path:
         candidates.append(project_path(path))
-    candidates.append(MODEL_ANSWER_BANK)
+    else:
+        candidates.append(resolve_rubric_bank_path("model_answers"))
 
     for p in candidates:
         try:
@@ -158,6 +163,33 @@ def load_model_answer_bank(path: str | Path | None = None) -> Dict[str, Any]:
 
 def save_model_answer_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:
     return write_json(path or MODEL_ANSWER_BANK, data)
+
+
+def load_fact_anchor_bank(path: str | Path | None = None) -> Dict[str, Any]:
+    candidates = []
+
+    if path:
+        candidates.append(project_path(path))
+    else:
+        candidates.append(resolve_rubric_bank_path("fact_anchors"))
+
+    for p in candidates:
+        try:
+            if p.exists():
+                return json.loads(p.read_text(encoding="utf-8"))
+        except Exception:
+            continue
+
+    return {
+        "version": "fact_anchor_bank_empty",
+        "subject": "unknown",
+        "policy": {},
+        "topics": [],
+    }
+
+
+def save_fact_anchor_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:
+    return write_json(path or FACT_ANCHOR_BANK, data)
 
 
 def model_answer_key(entry: Dict[str, Any]) -> str:
