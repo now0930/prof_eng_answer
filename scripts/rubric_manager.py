@@ -29,6 +29,33 @@ except Exception as _ctpg_exc:
     raise SystemExit(f"create-topic-pack dispatch failed: {_ctpg_exc}")
 # END_CREATE_TOPIC_PACK_COMMAND_PATCH
 
+# REVIEW_TOPIC_PACK_COMMAND_PATCH
+# Lightweight early dispatch for Ollama topic-pack review.
+try:
+    import sys as _rtp_sys
+    if len(_rtp_sys.argv) > 1 and _rtp_sys.argv[1] == "review-topic-pack":
+        import importlib.util as _rtp_importlib_util
+        from pathlib import Path as _rtp_Path
+
+        _rtp_path = _rtp_Path(__file__).resolve().parent / "review_topic_pack.py"
+        _rtp_spec = _rtp_importlib_util.spec_from_file_location(
+            "_review_topic_pack_module",
+            _rtp_path,
+        )
+        if _rtp_spec is None or _rtp_spec.loader is None:
+            raise RuntimeError(f"cannot load {_rtp_path}")
+
+        _rtp_mod = _rtp_importlib_util.module_from_spec(_rtp_spec)
+        _rtp_spec.loader.exec_module(_rtp_mod)
+
+        raise SystemExit(_rtp_mod.main(_rtp_sys.argv[2:]))
+except SystemExit:
+    raise
+except Exception as _rtp_exc:
+    raise SystemExit(f"review-topic-pack dispatch failed: {_rtp_exc}")
+# END_REVIEW_TOPIC_PACK_COMMAND_PATCH
+
+
 # VALIDATE_TOPIC_PACK_RELEASE_COMMAND_PATCH
 # Lightweight early dispatch for full topic_pack release validation.
 try:
