@@ -1,0 +1,615 @@
+{
+  "summary": {
+    "generated_at": "20260704_104212",
+    "total_topics": 60,
+    "topic_pack_topics": 1,
+    "generated_topics": 1,
+    "runtime_topics": 60,
+    "status_counts": {
+      "runtime_only": 59,
+      "source_and_generated_and_runtime": 1
+    }
+  },
+  "rows": [
+    {
+      "topic_id": "adc_dac_signal_conversion_interface",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "calibration_error_accuracy_precision",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "camera_lidar_radar_sensor_comparison",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "classification_model_precision_recall_f1_evaluation",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "continuous_discrete_control_model_comparison",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "control_theory_general",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/topic_importance/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "control_valve_actuator_types_selection",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "control_valve_body_trim_selection",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "control_valve_cavitation",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "cv_valve_flow_coefficient",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json; rubrics/topic_importance/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "dc_dc_chopper_buck_converter",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "differential_pressure_transmitter_calibration",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "doppler_effect_velocity_flow_measurement",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "energy_harvesting_wireless_sensor_power",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "explosion_safety_sil_sis",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "feedback_system",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/topic_importance/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "flowmeter_dp_orifice",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "frame_grounding_shielding_noise_control",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "frequency_response",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/topic_importance/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "gpib_scpi_instrumentation_communication",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "hart_fims_field_instrument_management",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "hmi_scada",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "induction_motor_dq_reference_frame_equivalent_circuit",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "industrial_communication_protocol",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "industrial_ethernet_realtime_network",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "industrial_robot_degrees_of_freedom",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "level_measurement_sensor_selection",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "local_instrument_cabinet_installation",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "measurement_repeatability_reproducibility",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "mems_comb_drive_electrostatic_actuator",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "motor_inverter_drive",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "noise_grounding_surge",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "photodiode_light_sensor_operation_modes",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "pid_control",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "plc_dcs_remote_io",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "power_semiconductor_switching_device_characteristics",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "pressure_dp_transmitter",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "pressure_gauge_accessories_installation",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "pressure_transmitter_datasheet_specification",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "psd_position_sensitive_detector_optical_sensor",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "rectifier_source_inductance_commutation_overlap",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "reference_tracking_prefilter_steady_state_error_control",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "reliability_maintainability_availability_ram",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "second_order_lag_response_by_damping_ratio",
+      "in_topic_pack": true,
+      "in_generated": true,
+      "in_runtime": true,
+      "topic_pack_paths": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio; rubrics/topic_packs/second_order_lag_response_by_damping_ratio/fact_anchor.json; rubrics/topic_packs/second_order_lag_response_by_damping_ratio/logic_check.json; rubrics/topic_packs/second_order_lag_response_by_damping_ratio/model_answer.json; rubrics/topic_packs/second_order_lag_response_by_damping_ratio/topic_importance.json",
+      "generated_paths": "rubrics/generated/fact_anchors.generated.json; rubrics/generated/logic_check_profiles.generated.json; rubrics/generated/logic_checks.generated.json; rubrics/generated/model_answers.generated.json; rubrics/generated/topic_importance.generated.json",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/logic_check_profiles/industrial_instrumentation_control.json; rubrics/logic_checks/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "source_and_generated_and_runtime"
+    },
+    {
+      "topic_id": "second_order_system",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/topic_importance/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "second_order_system_resonance_frequency_response",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "sensor_linearization_transfer_function_approximation",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "sensor_static_dynamic_performance_characteristics",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "smart_factory_iiot_digital_twin",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json; rubrics/topic_importance/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "smart_mcc_motor_control_center_monitoring",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "stability_analysis",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/topic_importance/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "temperature_measurement_error_heat_transfer",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "temperature_sensor_thermocouple_rtd",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json; rubrics/topic_importance/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "temperature_sensor_thermowell_material_selection",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "thermopile_noncontact_ir_temperature_sensor",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "transfer_function_state_space",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "vibration_measurement_condition_monitoring",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "wheatstone_bridge_null_balance_measurement",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    },
+    {
+      "topic_id": "wirelesshart_isa100_wireless_instrument_network",
+      "in_topic_pack": false,
+      "in_generated": false,
+      "in_runtime": true,
+      "topic_pack_paths": "",
+      "generated_paths": "",
+      "runtime_paths": "rubrics/fact_anchors/industrial_instrumentation_control.json; rubrics/model_answers/industrial_instrumentation_control.json",
+      "status": "runtime_only"
+    }
+  ]
+}

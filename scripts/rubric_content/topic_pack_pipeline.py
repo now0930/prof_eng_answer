@@ -15,6 +15,7 @@ PIPELINE_SCRIPTS = [
 ]
 
 AUDIT_SCRIPT = "scripts/audit_generated_vs_runtime.py"
+TOPIC_ID_AUDIT_SCRIPT = "scripts/audit_topic_id_consistency.py"
 
 
 def run_script(path: str) -> int:
@@ -84,6 +85,19 @@ def cmd_audit_generated_vs_runtime(_args: argparse.Namespace) -> int:
     return rc
 
 
+def cmd_audit_topic_id_consistency(_args: argparse.Namespace) -> int:
+    rc = py_compile_pipeline_scripts()
+
+    audit_path = ROOT / TOPIC_ID_AUDIT_SCRIPT
+    if not audit_path.exists():
+        print("ERROR missing:", TOPIC_ID_AUDIT_SCRIPT)
+        return 1
+
+    print("RUN:", TOPIC_ID_AUDIT_SCRIPT)
+    rc = max(rc, subprocess.call([sys.executable, str(audit_path)], cwd=str(ROOT)))
+    return rc
+
+
 def add_parser(sub) -> None:
     p = sub.add_parser(
         "validate-topic-packs",
@@ -115,3 +129,10 @@ def add_parser(sub) -> None:
         help="Audit generated rubric banks against current runtime JSON files",
     )
     p.set_defaults(func=cmd_audit_generated_vs_runtime)
+
+
+    p = sub.add_parser(
+        "audit-topic-id-consistency",
+        help="Audit topic_id coverage across topic packs, generated files, and runtime JSON files",
+    )
+    p.set_defaults(func=cmd_audit_topic_id_consistency)
