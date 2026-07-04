@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-04T07:15:11Z-generated-topic-pack-importance",
+  "version": "2026-07-04T13:43:00Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -15,10 +15,12 @@
         "표준 2차 전달함수 또는 특성방정식을 제시한다.",
         "감쇠비와 극점 위치를 연결한다.",
         "감쇠비 구간별 응답 특성을 비교한다.",
-        "현장 튜닝 trade-off를 설명한다.",
+        "오버슈트, 진동성, 상승시간, 정착시간을 함께 비교한다.",
+        "ζ=1 임계감쇠를 중근과 연결하되, 모든 현장에서 항상 최적이라고 단정하지 않는다.",
+        "현장 튜닝에서 응답속도와 안정성의 trade-off를 설명한다.",
         "fatal logic error가 없다."
       ],
-      "note": "2차 시스템과 감쇠비는 제어이론의 핵심 변별 주제이므로, 단순 정의보다 극점-응답-현장 튜닝 연결성이 중요하다."
+      "note": "2차 시스템과 감쇠비는 제어이론의 핵심 변별 주제이며, 감쇠비별 응답 특성은 핵심 변별 영역이다. 단순 정의나 정답표 암기보다는 극점-응답-현장 튜닝 연결성을 통해 고득점이 가능하다."
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

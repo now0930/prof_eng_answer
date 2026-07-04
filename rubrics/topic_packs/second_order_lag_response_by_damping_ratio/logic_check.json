@@ -200,7 +200,10 @@
           "과대\\s*감쇠.{0,60}중근",
           "과\\s*감쇠.{0,60}반복\\s*실근",
           "over\\s*damped.{0,60}repeated\\s*root",
-          "over\\s*damped.{0,60}double\\s*root"
+          "over\\s*damped.{0,60}double\\s*root",
+          "over\\s*damp(?:ed|ing)?.{0,80}중근",
+          "over\\s*damp(?:ed|ing)?\\s*(?:=>|→|=).{0,40}중근",
+          "overdamped\\s*(?:=>|→|=).{0,40}중근"
         ],
         "message": "과감쇠를 중근 조건으로 잘못 설명하였다.",
         "correct_rule": "과감쇠는 서로 다른 두 실근을 가지며, 중근은 임계감쇠 조건이다.",
