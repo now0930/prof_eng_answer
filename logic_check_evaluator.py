@@ -436,7 +436,55 @@ def evaluate_logic_checks(
     topic_name = None
     recommended_ceiling: float | None = None
 
-    for topic_check in bank.get("topic_logic_checks", []):
+
+    # LOGIC_CHECK_PREFERRED_TOPIC_PATCH
+    # Prefer a precise topic selected by upstream model-answer routing.
+    # Without this, broad keyword overlap can make phase3b apply a neighboring
+    # topic's deterministic checks, e.g. damping-ratio checks on a resonance
+    # frequency-response answer.
+    _topic_logic_checks_for_evaluation = bank.get("topic_logic_checks", [])
+
+    try:
+        _preferred_logic_topic_id = None
+
+        for _key in ("logic_check_topic_id", "topic_id", "inferred_topic_id", "primary_topic_id"):
+            _value = grade.get(_key) if isinstance(grade, dict) else None
+            if isinstance(_value, str) and _value.strip():
+                _preferred_logic_topic_id = _value.strip()
+                break
+
+        if not _preferred_logic_topic_id and isinstance(grade, dict):
+            _ref = grade.get("model_answer_reference") or {}
+            if isinstance(_ref, dict):
+                _primary = _ref.get("primary_reference") or {}
+                if isinstance(_primary, dict):
+                    _value = _primary.get("topic_id")
+                    if isinstance(_value, str) and _value.strip():
+                        _preferred_logic_topic_id = _value.strip()
+
+                if not _preferred_logic_topic_id:
+                    _candidates = _ref.get("candidates") or []
+                    if isinstance(_candidates, list) and _candidates:
+                        _answer = (_candidates[0].get("answer") or {})
+                        if isinstance(_answer, dict):
+                            _value = _answer.get("topic_id")
+                            if isinstance(_value, str) and _value.strip():
+                                _preferred_logic_topic_id = _value.strip()
+
+        if _preferred_logic_topic_id and isinstance(_topic_logic_checks_for_evaluation, list):
+            _matched_topic_checks = [
+                _topic_check
+                for _topic_check in _topic_logic_checks_for_evaluation
+                if isinstance(_topic_check, dict)
+                and _topic_check.get("topic_id") == _preferred_logic_topic_id
+            ]
+
+            if _matched_topic_checks:
+                _topic_logic_checks_for_evaluation = _matched_topic_checks
+    except Exception:
+        _topic_logic_checks_for_evaluation = bank.get("topic_logic_checks", [])
+
+    for topic_check in _topic_logic_checks_for_evaluation:
         if not topic_check.get("enabled", True):
             continue
 

@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-04T06:07:32Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-04T07:15:11Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",

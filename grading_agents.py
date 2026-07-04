@@ -3000,6 +3000,42 @@ def _phase2_postprocess_grade(legacy_result):
     try:
         from logic_check_evaluator import attach_logic_check_to_grade
 
+
+        # PHASE3B_LOGIC_CHECK_TOPIC_ROUTING_PATCH
+        # Logic check runs before the final difficulty strategy layer. Expose
+        # the best known precise topic_id first, otherwise the logic checker can
+        # fall back to a broader/neighboring topic based only on keyword overlap.
+        try:
+            _logic_topic_id = None
+
+            if isinstance(model_answer_ref, dict):
+                _primary = model_answer_ref.get("primary_reference") or {}
+                if isinstance(_primary, dict):
+                    _logic_topic_id = _primary.get("topic_id")
+
+                if not _logic_topic_id:
+                    _candidates = model_answer_ref.get("candidates") or []
+                    if isinstance(_candidates, list) and _candidates:
+                        _first_answer = (_candidates[0].get("answer") or {})
+                        if isinstance(_first_answer, dict):
+                            _logic_topic_id = _first_answer.get("topic_id")
+
+            if not _logic_topic_id and isinstance(grade, dict):
+                _logic_topic_id = grade.get("topic_id") or grade.get("inferred_topic_id")
+
+            if not _logic_topic_id and isinstance(fact_eval, dict):
+                _logic_topic_id = fact_eval.get("topic_id")
+
+            if _logic_topic_id and isinstance(grade, dict):
+                # Deliberately assign, not setdefault: a broad topic such as
+                # second_order_system should not override the precise
+                # model-answer reference topic.
+                grade["topic_id"] = _logic_topic_id
+                grade["inferred_topic_id"] = _logic_topic_id
+                grade["logic_check_topic_id"] = _logic_topic_id
+        except Exception:
+            pass
+
         grade = attach_logic_check_to_grade(grade, input_text)
         logic_eval = grade.get("logic_check_evaluation")
 
