@@ -5,14 +5,14 @@ import os
 import re
 import urllib.request
 from pathlib import Path
+from rubric_bank_paths import resolve_rubric_bank_path
 from typing import Any
 
 
 BASE_DIR = Path(__file__).resolve().parent
 
-DEFAULT_PROFILE_PATH = (
-    BASE_DIR / "rubrics" / "logic_check_profiles" / "industrial_instrumentation_control.json"
-)
+DEFAULT_PROFILE_PATH = resolve_rubric_bank_path("logic_check_profiles")
+# LOGIC_CHECK_PROFILE_PATH remains a manual override; otherwise follow RUBRIC_BANK_MODE.
 
 LOGIC_CHECK_PROFILE_PATH = Path(
     os.getenv("LOGIC_CHECK_PROFILE_PATH", str(DEFAULT_PROFILE_PATH))
