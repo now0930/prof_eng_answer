@@ -16,6 +16,7 @@ PIPELINE_SCRIPTS = [
 
 AUDIT_SCRIPT = "scripts/audit_generated_vs_runtime.py"
 TOPIC_ID_AUDIT_SCRIPT = "scripts/audit_topic_id_consistency.py"
+SCHEMA_AUDIT_SCRIPT = "scripts/audit_generated_runtime_schema.py"
 
 
 def run_script(path: str) -> int:
@@ -85,6 +86,20 @@ def cmd_audit_generated_vs_runtime(_args: argparse.Namespace) -> int:
     return rc
 
 
+
+
+def cmd_audit_generated_runtime_schema(_args: argparse.Namespace) -> int:
+    rc = py_compile_pipeline_scripts()
+
+    audit_path = ROOT / SCHEMA_AUDIT_SCRIPT
+    if not audit_path.exists():
+        print("ERROR missing:", SCHEMA_AUDIT_SCRIPT)
+        return 1
+
+    print("RUN:", SCHEMA_AUDIT_SCRIPT)
+    rc = max(rc, subprocess.call([sys.executable, str(audit_path)], cwd=str(ROOT)))
+    return rc
+
 def cmd_audit_topic_id_consistency(_args: argparse.Namespace) -> int:
     rc = py_compile_pipeline_scripts()
 
@@ -136,3 +151,10 @@ def add_parser(sub) -> None:
         help="Audit topic_id coverage across topic packs, generated files, and runtime JSON files",
     )
     p.set_defaults(func=cmd_audit_topic_id_consistency)
+
+    p = sub.add_parser(
+        "audit-generated-runtime-schema",
+        help="Audit generated JSON top-level schema compatibility with runtime JSON files",
+    )
+    p.set_defaults(func=cmd_audit_generated_runtime_schema)
+

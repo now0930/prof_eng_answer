@@ -1,0 +1,709 @@
+{
+  "generated_at": "20260704_104605",
+  "banks": [
+    {
+      "bank": "fact_anchors",
+      "runtime_file": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/fact_anchors.generated.json",
+      "runtime_container": "topics",
+      "generated_container": "topics",
+      "container_compatible": true,
+      "runtime_item_count": 55,
+      "generated_item_count": 1,
+      "runtime_topic_count": 55,
+      "generated_topic_count": 1,
+      "overlap_topic_count": 1,
+      "runtime_only_topics": [
+        "adc_dac_signal_conversion_interface",
+        "calibration_error_accuracy_precision",
+        "camera_lidar_radar_sensor_comparison",
+        "classification_model_precision_recall_f1_evaluation",
+        "continuous_discrete_control_model_comparison",
+        "control_valve_actuator_types_selection",
+        "control_valve_body_trim_selection",
+        "control_valve_cavitation",
+        "control_valve_positioner_ip_converter",
+        "cv_valve_flow_coefficient",
+        "dc_dc_chopper_buck_converter",
+        "differential_pressure_transmitter_calibration",
+        "doppler_effect_velocity_flow_measurement",
+        "energy_harvesting_wireless_sensor_power",
+        "explosion_safety_sil_sis",
+        "flowmeter_dp_orifice",
+        "frame_grounding_shielding_noise_control",
+        "gpib_scpi_instrumentation_communication",
+        "hart_fims_field_instrument_management",
+        "hmi_scada",
+        "induction_motor_dq_reference_frame_equivalent_circuit",
+        "industrial_communication_protocol",
+        "industrial_ethernet_realtime_network",
+        "industrial_robot_degrees_of_freedom",
+        "level_measurement_sensor_selection",
+        "local_instrument_cabinet_installation",
+        "measurement_repeatability_reproducibility",
+        "mems_comb_drive_electrostatic_actuator",
+        "motor_inverter_drive",
+        "noise_grounding_surge",
+        "photodiode_light_sensor_operation_modes",
+        "pid_control",
+        "plc_dcs_remote_io",
+        "power_semiconductor_switching_device_characteristics",
+        "pressure_dp_transmitter",
+        "pressure_gauge_accessories_installation",
+        "pressure_transmitter_datasheet_specification",
+        "psd_position_sensitive_detector_optical_sensor",
+        "rectifier_source_inductance_commutation_overlap",
+        "reference_tracking_prefilter_steady_state_error_control",
+        "reliability_maintainability_availability_ram",
+        "second_order_system_resonance_frequency_response",
+        "sensor_linearization_transfer_function_approximation",
+        "sensor_static_dynamic_performance_characteristics",
+        "smart_factory_iiot_digital_twin",
+        "smart_mcc_motor_control_center_monitoring",
+        "temperature_measurement_error_heat_transfer",
+        "temperature_sensor_thermocouple_rtd",
+        "temperature_sensor_thermowell_material_selection",
+        "thermopile_noncontact_ir_temperature_sensor",
+        "transfer_function_state_space",
+        "vibration_measurement_condition_monitoring",
+        "wheatstone_bridge_null_balance_measurement",
+        "wirelesshart_isa100_wireless_instrument_network"
+      ],
+      "generated_only_topics": [],
+      "overlap_topics": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "overlap_details": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "runtime_key_count": 8,
+          "generated_key_count": 5,
+          "runtime_only_keys": [
+            "aliases",
+            "low_score_patterns",
+            "name",
+            "priority",
+            "revision_notes",
+            "triggers"
+          ],
+          "generated_only_keys": [
+            "question_type_hint",
+            "schema_version",
+            "title_ko"
+          ],
+          "common_keys": [
+            "anchors",
+            "topic_id"
+          ],
+          "common_type_mismatch": [],
+          "runtime_summary": {
+            "topic_id": {
+              "type": "str",
+              "value": "second_order_lag_response_by_damping_ratio"
+            },
+            "name": {
+              "type": "str",
+              "value": "2차 지연시스템 감쇠비별 응답특성"
+            },
+            "priority": {
+              "type": "int",
+              "value": 920
+            },
+            "triggers": {
+              "type": "list",
+              "count": 22
+            },
+            "aliases": {
+              "type": "list",
+              "count": 19
+            },
+            "anchors": {
+              "type": "list",
+              "count": 5
+            },
+            "low_score_patterns": {
+              "type": "list",
+              "count": 3
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 1
+            }
+          },
+          "generated_summary": {
+            "schema_version": {
+              "type": "str",
+              "value": "topic_pack.fact_anchor.v1"
+            },
+            "topic_id": {
+              "type": "str",
+              "value": "second_order_lag_response_by_damping_ratio"
+            },
+            "title_ko": {
+              "type": "str",
+              "value": "감쇠비에 따른 2차 지연시스템 응답 특성"
+            },
+            "question_type_hint": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "anchors": {
+              "type": "list",
+              "count": 8
+            }
+          }
+        }
+      ],
+      "readiness": "container_ready"
+    },
+    {
+      "bank": "model_answers",
+      "runtime_file": "rubrics/model_answers/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/model_answers.generated.json",
+      "runtime_container": "answers",
+      "generated_container": "answers",
+      "container_compatible": true,
+      "runtime_item_count": 57,
+      "generated_item_count": 1,
+      "runtime_topic_count": 55,
+      "generated_topic_count": 1,
+      "overlap_topic_count": 1,
+      "runtime_only_topics": [
+        "adc_dac_signal_conversion_interface",
+        "calibration_error_accuracy_precision",
+        "camera_lidar_radar_sensor_comparison",
+        "classification_model_precision_recall_f1_evaluation",
+        "continuous_discrete_control_model_comparison",
+        "control_valve_actuator_types_selection",
+        "control_valve_body_trim_selection",
+        "control_valve_cavitation",
+        "control_valve_positioner_ip_converter",
+        "cv_valve_flow_coefficient",
+        "dc_dc_chopper_buck_converter",
+        "differential_pressure_transmitter_calibration",
+        "doppler_effect_velocity_flow_measurement",
+        "energy_harvesting_wireless_sensor_power",
+        "explosion_safety_sil_sis",
+        "flowmeter_dp_orifice",
+        "frame_grounding_shielding_noise_control",
+        "gpib_scpi_instrumentation_communication",
+        "hart_fims_field_instrument_management",
+        "hmi_scada",
+        "induction_motor_dq_reference_frame_equivalent_circuit",
+        "industrial_communication_protocol",
+        "industrial_ethernet_realtime_network",
+        "industrial_robot_degrees_of_freedom",
+        "level_measurement_sensor_selection",
+        "local_instrument_cabinet_installation",
+        "measurement_repeatability_reproducibility",
+        "mems_comb_drive_electrostatic_actuator",
+        "motor_inverter_drive",
+        "noise_grounding_surge",
+        "photodiode_light_sensor_operation_modes",
+        "pid_control",
+        "plc_dcs_remote_io",
+        "power_semiconductor_switching_device_characteristics",
+        "pressure_dp_transmitter",
+        "pressure_gauge_accessories_installation",
+        "pressure_transmitter_datasheet_specification",
+        "psd_position_sensitive_detector_optical_sensor",
+        "rectifier_source_inductance_commutation_overlap",
+        "reference_tracking_prefilter_steady_state_error_control",
+        "reliability_maintainability_availability_ram",
+        "second_order_system_resonance_frequency_response",
+        "sensor_linearization_transfer_function_approximation",
+        "sensor_static_dynamic_performance_characteristics",
+        "smart_factory_iiot_digital_twin",
+        "smart_mcc_motor_control_center_monitoring",
+        "temperature_measurement_error_heat_transfer",
+        "temperature_sensor_thermocouple_rtd",
+        "temperature_sensor_thermowell_material_selection",
+        "thermopile_noncontact_ir_temperature_sensor",
+        "transfer_function_state_space",
+        "vibration_measurement_condition_monitoring",
+        "wheatstone_bridge_null_balance_measurement",
+        "wirelesshart_isa100_wireless_instrument_network"
+      ],
+      "generated_only_topics": [],
+      "overlap_topics": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "overlap_details": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "runtime_key_count": 13,
+          "generated_key_count": 8,
+          "runtime_only_keys": [
+            "expected_structure",
+            "field_connection_points",
+            "high_score_features",
+            "id",
+            "legacy_question_type",
+            "low_score_patterns",
+            "model_answer_outline",
+            "question_examples",
+            "revision_notes",
+            "title",
+            "topic_aliases"
+          ],
+          "generated_only_keys": [
+            "common_missing_points",
+            "expected_question_patterns",
+            "high_score_points",
+            "recommended_outline",
+            "schema_version",
+            "title_ko"
+          ],
+          "common_keys": [
+            "question_type",
+            "topic_id"
+          ],
+          "common_type_mismatch": [],
+          "runtime_summary": {
+            "id": {
+              "type": "str",
+              "value": "second_order_lag_response_COMPARE_v1"
+            },
+            "topic_id": {
+              "type": "str",
+              "value": "second_order_lag_response_by_damping_ratio"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "title": {
+              "type": "str",
+              "value": "2차 지연시스템 감쇠비별 응답특성 비교형 모범 답안"
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 11
+            },
+            "question_examples": {
+              "type": "list",
+              "count": 3
+            },
+            "expected_structure": {
+              "type": "list",
+              "count": 5
+            },
+            "model_answer_outline": {
+              "type": "list",
+              "count": 6
+            },
+            "high_score_features": {
+              "type": "list",
+              "count": 6
+            },
+            "low_score_patterns": {
+              "type": "list",
+              "count": 5
+            },
+            "field_connection_points": {
+              "type": "list",
+              "count": 9
+            },
+            "revision_notes": {
+              "type": "list",
+              "count": 4
+            },
+            "legacy_question_type": {
+              "type": "str",
+              "value": "COMPARE"
+            }
+          },
+          "generated_summary": {
+            "schema_version": {
+              "type": "str",
+              "value": "topic_pack.model_answer.v1"
+            },
+            "topic_id": {
+              "type": "str",
+              "value": "second_order_lag_response_by_damping_ratio"
+            },
+            "title_ko": {
+              "type": "str",
+              "value": "감쇠비에 따른 2차 지연시스템 응답 특성 비교"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "expected_question_patterns": {
+              "type": "list",
+              "count": 3
+            },
+            "recommended_outline": {
+              "type": "list",
+              "count": 5
+            },
+            "high_score_points": {
+              "type": "list",
+              "count": 6
+            },
+            "common_missing_points": {
+              "type": "list",
+              "count": 5
+            }
+          }
+        }
+      ],
+      "readiness": "container_ready"
+    },
+    {
+      "bank": "topic_importance",
+      "runtime_file": "rubrics/topic_importance/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/topic_importance.generated.json",
+      "runtime_container": "topics",
+      "generated_container": "topics",
+      "container_compatible": true,
+      "runtime_item_count": 8,
+      "generated_item_count": 1,
+      "runtime_topic_count": 8,
+      "generated_topic_count": 1,
+      "overlap_topic_count": 0,
+      "runtime_only_topics": [
+        "control_theory_general",
+        "cv_valve_flow_coefficient",
+        "feedback_system",
+        "frequency_response",
+        "second_order_system",
+        "smart_factory_iiot_digital_twin",
+        "stability_analysis",
+        "temperature_sensor_thermocouple_rtd"
+      ],
+      "generated_only_topics": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "overlap_topics": [],
+      "overlap_details": [],
+      "readiness": "container_ready"
+    },
+    {
+      "bank": "logic_checks",
+      "runtime_file": "rubrics/logic_checks/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/logic_checks.generated.json",
+      "runtime_container": "topic_logic_checks",
+      "generated_container": "topic_logic_checks",
+      "container_compatible": true,
+      "runtime_item_count": 1,
+      "generated_item_count": 1,
+      "runtime_topic_count": 1,
+      "generated_topic_count": 1,
+      "overlap_topic_count": 1,
+      "runtime_only_topics": [],
+      "generated_only_topics": [],
+      "overlap_topics": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "overlap_details": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "runtime_key_count": 11,
+          "generated_key_count": 11,
+          "runtime_only_keys": [],
+          "generated_only_keys": [],
+          "common_keys": [
+            "de_claim_trust",
+            "difficulty_profile",
+            "enabled",
+            "fatal_checks",
+            "major_checks",
+            "next_practice_points",
+            "question_type",
+            "question_type_checks",
+            "topic_aliases",
+            "topic_id",
+            "topic_name"
+          ],
+          "common_type_mismatch": [],
+          "runtime_summary": {
+            "topic_id": {
+              "type": "str",
+              "value": "second_order_lag_response_by_damping_ratio"
+            },
+            "topic_name": {
+              "type": "str",
+              "value": "2차 지연시스템 감쇠비별 응답특성"
+            },
+            "enabled": {
+              "type": "bool",
+              "value": true
+            },
+            "question_type": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "difficulty_profile": {
+              "type": "str",
+              "value": "THEORY_CORE"
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 9
+            },
+            "fatal_checks": {
+              "type": "list",
+              "count": 8
+            },
+            "major_checks": {
+              "type": "list",
+              "count": 2
+            },
+            "question_type_checks": {
+              "type": "list",
+              "count": 1
+            },
+            "next_practice_points": {
+              "type": "list",
+              "count": 6
+            },
+            "de_claim_trust": {
+              "type": "object",
+              "keys": [
+                "enabled",
+                "fatal_meaning",
+                "pass_meaning",
+                "rule",
+                "score_effect",
+                "target_layers",
+                "trust_effect"
+              ]
+            }
+          },
+          "generated_summary": {
+            "topic_id": {
+              "type": "str",
+              "value": "second_order_lag_response_by_damping_ratio"
+            },
+            "enabled": {
+              "type": "bool",
+              "value": true
+            },
+            "topic_name": {
+              "type": "str",
+              "value": "2차 지연시스템 감쇠비별 응답특성"
+            },
+            "question_type": {
+              "type": "str",
+              "value": "COMPARE_SELECTION"
+            },
+            "difficulty_profile": {
+              "type": "str",
+              "value": "THEORY_CORE"
+            },
+            "topic_aliases": {
+              "type": "list",
+              "count": 9
+            },
+            "fatal_checks": {
+              "type": "list",
+              "count": 8
+            },
+            "major_checks": {
+              "type": "list",
+              "count": 2
+            },
+            "question_type_checks": {
+              "type": "list",
+              "count": 1
+            },
+            "next_practice_points": {
+              "type": "list",
+              "count": 6
+            },
+            "de_claim_trust": {
+              "type": "object",
+              "keys": [
+                "enabled",
+                "fatal_meaning",
+                "pass_meaning",
+                "rule",
+                "score_effect",
+                "target_layers",
+                "trust_effect"
+              ]
+            }
+          }
+        }
+      ],
+      "readiness": "container_ready"
+    },
+    {
+      "bank": "logic_check_profiles",
+      "runtime_file": "rubrics/logic_check_profiles/industrial_instrumentation_control.json",
+      "generated_file": "rubrics/generated/logic_check_profiles.generated.json",
+      "runtime_container": "profiles",
+      "generated_container": "profiles",
+      "container_compatible": true,
+      "runtime_item_count": 1,
+      "generated_item_count": 1,
+      "runtime_topic_count": 1,
+      "generated_topic_count": 1,
+      "overlap_topic_count": 1,
+      "runtime_only_topics": [],
+      "generated_only_topics": [],
+      "overlap_topics": [
+        "second_order_lag_response_by_damping_ratio"
+      ],
+      "overlap_details": [
+        {
+          "topic_id": "second_order_lag_response_by_damping_ratio",
+          "runtime_key_count": 12,
+          "generated_key_count": 12,
+          "runtime_only_keys": [],
+          "generated_only_keys": [],
+          "common_keys": [
+            "candidate_extraction",
+            "cap_policy",
+            "difficulty",
+            "display_name",
+            "fatal_conditions",
+            "feedback_templates",
+            "major_checks",
+            "next_practice_points",
+            "output_contract",
+            "safe_conditions",
+            "topic_id",
+            "truth_schema"
+          ],
+          "common_type_mismatch": [],
+          "runtime_summary": {
+            "topic_id": {
+              "type": "str",
+              "value": "second_order_lag_response_by_damping_ratio"
+            },
+            "display_name": {
+              "type": "str",
+              "value": "2차 표준형 시스템 감쇠비별 응답 특성"
+            },
+            "difficulty": {
+              "type": "str",
+              "value": "THEORY_CORE"
+            },
+            "cap_policy": {
+              "type": "object",
+              "keys": [
+                "fatal_confidence_threshold",
+                "fatal_recommended_ceiling"
+              ]
+            },
+            "candidate_extraction": {
+              "type": "object",
+              "keys": [
+                "key_terms",
+                "max_candidates",
+                "nearby_window",
+                "rules"
+              ]
+            },
+            "truth_schema": {
+              "type": "list",
+              "count": 17
+            },
+            "fatal_conditions": {
+              "type": "list",
+              "count": 15
+            },
+            "safe_conditions": {
+              "type": "list",
+              "count": 12
+            },
+            "output_contract": {
+              "type": "object",
+              "keys": [
+                "json_only",
+                "required_fields",
+                "verdict_values"
+              ]
+            },
+            "major_checks": {
+              "type": "list",
+              "count": 2
+            },
+            "feedback_templates": {
+              "type": "object",
+              "keys": [
+                "c_sign_stability_fatal",
+                "c_sign_stability_minor",
+                "c_sign_stability_positive"
+              ]
+            },
+            "next_practice_points": {
+              "type": "list",
+              "count": 3
+            }
+          },
+          "generated_summary": {
+            "topic_id": {
+              "type": "str",
+              "value": "second_order_lag_response_by_damping_ratio"
+            },
+            "display_name": {
+              "type": "str",
+              "value": "2차 표준형 시스템 감쇠비별 응답 특성"
+            },
+            "difficulty": {
+              "type": "str",
+              "value": "THEORY_CORE"
+            },
+            "cap_policy": {
+              "type": "object",
+              "keys": [
+                "fatal_confidence_threshold",
+                "fatal_recommended_ceiling"
+              ]
+            },
+            "candidate_extraction": {
+              "type": "object",
+              "keys": [
+                "key_terms",
+                "max_candidates",
+                "nearby_window",
+                "rules"
+              ]
+            },
+            "truth_schema": {
+              "type": "list",
+              "count": 17
+            },
+            "fatal_conditions": {
+              "type": "list",
+              "count": 15
+            },
+            "safe_conditions": {
+              "type": "list",
+              "count": 12
+            },
+            "output_contract": {
+              "type": "object",
+              "keys": [
+                "json_only",
+                "required_fields",
+                "verdict_values"
+              ]
+            },
+            "major_checks": {
+              "type": "list",
+              "count": 2
+            },
+            "feedback_templates": {
+              "type": "object",
+              "keys": [
+                "c_sign_stability_fatal",
+                "c_sign_stability_minor",
+                "c_sign_stability_positive"
+              ]
+            },
+            "next_practice_points": {
+              "type": "list",
+              "count": 3
+            }
+          }
+        }
+      ],
+      "readiness": "container_ready"
+    }
+  ]
+}
