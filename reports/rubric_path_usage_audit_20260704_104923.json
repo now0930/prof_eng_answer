@@ -1,0 +1,3471 @@
+{
+  "generated_at": "20260704_104923",
+  "hit_count": 492,
+  "summary_by_pattern": {
+    "active_profile": 3,
+    "default_rubric_json": 3,
+    "env_rubric_mode": 1,
+    "fact_anchors_runtime": 27,
+    "generated_rubrics": 5,
+    "hardcoded_rubrics_path": 188,
+    "industrial_subject_json": 127,
+    "logic_check_profiles_runtime": 11,
+    "logic_checks_runtime": 10,
+    "model_answers_runtime": 42,
+    "pathlib_rubrics": 62,
+    "topic_importance_runtime": 13
+  },
+  "summary_by_classification": {
+    "active_profile_loader_candidate": 1,
+    "other": 112,
+    "rubric_json_reference": 26,
+    "runtime_loader_candidate": 35,
+    "script_or_validator": 318
+  },
+  "hits": [
+    {
+      "file": "README.md",
+      "line": 100,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "현재 `rubrics/question_types/default.json` 기준 question type은 4개 active 대분류와 10개 legacy type mapping으로 구성된다.",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 156,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Scoring Model | `rubrics/scoring_model/default.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 157,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Rater Profile | `rubrics/raters/layered_default.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 158,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Question Type Profile | `rubrics/question_types/default.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 159,
+      "pattern": "model_answers_runtime",
+      "text": "| Model Answer Bank | `rubrics/model_answers/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "README.md",
+      "line": 159,
+      "pattern": "industrial_subject_json",
+      "text": "| Model Answer Bank | `rubrics/model_answers/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 159,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Model Answer Bank | `rubrics/model_answers/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 160,
+      "pattern": "fact_anchors_runtime",
+      "text": "| Fact Anchor Bank | `rubrics/fact_anchors/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "README.md",
+      "line": 160,
+      "pattern": "industrial_subject_json",
+      "text": "| Fact Anchor Bank | `rubrics/fact_anchors/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 160,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Fact Anchor Bank | `rubrics/fact_anchors/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 161,
+      "pattern": "topic_importance_runtime",
+      "text": "| Topic Importance | `rubrics/topic_importance/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "README.md",
+      "line": 161,
+      "pattern": "industrial_subject_json",
+      "text": "| Topic Importance | `rubrics/topic_importance/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 161,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Topic Importance | `rubrics/topic_importance/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 162,
+      "pattern": "logic_checks_runtime",
+      "text": "| Logic Check Bank | `rubrics/logic_checks/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "README.md",
+      "line": 162,
+      "pattern": "industrial_subject_json",
+      "text": "| Logic Check Bank | `rubrics/logic_checks/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 162,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Logic Check Bank | `rubrics/logic_checks/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 163,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "| Logic Check Profile | `rubrics/logic_check_profiles/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "README.md",
+      "line": 163,
+      "pattern": "industrial_subject_json",
+      "text": "| Logic Check Profile | `rubrics/logic_check_profiles/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "README.md",
+      "line": 163,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Logic Check Profile | `rubrics/logic_check_profiles/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "bot.py",
+      "line": 19,
+      "pattern": "pathlib_rubrics",
+      "text": "RUBRIC_FILE = BASE_DIR / \"rubrics\" / \"default.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 8,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "DIFFICULTY_PROFILE_PATH = Path(\"rubrics/difficulty_profiles/default.json\")",
+      "classification": "other"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 8,
+      "pattern": "pathlib_rubrics",
+      "text": "DIFFICULTY_PROFILE_PATH = Path(\"rubrics/difficulty_profiles/default.json\")",
+      "classification": "other"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 9,
+      "pattern": "topic_importance_runtime",
+      "text": "TOPIC_IMPORTANCE_PATH = Path(\"rubrics/topic_importance/industrial_instrumentation_control.json\")",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 9,
+      "pattern": "industrial_subject_json",
+      "text": "TOPIC_IMPORTANCE_PATH = Path(\"rubrics/topic_importance/industrial_instrumentation_control.json\")",
+      "classification": "other"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 9,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "TOPIC_IMPORTANCE_PATH = Path(\"rubrics/topic_importance/industrial_instrumentation_control.json\")",
+      "classification": "other"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 9,
+      "pattern": "pathlib_rubrics",
+      "text": "TOPIC_IMPORTANCE_PATH = Path(\"rubrics/topic_importance/industrial_instrumentation_control.json\")",
+      "classification": "other"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 10,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "EXAM_SELECTION_PATH = Path(\"rubrics/exam_selection/default.json\")",
+      "classification": "other"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 10,
+      "pattern": "pathlib_rubrics",
+      "text": "EXAM_SELECTION_PATH = Path(\"rubrics/exam_selection/default.json\")",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 35,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `grading_architecture.md` | A/B/C/D/E 25점 채점 구조를 볼 때 | `rubrics/scoring_model/default.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 36,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `question_type_taxonomy.md` | 문제 유형 기준과 legacy mapping을 볼 때 | `rubrics/question_types/default.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 43,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "| `logic_check_profile_generator_prompt.md` | LLM verifier profile 초안을 만들 때 | `rubrics/logic_check_profiles/...json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 43,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `logic_check_profile_generator_prompt.md` | LLM verifier profile 초안을 만들 때 | `rubrics/logic_check_profiles/...json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 44,
+      "pattern": "logic_checks_runtime",
+      "text": "| `logic_check_json_generator_prompt.md` | rule-based Logic Check Bank 초안을 만들 때 | `rubrics/logic_checks/...json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 44,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `logic_check_json_generator_prompt.md` | rule-based Logic Check Bank 초안을 만들 때 | `rubrics/logic_checks/...json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 54,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Scoring model | `rubrics/scoring_model/default.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 55,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Rater profile | `rubrics/raters/layered_default.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 56,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Question Type profile | `rubrics/question_types/default.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 57,
+      "pattern": "model_answers_runtime",
+      "text": "| Model Answer Bank | `rubrics/model_answers/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 57,
+      "pattern": "industrial_subject_json",
+      "text": "| Model Answer Bank | `rubrics/model_answers/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 57,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Model Answer Bank | `rubrics/model_answers/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 58,
+      "pattern": "fact_anchors_runtime",
+      "text": "| Fact Anchor Bank | `rubrics/fact_anchors/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 58,
+      "pattern": "industrial_subject_json",
+      "text": "| Fact Anchor Bank | `rubrics/fact_anchors/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 58,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Fact Anchor Bank | `rubrics/fact_anchors/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 59,
+      "pattern": "topic_importance_runtime",
+      "text": "| Topic Importance | `rubrics/topic_importance/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 59,
+      "pattern": "industrial_subject_json",
+      "text": "| Topic Importance | `rubrics/topic_importance/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 59,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Topic Importance | `rubrics/topic_importance/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 60,
+      "pattern": "logic_checks_runtime",
+      "text": "| Logic Check Bank | `rubrics/logic_checks/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 60,
+      "pattern": "industrial_subject_json",
+      "text": "| Logic Check Bank | `rubrics/logic_checks/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 60,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Logic Check Bank | `rubrics/logic_checks/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 61,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "| Logic Check Profile | `rubrics/logic_check_profiles/industrial_instrumentation_control.json` |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 61,
+      "pattern": "industrial_subject_json",
+      "text": "| Logic Check Profile | `rubrics/logic_check_profiles/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/README.md",
+      "line": 61,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| Logic Check Profile | `rubrics/logic_check_profiles/industrial_instrumentation_control.json` |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 98,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/question_types/default.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 99,
+      "pattern": "fact_anchors_runtime",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 99,
+      "pattern": "industrial_subject_json",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 99,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 100,
+      "pattern": "model_answers_runtime",
+      "text": "rubrics/model_answers/industrial_instrumentation_control.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 100,
+      "pattern": "industrial_subject_json",
+      "text": "rubrics/model_answers/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 100,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/model_answers/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 101,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/originality/default.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 102,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/scoring_model/default.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 132,
+      "pattern": "model_answers_runtime",
+      "text": "vim rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 132,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "vim rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 135,
+      "pattern": "model_answers_runtime",
+      "text": "--candidate rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/archive/20260701_073539/current_grading_architecture.md",
+      "line": 135,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "--candidate rubrics/model_answers/candidates/cv_valve_flow_coefficient_COMPARE_v1.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/docs/migration_plan.md",
+      "line": 7,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "- rubrics/scoring_model/default.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/docs/migration_plan.md",
+      "line": 8,
+      "pattern": "industrial_subject_json",
+      "text": "- rubrics/subjects/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/docs/migration_plan.md",
+      "line": 8,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "- rubrics/subjects/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/docs/migration_plan.md",
+      "line": 9,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "- rubrics/raters/default.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/docs/migration_plan.md",
+      "line": 11,
+      "pattern": "default_rubric_json",
+      "text": "기존 rubrics/default.json은 당분간 호환용으로 유지한다.",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_073539/docs/migration_plan.md",
+      "line": 11,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "기존 rubrics/default.json은 당분간 호환용으로 유지한다.",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/fact_anchor_generator_prompt.md",
+      "line": 33,
+      "pattern": "fact_anchors_runtime",
+      "text": "- rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/fact_anchor_generator_prompt.md",
+      "line": 33,
+      "pattern": "industrial_subject_json",
+      "text": "- rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/fact_anchor_generator_prompt.md",
+      "line": 33,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "- rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/model_answer_generator_prompt.md",
+      "line": 44,
+      "pattern": "model_answers_runtime",
+      "text": "- Model Answer Bank 파일: rubrics/model_answers/industrial_instrumentation_control.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/model_answer_generator_prompt.md",
+      "line": 44,
+      "pattern": "industrial_subject_json",
+      "text": "- Model Answer Bank 파일: rubrics/model_answers/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/model_answer_generator_prompt.md",
+      "line": 44,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "- Model Answer Bank 파일: rubrics/model_answers/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/model_answer_generator_prompt.md",
+      "line": 45,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "- Question Type v2 파일: rubrics/question_types/default.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/model_answer_generator_prompt.md",
+      "line": 46,
+      "pattern": "fact_anchors_runtime",
+      "text": "- Fact Anchor Bank 파일: rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/model_answer_generator_prompt.md",
+      "line": 46,
+      "pattern": "industrial_subject_json",
+      "text": "- Fact Anchor Bank 파일: rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/model_answer_generator_prompt.md",
+      "line": 46,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "- Fact Anchor Bank 파일: rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/topic_importance_generator_prompt.md",
+      "line": 34,
+      "pattern": "topic_importance_runtime",
+      "text": "- rubrics/topic_importance/industrial_instrumentation_control.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/topic_importance_generator_prompt.md",
+      "line": 34,
+      "pattern": "industrial_subject_json",
+      "text": "- rubrics/topic_importance/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/archive/20260701_193514/prompt_templates/topic_importance_generator_prompt.md",
+      "line": 34,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "- rubrics/topic_importance/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/difficulty_and_selection_strategy.md",
+      "line": 191,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/difficulty_profiles/default.json` | Profile 정의와 기본 ceiling |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 3,
+      "pattern": "logic_checks_runtime",
+      "text": "이 문서는 `rubrics/logic_checks/industrial_instrumentation_control.json`에 추가할 수 있는 Logic Check Bank JSON 초안을 생성하기 위한 LLM 프롬프트다.",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 3,
+      "pattern": "industrial_subject_json",
+      "text": "이 문서는 `rubrics/logic_checks/industrial_instrumentation_control.json`에 추가할 수 있는 Logic Check Bank JSON 초안을 생성하기 위한 LLM 프롬프트다.",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 3,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "이 문서는 `rubrics/logic_checks/industrial_instrumentation_control.json`에 추가할 수 있는 Logic Check Bank JSON 초안을 생성하기 위한 LLM 프롬프트다.",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 8,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "`rubrics/logic_check_profiles/industrial_instrumentation_control.json`은 LLM verifier가 candidate evidence와 truth schema를 비교할 때 사용하는 profile이다.",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 8,
+      "pattern": "industrial_subject_json",
+      "text": "`rubrics/logic_check_profiles/industrial_instrumentation_control.json`은 LLM verifier가 candidate evidence와 truth schema를 비교할 때 사용하는 profile이다.",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 8,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "`rubrics/logic_check_profiles/industrial_instrumentation_control.json`은 LLM verifier가 candidate evidence와 truth schema를 비교할 때 사용하는 profile이다.",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 14,
+      "pattern": "logic_checks_runtime",
+      "text": "| `rubrics/logic_checks/industrial_instrumentation_control.json` | Python rule 기반 topic truth check, regex check, fallback check, D/E claim trust metadata |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 14,
+      "pattern": "industrial_subject_json",
+      "text": "| `rubrics/logic_checks/industrial_instrumentation_control.json` | Python rule 기반 topic truth check, regex check, fallback check, D/E claim trust metadata |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 14,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/logic_checks/industrial_instrumentation_control.json` | Python rule 기반 topic truth check, regex check, fallback check, D/E claim trust metadata |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 15,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "| `rubrics/logic_check_profiles/industrial_instrumentation_control.json` | LLM verifier용 truth schema, fatal/safe condition, candidate extraction profile |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 15,
+      "pattern": "industrial_subject_json",
+      "text": "| `rubrics/logic_check_profiles/industrial_instrumentation_control.json` | LLM verifier용 truth schema, fatal/safe condition, candidate extraction profile |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_json_generator_prompt.md",
+      "line": 15,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/logic_check_profiles/industrial_instrumentation_control.json` | LLM verifier용 truth schema, fatal/safe condition, candidate extraction profile |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_profile_generator_prompt.md",
+      "line": 3,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "이 문서는 `rubrics/logic_check_profiles/industrial_instrumentation_control.json`에 추가할 수 있는 LLM verifier profile 초안을 생성하기 위한 프롬프트다.",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/logic_check_profile_generator_prompt.md",
+      "line": 3,
+      "pattern": "industrial_subject_json",
+      "text": "이 문서는 `rubrics/logic_check_profiles/industrial_instrumentation_control.json`에 추가할 수 있는 LLM verifier profile 초안을 생성하기 위한 프롬프트다.",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_profile_generator_prompt.md",
+      "line": 3,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "이 문서는 `rubrics/logic_check_profiles/industrial_instrumentation_control.json`에 추가할 수 있는 LLM verifier profile 초안을 생성하기 위한 프롬프트다.",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_profile_generator_prompt.md",
+      "line": 12,
+      "pattern": "logic_checks_runtime",
+      "text": "| `rubrics/logic_checks/industrial_instrumentation_control.json` | Python rule 기반 topic truth check, regex check, fallback check, D/E claim trust metadata |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/logic_check_profile_generator_prompt.md",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "| `rubrics/logic_checks/industrial_instrumentation_control.json` | Python rule 기반 topic truth check, regex check, fallback check, D/E claim trust metadata |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_profile_generator_prompt.md",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/logic_checks/industrial_instrumentation_control.json` | Python rule 기반 topic truth check, regex check, fallback check, D/E claim trust metadata |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_profile_generator_prompt.md",
+      "line": 13,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "| `rubrics/logic_check_profiles/industrial_instrumentation_control.json` | LLM verifier용 truth schema, fatal condition, safe condition, evidence extraction profile |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/logic_check_profile_generator_prompt.md",
+      "line": 13,
+      "pattern": "industrial_subject_json",
+      "text": "| `rubrics/logic_check_profiles/industrial_instrumentation_control.json` | LLM verifier용 truth schema, fatal condition, safe condition, evidence extraction profile |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_profile_generator_prompt.md",
+      "line": 13,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/logic_check_profiles/industrial_instrumentation_control.json` | LLM verifier용 truth schema, fatal condition, safe condition, evidence extraction profile |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_profiles_readme.md",
+      "line": 7,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "rubrics/logic_check_profiles/industrial_instrumentation_control.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/logic_check_profiles_readme.md",
+      "line": 7,
+      "pattern": "industrial_subject_json",
+      "text": "rubrics/logic_check_profiles/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/logic_check_profiles_readme.md",
+      "line": 7,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/logic_check_profiles/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/question_type_taxonomy.md",
+      "line": 226,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/question_types/default.json` | 기본 taxonomy 설정 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 9,
+      "pattern": "model_answers_runtime",
+      "text": "| `rubrics/model_answers/industrial_instrumentation_control.json` | 주제별 Model Answer Bank | 수정 대상 |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 9,
+      "pattern": "industrial_subject_json",
+      "text": "| `rubrics/model_answers/industrial_instrumentation_control.json` | 주제별 Model Answer Bank | 수정 대상 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 9,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/model_answers/industrial_instrumentation_control.json` | 주제별 Model Answer Bank | 수정 대상 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 10,
+      "pattern": "fact_anchors_runtime",
+      "text": "| `rubrics/fact_anchors/industrial_instrumentation_control.json` | topic별 핵심 Fact Anchor | 수정 대상 |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 10,
+      "pattern": "industrial_subject_json",
+      "text": "| `rubrics/fact_anchors/industrial_instrumentation_control.json` | topic별 핵심 Fact Anchor | 수정 대상 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 10,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/fact_anchors/industrial_instrumentation_control.json` | topic별 핵심 Fact Anchor | 수정 대상 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 11,
+      "pattern": "topic_importance_runtime",
+      "text": "| `rubrics/topic_importance/industrial_instrumentation_control.json` | 주제 중요도와 선택 전략 | 제한적 수정 |",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 11,
+      "pattern": "industrial_subject_json",
+      "text": "| `rubrics/topic_importance/industrial_instrumentation_control.json` | 주제 중요도와 선택 전략 | 제한적 수정 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 11,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/topic_importance/industrial_instrumentation_control.json` | 주제 중요도와 선택 전략 | 제한적 수정 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/question_types/default.json` | Question Type v2 lens | 보통 수정하지 않음 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 13,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/difficulty_profiles/default.json` | Difficulty Profile | 보통 수정하지 않음 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 14,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/scoring_model/default.json` | A/B/C/D/E 배점과 cap rule | 정책 변경 시 수정 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 15,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "| `rubrics/raters/layered_default.json` | 3인 채점자 관점 | 정책 변경 시 수정 |",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 45,
+      "pattern": "model_answers_runtime",
+      "text": "rubrics/model_answers/industrial_instrumentation_control.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 45,
+      "pattern": "industrial_subject_json",
+      "text": "rubrics/model_answers/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 45,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/model_answers/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 75,
+      "pattern": "fact_anchors_runtime",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 75,
+      "pattern": "industrial_subject_json",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "docs/rubric_authoring_guide.md",
+      "line": 75,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+      "classification": "other"
+    },
+    {
+      "file": "grade_output_summarizer.py",
+      "line": 12,
+      "pattern": "pathlib_rubrics",
+      "text": "DEFAULT_PROMPT_PATH = BASE_DIR / \"rubrics\" / \"output_prompts\" / \"compact_grade_summary.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 11,
+      "pattern": "pathlib_rubrics",
+      "text": "RATERS_FILE = BASE_DIR / \"rubrics\" / \"raters\" / \"default.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 571,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "- 채점자 캐릭터는 rubrics/raters/default.json에서 관리된다.",
+      "classification": "other"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1777,
+      "pattern": "fact_anchors_runtime",
+      "text": "Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\"),",
+      "classification": "runtime_loader_candidate"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1777,
+      "pattern": "industrial_subject_json",
+      "text": "Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\"),",
+      "classification": "other"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1777,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\"),",
+      "classification": "other"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1777,
+      "pattern": "pathlib_rubrics",
+      "text": "Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\"),",
+      "classification": "other"
+    },
+    {
+      "file": "grading_agents.py",
+      "line": 1778,
+      "pattern": "industrial_subject_json",
+      "text": "Path(__file__).resolve().parent / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\",",
+      "classification": "other"
+    },
+    {
+      "file": "grading_config.py",
+      "line": 18,
+      "pattern": "active_profile",
+      "text": "profile_path = base / \"rubrics\" / \"active_profile.json\"",
+      "classification": "active_profile_loader_candidate"
+    },
+    {
+      "file": "grading_config.py",
+      "line": 28,
+      "pattern": "default_rubric_json",
+      "text": "legacy_rubric_path = base / profile.get(\"legacy_rubric\", \"rubrics/default.json\")",
+      "classification": "other"
+    },
+    {
+      "file": "grading_config.py",
+      "line": 28,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "legacy_rubric_path = base / profile.get(\"legacy_rubric\", \"rubrics/default.json\")",
+      "classification": "other"
+    },
+    {
+      "file": "logic_check_evaluator.py",
+      "line": 10,
+      "pattern": "industrial_subject_json",
+      "text": "DEFAULT_BANK = ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "logic_check_evaluator.py",
+      "line": 10,
+      "pattern": "pathlib_rubrics",
+      "text": "DEFAULT_BANK = ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "logic_llm_verifier.py",
+      "line": 14,
+      "pattern": "industrial_subject_json",
+      "text": "BASE_DIR / \"rubrics\" / \"logic_check_profiles\" / \"industrial_instrumentation_control.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "logic_llm_verifier.py",
+      "line": 14,
+      "pattern": "pathlib_rubrics",
+      "text": "BASE_DIR / \"rubrics\" / \"logic_check_profiles\" / \"industrial_instrumentation_control.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "question_type_taxonomy.py",
+      "line": 16,
+      "pattern": "pathlib_rubrics",
+      "text": "TAXONOMY_PATH = ROOT / \"rubrics\" / \"question_types\" / \"v2_professional_engineer.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 12,
+      "pattern": "pathlib_rubrics",
+      "text": "QUESTION_TYPE_PROFILE = BASE_DIR / \"rubrics\" / \"question_types\" / \"default.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 13,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_ANSWER_BANK = BASE_DIR / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 13,
+      "pattern": "pathlib_rubrics",
+      "text": "MODEL_ANSWER_BANK = BASE_DIR / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\"",
+      "classification": "other"
+    },
+    {
+      "file": "rubrics/active_profile.json",
+      "line": 5,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"scoring_model\": \"rubrics/scoring_model/default.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/active_profile.json",
+      "line": 6,
+      "pattern": "industrial_subject_json",
+      "text": "\"subject_rubric\": \"rubrics/subjects/industrial_instrumentation_control.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/active_profile.json",
+      "line": 6,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"subject_rubric\": \"rubrics/subjects/industrial_instrumentation_control.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/active_profile.json",
+      "line": 7,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rater_profile\": \"rubrics/raters/layered_default.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/active_profile.json",
+      "line": 8,
+      "pattern": "default_rubric_json",
+      "text": "\"legacy_rubric\": \"rubrics/default.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/active_profile.json",
+      "line": 8,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"legacy_rubric\": \"rubrics/default.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/generated/fact_anchors.generated.json",
+      "line": 5,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/fact_anchor.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/generated/logic_check_profiles.generated.json",
+      "line": 6,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/logic_check.json:llm_profile\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/generated/logic_checks.generated.json",
+      "line": 6,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/logic_check.json:deterministic_checks\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/generated/model_answers.generated.json",
+      "line": 5,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/model_answer.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/generated/topic_importance.generated.json",
+      "line": 5,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/topic_importance.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/generated/topic_pack_manifest.generated.json",
+      "line": 5,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/keyword_question_profiles/industrial_instrumentation_control.json",
+      "line": 7,
+      "pattern": "industrial_subject_json",
+      "text": "\"keyword_rules_file\": \"rubrics/keyword_rules/industrial_instrumentation_control.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/keyword_question_profiles/industrial_instrumentation_control.json",
+      "line": 7,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"keyword_rules_file\": \"rubrics/keyword_rules/industrial_instrumentation_control.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/keyword_question_profiles/industrial_instrumentation_control.json",
+      "line": 8,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"question_type_criteria_file\": \"rubrics/question_type_criteria/default.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/subjects/industrial_instrumentation_control.json",
+      "line": 293,
+      "pattern": "fact_anchors_runtime",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/subjects/industrial_instrumentation_control.json",
+      "line": 293,
+      "pattern": "industrial_subject_json",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/subjects/industrial_instrumentation_control.json",
+      "line": 293,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/subjects/industrial_instrumentation_control.json",
+      "line": 294,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"question_type_profile\": \"rubrics/question_types/default.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/subjects/industrial_instrumentation_control.json",
+      "line": 295,
+      "pattern": "model_answers_runtime",
+      "text": "\"model_answer_bank\": \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/subjects/industrial_instrumentation_control.json",
+      "line": 295,
+      "pattern": "industrial_subject_json",
+      "text": "\"model_answer_bank\": \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/subjects/industrial_instrumentation_control.json",
+      "line": 295,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"model_answer_bank\": \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio/logic_check.json",
+      "line": 7,
+      "pattern": "generated_rubrics",
+      "text": "\"deterministic_checks_target\": \"rubrics/generated/logic_checks.generated.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio/logic_check.json",
+      "line": 7,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"deterministic_checks_target\": \"rubrics/generated/logic_checks.generated.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio/logic_check.json",
+      "line": 8,
+      "pattern": "generated_rubrics",
+      "text": "\"llm_profile_target\": \"rubrics/generated/logic_check_profiles.generated.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio/logic_check.json",
+      "line": 8,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"llm_profile_target\": \"rubrics/generated/logic_check_profiles.generated.json\",",
+      "classification": "rubric_json_reference"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 14,
+      "pattern": "industrial_subject_json",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 14,
+      "pattern": "pathlib_rubrics",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 15,
+      "pattern": "pathlib_rubrics",
+      "text": "\"generated\": ROOT / \"rubrics\" / \"generated\" / \"fact_anchors.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 19,
+      "pattern": "industrial_subject_json",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 19,
+      "pattern": "pathlib_rubrics",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 20,
+      "pattern": "pathlib_rubrics",
+      "text": "\"generated\": ROOT / \"rubrics\" / \"generated\" / \"model_answers.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 24,
+      "pattern": "industrial_subject_json",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 24,
+      "pattern": "pathlib_rubrics",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 25,
+      "pattern": "pathlib_rubrics",
+      "text": "\"generated\": ROOT / \"rubrics\" / \"generated\" / \"topic_importance.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 29,
+      "pattern": "industrial_subject_json",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 29,
+      "pattern": "pathlib_rubrics",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 30,
+      "pattern": "pathlib_rubrics",
+      "text": "\"generated\": ROOT / \"rubrics\" / \"generated\" / \"logic_checks.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 34,
+      "pattern": "industrial_subject_json",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"logic_check_profiles\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 34,
+      "pattern": "pathlib_rubrics",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"logic_check_profiles\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 35,
+      "pattern": "pathlib_rubrics",
+      "text": "\"generated\": ROOT / \"rubrics\" / \"generated\" / \"logic_check_profiles.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 10,
+      "pattern": "pathlib_rubrics",
+      "text": "GENERATED_DIR = ROOT / \"rubrics\" / \"generated\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 14,
+      "pattern": "industrial_subject_json",
+      "text": "\"fact_anchors\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 14,
+      "pattern": "pathlib_rubrics",
+      "text": "\"fact_anchors\": ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 15,
+      "pattern": "industrial_subject_json",
+      "text": "\"model_answers\": ROOT / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 15,
+      "pattern": "pathlib_rubrics",
+      "text": "\"model_answers\": ROOT / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 16,
+      "pattern": "industrial_subject_json",
+      "text": "\"topic_importance\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 16,
+      "pattern": "pathlib_rubrics",
+      "text": "\"topic_importance\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 17,
+      "pattern": "industrial_subject_json",
+      "text": "\"logic_checks\": ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 17,
+      "pattern": "pathlib_rubrics",
+      "text": "\"logic_checks\": ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 18,
+      "pattern": "industrial_subject_json",
+      "text": "\"logic_check_profiles\": ROOT / \"rubrics\" / \"logic_check_profiles\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 18,
+      "pattern": "pathlib_rubrics",
+      "text": "\"logic_check_profiles\": ROOT / \"rubrics\" / \"logic_check_profiles\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 26,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"fact_anchors_runtime\": r\"rubrics/(?:fact_anchors|fact_anchor)\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 27,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"model_answers_runtime\": r\"rubrics/(?:model_answers|model_answer)\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 28,
+      "pattern": "topic_importance_runtime",
+      "text": "\"topic_importance_runtime\": r\"rubrics/topic_importance\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 28,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"topic_importance_runtime\": r\"rubrics/topic_importance\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 29,
+      "pattern": "logic_checks_runtime",
+      "text": "\"logic_checks_runtime\": r\"rubrics/logic_checks\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 29,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"logic_checks_runtime\": r\"rubrics/logic_checks\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 30,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "\"logic_check_profiles_runtime\": r\"rubrics/logic_check_profiles\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 30,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"logic_check_profiles_runtime\": r\"rubrics/logic_check_profiles\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 31,
+      "pattern": "generated_rubrics",
+      "text": "\"generated_rubrics\": r\"rubrics/generated\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 31,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"generated_rubrics\": r\"rubrics/generated\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 34,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"default_rubric_json\": r\"rubrics/default\\.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 35,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"hardcoded_rubrics_path\": r\"rubrics/\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 37,
+      "pattern": "env_rubric_mode",
+      "text": "\"env_rubric_mode\": r\"RUBRIC_BANK_MODE|RUBRIC_MODE|GENERATED_RUBRIC\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 81,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "if file.startswith(\"rubrics/\"):",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 15,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"topic_packs\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 18,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"generated\" / \"fact_anchors.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 19,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"generated\" / \"model_answers.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 20,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"generated\" / \"topic_importance.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 21,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"generated\" / \"logic_checks.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 22,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"generated\" / \"logic_check_profiles.generated.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 25,
+      "pattern": "industrial_subject_json",
+      "text": "ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 25,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 26,
+      "pattern": "industrial_subject_json",
+      "text": "ROOT / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 26,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 27,
+      "pattern": "industrial_subject_json",
+      "text": "ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 27,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 28,
+      "pattern": "industrial_subject_json",
+      "text": "ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 28,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 29,
+      "pattern": "industrial_subject_json",
+      "text": "ROOT / \"rubrics\" / \"logic_check_profiles\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 29,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"logic_check_profiles\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 30,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"difficulty_profiles\" / \"default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 31,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"question_types\" / \"default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 32,
+      "pattern": "industrial_subject_json",
+      "text": "ROOT / \"rubrics\" / \"subjects\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 32,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"subjects\" / \"industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 10,
+      "pattern": "pathlib_rubrics",
+      "text": "PACK_ROOT = ROOT / \"rubrics\" / \"topic_packs\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 11,
+      "pattern": "pathlib_rubrics",
+      "text": "OUT_DIR = ROOT / \"rubrics\" / \"generated\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 79,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/fact_anchor.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 93,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/model_answer.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 107,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/topic_importance.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 138,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/logic_check.json:deterministic_checks\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 166,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs/*/logic_check.json:llm_profile\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 177,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"source\": \"rubrics/topic_packs\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 9,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 9,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 9,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/check_fact_anchor_id_references.py",
+      "line": 12,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 12,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_calibration_sentence_support_term.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup/clean_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 13,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 13,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/clean_fact_anchor_term_overlap.py",
+      "line": 13,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 14,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 14,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 14,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/normalize_fact_anchor_ids_with_refs.py",
+      "line": 18,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fact_anchor_cleanup_20260701/resolve_final_fact_anchor_support_terms.py",
+      "line": 13,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/find_major0_model_answer_backup.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/find_major0_model_answer_backup.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/find_major0_model_answer_backup.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_doppler_final_relationship.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_doppler_final_relationship.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_doppler_final_relationship.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_final_expected_structure_major3.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_final_expected_structure_major3.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_final_expected_structure_major3.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_major_model_answer_outlines.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_major_model_answer_outlines.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_major_model_answer_outlines.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_p1_minor_relationships.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_p1_minor_relationships.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_p1_minor_relationships.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_p2_minor_relationships.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_p2_minor_relationships.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_p2_minor_relationships.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_remaining_expected_structure_alignment.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_remaining_expected_structure_alignment.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_remaining_expected_structure_alignment.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_remaining_p1_p2_relationships.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_remaining_p1_p2_relationships.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/fix_remaining_p1_p2_relationships.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/find_major0_model_answer_backup_now.py",
+      "line": 10,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/find_major0_model_answer_backup_now.py",
+      "line": 10,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/find_major0_model_answer_backup_now.py",
+      "line": 10,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/fix_control_valve_positioner_major.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/fix_control_valve_positioner_major.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/fix_control_valve_positioner_major.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_coverage_batch4.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_coverage_batch4.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_coverage_batch4.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_coverage_batch5.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_coverage_batch5.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_coverage_batch5.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_model_answer_outlines_batch1.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_model_answer_outlines_batch1.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_model_answer_outlines_batch1.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_model_answer_outlines_batch2.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_model_answer_outlines_batch2.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_model_answer_outlines_batch2.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_order_weak_batch3.py",
+      "line": 12,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_order_weak_batch3.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/experiments/model_answer_relationship_patches/patch_p2_order_weak_batch3.py",
+      "line": 12,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 27,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/scoring_model/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 28,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/raters/layered_default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 34,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/question_types/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 40,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/difficulty_profiles/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 41,
+      "pattern": "topic_importance_runtime",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 41,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 41,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 42,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/exam_selection/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 53,
+      "pattern": "model_answers_runtime",
+      "text": "\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 53,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 53,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 54,
+      "pattern": "fact_anchors_runtime",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 54,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 54,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 55,
+      "pattern": "topic_importance_runtime",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 55,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 55,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 59,
+      "pattern": "model_answers_runtime",
+      "text": "\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 59,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 59,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 63,
+      "pattern": "fact_anchors_runtime",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 63,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 63,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 67,
+      "pattern": "topic_importance_runtime",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 67,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 67,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 77,
+      "pattern": "active_profile",
+      "text": "\"rubrics/active_profile.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 77,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/active_profile.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 78,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/scoring_model/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 79,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/subjects/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 79,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/subjects/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 80,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/raters/layered_default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 81,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/question_types/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 82,
+      "pattern": "fact_anchors_runtime",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 82,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 82,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 83,
+      "pattern": "model_answers_runtime",
+      "text": "\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 83,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 83,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 84,
+      "pattern": "topic_importance_runtime",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 84,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 84,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 85,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/difficulty_profiles/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 86,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/exam_selection/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 87,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/originality/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_exam_trend_keywords.py",
+      "line": 223,
+      "pattern": "industrial_subject_json",
+      "text": "ap.add_argument(\"--keyword-rules\", default=\"rubrics/keyword_rules/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_exam_trend_keywords.py",
+      "line": 223,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "ap.add_argument(\"--keyword-rules\", default=\"rubrics/keyword_rules/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_exam_trend_keywords.py",
+      "line": 224,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "ap.add_argument(\"--question-type-criteria\", default=\"rubrics/question_type_criteria/default.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_exam_trend_keywords.py",
+      "line": 225,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "ap.add_argument(\"--raw-out\", default=\"rubrics/exam_trends/industrial_instrumentation_control_raw.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_exam_trend_keywords.py",
+      "line": 226,
+      "pattern": "industrial_subject_json",
+      "text": "ap.add_argument(\"--profile-out\", default=\"rubrics/keyword_question_profiles/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_exam_trend_keywords.py",
+      "line": 226,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "ap.add_argument(\"--profile-out\", default=\"rubrics/keyword_question_profiles/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 9,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 9,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 9,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 10,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 10,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/import_review_design.py",
+      "line": 10,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/normalize_model_answer_outline_style.py",
+      "line": 13,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/normalize_model_answer_outline_style.py",
+      "line": 13,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/maintenance/normalize_model_answer_outline_style.py",
+      "line": 13,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 4,
+      "pattern": "model_answers_runtime",
+      "text": "rubrics/model_answers/industrial_instrumentation_control.json and",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 4,
+      "pattern": "industrial_subject_json",
+      "text": "rubrics/model_answers/industrial_instrumentation_control.json and",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 4,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/model_answers/industrial_instrumentation_control.json and",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 5,
+      "pattern": "fact_anchors_runtime",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json.",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 5,
+      "pattern": "industrial_subject_json",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json.",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 5,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "rubrics/fact_anchors/industrial_instrumentation_control.json.",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 681,
+      "pattern": "model_answers_runtime",
+      "text": "print(\"  git diff -- rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 681,
+      "pattern": "industrial_subject_json",
+      "text": "print(\"  git diff -- rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 681,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "print(\"  git diff -- rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 682,
+      "pattern": "fact_anchors_runtime",
+      "text": "print(\"  git diff -- rubrics/fact_anchors/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 682,
+      "pattern": "industrial_subject_json",
+      "text": "print(\"  git diff -- rubrics/fact_anchors/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_fact_anchors_and_cleanup.py",
+      "line": 682,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "print(\"  git diff -- rubrics/fact_anchors/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 31,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 31,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 31,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 32,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 32,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/migrations/apply_relation_completion_patch.py",
+      "line": 32,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/export_p2_model_answer_repair_context.py",
+      "line": 11,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/export_p2_model_answer_repair_context.py",
+      "line": 11,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/export_p2_model_answer_repair_context.py",
+      "line": 11,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/export_remaining_p2_coverage_context.py",
+      "line": 10,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/export_remaining_p2_coverage_context.py",
+      "line": 10,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/export_remaining_p2_coverage_context.py",
+      "line": 10,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/export_remaining_p2_order_context.py",
+      "line": 10,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/export_remaining_p2_order_context.py",
+      "line": 10,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/export_remaining_p2_order_context.py",
+      "line": 10,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 19,
+      "pattern": "active_profile",
+      "text": "\"rubrics/active_profile.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 19,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/active_profile.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 20,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/scoring_model/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 21,
+      "pattern": "industrial_subject_json",
+      "text": "\"rubrics/subjects/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 21,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/subjects/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_audit/gemini_audit_grading_engine.py",
+      "line": 22,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rubrics/raters/layered_default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 10,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_ANSWER_BANK = ROOT / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 10,
+      "pattern": "pathlib_rubrics",
+      "text": "MODEL_ANSWER_BANK = ROOT / \"rubrics\" / \"model_answers\" / \"industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 11,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_ANCHOR_BANK = ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 11,
+      "pattern": "pathlib_rubrics",
+      "text": "FACT_ANCHOR_BANK = ROOT / \"rubrics\" / \"fact_anchors\" / \"industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 12,
+      "pattern": "industrial_subject_json",
+      "text": "TOPIC_IMPORTANCE_BANK = ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 12,
+      "pattern": "pathlib_rubrics",
+      "text": "TOPIC_IMPORTANCE_BANK = ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 14,
+      "pattern": "pathlib_rubrics",
+      "text": "CANDIDATE_ROOT = ROOT / \"rubrics\" / \"content_candidates\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 121,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "help=\"Validate rubrics/topic_packs source files\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 127,
+      "pattern": "generated_rubrics",
+      "text": "help=\"Build rubrics/generated/*.generated.json from topic packs\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 127,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "help=\"Build rubrics/generated/*.generated.json from topic packs\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 133,
+      "pattern": "generated_rubrics",
+      "text": "help=\"Validate rubrics/generated outputs\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 133,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "help=\"Validate rubrics/generated outputs\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/show_model_answer.py",
+      "line": 5,
+      "pattern": "model_answers_runtime",
+      "text": "BANK_PATH = Path(\"rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/show_model_answer.py",
+      "line": 5,
+      "pattern": "industrial_subject_json",
+      "text": "BANK_PATH = Path(\"rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/show_model_answer.py",
+      "line": 5,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "BANK_PATH = Path(\"rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/show_model_answer.py",
+      "line": 5,
+      "pattern": "pathlib_rubrics",
+      "text": "BANK_PATH = Path(\"rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 14,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_BANK = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 14,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_BANK = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 14,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_BANK = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 15,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_BANK = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 15,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_BANK = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 15,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_BANK = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 16,
+      "pattern": "topic_importance_runtime",
+      "text": "TOPIC_BANK = ROOT / \"rubrics/topic_importance/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 16,
+      "pattern": "industrial_subject_json",
+      "text": "TOPIC_BANK = ROOT / \"rubrics/topic_importance/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 16,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "TOPIC_BANK = ROOT / \"rubrics/topic_importance/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_fact_anchor_bank.py",
+      "line": 4,
+      "pattern": "fact_anchors_runtime",
+      "text": "path = Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_fact_anchor_bank.py",
+      "line": 4,
+      "pattern": "industrial_subject_json",
+      "text": "path = Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_fact_anchor_bank.py",
+      "line": 4,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "path = Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_fact_anchor_bank.py",
+      "line": 4,
+      "pattern": "pathlib_rubrics",
+      "text": "path = Path(\"rubrics/fact_anchors/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 9,
+      "pattern": "pathlib_rubrics",
+      "text": "GENERATED_DIR = ROOT / \"rubrics\" / \"generated\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 10,
+      "pattern": "pathlib_rubrics",
+      "text": "PACK_ROOT = ROOT / \"rubrics\" / \"topic_packs\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_logic_check_bank.py",
+      "line": 8,
+      "pattern": "industrial_subject_json",
+      "text": "BANK = ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_logic_check_bank.py",
+      "line": 8,
+      "pattern": "pathlib_rubrics",
+      "text": "BANK = ROOT / \"rubrics\" / \"logic_checks\" / \"industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_logic_check_de_policy.py",
+      "line": 6,
+      "pattern": "logic_checks_runtime",
+      "text": "JSON_PATH = Path(\"rubrics/logic_checks/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_logic_check_de_policy.py",
+      "line": 6,
+      "pattern": "industrial_subject_json",
+      "text": "JSON_PATH = Path(\"rubrics/logic_checks/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_logic_check_de_policy.py",
+      "line": 6,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "JSON_PATH = Path(\"rubrics/logic_checks/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_logic_check_de_policy.py",
+      "line": 6,
+      "pattern": "pathlib_rubrics",
+      "text": "JSON_PATH = Path(\"rubrics/logic_checks/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_answer_bank.py",
+      "line": 4,
+      "pattern": "model_answers_runtime",
+      "text": "BANK_PATH = Path(\"rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_answer_bank.py",
+      "line": 4,
+      "pattern": "industrial_subject_json",
+      "text": "BANK_PATH = Path(\"rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_answer_bank.py",
+      "line": 4,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "BANK_PATH = Path(\"rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_answer_bank.py",
+      "line": 4,
+      "pattern": "pathlib_rubrics",
+      "text": "BANK_PATH = Path(\"rubrics/model_answers/industrial_instrumentation_control.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_answer_bank.py",
+      "line": 5,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "QUESTION_TYPE_PATH = Path(\"rubrics/question_types/default.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_answer_bank.py",
+      "line": 5,
+      "pattern": "pathlib_rubrics",
+      "text": "QUESTION_TYPE_PATH = Path(\"rubrics/question_types/default.json\")",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_answer_relationships.py",
+      "line": 13,
+      "pattern": "model_answers_runtime",
+      "text": "DEFAULT_MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_answer_relationships.py",
+      "line": 13,
+      "pattern": "industrial_subject_json",
+      "text": "DEFAULT_MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_answer_relationships.py",
+      "line": 13,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "DEFAULT_MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 8,
+      "pattern": "model_answers_runtime",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 8,
+      "pattern": "industrial_subject_json",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 8,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "MODEL_PATH = ROOT / \"rubrics/model_answers/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 9,
+      "pattern": "fact_anchors_runtime",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 9,
+      "pattern": "industrial_subject_json",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_model_fact_consistency.py",
+      "line": 9,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "FACT_PATH = ROOT / \"rubrics/fact_anchors/industrial_instrumentation_control.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_question_type_profile.py",
+      "line": 10,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"question_types\" / \"default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_question_type_profile.py",
+      "line": 11,
+      "pattern": "pathlib_rubrics",
+      "text": "ROOT / \"rubrics\" / \"question_types\" / \"v2_professional_engineer.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_question_type_taxonomy_v2.py",
+      "line": 8,
+      "pattern": "pathlib_rubrics",
+      "text": "PATH = ROOT / \"rubrics\" / \"question_types\" / \"v2_professional_engineer.json\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 9,
+      "pattern": "pathlib_rubrics",
+      "text": "PACK_ROOT = ROOT / \"rubrics\" / \"topic_packs\"",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 18,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"scoring_model\": \"rubrics/scoring_model/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 19,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"rater_profile\": \"rubrics/raters/layered_default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 20,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"question_type_profile\": \"rubrics/question_types/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 21,
+      "pattern": "model_answers_runtime",
+      "text": "\"model_answer_bank\": \"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 21,
+      "pattern": "industrial_subject_json",
+      "text": "\"model_answer_bank\": \"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 21,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"model_answer_bank\": \"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 22,
+      "pattern": "fact_anchors_runtime",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 22,
+      "pattern": "industrial_subject_json",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 22,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"fact_anchor_bank\": \"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 23,
+      "pattern": "topic_importance_runtime",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 23,
+      "pattern": "industrial_subject_json",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 23,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 24,
+      "pattern": "logic_checks_runtime",
+      "text": "\"logic_check_bank\": \"rubrics/logic_checks/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 24,
+      "pattern": "industrial_subject_json",
+      "text": "\"logic_check_bank\": \"rubrics/logic_checks/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 24,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"logic_check_bank\": \"rubrics/logic_checks/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 25,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "\"logic_check_profile\": \"rubrics/logic_check_profiles/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 25,
+      "pattern": "industrial_subject_json",
+      "text": "\"logic_check_profile\": \"rubrics/logic_check_profiles/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 25,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "\"logic_check_profile\": \"rubrics/logic_check_profiles/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 42,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "path=\"rubrics/scoring_model/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 47,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "path=\"rubrics/raters/layered_default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 52,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "path=\"rubrics/question_types/default.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 57,
+      "pattern": "model_answers_runtime",
+      "text": "path=\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 57,
+      "pattern": "industrial_subject_json",
+      "text": "path=\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 57,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "path=\"rubrics/model_answers/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 62,
+      "pattern": "fact_anchors_runtime",
+      "text": "path=\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 62,
+      "pattern": "industrial_subject_json",
+      "text": "path=\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 62,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "path=\"rubrics/fact_anchors/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 67,
+      "pattern": "topic_importance_runtime",
+      "text": "path=\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 67,
+      "pattern": "industrial_subject_json",
+      "text": "path=\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 67,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "path=\"rubrics/topic_importance/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 72,
+      "pattern": "logic_checks_runtime",
+      "text": "path=\"rubrics/logic_checks/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 72,
+      "pattern": "industrial_subject_json",
+      "text": "path=\"rubrics/logic_checks/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 72,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "path=\"rubrics/logic_checks/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 77,
+      "pattern": "logic_check_profiles_runtime",
+      "text": "path=\"rubrics/logic_check_profiles/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 77,
+      "pattern": "industrial_subject_json",
+      "text": "path=\"rubrics/logic_check_profiles/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 77,
+      "pattern": "hardcoded_rubrics_path",
+      "text": "path=\"rubrics/logic_check_profiles/industrial_instrumentation_control.json\",",
+      "classification": "script_or_validator"
+    }
+  ]
+}

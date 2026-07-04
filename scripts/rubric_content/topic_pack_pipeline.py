@@ -3,7 +3,6 @@ from __future__ import annotations
 import argparse
 import subprocess
 import sys
-from pathlib import Path
 
 from rubric_content.common import ROOT
 
@@ -14,9 +13,16 @@ PIPELINE_SCRIPTS = [
     "scripts/validate_generated_rubrics.py",
 ]
 
-AUDIT_SCRIPT = "scripts/audit_generated_vs_runtime.py"
-TOPIC_ID_AUDIT_SCRIPT = "scripts/audit_topic_id_consistency.py"
-SCHEMA_AUDIT_SCRIPT = "scripts/audit_generated_runtime_schema.py"
+OPTIONAL_AUDIT_SCRIPTS = {
+    "audit-generated-vs-runtime": "scripts/audit_generated_vs_runtime.py",
+    "audit-topic-id-consistency": "scripts/audit_topic_id_consistency.py",
+    "audit-generated-runtime-schema": "scripts/audit_generated_runtime_schema.py",
+    "audit-rubric-path-usage": "scripts/audit_rubric_path_usage.py",
+}
+
+
+def _script_exists(path: str) -> bool:
+    return (ROOT / path).exists()
 
 
 def run_script(path: str) -> int:
@@ -30,39 +36,47 @@ def run_script(path: str) -> int:
     return subprocess.call([sys.executable, str(script)], cwd=str(ROOT))
 
 
-def py_compile_pipeline_scripts() -> int:
-    files = [ROOT / path for path in PIPELINE_SCRIPTS]
-    existing = [str(path) for path in files if path.exists()]
+def py_compile_existing_scripts(paths: list[str]) -> int:
+    existing = [str(ROOT / path) for path in paths if _script_exists(path)]
+    missing = [path for path in paths if not _script_exists(path)]
 
-    if len(existing) != len(files):
-        missing = [str(path.relative_to(ROOT)) for path in files if not path.exists()]
-        print("ERROR missing pipeline scripts:", ", ".join(missing))
+    if missing:
+        print("ERROR missing scripts:", ", ".join(missing))
         return 1
 
-    print("RUN: py_compile topic pack pipeline")
+    if not existing:
+        return 0
+
+    print("RUN: py_compile")
+    for path in paths:
+        print(" -", path)
+
     return subprocess.call([sys.executable, "-m", "py_compile", *existing], cwd=str(ROOT))
 
 
 def cmd_validate_topic_packs(_args: argparse.Namespace) -> int:
-    rc = py_compile_pipeline_scripts()
+    paths = ["scripts/validate_topic_packs.py"]
+    rc = py_compile_existing_scripts(paths)
     rc = max(rc, run_script("scripts/validate_topic_packs.py"))
     return rc
 
 
 def cmd_build_generated_rubrics(_args: argparse.Namespace) -> int:
-    rc = py_compile_pipeline_scripts()
+    paths = ["scripts/build_generated_rubrics.py"]
+    rc = py_compile_existing_scripts(paths)
     rc = max(rc, run_script("scripts/build_generated_rubrics.py"))
     return rc
 
 
 def cmd_validate_generated_rubrics(_args: argparse.Namespace) -> int:
-    rc = py_compile_pipeline_scripts()
+    paths = ["scripts/validate_generated_rubrics.py"]
+    rc = py_compile_existing_scripts(paths)
     rc = max(rc, run_script("scripts/validate_generated_rubrics.py"))
     return rc
 
 
 def cmd_validate_generated_pipeline(_args: argparse.Namespace) -> int:
-    rc = py_compile_pipeline_scripts()
+    rc = py_compile_existing_scripts(PIPELINE_SCRIPTS)
 
     for script in PIPELINE_SCRIPTS:
         rc = max(rc, run_script(script))
@@ -74,42 +88,30 @@ def cmd_validate_generated_pipeline(_args: argparse.Namespace) -> int:
 
 
 def cmd_audit_generated_vs_runtime(_args: argparse.Namespace) -> int:
-    rc = py_compile_pipeline_scripts()
-
-    audit_path = ROOT / AUDIT_SCRIPT
-    if not audit_path.exists():
-        print("ERROR missing:", AUDIT_SCRIPT)
-        return 1
-
-    print("RUN:", AUDIT_SCRIPT)
-    rc = max(rc, subprocess.call([sys.executable, str(audit_path)], cwd=str(ROOT)))
+    path = OPTIONAL_AUDIT_SCRIPTS["audit-generated-vs-runtime"]
+    rc = py_compile_existing_scripts([path])
+    rc = max(rc, run_script(path))
     return rc
 
 
+def cmd_audit_topic_id_consistency(_args: argparse.Namespace) -> int:
+    path = OPTIONAL_AUDIT_SCRIPTS["audit-topic-id-consistency"]
+    rc = py_compile_existing_scripts([path])
+    rc = max(rc, run_script(path))
+    return rc
 
 
 def cmd_audit_generated_runtime_schema(_args: argparse.Namespace) -> int:
-    rc = py_compile_pipeline_scripts()
-
-    audit_path = ROOT / SCHEMA_AUDIT_SCRIPT
-    if not audit_path.exists():
-        print("ERROR missing:", SCHEMA_AUDIT_SCRIPT)
-        return 1
-
-    print("RUN:", SCHEMA_AUDIT_SCRIPT)
-    rc = max(rc, subprocess.call([sys.executable, str(audit_path)], cwd=str(ROOT)))
+    path = OPTIONAL_AUDIT_SCRIPTS["audit-generated-runtime-schema"]
+    rc = py_compile_existing_scripts([path])
+    rc = max(rc, run_script(path))
     return rc
 
-def cmd_audit_topic_id_consistency(_args: argparse.Namespace) -> int:
-    rc = py_compile_pipeline_scripts()
 
-    audit_path = ROOT / TOPIC_ID_AUDIT_SCRIPT
-    if not audit_path.exists():
-        print("ERROR missing:", TOPIC_ID_AUDIT_SCRIPT)
-        return 1
-
-    print("RUN:", TOPIC_ID_AUDIT_SCRIPT)
-    rc = max(rc, subprocess.call([sys.executable, str(audit_path)], cwd=str(ROOT)))
+def cmd_audit_rubric_path_usage(_args: argparse.Namespace) -> int:
+    path = OPTIONAL_AUDIT_SCRIPTS["audit-rubric-path-usage"]
+    rc = py_compile_existing_scripts([path])
+    rc = max(rc, run_script(path))
     return rc
 
 
@@ -138,13 +140,11 @@ def add_parser(sub) -> None:
     )
     p.set_defaults(func=cmd_validate_generated_pipeline)
 
-
     p = sub.add_parser(
         "audit-generated-vs-runtime",
         help="Audit generated rubric banks against current runtime JSON files",
     )
     p.set_defaults(func=cmd_audit_generated_vs_runtime)
-
 
     p = sub.add_parser(
         "audit-topic-id-consistency",
@@ -158,3 +158,8 @@ def add_parser(sub) -> None:
     )
     p.set_defaults(func=cmd_audit_generated_runtime_schema)
 
+    p = sub.add_parser(
+        "audit-rubric-path-usage",
+        help="Audit source files for direct runtime rubric JSON path usage",
+    )
+    p.set_defaults(func=cmd_audit_rubric_path_usage)
