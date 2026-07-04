@@ -4,7 +4,7 @@ import re
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
-from rubric_registry import load_topic_importance_bank
+from rubric_registry import load_topic_importance_bank as _load_topic_importance_bank
 
 
 DIFFICULTY_PROFILE_PATH = Path("rubrics/difficulty_profiles/default.json")

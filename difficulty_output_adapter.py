@@ -57,6 +57,13 @@ def _extract_question_from_grade(grade: Dict[str, Any]) -> str:
     return ""
 
 
+def _score_band_text(value, fallback=None) -> str:
+    band = value if value is not None else fallback
+    if isinstance(band, (list, tuple)) and len(band) >= 2:
+        return f"{band[0]}~{band[1]}"
+    return ""
+
+
 def _strategy_summary_text(strategy: Dict[str, Any]) -> str:
     difficulty = strategy.get("difficulty")
     difficulty_label = strategy.get("difficulty_label") or difficulty
@@ -67,33 +74,42 @@ def _strategy_summary_text(strategy: Dict[str, Any]) -> str:
     topic_label = strategy.get("topic_label") or strategy.get("topic_id")
 
     if difficulty == "THEORY_CORE":
+        excellent_text = _score_band_text(excellent, fallback=[21, 25])
+        excellent_sentence = (
+            f"{excellent_text}점 고득점 band가 열리는 고위험·고보상형 문항으로 평가합니다."
+            if excellent_text
+            else "고득점 band는 핵심 이론 충족 여부에 따라 제한적으로 열리는 문항으로 평가합니다."
+        )
         return (
             f"본 문항은 '{topic_label}' 계열의 핵심 이론 변별형 문제로 판단했습니다. "
             f"난이도 Profile은 {difficulty}({difficulty_label})이며, 선택 중요도는 {importance}, "
             f"선택 정책은 {policy}입니다. 제어이론 계열 문제는 선택했다는 사실만으로 가산점을 주지 않고, "
             f"표준 모델·핵심 변수·수식 관계·응답특성·현장 판단이 정확히 연결될 때 "
-            f"{excellent[0]}~{excellent[1]}점 고득점 band가 열리는 고위험·고보상형 문항으로 평가합니다."
+            f"{excellent_sentence}"
         )
 
     if difficulty == "BASIC_CONCEPT":
+        ceiling_text = f"{ceiling}점" if ceiling is not None else "정책 기준"
         return (
             f"본 문항은 기본 개념형 문제로 판단했습니다. 난이도 Profile은 {difficulty}({difficulty_label})이며, "
             f"정의·개념·구성·적용 범위를 폭넓게 설명하는 것이 핵심입니다. "
-            f"안정적인 득점은 가능하지만 고득점 ceiling은 약 {ceiling}점 수준으로 보았습니다."
+            f"안정적인 득점은 가능하지만 고득점 ceiling은 약 {ceiling_text} 수준으로 보았습니다."
         )
 
     if difficulty == "FIELD_APPLICATION":
+        ceiling_text = f"{ceiling}점" if ceiling is not None else "정책 기준"
         return (
             f"본 문항은 현장 적용형 문제로 판단했습니다. 난이도 Profile은 {difficulty}({difficulty_label})이며, "
             f"정의나 원리뿐 아니라 선정 기준, 현장 조건, 문제점, 개선방안, 비용·유지보수·기존 설비 영향을 연결해야 합니다. "
-            f"우수 답안의 ceiling은 약 {ceiling}점 수준으로 보았습니다."
+            f"우수 답안의 ceiling은 약 {ceiling_text} 수준으로 보았습니다."
         )
 
     if difficulty == "DESIGN_EVALUATION":
+        ceiling_text = f"{ceiling}점" if ceiling is not None else "정책 기준"
         return (
             f"본 문항은 설계·평가형 문제로 판단했습니다. 난이도 Profile은 {difficulty}({difficulty_label})이며, "
             f"평가 기준, 지표, 대안 비교, 효과 분석, 검증 방법을 포함해야 고득점이 가능합니다. "
-            f"우수 답안의 ceiling은 약 {ceiling}점 수준으로 보았습니다."
+            f"우수 답안의 ceiling은 약 {ceiling_text} 수준으로 보았습니다."
         )
 
     return (
@@ -137,6 +153,109 @@ def _non_theory_improvement_points(strategy: Dict[str, Any]) -> List[str]:
     return []
 
 
+
+
+def _difficulty_topic_id_from_grade(grade: dict) -> str | None:
+    if not isinstance(grade, dict):
+        return None
+
+    for key in ("topic_id", "inferred_topic_id", "primary_topic_id"):
+        value = grade.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+
+    ref = grade.get("model_answer_reference")
+    if isinstance(ref, dict):
+        primary = ref.get("primary_reference")
+        if isinstance(primary, dict):
+            value = primary.get("topic_id")
+            if isinstance(value, str) and value.strip():
+                return value.strip()
+
+        candidates = ref.get("candidates")
+        if isinstance(candidates, list) and candidates:
+            first = candidates[0]
+            if isinstance(first, dict):
+                answer = first.get("answer")
+                if isinstance(answer, dict):
+                    value = answer.get("topic_id")
+                    if isinstance(value, str) and value.strip():
+                        return value.strip()
+
+    return None
+
+
+def _topic_importance_strategy_from_topic_id(topic_id: str | None, question_text: str | None = None) -> dict | None:
+    if not topic_id:
+        return None
+
+    try:
+        from rubric_registry import load_topic_importance_bank
+
+        bank = load_topic_importance_bank()
+        topics = bank.get("topics", []) if isinstance(bank, dict) else []
+
+        for topic in topics:
+            if not isinstance(topic, dict):
+                continue
+            if topic.get("topic_id") != topic_id:
+                continue
+
+            difficulty = topic.get("difficulty")
+            try:
+                profile_policy = get_profile_policy(difficulty) or {}
+            except Exception:
+                profile_policy = {}
+
+            excellent_score_band = (
+                topic.get("excellent_score_band")
+                or profile_policy.get("excellent_score_band")
+                or ([21, 25] if difficulty == "THEORY_CORE" else None)
+            )
+
+            default_score_ceiling = (
+                topic.get("default_score_ceiling")
+                or profile_policy.get("default_score_ceiling")
+            )
+
+            return {
+                "question": question_text,
+                "topic_id": topic.get("topic_id"),
+                "topic_label": topic.get("label") or topic.get("title") or topic.get("title_ko") or topic.get("topic_id"),
+                "matched": True,
+                "matched_by": "grade.topic_id",
+                "matched_aliases": [],
+                "difficulty": difficulty,
+                "difficulty_label": topic.get("difficulty_label") or difficulty,
+                "selection_importance": topic.get("selection_importance"),
+                "selection_policy": topic.get("selection_policy") or profile_policy.get("selection_policy"),
+                "minimum_attempt_floor": topic.get("minimum_attempt_floor") or profile_policy.get("minimum_attempt_floor"),
+                "target_score": topic.get("target_score") or profile_policy.get("target_score"),
+                "excellent_score_band": excellent_score_band,
+                "default_score_ceiling": default_score_ceiling,
+                "requires_band_unlock": bool(
+                    topic.get(
+                        "requires_band_unlock",
+                        profile_policy.get("requires_band_unlock", difficulty == "THEORY_CORE")
+                    )
+                ),
+                "high_band_unlock_conditions": topic.get("high_band_unlock_conditions", []),
+                "omission_risk": topic.get("omission_risk") or profile_policy.get("omission_risk"),
+                "fatal_error_risk": topic.get("fatal_error_risk") or profile_policy.get("fatal_error_risk"),
+                "score_ceiling_policy": topic.get("score_ceiling_policy") or profile_policy.get("score_ceiling_policy"),
+                "note": topic.get("note"),
+            }
+
+    except Exception as exc:
+        return {
+            "question": question_text,
+            "topic_id": topic_id,
+            "matched": False,
+            "error": str(exc),
+        }
+
+    return None
+
 def attach_difficulty_strategy_to_grade(
     grade: Dict[str, Any],
     question_text: Optional[str] = None
@@ -165,6 +284,20 @@ def attach_difficulty_strategy_to_grade(
             "error": str(e)
         })
         return grade
+
+    # Prefer explicit topic_id already inferred by upstream rubric routing.
+    # This prevents topic_importance from falling back to "unknown" when
+    # question text extraction is weak but model_answer/fact_anchor routing
+    # already identified the topic.
+    topic_id = _difficulty_topic_id_from_grade(grade)
+    topic_strategy = _topic_importance_strategy_from_topic_id(topic_id, question_text)
+
+    if isinstance(topic_strategy, dict) and topic_strategy.get("matched"):
+        strategy = topic_strategy
+    elif isinstance(strategy, dict) and topic_id and strategy.get("topic_id") in {None, "", "unknown"}:
+        strategy = dict(strategy)
+        strategy["topic_id"] = topic_id
+        strategy["topic_id_source"] = "grade.topic_id"
 
     grade["difficulty_strategy"] = strategy
 

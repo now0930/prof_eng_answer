@@ -85,6 +85,179 @@ def build_fact_anchors(packs: list[dict[str, Any]], version: str) -> dict[str, A
     }
 
 
+def _as_str_list(value: Any) -> list[str]:
+    if value is None:
+        return []
+    if isinstance(value, str):
+        value = value.strip()
+        return [value] if value else []
+    if isinstance(value, list):
+        out: list[str] = []
+        for item in value:
+            if isinstance(item, str):
+                s = item.strip()
+                if s:
+                    out.append(s)
+            elif isinstance(item, dict):
+                # For outline-like objects, prefer human-readable intent/section.
+                for key in ("intent", "section", "name", "title", "text"):
+                    v = item.get(key)
+                    if isinstance(v, str) and v.strip():
+                        out.append(v.strip())
+                        break
+        return out
+    return []
+
+
+def _unique(values: list[str]) -> list[str]:
+    seen: set[str] = set()
+    out: list[str] = []
+    for value in values:
+        value = value.strip()
+        if not value:
+            continue
+        if value in seen:
+            continue
+        seen.add(value)
+        out.append(value)
+    return out
+
+
+def _outline_sections(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    out: list[str] = []
+    for item in value:
+        if isinstance(item, dict):
+            section = item.get("section")
+            if isinstance(section, str) and section.strip():
+                out.append(section.strip())
+        elif isinstance(item, str) and item.strip():
+            out.append(item.strip())
+    return _unique(out)
+
+
+def _outline_intents(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    out: list[str] = []
+    for item in value:
+        if isinstance(item, dict):
+            intent = item.get("intent") or item.get("section")
+            if isinstance(intent, str) and intent.strip():
+                out.append(intent.strip())
+        elif isinstance(item, str) and item.strip():
+            out.append(item.strip())
+    return _unique(out)
+
+
+def _extract_fact_anchor_terms(fact_anchor: dict[str, Any]) -> list[str]:
+    terms: list[str] = []
+
+    def visit(obj: Any) -> None:
+        if isinstance(obj, dict):
+            for key, value in obj.items():
+                key_l = str(key).lower()
+                if key_l in {
+                    "topic_aliases",
+                    "aliases",
+                    "keywords",
+                    "core_terms",
+                    "support_terms",
+                    "field_terms",
+                    "field_keywords",
+                    "core_terms_found",
+                    "support_terms_found",
+                }:
+                    terms.extend(_as_str_list(value))
+                else:
+                    visit(value)
+        elif isinstance(obj, list):
+            for item in obj:
+                visit(item)
+
+    visit(fact_anchor)
+    return _unique(terms)
+
+
+def normalize_model_answer_for_runtime(pack: dict[str, Any]) -> dict[str, Any]:
+    topic_id = pack["topic_id"]
+    model_answer = dict(pack["model_answer"])
+    fact_anchor = pack.get("fact_anchor") if isinstance(pack.get("fact_anchor"), dict) else {}
+
+    title = (
+        model_answer.get("title")
+        or model_answer.get("title_ko")
+        or model_answer.get("name")
+        or topic_id
+    )
+
+    question_examples = (
+        _as_str_list(model_answer.get("question_examples"))
+        or _as_str_list(model_answer.get("expected_question_patterns"))
+    )
+
+    recommended_outline = model_answer.get("recommended_outline")
+
+    expected_structure = (
+        _as_str_list(model_answer.get("expected_structure"))
+        or _outline_sections(recommended_outline)
+    )
+
+    model_answer_outline = (
+        _as_str_list(model_answer.get("model_answer_outline"))
+        or _outline_intents(recommended_outline)
+    )
+
+    high_score_features = (
+        _as_str_list(model_answer.get("high_score_features"))
+        or _as_str_list(model_answer.get("high_score_points"))
+    )
+
+    low_score_patterns = (
+        _as_str_list(model_answer.get("low_score_patterns"))
+        or _as_str_list(model_answer.get("common_missing_points"))
+    )
+
+    topic_aliases = _unique(
+        _as_str_list(model_answer.get("topic_aliases"))
+        + _as_str_list(model_answer.get("aliases"))
+        + _as_str_list(model_answer.get("title"))
+        + _as_str_list(model_answer.get("title_ko"))
+        + question_examples
+        + [topic_id, topic_id.replace("_", " ")]
+        + _extract_fact_anchor_terms(fact_anchor)
+    )
+
+    field_connection_points = _unique(
+        _as_str_list(model_answer.get("field_connection_points"))
+        + _as_str_list(model_answer.get("field_keywords"))
+        + _as_str_list(model_answer.get("practical_keywords"))
+        + _extract_fact_anchor_terms(fact_anchor)
+    )
+
+    runtime_answer = dict(model_answer)
+    runtime_answer.update(
+        {
+            "id": model_answer.get("id") or f"{topic_id}_COMPARE_v1",
+            "topic_id": topic_id,
+            "question_type": model_answer.get("question_type") or "COMPARE_SELECTION",
+            "title": title,
+            "question_examples": question_examples,
+            "topic_aliases": topic_aliases,
+            "expected_structure": expected_structure,
+            "model_answer_outline": model_answer_outline,
+            "high_score_features": high_score_features,
+            "low_score_patterns": low_score_patterns,
+            "field_connection_points": field_connection_points,
+            "revision_notes": _as_str_list(model_answer.get("revision_notes")),
+            "source_schema_version": model_answer.get("schema_version"),
+        }
+    )
+
+    return runtime_answer
+
+
 def build_model_answers(packs: list[dict[str, Any]], version: str) -> dict[str, Any]:
     return {
         "version": f"{version}-generated-topic-pack-model-answers",
@@ -93,7 +266,7 @@ def build_model_answers(packs: list[dict[str, Any]], version: str) -> dict[str, 
         "source": "rubrics/topic_packs/*/model_answer.json",
         "runtime_status": "generated_candidate_not_yet_runtime_default",
         "answers": [
-            pack["model_answer"]
+            normalize_model_answer_for_runtime(pack)
             for pack in packs
         ],
     }

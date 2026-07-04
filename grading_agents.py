@@ -3048,6 +3048,44 @@ def _phase2_postprocess_grade(legacy_result):
             or locals().get("problem")
             or locals().get("exam_question")
         )
+
+        # The phase2 postprocessor usually has input_text, fact_eval and
+        # model_answer_ref in scope, but not a variable literally named
+        # question/question_text. Derive the question explicitly so the
+        # difficulty strategy layer can match topic_importance.
+        if not _question_for_difficulty_final:
+            try:
+                _question_for_difficulty_final = _phase3_extract_question_text(input_text)
+            except Exception:
+                _question_for_difficulty_final = input_text
+
+        # Expose the best known topic_id on the grade before difficulty
+        # strategy runs. This is especially important for generated topic-pack
+        # mode where the generated topic_importance bank may contain only one
+        # precise topic_id.
+        try:
+            _difficulty_topic_id = None
+
+            if isinstance(fact_eval, dict):
+                _difficulty_topic_id = fact_eval.get("topic_id")
+
+            if not _difficulty_topic_id and isinstance(model_answer_ref, dict):
+                _difficulty_topic_id = (
+                    (model_answer_ref.get("primary_reference") or {}).get("topic_id")
+                    or (
+                        ((model_answer_ref.get("candidates") or [{}])[0].get("answer") or {}).get("topic_id")
+                        if isinstance(model_answer_ref.get("candidates"), list)
+                        and model_answer_ref.get("candidates")
+                        else None
+                    )
+                )
+
+            if _difficulty_topic_id and isinstance(grade, dict):
+                grade.setdefault("topic_id", _difficulty_topic_id)
+                grade.setdefault("inferred_topic_id", _difficulty_topic_id)
+        except Exception:
+            pass
+
         grade = attach_difficulty_strategy_to_grade(
             grade,
             question_text=_question_for_difficulty_final
@@ -3060,7 +3098,11 @@ def _phase2_postprocess_grade(legacy_result):
             f"topic={_ds.get('topic_id')}"
         )
     except Exception as e:
-        print(f"[agent] phase20 final difficulty strategy skipped: {e}")
+        print(f"[agent] phase20 final difficulty strategy skipped: {e!r}")
+        try:
+            print(traceback.format_exc())
+        except Exception:
+            pass
 
     # PHASE21_DIFFICULTY_SCORE_CEILING_FINAL_ORDERED
     try:
@@ -3712,7 +3754,65 @@ def _phase10_run_model_answer_reference(
         if isinstance(subject_rubric, dict):
             bank_path = subject_rubric.get("model_answer_bank")
 
-        bank = load_model_answer_bank(bank_path)
+        # Runtime bank mode guard:
+        # In generated mode, ignore explicit legacy bank_path passed from subject_rubric/config
+        # so load_model_answer_bank() can resolve rubrics/generated/model_answers.generated.json.
+        import os as _os
+
+        effective_bank_path = bank_path
+        if _os.getenv("RUBRIC_BANK_MODE", "legacy").strip().lower() == "generated":
+            effective_bank_path = None
+
+        bank = load_model_answer_bank(effective_bank_path)
+
+        # Generated bank is often a narrow single-topic bank during migration.
+        # If upstream question type detection falls back to GENERAL, do not let
+        # that weak lens prevent the only generated topic-pack model answer from
+        # being considered. This keeps generated-mode smoke tests focused on
+        # topic-pack routing while leaving legacy behavior unchanged.
+        if _os.getenv("RUBRIC_BANK_MODE", "legacy").strip().lower() == "generated":
+            try:
+                answers = bank.get("answers", []) if isinstance(bank, dict) else []
+                if len(answers) == 1 and isinstance(answers[0], dict):
+                    only_answer = answers[0]
+                    generated_topic_id = only_answer.get("topic_id")
+                    generated_question_type = only_answer.get("question_type")
+
+                    if isinstance(question_type_eval, dict) and generated_question_type:
+                        primary = question_type_eval.get("primary_type")
+                        primary_id = None
+                        if isinstance(primary, dict):
+                            primary_id = primary.get("id")
+
+                        if not primary_id or str(primary_id).strip().upper() in {
+                            "GENERAL",
+                            "UNKNOWN",
+                            "UNCLASSIFIED",
+                            "NONE",
+                        }:
+                            question_type_eval = dict(question_type_eval)
+                            primary = dict(primary or {})
+                            primary["id"] = generated_question_type
+                            primary.setdefault("name", "generated single-topic inferred type")
+                            question_type_eval["primary_type"] = primary
+                            question_type_eval["generated_single_topic_override"] = {
+                                "applied": True,
+                                "reason": "single generated model_answer with weak upstream question type",
+                                "from_question_type": primary_id,
+                                "to_question_type": generated_question_type,
+                                "topic_id": generated_topic_id,
+                            }
+
+                    if isinstance(fact_eval, dict) and generated_topic_id and not fact_eval.get("topic_id"):
+                        fact_eval = dict(fact_eval)
+                        fact_eval["topic_id"] = generated_topic_id
+                        fact_eval["generated_single_topic_override"] = {
+                            "applied": True,
+                            "reason": "single generated model_answer supplied missing fact_eval.topic_id",
+                            "topic_id": generated_topic_id,
+                        }
+            except Exception:
+                pass
 
         result = find_model_answer_reference(
             question_text=question_text,

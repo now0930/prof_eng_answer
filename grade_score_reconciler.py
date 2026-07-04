@@ -841,7 +841,31 @@ def reconcile_grade_score(
     cap_eval["uncapped_score_detected"] = uncapped_score
     cap_eval["alignment_penalty"] = penalty
     cap_eval["adjusted_score"] = adjusted
+    cap_eval["effective_score"] = adjusted
+    cap_eval["effective_policy"] = "llm_adjusted_cap_relaxation"
     cap_eval["llm_cap_reconciliation"] = "adjusted"
+
+    # Keep final grade-level score metadata consistent with the adjusted score.
+    # Deterministic strict cap was calculated first, but later adjudication
+    # partially relaxed it because fatal error was not found and high-band
+    # unlock evidence existed.
+    parsed["total_score"] = adjusted
+    parsed["final_total_score"] = adjusted
+    parsed["pre_ceiling_total_score"] = uncapped_score
+
+    try:
+        parsed["score_range"] = (
+            f"{max(0.0, adjusted - 0.5):.1f}~"
+            f"{min(max_score, adjusted + 0.5):.1f}"
+        )
+    except Exception:
+        pass
+
+    cap_eval["reason"] = (
+        f"THEORY_CORE strict ceiling 후보 {current_score}점이 산출되었으나, "
+        f"fatal 오류 없음, high-band unlock 근거, 구조화 채점 강도를 반영하여 "
+        f"최종 점수를 {adjusted}점으로 부분 완화했습니다."
+    )
     cap_eval["llm_reason"] = adjudication.get("reason", "")
 
     if adjudication.get("question_type_decision") == "change":
