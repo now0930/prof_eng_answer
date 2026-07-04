@@ -30,7 +30,7 @@ _GENERATED_PATHS = {
 
 
 def get_rubric_bank_mode() -> RubricBankMode:
-    mode = os.getenv("RUBRIC_BANK_MODE", "legacy").strip().lower()
+    mode = os.getenv("RUBRIC_BANK_MODE", "generated").strip().lower()
 
     if mode not in _ALLOWED_MODES:
         raise ValueError(

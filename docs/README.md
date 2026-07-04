@@ -1,19 +1,11 @@
 # Documentation Index
 
-이 디렉터리는 `prof_eng_answer`의 운영 문서, 채점 설계 문서, rubric 작성 문서, Logic Check 작성 문서를 보관한다.
+이 디렉터리는 `prof_eng_answer`의 운영 문서와 rubric 작성 문서를 보관한다.  
+이 문서는 과거 문서 조각을 이어 붙인 파일이 아니라, 현재 코드 구조와 현재 docs 디렉터리 구성을 기준으로 작성한 문서 인덱스다.
 
-이 문서는 docs 디렉터리의 지도다. 프로젝트 소개, 빠른 실행, 전체 시스템 요약은 루트 `README.md`에서 관리한다.
+---
 
-## 1. 문서 역할 분리
-
-| 문서 | 담당 범위 | 담당하지 않는 것 |
-|---|---|---|
-| `README.md` | 프로젝트 소개, 빠른 실행, 핵심 구조 요약, 기본 검증 | 세부 설계, rubric 작성 규칙, generator prompt 상세 |
-| `docs/README.md` | docs 문서 인덱스, 문서별 책임 범위, 유지보수 규칙 | 루트 실행 안내의 반복, 전체 채점표 상세 반복 |
-| docs 하위 세부 문서 | 각 주제의 상세 설계와 작성 기준 | 다른 문서의 긴 요약 복붙 |
-| `docs/archive/` | 과거 문서와 참고 이력 | 현재 기준 문서 |
-
-## 2. 문서 우선순위
+## 1. 문서 우선순위
 
 코드와 문서가 충돌할 때는 다음 순서를 따른다.
 
@@ -26,156 +18,289 @@
 
 오래된 구조 설명, migration 기록, 현재 코드와 충돌할 수 있는 문서는 현재 기준 문서로 사용하지 않는다. 필요한 경우 `docs/archive/` 아래로 이동한다.
 
-## 3. 현재 기준 문서
+---
 
-| 문서 | 읽는 경우 | 관리 기준 |
-|---|---|---|
-| `operation_runbook.md` | Bot 운영, 재시작, 장애 대응이 필요할 때 | 실제 Docker Compose 서비스명과 컨테이너명 |
-| `docker_compose_usage.md` | 로컬/서버 실행 방식을 확인할 때 | 현재 compose 파일과 mount 구조 |
-| `grading_architecture.md` | A/B/C/D/E 25점 채점 구조를 볼 때 | `rubrics/scoring_model/default.json` |
-| `question_type_taxonomy.md` | 문제 유형 기준과 legacy mapping을 볼 때 | `rubrics/question_types/default.json` |
-| `difficulty_and_selection_strategy.md` | 난이도, 선택 전략, score ceiling을 볼 때 | `difficulty_strategy.py`, `difficulty_score_ceiling.py` |
-| `llm_provider.md` | Gemini, CLOVA 등 provider 설정을 볼 때 | provider router와 환경 변수 |
-| `rubric_authoring_guide.md` | Model Answer, Fact Anchor, Topic Importance를 작성할 때 | 각 rubric JSON schema |
-| `model_answer_generator_prompt.md` | Model Answer Bank 초안을 만들 때 | model answer schema |
-| `fact_anchor_generator_prompt.md` | Fact Anchor Bank 초안을 만들 때 | fact anchor schema |
-| `logic_check_profiles_readme.md` | Logic Check Profile 운영 기준을 볼 때 | profile JSON과 verifier 코드 |
-| `logic_check_profile_generator_prompt.md` | LLM verifier profile 초안을 만들 때 | `rubrics/logic_check_profiles/...json` |
-| `logic_check_json_generator_prompt.md` | rule-based Logic Check Bank 초안을 만들 때 | `rubrics/logic_checks/...json` |
-| `archive/` | 과거 판단 근거를 참고할 때 | 현재 기준으로 직접 인용하지 않음 |
+## 2. 현재 기준 문서
 
-## 4. 코드와 직접 연결되는 기준 파일
+| 문서 | 역할 |
+|---|---|
+| `operation_runbook.md` | Bot 운영, 재시작, 장애 대응 |
+| `docker_compose_usage.md` | Docker Compose 기반 실행 방식 |
+| `grading_architecture.md` | A/B/C/D/E 25점 채점 구조 |
+| `question_type_taxonomy.md` | Question Type 기준과 분류 원칙 |
+| `difficulty_and_selection_strategy.md` | 문항 난이도와 선택 전략 |
+| `llm_provider.md` | Gemini, CLOVA 등 LLM provider 설정 |
+| `rubric_authoring_guide.md` | Model Answer, Fact Anchor, Topic Importance 작성 방법 |
+| `topic_pack_workflow.md` | Topic Pack 저장, generated bank, frozen/changed-only 검토 workflow |
+| `model_answer_generator_prompt.md` | Model Answer Bank 초안 생성 프롬프트 |
+| `fact_anchor_generator_prompt.md` | Fact Anchor Bank 초안 생성 프롬프트 |
+| `logic_check_profiles_readme.md` | 표, 도면, 수식, 비교 구조의 Logic Check 반영 기준 |
+| `logic_check_profile_generator_prompt.md` | Logic Check Profile JSON 초안 생성 프롬프트 |
+| `logic_check_json_generator_prompt.md` | Logic Check Bank JSON 초안 생성 프롬프트 |
+| `archive/` | 과거 문서와 참고용 이력 문서 |
+
+---
+
+## 3. 코드와 직접 연결되는 기준 파일
+
+### 3.1 Runtime entry / orchestration
 
 | 구분 | 파일 |
 |---|---|
 | Bot entrypoint | `bot.py` |
 | Semantic grading | `grading_agents.py` |
-| Provider routing | `llm_provider_router.py` |
-| Scoring model | `rubrics/scoring_model/default.json` |
-| Rater profile | `rubrics/raters/layered_default.json` |
-| Question Type profile | `rubrics/question_types/default.json` |
+| Model Answer routing | `model_answer_router.py` |
+| Question Type routing | `question_type_router.py` |
+| Difficulty strategy | `difficulty_strategy.py` |
+| Logic Check evaluator | `logic_check_evaluator.py` |
+| Logic LLM verifier | `logic_llm_verifier.py` |
+
+### 3.2 Legacy Rubric Bank
+
+| 구분 | 파일 |
+|---|---|
+| Scoring Model | `rubrics/scoring_model/default.json` |
+| Rater Profile | `rubrics/raters/layered_default.json` |
+| Question Type Profile | `rubrics/question_types/default.json` |
 | Model Answer Bank | `rubrics/model_answers/industrial_instrumentation_control.json` |
 | Fact Anchor Bank | `rubrics/fact_anchors/industrial_instrumentation_control.json` |
 | Topic Importance | `rubrics/topic_importance/industrial_instrumentation_control.json` |
 | Logic Check Bank | `rubrics/logic_checks/industrial_instrumentation_control.json` |
 | Logic Check Profile | `rubrics/logic_check_profiles/industrial_instrumentation_control.json` |
 
-## 5. 문서별 책임 범위
+### 3.3 Topic Pack Source
 
-### 5.1 채점 구조 문서
+| 구분 | 파일/디렉터리 |
+|---|---|
+| Topic Pack 원천 | `rubrics/topic_packs/<topic_id>/` |
+| Topic Pack README | `rubrics/topic_packs/<topic_id>/README.md` |
+| Fact Anchor source | `rubrics/topic_packs/<topic_id>/fact_anchor.json` |
+| Model Answer source | `rubrics/topic_packs/<topic_id>/model_answer.json` |
+| Topic Importance source | `rubrics/topic_packs/<topic_id>/topic_importance.json` |
+| Logic Check source | `rubrics/topic_packs/<topic_id>/logic_check.json` |
+| Topic 상태/hash | `rubrics/topic_packs/<topic_id>/topic_status.json` |
 
-`grading_architecture.md`는 A/B/C/D/E layer의 의미, 배점, rater profile 연결을 관리한다.
+### 3.4 Generated Rubric Bank
 
-이 문서에는 다음 내용을 둔다.
+| 구분 | 파일 |
+|---|---|
+| Fact Anchors | `rubrics/generated/fact_anchors.generated.json` |
+| Model Answers | `rubrics/generated/model_answers.generated.json` |
+| Topic Importance | `rubrics/generated/topic_importance.generated.json` |
+| Logic Checks | `rubrics/generated/logic_checks.generated.json` |
+| Logic Check Profiles | `rubrics/generated/logic_check_profiles.generated.json` |
+| Topic Pack Manifest | `rubrics/generated/topic_pack_manifest.generated.json` |
 
-- A/B/C/D/E layer별 평가 기준
-- 교수, 기술사, 기업 임원 rater 관점
-- score cap과 postprocess의 위치
-- Logic Check와 scoring model의 경계
+`rubrics/topic_packs/`는 사람이 관리하는 source of truth이고, `rubrics/generated/`는 runtime에서 읽기 쉽게 합친 build output이다.
 
-### 5.2 Question Type 문서
+---
 
-`question_type_taxonomy.md`는 active question type과 legacy type mapping을 관리한다.
+## 4. Legacy / Generated 평가 모드
 
-이 문서에는 다음 내용을 둔다.
+Rubric bank 경로는 `rubric_bank_paths.py`에서 선택한다.
 
-- 4개 active question type
-- 10개 legacy type mapping
-- DEFINE과 STRUCTURE의 처리 기준
-- C/D 평가 방향 보정 방식
+```text
+RUBRIC_BANK_MODE=generated
+  → rubrics/generated/*.generated.json 사용
 
-`docs/README.md`에는 question type 표 전체를 반복하지 않는다.
+RUBRIC_BANK_MODE=legacy
+  → 기존 industrial_instrumentation_control.json 사용
+```
 
-### 5.3 Rubric 작성 문서
+운영 원칙은 다음과 같다.
 
-`rubric_authoring_guide.md`는 rubric JSON을 작성할 때의 공통 원칙을 관리한다.
+```text
+기본 평가:
+  generated topic bank
 
-이 문서에는 다음 내용을 둔다.
+기존 전체 범위 fallback:
+  RUBRIC_BANK_MODE=legacy
 
-- Model Answer Bank 작성 기준
-- Fact Anchor Bank 작성 기준
-- Topic Importance 작성 기준
-- expected structure, high score features, field application 요소의 관계
+topic pack 개발/검증:
+  generated와 legacy를 smoke에서 비교
+```
 
-### 5.4 Logic Check 문서
+`logic_llm_verifier.py`도 `resolve_rubric_bank_path("logic_check_profiles")`를 사용해야 한다. 따라서 generated 모드에서는 `rubrics/generated/logic_check_profiles.generated.json`을 사용하고, legacy 모드에서는 `rubrics/logic_check_profiles/industrial_instrumentation_control.json`을 사용한다. 단, `LOGIC_CHECK_PROFILE_PATH`를 지정하면 해당 경로가 최우선이다.
+
+---
+
+## 5. Topic Pack 운영 문서
+
+Topic Pack의 상세 workflow는 다음 문서에서 관리한다.
+
+```text
+docs/topic_pack_workflow.md
+```
+
+이 문서가 다루는 내용은 다음과 같다.
+
+```text
+- topic pack 저장 위치
+- generated bank와 legacy bank의 차이
+- RUBRIC_BANK_MODE 운영 방식
+- 현재 topic 선택 방식
+- topic_router.py 분리 전 구조
+- topic pack 작성/검토 workflow
+- frozen / changed-only workflow
+- generated 파일 관리 정책
+- Gemini review report 위치
+- 현재 완성된 topic
+- 다음 개선 작업
+```
+
+---
+
+## 6. Question Type 문서화 기준
+
+현재 `rubrics/question_types/default.json` 기준으로 question type은 4개 active 대분류와 10개 legacy type mapping으로 구성된다.
+
+### 6.1 Active question type 4개
+
+| Active Type | 한국어명 | absorbs_legacy_types |
+|---|---|---|
+| `PRINCIPLE_INTERPRETATION` | 원리·해석형 | `PRINCIPLE`, `CALC_DESIGN` |
+| `DIAGNOSIS_ACTION` | 진단·대책형 | `PROBLEM_SOLVE`, `CAUSE_ACTION` |
+| `COMPARE_SELECTION` | 비교·선정형 | `COMPARE`, `STRUCTURE` |
+| `IMPLEMENTATION_EVALUATION` | 적용·평가형 | `PROCEDURE`, `APPLICATION`, `EVALUATION`, `STRUCTURE` |
+
+### 6.2 Legacy question type 10개
+
+| Legacy Type | 한국어명 | legacy_mapping 기준 |
+|---|---|---|
+| `DEFINE` | 정의·개념 설명형 | `null`, 즉 신규 체계에서 독립 active type으로 사용하지 않음 |
+| `PRINCIPLE` | 원리·메커니즘형 | `PRINCIPLE_INTERPRETATION` |
+| `STRUCTURE` | 구성·분류형 | 기본 매핑은 `COMPARE_SELECTION`; 단 `IMPLEMENTATION_EVALUATION`도 absorbs_legacy_types에 `STRUCTURE`를 포함 |
+| `COMPARE` | 비교·선정형 | `COMPARE_SELECTION` |
+| `PROBLEM_SOLVE` | 문제점·개선방안형 | `DIAGNOSIS_ACTION` |
+| `CAUSE_ACTION` | 원인·대책형 | `DIAGNOSIS_ACTION` |
+| `PROCEDURE` | 절차·방법론형 | `IMPLEMENTATION_EVALUATION` |
+| `CALC_DESIGN` | 계산·설계형 | `PRINCIPLE_INTERPRETATION` |
+| `APPLICATION` | 사례·적용형 | `IMPLEMENTATION_EVALUATION` |
+| `EVALUATION` | 평가·효과 분석형 | `IMPLEMENTATION_EVALUATION` |
+
+정확한 표현은 “10개 legacy type을 4개 active type으로 매핑한다”이다.
+
+---
+
+## 7. Logic Check 문서 작성 기준
 
 Logic Check 관련 문서는 다음 기준으로 분리한다.
 
 | 문서 | 기준 |
 |---|---|
 | `logic_check_profiles_readme.md` | Logic Check Profile 운영 원칙과 표·도면·수식 반영 기준 |
-| `logic_check_profile_generator_prompt.md` | LLM verifier profile 생성 프롬프트 |
-| `logic_check_json_generator_prompt.md` | rule-based Logic Check Bank 생성 프롬프트 |
+| `logic_check_profile_generator_prompt.md` | `rubrics/logic_check_profiles/...json` 또는 topic pack `logic_check.json`의 LLM verifier profile 생성 프롬프트 |
+| `logic_check_json_generator_prompt.md` | `rubrics/logic_checks/...json` 또는 topic pack `logic_check.json`의 rule bank 생성 프롬프트 |
 
-역할 구분:
+역할 구분은 다음과 같다.
 
 | 구분 | 역할 |
 |---|---|
-| Logic Check Profile | candidate evidence, truth schema, fatal conditions, safe conditions 등 LLM verifier용 지식 |
-| Logic Check Bank | regex 기반 topic truth check, fatal/major/minor check, question type check, D/E claim trust metadata |
-| D/E scoring | Logic Check가 직접 평가하지 않고 A/B/C/D/E scoring model이 담당 |
-| D/E claim trust | Logic Check topic truth 결과를 D/E 주장 신뢰도 판단에 참고하는 metadata |
+| Logic Check Profile | candidate evidence, truth schema, fatal/safe condition 등 LLM verifier용 지식 |
+| Logic Check Bank | regex 기반 fatal/major/minor topic truth check, question type 보조 check, D/E claim trust metadata |
+| Logic Check Evaluator | Logic Check 적용 여부 판단, finding 정리, fatal ceiling 정보 생성, D/E claim trust metadata 생성 |
 
-## 6. 문서 변경 후 검증
+---
 
-문서만 수정했을 때:
+## 8. Logic Check와 D/E 관계
 
-    cd ~/hermes/workspace/prof_eng_answer
+Logic Check는 D/E를 직접 평가하지 않는다. D/E 점수는 A/B/C/D/E scoring model에서만 산정한다.
 
-    python3 scripts/validate_logic_check_de_policy.py
-    git diff --check
-    git diff --stat
-    git status --short
+Logic Check의 topic은 D/E 주장과 연결될 수 있지만, 그 역할은 감점이나 가점이 아니라 이론적 신뢰도 검증이다.
 
-Logic Check 관련 문서를 수정했을 때:
+| 상태 | 의미 |
+|---|---|
+| `trusted` | Logic Check finding이 없어 해당 topic 기반 D/E 주장을 이론적으로 신뢰 가능 |
+| `trusted_with_notes` | fatal/major는 없고 minor 보완만 있어 대체로 신뢰 가능 |
+| `not_invalidated` | fatal은 없지만 major gap이 있어 반증되지는 않았으나 충분히 입증된 것으로 보지는 않음 |
+| `limited` | fatal이 있어 해당 topic 기반 D/E 주장을 제한적으로만 신뢰 |
 
-    cd ~/hermes/workspace/prof_eng_answer
+핵심 원칙은 다음과 같다.
 
-    python3 scripts/validate_logic_check_de_policy.py
-    python3 scripts/check_logic_check_de_claim_trust_regression.py
-    python3 scripts/validate_logic_check_bank.py
-    git diff --check
+1. Logic Check finding의 `affected_layers`에는 원칙적으로 `A`, `B`, `C`만 사용한다.
+2. `D`, `E`는 `affected_layers`가 아니라 `de_claim_trust.target_layers`로만 연결한다.
+3. D/E 점수는 scoring model이 평가한다.
+4. Logic Check는 D/E claim trust만 제공한다.
+5. THEORY_CORE fatal은 기존 score cap 정책을 유지한다.
+6. C 영역 fatal이 있더라도 D/E 현장 적용 시도 자체는 scoring model에서 별도 평가한다.
+7. keyword-only 답안은 fatal이 없더라도 fully trusted로 보지 않는다.
 
-Question Type 또는 Rubric 관련 문서를 수정했을 때:
+---
 
-    cd ~/hermes/workspace/prof_eng_answer
+## 9. 문서별 유지 원칙
 
-    python3 scripts/validate_rubric_bank_format.py
-    python3 scripts/validate_rubric_bank_content.py
-    python3 scripts/rubric_manager.py validate-all
-    python3 scripts/rubric_manager.py validate-topic-importance
-    python3 scripts/validate_question_type_profile.py
-    git diff --check
+| 문서 유형 | 유지 원칙 |
+|---|---|
+| 운영 runbook | 실제 Docker Compose와 컨테이너 이름 기준으로 유지 |
+| 채점 구조 문서 | `rubrics/scoring_model/default.json` 기준으로 유지 |
+| Question Type 문서 | `rubrics/question_types/default.json` 기준으로 유지 |
+| Rubric 작성 문서 | legacy bank와 topic pack source 구조를 함께 반영 |
+| Topic Pack 문서 | `rubrics/topic_packs/`, `rubrics/generated/`, `rubric_bank_paths.py` 기준으로 유지 |
+| Logic Check 문서 | `logic_check_profiles`, `logic_checks`, topic pack `logic_check.json`, evaluator 코드 기준으로 유지 |
+| Archive 문서 | 참고용으로만 유지하고 현재 기준으로 인용하지 않음 |
 
-## 7. 중복 방지 규칙
+---
 
-1. 루트 README에는 빠른 실행과 전체 구조 요약만 둔다.
-2. docs README에는 문서 목록과 문서별 책임 범위만 둔다.
-3. 세부 표와 긴 정책 설명은 전용 문서에 둔다.
-4. 같은 표를 README와 docs README에 동시에 유지하지 않는다.
-5. 검증 명령은 목적별 최소 명령만 둔다.
-6. 오래된 D/E 직접 평가 구조나 deprecated prompt 표현은 다시 넣지 않는다.
-7. README와 docs README는 append 방식으로 누적하지 않고 필요 시 완전 재작성한다.
+## 10. README 관리 원칙
 
-## 8. commit 기준
+루트 README는 다음 내용을 중심으로 유지한다.
 
-문서 인덱스와 루트 README만 수정한 경우:
+1. 프로젝트 목적
+2. 실행 구조
+3. 주요 Python 모듈
+4. Rubric Bank 구조
+5. Topic Pack / Generated Bank 구조
+6. A/B/C/D/E scoring model
+7. Question Type lens
+8. Logic Check 운영 구조
+9. D/E claim trust 정책
+10. 문서 인덱스
+11. 검증 명령
+12. commit 절차
 
-    cd ~/hermes/workspace/prof_eng_answer
+루트 README에는 과거 migration log나 긴 검증 로그를 누적하지 않는다.
 
-    git add README.md docs/README.md
-    git diff --cached --stat
-    git diff --cached --check
-    git commit -m "Split root and docs README responsibilities"
+---
 
-Logic Check 문서나 validator까지 함께 수정한 경우:
+## 11. 검증 명령
 
-    git add README.md docs/README.md \
-      docs/logic_check_profiles_readme.md \
-      docs/logic_check_profile_generator_prompt.md \
-      docs/logic_check_json_generator_prompt.md \
-      scripts/validate_logic_check_de_policy.py
+기본 검증은 다음 순서로 수행한다.
 
-    git diff --cached --stat
-    git diff --cached --check
-    git commit -m "Refresh documentation structure and logic check docs"
+```bash
+cd ~/hermes/workspace/prof_eng_answer
+
+python3 -m py_compile \
+  bot.py \
+  grading_agents.py \
+  difficulty_score_ceiling.py \
+  logic_check_evaluator.py \
+  logic_llm_verifier.py
+
+python3 scripts/validate_logic_check_de_policy.py
+python3 scripts/check_logic_check_de_claim_trust_regression.py
+python3 scripts/validate_logic_check_bank.py
+python3 scripts/rubric_manager.py validate-all
+python3 scripts/rubric_manager.py validate-topic-importance
+python3 scripts/validate_question_type_profile.py
+python3 scripts/rubric_manager.py validate-topic-pack-release
+git diff --check
+```
+
+Topic Pack 관련 검증은 다음을 사용한다.
+
+```bash
+python3 scripts/rubric_manager.py topic-pack-status --all --include-frozen
+python3 scripts/rubric_manager.py review-topic-pack-all --changed-only
+python3 scripts/rubric_manager.py validate-topic-pack-release
+```
+
+문서 변경 후 확인은 다음을 사용한다.
+
+```bash
+git diff --check
+grep -n 'topic_pack_workflow\|RUBRIC_BANK_MODE\|rubrics/generated\|topic truth gate' \
+  README.md \
+  docs/README.md \
+  docs/topic_pack_workflow.md \
+  docs/logic_check_json_generator_prompt.md
+```

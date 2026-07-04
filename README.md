@@ -179,6 +179,41 @@ Logic Check는 단순 누락이나 표현 부족을 잡는 기능이 아니다. 
 
     python3 scripts/validate_rubric_bank_content.py
 
+<!-- TOPIC_PACK_WORKFLOW_README_PATCH_BEGIN -->
+### Topic Pack / Generated Bank 운영
+
+현재 rubric bank는 legacy bank와 topic pack 기반 generated bank를 함께 지원한다.
+
+```text
+Topic Pack source:
+  rubrics/topic_packs/<topic_id>/
+
+Generated runtime bank:
+  rubrics/generated/*.generated.json
+
+Legacy fallback bank:
+  rubrics/*/industrial_instrumentation_control.json
+```
+
+운영 원칙:
+
+```text
+기본 평가:
+  generated topic bank
+
+기존 전체 범위 fallback:
+  RUBRIC_BANK_MODE=legacy
+
+topic pack 개발/검증:
+  validate-topic-pack-release
+  review-topic-pack-all --changed-only
+```
+
+`rubrics/topic_packs/<topic_id>/`는 사람이 관리하는 source of truth이고, `rubrics/generated/`는 runtime에서 읽기 쉽게 합친 build output이다.
+
+상세 workflow는 `docs/topic_pack_workflow.md`에서 관리한다.
+<!-- TOPIC_PACK_WORKFLOW_README_PATCH_END -->
+
 ## 8. 문서 위치
 
 `docs/README.md`는 문서 인덱스와 문서별 책임 범위를 관리한다.
