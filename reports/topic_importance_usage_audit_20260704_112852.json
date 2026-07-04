@@ -1,0 +1,2218 @@
+{
+  "generated_at": "20260704_112852",
+  "hit_count": 314,
+  "summary_by_classification": {
+    "direct_runtime_candidate": 149,
+    "reference_only": 139,
+    "registry_loader": 17,
+    "uses_registry_loader": 9
+  },
+  "summary_by_pattern": {
+    "direct_topic_importance_runtime_path": 16,
+    "industrial_topic_importance_file": 14,
+    "resolver_topic_importance": 1,
+    "topic_importance_constant": 127,
+    "topic_importance_loader": 11,
+    "topic_importance_text": 145
+  },
+  "hits": [
+    {
+      "file": "difficulty_strategy.py",
+      "line": 9,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_IMPORTANCE_PATH = Path(\"rubrics/topic_importance/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 9,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_IMPORTANCE_PATH = Path(\"rubrics/topic_importance/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 9,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_IMPORTANCE_PATH = Path(\"rubrics/topic_importance/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 9,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "TOPIC_IMPORTANCE_PATH = Path(\"rubrics/topic_importance/industrial_instrumentation_control.json\")"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 29,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def load_topic_importance() -> Dict[str, Any]:"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 29,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def load_topic_importance() -> Dict[str, Any]:"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 30,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "return _load_json(TOPIC_IMPORTANCE_PATH)"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 30,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "return _load_json(TOPIC_IMPORTANCE_PATH)"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 38,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topic_data = load_topic_importance()"
+    },
+    {
+      "file": "difficulty_strategy.py",
+      "line": 38,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "topic_data = load_topic_importance()"
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 17,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 17,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 17,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 17,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 25,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": \"rubrics/generated/topic_importance.generated.json\","
+    },
+    {
+      "file": "rubric_bank_paths.py",
+      "line": 25,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance\": \"rubrics/generated/topic_importance.generated.json\","
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 17,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "registry_loader",
+      "text": "TOPIC_IMPORTANCE_BANK = BASE_DIR / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 17,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "registry_loader",
+      "text": "TOPIC_IMPORTANCE_BANK = BASE_DIR / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 17,
+      "pattern": "topic_importance_constant",
+      "classification": "registry_loader",
+      "text": "TOPIC_IMPORTANCE_BANK = BASE_DIR / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 17,
+      "pattern": "topic_importance_text",
+      "classification": "registry_loader",
+      "text": "TOPIC_IMPORTANCE_BANK = BASE_DIR / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 196,
+      "pattern": "topic_importance_constant",
+      "classification": "registry_loader",
+      "text": "def load_topic_importance_bank(path: str | Path | None = None) -> Dict[str, Any]:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 196,
+      "pattern": "topic_importance_loader",
+      "classification": "registry_loader",
+      "text": "def load_topic_importance_bank(path: str | Path | None = None) -> Dict[str, Any]:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 196,
+      "pattern": "topic_importance_text",
+      "classification": "registry_loader",
+      "text": "def load_topic_importance_bank(path: str | Path | None = None) -> Dict[str, Any]:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 202,
+      "pattern": "topic_importance_constant",
+      "classification": "registry_loader",
+      "text": "candidates.append(resolve_rubric_bank_path(\"topic_importance\"))"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 202,
+      "pattern": "topic_importance_text",
+      "classification": "registry_loader",
+      "text": "candidates.append(resolve_rubric_bank_path(\"topic_importance\"))"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 202,
+      "pattern": "resolver_topic_importance",
+      "classification": "registry_loader",
+      "text": "candidates.append(resolve_rubric_bank_path(\"topic_importance\"))"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 212,
+      "pattern": "topic_importance_constant",
+      "classification": "registry_loader",
+      "text": "\"version\": \"topic_importance_bank_empty\","
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 212,
+      "pattern": "topic_importance_text",
+      "classification": "registry_loader",
+      "text": "\"version\": \"topic_importance_bank_empty\","
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 219,
+      "pattern": "topic_importance_constant",
+      "classification": "registry_loader",
+      "text": "def save_topic_importance_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 219,
+      "pattern": "topic_importance_loader",
+      "classification": "registry_loader",
+      "text": "def save_topic_importance_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 219,
+      "pattern": "topic_importance_text",
+      "classification": "registry_loader",
+      "text": "def save_topic_importance_bank(data: Dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 220,
+      "pattern": "topic_importance_constant",
+      "classification": "registry_loader",
+      "text": "return write_json(path or TOPIC_IMPORTANCE_BANK, data)"
+    },
+    {
+      "file": "rubric_registry.py",
+      "line": 220,
+      "pattern": "topic_importance_text",
+      "classification": "registry_loader",
+      "text": "return write_json(path or TOPIC_IMPORTANCE_BANK, data)"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 23,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": {"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 23,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance\": {"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 24,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 24,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 24,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 24,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"runtime\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 25,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"generated\": ROOT / \"rubrics\" / \"generated\" / \"topic_importance.generated.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 25,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"generated\": ROOT / \"rubrics\" / \"generated\" / \"topic_importance.generated.json\","
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 26,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"candidate_containers\": [\"topics\", \"topic_importance\", \"importance\"],"
+    },
+    {
+      "file": "scripts/audit_generated_runtime_schema.py",
+      "line": 26,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"candidate_containers\": [\"topics\", \"topic_importance\", \"importance\"],"
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 16,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 16,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 16,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 16,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance\": ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 24,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": GENERATED_DIR / \"topic_importance.generated.json\","
+    },
+    {
+      "file": "scripts/audit_generated_vs_runtime.py",
+      "line": 24,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance\": GENERATED_DIR / \"topic_importance.generated.json\","
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 28,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance_runtime\": r\"rubrics/topic_importance\","
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 28,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance_runtime\": r\"rubrics/topic_importance\","
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 28,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance_runtime\": r\"rubrics/topic_importance\","
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 83,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "if pattern in {\"logic_checks_runtime\", \"logic_check_profiles_runtime\", \"fact_anchors_runtime\", \"model_answers_runtime\", \"topic_importance_runtime\"}:"
+    },
+    {
+      "file": "scripts/audit_rubric_path_usage.py",
+      "line": 83,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "if pattern in {\"logic_checks_runtime\", \"logic_check_profiles_runtime\", \"fact_anchors_runtime\", \"model_answers_runtime\", \"topic_importance_runtime\"}:"
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 20,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "ROOT / \"rubrics\" / \"generated\" / \"topic_importance.generated.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 20,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "ROOT / \"rubrics\" / \"generated\" / \"topic_importance.generated.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 27,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 27,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 27,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_topic_id_consistency.py",
+      "line": 27,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 14,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"direct_topic_importance_runtime_path\": r\"rubrics/topic_importance|rubrics[/\\\"]\\s*/?\\s*[\\\"']?topic_importance\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 14,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"direct_topic_importance_runtime_path\": r\"rubrics/topic_importance|rubrics[/\\\"]\\s*/?\\s*[\\\"']?topic_importance\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 14,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"direct_topic_importance_runtime_path\": r\"rubrics/topic_importance|rubrics[/\\\"]\\s*/?\\s*[\\\"']?topic_importance\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 15,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"industrial_topic_importance_file\": r\"topic_importance.+industrial_instrumentation_control\\.json|industrial_instrumentation_control\\.json.+topic_importance\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 15,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"industrial_topic_importance_file\": r\"topic_importance.+industrial_instrumentation_control\\.json|industrial_instrumentation_control\\.json.+topic_importance\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 16,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance_constant\": r\"TOPIC_IMPORTANCE|IMPORTANCE_BANK|TOPIC_PRIORITY\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 16,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance_constant\": r\"TOPIC_IMPORTANCE|IMPORTANCE_BANK|TOPIC_PRIORITY\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 17,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance_loader\": r\"load_topic_importance_bank|save_topic_importance_bank\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 17,
+      "pattern": "topic_importance_loader",
+      "classification": "uses_registry_loader",
+      "text": "\"topic_importance_loader\": r\"load_topic_importance_bank|save_topic_importance_bank\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 17,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance_loader\": r\"load_topic_importance_bank|save_topic_importance_bank\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 18,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance_text\": r\"topic_importance|Topic Importance|TOPIC IMPORTANCE\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 18,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance_text\": r\"topic_importance|Topic Importance|TOPIC IMPORTANCE\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 19,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"resolver_topic_importance\": r\"resolve_rubric_bank_path\\([\\\"']topic_importance[\\\"']\\)\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 19,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"resolver_topic_importance\": r\"resolve_rubric_bank_path\\([\\\"']topic_importance[\\\"']\\)\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 49,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"direct_topic_importance_runtime_path\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 49,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"direct_topic_importance_runtime_path\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 50,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"industrial_topic_importance_file\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 50,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"industrial_topic_importance_file\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 51,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance_constant\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 51,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance_constant\","
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 55,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "if pattern == \"resolver_topic_importance\":"
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 55,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "if pattern == \"resolver_topic_importance\":"
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 58,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "if pattern == \"topic_importance_loader\":"
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 58,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "if pattern == \"topic_importance_loader\":"
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 101,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "lines.append(\"# Topic Importance Usage Audit\")"
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 104,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "lines.append(\"- purpose: topic_importance runtime path를 직접 읽는 코드와 resolver 적용 후보를 찾는다.\")"
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 104,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "lines.append(\"- purpose: topic_importance runtime path를 직접 읽는 코드와 resolver 적용 후보를 찾는다.\")"
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 176,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "json_path = REPORT_DIR / f\"topic_importance_usage_audit_{timestamp}.json\""
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 176,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "json_path = REPORT_DIR / f\"topic_importance_usage_audit_{timestamp}.json\""
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 177,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "md_path = REPORT_DIR / f\"topic_importance_usage_audit_{timestamp}.md\""
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 177,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "md_path = REPORT_DIR / f\"topic_importance_usage_audit_{timestamp}.md\""
+    },
+    {
+      "file": "scripts/audit_topic_importance_usage.py",
+      "line": 183,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "print(\"TOPIC IMPORTANCE USAGE AUDIT OK\")"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 53,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topic_importance = load_json(pack_dir / \"topic_importance.json\")"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 53,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "topic_importance = load_json(pack_dir / \"topic_importance.json\")"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 59,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "(\"topic_importance.json\", topic_importance),"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 59,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "(\"topic_importance.json\", topic_importance),"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 69,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": topic_importance,"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 69,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance\": topic_importance,"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 102,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def build_topic_importance(packs: list[dict[str, Any]], version: str) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 102,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def build_topic_importance(packs: list[dict[str, Any]], version: str) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 106,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"schema_version\": \"generated.topic_importance.v1\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 106,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"schema_version\": \"generated.topic_importance.v1\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 107,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"source\": \"rubrics/topic_packs/*/topic_importance.json\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 107,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"source\": \"rubrics/topic_packs/*/topic_importance.json\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 110,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "pack[\"topic_importance\"]"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 110,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "pack[\"topic_importance\"]"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 186,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance.json\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 186,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance.json\","
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 217,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "write_json(OUT_DIR / \"topic_importance.generated.json\", build_topic_importance(packs, version))"
+    },
+    {
+      "file": "scripts/build_generated_rubrics.py",
+      "line": 217,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "write_json(OUT_DIR / \"topic_importance.generated.json\", build_topic_importance(packs, version))"
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 41,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 41,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 41,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 41,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 55,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 55,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 55,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 55,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 65,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance_generator_prompt.md\": ["
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 65,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance_generator_prompt.md\": ["
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 67,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 67,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 67,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 67,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 84,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 84,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 84,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/maintenance/audit_docs_against_code.py",
+      "line": 84,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 12,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_IMPORTANCE_BANK = ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 12,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_IMPORTANCE_BANK = ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 12,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_IMPORTANCE_BANK = ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/rubric_content/common.py",
+      "line": 12,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "TOPIC_IMPORTANCE_BANK = ROOT / \"rubrics\" / \"topic_importance\" / \"industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 10,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_IMPORTANCE_BANK,"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 10,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "TOPIC_IMPORTANCE_BANK,"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 38,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def load_topic_importance_bank(path: str | Path | None = None) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 38,
+      "pattern": "topic_importance_loader",
+      "classification": "uses_registry_loader",
+      "text": "def load_topic_importance_bank(path: str | Path | None = None) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 38,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def load_topic_importance_bank(path: str | Path | None = None) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 39,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "return read_json(project_path(path, TOPIC_IMPORTANCE_BANK))"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 39,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "return read_json(project_path(path, TOPIC_IMPORTANCE_BANK))"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 42,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def save_topic_importance_bank(data: dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 42,
+      "pattern": "topic_importance_loader",
+      "classification": "uses_registry_loader",
+      "text": "def save_topic_importance_bank(data: dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 42,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def save_topic_importance_bank(data: dict[str, Any], path: str | Path | None = None) -> Path:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 43,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "return write_json(project_path(path, TOPIC_IMPORTANCE_BANK), data)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 43,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "return write_json(project_path(path, TOPIC_IMPORTANCE_BANK), data)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 46,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def build_topic_importance_template(topic_id: str, label: str, difficulty: str) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 46,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def build_topic_importance_template(topic_id: str, label: str, difficulty: str) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 79,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def validate_topic_importance_bank_data(data: dict[str, Any]) -> list[str]:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 79,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def validate_topic_importance_bank_data(data: dict[str, Any]) -> list[str]:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 132,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def upsert_topic_importance(bank: dict[str, Any], topic: dict[str, Any]) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 132,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def upsert_topic_importance(bank: dict[str, Any], topic: dict[str, Any]) -> dict[str, Any]:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 147,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_list_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 147,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def cmd_list_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 148,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = load_topic_importance_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 148,
+      "pattern": "topic_importance_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = load_topic_importance_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 148,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "bank = load_topic_importance_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 169,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_new_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 169,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def cmd_new_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 175,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "entry = build_topic_importance_template(args.topic_id, args.label, args.difficulty)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 175,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "entry = build_topic_importance_template(args.topic_id, args.label, args.difficulty)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 182,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "out = Path(args.out) if args.out else candidate_path(\"topic_importance\", entry[\"topic_id\"])"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 182,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "out = Path(args.out) if args.out else candidate_path(\"topic_importance\", entry[\"topic_id\"])"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 188,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_promote_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 188,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def cmd_promote_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 202,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank_path = project_path(args.bank, TOPIC_IMPORTANCE_BANK)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 202,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "bank_path = project_path(args.bank, TOPIC_IMPORTANCE_BANK)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 203,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = load_topic_importance_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 203,
+      "pattern": "topic_importance_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = load_topic_importance_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 203,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "bank = load_topic_importance_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 211,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "errors = validate_topic_importance_bank_data(temp)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 211,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "errors = validate_topic_importance_bank_data(temp)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 230,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "upsert_topic_importance(bank, entry)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 230,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "upsert_topic_importance(bank, entry)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 231,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "save_topic_importance_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 231,
+      "pattern": "topic_importance_loader",
+      "classification": "uses_registry_loader",
+      "text": "save_topic_importance_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 231,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "save_topic_importance_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 238,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_delete_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 238,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def cmd_delete_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 239,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank_path = project_path(args.bank, TOPIC_IMPORTANCE_BANK)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 239,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "bank_path = project_path(args.bank, TOPIC_IMPORTANCE_BANK)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 240,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = load_topic_importance_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 240,
+      "pattern": "topic_importance_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = load_topic_importance_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 240,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "bank = load_topic_importance_bank(bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 254,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "errors = validate_topic_importance_bank_data(bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 254,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "errors = validate_topic_importance_bank_data(bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 264,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "save_topic_importance_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 264,
+      "pattern": "topic_importance_loader",
+      "classification": "uses_registry_loader",
+      "text": "save_topic_importance_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 264,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "save_topic_importance_bank(bank, bank_path)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 270,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_validate_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 270,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def cmd_validate_topic_importance(args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 271,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = load_topic_importance_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 271,
+      "pattern": "topic_importance_loader",
+      "classification": "uses_registry_loader",
+      "text": "bank = load_topic_importance_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 271,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "bank = load_topic_importance_bank(args.bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 272,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "errors = validate_topic_importance_bank_data(bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 272,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "errors = validate_topic_importance_bank_data(bank)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 286,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p = sub.add_parser(\"list-topic-importance\", help=\"List topic importance entries\")"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 290,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_list_topic_importance)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 290,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_list_topic_importance)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 299,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_new_topic_importance)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 299,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_new_topic_importance)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 301,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p = sub.add_parser(\"promote-topic-importance\", help=\"Promote candidate into topic importance bank\")"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 306,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_promote_topic_importance, backup=True)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 306,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_promote_topic_importance, backup=True)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 308,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p = sub.add_parser(\"delete-topic-importance\", help=\"Delete topic importance entry\")"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 312,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_delete_topic_importance, backup=True)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 312,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_delete_topic_importance, backup=True)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 314,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p = sub.add_parser(\"validate-topic-importance\", help=\"Validate topic importance bank\")"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 316,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_validate_topic_importance)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_importance.py",
+      "line": 316,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_validate_topic_importance)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 23,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"audit-topic-importance-usage\": \"scripts/audit_topic_importance_usage.py\","
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 23,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"audit-topic-importance-usage\": \"scripts/audit_topic_importance_usage.py\","
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 135,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def cmd_audit_topic_importance_usage(_args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 135,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def cmd_audit_topic_importance_usage(_args: argparse.Namespace) -> int:"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 208,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "help=\"Audit source files for topic importance runtime path usage\","
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 210,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "p.set_defaults(func=cmd_audit_topic_importance_usage)"
+    },
+    {
+      "file": "scripts/rubric_content/topic_pack_pipeline.py",
+      "line": 210,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "p.set_defaults(func=cmd_audit_topic_importance_usage)"
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 8,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "from rubric_content.topic_importance import cmd_validate_topic_importance"
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 8,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "from rubric_content.topic_importance import cmd_validate_topic_importance"
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 43,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "rc = max(rc, cmd_validate_topic_importance(argparse.Namespace(bank=None)))"
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 43,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "rc = max(rc, cmd_validate_topic_importance(argparse.Namespace(bank=None)))"
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 67,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"scripts/rubric_content/topic_importance.py\","
+    },
+    {
+      "file": "scripts/rubric_content/validators.py",
+      "line": 67,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"scripts/rubric_content/topic_importance.py\","
+    },
+    {
+      "file": "scripts/rubric_manager.py",
+      "line": 15,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "from rubric_content import topic_importance  # noqa: E402"
+    },
+    {
+      "file": "scripts/rubric_manager.py",
+      "line": 15,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "from rubric_content import topic_importance  # noqa: E402"
+    },
+    {
+      "file": "scripts/rubric_manager.py",
+      "line": 29,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topic_importance.add_parsers(sub)"
+    },
+    {
+      "file": "scripts/rubric_manager.py",
+      "line": 29,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "topic_importance.add_parsers(sub)"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 16,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_BANK = ROOT / \"rubrics/topic_importance/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 16,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_BANK = ROOT / \"rubrics/topic_importance/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 16,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "TOPIC_BANK = ROOT / \"rubrics/topic_importance/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 16,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "TOPIC_BANK = ROOT / \"rubrics/topic_importance/industrial_instrumentation_control.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 162,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def topic_importance_candidate() -> dict:"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 162,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def topic_importance_candidate() -> dict:"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 163,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topic_id = \"crud_test_topic_importance\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 163,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "topic_id = \"crud_test_topic_importance\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 166,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"label\": \"[CRUD TEST] Topic Importance\","
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 167,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"aliases\": [\"CRUD TEST\", \"Topic Importance CRUD 검증\"],"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 303,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def test_topic_importance(tmp: Path) -> None:"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 303,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def test_topic_importance(tmp: Path) -> None:"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 304,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "print(\"\\n=== TEST Topic Importance CRUD ===\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 306,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "bank = tmp / \"topic_importance.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 306,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "bank = tmp / \"topic_importance.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 307,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "cand = tmp / \"topic_importance_candidate.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 307,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "cand = tmp / \"topic_importance_candidate.json\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 311,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "entry = topic_importance_candidate()"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 311,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "entry = topic_importance_candidate()"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 333,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "raise AssertionError(\"topic importance add did not increase count\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 334,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "assert_topic_exists(bank, target_id, \"label\", \"[CRUD TEST] Topic Importance\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 336,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "entry[\"label\"] = \"[CRUD TEST] Topic Importance Updated\""
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 349,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "raise AssertionError(\"topic importance update created duplicate\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 350,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "assert_topic_exists(bank, target_id, \"label\", \"[CRUD TEST] Topic Importance Updated\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 361,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "raise AssertionError(\"topic importance delete did not restore count\")"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 372,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "test_topic_importance(tmp)"
+    },
+    {
+      "file": "scripts/test_rubric_content_crud.py",
+      "line": 372,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "test_topic_importance(tmp)"
+    },
+    {
+      "file": "scripts/validate_difficulty_strategy.py",
+      "line": 16,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "load_topic_importance,"
+    },
+    {
+      "file": "scripts/validate_difficulty_strategy.py",
+      "line": 16,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "load_topic_importance,"
+    },
+    {
+      "file": "scripts/validate_difficulty_strategy.py",
+      "line": 27,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topics = load_topic_importance()"
+    },
+    {
+      "file": "scripts/validate_difficulty_strategy.py",
+      "line": 27,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "topics = load_topic_importance()"
+    },
+    {
+      "file": "scripts/validate_difficulty_strategy.py",
+      "line": 32,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "assert_true(\"topics\" in topics and topics[\"topics\"], \"topic importance topics missing\")"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 15,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance.generated.json\","
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 15,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance.generated.json\","
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 93,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "importance = load_json(GENERATED_DIR / \"topic_importance.generated.json\")"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 93,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "importance = load_json(GENERATED_DIR / \"topic_importance.generated.json\")"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 107,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "require_list(importance.get(\"topics\"), \"topic_importance.generated.json topics\"),"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 107,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "require_list(importance.get(\"topics\"), \"topic_importance.generated.json topics\"),"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 108,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance.generated.json topics\","
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 108,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance.generated.json topics\","
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 126,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": importance_ids,"
+    },
+    {
+      "file": "scripts/validate_generated_rubrics.py",
+      "line": 126,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance\": importance_ids,"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 153,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def validate_topic_importance(pack_dir: Path, topic_id: str) -> None:"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 153,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def validate_topic_importance(pack_dir: Path, topic_id: str) -> None:"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 154,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "path = pack_dir / \"topic_importance.json\""
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 154,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "path = pack_dir / \"topic_importance.json\""
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 156,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "fail(f\"{pack_dir}: missing topic_importance.json\")"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 156,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "fail(f\"{pack_dir}: missing topic_importance.json\")"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 296,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "validate_topic_importance(pack_dir, topic_id)"
+    },
+    {
+      "file": "scripts/validate_topic_packs.py",
+      "line": 296,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "validate_topic_importance(pack_dir, topic_id)"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 23,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 23,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 23,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/common.py",
+      "line": 23,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance\": \"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 43,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "(\"topic_importance\", [\"scripts/rubric_manager.py\", \"validate-topic-importance\"]),"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 43,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "(\"topic_importance\", [\"scripts/rubric_manager.py\", \"validate-topic-importance\"]),"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 323,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "def validate_topic_importance("
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 323,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "def validate_topic_importance("
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 324,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topic_importance: dict[str, Any],"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 324,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "topic_importance: dict[str, Any],"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 329,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topics = collection(topic_importance, \"topics\")"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 329,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "topics = collection(topic_importance, \"topics\")"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 336,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "add_error(errors, \"topic_importance.topic_id\", f\"topics[{index}] missing topic_id\")"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 336,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "add_error(errors, \"topic_importance.topic_id\", f\"topics[{index}] missing topic_id\")"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 341,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "# Topic Importance may contain umbrella/strategy topics that are broader"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 348,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance.topic_id\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 348,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance.topic_id\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 354,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "add_error(errors, \"topic_importance.duplicate\", f\"duplicate topic_id: {dup}\")"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 354,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "add_error(errors, \"topic_importance.duplicate\", f\"duplicate topic_id: {dup}\")"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 511,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "topic_importance_summary = validate_topic_importance("
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 511,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "topic_importance_summary = validate_topic_importance("
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 512,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "data[\"topic_importance\"],"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 512,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "data[\"topic_importance\"],"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 545,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"topic_importance\": topic_importance_summary,"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 545,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"topic_importance\": topic_importance_summary,"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 579,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "\"- topic_importance=\""
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 579,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "\"- topic_importance=\""
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 580,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "f\"{topic_importance_summary.get('topics')} \""
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 580,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "f\"{topic_importance_summary.get('topics')} \""
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 581,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "f\"unique_topics={topic_importance_summary.get('unique_topics')}\""
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_content.py",
+      "line": 581,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "f\"unique_topics={topic_importance_summary.get('unique_topics')}\""
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 66,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "name=\"topic_importance\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 66,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "name=\"topic_importance\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 67,
+      "pattern": "direct_topic_importance_runtime_path",
+      "classification": "direct_runtime_candidate",
+      "text": "path=\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 67,
+      "pattern": "industrial_topic_importance_file",
+      "classification": "direct_runtime_candidate",
+      "text": "path=\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 67,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "path=\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 67,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "path=\"rubrics/topic_importance/industrial_instrumentation_control.json\","
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 68,
+      "pattern": "topic_importance_constant",
+      "classification": "direct_runtime_candidate",
+      "text": "required_any_keys=(\"topics\", \"topic_importance\", \"importance\"),"
+    },
+    {
+      "file": "scripts/validators/rubric_bank/validate_format.py",
+      "line": 68,
+      "pattern": "topic_importance_text",
+      "classification": "reference_only",
+      "text": "required_any_keys=(\"topics\", \"topic_importance\", \"importance\"),"
+    }
+  ]
+}

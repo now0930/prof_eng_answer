@@ -20,6 +20,7 @@ OPTIONAL_AUDIT_SCRIPTS = {
     "audit-rubric-path-usage": "scripts/audit_rubric_path_usage.py",
     "check-rubric-bank-paths": "scripts/check_rubric_bank_paths.py",
     "audit-fact-anchor-usage": "scripts/audit_fact_anchor_usage.py",
+    "audit-topic-importance-usage": "scripts/audit_topic_importance_usage.py",
 }
 
 
@@ -131,6 +132,13 @@ def cmd_audit_fact_anchor_usage(_args: argparse.Namespace) -> int:
     return rc
 
 
+def cmd_audit_topic_importance_usage(_args: argparse.Namespace) -> int:
+    path = OPTIONAL_AUDIT_SCRIPTS["audit-topic-importance-usage"]
+    rc = py_compile_existing_scripts([path])
+    rc = max(rc, run_script(path))
+    return rc
+
+
 def add_parser(sub) -> None:
     p = sub.add_parser(
         "validate-topic-packs",
@@ -193,3 +201,10 @@ def add_parser(sub) -> None:
         help="Audit source files for fact anchor runtime path usage",
     )
     p.set_defaults(func=cmd_audit_fact_anchor_usage)
+
+
+    p = sub.add_parser(
+        "audit-topic-importance-usage",
+        help="Audit source files for topic importance runtime path usage",
+    )
+    p.set_defaults(func=cmd_audit_topic_importance_usage)
