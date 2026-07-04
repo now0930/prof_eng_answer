@@ -1,0 +1,24 @@
+{
+  "version": "2026-07-04T01:33:34Z-generated-topic-pack-importance",
+  "subject": "industrial_instrumentation_control",
+  "schema_version": "generated.topic_importance.v1",
+  "source": "rubrics/topic_packs/*/topic_importance.json",
+  "runtime_status": "generated_candidate_not_yet_runtime_default",
+  "topics": [
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "second_order_lag_response_by_damping_ratio",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "COMPARE_SELECTION",
+      "high_band_unlock_conditions": [
+        "표준 2차 전달함수 또는 특성방정식을 제시한다.",
+        "감쇠비와 극점 위치를 연결한다.",
+        "감쇠비 구간별 응답 특성을 비교한다.",
+        "현장 튜닝 trade-off를 설명한다.",
+        "fatal logic error가 없다."
+      ],
+      "note": "2차 시스템과 감쇠비는 제어이론의 핵심 변별 주제이므로, 단순 정의보다 극점-응답-현장 튜닝 연결성이 중요하다."
+    }
+  ]
+}
