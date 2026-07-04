@@ -1,0 +1,57 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "second_order_system_resonance_frequency_response",
+  "title_ko": "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    "표준 2차 시스템의 주파수응답과 공진주파수를 설명하시오.",
+    "2차계에서 감쇠비와 공진주파수의 관계를 설명하시오.",
+    "시간응답 overshoot와 주파수응답 resonance의 차이를 설명하시오."
+  ],
+  "recommended_outline": [
+    {
+      "section": "표준 2차 전달함수와 고유진동수·감쇠비·이득 정의",
+      "intent": "표준 2차 전달함수를 정확히 쓰고 고유진동수, 감쇠비, 이득의 의미를 정의한다.",
+      "anchor_refs": []
+    },
+    {
+      "section": "주파수응답에서 공진 peak 발생 의미와 해석 목적",
+      "intent": "주파수응답에서 공진 peak가 발생하는 물리적 의미와 해석 목적을 설명한다.",
+      "anchor_refs": []
+    },
+    {
+      "section": "공진주파수 ωr = ωn sqrt(1 - 2ζ²) 관계",
+      "intent": "공진주파수는 ωr = ωn sqrt(1 - 2ζ²)이며 조건 ζ < 1/sqrt(2)에서 성립함을 제시한다.",
+      "anchor_refs": []
+    },
+    {
+      "section": "공진 조건 ζ < 1/sqrt(2) 성립 범위",
+      "intent": "감쇠비 증가에 따라 공진 peak가 감소하고 응답이 완만해지는 경향을 설명한다.",
+      "anchor_refs": []
+    },
+    {
+      "section": "감쇠비 증가에 따른 공진 peak 감소와 응답 완만화",
+      "intent": "ζ=1 임계감쇠는 시간응답의 중근 조건이지 공진 조건이 아님을 명확히 구분한다.",
+      "anchor_refs": []
+    },
+    {
+      "section": "ζ=1 임계감쇠와 시간응답 중근 조건·공진 조건 구분",
+      "intent": "기계 진동, 센서 동특성, 제어계 튜닝에서 공진 회피와 감쇠 확보 기준을 연결한다.",
+      "anchor_refs": []
+    }
+  ],
+  "high_score_points": [
+    "표준 2차 전달함수를 정확히 쓴다.",
+    "주파수응답 크기식을 정규화 형태로 설명한다.",
+    "ωr = ωn sqrt(1 - 2ζ²)와 조건 ζ < 1/sqrt(2)를 정확히 제시한다.",
+    "감쇠비 증가에 따른 공진 peak 감소를 설명한다.",
+    "시간응답 overshoot와 주파수응답 resonance를 명확히 구분한다.",
+    "ζ=1 임계감쇠를 공진 조건처럼 오해하지 않는다."
+  ],
+  "common_missing_points": [
+    "ζ=1 임계감쇠를 공진 조건처럼 설명하면 안 된다.",
+    "시간응답 overshoot와 주파수응답 resonance를 같은 개념으로 쓰면 안 된다.",
+    "ωr=ωn√(1−2ζ²)의 존재 조건 ζ<1/√2를 빠뜨리면 안 된다.",
+    "수식만 쓰고 감쇠비, bandwidth, 제어루프 영향 등 해석을 빠뜨리면 안 된다."
+  ]
+}

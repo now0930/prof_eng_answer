@@ -1,13 +1,23 @@
 {
-  "version": "2026-07-04T03:45:44Z-generated-topic-pack-manifest",
+  "version": "2026-07-04T06:07:32Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 1,
+  "topic_count": 2,
   "topics": [
     {
       "topic_id": "second_order_lag_response_by_damping_ratio",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "second_order_system_resonance_frequency_response",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

@@ -272,6 +272,207 @@ def build_model_answers(packs: list[dict[str, Any]], version: str) -> dict[str, 
     }
 
 
+# BEGIN GENERATED_ALIAS_CLEANUP_PATCH
+_ORIGINAL_BUILD_MODEL_ANSWERS = build_model_answers
+
+
+def _generated_alias_unique(values):
+    seen = set()
+    out = []
+    for value in values or []:
+        text = str(value or "").strip()
+        if not text:
+            continue
+        if text in seen:
+            continue
+        seen.add(text)
+        out.append(text)
+    return out
+
+
+def _generated_filter_generic_terms(values):
+    noise = {
+        "",
+        "시스템",
+        "차계",
+        "표준",
+        "보통",
+        "대해",
+        "형태로",
+        "조건",
+        "실수",
+        "있지만",
+        "같은",
+        "개념",
+        "판단",
+        "해석형",
+        "모범",
+        "답안",
+        "response",
+        "condition",
+        "design",
+        "sensor",
+        "damping",
+        "stability",
+        "confusion",
+        "low-pass",
+        "magnitude",
+        "amplitude ratio",
+        "frequency ratio",
+        "natural frequency",
+        "transfer function",
+        "second order",
+        "K",
+        "+2",
+        "/(s",
+        "G(s",
+    }
+
+    out = []
+    for value in values or []:
+        text = str(value or "").strip()
+        if not text:
+            continue
+        if text in noise:
+            continue
+        if len(text) <= 1 and text not in {"ζ"}:
+            continue
+        out.append(text)
+    return _generated_alias_unique(out)
+
+
+def _curated_aliases_for_generated_answer(answer):
+    topic_id = str(answer.get("topic_id") or "")
+    title = answer.get("title")
+    question_examples = answer.get("question_examples") or []
+
+    base = [
+        title,
+        *question_examples,
+        topic_id,
+        topic_id.replace("_", " "),
+    ]
+
+    if topic_id == "second_order_lag_response_by_damping_ratio":
+        base.extend([
+            "2차 지연시스템",
+            "2차 시스템 감쇠비",
+            "감쇠비별 응답특성",
+            "감쇠비에 따른 응답",
+            "damping ratio response",
+            "ζ별 응답",
+            "zeta response",
+            "과도응답",
+            "transient response",
+            "부족감쇠",
+            "underdamped",
+            "임계감쇠",
+            "critically damped",
+            "과감쇠",
+            "과대감쇠",
+            "overdamped",
+            "오버슈트",
+            "정착시간",
+            "상승시간",
+            "극점",
+            "s평면",
+        ])
+        return _generated_alias_unique(_generated_filter_generic_terms(base))
+
+    if topic_id == "second_order_system_resonance_frequency_response":
+        base.extend([
+            "2차 시스템 주파수응답",
+            "2차계 주파수응답",
+            "공진주파수",
+            "공진 주파수",
+            "resonance frequency",
+            "frequency response resonance",
+            "주파수응답 공진",
+            "공진 peak",
+            "resonant peak",
+            "ωr",
+            "omega r",
+            "ωr=ωn",
+            "zeta resonance",
+            "ζ<1/√2",
+            "1/sqrt(2)",
+            "시간응답 overshoot와 주파수응답 resonance",
+        ])
+        return _generated_alias_unique(_generated_filter_generic_terms(base))
+
+    base.extend(answer.get("topic_aliases") or [])
+    return _generated_alias_unique(_generated_filter_generic_terms(base))[:40]
+
+
+def _curated_field_points_for_generated_answer(answer):
+    topic_id = str(answer.get("topic_id") or "")
+
+    if topic_id == "second_order_lag_response_by_damping_ratio":
+        return [
+            "2차 지연시스템",
+            "감쇠비",
+            "damping ratio",
+            "ζ",
+            "zeta",
+            "특성방정식",
+            "극점",
+            "복소근",
+            "실근",
+            "중근",
+            "s평면",
+            "부족감쇠",
+            "임계감쇠",
+            "과감쇠",
+            "과대감쇠",
+            "오버슈트",
+            "정착시간",
+            "상승시간",
+            "과도응답",
+            "PID 튜닝",
+            "헌팅",
+            "trade-off",
+        ]
+
+    if topic_id == "second_order_system_resonance_frequency_response":
+        return [
+            "주파수응답",
+            "frequency response",
+            "공진주파수",
+            "resonance frequency",
+            "공진 peak",
+            "resonant peak",
+            "ωr",
+            "omega r",
+            "ωr=ωn√(1−2ζ²)",
+            "ζ<1/√2",
+            "공진 조건",
+            "시간응답 overshoot와 주파수응답 resonance 구분",
+            "임계감쇠와 공진 조건 구분",
+            "bandwidth",
+            "loop tuning",
+            "mechanical resonance",
+        ]
+
+    return _generated_alias_unique(
+        _generated_filter_generic_terms(answer.get("field_connection_points") or [])
+    )[:50]
+
+
+def _clean_generated_model_answer_bank(bank):
+    for answer in bank.get("answers", []) or []:
+        answer["topic_aliases"] = _curated_aliases_for_generated_answer(answer)
+        answer["field_connection_points"] = _curated_field_points_for_generated_answer(answer)
+    return bank
+
+
+def build_model_answers(packs, version):
+    bank = _ORIGINAL_BUILD_MODEL_ANSWERS(packs, version)
+    return _clean_generated_model_answer_bank(bank)
+
+
+# END GENERATED_ALIAS_CLEANUP_PATCH
+
+
 def build_topic_importance(packs: list[dict[str, Any]], version: str) -> dict[str, Any]:
     return {
         "version": f"{version}-generated-topic-pack-importance",

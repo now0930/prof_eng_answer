@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-04T03:45:44Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-04T06:07:32Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -234,6 +234,41 @@
         "표준 2차형에서는 극점 실수부 -ζωn을 이용해 좌반평면/우반평면 안정성을 설명한다.",
         "ζ>0 안정성 조건과 ζ 크기에 따른 오버슈트·정착시간·감쇠 정도의 성능 조건을 분리해서 쓴다."
       ]
+    },
+    {
+      "topic_id": "second_order_system_resonance_frequency_response",
+      "profile_id": "second_order_system_resonance_frequency_response_v1",
+      "truth_schema": {
+        "required_facts": [
+          "표준 2차 전달함수",
+          "주파수응답 크기식",
+          "공진주파수 공식",
+          "ζ<1/√2 조건",
+          "overshoot와 resonance 구분",
+          "ζ=1 임계감쇠와 공진 조건 구분"
+        ],
+        "fatal_conditions": [
+          "ζ=1을 공진 조건으로 단정",
+          "공진주파수 조건 ζ<1/√2를 반대로 설명",
+          "시간응답과 주파수응답을 동일 개념으로 처리"
+        ],
+        "safe_conditions": [
+          "공진주파수 공식과 성립 조건을 함께 설명",
+          "감쇠비 증가에 따른 공진 peak 감소를 설명",
+          "센서/기계 공진/제어루프 안정성과 연결"
+        ]
+      },
+      "output_contract": {
+        "fatal_error_detected": "bool",
+        "severity": "none|minor|major|fatal",
+        "reason": "str",
+        "evidence": "list[str]"
+      },
+      "cap_policy": {
+        "fatal_error_cap": 12.5,
+        "major_error_cap": 17.5,
+        "mode": "warn"
+      }
     }
   ]
 }

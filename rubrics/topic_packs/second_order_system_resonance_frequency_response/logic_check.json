@@ -1,0 +1,148 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "second_order_system_resonance_frequency_response",
+  "deterministic_checks": {
+    "enabled": true,
+    "difficulty_profile": "THEORY_CORE",
+    "topic_name": "2차 시스템 주파수응답과 공진주파수",
+    "topic_aliases": [
+      "2차 시스템",
+      "second order system",
+      "주파수응답",
+      "frequency response",
+      "공진주파수",
+      "resonance frequency",
+      "공진",
+      "resonance",
+      "감쇠비",
+      "zeta",
+      "ζ",
+      "ωr",
+      "ωn"
+    ],
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "fatal_checks": [
+      {
+        "id": "resonance_condition_confusion",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "ζ=1 임계감쇠를 공진 조건으로 설명하는 오류를 점검한다.",
+        "correct_rule": "ζ=1은 시간응답의 임계감쇠 조건이며, 표준 2차 저역통과계의 공진주파수는 ζ<1/√2에서 존재한다.",
+        "wrong_patterns": [
+          "ζ=1에서\\ 공진이\\ 발생한다",
+          "임계감쇠가\\ 공진\\ 조건이다"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "time_frequency_response_confusion",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "시간응답 overshoot와 주파수응답 resonance를 동일 개념으로 처리하는 오류를 점검한다.",
+        "correct_rule": "두 개념은 관련은 있지만 시간영역/주파수영역 해석 축이 다르며 조건도 다르다.",
+        "wrong_patterns": [
+          "overshoot와\\ resonance는\\ 같은\\ 개념이다",
+          "오버슈트가\\ 있으면\\ 항상\\ 공진주파수가\\ 존재한다"
+        ],
+        "recommended_ceiling": 10.0
+      }
+    ],
+    "major_checks": [
+      {
+        "id": "omega_r_condition_missing",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "ωr = ωn√(1−2ζ²)의 성립 조건 누락을 점검한다.",
+        "correct_rule": "공진주파수 공식과 함께 ζ<1/√2 조건을 제시해야 한다.",
+        "required_patterns": [
+          "ωr",
+          "ωn",
+          "ζ",
+          "1/√2"
+        ],
+        "min_required": 1
+      }
+    ],
+    "question_type_checks": [
+      {
+        "id": "principle_interpretation_formula_condition_missing",
+        "severity": "minor",
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "affected_layers": [
+          "B",
+          "C"
+        ],
+        "message": "원리·해석형 문제임에도 공식, 성립 조건, 물리적 의미의 연결이 부족하다.",
+        "min_required": 3,
+        "required_axes": [
+          "표준 2차 전달함수",
+          "주파수응답 크기식",
+          "공진주파수",
+          "ζ<1/√2 조건",
+          "시간응답과 주파수응답 구분",
+          "현장 공진 회피 판단"
+        ]
+      }
+    ],
+    "next_practice_points": [
+      "표준 2차 전달함수와 주파수응답 크기식을 먼저 정리한다.",
+      "공진주파수 ωr=ωn√(1−2ζ²)와 ζ<1/√2 조건을 함께 쓴다.",
+      "시간응답 overshoot와 주파수응답 resonance를 구분한다.",
+      "ζ=1은 임계감쇠 조건이지 공진 조건이 아님을 명확히 쓴다.",
+      "기계 공진, 센서 노이즈 증폭, bandwidth, loop tuning과 연결한다."
+    ],
+    "de_claim_trust": {
+      "enabled": true,
+      "rule": "Logic Check는 D/E를 직접 평가하지 않는다. D/E 점수는 A/B/C/D/E scoring model에서만 산정한다.",
+      "target_layers": [
+        "D",
+        "E"
+      ],
+      "score_effect": "none",
+      "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+      "fatal_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 충돌하므로 현장 적용 주장을 강하게 신뢰하지 않는다.",
+      "pass_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 직접 충돌하지 않으므로 현장 적용 주장을 이론적으로 신뢰할 수 있다."
+    }
+  },
+  "llm_profile": {
+    "profile_id": "second_order_system_resonance_frequency_response_v1",
+    "topic_id": "second_order_system_resonance_frequency_response",
+    "truth_schema": {
+      "required_facts": [
+        "표준 2차 전달함수",
+        "주파수응답 크기식",
+        "공진주파수 공식",
+        "ζ<1/√2 조건",
+        "overshoot와 resonance 구분",
+        "ζ=1 임계감쇠와 공진 조건 구분"
+      ],
+      "fatal_conditions": [
+        "ζ=1을 공진 조건으로 단정",
+        "공진주파수 조건 ζ<1/√2를 반대로 설명",
+        "시간응답과 주파수응답을 동일 개념으로 처리"
+      ],
+      "safe_conditions": [
+        "공진주파수 공식과 성립 조건을 함께 설명",
+        "감쇠비 증가에 따른 공진 peak 감소를 설명",
+        "센서/기계 공진/제어루프 안정성과 연결"
+      ]
+    },
+    "output_contract": {
+      "fatal_error_detected": "bool",
+      "severity": "none|minor|major|fatal",
+      "reason": "str",
+      "evidence": "list[str]"
+    },
+    "cap_policy": {
+      "fatal_error_cap": 12.5,
+      "major_error_cap": 17.5,
+      "mode": "warn"
+    }
+  }
+}
