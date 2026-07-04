@@ -3796,7 +3796,7 @@ def _phase10_run_model_answer_reference(
         import os as _os
 
         effective_bank_path = bank_path
-        if _os.getenv("RUBRIC_BANK_MODE", "legacy").strip().lower() == "generated":
+        if _os.getenv("RUBRIC_BANK_MODE", "generated").strip().lower() == "generated":
             effective_bank_path = None
 
         bank = load_model_answer_bank(effective_bank_path)
@@ -3806,7 +3806,7 @@ def _phase10_run_model_answer_reference(
         # that weak lens prevent the only generated topic-pack model answer from
         # being considered. This keeps generated-mode smoke tests focused on
         # topic-pack routing while leaving legacy behavior unchanged.
-        if _os.getenv("RUBRIC_BANK_MODE", "legacy").strip().lower() == "generated":
+        if _os.getenv("RUBRIC_BANK_MODE", "generated").strip().lower() == "generated":
             try:
                 answers = bank.get("answers", []) if isinstance(bank, dict) else []
                 if len(answers) == 1 and isinstance(answers[0], dict):

@@ -13,7 +13,7 @@ from rubric_bank_paths import get_rubric_bank_report, require_rubric_bank_paths 
 
 
 def main() -> int:
-    mode = os.getenv("RUBRIC_BANK_MODE", "legacy")
+    mode = os.getenv("RUBRIC_BANK_MODE", "generated")
 
     try:
         require_rubric_bank_paths(mode)

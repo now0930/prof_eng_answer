@@ -156,6 +156,139 @@
           "C"
         ],
         "recommended_ceiling": 10.0
+      },
+      {
+        "id": "zeta_one_as_overdamped",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "ζ\\s*=\\s*1.{0,40}과\\s*감쇠",
+          "ζ\\s*=\\s*1.{0,40}과대\\s*감쇠",
+          "ζ\\s*=\\s*1.{0,40}over\\s*damp",
+          "zeta\\s*=\\s*1.{0,40}over\\s*damp",
+          "임계\\s*감쇠.{0,40}과\\s*감쇠",
+          "critically\\s*damped.{0,40}over\\s*damped"
+        ],
+        "message": "임계감쇠(ζ=1)를 과감쇠로 잘못 분류하였다.",
+        "correct_rule": "임계감쇠는 ζ=1이며 중근을 갖고, 과감쇠는 ζ>1이며 서로 다른 두 실근을 갖는다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "zeta_greater_than_one_as_critical",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "ζ\\s*>\\s*1.{0,40}임계\\s*감쇠",
+          "ζ\\s*>\\s*1.{0,40}critical\\s*damp",
+          "zeta\\s*>\\s*1.{0,40}critical\\s*damp",
+          "과\\s*감쇠.{0,40}임계\\s*감쇠",
+          "over\\s*damped.{0,40}critically\\s*damped"
+        ],
+        "message": "과감쇠(ζ>1)를 임계감쇠로 잘못 분류하였다.",
+        "correct_rule": "임계감쇠는 ζ=1이고, 과감쇠는 ζ>1이다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "overdamped_as_repeated_root",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "과\\s*감쇠.{0,60}중근",
+          "과대\\s*감쇠.{0,60}중근",
+          "과\\s*감쇠.{0,60}반복\\s*실근",
+          "over\\s*damped.{0,60}repeated\\s*root",
+          "over\\s*damped.{0,60}double\\s*root"
+        ],
+        "message": "과감쇠를 중근 조건으로 잘못 설명하였다.",
+        "correct_rule": "과감쇠는 서로 다른 두 실근을 가지며, 중근은 임계감쇠 조건이다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "critical_damping_as_distinct_roots",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "임계\\s*감쇠.{0,60}서로\\s*다른\\s*두\\s*실근",
+          "임계\\s*감쇠.{0,60}상이한\\s*두\\s*실근",
+          "critical\\s*damp.{0,60}distinct\\s*roots",
+          "critically\\s*damped.{0,60}two\\s*real\\s*roots"
+        ],
+        "message": "임계감쇠를 서로 다른 두 실근으로 잘못 설명하였다.",
+        "correct_rule": "임계감쇠는 중근을 가지며, 서로 다른 두 실근은 과감쇠 조건이다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "stable_pole_formula_missing_negative_sign",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "s\\s*=\\s*ζ\\s*(?:·|\\*)?\\s*ωn\\s*(?:±|\\+/-)\\s*j\\s*(?:·|\\*)?\\s*ωd",
+          "s\\s*=\\s*zeta\\s*(?:·|\\*)?\\s*w[nN]\\s*(?:±|\\+/-)\\s*j\\s*(?:·|\\*)?\\s*w[dD]",
+          "극점.{0,60}\\+\\s*ζ\\s*(?:·|\\*)?\\s*ωn",
+          "pole.{0,60}\\+\\s*zeta\\s*(?:·|\\*)?\\s*w[nN]"
+        ],
+        "message": "안정한 표준 2차계 극점의 실수부 부호를 음수가 아닌 양수로 표기하였다.",
+        "correct_rule": "표준 2차 시스템의 부족감쇠 극점은 s=-ζωn±jωd이며 안정 극점의 실수부는 음수이다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "left_right_half_plane_stability_inversion",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "좌반\\s*평면.{0,50}불\\s*안정",
+          "left[-\\s]*half[-\\s]*plane.{0,50}unstable",
+          "LHP.{0,50}unstable",
+          "우반\\s*평면.{0,50}(?<!불)안정",
+          "right[-\\s]*half[-\\s]*plane.{0,50}stable",
+          "RHP.{0,50}stable"
+        ],
+        "message": "s-평면 좌반평면/우반평면 안정성 관계를 반대로 설명하였다.",
+        "correct_rule": "연속시간 시스템에서 좌반평면 극점은 안정, 우반평면 극점은 불안정이다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "zeta_negative_as_stable",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "ζ\\s*<\\s*0.{0,50}(?<!불)안정",
+          "zeta\\s*<\\s*0.{0,50}stable",
+          "음의\\s*감쇠.{0,50}(?<!불)안정",
+          "negative\\s*damping.{0,50}stable"
+        ],
+        "message": "음의 감쇠비(ζ<0)를 안정 조건으로 잘못 설명하였다.",
+        "correct_rule": "ζ<0은 극점 실수부가 양수가 되어 우반평면 극점과 불안정 응답을 유발한다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "zeta_zero_as_asymptotically_stable",
+        "severity": "fatal",
+        "wrong_patterns": [
+          "ζ\\s*=\\s*0.{0,50}점근\\s*안정",
+          "zeta\\s*=\\s*0.{0,50}asymptotically\\s*stable",
+          "무\\s*감쇠.{0,50}점근\\s*안정"
+        ],
+        "message": "무감쇠(ζ=0)를 점근 안정으로 잘못 설명하였다.",
+        "correct_rule": "ζ=0은 순허수근에 의한 지속진동 상태이며 임계 안정 또는 marginal stability로 본다.",
+        "affected_layers": [
+          "C"
+        ],
+        "recommended_ceiling": 10.0
       }
     ],
     "major_checks": [

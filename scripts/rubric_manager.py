@@ -2,6 +2,29 @@
 
 from __future__ import annotations
 
+
+# GENERATE_TOPIC_PACK_FROM_SHEET_COMMAND_PATCH
+try:
+    import sys as _gtpfs_sys
+    if len(_gtpfs_sys.argv) > 1 and _gtpfs_sys.argv[1] == "generate-topic-pack-from-sheet":
+        import importlib.util as _gtpfs_importlib_util
+        from pathlib import Path as _gtpfs_Path
+        _gtpfs_path = _gtpfs_Path(__file__).resolve().parent / "generate_topic_pack_from_sheet.py"
+        _gtpfs_spec = _gtpfs_importlib_util.spec_from_file_location(
+            "_generate_topic_pack_from_sheet_module",
+            _gtpfs_path,
+        )
+        if _gtpfs_spec is None or _gtpfs_spec.loader is None:
+            raise RuntimeError(f"cannot load {_gtpfs_path}")
+        _gtpfs_mod = _gtpfs_importlib_util.module_from_spec(_gtpfs_spec)
+        _gtpfs_spec.loader.exec_module(_gtpfs_mod)
+        raise SystemExit(_gtpfs_mod.main(_gtpfs_sys.argv[2:]))
+except SystemExit:
+    raise
+except Exception as _gtpfs_exc:
+    raise SystemExit(f"generate-topic-pack-from-sheet dispatch failed: {_gtpfs_exc}")
+# END_GENERATE_TOPIC_PACK_FROM_SHEET_COMMAND_PATCH
+
 # CREATE_TOPIC_PACK_COMMAND_PATCH
 # Lightweight early dispatch so rubric_manager.py can expose the scaffold
 # generator without depending on the manager's internal command table shape.
