@@ -29,6 +29,33 @@ except Exception as _ctpg_exc:
     raise SystemExit(f"create-topic-pack dispatch failed: {_ctpg_exc}")
 # END_CREATE_TOPIC_PACK_COMMAND_PATCH
 
+# VALIDATE_TOPIC_PACK_RELEASE_COMMAND_PATCH
+# Lightweight early dispatch for full topic_pack release validation.
+try:
+    import sys as _vtpr_sys
+    if len(_vtpr_sys.argv) > 1 and _vtpr_sys.argv[1] == "validate-topic-pack-release":
+        import importlib.util as _vtpr_importlib_util
+        from pathlib import Path as _vtpr_Path
+
+        _vtpr_path = _vtpr_Path(__file__).resolve().parent / "validate_topic_pack_release.py"
+        _vtpr_spec = _vtpr_importlib_util.spec_from_file_location(
+            "_validate_topic_pack_release_module",
+            _vtpr_path,
+        )
+        if _vtpr_spec is None or _vtpr_spec.loader is None:
+            raise RuntimeError(f"cannot load {_vtpr_path}")
+
+        _vtpr_mod = _vtpr_importlib_util.module_from_spec(_vtpr_spec)
+        _vtpr_spec.loader.exec_module(_vtpr_mod)
+
+        raise SystemExit(_vtpr_mod.main(_vtpr_sys.argv[2:]))
+except SystemExit:
+    raise
+except Exception as _vtpr_exc:
+    raise SystemExit(f"validate-topic-pack-release dispatch failed: {_vtpr_exc}")
+# END_VALIDATE_TOPIC_PACK_RELEASE_COMMAND_PATCH
+
+
 # VALIDATE_TOPIC_PACK_QUALITY_COMMAND_PATCH
 # Lightweight early dispatch for topic_pack authoring quality validation.
 try:
