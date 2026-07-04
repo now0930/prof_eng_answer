@@ -14,6 +14,8 @@ PIPELINE_SCRIPTS = [
     "scripts/validate_generated_rubrics.py",
 ]
 
+AUDIT_SCRIPT = "scripts/audit_generated_vs_runtime.py"
+
 
 def run_script(path: str) -> int:
     script = ROOT / path
@@ -69,6 +71,19 @@ def cmd_validate_generated_pipeline(_args: argparse.Namespace) -> int:
     return rc
 
 
+def cmd_audit_generated_vs_runtime(_args: argparse.Namespace) -> int:
+    rc = py_compile_pipeline_scripts()
+
+    audit_path = ROOT / AUDIT_SCRIPT
+    if not audit_path.exists():
+        print("ERROR missing:", AUDIT_SCRIPT)
+        return 1
+
+    print("RUN:", AUDIT_SCRIPT)
+    rc = max(rc, subprocess.call([sys.executable, str(audit_path)], cwd=str(ROOT)))
+    return rc
+
+
 def add_parser(sub) -> None:
     p = sub.add_parser(
         "validate-topic-packs",
@@ -93,3 +108,10 @@ def add_parser(sub) -> None:
         help="Validate topic packs, build generated rubrics, then validate generated outputs",
     )
     p.set_defaults(func=cmd_validate_generated_pipeline)
+
+
+    p = sub.add_parser(
+        "audit-generated-vs-runtime",
+        help="Audit generated rubric banks against current runtime JSON files",
+    )
+    p.set_defaults(func=cmd_audit_generated_vs_runtime)
