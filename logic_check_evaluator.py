@@ -5,9 +5,11 @@ import re
 from pathlib import Path
 from typing import Any
 
+from rubric_bank_paths import resolve_rubric_bank_path
+
 
 ROOT = Path(__file__).resolve().parent
-DEFAULT_BANK = ROOT / "rubrics" / "logic_checks" / "industrial_instrumentation_control.json"
+DEFAULT_BANK = resolve_rubric_bank_path("logic_checks")
 
 
 NEGATION_HINTS = [
