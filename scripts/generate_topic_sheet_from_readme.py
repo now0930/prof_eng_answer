@@ -297,6 +297,128 @@ def extract_markdown_from_llm_response(text: str) -> str:
     return str(data).strip()
 
 
+
+def normalize_topic_sheet_markdown(content: str, topic_id: str) -> str:
+    # Normalize common Gemini heading variants into the required Topic Sheet shape.
+    raw = strip_markdown_fence(str(content or "")).strip()
+    if not raw:
+        return raw
+
+    first_line = next((line.strip() for line in raw.splitlines() if line.strip()), "")
+    has_all_required = all(section in raw for section in REQUIRED_SECTIONS)
+    wrapper_heading = re.search(
+        r"(?m)^#\s+(title|content|topic id|topic_id)\s*$",
+        raw,
+        flags=re.IGNORECASE,
+    )
+
+    if (
+        first_line.startswith("# ")
+        and "topic sheet" in first_line.lower()
+        and has_all_required
+        and not wrapper_heading
+    ):
+        return raw
+
+    def heading_key(value: str) -> str:
+        value = re.sub(r"^\s*#+\s*", "", str(value or "").strip())
+        value = value.lower().replace("_", " ")
+        value = re.sub(r"[^0-9a-z가-힣]+", " ", value)
+        return re.sub(r"\s+", " ", value).strip()
+
+    lines = raw.splitlines()
+    sections: list[tuple[str, str]] = []
+    current_heading: str | None = None
+    buf: list[str] = []
+
+    for line in lines:
+        match = re.match(r"^\s*#{1,2}\s+(.+?)\s*$", line)
+        if match:
+            if current_heading is not None:
+                sections.append((current_heading, "\n".join(buf).strip()))
+            current_heading = match.group(1).strip()
+            buf = []
+        else:
+            buf.append(line)
+
+    if current_heading is not None:
+        sections.append((current_heading, "\n".join(buf).strip()))
+
+    if not sections:
+        return raw
+
+    by_key: dict[str, str] = {}
+    for heading, body in sections:
+        by_key[heading_key(heading)] = body.strip()
+
+    title_body = by_key.get("title", "")
+    title = next((line.strip("- ").strip() for line in title_body.splitlines() if line.strip()), "")
+    if not title:
+        title = "Topic Sheet"
+    if "topic sheet" not in title.lower():
+        title = f"{title} Topic Sheet"
+
+    topic_body = by_key.get("topic id", "") or by_key.get("topicid", "")
+    topic_value = next((line.strip("- ").strip() for line in topic_body.splitlines() if line.strip()), "")
+    if not topic_value:
+        topic_value = topic_id
+
+    section_aliases = {
+        "topic metadata": "## 1. Topic metadata",
+        "core correct facts": "## 2. Core correct facts",
+        "acceptable expressions": "## 3. Acceptable answer expressions",
+        "acceptable answer expressions": "## 3. Acceptable answer expressions",
+        "fatal wrong claims": "## 4. Fatal wrong claims",
+        "warn level weak claims": "## 5. Warn-level weak claims",
+        "weak claims": "## 5. Warn-level weak claims",
+        "false positive cautions": "## 6. False positive cautions",
+        "regex candidate patterns": "## 7. Regex candidate patterns",
+        "regex candidates": "## 7. Regex candidate patterns",
+        "fact anchor json guidance": "## 8. fact_anchor.json generation guidance",
+        "fact anchor json generation guidance": "## 8. fact_anchor.json generation guidance",
+        "fact anchor generation guidance": "## 8. fact_anchor.json generation guidance",
+        "logic check json guidance": "## 9. logic_check.json generation guidance",
+        "logic check json generation guidance": "## 9. logic_check.json generation guidance",
+        "logic check generation guidance": "## 9. logic_check.json generation guidance",
+        "model answer json guidance": "## 10. model_answer.json generation guidance",
+        "model answer json generation guidance": "## 10. model_answer.json generation guidance",
+        "model answer generation guidance": "## 10. model_answer.json generation guidance",
+        "topic importance json guidance": "## 11. topic_importance.json generation guidance",
+        "topic importance json generation guidance": "## 11. topic_importance.json generation guidance",
+        "topic importance generation guidance": "## 11. topic_importance.json generation guidance",
+        "human review checklist": "## 12. Human review checklist",
+    }
+
+    canonical_blocks: dict[str, str] = {}
+    for heading, body in sections:
+        canonical = section_aliases.get(heading_key(heading))
+        if canonical:
+            canonical_blocks[canonical] = body.strip()
+
+    metadata = canonical_blocks.get("## 1. Topic metadata", "").strip()
+    if not metadata:
+        title_ko = title.replace(" Topic Sheet", "").strip()
+        metadata = "\n".join(
+            [
+                f"- topic_id: {topic_value}",
+                f"- title_ko: {title_ko}",
+            ]
+        )
+    elif topic_id not in metadata:
+        metadata = f"- topic_id: {topic_value}\n" + metadata
+
+    canonical_blocks["## 1. Topic metadata"] = metadata
+
+    out: list[str] = [f"# {title}", ""]
+    for section in REQUIRED_SECTIONS:
+        out.append(section)
+        out.append("")
+        body = canonical_blocks.get(section, "").strip()
+        out.append(body if body else "- Not provided by model output.")
+        out.append("")
+
+    return "\n".join(out).strip()
+
 def validate_topic_sheet_markdown(content: str, topic_id: str) -> tuple[bool, list[str]]:
     """Validate generated Topic Sheet shape before writing it."""
     errors: list[str] = []
@@ -417,8 +539,10 @@ def call_markdown_llm(
     )
 
     content = str(first.get("content") or "").strip()
+    content = normalize_topic_sheet_markdown(content, topic_id)
     ok, errors = validate_topic_sheet_markdown(content, topic_id)
     if ok:
+        first["content"] = content
         first["validation_errors"] = []
         first["repaired"] = False
         return first
@@ -440,8 +564,10 @@ def call_markdown_llm(
     )
 
     repaired_content = str(repaired.get("content") or "").strip()
+    repaired_content = normalize_topic_sheet_markdown(repaired_content, topic_id)
     ok2, errors2 = validate_topic_sheet_markdown(repaired_content, topic_id)
     if ok2:
+        repaired["content"] = repaired_content
         repaired["validation_errors"] = []
         repaired["repaired"] = True
         repaired["first_invalid_content"] = content

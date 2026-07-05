@@ -920,6 +920,88 @@ def attach_logic_check_to_grade(
     grade: dict[str, Any],
     answer_text: str,
 ) -> dict[str, Any]:
+    # phase3b can run before final difficulty_strategy is attached.
+    # The topic router may already have stored the selected topic at top-level
+    # fields such as topic_id/inferred_topic_id/logic_check_topic_id.
+    # evaluate_logic_checks currently resolves generated topic packs reliably
+    # through difficulty_strategy.topic_id, so bridge those early topic fields.
+    if isinstance(grade, dict):
+        difficulty_strategy = grade.get("difficulty_strategy")
+        if not isinstance(difficulty_strategy, dict):
+            difficulty_strategy = {}
+        else:
+            difficulty_strategy = dict(difficulty_strategy)
+
+        topic_id = (
+            difficulty_strategy.get("topic_id")
+            or grade.get("topic_id")
+            or grade.get("inferred_topic_id")
+            or grade.get("logic_check_topic_id")
+            or grade.get("rubric_topic_id")
+        )
+
+        if not topic_id:
+            question_analysis = grade.get("question_analysis")
+            if isinstance(question_analysis, dict):
+                topic_id = (
+                    question_analysis.get("topic_id")
+                    or question_analysis.get("inferred_topic_id")
+                    or question_analysis.get("logic_check_topic_id")
+                )
+
+        if not topic_id:
+            metadata = grade.get("metadata")
+            if isinstance(metadata, dict):
+                topic_id = (
+                    metadata.get("topic_id")
+                    or metadata.get("inferred_topic_id")
+                    or metadata.get("logic_check_topic_id")
+                )
+
+        if topic_id and not difficulty_strategy.get("topic_id"):
+            difficulty_strategy["topic_id"] = str(topic_id)
+            grade["difficulty_strategy"] = difficulty_strategy
+
+    # phase3b can run before final difficulty_strategy is attached.
+    # Bridge early topic routing fields into difficulty_strategy.topic_id
+    # because generated topic-pack logic checks are resolved there.
+    if isinstance(grade, dict):
+        difficulty_strategy = grade.get("difficulty_strategy")
+        if not isinstance(difficulty_strategy, dict):
+            difficulty_strategy = {}
+        else:
+            difficulty_strategy = dict(difficulty_strategy)
+
+        topic_id = (
+            difficulty_strategy.get("topic_id")
+            or grade.get("topic_id")
+            or grade.get("inferred_topic_id")
+            or grade.get("logic_check_topic_id")
+            or grade.get("rubric_topic_id")
+        )
+
+        if not topic_id:
+            question_analysis = grade.get("question_analysis")
+            if isinstance(question_analysis, dict):
+                topic_id = (
+                    question_analysis.get("topic_id")
+                    or question_analysis.get("inferred_topic_id")
+                    or question_analysis.get("logic_check_topic_id")
+                )
+
+        if not topic_id:
+            metadata = grade.get("metadata")
+            if isinstance(metadata, dict):
+                topic_id = (
+                    metadata.get("topic_id")
+                    or metadata.get("inferred_topic_id")
+                    or metadata.get("logic_check_topic_id")
+                )
+
+        if topic_id and not difficulty_strategy.get("topic_id"):
+            difficulty_strategy["topic_id"] = str(topic_id)
+            grade["difficulty_strategy"] = difficulty_strategy
+
     logic_eval = evaluate_logic_checks(answer_text=answer_text, grade=grade)
 
     if not logic_eval.get("applicable"):

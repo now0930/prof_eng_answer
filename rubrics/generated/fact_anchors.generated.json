@@ -1,10 +1,221 @@
 {
-  "version": "2026-07-05T00:33:53Z-generated-topic-pack-fact-anchors",
+  "version": "2026-07-05T08:33:16Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "topics": [
+    {
+      "topic_id": "pid_controller_tuning_sequence_gain_effects",
+      "schema_version": "fact_anchor.v1",
+      "title_ko": "PID 제어기 튜닝 순서와 P/I/D 게인 영향",
+      "anchors": [
+        {
+          "id": "pid_controller_definition",
+          "statement": "PID 제어기는 비례(P), 적분(I), 미분(D) 동작을 조합하여 오차에 대한 제어 출력을 생성한다.",
+          "importance": "must",
+          "keywords": [
+            "PID",
+            "비례",
+            "적분",
+            "미분",
+            "오차",
+            "제어 출력"
+          ],
+          "anchor_id": "pid_controller_definition"
+        },
+        {
+          "id": "pid_time_domain_formula",
+          "statement": "이상적인 연속형 PID 제어기는 u(t)=Kp e(t)+Ki∫e(t)dt+Kd de(t)/dt로 표현할 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "u(t)",
+            "Kp",
+            "Ki",
+            "Kd",
+            "e(t)",
+            "적분",
+            "미분"
+          ],
+          "anchor_id": "pid_time_domain_formula"
+        },
+        {
+          "id": "pid_s_domain_formula",
+          "statement": "라플라스 영역에서 이상적인 PID 제어기는 Gc(s)=Kp+Ki/s+Kd s 형태로 표현할 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "Gc(s)",
+            "Kp",
+            "Ki/s",
+            "Kd s",
+            "라플라스"
+          ],
+          "anchor_id": "pid_s_domain_formula"
+        },
+        {
+          "id": "p_action_effect",
+          "statement": "P 동작은 현재 오차에 비례하여 제어 출력을 만들며 응답 속도와 오차 보상에 기여하지만, 과도하면 overshoot, hunting, 진동, 불안정을 증가시킬 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "P",
+            "Kp",
+            "현재 오차",
+            "응답 속도",
+            "overshoot",
+            "hunting",
+            "불안정"
+          ],
+          "anchor_id": "p_action_effect"
+        },
+        {
+          "id": "i_action_effect",
+          "statement": "I 동작은 누적 오차를 보상하여 정상상태 오차와 offset을 제거하는 것이 주역할이며, 과도하면 overshoot, hunting, 응답 지연, 적분 windup을 유발할 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "I",
+            "Ki",
+            "누적 오차",
+            "정상상태 오차",
+            "offset",
+            "windup",
+            "hunting"
+          ],
+          "anchor_id": "i_action_effect"
+        },
+        {
+          "id": "d_action_effect",
+          "statement": "D 동작은 오차 변화율을 이용한 예측·감쇠 동작으로 overshoot와 진동 저감에 기여할 수 있으나, 센서 노이즈와 미분 kick에 민감하여 필터와 함께 제한적으로 사용한다.",
+          "importance": "must",
+          "keywords": [
+            "D",
+            "Kd",
+            "변화율",
+            "감쇠",
+            "overshoot",
+            "노이즈",
+            "미분 kick",
+            "필터"
+          ],
+          "anchor_id": "d_action_effect"
+        },
+        {
+          "id": "general_tuning_sequence",
+          "statement": "일반적인 현장 PID 튜닝은 P로 기본 응답성과 안정성을 확보하고, I로 정상상태 오차를 제거한 뒤, D는 필요한 경우에만 감쇠와 overshoot 저감 목적으로 추가한다.",
+          "importance": "must",
+          "keywords": [
+            "튜닝 순서",
+            "P",
+            "I",
+            "D",
+            "안정성",
+            "정상상태 오차",
+            "감쇠",
+            "overshoot"
+          ],
+          "anchor_id": "general_tuning_sequence"
+        },
+        {
+          "id": "pi_controller_common_in_process_control",
+          "statement": "일반적인 공정 제어에서는 D 동작의 노이즈 민감성과 유지보수 부담 때문에 PI 제어만 사용하는 경우도 많다.",
+          "importance": "must",
+          "keywords": [
+            "PI 제어",
+            "공정 제어",
+            "노이즈",
+            "유지보수"
+          ],
+          "anchor_id": "pi_controller_common_in_process_control"
+        },
+        {
+          "id": "pd_controller_exists",
+          "statement": "PD 제어기는 존재하며, 정상상태 오차 제거보다 빠른 응답과 감쇠가 중요한 위치 제어, 서보, 기계계에서 사용할 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "PD 제어기",
+            "위치 제어",
+            "서보",
+            "감쇠",
+            "빠른 응답"
+          ],
+          "anchor_id": "pd_controller_exists"
+        },
+        {
+          "id": "field_constraints",
+          "statement": "현장 튜닝에서는 dead time, time constant, sensor noise, actuator saturation, valve stiction, valve wear, manual/auto 전환, output limit, anti-windup, derivative filter, bumpless transfer를 함께 고려해야 한다.",
+          "importance": "must",
+          "keywords": [
+            "dead time",
+            "time constant",
+            "sensor noise",
+            "actuator saturation",
+            "valve stiction",
+            "anti-windup",
+            "derivative filter",
+            "bumpless transfer"
+          ],
+          "anchor_id": "field_constraints"
+        }
+      ],
+      "core_facts": [
+        "PID 제어기는 P, I, D 동작을 조합하여 오차에 대한 제어 출력을 만든다.",
+        "P 동작은 현재 오차에 비례하여 응답 속도를 높일 수 있으나 과도하면 overshoot, hunting, 불안정을 증가시킨다.",
+        "I 동작은 누적 오차를 보상하여 정상상태 오차를 제거하지만 과도하면 windup과 진동을 유발한다.",
+        "D 동작은 오차 변화율 기반의 예측·감쇠 동작이며 노이즈에 민감하다.",
+        "일반적인 튜닝 순서는 P로 안정성을 확보하고 I로 offset을 제거한 뒤 D는 필요한 경우에만 추가하는 것이다.",
+        "PI 제어는 공정 제어에서 흔하며, PD 제어기는 존재하지만 적용 영역이 제한적이다.",
+        "현장 튜닝은 노이즈, 포화, 밸브 마모, dead time, anti-windup, derivative filter를 함께 고려해야 한다."
+      ],
+      "fatal_wrong_claims": [
+        {
+          "id": "pid_tuning_d_first_general_rule",
+          "claim": "일반적인 PID 튜닝에서 D 게인을 항상 먼저 조정해야 한다.",
+          "correction": "일반적으로 P 또는 PI 기반으로 기본 안정성을 확보한 뒤 필요한 경우 D를 추가한다."
+        },
+        {
+          "id": "integral_increases_damping",
+          "claim": "I 동작이 damping을 증가시키거나 overshoot를 줄이는 주된 수단이다.",
+          "correction": "I는 정상상태 오차 제거가 주역할이며 과도하면 overshoot와 windup을 증가시킬 수 있다."
+        },
+        {
+          "id": "derivative_removes_steady_state_error",
+          "claim": "D 동작이 정상상태 오차 또는 offset을 제거한다.",
+          "correction": "정상상태 오차와 offset 제거는 주로 I 동작의 역할이다."
+        },
+        {
+          "id": "pd_controller_does_not_exist",
+          "claim": "PD 제어기는 존재하지 않는다.",
+          "correction": "PD 제어기는 존재하며 빠른 응답과 감쇠가 중요한 계에서 사용할 수 있다."
+        },
+        {
+          "id": "p_gain_always_stabilizes",
+          "claim": "P 게인을 키우면 항상 안정해진다.",
+          "correction": "P 게인을 과도하게 키우면 overshoot, hunting, 진동, 불안정이 증가할 수 있다."
+        },
+        {
+          "id": "integral_action_no_windup_risk",
+          "claim": "I 동작에는 windup이나 actuator saturation 문제가 없다.",
+          "correction": "I 동작은 saturation 상황에서 windup을 유발할 수 있으므로 anti-windup이 필요하다."
+        }
+      ],
+      "regex_patterns": [
+        "D.*(먼저|우선).*(튜닝|조정)",
+        "I.*(damping|감쇠).*증가",
+        "적분.*(damping|감쇠).*증가",
+        "D.*(정상상태|정상 상태|오프셋|offset).*제거",
+        "PD.*(존재하지|없다)",
+        "P.*게인.*(키우면|클수록).*항상.*안정",
+        "I.*(windup|와인드업).*없다",
+        "적분.*포화.*문제.*없다"
+      ],
+      "safe_expressions": [
+        "일반적으로 P → I → D 순서로 잡는다.",
+        "현장에서는 PI 제어만 사용하는 경우도 많다.",
+        "PD 제어기는 존재하지만 공정 제어에서는 PI/PID가 더 흔하다.",
+        "D 동작은 감쇠 효과가 있으나 노이즈에 민감하다.",
+        "I 동작은 offset 제거에 효과적이나 windup 위험이 있다.",
+        "anti-windup과 derivative filter가 필요할 수 있다."
+      ]
+    },
     {
       "schema_version": "topic_pack.fact_anchor.v1",
       "topic_id": "second_order_lag_response_by_damping_ratio",

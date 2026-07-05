@@ -1,10 +1,33 @@
 {
-  "version": "2026-07-05T00:33:53Z-generated-topic-pack-importance",
+  "version": "2026-07-05T08:33:16Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "topics": [
+    {
+      "topic_id": "pid_controller_tuning_sequence_gain_effects",
+      "difficulty": "high",
+      "importance": "high",
+      "selection_policy": "mandatory",
+      "theory_core": true,
+      "evaluation_focus": {
+        "key_areas": [
+          "감쇠비별 응답 특성",
+          "PID 게인별 응답 영향",
+          "현장 튜닝 순서 및 제약사항"
+        ],
+        "critical_errors": [
+          "ζ=1/ζ>1/극점 부호 오류",
+          "D 동작을 첫 튜닝 대상으로 설정",
+          "I 동작이 감쇠를 증가시킨다는 오개념",
+          "D 동작이 정상상태 오차를 제거한다는 오개념"
+        ],
+        "scoring_criteria": {
+          "high_score_requirements": "단순 암기가 아닌 극점-응답-현장 trade-off 연결 능력 평가"
+        }
+      }
+    },
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "second_order_lag_response_by_damping_ratio",

@@ -12,6 +12,122 @@ BASE_DIR = Path(__file__).resolve().parent
 DEFAULT_PROMPT_PATH = BASE_DIR / "rubrics" / "output_prompts" / "compact_grade_summary.json"
 
 
+
+
+def _logic_check_corrective_points_from_locals(local_vars, limit=3):
+    """Find logic_check_evaluation from the current formatter scope and build correction points."""
+    def find_grade_like(obj, depth=0):
+        if depth > 4:
+            return None
+
+        if isinstance(obj, dict):
+            logic_eval = obj.get("logic_check_evaluation")
+            if isinstance(logic_eval, dict):
+                return obj
+
+            # Sometimes the logic evaluation itself is passed around directly.
+            if isinstance(obj.get("findings"), list) and (
+                obj.get("mode") is not None or obj.get("fatal_error_detected") is not None
+            ):
+                return {"logic_check_evaluation": obj}
+
+            for key in [
+                "grade",
+                "result",
+                "grade_data",
+                "grade_result",
+                "data",
+                "summary",
+                "payload",
+                "formatted",
+            ]:
+                found = find_grade_like(obj.get(key), depth + 1)
+                if found:
+                    return found
+
+            for value in obj.values():
+                found = find_grade_like(value, depth + 1)
+                if found:
+                    return found
+
+        elif isinstance(obj, (list, tuple)):
+            for value in obj:
+                found = find_grade_like(value, depth + 1)
+                if found:
+                    return found
+
+        return None
+
+    if not isinstance(local_vars, dict):
+        return _logic_check_corrective_points({}, limit=limit)
+
+    # Prefer explicit local variable names first.
+    for name in [
+        "grade",
+        "result",
+        "grade_data",
+        "grade_result",
+        "data",
+        "summary",
+        "payload",
+    ]:
+        found = find_grade_like(local_vars.get(name))
+        if found:
+            return _logic_check_corrective_points(found, limit=limit)
+
+    # Fallback: scan every local object.
+    for value in local_vars.values():
+        found = find_grade_like(value)
+        if found:
+            return _logic_check_corrective_points(found, limit=limit)
+
+    return _logic_check_corrective_points({}, limit=limit)
+
+
+def _logic_check_corrective_points(grade, limit=3):
+    """Build correction points from logic_check_evaluation findings.
+
+    Prefer topic-specific correct_rule values from fatal logic checks.
+    This prevents a fatal fallback for one topic from leaking into another topic.
+    """
+    logic_eval = {}
+    if isinstance(grade, dict):
+        logic_eval = grade.get("logic_check_evaluation") or {}
+
+    points = []
+
+    if isinstance(logic_eval, dict):
+        findings = logic_eval.get("findings") or []
+
+        # 1) Prefer fatal finding correct_rule.
+        for finding in findings:
+            if not isinstance(finding, dict):
+                continue
+            if finding.get("severity") != "fatal":
+                continue
+
+            correct_rule = str(finding.get("correct_rule") or "").strip()
+            if correct_rule and correct_rule not in points:
+                points.append(correct_rule)
+
+        # 2) Fallback to next_practice_points if no correct_rule exists.
+        if not points:
+            for point in logic_eval.get("next_practice_points") or []:
+                point = str(point or "").strip()
+                if point and point not in points:
+                    points.append(point)
+
+    # 3) Generic fallback only. Do not use topic-specific hardcoded text here.
+    if not points:
+        points = [
+            "핵심 개념과 조건을 정답 기준과 일치시키세요.",
+            "공식, 변수 의미, 적용 조건을 함께 설명하세요.",
+            "현장 적용 시 한계와 보완 대책을 구분하세요.",
+        ]
+
+    return points[:limit]
+
+
 def _txt(value: Any, limit: int = 260) -> str:
     text = " ".join(str(value or "").split()).strip()
     if len(text) > limit:
@@ -254,11 +370,7 @@ def _normalise_summary(llm_obj: dict[str, Any] | None, payload: dict[str, Any]) 
                 "C항목: 핵심 이론 정의 오류로 내용 점수가 제한됩니다.",
                 "D/E항목: 현장 적용 설명은 일부 장점이나 fatal 오류를 보완하지 못합니다.",
             ],
-            "improvements": [
-                "감쇠비 구간 정의를 정답 기준과 일치시키세요.",
-                "극점식과 응답 특성을 연결하세요.",
-                "실무적 절충값과 이론적 임계조건을 구분하세요.",
-            ],
+            "improvements": _logic_check_corrective_points_from_locals(locals()),
         }
 
     section_basis = _items(

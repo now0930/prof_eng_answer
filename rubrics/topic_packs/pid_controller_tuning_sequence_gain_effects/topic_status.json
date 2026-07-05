@@ -1,0 +1,13 @@
+{
+  "schema_version": "topic_status.v1",
+  "topic_id": "pid_controller_tuning_sequence_gain_effects",
+  "status": "draft",
+  "owner": "rubric_authoring",
+  "review_stage": "generated_from_topic_sheet",
+  "notes": [
+    "Generated from README and Topic Sheet.",
+    "Human-updated fact_anchor.json with anchors list runtime schema.",
+    "Human-updated logic_check.json with fatal_checks and llm_profile runtime schema.",
+    "Needs release validation, generated bank promotion, and Telegram smoke test."
+  ]
+}

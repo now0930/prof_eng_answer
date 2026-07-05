@@ -1,11 +1,140 @@
 {
-  "version": "2026-07-05T00:33:53Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-05T08:33:16Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs/*/logic_check.json:deterministic_checks",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "topic_logic_checks": [
+    {
+      "topic_id": "pid_controller_tuning_sequence_gain_effects",
+      "fatal_checks": [
+        {
+          "id": "pid_tuning_d_first_general_rule",
+          "severity": "fatal",
+          "message": "일반적인 PID 튜닝에서 D 게인을 항상 먼저 조정해야 한다고 설명함.",
+          "description": "D first tuning generalization",
+          "correct_rule": "일반적인 현장 튜닝은 P로 기본 응답성과 안정성을 확보하고, I로 정상상태 오차를 제거한 뒤, D는 필요한 경우에만 감쇠와 overshoot 저감 목적으로 추가한다.",
+          "recommended_ceiling": 10.0,
+          "wrong_patterns": [
+            "D.*(먼저|우선).*(튜닝|조정)",
+            "미분.*(먼저|우선).*(튜닝|조정)",
+            "D.*크게.*주.*안정"
+          ],
+          "examples_or_patterns": [
+            "PID 튜닝은 D 게인을 먼저 잡아야 한다.",
+            "D를 먼저 크게 주어 안정성을 확보한 뒤 P와 I를 조정한다."
+          ]
+        },
+        {
+          "id": "integral_increases_damping",
+          "severity": "fatal",
+          "message": "I 동작이 damping을 증가시키거나 overshoot를 줄이는 주된 수단이라고 설명함.",
+          "description": "Integral action incorrectly treated as damping action",
+          "correct_rule": "I 동작은 누적 오차를 보상하여 정상상태 오차를 제거하는 것이 주역할이며, 과도하면 overshoot, hunting, 적분 windup을 유발할 수 있다. 감쇠와 overshoot 저감은 주로 D 동작 또는 전체 폐루프 튜닝으로 판단한다.",
+          "recommended_ceiling": 10.0,
+          "wrong_patterns": [
+            "I.*(damping|감쇠).*증가",
+            "적분.*(damping|감쇠).*증가",
+            "I.*overshoot.*(감소|저감|억제)",
+            "적분.*진동.*억제"
+          ],
+          "examples_or_patterns": [
+            "I 게인을 키우면 damping ratio가 증가한다.",
+            "I 동작은 진동을 억제하고 overshoot를 줄인다."
+          ]
+        },
+        {
+          "id": "derivative_removes_steady_state_error",
+          "severity": "fatal",
+          "message": "D 동작이 정상상태 오차 또는 offset을 제거한다고 설명함.",
+          "description": "Derivative action incorrectly treated as offset removal",
+          "correct_rule": "정상상태 오차 제거는 주로 I 동작의 역할이다. D 동작은 오차 변화율 기반의 예측·감쇠 동작이며 정상상태에서 변화율이 없으면 출력 기여가 사라진다.",
+          "recommended_ceiling": 10.0,
+          "wrong_patterns": [
+            "D.*(정상상태|정상 상태).*오차.*제거",
+            "D.*(오프셋|offset).*제거",
+            "미분.*(정상상태|정상 상태).*오차.*제거",
+            "미분.*(오프셋|offset).*제거"
+          ],
+          "examples_or_patterns": [
+            "D 제어는 offset을 제거한다.",
+            "정상상태 오차를 없애려면 D 게인을 키운다."
+          ]
+        },
+        {
+          "id": "pd_controller_does_not_exist",
+          "severity": "fatal",
+          "message": "PD 제어기가 존재하지 않는다고 설명함.",
+          "description": "PD controller nonexistence claim",
+          "correct_rule": "PD 제어기는 존재한다. 정상상태 오차 제거보다 빠른 응답과 감쇠가 중요한 위치 제어, 서보, 기계계에서 사용할 수 있다. 다만 일반적인 process control에서는 PI 또는 PID가 더 흔하다.",
+          "recommended_ceiling": 10.0,
+          "wrong_patterns": [
+            "PD.*존재하지.*(않는다|않음)",
+            "PD.*제어기.*없다",
+            "PD.*없다",
+            "I.*없으면.*제어기.*성립.*않"
+          ],
+          "examples_or_patterns": [
+            "PD 제어기는 없다.",
+            "PID에서 I가 없으면 제어기가 성립하지 않는다."
+          ]
+        },
+        {
+          "id": "p_gain_always_stabilizes",
+          "severity": "fatal",
+          "message": "P 게인을 키우면 항상 안정해진다고 설명함.",
+          "description": "P gain always stabilizes claim",
+          "correct_rule": "P 게인은 응답 속도를 높이고 오차를 줄일 수 있지만, 과도하게 키우면 overshoot, hunting, 진동, 불안정을 증가시킬 수 있다.",
+          "recommended_ceiling": 10.0,
+          "wrong_patterns": [
+            "P.*게인.*키우면.*항상.*안정",
+            "P.*게인.*클수록.*안정",
+            "Kp.*키우면.*항상.*안정",
+            "Kp.*클수록.*무조건.*좋"
+          ],
+          "examples_or_patterns": [
+            "Kp를 계속 키우면 안정도가 계속 좋아진다.",
+            "P 게인은 클수록 무조건 좋다."
+          ]
+        },
+        {
+          "id": "integral_action_no_windup_risk",
+          "severity": "fatal",
+          "message": "I 동작에는 windup이나 actuator saturation 문제가 없다고 설명함.",
+          "description": "Integral action no windup risk claim",
+          "correct_rule": "I 동작은 누적 오차를 사용하므로 actuator saturation 상황에서 적분 windup이 발생할 수 있으며, anti-windup과 output limit 고려가 필요하다.",
+          "recommended_ceiling": 10.0,
+          "wrong_patterns": [
+            "I.*windup.*없다",
+            "I.*와인드업.*없다",
+            "적분.*windup.*없다",
+            "적분.*와인드업.*없다",
+            "적분.*포화.*문제.*없다",
+            "anti.?windup.*필요.*없"
+          ],
+          "examples_or_patterns": [
+            "I 제어는 누적되지만 포화 문제는 없다.",
+            "anti-windup은 PID 튜닝에서 필요 없다."
+          ]
+        }
+      ],
+      "major_checks": [
+        {
+          "id": "tuning_sequence_logic_missing",
+          "severity": "major",
+          "message": "P/I/D 역할은 일부 설명했지만 튜닝 순서 또는 안정화 논리가 부족함.",
+          "description": "P 기반 안정화, I offset 제거, 선택적 D 감쇠 보정의 순서와 이유를 설명하는지 확인한다."
+        },
+        {
+          "id": "field_constraint_inclusion_missing",
+          "severity": "major",
+          "message": "현장 제약 조건인 노이즈, 포화, windup, 밸브 마모, dead time 고려가 부족함.",
+          "description": "실제 PID 튜닝에서 sensor noise, actuator saturation, valve stiction, dead time, anti-windup, derivative filter를 고려하는지 확인한다."
+        }
+      ],
+      "minor_checks": []
+    },
     {
       "topic_id": "second_order_lag_response_by_damping_ratio",
       "enabled": true,
