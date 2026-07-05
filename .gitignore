@@ -70,3 +70,11 @@ rubrics/topic_packs/**/fixed.*
 # Editor swap files
 *.swp
 *.swo
+
+# Local Docker Compose overrides
+docker-compose.yaml
+docker-compose.yml
+compose.yaml
+compose.yml
+!docker-compose.example.yml
+!docker-compose.example.yaml
