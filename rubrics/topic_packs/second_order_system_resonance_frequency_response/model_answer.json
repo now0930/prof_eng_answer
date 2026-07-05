@@ -10,49 +10,44 @@
   ],
   "recommended_outline": [
     {
-      "section": "표준 2차 전달함수와 고유진동수·감쇠비·이득 정의",
-      "intent": "표준 2차 전달함수를 정확히 쓰고 고유진동수, 감쇠비, 이득의 의미를 정의한다.",
+      "section": "표준 2차 전달함수와 고유진동수·감쇠비 정의",
+      "intent": "표준 2차 전달함수 G(s)=Kωn²/(s²+2ζωn s+ωn²)를 제시하고 고유진동수(ωn)와 감쇠비(ζ)를 정의한다.",
       "anchor_refs": []
     },
     {
-      "section": "주파수응답에서 공진 peak 발생 의미와 해석 목적",
-      "intent": "주파수응답에서 공진 peak가 발생하는 물리적 의미와 해석 목적을 설명한다.",
+      "section": "주파수응답 해석과 정규화 크기식",
+      "intent": "s=jω 대입 및 정규화 주파수비 r=ω/ωn을 도입하여 크기식 |G(jω)|/K = 1/sqrt((1-r²)²+(2ζr)²)을 도출한다.",
       "anchor_refs": []
     },
     {
-      "section": "공진주파수 ωr = ωn sqrt(1 - 2ζ²) 관계",
-      "intent": "공진주파수는 ωr = ωn sqrt(1 - 2ζ²)이며 조건 ζ < 1/sqrt(2)에서 성립함을 제시한다.",
+      "section": "공진주파수 ωr = ωn sqrt(1 - 2ζ²)와 존재 조건",
+      "intent": "공진주파수 공식과 실수 공진이 발생하는 조건인 ζ < 1/sqrt(2)를 명확히 제시한다.",
       "anchor_refs": []
     },
     {
-      "section": "공진 조건 ζ < 1/sqrt(2) 성립 범위",
-      "intent": "감쇠비 증가에 따라 공진 peak가 감소하고 응답이 완만해지는 경향을 설명한다.",
+      "section": "시간응답(overshoot)과 주파수응답(resonance)의 구분",
+      "intent": "감쇠진동수(ωd)와 공진주파수(ωr)의 차이, 그리고 overshoot 조건(0<ζ<1)과 resonance 조건(0<ζ<1/sqrt(2))을 구분한다.",
       "anchor_refs": []
     },
     {
-      "section": "감쇠비 증가에 따른 공진 peak 감소와 응답 완만화",
-      "intent": "ζ=1 임계감쇠는 시간응답의 중근 조건이지 공진 조건이 아님을 명확히 구분한다.",
-      "anchor_refs": []
-    },
-    {
-      "section": "ζ=1 임계감쇠와 시간응답 중근 조건·공진 조건 구분",
-      "intent": "기계 진동, 센서 동특성, 제어계 튜닝에서 공진 회피와 감쇠 확보 기준을 연결한다.",
+      "section": "감쇠비에 따른 응답 특성 및 현장 trade-off",
+      "intent": "감쇠비 증가에 따른 공진 peak 감소를 설명하고, 기계 진동, 센서 노이즈, 제어루프 bandwidth 튜닝 등 현장 적용성을 논한다.",
       "anchor_refs": []
     }
   ],
   "high_score_points": [
-    "표준 2차 전달함수를 정확히 쓴다.",
-    "주파수응답 크기식을 정규화 형태로 설명한다.",
-    "ωr = ωn sqrt(1 - 2ζ²)와 조건 ζ < 1/sqrt(2)를 정확히 제시한다.",
-    "감쇠비 증가에 따른 공진 peak 감소를 설명한다.",
-    "시간응답 overshoot와 주파수응답 resonance를 명확히 구분한다.",
-    "ζ=1 임계감쇠를 공진 조건처럼 오해하지 않는다."
+    "표준 2차 전달함수와 정규화 크기식을 정확히 기술한다.",
+    "공진주파수 ωr = ωn sqrt(1 - 2ζ²)와 존재 조건 ζ < 1/sqrt(2)를 명확히 제시한다.",
+    "시간응답의 감쇠진동수(ωd)와 주파수응답의 공진주파수(ωr)를 명확히 구분한다.",
+    "overshoot 조건(0<ζ<1)과 resonance 조건(0<ζ<1/sqrt(2))을 구분한다.",
+    "공진 회피, 노이즈 증폭, 제어루프 bandwidth 등 현장 설계 관점의 trade-off를 포함한다."
   ],
   "common_missing_points": [
-    "ζ=1 임계감쇠를 공진 조건처럼 설명하면 안 된다.",
-    "시간응답 overshoot와 주파수응답 resonance를 같은 개념으로 쓰면 안 된다.",
-    "ωr=ωn√(1−2ζ²)의 존재 조건 ζ<1/√2를 빠뜨리면 안 된다.",
-    "수식만 쓰고 감쇠비, bandwidth, 제어루프 영향 등 해석을 빠뜨리면 안 된다."
+    "ζ=1을 과감쇠(임계감쇠)로 분류하지 않고 공진 조건으로 오인하는 경우",
+    "과감쇠를 중근 조건으로 설명하지 못하는 경우",
+    "s = +ζωn ± jωd 부호 오류",
+    "2차 지연계와 dead time(무효시간)을 혼동하는 경우",
+    "ωr=ωn√(1−2ζ²)의 존재 조건 ζ<1/√2 누락"
   ],
   "routing_aliases": [
     "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안",
@@ -60,23 +55,16 @@
     "2차계에서 감쇠비와 공진주파수의 관계를 설명하시오.",
     "시간응답 overshoot와 주파수응답 resonance의 차이를 설명하시오.",
     "second_order_system_resonance_frequency_response",
-    "second order system resonance frequency response",
     "2차 시스템 주파수응답",
     "2차계 주파수응답",
     "공진주파수",
-    "공진 주파수",
     "resonance frequency",
-    "frequency response resonance",
-    "주파수응답 공진",
-    "공진 peak",
     "resonant peak",
+    "공진 peak",
     "ωr",
     "omega r",
-    "ωr=ωn",
-    "zeta resonance",
     "ζ<1/√2",
-    "1/sqrt(2)",
-    "시간응답 overshoot와 주파수응답 resonance"
+    "1/sqrt(2)"
   ],
   "routing_field_points": [
     "주파수응답",
@@ -86,12 +74,10 @@
     "공진 peak",
     "resonant peak",
     "ωr",
-    "omega r",
-    "ωr=ωn√(1−2ζ²)",
-    "ζ<1/√2",
-    "공진 조건",
-    "시간응답 overshoot와 주파수응답 resonance 구분",
-    "임계감쇠와 공진 조건 구분",
+    "ωn",
+    "ζ",
+    "ωd",
+    "overshoot",
     "bandwidth",
     "loop tuning",
     "mechanical resonance"

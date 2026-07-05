@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-04T13:43:00Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-05T00:33:53Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -255,7 +255,9 @@
         "safe_conditions": [
           "공진주파수 공식과 성립 조건을 함께 설명",
           "감쇠비 증가에 따른 공진 peak 감소를 설명",
-          "센서/기계 공진/제어루프 안정성과 연결"
+          "센서/기계 공진/제어루프 안정성과 연결",
+          "ζ≈0.707을 공진 peak 소멸 경계로 설명",
+          "ωr≈ωn을 감쇠가 매우 작을 때의 근사로 설명"
         ]
       },
       "output_contract": {

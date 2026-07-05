@@ -259,6 +259,9 @@ def append_required_logic_rules(data: dict[str, Any]) -> dict[str, Any]:
     This does not change schema. It only appends objects with the same shape as
     deterministic_checks.fatal_checks in the existing v1 logic_check.json.
     """
+    if data.get("topic_id") != "second_order_lag_response_by_damping_ratio":
+        return data
+
     dc = data.setdefault("deterministic_checks", {})
     fatal_checks = dc.setdefault("fatal_checks", [])
     if not isinstance(fatal_checks, list):

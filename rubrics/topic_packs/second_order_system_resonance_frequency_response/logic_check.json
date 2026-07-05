@@ -23,42 +23,103 @@
     "question_type": "PRINCIPLE_INTERPRETATION",
     "fatal_checks": [
       {
-        "id": "resonance_condition_confusion",
+        "id": "resonance_at_zeta_one",
         "severity": "fatal",
         "affected_layers": [
           "C"
         ],
-        "message": "ζ=1 임계감쇠를 공진 조건으로 설명하는 오류를 점검한다.",
-        "correct_rule": "ζ=1은 시간응답의 임계감쇠 조건이며, 표준 2차 저역통과계의 공진주파수는 ζ<1/√2에서 존재한다.",
+        "message": "ζ=1을 공진 조건으로 설명하는 오류를 점검한다.",
+        "correct_rule": "ζ=1은 시간응답의 임계감쇠 조건이며, 주파수응답의 공진 peak 발생 조건이 아니다.",
         "wrong_patterns": [
           "ζ=1에서\\ 공진이\\ 발생한다",
-          "임계감쇠가\\ 공진\\ 조건이다"
+          "임계감쇠가\\ 공진\\ 조건이다",
+          "ζ=1일\\ 때\\ 공진주파수가\\ 정의된다"
         ],
         "recommended_ceiling": 10.0
       },
       {
-        "id": "time_frequency_response_confusion",
+        "id": "omega_r_as_damped_natural_frequency",
         "severity": "fatal",
         "affected_layers": [
           "C"
         ],
-        "message": "시간응답 overshoot와 주파수응답 resonance를 동일 개념으로 처리하는 오류를 점검한다.",
-        "correct_rule": "두 개념은 관련은 있지만 시간영역/주파수영역 해석 축이 다르며 조건도 다르다.",
+        "message": "공진주파수 ωr와 시간응답 감쇠진동수 ωd를 혼동하는 오류를 점검한다.",
+        "correct_rule": "ωr=ωn√(1-2ζ²)는 공진주파수이며, ωd=ωn√(1-ζ²)는 시간응답의 감쇠진동수이다.",
         "wrong_patterns": [
-          "overshoot와\\ resonance는\\ 같은\\ 개념이다",
-          "오버슈트가\\ 있으면\\ 항상\\ 공진주파수가\\ 존재한다"
+          "공진주파수는\\ ωn√(1-ζ²)이다",
+          "ωr=ωd=ωn√(1-ζ²)",
+          "감쇠진동수와\\ 공진주파수는\\ 같다"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "resonance_for_all_damping_ratios",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "모든 감쇠비에서 공진 peak가 존재한다고 설명하는 오류를 점검한다.",
+        "correct_rule": "공진 peak와 ωr은 ζ<1/√2 조건에서만 정의된다.",
+        "wrong_patterns": [
+          "모든\\ 2차계에는\\ 공진주파수가\\ 있다",
+          "감쇠비와\\ 관계없이\\ 공진\\ peak가\\ 존재한다",
+          "ζ≥1/√2에서도\\ 공진\\ peak가\\ 발생한다"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "zeta_one_over_sqrt_two_as_critical_damping",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "ζ=1/√2를 임계감쇠로 설명하는 오류를 점검한다.",
+        "correct_rule": "ζ=1/√2는 공진 peak가 사라지는 경계 조건이며, 임계감쇠는 ζ=1이다.",
+        "wrong_patterns": [
+          "ζ=0.707은\\ 임계감쇠이다",
+          "ζ=1/√2에서\\ 중근이\\ 된다",
+          "ζ=1/√2가\\ critical\\ damping이다"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "omega_r_always_equals_omega_n",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "공진주파수가 항상 자연주파수와 같다고 설명하는 오류를 점검한다.",
+        "correct_rule": "ωr=ωn√(1-2ζ²)이므로 감쇠가 있으면 ωr<ωn이다.",
+        "wrong_patterns": [
+          "공진주파수는\\ 항상\\ 자연주파수와\\ 같다",
+          "ωr=ωn은\\ 모든\\ 2차계에서\\ 성립한다"
+        ],
+        "recommended_ceiling": 10.0
+      },
+      {
+        "id": "overshoot_condition_as_resonance_condition",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "시간응답 overshoot 조건과 주파수응답 resonance 조건을 혼동하는 오류를 점검한다.",
+        "correct_rule": "overshoot 조건은 0<ζ<1이며, resonance peak 조건은 0<ζ<1/√2이다.",
+        "wrong_patterns": [
+          "0<ζ<1이면\\ 공진\\ peak가\\ 존재한다",
+          "부족감쇠이면\\ 항상\\ 공진이\\ 발생한다",
+          "overshoot가\\ 있으면\\ 반드시\\ resonant\\ peak가\\ 있다"
         ],
         "recommended_ceiling": 10.0
       }
     ],
     "major_checks": [
       {
-        "id": "omega_r_condition_missing",
+        "id": "missing_resonance_existence_condition",
         "severity": "major",
         "affected_layers": [
           "C"
         ],
-        "message": "ωr = ωn√(1−2ζ²)의 성립 조건 누락을 점검한다.",
+        "message": "공진주파수 공식의 성립 조건(ζ<1/√2) 누락을 점검한다.",
         "correct_rule": "공진주파수 공식과 함께 ζ<1/√2 조건을 제시해야 한다.",
         "required_patterns": [
           "ωr",
@@ -67,6 +128,22 @@
           "1/√2"
         ],
         "min_required": 1
+      },
+      {
+        "id": "weak_time_frequency_distinction",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "시간응답과 주파수응답의 개념 구분 부족을 점검한다.",
+        "correct_rule": "ωd와 ωr, overshoot와 resonance의 개념적 차이를 명확히 해야 한다.",
+        "required_patterns": [
+          "ωd",
+          "ωr",
+          "overshoot",
+          "resonance"
+        ],
+        "min_required": 2
       }
     ],
     "question_type_checks": [
@@ -99,7 +176,7 @@
     ],
     "de_claim_trust": {
       "enabled": true,
-      "rule": "Logic Check는 D/E를 직접 평가하지 않는다. D/E 점수는 A/B/C/D/E scoring model에서만 산정한다.",
+      "rule": "Logic Check는 D/E를 직접 평가하지 않는다.",
       "target_layers": [
         "D",
         "E"
@@ -130,7 +207,9 @@
       "safe_conditions": [
         "공진주파수 공식과 성립 조건을 함께 설명",
         "감쇠비 증가에 따른 공진 peak 감소를 설명",
-        "센서/기계 공진/제어루프 안정성과 연결"
+        "센서/기계 공진/제어루프 안정성과 연결",
+        "ζ≈0.707을 공진 peak 소멸 경계로 설명",
+        "ωr≈ωn을 감쇠가 매우 작을 때의 근사로 설명"
       ]
     },
     "output_contract": {

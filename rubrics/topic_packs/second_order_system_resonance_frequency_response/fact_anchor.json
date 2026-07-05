@@ -24,7 +24,14 @@
     "주파수응답",
     "해석형",
     "모범",
-    "답안"
+    "답안",
+    "2차 시스템 주파수응답",
+    "2차계 주파수응답",
+    "second order system frequency response",
+    "damping ratio resonance",
+    "Mr",
+    "bandwidth",
+    "Bode plot"
   ],
   "triggers": [
     "2차 시스템",
@@ -52,12 +59,14 @@
     "시간응답",
     "overshoot",
     "resonance",
-    "차이"
+    "차이",
+    "bandwidth",
+    "Bode plot"
   ],
   "anchors": [
     {
       "name": "표준 2차 전달함수",
-      "expected": "표준 2차계는 보통 G(s)=Kωn²/(s²+2ζωn s+ωn²)로 표현하며, ωn은 고유진동수, ζ는 감쇠비라고 설명해야 한다.",
+      "expected": "표준 2차계는 G(s)=Kωn²/(s²+2ζωn s+ωn²)로 표현하며, ωn은 고유진동수, ζ는 감쇠비이다. 주파수응답은 s=jω를 대입하여 해석한다.",
       "core_terms": [
         "G(s",
         "ωn",
@@ -66,133 +75,72 @@
         "감쇠비",
         "표준",
         "전달함수",
-        "차계",
-        "보통",
-        "K"
+        "s=jω"
       ],
       "support_terms": [
         "second order",
         "transfer function",
         "natural frequency",
         "damping ratio",
-        "표준 2차 전달함수",
-        "ζ=1 임계감쇠와 공진 조건 구분",
-        "/(s",
-        "+2",
-        "response",
-        "resonance",
-        "2차 시스템"
+        "주파수응답"
       ],
       "anchor_id": "F1",
-      "statement": "표준 2차계는 보통 G(s)=Kωn²/(s²+2ζωn s+ωn²)로 표현하며, ωn은 고유진동수, ζ는 감쇠비라고 설명해야 한다."
+      "statement": "표준 2차계는 G(s)=Kωn²/(s²+2ζωn s+ωn²)로 표현하며, ωn은 고유진동수, ζ는 감쇠비이다. 주파수응답은 s=jω를 대입하여 해석한다."
     },
     {
       "name": "주파수응답 크기식",
-      "expected": "s=jω를 대입하면 2차계 주파수응답 크기는 주파수비 r=ω/ωn에 대해 분모 √((1-r²)²+(2ζr)²)의 형태로 해석된다고 설명해야 한다.",
+      "expected": "주파수비 r=ω/ωn에 대해 정규화 크기는 |G(jω)|/K = 1/sqrt((1-r²)²+(2ζr)²)로 표현된다.",
       "core_terms": [
-        "s=jω",
-        "주파수응답",
         "r=ω/ωn",
-        "크기식",
-        "분모",
-        "대입하면",
-        "차계",
         "크기",
         "주파수비",
-        "대해"
+        "|G(jω)|/K"
       ],
       "support_terms": [
         "magnitude",
         "frequency ratio",
         "Bode",
-        "amplitude ratio",
-        "ζ<1/√2에서 공진 peak가 존재한다는 조건 확인",
-        "주파수응답 크기식을 정규화 형태로 설명",
-        "ωn",
-        "ζ",
-        "형태로",
-        "주파수",
-        "response",
-        "resonance",
-        "2차 시스템",
-        "second order system",
-        "공진주파수",
-        "resonance frequency",
-        "frequency response"
+        "amplitude ratio"
       ],
       "anchor_id": "F2",
-      "statement": "s=jω를 대입하면 2차계 주파수응답 크기는 주파수비 r=ω/ωn에 대해 분모 √((1-r²)²+(2ζr)²)의 형태로 해석된다고 설명해야 한다."
+      "statement": "주파수비 r=ω/ωn에 대해 정규화 크기는 |G(jω)|/K = 1/sqrt((1-r²)²+(2ζr)²)로 표현된다."
     },
     {
       "name": "공진 주파수와 조건",
-      "expected": "표준 2차 저역통과계의 공진 주파수는 ωr=ωn√(1−2ζ²)이며, 실수 공진 주파수가 존재하려면 ζ<1/√2 조건을 만족해야 한다.",
+      "expected": "공진 주파수는 ωr=ωn√(1−2ζ²)이며, 실수 공진 주파수가 존재하려면 0≤ζ<1/√2 조건을 만족해야 한다.",
       "core_terms": [
         "공진",
         "주파수",
-        "조건",
-        "표준",
-        "저역통과계",
-        "이며",
-        "실수",
-        "존재하려면"
+        "ωr=ωn√(1-2ζ²)",
+        "ζ<1/√2"
       ],
       "support_terms": [
         "resonance",
         "resonant frequency",
-        "low-pass",
         "condition",
-        "시간응답 overshoot와 주파수응답 resonance 구분",
-        "ωr",
-        "ωn",
-        "ζ",
-        "response",
-        "2차 시스템",
-        "second order system",
-        "공진주파수",
-        "resonance frequency",
-        "frequency response",
-        "감쇠비",
-        "zeta",
-        "omega r"
+        "ζ≥1/√2"
       ],
       "anchor_id": "F3",
-      "statement": "표준 2차 저역통과계의 공진 주파수는 ωr=ωn√(1−2ζ²)이며, 실수 공진 주파수가 존재하려면 ζ<1/√2 조건을 만족해야 한다."
+      "statement": "공진 주파수는 ωr=ωn√(1−2ζ²)이며, 실수 공진 주파수가 존재하려면 0≤ζ<1/√2 조건을 만족해야 한다."
     },
     {
       "name": "시간응답과 주파수응답 구분",
-      "expected": "시간응답의 overshoot와 주파수응답의 resonance는 관련은 있지만 같은 개념이 아니며, ζ=1은 임계감쇠 조건이지 공진 조건이 아니라고 명확히 구분해야 한다.",
+      "expected": "시간응답의 감쇠진동수 ωd=ωn√(1-ζ²)와 주파수응답의 공진주파수 ωr=ωn√(1-2ζ²)는 다르다. 또한 overshoot 조건(0<ζ<1)과 resonance 조건(0<ζ<1/√2)은 구분되어야 한다.",
       "core_terms": [
+        "ωd",
+        "ωr",
         "overshoot",
         "resonance",
-        "ζ=1",
-        "임계감쇠",
-        "공진 조건",
-        "시간응답",
-        "주파수응답",
-        "있지만",
-        "같은",
-        "개념"
+        "구분"
       ],
       "support_terms": [
         "time response",
         "frequency response",
-        "critical damping",
-        "confusion",
-        "감쇠비 증가에 따른 공진 peak 감소",
-        "ζ",
-        "주파수",
-        "공진",
-        "response",
-        "2차 시스템",
-        "second order system",
-        "공진주파수",
-        "resonance frequency",
-        "감쇠비",
-        "zeta",
-        "omega r"
+        "감쇠진동수",
+        "공진주파수"
       ],
       "anchor_id": "F4",
-      "statement": "시간응답의 overshoot와 주파수응답의 resonance는 관련은 있지만 같은 개념이 아니며, ζ=1은 임계감쇠 조건이지 공진 조건이 아니라고 명확히 구분해야 한다."
+      "statement": "시간응답의 감쇠진동수 ωd=ωn√(1-ζ²)와 주파수응답의 공진주파수 ωr=ωn√(1-2ζ²)는 다르다. 또한 overshoot 조건(0<ζ<1)과 resonance 조건(0<ζ<1/√2)은 구분되어야 한다."
     },
     {
       "name": "제어·계측 적용 판단",
@@ -203,38 +151,19 @@
         "제어루프",
         "bandwidth",
         "loop tuning",
-        "제어·계측",
-        "판단",
-        "공진",
-        "진동",
-        "증폭"
+        "제어·계측"
       ],
       "support_terms": [
         "mechanical resonance",
         "stability",
         "sensor",
-        "damping",
-        "design",
-        "시간응답 overshoot와 주파수응답 resonance 구분",
-        "감쇠비",
-        "response",
-        "resonance",
-        "2차 시스템",
-        "second order system",
-        "공진주파수",
-        "resonance frequency",
-        "frequency response",
-        "zeta",
-        "omega r",
-        "ωr",
-        "ωn",
-        "ζ"
+        "damping"
       ],
       "anchor_id": "F5",
       "statement": "공진은 진동 증폭, 노이즈 증폭, 제어루프 불안정, 센서·기계 구조물 손상 위험과 연결되므로 감쇠비, bandwidth, loop tuning, mechanical resonance 회피를 함께 고려해야 한다."
     }
   ],
   "revision_notes": [
-    "aligned_with_model_answers=2026-07-01; triggers/aliases/core_terms/support_terms synchronized with model answer bank."
+    "aligned_with_model_answers=2026-07-01; updated with specific resonance conditions and distinction between ωd and ωr."
   ]
 }
