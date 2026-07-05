@@ -1,69 +1,72 @@
+# Environment / secrets
 .env
+
+# Python runtime / cache
 __pycache__/
-*.pyc
-logs/*.log
+*.py[cod]
+*.pyo
+
+# Logs
+logs/
+*.log
+
+# Local runtime state
 data/state.json
 data/sessions/
+data/user_settings/
+
+# Temporary working directories
+tmp/
+backups/
+wordpress_docs/
+
+# Generated / experimental working files
+rubrics/content_candidates/
+scripts/experiments/fact_anchor_cleanup/
+scripts/experiments/model_answer_relationship_patches/
+scripts/experiments/find_major0_model_answer_backup.py
+scripts/experiments/fix_*.py
+
+# Reports: keep curated baseline reports tracked, ignore ad-hoc generated outputs
+reports/backups/
+reports/rubric_bank/
+reports/*_prompt.md
+reports/*_prompts.md
+reports/*_context.csv
+reports/*_context.md
+reports/*_candidates.csv
+reports/*_candidates_strict.csv
+reports/*_manual_review.csv
+reports/*_manual_review.md
+reports/*_manual_review_applied.csv
+reports/*_manual_review_resolved.csv
+reports/*_final_review.csv
+reports/*_final_review.md
+reports/*_rewrite_applied.csv
+reports/*_removed_*.csv
+reports/*_resolution_applied.csv
+reports/*_normalization_with_refs.csv
+reports/*_quality_audit.csv
+reports/*_quality_audit.md
+reports/*_remaining_*.csv
+reports/*_remaining_*.md
+reports/*_backup_*.tsv
+reports/rubric_audit_summary.md
+
+# Rubric/topic-pack temporary repair files
+*.backup.*
+*.broken.*
+rubrics/topic_packs/**/backup.*
+rubrics/topic_packs/**/bad.*
+rubrics/topic_packs/**/fixed.*
+
+# Local media / large uploads
 *.jpg
 *.jpeg
 *.png
 *.webp
 *.pdf
 
-# Runtime / cache
-__pycache__/
-*.pyc
-*.pyo
-
-# Logs
-logs/*.log
-
-# Local state and private answer sessions
-data/state.json
-data/sessions/
-
-# Backups and temporary files
-backups/
-*.backup.*
-*.broken.*
-
-# Runtime/private
-data/sessions/
-data/state.json
-logs/*.log
-backups/
-__pycache__/
-*.pyc
-*.backup.*
-*.broken.*
-
-# Runtime/private
-data/sessions/
-data/state.json
-logs/*.log
-backups/
-__pycache__/
-*.pyc
-*.backup.*
-*.broken.*
-
-# user runtime settings
-data/user_settings/
-
-# WordPress export and LLM working files
-wordpress_docs/
-
-# Temporary rubric content candidates
-rubrics/content_candidates/
-
 # Editor swap files
 *.swp
 *.swo
-
-# Editor swap files
-*.swp
-*.swo
-
-# Generated Rubric Bank validator reports
-reports/rubric_bank/*.json
-tmp/
