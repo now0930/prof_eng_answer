@@ -523,6 +523,34 @@ def evaluate_logic_checks(
                     recommended_ceiling = ceiling if recommended_ceiling is None else min(recommended_ceiling, float(ceiling))
                 break
 
+        # Semantic fatal fallback:
+        # wrong_patterns are only a fast deterministic aid. If they do not catch
+        # a fatal misconception, ask the LLM verifier to interpret the answer
+        # against this topic's fatal rules in context.
+        if not any(f.get("severity") == "fatal" for f in findings):
+            for semantic_finding in _evaluate_topic_fatal_checks_with_llm(text, topic_check):
+                if any(
+                    f.get("id") == semantic_finding.get("id")
+                    or f.get("source_rule_id") == semantic_finding.get("source_rule_id")
+                    for f in findings
+                    if isinstance(f, dict)
+                ):
+                    continue
+
+                findings.append(semantic_finding)
+                _append_unique(
+                    deduction_elements,
+                    semantic_finding.get("message", "핵심 이론 오류")
+                )
+
+                ceiling = semantic_finding.get("recommended_ceiling")
+                if semantic_finding.get("severity") == "fatal" and isinstance(ceiling, (int, float)):
+                    recommended_ceiling = (
+                        float(ceiling)
+                        if recommended_ceiling is None
+                        else min(recommended_ceiling, float(ceiling))
+                    )
+
         if topic_check.get("topic_id") == "second_order_lag_response_by_damping_ratio":
             for deterministic_finding in _evaluate_second_order_deterministic_checks(text):
                 if any(f.get("id") == deterministic_finding.get("id") for f in findings):
@@ -587,7 +615,11 @@ def evaluate_logic_checks(
 
         break
 
-    findings = _apply_second_order_claim_evaluator(text, findings)
+    # The second-order damping claim evaluator is topic-specific.
+    # Do not apply it to neighboring topics such as frequency-response/resonance,
+    # otherwise damping-ratio profile findings leak into resonance evaluations.
+    if topic_id == "second_order_lag_response_by_damping_ratio":
+        findings = _apply_second_order_claim_evaluator(text, findings)
     # Logic Check는 D/E를 직접 평가하지 않는다.
     # D/E는 de_claim_trust metadata의 target일 뿐 finding affected layer가 아니다.
     for _finding in findings:
@@ -677,6 +709,212 @@ def evaluate_logic_checks(
 
     return result
 
+
+
+def _evaluate_topic_fatal_checks_with_llm(text: str, topic_check: dict[str, Any]) -> list[dict[str, Any]]:
+    """Use an LLM to semantically verify topic fatal rules.
+
+    Regex wrong_patterns are kept as a fast deterministic path, but they are not
+    expressive enough for professional-engineering answers. This verifier reads
+    the answer in context and checks whether the answer actually asserts one of
+    the topic's fatal misconceptions.
+
+    Safety:
+    - If the verifier is unavailable, return no fatal finding.
+    - If confidence is below threshold, downgrade fatal to major.
+    - Contrastive/corrective statements must not be treated as fatal.
+    """
+    fatal_checks = topic_check.get("fatal_checks") or []
+    if not isinstance(fatal_checks, list) or not fatal_checks:
+        return []
+
+    topic_id = str(topic_check.get("topic_id") or "").strip()
+    topic_name = str(topic_check.get("topic_name") or "").strip()
+
+    rules: list[dict[str, Any]] = []
+    rule_map: dict[str, dict[str, Any]] = {}
+
+    for check in fatal_checks:
+        if not isinstance(check, dict):
+            continue
+
+        rid = str(check.get("id") or "").strip()
+        if not rid:
+            continue
+
+        rule = {
+            "id": rid,
+            "message": check.get("message"),
+            "correct_rule": check.get("correct_rule"),
+            "recommended_ceiling": check.get("recommended_ceiling", 10.0),
+            "examples_or_patterns": check.get("wrong_patterns", []),
+        }
+        rules.append(rule)
+        rule_map[rid] = check
+
+    if not rules:
+        return []
+
+    prompt = f"""
+너는 산업계측제어기술사 답안 채점용 Logic Check verifier다.
+
+중요 원칙:
+- 정규표현식 매칭이 아니라 답안의 문맥과 주장을 해석한다.
+- 아래 Fatal rules는 이미 fatal로 정의된 규칙이다.
+- 답안이 Fatal rule의 wrong claim을 실제로 주장하면 severity는 반드시 "fatal"이다.
+- "major"는 답안이 의심스럽지만 wrong claim을 직접 주장했다고 보기 어려운 경우에만 사용한다.
+- 단순 누락, 짧은 답안, 설명 부족은 fatal이 아니다.
+- 정답을 대비 설명하거나 오류를 부정하는 문장은 fatal이 아니다.
+- 애매하면 fatal로 판정하지 말고 major 또는 none으로 둔다.
+- 특히 topic_id가 second_order_system_resonance_frequency_response일 때:
+  * "공진주파수는 ωr=ωn√(1-ζ²)이다"라고 설명하면 fatal이다.
+  * "ωr와 ωd가 같다", "감쇠진동수와 공진주파수가 같다"라고 설명하면 fatal이다.
+  * "ζ=1에서 공진 peak가 발생한다" 또는 "ζ=1이 공진 조건이다"라고 설명하면 fatal이다.
+  * "ζ=1/√2 또는 0.707이 임계감쇠/중근 조건이다"라고 설명하면 fatal이다.
+  * "0<ζ<1이면 공진 peak가 존재한다"처럼 overshoot 조건을 resonance 조건으로 동일시하면 fatal이다.
+- 출력은 JSON object 하나만 반환한다.
+
+Topic:
+- topic_id: {topic_id}
+- topic_name: {topic_name}
+
+Fatal rules:
+{json.dumps(rules, ensure_ascii=False, indent=2)}
+
+False-positive caution:
+- ζ=1을 시간응답의 임계감쇠로만 설명하면 정상이다.
+- ζ=1을 공진 조건 또는 공진 peak 발생 조건으로 설명할 때만 fatal이다.
+- ωd=ωn√(1-ζ²)를 시간응답 감쇠진동수로 설명하면 정상이다.
+- ωd를 공진주파수 ωr와 같다고 하거나, ωr=ωn√(1-ζ²)로 설명하면 fatal이다.
+- ωr≈ωn은 감쇠비가 매우 작은 경우의 근사 설명이면 정상이다.
+- ζ=1/√2 또는 0.707을 공진 peak가 사라지는 경계로 설명하면 정상이다.
+- ζ=1/√2 또는 0.707을 임계감쇠/중근 조건으로 설명하면 fatal이다.
+- overshoot와 resonance가 관련 있다고 말하는 것은 정상이다.
+- overshoot 조건 0<ζ<1을 resonance peak 조건으로 동일시하면 fatal이다.
+
+Answer:
+<<<ANSWER>>>
+{text}
+<<<END_ANSWER>>>
+
+Return JSON only:
+{{
+  "verdict": "fatal | major | pass",
+  "confidence": 0.0,
+  "findings": [
+    {{
+      "rule_id": "fatal rule id",
+      "severity": "fatal | major",
+      "evidence": "답안에서 실제로 문제 되는 주장 요약 또는 짧은 인용",
+      "message": "왜 이 rule에 해당하는지",
+      "correct_rule": "정정 기준"
+    }}
+  ],
+  "reason": "brief reason"
+}}
+""".strip()
+
+    try:
+        from logic_llm_verifier import _call_ollama_json
+        verdict = _call_ollama_json(prompt)
+    except Exception:
+        return []
+
+    if not isinstance(verdict, dict):
+        return []
+
+    try:
+        global_confidence = float(verdict.get("confidence", 0.0))
+    except Exception:
+        global_confidence = 0.0
+
+    fatal_threshold = 0.75
+    findings: list[dict[str, Any]] = []
+
+    for item in verdict.get("findings") or []:
+        if not isinstance(item, dict):
+            continue
+
+        rid = str(item.get("rule_id") or item.get("id") or "").strip()
+        if rid not in rule_map:
+            continue
+
+        severity = str(item.get("severity") or "").strip().lower()
+        if severity not in {"fatal", "major"}:
+            continue
+
+        try:
+            item_confidence = float(item.get("confidence", global_confidence))
+        except Exception:
+            item_confidence = global_confidence
+
+        confidence = max(global_confidence, item_confidence)
+
+        # Never apply fatal cap on low-confidence semantic interpretation.
+        if severity == "fatal" and confidence < fatal_threshold:
+            severity = "major"
+
+        # If the LLM selected one of this topic's fatal rules with high
+        # confidence, keep the source rule's fatal policy. This is not regex
+        # matching; the LLM has already semantically mapped the answer to a
+        # fatal rule. Keep it as major only when the LLM explicitly says the
+        # answer did not directly assert the misconception or is merely vague.
+        elif severity == "major" and confidence >= fatal_threshold:
+            combined = " ".join(
+                str(x or "")
+                for x in [
+                    item.get("message"),
+                    item.get("evidence"),
+                    item.get("reason"),
+                ]
+            )
+            ambiguity_markers = [
+                "직접적으로 없",
+                "직접 주장은 없",
+                "직접 주장하지",
+                "오해를 줄 수",
+                "오해를 유발",
+                "설명 부족",
+                "추가 설명",
+                "애매",
+                "불명확",
+                "부족하여",
+                "가능성",
+            ]
+            if not any(marker in combined for marker in ambiguity_markers):
+                severity = "fatal"
+
+        source_rule = rule_map[rid]
+        message = str(item.get("message") or source_rule.get("message") or "핵심 이론 오류").strip()
+        correct_rule = str(item.get("correct_rule") or source_rule.get("correct_rule") or "").strip()
+        evidence = str(item.get("evidence") or "").strip()
+
+        finding = {
+            "id": f"llm_semantic_{rid}",
+            "source_rule_id": rid,
+            "severity": severity,
+            "message": message,
+            "correct_rule": correct_rule,
+            "affected_layers": source_rule.get("affected_layers", ["C"]),
+            "evidence": evidence,
+            "engine": "topic_fatal_semantic_llm_v1",
+            "confidence": confidence,
+        }
+
+        ceiling = source_rule.get("recommended_ceiling")
+        if severity == "fatal":
+            finding["recommended_ceiling"] = float(ceiling) if isinstance(ceiling, (int, float)) else 10.0
+
+        findings.append(finding)
+
+    # Keep this step focused; avoid flooding the user with many LLM findings.
+    fatal_findings = [f for f in findings if f.get("severity") == "fatal"]
+    major_findings = [f for f in findings if f.get("severity") == "major"]
+
+    if fatal_findings:
+        return fatal_findings[:3] + major_findings[:2]
+
+    return major_findings[:3]
 
 def attach_logic_check_to_grade(
     grade: dict[str, Any],
