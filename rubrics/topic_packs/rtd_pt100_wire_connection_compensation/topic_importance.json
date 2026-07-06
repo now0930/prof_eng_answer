@@ -1,0 +1,24 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "rtd_pt100_wire_connection_compensation",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "PT100의 의미와 RTD의 저항 변화 측정 원리를 열전대 원리와 구분한다.",
+    "2선식, 3선식, 4선식의 리드선 저항 오차와 보상 원리를 회로 관점으로 설명한다.",
+    "3선식은 동일 리드선 저항 가정 하의 보상이고, 4선식은 Kelvin 측정으로 리드선 오차를 제거한다는 차이를 설명한다.",
+    "Wheatstone Bridge, 정전류원, 계측증폭기, transmitter 등 측정 회로를 현장 적용과 연결한다.",
+    "자기발열, 배선 길이, 노이즈, 접촉저항, 정확도와 비용의 trade-off를 제시한다.",
+    "RTD와 thermistor의 재료·선형성·민감도 차이 및 NTC/PTC 온도계수 방향을 정확히 구분한다.",
+    "온도센서를 이상적 0차계와 실제 1차 지연계로 구분하고, 보호관·열용량·열저항에 의한 응답 지연을 설명한다.",
+    "RTD의 저항-온도 관계가 완전 선형이 아니라 온도 범위에 따라 1차·2차·3차 다항식 또는 표준 보정식으로 근사됨을 설명한다."
+  ],
+  "note": "RTD/PT100 결선과 리드선 보상은 온도센서 원리와 계측 회로를 동시에 묻는 핵심 주제이다. 단순 정의보다 2선식·3선식·4선식의 오차 메커니즘과 보상 조건을 구분해야 고득점이 가능하다. Thermistor는 RTD와 같은 저항 변화 기반 소자로 함께 출제될 수 있으나, NTC/PTC의 온도계수 방향과 RTD와의 재료·선형성 차이를 구분해야 한다. 또한 온도센서의 동특성은 이상적 0차계와 실제 1차 지연계로 구분하고, RTD의 저항-온도 관계는 정확도 요구에 따라 1차·2차·3차 다항식 근사 또는 표준 보정식으로 설명해야 한다.",
+  "revision_notes": [
+    "created_for_topic_pack=rtd_pt100_wire_connection_compensation",
+    "difficulty=THEORY_CORE because sensor principle and measurement circuit correctness are central",
+    "added_ntc_ptc_thermistor_distinction",
+    "added_dynamic_order_and_polynomial_approximation"
+  ]
+}

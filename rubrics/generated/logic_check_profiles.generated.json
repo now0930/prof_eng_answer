@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T09:01:24Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-06T11:17:46Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -63,6 +63,22 @@
         "I 동작이 offset 제거에 효과적이라는 설명",
         "anti-windup과 derivative filter 필요성을 언급하는 설명"
       ]
+    },
+    {
+      "topic_id": "rtd_pt100_wire_connection_compensation",
+      "enabled": true,
+      "focus": [
+        "PT100의 의미와 RTD 저항 변화 원리를 정확히 설명했는지 확인",
+        "RTD와 열전대의 측정 원리를 혼동하지 않았는지 확인",
+        "2선식, 3선식, 4선식의 리드선 저항 오차와 보상 원리를 구분했는지 확인",
+        "Wheatstone Bridge, 정전류, 차동증폭, Kelvin 측정 등 회로 관점을 설명했는지 확인",
+        "자기발열, 배선 길이, 노이즈, 비용, 유지보수 trade-off를 현장 적용과 연결했는지 확인",
+        "RTD와 thermistor를 동일한 센서로 혼동하지 않았는지 확인",
+        "NTC/PTC의 온도 상승 시 저항 변화 방향을 정확히 구분했는지 확인",
+        "온도센서의 0차계·1차 지연계 동특성과 시정수를 설명했는지 확인",
+        "RTD의 저항-온도 관계를 1차·2차·3차 다항식 근사 또는 표준 보정식 관점으로 설명했는지 확인"
+      ],
+      "fatal_error_policy": "PT100 의미, RTD 동작 원리, 2선식 리드선 오차, 3선식 보상 조건을 반대로 설명하면 C항목 핵심 오류로 제한한다."
     },
     {
       "topic_id": "second_order_lag_response_by_damping_ratio",

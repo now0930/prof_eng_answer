@@ -1,13 +1,23 @@
 {
-  "version": "2026-07-06T09:01:24Z-generated-topic-pack-manifest",
+  "version": "2026-07-06T11:17:46Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 4,
+  "topic_count": 5,
   "topics": [
     {
       "topic_id": "pid_controller_tuning_sequence_gain_effects",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "rtd_pt100_wire_connection_compensation",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T09:01:24Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-06T11:17:46Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -134,6 +134,278 @@
         }
       ],
       "minor_checks": []
+    },
+    {
+      "topic_id": "rtd_pt100_wire_connection_compensation",
+      "enabled": true,
+      "difficulty_profile": "THEORY_CORE",
+      "topic_name": "RTD(PT100)의 원리와 2선식·3선식·4선식 결선 및 리드선 저항 보상",
+      "topic_aliases": [
+        "RTD",
+        "PT100",
+        "Pt100",
+        "측온저항체",
+        "측온 저항계",
+        "저항온도계",
+        "2선식",
+        "3선식",
+        "4선식",
+        "Wheatstone Bridge",
+        "리드선 저항",
+        "Kelvin connection",
+        "thermistor",
+        "써미스터",
+        "NTC",
+        "PTC",
+        "Negative Temperature Coefficient",
+        "Positive Temperature Coefficient",
+        "온도센서 동특성",
+        "1차 지연",
+        "시정수",
+        "0차계",
+        "다항식 근사",
+        "Callendar-Van Dusen",
+        "Steinhart-Hart"
+      ],
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "fatal_checks": [
+        {
+          "id": "rtd_pt100_100_means_100c",
+          "description": "PT100의 100을 100°C로 오해하는 오류.",
+          "patterns": [
+            "PT100.*100.*100도",
+            "Pt100.*100.*100°C",
+            "PT100.*100.*섭씨.*100",
+            "100.*의미.*100도"
+          ],
+          "message": "PT100의 100을 100°C 의미로 설명함.",
+          "correct_rule": "PT100의 100은 0°C에서 기준 저항값이 100Ω이라는 뜻이며, PT는 백금 Platinum을 의미한다.",
+          "recommended_ceiling": 12.0,
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_uses_thermoelectric_voltage",
+          "description": "RTD가 열전대처럼 열기전력으로 동작한다고 설명하는 오류.",
+          "patterns": [
+            "RTD.*열기전력",
+            "RTD.*Seebeck",
+            "측온저항.*열전대.*전압.*발생",
+            "RTD.*서로.*다른.*금속.*전압"
+          ],
+          "message": "RTD의 동작 원리를 열전대의 열기전력 원리와 혼동함.",
+          "correct_rule": "RTD는 금속 저항의 온도 변화를 측정하고, 열전대는 서로 다른 금속 접점의 열기전력을 측정한다.",
+          "recommended_ceiling": 10.0,
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_two_wire_no_lead_error",
+          "description": "2선식 RTD에서 리드선 저항 오차가 없다고 설명하는 오류.",
+          "patterns": [
+            "2선식.*리드선.*오차.*없",
+            "2선식.*선로.*저항.*무시",
+            "2선식.*가장.*정확",
+            "2 wire.*no.*lead.*error"
+          ],
+          "message": "2선식 RTD에서 리드선 저항 오차가 없다고 설명함.",
+          "correct_rule": "2선식 RTD는 센서 저항에 두 리드선 저항이 직렬로 포함되어 측정되므로 배선 길이에 따른 오차가 발생한다.",
+          "recommended_ceiling": 12.0,
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_three_wire_always_eliminates_lead_error",
+          "description": "3선식이 리드선 저항 오차를 조건 없이 완전히 제거한다고 단정하는 오류.",
+          "patterns": [
+            "3선식.*완전히.*제거",
+            "3선식.*항상.*오차.*없",
+            "3 wire.*completely.*eliminates",
+            "3선식.*리드선.*영향.*없"
+          ],
+          "message": "3선식 RTD가 리드선 저항 오차를 항상 완전히 제거한다고 단정함.",
+          "correct_rule": "3선식은 리드선 저항이 서로 같다는 가정 하에 Wheatstone Bridge 또는 차동 측정으로 영향을 상쇄하는 방식이며, 불균형 리드선에서는 잔류 오차가 생긴다.",
+          "recommended_ceiling": 12.0,
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_thermistor_same_principle_confusion",
+          "description": "RTD와 thermistor를 동일한 재료와 동일한 선형 특성을 갖는 센서로 설명하는 오류.",
+          "patterns": [
+            "RTD.*thermistor.*같.*원리",
+            "RTD.*써미스터.*같.*원리",
+            "RTD.*반도체.*저항체",
+            "PT100.*NTC",
+            "PT100.*PTC"
+          ],
+          "message": "RTD와 thermistor의 재료와 특성을 혼동함.",
+          "correct_rule": "RTD는 백금 등 금속 저항체의 온도에 따른 저항 변화를 이용하고, thermistor는 반도체 저항체로 NTC/PTC 특성을 갖는다.",
+          "recommended_ceiling": 12.0,
+          "affected_layers": [
+            "C"
+          ]
+        }
+      ],
+      "major_checks": [
+        {
+          "id": "rtd_missing_wire_connection_comparison",
+          "description": "2선식·3선식·4선식 결선 차이를 설명하지 못하는 주요 누락.",
+          "patterns": [
+            "RTD.*정확.*반복.*안정.*$",
+            "PT100.*백금.*100Ω.*$",
+            "측온저항.*온도.*저항.*변화.*$"
+          ],
+          "message": "RTD 원리는 설명했지만 2선식·3선식·4선식 결선과 리드선 보상 차이가 부족함.",
+          "correct_rule": "2선식은 리드선 저항 오차가 포함되고, 3선식은 동일 리드선 저항 가정 하에 보상하며, 4선식은 전류선과 전압선을 분리해 리드선 오차를 제거한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_missing_four_wire_kelvin",
+          "description": "4선식 Kelvin 측정 원리를 누락하는 주요 누락.",
+          "patterns": [
+            "4선식.*3선식.*같",
+            "4선식.*선.*많",
+            "4선식.*비용.*비싸.*끝"
+          ],
+          "message": "4선식의 전류 공급선과 전압 검출선 분리 원리 설명이 부족함.",
+          "correct_rule": "4선식은 RTD에 전류를 공급하는 선과 센서 양단 전압을 검출하는 선을 분리하여 R=V/I로 저항을 계산한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_missing_self_heating",
+          "description": "자기발열과 측정 전류 제한을 누락하는 주요 누락.",
+          "patterns": [
+            "전류.*많.*정확",
+            "측정전류.*크.*좋",
+            "자기발열.*무관",
+            "self.*heating.*irrelevant"
+          ],
+          "message": "RTD 측정 전류에 의한 자기발열 오차와 전류 제한 설명이 부족함.",
+          "correct_rule": "RTD는 측정 전류가 흐르므로 과도한 전류는 자기발열 오차를 만들 수 있어 적절한 여자 전류와 회로 설계가 필요하다.",
+          "affected_layers": [
+            "D"
+          ]
+        },
+        {
+          "id": "rtd_missing_field_tradeoff",
+          "description": "현장 선정 기준과 trade-off를 누락하는 주요 누락.",
+          "patterns": [
+            "항상.*4선식.*사용",
+            "무조건.*4선식",
+            "3선식.*쓸.*필요.*없",
+            "2선식.*항상.*충분"
+          ],
+          "message": "정확도, 비용, 배선 길이, 유지보수성을 고려한 결선 방식 선정 기준이 부족함.",
+          "correct_rule": "2선식은 단거리·저정밀, 3선식은 일반 산업 현장, 4선식은 고정밀·교정용처럼 정확도와 비용의 trade-off로 선정한다.",
+          "affected_layers": [
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "rtd_ntc_ptc_direction_reversed",
+          "description": "NTC와 PTC의 온도-저항 변화 방향을 반대로 설명하는 오류.",
+          "patterns": [
+            "NTC.*온도.*상승.*저항.*증가",
+            "NTC.*temperature.*increase.*resistance.*increase",
+            "PTC.*온도.*상승.*저항.*감소",
+            "PTC.*temperature.*increase.*resistance.*decrease"
+          ],
+          "message": "NTC/PTC의 온도 상승 시 저항 변화 방향을 반대로 설명함.",
+          "correct_rule": "NTC는 온도 상승 시 저항이 감소하고, PTC는 온도 상승 시 저항이 증가한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_missing_thermistor_distinction",
+          "description": "RTD, NTC, PTC가 함께 언급된 문제에서 thermistor와 RTD의 차이를 설명하지 못하는 누락.",
+          "patterns": [
+            "NTC.*PTC.*RTD",
+            "thermistor.*RTD",
+            "써미스터.*측온저항",
+            "저항식.*온도센서.*비교"
+          ],
+          "message": "RTD와 thermistor, NTC/PTC의 재료·선형성·온도계수 차이 설명이 부족함.",
+          "correct_rule": "RTD는 금속 저항체로 비교적 선형성과 안정성이 좋고, thermistor는 반도체 저항체로 민감도는 높지만 비선형성이 크며 NTC/PTC로 구분된다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_sensor_response_always_zero_order",
+          "description": "실제 온도센서에 시간 지연이 없고 항상 0차계라고 단정하는 오류.",
+          "patterns": [
+            "온도센서.*항상.*0차",
+            "온도센서.*시간.*지연.*없",
+            "RTD.*즉시.*따라",
+            "RTD.*시정수.*없"
+          ],
+          "message": "실제 온도센서의 열적 시정수와 1차 지연 응답을 누락함.",
+          "correct_rule": "이상적 센서는 0차계로 볼 수 있지만 실제 RTD와 온도센서는 열용량과 열저항 때문에 주로 1차 지연 응답을 가지며 보호관과 설치 구조에 따라 고차 지연으로 근사될 수 있다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_resistance_temperature_perfectly_linear",
+          "description": "RTD의 저항-온도 관계를 모든 범위에서 완전 선형이라고 단정하는 오류.",
+          "patterns": [
+            "RTD.*완전.*선형",
+            "PT100.*완전.*선형",
+            "보정식.*필요.*없",
+            "저항.*온도.*항상.*직선"
+          ],
+          "message": "RTD 저항-온도 관계의 다항식 근사와 보정 필요성을 누락함.",
+          "correct_rule": "RTD는 비교적 선형성이 좋지만 정밀 계측에서는 온도 범위에 따라 1차, 2차, 3차 다항식 근사 또는 표준 보정식을 사용한다.",
+          "affected_layers": [
+            "C"
+          ]
+        }
+      ],
+      "question_type_checks": [
+        {
+          "id": "rtd_principle_interpretation_structure",
+          "description": "PRINCIPLE_INTERPRETATION 답안으로 원리, 수식, 회로, 적용 조건을 연결하는지 확인한다.",
+          "patterns": [],
+          "message": "원리·해석형 답안은 RTD 원리, 결선별 오차 메커니즘, 보상 회로, 현장 적용 조건을 순서대로 설명해야 합니다.",
+          "correct_rule": "PT100 정의 → 저항-온도 특성 → 2선식 오차 → 3선식 보상 → 4선식 Kelvin 측정 → 현장 선정 기준 순서로 전개해야 한다."
+        }
+      ],
+      "next_practice_points": [
+        "PT100은 0°C에서 100Ω인 백금 RTD라는 점을 먼저 정리하세요.",
+        "2선식은 리드선 저항이 직렬로 포함되어 오차가 발생한다고 설명하세요.",
+        "3선식은 리드선 저항이 동일하다는 가정 하에 Wheatstone Bridge 또는 차동 측정으로 보상한다고 쓰세요.",
+        "4선식은 전류 공급선과 전압 검출선을 분리해 R=V/I로 정밀 측정한다고 정리하세요.",
+        "자기발열, 노이즈, 접촉저항, 배선 길이, 설치비를 현장 선정 기준으로 연결하세요.",
+        "NTC는 온도 상승 시 저항 감소, PTC는 온도 상승 시 저항 증가로 구분하세요.",
+        "RTD는 금속 저항체, thermistor는 반도체 저항체로 재료와 선형성, 민감도, 사용 범위가 다르다고 정리하세요.",
+        "온도센서는 이상적으로 0차계, 실제로는 열용량과 열저항에 의한 1차 지연계로 근사된다고 정리하세요.",
+        "RTD의 저항-온도 관계는 좁은 범위에서는 1차식, 정밀 계측에서는 2차·3차 보정식으로 근사된다고 설명하세요."
+      ],
+      "de_claim_trust": {
+        "score_effect": "none",
+        "target_layers": [
+          "D",
+          "E"
+        ],
+        "trust_condition": "D/E 현장 적용 주장은 C항목에서 RTD 원리와 결선별 리드선 저항 보상 원리가 설명된 경우에만 신뢰한다.",
+        "limited_when": [
+          "PT100 의미를 잘못 설명함.",
+          "2선식·3선식·4선식 차이를 구분하지 못함.",
+          "3선식 보상 조건을 무시하고 완전 제거로 단정함.",
+          "자기발열과 측정 전류 제한을 누락함."
+        ]
+      }
     },
     {
       "topic_id": "second_order_lag_response_by_damping_ratio",
