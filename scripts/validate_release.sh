@@ -27,6 +27,10 @@ echo "===== formatter regression tests ====="
 python3 -m unittest scripts.test_grade_output_formatter
 
 echo
+echo "===== logic_check evaluator regression tests ====="
+python3 -m unittest scripts.test_logic_check_evaluator
+
+echo
 echo "===== rubric validation: validate-all ====="
 python3 scripts/rubric_manager.py validate-all
 
