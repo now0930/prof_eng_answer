@@ -30,6 +30,8 @@ scripts/experiments/fix_*.py
 # Reports: keep curated baseline reports tracked, ignore ad-hoc generated outputs
 reports/backups/
 reports/rubric_bank/
+reports/model_answer_relationship_validation.md
+reports/model_answer_relationship_validation.csv
 reports/*_prompt.md
 reports/*_prompts.md
 reports/*_context.csv
