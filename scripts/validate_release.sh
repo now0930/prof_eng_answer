@@ -4,6 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 PROMOTE_GENERATED="${PROMOTE_GENERATED:-1}"
+RUN_SMOKE_TOPIC_PACKS="${RUN_SMOKE_TOPIC_PACKS:-0}"
 
 TOPIC_IDS=(
   "pid_controller_tuning_sequence_gain_effects"
@@ -50,7 +51,9 @@ echo
 echo "===== optional smoke topic packs ====="
 mkdir -p data/sessions
 
-if find data/sessions -mindepth 1 -maxdepth 1 -type d | grep -q .; then
+if [[ "${RUN_SMOKE_TOPIC_PACKS}" != "1" ]]; then
+  echo "SKIP: smoke-topic-pack is opt-in. Set RUN_SMOKE_TOPIC_PACKS=1 to run it locally."
+elif find data/sessions -mindepth 1 -maxdepth 1 -type d | grep -q .; then
   for topic_id in "${TOPIC_IDS[@]}"; do
     echo
     echo "----- smoke-topic-pack: ${topic_id} -----"

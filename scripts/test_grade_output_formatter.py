@@ -66,5 +66,37 @@ class GradeOutputFormatterRegressionTest(unittest.TestCase):
         self.assertIn("총평: 치명 오류로 고득점이 제한됩니다.", text)
 
 
+
+class CompactFormatterCorrectRuleRegressionTest(unittest.TestCase):
+    def test_fatal_correct_rule_is_used_for_compact_improvements(self):
+        from grade_output_summarizer import _build_payload, _normalise_summary, _render
+
+        grade = {
+            "total_score": 1.56,
+            "max_score": 25,
+            "confidence": "high",
+            "official_pass_score": 15,
+            "practical_target_score": 17.5,
+            "high_score_target": 20,
+            "logic_check_evaluation": {
+                "fatal_error_detected": True,
+                "mode": "fatal",
+                "findings": [
+                    {
+                        "severity": "fatal",
+                        "message": "D 동작이 정상상태 오차를 제거한다고 주장함.",
+                        "correct_rule": "정상상태 오차 제거는 주로 I 동작의 역할이다. D 동작은 변화율 기반의 예측·감쇠 동작이다.",
+                    }
+                ],
+            },
+        }
+
+        payload = _build_payload(grade)
+        summary = _normalise_summary(None, payload)
+        rendered = _render(summary, payload)
+
+        assert "정상상태 오차 제거는 주로 I 동작의 역할이다" in rendered
+        assert "핵심 개념과 조건을 정답 기준과 일치시키세요" not in rendered
 if __name__ == "__main__":
     unittest.main()
+

@@ -196,6 +196,7 @@ def _extract_logic(grade: dict[str, Any]) -> dict[str, Any]:
             "severity": str(item.get("severity") or ""),
             "message": _txt(item.get("message") or item.get("evidence") or "", 320),
             "evidence": _txt(item.get("evidence") or "", 180),
+            "correct_rule": _txt(item.get("correct_rule") or "", 420),
         })
 
     fatal = bool(logic.get("fatal_error_detected"))
