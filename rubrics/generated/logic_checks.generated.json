@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T12:23:46Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-06T12:36:22Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -182,7 +182,13 @@
         "Rt+2Rw",
         "Kelvin",
         "sense lead",
-        "current lead"
+        "current lead",
+        "thermal runaway",
+        "열폭주",
+        "self-heating",
+        "자기발열",
+        "NTC thermal runaway",
+        "PT100 열폭주"
       ],
       "question_type": "PRINCIPLE_INTERPRETATION",
       "fatal_checks": [
@@ -283,6 +289,27 @@
           "message": "RTD/PT100에 냉접점 보상이 필요하다고 설명하여 열전대와 RTD의 보상 개념을 혼동함.",
           "correct_rule": "냉접점 보상은 열전대의 기준접점 온도 보상 개념이다. RTD/PT100은 저항 측정 방식이므로 리드선 저항 보상, 여자전류 관리, 자기발열 억제, 선형화 보정이 핵심이다.",
           "recommended_ceiling": 16.0,
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_ntc_thermal_runaway_misapplied_to_pt100",
+          "description": "NTC thermistor의 thermal runaway 개념을 PT100/RTD 핵심 현상으로 적용하는 오류.",
+          "patterns": [
+            "PT[- ]?100.*열폭주",
+            "Pt[- ]?100.*열폭주",
+            "RTD.*열폭주",
+            "측온저항.*열폭주",
+            "저항온도.*열폭주",
+            "PT[- ]?100.*thermal runaway",
+            "RTD.*thermal runaway",
+            "PT[- ]?100.*NTC.*폭주",
+            "RTD.*NTC.*폭주"
+          ],
+          "message": "NTC thermistor의 thermal runaway 개념을 PT100/RTD에 적용하여 설명함.",
+          "correct_rule": "PT100/RTD의 핵심 오차는 측정 전류에 의한 self-heating이다. NTC thermal runaway는 thermistor에서 조건에 따라 나타날 수 있는 현상이며, PT100 원리나 결선 보상 개념으로 설명하면 안 된다.",
+          "recommended_ceiling": 15.5,
           "affected_layers": [
             "C"
           ]
@@ -500,6 +527,23 @@
           "affected_layers": [
             "C"
           ]
+        },
+        {
+          "id": "rtd_ntc_ptc_as_rtd_subtype_confusion",
+          "description": "NTC/PTC를 RTD의 하위 개념이나 PT100 결선 보상 개념으로 설명하는 오류.",
+          "patterns": [
+            "RTD.*NTC.*종류",
+            "RTD.*PTC.*종류",
+            "PT[- ]?100.*PTC.*thermistor",
+            "PT[- ]?100.*NTC",
+            "측온저항.*NTC.*PTC",
+            "NTC.*PTC.*RTD.*하위"
+          ],
+          "message": "NTC/PTC를 RTD/PT100의 하위 개념처럼 설명함.",
+          "correct_rule": "NTC/PTC는 thermistor의 온도계수 분류이다. RTD/PT100은 백금 등 금속 저항체이고, thermistor는 반도체 저항체이므로 혼동하면 안 된다.",
+          "affected_layers": [
+            "C"
+          ]
         }
       ],
       "question_type_checks": [
@@ -528,7 +572,10 @@
         "회로도는 정답 그림과 똑같이 그리는 것보다 Rt, Rw/RL, It, Vt, V1/V2 라벨과 전기적 의미를 정확히 표시하는 것이 중요합니다.",
         "2선식 회로도에는 Rt+2Rw 오차 구조를 반드시 표시하세요.",
         "3선식 회로도에는 세 번째 리드선, 브리지 또는 차동 측정 구조, RL1 ~= RL2 조건의 보상 의미를 표시하세요.",
-        "4선식 회로도에는 전류 공급선과 전압 검출선 분리를 표시하세요."
+        "4선식 회로도에는 전류 공급선과 전압 검출선 분리를 표시하세요.",
+        "PT100에는 NTC thermal runaway가 아니라 측정 전류에 의한 self-heating 오차를 적용하세요.",
+        "NTC/PTC는 RTD 하위 개념이 아니라 thermistor 분류로만 언급하세요.",
+        "PT100을 PTC thermistor로 설명하지 마세요."
       ],
       "de_claim_trust": {
         "score_effect": "none",

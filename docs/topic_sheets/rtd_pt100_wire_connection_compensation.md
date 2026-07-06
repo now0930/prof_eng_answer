@@ -231,3 +231,18 @@ Rt = Vt / It
 - 3선식: 세 번째 리드선과 조건부 보상
 - 4선식: 전류선과 전압선 분리
 - 라벨: Rt, Rw/RL, It, Vt, V1/V2
+
+
+## NTC thermal runaway와 PT100 자기발열 구분
+
+NTC/PTC는 RTD의 하위 개념이 아니라 thermistor의 분류이다. PT100은 백금 등 금속 저항체의 저항 변화를 이용하고, thermistor는 반도체 저항체를 이용한다.
+
+PT100에도 자기발열은 있다. 그러나 이는 측정 전류에 의해 I^2R 열이 발생하여 센서 표시값에 오차를 만드는 self-heating 문제이다.
+
+반면 NTC thermal runaway는 thermistor에서 온도 상승, 저항 감소, 전류 증가, 발열 증가가 이어질 때 발생할 수 있는 현상이다. 이 개념을 PT100 원리나 RTD 결선 보상으로 설명하면 오류이다.
+
+채점 기준:
+- PT100 self-heating 설명: 인정
+- NTC/PTC를 thermistor 비교 항목으로 언급: 인정
+- NTC thermal runaway를 PT100 핵심 오차로 설명: 감점
+- NTC/PTC를 RTD의 하위 종류로 설명: 감점

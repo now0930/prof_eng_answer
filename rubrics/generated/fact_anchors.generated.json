@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T12:23:46Z-generated-topic-pack-fact-anchors",
+  "version": "2026-07-06T12:36:22Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json",
@@ -599,6 +599,10 @@
         {
           "claim": "RTD가 열전대보다 항상 더 넓은 온도 범위를 가진다고 설명한다.",
           "correction": "RTD의 대표 장점은 정확도, 반복성, 안정성, 장기 안정성이다. 넓은 온도 범위, 저비용, 견고성, 빠른 응답은 일반적으로 열전대의 장점으로 설명하는 것이 안전하다."
+        },
+        {
+          "claim": "PT100 또는 RTD에 NTC thermal runaway 개념을 적용하여 설명한다.",
+          "correction": "PT100/RTD의 핵심 오차는 측정 전류에 의한 자기발열 self-heating이다. NTC thermal runaway는 서미스터에서 조건에 따라 나타날 수 있는 현상이며 PT100 원리나 결선 보상 개념으로 설명하면 안 된다."
         }
       ],
       "safe_expressions": [
@@ -618,7 +622,10 @@
         "회로도는 정답 그림과의 외형 일치가 아니라 전기적 기능 요소로 평가한다.",
         "2선식 회로도는 Rt와 두 리드선 저항이 직렬로 포함되어 Rt+2Rw 오차가 발생하는 구조를 표현해야 한다.",
         "3선식 회로도는 세 번째 리드선과 브리지 또는 차동 측정 구조로 리드선 저항이 조건부 상쇄되는 원리를 표현해야 한다.",
-        "4선식 회로도는 전류 공급선과 전압 검출선이 분리되는 Kelvin 결선 의미를 표현해야 한다."
+        "4선식 회로도는 전류 공급선과 전압 검출선이 분리되는 Kelvin 결선 의미를 표현해야 한다.",
+        "NTC/PTC는 RTD의 하위 개념이 아니라 thermistor의 온도계수 분류이다.",
+        "PT100은 금속 RTD이고, NTC/PTC thermistor는 반도체 저항체이므로 원리와 적용 목적을 구분해야 한다.",
+        "PT100에는 NTC thermal runaway가 아니라 측정 전류에 의한 자기발열 오차를 적용해야 한다."
       ],
       "revision_notes": [
         "created_from_uploaded_notes=RTD_PT100_2wire_3wire_4wire_bridge",
