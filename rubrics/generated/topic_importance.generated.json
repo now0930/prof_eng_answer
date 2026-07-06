@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T02:24:25Z-generated-topic-pack-importance",
+  "version": "2026-07-06T09:01:24Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -55,6 +55,25 @@
         "fatal logic error가 없다."
       ],
       "note": "2차 시스템의 공진주파수와 주파수응답은 제어이론 핵심 변별 주제이며, 단순 공식 암기를 넘어 시간응답-주파수응답의 개념적 차이와 현장 설계(진동, 노이즈, 대역폭) 간의 연결 능력이 고득점의 핵심이다."
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "temperature_measurement_error_heat_transfer",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "DIAGNOSIS_ACTION",
+      "high_band_unlock_conditions": [
+        "전도·대류·복사를 온도 측정오차의 실제 원인으로 구분하고 측정값 형성 원리와 연결한다.",
+        "열저항 모델, 담금 깊이, 줄기 전도, 보호관, 유속을 하나의 진단 흐름으로 설명한다.",
+        "센서 교정만이 아니라 설치 위치, 보호관 선정, 복사 차폐, 단열, 보정, 검증을 종합 대책으로 제시한다.",
+        "정확도, 응답속도, 기계적 보호, 유지보수, 기존 설비 개조 비용의 trade-off를 설명한다.",
+        "특정 삽입 깊이 또는 thermowell 적용을 모든 현장에 일반화하지 않는다."
+      ],
+      "note": "온도 측정오차와 열전달은 열전달 원리와 현장 설치 조건을 함께 평가하는 THEORY_CORE 주제이다. 단순 교정·센서 종류 나열로는 고득점이 어렵고, 열전달 경로, 담금 깊이, 보호관, 유속, 복사 차폐, 보정·검증을 연결해야 한다.",
+      "revision_notes": [
+        "created_for_topic_pack=temperature_measurement_error_heat_transfer",
+        "difficulty=THEORY_CORE; field diagnosis and installation trade-off are central"
+      ]
     }
   ]
 }

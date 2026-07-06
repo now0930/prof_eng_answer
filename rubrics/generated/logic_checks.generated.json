@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T02:24:25Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-06T09:01:24Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -688,6 +688,131 @@
         "trust_effect": "logic_pass_supports_d_e_claim_reliability",
         "fatal_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 충돌하므로 현장 적용 주장을 강하게 신뢰하지 않는다.",
         "pass_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 직접 충돌하지 않으므로 현장 적용 주장을 이론적으로 신뢰할 수 있다."
+      }
+    },
+    {
+      "topic_id": "temperature_measurement_error_heat_transfer",
+      "enabled": true,
+      "difficulty_profile": "THEORY_CORE",
+      "topic_name": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
+      "topic_aliases": [
+        "온도 측정 오차",
+        "열전달 오차",
+        "열저항 모델",
+        "담금 깊이 오차",
+        "줄기 전도 오차",
+        "temperature measurement error",
+        "immersion error",
+        "stem conduction error",
+        "thermowell"
+      ],
+      "question_type": "DIAGNOSIS_ACTION",
+      "fatal_checks": [
+        {
+          "id": "temperature_error_sensor_accuracy_only",
+          "description": "온도 측정오차를 센서 정확도 또는 교정 문제만으로 설명하고 열전달 경로를 배제하는 오류.",
+          "patterns": [
+            "센서.*정확도.*만.*오차",
+            "교정.*만.*하면.*해결",
+            "열전달.*(무관|관계없)",
+            "전도.*대류.*복사.*(무관|관계없)"
+          ],
+          "message": "온도 측정오차를 센서 정확도나 교정 문제만으로 설명하고 열전달 경로를 배제함.",
+          "correct_rule": "온도 측정오차는 센서 자체 오차뿐 아니라 전도·대류·복사, 담금 깊이, 보호관, 유속, 주변 열환경의 영향을 함께 받는다.",
+          "recommended_ceiling": 12.0,
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "temperature_error_thermowell_always_improves_accuracy",
+          "description": "보호관 또는 thermowell을 사용하면 항상 정확도가 향상된다고 단정하는 오류.",
+          "patterns": [
+            "보호관.*항상.*정확",
+            "thermowell.*always.*accur",
+            "보호관.*사용.*오차.*없",
+            "써모웰.*항상.*정확"
+          ],
+          "message": "보호관 또는 thermowell을 사용하면 항상 온도 측정 정확도가 향상된다고 단정함.",
+          "correct_rule": "보호관은 기계적 보호에는 유리하지만 열저항과 열용량을 증가시켜 응답 지연과 측정오차를 키울 수 있으므로 공정 조건에 맞게 선정해야 한다.",
+          "recommended_ceiling": 12.0,
+          "affected_layers": [
+            "C"
+          ]
+        }
+      ],
+      "major_checks": [
+        {
+          "id": "temperature_error_missing_heat_transfer_paths",
+          "description": "전도·대류·복사 열전달 경로를 구분하지 못하는 주요 누락.",
+          "patterns": [
+            "온도센서.*종류.*(열전대|RTD|써미스터).*만",
+            "교정.*성적서.*만",
+            "센서.*교체.*만"
+          ],
+          "message": "전도·대류·복사 열전달 경로와 측정오차의 연결 설명이 부족함.",
+          "correct_rule": "전도, 대류, 복사가 센서와 주변 사이의 열교환을 만들고 측정온도를 실제 대상 온도와 다르게 만들 수 있음을 설명해야 한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "temperature_error_missing_immersion_and_stem_conduction",
+          "description": "담금 깊이와 줄기 전도 오차를 누락하는 주요 누락.",
+          "patterns": [
+            "담금.*깊이.*(상관없|무관)",
+            "줄기.*전도.*(상관없|무관)",
+            "삽입.*깊이.*(항상|무조건).*80"
+          ],
+          "message": "담금 깊이, 감지부 위치, 줄기 전도 오차의 조건부 설명이 부족함.",
+          "correct_rule": "담금 깊이 부족과 줄기 전도는 감지부가 주변 온도의 영향을 받게 하므로 센서 지름, 감지부 길이, 보호관, 유속, 목표 정확도에 따라 판단해야 한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "temperature_error_missing_field_countermeasures",
+          "description": "현장 저감 대책이 센서 교체나 교정으로만 제한되는 주요 누락.",
+          "patterns": [
+            "대책.*센서.*교체.*만",
+            "교정.*하면.*충분",
+            "보정.*필요없",
+            "차폐.*필요없"
+          ],
+          "message": "설치 위치, 보호관, 유속, 복사 차폐, 단열, 보정·검증을 포함한 종합 대책이 부족함.",
+          "correct_rule": "오차 저감은 충분한 담금 깊이, 대표 온도 영역 설치, 보호관 선정, 유속 확보, 복사 차폐, 단열, 보정 계산, 교정을 함께 적용해야 한다.",
+          "affected_layers": [
+            "D"
+          ]
+        }
+      ],
+      "question_type_checks": [
+        {
+          "id": "temperature_error_diagnosis_action_structure",
+          "description": "DIAGNOSIS_ACTION 답안으로 원인 진단과 대책을 모두 포함하는지 확인한다.",
+          "patterns": [],
+          "message": "진단·대책형 답안은 원인, 영향, 확인 방법, 개선 대책, 현장 trade-off 순서로 전개해야 합니다.",
+          "correct_rule": "온도 측정오차의 원인 진단 후 설치·보호관·유속·차폐·단열·보정·검증 대책을 연결해야 한다."
+        }
+      ],
+      "next_practice_points": [
+        "전도·대류·복사를 온도 측정오차의 원인으로 구분하고 측정값 형성 원리와 연결하세요.",
+        "담금 깊이 부족과 줄기 전도 오차를 감지부 위치, 보호관, 유속, 주변온도 영향과 함께 설명하세요.",
+        "센서 교정만이 아니라 설치 위치, 보호관 선정, 복사 차폐, 단열, 보정, 검증을 종합 대책으로 쓰세요.",
+        "보호관과 thermowell은 정확도, 응답속도, 강도, 정비성의 trade-off로 선정한다고 정리하세요."
+      ],
+      "de_claim_trust": {
+        "score_effect": "none",
+        "target_layers": [
+          "D",
+          "E"
+        ],
+        "trust_condition": "D/E 현장 적용 주장은 C항목에서 열전달 오차 원인과 진단 축이 설명된 경우에만 신뢰한다.",
+        "limited_when": [
+          "전도·대류·복사 원인 설명 없이 현장 대책만 나열함.",
+          "담금 깊이, 보호관, 유속, 주변 열환경을 누락함.",
+          "센서 교체나 교정만으로 해결한다고 단정함."
+        ]
       }
     }
   ]

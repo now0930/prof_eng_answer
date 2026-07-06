@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T02:24:25Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-06T09:01:24Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -329,6 +329,18 @@
         "major_error_cap": 17.5,
         "mode": "warn"
       }
+    },
+    {
+      "topic_id": "temperature_measurement_error_heat_transfer",
+      "enabled": true,
+      "focus": [
+        "전도·대류·복사 열전달 경로를 온도 측정오차와 연결했는지 확인",
+        "담금 깊이 부족과 줄기 전도 오차를 설명했는지 확인",
+        "보호관, 유속, 설치 위치, 복사 차폐, 단열, 보정·검증 대책을 포함했는지 확인",
+        "센서 교정 또는 thermowell을 만능 대책으로 단정하는 오류가 있는지 확인",
+        "DIAGNOSIS_ACTION 유형에 맞게 원인 진단과 개선 대책이 연결되는지 확인"
+      ],
+      "fatal_error_policy": "센서 정확도·교정만으로 열전달 오차를 배제하거나 보호관을 항상 정확도 개선 수단으로 단정하면 C항목 핵심 오류로 제한한다."
     }
   ]
 }

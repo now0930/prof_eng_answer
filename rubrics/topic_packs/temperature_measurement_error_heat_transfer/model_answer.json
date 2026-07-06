@@ -1,0 +1,98 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "temperature_measurement_error_heat_transfer",
+  "title_ko": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
+  "question_type": "DIAGNOSIS_ACTION",
+  "expected_question_patterns": [
+    "온도 측정 시 열전달에 의한 측정오차의 발생 원인과 저감 대책에 대하여 설명하시오.",
+    "온도 측정에서 전도, 대류, 복사 및 담금 깊이가 측정오차에 미치는 영향을 설명하시오.",
+    "온도센서 설치 시 보호관, 담금 깊이, 주변 열환경이 측정오차에 미치는 영향과 개선 방안을 설명하시오."
+  ],
+  "recommended_outline": [
+    {
+      "section": "문제 배경과 진단 관점",
+      "intent": "온도 측정값은 센서 자체 정확도뿐 아니라 열전달 경로와 설치 조건의 영향을 받으므로 현장 진단이 필요함을 제시한다.",
+      "anchor_refs": [
+        "temperature_heat_transfer_error_paths"
+      ]
+    },
+    {
+      "section": "열전달 오차 원인",
+      "intent": "전도, 대류, 복사 열교환이 센서 측정온도를 실제 대상 온도와 다르게 만드는 원리를 설명한다.",
+      "anchor_refs": [
+        "temperature_heat_transfer_error_paths",
+        "temperature_heat_resistance_model"
+      ]
+    },
+    {
+      "section": "담금 깊이와 줄기 전도",
+      "intent": "담금 깊이 부족, 줄기 전도, 감지부 위치, 보호관 구조가 immersion error를 유발하는 과정을 설명한다.",
+      "anchor_refs": [
+        "temperature_stem_conduction_immersion_error"
+      ]
+    },
+    {
+      "section": "보호관·유속·설치 조건 진단",
+      "intent": "보호관 재질·형상, 유속, 열용량, 응답 지연, 대표 온도 영역 설치 여부를 진단 항목으로 정리한다.",
+      "anchor_refs": [
+        "temperature_installation_selection_conditions"
+      ]
+    },
+    {
+      "section": "저감 대책과 검증",
+      "intent": "충분한 담금 깊이, 설치 위치 개선, 유속 확보, 복사 차폐, 단열, 보정, 교정을 종합 대책으로 제시한다.",
+      "anchor_refs": [
+        "temperature_error_reduction_measures"
+      ]
+    },
+    {
+      "section": "현장 적용 결론",
+      "intent": "정확도, 응답속도, 보호관 강도, 정비성, 기존 설비 개조 비용의 trade-off를 고려해 개선 우선순위를 제시한다.",
+      "anchor_refs": [
+        "temperature_installation_selection_conditions",
+        "temperature_error_reduction_measures"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "전도, 대류, 복사를 온도 측정오차의 원인으로 구분하고 측정값 형성 원리와 연결한다.",
+    "열저항 모델을 이용해 측정온도가 대상 온도와 주변 온도 사이에서 결정된다는 점을 설명한다.",
+    "담금 깊이 부족과 줄기 전도 오차를 감지부 위치, 보호관, 주변온도 영향과 연결한다.",
+    "감지부 길이, 센서 지름, 보호관 재질·형상, 유속, 목표 정확도를 담금 깊이 선정 요소로 제시한다.",
+    "센서 교정만이 아니라 설치 위치, 보호관, 복사 차폐, 단열, 보정, 검증을 종합 대책으로 제시한다.",
+    "보호관 사용, 삽입 깊이, 예제 수치를 일반 기준으로 단정하지 않고 현장 조건별 trade-off로 설명한다."
+  ],
+  "common_missing_points": [
+    "온도센서 종류나 교정만 나열하고 열전달 오차 원인을 설명하지 못함.",
+    "전도, 대류, 복사를 정의만 하고 측정오차와 연결하지 못함.",
+    "담금 깊이 부족을 단순 설치 불량으로만 쓰고 줄기 전도 오차를 설명하지 못함.",
+    "보호관을 항상 정확도 개선 수단으로만 설명하고 응답 지연과 열저항 증가를 누락함.",
+    "센서 교체만 대책으로 제시하고 설치 위치, 차폐, 단열, 보정, 검증을 누락함.",
+    "80 mm 같은 예제 수치를 모든 온도계의 일반 기준처럼 단정함."
+  ],
+  "routing_aliases": [
+    "온도 측정오차와 열전달",
+    "온도 측정 오차",
+    "열전달 오차",
+    "열저항 모델",
+    "담금 깊이 오차",
+    "줄기 전도 오차",
+    "temperature measurement error",
+    "immersion error",
+    "stem conduction error",
+    "thermowell response error",
+    "온도 측정 시 열전달에 의한 측정오차의 발생 원인과 저감 대책"
+  ],
+  "routing_field_points": [
+    "전도 대류 복사 온도 측정오차",
+    "열저항 모델 측정온도 대상온도 주변온도",
+    "담금 깊이 줄기 전도 오차 감지부 보호관",
+    "보호관 유속 설치 위치 응답 지연",
+    "복사 차폐 단열 보정 교정"
+  ],
+  "revision_notes": [
+    "created_from_runtime_model_answer=temperature_measurement_error_heat_transfer_DIAGNOSIS_ACTION_v1",
+    "converted_to_topic_pack=2026-07-06",
+    "question_type=DIAGNOSIS_ACTION"
+  ]
+}

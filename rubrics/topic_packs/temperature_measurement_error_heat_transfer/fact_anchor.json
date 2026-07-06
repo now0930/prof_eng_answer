@@ -1,0 +1,177 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "temperature_measurement_error_heat_transfer",
+  "title_ko": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
+  "question_type_hint": "DIAGNOSIS_ACTION",
+  "anchors": [
+    {
+      "anchor_id": "temperature_heat_transfer_error_paths",
+      "name": "전도·대류·복사에 의한 온도 측정오차",
+      "statement": "온도 측정값은 실제 대상 온도만이 아니라 센서, 보호관, 주변 환경 사이의 전도·대류·복사 열교환 결과로 결정되므로 설치 조건에 따라 실제 온도와 차이가 발생할 수 있다.",
+      "expected": "전도, 대류, 복사를 온도 측정오차의 원인으로 구분하고, 센서가 대상과 주변 사이의 열교환 영향을 받는다는 점을 설명해야 한다.",
+      "keywords": [
+        "전도",
+        "대류",
+        "복사",
+        "열교환",
+        "측정오차",
+        "주변온도",
+        "보호관"
+      ],
+      "core_terms": [
+        "전도",
+        "대류",
+        "복사",
+        "열교환",
+        "측정오차"
+      ],
+      "support_terms": [
+        "센서 표면",
+        "주변온도",
+        "보호관",
+        "유속",
+        "복사열"
+      ],
+      "required": true,
+      "weight": 1.2
+    },
+    {
+      "anchor_id": "temperature_heat_resistance_model",
+      "name": "열저항 모델에 의한 오차 해석",
+      "statement": "전도 열저항, 대류 열저항, 복사 열저항을 이용하면 측정온도가 대상 온도와 주변 온도 사이에서 열저항 분배에 의해 결정되는 것으로 해석할 수 있다.",
+      "expected": "열저항 모델을 사용해 실제 대상 온도, 주변 온도, 측정온도 사이의 관계를 설명하고 오차 발생 방향을 해석해야 한다.",
+      "keywords": [
+        "열저항 모델",
+        "전도 열저항",
+        "대류 열저항",
+        "복사 열저항",
+        "측정온도"
+      ],
+      "core_terms": [
+        "열저항",
+        "대상 온도",
+        "주변 온도",
+        "측정온도"
+      ],
+      "support_terms": [
+        "열전달계수",
+        "열전도율",
+        "면적",
+        "열저항 분배"
+      ],
+      "required": true,
+      "weight": 1.1
+    },
+    {
+      "anchor_id": "temperature_stem_conduction_immersion_error",
+      "name": "줄기 전도 오차와 담금 깊이",
+      "statement": "온도센서 줄기나 보호관을 통한 열전달 때문에 담금 깊이가 부족하면 감지부가 주변 온도의 영향을 받아 줄기 전도 오차와 immersion error가 발생한다.",
+      "expected": "담금 깊이 부족, 감지부 위치, 센서 지름, 보호관 구조가 줄기 전도 오차에 미치는 영향을 연결해야 한다.",
+      "keywords": [
+        "줄기 전도 오차",
+        "담금 깊이",
+        "감지부",
+        "보호관",
+        "immersion error"
+      ],
+      "core_terms": [
+        "줄기 전도",
+        "담금 깊이",
+        "감지부",
+        "보호관"
+      ],
+      "support_terms": [
+        "stem conduction",
+        "센서 지름",
+        "감지부 길이",
+        "특성 길이"
+      ],
+      "required": true,
+      "weight": 1.2
+    },
+    {
+      "anchor_id": "temperature_installation_selection_conditions",
+      "name": "보호관·유속·설치 조건",
+      "statement": "담금 깊이와 보호관 선정은 감지부 길이, 센서 지름, 보호관 재질·형상, 유속, 목표 정확도, 대상 온도와 주변 온도 차이를 함께 고려해야 한다.",
+      "expected": "특정 수치를 일반 기준처럼 단정하지 않고, 공정 조건과 설치 조건에 따라 담금 깊이와 보호관을 선정해야 함을 설명해야 한다.",
+      "keywords": [
+        "감지부 길이",
+        "센서 지름",
+        "보호관",
+        "유속",
+        "목표 정확도",
+        "온도차"
+      ],
+      "core_terms": [
+        "보호관",
+        "유속",
+        "설치 조건",
+        "목표 정확도"
+      ],
+      "support_terms": [
+        "재질",
+        "형상",
+        "응답 지연",
+        "기계적 강도",
+        "정비성"
+      ],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "temperature_error_reduction_measures",
+      "name": "온도 측정오차 저감 대책",
+      "statement": "온도 측정오차 저감은 충분한 담금 깊이, 대표 온도 영역 설치, 적절한 보호관 선정, 유속 확보, 복사 차폐, 단열, 보정 계산, 교정을 종합적으로 적용해야 한다.",
+      "expected": "센서 교정만이 아니라 설치 위치, 보호관, 차폐, 단열, 보정, 검증까지 현장 대책으로 제시해야 한다.",
+      "keywords": [
+        "설치 위치",
+        "보호관 선정",
+        "복사 차폐",
+        "단열",
+        "보정",
+        "교정",
+        "유속 확보"
+      ],
+      "core_terms": [
+        "저감 대책",
+        "설치 위치",
+        "복사 차폐",
+        "단열",
+        "보정"
+      ],
+      "support_terms": [
+        "현장 보정",
+        "교정",
+        "응답 지연",
+        "유지보수",
+        "기존 설비 개선"
+      ],
+      "required": true,
+      "weight": 1.2
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "claim": "온도 측정오차는 센서 정확도나 교정 문제만으로 설명할 수 있다.",
+      "correction": "온도 측정오차는 센서 자체 오차뿐 아니라 전도·대류·복사, 담금 깊이, 보호관, 유속, 주변 열환경의 영향을 함께 받는다."
+    },
+    {
+      "claim": "보호관 또는 thermowell을 사용하면 항상 온도 측정 정확도가 향상된다.",
+      "correction": "보호관은 기계적 보호에는 유리하지만 열저항과 열용량을 증가시켜 응답 지연과 측정오차를 키울 수 있으므로 조건부로 선정해야 한다."
+    },
+    {
+      "claim": "응답 지연은 전기적 지연만 고려하면 된다.",
+      "correction": "온도 측정 응답 지연은 센서·보호관의 열용량, 대류 열전달계수, 유속, 설치 구조의 영향을 크게 받는다."
+    }
+  ],
+  "safe_expressions": [
+    "센서 교정은 필요하지만 열전달 오차를 모두 제거하지는 못한다.",
+    "보호관은 공정 조건에 따라 정확도, 응답속도, 강도, 정비성의 trade-off로 선정한다.",
+    "80 mm 같은 삽입 깊이는 조건부 예시일 수 있으며 모든 현장의 일반 기준으로 단정하면 안 된다."
+  ],
+  "revision_notes": [
+    "created_from_runtime_fact_anchor=temperature_measurement_error_heat_transfer",
+    "converted_to_topic_pack=2026-07-06",
+    "focus=heat_transfer_error_diagnosis_and_field_countermeasures"
+  ]
+}
