@@ -35,6 +35,38 @@ ALLOWED_DIFFICULTY = {
     "UNKNOWN",
 }
 
+MODEL_ANSWER_SCHEMA_VERSION = "topic_pack.model_answer.v1"
+TOPIC_IMPORTANCE_SCHEMA_VERSION = "topic_pack.topic_importance.v1"
+
+MODEL_ANSWER_REQUIRED_KEYS = {
+    "schema_version",
+    "topic_id",
+    "title_ko",
+    "question_type",
+    "expected_question_patterns",
+    "recommended_outline",
+    "high_score_points",
+    "common_missing_points",
+    "routing_aliases",
+    "routing_field_points",
+}
+
+MODEL_ANSWER_LEGACY_ROOT_KEYS = {
+    "model_answer",
+    "high_score_elements",
+    "common_mistakes",
+}
+
+TOPIC_IMPORTANCE_REQUIRED_KEYS = {
+    "schema_version",
+    "topic_id",
+    "difficulty",
+    "selection_importance",
+    "question_type",
+    "high_band_unlock_conditions",
+    "note",
+}
+
 
 def fail(msg: str) -> None:
     print(f"ERROR: {msg}")
@@ -69,6 +101,36 @@ def require_str(value: Any, label: str) -> str:
     if not isinstance(value, str) or not value.strip():
         fail(f"{label}: required non-empty string")
     return value
+
+
+def require_keys(data: dict[str, Any], keys: set[str], label: str) -> None:
+    missing = sorted(key for key in keys if key not in data)
+    if missing:
+        fail(f"{label}: missing required keys: {', '.join(missing)}")
+
+
+def reject_keys(data: dict[str, Any], keys: set[str], label: str) -> None:
+    found = sorted(key for key in keys if key in data)
+    if found:
+        fail(f"{label}: legacy/unsupported root keys: {', '.join(found)}")
+
+
+def require_schema_version(data: dict[str, Any], expected: str, label: str) -> None:
+    actual = require_str(data.get("schema_version"), f"{label}: schema_version")
+    if actual != expected:
+        fail(f"{label}: schema_version must be {expected}, got {actual}")
+
+
+def require_str_list(value: Any, label: str, *, allow_empty: bool = False) -> list[str]:
+    items = require_list(value, label)
+    if not allow_empty and not items:
+        fail(f"{label}: must not be empty")
+
+    result: list[str] = []
+    for idx, item in enumerate(items):
+        result.append(require_str(item, f"{label}[{idx}]"))
+
+    return result
 
 
 def validate_fact_anchor(pack_dir: Path, topic_id: str, global_anchor_ids: set[str]) -> set[str]:
@@ -119,13 +181,24 @@ def validate_model_answer(pack_dir: Path, topic_id: str, anchor_ids: set[str]) -
         fail(f"{pack_dir}: missing model_answer.json")
 
     data = load_json(path)
+    require_keys(data, MODEL_ANSWER_REQUIRED_KEYS, str(path))
+    reject_keys(data, MODEL_ANSWER_LEGACY_ROOT_KEYS, str(path))
+    require_schema_version(data, MODEL_ANSWER_SCHEMA_VERSION, str(path))
 
     if data.get("topic_id") != topic_id:
         fail(f"{path}: topic_id must match directory name: {topic_id}")
 
+    require_str(data.get("title_ko"), f"{path}: title_ko")
+
     qtype = data.get("question_type")
     if qtype not in ALLOWED_QUESTION_TYPES:
         fail(f"{path}: invalid question_type: {qtype}")
+
+    require_str_list(data.get("expected_question_patterns"), f"{path}: expected_question_patterns")
+    require_str_list(data.get("high_score_points"), f"{path}: high_score_points")
+    require_str_list(data.get("common_missing_points"), f"{path}: common_missing_points")
+    require_str_list(data.get("routing_aliases"), f"{path}: routing_aliases")
+    require_str_list(data.get("routing_field_points"), f"{path}: routing_field_points")
 
     outline = require_list(data.get("recommended_outline"), f"{path}: recommended_outline")
     if not outline:
@@ -141,13 +214,10 @@ def validate_model_answer(pack_dir: Path, topic_id: str, anchor_ids: set[str]) -
             refs = []
         refs = require_list(refs, f"{path}: recommended_outline[{idx}].anchor_refs")
 
-        for ref in refs:
+        for ref_idx, ref in enumerate(refs):
+            ref = require_str(ref, f"{path}: recommended_outline[{idx}].anchor_refs[{ref_idx}]")
             if ref not in anchor_ids:
                 fail(f"{path}: outline[{idx}] references missing anchor_id: {ref}")
-
-    high_score_points = require_list(data.get("high_score_points"), f"{path}: high_score_points")
-    if not high_score_points:
-        fail(f"{path}: high_score_points must not be empty")
 
 
 def validate_topic_importance(pack_dir: Path, topic_id: str) -> None:
@@ -156,19 +226,27 @@ def validate_topic_importance(pack_dir: Path, topic_id: str) -> None:
         fail(f"{pack_dir}: missing topic_importance.json")
 
     data = load_json(path)
+    require_keys(data, TOPIC_IMPORTANCE_REQUIRED_KEYS, str(path))
+    require_schema_version(data, TOPIC_IMPORTANCE_SCHEMA_VERSION, str(path))
 
     if data.get("topic_id") != topic_id:
         fail(f"{path}: topic_id must match directory name: {topic_id}")
 
-    difficulty = data.get("difficulty_profile", data.get("difficulty"))
-    if difficulty is not None and difficulty not in ALLOWED_DIFFICULTY:
-        fail(f"{path}: invalid difficulty/difficulty_profile: {difficulty}")
+    difficulty = data.get("difficulty")
+    if difficulty not in ALLOWED_DIFFICULTY:
+        fail(f"{path}: invalid difficulty: {difficulty}")
 
     require_str(data.get("selection_importance"), f"{path}: selection_importance")
 
     qtype = data.get("question_type")
-    if qtype is not None and qtype not in ALLOWED_QUESTION_TYPES:
+    if qtype not in ALLOWED_QUESTION_TYPES:
         fail(f"{path}: invalid question_type: {qtype}")
+
+    require_str_list(
+        data.get("high_band_unlock_conditions"),
+        f"{path}: high_band_unlock_conditions",
+    )
+    require_str(data.get("note"), f"{path}: note")
 
 
 def validate_check_list(checks: Any, label: str) -> None:

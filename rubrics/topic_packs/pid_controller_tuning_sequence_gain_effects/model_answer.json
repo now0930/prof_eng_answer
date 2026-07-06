@@ -1,5 +1,5 @@
 {
-  "schema_version": "topic_pack_model_answer_v1",
+  "schema_version": "topic_pack.model_answer.v1",
   "topic_id": "pid_controller_tuning_sequence_gain_effects",
   "title_ko": "PID 제어기 튜닝 순서와 P/I/D 게인 영향",
   "question_type": "PRINCIPLE_INTERPRETATION",
