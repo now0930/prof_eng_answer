@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-05T08:33:16Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-06T02:24:25Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",

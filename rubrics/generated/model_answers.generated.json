@@ -1,138 +1,161 @@
 {
-  "version": "2026-07-05T08:33:16Z-generated-topic-pack-model-answers",
+  "version": "2026-07-06T02:24:25Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "answers": [
     {
+      "schema_version": "topic_pack_model_answer_v1",
       "topic_id": "pid_controller_tuning_sequence_gain_effects",
-      "model_answer": {
-        "definition": "PID 제어기는 비례(P), 적분(I), 미분(D) 동작의 조합으로 제어 출력을 생성하며, 수식은 u(t) = Kp*e(t) + Ki*∫e(t)dt + Kd*(de(t)/dt)로 표현됨.",
-        "gain_effects": {
-          "P": "현재 오차에 비례하여 응답 속도를 개선하나, 과도하면 overshoot와 진동을 유발함.",
-          "I": "누적 오차를 보상하여 정상상태 오차를 제거하나, 과도하면 windup과 hunting을 유발함.",
-          "D": "오차 변화율을 이용해 예측 및 감쇠 효과를 제공하나, 노이즈에 민감함."
-        },
-        "tuning_sequence": "일반적인 현장 튜닝 순서는 P(기본 응답 및 안정성 확보) → I(정상상태 오차 제거) → D(필요 시 감쇠 및 overshoot 저감) 순으로 진행함.",
-        "field_considerations": [
-          "Actuator saturation에 따른 적분 windup 방지(Anti-windup)",
-          "Sensor noise에 대한 D 동작의 필터링 필요성",
-          "Valve stiction 및 dead time에 의한 제어 성능 저하 고려"
-        ],
-        "high_score_elements": [
-          "극점(Pole) 이동에 따른 시스템 안정성 해석",
-          "Overshoot, 상승시간(Rise time), 정착시간(Settling time) 간의 trade-off 관계",
-          "현장 제약 조건(노이즈, 포화, 기계적 마모)을 고려한 실무적 튜닝 전략"
-        ],
-        "common_mistakes": [
-          "D 동작을 항상 첫 번째로 튜닝해야 한다는 오해",
-          "I 동작이 damping을 증가시킨다고 잘못 이해하는 경우",
-          "D 동작이 정상상태 오차를 제거한다고 혼동하는 경우",
-          "PD 제어기의 존재를 부정하거나 P 게인 증가가 항상 안정성을 보장한다고 믿는 경우",
-          "I 동작 시 windup 및 포화 문제를 간과하는 경우"
-        ]
-      },
+      "title_ko": "PID 제어기 튜닝 순서와 P/I/D 게인 영향",
       "question_type": "PRINCIPLE_INTERPRETATION",
-      "id": "pid_controller_tuning_sequence_gain_effects_COMPARE_v1",
-      "title": "pid_controller_tuning_sequence_gain_effects",
-      "question_examples": [],
-      "topic_aliases": [
-        "pid_controller_tuning_sequence_gain_effects",
-        "pid controller tuning sequence gain effects",
-        "PID",
-        "비례",
-        "적분",
-        "미분",
-        "오차",
-        "제어 출력",
-        "u(t)",
-        "Kp",
-        "Ki",
-        "Kd",
-        "e(t)",
-        "Gc(s)",
-        "Ki/s",
-        "Kd s",
-        "라플라스",
-        "현재 오차",
-        "응답 속도",
-        "overshoot",
-        "hunting",
-        "불안정",
-        "누적 오차",
-        "정상상태 오차",
-        "offset",
-        "windup",
-        "변화율",
-        "감쇠",
-        "노이즈",
-        "미분 kick",
-        "필터",
-        "튜닝 순서",
-        "안정성",
-        "PI 제어",
-        "공정 제어",
-        "유지보수",
-        "PD 제어기",
-        "위치 제어",
-        "서보",
-        "빠른 응답"
+      "expected_question_patterns": [
+        "PID 제어기의 P, I, D 게인 영향과 튜닝 순서를 설명하시오.",
+        "PID 튜닝에서 P, I, D 게인을 어떤 순서로 조정하는지 설명하시오.",
+        "PID 제어에서 I 게인과 D 게인의 역할 및 튜닝상 주의점을 설명하시오.",
+        "PID 제어기의 오버슈트, 정상상태 오차, 감쇠 특성과 게인 조정 관계를 설명하시오."
       ],
-      "expected_structure": [],
-      "model_answer_outline": [],
-      "high_score_features": [],
-      "low_score_patterns": [],
-      "field_connection_points": [
-        "PID",
-        "비례",
-        "적분",
-        "미분",
-        "오차",
-        "제어 출력",
-        "u(t)",
-        "Kp",
-        "Ki",
-        "Kd",
-        "e(t)",
-        "Gc(s)",
-        "Ki/s",
-        "Kd s",
-        "라플라스",
-        "현재 오차",
-        "응답 속도",
-        "overshoot",
-        "hunting",
-        "불안정",
-        "누적 오차",
-        "정상상태 오차",
-        "offset",
-        "windup",
-        "변화율",
-        "감쇠",
-        "노이즈",
-        "미분 kick",
-        "필터",
-        "튜닝 순서",
-        "안정성",
-        "PI 제어",
-        "공정 제어",
-        "유지보수",
+      "recommended_outline": [
+        {
+          "section": "PID 제어기 기본식과 동작 정의",
+          "intent": "PID 제어 출력 u(t)=Kp e(t)+Ki∫e(t)dt+Kd de(t)/dt를 제시하고 P, I, D 동작의 역할을 구분한다.",
+          "anchor_refs": []
+        },
+        {
+          "section": "P 게인의 영향",
+          "intent": "P 게인은 현재 오차에 비례해 응답 속도를 높이지만 과도하면 overshoot, 진동, 불안정 가능성이 증가함을 설명한다.",
+          "anchor_refs": []
+        },
+        {
+          "section": "I 게인의 영향",
+          "intent": "I 게인은 누적 오차를 보상해 정상상태 오차를 제거하지만 과도하면 windup, hunting, 응답 지연을 유발할 수 있음을 설명한다.",
+          "anchor_refs": []
+        },
+        {
+          "section": "D 게인의 영향",
+          "intent": "D 게인은 오차 변화율을 이용해 예측·감쇠 효과를 제공하지만 센서 노이즈에 민감하므로 필터링과 제한 적용이 필요함을 설명한다.",
+          "anchor_refs": []
+        },
+        {
+          "section": "일반적인 튜닝 순서",
+          "intent": "현장 튜닝은 일반적으로 P로 기본 응답과 안정성을 확보한 뒤 I로 정상상태 오차를 제거하고, 필요 시 D로 overshoot와 진동을 저감하는 순서임을 제시한다.",
+          "anchor_refs": []
+        },
+        {
+          "section": "핵심 오개념 구분",
+          "intent": "D 동작이 정상상태 오차를 제거한다거나 I 동작이 damping을 증가시킨다는 오해, PD 제어기의 존재를 부정하는 오해를 명확히 배제한다.",
+          "anchor_refs": []
+        },
+        {
+          "section": "현장 적용 고려사항",
+          "intent": "Anti-windup, D 필터링, actuator saturation, valve stiction, dead time 등 실제 설비 제약을 반영한 튜닝 전략을 제시한다.",
+          "anchor_refs": []
+        }
+      ],
+      "high_score_points": [
+        "PID 제어 출력식과 P, I, D 동작의 물리적 의미를 정확히 제시한다.",
+        "P 게인 증가가 응답 속도 개선과 동시에 overshoot·진동·불안정 위험을 키울 수 있음을 설명한다.",
+        "I 게인이 정상상태 오차 제거에 기여하지만 windup, hunting, 포화 문제를 유발할 수 있음을 설명한다.",
+        "D 게인이 감쇠와 예측 효과를 제공하지만 정상상태 오차 제거 기능은 아니며 노이즈 민감성이 크다는 점을 구분한다.",
+        "일반적인 튜닝 순서를 P → I → D로 설명하고, 각 단계의 목적을 안정성 확보, 정상상태 오차 제거, overshoot·진동 저감으로 연결한다.",
+        "PD 제어기가 존재하며, D를 무조건 먼저 튜닝해야 한다는 주장이 일반적인 현장 튜닝 원칙과 다름을 설명한다.",
+        "Anti-windup, D 필터, actuator saturation, valve stiction, dead time 등 현장 제약을 반영한다."
+      ],
+      "common_missing_points": [
+        "P, I, D 각 게인의 역할을 단순 암기식으로만 나열하고 응답 특성과 연결하지 않음.",
+        "I 동작이 damping을 증가시킨다고 설명함.",
+        "D 동작이 정상상태 오차를 제거한다고 설명함.",
+        "D 게인을 항상 가장 먼저 튜닝해야 한다고 설명함.",
+        "PD 제어기의 존재를 부정함.",
+        "적분 windup, 센서 노이즈, 포화, dead time 등 현장 제약을 누락함."
+      ],
+      "routing_aliases": [
+        "pid 튜닝 순서",
+        "pid gain tuning sequence",
+        "P I D 게인 영향",
+        "비례 적분 미분 게인",
+        "PID 오버슈트 정상상태 오차 감쇠",
         "PD 제어기",
-        "위치 제어",
-        "서보",
-        "빠른 응답",
-        "dead time",
-        "time constant",
-        "sensor noise",
-        "actuator saturation",
-        "valve stiction",
-        "anti-windup",
-        "derivative filter",
-        "bumpless transfer"
+        "I 게인 D 게인"
+      ],
+      "routing_field_points": [
+        "PID tuning",
+        "P gain",
+        "I gain",
+        "D gain",
+        "steady-state error",
+        "overshoot",
+        "damping",
+        "windup",
+        "derivative noise",
+        "anti-windup"
+      ],
+      "id": "pid_controller_tuning_sequence_gain_effects_COMPARE_v1",
+      "title": "PID 제어기 튜닝 순서와 P/I/D 게인 영향",
+      "question_examples": [
+        "PID 제어기의 P, I, D 게인 영향과 튜닝 순서를 설명하시오.",
+        "PID 튜닝에서 P, I, D 게인을 어떤 순서로 조정하는지 설명하시오.",
+        "PID 제어에서 I 게인과 D 게인의 역할 및 튜닝상 주의점을 설명하시오.",
+        "PID 제어기의 오버슈트, 정상상태 오차, 감쇠 특성과 게인 조정 관계를 설명하시오."
+      ],
+      "topic_aliases": [
+        "pid 튜닝 순서",
+        "pid gain tuning sequence",
+        "P I D 게인 영향",
+        "비례 적분 미분 게인",
+        "PID 오버슈트 정상상태 오차 감쇠",
+        "PD 제어기",
+        "I 게인 D 게인"
+      ],
+      "expected_structure": [
+        "PID 제어기 기본식과 동작 정의",
+        "P 게인의 영향",
+        "I 게인의 영향",
+        "D 게인의 영향",
+        "일반적인 튜닝 순서",
+        "핵심 오개념 구분",
+        "현장 적용 고려사항"
+      ],
+      "model_answer_outline": [
+        "PID 제어 출력 u(t)=Kp e(t)+Ki∫e(t)dt+Kd de(t)/dt를 제시하고 P, I, D 동작의 역할을 구분한다.",
+        "P 게인은 현재 오차에 비례해 응답 속도를 높이지만 과도하면 overshoot, 진동, 불안정 가능성이 증가함을 설명한다.",
+        "I 게인은 누적 오차를 보상해 정상상태 오차를 제거하지만 과도하면 windup, hunting, 응답 지연을 유발할 수 있음을 설명한다.",
+        "D 게인은 오차 변화율을 이용해 예측·감쇠 효과를 제공하지만 센서 노이즈에 민감하므로 필터링과 제한 적용이 필요함을 설명한다.",
+        "현장 튜닝은 일반적으로 P로 기본 응답과 안정성을 확보한 뒤 I로 정상상태 오차를 제거하고, 필요 시 D로 overshoot와 진동을 저감하는 순서임을 제시한다.",
+        "D 동작이 정상상태 오차를 제거한다거나 I 동작이 damping을 증가시킨다는 오해, PD 제어기의 존재를 부정하는 오해를 명확히 배제한다.",
+        "Anti-windup, D 필터링, actuator saturation, valve stiction, dead time 등 실제 설비 제약을 반영한 튜닝 전략을 제시한다."
+      ],
+      "high_score_features": [
+        "PID 제어 출력식과 P, I, D 동작의 물리적 의미를 정확히 제시한다.",
+        "P 게인 증가가 응답 속도 개선과 동시에 overshoot·진동·불안정 위험을 키울 수 있음을 설명한다.",
+        "I 게인이 정상상태 오차 제거에 기여하지만 windup, hunting, 포화 문제를 유발할 수 있음을 설명한다.",
+        "D 게인이 감쇠와 예측 효과를 제공하지만 정상상태 오차 제거 기능은 아니며 노이즈 민감성이 크다는 점을 구분한다.",
+        "일반적인 튜닝 순서를 P → I → D로 설명하고, 각 단계의 목적을 안정성 확보, 정상상태 오차 제거, overshoot·진동 저감으로 연결한다.",
+        "PD 제어기가 존재하며, D를 무조건 먼저 튜닝해야 한다는 주장이 일반적인 현장 튜닝 원칙과 다름을 설명한다.",
+        "Anti-windup, D 필터, actuator saturation, valve stiction, dead time 등 현장 제약을 반영한다."
+      ],
+      "low_score_patterns": [
+        "P, I, D 각 게인의 역할을 단순 암기식으로만 나열하고 응답 특성과 연결하지 않음.",
+        "I 동작이 damping을 증가시킨다고 설명함.",
+        "D 동작이 정상상태 오차를 제거한다고 설명함.",
+        "D 게인을 항상 가장 먼저 튜닝해야 한다고 설명함.",
+        "PD 제어기의 존재를 부정함.",
+        "적분 windup, 센서 노이즈, 포화, dead time 등 현장 제약을 누락함."
+      ],
+      "field_connection_points": [
+        "PID tuning",
+        "P gain",
+        "I gain",
+        "D gain",
+        "steady-state error",
+        "overshoot",
+        "windup",
+        "derivative noise",
+        "anti-windup"
       ],
       "revision_notes": [],
-      "source_schema_version": null
+      "source_schema_version": "topic_pack_model_answer_v1"
     },
     {
       "schema_version": "topic_pack.model_answer.v1",
