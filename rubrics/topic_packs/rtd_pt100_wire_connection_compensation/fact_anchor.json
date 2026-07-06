@@ -335,6 +335,37 @@
       ],
       "required": false,
       "weight": 1.0
+    },
+    {
+      "anchor_id": "rtd_resistance_measurement_vs_self_heating_power",
+      "name": "PT100 저항 측정과 자기발열 전력의 구분",
+      "statement": "PT100은 전력이나 발열량을 측정하는 센서가 아니라, 정전류 또는 브리지 회로로 저항을 측정하여 온도로 환산하는 센서이다. 다만 저항 측정을 위해 흐르는 여자전류 때문에 P=I^2R 전력이 열로 발생하며, 이 열은 자기발열 오차의 원인이 된다.",
+      "expected": "전류와 전압은 RTD 저항을 구하기 위한 수단이고, P=I^2R은 측정 대상이 아니라 오차 원인임을 설명해야 한다.",
+      "keywords": [
+        "저항 측정",
+        "정전류",
+        "브리지",
+        "전압 측정",
+        "R=V/I",
+        "P=I^2R",
+        "자기발열",
+        "여자전류"
+      ],
+      "core_terms": [
+        "저항 측정",
+        "온도 환산",
+        "P=I^2R",
+        "자기발열 오차"
+      ],
+      "support_terms": [
+        "constant current",
+        "bridge circuit",
+        "excitation current",
+        "self-heating",
+        "power is error source"
+      ],
+      "required": false,
+      "weight": 0.9
     }
   ],
   "fatal_wrong_claims": [
@@ -385,6 +416,10 @@
     {
       "claim": "PT100 또는 RTD에 NTC thermal runaway 개념을 적용하여 설명한다.",
       "correction": "PT100/RTD의 핵심 오차는 측정 전류에 의한 자기발열 self-heating이다. NTC thermal runaway는 서미스터에서 조건에 따라 나타날 수 있는 현상이며 PT100 원리나 결선 보상 개념으로 설명하면 안 된다."
+    },
+    {
+      "claim": "PT100이 전력 또는 발열량을 측정하여 온도를 구한다고 설명한다.",
+      "correction": "PT100은 저항을 측정해 온도를 환산한다. P=I^2R 전력은 저항 측정을 위해 흐르는 여자전류가 만드는 자기발열 오차 원인이지, PT100의 측정 대상이 아니다."
     }
   ],
   "safe_expressions": [
@@ -407,7 +442,10 @@
     "4선식 회로도는 전류 공급선과 전압 검출선이 분리되는 Kelvin 결선 의미를 표현해야 한다.",
     "NTC/PTC는 RTD의 하위 개념이 아니라 thermistor의 온도계수 분류이다.",
     "PT100은 금속 RTD이고, NTC/PTC thermistor는 반도체 저항체이므로 원리와 적용 목적을 구분해야 한다.",
-    "PT100에는 NTC thermal runaway가 아니라 측정 전류에 의한 자기발열 오차를 적용해야 한다."
+    "PT100에는 NTC thermal runaway가 아니라 측정 전류에 의한 자기발열 오차를 적용해야 한다.",
+    "PT100은 power를 측정하는 것이 아니라 R=V/I로 저항을 구해 온도로 환산한다.",
+    "P=I^2R은 PT100의 측정 원리가 아니라 여자전류로 인한 자기발열 오차를 설명하는 식이다.",
+    "PT100에서 전류와 전압은 저항을 구하기 위한 수단이고, 전력은 관리해야 할 오차 원인이다."
   ],
   "revision_notes": [
     "created_from_uploaded_notes=RTD_PT100_2wire_3wire_4wire_bridge",

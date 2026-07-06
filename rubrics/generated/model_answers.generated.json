@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T12:36:22Z-generated-topic-pack-model-answers",
+  "version": "2026-07-06T12:44:03Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -264,7 +264,10 @@
         "4선식 회로도에서 전류 공급선 2개와 전압 검출선 2개가 분리되고, sense선 전류가 거의 0임을 설명한다.",
         "회로도 옆에 Rt, Rw/RL, It, Vt, V1/V2 등 핵심 라벨을 붙여 채점자가 전기적 의미를 확인할 수 있게 한다.",
         "NTC/PTC는 RTD의 하위 개념이 아니라 thermistor의 분류이며, PT100 답안에서는 혼동 방지 수준으로만 언급한다.",
-        "PT100의 자기발열은 측정 전류에 의한 I^2R 오차이며, NTC thermal runaway와 구분한다."
+        "PT100의 자기발열은 측정 전류에 의한 I^2R 오차이며, NTC thermal runaway와 구분한다.",
+        "PT100은 전력을 측정하는 센서가 아니라 정전류 또는 브리지 회로로 저항을 측정해 온도로 환산한다는 점을 명확히 설명한다.",
+        "P=I^2R은 측정 원리가 아니라 여자전류에 의해 생기는 자기발열 오차를 설명하는 식임을 구분한다.",
+        "전류와 전압은 R=V/I로 저항을 계산하기 위한 수단이고, 자기발열 전력은 줄이거나 보정해야 할 오차 요인으로 설명한다."
       ],
       "common_missing_points": [
         "RTD 정의만 쓰고 2선식·3선식·4선식 차이를 설명하지 않음.",
@@ -292,7 +295,10 @@
         "정답 회로도와 모양은 비슷하지만 2선식 오차, 3선식 보상, 4선식 Kelvin 측정의 의미 설명이 부족함.",
         "PT100/RTD의 자기발열을 NTC thermistor의 thermal runaway와 같은 현상으로 설명함.",
         "NTC/PTC를 RTD의 하위 종류 또는 PT100의 보상 개념으로 설명함.",
-        "PT100을 PTC thermistor로 설명함."
+        "PT100을 PTC thermistor로 설명함.",
+        "PT100이 전력 또는 발열량을 측정해서 온도를 구한다고 설명함.",
+        "P=I^2R을 PT100의 온도 측정 원리로 설명하고, 저항 측정과 자기발열 오차를 구분하지 못함.",
+        "정전류와 전압 측정이 R=V/I로 저항을 구하기 위한 수단임을 설명하지 못함."
       ],
       "routing_aliases": [
         "RTD",
@@ -339,7 +345,12 @@
         "RTD NTC thermal runaway 오류",
         "PT100 열폭주 오류",
         "PT100 self heating vs NTC thermal runaway",
-        "RTD thermistor 혼동"
+        "RTD thermistor 혼동",
+        "PT100 power 측정 오류",
+        "RTD power measurement confusion",
+        "PT100 P=I2R 자기발열",
+        "PT100 resistance measurement vs power",
+        "RTD R=V/I"
       ],
       "routing_field_points": [
         "PT100 0도 100옴 백금 RTD",
@@ -367,7 +378,10 @@
         "4선식 전류 공급선 전압 검출선 분리 sense current near zero",
         "PT100 자기발열 NTC 열폭주 구분",
         "NTC PTC thermistor 분류 RTD 하위 개념 아님",
-        "PT100 금속 RTD thermistor 반도체 저항체"
+        "PT100 금속 RTD thermistor 반도체 저항체",
+        "PT100은 전력 측정이 아니라 저항 측정",
+        "P=I2R은 측정 원리 아니라 자기발열 오차",
+        "전류 전압은 R=V/I 저항 계산 수단"
       ],
       "revision_notes": [
         "created_as_separate_RTD_topic_pack",
@@ -377,7 +391,8 @@
         "added_sensor_dynamic_order_and_polynomial_approximation",
         "added_strict_pt100_checks_cjc_bridge_balance_wire_selection",
         "added_rtd_wire_diagram_semantic_feature_grading",
-        "removed_ntc_thermal_runaway_from_pt100_core_and_added_confusion_guard"
+        "removed_ntc_thermal_runaway_from_pt100_core_and_added_confusion_guard",
+        "added_power_vs_resistance_measurement_self_heating_distinction"
       ],
       "id": "rtd_pt100_wire_connection_compensation_COMPARE_v1",
       "title": "RTD(PT100)의 원리와 2선식·3선식·4선식 결선 및 리드선 저항 보상",
@@ -431,7 +446,12 @@
         "RTD NTC thermal runaway 오류",
         "PT100 열폭주 오류",
         "PT100 self heating vs NTC thermal runaway",
-        "RTD thermistor 혼동"
+        "RTD thermistor 혼동",
+        "PT100 power 측정 오류",
+        "RTD power measurement confusion",
+        "PT100 P=I2R 자기발열",
+        "PT100 resistance measurement vs power",
+        "RTD R=V/I"
       ],
       "expected_structure": [
         "RTD와 PT100의 정의",
@@ -481,7 +501,10 @@
         "4선식 회로도에서 전류 공급선 2개와 전압 검출선 2개가 분리되고, sense선 전류가 거의 0임을 설명한다.",
         "회로도 옆에 Rt, Rw/RL, It, Vt, V1/V2 등 핵심 라벨을 붙여 채점자가 전기적 의미를 확인할 수 있게 한다.",
         "NTC/PTC는 RTD의 하위 개념이 아니라 thermistor의 분류이며, PT100 답안에서는 혼동 방지 수준으로만 언급한다.",
-        "PT100의 자기발열은 측정 전류에 의한 I^2R 오차이며, NTC thermal runaway와 구분한다."
+        "PT100의 자기발열은 측정 전류에 의한 I^2R 오차이며, NTC thermal runaway와 구분한다.",
+        "PT100은 전력을 측정하는 센서가 아니라 정전류 또는 브리지 회로로 저항을 측정해 온도로 환산한다는 점을 명확히 설명한다.",
+        "P=I^2R은 측정 원리가 아니라 여자전류에 의해 생기는 자기발열 오차를 설명하는 식임을 구분한다.",
+        "전류와 전압은 R=V/I로 저항을 계산하기 위한 수단이고, 자기발열 전력은 줄이거나 보정해야 할 오차 요인으로 설명한다."
       ],
       "low_score_patterns": [
         "RTD 정의만 쓰고 2선식·3선식·4선식 차이를 설명하지 않음.",
@@ -509,7 +532,10 @@
         "정답 회로도와 모양은 비슷하지만 2선식 오차, 3선식 보상, 4선식 Kelvin 측정의 의미 설명이 부족함.",
         "PT100/RTD의 자기발열을 NTC thermistor의 thermal runaway와 같은 현상으로 설명함.",
         "NTC/PTC를 RTD의 하위 종류 또는 PT100의 보상 개념으로 설명함.",
-        "PT100을 PTC thermistor로 설명함."
+        "PT100을 PTC thermistor로 설명함.",
+        "PT100이 전력 또는 발열량을 측정해서 온도를 구한다고 설명함.",
+        "P=I^2R을 PT100의 온도 측정 원리로 설명하고, 저항 측정과 자기발열 오차를 구분하지 못함.",
+        "정전류와 전압 측정이 R=V/I로 저항을 구하기 위한 수단임을 설명하지 못함."
       ],
       "field_connection_points": [
         "PT100 0도 100옴 백금 RTD",
@@ -537,7 +563,10 @@
         "4선식 전류 공급선 전압 검출선 분리 sense current near zero",
         "PT100 자기발열 NTC 열폭주 구분",
         "NTC PTC thermistor 분류 RTD 하위 개념 아님",
-        "PT100 금속 RTD thermistor 반도체 저항체"
+        "PT100 금속 RTD thermistor 반도체 저항체",
+        "PT100은 전력 측정이 아니라 저항 측정",
+        "P=I2R은 측정 원리 아니라 자기발열 오차",
+        "전류 전압은 R=V/I 저항 계산 수단"
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

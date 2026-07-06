@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T12:36:22Z-generated-topic-pack-importance",
+  "version": "2026-07-06T12:44:03Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -43,9 +43,10 @@
         "2선식, 3선식, 4선식 회로도를 외형이 아니라 전기적 기능 요소로 해석하여 설명한다.",
         "2선식은 Rt+2Rw 오차, 3선식은 동일 리드선 조건의 상쇄, 4선식은 전류선/전압선 분리라는 의미를 회로도에 반영한다.",
         "PT100의 자기발열 self-heating과 NTC thermistor의 thermal runaway를 구분한다.",
-        "NTC/PTC를 RTD 하위 개념이 아니라 thermistor 분류로 설명한다."
+        "NTC/PTC를 RTD 하위 개념이 아니라 thermistor 분류로 설명한다.",
+        "PT100은 전력 측정 센서가 아니라 저항 측정 센서이며, P=I^2R은 자기발열 오차 원인임을 구분한다."
       ],
-      "note": "RTD/PT100 결선과 리드선 보상은 온도센서 원리와 계측 회로를 동시에 묻는 핵심 주제이다. 단순 정의보다 2선식·3선식·4선식의 오차 메커니즘과 보상 조건을 구분해야 고득점이 가능하다. Thermistor는 RTD와 같은 저항 변화 기반 소자로 함께 출제될 수 있으나, NTC/PTC의 온도계수 방향과 RTD와의 재료·선형성 차이를 구분해야 한다. 또한 온도센서의 동특성은 이상적 0차계와 실제 1차 지연계로 구분하고, RTD의 저항-온도 관계는 정확도 요구에 따라 1차·2차·3차 다항식 근사 또는 표준 보정식으로 설명해야 한다. RTD에 냉접점 보상을 적용하는 오류는 열전대와 RTD의 원리 혼동이므로 강한 감점 요인이다. 3선식 브리지 평형 원리는 단순 비교가 아니라 수식적 상쇄 조건까지 설명해야 고득점이 가능하다. 회로도 채점은 정답 그림과의 외형 일치가 아니라 Rt, Rw/RL, It, Vt, V1/V2 등 라벨과 2선식 오차, 3선식 보상, 4선식 Kelvin 측정의 기능 요소 충족 여부로 평가한다. NTC/PTC는 PT100의 핵심 원리가 아니라 thermistor 혼동 방지 항목으로만 다룬다. PT100에는 NTC thermal runaway가 아니라 측정 전류에 의한 self-heating 오차를 적용한다.",
+      "note": "RTD/PT100 결선과 리드선 보상은 온도센서 원리와 계측 회로를 동시에 묻는 핵심 주제이다. 단순 정의보다 2선식·3선식·4선식의 오차 메커니즘과 보상 조건을 구분해야 고득점이 가능하다. Thermistor는 RTD와 같은 저항 변화 기반 소자로 함께 출제될 수 있으나, NTC/PTC의 온도계수 방향과 RTD와의 재료·선형성 차이를 구분해야 한다. 또한 온도센서의 동특성은 이상적 0차계와 실제 1차 지연계로 구분하고, RTD의 저항-온도 관계는 정확도 요구에 따라 1차·2차·3차 다항식 근사 또는 표준 보정식으로 설명해야 한다. RTD에 냉접점 보상을 적용하는 오류는 열전대와 RTD의 원리 혼동이므로 강한 감점 요인이다. 3선식 브리지 평형 원리는 단순 비교가 아니라 수식적 상쇄 조건까지 설명해야 고득점이 가능하다. 회로도 채점은 정답 그림과의 외형 일치가 아니라 Rt, Rw/RL, It, Vt, V1/V2 등 라벨과 2선식 오차, 3선식 보상, 4선식 Kelvin 측정의 기능 요소 충족 여부로 평가한다. NTC/PTC는 PT100의 핵심 원리가 아니라 thermistor 혼동 방지 항목으로만 다룬다. PT100에는 NTC thermal runaway가 아니라 측정 전류에 의한 self-heating 오차를 적용한다. PT100에서 power는 측정 대상이 아니라 저항 측정을 위한 여자전류가 만드는 자기발열 오차 원인이다. 따라서 R=V/I 저항 측정과 P=I^2R 자기발열 오차를 구분해야 한다.",
       "revision_notes": [
         "created_for_topic_pack=rtd_pt100_wire_connection_compensation",
         "difficulty=THEORY_CORE because sensor principle and measurement circuit correctness are central",
@@ -53,7 +54,8 @@
         "added_dynamic_order_and_polynomial_approximation",
         "added_strict_pt100_scoring_note",
         "added_diagram_semantic_feature_importance",
-        "clarified_ntc_ptc_as_thermistor_only_not_rtd_core"
+        "clarified_ntc_ptc_as_thermistor_only_not_rtd_core",
+        "added_power_vs_resistance_measurement_distinction"
       ]
     },
     {

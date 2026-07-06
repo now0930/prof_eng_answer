@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T12:36:22Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-06T12:44:03Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -188,7 +188,13 @@
         "self-heating",
         "자기발열",
         "NTC thermal runaway",
-        "PT100 열폭주"
+        "PT100 열폭주",
+        "power measurement",
+        "전력 측정",
+        "발열량 측정",
+        "P=I^2R",
+        "R=V/I",
+        "저항 측정"
       ],
       "question_type": "PRINCIPLE_INTERPRETATION",
       "fatal_checks": [
@@ -309,6 +315,26 @@
           ],
           "message": "NTC thermistor의 thermal runaway 개념을 PT100/RTD에 적용하여 설명함.",
           "correct_rule": "PT100/RTD의 핵심 오차는 측정 전류에 의한 self-heating이다. NTC thermal runaway는 thermistor에서 조건에 따라 나타날 수 있는 현상이며, PT100 원리나 결선 보상 개념으로 설명하면 안 된다.",
+          "recommended_ceiling": 15.5,
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "rtd_power_measurement_confusion",
+          "description": "PT100/RTD가 전력 또는 발열량을 측정해 온도를 구한다고 설명하는 오류.",
+          "patterns": [
+            "PT[- ]?100.*전력.*측정",
+            "Pt[- ]?100.*전력.*측정",
+            "RTD.*전력.*측정",
+            "측온저항.*전력.*측정",
+            "PT[- ]?100.*발열량.*측정",
+            "RTD.*발열량.*측정",
+            "PT[- ]?100.*power.*measure",
+            "RTD.*power.*measure"
+          ],
+          "message": "PT100/RTD가 전력 또는 발열량을 측정해 온도를 구한다고 설명함.",
+          "correct_rule": "PT100/RTD는 저항을 측정해 온도를 환산한다. 전류와 전압은 R=V/I로 저항을 구하기 위한 수단이며, P=I^2R은 여자전류가 만드는 자기발열 오차 원인이다.",
           "recommended_ceiling": 15.5,
           "affected_layers": [
             "C"
@@ -544,6 +570,21 @@
           "affected_layers": [
             "C"
           ]
+        },
+        {
+          "id": "rtd_self_heating_power_not_distinguished",
+          "description": "P=I^2R 자기발열 전력을 측정 원리와 오차 원인으로 구분하지 못하는 경우.",
+          "patterns": [
+            "P.*I.*R.*온도.*측정",
+            "전력.*온도.*환산",
+            "발열.*온도.*측정",
+            "저항.*전력.*온도.*구"
+          ],
+          "message": "P=I^2R을 자기발열 오차가 아니라 PT100의 직접 측정 원리처럼 설명함.",
+          "correct_rule": "PT100은 R=V/I로 저항을 계산한 뒤 저항-온도 관계로 온도를 환산한다. P=I^2R은 측정 전류 때문에 발생하는 자기발열 오차를 설명할 때 사용한다.",
+          "affected_layers": [
+            "C"
+          ]
         }
       ],
       "question_type_checks": [
@@ -575,7 +616,10 @@
         "4선식 회로도에는 전류 공급선과 전압 검출선 분리를 표시하세요.",
         "PT100에는 NTC thermal runaway가 아니라 측정 전류에 의한 self-heating 오차를 적용하세요.",
         "NTC/PTC는 RTD 하위 개념이 아니라 thermistor 분류로만 언급하세요.",
-        "PT100을 PTC thermistor로 설명하지 마세요."
+        "PT100을 PTC thermistor로 설명하지 마세요.",
+        "PT100은 power를 측정하는 것이 아니라 저항을 측정해 온도로 환산한다고 정리하세요.",
+        "P=I^2R은 PT100의 측정 원리가 아니라 자기발열 오차 원인이라고 구분하세요.",
+        "전류와 전압은 R=V/I로 저항을 계산하기 위한 수단이라고 설명하세요."
       ],
       "de_claim_trust": {
         "score_effect": "none",

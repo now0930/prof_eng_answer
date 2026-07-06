@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-06T12:36:22Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-06T12:44:03Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -87,9 +87,12 @@
         "4선식 회로도에 current lead와 sense lead 분리 의미가 있는지 확인",
         "NTC thermal runaway를 PT100/RTD 핵심 현상으로 잘못 적용했는지 확인",
         "PT100 자기발열 self-heating과 NTC thermistor thermal runaway를 구분했는지 확인",
-        "NTC/PTC를 RTD 하위 개념으로 설명하지 않았는지 확인"
+        "NTC/PTC를 RTD 하위 개념으로 설명하지 않았는지 확인",
+        "PT100/RTD를 전력 측정 센서로 오해하지 않았는지 확인",
+        "R=V/I 저항 측정과 P=I^2R 자기발열 오차를 구분했는지 확인",
+        "전류와 전압이 저항 계산 수단이고 power는 오차 원인임을 설명했는지 확인"
       ],
-      "fatal_error_policy": "PT100 의미, RTD 동작 원리, 2선식 리드선 오차, 3선식 보상 조건을 반대로 설명하면 C항목 핵심 오류로 제한한다. RTD/PT100에 냉접점 보상이 필요하다고 설명하는 경우는 열전대와 RTD의 측정 원리를 혼동한 주요 오류로 보고 고득점 상한을 제한한다. NTC thermal runaway를 PT100/RTD의 핵심 현상으로 설명하면 thermistor와 RTD를 혼동한 오류로 보고 고득점 상한을 제한한다."
+      "fatal_error_policy": "PT100 의미, RTD 동작 원리, 2선식 리드선 오차, 3선식 보상 조건을 반대로 설명하면 C항목 핵심 오류로 제한한다. RTD/PT100에 냉접점 보상이 필요하다고 설명하는 경우는 열전대와 RTD의 측정 원리를 혼동한 주요 오류로 보고 고득점 상한을 제한한다. NTC thermal runaway를 PT100/RTD의 핵심 현상으로 설명하면 thermistor와 RTD를 혼동한 오류로 보고 고득점 상한을 제한한다. PT100/RTD가 전력 또는 발열량을 측정해 온도를 구한다고 설명하면 저항식 온도센서의 기본 원리를 혼동한 오류로 보고 고득점 상한을 제한한다."
     },
     {
       "topic_id": "second_order_lag_response_by_damping_ratio",
