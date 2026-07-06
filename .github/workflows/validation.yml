@@ -1,0 +1,30 @@
+name: validation
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Run release validation
+        run: PROMOTE_GENERATED=0 scripts/validate_release.sh
+
+      - name: Ensure generated files are committed
+        run: |
+          git diff --check
+          git diff --exit-code

@@ -3,6 +3,8 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+PROMOTE_GENERATED="${PROMOTE_GENERATED:-1}"
+
 TOPIC_IDS=(
   "pid_controller_tuning_sequence_gain_effects"
   "second_order_system_resonance_frequency_response"
@@ -25,10 +27,16 @@ echo "===== rubric validation: validate-all ====="
 python3 scripts/rubric_manager.py validate-all
 
 echo
-echo "===== topic pack release validation: deterministic only ====="
-python3 scripts/rubric_manager.py validate-topic-pack-release \
-  --promote-generated \
-  --skip-smoke
+if [[ "${PROMOTE_GENERATED}" == "1" ]]; then
+  echo "===== topic pack release validation: promote generated ====="
+  python3 scripts/rubric_manager.py validate-topic-pack-release \
+    --promote-generated \
+    --skip-smoke
+else
+  echo "===== topic pack release validation: no promote ====="
+  python3 scripts/rubric_manager.py validate-topic-pack-release \
+    --skip-smoke
+fi
 
 echo
 echo "===== optional smoke topic packs ====="
