@@ -23,6 +23,10 @@ python3 -m py_compile \
   scripts/smoke_topic_pack.py
 
 echo
+echo "===== formatter regression tests ====="
+python3 -m unittest scripts.test_grade_output_formatter
+
+echo
 echo "===== rubric validation: validate-all ====="
 python3 scripts/rubric_manager.py validate-all
 
