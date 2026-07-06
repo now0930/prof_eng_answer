@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import subprocess
 import sys
 from datetime import datetime
 from pathlib import Path
@@ -443,6 +444,12 @@ def enforce_schema_lock(name: str, data: dict[str, Any], pack_dir: Path) -> dict
 
     return merged
 
+def validate_topic_pack_schema(root: Path, topic_id: str) -> None:
+    cmd = [sys.executable, "scripts/rubric_manager.py", "validate-topic-packs"]
+    print("validating topic pack schema:", " ".join(cmd))
+    subprocess.run(cmd, cwd=root, check=True)
+
+
 def write_text(path: Path, text: str) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
     path.write_text(text, encoding="utf-8")
@@ -613,6 +620,12 @@ def main(argv: list[str] | None = None) -> int:
     raw_path = report_dir / f"topic_pack_generation_{args.topic_id}_{stamp}_raw.json"
     write_json(raw_path, raw_report)
     print(f"raw: {raw_path.relative_to(root)}")
+
+    if args.overwrite and args.only != "consistency_review":
+        validate_topic_pack_schema(root, args.topic_id)
+    elif args.only != "consistency_review":
+        print("schema validation skipped: candidate files were written without --overwrite")
+
     print("DONE")
     return 0
 

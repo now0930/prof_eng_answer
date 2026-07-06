@@ -103,28 +103,46 @@ def _build_model_answer(topic_id: str, title: str, question_type: str) -> dict[s
     question_examples = _default_question_examples(title)
 
     return {
+        "schema_version": "topic_pack.model_answer.v1",
         "topic_id": topic_id,
-        "title": title,
+        "title_ko": title,
         "question_type": question_type,
-        "question_examples": question_examples,
-        "recommended_outline": {
-            "sections": [
-                "배경 및 문제 요구",
-                "핵심 개념과 정의",
-                "원리·구성·판단 기준",
-                "현장 적용 및 설계 고려사항",
-                "문제점·개선 방향",
-                "결론",
-            ],
-            "intents": [
-                f"{title}이 필요한 배경과 출제 의도를 설명한다.",
-                f"{title}의 핵심 정의와 주요 변수를 명확히 제시한다.",
-                "원리, 구성 요소, 판단 기준을 구조적으로 전개한다.",
-                "현장 적용 시 비용, 운전성, 유지보수성, 기존 설비 영향을 연결한다.",
-                "대표적인 오류, 한계, 개선 방향을 제시한다.",
-                "기술사 답안 관점에서 핵심 판단 기준을 정리한다.",
-            ],
-        },
+        "expected_question_patterns": question_examples,
+        "recommended_outline": [
+            {
+                "section": "배경 및 문제 요구",
+                "intent": f"{title}이 필요한 배경과 출제 의도를 설명한다.",
+                "anchor_refs": [],
+            },
+            {
+                "section": "핵심 개념과 정의",
+                "intent": f"{title}의 핵심 정의와 주요 변수를 명확히 제시한다.",
+                "anchor_refs": [f"{topic_id}_anchor_01"],
+            },
+            {
+                "section": "원리·구성·판단 기준",
+                "intent": "원리, 구성 요소, 판단 기준을 구조적으로 전개한다.",
+                "anchor_refs": [
+                    f"{topic_id}_anchor_02",
+                    f"{topic_id}_anchor_03",
+                ],
+            },
+            {
+                "section": "현장 적용 및 설계 고려사항",
+                "intent": "현장 적용 시 비용, 운전성, 유지보수성, 기존 설비 영향을 연결한다.",
+                "anchor_refs": [f"{topic_id}_anchor_04"],
+            },
+            {
+                "section": "문제점·한계·개선 방향",
+                "intent": "대표적인 오류, 한계, 개선 방향을 제시한다.",
+                "anchor_refs": [f"{topic_id}_anchor_05"],
+            },
+            {
+                "section": "결론",
+                "intent": "기술사 답안 관점에서 핵심 판단 기준을 정리한다.",
+                "anchor_refs": [],
+            },
+        ],
         "high_score_points": [
             "핵심 정의와 적용 범위를 명확히 제시한다.",
             "주요 변수, 조건, 판단 기준을 구조적으로 설명한다.",
@@ -133,10 +151,10 @@ def _build_model_answer(topic_id: str, title: str, question_type: str) -> dict[s
             "오해하기 쉬운 개념이나 fatal 오류를 구분한다.",
         ],
         "common_missing_points": [
-            "정의만 쓰고 판단 기준이나 적용 조건을 설명하지 않음",
-            "키워드 나열에 그치고 원리와 현장 의미를 연결하지 않음",
-            "비용, 실현 가능성, 기존 설비 영향 등 실무 고려가 없음",
-            "유사 개념과의 차이를 구분하지 않음",
+            "정의만 쓰고 판단 기준이나 적용 조건을 설명하지 않음.",
+            "키워드 나열에 그치고 원리와 현장 의미를 연결하지 않음.",
+            "비용, 실현 가능성, 기존 설비 영향 등 실무 고려가 없음.",
+            "유사 개념과의 차이를 구분하지 않음.",
         ],
         "routing_aliases": [
             title,
@@ -191,28 +209,25 @@ def _build_fact_anchor(topic_id: str, title: str) -> dict[str, Any]:
     }
 
 
-def _build_topic_importance(topic_id: str, title: str, difficulty: str, importance: str) -> dict[str, Any]:
+def _build_topic_importance(
+    topic_id: str,
+    title: str,
+    question_type: str,
+    difficulty: str,
+    importance: str,
+) -> dict[str, Any]:
     return {
+        "schema_version": "topic_pack.topic_importance.v1",
         "topic_id": topic_id,
-        "topic_label": title,
         "difficulty": difficulty,
-        "difficulty_label": difficulty,
         "selection_importance": importance,
-        "selection_policy": None,
-        "minimum_attempt_floor": None,
-        "target_score": None,
-        "excellent_score_band": [21, 25] if difficulty == "THEORY_CORE" else [18, 25],
-        "default_score_ceiling": None,
-        "requires_band_unlock": difficulty == "THEORY_CORE",
+        "question_type": question_type,
         "high_band_unlock_conditions": [
             "핵심 정의와 기본 모델을 정확히 제시한다.",
             "주요 판단 조건과 적용 범위를 설명한다.",
             "현장 적용성과 한계, 개선 방향을 연결한다.",
             "fatal logic error가 없다.",
         ],
-        "omission_risk": "medium",
-        "fatal_error_risk": "medium",
-        "score_ceiling_policy": None,
         "note": f"TODO: {title}의 난이도, 선택 중요도, 고득점 unlock 조건을 검토한다.",
         "revision_notes": [
             "created_by=scripts/create_topic_pack.py",
@@ -264,7 +279,7 @@ def _build_logic_check(topic_id: str, title: str, question_type: str, difficulty
                 "fact anchor 기반 답안 전개",
                 "현장 적용성과 개선 방안 연결",
             ],
-            "de_claim_trust": [],
+            "de_claim_trust": {},
         },
         "llm_profile": {
             "enabled": True,
@@ -306,6 +321,7 @@ def create_topic_pack(args: argparse.Namespace) -> Path:
         "topic_importance.json": _build_topic_importance(
             args.topic_id,
             args.title,
+            args.question_type,
             args.difficulty,
             args.importance,
         ),
