@@ -98,11 +98,16 @@ python3 -m py_compile \
   scripts/test_model_answer_relationship_validator.py \
   scripts/test_priority_minor_reporter.py \
   scripts/test_deep_model_fact_relationship_auditor.py \
+  scripts/test_release_test_coverage_validator.py \
   scripts/smoke_topic_pack.py
 
 echo
 echo "===== release test coverage validation ====="
 python3 scripts/validate_release_test_coverage.py
+
+echo
+echo "===== release-test coverage validator regression ====="
+python3 -m unittest scripts.test_release_test_coverage_validator
 
 echo
 echo "===== formatter regression tests ====="
