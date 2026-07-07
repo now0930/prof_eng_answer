@@ -72,6 +72,10 @@ rm -f reports/model_answer_relationship_validation.csv
 rm -f reports/model_answer_relationship_validation.md
 
 echo
+echo
+echo "===== model answer router regression ====="
+python3 scripts/test_model_answer_router.py
+
 echo "===== whitespace check ====="
 git diff --check
 
