@@ -28,6 +28,7 @@ python3 -m py_compile \
   scripts/rubric_audit/audit_fact_anchor_quality.py \
   scripts/rubric_audit/build_rubric_work_pack.py \
   scripts/test_restored_rubric_audit_tools.py \
+  scripts/test_rubric_content_crud.py \
   scripts/rubric_audit/deep_model_fact_relationship_audit.py \
   scripts/test_model_answer_relationship_validator.py \
   scripts/test_priority_minor_reporter.py \
@@ -56,6 +57,10 @@ python3 -m unittest scripts.test_deep_model_fact_relationship_auditor
 
 echo "===== restored rubric audit tools regression ====="
 python3 -m unittest scripts.test_restored_rubric_audit_tools
+
+echo
+echo "===== rubric content CRUD integration regression ====="
+python3 scripts/test_rubric_content_crud.py
 
 echo
 echo "===== rubric quality audit ====="
