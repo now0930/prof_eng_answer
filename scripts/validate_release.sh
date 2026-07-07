@@ -11,6 +11,70 @@ TOPIC_IDS=(
   "second_order_system_resonance_frequency_response"
 )
 
+TRANSIENT_REPORTS=(
+  "reports/fact_anchor_quality_audit.csv"
+  "reports/fact_anchor_quality_audit.md"
+  "reports/model_fact_relationship_audit.csv"
+  "reports/model_fact_relationship_audit.md"
+  "reports/model_answer_relationship_validation.csv"
+  "reports/model_answer_relationship_validation.md"
+  "reports/model_answer_relationship_minor_analysis.csv"
+  "reports/model_answer_relationship_minor_analysis.md"
+  "reports/model_answer_relationship_priority_minors.md"
+  "reports/rubric_audit_summary.md"
+)
+
+REPORT_SNAPSHOT_DIR="$(
+  mktemp -d \
+    "${TMPDIR:-/tmp}/prof_eng_answer_validation_reports.XXXXXX"
+)"
+REPORT_SNAPSHOT_MANIFEST="${REPORT_SNAPSHOT_DIR}/existing.txt"
+
+snapshot_transient_reports() {
+  local report
+  local snapshot_path
+
+  : > "${REPORT_SNAPSHOT_MANIFEST}"
+
+  for report in "${TRANSIENT_REPORTS[@]}"; do
+    if [[ -f "${report}" ]]; then
+      snapshot_path="${REPORT_SNAPSHOT_DIR}/files/${report}"
+      mkdir -p "$(dirname "${snapshot_path}")"
+      cp -p -- "${report}" "${snapshot_path}"
+      printf '%s\n' "${report}" >> "${REPORT_SNAPSHOT_MANIFEST}"
+    fi
+  done
+}
+
+restore_transient_reports() {
+  local report
+  local snapshot_path
+
+  if [[ -z "${REPORT_SNAPSHOT_DIR:-}" ]] ||
+     [[ ! -d "${REPORT_SNAPSHOT_DIR}" ]]; then
+    return 0
+  fi
+
+  for report in "${TRANSIENT_REPORTS[@]}"; do
+    rm -f -- "${report}"
+  done
+
+  if [[ -f "${REPORT_SNAPSHOT_MANIFEST}" ]]; then
+    while IFS= read -r report; do
+      [[ -n "${report}" ]] || continue
+
+      snapshot_path="${REPORT_SNAPSHOT_DIR}/files/${report}"
+      mkdir -p "$(dirname "${report}")"
+      cp -p -- "${snapshot_path}" "${report}"
+    done < "${REPORT_SNAPSHOT_MANIFEST}"
+  fi
+
+  rm -rf -- "${REPORT_SNAPSHOT_DIR}"
+}
+
+snapshot_transient_reports
+trap restore_transient_reports EXIT
+
 echo "===== py_compile: core entrypoints ====="
 python3 -m py_compile \
   bot.py \
@@ -108,8 +172,8 @@ fi
 
 echo
 echo "===== cleanup transient validation reports ====="
-rm -f reports/model_answer_relationship_validation.csv
-rm -f reports/model_answer_relationship_validation.md
+restore_transient_reports
+trap - EXIT
 
 echo
 echo
