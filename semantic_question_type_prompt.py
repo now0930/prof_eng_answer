@@ -43,18 +43,19 @@ def build_question_type_semantic_guidance(
     return f"""
 [Question Type v2 평가 지침]
 
-아래 question_type은 별도 점수체계가 아니라, A/B/C/D/E 채점 중 C항목 Fact 기반 설명과 D항목 현장 적용·판단·제언을 점검하기 위한 lens이다.
+아래 question_type은 별도 점수체계가 아니라, A/B/C/D/E 채점 중 B항목 요구사항 완전성, C항목 Fact 기반 설명과 D항목 현장 적용·판단·제언을 점검하기 위한 lens이다.
 
 {payload_text}
 
 평가 시 반드시 확인할 것:
 1. 답안이 sub_criteria를 언급했는지 확인한다.
 2. 단순 키워드 존재 여부가 아니라, 문맥상 의미 있게 설명했는지 판단한다.
-3. C항목에서는 fact, 구조, 원리, 절차, 비교축, 평가 지표 등 기술 설명의 충족도를 본다.
-4. D항목에서는 현장 적용 조건, 기존 설비 영향, 비용, 유지보수, 실현 가능성, trade-off, 검증 방법을 본다.
-5. IMPLEMENTATION_EVALUATION의 경우 C항목은 적용 대상·시스템 구성·절차·평가 기준이고, D항목은 적용 후 운영 판단·검증·개선·확장성이다.
-6. 누락된 sub_criteria가 있으면 missing_sub_criteria에 기록한다.
-7. 부분적으로만 언급되었으면 partial로 표시하고, 왜 partial인지 설명한다.
+3. B항목에서는 문제의 요구동사와 모든 세부 요구항목에 빠짐없이 직접 답했는지 본다.
+4. C항목에서는 fact, 구조, 원리, 절차, 비교축, 평가 지표 등 기술 설명의 충족도를 본다.
+5. D항목에서는 현장 적용 조건, 기존 설비 영향, 비용, 유지보수, 실현 가능성, trade-off, 검증 방법을 본다.
+6. IMPLEMENTATION_EVALUATION의 경우 C항목은 적용 대상·시스템 구성·절차·평가 기준이고, D항목은 적용 후 운영 판단·검증·개선·확장성이다.
+7. 누락된 sub_criteria가 있으면 missing_sub_criteria에 기록한다.
+8. 부분적으로만 언급되었으면 partial로 표시하고, 왜 partial인지 설명한다.
 
 semantic evaluation JSON에는 다음 필드를 반드시 포함한다.
 
@@ -66,7 +67,7 @@ semantic evaluation JSON에는 다음 필드를 반드시 포함한다.
       "criterion": "sub_criteria 이름",
       "status": "present | partial | missing",
       "evidence": "답안에서 확인되는 근거 또는 누락 설명",
-      "impact": "이 항목이 C 또는 D 점수에 주는 영향"
+      "impact": "이 항목이 B, C 또는 D 점수에 주는 영향"
     }}
   ],
   "c_fact_focus_coverage": {{
@@ -79,12 +80,12 @@ semantic evaluation JSON에는 다음 필드를 반드시 포함한다.
   }},
   "missing_sub_criteria": ["누락된 sub_criteria"],
   "overall_coverage": "strong | adequate | weak | poor",
-  "scoring_hint": "A/B/C/D/E 중 어느 항목을 보수적으로 볼지 간단히 설명"
+  "scoring_hint": "B/C/D 중 어느 항목을 보수적으로 볼지 간단히 설명"
 }}
 
 주의:
 - 이 평가는 최종 점수를 직접 결정하지 않는다.
-- 기존 A/B/C/D/E 구조를 유지하되, C와 D 점수 판단 근거를 보강한다.
+- 기존 A/B/C/D/E 구조를 유지하되, B의 요구사항 완전성과 C/D 점수 판단 근거를 보강한다.
 - 답안에 없는 내용을 추정해서 채워 넣지 않는다.
 """.strip()
 
@@ -165,7 +166,7 @@ def build_question_type_json_contract(
         "criterion": "sub_criteria 이름",
         "status": "present | partial | missing",
         "evidence": "답안에서 확인한 근거 또는 누락 설명",
-        "impact": "C 또는 D 점수 판단에 주는 영향"
+        "impact": "B, C 또는 D 점수 판단에 주는 영향"
       }}
     ],
     "c_fact_focus_coverage": {{
@@ -178,7 +179,7 @@ def build_question_type_json_contract(
     }},
     "missing_sub_criteria": [],
     "overall_coverage": "strong | adequate | weak | poor",
-    "scoring_hint": "C/D 항목을 어떻게 보수적으로 볼지 설명"
+    "scoring_hint": "B/C/D 항목을 어떻게 보수적으로 볼지 설명"
   }}
 }}
 

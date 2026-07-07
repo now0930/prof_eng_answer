@@ -1,6 +1,6 @@
 {
   "name": "layered_gate_scoring_model",
-  "version": "2026-06-28-v2-demand-axis-json-only",
+  "version": "2026-07-07-v3-requirement-completeness",
   "editable": true,
   "description": "기술사 답안 채점용 단계형 게이트 모델. 키워드 기반 채점이 아니라 문제점 중심, fact anchor 기반 설명, 현장 적용·제언, 연결성, 면접 방어 가능성을 평가한다.",
   "total_points": 25,
@@ -13,8 +13,8 @@
     "practical_target_score_per_question": 17.5,
     "high_score_target_per_100": 80,
     "high_score_target_per_question": 20,
-    "structure_only_score_per_100": 24,
-    "structure_only_score_per_question": 6,
+    "structure_only_score_per_100": 20,
+    "structure_only_score_per_question": 5,
     "fact_only_cap_score_per_100": {
       "min": 41,
       "max": 42
@@ -85,33 +85,35 @@
   "layers": [
     {
       "id": "A",
-      "name": "배경과 문제 진입",
-      "points": 4,
+      "name": "문제 진입·답안 구조",
+      "points": 3,
       "main_raters": [
         "professional_engineer"
       ],
-      "description": "자유 배경이 문제점으로 자연스럽게 연결되는지 평가한다.",
+      "description": "문제의 배경과 핵심 쟁점을 간결하게 제시하고, 답안 전개 구조가 채점자가 확인하기 쉽게 구성되었는지 평가한다.",
       "scoring_focus": [
         "문제와 무관한 일반론이 아닌가",
-        "배경이 문제점으로 자연스럽게 진입하는가",
-        "답안의 도입이 지나치게 장황하지 않은가"
+        "배경 또는 정의가 문제의 핵심 쟁점으로 자연스럽게 이어지는가",
+        "답안의 목차와 전개 순서가 명확한가",
+        "도입이 지나치게 장황하지 않은가"
       ]
     },
     {
       "id": "B",
-      "name": "문제 요구 파악",
-      "points": 5,
+      "name": "문제 요구 해석·완전성",
+      "points": 6,
       "main_raters": [
         "professor",
         "professional_engineer"
       ],
-      "description": "문제에서 요구한 핵심 문제를 정확히 잡았는지 평가한다.",
+      "description": "문제의 요구동사와 세부 요구항목을 정확히 해석하고, 모든 핵심 요구에 빠짐없이 직접 답했는지 평가한다.",
       "scoring_focus": [
-        "문제가 묻는 핵심 문제를 정확히 잡았는가",
-        "문제점의 현장적 의미를 이해했는가",
-        "문제점이 답안의 중심축으로 제시되었는가",
-        "문제문이 제시한 기준축, 예: 감쇠비·비교축·절차·판정기준을 답안 중심으로 삼았는가",
-        "관련 이론으로 우회하지 않고 출제자가 요구한 응답을 직접 설명했는가"
+        "설명·비교·선정·절차·계산·평가 등 요구동사를 정확히 해석했는가",
+        "문제문에 포함된 모든 세부 요구항목을 식별했는가",
+        "각 요구항목이 답안 목차 또는 본문에 명시적으로 대응되는가",
+        "핵심 요구항목을 누락하거나 일부만 답하지 않았는가",
+        "관련 이론으로 우회하지 않고 출제 요구에 직접 답했는가",
+        "비교축·판정기준·적용조건 등 문제에서 제시한 기준축을 유지했는가"
       ]
     },
     {

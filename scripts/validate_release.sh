@@ -73,6 +73,10 @@ rm -f reports/model_answer_relationship_validation.md
 
 echo
 echo
+echo "===== requirement coverage regression ====="
+python3 scripts/test_requirement_coverage.py
+
+echo
 echo "===== bot logging regression ====="
 python3 scripts/test_bot_logging.py
 

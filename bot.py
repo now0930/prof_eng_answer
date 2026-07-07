@@ -974,6 +974,17 @@ def _format_question_type_coverage_display(grade):
     d_missing = coverage_summary.get("d_field_judgement_focus_missing_text")
     missing_sub = coverage_summary.get("missing_sub_criteria_text")
 
+    total_count = coverage_summary.get("sub_criteria_total", 0)
+    present_count = coverage_summary.get("sub_criteria_present", 0)
+    partial_count = coverage_summary.get("sub_criteria_partial", 0)
+    missing_count = coverage_summary.get("sub_criteria_missing", 0)
+
+    weighted_score = coverage_summary.get("weighted_coverage_score")
+    weighted_percent = coverage_summary.get("weighted_coverage_percent")
+
+    partial_criteria = coverage_summary.get("partial_criteria") or []
+    missing_criteria = coverage_summary.get("missing_criteria") or []
+
     lines = []
 
     if question_type or name_ko:
@@ -983,9 +994,36 @@ def _format_question_type_coverage_display(grade):
         lines.append(f"문제 유형 lens: {label}")
 
     if overall:
-        lines.append(f"세부 요구 충족도: {overall}")
+        lines.append(f"전체 판정: {overall}")
 
-    if missing_sub:
+    if total_count:
+        try:
+            percent_text = f"{float(weighted_percent):.1f}%"
+            score_text = f"{float(weighted_score):g}/{int(total_count)}"
+        except (TypeError, ValueError):
+            percent_text = "-"
+            score_text = "-"
+
+        lines.append(
+            "요구사항 충족률: "
+            f"{percent_text} (가중 {score_text})"
+        )
+        lines.append(
+            "상태: "
+            f"충족 {present_count} · "
+            f"부분 {partial_count} · "
+            f"누락 {missing_count}"
+        )
+
+    partial_text = _qtype_short_join(partial_criteria, limit=4)
+    missing_text = _qtype_short_join(missing_criteria, limit=4)
+
+    if partial_text:
+        lines.append(f"부분 충족: {partial_text}")
+
+    if missing_text:
+        lines.append(f"누락: {missing_text}")
+    elif missing_sub:
         lines.append(f"부족한 세부 범주: {missing_sub}")
 
     if c_missing:
@@ -1014,7 +1052,7 @@ def _format_question_type_coverage_display(grade):
     if not lines:
         return ""
 
-    return "\n\n[Question Type Coverage]\n" + "\n".join(f"- {line}" for line in lines)
+    return "\n\n[요구사항 충족도]\n" + "\n".join(f"- {line}" for line in lines)
 
 def format_result(*args, **kwargs):
     text = _ORIGINAL_FORMAT_RESULT_QTYPE_COVERAGE_V2(*args, **kwargs)
@@ -1028,7 +1066,7 @@ def format_result(*args, **kwargs):
     if not isinstance(text, str):
         return text
 
-    if "[Question Type Coverage]" in text:
+    if "[요구사항 충족도]" in text:
         return text
 
     return text.rstrip() + extra

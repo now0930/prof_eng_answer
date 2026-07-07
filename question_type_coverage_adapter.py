@@ -57,6 +57,68 @@ def _criteria_counts(coverage: dict[str, Any]) -> dict[str, int]:
     return counts
 
 
+def _criteria_details(
+    coverage: dict[str, Any],
+) -> dict[str, Any]:
+    rows = _as_list(coverage.get("sub_criteria_coverage"))
+
+    status_rows: list[dict[str, str]] = []
+    present: list[str] = []
+    partial: list[str] = []
+    missing: list[str] = []
+
+    weighted_score = 0.0
+
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+
+        criterion = str(row.get("criterion") or "").strip()
+        status = str(row.get("status") or "").strip().lower()
+        evidence = str(row.get("evidence") or "").strip()
+
+        if not criterion:
+            continue
+
+        if status not in {"present", "partial", "missing"}:
+            status = "missing"
+
+        status_rows.append({
+            "criterion": criterion,
+            "status": status,
+            "evidence": evidence,
+        })
+
+        if status == "present":
+            present.append(criterion)
+            weighted_score += 1.0
+        elif status == "partial":
+            partial.append(criterion)
+            weighted_score += 0.5
+        else:
+            missing.append(criterion)
+
+    total = len(status_rows)
+
+    if total:
+        ratio = round(weighted_score / total, 4)
+        percent = round(ratio * 100, 1)
+    else:
+        ratio = None
+        percent = None
+
+    return {
+        "status_rows": status_rows,
+        "present_criteria": present,
+        "partial_criteria": partial,
+        "missing_criteria": missing,
+        "weighted_score": round(weighted_score, 2),
+        "weighted_ratio": ratio,
+        "weighted_percent": percent,
+        "total": total,
+    }
+
+
 def _missing_criteria_text(coverage: dict[str, Any], limit: int = 5) -> str:
     missing = _as_list(coverage.get("missing_sub_criteria"))
 
@@ -116,6 +178,7 @@ def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, A
     overall = str(coverage.get("overall_coverage", "")).strip().lower()
 
     counts = _criteria_counts(coverage)
+    details = _criteria_details(coverage)
     missing_text = _missing_criteria_text(coverage)
 
     c_missing = _focus_missing_text(
@@ -133,11 +196,18 @@ def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, A
         "sub_criteria_present": counts["present"],
         "sub_criteria_partial": counts["partial"],
         "sub_criteria_missing": counts["missing"],
+        "weighted_coverage_score": details["weighted_score"],
+        "weighted_coverage_ratio": details["weighted_ratio"],
+        "weighted_coverage_percent": details["weighted_percent"],
+        "criteria_status_rows": details["status_rows"],
+        "present_criteria": details["present_criteria"],
+        "partial_criteria": details["partial_criteria"],
+        "missing_criteria": details["missing_criteria"],
         "missing_sub_criteria_text": missing_text,
         "c_fact_focus_missing_text": c_missing,
         "d_field_judgement_focus_missing_text": d_missing,
         "note": (
-            "이 평가는 점수를 직접 변경하지 않고, C항목 Fact 설명과 "
+            "이 평가는 B항목 요구사항 완전성과 C항목 Fact 설명, "
             "D항목 현장 판단 피드백을 보강합니다."
         ),
     }
@@ -303,7 +373,7 @@ try:
                 "c_fact_focus": question_type_c_focus(qtype),
                 "d_field_judgement_focus": question_type_d_focus(qtype),
                 "note": (
-                    "question_type_v2는 점수 체계가 아니라 C항목 Fact 전개와 "
+                    "question_type_v2는 B항목 요구사항 완전성과 C항목 Fact 전개, "
                     "D항목 현장 판단을 보완하는 평가 lens입니다."
                 ),
             }
