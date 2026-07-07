@@ -150,7 +150,11 @@ def _build_prompt(*args, **kwargs) -> str:
         "- E. 연결성·면접 방어 가능성\n\n"
         "B항목에서는 문제문의 요구동사와 세부 요구항목을 "
         "모두 식별하고, 답안이 각 요구에 빠짐없이 직접 "
-        "응답했는지 평가하십시오.\n\n"
+        "응답했는지 평가하십시오.\n"
+        "question_type_coverage 안에 explicit_requirement_coverage를 "
+        "포함하고, 문제문에 직접 명시된 요구만 present, partial, "
+        "missing으로 평가하십시오. 유형별 권장 항목은 명시적 요구로 "
+        "간주하지 마십시오.\n\n"
         "출력 JSON 형식:\n"
         "{\n"
         '  "ok": true,\n'

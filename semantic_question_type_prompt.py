@@ -196,3 +196,117 @@ def build_question_type_json_contract(
 7. 기존 layers, fact_anchor_review, connection_review도 유지하되 question_type_coverage를 반드시 추가한다.
 """.strip()
 
+
+
+# === explicit question requirement contract v1 ===
+# Separate question-text demands from question-type high-score sub-criteria.
+def _explicit_requirement_contract_v1(
+    question_text: str | None,
+) -> str:
+    return f"""
+[문제문 명시적 요구사항 평가]
+
+문제문:
+{question_text or ""}
+
+question_type의 sub_criteria와 문제문이 직접 요구한 항목을 구분하라.
+
+- sub_criteria:
+  고득점 답안을 위한 유형별 전개 lens이다.
+- explicit_requirement_coverage:
+  문제문에 실제로 명시된 요구동사와 세부 요구항목만 평가한다.
+
+question_type_coverage 내부에 반드시 다음 객체를 포함하라.
+
+"explicit_requirement_coverage": {{
+  "source": "question_text",
+  "extraction_confidence": "high | medium | low",
+  "requirements": [
+    {{
+      "requirement": "문제문이 직접 요구한 독립 항목",
+      "status": "present | partial | missing",
+      "evidence": "답안에서 확인한 근거 또는 누락 설명",
+      "is_core": true
+    }}
+  ]
+}}
+
+판정 규칙:
+1. 문제문이 직접 요구한 항목만 requirements에 포함한다.
+2. background_need, field_judgement, trade-off 등 유형별 권장 요소를
+   문제문이 직접 요구하지 않았다면 포함하지 않는다.
+3. 하나의 문장에 여러 요구가 있으면 독립 요구로 분리한다.
+4. 명확히 답했으면 present.
+5. 일부만 답했으면 partial.
+6. 전혀 답하지 않았으면 missing.
+7. is_core=true는 문제문에 직접 명시된 요구에만 사용한다.
+8. 문제문 추출이 불명확하면 extraction_confidence를 low로 둔다.
+9. 답안의 품질이 낮다는 이유만으로 missing 처리하지 말고,
+   요구항목 자체에 응답하지 않은 경우에만 missing으로 판정한다.
+""".strip()
+
+
+_ORIGINAL_BUILD_QTYPE_GUIDANCE_EXPLICIT_REQ_V1 = (
+    build_question_type_semantic_guidance
+)
+
+
+def build_question_type_semantic_guidance(
+    question_text: str | None,
+    existing_question_type: str | None = None,
+) -> str:
+    base = _ORIGINAL_BUILD_QTYPE_GUIDANCE_EXPLICIT_REQ_V1(
+        question_text,
+        existing_question_type=existing_question_type,
+    )
+    return (
+        base
+        + "\n\n"
+        + _explicit_requirement_contract_v1(question_text)
+    )
+
+
+_ORIGINAL_BUILD_QTYPE_JSON_CONTRACT_EXPLICIT_REQ_V1 = (
+    build_question_type_json_contract
+)
+
+
+def build_question_type_json_contract(
+    question_text: str | None,
+    existing_question_type: str | None = None,
+) -> str:
+    base = _ORIGINAL_BUILD_QTYPE_JSON_CONTRACT_EXPLICIT_REQ_V1(
+        question_text,
+        existing_question_type=existing_question_type,
+    )
+    return (
+        base
+        + "\n\n"
+        + _explicit_requirement_contract_v1(question_text)
+    )
+
+
+_ORIGINAL_EMPTY_QTYPE_COVERAGE_EXPLICIT_REQ_V1 = (
+    empty_question_type_coverage
+)
+
+
+def empty_question_type_coverage(
+    question_text: str | None,
+    existing_question_type: str | None = None,
+) -> dict[str, Any]:
+    coverage = _ORIGINAL_EMPTY_QTYPE_COVERAGE_EXPLICIT_REQ_V1(
+        question_text,
+        existing_question_type=existing_question_type,
+    )
+
+    coverage.setdefault(
+        "explicit_requirement_coverage",
+        {
+            "source": "fallback",
+            "extraction_confidence": "low",
+            "requirements": [],
+        },
+    )
+
+    return coverage

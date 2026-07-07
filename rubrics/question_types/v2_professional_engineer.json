@@ -1,15 +1,15 @@
 {
   "version": "2.0",
-  "description": "산업계측제어기술사 2~4교시 답안용 question_type 대분류와 세부 채점 lens. question_type은 A/B/C/D/E 점수체계를 대체하지 않고 C항목 Fact 전개와 D항목 현장 판단을 보완한다.",
+  "description": "산업계측제어기술사 2~4교시 답안용 question_type 대분류와 세부 채점 lens. question_type은 A/B/C/D/E 점수체계를 대체하지 않고 B항목 요구사항 완전성, C항목 Fact 전개와 D항목 현장 판단을 보완한다.",
   "scoring_principle": {
     "common_structure": [
-      "A. 배경과 문제 진입",
-      "B. 문제 요구 파악",
-      "C. Fact 기반 설명",
-      "D. 현장 적용·판단·제언",
+      "A. 문제 진입·답안 구조",
+      "B. 문제 요구 해석·완전성",
+      "C. 유형별 Fact 기반 내용 설명",
+      "D. 현장 적용·설계 판단·제언",
       "E. 연결성·면접 방어 가능성"
     ],
-    "question_type_role": "question_type은 별도 점수체계가 아니라 C항목의 fact 설명 방향과 D항목의 현장 판단 방향을 정하는 lens이다.",
+    "question_type_role": "question_type은 별도 점수체계가 아니라 B항목의 요구사항 완전성, C항목의 fact 설명 방향과 D항목의 현장 판단 방향을 정하는 lens이다.",
     "first_period_policy": "1교시 단답형은 분석 대상에서 제외한다. DEFINE은 신규 체계에서 사용하지 않는다."
   },
   "types": {

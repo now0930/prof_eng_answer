@@ -1,8 +1,8 @@
 """Question type taxonomy for professional engineer answer grading.
 
 The v2 taxonomy uses broad answer-development lenses instead of short-answer
-style labels. The question_type does not replace A/B/C/D/E scoring. It only
-guides C fact explanation and D field judgement.
+style labels. The question_type does not replace A/B/C/D/E scoring. It guides
+B requirement completeness, C fact explanation, and D field judgement.
 """
 
 from __future__ import annotations

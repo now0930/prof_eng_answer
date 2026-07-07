@@ -702,6 +702,15 @@ def _alignment_penalty(alignment: Any) -> float:
 
 def _apply_numeric_flags(parsed: JsonDict) -> JsonDict:
     """Recalculate pass/target/high-score flags from final total_score."""
+    try:
+        from explicit_requirement_cap import (
+            enforce_existing_explicit_requirement_cap,
+        )
+
+        parsed = enforce_existing_explicit_requirement_cap(parsed)
+    except Exception:
+        pass
+
     total = _to_float(parsed.get("total_score"), 0.0) or 0.0
     max_score = _to_float(parsed.get("max_score"), 25.0) or 25.0
 

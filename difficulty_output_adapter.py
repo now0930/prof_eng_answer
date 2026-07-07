@@ -256,6 +256,9 @@ def _topic_importance_strategy_from_topic_id(topic_id: str | None, question_text
 
     return None
 
+from explicit_requirement_cap import apply_explicit_requirement_hard_cap
+
+
 def attach_difficulty_strategy_to_grade(
     grade: Dict[str, Any],
     question_text: Optional[str] = None
@@ -263,6 +266,7 @@ def attach_difficulty_strategy_to_grade(
     grade = attach_question_type_v2_to_grade(grade, question_text=question_text)
     grade = ensure_grade_question_type_coverage(grade, question_text=question_text)
     grade = attach_question_type_coverage_feedback(grade)
+    grade = apply_explicit_requirement_hard_cap(grade)
     grade = apply_question_type_coverage_score_adjustment(grade)
     if not isinstance(grade, dict):
         return grade

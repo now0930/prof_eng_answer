@@ -77,6 +77,10 @@ echo "===== requirement coverage regression ====="
 python3 scripts/test_requirement_coverage.py
 
 echo
+echo "===== explicit requirement cap regression ====="
+python3 scripts/test_explicit_requirement_cap.py
+
+echo
 echo "===== bot logging regression ====="
 python3 scripts/test_bot_logging.py
 

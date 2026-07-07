@@ -829,3 +829,54 @@ overall_coverage에는 unknown, fallback, not_evaluated를 쓰지 마라.
 except Exception as _qtype_wrapper_exc:
     # Do not break the grader import if the optional qtype wrapper fails.
     pass
+
+
+# === explicit question requirement final prompt wrapper v1 ===
+try:
+    _ORIGINAL_BUILD_GEMINI_PROMPT_EXPLICIT_REQ_V1 = (
+        build_gemini_grading_prompt
+    )
+
+    def build_gemini_grading_prompt(*args, **kwargs):
+        base = _ORIGINAL_BUILD_GEMINI_PROMPT_EXPLICIT_REQ_V1(
+            *args,
+            **kwargs,
+        )
+
+        question_text = (
+            args[0]
+            if args
+            else kwargs.get("question_text")
+        )
+
+        explicit_contract = f"""
+[FINAL MANDATORY EXPLICIT REQUIREMENT CONTRACT]
+
+문제문:
+{question_text or ""}
+
+최종 JSON의 question_type_coverage 내부에 반드시
+explicit_requirement_coverage를 포함하라.
+
+"explicit_requirement_coverage": {{
+  "source": "question_text",
+  "extraction_confidence": "high | medium | low",
+  "requirements": [
+    {{
+      "requirement": "문제문이 직접 요구한 독립 항목",
+      "status": "present | partial | missing",
+      "evidence": "답안 근거 또는 누락 설명",
+      "is_core": true
+    }}
+  ]
+}}
+
+유형별 권장 전개와 문제문 직접 요구를 혼동하지 마라.
+문제문에 직접 없는 background, 현장 판단, trade-off를
+명시적 요구사항으로 만들지 마라.
+""".strip()
+
+        return base + "\n\n" + explicit_contract
+
+except Exception:
+    pass

@@ -147,6 +147,21 @@ def evaluate_question_type_coverage_score_adjustment(
         decision["reason"] = "QUESTION_TYPE_COVERAGE_SCORE_MODE=off 이므로 보정하지 않습니다."
         return decision
 
+    hard_cap = grade.get("explicit_requirement_cap_evaluation")
+
+    if (
+        isinstance(hard_cap, dict)
+        and hard_cap.get("triggered")
+    ):
+        decision["hard_cap_supersedes_weak_penalty"] = True
+        decision["recommended_penalty"] = 0.0
+        decision["adjusted_score"] = score
+        decision["reason"] = (
+            "명시적 요구사항 hard cap이 적용되어 "
+            "기존 coverage 약한 감점은 중복 적용하지 않습니다."
+        )
+        return decision
+
     if score is None:
         decision["reason"] = "total_score가 없어 점수 보정을 계산하지 않습니다."
         return decision

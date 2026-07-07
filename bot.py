@@ -952,6 +952,7 @@ def _format_question_type_coverage_display(grade):
     qtype_v2 = grade.get("question_type_v2")
     coverage_summary = grade.get("question_type_coverage_summary")
     adjustment = grade.get("question_type_coverage_score_adjustment")
+    explicit_cap = grade.get("explicit_requirement_cap_evaluation")
 
     if not isinstance(qtype_v2, dict):
         qtype_v2 = {}
@@ -961,6 +962,9 @@ def _format_question_type_coverage_display(grade):
 
     if not isinstance(adjustment, dict):
         adjustment = {}
+
+    if not isinstance(explicit_cap, dict):
+        explicit_cap = {}
 
     question_type = (
         coverage_summary.get("question_type")
@@ -1031,6 +1035,30 @@ def _format_question_type_coverage_display(grade):
 
     if d_missing:
         lines.append(f"D항목 보완 필요: {d_missing}")
+
+    if explicit_cap.get("triggered"):
+        missing_requirements = explicit_cap.get(
+            "missing_requirements"
+        ) or []
+
+        missing_text = _qtype_short_join(
+            missing_requirements,
+            limit=4,
+        )
+
+        if missing_text:
+            lines.append(
+                f"명시적 핵심 요구 누락: {missing_text}"
+            )
+
+        b_cap = explicit_cap.get("b_cap")
+        total_cap = explicit_cap.get("total_cap")
+
+        if b_cap is not None and total_cap is not None:
+            lines.append(
+                f"요구 누락 상한: B≤{b_cap:g}/6, "
+                f"총점≤{total_cap:g}/25"
+            )
 
     if adjustment:
         mode = adjustment.get("mode")
