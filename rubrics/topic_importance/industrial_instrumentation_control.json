@@ -24,7 +24,8 @@
       ],
       "omission_risk": "high",
       "fatal_error_risk": "high",
-      "score_ceiling_policy": "theory_core_practical_ceiling"
+      "score_ceiling_policy": "theory_core_practical_ceiling",
+      "topic_scope": "umbrella_strategy"
     },
     {
       "topic_id": "feedback_system",
@@ -50,7 +51,8 @@
       ],
       "omission_risk": "high",
       "fatal_error_risk": "high",
-      "score_ceiling_policy": "theory_core_practical_ceiling"
+      "score_ceiling_policy": "theory_core_practical_ceiling",
+      "topic_scope": "umbrella_strategy"
     },
     {
       "topic_id": "second_order_system",
@@ -85,7 +87,8 @@
       ],
       "omission_risk": "high",
       "fatal_error_risk": "high",
-      "score_ceiling_policy": "theory_core_practical_ceiling"
+      "score_ceiling_policy": "theory_core_practical_ceiling",
+      "topic_scope": "umbrella_strategy"
     },
     {
       "topic_id": "stability_analysis",
@@ -112,7 +115,8 @@
       ],
       "omission_risk": "high",
       "fatal_error_risk": "high",
-      "score_ceiling_policy": "theory_core_practical_ceiling"
+      "score_ceiling_policy": "theory_core_practical_ceiling",
+      "topic_scope": "umbrella_strategy"
     },
     {
       "topic_id": "frequency_response",
@@ -138,7 +142,8 @@
       ],
       "omission_risk": "medium",
       "fatal_error_risk": "high",
-      "score_ceiling_policy": "theory_core_practical_ceiling"
+      "score_ceiling_policy": "theory_core_practical_ceiling",
+      "topic_scope": "umbrella_strategy"
     },
     {
       "topic_id": "cv_valve_flow_coefficient",

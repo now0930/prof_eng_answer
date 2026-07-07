@@ -205,6 +205,11 @@ echo
 echo "===== model answer router regression ====="
 python3 scripts/test_model_answer_router.py
 
+echo
+echo "===== topic importance scope validation regression ====="
+python3 scripts/test_topic_importance_scope_validation.py
+
+echo
 echo "===== whitespace check ====="
 git diff --check
 

@@ -32,6 +32,12 @@ EXPECTED_LAYERS = ["A", "B", "C", "D", "E"]
 EXPECTED_TOTAL_POINTS = 25.0
 TOL = 1e-6
 
+VALID_TOPIC_SCOPES = {
+    "fact_topic",
+    "umbrella_strategy",
+}
+UMBRELLA_TOPIC_SCOPE = "umbrella_strategy"
+
 
 EXISTING_VALIDATORS = [
     ("format", ["scripts/validate_rubric_bank_format.py"]),
@@ -338,15 +344,31 @@ def validate_topic_importance(
 
         topic_ids.append(topic_id)
 
-        # Topic Importance may contain umbrella/strategy topics that are broader
-        # than a single Fact Anchor topic. Existing validate-topic-importance
-        # allows this, so content validation reports it as a warning only.
+        topic_scope = str(topic.get("topic_scope", "")).strip()
+
+        if topic_scope and topic_scope not in VALID_TOPIC_SCOPES:
+            add_error(
+                errors,
+                "topic_importance.topic_scope",
+                f"{topic_id} has invalid topic_scope: {topic_scope}",
+            )
+
         if topic_id not in fact_topic_ids:
-            umbrella_topics.append(topic_id)
-            add_warning(
-                warnings,
-                "topic_importance.topic_id",
-                f"{topic_id} is not a fact_anchor topic_id; treated as umbrella/strategy topic",
+            if topic_scope == UMBRELLA_TOPIC_SCOPE:
+                umbrella_topics.append(topic_id)
+            else:
+                add_error(
+                    errors,
+                    "topic_importance.topic_id",
+                    f"{topic_id} is not a fact_anchor topic_id and must declare "
+                    f"topic_scope={UMBRELLA_TOPIC_SCOPE}",
+                )
+        elif topic_scope == UMBRELLA_TOPIC_SCOPE:
+            add_error(
+                errors,
+                "topic_importance.topic_scope",
+                f"{topic_id} matches a fact_anchor topic_id and cannot declare "
+                f"topic_scope={UMBRELLA_TOPIC_SCOPE}",
             )
 
     dup = duplicates(topic_ids)

@@ -34,6 +34,11 @@ VALID_SELECTION_IMPORTANCE = {
     "OPTIONAL",
 }
 
+VALID_TOPIC_SCOPES = {
+    "fact_topic",
+    "umbrella_strategy",
+}
+
 
 def load_topic_importance_bank(path: str | Path | None = None) -> dict[str, Any]:
     return read_json(project_path(path, TOPIC_IMPORTANCE_BANK))
@@ -46,6 +51,7 @@ def save_topic_importance_bank(data: dict[str, Any], path: str | Path | None = N
 def build_topic_importance_template(topic_id: str, label: str, difficulty: str) -> dict[str, Any]:
     return {
         "topic_id": topic_id,
+        "topic_scope": "fact_topic",
         "label": label,
         "aliases": [],
         "difficulty": difficulty,
@@ -99,6 +105,12 @@ def validate_topic_importance_bank_data(data: dict[str, Any]) -> list[str]:
         if topic_id in seen:
             errors.append(f"{prefix}: duplicated topic_id: {topic_id}")
         seen.add(topic_id)
+
+        topic_scope = topic.get("topic_scope")
+        if topic_scope is not None and topic_scope not in VALID_TOPIC_SCOPES:
+            errors.append(
+                f"{topic_id}: invalid topic_scope: {topic_scope}"
+            )
 
         if not str(topic.get("label", "")).strip():
             errors.append(f"{topic_id}: label missing")
