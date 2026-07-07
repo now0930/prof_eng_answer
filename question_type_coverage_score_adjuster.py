@@ -230,6 +230,7 @@ def apply_question_type_coverage_score_adjustment(
         return grade
 
     decision = evaluate_question_type_coverage_score_adjustment(grade)
+    _computed_adjusted_score = decision.get("adjusted_score")
     grade["question_type_coverage_score_adjustment"] = decision
 
     if (
@@ -257,5 +258,54 @@ def apply_question_type_coverage_score_adjustment(
             )
             if msg not in warnings:
                 warnings.append(msg)
+
+
+    # 계산된 coverage 감점이 현재 점수보다 낮으면 실제 점수 흐름에
+    # 반드시 반영한다. Coverage 평가는 점수를 올리는 용도로는 쓰지 않는다.
+    try:
+        _coverage_current_score = float(grade.get("total_score"))
+        _coverage_adjusted_score = float(_computed_adjusted_score)
+    except (TypeError, ValueError):
+        _coverage_current_score = None
+        _coverage_adjusted_score = None
+
+    if (
+        _coverage_current_score is not None
+        and _coverage_adjusted_score is not None
+        and _coverage_adjusted_score < _coverage_current_score
+    ):
+        grade["pre_question_type_coverage_total_score"] = round(
+            _coverage_current_score,
+            2,
+        )
+        grade["total_score"] = round(
+            max(0.0, _coverage_adjusted_score),
+            2,
+        )
+
+        decision["applied"] = True
+        decision["score_flow_applied"] = True
+        decision["original_score"] = round(
+            _coverage_current_score,
+            2,
+        )
+        decision["adjusted_score"] = grade["total_score"]
+
+        max_score = float(grade.get("max_score", 25.0) or 25.0)
+        grade["score_range"] = (
+            f"{max(0.0, grade['total_score'] - 0.5):.1f}~"
+            f"{min(max_score, grade['total_score'] + 0.5):.1f}"
+        )
+
+        for score_key, met_key in (
+            ("official_pass_score", "official_pass_met"),
+            ("practical_target_score", "practical_target_met"),
+            ("high_score_target", "high_score_met"),
+        ):
+            try:
+                target = float(grade.get(score_key))
+            except (TypeError, ValueError):
+                continue
+            grade[met_key] = grade["total_score"] >= target
 
     return grade

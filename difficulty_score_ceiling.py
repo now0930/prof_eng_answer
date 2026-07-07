@@ -332,6 +332,33 @@ def _attach_theory_core_fatal_feedback(
     _append_unique_messages(grade, "rewrite_advice", advice)
 
 
+
+def _prefer_question_type_adjusted_score(grade, fallback_score):
+    try:
+        fallback = float(fallback_score)
+    except (TypeError, ValueError):
+        fallback = 0.0
+
+    adjustment = grade.get(
+        "question_type_coverage_score_adjustment"
+    ) or {}
+
+    if not isinstance(adjustment, dict):
+        return round(fallback, 2), False
+
+    try:
+        adjusted = float(adjustment.get("adjusted_score"))
+    except (TypeError, ValueError):
+        return round(fallback, 2), False
+
+    adjusted = max(0.0, adjusted)
+
+    # Coverage 조정은 기존 점수를 낮출 때만 우선한다.
+    if adjusted < fallback:
+        return round(adjusted, 2), True
+
+    return round(fallback, 2), False
+
 def apply_difficulty_score_ceiling(
     grade: Dict[str, Any],
     question_text: Optional[str] = None,
@@ -393,6 +420,27 @@ def apply_difficulty_score_ceiling(
     ):
         # Preserve pre-ceiling score for explanation, but keep user-facing
         # final score fields consistent with the capped score.
+        score, coverage_score_applied = (
+            _prefer_question_type_adjusted_score(
+                grade,
+                score,
+            )
+        )
+
+        if coverage_score_applied:
+            grade["total_score"] = score
+            grade[
+                "coverage_adjusted_score_applied_to_ceiling"
+            ] = True
+
+            adjustment = grade.get(
+                "question_type_coverage_score_adjustment"
+            )
+            if isinstance(adjustment, dict):
+                adjustment[
+                    "score_flow_applied_before_ceiling"
+                ] = True
+
         grade["pre_ceiling_total_score"] = round(float(score), 2)
 
         _set_score(grade, decision["capped_score"])

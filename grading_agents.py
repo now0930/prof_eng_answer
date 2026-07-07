@@ -2681,20 +2681,102 @@ def _phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model):
             max_score = max_by_layer.get(layer_id, float(layer.get("max", 0)))
             g_score = _phase6_clamp_score(g.get("score", 0), max_score)
 
-            new_layer["score_before_gemini"] = layer.get("score")
-            new_layer["score"] = g_score
-            new_layer["gemini_semantic_score"] = g_score
+            score_guard = _phase6_limit_gemini_score(
+                layer_id=layer_id,
+                base_score=layer.get("score", 0),
+                gemini_score=g_score,
+                max_score=max_score,
+            )
+            effective_score = score_guard["effective_score"]
+
+            new_layer["score_before_gemini"] = score_guard["base_score"]
+            new_layer["score"] = effective_score
+            new_layer["gemini_semantic_raw_score"] = (
+                score_guard["raw_gemini_score"]
+            )
+            new_layer["gemini_semantic_score"] = effective_score
+            new_layer["gemini_raise_cap"] = score_guard["raise_cap"]
+            new_layer["gemini_adjustment_limited"] = (
+                score_guard["raise_limited"]
+            )
             new_layer["gemini_reason"] = g.get("reason", "")
             new_layer["gemini_evidence"] = g.get("evidence", [])
+
+            limit_note = ""
+            if score_guard["raise_limited"]:
+                limit_note = (
+                    f" / Gemini 상향폭을 {score_guard['raise_cap']}점으로 "
+                    "제한함."
+                )
+
             new_layer["reason"] = (
                 f"Gemini 의미 평가: {g.get('reason', '')} "
                 f"/ 기존 휴리스틱 근거: {layer.get('reason', '')}"
+                f"{limit_note}"
             )
 
         out.append(new_layer)
 
     return out
 
+
+
+# Gemini semantic grader는 기존 deterministic/fact 점수를 보완한다.
+# 점수 하향은 그대로 반영하지만, 상향은 layer별 제한을 둔다.
+_PHASE6_GEMINI_LAYER_RAISE_CAPS = {
+    "A": 0.50,
+    "B": 0.50,
+    "C": 0.75,
+    "D": 0.75,
+    "E": 0.25,
+}
+
+
+def _phase6_limit_gemini_score(
+    layer_id,
+    base_score,
+    gemini_score,
+    max_score,
+):
+    try:
+        maximum = max(0.0, float(max_score))
+    except Exception:
+        maximum = 0.0
+
+    try:
+        base = float(base_score)
+    except Exception:
+        base = 0.0
+
+    try:
+        raw_gemini = float(gemini_score)
+    except Exception:
+        raw_gemini = base
+
+    base = max(0.0, min(maximum, base))
+    raw_gemini = max(0.0, min(maximum, raw_gemini))
+
+    raise_cap = float(
+        _PHASE6_GEMINI_LAYER_RAISE_CAPS.get(
+            str(layer_id),
+            0.50,
+        )
+    )
+
+    if raw_gemini <= base:
+        effective = raw_gemini
+        limited = False
+    else:
+        effective = min(raw_gemini, base + raise_cap)
+        limited = effective < raw_gemini
+
+    return {
+        "base_score": round(base, 2),
+        "raw_gemini_score": round(raw_gemini, 2),
+        "effective_score": round(effective, 2),
+        "raise_cap": round(raise_cap, 2),
+        "raise_limited": limited,
+    }
 
 def _phase6_merge_gemini_feedback(grade, gemini_eval):
     if not gemini_eval or not gemini_eval.get("ok"):
