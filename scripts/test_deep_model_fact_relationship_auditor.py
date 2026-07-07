@@ -3,6 +3,7 @@ from __future__ import annotations
 import copy
 import importlib.util
 import json
+import tempfile
 import unittest
 from pathlib import Path
 from types import ModuleType
@@ -85,6 +86,11 @@ class DeepModelFactRelationshipAuditorTest(
             1000,
         )
 
+        self.assertEqual(
+            ROOT,
+            self.auditor.ROOT,
+        )
+
         required = (
             "audit_topic",
             "write_reports",
@@ -136,6 +142,74 @@ class DeepModelFactRelationshipAuditorTest(
         ]
 
         self.assertEqual([], severe)
+
+
+    def test_write_reports_uses_repository_root_and_lf(
+        self,
+    ) -> None:
+        self.assertEqual(
+            ROOT,
+            self.auditor.ROOT,
+        )
+
+        rows = [
+            {
+                "severity": "OK",
+                "topic_id": "fixture_topic",
+                "model_variants": 1,
+                "fact_exists": True,
+                "anchor_count": 5,
+                "coverage_score": 1.0,
+                "anchor_coverage": "5/5",
+                "issues": ["OK"],
+            }
+        ]
+
+        original_md = self.auditor.OUT_MD
+        original_csv = self.auditor.OUT_CSV
+
+        try:
+            with tempfile.TemporaryDirectory() as tmp:
+                tmp_path = Path(tmp)
+                output_md = tmp_path / "audit.md"
+                output_csv = tmp_path / "audit.csv"
+
+                self.auditor.OUT_MD = output_md
+                self.auditor.OUT_CSV = output_csv
+                self.auditor.write_reports(rows)
+
+                self.assertTrue(output_md.exists())
+                self.assertTrue(output_csv.exists())
+
+                raw = output_csv.read_bytes()
+
+                self.assertNotIn(
+                    bytes([13]),
+                    raw,
+                )
+                self.assertEqual(
+                    2,
+                    raw.count(bytes([10])),
+                )
+
+                with output_csv.open(
+                    encoding="utf-8",
+                    newline="",
+                ) as handle:
+                    csv_lines = handle.readlines()
+
+                self.assertEqual(
+                    2,
+                    len(csv_lines),
+                )
+                self.assertTrue(
+                    csv_lines[0].startswith(
+                        "severity,topic_id,"
+                    )
+                )
+        finally:
+            self.auditor.OUT_MD = original_md
+            self.auditor.OUT_CSV = original_csv
 
     def test_broad_trigger_warning_uses_exact_match(
         self,

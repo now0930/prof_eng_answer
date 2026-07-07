@@ -25,6 +25,9 @@ python3 -m py_compile \
   scripts/validate_topic_pack_release.py \
   scripts/validate_model_answer_relationships.py \
   scripts/rubric_audit/report_priority_minor_relationships.py \
+  scripts/rubric_audit/audit_fact_anchor_quality.py \
+  scripts/rubric_audit/build_rubric_work_pack.py \
+  scripts/test_restored_rubric_audit_tools.py \
   scripts/rubric_audit/deep_model_fact_relationship_audit.py \
   scripts/test_model_answer_relationship_validator.py \
   scripts/test_priority_minor_reporter.py \
@@ -50,6 +53,13 @@ python3 -m unittest scripts.test_priority_minor_reporter
 echo
 echo "===== deep Model Answer ↔ Fact Anchor auditor regression ====="
 python3 -m unittest scripts.test_deep_model_fact_relationship_auditor
+
+echo "===== restored rubric audit tools regression ====="
+python3 -m unittest scripts.test_restored_rubric_audit_tools
+
+echo
+echo "===== rubric quality audit ====="
+python3 scripts/rubric_audit/run_rubric_audit.py
 
 echo
 echo "===== rubric validation: validate-all ====="

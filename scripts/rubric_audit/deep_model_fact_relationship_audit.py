@@ -9,7 +9,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parents[1] if Path(__file__).resolve().parent.name == "scripts" else Path.cwd()
+ROOT = Path(__file__).resolve().parents[2]
 
 MODEL_PATH = ROOT / "rubrics/model_answers/industrial_instrumentation_control.json"
 FACT_PATH = ROOT / "rubrics/fact_anchors/industrial_instrumentation_control.json"
@@ -379,7 +379,11 @@ def write_reports(rows: list[dict[str, Any]]) -> None:
         "issues",
     ]
     with OUT_CSV.open("w", encoding="utf-8", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=fieldnames)
+        w = csv.DictWriter(
+            f,
+            fieldnames=fieldnames,
+            lineterminator="\n",
+        )
         w.writeheader()
         for r in rows:
             rr = dict(r)
