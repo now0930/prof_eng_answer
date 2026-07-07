@@ -120,9 +120,32 @@ def similarity(a: Any, b: Any) -> float:
     if ca and cb:
         category_score = len(ca & cb) / len(ca | cb)
 
+    left_key = normalized_duplicate_key(clean_text(a))
+    right_key = normalized_duplicate_key(clean_text(b))
+
+    containment_score = 0.0
+
+    # expected_structure의 짧은 목차 문구에는 조사·어미가 없지만,
+    # outline에는 "개요에서", "준비 사항으로"처럼 붙어서 나타난다.
+    # 공백·구두점을 제거한 전체 문구가 포함되면 직접 매칭으로 본다.
+    # 한 글자 약어(P, I, D 등)는 과매칭 방지를 위해 제외한다.
+    if (
+        len(left_key) >= 2
+        and len(right_key) >= 2
+        and (
+            left_key in right_key
+            or right_key in left_key
+        )
+    ):
+        containment_score = 1.0
+
     # outline은 큰 흐름이고 feature는 세부 문장이므로
     # category 일치에 더 큰 가중치를 준다.
-    return max(token_score, category_score * 0.75 + token_score * 0.25)
+    return max(
+        containment_score,
+        token_score,
+        category_score * 0.75 + token_score * 0.25,
+    )
 
 
 def best_match_score(source: str, targets: list[str]) -> tuple[float, str]:

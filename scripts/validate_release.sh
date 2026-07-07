@@ -23,6 +23,8 @@ python3 -m py_compile \
   rubric_bank_paths.py \
   scripts/rubric_manager.py \
   scripts/validate_topic_pack_release.py \
+  scripts/validate_model_answer_relationships.py \
+  scripts/test_model_answer_relationship_validator.py \
   scripts/smoke_topic_pack.py
 
 echo
@@ -32,6 +34,10 @@ python3 -m unittest scripts.test_grade_output_formatter
 echo
 echo "===== logic_check evaluator regression tests ====="
 python3 -m unittest scripts.test_logic_check_evaluator
+
+echo
+echo "===== model-answer relationship validator regression ====="
+python3 -m unittest scripts.test_model_answer_relationship_validator
 
 echo
 echo "===== rubric validation: validate-all ====="
