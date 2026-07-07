@@ -73,6 +73,10 @@ rm -f reports/model_answer_relationship_validation.md
 
 echo
 echo
+echo "===== bot logging regression ====="
+python3 scripts/test_bot_logging.py
+
+echo
 echo "===== score flow guard regression ====="
 python3 scripts/test_score_flow_guards.py
 

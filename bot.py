@@ -71,11 +71,15 @@ def ensure_dirs():
 
 
 def log(msg):
+    """로그를 stdout에 한 번만 기록한다.
+
+    서비스 실행 스크립트가 stdout/stderr를
+    logs/prof_eng_answer.log로 리다이렉트하므로,
+    여기서 같은 파일에 직접 append하면 로그가 중복된다.
+    """
     ensure_dirs()
     line = f"[{datetime.now().isoformat(timespec='seconds')}] {msg}"
     print(line, flush=True)
-    with LOG_FILE.open("a", encoding="utf-8") as f:
-        f.write(line + "\n")
 
 
 def load_state():
