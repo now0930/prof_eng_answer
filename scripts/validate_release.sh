@@ -23,6 +23,7 @@ python3 -m py_compile \
   rubric_bank_paths.py \
   scripts/rubric_manager.py \
   scripts/validate_topic_pack_release.py \
+  scripts/validate_release_test_coverage.py \
   scripts/validate_model_answer_relationships.py \
   scripts/rubric_audit/report_priority_minor_relationships.py \
   scripts/rubric_audit/audit_fact_anchor_quality.py \
@@ -34,6 +35,10 @@ python3 -m py_compile \
   scripts/test_priority_minor_reporter.py \
   scripts/test_deep_model_fact_relationship_auditor.py \
   scripts/smoke_topic_pack.py
+
+echo
+echo "===== release test coverage validation ====="
+python3 scripts/validate_release_test_coverage.py
 
 echo
 echo "===== formatter regression tests ====="
