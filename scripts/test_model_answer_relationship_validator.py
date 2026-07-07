@@ -91,11 +91,42 @@ class RelationshipValidatorRegressionTest(unittest.TestCase):
             1.0,
         )
 
-    def test_real_cabinet_content_gap_remains_visible(self):
+    def test_repaired_cabinet_has_no_relationship_issue(self):
         row = self.by_id[
             "local_instrument_cabinet_installation_"
             "DIAGNOSIS_ACTION_v1"
         ]
+
+        self.assertEqual(
+            validate_expected_vs_outline(row),
+            [],
+        )
+        self.assertEqual(
+            validate_outline_vs_high_score(row),
+            [],
+        )
+
+    def test_synthetic_content_gap_remains_visible(self):
+        row = {
+            "id": "synthetic_content_gap_v1",
+            "topic_id": "synthetic_content_gap",
+            "expected_structure": [
+                "개요",
+                "원리",
+                "현장 적용",
+            ],
+            "model_answer_outline": [
+                "개요에서 측정 시스템의 목적과 적용 배경을 제시한다.",
+                "원리에서 입력과 출력의 기본 관계를 설명한다.",
+                "현장 적용에서 설치 위치와 운전 조건을 검토한다.",
+            ],
+            "high_score_features": [
+                "정확도와 정밀도의 차이를 수식과 사례로 설명한다.",
+                "교정 전후 오차와 측정 불확도를 정량 비교한다.",
+                "표준기 추적성과 교정 주기 관리 기준을 제시한다.",
+                "온도와 진동 등 환경 조건에 따른 오차를 평가한다.",
+            ],
+        }
 
         expected_issues = validate_expected_vs_outline(row)
         high_score_issues = validate_outline_vs_high_score(row)
