@@ -25,8 +25,10 @@ python3 -m py_compile \
   scripts/validate_topic_pack_release.py \
   scripts/validate_model_answer_relationships.py \
   scripts/rubric_audit/report_priority_minor_relationships.py \
+  scripts/rubric_audit/deep_model_fact_relationship_audit.py \
   scripts/test_model_answer_relationship_validator.py \
   scripts/test_priority_minor_reporter.py \
+  scripts/test_deep_model_fact_relationship_auditor.py \
   scripts/smoke_topic_pack.py
 
 echo
@@ -44,6 +46,10 @@ python3 -m unittest scripts.test_model_answer_relationship_validator
 echo
 echo "===== priority-minor reporter regression ====="
 python3 -m unittest scripts.test_priority_minor_reporter
+
+echo
+echo "===== deep Model Answer ↔ Fact Anchor auditor regression ====="
+python3 -m unittest scripts.test_deep_model_fact_relationship_auditor
 
 echo
 echo "===== rubric validation: validate-all ====="

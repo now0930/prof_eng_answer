@@ -198,6 +198,14 @@ def audit_rubric_quality() -> RubricAuditSummary:
     steps: list[tuple[str, list[str], bool]] = [
         ("validate_fact_anchor_bank", ["python3", "scripts/validate_fact_anchor_bank.py"], False),
         ("audit_fact_anchor_quality", ["python3", "scripts/rubric_audit/audit_fact_anchor_quality.py"], False),
+        (
+            "deep_model_fact_relationship_audit",
+            [
+                "python3",
+                "scripts/rubric_audit/deep_model_fact_relationship_audit.py",
+            ],
+            False,
+        ),
         ("validate_model_answer_bank", ["python3", "scripts/validate_model_answer_bank.py"], False),
         ("validate_model_answer_relationships", ["python3", "scripts/validate_model_answer_relationships.py"], False),
         (

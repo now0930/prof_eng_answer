@@ -9959,7 +9959,6 @@
         "OPC UA",
         "산업용 통신",
         "산업용",
-        "통신",
         "종류",
         "선정",
         "설명하시오",
@@ -10165,7 +10164,8 @@
       ],
       "revision_notes": [
         "deep_relation_cleanup: narrowed broad triggers and added protocol support terms.",
-        "aligned_with_model_answers=2026-07-01; triggers/aliases/core_terms/support_terms synchronized with model answer bank."
+        "aligned_with_model_answers=2026-07-01; triggers/aliases/core_terms/support_terms synchronized with model answer bank.",
+        "deep_relation_routing_cleanup=2026-07-07; removed exact broad trigger '통신' to prevent cross-topic routing."
       ]
     },
     {
@@ -11070,7 +11070,6 @@
         "설치",
         "고려사항",
         "설명하시오",
-        "압력",
         "계측",
         "zero/span",
         "impulse",
@@ -11277,7 +11276,8 @@
       ],
       "revision_notes": [
         "deep_relation_cleanup: removed overly broad trigger and added transmitter support terms.",
-        "aligned_with_model_answers=2026-07-01; triggers/aliases/core_terms/support_terms synchronized with model answer bank."
+        "aligned_with_model_answers=2026-07-01; triggers/aliases/core_terms/support_terms synchronized with model answer bank.",
+        "deep_relation_routing_cleanup=2026-07-07; removed exact broad trigger '압력' to prevent cross-topic routing."
       ]
     },
     {
