@@ -17,6 +17,8 @@ python3 -m py_compile \
   grade_output_summarizer.py \
   logic_check_evaluator.py \
   grade_score_reconciler.py \
+  grading_agents.py \
+  originality_grader.py \
   rubric_registry.py \
   rubric_bank_paths.py \
   scripts/rubric_manager.py \
@@ -79,6 +81,10 @@ python3 scripts/test_requirement_coverage.py
 echo
 echo "===== explicit requirement cap regression ====="
 python3 scripts/test_explicit_requirement_cap.py
+
+echo
+echo "===== originality and final score metadata regression ====="
+python3 -m unittest scripts.test_score_metadata_originality_consistency
 
 echo
 echo "===== bot logging regression ====="

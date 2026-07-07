@@ -700,8 +700,97 @@ def _alignment_penalty(alignment: Any) -> float:
     return table.get(str(alignment or "").strip(), 2.5)
 
 
+def _is_close_score(left: Any, right: Any, tolerance: float = 0.011) -> bool:
+    left_value = _to_float(left, None)
+    right_value = _to_float(right, None)
+
+    if left_value is None or right_value is None:
+        return False
+
+    return abs(left_value - right_value) <= tolerance
+
+
+def _final_binding_cap(parsed: JsonDict, total: float) -> float | None:
+    """
+    Return a cap only when it is actually binding at the final score.
+
+    A cap rule that was merely triggered, but did not lower the score, must
+    not be displayed as an applied cap.
+    """
+    explicit = parsed.get("explicit_requirement_cap_evaluation")
+    if isinstance(explicit, dict) and explicit.get("applied") is True:
+        cap = _to_float(explicit.get("total_cap"), None)
+        if cap is not None and _is_close_score(total, cap):
+            return cap
+
+    difficulty = parsed.get("difficulty_ceiling_evaluation")
+    if isinstance(difficulty, dict) and difficulty.get("cap_applied") is True:
+        cap = _to_float(
+            difficulty.get("capped_score")
+            or difficulty.get("recommended_cap"),
+            None,
+        )
+        if cap is not None and _is_close_score(total, cap):
+            return cap
+
+    volume = parsed.get("volume_evaluation")
+    if isinstance(volume, dict):
+        cap = _to_float(volume.get("cap"), None)
+        before = _to_float(
+            parsed.get("total_score_before_final_cap"),
+            None,
+        )
+
+        if (
+            cap is not None
+            and before is not None
+            and before > cap
+            and _is_close_score(total, cap)
+        ):
+            return cap
+
+    logic = parsed.get("logic_check_evaluation")
+    if isinstance(logic, dict):
+        fatal = (
+            logic.get("fatal") is True
+            or logic.get("fatal_error_detected") is True
+        )
+        if fatal:
+            return total
+
+    return None
+
+
+def _applied_upper_cap(parsed: JsonDict) -> float | None:
+    caps = []
+
+    explicit = parsed.get("explicit_requirement_cap_evaluation")
+    if isinstance(explicit, dict) and explicit.get("applied") is True:
+        cap = _to_float(explicit.get("total_cap"), None)
+        if cap is not None:
+            caps.append(cap)
+
+    difficulty = parsed.get("difficulty_ceiling_evaluation")
+    if isinstance(difficulty, dict) and difficulty.get("cap_applied") is True:
+        cap = _to_float(
+            difficulty.get("capped_score")
+            or difficulty.get("recommended_cap"),
+            None,
+        )
+        if cap is not None:
+            caps.append(cap)
+
+    return min(caps) if caps else None
+
+
 def _apply_numeric_flags(parsed: JsonDict) -> JsonDict:
-    """Recalculate pass/target/high-score flags from final total_score."""
+    """
+    Synchronize all user-facing numeric metadata from final total_score.
+
+    This function is called on every reconciliation return path, so it is the
+    canonical final writer for final_total_score, score_range, and threshold
+    flags.
+    """
     try:
         from explicit_requirement_cap import (
             enforce_existing_explicit_requirement_cap,
@@ -714,9 +803,36 @@ def _apply_numeric_flags(parsed: JsonDict) -> JsonDict:
     total = _to_float(parsed.get("total_score"), 0.0) or 0.0
     max_score = _to_float(parsed.get("max_score"), 25.0) or 25.0
 
-    official = _to_float(parsed.get("official_pass_score"), round(max_score * 0.60, 2))
-    practical = _to_float(parsed.get("practical_target_score"), round(max_score * 0.70, 2))
-    high = _to_float(parsed.get("high_score_target"), round(max_score * 0.80, 2))
+    total = round(max(0.0, min(total, max_score)), 2)
+    parsed["total_score"] = total
+    parsed["final_total_score"] = total
+
+    binding_cap = _final_binding_cap(parsed, total)
+
+    if binding_cap is not None:
+        parsed["score_range"] = f"{total:g}점 cap 적용"
+    else:
+        lower = max(0.0, total - 0.5)
+        upper = min(max_score, total + 0.5)
+
+        applied_upper_cap = _applied_upper_cap(parsed)
+        if applied_upper_cap is not None:
+            upper = min(upper, applied_upper_cap)
+
+        parsed["score_range"] = f"{lower:.1f}~{upper:.1f}"
+
+    official = _to_float(
+        parsed.get("official_pass_score"),
+        round(max_score * 0.60, 2),
+    )
+    practical = _to_float(
+        parsed.get("practical_target_score"),
+        round(max_score * 0.70, 2),
+    )
+    high = _to_float(
+        parsed.get("high_score_target"),
+        round(max_score * 0.80, 2),
+    )
 
     parsed["official_pass_score"] = official
     parsed["practical_target_score"] = practical

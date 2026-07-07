@@ -3356,6 +3356,167 @@ def _phase8_clamp(value, low=0.0, high=1.0):
     return max(low, min(high, v))
 
 
+def _phase8_normalize_originality_evaluation(parsed):
+    """
+    Normalize Gemini originality metadata against its own O1~O5 anchors.
+
+    Gemini may return a raw score that contradicts both average_level and
+    individual anchor levels. Anchor-derived score is therefore treated as
+    the maximum score supported by the structured evidence.
+
+    A model-reported score lower than the anchor-derived score is preserved
+    as the conservative holistic judgment. The normalizer never raises the
+    model-reported score.
+    """
+    if not isinstance(parsed, dict):
+        return {}
+
+    levels = []
+
+    for row in parsed.get("anchors") or []:
+        if not isinstance(row, dict):
+            continue
+
+        try:
+            level = float(row.get("level"))
+        except (TypeError, ValueError):
+            continue
+
+        levels.append(_phase8_clamp(level, 0.0, 1.0))
+
+    # Preserve the original Gemini value for diagnostics. This function is
+    # called both immediately after evaluation and again before applying the
+    # D/E bonus, so prefer the already-preserved value on repeated calls.
+    reported_candidate = parsed.get(
+        "reported_raw_originality_score"
+    )
+
+    if reported_candidate is None:
+        reported_candidate = parsed.get("raw_originality_score")
+
+    reported_raw = None
+    bounded_reported_raw = None
+
+    try:
+        if reported_candidate is not None:
+            reported_raw = float(reported_candidate)
+            bounded_reported_raw = _phase8_clamp(
+                reported_raw,
+                0.0,
+                2.0,
+            )
+    except (TypeError, ValueError):
+        reported_raw = None
+        bounded_reported_raw = None
+
+    structured_score_available = bool(levels)
+
+    if levels:
+        anchor_average = sum(levels) / len(levels)
+        anchor_score = anchor_average * 2.0
+
+        if bounded_reported_raw is None:
+            effective_raw = anchor_score
+            source = "anchor_derived"
+        else:
+            effective_raw = min(
+                bounded_reported_raw,
+                anchor_score,
+            )
+            source = (
+                "reported_raw"
+                if bounded_reported_raw <= anchor_score
+                else "anchor_upper_bound"
+            )
+
+        parsed["average_level"] = round(anchor_average, 3)
+        parsed["anchor_derived_originality_score"] = round(
+            anchor_score,
+            3,
+        )
+    else:
+        average_candidate = parsed.get("average_level")
+        average = 0.0
+
+        if average_candidate is not None:
+            try:
+                average = float(average_candidate)
+                average = _phase8_clamp(
+                    average,
+                    0.0,
+                    1.0,
+                )
+                structured_score_available = True
+            except (TypeError, ValueError):
+                average = 0.0
+
+        anchor_average = average
+        anchor_score = average * 2.0
+
+        if not structured_score_available:
+            # A standalone raw score has no structured evidence supporting
+            # it. Do not award originality points from that value alone.
+            effective_raw = 0.0
+            source = "no_structured_evidence"
+        elif bounded_reported_raw is None:
+            effective_raw = anchor_score
+            source = "average_level_fallback"
+        else:
+            effective_raw = min(
+                bounded_reported_raw,
+                anchor_score,
+            )
+            source = (
+                "reported_raw"
+                if bounded_reported_raw <= anchor_score
+                else "average_level_upper_bound"
+            )
+
+        parsed["average_level"] = round(anchor_average, 3)
+        parsed["anchor_derived_originality_score"] = round(
+            anchor_score,
+            3,
+        )
+
+    parsed["reported_raw_originality_score"] = (
+        round(reported_raw, 3)
+        if reported_raw is not None
+        else None
+    )
+    parsed["bounded_reported_raw_originality_score"] = (
+        round(bounded_reported_raw, 3)
+        if bounded_reported_raw is not None
+        else None
+    )
+    parsed["raw_originality_score"] = round(effective_raw, 3)
+    parsed["originality_score_source"] = source
+
+    adjustment_applied = (
+        reported_raw is not None
+        and abs(reported_raw - effective_raw) > 1e-9
+    )
+
+    parsed["originality_score_consistency_adjustment"] = {
+        "applied": adjustment_applied,
+        "reported_raw_score": (
+            round(reported_raw, 3)
+            if reported_raw is not None
+            else None
+        ),
+        "anchor_average_level": round(anchor_average, 3),
+        "anchor_derived_score": round(anchor_score, 3),
+        "effective_raw_score": round(effective_raw, 3),
+        "policy": (
+            "구조화된 O1~O5 anchor 또는 average_level이 지지하는 "
+            "점수보다 Gemini raw 점수가 높으면 구조화 산출값으로 "
+            "제한한다. 구조화 근거가 전혀 없으면 raw 점수만으로 "
+            "가점을 부여하지 않으며, 더 낮은 Gemini 평가는 유지한다."
+        ),
+    }
+
+    return parsed
+
+
 def _phase8_get_layer_id(row):
     if not isinstance(row, dict):
         return ""
@@ -3498,6 +3659,8 @@ def _phase8_run_originality_evaluator(input_text, answer_text, layer_scores, vol
         else:
             parsed = _phase8_fallback_originality_evaluation(answer_text)
 
+        parsed = _phase8_normalize_originality_evaluation(parsed)
+
         eval_data = {
             "ok": result.get("ok"),
             "error": result.get("error", ""),
@@ -3521,6 +3684,7 @@ def _phase8_run_originality_evaluator(input_text, answer_text, layer_scores, vol
 
     except Exception as e:
         parsed = _phase8_fallback_originality_evaluation(answer_text)
+        parsed = _phase8_normalize_originality_evaluation(parsed)
         eval_data = {
             "ok": False,
             "error": repr(e),
@@ -3540,12 +3704,13 @@ def _phase8_run_originality_evaluator(input_text, answer_text, layer_scores, vol
 def _phase8_apply_originality_to_layer_scores(layer_scores, originality_eval, volume):
     parsed = (originality_eval or {}).get("parsed") or {}
 
-    raw_score = parsed.get("raw_originality_score")
-    if raw_score is None:
-        avg = parsed.get("average_level", 0.0)
-        raw_score = _phase8_clamp(avg, 0.0, 1.0) * 2.0
+    parsed = _phase8_normalize_originality_evaluation(parsed)
 
-    raw_score = _phase8_clamp(raw_score, 0.0, 2.0)
+    raw_score = _phase8_clamp(
+        parsed.get("raw_originality_score"),
+        0.0,
+        2.0,
+    )
 
     c_score = _phase8_layer_score(layer_scores, "C", 0.0)
     d_score = _phase8_layer_score(layer_scores, "D", 0.0)

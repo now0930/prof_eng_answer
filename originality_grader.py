@@ -70,6 +70,12 @@ O5. 검증 가능성
 0.9 = 현장 조건과 trade-off가 구체적
 1.0 = 대안, 제약, 검증, 우선순위가 모두 명확
 
+점수 계산 규칙:
+- average_level은 O1~O5 level의 산술평균이다.
+- raw_originality_score는 average_level × 2.0이다.
+- raw_originality_score의 허용 범위는 0.0~2.0이다.
+- 총평과 anchor level이 부정적인데 높은 raw 점수를 부여하지 마라.
+
 반드시 JSON만 출력하라. 설명문, markdown, 코드블록은 출력하지 마라.
 
 JSON schema:
