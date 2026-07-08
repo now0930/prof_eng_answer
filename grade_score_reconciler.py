@@ -952,11 +952,6 @@ def reconcile_grade_score(
         return _apply_numeric_flags(parsed)
 
     parsed["total_score"] = adjusted
-    parsed["score_range"] = (
-        f"{max(0.0, adjusted - 0.5):.1f}~"
-        f"{min(max_score, adjusted + 0.5):.1f}"
-    )
-
     cap_eval["cap_applied"] = False
     cap_eval["cap_overridden_by_llm_adjudication"] = True
     cap_eval["original_capped_score"] = current_score
@@ -974,14 +969,6 @@ def reconcile_grade_score(
     parsed["total_score"] = adjusted
     parsed["final_total_score"] = adjusted
     parsed["pre_ceiling_total_score"] = uncapped_score
-
-    try:
-        parsed["score_range"] = (
-            f"{max(0.0, adjusted - 0.5):.1f}~"
-            f"{min(max_score, adjusted + 0.5):.1f}"
-        )
-    except Exception:
-        pass
 
     cap_eval["reason"] = (
         f"THEORY_CORE strict ceiling 후보 {current_score}점이 산출되었으나, "
