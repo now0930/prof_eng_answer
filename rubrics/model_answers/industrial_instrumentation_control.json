@@ -1375,12 +1375,12 @@
         "업무 목적에 따른 Precision·Recall·F1-score 우선 지표 선정"
       ],
       "model_answer_outline": [
-        "분류 모델 성능평가의 목적을 제시하고 혼동행렬 기반의 TP, FP, FN, TN 관계를 정리한다.",
-        "Precision은 모델이 양성이라고 예측한 사례 중 실제 양성의 비율이며 오경보 또는 false alarm과 관련됨을 설명한다.",
-        "Recall은 실제 양성 사례 중 모델이 양성으로 검출한 비율이며 미검출 또는 missed detection과 관련됨을 설명한다.",
-        "F1-score는 Precision과 Recall의 조화평균으로 두 지표의 균형을 평가하는 지표임을 설명한다.",
-        "불량 검출, 안전 감시, 경보 시스템처럼 오경보와 미검출 비용이 다른 사례를 연결한다.",
-        "업무 목적에 따라 Precision, Recall, F1-score 중 어떤 지표를 우선할지 판단 기준을 제시한다."
+        "분류 모델 성능평가 목적과 혼동행렬 TP·FP·FN·TN 관계. TP, FP, FN, TN의 의미를 구분하고 분류 모델 성능지표가 이 값들에서 계산됨을 설명해야 한다. 혼동행렬은 실제 클래스와 예측 클래스의 조합을 TP, FP, FN, TN으로 구분한다. TP는 실제 양성을 양성으로 검출한 경우, FP는 실제 음성을 양성으로 잘못 판단한 오경보, FN은 실제 양성을 놓친 미검출, TN은 실제 음성을 음성으로 올바르게 판단한 경우이다. Precision, Recall, F1-score와 Accuracy는 이 네 값으로 계산한다.",
+        "Precision과 양성 예측 사례·실제 양성 비율·오경보 false alarm. Precision은 모델이 양성이라고 예측한 사례 중 실제 양성의 비율이며 오경보 또는 false alarm과 관련됨을 설명해야 한다. Precision=TP/(TP+FP)이며 양성으로 예측한 사례 중 실제 양성인 비율이다. FP가 증가하면 Precision이 낮아지므로 오경보, 정상 제품 폐기, 불필요한 정비 비용이 큰 업무에서 중요하다. 양성 예측이 없는 경우에는 분모가 0이 되므로 평가 도구의 zero-division 처리 기준도 명시한다.",
+        "Recall과 실제 양성 사례·양성 검출 비율·미검출 missed detection. Recall은 실제 양성 사례 중 모델이 양성으로 검출한 비율이며 미검출 또는 missed detection과 관련됨을 설명해야 한다. Recall=TP/(TP+FN)이며 실제 양성 사례 중 모델이 검출한 비율이다. FN이 증가하면 Recall이 낮아지므로 불량 누락, 고장 미검출, 안전사고 위험처럼 missed detection 비용이 큰 업무에서 우선한다. Recall은 민감도 또는 true positive rate와 같은 의미로 사용된다.",
+        "F1-score와 Precision·Recall 조화평균 및 균형 평가. F1-score는 Precision과 Recall의 조화평균으로 두 지표의 균형을 평가하는 지표임을 설명해야 한다. F1-score=2·Precision·Recall/(Precision+Recall)로 Precision과 Recall의 조화평균이다. 두 값 중 하나가 낮으면 F1-score도 크게 낮아지므로 두 지표의 균형을 평가하는 데 유용하다. 다중 클래스에서는 클래스별 지표와 함께 macro, micro, weighted 평균의 계산 기준과 class support를 구분해 해석한다.",
+        "불량 검출·안전 감시·경보 시스템의 오경보와 미검출 비용. Accuracy는 class imbalance에서 왜곡될 수 있으며, 문제의 비용 구조에 따라 Precision, Recall, F1-score를 선택적으로 해석해야 함을 설명해야 한다. Accuracy=(TP+TN)/(TP+TN+FP+FN)이지만 class imbalance에서는 다수 클래스만 맞혀도 높은 값이 나와 성능이 왜곡될 수 있다. 불량 검출과 안전 감시는 FN 비용을, 자동 정지와 정비 경보는 FP 비용을 우선 고려한다. 판정 임계값을 낮추면 일반적으로 Recall은 높아지고 FP 증가로 Precision은 낮아질 수 있으며, 임계값을 높이면 반대 경향이 나타난다.",
+        "업무 목적에 따른 Precision·Recall·F1-score 우선 지표 선정. 미검출 비용이 큰 안전·불량 검출은 Recall을, 오경보 비용이 큰 자동 정지·정비 알람은 Precision을 우선한다. 두 오류의 균형이 중요하고 클래스가 불균형하면 F1-score와 PR curve를 함께 본다. 업무 비용을 반영해 판정 임계값을 선정하고, 독립 검증 데이터의 혼동행렬과 클래스별 support를 확인한다. 운영 중에는 클래스 비율, Precision·Recall 변화와 data drift를 감시하고 재교정·재학습 및 기존 시스템 연동 비용을 반영한다."
       ],
       "high_score_features": [
         "TP, FP, FN, TN의 의미를 구분하고 분류 모델 성능지표가 이 값들에서 계산됨을 설명해야 한다.",
