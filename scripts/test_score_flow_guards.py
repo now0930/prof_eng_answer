@@ -17,6 +17,7 @@ from difficulty_score_ceiling import (
 )
 import question_type_coverage_score_adjuster as coverage_adjuster
 from grading_agents import (
+    _phase10_apply_generated_single_topic_overrides,
     _phase2_resolve_difficulty_topic_id,
     _phase2_resolve_logic_topic_id,
 )
@@ -365,6 +366,154 @@ class DifficultyTopicFallbackRegressionTest(unittest.TestCase):
         )
 
         self.assertIsNone(topic_id)
+
+
+
+
+class GeneratedSingleTopicOverrideRegressionTest(unittest.TestCase):
+    def setUp(self) -> None:
+        self.bank = {
+            "answers": [
+                {
+                    "topic_id": "generated_topic",
+                    "question_type": (
+                        "PRINCIPLE_INTERPRETATION"
+                    ),
+                }
+            ]
+        }
+
+    def test_general_primary_applies_both_overrides(self) -> None:
+        question_type, fact_eval = (
+            _phase10_apply_generated_single_topic_overrides(
+                self.bank,
+                {
+                    "primary_type": {
+                        "id": "GENERAL",
+                    }
+                },
+                {},
+            )
+        )
+
+        self.assertEqual(
+            question_type["primary_type"]["id"],
+            "PRINCIPLE_INTERPRETATION",
+        )
+        self.assertEqual(
+            fact_eval["topic_id"],
+            "generated_topic",
+        )
+
+    def test_malformed_primary_applies_both_overrides(self) -> None:
+        for malformed_primary in (
+            "GENERAL",
+            123,
+        ):
+            with self.subTest(
+                primary=malformed_primary,
+            ):
+                question_type, fact_eval = (
+                    _phase10_apply_generated_single_topic_overrides(
+                        self.bank,
+                        {
+                            "primary_type": malformed_primary,
+                        },
+                        {},
+                    )
+                )
+
+                self.assertEqual(
+                    question_type["primary_type"]["id"],
+                    "PRINCIPLE_INTERPRETATION",
+                )
+                self.assertEqual(
+                    fact_eval["topic_id"],
+                    "generated_topic",
+                )
+
+    def test_answers_none_is_ignored_safely(self) -> None:
+        original_question_type = {
+            "primary_type": {
+                "id": "GENERAL",
+            }
+        }
+        original_fact_eval = {}
+
+        question_type, fact_eval = (
+            _phase10_apply_generated_single_topic_overrides(
+                {
+                    "answers": None,
+                },
+                original_question_type,
+                original_fact_eval,
+            )
+        )
+
+        self.assertIs(
+            question_type,
+            original_question_type,
+        )
+        self.assertIs(
+            fact_eval,
+            original_fact_eval,
+        )
+
+    def test_strong_primary_is_preserved_and_fact_is_filled(
+        self,
+    ) -> None:
+        question_type, fact_eval = (
+            _phase10_apply_generated_single_topic_overrides(
+                self.bank,
+                {
+                    "primary_type": {
+                        "id": "COMPARE_SELECTION",
+                    }
+                },
+                {},
+            )
+        )
+
+        self.assertEqual(
+            question_type["primary_type"]["id"],
+            "COMPARE_SELECTION",
+        )
+        self.assertNotIn(
+            "generated_single_topic_override",
+            question_type,
+        )
+        self.assertEqual(
+            fact_eval["topic_id"],
+            "generated_topic",
+        )
+
+    def test_existing_fact_topic_is_preserved(self) -> None:
+        question_type, fact_eval = (
+            _phase10_apply_generated_single_topic_overrides(
+                self.bank,
+                {
+                    "primary_type": {
+                        "id": "GENERAL",
+                    }
+                },
+                {
+                    "topic_id": "existing_fact",
+                },
+            )
+        )
+
+        self.assertEqual(
+            question_type["primary_type"]["id"],
+            "PRINCIPLE_INTERPRETATION",
+        )
+        self.assertEqual(
+            fact_eval["topic_id"],
+            "existing_fact",
+        )
+        self.assertNotIn(
+            "generated_single_topic_override",
+            fact_eval,
+        )
 
 
 if __name__ == "__main__":

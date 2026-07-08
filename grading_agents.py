@@ -4104,6 +4104,103 @@ def _phase9_merge_question_type_feedback(grade, question_type_eval):
 # 모범 답안 Bank를 정답 매칭이 아니라 기준 답안으로 참조
 # ============================================================
 
+def _phase10_apply_generated_single_topic_overrides(
+    bank,
+    question_type_eval,
+    fact_eval,
+):
+    """Apply safe overrides for a generated bank with one model answer."""
+    answers = (
+        bank.get("answers")
+        if isinstance(bank, dict)
+        else None
+    )
+
+    if (
+        not isinstance(answers, list)
+        or len(answers) != 1
+        or not isinstance(answers[0], dict)
+    ):
+        return question_type_eval, fact_eval
+
+    only_answer = answers[0]
+    generated_topic_id = only_answer.get("topic_id")
+    generated_question_type = only_answer.get(
+        "question_type"
+    )
+
+    if (
+        isinstance(question_type_eval, dict)
+        and generated_question_type
+    ):
+        primary = question_type_eval.get("primary_type")
+        primary_id = (
+            primary.get("id")
+            if isinstance(primary, dict)
+            else None
+        )
+
+        weak_primary_types = {
+            "GENERAL",
+            "UNKNOWN",
+            "UNCLASSIFIED",
+            "NONE",
+        }
+
+        if (
+            not primary_id
+            or str(primary_id).strip().upper()
+            in weak_primary_types
+        ):
+            question_type_eval = dict(
+                question_type_eval
+            )
+            primary = (
+                dict(primary)
+                if isinstance(primary, dict)
+                else {}
+            )
+            primary["id"] = generated_question_type
+            primary.setdefault(
+                "name",
+                "generated single-topic inferred type",
+            )
+
+            question_type_eval["primary_type"] = primary
+            question_type_eval[
+                "generated_single_topic_override"
+            ] = {
+                "applied": True,
+                "reason": (
+                    "single generated model_answer with "
+                    "weak upstream question type"
+                ),
+                "from_question_type": primary_id,
+                "to_question_type": generated_question_type,
+                "topic_id": generated_topic_id,
+            }
+
+    if (
+        isinstance(fact_eval, dict)
+        and generated_topic_id
+        and not fact_eval.get("topic_id")
+    ):
+        fact_eval = dict(fact_eval)
+        fact_eval["topic_id"] = generated_topic_id
+        fact_eval[
+            "generated_single_topic_override"
+        ] = {
+            "applied": True,
+            "reason": (
+                "single generated model_answer supplied "
+                "missing fact_eval.topic_id"
+            ),
+            "topic_id": generated_topic_id,
+        }
+
+    return question_type_eval, fact_eval
+
+
 def _phase10_run_model_answer_reference(
     input_text,
     answer_text,
@@ -4138,48 +4235,14 @@ def _phase10_run_model_answer_reference(
         # being considered. This keeps generated-mode smoke tests focused on
         # topic-pack routing while leaving legacy behavior unchanged.
         if _os.getenv("RUBRIC_BANK_MODE", "generated").strip().lower() == "generated":
-            try:
-                answers = bank.get("answers", []) if isinstance(bank, dict) else []
-                if len(answers) == 1 and isinstance(answers[0], dict):
-                    only_answer = answers[0]
-                    generated_topic_id = only_answer.get("topic_id")
-                    generated_question_type = only_answer.get("question_type")
-
-                    if isinstance(question_type_eval, dict) and generated_question_type:
-                        primary = question_type_eval.get("primary_type")
-                        primary_id = None
-                        if isinstance(primary, dict):
-                            primary_id = primary.get("id")
-
-                        if not primary_id or str(primary_id).strip().upper() in {
-                            "GENERAL",
-                            "UNKNOWN",
-                            "UNCLASSIFIED",
-                            "NONE",
-                        }:
-                            question_type_eval = dict(question_type_eval)
-                            primary = dict(primary or {})
-                            primary["id"] = generated_question_type
-                            primary.setdefault("name", "generated single-topic inferred type")
-                            question_type_eval["primary_type"] = primary
-                            question_type_eval["generated_single_topic_override"] = {
-                                "applied": True,
-                                "reason": "single generated model_answer with weak upstream question type",
-                                "from_question_type": primary_id,
-                                "to_question_type": generated_question_type,
-                                "topic_id": generated_topic_id,
-                            }
-
-                    if isinstance(fact_eval, dict) and generated_topic_id and not fact_eval.get("topic_id"):
-                        fact_eval = dict(fact_eval)
-                        fact_eval["topic_id"] = generated_topic_id
-                        fact_eval["generated_single_topic_override"] = {
-                            "applied": True,
-                            "reason": "single generated model_answer supplied missing fact_eval.topic_id",
-                            "topic_id": generated_topic_id,
-                        }
-            except Exception:
-                pass
+            (
+                question_type_eval,
+                fact_eval,
+            ) = _phase10_apply_generated_single_topic_overrides(
+                bank,
+                question_type_eval,
+                fact_eval,
+            )
 
         result = find_model_answer_reference(
             question_text=question_text,
