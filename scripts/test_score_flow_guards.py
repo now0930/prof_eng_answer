@@ -826,5 +826,92 @@ class QuestionTypeRootPromotionBootstrapRegressionTest(
         )
 
 
+
+
+class QuestionTypeFallbackRecoveryRegressionTest(
+    unittest.TestCase
+):
+    def test_qtype_fallback_generator_exception_preserves_grade(
+        self,
+    ) -> None:
+        grade = {
+            "question_type": "COMPARE",
+            "total_score": 16.5,
+            "summary": "keep this result",
+        }
+
+        with patch(
+            "semantic_question_type_prompt."
+            "empty_question_type_coverage",
+            side_effect=RuntimeError(
+                "simulated fallback failure"
+            ),
+        ):
+            result = (
+                qtype_coverage_adapter
+                .ensure_grade_question_type_coverage(
+                    deepcopy(grade),
+                    question_text="두 방식을 비교하시오.",
+                )
+            )
+
+        self.assertEqual(
+            result["total_score"],
+            16.5,
+        )
+        self.assertEqual(
+            result["summary"],
+            "keep this result",
+        )
+        self.assertNotIn(
+            "question_type_coverage",
+            result,
+        )
+        self.assertIn(
+            "simulated fallback failure",
+            result.get(
+                "question_type_coverage_error",
+                "",
+            ),
+        )
+
+    def test_qtype_fallback_malformed_return_records_error(
+        self,
+    ) -> None:
+        grade = {
+            "question_type": "PROCEDURE",
+            "total_score": 15.5,
+        }
+
+        with patch(
+            "semantic_question_type_prompt."
+            "empty_question_type_coverage",
+            return_value=[],
+        ):
+            result = (
+                qtype_coverage_adapter
+                .ensure_grade_question_type_coverage(
+                    deepcopy(grade),
+                    question_text="절차를 설명하시오.",
+                )
+            )
+
+        self.assertEqual(
+            result["total_score"],
+            15.5,
+        )
+        self.assertNotIn(
+            "question_type_coverage",
+            result,
+        )
+        self.assertIn(
+            "fallback coverage generation failed",
+            result.get(
+                "question_type_coverage_error",
+                "",
+            ),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
