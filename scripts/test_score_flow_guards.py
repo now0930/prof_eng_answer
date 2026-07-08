@@ -16,7 +16,10 @@ from difficulty_score_ceiling import (
     _prefer_question_type_adjusted_score,
 )
 import question_type_coverage_score_adjuster as coverage_adjuster
-from grading_agents import _phase2_resolve_logic_topic_id
+from grading_agents import (
+    _phase2_resolve_difficulty_topic_id,
+    _phase2_resolve_logic_topic_id,
+)
 
 
 class ScoreFlowGuardTest(unittest.TestCase):
@@ -243,6 +246,122 @@ class LogicTopicFallbackRegressionTest(unittest.TestCase):
             },
             {},
             {},
+        )
+
+        self.assertIsNone(topic_id)
+
+
+
+
+class DifficultyTopicFallbackRegressionTest(unittest.TestCase):
+    def test_fact_topic_has_highest_priority(self) -> None:
+        topic_id = _phase2_resolve_difficulty_topic_id(
+            {
+                "topic_id": "fact_topic",
+            },
+            {
+                "primary_reference": {
+                    "topic_id": "primary_topic",
+                },
+                "candidates": [
+                    {
+                        "answer": {
+                            "topic_id": "candidate_topic",
+                        }
+                    }
+                ],
+            },
+        )
+
+        self.assertEqual(
+            topic_id,
+            "fact_topic",
+        )
+
+    def test_primary_reference_topic_is_selected(self) -> None:
+        topic_id = _phase2_resolve_difficulty_topic_id(
+            {},
+            {
+                "primary_reference": {
+                    "topic_id": "primary_topic",
+                },
+                "candidates": [
+                    {
+                        "answer": {
+                            "topic_id": "candidate_topic",
+                        }
+                    }
+                ],
+            },
+        )
+
+        self.assertEqual(
+            topic_id,
+            "primary_topic",
+        )
+
+    def test_malformed_primary_falls_through_to_candidate(
+        self,
+    ) -> None:
+        topic_id = _phase2_resolve_difficulty_topic_id(
+            {},
+            {
+                "primary_reference": "invalid",
+                "candidates": [
+                    {
+                        "answer": {
+                            "topic_id": "candidate_topic",
+                        }
+                    }
+                ],
+            },
+        )
+
+        self.assertEqual(
+            topic_id,
+            "candidate_topic",
+        )
+
+    def test_invalid_first_candidate_does_not_block_later_candidate(
+        self,
+    ) -> None:
+        topic_id = _phase2_resolve_difficulty_topic_id(
+            {},
+            {
+                "candidates": [
+                    None,
+                    "invalid",
+                    123,
+                    {
+                        "answer": [],
+                    },
+                    {
+                        "answer": {
+                            "topic_id": "later_candidate",
+                        }
+                    },
+                ],
+            },
+        )
+
+        self.assertEqual(
+            topic_id,
+            "later_candidate",
+        )
+
+    def test_missing_difficulty_topic_returns_none(self) -> None:
+        topic_id = _phase2_resolve_difficulty_topic_id(
+            {},
+            {
+                "primary_reference": {},
+                "candidates": [
+                    None,
+                    {},
+                    {
+                        "answer": {},
+                    },
+                ],
+            },
         )
 
         self.assertIsNone(topic_id)

@@ -2963,6 +2963,55 @@ def _phase2_resolve_logic_topic_id(
     return None
 
 
+def _phase2_resolve_difficulty_topic_id(
+    fact_eval,
+    model_answer_ref,
+):
+    """Return the best topic id for final difficulty-strategy routing."""
+    if isinstance(fact_eval, dict):
+        topic_id = fact_eval.get("topic_id")
+
+        if topic_id:
+            return topic_id
+
+    if isinstance(model_answer_ref, dict):
+        primary = (
+            model_answer_ref.get("primary_reference")
+            or {}
+        )
+
+        if isinstance(primary, dict):
+            topic_id = primary.get("topic_id")
+
+            if topic_id:
+                return topic_id
+
+        candidates = (
+            model_answer_ref.get("candidates")
+            or []
+        )
+
+        if isinstance(candidates, list):
+            for candidate in candidates:
+                if not isinstance(candidate, dict):
+                    continue
+
+                answer = (
+                    candidate.get("answer")
+                    or {}
+                )
+
+                if not isinstance(answer, dict):
+                    continue
+
+                topic_id = answer.get("topic_id")
+
+                if topic_id:
+                    return topic_id
+
+    return None
+
+
 def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
     from grading_config import load_active_config, save_active_config_snapshots
@@ -3230,28 +3279,14 @@ def _phase2_postprocess_grade(legacy_result):
         # strategy runs. This is especially important for generated topic-pack
         # mode where the generated topic_importance bank may contain only one
         # precise topic_id.
-        try:
-            _difficulty_topic_id = None
+        _difficulty_topic_id = _phase2_resolve_difficulty_topic_id(
+            fact_eval,
+            model_answer_ref,
+        )
 
-            if isinstance(fact_eval, dict):
-                _difficulty_topic_id = fact_eval.get("topic_id")
-
-            if not _difficulty_topic_id and isinstance(model_answer_ref, dict):
-                _difficulty_topic_id = (
-                    (model_answer_ref.get("primary_reference") or {}).get("topic_id")
-                    or (
-                        ((model_answer_ref.get("candidates") or [{}])[0].get("answer") or {}).get("topic_id")
-                        if isinstance(model_answer_ref.get("candidates"), list)
-                        and model_answer_ref.get("candidates")
-                        else None
-                    )
-                )
-
-            if _difficulty_topic_id and isinstance(grade, dict):
-                grade.setdefault("topic_id", _difficulty_topic_id)
-                grade.setdefault("inferred_topic_id", _difficulty_topic_id)
-        except Exception:
-            pass
+        if _difficulty_topic_id and isinstance(grade, dict):
+            grade.setdefault("topic_id", _difficulty_topic_id)
+            grade.setdefault("inferred_topic_id", _difficulty_topic_id)
 
         grade = attach_difficulty_strategy_to_grade(
             grade,
