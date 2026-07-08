@@ -564,27 +564,6 @@ def call_ollama(prompt):
     return data.get("message", {}).get("content", "")
 
 
-def extract_json(text):
-    if not text:
-        return None
-
-    m = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.S)
-    if m:
-        try:
-            return json.loads(m.group(1))
-        except Exception:
-            pass
-
-    start = text.find("{")
-    end = text.rfind("}")
-    if start >= 0 and end > start:
-        try:
-            return json.loads(text[start:end + 1])
-        except Exception:
-            return None
-
-    return None
-
 
 def grade_answer(chat_id, raw_text, state):
     sid = get_active_session(chat_id, state)
