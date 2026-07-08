@@ -4252,6 +4252,12 @@ def _phase10_run_model_answer_reference(
             bank=bank
         )
 
+        if not isinstance(result, dict):
+            raise TypeError(
+                "find_model_answer_reference must return dict, "
+                f"got {type(result).__name__}"
+            )
+
         if session_dir is not None:
             try:
                 _phase2_json_write(session_dir / "model_answer_reference.json", result)

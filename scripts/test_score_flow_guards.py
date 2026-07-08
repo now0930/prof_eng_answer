@@ -913,5 +913,186 @@ class QuestionTypeFallbackRecoveryRegressionTest(
         )
 
 
+
+
+class ModelAnswerReferenceResultContractRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _invoke_phase10_reference(
+        reference_result,
+        *,
+        fail_log=False,
+    ):
+        import os
+        from contextlib import ExitStack
+
+        import grading_agents as grading_agents_module
+        import model_answer_router as model_answer_router_module
+
+        function = (
+            grading_agents_module
+            ._phase10_run_model_answer_reference
+        )
+
+        log_messages = []
+
+        def fake_log(
+            message,
+            *args,
+            **kwargs,
+        ):
+            log_messages.append(str(message))
+
+            if fail_log:
+                raise RuntimeError(
+                    "simulated phase10 logging failure"
+                )
+
+        with ExitStack() as stack:
+            stack.enter_context(
+                patch.dict(
+                    os.environ,
+                    {
+                        "RUBRIC_BANK_MODE": "legacy",
+                    },
+                )
+            )
+
+            stack.enter_context(
+                patch.dict(
+                    function.__globals__,
+                    {
+                        "_phase3_extract_question_text": (
+                            lambda input_text: (
+                                "모델 답안 참조 계약 시험"
+                            )
+                        ),
+                        "_phase2_log": fake_log,
+                    },
+                    clear=False,
+                )
+            )
+
+            stack.enter_context(
+                patch.object(
+                    model_answer_router_module,
+                    "load_model_answer_bank",
+                    return_value={
+                        "answers": [],
+                    },
+                )
+            )
+
+            stack.enter_context(
+                patch.object(
+                    model_answer_router_module,
+                    "find_model_answer_reference",
+                    return_value=reference_result,
+                )
+            )
+
+            result = function(
+                input_text=(
+                    "문제: 모델 답안 참조 계약 시험"
+                ),
+                answer_text="시험 답안",
+                question_type_eval={
+                    "primary_type": {
+                        "question_type": "PRINCIPLE",
+                    },
+                },
+                fact_eval={
+                    "topic_id": "contract_test_topic",
+                },
+                subject_rubric=None,
+                session_dir=None,
+            )
+
+        return result, log_messages
+
+    def test_phase10_logging_failure_preserves_valid_reference(
+        self,
+    ) -> None:
+        reference_result = {
+            "version": "model_answer_reference_v1",
+            "matched": True,
+            "primary_reference": {
+                "id": "reference-1",
+                "topic_id": "topic-1",
+                "question_type": "PRINCIPLE",
+            },
+            "candidates": [],
+        }
+
+        result, log_messages = (
+            self._invoke_phase10_reference(
+                reference_result,
+                fail_log=True,
+            )
+        )
+
+        self.assertEqual(
+            result,
+            reference_result,
+        )
+        self.assertTrue(
+            log_messages,
+        )
+
+    def test_phase10_malformed_reference_uses_outer_fallback(
+        self,
+    ) -> None:
+        malformed_results = (
+            [],
+            None,
+            "malformed-reference",
+        )
+
+        for malformed_result in malformed_results:
+            with self.subTest(
+                malformed_result=repr(
+                    malformed_result
+                ),
+            ):
+                result, _ = (
+                    self._invoke_phase10_reference(
+                        malformed_result,
+                    )
+                )
+
+                self.assertIsInstance(
+                    result,
+                    dict,
+                )
+                self.assertEqual(
+                    result.get("version"),
+                    "model_answer_reference_v1_fallback",
+                )
+                self.assertFalse(
+                    result.get("matched"),
+                )
+                self.assertIsNone(
+                    result.get(
+                        "primary_reference"
+                    )
+                )
+                self.assertEqual(
+                    result.get("candidates"),
+                    [],
+                )
+                self.assertIn(
+                    "TypeError",
+                    result.get("error", ""),
+                )
+                self.assertIn(
+                    (
+                        "find_model_answer_reference "
+                        "must return dict"
+                    ),
+                    result.get("error", ""),
+                )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
