@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+from copy import deepcopy
+
 import sys
 import unittest
 from pathlib import Path
@@ -681,6 +683,146 @@ class QuestionTypeCleanupBootstrapRegressionTest(
         self.assertEqual(
             result["question_type_v2"],
             "invalid",
+        )
+
+
+
+
+class QuestionTypeRootPromotionBootstrapRegressionTest(
+    unittest.TestCase
+):
+    def test_qtype_root_promotion_wrapper_chain_is_installed(
+        self,
+    ) -> None:
+        required_callables = (
+            "_promote_question_type_coverage_to_root_v1",
+            "_ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_PROMOTE_ROOT_V1",
+            "_ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PROMOTE_ROOT_V1",
+            "attach_question_type_coverage_feedback",
+            "ensure_grade_question_type_coverage",
+        )
+
+        for name in required_callables:
+            with self.subTest(name=name):
+                self.assertTrue(
+                    callable(
+                        getattr(
+                            qtype_coverage_adapter,
+                            name,
+                            None,
+                        )
+                    )
+                )
+
+    def test_qtype_root_promotion_matches_locked_contract(
+        self,
+    ) -> None:
+        grade = {'question_type': 'EXISTING_ROOT_TYPE',
+ 'question_type_coverage': {'c_fact_focus': ['fact-a'],
+                            'coverage_ratio': 0.73,
+                            'coverage_score': 5.8,
+                            'covered_requirements': ['covered-a', 'covered-b'],
+                            'layer_points': {'A': 3, 'B': 6, 'C': 8},
+                            'max_coverage_score': 8.0,
+                            'missing_requirements': ['missing-a'],
+                            'name_ko': '중첩 이름',
+                            'primary_type': 'NESTED_PRIMARY',
+                            'question_type': 'NESTED_TYPE',
+                            'question_type_lens': 'NESTED_LENS',
+                            'reason': 'sentinel reason',
+                            'strategy_warnings': ['warning-a'],
+                            'strengths': ['strength-a'],
+                            'type_name': '중첩 유형',
+                            'weaknesses': ['weakness-a']}}
+        expected_promoted = {'question_type': 'PRINCIPLE_INTERPRETATION',
+ 'question_type_v2': {'c_fact_focus': ['대상 시스템·계기·회로·제어 loop의 구성요소',
+                                       '동작 원리와 물리적 의미',
+                                       '수식·모델·변수·단위',
+                                       '계산 또는 해석 과정',
+                                       '결과값 또는 응답특성의 의미'],
+                      'd_field_judgement_focus': ['선정 또는 설계 판단',
+                                                  'tuning, 안정성, 제어성, 오차 영향',
+                                                  '현장 적용 한계',
+                                                  '유지보수와 운전 조건',
+                                                  '비용·성능 trade-off'],
+                      'name_ko': '중첩 이름',
+                      'note': 'question_type_v2는 B항목 요구사항 완전성과 C항목 Fact 전개, '
+                              'D항목 현장 판단을 보완하는 평가 lens입니다.',
+                      'question_type': 'PRINCIPLE_INTERPRETATION',
+                      'sub_criteria': ['background_need',
+                                       'structure_components',
+                                       'principle_mechanism',
+                                       'formula_model_variables',
+                                       'calculation_or_interpretation',
+                                       'result_meaning',
+                                       'field_judgement']}}
+
+        helper_result = (
+            qtype_coverage_adapter
+            ._promote_question_type_coverage_to_root_v1(
+                deepcopy(grade)
+            )
+        )
+
+        attach_result = (
+            qtype_coverage_adapter
+            .attach_question_type_coverage_feedback(
+                deepcopy(grade)
+            )
+        )
+
+        ensure_result = (
+            qtype_coverage_adapter
+            .ensure_grade_question_type_coverage(
+                deepcopy(grade)
+            )
+        )
+
+        self.assertTrue(expected_promoted)
+
+        for key, value in expected_promoted.items():
+            with self.subTest(
+                function="helper",
+                key=key,
+            ):
+                self.assertEqual(
+                    helper_result.get(key),
+                    value,
+                )
+
+            with self.subTest(
+                function="attach",
+                key=key,
+            ):
+                self.assertEqual(
+                    attach_result.get(key),
+                    value,
+                )
+
+            with self.subTest(
+                function="ensure",
+                key=key,
+            ):
+                self.assertEqual(
+                    ensure_result.get(key),
+                    value,
+                )
+
+    def test_qtype_root_promotion_handles_malformed_coverage(
+        self,
+    ) -> None:
+        grade = {'question_type': 'GENERAL', 'question_type_coverage': 'invalid'}
+
+        result = (
+            qtype_coverage_adapter
+            ._promote_question_type_coverage_to_root_v1(
+                deepcopy(grade)
+            )
+        )
+
+        self.assertEqual(
+            result,
+            grade,
         )
 
 

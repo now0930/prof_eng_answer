@@ -341,68 +341,64 @@ def ensure_grade_question_type_coverage(
 # === qtype coverage root promotion wrapper v1 EOF ===
 # Keep this near the end of the file. It promotes nested semantic coverage
 # to grade root so grade.json remains self-contained and consistent.
-try:
-    from question_type_taxonomy import (
-        get_question_type_profile,
-        normalize_question_type,
-        question_type_c_focus,
-        question_type_d_focus,
-        question_type_sub_criteria,
-    )
+from question_type_taxonomy import (
+    get_question_type_profile,
+    normalize_question_type,
+    question_type_c_focus,
+    question_type_d_focus,
+    question_type_sub_criteria,
+)
 
-    def _promote_question_type_coverage_to_root_v1(grade: dict[str, Any]) -> dict[str, Any]:
-        if not isinstance(grade, dict):
-            return grade
-
-        coverage = _walk_find_question_type_coverage(grade)
-        if not isinstance(coverage, dict):
-            return grade
-
-        grade["question_type_coverage"] = coverage
-
-        coverage_qtype = coverage.get("question_type")
-        if coverage_qtype:
-            qtype = normalize_question_type(coverage_qtype)
-            profile = get_question_type_profile(qtype)
-
-            grade["question_type"] = qtype
-            grade["question_type_v2"] = {
-                "question_type": qtype,
-                "name_ko": coverage.get("name_ko") or profile.get("name_ko"),
-                "sub_criteria": question_type_sub_criteria(qtype),
-                "c_fact_focus": question_type_c_focus(qtype),
-                "d_field_judgement_focus": question_type_d_focus(qtype),
-                "note": (
-                    "question_type_v2는 B항목 요구사항 완전성과 C항목 Fact 전개, "
-                    "D항목 현장 판단을 보완하는 평가 lens입니다."
-                ),
-            }
-
+def _promote_question_type_coverage_to_root_v1(grade: dict[str, Any]) -> dict[str, Any]:
+    if not isinstance(grade, dict):
         return grade
 
+    coverage = _walk_find_question_type_coverage(grade)
+    if not isinstance(coverage, dict):
+        return grade
 
-    _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_PROMOTE_ROOT_V1 = attach_question_type_coverage_feedback
+    grade["question_type_coverage"] = coverage
 
-    def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, Any]:
-        grade = _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_PROMOTE_ROOT_V1(grade)
+    coverage_qtype = coverage.get("question_type")
+    if coverage_qtype:
+        qtype = normalize_question_type(coverage_qtype)
+        profile = get_question_type_profile(qtype)
+
+        grade["question_type"] = qtype
+        grade["question_type_v2"] = {
+            "question_type": qtype,
+            "name_ko": coverage.get("name_ko") or profile.get("name_ko"),
+            "sub_criteria": question_type_sub_criteria(qtype),
+            "c_fact_focus": question_type_c_focus(qtype),
+            "d_field_judgement_focus": question_type_d_focus(qtype),
+            "note": (
+                "question_type_v2는 B항목 요구사항 완전성과 C항목 Fact 전개, "
+                "D항목 현장 판단을 보완하는 평가 lens입니다."
+            ),
+        }
+
+    return grade
+
+
+_ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_PROMOTE_ROOT_V1 = attach_question_type_coverage_feedback
+
+def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, Any]:
+    grade = _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_PROMOTE_ROOT_V1(grade)
+    return _promote_question_type_coverage_to_root_v1(grade)
+
+
+if "ensure_grade_question_type_coverage" in globals():
+    _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PROMOTE_ROOT_V1 = ensure_grade_question_type_coverage
+
+    def ensure_grade_question_type_coverage(
+        grade: dict[str, Any],
+        question_text: str | None = None,
+    ) -> dict[str, Any]:
+        grade = _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PROMOTE_ROOT_V1(
+            grade,
+            question_text=question_text,
+        )
         return _promote_question_type_coverage_to_root_v1(grade)
-
-
-    if "ensure_grade_question_type_coverage" in globals():
-        _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PROMOTE_ROOT_V1 = ensure_grade_question_type_coverage
-
-        def ensure_grade_question_type_coverage(
-            grade: dict[str, Any],
-            question_text: str | None = None,
-        ) -> dict[str, Any]:
-            grade = _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PROMOTE_ROOT_V1(
-                grade,
-                question_text=question_text,
-            )
-            return _promote_question_type_coverage_to_root_v1(grade)
-
-except Exception:
-    pass
 
 # === qtype legacy GENERAL cleanup wrapper v2 EOF ===
 # Remove old GENERAL(일반 설명형) phrases after question_type_v2 is resolved.
