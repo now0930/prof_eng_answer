@@ -1,37 +1,37 @@
 severity,topic_id,model_variants,fact_exists,anchor_count,coverage_score,anchor_coverage,issues
 OK,adc_dac_signal_conversion_interface,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,calibration_error_accuracy_precision,1,True,5,4/5,"F1:OK; F2:LOW(core 0/6, support 1); F3:OK; F4:OK; F5:OK",model_answer에서 일부 anchor core_terms 반영 약함 | model high_score/field point 일부가 anchor에 약하게 반영됨
+OK,calibration_error_accuracy_precision,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,camera_lidar_radar_sensor_comparison,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,classification_model_precision_recall_f1_evaluation,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,continuous_discrete_control_model_comparison,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,control_valve_actuator_types_selection,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,control_valve_body_trim_selection,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,control_valve_cavitation,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,control_valve_positioner_ip_converter,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,model high_score/field point 일부가 anchor에 약하게 반영됨
-MINOR,cv_valve_flow_coefficient,3,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,model high_score/field point 일부가 anchor에 약하게 반영됨
+OK,control_valve_positioner_ip_converter,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
+OK,cv_valve_flow_coefficient,3,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,dc_dc_chopper_buck_converter,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,differential_pressure_transmitter_calibration,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,doppler_effect_velocity_flow_measurement,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,energy_harvesting_wireless_sensor_power,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,explosion_safety_sil_sis,1,True,5,4/5,"F1:OK; F2:LOW(core 0/5, support 2); F3:OK; F4:OK; F5:OK",model_answer에서 일부 anchor core_terms 반영 약함 | model high_score/field point 일부가 anchor에 약하게 반영됨
-MINOR,flowmeter_dp_orifice,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,model high_score/field point 일부가 anchor에 약하게 반영됨
+OK,explosion_safety_sil_sis,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
+OK,flowmeter_dp_orifice,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,frame_grounding_shielding_noise_control,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,gpib_scpi_instrumentation_communication,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,hart_fims_field_instrument_management,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,hmi_scada,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,model high_score/field point 일부가 anchor에 약하게 반영됨
+OK,hmi_scada,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,induction_motor_dq_reference_frame_equivalent_circuit,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,industrial_communication_protocol,1,True,5,4/5,"F1:OK; F2:OK; F3:OK; F4:LOW(core 0/6, support 5); F5:OK",model_answer에서 일부 anchor core_terms 반영 약함
+OK,industrial_communication_protocol,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,industrial_ethernet_realtime_network,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,industrial_robot_degrees_of_freedom,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,level_measurement_sensor_selection,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,local_instrument_cabinet_installation,1,True,5,4/5,"F1:OK; F2:OK; F3:OK; F4:LOW(core 0/5, support 2); F5:OK",model_answer에서 일부 anchor core_terms 반영 약함 | model high_score/field point 일부가 anchor에 약하게 반영됨
+OK,local_instrument_cabinet_installation,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,measurement_repeatability_reproducibility,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,mems_comb_drive_electrostatic_actuator,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,motor_inverter_drive,1,True,5,4/5,"F1:OK; F2:LOW(core 1/5, support 1); F3:OK; F4:OK; F5:OK",model_answer에서 일부 anchor core_terms 반영 약함 | model high_score/field point 일부가 anchor에 약하게 반영됨
-MINOR,noise_grounding_surge,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,model high_score/field point 일부가 anchor에 약하게 반영됨
+OK,motor_inverter_drive,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
+OK,noise_grounding_surge,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,photodiode_light_sensor_operation_modes,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,pid_control,1,True,5,4/5,"F1:OK; F2:LOW(core 0/6, support 2); F3:OK; F4:OK; F5:OK",model_answer에서 일부 anchor core_terms 반영 약함
-MINOR,plc_dcs_remote_io,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,model high_score/field point 일부가 anchor에 약하게 반영됨
+OK,pid_control,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
+OK,plc_dcs_remote_io,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,power_semiconductor_switching_device_characteristics,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,pressure_dp_transmitter,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,pressure_gauge_accessories_installation,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
@@ -39,18 +39,18 @@ OK,pressure_transmitter_datasheet_specification,1,True,5,5/5,F1:OK; F2:OK; F3:OK
 OK,psd_position_sensitive_detector_optical_sensor,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,rectifier_source_inductance_commutation_overlap,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,reference_tracking_prefilter_steady_state_error_control,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,reliability_maintainability_availability_ram,1,True,5,4/5,"F1:OK; F2:OK; F3:OK; F4:LOW(core 0/5, support 2); F5:OK",model_answer에서 일부 anchor core_terms 반영 약함
+OK,reliability_maintainability_availability_ram,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,second_order_lag_response_by_damping_ratio,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,second_order_system_resonance_frequency_response,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,sensor_linearization_transfer_function_approximation,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,sensor_static_dynamic_performance_characteristics,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,smart_factory_iiot_digital_twin,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,model high_score/field point 일부가 anchor에 약하게 반영됨
+OK,smart_factory_iiot_digital_twin,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,smart_mcc_motor_control_center_monitoring,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,temperature_measurement_error_heat_transfer,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,temperature_sensor_thermocouple_rtd,1,True,5,4/5,"F1:OK; F2:OK; F3:OK; F4:LOW(core 1/6, support 0); F5:OK",model_answer에서 일부 anchor core_terms 반영 약함
+OK,temperature_sensor_thermocouple_rtd,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,temperature_sensor_thermowell_material_selection,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,thermopile_noncontact_ir_temperature_sensor,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
-MINOR,transfer_function_state_space,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,model high_score/field point 일부가 anchor에 약하게 반영됨
+OK,transfer_function_state_space,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,vibration_measurement_condition_monitoring,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,wheatstone_bridge_null_balance_measurement,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
 OK,wirelesshart_isa100_wireless_instrument_network,1,True,5,5/5,F1:OK; F2:OK; F3:OK; F4:OK; F5:OK,OK
