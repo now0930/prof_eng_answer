@@ -1094,5 +1094,135 @@ class ModelAnswerReferenceResultContractRegressionTest(
                 )
 
 
+
+
+class TopicImportanceFallbackRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _topic_without_profile_defaults():
+        return {
+            "topic_id": "contract_topic",
+            "label": "계약 시험 주제",
+            "difficulty": "THEORY_CORE",
+            "difficulty_label": "핵심 이론",
+            "selection_importance": "CORE_MUST_PREPARE",
+            "requires_band_unlock": True,
+            "high_band_unlock_conditions": [
+                "핵심 이론 정확성",
+            ],
+            "note": "contract topic",
+        }
+
+    def test_topic_importance_profile_failure_preserves_topic_match(
+        self,
+    ) -> None:
+        import difficulty_output_adapter as adapter
+        import rubric_registry
+
+        function = (
+            adapter
+            ._topic_importance_strategy_from_topic_id
+        )
+
+        def fail_profile_policy(
+            difficulty,
+        ):
+            raise RuntimeError(
+                "simulated profile policy failure"
+            )
+
+        with patch.object(
+            rubric_registry,
+            "load_topic_importance_bank",
+            return_value={
+                "topics": [
+                    self._topic_without_profile_defaults(),
+                ],
+            },
+        ), patch.dict(
+            function.__globals__,
+            {
+                "get_profile_policy": (
+                    fail_profile_policy
+                ),
+            },
+            clear=False,
+        ):
+            result = function(
+                "contract_topic",
+                "시험 문제",
+            )
+
+        self.assertIsInstance(
+            result,
+            dict,
+        )
+        self.assertTrue(
+            result.get("matched"),
+        )
+        self.assertEqual(
+            result.get("topic_id"),
+            "contract_topic",
+        )
+        self.assertEqual(
+            result.get("difficulty"),
+            "THEORY_CORE",
+        )
+        self.assertEqual(
+            result.get("excellent_score_band"),
+            [21, 25],
+        )
+        self.assertIsNone(
+            result.get("selection_policy"),
+        )
+        self.assertIsNone(
+            result.get("default_score_ceiling"),
+        )
+
+    def test_topic_importance_bank_failure_returns_unmatched_diagnostic(
+        self,
+    ) -> None:
+        import difficulty_output_adapter as adapter
+        import rubric_registry
+
+        function = (
+            adapter
+            ._topic_importance_strategy_from_topic_id
+        )
+
+        with patch.object(
+            rubric_registry,
+            "load_topic_importance_bank",
+            side_effect=RuntimeError(
+                "simulated topic bank failure"
+            ),
+        ):
+            result = function(
+                "contract_topic",
+                "시험 문제",
+            )
+
+        self.assertIsInstance(
+            result,
+            dict,
+        )
+        self.assertFalse(
+            result.get("matched"),
+        )
+        self.assertEqual(
+            result.get("topic_id"),
+            "contract_topic",
+        )
+        self.assertEqual(
+            result.get("question"),
+            "시험 문제",
+        )
+        self.assertIn(
+            "simulated topic bank failure",
+            result.get("error", ""),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
