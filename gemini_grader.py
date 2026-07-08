@@ -706,59 +706,58 @@ def gemini_semantic_grade(*args, **kwargs):
 # === final qtype semantic prompt wrapper v4 EOF ===
 # This wrapper must stay near the end of this file because build_gemini_grading_prompt
 # is redefined multiple times by phase wrappers.
-try:
-    from semantic_question_type_prompt import (
-        build_question_type_json_contract,
-        build_question_type_semantic_guidance,
+from semantic_question_type_prompt import (
+    build_question_type_json_contract,
+    build_question_type_semantic_guidance,
+)
+
+_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_QTYPE_V4_EOF = build_gemini_grading_prompt
+
+def build_gemini_grading_prompt(question_text, answer_text, *args, **kwargs):
+    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_QTYPE_V4_EOF(
+        question_text,
+        answer_text,
+        *args,
+        **kwargs,
     )
 
-    _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_QTYPE_V4_EOF = build_gemini_grading_prompt
+    if not isinstance(base_prompt, str):
+        return base_prompt
 
-    def build_gemini_grading_prompt(question_text, answer_text, *args, **kwargs):
-        base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_QTYPE_V4_EOF(
+    if (
+        "Question Type v2 평가 지침" in base_prompt
+        and "MANDATORY QUESTION_TYPE_COVERAGE OUTPUT CONTRACT" in base_prompt
+        and "QTYPE_HARD_JSON_TEMPLATE_V4" in base_prompt
+    ):
+        return base_prompt
+
+    existing_question_type = (
+        kwargs.get("question_type")
+        or kwargs.get("detected_question_type")
+        or kwargs.get("legacy_question_type")
+    )
+
+    try:
+        qtype_guidance = build_question_type_semantic_guidance(
             question_text,
-            answer_text,
-            *args,
-            **kwargs,
+            existing_question_type=existing_question_type,
         )
-
-        if not isinstance(base_prompt, str):
-            return base_prompt
-
-        if (
-            "Question Type v2 평가 지침" in base_prompt
-            and "MANDATORY QUESTION_TYPE_COVERAGE OUTPUT CONTRACT" in base_prompt
-            and "QTYPE_HARD_JSON_TEMPLATE_V4" in base_prompt
-        ):
-            return base_prompt
-
-        existing_question_type = (
-            kwargs.get("question_type")
-            or kwargs.get("detected_question_type")
-            or kwargs.get("legacy_question_type")
+        qtype_contract = build_question_type_json_contract(
+            question_text,
+            existing_question_type=existing_question_type,
         )
-
-        try:
-            qtype_guidance = build_question_type_semantic_guidance(
-                question_text,
-                existing_question_type=existing_question_type,
-            )
-            qtype_contract = build_question_type_json_contract(
-                question_text,
-                existing_question_type=existing_question_type,
-            )
-        except Exception as exc:
-            qtype_guidance = (
-                "[Question Type v2 평가 지침]\n"
+    except Exception as exc:
+        qtype_guidance = (
+            "[Question Type v2 평가 지침]\n"
                 "question_type 세부 평가 지침 생성에 실패했습니다. "
                 f"기존 A/B/C/D/E 기준으로 평가하세요. error={exc}"
-            )
-            qtype_contract = (
-                "[MANDATORY QUESTION_TYPE_COVERAGE OUTPUT CONTRACT]\n"
+        )
+        qtype_contract = (
+            "[MANDATORY QUESTION_TYPE_COVERAGE OUTPUT CONTRACT]\n"
                 "최종 JSON root object에 question_type_coverage 필드를 반드시 포함하세요."
-            )
+        )
 
-        qtype_template = """
+    qtype_template = """
 [QTYPE_HARD_JSON_TEMPLATE_V4]
 
 너는 반드시 JSON object 하나만 반환해야 한다.
@@ -814,42 +813,38 @@ overall_coverage에는 unknown, fallback, not_evaluated를 쓰지 마라.
 - markdown 코드블록 출력 금지
 """
 
-        return (
-            qtype_template
-            + "\n\n"
-            + base_prompt
-            + "\n\n"
-            + qtype_guidance
-            + "\n\n"
-            + qtype_contract
-            + "\n\n"
-            + qtype_template
-        )
+    return (
+        qtype_template
+        + "\n\n"
+        + base_prompt
+        + "\n\n"
+        + qtype_guidance
+        + "\n\n"
+        + qtype_contract
+        + "\n\n"
+        + qtype_template
+    )
 
-except Exception as _qtype_wrapper_exc:
-    # Do not break the grader import if the optional qtype wrapper fails.
-    pass
 
 
 # === explicit question requirement final prompt wrapper v1 ===
-try:
-    _ORIGINAL_BUILD_GEMINI_PROMPT_EXPLICIT_REQ_V1 = (
-        build_gemini_grading_prompt
+_ORIGINAL_BUILD_GEMINI_PROMPT_EXPLICIT_REQ_V1 = (
+    build_gemini_grading_prompt
+)
+
+def build_gemini_grading_prompt(*args, **kwargs):
+    base = _ORIGINAL_BUILD_GEMINI_PROMPT_EXPLICIT_REQ_V1(
+        *args,
+        **kwargs,
     )
 
-    def build_gemini_grading_prompt(*args, **kwargs):
-        base = _ORIGINAL_BUILD_GEMINI_PROMPT_EXPLICIT_REQ_V1(
-            *args,
-            **kwargs,
-        )
+    question_text = (
+        args[0]
+        if args
+        else kwargs.get("question_text")
+    )
 
-        question_text = (
-            args[0]
-            if args
-            else kwargs.get("question_text")
-        )
-
-        explicit_contract = f"""
+    explicit_contract = f"""
 [FINAL MANDATORY EXPLICIT REQUIREMENT CONTRACT]
 
 문제문:
@@ -876,7 +871,4 @@ explicit_requirement_coverage를 포함하라.
 명시적 요구사항으로 만들지 마라.
 """.strip()
 
-        return base + "\n\n" + explicit_contract
-
-except Exception:
-    pass
+    return base + "\n\n" + explicit_contract

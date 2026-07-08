@@ -1326,5 +1326,121 @@ class LogicLlmVerifierFallbackRegressionTest(
         )
 
 
+
+
+class GeminiMandatoryPromptBootstrapRegressionTest(
+    unittest.TestCase
+):
+    def test_gemini_mandatory_prompt_wrappers_are_installed(
+        self,
+    ) -> None:
+        import gemini_grader
+
+        self.assertTrue(
+            callable(
+                getattr(
+                    gemini_grader,
+                    (
+                        "_ORIGINAL_BUILD_GEMINI_GRADING_"
+                        "PROMPT_QTYPE_V4_EOF"
+                    ),
+                    None,
+                )
+            )
+        )
+        self.assertTrue(
+            callable(
+                getattr(
+                    gemini_grader,
+                    (
+                        "_ORIGINAL_BUILD_GEMINI_PROMPT_"
+                        "EXPLICIT_REQ_V1"
+                    ),
+                    None,
+                )
+            )
+        )
+
+        prompt = (
+            gemini_grader
+            .build_gemini_grading_prompt(
+                question_text=(
+                    "공압식, 전동식, 유압식 제어밸브 "
+                    "액추에이터를 비교하고 선정 기준을 "
+                    "설명하시오."
+                ),
+                answer_text=(
+                    "공압식은 압축공기를 사용하고 "
+                    "전동식은 전원을 사용하며 "
+                    "유압식은 큰 추력에 적합하다. "
+                    "추력, 응답속도, 방폭, 유지보수성을 "
+                    "기준으로 선정한다."
+                ),
+                scoring_model={
+                    "total_score": 25,
+                    "criteria": {},
+                },
+                subject_rubric={
+                    "subject": "산업계측제어기술사",
+                },
+                rater_profile={
+                    "name": "contract-test",
+                },
+                volume={
+                    "target_pages": 3,
+                    "target_lines_per_page": 12,
+                },
+                fact_eval={
+                    "matched": True,
+                    "topic_id": (
+                        "control_valve_actuator"
+                    ),
+                },
+                connection_eval={
+                    "matched": True,
+                    "score": 1.0,
+                },
+            )
+        )
+
+        self.assertIsInstance(prompt, str)
+        self.assertIn(
+            "question_type_coverage",
+            prompt,
+        )
+        self.assertIn(
+            "explicit_requirement_coverage",
+            prompt,
+        )
+        self.assertGreaterEqual(
+            prompt.count(
+                "QTYPE_HARD_JSON_TEMPLATE_V4"
+            ),
+            2,
+        )
+        self.assertIn(
+            (
+                "FINAL MANDATORY EXPLICIT "
+                "REQUIREMENT CONTRACT"
+            ),
+            prompt,
+        )
+
+        qtype_position = prompt.rfind(
+            "QTYPE_HARD_JSON_TEMPLATE_V4"
+        )
+        explicit_position = prompt.rfind(
+            (
+                "FINAL MANDATORY EXPLICIT "
+                "REQUIREMENT CONTRACT"
+            )
+        )
+
+        self.assertGreater(
+            explicit_position,
+            qtype_position,
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
