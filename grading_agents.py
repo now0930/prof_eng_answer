@@ -2904,6 +2904,65 @@ def _phase6_run_gemini_semantic_grader(
         print(f"[agent] Gemini semantic grader exception: {e!r}")
         return result
 
+def _phase2_resolve_logic_topic_id(
+    model_answer_ref,
+    grade,
+    fact_eval,
+):
+    """Return the most precise available topic id for logic-check routing."""
+    if isinstance(model_answer_ref, dict):
+        primary = (
+            model_answer_ref.get("primary_reference")
+            or {}
+        )
+
+        if isinstance(primary, dict):
+            topic_id = primary.get("topic_id")
+
+            if topic_id:
+                return topic_id
+
+        candidates = (
+            model_answer_ref.get("candidates")
+            or []
+        )
+
+        if isinstance(candidates, list):
+            for candidate in candidates:
+                if not isinstance(candidate, dict):
+                    continue
+
+                answer = (
+                    candidate.get("answer")
+                    or {}
+                )
+
+                if not isinstance(answer, dict):
+                    continue
+
+                topic_id = answer.get("topic_id")
+
+                if topic_id:
+                    return topic_id
+
+    if isinstance(grade, dict):
+        topic_id = (
+            grade.get("topic_id")
+            or grade.get("inferred_topic_id")
+        )
+
+        if topic_id:
+            return topic_id
+
+    if isinstance(fact_eval, dict):
+        topic_id = fact_eval.get("topic_id")
+
+        if topic_id:
+            return topic_id
+
+    return None
+
+
 def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
     from grading_config import load_active_config, save_active_config_snapshots
@@ -3094,36 +3153,19 @@ def _phase2_postprocess_grade(legacy_result):
         # Logic check runs before the final difficulty strategy layer. Expose
         # the best known precise topic_id first, otherwise the logic checker can
         # fall back to a broader/neighboring topic based only on keyword overlap.
-        try:
-            _logic_topic_id = None
+        _logic_topic_id = _phase2_resolve_logic_topic_id(
+            model_answer_ref,
+            grade,
+            fact_eval,
+        )
 
-            if isinstance(model_answer_ref, dict):
-                _primary = model_answer_ref.get("primary_reference") or {}
-                if isinstance(_primary, dict):
-                    _logic_topic_id = _primary.get("topic_id")
-
-                if not _logic_topic_id:
-                    _candidates = model_answer_ref.get("candidates") or []
-                    if isinstance(_candidates, list) and _candidates:
-                        _first_answer = (_candidates[0].get("answer") or {})
-                        if isinstance(_first_answer, dict):
-                            _logic_topic_id = _first_answer.get("topic_id")
-
-            if not _logic_topic_id and isinstance(grade, dict):
-                _logic_topic_id = grade.get("topic_id") or grade.get("inferred_topic_id")
-
-            if not _logic_topic_id and isinstance(fact_eval, dict):
-                _logic_topic_id = fact_eval.get("topic_id")
-
-            if _logic_topic_id and isinstance(grade, dict):
-                # Deliberately assign, not setdefault: a broad topic such as
-                # second_order_system should not override the precise
-                # model-answer reference topic.
-                grade["topic_id"] = _logic_topic_id
-                grade["inferred_topic_id"] = _logic_topic_id
-                grade["logic_check_topic_id"] = _logic_topic_id
-        except Exception:
-            pass
+        if _logic_topic_id and isinstance(grade, dict):
+            # Deliberately assign, not setdefault: a broad topic such as
+            # second_order_system should not override the precise
+            # model-answer reference topic.
+            grade["topic_id"] = _logic_topic_id
+            grade["inferred_topic_id"] = _logic_topic_id
+            grade["logic_check_topic_id"] = _logic_topic_id
 
         grade = attach_logic_check_to_grade(grade, input_text)
         logic_eval = grade.get("logic_check_evaluation")

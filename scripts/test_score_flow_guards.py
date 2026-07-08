@@ -16,6 +16,7 @@ from difficulty_score_ceiling import (
     _prefer_question_type_adjusted_score,
 )
 import question_type_coverage_score_adjuster as coverage_adjuster
+from grading_agents import _phase2_resolve_logic_topic_id
 
 
 class ScoreFlowGuardTest(unittest.TestCase):
@@ -119,6 +120,132 @@ class ScoreFlowGuardTest(unittest.TestCase):
 
         self.assertEqual(score, 18.06)
         self.assertFalse(applied)
+
+
+
+
+class LogicTopicFallbackRegressionTest(unittest.TestCase):
+    def test_primary_reference_topic_has_highest_priority(self) -> None:
+        topic_id = _phase2_resolve_logic_topic_id(
+            {
+                "primary_reference": {
+                    "topic_id": "primary_topic",
+                },
+                "candidates": [
+                    {
+                        "answer": {
+                            "topic_id": "candidate_topic",
+                        }
+                    }
+                ],
+            },
+            {
+                "topic_id": "grade_topic",
+            },
+            {
+                "topic_id": "fact_topic",
+            },
+        )
+
+        self.assertEqual(
+            topic_id,
+            "primary_topic",
+        )
+
+    def test_first_valid_candidate_topic_is_selected(self) -> None:
+        topic_id = _phase2_resolve_logic_topic_id(
+            {
+                "primary_reference": None,
+                "candidates": [
+                    None,
+                    "invalid",
+                    {
+                        "answer": {
+                            "topic_id": "candidate_topic",
+                        }
+                    },
+                ],
+            },
+            {
+                "topic_id": "grade_topic",
+            },
+            {
+                "topic_id": "fact_topic",
+            },
+        )
+
+        self.assertEqual(
+            topic_id,
+            "candidate_topic",
+        )
+
+    def test_malformed_candidates_do_not_block_grade_fallback(
+        self,
+    ) -> None:
+        topic_id = _phase2_resolve_logic_topic_id(
+            {
+                "candidates": [
+                    None,
+                    "invalid",
+                    123,
+                    {
+                        "answer": "invalid",
+                    },
+                ],
+            },
+            {
+                "inferred_topic_id": "grade_inferred_topic",
+            },
+            {
+                "topic_id": "fact_topic",
+            },
+        )
+
+        self.assertEqual(
+            topic_id,
+            "grade_inferred_topic",
+        )
+
+    def test_malformed_candidates_do_not_block_fact_fallback(
+        self,
+    ) -> None:
+        topic_id = _phase2_resolve_logic_topic_id(
+            {
+                "candidates": [
+                    None,
+                    {
+                        "answer": [],
+                    },
+                ],
+            },
+            {},
+            {
+                "topic_id": "fact_topic",
+            },
+        )
+
+        self.assertEqual(
+            topic_id,
+            "fact_topic",
+        )
+
+    def test_missing_topic_returns_none(self) -> None:
+        topic_id = _phase2_resolve_logic_topic_id(
+            {
+                "primary_reference": {},
+                "candidates": [
+                    None,
+                    {},
+                    {
+                        "answer": {},
+                    },
+                ],
+            },
+            {},
+            {},
+        )
+
+        self.assertIsNone(topic_id)
 
 
 if __name__ == "__main__":
