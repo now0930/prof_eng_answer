@@ -17,6 +17,7 @@ from difficulty_score_ceiling import (
     _prefer_question_type_adjusted_score,
 )
 import question_type_coverage_score_adjuster as coverage_adjuster
+import question_type_coverage_adapter as qtype_coverage_adapter
 from grading_agents import (
     _phase10_apply_generated_single_topic_overrides,
     _phase2_resolve_difficulty_topic_id,
@@ -576,6 +577,111 @@ class ExplicitRequirementCapEnforcementRegressionTest(
                         "max_score": 25.0,
                     }
                 )
+
+
+
+
+class QuestionTypeCleanupBootstrapRegressionTest(
+    unittest.TestCase
+):
+    def test_qtype_cleanup_wrapper_is_installed(self) -> None:
+        self.assertIs(
+            qtype_coverage_adapter
+            ._QTYPE_CLEAN_GENERAL_V2_INSTALLED,
+            True,
+        )
+        self.assertTrue(
+            callable(
+                qtype_coverage_adapter
+                ._cleanup_legacy_general_text_v2
+            )
+        )
+
+    def test_qtype_cleanup_removes_legacy_general_sentence(
+        self,
+    ) -> None:
+        grade = {
+            "summary": (
+                "문제 유형은 GENERAL(일반 설명형)로 "
+                "판단했습니다. 핵심 원리를 설명했습니다."
+            ),
+        }
+
+        result = (
+            qtype_coverage_adapter
+            ._cleanup_legacy_general_text_v2(grade)
+        )
+
+        self.assertEqual(
+            result["summary"],
+            "핵심 원리를 설명했습니다.",
+        )
+
+    def test_qtype_cleanup_replaces_general_c_feedback(
+        self,
+    ) -> None:
+        grade = {
+            "question_type": "PRINCIPLE_INTERPRETATION",
+            "question_type_v2": {
+                "name_ko": "원리·해석형",
+                "c_fact_focus": [
+                    "원리",
+                    "인과관계",
+                ],
+            },
+            "improvement_points": [
+                (
+                    "C항목 보완: 일반 설명형 유형에서는 "
+                    "정의와 특징을 보완하세요."
+                ),
+            ],
+        }
+
+        result = (
+            qtype_coverage_adapter
+            ._cleanup_legacy_general_text_v2(grade)
+        )
+
+        feedback = result["improvement_points"][0]
+
+        self.assertIn(
+            "원리·해석형",
+            feedback,
+        )
+        self.assertIn(
+            "원리, 인과관계",
+            feedback,
+        )
+        self.assertNotIn(
+            "일반 설명형 유형에서는",
+            feedback,
+        )
+
+    def test_qtype_cleanup_handles_malformed_qv2(
+        self,
+    ) -> None:
+        grade = {
+            "question_type": "GENERAL",
+            "question_type_v2": "invalid",
+            "summary": (
+                "문제 유형은 GENERAL(일반 설명형)로 "
+                "판단했습니다."
+            ),
+        }
+
+        result = (
+            qtype_coverage_adapter
+            ._cleanup_legacy_general_text_v2(grade)
+        )
+
+        self.assertEqual(
+            result["summary"],
+            "",
+        )
+        self.assertEqual(
+            result["question_type_v2"],
+            "invalid",
+        )
 
 
 if __name__ == "__main__":
