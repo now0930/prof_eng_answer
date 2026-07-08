@@ -791,14 +791,11 @@ def _apply_numeric_flags(parsed: JsonDict) -> JsonDict:
     canonical final writer for final_total_score, score_range, and threshold
     flags.
     """
-    try:
-        from explicit_requirement_cap import (
-            enforce_existing_explicit_requirement_cap,
-        )
+    from explicit_requirement_cap import (
+        enforce_existing_explicit_requirement_cap,
+    )
 
-        parsed = enforce_existing_explicit_requirement_cap(parsed)
-    except Exception:
-        pass
+    parsed = enforce_existing_explicit_requirement_cap(parsed)
 
     total = _to_float(parsed.get("total_score"), 0.0) or 0.0
     max_score = _to_float(parsed.get("max_score"), 25.0) or 25.0

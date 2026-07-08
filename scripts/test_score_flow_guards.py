@@ -12,6 +12,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from grading_agents import _phase6_limit_gemini_score
+from grade_score_reconciler import _apply_numeric_flags
 from difficulty_score_ceiling import (
     _prefer_question_type_adjusted_score,
 )
@@ -514,6 +515,67 @@ class GeneratedSingleTopicOverrideRegressionTest(unittest.TestCase):
             "generated_single_topic_override",
             fact_eval,
         )
+
+
+
+
+class ExplicitRequirementCapEnforcementRegressionTest(
+    unittest.TestCase
+):
+    def test_numeric_flags_use_enforced_cap_result(self) -> None:
+        def enforce_cap(grade):
+            updated = dict(grade)
+            updated["total_score"] = 14.0
+            updated["explicit_requirement_cap_evaluation"] = {
+                "cap_applied": True,
+                "capped_score": 14.0,
+            }
+            return updated
+
+        with patch(
+            "explicit_requirement_cap."
+            "enforce_existing_explicit_requirement_cap",
+            side_effect=enforce_cap,
+        ):
+            result = _apply_numeric_flags(
+                {
+                    "total_score": 18.0,
+                    "max_score": 25.0,
+                }
+            )
+
+        self.assertEqual(
+            result["total_score"],
+            14.0,
+        )
+        self.assertEqual(
+            result["final_total_score"],
+            14.0,
+        )
+        self.assertFalse(
+            result["official_pass_met"],
+        )
+
+    def test_numeric_flags_propagate_cap_enforcement_failure(
+        self,
+    ) -> None:
+        with patch(
+            "explicit_requirement_cap."
+            "enforce_existing_explicit_requirement_cap",
+            side_effect=RuntimeError(
+                "simulated cap enforcement failure"
+            ),
+        ):
+            with self.assertRaisesRegex(
+                RuntimeError,
+                "simulated cap enforcement failure",
+            ):
+                _apply_numeric_flags(
+                    {
+                        "total_score": 18.0,
+                        "max_score": 25.0,
+                    }
+                )
 
 
 if __name__ == "__main__":
