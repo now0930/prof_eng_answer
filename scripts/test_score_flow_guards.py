@@ -1224,5 +1224,107 @@ class TopicImportanceFallbackRegressionTest(
         )
 
 
+
+
+class LogicLlmVerifierFallbackRegressionTest(
+    unittest.TestCase
+):
+    def test_logic_llm_failure_returns_safe_warn_fallback(
+        self,
+    ) -> None:
+        import logic_llm_verifier as verifier
+
+        function = verifier.verify_logic_with_llm
+        prompts = []
+
+        def fail_ollama_call(
+            prompt,
+        ):
+            prompts.append(prompt)
+            raise RuntimeError(
+                "simulated Ollama verifier failure"
+            )
+
+        with patch.dict(
+            function.__globals__,
+            {
+                "_call_ollama_json": fail_ollama_call,
+            },
+            clear=False,
+        ):
+            result = function(
+                answer_text='시스템은 우반평면에 극점이 있어도 안정하다. 감쇠비가 음수이면 진동이 감소한다.',
+                topic_id='second_order_lag_response_by_damping_ratio',
+            )
+
+        self.assertEqual(
+            len(prompts),
+            1,
+        )
+        self.assertIsInstance(
+            result,
+            dict,
+        )
+        self.assertTrue(
+            result.get("applicable"),
+        )
+        self.assertEqual(
+            result.get("engine"),
+            "llm_verifier_profile_v1",
+        )
+        self.assertEqual(
+            result.get("topic_id"),
+            'second_order_lag_response_by_damping_ratio',
+        )
+        self.assertEqual(
+            result.get("verdict"),
+            "warn",
+        )
+        self.assertEqual(
+            result.get("confidence"),
+            0.0,
+        )
+        self.assertFalse(
+            result.get("fatal_error_detected"),
+        )
+        self.assertIsNone(
+            result.get("recommended_ceiling"),
+        )
+        self.assertEqual(
+            result.get("mode"),
+            "warn",
+        )
+        self.assertEqual(
+            result.get("reason"),
+            "LLM verifier unavailable",
+        )
+
+        findings = result.get("findings")
+
+        self.assertIsInstance(
+            findings,
+            list,
+        )
+        self.assertTrue(
+            findings,
+        )
+        self.assertEqual(
+            findings[0].get("id"),
+            "llm_verifier_unavailable",
+        )
+        self.assertEqual(
+            findings[0].get("severity"),
+            "minor",
+        )
+        self.assertIn(
+            "simulated Ollama verifier failure",
+            findings[0].get("message", ""),
+        )
+        self.assertIn(
+            "fatal cap을 적용하지 않습니다",
+            findings[0].get("correct_rule", ""),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
