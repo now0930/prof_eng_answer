@@ -182,6 +182,10 @@ trap - EXIT
 
 echo
 echo
+echo
+echo "===== active JSON parser contract regression ====="
+PYTHONPATH=. python3 scripts/test_json_parser_contract.py
+
 echo "===== requirement coverage regression ====="
 python3 scripts/test_requirement_coverage.py
 
