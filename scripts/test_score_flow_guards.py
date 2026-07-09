@@ -5446,5 +5446,170 @@ class LogicLlmFatalCheckDiagnosticRegressionTest(
             finding,
         )
 
+
+class LogicVerifierConfidenceRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _run_with_verdict(
+        verdict,
+    ):
+        import logic_llm_verifier as verifier
+
+        function = (
+            verifier.verify_logic_with_llm
+        )
+
+        with patch.dict(
+            function.__globals__,
+            {
+                "_call_ollama_json": (
+                    lambda prompt: verdict
+                ),
+            },
+            clear=False,
+        ):
+            return function(
+                answer_text=(
+                    "시스템은 우반평면에 극점이 "
+                    "있어도 안정하다. 감쇠비가 "
+                    "음수이면 진동이 감소한다."
+                ),
+                topic_id=(
+                    "second_order_lag_"
+                    "response_by_damping_ratio"
+                ),
+            )
+
+    def test_logic_verifier_invalid_confidence_returns_warn_diagnostic(
+        self,
+    ) -> None:
+        for confidence in (
+            None,
+            True,
+            "invalid",
+            [],
+            {},
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(
+                confidence=confidence
+            ):
+                result = (
+                    self._run_with_verdict(
+                        {
+                            "verdict": "fatal",
+                            "confidence": (
+                                confidence
+                            ),
+                            "findings": [],
+                            "reason": "probe",
+                        }
+                    )
+                )
+
+                self.assertEqual(
+                    result["verdict"],
+                    "warn",
+                )
+                self.assertIsNone(
+                    result["confidence"],
+                )
+                self.assertEqual(
+                    result["mode"],
+                    "warn",
+                )
+                self.assertFalse(
+                    result[
+                        "fatal_error_detected"
+                    ]
+                )
+                self.assertIsNone(
+                    result[
+                        "recommended_ceiling"
+                    ]
+                )
+                self.assertEqual(
+                    result["reason"],
+                    (
+                        "LLM verifier invalid "
+                        "confidence"
+                    ),
+                )
+
+                findings = result[
+                    "findings"
+                ]
+
+                self.assertEqual(
+                    len(findings),
+                    1,
+                )
+                self.assertEqual(
+                    findings[0]["id"],
+                    (
+                        "llm_verifier_"
+                        "invalid_confidence"
+                    ),
+                )
+                self.assertEqual(
+                    findings[0]["severity"],
+                    "minor",
+                )
+                self.assertIn(
+                    "fatal cap을 적용하지 않습니다",
+                    findings[0][
+                        "correct_rule"
+                    ],
+                )
+
+                diagnostic = result[
+                    "confidence_diagnostic"
+                ]
+
+                self.assertEqual(
+                    diagnostic["ok"],
+                    False,
+                )
+                self.assertTrue(
+                    diagnostic["error"],
+                )
+
+    def test_logic_verifier_accepts_finite_numeric_string_confidence(
+        self,
+    ) -> None:
+        result = self._run_with_verdict(
+            {
+                "verdict": "pass",
+                "confidence": "0.85",
+                "findings": [],
+                "reason": "valid probe",
+            }
+        )
+
+        self.assertEqual(
+            result["confidence"],
+            0.85,
+        )
+        self.assertEqual(
+            result["mode"],
+            "pass",
+        )
+        self.assertFalse(
+            result[
+                "fatal_error_detected"
+            ]
+        )
+        self.assertEqual(
+            result["findings"],
+            [],
+        )
+        self.assertNotIn(
+            "confidence_diagnostic",
+            result,
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

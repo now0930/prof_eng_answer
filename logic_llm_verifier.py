@@ -7,6 +7,7 @@ import urllib.request
 from pathlib import Path
 from rubric_bank_paths import resolve_rubric_bank_path
 from typing import Any
+import math
 
 
 BASE_DIR = Path(__file__).resolve().parent
@@ -474,10 +475,90 @@ def verify_logic_with_llm(answer_text: str, topic_id: str) -> dict[str, Any]:
 
     candidate_map = {c["id"]: c for c in candidates}
 
-    try:
-        confidence = float(verdict.get("confidence", 0.0))
-    except Exception:
-        confidence = 0.0
+    confidence_value = verdict.get(
+        "confidence"
+    )
+    confidence_error = None
+
+    if isinstance(confidence_value, bool):
+        confidence_error = (
+            "confidence must be a finite "
+            "numeric value, not bool"
+        )
+    else:
+        try:
+            confidence_candidate = float(
+                confidence_value
+            )
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+        ) as error:
+            confidence_error = (
+                "confidence conversion failed: "
+                f"{error!r}"
+            )
+        else:
+            if math.isfinite(
+                confidence_candidate
+            ):
+                confidence = (
+                    confidence_candidate
+                )
+            else:
+                confidence_error = (
+                    "confidence must be finite"
+                )
+
+    if confidence_error is not None:
+        return {
+            "applicable": True,
+            "engine": (
+                "llm_verifier_profile_v1"
+            ),
+            "topic_id": topic_id,
+            "verdict": "warn",
+            "confidence": None,
+            "findings": [
+                {
+                    "id": (
+                        "llm_verifier_"
+                        "invalid_confidence"
+                    ),
+                    "severity": "minor",
+                    "message": (
+                        "LLM logic verifier가 "
+                        "유효하지 않은 confidence를 "
+                        "반환했습니다: "
+                        f"{confidence_error}; "
+                        "value="
+                        f"{confidence_value!r}"
+                    ),
+                    "correct_rule": (
+                        "유한한 수치 confidence가 "
+                        "없으면 fatal cap을 "
+                        "적용하지 않습니다."
+                    ),
+                    "affected_layers": ["C"],
+                }
+            ],
+            "candidates": candidates,
+            "fatal_error_detected": False,
+            "recommended_ceiling": None,
+            "mode": "warn",
+            "reason": (
+                "LLM verifier invalid "
+                "confidence"
+            ),
+            "confidence_diagnostic": {
+                "ok": False,
+                "error": confidence_error,
+                "value_repr": repr(
+                    confidence_value
+                ),
+            },
+        }
 
     normalized_findings: list[dict[str, Any]] = []
 
