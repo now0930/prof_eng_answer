@@ -3798,5 +3798,147 @@ class LogicTopicRoutingFailureRegressionTest(
             1,
         )
 
+
+class GeminiScoreFiniteNormalizationRegressionTest(
+    unittest.TestCase
+):
+    def test_non_finite_gemini_score_falls_back_to_base(
+        self,
+    ) -> None:
+        from grading_agents import (
+            _phase6_limit_gemini_score,
+        )
+
+        for value in (
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(value=value):
+                result = (
+                    _phase6_limit_gemini_score(
+                        layer_id="C",
+                        base_score=5.0,
+                        gemini_score=value,
+                        max_score=10.0,
+                    )
+                )
+
+                self.assertEqual(
+                    result["base_score"],
+                    5.0,
+                )
+                self.assertEqual(
+                    result["raw_gemini_score"],
+                    5.0,
+                )
+                self.assertEqual(
+                    result["effective_score"],
+                    5.0,
+                )
+                self.assertFalse(
+                    result["raise_limited"]
+                )
+                self.assertEqual(
+                    result[
+                        "normalization_fallbacks"
+                    ],
+                    [
+                        "gemini_score_non_finite",
+                    ],
+                )
+
+    def test_non_finite_base_score_uses_zero_fallback(
+        self,
+    ) -> None:
+        from grading_agents import (
+            _phase6_limit_gemini_score,
+        )
+
+        for value in (
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(value=value):
+                result = (
+                    _phase6_limit_gemini_score(
+                        layer_id="C",
+                        base_score=value,
+                        gemini_score=5.0,
+                        max_score=10.0,
+                    )
+                )
+
+                self.assertEqual(
+                    result["base_score"],
+                    0.0,
+                )
+                self.assertEqual(
+                    result["raw_gemini_score"],
+                    5.0,
+                )
+                self.assertEqual(
+                    result["effective_score"],
+                    0.75,
+                )
+                self.assertTrue(
+                    result["raise_limited"]
+                )
+                self.assertEqual(
+                    result[
+                        "normalization_fallbacks"
+                    ],
+                    [
+                        "base_score_non_finite",
+                    ],
+                )
+
+    def test_non_finite_maximum_disables_layer_score(
+        self,
+    ) -> None:
+        from grading_agents import (
+            _phase6_limit_gemini_score,
+        )
+
+        for value in (
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(value=value):
+                result = (
+                    _phase6_limit_gemini_score(
+                        layer_id="C",
+                        base_score=5.0,
+                        gemini_score=7.0,
+                        max_score=value,
+                    )
+                )
+
+                self.assertEqual(
+                    result["base_score"],
+                    0.0,
+                )
+                self.assertEqual(
+                    result["raw_gemini_score"],
+                    0.0,
+                )
+                self.assertEqual(
+                    result["effective_score"],
+                    0.0,
+                )
+                self.assertFalse(
+                    result["raise_limited"]
+                )
+                self.assertEqual(
+                    result[
+                        "normalization_fallbacks"
+                    ],
+                    [
+                        "max_score_non_finite",
+                    ],
+                )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

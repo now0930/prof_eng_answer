@@ -1,3 +1,4 @@
+import math
 from rubric_registry import load_fact_anchor_bank
 #!/usr/bin/env python3
 import json
@@ -2745,46 +2746,101 @@ def _phase6_limit_gemini_score(
     gemini_score,
     max_score,
 ):
-    try:
-        maximum = max(0.0, float(max_score))
-    except Exception:
-        maximum = 0.0
+    normalization_fallbacks: list[str] = []
 
-    try:
-        base = float(base_score)
-    except Exception:
-        base = 0.0
+    def coerce_finite_score(
+        value,
+        fallback,
+        label,
+    ):
+        try:
+            numeric = float(value)
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+        ):
+            normalization_fallbacks.append(
+                f"{label}_invalid"
+            )
+            return float(fallback)
 
-    try:
-        raw_gemini = float(gemini_score)
-    except Exception:
-        raw_gemini = base
+        if not math.isfinite(numeric):
+            normalization_fallbacks.append(
+                f"{label}_non_finite"
+            )
+            return float(fallback)
 
-    base = max(0.0, min(maximum, base))
-    raw_gemini = max(0.0, min(maximum, raw_gemini))
+        return numeric
 
-    raise_cap = float(
-        _PHASE6_GEMINI_LAYER_RAISE_CAPS.get(
-            str(layer_id),
-            0.50,
-        )
+    maximum = max(
+        0.0,
+        coerce_finite_score(
+            max_score,
+            0.0,
+            "max_score",
+        ),
+    )
+
+    base = coerce_finite_score(
+        base_score,
+        0.0,
+        "base_score",
+    )
+    base = max(
+        0.0,
+        min(maximum, base),
+    )
+
+    raw_gemini = coerce_finite_score(
+        gemini_score,
+        base,
+        "gemini_score",
+    )
+    raw_gemini = max(
+        0.0,
+        min(maximum, raw_gemini),
+    )
+
+    raise_cap = max(
+        0.0,
+        float(
+            _PHASE6_GEMINI_LAYER_RAISE_CAPS.get(
+                str(layer_id),
+                0.50,
+            )
+        ),
     )
 
     if raw_gemini <= base:
         effective = raw_gemini
         limited = False
     else:
-        effective = min(raw_gemini, base + raise_cap)
+        effective = min(
+            raw_gemini,
+            base + raise_cap,
+        )
         limited = effective < raw_gemini
 
     return {
         "base_score": round(base, 2),
-        "raw_gemini_score": round(raw_gemini, 2),
-        "effective_score": round(effective, 2),
-        "raise_cap": round(raise_cap, 2),
+        "raw_gemini_score": round(
+            raw_gemini,
+            2,
+        ),
+        "effective_score": round(
+            effective,
+            2,
+        ),
+        "raise_cap": round(
+            raise_cap,
+            2,
+        ),
         "raise_limited": limited,
+        "normalization_fallbacks": (
+            normalization_fallbacks
+        ),
     }
-
 def _phase6_merge_gemini_feedback(grade, gemini_eval):
     if not gemini_eval or not gemini_eval.get("ok"):
         grade["gemini_semantic_evaluation"] = gemini_eval or {
