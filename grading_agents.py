@@ -4029,50 +4029,172 @@ def _phase8_merge_originality_feedback(grade, originality_eval):
 
     grade["originality_evaluation"] = originality_eval
 
-    parsed = (originality_eval or {}).get("parsed") or {}
-    final_score = parsed.get("final_originality_score")
-    raw_score = parsed.get("raw_originality_score")
-    comment = parsed.get("overall_comment") or ""
+    if isinstance(originality_eval, dict):
+        parsed = originality_eval.get("parsed") or {}
+    else:
+        parsed = {}
+
+    if not isinstance(parsed, dict):
+        parsed = {}
+
+    final_score = parsed.get(
+        "final_originality_score"
+    )
+    raw_score = parsed.get(
+        "raw_originality_score"
+    )
+    comment = (
+        parsed.get("overall_comment")
+        or ""
+    )
+
+    fs = None
+    score_error = None
 
     if final_score is not None:
-        grade["originality_score"] = final_score
-        grade["originality_raw_score"] = raw_score
+        if isinstance(final_score, bool):
+            score_error = (
+                "final_originality_score must be "
+                "a finite numeric value, not bool"
+            )
+        else:
+            try:
+                score_candidate = float(
+                    final_score
+                )
+            except (
+                TypeError,
+                ValueError,
+                OverflowError,
+            ) as error:
+                score_error = (
+                    "final_originality_score "
+                    "conversion failed: "
+                    f"{error!r}"
+                )
+            else:
+                if math.isfinite(
+                    score_candidate
+                ):
+                    fs = score_candidate
+                else:
+                    score_error = (
+                        "final_originality_score "
+                        "must be finite"
+                    )
 
-    if comment:
-        old_summary = str(grade.get("summary") or "")
-        add = f" 독창성/기술사적 판단성 평가는 {final_score}/2.0점으로 D/E 항목에 반영했습니다."
-        if "독창성/기술사적 판단성" not in old_summary:
-            grade["summary"] = (old_summary + add).strip()
+    if score_error is not None:
+        grade.pop(
+            "originality_score",
+            None,
+        )
+        grade.pop(
+            "originality_raw_score",
+            None,
+        )
+
+        diagnostic = {
+            "field": (
+                "final_originality_score"
+            ),
+            "error": score_error,
+            "value_repr": repr(
+                final_score
+            ),
+        }
+        grade[
+            "originality_feedback_diagnostic"
+        ] = diagnostic
+
+        print(
+            "[agent] phase8 originality "
+            "feedback score invalid: "
+            f"{diagnostic!r}"
+        )
+    else:
+        grade.pop(
+            "originality_feedback_diagnostic",
+            None,
+        )
+
+    if fs is not None:
+        grade["originality_score"] = fs
+        grade[
+            "originality_raw_score"
+        ] = raw_score
+
+    if comment and fs is not None:
+        old_summary = str(
+            grade.get("summary") or ""
+        )
+        add = (
+            " 독창성/기술사적 판단성 평가는 "
+            f"{fs:g}/2.0점으로 D/E 항목에 "
+            "반영했습니다."
+        )
+
+        if (
+            "독창성/기술사적 판단성"
+            not in old_summary
+        ):
+            grade["summary"] = (
+                old_summary + add
+            ).strip()
 
     strengths = grade.get("strengths")
+
     if not isinstance(strengths, list):
         strengths = []
+
     weaknesses = grade.get("weaknesses")
+
     if not isinstance(weaknesses, list):
         weaknesses = []
-    advice = grade.get("rewrite_advice")
+
+    advice = grade.get(
+        "rewrite_advice"
+    )
+
     if not isinstance(advice, list):
         advice = []
 
-    if final_score is not None:
-        try:
-            fs = float(final_score)
-        except Exception:
-            fs = 0.0
-
+    if fs is not None:
         if fs >= 1.2:
-            strengths.append(f"독창성/기술사적 판단성: {final_score}/2.0 - {comment}")
+            strengths.append(
+                "독창성/기술사적 판단성: "
+                f"{fs:g}/2.0 - {comment}"
+            )
         elif fs <= 0.5:
-            weaknesses.append(f"독창성/기술사적 판단성 부족: {final_score}/2.0 - 현장 조건, 대안 비교, 우선순위, 검증 기준이 부족합니다.")
+            weaknesses.append(
+                "독창성/기술사적 판단성 부족: "
+                f"{fs:g}/2.0 - 현장 조건, "
+                "대안 비교, 우선순위, "
+                "검증 기준이 부족합니다."
+            )
         else:
-            weaknesses.append(f"독창성/기술사적 판단성 보통: {final_score}/2.0 - 일부 판단은 있으나 구체성이 더 필요합니다.")
+            weaknesses.append(
+                "독창성/기술사적 판단성 보통: "
+                f"{fs:g}/2.0 - 일부 판단은 "
+                "있으나 구체성이 더 필요합니다."
+            )
 
-    for item in parsed.get("improvement_advice") or []:
+    for item in (
+        parsed.get("improvement_advice")
+        or []
+    ):
         if item and item not in advice:
             advice.append(item)
 
-    if "현장 조건, 대안별 trade-off, 적용 우선순위, 검증 기준을 포함해 기술사적 판단성을 강화하세요." not in advice:
-        advice.append("현장 조건, 대안별 trade-off, 적용 우선순위, 검증 기준을 포함해 기술사적 판단성을 강화하세요.")
+    standard_advice = (
+        "현장 조건, 대안별 trade-off, "
+        "적용 우선순위, 검증 기준을 포함해 "
+        "기술사적 판단성을 강화하세요."
+    )
+
+    if standard_advice not in advice:
+        advice.append(
+            standard_advice
+        )
 
     grade["strengths"] = strengths
     grade["weaknesses"] = weaknesses

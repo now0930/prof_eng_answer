@@ -4814,5 +4814,268 @@ class QuestionTypeCoveragePenaltyDisplayRegressionTest(
                     display.lower(),
                 )
 
+
+class OriginalityMergeScoreCoercionRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _merge(
+        final_score_marker,
+        *,
+        include_score=True,
+        comment="현장 판단 반영",
+    ):
+        import grading_agents
+
+        parsed = {
+            "raw_originality_score": 1.7,
+            "overall_comment": comment,
+            "improvement_advice": [],
+        }
+
+        if include_score:
+            parsed[
+                "final_originality_score"
+            ] = final_score_marker
+
+        grade = {
+            "summary": "기존 요약",
+            "strengths": [],
+            "weaknesses": [],
+            "rewrite_advice": [],
+        }
+
+        return (
+            grading_agents
+            ._phase8_merge_originality_feedback(
+                grade,
+                {
+                    "ok": True,
+                    "parsed": parsed,
+                },
+            )
+        )
+
+    def test_originality_merge_accepts_finite_final_scores(
+        self,
+    ) -> None:
+        high = self._merge(1.5)
+        medium = self._merge("0.8")
+        low = self._merge(0)
+
+        self.assertEqual(
+            high["originality_score"],
+            1.5,
+        )
+        self.assertEqual(
+            medium["originality_score"],
+            0.8,
+        )
+        self.assertEqual(
+            low["originality_score"],
+            0.0,
+        )
+
+        self.assertTrue(
+            any(
+                "독창성/기술사적 판단성: "
+                "1.5/2.0"
+                in item
+                for item in high["strengths"]
+            )
+        )
+        self.assertTrue(
+            any(
+                "독창성/기술사적 판단성 보통: "
+                "0.8/2.0"
+                in item
+                for item
+                in medium["weaknesses"]
+            )
+        )
+        self.assertTrue(
+            any(
+                "독창성/기술사적 판단성 부족: "
+                "0/2.0"
+                in item
+                for item in low["weaknesses"]
+            )
+        )
+
+        for result in (
+            high,
+            medium,
+            low,
+        ):
+            self.assertNotIn(
+                "originality_feedback_diagnostic",
+                result,
+            )
+            self.assertIn(
+                "독창성/기술사적 판단성 평가는",
+                result["summary"],
+            )
+
+    def test_originality_merge_preserves_missing_score_semantics(
+        self,
+    ) -> None:
+        missing = self._merge(
+            None,
+            include_score=False,
+        )
+        none_value = self._merge(None)
+
+        for result in (
+            missing,
+            none_value,
+        ):
+            self.assertNotIn(
+                "originality_score",
+                result,
+            )
+            self.assertNotIn(
+                "originality_raw_score",
+                result,
+            )
+            self.assertNotIn(
+                "originality_feedback_diagnostic",
+                result,
+            )
+            self.assertEqual(
+                result["summary"],
+                "기존 요약",
+            )
+            self.assertEqual(
+                result["strengths"],
+                [],
+            )
+            self.assertEqual(
+                result["weaknesses"],
+                [],
+            )
+
+    def test_originality_merge_rejects_malformed_final_scores(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+
+        for value in (
+            "invalid",
+            True,
+            [],
+            {},
+        ):
+            with self.subTest(value=value):
+                output = io.StringIO()
+
+                with redirect_stdout(output):
+                    result = self._merge(
+                        value
+                    )
+
+                self.assertNotIn(
+                    "originality_score",
+                    result,
+                )
+                self.assertNotIn(
+                    "originality_raw_score",
+                    result,
+                )
+                self.assertEqual(
+                    result["summary"],
+                    "기존 요약",
+                )
+                self.assertEqual(
+                    result["strengths"],
+                    [],
+                )
+                self.assertEqual(
+                    result["weaknesses"],
+                    [],
+                )
+
+                diagnostic = result[
+                    "originality_feedback_diagnostic"
+                ]
+
+                self.assertEqual(
+                    diagnostic["field"],
+                    "final_originality_score",
+                )
+                self.assertIn(
+                    "final_originality_score",
+                    diagnostic["error"],
+                )
+                self.assertIn(
+                    "[agent] phase8 originality "
+                    "feedback score invalid:",
+                    output.getvalue(),
+                )
+
+    def test_originality_merge_rejects_non_finite_final_scores(
+        self,
+    ) -> None:
+        import io
+        import math
+        from contextlib import redirect_stdout
+
+        for value in (
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(value=value):
+                output = io.StringIO()
+
+                with redirect_stdout(output):
+                    result = self._merge(
+                        value
+                    )
+
+                self.assertNotIn(
+                    "originality_score",
+                    result,
+                )
+                self.assertNotIn(
+                    "originality_raw_score",
+                    result,
+                )
+                self.assertEqual(
+                    result["summary"],
+                    "기존 요약",
+                )
+                self.assertEqual(
+                    result["strengths"],
+                    [],
+                )
+                self.assertEqual(
+                    result["weaknesses"],
+                    [],
+                )
+
+                diagnostic = result[
+                    "originality_feedback_diagnostic"
+                ]
+
+                self.assertIn(
+                    "must be finite",
+                    diagnostic["error"],
+                )
+
+                self.assertFalse(
+                    any(
+                        isinstance(item, float)
+                        and not math.isfinite(item)
+                        for item
+                        in result.values()
+                    )
+                )
+                self.assertIn(
+                    "[agent] phase8 originality "
+                    "feedback score invalid:",
+                    output.getvalue(),
+                )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
