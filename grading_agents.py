@@ -4042,59 +4042,104 @@ def _phase8b_enforce_final_volume_cap(grade):
 # 문제 유형은 C항목의 Fact 설명 방식 렌즈로만 사용
 # ============================================================
 
-def _phase9_run_question_type_lens(input_text, answer_text, subject_rubric=None, session_dir=None):
+def _phase9_run_question_type_lens(
+    input_text,
+    answer_text,
+    subject_rubric=None,
+    session_dir=None,
+):
+    def persist_evaluation(eval_data):
+        if session_dir is None:
+            return
+
+        try:
+            _phase2_json_write(
+                session_dir / "question_type_evaluation.json",
+                eval_data,
+            )
+        except Exception as write_error:
+            print(
+                "[agent] phase9 question type lens "
+                "persistence failed: "
+                f"{write_error!r}"
+            )
+
     try:
-        from question_type_router import detect_question_type, load_question_type_profile
+        from question_type_router import (
+            detect_question_type,
+            load_question_type_profile,
+        )
 
         question_text = _phase3_extract_question_text(input_text)
 
         profile_path = None
         if isinstance(subject_rubric, dict):
-            profile_path = subject_rubric.get("question_type_profile")
+            profile_path = subject_rubric.get(
+                "question_type_profile"
+            )
 
         profile = load_question_type_profile(profile_path)
 
         result = detect_question_type(
             question_text=question_text,
             answer_text=answer_text,
-            profile=profile
+            profile=profile,
         )
 
-        if session_dir is not None:
-            try:
-                _phase2_json_write(session_dir / "question_type_evaluation.json", result)
-            except Exception:
-                pass
+        persist_evaluation(result)
 
-        try:
-            p = result.get("primary_type", {})
-            _phase2_log(f"[agent] phase9 question type lens selected: {p.get('id')} ({p.get('name')})")
-        except Exception:
-            pass
+        primary_type = result.get("primary_type", {})
+        if not isinstance(primary_type, dict):
+            primary_type = {}
+
+        print(
+            "[agent] phase9 question type lens selected: "
+            f"{primary_type.get('id')} "
+            f"({primary_type.get('name')})"
+        )
 
         return result
 
-    except Exception as e:
+    except Exception as error:
         fallback = {
             "version": "question_type_lens_v1_fallback",
             "confidence": "low",
             "primary_type": {
                 "id": "GENERAL",
                 "name": "일반 설명형",
-                "c_lens": "문제 요구에 맞는 핵심 fact, 적용 범위, 한계, 실무 의미를 설명했는가",
-                "c_required_elements": ["핵심 fact", "적용 범위", "한계", "실무 의미"],
-                "weak_answer_pattern": "키워드만 나열하고 설명 구조와 현장 의미가 부족함",
-                "high_score_pattern": "핵심 fact를 구조적으로 설명하고 현실 적용 의미까지 연결함"
+                "c_lens": (
+                    "문제 요구에 맞는 핵심 fact, 적용 범위, "
+                    "한계, 실무 의미를 설명했는가"
+                ),
+                "c_required_elements": [
+                    "핵심 fact",
+                    "적용 범위",
+                    "한계",
+                    "실무 의미",
+                ],
+                "weak_answer_pattern": (
+                    "키워드만 나열하고 설명 구조와 "
+                    "현장 의미가 부족함"
+                ),
+                "high_score_pattern": (
+                    "핵심 fact를 구조적으로 설명하고 "
+                    "현실 적용 의미까지 연결함"
+                ),
             },
             "candidates": [],
-            "error": repr(e),
-            "interpretation": "문제 유형 렌즈 선택 실패로 GENERAL 렌즈를 적용함."
+            "error": repr(error),
+            "interpretation": (
+                "문제 유형 렌즈 선택 실패로 "
+                "GENERAL 렌즈를 적용함."
+            ),
         }
 
-        try:
-            _phase2_log(f"[agent] phase9 question type lens failed: {e!r}")
-        except Exception:
-            pass
+        persist_evaluation(fallback)
+
+        print(
+            "[agent] phase9 question type lens failed: "
+            f"{error!r}"
+        )
 
         return fallback
 

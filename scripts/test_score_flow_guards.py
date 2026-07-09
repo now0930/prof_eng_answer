@@ -1094,6 +1094,276 @@ class ModelAnswerReferenceResultContractRegressionTest(
                 )
 
 
+    def test_phase9_success_persists_evaluation(self) -> None:
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        import grading_agents
+
+        evaluation = {
+            "version": "question_type_lens_v1",
+            "confidence": "high",
+            "primary_type": {
+                "id": "COMPARE",
+                "name": "비교·선정형",
+            },
+            "candidates": [],
+        }
+
+        with TemporaryDirectory() as temporary_directory:
+            session_dir = Path(temporary_directory)
+
+            with (
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    return_value="두 방식을 비교하시오.",
+                ),
+                patch(
+                    "question_type_router."
+                    "load_question_type_profile",
+                    return_value={"types": []},
+                ),
+                patch(
+                    "question_type_router.detect_question_type",
+                    return_value=evaluation,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                ) as write_mock,
+            ):
+                result = (
+                    grading_agents
+                    ._phase9_run_question_type_lens(
+                        "문제: 두 방식을 비교하시오.",
+                        "두 방식의 특징과 선정 기준",
+                        session_dir=session_dir,
+                    )
+                )
+
+        self.assertEqual(result, evaluation)
+        write_mock.assert_called_once_with(
+            session_dir / "question_type_evaluation.json",
+            evaluation,
+        )
+
+    def test_phase9_router_failure_persists_fallback(
+        self,
+    ) -> None:
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        import grading_agents
+
+        with TemporaryDirectory() as temporary_directory:
+            session_dir = Path(temporary_directory)
+
+            with (
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    return_value="원리를 설명하시오.",
+                ),
+                patch(
+                    "question_type_router."
+                    "load_question_type_profile",
+                    return_value={"types": []},
+                ),
+                patch(
+                    "question_type_router.detect_question_type",
+                    side_effect=RuntimeError(
+                        "simulated phase9 router failure"
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                ) as write_mock,
+            ):
+                result = (
+                    grading_agents
+                    ._phase9_run_question_type_lens(
+                        "문제: 원리를 설명하시오.",
+                        "원리에 대한 답안",
+                        session_dir=session_dir,
+                    )
+                )
+
+        self.assertEqual(
+            result["version"],
+            "question_type_lens_v1_fallback",
+        )
+        self.assertEqual(
+            result["primary_type"]["id"],
+            "GENERAL",
+        )
+        self.assertIn(
+            "simulated phase9 router failure",
+            result["error"],
+        )
+        write_mock.assert_called_once_with(
+            session_dir / "question_type_evaluation.json",
+            result,
+        )
+
+    def test_phase9_persistence_failure_is_reported_and_preserves_result(
+        self,
+    ) -> None:
+        from contextlib import redirect_stdout
+        from io import StringIO
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        import grading_agents
+
+        evaluation = {
+            "version": "question_type_lens_v1",
+            "confidence": "medium",
+            "primary_type": {
+                "id": "PROCEDURE",
+                "name": "절차·방법론형",
+            },
+            "candidates": [],
+        }
+        output = StringIO()
+
+        with TemporaryDirectory() as temporary_directory:
+            session_dir = Path(temporary_directory)
+
+            with (
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    return_value="절차를 설명하시오.",
+                ),
+                patch(
+                    "question_type_router."
+                    "load_question_type_profile",
+                    return_value={"types": []},
+                ),
+                patch(
+                    "question_type_router.detect_question_type",
+                    return_value=evaluation,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=OSError(
+                        "simulated phase9 persistence failure"
+                    ),
+                ),
+                redirect_stdout(output),
+            ):
+                result = (
+                    grading_agents
+                    ._phase9_run_question_type_lens(
+                        "문제: 절차를 설명하시오.",
+                        "절차에 대한 답안",
+                        session_dir=session_dir,
+                    )
+                )
+
+        self.assertEqual(result, evaluation)
+        self.assertIn(
+            (
+                "phase9 question type lens "
+                "persistence failed"
+            ),
+            output.getvalue(),
+        )
+        self.assertIn(
+            "simulated phase9 persistence failure",
+            output.getvalue(),
+        )
+        self.assertIn(
+            "phase9 question type lens selected",
+            output.getvalue(),
+        )
+
+    def test_phase9_fallback_persistence_failure_preserves_result(
+        self,
+    ) -> None:
+        from contextlib import redirect_stdout
+        from io import StringIO
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        import grading_agents
+
+        output = StringIO()
+
+        with TemporaryDirectory() as temporary_directory:
+            session_dir = Path(temporary_directory)
+
+            with (
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    return_value="구성을 설명하시오.",
+                ),
+                patch(
+                    "question_type_router."
+                    "load_question_type_profile",
+                    return_value={"types": []},
+                ),
+                patch(
+                    "question_type_router.detect_question_type",
+                    side_effect=RuntimeError(
+                        "simulated phase9 fallback trigger"
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=OSError(
+                        "simulated fallback persistence failure"
+                    ),
+                ),
+                redirect_stdout(output),
+            ):
+                result = (
+                    grading_agents
+                    ._phase9_run_question_type_lens(
+                        "문제: 구성을 설명하시오.",
+                        "구성에 대한 답안",
+                        session_dir=session_dir,
+                    )
+                )
+
+        self.assertEqual(
+            result["version"],
+            "question_type_lens_v1_fallback",
+        )
+        self.assertEqual(
+            result["primary_type"]["id"],
+            "GENERAL",
+        )
+        self.assertIn(
+            "simulated phase9 fallback trigger",
+            result["error"],
+        )
+        self.assertIn(
+            (
+                "phase9 question type lens "
+                "persistence failed"
+            ),
+            output.getvalue(),
+        )
+        self.assertIn(
+            "simulated fallback persistence failure",
+            output.getvalue(),
+        )
+        self.assertIn(
+            "phase9 question type lens failed",
+            output.getvalue(),
+        )
+
+
 
 
 class TopicImportanceFallbackRegressionTest(
