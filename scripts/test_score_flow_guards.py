@@ -2958,5 +2958,99 @@ class OriginalityPersistenceRegressionTest(
         )
 
 
+
+class LlmJsonParserRegressionTest(unittest.TestCase):
+    def test_llm_json_parser_parses_fenced_object(
+        self,
+    ) -> None:
+        import grade_output_summarizer
+
+        result = grade_output_summarizer._parse_llm_json(
+            """```json
+            {
+                "summary": "정상 결과",
+                "score": 17.5
+            }
+            ```"""
+        )
+
+        self.assertEqual(
+            result,
+            {
+                "summary": "정상 결과",
+                "score": 17.5,
+            },
+        )
+
+    def test_llm_json_parser_falls_back_after_truncated_fence_match(
+        self,
+    ) -> None:
+        import grade_output_summarizer
+
+        result = grade_output_summarizer._parse_llm_json(
+            """```json
+            {
+                "summary": "중첩 JSON",
+                "details": {
+                    "grade": "B",
+                    "score": 16.0
+                }
+            }
+            ```"""
+        )
+
+        self.assertEqual(
+            result,
+            {
+                "summary": "중첩 JSON",
+                "details": {
+                    "grade": "B",
+                    "score": 16.0,
+                },
+            },
+        )
+
+    def test_llm_json_parser_parses_embedded_object(
+        self,
+    ) -> None:
+        import grade_output_summarizer
+
+        result = grade_output_summarizer._parse_llm_json(
+            (
+                "다음은 요약 결과입니다.\n"
+                '{"summary": "본문 객체", "passed": true}\n'
+                "검토를 완료했습니다."
+            )
+        )
+
+        self.assertEqual(
+            result,
+            {
+                "summary": "본문 객체",
+                "passed": True,
+            },
+        )
+
+    def test_llm_json_parser_rejects_malformed_or_non_object_response(
+        self,
+    ) -> None:
+        import grade_output_summarizer
+
+        invalid_inputs = (
+            "",
+            "JSON 응답이 없습니다.",
+            '{"summary": "닫히지 않은 객체"',
+            "[1, 2, 3]",
+            "```json\n[1, 2, 3]\n```",
+        )
+
+        for raw in invalid_inputs:
+            with self.subTest(raw=raw):
+                self.assertIsNone(
+                    grade_output_summarizer._parse_llm_json(
+                        raw
+                    )
+                )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

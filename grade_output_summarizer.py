@@ -308,20 +308,32 @@ def _parse_llm_json(raw: str) -> dict[str, Any] | None:
     if not text:
         return None
 
-    fenced = re.search(r"```(?:json)?\s*(\{.*?\})\s*```", text, re.S)
-    if fenced:
+    def parse_object(candidate: str) -> dict[str, Any] | None:
         try:
-            return json.loads(fenced.group(1))
-        except Exception:
-            pass
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            return None
+
+        if not isinstance(parsed, dict):
+            return None
+
+        return parsed
+
+    fenced = re.search(
+        r"```(?:json)?\s*(\{.*?\})\s*```",
+        text,
+        re.S,
+    )
+    if fenced:
+        parsed = parse_object(fenced.group(1))
+        if parsed is not None:
+            return parsed
 
     start = text.find("{")
     end = text.rfind("}")
+
     if start >= 0 and end > start:
-        try:
-            return json.loads(text[start : end + 1])
-        except Exception:
-            return None
+        return parse_object(text[start : end + 1])
 
     return None
 
