@@ -515,20 +515,53 @@ def summarize_grade_for_telegram(
     grade: dict[str, Any],
     call_ollama_fn: Callable[[str], str] | None,
 ) -> str | None:
-    """Build compact Telegram output. Return None to use legacy fallback."""
-    if os.getenv("GRADE_OUTPUT_LLM_SUMMARY", "1").strip().lower() in {"0", "false", "off", "no"}:
+    """Build compact Telegram output.
+
+    Return None only when compact summarization is
+    explicitly disabled or no callable is available.
+    LLM failures use the deterministic normalisation
+    and rendering fallback.
+    """
+    if (
+        os.getenv(
+            "GRADE_OUTPUT_LLM_SUMMARY",
+            "1",
+        )
+        .strip()
+        .lower()
+        in {
+            "0",
+            "false",
+            "off",
+            "no",
+        }
+    ):
         return None
-    if not isinstance(grade, dict) or call_ollama_fn is None:
+
+    if (
+        not isinstance(grade, dict)
+        or call_ollama_fn is None
+    ):
         return None
 
     payload = _build_payload(grade)
     prompt = _build_prompt(payload)
 
     try:
-        raw = str(call_ollama_fn(prompt) or "").strip()
+        raw = str(
+            call_ollama_fn(prompt)
+            or ""
+        ).strip()
     except Exception:
-        return None
+        raw = ""
 
     llm_obj = _parse_llm_json(raw)
-    summary = _normalise_summary(llm_obj, payload)
-    return _render(summary, payload)
+    summary = _normalise_summary(
+        llm_obj,
+        payload,
+    )
+
+    return _render(
+        summary,
+        payload,
+    )

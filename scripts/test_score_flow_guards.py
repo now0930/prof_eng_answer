@@ -5890,5 +5890,155 @@ class PhaseScoreCallerDiagnosticRegressionTest(
             diagnostic["error"],
         )
 
+
+class TelegramSummaryFallbackRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _grade():
+        return {
+            "total_score": 10.0,
+            "max_score": 25.0,
+            "score_range": "10~10",
+            "breakdown": [],
+            "summary": "기존 요약",
+        }
+
+    def test_telegram_summary_disabled_returns_none(
+        self,
+    ) -> None:
+        import os
+
+        import grade_output_summarizer
+
+        with patch.dict(
+            os.environ,
+            {
+                "GRADE_OUTPUT_LLM_SUMMARY": (
+                    "off"
+                ),
+            },
+            clear=False,
+        ):
+            result = (
+                grade_output_summarizer
+                .summarize_grade_for_telegram(
+                    self._grade(),
+                    lambda prompt: "{}",
+                )
+            )
+
+        self.assertIsNone(result)
+
+    def test_telegram_summary_unavailable_callable_returns_none(
+        self,
+    ) -> None:
+        import os
+
+        import grade_output_summarizer
+
+        with patch.dict(
+            os.environ,
+            {
+                "GRADE_OUTPUT_LLM_SUMMARY": (
+                    "1"
+                ),
+            },
+            clear=False,
+        ):
+            result = (
+                grade_output_summarizer
+                .summarize_grade_for_telegram(
+                    self._grade(),
+                    None,
+                )
+            )
+
+        self.assertIsNone(result)
+
+    def test_telegram_summary_exception_uses_deterministic_fallback(
+        self,
+    ) -> None:
+        import os
+
+        import grade_output_summarizer
+
+        def fail_summary(
+            prompt,
+        ):
+            raise RuntimeError(
+                "simulated summary failure"
+            )
+
+        with patch.dict(
+            os.environ,
+            {
+                "GRADE_OUTPUT_LLM_SUMMARY": (
+                    "1"
+                ),
+            },
+            clear=False,
+        ):
+            failed_result = (
+                grade_output_summarizer
+                .summarize_grade_for_telegram(
+                    self._grade(),
+                    fail_summary,
+                )
+            )
+            malformed_result = (
+                grade_output_summarizer
+                .summarize_grade_for_telegram(
+                    self._grade(),
+                    lambda prompt: (
+                        "not valid json"
+                    ),
+                )
+            )
+
+        self.assertIsInstance(
+            failed_result,
+            str,
+        )
+        self.assertTrue(
+            failed_result.strip(),
+        )
+        self.assertEqual(
+            failed_result,
+            malformed_result,
+        )
+
+    def test_telegram_summary_object_response_returns_text(
+        self,
+    ) -> None:
+        import os
+
+        import grade_output_summarizer
+
+        with patch.dict(
+            os.environ,
+            {
+                "GRADE_OUTPUT_LLM_SUMMARY": (
+                    "1"
+                ),
+            },
+            clear=False,
+        ):
+            result = (
+                grade_output_summarizer
+                .summarize_grade_for_telegram(
+                    self._grade(),
+                    lambda prompt: "{}",
+                )
+            )
+
+        self.assertIsInstance(
+            result,
+            str,
+        )
+        self.assertTrue(
+            result.strip(),
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
