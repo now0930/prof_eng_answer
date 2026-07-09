@@ -5611,5 +5611,284 @@ class LogicVerifierConfidenceRegressionTest(
             result,
         )
 
+
+class PhaseScoreHelperFiniteContractRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _helpers():
+        import grading_agents
+
+        return {
+            "phase4": (
+                grading_agents
+                ._phase4_cap_layer_score
+            ),
+            "phase6": (
+                grading_agents
+                ._phase6_clamp_score
+            ),
+        }
+
+    def test_phase_score_helpers_accept_finite_values(
+        self,
+    ) -> None:
+        cases = (
+            (
+                "valid_zero",
+                0,
+                5,
+                0.0,
+            ),
+            (
+                "valid_finite",
+                3.25,
+                5,
+                3.25,
+            ),
+            (
+                "numeric_strings",
+                "3.25",
+                "5",
+                3.25,
+            ),
+            (
+                "negative_score",
+                -2,
+                5,
+                0.0,
+            ),
+            (
+                "above_maximum",
+                8,
+                5,
+                5.0,
+            ),
+        )
+
+        for helper_name, helper in (
+            self._helpers().items()
+        ):
+            for (
+                case_name,
+                score,
+                maximum,
+                expected,
+            ) in cases:
+                with self.subTest(
+                    helper=helper_name,
+                    case=case_name,
+                ):
+                    self.assertEqual(
+                        helper(
+                            score,
+                            maximum,
+                        ),
+                        expected,
+                    )
+
+    def test_phase_score_helpers_reject_invalid_values(
+        self,
+    ) -> None:
+        invalid_values = (
+            None,
+            True,
+            False,
+            "invalid",
+            [],
+            {},
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+            10 ** 10000,
+        )
+
+        for helper_name, helper in (
+            self._helpers().items()
+        ):
+            for invalid in invalid_values:
+                with self.subTest(
+                    helper=helper_name,
+                    field="score",
+                    invalid_type=type(invalid).__name__,
+                ):
+                    with self.assertRaisesRegex(
+                        ValueError,
+                        "score",
+                    ):
+                        helper(
+                            invalid,
+                            5,
+                        )
+
+                with self.subTest(
+                    helper=helper_name,
+                    field="max_score",
+                    invalid_type=type(invalid).__name__,
+                ):
+                    with self.assertRaisesRegex(
+                        ValueError,
+                        "max_score",
+                    ):
+                        helper(
+                            3,
+                            invalid,
+                        )
+
+
+class PhaseScoreCallerDiagnosticRegressionTest(
+    unittest.TestCase
+):
+    def test_phase4_invalid_score_preserves_grade_with_diagnostic(
+        self,
+    ) -> None:
+        import copy
+
+        import grading_agents
+
+        grade = {
+            "max_score": 25,
+            "breakdown": [
+                {
+                    "layer_id": "A",
+                    "item": "배경",
+                    "score": True,
+                    "max": 5,
+                    "reason": "base",
+                },
+            ],
+        }
+        original_breakdown = copy.deepcopy(
+            grade["breakdown"]
+        )
+
+        result = (
+            grading_agents
+            ._phase4_apply_rater_weighted_scoring(
+                grade,
+                {
+                    "total_points": 25,
+                    "rater_weights_by_layer": {
+                        "A": {
+                            "professor": 1.0,
+                        },
+                    },
+                },
+                {
+                    "raters": [
+                        {
+                            "id": "professor",
+                            "name": "교수",
+                            "enabled": True,
+                        },
+                    ],
+                },
+            )
+        )
+
+        self.assertIs(
+            result,
+            grade,
+        )
+        self.assertEqual(
+            result["breakdown"],
+            original_breakdown,
+        )
+        self.assertNotIn(
+            "rater_results",
+            result,
+        )
+
+        diagnostic = result[
+            "rater_weighted_scoring_diagnostic"
+        ]
+
+        self.assertEqual(
+            diagnostic["ok"],
+            False,
+        )
+        self.assertEqual(
+            diagnostic["fallback"],
+            "preserve_existing_grade",
+        )
+        self.assertIn(
+            "must not be bool",
+            diagnostic["error"],
+        )
+
+    def test_phase6_invalid_gemini_score_preserves_layer_with_diagnostic(
+        self,
+    ) -> None:
+        import grading_agents
+
+        result = (
+            grading_agents
+            ._phase6_apply_gemini_layer_scores(
+                [
+                    {
+                        "layer_id": "A",
+                        "item": "배경",
+                        "score": 2.0,
+                        "max": 5.0,
+                        "reason": "base",
+                    },
+                ],
+                {
+                    "ok": True,
+                    "parsed": {
+                        "layers": [
+                            {
+                                "layer_id": "A",
+                                "score": float(
+                                    "nan"
+                                ),
+                                "reason": (
+                                    "invalid probe"
+                                ),
+                                "evidence": [],
+                            },
+                        ],
+                    },
+                },
+                {},
+            )
+        )
+
+        self.assertEqual(
+            len(result),
+            1,
+        )
+        self.assertEqual(
+            result[0]["score"],
+            2.0,
+        )
+        self.assertNotIn(
+            "gemini_semantic_score",
+            result[0],
+        )
+        self.assertEqual(
+            result[0][
+                "gemini_semantic_score_applied"
+            ],
+            False,
+        )
+
+        diagnostic = result[0][
+            "gemini_semantic_diagnostic"
+        ]
+
+        self.assertEqual(
+            diagnostic["ok"],
+            False,
+        )
+        self.assertEqual(
+            diagnostic["fallback"],
+            "preserve_base_layer_score",
+        )
+        self.assertIn(
+            "must be finite",
+            diagnostic["error"],
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

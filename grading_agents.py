@@ -2460,13 +2460,58 @@ def _phase4_rater_layer_comment(rater_id, layer_id):
     return comments.get(rater_id, {}).get(layer_id, "")
 
 
-def _phase4_cap_layer_score(score, max_score):
+def _coerce_finite_nonboolean_score(
+    value,
+    field_name,
+):
+    if isinstance(value, bool):
+        raise ValueError(
+            f"{field_name} must not be bool"
+        )
+
     try:
-        score = float(score)
-        max_score = float(max_score)
-    except Exception:
-        return 0.0
-    return round(max(0.0, min(score, max_score)), 2)
+        number = float(value)
+    except (
+        TypeError,
+        ValueError,
+        OverflowError,
+    ) as error:
+        raise ValueError(
+            f"{field_name} must be numeric"
+        ) from error
+
+    if not math.isfinite(number):
+        raise ValueError(
+            f"{field_name} must be finite"
+        )
+
+    return number
+
+
+def _phase4_cap_layer_score(score, max_score):
+    score_value = (
+        _coerce_finite_nonboolean_score(
+            score,
+            "phase4 score",
+        )
+    )
+    maximum_value = (
+        _coerce_finite_nonboolean_score(
+            max_score,
+            "phase4 max_score",
+        )
+    )
+
+    return round(
+        max(
+            0.0,
+            min(
+                score_value,
+                maximum_value,
+            ),
+        ),
+        2,
+    )
 
 
 def _phase4_make_weighted_rater_matrix(grade, scoring_model, rater_profile):
@@ -2478,7 +2523,13 @@ def _phase4_make_weighted_rater_matrix(grade, scoring_model, rater_profile):
     rater_layer_map = {}
     rater_results = []
 
-    max_score = float(scoring_model.get("total_points", grade.get("max_score", 25)))
+    max_score = _coerce_finite_nonboolean_score(
+        scoring_model.get(
+            "total_points",
+            grade.get("max_score", 25),
+        ),
+        "phase4 total_points",
+    )
     official = round(max_score * 0.60, 2)
     practical = round(max_score * 0.70, 2)
     high = round(max_score * 0.80, 2)
@@ -2494,10 +2545,29 @@ def _phase4_make_weighted_rater_matrix(grade, scoring_model, rater_profile):
 
         for layer in layer_scores:
             layer_id = layer.get("layer_id")
-            base_score = float(layer.get("score", 0))
-            layer_max = float(layer.get("max", 0))
-            mult = _phase4_rater_multiplier(rid, layer_id, grade)
-            r_score = _phase4_cap_layer_score(base_score * mult, layer_max)
+            base_score = _coerce_finite_nonboolean_score(
+                layer.get("score", 0),
+                f"phase4 {layer_id} base_score",
+            )
+            layer_max = _coerce_finite_nonboolean_score(
+                layer.get("max", 0),
+                f"phase4 {layer_id} max_score",
+            )
+            mult = _coerce_finite_nonboolean_score(
+                _phase4_rater_multiplier(
+                    rid,
+                    layer_id,
+                    grade,
+                ),
+                (
+                    f"phase4 {rid} {layer_id} "
+                    "multiplier"
+                ),
+            )
+            r_score = _phase4_cap_layer_score(
+                base_score * mult,
+                layer_max,
+            )
 
             r_layers.append({
                 "layer_id": layer_id,
@@ -2559,11 +2629,31 @@ def _phase4_apply_rater_weighted_scoring(grade, scoring_model, rater_profile):
     if not weights_by_layer or not layer_scores or not rater_profile:
         return grade
 
-    rater_results, rater_layer_map = _phase4_make_weighted_rater_matrix(
-        grade,
-        scoring_model,
-        rater_profile
-    )
+    try:
+        (
+            rater_results,
+            rater_layer_map,
+        ) = _phase4_make_weighted_rater_matrix(
+            grade,
+            scoring_model,
+            rater_profile,
+        )
+    except ValueError as error:
+        grade[
+            "rater_weighted_scoring_diagnostic"
+        ] = {
+            "ok": False,
+            "error": repr(error),
+            "fallback": (
+                "preserve_existing_grade"
+            ),
+            "reason": (
+                "채점자 가중 점수 입력이 "
+                "유효하지 않아 기존 점수를 "
+                "보존했습니다."
+            ),
+        }
+        return grade
 
     # layer별 3인 가중 합성
     weighted_layers = []
@@ -2662,12 +2752,29 @@ def _phase4_apply_rater_weighted_scoring(grade, scoring_model, rater_profile):
 # Gemini가 A/B/C/D/E 의미 기반 원점수를 평가하고, Python은 cap/검증/3인 가중치를 적용한다.
 
 def _phase6_clamp_score(score, max_score):
-    try:
-        score = float(score)
-        max_score = float(max_score)
-    except Exception:
-        return 0.0
-    return round(max(0.0, min(score, max_score)), 2)
+    score_value = (
+        _coerce_finite_nonboolean_score(
+            score,
+            "phase6 score",
+        )
+    )
+    maximum_value = (
+        _coerce_finite_nonboolean_score(
+            max_score,
+            "phase6 max_score",
+        )
+    )
+
+    return round(
+        max(
+            0.0,
+            min(
+                score_value,
+                maximum_value,
+            ),
+        ),
+        2,
+    )
 
 
 def _phase6_get_layer_max(scoring_model):
@@ -2698,8 +2805,36 @@ def _phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model):
         new_layer = dict(layer)
 
         if g:
-            max_score = max_by_layer.get(layer_id, float(layer.get("max", 0)))
-            g_score = _phase6_clamp_score(g.get("score", 0), max_score)
+            max_score = max_by_layer.get(
+                layer_id,
+                layer.get("max", 0),
+            )
+
+            try:
+                g_score = _phase6_clamp_score(
+                    g.get("score", 0),
+                    max_score,
+                )
+            except ValueError as error:
+                new_layer[
+                    "gemini_semantic_diagnostic"
+                ] = {
+                    "ok": False,
+                    "error": repr(error),
+                    "fallback": (
+                        "preserve_base_layer_score"
+                    ),
+                    "reason": (
+                        "Gemini 레이어 점수가 "
+                        "유효하지 않아 기존 레이어 "
+                        "점수를 보존했습니다."
+                    ),
+                }
+                new_layer[
+                    "gemini_semantic_score_applied"
+                ] = False
+                out.append(new_layer)
+                continue
 
             score_guard = _phase6_limit_gemini_score(
                 layer_id=layer_id,
