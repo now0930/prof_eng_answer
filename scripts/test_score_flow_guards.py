@@ -5077,5 +5077,374 @@ class OriginalityMergeScoreCoercionRegressionTest(
                     output.getvalue(),
                 )
 
+
+class LogicLlmFatalCheckDiagnosticRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _topic_check():
+        return {
+            "topic_id": "logic_llm_probe",
+            "topic_name": "Logic LLM probe",
+            "fatal_checks": [
+                {
+                    "id": "fatal_probe",
+                    "message": "probe message",
+                    "correct_rule": (
+                        "probe correction"
+                    ),
+                    "recommended_ceiling": 10.0,
+                    "affected_layers": ["C"],
+                    "wrong_patterns": [],
+                },
+            ],
+        }
+
+    @classmethod
+    def _run_verifier(
+        cls,
+        verifier,
+    ):
+        import copy
+        import sys
+        import types
+
+        import logic_check_evaluator
+
+        fake_module = types.ModuleType(
+            "logic_llm_verifier"
+        )
+        fake_module._call_ollama_json = verifier
+
+        original_module = sys.modules.get(
+            "logic_llm_verifier"
+        )
+
+        try:
+            sys.modules[
+                "logic_llm_verifier"
+            ] = fake_module
+
+            return (
+                logic_check_evaluator
+                ._evaluate_topic_fatal_checks_with_llm(
+                    "logic LLM probe answer",
+                    copy.deepcopy(
+                        cls._topic_check()
+                    ),
+                )
+            )
+        finally:
+            if original_module is None:
+                sys.modules.pop(
+                    "logic_llm_verifier",
+                    None,
+                )
+            else:
+                sys.modules[
+                    "logic_llm_verifier"
+                ] = original_module
+
+    def _assert_diagnostic(
+        self,
+        result,
+        reason,
+    ) -> None:
+        self.assertIsInstance(
+            result,
+            list,
+        )
+        self.assertEqual(
+            len(result),
+            1,
+        )
+
+        finding = result[0]
+
+        self.assertEqual(
+            finding["id"],
+            "topic_fatal_semantic_llm_error",
+        )
+        self.assertEqual(
+            finding["severity"],
+            "minor",
+        )
+        self.assertEqual(
+            finding["affected_layers"],
+            ["C"],
+        )
+        self.assertNotIn(
+            "recommended_ceiling",
+            finding,
+        )
+        self.assertEqual(
+            finding["diagnostic"]["ok"],
+            False,
+        )
+        self.assertEqual(
+            finding["diagnostic"]["reason"],
+            reason,
+        )
+        self.assertIn(
+            "fatal cap을 적용하지 않습니다",
+            finding["correct_rule"],
+        )
+
+    def test_logic_llm_call_failure_returns_diagnostic_finding(
+        self,
+    ) -> None:
+        def raise_failure(prompt):
+            raise RuntimeError(
+                "simulated verifier failure"
+            )
+
+        result = self._run_verifier(
+            raise_failure
+        )
+
+        self._assert_diagnostic(
+            result,
+            "verifier_call_failed",
+        )
+        self.assertIn(
+            "simulated verifier failure",
+            result[0]["diagnostic"]["error"],
+        )
+
+    def test_logic_llm_non_object_response_returns_diagnostic_finding(
+        self,
+    ) -> None:
+        for payload in (
+            None,
+            [],
+            "invalid",
+        ):
+            with self.subTest(
+                payload=payload
+            ):
+                result = self._run_verifier(
+                    lambda prompt, payload=payload: (
+                        payload
+                    )
+                )
+
+                self._assert_diagnostic(
+                    result,
+                    "response_must_be_object",
+                )
+
+    def test_logic_llm_invalid_findings_shape_returns_diagnostic_finding(
+        self,
+    ) -> None:
+        payloads = (
+            (
+                {
+                    "confidence": 0.9,
+                },
+                "findings_field_missing",
+            ),
+            (
+                {
+                    "confidence": 0.9,
+                    "findings": {},
+                },
+                "findings_must_be_list",
+            ),
+            (
+                {
+                    "confidence": 0.9,
+                    "findings": "invalid",
+                },
+                "findings_must_be_list",
+            ),
+        )
+
+        for payload, reason in payloads:
+            with self.subTest(
+                payload=payload
+            ):
+                result = self._run_verifier(
+                    lambda prompt, payload=payload: (
+                        payload
+                    )
+                )
+
+                self._assert_diagnostic(
+                    result,
+                    reason,
+                )
+
+    def test_logic_llm_non_dict_finding_returns_diagnostic_finding(
+        self,
+    ) -> None:
+        result = self._run_verifier(
+            lambda prompt: {
+                "verdict": "fatal",
+                "confidence": 0.9,
+                "findings": [
+                    "invalid",
+                ],
+            }
+        )
+
+        self._assert_diagnostic(
+            result,
+            "finding_item_must_be_object",
+        )
+
+    def test_logic_llm_invalid_global_confidence_returns_diagnostic_finding(
+        self,
+    ) -> None:
+        payloads = (
+            {},
+            {
+                "confidence": None,
+            },
+            {
+                "confidence": True,
+            },
+            {
+                "confidence": "invalid",
+            },
+            {
+                "confidence": float("nan"),
+            },
+            {
+                "confidence": float("inf"),
+            },
+            {
+                "confidence": float("-inf"),
+            },
+        )
+
+        for extra in payloads:
+            with self.subTest(
+                extra=extra
+            ):
+                payload = {
+                    "verdict": "fatal",
+                    "findings": [
+                        {
+                            "rule_id": "fatal_probe",
+                            "severity": "fatal",
+                        },
+                    ],
+                }
+                payload.update(extra)
+
+                result = self._run_verifier(
+                    lambda prompt, payload=payload: (
+                        payload
+                    )
+                )
+
+                self._assert_diagnostic(
+                    result,
+                    "invalid_global_confidence",
+                )
+
+    def test_logic_llm_invalid_item_confidence_returns_diagnostic_finding(
+        self,
+    ) -> None:
+        for confidence in (
+            None,
+            True,
+            "invalid",
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(
+                confidence=confidence
+            ):
+                result = self._run_verifier(
+                    lambda prompt, confidence=confidence: {
+                        "verdict": "fatal",
+                        "confidence": 0.9,
+                        "findings": [
+                            {
+                                "rule_id": (
+                                    "fatal_probe"
+                                ),
+                                "severity": "fatal",
+                                "confidence": (
+                                    confidence
+                                ),
+                            },
+                        ],
+                    }
+                )
+
+                self._assert_diagnostic(
+                    result,
+                    "invalid_item_confidence",
+                )
+
+    def test_logic_llm_valid_empty_findings_remain_empty(
+        self,
+    ) -> None:
+        result = self._run_verifier(
+            lambda prompt: {
+                "verdict": "pass",
+                "confidence": 0.9,
+                "findings": [],
+                "reason": "no fatal claim",
+            }
+        )
+
+        self.assertEqual(
+            result,
+            [],
+        )
+
+    def test_logic_llm_valid_fatal_finding_is_preserved(
+        self,
+    ) -> None:
+        result = self._run_verifier(
+            lambda prompt: {
+                "verdict": "fatal",
+                "confidence": "0.9",
+                "findings": [
+                    {
+                        "rule_id": "fatal_probe",
+                        "severity": "fatal",
+                        "confidence": "0.85",
+                        "message": "probe",
+                        "evidence": (
+                            "probe evidence"
+                        ),
+                    },
+                ],
+            }
+        )
+
+        self.assertEqual(
+            len(result),
+            1,
+        )
+
+        finding = result[0]
+
+        self.assertEqual(
+            finding["id"],
+            "llm_semantic_fatal_probe",
+        )
+        self.assertEqual(
+            finding["severity"],
+            "fatal",
+        )
+        self.assertEqual(
+            finding["confidence"],
+            0.9,
+        )
+        self.assertEqual(
+            finding["recommended_ceiling"],
+            10.0,
+        )
+        self.assertNotIn(
+            "diagnostic",
+            finding,
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

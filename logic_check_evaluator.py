@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import math
 import re
 from pathlib import Path
 from typing import Any
@@ -773,6 +774,72 @@ def _evaluate_topic_fatal_checks_with_llm(text: str, topic_check: dict[str, Any]
     if not rules:
         return []
 
+    def _diagnostic_finding(
+        reason: str,
+        error: Exception | None = None,
+    ) -> list[dict[str, Any]]:
+        diagnostic = {
+            "ok": False,
+            "reason": reason,
+            "error": (
+                repr(error)
+                if error is not None
+                else ""
+            ),
+        }
+
+        return [
+            {
+                "id": (
+                    "topic_fatal_semantic_"
+                    "llm_error"
+                ),
+                "severity": "minor",
+                "message": (
+                    "Topic fatal LLM verifier를 "
+                    "사용할 수 없어 semantic "
+                    "fatal 판정을 건너뛰었습니다: "
+                    f"{reason}"
+                ),
+                "correct_rule": (
+                    "LLM verifier 실패 시 fatal "
+                    "cap을 적용하지 않습니다."
+                ),
+                "affected_layers": ["C"],
+                "engine": (
+                    "topic_fatal_semantic_llm_v1"
+                ),
+                "diagnostic": diagnostic,
+            }
+        ]
+
+    def _finite_confidence(
+        value: Any,
+        field_name: str,
+    ) -> float:
+        if isinstance(value, bool):
+            raise ValueError(
+                f"{field_name} must not be bool"
+            )
+
+        try:
+            confidence = float(value)
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+        ) as error:
+            raise ValueError(
+                f"{field_name} must be numeric"
+            ) from error
+
+        if not math.isfinite(confidence):
+            raise ValueError(
+                f"{field_name} must be finite"
+            )
+
+        return confidence
+
     prompt = f"""
 너는 산업계측제어기술사 답안 채점용 Logic Check verifier다.
 
@@ -834,24 +901,67 @@ Return JSON only:
 
     try:
         from logic_llm_verifier import _call_ollama_json
+
         verdict = _call_ollama_json(prompt)
-    except Exception:
-        return []
+    except Exception as error:
+        return _diagnostic_finding(
+            "verifier_call_failed",
+            error,
+        )
 
     if not isinstance(verdict, dict):
-        return []
+        return _diagnostic_finding(
+            "response_must_be_object",
+            TypeError(
+                "logic LLM response must be "
+                f"dict, got "
+                f"{type(verdict).__name__}"
+            ),
+        )
+
+    if "findings" not in verdict:
+        return _diagnostic_finding(
+            "findings_field_missing",
+            KeyError("findings"),
+        )
+
+    raw_findings = verdict.get("findings")
+
+    if not isinstance(raw_findings, list):
+        return _diagnostic_finding(
+            "findings_must_be_list",
+            TypeError(
+                "findings must be list, got "
+                f"{type(raw_findings).__name__}"
+            ),
+        )
+
+    if not all(
+        isinstance(item, dict)
+        for item in raw_findings
+    ):
+        return _diagnostic_finding(
+            "finding_item_must_be_object",
+            TypeError(
+                "every findings item must be dict"
+            ),
+        )
 
     try:
-        global_confidence = float(verdict.get("confidence", 0.0))
-    except Exception:
-        global_confidence = 0.0
+        global_confidence = _finite_confidence(
+            verdict.get("confidence"),
+            "confidence",
+        )
+    except ValueError as error:
+        return _diagnostic_finding(
+            "invalid_global_confidence",
+            error,
+        )
 
     fatal_threshold = 0.75
     findings: list[dict[str, Any]] = []
 
-    for item in verdict.get("findings") or []:
-        if not isinstance(item, dict):
-            continue
+    for item in raw_findings:
 
         rid = str(item.get("rule_id") or item.get("id") or "").strip()
         if rid not in rule_map:
@@ -861,12 +971,31 @@ Return JSON only:
         if severity not in {"fatal", "major"}:
             continue
 
-        try:
-            item_confidence = float(item.get("confidence", global_confidence))
-        except Exception:
-            item_confidence = global_confidence
+        if "confidence" in item:
+            try:
+                item_confidence = (
+                    _finite_confidence(
+                        item.get("confidence"),
+                        (
+                            "findings."
+                            f"{rid}.confidence"
+                        ),
+                    )
+                )
+            except ValueError as error:
+                return _diagnostic_finding(
+                    "invalid_item_confidence",
+                    error,
+                )
+        else:
+            item_confidence = (
+                global_confidence
+            )
 
-        confidence = max(global_confidence, item_confidence)
+        confidence = max(
+            global_confidence,
+            item_confidence,
+        )
 
         # Never apply fatal cap on low-confidence semantic interpretation.
         if severity == "fatal" and confidence < fatal_threshold:
