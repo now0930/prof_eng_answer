@@ -4302,41 +4302,78 @@ def _phase10_run_model_answer_reference(
     question_type_eval,
     fact_eval,
     subject_rubric=None,
-    session_dir=None
+    session_dir=None,
 ):
-    try:
-        from model_answer_router import load_model_answer_bank, find_model_answer_reference
+    def report(message):
+        try:
+            print(message)
+        except Exception:
+            return
 
-        question_text = _phase3_extract_question_text(input_text)
+    def persist_reference(reference_data):
+        if session_dir is None:
+            return
+
+        try:
+            _phase2_json_write(
+                session_dir / "model_answer_reference.json",
+                reference_data,
+            )
+        except Exception as write_error:
+            report(
+                "[agent] phase10 model answer reference "
+                "persistence failed: "
+                f"{write_error!r}"
+            )
+
+    try:
+        from model_answer_router import (
+            find_model_answer_reference,
+            load_model_answer_bank,
+        )
+
+        question_text = _phase3_extract_question_text(
+            input_text
+        )
 
         bank_path = None
         if isinstance(subject_rubric, dict):
-            bank_path = subject_rubric.get("model_answer_bank")
+            bank_path = subject_rubric.get(
+                "model_answer_bank"
+            )
 
         # Runtime bank mode guard:
-        # In generated mode, ignore explicit legacy bank_path passed from subject_rubric/config
-        # so load_model_answer_bank() can resolve rubrics/generated/model_answers.generated.json.
+        # In generated mode, ignore an explicit legacy bank
+        # path so the generated model-answer bank is resolved.
         import os as _os
 
+        bank_mode = (
+            _os.getenv("RUBRIC_BANK_MODE", "generated")
+            .strip()
+            .lower()
+        )
+
         effective_bank_path = bank_path
-        if _os.getenv("RUBRIC_BANK_MODE", "generated").strip().lower() == "generated":
+        if bank_mode == "generated":
             effective_bank_path = None
 
-        bank = load_model_answer_bank(effective_bank_path)
+        bank = load_model_answer_bank(
+            effective_bank_path
+        )
 
-        # Generated bank is often a narrow single-topic bank during migration.
-        # If upstream question type detection falls back to GENERAL, do not let
-        # that weak lens prevent the only generated topic-pack model answer from
-        # being considered. This keeps generated-mode smoke tests focused on
-        # topic-pack routing while leaving legacy behavior unchanged.
-        if _os.getenv("RUBRIC_BANK_MODE", "generated").strip().lower() == "generated":
+        # A generated bank can temporarily contain only one
+        # topic during migration. Do not let a weak GENERAL
+        # upstream lens prevent that topic from being checked.
+        if bank_mode == "generated":
             (
                 question_type_eval,
                 fact_eval,
-            ) = _phase10_apply_generated_single_topic_overrides(
-                bank,
-                question_type_eval,
-                fact_eval,
+            ) = (
+                _phase10_apply_generated_single_topic_overrides(
+                    bank,
+                    question_type_eval,
+                    fact_eval,
+                )
             )
 
         result = find_model_answer_reference(
@@ -4344,49 +4381,62 @@ def _phase10_run_model_answer_reference(
             answer_text=answer_text,
             question_type_eval=question_type_eval,
             fact_eval=fact_eval,
-            bank=bank
+            bank=bank,
         )
 
         if not isinstance(result, dict):
             raise TypeError(
-                "find_model_answer_reference must return dict, "
+                "find_model_answer_reference must return "
+                "dict, "
                 f"got {type(result).__name__}"
             )
 
-        if session_dir is not None:
-            try:
-                _phase2_json_write(session_dir / "model_answer_reference.json", result)
-            except Exception:
-                pass
+        persist_reference(result)
 
-        try:
-            ref = result.get("primary_reference") or {}
-            if result.get("matched"):
-                _phase2_log(
-                    f"[agent] phase10 model answer reference selected: "
-                    f"{ref.get('id')} ({ref.get('topic_id')} / {ref.get('question_type')})"
-                )
-            else:
-                _phase2_log("[agent] phase10 model answer reference not matched.")
-        except Exception:
-            pass
+        primary_reference = result.get(
+            "primary_reference"
+        )
+        if not isinstance(primary_reference, dict):
+            primary_reference = {}
+
+        if result.get("matched"):
+            report(
+                "[agent] phase10 model answer reference "
+                "selected: "
+                f"{primary_reference.get('id')} "
+                f"({primary_reference.get('topic_id')} / "
+                f"{primary_reference.get('question_type')})"
+            )
+        else:
+            report(
+                "[agent] phase10 model answer reference "
+                "not matched."
+            )
 
         return result
 
-    except Exception as e:
+    except Exception as error:
         fallback = {
-            "version": "model_answer_reference_v1_fallback",
+            "version": (
+                "model_answer_reference_v1_fallback"
+            ),
             "matched": False,
             "primary_reference": None,
             "candidates": [],
-            "error": repr(e),
-            "usage": "모범 답안 참조 실패. 기존 채점 기준만 적용함."
+            "error": repr(error),
+            "usage": (
+                "모범 답안 참조 실패. "
+                "기존 채점 기준만 적용함."
+            ),
         }
 
-        try:
-            _phase2_log(f"[agent] phase10 model answer reference failed: {e!r}")
-        except Exception:
-            pass
+        persist_reference(fallback)
+
+        report(
+            "[agent] phase10 model answer reference "
+            "failed: "
+            f"{error!r}"
+        )
 
         return fallback
 

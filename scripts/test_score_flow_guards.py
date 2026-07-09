@@ -1011,9 +1011,17 @@ class ModelAnswerReferenceResultContractRegressionTest(
 
         return result, log_messages
 
+
     def test_phase10_logging_failure_preserves_valid_reference(
         self,
     ) -> None:
+        import os
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        import grading_agents
+
         reference_result = {
             "version": "model_answer_reference_v1",
             "matched": True,
@@ -1025,19 +1033,392 @@ class ModelAnswerReferenceResultContractRegressionTest(
             "candidates": [],
         }
 
-        result, log_messages = (
-            self._invoke_phase10_reference(
-                reference_result,
-                fail_log=True,
-            )
-        )
+        with TemporaryDirectory() as temporary_directory:
+            session_dir = Path(temporary_directory)
+
+            with (
+                patch.dict(
+                    os.environ,
+                    {"RUBRIC_BANK_MODE": "legacy"},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    return_value="원리를 설명하시오.",
+                ),
+                patch(
+                    "model_answer_router."
+                    "load_model_answer_bank",
+                    return_value={"model_answers": []},
+                ),
+                patch(
+                    "model_answer_router."
+                    "find_model_answer_reference",
+                    return_value=reference_result,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                ) as write_mock,
+                patch(
+                    "builtins.print",
+                    side_effect=RuntimeError(
+                        "simulated print failure"
+                    ),
+                ),
+            ):
+                result = (
+                    grading_agents
+                    ._phase10_run_model_answer_reference(
+                        "문제: 원리를 설명하시오.",
+                        "원리에 대한 답안",
+                        {},
+                        {},
+                        session_dir=session_dir,
+                    )
+                )
 
         self.assertEqual(
             result,
             reference_result,
         )
-        self.assertTrue(
-            log_messages,
+        write_mock.assert_called_once_with(
+            session_dir / "model_answer_reference.json",
+            reference_result,
+        )
+
+    def test_phase10_success_persists_reference(
+        self,
+    ) -> None:
+        import os
+        from contextlib import redirect_stdout
+        from io import StringIO
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        import grading_agents
+
+        reference_result = {
+            "version": "model_answer_reference_v1",
+            "matched": True,
+            "primary_reference": {
+                "id": "reference-2",
+                "topic_id": "topic-2",
+                "question_type": "COMPARE",
+            },
+            "candidates": [],
+        }
+        output = StringIO()
+
+        with TemporaryDirectory() as temporary_directory:
+            session_dir = Path(temporary_directory)
+
+            with (
+                patch.dict(
+                    os.environ,
+                    {"RUBRIC_BANK_MODE": "legacy"},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    return_value="두 방식을 비교하시오.",
+                ),
+                patch(
+                    "model_answer_router."
+                    "load_model_answer_bank",
+                    return_value={"model_answers": []},
+                ),
+                patch(
+                    "model_answer_router."
+                    "find_model_answer_reference",
+                    return_value=reference_result,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                ) as write_mock,
+                redirect_stdout(output),
+            ):
+                result = (
+                    grading_agents
+                    ._phase10_run_model_answer_reference(
+                        "문제: 두 방식을 비교하시오.",
+                        "비교 답안",
+                        {},
+                        {},
+                        session_dir=session_dir,
+                    )
+                )
+
+        self.assertEqual(
+            result,
+            reference_result,
+        )
+        write_mock.assert_called_once_with(
+            session_dir / "model_answer_reference.json",
+            reference_result,
+        )
+        self.assertIn(
+            (
+                "phase10 model answer reference "
+                "selected"
+            ),
+            output.getvalue(),
+        )
+        self.assertIn(
+            "reference-2",
+            output.getvalue(),
+        )
+
+    def test_phase10_router_failure_persists_fallback(
+        self,
+    ) -> None:
+        import os
+        from contextlib import redirect_stdout
+        from io import StringIO
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        import grading_agents
+
+        output = StringIO()
+
+        with TemporaryDirectory() as temporary_directory:
+            session_dir = Path(temporary_directory)
+
+            with (
+                patch.dict(
+                    os.environ,
+                    {"RUBRIC_BANK_MODE": "legacy"},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    return_value="구성을 설명하시오.",
+                ),
+                patch(
+                    "model_answer_router."
+                    "load_model_answer_bank",
+                    return_value={"model_answers": []},
+                ),
+                patch(
+                    "model_answer_router."
+                    "find_model_answer_reference",
+                    side_effect=RuntimeError(
+                        "simulated phase10 router failure"
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                ) as write_mock,
+                redirect_stdout(output),
+            ):
+                result = (
+                    grading_agents
+                    ._phase10_run_model_answer_reference(
+                        "문제: 구성을 설명하시오.",
+                        "구성에 대한 답안",
+                        {},
+                        {},
+                        session_dir=session_dir,
+                    )
+                )
+
+        self.assertEqual(
+            result["version"],
+            "model_answer_reference_v1_fallback",
+        )
+        self.assertFalse(result["matched"])
+        self.assertIn(
+            "simulated phase10 router failure",
+            result["error"],
+        )
+        write_mock.assert_called_once_with(
+            session_dir / "model_answer_reference.json",
+            result,
+        )
+        self.assertIn(
+            (
+                "phase10 model answer reference "
+                "failed"
+            ),
+            output.getvalue(),
+        )
+
+    def test_phase10_persistence_failure_is_reported_and_preserves_result(
+        self,
+    ) -> None:
+        import os
+        from contextlib import redirect_stdout
+        from io import StringIO
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        import grading_agents
+
+        reference_result = {
+            "version": "model_answer_reference_v1",
+            "matched": False,
+            "primary_reference": None,
+            "candidates": [],
+        }
+        output = StringIO()
+
+        with TemporaryDirectory() as temporary_directory:
+            session_dir = Path(temporary_directory)
+
+            with (
+                patch.dict(
+                    os.environ,
+                    {"RUBRIC_BANK_MODE": "legacy"},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    return_value="절차를 설명하시오.",
+                ),
+                patch(
+                    "model_answer_router."
+                    "load_model_answer_bank",
+                    return_value={"model_answers": []},
+                ),
+                patch(
+                    "model_answer_router."
+                    "find_model_answer_reference",
+                    return_value=reference_result,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=OSError(
+                        "simulated phase10 persistence failure"
+                    ),
+                ),
+                redirect_stdout(output),
+            ):
+                result = (
+                    grading_agents
+                    ._phase10_run_model_answer_reference(
+                        "문제: 절차를 설명하시오.",
+                        "절차에 대한 답안",
+                        {},
+                        {},
+                        session_dir=session_dir,
+                    )
+                )
+
+        self.assertEqual(
+            result,
+            reference_result,
+        )
+        self.assertIn(
+            (
+                "phase10 model answer reference "
+                "persistence failed"
+            ),
+            output.getvalue(),
+        )
+        self.assertIn(
+            "simulated phase10 persistence failure",
+            output.getvalue(),
+        )
+        self.assertIn(
+            (
+                "phase10 model answer reference "
+                "not matched"
+            ),
+            output.getvalue(),
+        )
+
+    def test_phase10_fallback_persistence_failure_preserves_result(
+        self,
+    ) -> None:
+        import os
+        from contextlib import redirect_stdout
+        from io import StringIO
+        from pathlib import Path
+        from tempfile import TemporaryDirectory
+        from unittest.mock import patch
+
+        import grading_agents
+
+        output = StringIO()
+
+        with TemporaryDirectory() as temporary_directory:
+            session_dir = Path(temporary_directory)
+
+            with (
+                patch.dict(
+                    os.environ,
+                    {"RUBRIC_BANK_MODE": "legacy"},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    return_value="원리를 설명하시오.",
+                ),
+                patch(
+                    "model_answer_router."
+                    "load_model_answer_bank",
+                    return_value={"model_answers": []},
+                ),
+                patch(
+                    "model_answer_router."
+                    "find_model_answer_reference",
+                    side_effect=RuntimeError(
+                        "simulated phase10 fallback trigger"
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=OSError(
+                        "simulated fallback persistence failure"
+                    ),
+                ),
+                redirect_stdout(output),
+            ):
+                result = (
+                    grading_agents
+                    ._phase10_run_model_answer_reference(
+                        "문제: 원리를 설명하시오.",
+                        "원리에 대한 답안",
+                        {},
+                        {},
+                        session_dir=session_dir,
+                    )
+                )
+
+        self.assertEqual(
+            result["version"],
+            "model_answer_reference_v1_fallback",
+        )
+        self.assertFalse(result["matched"])
+        self.assertIn(
+            "simulated phase10 fallback trigger",
+            result["error"],
+        )
+        self.assertIn(
+            (
+                "phase10 model answer reference "
+                "persistence failed"
+            ),
+            output.getvalue(),
+        )
+        self.assertIn(
+            "simulated fallback persistence failure",
+            output.getvalue(),
+        )
+        self.assertIn(
+            (
+                "phase10 model answer reference "
+                "failed"
+            ),
+            output.getvalue(),
         )
 
     def test_phase10_malformed_reference_uses_outer_fallback(
