@@ -3052,5 +3052,444 @@ class LlmJsonParserRegressionTest(unittest.TestCase):
                     )
                 )
 
+
+class Phase2PostprocessDiagnosticsRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _prepare_session(
+        session_dir,
+        grading_agents,
+        input_text,
+    ) -> None:
+        from grading_config import (
+            load_active_config,
+            save_active_config_snapshots,
+        )
+
+        config = load_active_config(
+            grading_agents.BASE_DIR
+        )
+
+        save_active_config_snapshots(
+            session_dir,
+            config,
+        )
+
+        (session_dir / "input.txt").write_text(
+            input_text,
+            encoding="utf-8",
+        )
+
+    @staticmethod
+    def _question_type_result() -> dict:
+        return {
+            "version": "question_type_lens_v1",
+            "confidence": "high",
+            "primary_type": {
+                "id": "PRINCIPLE",
+                "name": "원리·메커니즘형",
+            },
+            "candidates": [],
+        }
+
+    @staticmethod
+    def _model_reference_result() -> dict:
+        return {
+            "version": "model_answer_reference_v1",
+            "matched": False,
+            "primary_reference": None,
+            "candidates": [],
+        }
+
+    def test_phase2_logic_persistence_failure_is_reported_and_preserves_grade(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import difficulty_output_adapter
+        import difficulty_score_ceiling
+        import grading_agents
+        import logic_check_evaluator
+
+        input_text = """문제:
+피드백 제어계의 안정성을 설명하시오.
+
+답안:
+폐루프 극점이 좌반평면에 있으면 안정하다.
+"""
+
+        write_names: list[str] = []
+
+        def capture_json_write(
+            path_value,
+            data,
+        ) -> None:
+            file_name = Path(path_value).name
+            write_names.append(file_name)
+
+            if file_name == "logic_check_evaluation.json":
+                raise OSError(
+                    "simulated logic persistence failure"
+                )
+
+        def attach_logic(
+            grade,
+            _input_text,
+        ):
+            result = deepcopy(grade)
+            result["logic_check_evaluation"] = {
+                "topic_id": "feedback_stability",
+                "mode": "rule",
+                "fatal_error_detected": False,
+            }
+            return result
+
+        with TemporaryDirectory() as directory:
+            session_dir = Path(directory)
+
+            self._prepare_session(
+                session_dir,
+                grading_agents,
+                input_text,
+            )
+
+            output = io.StringIO()
+
+            with (
+                patch.object(
+                    grading_agents,
+                    "_phase2_latest_session_dir",
+                    return_value=session_dir,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=capture_json_write,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase6_run_gemini_semantic_grader",
+                    return_value={},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase8_run_originality_evaluator",
+                    return_value={},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase9_run_question_type_lens",
+                    return_value=self._question_type_result(),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase10_run_model_answer_reference",
+                    return_value=self._model_reference_result(),
+                ),
+                patch.object(
+                    logic_check_evaluator,
+                    "attach_logic_check_to_grade",
+                    side_effect=attach_logic,
+                ),
+                patch.object(
+                    difficulty_output_adapter,
+                    "attach_difficulty_strategy_to_grade",
+                    side_effect=lambda grade, **kwargs: grade,
+                ),
+                patch.object(
+                    difficulty_score_ceiling,
+                    "apply_difficulty_score_ceiling",
+                    side_effect=lambda grade, **kwargs: grade,
+                ),
+                redirect_stdout(output),
+            ):
+                result = (
+                    grading_agents
+                    ._phase2_postprocess_grade(
+                        {"total_score": 22.0}
+                    )
+                )
+
+        self.assertIsInstance(result, dict)
+        self.assertIn(
+            "logic_check_evaluation.json",
+            write_names,
+        )
+        self.assertIn(
+            "grade.json",
+            write_names,
+        )
+        self.assertIn(
+            "phase3b logic check persistence failed",
+            output.getvalue(),
+        )
+        self.assertIn(
+            "simulated logic persistence failure",
+            output.getvalue(),
+        )
+
+    def test_phase2_question_extraction_failure_uses_input_text(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import difficulty_output_adapter
+        import difficulty_score_ceiling
+        import grading_agents
+        import logic_check_evaluator
+
+        input_text = """문제:
+제어밸브 액추에이터를 비교하시오.
+
+답안:
+공압식, 전동식, 유압식을 비교한다.
+"""
+
+        difficulty_questions: list[str | None] = []
+
+        def capture_strategy(
+            grade,
+            *,
+            question_text=None,
+        ):
+            difficulty_questions.append(question_text)
+            return grade
+
+        with TemporaryDirectory() as directory:
+            session_dir = Path(directory)
+
+            self._prepare_session(
+                session_dir,
+                grading_agents,
+                input_text,
+            )
+
+            output = io.StringIO()
+
+            with (
+                patch.object(
+                    grading_agents,
+                    "_phase2_latest_session_dir",
+                    return_value=session_dir,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    return_value=None,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase3_evaluate_fact_anchors",
+                    return_value={},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase3_extract_question_text",
+                    side_effect=RuntimeError(
+                        "simulated question extraction failure"
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase6_run_gemini_semantic_grader",
+                    return_value={},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase8_run_originality_evaluator",
+                    return_value={},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase9_run_question_type_lens",
+                    return_value=self._question_type_result(),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase10_run_model_answer_reference",
+                    return_value=self._model_reference_result(),
+                ),
+                patch.object(
+                    logic_check_evaluator,
+                    "attach_logic_check_to_grade",
+                    side_effect=lambda grade, _text: grade,
+                ),
+                patch.object(
+                    difficulty_output_adapter,
+                    "attach_difficulty_strategy_to_grade",
+                    side_effect=capture_strategy,
+                ),
+                patch.object(
+                    difficulty_score_ceiling,
+                    "apply_difficulty_score_ceiling",
+                    side_effect=lambda grade, **kwargs: grade,
+                ),
+                redirect_stdout(output),
+            ):
+                result = (
+                    grading_agents
+                    ._phase2_postprocess_grade(
+                        {"total_score": 18.0}
+                    )
+                )
+
+        self.assertIsInstance(result, dict)
+        self.assertEqual(
+            difficulty_questions,
+            [input_text],
+        )
+        self.assertIn(
+            (
+                "phase20 question extraction failed; "
+                "using input text"
+            ),
+            output.getvalue(),
+        )
+        self.assertIn(
+            "simulated question extraction failure",
+            output.getvalue(),
+        )
+
+    def test_phase2_traceback_format_failure_preserves_grade(
+        self,
+    ) -> None:
+        import io
+        import traceback
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import difficulty_output_adapter
+        import difficulty_score_ceiling
+        import grading_agents
+        import logic_check_evaluator
+
+        input_text = """문제:
+2차 시스템의 감쇠비를 설명하시오.
+
+답안:
+감쇠비에 따라 과도응답이 달라진다.
+"""
+
+        ceiling_inputs: list[dict] = []
+
+        def fail_strategy(
+            grade,
+            *,
+            question_text=None,
+        ):
+            raise RuntimeError(
+                "simulated difficulty strategy failure"
+            )
+
+        def capture_ceiling(
+            grade,
+            *,
+            question_text=None,
+            answer_text=None,
+        ):
+            ceiling_inputs.append(deepcopy(grade))
+            return grade
+
+        with TemporaryDirectory() as directory:
+            session_dir = Path(directory)
+
+            self._prepare_session(
+                session_dir,
+                grading_agents,
+                input_text,
+            )
+
+            output = io.StringIO()
+
+            with (
+                patch.object(
+                    grading_agents,
+                    "_phase2_latest_session_dir",
+                    return_value=session_dir,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    return_value=None,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase6_run_gemini_semantic_grader",
+                    return_value={},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase8_run_originality_evaluator",
+                    return_value={},
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase9_run_question_type_lens",
+                    return_value=self._question_type_result(),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase10_run_model_answer_reference",
+                    return_value=self._model_reference_result(),
+                ),
+                patch.object(
+                    logic_check_evaluator,
+                    "attach_logic_check_to_grade",
+                    side_effect=lambda grade, _text: grade,
+                ),
+                patch.object(
+                    difficulty_output_adapter,
+                    "attach_difficulty_strategy_to_grade",
+                    side_effect=fail_strategy,
+                ),
+                patch.object(
+                    traceback,
+                    "format_exc",
+                    side_effect=RuntimeError(
+                        "simulated traceback formatting failure"
+                    ),
+                ),
+                patch.object(
+                    difficulty_score_ceiling,
+                    "apply_difficulty_score_ceiling",
+                    side_effect=capture_ceiling,
+                ),
+                redirect_stdout(output),
+            ):
+                result = (
+                    grading_agents
+                    ._phase2_postprocess_grade(
+                        {"total_score": 17.0}
+                    )
+                )
+
+        self.assertIsInstance(result, dict)
+        self.assertEqual(len(ceiling_inputs), 1)
+        self.assertEqual(
+            result,
+            ceiling_inputs[0],
+        )
+        self.assertIn(
+            "phase20 final difficulty strategy skipped",
+            output.getvalue(),
+        )
+        self.assertIn(
+            "simulated difficulty strategy failure",
+            output.getvalue(),
+        )
+        self.assertIn(
+            "phase20 traceback formatting failed",
+            output.getvalue(),
+        )
+        self.assertIn(
+            "simulated traceback formatting failure",
+            output.getvalue(),
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

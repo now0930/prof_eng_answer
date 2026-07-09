@@ -3024,6 +3024,12 @@ def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
     from grading_config import load_active_config, save_active_config_snapshots
 
+    def report(message):
+        try:
+            print(message)
+        except Exception:
+            return
+
     session_dir = _phase2_latest_session_dir()
     if session_dir is None:
         print("[agent] phase2 skipped: session_dir not found.")
@@ -3236,9 +3242,16 @@ def _phase2_postprocess_grade(legacy_result):
             )
 
             try:
-                _phase2_json_write(session_dir / "logic_check_evaluation.json", logic_eval)
-            except Exception:
-                pass
+                _phase2_json_write(
+                    session_dir / "logic_check_evaluation.json",
+                    logic_eval,
+                )
+            except Exception as write_error:
+                report(
+                    "[agent] phase3b logic check "
+                    "persistence failed: "
+                    f"{write_error!r}"
+                )
 
     except Exception as e:
         print(f"[agent] phase3b logic check failed: {e!r}")
@@ -3279,8 +3292,15 @@ def _phase2_postprocess_grade(legacy_result):
         # difficulty strategy layer can match topic_importance.
         if not _question_for_difficulty_final:
             try:
-                _question_for_difficulty_final = _phase3_extract_question_text(input_text)
-            except Exception:
+                _question_for_difficulty_final = (
+                    _phase3_extract_question_text(input_text)
+                )
+            except Exception as question_error:
+                report(
+                    "[agent] phase20 question extraction "
+                    "failed; using input text: "
+                    f"{question_error!r}"
+                )
                 _question_for_difficulty_final = input_text
 
         # Expose the best known topic_id on the grade before difficulty
@@ -3308,11 +3328,21 @@ def _phase2_postprocess_grade(legacy_result):
             f"topic={_ds.get('topic_id')}"
         )
     except Exception as e:
-        print(f"[agent] phase20 final difficulty strategy skipped: {e!r}")
+        report(
+            "[agent] phase20 final difficulty strategy "
+            f"skipped: {e!r}"
+        )
+
         try:
-            print(traceback.format_exc())
-        except Exception:
-            pass
+            traceback_text = traceback.format_exc()
+        except Exception as traceback_error:
+            report(
+                "[agent] phase20 traceback formatting "
+                "failed: "
+                f"{traceback_error!r}"
+            )
+        else:
+            report(traceback_text)
 
     # PHASE21_DIFFICULTY_SCORE_CEILING_FINAL_ORDERED
     try:
