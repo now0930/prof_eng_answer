@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import json
+import math
 import os
 import re
 import time
@@ -1099,13 +1100,29 @@ def _format_question_type_coverage_display(grade):
         penalty = adjustment.get("recommended_penalty")
         applied = adjustment.get("applied")
 
-        if penalty is not None:
-            try:
-                penalty_value = float(penalty)
-            except Exception:
-                penalty_value = 0.0
+        if "recommended_penalty" in adjustment:
+            penalty_value = None
+            if not isinstance(penalty, bool):
+                try:
+                    _penalty_candidate = float(penalty)
+                except (
+                    TypeError,
+                    ValueError,
+                    OverflowError,
+                ):
+                    _penalty_candidate = None
 
-            if penalty_value > 0:
+                if (
+                    _penalty_candidate is not None
+                    and math.isfinite(_penalty_candidate)
+                ):
+                    penalty_value = _penalty_candidate
+
+            if penalty_value is None:
+                lines.append(
+                    "권고 감점: 확인 불가"
+                )
+            elif penalty_value > 0:
                 if mode == "strict" and applied:
                     lines.append(f"coverage 보정 적용: -{penalty_value:g}점")
                 else:

@@ -4720,5 +4720,99 @@ class BotStateLoadingRegressionTest(
             output.getvalue(),
         )
 
+
+class QuestionTypeCoveragePenaltyDisplayRegressionTest(
+    unittest.TestCase
+):
+    COVERAGE_KEY = 'question_type_coverage_score_adjustment'
+
+    @classmethod
+    def _display(
+        cls,
+        penalty,
+    ) -> str:
+        import bot
+
+        return (
+            bot._format_question_type_coverage_display(
+                {
+                    cls.COVERAGE_KEY: {
+                        "recommended_penalty": penalty,
+                    },
+                }
+            )
+        )
+
+    def test_question_type_coverage_display_accepts_finite_penalties(
+        self,
+    ) -> None:
+        numeric = self._display(1.5)
+        numeric_string = self._display("1.5")
+        zero = self._display(0)
+
+        self.assertTrue(numeric)
+        self.assertEqual(
+            numeric_string,
+            numeric,
+        )
+        self.assertNotIn(
+            "확인 불가",
+            numeric,
+        )
+        self.assertNotIn(
+            "확인 불가",
+            zero,
+        )
+
+    def test_question_type_coverage_display_marks_invalid_penalty_unavailable(
+        self,
+    ) -> None:
+        for penalty in (
+            "invalid",
+            None,
+            True,
+            [],
+            {},
+        ):
+            with self.subTest(
+                penalty=penalty
+            ):
+                display = self._display(
+                    penalty
+                )
+
+                self.assertIn(
+                    "권고 감점: 확인 불가",
+                    display,
+                )
+
+    def test_question_type_coverage_display_rejects_non_finite_penalty(
+        self,
+    ) -> None:
+        for penalty in (
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(
+                penalty=penalty
+            ):
+                display = self._display(
+                    penalty
+                )
+
+                self.assertIn(
+                    "권고 감점: 확인 불가",
+                    display,
+                )
+                self.assertNotIn(
+                    "nan",
+                    display.lower(),
+                )
+                self.assertNotIn(
+                    "inf",
+                    display.lower(),
+                )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
