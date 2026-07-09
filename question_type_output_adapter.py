@@ -67,6 +67,7 @@ def attach_question_type_v2_to_grade(
     profile = get_question_type_profile(question_type)
 
     grade["question_type"] = question_type
+    grade["question_type_name"] = profile.get("name_ko")
     grade["question_type_v2"] = {
         "question_type": question_type,
         "legacy_question_type": legacy_question_type,

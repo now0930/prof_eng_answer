@@ -65,7 +65,7 @@ semantic evaluation JSON에는 다음 필드를 반드시 포함한다.
   "sub_criteria_coverage": [
     {{
       "criterion": "sub_criteria 이름",
-      "status": "present | partial | missing",
+      "status": "present | partial | incorrect | missing",
       "evidence": "답안에서 확인되는 근거 또는 누락 설명",
       "impact": "이 항목이 B, C 또는 D 점수에 주는 영향"
     }}
@@ -164,7 +164,7 @@ def build_question_type_json_contract(
     "sub_criteria_coverage": [
       {{
         "criterion": "sub_criteria 이름",
-        "status": "present | partial | missing",
+        "status": "present | partial | incorrect | missing",
         "evidence": "답안에서 확인한 근거 또는 누락 설명",
         "impact": "B, C 또는 D 점수 판단에 주는 영향"
       }}
@@ -224,7 +224,7 @@ question_type_coverage 내부에 반드시 다음 객체를 포함하라.
   "requirements": [
     {{
       "requirement": "문제문이 직접 요구한 독립 항목",
-      "status": "present | partial | missing",
+      "status": "present | partial | incorrect | missing",
       "evidence": "답안에서 확인한 근거 또는 누락 설명",
       "is_core": true
     }}
@@ -236,7 +236,10 @@ question_type_coverage 내부에 반드시 다음 객체를 포함하라.
 2. background_need, field_judgement, trade-off 등 유형별 권장 요소를
    문제문이 직접 요구하지 않았다면 포함하지 않는다.
 3. 하나의 문장에 여러 요구가 있으면 독립 요구로 분리한다.
-4. 명확히 답했으면 present.
+4. 요구 항목을 직접 다뤘지만 핵심 사실이 틀리면 incorrect.
+5. 답안에 해당 요구를 직접 다룬 내용이 없을 때만 missing.
+6. 일부만 맞거나 불완전하면 partial.
+7. 명확하고 정확하게 답했으면 present.
 5. 일부만 답했으면 partial.
 6. 전혀 답하지 않았으면 missing.
 7. is_core=true는 문제문에 직접 명시된 요구에만 사용한다.

@@ -492,3 +492,298 @@ if "_QTYPE_CLEAN_GENERAL_V2_INSTALLED" not in globals():
                 question_text=question_text,
             )
             return _cleanup_legacy_general_text_v2(grade)
+
+# INCORRECT_REQUIREMENT_STATUS_CONTRACT_V3
+def _apply_incorrect_requirement_status_contract_v3(grade):
+    if not isinstance(grade, dict):
+        return grade
+
+    qtype_v2 = grade.get("question_type_v2")
+
+    if isinstance(qtype_v2, dict):
+        final_type = str(
+            qtype_v2.get("question_type") or ""
+        ).strip()
+        final_name = str(
+            qtype_v2.get("name_ko") or ""
+        ).strip()
+
+        if final_type:
+            grade["question_type"] = final_type
+
+        if final_name:
+            grade["question_type_name"] = final_name
+
+        coverage_summary = grade.get(
+            "question_type_coverage_summary"
+        )
+
+        if isinstance(coverage_summary, dict):
+            if final_type:
+                coverage_summary["question_type"] = final_type
+
+            if final_name:
+                coverage_summary["name_ko"] = final_name
+
+        legacy_eval = grade.get(
+            "question_type_evaluation"
+        )
+
+        if isinstance(legacy_eval, dict):
+            primary = legacy_eval.get(
+                "primary_type"
+            )
+
+            if isinstance(primary, dict):
+                old_type = str(
+                    primary.get("id") or ""
+                ).strip()
+                old_name = str(
+                    primary.get("name") or ""
+                ).strip()
+
+                if (
+                    old_type
+                    and old_name
+                    and final_type
+                    and final_name
+                ):
+                    old_label = (
+                        f"{old_type}({old_name})"
+                    )
+                    new_label = (
+                        f"{final_type}({final_name})"
+                    )
+
+                    for field in (
+                        "summary",
+                        "overall_summary",
+                    ):
+                        value = grade.get(field)
+
+                        if isinstance(value, str):
+                            grade[field] = value.replace(
+                                old_label,
+                                new_label,
+                            )
+
+    coverage = grade.get(
+        "question_type_coverage"
+    )
+
+    if not isinstance(coverage, dict):
+        return grade
+
+    rows = coverage.get(
+        "sub_criteria_coverage"
+    )
+
+    if not isinstance(rows, list):
+        return grade
+
+    normalised_rows = []
+
+    aliases = {
+        "wrong": "incorrect",
+        "invalid": "incorrect",
+        "factually_incorrect": "incorrect",
+        "factually-incorrect": "incorrect",
+    }
+
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+
+        criterion = str(
+            row.get("criterion")
+            or row.get("requirement")
+            or ""
+        ).strip()
+
+        status = str(
+            row.get("status") or ""
+        ).strip().lower()
+
+        status = aliases.get(
+            status,
+            status,
+        )
+
+        if (
+            not criterion
+            or status
+            not in {
+                "present",
+                "partial",
+                "incorrect",
+                "missing",
+            }
+        ):
+            continue
+
+        normalised = dict(row)
+        normalised["criterion"] = criterion
+        normalised["status"] = status
+        normalised_rows.append(
+            normalised
+        )
+
+    if not normalised_rows:
+        return grade
+
+    present = [
+        row["criterion"]
+        for row in normalised_rows
+        if row["status"] == "present"
+    ]
+
+    partial = [
+        row["criterion"]
+        for row in normalised_rows
+        if row["status"] == "partial"
+    ]
+
+    incorrect = [
+        row["criterion"]
+        for row in normalised_rows
+        if row["status"] == "incorrect"
+    ]
+
+    missing = [
+        row["criterion"]
+        for row in normalised_rows
+        if row["status"] == "missing"
+    ]
+
+    total = len(normalised_rows)
+    weighted_score = (
+        len(present)
+        + 0.5 * len(partial)
+    )
+    weighted_ratio = (
+        weighted_score / total
+        if total
+        else 0.0
+    )
+
+    summary = grade.get(
+        "question_type_coverage_summary"
+    )
+
+    if not isinstance(summary, dict):
+        summary = {}
+
+    qtype_v2 = grade.get(
+        "question_type_v2"
+    )
+
+    final_type = ""
+    final_name = ""
+
+    if isinstance(qtype_v2, dict):
+        final_type = str(
+            qtype_v2.get("question_type") or ""
+        ).strip()
+        final_name = str(
+            qtype_v2.get("name_ko") or ""
+        ).strip()
+
+    summary.update(
+        {
+            "question_type": (
+                final_type
+                or coverage.get("question_type")
+                or grade.get("question_type")
+            ),
+            "name_ko": (
+                final_name
+                or coverage.get("name_ko")
+                or grade.get("question_type_name")
+            ),
+            "overall_coverage": coverage.get(
+                "overall_coverage"
+            ),
+            "sub_criteria_total": total,
+            "sub_criteria_present": len(present),
+            "sub_criteria_partial": len(partial),
+            "sub_criteria_incorrect": len(incorrect),
+            "sub_criteria_missing": len(missing),
+            "weighted_coverage_score": round(
+                weighted_score,
+                2,
+            ),
+            "weighted_coverage_ratio": round(
+                weighted_ratio,
+                4,
+            ),
+            "weighted_coverage_percent": round(
+                weighted_ratio * 100.0,
+                1,
+            ),
+            "partial_criteria": partial,
+            "incorrect_criteria": incorrect,
+            "missing_criteria": missing,
+            "criteria_status_rows": [
+                {
+                    "criterion": row["criterion"],
+                    "status": row["status"],
+                    "evidence": str(
+                        row.get("evidence") or ""
+                    ).strip(),
+                }
+                for row in normalised_rows
+            ],
+        }
+    )
+
+    grade[
+        "question_type_coverage_summary"
+    ] = summary
+
+    return grade
+
+
+_ORIGINAL_ATTACH_QTYPE_COVERAGE_INCORRECT_V3 = (
+    attach_question_type_coverage_feedback
+)
+
+
+def attach_question_type_coverage_feedback(
+    *args,
+    **kwargs,
+):
+    result = (
+        _ORIGINAL_ATTACH_QTYPE_COVERAGE_INCORRECT_V3(
+            *args,
+            **kwargs,
+        )
+    )
+
+    return (
+        _apply_incorrect_requirement_status_contract_v3(
+            result
+        )
+    )
+
+
+_ORIGINAL_ENSURE_QTYPE_COVERAGE_INCORRECT_V3 = (
+    ensure_grade_question_type_coverage
+)
+
+
+def ensure_grade_question_type_coverage(
+    *args,
+    **kwargs,
+):
+    result = (
+        _ORIGINAL_ENSURE_QTYPE_COVERAGE_INCORRECT_V3(
+            *args,
+            **kwargs,
+        )
+    )
+
+    return (
+        _apply_incorrect_requirement_status_contract_v3(
+            result
+        )
+    )

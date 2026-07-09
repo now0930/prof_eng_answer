@@ -1016,12 +1016,14 @@ def _format_question_type_coverage_display(grade):
     total_count = coverage_summary.get("sub_criteria_total", 0)
     present_count = coverage_summary.get("sub_criteria_present", 0)
     partial_count = coverage_summary.get("sub_criteria_partial", 0)
+    incorrect_count = coverage_summary.get("sub_criteria_incorrect", 0)
     missing_count = coverage_summary.get("sub_criteria_missing", 0)
 
     weighted_score = coverage_summary.get("weighted_coverage_score")
     weighted_percent = coverage_summary.get("weighted_coverage_percent")
 
     partial_criteria = coverage_summary.get("partial_criteria") or []
+    incorrect_criteria = coverage_summary.get("incorrect_criteria") or []
     missing_criteria = coverage_summary.get("missing_criteria") or []
 
     lines = []
@@ -1051,14 +1053,19 @@ def _format_question_type_coverage_display(grade):
             "상태: "
             f"충족 {present_count} · "
             f"부분 {partial_count} · "
+            f"오답 {incorrect_count} · "
             f"누락 {missing_count}"
         )
 
     partial_text = _qtype_short_join(partial_criteria, limit=4)
+    incorrect_text = _qtype_short_join(incorrect_criteria, limit=4)
     missing_text = _qtype_short_join(missing_criteria, limit=4)
 
     if partial_text:
         lines.append(f"부분 충족: {partial_text}")
+
+    if incorrect_text:
+        lines.append(f"오답 응답: {incorrect_text}")
 
     if missing_text:
         lines.append(f"누락: {missing_text}")
@@ -1070,6 +1077,21 @@ def _format_question_type_coverage_display(grade):
 
     if d_missing:
         lines.append(f"D항목 보완 필요: {d_missing}")
+
+    incorrect_requirements = explicit_cap.get(
+        "incorrect_requirements"
+    ) or []
+
+    incorrect_requirement_text = _qtype_short_join(
+        incorrect_requirements,
+        limit=4,
+    )
+
+    if incorrect_requirement_text:
+        lines.append(
+            "명시적 핵심 요구 오답 응답: "
+            f"{incorrect_requirement_text}"
+        )
 
     if explicit_cap.get("triggered"):
         missing_requirements = explicit_cap.get(

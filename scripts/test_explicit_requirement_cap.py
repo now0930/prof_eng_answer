@@ -374,5 +374,138 @@ class ExplicitRequirementCapTest(unittest.TestCase):
             "17점 cap 적용",
         )
 
+class IncorrectRequirementStatusRegressionTests(
+    unittest.TestCase
+):
+    def test_incorrect_requirement_is_not_missing_cap(
+        self,
+    ) -> None:
+        from explicit_requirement_cap import (
+            apply_explicit_requirement_hard_cap,
+        )
+
+        grade = {
+            "total_score": 1.02,
+            "question_type_coverage": {
+                "coverage_source": "semantic_grader",
+                "explicit_requirement_coverage": {
+                    "source": "question_text",
+                    "extraction_confidence": "high",
+                    "requirements": [
+                        {
+                            "requirement": (
+                                "2차 시스템의 감쇠비에 따른 "
+                                "과도응답 특성 설명"
+                            ),
+                            "status": "incorrect",
+                            "evidence": (
+                                "요구 주제를 직접 설명했으나 "
+                                "핵심 사실이 반대로 서술됨"
+                            ),
+                            "is_core": True,
+                        }
+                    ],
+                },
+            },
+        }
+
+        result = (
+            apply_explicit_requirement_hard_cap(
+                grade
+            )
+        )
+
+        decision = result[
+            "explicit_requirement_cap_evaluation"
+        ]
+
+        self.assertTrue(
+            decision["eligible"]
+        )
+        self.assertFalse(
+            decision["triggered"]
+        )
+        self.assertEqual(
+            decision["explicit_requirement_total"],
+            1,
+        )
+        self.assertEqual(
+            decision["incorrect_core_count"],
+            1,
+        )
+        self.assertEqual(
+            decision["missing_core_count"],
+            0,
+        )
+        self.assertEqual(
+            decision["incorrect_requirements"],
+            [
+                (
+                    "2차 시스템의 감쇠비에 따른 "
+                    "과도응답 특성 설명"
+                )
+            ],
+        )
+        self.assertEqual(
+            result["total_score"],
+            1.02,
+        )
+        self.assertNotIn(
+            "applied_caps",
+            result,
+        )
+
+    def test_true_missing_requirement_still_caps(
+        self,
+    ) -> None:
+        from explicit_requirement_cap import (
+            apply_explicit_requirement_hard_cap,
+        )
+
+        grade = {
+            "total_score": 20.0,
+            "question_type_coverage": {
+                "coverage_source": "semantic_grader",
+                "explicit_requirement_coverage": {
+                    "source": "question_text",
+                    "extraction_confidence": "high",
+                    "requirements": [
+                        {
+                            "requirement": "특성 비교",
+                            "status": "missing",
+                            "evidence": "관련 내용 없음",
+                            "is_core": True,
+                        }
+                    ],
+                },
+            },
+        }
+
+        result = (
+            apply_explicit_requirement_hard_cap(
+                grade
+            )
+        )
+
+        decision = result[
+            "explicit_requirement_cap_evaluation"
+        ]
+
+        self.assertTrue(
+            decision["triggered"]
+        )
+        self.assertEqual(
+            decision["missing_core_count"],
+            1,
+        )
+        self.assertEqual(
+            decision["incorrect_core_count"],
+            0,
+        )
+        self.assertEqual(
+            result["total_score"],
+            12.5,
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

@@ -832,7 +832,7 @@ overall_coverage에는 unknown, fallback, not_evaluated를 쓰지 마라.
   "sub_criteria_coverage": [
     {
       "criterion": "sub_criteria 이름",
-      "status": "present | partial | missing",
+      "status": "present | partial | incorrect | missing",
       "evidence": "답안 근거 또는 누락 설명",
       "impact": "C 또는 D 점수 판단 영향"
     }
@@ -903,7 +903,7 @@ explicit_requirement_coverage를 포함하라.
   "requirements": [
     {{
       "requirement": "문제문이 직접 요구한 독립 항목",
-      "status": "present | partial | missing",
+      "status": "present | partial | incorrect | missing",
       "evidence": "답안 근거 또는 누락 설명",
       "is_core": true
     }}
@@ -913,6 +913,10 @@ explicit_requirement_coverage를 포함하라.
 유형별 권장 전개와 문제문 직접 요구를 혼동하지 마라.
 문제문에 직접 없는 background, 현장 판단, trade-off를
 명시적 요구사항으로 만들지 마라.
+답안이 요구 항목을 직접 다뤘지만 핵심 사실이 틀리면
+incorrect로 평가하라.
+답안이 해당 요구 항목을 전혀 다루지 않았을 때만
+missing으로 평가하라.
 """.strip()
 
     return base + "\n\n" + explicit_contract

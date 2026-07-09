@@ -99,7 +99,7 @@ def _normalise_requirement_rows(
         if not requirement:
             continue
 
-        if status not in {"present", "partial", "missing"}:
+        if status not in {"present", "partial", "incorrect", "missing"}:
             continue
 
         result.append(
@@ -133,9 +133,11 @@ def evaluate_explicit_requirement_hard_cap(
         "explicit_requirement_total": 0,
         "present_core_count": 0,
         "partial_core_count": 0,
+        "incorrect_core_count": 0,
         "missing_core_count": 0,
         "present_requirements": [],
         "partial_requirements": [],
+        "incorrect_requirements": [],
         "missing_requirements": [],
         "source": None,
         "extraction_confidence": None,
@@ -213,6 +215,11 @@ def evaluate_explicit_requirement_hard_cap(
         for row in rows
         if row["status"] == "partial"
     ]
+    incorrect = [
+        row["requirement"]
+        for row in rows
+        if row["status"] == "incorrect"
+    ]
     missing = [
         row["requirement"]
         for row in rows
@@ -225,9 +232,11 @@ def evaluate_explicit_requirement_hard_cap(
             "explicit_requirement_total": len(rows),
             "present_core_count": len(present),
             "partial_core_count": len(partial),
+            "incorrect_core_count": len(incorrect),
             "missing_core_count": len(missing),
             "present_requirements": present,
             "partial_requirements": partial,
+            "incorrect_requirements": incorrect,
             "missing_requirements": missing,
         }
     )

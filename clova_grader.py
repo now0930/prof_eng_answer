@@ -153,8 +153,11 @@ def _build_prompt(*args, **kwargs) -> str:
         "응답했는지 평가하십시오.\n"
         "question_type_coverage 안에 explicit_requirement_coverage를 "
         "포함하고, 문제문에 직접 명시된 요구만 present, partial, "
-        "missing으로 평가하십시오. 유형별 권장 항목은 명시적 요구로 "
-        "간주하지 마십시오.\n\n"
+        "incorrect, missing으로 평가하십시오. 유형별 권장 항목은 "
+        "명시적 요구로 간주하지 마십시오.\n"
+        "요구 항목을 직접 다뤘지만 핵심 사실이 틀리면 incorrect로 "
+        "평가하고, 해당 요구를 전혀 다루지 않았을 때만 missing으로 "
+        "평가하십시오.\n\n"
         "출력 JSON 형식:\n"
         "{\n"
         '  "ok": true,\n'

@@ -121,10 +121,186 @@ class RequirementCoverageRegressionTest(unittest.TestCase):
         self.assertIn("[요구사항 충족도]", text)
         self.assertIn("요구사항 충족률: 62.5%", text)
         self.assertIn("가중 2.5/4", text)
-        self.assertIn("충족 2 · 부분 1 · 누락 1", text)
+        self.assertIn("충족 2 · 부분 1 · 오답 0 · 누락 1", text)
         self.assertIn("부분 충족: 적용 조건", text)
         self.assertIn("누락: 선정 기준", text)
 
+class IncorrectRequirementCoverageRegressionTests(
+    unittest.TestCase
+):
+    def test_incorrect_coverage_is_separate_from_missing(
+        self,
+    ) -> None:
+        import bot
+        from question_type_coverage_adapter import (
+            attach_question_type_coverage_feedback,
+        )
+
+        grade = {
+            "total_score": 1.02,
+            "question_type": (
+                "PRINCIPLE_INTERPRETATION"
+            ),
+            "question_type_v2": {
+                "question_type": (
+                    "PRINCIPLE_INTERPRETATION"
+                ),
+                "name_ko": "원리·해석형",
+            },
+            "question_type_coverage": {
+                "coverage_source": "semantic_grader",
+                "question_type": (
+                    "PRINCIPLE_INTERPRETATION"
+                ),
+                "name_ko": "원리·해석형",
+                "overall_coverage": "poor",
+                "sub_criteria_coverage": [
+                    {
+                        "criterion": "배경",
+                        "status": "present",
+                        "evidence": "배경을 제시함",
+                    },
+                    {
+                        "criterion": "구성",
+                        "status": "partial",
+                        "evidence": "일부만 설명함",
+                    },
+                    {
+                        "criterion": "감쇠비 원리",
+                        "status": "incorrect",
+                        "evidence": (
+                            "요구를 직접 설명했으나 "
+                            "안정성 부호가 반대임"
+                        ),
+                    },
+                    {
+                        "criterion": "표준 수식",
+                        "status": "missing",
+                        "evidence": "수식 없음",
+                    },
+                ],
+            },
+            "explicit_requirement_cap_evaluation": {
+                "eligible": True,
+                "triggered": False,
+                "incorrect_requirements": [
+                    "감쇠비별 과도응답 특성 설명"
+                ],
+                "missing_requirements": [],
+            },
+        }
+
+        result = (
+            attach_question_type_coverage_feedback(
+                grade
+            )
+        )
+
+        summary = result[
+            "question_type_coverage_summary"
+        ]
+
+        self.assertEqual(
+            summary["sub_criteria_total"],
+            4,
+        )
+        self.assertEqual(
+            summary["sub_criteria_present"],
+            1,
+        )
+        self.assertEqual(
+            summary["sub_criteria_partial"],
+            1,
+        )
+        self.assertEqual(
+            summary["sub_criteria_incorrect"],
+            1,
+        )
+        self.assertEqual(
+            summary["sub_criteria_missing"],
+            1,
+        )
+        self.assertEqual(
+            summary["weighted_coverage_score"],
+            1.5,
+        )
+        self.assertEqual(
+            summary["weighted_coverage_percent"],
+            37.5,
+        )
+        self.assertEqual(
+            summary["incorrect_criteria"],
+            ["감쇠비 원리"],
+        )
+        self.assertEqual(
+            summary["missing_criteria"],
+            ["표준 수식"],
+        )
+
+        text = (
+            bot._format_question_type_coverage_display(
+                result
+            )
+        )
+
+        self.assertIn(
+            (
+                "충족 1 · 부분 1 · "
+                "오답 1 · 누락 1"
+            ),
+            text,
+        )
+        self.assertIn(
+            "오답 응답: 감쇠비 원리",
+            text,
+        )
+        self.assertIn(
+            "누락: 표준 수식",
+            text,
+        )
+        self.assertIn(
+            (
+                "명시적 핵심 요구 오답 응답: "
+                "감쇠비별 과도응답 특성 설명"
+            ),
+            text,
+        )
+        self.assertNotIn(
+            "명시적 핵심 요구 누락",
+            text,
+        )
+
+    def test_final_question_type_name_matches_v2(
+        self,
+    ) -> None:
+        from question_type_output_adapter import (
+            attach_question_type_v2_to_grade,
+        )
+
+        grade = {
+            "question_type": "GENERAL",
+            "question_type_name": "일반 설명형",
+        }
+
+        result = attach_question_type_v2_to_grade(
+            grade,
+            existing_question_type=(
+                "PRINCIPLE_INTERPRETATION"
+            ),
+        )
+
+        self.assertEqual(
+            result["question_type"],
+            "PRINCIPLE_INTERPRETATION",
+        )
+        self.assertEqual(
+            result["question_type_name"],
+            "원리·해석형",
+        )
+        self.assertEqual(
+            result["question_type_v2"]["name_ko"],
+            "원리·해석형",
+        )
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
