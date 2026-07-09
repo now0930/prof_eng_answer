@@ -443,6 +443,7 @@ def evaluate_logic_checks(
     # topic's deterministic checks, e.g. damping-ratio checks on a resonance
     # frequency-response answer.
     _topic_logic_checks_for_evaluation = bank.get("topic_logic_checks", [])
+    _topic_routing_error = ""
 
     try:
         _preferred_logic_topic_id = None
@@ -465,11 +466,16 @@ def evaluate_logic_checks(
                 if not _preferred_logic_topic_id:
                     _candidates = _ref.get("candidates") or []
                     if isinstance(_candidates, list) and _candidates:
-                        _answer = (_candidates[0].get("answer") or {})
-                        if isinstance(_answer, dict):
-                            _value = _answer.get("topic_id")
-                            if isinstance(_value, str) and _value.strip():
-                                _preferred_logic_topic_id = _value.strip()
+                        _candidate = _candidates[0]
+
+                        if isinstance(_candidate, dict):
+                            _answer = _candidate.get("answer") or {}
+
+                            if isinstance(_answer, dict):
+                                _value = _answer.get("topic_id")
+
+                                if isinstance(_value, str) and _value.strip():
+                                    _preferred_logic_topic_id = _value.strip()
 
         if _preferred_logic_topic_id and isinstance(_topic_logic_checks_for_evaluation, list):
             _matched_topic_checks = [
@@ -481,8 +487,9 @@ def evaluate_logic_checks(
 
             if _matched_topic_checks:
                 _topic_logic_checks_for_evaluation = _matched_topic_checks
-    except Exception:
-        _topic_logic_checks_for_evaluation = bank.get("topic_logic_checks", [])
+    except Exception as routing_error:
+        _topic_logic_checks_for_evaluation = []
+        _topic_routing_error = repr(routing_error)
 
     for topic_check in _topic_logic_checks_for_evaluation:
         if not topic_check.get("enabled", True):
@@ -671,6 +678,17 @@ def evaluate_logic_checks(
             "reason": "Logic Check에서 THEORY_CORE 핵심 이론 오류가 감지됨" if fatal_error_detected else "",
         },
     }
+
+    if _topic_routing_error:
+        result["topic_routing_diagnostic"] = {
+            "ok": False,
+            "error": _topic_routing_error,
+            "fallback": "skip_topic_logic_checks",
+            "reason": (
+                "주제 라우팅 실패로 전체 로직 체크 bank 적용을 "
+                "중단했습니다."
+            ),
+        }
 
     major_error_detected = any(f.get("severity") == "major" for f in findings)
     minor_or_warn_detected = any(

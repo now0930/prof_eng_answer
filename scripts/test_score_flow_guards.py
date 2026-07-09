@@ -3644,5 +3644,159 @@ class OriginalityGraderJsonContractRegressionTest(
             result["error"],
         )
 
+
+class LogicTopicRoutingFailureRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _write_bank(
+        directory,
+    ) -> Path:
+        bank_path = Path(directory) / "logic_checks.json"
+
+        bank_path.write_text(
+            """
+            {
+              "version": "test",
+              "topic_logic_checks": [
+                {
+                  "topic_id": "neighbor_topic",
+                  "topic_name": "Neighbor Topic",
+                  "enabled": true,
+                  "fatal_checks": [
+                    {
+                      "id": "neighbor_fatal",
+                      "severity": "fatal",
+                      "wrong_patterns": ["wrong marker"],
+                      "message": "neighbor rule leaked",
+                      "recommended_ceiling": 10
+                    }
+                  ],
+                  "major_checks": [],
+                  "question_type_checks": [],
+                  "next_practice_points": []
+                }
+              ]
+            }
+            """,
+            encoding="utf-8",
+        )
+
+        return bank_path
+
+    def test_logic_topic_routing_failure_skips_full_bank_and_reports_diagnostic(
+        self,
+    ) -> None:
+        from tempfile import TemporaryDirectory
+
+        import logic_check_evaluator
+
+        class ExplodingGrade(dict):
+            def get(
+                self,
+                key,
+                default=None,
+            ):
+                raise RuntimeError(
+                    "simulated logic topic routing failure"
+                )
+
+        with TemporaryDirectory() as directory:
+            bank_path = self._write_bank(directory)
+
+            with patch.object(
+                logic_check_evaluator,
+                "_topic_applies",
+                side_effect=AssertionError(
+                    "full logic-check bank must not be evaluated"
+                ),
+            ) as topic_applies:
+                result = (
+                    logic_check_evaluator
+                    .evaluate_logic_checks(
+                        answer_text="wrong marker",
+                        grade=ExplodingGrade(
+                            {
+                                "topic_id": "target_topic",
+                            }
+                        ),
+                        bank_path=bank_path,
+                    )
+                )
+
+        self.assertFalse(result["applicable"])
+        self.assertEqual(result["mode"], "pass")
+        self.assertFalse(
+            result["fatal_error_detected"]
+        )
+        self.assertEqual(result["findings"], [])
+        self.assertEqual(
+            topic_applies.call_count,
+            0,
+        )
+
+        diagnostic = result.get(
+            "topic_routing_diagnostic"
+        )
+
+        self.assertIsInstance(diagnostic, dict)
+        self.assertFalse(diagnostic["ok"])
+        self.assertEqual(
+            diagnostic["fallback"],
+            "skip_topic_logic_checks",
+        )
+        self.assertIn(
+            "simulated logic topic routing failure",
+            diagnostic["error"],
+        )
+        self.assertIn(
+            "전체 로직 체크 bank 적용을 중단",
+            diagnostic["reason"],
+        )
+
+    def test_logic_topic_routing_ignores_malformed_reference_candidate(
+        self,
+    ) -> None:
+        from tempfile import TemporaryDirectory
+
+        import logic_check_evaluator
+
+        grade = {
+            "model_answer_reference": {
+                "primary_reference": None,
+                "candidates": [
+                    "malformed candidate",
+                ],
+            },
+        }
+
+        with TemporaryDirectory() as directory:
+            bank_path = self._write_bank(directory)
+
+            with patch.object(
+                logic_check_evaluator,
+                "_topic_applies",
+                return_value=False,
+            ) as topic_applies:
+                result = (
+                    logic_check_evaluator
+                    .evaluate_logic_checks(
+                        answer_text="정상 답안",
+                        grade=grade,
+                        bank_path=bank_path,
+                    )
+                )
+
+        self.assertFalse(result["applicable"])
+        self.assertEqual(result["findings"], [])
+        self.assertNotIn(
+            "topic_routing_diagnostic",
+            result,
+        )
+        self.assertEqual(
+            topic_applies.call_count,
+            1,
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
