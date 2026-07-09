@@ -708,6 +708,24 @@ def get_rater_analysis(analysis, rater_id):
     }
 
 
+def _coerce_finite_rater_score(
+    value,
+    fallback=0.0,
+):
+    try:
+        score = float(value)
+    except (
+        TypeError,
+        ValueError,
+        OverflowError,
+    ):
+        return float(fallback)
+
+    if not math.isfinite(score):
+        return float(fallback)
+
+    return score
+
 def score_map_from_rows(rows):
     result = {}
     if not isinstance(rows, list):
@@ -721,10 +739,7 @@ def score_map_from_rows(rows):
         if not item:
             continue
 
-        try:
-            score = float(row.get("score", 0))
-        except Exception:
-            score = 0.0
+        score = _coerce_finite_rater_score(row.get("score", 0))
 
         result[item] = {
             "score": score,
@@ -1212,10 +1227,7 @@ def ensure_rater_scores(analysis, rubric, raters, raw_text):
 
             if item_name in old_scores:
                 row = old_scores[item_name]
-                try:
-                    score = float(row.get("score", 0))
-                except Exception:
-                    score = 0.0
+                score = _coerce_finite_rater_score(row.get("score", 0))
                 score = max(0.0, min(score, max_item))
                 reason = clean_text(row.get("reason"), 180) or "모델이 제공한 항목별 사유."
             else:

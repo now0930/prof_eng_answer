@@ -3940,5 +3940,99 @@ class GeminiScoreFiniteNormalizationRegressionTest(
                     ],
                 )
 
+
+class RaterScoreFiniteNormalizationRegressionTest(
+    unittest.TestCase
+):
+    def test_rater_score_coercion_rejects_invalid_and_non_finite_values(
+        self,
+    ) -> None:
+        from grading_agents import (
+            _coerce_finite_rater_score,
+        )
+
+        self.assertEqual(
+            _coerce_finite_rater_score(3.5),
+            3.5,
+        )
+        self.assertEqual(
+            _coerce_finite_rater_score("3.5"),
+            3.5,
+        )
+
+        for value in (
+            "invalid",
+            None,
+            float("nan"),
+            float("inf"),
+            float("-inf"),
+        ):
+            with self.subTest(value=value):
+                result = (
+                    _coerce_finite_rater_score(
+                        value,
+                    )
+                )
+
+                self.assertEqual(result, 0.0)
+
+    def test_score_map_rejects_non_finite_rater_scores(
+        self,
+    ) -> None:
+        from grading_agents import (
+            score_map_from_rows,
+        )
+
+        rows = [
+            {
+                "item": "A",
+                "score": float("nan"),
+                "reason": "nan",
+            },
+            {
+                "item": "B",
+                "score": float("inf"),
+                "reason": "positive infinity",
+            },
+            {
+                "item": "C",
+                "score": float("-inf"),
+                "reason": "negative infinity",
+            },
+            {
+                "item": "D",
+                "score": "invalid",
+                "reason": "invalid",
+            },
+            {
+                "item": "E",
+                "score": "2.5",
+                "reason": "numeric string",
+            },
+        ]
+
+        result = score_map_from_rows(rows)
+
+        self.assertEqual(
+            result["A"]["score"],
+            0.0,
+        )
+        self.assertEqual(
+            result["B"]["score"],
+            0.0,
+        )
+        self.assertEqual(
+            result["C"]["score"],
+            0.0,
+        )
+        self.assertEqual(
+            result["D"]["score"],
+            0.0,
+        )
+        self.assertEqual(
+            result["E"]["score"],
+            2.5,
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
