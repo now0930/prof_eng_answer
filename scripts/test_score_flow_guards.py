@@ -1892,5 +1892,420 @@ class GeminiSemanticPersistenceRegressionTest(
         )
 
 
+
+
+class OriginalityPersistenceRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _call_arguments(
+        session_dir,
+    ):
+        return {
+            "input_text": (
+                "문제:\n"
+                "PID 제어기의 동작 원리를 설명하시오.\n\n"
+                "답안:\n"
+                "비례, 적분, 미분 동작으로 제어한다."
+            ),
+            "answer_text": (
+                "비례, 적분, 미분 동작으로 제어한다."
+            ),
+            "layer_scores": {
+                "A": 1.0,
+                "B": 2.0,
+                "C": 3.0,
+                "D": 2.0,
+                "E": 1.0,
+            },
+            "volume": {
+                "level": "text_only_short_answer",
+            },
+            "fact_eval": {},
+            "connection_eval": {},
+            "session_dir": session_dir,
+        }
+
+    @staticmethod
+    def _valid_grader_result():
+        return {
+            "ok": True,
+            "error": "",
+            "model": "contract-test-model",
+            "raw_text": '{"ok": true}',
+            "parsed": {
+                "originality_level": "independent",
+                "template_dependency": False,
+                "evidence": [
+                    "현장 적용 설명 포함",
+                ],
+            },
+        }
+
+    @staticmethod
+    def _normalized_valid_result():
+        return {
+            "originality_level": "independent",
+            "template_dependency": False,
+            "evidence": [
+                "현장 적용 설명 포함",
+            ],
+        }
+
+    @staticmethod
+    def _normalized_fallback_result():
+        return {
+            "originality_level": "fallback",
+            "template_dependency": False,
+            "evidence": [],
+        }
+
+    def test_originality_success_persists_evaluation(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import grading_agents
+        import originality_grader
+
+        writes = []
+        stdout_buffer = io.StringIO()
+
+        def capture_write(
+            path_value,
+            data,
+        ) -> None:
+            writes.append(
+                {
+                    "filename": Path(path_value).name,
+                    "data": deepcopy(data),
+                }
+            )
+
+        with TemporaryDirectory() as directory:
+            with (
+                patch.object(
+                    originality_grader,
+                    "gemini_originality_evaluate",
+                    return_value=deepcopy(
+                        self._valid_grader_result()
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase8_normalize_originality_evaluation",
+                    return_value=deepcopy(
+                        self._normalized_valid_result()
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=capture_write,
+                ),
+                redirect_stdout(stdout_buffer),
+            ):
+                result = (
+                    grading_agents
+                    ._phase8_run_originality_evaluator(
+                        **self._call_arguments(
+                            Path(directory)
+                        )
+                    )
+                )
+
+        self.assertTrue(
+            result["ok"],
+        )
+        self.assertEqual(
+            result["parsed"],
+            self._normalized_valid_result(),
+        )
+        self.assertEqual(
+            [item["filename"] for item in writes],
+            ["originality_evaluation.json"],
+        )
+        self.assertEqual(
+            writes[0]["data"],
+            result,
+        )
+        self.assertIn(
+            "phase8 originality evaluator applied",
+            stdout_buffer.getvalue(),
+        )
+
+    def test_originality_grader_failure_persists_fallback(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import grading_agents
+        import originality_grader
+
+        writes = []
+        stdout_buffer = io.StringIO()
+
+        def capture_write(
+            path_value,
+            data,
+        ) -> None:
+            writes.append(
+                {
+                    "filename": Path(path_value).name,
+                    "data": deepcopy(data),
+                }
+            )
+
+        with TemporaryDirectory() as directory:
+            with (
+                patch.object(
+                    originality_grader,
+                    "gemini_originality_evaluate",
+                    side_effect=RuntimeError(
+                        "simulated originality grader failure"
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase8_fallback_originality_evaluation",
+                    return_value=deepcopy(
+                        self._normalized_fallback_result()
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase8_normalize_originality_evaluation",
+                    return_value=deepcopy(
+                        self._normalized_fallback_result()
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=capture_write,
+                ),
+                redirect_stdout(stdout_buffer),
+            ):
+                result = (
+                    grading_agents
+                    ._phase8_run_originality_evaluator(
+                        **self._call_arguments(
+                            Path(directory)
+                        )
+                    )
+                )
+
+        self.assertFalse(
+            result["ok"],
+        )
+        self.assertIn(
+            "simulated originality grader failure",
+            result["error"],
+        )
+        self.assertEqual(
+            result["parsed"],
+            self._normalized_fallback_result(),
+        )
+        self.assertEqual(
+            [item["filename"] for item in writes],
+            ["originality_evaluation.json"],
+        )
+        self.assertEqual(
+            writes[0]["data"],
+            result,
+        )
+        self.assertIn(
+            "phase8 originality evaluator failed",
+            stdout_buffer.getvalue(),
+        )
+
+    def test_originality_persistence_failure_is_reported_and_preserves_result(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import grading_agents
+        import originality_grader
+
+        write_attempts = []
+        stdout_buffer = io.StringIO()
+
+        def fail_write(
+            path_value,
+            data,
+        ) -> None:
+            write_attempts.append(
+                {
+                    "filename": Path(path_value).name,
+                    "data": deepcopy(data),
+                }
+            )
+
+            raise PermissionError(
+                "simulated originality persistence failure"
+            )
+
+        with TemporaryDirectory() as directory:
+            with (
+                patch.object(
+                    originality_grader,
+                    "gemini_originality_evaluate",
+                    return_value=deepcopy(
+                        self._valid_grader_result()
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase8_normalize_originality_evaluation",
+                    return_value=deepcopy(
+                        self._normalized_valid_result()
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=fail_write,
+                ),
+                redirect_stdout(stdout_buffer),
+            ):
+                result = (
+                    grading_agents
+                    ._phase8_run_originality_evaluator(
+                        **self._call_arguments(
+                            Path(directory)
+                        )
+                    )
+                )
+
+        self.assertTrue(
+            result["ok"],
+        )
+        self.assertEqual(
+            result["parsed"],
+            self._normalized_valid_result(),
+        )
+        self.assertEqual(
+            [item["filename"] for item in write_attempts],
+            ["originality_evaluation.json"],
+        )
+        self.assertEqual(
+            write_attempts[0]["data"],
+            result,
+        )
+        self.assertIn(
+            "phase8 originality evaluator persistence failed",
+            stdout_buffer.getvalue(),
+        )
+        self.assertIn(
+            "simulated originality persistence failure",
+            stdout_buffer.getvalue(),
+        )
+        self.assertIn(
+            "phase8 originality evaluator applied",
+            stdout_buffer.getvalue(),
+        )
+
+    def test_originality_fallback_persistence_failure_preserves_result(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import grading_agents
+        import originality_grader
+
+        write_attempts = []
+        stdout_buffer = io.StringIO()
+
+        def fail_write(
+            path_value,
+            data,
+        ) -> None:
+            write_attempts.append(
+                {
+                    "filename": Path(path_value).name,
+                    "data": deepcopy(data),
+                }
+            )
+
+            raise PermissionError(
+                "simulated fallback persistence failure"
+            )
+
+        with TemporaryDirectory() as directory:
+            with (
+                patch.object(
+                    originality_grader,
+                    "gemini_originality_evaluate",
+                    side_effect=RuntimeError(
+                        "simulated originality grader failure"
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase8_fallback_originality_evaluation",
+                    return_value=deepcopy(
+                        self._normalized_fallback_result()
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase8_normalize_originality_evaluation",
+                    return_value=deepcopy(
+                        self._normalized_fallback_result()
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=fail_write,
+                ),
+                redirect_stdout(stdout_buffer),
+            ):
+                result = (
+                    grading_agents
+                    ._phase8_run_originality_evaluator(
+                        **self._call_arguments(
+                            Path(directory)
+                        )
+                    )
+                )
+
+        self.assertFalse(
+            result["ok"],
+        )
+        self.assertEqual(
+            result["parsed"],
+            self._normalized_fallback_result(),
+        )
+        self.assertEqual(
+            [item["filename"] for item in write_attempts],
+            ["originality_evaluation.json"],
+        )
+        self.assertEqual(
+            write_attempts[0]["data"],
+            result,
+        )
+        self.assertIn(
+            "phase8 originality evaluator persistence failed",
+            stdout_buffer.getvalue(),
+        )
+        self.assertIn(
+            "simulated fallback persistence failure",
+            stdout_buffer.getvalue(),
+        )
+        self.assertIn(
+            "phase8 originality evaluator failed",
+            stdout_buffer.getvalue(),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

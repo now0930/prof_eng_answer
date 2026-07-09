@@ -3724,11 +3724,39 @@ def _phase8_fallback_originality_evaluation(answer_text):
     }
 
 
-def _phase8_run_originality_evaluator(input_text, answer_text, layer_scores, volume, fact_eval, connection_eval, session_dir=None):
-    try:
-        from originality_grader import gemini_originality_evaluate
+def _phase8_run_originality_evaluator(
+    input_text,
+    answer_text,
+    layer_scores,
+    volume,
+    fact_eval,
+    connection_eval,
+    session_dir=None,
+):
+    def persist_evaluation(eval_data):
+        if session_dir is None:
+            return
 
-        question_text = _phase3_extract_question_text(input_text)
+        try:
+            _phase2_json_write(
+                session_dir / "originality_evaluation.json",
+                eval_data,
+            )
+        except Exception as write_error:
+            print(
+                "[agent] phase8 originality evaluator "
+                "persistence failed: "
+                f"{write_error!r}"
+            )
+
+    try:
+        from originality_grader import (
+            gemini_originality_evaluate,
+        )
+
+        question_text = _phase3_extract_question_text(
+            input_text
+        )
 
         result = gemini_originality_evaluate(
             question_text=question_text,
@@ -3742,46 +3770,60 @@ def _phase8_run_originality_evaluator(input_text, answer_text, layer_scores, vol
         if result.get("ok") and result.get("parsed"):
             parsed = result.get("parsed") or {}
         else:
-            parsed = _phase8_fallback_originality_evaluation(answer_text)
+            parsed = (
+                _phase8_fallback_originality_evaluation(
+                    answer_text
+                )
+            )
 
-        parsed = _phase8_normalize_originality_evaluation(parsed)
+        parsed = (
+            _phase8_normalize_originality_evaluation(
+                parsed
+            )
+        )
 
         eval_data = {
             "ok": result.get("ok"),
             "error": result.get("error", ""),
             "model": result.get("model", ""),
             "raw_text": result.get("raw_text", ""),
-            "parsed": parsed
+            "parsed": parsed,
         }
 
-        if session_dir is not None:
-            try:
-                _phase2_json_write(session_dir / "originality_evaluation.json", eval_data)
-            except Exception:
-                pass
+        persist_evaluation(eval_data)
 
-        try:
-            _phase2_log("[agent] phase8 originality evaluator applied.")
-        except Exception:
-            pass
+        print(
+            "[agent] phase8 originality evaluator applied."
+        )
 
         return eval_data
 
-    except Exception as e:
-        parsed = _phase8_fallback_originality_evaluation(answer_text)
-        parsed = _phase8_normalize_originality_evaluation(parsed)
+    except Exception as error:
+        parsed = (
+            _phase8_fallback_originality_evaluation(
+                answer_text
+            )
+        )
+        parsed = (
+            _phase8_normalize_originality_evaluation(
+                parsed
+            )
+        )
+
         eval_data = {
             "ok": False,
-            "error": repr(e),
+            "error": repr(error),
             "model": "",
             "raw_text": "",
-            "parsed": parsed
+            "parsed": parsed,
         }
 
-        try:
-            _phase2_log(f"[agent] phase8 originality evaluator failed: {e!r}")
-        except Exception:
-            pass
+        persist_evaluation(eval_data)
+
+        print(
+            "[agent] phase8 originality evaluator failed: "
+            f"{error!r}"
+        )
 
         return eval_data
 
