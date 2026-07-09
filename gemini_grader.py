@@ -11,30 +11,74 @@ import urllib.error
 from pathlib import Path
 
 
-def _extract_json(text):
-    text = text or ""
+def _extract_json(text: str) -> dict:
+    normalized = str(text or "").strip()
 
-    try:
-        return json.loads(text)
-    except Exception:
-        pass
+    if not normalized:
+        raise ValueError(
+            "Gemini 응답에서 JSON 객체를 찾지 못했습니다."
+        )
 
-    m = re.search(r"```json\s*(.*?)\s*```", text, re.S)
-    if m:
+    def parse_object(candidate: str):
         try:
-            return json.loads(m.group(1))
-        except Exception:
-            pass
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            return None
 
-    start = text.find("{")
-    end = text.rfind("}")
-    if start != -1 and end != -1 and end > start:
+        if not isinstance(parsed, dict):
+            raise ValueError(
+                "Gemini 응답 JSON root는 object여야 합니다."
+            )
+
+        return parsed
+
+    direct_result = parse_object(normalized)
+
+    if direct_result is not None:
+        return direct_result
+
+    fence_match = re.fullmatch(
+        r"\s*```(?:json)?\s*(.*?)\s*```\s*",
+        normalized,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+
+    if fence_match:
+        fenced_result = parse_object(
+            fence_match.group(1).strip()
+        )
+
+        if fenced_result is not None:
+            return fenced_result
+
+    decoder = json.JSONDecoder()
+    search_index = 0
+
+    while True:
+        object_start = normalized.find(
+            "{",
+            search_index,
+        )
+
+        if object_start < 0:
+            break
+
         try:
-            return json.loads(text[start:end + 1])
-        except Exception:
-            pass
+            parsed, _end = decoder.raw_decode(
+                normalized[object_start:]
+            )
+        except json.JSONDecodeError:
+            search_index = object_start + 1
+            continue
 
-    raise ValueError("Gemini 응답에서 JSON을 파싱하지 못했습니다.")
+        if isinstance(parsed, dict):
+            return parsed
+
+        search_index = object_start + 1
+
+    raise ValueError(
+        "Gemini 응답에서 JSON 객체를 찾지 못했습니다."
+    )
 
 
 def _compact(obj, max_chars=16000):

@@ -4034,5 +4034,101 @@ class RaterScoreFiniteNormalizationRegressionTest(
             2.5,
         )
 
+
+class GeminiGraderJsonContractRegressionTest(
+    unittest.TestCase
+):
+    def test_gemini_grader_extract_json_parses_object_variants(
+        self,
+    ) -> None:
+        from gemini_grader import _extract_json
+
+        cases = {
+            "plain": (
+                '{"score": 1}',
+                {"score": 1},
+            ),
+            "fenced_json": (
+                '```json\n{"score": 2}\n```',
+                {"score": 2},
+            ),
+            "fenced_plain": (
+                '```\n{"score": 3}\n```',
+                {"score": 3},
+            ),
+            "embedded": (
+                'prefix {"score": 4} suffix',
+                {"score": 4},
+            ),
+            "nested": (
+                'prefix {"outer": {"inner": 5}} suffix',
+                {
+                    "outer": {
+                        "inner": 5,
+                    },
+                },
+            ),
+            "truncated_fence_with_later_object": (
+                (
+                    '```json\n{"broken":\n'
+                    'text {"score": 6} suffix'
+                ),
+                {"score": 6},
+            ),
+            "multiple_objects_uses_first": (
+                (
+                    'first {"score": 7} '
+                    'second {"score": 8}'
+                ),
+                {"score": 7},
+            ),
+            "brace_inside_string": (
+                (
+                    'prefix {"text": "value with } brace", '
+                    '"score": 9} suffix'
+                ),
+                {
+                    "text": "value with } brace",
+                    "score": 9,
+                },
+            ),
+        }
+
+        for label, (
+            payload,
+            expected,
+        ) in cases.items():
+            with self.subTest(label=label):
+                self.assertEqual(
+                    _extract_json(payload),
+                    expected,
+                )
+
+    def test_gemini_grader_extract_json_rejects_non_object_and_malformed_payloads(
+        self,
+    ) -> None:
+        from gemini_grader import _extract_json
+
+        payloads = {
+            "plain_array": '[{"score": 1}]',
+            "fenced_array": (
+                '```json\n[{"score": 2}]\n```'
+            ),
+            "string": '"scalar"',
+            "number": '3',
+            "boolean": 'true',
+            "null": 'null',
+            "empty": '',
+            "whitespace": '   \n\t ',
+            "malformed": '{"score": 4',
+        }
+
+        for label, payload in payloads.items():
+            with self.subTest(label=label):
+                with self.assertRaises(
+                    ValueError,
+                ):
+                    _extract_json(payload)
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
