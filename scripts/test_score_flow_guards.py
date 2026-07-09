@@ -3491,5 +3491,158 @@ class Phase2PostprocessDiagnosticsRegressionTest(
             output.getvalue(),
         )
 
+
+class OriginalityGraderJsonContractRegressionTest(
+    unittest.TestCase
+):
+    def test_originality_extract_json_parses_fenced_and_embedded_objects(
+        self,
+    ) -> None:
+        import originality_grader
+
+        cases = (
+            (
+                """```json
+                {
+                    "originality_score": 3.5,
+                    "judgment": "independent"
+                }
+                ```""",
+                {
+                    "originality_score": 3.5,
+                    "judgment": "independent",
+                },
+            ),
+            (
+                (
+                    "Gemini 분석 결과입니다.\n"
+                    '{"originality_score": 2.5, '
+                    '"judgment": "partial"}\n'
+                    "검토를 완료했습니다."
+                ),
+                {
+                    "originality_score": 2.5,
+                    "judgment": "partial",
+                },
+            ),
+            (
+                """```json
+                {
+                    "originality_score": 4.0,
+                    "evidence": {
+                        "independent_reasoning": true
+                    }
+                }
+                ```""",
+                {
+                    "originality_score": 4.0,
+                    "evidence": {
+                        "independent_reasoning": True,
+                    },
+                },
+            ),
+        )
+
+        for raw, expected in cases:
+            with self.subTest(raw=raw):
+                self.assertEqual(
+                    originality_grader._extract_json(
+                        raw
+                    ),
+                    expected,
+                )
+
+    def test_originality_extract_json_rejects_malformed_and_non_object_payloads(
+        self,
+    ) -> None:
+        import originality_grader
+
+        invalid_payloads = (
+            "",
+            "JSON 응답이 없습니다.",
+            '{"originality_score": 3.0',
+            "[1, 2, 3]",
+            "```json\n[1, 2, 3]\n```",
+            '"plain string"',
+            "null",
+        )
+
+        for raw in invalid_payloads:
+            with self.subTest(raw=raw):
+                with self.assertRaisesRegex(
+                    ValueError,
+                    "JSON object not found",
+                ):
+                    originality_grader._extract_json(
+                        raw
+                    )
+
+    def test_originality_http_body_read_failure_is_reported(
+        self,
+    ) -> None:
+        import os
+        import urllib.error
+
+        import originality_grader
+
+        class BrokenBody:
+            def read(self):
+                raise OSError(
+                    "simulated response body read failure"
+                )
+
+            def close(self) -> None:
+                return
+
+        http_error = urllib.error.HTTPError(
+            url="https://example.invalid/gemini",
+            code=429,
+            msg="Too Many Requests",
+            hdrs=None,
+            fp=BrokenBody(),
+        )
+
+        with (
+            patch.dict(
+                os.environ,
+                {
+                    "GEMINI_API_KEY": "test-key",
+                    "GEMINI_MODEL": "test-model",
+                },
+                clear=True,
+            ),
+            patch.object(
+                originality_grader.urllib.request,
+                "urlopen",
+                side_effect=http_error,
+            ),
+        ):
+            result = (
+                originality_grader
+                .gemini_originality_evaluate(
+                    question_text="질문",
+                    answer_text="답안",
+                )
+            )
+
+        self.assertFalse(result["ok"])
+        self.assertEqual(
+            result["model"],
+            "test-model",
+        )
+        self.assertIsNone(result["parsed"])
+        self.assertIn(
+            "HTTPError 429",
+            result["error"],
+        )
+        self.assertIn(
+            "response body unavailable",
+            result["error"],
+        )
+        self.assertIn(
+            "simulated response body read failure",
+            result["error"],
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

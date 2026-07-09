@@ -5,25 +5,50 @@ import urllib.error
 import urllib.request
 
 
-def _extract_json(text: str):
-    text = text or ""
-    text = text.strip()
+def _extract_json(text: str) -> dict:
+    text = str(text or "").strip()
 
     if text.startswith("```"):
-        text = re.sub(r"^```(?:json)?", "", text).strip()
-        text = re.sub(r"```$", "", text).strip()
+        text = re.sub(
+            r"^```(?:json)?",
+            "",
+            text,
+        ).strip()
+        text = re.sub(
+            r"```$",
+            "",
+            text,
+        ).strip()
 
-    try:
-        return json.loads(text)
-    except Exception:
-        pass
+    def parse_object(candidate: str):
+        try:
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            return None
+
+        if not isinstance(parsed, dict):
+            return None
+
+        return parsed
+
+    parsed = parse_object(text)
+    if parsed is not None:
+        return parsed
 
     start = text.find("{")
     end = text.rfind("}")
-    if start >= 0 and end > start:
-        return json.loads(text[start:end + 1])
 
-    raise ValueError("JSON object not found in Gemini response")
+    if start >= 0 and end > start:
+        parsed = parse_object(
+            text[start : end + 1]
+        )
+
+        if parsed is not None:
+            return parsed
+
+    raise ValueError(
+        "JSON object not found in Gemini response"
+    )
 
 
 def build_originality_prompt(question_text, answer_text, layer_scores=None, volume=None, fact_eval=None, connection_eval=None):
@@ -227,14 +252,24 @@ def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, v
 
     except urllib.error.HTTPError as e:
         body = ""
+        body_error = ""
+
         try:
             body = e.read().decode("utf-8")
-        except Exception:
-            pass
+        except Exception as read_error:
+            body_error = repr(read_error)
+
+        error_text = f"HTTPError {e.code}: {body[:1000]}"
+
+        if body_error:
+            error_text += (
+                " (response body unavailable: "
+                f"{body_error})"
+            )
 
         return {
             "ok": False,
-            "error": f"HTTPError {e.code}: {body[:1000]}",
+            "error": error_text,
             "model": model,
             "raw_text": "",
             "parsed": None
