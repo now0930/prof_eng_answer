@@ -4130,5 +4130,175 @@ class GeminiGraderJsonContractRegressionTest(
                 ):
                     _extract_json(payload)
 
+
+class MigrationCompatibilityImportRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _migration_import_statement():
+        import ast
+        from pathlib import Path
+
+        source_path = Path(
+            "scripts/migrations/"
+            "apply_fact_anchors_and_cleanup.py"
+        )
+        source = source_path.read_text(
+            encoding="utf-8"
+        )
+        tree = ast.parse(
+            source,
+            filename=str(source_path),
+        )
+
+        matches = []
+
+        for node in ast.walk(tree):
+            if not isinstance(node, ast.Try):
+                continue
+
+            imported_names = {
+                alias.name
+                for statement in node.body
+                if isinstance(
+                    statement,
+                    ast.ImportFrom,
+                )
+                and statement.module
+                == "rubric_registry"
+                for alias in statement.names
+            }
+
+            if imported_names == {
+                "load_model_answer_bank",
+                "save_model_answer_bank",
+                "validate_model_answer_bank",
+                "question_type_ids",
+            }:
+                matches.append(node)
+
+        if len(matches) != 1:
+            raise AssertionError(
+                "rubric_registry compatibility "
+                f"try count={len(matches)}"
+            )
+
+        isolated = ast.Module(
+            body=[matches[0]],
+            type_ignores=[],
+        )
+        ast.fix_missing_locations(isolated)
+
+        return compile(
+            isolated,
+            str(source_path),
+            "exec",
+        )
+
+    def test_migration_compatibility_import_allows_missing_registry(
+        self,
+    ) -> None:
+        import builtins
+        from unittest.mock import patch
+
+        compiled = (
+            self._migration_import_statement()
+        )
+        real_import = builtins.__import__
+
+        def missing_registry(
+            name,
+            globals=None,
+            locals=None,
+            fromlist=(),
+            level=0,
+        ):
+            if name == "rubric_registry":
+                raise ModuleNotFoundError(
+                    "simulated legacy repository"
+                )
+
+            return real_import(
+                name,
+                globals,
+                locals,
+                fromlist,
+                level,
+            )
+
+        namespace = {}
+
+        with patch(
+            "builtins.__import__",
+            side_effect=missing_registry,
+        ):
+            exec(compiled, namespace)
+
+        for name in (
+            "load_model_answer_bank",
+            "save_model_answer_bank",
+            "validate_model_answer_bank",
+            "question_type_ids",
+        ):
+            with self.subTest(name=name):
+                self.assertIsNone(
+                    namespace[name]
+                )
+
+    def test_migration_compatibility_import_does_not_hide_runtime_error(
+        self,
+    ) -> None:
+        import builtins
+        from unittest.mock import patch
+
+        compiled = (
+            self._migration_import_statement()
+        )
+        real_import = builtins.__import__
+
+        def broken_registry(
+            name,
+            globals=None,
+            locals=None,
+            fromlist=(),
+            level=0,
+        ):
+            if name == "rubric_registry":
+                raise RuntimeError(
+                    "simulated registry initialization bug"
+                )
+
+            return real_import(
+                name,
+                globals,
+                locals,
+                fromlist,
+                level,
+            )
+
+        namespace = {}
+
+        with patch(
+            "builtins.__import__",
+            side_effect=broken_registry,
+        ):
+            with self.assertRaisesRegex(
+                RuntimeError,
+                "registry initialization bug",
+            ):
+                exec(compiled, namespace)
+
+        for name in (
+            "load_model_answer_bank",
+            "save_model_answer_bank",
+            "validate_model_answer_bank",
+            "question_type_ids",
+        ):
+            with self.subTest(name=name):
+                self.assertNotIn(
+                    name,
+                    namespace,
+                )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

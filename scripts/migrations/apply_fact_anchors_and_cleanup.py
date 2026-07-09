@@ -45,7 +45,7 @@ try:
         validate_model_answer_bank,
         question_type_ids,
     )
-except Exception:  # pragma: no cover - fallback for older repo layouts
+except (ImportError, ModuleNotFoundError):  # pragma: no cover - fallback for older repo layouts
     load_model_answer_bank = None
     save_model_answer_bank = None
     validate_model_answer_bank = None
