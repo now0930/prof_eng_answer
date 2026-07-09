@@ -1442,5 +1442,200 @@ class GeminiMandatoryPromptBootstrapRegressionTest(
         )
 
 
+
+
+class DifficultyCeilingFallbackRegressionTest(
+    unittest.TestCase
+):
+    def test_phase2_preserves_grade_when_difficulty_ceiling_fails(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import difficulty_score_ceiling
+        import grading_agents
+        from grading_config import (
+            load_active_config,
+            save_active_config_snapshots,
+        )
+
+        legacy_result = {
+            "score": 22.0,
+            "total_score": 22.0,
+            "final_score": 22.0,
+            "raw_score": 22.0,
+            "score_25": 22.0,
+            "criteria": {
+                "A": {
+                    "score": 5.0,
+                    "max_score": 5.0,
+                },
+                "B": {
+                    "score": 5.0,
+                    "max_score": 5.0,
+                },
+                "C": {
+                    "score": 5.0,
+                    "max_score": 5.0,
+                },
+                "D": {
+                    "score": 4.0,
+                    "max_score": 5.0,
+                },
+                "E": {
+                    "score": 3.0,
+                    "max_score": 5.0,
+                },
+            },
+            "scores": {
+                "A": 5.0,
+                "B": 5.0,
+                "C": 5.0,
+                "D": 4.0,
+                "E": 3.0,
+            },
+            "feedback": [],
+            "findings": [],
+            "caps": [],
+            "metadata": {},
+        }
+
+        input_text = """문제:
+피드백 제어계의 안정성을 설명하시오.
+
+답안:
+폐루프 극점이 좌반평면에 있으면 시스템은 안정하며,
+우반평면에 있으면 불안정하다.
+"""
+
+        json_write_calls = []
+        ceiling_calls = []
+
+        def capture_json_write(
+            path_value,
+            data,
+        ) -> None:
+            json_write_calls.append(
+                {
+                    "path": str(path_value),
+                    "data": deepcopy(data),
+                }
+            )
+
+        def fail_ceiling(
+            grade,
+            *,
+            question_text=None,
+            answer_text=None,
+        ):
+            ceiling_calls.append(
+                {
+                    "grade": deepcopy(grade),
+                    "question_text": question_text,
+                    "answer_text": answer_text,
+                }
+            )
+
+            raise RuntimeError(
+                "simulated difficulty ceiling failure"
+            )
+
+        with TemporaryDirectory() as directory:
+            session_dir = Path(directory)
+
+            config = load_active_config(
+                grading_agents.BASE_DIR
+            )
+
+            save_active_config_snapshots(
+                session_dir,
+                config,
+            )
+
+            (session_dir / "input.txt").write_text(
+                input_text,
+                encoding="utf-8",
+            )
+
+            for snapshot_name in (
+                "scoring_model_snapshot.json",
+                "subject_rubric_snapshot.json",
+                "layered_rater_snapshot.json",
+            ):
+                self.assertTrue(
+                    (
+                        session_dir
+                        / snapshot_name
+                    ).is_file()
+                )
+
+            stdout_buffer = io.StringIO()
+
+            with (
+                patch.object(
+                    grading_agents,
+                    "_phase2_latest_session_dir",
+                    return_value=session_dir,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=capture_json_write,
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase6_run_gemini_semantic_grader",
+                    return_value={},
+                ),
+                patch.object(
+                    difficulty_score_ceiling,
+                    "apply_difficulty_score_ceiling",
+                    side_effect=fail_ceiling,
+                ),
+                redirect_stdout(stdout_buffer),
+            ):
+                result = (
+                    grading_agents
+                    ._phase2_postprocess_grade(
+                        deepcopy(legacy_result)
+                    )
+                )
+
+        self.assertEqual(
+            len(ceiling_calls),
+            1,
+        )
+        self.assertIsInstance(
+            result,
+            dict,
+        )
+        self.assertEqual(
+            result,
+            ceiling_calls[0]["grade"],
+        )
+        self.assertGreater(
+            len(json_write_calls),
+            0,
+        )
+        self.assertEqual(
+            ceiling_calls[0]["question_text"],
+            "피드백 제어계의 안정성을 설명하시오.",
+        )
+        self.assertIn(
+            "폐루프 극점이 좌반평면에 있으면",
+            ceiling_calls[0]["answer_text"],
+        )
+        self.assertIn(
+            "simulated difficulty ceiling failure",
+            stdout_buffer.getvalue(),
+        )
+        self.assertIn(
+            "phase21 final difficulty ceiling skipped",
+            stdout_buffer.getvalue(),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
