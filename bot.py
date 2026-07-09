@@ -84,12 +84,67 @@ def log(msg):
 
 def load_state():
     ensure_dirs()
-    if not STATE_FILE.exists():
-        return {"last_update_id": 0, "chats": {}}
+    default_state = {
+        "last_update_id": 0,
+        "chats": {},
+    }
+
     try:
-        return json.loads(STATE_FILE.read_text(encoding="utf-8"))
-    except Exception:
-        return {"last_update_id": 0, "chats": {}}
+        if not STATE_FILE.exists():
+            return default_state
+
+        state = json.loads(
+            STATE_FILE.read_text(
+                encoding="utf-8"
+            )
+        )
+
+        if not isinstance(state, dict):
+            raise ValueError(
+                "state root must be a JSON object"
+            )
+
+        last_update_id = state.get(
+            "last_update_id",
+            0,
+        )
+
+        if (
+            isinstance(last_update_id, bool)
+            or not isinstance(last_update_id, int)
+            or last_update_id < 0
+        ):
+            raise ValueError(
+                "state.last_update_id must be "
+                "a non-negative integer"
+            )
+
+        chats = state.get("chats", {})
+
+        if not isinstance(chats, dict):
+            raise ValueError(
+                "state.chats must be a JSON object"
+            )
+
+        state["last_update_id"] = (
+            last_update_id
+        )
+        state["chats"] = chats
+
+        return state
+
+    except (
+        OSError,
+        UnicodeError,
+        ValueError,
+        TypeError,
+    ) as error:
+        print(
+            "[bot] state load failed; "
+            "using default state: "
+            f"{error!r}"
+        )
+        return default_state
 
 
 def save_state(state):

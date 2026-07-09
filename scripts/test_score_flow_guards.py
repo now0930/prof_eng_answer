@@ -4300,5 +4300,425 @@ class MigrationCompatibilityImportRegressionTest(
                     namespace,
                 )
 
+
+class BotStateLoadingRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _default_state():
+        return {
+            "last_update_id": 0,
+            "chats": {},
+        }
+
+    def test_load_state_missing_file_returns_default_without_diagnostic(
+        self,
+    ) -> None:
+        import io
+        import tempfile
+        from contextlib import redirect_stdout
+        from pathlib import Path
+        from unittest.mock import patch
+
+        import bot
+
+        with tempfile.TemporaryDirectory(
+            prefix="state_missing_"
+        ) as temp_dir:
+            state_path = (
+                Path(temp_dir) / "state.json"
+            )
+            output = io.StringIO()
+
+            with (
+                patch.object(
+                    bot,
+                    "STATE_FILE",
+                    state_path,
+                ),
+                patch.object(
+                    bot,
+                    "ensure_dirs",
+                    lambda: None,
+                ),
+                redirect_stdout(output),
+            ):
+                result = bot.load_state()
+
+        self.assertEqual(
+            result,
+            self._default_state(),
+        )
+        self.assertEqual(
+            output.getvalue(),
+            "",
+        )
+
+    def test_load_state_valid_object_is_returned_and_missing_fields_are_normalized(
+        self,
+    ) -> None:
+        import json
+        import tempfile
+        from pathlib import Path
+        from unittest.mock import patch
+
+        import bot
+
+        cases = (
+            (
+                {
+                    "last_update_id": 14,
+                    "chats": {
+                        "100": {
+                            "mode": "test",
+                        },
+                    },
+                    "custom": "preserved",
+                },
+                {
+                    "last_update_id": 14,
+                    "chats": {
+                        "100": {
+                            "mode": "test",
+                        },
+                    },
+                    "custom": "preserved",
+                },
+            ),
+            (
+                {},
+                self._default_state(),
+            ),
+            (
+                {
+                    "chats": {
+                        "200": {},
+                    },
+                },
+                {
+                    "last_update_id": 0,
+                    "chats": {
+                        "200": {},
+                    },
+                },
+            ),
+            (
+                {
+                    "last_update_id": 4,
+                },
+                {
+                    "last_update_id": 4,
+                    "chats": {},
+                },
+            ),
+        )
+
+        with tempfile.TemporaryDirectory(
+            prefix="state_valid_"
+        ) as temp_dir:
+            state_path = (
+                Path(temp_dir) / "state.json"
+            )
+
+            for payload, expected in cases:
+                with self.subTest(
+                    payload=payload
+                ):
+                    state_path.write_text(
+                        json.dumps(
+                            payload,
+                            ensure_ascii=False,
+                        ),
+                        encoding="utf-8",
+                    )
+
+                    with (
+                        patch.object(
+                            bot,
+                            "STATE_FILE",
+                            state_path,
+                        ),
+                        patch.object(
+                            bot,
+                            "ensure_dirs",
+                            lambda: None,
+                        ),
+                    ):
+                        result = (
+                            bot.load_state()
+                        )
+
+                    self.assertEqual(
+                        result,
+                        expected,
+                    )
+
+    def test_load_state_malformed_json_reports_recovery(
+        self,
+    ) -> None:
+        import io
+        import tempfile
+        from contextlib import redirect_stdout
+        from pathlib import Path
+        from unittest.mock import patch
+
+        import bot
+
+        with tempfile.TemporaryDirectory(
+            prefix="state_malformed_"
+        ) as temp_dir:
+            state_path = (
+                Path(temp_dir) / "state.json"
+            )
+            state_path.write_text(
+                '{"last_update_id":',
+                encoding="utf-8",
+            )
+            output = io.StringIO()
+
+            with (
+                patch.object(
+                    bot,
+                    "STATE_FILE",
+                    state_path,
+                ),
+                patch.object(
+                    bot,
+                    "ensure_dirs",
+                    lambda: None,
+                ),
+                redirect_stdout(output),
+            ):
+                result = bot.load_state()
+
+        self.assertEqual(
+            result,
+            self._default_state(),
+        )
+        self.assertIn(
+            "[bot] state load failed; "
+            "using default state:",
+            output.getvalue(),
+        )
+        self.assertIn(
+            "JSONDecodeError",
+            output.getvalue(),
+        )
+
+    def test_load_state_rejects_non_object_json_roots(
+        self,
+    ) -> None:
+        import io
+        import json
+        import tempfile
+        from contextlib import redirect_stdout
+        from pathlib import Path
+        from unittest.mock import patch
+
+        import bot
+
+        payloads = (
+            [],
+            "scalar",
+            None,
+            True,
+            3,
+        )
+
+        with tempfile.TemporaryDirectory(
+            prefix="state_non_object_"
+        ) as temp_dir:
+            state_path = (
+                Path(temp_dir) / "state.json"
+            )
+
+            for payload in payloads:
+                with self.subTest(
+                    payload=payload
+                ):
+                    state_path.write_text(
+                        json.dumps(payload),
+                        encoding="utf-8",
+                    )
+                    output = io.StringIO()
+
+                    with (
+                        patch.object(
+                            bot,
+                            "STATE_FILE",
+                            state_path,
+                        ),
+                        patch.object(
+                            bot,
+                            "ensure_dirs",
+                            lambda: None,
+                        ),
+                        redirect_stdout(output),
+                    ):
+                        result = (
+                            bot.load_state()
+                        )
+
+                    self.assertEqual(
+                        result,
+                        self._default_state(),
+                    )
+                    self.assertIn(
+                        "state root must be "
+                        "a JSON object",
+                        output.getvalue(),
+                    )
+
+    def test_load_state_rejects_invalid_required_field_types(
+        self,
+    ) -> None:
+        import io
+        import json
+        import tempfile
+        from contextlib import redirect_stdout
+        from pathlib import Path
+        from unittest.mock import patch
+
+        import bot
+
+        cases = (
+            (
+                {
+                    "last_update_id": True,
+                    "chats": {},
+                },
+                "state.last_update_id",
+            ),
+            (
+                {
+                    "last_update_id": "15",
+                    "chats": {},
+                },
+                "state.last_update_id",
+            ),
+            (
+                {
+                    "last_update_id": -1,
+                    "chats": {},
+                },
+                "state.last_update_id",
+            ),
+            (
+                {
+                    "last_update_id": float(
+                        "nan"
+                    ),
+                    "chats": {},
+                },
+                "state.last_update_id",
+            ),
+            (
+                {
+                    "last_update_id": 0,
+                    "chats": [],
+                },
+                "state.chats",
+            ),
+        )
+
+        with tempfile.TemporaryDirectory(
+            prefix="state_invalid_fields_"
+        ) as temp_dir:
+            state_path = (
+                Path(temp_dir) / "state.json"
+            )
+
+            for payload, marker in cases:
+                with self.subTest(
+                    payload=payload
+                ):
+                    state_path.write_text(
+                        json.dumps(
+                            payload,
+                            allow_nan=True,
+                        ),
+                        encoding="utf-8",
+                    )
+                    output = io.StringIO()
+
+                    with (
+                        patch.object(
+                            bot,
+                            "STATE_FILE",
+                            state_path,
+                        ),
+                        patch.object(
+                            bot,
+                            "ensure_dirs",
+                            lambda: None,
+                        ),
+                        redirect_stdout(output),
+                    ):
+                        result = (
+                            bot.load_state()
+                        )
+
+                    self.assertEqual(
+                        result,
+                        self._default_state(),
+                    )
+                    self.assertIn(
+                        marker,
+                        output.getvalue(),
+                    )
+
+    def test_load_state_read_failure_reports_recovery(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from unittest.mock import patch
+
+        import bot
+
+        class FailingStatePath:
+            def exists(self):
+                return True
+
+            def read_text(
+                self,
+                *args,
+                **kwargs,
+            ):
+                raise OSError(
+                    "simulated state read failure"
+                )
+
+        output = io.StringIO()
+
+        with (
+            patch.object(
+                bot,
+                "STATE_FILE",
+                FailingStatePath(),
+            ),
+            patch.object(
+                bot,
+                "ensure_dirs",
+                lambda: None,
+            ),
+            redirect_stdout(output),
+        ):
+            result = bot.load_state()
+
+        self.assertEqual(
+            result,
+            self._default_state(),
+        )
+        self.assertIn(
+            "simulated state read failure",
+            output.getvalue(),
+        )
+        self.assertIn(
+            "[bot] state load failed; "
+            "using default state:",
+            output.getvalue(),
+        )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
