@@ -2875,12 +2875,15 @@ def _phase6_run_gemini_semantic_grader(
         )
 
         try:
-            _phase2_json_write(session_dir / "gemini_semantic_evaluation.json", result)
-            _phase2_json_write(session_dir / "question_type_evaluation.json", grade.get("question_type_evaluation", {}))
-            _phase2_json_write(session_dir / "model_answer_reference.json", grade.get("model_answer_reference", {}))
-            _phase2_json_write(session_dir / "originality_evaluation.json", grade.get("originality_evaluation", {}))
-        except Exception:
-            pass
+            _phase2_json_write(
+                session_dir / "gemini_semantic_evaluation.json",
+                result,
+            )
+        except Exception as write_error:
+            print(
+                "[agent] Gemini semantic grader persistence failed: "
+                f"{write_error!r}"
+            )
 
         if result.get("ok"):
             print("[agent] Gemini semantic grader applied.")
@@ -2897,10 +2900,15 @@ def _phase6_run_gemini_semantic_grader(
             "raw_text": ""
         }
         try:
-            _phase2_json_write(session_dir / "gemini_semantic_evaluation.json", result)
-            _phase2_json_write(session_dir / "originality_evaluation.json", grade.get("originality_evaluation", {}))
-        except Exception:
-            pass
+            _phase2_json_write(
+                session_dir / "gemini_semantic_evaluation.json",
+                result,
+            )
+        except Exception as write_error:
+            print(
+                "[agent] Gemini semantic grader persistence failed: "
+                f"{write_error!r}"
+            )
         print(f"[agent] Gemini semantic grader exception: {e!r}")
         return result
 
@@ -4641,4 +4649,3 @@ def _phase17_final_phrase_cleanup(grade):
         return fix_text(obj)
 
     return walk(grade)
-

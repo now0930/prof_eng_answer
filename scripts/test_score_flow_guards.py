@@ -1637,5 +1637,260 @@ class DifficultyCeilingFallbackRegressionTest(
         )
 
 
+
+
+class GeminiSemanticPersistenceRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _call_arguments(
+        session_dir,
+    ):
+        return {
+            "input_text": (
+                "문제:\n"
+                "PID 제어기의 동작 원리를 설명하시오.\n\n"
+                "답안:\n"
+                "비례, 적분, 미분 동작으로 제어한다."
+            ),
+            "answer_text": (
+                "비례, 적분, 미분 동작으로 제어한다."
+            ),
+            "scoring_model": {
+                "total_points": 25,
+                "layers": [],
+            },
+            "subject_rubric": {
+                "name": "contract-test",
+            },
+            "rater_profile": {
+                "raters": [],
+            },
+            "volume": {
+                "level": "text_only_short_answer",
+            },
+            "fact_eval": {},
+            "connection_eval": {},
+            "session_dir": session_dir,
+        }
+
+    @staticmethod
+    def _valid_result():
+        return {
+            "ok": True,
+            "error": None,
+            "parsed": {
+                "scores": {
+                    "A": 1.0,
+                },
+            },
+            "raw_text": '{"ok": true}',
+        }
+
+    def test_gemini_success_persists_only_semantic_result(
+        self,
+    ) -> None:
+        from tempfile import TemporaryDirectory
+
+        import gemini_grader
+        import grading_agents
+
+        valid_result = self._valid_result()
+        writes = []
+
+        def capture_write(
+            path_value,
+            data,
+        ) -> None:
+            writes.append(
+                {
+                    "filename": Path(path_value).name,
+                    "data": deepcopy(data),
+                }
+            )
+
+        with TemporaryDirectory() as directory:
+            with (
+                patch.object(
+                    gemini_grader,
+                    "gemini_semantic_grade",
+                    return_value=deepcopy(valid_result),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=capture_write,
+                ),
+            ):
+                result = (
+                    grading_agents
+                    ._phase6_run_gemini_semantic_grader(
+                        **self._call_arguments(
+                            Path(directory)
+                        )
+                    )
+                )
+
+        self.assertEqual(
+            result,
+            valid_result,
+        )
+        self.assertEqual(
+            [item["filename"] for item in writes],
+            ["gemini_semantic_evaluation.json"],
+        )
+        self.assertEqual(
+            writes[0]["data"],
+            valid_result,
+        )
+
+    def test_gemini_exception_persists_fallback_result(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import gemini_grader
+        import grading_agents
+
+        writes = []
+
+        def capture_write(
+            path_value,
+            data,
+        ) -> None:
+            writes.append(
+                {
+                    "filename": Path(path_value).name,
+                    "data": deepcopy(data),
+                }
+            )
+
+        stdout_buffer = io.StringIO()
+
+        with TemporaryDirectory() as directory:
+            with (
+                patch.object(
+                    gemini_grader,
+                    "gemini_semantic_grade",
+                    side_effect=RuntimeError(
+                        "simulated Gemini dependency failure"
+                    ),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=capture_write,
+                ),
+                redirect_stdout(stdout_buffer),
+            ):
+                result = (
+                    grading_agents
+                    ._phase6_run_gemini_semantic_grader(
+                        **self._call_arguments(
+                            Path(directory)
+                        )
+                    )
+                )
+
+        self.assertFalse(
+            result["ok"],
+        )
+        self.assertIn(
+            "simulated Gemini dependency failure",
+            result["error"],
+        )
+        self.assertEqual(
+            [item["filename"] for item in writes],
+            ["gemini_semantic_evaluation.json"],
+        )
+        self.assertEqual(
+            writes[0]["data"],
+            result,
+        )
+        self.assertIn(
+            "Gemini semantic grader exception",
+            stdout_buffer.getvalue(),
+        )
+
+    def test_gemini_persistence_failure_is_reported_and_preserves_result(
+        self,
+    ) -> None:
+        import io
+        from contextlib import redirect_stdout
+        from tempfile import TemporaryDirectory
+
+        import gemini_grader
+        import grading_agents
+
+        valid_result = self._valid_result()
+        write_attempts = []
+        stdout_buffer = io.StringIO()
+
+        def fail_write(
+            path_value,
+            data,
+        ) -> None:
+            write_attempts.append(
+                {
+                    "filename": Path(path_value).name,
+                    "data": deepcopy(data),
+                }
+            )
+
+            raise PermissionError(
+                "simulated Gemini persistence write failure"
+            )
+
+        with TemporaryDirectory() as directory:
+            with (
+                patch.object(
+                    gemini_grader,
+                    "gemini_semantic_grade",
+                    return_value=deepcopy(valid_result),
+                ),
+                patch.object(
+                    grading_agents,
+                    "_phase2_json_write",
+                    side_effect=fail_write,
+                ),
+                redirect_stdout(stdout_buffer),
+            ):
+                result = (
+                    grading_agents
+                    ._phase6_run_gemini_semantic_grader(
+                        **self._call_arguments(
+                            Path(directory)
+                        )
+                    )
+                )
+
+        self.assertEqual(
+            result,
+            valid_result,
+        )
+        self.assertEqual(
+            [item["filename"] for item in write_attempts],
+            ["gemini_semantic_evaluation.json"],
+        )
+        self.assertEqual(
+            write_attempts[0]["data"],
+            valid_result,
+        )
+        self.assertIn(
+            "Gemini semantic grader persistence failed",
+            stdout_buffer.getvalue(),
+        )
+        self.assertIn(
+            "simulated Gemini persistence write failure",
+            stdout_buffer.getvalue(),
+        )
+        self.assertIn(
+            "Gemini semantic grader applied",
+            stdout_buffer.getvalue(),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
