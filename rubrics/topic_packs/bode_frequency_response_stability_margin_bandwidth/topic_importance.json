@@ -1,0 +1,22 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "bode_frequency_response_stability_margin_bandwidth",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "CALC_DESIGN",
+  "high_band_unlock_conditions": [
+    "개루프 L(s)와 폐루프 T(s)의 평가 목적을 정확히 구분한다.",
+    "극점·영점별 크기 기울기와 위상 기여를 합성한다.",
+    "ω_gc, ω_pc, PM과 GM을 정확히 정의하고 계산한다.",
+    "GM의 배수와 dB 표현을 일관된 부호로 변환한다.",
+    "폐루프 -3 dB bandwidth와 개루프 crossover의 근사 관계 및 한계를 설명한다.",
+    "안정여유를 damping, overshoot와 응답속도에 조건부로 연결한다.",
+    "시간지연·비최소위상·multiple crossover·phase unwrap의 영향을 검증한다.",
+    "lead·lag·PID 보상과 운전점·포화·잡음·모델 오차를 함께 검토한다."
+  ],
+  "note": "Bode 선도는 개루프 주파수응답으로 안정여유와 강인성을 평가하고 폐루프 대역폭 및 시간응답을 연결하는 핵심 계산형 제어이론이다. 고득점은 crossover·PM·GM·bandwidth를 정확히 구분하고 지연·비최소위상·multiple crossover·보상기와 현장 제약까지 일관되게 검증할 때 가능하다.",
+  "revision_notes": [
+    "사람이 검토한 Bode 요구사항 Markdown을 기준으로 직접 작성함.",
+    "8개 high-band 조건을 Bode 안정여유·대역폭·보상기 내용으로 작성함."
+  ]
+}

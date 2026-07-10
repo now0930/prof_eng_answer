@@ -1,11 +1,119 @@
 {
-  "version": "2026-07-10T15:50:04Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-10T23:40:53Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs/*/logic_check.json:llm_profile",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "profiles": [
+    {
+      "topic_id": "bode_frequency_response_stability_margin_bandwidth",
+      "display_name": "근궤적법에 의한 안정도 해석과 제어기 이득 설계",
+      "difficulty": "THEORY_CORE",
+      "cap_policy": {
+        "fatal_recommended_ceiling": 10.0,
+        "fatal_confidence_threshold": 0.75
+      },
+      "candidate_extraction": {
+        "max_candidates": 20,
+        "nearby_window": 2,
+        "key_terms": [
+          "Bode",
+          "Bode plot",
+          "보드선도",
+          "보드 선도",
+          "주파수응답",
+          "frequency response",
+          "gain crossover",
+          "phase crossover",
+          "이득교차주파수",
+          "위상교차주파수",
+          "phase margin",
+          "gain margin",
+          "위상여유",
+          "이득여유",
+          "stability margin",
+          "bandwidth",
+          "대역폭",
+          "0 dB crossover",
+          "-180 degree crossover",
+          "lead compensation",
+          "lag compensation",
+          "phase unwrap",
+          "non-minimum phase",
+          "시간지연",
+          "delay phase"
+        ],
+        "rules": []
+      },
+      "truth_schema": [
+        "[open_loop_closed_loop_roles] 고전적 위상여유와 이득여유는 루프 전달함수 L(s)=G(s)H(s)의 주파수응답에서 구하고, 폐루프 대역폭은 T(s)=L(s)/(1+L(s))에서 평가한다.",
+        "[log_frequency_and_decibel] Bode 크기선도는 로그 주파수축에서 20log10|L(jω)|로 진폭비를 표현하며, 전달함수 곱은 dB 크기와 위상의 합으로 나타낸다.",
+        "[pole_zero_magnitude_slopes] 1차 좌반평면 영점은 절점 이후 +20 dB/dec, 1차 좌반평면 극점은 -20 dB/dec를 추가하며 중복 차수만큼 기울기가 누적된다.",
+        "[phase_contribution_nonminimum_phase] 좌반평면 영점은 양의 위상, 좌반평면 극점은 음의 위상을 기여하며 우반평면 영점은 대응 좌반평면 영점과 크기는 같을 수 있지만 추가 위상지연을 만든다.",
+        "[positive_gain_shift] 양의 상수 이득 K는 크기선도를 20log10K만큼 평행 이동시키고 위상선도 자체는 바꾸지 않지만, 교차주파수와 안정여유는 달라질 수 있다.",
+        "[gain_phase_crossover_frequencies] 이득교차주파수 ω_gc는 |L(jω_gc)|=1인 주파수이고, 위상교차주파수 ω_pc는 위상이 -(2k+1)180°에 도달하는 주파수이므로 서로 다른 조건이다.",
+        "[phase_margin_calculation] 부호가 포함된 위상을 사용할 때 위상여유는 PM=180°+∠L(jω_gc)이며 이득교차주파수에서 계산한다.",
+        "[gain_margin_calculation] 이득여유는 위상교차주파수에서 GM=1/|L(jω_pc)|로 구하며 dB 표현은 GM_dB=-20log10|L(jω_pc)|이다.",
+        "[multiple_or_missing_crossovers] 0 dB 또는 -180° 교차가 없으면 해당 고전적 margin이 정의되지 않거나 무한대로 표현될 수 있고, 다중 교차점에서는 모든 관련 교차점과 전체 안정성을 검토해야 한다.",
+        "[closed_loop_bandwidth] 일반적인 저역통과형 폐루프 시스템의 대역폭은 |T(jω_BW)|=|T(0)|/√2가 되는 상대 -3.0103 dB 주파수로 정의한다.",
+        "[margin_transient_response_approximation] PM 증가와 감쇠 증가·overshoot 감소, bandwidth 증가와 응답속도 향상의 관계는 dominant second-order와 유사한 조건에서 사용하는 근사적 설계 경향이다.",
+        "[delay_and_nonminimum_phase_limits] 순수 시간지연 e^{-sτ}는 크기 1과 위상 -ωτ rad를 가지며, 우반평면 영점과 함께 추가 위상지연 및 달성 가능한 대역폭·안정여유의 한계를 만든다.",
+        "[sensitivity_robustness_noise_tradeoff] S(s)=1/(1+L(s))와 T(s)=L(s)/(1+L(s))를 이용해 저주파 추종·외란 억제와 고주파 잡음·미모델 동특성 사이의 trade-off를 평가한다.",
+        "[compensator_and_field_validation] lead·lag·PID 보상은 목표 crossover, PM, 저주파 이득과 잡음 조건을 함께 고려하고, 적용 전 운전점·시간지연·포화·rate limit·deadband·모델 오차를 검증한다."
+      ],
+      "fatal_conditions": [
+        "[margins_from_closed_loop_bode] 잘못된 주장: 위상여유와 이득여유는 폐루프 전달함수 T(s)의 Bode 선도에서 직접 구한다. 정확한 기준: 고전적 PM과 GM은 루프 전달함수 L(s)의 주파수응답에서 구하고, T(s)는 폐루프 bandwidth와 응답 평가에 사용한다.",
+        "[crossover_frequencies_are_same] 잘못된 주장: 이득교차주파수와 위상교차주파수는 항상 같은 주파수이다. 정확한 기준: ω_gc는 |L|=1, ω_pc는 위상이 -(2k+1)180°인 서로 다른 조건으로 정의된다.",
+        "[phase_margin_sign_error] 잘못된 주장: 음의 위상값을 그대로 사용할 때 PM=180°-∠L(jω_gc)로 계산한다. 정확한 기준: 부호가 포함된 위상에 대해서는 PM=180°+∠L(jω_gc)이다.",
+        "[gain_margin_db_sign_error] 잘못된 주장: GM_dB=20log10|L(jω_pc)|로 계산한다. 정확한 기준: GM=1/|L(jω_pc)|이므로 GM_dB=-20log10|L(jω_pc)|이다.",
+        "[bandwidth_always_equals_gain_crossover] 잘못된 주장: 폐루프 대역폭은 개루프 이득교차주파수와 항상 같다. 정확한 기준: ω_BW는 T(s)의 상대 -3 dB 주파수이고 ω_gc는 L(s)의 0 dB 교차이므로 특정 조건에서만 근사적으로 유사하다.",
+        "[phase_margin_damping_exact_universal] 잘못된 주장: 위상여유와 감쇠비 사이에는 모든 시스템에 적용되는 정확한 일대일 공식이 있다. 정확한 기준: PM과 감쇠비의 관계는 dominant second-order와 유사한 조건에서 사용하는 근사적 경향이다.",
+        "[delay_has_no_stability_effect] 잘못된 주장: 순수 시간지연은 크기응답을 바꾸지 않으므로 폐루프 안정성에도 영향을 주지 않는다. 정확한 기준: 시간지연은 -ωτ의 위상지연을 추가해 PM을 줄이고 폐루프 불안정을 유발할 수 있다.",
+        "[positive_margins_always_guarantee_stability] 잘못된 주장: 양의 PM과 GM이 표시되면 개루프 불안정 극점, 다중 crossover, 비최소위상 특성과 무관하게 항상 폐루프 안정이다. 정확한 기준: 고전적 margin 해석에는 전제가 있으며 복잡한 경우에는 전체 Nyquist 조건 또는 폐루프 극점 검증이 필요하다."
+      ],
+      "safe_conditions": [
+        "단일 crossover와 음의 피드백이라는 적용 전제를 명시한다.",
+        "개루프 L(s)에서 margin을, 폐루프 T(s)에서 bandwidth를 평가한다.",
+        "근사 관계에는 dominant second-order 등 적용 조건을 함께 제시한다.",
+        "복잡한 경우 Nyquist 조건 또는 폐루프 극점을 추가 검증한다.",
+        "시간지연은 크기가 아니라 위상과 안정여유에 영향을 준다고 설명한다."
+      ],
+      "output_contract": {
+        "json_only": true,
+        "required_fields": [
+          "verdict",
+          "confidence",
+          "reason",
+          "checks",
+          "findings"
+        ],
+        "verdict_values": [
+          "pass",
+          "warn",
+          "fatal"
+        ]
+      },
+      "major_checks": [],
+      "feedback_templates": {
+        "core_theory_positive": "폐루프 특성방정식, P-N-Z 관계, 목표 설계점 선회와 안정 이득·과도응답의 핵심 이론이 정답과 일치한다.",
+        "core_theory_major": "핵심 이론의 직접적인 반대 주장은 없지만 선회 convention, 특수조건 또는 안정여유 해석을 보강해야 한다.",
+        "core_theory_fatal": "답안이 근궤적 안정도 판별의 핵심 원리와 직접 충돌하는 주장을 실제 정답으로 제시했다."
+      },
+      "next_practice_points": [
+        "L(s), T(s), S(s)의 평가 목적을 구분한다.",
+        "ω_gc, ω_pc, PM과 GM의 정의 및 부호를 확인한다.",
+        "폐루프 -3 dB bandwidth와 개루프 crossover의 차이를 설명한다.",
+        "시간지연, 비최소위상과 multiple crossover의 한계를 검증한다."
+      ],
+      "false_positive_cautions": [
+        "일반 단어인 안정성, 이득, 위상, 주파수 또는 설계만으로 Topic을 확정하지 않는다.",
+        "PM·GM 공식의 단순 누락은 직접적인 반대 주장이 없는 한 fatal이 아니다.",
+        "multiple crossover, phase unwrap 또는 감도함수 누락만으로 fatal 처리하지 않는다.",
+        "bandwidth와 gain crossover가 근사적으로 유사할 수 있다는 조건부 표현은 허용한다.",
+        "dominant second-order 조건에서 PM과 감쇠비를 근사적으로 연결하는 표현은 허용한다."
+      ]
+    },
     {
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
       "display_name": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",

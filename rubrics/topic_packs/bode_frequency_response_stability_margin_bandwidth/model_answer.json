@@ -1,0 +1,366 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "bode_frequency_response_stability_margin_bandwidth",
+  "title_ko": "Bode 선도에 의한 안정여유·대역폭 해석과 주파수응답 설계",
+  "question_type": "CALC_DESIGN",
+  "expected_question_patterns": [
+    "Bode 선도의 원리와 작성 방법을 설명하고 안정여유를 구하시오.",
+    "주어진 개루프 전달함수의 Bode 선도에서 위상여유와 이득여유를 계산하시오.",
+    "이득교차주파수와 위상교차주파수의 차이를 설명하시오.",
+    "폐루프 대역폭과 개루프 이득교차주파수의 관계를 설명하시오.",
+    "Bode 선도를 이용하여 목표 위상여유를 만족하는 제어기 이득을 설계하시오.",
+    "lead 또는 lag 보상기를 이용한 주파수응답 설계 절차를 설명하시오.",
+    "시간지연이 위상여유와 폐루프 안정성에 미치는 영향을 설명하시오.",
+    "다중 crossover가 있는 시스템에서 고전적 PM·GM 판정의 한계를 설명하시오."
+  ],
+  "recommended_outline": [
+    {
+      "section": "배경과 설계 목적",
+      "intent": "Bode 선도로 안정여유·대역폭·강인성을 설계하는 목적을 제시한다.",
+      "id": "section_1",
+      "section_id": "section_1",
+      "order": 1,
+      "index": 1,
+      "sequence": 1,
+      "title": "배경과 설계 목적",
+      "heading": "배경과 설계 목적",
+      "name": "배경과 설계 목적",
+      "description": "Bode 선도의 설계 목적과 안정여유·대역폭·강인성의 관계를 제시한다.",
+      "purpose": "Bode 선도로 안정여유·대역폭·강인성을 설계하는 목적을 제시한다.",
+      "summary": "Bode 선도의 설계 목적과 안정여유·대역폭·강인성의 관계를 제시한다.",
+      "content": "Bode 선도의 설계 목적과 안정여유·대역폭·강인성의 관계를 제시한다.",
+      "key_points": [
+        "Bode 선도의 설계 목적과 안정여유·대역폭·강인성의 관계를 제시한다."
+      ],
+      "required_points": [
+        "Bode 선도의 설계 목적과 안정여유·대역폭·강인성의 관계를 제시한다."
+      ],
+      "core_points": [
+        "Bode 선도의 설계 목적과 안정여유·대역폭·강인성의 관계를 제시한다."
+      ],
+      "items": [
+        "Bode 선도의 설계 목적과 안정여유·대역폭·강인성의 관계를 제시한다."
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "전달함수와 Bode 구성",
+      "intent": "개루프·폐루프 전달함수와 요소별 주파수응답 구성 원리를 설명한다.",
+      "id": "section_2",
+      "section_id": "section_2",
+      "order": 2,
+      "index": 2,
+      "sequence": 2,
+      "title": "전달함수와 Bode 구성",
+      "heading": "전달함수와 Bode 구성",
+      "name": "전달함수와 Bode 구성",
+      "description": "L(s), T(s), S(s)를 구분하고 극점·영점별 크기 기울기와 위상을 합성한다.",
+      "purpose": "개루프·폐루프 전달함수와 요소별 주파수응답 구성 원리를 설명한다.",
+      "summary": "L(s), T(s), S(s)를 구분하고 극점·영점별 크기 기울기와 위상을 합성한다.",
+      "content": "L(s), T(s), S(s)를 구분하고 극점·영점별 크기 기울기와 위상을 합성한다.",
+      "key_points": [
+        "L(s), T(s), S(s)를 구분하고 극점·영점별 크기 기울기와 위상을 합성한다."
+      ],
+      "required_points": [
+        "L(s), T(s), S(s)를 구분하고 극점·영점별 크기 기울기와 위상을 합성한다."
+      ],
+      "core_points": [
+        "L(s), T(s), S(s)를 구분하고 극점·영점별 크기 기울기와 위상을 합성한다."
+      ],
+      "items": [
+        "L(s), T(s), S(s)를 구분하고 극점·영점별 크기 기울기와 위상을 합성한다."
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "이득교차와 위상교차",
+      "intent": "이득교차주파수와 위상교차주파수를 구분하고 계산 절차를 제시한다.",
+      "id": "section_3",
+      "section_id": "section_3",
+      "order": 3,
+      "index": 3,
+      "sequence": 3,
+      "title": "이득교차와 위상교차",
+      "heading": "이득교차와 위상교차",
+      "name": "이득교차와 위상교차",
+      "description": "이득교차주파수와 위상교차주파수를 서로 다른 조건으로 계산한다.",
+      "purpose": "이득교차주파수와 위상교차주파수를 구분하고 계산 절차를 제시한다.",
+      "summary": "이득교차주파수와 위상교차주파수를 서로 다른 조건으로 계산한다.",
+      "content": "이득교차주파수와 위상교차주파수를 서로 다른 조건으로 계산한다.",
+      "key_points": [
+        "이득교차주파수와 위상교차주파수를 서로 다른 조건으로 계산한다."
+      ],
+      "required_points": [
+        "이득교차주파수와 위상교차주파수를 서로 다른 조건으로 계산한다."
+      ],
+      "core_points": [
+        "이득교차주파수와 위상교차주파수를 서로 다른 조건으로 계산한다."
+      ],
+      "items": [
+        "이득교차주파수와 위상교차주파수를 서로 다른 조건으로 계산한다."
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "위상여유와 이득여유",
+      "intent": "PM·GM 계산과 부호·단위 검증 기준을 제시한다.",
+      "id": "section_4",
+      "section_id": "section_4",
+      "order": 4,
+      "index": 4,
+      "sequence": 4,
+      "title": "위상여유와 이득여유",
+      "heading": "위상여유와 이득여유",
+      "name": "위상여유와 이득여유",
+      "description": "PM과 GM을 계산하고 GM의 배수 및 dB 표현과 부호를 검증한다.",
+      "purpose": "PM·GM 계산과 부호·단위 검증 기준을 제시한다.",
+      "summary": "PM과 GM을 계산하고 GM의 배수 및 dB 표현과 부호를 검증한다.",
+      "content": "PM과 GM을 계산하고 GM의 배수 및 dB 표현과 부호를 검증한다.",
+      "key_points": [
+        "PM과 GM을 계산하고 GM의 배수 및 dB 표현과 부호를 검증한다."
+      ],
+      "required_points": [
+        "PM과 GM을 계산하고 GM의 배수 및 dB 표현과 부호를 검증한다."
+      ],
+      "core_points": [
+        "PM과 GM을 계산하고 GM의 배수 및 dB 표현과 부호를 검증한다."
+      ],
+      "items": [
+        "PM과 GM을 계산하고 GM의 배수 및 dB 표현과 부호를 검증한다."
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "폐루프 대역폭과 시간응답",
+      "intent": "폐루프 bandwidth와 시간응답 관계를 적용 조건과 함께 해석한다.",
+      "id": "section_5",
+      "section_id": "section_5",
+      "order": 5,
+      "index": 5,
+      "sequence": 5,
+      "title": "폐루프 대역폭과 시간응답",
+      "heading": "폐루프 대역폭과 시간응답",
+      "name": "폐루프 대역폭과 시간응답",
+      "description": "폐루프 상대 -3 dB bandwidth를 구하고 crossover와의 근사 관계 및 한계를 설명한다.",
+      "purpose": "폐루프 bandwidth와 시간응답 관계를 적용 조건과 함께 해석한다.",
+      "summary": "폐루프 상대 -3 dB bandwidth를 구하고 crossover와의 근사 관계 및 한계를 설명한다.",
+      "content": "폐루프 상대 -3 dB bandwidth를 구하고 crossover와의 근사 관계 및 한계를 설명한다.",
+      "key_points": [
+        "폐루프 상대 -3 dB bandwidth를 구하고 crossover와의 근사 관계 및 한계를 설명한다."
+      ],
+      "required_points": [
+        "폐루프 상대 -3 dB bandwidth를 구하고 crossover와의 근사 관계 및 한계를 설명한다."
+      ],
+      "core_points": [
+        "폐루프 상대 -3 dB bandwidth를 구하고 crossover와의 근사 관계 및 한계를 설명한다."
+      ],
+      "items": [
+        "폐루프 상대 -3 dB bandwidth를 구하고 crossover와의 근사 관계 및 한계를 설명한다."
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "특수 조건과 적용 한계",
+      "intent": "지연·비최소위상·다중 crossover에서 고전적 margin 해석의 한계를 제시한다.",
+      "id": "section_6",
+      "section_id": "section_6",
+      "order": 6,
+      "index": 6,
+      "sequence": 6,
+      "title": "특수 조건과 적용 한계",
+      "heading": "특수 조건과 적용 한계",
+      "name": "특수 조건과 적용 한계",
+      "description": "시간지연, 비최소위상 영점, multiple crossover와 phase unwrap을 검토한다.",
+      "purpose": "지연·비최소위상·다중 crossover에서 고전적 margin 해석의 한계를 제시한다.",
+      "summary": "시간지연, 비최소위상 영점, multiple crossover와 phase unwrap을 검토한다.",
+      "content": "시간지연, 비최소위상 영점, multiple crossover와 phase unwrap을 검토한다.",
+      "key_points": [
+        "시간지연, 비최소위상 영점, multiple crossover와 phase unwrap을 검토한다."
+      ],
+      "required_points": [
+        "시간지연, 비최소위상 영점, multiple crossover와 phase unwrap을 검토한다."
+      ],
+      "core_points": [
+        "시간지연, 비최소위상 영점, multiple crossover와 phase unwrap을 검토한다."
+      ],
+      "items": [
+        "시간지연, 비최소위상 영점, multiple crossover와 phase unwrap을 검토한다."
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "보상기 설계",
+      "intent": "목표 margin과 bandwidth를 만족하는 보상기 설계 절차를 제시한다.",
+      "id": "section_7",
+      "section_id": "section_7",
+      "order": 7,
+      "index": 7,
+      "sequence": 7,
+      "title": "보상기 설계",
+      "heading": "보상기 설계",
+      "name": "보상기 설계",
+      "description": "목표 crossover와 margin을 기준으로 lead·lag·PID 보상기를 설계한다.",
+      "purpose": "목표 margin과 bandwidth를 만족하는 보상기 설계 절차를 제시한다.",
+      "summary": "목표 crossover와 margin을 기준으로 lead·lag·PID 보상기를 설계한다.",
+      "content": "목표 crossover와 margin을 기준으로 lead·lag·PID 보상기를 설계한다.",
+      "key_points": [
+        "목표 crossover와 margin을 기준으로 lead·lag·PID 보상기를 설계한다."
+      ],
+      "required_points": [
+        "목표 crossover와 margin을 기준으로 lead·lag·PID 보상기를 설계한다."
+      ],
+      "core_points": [
+        "목표 crossover와 margin을 기준으로 lead·lag·PID 보상기를 설계한다."
+      ],
+      "items": [
+        "목표 crossover와 margin을 기준으로 lead·lag·PID 보상기를 설계한다."
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "현장 적용과 결론",
+      "intent": "비선형성·잡음·모델 오차를 포함한 현장 검증 절차를 제시한다.",
+      "id": "section_8",
+      "section_id": "section_8",
+      "order": 8,
+      "index": 8,
+      "sequence": 8,
+      "title": "현장 적용과 결론",
+      "heading": "현장 적용과 결론",
+      "name": "현장 적용과 결론",
+      "description": "운전점, 포화, rate limit, deadband, 잡음과 모델 오차를 포함해 현장 적용성을 검증한다.",
+      "purpose": "비선형성·잡음·모델 오차를 포함한 현장 검증 절차를 제시한다.",
+      "summary": "운전점, 포화, rate limit, deadband, 잡음과 모델 오차를 포함해 현장 적용성을 검증한다.",
+      "content": "운전점, 포화, rate limit, deadband, 잡음과 모델 오차를 포함해 현장 적용성을 검증한다.",
+      "key_points": [
+        "운전점, 포화, rate limit, deadband, 잡음과 모델 오차를 포함해 현장 적용성을 검증한다."
+      ],
+      "required_points": [
+        "운전점, 포화, rate limit, deadband, 잡음과 모델 오차를 포함해 현장 적용성을 검증한다."
+      ],
+      "core_points": [
+        "운전점, 포화, rate limit, deadband, 잡음과 모델 오차를 포함해 현장 적용성을 검증한다."
+      ],
+      "items": [
+        "운전점, 포화, rate limit, deadband, 잡음과 모델 오차를 포함해 현장 적용성을 검증한다."
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "개루프 L(s)와 폐루프 T(s)의 평가 목적을 정확히 구분한다.",
+    "극점·영점별 크기 기울기와 위상 기여를 합성한다.",
+    "ω_gc, ω_pc, PM과 GM을 정확히 정의하고 계산한다.",
+    "GM의 배수와 dB 표현을 일관된 부호로 변환한다.",
+    "폐루프 -3 dB bandwidth와 개루프 crossover의 근사 관계 및 한계를 설명한다.",
+    "안정여유를 damping, overshoot와 응답속도에 조건부로 연결한다.",
+    "시간지연·비최소위상·multiple crossover·phase unwrap의 영향을 검증한다.",
+    "lead·lag·PID 보상과 운전점·포화·잡음·모델 오차를 함께 검토한다."
+  ],
+  "common_missing_points": [
+    "PM과 GM의 평가 전달함수를 명시하지 않음.",
+    "ω_gc와 ω_pc를 구분하지 않음.",
+    "GM의 선형 배수와 dB 변환을 누락함.",
+    "폐루프 bandwidth의 상대 -3 dB 기준을 누락함.",
+    "bandwidth와 gain crossover를 무조건 동일시함.",
+    "PM과 damping 관계의 근사 조건을 누락함.",
+    "시간지연의 -ωτ 위상 영향을 누락함.",
+    "비최소위상 영점과 multiple crossover를 누락함.",
+    "phase unwrap과 교차점 부재 처리를 누락함.",
+    "보상기 적용 후 L(s), T(s), S(s) 재검증을 누락함.",
+    "현장 포화, 잡음, 운전점과 모델 오차를 누락함."
+  ],
+  "routing_aliases": [
+    "Bode",
+    "Bode plot",
+    "Bode diagram",
+    "보드선도",
+    "보드 선도",
+    "주파수응답",
+    "frequency response",
+    "magnitude plot",
+    "phase plot",
+    "이득교차주파수",
+    "gain crossover frequency",
+    "위상교차주파수",
+    "phase crossover frequency",
+    "위상여유",
+    "phase margin",
+    "이득여유",
+    "gain margin",
+    "안정여유",
+    "stability margin",
+    "대역폭",
+    "bandwidth",
+    "0 dB crossover",
+    "-180 degree crossover",
+    "lead compensation",
+    "lag compensation"
+  ],
+  "routing_field_points": [
+    "개루프 크기선도에서 0 dB 교차를 확인한다.",
+    "개루프 위상선도에서 -180° 계열 교차를 확인한다.",
+    "ω_gc와 ω_pc를 분리하여 PM과 GM을 계산한다.",
+    "이득여유의 배수와 dB 표현을 변환한다.",
+    "폐루프 T(s)의 저주파 이득 대비 -3 dB bandwidth를 확인한다.",
+    "margin과 damping·overshoot·응답속도의 관계를 조건부로 해석한다.",
+    "시간지연의 -ωτ 위상과 우반평면 영점의 위상손실을 반영한다.",
+    "multiple crossover와 phase unwrap을 검토한다.",
+    "lead·lag·PID 보상 전후 margin과 bandwidth를 비교한다.",
+    "저주파 외란 억제와 고주파 센서 잡음의 trade-off를 검토한다.",
+    "운전점, 포화, rate limit, deadband와 모델 오차를 확인한다."
+  ],
+  "revision_notes": [
+    "사람이 검토한 Bode 요구사항 Markdown을 기준으로 직접 작성함.",
+    "CALC_DESIGN형 작도·교차주파수·margin·bandwidth 계산과 보상기 설계를 함께 요구함.",
+    "모든 답안 필드를 Bode 주파수응답 전용 내용으로 작성함."
+  ]
+}
