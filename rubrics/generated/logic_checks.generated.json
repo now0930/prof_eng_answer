@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-10T12:16:49Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-10T13:27:15Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -41,6 +41,58 @@
         "최종값 정리의 안정 조건과 Type별 정상상태 오차를 함께 정리한다.",
         "루프 이득과 대역폭을 안정여유, 지연, 잡음 및 포화와 함께 판단한다.",
         "Bode/Nyquist, 시간응답, 외란응답과 포화시험을 검증 절차로 제시한다."
+      ],
+      "de_claim_trust": {
+        "enabled": true,
+        "target_layers": [
+          "D",
+          "E"
+        ],
+        "score_effect": "none",
+        "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+        "pass_meaning": "핵심 이론 주장이 정답과 직접 충돌하지 않아 이를 기반으로 한 현장 적용·결론을 이론적으로 신뢰할 수 있다.",
+        "fatal_meaning": "핵심 이론 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 적용·결론을 강하게 신뢰하지 않는다.",
+        "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
+      }
+    },
+    {
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "enabled": false,
+      "topic_name": "Nyquist 안정도 판별과 이득·위상여유",
+      "question_type": "CALC_DESIGN",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "Nyquist 안정도 판별",
+        "Nyquist criterion",
+        "Nyquist stability criterion",
+        "Nyquist plot",
+        "Nyquist contour",
+        "나이퀴스트 안정도 판별",
+        "나이키스트 안정도 판별",
+        "나이퀴스트 선도",
+        "P N Z",
+        "P-N-Z 관계",
+        "-1점 선회",
+        "임계점 -1",
+        "우반평면 극점",
+        "개루프 불안정",
+        "gain margin",
+        "이득여유",
+        "phase margin",
+        "위상여유",
+        "gain crossover",
+        "phase crossover",
+        "시간지연 안정성"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "폐루프 특성방정식 1+L(s)=0과 -1점의 관계를 직접 유도한다.",
+        "P를 먼저 계산한 뒤 선택한 선회 방향 convention으로 Z를 구한다.",
+        "허수축 극점이 있는 시스템의 수정 Nyquist contour를 연습한다.",
+        "gain crossover와 phase crossover를 구분하여 GM과 PM을 계산한다.",
+        "시간지연과 복수 crossover가 있는 경우 전체 Nyquist 궤적을 검증한다."
       ],
       "de_claim_trust": {
         "enabled": true,

@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-10T12:16:49Z-generated-topic-pack-importance",
+  "version": "2026-07-10T13:27:15Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -24,6 +24,28 @@
       "revision_notes": [
         "Difficulty=THEORY_CORE, selection_importance=CORE_MUST_PREPARE로 확정함.",
         "단순 누락만으로 fatal cap을 적용하지 않는 정책을 명시함."
+      ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "CALC_DESIGN",
+      "high_band_unlock_conditions": [
+        "특성방정식과 점근안정의 극점 조건을 정확히 제시한다.",
+        "Nyquist 궤적을 정확히 구성하고 -1점 순선회와 우반평면 근 수를 연결한다.",
+        "양의 계수 조건을 필요조건과 충분조건으로 구분한다.",
+        "-1점 선회 0과 허수축 극점의 처리법을 정확히 구분한다.",
+        "K의 안정 범위와 경계값 검증을 모두 수행한다.",
+        "이득·위상여유 축 이동과 시간지연 적용 한계를 정확히 설명한다.",
+        "현장 이득 선정에서 안정여유, 운전점, 지연, 잡음과 포화를 함께 판단한다.",
+        "8개 fatal condition에 해당하는 직접적인 반대 주장이 없다."
+      ],
+      "note": "Nyquist 판별은 폐루프 특성방정식, 극점 안정성, 제어기 이득 범위와 이득·위상여유를 연결하는 핵심 계산형 제어이론이다. 고득점은 배열 작성뿐 아니라 특수 경우, 경계값, 적용 한계와 현장 안정여유를 함께 설명할 때 가능하다.",
+      "revision_notes": [
+        "요구사항 Markdown과 기존 schema를 기준으로 ChatGPT가 직접 작성함.",
+        "참조 Topic Pack의 high-band 조건을 복사하지 않고 Routh 내용으로 재작성함."
       ]
     },
     {

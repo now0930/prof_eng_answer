@@ -1,0 +1,219 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+  "source_policy": {
+    "role": "topic_pack_source",
+    "runtime_files_are_not_modified_by_this_file": true,
+    "deterministic_checks_target": "rubrics/generated/logic_checks.generated.json",
+    "llm_profile_target": "rubrics/generated/logic_check_profiles.generated.json",
+    "note": "이 파일은 사람이 검토한 Nyquist Topic Sheet에서 직접 작성한 source이다. 이 Topic은 deterministic fatal 판정을 사용하지 않고 JSON-profile LLM 검증만 사용한다."
+  },
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "Nyquist 안정도 판별과 이득·위상여유",
+    "question_type": "CALC_DESIGN",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [
+      "Nyquist 안정도 판별",
+      "Nyquist criterion",
+      "Nyquist stability criterion",
+      "Nyquist plot",
+      "Nyquist contour",
+      "나이퀴스트 안정도 판별",
+      "나이키스트 안정도 판별",
+      "나이퀴스트 선도",
+      "P N Z",
+      "P-N-Z 관계",
+      "-1점 선회",
+      "임계점 -1",
+      "우반평면 극점",
+      "개루프 불안정",
+      "gain margin",
+      "이득여유",
+      "phase margin",
+      "위상여유",
+      "gain crossover",
+      "phase crossover",
+      "시간지연 안정성"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "폐루프 특성방정식 1+L(s)=0과 -1점의 관계를 직접 유도한다.",
+      "P를 먼저 계산한 뒤 선택한 선회 방향 convention으로 Z를 구한다.",
+      "허수축 극점이 있는 시스템의 수정 Nyquist contour를 연습한다.",
+      "gain crossover와 phase crossover를 구분하여 GM과 PM을 계산한다.",
+      "시간지연과 복수 crossover가 있는 경우 전체 Nyquist 궤적을 검증한다."
+    ],
+    "de_claim_trust": {
+      "enabled": true,
+      "target_layers": [
+        "D",
+        "E"
+      ],
+      "score_effect": "none",
+      "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+      "pass_meaning": "핵심 이론 주장이 정답과 직접 충돌하지 않아 이를 기반으로 한 현장 적용·결론을 이론적으로 신뢰할 수 있다.",
+      "fatal_meaning": "핵심 이론 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 적용·결론을 강하게 신뢰하지 않는다.",
+      "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
+    }
+  },
+  "llm_profile": {
+    "display_name": "Nyquist 안정도 판별과 이득·위상여유",
+    "difficulty": "THEORY_CORE",
+    "cap_policy": {
+      "fatal_recommended_ceiling": 10.0,
+      "fatal_confidence_threshold": 0.75
+    },
+    "candidate_extraction": {
+      "max_candidates": 20,
+      "nearby_window": 2,
+      "key_terms": [
+        "Nyquist",
+        "Nyquist plot",
+        "Nyquist contour",
+        "나이퀴스트",
+        "나이키스트",
+        "-1점",
+        "-1+j0",
+        "임계점",
+        "선회",
+        "encirclement",
+        "시계방향",
+        "반시계방향",
+        "P N Z",
+        "P",
+        "N",
+        "Z",
+        "우반평면",
+        "개루프 극점",
+        "폐루프 극점",
+        "argument principle",
+        "gain margin",
+        "phase margin",
+        "이득여유",
+        "위상여유",
+        "gain crossover",
+        "phase crossover",
+        "교차주파수",
+        "허수축 극점",
+        "contour indentation",
+        "시간지연",
+        "dead time",
+        "e^(-sT)",
+        "강인성"
+      ],
+      "rules": []
+    },
+    "truth_schema": [
+      "표준 음의 피드백의 loop transfer function을 L(s)=G(s)H(s)로 두면 폐루프 특성방정식은 1+L(s)=0이다.",
+      "Nyquist 판별은 열린 우반평면을 둘러싸는 contour를 L(s) 평면에 사상하고 -1+j0 임계점에 대한 순선회수를 이용해 폐루프 안정성을 판단한다.",
+      "P는 L(s)의 열린 우반평면 극점 수이고 Z는 1+L(s)의 열린 우반평면 영점 수, 즉 폐루프 우반평면 극점 수이다.",
+      "이 Topic Pack은 우반평면 contour를 시계방향으로 돌고 -1점의 순시계방향 선회수를 양수로 정의하여 N_cw=Z-P와 Z=P+N_cw를 사용한다.",
+      "폐루프 점근안정 조건은 Z=0이며, 따라서 P개의 개루프 우반평면 극점이 있으면 N_cw=-P가 필요하다.",
+      "P=0인 특수한 경우 폐루프 안정을 위해 -1점의 순선회수가 0이어야 하지만, 궤적이 -1점을 통과하는 경계상태는 점근안정으로 포함하지 않는다.",
+      "L(s)가 허수축 위에 극점을 가지면 contour가 극점을 통과하지 않도록 작은 반원으로 우회하고 그 사상을 전체 Nyquist 궤적에 포함해야 한다.",
+      "실계수 전달함수는 L(-jω)=L(jω)*이므로 음의 주파수 궤적이 양의 주파수 궤적의 실수축 대칭이다.",
+      "phase crossover frequency ω_pc에서 ∠L(jω_pc)=-180°이며 gain margin은 GM=1/|L(jω_pc)|이다.",
+      "gain crossover frequency ω_gc에서 |L(jω_gc)|=1이며 phase margin은 PM=180°+∠L(jω_gc)이다.",
+      "gain 또는 phase crossover가 여러 개이면 모든 crossover의 margin을 평가하고 최종 안정성은 Nyquist 전체 순선회수와 함께 판단한다.",
+      "순수 시간지연 e^(-sT)는 주파수응답 크기가 1이고 위상을 -ωT만큼 추가 지연시켜 phase margin과 허용 이득을 감소시킬 수 있다.",
+      "개루프 우반평면 영점은 P에 포함되지 않지만 추가 위상지연과 inverse response를 유발하여 대역폭과 강인성에 제약을 준다.",
+      "현장 제어기 이득은 수학적 임계경계에서 여유를 두고 운전점, 모델 오차, 지연, 잡음, 포화와 미모델 고주파 모드를 포함해 검증해야 한다."
+    ],
+    "fatal_conditions": [
+      "[nyquist_encircles_origin_instead_of_minus_one] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 표준 음의 피드백 Nyquist 안정 판정은 원점의 선회수를 기준으로 한다. 정정 기준: 표준 음의 피드백의 임계점은 -1+j0이며 1+L(s)=0과 연결해 판정한다.",
+      "[nyquist_ignores_open_loop_rhp_poles] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 개루프 우반평면 극점 수 P는 계산하지 않아도 되고 Nyquist 궤적의 선회수만 보면 된다. 정정 기준: P를 먼저 계산하고 선택한 convention의 P-N-Z 관계로 폐루프 우반평면 극점 수 Z를 구해야 한다.",
+      "[nyquist_no_encirclement_always_stable] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 개루프 우반평면 극점의 수와 관계없이 -1점을 선회하지 않으면 항상 폐루프 안정이다. 정정 기준: 무선회 안정 조건은 P=0 특수형이며 P>0이면 폐루프 안정을 위한 필요한 선회가 존재한다.",
+      "[nyquist_sign_convention_reversed_without_definition] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 선회 방향을 정의하지 않은 채 P-N-Z 식의 부호를 반대로 사용하여 폐루프 안정성을 잘못 판정한다. 정정 기준: 시계 또는 반시계방향 양수 convention을 먼저 정의하고 동일한 convention으로 N과 Z를 끝까지 계산한다.",
+      "[imaginary_axis_pole_used_without_indentation] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: L(s)의 극점이 Nyquist contour 위에 있어도 우회 없이 일반 argument principle을 그대로 적용한다. 정정 기준: 허수축 위 개루프 극점은 작은 반원으로 우회하고 우회 경로의 사상을 전체 Nyquist 궤적에 포함한다.",
+      "[gain_margin_measured_at_gain_crossover] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: gain margin은 |L(jω)|=1인 gain crossover에서 계산한다. 정정 기준: gain margin은 ∠L(jω_pc)=-180°인 phase crossover에서 GM=1/|L(jω_pc)|로 계산한다.",
+      "[phase_margin_measured_at_phase_crossover] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: phase margin은 ∠L(jω)=-180°인 phase crossover에서 계산한다. 정정 기준: phase margin은 |L(jω_gc)|=1인 gain crossover에서 PM=180°+∠L(jω_gc)로 계산한다.",
+      "[time_delay_changes_magnitude_only] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 순수 시간지연은 위상에는 영향이 없고 주파수응답의 크기만 변화시킨다. 정정 기준: 순수 시간지연의 크기는 1이고 위상을 -ωT만큼 추가 지연시켜 안정여유를 감소시킬 수 있다."
+    ],
+    "safe_conditions": [
+      "오개념을 인용한 뒤 정확한 원칙으로 명확히 반박하는 것은 fatal이 아니다.",
+      "선회 방향을 반시계방향 양수로 정의하고 일관된 등가식을 사용하는 것은 정상이다.",
+      "양의 피드백 또는 다른 특성방정식을 명시적으로 유도한 경우 임계점 convention을 문맥으로 판단한다.",
+      "P=0인 시스템에서 -1점 무선회를 안정 조건으로 설명하는 것은 정상이다.",
+      "허수축 극점을 수정 contour로 우회한다고 명시하면 정상이다.",
+      "복수 crossover 때문에 단일 GM·PM 해석에 주의해야 한다고 설명하는 것은 정상이다.",
+      "Padé 근사의 한계를 언급하면서 원래 지연 주파수응답과 교차 검증하는 것은 정상이다.",
+      "단순 누락, 짧은 설명 또는 convention 표기 부족은 최종 안정성 오판이 없다면 fatal이 아니다.",
+      "candidate evidence에 없는 주장을 추론하여 fatal로 만들면 안 된다.",
+      "confidence가 fatal threshold보다 낮으면 fatal이 아니라 warn 또는 major로 처리한다.",
+      "LLM 호출 실패, JSON parse 실패 또는 필수 필드 오류는 fatal cap을 만들지 않는다."
+    ],
+    "output_contract": {
+      "json_only": true,
+      "required_fields": [
+        "verdict",
+        "confidence",
+        "reason",
+        "checks",
+        "findings"
+      ],
+      "verdict_values": [
+        "pass",
+        "warn",
+        "fatal"
+      ]
+    },
+    "major_checks": [
+      {
+        "id": "missing_characteristic_equation_link",
+        "severity": "major",
+        "description": "Nyquist 궤적은 설명했지만 1+L(s)=0과 -1점의 연결이 부족하다.",
+        "correct_rule": "표준 음의 피드백 특성방정식과 임계점 -1을 먼저 정의한다.",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "폐루프 특성방정식과 Nyquist 임계점의 연결을 보강해야 한다."
+      },
+      {
+        "id": "pnz_convention_incomplete",
+        "severity": "major",
+        "description": "P, N, Z 또는 선회 방향 convention이 불완전하다.",
+        "correct_rule": "P와 Z를 정의하고 선회 방향을 명시한 뒤 일관된 P-N-Z 관계를 적용한다.",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "P-N-Z 관계와 선회 방향 convention을 명확히 해야 한다."
+      },
+      {
+        "id": "margin_or_crossover_incomplete",
+        "severity": "major",
+        "description": "GM·PM 식 또는 gain·phase crossover의 구분이 불완전하다.",
+        "correct_rule": "GM은 phase crossover, PM은 gain crossover에서 계산한다.",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "안정여유와 crossover 정의를 정확히 구분해야 한다."
+      },
+      {
+        "id": "field_robustness_validation_missing",
+        "severity": "major",
+        "description": "수학적 안정 결과는 제시했지만 지연, 불확실성, 포화를 포함한 현장 검증이 부족하다.",
+        "correct_rule": "최소 GM·PM, pole 위치, 지연 변화와 saturation을 운전영역 전체에서 검증한다.",
+        "affected_layers": [
+          "C",
+          "E"
+        ],
+        "message": "수학적 안정 경계와 현장 운전여유를 구분해야 한다."
+      }
+    ],
+    "feedback_templates": {
+      "core_theory_positive": "폐루프 특성방정식, P-N-Z 관계, -1점 선회와 GM·PM의 핵심 이론이 정답과 일치한다.",
+      "core_theory_major": "핵심 이론의 직접적인 반대 주장은 없지만 선회 convention, 특수조건 또는 안정여유 해석을 보강해야 한다.",
+      "core_theory_fatal": "답안이 Nyquist 안정도 판별의 핵심 원리와 직접 충돌하는 주장을 실제 정답으로 제시했다."
+    },
+    "next_practice_points": [
+      "폐루프 특성방정식 1+L(s)=0과 -1점의 관계를 직접 유도한다.",
+      "P를 먼저 계산한 뒤 선택한 선회 방향 convention으로 Z를 구한다.",
+      "허수축 극점이 있는 시스템의 수정 Nyquist contour를 연습한다.",
+      "gain crossover와 phase crossover를 구분하여 GM과 PM을 계산한다.",
+      "시간지연과 복수 crossover가 있는 경우 전체 Nyquist 궤적을 검증한다."
+    ]
+  }
+}

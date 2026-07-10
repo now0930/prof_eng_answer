@@ -1,13 +1,23 @@
 {
-  "version": "2026-07-10T12:16:49Z-generated-topic-pack-manifest",
+  "version": "2026-07-10T13:27:15Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 7,
+  "topic_count": 8,
   "topics": [
     {
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

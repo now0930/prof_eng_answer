@@ -1,0 +1,380 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+  "title_ko": "Nyquist 안정도 판별과 이득·위상여유",
+  "question_type": "CALC_DESIGN",
+  "expected_question_patterns": [
+    "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+    "주어진 특성방정식의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
+    "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
+    "Nyquist 궤적에서 -1점 선회 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
+    "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오."
+  ],
+  "recommended_outline": [
+    {
+      "section": "안정도 판별 목적과 특성방정식",
+      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "id": "section_1",
+      "section_id": "section_1",
+      "order": 1,
+      "index": 1,
+      "sequence": 1,
+      "title": "문제 배경과 Nyquist 판별 목적",
+      "heading": "문제 배경과 Nyquist 판별 목적",
+      "name": "문제 배경과 Nyquist 판별 목적",
+      "description": "주파수응답으로 폐루프 안정성과 강인성을 판단해야 하는 배경을 제시한다.",
+      "purpose": "주파수응답으로 폐루프 안정성과 강인성을 판단해야 하는 배경을 제시한다.",
+      "summary": "주파수응답으로 폐루프 안정성과 강인성을 판단해야 하는 배경을 제시한다.",
+      "content": "주파수응답으로 폐루프 안정성과 강인성을 판단해야 하는 배경을 제시한다.",
+      "key_points": [
+        "Routh와 Nyquist의 역할 차이",
+        "시간지연과 개루프 불안정 시스템의 필요성"
+      ],
+      "required_points": [
+        "Routh와 Nyquist의 역할 차이",
+        "시간지연과 개루프 불안정 시스템의 필요성"
+      ],
+      "core_points": [
+        "Routh와 Nyquist의 역할 차이",
+        "시간지연과 개루프 불안정 시스템의 필요성"
+      ],
+      "items": [
+        "Routh와 Nyquist의 역할 차이",
+        "시간지연과 개루프 불안정 시스템의 필요성"
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "안정도 판별 목적과 특성방정식",
+      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "id": "section_2",
+      "section_id": "section_2",
+      "order": 2,
+      "index": 2,
+      "sequence": 2,
+      "title": "폐루프 특성방정식과 L(s) 정의",
+      "heading": "폐루프 특성방정식과 L(s) 정의",
+      "name": "폐루프 특성방정식과 L(s) 정의",
+      "description": "L(s)=G(s)H(s)와 1+L(s)=0을 정의하고 -1점의 의미를 연결한다.",
+      "purpose": "L(s)=G(s)H(s)와 1+L(s)=0을 정의하고 -1점의 의미를 연결한다.",
+      "summary": "L(s)=G(s)H(s)와 1+L(s)=0을 정의하고 -1점의 의미를 연결한다.",
+      "content": "L(s)=G(s)H(s)와 1+L(s)=0을 정의하고 -1점의 의미를 연결한다.",
+      "key_points": [
+        "표준 음의 피드백",
+        "characteristic function F(s)=1+L(s)"
+      ],
+      "required_points": [
+        "표준 음의 피드백",
+        "characteristic function F(s)=1+L(s)"
+      ],
+      "core_points": [
+        "표준 음의 피드백",
+        "characteristic function F(s)=1+L(s)"
+      ],
+      "items": [
+        "표준 음의 피드백",
+        "characteristic function F(s)=1+L(s)"
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "안정도 판별 목적과 특성방정식",
+      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "id": "section_3",
+      "section_id": "section_3",
+      "order": 3,
+      "index": 3,
+      "sequence": 3,
+      "title": "Nyquist contour와 mapping 절차",
+      "heading": "Nyquist contour와 mapping 절차",
+      "name": "Nyquist contour와 mapping 절차",
+      "description": "우반평면 contour, 주파수축, 무한 반원과 허수축 극점 우회를 설명한다.",
+      "purpose": "우반평면 contour, 주파수축, 무한 반원과 허수축 극점 우회를 설명한다.",
+      "summary": "우반평면 contour, 주파수축, 무한 반원과 허수축 극점 우회를 설명한다.",
+      "content": "우반평면 contour, 주파수축, 무한 반원과 허수축 극점 우회를 설명한다.",
+      "key_points": [
+        "contour orientation",
+        "실계수 전달함수의 conjugate symmetry"
+      ],
+      "required_points": [
+        "contour orientation",
+        "실계수 전달함수의 conjugate symmetry"
+      ],
+      "core_points": [
+        "contour orientation",
+        "실계수 전달함수의 conjugate symmetry"
+      ],
+      "items": [
+        "contour orientation",
+        "실계수 전달함수의 conjugate symmetry"
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "안정도 판별 목적과 특성방정식",
+      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "id": "section_4",
+      "section_id": "section_4",
+      "order": 4,
+      "index": 4,
+      "sequence": 4,
+      "title": "P, N, Z 정의와 안정 조건",
+      "heading": "P, N, Z 정의와 안정 조건",
+      "name": "P, N, Z 정의와 안정 조건",
+      "description": "선회 방향 convention을 선언하고 N_cw=Z-P와 Z=0을 적용한다.",
+      "purpose": "선회 방향 convention을 선언하고 N_cw=Z-P와 Z=0을 적용한다.",
+      "summary": "선회 방향 convention을 선언하고 N_cw=Z-P와 Z=0을 적용한다.",
+      "content": "선회 방향 convention을 선언하고 N_cw=Z-P와 Z=0을 적용한다.",
+      "key_points": [
+        "개루프 우반평면 극점 P",
+        "폐루프 우반평면 극점 Z"
+      ],
+      "required_points": [
+        "개루프 우반평면 극점 P",
+        "폐루프 우반평면 극점 Z"
+      ],
+      "core_points": [
+        "개루프 우반평면 극점 P",
+        "폐루프 우반평면 극점 Z"
+      ],
+      "items": [
+        "개루프 우반평면 극점 P",
+        "폐루프 우반평면 극점 Z"
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "안정도 판별 목적과 특성방정식",
+      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "id": "section_5",
+      "section_id": "section_5",
+      "order": 5,
+      "index": 5,
+      "sequence": 5,
+      "title": "이득 K와 임계조건 계산",
+      "heading": "이득 K와 임계조건 계산",
+      "name": "이득 K와 임계조건 계산",
+      "description": "K에 따른 Nyquist 궤적 scaling과 -1점 통과 임계이득을 계산한다.",
+      "purpose": "K에 따른 Nyquist 궤적 scaling과 -1점 통과 임계이득을 계산한다.",
+      "summary": "K에 따른 Nyquist 궤적 scaling과 -1점 통과 임계이득을 계산한다.",
+      "content": "K에 따른 Nyquist 궤적 scaling과 -1점 통과 임계이득을 계산한다.",
+      "key_points": [
+        "L(s)=K/[s(s+1)(s+2)]",
+        "0<K<6 교차 검증"
+      ],
+      "required_points": [
+        "L(s)=K/[s(s+1)(s+2)]",
+        "0<K<6 교차 검증"
+      ],
+      "core_points": [
+        "L(s)=K/[s(s+1)(s+2)]",
+        "0<K<6 교차 검증"
+      ],
+      "items": [
+        "L(s)=K/[s(s+1)(s+2)]",
+        "0<K<6 교차 검증"
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "안정도 판별 목적과 특성방정식",
+      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "id": "section_6",
+      "section_id": "section_6",
+      "order": 6,
+      "index": 6,
+      "sequence": 6,
+      "title": "GM·PM과 복수 crossover",
+      "heading": "GM·PM과 복수 crossover",
+      "name": "GM·PM과 복수 crossover",
+      "description": "gain·phase crossover를 구분하고 GM과 PM을 계산한다.",
+      "purpose": "gain·phase crossover를 구분하고 GM과 PM을 계산한다.",
+      "summary": "gain·phase crossover를 구분하고 GM과 PM을 계산한다.",
+      "content": "gain·phase crossover를 구분하고 GM과 PM을 계산한다.",
+      "key_points": [
+        "GM=1/|L(jω_pc)|",
+        "PM=180°+∠L(jω_gc)"
+      ],
+      "required_points": [
+        "GM=1/|L(jω_pc)|",
+        "PM=180°+∠L(jω_gc)"
+      ],
+      "core_points": [
+        "GM=1/|L(jω_pc)|",
+        "PM=180°+∠L(jω_gc)"
+      ],
+      "items": [
+        "GM=1/|L(jω_pc)|",
+        "PM=180°+∠L(jω_gc)"
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "안정도 판별 목적과 특성방정식",
+      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "id": "section_7",
+      "section_id": "section_7",
+      "order": 7,
+      "index": 7,
+      "sequence": 7,
+      "title": "특수조건과 적용 한계",
+      "heading": "특수조건과 적용 한계",
+      "name": "특수조건과 적용 한계",
+      "description": "허수축 극점, 개루프 불안정, 비최소위상과 시간지연을 다룬다.",
+      "purpose": "허수축 극점, 개루프 불안정, 비최소위상과 시간지연을 다룬다.",
+      "summary": "허수축 극점, 개루프 불안정, 비최소위상과 시간지연을 다룬다.",
+      "content": "허수축 극점, 개루프 불안정, 비최소위상과 시간지연을 다룬다.",
+      "key_points": [
+        "수정 Nyquist contour",
+        "e^(-sT)의 위상지연"
+      ],
+      "required_points": [
+        "수정 Nyquist contour",
+        "e^(-sT)의 위상지연"
+      ],
+      "core_points": [
+        "수정 Nyquist contour",
+        "e^(-sT)의 위상지연"
+      ],
+      "items": [
+        "수정 Nyquist contour",
+        "e^(-sT)의 위상지연"
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    },
+    {
+      "section": "안정도 판별 목적과 특성방정식",
+      "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+      "id": "section_8",
+      "section_id": "section_8",
+      "order": 8,
+      "index": 8,
+      "sequence": 8,
+      "title": "현장 강인성 검증과 결론",
+      "heading": "현장 강인성 검증과 결론",
+      "name": "현장 강인성 검증과 결론",
+      "description": "수학적 안정경계와 현장 운전영역을 구분하고 검증 절차를 제안한다.",
+      "purpose": "수학적 안정경계와 현장 운전영역을 구분하고 검증 절차를 제안한다.",
+      "summary": "수학적 안정경계와 현장 운전영역을 구분하고 검증 절차를 제안한다.",
+      "content": "수학적 안정경계와 현장 운전영역을 구분하고 검증 절차를 제안한다.",
+      "key_points": [
+        "운전점·모델 오차·지연·포화",
+        "Bode, Nyquist, pole과 시간응답 교차 검증"
+      ],
+      "required_points": [
+        "운전점·모델 오차·지연·포화",
+        "Bode, Nyquist, pole과 시간응답 교차 검증"
+      ],
+      "core_points": [
+        "운전점·모델 오차·지연·포화",
+        "Bode, Nyquist, pole과 시간응답 교차 검증"
+      ],
+      "items": [
+        "운전점·모델 오차·지연·포화",
+        "Bode, Nyquist, pole과 시간응답 교차 검증"
+      ],
+      "affected_layers": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "1+L(s)=0과 -1+j0 임계점의 관계를 직접 유도한다.",
+    "P, N, Z와 선회 방향 convention을 명확히 정의한다.",
+    "P=0 특수형과 P>0 일반형을 구분한다.",
+    "허수축 극점 우회와 conjugate symmetry를 설명한다.",
+    "GM과 PM을 정확한 crossover에서 계산한다.",
+    "복수 crossover와 시간지연의 한계를 설명한다.",
+    "K 안정범위를 Routh 또는 pole calculation과 교차 검증한다.",
+    "현장 운전점·지연·포화·모델 오차를 포함한 여유를 제시한다."
+  ],
+  "common_missing_points": [
+    "특성방정식과 폐루프 극점 조건의 연결이 부족함.",
+    "Nyquist 궤적 첫 두 행의 계수 배치 설명이 부족함.",
+    "-1점 순선회와 우반평면 근 수의 연결이 부족함.",
+    "-1점 선회 0과 허수축 극점의 처리 구분이 부족함.",
+    "K의 경계값 검증이 누락됨.",
+    "이득·위상여유 축 이동 설명이 부족함.",
+    "시간지연과 현장 적용 한계가 누락됨."
+  ],
+  "routing_aliases": [
+    "Nyquist",
+    "Nyquist",
+    "Routh criterion",
+    "Routh stability criterion",
+    "Nyquist plot",
+    "Nyquist plot",
+    "라우스 후르비츠",
+    "루스 후르비츠",
+    "Nyquist 안정도 판별",
+    "Nyquist 안정도 판별",
+    "Nyquist 궤적",
+    "Nyquist 궤적",
+    "특성방정식 안정도",
+    "우반평면 극점",
+    "순선회",
+    "이득 안정 범위",
+    "제어기 이득 범위",
+    "수정 Nyquist contour",
+    "contour indentation",
+    "이득·위상여유"
+  ],
+  "routing_field_points": [
+    "운전점별 최소 GM과 PM을 확인한다.",
+    "통신·연산·공정 dead time의 최대값을 반영한다.",
+    "센서와 actuator의 미모델 동특성을 포함한다.",
+    "포화와 rate limit을 포함한 simulation을 수행한다.",
+    "임계이득보다 충분히 낮은 단계별 현장 적용값을 선정한다."
+  ],
+  "revision_notes": [
+    "사람이 검토한 요구사항 Markdown을 기준으로 ChatGPT가 직접 작성함.",
+    "CALC_DESIGN형 배열 작성, 부등식, 경계 검증과 해석을 함께 요구함.",
+    "참조 Topic Pack의 라우팅·답안 필드를 복사하지 않고 전부 재작성함."
+  ]
+}
