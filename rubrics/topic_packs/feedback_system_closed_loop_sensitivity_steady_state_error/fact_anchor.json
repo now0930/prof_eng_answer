@@ -1,0 +1,277 @@
+{
+  "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+  "schema_version": "fact_anchor.v1",
+  "title_ko": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
+  "anchors": [
+    {
+      "id": "feedback_negative_loop_structure",
+      "anchor_id": "feedback_negative_loop_structure",
+      "statement": "표준 음의 피드백 시스템은 기준입력 R(s), 오차 E(s)=R(s)-H(s)Y(s), 순방향 전달함수 G(s), 피드백 전달함수 H(s)로 구성되며 루프 전달함수는 L(s)=G(s)H(s)이다.",
+      "importance": "must",
+      "keywords": [
+        "음의 피드백",
+        "R(s)",
+        "E(s)",
+        "G(s)",
+        "H(s)",
+        "L(s)"
+      ],
+      "core_terms": [
+        "E(s)=R(s)-H(s)Y(s)",
+        "L(s)=G(s)H(s)"
+      ]
+    },
+    {
+      "id": "feedback_closed_loop_transfer",
+      "anchor_id": "feedback_closed_loop_transfer",
+      "statement": "표준 음의 피드백에서 기준입력에 대한 출력 전달함수는 Y(s)/R(s)=G(s)/[1+G(s)H(s)]이고 폐루프 특성방정식은 1+L(s)=0이다. 단위 피드백에서는 Y/R=L/(1+L)=T로 표현할 수 있다.",
+      "importance": "must",
+      "keywords": [
+        "폐루프 전달함수",
+        "1+GH",
+        "특성방정식",
+        "1+L=0",
+        "단위 피드백"
+      ],
+      "core_terms": [
+        "Y/R=G/(1+GH)",
+        "1+L=0",
+        "Y/R=T"
+      ]
+    },
+    {
+      "id": "feedback_sensitivity_functions",
+      "anchor_id": "feedback_sensitivity_functions",
+      "statement": "민감도 함수는 S(s)=1/[1+L(s)], 상보 민감도 함수는 T(s)=L(s)/[1+L(s)]이며 S(s)+T(s)=1이다. S와 T는 같은 함수가 아니다.",
+      "importance": "must",
+      "keywords": [
+        "민감도 함수",
+        "상보 민감도",
+        "S(s)",
+        "T(s)",
+        "S+T=1"
+      ],
+      "core_terms": [
+        "S=1/(1+L)",
+        "T=L/(1+L)",
+        "S+T=1"
+      ]
+    },
+    {
+      "id": "feedback_parameter_sensitivity",
+      "anchor_id": "feedback_parameter_sensitivity",
+      "statement": "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다.",
+      "importance": "must",
+      "keywords": [
+        "파라미터 민감도",
+        "모델 불확실성",
+        "루프 이득",
+        "robustness"
+      ],
+      "core_terms": [
+        "relative sensitivity",
+        "S(s)",
+        "large loop gain"
+      ]
+    },
+    {
+      "id": "feedback_disturbance_noise_paths",
+      "anchor_id": "feedback_disturbance_noise_paths",
+      "statement": "단위 피드백의 표준 신호 위치에서 출력단 외란은 S를 통해 출력에 나타나고 측정 잡음은 -T를 통해 출력에 나타난다. 전달경로는 외란과 잡음의 주입 위치에 따라 달라지므로 신호 위치를 먼저 정의해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "출력 외란",
+        "측정 잡음",
+        "disturbance",
+        "measurement noise",
+        "S",
+        "T"
+      ],
+      "core_terms": [
+        "output disturbance through S",
+        "measurement noise through -T"
+      ]
+    },
+    {
+      "id": "feedback_steady_state_error_final_value",
+      "anchor_id": "feedback_steady_state_error_final_value",
+      "statement": "정상상태 오차는 e_ss=lim[s→0]sE(s)로 계산할 수 있으며, 최종값 정리는 최종값이 존재하고 sE(s)의 관련 극이 안정 조건을 만족할 때만 적용한다.",
+      "importance": "must",
+      "keywords": [
+        "정상상태 오차",
+        "최종값 정리",
+        "e_ss",
+        "lim sE(s)",
+        "안정 조건"
+      ],
+      "core_terms": [
+        "e_ss=lim sE(s)",
+        "final value theorem condition"
+      ]
+    },
+    {
+      "id": "feedback_system_type_error_constants",
+      "anchor_id": "feedback_system_type_error_constants",
+      "statement": "단위 피드백에서 시스템 형은 개루프 L(s)의 원점 극, 즉 순수 적분기의 수로 정의한다. 정적 오차상수는 Kp_e=lim L(s), Kv=lim sL(s), Ka=lim s²L(s)이다.",
+      "importance": "must",
+      "keywords": [
+        "시스템 형",
+        "원점 극",
+        "순수 적분기",
+        "Kp_e",
+        "Kv",
+        "Ka"
+      ],
+      "core_terms": [
+        "open-loop integrators",
+        "Kp_e",
+        "Kv",
+        "Ka"
+      ]
+    },
+    {
+      "id": "feedback_type_error_relationship",
+      "anchor_id": "feedback_type_error_relationship",
+      "statement": "안정한 단위 피드백에서 Type 0의 단위 계단 오차는 1/(1+Kp_e)이고 램프 오차는 무한대이다. Type 1은 계단 오차가 0이고 램프 오차가 1/Kv이며, Type 2는 계단과 램프 오차가 0이고 포물선 오차가 1/Ka이다.",
+      "importance": "must",
+      "keywords": [
+        "Type 0",
+        "Type 1",
+        "Type 2",
+        "계단",
+        "램프",
+        "포물선"
+      ],
+      "core_terms": [
+        "step error",
+        "ramp error",
+        "parabolic error"
+      ]
+    },
+    {
+      "id": "feedback_integral_action_tradeoff",
+      "anchor_id": "feedback_integral_action_tradeoff",
+      "statement": "적분 동작은 시스템 형을 증가시켜 정상상태 오차 제거에 기여할 수 있지만 위상여유 감소, 액추에이터 포화 및 적분 windup을 유발할 수 있으므로 anti-windup과 포화 처리가 필요하다.",
+      "importance": "important",
+      "keywords": [
+        "적분 동작",
+        "위상여유",
+        "windup",
+        "anti-windup",
+        "포화"
+      ],
+      "core_terms": [
+        "integral action",
+        "stability margin",
+        "anti-windup"
+      ]
+    },
+    {
+      "id": "feedback_stability_bandwidth_tradeoff",
+      "anchor_id": "feedback_stability_bandwidth_tradeoff",
+      "statement": "루프 이득과 대역폭을 높이면 추종성과 저주파 외란 억제가 개선될 수 있지만 시간지연, 비최소위상 영점, 미모델 동특성, 센서 잡음과 액추에이터 포화 때문에 위상여유와 강인 안정성이 저하될 수 있다.",
+      "importance": "must",
+      "keywords": [
+        "대역폭",
+        "위상여유",
+        "시간지연",
+        "비최소위상",
+        "강인 안정성",
+        "포화"
+      ],
+      "core_terms": [
+        "bandwidth trade-off",
+        "phase margin",
+        "robust stability"
+      ]
+    },
+    {
+      "id": "feedback_field_design_validation",
+      "anchor_id": "feedback_field_design_validation",
+      "statement": "현장 설계에서는 센서 잡음과 필터, 샘플링 주기, 통신·공정 지연, 액추에이터 용량과 포화, anti-windup, set-point prefilter와 feedforward를 검토하고 Bode/Nyquist 안정여유, 시간응답, 외란응답 및 포화시험으로 검증한다.",
+      "importance": "important",
+      "keywords": [
+        "센서",
+        "샘플링",
+        "시간지연",
+        "포화",
+        "prefilter",
+        "feedforward",
+        "Bode",
+        "Nyquist"
+      ],
+      "core_terms": [
+        "field constraints",
+        "verification",
+        "stability margin"
+      ]
+    }
+  ],
+  "core_facts": [
+    "표준 음의 피드백 시스템은 기준입력 R(s), 오차 E(s)=R(s)-H(s)Y(s), 순방향 전달함수 G(s), 피드백 전달함수 H(s)로 구성되며 루프 전달함수는 L(s)=G(s)H(s)이다.",
+    "표준 음의 피드백에서 기준입력에 대한 출력 전달함수는 Y(s)/R(s)=G(s)/[1+G(s)H(s)]이고 폐루프 특성방정식은 1+L(s)=0이다. 단위 피드백에서는 Y/R=L/(1+L)=T로 표현할 수 있다.",
+    "민감도 함수는 S(s)=1/[1+L(s)], 상보 민감도 함수는 T(s)=L(s)/[1+L(s)]이며 S(s)+T(s)=1이다. S와 T는 같은 함수가 아니다.",
+    "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다.",
+    "단위 피드백의 표준 신호 위치에서 출력단 외란은 S를 통해 출력에 나타나고 측정 잡음은 -T를 통해 출력에 나타난다. 전달경로는 외란과 잡음의 주입 위치에 따라 달라지므로 신호 위치를 먼저 정의해야 한다.",
+    "정상상태 오차는 e_ss=lim[s→0]sE(s)로 계산할 수 있으며, 최종값 정리는 최종값이 존재하고 sE(s)의 관련 극이 안정 조건을 만족할 때만 적용한다.",
+    "단위 피드백에서 시스템 형은 개루프 L(s)의 원점 극, 즉 순수 적분기의 수로 정의한다. 정적 오차상수는 Kp_e=lim L(s), Kv=lim sL(s), Ka=lim s²L(s)이다.",
+    "안정한 단위 피드백에서 Type 0의 단위 계단 오차는 1/(1+Kp_e)이고 램프 오차는 무한대이다. Type 1은 계단 오차가 0이고 램프 오차가 1/Kv이며, Type 2는 계단과 램프 오차가 0이고 포물선 오차가 1/Ka이다.",
+    "루프 이득과 대역폭을 높이면 추종성과 저주파 외란 억제가 개선될 수 있지만 시간지연, 비최소위상 영점, 미모델 동특성, 센서 잡음과 액추에이터 포화 때문에 위상여유와 강인 안정성이 저하될 수 있다."
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "negative_feedback_wrong_denominator",
+      "claim": "E=R-HY인 표준 음의 피드백의 폐루프 분모를 1-GH라고 직접 주장한다.",
+      "correction": "표준 음의 피드백의 폐루프 분모는 1+GH이고 특성방정식은 1+L=0이다."
+    },
+    {
+      "id": "sensitivity_complementary_same",
+      "claim": "민감도 함수 S와 상보 민감도 함수 T가 같은 함수라고 직접 주장한다.",
+      "correction": "S=1/(1+L), T=L/(1+L)이며 S+T=1이다."
+    },
+    {
+      "id": "high_loop_gain_always_stable",
+      "claim": "루프 이득을 높이면 모든 시스템이 항상 더 안정해진다고 직접 주장한다.",
+      "correction": "이득과 대역폭 증가는 지연과 미모델 동특성 때문에 안정여유를 감소시키거나 불안정을 유발할 수 있다."
+    },
+    {
+      "id": "system_type_from_closed_loop_order",
+      "claim": "시스템 형을 폐루프 차수나 폐루프 극 전체의 수로 정의한다.",
+      "correction": "단위 피드백의 시스템 형은 개루프 L(s)의 원점 극, 즉 순수 적분기 수이다."
+    },
+    {
+      "id": "type_zero_step_error_zero",
+      "claim": "Type 0 시스템의 단위 계단 정상상태 오차가 항상 0이라고 직접 주장한다.",
+      "correction": "안정한 Type 0 단위 피드백의 단위 계단 오차는 일반적으로 1/(1+Kp_e)이다."
+    },
+    {
+      "id": "measurement_noise_always_rejected",
+      "claim": "루프 이득을 높이면 측정 잡음이 모든 주파수에서 항상 완전히 제거된다고 직접 주장한다.",
+      "correction": "표준 단위 피드백에서 측정 잡음의 출력 전달은 -T이며 주파수별 T와 센서 필터로 판단한다."
+    },
+    {
+      "id": "final_value_without_stability",
+      "claim": "폐루프가 불안정하거나 최종값이 존재하지 않아도 최종값 정리를 항상 적용할 수 있다고 직접 주장한다.",
+      "correction": "최종값 정리는 최종값이 존재하고 sE(s)의 관련 극이 안정 조건을 만족할 때만 적용한다."
+    },
+    {
+      "id": "feedback_rejects_all_disturbances",
+      "claim": "피드백이 외란의 위치와 주파수에 관계없이 모든 외란을 완전히 제거한다고 직접 주장한다.",
+      "correction": "외란 전달은 주입 위치와 주파수에 따라 달라지며 해당 S/T 전달경로를 구분해야 한다."
+    }
+  ],
+  "regex_patterns": [],
+  "safe_expressions": [
+    "합산점 부호를 명시하고 일관되게 유도한 다른 기호 관례는 기호 차이만으로 오류가 아니다.",
+    "단위 피드백에서 Y/R=T라고 설명하는 것은 정상이다.",
+    "높은 저주파 루프 이득이 추종과 저주파 외란 억제에 유리하다는 조건부 설명은 정상이다.",
+    "적분 동작이 정상상태 오차 제거에 기여한다고 설명하면서 안정성과 windup 한계를 함께 쓰는 것은 정상이다.",
+    "prefilter와 feedforward를 feedback의 보완 수단으로 설명하는 것은 정상이다.",
+    "오답을 인용한 뒤 틀렸다고 반박하거나 정정하는 문장은 실제 오개념 주장이 아니다."
+  ],
+  "revision_notes": [
+    "사람이 검토한 Feedback System Topic Sheet를 기준으로 ChatGPT가 직접 작성함.",
+    "정규표현식 기반 직접 fatal 판정을 사용하지 않도록 regex_patterns를 비움.",
+    "8개 fatal misconception ID를 Logic Check와 동일하게 통일함."
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-07T09:23:29Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-10T09:36:47Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -7,7 +7,75 @@
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "topic_logic_checks": [
     {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "enabled": false,
+      "topic_name": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "피드백 시스템",
+        "feedback system",
+        "음의 피드백",
+        "negative feedback",
+        "폐루프 전달함수",
+        "closed-loop transfer function",
+        "민감도 함수",
+        "sensitivity function",
+        "상보 민감도",
+        "complementary sensitivity",
+        "정상상태 오차",
+        "steady-state error",
+        "시스템 형",
+        "system type",
+        "정적 오차상수",
+        "static error constants",
+        "Kp Kv Ka",
+        "S T 함수"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "E=R-HY와 L=GH에서 폐루프 전달함수를 직접 유도한다.",
+        "S, T 및 S+T=1을 추종, 출력 외란과 측정 잡음에 연결한다.",
+        "최종값 정리의 안정 조건과 Type별 정상상태 오차를 함께 정리한다.",
+        "루프 이득과 대역폭을 안정여유, 지연, 잡음 및 포화와 함께 판단한다.",
+        "Bode/Nyquist, 시간응답, 외란응답과 포화시험을 검증 절차로 제시한다."
+      ],
+      "de_claim_trust": {
+        "enabled": true,
+        "target_layers": [
+          "D",
+          "E"
+        ],
+        "score_effect": "none",
+        "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+        "pass_meaning": "핵심 이론 주장이 정답과 직접 충돌하지 않아 이를 기반으로 한 현장 적용·결론을 이론적으로 신뢰할 수 있다.",
+        "fatal_meaning": "핵심 이론 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 적용·결론을 강하게 신뢰하지 않는다.",
+        "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
+      }
+    },
+    {
       "topic_id": "pid_controller_tuning_sequence_gain_effects",
+      "topic_aliases": [
+        "PID 제어기",
+        "PID 제어",
+        "PID 튜닝",
+        "PID 게인 튜닝",
+        "PID tuning",
+        "PID controller tuning",
+        "P I D 게인",
+        "P 게인 I 게인 D 게인",
+        "비례 적분 미분 제어",
+        "비례 적분 미분 게인",
+        "P → I → D",
+        "PI 기반 튜닝",
+        "PD 제어기",
+        "적분 windup",
+        "anti-windup",
+        "미분 필터",
+        "derivative filter"
+      ],
       "fatal_checks": [
         {
           "id": "pid_tuning_d_first_general_rule",

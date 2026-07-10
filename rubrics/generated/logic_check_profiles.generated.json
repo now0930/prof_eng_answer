@@ -1,11 +1,179 @@
 {
-  "version": "2026-07-07T09:23:29Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-10T09:36:47Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs/*/logic_check.json:llm_profile",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "profiles": [
+    {
+      "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "display_name": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
+      "difficulty": "THEORY_CORE",
+      "cap_policy": {
+        "fatal_recommended_ceiling": 10.0,
+        "fatal_confidence_threshold": 0.75
+      },
+      "candidate_extraction": {
+        "max_candidates": 20,
+        "nearby_window": 2,
+        "key_terms": [
+          "피드백",
+          "feedback",
+          "부궤환",
+          "음의 피드백",
+          "양의 피드백",
+          "폐루프",
+          "closed loop",
+          "전달함수",
+          "특성방정식",
+          "1+GH",
+          "1-GH",
+          "E=R-HY",
+          "L=GH",
+          "민감도",
+          "sensitivity",
+          "상보 민감도",
+          "complementary sensitivity",
+          "S=T",
+          "S+T",
+          "외란",
+          "disturbance",
+          "측정 잡음",
+          "센서 노이즈",
+          "measurement noise",
+          "최종값 정리",
+          "final value theorem",
+          "정상상태 오차",
+          "steady-state error",
+          "시스템 형",
+          "system type",
+          "Type 0",
+          "Type 1",
+          "Type 2",
+          "원점 극",
+          "적분기",
+          "Kp",
+          "Kv",
+          "Ka",
+          "루프 이득",
+          "loop gain",
+          "대역폭",
+          "위상여유",
+          "phase margin",
+          "시간지연",
+          "포화",
+          "windup",
+          "anti-windup",
+          "prefilter",
+          "feedforward"
+        ],
+        "rules": []
+      },
+      "truth_schema": [
+        "표준 음의 피드백 시스템은 기준입력 R(s), 오차 E(s)=R(s)-H(s)Y(s), 순방향 전달함수 G(s), 피드백 전달함수 H(s)로 구성되며 루프 전달함수는 L(s)=G(s)H(s)이다.",
+        "표준 음의 피드백에서 기준입력에 대한 출력 전달함수는 Y(s)/R(s)=G(s)/[1+G(s)H(s)]이고 폐루프 특성방정식은 1+L(s)=0이다. 단위 피드백에서는 Y/R=L/(1+L)=T로 표현할 수 있다.",
+        "민감도 함수는 S(s)=1/[1+L(s)], 상보 민감도 함수는 T(s)=L(s)/[1+L(s)]이며 S(s)+T(s)=1이다. S와 T는 같은 함수가 아니다.",
+        "피드백 전달 H가 고정된 경우 순방향 전달 G의 상대 변화에 대한 폐루프 전달함수의 상대 민감도는 S(s)와 연결된다. |L|가 충분히 큰 주파수 영역에서는 |S|가 작아져 모델 변화의 영향이 감소할 수 있지만 모든 주파수에서 S를 임의로 작게 만들 수는 없다.",
+        "단위 피드백의 표준 신호 위치에서 출력단 외란은 S를 통해 출력에 나타나고 측정 잡음은 -T를 통해 출력에 나타난다. 전달경로는 외란과 잡음의 주입 위치에 따라 달라지므로 신호 위치를 먼저 정의해야 한다.",
+        "정상상태 오차는 e_ss=lim[s→0]sE(s)로 계산할 수 있으며, 최종값 정리는 최종값이 존재하고 sE(s)의 관련 극이 안정 조건을 만족할 때만 적용한다.",
+        "단위 피드백에서 시스템 형은 개루프 L(s)의 원점 극, 즉 순수 적분기의 수로 정의한다. 정적 오차상수는 Kp_e=lim L(s), Kv=lim sL(s), Ka=lim s²L(s)이다.",
+        "안정한 단위 피드백에서 Type 0의 단위 계단 오차는 1/(1+Kp_e)이고 램프 오차는 무한대이다. Type 1은 계단 오차가 0이고 램프 오차가 1/Kv이며, Type 2는 계단과 램프 오차가 0이고 포물선 오차가 1/Ka이다.",
+        "적분 동작은 시스템 형을 증가시켜 정상상태 오차 제거에 기여할 수 있지만 위상여유 감소, 액추에이터 포화 및 적분 windup을 유발할 수 있으므로 anti-windup과 포화 처리가 필요하다.",
+        "루프 이득과 대역폭을 높이면 추종성과 저주파 외란 억제가 개선될 수 있지만 시간지연, 비최소위상 영점, 미모델 동특성, 센서 잡음과 액추에이터 포화 때문에 위상여유와 강인 안정성이 저하될 수 있다.",
+        "현장 설계에서는 센서 잡음과 필터, 샘플링 주기, 통신·공정 지연, 액추에이터 용량과 포화, anti-windup, set-point prefilter와 feedforward를 검토하고 Bode/Nyquist 안정여유, 시간응답, 외란응답 및 포화시험으로 검증한다."
+      ],
+      "fatal_conditions": [
+        "[negative_feedback_wrong_denominator] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: E=R-HY인 표준 음의 피드백의 폐루프 분모를 1-GH라고 직접 주장한다. 정정 기준: 표준 음의 피드백의 폐루프 분모는 1+GH이고 특성방정식은 1+L=0이다.",
+        "[sensitivity_complementary_same] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 민감도 함수 S와 상보 민감도 함수 T가 같은 함수라고 직접 주장한다. 정정 기준: S=1/(1+L), T=L/(1+L)이며 S+T=1이다.",
+        "[high_loop_gain_always_stable] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 루프 이득을 높이면 모든 시스템이 항상 더 안정해진다고 직접 주장한다. 정정 기준: 이득과 대역폭 증가는 지연과 미모델 동특성 때문에 안정여유를 감소시키거나 불안정을 유발할 수 있다.",
+        "[system_type_from_closed_loop_order] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 시스템 형을 폐루프 차수나 폐루프 극 전체의 수로 정의한다. 정정 기준: 단위 피드백의 시스템 형은 개루프 L(s)의 원점 극, 즉 순수 적분기 수이다.",
+        "[type_zero_step_error_zero] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Type 0 시스템의 단위 계단 정상상태 오차가 항상 0이라고 직접 주장한다. 정정 기준: 안정한 Type 0 단위 피드백의 단위 계단 오차는 일반적으로 1/(1+Kp_e)이다.",
+        "[measurement_noise_always_rejected] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 루프 이득을 높이면 측정 잡음이 모든 주파수에서 항상 완전히 제거된다고 직접 주장한다. 정정 기준: 표준 단위 피드백에서 측정 잡음의 출력 전달은 -T이며 주파수별 T와 센서 필터로 판단한다.",
+        "[final_value_without_stability] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 폐루프가 불안정하거나 최종값이 존재하지 않아도 최종값 정리를 항상 적용할 수 있다고 직접 주장한다. 정정 기준: 최종값 정리는 최종값이 존재하고 sE(s)의 관련 극이 안정 조건을 만족할 때만 적용한다.",
+        "[feedback_rejects_all_disturbances] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 피드백이 외란의 위치와 주파수에 관계없이 모든 외란을 완전히 제거한다고 직접 주장한다. 정정 기준: 외란 전달은 주입 위치와 주파수에 따라 달라지며 해당 S/T 전달경로를 구분해야 한다."
+      ],
+      "safe_conditions": [
+        "오답 문장을 인용한 뒤 틀렸다, 오류이다, 아니다 또는 금지해야 한다고 반박·정정하는 문맥은 fatal이 아니다.",
+        "주의할 오류, 잘못된 주장, 오개념 또는 금지 표현 목록에 등장한 문장을 수험생의 실제 주장으로 해석하지 않는다.",
+        "합산점 부호를 명시하고 일관되게 유도한 양의 피드백 또는 다른 부호 관례는 자동 fatal이 아니다.",
+        "단위 피드백에서 Y/R=T라고 설명하는 것은 정상이다.",
+        "외란이나 잡음의 주입 위치가 다르면 전달경로가 달라질 수 있으므로 위치를 확인하지 않고 fatal로 판정하지 않는다.",
+        "저주파 루프 이득 증가가 추종과 외란 억제에 유리하다고 조건부로 설명하는 것은 정상이다.",
+        "루프 이득 증가가 항상 안정한 것은 아니라고 명시한 문장은 high_loop_gain_always_stable fatal이 아니다.",
+        "적분 동작이 정상상태 오차 제거에 기여한다고 설명하면서 안정성, 포화 또는 windup 한계를 언급하면 정상이다.",
+        "단순 누락, 짧은 설명, 애매한 표현 또는 적용 조건 부족은 fatal이 아니라 major 또는 minor이다.",
+        "candidate evidence에 없는 주장을 추론하거나 답안 전체 문맥과 반대되는 일부 구절만 떼어 fatal로 만들면 안 된다.",
+        "confidence가 fatal threshold보다 낮으면 fatal이 아니라 major로 판정한다.",
+        "LLM 호출 실패, JSON parse 실패 또는 필수 필드 오류는 fatal cap을 만들지 않는다."
+      ],
+      "output_contract": {
+        "json_only": true,
+        "required_fields": [
+          "verdict",
+          "confidence",
+          "reason",
+          "checks",
+          "findings"
+        ],
+        "verdict_values": [
+          "pass",
+          "warn",
+          "fatal"
+        ]
+      },
+      "major_checks": [
+        {
+          "id": "closed_loop_equation_or_scope_missing",
+          "severity": "major",
+          "description": "폐루프 전달함수, 특성방정식 또는 부호 관례가 누락되거나 적용 범위가 불명확하다.",
+          "correct_rule": "E=R-HY, L=GH, Y/R=G/(1+GH), 1+L=0을 정의와 함께 제시한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "sensitivity_physical_interpretation_missing",
+          "severity": "major",
+          "description": "S와 T의 식은 있으나 추종, 외란, 잡음 또는 모델 민감도 해석이 부족하다.",
+          "correct_rule": "S/T 식과 신호 위치별 물리적 의미를 함께 설명한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "steady_state_type_conditions_missing",
+          "severity": "major",
+          "description": "최종값 정리의 안정 조건, 시스템 형 또는 정적 오차상수 연결이 부족하다.",
+          "correct_rule": "최종값 존재 조건과 개루프 원점 극 수 및 Kp_e/Kv/Ka를 함께 설명한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "field_tradeoff_validation_missing",
+          "severity": "major",
+          "description": "지연, 잡음, 포화, anti-windup 및 안정여유 검증이 부족하다.",
+          "correct_rule": "성능 개선과 안정성·현장 제약을 함께 판단하고 검증 방법을 제시한다.",
+          "affected_layers": [
+            "C",
+            "E"
+          ]
+        }
+      ],
+      "feedback_templates": {
+        "core_theory_positive": "폐루프 구조, S/T, 정상상태 오차와 시스템 형의 핵심 이론이 정답과 일치한다.",
+        "core_theory_major": "핵심 이론의 직접적인 반대 주장은 없지만 적용 조건 또는 물리적 해석을 보강해야 한다.",
+        "core_theory_fatal": "답안이 핵심 이론과 직접 충돌하는 주장을 실제 정답으로 제시했다."
+      },
+      "next_practice_points": [
+        "폐루프 전달함수를 블록선도에서 직접 유도한다.",
+        "S와 T를 추종, 모델 민감도, 출력 외란과 측정 잡음 경로로 구분한다.",
+        "최종값 정리의 적용 조건과 Type 0·1·2의 입력별 오차를 표로 정리한다.",
+        "루프 이득과 대역폭을 위상여유, 지연, 잡음, 포화 및 강인 안정성과 함께 판단한다.",
+        "오답 인용과 실제 오개념 주장을 문맥으로 구분한다."
+      ]
+    },
     {
       "topic_id": "pid_controller_tuning_sequence_gain_effects",
       "profile_name": "PID controller tuning sequence and P/I/D gain effects",

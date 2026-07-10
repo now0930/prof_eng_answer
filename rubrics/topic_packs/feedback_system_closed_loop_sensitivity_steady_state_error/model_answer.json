@@ -1,0 +1,137 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+  "title_ko": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    "피드백 시스템의 폐루프 전달함수와 민감도 함수를 설명하시오.",
+    "음의 피드백 시스템의 민감도 S와 상보 민감도 T의 의미를 설명하시오.",
+    "피드백 시스템의 시스템 형과 정상상태 오차의 관계를 설명하시오.",
+    "폐루프 제어계에서 외란 억제, 측정 잡음 및 안정성의 상충관계를 설명하시오.",
+    "Feedback System의 추종성, 민감도 및 정상상태 오차 개선 방법을 설명하시오."
+  ],
+  "recommended_outline": [
+    {
+      "section": "배경과 피드백 목적",
+      "intent": "모델 불확실성, 외란과 목표값 변화가 존재하는 공정에서 피드백이 필요한 이유를 제시한다.",
+      "anchor_refs": [
+        "feedback_negative_loop_structure"
+      ]
+    },
+    {
+      "section": "폐루프 구조와 전달함수",
+      "intent": "E=R-HY와 L=GH를 정의하고 Y/R=G/(1+GH), 특성방정식 1+L=0을 유도한다.",
+      "anchor_refs": [
+        "feedback_negative_loop_structure",
+        "feedback_closed_loop_transfer"
+      ]
+    },
+    {
+      "section": "민감도와 상보 민감도",
+      "intent": "S=1/(1+L), T=L/(1+L), S+T=1을 제시하고 추종과 모델 민감도를 해석한다.",
+      "anchor_refs": [
+        "feedback_sensitivity_functions",
+        "feedback_parameter_sensitivity"
+      ]
+    },
+    {
+      "section": "외란과 측정 잡음",
+      "intent": "출력단 외란의 S 경로와 측정 잡음의 -T 경로를 신호 주입 위치와 함께 설명한다.",
+      "anchor_refs": [
+        "feedback_disturbance_noise_paths"
+      ]
+    },
+    {
+      "section": "정상상태 오차와 최종값 정리",
+      "intent": "e_ss=lim sE(s)를 안정 조건과 함께 적용한다.",
+      "anchor_refs": [
+        "feedback_steady_state_error_final_value"
+      ]
+    },
+    {
+      "section": "시스템 형과 정적 오차상수",
+      "intent": "개루프 원점 극 수로 Type을 정의하고 Kp_e, Kv, Ka와 입력별 오차를 연결한다.",
+      "anchor_refs": [
+        "feedback_system_type_error_constants",
+        "feedback_type_error_relationship"
+      ]
+    },
+    {
+      "section": "성능·안정성 상충관계",
+      "intent": "적분, 루프 이득과 대역폭의 이점 및 위상여유, 잡음, 포화 위험을 함께 설명한다.",
+      "anchor_refs": [
+        "feedback_integral_action_tradeoff",
+        "feedback_stability_bandwidth_tradeoff"
+      ]
+    },
+    {
+      "section": "현장 적용과 검증",
+      "intent": "센서, 지연, 샘플링, 포화, anti-windup, prefilter와 feedforward를 고려하고 시험으로 검증한다.",
+      "anchor_refs": [
+        "feedback_field_design_validation"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "표준 음의 피드백의 신호 관계와 폐루프 전달함수를 식으로 정확히 제시한다.",
+    "특성방정식 1+L=0과 폐루프 안정성의 관계를 설명한다.",
+    "S, T 및 S+T=1을 제시하고 각 함수의 물리적 의미를 구분한다.",
+    "출력단 외란과 측정 잡음의 주입 위치에 따른 전달경로를 구분한다.",
+    "최종값 정리의 적용 조건을 정상상태 오차 계산과 연결한다.",
+    "시스템 형을 개루프 원점 극 수로 정의하고 Kp_e, Kv, Ka를 입력별 오차와 연결한다.",
+    "적분 동작의 이점과 안정여유·windup·포화 문제를 함께 설명한다.",
+    "루프 이득과 대역폭의 이점 및 시간지연·잡음·강인 안정성의 상충관계를 설명한다.",
+    "Bode/Nyquist, 시간응답, 외란응답 및 포화시험을 현장 검증 방법으로 제시한다.",
+    "prefilter, feedforward와 anti-windup을 feedback의 보완 수단으로 구분한다."
+  ],
+  "common_missing_points": [
+    "오차 신호와 루프 전달함수 정의가 누락됨.",
+    "폐루프 전달함수와 특성방정식의 연결이 부족함.",
+    "S와 T의 물리적 의미가 부족함.",
+    "외란과 측정 잡음의 주입 위치가 구분되지 않음.",
+    "최종값 정리의 안정 조건이 누락됨.",
+    "시스템 형과 정적 오차상수의 연결이 부족함.",
+    "적분 windup, 시간지연, 센서 잡음 또는 포화가 누락됨.",
+    "현장 안정여유와 검증 절차가 부족함."
+  ],
+  "routing_aliases": [
+    "피드백 시스템",
+    "feedback system",
+    "음의 피드백",
+    "negative feedback",
+    "폐루프 전달함수",
+    "closed-loop transfer function",
+    "민감도 함수",
+    "sensitivity function",
+    "상보 민감도",
+    "complementary sensitivity",
+    "정상상태 오차",
+    "steady-state error",
+    "시스템 형",
+    "system type",
+    "정적 오차상수",
+    "static error constants",
+    "Kp Kv Ka",
+    "S T 함수"
+  ],
+  "routing_field_points": [
+    "E(s)=R(s)-H(s)Y(s)",
+    "L(s)=G(s)H(s)",
+    "Y/R=G/(1+GH)",
+    "1+L(s)=0",
+    "S=1/(1+L)",
+    "T=L/(1+L)",
+    "S+T=1",
+    "final value theorem",
+    "system type",
+    "step ramp parabolic error",
+    "disturbance rejection",
+    "measurement noise",
+    "phase margin",
+    "anti-windup"
+  ],
+  "revision_notes": [
+    "사람이 검토한 Topic Sheet와 Fact Anchor를 기준으로 ChatGPT가 직접 작성함.",
+    "합성 답안에 오답 문장이 삽입되지 않도록 common_missing_points를 누락 중심으로 작성함."
+  ]
+}
