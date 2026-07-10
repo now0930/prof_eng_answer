@@ -186,6 +186,7 @@ def extract_logic_evidence_candidates(
     max_candidates = int(extraction.get("max_candidates") or 12)
     nearby_window = int(extraction.get("nearby_window") or 1)
     rules = extraction.get("rules") or []
+    key_terms = extraction.get("key_terms") or []
 
     lines = _lines(answer_text)
     candidates: list[dict[str, str]] = []
@@ -196,7 +197,11 @@ def extract_logic_evidence_candidates(
             return
         if len(text) > 900:
             text = text[:900]
-        if any(c["text"] == text and c["kind"] == kind for c in candidates):
+        if any(
+            candidate["text"] == text
+            and candidate["kind"] == kind
+            for candidate in candidates
+        ):
             return
         candidates.append(
             {
@@ -214,7 +219,10 @@ def extract_logic_evidence_candidates(
         rule_type = str(rule.get("type") or "")
 
         if rule_type == "structured_mapping":
-            structured = _structured_mapping_candidate(lines, rule)
+            structured = _structured_mapping_candidate(
+                lines,
+                rule,
+            )
             if structured:
                 add(kind, structured)
             continue
@@ -232,12 +240,87 @@ def extract_logic_evidence_candidates(
             continue
 
         if rule_type == "nearby_regex":
-            for i, line in enumerate(lines):
+            for index, line in enumerate(lines):
                 if regex.search(line):
-                    start = max(0, i - nearby_window)
-                    end = min(len(lines), i + nearby_window + 1)
-                    add(kind, _candidate_text(lines[start:end]))
+                    start = max(
+                        0,
+                        index - nearby_window,
+                    )
+                    end = min(
+                        len(lines),
+                        index + nearby_window + 1,
+                    )
+                    add(
+                        kind,
+                        _candidate_text(
+                            lines[start:end]
+                        ),
+                    )
             continue
+
+    # LLM-only profiles intentionally keep rules empty so that
+    # deterministic regexes do not decide whether a claim is wrong.
+    # In that configuration, key terms only select nearby evidence;
+    # the LLM still performs the semantic verdict.
+    if not candidates and not rules and key_terms:
+        normalized_terms: list[str] = []
+
+        for term in key_terms:
+            normalized = _normalize_text(
+                str(term)
+            ).casefold()
+
+            if (
+                normalized
+                and normalized
+                not in normalized_terms
+            ):
+                normalized_terms.append(
+                    normalized
+                )
+
+        for index, line in enumerate(lines):
+            normalized_line = _normalize_text(
+                line
+            ).casefold()
+
+            if not any(
+                term in normalized_line
+                for term in normalized_terms
+            ):
+                continue
+
+            start = max(
+                0,
+                index - nearby_window,
+            )
+            end = min(
+                len(lines),
+                index + nearby_window + 1,
+            )
+
+            add(
+                "key_term_context",
+                _candidate_text(
+                    lines[start:end]
+                ),
+            )
+
+        # A matched expression may span line boundaries.
+        if not candidates:
+            collapsed = _candidate_text(lines)
+            normalized_collapsed = _normalize_text(
+                collapsed
+            ).casefold()
+
+            if any(
+                term in normalized_collapsed
+                for term in normalized_terms
+            ):
+                add(
+                    "key_term_context",
+                    collapsed,
+                )
 
     return candidates[:max_candidates]
 

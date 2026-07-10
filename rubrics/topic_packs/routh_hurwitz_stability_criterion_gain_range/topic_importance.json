@@ -1,0 +1,22 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "CALC_DESIGN",
+  "high_band_unlock_conditions": [
+    "특성방정식과 점근안정의 극점 조건을 정확히 제시한다.",
+    "Routh 배열을 정확히 구성하고 첫 열 부호 변화와 우반평면 근 수를 연결한다.",
+    "양의 계수 조건을 필요조건과 충분조건으로 구분한다.",
+    "첫 열 0과 전체 0행의 처리법을 정확히 구분한다.",
+    "K의 안정 범위와 경계값 검증을 모두 수행한다.",
+    "상대안정도 축 이동과 시간지연 적용 한계를 정확히 설명한다.",
+    "현장 이득 선정에서 안정여유, 운전점, 지연, 잡음과 포화를 함께 판단한다.",
+    "8개 fatal condition에 해당하는 직접적인 반대 주장이 없다."
+  ],
+  "note": "Routh-Hurwitz 판별은 폐루프 특성방정식, 극점 안정성, 제어기 이득 범위와 상대안정도를 연결하는 핵심 계산형 제어이론이다. 고득점은 배열 작성뿐 아니라 특수 경우, 경계값, 적용 한계와 현장 안정여유를 함께 설명할 때 가능하다.",
+  "revision_notes": [
+    "요구사항 Markdown과 기존 schema를 기준으로 ChatGPT가 직접 작성함.",
+    "참조 Topic Pack의 high-band 조건을 복사하지 않고 Routh 내용으로 재작성함."
+  ]
+}

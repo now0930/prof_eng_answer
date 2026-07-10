@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-10T09:36:47Z-generated-topic-pack-model-answers",
+  "version": "2026-07-10T12:16:49Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -380,6 +380,226 @@
         "anti-windup"
       ],
       "revision_notes": [],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "title_ko": "Routh-Hurwitz 안정도 판별과 제어기 이득 범위",
+      "question_type": "CALC_DESIGN",
+      "expected_question_patterns": [
+        "Routh-Hurwitz 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+        "주어진 특성방정식의 Routh 배열을 작성하고 안정 여부를 판별하시오.",
+        "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
+        "Routh 배열에서 첫 열 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
+        "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오."
+      ],
+      "recommended_outline": [
+        {
+          "section": "안정도 판별 목적과 특성방정식",
+          "intent": "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다."
+        },
+        {
+          "section": "Routh 배열 첫 두 행",
+          "intent": "특성다항식을 내림차순으로 정리하고 짝수 차수 계수와 홀수 차수 계수를 각각 첫 두 행에 배치한다."
+        },
+        {
+          "section": "일반 행 계산과 첫 열 의미",
+          "intent": "교차곱 구조로 다음 행을 계산하고 첫 열 부호 변화 수를 우반평면 근 수와 연결한다."
+        },
+        {
+          "section": "안정 조건과 계수 조건",
+          "intent": "양의 계수는 필요조건일 뿐 충분조건이 아님을 밝히고 첫 열 조건과 허수축 근 여부로 안정성을 판정한다."
+        },
+        {
+          "section": "첫 열 원소 0 처리",
+          "intent": "첫 열 원소만 0이면 작은 양수 ε로 대체하고 ε→0+에서 부호를 판단한다."
+        },
+        {
+          "section": "전체 0행 처리",
+          "intent": "바로 위 행으로 보조다항식 A(s)를 만들고 dA(s)/ds의 계수로 계산을 계속하며 허수축 근을 분석한다."
+        },
+        {
+          "section": "이득 범위와 상대안정도",
+          "intent": "첫 열 부등식의 교집합으로 K 범위를 구하고 경계값을 검증하며 Re(s)<-α는 s=z-α 치환으로 판단한다."
+        },
+        {
+          "section": "현장 적용과 한계",
+          "intent": "시간지연에는 직접 적용하지 않고 극점 계산과 주파수응답, 운전점·지연·잡음·포화 시험으로 보완한다."
+        }
+      ],
+      "high_score_points": [
+        "특성방정식과 열린 좌반평면 극점 조건을 정확히 제시한다.",
+        "Routh 첫 두 행과 일반 행 계산 구조를 정확히 설명한다.",
+        "첫 열 부호 변화 수를 우반평면 근 수와 연결한다.",
+        "양의 계수 조건을 충분조건으로 오해하지 않는다.",
+        "첫 열 0과 전체 0행을 구분하여 각각 ε 및 보조다항식 방법을 적용한다.",
+        "허수축 단순근과 중복근의 안정성 차이를 구분한다.",
+        "K의 안정 범위와 경계값 검증을 모두 수행한다.",
+        "s=z-α 치환으로 상대안정도를 정확히 판단한다.",
+        "시간지연에는 직접 적용하지 않고 근사 또는 주파수영역 방법을 제시한다.",
+        "현장 이득 선정에서 안정여유와 모델 불확실성을 함께 고려한다."
+      ],
+      "common_missing_points": [
+        "특성방정식과 폐루프 극점 조건의 연결이 부족함.",
+        "Routh 배열 첫 두 행의 계수 배치 설명이 부족함.",
+        "첫 열 부호 변화와 우반평면 근 수의 연결이 부족함.",
+        "첫 열 0과 전체 0행의 처리 구분이 부족함.",
+        "K의 경계값 검증이 누락됨.",
+        "상대안정도 축 이동 설명이 부족함.",
+        "시간지연과 현장 적용 한계가 누락됨."
+      ],
+      "routing_aliases": [
+        "Routh-Hurwitz",
+        "Routh Hurwitz",
+        "Routh criterion",
+        "Routh stability criterion",
+        "Routh array",
+        "Routh table",
+        "라우스 후르비츠",
+        "루스 후르비츠",
+        "라우스 안정도 판별",
+        "루스 안정도 판별",
+        "라우스 배열",
+        "루스 배열",
+        "특성방정식 안정도",
+        "우반평면 극점",
+        "부호 변화",
+        "이득 안정 범위",
+        "제어기 이득 범위",
+        "보조다항식",
+        "epsilon method",
+        "상대안정도"
+      ],
+      "routing_field_points": [
+        "characteristic equation",
+        "Routh array",
+        "Routh table",
+        "first-column sign change",
+        "right-half-plane pole",
+        "asymptotic stability",
+        "marginal stability",
+        "imaginary-axis pole",
+        "auxiliary polynomial",
+        "epsilon method",
+        "controller gain K",
+        "gain range",
+        "relative stability",
+        "s=z-α",
+        "time delay",
+        "Padé approximation",
+        "Root Locus",
+        "Bode plot",
+        "Nyquist plot",
+        "gain margin",
+        "phase margin",
+        "operating point",
+        "actuator saturation",
+        "step test"
+      ],
+      "revision_notes": [
+        "사람이 검토한 요구사항 Markdown을 기준으로 ChatGPT가 직접 작성함.",
+        "CALC_DESIGN형 배열 작성, 부등식, 경계 검증과 해석을 함께 요구함.",
+        "참조 Topic Pack의 라우팅·답안 필드를 복사하지 않고 전부 재작성함."
+      ],
+      "id": "routh_hurwitz_stability_criterion_gain_range_COMPARE_v1",
+      "title": "Routh-Hurwitz 안정도 판별과 제어기 이득 범위",
+      "question_examples": [
+        "Routh-Hurwitz 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+        "주어진 특성방정식의 Routh 배열을 작성하고 안정 여부를 판별하시오.",
+        "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
+        "Routh 배열에서 첫 열 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
+        "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오."
+      ],
+      "topic_aliases": [
+        "Routh-Hurwitz",
+        "Routh Hurwitz",
+        "Routh criterion",
+        "Routh stability criterion",
+        "Routh array",
+        "Routh table",
+        "라우스 후르비츠",
+        "루스 후르비츠",
+        "라우스 안정도 판별",
+        "루스 안정도 판별",
+        "라우스 배열",
+        "루스 배열",
+        "특성방정식 안정도",
+        "우반평면 극점",
+        "부호 변화",
+        "이득 안정 범위",
+        "제어기 이득 범위",
+        "보조다항식",
+        "epsilon method",
+        "상대안정도"
+      ],
+      "expected_structure": [
+        "안정도 판별 목적과 특성방정식",
+        "Routh 배열 첫 두 행",
+        "일반 행 계산과 첫 열 의미",
+        "안정 조건과 계수 조건",
+        "첫 열 원소 0 처리",
+        "전체 0행 처리",
+        "이득 범위와 상대안정도",
+        "현장 적용과 한계"
+      ],
+      "model_answer_outline": [
+        "폐루프 특성방정식 P(s)=0과 모든 극점이 열린 좌반평면에 있어야 한다는 점근안정 조건을 제시한다.",
+        "특성다항식을 내림차순으로 정리하고 짝수 차수 계수와 홀수 차수 계수를 각각 첫 두 행에 배치한다.",
+        "교차곱 구조로 다음 행을 계산하고 첫 열 부호 변화 수를 우반평면 근 수와 연결한다.",
+        "양의 계수는 필요조건일 뿐 충분조건이 아님을 밝히고 첫 열 조건과 허수축 근 여부로 안정성을 판정한다.",
+        "첫 열 원소만 0이면 작은 양수 ε로 대체하고 ε→0+에서 부호를 판단한다.",
+        "바로 위 행으로 보조다항식 A(s)를 만들고 dA(s)/ds의 계수로 계산을 계속하며 허수축 근을 분석한다.",
+        "첫 열 부등식의 교집합으로 K 범위를 구하고 경계값을 검증하며 Re(s)<-α는 s=z-α 치환으로 판단한다.",
+        "시간지연에는 직접 적용하지 않고 극점 계산과 주파수응답, 운전점·지연·잡음·포화 시험으로 보완한다."
+      ],
+      "high_score_features": [
+        "특성방정식과 열린 좌반평면 극점 조건을 정확히 제시한다.",
+        "Routh 첫 두 행과 일반 행 계산 구조를 정확히 설명한다.",
+        "첫 열 부호 변화 수를 우반평면 근 수와 연결한다.",
+        "양의 계수 조건을 충분조건으로 오해하지 않는다.",
+        "첫 열 0과 전체 0행을 구분하여 각각 ε 및 보조다항식 방법을 적용한다.",
+        "허수축 단순근과 중복근의 안정성 차이를 구분한다.",
+        "K의 안정 범위와 경계값 검증을 모두 수행한다.",
+        "s=z-α 치환으로 상대안정도를 정확히 판단한다.",
+        "시간지연에는 직접 적용하지 않고 근사 또는 주파수영역 방법을 제시한다.",
+        "현장 이득 선정에서 안정여유와 모델 불확실성을 함께 고려한다."
+      ],
+      "low_score_patterns": [
+        "특성방정식과 폐루프 극점 조건의 연결이 부족함.",
+        "Routh 배열 첫 두 행의 계수 배치 설명이 부족함.",
+        "첫 열 부호 변화와 우반평면 근 수의 연결이 부족함.",
+        "첫 열 0과 전체 0행의 처리 구분이 부족함.",
+        "K의 경계값 검증이 누락됨.",
+        "상대안정도 축 이동 설명이 부족함.",
+        "시간지연과 현장 적용 한계가 누락됨."
+      ],
+      "field_connection_points": [
+        "characteristic equation",
+        "Routh array",
+        "Routh table",
+        "first-column sign change",
+        "right-half-plane pole",
+        "asymptotic stability",
+        "marginal stability",
+        "imaginary-axis pole",
+        "auxiliary polynomial",
+        "epsilon method",
+        "controller gain K",
+        "gain range",
+        "relative stability",
+        "s=z-α",
+        "time delay",
+        "Padé approximation",
+        "Root Locus",
+        "Bode plot",
+        "Nyquist plot",
+        "gain margin",
+        "phase margin",
+        "operating point",
+        "actuator saturation",
+        "step test"
+      ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },
     {

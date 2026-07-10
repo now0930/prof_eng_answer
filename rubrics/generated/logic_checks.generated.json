@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-10T09:36:47Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-10T12:16:49Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -202,6 +202,57 @@
         }
       ],
       "minor_checks": []
+    },
+    {
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "enabled": false,
+      "topic_name": "Routh-Hurwitz 안정도 판별과 제어기 이득 범위",
+      "question_type": "CALC_DESIGN",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "Routh-Hurwitz",
+        "Routh Hurwitz",
+        "Routh criterion",
+        "Routh stability criterion",
+        "Routh array",
+        "Routh table",
+        "라우스 후르비츠",
+        "루스 후르비츠",
+        "라우스 안정도 판별",
+        "루스 안정도 판별",
+        "라우스 배열",
+        "루스 배열",
+        "특성방정식 안정도",
+        "우반평면 극점",
+        "부호 변화",
+        "이득 안정 범위",
+        "제어기 이득 범위",
+        "보조다항식",
+        "epsilon method",
+        "상대안정도"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "3차와 4차 특성다항식의 Routh 배열을 직접 작성하고 첫 열 부호를 검산한다.",
+        "첫 열 원소 0과 전체 0행의 처리 절차를 각각 예제로 연습한다.",
+        "이득 K 부등식의 교집합을 구하고 경계값에서 허수축 근과 차수 저하를 검증한다.",
+        "s=z-α 치환을 이용한 상대안정도 문제를 계산한다.",
+        "Routh 결과를 극점 계산, Bode 및 Nyquist 결과와 교차 검증한다."
+      ],
+      "de_claim_trust": {
+        "enabled": true,
+        "target_layers": [
+          "D",
+          "E"
+        ],
+        "score_effect": "none",
+        "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+        "pass_meaning": "핵심 이론 주장이 정답과 직접 충돌하지 않아 이를 기반으로 한 현장 적용·결론을 이론적으로 신뢰할 수 있다.",
+        "fatal_meaning": "핵심 이론 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 적용·결론을 강하게 신뢰하지 않는다.",
+        "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
+      }
     },
     {
       "topic_id": "rtd_pt100_wire_connection_compensation",

@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-10T09:36:47Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-10T12:16:49Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -230,6 +230,154 @@
         "D 동작이 damping 효과를 가진다는 설명",
         "I 동작이 offset 제거에 효과적이라는 설명",
         "anti-windup과 derivative filter 필요성을 언급하는 설명"
+      ]
+    },
+    {
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "display_name": "Routh-Hurwitz 안정도 판별과 제어기 이득 범위",
+      "difficulty": "THEORY_CORE",
+      "cap_policy": {
+        "fatal_recommended_ceiling": 10.0,
+        "fatal_confidence_threshold": 0.75
+      },
+      "candidate_extraction": {
+        "max_candidates": 20,
+        "nearby_window": 2,
+        "key_terms": [
+          "Padé approximation",
+          "Routh Hurwitz",
+          "Routh array",
+          "Routh criterion",
+          "Routh stability criterion",
+          "Routh table",
+          "Routh-Hurwitz",
+          "epsilon method",
+          "s=z-α",
+          "ε→0+",
+          "라우스 배열",
+          "라우스 안정도 판별",
+          "라우스 후르비츠",
+          "루스 배열",
+          "루스 안정도 판별",
+          "루스 후르비츠",
+          "보조다항식",
+          "부호 변화",
+          "상대안정도",
+          "우반평면",
+          "우반평면 극점",
+          "이득 K",
+          "이득 안정 범위",
+          "전체 0행",
+          "제어기 이득 범위",
+          "첫 열",
+          "특성방정식",
+          "특성방정식 안정도"
+        ],
+        "rules": []
+      },
+      "truth_schema": [
+        "연속시간 폐루프 시스템이 점근안정하려면 특성방정식의 모든 근이 열린 좌반평면에 존재해야 한다.",
+        "Routh 배열 첫 열의 부호 변화 횟수는 중복도를 포함한 우반평면 근 개수와 같다.",
+        "최고차항을 양수로 정규화했을 때 모든 계수가 양수인 것은 일반적으로 안정의 필요조건이지만 고차 다항식의 충분조건은 아니다.",
+        "첫 행에는 a_n, a_(n-2), a_(n-4), ...를 배치하고 둘째 행에는 a_(n-1), a_(n-3), a_(n-5), ...를 배치한다.",
+        "셋째 행 이후는 바로 위 두 행의 교차곱 구조를 하나의 부호 convention으로 일관되게 적용하여 계산한다.",
+        "어떤 행의 첫 원소만 0이고 나머지 원소가 모두 0은 아니면 작은 양수 ε로 대체한 뒤 ε→0+ 극한에서 첫 열 부호를 판정한다.",
+        "한 행 전체가 0이면 바로 위 행으로 보조다항식 A(s)를 만들고 dA(s)/ds의 계수로 0행을 대체하여 계산을 계속한다.",
+        "우반평면 근이 없고 허수축에 단순근만 존재하면 임계안정 가능성을 검토하며, 허수축 중복극점은 불안정으로 판단한다.",
+        "특성다항식에 이득 K가 포함되면 첫 열 원소를 K의 식으로 나타내고 같은 부호를 유지하는 엄격 부등식의 교집합으로 점근안정 범위를 구한다.",
+        "K의 경계값은 허수축 근, 원점 근, 중복근 또는 차수 저하 가능성이 있으므로 특성방정식이나 보조다항식으로 별도 검증한다.",
+        "모든 극점이 Re(s)<-α를 만족하는지 판단하려면 s=z-α를 대입한 P(z-α)에 대해 z 평면 Routh 판별을 수행한다.",
+        "Routh-Hurwitz 판별은 유한차수 다항식에 적용하므로 e^(-Ls)가 포함된 초월 특성방정식에는 직접 적용하지 않고 Padé 근사 또는 Nyquist 등 다른 방법을 사용한다.",
+        "Routh 배열은 우반평면 근의 개수와 안정 조건을 제공하지만 일반적으로 정확한 극점 위치, 감쇠비 또는 안정여유를 직접 제공하지 않는다.",
+        "수학적으로 안정한 K 범위 전체가 현장에서 바로 사용 가능한 범위는 아니며 안정 경계에서 여유를 두고 운전점, 지연, 잡음, 포화를 함께 검증해야 한다."
+      ],
+      "fatal_conditions": [
+        "[routh_sign_changes_left_half_plane] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 첫 열의 부호 변화 횟수가 좌반평면 극점 수라고 주장한다. 정정 기준: 첫 열 부호 변화 횟수는 중복도를 포함한 우반평면 근 개수이다.",
+        "[positive_coefficients_always_stable] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 특성다항식의 모든 계수가 양수이면 항상 안정이라고 단정한다. 정정 기준: 양의 계수는 일반적으로 필요조건이며 고차 다항식의 충분조건은 아니다.",
+        "[zero_leading_element_same_as_zero_row] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 첫 열 원소만 0인 경우와 전체 0행을 같은 방법으로 처리한다. 정정 기준: 첫 열 원소만 0이면 ε→0+ 방법을 사용하고 전체 0행이면 보조다항식과 도함수 행을 사용한다.",
+        "[zero_row_immediately_unstable] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 한 행 전체가 0이면 추가 분석 없이 즉시 불안정이라고 판정한다. 정정 기준: 보조다항식으로 대칭근과 허수축 근을 분석한 뒤 안정성 종류를 판정한다.",
+        "[no_sign_change_always_asymptotically_stable] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 첫 열 부호 변화가 없으면 허수축 근과 관계없이 항상 점근안정이라고 주장한다. 정정 기준: 허수축 근 또는 전체 0행이 있으면 점근안정 여부를 별도로 확인해야 한다.",
+        "[routh_entries_are_pole_locations] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Routh 배열의 원소를 실제 폐루프 극점 좌표라고 설명한다. 정정 기준: Routh 배열은 우반평면 근 개수와 안정 조건을 제공하지만 정확한 극점 위치는 직접 제공하지 않는다.",
+        "[gain_boundary_always_included] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 첫 열 부등식의 K 경계값을 검증 없이 안정 범위에 포함한다. 정정 기준: 경계값의 허수축 근, 원점 근, 중복근과 차수 저하 여부를 별도로 검증한다.",
+        "[direct_routh_on_time_delay] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: e^(-Ls)가 포함된 초월 특성방정식에 Routh 배열을 직접 적용한다. 정정 기준: 시간지연은 Padé 근사 또는 Nyquist 등 적절한 방법으로 다뤄야 한다."
+      ],
+      "safe_conditions": [
+        "오개념을 인용한 뒤 정확한 원칙으로 명확히 반박하는 것은 정상이다.",
+        "학생 답안의 오류를 교정하는 문맥은 실제 주장과 구분한다.",
+        "반례나 잘못된 풀이 예시를 제시한 뒤 최종 결론에서 수정하는 것은 정상이다.",
+        "교재별 Routh 행 계산 부호 convention이 달라도 배열 전체에서 일관되고 첫 열 판정이 같으면 정상이다.",
+        "Padé approximation을 명시하고 근사 다항식에 Routh 판별을 적용하는 것은 정상이다.",
+        "경계값을 임계안정 후보로 구분하고 별도 검증하는 것은 정상이다."
+      ],
+      "output_contract": {
+        "json_only": true,
+        "required_fields": [
+          "verdict",
+          "confidence",
+          "reason",
+          "checks",
+          "findings"
+        ],
+        "verdict_values": [
+          "pass",
+          "warn",
+          "fatal"
+        ]
+      },
+      "major_checks": [
+        {
+          "id": "missing_characteristic_equation_link",
+          "severity": "major",
+          "description": "Routh 배열은 제시했지만 폐루프 특성방정식과의 연결이 부족하다.",
+          "correct_rule": "먼저 1+L(s)=0 또는 폐루프 분모로부터 특성다항식을 정확히 구성한다.",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Routh 배열은 제시했지만 폐루프 특성방정식과의 연결이 부족하다."
+        },
+        {
+          "id": "incomplete_special_case_handling",
+          "severity": "major",
+          "description": "첫 열 0 또는 전체 0행의 처리 절차가 불완전하다.",
+          "correct_rule": "ε→0+ 방법과 보조다항식·도함수 행을 조건에 따라 구분한다.",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "첫 열 0 또는 전체 0행의 처리 절차가 불완전하다."
+        },
+        {
+          "id": "gain_range_without_boundary_check",
+          "severity": "major",
+          "description": "K의 부등식 범위는 구했지만 경계값 검증이 부족하다.",
+          "correct_rule": "경계값에서 허수축 근, 원점 근과 차수 저하를 확인한다.",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "K의 부등식 범위는 구했지만 경계값 검증이 부족하다."
+        },
+        {
+          "id": "missing_practical_margin",
+          "severity": "major",
+          "description": "수학적 안정 범위와 현장 적용 범위의 차이를 설명하지 않았다.",
+          "correct_rule": "운전점, 지연, 잡음, 포화와 안정여유를 함께 검토한다.",
+          "affected_layers": [
+            "C",
+            "E"
+          ],
+          "message": "수학적 안정 범위와 현장 적용 범위의 차이를 설명하지 않았다."
+        }
+      ],
+      "feedback_templates": {
+        "core_theory_positive": "특성방정식, Routh 배열, 첫 열 부호 변화와 특수 경우의 핵심 이론이 정답과 일치한다.",
+        "core_theory_major": "핵심 이론의 직접적인 반대 주장은 없지만 배열 계산, 경계값 또는 적용 조건을 보강해야 한다.",
+        "core_theory_fatal": "답안이 Routh-Hurwitz 안정도 판별의 핵심 원리와 직접 충돌하는 주장을 실제 정답으로 제시했다."
+      },
+      "next_practice_points": [
+        "3차와 4차 특성다항식의 Routh 배열을 직접 작성하고 첫 열 부호를 검산한다.",
+        "첫 열 원소 0과 전체 0행의 처리 절차를 각각 예제로 연습한다.",
+        "이득 K 부등식의 교집합을 구하고 경계값에서 허수축 근과 차수 저하를 검증한다.",
+        "s=z-α 치환을 이용한 상대안정도 문제를 계산한다.",
+        "Routh 결과를 극점 계산, Bode 및 Nyquist 결과와 교차 검증한다."
       ]
     },
     {

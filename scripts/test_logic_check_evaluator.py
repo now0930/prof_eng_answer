@@ -476,5 +476,132 @@ class SystemTypeClosedLoopOrderRegressionTest(
 
 
 
+
+
+class LogicCandidateKeyTermFallbackRegressionTest(
+    unittest.TestCase
+):
+    def test_empty_rules_extract_key_term_context(
+        self,
+    ) -> None:
+        import logic_llm_verifier as verifier
+
+        profile = {
+            "candidate_extraction": {
+                "max_candidates": 20,
+                "nearby_window": 2,
+                "key_terms": [
+                    "첫 열",
+                    "부호 변화",
+                    "우반평면",
+                ],
+                "rules": [],
+            }
+        }
+
+        answer = """
+Routh 배열 첫 열의 부호 변화 횟수는
+좌반평면 극점의 개수이다.
+따라서 첫 열에서 부호가 두 번 변하면
+좌반평면 극점이 두 개 존재한다.
+""".strip()
+
+        candidates = (
+            verifier
+            .extract_logic_evidence_candidates(
+                answer,
+                profile,
+            )
+        )
+
+        self.assertGreaterEqual(
+            len(candidates),
+            1,
+        )
+        self.assertTrue(
+            all(
+                candidate.get("kind")
+                == "key_term_context"
+                for candidate in candidates
+            )
+        )
+        self.assertTrue(
+            any(
+                "좌반평면 극점의 개수" in str(
+                    candidate.get("text")
+                )
+                for candidate in candidates
+            )
+        )
+
+    def test_empty_rules_without_key_term_match_is_empty(
+        self,
+    ) -> None:
+        import logic_llm_verifier as verifier
+
+        profile = {
+            "candidate_extraction": {
+                "max_candidates": 20,
+                "nearby_window": 2,
+                "key_terms": [
+                    "첫 열",
+                    "부호 변화",
+                ],
+                "rules": [],
+            }
+        }
+
+        candidates = (
+            verifier
+            .extract_logic_evidence_candidates(
+                "센서 교정 주기를 설명한다.",
+                profile,
+            )
+        )
+
+        self.assertEqual(
+            candidates,
+            [],
+        )
+
+    def test_explicit_rules_preserve_rule_only_behavior(
+        self,
+    ) -> None:
+        import logic_llm_verifier as verifier
+
+        profile = {
+            "candidate_extraction": {
+                "max_candidates": 20,
+                "nearby_window": 2,
+                "key_terms": [
+                    "첫 열",
+                    "부호 변화",
+                ],
+                "rules": [
+                    {
+                        "kind": "claim",
+                        "type": "line_regex",
+                        "regex": (
+                            "절대로-일치하지-않는-패턴"
+                        ),
+                    }
+                ],
+            }
+        }
+
+        candidates = (
+            verifier
+            .extract_logic_evidence_candidates(
+                "첫 열의 부호 변화 의미를 설명한다.",
+                profile,
+            )
+        )
+
+        self.assertEqual(
+            candidates,
+            [],
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
