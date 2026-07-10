@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-10T13:27:15Z-generated-topic-pack-importance",
+  "version": "2026-07-10T15:50:04Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -64,6 +64,28 @@
         "Anti-windup, D 필터링, actuator saturation, valve stiction, dead time 등 현장 제약을 반영한다."
       ],
       "note": "PID 제어기의 P/I/D 게인 영향과 튜닝 순서는 제어이론과 현장 적용을 연결하는 핵심 변별 주제이다. 단순한 게인 효과 암기보다 응답속도, overshoot, 정상상태 오차, 감쇠, 포화, 노이즈, dead time을 함께 고려한 튜닝 판단이 고득점의 핵심이다."
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "root_locus_stability_gain_design",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "CALC_DESIGN",
+      "high_band_unlock_conditions": [
+        "폐루프 특성방정식 1+KG(s)H(s)=0과 이득 변화에 따라 이동하는 대상이 폐루프 극점임을 정확히 제시한다.",
+        "근궤적 가지의 수, 개루프 극점에서의 시작, 유한·무한대 영점에서의 종료와 실수축 대칭성을 정확히 설명한다.",
+        "실수축 오른쪽의 실수 극점·영점 홀수 규칙과 점근선 수·각도·중심을 정확히 계산한다.",
+        "dK(s)/ds=0으로 구한 이탈점·진입점 후보의 근궤적 포함 여부와 이득 유효성을 검증한다.",
+        "복소극 출발각, 복소영점 도착각과 허수축 교차점의 임계 이득 및 안정 경계를 설명한다.",
+        "각도조건 ∠G(s)H(s)=(2q+1)180°와 크기조건 K=1/|G(s)H(s)|의 역할을 구분하여 적용한다.",
+        "목표 감쇠비·정착시간·오버슈트를 우세극 위치와 연결하고, 비우세극을 포함한 고차계 근사의 유효성을 확인한다.",
+        "목표점이 기존 근궤적 밖이면 lead·lag·PID 보상기를 설계하고, 모델 오차·지연·포화·노이즈·운전점과 8개 fatal condition을 검증한다."
+      ],
+      "note": "근궤적법은 이득 변화에 따른 폐루프 극점 경로를 통해 안정도와 과도응답을 동시에 설계하는 핵심 계산형 제어이론이다. 고득점은 작도 규칙, 경계 이득, 우세극, 보상기 설계와 현장 제약을 일관되게 연결할 때 가능하다.",
+      "revision_notes": [
+        "요구사항 Markdown과 기존 schema를 기준으로 ChatGPT가 직접 작성함.",
+        "참조 Topic Pack의 high-band 조건을 복사하지 않고 근궤적 내용으로 재작성함."
+      ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

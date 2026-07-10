@@ -1,0 +1,162 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "root_locus_stability_gain_design",
+  "source_policy": {
+    "role": "topic_pack_source",
+    "runtime_files_are_not_modified_by_this_file": true,
+    "deterministic_checks_target": "rubrics/generated/logic_checks.generated.json",
+    "llm_profile_target": "rubrics/generated/logic_check_profiles.generated.json",
+    "note": "이 파일은 사람이 검토한 근궤적 Topic Sheet에서 직접 작성한 source이다. 이 Topic은 deterministic fatal 판정을 사용하지 않고 JSON-profile LLM 검증만 사용한다."
+  },
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "근궤적법에 의한 안정도 해석과 제어기 이득 설계",
+    "question_type": "CALC_DESIGN",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [
+      "근궤적",
+      "근궤적법",
+      "root locus",
+      "root-locus",
+      "근궤적 안정도",
+      "근궤적 작도",
+      "근궤적 이득 설계",
+      "폐루프 극점 이동",
+      "실축 근궤적",
+      "점근선 중심",
+      "이탈점",
+      "진입점",
+      "출발각",
+      "도착각",
+      "허수축 교차 이득",
+      "우세극 설계",
+      "lead compensator",
+      "lag compensator"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "폐루프 특성방정식 1+L(s)=0과 목표 설계점의 관계를 직접 유도한다.",
+      "P를 먼저 계산한 뒤 선택한 선회 방향 convention으로 Z를 구한다.",
+      "허수축 극점이 있는 시스템의 수정 근궤적 근궤적 경로를 연습한다.",
+      "설계점와 허수축 교차를 구분하여 안정 이득과 과도응답을 계산한다.",
+      "시간지연과 복수 교차점가 있는 경우 전체 근궤적 궤적을 검증한다."
+    ],
+    "de_claim_trust": {
+      "enabled": true,
+      "target_layers": [
+        "D",
+        "E"
+      ],
+      "score_effect": "none",
+      "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+      "pass_meaning": "핵심 이론 주장이 정답과 직접 충돌하지 않아 이를 기반으로 한 현장 적용·결론을 이론적으로 신뢰할 수 있다.",
+      "fatal_meaning": "핵심 이론 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 적용·결론을 강하게 신뢰하지 않는다.",
+      "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
+    }
+  },
+  "llm_profile": {
+    "display_name": "근궤적법에 의한 안정도 해석과 제어기 이득 설계",
+    "difficulty": "THEORY_CORE",
+    "cap_policy": {
+      "fatal_recommended_ceiling": 10.0,
+      "fatal_confidence_threshold": 0.75
+    },
+    "candidate_extraction": {
+      "max_candidates": 20,
+      "nearby_window": 2,
+      "key_terms": [
+        "근궤적",
+        "root locus",
+        "특성방정식",
+        "폐루프 극점",
+        "개루프 극점",
+        "개루프 영점",
+        "이득 K",
+        "각도조건",
+        "크기조건",
+        "실축 구간",
+        "홀수",
+        "점근선",
+        "점근선 중심",
+        "이탈점",
+        "진입점",
+        "출발각",
+        "도착각",
+        "허수축",
+        "임계 이득",
+        "우세극",
+        "감쇠비",
+        "정착시간",
+        "오버슈트",
+        "lead compensator",
+        "lag compensator",
+        "PID"
+      ],
+      "rules": []
+    },
+    "truth_schema": [
+      "근궤적은 폐루프 특성방정식 1+KG(s)H(s)=0의 근이 이득 K에 따라 이동하는 경로다.",
+      "표준 양의 이득 근궤적은 K가 0에서 무한대로 변할 때 폐루프 극점이 복소평면에 그리는 궤적이다.",
+      "n개 가지는 개루프 극점에서 시작하고 m개 유한 개루프 영점과 n-m개 무한대 영점으로 끝난다.",
+      "시험점 오른쪽의 실수 개루프 극점과 영점 총수가 홀수인 실수축 구간만 근궤적이다.",
+      "점근선 수는 n-m이고 각도는 θ_a=(2q+1)180°/(n-m)이다.",
+      "점근선 중심은 σ_a=(Σp_i-Σz_i)/(n-m)로 계산한다.",
+      "이탈점과 진입점 후보는 K(s)=-1/[G(s)H(s)]에서 dK(s)/ds=0으로 구하고 유효성을 검증한다.",
+      "복소극 출발각과 복소영점 도착각은 대상 특이점을 제외한 나머지 극점과 영점의 각도 기여로 계산한다.",
+      "허수축 교차점과 임계 이득은 s=jω 대입 또는 Routh 경계조건으로 구하며 안정 경계로 해석한다.",
+      "설계점의 이득은 K|G(s)H(s)|=1에서 K=1/|G(s)H(s)|로 계산한다.",
+      "표준 음의 피드백의 양의 이득 근궤적은 ∠G(s)H(s)=(2q+1)180°를 만족한다.",
+      "목표 감쇠비와 정착시간으로 우세극을 정하고 비우세극의 영향을 확인해 이득 또는 보상기를 결정한다.",
+      "복소 우세극 s=-ζω_n±jω_n√(1-ζ²)는 감쇠비, 정착시간, 오버슈트와 연결된다.",
+      "목표점이 기존 근궤적 위에 없으면 lead, lag, lead-lag 또는 PID로 근궤적을 변경하고 현장 제약을 검증한다."
+    ],
+    "fatal_conditions": [
+      "[root_locus_shows_open_loop_pole_motion] 근궤적은 개루프 극점 자체가 이득에 따라 이동하는 경로다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 근궤적의 이동 대상은 폐루프 특성방정식의 극점이다.",
+      "[root_locus_exists_on_all_real_axis_segments] 근궤적은 모든 실수축 구간에 존재한다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 시험점 오른쪽의 실수 극점과 영점 총수가 홀수인 구간만 해당한다.",
+      "[branches_start_at_open_loop_zeros] 근궤적 가지는 개루프 영점에서 시작한다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: K=0에서 근궤적 가지는 개루프 극점에서 시작한다.",
+      "[branches_end_only_at_finite_poles] 근궤적 가지는 유한 개루프 극점에서만 끝난다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 가지는 유한 개루프 영점 또는 무한대 영점으로 끝난다.",
+      "[angle_condition_uses_zero_degrees] 표준 음의 피드백의 양의 이득 각도조건은 0도의 짝수배다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 기본 각도조건은 ∠G(s)H(s)=(2q+1)180°이다.",
+      "[gain_condition_ignores_magnitude] 각도조건만 만족하면 이득도 결정되므로 크기조건은 필요 없다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 수치 이득은 K=1/|G(s)H(s)|의 크기조건으로 구한다.",
+      "[imaginary_axis_crossing_always_stable] 허수축 교차 상태는 항상 점근적으로 안정하다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 허수축 교차는 일반적으로 임계 안정의 경계다.",
+      "[increasing_gain_always_improves_stability] 이득을 증가시키면 폐루프 안정성은 항상 향상된다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 이득 증가로 극점이 우반평면에 진입하면 안정성이 악화될 수 있다."
+    ],
+    "safe_conditions": [
+      "180도, -180도 및 360도 차이의 동치 각도 표현은 허용한다.",
+      "피드백 부호 convention을 명시하고 일관되게 적용하면 허용한다.",
+      "점근선 각도를 음수 또는 360도 초과 값으로 표시해도 동치이면 허용한다.",
+      "허수축 교차 이득을 s=jω 대입 또는 Routh 배열로 구한 경우 모두 허용한다.",
+      "수치 반올림 차이가 있어도 계산 구조와 판정 방향이 맞으면 허용한다.",
+      "고차계 우세극 근사의 한계를 명시한 설명은 허용한다.",
+      "모델 불확실성과 현장 검증 필요성을 강조한 설명은 허용한다."
+    ],
+    "output_contract": {
+      "json_only": true,
+      "required_fields": [
+        "verdict",
+        "confidence",
+        "reason",
+        "checks",
+        "findings"
+      ],
+      "verdict_values": [
+        "pass",
+        "warn",
+        "fatal"
+      ]
+    },
+    "major_checks": [],
+    "feedback_templates": {
+      "core_theory_positive": "폐루프 특성방정식, P-N-Z 관계, 목표 설계점 선회와 안정 이득·과도응답의 핵심 이론이 정답과 일치한다.",
+      "core_theory_major": "핵심 이론의 직접적인 반대 주장은 없지만 선회 convention, 특수조건 또는 안정여유 해석을 보강해야 한다.",
+      "core_theory_fatal": "답안이 근궤적 안정도 판별의 핵심 원리와 직접 충돌하는 주장을 실제 정답으로 제시했다."
+    },
+    "next_practice_points": [
+      "각도조건과 크기조건을 구분한다.",
+      "시작점, 종료점과 실축 홀수 규칙을 설명한다.",
+      "점근선, 이탈점과 허수축 교차 이득을 계산한다.",
+      "우세극과 보상기 설계를 현장 제약과 연결한다."
+    ]
+  }
+}

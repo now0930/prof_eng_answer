@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-10T13:27:15Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-10T15:50:04Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -254,6 +254,55 @@
         }
       ],
       "minor_checks": []
+    },
+    {
+      "topic_id": "root_locus_stability_gain_design",
+      "enabled": false,
+      "topic_name": "근궤적법에 의한 안정도 해석과 제어기 이득 설계",
+      "question_type": "CALC_DESIGN",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "근궤적",
+        "근궤적법",
+        "root locus",
+        "root-locus",
+        "근궤적 안정도",
+        "근궤적 작도",
+        "근궤적 이득 설계",
+        "폐루프 극점 이동",
+        "실축 근궤적",
+        "점근선 중심",
+        "이탈점",
+        "진입점",
+        "출발각",
+        "도착각",
+        "허수축 교차 이득",
+        "우세극 설계",
+        "lead compensator",
+        "lag compensator"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "폐루프 특성방정식 1+L(s)=0과 목표 설계점의 관계를 직접 유도한다.",
+        "P를 먼저 계산한 뒤 선택한 선회 방향 convention으로 Z를 구한다.",
+        "허수축 극점이 있는 시스템의 수정 근궤적 근궤적 경로를 연습한다.",
+        "설계점와 허수축 교차를 구분하여 안정 이득과 과도응답을 계산한다.",
+        "시간지연과 복수 교차점가 있는 경우 전체 근궤적 궤적을 검증한다."
+      ],
+      "de_claim_trust": {
+        "enabled": true,
+        "target_layers": [
+          "D",
+          "E"
+        ],
+        "score_effect": "none",
+        "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+        "pass_meaning": "핵심 이론 주장이 정답과 직접 충돌하지 않아 이를 기반으로 한 현장 적용·결론을 이론적으로 신뢰할 수 있다.",
+        "fatal_meaning": "핵심 이론 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 적용·결론을 강하게 신뢰하지 않는다.",
+        "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
+      }
     },
     {
       "topic_id": "routh_hurwitz_stability_criterion_gain_range",
