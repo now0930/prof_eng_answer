@@ -82,5 +82,399 @@ class LogicCheckEvaluatorRegressionTest(unittest.TestCase):
         )
 
 
+
+class SemanticCorrectiveContextRegressionTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _topic_check() -> dict:
+        return {
+            "topic_id": (
+                "feedback_system_closed_loop_"
+                "sensitivity_steady_state_error"
+            ),
+            "topic_name": "피드백 시스템",
+            "fatal_checks": [
+                {
+                    "id": (
+                        "high_loop_gain_always_stable"
+                    ),
+                    "severity": "fatal",
+                    "message": (
+                        "루프 이득을 높이면 항상 "
+                        "안정해진다고 설명함."
+                    ),
+                    "correct_rule": (
+                        "높은 루프 이득은 안정여유를 "
+                        "감소시킬 수도 있다."
+                    ),
+                    "recommended_ceiling": 10.0,
+                    "wrong_patterns": [
+                        (
+                            r"(루프\s*이득|loop\s*gain)"
+                            r".{0,40}(높일수록|클수록)"
+                            r".{0,30}(항상|무조건)"
+                            r".{0,20}(안정|좋)"
+                        )
+                    ],
+                }
+            ],
+        }
+
+    @staticmethod
+    def _verdict(
+        evidence: str,
+    ) -> dict:
+        return {
+            "verdict": "fatal",
+            "confidence": 1.0,
+            "findings": [
+                {
+                    "rule_id": (
+                        "high_loop_gain_always_stable"
+                    ),
+                    "severity": "fatal",
+                    "confidence": 1.0,
+                    "evidence": evidence,
+                    "message": (
+                        "루프 이득 증가가 항상 안정성을 "
+                        "보장한다고 주장함."
+                    ),
+                    "correct_rule": (
+                        "높은 루프 이득은 안정여유를 "
+                        "감소시킬 수도 있다."
+                    ),
+                }
+            ],
+            "reason": "test",
+        }
+
+    def test_corrective_context_is_not_semantic_fatal(
+        self,
+    ) -> None:
+        from unittest.mock import patch
+
+        import logic_check_evaluator
+
+        evidence = (
+            "루프 이득을 높이면 항상 안정해진다고"
+        )
+
+        answer = (
+            "주의할 오류: "
+            "루프 이득을 높이면 항상 안정해진다고 "
+            "단정하면 안 된다."
+        )
+
+        with patch(
+            "logic_llm_verifier._call_ollama_json",
+            return_value=self._verdict(evidence),
+        ):
+            findings = (
+                logic_check_evaluator
+                ._evaluate_topic_fatal_checks_with_llm(
+                    answer,
+                    self._topic_check(),
+                )
+            )
+
+        self.assertEqual(
+            findings,
+            [],
+        )
+
+    def test_direct_assertion_remains_semantic_fatal(
+        self,
+    ) -> None:
+        from unittest.mock import patch
+
+        import logic_check_evaluator
+
+        evidence = (
+            "루프 이득을 높이면 항상 안정해진다"
+        )
+
+        answer = (
+            "루프 이득을 높이면 항상 안정해진다."
+        )
+
+        with patch(
+            "logic_llm_verifier._call_ollama_json",
+            return_value=self._verdict(evidence),
+        ):
+            findings = (
+                logic_check_evaluator
+                ._evaluate_topic_fatal_checks_with_llm(
+                    answer,
+                    self._topic_check(),
+                )
+            )
+
+        self.assertEqual(
+            len(findings),
+            1,
+        )
+
+        self.assertEqual(
+            findings[0].get("source_rule_id"),
+            "high_loop_gain_always_stable",
+        )
+
+        self.assertEqual(
+            findings[0].get("severity"),
+            "fatal",
+        )
+
+
+class SystemTypeClosedLoopOrderRegressionTest(
+    unittest.TestCase
+):
+    TOPIC_ID = (
+        "feedback_system_closed_loop_"
+        "sensitivity_steady_state_error"
+    )
+
+    @classmethod
+    def _grade(cls) -> dict:
+        return {
+            "topic_id": cls.TOPIC_ID,
+            "logic_check_topic_id": cls.TOPIC_ID,
+            "total_score": 20.0,
+            "max_score": 25.0,
+            "difficulty_strategy": {
+                "topic_id": cls.TOPIC_ID,
+            },
+        }
+
+    def test_llm_profile_fatal_is_applied(
+        self,
+    ) -> None:
+        answer = (
+            "폐루프가 2차이면 "
+            "Type 2 시스템이다."
+        )
+
+        profile_result = {
+            "applicable": True,
+            "engine": "llm_verifier_profile_v1",
+            "topic_id": self.TOPIC_ID,
+            "verdict": "fatal",
+            "confidence": 0.98,
+            "checks": [
+                {
+                    "rule_id": (
+                        "system_type_from_"
+                        "closed_loop_order"
+                    ),
+                    "status": "fatal",
+                    "asserted": True,
+                    "candidate_id": "C1",
+                    "evidence": answer,
+                    "reason": (
+                        "시스템 형을 폐루프 "
+                        "차수로 정의했다."
+                    ),
+                    "correction": (
+                        "시스템 형은 개루프 "
+                        "원점 극 수이다."
+                    ),
+                    "confidence": 0.98,
+                },
+            ],
+            "findings": [
+                {
+                    "id": (
+                        "llm_profile_system_type_"
+                        "from_closed_loop_order"
+                    ),
+                    "source_rule_id": (
+                        "system_type_from_"
+                        "closed_loop_order"
+                    ),
+                    "severity": "fatal",
+                    "message": (
+                        "시스템 형을 폐루프 "
+                        "차수로 잘못 정의했다."
+                    ),
+                    "correct_rule": (
+                        "시스템 형은 개루프 "
+                        "L(s)의 원점 극 수이다."
+                    ),
+                    "affected_layers": ["C"],
+                    "evidence": answer,
+                    "confidence": 0.98,
+                    "recommended_ceiling": 10.0,
+                },
+            ],
+            "fatal_error_detected": True,
+            "recommended_ceiling": 10.0,
+            "mode": "fatal",
+            "reason": "직접적인 핵심 오개념",
+        }
+
+        with patch(
+            "logic_llm_verifier."
+            "verify_logic_with_llm",
+            return_value=profile_result,
+        ) as verifier, patch.object(
+            logic_check_evaluator,
+            "_evaluate_topic_fatal_checks_with_llm",
+            side_effect=AssertionError(
+                "LLM-only topic used legacy "
+                "semantic fallback"
+            ),
+        ):
+            output = (
+                logic_check_evaluator
+                .attach_logic_check_to_grade(
+                    self._grade(),
+                    answer,
+                )
+            )
+
+        verifier.assert_called_once()
+
+        evaluation = output.get(
+            "logic_check_evaluation",
+            {},
+        )
+
+        fatal_ids = {
+            str(
+                finding.get(
+                    "source_rule_id"
+                )
+                or finding.get("id")
+                or ""
+            )
+            for finding in evaluation.get(
+                "findings",
+                [],
+            )
+            if (
+                isinstance(finding, dict)
+                and finding.get("severity")
+                == "fatal"
+            )
+        }
+
+        self.assertTrue(
+            evaluation.get(
+                "fatal_error_detected"
+            )
+        )
+
+        self.assertEqual(
+            evaluation.get("topic_id"),
+            self.TOPIC_ID,
+        )
+
+        self.assertIn(
+            (
+                "system_type_from_"
+                "closed_loop_order"
+            ),
+            fatal_ids,
+        )
+
+        self.assertEqual(
+            (
+                evaluation.get(
+                    "score_policy"
+                )
+                or {}
+            ).get(
+                "recommended_ceiling"
+            ),
+            10.0,
+        )
+
+    def test_llm_profile_pass_does_not_apply_fatal(
+        self,
+    ) -> None:
+        answer = (
+            "시스템 형은 개루프 L(s)의 "
+            "원점 극 수로 정한다."
+        )
+
+        profile_result = {
+            "applicable": True,
+            "engine": "llm_verifier_profile_v1",
+            "topic_id": self.TOPIC_ID,
+            "verdict": "pass",
+            "confidence": 0.99,
+            "checks": [
+                {
+                    "rule_id": (
+                        "system_type_from_"
+                        "closed_loop_order"
+                    ),
+                    "status": "pass",
+                    "asserted": False,
+                    "candidate_id": "C1",
+                    "evidence": answer,
+                    "reason": (
+                        "개루프 원점 극 수로 "
+                        "정확히 정의했다."
+                    ),
+                    "correction": (
+                        "시스템 형은 개루프 "
+                        "원점 극 수이다."
+                    ),
+                    "confidence": 0.99,
+                },
+            ],
+            "findings": [],
+            "fatal_error_detected": False,
+            "recommended_ceiling": None,
+            "mode": "pass",
+            "reason": "핵심 정의가 정확함",
+        }
+
+        with patch(
+            "logic_llm_verifier."
+            "verify_logic_with_llm",
+            return_value=profile_result,
+        ) as verifier, patch.object(
+            logic_check_evaluator,
+            "_evaluate_topic_fatal_checks_with_llm",
+            side_effect=AssertionError(
+                "LLM-only topic used legacy "
+                "semantic fallback"
+            ),
+        ):
+            output = (
+                logic_check_evaluator
+                .attach_logic_check_to_grade(
+                    self._grade(),
+                    answer,
+                )
+            )
+
+        verifier.assert_called_once()
+
+        evaluation = output.get(
+            "logic_check_evaluation",
+            {},
+        )
+
+        self.assertFalse(
+            evaluation.get(
+                "fatal_error_detected"
+            )
+        )
+
+        self.assertEqual(
+            evaluation.get("mode"),
+            "pass",
+        )
+
+        self.assertEqual(
+            evaluation.get("findings"),
+            [],
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main()

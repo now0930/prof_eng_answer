@@ -104,6 +104,83 @@ def _is_safe_correction_context(ctx: str) -> bool:
     return any(hint.lower() in lowered for hint in SAFE_CORRECTION_HINTS)
 
 
+def _semantic_evidence_is_corrective_context(
+    text: str,
+    evidence: str,
+) -> bool:
+    """Return True only for explicitly corrective evidence contexts."""
+
+    normalized_text = _normalize_text(text)
+    normalized_evidence = _normalize_text(evidence)
+
+    if not normalized_text or not normalized_evidence:
+        return False
+
+    evidence_pattern = re.compile(
+        re.escape(normalized_evidence),
+        flags=re.IGNORECASE,
+    )
+
+    correction_prefix = re.compile(
+        r"(?:"
+        r"주의(?:할)?\s*오류"
+        r"|오류\s*(?:항목|사례|표현)?"
+        r"|잘못된?\s*(?:주장|설명|표현|오개념)"
+        r"|틀린\s*(?:주장|설명|표현)"
+        r"|금지\s*(?:표현|사항)"
+        r"|오개념"
+        r"|반대로\s*(?:쓰|설명|표현)"
+        r")\s*[:：\-]?\s*$",
+        flags=re.IGNORECASE,
+    )
+
+    explicit_negation = re.compile(
+        r"(?:"
+        r"아니(?:다|며|고|므로|라는)"
+        r"|않(?:다|으며|고|아야|도록)"
+        r"|안\s*된(?:다|다고|다는|다며)"
+        r"|해서는\s*안\s*된"
+        r"|하면\s*안\s*된"
+        r"|단정(?:하면|해서는)\s*안"
+        r"|잘못(?:이다|이며|된|되었)"
+        r"|틀리(?:다|며|고|므로)"
+        r"|오류(?:이다|이며|로)"
+        r"|금지(?:한다|해야|된다)"
+        r")",
+        flags=re.IGNORECASE,
+    )
+
+    for match in evidence_pattern.finditer(
+        normalized_text
+    ):
+        start = match.start()
+        end = match.end()
+
+        prefix = normalized_text[
+            max(0, start - 50):start
+        ]
+
+        suffix = normalized_text[
+            end:min(
+                len(normalized_text),
+                end + 70,
+            )
+        ]
+
+        if correction_prefix.search(prefix):
+            return True
+
+        if explicit_negation.search(
+            normalized_evidence
+        ):
+            return True
+
+        if explicit_negation.search(suffix):
+            return True
+
+    return False
+
+
 def _has_good_underdamped_divergence_separation(text: str) -> bool:
     normalized = _normalize_text(text)
 
@@ -493,14 +570,155 @@ def evaluate_logic_checks(
         _topic_routing_error = repr(routing_error)
 
     for topic_check in _topic_logic_checks_for_evaluation:
-        if not topic_check.get("enabled", True):
-            continue
+        deterministic_enabled = bool(
+            topic_check.get("enabled", True)
+        )
 
-        if not _topic_applies(text, grade, topic_check):
+        if not _topic_applies(
+            text,
+            grade,
+            topic_check,
+        ):
             continue
 
         topic_id = topic_check.get("topic_id")
         topic_name = topic_check.get("topic_name")
+
+        # A generated Topic Pack may intentionally disable deterministic
+        # checks while keeping an active JSON-profile LLM verifier.
+        #
+        # In that case, enabled=false means "profile-only", not
+        # "disable the entire topic". Do not execute wrong_patterns,
+        # deterministic major checks, or question-type pattern checks.
+        if not deterministic_enabled:
+            try:
+                from logic_llm_verifier import (
+                    load_logic_check_profile,
+                    verify_logic_with_llm,
+                )
+
+                profile = load_logic_check_profile(
+                    str(topic_id)
+                )
+
+                profile_evaluation = (
+                    verify_logic_with_llm(
+                        text,
+                        str(topic_id),
+                    )
+                )
+            except Exception as error:
+                findings.append(
+                    {
+                        "id": (
+                            "llm_profile_verifier_"
+                            "unavailable"
+                        ),
+                        "severity": "minor",
+                        "message": (
+                            "JSON-profile LLM Logic "
+                            "Check를 실행하지 못해 "
+                            "fatal 판정을 건너뛰었습니다: "
+                            f"{error}"
+                        ),
+                        "correct_rule": (
+                            "LLM verifier 실패 시 "
+                            "fatal cap을 적용하지 않습니다."
+                        ),
+                        "affected_layers": ["C"],
+                        "engine": (
+                            "llm_verifier_profile_v1"
+                        ),
+                        "diagnostic": {
+                            "ok": False,
+                            "error": repr(error),
+                        },
+                    }
+                )
+
+                profile = {}
+                profile_evaluation = {}
+            else:
+                if not isinstance(
+                    profile_evaluation,
+                    dict,
+                ):
+                    profile_evaluation = {}
+
+                topic_name = (
+                    profile.get("display_name")
+                    or topic_name
+                )
+
+                for profile_finding in (
+                    profile_evaluation.get(
+                        "findings"
+                    )
+                    or []
+                ):
+                    if not isinstance(
+                        profile_finding,
+                        dict,
+                    ):
+                        continue
+
+                    profile_finding = dict(
+                        profile_finding
+                    )
+
+                    profile_finding.setdefault(
+                        "engine",
+                        "llm_verifier_profile_v1",
+                    )
+
+                    if any(
+                        isinstance(existing, dict)
+                        and (
+                            existing.get("id")
+                            == profile_finding.get("id")
+                            or (
+                                existing.get(
+                                    "source_rule_id"
+                                )
+                                and existing.get(
+                                    "source_rule_id"
+                                )
+                                == profile_finding.get(
+                                    "source_rule_id"
+                                )
+                            )
+                        )
+                        for existing in findings
+                    ):
+                        continue
+
+                    findings.append(
+                        profile_finding
+                    )
+
+            practice_source = (
+                profile.get(
+                    "next_practice_points"
+                )
+                if isinstance(profile, dict)
+                else None
+            )
+
+            if not practice_source:
+                practice_source = (
+                    topic_check.get(
+                        "next_practice_points"
+                    )
+                    or []
+                )
+
+            for point in practice_source:
+                _append_unique(
+                    next_practice_points,
+                    point,
+                )
+
+            break
 
         for check in topic_check.get("fatal_checks", []):
             for pattern in check.get("wrong_patterns", []):
@@ -1035,6 +1253,12 @@ Return JSON only:
         message = str(item.get("message") or source_rule.get("message") or "핵심 이론 오류").strip()
         correct_rule = str(item.get("correct_rule") or source_rule.get("correct_rule") or "").strip()
         evidence = str(item.get("evidence") or "").strip()
+
+        if _semantic_evidence_is_corrective_context(
+            text,
+            evidence,
+        ):
+            continue
 
         finding = {
             "id": f"llm_semantic_{rid}",

@@ -333,31 +333,74 @@ def _attach_theory_core_fatal_feedback(
 
 
 
-def _prefer_question_type_adjusted_score(grade, fallback_score):
+def _prefer_question_type_adjusted_score(
+    grade,
+    fallback_score,
+):
     try:
-        fallback = float(fallback_score)
-    except (TypeError, ValueError):
+        fallback = float(
+            fallback_score
+        )
+    except (
+        TypeError,
+        ValueError,
+        OverflowError,
+    ):
         fallback = 0.0
 
     adjustment = grade.get(
         "question_type_coverage_score_adjustment"
     ) or {}
 
-    if not isinstance(adjustment, dict):
-        return round(fallback, 2), False
+    if not isinstance(
+        adjustment,
+        dict,
+    ):
+        return round(
+            fallback,
+            2,
+        ), False
+
+    if (
+        adjustment.get("mode") != "strict"
+        or adjustment.get("applied") is not True
+    ):
+        return round(
+            fallback,
+            2,
+        ), False
 
     try:
-        adjusted = float(adjustment.get("adjusted_score"))
-    except (TypeError, ValueError):
-        return round(fallback, 2), False
+        adjusted = float(
+            adjustment.get(
+                "adjusted_score"
+            )
+        )
+    except (
+        TypeError,
+        ValueError,
+        OverflowError,
+    ):
+        return round(
+            fallback,
+            2,
+        ), False
 
-    adjusted = max(0.0, adjusted)
+    adjusted = max(
+        0.0,
+        adjusted,
+    )
 
-    # Coverage 조정은 기존 점수를 낮출 때만 우선한다.
     if adjusted < fallback:
-        return round(adjusted, 2), True
+        return round(
+            adjusted,
+            2,
+        ), True
 
-    return round(fallback, 2), False
+    return round(
+        fallback,
+        2,
+    ), False
 
 def apply_difficulty_score_ceiling(
     grade: Dict[str, Any],

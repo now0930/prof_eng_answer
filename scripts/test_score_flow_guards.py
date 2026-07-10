@@ -62,7 +62,9 @@ class ScoreFlowGuardTest(unittest.TestCase):
         self.assertEqual(result["effective_score"], 3.5)
         self.assertFalse(result["raise_limited"])
 
-    def test_coverage_adjusted_score_is_applied(self) -> None:
+    def test_coverage_adjusted_score_is_applied(
+        self,
+    ) -> None:
         grade = {
             "total_score": 18.06,
             "max_score": 25.0,
@@ -72,15 +74,19 @@ class ScoreFlowGuardTest(unittest.TestCase):
         }
 
         decision = {
+            "mode": "strict",
             "original_score": 18.06,
             "adjusted_score": 17.79,
             "applied": False,
-            "total_penalty": 0.27,
+            "recommended_penalty": 0.27,
         }
 
         with patch.object(
             coverage_adjuster,
-            "evaluate_question_type_coverage_score_adjustment",
+            (
+                "evaluate_question_type_coverage_"
+                "score_adjustment"
+            ),
             return_value=decision,
         ):
             result = (
@@ -90,44 +96,85 @@ class ScoreFlowGuardTest(unittest.TestCase):
                 )
             )
 
-        self.assertEqual(result["total_score"], 17.79)
+        self.assertEqual(
+            result["total_score"],
+            17.79,
+        )
 
         adjustment = result[
             "question_type_coverage_score_adjustment"
         ]
 
-        self.assertTrue(adjustment["applied"])
-        self.assertTrue(adjustment["score_flow_applied"])
+        self.assertTrue(
+            adjustment["applied"]
+        )
+        self.assertTrue(
+            adjustment[
+                "score_flow_applied"
+            ]
+        )
         self.assertEqual(
-            result["pre_question_type_coverage_total_score"],
+            result[
+                "pre_question_type_coverage_total_score"
+            ],
             18.06,
         )
 
-    def test_ceiling_prefers_lower_coverage_score(self) -> None:
-        score, applied = _prefer_question_type_adjusted_score(
-            {
-                "question_type_coverage_score_adjustment": {
-                    "adjusted_score": 17.79,
-                }
-            },
-            18.06,
+    def test_ceiling_prefers_lower_coverage_score(
+        self,
+    ) -> None:
+        score, applied = (
+            _prefer_question_type_adjusted_score(
+                {
+                    (
+                        "question_type_coverage_"
+                        "score_adjustment"
+                    ): {
+                        "mode": "strict",
+                        "applied": True,
+                        "score_flow_applied": True,
+                        "adjusted_score": 17.79,
+                    }
+                },
+                18.06,
+            )
         )
 
-        self.assertEqual(score, 17.79)
-        self.assertTrue(applied)
-
-    def test_ceiling_does_not_raise_score(self) -> None:
-        score, applied = _prefer_question_type_adjusted_score(
-            {
-                "question_type_coverage_score_adjustment": {
-                    "adjusted_score": 18.5,
-                }
-            },
-            18.06,
+        self.assertEqual(
+            score,
+            17.79,
+        )
+        self.assertTrue(
+            applied
         )
 
-        self.assertEqual(score, 18.06)
-        self.assertFalse(applied)
+    def test_ceiling_does_not_raise_score(
+        self,
+    ) -> None:
+        score, applied = (
+            _prefer_question_type_adjusted_score(
+                {
+                    (
+                        "question_type_coverage_"
+                        "score_adjustment"
+                    ): {
+                        "mode": "strict",
+                        "applied": True,
+                        "score_flow_applied": True,
+                        "adjusted_score": 18.5,
+                    }
+                },
+                18.06,
+            )
+        )
+
+        self.assertEqual(
+            score,
+            18.06,
+        )
+        self.assertFalse(
+            applied
+        )
 
 
 
@@ -6038,6 +6085,305 @@ class TelegramSummaryFallbackRegressionTest(
         )
         self.assertTrue(
             result.strip(),
+        )
+
+class CoverageWarnModeScoreFlowRegressionTest(
+    unittest.TestCase
+):
+    def test_warn_candidate_does_not_mutate_score(
+        self,
+    ) -> None:
+        from unittest.mock import patch
+
+        import question_type_coverage_score_adjuster as adjuster
+
+        grade = {
+            "total_score": 1.02,
+            "final_total_score": 1.02,
+            "max_score": 25.0,
+            "score_range": "0.5~1.5",
+        }
+
+        decision = {
+            "mode": "warn",
+            "original_score": 1.02,
+            "adjusted_score": 0.27,
+            "recommended_penalty": 0.75,
+            "applied": False,
+        }
+
+        with patch.object(
+            adjuster,
+            (
+                "evaluate_question_type_coverage_"
+                "score_adjustment"
+            ),
+            return_value=decision,
+        ):
+            result = (
+                adjuster
+                .apply_question_type_coverage_score_adjustment(
+                    grade
+                )
+            )
+
+        adjustment = result[
+            "question_type_coverage_score_adjustment"
+        ]
+
+        self.assertEqual(
+            result["total_score"],
+            1.02,
+        )
+        self.assertEqual(
+            result["final_total_score"],
+            1.02,
+        )
+        self.assertEqual(
+            result["score_range"],
+            "0.5~1.5",
+        )
+        self.assertFalse(
+            adjustment["applied"]
+        )
+        self.assertNotEqual(
+            adjustment.get(
+                "score_flow_applied"
+            ),
+            True,
+        )
+        self.assertNotIn(
+            (
+                "pre_question_type_coverage_"
+                "total_score"
+            ),
+            result,
+        )
+
+    def test_ceiling_ignores_warn_candidate(
+        self,
+    ) -> None:
+        from difficulty_score_ceiling import (
+            _prefer_question_type_adjusted_score,
+        )
+
+        score, applied = (
+            _prefer_question_type_adjusted_score(
+                {
+                    (
+                        "question_type_coverage_"
+                        "score_adjustment"
+                    ): {
+                        "mode": "warn",
+                        "applied": False,
+                        "adjusted_score": 0.27,
+                    }
+                },
+                1.02,
+            )
+        )
+
+        self.assertEqual(
+            score,
+            1.02,
+        )
+        self.assertFalse(
+            applied
+        )
+
+    def test_fatal_without_numeric_cap_has_normal_range(
+        self,
+    ) -> None:
+        from grade_score_reconciler import (
+            _apply_numeric_flags,
+        )
+
+        result = _apply_numeric_flags(
+            {
+                "total_score": 1.02,
+                "max_score": 25.0,
+                "logic_check_evaluation": {
+                    "fatal_error_detected": True,
+                    "mode": "fatal",
+                },
+                "difficulty_ceiling_evaluation": {
+                    "mode": "strict",
+                    "recommended_cap": 10.0,
+                    "capped_score": 1.02,
+                    "cap_applied": False,
+                },
+                "explicit_requirement_cap_evaluation": {
+                    "triggered": False,
+                    "applied": False,
+                },
+            }
+        )
+
+        self.assertEqual(
+            result["total_score"],
+            1.02,
+        )
+        self.assertEqual(
+            result["final_total_score"],
+            1.02,
+        )
+        self.assertEqual(
+            result["score_range"],
+            "0.5~1.5",
+        )
+        self.assertNotIn(
+            "cap 적용",
+            result["score_range"],
+        )
+
+class FinalBindingCapRegressionTest(
+    unittest.TestCase
+):
+    def test_logic_fatal_without_applied_cap_is_not_binding(
+        self,
+    ) -> None:
+        from grade_score_reconciler import (
+            _apply_numeric_flags,
+        )
+
+        result = _apply_numeric_flags(
+            {
+                "total_score": 1.02,
+                "max_score": 25.0,
+                "logic_check_evaluation": {
+                    "fatal_error_detected": True,
+                    "mode": "fatal",
+                },
+                "difficulty_ceiling_evaluation": {
+                    "mode": "strict",
+                    "recommended_cap": 10.0,
+                    "capped_score": 1.02,
+                    "cap_applied": False,
+                },
+                "explicit_requirement_cap_evaluation": {
+                    "triggered": False,
+                    "applied": False,
+                },
+            }
+        )
+
+        self.assertEqual(
+            result["total_score"],
+            1.02,
+        )
+        self.assertEqual(
+            result["final_total_score"],
+            1.02,
+        )
+        self.assertEqual(
+            result["score_range"],
+            "0.5~1.5",
+        )
+        self.assertNotIn(
+            "cap 적용",
+            result["score_range"],
+        )
+
+    def test_applied_difficulty_cap_is_binding(
+        self,
+    ) -> None:
+        from grade_score_reconciler import (
+            _apply_numeric_flags,
+        )
+
+        result = _apply_numeric_flags(
+            {
+                "total_score": 10.0,
+                "max_score": 25.0,
+                "difficulty_ceiling_evaluation": {
+                    "mode": "strict",
+                    "recommended_cap": 10.0,
+                    "capped_score": 10.0,
+                    "cap_applied": True,
+                },
+            }
+        )
+
+        self.assertEqual(
+            result["score_range"],
+            "10점 cap 적용",
+        )
+
+    def test_applied_nonbinding_upper_cap_uses_normal_range(
+        self,
+    ) -> None:
+        from grade_score_reconciler import (
+            _apply_numeric_flags,
+        )
+
+        result = _apply_numeric_flags(
+            {
+                "total_score": 8.0,
+                "max_score": 25.0,
+                "difficulty_ceiling_evaluation": {
+                    "mode": "strict",
+                    "recommended_cap": 10.0,
+                    "capped_score": 10.0,
+                    "cap_applied": True,
+                },
+            }
+        )
+
+        self.assertEqual(
+            result["score_range"],
+            "7.5~8.5",
+        )
+        self.assertNotIn(
+            "cap 적용",
+            result["score_range"],
+        )
+
+    def test_bot_fallback_does_not_claim_unapplied_cap(
+        self,
+    ) -> None:
+        from unittest.mock import patch
+
+        import bot
+
+        grade = {
+            "total_score": 1.02,
+            "max_score": 25.0,
+            "score_range": "0.5~1.5",
+            "summary": "핵심 이론 오류가 있습니다.",
+            "rater_results": [
+                {
+                    "rater_name": "채점자",
+                    "total_score": 1.02,
+                    "max_score": 25.0,
+                }
+            ],
+            "logic_check_evaluation": {
+                "fatal_error_detected": True,
+                "mode": "fatal",
+            },
+            "difficulty_ceiling_evaluation": {
+                "recommended_cap": 10.0,
+                "capped_score": 1.02,
+                "cap_applied": False,
+            },
+        }
+
+        with patch.object(
+            bot,
+            "summarize_grade_for_telegram",
+            return_value=None,
+        ):
+            text = bot.format_result(
+                grade
+            )
+
+        self.assertNotIn(
+            "cap을 우선 적용",
+            text,
+        )
+        self.assertNotIn(
+            "실제 적용된 ceiling",
+            text,
         )
 
 if __name__ == "__main__":

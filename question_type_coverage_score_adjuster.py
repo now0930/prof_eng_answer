@@ -238,89 +238,127 @@ def apply_question_type_coverage_score_adjustment(
 ) -> dict[str, Any]:
     """Attach and optionally apply weak score adjustment.
 
-    warn mode: attach decision only.
-    strict mode: subtract recommended_penalty from total_score.
+    warn mode:
+      Attach the recommendation only. Never mutate score fields.
+
+    strict mode:
+      Apply a finite positive penalty only when adjusted_score is
+      lower than the current score.
     """
     if not isinstance(grade, dict):
         return grade
 
-    decision = evaluate_question_type_coverage_score_adjustment(grade)
-    _computed_adjusted_score = decision.get("adjusted_score")
-    grade["question_type_coverage_score_adjustment"] = decision
+    decision = (
+        evaluate_question_type_coverage_score_adjustment(
+            grade
+        )
+    )
+
+    grade[
+        "question_type_coverage_score_adjustment"
+    ] = decision
+
+    if decision.get("mode") != "strict":
+        return grade
+
+    penalty = _to_float(
+        decision.get("recommended_penalty"),
+        0.0,
+    )
+    old_score = _to_float(
+        grade.get("total_score"),
+        None,
+    )
+    adjusted_score = _to_float(
+        decision.get("adjusted_score"),
+        None,
+    )
 
     if (
-        decision.get("mode") == "strict"
-        and decision.get("recommended_penalty", 0) > 0
-        and decision.get("adjusted_score") is not None
+        penalty is None
+        or penalty <= 0
+        or old_score is None
+        or adjusted_score is None
+        or adjusted_score >= old_score
     ):
-        old_score = _to_float(grade.get("total_score"), None)
+        return grade
 
-        if old_score is not None:
-            grade["total_score"] = decision["adjusted_score"]
-            decision["applied"] = True
-            decision["original_score"] = old_score
-            decision["adjusted_score"] = grade["total_score"]
+    new_score = round(
+        max(0.0, adjusted_score),
+        2,
+    )
 
-            warnings = grade.get("strategy_warnings")
-            if not isinstance(warnings, list):
-                warnings = []
-                grade["strategy_warnings"] = warnings
+    grade[
+        "pre_question_type_coverage_total_score"
+    ] = round(
+        old_score,
+        2,
+    )
+    grade["total_score"] = new_score
+    grade["final_total_score"] = new_score
 
-            msg = (
-                "question_type coverage strict 보정 적용: "
-                f"{old_score:g} -> {grade['total_score']:g} "
-                f"(-{decision['recommended_penalty']:g})"
+    decision["applied"] = True
+    decision["score_flow_applied"] = True
+    decision["original_score"] = round(
+        old_score,
+        2,
+    )
+    decision["adjusted_score"] = new_score
+
+    warnings = grade.get(
+        "strategy_warnings"
+    )
+
+    if not isinstance(warnings, list):
+        warnings = []
+        grade["strategy_warnings"] = warnings
+
+    message = (
+        "question_type coverage strict 보정 적용: "
+        f"{old_score:g} -> {new_score:g} "
+        f"(-{penalty:g})"
+    )
+
+    if message not in warnings:
+        warnings.append(
+            message
+        )
+
+    max_score = _to_float(
+        grade.get("max_score"),
+        25.0,
+    )
+
+    if max_score is None:
+        max_score = 25.0
+
+    grade["score_range"] = (
+        f"{max(0.0, new_score - 0.5):.1f}~"
+        f"{min(max_score, new_score + 0.5):.1f}"
+    )
+
+    for score_key, met_key in (
+        (
+            "official_pass_score",
+            "official_pass_met",
+        ),
+        (
+            "practical_target_score",
+            "practical_target_met",
+        ),
+        (
+            "high_score_target",
+            "high_score_met",
+        ),
+    ):
+        target = _to_float(
+            grade.get(score_key),
+            None,
+        )
+
+        if target is not None:
+            grade[met_key] = (
+                new_score >= target
             )
-            if msg not in warnings:
-                warnings.append(msg)
-
-
-    # 계산된 coverage 감점이 현재 점수보다 낮으면 실제 점수 흐름에
-    # 반드시 반영한다. Coverage 평가는 점수를 올리는 용도로는 쓰지 않는다.
-    try:
-        _coverage_current_score = float(grade.get("total_score"))
-        _coverage_adjusted_score = float(_computed_adjusted_score)
-    except (TypeError, ValueError):
-        _coverage_current_score = None
-        _coverage_adjusted_score = None
-
-    if (
-        _coverage_current_score is not None
-        and _coverage_adjusted_score is not None
-        and _coverage_adjusted_score < _coverage_current_score
-    ):
-        grade["pre_question_type_coverage_total_score"] = round(
-            _coverage_current_score,
-            2,
-        )
-        grade["total_score"] = round(
-            max(0.0, _coverage_adjusted_score),
-            2,
-        )
-
-        decision["applied"] = True
-        decision["score_flow_applied"] = True
-        decision["original_score"] = round(
-            _coverage_current_score,
-            2,
-        )
-        decision["adjusted_score"] = grade["total_score"]
-
-        max_score = float(grade.get("max_score", 25.0) or 25.0)
-        grade["score_range"] = (
-            f"{max(0.0, grade['total_score'] - 0.5):.1f}~"
-            f"{min(max_score, grade['total_score'] + 0.5):.1f}"
-        )
-
-        for score_key, met_key in (
-            ("official_pass_score", "official_pass_met"),
-            ("practical_target_score", "practical_target_met"),
-            ("high_score_target", "high_score_met"),
-        ):
-            try:
-                target = float(grade.get(score_key))
-            except (TypeError, ValueError):
-                continue
-            grade[met_key] = grade["total_score"] >= target
 
     return grade

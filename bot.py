@@ -827,8 +827,12 @@ def format_result(parsed, sid=None):
 
     rater_results = parsed.get("rater_results") or parsed.get("raters") or []
     if rater_results:
-        if _logic_check_has_fatal(parsed):
-            lines.append("※ 아래 3인 채점위원 평가는 ceiling 적용 전 의미 평가입니다. Logic Check fatal이 있는 경우 최종 점수는 핵심 이론 오류 cap을 우선 적용합니다.")
+        if cap_eval.get("cap_applied"):
+            lines.append(
+                "※ 아래 3인 채점위원 평가는 난이도 ceiling 적용 전 "
+                "의미 평가입니다. 최종 점수에는 실제 적용된 ceiling이 "
+                "반영되었습니다."
+            )
         lines.append("[3인 채점위원 점수]")
         for r in rater_results:
             name = pick(r.get("rater_name"), r.get("name"), r.get("id"), default="채점자")

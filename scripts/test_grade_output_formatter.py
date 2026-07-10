@@ -3,6 +3,18 @@ from __future__ import annotations
 
 import unittest
 
+# GRADE_OUTPUT_FORMATTER_TEST_ROOT_BOOTSTRAP_V1
+import sys
+from pathlib import Path
+
+PROJECT_ROOT = Path(__file__).resolve().parents[1]
+
+if str(PROJECT_ROOT) not in sys.path:
+    sys.path.insert(
+        0,
+        str(PROJECT_ROOT),
+    )
+
 from grade_output_summarizer import _build_payload, _render
 
 
@@ -39,13 +51,24 @@ class GradeOutputFormatterRegressionTest(unittest.TestCase):
         self.assertIn("실전 목표선: 17.5점 (미달)", text)
         self.assertIn("총평: 기본 개념은 충족했으나 현장 판단이 부족합니다.", text)
 
-    def test_fatal_logic_check_forces_cap_score_range(self) -> None:
+    def test_fatal_logic_without_numeric_cap_preserves_score_range(
+        self,
+    ) -> None:
         text = render_without_llm(
             {
                 "total_score": 10.0,
                 "max_score": 25,
+                "score_range": "9.5~10.5",
                 "confidence": "high",
-                "summary": "치명 오류로 고득점이 제한됩니다.",
+                "summary": (
+                    "치명 오류로 고득점이 제한됩니다."
+                ),
+                "difficulty_ceiling_evaluation": {
+                    "mode": "strict",
+                    "recommended_cap": 10.0,
+                    "capped_score": 10.0,
+                    "cap_applied": False,
+                },
                 "logic_check_evaluation": {
                     "fatal_error_detected": True,
                     "mode": "topic_specific",
@@ -53,17 +76,46 @@ class GradeOutputFormatterRegressionTest(unittest.TestCase):
                         {
                             "severity": "fatal",
                             "message": "극점 부호 오류",
-                            "evidence": "s = +ζωn ± jωd",
-                            "correct_rule": "안정 2차계 극점의 실수부는 -ζωn이다.",
+                            "evidence": (
+                                "s = +ζωn ± jωd"
+                            ),
+                            "correct_rule": (
+                                "안정 2차계 극점의 "
+                                "실수부는 -ζωn이다."
+                            ),
                         }
                     ],
                 },
             }
         )
 
-        self.assertIn("채점 완료: 10.0/25", text)
-        self.assertIn("예상 점수대: 10.0점 cap 적용", text)
-        self.assertIn("총평: 치명 오류로 고득점이 제한됩니다.", text)
+        self.assertIn(
+            "채점 완료: 10.0/25",
+            text,
+        )
+        self.assertIn(
+            "예상 점수대: 9.5~10.5",
+            text,
+        )
+        self.assertIn(
+            "판정: THEORY_CORE 핵심 이론 오류",
+            text,
+        )
+        self.assertIn(
+            (
+                "추가적인 수치 cap은 "
+                "적용되지 않았습니다."
+            ),
+            text,
+        )
+        self.assertNotIn(
+            "핵심 이론 오류 cap 적용",
+            text,
+        )
+        self.assertNotIn(
+            "10.0점 cap 적용",
+            text,
+        )
 
 
 
@@ -97,6 +149,54 @@ class CompactFormatterCorrectRuleRegressionTest(unittest.TestCase):
 
         assert "정상상태 오차 제거는 주로 I 동작의 역할이다" in rendered
         assert "핵심 개념과 조건을 정답 기준과 일치시키세요" not in rendered
+
+class AppliedNumericCapOutputRegressionTest(
+    unittest.TestCase
+):
+    def test_applied_difficulty_cap_keeps_cap_wording(
+        self,
+    ) -> None:
+        text = render_without_llm(
+            {
+                "total_score": 10.0,
+                "max_score": 25,
+                "score_range": "10점 cap 적용",
+                "confidence": "high",
+                "difficulty_ceiling_evaluation": {
+                    "mode": "strict",
+                    "recommended_cap": 10.0,
+                    "capped_score": 10.0,
+                    "cap_applied": True,
+                },
+                "logic_check_evaluation": {
+                    "fatal_error_detected": True,
+                    "mode": "fatal",
+                    "findings": [
+                        {
+                            "severity": "fatal",
+                            "message": "핵심 이론 오류",
+                        }
+                    ],
+                },
+            }
+        )
+
+        self.assertIn(
+            "예상 점수대: 10.0점 cap 적용",
+            text,
+        )
+        self.assertIn(
+            (
+                "판정: THEORY_CORE "
+                "핵심 이론 오류 cap 적용"
+            ),
+            text,
+        )
+        self.assertIn(
+            "최종 cap이 적용되었습니다.",
+            text,
+        )
+
 if __name__ == "__main__":
     unittest.main()
 

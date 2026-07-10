@@ -251,7 +251,7 @@ def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
         qtype = {}
 
     score_range = grade.get("score_range") or grade.get("estimated_score_range") or f"{total}~{total}"
-    if logic.get("fatal") or ceiling.get("cap_applied"):
+    if ceiling.get("cap_applied"):
         score_range = f"{total}점 cap 적용"
 
     return {
@@ -269,7 +269,7 @@ def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
         },
         "logic_check": logic,
         "ceiling": {
-            "cap_applied": bool(ceiling.get("cap_applied")) or bool(logic.get("fatal")),
+            "cap_applied": bool(ceiling.get("cap_applied")),
             "reason": _txt(
                 ceiling.get("reason")
                 or ceiling.get("fatal_error_reason")
@@ -375,9 +375,26 @@ def _normalise_summary(llm_obj: dict[str, Any] | None, payload: dict[str, Any]) 
 
     if fatal:
         key_reasons = _fatal_messages(payload) or ["Logic Check에서 핵심 이론 오류가 확인되었습니다."]
+        cap_applied = bool(
+            (payload.get("ceiling") or {}).get(
+                "cap_applied"
+            )
+        )
+
+        if cap_applied:
+            headline = "THEORY_CORE 핵심 이론 오류 cap 적용"
+            overall = "핵심 이론 오류가 확인되어 최종 cap이 적용되었습니다."
+        else:
+            headline = "THEORY_CORE 핵심 이론 오류"
+            overall = (
+                "핵심 이론 오류가 확인되었습니다. "
+                "현재 점수가 권장 ceiling보다 낮아 "
+                "추가적인 수치 cap은 적용되지 않았습니다."
+            )
+
         return {
-            "headline": "THEORY_CORE 핵심 이론 오류 cap 적용",
-            "overall": "핵심 이론 오류가 확인되어 최종 cap이 적용되었습니다.",
+            "headline": headline,
+            "overall": overall,
             "key_reasons": key_reasons,
             "section_basis": [
                 "C항목: 핵심 이론 정의 오류로 내용 점수가 제한됩니다.",
@@ -470,6 +487,80 @@ def _build_prompt(payload: dict[str, Any]) -> str:
 
 def _render(summary: dict[str, Any], payload: dict[str, Any]) -> str:
     score = payload["score"]
+
+    # FINAL_FATAL_RENDER_PRECEDENCE
+    # _render is the final trust boundary and may also be called directly by
+    # deterministic tests or fallback code. A verified Logic Check fatal must
+    # therefore override any LLM-authored headline at this boundary.
+    logic_payload = payload.get("logic_check") or {}
+
+    if bool(logic_payload.get("fatal")):
+        summary = dict(
+            summary
+            if isinstance(summary, dict)
+            else {}
+        )
+
+        ceiling_payload = payload.get("ceiling") or {}
+        cap_applied = bool(
+            ceiling_payload.get("cap_applied")
+        )
+
+        if cap_applied:
+            summary["headline"] = (
+                "THEORY_CORE 핵심 이론 오류 cap 적용"
+            )
+            summary["overall"] = (
+                "핵심 이론 오류가 확인되어 "
+                "최종 cap이 적용되었습니다."
+            )
+        else:
+            summary["headline"] = (
+                "THEORY_CORE 핵심 이론 오류"
+            )
+            summary["overall"] = (
+                "핵심 이론 오류가 확인되었습니다. "
+                "현재 점수가 권장 ceiling보다 낮아 "
+                "추가적인 수치 cap은 적용되지 않았습니다."
+            )
+
+        fatal_reasons = _fatal_messages(payload)
+
+        if fatal_reasons:
+            summary["key_reasons"] = fatal_reasons
+
+        summary["section_basis"] = [
+            (
+                "C항목: 핵심 이론 정의 오류로 "
+                "내용 점수가 제한됩니다."
+            ),
+            (
+                "D/E항목: 현장 적용 설명은 일부 장점이나 "
+                "fatal 오류를 보완하지 못합니다."
+            ),
+        ]
+
+        corrections = []
+
+        for finding in logic_payload.get("findings") or []:
+            if not isinstance(finding, dict):
+                continue
+
+            if finding.get("severity") != "fatal":
+                continue
+
+            correction = str(
+                finding.get("correct_rule") or ""
+            ).strip()
+
+            if (
+                correction
+                and correction not in corrections
+            ):
+                corrections.append(correction)
+
+        if corrections:
+            summary["improvements"] = corrections[:3]
 
     lines = [
         f"채점 완료: {score['total']}/{score['max']}",

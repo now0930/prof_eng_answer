@@ -143,7 +143,32 @@ summary = {
         or parsed.get("model_answer_reference", {}).get("primary_reference", {}).get("topic_id")
     ),
     "model_answer_reference": parsed.get("model_answer_reference"),
-    "logic_check": parsed.get("logic_check_result") or parsed.get("logic_check"),
+    "logic_check": (
+        parsed.get("logic_check_evaluation")
+        or parsed.get("logic_check_result")
+        or parsed.get("logic_check")
+    ),
+    "logic_check_evaluation": (
+        parsed.get("logic_check_evaluation")
+        or parsed.get("logic_check_result")
+        or parsed.get("logic_check")
+    ),
+    "logic_check_topic_id": (
+        parsed.get("logic_check_topic_id")
+        or (
+            parsed.get(
+                "logic_check_evaluation",
+                {},
+            ).get("topic_id")
+            if isinstance(
+                parsed.get(
+                    "logic_check_evaluation"
+                ),
+                dict,
+            )
+            else None
+        )
+    ),
     "difficulty_strategy": parsed.get("difficulty_strategy"),
     "difficulty_ceiling_evaluation": parsed.get("difficulty_ceiling_evaluation"),
     "llm_cap_reconciliation": (

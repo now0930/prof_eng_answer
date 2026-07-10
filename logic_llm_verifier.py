@@ -370,17 +370,34 @@ fatal 판정 조건:
   "verdict": "pass" | "warn" | "fatal",
   "confidence": 0.0,
   "reason": "간단한 한국어 사유",
+  "checks": [
+    {{
+      "rule_id": "fatal condition rule id",
+      "status": "pass" | "major" | "fatal",
+      "asserted": false,
+      "candidate_id": "C1 또는 빈 문자열",
+      "evidence": "답안의 실제 근거 또는 빈 문자열",
+      "reason": "항목별 판정 이유",
+      "correction": "정정 기준",
+      "confidence": 0.0
+    }}
+  ],
   "findings": [
     {{
       "candidate_id": "C1",
+      "rule_id": "fatal condition rule id",
       "severity": "fatal" | "major" | "minor",
       "message": "한국어 오류 설명",
-      "correct_rule": "정답 기준"
+      "correct_rule": "정답 기준",
+      "confidence": 0.0
     }}
   ]
 }}
 
 중요:
+- checks에는 fatal 판정 조건을 각각 한 번씩 모두 포함한다.
+- 해당 오개념을 주장하지 않았더라도 status=pass로 기록한다.
+- findings에는 실제 major 또는 fatal 항목만 포함한다.
 - fatal finding은 candidate_id가 반드시 있어야 한다.
 - candidate_id는 아래 후보 목록의 id 중 하나만 사용한다.
 - kind가 structured_damping_region_table인 후보는 "A => B" 형태의 수험생 주장 요약이다. 이 매핑이 정답 스키마와 직접 충돌하면 우선 검토하라.

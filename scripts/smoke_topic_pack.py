@@ -193,9 +193,16 @@ def _answer_from_model_answer(model_answer: dict[str, Any], question: str) -> st
         lines.append(", ".join(field_points[:20]))
 
     if missing_points:
-        lines.extend(["", "## 5. 주의할 오류"])
-        for idx, item in enumerate(missing_points[:5], start=1):
-            lines.append(f"{idx}. {item}")
+        lines.extend(
+            [
+                "",
+                "## 5. 오류 방지 원칙",
+            ]
+        )
+        lines.append(
+            "핵심 원리를 반대로 단정하지 않고, "
+            "적용 조건과 한계를 함께 확인한다."
+        )
 
     lines.extend([
         "",

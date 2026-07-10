@@ -710,53 +710,42 @@ def _is_close_score(left: Any, right: Any, tolerance: float = 0.011) -> bool:
     return abs(left_value - right_value) <= tolerance
 
 
-def _final_binding_cap(parsed: JsonDict, total: float) -> float | None:
+def _final_binding_cap(
+    parsed: JsonDict,
+    total: float,
+) -> float | None:
+    """Return an actually applied cap that binds the final score.
+
+    A Logic Check fatal finding may recommend a ceiling, but it does
+    not mean that a numeric cap changed the score. Cap wording is valid
+    only when an applied cap equals the final total within rounding
+    tolerance.
     """
-    Return a cap only when it is actually binding at the final score.
+    applied_cap = _applied_upper_cap(
+        parsed
+    )
+    cap_value = _to_float(
+        applied_cap,
+        None,
+    )
+    total_value = _to_float(
+        total,
+        None,
+    )
 
-    A cap rule that was merely triggered, but did not lower the score, must
-    not be displayed as an applied cap.
-    """
-    explicit = parsed.get("explicit_requirement_cap_evaluation")
-    if isinstance(explicit, dict) and explicit.get("applied") is True:
-        cap = _to_float(explicit.get("total_cap"), None)
-        if cap is not None and _is_close_score(total, cap):
-            return cap
+    if (
+        cap_value is None
+        or total_value is None
+    ):
+        return None
 
-    difficulty = parsed.get("difficulty_ceiling_evaluation")
-    if isinstance(difficulty, dict) and difficulty.get("cap_applied") is True:
-        cap = _to_float(
-            difficulty.get("capped_score")
-            or difficulty.get("recommended_cap"),
-            None,
+    if abs(
+        total_value - cap_value
+    ) <= 0.01:
+        return round(
+            cap_value,
+            2,
         )
-        if cap is not None and _is_close_score(total, cap):
-            return cap
-
-    volume = parsed.get("volume_evaluation")
-    if isinstance(volume, dict):
-        cap = _to_float(volume.get("cap"), None)
-        before = _to_float(
-            parsed.get("total_score_before_final_cap"),
-            None,
-        )
-
-        if (
-            cap is not None
-            and before is not None
-            and before > cap
-            and _is_close_score(total, cap)
-        ):
-            return cap
-
-    logic = parsed.get("logic_check_evaluation")
-    if isinstance(logic, dict):
-        fatal = (
-            logic.get("fatal") is True
-            or logic.get("fatal_error_detected") is True
-        )
-        if fatal:
-            return total
 
     return None
 
