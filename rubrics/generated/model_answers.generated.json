@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-10T23:40:53Z-generated-topic-pack-model-answers",
+  "version": "2026-07-11T01:04:02Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -2810,6 +2810,588 @@
         "mechanical resonance"
       ],
       "revision_notes": [],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "state_space_controllability_observability_pole_placement",
+      "title_ko": "상태공간 모델의 제어가능성·관측가능성과 극점배치 설계",
+      "question_type": "CALC_DESIGN",
+      "expected_question_patterns": [
+        "상태공간 모델의 구성과 전달함수와의 관계를 설명하시오.",
+        "주어진 A, B 행렬의 제어가능성을 판정하고 그 의미를 설명하시오.",
+        "주어진 A, C 행렬의 관측가능성을 판정하고 그 의미를 설명하시오.",
+        "PBH test를 이용하여 제어가능성·관측가능성을 판정하시오.",
+        "상태피드백으로 목표 폐루프 극점을 만족하는 K를 설계하시오.",
+        "전상태 관측기의 원리와 observer gain L의 설계 절차를 설명하시오.",
+        "separation principle을 이용한 observer 기반 상태피드백 설계를 설명하시오.",
+        "상태피드백 시스템의 정상상태 오차 개선과 현장 구현 고려사항을 설명하시오."
+      ],
+      "recommended_outline": [
+        {
+          "section": "배경과 상태공간 설계 목적",
+          "intent": "상태공간 모델이 내부상태, 초기조건, MIMO 시스템과 현대제어 설계에 필요한 이유를 제시한다.",
+          "id": "section_1",
+          "section_id": "section_1",
+          "order": 1,
+          "index": 1,
+          "sequence": 1,
+          "title": "배경과 상태공간 설계 목적",
+          "heading": "배경과 상태공간 설계 목적",
+          "name": "배경과 상태공간 설계 목적",
+          "description": "상태공간 모델이 내부상태, 초기조건, MIMO 시스템과 현대제어 설계에 필요한 이유를 제시한다.",
+          "purpose": "상태공간 모델이 내부상태, 초기조건, MIMO 시스템과 현대제어 설계에 필요한 이유를 제시한다.",
+          "summary": "상태공간 모델이 내부상태, 초기조건, MIMO 시스템과 현대제어 설계에 필요한 이유를 제시한다.",
+          "content": "상태공간 모델이 내부상태, 초기조건, MIMO 시스템과 현대제어 설계에 필요한 이유를 제시한다.",
+          "key_points": [
+            "내부상태와 초기조건",
+            "MIMO 및 현대제어 설계"
+          ],
+          "required_points": [
+            "내부상태와 초기조건",
+            "MIMO 및 현대제어 설계"
+          ],
+          "core_points": [
+            "내부상태와 초기조건",
+            "MIMO 및 현대제어 설계"
+          ],
+          "items": [
+            "내부상태와 초기조건",
+            "MIMO 및 현대제어 설계"
+          ],
+          "affected_layers": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "section": "모델과 전달함수 관계",
+          "intent": "x_dot=Ax+Bu, y=Cx+Du와 G(s)=C(sI-A)^(-1)B+D 및 최소 realization 조건을 설명한다.",
+          "id": "section_2",
+          "section_id": "section_2",
+          "order": 2,
+          "index": 2,
+          "sequence": 2,
+          "title": "모델과 전달함수 관계",
+          "heading": "모델과 전달함수 관계",
+          "name": "모델과 전달함수 관계",
+          "description": "x_dot=Ax+Bu, y=Cx+Du와 G(s)=C(sI-A)^(-1)B+D 및 최소 realization 조건을 설명한다.",
+          "purpose": "x_dot=Ax+Bu, y=Cx+Du와 G(s)=C(sI-A)^(-1)B+D 및 최소 realization 조건을 설명한다.",
+          "summary": "x_dot=Ax+Bu, y=Cx+Du와 G(s)=C(sI-A)^(-1)B+D 및 최소 realization 조건을 설명한다.",
+          "content": "x_dot=Ax+Bu, y=Cx+Du와 G(s)=C(sI-A)^(-1)B+D 및 최소 realization 조건을 설명한다.",
+          "key_points": [
+            "상태·입력·출력 및 행렬 차원",
+            "전달함수와 realization",
+            "숨은 내부 모드"
+          ],
+          "required_points": [
+            "상태·입력·출력 및 행렬 차원",
+            "전달함수와 realization",
+            "숨은 내부 모드"
+          ],
+          "core_points": [
+            "상태·입력·출력 및 행렬 차원",
+            "전달함수와 realization",
+            "숨은 내부 모드"
+          ],
+          "items": [
+            "상태·입력·출력 및 행렬 차원",
+            "전달함수와 realization",
+            "숨은 내부 모드"
+          ],
+          "affected_layers": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "section": "제어가능성과 stabilizability",
+          "intent": "controllability matrix, rank 조건, PBH test와 stabilizability를 계산하고 구분한다.",
+          "id": "section_3",
+          "section_id": "section_3",
+          "order": 3,
+          "index": 3,
+          "sequence": 3,
+          "title": "제어가능성과 stabilizability",
+          "heading": "제어가능성과 stabilizability",
+          "name": "제어가능성과 stabilizability",
+          "description": "controllability matrix, rank 조건, PBH test와 stabilizability를 계산하고 구분한다.",
+          "purpose": "controllability matrix, rank 조건, PBH test와 stabilizability를 계산하고 구분한다.",
+          "summary": "controllability matrix, rank 조건, PBH test와 stabilizability를 계산하고 구분한다.",
+          "content": "controllability matrix, rank 조건, PBH test와 stabilizability를 계산하고 구분한다.",
+          "key_points": [
+            "C_c=[B,AB,...]",
+            "rank(C_c)=n",
+            "PBH와 불안정 모드"
+          ],
+          "required_points": [
+            "C_c=[B,AB,...]",
+            "rank(C_c)=n",
+            "PBH와 불안정 모드"
+          ],
+          "core_points": [
+            "C_c=[B,AB,...]",
+            "rank(C_c)=n",
+            "PBH와 불안정 모드"
+          ],
+          "items": [
+            "C_c=[B,AB,...]",
+            "rank(C_c)=n",
+            "PBH와 불안정 모드"
+          ],
+          "affected_layers": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "section": "관측가능성과 detectability",
+          "intent": "observability matrix, rank 조건, PBH test와 detectability를 계산하고 구분한다.",
+          "id": "section_4",
+          "section_id": "section_4",
+          "order": 4,
+          "index": 4,
+          "sequence": 4,
+          "title": "관측가능성과 detectability",
+          "heading": "관측가능성과 detectability",
+          "name": "관측가능성과 detectability",
+          "description": "observability matrix, rank 조건, PBH test와 detectability를 계산하고 구분한다.",
+          "purpose": "observability matrix, rank 조건, PBH test와 detectability를 계산하고 구분한다.",
+          "summary": "observability matrix, rank 조건, PBH test와 detectability를 계산하고 구분한다.",
+          "content": "observability matrix, rank 조건, PBH test와 detectability를 계산하고 구분한다.",
+          "key_points": [
+            "O=[C;CA;...]",
+            "rank(O)=n",
+            "PBH와 불안정 모드"
+          ],
+          "required_points": [
+            "O=[C;CA;...]",
+            "rank(O)=n",
+            "PBH와 불안정 모드"
+          ],
+          "core_points": [
+            "O=[C;CA;...]",
+            "rank(O)=n",
+            "PBH와 불안정 모드"
+          ],
+          "items": [
+            "O=[C;CA;...]",
+            "rank(O)=n",
+            "PBH와 불안정 모드"
+          ],
+          "affected_layers": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "section": "상태피드백과 극점배치",
+          "intent": "u=-Kx+Nr, A-BK, 목표 극점 선정과 Ackermann 또는 수치 pole placement 절차를 설명한다.",
+          "id": "section_5",
+          "section_id": "section_5",
+          "order": 5,
+          "index": 5,
+          "sequence": 5,
+          "title": "상태피드백과 극점배치",
+          "heading": "상태피드백과 극점배치",
+          "name": "상태피드백과 극점배치",
+          "description": "u=-Kx+Nr, A-BK, 목표 극점 선정과 Ackermann 또는 수치 pole placement 절차를 설명한다.",
+          "purpose": "u=-Kx+Nr, A-BK, 목표 극점 선정과 Ackermann 또는 수치 pole placement 절차를 설명한다.",
+          "summary": "u=-Kx+Nr, A-BK, 목표 극점 선정과 Ackermann 또는 수치 pole placement 절차를 설명한다.",
+          "content": "u=-Kx+Nr, A-BK, 목표 극점 선정과 Ackermann 또는 수치 pole placement 절차를 설명한다.",
+          "key_points": [
+            "목표 특성다항식",
+            "eig(A-BK) 검증",
+            "control effort와 포화"
+          ],
+          "required_points": [
+            "목표 특성다항식",
+            "eig(A-BK) 검증",
+            "control effort와 포화"
+          ],
+          "core_points": [
+            "목표 특성다항식",
+            "eig(A-BK) 검증",
+            "control effort와 포화"
+          ],
+          "items": [
+            "목표 특성다항식",
+            "eig(A-BK) 검증",
+            "control effort와 포화"
+          ],
+          "affected_layers": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "section": "Observer와 separation principle",
+          "intent": "e_dot=(A-LC)e, observer pole 선정, observer 기반 상태피드백과 separation principle의 조건을 설명한다.",
+          "id": "section_6",
+          "section_id": "section_6",
+          "order": 6,
+          "index": 6,
+          "sequence": 6,
+          "title": "Observer와 separation principle",
+          "heading": "Observer와 separation principle",
+          "name": "Observer와 separation principle",
+          "description": "e_dot=(A-LC)e, observer pole 선정, observer 기반 상태피드백과 separation principle의 조건을 설명한다.",
+          "purpose": "e_dot=(A-LC)e, observer pole 선정, observer 기반 상태피드백과 separation principle의 조건을 설명한다.",
+          "summary": "e_dot=(A-LC)e, observer pole 선정, observer 기반 상태피드백과 separation principle의 조건을 설명한다.",
+          "content": "e_dot=(A-LC)e, observer pole 선정, observer 기반 상태피드백과 separation principle의 조건을 설명한다.",
+          "key_points": [
+            "Luenberger observer",
+            "A-LC",
+            "controller·observer 독립 설계"
+          ],
+          "required_points": [
+            "Luenberger observer",
+            "A-LC",
+            "controller·observer 독립 설계"
+          ],
+          "core_points": [
+            "Luenberger observer",
+            "A-LC",
+            "controller·observer 독립 설계"
+          ],
+          "items": [
+            "Luenberger observer",
+            "A-LC",
+            "controller·observer 독립 설계"
+          ],
+          "affected_layers": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "section": "기준입력 추종과 적분 확대",
+          "intent": "reference prefilter, integral augmentation, 정상상태 오차와 지속 외란 억제의 차이를 설명한다.",
+          "id": "section_7",
+          "section_id": "section_7",
+          "order": 7,
+          "index": 7,
+          "sequence": 7,
+          "title": "기준입력 추종과 적분 확대",
+          "heading": "기준입력 추종과 적분 확대",
+          "name": "기준입력 추종과 적분 확대",
+          "description": "reference prefilter, integral augmentation, 정상상태 오차와 지속 외란 억제의 차이를 설명한다.",
+          "purpose": "reference prefilter, integral augmentation, 정상상태 오차와 지속 외란 억제의 차이를 설명한다.",
+          "summary": "reference prefilter, integral augmentation, 정상상태 오차와 지속 외란 억제의 차이를 설명한다.",
+          "content": "reference prefilter, integral augmentation, 정상상태 오차와 지속 외란 억제의 차이를 설명한다.",
+          "key_points": [
+            "reference gain",
+            "error integrator",
+            "확대 시스템 controllability"
+          ],
+          "required_points": [
+            "reference gain",
+            "error integrator",
+            "확대 시스템 controllability"
+          ],
+          "core_points": [
+            "reference gain",
+            "error integrator",
+            "확대 시스템 controllability"
+          ],
+          "items": [
+            "reference gain",
+            "error integrator",
+            "확대 시스템 controllability"
+          ],
+          "affected_layers": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "section": "현장 구현과 검증",
+          "intent": "포화, 잡음, observer peaking, sampling, state scaling, 수치조건, 모델 오차와 단계적 적용을 설명한다.",
+          "id": "section_8",
+          "section_id": "section_8",
+          "order": 8,
+          "index": 8,
+          "sequence": 8,
+          "title": "현장 구현과 검증",
+          "heading": "현장 구현과 검증",
+          "name": "현장 구현과 검증",
+          "description": "포화, 잡음, observer peaking, sampling, state scaling, 수치조건, 모델 오차와 단계적 적용을 설명한다.",
+          "purpose": "포화, 잡음, observer peaking, sampling, state scaling, 수치조건, 모델 오차와 단계적 적용을 설명한다.",
+          "summary": "포화, 잡음, observer peaking, sampling, state scaling, 수치조건, 모델 오차와 단계적 적용을 설명한다.",
+          "content": "포화, 잡음, observer peaking, sampling, state scaling, 수치조건, 모델 오차와 단계적 적용을 설명한다.",
+          "key_points": [
+            "actuator saturation과 rate limit",
+            "sensor noise와 sampling",
+            "simulation·HIL·단계적 적용"
+          ],
+          "required_points": [
+            "actuator saturation과 rate limit",
+            "sensor noise와 sampling",
+            "simulation·HIL·단계적 적용"
+          ],
+          "core_points": [
+            "actuator saturation과 rate limit",
+            "sensor noise와 sampling",
+            "simulation·HIL·단계적 적용"
+          ],
+          "items": [
+            "actuator saturation과 rate limit",
+            "sensor noise와 sampling",
+            "simulation·HIL·단계적 적용"
+          ],
+          "affected_layers": [
+            "A",
+            "B",
+            "C",
+            "D",
+            "E"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "x_dot=Ax+Bu, y=Cx+Du와 상태·입력·출력 및 행렬 차원을 정확히 설명한다.",
+        "전달함수, 최소 realization과 숨은 내부 모드의 관계를 설명한다.",
+        "controllability matrix와 PBH test를 계산하고 stabilizability와 구분한다.",
+        "observability matrix와 PBH test를 계산하고 detectability와 구분한다.",
+        "목표 사양을 폐루프 극점으로 변환하고 eig(A-BK)를 재검증한다.",
+        "e_dot=(A-LC)e를 설명하고 observer 속도와 잡음 trade-off를 제시한다.",
+        "상태피드백만으로 정상상태 오차가 보장되지 않음을 설명하고 보상 방법을 제시한다.",
+        "포화, control effort, sampling, scaling, 모델 오차와 현장 검증을 연결한다."
+      ],
+      "common_missing_points": [
+        "상태·입력·출력과 A·B·C·D 행렬 차원을 누락함.",
+        "G(s)=C(sI-A)^(-1)B+D의 영 초기조건을 누락함.",
+        "최소 realization과 숨은 내부 모드를 누락함.",
+        "controllability matrix의 물리적 의미를 설명하지 않음.",
+        "observability matrix의 초기상태 복원 의미를 설명하지 않음.",
+        "stabilizability와 controllability를 구분하지 않음.",
+        "detectability와 observability를 구분하지 않음.",
+        "상태피드백 부호 규약과 A-BK를 누락함.",
+        "제어 불가능한 모드는 이동하지 않는다는 점을 누락함.",
+        "observer error dynamics를 누락함.",
+        "observer pole을 무조건 매우 빠르게 배치함.",
+        "separation principle의 적용 조건을 누락함.",
+        "정상상태 오차 보상 방법을 누락함.",
+        "actuator saturation과 control effort를 누락함.",
+        "sensor noise와 observer peaking을 누락함.",
+        "sampling, state scaling과 numerical conditioning을 누락함.",
+        "simulation 및 단계적 현장 적용을 누락함."
+      ],
+      "routing_aliases": [
+        "상태공간",
+        "상태 공간",
+        "state space",
+        "state-space",
+        "상태방정식",
+        "state equation",
+        "A B C D matrix",
+        "제어가능성",
+        "controllability",
+        "가제어성",
+        "관측가능성",
+        "observability",
+        "가관측성",
+        "stabilizability",
+        "안정화가능성",
+        "detectability",
+        "검출가능성",
+        "PBH test",
+        "Hautus test",
+        "제어가능성 행렬",
+        "controllability matrix",
+        "관측가능성 행렬",
+        "observability matrix",
+        "상태피드백",
+        "state feedback",
+        "극점배치",
+        "pole placement",
+        "pole assignment",
+        "Ackermann",
+        "아커만",
+        "Luenberger observer",
+        "상태관측기",
+        "state observer",
+        "state estimator",
+        "observer gain",
+        "separation principle",
+        "분리원리",
+        "minimal realization",
+        "최소 realization",
+        "Kalman decomposition",
+        "적분 확대",
+        "integral augmentation",
+        "reference prefilter"
+      ],
+      "routing_field_points": [
+        "x_dot=Ax+Bu와 y=Cx+Du의 행렬 차원을 확인한다.",
+        "G(s)=C(sI-A)^(-1)B+D와 최소 realization을 확인한다.",
+        "controllability matrix의 rank를 계산한다.",
+        "observability matrix의 rank를 계산한다.",
+        "PBH test로 고유모드별 제어·관측 가능성을 확인한다.",
+        "stabilizability와 detectability를 구분한다.",
+        "A-BK의 목표 고유값을 확인한다.",
+        "Ackermann 또는 수치 pole placement를 적용한다.",
+        "A-LC의 observer pole을 확인한다.",
+        "controller pole과 observer pole을 독립적으로 설계한다.",
+        "prefilter 또는 integral augmentation으로 추종오차를 개선한다.",
+        "actuator saturation과 control effort를 확인한다.",
+        "observer noise와 peaking을 확인한다.",
+        "sampling period와 계산지연을 확인한다.",
+        "state scaling과 condition number를 확인한다.",
+        "모델 오차와 운전점 변화를 검증한다.",
+        "simulation, HIL 및 단계적 현장 적용을 수행한다."
+      ],
+      "revision_notes": [
+        "사람이 검토한 상태공간 요구사항 Markdown을 기준으로 직접 작성함.",
+        "CALC_DESIGN형 rank 판정, 극점배치, observer와 추종 설계를 포함함.",
+        "모든 답안 필드를 상태공간 제어 전용 내용으로 작성함."
+      ],
+      "id": "state_space_controllability_observability_pole_placement_COMPARE_v1",
+      "title": "상태공간 모델의 제어가능성·관측가능성과 극점배치 설계",
+      "question_examples": [
+        "상태공간 모델의 구성과 전달함수와의 관계를 설명하시오.",
+        "주어진 A, B 행렬의 제어가능성을 판정하고 그 의미를 설명하시오.",
+        "주어진 A, C 행렬의 관측가능성을 판정하고 그 의미를 설명하시오.",
+        "PBH test를 이용하여 제어가능성·관측가능성을 판정하시오.",
+        "상태피드백으로 목표 폐루프 극점을 만족하는 K를 설계하시오.",
+        "전상태 관측기의 원리와 observer gain L의 설계 절차를 설명하시오.",
+        "separation principle을 이용한 observer 기반 상태피드백 설계를 설명하시오.",
+        "상태피드백 시스템의 정상상태 오차 개선과 현장 구현 고려사항을 설명하시오."
+      ],
+      "topic_aliases": [
+        "상태공간",
+        "상태 공간",
+        "state space",
+        "state-space",
+        "상태방정식",
+        "state equation",
+        "A B C D matrix",
+        "제어가능성",
+        "controllability",
+        "가제어성",
+        "관측가능성",
+        "observability",
+        "가관측성",
+        "stabilizability",
+        "안정화가능성",
+        "detectability",
+        "검출가능성",
+        "PBH test",
+        "Hautus test",
+        "제어가능성 행렬",
+        "controllability matrix",
+        "관측가능성 행렬",
+        "observability matrix",
+        "상태피드백",
+        "state feedback",
+        "극점배치",
+        "pole placement",
+        "pole assignment",
+        "Ackermann",
+        "아커만",
+        "Luenberger observer",
+        "상태관측기",
+        "state observer",
+        "state estimator",
+        "observer gain",
+        "separation principle",
+        "분리원리",
+        "minimal realization",
+        "최소 realization",
+        "Kalman decomposition",
+        "적분 확대",
+        "integral augmentation",
+        "reference prefilter"
+      ],
+      "expected_structure": [
+        "배경과 상태공간 설계 목적",
+        "모델과 전달함수 관계",
+        "제어가능성과 stabilizability",
+        "관측가능성과 detectability",
+        "상태피드백과 극점배치",
+        "Observer와 separation principle",
+        "기준입력 추종과 적분 확대",
+        "현장 구현과 검증"
+      ],
+      "model_answer_outline": [
+        "상태공간 모델이 내부상태, 초기조건, MIMO 시스템과 현대제어 설계에 필요한 이유를 제시한다.",
+        "x_dot=Ax+Bu, y=Cx+Du와 G(s)=C(sI-A)^(-1)B+D 및 최소 realization 조건을 설명한다.",
+        "controllability matrix, rank 조건, PBH test와 stabilizability를 계산하고 구분한다.",
+        "observability matrix, rank 조건, PBH test와 detectability를 계산하고 구분한다.",
+        "u=-Kx+Nr, A-BK, 목표 극점 선정과 Ackermann 또는 수치 pole placement 절차를 설명한다.",
+        "e_dot=(A-LC)e, observer pole 선정, observer 기반 상태피드백과 separation principle의 조건을 설명한다.",
+        "reference prefilter, integral augmentation, 정상상태 오차와 지속 외란 억제의 차이를 설명한다.",
+        "포화, 잡음, observer peaking, sampling, state scaling, 수치조건, 모델 오차와 단계적 적용을 설명한다."
+      ],
+      "high_score_features": [
+        "x_dot=Ax+Bu, y=Cx+Du와 상태·입력·출력 및 행렬 차원을 정확히 설명한다.",
+        "전달함수, 최소 realization과 숨은 내부 모드의 관계를 설명한다.",
+        "controllability matrix와 PBH test를 계산하고 stabilizability와 구분한다.",
+        "observability matrix와 PBH test를 계산하고 detectability와 구분한다.",
+        "목표 사양을 폐루프 극점으로 변환하고 eig(A-BK)를 재검증한다.",
+        "e_dot=(A-LC)e를 설명하고 observer 속도와 잡음 trade-off를 제시한다.",
+        "상태피드백만으로 정상상태 오차가 보장되지 않음을 설명하고 보상 방법을 제시한다.",
+        "포화, control effort, sampling, scaling, 모델 오차와 현장 검증을 연결한다."
+      ],
+      "low_score_patterns": [
+        "상태·입력·출력과 A·B·C·D 행렬 차원을 누락함.",
+        "G(s)=C(sI-A)^(-1)B+D의 영 초기조건을 누락함.",
+        "최소 realization과 숨은 내부 모드를 누락함.",
+        "controllability matrix의 물리적 의미를 설명하지 않음.",
+        "observability matrix의 초기상태 복원 의미를 설명하지 않음.",
+        "stabilizability와 controllability를 구분하지 않음.",
+        "detectability와 observability를 구분하지 않음.",
+        "상태피드백 부호 규약과 A-BK를 누락함.",
+        "제어 불가능한 모드는 이동하지 않는다는 점을 누락함.",
+        "observer error dynamics를 누락함.",
+        "observer pole을 무조건 매우 빠르게 배치함.",
+        "separation principle의 적용 조건을 누락함.",
+        "정상상태 오차 보상 방법을 누락함.",
+        "actuator saturation과 control effort를 누락함.",
+        "sensor noise와 observer peaking을 누락함.",
+        "sampling, state scaling과 numerical conditioning을 누락함.",
+        "simulation 및 단계적 현장 적용을 누락함."
+      ],
+      "field_connection_points": [
+        "x_dot=Ax+Bu와 y=Cx+Du의 행렬 차원을 확인한다.",
+        "G(s)=C(sI-A)^(-1)B+D와 최소 realization을 확인한다.",
+        "controllability matrix의 rank를 계산한다.",
+        "observability matrix의 rank를 계산한다.",
+        "PBH test로 고유모드별 제어·관측 가능성을 확인한다.",
+        "stabilizability와 detectability를 구분한다.",
+        "A-BK의 목표 고유값을 확인한다.",
+        "Ackermann 또는 수치 pole placement를 적용한다.",
+        "A-LC의 observer pole을 확인한다.",
+        "controller pole과 observer pole을 독립적으로 설계한다.",
+        "prefilter 또는 integral augmentation으로 추종오차를 개선한다.",
+        "actuator saturation과 control effort를 확인한다.",
+        "observer noise와 peaking을 확인한다.",
+        "sampling period와 계산지연을 확인한다.",
+        "state scaling과 condition number를 확인한다.",
+        "모델 오차와 운전점 변화를 검증한다.",
+        "simulation, HIL 및 단계적 현장 적용을 수행한다."
+      ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },
     {

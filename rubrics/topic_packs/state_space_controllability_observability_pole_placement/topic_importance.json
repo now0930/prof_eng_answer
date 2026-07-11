@@ -1,0 +1,22 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "state_space_controllability_observability_pole_placement",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "CALC_DESIGN",
+  "high_band_unlock_conditions": [
+    "상태방정식과 출력방정식 및 행렬 차원을 정확히 제시한다.",
+    "전달함수와 최소 realization 및 숨은 내부 모드의 관계를 설명한다.",
+    "controllability matrix와 PBH test로 제어가능성과 stabilizability를 판정한다.",
+    "observability matrix와 PBH test로 관측가능성과 detectability를 판정한다.",
+    "목표 사양으로 controller pole을 정하고 K를 계산·재검증한다.",
+    "observer error dynamics와 separation principle을 조건과 함께 설명한다.",
+    "prefilter와 integral augmentation을 추종·외란 억제 목적에 맞게 구분한다.",
+    "포화, control effort, 잡음, peaking, sampling, scaling과 모델 오차를 검증한다."
+  ],
+  "note": "상태공간 설계는 rank 판정뿐 아니라 극점배치·observer·추종 설계와 현장 제약을 논리적으로 연결해야 고득점이 가능하다.",
+  "revision_notes": [
+    "THEORY_CORE와 CORE_MUST_PREPARE로 분류함.",
+    "고득점 unlock은 rank·극점배치·observer·추종·현장 검증을 모두 요구함."
+  ]
+}

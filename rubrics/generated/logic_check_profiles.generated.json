@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-10T23:40:53Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-11T01:04:02Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -1045,6 +1045,126 @@
         "major_error_cap": 17.5,
         "mode": "warn"
       }
+    },
+    {
+      "topic_id": "state_space_controllability_observability_pole_placement",
+      "display_name": "상태공간 모델의 제어가능성·관측가능성과 극점배치 설계",
+      "difficulty": "THEORY_CORE",
+      "cap_policy": {
+        "fatal_recommended_ceiling": 10.0,
+        "fatal_confidence_threshold": 0.75
+      },
+      "candidate_extraction": {
+        "max_candidates": 20,
+        "nearby_window": 2,
+        "key_terms": [
+          "state space",
+          "상태공간",
+          "state equation",
+          "상태방정식",
+          "controllability",
+          "제어가능성",
+          "controllability matrix",
+          "observability",
+          "관측가능성",
+          "observability matrix",
+          "PBH",
+          "Hautus",
+          "stabilizability",
+          "detectability",
+          "state feedback",
+          "상태피드백",
+          "pole placement",
+          "극점배치",
+          "Ackermann",
+          "Luenberger observer",
+          "state observer",
+          "observer gain",
+          "separation principle",
+          "minimal realization",
+          "Kalman decomposition",
+          "reference prefilter",
+          "integral augmentation",
+          "actuator saturation",
+          "observer peaking",
+          "numerical conditioning",
+          "state scaling",
+          "sampling period",
+          "model uncertainty",
+          "control effort"
+        ],
+        "rules": []
+      },
+      "truth_schema": [
+        "[state_space_model_and_dimensions] 연속시간 LTI 시스템은 x_dot=Ax+Bu, y=Cx+Du로 표현하며 상태·입력·출력과 A·B·C·D 행렬의 차원이 일치해야 한다.",
+        "[transfer_function_realization_relation] 영 초기조건에서 전달함수 행렬은 G(s)=C(sI-A)^(-1)B+D이며 동일한 전달함수에 여러 상태공간 realization이 존재할 수 있다.",
+        "[eigenvalue_pole_minimal_realization] A의 고유값은 내부 모드를 나타내며 최소 realization에서는 전달함수 극점과 일치하지만, 비최소 realization에는 전달함수에서 보이지 않는 내부 모드가 존재할 수 있다.",
+        "[controllability_matrix_rank] 제어가능성 행렬 C_c=[B,AB,A^2B,...,A^(n-1)B]의 rank가 n이면 유한시간 입력으로 임의의 초기상태에서 임의의 최종상태로 이동할 수 있다.",
+        "[pbh_controllability_stabilizability] PBH test는 각 고유값 λ에 대해 rank[λI-A,B]=n인지 확인하며, 완전 제어가능하지 않더라도 모든 불안정 모드가 제어가능하면 stabilizable하다.",
+        "[observability_matrix_rank] 관측가능성 행렬 O=[C;CA;CA^2;...;CA^(n-1)]의 rank가 n이면 유한시간 입력·출력 정보로 초기상태를 유일하게 복원할 수 있다.",
+        "[pbh_observability_detectability] PBH 관측가능성 test는 각 고유값 λ에 대해 rank[[λI-A];C]=n인지 확인하며, 모든 불안정 모드가 관측가능하면 detectable하다.",
+        "[state_feedback_closed_loop] u=-Kx+Nr를 적용하면 폐루프 상태행렬은 A-BK가 되고 폐루프 극점은 A-BK의 고유값으로 결정된다.",
+        "[pole_placement_conditions] 완전 제어가능한 시스템은 상태피드백으로 폐루프 극점을 임의 배치할 수 있으며 제어 불가능한 모드는 K로 이동시킬 수 없다.",
+        "[ackermann_and_numerical_limits] SISO 완전 제어가능 시스템에서 Ackermann 공식으로 K를 계산할 수 있지만 고차 또는 ill-conditioned 시스템에서는 수치적으로 민감할 수 있다.",
+        "[observer_error_dynamics] Luenberger observer의 관측오차 e=x-x_hat은 e_dot=(A-LC)e를 만족하며 관측기 극점은 A-LC의 고유값이다.",
+        "[separation_principle_conditions] LTI 시스템에서 controller와 observer가 각각 설계 가능하면 observer 기반 상태피드백의 극점은 A-BK와 A-LC의 극점 집합으로 분리된다.",
+        "[reference_tracking_integral_action] 상태피드백은 폐루프 극점을 변경하지만 정상상태 추종오차 0을 자동 보장하지 않으며 reference prefilter나 integral augmentation이 필요할 수 있다.",
+        "[implementation_tradeoffs_validation] 빠른 controller·observer pole은 응답속도를 높일 수 있지만 control effort, 포화, 잡음, peaking, sampling 및 모델 오차 민감도를 키울 수 있으므로 단계적 검증이 필요하다."
+      ],
+      "fatal_conditions": [
+        "[controllability_equals_stability] 제어가능성과 안정성은 동일하며 제어가능하면 open-loop 시스템은 반드시 안정하다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: controllability는 상태 이동 가능성이고 stability는 자유응답의 수렴 특성이므로 서로 다른 속성이다.",
+        "[all_realizations_controllable_observable] 상태공간으로 표현된 모든 realization은 자동으로 제어가능하고 관측가능하다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 각 realization의 controllability와 observability를 rank 또는 PBH test로 별도 확인해야 한다.",
+        "[uncontrollable_poles_arbitrary_placement] K를 선택하면 제어 불가능한 모드를 포함한 모든 고유값을 항상 원하는 위치로 이동할 수 있다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 완전 제어가능해야 임의 극점배치가 가능하며 제어 불가능한 모드의 고유값은 K로 이동할 수 없다.",
+        "[unobservable_states_exactly_reconstructable] 관측 불가능한 상태도 observer gain L을 크게 하면 출력만으로 정확히 복원할 수 있다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 관측 불가능한 불안정 모드는 observer로 복원·수렴시킬 수 없으며 detectability가 필요하다.",
+        "[a_eigenvalues_always_transfer_poles] 모든 realization에서 A의 모든 고유값은 항상 전달함수 극점과 정확히 일치한다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 최소 realization에서 일치하며 비최소 realization에는 pole-zero cancellation이나 숨은 내부 모드가 존재할 수 있다.",
+        "[state_feedback_always_zero_steady_state_error] u=-Kx만 적용하면 모든 기준입력과 지속 외란에 대해 정상상태 오차가 자동으로 0이 된다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: reference prefilter, integral augmentation 또는 disturbance model이 추가로 필요할 수 있다.",
+        "[observer_poles_must_equal_controller_poles] separation principle 때문에 observer pole과 controller pole은 반드시 같아야 한다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: K와 L은 독립 설계할 수 있으며 observer 속도는 잡음, peaking, sampling과 모델 오차를 고려해 정한다.",
+        "[separation_principle_unconditional] observer 기반 상태피드백의 독립 설계는 비선형, 포화, 시간변화 및 제약 시스템에서도 조건 없이 성립한다.라고 명시적으로 주장하면 fatal이다. 올바른 규칙: 기본 separation principle은 LTI 모델과 stabilizability·detectability 조건에서 적용하며 비선형성과 포화는 추가 검토가 필요하다."
+      ],
+      "safe_conditions": [
+        "dx/dt=Ax+Bu와 x_dot=Ax+Bu는 동등한 표기로 인정한다.",
+        "controllability matrix와 observability matrix에 다른 기호를 사용해도 구성과 rank가 맞으면 인정한다.",
+        "PBH matrix의 부호나 열 배치가 수학적으로 동등하면 인정한다.",
+        "u=Kx 부호 규약을 사용해도 폐루프 상태행렬을 일관되게 유도하면 인정한다.",
+        "Ackermann 대신 place, canonical form 또는 Schur 기반 pole placement를 사용해도 인정한다.",
+        "observer를 state estimator 또는 Luenberger estimator로 표현해도 인정한다.",
+        "reference gain 또는 feedforward gain을 prefilter 의미로 사용하면 인정한다.",
+        "수치 rank를 singular value와 tolerance로 판정하는 설명을 인정한다."
+      ],
+      "output_contract": {
+        "json_only": true,
+        "required_fields": [
+          "verdict",
+          "confidence",
+          "reason",
+          "checks",
+          "findings"
+        ],
+        "verdict_values": [
+          "pass",
+          "warn",
+          "fatal"
+        ]
+      },
+      "major_checks": [],
+      "feedback_templates": {
+        "core_theory_positive": "상태공간 모델, rank 조건, 극점배치와 observer 설계의 핵심 이론이 정답과 일치한다.",
+        "core_theory_major": "핵심 이론의 직접적인 반대 주장은 없지만 최소 realization, stabilizability·detectability 또는 구현 trade-off를 보강해야 한다.",
+        "core_theory_fatal": "답안이 제어가능성·관측가능성·극점배치 또는 observer 설계의 핵심 원리와 직접 충돌하는 주장을 실제 정답으로 제시했다."
+      },
+      "next_practice_points": [
+        "controllability·observability rank 조건과 PBH test를 함께 연습한다.",
+        "stabilizability·detectability를 완전 rank 조건과 구분한다.",
+        "A-BK와 A-LC의 목표 극점 및 separation principle을 설명한다.",
+        "prefilter·integral augmentation과 포화·잡음·sampling 제약을 검증한다."
+      ],
+      "false_positive_cautions": [
+        "일반 단어인 상태, 행렬, 극점, 안정성 또는 설계만으로 Topic을 확정하지 않는다.",
+        "rank 계산의 단순 누락은 직접적인 반대 주장이 없는 한 fatal이 아니다.",
+        "Ackermann 공식을 사용하지 않았다는 이유만으로 오류 처리하지 않는다.",
+        "u=Kx와 u=-Kx의 부호 convention이 일관되면 허용한다.",
+        "observer pole을 controller pole보다 빠르게 둔다는 조건부 설계 표현은 허용한다."
+      ]
     },
     {
       "topic_id": "temperature_measurement_error_heat_transfer",
