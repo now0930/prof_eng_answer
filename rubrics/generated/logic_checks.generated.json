@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T03:29:43Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-11T12:36:05Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -1471,6 +1471,34 @@
         "fatal_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 충돌하므로 현장 적용 주장을 강하게 신뢰하지 않는다.",
         "pass_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 직접 충돌하지 않으므로 현장 적용 주장을 이론적으로 신뢰할 수 있다."
       }
+    },
+    {
+      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
+      "enabled": false,
+      "topic_name": "상태피드백 기준입력 추종·프리필터·적분보상 설계",
+      "question_type": "CALC_DESIGN",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "상태피드백 기준입력 추종",
+        "상태 피드백 추종",
+        "state feedback reference tracking",
+        "state feedback servo",
+        "정상상태 프리필터",
+        "reference prefilter",
+        "Nbar",
+        "N_r",
+        "적분상태 피드백",
+        "integral state feedback",
+        "integral servo",
+        "observer-based servo",
+        "상태공간 서보 제어",
+        "정상상태 오차 보상"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "state_space_controllability_observability_pole_placement",

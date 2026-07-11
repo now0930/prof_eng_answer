@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T03:29:43Z-generated-topic-pack-model-answers",
+  "version": "2026-07-11T12:36:05Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -3066,6 +3066,262 @@
         "mechanical resonance"
       ],
       "revision_notes": [],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
+      "title_ko": "상태피드백 기준입력 추종·프리필터·적분보상 설계",
+      "question_type": "CALC_DESIGN",
+      "expected_question_patterns": [
+        "상태피드백 제어에서 기준입력 추종과 정상상태 오차 보상 방법을 설명하시오.",
+        "상태피드백 프리필터 N_r을 정상상태 방정식으로 유도하고 적용조건을 설명하시오.",
+        "적분상태를 포함한 상태공간 서보시스템의 구성과 설계조건을 설명하시오.",
+        "프리필터와 적분보상의 차이, 장단점과 적용방법을 비교하시오.",
+        "관측기 기반 상태피드백 추종제어에서 포화와 anti-windup을 포함한 검증항목을 설명하시오."
+      ],
+      "recommended_outline": [
+        {
+          "section": "설계 문제와 추종 요구조건",
+          "intent": "폐루프 안정화, 과도응답, 정상상태 추종, 외란 제거와 입력 제한을 서로 구분하여 설계 목표를 정의한다.",
+          "anchor_refs": [
+            "state_tracking_design_objective",
+            "state_tracking_pole_placement_tracking_distinction"
+          ]
+        },
+        {
+          "section": "상태피드백과 폐루프 동특성",
+          "intent": "u=-Kx+N_r r과 A-BK를 제시하고 K와 N_r의 역할을 구분한다.",
+          "anchor_refs": [
+            "state_tracking_feedback_law_closed_loop"
+          ]
+        },
+        {
+          "section": "정상상태 프리필터 설계",
+          "intent": "정상상태 방정식에서 N_r을 유도하고 존재조건, 모델 의존성과 MIMO·D≠0 조건의 한계를 설명한다.",
+          "anchor_refs": [
+            "state_tracking_prefilter_steady_state_derivation",
+            "state_tracking_prefilter_existence_model_dependence"
+          ]
+        },
+        {
+          "section": "적분상태와 내부모델 원리",
+          "intent": "출력오차 적분상태를 추가하고 상수 기준입력과 상수 외란의 정상상태 오차를 제거하는 원리를 설명한다.",
+          "anchor_refs": [
+            "state_tracking_integral_internal_model_principle",
+            "state_tracking_augmented_system_formulation"
+          ]
+        },
+        {
+          "section": "확대시스템 설계 가능성",
+          "intent": "확대시스템의 가제어성·안정화 가능성과 원점 불변영점 조건을 검증한다.",
+          "anchor_refs": [
+            "state_tracking_augmented_controllability_stabilizability"
+          ]
+        },
+        {
+          "section": "프리필터와 적분보상의 비교",
+          "intent": "feedforward와 feedback의 역할을 구분하고 기준입력 추종, 외란 제거와 결합 사용을 설명한다.",
+          "anchor_refs": [
+            "state_tracking_prefilter_integral_role_separation",
+            "state_tracking_disturbance_reference_performance"
+          ]
+        },
+        {
+          "section": "관측기·포화·강인성",
+          "intent": "관측기 기반 구현, 분리원리, anti-windup과 이득 증가에 따른 성능 상충관계를 설명한다.",
+          "anchor_refs": [
+            "state_tracking_observer_separation_principle",
+            "state_tracking_saturation_anti_windup",
+            "state_tracking_robustness_noise_gain_tradeoff"
+          ]
+        },
+        {
+          "section": "구현 및 최종 검증",
+          "intent": "추종오차, 외란응답, 제어입력, 노이즈, 불확실성과 이산 구현을 종합 검증한다.",
+          "anchor_refs": [
+            "state_tracking_implementation_validation"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "상태피드백 안정화와 기준입력 추종을 구분한다.",
+        "u=-Kx+N_r r과 A-BK의 관계를 정확히 제시한다.",
+        "극점 배치만으로 정상상태 오차 0이 보장되지 않음을 설명한다.",
+        "정상상태 방정식에서 N_r 공식을 조건부로 유도한다.",
+        "프리필터의 DC 이득 가역성과 모델 의존성을 설명한다.",
+        "출력오차 적분상태와 내부모델 원리를 설명한다.",
+        "확대시스템 행렬과 제어이득 부호를 일관되게 작성한다.",
+        "확대시스템 가제어성·안정화 가능성과 원점 불변영점을 확인한다.",
+        "프리필터와 적분기의 feedforward·feedback 역할을 구분한다.",
+        "기준입력과 외란 경로에 따른 응답 차이를 설명한다.",
+        "관측기의 가관측성·검출 가능성과 분리원리를 설명한다.",
+        "액추에이터 포화와 anti-windup을 설명한다.",
+        "이득 증가에 따른 제어입력·노이즈·강인성 상충관계를 설명한다.",
+        "연속·이산 구현과 불확실성을 포함해 최종 검증한다."
+      ],
+      "common_missing_points": [
+        "극점 배치와 정상상태 추종을 동일한 문제로 취급한다.",
+        "N_r 공식을 조건과 유도 없이 암기식으로 제시한다.",
+        "D≠0 또는 MIMO에서 프리필터 공식의 일반화를 누락한다.",
+        "프리필터가 외란을 제거한다고 오해한다.",
+        "적분상태의 내부모델 원리를 누락한다.",
+        "확대시스템의 가제어성과 원점 불변영점을 확인하지 않는다.",
+        "프리필터와 적분기의 역할 차이를 설명하지 않는다.",
+        "기준입력 응답과 부하외란 응답을 구분하지 않는다.",
+        "관측기 극점을 제어기 극점과 같게 해야 한다고 오해한다.",
+        "포화와 적분 windup 대책을 누락한다.",
+        "큰 적분이득과 빠른 관측기에 따른 노이즈·제어입력 증가를 누락한다.",
+        "샘플링, 계산지연과 이산화 검증을 누락한다."
+      ],
+      "routing_aliases": [
+        "상태피드백 기준입력 추종",
+        "상태 피드백 추종",
+        "state feedback reference tracking",
+        "state feedback servo",
+        "정상상태 프리필터",
+        "reference prefilter",
+        "Nbar",
+        "N_r",
+        "적분상태 피드백",
+        "integral state feedback",
+        "integral servo",
+        "observer-based servo",
+        "상태공간 서보 제어",
+        "정상상태 오차 보상"
+      ],
+      "routing_field_points": [
+        "u=-Kx+N_r r",
+        "closed-loop matrix A-BK",
+        "pole placement does not guarantee zero steady-state error",
+        "reference prefilter Nbar",
+        "N_r=-[C(A-BK)^(-1)B]^(-1)",
+        "closed-loop DC gain",
+        "prefilter model dependence",
+        "prefilter does not reject disturbances",
+        "xi dot equals r minus y",
+        "integral internal model principle",
+        "augmented state-space system",
+        "augmented controllability",
+        "stabilizability",
+        "invariant zero at the origin",
+        "servo rank condition",
+        "prefilter versus integral action",
+        "reference and disturbance response",
+        "observer-based state feedback",
+        "separation principle",
+        "observer pole selection",
+        "actuator saturation",
+        "integrator windup",
+        "anti-windup back-calculation",
+        "sensitivity and complementary sensitivity",
+        "digital servo implementation"
+      ],
+      "revision_notes": [
+        "2026-07-11: 14개 Anchor와 8개 답안 구조를 기준으로 상태피드백 기준입력 추종·적분서보 답안 계약을 작성했다."
+      ],
+      "id": "state_feedback_reference_tracking_prefilter_integral_action_COMPARE_v1",
+      "title": "상태피드백 기준입력 추종·프리필터·적분보상 설계",
+      "question_examples": [
+        "상태피드백 제어에서 기준입력 추종과 정상상태 오차 보상 방법을 설명하시오.",
+        "상태피드백 프리필터 N_r을 정상상태 방정식으로 유도하고 적용조건을 설명하시오.",
+        "적분상태를 포함한 상태공간 서보시스템의 구성과 설계조건을 설명하시오.",
+        "프리필터와 적분보상의 차이, 장단점과 적용방법을 비교하시오.",
+        "관측기 기반 상태피드백 추종제어에서 포화와 anti-windup을 포함한 검증항목을 설명하시오."
+      ],
+      "topic_aliases": [
+        "상태피드백 기준입력 추종",
+        "상태 피드백 추종",
+        "state feedback reference tracking",
+        "state feedback servo",
+        "정상상태 프리필터",
+        "reference prefilter",
+        "Nbar",
+        "N_r",
+        "적분상태 피드백",
+        "integral state feedback",
+        "integral servo",
+        "observer-based servo",
+        "상태공간 서보 제어",
+        "정상상태 오차 보상"
+      ],
+      "expected_structure": [
+        "설계 문제와 추종 요구조건",
+        "상태피드백과 폐루프 동특성",
+        "정상상태 프리필터 설계",
+        "적분상태와 내부모델 원리",
+        "확대시스템 설계 가능성",
+        "프리필터와 적분보상의 비교",
+        "관측기·포화·강인성",
+        "구현 및 최종 검증"
+      ],
+      "model_answer_outline": [
+        "폐루프 안정화, 과도응답, 정상상태 추종, 외란 제거와 입력 제한을 서로 구분하여 설계 목표를 정의한다.",
+        "u=-Kx+N_r r과 A-BK를 제시하고 K와 N_r의 역할을 구분한다.",
+        "정상상태 방정식에서 N_r을 유도하고 존재조건, 모델 의존성과 MIMO·D≠0 조건의 한계를 설명한다.",
+        "출력오차 적분상태를 추가하고 상수 기준입력과 상수 외란의 정상상태 오차를 제거하는 원리를 설명한다.",
+        "확대시스템의 가제어성·안정화 가능성과 원점 불변영점 조건을 검증한다.",
+        "feedforward와 feedback의 역할을 구분하고 기준입력 추종, 외란 제거와 결합 사용을 설명한다.",
+        "관측기 기반 구현, 분리원리, anti-windup과 이득 증가에 따른 성능 상충관계를 설명한다.",
+        "추종오차, 외란응답, 제어입력, 노이즈, 불확실성과 이산 구현을 종합 검증한다."
+      ],
+      "high_score_features": [
+        "상태피드백 안정화와 기준입력 추종을 구분한다.",
+        "u=-Kx+N_r r과 A-BK의 관계를 정확히 제시한다.",
+        "극점 배치만으로 정상상태 오차 0이 보장되지 않음을 설명한다.",
+        "정상상태 방정식에서 N_r 공식을 조건부로 유도한다.",
+        "프리필터의 DC 이득 가역성과 모델 의존성을 설명한다.",
+        "출력오차 적분상태와 내부모델 원리를 설명한다.",
+        "확대시스템 행렬과 제어이득 부호를 일관되게 작성한다.",
+        "확대시스템 가제어성·안정화 가능성과 원점 불변영점을 확인한다.",
+        "프리필터와 적분기의 feedforward·feedback 역할을 구분한다.",
+        "기준입력과 외란 경로에 따른 응답 차이를 설명한다.",
+        "관측기의 가관측성·검출 가능성과 분리원리를 설명한다.",
+        "액추에이터 포화와 anti-windup을 설명한다.",
+        "이득 증가에 따른 제어입력·노이즈·강인성 상충관계를 설명한다.",
+        "연속·이산 구현과 불확실성을 포함해 최종 검증한다."
+      ],
+      "low_score_patterns": [
+        "극점 배치와 정상상태 추종을 동일한 문제로 취급한다.",
+        "N_r 공식을 조건과 유도 없이 암기식으로 제시한다.",
+        "D≠0 또는 MIMO에서 프리필터 공식의 일반화를 누락한다.",
+        "프리필터가 외란을 제거한다고 오해한다.",
+        "적분상태의 내부모델 원리를 누락한다.",
+        "확대시스템의 가제어성과 원점 불변영점을 확인하지 않는다.",
+        "프리필터와 적분기의 역할 차이를 설명하지 않는다.",
+        "기준입력 응답과 부하외란 응답을 구분하지 않는다.",
+        "관측기 극점을 제어기 극점과 같게 해야 한다고 오해한다.",
+        "포화와 적분 windup 대책을 누락한다.",
+        "큰 적분이득과 빠른 관측기에 따른 노이즈·제어입력 증가를 누락한다.",
+        "샘플링, 계산지연과 이산화 검증을 누락한다."
+      ],
+      "field_connection_points": [
+        "u=-Kx+N_r r",
+        "closed-loop matrix A-BK",
+        "pole placement does not guarantee zero steady-state error",
+        "reference prefilter Nbar",
+        "N_r=-[C(A-BK)^(-1)B]^(-1)",
+        "closed-loop DC gain",
+        "prefilter model dependence",
+        "prefilter does not reject disturbances",
+        "xi dot equals r minus y",
+        "integral internal model principle",
+        "augmented state-space system",
+        "augmented controllability",
+        "stabilizability",
+        "invariant zero at the origin",
+        "servo rank condition",
+        "prefilter versus integral action",
+        "reference and disturbance response",
+        "observer-based state feedback",
+        "separation principle",
+        "observer pole selection",
+        "actuator saturation",
+        "integrator windup",
+        "anti-windup back-calculation",
+        "sensitivity and complementary sensitivity",
+        "digital servo implementation"
+      ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },
     {

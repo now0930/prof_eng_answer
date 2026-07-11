@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T03:29:43Z-generated-topic-pack-fact-anchors",
+  "version": "2026-07-11T12:36:05Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json",
@@ -3882,6 +3882,562 @@
       ],
       "revision_notes": [
         "aligned_with_model_answers=2026-07-01; updated with specific resonance conditions and distinction between ωd and ωr."
+      ]
+    },
+    {
+      "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
+      "schema_version": "fact_anchor.v1",
+      "title_ko": "상태피드백 기준입력 추종·프리필터·적분보상 설계",
+      "anchors": [
+        {
+          "id": "state_tracking_design_objective",
+          "anchor_id": "state_tracking_design_objective",
+          "statement": "상태피드백 추종제어는 폐루프 안정화와 극점 배치뿐 아니라 기준입력 추종, 정상상태 오차, 외란 제거, 제어입력, 포화와 강인성을 함께 만족하도록 설계해야 한다.",
+          "importance": "must",
+          "keywords": [
+            "state feedback tracking",
+            "servo control",
+            "reference tracking",
+            "상태피드백 추종",
+            "설계 목표"
+          ],
+          "core_terms": [
+            "폐루프 안정화",
+            "기준입력 추종",
+            "정상상태 오차",
+            "외란 제거",
+            "강인성"
+          ],
+          "accepted_explanations": [
+            "안정화와 추종을 서로 다른 요구조건으로 구분하고 과도응답, 정상상태 성능과 실제 구현 제약을 함께 평가한다."
+          ],
+          "rejected_explanations": [
+            "폐루프 극점만 안정하면 추종오차, 포화와 외란응답을 검증할 필요가 없다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_feedback_law_closed_loop",
+          "anchor_id": "state_tracking_feedback_law_closed_loop",
+          "statement": "상태를 측정할 수 있을 때 u=-Kx+N_r r을 적용하면 x_dot=(A-BK)x+B N_r r이 되고, K는 A-BK의 폐루프 동특성을, N_r은 기준입력의 정상상태 크기를 조정한다.",
+          "importance": "must",
+          "keywords": [
+            "state feedback law",
+            "closed-loop matrix",
+            "reference gain",
+            "상태피드백 이득",
+            "프리필터 이득"
+          ],
+          "core_terms": [
+            "u=-Kx+N_r r",
+            "A-BK",
+            "폐루프 극점",
+            "K",
+            "N_r"
+          ],
+          "accepted_explanations": [
+            "K와 N_r의 역할을 구분하고 상태피드백이 적용된 폐루프 상태방정식을 정확히 제시한다."
+          ],
+          "rejected_explanations": [
+            "N_r이 폐루프 극점을 결정하거나 K가 기준입력 스케일만 조정한다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_pole_placement_tracking_distinction",
+          "anchor_id": "state_tracking_pole_placement_tracking_distinction",
+          "statement": "가제어한 시스템에서 K로 A-BK의 극점을 배치할 수 있지만, 극점 배치만으로 y_ss=r 또는 정상상태 오차 0이 자동으로 보장되지는 않는다.",
+          "importance": "must",
+          "keywords": [
+            "pole placement",
+            "tracking distinction",
+            "steady-state gain",
+            "극점배치",
+            "정상상태 추종"
+          ],
+          "core_terms": [
+            "가제어성",
+            "극점 배치",
+            "정상상태 이득",
+            "y_ss=r",
+            "추종오차"
+          ],
+          "accepted_explanations": [
+            "폐루프 내부 동특성과 기준입력에서 출력까지의 정상상태 이득을 분리하여 설명한다."
+          ],
+          "rejected_explanations": [
+            "원하는 극점만 배치하면 별도 기준입력 경로 없이 모든 상수 기준입력을 정확히 추종한다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_prefilter_steady_state_derivation",
+          "anchor_id": "state_tracking_prefilter_steady_state_derivation",
+          "statement": "SISO, D=0, 안정한 A-BK와 0이 아닌 폐루프 DC 이득에서 정상상태 방정식을 적용하면 N_r=-[C(A-BK)^(-1)B]^(-1)로 상수 기준입력의 정상상태 스케일을 맞출 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "reference prefilter",
+            "Nbar",
+            "steady-state derivation",
+            "프리필터 공식",
+            "DC gain inverse"
+          ],
+          "core_terms": [
+            "D=0",
+            "정상상태 방정식",
+            "A-BK",
+            "DC 이득",
+            "N_r 공식"
+          ],
+          "accepted_explanations": [
+            "0=(A-BK)x_ss+B N_r r과 y_ss=Cx_ss에서 공식을 유도하고 역수가 존재하는 조건을 명시한다."
+          ],
+          "rejected_explanations": [
+            "시스템 행렬과 출력행렬에 관계없이 N_r을 항상 1로 설정한다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_prefilter_existence_model_dependence",
+          "anchor_id": "state_tracking_prefilter_existence_model_dependence",
+          "statement": "프리필터는 모델 기반 기준입력 feedforward 보상으로서 폐루프 DC 이득이 가역해야 하며, 모델 오차와 외란을 적분 피드백처럼 자동 제거하지는 않는다.",
+          "importance": "must",
+          "keywords": [
+            "prefilter limitation",
+            "model dependence",
+            "MIMO tracking",
+            "정상상태 이득행렬",
+            "의사역행렬"
+          ],
+          "core_terms": [
+            "feedforward",
+            "DC 이득 가역성",
+            "모델 의존성",
+            "MIMO",
+            "외란 제거 한계"
+          ],
+          "accepted_explanations": [
+            "DC 이득이 0이거나 가역하지 않으면 정확한 정적 추종이 불가능할 수 있고 MIMO에서는 추종 가능성을 별도 검토한다."
+          ],
+          "rejected_explanations": [
+            "프리필터가 plant 파라미터 변화와 모든 외란을 자동으로 보상한다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_integral_internal_model_principle",
+          "anchor_id": "state_tracking_integral_internal_model_principle",
+          "statement": "ξ_dot=r-y의 출력오차 적분상태를 추가하면 제어기에 상수 신호의 내부모델이 포함되어, 안정한 폐루프와 비지속 포화 조건에서 상수 기준입력과 상수 외란의 정상상태 오차를 제거할 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "integral action",
+            "internal model principle",
+            "servo integrator",
+            "오차 적분",
+            "정상상태 오차 제거"
+          ],
+          "core_terms": [
+            "ξ_dot=r-y",
+            "적분상태",
+            "내부모델 원리",
+            "상수 기준입력",
+            "상수 외란"
+          ],
+          "accepted_explanations": [
+            "적분기가 피드백 오차를 누적하며 상수 신호의 내부모델로 작용하는 조건과 한계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "적분상태 하나로 모든 주파수의 외란과 임의 모델오차를 완전히 제거한다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_augmented_system_formulation",
+          "anchor_id": "state_tracking_augmented_system_formulation",
+          "statement": "D=0에서 확대상태 x_a=[x^T ξ^T]^T를 정의하면 A_a=[[A,0],[-C,0]], B_a=[[B],[0]]로 구성할 수 있으며, u=-K_x x+K_i ξ의 부호 규약에 맞춰 확대 폐루프 이득을 일관되게 설계한다.",
+          "importance": "must",
+          "keywords": [
+            "augmented system",
+            "integral augmentation",
+            "servo system matrix",
+            "확대시스템",
+            "적분극"
+          ],
+          "core_terms": [
+            "확대상태",
+            "A_a",
+            "B_a",
+            "K_x",
+            "K_i"
+          ],
+          "accepted_explanations": [
+            "상태와 적분상태의 차원을 명확히 하고 부호 규약에 맞는 확대 폐루프 행렬과 전체 극점을 설계한다."
+          ],
+          "rejected_explanations": [
+            "적분상태를 추가하면서 확대행렬과 제어입력 부호를 서로 모순되게 사용한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_augmented_controllability_stabilizability",
+          "anchor_id": "state_tracking_augmented_controllability_stabilizability",
+          "statement": "원래 시스템이 가제어하더라도 적분 확대시스템이 자동으로 가제어하지는 않으며, 임의 극점 배치에는 확대시스템의 가제어성, 안정화에는 최소한 안정화 가능성이 필요하다.",
+          "importance": "must",
+          "keywords": [
+            "augmented controllability",
+            "stabilizability",
+            "invariant zero at origin",
+            "servo rank condition",
+            "적분 출력조절"
+          ],
+          "core_terms": [
+            "확대시스템 가제어성",
+            "안정화 가능성",
+            "원점 불변영점",
+            "rank 조건",
+            "출력조절 가능성"
+          ],
+          "accepted_explanations": [
+            "rank([[A,B],[C,0]])=n+p와 같은 원점 조건을 이용해 적분 출력조절 가능성과 입력·출력 차원을 확인한다."
+          ],
+          "rejected_explanations": [
+            "원래 시스템이 가제어하면 확대시스템 검사는 항상 생략할 수 있다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_prefilter_integral_role_separation",
+          "anchor_id": "state_tracking_prefilter_integral_role_separation",
+          "statement": "프리필터는 모델 기반 feedforward 스케일 보상이고 적분기는 출력오차 기반 feedback 보상이다. 두 방법은 명령응답, 모델 의존성, 외란 강인성, 위상지연과 windup 특성이 다르다.",
+          "importance": "must",
+          "keywords": [
+            "prefilter versus integrator",
+            "feedforward feedback",
+            "servo structure",
+            "결합 사용",
+            "추종 보상 비교"
+          ],
+          "core_terms": [
+            "프리필터",
+            "적분기",
+            "feedforward",
+            "feedback",
+            "역할 분리"
+          ],
+          "accepted_explanations": [
+            "프리필터는 적분기의 초기 부담을 줄이고 적분기는 모델오차와 상수 외란에 더 강인하다는 차이를 설명한다."
+          ],
+          "rejected_explanations": [
+            "프리필터와 적분기가 동일한 구조이며 언제나 서로 완전히 대체할 수 있다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_disturbance_reference_performance",
+          "anchor_id": "state_tracking_disturbance_reference_performance",
+          "statement": "기준입력 추종과 외란 제거는 신호의 입력 위치와 모델에 따라 구분해야 하며, 프리필터만으로 plant 입력 또는 출력 외란을 제거할 수 없다.",
+          "importance": "must",
+          "keywords": [
+            "disturbance rejection",
+            "reference response",
+            "matched disturbance",
+            "load disturbance",
+            "noise response"
+          ],
+          "core_terms": [
+            "기준입력 응답",
+            "부하외란 응답",
+            "matched disturbance",
+            "외란 경로",
+            "측정노이즈"
+          ],
+          "accepted_explanations": [
+            "기준입력, 부하외란과 측정노이즈 응답을 각각 분석하고 적분기가 제거할 수 있는 외란 모델의 범위를 설명한다."
+          ],
+          "rejected_explanations": [
+            "기준입력 프리필터가 모든 위치의 외란을 동일하게 제거한다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_observer_separation_principle",
+          "anchor_id": "state_tracking_observer_separation_principle",
+          "statement": "상태를 모두 측정할 수 없으면 추정상태 x_hat을 사용하며, 가관측성 또는 검출 가능성을 만족하는 이상적 LTI 시스템에서는 제어기와 관측기 극점을 독립적으로 설계하는 분리원리가 성립한다.",
+          "importance": "must",
+          "keywords": [
+            "observer-based servo",
+            "separation principle",
+            "state estimator",
+            "관측기 기반 제어",
+            "observer poles"
+          ],
+          "core_terms": [
+            "x_hat",
+            "가관측성",
+            "검출 가능성",
+            "분리원리",
+            "관측기 극점"
+          ],
+          "accepted_explanations": [
+            "관측기 극점은 일반적으로 제어기보다 빠르게 선택할 수 있지만 노이즈와 미모델 동특성 때문에 무한히 빠르게 할 수 없다고 설명한다."
+          ],
+          "rejected_explanations": [
+            "분리원리에 따라 관측기 극점이 제어기 극점과 반드시 동일해야 한다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_saturation_anti_windup",
+          "anchor_id": "state_tracking_saturation_anti_windup",
+          "statement": "액추에이터 포화 중 적분오차가 계속 누적되면 windup이 발생하므로 conditional integration, clamping 또는 back-calculation 등의 anti-windup을 적용하고 포화 응답을 별도로 검증한다.",
+          "importance": "must",
+          "keywords": [
+            "integrator windup",
+            "actuator saturation",
+            "conditional integration",
+            "포화 복구",
+            "입력 제한"
+          ],
+          "core_terms": [
+            "액추에이터 포화",
+            "windup",
+            "anti-windup",
+            "clamping",
+            "back-calculation"
+          ],
+          "accepted_explanations": [
+            "실제 제어입력 제한과 포화 중 적분상태의 동작을 포함하여 오버슈트와 복구시간을 평가한다."
+          ],
+          "rejected_explanations": [
+            "선형 폐루프 극점이 안정하면 포화와 windup은 추종성능에 영향을 주지 않는다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_robustness_noise_gain_tradeoff",
+          "anchor_id": "state_tracking_robustness_noise_gain_tradeoff",
+          "statement": "큰 적분이득이나 지나치게 빠른 폐루프·관측기 극점은 응답속도와 정상상태 성능을 개선할 수 있지만 제어입력, 포화, 진동, 노이즈 증폭과 강인성 저하를 유발할 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "gain tradeoff",
+            "sensitivity function",
+            "complementary sensitivity",
+            "robustness",
+            "control effort"
+          ],
+          "core_terms": [
+            "적분이득",
+            "제어입력",
+            "노이즈 증폭",
+            "sensitivity",
+            "강인성"
+          ],
+          "accepted_explanations": [
+            "모델 불확실성, 시간지연, S와 T 함수, 제어입력과 측정노이즈 사이의 성능 상충관계를 평가한다."
+          ],
+          "rejected_explanations": [
+            "적분이득과 관측기 속도를 높일수록 모든 성능이 제한 없이 향상된다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        },
+        {
+          "id": "state_tracking_implementation_validation",
+          "anchor_id": "state_tracking_implementation_validation",
+          "statement": "최종 설계는 폐루프·확대시스템 극점, 가제어성·안정화 가능성, 가관측성, 추종오차, 외란응답, 제어입력·포화, anti-windup, 노이즈, S·T, 이산화와 불확실성을 종합 검증한다.",
+          "importance": "must",
+          "keywords": [
+            "implementation validation",
+            "digital servo",
+            "sampling delay",
+            "robust validation",
+            "최종 검증"
+          ],
+          "core_terms": [
+            "폐루프 극점",
+            "추종오차",
+            "외란응답",
+            "이산화",
+            "종합 검증"
+          ],
+          "accepted_explanations": [
+            "연속시간 설계뿐 아니라 샘플링주기, 계산지연, 실제 입력 제한과 파라미터 불확실성을 포함한 조건에서 검증한다."
+          ],
+          "rejected_explanations": [
+            "명목 폐루프 극점만 안정하면 추종, 외란, 포화와 디지털 구현 검증을 생략해도 된다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "상태공간 상태피드백, 정상상태 프리필터, 내부모델 원리, 적분 서보와 관측기 기반 제어의 표준 제어이론"
+        }
+      ],
+      "core_facts": [
+        "상태피드백 추종제어는 폐루프 안정화와 극점 배치뿐 아니라 기준입력 추종, 정상상태 오차, 외란 제거, 제어입력, 포화와 강인성을 함께 만족하도록 설계해야 한다.",
+        "상태를 측정할 수 있을 때 u=-Kx+N_r r을 적용하면 x_dot=(A-BK)x+B N_r r이 되고, K는 A-BK의 폐루프 동특성을, N_r은 기준입력의 정상상태 크기를 조정한다.",
+        "가제어한 시스템에서 K로 A-BK의 극점을 배치할 수 있지만, 극점 배치만으로 y_ss=r 또는 정상상태 오차 0이 자동으로 보장되지는 않는다.",
+        "SISO, D=0, 안정한 A-BK와 0이 아닌 폐루프 DC 이득에서 정상상태 방정식을 적용하면 N_r=-[C(A-BK)^(-1)B]^(-1)로 상수 기준입력의 정상상태 스케일을 맞출 수 있다.",
+        "프리필터는 모델 기반 기준입력 feedforward 보상으로서 폐루프 DC 이득이 가역해야 하며, 모델 오차와 외란을 적분 피드백처럼 자동 제거하지는 않는다.",
+        "ξ_dot=r-y의 출력오차 적분상태를 추가하면 제어기에 상수 신호의 내부모델이 포함되어, 안정한 폐루프와 비지속 포화 조건에서 상수 기준입력과 상수 외란의 정상상태 오차를 제거할 수 있다.",
+        "D=0에서 확대상태 x_a=[x^T ξ^T]^T를 정의하면 A_a=[[A,0],[-C,0]], B_a=[[B],[0]]로 구성할 수 있으며, u=-K_x x+K_i ξ의 부호 규약에 맞춰 확대 폐루프 이득을 일관되게 설계한다.",
+        "원래 시스템이 가제어하더라도 적분 확대시스템이 자동으로 가제어하지는 않으며, 임의 극점 배치에는 확대시스템의 가제어성, 안정화에는 최소한 안정화 가능성이 필요하다.",
+        "프리필터는 모델 기반 feedforward 스케일 보상이고 적분기는 출력오차 기반 feedback 보상이다. 두 방법은 명령응답, 모델 의존성, 외란 강인성, 위상지연과 windup 특성이 다르다.",
+        "기준입력 추종과 외란 제거는 신호의 입력 위치와 모델에 따라 구분해야 하며, 프리필터만으로 plant 입력 또는 출력 외란을 제거할 수 없다.",
+        "상태를 모두 측정할 수 없으면 추정상태 x_hat을 사용하며, 가관측성 또는 검출 가능성을 만족하는 이상적 LTI 시스템에서는 제어기와 관측기 극점을 독립적으로 설계하는 분리원리가 성립한다.",
+        "액추에이터 포화 중 적분오차가 계속 누적되면 windup이 발생하므로 conditional integration, clamping 또는 back-calculation 등의 anti-windup을 적용하고 포화 응답을 별도로 검증한다.",
+        "큰 적분이득이나 지나치게 빠른 폐루프·관측기 극점은 응답속도와 정상상태 성능을 개선할 수 있지만 제어입력, 포화, 진동, 노이즈 증폭과 강인성 저하를 유발할 수 있다.",
+        "최종 설계는 폐루프·확대시스템 극점, 가제어성·안정화 가능성, 가관측성, 추종오차, 외란응답, 제어입력·포화, anti-windup, 노이즈, S·T, 이산화와 불확실성을 종합 검증한다."
+      ],
+      "fatal_wrong_claims": [
+        {
+          "id": "state_tracking_fatal_pole_placement_guarantees_zero_error",
+          "claim": "상태피드백으로 원하는 폐루프 극점을 배치하면 기준입력의 정상상태 오차가 항상 0이 된다.",
+          "correction": "극점 배치는 폐루프 동특성을 결정하지만 출력의 정상상태 이득은 별도이므로 프리필터나 적분보상이 필요할 수 있다.",
+          "wrong_claim": "상태피드백으로 원하는 폐루프 극점을 배치하면 기준입력의 정상상태 오차가 항상 0이 된다.",
+          "correct_rule": "극점 배치는 폐루프 동특성을 결정하지만 출력의 정상상태 이득은 별도이므로 프리필터나 적분보상이 필요할 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "극점 배치는 폐루프 동특성을 결정하지만 출력의 정상상태 이득은 별도이므로 프리필터나 적분보상이 필요할 수 있다.",
+          "description": "극점 배치는 폐루프 동특성을 결정하지만 출력의 정상상태 이득은 별도이므로 프리필터나 적분보상이 필요할 수 있다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 상태피드백 추종제어의 핵심 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_tracking_fatal_prefilter_rejects_disturbance",
+          "claim": "정상상태 프리필터를 적용하면 모델오차와 모든 외란도 자동으로 제거된다.",
+          "correction": "프리필터는 기준입력 feedforward 보상이며 피드백 오차를 적분하지 않으므로 모델오차와 외란 제거를 일반적으로 보장하지 않는다.",
+          "wrong_claim": "정상상태 프리필터를 적용하면 모델오차와 모든 외란도 자동으로 제거된다.",
+          "correct_rule": "프리필터는 기준입력 feedforward 보상이며 피드백 오차를 적분하지 않으므로 모델오차와 외란 제거를 일반적으로 보장하지 않는다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "프리필터는 기준입력 feedforward 보상이며 피드백 오차를 적분하지 않으므로 모델오차와 외란 제거를 일반적으로 보장하지 않는다.",
+          "description": "프리필터는 기준입력 feedforward 보상이며 피드백 오차를 적분하지 않으므로 모델오차와 외란 제거를 일반적으로 보장하지 않는다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 상태피드백 추종제어의 핵심 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_tracking_fatal_nbar_always_one",
+          "claim": "단위 기준입력을 추종하므로 프리필터 이득 N_r은 항상 1이다.",
+          "correction": "N_r은 상태피드백 폐루프의 DC 이득에 따라 결정되며 특수한 경우를 제외하면 1로 고정되지 않는다.",
+          "wrong_claim": "단위 기준입력을 추종하므로 프리필터 이득 N_r은 항상 1이다.",
+          "correct_rule": "N_r은 상태피드백 폐루프의 DC 이득에 따라 결정되며 특수한 경우를 제외하면 1로 고정되지 않는다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "N_r은 상태피드백 폐루프의 DC 이득에 따라 결정되며 특수한 경우를 제외하면 1로 고정되지 않는다.",
+          "description": "N_r은 상태피드백 폐루프의 DC 이득에 따라 결정되며 특수한 경우를 제외하면 1로 고정되지 않는다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 상태피드백 추종제어의 핵심 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_tracking_fatal_integral_needs_no_augmented_check",
+          "claim": "원래 시스템이 가제어하면 적분상태를 추가한 시스템도 자동으로 가제어하므로 별도 검증이 필요 없다.",
+          "correction": "확대시스템의 가제어성 또는 안정화 가능성을 별도로 확인해야 하며 원점 불변영점 때문에 적분 출력조절이 불가능할 수 있다.",
+          "wrong_claim": "원래 시스템이 가제어하면 적분상태를 추가한 시스템도 자동으로 가제어하므로 별도 검증이 필요 없다.",
+          "correct_rule": "확대시스템의 가제어성 또는 안정화 가능성을 별도로 확인해야 하며 원점 불변영점 때문에 적분 출력조절이 불가능할 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "확대시스템의 가제어성 또는 안정화 가능성을 별도로 확인해야 하며 원점 불변영점 때문에 적분 출력조절이 불가능할 수 있다.",
+          "description": "확대시스템의 가제어성 또는 안정화 가능성을 별도로 확인해야 하며 원점 불변영점 때문에 적분 출력조절이 불가능할 수 있다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 상태피드백 추종제어의 핵심 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_tracking_fatal_integral_gain_unbounded_improvement",
+          "claim": "적분이득을 계속 높일수록 정상상태와 과도응답 성능이 모두 향상된다.",
+          "correction": "큰 적분이득은 진동, 안정여유 저하, 큰 제어입력, 포화와 windup을 유발할 수 있다.",
+          "wrong_claim": "적분이득을 계속 높일수록 정상상태와 과도응답 성능이 모두 향상된다.",
+          "correct_rule": "큰 적분이득은 진동, 안정여유 저하, 큰 제어입력, 포화와 windup을 유발할 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "큰 적분이득은 진동, 안정여유 저하, 큰 제어입력, 포화와 windup을 유발할 수 있다.",
+          "description": "큰 적분이득은 진동, 안정여유 저하, 큰 제어입력, 포화와 windup을 유발할 수 있다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 상태피드백 추종제어의 핵심 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_tracking_fatal_saturation_irrelevant",
+          "claim": "상태공간 폐루프 극점이 안정하면 액추에이터 포화는 추종성능과 무관하다.",
+          "correction": "포화는 선형 설계 가정을 깨뜨리고 적분 windup과 느린 복구를 유발하므로 입력 제한과 anti-windup을 검증해야 한다.",
+          "wrong_claim": "상태공간 폐루프 극점이 안정하면 액추에이터 포화는 추종성능과 무관하다.",
+          "correct_rule": "포화는 선형 설계 가정을 깨뜨리고 적분 windup과 느린 복구를 유발하므로 입력 제한과 anti-windup을 검증해야 한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "포화는 선형 설계 가정을 깨뜨리고 적분 windup과 느린 복구를 유발하므로 입력 제한과 anti-windup을 검증해야 한다.",
+          "description": "포화는 선형 설계 가정을 깨뜨리고 적분 windup과 느린 복구를 유발하므로 입력 제한과 anti-windup을 검증해야 한다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 상태피드백 추종제어의 핵심 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_tracking_fatal_observer_poles_equal_controller",
+          "claim": "분리원리에 따라 관측기 극점은 상태피드백 제어기 극점과 반드시 동일하게 배치해야 한다.",
+          "correction": "이상적인 LTI 모델에서 제어기와 관측기 극점은 독립적으로 설계할 수 있으며 노이즈와 미모델 동특성을 고려한다.",
+          "wrong_claim": "분리원리에 따라 관측기 극점은 상태피드백 제어기 극점과 반드시 동일하게 배치해야 한다.",
+          "correct_rule": "이상적인 LTI 모델에서 제어기와 관측기 극점은 독립적으로 설계할 수 있으며 노이즈와 미모델 동특성을 고려한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "이상적인 LTI 모델에서 제어기와 관측기 극점은 독립적으로 설계할 수 있으며 노이즈와 미모델 동특성을 고려한다.",
+          "description": "이상적인 LTI 모델에서 제어기와 관측기 극점은 독립적으로 설계할 수 있으며 노이즈와 미모델 동특성을 고려한다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 상태피드백 추종제어의 핵심 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_tracking_fatal_uncontrollable_arbitrary_poles",
+          "claim": "가제어하지 않은 시스템도 상태피드백 이득을 선택하면 모든 폐루프 극점을 임의로 배치할 수 있다.",
+          "correction": "임의 극점 배치에는 가제어성이 필요하며 안정화 목적에는 불안정 모드가 가제어한 안정화 가능성이 필요하다.",
+          "wrong_claim": "가제어하지 않은 시스템도 상태피드백 이득을 선택하면 모든 폐루프 극점을 임의로 배치할 수 있다.",
+          "correct_rule": "임의 극점 배치에는 가제어성이 필요하며 안정화 목적에는 불안정 모드가 가제어한 안정화 가능성이 필요하다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "임의 극점 배치에는 가제어성이 필요하며 안정화 목적에는 불안정 모드가 가제어한 안정화 가능성이 필요하다.",
+          "description": "임의 극점 배치에는 가제어성이 필요하며 안정화 목적에는 불안정 모드가 가제어한 안정화 가능성이 필요하다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 상태피드백 추종제어의 핵심 원리와 직접 충돌한다."
+        }
+      ],
+      "regex_patterns": [],
+      "safe_expressions": [
+        "SISO, D=0, 안정한 A-BK와 0이 아닌 DC 이득이라는 조건에서 N_r=-[C(A-BK)^(-1)B]^(-1)을 사용할 수 있다.",
+        "적분상태는 폐루프가 안정하고 지속 포화가 없는 조건에서 상수 기준입력과 상수 외란의 정상상태 오차를 제거할 수 있다.",
+        "관측기 극점은 일반적으로 제어기 극점보다 빠르게 선택하지만 노이즈와 미모델 동특성을 고려해야 한다.",
+        "프리필터와 적분기를 함께 사용하면 명령응답과 외란 강인성을 보완할 수 있으나 전체 폐루프를 다시 검증해야 한다.",
+        "가제어하지 않은 안정 모드는 남을 수 있으므로 안정화 가능성과 임의 극점 배치 가능성을 구분한다."
+      ],
+      "revision_notes": [
+        "2026-07-11: 상태피드백 기준입력 추종, 정상상태 프리필터와 적분 서보를 14개 Anchor와 8개 Fatal로 구성했다."
       ]
     },
     {

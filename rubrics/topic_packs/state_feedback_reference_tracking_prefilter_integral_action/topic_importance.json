@@ -1,0 +1,21 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "CALC_DESIGN",
+  "high_band_unlock_conditions": [
+    "상태피드백 극점 배치와 정상상태 추종을 서로 다른 설계 요구조건으로 설명한다.",
+    "SISO, D=0과 가역한 DC 이득 조건에서 N_r 공식을 정상상태 방정식으로 유도한다.",
+    "프리필터의 feedforward 역할, 모델 의존성과 외란 제거 한계를 설명한다.",
+    "적분상태와 내부모델 원리를 이용한 상수 기준입력·외란의 정상상태 오차 제거를 설명한다.",
+    "확대시스템의 가제어성·안정화 가능성과 원점 불변영점 조건을 검증한다.",
+    "프리필터와 적분기의 명령응답, 외란 강인성, 위상지연과 windup 차이를 비교한다.",
+    "관측기 분리원리, 노이즈, 액추에이터 포화와 anti-windup을 설명한다.",
+    "추종오차, 외란응답, 제어입력, S·T, 불확실성과 이산 구현을 종합 검증한다."
+  ],
+  "note": "상태피드백 극점 배치를 실제 기준입력 추종과 외란 제거 서보 설계로 확장하는 핵심 상태공간 제어 주제다.",
+  "revision_notes": [
+    "2026-07-11: CALC_DESIGN / THEORY_CORE / CORE_MUST_PREPARE로 확정했다."
+  ]
+}
