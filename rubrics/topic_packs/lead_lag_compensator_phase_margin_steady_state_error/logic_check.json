@@ -1,0 +1,146 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+  "source_policy": {
+    "role": "진상·지상 보상기의 전달함수, 설계식, 성능 상충관계와 강인성 한계를 LLM 의미 판정에 제공한다.",
+    "runtime_files_are_not_modified_by_this_file": true,
+    "deterministic_checks_target": "수식과 조건의 의미 판정이 필요하므로 결정론적 fatal 검사를 사용하지 않는다.",
+    "llm_profile_target": "lead·lag 극점·영점, 위상·크기, 오차상수와 구현 한계를 문맥 기반으로 판정한다.",
+    "note": "직접적인 반대 주장만 Fatal 후보로 판정하며 단순 누락은 답안 완전성 문제로 처리한다."
+  },
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
+    "question_type": "CALC_DESIGN",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [
+      "진상보상기",
+      "진상 보상기",
+      "lead compensator",
+      "phase lead compensator",
+      "지상보상기",
+      "지상 보상기",
+      "lag compensator",
+      "phase lag compensator",
+      "진상·지상 보상기",
+      "lead-lag compensator",
+      "위상여유 보상",
+      "정상상태 오차 보상",
+      "주파수응답 보상기 설계",
+      "Bode 보상기 설계"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
+    "difficulty": "THEORY_CORE",
+    "cap_policy": {
+      "fatal_recommended_ceiling": 10.0,
+      "fatal_confidence_threshold": 0.75
+    },
+    "candidate_extraction": {
+      "max_candidates": 24,
+      "nearby_window": 2,
+      "key_terms": [
+        "진상보상기",
+        "진상 보상기",
+        "lead compensator",
+        "phase lead compensator",
+        "지상보상기",
+        "지상 보상기",
+        "lag compensator",
+        "phase lag compensator",
+        "진상·지상 보상기",
+        "lead-lag compensator",
+        "위상여유 보상",
+        "정상상태 오차 보상",
+        "주파수응답 보상기 설계",
+        "Bode 보상기 설계",
+        "0<α<1",
+        "β>1",
+        "maximum phase lead",
+        "gain crossover",
+        "phase margin",
+        "error constant",
+        "low-frequency gain",
+        "bandwidth",
+        "noise amplification",
+        "control effort",
+        "pole-zero cancellation",
+        "time delay"
+      ],
+      "rules": []
+    },
+    "truth_schema": [
+      "[lead_lag_design_objective] 보상기는 plant G(s)와 구분되는 제어기 C(s)에 극점과 영점을 추가하여 L(s)=C(s)G(s)의 크기와 위상을 조정하며, 안정여유·대역폭·정상상태 오차·제어입력·노이즈·강인성의 상충관계를 종합 설계한다.",
+      "[lead_lag_lead_pole_zero_geometry] 진상보상기 C_lead(s)=Kc(1+Ts)/(1+αTs), 0<α<1에서 영점은 -1/T, 극점은 -1/(αT)이므로 |p|>|z|이고 관심 주파수 구간에 양의 위상을 추가한다.",
+      "[lead_lag_lead_maximum_phase_relation] 진상보상기의 최대 위상진상은 φmax=sin^-1((1-α)/(1+α))이며, 요구 φmax로부터 α=(1-sinφmax)/(1+sinφmax)를 계산한다.",
+      "[lead_lag_lead_center_frequency_magnitude] 진상보상기의 최대 위상진상 주파수는 ωm=1/(T√α)이고, 이 주파수에서 |C_lead(jωm)|=Kc/√α이므로 위상뿐 아니라 크기와 이득교차주파수도 변한다.",
+      "[lead_lag_lead_phase_margin_design_sequence] 진상 설계는 보상 전 위상여유와 교차주파수 계산, 요구 위상진상과 안전여유 산정, α 결정, 새 교차주파수 선정, ωm 배치, Kc 조정 및 보상 후 재검증 순으로 수행한다.",
+      "[lead_lag_lead_bandwidth_noise_effort_tradeoff] 진상보상기는 일반적으로 위상여유·교차주파수·대역폭과 응답속도를 높일 수 있지만, 고주파 이득 증가로 측정노이즈, 제어입력, 포화와 미모델 동특성 자극이 커질 수 있다.",
+      "[lead_lag_lag_pole_zero_geometry] 지상보상기 C_lag(s)=Kc(1+Ts)/(1+βTs), β>1에서 영점은 -1/T, 극점은 -1/(βT)이므로 |p|<|z|이고 극점이 영점보다 원점에 더 가깝다.",
+      "[lead_lag_lag_steady_state_error_improvement] 지상보상기는 저주파 루프이득과 오차상수를 높여 정상상태 오차를 줄일 수 있지만, 일반적인 지상보상기만으로 시스템 형이 자동 증가하거나 모든 입력의 오차가 0이 되지는 않는다.",
+      "[lead_lag_lag_crossover_phase_loss] 지상보상기의 극점과 영점을 목표 교차주파수보다 충분히 낮게 배치하면 교차주파수 부근의 위상손실을 제한할 수 있지만, 표준 지상부는 음의 위상을 추가하므로 최종 위상여유를 재계산한다.",
+      "[lead_lag_lag_gain_ratio_error_constant] 표준 지상보상기에서 저주파 이득은 Kc, 고주파 이득은 Kc/β이므로 상대 이득비는 β이다. 요구 오차상수 개선비와 목표 교차주파수의 크기 조건을 함께 만족하도록 설계한다.",
+      "[lead_lag_combined_design] 진상·지상 결합보상기는 진상부로 위상여유·대역폭·과도응답을, 지상부로 저주파 이득·정상상태 오차를 개선하며 두 보상기의 상호작용을 반영해 전체 루프를 반복 검증한다.",
+      "[lead_lag_root_locus_frequency_consistency] 진상·지상 보상기의 극점과 영점은 Bode 선도의 크기·위상과 근궤적의 형상을 동시에 변경하며 두 해석은 동일한 폐루프 특성을 주파수영역과 s평면에서 각각 평가한다.",
+      "[lead_lag_plant_robustness_limits] 우반평면 영점, 시간지연, 불안정극, 공진모드, 포화, 센서·액추에이터 대역폭과 모델 불확실성은 달성 가능한 위상여유·대역폭·응답속도와 정상상태 정확도를 제한한다.",
+      "[lead_lag_implementation_validation] 최종 설계는 폐루프 극점, GM·PM, 교차주파수·대역폭, 시간응답, 정상상태 오차, S·T 함수, 제어입력·포화, 노이즈, 시간지연·불확실성과 이산화 오차를 종합 검증한다."
+    ],
+    "fatal_conditions": [
+      "[lead_lag_fatal_lead_pole_zero_reversed] 잘못된 주장: 진상보상기의 극점은 영점보다 원점에 더 가깝다. 정확한 기준: 진상보상기에서는 0<α<1이고 극점 -1/(αT)이 영점 -1/T보다 원점에서 멀어 |p|>|z|이다.",
+      "[lead_lag_fatal_lead_only_changes_phase] 잘못된 주장: 진상보상기는 크기에 영향을 주지 않고 위상만 증가시킨다. 정확한 기준: 진상보상기는 양의 위상과 함께 크기도 증가시켜 이득교차주파수와 대역폭을 변화시킨다.",
+      "[lead_lag_fatal_lead_always_reduces_bandwidth] 잘못된 주장: 진상보상기는 항상 대역폭을 감소시킨다. 정확한 기준: 진상보상기는 일반적으로 교차주파수와 대역폭을 증가시키는 방향으로 작용하지만 최종 결과는 plant와 이득을 포함해 계산한다.",
+      "[lead_lag_fatal_lag_always_improves_phase_margin] 잘못된 주장: 지상보상기는 위상여유를 항상 증가시킨다. 정확한 기준: 표준 지상보상기는 전이구간에서 음의 위상을 추가하므로 위상여유 증가가 자동으로 보장되지 않는다.",
+      "[lead_lag_fatal_lag_guarantees_zero_error] 잘못된 주장: 지상보상기를 추가하면 모든 입력의 정상상태 오차가 0이 된다. 정확한 기준: 지상보상기는 저주파 이득과 오차상수를 개선하지만 시스템 형과 입력 종류에 따라 정상상태 오차가 남을 수 있다.",
+      "[lead_lag_fatal_margins_guarantee_robustness] 잘못된 주장: 양의 이득여유와 위상여유만 확보하면 모든 불확실성과 시간지연에 강인하다. 정확한 기준: GM과 PM은 상대안정도 지표이며 구조화 불확실성, 공진, 시간지연과 민감도 피크를 모두 보장하지 않는다.",
+      "[lead_lag_fatal_exact_cancellation_always_safe] 잘못된 주장: 불안정극이나 느린 극은 보상기 영점으로 정확히 상쇄하면 항상 안전하다. 정확한 기준: 정확한 상쇄는 모델 오차에 취약하며 특히 불안정극이나 우반평면 요소의 상쇄는 내부안정성과 강인성을 훼손할 수 있다.",
+      "[lead_lag_fatal_any_specification_achievable] 잘못된 주장: 진상·지상 보상기를 사용하면 모든 plant에서 임의의 안정여유·대역폭·정상상태 오차를 동시에 만족시킬 수 있다. 정확한 기준: 우반평면 영점, 시간지연, 포화, 노이즈, 미모델 동특성과 물리적 대역폭이 달성 가능한 성능을 제한한다."
+    ],
+    "safe_conditions": [
+      "안정한 최소위상 단일루프라는 전제에서 진상보상기는 일반적으로 위상여유와 대역폭을 높이는 방향으로 작용한다.",
+      "지상 극점과 영점을 교차주파수보다 충분히 낮게 배치하면 교차주파수 부근의 위상손실을 작게 제한할 수 있다.",
+      "지상보상기는 저주파 오차상수를 개선하지만 시스템 형과 입력 종류에 따라 정상상태 오차가 남을 수 있다.",
+      "위상여유와 시간응답 관계는 지배적 2차계와 유사한 조건에서 설계 경향으로 사용할 수 있다.",
+      "다중 교차·시간지연·비최소위상 시스템은 Nyquist 조건과 폐루프 극점을 함께 확인한다."
+    ],
+    "output_contract": {
+      "json_only": true,
+      "required_fields": [
+        "verdict",
+        "confidence",
+        "reason",
+        "checks",
+        "findings"
+      ],
+      "verdict_values": [
+        "pass",
+        "warn",
+        "fatal"
+      ]
+    },
+    "major_checks": [],
+    "feedback_templates": {
+      "core_theory_positive": "진상·지상 보상기의 극점·영점, 위상·크기 관계와 정상상태 오차·성능 상충관계를 정확히 연결했다.",
+      "core_theory_major": "핵심 반대 주장은 없지만 교차주파수 이동, 지상부 위상손실 또는 구현 제약 설명을 보강해야 한다.",
+      "core_theory_fatal": "답안이 lead·lag 극점·영점 순서나 정상상태 오차·강인성의 핵심 원리와 직접 충돌한다."
+    },
+    "next_practice_points": [
+      "진상보상기의 α, φmax와 ωm 관계를 계산한다.",
+      "새 교차주파수에서 위상여유를 다시 검증한다.",
+      "지상보상기의 β와 오차상수 개선비를 연결한다.",
+      "대역폭·노이즈·제어입력·포화의 상충관계를 설명한다."
+    ],
+    "false_positive_cautions": [
+      "보상기·위상·이득이라는 일반 단어만으로 이 Topic을 확정하지 않는다.",
+      "φmax 또는 ωm 공식의 단순 누락만으로 Fatal 처리하지 않는다.",
+      "조건부로 대역폭이나 위상여유가 개선된다는 표현은 허용한다.",
+      "지상보상기의 위상손실이 작다는 표현은 손실이 0이라고 단정하지 않는 한 허용한다.",
+      "근사적인 극점·영점 상쇄는 모델오차와 내부안정성 한계를 명시한 경우 허용한다."
+    ]
+  }
+}

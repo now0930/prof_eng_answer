@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T01:04:02Z-generated-topic-pack-model-answers",
+  "version": "2026-07-11T03:29:43Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -689,6 +689,262 @@
         "measurement noise",
         "phase margin",
         "anti-windup"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "title_ko": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
+      "question_type": "CALC_DESIGN",
+      "expected_question_patterns": [
+        "진상보상기와 지상보상기의 전달함수와 주파수응답 특성을 비교하여 설명하시오.",
+        "목표 위상여유를 만족하는 진상보상기의 α, T와 이득을 설계하시오.",
+        "정상상태 오차상수를 만족하는 지상보상기를 설계하시오.",
+        "진상·지상 결합보상기의 설계 절차와 성능 상충관계를 설명하시오.",
+        "보상 전후 Bode 선도와 시간응답을 비교하고 현장 적용 시 고려사항을 논하시오."
+      ],
+      "recommended_outline": [
+        {
+          "section": "설계 문제와 성능 요구조건",
+          "intent": "plant와 compensator를 구분하고 안정여유·과도응답·정상상태 오차와 구현 제약을 설계 목표로 정의한다.",
+          "anchor_refs": [
+            "lead_lag_design_objective"
+          ]
+        },
+        {
+          "section": "진상보상기의 원리와 설계식",
+          "intent": "진상 극점·영점 위치, 최대 위상진상과 중심주파수·크기 관계를 수식으로 설명한다.",
+          "anchor_refs": [
+            "lead_lag_lead_pole_zero_geometry",
+            "lead_lag_lead_maximum_phase_relation",
+            "lead_lag_lead_center_frequency_magnitude"
+          ]
+        },
+        {
+          "section": "위상여유 기반 진상 설계 절차",
+          "intent": "α·T·Kc와 새 교차주파수를 결정하고 대역폭·노이즈·제어입력 상충관계를 평가한다.",
+          "anchor_refs": [
+            "lead_lag_lead_phase_margin_design_sequence",
+            "lead_lag_lead_bandwidth_noise_effort_tradeoff"
+          ]
+        },
+        {
+          "section": "지상보상기의 원리와 정상상태 오차",
+          "intent": "지상 극점·영점 위치와 저주파 이득·오차상수 개선, 시스템 형과의 차이를 설명한다.",
+          "anchor_refs": [
+            "lead_lag_lag_pole_zero_geometry",
+            "lead_lag_lag_steady_state_error_improvement"
+          ]
+        },
+        {
+          "section": "지상보상기 파라미터 설계",
+          "intent": "β와 Kc를 요구 오차상수 개선비에 맞추고 교차주파수 부근의 위상손실과 크기 조건을 검증한다.",
+          "anchor_refs": [
+            "lead_lag_lag_crossover_phase_loss",
+            "lead_lag_lag_gain_ratio_error_constant"
+          ]
+        },
+        {
+          "section": "진상·지상 결합과 해석 일관성",
+          "intent": "진상부와 지상부의 상호작용을 반복 설계하고 Bode와 근궤적 결과를 교차검증한다.",
+          "anchor_refs": [
+            "lead_lag_combined_design",
+            "lead_lag_root_locus_frequency_consistency"
+          ]
+        },
+        {
+          "section": "성능과 강인성의 한계",
+          "intent": "우반평면 영점·시간지연·공진·포화와 불확실성으로 인한 달성 가능한 성능 한계를 설명한다.",
+          "anchor_refs": [
+            "lead_lag_plant_robustness_limits"
+          ]
+        },
+        {
+          "section": "구현 및 최종 검증",
+          "intent": "안정여유·폐루프 극점·시간응답·S/T·제어입력·노이즈와 이산화를 포함한 검증 절차를 제시한다.",
+          "anchor_refs": [
+            "lead_lag_implementation_validation"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "plant와 compensator의 역할을 구분한다.",
+        "진상보상기의 0<α<1 및 |p|>|z|를 정확히 제시한다.",
+        "φmax와 α의 관계를 이용해 요구 위상진상을 계산한다.",
+        "ωm=1/(T√α)와 Kc/√α의 크기 관계를 제시한다.",
+        "새 교차주파수에서 최종 위상여유를 재계산한다.",
+        "진상에 따른 대역폭·노이즈·제어입력 상충관계를 설명한다.",
+        "지상보상기의 β>1 및 |p|<|z|를 정확히 제시한다.",
+        "오차상수 개선과 시스템 형 증가를 구분한다.",
+        "지상부의 저주파 배치와 위상손실을 설명한다.",
+        "Kc, β와 저주파·고주파 상대 이득비를 연결한다.",
+        "진상·지상 결합보상기의 상호작용과 반복 설계를 설명한다.",
+        "Bode 해석과 근궤적 해석의 일관성을 제시한다.",
+        "시간지연·우반평면 영점·포화·불확실성의 한계를 제시한다.",
+        "주파수·시간·강인성·구현 조건을 종합 검증한다."
+      ],
+      "common_missing_points": [
+        "진상과 지상의 극점·영점 순서를 반대로 기재한다.",
+        "진상보상기의 크기 증가와 교차주파수 이동을 누락한다.",
+        "필요 위상진상에 추가 안전여유를 반영하지 않는다.",
+        "지상보상기가 시스템 형을 자동 증가시킨다고 오해한다.",
+        "지상부의 음의 위상과 위상여유 감소 가능성을 누락한다.",
+        "Kc와 β를 구분하지 않고 오차상수 개선비를 단정한다.",
+        "진상부와 지상부의 결합 검증을 생략한다.",
+        "대역폭 증가에 따른 노이즈·제어입력 증가를 누락한다.",
+        "시간지연과 비최소위상 plant의 성능 한계를 누락한다.",
+        "이산화·포화·센서 대역폭 검증을 누락한다."
+      ],
+      "routing_aliases": [
+        "진상보상기",
+        "진상 보상기",
+        "lead compensator",
+        "phase lead compensator",
+        "지상보상기",
+        "지상 보상기",
+        "lag compensator",
+        "phase lag compensator",
+        "진상·지상 보상기",
+        "lead-lag compensator",
+        "위상여유 보상",
+        "정상상태 오차 보상",
+        "주파수응답 보상기 설계",
+        "Bode 보상기 설계"
+      ],
+      "routing_field_points": [
+        "C_lead(s)=Kc(1+Ts)/(1+αTs)",
+        "0<α<1",
+        "|p|>|z|",
+        "φmax=sin^-1((1-α)/(1+α))",
+        "α=(1-sinφmax)/(1+sinφmax)",
+        "ωm=1/(T√α)",
+        "|C_lead(jωm)|=Kc/√α",
+        "new gain crossover frequency",
+        "lead bandwidth increase",
+        "lead noise amplification",
+        "C_lag(s)=Kc(1+Ts)/(1+βTs)",
+        "β>1",
+        "|p|<|z|",
+        "lag low-frequency gain",
+        "steady-state error constant",
+        "system type does not automatically increase",
+        "lag phase loss",
+        "low-frequency gain Kc",
+        "high-frequency gain Kc/β",
+        "relative gain ratio β",
+        "lead-lag combined compensator",
+        "Bode and root locus consistency",
+        "right-half-plane zero limitation",
+        "time-delay bandwidth limitation",
+        "actuator saturation and control effort",
+        "sensitivity and complementary sensitivity",
+        "digital discretization"
+      ],
+      "revision_notes": [
+        "2026-07-11: 14개 Anchor와 8개 답안 구조를 기준으로 진상·지상 보상기 계산·설계형 답안 계약을 작성했다."
+      ],
+      "id": "lead_lag_compensator_phase_margin_steady_state_error_COMPARE_v1",
+      "title": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
+      "question_examples": [
+        "진상보상기와 지상보상기의 전달함수와 주파수응답 특성을 비교하여 설명하시오.",
+        "목표 위상여유를 만족하는 진상보상기의 α, T와 이득을 설계하시오.",
+        "정상상태 오차상수를 만족하는 지상보상기를 설계하시오.",
+        "진상·지상 결합보상기의 설계 절차와 성능 상충관계를 설명하시오.",
+        "보상 전후 Bode 선도와 시간응답을 비교하고 현장 적용 시 고려사항을 논하시오."
+      ],
+      "topic_aliases": [
+        "진상보상기",
+        "진상 보상기",
+        "lead compensator",
+        "phase lead compensator",
+        "지상보상기",
+        "지상 보상기",
+        "lag compensator",
+        "phase lag compensator",
+        "진상·지상 보상기",
+        "lead-lag compensator",
+        "위상여유 보상",
+        "정상상태 오차 보상",
+        "주파수응답 보상기 설계",
+        "Bode 보상기 설계"
+      ],
+      "expected_structure": [
+        "설계 문제와 성능 요구조건",
+        "진상보상기의 원리와 설계식",
+        "위상여유 기반 진상 설계 절차",
+        "지상보상기의 원리와 정상상태 오차",
+        "지상보상기 파라미터 설계",
+        "진상·지상 결합과 해석 일관성",
+        "성능과 강인성의 한계",
+        "구현 및 최종 검증"
+      ],
+      "model_answer_outline": [
+        "plant와 compensator를 구분하고 안정여유·과도응답·정상상태 오차와 구현 제약을 설계 목표로 정의한다.",
+        "진상 극점·영점 위치, 최대 위상진상과 중심주파수·크기 관계를 수식으로 설명한다.",
+        "α·T·Kc와 새 교차주파수를 결정하고 대역폭·노이즈·제어입력 상충관계를 평가한다.",
+        "지상 극점·영점 위치와 저주파 이득·오차상수 개선, 시스템 형과의 차이를 설명한다.",
+        "β와 Kc를 요구 오차상수 개선비에 맞추고 교차주파수 부근의 위상손실과 크기 조건을 검증한다.",
+        "진상부와 지상부의 상호작용을 반복 설계하고 Bode와 근궤적 결과를 교차검증한다.",
+        "우반평면 영점·시간지연·공진·포화와 불확실성으로 인한 달성 가능한 성능 한계를 설명한다.",
+        "안정여유·폐루프 극점·시간응답·S/T·제어입력·노이즈와 이산화를 포함한 검증 절차를 제시한다."
+      ],
+      "high_score_features": [
+        "plant와 compensator의 역할을 구분한다.",
+        "진상보상기의 0<α<1 및 |p|>|z|를 정확히 제시한다.",
+        "φmax와 α의 관계를 이용해 요구 위상진상을 계산한다.",
+        "ωm=1/(T√α)와 Kc/√α의 크기 관계를 제시한다.",
+        "새 교차주파수에서 최종 위상여유를 재계산한다.",
+        "진상에 따른 대역폭·노이즈·제어입력 상충관계를 설명한다.",
+        "지상보상기의 β>1 및 |p|<|z|를 정확히 제시한다.",
+        "오차상수 개선과 시스템 형 증가를 구분한다.",
+        "지상부의 저주파 배치와 위상손실을 설명한다.",
+        "Kc, β와 저주파·고주파 상대 이득비를 연결한다.",
+        "진상·지상 결합보상기의 상호작용과 반복 설계를 설명한다.",
+        "Bode 해석과 근궤적 해석의 일관성을 제시한다.",
+        "시간지연·우반평면 영점·포화·불확실성의 한계를 제시한다.",
+        "주파수·시간·강인성·구현 조건을 종합 검증한다."
+      ],
+      "low_score_patterns": [
+        "진상과 지상의 극점·영점 순서를 반대로 기재한다.",
+        "진상보상기의 크기 증가와 교차주파수 이동을 누락한다.",
+        "필요 위상진상에 추가 안전여유를 반영하지 않는다.",
+        "지상보상기가 시스템 형을 자동 증가시킨다고 오해한다.",
+        "지상부의 음의 위상과 위상여유 감소 가능성을 누락한다.",
+        "Kc와 β를 구분하지 않고 오차상수 개선비를 단정한다.",
+        "진상부와 지상부의 결합 검증을 생략한다.",
+        "대역폭 증가에 따른 노이즈·제어입력 증가를 누락한다.",
+        "시간지연과 비최소위상 plant의 성능 한계를 누락한다.",
+        "이산화·포화·센서 대역폭 검증을 누락한다."
+      ],
+      "field_connection_points": [
+        "C_lead(s)=Kc(1+Ts)/(1+αTs)",
+        "0<α<1",
+        "|p|>|z|",
+        "φmax=sin^-1((1-α)/(1+α))",
+        "α=(1-sinφmax)/(1+sinφmax)",
+        "ωm=1/(T√α)",
+        "|C_lead(jωm)|=Kc/√α",
+        "new gain crossover frequency",
+        "lead bandwidth increase",
+        "lead noise amplification",
+        "C_lag(s)=Kc(1+Ts)/(1+βTs)",
+        "β>1",
+        "|p|<|z|",
+        "lag low-frequency gain",
+        "steady-state error constant",
+        "system type does not automatically increase",
+        "lag phase loss",
+        "low-frequency gain Kc",
+        "high-frequency gain Kc/β",
+        "relative gain ratio β",
+        "lead-lag combined compensator",
+        "Bode and root locus consistency",
+        "right-half-plane zero limitation",
+        "time-delay bandwidth limitation",
+        "actuator saturation and control effort",
+        "sensitivity and complementary sensitivity",
+        "digital discretization"
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

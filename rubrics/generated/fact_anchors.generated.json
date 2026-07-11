@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T01:04:02Z-generated-topic-pack-fact-anchors",
+  "version": "2026-07-11T03:29:43Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json",
@@ -822,6 +822,562 @@
         "사람이 검토한 Feedback System Topic Sheet를 기준으로 ChatGPT가 직접 작성함.",
         "정규표현식 기반 직접 fatal 판정을 사용하지 않도록 regex_patterns를 비움.",
         "8개 fatal misconception ID를 Logic Check와 동일하게 통일함."
+      ]
+    },
+    {
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "schema_version": "fact_anchor.v1",
+      "title_ko": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
+      "anchors": [
+        {
+          "id": "lead_lag_design_objective",
+          "anchor_id": "lead_lag_design_objective",
+          "statement": "보상기는 plant G(s)와 구분되는 제어기 C(s)에 극점과 영점을 추가하여 L(s)=C(s)G(s)의 크기와 위상을 조정하며, 안정여유·대역폭·정상상태 오차·제어입력·노이즈·강인성의 상충관계를 종합 설계한다.",
+          "importance": "must",
+          "keywords": [
+            "보상기",
+            "compensator",
+            "loop transfer",
+            "제어기",
+            "강인성"
+          ],
+          "core_terms": [
+            "C(s)",
+            "G(s)",
+            "L(s)=C(s)G(s)",
+            "안정여유",
+            "성능 상충관계"
+          ],
+          "accepted_explanations": [
+            "plant와 compensator를 분리하고 보상 목표를 안정도, 과도응답, 정상상태 정확도와 구현 제약의 균형으로 설명한다."
+          ],
+          "rejected_explanations": [
+            "보상기를 plant 자체의 물리 파라미터 변경과 동일하다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_lead_pole_zero_geometry",
+          "anchor_id": "lead_lag_lead_pole_zero_geometry",
+          "statement": "진상보상기 C_lead(s)=Kc(1+Ts)/(1+αTs), 0<α<1에서 영점은 -1/T, 극점은 -1/(αT)이므로 |p|>|z|이고 관심 주파수 구간에 양의 위상을 추가한다.",
+          "importance": "must",
+          "keywords": [
+            "진상보상기",
+            "lead compensator",
+            "phase lead",
+            "극점",
+            "영점"
+          ],
+          "core_terms": [
+            "0<α<1",
+            "-1/T",
+            "-1/(αT)",
+            "|p|>|z|",
+            "양의 위상"
+          ],
+          "accepted_explanations": [
+            "진상보상기의 극점이 영점보다 원점에서 더 멀다는 위치 관계를 전달함수와 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "진상보상기의 극점이 영점보다 원점에 더 가깝다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_lead_maximum_phase_relation",
+          "anchor_id": "lead_lag_lead_maximum_phase_relation",
+          "statement": "진상보상기의 최대 위상진상은 φmax=sin^-1((1-α)/(1+α))이며, 요구 φmax로부터 α=(1-sinφmax)/(1+sinφmax)를 계산한다.",
+          "importance": "must",
+          "keywords": [
+            "maximum phase lead",
+            "alpha",
+            "phase margin",
+            "진상각",
+            "설계식"
+          ],
+          "core_terms": [
+            "φmax",
+            "sin^-1",
+            "α",
+            "최대 위상진상",
+            "위상여유"
+          ],
+          "accepted_explanations": [
+            "목표 위상여유 부족분과 추가 안전여유로 요구 위상진상을 정한 뒤 α를 계산한다."
+          ],
+          "rejected_explanations": [
+            "α가 커질수록 최대 위상진상이 항상 증가한다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_lead_center_frequency_magnitude",
+          "anchor_id": "lead_lag_lead_center_frequency_magnitude",
+          "statement": "진상보상기의 최대 위상진상 주파수는 ωm=1/(T√α)이고, 이 주파수에서 |C_lead(jωm)|=Kc/√α이므로 위상뿐 아니라 크기와 이득교차주파수도 변한다.",
+          "importance": "must",
+          "keywords": [
+            "center frequency",
+            "magnitude boost",
+            "crossover",
+            "진상 중심주파수",
+            "maximum phase frequency"
+          ],
+          "core_terms": [
+            "ωm=1/(T√α)",
+            "Kc/√α",
+            "중심주파수",
+            "크기 증가",
+            "교차주파수"
+          ],
+          "accepted_explanations": [
+            "ωm을 목표 교차주파수 부근에 배치하고 크기 조건으로 T와 Kc를 함께 결정한다."
+          ],
+          "rejected_explanations": [
+            "진상보상기는 크기응답을 전혀 변경하지 않는다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_lead_phase_margin_design_sequence",
+          "anchor_id": "lead_lag_lead_phase_margin_design_sequence",
+          "statement": "진상 설계는 보상 전 위상여유와 교차주파수 계산, 요구 위상진상과 안전여유 산정, α 결정, 새 교차주파수 선정, ωm 배치, Kc 조정 및 보상 후 재검증 순으로 수행한다.",
+          "importance": "must",
+          "keywords": [
+            "lead design procedure",
+            "phase margin design",
+            "gain crossover",
+            "진상 설계 절차",
+            "반복 설계"
+          ],
+          "core_terms": [
+            "보상 전 위상여유",
+            "안전여유",
+            "새 교차주파수",
+            "Kc",
+            "재검증"
+          ],
+          "accepted_explanations": [
+            "진상보상기의 크기 증가로 이동한 새 교차주파수에서 최종 위상여유를 다시 계산한다."
+          ],
+          "rejected_explanations": [
+            "기존 교차주파수에서 부족한 위상만 더하면 최종 목표가 항상 정확히 달성된다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_lead_bandwidth_noise_effort_tradeoff",
+          "anchor_id": "lead_lag_lead_bandwidth_noise_effort_tradeoff",
+          "statement": "진상보상기는 일반적으로 위상여유·교차주파수·대역폭과 응답속도를 높일 수 있지만, 고주파 이득 증가로 측정노이즈, 제어입력, 포화와 미모델 동특성 자극이 커질 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "bandwidth",
+            "noise amplification",
+            "control effort",
+            "actuator saturation",
+            "high-frequency gain"
+          ],
+          "core_terms": [
+            "대역폭",
+            "측정노이즈",
+            "제어입력",
+            "포화",
+            "미모델 동특성"
+          ],
+          "accepted_explanations": [
+            "대역폭과 응답속도 개선을 노이즈 증폭 및 제어입력 증가와 함께 평가한다."
+          ],
+          "rejected_explanations": [
+            "진상보상기의 대역폭 증가는 부작용이 없는 성능 향상이라고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_lag_pole_zero_geometry",
+          "anchor_id": "lead_lag_lag_pole_zero_geometry",
+          "statement": "지상보상기 C_lag(s)=Kc(1+Ts)/(1+βTs), β>1에서 영점은 -1/T, 극점은 -1/(βT)이므로 |p|<|z|이고 극점이 영점보다 원점에 더 가깝다.",
+          "importance": "must",
+          "keywords": [
+            "지상보상기",
+            "lag compensator",
+            "phase lag",
+            "지상 극점",
+            "지상 영점"
+          ],
+          "core_terms": [
+            "β>1",
+            "-1/T",
+            "-1/(βT)",
+            "|p|<|z|",
+            "음의 위상"
+          ],
+          "accepted_explanations": [
+            "지상보상기의 극점이 영점보다 원점에 더 가깝다는 위치 관계를 정확히 설명한다."
+          ],
+          "rejected_explanations": [
+            "지상보상기의 극점이 영점보다 원점에서 더 멀다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_lag_steady_state_error_improvement",
+          "anchor_id": "lead_lag_lag_steady_state_error_improvement",
+          "statement": "지상보상기는 저주파 루프이득과 오차상수를 높여 정상상태 오차를 줄일 수 있지만, 일반적인 지상보상기만으로 시스템 형이 자동 증가하거나 모든 입력의 오차가 0이 되지는 않는다.",
+          "importance": "must",
+          "keywords": [
+            "steady-state error",
+            "error constant",
+            "system type",
+            "저주파 이득",
+            "정상상태 정확도"
+          ],
+          "core_terms": [
+            "저주파 루프이득",
+            "오차상수",
+            "정상상태 오차",
+            "시스템 형",
+            "입력 종류"
+          ],
+          "accepted_explanations": [
+            "위치·속도·가속도 오차상수와 입력 종류를 구분하여 지상보상기의 개선 효과를 설명한다."
+          ],
+          "rejected_explanations": [
+            "지상보상기를 추가하면 모든 기준입력의 정상상태 오차가 반드시 0이라고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_lag_crossover_phase_loss",
+          "anchor_id": "lead_lag_lag_crossover_phase_loss",
+          "statement": "지상보상기의 극점과 영점을 목표 교차주파수보다 충분히 낮게 배치하면 교차주파수 부근의 위상손실을 제한할 수 있지만, 표준 지상부는 음의 위상을 추가하므로 최종 위상여유를 재계산한다.",
+          "importance": "must",
+          "keywords": [
+            "lag phase loss",
+            "crossover preservation",
+            "low-frequency placement",
+            "위상지연",
+            "위상여유 재검증"
+          ],
+          "core_terms": [
+            "낮은 주파수 배치",
+            "위상손실",
+            "음의 위상",
+            "위상여유",
+            "재계산"
+          ],
+          "accepted_explanations": [
+            "지상 극점과 영점을 교차주파수에서 충분히 분리하고 남는 위상손실을 검증한다."
+          ],
+          "rejected_explanations": [
+            "지상보상기는 위상여유를 항상 증가시키거나 완전히 보존한다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_lag_gain_ratio_error_constant",
+          "anchor_id": "lead_lag_lag_gain_ratio_error_constant",
+          "statement": "표준 지상보상기에서 저주파 이득은 Kc, 고주파 이득은 Kc/β이므로 상대 이득비는 β이다. 요구 오차상수 개선비와 목표 교차주파수의 크기 조건을 함께 만족하도록 설계한다.",
+          "importance": "must",
+          "keywords": [
+            "lag gain ratio",
+            "beta",
+            "low-frequency gain",
+            "high-frequency attenuation",
+            "error constant improvement"
+          ],
+          "core_terms": [
+            "저주파 이득 Kc",
+            "고주파 이득 Kc/β",
+            "상대 이득비 β",
+            "오차상수 개선비",
+            "크기 조건"
+          ],
+          "accepted_explanations": [
+            "단순 전체 이득 증가가 아니라 저주파와 교차주파수 영역의 상대 이득을 분리하여 Kc와 β를 결정한다."
+          ],
+          "rejected_explanations": [
+            "β만 결정하면 교차주파수와 Kc를 확인하지 않아도 요구 정상상태 오차가 자동으로 만족된다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_combined_design",
+          "anchor_id": "lead_lag_combined_design",
+          "statement": "진상·지상 결합보상기는 진상부로 위상여유·대역폭·과도응답을, 지상부로 저주파 이득·정상상태 오차를 개선하며 두 보상기의 상호작용을 반영해 전체 루프를 반복 검증한다.",
+          "importance": "must",
+          "keywords": [
+            "lead-lag compensator",
+            "combined compensation",
+            "진상 지상 결합",
+            "순차 설계",
+            "반복 검증"
+          ],
+          "core_terms": [
+            "진상부",
+            "지상부",
+            "결합보상기",
+            "반복 설계",
+            "상호작용"
+          ],
+          "accepted_explanations": [
+            "진상부와 지상부를 순차 설계한 후 최종 교차주파수, 위상여유와 정상상태 오차를 전체 루프에서 재검증한다."
+          ],
+          "rejected_explanations": [
+            "진상부와 지상부의 효과가 완전히 독립적이므로 결합 후 검증할 필요가 없다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_root_locus_frequency_consistency",
+          "anchor_id": "lead_lag_root_locus_frequency_consistency",
+          "statement": "진상·지상 보상기의 극점과 영점은 Bode 선도의 크기·위상과 근궤적의 형상을 동시에 변경하며 두 해석은 동일한 폐루프 특성을 주파수영역과 s평면에서 각각 평가한다.",
+          "importance": "must",
+          "keywords": [
+            "root locus",
+            "frequency domain",
+            "s-plane",
+            "주파수영역",
+            "근궤적 보상"
+          ],
+          "core_terms": [
+            "Bode 선도",
+            "근궤적",
+            "극점 영점 추가",
+            "폐루프 극점",
+            "해석 일관성"
+          ],
+          "accepted_explanations": [
+            "위상여유·교차주파수 설계와 지배극·감쇠비 설계가 서로 모순되지 않는지 교차검증한다."
+          ],
+          "rejected_explanations": [
+            "Bode 설계와 근궤적 설계는 서로 무관한 물리현상이라고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_plant_robustness_limits",
+          "anchor_id": "lead_lag_plant_robustness_limits",
+          "statement": "우반평면 영점, 시간지연, 불안정극, 공진모드, 포화, 센서·액추에이터 대역폭과 모델 불확실성은 달성 가능한 위상여유·대역폭·응답속도와 정상상태 정확도를 제한한다.",
+          "importance": "must",
+          "keywords": [
+            "non-minimum phase",
+            "time delay",
+            "robustness limit",
+            "공진모드",
+            "plant limitation"
+          ],
+          "core_terms": [
+            "우반평면 영점",
+            "시간지연",
+            "불안정극",
+            "모델 불확실성",
+            "물리적 한계"
+          ],
+          "accepted_explanations": [
+            "plant의 비최소위상성, 시간지연과 구현 제약을 반영해 목표 대역폭과 안정여유를 현실적으로 제한한다."
+          ],
+          "rejected_explanations": [
+            "진상·지상 보상기를 사용하면 plant의 물리적 제약과 관계없이 임의 성능을 달성할 수 있다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        },
+        {
+          "id": "lead_lag_implementation_validation",
+          "anchor_id": "lead_lag_implementation_validation",
+          "statement": "최종 설계는 폐루프 극점, GM·PM, 교차주파수·대역폭, 시간응답, 정상상태 오차, S·T 함수, 제어입력·포화, 노이즈, 시간지연·불확실성과 이산화 오차를 종합 검증한다.",
+          "importance": "must",
+          "keywords": [
+            "final validation",
+            "digital implementation",
+            "sensitivity",
+            "actuator limit",
+            "discretization"
+          ],
+          "core_terms": [
+            "폐루프 극점",
+            "GM PM",
+            "S(s) T(s)",
+            "포화",
+            "이산화"
+          ],
+          "accepted_explanations": [
+            "연속시간 설계 결과를 실제 샘플링주기와 센서·액추에이터 제약을 포함한 조건에서 다시 확인한다."
+          ],
+          "rejected_explanations": [
+            "위상여유 하나만 목표값이면 시간응답·정상상태 오차·노이즈·포화 검증은 생략해도 된다고 설명한다."
+          ],
+          "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+        }
+      ],
+      "core_facts": [
+        "보상기는 plant G(s)와 구분되는 제어기 C(s)에 극점과 영점을 추가하여 L(s)=C(s)G(s)의 크기와 위상을 조정하며, 안정여유·대역폭·정상상태 오차·제어입력·노이즈·강인성의 상충관계를 종합 설계한다.",
+        "진상보상기 C_lead(s)=Kc(1+Ts)/(1+αTs), 0<α<1에서 영점은 -1/T, 극점은 -1/(αT)이므로 |p|>|z|이고 관심 주파수 구간에 양의 위상을 추가한다.",
+        "진상보상기의 최대 위상진상은 φmax=sin^-1((1-α)/(1+α))이며, 요구 φmax로부터 α=(1-sinφmax)/(1+sinφmax)를 계산한다.",
+        "진상보상기의 최대 위상진상 주파수는 ωm=1/(T√α)이고, 이 주파수에서 |C_lead(jωm)|=Kc/√α이므로 위상뿐 아니라 크기와 이득교차주파수도 변한다.",
+        "진상 설계는 보상 전 위상여유와 교차주파수 계산, 요구 위상진상과 안전여유 산정, α 결정, 새 교차주파수 선정, ωm 배치, Kc 조정 및 보상 후 재검증 순으로 수행한다.",
+        "진상보상기는 일반적으로 위상여유·교차주파수·대역폭과 응답속도를 높일 수 있지만, 고주파 이득 증가로 측정노이즈, 제어입력, 포화와 미모델 동특성 자극이 커질 수 있다.",
+        "지상보상기 C_lag(s)=Kc(1+Ts)/(1+βTs), β>1에서 영점은 -1/T, 극점은 -1/(βT)이므로 |p|<|z|이고 극점이 영점보다 원점에 더 가깝다.",
+        "지상보상기는 저주파 루프이득과 오차상수를 높여 정상상태 오차를 줄일 수 있지만, 일반적인 지상보상기만으로 시스템 형이 자동 증가하거나 모든 입력의 오차가 0이 되지는 않는다.",
+        "지상보상기의 극점과 영점을 목표 교차주파수보다 충분히 낮게 배치하면 교차주파수 부근의 위상손실을 제한할 수 있지만, 표준 지상부는 음의 위상을 추가하므로 최종 위상여유를 재계산한다.",
+        "표준 지상보상기에서 저주파 이득은 Kc, 고주파 이득은 Kc/β이므로 상대 이득비는 β이다. 요구 오차상수 개선비와 목표 교차주파수의 크기 조건을 함께 만족하도록 설계한다.",
+        "진상·지상 결합보상기는 진상부로 위상여유·대역폭·과도응답을, 지상부로 저주파 이득·정상상태 오차를 개선하며 두 보상기의 상호작용을 반영해 전체 루프를 반복 검증한다.",
+        "진상·지상 보상기의 극점과 영점은 Bode 선도의 크기·위상과 근궤적의 형상을 동시에 변경하며 두 해석은 동일한 폐루프 특성을 주파수영역과 s평면에서 각각 평가한다.",
+        "우반평면 영점, 시간지연, 불안정극, 공진모드, 포화, 센서·액추에이터 대역폭과 모델 불확실성은 달성 가능한 위상여유·대역폭·응답속도와 정상상태 정확도를 제한한다.",
+        "최종 설계는 폐루프 극점, GM·PM, 교차주파수·대역폭, 시간응답, 정상상태 오차, S·T 함수, 제어입력·포화, 노이즈, 시간지연·불확실성과 이산화 오차를 종합 검증한다."
+      ],
+      "fatal_wrong_claims": [
+        {
+          "id": "lead_lag_fatal_lead_pole_zero_reversed",
+          "claim": "진상보상기의 극점은 영점보다 원점에 더 가깝다.",
+          "correction": "진상보상기에서는 0<α<1이고 극점 -1/(αT)이 영점 -1/T보다 원점에서 멀어 |p|>|z|이다.",
+          "wrong_claim": "진상보상기의 극점은 영점보다 원점에 더 가깝다.",
+          "correct_rule": "진상보상기에서는 0<α<1이고 극점 -1/(αT)이 영점 -1/T보다 원점에서 멀어 |p|>|z|이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "진상보상기에서는 0<α<1이고 극점 -1/(αT)이 영점 -1/T보다 원점에서 멀어 |p|>|z|이다.",
+          "description": "진상보상기에서는 0<α<1이고 극점 -1/(αT)이 영점 -1/T보다 원점에서 멀어 |p|>|z|이다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 핵심 제어이론과 직접 충돌한다."
+        },
+        {
+          "id": "lead_lag_fatal_lead_only_changes_phase",
+          "claim": "진상보상기는 크기에 영향을 주지 않고 위상만 증가시킨다.",
+          "correction": "진상보상기는 양의 위상과 함께 크기도 증가시켜 이득교차주파수와 대역폭을 변화시킨다.",
+          "wrong_claim": "진상보상기는 크기에 영향을 주지 않고 위상만 증가시킨다.",
+          "correct_rule": "진상보상기는 양의 위상과 함께 크기도 증가시켜 이득교차주파수와 대역폭을 변화시킨다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "진상보상기는 양의 위상과 함께 크기도 증가시켜 이득교차주파수와 대역폭을 변화시킨다.",
+          "description": "진상보상기는 양의 위상과 함께 크기도 증가시켜 이득교차주파수와 대역폭을 변화시킨다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 핵심 제어이론과 직접 충돌한다."
+        },
+        {
+          "id": "lead_lag_fatal_lead_always_reduces_bandwidth",
+          "claim": "진상보상기는 항상 대역폭을 감소시킨다.",
+          "correction": "진상보상기는 일반적으로 교차주파수와 대역폭을 증가시키는 방향으로 작용하지만 최종 결과는 plant와 이득을 포함해 계산한다.",
+          "wrong_claim": "진상보상기는 항상 대역폭을 감소시킨다.",
+          "correct_rule": "진상보상기는 일반적으로 교차주파수와 대역폭을 증가시키는 방향으로 작용하지만 최종 결과는 plant와 이득을 포함해 계산한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "진상보상기는 일반적으로 교차주파수와 대역폭을 증가시키는 방향으로 작용하지만 최종 결과는 plant와 이득을 포함해 계산한다.",
+          "description": "진상보상기는 일반적으로 교차주파수와 대역폭을 증가시키는 방향으로 작용하지만 최종 결과는 plant와 이득을 포함해 계산한다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 핵심 제어이론과 직접 충돌한다."
+        },
+        {
+          "id": "lead_lag_fatal_lag_always_improves_phase_margin",
+          "claim": "지상보상기는 위상여유를 항상 증가시킨다.",
+          "correction": "표준 지상보상기는 전이구간에서 음의 위상을 추가하므로 위상여유 증가가 자동으로 보장되지 않는다.",
+          "wrong_claim": "지상보상기는 위상여유를 항상 증가시킨다.",
+          "correct_rule": "표준 지상보상기는 전이구간에서 음의 위상을 추가하므로 위상여유 증가가 자동으로 보장되지 않는다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "표준 지상보상기는 전이구간에서 음의 위상을 추가하므로 위상여유 증가가 자동으로 보장되지 않는다.",
+          "description": "표준 지상보상기는 전이구간에서 음의 위상을 추가하므로 위상여유 증가가 자동으로 보장되지 않는다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 핵심 제어이론과 직접 충돌한다."
+        },
+        {
+          "id": "lead_lag_fatal_lag_guarantees_zero_error",
+          "claim": "지상보상기를 추가하면 모든 입력의 정상상태 오차가 0이 된다.",
+          "correction": "지상보상기는 저주파 이득과 오차상수를 개선하지만 시스템 형과 입력 종류에 따라 정상상태 오차가 남을 수 있다.",
+          "wrong_claim": "지상보상기를 추가하면 모든 입력의 정상상태 오차가 0이 된다.",
+          "correct_rule": "지상보상기는 저주파 이득과 오차상수를 개선하지만 시스템 형과 입력 종류에 따라 정상상태 오차가 남을 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "지상보상기는 저주파 이득과 오차상수를 개선하지만 시스템 형과 입력 종류에 따라 정상상태 오차가 남을 수 있다.",
+          "description": "지상보상기는 저주파 이득과 오차상수를 개선하지만 시스템 형과 입력 종류에 따라 정상상태 오차가 남을 수 있다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 핵심 제어이론과 직접 충돌한다."
+        },
+        {
+          "id": "lead_lag_fatal_margins_guarantee_robustness",
+          "claim": "양의 이득여유와 위상여유만 확보하면 모든 불확실성과 시간지연에 강인하다.",
+          "correction": "GM과 PM은 상대안정도 지표이며 구조화 불확실성, 공진, 시간지연과 민감도 피크를 모두 보장하지 않는다.",
+          "wrong_claim": "양의 이득여유와 위상여유만 확보하면 모든 불확실성과 시간지연에 강인하다.",
+          "correct_rule": "GM과 PM은 상대안정도 지표이며 구조화 불확실성, 공진, 시간지연과 민감도 피크를 모두 보장하지 않는다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "GM과 PM은 상대안정도 지표이며 구조화 불확실성, 공진, 시간지연과 민감도 피크를 모두 보장하지 않는다.",
+          "description": "GM과 PM은 상대안정도 지표이며 구조화 불확실성, 공진, 시간지연과 민감도 피크를 모두 보장하지 않는다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 핵심 제어이론과 직접 충돌한다."
+        },
+        {
+          "id": "lead_lag_fatal_exact_cancellation_always_safe",
+          "claim": "불안정극이나 느린 극은 보상기 영점으로 정확히 상쇄하면 항상 안전하다.",
+          "correction": "정확한 상쇄는 모델 오차에 취약하며 특히 불안정극이나 우반평면 요소의 상쇄는 내부안정성과 강인성을 훼손할 수 있다.",
+          "wrong_claim": "불안정극이나 느린 극은 보상기 영점으로 정확히 상쇄하면 항상 안전하다.",
+          "correct_rule": "정확한 상쇄는 모델 오차에 취약하며 특히 불안정극이나 우반평면 요소의 상쇄는 내부안정성과 강인성을 훼손할 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "정확한 상쇄는 모델 오차에 취약하며 특히 불안정극이나 우반평면 요소의 상쇄는 내부안정성과 강인성을 훼손할 수 있다.",
+          "description": "정확한 상쇄는 모델 오차에 취약하며 특히 불안정극이나 우반평면 요소의 상쇄는 내부안정성과 강인성을 훼손할 수 있다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 핵심 제어이론과 직접 충돌한다."
+        },
+        {
+          "id": "lead_lag_fatal_any_specification_achievable",
+          "claim": "진상·지상 보상기를 사용하면 모든 plant에서 임의의 안정여유·대역폭·정상상태 오차를 동시에 만족시킬 수 있다.",
+          "correction": "우반평면 영점, 시간지연, 포화, 노이즈, 미모델 동특성과 물리적 대역폭이 달성 가능한 성능을 제한한다.",
+          "wrong_claim": "진상·지상 보상기를 사용하면 모든 plant에서 임의의 안정여유·대역폭·정상상태 오차를 동시에 만족시킬 수 있다.",
+          "correct_rule": "우반평면 영점, 시간지연, 포화, 노이즈, 미모델 동특성과 물리적 대역폭이 달성 가능한 성능을 제한한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "우반평면 영점, 시간지연, 포화, 노이즈, 미모델 동특성과 물리적 대역폭이 달성 가능한 성능을 제한한다.",
+          "description": "우반평면 영점, 시간지연, 포화, 노이즈, 미모델 동특성과 물리적 대역폭이 달성 가능한 성능을 제한한다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 핵심 제어이론과 직접 충돌한다."
+        }
+      ],
+      "regex_patterns": [],
+      "safe_expressions": [
+        "안정한 최소위상 단일루프라는 전제에서 진상보상기는 일반적으로 위상여유와 대역폭을 높이는 방향으로 작용한다.",
+        "지상 극점과 영점을 교차주파수보다 충분히 낮게 배치하면 교차주파수 부근의 위상손실을 작게 제한할 수 있다.",
+        "지상보상기는 저주파 오차상수를 개선하지만 시스템 형과 입력 종류에 따라 정상상태 오차가 남을 수 있다.",
+        "위상여유와 시간응답 관계는 지배적 2차계와 유사한 조건에서 설계 경향으로 사용할 수 있다.",
+        "다중 교차·시간지연·비최소위상 시스템은 Nyquist 조건과 폐루프 극점을 함께 확인한다."
+      ],
+      "revision_notes": [
+        "2026-07-11: 진상·지상 보상기 설계식과 성능 상충관계를 14개 Anchor와 8개 Fatal로 구성했다."
       ]
     },
     {

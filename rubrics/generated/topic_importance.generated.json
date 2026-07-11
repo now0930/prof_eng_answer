@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T01:04:02Z-generated-topic-pack-importance",
+  "version": "2026-07-11T03:29:43Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -46,6 +46,27 @@
       "revision_notes": [
         "Difficulty=THEORY_CORE, selection_importance=CORE_MUST_PREPARE로 확정함.",
         "단순 누락만으로 fatal cap을 적용하지 않는 정책을 명시함."
+      ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "CALC_DESIGN",
+      "high_band_unlock_conditions": [
+        "진상보상기의 표준 전달함수와 0<α<1, 극점·영점 위치 관계를 정확히 설명한다.",
+        "최대 위상진상과 중심주파수 관계를 설계 파라미터와 연결한다.",
+        "진상보상기의 크기 증가와 새 교차주파수에서 위상여유를 재검증한다.",
+        "지상보상기의 β, 극점·영점 위치와 저주파 이득 개선 원리를 설명한다.",
+        "지상보상기와 시스템 형의 차이 및 남는 정상상태 오차 조건을 설명한다.",
+        "진상·지상 결합보상기의 상호작용과 반복 설계를 설명한다.",
+        "대역폭·노이즈·제어입력·포화·강인성의 상충관계를 제시한다.",
+        "Bode·근궤적·폐루프 극점·시간응답·S/T·이산화를 종합 검증한다."
+      ],
+      "note": "진상·지상 보상기는 Bode·근궤적·정상상태 오차 해석을 실제 제어기 파라미터 설계로 연결하는 핵심 변별 주제다.",
+      "revision_notes": [
+        "2026-07-11: CALC_DESIGN / THEORY_CORE / CORE_MUST_PREPARE로 확정했다."
       ]
     },
     {
