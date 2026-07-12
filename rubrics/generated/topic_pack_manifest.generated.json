@@ -1,10 +1,10 @@
 {
-  "version": "2026-07-11T13:53:57Z-generated-topic-pack-manifest",
+  "version": "2026-07-12T01:55:14Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 14,
+  "topic_count": 15,
   "topics": [
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
@@ -48,6 +48,16 @@
     },
     {
       "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

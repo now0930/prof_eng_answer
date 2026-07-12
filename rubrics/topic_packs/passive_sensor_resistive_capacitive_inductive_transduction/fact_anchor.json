@@ -1,0 +1,557 @@
+{
+  "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+  "schema_version": "fact_anchor.v1",
+  "title_ko": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
+  "anchors": [
+    {
+      "id": "sensor_passive_transduction_chain",
+      "anchor_id": "sensor_passive_transduction_chain",
+      "statement": "저항형·정전용량형·인덕턴스형 수동센서는 측정량을 먼저 R·C·L 파라미터 변화로 변환하고, 외부 여기와 신호조절회로를 통해 전압·전류·임피던스·위상 또는 주파수 신호로 검출한다.",
+      "importance": "must",
+      "keywords": [
+        "passive sensor",
+        "parametric transducer",
+        "R C L transduction",
+        "수동형 센서",
+        "변환 사슬"
+      ],
+      "core_terms": [
+        "측정량",
+        "R C L 변화",
+        "외부 여기",
+        "신호조절",
+        "전기적 출력"
+      ],
+      "accepted_explanations": [
+        "측정량, 기계·재료 변화, 전기 파라미터 변화와 회로출력을 서로 다른 변환단계로 구분한다."
+      ],
+      "rejected_explanations": [
+        "수동센서가 여기회로 없이 측정량에 비례한 전압을 스스로 직접 생성한다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_mechanical_stress_strain_youngs_modulus",
+      "anchor_id": "sensor_mechanical_stress_strain_youngs_modulus",
+      "statement": "Young's modulus E는 선형 탄성영역에서 기계적 응력 sigma_m과 변형률 epsilon_m을 연결하며, 같은 응력에서 E가 클수록 기하학적 변형은 작다.",
+      "importance": "must",
+      "keywords": [
+        "elastic modulus",
+        "stress strain",
+        "Young modulus",
+        "기계적 변형",
+        "구조강성"
+      ],
+      "core_terms": [
+        "Young's modulus",
+        "응력",
+        "변형률",
+        "선형 탄성",
+        "기하학적 변형"
+      ],
+      "accepted_explanations": [
+        "sigma_m=F/A_m, epsilon_m=Delta l/l과 E=sigma_m/epsilon_m의 관계를 R·C·L 변화 이전의 기계적 변환단계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "Young's modulus를 도전율·유전율·투자율과 같은 전기적 물성으로 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_resistive_geometry_conductivity_relation",
+      "anchor_id": "sensor_resistive_geometry_conductivity_relation",
+      "statement": "균일 도체의 저항은 R=rho l/A=l/(kappa A)이며, 길이와 단면적의 기하 변화 및 비저항 rho 또는 도전율 kappa의 재료 물성 변화로 결정된다.",
+      "importance": "must",
+      "keywords": [
+        "resistive sensor",
+        "conductivity",
+        "resistivity",
+        "저항형 센서",
+        "geometry resistance"
+      ],
+      "core_terms": [
+        "R=rho l/A",
+        "도전율",
+        "비저항",
+        "길이",
+        "단면적"
+      ],
+      "accepted_explanations": [
+        "Delta R/R=Delta rho/rho+Delta l/l-Delta A/A 또는 도전율 표현을 이용해 물성과 기하 효과를 분리한다."
+      ],
+      "rejected_explanations": [
+        "저항이 길이에만 의존하며 단면적과 도전율은 영향을 주지 않는다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_resistive_strain_gauge_factor",
+      "anchor_id": "sensor_resistive_strain_gauge_factor",
+      "statement": "스트레인 게이지의 Gauge factor는 GF=(Delta R/R)/epsilon_m이며, 길이·단면적 변화에 의한 기하학적 효과와 비저항 변화에 의한 압저항 효과를 함께 포함한다.",
+      "importance": "must",
+      "keywords": [
+        "strain gauge",
+        "piezoresistive effect",
+        "gauge factor",
+        "스트레인 게이지",
+        "포아송비"
+      ],
+      "core_terms": [
+        "Gauge factor",
+        "변형률",
+        "Poisson ratio",
+        "기하학적 효과",
+        "압저항 효과"
+      ],
+      "accepted_explanations": [
+        "Delta A/A approximately -2 nu epsilon_m과 Delta R/R approximately (1+2nu)epsilon_m+Delta rho/rho를 작은 변형의 근사로 설명한다."
+      ],
+      "rejected_explanations": [
+        "Gauge factor가 길이 변화만을 의미하며 단면수축과 압저항 효과는 포함하지 않는다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_resistive_voltage_current_conversion",
+      "anchor_id": "sensor_resistive_voltage_current_conversion",
+      "statement": "저항 변화는 정전류에서 V=IR, 정전압에서 I=V/R 또는 Wheatstone bridge의 불평형 전압으로 변환하여 측정한다.",
+      "importance": "must",
+      "keywords": [
+        "resistance readout",
+        "Wheatstone bridge",
+        "constant current excitation",
+        "브리지 회로",
+        "instrumentation amplifier"
+      ],
+      "core_terms": [
+        "정전류 여기",
+        "정전압 여기",
+        "Wheatstone bridge",
+        "브리지 불평형",
+        "자기발열"
+      ],
+      "accepted_explanations": [
+        "작은 Delta R을 브리지와 계측증폭기로 검출하고, 여기전압·자기발열·리드선저항·온도보상을 함께 고려한다."
+      ],
+      "rejected_explanations": [
+        "저항 변화 자체가 외부 여기 없이 항상 출력전압으로 직접 나타난다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_capacitive_geometry_permittivity_relation",
+      "anchor_id": "sensor_capacitive_geometry_permittivity_relation",
+      "statement": "평행판 근사에서 C=epsilon A/d이며, 정전용량은 유전율 epsilon, 전극 중첩면적 A와 전극 간격 d의 변화로 결정된다.",
+      "importance": "must",
+      "keywords": [
+        "capacitive sensor",
+        "permittivity",
+        "electrode gap",
+        "정전용량형 센서",
+        "parallel plate capacitor"
+      ],
+      "core_terms": [
+        "C=epsilon A/d",
+        "유전율",
+        "전극면적",
+        "전극간격",
+        "기생 정전용량"
+      ],
+      "accepted_explanations": [
+        "Delta C/C=Delta epsilon/epsilon+Delta A/A-Delta d/d로 유전율과 기하 변화의 기여를 분리한다."
+      ],
+      "rejected_explanations": [
+        "정전용량이 전극면적만으로 결정되고 유전율과 간격은 무관하다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_capacitive_dynamic_current_readout",
+      "anchor_id": "sensor_capacitive_dynamic_current_readout",
+      "statement": "정전용량형 센서는 q=CV와 i=C dV/dt+V dC/dt의 관계를 이용하며, AC 여기에서 전류·임피던스·위상·충방전시간 또는 발진주파수로 읽는다.",
+      "importance": "must",
+      "keywords": [
+        "capacitive readout",
+        "charge amplifier",
+        "capacitance bridge",
+        "CDC",
+        "정전용량 검출"
+      ],
+      "core_terms": [
+        "q=CV",
+        "변위전류",
+        "AC 여기",
+        "용량성 임피던스",
+        "발진주파수"
+      ],
+      "accepted_explanations": [
+        "정전용량과 출력전압을 구분하고 AC bridge, charge amplifier, oscillator와 CDC의 역할을 설명한다."
+      ],
+      "rejected_explanations": [
+        "정전용량 변화가 회로와 무관하게 항상 동일한 직류전압 변화로 출력된다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_inductive_magnetic_circuit_permeability_relation",
+      "anchor_id": "sensor_inductive_magnetic_circuit_permeability_relation",
+      "statement": "자기회로에서 R_m=l_m/(mu A), L=N^2/R_m이므로 인덕턴스는 투자율 mu, 권수 N, 자속면적 A와 자기회로 길이 l_m에 의해 결정된다.",
+      "importance": "must",
+      "keywords": [
+        "inductive sensor",
+        "magnetic reluctance",
+        "permeability",
+        "인덕턴스형 센서",
+        "magnetic circuit"
+      ],
+      "core_terms": [
+        "자기저항",
+        "투자율",
+        "인덕턴스",
+        "권수",
+        "자기회로 길이"
+      ],
+      "accepted_explanations": [
+        "L approximately mu N^2A/l_m의 근사와 코어 포화, 히스테리시스 및 주파수 의존성을 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "인덕턴스가 권수만으로 결정되며 투자율과 자기회로 형상은 영향을 주지 않는다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_inductive_gap_eddy_current_conductivity",
+      "anchor_id": "sensor_inductive_gap_eddy_current_conductivity",
+      "statement": "가변 릴럭턴스형 센서에서는 공극 g가 자기저항과 인덕턴스를 변화시키고, 와전류 센서에서는 대상체의 도전율·투자율·두께·주파수와 거리가 코일 복소 임피던스를 변화시킨다.",
+      "importance": "must",
+      "keywords": [
+        "air gap",
+        "eddy current sensor",
+        "variable reluctance",
+        "와전류 센서",
+        "skin depth"
+      ],
+      "core_terms": [
+        "공극",
+        "가변 릴럭턴스",
+        "와전류",
+        "대상체 도전율",
+        "복소 임피던스"
+      ],
+      "accepted_explanations": [
+        "공극 증가에 따른 자기저항 증가와 인덕턴스 감소 경향, 그리고 와전류에 의한 저항성·유도성 임피던스 변화를 구분한다."
+      ],
+      "rejected_explanations": [
+        "유도형 센서와 와전류 센서가 대상체 물성 및 공극과 무관하게 동일한 L 변화만 측정한다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_inductive_voltage_impedance_readout",
+      "anchor_id": "sensor_inductive_voltage_impedance_readout",
+      "statement": "인덕턴스형 센서는 lambda=Li와 v=L di/dt+i dL/dt의 관계를 이용하며, AC 여기에서 전압·전류·위상·임피던스·공진주파수 또는 차동전압으로 검출한다.",
+      "importance": "must",
+      "keywords": [
+        "inductive readout",
+        "LVDT",
+        "synchronous demodulation",
+        "coil impedance",
+        "차동 인덕턴스"
+      ],
+      "core_terms": [
+        "자속쇄교량",
+        "코일 전압",
+        "유도성 임피던스",
+        "동기복조",
+        "LVDT"
+      ],
+      "accepted_explanations": [
+        "실제 코일의 저항과 철손을 포함한 복소 임피던스 및 AC excitation과 phase-sensitive detection을 설명한다."
+      ],
+      "rejected_explanations": [
+        "실제 코일이 모든 주파수에서 손실 없는 순수 j omega L로만 동작한다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_material_property_geometry_separation",
+      "anchor_id": "sensor_material_property_geometry_separation",
+      "statement": "R·C·L은 각각 도전율 kappa, 유전율 epsilon, 투자율 mu와 기하학적 치수의 조합으로 결정되며, Young's modulus는 외력을 기하학적 변형으로 바꾸는 별도의 기계적 물성이다.",
+      "importance": "must",
+      "keywords": [
+        "material property",
+        "geometry effect",
+        "conductivity permittivity permeability",
+        "물성 비교",
+        "기하학적 변화"
+      ],
+      "core_terms": [
+        "도전율",
+        "유전율",
+        "투자율",
+        "Young's modulus",
+        "물성·기하 분리"
+      ],
+      "accepted_explanations": [
+        "kappa·epsilon·mu의 물리적 역할과 길이·면적·간격·공극의 기하학적 역할을 구분하고 동시에 변할 수 있음을 설명한다."
+      ],
+      "rejected_explanations": [
+        "도전율·유전율·투자율을 서로 교환 가능한 동일한 물리량으로 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_rcl_excitation_signal_conditioning",
+      "anchor_id": "sensor_rcl_excitation_signal_conditioning",
+      "statement": "수동형 R·C·L 센서는 안정된 DC 또는 AC 여기, 브리지, 증폭, 필터링, 복조, 선형화와 A/D 변환을 통해 전체 계측신호를 형성한다.",
+      "importance": "must",
+      "keywords": [
+        "sensor excitation",
+        "signal conditioning",
+        "ratiometric measurement",
+        "신호조절회로",
+        "synchronous detector"
+      ],
+      "core_terms": [
+        "여기원",
+        "브리지",
+        "증폭",
+        "복조",
+        "ratiometric 측정"
+      ],
+      "accepted_explanations": [
+        "센서소자와 전체 계측채널을 구분하고 여기 안정도, 접지·차폐·절연과 EMC가 출력에 미치는 영향을 설명한다."
+      ],
+      "rejected_explanations": [
+        "센서 파라미터만 정해지면 여기원과 신호조절회로는 측정결과에 영향을 주지 않는다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_rcl_sensitivity_linearity_environment",
+      "anchor_id": "sensor_rcl_sensitivity_linearity_environment",
+      "statement": "전체 센서 감도는 측정량에서 기계변형·파라미터·회로출력으로 이어지는 단계별 감도의 곱으로 해석하며, 감도·범위·선형성·잡음·포화·환경안정성 사이에는 상충관계가 있다.",
+      "importance": "must",
+      "keywords": [
+        "sensor sensitivity",
+        "linearity",
+        "cross sensitivity",
+        "환경 영향",
+        "measurement range"
+      ],
+      "core_terms": [
+        "전체 감도",
+        "단계별 감도",
+        "선형성",
+        "측정범위",
+        "환경 교차감도"
+      ],
+      "accepted_explanations": [
+        "온도·습도·주파수·aging·히스테리시스·creep·반복성 및 Young's modulus와 구조강성의 영향을 종합 설명한다."
+      ],
+      "rejected_explanations": [
+        "감도만 높으면 측정범위, 선형성, 잡음과 안정성도 항상 동시에 향상된다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    },
+    {
+      "id": "sensor_rcl_calibration_implementation_validation",
+      "anchor_id": "sensor_rcl_calibration_implementation_validation",
+      "statement": "최종 R·C·L 센서 시스템은 입력 측정량과 전기출력 사이의 교정곡선, 영점·span·선형성·반복성·히스테리시스·온도특성·동적응답과 불확도를 검증해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "sensor calibration",
+        "measurement uncertainty",
+        "traceability",
+        "교정곡선",
+        "implementation validation"
+      ],
+      "core_terms": [
+        "다점교정",
+        "측정불확도",
+        "추적성",
+        "동적응답",
+        "장기 drift"
+      ],
+      "accepted_explanations": [
+        "기준기 추적성, 기생성분, 설치배선, 차폐·접지, 재교정 주기와 고장진단을 포함해 전체 채널을 검증한다."
+      ],
+      "rejected_explanations": [
+        "Delta R·Delta C·Delta L을 계산하면 교정과 환경보상 없이 측정량을 직접 확정할 수 있다고 설명한다."
+      ],
+      "grading_notes": "물성·기하·여기회로의 인과관계를 평가하며 공식이나 센서명만 나열한 경우에는 충분한 설명으로 판단하지 않는다.",
+      "source_basis": "저항·정전용량·인덕턴스의 기본 전자기 관계, 선형 탄성, 센서 신호조절과 계측 교정의 표준 원리"
+    }
+  ],
+  "core_facts": [
+    "저항형·정전용량형·인덕턴스형 수동센서는 측정량을 먼저 R·C·L 파라미터 변화로 변환하고, 외부 여기와 신호조절회로를 통해 전압·전류·임피던스·위상 또는 주파수 신호로 검출한다.",
+    "Young's modulus E는 선형 탄성영역에서 기계적 응력 sigma_m과 변형률 epsilon_m을 연결하며, 같은 응력에서 E가 클수록 기하학적 변형은 작다.",
+    "균일 도체의 저항은 R=rho l/A=l/(kappa A)이며, 길이와 단면적의 기하 변화 및 비저항 rho 또는 도전율 kappa의 재료 물성 변화로 결정된다.",
+    "스트레인 게이지의 Gauge factor는 GF=(Delta R/R)/epsilon_m이며, 길이·단면적 변화에 의한 기하학적 효과와 비저항 변화에 의한 압저항 효과를 함께 포함한다.",
+    "저항 변화는 정전류에서 V=IR, 정전압에서 I=V/R 또는 Wheatstone bridge의 불평형 전압으로 변환하여 측정한다.",
+    "평행판 근사에서 C=epsilon A/d이며, 정전용량은 유전율 epsilon, 전극 중첩면적 A와 전극 간격 d의 변화로 결정된다.",
+    "정전용량형 센서는 q=CV와 i=C dV/dt+V dC/dt의 관계를 이용하며, AC 여기에서 전류·임피던스·위상·충방전시간 또는 발진주파수로 읽는다.",
+    "자기회로에서 R_m=l_m/(mu A), L=N^2/R_m이므로 인덕턴스는 투자율 mu, 권수 N, 자속면적 A와 자기회로 길이 l_m에 의해 결정된다.",
+    "가변 릴럭턴스형 센서에서는 공극 g가 자기저항과 인덕턴스를 변화시키고, 와전류 센서에서는 대상체의 도전율·투자율·두께·주파수와 거리가 코일 복소 임피던스를 변화시킨다.",
+    "인덕턴스형 센서는 lambda=Li와 v=L di/dt+i dL/dt의 관계를 이용하며, AC 여기에서 전압·전류·위상·임피던스·공진주파수 또는 차동전압으로 검출한다.",
+    "R·C·L은 각각 도전율 kappa, 유전율 epsilon, 투자율 mu와 기하학적 치수의 조합으로 결정되며, Young's modulus는 외력을 기하학적 변형으로 바꾸는 별도의 기계적 물성이다.",
+    "수동형 R·C·L 센서는 안정된 DC 또는 AC 여기, 브리지, 증폭, 필터링, 복조, 선형화와 A/D 변환을 통해 전체 계측신호를 형성한다.",
+    "전체 센서 감도는 측정량에서 기계변형·파라미터·회로출력으로 이어지는 단계별 감도의 곱으로 해석하며, 감도·범위·선형성·잡음·포화·환경안정성 사이에는 상충관계가 있다.",
+    "최종 R·C·L 센서 시스템은 입력 측정량과 전기출력 사이의 교정곡선, 영점·span·선형성·반복성·히스테리시스·온도특성·동적응답과 불확도를 검증해야 한다."
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "sensor_fatal_direct_voltage_without_excitation",
+      "claim": "저항형·정전용량형·인덕턴스형 수동센서는 외부 여기나 신호조절 없이 측정량에 비례한 전압을 직접 발생한다.",
+      "correction": "수동센서는 먼저 R·C·L을 변화시키며, 일반적으로 외부 여기와 신호조절을 통해 전압·전류·주파수로 읽는다.",
+      "wrong_claim": "저항형·정전용량형·인덕턴스형 수동센서는 외부 여기나 신호조절 없이 측정량에 비례한 전압을 직접 발생한다.",
+      "correct_rule": "수동센서는 먼저 R·C·L을 변화시키며, 일반적으로 외부 여기와 신호조절을 통해 전압·전류·주파수로 읽는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "수동센서는 먼저 R·C·L을 변화시키며, 일반적으로 외부 여기와 신호조절을 통해 전압·전류·주파수로 읽는다.",
+      "description": "수동센서는 먼저 R·C·L을 변화시키며, 일반적으로 외부 여기와 신호조절을 통해 전압·전류·주파수로 읽는다.",
+      "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 수동형 센서의 핵심 변환원리와 직접 충돌한다."
+    },
+    {
+      "id": "sensor_fatal_youngs_modulus_electrical_property",
+      "claim": "Young's modulus는 도전율·유전율·투자율과 같은 전기적 물성으로 R·C·L을 직접 결정한다.",
+      "correction": "Young's modulus는 응력과 변형률을 연결하는 기계적 물성이며 기하학적 변형을 통해 R·C·L에 간접 영향을 준다.",
+      "wrong_claim": "Young's modulus는 도전율·유전율·투자율과 같은 전기적 물성으로 R·C·L을 직접 결정한다.",
+      "correct_rule": "Young's modulus는 응력과 변형률을 연결하는 기계적 물성이며 기하학적 변형을 통해 R·C·L에 간접 영향을 준다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "Young's modulus는 응력과 변형률을 연결하는 기계적 물성이며 기하학적 변형을 통해 R·C·L에 간접 영향을 준다.",
+      "description": "Young's modulus는 응력과 변형률을 연결하는 기계적 물성이며 기하학적 변형을 통해 R·C·L에 간접 영향을 준다.",
+      "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 수동형 센서의 핵심 변환원리와 직접 충돌한다."
+    },
+    {
+      "id": "sensor_fatal_resistance_length_only",
+      "claim": "도체의 저항은 길이에만 의존하며 단면적과 도전율 또는 비저항은 영향을 주지 않는다.",
+      "correction": "저항은 R=l/(kappa A)=rho l/A로 표현되며 길이, 단면적과 재료 물성이 함께 결정한다.",
+      "wrong_claim": "도체의 저항은 길이에만 의존하며 단면적과 도전율 또는 비저항은 영향을 주지 않는다.",
+      "correct_rule": "저항은 R=l/(kappa A)=rho l/A로 표현되며 길이, 단면적과 재료 물성이 함께 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "저항은 R=l/(kappa A)=rho l/A로 표현되며 길이, 단면적과 재료 물성이 함께 결정한다.",
+      "description": "저항은 R=l/(kappa A)=rho l/A로 표현되며 길이, 단면적과 재료 물성이 함께 결정한다.",
+      "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 수동형 센서의 핵심 변환원리와 직접 충돌한다."
+    },
+    {
+      "id": "sensor_fatal_capacitance_ignores_permittivity_gap",
+      "claim": "정전용량은 전극면적만으로 결정되며 유전율과 전극 간격은 영향을 주지 않는다.",
+      "correction": "평행판 근사에서 C=epsilon A/d이므로 유전율, 면적과 간격이 모두 정전용량을 결정한다.",
+      "wrong_claim": "정전용량은 전극면적만으로 결정되며 유전율과 전극 간격은 영향을 주지 않는다.",
+      "correct_rule": "평행판 근사에서 C=epsilon A/d이므로 유전율, 면적과 간격이 모두 정전용량을 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "평행판 근사에서 C=epsilon A/d이므로 유전율, 면적과 간격이 모두 정전용량을 결정한다.",
+      "description": "평행판 근사에서 C=epsilon A/d이므로 유전율, 면적과 간격이 모두 정전용량을 결정한다.",
+      "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 수동형 센서의 핵심 변환원리와 직접 충돌한다."
+    },
+    {
+      "id": "sensor_fatal_inductance_ignores_gap_permeability",
+      "claim": "인덕턴스는 코일 권수만으로 결정되며 투자율, 자속면적, 자기회로 길이와 공극은 영향을 주지 않는다.",
+      "correction": "인덕턴스는 자기저항의 역수에 비례하며 투자율, 권수, 면적, 자기회로 길이와 공극의 영향을 받는다.",
+      "wrong_claim": "인덕턴스는 코일 권수만으로 결정되며 투자율, 자속면적, 자기회로 길이와 공극은 영향을 주지 않는다.",
+      "correct_rule": "인덕턴스는 자기저항의 역수에 비례하며 투자율, 권수, 면적, 자기회로 길이와 공극의 영향을 받는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "인덕턴스는 자기저항의 역수에 비례하며 투자율, 권수, 면적, 자기회로 길이와 공극의 영향을 받는다.",
+      "description": "인덕턴스는 자기저항의 역수에 비례하며 투자율, 권수, 면적, 자기회로 길이와 공극의 영향을 받는다.",
+      "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 수동형 센서의 핵심 변환원리와 직접 충돌한다."
+    },
+    {
+      "id": "sensor_fatal_material_properties_identical",
+      "claim": "도전율·유전율·투자율은 동일한 물리량이므로 R·C·L 식에서 서로 바꾸어 사용할 수 있다.",
+      "correction": "도전율은 전하전도, 유전율은 전기장 에너지 저장, 투자율은 자기장 형성과 관련된 서로 다른 물리량이다.",
+      "wrong_claim": "도전율·유전율·투자율은 동일한 물리량이므로 R·C·L 식에서 서로 바꾸어 사용할 수 있다.",
+      "correct_rule": "도전율은 전하전도, 유전율은 전기장 에너지 저장, 투자율은 자기장 형성과 관련된 서로 다른 물리량이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "도전율은 전하전도, 유전율은 전기장 에너지 저장, 투자율은 자기장 형성과 관련된 서로 다른 물리량이다.",
+      "description": "도전율은 전하전도, 유전율은 전기장 에너지 저장, 투자율은 자기장 형성과 관련된 서로 다른 물리량이다.",
+      "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 수동형 센서의 핵심 변환원리와 직접 충돌한다."
+    },
+    {
+      "id": "sensor_fatal_sensitivity_always_better",
+      "claim": "센서 감도는 높을수록 측정범위·선형성·잡음·포화와 안정성에 관계없이 항상 우수하다.",
+      "correction": "감도 증가는 작은 입력 검출에 유리하지만 범위, 포화, 잡음, 비선형성과 구조강도 사이의 상충관계를 가진다.",
+      "wrong_claim": "센서 감도는 높을수록 측정범위·선형성·잡음·포화와 안정성에 관계없이 항상 우수하다.",
+      "correct_rule": "감도 증가는 작은 입력 검출에 유리하지만 범위, 포화, 잡음, 비선형성과 구조강도 사이의 상충관계를 가진다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "감도 증가는 작은 입력 검출에 유리하지만 범위, 포화, 잡음, 비선형성과 구조강도 사이의 상충관계를 가진다.",
+      "description": "감도 증가는 작은 입력 검출에 유리하지만 범위, 포화, 잡음, 비선형성과 구조강도 사이의 상충관계를 가진다.",
+      "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 수동형 센서의 핵심 변환원리와 직접 충돌한다."
+    },
+    {
+      "id": "sensor_fatal_parameter_change_equals_measurand",
+      "claim": "Delta R·Delta C·Delta L은 교정, 여기회로와 환경보상 없이 항상 외부 측정량과 동일한 값이다.",
+      "correction": "파라미터 변화는 물성·기하·온도·회로의 영향을 받으므로 측정량과 출력 사이의 전달관계를 교정하고 보상해야 한다.",
+      "wrong_claim": "Delta R·Delta C·Delta L은 교정, 여기회로와 환경보상 없이 항상 외부 측정량과 동일한 값이다.",
+      "correct_rule": "파라미터 변화는 물성·기하·온도·회로의 영향을 받으므로 측정량과 출력 사이의 전달관계를 교정하고 보상해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "파라미터 변화는 물성·기하·온도·회로의 영향을 받으므로 측정량과 출력 사이의 전달관계를 교정하고 보상해야 한다.",
+      "description": "파라미터 변화는 물성·기하·온도·회로의 영향을 받으므로 측정량과 출력 사이의 전달관계를 교정하고 보상해야 한다.",
+      "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 수동형 센서의 핵심 변환원리와 직접 충돌한다."
+    }
+  ],
+  "regex_patterns": [],
+  "safe_expressions": [
+    "수동형 센서는 R·C·L 변화 자체를 만들고 외부 회로가 이를 전압이나 전류로 변환한다.",
+    "Young's modulus가 작으면 같은 응력에서 변형이 커질 수 있지만 감도와 구조강도는 함께 검토해야 한다.",
+    "저항형 센서에서는 기하학적 효과와 도전율 또는 비저항 변화가 동시에 나타날 수 있다.",
+    "정전용량형 센서는 간격, 면적 또는 유전율 중 하나 이상을 변화시켜 측정량을 검출한다.",
+    "유도형 센서에서는 공극과 투자율이, 와전류 센서에서는 대상체 도전율과 주파수가 중요할 수 있다.",
+    "감도가 증가해도 정확도와 선형성이 자동으로 향상되는 것은 아니다."
+  ],
+  "revision_notes": [
+    "2026-07-12: 수동형 R·C·L 센서의 물성·기하·여기회로 변환원리를 14개 Anchor와 8개 Fatal로 구성했다."
+  ]
+}

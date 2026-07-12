@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T13:53:57Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-12T01:55:14Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -195,6 +195,38 @@
         "fatal_meaning": "핵심 이론 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 적용·결론을 강하게 신뢰하지 않는다.",
         "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
       }
+    },
+    {
+      "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+      "enabled": false,
+      "topic_name": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
+      "question_type": "PRINCIPLE",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "저항형 센서",
+        "정전용량형 센서",
+        "인덕턴스형 센서",
+        "R C L 센서",
+        "수동형 센서",
+        "parametric sensor",
+        "resistive sensor",
+        "capacitive sensor",
+        "inductive sensor",
+        "strain gauge",
+        "Wheatstone bridge",
+        "LVDT",
+        "eddy current sensor",
+        "도전율",
+        "유전율",
+        "투자율",
+        "Young's modulus",
+        "센서 변환원리"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "pid_controller_tuning_sequence_gain_effects",

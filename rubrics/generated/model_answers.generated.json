@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T13:53:57Z-generated-topic-pack-model-answers",
+  "version": "2026-07-12T01:55:14Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -1649,6 +1649,256 @@
         "센서와 actuator의 미모델 동특성을 포함한다.",
         "포화와 rate limit을 포함한 simulation을 수행한다.",
         "임계이득보다 충분히 낮은 단계별 현장 적용값을 선정한다."
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+      "title_ko": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
+      "question_type": "PRINCIPLE",
+      "expected_question_patterns": [
+        "저항형, 정전용량형, 인덕턴스형 센서의 측정원리와 전기적 출력 변환방법을 설명하시오.",
+        "R, C, L 센서에서 재료 물성과 기하학적 변화가 감도에 미치는 영향을 설명하시오.",
+        "Young's modulus, 도전율, 유전율과 투자율을 센서 변환원리와 연계하여 설명하시오.",
+        "저항·정전용량·인덕턴스형 센서의 기본식과 신호조절회로를 비교하시오.",
+        "수동형 파라미터 센서의 감도, 오차요인과 교정방법을 설명하시오."
+      ],
+      "recommended_outline": [
+        {
+          "section": "수동형 센서의 통합 변환 사슬",
+          "intent": "측정량이 기계적 변형 또는 재료 물성 변화를 거쳐 R·C·L로 변환되고 외부 회로에서 전기신호가 되는 구조를 설명한다.",
+          "anchor_refs": [
+            "sensor_passive_transduction_chain",
+            "sensor_mechanical_stress_strain_youngs_modulus"
+          ]
+        },
+        {
+          "section": "저항형 센서의 물성과 기하학",
+          "intent": "R=l/(kappa A)를 기준으로 길이, 단면적, 도전율과 비저항 및 Gauge factor를 설명한다.",
+          "anchor_refs": [
+            "sensor_resistive_geometry_conductivity_relation",
+            "sensor_resistive_strain_gauge_factor"
+          ]
+        },
+        {
+          "section": "저항 변화의 전압·전류 변환",
+          "intent": "정전류·정전압 여기와 Wheatstone bridge를 이용한 저항 변화 검출 및 자기발열을 설명한다.",
+          "anchor_refs": [
+            "sensor_resistive_voltage_current_conversion"
+          ]
+        },
+        {
+          "section": "정전용량형 센서의 물성과 검출",
+          "intent": "C=epsilon A/d의 유전율·면적·간격 변화와 전하·전류·임피던스·주파수 검출을 설명한다.",
+          "anchor_refs": [
+            "sensor_capacitive_geometry_permittivity_relation",
+            "sensor_capacitive_dynamic_current_readout"
+          ]
+        },
+        {
+          "section": "인덕턴스형 센서의 자기회로",
+          "intent": "투자율, 자기저항, 권수, 면적, 자기회로 길이, 공극과 와전류 대상체의 도전율 영향을 설명한다.",
+          "anchor_refs": [
+            "sensor_inductive_magnetic_circuit_permeability_relation",
+            "sensor_inductive_gap_eddy_current_conductivity"
+          ]
+        },
+        {
+          "section": "인덕턴스 변화의 전기적 검출",
+          "intent": "코일 전압, 복소 임피던스, 위상, 공진주파수와 LVDT·동기복조를 설명한다.",
+          "anchor_refs": [
+            "sensor_inductive_voltage_impedance_readout"
+          ]
+        },
+        {
+          "section": "물성·기하·신호조절의 통합",
+          "intent": "도전율·유전율·투자율과 Young's modulus를 구분하고 여기·증폭·복조·필터링을 설명한다.",
+          "anchor_refs": [
+            "sensor_material_property_geometry_separation",
+            "sensor_rcl_excitation_signal_conditioning"
+          ]
+        },
+        {
+          "section": "감도·환경·교정과 구현 검증",
+          "intent": "감도와 범위의 상충관계, 환경영향, 교정, 불확도와 동적응답을 종합 평가한다.",
+          "anchor_refs": [
+            "sensor_rcl_sensitivity_linearity_environment",
+            "sensor_rcl_calibration_implementation_validation"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "측정량에서 R·C·L과 전기출력까지의 변환 사슬을 설명한다.",
+        "Young's modulus를 기계적 변형의 물성으로 구분한다.",
+        "R=l/(kappa A)에서 기하와 도전율 효과를 분리한다.",
+        "Gauge factor에 기하학적 효과와 압저항 효과를 포함한다.",
+        "Wheatstone bridge와 자기발열·리드선 영향을 설명한다.",
+        "C=epsilon A/d에서 유전율·면적·간격 변화를 설명한다.",
+        "q=CV와 AC 용량성 검출의 관계를 설명한다.",
+        "자기저항과 L=N^2/R_m의 관계를 설명한다.",
+        "공극과 와전류 대상체 도전율의 영향을 구분한다.",
+        "코일의 실제 복소 임피던스와 동기복조를 설명한다.",
+        "도전율·유전율·투자율을 서로 다른 물성으로 구분한다.",
+        "여기·증폭·필터·복조와 ratiometric 측정을 설명한다.",
+        "감도와 범위·선형성·잡음의 상충관계를 설명한다.",
+        "교정·불확도·환경·동적응답을 종합 검증한다."
+      ],
+      "common_missing_points": [
+        "센서소자와 출력 신호조절회로를 구분하지 않는다.",
+        "Young's modulus를 전기적 물성으로 오해한다.",
+        "저항에서 단면적과 도전율 영향을 누락한다.",
+        "Gauge factor의 압저항 효과를 누락한다.",
+        "브리지 여기와 자기발열을 누락한다.",
+        "정전용량에서 유전율 또는 간격 영향을 누락한다.",
+        "기생 정전용량과 누설 영향을 누락한다.",
+        "인덕턴스에서 투자율과 자기저항을 누락한다.",
+        "공극과 와전류 원리를 구분하지 않는다.",
+        "실제 코일의 저항성 손실을 누락한다.",
+        "도전율·유전율·투자율을 혼동한다.",
+        "감도가 높으면 정확도도 항상 높다고 단정한다.",
+        "여기원 안정도와 차폐·접지를 누락한다.",
+        "교정곡선과 불확도 및 장기 drift를 누락한다."
+      ],
+      "routing_aliases": [
+        "저항형 센서",
+        "정전용량형 센서",
+        "인덕턴스형 센서",
+        "R C L 센서",
+        "수동형 센서",
+        "parametric sensor",
+        "resistive sensor",
+        "capacitive sensor",
+        "inductive sensor",
+        "strain gauge",
+        "Wheatstone bridge",
+        "LVDT",
+        "eddy current sensor",
+        "도전율",
+        "유전율",
+        "투자율",
+        "Young's modulus",
+        "센서 변환원리"
+      ],
+      "routing_field_points": [
+        "passive parametric sensor",
+        "resistance conductivity geometry",
+        "strain gauge factor",
+        "Wheatstone bridge readout",
+        "capacitance permittivity area gap",
+        "capacitive current and charge",
+        "magnetic reluctance permeability",
+        "inductance air gap",
+        "eddy current conductivity",
+        "coil complex impedance",
+        "Young modulus stress strain",
+        "material property versus geometry",
+        "sensor excitation and signal conditioning",
+        "ratiometric measurement",
+        "sensitivity linearity range tradeoff",
+        "sensor calibration and uncertainty"
+      ],
+      "revision_notes": [
+        "2026-07-12: 14개 Anchor와 8개 답안 구조를 기준으로 수동형 R·C·L 센서 답안 계약을 작성했다."
+      ],
+      "id": "passive_sensor_resistive_capacitive_inductive_transduction_COMPARE_v1",
+      "title": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
+      "question_examples": [
+        "저항형, 정전용량형, 인덕턴스형 센서의 측정원리와 전기적 출력 변환방법을 설명하시오.",
+        "R, C, L 센서에서 재료 물성과 기하학적 변화가 감도에 미치는 영향을 설명하시오.",
+        "Young's modulus, 도전율, 유전율과 투자율을 센서 변환원리와 연계하여 설명하시오.",
+        "저항·정전용량·인덕턴스형 센서의 기본식과 신호조절회로를 비교하시오.",
+        "수동형 파라미터 센서의 감도, 오차요인과 교정방법을 설명하시오."
+      ],
+      "topic_aliases": [
+        "저항형 센서",
+        "정전용량형 센서",
+        "인덕턴스형 센서",
+        "R C L 센서",
+        "수동형 센서",
+        "parametric sensor",
+        "resistive sensor",
+        "capacitive sensor",
+        "inductive sensor",
+        "strain gauge",
+        "Wheatstone bridge",
+        "LVDT",
+        "eddy current sensor",
+        "도전율",
+        "유전율",
+        "투자율",
+        "Young's modulus",
+        "센서 변환원리"
+      ],
+      "expected_structure": [
+        "수동형 센서의 통합 변환 사슬",
+        "저항형 센서의 물성과 기하학",
+        "저항 변화의 전압·전류 변환",
+        "정전용량형 센서의 물성과 검출",
+        "인덕턴스형 센서의 자기회로",
+        "인덕턴스 변화의 전기적 검출",
+        "물성·기하·신호조절의 통합",
+        "감도·환경·교정과 구현 검증"
+      ],
+      "model_answer_outline": [
+        "측정량이 기계적 변형 또는 재료 물성 변화를 거쳐 R·C·L로 변환되고 외부 회로에서 전기신호가 되는 구조를 설명한다.",
+        "R=l/(kappa A)를 기준으로 길이, 단면적, 도전율과 비저항 및 Gauge factor를 설명한다.",
+        "정전류·정전압 여기와 Wheatstone bridge를 이용한 저항 변화 검출 및 자기발열을 설명한다.",
+        "C=epsilon A/d의 유전율·면적·간격 변화와 전하·전류·임피던스·주파수 검출을 설명한다.",
+        "투자율, 자기저항, 권수, 면적, 자기회로 길이, 공극과 와전류 대상체의 도전율 영향을 설명한다.",
+        "코일 전압, 복소 임피던스, 위상, 공진주파수와 LVDT·동기복조를 설명한다.",
+        "도전율·유전율·투자율과 Young's modulus를 구분하고 여기·증폭·복조·필터링을 설명한다.",
+        "감도와 범위의 상충관계, 환경영향, 교정, 불확도와 동적응답을 종합 평가한다."
+      ],
+      "high_score_features": [
+        "측정량에서 R·C·L과 전기출력까지의 변환 사슬을 설명한다.",
+        "Young's modulus를 기계적 변형의 물성으로 구분한다.",
+        "R=l/(kappa A)에서 기하와 도전율 효과를 분리한다.",
+        "Gauge factor에 기하학적 효과와 압저항 효과를 포함한다.",
+        "Wheatstone bridge와 자기발열·리드선 영향을 설명한다.",
+        "C=epsilon A/d에서 유전율·면적·간격 변화를 설명한다.",
+        "q=CV와 AC 용량성 검출의 관계를 설명한다.",
+        "자기저항과 L=N^2/R_m의 관계를 설명한다.",
+        "공극과 와전류 대상체 도전율의 영향을 구분한다.",
+        "코일의 실제 복소 임피던스와 동기복조를 설명한다.",
+        "도전율·유전율·투자율을 서로 다른 물성으로 구분한다.",
+        "여기·증폭·필터·복조와 ratiometric 측정을 설명한다.",
+        "감도와 범위·선형성·잡음의 상충관계를 설명한다.",
+        "교정·불확도·환경·동적응답을 종합 검증한다."
+      ],
+      "low_score_patterns": [
+        "센서소자와 출력 신호조절회로를 구분하지 않는다.",
+        "Young's modulus를 전기적 물성으로 오해한다.",
+        "저항에서 단면적과 도전율 영향을 누락한다.",
+        "Gauge factor의 압저항 효과를 누락한다.",
+        "브리지 여기와 자기발열을 누락한다.",
+        "정전용량에서 유전율 또는 간격 영향을 누락한다.",
+        "기생 정전용량과 누설 영향을 누락한다.",
+        "인덕턴스에서 투자율과 자기저항을 누락한다.",
+        "공극과 와전류 원리를 구분하지 않는다.",
+        "실제 코일의 저항성 손실을 누락한다.",
+        "도전율·유전율·투자율을 혼동한다.",
+        "감도가 높으면 정확도도 항상 높다고 단정한다.",
+        "여기원 안정도와 차폐·접지를 누락한다.",
+        "교정곡선과 불확도 및 장기 drift를 누락한다."
+      ],
+      "field_connection_points": [
+        "passive parametric sensor",
+        "resistance conductivity geometry",
+        "strain gauge factor",
+        "Wheatstone bridge readout",
+        "capacitance permittivity area gap",
+        "capacitive current and charge",
+        "magnetic reluctance permeability",
+        "inductance air gap",
+        "eddy current conductivity",
+        "coil complex impedance",
+        "Young modulus stress strain",
+        "material property versus geometry",
+        "sensor excitation and signal conditioning",
+        "ratiometric measurement",
+        "sensitivity linearity range tradeoff",
+        "sensor calibration and uncertainty"
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

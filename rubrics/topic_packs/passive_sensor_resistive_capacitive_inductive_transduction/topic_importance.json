@@ -1,0 +1,21 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE",
+  "high_band_unlock_conditions": [
+    "측정량, 기계변형·물성변화, R·C·L, 여기회로와 전기출력의 변환단계를 명확히 구분한다.",
+    "Young's modulus를 응력과 변형률을 연결하는 기계적 물성으로 정확히 설명한다.",
+    "R=l/(kappa A)와 저항 변화율을 이용해 길이·단면적·도전율 효과를 분리한다.",
+    "C=epsilon A/d와 q=CV를 이용해 유전율·면적·간격과 용량성 검출을 설명한다.",
+    "자기저항, 투자율, 공극과 와전류 대상체 도전율이 인덕턴스 및 복소 임피던스에 미치는 영향을 설명한다.",
+    "도전율·유전율·투자율과 Young's modulus의 역할을 구분하고 전압·전류·위상·주파수 변환을 설명한다.",
+    "감도, 측정범위, 선형성, 잡음, 포화, 환경과 구조강성의 상충관계를 설명한다.",
+    "다점교정, 불확도, 기생성분, 설치환경, 동적응답과 장기 drift를 종합 검증한다."
+  ],
+  "note": "센서의 전기적 기본 파라미터와 재료 물성·기하 변형·신호조절을 하나의 인과사슬로 연결하는 계측 핵심 주제다.",
+  "revision_notes": [
+    "2026-07-12: PRINCIPLE / THEORY_CORE / CORE_MUST_PREPARE로 확정했다."
+  ]
+}
