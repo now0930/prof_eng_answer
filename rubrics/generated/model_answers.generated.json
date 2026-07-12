@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T12:36:05Z-generated-topic-pack-model-answers",
+  "version": "2026-07-11T13:53:57Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -945,6 +945,270 @@
         "actuator saturation and control effort",
         "sensitivity and complementary sensitivity",
         "digital discretization"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "title_ko": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
+      "question_type": "CALC_DESIGN",
+      "expected_question_patterns": [
+        "LQR 최적 상태피드백 제어기의 비용함수와 Riccati 방정식 및 설계절차를 설명하시오.",
+        "LQR에서 Q와 R 가중치가 상태응답과 제어입력에 미치는 영향을 설명하시오.",
+        "연속시간 LQR의 해 존재조건과 안정화 가능성 및 검출 가능성을 설명하시오.",
+        "LQR과 극점 배치의 차이 및 기준입력 추종을 위한 LQI 확장방법을 설명하시오.",
+        "CARE와 DARE를 비교하고 LQR 실제 구현 시 포화와 강인성 검증항목을 설명하시오."
+      ],
+      "recommended_outline": [
+        {
+          "section": "LQR 설계 목적과 비용함수",
+          "intent": "상태편차와 제어입력의 상충관계를 이차 비용함수로 정의하고 LQR 최적성의 적용범위를 설명한다.",
+          "anchor_refs": [
+            "state_lqr_design_objective_cost",
+            "state_lqr_weight_matrix_conditions"
+          ]
+        },
+        {
+          "section": "CARE와 최적 상태피드백 이득",
+          "intent": "연속시간 Riccati 방정식, 안정화 해 P, 최적이득 K와 폐루프 A-BK를 설명한다.",
+          "anchor_refs": [
+            "state_lqr_care_stabilizing_solution",
+            "state_lqr_optimal_gain_closed_loop"
+          ]
+        },
+        {
+          "section": "해의 존재조건과 안정성",
+          "intent": "stabilizability, detectability, Q>=0과 R>0 조건 및 불안정 비가제어 모드의 의미를 설명한다.",
+          "anchor_refs": [
+            "state_lqr_existence_stabilizability_detectability"
+          ]
+        },
+        {
+          "section": "Q와 R의 가중치 설계",
+          "intent": "Q와 R 변화에 따른 상태응답, 제어입력, 포화와 강인성의 상충관계 및 공통 배율 불변성을 설명한다.",
+          "anchor_refs": [
+            "state_lqr_q_weight_state_tradeoff",
+            "state_lqr_r_weight_control_tradeoff",
+            "state_lqr_common_scaling_invariance"
+          ]
+        },
+        {
+          "section": "정규화와 Bryson's rule",
+          "intent": "상태와 입력의 단위 및 허용범위를 반영해 초기 가중치를 선정하고 반복 튜닝하는 방법을 설명한다.",
+          "anchor_refs": [
+            "state_lqr_state_input_normalization_bryson"
+          ]
+        },
+        {
+          "section": "극점 배치와 기준입력 추종",
+          "intent": "극점 배치와 LQR의 차이를 설명하고 프리필터 또는 LQI를 이용한 기준입력 추종 확장을 설명한다.",
+          "anchor_refs": [
+            "state_lqr_pole_placement_distinction",
+            "state_lqr_tracking_prefilter_lqi"
+          ]
+        },
+        {
+          "section": "제약조건과 연속·이산 설계",
+          "intent": "표준 LQR의 hard constraint 한계와 CARE·DARE 및 샘플링 기반 이산설계의 차이를 설명한다.",
+          "anchor_refs": [
+            "state_lqr_saturation_constraints_limit",
+            "state_lqr_continuous_discrete_riccati_distinction"
+          ]
+        },
+        {
+          "section": "관측기·강인성·최종 검증",
+          "intent": "관측기 기반 구현, 포화, 불확실성, 노이즈, 수치조건과 연속·이산 폐루프를 종합 검증한다.",
+          "anchor_refs": [
+            "state_lqr_robustness_observer_implementation_validation"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "LQR 비용함수와 최적성의 적용범위를 설명한다.",
+        "Q>=0과 R>0의 행렬 조건을 정확히 제시한다.",
+        "CARE와 stabilizing solution P의 의미를 설명한다.",
+        "K=R^(-1)B^TP와 A-BK를 일관된 부호로 제시한다.",
+        "stabilizability와 detectability 조건을 구분한다.",
+        "Q 변화에 따른 상태편차와 제어입력의 상충관계를 설명한다.",
+        "R 변화에 따른 응답속도, 입력크기와 포화를 설명한다.",
+        "Q와 R의 공통 양의 배율에서 K가 불변임을 설명한다.",
+        "상태·입력 정규화와 Bryson's rule을 설명한다.",
+        "LQR과 직접 극점 배치의 차이를 설명한다.",
+        "기본 LQR regulator와 프리필터·LQI servo를 구분한다.",
+        "입력 penalty와 hard saturation을 구분한다.",
+        "CARE와 DARE 및 폐루프 안정영역을 구분한다.",
+        "관측기, 불확실성, 노이즈와 수치조건을 종합 검증한다."
+      ],
+      "common_missing_points": [
+        "LQR의 최적성이 선택한 비용함수에 대한 최적임을 누락한다.",
+        "Q와 R의 준정부호·정부호 조건을 누락한다.",
+        "CARE의 임의 해와 안정화 해를 구분하지 않는다.",
+        "K와 A-BK의 부호를 일관되지 않게 사용한다.",
+        "stabilizability와 완전 가제어성을 구분하지 않는다.",
+        "detectability 조건을 누락한다.",
+        "Q를 크게 하면 모든 성능이 개선된다고 단정한다.",
+        "작은 R에 따른 포화와 입력증가를 누락한다.",
+        "Q와 R의 공통 배율 불변성을 누락한다.",
+        "상태와 입력의 단위 및 정규화를 고려하지 않는다.",
+        "LQR을 직접 극점 배치 방법으로 오해한다.",
+        "기본 LQR이 기준입력 정상상태 오차를 자동 제거한다고 오해한다.",
+        "R이 hard saturation을 보장한다고 오해한다.",
+        "연속 CARE 해를 이산시스템에 그대로 적용한다.",
+        "관측기, 모델 불확실성과 수치 residual 검증을 누락한다."
+      ],
+      "routing_aliases": [
+        "LQR",
+        "linear quadratic regulator",
+        "선형 이차 조절기",
+        "최적 상태피드백",
+        "Riccati 방정식",
+        "CARE",
+        "DARE",
+        "LQR 가중치",
+        "Q R 튜닝",
+        "Bryson rule",
+        "Bryson's rule",
+        "LQI",
+        "optimal state feedback",
+        "quadratic optimal control"
+      ],
+      "routing_field_points": [
+        "quadratic cost J",
+        "x transpose Q x",
+        "u transpose R u",
+        "positive semidefinite Q",
+        "positive definite R",
+        "continuous algebraic Riccati equation",
+        "stabilizing Riccati solution",
+        "K equals R inverse B transpose P",
+        "closed-loop A minus B K",
+        "stabilizability",
+        "detectability",
+        "Q state weighting",
+        "R control weighting",
+        "common scaling invariance",
+        "Bryson rule",
+        "state and input normalization",
+        "LQR versus pole placement",
+        "LQR reference prefilter",
+        "LQI integral augmentation",
+        "hard input saturation",
+        "constrained optimal control",
+        "discrete algebraic Riccati equation",
+        "discrete LQR gain",
+        "observer-based LQR",
+        "Riccati residual",
+        "robustness validation"
+      ],
+      "revision_notes": [
+        "2026-07-11: 14개 Anchor와 8개 답안 구조를 기준으로 LQR 최적 상태피드백 답안 계약을 작성했다."
+      ],
+      "id": "lqr_optimal_state_feedback_riccati_weighting_design_COMPARE_v1",
+      "title": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
+      "question_examples": [
+        "LQR 최적 상태피드백 제어기의 비용함수와 Riccati 방정식 및 설계절차를 설명하시오.",
+        "LQR에서 Q와 R 가중치가 상태응답과 제어입력에 미치는 영향을 설명하시오.",
+        "연속시간 LQR의 해 존재조건과 안정화 가능성 및 검출 가능성을 설명하시오.",
+        "LQR과 극점 배치의 차이 및 기준입력 추종을 위한 LQI 확장방법을 설명하시오.",
+        "CARE와 DARE를 비교하고 LQR 실제 구현 시 포화와 강인성 검증항목을 설명하시오."
+      ],
+      "topic_aliases": [
+        "LQR",
+        "linear quadratic regulator",
+        "선형 이차 조절기",
+        "최적 상태피드백",
+        "Riccati 방정식",
+        "CARE",
+        "DARE",
+        "LQR 가중치",
+        "Q R 튜닝",
+        "Bryson rule",
+        "Bryson's rule",
+        "LQI",
+        "optimal state feedback",
+        "quadratic optimal control"
+      ],
+      "expected_structure": [
+        "LQR 설계 목적과 비용함수",
+        "CARE와 최적 상태피드백 이득",
+        "해의 존재조건과 안정성",
+        "Q와 R의 가중치 설계",
+        "정규화와 Bryson's rule",
+        "극점 배치와 기준입력 추종",
+        "제약조건과 연속·이산 설계",
+        "관측기·강인성·최종 검증"
+      ],
+      "model_answer_outline": [
+        "상태편차와 제어입력의 상충관계를 이차 비용함수로 정의하고 LQR 최적성의 적용범위를 설명한다.",
+        "연속시간 Riccati 방정식, 안정화 해 P, 최적이득 K와 폐루프 A-BK를 설명한다.",
+        "stabilizability, detectability, Q>=0과 R>0 조건 및 불안정 비가제어 모드의 의미를 설명한다.",
+        "Q와 R 변화에 따른 상태응답, 제어입력, 포화와 강인성의 상충관계 및 공통 배율 불변성을 설명한다.",
+        "상태와 입력의 단위 및 허용범위를 반영해 초기 가중치를 선정하고 반복 튜닝하는 방법을 설명한다.",
+        "극점 배치와 LQR의 차이를 설명하고 프리필터 또는 LQI를 이용한 기준입력 추종 확장을 설명한다.",
+        "표준 LQR의 hard constraint 한계와 CARE·DARE 및 샘플링 기반 이산설계의 차이를 설명한다.",
+        "관측기 기반 구현, 포화, 불확실성, 노이즈, 수치조건과 연속·이산 폐루프를 종합 검증한다."
+      ],
+      "high_score_features": [
+        "LQR 비용함수와 최적성의 적용범위를 설명한다.",
+        "Q>=0과 R>0의 행렬 조건을 정확히 제시한다.",
+        "CARE와 stabilizing solution P의 의미를 설명한다.",
+        "K=R^(-1)B^TP와 A-BK를 일관된 부호로 제시한다.",
+        "stabilizability와 detectability 조건을 구분한다.",
+        "Q 변화에 따른 상태편차와 제어입력의 상충관계를 설명한다.",
+        "R 변화에 따른 응답속도, 입력크기와 포화를 설명한다.",
+        "Q와 R의 공통 양의 배율에서 K가 불변임을 설명한다.",
+        "상태·입력 정규화와 Bryson's rule을 설명한다.",
+        "LQR과 직접 극점 배치의 차이를 설명한다.",
+        "기본 LQR regulator와 프리필터·LQI servo를 구분한다.",
+        "입력 penalty와 hard saturation을 구분한다.",
+        "CARE와 DARE 및 폐루프 안정영역을 구분한다.",
+        "관측기, 불확실성, 노이즈와 수치조건을 종합 검증한다."
+      ],
+      "low_score_patterns": [
+        "LQR의 최적성이 선택한 비용함수에 대한 최적임을 누락한다.",
+        "Q와 R의 준정부호·정부호 조건을 누락한다.",
+        "CARE의 임의 해와 안정화 해를 구분하지 않는다.",
+        "K와 A-BK의 부호를 일관되지 않게 사용한다.",
+        "stabilizability와 완전 가제어성을 구분하지 않는다.",
+        "detectability 조건을 누락한다.",
+        "Q를 크게 하면 모든 성능이 개선된다고 단정한다.",
+        "작은 R에 따른 포화와 입력증가를 누락한다.",
+        "Q와 R의 공통 배율 불변성을 누락한다.",
+        "상태와 입력의 단위 및 정규화를 고려하지 않는다.",
+        "LQR을 직접 극점 배치 방법으로 오해한다.",
+        "기본 LQR이 기준입력 정상상태 오차를 자동 제거한다고 오해한다.",
+        "R이 hard saturation을 보장한다고 오해한다.",
+        "연속 CARE 해를 이산시스템에 그대로 적용한다.",
+        "관측기, 모델 불확실성과 수치 residual 검증을 누락한다."
+      ],
+      "field_connection_points": [
+        "quadratic cost J",
+        "x transpose Q x",
+        "u transpose R u",
+        "positive semidefinite Q",
+        "positive definite R",
+        "continuous algebraic Riccati equation",
+        "stabilizing Riccati solution",
+        "K equals R inverse B transpose P",
+        "closed-loop A minus B K",
+        "stabilizability",
+        "detectability",
+        "Q state weighting",
+        "R control weighting",
+        "common scaling invariance",
+        "Bryson rule",
+        "state and input normalization",
+        "LQR versus pole placement",
+        "LQR reference prefilter",
+        "LQI integral augmentation",
+        "hard input saturation",
+        "constrained optimal control",
+        "discrete algebraic Riccati equation",
+        "discrete LQR gain",
+        "observer-based LQR",
+        "Riccati residual",
+        "robustness validation"
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T12:36:05Z-generated-topic-pack-fact-anchors",
+  "version": "2026-07-11T13:53:57Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json",
@@ -1378,6 +1378,563 @@
       ],
       "revision_notes": [
         "2026-07-11: 진상·지상 보상기 설계식과 성능 상충관계를 14개 Anchor와 8개 Fatal로 구성했다."
+      ]
+    },
+    {
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "schema_version": "fact_anchor.v1",
+      "title_ko": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
+      "anchors": [
+        {
+          "id": "state_lqr_design_objective_cost",
+          "anchor_id": "state_lqr_design_objective_cost",
+          "statement": "LQR은 상태편차와 제어입력 사용량의 상충관계를 J=∫(x^TQx+u^TRu)dt의 이차 비용함수로 정의하고 이를 최소화하는 상태피드백 이득을 구하는 최적제어 방법이다.",
+          "importance": "must",
+          "keywords": [
+            "linear quadratic regulator",
+            "quadratic cost",
+            "optimal state feedback",
+            "LQR 비용함수",
+            "상태 제어 절충"
+          ],
+          "core_terms": [
+            "LQR",
+            "이차 비용함수",
+            "상태편차",
+            "제어입력",
+            "최적 상태피드백"
+          ],
+          "accepted_explanations": [
+            "LQR의 최적성이 선택한 선형모델과 Q, R로 정의한 비용함수에 대한 최적임을 설명한다."
+          ],
+          "rejected_explanations": [
+            "LQR이 모델과 가중치에 관계없이 모든 실제 성능지표를 자동으로 최적화한다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_weight_matrix_conditions",
+          "anchor_id": "state_lqr_weight_matrix_conditions",
+          "statement": "기본 연속시간 LQR에서 Q는 대칭 양의 준정부호이고 R은 대칭 양의 정부호여야 하며, 각각 상태편차와 제어입력의 비용을 정의한다.",
+          "importance": "must",
+          "keywords": [
+            "weighting matrix",
+            "positive semidefinite Q",
+            "positive definite R",
+            "가중행렬 조건",
+            "quadratic form"
+          ],
+          "core_terms": [
+            "Q>=0",
+            "R>0",
+            "대칭행렬",
+            "상태 가중치",
+            "입력 가중치"
+          ],
+          "accepted_explanations": [
+            "Q=Q^T>=0, R=R^T>0 조건과 R 역행렬 및 비용함수의 양의성을 연결하여 설명한다."
+          ],
+          "rejected_explanations": [
+            "Q와 R의 대칭성, 정부호 조건과 물리적 의미를 무시하고 임의의 행렬을 사용할 수 있다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_care_stabilizing_solution",
+          "anchor_id": "state_lqr_care_stabilizing_solution",
+          "statement": "교차항이 없는 연속시간 무한시간 LQR의 CARE는 A^TP+PA-PBR^(-1)B^TP+Q=0이며, 제어에는 A-BR^(-1)B^TP를 안정하게 만드는 stabilizing solution P를 사용한다.",
+          "importance": "must",
+          "keywords": [
+            "continuous algebraic Riccati equation",
+            "stabilizing solution",
+            "CARE residual",
+            "Riccati 해",
+            "대칭 P"
+          ],
+          "core_terms": [
+            "CARE",
+            "Riccati 방정식",
+            "안정화 해",
+            "P",
+            "Riccati residual"
+          ],
+          "accepted_explanations": [
+            "Riccati 방정식의 임의 수학적 해가 아니라 폐루프를 안정하게 만드는 대칭 안정화 해와 residual을 확인한다."
+          ],
+          "rejected_explanations": [
+            "CARE를 만족하는 어떠한 P도 폐루프 안정성과 관계없이 동일한 LQR 해라고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_optimal_gain_closed_loop",
+          "anchor_id": "state_lqr_optimal_gain_closed_loop",
+          "statement": "안정화 Riccati 해 P에서 K=R^(-1)B^TP를 계산하고 u=-Kx를 적용하면 폐루프 행렬은 A-BK가 되며 그 고유값이 LQR 폐루프 극점이다.",
+          "importance": "must",
+          "keywords": [
+            "optimal gain",
+            "closed-loop matrix",
+            "LQR feedback gain",
+            "최적 상태피드백 이득",
+            "closed-loop eigenvalue"
+          ],
+          "core_terms": [
+            "K=R^(-1)B^TP",
+            "u=-Kx",
+            "A-BK",
+            "폐루프 극점",
+            "최적 이득"
+          ],
+          "accepted_explanations": [
+            "제어입력 부호 규약, K 계산식과 A-BK의 안정성 및 비용 최소화를 일관되게 연결한다."
+          ],
+          "rejected_explanations": [
+            "K가 Q와 R에 무관하거나 폐루프 행렬을 A+BK로 사용하면서 부호 규약을 설명하지 않는다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_existence_stabilizability_detectability",
+          "anchor_id": "state_lqr_existence_stabilizability_detectability",
+          "statement": "무한시간 안정화 LQR 해에는 통상 (A,B)의 stabilizability, (Q^(1/2),A)의 detectability, Q>=0과 R>0 조건이 필요하다.",
+          "importance": "must",
+          "keywords": [
+            "LQR existence condition",
+            "stabilizable pair",
+            "detectable pair",
+            "안정화 가능성",
+            "검출 가능성"
+          ],
+          "core_terms": [
+            "stabilizability",
+            "detectability",
+            "비가제어 안정모드",
+            "비검출 불안정모드",
+            "해의 존재조건"
+          ],
+          "accepted_explanations": [
+            "완전 가제어성보다 완화된 stabilizability와 비용에서 보이지 않는 불안정 모드를 배제하는 detectability를 설명한다."
+          ],
+          "rejected_explanations": [
+            "불안정한 비가제어 모드가 있어도 Q>=0과 R>0만 만족하면 항상 안정한 LQR 해가 존재한다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_q_weight_state_tradeoff",
+          "anchor_id": "state_lqr_q_weight_state_tradeoff",
+          "statement": "Q의 특정 상태 가중치를 상대적으로 증가시키면 해당 상태편차 억제를 강화하지만 일반적으로 제어입력, 포화, 노이즈 민감도와 강인성 사이의 상충관계가 발생한다.",
+          "importance": "must",
+          "keywords": [
+            "state weighting",
+            "Q tuning",
+            "performance tradeoff",
+            "상태 가중치 조정",
+            "LQR tuning"
+          ],
+          "core_terms": [
+            "Q 가중치",
+            "상태편차",
+            "제어입력 증가",
+            "포화",
+            "강인성 상충"
+          ],
+          "accepted_explanations": [
+            "특정 Q 원소의 증가가 결합된 폐루프 전체에 미치는 영향을 검증하며 모든 성능이 단조롭게 개선된다고 단정하지 않는다."
+          ],
+          "rejected_explanations": [
+            "Q를 크게 할수록 상태응답, 입력크기, 노이즈와 강인성이 모두 제한 없이 개선된다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_r_weight_control_tradeoff",
+          "anchor_id": "state_lqr_r_weight_control_tradeoff",
+          "statement": "R을 상대적으로 증가시키면 제어입력 사용을 더 제한하고, 감소시키면 더 큰 입력을 허용해 빠른 응답을 유도할 수 있지만 포화와 미모델 동특성 문제가 커질 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "control weighting",
+            "R tuning",
+            "control effort",
+            "입력 가중치 조정",
+            "cheap control"
+          ],
+          "core_terms": [
+            "R 가중치",
+            "제어입력 비용",
+            "응답속도",
+            "액추에이터 포화",
+            "입력 제한"
+          ],
+          "accepted_explanations": [
+            "R의 변화와 제어입력, 응답속도, 포화 및 실제 액추에이터 용량 사이의 상충관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "R을 0 또는 거의 0으로 줄이면 입력 제한과 관계없이 항상 더 좋은 제어기가 된다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_common_scaling_invariance",
+          "anchor_id": "state_lqr_common_scaling_invariance",
+          "statement": "기본 무한시간 LQR에서 Q와 R을 동일한 양의 상수 gamma로 동시에 배율 조정하면 비용함수와 P의 스케일은 변하지만 최적 상태피드백 이득 K는 변하지 않는다.",
+          "importance": "must",
+          "keywords": [
+            "common scaling invariance",
+            "LQR scaling",
+            "relative weighting",
+            "가중치 동일 배율",
+            "gain invariance"
+          ],
+          "core_terms": [
+            "동일 배율",
+            "gamma Q",
+            "gamma R",
+            "K 불변",
+            "상대적 가중치"
+          ],
+          "accepted_explanations": [
+            "Q와 R의 공통 양의 배율 변경과 Q 또는 R만 변경하는 경우를 구분하고 K가 상대비에 좌우됨을 설명한다."
+          ],
+          "rejected_explanations": [
+            "Q와 R을 동일하게 배율 조정하면 폐루프 이득도 같은 비율로 반드시 증가한다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_state_input_normalization_bryson",
+          "anchor_id": "state_lqr_state_input_normalization_bryson",
+          "statement": "상태와 입력의 단위 및 허용범위가 다르므로 정규화가 필요하며, Bryson's rule의 Q_ii=1/x_i,max^2, R_jj=1/u_j,max^2는 초기 가중치 선정용 경험칙이다.",
+          "importance": "must",
+          "keywords": [
+            "Bryson rule",
+            "state normalization",
+            "input normalization",
+            "허용범위 기반 가중치",
+            "unit scaling"
+          ],
+          "core_terms": [
+            "상태 정규화",
+            "입력 정규화",
+            "Bryson's rule",
+            "허용 최대편차",
+            "초기 가중치"
+          ],
+          "accepted_explanations": [
+            "물리적 허용범위로 초기 Q, R을 선정한 뒤 폐루프 성능과 강인성 검증을 통해 반복 조정한다고 설명한다."
+          ],
+          "rejected_explanations": [
+            "서로 다른 단위의 모든 상태와 입력에 동일한 수치의 가중치를 주면 물리적 중요도도 같다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_pole_placement_distinction",
+          "anchor_id": "state_lqr_pole_placement_distinction",
+          "statement": "극점 배치는 원하는 폐루프 극점을 직접 지정하지만 LQR은 Q와 R로 정의한 비용함수 최소화 결과로 폐루프 극점이 간접 결정된다.",
+          "importance": "must",
+          "keywords": [
+            "LQR versus pole placement",
+            "closed-loop pole design",
+            "optimal versus assigned poles",
+            "극점배치 비교",
+            "상태피드백 설계"
+          ],
+          "core_terms": [
+            "극점 배치",
+            "LQR",
+            "직접 극점 지정",
+            "비용함수 최소화",
+            "간접 극점 결정"
+          ],
+          "accepted_explanations": [
+            "극점 배치의 명시적 동특성 지정과 LQR의 상태성능·입력부담 절충이라는 설계목적 차이를 설명한다."
+          ],
+          "rejected_explanations": [
+            "LQR이 사용자가 입력한 폐루프 극점을 정확히 배치하는 직접 극점배치 알고리즘이라고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_tracking_prefilter_lqi",
+          "anchor_id": "state_lqr_tracking_prefilter_lqi",
+          "statement": "기본 LQR은 원점 조절기이므로 상수 기준입력의 정상상태 오차 0을 자동 보장하지 않으며, 기준입력 프리필터 또는 출력오차 적분상태를 포함한 LQI로 확장할 수 있다.",
+          "importance": "must",
+          "keywords": [
+            "LQI",
+            "LQR reference tracking",
+            "integral optimal control",
+            "LQR 프리필터",
+            "servo regulator"
+          ],
+          "core_terms": [
+            "LQR regulator",
+            "기준입력 추종",
+            "프리필터",
+            "LQI",
+            "적분상태"
+          ],
+          "accepted_explanations": [
+            "기본 LQR, 정상상태 프리필터와 적분상태 확대 LQI의 역할을 구분하고 확대시스템의 안정화 가능성을 확인한다."
+          ],
+          "rejected_explanations": [
+            "u=-Kx의 기본 LQR만 적용하면 별도 기준입력 경로 없이 모든 상수 기준을 정확히 추종한다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_saturation_constraints_limit",
+          "anchor_id": "state_lqr_saturation_constraints_limit",
+          "statement": "표준 LQR의 u^TRu 항은 제어입력 사용에 비용을 부과하지만 액추에이터의 hard saturation이나 상태·입력 상하한을 직접 제약조건으로 강제하지 않는다.",
+          "importance": "must",
+          "keywords": [
+            "LQR constraints",
+            "actuator saturation",
+            "hard input limit",
+            "constrained optimal control",
+            "입력 제약"
+          ],
+          "core_terms": [
+            "u^TRu",
+            "입력 penalty",
+            "hard saturation",
+            "제약조건",
+            "MPC"
+          ],
+          "accepted_explanations": [
+            "명목 입력비용과 실제 hard constraint를 구분하고 포화, windup 및 제약 최적제어의 필요성을 설명한다."
+          ],
+          "rejected_explanations": [
+            "R이 존재하므로 표준 LQR이 실제 액추에이터 상하한을 수학적으로 항상 보장한다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_continuous_discrete_riccati_distinction",
+          "anchor_id": "state_lqr_continuous_discrete_riccati_distinction",
+          "statement": "연속시간 LQR은 CARE를 사용하고 이산시간 LQR은 DARE와 K_d=(R+B_d^TPB_d)^(-1)B_d^TPA_d를 사용하며, 두 해를 동일하게 취급해서는 안 된다.",
+          "importance": "must",
+          "keywords": [
+            "discrete LQR",
+            "DARE",
+            "continuous versus discrete Riccati",
+            "이산시간 LQR",
+            "sampled-data control"
+          ],
+          "core_terms": [
+            "CARE",
+            "DARE",
+            "이산 최적이득",
+            "샘플링주기",
+            "단위원 안정성"
+          ],
+          "accepted_explanations": [
+            "연속 plant의 이산화, 비용함수 이산화, 샘플링 및 A_d-B_dK_d의 단위원 내부 안정성을 검증한다."
+          ],
+          "rejected_explanations": [
+            "연속 CARE에서 계산한 P와 K가 모든 샘플링주기의 이산시스템에서 그대로 최적해가 된다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        },
+        {
+          "id": "state_lqr_robustness_observer_implementation_validation",
+          "anchor_id": "state_lqr_robustness_observer_implementation_validation",
+          "statement": "최종 LQR 설계는 폐루프 극점, 상태응답, 제어입력, 포화, 관측기, 모델 불확실성, 시간지연, 노이즈, 이산화와 Riccati 수치오차를 종합 검증해야 한다.",
+          "importance": "must",
+          "keywords": [
+            "LQR robustness",
+            "observer implementation",
+            "Riccati residual",
+            "Monte Carlo validation",
+            "실제 구현 검증"
+          ],
+          "core_terms": [
+            "폐루프 검증",
+            "관측기",
+            "모델 불확실성",
+            "시간지연",
+            "수치조건"
+          ],
+          "accepted_explanations": [
+            "상태를 측정할 수 없을 때 관측기 또는 Kalman filter를 결합하고 입력제한, 노이즈와 파라미터 변화를 평가한다."
+          ],
+          "rejected_explanations": [
+            "명목 CARE가 풀리고 A-BK가 안정하면 포화, 관측기, 불확실성과 디지털 구현 검증은 필요 없다고 설명한다."
+          ],
+          "grading_notes": "조건과 물리적 의미를 포함한 설명을 평가하며 공식이나 키워드의 단순 나열만으로 충족한 것으로 판단하지 않는다.",
+          "source_basis": "연속·이산 선형 이차 최적제어, 대수 Riccati 방정식, 안정화 가능성·검출 가능성과 상태피드백 설계의 표준 제어이론"
+        }
+      ],
+      "core_facts": [
+        "LQR은 상태편차와 제어입력 사용량의 상충관계를 J=∫(x^TQx+u^TRu)dt의 이차 비용함수로 정의하고 이를 최소화하는 상태피드백 이득을 구하는 최적제어 방법이다.",
+        "기본 연속시간 LQR에서 Q는 대칭 양의 준정부호이고 R은 대칭 양의 정부호여야 하며, 각각 상태편차와 제어입력의 비용을 정의한다.",
+        "교차항이 없는 연속시간 무한시간 LQR의 CARE는 A^TP+PA-PBR^(-1)B^TP+Q=0이며, 제어에는 A-BR^(-1)B^TP를 안정하게 만드는 stabilizing solution P를 사용한다.",
+        "안정화 Riccati 해 P에서 K=R^(-1)B^TP를 계산하고 u=-Kx를 적용하면 폐루프 행렬은 A-BK가 되며 그 고유값이 LQR 폐루프 극점이다.",
+        "무한시간 안정화 LQR 해에는 통상 (A,B)의 stabilizability, (Q^(1/2),A)의 detectability, Q>=0과 R>0 조건이 필요하다.",
+        "Q의 특정 상태 가중치를 상대적으로 증가시키면 해당 상태편차 억제를 강화하지만 일반적으로 제어입력, 포화, 노이즈 민감도와 강인성 사이의 상충관계가 발생한다.",
+        "R을 상대적으로 증가시키면 제어입력 사용을 더 제한하고, 감소시키면 더 큰 입력을 허용해 빠른 응답을 유도할 수 있지만 포화와 미모델 동특성 문제가 커질 수 있다.",
+        "기본 무한시간 LQR에서 Q와 R을 동일한 양의 상수 gamma로 동시에 배율 조정하면 비용함수와 P의 스케일은 변하지만 최적 상태피드백 이득 K는 변하지 않는다.",
+        "상태와 입력의 단위 및 허용범위가 다르므로 정규화가 필요하며, Bryson's rule의 Q_ii=1/x_i,max^2, R_jj=1/u_j,max^2는 초기 가중치 선정용 경험칙이다.",
+        "극점 배치는 원하는 폐루프 극점을 직접 지정하지만 LQR은 Q와 R로 정의한 비용함수 최소화 결과로 폐루프 극점이 간접 결정된다.",
+        "기본 LQR은 원점 조절기이므로 상수 기준입력의 정상상태 오차 0을 자동 보장하지 않으며, 기준입력 프리필터 또는 출력오차 적분상태를 포함한 LQI로 확장할 수 있다.",
+        "표준 LQR의 u^TRu 항은 제어입력 사용에 비용을 부과하지만 액추에이터의 hard saturation이나 상태·입력 상하한을 직접 제약조건으로 강제하지 않는다.",
+        "연속시간 LQR은 CARE를 사용하고 이산시간 LQR은 DARE와 K_d=(R+B_d^TPB_d)^(-1)B_d^TPA_d를 사용하며, 두 해를 동일하게 취급해서는 안 된다.",
+        "최종 LQR 설계는 폐루프 극점, 상태응답, 제어입력, 포화, 관측기, 모델 불확실성, 시간지연, 노이즈, 이산화와 Riccati 수치오차를 종합 검증해야 한다."
+      ],
+      "fatal_wrong_claims": [
+        {
+          "id": "state_lqr_fatal_arbitrary_q_r",
+          "claim": "LQR의 Q와 R은 행렬 조건과 물리적 의미에 관계없이 아무 값이나 사용해도 된다.",
+          "correction": "기본 LQR에서는 Q를 대칭 양의 준정부호, R을 대칭 양의 정부호로 설정하고 상태·입력의 단위와 설계목표를 반영한다.",
+          "wrong_claim": "LQR의 Q와 R은 행렬 조건과 물리적 의미에 관계없이 아무 값이나 사용해도 된다.",
+          "correct_rule": "기본 LQR에서는 Q를 대칭 양의 준정부호, R을 대칭 양의 정부호로 설정하고 상태·입력의 단위와 설계목표를 반영한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "기본 LQR에서는 Q를 대칭 양의 준정부호, R을 대칭 양의 정부호로 설정하고 상태·입력의 단위와 설계목표를 반영한다.",
+          "description": "기본 LQR에서는 Q를 대칭 양의 준정부호, R을 대칭 양의 정부호로 설정하고 상태·입력의 단위와 설계목표를 반영한다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 LQR의 핵심 최적제어 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_lqr_fatal_larger_q_always_better",
+          "claim": "Q를 크게 할수록 상태오차, 제어입력, 강인성과 모든 과도응답 성능이 항상 함께 향상된다.",
+          "correction": "Q 증가는 특정 상태편차 억제를 강화할 수 있지만 큰 제어입력, 포화, 노이즈 민감도와 강인성 저하를 유발할 수 있다.",
+          "wrong_claim": "Q를 크게 할수록 상태오차, 제어입력, 강인성과 모든 과도응답 성능이 항상 함께 향상된다.",
+          "correct_rule": "Q 증가는 특정 상태편차 억제를 강화할 수 있지만 큰 제어입력, 포화, 노이즈 민감도와 강인성 저하를 유발할 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "Q 증가는 특정 상태편차 억제를 강화할 수 있지만 큰 제어입력, 포화, 노이즈 민감도와 강인성 저하를 유발할 수 있다.",
+          "description": "Q 증가는 특정 상태편차 억제를 강화할 수 있지만 큰 제어입력, 포화, 노이즈 민감도와 강인성 저하를 유발할 수 있다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 LQR의 핵심 최적제어 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_lqr_fatal_smaller_r_no_control_cost",
+          "claim": "R을 0에 가깝게 줄일수록 입력 제한과 포화에 관계없이 최적 성능이 계속 향상된다.",
+          "correction": "작은 R은 큰 제어입력과 포화 및 미모델 동특성 문제를 유발할 수 있으며 기본 이론에서 R은 양의 정부호여야 한다.",
+          "wrong_claim": "R을 0에 가깝게 줄일수록 입력 제한과 포화에 관계없이 최적 성능이 계속 향상된다.",
+          "correct_rule": "작은 R은 큰 제어입력과 포화 및 미모델 동특성 문제를 유발할 수 있으며 기본 이론에서 R은 양의 정부호여야 한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "작은 R은 큰 제어입력과 포화 및 미모델 동특성 문제를 유발할 수 있으며 기본 이론에서 R은 양의 정부호여야 한다.",
+          "description": "작은 R은 큰 제어입력과 포화 및 미모델 동특성 문제를 유발할 수 있으며 기본 이론에서 R은 양의 정부호여야 한다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 LQR의 핵심 최적제어 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_lqr_fatal_direct_pole_assignment",
+          "claim": "LQR은 사용자가 지정한 폐루프 극점을 정확히 배치하는 직접 극점 배치 방법이다.",
+          "correction": "LQR 극점은 Q와 R의 비용함수 최소화 결과로 간접 결정되며 직접 극점 지정은 극점 배치 설계의 역할이다.",
+          "wrong_claim": "LQR은 사용자가 지정한 폐루프 극점을 정확히 배치하는 직접 극점 배치 방법이다.",
+          "correct_rule": "LQR 극점은 Q와 R의 비용함수 최소화 결과로 간접 결정되며 직접 극점 지정은 극점 배치 설계의 역할이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "LQR 극점은 Q와 R의 비용함수 최소화 결과로 간접 결정되며 직접 극점 지정은 극점 배치 설계의 역할이다.",
+          "description": "LQR 극점은 Q와 R의 비용함수 최소화 결과로 간접 결정되며 직접 극점 지정은 극점 배치 설계의 역할이다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 LQR의 핵심 최적제어 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_lqr_fatal_unstabilizable_always_solution",
+          "claim": "Q>=0, R>0이면 (A,B)가 안정화 가능하지 않아도 항상 안정한 Riccati 해와 LQR 폐루프를 얻을 수 있다.",
+          "correction": "불안정한 비가제어 모드가 존재하면 상태피드백으로 안정화할 수 없으며 stabilizability와 detectability 조건이 필요하다.",
+          "wrong_claim": "Q>=0, R>0이면 (A,B)가 안정화 가능하지 않아도 항상 안정한 Riccati 해와 LQR 폐루프를 얻을 수 있다.",
+          "correct_rule": "불안정한 비가제어 모드가 존재하면 상태피드백으로 안정화할 수 없으며 stabilizability와 detectability 조건이 필요하다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "불안정한 비가제어 모드가 존재하면 상태피드백으로 안정화할 수 없으며 stabilizability와 detectability 조건이 필요하다.",
+          "description": "불안정한 비가제어 모드가 존재하면 상태피드백으로 안정화할 수 없으며 stabilizability와 detectability 조건이 필요하다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 LQR의 핵심 최적제어 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_lqr_fatal_basic_lqr_zero_tracking_error",
+          "claim": "기본 LQR 상태피드백을 적용하면 별도 기준입력 경로 없이 모든 상수 기준입력의 정상상태 오차가 자동으로 0이 된다.",
+          "correction": "기본 LQR은 원점 조절기이며 기준입력 추종에는 프리필터, LQI 또는 다른 servo 구조가 필요할 수 있다.",
+          "wrong_claim": "기본 LQR 상태피드백을 적용하면 별도 기준입력 경로 없이 모든 상수 기준입력의 정상상태 오차가 자동으로 0이 된다.",
+          "correct_rule": "기본 LQR은 원점 조절기이며 기준입력 추종에는 프리필터, LQI 또는 다른 servo 구조가 필요할 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "기본 LQR은 원점 조절기이며 기준입력 추종에는 프리필터, LQI 또는 다른 servo 구조가 필요할 수 있다.",
+          "description": "기본 LQR은 원점 조절기이며 기준입력 추종에는 프리필터, LQI 또는 다른 servo 구조가 필요할 수 있다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 LQR의 핵심 최적제어 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_lqr_fatal_cost_handles_hard_saturation",
+          "claim": "비용함수에 u^TRu가 있으므로 표준 LQR은 액추에이터의 hard saturation과 입력 제한을 정확히 보장한다.",
+          "correction": "R은 입력 사용에 비용을 부과할 뿐 hard constraint를 직접 강제하지 않으므로 포화 검증과 제약제어가 필요하다.",
+          "wrong_claim": "비용함수에 u^TRu가 있으므로 표준 LQR은 액추에이터의 hard saturation과 입력 제한을 정확히 보장한다.",
+          "correct_rule": "R은 입력 사용에 비용을 부과할 뿐 hard constraint를 직접 강제하지 않으므로 포화 검증과 제약제어가 필요하다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "R은 입력 사용에 비용을 부과할 뿐 hard constraint를 직접 강제하지 않으므로 포화 검증과 제약제어가 필요하다.",
+          "description": "R은 입력 사용에 비용을 부과할 뿐 hard constraint를 직접 강제하지 않으므로 포화 검증과 제약제어가 필요하다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 LQR의 핵심 최적제어 원리와 직접 충돌한다."
+        },
+        {
+          "id": "state_lqr_fatal_care_equals_dare",
+          "claim": "연속시간 CARE에서 구한 P와 K를 샘플링한 이산시스템에 그대로 사용하면 이산시간 LQR 최적해가 된다.",
+          "correction": "이산시간 시스템은 이산 모델과 DARE로 K_d를 계산하고 샘플링주기와 이산 비용함수를 고려해야 한다.",
+          "wrong_claim": "연속시간 CARE에서 구한 P와 K를 샘플링한 이산시스템에 그대로 사용하면 이산시간 LQR 최적해가 된다.",
+          "correct_rule": "이산시간 시스템은 이산 모델과 DARE로 K_d를 계산하고 샘플링주기와 이산 비용함수를 고려해야 한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C",
+            "D"
+          ],
+          "message": "이산시간 시스템은 이산 모델과 DARE로 K_d를 계산하고 샘플링주기와 이산 비용함수를 고려해야 한다.",
+          "description": "이산시간 시스템은 이산 모델과 DARE로 K_d를 계산하고 샘플링주기와 이산 비용함수를 고려해야 한다.",
+          "grading_notes": "답안이 해당 주장을 조건 없는 정답으로 제시하면 LQR의 핵심 최적제어 원리와 직접 충돌한다."
+        }
+      ],
+      "regex_patterns": [],
+      "safe_expressions": [
+        "Q를 증가시키면 해당 상태편차를 더 강하게 억제하는 경향이 있지만 제어입력과 강인성은 별도로 검증해야 한다.",
+        "R을 증가시키면 일반적으로 제어입력이 감소하고 응답이 완만해질 수 있다.",
+        "완전 가제어하지 않아도 비가제어 모드가 안정하면 stabilizability가 성립할 수 있다.",
+        "기본 LQR에 프리필터 또는 적분상태를 결합하여 기준입력 추종성능을 개선할 수 있다.",
+        "Q와 R의 동일 양의 배율 변경은 기본 무한시간 LQR의 K를 변경하지 않는다.",
+        "표준 LQR의 R은 입력 사용을 억제하지만 hard saturation을 직접 보장하지 않는다."
+      ],
+      "revision_notes": [
+        "2026-07-11: LQR 비용함수, CARE, 존재조건, 가중치 설계와 실제 구현을 14개 Anchor와 8개 Fatal로 구성했다."
       ]
     },
     {

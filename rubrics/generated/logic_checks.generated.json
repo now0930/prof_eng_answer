@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-11T12:36:05Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-11T13:53:57Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -109,6 +109,34 @@
         "정상상태 오차 보상",
         "주파수응답 보상기 설계",
         "Bode 보상기 설계"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "enabled": false,
+      "topic_name": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
+      "question_type": "CALC_DESIGN",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "LQR",
+        "linear quadratic regulator",
+        "선형 이차 조절기",
+        "최적 상태피드백",
+        "Riccati 방정식",
+        "CARE",
+        "DARE",
+        "LQR 가중치",
+        "Q R 튜닝",
+        "Bryson rule",
+        "Bryson's rule",
+        "LQI",
+        "optimal state feedback",
+        "quadratic optimal control"
       ],
       "fatal_checks": [],
       "major_checks": [],

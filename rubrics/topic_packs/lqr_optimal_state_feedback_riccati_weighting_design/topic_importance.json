@@ -1,0 +1,21 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "CALC_DESIGN",
+  "high_band_unlock_conditions": [
+    "LQR의 최적성이 선택한 선형모델과 이차 비용함수에 대한 최적임을 설명한다.",
+    "CARE, stabilizing solution P, K=R^(-1)B^TP와 A-BK의 관계를 정확히 제시한다.",
+    "완전 가제어성보다 완화된 stabilizability와 detectability 조건을 설명한다.",
+    "Q와 R 변화에 따른 상태편차, 제어입력, 포화, 노이즈와 강인성의 상충관계를 설명한다.",
+    "Q와 R의 공통 배율 불변성과 상태·입력 정규화 및 Bryson's rule을 설명한다.",
+    "극점 직접 배치와 LQR 비용 최적화 및 기본 LQR과 LQI의 역할을 구분한다.",
+    "표준 LQR이 hard saturation을 보장하지 않는 이유와 CARE·DARE의 차이를 설명한다.",
+    "폐루프 극점, 입력, 포화, 관측기, 불확실성, 노이즈, 샘플링과 Riccati 수치오차를 종합 검증한다."
+  ],
+  "note": "극점 배치 상태피드백을 비용함수 기반 최적설계로 확장하며 향후 Kalman filter와 LQG Topic의 기반이 되는 핵심 주제다.",
+  "revision_notes": [
+    "2026-07-11: CALC_DESIGN / THEORY_CORE / CORE_MUST_PREPARE로 확정했다."
+  ]
+}

@@ -1,0 +1,151 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+  "source_policy": {
+    "role": "LQR 비용함수, CARE·DARE, 안정화 해, Q·R 가중치와 실제 구현 한계를 LLM 의미 판정에 제공한다.",
+    "runtime_files_are_not_modified_by_this_file": true,
+    "deterministic_checks_target": "행렬 조건, 존재조건과 조건부 가중치 의미 판정이 필요하므로 결정론적 Fatal 검사를 사용하지 않는다.",
+    "llm_profile_target": "비용함수와 최적성 범위, Riccati 안정화 해, 가중치 상충관계와 연속·이산 구현을 문맥 기반으로 판정한다.",
+    "note": "공식의 단순 누락이나 계산 실수는 Fatal이 아니며 핵심 원리의 조건 없는 반대 주장만 Fatal 후보로 판정한다."
+  },
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
+    "question_type": "CALC_DESIGN",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [
+      "LQR",
+      "linear quadratic regulator",
+      "선형 이차 조절기",
+      "최적 상태피드백",
+      "Riccati 방정식",
+      "CARE",
+      "DARE",
+      "LQR 가중치",
+      "Q R 튜닝",
+      "Bryson rule",
+      "Bryson's rule",
+      "LQI",
+      "optimal state feedback",
+      "quadratic optimal control"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
+    "difficulty": "THEORY_CORE",
+    "cap_policy": {
+      "fatal_recommended_ceiling": 10.0,
+      "fatal_confidence_threshold": 0.75
+    },
+    "candidate_extraction": {
+      "max_candidates": 24,
+      "nearby_window": 2,
+      "key_terms": [
+        "LQR",
+        "linear quadratic regulator",
+        "선형 이차 조절기",
+        "최적 상태피드백",
+        "Riccati 방정식",
+        "CARE",
+        "DARE",
+        "LQR 가중치",
+        "Q R 튜닝",
+        "Bryson rule",
+        "Bryson's rule",
+        "LQI",
+        "optimal state feedback",
+        "quadratic optimal control",
+        "J integral x transpose Q x",
+        "u transpose R u",
+        "A transpose P plus P A",
+        "P B R inverse B transpose P",
+        "K equals R inverse B transpose P",
+        "stabilizability",
+        "detectability",
+        "positive semidefinite Q",
+        "positive definite R",
+        "common scaling",
+        "state normalization",
+        "hard saturation",
+        "reference prefilter",
+        "discrete Riccati equation"
+      ],
+      "rules": []
+    },
+    "truth_schema": [
+      "[state_lqr_design_objective_cost] LQR은 상태편차와 제어입력 사용량의 상충관계를 J=∫(x^TQx+u^TRu)dt의 이차 비용함수로 정의하고 이를 최소화하는 상태피드백 이득을 구하는 최적제어 방법이다.",
+      "[state_lqr_weight_matrix_conditions] 기본 연속시간 LQR에서 Q는 대칭 양의 준정부호이고 R은 대칭 양의 정부호여야 하며, 각각 상태편차와 제어입력의 비용을 정의한다.",
+      "[state_lqr_care_stabilizing_solution] 교차항이 없는 연속시간 무한시간 LQR의 CARE는 A^TP+PA-PBR^(-1)B^TP+Q=0이며, 제어에는 A-BR^(-1)B^TP를 안정하게 만드는 stabilizing solution P를 사용한다.",
+      "[state_lqr_optimal_gain_closed_loop] 안정화 Riccati 해 P에서 K=R^(-1)B^TP를 계산하고 u=-Kx를 적용하면 폐루프 행렬은 A-BK가 되며 그 고유값이 LQR 폐루프 극점이다.",
+      "[state_lqr_existence_stabilizability_detectability] 무한시간 안정화 LQR 해에는 통상 (A,B)의 stabilizability, (Q^(1/2),A)의 detectability, Q>=0과 R>0 조건이 필요하다.",
+      "[state_lqr_q_weight_state_tradeoff] Q의 특정 상태 가중치를 상대적으로 증가시키면 해당 상태편차 억제를 강화하지만 일반적으로 제어입력, 포화, 노이즈 민감도와 강인성 사이의 상충관계가 발생한다.",
+      "[state_lqr_r_weight_control_tradeoff] R을 상대적으로 증가시키면 제어입력 사용을 더 제한하고, 감소시키면 더 큰 입력을 허용해 빠른 응답을 유도할 수 있지만 포화와 미모델 동특성 문제가 커질 수 있다.",
+      "[state_lqr_common_scaling_invariance] 기본 무한시간 LQR에서 Q와 R을 동일한 양의 상수 gamma로 동시에 배율 조정하면 비용함수와 P의 스케일은 변하지만 최적 상태피드백 이득 K는 변하지 않는다.",
+      "[state_lqr_state_input_normalization_bryson] 상태와 입력의 단위 및 허용범위가 다르므로 정규화가 필요하며, Bryson's rule의 Q_ii=1/x_i,max^2, R_jj=1/u_j,max^2는 초기 가중치 선정용 경험칙이다.",
+      "[state_lqr_pole_placement_distinction] 극점 배치는 원하는 폐루프 극점을 직접 지정하지만 LQR은 Q와 R로 정의한 비용함수 최소화 결과로 폐루프 극점이 간접 결정된다.",
+      "[state_lqr_tracking_prefilter_lqi] 기본 LQR은 원점 조절기이므로 상수 기준입력의 정상상태 오차 0을 자동 보장하지 않으며, 기준입력 프리필터 또는 출력오차 적분상태를 포함한 LQI로 확장할 수 있다.",
+      "[state_lqr_saturation_constraints_limit] 표준 LQR의 u^TRu 항은 제어입력 사용에 비용을 부과하지만 액추에이터의 hard saturation이나 상태·입력 상하한을 직접 제약조건으로 강제하지 않는다.",
+      "[state_lqr_continuous_discrete_riccati_distinction] 연속시간 LQR은 CARE를 사용하고 이산시간 LQR은 DARE와 K_d=(R+B_d^TPB_d)^(-1)B_d^TPA_d를 사용하며, 두 해를 동일하게 취급해서는 안 된다.",
+      "[state_lqr_robustness_observer_implementation_validation] 최종 LQR 설계는 폐루프 극점, 상태응답, 제어입력, 포화, 관측기, 모델 불확실성, 시간지연, 노이즈, 이산화와 Riccati 수치오차를 종합 검증해야 한다."
+    ],
+    "fatal_conditions": [
+      "[state_lqr_fatal_arbitrary_q_r] 잘못된 주장: LQR의 Q와 R은 행렬 조건과 물리적 의미에 관계없이 아무 값이나 사용해도 된다. 정확한 기준: 기본 LQR에서는 Q를 대칭 양의 준정부호, R을 대칭 양의 정부호로 설정하고 상태·입력의 단위와 설계목표를 반영한다.",
+      "[state_lqr_fatal_larger_q_always_better] 잘못된 주장: Q를 크게 할수록 상태오차, 제어입력, 강인성과 모든 과도응답 성능이 항상 함께 향상된다. 정확한 기준: Q 증가는 특정 상태편차 억제를 강화할 수 있지만 큰 제어입력, 포화, 노이즈 민감도와 강인성 저하를 유발할 수 있다.",
+      "[state_lqr_fatal_smaller_r_no_control_cost] 잘못된 주장: R을 0에 가깝게 줄일수록 입력 제한과 포화에 관계없이 최적 성능이 계속 향상된다. 정확한 기준: 작은 R은 큰 제어입력과 포화 및 미모델 동특성 문제를 유발할 수 있으며 기본 이론에서 R은 양의 정부호여야 한다.",
+      "[state_lqr_fatal_direct_pole_assignment] 잘못된 주장: LQR은 사용자가 지정한 폐루프 극점을 정확히 배치하는 직접 극점 배치 방법이다. 정확한 기준: LQR 극점은 Q와 R의 비용함수 최소화 결과로 간접 결정되며 직접 극점 지정은 극점 배치 설계의 역할이다.",
+      "[state_lqr_fatal_unstabilizable_always_solution] 잘못된 주장: Q>=0, R>0이면 (A,B)가 안정화 가능하지 않아도 항상 안정한 Riccati 해와 LQR 폐루프를 얻을 수 있다. 정확한 기준: 불안정한 비가제어 모드가 존재하면 상태피드백으로 안정화할 수 없으며 stabilizability와 detectability 조건이 필요하다.",
+      "[state_lqr_fatal_basic_lqr_zero_tracking_error] 잘못된 주장: 기본 LQR 상태피드백을 적용하면 별도 기준입력 경로 없이 모든 상수 기준입력의 정상상태 오차가 자동으로 0이 된다. 정확한 기준: 기본 LQR은 원점 조절기이며 기준입력 추종에는 프리필터, LQI 또는 다른 servo 구조가 필요할 수 있다.",
+      "[state_lqr_fatal_cost_handles_hard_saturation] 잘못된 주장: 비용함수에 u^TRu가 있으므로 표준 LQR은 액추에이터의 hard saturation과 입력 제한을 정확히 보장한다. 정확한 기준: R은 입력 사용에 비용을 부과할 뿐 hard constraint를 직접 강제하지 않으므로 포화 검증과 제약제어가 필요하다.",
+      "[state_lqr_fatal_care_equals_dare] 잘못된 주장: 연속시간 CARE에서 구한 P와 K를 샘플링한 이산시스템에 그대로 사용하면 이산시간 LQR 최적해가 된다. 정확한 기준: 이산시간 시스템은 이산 모델과 DARE로 K_d를 계산하고 샘플링주기와 이산 비용함수를 고려해야 한다."
+    ],
+    "safe_conditions": [
+      "Q를 증가시키면 해당 상태편차를 더 강하게 억제하는 경향이 있지만 제어입력과 강인성은 별도로 검증해야 한다.",
+      "R을 증가시키면 일반적으로 제어입력이 감소하고 응답이 완만해질 수 있다.",
+      "완전 가제어하지 않아도 비가제어 모드가 안정하면 stabilizability가 성립할 수 있다.",
+      "기본 LQR에 프리필터 또는 적분상태를 결합하여 기준입력 추종성능을 개선할 수 있다.",
+      "Q와 R의 동일 양의 배율 변경은 기본 무한시간 LQR의 K를 변경하지 않는다.",
+      "표준 LQR의 R은 입력 사용을 억제하지만 hard saturation을 직접 보장하지 않는다."
+    ],
+    "output_contract": {
+      "json_only": true,
+      "required_fields": [
+        "verdict",
+        "confidence",
+        "reason",
+        "checks",
+        "findings"
+      ],
+      "verdict_values": [
+        "pass",
+        "warn",
+        "fatal"
+      ]
+    },
+    "major_checks": [],
+    "feedback_templates": {
+      "core_theory_positive": "LQR 비용함수, Riccati 안정화 해, 존재조건과 Q·R의 상충관계를 실제 구현까지 정확히 연결했다.",
+      "core_theory_major": "핵심 반대 주장은 없지만 stabilizability·detectability, 가중치 정규화, 추종 확장 또는 포화·이산 검증을 보강해야 한다.",
+      "core_theory_fatal": "답안이 Q·R 조건, LQR 극점 결정, 안정화 가능성, hard constraint 또는 CARE·DARE의 핵심 원리와 충돌한다."
+    },
+    "next_practice_points": [
+      "CARE에서 안정화 해 P와 K를 계산한다.",
+      "stabilizability와 detectability를 구분한다.",
+      "Bryson's rule로 초기 Q와 R을 정규화한다.",
+      "LQR과 극점 배치 및 LQI의 역할을 비교한다.",
+      "포화와 이산 DARE를 포함한 폐루프를 검증한다."
+    ],
+    "false_positive_cautions": [
+      "optimal, Riccati, 상태피드백이라는 일반 단어만으로 이 Topic을 확정하지 않는다.",
+      "Q 또는 R 변화의 일반적 경향을 조건부로 설명한 답안을 항상·무조건 주장과 구분한다.",
+      "완전 가제어성을 충분조건으로 제시한 답안은 stabilizability를 부정한 것으로 보지 않는다.",
+      "CARE 또는 DARE 공식의 단순 항 누락이나 기호 차이만으로 Fatal 처리하지 않는다.",
+      "프리필터나 LQI를 선택적 추종 확장으로 설명한 답안은 기본 LQR의 원점 조절기 성격과 모순되지 않는다.",
+      "R이 입력을 억제한다고 설명한 것을 hard constraint를 보장한다는 주장과 구분한다."
+    ]
+  }
+}
