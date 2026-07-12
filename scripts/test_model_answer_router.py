@@ -16,7 +16,7 @@ if str(ROOT_DIR) not in sys.path:
 from model_answer_router import find_model_answer_reference
 
 
-PT100_TOPIC = "rtd_pt100_wire_connection_compensation"
+PT100_TOPIC = "rtd_temperature_sensor_principle_pt100_wiring_compensation"
 
 PRINCIPLE_TYPE = {
     "primary_type": {

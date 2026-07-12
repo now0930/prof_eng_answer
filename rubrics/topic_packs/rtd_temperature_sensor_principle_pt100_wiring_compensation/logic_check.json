@@ -1,0 +1,77 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+  "title": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [
+      "RTD",
+      "Pt100",
+      "PT100",
+      "측온저항체",
+      "저항온도계",
+      "Resistance Temperature Detector",
+      "Callendar-Van Dusen",
+      "2선식 RTD",
+      "3선식 RTD",
+      "4선식 RTD",
+      "리드선 저항 보상",
+      "Kelvin RTD"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+    "difficulty": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+    "cap_policy": {},
+    "candidate_extraction": {},
+    "truth_schema": [
+      "[rtd_temperature_measurement_chain] RTD는 공정온도를 감온부의 온도로 전달한 뒤 금속소자의 저항 변화로 변환하고, 외부 여기전류와 신호조절회로를 통해 전압과 표시온도로 검출하는 수동형 온도센서이다.",
+      "[rtd_metal_resistance_temperature_principle] RTD는 R=ρl/A에서 금속 비저항 ρ가 온도에 따라 변하는 성질을 주된 변환원리로 이용하며, 백금은 안정성·재현성·내식성이 우수하여 널리 사용된다.",
+      "[rtd_pt100_reference_resistance_alpha_standard] Pt100은 0℃에서 공칭저항이 100 Ω인 백금 RTD이며, 대표 산업용 표준 특성의 평균 온도계수 α는 약 0.00385/℃이다.",
+      "[rtd_callendar_van_dusen_characteristic] Pt100의 저항-온도 관계는 전 온도범위에서 완전한 직선이 아니며, 0℃ 이상에서는 R_t=R_0(1+At+Bt²), 0℃ 미만에서는 C(t−100)t³ 항을 추가하는 Callendar–Van Dusen 관계를 사용한다.",
+      "[rtd_excitation_voltage_measurement] RTD는 외부 측정전류를 흘리고 V_RTD=I_exc·R_RTD를 측정하여 R_RTD=V_RTD/I_exc로 저항을 구한 뒤 온도로 환산한다.",
+      "[rtd_self_heating_thermal_error] RTD의 여기전류는 P=I_exc²R_RTD의 열을 발생시키며, 열이 충분히 방출되지 않으면 감온부 온도가 실제 공정온도보다 높아지는 자기발열 오차가 발생한다.",
+      "[rtd_two_wire_lead_resistance_error] 2선식 RTD에서는 R_measured=R_RTD+R_L1+R_L2로 두 리드선 저항이 감온저항에 직렬로 포함되어 일반적으로 양의 온도오차를 만든다.",
+      "[rtd_three_wire_bridge_compensation_assumptions] 3선식 RTD는 bridge 또는 차동측정에서 R_L1≈R_L2라는 동일 리드저항 가정을 이용하여 리드선 영향의 1차 성분을 상쇄한다.",
+      "[rtd_four_wire_kelvin_measurement] 4선식 RTD는 force lead로 측정전류를 공급하고 sense lead로 RTD 양단 전압을 측정하는 Kelvin 방식으로 리드선 전압강하 영향을 크게 줄인다.",
+      "[rtd_wiring_method_selection_tradeoff] RTD의 2선식·3선식·4선식은 요구 불확도, 배선거리, 비용, 단자 수, transmitter 위치와 유지보수성을 함께 고려하여 선정한다.",
+      "[rtd_transmitter_connection_signal_conditioning] RTD transmitter는 여기전류 공급, 2선식·3선식·4선식 입력처리, 선형화, 절연, 진단과 4–20 mA 또는 디지털 신호변환을 수행할 수 있다.",
+      "[rtd_installation_thermowell_dynamic_response] RTD의 표시온도와 응답시간은 감온소자뿐 아니라 thermowell, 삽입길이, 유속, 열전도, 열용량과 stem conduction의 영향을 받는다.",
+      "[rtd_calibration_tolerance_uncertainty] RTD는 기준온도계와 안정된 온도원을 사용하여 다점교정하며, 센서 허용오차, 회로, 배선, 자기발열과 설치오차를 측정불확도에 반영한다.",
+      "[rtd_fault_diagnostics_environment_validation] RTD 계측채널은 단선, 단락, 접촉저항, 절연저하, 수분침투, 3선식 불평형, 배선방식 오설정과 drift를 진단하고 loop check로 검증해야 한다."
+    ],
+    "fatal_conditions": [
+      "[rtd_fatal_self_generated_voltage] 잘못된 주장: RTD는 온도에 비례하는 전압을 자체 발생하므로 외부 측정전류가 필요 없다. 정확한 기준: RTD는 온도에 따라 저항이 변하는 수동형 센서이며 외부 여기전류 또는 bridge 측정이 필요하다.",
+      "[rtd_fatal_pt100_means_hundred_at_any_temperature] 잘못된 주장: Pt100은 모든 온도에서 저항이 항상 100 Ω이다. 정확한 기준: Pt100은 0℃에서 공칭저항이 100 Ω인 백금 RTD이며 저항은 온도에 따라 변한다.",
+      "[rtd_fatal_perfect_linear_all_temperature] 잘못된 주장: Pt100은 전 온도범위에서 완전히 선형이므로 하나의 1차식만 사용하면 된다. 정확한 기준: 정밀 변환에는 적용범위에 맞는 Callendar–Van Dusen 식 또는 표준표가 필요하다.",
+      "[rtd_fatal_excitation_current_no_self_heating] 잘못된 주장: RTD 측정전류는 신호만 증가시키며 센서온도와 측정오차에는 영향을 주지 않는다. 정확한 기준: 측정전류는 I²R 열을 발생시켜 자기발열 오차를 만들 수 있다.",
+      "[rtd_fatal_two_wire_removes_lead_error] 잘못된 주장: 2선식은 두 리드선을 사용하므로 리드선 저항이 자동으로 상쇄된다. 정확한 기준: 2선식에서는 두 리드선 저항이 RTD 저항에 직렬로 더해진다.",
+      "[rtd_fatal_three_wire_perfect_unconditional] 잘못된 주장: 3선식은 리드선 저항이 달라도 모든 조건에서 오차를 완전히 제거한다. 정확한 기준: 3선식은 대응 리드선 저항이 같다는 가정에 의존하며 불평형 시 잔류오차가 발생한다.",
+      "[rtd_fatal_four_wire_removes_all_error] 잘못된 주장: 4선식은 자기발열, 설치오차, 노이즈와 drift까지 모든 오차를 제거한다. 정확한 기준: 4선식은 주로 리드선 저항 영향을 줄이며 다른 센서·회로·설치 오차는 별도로 관리해야 한다.",
+      "[rtd_fatal_wiring_accuracy_only_selection] 잘못된 주장: RTD는 항상 가장 정확한 4선식만 사용하면 되고 비용과 유지보수는 고려할 필요가 없다. 정확한 기준: 2선식·3선식·4선식은 요구 불확도, 거리, 비용, transmitter 위치와 유지보수성을 함께 고려해 선정한다."
+    ],
+    "safe_conditions": [],
+    "output_contract": {},
+    "major_checks": [],
+    "feedback_templates": {},
+    "next_practice_points": [],
+    "false_positive_cautions": [],
+    "enabled": true
+  },
+  "revision_notes": [
+    "renamed_from=rtd_pt100_wire_connection_compensation",
+    "reframed_from_wiring_centric_to_rtd_sensor_principle",
+    "integrated_pt100_excitation_self_heating_and_2_3_4_wire_compensation",
+    "separated_thermocouple_and_thermistor_into_independent_topics",
+    "deterministic_checks_disabled",
+    "candidate_extraction_rules_empty"
+  ]
+}

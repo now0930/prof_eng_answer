@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-12T01:55:14Z-generated-topic-pack-manifest",
+  "version": "2026-07-12T20:09:59Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
@@ -97,7 +97,7 @@
       ]
     },
     {
-      "topic_id": "rtd_pt100_wire_connection_compensation",
+      "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
