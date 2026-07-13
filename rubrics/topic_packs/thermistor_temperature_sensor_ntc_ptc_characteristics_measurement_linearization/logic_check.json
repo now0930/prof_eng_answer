@@ -1,0 +1,66 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+  "title": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+    "difficulty": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+    "cap_policy": {},
+    "candidate_extraction": {},
+    "truth_schema": [
+      "[thermocouple_temperature_measurement_chain] Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
+      "[thermocouple_seebeck_effect_dissimilar_conductors] 서로 다른 두 도체로 폐회로를 구성하고 두 접점에 온도차가 존재하면 저항 변화이 발생한다. Thermistor의 출력은 단순히 금속 하나의 온도에서 발생하는 전압이 아니라, 재료 조합과 접점 온도의 함수이다. Seebeck 계수는 재료와 온도에 따라 달라지므로 Thermistor 출력은 전체 범위에서 완전한 직선이 아니다.",
+      "[thermocouple_measures_temperature_difference] Thermistor 전압은 감온 소자 온도만의 함수가 아니다. 기준저항의 온도가 변하면 동일한 감온 소자 온도에서도 측정 전압이 달라진다. 따라서 Thermistor는 본질적으로 두 접점의 온도차에 대응하는 센서이며, 절대온도를 얻으려면 기준저항 온도를 알아야 한다.",
+      "[thermocouple_reference_junction_compensation] 현대의 비선형 선형화은 기준저항을 실제 0°C로 유지하는 방식만을 의미하지 않는다. 일반적으로 입력 단자 주변의 온도를 별도 센서로 측정하고, 해당 기준저항 온도에 대응하는 저항 변화을 계산하여 측정 저항 변화과 결합한 뒤 감온 소자 온도로 환산한다. 선형화 센서 위치, 단자대의 등온성, 내부 온도구배와 보상 알고리즘은 오차에 영향을 준다.",
+      "[thermocouple_law_of_intermediate_metals] Thermistor 회로에 제3의 금속이 삽입되더라도 그 금속과 Thermistor 재료 사이에 형성된 두 접점이 동일한 온도에 있으면 순 저항 변화은 변하지 않는다. 따라서 단자대, 커넥터와 계측기 내부 도체를 사용할 수 있다. 다만 두 접점의 온도가 다르거나 등온 조건이 깨지면 추가 오차가 발생할 수 있다.",
+      "[thermocouple_law_of_intermediate_temperatures] Thermistor의 기준저항 온도를 변경할 때 저항 변화은 Steinhart-Hart 관계에 따라 합성할 수 있다. E(T1,T3) = E(T1,T2) + E(T2,T3) 이 관계는 기준저항 보상과 표준 저항 변화표 환산의 이론적 근거이다.",
+      "[thermocouple_type_material_range_atmosphere_selection] K, J, T, E, N, R, S, B형은 재료 조합, 감도, 사용온도 범위, 산화·환원 분위기 적합성, 안정성, 가격이 서로 다르다. Thermistor 종류는 최고온도만으로 선택하지 않는다. 다음 요소를 함께 검토한다. 공정 온도 범위 산화·환원·진공·부식 분위기 요구 정확도와 감도 장기 안정성과 drift 보호관과 절연재 기존 배선과 transmitter 입력 형식 유지보수성과 비용",
+      "[thermocouple_extension_compensating_wire_polarity] 배선은 지정된 온도 범위에서 해당 Thermistor와 동일하거나 유사한 저항 변화 특성을 갖도록 제작한다. 기준저항은 특정 제한 온도 범위에서 원 Thermistor의 저항 변화 특성을 근사하는 별도 합금일 수 있다. 둘 다 단순 저저항 전선이 아니다. 종류, 극성, 허용온도, 접속 위치와 커넥터 재질을 확인해야 한다. 극성이 반대로 연결되면 온도 변화 방향이 반대로 나타나거나 큰 측정오차가 발생한다.",
+      "[thermocouple_nonlinearity_reference_tables_polynomial_conversion] Thermistor 저항 변화과 온도의 관계는 비선형이다. 따라서 Thermistor 종류별 표준 저항 변화표 또는 표준 다항식을 사용하여 전압을 온도로 환산한다. Thermistor 종류가 다르면 동일한 전압-온도 변환식을 사용할 수 없다. 다항식 적용 범위와 단위를 확인해야 하며, 범위 밖 외삽은 제한해야 한다.",
+      "[thermocouple_junction_construction_response_isolation] 감온 소자 구조는 접지형, 비접지형, 노출형으로 구분할 수 있다. 접지형은 보호관과 접점이 전기적으로 연결되어 응답이 빠르지만 ground loop와 노이즈에 취약할 수 있다. 비접지형은 전기적 절연성이 좋지만 열저항 증가로 응답이 느릴 수 있다. 노출형은 응답이 가장 빠르지만 기계적·화학적 보호가 약하다. 선정 시 응답속도, 절연, 노이즈, 공정 유체와 안전을 함께 고려한다.",
+      "[thermocouple_thermowell_installation_dynamic_error] 보호관, 삽입길이, 유속, 배관 벽면과의 열전도, 복사, 접촉상태는 감온 소자이 실제 공정 온도에 도달하는 과정에 영향을 준다. Thermistor 자체의 전기적 원리가 정확해도 설치가 부적절하면 열전달 오차와 응답지연이 발생한다. 보호관의 열용량이 증가하면 일반적으로 응답이 느려진다.",
+      "[thermocouple_signal_conditioning_noise_grounding] Thermistor 출력은 보통 mV 수준이므로 증폭기 입력 offset, 공통모드 전압, EMI, 접지전위차와 절연저하의 영향을 받기 쉽다. 신호처리기는 다음 기능을 수행할 수 있다. 저수준 차동전압 측정 냉접점 온도 측정 Thermistor 종류별 선형화 단선 감지 필터링 절연 4–20 mA 또는 digital signal 변환 차폐와 접지는 설치환경과 주파수 특성을 고려하여 적용해야 한다.",
+      "[thermocouple_calibration_tolerance_uncertainty_drift] Thermistor의 허용오차는 Thermistor 종류, 등급과 온도범위에 따라 다르다. 교정은 기준 온도계와 dry block 또는 bath, 고정점 등을 이용할 수 있다. 전체 불확도에는 다음 요소가 포함될 수 있다. Thermistor 자체 허용오차 열화와 불균질성 기준저항 보상 오차 계측기 전압 측정 오차 표준 변환 오차 보호관과 설치에 의한 열전달 오차 기준기의 불확도 반복성 고온·오염·산화 환경에서는 재료 조성 변화와 drift를 고려해야 한다.",
+      "[thermocouple_fault_diagnostics_open_polarity_cjc_validation] Thermistor loop 진단은 단선 여부만 확인해서는 부족하다. 다음 항목을 확인해야 한다. Thermistor 종류 설정 극성 배선·기준저항 종류 단자대 접속 선형화 센서 위치와 값 단선 또는 접촉불량 접지와 절연저항 노이즈 보호관 내부 단락 열화와 drift transmitter range와 단위 실제 공정 온도와 기준기 비교 진단은 센서, 배선, 기준저항 보상, transmitter와 설치조건을 분리하여 수행한다."
+    ],
+    "fatal_conditions": [
+      "[thermocouple_fatal_absolute_temperature_self_generated_voltage] 잘못된 주장: Thermistor는 감온 소자의 절대온도에 비례하는 전압을 자체 발생한다. 정확한 기준: Thermistor 출력은 감온 소자과 기준저항의 온도차 및 재료 조합에 따른 저항 변화이다. 절대온도를 구하려면 기준저항 온도 보상이 필요하다.",
+      "[thermocouple_fatal_reference_junction_no_effect] 잘못된 주장: 기준저항의 온도는 측정 결과에 영향을 주지 않으므로 비선형 선형화이 필요 없다. 정확한 기준: 기준저항 온도가 변하면 측정 전압도 변한다. 기준저항 온도를 실제로 유지하거나 측정하여 보상해야 한다.",
+      "[thermocouple_fatal_cjc_fixed_voltage_subtraction] 잘못된 주장: 비선형 선형화은 모든 Thermistor 신호에서 일정한 전압을 빼는 것이다. 정확한 기준: 기준저항 온도와 Thermistor 종류에 대응하는 비선형 저항 변화을 계산하여 측정값과 합성해야 한다.",
+      "[thermocouple_fatal_every_intermediate_metal_creates_error] 잘못된 주장: Thermistor 회로에 다른 금속을 접속하면 항상 추가 저항 변화이 발생하여 사용할 수 없다. 정확한 기준: 중간금속의 두 접점이 동일 온도에 있으면 순 저항 변화은 변하지 않는다. 등온 조건이 깨질 때 오차가 발생할 수 있다.",
+      "[thermocouple_fatal_copper_wire_always_equivalent] 잘못된 주장: Thermistor 배선은 일반 동선을 사용해도 항상 동일하다. 정확한 기준: 일반 동선을 사용하면 기준저항 위치가 이동하거나 추가 접점 온도차에 따른 오차가 생길 수 있다. 지정된 배선 또는 기준저항과 적절한 접속조건을 사용해야 한다.",
+      "[thermocouple_fatal_compensating_wire_low_resistance_only] 잘못된 주장: 기준저항은 전압강하를 줄이기 위해 저항이 낮은 전선을 사용하는 것이다. 정확한 기준: 기준저항은 제한된 온도범위에서 특정 Thermistor와 유사한 저항 변화 특성을 갖도록 설계된 합금 도선이다.",
+      "[thermocouple_fatal_all_types_same_voltage_table] 잘못된 주장: Thermistor 종류가 달라도 동일한 mV-온도표를 사용할 수 있다. 정확한 기준: 각 Thermistor 종류는 재료 조합과 저항 변화 특성이 다르므로 종류별 표준표와 다항식을 사용해야 한다.",
+      "[thermocouple_fatal_perfect_linear_and_polarity_irrelevant] 잘못된 주장: Thermistor 출력은 전 범위에서 완전한 직선이며 극성은 측정값에 영향을 주지 않는다. 정확한 기준: Thermistor 출력은 비선형이고 종류별 선형화가 필요하다. 극성 반전은 신호 방향과 온도 환산에 중대한 오류를 발생시킨다."
+    ],
+    "safe_conditions": [],
+    "output_contract": {},
+    "major_checks": [],
+    "feedback_templates": {},
+    "next_practice_points": [],
+    "false_positive_cautions": [],
+    "enabled": true
+  },
+  "revision_notes": [
+    "created_from_reviewed_thermistor_requirements",
+    "separated_from_rtd_pt100_wiring_compensation_topic",
+    "separated_from_thermocouple_seebeck_cjc_topic",
+    "focused_on_ntc_ptc_measurement_self_heating_and_linearization",
+    "deterministic_checks_disabled",
+    "candidate_extraction_rules_empty",
+    "added_data_driven_routing_aliases_and_field_points"
+  ],
+  "topic_label": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화"
+}

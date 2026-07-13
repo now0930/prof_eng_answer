@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-13T05:08:35Z-generated-topic-pack-importance",
+  "version": "2026-07-13T12:37:20Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -315,6 +315,34 @@
         "created_for_topic_pack=temperature_measurement_error_heat_transfer",
         "difficulty=THEORY_CORE; field diagnosis and installation trade-off are central"
       ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "Thermistor가 절대온도가 아니라 접점 온도차에 대응하는 저항 변화을 발생한다는 점을 설명한다.",
+        "저항-온도 특성와 서로 다른 도체의 역할을 설명한다.",
+        "감온 소자과 기준저항을 구분하고 비선형 선형화 절차를 설명한다.",
+        "B-상수 관계과 Steinhart-Hart 관계을 적용 조건과 함께 설명한다.",
+        "배선과 기준저항의 목적, 재질, 극성 및 허용온도를 설명한다.",
+        "Thermistor 종류별 비선형 특성과 종류별 표준 변환의 필요성을 설명한다.",
+        "접점 구조, 보호관과 설치조건을 응답속도·절연·노이즈와 연결한다.",
+        "교정, 불확도, drift, 단선·극성·선형화 오류 진단을 포함한다."
+      ],
+      "note": "RTD를 단순 배선 비교가 아니라 금속 저항의 온도의존성, Pt100 표준특성, 여기전류와 자기발열, 2선식·3선식·4선식 배선보상, transmitter, 설치·교정·진단을 연결하는 센서 원리형 핵심 Topic으로 평가한다. Thermistor과 Thermistor는 별도 Topic으로 분리한다.",
+      "revision_notes": [
+        "created_from_reviewed_thermistor_requirements",
+        "separated_from_rtd_pt100_wiring_compensation_topic",
+        "separated_from_thermocouple_seebeck_cjc_topic",
+        "focused_on_ntc_ptc_measurement_self_heating_and_linearization",
+        "deterministic_checks_disabled",
+        "candidate_extraction_rules_empty",
+        "added_data_driven_routing_aliases_and_field_points"
+      ],
+      "topic_label": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

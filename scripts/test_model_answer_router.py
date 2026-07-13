@@ -494,26 +494,221 @@ class ThermocoupleRoutingRegressionTest(unittest.TestCase):
         )
 
 
-    def test_thermistor_only_question_does_not_retain_thermocouple_candidate(self):
-        result = find_model_answer_reference(
-            question_text='서미스터의 NTC와 PTC 특성, β 식 및 Steinhart-Hart 식을 설명하시오.',
-            answer_text='NTC는 온도가 상승하면 저항이 감소하며 thermistor의 비선형 저항-온도 관계를 이용한다.',
-            question_type_eval=PRINCIPLE_TYPE,
+    def _route_for_thermistor_regression(
+        self,
+        question_text,
+        answer_text="",
+    ):
+        from model_answer_router import (
+            find_model_answer_reference,
         )
-        primary = result.get("primary_reference") or {}
-        candidate_topics = [
-            candidate.get("answer", {}).get("topic_id")
-            for candidate in result.get("candidates", [])
-            if isinstance(candidate, dict)
-        ]
 
-        self.assertNotEqual(
-            primary.get("topic_id"),
-            THERMOCOUPLE_TOPIC,
+        return find_model_answer_reference(
+            question_text=question_text,
+            answer_text=answer_text,
+            question_type_eval={
+                "question_type":
+                    "PRINCIPLE_INTERPRETATION",
+                "predicted_type":
+                    "PRINCIPLE_INTERPRETATION",
+                "confidence":
+                    "high",
+            },
         )
+
+    def _thermistor_regression_topic_ids(
+        self,
+        value,
+    ):
+        topic_ids = set()
+
+        def visit(node):
+            if isinstance(node, dict):
+                topic_id = node.get("topic_id")
+
+                if isinstance(topic_id, str):
+                    topic_ids.add(topic_id)
+
+                for child in node.values():
+                    visit(child)
+
+            elif isinstance(node, list):
+                for child in node:
+                    visit(child)
+
+        visit(value)
+
+        return topic_ids
+
+    def _assert_thermistor_primary(
+        self,
+        result,
+    ):
+        thermistor_topic = (
+            "thermistor_temperature_sensor_"
+            "ntc_ptc_characteristics_measurement_linearization"
+        )
+
+        primary = (
+            result.get("primary_reference")
+            or {}
+        )
+
+        topic_ids = (
+            self
+            ._thermistor_regression_topic_ids(
+                result
+            )
+        )
+
+        self.assertTrue(
+            result.get("matched")
+        )
+
+        self.assertEqual(
+            primary.get("topic_id"),
+            thermistor_topic,
+        )
+
+        self.assertIn(
+            thermistor_topic,
+            topic_ids,
+        )
+
+        return topic_ids
+
+    def test_thermistor_only_question_does_not_retain_thermocouple_candidate(
+        self,
+    ):
+        thermocouple_topic = (
+            "thermocouple_temperature_sensor_"
+            "seebeck_reference_junction_compensation"
+        )
+
+        result = self._route_for_thermistor_regression(
+            (
+                "NTC Thermistor의 온도에 따른 저항 감소, "
+                "B-상수 식과 Steinhart-Hart 선형화를 설명하시오."
+            )
+        )
+
+        topic_ids = self._assert_thermistor_primary(
+            result
+        )
+
         self.assertNotIn(
-            THERMOCOUPLE_TOPIC,
-            candidate_topics,
+            thermocouple_topic,
+            topic_ids,
+        )
+
+    def test_ptc_thermistor_question_routes_to_thermistor(
+        self,
+    ):
+        result = self._route_for_thermistor_regression(
+            (
+                "PTC Thermistor의 전이온도, 저항 증가와 "
+                "과전류 보호 및 자기조절 히터 특성을 설명하시오."
+            )
+        )
+
+        self._assert_thermistor_primary(
+            result
+        )
+
+    def test_explicit_thermistor_comparison_keeps_thermistor_primary(
+        self,
+    ):
+        rtd_topic = (
+            "rtd_temperature_sensor_principle_"
+            "pt100_wiring_compensation"
+        )
+
+        result = self._route_for_thermistor_regression(
+            (
+                "Thermistor와 RTD를 비교하되 Thermistor의 "
+                "NTC·PTC 특성, B-상수, 비선형성과 자기발열을 "
+                "중심으로 설명하시오."
+            )
+        )
+
+        topic_ids = self._assert_thermistor_primary(
+            result
+        )
+
+        self.assertIn(
+            rtd_topic,
+            topic_ids,
+        )
+
+    def test_rtd_and_thermocouple_only_questions_exclude_thermistor(
+        self,
+    ):
+        thermistor_topic = (
+            "thermistor_temperature_sensor_"
+            "ntc_ptc_characteristics_measurement_linearization"
+        )
+
+        questions = (
+            (
+                "Pt100 RTD의 금속 저항온도계수와 "
+                "2선식, 3선식, 4선식 리드선 보상을 설명하시오."
+            ),
+            (
+                "열전대의 Seebeck 효과, 측정접점과 기준접점, "
+                "냉접점 보상 및 보상도선을 설명하시오."
+            ),
+        )
+
+        for question_text in questions:
+            with self.subTest(
+                question=question_text
+            ):
+                result = (
+                    self
+                    ._route_for_thermistor_regression(
+                        question_text
+                    )
+                )
+
+                primary = (
+                    result.get("primary_reference")
+                    or {}
+                )
+
+                topic_ids = (
+                    self
+                    ._thermistor_regression_topic_ids(
+                        result
+                    )
+                )
+
+                self.assertNotEqual(
+                    primary.get("topic_id"),
+                    thermistor_topic,
+                )
+
+                self.assertNotIn(
+                    thermistor_topic,
+                    topic_ids,
+                )
+
+    def test_thermistor_question_survives_foreign_answer_contamination(
+        self,
+    ):
+        result = self._route_for_thermistor_regression(
+            (
+                "Thermistor의 NTC·PTC 저항-온도 특성과 "
+                "자기발열 및 선형화 방법을 설명하시오."
+            ),
+            (
+                "Pt100은 0℃에서 100 Ω이며 3선식으로 "
+                "리드선 저항을 보상한다. 열전대는 Seebeck 효과와 "
+                "냉접점 보상을 사용한다."
+            ),
+        )
+
+        self._assert_thermistor_primary(
+            result
         )
 
 

@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-13T05:08:35Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-13T12:37:20Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -1277,6 +1277,19 @@
           "센서 교체나 교정만으로 해결한다고 단정함."
         ]
       }
+    },
+    {
+      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+      "enabled": false,
+      "topic_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
