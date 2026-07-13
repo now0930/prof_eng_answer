@@ -1,10 +1,10 @@
 {
-  "version": "2026-07-12T20:09:59Z-generated-topic-pack-manifest",
+  "version": "2026-07-13T05:08:35Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 15,
+  "topic_count": 16,
   "topics": [
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
@@ -148,6 +148,16 @@
     },
     {
       "topic_id": "temperature_measurement_error_heat_transfer",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

@@ -426,3 +426,112 @@ class ModelAnswerRouterTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)
+
+THERMOCOUPLE_TOPIC = 'thermocouple_temperature_sensor_seebeck_reference_junction_compensation'
+
+class ThermocoupleRoutingRegressionTest(unittest.TestCase):
+
+    def test_real_thermocouple_question_routes_to_thermocouple(self):
+        result = find_model_answer_reference(
+            question_text='열전대의 Seebeck 효과, 측정접점과 기준접점, 냉접점 보상 및 보상도선을 설명하시오.',
+            answer_text='열전대는 서로 다른 두 도체와 접점 온도차로 열기전력을 발생시킨다. 기준접점 온도를 측정하여 냉접점 보상하고 종류별 표준표로 온도를 환산한다.',
+            question_type_eval=PRINCIPLE_TYPE,
+        )
+        primary = result.get("primary_reference") or {}
+        candidate_topics = [
+            candidate.get("answer", {}).get("topic_id")
+            for candidate in result.get("candidates", [])
+            if isinstance(candidate, dict)
+        ]
+
+        self.assertTrue(result.get("matched"))
+        self.assertEqual(
+            primary.get("topic_id"),
+            THERMOCOUPLE_TOPIC,
+        )
+
+
+    def test_explicit_thermocouple_comparison_keeps_thermocouple_candidate(self):
+        result = find_model_answer_reference(
+            question_text='열전대와 RTD를 비교하되 열전대의 Seebeck 효과, 기준접점 보상, 연장도선과 보상도선을 중심으로 설명하시오.',
+            answer_text='열전대는 온도차에 따른 mV 열기전력을 이용하고 RTD는 여자전류로 저항을 측정한다. 열전대에는 기준접점 보상과 전용 보상도선이 필요하다.',
+            question_type_eval=PRINCIPLE_TYPE,
+        )
+        primary = result.get("primary_reference") or {}
+        candidate_topics = [
+            candidate.get("answer", {}).get("topic_id")
+            for candidate in result.get("candidates", [])
+            if isinstance(candidate, dict)
+        ]
+
+        self.assertTrue(result.get("matched"))
+        self.assertEqual(
+            primary.get("topic_id"),
+            THERMOCOUPLE_TOPIC,
+        )
+
+
+    def test_rtd_only_question_does_not_retain_thermocouple_candidate(self):
+        result = find_model_answer_reference(
+            question_text='Pt100 RTD의 저항-온도 관계와 3선식 및 4선식 리드선 보상 방법을 설명하시오.',
+            answer_text='Pt100은 저항식 온도센서이며 3선식은 리드저항의 대칭을 가정하고 4선식은 Kelvin 방식으로 측정한다.',
+            question_type_eval=PRINCIPLE_TYPE,
+        )
+        primary = result.get("primary_reference") or {}
+        candidate_topics = [
+            candidate.get("answer", {}).get("topic_id")
+            for candidate in result.get("candidates", [])
+            if isinstance(candidate, dict)
+        ]
+
+        self.assertNotEqual(
+            primary.get("topic_id"),
+            THERMOCOUPLE_TOPIC,
+        )
+        self.assertNotIn(
+            THERMOCOUPLE_TOPIC,
+            candidate_topics,
+        )
+
+
+    def test_thermistor_only_question_does_not_retain_thermocouple_candidate(self):
+        result = find_model_answer_reference(
+            question_text='서미스터의 NTC와 PTC 특성, β 식 및 Steinhart-Hart 식을 설명하시오.',
+            answer_text='NTC는 온도가 상승하면 저항이 감소하며 thermistor의 비선형 저항-온도 관계를 이용한다.',
+            question_type_eval=PRINCIPLE_TYPE,
+        )
+        primary = result.get("primary_reference") or {}
+        candidate_topics = [
+            candidate.get("answer", {}).get("topic_id")
+            for candidate in result.get("candidates", [])
+            if isinstance(candidate, dict)
+        ]
+
+        self.assertNotEqual(
+            primary.get("topic_id"),
+            THERMOCOUPLE_TOPIC,
+        )
+        self.assertNotIn(
+            THERMOCOUPLE_TOPIC,
+            candidate_topics,
+        )
+
+
+    def test_thermocouple_question_survives_rtd_answer_contamination(self):
+        result = find_model_answer_reference(
+            question_text='열전대의 Seebeck 효과, 측정접점과 기준접점 보상 원리를 설명하시오.',
+            answer_text='Pt100은 0도에서 100옴이며 3선식 브리지와 4선식 Kelvin 측정으로 리드선 저항을 보상한다.',
+            question_type_eval=PRINCIPLE_TYPE,
+        )
+        primary = result.get("primary_reference") or {}
+        candidate_topics = [
+            candidate.get("answer", {}).get("topic_id")
+            for candidate in result.get("candidates", [])
+            if isinstance(candidate, dict)
+        ]
+
+        self.assertTrue(result.get("matched"))
+        self.assertEqual(
+            primary.get("topic_id"),
+            THERMOCOUPLE_TOPIC,
+        )
