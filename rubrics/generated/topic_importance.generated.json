@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-14T03:14:38Z-generated-topic-pack-importance",
+  "version": "2026-07-14T04:11:34Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -89,6 +89,36 @@
       "revision_notes": [
         "2026-07-11: CALC_DESIGN / THEORY_CORE / CORE_MUST_PREPARE로 확정했다."
       ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "교류 여자, 직렬 역접속과 Eo=Es1-Es2의 차동출력 원리를 정확히 설명한다.",
+        "영점에서 두 2차 전압의 크기가 같아 상쇄되며 각 전압 자체는 0이 아님을 설명한다.",
+        "출력 진폭과 변위량, 출력 위상과 이동 방향의 관계를 구분한다.",
+        "위상민감 복조, 저역통과필터와 부호 있는 직류출력 생성과정을 설명한다.",
+        "선형범위, 잔류전압, 정렬, 온도, 여자조건, 케이블과 RVDT 경계를 제시한다."
+      ],
+      "note": "유도형 변위·위치 계측의 핵심 Topic으로 차동변압기 물리원리, 위상민감 복조, 선형범위, 동특성과 현장 설치오차를 통합하여 설명해야 한다.",
+      "revision_notes": [
+        "created_from_approved_lvdt_rvdt_requirements_markdown",
+        "used_modern_topic_pack_schema",
+        "separated_from_general_passive_sensor_transduction_topic",
+        "removed_exact_lvdt_alias_collision_with_passive_sensor_topic",
+        "narrowed_generic_routing_aliases",
+        "focused_on_ac_excitation_differential_output_and_demodulation",
+        "included_null_residual_linearity_alignment_temperature_and_cable_errors",
+        "included_rvdt_rotary_angle_boundary",
+        "deterministic_checks_disabled",
+        "candidate_extraction_rules_empty",
+        "manual_semantic_review_by_chatgpt",
+        "all_local_llm_calls_skipped"
+      ],
+      "topic_label": "LVDT·RVDT의 차동변압기 원리, 위상민감 복조, 변위·각도 측정 및 오차"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

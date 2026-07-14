@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-14T03:14:38Z-generated-topic-pack-model-answers",
+  "version": "2026-07-14T04:11:34Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -1209,6 +1209,355 @@
         "observer-based LQR",
         "Riccati residual",
         "robustness validation"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "title_ko": "LVDT·RVDT의 차동변압기 원리, 위상민감 복조, 변위·각도 측정 및 오차",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "LVDT의 원리와 특징을 설명하시오.",
+          "intent": "LVDT의 차동변압기 구조, 교류 여자와 철심 위치에 따른 결합변화를 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_differential_transformer_structure",
+            "lvdt_primary_ac_excitation",
+            "lvdt_secondary_series_opposition",
+            "lvdt_core_position_mutual_inductance"
+          ]
+        },
+        {
+          "pattern": "차동변압기식 변위센서의 구조와 동작원리를 설명하시오.",
+          "intent": "두 2차 코일의 직렬 역접속과 차동출력 형성과정을 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_differential_transformer_structure",
+            "lvdt_secondary_series_opposition",
+            "lvdt_differential_output_es1_es2"
+          ]
+        },
+        {
+          "pattern": "LVDT의 영점과 차동출력 관계를 설명하시오.",
+          "intent": "전기적 영점에서 두 2차 전압이 상쇄되는 원리와 잔류전압을 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_differential_output_es1_es2",
+            "lvdt_null_position_voltage_balance",
+            "lvdt_null_residual_voltage"
+          ]
+        },
+        {
+          "pattern": "LVDT 출력의 진폭과 위상이 나타내는 물리량을 설명하시오.",
+          "intent": "출력 진폭은 변위량, 기준신호에 대한 위상은 이동 방향을 나타냄을 구분한다.",
+          "required_anchor_ids": [
+            "lvdt_output_amplitude_displacement",
+            "lvdt_output_phase_direction"
+          ]
+        },
+        {
+          "pattern": "LVDT 신호조절에서 위상민감 복조가 필요한 이유를 설명하시오.",
+          "intent": "위상민감 복조와 저역통과필터를 이용한 부호 있는 직류출력을 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_output_phase_direction",
+            "lvdt_phase_sensitive_demodulation",
+            "lvdt_low_pass_dc_output"
+          ]
+        },
+        {
+          "pattern": "LVDT의 여자전압과 여자주파수가 측정에 미치는 영향을 설명하시오.",
+          "intent": "여자전압과 주파수가 감도, 위상, 발열과 포화에 미치는 영향을 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_primary_ac_excitation",
+            "lvdt_excitation_frequency_voltage_sensitivity",
+            "lvdt_magnetic_saturation_nonlinearity"
+          ]
+        },
+        {
+          "pattern": "LVDT의 선형범위와 비선형 오차를 설명하시오.",
+          "intent": "규정 선형범위와 범위 초과 시 비선형 및 자기포화 영향을 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_output_amplitude_displacement",
+            "lvdt_linear_measurement_range",
+            "lvdt_magnetic_saturation_nonlinearity"
+          ]
+        },
+        {
+          "pattern": "LVDT의 영점 잔류전압 원인과 대책을 설명하시오.",
+          "intent": "영점 잔류전압의 원인, 위상성분과 보정·진단 방법을 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_null_position_voltage_balance",
+            "lvdt_null_residual_voltage",
+            "lvdt_phase_sensitive_demodulation"
+          ]
+        },
+        {
+          "pattern": "LVDT 설치 시 철심 편심과 축 정렬 오차를 설명하시오.",
+          "intent": "철심 편심, 축 정렬, 유격과 교정조건이 측정오차에 미치는 영향을 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_core_alignment_eccentricity_error",
+            "lvdt_linear_measurement_range",
+            "lvdt_calibration_traceability_diagnostics"
+          ]
+        },
+        {
+          "pattern": "LVDT의 온도, 케이블, 차폐와 접지 영향을 설명하시오.",
+          "intent": "온도, 케이블, 차폐와 접지가 영점·감도·위상에 미치는 영향을 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_temperature_coil_resistance_error",
+            "lvdt_cable_shield_grounding_error",
+            "lvdt_calibration_traceability_diagnostics"
+          ]
+        },
+        {
+          "pattern": "LVDT의 동특성과 측정대역 결정요인을 설명하시오.",
+          "intent": "기계계와 여자·복조·필터의 대역폭을 통합하여 동특성을 설명한다.",
+          "required_anchor_ids": [
+            "lvdt_dynamic_response_frequency_bandwidth",
+            "lvdt_excitation_frequency_voltage_sensitivity",
+            "lvdt_low_pass_dc_output"
+          ]
+        },
+        {
+          "pattern": "RVDT의 원리와 회전각 측정 특성을 설명하시오.",
+          "intent": "RVDT의 회전각 측정원리, 방향판별과 제한 각도범위를 설명한다.",
+          "required_anchor_ids": [
+            "rvdt_rotary_angle_measurement",
+            "lvdt_output_amplitude_displacement",
+            "lvdt_output_phase_direction"
+          ]
+        },
+        {
+          "pattern": "LVDT와 스트레인 게이지식 변위센서를 비교하시오.",
+          "intent": "LVDT와 스트레인 게이지식 변위센서의 원리, 동특성, 설치와 교정 특성을 비교한다.",
+          "required_anchor_ids": [
+            "lvdt_differential_transformer_structure",
+            "lvdt_linear_measurement_range",
+            "lvdt_dynamic_response_frequency_bandwidth",
+            "lvdt_calibration_traceability_diagnostics"
+          ]
+        },
+        {
+          "pattern": "LVDT와 RVDT의 공통점과 차이점을 설명하시오.",
+          "intent": "LVDT와 RVDT의 공통 차동변압기 원리와 직선·회전 측정량 차이를 비교한다.",
+          "required_anchor_ids": [
+            "lvdt_differential_transformer_structure",
+            "rvdt_rotary_angle_measurement",
+            "lvdt_phase_sensitive_demodulation"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        "배경과 적용 목적",
+        "LVDT 구조",
+        "1차 코일 교류 여자",
+        "가동 철심과 상호인덕턴스 변화",
+        "두 2차 코일의 직렬 역접속",
+        "\\(E_o=E_{s1}-E_{s2}\\)",
+        "영점의 전압 평형",
+        "출력 진폭과 변위량",
+        "출력 위상과 이동 방향",
+        "위상민감 복조와 저역통과필터",
+        "선형범위와 동특성",
+        "영점·정렬·온도·여자·케이블 오차",
+        "RVDT 회전각 측정",
+        "현장 적용과 교정"
+      ],
+      "high_score_points": [
+        "영점에서 두 2차 전압이 각각 0이 아니라 크기가 같아 상쇄된다고 설명한다.",
+        "두 2차 코일의 직렬 역접속 이유를 설명한다.",
+        "차동출력 \\(E_o=E_{s1}-E_{s2}\\)를 제시한다.",
+        "진폭과 위상이 각각 변위량과 방향을 나타낸다고 구분한다.",
+        "위상민감 복조의 필요성을 설명한다.",
+        "복조 후 저역통과필터의 반송파 제거 역할을 설명한다.",
+        "선형범위를 벗어나면 비선형이 증가한다고 설명한다.",
+        "영점 잔류전압의 실제 원인을 설명한다.",
+        "여자조건, 정렬, 온도와 케이블을 하나의 측정사슬 관점에서 설명한다.",
+        "RVDT가 회전각 측정용임을 구분한다.",
+        "교정, 추적성과 상태진단을 현장 적용과 연결한다."
+      ],
+      "common_missing_points": [
+        "직렬 역접속 누락",
+        "영점 상쇄원리 누락",
+        "진폭과 위상의 역할 혼동",
+        "복조기 누락",
+        "저역통과필터 누락",
+        "선형범위 누락",
+        "영점 잔류전압 누락",
+        "정렬과 편심오차 누락",
+        "여자주파수 영향 누락",
+        "RVDT와 LVDT 구분 누락",
+        "교정과 추적성 누락"
+      ],
+      "routing_aliases": [
+        "linear variable differential transformer",
+        "linear differential transformer",
+        "LVDT sensor",
+        "LVDT displacement sensor",
+        "LVDT displacement transducer",
+        "LVDT position sensor",
+        "LVDT signal conditioner",
+        "LVDT demodulator",
+        "LVDT movable core",
+        "LVDT primary coil",
+        "LVDT secondary coils",
+        "LVDT series opposition",
+        "LVDT differential output",
+        "LVDT null position",
+        "LVDT null voltage",
+        "LVDT residual voltage",
+        "LVDT phase-sensitive demodulation",
+        "LVDT synchronous demodulation",
+        "LVDT carrier demodulation",
+        "차동변압기",
+        "차동 변압기",
+        "리니어 차동변압기",
+        "LVDT 변위센서",
+        "LVDT 위치센서",
+        "LVDT 가동 철심",
+        "LVDT 직렬 역접속",
+        "LVDT 차동 출력",
+        "LVDT 영점 잔류전압",
+        "LVDT 위상민감 복조",
+        "RVDT",
+        "rotary variable differential transformer",
+        "회전형 차동변압기"
+      ],
+      "routing_field_points": [
+        "1차 코일의 교류 여자와 두 2차 코일의 직렬 역접속",
+        "가동 철심 위치에 따른 상호인덕턴스와 차동출력 변화",
+        "출력 진폭과 변위량, 출력 위상과 이동 방향의 구분",
+        "위상민감 복조, 저역통과필터와 부호가 있는 직류 출력",
+        "영점 잔류전압, 선형범위, 설치·온도·여자·케이블 오차와 RVDT 적용"
+      ],
+      "revision_notes": [
+        "created_from_approved_lvdt_rvdt_requirements_markdown",
+        "used_modern_topic_pack_schema",
+        "separated_from_general_passive_sensor_transduction_topic",
+        "removed_exact_lvdt_alias_collision_with_passive_sensor_topic",
+        "narrowed_generic_routing_aliases",
+        "focused_on_ac_excitation_differential_output_and_demodulation",
+        "included_null_residual_linearity_alignment_temperature_and_cable_errors",
+        "included_rvdt_rotary_angle_boundary",
+        "deterministic_checks_disabled",
+        "candidate_extraction_rules_empty",
+        "manual_semantic_review_by_chatgpt",
+        "all_local_llm_calls_skipped"
+      ],
+      "id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+      "title": "LVDT·RVDT의 차동변압기 원리, 위상민감 복조, 변위·각도 측정 및 오차",
+      "question_examples": [
+        "LVDT의 원리와 특징을 설명하시오.",
+        "차동변압기식 변위센서의 구조와 동작원리를 설명하시오.",
+        "LVDT의 영점과 차동출력 관계를 설명하시오.",
+        "LVDT 출력의 진폭과 위상이 나타내는 물리량을 설명하시오.",
+        "LVDT 신호조절에서 위상민감 복조가 필요한 이유를 설명하시오.",
+        "LVDT의 여자전압과 여자주파수가 측정에 미치는 영향을 설명하시오.",
+        "LVDT의 선형범위와 비선형 오차를 설명하시오.",
+        "LVDT의 영점 잔류전압 원인과 대책을 설명하시오.",
+        "LVDT 설치 시 철심 편심과 축 정렬 오차를 설명하시오.",
+        "LVDT의 온도, 케이블, 차폐와 접지 영향을 설명하시오.",
+        "LVDT의 동특성과 측정대역 결정요인을 설명하시오.",
+        "RVDT의 원리와 회전각 측정 특성을 설명하시오.",
+        "LVDT와 스트레인 게이지식 변위센서를 비교하시오.",
+        "LVDT와 RVDT의 공통점과 차이점을 설명하시오."
+      ],
+      "topic_aliases": [
+        "linear variable differential transformer",
+        "linear differential transformer",
+        "LVDT sensor",
+        "LVDT displacement sensor",
+        "LVDT displacement transducer",
+        "LVDT position sensor",
+        "LVDT signal conditioner",
+        "LVDT demodulator",
+        "LVDT movable core",
+        "LVDT primary coil",
+        "LVDT secondary coils",
+        "LVDT series opposition",
+        "LVDT differential output",
+        "LVDT null position",
+        "LVDT null voltage",
+        "LVDT residual voltage",
+        "LVDT phase-sensitive demodulation",
+        "LVDT synchronous demodulation",
+        "LVDT carrier demodulation",
+        "차동변압기",
+        "차동 변압기",
+        "리니어 차동변압기",
+        "LVDT 변위센서",
+        "LVDT 위치센서",
+        "LVDT 가동 철심",
+        "LVDT 직렬 역접속",
+        "LVDT 차동 출력",
+        "LVDT 영점 잔류전압",
+        "LVDT 위상민감 복조",
+        "RVDT",
+        "rotary variable differential transformer",
+        "회전형 차동변압기"
+      ],
+      "expected_structure": [
+        "배경과 적용 목적",
+        "LVDT 구조",
+        "1차 코일 교류 여자",
+        "가동 철심과 상호인덕턴스 변화",
+        "두 2차 코일의 직렬 역접속",
+        "\\(E_o=E_{s1}-E_{s2}\\)",
+        "영점의 전압 평형",
+        "출력 진폭과 변위량",
+        "출력 위상과 이동 방향",
+        "위상민감 복조와 저역통과필터",
+        "선형범위와 동특성",
+        "영점·정렬·온도·여자·케이블 오차",
+        "RVDT 회전각 측정",
+        "현장 적용과 교정"
+      ],
+      "high_score_features": [
+        "영점에서 두 2차 전압이 각각 0이 아니라 크기가 같아 상쇄된다고 설명한다.",
+        "두 2차 코일의 직렬 역접속 이유를 설명한다.",
+        "차동출력 \\(E_o=E_{s1}-E_{s2}\\)를 제시한다.",
+        "진폭과 위상이 각각 변위량과 방향을 나타낸다고 구분한다.",
+        "위상민감 복조의 필요성을 설명한다.",
+        "복조 후 저역통과필터의 반송파 제거 역할을 설명한다.",
+        "선형범위를 벗어나면 비선형이 증가한다고 설명한다.",
+        "영점 잔류전압의 실제 원인을 설명한다.",
+        "여자조건, 정렬, 온도와 케이블을 하나의 측정사슬 관점에서 설명한다.",
+        "RVDT가 회전각 측정용임을 구분한다.",
+        "교정, 추적성과 상태진단을 현장 적용과 연결한다."
+      ],
+      "low_score_patterns": [
+        "LVDT를 단순 유도형 근접센서로만 설명",
+        "직류 여자라고 설명",
+        "두 2차 코일을 같은 극성으로 연결한다고 설명",
+        "영점에서 각 2차 전압이 0이라고 설명",
+        "출력 진폭만으로 방향까지 판단한다고 설명",
+        "원시 출력이 직류라고 설명",
+        "전체 이동범위가 완전 선형이라고 설명",
+        "여자조건은 영향이 없다고 설명",
+        "철심과 코일이 접촉해야 한다고 설명",
+        "RVDT를 직선 변위센서라고 설명"
+      ],
+      "field_connection_points": [
+        "1차 코일의 교류 여자와 두 2차 코일의 직렬 역접속",
+        "가동 철심 위치에 따른 상호인덕턴스와 차동출력 변화",
+        "출력 진폭과 변위량, 출력 위상과 이동 방향의 구분",
+        "위상민감 복조, 저역통과필터와 부호가 있는 직류 출력",
+        "영점 잔류전압, 선형범위, 설치·온도·여자·케이블 오차와 RVDT 적용"
+      ],
+      "model_answer_outline": [
+        "배경과 적용 목적",
+        "LVDT 구조",
+        "1차 코일 교류 여자",
+        "가동 철심과 상호인덕턴스 변화",
+        "두 2차 코일의 직렬 역접속",
+        "\\(E_o=E_{s1}-E_{s2}\\)",
+        "영점의 전압 평형",
+        "출력 진폭과 변위량",
+        "출력 위상과 이동 방향",
+        "위상민감 복조와 저역통과필터",
+        "선형범위와 동특성",
+        "영점·정렬·온도·여자·케이블 오차",
+        "RVDT 회전각 측정",
+        "현장 적용과 교정"
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

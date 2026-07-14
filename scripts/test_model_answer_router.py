@@ -1365,5 +1365,256 @@ class PiezoelectricRoutingRegressionTests(
         )
 
 
+
+class LVDTRVDTRoutingRegressionTests(
+    StrainGaugeLoadCellRoutingRegressionTests
+):
+    LVDT_TOPIC = (
+        "lvdt_rvdt_differential_transformer_"
+        "demodulation_displacement_angle_error"
+    )
+    PIEZO_TOPIC = (
+        "piezoelectric_sensor_charge_amplifier_"
+        "dynamic_force_pressure_acceleration"
+    )
+
+    test_exact_question_example_routes_without_pipeline_context = None
+    test_legacy_passive_question_only_is_unmatched_without_leak = None
+    test_legacy_temperature_error_is_unmatched_without_leak = None
+    test_pipeline_direct_strain_question_routes_with_fact_context = None
+    test_pipeline_strain_centered_mixed_question_keeps_primary = None
+    test_pipeline_strain_ignores_temperature_answer_terms = None
+    test_temperature_sensor_topics_do_not_leak_to_strain = None
+
+    def test_exact_lvdt_questions_route_without_context(self):
+        lvdt_answer = self.answer_by_topic[self.LVDT_TOPIC]
+        passive_answer = self.answer_by_topic[self.PASSIVE_TOPIC]
+
+        self.assertNotIn(
+            "LVDT",
+            lvdt_answer.get("routing_aliases", []),
+        )
+        self.assertIn(
+            "LVDT",
+            passive_answer.get("routing_aliases", []),
+        )
+
+        questions = [
+            "LVDT의 원리와 특징을 설명하시오.",
+            (
+                "차동변압기식 변위센서의 구조와 "
+                "동작원리를 설명하시오."
+            ),
+            (
+                "LVDT 신호조절에서 위상민감 복조가 "
+                "필요한 이유를 설명하시오."
+            ),
+            (
+                "LVDT의 영점 잔류전압 원인과 "
+                "대책을 설명하시오."
+            ),
+        ]
+
+        for question in questions:
+            with self.subTest(question=question):
+                result = self._route(question)
+
+                self.assertPrimaryTopic(
+                    result,
+                    self.LVDT_TOPIC,
+                )
+
+    def test_exact_rvdt_question_routes_without_context(self):
+        result = self._route(
+            "RVDT의 원리와 회전각 측정 특성을 설명하시오."
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.LVDT_TOPIC,
+        )
+
+    def test_pipeline_rephrased_lvdt_question_routes(self):
+        result = self._route(
+            (
+                "1차 교류 여자, 두 2차 코일의 직렬 역접속, "
+                "Eo=Es1-Es2와 위상민감 복조를 이용한 "
+                "변위 측정을 설명하시오."
+            ),
+            fact_topic=self.LVDT_TOPIC,
+            question_type_topic=self.LVDT_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.LVDT_TOPIC,
+        )
+
+    def test_lvdt_centered_strain_comparison_keeps_lvdt_primary(self):
+        result = self._route(
+            (
+                "LVDT와 스트레인 게이지식 변위센서를 비교하되 "
+                "LVDT의 가동 철심, 차동출력, 위상민감 복조와 "
+                "선형범위를 중심으로 설명하시오."
+            ),
+            fact_topic=self.LVDT_TOPIC,
+            question_type_topic=self.LVDT_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.LVDT_TOPIC,
+        )
+
+    def test_lvdt_centered_passive_comparison_keeps_lvdt_primary(self):
+        result = self._route(
+            (
+                "일반 유도형 수동센서와 비교하여 LVDT의 "
+                "1차 교류 여자, 직렬 역접속, 가동 철심과 "
+                "차동출력을 중심으로 설명하시오."
+            ),
+            fact_topic=self.LVDT_TOPIC,
+            question_type_topic=self.LVDT_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.LVDT_TOPIC,
+        )
+
+    def test_generic_passive_question_does_not_leak_to_lvdt(self):
+        question = (
+            "저항형, 용량형, 유도형 수동센서의 "
+            "변환원리를 비교하시오."
+        )
+
+        question_only = self._route(question)
+
+        self.assertFalse(
+            question_only.get("matched"),
+            msg=question_only,
+        )
+        self.assertIsNone(
+            self._primary_topic(question_only),
+            msg=question_only,
+        )
+        self.assertTopicNotRouted(
+            question_only,
+            self.LVDT_TOPIC,
+        )
+
+        pipeline = self._route(
+            question,
+            fact_topic=self.PASSIVE_TOPIC,
+            question_type_topic=self.PASSIVE_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            pipeline,
+            self.PASSIVE_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            pipeline,
+            self.LVDT_TOPIC,
+        )
+
+    def test_strain_question_does_not_leak_to_lvdt(self):
+        result = self._route(
+            (
+                "스트레인 게이지식 로드셀의 게이지율, "
+                "Wheatstone bridge, mV/V 감도와 "
+                "크리프를 설명하시오."
+            ),
+            answer_text=(
+                "비교대상으로 LVDT의 가동 철심과 "
+                "차동출력을 짧게 언급한다."
+            ),
+            fact_topic=self.STRAIN_TOPIC,
+            question_type_topic=self.STRAIN_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.STRAIN_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            result,
+            self.LVDT_TOPIC,
+        )
+
+    def test_piezoelectric_question_does_not_leak_to_lvdt(self):
+        result = self._route(
+            (
+                "압전식 힘센서의 직접 압전효과, Q=dF, "
+                "전하증폭기와 동적 측정대역을 설명하시오."
+            ),
+            answer_text=(
+                "비교대상으로 LVDT의 변위 측정과 "
+                "위상민감 복조를 짧게 언급한다."
+            ),
+            fact_topic=self.PIEZO_TOPIC,
+            question_type_topic=self.PIEZO_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.PIEZO_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            result,
+            self.LVDT_TOPIC,
+        )
+
+    def test_lvdt_question_survives_foreign_answer_contamination(self):
+        result = self._route(
+            (
+                "LVDT의 교류 여자, 직렬 역접속, 영점, "
+                "출력 진폭·위상과 위상민감 복조를 설명하시오."
+            ),
+            answer_text=(
+                "스트레인 게이지의 Wheatstone bridge와 mV/V, "
+                "압전센서의 Q=dF와 전하증폭기를 잘못 길게 설명한다."
+            ),
+            fact_topic=self.LVDT_TOPIC,
+            question_type_topic=self.LVDT_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.LVDT_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            result,
+            self.STRAIN_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            result,
+            self.PIEZO_TOPIC,
+        )
+
+    def test_rvdt_question_survives_foreign_answer_contamination(self):
+        result = self._route(
+            (
+                "RVDT의 차동변압기 원리, 출력 진폭과 위상, "
+                "제한된 회전각 측정범위를 설명하시오."
+            ),
+            answer_text=(
+                "일반 저항형·용량형 수동센서의 "
+                "변환원리를 잘못 중심으로 설명한다."
+            ),
+            fact_topic=self.LVDT_TOPIC,
+            question_type_topic=self.LVDT_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.LVDT_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            result,
+            self.PASSIVE_TOPIC,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

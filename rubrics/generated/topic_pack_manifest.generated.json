@@ -1,10 +1,10 @@
 {
-  "version": "2026-07-14T03:14:38Z-generated-topic-pack-manifest",
+  "version": "2026-07-14T04:11:34Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 19,
+  "topic_count": 20,
   "topics": [
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
@@ -38,6 +38,16 @@
     },
     {
       "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
