@@ -809,8 +809,6 @@ class StrainGaugeLoadCellRoutingRegressionTests(
                     self.STRAIN_TOPIC,
                 )
 
-if __name__ == "__main__":
-    unittest.main(verbosity=2)
 
 THERMOCOUPLE_TOPIC = 'thermocouple_temperature_sensor_seebeck_reference_junction_compensation'
 
@@ -1115,3 +1113,257 @@ class ThermocoupleRoutingRegressionTest(unittest.TestCase):
             primary.get("topic_id"),
             THERMOCOUPLE_TOPIC,
         )
+class RouterTestFileStructureRegressionTest(unittest.TestCase):
+    def test_main_guard_is_final_top_level_statement(self):
+        import ast
+        from pathlib import Path
+
+        path = Path(__file__)
+        tree = ast.parse(
+            path.read_text(encoding="utf-8"),
+            filename=str(path),
+        )
+
+        main_nodes = [
+            node
+            for node in tree.body
+            if (
+                isinstance(node, ast.If)
+                and isinstance(node.test, ast.Compare)
+                and isinstance(node.test.left, ast.Name)
+                and node.test.left.id == "__name__"
+                and len(node.test.ops) == 1
+                and isinstance(node.test.ops[0], ast.Eq)
+                and len(node.test.comparators) == 1
+                and isinstance(
+                    node.test.comparators[0],
+                    ast.Constant,
+                )
+                and node.test.comparators[0].value == "__main__"
+            )
+        ]
+
+        self.assertEqual(
+            len(main_nodes),
+            1,
+            msg="router test file must contain one __main__ guard",
+        )
+        self.assertIs(
+            tree.body[-1],
+            main_nodes[0],
+            msg=(
+                "__main__ guard must remain the final top-level "
+                "statement so direct execution discovers every test"
+            ),
+        )
+
+
+class PiezoelectricRoutingRegressionTests(
+    StrainGaugeLoadCellRoutingRegressionTests
+):
+    PIEZO_TOPIC = (
+        "piezoelectric_sensor_charge_amplifier_"
+        "dynamic_force_pressure_acceleration"
+    )
+
+    test_exact_question_example_routes_without_pipeline_context = None
+    test_legacy_passive_question_only_is_unmatched_without_leak = None
+    test_legacy_temperature_error_is_unmatched_without_leak = None
+    test_pipeline_direct_strain_question_routes_with_fact_context = None
+    test_pipeline_strain_centered_mixed_question_keeps_primary = None
+    test_pipeline_strain_ignores_temperature_answer_terms = None
+    test_temperature_sensor_topics_do_not_leak_to_strain = None
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+        if cls.PIEZO_TOPIC not in cls.answer_by_topic:
+            raise AssertionError(
+                "Piezoelectric Generated Topic is missing"
+            )
+
+    def test_exact_piezoelectric_question_examples_route_without_context(
+        self,
+    ):
+        questions = [
+            "압전식 센서의 측정원리와 특징을 설명하시오.",
+            "압전센서용 전하증폭기의 원리와 "
+            "설계요소를 설명하시오.",
+            "전하출력형 압전센서와 IEPE 센서를 비교하시오.",
+            "압전센서의 전기적 등가회로와 "
+            "정적 측정의 한계를 설명하시오.",
+        ]
+
+        for question in questions:
+            with self.subTest(question=question):
+                result = self._route(question)
+
+                self.assertPrimaryTopic(
+                    result,
+                    self.PIEZO_TOPIC,
+                )
+
+    def test_pipeline_rephrased_piezoelectric_question_routes(self):
+        result = self._route(
+            "압전소자의 Q=dF 관계, 전하증폭기, "
+            "IEPE 신호처리와 동적 측정대역을 설명하시오.",
+            fact_topic=self.PIEZO_TOPIC,
+            question_type_topic=self.PIEZO_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.PIEZO_TOPIC,
+        )
+
+    def test_pipeline_piezoelectric_centered_load_cell_comparison(
+        self,
+    ):
+        result = self._route(
+            "스트레인 게이지식 로드셀과 비교하여 "
+            "압전식 힘센서의 전하증폭기, 정적 측정 한계와 "
+            "동적 힘 측정 장점을 설명하시오.",
+            fact_topic=self.PIEZO_TOPIC,
+            question_type_topic=self.PIEZO_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.PIEZO_TOPIC,
+        )
+
+    def test_pipeline_strain_centered_question_keeps_strain_primary(
+        self,
+    ):
+        result = self._route(
+            "스트레인 게이지식 로드셀의 게이지율, "
+            "Wheatstone bridge, mV/V와 크리프를 설명하시오.",
+            answer_text=(
+                "비교대상으로 압전식 힘센서와 "
+                "전하증폭기를 짧게 언급한다."
+            ),
+            fact_topic=self.STRAIN_TOPIC,
+            question_type_topic=self.STRAIN_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.STRAIN_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            result,
+            self.PIEZO_TOPIC,
+        )
+
+    def test_generic_passive_question_boundary(self):
+        question = (
+            "저항형, 용량형, 유도형 수동센서의 "
+            "변환원리를 비교하시오."
+        )
+
+        question_only = self._route(question)
+
+        self.assertFalse(
+            question_only.get("matched"),
+            msg=question_only,
+        )
+        self.assertIsNone(
+            self._primary_topic(question_only),
+            msg=question_only,
+        )
+        self.assertTopicNotRouted(
+            question_only,
+            self.PIEZO_TOPIC,
+        )
+
+        pipeline = self._route(
+            question,
+            fact_topic=self.PASSIVE_TOPIC,
+            question_type_topic=self.PASSIVE_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            pipeline,
+            self.PASSIVE_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            pipeline,
+            self.PIEZO_TOPIC,
+        )
+
+    def test_temperature_sensor_topics_do_not_leak_to_piezoelectric(
+        self,
+    ):
+        cases = [
+            (
+                self.RTD_TOPIC,
+                "RTD와 Pt100의 측정원리 및 "
+                "2선식·3선식·4선식 배선보상을 설명하시오.",
+                "압전센서의 전하출력과 비교한다.",
+            ),
+            (
+                self.THERMISTOR_TOPIC,
+                "NTC와 PTC thermistor의 특성과 "
+                "선형화 방법을 설명하시오.",
+                "",
+            ),
+            (
+                self.THERMOCOUPLE_TOPIC,
+                "열전대의 Seebeck 효과와 "
+                "기준접점 보상을 설명하시오.",
+                "",
+            ),
+        ]
+
+        for expected_topic, question, answer_text in cases:
+            with self.subTest(topic=expected_topic):
+                result = self._route(
+                    question,
+                    answer_text=answer_text,
+                    fact_topic=expected_topic,
+                    question_type_topic=expected_topic,
+                )
+
+                self.assertPrimaryTopic(
+                    result,
+                    expected_topic,
+                )
+                self.assertTopicNotRouted(
+                    result,
+                    self.PIEZO_TOPIC,
+                )
+
+    def test_temperature_measurement_error_does_not_leak_to_piezoelectric(
+        self,
+    ):
+        result = self._route(
+            "온도 측정에서 열전도, 대류, 복사, "
+            "삽입오차와 응답지연을 설명하시오.",
+            fact_topic=self.TEMPERATURE_ERROR_TOPIC,
+            question_type_topic=self.TEMPERATURE_ERROR_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.TEMPERATURE_ERROR_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            result,
+            self.PIEZO_TOPIC,
+        )
+
+    def test_accelerometer_question_keeps_piezoelectric_primary(self):
+        result = self._route(
+            "압전 가속도계의 원리, 주파수응답과 "
+            "설치방법을 설명하시오."
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.PIEZO_TOPIC,
+        )
+
+
+if __name__ == "__main__":
+    unittest.main()

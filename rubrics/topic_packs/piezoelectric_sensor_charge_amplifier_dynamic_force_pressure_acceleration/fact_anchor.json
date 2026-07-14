@@ -1,0 +1,798 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+  "title_ko": "압전식 센서의 원리, 전하증폭기, 동적 힘·압력·가속도 측정 및 오차",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "id": "piezoelectric_direct_effect_charge_generation",
+      "anchor_id": "piezoelectric_direct_effect_charge_generation",
+      "statement": "기계적 힘 또는 응력이 압전재료의 분극을 변화시켜 전극에 전하를 발생시키며 센서에는 직접 압전효과를 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "직접 압전효과",
+        "분극",
+        "응력",
+        "전하"
+      ],
+      "core_terms": [
+        "직접 압전효과",
+        "분극",
+        "응력",
+        "전하"
+      ],
+      "accepted_explanations": [
+        "기계적 힘 또는 응력이 압전재료의 분극을 변화시켜 전극에 전하를 발생시키며 센서에는 직접 압전효과를 사용한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "기계적 힘 또는 응력이 압전재료의 분극을 변화시켜 전극에 전하를 발생시키며 센서에는 직접 압전효과를 사용한다.",
+      "description": "기계적 힘 또는 응력이 압전재료의 분극을 변화시켜 전극에 전하를 발생시키며 센서에는 직접 압전효과를 사용한다."
+    },
+    {
+      "id": "piezoelectric_charge_constant_q_df",
+      "anchor_id": "piezoelectric_charge_constant_q_df",
+      "statement": "단일 축 선형영역에서 Q=dF로 나타내며 d는 시간미분이 아니라 재료·결정축·분극 및 하중방향에 따른 압전 전하상수이다.",
+      "importance": "core",
+      "keywords": [
+        "Q=dF",
+        "압전 전하상수",
+        "pC/N",
+        "결정축"
+      ],
+      "core_terms": [
+        "Q=dF",
+        "압전 전하상수",
+        "pC/N",
+        "결정축"
+      ],
+      "accepted_explanations": [
+        "단일 축 선형영역에서 Q=dF로 나타내며 d는 시간미분이 아니라 재료·결정축·분극 및 하중방향에 따른 압전 전하상수이다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "단일 축 선형영역에서 Q=dF로 나타내며 d는 시간미분이 아니라 재료·결정축·분극 및 하중방향에 따른 압전 전하상수이다.",
+      "description": "단일 축 선형영역에서 Q=dF로 나타내며 d는 시간미분이 아니라 재료·결정축·분극 및 하중방향에 따른 압전 전하상수이다."
+    },
+    {
+      "id": "piezoelectric_direct_inverse_effect_distinction",
+      "anchor_id": "piezoelectric_direct_inverse_effect_distinction",
+      "statement": "직접 압전효과는 기계적 입력을 전하로 바꾸어 센서에 사용하고 역압전효과는 전기장을 변형으로 바꾸어 액추에이터에 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "직접 압전효과",
+        "역압전효과",
+        "센서",
+        "액추에이터"
+      ],
+      "core_terms": [
+        "직접 압전효과",
+        "역압전효과",
+        "센서",
+        "액추에이터"
+      ],
+      "accepted_explanations": [
+        "직접 압전효과는 기계적 입력을 전하로 바꾸어 센서에 사용하고 역압전효과는 전기장을 변형으로 바꾸어 액추에이터에 사용한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "직접 압전효과는 기계적 입력을 전하로 바꾸어 센서에 사용하고 역압전효과는 전기장을 변형으로 바꾸어 액추에이터에 사용한다.",
+      "description": "직접 압전효과는 기계적 입력을 전하로 바꾸어 센서에 사용하고 역압전효과는 전기장을 변형으로 바꾸어 액추에이터에 사용한다."
+    },
+    {
+      "id": "piezoelectric_equivalent_circuit_charge_capacitance_leakage",
+      "anchor_id": "piezoelectric_equivalent_circuit_charge_capacitance_leakage",
+      "statement": "압전센서는 전하원과 센서 정전용량 Cp, 절연 및 누설을 나타내는 병렬저항 Rp로 모델링하며 케이블과 입력단도 등가회로에 포함한다.",
+      "importance": "core",
+      "keywords": [
+        "전하원",
+        "Cp",
+        "Rp",
+        "누설저항",
+        "절연저항"
+      ],
+      "core_terms": [
+        "전하원",
+        "Cp",
+        "Rp",
+        "누설저항",
+        "절연저항"
+      ],
+      "accepted_explanations": [
+        "압전센서는 전하원과 센서 정전용량 Cp, 절연 및 누설을 나타내는 병렬저항 Rp로 모델링하며 케이블과 입력단도 등가회로에 포함한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "압전센서는 전하원과 센서 정전용량 Cp, 절연 및 누설을 나타내는 병렬저항 Rp로 모델링하며 케이블과 입력단도 등가회로에 포함한다.",
+      "description": "압전센서는 전하원과 센서 정전용량 Cp, 절연 및 누설을 나타내는 병렬저항 Rp로 모델링하며 케이블과 입력단도 등가회로에 포함한다."
+    },
+    {
+      "id": "piezoelectric_voltage_charge_capacitance_relation",
+      "anchor_id": "piezoelectric_voltage_charge_capacitance_relation",
+      "statement": "개방회로 전압은 V=Q/C로 근사하며 단순 전압입력에서는 센서와 케이블의 등가정전용량이 감도와 주파수특성에 영향을 준다.",
+      "importance": "core",
+      "keywords": [
+        "V=Q/C",
+        "케이블 정전용량",
+        "전압감도"
+      ],
+      "core_terms": [
+        "V=Q/C",
+        "케이블 정전용량",
+        "전압감도"
+      ],
+      "accepted_explanations": [
+        "개방회로 전압은 V=Q/C로 근사하며 단순 전압입력에서는 센서와 케이블의 등가정전용량이 감도와 주파수특성에 영향을 준다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "개방회로 전압은 V=Q/C로 근사하며 단순 전압입력에서는 센서와 케이블의 등가정전용량이 감도와 주파수특성에 영향을 준다.",
+      "description": "개방회로 전압은 V=Q/C로 근사하며 단순 전압입력에서는 센서와 케이블의 등가정전용량이 감도와 주파수특성에 영향을 준다."
+    },
+    {
+      "id": "piezoelectric_static_limit_electrical_time_constant",
+      "anchor_id": "piezoelectric_static_limit_electrical_time_constant",
+      "statement": "발생전하는 누설경로로 감소하고 τ=RC의 전기적 시정수 때문에 진정한 DC 또는 무기한 정하중 측정에는 제한이 있다.",
+      "importance": "core",
+      "keywords": [
+        "τ=RC",
+        "정적 측정 한계",
+        "전하누설",
+        "준정적 측정"
+      ],
+      "core_terms": [
+        "τ=RC",
+        "정적 측정 한계",
+        "전하누설",
+        "준정적 측정"
+      ],
+      "accepted_explanations": [
+        "발생전하는 누설경로로 감소하고 τ=RC의 전기적 시정수 때문에 진정한 DC 또는 무기한 정하중 측정에는 제한이 있다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "발생전하는 누설경로로 감소하고 τ=RC의 전기적 시정수 때문에 진정한 DC 또는 무기한 정하중 측정에는 제한이 있다.",
+      "description": "발생전하는 누설경로로 감소하고 τ=RC의 전기적 시정수 때문에 진정한 DC 또는 무기한 정하중 측정에는 제한이 있다."
+    },
+    {
+      "id": "charge_amplifier_output_feedback_capacitance",
+      "anchor_id": "charge_amplifier_output_feedback_capacitance",
+      "statement": "이상적인 전하증폭기의 출력은 Vo≈-Q/Cf이며 피드백 정전용량 Cf가 전하-전압 변환비를 결정한다.",
+      "importance": "core",
+      "keywords": [
+        "전하증폭기",
+        "Vo≈-Q/Cf",
+        "피드백 정전용량"
+      ],
+      "core_terms": [
+        "전하증폭기",
+        "Vo≈-Q/Cf",
+        "피드백 정전용량"
+      ],
+      "accepted_explanations": [
+        "이상적인 전하증폭기의 출력은 Vo≈-Q/Cf이며 피드백 정전용량 Cf가 전하-전압 변환비를 결정한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "이상적인 전하증폭기의 출력은 Vo≈-Q/Cf이며 피드백 정전용량 Cf가 전하-전압 변환비를 결정한다.",
+      "description": "이상적인 전하증폭기의 출력은 Vo≈-Q/Cf이며 피드백 정전용량 Cf가 전하-전압 변환비를 결정한다."
+    },
+    {
+      "id": "charge_amplifier_feedback_resistor_low_frequency_cutoff",
+      "anchor_id": "charge_amplifier_feedback_resistor_low_frequency_cutoff",
+      "statement": "피드백 저항 Rf는 방전경로를 제공하고 저주파 차단은 fc≈1/(2πRfCf)로 근사하며 RfCf가 클수록 더 낮은 주파수를 측정할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "Rf",
+        "Cf",
+        "fc≈1/(2πRfCf)",
+        "저주파 차단"
+      ],
+      "core_terms": [
+        "Rf",
+        "Cf",
+        "fc≈1/(2πRfCf)",
+        "저주파 차단"
+      ],
+      "accepted_explanations": [
+        "피드백 저항 Rf는 방전경로를 제공하고 저주파 차단은 fc≈1/(2πRfCf)로 근사하며 RfCf가 클수록 더 낮은 주파수를 측정할 수 있다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "피드백 저항 Rf는 방전경로를 제공하고 저주파 차단은 fc≈1/(2πRfCf)로 근사하며 RfCf가 클수록 더 낮은 주파수를 측정할 수 있다.",
+      "description": "피드백 저항 Rf는 방전경로를 제공하고 저주파 차단은 fc≈1/(2πRfCf)로 근사하며 RfCf가 클수록 더 낮은 주파수를 측정할 수 있다."
+    },
+    {
+      "id": "piezoelectric_charge_output_iepe_distinction",
+      "anchor_id": "piezoelectric_charge_output_iepe_distinction",
+      "statement": "전하출력형은 외부 전하증폭기와 고절연 케이블을 사용하고 IEPE형은 내장 임피던스 변환회로와 외부 정전류 여자전원을 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "전하출력형",
+        "IEPE",
+        "ICP",
+        "정전류 여자"
+      ],
+      "core_terms": [
+        "전하출력형",
+        "IEPE",
+        "ICP",
+        "정전류 여자"
+      ],
+      "accepted_explanations": [
+        "전하출력형은 외부 전하증폭기와 고절연 케이블을 사용하고 IEPE형은 내장 임피던스 변환회로와 외부 정전류 여자전원을 사용한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "전하출력형은 외부 전하증폭기와 고절연 케이블을 사용하고 IEPE형은 내장 임피던스 변환회로와 외부 정전류 여자전원을 사용한다.",
+      "description": "전하출력형은 외부 전하증폭기와 고절연 케이블을 사용하고 IEPE형은 내장 임피던스 변환회로와 외부 정전류 여자전원을 사용한다."
+    },
+    {
+      "id": "piezoelectric_charge_voltage_sensitivity_units",
+      "anchor_id": "piezoelectric_charge_voltage_sensitivity_units",
+      "statement": "pC/N와 pC/g는 입력당 전하감도이고 mV/N와 mV/g는 전하-전압 변환회로를 포함한 전압감도이다.",
+      "importance": "core",
+      "keywords": [
+        "pC/N",
+        "pC/g",
+        "mV/N",
+        "mV/g"
+      ],
+      "core_terms": [
+        "pC/N",
+        "pC/g",
+        "mV/N",
+        "mV/g"
+      ],
+      "accepted_explanations": [
+        "pC/N와 pC/g는 입력당 전하감도이고 mV/N와 mV/g는 전하-전압 변환회로를 포함한 전압감도이다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "pC/N와 pC/g는 입력당 전하감도이고 mV/N와 mV/g는 전하-전압 변환회로를 포함한 전압감도이다.",
+      "description": "pC/N와 pC/g는 입력당 전하감도이고 mV/N와 mV/g는 전하-전압 변환회로를 포함한 전압감도이다."
+    },
+    {
+      "id": "piezoelectric_force_sensor_measurement_chain",
+      "anchor_id": "piezoelectric_force_sensor_measurement_chain",
+      "statement": "압전식 힘센서는 힘을 압전소자의 응력과 전하로 바꾸고 conditioner 출력과 교정감도를 이용해 다시 힘으로 환산한다.",
+      "importance": "core",
+      "keywords": [
+        "압전식 힘센서",
+        "예압",
+        "동적 힘",
+        "횡하중"
+      ],
+      "core_terms": [
+        "압전식 힘센서",
+        "예압",
+        "동적 힘",
+        "횡하중"
+      ],
+      "accepted_explanations": [
+        "압전식 힘센서는 힘을 압전소자의 응력과 전하로 바꾸고 conditioner 출력과 교정감도를 이용해 다시 힘으로 환산한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "압전식 힘센서는 힘을 압전소자의 응력과 전하로 바꾸고 conditioner 출력과 교정감도를 이용해 다시 힘으로 환산한다.",
+      "description": "압전식 힘센서는 힘을 압전소자의 응력과 전하로 바꾸고 conditioner 출력과 교정감도를 이용해 다시 힘으로 환산한다."
+    },
+    {
+      "id": "piezoelectric_pressure_sensor_dynamic_chain",
+      "anchor_id": "piezoelectric_pressure_sensor_dynamic_chain",
+      "statement": "압력은 다이어프램과 유효면적을 통해 힘으로 변환되고 압전전하로 검출되며 연소압·충격압·맥동압 같은 동압 측정에 적합하다.",
+      "importance": "core",
+      "keywords": [
+        "압전식 압력센서",
+        "동압",
+        "유효면적",
+        "연소압"
+      ],
+      "core_terms": [
+        "압전식 압력센서",
+        "동압",
+        "유효면적",
+        "연소압"
+      ],
+      "accepted_explanations": [
+        "압력은 다이어프램과 유효면적을 통해 힘으로 변환되고 압전전하로 검출되며 연소압·충격압·맥동압 같은 동압 측정에 적합하다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "압력은 다이어프램과 유효면적을 통해 힘으로 변환되고 압전전하로 검출되며 연소압·충격압·맥동압 같은 동압 측정에 적합하다.",
+      "description": "압력은 다이어프램과 유효면적을 통해 힘으로 변환되고 압전전하로 검출되며 연소압·충격압·맥동압 같은 동압 측정에 적합하다."
+    },
+    {
+      "id": "piezoelectric_accelerometer_inertial_force_chain",
+      "anchor_id": "piezoelectric_accelerometer_inertial_force_chain",
+      "statement": "압전 가속도계는 내부 관성질량에 작용하는 F=ma의 힘을 압전소자가 검출하여 가속도로 환산한다.",
+      "importance": "core",
+      "keywords": [
+        "압전 가속도계",
+        "F=ma",
+        "관성질량",
+        "mV/g"
+      ],
+      "core_terms": [
+        "압전 가속도계",
+        "F=ma",
+        "관성질량",
+        "mV/g"
+      ],
+      "accepted_explanations": [
+        "압전 가속도계는 내부 관성질량에 작용하는 F=ma의 힘을 압전소자가 검출하여 가속도로 환산한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "압전 가속도계는 내부 관성질량에 작용하는 F=ma의 힘을 압전소자가 검출하여 가속도로 환산한다.",
+      "description": "압전 가속도계는 내부 관성질량에 작용하는 F=ma의 힘을 압전소자가 검출하여 가속도로 환산한다."
+    },
+    {
+      "id": "piezoelectric_frequency_band_flat_response_resonance",
+      "anchor_id": "piezoelectric_frequency_band_flat_response_resonance",
+      "statement": "유효 측정대역은 전기적 저주파 차단과 기계적 고주파 공진 사이이며 정밀측정은 일반적으로 공진을 피한 평탄대역에서 수행한다.",
+      "importance": "core",
+      "keywords": [
+        "저주파 차단",
+        "평탄대역",
+        "공진주파수",
+        "주파수응답"
+      ],
+      "core_terms": [
+        "저주파 차단",
+        "평탄대역",
+        "공진주파수",
+        "주파수응답"
+      ],
+      "accepted_explanations": [
+        "유효 측정대역은 전기적 저주파 차단과 기계적 고주파 공진 사이이며 정밀측정은 일반적으로 공진을 피한 평탄대역에서 수행한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "유효 측정대역은 전기적 저주파 차단과 기계적 고주파 공진 사이이며 정밀측정은 일반적으로 공진을 피한 평탄대역에서 수행한다.",
+      "description": "유효 측정대역은 전기적 저주파 차단과 기계적 고주파 공진 사이이며 정밀측정은 일반적으로 공진을 피한 평탄대역에서 수행한다."
+    },
+    {
+      "id": "piezoelectric_mounting_stiffness_torque_contact_resonance",
+      "anchor_id": "piezoelectric_mounting_stiffness_torque_contact_resonance",
+      "statement": "설치강성, 체결토크와 설치면 상태는 접촉공진과 고주파 응답을 변화시키므로 규정된 설치조건으로 관리한다.",
+      "importance": "core",
+      "keywords": [
+        "설치강성",
+        "체결토크",
+        "접촉공진",
+        "stud mounting"
+      ],
+      "core_terms": [
+        "설치강성",
+        "체결토크",
+        "접촉공진",
+        "stud mounting"
+      ],
+      "accepted_explanations": [
+        "설치강성, 체결토크와 설치면 상태는 접촉공진과 고주파 응답을 변화시키므로 규정된 설치조건으로 관리한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "설치강성, 체결토크와 설치면 상태는 접촉공진과 고주파 응답을 변화시키므로 규정된 설치조건으로 관리한다.",
+      "description": "설치강성, 체결토크와 설치면 상태는 접촉공진과 고주파 응답을 변화시키므로 규정된 설치조건으로 관리한다."
+    },
+    {
+      "id": "piezoelectric_cable_triboelectric_insulation_error",
+      "anchor_id": "piezoelectric_cable_triboelectric_insulation_error",
+      "statement": "전하케이블의 움직임은 triboelectric noise를 만들 수 있고 습기·오염·절연저하는 누설을 증가시켜 저주파 응답을 악화시킨다.",
+      "importance": "core",
+      "keywords": [
+        "triboelectric noise",
+        "절연저하",
+        "저잡음 케이블",
+        "습기"
+      ],
+      "core_terms": [
+        "triboelectric noise",
+        "절연저하",
+        "저잡음 케이블",
+        "습기"
+      ],
+      "accepted_explanations": [
+        "전하케이블의 움직임은 triboelectric noise를 만들 수 있고 습기·오염·절연저하는 누설을 증가시켜 저주파 응답을 악화시킨다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "전하케이블의 움직임은 triboelectric noise를 만들 수 있고 습기·오염·절연저하는 누설을 증가시켜 저주파 응답을 악화시킨다.",
+      "description": "전하케이블의 움직임은 triboelectric noise를 만들 수 있고 습기·오염·절연저하는 누설을 증가시켜 저주파 응답을 악화시킨다."
+    },
+    {
+      "id": "piezoelectric_temperature_pyroelectric_thermal_shock",
+      "anchor_id": "piezoelectric_temperature_pyroelectric_thermal_shock",
+      "statement": "온도는 감도와 절연저항을 변화시키며 빠른 온도변화는 열팽창응력과 pyroelectric output에 의한 과도출력을 만들 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "열충격",
+        "pyroelectric output",
+        "감도 온도계수",
+        "Curie 온도"
+      ],
+      "core_terms": [
+        "열충격",
+        "pyroelectric output",
+        "감도 온도계수",
+        "Curie 온도"
+      ],
+      "accepted_explanations": [
+        "온도는 감도와 절연저항을 변화시키며 빠른 온도변화는 열팽창응력과 pyroelectric output에 의한 과도출력을 만들 수 있다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "온도는 감도와 절연저항을 변화시키며 빠른 온도변화는 열팽창응력과 pyroelectric output에 의한 과도출력을 만들 수 있다.",
+      "description": "온도는 감도와 절연저항을 변화시키며 빠른 온도변화는 열팽창응력과 pyroelectric output에 의한 과도출력을 만들 수 있다."
+    },
+    {
+      "id": "piezoelectric_cross_axis_base_strain_mass_loading",
+      "anchor_id": "piezoelectric_cross_axis_base_strain_mass_loading",
+      "statement": "직각방향 입력은 횡감도, 설치면 변형은 base strain, 센서 질량은 구조물 동특성을 바꾸는 mass loading 오차를 만든다.",
+      "importance": "core",
+      "keywords": [
+        "횡감도",
+        "base strain",
+        "mass loading",
+        "축 정렬"
+      ],
+      "core_terms": [
+        "횡감도",
+        "base strain",
+        "mass loading",
+        "축 정렬"
+      ],
+      "accepted_explanations": [
+        "직각방향 입력은 횡감도, 설치면 변형은 base strain, 센서 질량은 구조물 동특성을 바꾸는 mass loading 오차를 만든다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "직각방향 입력은 횡감도, 설치면 변형은 base strain, 센서 질량은 구조물 동특성을 바꾸는 mass loading 오차를 만든다.",
+      "description": "직각방향 입력은 횡감도, 설치면 변형은 base strain, 센서 질량은 구조물 동특성을 바꾸는 mass loading 오차를 만든다."
+    },
+    {
+      "id": "piezoelectric_signal_conditioning_filter_adc_antialias",
+      "anchor_id": "piezoelectric_signal_conditioning_filter_adc_antialias",
+      "statement": "측정시스템은 conditioner, 입력범위, high-pass와 low-pass filter, anti-aliasing filter, sampling rate와 ADC 동적범위를 함께 설계한다.",
+      "importance": "core",
+      "keywords": [
+        "conditioner",
+        "anti-aliasing filter",
+        "sampling rate",
+        "ADC"
+      ],
+      "core_terms": [
+        "conditioner",
+        "anti-aliasing filter",
+        "sampling rate",
+        "ADC"
+      ],
+      "accepted_explanations": [
+        "측정시스템은 conditioner, 입력범위, high-pass와 low-pass filter, anti-aliasing filter, sampling rate와 ADC 동적범위를 함께 설계한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "측정시스템은 conditioner, 입력범위, high-pass와 low-pass filter, anti-aliasing filter, sampling rate와 ADC 동적범위를 함께 설계한다.",
+      "description": "측정시스템은 conditioner, 입력범위, high-pass와 low-pass filter, anti-aliasing filter, sampling rate와 ADC 동적범위를 함께 설계한다."
+    },
+    {
+      "id": "piezoelectric_calibration_traceability_diagnostics",
+      "anchor_id": "piezoelectric_calibration_traceability_diagnostics",
+      "statement": "교정은 센서·conditioner·케이블·DAQ 전체 측정사슬을 대상으로 하며 감도, 주파수응답, 위상, 절연저항, IEPE bias와 불확도를 관리한다.",
+      "importance": "core",
+      "keywords": [
+        "교정",
+        "추적성",
+        "불확도",
+        "IEPE bias"
+      ],
+      "core_terms": [
+        "교정",
+        "추적성",
+        "불확도",
+        "IEPE bias"
+      ],
+      "accepted_explanations": [
+        "교정은 센서·conditioner·케이블·DAQ 전체 측정사슬을 대상으로 하며 감도, 주파수응답, 위상, 절연저항, IEPE bias와 불확도를 관리한다.",
+        "측정사슬과 적용조건을 인과관계로 설명한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 변환원리 또는 적용조건을 설명하지 않는다."
+      ],
+      "grading_notes": "물리적 원리, 수식의 방향, 적용조건과 현장 측정사슬의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration.md",
+      "claim": "교정은 센서·conditioner·케이블·DAQ 전체 측정사슬을 대상으로 하며 감도, 주파수응답, 위상, 절연저항, IEPE bias와 불확도를 관리한다.",
+      "description": "교정은 센서·conditioner·케이블·DAQ 전체 측정사슬을 대상으로 하며 감도, 주파수응답, 위상, 절연저항, IEPE bias와 불확도를 관리한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "piezoelectric_fatal_inverse_effect_only_measurement",
+      "claim": "압전센서는 역압전효과만을 이용하여 힘을 측정한다.",
+      "correction": "센서 측정에는 기계적 입력으로 전하가 발생하는 직접 압전효과를 사용하며 역압전효과는 전기장으로 변형을 만드는 구동원리이다.",
+      "wrong_claim": "압전센서는 역압전효과만을 이용하여 힘을 측정한다.",
+      "correct_rule": "센서 측정에는 기계적 입력으로 전하가 발생하는 직접 압전효과를 사용하며 역압전효과는 전기장으로 변형을 만드는 구동원리이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "센서 측정에는 기계적 입력으로 전하가 발생하는 직접 압전효과를 사용하며 역압전효과는 전기장으로 변형을 만드는 구동원리이다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    },
+    {
+      "id": "piezoelectric_fatal_d_is_time_derivative",
+      "claim": "Q=dF의 d는 힘을 시간으로 미분하는 연산자이다.",
+      "correction": "d는 재료, 결정축, 분극방향과 하중방향에 따른 압전 전하상수이다.",
+      "wrong_claim": "Q=dF의 d는 힘을 시간으로 미분하는 연산자이다.",
+      "correct_rule": "d는 재료, 결정축, 분극방향과 하중방향에 따른 압전 전하상수이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "d는 재료, 결정축, 분극방향과 하중방향에 따른 압전 전하상수이다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    },
+    {
+      "id": "piezoelectric_fatal_unlimited_static_measurement",
+      "claim": "압전센서는 정하중을 시간 제한 없이 일정한 출력으로 측정할 수 있다.",
+      "correction": "발생전하는 누설경로로 감소하므로 진정한 DC와 무기한 정하중 측정에는 제한이 있다.",
+      "wrong_claim": "압전센서는 정하중을 시간 제한 없이 일정한 출력으로 측정할 수 있다.",
+      "correct_rule": "발생전하는 누설경로로 감소하므로 진정한 DC와 무기한 정하중 측정에는 제한이 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "발생전하는 누설경로로 감소하므로 진정한 DC와 무기한 정하중 측정에는 제한이 있다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    },
+    {
+      "id": "charge_amplifier_fatal_output_depends_on_sensor_cable_capacitance",
+      "claim": "이상적 전하증폭기의 출력은 센서와 케이블 정전용량에 직접 비례한다.",
+      "correction": "이상적인 폐루프 출력은 Vo≈-Q/Cf이며 주로 피드백 정전용량 Cf가 변환비를 결정한다.",
+      "wrong_claim": "이상적 전하증폭기의 출력은 센서와 케이블 정전용량에 직접 비례한다.",
+      "correct_rule": "이상적인 폐루프 출력은 Vo≈-Q/Cf이며 주로 피드백 정전용량 Cf가 변환비를 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "이상적인 폐루프 출력은 Vo≈-Q/Cf이며 주로 피드백 정전용량 Cf가 변환비를 결정한다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    },
+    {
+      "id": "piezoelectric_fatal_charge_voltage_sensitivity_identical",
+      "claim": "전하감도 pC/N와 전압감도 mV/N는 조건 없이 동일한 값이다.",
+      "correction": "pC/N는 입력당 전하이고 mV/N는 전하-전압 변환회로를 포함한 전압감도이다.",
+      "wrong_claim": "전하감도 pC/N와 전압감도 mV/N는 조건 없이 동일한 값이다.",
+      "correct_rule": "pC/N는 입력당 전하이고 mV/N는 전하-전압 변환회로를 포함한 전압감도이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "pC/N는 입력당 전하이고 mV/N는 전하-전압 변환회로를 포함한 전압감도이다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    },
+    {
+      "id": "piezoelectric_fatal_resonance_highest_accuracy",
+      "claim": "압전센서의 공진주파수에서 측정 정확도가 항상 가장 높다.",
+      "correction": "공진에서는 출력과 위상이 급변할 수 있으므로 정밀측정은 일반적으로 평탄대역에서 수행한다.",
+      "wrong_claim": "압전센서의 공진주파수에서 측정 정확도가 항상 가장 높다.",
+      "correct_rule": "공진에서는 출력과 위상이 급변할 수 있으므로 정밀측정은 일반적으로 평탄대역에서 수행한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "공진에서는 출력과 위상이 급변할 수 있으므로 정밀측정은 일반적으로 평탄대역에서 수행한다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    },
+    {
+      "id": "iepe_fatal_no_constant_current_excitation",
+      "claim": "IEPE 센서는 내장 전자회로가 있어도 정전류 여자전원이 필요하지 않다.",
+      "correction": "IEPE 내장 임피던스 변환회로에는 일반적으로 외부 정전류 여자전원과 충분한 전압여유가 필요하다.",
+      "wrong_claim": "IEPE 센서는 내장 전자회로가 있어도 정전류 여자전원이 필요하지 않다.",
+      "correct_rule": "IEPE 내장 임피던스 변환회로에는 일반적으로 외부 정전류 여자전원과 충분한 전압여유가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "IEPE 내장 임피던스 변환회로에는 일반적으로 외부 정전류 여자전원과 충분한 전압여유가 필요하다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    },
+    {
+      "id": "piezoelectric_fatal_cable_insulation_no_effect",
+      "claim": "케이블 움직임과 커넥터 절연상태는 전하출력에 영향을 주지 않는다.",
+      "correction": "케이블 움직임은 triboelectric noise를 만들 수 있고 절연저하는 전하누설을 증가시킨다.",
+      "wrong_claim": "케이블 움직임과 커넥터 절연상태는 전하출력에 영향을 주지 않는다.",
+      "correct_rule": "케이블 움직임은 triboelectric noise를 만들 수 있고 절연저하는 전하누설을 증가시킨다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "케이블 움직임은 triboelectric noise를 만들 수 있고 절연저하는 전하누설을 증가시킨다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    },
+    {
+      "id": "piezoelectric_fatal_mounting_no_frequency_effect",
+      "claim": "체결토크와 설치면 강성은 가속도계 주파수응답에 영향을 주지 않는다.",
+      "correction": "설치강성, 체결토크와 설치면 상태는 접촉공진과 고주파 응답을 변화시킨다.",
+      "wrong_claim": "체결토크와 설치면 강성은 가속도계 주파수응답에 영향을 주지 않는다.",
+      "correct_rule": "설치강성, 체결토크와 설치면 상태는 접촉공진과 고주파 응답을 변화시킨다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "설치강성, 체결토크와 설치면 상태는 접촉공진과 고주파 응답을 변화시킨다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    },
+    {
+      "id": "piezoelectric_fatal_same_static_dynamic_range_as_load_cell",
+      "claim": "압전식 힘센서와 스트레인 게이지식 로드셀은 정적·동적 적용범위가 동일하다.",
+      "correction": "스트레인 게이지식 로드셀은 정적·준정적 하중에, 압전식 힘센서는 충격·진동·빠른 동적 힘에 상대적으로 적합하다.",
+      "wrong_claim": "압전식 힘센서와 스트레인 게이지식 로드셀은 정적·동적 적용범위가 동일하다.",
+      "correct_rule": "스트레인 게이지식 로드셀은 정적·준정적 하중에, 압전식 힘센서는 충격·진동·빠른 동적 힘에 상대적으로 적합하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "fact",
+        "logic",
+        "model_answer"
+      ],
+      "message": "스트레인 게이지식 로드셀은 정적·준정적 하중에, 압전식 힘센서는 충격·진동·빠른 동적 힘에 상대적으로 적합하다.",
+      "description": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "압전센서의 물리적 변환원리 또는 측정회로 조건을 반대로 설명하는 중대한 오개념이다."
+    }
+  ],
+  "safe_expressions": [
+    "기계적 힘 또는 응력이 압전재료의 분극을 변화시켜 전극에 전하를 발생시키며 센서에는 직접 압전효과를 사용한다.",
+    "단일 축 선형영역에서 Q=dF로 나타내며 d는 시간미분이 아니라 재료·결정축·분극 및 하중방향에 따른 압전 전하상수이다.",
+    "직접 압전효과는 기계적 입력을 전하로 바꾸어 센서에 사용하고 역압전효과는 전기장을 변형으로 바꾸어 액추에이터에 사용한다.",
+    "압전센서는 전하원과 센서 정전용량 Cp, 절연 및 누설을 나타내는 병렬저항 Rp로 모델링하며 케이블과 입력단도 등가회로에 포함한다.",
+    "개방회로 전압은 V=Q/C로 근사하며 단순 전압입력에서는 센서와 케이블의 등가정전용량이 감도와 주파수특성에 영향을 준다.",
+    "발생전하는 누설경로로 감소하고 τ=RC의 전기적 시정수 때문에 진정한 DC 또는 무기한 정하중 측정에는 제한이 있다.",
+    "이상적인 전하증폭기의 출력은 Vo≈-Q/Cf이며 피드백 정전용량 Cf가 전하-전압 변환비를 결정한다.",
+    "피드백 저항 Rf는 방전경로를 제공하고 저주파 차단은 fc≈1/(2πRfCf)로 근사하며 RfCf가 클수록 더 낮은 주파수를 측정할 수 있다.",
+    "전하출력형은 외부 전하증폭기와 고절연 케이블을 사용하고 IEPE형은 내장 임피던스 변환회로와 외부 정전류 여자전원을 사용한다.",
+    "pC/N와 pC/g는 입력당 전하감도이고 mV/N와 mV/g는 전하-전압 변환회로를 포함한 전압감도이다."
+  ],
+  "revision_notes": [
+    "created_from_approved_piezoelectric_sensor_requirements_markdown",
+    "corrected_schema_specific_title_fields",
+    "separated_from_strain_gauge_load_cell_topic",
+    "separated_from_general_passive_sensor_transduction_topic",
+    "focused_on_direct_piezoelectric_effect_charge_amplifier_and_dynamic_measurement",
+    "included_charge_output_and_iepe_signal_conditioning",
+    "included_static_limit_frequency_band_and_resonance",
+    "included_mounting_cable_temperature_and_cross_axis_errors",
+    "deterministic_checks_disabled",
+    "candidate_extraction_rules_empty",
+    "manual_semantic_review_by_chatgpt",
+    "all_local_llm_calls_skipped"
+  ],
+  "topic_label": "압전식 센서의 원리, 전하증폭기, 동적 힘·압력·가속도 측정 및 오차",
+  "core_facts": [
+    "기계적 힘 또는 응력이 압전재료의 분극을 변화시켜 전극에 전하를 발생시키며 센서에는 직접 압전효과를 사용한다.",
+    "단일 축 선형영역에서 Q=dF로 나타내며 d는 시간미분이 아니라 재료·결정축·분극 및 하중방향에 따른 압전 전하상수이다.",
+    "직접 압전효과는 기계적 입력을 전하로 바꾸어 센서에 사용하고 역압전효과는 전기장을 변형으로 바꾸어 액추에이터에 사용한다.",
+    "압전센서는 전하원과 센서 정전용량 Cp, 절연 및 누설을 나타내는 병렬저항 Rp로 모델링하며 케이블과 입력단도 등가회로에 포함한다.",
+    "개방회로 전압은 V=Q/C로 근사하며 단순 전압입력에서는 센서와 케이블의 등가정전용량이 감도와 주파수특성에 영향을 준다.",
+    "발생전하는 누설경로로 감소하고 τ=RC의 전기적 시정수 때문에 진정한 DC 또는 무기한 정하중 측정에는 제한이 있다.",
+    "이상적인 전하증폭기의 출력은 Vo≈-Q/Cf이며 피드백 정전용량 Cf가 전하-전압 변환비를 결정한다.",
+    "피드백 저항 Rf는 방전경로를 제공하고 저주파 차단은 fc≈1/(2πRfCf)로 근사하며 RfCf가 클수록 더 낮은 주파수를 측정할 수 있다.",
+    "전하출력형은 외부 전하증폭기와 고절연 케이블을 사용하고 IEPE형은 내장 임피던스 변환회로와 외부 정전류 여자전원을 사용한다.",
+    "pC/N와 pC/g는 입력당 전하감도이고 mV/N와 mV/g는 전하-전압 변환회로를 포함한 전압감도이다.",
+    "압전식 힘센서는 힘을 압전소자의 응력과 전하로 바꾸고 conditioner 출력과 교정감도를 이용해 다시 힘으로 환산한다.",
+    "압력은 다이어프램과 유효면적을 통해 힘으로 변환되고 압전전하로 검출되며 연소압·충격압·맥동압 같은 동압 측정에 적합하다.",
+    "압전 가속도계는 내부 관성질량에 작용하는 F=ma의 힘을 압전소자가 검출하여 가속도로 환산한다.",
+    "유효 측정대역은 전기적 저주파 차단과 기계적 고주파 공진 사이이며 정밀측정은 일반적으로 공진을 피한 평탄대역에서 수행한다.",
+    "설치강성, 체결토크와 설치면 상태는 접촉공진과 고주파 응답을 변화시키므로 규정된 설치조건으로 관리한다.",
+    "전하케이블의 움직임은 triboelectric noise를 만들 수 있고 습기·오염·절연저하는 누설을 증가시켜 저주파 응답을 악화시킨다.",
+    "온도는 감도와 절연저항을 변화시키며 빠른 온도변화는 열팽창응력과 pyroelectric output에 의한 과도출력을 만들 수 있다.",
+    "직각방향 입력은 횡감도, 설치면 변형은 base strain, 센서 질량은 구조물 동특성을 바꾸는 mass loading 오차를 만든다.",
+    "측정시스템은 conditioner, 입력범위, high-pass와 low-pass filter, anti-aliasing filter, sampling rate와 ADC 동적범위를 함께 설계한다.",
+    "교정은 센서·conditioner·케이블·DAQ 전체 측정사슬을 대상으로 하며 감도, 주파수응답, 위상, 절연저항, IEPE bias와 불확도를 관리한다.",
+    "장시간 정하중은 스트레인 게이지식 로드셀을 우선 검토하고 충격·진동·빠른 동적 힘은 압전식 센서를 우선 검토한다."
+  ]
+}

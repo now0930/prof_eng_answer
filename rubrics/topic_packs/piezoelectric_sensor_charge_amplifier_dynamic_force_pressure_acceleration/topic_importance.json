@@ -1,0 +1,30 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "Q=dF와 직접 압전효과를 정확히 설명한다.",
+    "정적 측정 한계와 전기적 시정수를 설명한다.",
+    "전하증폭기와 IEPE 신호처리를 구분한다.",
+    "평탄대역, 공진과 설치오차를 설명한다.",
+    "스트레인 게이지식 로드셀과 선정경계를 제시한다."
+  ],
+  "note": "동적 힘·압력·가속도 계측의 핵심 Topic으로 물리원리, conditioner, 주파수응답과 현장 설치를 통합하여 설명해야 한다.",
+  "revision_notes": [
+    "created_from_approved_piezoelectric_sensor_requirements_markdown",
+    "corrected_schema_specific_title_fields",
+    "separated_from_strain_gauge_load_cell_topic",
+    "separated_from_general_passive_sensor_transduction_topic",
+    "focused_on_direct_piezoelectric_effect_charge_amplifier_and_dynamic_measurement",
+    "included_charge_output_and_iepe_signal_conditioning",
+    "included_static_limit_frequency_band_and_resonance",
+    "included_mounting_cable_temperature_and_cross_axis_errors",
+    "deterministic_checks_disabled",
+    "candidate_extraction_rules_empty",
+    "manual_semantic_review_by_chatgpt",
+    "all_local_llm_calls_skipped"
+  ],
+  "topic_label": "압전식 센서의 원리, 전하증폭기, 동적 힘·압력·가속도 측정 및 오차"
+}
