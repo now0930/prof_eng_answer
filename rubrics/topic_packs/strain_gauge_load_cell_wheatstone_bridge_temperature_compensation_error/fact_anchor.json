@@ -1,0 +1,704 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+  "title_ko": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "id": "strain_gauge_resistance_change_principle",
+      "anchor_id": "strain_gauge_resistance_change_principle",
+      "statement": "금속 스트레인 게이지는 피측정체의 변형을 길이, 단면적 및 비저항 변화에 따른 전기저항 변화로 변환한다.",
+      "importance": "must",
+      "keywords": [
+        "R=ρL/A",
+        "길이 변화",
+        "단면적 변화",
+        "비저항 변화",
+        "압저항 효과"
+      ],
+      "core_terms": [
+        "R=ρL/A",
+        "길이 변화",
+        "단면적 변화",
+        "비저항 변화",
+        "압저항 효과"
+      ],
+      "accepted_explanations": [
+        "R=ρL/A에서 피측정체의 변형이 게이지에 전달되면 길이 L, 단면적 A 및 비저항 ρ의 변화가 상대 저항변화 ΔR/R을 만든다.",
+        "금속 게이지는 인장 시 길이 증가와 단면적 감소로 저항이 증가하고 압축 시 반대로 변하며, 기하학적 효과와 압저항 효과가 함께 작용한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "스트레인 게이지를 외부 여자 없이 전압을 발생시키는 자기발전형 센서로 설명한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "금속 스트레인 게이지는 피측정체의 변형을 길이, 단면적 및 비저항 변화에 따른 전기저항 변화로 변환한다.",
+      "description": "기본 저항식은 R=ρL/A이다. 축방향 인장 시 길이는 증가하고 단면적은 감소하므로 저항이 증가하며, 압축 시에는 반대 방향으로 변한다. 금속의 압저항 효과에 따른 비저항 변화도 함께 포함된다."
+    },
+    {
+      "id": "strain_gauge_factor_definition",
+      "anchor_id": "strain_gauge_factor_definition",
+      "statement": "게이지율은 기계적 변형률에 대한 상대 저항변화의 비로 GF=(ΔR/R)/ε로 정의한다.",
+      "importance": "must",
+      "keywords": [
+        "게이지율",
+        "Gauge factor",
+        "GF=(ΔR/R)/ε",
+        "변형률",
+        "상대 저항변화"
+      ],
+      "core_terms": [
+        "게이지율",
+        "Gauge factor",
+        "GF=(ΔR/R)/ε",
+        "변형률",
+        "상대 저항변화"
+      ],
+      "accepted_explanations": [
+        "변형률은 ε=ΔL/L이고 게이지율은 GF=(ΔR/R)/ε이므로, 작은 변형률에서는 ΔR/R≈GF·ε로 나타낸다.",
+        "게이지율은 무차원이며 금속 게이지의 기하학적 변화와 비저항 변화의 영향을 함께 포함한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "GF를 ε/(ΔR/R)로 반대로 정의하거나 변형률과 상대 저항변화를 구분하지 않는다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "게이지율은 기계적 변형률에 대한 상대 저항변화의 비로 GF=(ΔR/R)/ε로 정의한다.",
+      "description": "여기서 ε=ΔL/L이며 무차원이다. 따라서 작은 변형률에서 ΔR/R≈GF·ε로 표현할 수 있다. 금속 스트레인 게이지의 게이지율은 기하학적 효과와 압저항 효과를 모두 포함한다."
+    },
+    {
+      "id": "strain_poisson_transverse_effect",
+      "anchor_id": "strain_poisson_transverse_effect",
+      "statement": "축방향 변형률은 포아송비에 따른 횡방향 변형률을 발생시키며, 이 효과가 스트레인 게이지의 단면적 변화와 게이지율에 기여한다.",
+      "importance": "must",
+      "keywords": [
+        "포아송비",
+        "횡변형률",
+        "εt=-ν·εl",
+        "단면수축",
+        "Δρ/ρ"
+      ],
+      "core_terms": [
+        "포아송비",
+        "횡변형률",
+        "εt=-ν·εl",
+        "단면수축",
+        "Δρ/ρ"
+      ],
+      "accepted_explanations": [
+        "선형 탄성범위에서 축변형률 εl에 대한 횡변형률은 εt=-ν·εl이며, 횡수축 또는 횡팽창이 도체 단면적 변화에 기여한다.",
+        "균일한 일축 변형을 가정하면 금속 게이지의 상대 저항변화는 ΔR/R≈(1+2ν)ε+Δρ/ρ로 설명할 수 있다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "횡변형률의 부호와 단면적 변화가 저항에 미치는 영향을 반대로 설명한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "축방향 변형률은 포아송비에 따른 횡방향 변형률을 발생시키며, 이 효과가 스트레인 게이지의 단면적 변화와 게이지율에 기여한다.",
+      "description": "선형 탄성범위에서 횡변형률은 εt=-ν·εl로 나타낸다. 금속 게이지의 상대 저항변화는 근사적으로 ΔR/R=(1+2ν)ε+Δρ/ρ로 설명할 수 있다."
+    },
+    {
+      "id": "wheatstone_bridge_balance_output",
+      "anchor_id": "wheatstone_bridge_balance_output",
+      "statement": "휘트스톤 브리지는 네 저항의 비가 평형조건을 만족할 때 차동 출력이 0이 되고, 게이지 저항 변화에 따라 불평형 전압이 발생한다.",
+      "importance": "must",
+      "keywords": [
+        "Wheatstone bridge",
+        "R1/R2=R3/R4",
+        "평형",
+        "차동 출력",
+        "불평형 전압"
+      ],
+      "core_terms": [
+        "Wheatstone bridge",
+        "R1/R2=R3/R4",
+        "평형",
+        "차동 출력",
+        "불평형 전압"
+      ],
+      "accepted_explanations": [
+        "브리지의 저항비가 R1/R2=R3/R4를 만족하면 두 중간점 전위가 같아 이상적인 차동출력은 0이 된다.",
+        "게이지 저항이 변하면 브리지가 불평형이 되어 차동전압이 발생하며, 작은 저항변화에서는 출력이 변형률에 거의 비례한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "브리지 평형에서 최대 출력이 발생한다고 설명한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "휘트스톤 브리지는 네 저항의 비가 평형조건을 만족할 때 차동 출력이 0이 되고, 게이지 저항 변화에 따라 불평형 전압이 발생한다.",
+      "description": "대표적인 평형조건은 R1/R2=R3/R4이다. 브리지 출력은 두 중간점 전압의 차이며, 작은 저항 변화에서는 변형률에 거의 비례하는 차동신호로 사용할 수 있다."
+    },
+    {
+      "id": "quarter_bridge_sensitivity_temperature",
+      "anchor_id": "quarter_bridge_sensitivity_temperature",
+      "statement": "Quarter bridge는 한 개의 활성 게이지를 사용하며, 작은 변형률에서 출력 크기는 대략 Vo/Vex≈GF·ε/4이다.",
+      "importance": "must",
+      "keywords": [
+        "Quarter bridge",
+        "한 개 활성 게이지",
+        "Vo/Vex≈GF·ε/4",
+        "리드선 영향",
+        "온도오차"
+      ],
+      "core_terms": [
+        "Quarter bridge",
+        "한 개 활성 게이지",
+        "Vo/Vex≈GF·ε/4",
+        "리드선 영향",
+        "온도오차"
+      ],
+      "accepted_explanations": [
+        "한 개의 활성 게이지만 변형을 받는 Quarter bridge는 작은 변형률에서 출력 크기가 Vo/Vex≈GF·ε/4가 된다.",
+        "출력 부호는 브리지 팔과 인장·압축 방향에 따라 달라지며, 리드선저항과 온도변화는 3선식 또는 더미 게이지 등의 방법으로 보상한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "Quarter bridge의 1차 감도를 GF·ε 또는 GF·ε/2로 일반화한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "Quarter bridge는 한 개의 활성 게이지를 사용하며, 작은 변형률에서 출력 크기는 대략 Vo/Vex≈GF·ε/4이다.",
+      "description": "부호는 게이지가 연결된 브리지 팔과 인장·압축 방향에 따라 달라진다. 구성이 단순하지만 게이지 및 리드선의 온도 변화와 배선저항 영향을 상대적으로 크게 받으므로 보상회로가 필요하다."
+    },
+    {
+      "id": "half_bridge_sensitivity_compensation",
+      "anchor_id": "half_bridge_sensitivity_compensation",
+      "statement": "Half bridge는 두 개의 게이지를 사용한다. 두 활성 게이지를 출력이 합산되도록 배치하면 Quarter bridge보다 감도가 높아지고, 활성·더미 구성은 주로 온도보상을 제공한다.",
+      "importance": "must",
+      "keywords": [
+        "Half bridge",
+        "두 활성 게이지",
+        "Vo/Vex≈GF·ε/2",
+        "활성·더미 게이지",
+        "Vo/Vex≈GF·ε/4",
+        "온도보상"
+      ],
+      "core_terms": [
+        "Half bridge",
+        "두 활성 게이지",
+        "Vo/Vex≈GF·ε/2",
+        "활성·더미 게이지",
+        "Vo/Vex≈GF·ε/4",
+        "온도보상"
+      ],
+      "accepted_explanations": [
+        "동일 크기의 인장·압축 변형을 받는 두 활성 게이지를 출력이 합산되도록 배치하면 작은 변형률에서 Vo/Vex≈GF·ε/2가 된다.",
+        "활성 게이지 한 개와 무변형 더미 게이지를 사용한 Half bridge는 주로 온도보상을 제공하며 기계적 감도는 1차 근사에서 Quarter bridge와 같은 Vo/Vex≈GF·ε/4이다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "두 활성 게이지 구성과 활성·더미 구성을 구분하지 않고 모두 GF·ε/2라고 설명한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "Half bridge는 두 개의 게이지를 사용한다. 두 활성 게이지를 출력이 합산되도록 배치하면 Quarter bridge보다 감도가 높아지고, 활성·더미 구성은 주로 온도보상을 제공한다.",
+      "description": "동일 크기의 인장·압축 변형을 받는 두 활성 게이지를 출력이 합산되도록 배치하면 작은 변형률에서 Vo/Vex≈GF·ε/2가 된다. 활성 게이지 한 개와 무변형 더미 게이지를 사용하면 공통 온도변화는 상쇄하지만 기계적 감도는 1차 근사에서 Vo/Vex≈GF·ε/4이다."
+    },
+    {
+      "id": "full_bridge_sensitivity_compensation",
+      "anchor_id": "full_bridge_sensitivity_compensation",
+      "statement": "Full bridge는 네 개의 활성 게이지를 사용하며, 인장과 압축 게이지를 출력이 합산되도록 배치하면 가장 높은 감도와 우수한 공통 온도보상을 얻을 수 있다.",
+      "importance": "must",
+      "keywords": [
+        "Full bridge",
+        "네 개 활성 게이지",
+        "Vo/Vex≈GF·ε",
+        "최대 감도",
+        "공통 온도보상"
+      ],
+      "core_terms": [
+        "Full bridge",
+        "네 개 활성 게이지",
+        "Vo/Vex≈GF·ε",
+        "최대 감도",
+        "공통 온도보상"
+      ],
+      "accepted_explanations": [
+        "네 활성 게이지가 같은 크기의 인장과 압축 변형을 받고 출력이 합산되도록 배치되면 작은 변형률에서 Vo/Vex≈GF·ε가 된다.",
+        "대칭 배치는 공통 온도변화와 일부 기생변형을 상쇄하지만 실제 감도는 탄성체 형상, 게이지 위치, 정렬과 횡감도의 영향을 받는다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "한 개 또는 두 개의 활성 게이지만 사용하면서 Full bridge 감도 GF·ε를 적용한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "Full bridge는 네 개의 활성 게이지를 사용하며, 인장과 압축 게이지를 출력이 합산되도록 배치하면 가장 높은 감도와 우수한 공통 온도보상을 얻을 수 있다.",
+      "description": "이상적인 대칭 배치와 작은 변형률에서는 출력 크기가 대략 Vo/Vex≈GF·ε가 된다. 실제 감도는 탄성체 형상, 게이지 위치, 배선 방향과 횡감도에 따라 달라진다."
+    },
+    {
+      "id": "load_cell_force_strain_voltage_chain",
+      "anchor_id": "load_cell_force_strain_voltage_chain",
+      "statement": "스트레인 게이지식 로드셀은 하중을 탄성체의 변형으로 바꾸고, 게이지 저항변화와 브리지 불평형 전압을 거쳐 전기신호로 변환한다.",
+      "importance": "must",
+      "keywords": [
+        "로드셀",
+        "탄성체",
+        "하중",
+        "변형률",
+        "브리지 출력"
+      ],
+      "core_terms": [
+        "로드셀",
+        "탄성체",
+        "하중",
+        "변형률",
+        "브리지 출력"
+      ],
+      "accepted_explanations": [
+        "로드셀은 하중을 탄성체의 응력과 변형률로 바꾸고, 게이지의 ΔR/R과 브리지 불평형 전압을 거쳐 전기신호로 변환한다.",
+        "탄성체와 게이지는 정격범위에서 선형 탄성거동을 유지하고 인장·압축 변형이 충분히 나타나는 위치와 방향으로 설계해야 한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "하중에서 브리지 출력까지의 탄성체·변형률·저항변화 단계를 생략한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "스트레인 게이지식 로드셀은 하중을 탄성체의 변형으로 바꾸고, 게이지 저항변화와 브리지 불평형 전압을 거쳐 전기신호로 변환한다.",
+      "description": "측정사슬은 힘·하중→탄성체 응력→변형률→ΔR/R→브리지 출력의 순서이다. 탄성체는 정격하중에서 선형 탄성범위에 있도록 설계되며, 게이지 위치는 인장과 압축 변형이 크게 나타나는 곳에 선정한다."
+    },
+    {
+      "id": "load_cell_excitation_ratiometric_output",
+      "anchor_id": "load_cell_excitation_ratiometric_output",
+      "statement": "로드셀의 브리지 출력은 여자전압에 비례하며 일반적으로 정격하중에서의 감도를 mV/V 단위로 표시한다.",
+      "importance": "must",
+      "keywords": [
+        "여자전압",
+        "mV/V",
+        "정격감도",
+        "비율측정",
+        "ratiometric"
+      ],
+      "core_terms": [
+        "여자전압",
+        "mV/V",
+        "정격감도",
+        "비율측정",
+        "ratiometric"
+      ],
+      "accepted_explanations": [
+        "정격감도가 S mV/V이고 여자전압이 Vex이면 정격하중 출력은 이상적으로 S×Vex mV이므로 브리지 출력은 여자전압에 비례한다.",
+        "ADC 기준전압을 여자전압과 연동하는 비율측정과 remote excitation sense를 사용하면 전원변동과 여자선 전압강하의 영향을 줄일 수 있다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "mV/V를 여자전압과 무관한 고정 절대전압으로 설명한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "로드셀의 브리지 출력은 여자전압에 비례하며 일반적으로 정격하중에서의 감도를 mV/V 단위로 표시한다.",
+      "description": "예를 들어 정격감도 2 mV/V의 로드셀에 10 V를 인가하면 정격하중 출력은 이상적으로 약 20 mV이다. 여자전압을 ADC 기준과 공유하는 비율측정은 여자전압 변동의 영향을 줄일 수 있다."
+    },
+    {
+      "id": "instrumentation_amplifier_adc_signal_chain",
+      "anchor_id": "instrumentation_amplifier_adc_signal_chain",
+      "statement": "로드셀의 작은 차동 브리지 출력은 계측증폭기에서 증폭한 뒤 필터링하고 ADC로 변환한다.",
+      "importance": "must",
+      "keywords": [
+        "계측증폭기",
+        "차동신호",
+        "CMRR",
+        "오프셋",
+        "ADC",
+        "필터링"
+      ],
+      "core_terms": [
+        "계측증폭기",
+        "차동신호",
+        "CMRR",
+        "오프셋",
+        "ADC",
+        "필터링"
+      ],
+      "accepted_explanations": [
+        "수 mV 수준의 차동 브리지 신호는 높은 입력임피던스와 CMRR, 낮은 오프셋과 드리프트를 갖는 계측증폭기로 증폭한다.",
+        "이득은 최대 출력, 영점오차, 공통모드 범위와 ADC 입력범위를 함께 고려하고 저역통과 및 anti-alias 필터를 거쳐 디지털 값으로 변환한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "오프셋, 드리프트, 공통모드 범위와 ADC 포화를 고려하지 않고 이득만 크게 설정한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "로드셀의 작은 차동 브리지 출력은 계측증폭기에서 증폭한 뒤 필터링하고 ADC로 변환한다.",
+      "description": "계측증폭기는 높은 입력임피던스와 공통모드 제거비, 낮은 오프셋과 드리프트가 필요하다. 증폭이득은 정격 mV/V 출력과 ADC 입력범위를 고려하여 정하며, 영점 조정과 저역통과 필터를 함께 적용한다."
+    },
+    {
+      "id": "temperature_zero_span_compensation",
+      "anchor_id": "temperature_zero_span_compensation",
+      "statement": "온도 변화는 게이지 저항, 접착층, 탄성체 열팽창과 탄성계수를 변화시켜 로드셀의 영점과 감도에 오차를 만든다.",
+      "importance": "must",
+      "keywords": [
+        "영점 온도영향",
+        "감도 온도영향",
+        "더미 게이지",
+        "자기온도보상",
+        "span 보상"
+      ],
+      "core_terms": [
+        "영점 온도영향",
+        "감도 온도영향",
+        "더미 게이지",
+        "자기온도보상",
+        "span 보상"
+      ],
+      "accepted_explanations": [
+        "영점 온도영향은 무부하 출력의 온도변화이고 span 온도영향은 하중에 대한 감도 또는 기울기의 온도변화이므로 구분하여 평가한다.",
+        "더미 게이지, 자기온도보상 게이지, 대칭 브리지, 보상저항과 온도별 소프트웨어 교정으로 열팽창·탄성계수·게이지율 변화의 영향을 줄인다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "영점 온도영향과 span 온도영향을 같은 현상으로 취급한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "온도 변화는 게이지 저항, 접착층, 탄성체 열팽창과 탄성계수를 변화시켜 로드셀의 영점과 감도에 오차를 만든다.",
+      "description": "더미 게이지는 동일한 온도와 재료변화를 받되 기계적 변형은 받지 않도록 배치하여 온도에 의한 저항변화를 상쇄한다. 자기온도보상 게이지, 대칭 브리지, 보상저항 및 소프트웨어 보정으로 영점과 span을 보상한다."
+    },
+    {
+      "id": "creep_hysteresis_nonlinearity_repeatability",
+      "anchor_id": "creep_hysteresis_nonlinearity_repeatability",
+      "statement": "크리프, 히스테리시스, 비직선성과 반복성은 서로 다른 로드셀 성능오차이며 각각의 시험조건과 정의로 평가해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "크리프",
+        "히스테리시스",
+        "비직선성",
+        "반복성",
+        "교정오차"
+      ],
+      "core_terms": [
+        "크리프",
+        "히스테리시스",
+        "비직선성",
+        "반복성",
+        "교정오차"
+      ],
+      "accepted_explanations": [
+        "크리프는 일정 하중과 환경에서 시간 경과에 따라 출력이 변하는 현상이고, 히스테리시스는 같은 하중에서 증가·감소 경로의 출력이 다른 현상이다.",
+        "비직선성은 기준 교정선과의 편차이며 반복성은 동일 조건의 반복 측정값 사이의 산포이므로 각각 다른 시험조건과 지표로 평가한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "크리프, 히스테리시스, 비직선성과 반복성을 동일한 오차로 설명한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "크리프, 히스테리시스, 비직선성과 반복성은 서로 다른 로드셀 성능오차이며 각각의 시험조건과 정의로 평가해야 한다.",
+      "description": "크리프는 일정 하중과 환경에서 시간이 지나며 출력이 변하는 현상이다. 히스테리시스는 같은 하중에서 증가·감소 경로의 출력이 다른 현상이다. 비직선성은 교정직선과의 편차이며 반복성은 동일 조건 반복측정의 산포이다."
+    },
+    {
+      "id": "installation_eccentric_load_overload",
+      "anchor_id": "installation_eccentric_load_overload",
+      "statement": "로드셀은 정해진 하중축과 지지조건으로 설치해야 하며, 편심하중, 측하중, 모멘트와 과부하는 출력오차와 영구변형을 유발할 수 있다.",
+      "importance": "must",
+      "keywords": [
+        "편심하중",
+        "측하중",
+        "과부하",
+        "접착",
+        "정렬",
+        "기계적 스토퍼"
+      ],
+      "core_terms": [
+        "편심하중",
+        "측하중",
+        "과부하",
+        "접착",
+        "정렬",
+        "기계적 스토퍼"
+      ],
+      "accepted_explanations": [
+        "편심하중, 측하중과 모멘트는 설계된 변형분포를 바꾸어 영점·감도·선형성 오차를 만들고 과부하는 탄성체의 영구변형이나 게이지 손상을 유발할 수 있다.",
+        "하중축 정렬, 부착면 강성, 체결조건, 기계적 스토퍼, 표면처리, 접착층, 게이지 방향과 방습 밀봉을 설치기준으로 관리한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "편심·측하중, 접착, 정렬과 과부하가 출력 및 장기 안정성에 영향을 주지 않는다고 설명한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "로드셀은 정해진 하중축과 지지조건으로 설치해야 하며, 편심하중, 측하중, 모멘트와 과부하는 출력오차와 영구변형을 유발할 수 있다.",
+      "description": "하중 도입부의 정렬, 수평, 체결토크, 부착면 강성 및 기계적 스토퍼를 관리해야 한다. 스트레인 게이지 직접 부착 시에는 표면처리, 접착층 두께, 방향 정렬과 방습 밀봉이 변형 전달과 장기 안정성에 영향을 준다."
+    },
+    {
+      "id": "wiring_shield_ground_fault_diagnostics",
+      "anchor_id": "wiring_shield_ground_fault_diagnostics",
+      "statement": "스트레인 게이지와 로드셀 배선은 리드선저항, 전자기잡음과 접지루프를 관리하고 단선·단락·브리지 불평형 고장을 진단해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "3선식 보상",
+        "6선식 로드셀",
+        "sense 선",
+        "차폐",
+        "단일점 접지",
+        "단선·단락 진단"
+      ],
+      "core_terms": [
+        "3선식 보상",
+        "6선식 로드셀",
+        "sense 선",
+        "차폐",
+        "단일점 접지",
+        "단선·단락 진단"
+      ],
+      "accepted_explanations": [
+        "Quarter bridge의 3선식 보상은 조건이 맞을 때 리드선저항 영향을 줄이고, 6선식 로드셀의 sense 선은 로드셀 단자에서의 실제 여자전압을 보상한다.",
+        "트위스트 페어, 차폐와 단일점 접지로 잡음과 접지루프를 줄이고, 브리지 저항·절연·입력범위·영점 불평형을 이용해 단선·단락과 배선오류를 진단한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하고 원리, 성립조건과 오차 메커니즘을 연결하지 않는다.",
+        "차폐를 여러 지점에 무조건 접지하거나 sense 선을 신호선 저항보상용으로 설명한다."
+      ],
+      "grading_notes": "표현의 일치보다 물리적 원리, 식의 정의와 가정조건, 측정사슬 및 현장 적용의 정확성을 평가한다.",
+      "source_basis": "docs/topic_sheets/strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error.md",
+      "claim": "스트레인 게이지와 로드셀 배선은 리드선저항, 전자기잡음과 접지루프를 관리하고 단선·단락·브리지 불평형 고장을 진단해야 한다.",
+      "description": "Quarter bridge는 3선식 보상으로 리드선저항 영향을 줄일 수 있고, 정밀 로드셀은 excitation sense를 포함한 6선식을 사용할 수 있다. 트위스트 페어, 차폐, 단일점 접지와 입력 범위진단을 적용한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "strain_gauge_fatal_self_generating_voltage",
+      "claim": "스트레인 게이지는 외부 여기 없이 변형에 비례하는 전압을 스스로 발생한다.",
+      "correction": "스트레인 게이지는 변형에 따라 저항이 변하는 수동 저항형 센서이므로 외부 여자 및 브리지 측정회로가 필요하다.",
+      "wrong_claim": "스트레인 게이지는 외부 여기 없이 변형에 비례하는 전압을 스스로 발생한다.",
+      "correct_rule": "스트레인 게이지는 변형에 따라 저항이 변하는 수동 저항형 센서이므로 외부 여자 및 브리지 측정회로가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "스트레인 게이지·로드셀의 핵심 변환원리, 브리지 특성 또는 오차 메커니즘을 반대로 설명했다.",
+      "description": "잘못된 주장: 스트레인 게이지는 외부 여기 없이 변형에 비례하는 전압을 스스로 발생한다. 정확한 기준: 스트레인 게이지는 변형에 따라 저항이 변하는 수동 저항형 센서이므로 외부 여자 및 브리지 측정회로가 필요하다.",
+      "grading_notes": "해당 주장이 답안의 결론으로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "strain_gauge_fatal_gauge_factor_inverse_definition",
+      "claim": "게이지율은 변형률을 상대 저항변화로 나눈 GF=ε/(ΔR/R)이다.",
+      "correction": "게이지율은 상대 저항변화를 변형률로 나눈 GF=(ΔR/R)/ε로 정의한다.",
+      "wrong_claim": "게이지율은 변형률을 상대 저항변화로 나눈 GF=ε/(ΔR/R)이다.",
+      "correct_rule": "게이지율은 상대 저항변화를 변형률로 나눈 GF=(ΔR/R)/ε로 정의한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "스트레인 게이지·로드셀의 핵심 변환원리, 브리지 특성 또는 오차 메커니즘을 반대로 설명했다.",
+      "description": "잘못된 주장: 게이지율은 변형률을 상대 저항변화로 나눈 GF=ε/(ΔR/R)이다. 정확한 기준: 게이지율은 상대 저항변화를 변형률로 나눈 GF=(ΔR/R)/ε로 정의한다.",
+      "grading_notes": "해당 주장이 답안의 결론으로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "wheatstone_bridge_fatal_balance_maximum_output",
+      "claim": "휘트스톤 브리지는 평형상태에서 최대 차동출력을 발생한다.",
+      "correction": "이상적인 휘트스톤 브리지는 평형조건에서 차동출력이 0이며, 저항 변화에 따른 불평형으로 출력이 발생한다.",
+      "wrong_claim": "휘트스톤 브리지는 평형상태에서 최대 차동출력을 발생한다.",
+      "correct_rule": "이상적인 휘트스톤 브리지는 평형조건에서 차동출력이 0이며, 저항 변화에 따른 불평형으로 출력이 발생한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "스트레인 게이지·로드셀의 핵심 변환원리, 브리지 특성 또는 오차 메커니즘을 반대로 설명했다.",
+      "description": "잘못된 주장: 휘트스톤 브리지는 평형상태에서 최대 차동출력을 발생한다. 정확한 기준: 이상적인 휘트스톤 브리지는 평형조건에서 차동출력이 0이며, 저항 변화에 따른 불평형으로 출력이 발생한다.",
+      "grading_notes": "해당 주장이 답안의 결론으로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "bridge_fatal_quarter_half_full_identical",
+      "claim": "Quarter, Half, Full bridge는 게이지 수만 다를 뿐 감도와 온도보상 능력이 모두 동일하다.",
+      "correction": "활성 게이지 수와 배치에 따라 감도는 대략 GFε/4, GFε/2, GFε로 달라지며 온도보상과 굽힘·축력 분리 능력도 서로 다르다.",
+      "wrong_claim": "Quarter, Half, Full bridge는 게이지 수만 다를 뿐 감도와 온도보상 능력이 모두 동일하다.",
+      "correct_rule": "활성 게이지 수와 배치에 따라 감도는 대략 GFε/4, GFε/2, GFε로 달라지며 온도보상과 굽힘·축력 분리 능력도 서로 다르다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "스트레인 게이지·로드셀의 핵심 변환원리, 브리지 특성 또는 오차 메커니즘을 반대로 설명했다.",
+      "description": "잘못된 주장: Quarter, Half, Full bridge는 게이지 수만 다를 뿐 감도와 온도보상 능력이 모두 동일하다. 정확한 기준: 활성 게이지 수와 배치에 따라 감도는 대략 GFε/4, GFε/2, GFε로 달라지며 온도보상과 굽힘·축력 분리 능력도 서로 다르다.",
+      "grading_notes": "해당 주장이 답안의 결론으로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "load_cell_fatal_output_independent_of_excitation",
+      "claim": "로드셀 출력은 여자전압과 관계없는 고정 절대전압이다.",
+      "correction": "저항 브리지형 로드셀 출력은 여자전압에 비례하며 감도는 보통 mV/V로 표시한다.",
+      "wrong_claim": "로드셀 출력은 여자전압과 관계없는 고정 절대전압이다.",
+      "correct_rule": "저항 브리지형 로드셀 출력은 여자전압에 비례하며 감도는 보통 mV/V로 표시한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "스트레인 게이지·로드셀의 핵심 변환원리, 브리지 특성 또는 오차 메커니즘을 반대로 설명했다.",
+      "description": "잘못된 주장: 로드셀 출력은 여자전압과 관계없는 고정 절대전압이다. 정확한 기준: 저항 브리지형 로드셀 출력은 여자전압에 비례하며 감도는 보통 mV/V로 표시한다.",
+      "grading_notes": "해당 주장이 답안의 결론으로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "dummy_gauge_fatal_active_load_measurement",
+      "claim": "더미 게이지는 하중변형을 직접 측정하는 활성 게이지이다.",
+      "correction": "더미 게이지는 활성 게이지와 같은 온도조건을 받되 측정변형은 받지 않도록 배치하여 온도에 의한 저항변화를 상쇄한다.",
+      "wrong_claim": "더미 게이지는 하중변형을 직접 측정하는 활성 게이지이다.",
+      "correct_rule": "더미 게이지는 활성 게이지와 같은 온도조건을 받되 측정변형은 받지 않도록 배치하여 온도에 의한 저항변화를 상쇄한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "스트레인 게이지·로드셀의 핵심 변환원리, 브리지 특성 또는 오차 메커니즘을 반대로 설명했다.",
+      "description": "잘못된 주장: 더미 게이지는 하중변형을 직접 측정하는 활성 게이지이다. 정확한 기준: 더미 게이지는 활성 게이지와 같은 온도조건을 받되 측정변형은 받지 않도록 배치하여 온도에 의한 저항변화를 상쇄한다.",
+      "grading_notes": "해당 주장이 답안의 결론으로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "load_cell_fatal_creep_equals_hysteresis",
+      "claim": "크리프와 히스테리시스는 같은 원인과 같은 시험으로 정의되는 동일한 오차이다.",
+      "correction": "크리프는 일정 하중에서 시간에 따른 출력변화이고, 히스테리시스는 동일 하중에서 증가·감소 경로에 따른 출력차이이다.",
+      "wrong_claim": "크리프와 히스테리시스는 같은 원인과 같은 시험으로 정의되는 동일한 오차이다.",
+      "correct_rule": "크리프는 일정 하중에서 시간에 따른 출력변화이고, 히스테리시스는 동일 하중에서 증가·감소 경로에 따른 출력차이이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "스트레인 게이지·로드셀의 핵심 변환원리, 브리지 특성 또는 오차 메커니즘을 반대로 설명했다.",
+      "description": "잘못된 주장: 크리프와 히스테리시스는 같은 원인과 같은 시험으로 정의되는 동일한 오차이다. 정확한 기준: 크리프는 일정 하중에서 시간에 따른 출력변화이고, 히스테리시스는 동일 하중에서 증가·감소 경로에 따른 출력차이이다.",
+      "grading_notes": "해당 주장이 답안의 결론으로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "load_cell_fatal_installation_no_error",
+      "claim": "편심하중, 과부하, 접착상태와 설치방향은 로드셀 및 스트레인 게이지 출력오차에 영향을 주지 않는다.",
+      "correction": "하중축 정렬, 편심·측하중, 과부하, 표면처리, 접착과 게이지 방향은 변형 전달, 영점, 감도, 선형성과 장기 안정성에 직접 영향을 준다.",
+      "wrong_claim": "편심하중, 과부하, 접착상태와 설치방향은 로드셀 및 스트레인 게이지 출력오차에 영향을 주지 않는다.",
+      "correct_rule": "하중축 정렬, 편심·측하중, 과부하, 표면처리, 접착과 게이지 방향은 변형 전달, 영점, 감도, 선형성과 장기 안정성에 직접 영향을 준다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C",
+        "D"
+      ],
+      "message": "스트레인 게이지·로드셀의 핵심 변환원리, 브리지 특성 또는 오차 메커니즘을 반대로 설명했다.",
+      "description": "잘못된 주장: 편심하중, 과부하, 접착상태와 설치방향은 로드셀 및 스트레인 게이지 출력오차에 영향을 주지 않는다. 정확한 기준: 하중축 정렬, 편심·측하중, 과부하, 표면처리, 접착과 게이지 방향은 변형 전달, 영점, 감도, 선형성과 장기 안정성에 직접 영향을 준다.",
+      "grading_notes": "해당 주장이 답안의 결론으로 사용되면 high-band를 허용하지 않는다."
+    }
+  ],
+  "safe_expressions": [
+    "R=ρL/A",
+    "길이 변화",
+    "단면적 변화",
+    "비저항 변화",
+    "압저항 효과",
+    "게이지율",
+    "Gauge factor",
+    "GF=(ΔR/R)/ε",
+    "변형률",
+    "상대 저항변화",
+    "포아송비",
+    "횡변형률",
+    "εt=-ν·εl",
+    "단면수축",
+    "Δρ/ρ",
+    "Wheatstone bridge",
+    "R1/R2=R3/R4",
+    "평형",
+    "차동 출력",
+    "불평형 전압",
+    "Quarter bridge",
+    "한 개 활성 게이지",
+    "Vo/Vex≈GF·ε/4",
+    "리드선 영향",
+    "온도오차",
+    "Half bridge",
+    "두 개 게이지",
+    "Vo/Vex≈GF·ε/2",
+    "인장·압축",
+    "온도보상",
+    "Full bridge",
+    "네 개 활성 게이지",
+    "Vo/Vex≈GF·ε",
+    "최대 감도",
+    "공통 온도보상",
+    "로드셀",
+    "탄성체",
+    "하중",
+    "변형률",
+    "브리지 출력",
+    "여자전압",
+    "mV/V",
+    "정격감도",
+    "비율측정",
+    "ratiometric",
+    "계측증폭기",
+    "차동신호",
+    "CMRR",
+    "오프셋",
+    "ADC",
+    "필터링",
+    "영점 온도영향",
+    "감도 온도영향",
+    "더미 게이지",
+    "자기온도보상",
+    "span 보상",
+    "크리프",
+    "히스테리시스",
+    "비직선성",
+    "반복성",
+    "교정오차",
+    "편심하중",
+    "측하중",
+    "과부하",
+    "접착",
+    "정렬",
+    "기계적 스토퍼",
+    "3선식 보상",
+    "6선식 로드셀",
+    "sense 선",
+    "차폐",
+    "단일점 접지",
+    "단선·단락 진단",
+    "활성·더미 Half bridge",
+    "활성·더미 구성 Vo/Vex≈GF·ε/4",
+    "두 활성 게이지 Half bridge Vo/Vex≈GF·ε/2",
+    "remote excitation sense"
+  ],
+  "revision_notes": [
+    "created_from_reviewed_strain_gauge_load_cell_requirements",
+    "separated_from_general_passive_sensor_transduction_topic",
+    "separated_from_temperature_resistive_sensor_topics",
+    "focused_on_gauge_factor_bridge_load_cell_signal_chain_and_error",
+    "deterministic_checks_disabled",
+    "candidate_extraction_rules_empty",
+    "added_data_driven_routing_aliases_and_field_points",
+    "manual_semantic_review_by_chatgpt",
+    "all_local_llm_calls_skipped",
+    "removed_temperature_sensor_template_contamination",
+    "clarified_active_dummy_half_bridge_sensitivity",
+    "preserved_eight_fatal_claim_contract"
+  ],
+  "topic_label": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
+  "core_facts": [
+    "금속 스트레인 게이지는 피측정체의 변형을 길이, 단면적 및 비저항 변화에 따른 전기저항 변화로 변환한다.",
+    "게이지율은 기계적 변형률에 대한 상대 저항변화의 비로 GF=(ΔR/R)/ε로 정의한다.",
+    "축방향 변형률은 포아송비에 따른 횡방향 변형률을 발생시키며, 이 효과가 스트레인 게이지의 단면적 변화와 게이지율에 기여한다.",
+    "휘트스톤 브리지는 네 저항의 비가 평형조건을 만족할 때 차동 출력이 0이 되고, 게이지 저항 변화에 따라 불평형 전압이 발생한다.",
+    "Quarter bridge는 한 개의 활성 게이지를 사용하며, 작은 변형률에서 출력 크기는 대략 Vo/Vex≈GF·ε/4이다.",
+    "Half bridge는 두 개의 게이지를 사용한다. 두 활성 게이지를 출력이 합산되도록 배치하면 Quarter bridge보다 감도가 높아지고, 활성·더미 구성은 주로 온도보상을 제공한다.",
+    "Full bridge는 네 개의 활성 게이지를 사용하며, 인장과 압축 게이지를 출력이 합산되도록 배치하면 가장 높은 감도와 우수한 공통 온도보상을 얻을 수 있다.",
+    "스트레인 게이지식 로드셀은 하중을 탄성체의 변형으로 바꾸고, 게이지 저항변화와 브리지 불평형 전압을 거쳐 전기신호로 변환한다.",
+    "로드셀의 브리지 출력은 여자전압에 비례하며 일반적으로 정격하중에서의 감도를 mV/V 단위로 표시한다.",
+    "로드셀의 작은 차동 브리지 출력은 계측증폭기에서 증폭한 뒤 필터링하고 ADC로 변환한다.",
+    "온도 변화는 게이지 저항, 접착층, 탄성체 열팽창과 탄성계수를 변화시켜 로드셀의 영점과 감도에 오차를 만든다.",
+    "크리프, 히스테리시스, 비직선성과 반복성은 서로 다른 로드셀 성능오차이며 각각의 시험조건과 정의로 평가해야 한다.",
+    "로드셀은 정해진 하중축과 지지조건으로 설치해야 하며, 편심하중, 측하중, 모멘트와 과부하는 출력오차와 영구변형을 유발할 수 있다.",
+    "스트레인 게이지와 로드셀 배선은 리드선저항, 전자기잡음과 접지루프를 관리하고 단선·단락·브리지 불평형 고장을 진단해야 한다."
+  ]
+}

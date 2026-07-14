@@ -1,0 +1,32 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "기계적 하중에서 디지털 값까지의 측정사슬을 단절 없이 설명한다.",
+    "게이지율과 브리지 감도식을 정의 및 가정조건과 함께 정확히 제시한다.",
+    "Quarter, 두 활성 Half, 활성·더미 Half와 Full bridge를 감도조건과 보상성능으로 비교한다.",
+    "여자전압 변동과 mV/V 출력을 비율측정 및 ADC 기준전압으로 연결한다.",
+    "영점 온도영향과 span 온도영향을 구분하고 하드웨어·소프트웨어 보상을 제시한다.",
+    "정적오차, 시간의존 오차 및 설치오차를 구분하여 개선방법을 제시한다.",
+    "기존 수동형 센서 일반 Topic과 중복하지 않고 로드셀 고유 측정사슬을 중심으로 답한다.",
+    "정확도뿐 아니라 비용, 교정성, 과부하 보호, 유지보수와 Fail-safe를 함께 고려한다."
+  ],
+  "note": "스트레인 게이지와 로드셀은 힘·하중 계측의 대표적인 저항형 센서이며, 게이지율, 브리지 감도, mV/V 신호처리, 온도보상과 설치오차를 함께 이해해야 정확한 현장 답안을 작성할 수 있다.",
+  "revision_notes": [
+    "created_from_reviewed_strain_gauge_load_cell_requirements",
+    "separated_from_general_passive_sensor_transduction_topic",
+    "separated_from_temperature_resistive_sensor_topics",
+    "focused_on_gauge_factor_bridge_load_cell_signal_chain_and_error",
+    "deterministic_checks_disabled",
+    "candidate_extraction_rules_empty",
+    "added_data_driven_routing_aliases_and_field_points",
+    "manual_semantic_review_by_chatgpt",
+    "all_local_llm_calls_skipped",
+    "clarified_active_dummy_half_bridge_sensitivity",
+    "completed_chatgpt_manual_semantic_correction"
+  ],
+  "topic_label": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차"
+}

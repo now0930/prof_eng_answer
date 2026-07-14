@@ -1,0 +1,99 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+  "title": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
+    "difficulty": "THEORY_CORE",
+    "cap_policy": {},
+    "candidate_extraction": {},
+    "truth_schema": [
+      "금속 스트레인 게이지는 피측정체의 변형을 길이, 단면적 및 비저항 변화에 따른 전기저항 변화로 변환한다.",
+      "게이지율은 기계적 변형률에 대한 상대 저항변화의 비로 GF=(ΔR/R)/ε로 정의한다.",
+      "축방향 변형률은 포아송비에 따른 횡방향 변형률을 발생시키며, 이 효과가 스트레인 게이지의 단면적 변화와 게이지율에 기여한다.",
+      "휘트스톤 브리지는 네 저항의 비가 평형조건을 만족할 때 차동 출력이 0이 되고, 게이지 저항 변화에 따라 불평형 전압이 발생한다.",
+      "Quarter bridge는 한 개의 활성 게이지를 사용하며, 작은 변형률에서 출력 크기는 대략 Vo/Vex≈GF·ε/4이다.",
+      "Half bridge는 두 개의 게이지를 사용한다. 두 활성 게이지를 출력이 합산되도록 배치하면 Quarter bridge보다 감도가 높아지고, 활성·더미 구성은 주로 온도보상을 제공한다.",
+      "Full bridge는 네 개의 활성 게이지를 사용하며, 인장과 압축 게이지를 출력이 합산되도록 배치하면 가장 높은 감도와 우수한 공통 온도보상을 얻을 수 있다.",
+      "스트레인 게이지식 로드셀은 하중을 탄성체의 변형으로 바꾸고, 게이지 저항변화와 브리지 불평형 전압을 거쳐 전기신호로 변환한다.",
+      "로드셀의 브리지 출력은 여자전압에 비례하며 일반적으로 정격하중에서의 감도를 mV/V 단위로 표시한다.",
+      "로드셀의 작은 차동 브리지 출력은 계측증폭기에서 증폭한 뒤 필터링하고 ADC로 변환한다.",
+      "온도 변화는 게이지 저항, 접착층, 탄성체 열팽창과 탄성계수를 변화시켜 로드셀의 영점과 감도에 오차를 만든다.",
+      "크리프, 히스테리시스, 비직선성과 반복성은 서로 다른 로드셀 성능오차이며 각각의 시험조건과 정의로 평가해야 한다.",
+      "로드셀은 정해진 하중축과 지지조건으로 설치해야 하며, 편심하중, 측하중, 모멘트와 과부하는 출력오차와 영구변형을 유발할 수 있다.",
+      "스트레인 게이지와 로드셀 배선은 리드선저항, 전자기잡음과 접지루프를 관리하고 단선·단락·브리지 불평형 고장을 진단해야 한다."
+    ],
+    "fatal_conditions": [
+      "스트레인 게이지는 외부 여기 없이 변형에 비례하는 전압을 스스로 발생한다.",
+      "게이지율은 변형률을 상대 저항변화로 나눈 GF=ε/(ΔR/R)이다.",
+      "휘트스톤 브리지는 평형상태에서 최대 차동출력을 발생한다.",
+      "Quarter, Half, Full bridge는 게이지 수만 다를 뿐 감도와 온도보상 능력이 모두 동일하다.",
+      "로드셀 출력은 여자전압과 관계없는 고정 절대전압이다.",
+      "더미 게이지는 하중변형을 직접 측정하는 활성 게이지이다.",
+      "크리프와 히스테리시스는 같은 원인과 같은 시험으로 정의되는 동일한 오차이다.",
+      "편심하중, 과부하, 접착상태와 설치방향은 로드셀 및 스트레인 게이지 출력오차에 영향을 주지 않는다."
+    ],
+    "safe_conditions": [
+      "스트레인 게이지는 변형에 따라 저항이 변하는 수동 저항형 센서이므로 외부 여자 및 브리지 측정회로가 필요하다.",
+      "게이지율은 상대 저항변화를 변형률로 나눈 GF=(ΔR/R)/ε로 정의한다.",
+      "이상적인 휘트스톤 브리지는 평형조건에서 차동출력이 0이며, 저항 변화에 따른 불평형으로 출력이 발생한다.",
+      "활성 게이지 수와 배치에 따라 감도는 대략 GFε/4, GFε/2, GFε로 달라지며 온도보상과 굽힘·축력 분리 능력도 서로 다르다.",
+      "저항 브리지형 로드셀 출력은 여자전압에 비례하며 감도는 보통 mV/V로 표시한다.",
+      "더미 게이지는 활성 게이지와 같은 온도조건을 받되 측정변형은 받지 않도록 배치하여 온도에 의한 저항변화를 상쇄한다.",
+      "크리프는 일정 하중에서 시간에 따른 출력변화이고, 히스테리시스는 동일 하중에서 증가·감소 경로에 따른 출력차이이다.",
+      "하중축 정렬, 편심·측하중, 과부하, 표면처리, 접착과 게이지 방향은 변형 전달, 영점, 감도, 선형성과 장기 안정성에 직접 영향을 준다."
+    ],
+    "output_contract": {},
+    "major_checks": [
+      "스트레인 게이지가 외부여자가 필요한 수동 저항형 센서임을 확인한다.",
+      "GF=(ΔR/R)/ε와 ε=ΔL/L의 방향 및 의미를 확인한다.",
+      "브리지 평형출력 0과 불평형 차동출력을 확인한다.",
+      "Quarter, 두 활성 Half, 활성·더미 Half와 Full bridge의 감도조건을 구분한다.",
+      "로드셀의 하중-응력-변형률-저항변화-브리지 출력 사슬을 확인한다.",
+      "mV/V 출력과 여자전압, 비율측정 및 sense 선의 관계를 확인한다.",
+      "영점·span 온도영향과 크리프·히스테리시스·비직선성·반복성을 구분한다.",
+      "편심·측하중, 과부하, 접착, 배선, 차폐와 접지 영향을 확인한다."
+    ],
+    "feedback_templates": {},
+    "next_practice_points": [
+      "Half bridge에서 두 활성 게이지 구성과 활성·더미 구성을 구분한다.",
+      "정격 mV/V와 여자전압으로 실제 최대 출력전압을 계산한다.",
+      "영점 온도영향과 span 온도영향의 시험 및 보상방법을 구분한다.",
+      "6선식 sense 선과 3선식 Quarter bridge 보상의 대상을 구분한다."
+    ],
+    "false_positive_cautions": [
+      "브리지 출력의 부호는 게이지 팔, 출력단자 극성과 인장·압축 방향에 따라 달라질 수 있으므로 크기와 배치조건을 함께 평가한다.",
+      "Vo/Vex≈GF·ε/4, GF·ε/2, GF·ε는 작은 변형률과 이상적인 게이지 배치를 전제로 한 1차 근사이다.",
+      "활성·더미 Half bridge는 온도보상을 제공하지만 두 활성 게이지 Half bridge와 같은 GF·ε/2 감도를 갖지 않는다.",
+      "R1/R2=R3/R4와 R1R4=R2R3은 같은 브리지 평형조건의 등가표현으로 인정한다."
+    ],
+    "enabled": true
+  },
+  "revision_notes": [
+    "created_from_reviewed_strain_gauge_load_cell_requirements",
+    "separated_from_general_passive_sensor_transduction_topic",
+    "separated_from_temperature_resistive_sensor_topics",
+    "focused_on_gauge_factor_bridge_load_cell_signal_chain_and_error",
+    "deterministic_checks_disabled",
+    "candidate_extraction_rules_empty",
+    "added_data_driven_routing_aliases_and_field_points",
+    "manual_semantic_review_by_chatgpt",
+    "all_local_llm_calls_skipped",
+    "removed_rtd_topic_name_template_contamination",
+    "aligned_llm_truth_and_fatal_contracts",
+    "clarified_active_dummy_half_bridge_sensitivity"
+  ],
+  "topic_label": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차"
+}

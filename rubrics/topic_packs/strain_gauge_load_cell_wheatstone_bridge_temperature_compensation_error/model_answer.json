@@ -1,0 +1,264 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+  "title_ko": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "스트레인 게이지의 저항변화 원리와 게이지율을 설명하시오.",
+      "intent": "저항식, 변형률과 게이지율을 연결하여 스트레인 게이지의 저항변환 원리를 설명한다.",
+      "required_anchor_ids": [
+        "strain_gauge_resistance_change_principle",
+        "strain_gauge_factor_definition"
+      ]
+    },
+    {
+      "pattern": "스트레인 게이지의 게이지율과 포아송비의 관계를 설명하시오.",
+      "intent": "게이지율을 기하학적 변화, 횡변형률과 압저항 효과로 설명한다.",
+      "required_anchor_ids": [
+        "strain_gauge_factor_definition",
+        "strain_poisson_transverse_effect"
+      ]
+    },
+    {
+      "pattern": "휘트스톤 브리지의 평형조건과 스트레인 게이지 출력원리를 설명하시오.",
+      "intent": "브리지 평형조건과 게이지 저항변화에 의한 불평형 차동출력을 설명한다.",
+      "required_anchor_ids": [
+        "wheatstone_bridge_balance_output"
+      ]
+    },
+    {
+      "pattern": "Quarter, Half, Full bridge의 구성, 감도와 온도보상을 비교하시오.",
+      "intent": "활성 게이지 수와 배치조건에 따른 감도 및 온도보상 차이를 비교한다.",
+      "required_anchor_ids": [
+        "wheatstone_bridge_balance_output",
+        "quarter_bridge_sensitivity_temperature",
+        "half_bridge_sensitivity_compensation",
+        "full_bridge_sensitivity_compensation"
+      ]
+    },
+    {
+      "pattern": "스트레인 게이지식 로드셀의 하중-변형률-전압 변환과정을 설명하시오.",
+      "intent": "하중에서 탄성체 변형률, 저항변화와 브리지 전압까지의 변환사슬을 설명한다.",
+      "required_anchor_ids": [
+        "strain_gauge_resistance_change_principle",
+        "strain_gauge_factor_definition",
+        "wheatstone_bridge_balance_output",
+        "load_cell_force_strain_voltage_chain"
+      ]
+    },
+    {
+      "pattern": "로드셀의 mV/V 정격감도와 여자전압의 관계를 설명하시오.",
+      "intent": "mV/V 정격감도, 여자전압, 실제 출력전압과 비율측정을 연결한다.",
+      "required_anchor_ids": [
+        "load_cell_excitation_ratiometric_output"
+      ]
+    },
+    {
+      "pattern": "로드셀 신호용 계측증폭기와 ADC 설계 시 고려사항을 설명하시오.",
+      "intent": "정격 브리지 출력에서 계측증폭기, 필터와 ADC까지의 신호처리를 설명한다.",
+      "required_anchor_ids": [
+        "load_cell_excitation_ratiometric_output",
+        "instrumentation_amplifier_adc_signal_chain"
+      ]
+    },
+    {
+      "pattern": "스트레인 게이지의 더미 게이지 및 자기온도보상 방법을 설명하시오.",
+      "intent": "더미 게이지와 자기온도보상 게이지의 역할 및 적용조건을 구분한다.",
+      "required_anchor_ids": [
+        "half_bridge_sensitivity_compensation",
+        "temperature_zero_span_compensation"
+      ]
+    },
+    {
+      "pattern": "로드셀의 영점 및 감도 온도영향과 보상방법을 설명하시오.",
+      "intent": "영점 온도영향과 span 온도영향을 구분하고 보상방법을 설명한다.",
+      "required_anchor_ids": [
+        "temperature_zero_span_compensation"
+      ]
+    },
+    {
+      "pattern": "로드셀의 크리프, 히스테리시스, 비직선성과 반복성을 설명하시오.",
+      "intent": "시간의존 오차, 경로의존 오차, 교정선 편차와 반복 산포를 구분한다.",
+      "required_anchor_ids": [
+        "creep_hysteresis_nonlinearity_repeatability"
+      ]
+    },
+    {
+      "pattern": "로드셀의 편심하중, 측하중과 과부하에 대한 설치대책을 설명하시오.",
+      "intent": "비정상 하중과 과부하의 오차·손상 메커니즘 및 설치대책을 설명한다.",
+      "required_anchor_ids": [
+        "installation_eccentric_load_overload"
+      ]
+    },
+    {
+      "pattern": "스트레인 게이지의 리드선 보상, 차폐, 접지와 고장진단을 설명하시오.",
+      "intent": "리드선 및 여자선 보상, 노이즈·접지 관리와 브리지 고장진단을 설명한다.",
+      "required_anchor_ids": [
+        "wiring_shield_ground_fault_diagnostics"
+      ]
+    },
+    {
+      "pattern": "스트레인 게이지식 로드셀과 압전식 힘센서의 측정특성을 비교하시오.",
+      "intent": "스트레인 게이지식 로드셀의 외부여자 저항브리지 측정특성을 중심으로 비교한다.",
+      "required_anchor_ids": [
+        "strain_gauge_resistance_change_principle",
+        "load_cell_force_strain_voltage_chain",
+        "load_cell_excitation_ratiometric_output"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    "스트레인 게이지를 변형에 따른 저항변화를 이용하는 수동 저항형 센서로 정의한다.",
+    "R=ρL/A, 변형률과 게이지율 GF=(ΔR/R)/ε를 설명한다.",
+    "휘트스톤 브리지의 평형조건과 차동 불평형 출력을 설명한다.",
+    "Quarter, 두 활성 Half, 활성·더미 Half와 Full bridge의 감도 및 온도보상 차이를 비교한다.",
+    "로드셀의 하중→탄성체→변형률→저항변화→mV/V 출력 사슬을 설명한다.",
+    "여자전압, 계측증폭기, 필터와 ADC의 신호처리 구조를 설명한다.",
+    "온도영향, 크리프, 히스테리시스, 비직선성과 반복성 오차를 설명한다.",
+    "편심하중·과부하·접착·배선·차폐·접지와 고장진단 대책을 제시한다."
+  ],
+  "high_score_points": [
+    "게이지율 정의를 정확히 제시하고 기하학적 효과와 압저항 효과를 연결한다.",
+    "포아송비와 횡변형률이 단면적 변화 및 게이지율에 미치는 영향을 설명한다.",
+    "브리지 평형조건과 작은 변형률에서 Quarter, 두 활성 Half, 활성·더미 Half와 Full bridge의 출력 근사조건을 구분한다.",
+    "로드셀 감도를 mV/V와 여자전압의 곱으로 실제 출력전압에 연결한다.",
+    "더미 게이지와 자기온도보상, 대칭 브리지의 역할을 구분한다.",
+    "크리프·히스테리시스·비직선성·반복성을 서로 다른 시험개념으로 구분한다.",
+    "계측증폭기의 CMRR·오프셋·드리프트와 ADC 입력범위를 정량 설계에 연결한다.",
+    "편심·측하중, 과부하, 접착과 방습을 설치 및 수명관리 대책으로 연결한다."
+  ],
+  "common_missing_points": [
+    "게이지율 정의와 변형률의 무차원 관계를 누락한다.",
+    "브리지 평형조건과 불평형 차동출력의 관계를 설명하지 않는다.",
+    "두 활성 게이지 Half bridge와 활성·더미 Half bridge의 감도 및 온도보상 차이를 구분하지 않는다.",
+    "로드셀의 mV/V 정격과 여자전압 관계를 누락한다.",
+    "더미 게이지와 활성 게이지의 역할을 혼동한다.",
+    "크리프와 히스테리시스를 구분하지 않는다.",
+    "편심하중, 접착, 차폐와 접지 등 설치오차를 누락한다.",
+    "계측증폭기와 ADC의 오프셋·드리프트·입력범위를 고려하지 않는다."
+  ],
+  "routing_aliases": [
+    "스트레인 게이지",
+    "변형률 게이지",
+    "strain gauge",
+    "strain gage",
+    "로드셀",
+    "load cell",
+    "휘트스톤 브리지",
+    "Wheatstone bridge",
+    "게이지율",
+    "gauge factor",
+    "Quarter bridge",
+    "Half bridge",
+    "Full bridge",
+    "더미 게이지",
+    "dummy gauge",
+    "mV/V",
+    "브리지 출력",
+    "계측증폭기",
+    "instrumentation amplifier",
+    "크리프",
+    "히스테리시스",
+    "편심하중"
+  ],
+  "routing_field_points": [
+    "피측정 하중범위, 정격용량, 안전과부하, 탄성체 형상과 게이지 배치를 기준으로 로드셀 구조를 선정한다.",
+    "Quarter·Half·Full bridge의 감도, 온도보상, 배선복잡도와 원가를 비교하여 브리지 구성을 결정한다.",
+    "정격 mV/V 출력과 여자전압을 기준으로 계측증폭기 이득, ADC 입력범위, 필터와 비율측정 구조를 설계한다.",
+    "영점·span 온도영향, 크리프, 히스테리시스, 비직선성과 반복성을 교정·보상 및 유지보수 계획에 반영한다.",
+    "하중축 정렬, 편심·측하중, 과부하 방지, 접착·방습, 차폐·접지와 단선·단락 진단을 현장 설치기준에 포함한다."
+  ],
+  "revision_notes": [
+    "created_from_reviewed_strain_gauge_load_cell_requirements",
+    "separated_from_general_passive_sensor_transduction_topic",
+    "separated_from_temperature_resistive_sensor_topics",
+    "focused_on_gauge_factor_bridge_load_cell_signal_chain_and_error",
+    "deterministic_checks_disabled",
+    "candidate_extraction_rules_empty",
+    "added_data_driven_routing_aliases_and_field_points",
+    "manual_semantic_review_by_chatgpt",
+    "all_local_llm_calls_skipped",
+    "corrected_question_pattern_anchor_mapping",
+    "clarified_active_dummy_half_bridge_sensitivity",
+    "expanded_low_score_patterns_to_eight_fatal_claims"
+  ],
+  "id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+  "title": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
+  "question_examples": [
+    "스트레인 게이지의 저항변화 원리와 게이지율을 설명하시오.",
+    "스트레인 게이지의 게이지율과 포아송비의 관계를 설명하시오.",
+    "휘트스톤 브리지의 평형조건과 스트레인 게이지 출력원리를 설명하시오.",
+    "Quarter, Half, Full bridge의 구성, 감도와 온도보상을 비교하시오.",
+    "스트레인 게이지식 로드셀의 하중-변형률-전압 변환과정을 설명하시오.",
+    "로드셀의 mV/V 정격감도와 여자전압의 관계를 설명하시오.",
+    "로드셀 신호용 계측증폭기와 ADC 설계 시 고려사항을 설명하시오.",
+    "스트레인 게이지의 더미 게이지 및 자기온도보상 방법을 설명하시오.",
+    "로드셀의 영점 및 감도 온도영향과 보상방법을 설명하시오.",
+    "로드셀의 크리프, 히스테리시스, 비직선성과 반복성을 설명하시오.",
+    "로드셀의 편심하중, 측하중과 과부하에 대한 설치대책을 설명하시오.",
+    "스트레인 게이지의 리드선 보상, 차폐, 접지와 고장진단을 설명하시오.",
+    "스트레인 게이지식 로드셀과 압전식 힘센서의 측정특성을 비교하시오."
+  ],
+  "topic_aliases": [
+    "스트레인 게이지",
+    "변형률 게이지",
+    "strain gauge",
+    "strain gage",
+    "로드셀",
+    "load cell",
+    "휘트스톤 브리지",
+    "Wheatstone bridge",
+    "게이지율",
+    "gauge factor",
+    "Quarter bridge",
+    "Half bridge",
+    "Full bridge",
+    "더미 게이지",
+    "dummy gauge",
+    "mV/V",
+    "브리지 출력",
+    "계측증폭기",
+    "instrumentation amplifier",
+    "크리프",
+    "히스테리시스",
+    "편심하중"
+  ],
+  "expected_structure": [
+    "스트레인 게이지를 변형에 따른 저항변화를 이용하는 수동 저항형 센서로 정의한다.",
+    "R=ρL/A, 변형률과 게이지율 GF=(ΔR/R)/ε를 설명한다.",
+    "휘트스톤 브리지의 평형조건과 차동 불평형 출력을 설명한다.",
+    "Quarter, 두 활성 Half, 활성·더미 Half와 Full bridge의 감도 및 온도보상 차이를 비교한다.",
+    "로드셀의 하중→탄성체→변형률→저항변화→mV/V 출력 사슬을 설명한다.",
+    "여자전압, 계측증폭기, 필터와 ADC의 신호처리 구조를 설명한다.",
+    "온도영향, 크리프, 히스테리시스, 비직선성과 반복성 오차를 설명한다.",
+    "편심하중·과부하·접착·배선·차폐·접지와 고장진단 대책을 제시한다."
+  ],
+  "high_score_features": [
+    "게이지율 정의를 정확히 제시하고 기하학적 효과와 압저항 효과를 연결한다.",
+    "포아송비와 횡변형률이 단면적 변화 및 게이지율에 미치는 영향을 설명한다.",
+    "브리지 평형조건과 작은 변형률에서 Quarter, 두 활성 Half, 활성·더미 Half와 Full bridge의 출력 근사조건을 구분한다.",
+    "로드셀 감도를 mV/V와 여자전압의 곱으로 실제 출력전압에 연결한다.",
+    "더미 게이지와 자기온도보상, 대칭 브리지의 역할을 구분한다.",
+    "크리프·히스테리시스·비직선성·반복성을 서로 다른 시험개념으로 구분한다.",
+    "계측증폭기의 CMRR·오프셋·드리프트와 ADC 입력범위를 정량 설계에 연결한다.",
+    "편심·측하중, 과부하, 접착과 방습을 설치 및 수명관리 대책으로 연결한다."
+  ],
+  "low_score_patterns": [
+    "스트레인 게이지는 외부 여기 없이 변형에 비례하는 전압을 스스로 발생한다.",
+    "게이지율은 변형률을 상대 저항변화로 나눈 GF=ε/(ΔR/R)이다.",
+    "휘트스톤 브리지는 평형상태에서 최대 차동출력을 발생한다.",
+    "Quarter, Half, Full bridge는 게이지 수만 다를 뿐 감도와 온도보상 능력이 모두 동일하다.",
+    "로드셀 출력은 여자전압과 관계없는 고정 절대전압이다.",
+    "더미 게이지는 하중변형을 직접 측정하는 활성 게이지이다.",
+    "크리프와 히스테리시스는 같은 원인과 같은 시험으로 정의되는 동일한 오차이다.",
+    "편심하중, 과부하, 접착상태와 설치방향은 로드셀 및 스트레인 게이지 출력오차에 영향을 주지 않는다."
+  ],
+  "field_connection_points": [
+    "피측정 하중범위, 정격용량, 안전과부하, 탄성체 형상과 게이지 배치를 기준으로 로드셀 구조를 선정한다.",
+    "Quarter·Half·Full bridge의 감도, 온도보상, 배선복잡도와 원가를 비교하여 브리지 구성을 결정한다.",
+    "정격 mV/V 출력과 여자전압을 기준으로 계측증폭기 이득, ADC 입력범위, 필터와 비율측정 구조를 설계한다.",
+    "영점·span 온도영향, 크리프, 히스테리시스, 비직선성과 반복성을 교정·보상 및 유지보수 계획에 반영한다.",
+    "하중축 정렬, 편심·측하중, 과부하 방지, 접착·방습, 차폐·접지와 단선·단락 진단을 현장 설치기준에 포함한다."
+  ]
+}

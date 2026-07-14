@@ -424,6 +424,391 @@ class ModelAnswerRouterTest(unittest.TestCase):
         )
 
 
+
+import json as _strain_router_json
+import unittest as _strain_router_unittest
+from pathlib import Path as _StrainRouterPath
+
+from model_answer_router import (
+    find_model_answer_reference as _strain_find_model_answer_reference,
+)
+
+
+class StrainGaugeLoadCellRoutingRegressionTests(
+    _strain_router_unittest.TestCase
+):
+    STRAIN_TOPIC = (
+        "strain_gauge_load_cell_wheatstone_bridge_"
+        "temperature_compensation_error"
+    )
+    PASSIVE_TOPIC = (
+        "passive_sensor_resistive_capacitive_"
+        "inductive_transduction"
+    )
+    RTD_TOPIC = (
+        "rtd_temperature_sensor_principle_"
+        "pt100_wiring_compensation"
+    )
+    THERMISTOR_TOPIC = (
+        "thermistor_temperature_sensor_ntc_ptc_"
+        "characteristics_measurement_linearization"
+    )
+    THERMOCOUPLE_TOPIC = (
+        "thermocouple_temperature_sensor_seebeck_"
+        "reference_junction_compensation"
+    )
+    TEMPERATURE_ERROR_TOPIC = (
+        "temperature_measurement_error_heat_transfer"
+    )
+
+    @classmethod
+    def setUpClass(cls):
+        root = _StrainRouterPath(__file__).resolve().parents[1]
+        bank_path = (
+            root
+            / "rubrics"
+            / "generated"
+            / "model_answers.generated.json"
+        )
+
+        cls.bank = _strain_router_json.loads(
+            bank_path.read_text(encoding="utf-8")
+        )
+        answers = cls.bank.get("answers")
+
+        if not isinstance(answers, list):
+            raise AssertionError(
+                "generated model-answer bank has no answers list"
+            )
+
+        cls.answer_by_topic = {
+            item["topic_id"]: item
+            for item in answers
+            if isinstance(item, dict)
+            and isinstance(item.get("topic_id"), str)
+        }
+
+        required_topics = {
+            cls.STRAIN_TOPIC,
+            cls.PASSIVE_TOPIC,
+            cls.RTD_TOPIC,
+            cls.THERMISTOR_TOPIC,
+            cls.THERMOCOUPLE_TOPIC,
+            cls.TEMPERATURE_ERROR_TOPIC,
+        }
+
+        missing = sorted(
+            required_topics - set(cls.answer_by_topic)
+        )
+
+        if missing:
+            raise AssertionError(
+                f"required Generated Topics are missing: {missing}"
+            )
+
+    @classmethod
+    def _question_type_eval(cls, topic_id):
+        question_type = (
+            cls.answer_by_topic[topic_id].get("question_type")
+            or "GENERAL"
+        )
+
+        return {
+            "primary_type": {
+                "id": question_type,
+                "confidence": "high",
+            }
+        }
+
+    @staticmethod
+    def _fact_eval(topic_id):
+        return {
+            "topic_id": topic_id,
+            "matched": True,
+            "confidence": "high",
+        }
+
+    @classmethod
+    def _route(
+        cls,
+        question,
+        *,
+        answer_text="",
+        fact_topic=None,
+        question_type_topic=None,
+    ):
+        return _strain_find_model_answer_reference(
+            question_text=question,
+            answer_text=answer_text,
+            question_type_eval=(
+                cls._question_type_eval(question_type_topic)
+                if question_type_topic is not None
+                else None
+            ),
+            fact_eval=(
+                cls._fact_eval(fact_topic)
+                if fact_topic is not None
+                else None
+            ),
+            bank=cls.bank,
+        )
+
+    @classmethod
+    def _topic_ids(cls, value):
+        found = []
+
+        def append(candidate):
+            if (
+                isinstance(candidate, str)
+                and candidate in cls.answer_by_topic
+                and candidate not in found
+            ):
+                found.append(candidate)
+
+        def walk(child):
+            if isinstance(child, str):
+                append(child)
+                return
+
+            if isinstance(child, dict):
+                priority_keys = (
+                    "primary_reference",
+                    "answer",
+                    "candidates",
+                    "topic_id",
+                    "id",
+                )
+                visited = set()
+
+                for key in priority_keys:
+                    if key in child:
+                        visited.add(key)
+                        walk(child[key])
+
+                for key, nested in child.items():
+                    if key not in visited:
+                        walk(nested)
+
+                return
+
+            if isinstance(child, (list, tuple)):
+                for nested in child:
+                    walk(nested)
+
+        walk(value)
+        return found
+
+    @classmethod
+    def _primary_topic(cls, result):
+        primary = result.get("primary_reference")
+
+        if isinstance(primary, dict):
+            for key in ("topic_id", "id"):
+                candidate = primary.get(key)
+
+                if (
+                    isinstance(candidate, str)
+                    and candidate in cls.answer_by_topic
+                ):
+                    return candidate
+
+        ids = cls._topic_ids(primary)
+        return ids[0] if ids else None
+
+    def assertPrimaryTopic(self, result, expected_topic):
+        self.assertTrue(
+            result.get("matched"),
+            msg=result,
+        )
+        self.assertEqual(
+            self._primary_topic(result),
+            expected_topic,
+            msg=result,
+        )
+
+    def assertTopicNotRouted(self, result, forbidden_topic):
+        self.assertNotIn(
+            forbidden_topic,
+            self._topic_ids(result),
+            msg=result,
+        )
+
+    def test_exact_question_example_routes_without_pipeline_context(self):
+        result = self._route(
+            "스트레인 게이지의 저항변화 원리와 "
+            "게이지율을 설명하시오."
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.STRAIN_TOPIC,
+        )
+
+    def test_pipeline_direct_strain_question_routes_with_fact_context(self):
+        result = self._route(
+            "스트레인 게이지의 게이지율과 "
+            "저항변화 원리를 설명하시오.",
+            fact_topic=self.STRAIN_TOPIC,
+            question_type_topic=self.STRAIN_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.STRAIN_TOPIC,
+        )
+
+    def test_pipeline_strain_centered_mixed_question_keeps_primary(self):
+        result = self._route(
+            "저항형 센서를 비교하되 스트레인 게이지의 "
+            "게이지율, 휘트스톤 브리지와 로드셀 적용을 "
+            "중심으로 설명하시오.",
+            fact_topic=self.STRAIN_TOPIC,
+            question_type_topic=self.STRAIN_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.STRAIN_TOPIC,
+        )
+
+    def test_pipeline_strain_ignores_temperature_answer_terms(self):
+        result = self._route(
+            "스트레인 게이지식 로드셀의 브리지, "
+            "mV/V 감도와 온도보상을 설명하시오.",
+            answer_text=(
+                "비교를 위해 RTD와 thermistor의 "
+                "저항 변화도 간단히 언급한다."
+            ),
+            fact_topic=self.STRAIN_TOPIC,
+            question_type_topic=self.STRAIN_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.STRAIN_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            result,
+            self.RTD_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            result,
+            self.THERMISTOR_TOPIC,
+        )
+
+    def test_legacy_passive_question_only_is_unmatched_without_leak(self):
+        question = (
+            "저항형, 용량형, 유도형 수동센서의 "
+            "변환원리를 비교하시오."
+        )
+
+        question_only = self._route(question)
+
+        self.assertFalse(
+            question_only.get("matched"),
+            msg=question_only,
+        )
+        self.assertIsNone(
+            self._primary_topic(question_only),
+            msg=question_only,
+        )
+        self.assertTopicNotRouted(
+            question_only,
+            self.STRAIN_TOPIC,
+        )
+
+        pipeline = self._route(
+            question,
+            fact_topic=self.PASSIVE_TOPIC,
+            question_type_topic=self.PASSIVE_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            pipeline,
+            self.PASSIVE_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            pipeline,
+            self.STRAIN_TOPIC,
+        )
+
+    def test_legacy_temperature_error_is_unmatched_without_leak(self):
+        question = (
+            "온도 측정에서 열전도, 대류, 복사와 "
+            "삽입오차 및 응답지연을 설명하시오."
+        )
+
+        question_only = self._route(question)
+
+        self.assertFalse(
+            question_only.get("matched"),
+            msg=question_only,
+        )
+        self.assertIsNone(
+            self._primary_topic(question_only),
+            msg=question_only,
+        )
+        self.assertTopicNotRouted(
+            question_only,
+            self.STRAIN_TOPIC,
+        )
+
+        pipeline = self._route(
+            question,
+            fact_topic=self.TEMPERATURE_ERROR_TOPIC,
+            question_type_topic=self.TEMPERATURE_ERROR_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            pipeline,
+            self.TEMPERATURE_ERROR_TOPIC,
+        )
+        self.assertTopicNotRouted(
+            pipeline,
+            self.STRAIN_TOPIC,
+        )
+
+    def test_temperature_sensor_topics_do_not_leak_to_strain(self):
+        cases = [
+            (
+                self.RTD_TOPIC,
+                "RTD와 Pt100의 측정원리 및 "
+                "2선식·3선식·4선식 보상을 설명하시오.",
+                "다른 저항형 센서 예로 스트레인 게이지와 "
+                "로드셀의 브리지를 일부 언급한다.",
+            ),
+            (
+                self.THERMISTOR_TOPIC,
+                "NTC와 PTC thermistor의 특성과 "
+                "선형화 방법을 설명하시오.",
+                "",
+            ),
+            (
+                self.THERMOCOUPLE_TOPIC,
+                "열전대의 Seebeck 효과와 "
+                "기준접점 보상을 설명하시오.",
+                "",
+            ),
+        ]
+
+        for expected_topic, question, answer_text in cases:
+            with self.subTest(topic=expected_topic):
+                result = self._route(
+                    question,
+                    answer_text=answer_text,
+                    fact_topic=expected_topic,
+                    question_type_topic=expected_topic,
+                )
+
+                self.assertPrimaryTopic(
+                    result,
+                    expected_topic,
+                )
+                self.assertTopicNotRouted(
+                    result,
+                    self.STRAIN_TOPIC,
+                )
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
 
