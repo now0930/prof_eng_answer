@@ -27,10 +27,17 @@
 - 14 Expected Question Patterns
 - 펄스식 왕복시간과 `D=cτ/2`
 - FMCW 처프·비트주파수와 `D=cf_b/(2S)`
-- 변조 대역폭과 거리 분해능
+- 반송주파수의 빔 특성과 유효 변조 대역폭의 거리 분해능 역할 구분
 - 상대유전율과 반사에코
 - 블로킹 거리, 허위에코와 다중반사
+- 액체의 수직 정렬과 분체의 표면방향 정렬조건
 - 노즐·안테나 부착물·응축 및 설치오차
+
+## Fact verification references
+
+- Texas Instruments, `Introduction to mmWave Sensing: FMCW Radars`: FMCW 거리 분해능은 유효 처프 대역폭에 의해 결정된다.
+- Endress+Hauser, `Micropilot S FMR540`: 액체 측정에서는 안테나 축을 액면에 수직으로 정렬한다.
+- Endress+Hauser, free-space radar guidance for bulk solids: 분체 측정에서는 정렬장치로 안테나를 경사진 표면 방향에 맞출 수 있다.
 
 ## Validation policy
 
