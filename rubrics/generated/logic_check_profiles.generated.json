@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-15T05:47:21Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-15T06:18:51Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -466,16 +466,16 @@
         "[state_lqr_weight_matrix_conditions] 기본 연속시간 LQR에서 Q는 대칭 양의 준정부호이고 R은 대칭 양의 정부호여야 하며, 각각 상태편차와 제어입력의 비용을 정의한다.",
         "[state_lqr_care_stabilizing_solution] 교차항이 없는 연속시간 무한시간 LQR의 CARE는 A^TP+PA-PBR^(-1)B^TP+Q=0이며, 제어에는 A-BR^(-1)B^TP를 안정하게 만드는 stabilizing solution P를 사용한다.",
         "[state_lqr_optimal_gain_closed_loop] 안정화 Riccati 해 P에서 K=R^(-1)B^TP를 계산하고 u=-Kx를 적용하면 폐루프 행렬은 A-BK가 되며 그 고유값이 LQR 폐루프 극점이다.",
-        "[state_lqr_existence_stabilizability_detectability] 무한시간 안정화 LQR 해에는 통상 (A,B)의 stabilizability, (Q^(1/2),A)의 detectability, Q>=0과 R>0 조건이 필요하다.",
-        "[state_lqr_q_weight_state_tradeoff] Q의 특정 상태 가중치를 상대적으로 증가시키면 해당 상태편차 억제를 강화하지만 일반적으로 제어입력, 포화, 노이즈 민감도와 강인성 사이의 상충관계가 발생한다.",
+        "[state_lqr_existence_stabilizability_detectability] 교차항이 없는 표준 연속시간 무한시간 LQR에서 Q=Q^T⪰0, R=R^T≻0, (A,B)가 stabilizable이고 (Q^(1/2),A)가 detectable이면 폐루프 A-BK를 Hurwitz로 만드는 고유한 양의 준정부호 안정화 해 P=P^T⪰0가 존재한다. 완전 가제어성과 완전 관측성은 더 강한 충분조건이다.",
+        "[state_lqr_q_weight_state_tradeoff] 특정 상태의 Q 가중치를 상대적으로 높이면 그 상태편차 억제를 더 중시하는 최적해가 계산된다. 다만 Riccati 해와 폐루프 이득은 결합적으로 변하므로 모든 상태응답의 단조 개선을 보장하지 않는다. 제어입력, 포화, 측정·추정 잡음과 모델 불확실성에 대한 민감도는 별도로 검증한다.",
         "[state_lqr_r_weight_control_tradeoff] R을 상대적으로 증가시키면 제어입력 사용을 더 제한하고, 감소시키면 더 큰 입력을 허용해 빠른 응답을 유도할 수 있지만 포화와 미모델 동특성 문제가 커질 수 있다.",
         "[state_lqr_common_scaling_invariance] 기본 무한시간 LQR에서 Q와 R을 동일한 양의 상수 gamma로 동시에 배율 조정하면 비용함수와 P의 스케일은 변하지만 최적 상태피드백 이득 K는 변하지 않는다.",
         "[state_lqr_state_input_normalization_bryson] 상태와 입력의 단위 및 허용범위가 다르므로 정규화가 필요하며, Bryson's rule의 Q_ii=1/x_i,max^2, R_jj=1/u_j,max^2는 초기 가중치 선정용 경험칙이다.",
         "[state_lqr_pole_placement_distinction] 극점 배치는 원하는 폐루프 극점을 직접 지정하지만 LQR은 Q와 R로 정의한 비용함수 최소화 결과로 폐루프 극점이 간접 결정된다.",
-        "[state_lqr_tracking_prefilter_lqi] 기본 LQR은 원점 조절기이므로 상수 기준입력의 정상상태 오차 0을 자동 보장하지 않으며, 기준입력 프리필터 또는 출력오차 적분상태를 포함한 LQI로 확장할 수 있다.",
+        "[state_lqr_tracking_prefilter_lqi] 기본 LQR은 원점 조절기이다. 비영점 평형점을 추종하려면 실현 가능한 정상상태 (x_r,u_r)를 구하고 x-x_r, u-u_r의 오차좌표로 설계한다. 정적 프리필터는 명목 정상상태 추종을 보완하지만 모델 오차와 상수 외란에 대한 robust zero error를 보장하지 않는다. LQI는 적분상태를 포함한 확대시스템의 stabilizability를 확인하고 포화 시 windup을 검증해야 한다.",
         "[state_lqr_saturation_constraints_limit] 표준 LQR의 u^TRu 항은 제어입력 사용에 비용을 부과하지만 액추에이터의 hard saturation이나 상태·입력 상하한을 직접 제약조건으로 강제하지 않는다.",
         "[state_lqr_continuous_discrete_riccati_distinction] 연속시간 LQR은 CARE를 사용하고 이산시간 LQR은 DARE와 K_d=(R+B_d^TPB_d)^(-1)B_d^TPA_d를 사용하며, 두 해를 동일하게 취급해서는 안 된다.",
-        "[state_lqr_robustness_observer_implementation_validation] 최종 LQR 설계는 폐루프 극점, 상태응답, 제어입력, 포화, 관측기, 모델 불확실성, 시간지연, 노이즈, 이산화와 Riccati 수치오차를 종합 검증해야 한다."
+        "[state_lqr_robustness_observer_implementation_validation] (Q^(1/2),A)의 detectability는 비용함수에서 보이지 않는 불안정 모드를 배제하기 위한 CARE 조건이다. 실제 상태를 모두 측정하지 못해 관측기를 사용할 때에는 측정쌍 (C,A)의 detectability와 추정오차 동역학 A-LC의 안정성을 별도로 확인한다."
       ],
       "fatal_conditions": [
         "[state_lqr_fatal_arbitrary_q_r] 잘못된 주장: LQR의 Q와 R은 행렬 조건과 물리적 의미에 관계없이 아무 값이나 사용해도 된다. 정확한 기준: 기본 LQR에서는 Q를 대칭 양의 준정부호, R을 대칭 양의 정부호로 설정하고 상태·입력의 단위와 설계목표를 반영한다.",
@@ -493,7 +493,11 @@
         "완전 가제어하지 않아도 비가제어 모드가 안정하면 stabilizability가 성립할 수 있다.",
         "기본 LQR에 프리필터 또는 적분상태를 결합하여 기준입력 추종성능을 개선할 수 있다.",
         "Q와 R의 동일 양의 배율 변경은 기본 무한시간 LQR의 K를 변경하지 않는다.",
-        "표준 LQR의 R은 입력 사용을 억제하지만 hard saturation을 직접 보장하지 않는다."
+        "표준 LQR의 R은 입력 사용을 억제하지만 hard saturation을 직접 보장하지 않는다.",
+        "답안이 J=∫(x^TQx+2x^TNu+u^TRu)dt의 교차항 N을 포함한 일반화 LQR을 명시하고 비용 블록행렬 조건, 일반화 Riccati 방정식과 이득식을 일관되게 사용하면 기본식과 다르다는 이유만으로 오류 처리하지 않는다.",
+        "(Q^(1/2),A)의 detectability는 비용함수에서 보이지 않는 불안정 모드를 배제하기 위한 CARE 조건이다. 실제 상태를 모두 측정하지 못해 관측기를 사용할 때에는 측정쌍 (C,A)의 detectability와 추정오차 동역학 A-LC의 안정성을 별도로 확인한다.",
+        "특정 상태의 Q 가중치를 상대적으로 높이면 그 상태편차 억제를 더 중시하는 최적해가 계산된다. 다만 Riccati 해와 폐루프 이득은 결합적으로 변하므로 모든 상태응답의 단조 개선을 보장하지 않는다. 제어입력, 포화, 측정·추정 잡음과 모델 불확실성에 대한 민감도는 별도로 검증한다.",
+        "Fatal의 직접 점수 영향은 B/C에 한정한다. D/E 점수는 직접 변경하지 않고 관련 현장 적용·제언의 claim trust만 limited로 표시한다."
       ],
       "output_contract": {
         "json_only": true,
@@ -510,7 +514,33 @@
           "fatal"
         ]
       },
-      "major_checks": [],
+      "major_checks": [
+        {
+          "id": "lqr_stabilizing_solution_condition_incomplete",
+          "description": "Q·R 조건, stabilizability, 비용 detectability 또는 양의 준정부호 stabilizing solution 조건이 누락되었다.",
+          "correct_rule": "교차항이 없는 표준 연속시간 무한시간 LQR에서 Q=Q^T⪰0, R=R^T≻0, (A,B)가 stabilizable이고 (Q^(1/2),A)가 detectable이면 폐루프 A-BK를 Hurwitz로 만드는 고유한 양의 준정부호 안정화 해 P=P^T⪰0가 존재한다. 완전 가제어성과 완전 관측성은 더 강한 충분조건이다."
+        },
+        {
+          "id": "lqr_cost_detectability_observer_detectability_confused",
+          "description": "CARE 존재조건의 (Q^(1/2),A) detectability와 실제 관측기 구현조건의 (C,A) detectability를 혼동했다.",
+          "correct_rule": "(Q^(1/2),A)의 detectability는 비용함수에서 보이지 않는 불안정 모드를 배제하기 위한 CARE 조건이다. 실제 상태를 모두 측정하지 못해 관측기를 사용할 때에는 측정쌍 (C,A)의 detectability와 추정오차 동역학 A-LC의 안정성을 별도로 확인한다."
+        },
+        {
+          "id": "lqr_qr_tradeoff_overgeneralized",
+          "description": "특정 Q 또는 R 변경이 모든 상태응답, 잡음 민감도와 강인성을 단조롭게 개선한다고 일반화했다.",
+          "correct_rule": "특정 상태의 Q 가중치를 상대적으로 높이면 그 상태편차 억제를 더 중시하는 최적해가 계산된다. 다만 Riccati 해와 폐루프 이득은 결합적으로 변하므로 모든 상태응답의 단조 개선을 보장하지 않는다. 제어입력, 포화, 측정·추정 잡음과 모델 불확실성에 대한 민감도는 별도로 검증한다."
+        },
+        {
+          "id": "lqr_tracking_equilibrium_or_lqi_condition_missing",
+          "description": "비영점 평형점, 오차좌표, 프리필터의 명목 한계, LQI 확대시스템 안정화 가능성 또는 포화 검증이 누락되었다.",
+          "correct_rule": "기본 LQR은 원점 조절기이다. 비영점 평형점을 추종하려면 실현 가능한 정상상태 (x_r,u_r)를 구하고 x-x_r, u-u_r의 오차좌표로 설계한다. 정적 프리필터는 명목 정상상태 추종을 보완하지만 모델 오차와 상수 외란에 대한 robust zero error를 보장하지 않는다. LQI는 적분상태를 포함한 확대시스템의 stabilizability를 확인하고 포화 시 windup을 검증해야 한다."
+        },
+        {
+          "id": "lqr_discrete_cost_or_sampling_condition_missing",
+          "description": "이산시간 LQR에서 DARE, 이산 모델, 표본시간 또는 연속 비용의 이산화 조건이 누락되었다.",
+          "correct_rule": "이산시간 LQR은 이산화된 (A_d,B_d), 이산시간 비용 정의와 DARE를 사용한다. 표본시간과 연속 비용의 이산 등가화 방법에 따라 Q_d와 R_d가 달라질 수 있으므로 CARE 식을 그대로 적용하지 않는다."
+        }
+      ],
       "feedback_templates": {
         "core_theory_positive": "LQR 비용함수, Riccati 안정화 해, 존재조건과 Q·R의 상충관계를 실제 구현까지 정확히 연결했다.",
         "core_theory_major": "핵심 반대 주장은 없지만 stabilizability·detectability, 가중치 정규화, 추종 확장 또는 포화·이산 검증을 보강해야 한다.",
