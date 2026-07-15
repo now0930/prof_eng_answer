@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-15T03:19:59Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-15T04:12:03Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -462,6 +462,19 @@
         "공진주파수",
         "저주파 차단"
       ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "enabled": false,
+      "topic_name": "레이더식 레벨계의 FMCW·펄스 방식, 거리·레벨 측정원리, 유전율 영향 및 허위에코·설치오차",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [],
       "fatal_checks": [],
       "major_checks": [],
       "question_type_checks": [],

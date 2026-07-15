@@ -1,0 +1,298 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+  "title_ko": "레이더식 레벨계의 FMCW·펄스 방식, 거리·레벨 측정원리, 유전율 영향 및 허위에코·설치오차",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "레이더식 레벨계의 전체 측정원리",
+      "intent": "구성, 전자기파 송수신 및 거리·레벨 변환을 설명한다.",
+      "required_anchor_ids": [
+        "radar_level_system_structure",
+        "radar_electromagnetic_wave_reflection",
+        "radar_pulse_time_of_flight",
+        "radar_fmcw_linear_frequency_sweep"
+      ]
+    },
+    {
+      "pattern": "펄스 레이더의 비행시간과 거리식",
+      "intent": "왕복시간과 편도거리 계산을 설명한다.",
+      "required_anchor_ids": [
+        "radar_electromagnetic_wave_reflection",
+        "radar_pulse_time_of_flight",
+        "radar_pulse_distance_equation",
+        "radar_blocking_distance_near_field"
+      ]
+    },
+    {
+      "pattern": "FMCW 처프와 비트주파수",
+      "intent": "선형 스윕, 지연시간, 비트주파수 및 거리계산을 설명한다.",
+      "required_anchor_ids": [
+        "radar_electromagnetic_wave_reflection",
+        "radar_fmcw_linear_frequency_sweep",
+        "radar_fmcw_beat_frequency_distance",
+        "radar_bandwidth_range_resolution"
+      ]
+    },
+    {
+      "pattern": "펄스식과 FMCW식 비교",
+      "intent": "두 방식의 거리추정 변수와 적용조건을 비교한다.",
+      "required_anchor_ids": [
+        "radar_pulse_time_of_flight",
+        "radar_pulse_distance_equation",
+        "radar_fmcw_linear_frequency_sweep",
+        "radar_fmcw_beat_frequency_distance",
+        "radar_pulse_fmcw_application_selection"
+      ]
+    },
+    {
+      "pattern": "대역폭과 거리 분해능",
+      "intent": "변조 대역폭, 비트주파수 처리 및 안테나 주파수의 관계를 설명한다.",
+      "required_anchor_ids": [
+        "radar_fmcw_beat_frequency_distance",
+        "radar_bandwidth_range_resolution",
+        "radar_frequency_antenna_tradeoff"
+      ]
+    },
+    {
+      "pattern": "유전율과 에코강도",
+      "intent": "상대유전율, 반사계수, 약한 에코와 표면조건을 설명한다.",
+      "required_anchor_ids": [
+        "radar_electromagnetic_wave_reflection",
+        "radar_dielectric_constant_reflection",
+        "radar_low_dielectric_echo_margin",
+        "radar_surface_foam_turbulence_slope"
+      ]
+    },
+    {
+      "pattern": "거리와 레벨 환산",
+      "intent": "측정거리, 기준거리와 탱크 레벨의 관계를 설명한다.",
+      "required_anchor_ids": [
+        "radar_pulse_distance_equation",
+        "radar_level_reference_calculation",
+        "radar_dielectric_constant_reflection"
+      ]
+    },
+    {
+      "pattern": "블로킹 거리",
+      "intent": "근거리 불감대의 원인과 최대레벨 설정방법을 설명한다.",
+      "required_anchor_ids": [
+        "radar_level_system_structure",
+        "radar_blocking_distance_near_field",
+        "radar_mounting_nozzle_obstruction_error"
+      ]
+    },
+    {
+      "pattern": "안테나, 주파수와 빔 경로",
+      "intent": "빔각, 조사면적, 주파수 및 설치장애물의 영향을 설명한다.",
+      "required_anchor_ids": [
+        "radar_antenna_beam_footprint",
+        "radar_frequency_antenna_tradeoff",
+        "radar_surface_foam_turbulence_slope",
+        "radar_mounting_nozzle_obstruction_error"
+      ]
+    },
+    {
+      "pattern": "허위에코와 다중반사",
+      "intent": "탱크 내부구조물의 반사와 신호처리 대책을 설명한다.",
+      "required_anchor_ids": [
+        "radar_antenna_beam_footprint",
+        "radar_false_echo_multiple_reflection",
+        "radar_mounting_nozzle_obstruction_error",
+        "radar_echo_mapping_calibration_diagnostics"
+      ]
+    },
+    {
+      "pattern": "거품, 난류, 증기와 고압",
+      "intent": "표면변동과 가스공간의 공정조건 영향을 설명한다.",
+      "required_anchor_ids": [
+        "radar_dielectric_constant_reflection",
+        "radar_surface_foam_turbulence_slope",
+        "radar_vapor_pressure_temperature_effect",
+        "radar_antenna_buildup_condensation"
+      ]
+    },
+    {
+      "pattern": "노즐 설치와 안테나 오염",
+      "intent": "노즐, 설치각도, 부착물과 결로의 대책을 설명한다.",
+      "required_anchor_ids": [
+        "radar_mounting_nozzle_obstruction_error",
+        "radar_antenna_buildup_condensation",
+        "radar_echo_mapping_calibration_diagnostics"
+      ]
+    },
+    {
+      "pattern": "교정, 에코맵과 진단",
+      "intent": "기준거리 설정, 허위에코 억제 및 진단방법을 설명한다.",
+      "required_anchor_ids": [
+        "radar_false_echo_multiple_reflection",
+        "radar_antenna_buildup_condensation",
+        "radar_echo_mapping_calibration_diagnostics"
+      ]
+    },
+    {
+      "pattern": "레벨계 방식 선정",
+      "intent": "유전율, 주파수, 공정가스 및 방식별 적용한계를 비교한다.",
+      "required_anchor_ids": [
+        "radar_low_dielectric_echo_margin",
+        "radar_frequency_antenna_tradeoff",
+        "radar_vapor_pressure_temperature_effect",
+        "radar_pulse_fmcw_application_selection"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    "레이더식 레벨계의 정의와 시스템 구성",
+    "전자기파 송수신과 표면 반사",
+    "펄스식 왕복시간과 D=cτ/2",
+    "FMCW 처프·비트주파수와 D=cf_b/(2S)",
+    "대역폭·거리 분해능과 레벨 환산",
+    "유전율·에코마진·빔각과 적용성",
+    "허위에코·다중반사·공정 및 설치오차",
+    "교정·에코맵·진단과 방식선정"
+  ],
+  "high_score_points": [
+    "펄스식과 FMCW식의 직접 측정변수를 명확히 구분한다.",
+    "D=cτ/2와 D=cf_b/(2S)의 변수 및 적용조건을 설명한다.",
+    "변조 대역폭과 거리 분해능의 관계를 설명한다.",
+    "거리 D와 기준거리 E에서 L=E-D를 정확히 설명한다.",
+    "유전율과 반사계수 및 에코마진을 연결한다.",
+    "블로킹 거리, 빔 경로와 설치오차를 설명한다.",
+    "허위에코와 다중반사의 원인·진단·대책을 연결한다.",
+    "기존설비 연계, 유지보수와 비용을 방식선정에 반영한다."
+  ],
+  "common_missing_points": [
+    "펄스 왕복시간에서 2로 나누는 이유를 생략한다.",
+    "FMCW의 비트주파수와 스윕 기울기 관계를 생략한다.",
+    "반송주파수와 변조 대역폭을 혼동한다.",
+    "유전율과 에코마진의 관계를 생략한다.",
+    "허위에코를 신호처리만으로 해결하려 한다.",
+    "노즐·안테나 부착물·결로와 유지보수 조건을 생략한다."
+  ],
+  "routing_aliases": [
+    "radar level gauge",
+    "radar level transmitter",
+    "non-contact radar level measurement",
+    "free space radar level",
+    "pulse radar level",
+    "pulsed radar level transmitter",
+    "radar time of flight level",
+    "FMCW radar level",
+    "frequency modulated continuous wave level radar",
+    "FMCW beat frequency ranging",
+    "radar chirp level measurement",
+    "radar dielectric constant level",
+    "radar false echo mapping",
+    "radar blocking distance",
+    "80 GHz radar level",
+    "microwave level transmitter",
+    "레이더식 레벨계",
+    "레이더 레벨 트랜스미터",
+    "비접촉 레이더 레벨 측정",
+    "자유공간 레이더 레벨계",
+    "펄스 레이더 레벨계",
+    "펄스식 레이더 수위계",
+    "레이더 비행시간 레벨 측정",
+    "FMCW 레이더 레벨계",
+    "주파수 변조 연속파 레벨계",
+    "FMCW 비트주파수 거리측정",
+    "레이더 처프 측정",
+    "레이더 유전율 영향",
+    "레이더 허위에코 맵",
+    "레이더 불감대",
+    "80GHz 레이더 레벨계",
+    "마이크로파 레벨 트랜스미터"
+  ],
+  "routing_field_points": [
+    "노즐 치수·안테나 돌출조건 및 빔 경로 확보",
+    "측정물 유전율과 에코마진에 따른 적용성 검토",
+    "탱크 내부구조물·교반기에 대한 허위에코 맵 설정",
+    "안테나 부착물·응축·결로에 대한 유지보수 대책",
+    "펄스·FMCW·GWR·초음파 방식의 비용과 기존설비 연계 비교"
+  ],
+  "revision_notes": [
+    "14개 Question Pattern을 추가했다.",
+    "32개 Routing Alias와 5개 현장 연결점을 추가했다.",
+    "펄스·FMCW·유전율·허위에코 계약을 통합했다."
+  ],
+  "id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+  "title": "레이더식 레벨계의 FMCW·펄스 방식, 거리·레벨 측정원리, 유전율 영향 및 허위에코·설치오차",
+  "question_examples": [
+    "레이더식 레벨계의 측정원리와 특징을 설명하시오.",
+    "펄스 레이더식 레벨계의 비행시간과 거리 계산식을 설명하시오.",
+    "FMCW 레이더식 레벨계의 처프와 비트주파수 측정원리를 설명하시오.",
+    "펄스식과 FMCW식 레이더 레벨계의 거리측정 방식을 비교하시오.",
+    "FMCW 레이더의 변조 대역폭과 거리 분해능의 관계를 설명하시오.",
+    "상대유전율이 레이더 레벨 측정의 반사강도에 미치는 영향을 설명하시오.",
+    "레이더식 레벨계의 측정거리와 탱크 레벨 계산방법을 설명하시오.",
+    "레이더식 레벨계의 블로킹 거리와 최소 측정거리 발생원인을 설명하시오.",
+    "레이더 안테나의 주파수, 빔각과 조사면적이 측정에 미치는 영향을 설명하시오.",
+    "레이더식 레벨계의 허위에코와 다중반사 발생원인 및 대책을 설명하시오.",
+    "거품, 난류, 증기, 분진 및 고압조건이 레이더 레벨 측정에 미치는 영향을 설명하시오.",
+    "레이더 레벨계의 노즐 설치, 장애물, 안테나 부착물과 결로 대책을 설명하시오.",
+    "레이더 레벨 트랜스미터의 교정, 에코맵 및 진단방법을 설명하시오.",
+    "펄스식·FMCW식·GWR식·초음파식 레벨계의 적용조건을 비교하시오."
+  ],
+  "topic_aliases": [
+    "radar level gauge",
+    "radar level transmitter",
+    "non-contact radar level measurement",
+    "free space radar level",
+    "pulse radar level",
+    "pulsed radar level transmitter",
+    "radar time of flight level",
+    "FMCW radar level",
+    "frequency modulated continuous wave level radar",
+    "FMCW beat frequency ranging",
+    "radar chirp level measurement",
+    "radar dielectric constant level",
+    "radar false echo mapping",
+    "radar blocking distance",
+    "80 GHz radar level",
+    "microwave level transmitter",
+    "레이더식 레벨계",
+    "레이더 레벨 트랜스미터",
+    "비접촉 레이더 레벨 측정",
+    "자유공간 레이더 레벨계",
+    "펄스 레이더 레벨계",
+    "펄스식 레이더 수위계",
+    "레이더 비행시간 레벨 측정",
+    "FMCW 레이더 레벨계",
+    "주파수 변조 연속파 레벨계",
+    "FMCW 비트주파수 거리측정",
+    "레이더 처프 측정",
+    "레이더 유전율 영향",
+    "레이더 허위에코 맵",
+    "레이더 불감대",
+    "80GHz 레이더 레벨계",
+    "마이크로파 레벨 트랜스미터"
+  ],
+  "expected_structure": [
+    "정의 및 적용범위",
+    "펄스식 측정원리",
+    "FMCW식 측정원리",
+    "유전율·안테나·공정 영향",
+    "허위에코·설치오차 및 대책",
+    "시운전·진단 및 방식선정"
+  ],
+  "high_score_features": [
+    "펄스식과 FMCW식의 물리식과 변수 의미가 정확하다.",
+    "거리·레벨 환산과 기준점 정의가 정확하다.",
+    "유전율, 빔 경로와 에코품질을 현장조건에 연결한다.",
+    "오차원인, 설치개선, 진단 및 유지보수 대책이 논리적으로 연결된다."
+  ],
+  "low_score_patterns": [
+    "레이더가 전자기파를 사용한다는 설명 없이 용어만 나열한다.",
+    "펄스식과 FMCW식의 거리계측 방식을 혼동한다.",
+    "비트주파수와 스윕 기울기 또는 왕복계수 1/2를 누락한다.",
+    "레이더는 공정조건과 설치조건의 영향을 전혀 받지 않는다고 단정한다.",
+    "현장 대책 없이 장점만 나열하거나 특정 방식을 절대적으로 우수하다고 표현한다."
+  ],
+  "field_connection_points": [
+    "노즐 치수·안테나 돌출조건 및 빔 경로 확보",
+    "측정물 유전율과 에코마진에 따른 적용성 검토",
+    "탱크 내부구조물·교반기에 대한 허위에코 맵 설정",
+    "안테나 부착물·응축·결로에 대한 유지보수 대책",
+    "펄스·FMCW·GWR·초음파 방식의 비용과 기존설비 연계 비교"
+  ]
+}

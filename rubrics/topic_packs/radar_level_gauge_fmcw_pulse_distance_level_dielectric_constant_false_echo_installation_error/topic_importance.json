@@ -1,0 +1,21 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "펄스식 왕복시간과 D=cτ/2를 정확히 설명한다.",
+    "FMCW 선형 스윕, 비트주파수와 D=cf_b/(2S)를 정확히 설명한다.",
+    "변조 대역폭과 거리 분해능의 관계를 설명한다.",
+    "상대유전율과 에코마진 및 적용성을 연결한다.",
+    "허위에코·다중반사와 설치·진단 대책을 연결한다.",
+    "펄스·FMCW·GWR·초음파 방식의 현장 적용조건을 비교한다."
+  ],
+  "note": "레이더식 레벨계는 비접촉 레벨계측의 핵심 주제이며 펄스식과 FMCW식의 원리 구분이 고득점의 핵심이다.",
+  "revision_notes": [
+    "난이도를 THEORY_CORE로 설정했다.",
+    "선택 중요도를 CORE_MUST_PREPARE로 설정했다."
+  ],
+  "topic_label": "레이더식 레벨계"
+}
