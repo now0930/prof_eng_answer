@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-15T05:09:47Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-15T05:35:50Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -71,7 +71,7 @@
       "next_practice_points": [
         "E=R-HY와 L=GH에서 폐루프 전달함수를 직접 유도한다.",
         "S, T 및 S+T=1을 추종, 출력 외란과 측정 잡음에 연결한다.",
-        "최종값 정리의 안정 조건과 Type별 정상상태 오차를 함께 정리한다.",
+        "최종값 정리의 sE(s) 극 조건과 Type별 정상상태 오차를 함께 정리한다.",
         "루프 이득과 대역폭을 안정여유, 지연, 잡음 및 포화와 함께 판단한다.",
         "Bode/Nyquist, 시간응답, 외란응답과 포화시험을 검증 절차로 제시한다."
       ],

@@ -45,7 +45,7 @@
 
 단위 피드백에서는 기준입력에 대한 출력 전달함수를 `T`로 표현할 수 있다.
 
-정상상태 오차는 폐루프가 최종값 정리의 적용 조건을 만족할 때 다음과 같이 계산한다.
+정상상태 오차는 폐루프가 최종값 정리의 sE(s) 극 조건을 만족할 때 다음과 같이 계산한다.
 
     e_ss = lim[s→0] sE(s)
 
@@ -70,7 +70,7 @@
 - 낮은 주파수에서 `|L|`가 크면 `|S|`가 작아져 추종 오차, 출력 외란과 모델 변화의 영향이 감소할 수 있다.
 - 단위 피드백의 표준 위치에서 측정 잡음의 출력 전달은 `-T`이므로 높은 이득만으로 모든 잡음을 제거할 수 없다.
 - `S+T=1`이므로 모든 주파수에서 `S`와 `T`를 동시에 임의로 작게 만들 수 없다.
-- 시간지연, 비최소위상 영점과 미모델 고주파 동특성은 가능한 대역폭을 제한한다.
+- 시간지연, 우반평면 영점과 미모델 고주파 동특성은 가능한 대역폭을 제한한다.
 
 ## 기술사 답안 권장 전개
 
@@ -141,3 +141,19 @@
 ## Source validation
 
     python3 scripts/rubric_manager.py validate-topic-packs
+
+## Corrected application conditions
+
+- 최종값 정리는 `sE(s)`의 모든 극이 개방 좌반평면에 있을 때 적용한다.
+- 시스템 형은 원점 극·영점 상쇄를 반영한 유효 개루프에 상쇄되지 않고 남은 원점 극의 수로 정의한다.
+- Type별 오차 관계는 폐루프가 안정한 표준 단위 피드백과 표준 단위 입력을 전제로 한다.
+- 시간지연, 우반평면 영점 및 미모델 고주파 동특성은 대역폭과 안정여유를 제한한다.
+- 센서 잡음·제어입력 증가와 액추에이터 포화는 선형 안정여유 문제와 구분한다.
+
+## Fact verification references
+
+- MathWorks `feedback`
+- MathWorks `loopsens`
+- MathWorks loop-shaping and robust-control guidance
+- MathWorks PID anti-windup guidance
+- MIT OpenCourseWare 16.06 steady-state error and system-type notes
