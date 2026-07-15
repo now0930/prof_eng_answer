@@ -550,3 +550,18 @@ GM과 PM은 중요한 상대안정도 지표지만
 - 다변수 decoupling 설계
 
 다만 구현 한계나 확장 방향으로 간단히 언급할 수 있다.
+
+## Lead-lag 설계 적용조건
+
+- 지상보상기의 저주파·고주파 상대 이득비는 β이다. 목표 교차주파수 부근의 이득을 기존 수준으로 유지하도록 K_c를 선택한 경우 저주파 루프이득과 해당 정적 오차상수를 약 β배 높일 수 있다. 실제 개선비는 K_c, 기존 루프이득, 시스템 형과 입력 종류를 함께 계산하여 확인한다.
+- 진상보상기는 양의 위상뿐 아니라 크기응답도 변화시키므로 새 이득교차주파수와 위상여유를 보상 후 개루프에서 다시 계산해야 한다.
+- 위상여유와 감쇠비·오버슈트의 관계는 안정한 최소위상 단일루프에서 지배적 2차계 근사가 유효할 때 사용하는 설계 경향이며 일반적인 등식으로 단정하지 않는다.
+- 보상기 설계 후에는 센서 잡음, 제어입력, 액추에이터 포화와 rate limit, 샘플링·이산화, 시간지연 및 모델 불확실성을 시간영역과 주파수영역에서 함께 검증한다.
+
+## Fact verification references
+
+- MIT OpenCourseWare 16.30 Topic 4: Control design using Bode plots
+- MathWorks `Bode Diagram Design`
+- MathWorks lead, lag and PID compensator structures
+- MathWorks loop-shaping and robust-control guidance
+- MathWorks Control System Designer and PID anti-windup guidance

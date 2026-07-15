@@ -23,13 +23,15 @@
         "성능 상충관계"
       ],
       "accepted_explanations": [
-        "plant와 compensator를 분리하고 보상 목표를 안정도, 과도응답, 정상상태 정확도와 구현 제약의 균형으로 설명한다."
+        "plant와 compensator를 분리하고 보상 목표를 안정도, 과도응답, 정상상태 정확도와 구현 제약의 균형으로 설명한다.",
+        "지상보상기의 저주파·고주파 상대 이득비는 β이다. 목표 교차주파수 부근의 이득을 기존 수준으로 유지하도록 K_c를 선택한 경우 저주파 루프이득과 해당 정적 오차상수를 약 β배 높일 수 있다. 실제 개선비는 K_c, 기존 루프이득, 시스템 형과 입력 종류를 함께 계산하여 확인한다."
       ],
       "rejected_explanations": [
-        "보상기를 plant 자체의 물리 파라미터 변경과 동일하다고 설명한다."
+        "보상기를 plant 자체의 물리 파라미터 변경과 동일하다고 설명한다.",
+        "β만 정하면 K_c, 기존 교차영역 이득, 시스템 형과 입력 종류에 관계없이 정상상태 오차상수가 자동으로 정확히 β배 증가한다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     },
     {
       "id": "lead_lag_lead_pole_zero_geometry",
@@ -57,7 +59,7 @@
         "진상보상기의 극점이 영점보다 원점에 더 가깝다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     },
     {
       "id": "lead_lag_lead_maximum_phase_relation",
@@ -85,7 +87,7 @@
         "α가 커질수록 최대 위상진상이 항상 증가한다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     },
     {
       "id": "lead_lag_lead_center_frequency_magnitude",
@@ -107,13 +109,15 @@
         "교차주파수"
       ],
       "accepted_explanations": [
-        "ωm을 목표 교차주파수 부근에 배치하고 크기 조건으로 T와 Kc를 함께 결정한다."
+        "ωm을 목표 교차주파수 부근에 배치하고 크기 조건으로 T와 Kc를 함께 결정한다.",
+        "지상보상기의 저주파·고주파 상대 이득비는 β이다. 목표 교차주파수 부근의 이득을 기존 수준으로 유지하도록 K_c를 선택한 경우 저주파 루프이득과 해당 정적 오차상수를 약 β배 높일 수 있다. 실제 개선비는 K_c, 기존 루프이득, 시스템 형과 입력 종류를 함께 계산하여 확인한다."
       ],
       "rejected_explanations": [
-        "진상보상기는 크기응답을 전혀 변경하지 않는다고 설명한다."
+        "진상보상기는 크기응답을 전혀 변경하지 않는다고 설명한다.",
+        "β만 정하면 K_c, 기존 교차영역 이득, 시스템 형과 입력 종류에 관계없이 정상상태 오차상수가 자동으로 정확히 β배 증가한다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     },
     {
       "id": "lead_lag_lead_phase_margin_design_sequence",
@@ -135,13 +139,15 @@
         "재검증"
       ],
       "accepted_explanations": [
-        "진상보상기의 크기 증가로 이동한 새 교차주파수에서 최종 위상여유를 다시 계산한다."
+        "진상보상기의 크기 증가로 이동한 새 교차주파수에서 최종 위상여유를 다시 계산한다.",
+        "위상여유와 감쇠비·오버슈트의 관계는 안정한 최소위상 단일루프에서 지배적 2차계 근사가 유효할 때 사용하는 설계 경향이며 일반적인 등식으로 단정하지 않는다."
       ],
       "rejected_explanations": [
-        "기존 교차주파수에서 부족한 위상만 더하면 최종 목표가 항상 정확히 달성된다고 설명한다."
+        "기존 교차주파수에서 부족한 위상만 더하면 최종 목표가 항상 정확히 달성된다고 설명한다.",
+        "위상여유와 감쇠비 또는 오버슈트 사이에 모든 고차·비최소위상 시스템에 공통인 정확한 일대일 등식이 있다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     },
     {
       "id": "lead_lag_lead_bandwidth_noise_effort_tradeoff",
@@ -163,13 +169,17 @@
         "미모델 동특성"
       ],
       "accepted_explanations": [
-        "대역폭과 응답속도 개선을 노이즈 증폭 및 제어입력 증가와 함께 평가한다."
+        "대역폭과 응답속도 개선을 노이즈 증폭 및 제어입력 증가와 함께 평가한다.",
+        "지상보상기의 저주파·고주파 상대 이득비는 β이다. 목표 교차주파수 부근의 이득을 기존 수준으로 유지하도록 K_c를 선택한 경우 저주파 루프이득과 해당 정적 오차상수를 약 β배 높일 수 있다. 실제 개선비는 K_c, 기존 루프이득, 시스템 형과 입력 종류를 함께 계산하여 확인한다.",
+        "위상여유와 감쇠비·오버슈트의 관계는 안정한 최소위상 단일루프에서 지배적 2차계 근사가 유효할 때 사용하는 설계 경향이며 일반적인 등식으로 단정하지 않는다."
       ],
       "rejected_explanations": [
-        "진상보상기의 대역폭 증가는 부작용이 없는 성능 향상이라고 설명한다."
+        "진상보상기의 대역폭 증가는 부작용이 없는 성능 향상이라고 설명한다.",
+        "β만 정하면 K_c, 기존 교차영역 이득, 시스템 형과 입력 종류에 관계없이 정상상태 오차상수가 자동으로 정확히 β배 증가한다고 설명한다.",
+        "위상여유와 감쇠비 또는 오버슈트 사이에 모든 고차·비최소위상 시스템에 공통인 정확한 일대일 등식이 있다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lag compensator low/high-frequency gain ratio, crossover-region gain normalization and steady-state accuracy improvement."
     },
     {
       "id": "lead_lag_lag_pole_zero_geometry",
@@ -191,13 +201,15 @@
         "음의 위상"
       ],
       "accepted_explanations": [
-        "지상보상기의 극점이 영점보다 원점에 더 가깝다는 위치 관계를 정확히 설명한다."
+        "지상보상기의 극점이 영점보다 원점에 더 가깝다는 위치 관계를 정확히 설명한다.",
+        "지상보상기의 저주파·고주파 상대 이득비는 β이다. 목표 교차주파수 부근의 이득을 기존 수준으로 유지하도록 K_c를 선택한 경우 저주파 루프이득과 해당 정적 오차상수를 약 β배 높일 수 있다. 실제 개선비는 K_c, 기존 루프이득, 시스템 형과 입력 종류를 함께 계산하여 확인한다."
       ],
       "rejected_explanations": [
-        "지상보상기의 극점이 영점보다 원점에서 더 멀다고 설명한다."
+        "지상보상기의 극점이 영점보다 원점에서 더 멀다고 설명한다.",
+        "β만 정하면 K_c, 기존 교차영역 이득, 시스템 형과 입력 종류에 관계없이 정상상태 오차상수가 자동으로 정확히 β배 증가한다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     },
     {
       "id": "lead_lag_lag_steady_state_error_improvement",
@@ -219,13 +231,15 @@
         "입력 종류"
       ],
       "accepted_explanations": [
-        "위치·속도·가속도 오차상수와 입력 종류를 구분하여 지상보상기의 개선 효과를 설명한다."
+        "위치·속도·가속도 오차상수와 입력 종류를 구분하여 지상보상기의 개선 효과를 설명한다.",
+        "지상보상기의 저주파·고주파 상대 이득비는 β이다. 목표 교차주파수 부근의 이득을 기존 수준으로 유지하도록 K_c를 선택한 경우 저주파 루프이득과 해당 정적 오차상수를 약 β배 높일 수 있다. 실제 개선비는 K_c, 기존 루프이득, 시스템 형과 입력 종류를 함께 계산하여 확인한다."
       ],
       "rejected_explanations": [
-        "지상보상기를 추가하면 모든 기준입력의 정상상태 오차가 반드시 0이라고 설명한다."
+        "지상보상기를 추가하면 모든 기준입력의 정상상태 오차가 반드시 0이라고 설명한다.",
+        "β만 정하면 K_c, 기존 교차영역 이득, 시스템 형과 입력 종류에 관계없이 정상상태 오차상수가 자동으로 정확히 β배 증가한다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lag compensator low/high-frequency gain ratio, crossover-region gain normalization and steady-state accuracy improvement."
     },
     {
       "id": "lead_lag_lag_crossover_phase_loss",
@@ -247,13 +261,15 @@
         "재계산"
       ],
       "accepted_explanations": [
-        "지상 극점과 영점을 교차주파수에서 충분히 분리하고 남는 위상손실을 검증한다."
+        "지상 극점과 영점을 교차주파수에서 충분히 분리하고 남는 위상손실을 검증한다.",
+        "위상여유와 감쇠비·오버슈트의 관계는 안정한 최소위상 단일루프에서 지배적 2차계 근사가 유효할 때 사용하는 설계 경향이며 일반적인 등식으로 단정하지 않는다."
       ],
       "rejected_explanations": [
-        "지상보상기는 위상여유를 항상 증가시키거나 완전히 보존한다고 설명한다."
+        "지상보상기는 위상여유를 항상 증가시키거나 완전히 보존한다고 설명한다.",
+        "위상여유와 감쇠비 또는 오버슈트 사이에 모든 고차·비최소위상 시스템에 공통인 정확한 일대일 등식이 있다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     },
     {
       "id": "lead_lag_lag_gain_ratio_error_constant",
@@ -275,13 +291,15 @@
         "크기 조건"
       ],
       "accepted_explanations": [
-        "단순 전체 이득 증가가 아니라 저주파와 교차주파수 영역의 상대 이득을 분리하여 Kc와 β를 결정한다."
+        "단순 전체 이득 증가가 아니라 저주파와 교차주파수 영역의 상대 이득을 분리하여 Kc와 β를 결정한다.",
+        "지상보상기의 저주파·고주파 상대 이득비는 β이다. 목표 교차주파수 부근의 이득을 기존 수준으로 유지하도록 K_c를 선택한 경우 저주파 루프이득과 해당 정적 오차상수를 약 β배 높일 수 있다. 실제 개선비는 K_c, 기존 루프이득, 시스템 형과 입력 종류를 함께 계산하여 확인한다."
       ],
       "rejected_explanations": [
-        "β만 결정하면 교차주파수와 Kc를 확인하지 않아도 요구 정상상태 오차가 자동으로 만족된다고 설명한다."
+        "β만 결정하면 교차주파수와 Kc를 확인하지 않아도 요구 정상상태 오차가 자동으로 만족된다고 설명한다.",
+        "β만 정하면 K_c, 기존 교차영역 이득, 시스템 형과 입력 종류에 관계없이 정상상태 오차상수가 자동으로 정확히 β배 증가한다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lag compensator low/high-frequency gain ratio, crossover-region gain normalization and steady-state accuracy improvement."
     },
     {
       "id": "lead_lag_combined_design",
@@ -303,13 +321,17 @@
         "상호작용"
       ],
       "accepted_explanations": [
-        "진상부와 지상부를 순차 설계한 후 최종 교차주파수, 위상여유와 정상상태 오차를 전체 루프에서 재검증한다."
+        "진상부와 지상부를 순차 설계한 후 최종 교차주파수, 위상여유와 정상상태 오차를 전체 루프에서 재검증한다.",
+        "지상보상기의 저주파·고주파 상대 이득비는 β이다. 목표 교차주파수 부근의 이득을 기존 수준으로 유지하도록 K_c를 선택한 경우 저주파 루프이득과 해당 정적 오차상수를 약 β배 높일 수 있다. 실제 개선비는 K_c, 기존 루프이득, 시스템 형과 입력 종류를 함께 계산하여 확인한다.",
+        "위상여유와 감쇠비·오버슈트의 관계는 안정한 최소위상 단일루프에서 지배적 2차계 근사가 유효할 때 사용하는 설계 경향이며 일반적인 등식으로 단정하지 않는다."
       ],
       "rejected_explanations": [
-        "진상부와 지상부의 효과가 완전히 독립적이므로 결합 후 검증할 필요가 없다고 설명한다."
+        "진상부와 지상부의 효과가 완전히 독립적이므로 결합 후 검증할 필요가 없다고 설명한다.",
+        "β만 정하면 K_c, 기존 교차영역 이득, 시스템 형과 입력 종류에 관계없이 정상상태 오차상수가 자동으로 정확히 β배 증가한다고 설명한다.",
+        "위상여유와 감쇠비 또는 오버슈트 사이에 모든 고차·비최소위상 시스템에 공통인 정확한 일대일 등식이 있다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lag compensator low/high-frequency gain ratio, crossover-region gain normalization and steady-state accuracy improvement."
     },
     {
       "id": "lead_lag_root_locus_frequency_consistency",
@@ -337,7 +359,7 @@
         "Bode 설계와 근궤적 설계는 서로 무관한 물리현상이라고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     },
     {
       "id": "lead_lag_plant_robustness_limits",
@@ -359,13 +381,15 @@
         "물리적 한계"
       ],
       "accepted_explanations": [
-        "plant의 비최소위상성, 시간지연과 구현 제약을 반영해 목표 대역폭과 안정여유를 현실적으로 제한한다."
+        "plant의 비최소위상성, 시간지연과 구현 제약을 반영해 목표 대역폭과 안정여유를 현실적으로 제한한다.",
+        "위상여유와 감쇠비·오버슈트의 관계는 안정한 최소위상 단일루프에서 지배적 2차계 근사가 유효할 때 사용하는 설계 경향이며 일반적인 등식으로 단정하지 않는다."
       ],
       "rejected_explanations": [
-        "진상·지상 보상기를 사용하면 plant의 물리적 제약과 관계없이 임의 성능을 달성할 수 있다고 설명한다."
+        "진상·지상 보상기를 사용하면 plant의 물리적 제약과 관계없이 임의 성능을 달성할 수 있다고 설명한다.",
+        "위상여유와 감쇠비 또는 오버슈트 사이에 모든 고차·비최소위상 시스템에 공통인 정확한 일대일 등식이 있다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     },
     {
       "id": "lead_lag_implementation_validation",
@@ -387,13 +411,15 @@
         "이산화"
       ],
       "accepted_explanations": [
-        "연속시간 설계 결과를 실제 샘플링주기와 센서·액추에이터 제약을 포함한 조건에서 다시 확인한다."
+        "연속시간 설계 결과를 실제 샘플링주기와 센서·액추에이터 제약을 포함한 조건에서 다시 확인한다.",
+        "지상보상기의 저주파·고주파 상대 이득비는 β이다. 목표 교차주파수 부근의 이득을 기존 수준으로 유지하도록 K_c를 선택한 경우 저주파 루프이득과 해당 정적 오차상수를 약 β배 높일 수 있다. 실제 개선비는 K_c, 기존 루프이득, 시스템 형과 입력 종류를 함께 계산하여 확인한다."
       ],
       "rejected_explanations": [
-        "위상여유 하나만 목표값이면 시간응답·정상상태 오차·노이즈·포화 검증은 생략해도 된다고 설명한다."
+        "위상여유 하나만 목표값이면 시간응답·정상상태 오차·노이즈·포화 검증은 생략해도 된다고 설명한다.",
+        "β만 정하면 K_c, 기존 교차영역 이득, 시스템 형과 입력 종류에 관계없이 정상상태 오차상수가 자동으로 정확히 β배 증가한다고 설명한다."
       ],
       "grading_notes": "조건과 전제를 포함한 의미 설명을 평가하며 단순 키워드 나열만으로 충족한 것으로 판단하지 않는다.",
-      "source_basis": "고전제어의 lead·lag 보상기 주파수응답 설계식과 폐루프 성능·강인성 검증 원칙"
+      "source_basis": "MIT OpenCourseWare 16.30 Topic 4, `Control design using Bode plots`: lead compensator pole-zero ordering, maximum phase lead, center frequency and magnitude contribution."
     }
   ],
   "core_facts": [
@@ -422,8 +448,7 @@
       "severity": "fatal",
       "affected_layers": [
         "B",
-        "C",
-        "D"
+        "C"
       ],
       "message": "진상보상기에서는 0<α<1이고 극점 -1/(αT)이 영점 -1/T보다 원점에서 멀어 |p|>|z|이다.",
       "description": "진상보상기에서는 0<α<1이고 극점 -1/(αT)이 영점 -1/T보다 원점에서 멀어 |p|>|z|이다.",
@@ -438,8 +463,7 @@
       "severity": "fatal",
       "affected_layers": [
         "B",
-        "C",
-        "D"
+        "C"
       ],
       "message": "진상보상기는 양의 위상과 함께 크기도 증가시켜 이득교차주파수와 대역폭을 변화시킨다.",
       "description": "진상보상기는 양의 위상과 함께 크기도 증가시켜 이득교차주파수와 대역폭을 변화시킨다.",
@@ -454,8 +478,7 @@
       "severity": "fatal",
       "affected_layers": [
         "B",
-        "C",
-        "D"
+        "C"
       ],
       "message": "진상보상기는 일반적으로 교차주파수와 대역폭을 증가시키는 방향으로 작용하지만 최종 결과는 plant와 이득을 포함해 계산한다.",
       "description": "진상보상기는 일반적으로 교차주파수와 대역폭을 증가시키는 방향으로 작용하지만 최종 결과는 plant와 이득을 포함해 계산한다.",
@@ -470,8 +493,7 @@
       "severity": "fatal",
       "affected_layers": [
         "B",
-        "C",
-        "D"
+        "C"
       ],
       "message": "표준 지상보상기는 전이구간에서 음의 위상을 추가하므로 위상여유 증가가 자동으로 보장되지 않는다.",
       "description": "표준 지상보상기는 전이구간에서 음의 위상을 추가하므로 위상여유 증가가 자동으로 보장되지 않는다.",
@@ -486,8 +508,7 @@
       "severity": "fatal",
       "affected_layers": [
         "B",
-        "C",
-        "D"
+        "C"
       ],
       "message": "지상보상기는 저주파 이득과 오차상수를 개선하지만 시스템 형과 입력 종류에 따라 정상상태 오차가 남을 수 있다.",
       "description": "지상보상기는 저주파 이득과 오차상수를 개선하지만 시스템 형과 입력 종류에 따라 정상상태 오차가 남을 수 있다.",
@@ -502,8 +523,7 @@
       "severity": "fatal",
       "affected_layers": [
         "B",
-        "C",
-        "D"
+        "C"
       ],
       "message": "GM과 PM은 상대안정도 지표이며 구조화 불확실성, 공진, 시간지연과 민감도 피크를 모두 보장하지 않는다.",
       "description": "GM과 PM은 상대안정도 지표이며 구조화 불확실성, 공진, 시간지연과 민감도 피크를 모두 보장하지 않는다.",
@@ -518,8 +538,7 @@
       "severity": "fatal",
       "affected_layers": [
         "B",
-        "C",
-        "D"
+        "C"
       ],
       "message": "정확한 상쇄는 모델 오차에 취약하며 특히 불안정극이나 우반평면 요소의 상쇄는 내부안정성과 강인성을 훼손할 수 있다.",
       "description": "정확한 상쇄는 모델 오차에 취약하며 특히 불안정극이나 우반평면 요소의 상쇄는 내부안정성과 강인성을 훼손할 수 있다.",
@@ -534,8 +553,7 @@
       "severity": "fatal",
       "affected_layers": [
         "B",
-        "C",
-        "D"
+        "C"
       ],
       "message": "우반평면 영점, 시간지연, 포화, 노이즈, 미모델 동특성과 물리적 대역폭이 달성 가능한 성능을 제한한다.",
       "description": "우반평면 영점, 시간지연, 포화, 노이즈, 미모델 동특성과 물리적 대역폭이 달성 가능한 성능을 제한한다.",
@@ -551,6 +569,9 @@
     "다중 교차·시간지연·비최소위상 시스템은 Nyquist 조건과 폐루프 극점을 함께 확인한다."
   ],
   "revision_notes": [
-    "2026-07-11: 진상·지상 보상기 설계식과 성능 상충관계를 14개 Anchor와 8개 Fatal로 구성했다."
+    "2026-07-11: 진상·지상 보상기 설계식과 성능 상충관계를 14개 Anchor와 8개 Fatal로 구성했다.",
+    "14개 Fact Anchor의 source_basis를 공식 자료별로 구체화했다.",
+    "지상보상기의 β배 오차상수 개선에 K_c와 교차영역 이득 정규화 조건을 추가했다.",
+    "Fatal의 직접 점수 영향 레이어를 B/C로 제한하고 D/E는 claim trust만 제한하도록 정리했다."
   ]
 }
