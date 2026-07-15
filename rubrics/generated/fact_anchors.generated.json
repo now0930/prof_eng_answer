@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-15T04:40:08Z-generated-topic-pack-fact-anchors",
+  "version": "2026-07-15T05:09:47Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json",
@@ -33,10 +33,11 @@
             "고전적 위상여유와 이득여유는 루프 전달함수 L(s)=G(s)H(s)의 주파수응답에서 구하고, 폐루프 대역폭은 T(s)=L(s)/(1+L(s))에서 평가한다."
           ],
           "rejected_explanations": [
-            "고전적 위상여유와 이득여유는 루프 전달함수 L(s)=G(s)H(s)의 주파수응답에서 구하고, 폐루프 대역폭은 T(s)=L(s)/(1+L(s))에서 평가한다."
+            "위상여유와 이득여유는 폐루프 전달함수 T(s)의 Bode 선도에서 직접 구하고, 대역폭은 루프 전달함수 L(s)에서 구한다.",
+            "안정여유와 폐루프 대역폭은 모두 동일한 전달함수와 동일한 교차주파수에서 정의된다."
           ],
           "grading_notes": "margin과 bandwidth의 평가 전달함수를 분리해야 안정여유와 폐루프 성능을 혼동하지 않는다.",
-          "source_basis": "margin과 bandwidth의 평가 전달함수를 분리해야 안정여유와 폐루프 성능을 혼동하지 않는다."
+          "source_basis": "MathWorks Control System Toolbox documentation: margin, allmargin and bandwidth; loop-transfer stability margins and closed-loop bandwidth definitions."
         },
         {
           "id": "log_frequency_and_decibel",
@@ -61,10 +62,11 @@
             "Bode 크기선도는 로그 주파수축에서 20log10|L(jω)|로 진폭비를 표현하며, 전달함수 곱은 dB 크기와 위상의 합으로 나타낸다."
           ],
           "rejected_explanations": [
-            "Bode 크기선도는 로그 주파수축에서 20log10|L(jω)|로 진폭비를 표현하며, 전달함수 곱은 dB 크기와 위상의 합으로 나타낸다."
+            "진폭비는 10log10|L(jω)|로 변환하며 전달함수의 곱은 dB 값의 곱으로 계산한다.",
+            "Bode 선도의 주파수축은 선형축이어야 하며 요소별 위상은 서로 곱한다."
           ],
           "grading_notes": "로그 표현은 넓은 주파수 범위와 요소별 기여를 가산 형태로 분석하게 한다.",
-          "source_basis": "로그 표현은 넓은 주파수 범위와 요소별 기여를 가산 형태로 분석하게 한다."
+          "source_basis": "MathWorks Control System Toolbox documentation: bode; logarithmic frequency axis, decibel magnitude and additive magnitude and phase contributions."
         },
         {
           "id": "pole_zero_magnitude_slopes",
@@ -89,10 +91,11 @@
             "1차 좌반평면 영점은 절점 이후 +20 dB/dec, 1차 좌반평면 극점은 -20 dB/dec를 추가하며 중복 차수만큼 기울기가 누적된다."
           ],
           "rejected_explanations": [
-            "1차 좌반평면 영점은 절점 이후 +20 dB/dec, 1차 좌반평면 극점은 -20 dB/dec를 추가하며 중복 차수만큼 기울기가 누적된다."
+            "1차 영점은 절점 이후 -20 dB/dec, 1차 극점은 +20 dB/dec를 추가한다.",
+            "극점과 영점은 절점 전후에 관계없이 모든 주파수에서 동일한 기울기 변화를 만든다."
           ],
           "grading_notes": "원점 요소는 전체 주파수 범위에서 기울기에 영향을 주며, 절점 요소는 해당 절점 이후 기울기를 변경한다.",
-          "source_basis": "원점 요소는 전체 주파수 범위에서 기울기에 영향을 주며, 절점 요소는 해당 절점 이후 기울기를 변경한다."
+          "source_basis": "MathWorks bode documentation and MIT OpenCourseWare feedback-control notes: first-order pole and zero asymptotic Bode slopes."
         },
         {
           "id": "phase_contribution_nonminimum_phase",
@@ -117,10 +120,11 @@
             "좌반평면 영점은 양의 위상, 좌반평면 극점은 음의 위상을 기여하며 우반평면 영점은 대응 좌반평면 영점과 크기는 같을 수 있지만 추가 위상지연을 만든다."
           ],
           "rejected_explanations": [
-            "좌반평면 영점은 양의 위상, 좌반평면 극점은 음의 위상을 기여하며 우반평면 영점은 대응 좌반평면 영점과 크기는 같을 수 있지만 추가 위상지연을 만든다."
+            "우반평면 영점은 대응 좌반평면 영점과 동일한 양의 위상을 제공하므로 안정여유를 증가시킨다.",
+            "크기선도만 확인하면 좌반평면 영점과 우반평면 영점을 항상 구분할 수 있다."
           ],
           "grading_notes": "크기응답만으로 최소위상과 비최소위상 시스템을 항상 구분할 수 없으므로 위상응답을 함께 확인한다.",
-          "source_basis": "크기응답만으로 최소위상과 비최소위상 시스템을 항상 구분할 수 없으므로 위상응답을 함께 확인한다."
+          "source_basis": "MIT OpenCourseWare Electronic Feedback Systems and classical minimum-phase and nonminimum-phase frequency-response results."
         },
         {
           "id": "positive_gain_shift",
@@ -145,10 +149,11 @@
             "양의 상수 이득 K는 크기선도를 20log10K만큼 평행 이동시키고 위상선도 자체는 바꾸지 않지만, 교차주파수와 안정여유는 달라질 수 있다."
           ],
           "rejected_explanations": [
-            "양의 상수 이득 K는 크기선도를 20log10K만큼 평행 이동시키고 위상선도 자체는 바꾸지 않지만, 교차주파수와 안정여유는 달라질 수 있다."
+            "양의 상수 이득 K는 크기선도뿐 아니라 위상선도도 20log10K만큼 이동시킨다.",
+            "상수 이득을 변경해도 교차주파수와 위상여유 및 이득여유는 변하지 않는다."
           ],
           "grading_notes": "이득 증가로 0 dB 교차 위치가 이동하면서 새 교차점의 위상에 따라 PM과 폐루프 응답이 변한다.",
-          "source_basis": "이득 증가로 0 dB 교차 위치가 이동하면서 새 교차점의 위상에 따라 PM과 폐루프 응답이 변한다."
+          "source_basis": "MathWorks bode and margin documentation: positive scalar gain shifts magnitude by 20log10(K), leaves direct phase unchanged and can move crossover frequencies."
         },
         {
           "id": "gain_phase_crossover_frequencies",
@@ -173,10 +178,11 @@
             "이득교차주파수 ω_gc는 |L(jω_gc)|=1인 주파수이고, 위상교차주파수 ω_pc는 위상이 -(2k+1)180°에 도달하는 주파수이므로 서로 다른 조건이다."
           ],
           "rejected_explanations": [
-            "이득교차주파수 ω_gc는 |L(jω_gc)|=1인 주파수이고, 위상교차주파수 ω_pc는 위상이 -(2k+1)180°에 도달하는 주파수이므로 서로 다른 조건이다."
+            "이득교차주파수와 위상교차주파수는 항상 동일하다.",
+            "ω_gc는 위상이 -180°인 주파수이고 ω_pc는 크기가 0 dB인 주파수이다."
           ],
           "grading_notes": "두 교차주파수는 우연히 일치할 수 있지만 일반적으로 동일하다고 가정해서는 안 된다.",
-          "source_basis": "두 교차주파수는 우연히 일치할 수 있지만 일반적으로 동일하다고 가정해서는 안 된다."
+          "source_basis": "MathWorks margin and allmargin documentation: gain-crossover and phase-crossover definitions."
         },
         {
           "id": "phase_margin_calculation",
@@ -201,10 +207,11 @@
             "부호가 포함된 위상을 사용할 때 위상여유는 PM=180°+∠L(jω_gc)이며 이득교차주파수에서 계산한다."
           ],
           "rejected_explanations": [
-            "부호가 포함된 위상을 사용할 때 위상여유는 PM=180°+∠L(jω_gc)이며 이득교차주파수에서 계산한다."
+            "위상여유는 위상교차주파수 ω_pc에서 계산한다.",
+            "∠L(jω_gc)=-135°이면 위상여유는 315°이다."
           ],
           "grading_notes": "예를 들어 ∠L(jω_gc)=-135°이면 PM은 45°이며, 위상 lag의 절대값을 쓰는 경우에는 부호 규약을 명시한다.",
-          "source_basis": "예를 들어 ∠L(jω_gc)=-135°이면 PM은 45°이며, 위상 lag의 절대값을 쓰는 경우에는 부호 규약을 명시한다."
+          "source_basis": "MathWorks margin and allmargin documentation: phase margin is evaluated at a gain-crossover frequency."
         },
         {
           "id": "gain_margin_calculation",
@@ -229,10 +236,11 @@
             "이득여유는 위상교차주파수에서 GM=1/|L(jω_pc)|로 구하며 dB 표현은 GM_dB=-20log10|L(jω_pc)|이다."
           ],
           "rejected_explanations": [
-            "이득여유는 위상교차주파수에서 GM=1/|L(jω_pc)|로 구하며 dB 표현은 GM_dB=-20log10|L(jω_pc)|이다."
+            "이득여유는 이득교차주파수 ω_gc에서 계산한다.",
+            "위상교차점의 크기가 -10 dB이면 이득여유도 -10 dB이다."
           ],
           "grading_notes": "위상교차점의 루프 크기가 -10 dB이면 이득여유는 +10 dB이다.",
-          "source_basis": "위상교차점의 루프 크기가 -10 dB이면 이득여유는 +10 dB이다."
+          "source_basis": "MathWorks margin and allmargin documentation: gain margin is evaluated at a phase-crossover frequency."
         },
         {
           "id": "multiple_or_missing_crossovers",
@@ -257,10 +265,11 @@
             "0 dB 또는 -180° 교차가 없으면 해당 고전적 margin이 정의되지 않거나 무한대로 표현될 수 있고, 다중 교차점에서는 모든 관련 교차점과 전체 안정성을 검토해야 한다."
           ],
           "rejected_explanations": [
-            "0 dB 또는 -180° 교차가 없으면 해당 고전적 margin이 정의되지 않거나 무한대로 표현될 수 있고, 다중 교차점에서는 모든 관련 교차점과 전체 안정성을 검토해야 한다."
+            "다중 교차점이 존재하면 가장 낮은 주파수의 교차점 하나만 확인하면 충분하다.",
+            "0 dB 또는 -180° 교차가 없으면 시스템은 반드시 불안정하고 margin은 항상 0이다."
           ],
           "grading_notes": "개루프 불안정 극점이나 복잡한 위상 궤적이 있으면 단일 PM·GM 값 대신 전체 Nyquist 조건 또는 폐루프 극점을 병행 확인한다.",
-          "source_basis": "개루프 불안정 극점이나 복잡한 위상 궤적이 있으면 단일 PM·GM 값 대신 전체 Nyquist 조건 또는 폐루프 극점을 병행 확인한다."
+          "source_basis": "MathWorks allmargin documentation: multiple or missing gain and phase crossovers and assessment of all relevant margins and closed-loop stability."
         },
         {
           "id": "closed_loop_bandwidth",
@@ -285,10 +294,11 @@
             "일반적인 저역통과형 폐루프 시스템의 대역폭은 |T(jω_BW)|=|T(0)|/√2가 되는 상대 -3.0103 dB 주파수로 정의한다."
           ],
           "rejected_explanations": [
-            "일반적인 저역통과형 폐루프 시스템의 대역폭은 |T(jω_BW)|=|T(0)|/√2가 되는 상대 -3.0103 dB 주파수로 정의한다."
+            "폐루프 대역폭은 항상 개루프 이득교차주파수와 정확히 같다.",
+            "폐루프 DC 이득과 관계없이 |T(jω)|가 절대값 0.707이 되는 지점을 모든 시스템의 대역폭으로 정의한다."
           ],
           "grading_notes": "ω_BW와 개루프 ω_gc는 잘 거동하는 단일루프에서 유사할 수 있지만 서로 다른 전달함수에서 정의되며 항등적으로 같지 않다.",
-          "source_basis": "ω_BW와 개루프 ω_gc는 잘 거동하는 단일루프에서 유사할 수 있지만 서로 다른 전달함수에서 정의되며 항등적으로 같지 않다."
+          "source_basis": "MathWorks bandwidth documentation: low-pass bandwidth is the first frequency where gain falls 3 dB below DC gain."
         },
         {
           "id": "margin_transient_response_approximation",
@@ -313,10 +323,11 @@
             "PM 증가와 감쇠 증가·overshoot 감소, bandwidth 증가와 응답속도 향상의 관계는 dominant second-order와 유사한 조건에서 사용하는 근사적 설계 경향이다."
           ],
           "rejected_explanations": [
-            "PM 증가와 감쇠 증가·overshoot 감소, bandwidth 증가와 응답속도 향상의 관계는 dominant second-order와 유사한 조건에서 사용하는 근사적 설계 경향이다."
+            "위상여유와 감쇠비 및 overshoot 사이에는 시스템 차수, 영점 및 지연에 무관한 정확한 일대일 관계가 있다.",
+            "대역폭만 알면 모든 고차 시스템의 상승시간과 정착시간을 정확히 결정할 수 있다."
           ],
           "grading_notes": "고차 극점, 영점, 지연과 비최소위상 요소가 있으면 PM과 감쇠비 또는 bandwidth와 상승시간 사이에 일반적인 정확한 일대일 관계가 성립하지 않는다.",
-          "source_basis": "고차 극점, 영점, 지연과 비최소위상 요소가 있으면 PM과 감쇠비 또는 bandwidth와 상승시간 사이에 일반적인 정확한 일대일 관계가 성립하지 않는다."
+          "source_basis": "Classical dominant-second-order approximation and MathWorks control-design guidance: phase margin, damping, overshoot and bandwidth are conditional correlations."
         },
         {
           "id": "delay_and_nonminimum_phase_limits",
@@ -341,10 +352,11 @@
             "순수 시간지연 e^{-sτ}는 크기 1과 위상 -ωτ rad를 가지며, 우반평면 영점과 함께 추가 위상지연 및 달성 가능한 대역폭·안정여유의 한계를 만든다."
           ],
           "rejected_explanations": [
-            "순수 시간지연 e^{-sτ}는 크기 1과 위상 -ωτ rad를 가지며, 우반평면 영점과 함께 추가 위상지연 및 달성 가능한 대역폭·안정여유의 한계를 만든다."
+            "순수 시간지연은 크기와 위상에 아무 영향이 없으므로 위상여유와 폐루프 안정성을 바꾸지 않는다.",
+            "우반평면 영점은 위상선행을 제공하므로 달성 가능한 대역폭을 항상 증가시킨다."
           ],
           "grading_notes": "시간지연은 크기선도를 직접 바꾸지 않아도 PM을 감소시키고 폐루프 불안정을 유발할 수 있다.",
-          "source_basis": "시간지연은 크기선도를 직접 바꾸지 않아도 PM을 감소시키고 폐루프 불안정을 유발할 수 있다."
+          "source_basis": "MIT OpenCourseWare 16.30 Feedback Control Systems, Recitation 11: Time Delays; classical nonminimum-phase frequency-response limitations."
         },
         {
           "id": "sensitivity_robustness_noise_tradeoff",
@@ -369,10 +381,11 @@
             "S(s)=1/(1+L(s))와 T(s)=L(s)/(1+L(s))를 이용해 저주파 추종·외란 억제와 고주파 잡음·미모델 동특성 사이의 trade-off를 평가한다."
           ],
           "rejected_explanations": [
-            "S(s)=1/(1+L(s))와 T(s)=L(s)/(1+L(s))를 이용해 저주파 추종·외란 억제와 고주파 잡음·미모델 동특성 사이의 trade-off를 평가한다."
+            "루프 이득은 모든 주파수에서 클수록 추종, 외란 억제, 센서 잡음 및 모델 불확실성에 항상 동시에 유리하다.",
+            "감도함수 S(s)와 상보감도함수 T(s)는 서로 무관하므로 주파수별 trade-off를 검토할 필요가 없다."
           ],
           "grading_notes": "저주파의 큰 루프 이득은 오차와 외란 억제에 유리할 수 있지만, 과도한 고주파 이득은 잡음과 모델 불확실성 영향을 키운다.",
-          "source_basis": "저주파의 큰 루프 이득은 오차와 외란 억제에 유리할 수 있지만, 과도한 고주파 이득은 잡음과 모델 불확실성 영향을 키운다."
+          "source_basis": "MathWorks loopsens documentation and MIT OpenCourseWare robust-control notes: S=1/(1+L), T=L/(1+L) and disturbance, noise and uncertainty trade-offs."
         },
         {
           "id": "compensator_and_field_validation",
@@ -397,10 +410,11 @@
             "lead·lag·PID 보상은 목표 crossover, PM, 저주파 이득과 잡음 조건을 함께 고려하고, 적용 전 운전점·시간지연·포화·rate limit·deadband·모델 오차를 검증한다."
           ],
           "rejected_explanations": [
-            "lead·lag·PID 보상은 목표 crossover, PM, 저주파 이득과 잡음 조건을 함께 고려하고, 적용 전 운전점·시간지연·포화·rate limit·deadband·모델 오차를 검증한다."
+            "보상기 설계는 위상여유 하나만 만족하면 완료되며 대역폭, 잡음 및 저주파 이득은 확인할 필요가 없다.",
+            "선형 모델에서 안정하면 포화, rate limit, deadband, 시간지연 및 운전점 변화 검증 없이 현장 이득을 적용해도 된다."
           ],
           "grading_notes": "설계 후 L(s), T(s), S(s)의 margin·bandwidth·잡음응답을 재확인하고 단계적으로 현장 이득을 적용한다.",
-          "source_basis": "설계 후 L(s), T(s), S(s)의 margin·bandwidth·잡음응답을 재확인하고 단계적으로 현장 이득을 적용한다."
+          "source_basis": "MathWorks loop-shaping and PID tuning documentation plus industrial commissioning practice for margins, bandwidth, noise, delay, saturation, rate limit and deadband checks."
         }
       ],
       "core_facts": [
@@ -544,7 +558,9 @@
       "revision_notes": [
         "사람이 검토한 Bode 요구사항 Markdown을 기준으로 직접 작성함.",
         "14개 Fact Anchor와 8개 fatal wrong claim을 Bode 전용 내용으로 작성함.",
-        "개루프 안정여유와 폐루프 bandwidth를 분리하고 특수 crossover 조건을 반영함."
+        "개루프 안정여유와 폐루프 bandwidth를 분리하고 특수 crossover 조건을 반영함.",
+        "14개 Fact Anchor의 rejected_explanations를 정답 복제문에서 실제 오답 및 혼동 예시로 교체했다.",
+        "14개 Fact Anchor의 source_basis를 구체적인 공식 문서와 대학 강의자료 기반으로 보완했다."
       ]
     },
     {

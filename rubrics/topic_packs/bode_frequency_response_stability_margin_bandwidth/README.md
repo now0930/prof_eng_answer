@@ -97,3 +97,18 @@
 
 다른 제어이론 Topic의 작도 규칙이나 변경 이력을 복사하지 않는다.
 Bode 전용 수식, 판단 조건, 예외와 현장 검증만 유지한다.
+
+## Fact verification references
+
+- MathWorks Control System Toolbox, `bode`: 로그 주파수축, dB 크기와 위상응답 해석
+- MathWorks Control System Toolbox, `margin` 및 `allmargin`: 이득교차·위상교차, PM·GM 및 다중 교차점
+- MathWorks Control System Toolbox, `bandwidth`: 폐루프 DC 이득 대비 -3 dB 대역폭
+- MathWorks Control System Toolbox, `loopsens`: 감도함수와 상보감도함수 및 강인성 trade-off
+- MIT OpenCourseWare 16.30, `Feedback Control Systems - Recitation 11: Time Delays`: 시간지연과 안정여유
+- MIT OpenCourseWare, `Electronic Feedback Systems`: Bode 해석, 비최소위상 요소 및 보상설계
+
+## Rubric clarification
+
+- `accepted_explanations`는 허용 가능한 정답 설명이다.
+- `rejected_explanations`는 실제 오답, 정의 교환, 무조건적 일반화 또는 적용조건 누락 사례만 포함한다.
+- 동일하거나 의미상 동등한 문장을 두 필드에 동시에 배치하지 않는다.
