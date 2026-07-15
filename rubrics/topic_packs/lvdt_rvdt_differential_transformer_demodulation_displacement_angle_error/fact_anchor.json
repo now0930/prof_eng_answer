@@ -29,7 +29,7 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "LVDT는 중앙의 1차 코일, 대칭 배치된 두 2차 코일과 일반적으로 코일에 접촉하지 않는 가동 철심으로 구성되는 차동변압기식 변위센서이다.",
       "description": "LVDT는 중앙의 1차 코일, 대칭 배치된 두 2차 코일과 일반적으로 코일에 접촉하지 않는 가동 철심으로 구성되는 차동변압기식 변위센서이다."
     },
@@ -58,7 +58,7 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "LVDT는 1차 코일에 교류 전압을 인가하여 교류 자속을 만들고 가동 철심을 통해 두 2차 코일에 유도전압을 발생시킨다.",
       "description": "LVDT는 1차 코일에 교류 전압을 인가하여 교류 자속을 만들고 가동 철심을 통해 두 2차 코일에 유도전압을 발생시킨다."
     },
@@ -87,7 +87,7 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "두 2차 코일은 직렬 역접속하여 공통 유도성분을 상쇄하고 철심 위치에 따른 차동전압을 출력한다.",
       "description": "두 2차 코일은 직렬 역접속하여 공통 유도성분을 상쇄하고 철심 위치에 따른 차동전압을 출력한다."
     },
@@ -116,7 +116,7 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "가동 철심의 위치가 변하면 각 2차 코일과의 상호인덕턴스와 결합계수가 서로 반대 방향으로 변한다.",
       "description": "가동 철심의 위치가 변하면 각 2차 코일과의 상호인덕턴스와 결합계수가 서로 반대 방향으로 변한다."
     },
@@ -145,14 +145,14 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "LVDT의 차동출력은 두 2차 유도전압의 벡터 차로 Eo=Es1-Es2와 같이 표현한다.",
       "description": "LVDT의 차동출력은 두 2차 유도전압의 벡터 차로 Eo=Es1-Es2와 같이 표현한다."
     },
     {
       "id": "lvdt_null_position_voltage_balance",
       "anchor_id": "lvdt_null_position_voltage_balance",
-      "statement": "전기적 영점에서는 두 2차 전압의 크기가 같아 직렬 역접속 차동출력이 이상적으로 0이 되며 각 2차 전압 자체가 0인 것은 아니다.",
+      "statement": "두 2차 전압은 페이저 또는 동일 기준의 순간신호로 비교한다. 이상적인 전기적 영점에서는 두 2차 전압의 크기와 위상이 같아 E_s1=E_s2가 되고 직렬 역접속 차동출력 E_o=E_s1-E_s2는 0이 된다. 두 2차 전압 각각이 0이 되는 것은 아니다.",
       "importance": "core",
       "keywords": [
         "전기적 영점",
@@ -167,16 +167,17 @@
         "상쇄"
       ],
       "accepted_explanations": [
-        "전기적 영점에서는 두 2차 전압의 크기가 같아 직렬 역접속 차동출력이 이상적으로 0이 되며 각 2차 전압 자체가 0인 것은 아니다.",
+        "두 2차 전압은 페이저 또는 동일 기준의 순간신호로 비교한다. 이상적인 전기적 영점에서는 두 2차 전압의 크기와 위상이 같아 E_s1=E_s2가 되고 직렬 역접속 차동출력 E_o=E_s1-E_s2는 0이 된다. 두 2차 전압 각각이 0이 되는 것은 아니다.",
         "영점에서 두 2차 전압의 크기가 같아 차동출력이 상쇄되는 원리을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
       ],
       "rejected_explanations": [
-        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
+        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다.",
+        "두 2차 전압의 크기만 같으면 위상에 관계없이 차동출력이 항상 0이라고 설명하거나 두 2차 전압 각각이 영점에서 0이라고 설명한다."
       ],
-      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
-      "claim": "전기적 영점에서는 두 2차 전압의 크기가 같아 직렬 역접속 차동출력이 이상적으로 0이 되며 각 2차 전압 자체가 0인 것은 아니다.",
-      "description": "전기적 영점에서는 두 2차 전압의 크기가 같아 직렬 역접속 차동출력이 이상적으로 0이 되며 각 2차 전압 자체가 0인 것은 아니다."
+      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다. 영점 조건을 E_s1=E_s2의 벡터 equality로 설명하는지 평가한다.",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
+      "claim": "두 2차 전압은 페이저 또는 동일 기준의 순간신호로 비교한다. 이상적인 전기적 영점에서는 두 2차 전압의 크기와 위상이 같아 E_s1=E_s2가 되고 직렬 역접속 차동출력 E_o=E_s1-E_s2는 0이 된다. 두 2차 전압 각각이 0이 되는 것은 아니다.",
+      "description": "두 2차 전압은 페이저 또는 동일 기준의 순간신호로 비교한다. 이상적인 전기적 영점에서는 두 2차 전압의 크기와 위상이 같아 E_s1=E_s2가 되고 직렬 역접속 차동출력 E_o=E_s1-E_s2는 0이 된다. 두 2차 전압 각각이 0이 되는 것은 아니다."
     },
     {
       "id": "lvdt_output_amplitude_displacement",
@@ -203,14 +204,14 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "영점 부근의 규정 선형범위에서는 LVDT 출력 진폭이 영점으로부터의 변위 크기에 근사적으로 비례한다.",
       "description": "영점 부근의 규정 선형범위에서는 LVDT 출력 진폭이 영점으로부터의 변위 크기에 근사적으로 비례한다."
     },
     {
       "id": "lvdt_output_phase_direction",
       "anchor_id": "lvdt_output_phase_direction",
-      "statement": "기준 여자신호에 대한 LVDT 출력의 위상은 철심 이동 방향을 나타내며 반대 방향에서는 약 180도 위상반전이 발생한다.",
+      "statement": "두 이동 방향의 차동출력은 영점을 기준으로 약 180도의 상대 위상반전을 보인다. 실제 방향 판별은 센서, 케이블과 신호조절기의 위상지연을 고려한 기준위상 또는 동등한 극성 판별 방식으로 수행한다.",
       "importance": "core",
       "keywords": [
         "출력 위상",
@@ -225,16 +226,17 @@
         "180도"
       ],
       "accepted_explanations": [
-        "기준 여자신호에 대한 LVDT 출력의 위상은 철심 이동 방향을 나타내며 반대 방향에서는 약 180도 위상반전이 발생한다.",
+        "두 이동 방향의 차동출력은 영점을 기준으로 약 180도의 상대 위상반전을 보인다. 실제 방향 판별은 센서, 케이블과 신호조절기의 위상지연을 고려한 기준위상 또는 동등한 극성 판별 방식으로 수행한다.",
         "기준 여자신호에 대한 출력 위상과 이동 방향의 관계을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
       ],
       "rejected_explanations": [
-        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
+        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다.",
+        "원시 2차 출력이 센서·케이블 조건과 무관하게 항상 여자신호에 대해 정확히 0도 또는 180도라고 설명한다."
       ],
-      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
-      "claim": "기준 여자신호에 대한 LVDT 출력의 위상은 철심 이동 방향을 나타내며 반대 방향에서는 약 180도 위상반전이 발생한다.",
-      "description": "기준 여자신호에 대한 LVDT 출력의 위상은 철심 이동 방향을 나타내며 반대 방향에서는 약 180도 위상반전이 발생한다."
+      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다. 상대 위상반전과 실제 기준위상 보상을 구분하는지 평가한다.",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
+      "claim": "두 이동 방향의 차동출력은 영점을 기준으로 약 180도의 상대 위상반전을 보인다. 실제 방향 판별은 센서, 케이블과 신호조절기의 위상지연을 고려한 기준위상 또는 동등한 극성 판별 방식으로 수행한다.",
+      "description": "두 이동 방향의 차동출력은 영점을 기준으로 약 180도의 상대 위상반전을 보인다. 실제 방향 판별은 센서, 케이블과 신호조절기의 위상지연을 고려한 기준위상 또는 동등한 극성 판별 방식으로 수행한다."
     },
     {
       "id": "lvdt_linear_measurement_range",
@@ -261,14 +263,14 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "LVDT는 전체 철심 이동범위가 아니라 제조사가 규정한 영점 부근 범위에서만 출력과 변위의 충분한 선형성을 보장한다.",
       "description": "LVDT는 전체 철심 이동범위가 아니라 제조사가 규정한 영점 부근 범위에서만 출력과 변위의 충분한 선형성을 보장한다."
     },
     {
       "id": "lvdt_null_residual_voltage",
       "anchor_id": "lvdt_null_residual_voltage",
-      "statement": "권선 불균형, 누설자속, 기생 정전용량, 여자 고조파와 복조기 위상오차 때문에 실제 영점에 잔류 교류전압이 남을 수 있다.",
+      "statement": "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다.",
       "importance": "core",
       "keywords": [
         "영점 잔류전압",
@@ -283,21 +285,52 @@
         "고조파"
       ],
       "accepted_explanations": [
-        "권선 불균형, 누설자속, 기생 정전용량, 여자 고조파와 복조기 위상오차 때문에 실제 영점에 잔류 교류전압이 남을 수 있다.",
+        "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다.",
         "권선 불균형, 기생성분과 고조파에 의한 영점 잔류전압을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
       ],
       "rejected_explanations": [
-        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
+        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다.",
+        "실제 LVDT의 원시 AC 차동출력에는 영점 잔류전압이 발생할 수 없다고 설명한다."
       ],
-      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
-      "claim": "권선 불균형, 누설자속, 기생 정전용량, 여자 고조파와 복조기 위상오차 때문에 실제 영점에 잔류 교류전압이 남을 수 있다.",
-      "description": "권선 불균형, 누설자속, 기생 정전용량, 여자 고조파와 복조기 위상오차 때문에 실제 영점에 잔류 교류전압이 남을 수 있다."
+      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다. 센서 원시 AC null residual의 물리적 원인을 평가한다.",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
+      "claim": "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다.",
+      "description": "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다."
+    },
+    {
+      "id": "lvdt_demodulated_zero_offset",
+      "anchor_id": "lvdt_null_residual_voltage",
+      "statement": "복조 후 DC zero offset은 기준위상 오차, 위상보상 불량, 증폭기 오프셋과 온도 드리프트 때문에 발생할 수 있다. 이는 센서 원시 AC null residual voltage와 구분하여 교정하고 진단한다.",
+      "importance": "core",
+      "keywords": [
+        "복조기 기준위상",
+        "위상보상",
+        "증폭기 오프셋",
+        "온도 드리프트",
+        "DC zero offset"
+      ],
+      "core_terms": [
+        "복조기 기준위상",
+        "위상보상",
+        "증폭기 오프셋",
+        "온도 드리프트",
+        "DC zero offset"
+      ],
+      "accepted_explanations": [
+        "복조 후 DC zero offset은 기준위상 오차, 위상보상 불량, 증폭기 오프셋과 온도 드리프트 때문에 발생할 수 있다. 이는 센서 원시 AC null residual voltage와 구분하여 교정하고 진단한다."
+      ],
+      "rejected_explanations": [
+        "복조기 기준위상 오차와 증폭기 오프셋을 센서 자체의 원시 AC null residual voltage와 동일한 현상으로 설명한다."
+      ],
+      "grading_notes": "신호조절기의 DC zero offset과 센서 AC 잔류전압을 분리해 평가한다.",
+      "source_basis": "Analog Devices AD598 data sheet: LVDT signal conditioning, phase compensation, demodulation and output-offset behaviour.",
+      "claim": "복조 후 DC zero offset은 기준위상 오차, 위상보상 불량, 증폭기 오프셋과 온도 드리프트 때문에 발생할 수 있다. 이는 센서 원시 AC null residual voltage와 구분하여 교정하고 진단한다.",
+      "description": "복조 후 DC zero offset은 기준위상 오차, 위상보상 불량, 증폭기 오프셋과 온도 드리프트 때문에 발생할 수 있다. 이는 센서 원시 AC null residual voltage와 구분하여 교정하고 진단한다."
     },
     {
       "id": "lvdt_phase_sensitive_demodulation",
       "anchor_id": "lvdt_phase_sensitive_demodulation",
-      "statement": "위상민감 복조 또는 동기검파는 LVDT 차동출력과 기준 여자신호의 위상관계를 이용하여 변위의 크기와 부호를 복원한다.",
+      "statement": "위상민감 복조와 저역통과필터는 대표적인 부호 변위 복원 방식이다. 두 2차 신호를 개별 취득하여 정류·필터링한 뒤 V_A-V_B 또는 (V_A-V_B)/(V_A+V_B)를 계산하는 방식도 합 신호가 유효하고 적용조건을 설명하면 정답으로 인정한다.",
       "importance": "core",
       "keywords": [
         "위상민감 복조",
@@ -312,16 +345,17 @@
         "방향 판별"
       ],
       "accepted_explanations": [
-        "위상민감 복조 또는 동기검파는 LVDT 차동출력과 기준 여자신호의 위상관계를 이용하여 변위의 크기와 부호를 복원한다.",
+        "위상민감 복조와 저역통과필터는 대표적인 부호 변위 복원 방식이다. 두 2차 신호를 개별 취득하여 정류·필터링한 뒤 V_A-V_B 또는 (V_A-V_B)/(V_A+V_B)를 계산하는 방식도 합 신호가 유효하고 적용조건을 설명하면 정답으로 인정한다.",
         "위상민감 복조 또는 동기검파를 통한 방향 판별을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
       ],
       "rejected_explanations": [
-        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
+        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다.",
+        "위상민감 복조만이 유일한 유효 방식이며 개별 2차 정류 또는 difference/sum 방식은 항상 오답이라고 설명한다."
       ],
-      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
-      "claim": "위상민감 복조 또는 동기검파는 LVDT 차동출력과 기준 여자신호의 위상관계를 이용하여 변위의 크기와 부호를 복원한다.",
-      "description": "위상민감 복조 또는 동기검파는 LVDT 차동출력과 기준 여자신호의 위상관계를 이용하여 변위의 크기와 부호를 복원한다."
+      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다. 동기복조와 ratiometric 대체방식의 적용조건을 평가한다.",
+      "source_basis": "Analog Devices AD598 data sheet: excitation, individual secondary processing, demodulation, phase compensation, ratiometric output and bandwidth design.",
+      "claim": "위상민감 복조와 저역통과필터는 대표적인 부호 변위 복원 방식이다. 두 2차 신호를 개별 취득하여 정류·필터링한 뒤 V_A-V_B 또는 (V_A-V_B)/(V_A+V_B)를 계산하는 방식도 합 신호가 유효하고 적용조건을 설명하면 정답으로 인정한다.",
+      "description": "위상민감 복조와 저역통과필터는 대표적인 부호 변위 복원 방식이다. 두 2차 신호를 개별 취득하여 정류·필터링한 뒤 V_A-V_B 또는 (V_A-V_B)/(V_A+V_B)를 계산하는 방식도 합 신호가 유효하고 적용조건을 설명하면 정답으로 인정한다."
     },
     {
       "id": "lvdt_low_pass_dc_output",
@@ -348,14 +382,14 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "Analog Devices AD598 data sheet: excitation, individual secondary processing, demodulation, phase compensation, ratiometric output and bandwidth design.",
       "claim": "동기검파 후 저역통과필터는 반송파와 고조파를 억제하여 부호가 있는 직류 변위출력을 생성하며 대역폭과 리플을 절충한다.",
       "description": "동기검파 후 저역통과필터는 반송파와 고조파를 억제하여 부호가 있는 직류 변위출력을 생성하며 대역폭과 리플을 절충한다."
     },
     {
       "id": "lvdt_excitation_frequency_voltage_sensitivity",
       "anchor_id": "lvdt_excitation_frequency_voltage_sensitivity",
-      "statement": "여자전압과 여자주파수는 LVDT의 감도, 위상, 발열, 신호대잡음비, 자기포화와 측정대역에 영향을 준다.",
+      "statement": "LVDT 변위정보는 여자 반송파의 포락선에 실리므로 여자주파수는 요구 기계적 측정대역보다 충분히 높아야 한다. 구체적인 비율과 여자전압은 센서 및 신호조절기의 허용 주파수, 감도, 발열과 자기포화 사양을 함께 확인하여 선정한다.",
       "importance": "core",
       "keywords": [
         "여자전압",
@@ -370,16 +404,17 @@
         "발열"
       ],
       "accepted_explanations": [
-        "여자전압과 여자주파수는 LVDT의 감도, 위상, 발열, 신호대잡음비, 자기포화와 측정대역에 영향을 준다.",
+        "LVDT 변위정보는 여자 반송파의 포락선에 실리므로 여자주파수는 요구 기계적 측정대역보다 충분히 높아야 한다. 구체적인 비율과 여자전압은 센서 및 신호조절기의 허용 주파수, 감도, 발열과 자기포화 사양을 함께 확인하여 선정한다.",
         "여자전압·주파수가 감도, 위상과 발열에 미치는 영향을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
       ],
       "rejected_explanations": [
-        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
+        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다.",
+        "여자주파수와 여자전압이 감도, 발열, 위상, 측정대역과 자기포화에 영향을 주지 않는다고 설명한다."
       ],
-      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
-      "claim": "여자전압과 여자주파수는 LVDT의 감도, 위상, 발열, 신호대잡음비, 자기포화와 측정대역에 영향을 준다.",
-      "description": "여자전압과 여자주파수는 LVDT의 감도, 위상, 발열, 신호대잡음비, 자기포화와 측정대역에 영향을 준다."
+      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다. 여자 반송파와 측정대역 및 센서 허용조건을 평가한다.",
+      "source_basis": "Analog Devices AD598 data sheet: excitation, individual secondary processing, demodulation, phase compensation, ratiometric output and bandwidth design.",
+      "claim": "LVDT 변위정보는 여자 반송파의 포락선에 실리므로 여자주파수는 요구 기계적 측정대역보다 충분히 높아야 한다. 구체적인 비율과 여자전압은 센서 및 신호조절기의 허용 주파수, 감도, 발열과 자기포화 사양을 함께 확인하여 선정한다.",
+      "description": "LVDT 변위정보는 여자 반송파의 포락선에 실리므로 여자주파수는 요구 기계적 측정대역보다 충분히 높아야 한다. 구체적인 비율과 여자전압은 센서 및 신호조절기의 허용 주파수, 감도, 발열과 자기포화 사양을 함께 확인하여 선정한다."
     },
     {
       "id": "lvdt_core_alignment_eccentricity_error",
@@ -406,7 +441,7 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다.",
       "description": "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다."
     },
@@ -435,7 +470,7 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "온도변화는 코일저항, 여자전류, 감도, 영점, 절연특성, 전자회로 오프셋과 설치구조의 열팽창을 변화시킨다.",
       "description": "온도변화는 코일저항, 여자전류, 감도, 영점, 절연특성, 전자회로 오프셋과 설치구조의 열팽창을 변화시킨다."
     },
@@ -464,7 +499,7 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다.",
       "description": "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다."
     },
@@ -493,14 +528,14 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "United Electronic Industries LVDT/RVDT tutorial: four-, five- and six-wire connections, shielding and independent secondary-signal acquisition.",
       "claim": "케이블 정전용량, 신호 감쇠, EMI, 차폐 불량과 접지루프는 LVDT 출력의 진폭·위상·영점 안정성을 악화시킬 수 있다.",
       "description": "케이블 정전용량, 신호 감쇠, EMI, 차폐 불량과 접지루프는 LVDT 출력의 진폭·위상·영점 안정성을 악화시킬 수 있다."
     },
     {
       "id": "lvdt_dynamic_response_frequency_bandwidth",
       "anchor_id": "lvdt_dynamic_response_frequency_bandwidth",
-      "statement": "LVDT 측정대역은 철심과 연결기구의 기계특성, 여자주파수, 복조기, 저역통과필터, 증폭기와 케이블의 대역폭을 함께 고려한다.",
+      "statement": "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
       "importance": "core",
       "keywords": [
         "동특성",
@@ -515,21 +550,22 @@
         "복조기 대역폭"
       ],
       "accepted_explanations": [
-        "LVDT 측정대역은 철심과 연결기구의 기계특성, 여자주파수, 복조기, 저역통과필터, 증폭기와 케이블의 대역폭을 함께 고려한다.",
+        "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
         "기계계, 여자, 복조기와 필터에 의한 동특성을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
       ],
       "rejected_explanations": [
-        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
+        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다.",
+        "복조 후 필터 대역폭이 응답지연, 리플 및 잡음에 아무 영향도 주지 않는다고 설명한다."
       ],
-      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
-      "claim": "LVDT 측정대역은 철심과 연결기구의 기계특성, 여자주파수, 복조기, 저역통과필터, 증폭기와 케이블의 대역폭을 함께 고려한다.",
-      "description": "LVDT 측정대역은 철심과 연결기구의 기계특성, 여자주파수, 복조기, 저역통과필터, 증폭기와 케이블의 대역폭을 함께 고려한다."
+      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다. 필터 대역폭의 응답과 리플 상충관계를 평가한다.",
+      "source_basis": "Analog Devices AD598 data sheet: excitation, individual secondary processing, demodulation, phase compensation, ratiometric output and bandwidth design.",
+      "claim": "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
+      "description": "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다."
     },
     {
       "id": "rvdt_rotary_angle_measurement",
       "anchor_id": "rvdt_rotary_angle_measurement",
-      "statement": "RVDT는 차동변압기 원리를 회전 자성체에 적용하며 규정된 각도범위에서 출력 진폭과 위상으로 회전각 크기와 방향을 측정한다.",
+      "statement": "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
       "importance": "core",
       "keywords": [
         "RVDT",
@@ -544,16 +580,17 @@
         "각도범위"
       ],
       "accepted_explanations": [
-        "RVDT는 차동변압기 원리를 회전 자성체에 적용하며 규정된 각도범위에서 출력 진폭과 위상으로 회전각 크기와 방향을 측정한다.",
+        "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
         "RVDT의 회전각 측정원리와 제한 각도범위을 원리, 신호흐름, 적용조건과 오차요인으로 연결하여 설명한다."
       ],
       "rejected_explanations": [
-        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
+        "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다.",
+        "특정 선형 각도범위를 모든 RVDT의 공통 절대범위로 일반화한다."
       ],
-      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
-      "claim": "RVDT는 차동변압기 원리를 회전 자성체에 적용하며 규정된 각도범위에서 출력 진폭과 위상으로 회전각 크기와 방향을 측정한다.",
-      "description": "RVDT는 차동변압기 원리를 회전 자성체에 적용하며 규정된 각도범위에서 출력 진폭과 위상으로 회전각 크기와 방향을 측정한다."
+      "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다. 제품별 교정범위와 비선형 사양을 확인하는지 평가한다.",
+      "source_basis": "TE Connectivity and manufacturer RVDT product documentation: differential rotary-transformer operation, calibrated angular range and nonlinearity.",
+      "claim": "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
+      "description": "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다."
     },
     {
       "id": "lvdt_calibration_traceability_diagnostics",
@@ -580,7 +617,7 @@
         "관련 용어만 나열하거나 LVDT의 교류 여자, 차동출력, 위상 또는 적용조건을 반대로 설명한다."
       ],
       "grading_notes": "차동변압기 물리원리, 진폭·위상 해석, 복조, 선형범위와 현장 설치오차의 인과관계를 평가한다.",
-      "source_basis": "docs/topic_sheets/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error.md",
+      "source_basis": "TE Connectivity LVDT Tutorial and NewTek LVDT technical guidance: transformer structure, series-opposed secondaries, null balance, displacement amplitude, linearity and direction reversal.",
       "claim": "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다.",
       "description": "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다."
     }
@@ -594,9 +631,8 @@
       "correct_rule": "LVDT는 교류 여자와 교류 자속을 이용한다.",
       "severity": "fatal",
       "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
+        "B",
+        "C"
       ],
       "message": "LVDT는 교류 여자와 교류 자속을 이용한다.",
       "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
@@ -610,9 +646,8 @@
       "correct_rule": "두 2차 코일은 차동출력을 얻기 위해 직렬 역접속한다.",
       "severity": "fatal",
       "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
+        "B",
+        "C"
       ],
       "message": "두 2차 코일은 차동출력을 얻기 위해 직렬 역접속한다.",
       "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
@@ -626,9 +661,8 @@
       "correct_rule": "두 2차 전압의 크기가 같아 직렬 역접속 차동출력이 이상적으로 0이 된다.",
       "severity": "fatal",
       "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
+        "B",
+        "C"
       ],
       "message": "두 2차 전압의 크기가 같아 직렬 역접속 차동출력이 이상적으로 0이 된다.",
       "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
@@ -642,9 +676,8 @@
       "correct_rule": "진폭은 변위량을 나타내고 기준 여자신호에 대한 위상은 방향을 나타낸다.",
       "severity": "fatal",
       "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
+        "B",
+        "C"
       ],
       "message": "진폭은 변위량을 나타내고 기준 여자신호에 대한 위상은 방향을 나타낸다.",
       "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
@@ -658,9 +691,8 @@
       "correct_rule": "원시 차동출력은 교류이며 직류 신호에는 복조와 필터가 필요하다.",
       "severity": "fatal",
       "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
+        "B",
+        "C"
       ],
       "message": "원시 차동출력은 교류이며 직류 신호에는 복조와 필터가 필요하다.",
       "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
@@ -674,9 +706,8 @@
       "correct_rule": "규정된 영점 부근 선형범위에서만 충분한 비례관계를 보장한다.",
       "severity": "fatal",
       "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
+        "B",
+        "C"
       ],
       "message": "규정된 영점 부근 선형범위에서만 충분한 비례관계를 보장한다.",
       "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
@@ -690,9 +721,8 @@
       "correct_rule": "여자조건은 감도, 위상, 발열, 포화와 주파수응답에 영향을 준다.",
       "severity": "fatal",
       "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
+        "B",
+        "C"
       ],
       "message": "여자조건은 감도, 위상, 발열, 포화와 주파수응답에 영향을 준다.",
       "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
@@ -706,27 +736,10 @@
       "correct_rule": "철심은 자기결합을 변화시키며 일반적으로 코일과 접촉하지 않는다.",
       "severity": "fatal",
       "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
+        "B",
+        "C"
       ],
       "message": "철심은 자기결합을 변화시키며 일반적으로 코일과 접촉하지 않는다.",
-      "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
-      "grading_notes": "답안에서 이 주장을 명시하면 관련 핵심원리와 신호처리 이해가 무너진 것으로 평가한다."
-    },
-    {
-      "id": "lvdt_fatal_no_null_residual",
-      "claim": "실제 LVDT에서는 영점 잔류전압이 발생하지 않는다.",
-      "correction": "권선 불균형, 기생 정전용량, 고조파와 비대칭으로 영점 잔류전압이 발생할 수 있다.",
-      "wrong_claim": "실제 LVDT에서는 영점 잔류전압이 발생하지 않는다.",
-      "correct_rule": "권선 불균형, 기생 정전용량, 고조파와 비대칭으로 영점 잔류전압이 발생할 수 있다.",
-      "severity": "fatal",
-      "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
-      ],
-      "message": "권선 불균형, 기생 정전용량, 고조파와 비대칭으로 영점 잔류전압이 발생할 수 있다.",
       "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
       "grading_notes": "답안에서 이 주장을 명시하면 관련 핵심원리와 신호처리 이해가 무너진 것으로 평가한다."
     },
@@ -738,9 +751,8 @@
       "correct_rule": "RVDT는 차동변압기 원리를 이용하여 제한된 범위의 회전각을 측정한다.",
       "severity": "fatal",
       "affected_layers": [
-        "fact",
-        "logic",
-        "model_answer"
+        "B",
+        "C"
       ],
       "message": "RVDT는 차동변압기 원리를 이용하여 제한된 범위의 회전각을 측정한다.",
       "description": "LVDT·RVDT의 여자방식, 차동결선, 영점, 위상, 선형범위 또는 측정량을 반대로 설명하는 중대한 오개념이다.",
@@ -753,20 +765,20 @@
     "두 2차 코일은 직렬 역접속하여 공통 유도성분을 상쇄하고 철심 위치에 따른 차동전압을 출력한다.",
     "가동 철심의 위치가 변하면 각 2차 코일과의 상호인덕턴스와 결합계수가 서로 반대 방향으로 변한다.",
     "LVDT의 차동출력은 두 2차 유도전압의 벡터 차로 Eo=Es1-Es2와 같이 표현한다.",
-    "전기적 영점에서는 두 2차 전압의 크기가 같아 직렬 역접속 차동출력이 이상적으로 0이 되며 각 2차 전압 자체가 0인 것은 아니다.",
+    "두 2차 전압은 페이저 또는 동일 기준의 순간신호로 비교한다. 이상적인 전기적 영점에서는 두 2차 전압의 크기와 위상이 같아 E_s1=E_s2가 되고 직렬 역접속 차동출력 E_o=E_s1-E_s2는 0이 된다. 두 2차 전압 각각이 0이 되는 것은 아니다.",
     "영점 부근의 규정 선형범위에서는 LVDT 출력 진폭이 영점으로부터의 변위 크기에 근사적으로 비례한다.",
-    "기준 여자신호에 대한 LVDT 출력의 위상은 철심 이동 방향을 나타내며 반대 방향에서는 약 180도 위상반전이 발생한다.",
+    "두 이동 방향의 차동출력은 영점을 기준으로 약 180도의 상대 위상반전을 보인다. 실제 방향 판별은 센서, 케이블과 신호조절기의 위상지연을 고려한 기준위상 또는 동등한 극성 판별 방식으로 수행한다.",
     "LVDT는 전체 철심 이동범위가 아니라 제조사가 규정한 영점 부근 범위에서만 출력과 변위의 충분한 선형성을 보장한다.",
-    "권선 불균형, 누설자속, 기생 정전용량, 여자 고조파와 복조기 위상오차 때문에 실제 영점에 잔류 교류전압이 남을 수 있다.",
-    "위상민감 복조 또는 동기검파는 LVDT 차동출력과 기준 여자신호의 위상관계를 이용하여 변위의 크기와 부호를 복원한다.",
+    "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다.",
+    "위상민감 복조와 저역통과필터는 대표적인 부호 변위 복원 방식이다. 두 2차 신호를 개별 취득하여 정류·필터링한 뒤 V_A-V_B 또는 (V_A-V_B)/(V_A+V_B)를 계산하는 방식도 합 신호가 유효하고 적용조건을 설명하면 정답으로 인정한다.",
     "동기검파 후 저역통과필터는 반송파와 고조파를 억제하여 부호가 있는 직류 변위출력을 생성하며 대역폭과 리플을 절충한다.",
-    "여자전압과 여자주파수는 LVDT의 감도, 위상, 발열, 신호대잡음비, 자기포화와 측정대역에 영향을 준다.",
+    "LVDT 변위정보는 여자 반송파의 포락선에 실리므로 여자주파수는 요구 기계적 측정대역보다 충분히 높아야 한다. 구체적인 비율과 여자전압은 센서 및 신호조절기의 허용 주파수, 감도, 발열과 자기포화 사양을 함께 확인하여 선정한다.",
     "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다.",
     "온도변화는 코일저항, 여자전류, 감도, 영점, 절연특성, 전자회로 오프셋과 설치구조의 열팽창을 변화시킨다.",
     "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다.",
     "케이블 정전용량, 신호 감쇠, EMI, 차폐 불량과 접지루프는 LVDT 출력의 진폭·위상·영점 안정성을 악화시킬 수 있다.",
-    "LVDT 측정대역은 철심과 연결기구의 기계특성, 여자주파수, 복조기, 저역통과필터, 증폭기와 케이블의 대역폭을 함께 고려한다.",
-    "RVDT는 차동변압기 원리를 회전 자성체에 적용하며 규정된 각도범위에서 출력 진폭과 위상으로 회전각 크기와 방향을 측정한다.",
+    "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
+    "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
     "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다."
   ],
   "revision_notes": [
@@ -781,7 +793,12 @@
     "deterministic_checks_disabled",
     "candidate_extraction_rules_empty",
     "manual_semantic_review_by_chatgpt",
-    "all_local_llm_calls_skipped"
+    "all_local_llm_calls_skipped",
+    "영점 조건을 두 2차 전압의 벡터 equality로 구체화했다.",
+    "센서 AC null residual과 신호조절기 DC zero offset을 분리했다.",
+    "ratiometric 및 개별 2차 신호처리를 조건부 정답으로 허용했다.",
+    "null residual 부정 주장을 Fatal에서 Major로 조정했다.",
+    "Fatal의 직접 점수 영향 레이어를 B/C로 제한했다."
   ],
   "topic_label": "LVDT·RVDT의 차동변압기 원리, 위상민감 복조, 변위·각도 측정 및 오차",
   "core_facts": [
@@ -790,20 +807,20 @@
     "두 2차 코일은 직렬 역접속하여 공통 유도성분을 상쇄하고 철심 위치에 따른 차동전압을 출력한다.",
     "가동 철심의 위치가 변하면 각 2차 코일과의 상호인덕턴스와 결합계수가 서로 반대 방향으로 변한다.",
     "LVDT의 차동출력은 두 2차 유도전압의 벡터 차로 Eo=Es1-Es2와 같이 표현한다.",
-    "전기적 영점에서는 두 2차 전압의 크기가 같아 직렬 역접속 차동출력이 이상적으로 0이 되며 각 2차 전압 자체가 0인 것은 아니다.",
+    "두 2차 전압은 페이저 또는 동일 기준의 순간신호로 비교한다. 이상적인 전기적 영점에서는 두 2차 전압의 크기와 위상이 같아 E_s1=E_s2가 되고 직렬 역접속 차동출력 E_o=E_s1-E_s2는 0이 된다. 두 2차 전압 각각이 0이 되는 것은 아니다.",
     "영점 부근의 규정 선형범위에서는 LVDT 출력 진폭이 영점으로부터의 변위 크기에 근사적으로 비례한다.",
-    "기준 여자신호에 대한 LVDT 출력의 위상은 철심 이동 방향을 나타내며 반대 방향에서는 약 180도 위상반전이 발생한다.",
+    "두 이동 방향의 차동출력은 영점을 기준으로 약 180도의 상대 위상반전을 보인다. 실제 방향 판별은 센서, 케이블과 신호조절기의 위상지연을 고려한 기준위상 또는 동등한 극성 판별 방식으로 수행한다.",
     "LVDT는 전체 철심 이동범위가 아니라 제조사가 규정한 영점 부근 범위에서만 출력과 변위의 충분한 선형성을 보장한다.",
-    "권선 불균형, 누설자속, 기생 정전용량, 여자 고조파와 복조기 위상오차 때문에 실제 영점에 잔류 교류전압이 남을 수 있다.",
-    "위상민감 복조 또는 동기검파는 LVDT 차동출력과 기준 여자신호의 위상관계를 이용하여 변위의 크기와 부호를 복원한다.",
+    "실제 LVDT의 전기적 영점에서는 권선 불균형, 기생 정전용량, 누설자속, 여자 고조파와 자기회로 비대칭 때문에 원시 차동 AC 출력에 null residual voltage가 남을 수 있다.",
+    "위상민감 복조와 저역통과필터는 대표적인 부호 변위 복원 방식이다. 두 2차 신호를 개별 취득하여 정류·필터링한 뒤 V_A-V_B 또는 (V_A-V_B)/(V_A+V_B)를 계산하는 방식도 합 신호가 유효하고 적용조건을 설명하면 정답으로 인정한다.",
     "동기검파 후 저역통과필터는 반송파와 고조파를 억제하여 부호가 있는 직류 변위출력을 생성하며 대역폭과 리플을 절충한다.",
-    "여자전압과 여자주파수는 LVDT의 감도, 위상, 발열, 신호대잡음비, 자기포화와 측정대역에 영향을 준다.",
+    "LVDT 변위정보는 여자 반송파의 포락선에 실리므로 여자주파수는 요구 기계적 측정대역보다 충분히 높아야 한다. 구체적인 비율과 여자전압은 센서 및 신호조절기의 허용 주파수, 감도, 발열과 자기포화 사양을 함께 확인하여 선정한다.",
     "철심과 코일축의 편심, 축 정렬 불량, 마찰과 기계적 유격은 결합 비대칭, 영점 이동, 히스테리시스와 반복성 오차를 만든다.",
     "온도변화는 코일저항, 여자전류, 감도, 영점, 절연특성, 전자회로 오프셋과 설치구조의 열팽창을 변화시킨다.",
     "과도한 여자 또는 부적절한 자기회로로 자기포화가 발생하면 파형왜곡, 고조파, 감도 비선형과 복조오차가 증가한다.",
     "케이블 정전용량, 신호 감쇠, EMI, 차폐 불량과 접지루프는 LVDT 출력의 진폭·위상·영점 안정성을 악화시킬 수 있다.",
-    "LVDT 측정대역은 철심과 연결기구의 기계특성, 여자주파수, 복조기, 저역통과필터, 증폭기와 케이블의 대역폭을 함께 고려한다.",
-    "RVDT는 차동변압기 원리를 회전 자성체에 적용하며 규정된 각도범위에서 출력 진폭과 위상으로 회전각 크기와 방향을 측정한다.",
+    "복조 후 필터 대역폭을 높이면 응답은 빨라지지만 반송파 리플과 잡음이 증가할 수 있다. 대역폭을 낮추면 리플은 감소하지만 응답지연이 증가하므로 요구 동특성과 출력 리플을 함께 검증한다.",
+    "RVDT는 회전각을 차동출력으로 변환하지만 선형 각도범위와 허용 비선형은 제품의 자기회로, 권선과 기구 설계에 따라 달라진다. 특정 각도값을 모든 RVDT에 일반화하지 않고 제조사 교정범위와 데이터시트를 확인한다.",
     "LVDT와 신호조절기는 영점, 감도, 선형성, 위상과 주파수응답을 측정사슬 상태로 교정하고 불확도와 추적성을 관리해야 한다."
   ]
 }
