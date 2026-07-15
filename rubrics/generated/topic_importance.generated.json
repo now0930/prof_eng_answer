@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-14T04:11:34Z-generated-topic-pack-importance",
+  "version": "2026-07-15T03:19:59Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -463,6 +463,27 @@
         "candidate_extraction_rules_empty"
       ],
       "topic_label": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "반사형 왕복시간과 d=ct/2를 정확히 설명한다.",
+        "음속의 온도·매질 의존성과 온도보상을 설명한다.",
+        "링다운과 수신회복시간에 따른 사각지대를 설명한다.",
+        "빔각, 대상물 반사특성과 주파수 절충관계를 설명한다.",
+        "허위에코, 공정조건, 설치오차와 대책을 연결한다.",
+        "레이더식과의 적용성을 공정조건에 근거하여 비교한다."
+      ],
+      "note": "초음파 센서는 비접촉 거리·레벨 계측의 핵심 주제이다.",
+      "revision_notes": [
+        "난이도를 THEORY_CORE로 설정했다.",
+        "선택 중요도를 CORE_MUST_PREPARE로 설정했다."
+      ],
+      "topic_label": "초음파 거리·레벨 센서"
     }
   ]
 }

@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-14T04:11:34Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-15T03:19:59Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -1400,6 +1400,19 @@
       "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
       "enabled": false,
       "topic_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
+      "enabled": false,
+      "topic_name": "초음파 센서의 비행시간 원리, 거리·레벨 측정, 온도보상 및 반사·설치 오차",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "difficulty_profile": "THEORY_CORE",
       "topic_aliases": [],

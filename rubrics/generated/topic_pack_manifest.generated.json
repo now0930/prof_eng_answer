@@ -1,10 +1,10 @@
 {
-  "version": "2026-07-14T04:11:34Z-generated-topic-pack-manifest",
+  "version": "2026-07-15T03:19:59Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 20,
+  "topic_count": 21,
   "topics": [
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
@@ -198,6 +198,16 @@
     },
     {
       "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
