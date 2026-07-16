@@ -2,8 +2,8 @@
 
 - Topic ID: `piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration`
 - 문항 유형: `PRINCIPLE_INTERPRETATION`
-- 이론 깊이: `THEORY_CORE`
-- 준비 우선순위: `CORE_MUST_PREPARE`
+- 이론 깊이: `FIELD_APPLICATION`
+- 준비 우선순위: `NORMAL`
 - 채점 방식: `LLM_ONLY`
 
 ## Source

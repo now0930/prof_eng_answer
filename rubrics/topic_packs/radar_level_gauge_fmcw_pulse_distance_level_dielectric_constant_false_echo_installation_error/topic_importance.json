@@ -1,8 +1,8 @@
 {
   "schema_version": "topic_pack.topic_importance.v1",
   "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-  "difficulty": "THEORY_CORE",
-  "selection_importance": "CORE_MUST_PREPARE",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
     "펄스식 왕복시간과 D=cτ/2를 정확히 설명한다.",
@@ -23,10 +23,11 @@
   ],
   "note": "레이더식 레벨계는 비접촉 레벨계측의 핵심 주제이며 펄스식과 FMCW식의 원리 구분이 고득점의 핵심이다.",
   "revision_notes": [
-    "난이도를 THEORY_CORE로 설정했다.",
-    "선택 중요도를 CORE_MUST_PREPARE로 설정했다.",
+    "난이도를 FIELD_APPLICATION로 설정했다.",
+    "선택 중요도를 NORMAL로 설정했다.",
     "반송주파수와 유효 변조 대역폭의 역할 및 액체·분체별 안테나 정렬조건을 구분했다.",
-    "기존 Radar Topic Pack에 GWR와 에코 분석을 통합했다."
+    "기존 Radar Topic Pack에 GWR와 에코 분석을 통합했다.",
+    "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
   ],
   "topic_label": "레이더식 레벨계"
 }

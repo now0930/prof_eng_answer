@@ -1,8 +1,8 @@
 {
   "schema_version": "topic_pack.topic_importance.v1",
   "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-  "difficulty": "THEORY_CORE",
-  "selection_importance": "CORE_MUST_PREPARE",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
     "반사형 왕복시간과 d=ct/2를 정확히 설명한다.",
@@ -14,8 +14,9 @@
   ],
   "note": "초음파 센서는 비접촉 거리·레벨 계측의 핵심 주제이다.",
   "revision_notes": [
-    "난이도를 THEORY_CORE로 설정했다.",
-    "선택 중요도를 CORE_MUST_PREPARE로 설정했다."
+    "난이도를 FIELD_APPLICATION로 설정했다.",
+    "선택 중요도를 NORMAL로 설정했다.",
+    "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
   ],
   "topic_label": "초음파 거리·레벨 센서"
 }

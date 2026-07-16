@@ -1,8 +1,8 @@
 {
   "schema_version": "topic_pack.topic_importance.v1",
   "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-  "difficulty": "THEORY_CORE",
-  "selection_importance": "CORE_MUST_PREPARE",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
     "기계적 하중에서 디지털 값까지의 측정사슬을 단절 없이 설명한다.",
@@ -26,7 +26,8 @@
     "manual_semantic_review_by_chatgpt",
     "all_local_llm_calls_skipped",
     "clarified_active_dummy_half_bridge_sensitivity",
-    "completed_chatgpt_manual_semantic_correction"
+    "completed_chatgpt_manual_semantic_correction",
+    "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
   ],
   "topic_label": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차"
 }

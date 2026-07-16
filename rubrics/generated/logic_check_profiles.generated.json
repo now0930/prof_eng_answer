@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-16T01:02:08Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-16T12:47:07Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -117,7 +117,7 @@
     {
       "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
       "display_name": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차",
-      "difficulty": "THEORY_CORE",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},
       "truth_schema": [
@@ -667,7 +667,7 @@
     {
       "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
       "display_name": "LVDT·RVDT의 차동변압기 원리, 위상민감 복조, 변위·각도 측정 및 오차",
-      "difficulty": "THEORY_CORE",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},
       "truth_schema": [
@@ -956,7 +956,7 @@
     {
       "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
       "display_name": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
-      "difficulty": "THEORY_CORE",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {
         "fatal_recommended_ceiling": 10.0,
         "fatal_confidence_threshold": 0.75
@@ -1135,7 +1135,7 @@
     {
       "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
       "display_name": "압전식 센서의 원리, 전하증폭기, 동적 힘·압력·가속도 측정 및 오차",
-      "difficulty": "THEORY_CORE",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},
       "truth_schema": [
@@ -1214,7 +1214,7 @@
     {
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
       "display_name": "레이더식 레벨계의 펄스·FMCW 거리계측, 유전율, 허위에코 및 설치오차를 평가한다.",
-      "difficulty": "레이더식 레벨계의 펄스·FMCW 거리계측, 유전율, 허위에코 및 설치오차를 평가한다.",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},
       "truth_schema": [
@@ -1590,7 +1590,7 @@
     {
       "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
       "display_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
-      "difficulty": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},
       "truth_schema": [
@@ -2125,7 +2125,7 @@
     {
       "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
       "display_name": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
-      "difficulty": "THEORY_CORE",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},
       "truth_schema": [
@@ -2205,11 +2205,11 @@
     {
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
       "display_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
-      "difficulty": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},
       "truth_schema": [
-        "[thermocouple_temperature_measurement_chain] Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
+        "[thermistor_temperature_measurement_chain] Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
         "[thermocouple_seebeck_effect_dissimilar_conductors] 서로 다른 두 도체로 폐회로를 구성하고 두 접점에 온도차가 존재하면 저항 변화이 발생한다. Thermistor의 출력은 단순히 금속 하나의 온도에서 발생하는 전압이 아니라, 재료 조합과 접점 온도의 함수이다. Seebeck 계수는 재료와 온도에 따라 달라지므로 Thermistor 출력은 전체 범위에서 완전한 직선이 아니다.",
         "[thermocouple_measures_temperature_difference] Thermistor 전압은 감온 소자 온도만의 함수가 아니다. 기준저항의 온도가 변하면 동일한 감온 소자 온도에서도 측정 전압이 달라진다. 따라서 Thermistor는 본질적으로 두 접점의 온도차에 대응하는 센서이며, 절대온도를 얻으려면 기준저항 온도를 알아야 한다.",
         "[thermocouple_reference_junction_compensation] 현대의 비선형 선형화은 기준저항을 실제 0°C로 유지하는 방식만을 의미하지 않는다. 일반적으로 입력 단자 주변의 온도를 별도 센서로 측정하고, 해당 기준저항 온도에 대응하는 저항 변화을 계산하여 측정 저항 변화과 결합한 뒤 감온 소자 온도로 환산한다. 선형화 센서 위치, 단자대의 등온성, 내부 온도구배와 보상 알고리즘은 오차에 영향을 준다.",
@@ -2245,7 +2245,7 @@
     {
       "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
       "display_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
-      "difficulty": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},
       "truth_schema": [
@@ -2285,7 +2285,7 @@
     {
       "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
       "display_name": "초음파 펄스 에코의 비행시간, 음속보상, 사각지대와 반사·설치 오차를 평가한다.",
-      "difficulty": "초음파 펄스 에코의 비행시간, 음속보상, 사각지대와 반사·설치 오차를 평가한다.",
+      "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},
       "truth_schema": [

@@ -1,8 +1,8 @@
 {
   "schema_version": "topic_pack.topic_importance.v1",
   "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
-  "difficulty": "THEORY_CORE",
-  "selection_importance": "CORE_MUST_PREPARE",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
     "Q=dF와 직접 압전효과를 정확히 설명한다.",
@@ -24,7 +24,8 @@
     "deterministic_checks_disabled",
     "candidate_extraction_rules_empty",
     "manual_semantic_review_by_chatgpt",
-    "all_local_llm_calls_skipped"
+    "all_local_llm_calls_skipped",
+    "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
   ],
   "topic_label": "압전식 센서의 원리, 전하증폭기, 동적 힘·압력·가속도 측정 및 오차"
 }

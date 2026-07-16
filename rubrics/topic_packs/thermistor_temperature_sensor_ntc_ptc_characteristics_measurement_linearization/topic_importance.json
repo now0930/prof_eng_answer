@@ -1,8 +1,8 @@
 {
   "schema_version": "topic_pack.topic_importance.v1",
   "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-  "difficulty": "THEORY_CORE",
-  "selection_importance": "CORE_MUST_PREPARE",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
     "Thermistor가 절대온도가 아니라 접점 온도차에 대응하는 저항 변화을 발생한다는 점을 설명한다.",
@@ -22,7 +22,8 @@
     "focused_on_ntc_ptc_measurement_self_heating_and_linearization",
     "deterministic_checks_disabled",
     "candidate_extraction_rules_empty",
-    "added_data_driven_routing_aliases_and_field_points"
+    "added_data_driven_routing_aliases_and_field_points",
+    "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
   ],
   "topic_label": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화"
 }

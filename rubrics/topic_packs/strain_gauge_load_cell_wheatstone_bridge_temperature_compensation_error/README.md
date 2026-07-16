@@ -2,8 +2,8 @@
 
 - Topic ID: `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`
 - Question type: `PRINCIPLE_INTERPRETATION`
-- Theory depth: `THEORY_CORE`
-- Priority: `CORE_MUST_PREPARE`
+- Theory depth: `FIELD_APPLICATION`
+- Priority: `NORMAL`
 - Grading mode: `LLM_ONLY`
 
 ## Scope

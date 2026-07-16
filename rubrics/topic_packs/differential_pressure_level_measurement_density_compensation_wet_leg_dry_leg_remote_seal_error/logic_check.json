@@ -6,7 +6,7 @@
     "enabled": false,
     "topic_name": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차",
     "question_type": "PRINCIPLE_INTERPRETATION",
-    "difficulty_profile": "THEORY_CORE",
+    "difficulty_profile": "FIELD_APPLICATION",
     "topic_aliases": [
       "차압식 레벨계",
       "DP level",
@@ -23,7 +23,7 @@
   },
   "llm_profile": {
     "display_name": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차",
-    "difficulty": "THEORY_CORE",
+    "difficulty": "FIELD_APPLICATION",
     "cap_policy": {},
     "candidate_extraction": {},
     "truth_schema": [

@@ -6,7 +6,7 @@
     "enabled": false,
     "topic_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
     "question_type": "PRINCIPLE_INTERPRETATION",
-    "difficulty_profile": "THEORY_CORE",
+    "difficulty_profile": "FIELD_APPLICATION",
     "topic_aliases": [],
     "fatal_checks": [],
     "major_checks": [],
@@ -16,11 +16,11 @@
   },
   "llm_profile": {
     "display_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
-    "difficulty": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+    "difficulty": "FIELD_APPLICATION",
     "cap_policy": {},
     "candidate_extraction": {},
     "truth_schema": [
-      "[thermocouple_temperature_measurement_chain] Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
+      "[thermistor_temperature_measurement_chain] Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
       "[thermocouple_seebeck_effect_dissimilar_conductors] 서로 다른 두 도체로 폐회로를 구성하고 두 접점에 온도차가 존재하면 저항 변화이 발생한다. Thermistor의 출력은 단순히 금속 하나의 온도에서 발생하는 전압이 아니라, 재료 조합과 접점 온도의 함수이다. Seebeck 계수는 재료와 온도에 따라 달라지므로 Thermistor 출력은 전체 범위에서 완전한 직선이 아니다.",
       "[thermocouple_measures_temperature_difference] Thermistor 전압은 감온 소자 온도만의 함수가 아니다. 기준저항의 온도가 변하면 동일한 감온 소자 온도에서도 측정 전압이 달라진다. 따라서 Thermistor는 본질적으로 두 접점의 온도차에 대응하는 센서이며, 절대온도를 얻으려면 기준저항 온도를 알아야 한다.",
       "[thermocouple_reference_junction_compensation] 현대의 비선형 선형화은 기준저항을 실제 0°C로 유지하는 방식만을 의미하지 않는다. 일반적으로 입력 단자 주변의 온도를 별도 센서로 측정하고, 해당 기준저항 온도에 대응하는 저항 변화을 계산하여 측정 저항 변화과 결합한 뒤 감온 소자 온도로 환산한다. 선형화 센서 위치, 단자대의 등온성, 내부 온도구배와 보상 알고리즘은 오차에 영향을 준다.",

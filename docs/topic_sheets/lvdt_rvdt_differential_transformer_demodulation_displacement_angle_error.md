@@ -18,8 +18,8 @@ Gemini, Ollama 또는 다른 LLM이 JSON을 생성하지 않는다.
 ## 2. Topic 메타데이터
 
 - `question_type`: `PRINCIPLE_INTERPRETATION`
-- `difficulty`: `THEORY_CORE`
-- `selection_importance`: `CORE_MUST_PREPARE`
+- `difficulty`: `FIELD_APPLICATION`
+- `selection_importance`: `NORMAL`
 - `semantic_execution`: `LLM_ONLY`
 - deterministic check: 비활성화
 - deterministic fatal check: 빈 배열

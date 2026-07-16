@@ -58,8 +58,8 @@ force lead와 sense lead를 분리하는 Kelvin 방식이다.
 ## 평가 계약
 
 - 문제 유형: `PRINCIPLE_INTERPRETATION`
-- 난이도: `THEORY_CORE`
-- 중요도: `CORE_MUST_PREPARE`
+- 난이도: `FIELD_APPLICATION`
+- 중요도: `NORMAL`
 - 평가 방식: `LLM_ONLY`
 - Fact Anchor: 14개
 - Fatal Wrong Claim: 8개

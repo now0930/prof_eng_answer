@@ -9,7 +9,12 @@ ROOT = Path(__file__).resolve().parents[1]
 PACK_ROOT = ROOT / "rubrics" / "topic_packs"
 
 ALLOWED_SEVERITY = {"fatal", "major", "minor", "warn", "info"}
-ALLOWED_IMPORTANCE = {"must", "important", "optional"}
+ALLOWED_IMPORTANCE = {
+    "core",
+    "must",
+    "important",
+    "optional",
+}
 ALLOWED_QUESTION_TYPES = {
     "DEFINE",
     "PRINCIPLE",
@@ -153,6 +158,19 @@ def validate_fact_anchor(pack_dir: Path, topic_id: str, global_anchor_ids: set[s
         anchor = require_object(raw_anchor, f"{path}: anchors[{idx}]")
         anchor_id = require_str(anchor.get("anchor_id"), f"{path}: anchors[{idx}].anchor_id")
 
+        record_id = anchor.get("id")
+        if record_id is not None:
+            record_id = require_str(
+                record_id,
+                f"{path}: anchors[{idx}].id",
+            )
+            if record_id != anchor_id:
+                fail(
+                    f"{path}: anchors[{idx}].id "
+                    f"must match anchor_id: "
+                    f"{record_id} != {anchor_id}"
+                )
+
         if anchor_id in local_anchor_ids:
             fail(f"{path}: duplicate local anchor_id: {anchor_id}")
 
@@ -175,6 +193,76 @@ def validate_fact_anchor(pack_dir: Path, topic_id: str, global_anchor_ids: set[s
     return local_anchor_ids
 
 
+def validate_expected_question_patterns(
+    raw_patterns: Any,
+    context: str,
+    anchor_ids: set[str],
+) -> None:
+    patterns = require_list(
+        raw_patterns,
+        context,
+    )
+
+    if not patterns:
+        fail(f"{context} must not be empty")
+
+    for idx, raw_pattern in enumerate(
+        patterns
+    ):
+        item_context = (
+            f"{context}[{idx}]"
+        )
+
+        if isinstance(raw_pattern, str):
+            require_str(
+                raw_pattern,
+                item_context,
+            )
+            continue
+
+        pattern = require_object(
+            raw_pattern,
+            item_context,
+        )
+
+        require_str(
+            pattern.get("pattern"),
+            f"{item_context}.pattern",
+        )
+
+        intent = pattern.get("intent")
+
+        if intent is not None:
+            require_str(
+                intent,
+                f"{item_context}.intent",
+            )
+
+        refs = pattern.get(
+            "required_anchor_ids",
+            [],
+        )
+
+        if refs is None:
+            refs = []
+
+        refs = require_list(
+            refs,
+            f"{item_context}.required_anchor_ids",
+        )
+
+        for ref_idx, ref in enumerate(refs):
+            ref = require_str(
+                ref,
+                f"{item_context}.required_anchor_ids[{ref_idx}]",
+            )
+
+            if ref not in anchor_ids:
+                fail(
+                    f"{context}[{idx}] references "
+                    f"missing anchor_id: {ref}"
+                )
+
 def validate_model_answer(pack_dir: Path, topic_id: str, anchor_ids: set[str]) -> None:
     path = pack_dir / "model_answer.json"
     if not path.exists():
@@ -194,7 +282,11 @@ def validate_model_answer(pack_dir: Path, topic_id: str, anchor_ids: set[str]) -
     if qtype not in ALLOWED_QUESTION_TYPES:
         fail(f"{path}: invalid question_type: {qtype}")
 
-    require_str_list(data.get("expected_question_patterns"), f"{path}: expected_question_patterns")
+    validate_expected_question_patterns(
+        data.get("expected_question_patterns"),
+        f"{path}: expected_question_patterns",
+        anchor_ids,
+    )
     require_str_list(data.get("high_score_points"), f"{path}: high_score_points")
     require_str_list(data.get("common_missing_points"), f"{path}: common_missing_points")
     require_str_list(data.get("routing_aliases"), f"{path}: routing_aliases")
@@ -205,19 +297,55 @@ def validate_model_answer(pack_dir: Path, topic_id: str, anchor_ids: set[str]) -
         fail(f"{path}: recommended_outline must not be empty")
 
     for idx, raw_section in enumerate(outline):
-        section = require_object(raw_section, f"{path}: recommended_outline[{idx}]")
-        require_str(section.get("section"), f"{path}: recommended_outline[{idx}].section")
-        require_str(section.get("intent"), f"{path}: recommended_outline[{idx}].intent")
+        section_context = (
+            f"{path}: recommended_outline[{idx}]"
+        )
 
-        refs = section.get("anchor_refs", [])
+        if isinstance(raw_section, str):
+            require_str(
+                raw_section,
+                section_context,
+            )
+            continue
+
+        section = require_object(
+            raw_section,
+            section_context,
+        )
+
+        require_str(
+            section.get("section"),
+            f"{section_context}.section",
+        )
+        require_str(
+            section.get("intent"),
+            f"{section_context}.intent",
+        )
+
+        refs = section.get(
+            "anchor_refs",
+            [],
+        )
+
         if refs is None:
             refs = []
-        refs = require_list(refs, f"{path}: recommended_outline[{idx}].anchor_refs")
+
+        refs = require_list(
+            refs,
+            f"{section_context}.anchor_refs",
+        )
 
         for ref_idx, ref in enumerate(refs):
-            ref = require_str(ref, f"{path}: recommended_outline[{idx}].anchor_refs[{ref_idx}]")
+            ref = require_str(
+                ref,
+                f"{section_context}.anchor_refs[{ref_idx}]",
+            )
+
             if ref not in anchor_ids:
-                fail(f"{path}: outline[{idx}] references missing anchor_id: {ref}")
+                fail(
+                    f"{path}: outline[{idx}] references "
+                    f"missing anchor_id: {ref}"
+                )
 
 
 def validate_topic_importance(pack_dir: Path, topic_id: str) -> None:

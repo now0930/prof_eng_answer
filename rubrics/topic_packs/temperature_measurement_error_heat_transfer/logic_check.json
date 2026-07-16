@@ -4,7 +4,7 @@
   "title": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
   "deterministic_checks": {
     "enabled": true,
-    "difficulty_profile": "THEORY_CORE",
+    "difficulty_profile": "FIELD_APPLICATION",
     "topic_name": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
     "topic_aliases": [
       "온도 측정 오차",

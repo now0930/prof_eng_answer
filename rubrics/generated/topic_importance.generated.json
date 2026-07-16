@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-16T01:02:08Z-generated-topic-pack-importance",
+  "version": "2026-07-16T12:47:07Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -30,8 +30,8 @@
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "high_band_unlock_conditions": [
         "Open/Closed Tank 기준압력과 기상부 압력 상쇄를 설명한다.",
@@ -49,10 +49,11 @@
       ],
       "note": "정수압, 공통압력 상쇄, 기준수두, 밀도오차, Remote Seal과 계면 측정을 연결하는 핵심 계측 Topic이다.",
       "revision_notes": [
-        "THEORY_CORE로 설정했다.",
-        "CORE_MUST_PREPARE로 설정했다.",
+        "FIELD_APPLICATION로 설정했다.",
+        "NORMAL로 설정했다.",
         "밀도·Wet Leg·Remote Seal·계면을 고득점 조건에 반영했다.",
-        "LLM_ONLY이며 Deterministic Check는 비활성화했다."
+        "LLM_ONLY이며 Deterministic Check는 비활성화했다.",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차"
     },
@@ -138,8 +139,8 @@
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "high_band_unlock_conditions": [
         "교류 여자, 직렬 역접속과 Eo=Es1-Es2의 차동출력 원리를 정확히 설명한다.",
@@ -171,7 +172,8 @@
         "manual_semantic_review_by_chatgpt",
         "all_local_llm_calls_skipped",
         "고득점 조건에 영점 벡터 조건과 AC/DC 영점오차 구분을 반영했다.",
-        "대체 복조, 기준위상, 여자대역과 RVDT 제품범위를 반영했다."
+        "대체 복조, 기준위상, 여자대역과 RVDT 제품범위를 반영했다.",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "LVDT·RVDT의 차동변압기 원리, 위상민감 복조, 변위·각도 측정 및 오차"
     },
@@ -200,8 +202,8 @@
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE",
       "high_band_unlock_conditions": [
         "측정량, 기계변형·물성변화, R·C·L, 여기회로와 전기출력의 변환단계를 명확히 구분한다.",
@@ -215,7 +217,8 @@
       ],
       "note": "센서의 전기적 기본 파라미터와 재료 물성·기하 변형·신호조절을 하나의 인과사슬로 연결하는 계측 핵심 주제다.",
       "revision_notes": [
-        "2026-07-12: PRINCIPLE / THEORY_CORE / CORE_MUST_PREPARE로 확정했다."
+        "2026-07-12: PRINCIPLE / FIELD_APPLICATION / NORMAL로 확정했다.",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ]
     },
     {
@@ -238,8 +241,8 @@
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "high_band_unlock_conditions": [
         "Q=dF와 직접 압전효과를 정확히 설명한다.",
@@ -261,15 +264,16 @@
         "deterministic_checks_disabled",
         "candidate_extraction_rules_empty",
         "manual_semantic_review_by_chatgpt",
-        "all_local_llm_calls_skipped"
+        "all_local_llm_calls_skipped",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "압전식 센서의 원리, 전하증폭기, 동적 힘·압력·가속도 측정 및 오차"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "high_band_unlock_conditions": [
         "펄스식 왕복시간과 D=cτ/2를 정확히 설명한다.",
@@ -290,10 +294,11 @@
       ],
       "note": "레이더식 레벨계는 비접촉 레벨계측의 핵심 주제이며 펄스식과 FMCW식의 원리 구분이 고득점의 핵심이다.",
       "revision_notes": [
-        "난이도를 THEORY_CORE로 설정했다.",
-        "선택 중요도를 CORE_MUST_PREPARE로 설정했다.",
+        "난이도를 FIELD_APPLICATION로 설정했다.",
+        "선택 중요도를 NORMAL로 설정했다.",
         "반송주파수와 유효 변조 대역폭의 역할 및 액체·분체별 안테나 정렬조건을 구분했다.",
-        "기존 Radar Topic Pack에 GWR와 에코 분석을 통합했다."
+        "기존 Radar Topic Pack에 GWR와 에코 분석을 통합했다.",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "레이더식 레벨계"
     },
@@ -344,8 +349,8 @@
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "high_band_unlock_conditions": [
         "온도에서 저항, 여기전류, 전압과 표시온도까지의 RTD 변환 사슬을 구분한다.",
@@ -364,7 +369,8 @@
         "integrated_pt100_excitation_self_heating_and_2_3_4_wire_compensation",
         "separated_thermocouple_and_thermistor_into_independent_topics",
         "deterministic_checks_disabled",
-        "candidate_extraction_rules_empty"
+        "candidate_extraction_rules_empty",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ]
     },
     {
@@ -447,8 +453,8 @@
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "high_band_unlock_conditions": [
         "기계적 하중에서 디지털 값까지의 측정사슬을 단절 없이 설명한다.",
@@ -472,15 +478,16 @@
         "manual_semantic_review_by_chatgpt",
         "all_local_llm_calls_skipped",
         "clarified_active_dummy_half_bridge_sensitivity",
-        "completed_chatgpt_manual_semantic_correction"
+        "completed_chatgpt_manual_semantic_correction",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "temperature_measurement_error_heat_transfer",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "DIAGNOSIS_ACTION",
       "high_band_unlock_conditions": [
         "전도·대류·복사를 온도 측정오차의 실제 원인으로 구분하고 측정값 형성 원리와 연결한다.",
@@ -489,17 +496,18 @@
         "정확도, 응답속도, 기계적 보호, 유지보수, 기존 설비 개조 비용의 trade-off를 설명한다.",
         "특정 삽입 깊이 또는 thermowell 적용을 모든 현장에 일반화하지 않는다."
       ],
-      "note": "온도 측정오차와 열전달은 열전달 원리와 현장 설치 조건을 함께 평가하는 THEORY_CORE 주제이다. 단순 교정·센서 종류 나열로는 고득점이 어렵고, 열전달 경로, 담금 깊이, 보호관, 유속, 복사 차폐, 보정·검증을 연결해야 한다.",
+      "note": "온도 측정오차와 열전달은 열전달 원리와 현장 설치 조건을 함께 평가하는 FIELD_APPLICATION 주제이다. 단순 교정·센서 종류 나열로는 고득점이 어렵고, 열전달 경로, 담금 깊이, 보호관, 유속, 복사 차폐, 보정·검증을 연결해야 한다.",
       "revision_notes": [
         "created_for_topic_pack=temperature_measurement_error_heat_transfer",
-        "difficulty=THEORY_CORE; field diagnosis and installation trade-off are central"
+        "difficulty=FIELD_APPLICATION; field diagnosis and installation trade-off are central",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "high_band_unlock_conditions": [
         "Thermistor가 절대온도가 아니라 접점 온도차에 대응하는 저항 변화을 발생한다는 점을 설명한다.",
@@ -519,15 +527,16 @@
         "focused_on_ntc_ptc_measurement_self_heating_and_linearization",
         "deterministic_checks_disabled",
         "candidate_extraction_rules_empty",
-        "added_data_driven_routing_aliases_and_field_points"
+        "added_data_driven_routing_aliases_and_field_points",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "high_band_unlock_conditions": [
         "열전대가 절대온도가 아니라 접점 온도차에 대응하는 열기전력을 발생한다는 점을 설명한다.",
@@ -547,15 +556,16 @@
         "focused_on_seebeck_reference_junction_cjc_and_compensating_wire",
         "thermistor_ntc_ptc_kept_as_independent_future_topic",
         "deterministic_checks_disabled",
-        "candidate_extraction_rules_empty"
+        "candidate_extraction_rules_empty",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-      "difficulty": "THEORY_CORE",
-      "selection_importance": "CORE_MUST_PREPARE",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "high_band_unlock_conditions": [
         "반사형 왕복시간과 d=ct/2를 정확히 설명한다.",
@@ -567,8 +577,9 @@
       ],
       "note": "초음파 센서는 비접촉 거리·레벨 계측의 핵심 주제이다.",
       "revision_notes": [
-        "난이도를 THEORY_CORE로 설정했다.",
-        "선택 중요도를 CORE_MUST_PREPARE로 설정했다."
+        "난이도를 FIELD_APPLICATION로 설정했다.",
+        "선택 중요도를 NORMAL로 설정했다.",
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "초음파 거리·레벨 센서"
     }

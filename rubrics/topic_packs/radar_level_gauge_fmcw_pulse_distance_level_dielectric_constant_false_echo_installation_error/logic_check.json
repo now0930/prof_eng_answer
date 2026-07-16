@@ -6,7 +6,7 @@
     "enabled": false,
     "topic_name": "레이더식 레벨계의 FMCW·펄스 방식, 거리·레벨 측정원리, 유전율 영향 및 허위에코·설치오차",
     "question_type": "PRINCIPLE_INTERPRETATION",
-    "difficulty_profile": "THEORY_CORE",
+    "difficulty_profile": "FIELD_APPLICATION",
     "topic_aliases": [],
     "fatal_checks": [],
     "major_checks": [],
@@ -16,7 +16,7 @@
   },
   "llm_profile": {
     "display_name": "레이더식 레벨계의 펄스·FMCW 거리계측, 유전율, 허위에코 및 설치오차를 평가한다.",
-    "difficulty": "레이더식 레벨계의 펄스·FMCW 거리계측, 유전율, 허위에코 및 설치오차를 평가한다.",
+    "difficulty": "FIELD_APPLICATION",
     "cap_policy": {},
     "candidate_extraction": {},
     "truth_schema": [

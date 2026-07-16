@@ -299,7 +299,7 @@
     },
     {
       "id": "lvdt_demodulated_zero_offset",
-      "anchor_id": "lvdt_null_residual_voltage",
+      "anchor_id": "lvdt_demodulated_zero_offset",
       "statement": "복조 후 DC zero offset은 기준위상 오차, 위상보상 불량, 증폭기 오프셋과 온도 드리프트 때문에 발생할 수 있다. 이는 센서 원시 AC null residual voltage와 구분하여 교정하고 진단한다.",
       "importance": "core",
       "keywords": [

@@ -1,8 +1,8 @@
 {
   "schema_version": "topic_pack.topic_importance.v1",
   "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
-  "difficulty": "THEORY_CORE",
-  "selection_importance": "CORE_MUST_PREPARE",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
     "교류 여자, 직렬 역접속과 Eo=Es1-Es2의 차동출력 원리를 정확히 설명한다.",
@@ -34,7 +34,8 @@
     "manual_semantic_review_by_chatgpt",
     "all_local_llm_calls_skipped",
     "고득점 조건에 영점 벡터 조건과 AC/DC 영점오차 구분을 반영했다.",
-    "대체 복조, 기준위상, 여자대역과 RVDT 제품범위를 반영했다."
+    "대체 복조, 기준위상, 여자대역과 RVDT 제품범위를 반영했다.",
+    "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
   ],
   "topic_label": "LVDT·RVDT의 차동변압기 원리, 위상민감 복조, 변위·각도 측정 및 오차"
 }

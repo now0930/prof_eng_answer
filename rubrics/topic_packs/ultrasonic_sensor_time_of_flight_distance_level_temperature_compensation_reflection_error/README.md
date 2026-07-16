@@ -2,8 +2,8 @@
 
 - Topic ID: `ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error`
 - Question type: `PRINCIPLE_INTERPRETATION`
-- Difficulty: `THEORY_CORE`
-- Selection importance: `CORE_MUST_PREPARE`
+- Difficulty: `FIELD_APPLICATION`
+- Selection importance: `NORMAL`
 - Semantic execution: `LLM_ONLY`
 - Deterministic checks: disabled
 - Candidate extraction: empty

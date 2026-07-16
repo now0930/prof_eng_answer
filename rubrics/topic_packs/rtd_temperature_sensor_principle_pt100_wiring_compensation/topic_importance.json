@@ -1,8 +1,8 @@
 {
   "schema_version": "topic_pack.topic_importance.v1",
   "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
-  "difficulty": "THEORY_CORE",
-  "selection_importance": "CORE_MUST_PREPARE",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
     "온도에서 저항, 여기전류, 전압과 표시온도까지의 RTD 변환 사슬을 구분한다.",
@@ -21,6 +21,7 @@
     "integrated_pt100_excitation_self_heating_and_2_3_4_wire_compensation",
     "separated_thermocouple_and_thermistor_into_independent_topics",
     "deterministic_checks_disabled",
-    "candidate_extraction_rules_empty"
+    "candidate_extraction_rules_empty",
+    "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
   ]
 }

@@ -6,7 +6,7 @@
     "enabled": false,
     "topic_name": "초음파 센서의 비행시간 원리, 거리·레벨 측정, 온도보상 및 반사·설치 오차",
     "question_type": "PRINCIPLE_INTERPRETATION",
-    "difficulty_profile": "THEORY_CORE",
+    "difficulty_profile": "FIELD_APPLICATION",
     "topic_aliases": [],
     "fatal_checks": [],
     "major_checks": [],
@@ -16,7 +16,7 @@
   },
   "llm_profile": {
     "display_name": "초음파 펄스 에코의 비행시간, 음속보상, 사각지대와 반사·설치 오차를 평가한다.",
-    "difficulty": "초음파 펄스 에코의 비행시간, 음속보상, 사각지대와 반사·설치 오차를 평가한다.",
+    "difficulty": "FIELD_APPLICATION",
     "cap_policy": {},
     "candidate_extraction": {},
     "truth_schema": [

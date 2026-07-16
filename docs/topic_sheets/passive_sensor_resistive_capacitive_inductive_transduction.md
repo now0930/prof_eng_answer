@@ -4,8 +4,8 @@
 
 - Topic ID: `passive_sensor_resistive_capacitive_inductive_transduction`
 - 문제 유형: `PRINCIPLE`
-- 난이도: `THEORY_CORE`
-- 선택 중요도: `CORE_MUST_PREPARE`
+- 난이도: `FIELD_APPLICATION`
+- 선택 중요도: `NORMAL`
 - 평가 방식: `LLM_ONLY`
 - 결정론적 검사: 비활성화
 - 작성 기준일: 2026-07-12

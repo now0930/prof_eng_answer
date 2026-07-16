@@ -354,12 +354,12 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument(
         "--difficulty",
-        default="THEORY_CORE",
+        default="FIELD_APPLICATION",
         help="topic importance difficulty profile",
     )
     parser.add_argument(
         "--importance",
-        default="CORE_MUST_PREPARE",
+        default="NORMAL",
         help="topic selection importance",
     )
     parser.add_argument(

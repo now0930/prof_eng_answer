@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-16T01:02:08Z-generated-topic-pack-model-answers",
+  "version": "2026-07-16T12:47:07Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -477,56 +477,70 @@
           "pattern": "차압식 레벨계의 측정원리와 개방·밀폐탱크 적용방법을 설명하시오.",
           "intent": "정수압식과 Open/Closed Tank 기준압력",
           "required_anchor_ids": [
-            "정수압식과 Open/Closed Tank 기준압력"
+            "dp_level_hydrostatic_pressure_principle",
+            "dp_level_open_tank_equation",
+            "dp_level_closed_tank_vapor_pressure_cancellation"
           ]
         },
         {
           "pattern": "Dry Leg와 Wet Leg를 비교하고 교정범위를 설명하시오.",
           "intent": "Dry Leg 응축과 Wet Leg 기준수두",
           "required_anchor_ids": [
-            "Dry Leg 응축과 Wet Leg 기준수두"
+            "dp_level_dry_leg_configuration",
+            "dp_level_dry_leg_condensation_error",
+            "dp_level_wet_leg_reference_head",
+            "dp_level_reference_elevation_and_span"
           ]
         },
         {
           "pattern": "Wet Leg에서 Zero Elevation이 필요한 이유를 설명하시오.",
           "intent": "LRV 부호와 Zero Elevation",
           "required_anchor_ids": [
-            "LRV 부호와 Zero Elevation"
+            "dp_level_wet_leg_zero_elevation",
+            "dp_level_zero_suppression_and_elevation",
+            "dp_level_calibration_lrv_urv"
           ]
         },
         {
           "pattern": "차압식 레벨계의 밀도 변화 오차와 보정방법을 설명하시오.",
           "intent": "실제밀도와 교정밀도",
           "required_anchor_ids": [
-            "실제밀도와 교정밀도"
+            "dp_level_density_compensation",
+            "dp_level_process_temperature_density_error"
           ]
         },
         {
           "pattern": "Remote Diaphragm Seal의 구조와 온도오차를 설명하시오.",
           "intent": "충전액·격리막·모세관 열동특성",
           "required_anchor_ids": [
-            "충전액·격리막·모세관 열동특성"
+            "dp_level_remote_seal_structure",
+            "dp_level_remote_seal_fill_fluid_head",
+            "dp_level_remote_seal_temperature_error",
+            "dp_level_capillary_length_symmetry"
           ]
         },
         {
           "pattern": "차압식 계면 측정의 원리와 적용조건을 설명하시오.",
           "intent": "밀도차와 전체 액주 경계조건",
           "required_anchor_ids": [
-            "밀도차와 전체 액주 경계조건"
+            "dp_level_interface_density_difference",
+            "dp_level_interface_total_level_condition"
           ]
         },
         {
           "pattern": "도압관과 설치조건에 따른 오차 및 대책을 설명하시오.",
           "intent": "도압관 및 설치오차 진단",
           "required_anchor_ids": [
-            "도압관 및 설치오차 진단"
+            "dp_level_impulse_line_blockage_leak_bubble",
+            "dp_level_impulse_line_freezing_and_heat_tracing",
+            "dp_level_transmitter_mounting_elevation_error"
           ]
         },
         {
           "pattern": "차압식과 Radar·GWR 레벨 측정방식을 비교하시오.",
           "intent": "공정의존성과 유지보수성 기반 선정",
           "required_anchor_ids": [
-            "공정의존성과 유지보수성 기반 선정"
+            "dp_level_selection_against_radar_gwr"
           ]
         }
       ],

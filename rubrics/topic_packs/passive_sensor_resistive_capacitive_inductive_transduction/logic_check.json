@@ -12,7 +12,7 @@
     "enabled": false,
     "topic_name": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
     "question_type": "PRINCIPLE",
-    "difficulty_profile": "THEORY_CORE",
+    "difficulty_profile": "FIELD_APPLICATION",
     "topic_aliases": [
       "저항형 센서",
       "정전용량형 센서",
@@ -41,7 +41,7 @@
   },
   "llm_profile": {
     "display_name": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
-    "difficulty": "THEORY_CORE",
+    "difficulty": "FIELD_APPLICATION",
     "cap_policy": {
       "fatal_recommended_ceiling": 10.0,
       "fatal_confidence_threshold": 0.75

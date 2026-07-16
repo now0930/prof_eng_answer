@@ -2,8 +2,8 @@
 
 - Topic ID: `thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`
 - Question type: `PRINCIPLE_INTERPRETATION`
-- Theory depth: `THEORY_CORE`
-- Priority: `CORE_MUST_PREPARE`
+- Theory depth: `FIELD_APPLICATION`
+- Priority: `NORMAL`
 - Grading mode: `LLM_ONLY`
 
 ## Scope

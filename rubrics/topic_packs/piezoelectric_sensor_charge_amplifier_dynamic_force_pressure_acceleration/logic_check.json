@@ -6,7 +6,7 @@
     "enabled": false,
     "topic_name": "압전식 센서의 원리, 전하증폭기, 동적 힘·압력·가속도 측정 및 오차",
     "question_type": "PRINCIPLE_INTERPRETATION",
-    "difficulty_profile": "THEORY_CORE",
+    "difficulty_profile": "FIELD_APPLICATION",
     "topic_aliases": [
       "압전식 센서",
       "압전센서",
@@ -49,7 +49,7 @@
   },
   "llm_profile": {
     "display_name": "압전식 센서의 원리, 전하증폭기, 동적 힘·압력·가속도 측정 및 오차",
-    "difficulty": "THEORY_CORE",
+    "difficulty": "FIELD_APPLICATION",
     "cap_policy": {},
     "candidate_extraction": {},
     "truth_schema": [

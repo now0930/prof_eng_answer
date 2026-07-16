@@ -5,8 +5,8 @@
 - Topic ID: `rtd_temperature_sensor_principle_pt100_wiring_compensation`
 - 이전 Topic ID: `rtd_pt100_wire_connection_compensation`
 - 문제 유형: `PRINCIPLE_INTERPRETATION`
-- 난이도: `THEORY_CORE`
-- 선택 중요도: `CORE_MUST_PREPARE`
+- 난이도: `FIELD_APPLICATION`
+- 선택 중요도: `NORMAL`
 - 평가 방식: `LLM_ONLY`
 - 결정론적 검사: 비활성화
 - 작성 기준일: 2026-07-12
@@ -613,8 +613,8 @@ force와 sense lead를 구분하고 4선식이 리드선 오차만 주로 줄인
 추가 원칙:
 
 - 문제 유형은 `PRINCIPLE_INTERPRETATION`로 변경한다.
-- 난이도는 `THEORY_CORE`를 유지한다.
-- 선택 중요도는 `CORE_MUST_PREPARE`를 유지한다.
+- 난이도는 `FIELD_APPLICATION`를 유지한다.
+- 선택 중요도는 `NORMAL`를 유지한다.
 - 평가 방식은 `LLM_ONLY`를 유지한다.
 - 결정론적 검사는 비활성화한다.
 - candidate extraction rule은 비워 둔다.

@@ -11,8 +11,8 @@ Source Pack JSON은 이 문서에서 합의한 사실 기준을 직접 반영한
 - Topic ID: `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error`
 - 제목: 스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차
 - 문제 유형: `PRINCIPLE_INTERPRETATION`
-- 이론 깊이: `THEORY_CORE`
-- 준비 우선순위: `CORE_MUST_PREPARE`
+- 이론 깊이: `FIELD_APPLICATION`
+- 준비 우선순위: `NORMAL`
 - 채점 방식: `LLM_ONLY`
 - deterministic checks: 비활성화
 - candidate extraction: 빈 객체

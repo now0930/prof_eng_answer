@@ -4,8 +4,8 @@
 
 - Topic ID: `lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error`
 - 문제유형: `PRINCIPLE_INTERPRETATION`
-- 난이도: `THEORY_CORE`
-- 선택 중요도: `CORE_MUST_PREPARE`
+- 난이도: `FIELD_APPLICATION`
+- 선택 중요도: `NORMAL`
 - 의미평가: `LLM_ONLY`
 - deterministic check: disabled
 - candidate extraction: empty

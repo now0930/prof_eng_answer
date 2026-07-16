@@ -4,8 +4,8 @@
 
 - Topic ID: `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`
 - Question Type: `PRINCIPLE_INTERPRETATION`
-- Theory Depth: `THEORY_CORE`
-- Preparation Priority: `CORE_MUST_PREPARE`
+- Theory Depth: `FIELD_APPLICATION`
+- Preparation Priority: `NORMAL`
 - Grading Mode: `LLM_ONLY`
 - Deterministic Checks: `disabled`
 

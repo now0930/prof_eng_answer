@@ -4,8 +4,8 @@
 
 - Topic ID: `thermocouple_temperature_sensor_seebeck_reference_junction_compensation`
 - Question type: `PRINCIPLE_INTERPRETATION`
-- Difficulty: `THEORY_CORE`
-- Selection importance: `CORE_MUST_PREPARE`
+- Difficulty: `FIELD_APPLICATION`
+- Selection importance: `NORMAL`
 - Evaluation method: `LLM_ONLY`
 
 ## 목적
@@ -31,7 +31,7 @@
 - `fact_anchor.json`: Fact Anchor 14개와 Fatal Wrong Claim 8개
 - `logic_check.json`: truth schema 14개와 fatal condition 8개
 - `model_answer.json`: 답안 구조와 고득점 판단 기준
-- `topic_importance.json`: THEORY_CORE 전략과 high-band 조건
+- `topic_importance.json`: FIELD_APPLICATION 전략과 high-band 조건
 
 ## 평가 방식
 

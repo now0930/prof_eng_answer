@@ -4,8 +4,8 @@
 
 - Topic ID: `radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error`
 - Question type: `PRINCIPLE_INTERPRETATION`
-- Difficulty: `THEORY_CORE`
-- Selection importance: `CORE_MUST_PREPARE`
+- Difficulty: `FIELD_APPLICATION`
+- Selection importance: `NORMAL`
 - Semantic execution: `LLM_ONLY`
 - Deterministic checks: disabled
 - Candidate extraction: `{}`

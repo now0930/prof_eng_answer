@@ -1,8 +1,8 @@
 {
   "schema_version": "topic_pack.topic_importance.v1",
   "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
-  "difficulty": "THEORY_CORE",
-  "selection_importance": "CORE_MUST_PREPARE",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
     "Open/Closed Tank 기준압력과 기상부 압력 상쇄를 설명한다.",
@@ -20,10 +20,11 @@
   ],
   "note": "정수압, 공통압력 상쇄, 기준수두, 밀도오차, Remote Seal과 계면 측정을 연결하는 핵심 계측 Topic이다.",
   "revision_notes": [
-    "THEORY_CORE로 설정했다.",
-    "CORE_MUST_PREPARE로 설정했다.",
+    "FIELD_APPLICATION로 설정했다.",
+    "NORMAL로 설정했다.",
     "밀도·Wet Leg·Remote Seal·계면을 고득점 조건에 반영했다.",
-    "LLM_ONLY이며 Deterministic Check는 비활성화했다."
+    "LLM_ONLY이며 Deterministic Check는 비활성화했다.",
+    "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
   ],
   "topic_label": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차"
 }

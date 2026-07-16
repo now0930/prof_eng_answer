@@ -4,21 +4,23 @@
 
 - Topic ID: `differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error`
 - Question Type: `PRINCIPLE_INTERPRETATION`
-- Theory Depth: `THEORY_CORE`
-- Preparation Priority: `CORE_MUST_PREPARE`
+- Theory Depth: `FIELD_APPLICATION`
+- Preparation Priority: `NORMAL`
 - Grading Mode: `LLM_ONLY`
 - Deterministic Checks: `disabled`
 
 ## 2. 기본 원리
 
 \[
-P_2-P_1=\int_{z_1}^{z_2}ho g\,dz
+P_2-P_1=\int_{z_1}^{z_2}
+ho g\,dz
 \]
 
 밀도가 일정하면 다음과 같다.
 
 \[
-\Delta P=ho gh
+\Delta P=
+ho gh
 \]
 
 차압식 레벨계는 높이만 직접 측정하지 않는다.
@@ -27,7 +29,8 @@ P_2-P_1=\int_{z_1}^{z_2}ho g\,dz
 ## 3. Open Tank
 
 \[
-\Delta P=ho_pgh
+\Delta P=
+ho_pgh
 \]
 
 저압측은 대기에 개방한다.
@@ -36,7 +39,8 @@ P_2-P_1=\int_{z_1}^{z_2}ho g\,dz
 ## 4. Closed Tank
 
 \[
-P_H=P_v+ho_pgh
+P_H=P_v+
+ho_pgh
 \]
 
 \[
@@ -44,7 +48,9 @@ P_L=P_v
 \]
 
 \[
-\Delta P=(P_v+ho_pgh)-P_v=ho_pgh
+\Delta P=(P_v+
+ho_pgh)-P_v=
+ho_pgh
 \]
 
 ## 5. Dry Leg와 Wet Leg
@@ -58,7 +64,9 @@ P_L=P_v
 ### 5.2. Wet Leg
 
 \[
-\Delta P=ho_pgh-ho_wgH_w
+\Delta P=
+ho_pgh-
+ho_wgH_w
 \]
 
 0%에서도 음의 차압이 생길 수 있다.
@@ -68,8 +76,11 @@ P_L=P_v
 
 \[
 h_{ind}
-=rac{\Delta P}{ho_{cal}g}
-=rac{ho_{actual}}{ho_{cal}}
+=rac{\Delta P}{
+ho_{cal}g}
+=rac{
+ho_{actual}}{
+ho_{cal}}
  h_{actual}
 \]
 
@@ -91,7 +102,8 @@ h_{ind}
 충전액 수두는 다음과 같다.
 
 \[
-P_f=ho_fg\Delta z
+P_f=
+ho_fg\Delta z
 \]
 
 주요 오차요인은 다음과 같다.
@@ -106,11 +118,16 @@ P_f=ho_fg\Delta z
 ## 9. 계면 측정
 
 \[
-\Delta P=C+g[ho_LH+(ho_H-ho_L)h_i]
+\Delta P=C+g[
+ho_LH+(
+ho_H-
+ho_L)h_i]
 \]
 
 \[
-rac{d\Delta P}{dh_i}=g(ho_H-ho_L)
+rac{d\Delta P}{dh_i}=g(
+ho_H-
+ho_L)
 \]
 
 밀도차가 작으면 계면 span이 감소한다.

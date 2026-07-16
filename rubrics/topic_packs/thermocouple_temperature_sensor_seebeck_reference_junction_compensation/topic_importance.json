@@ -1,8 +1,8 @@
 {
   "schema_version": "topic_pack.topic_importance.v1",
   "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-  "difficulty": "THEORY_CORE",
-  "selection_importance": "CORE_MUST_PREPARE",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "high_band_unlock_conditions": [
     "열전대가 절대온도가 아니라 접점 온도차에 대응하는 열기전력을 발생한다는 점을 설명한다.",
@@ -22,7 +22,8 @@
     "focused_on_seebeck_reference_junction_cjc_and_compensating_wire",
     "thermistor_ntc_ptc_kept_as_independent_future_topic",
     "deterministic_checks_disabled",
-    "candidate_extraction_rules_empty"
+    "candidate_extraction_rules_empty",
+    "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
   ],
   "topic_label": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선"
 }

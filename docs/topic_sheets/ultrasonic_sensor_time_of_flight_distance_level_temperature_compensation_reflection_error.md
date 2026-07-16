@@ -5,8 +5,8 @@
 - `topic_id`: `ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error`
 - `title_ko`: `초음파 센서의 비행시간 원리, 거리·레벨 측정, 온도보상 및 반사·설치 오차`
 - `question_type`: `PRINCIPLE_INTERPRETATION`
-- `difficulty`: `THEORY_CORE`
-- `selection_importance`: `CORE_MUST_PREPARE`
+- `difficulty`: `FIELD_APPLICATION`
+- `selection_importance`: `NORMAL`
 - `semantic_execution`: `LLM_ONLY`
 - `deterministic_checks.enabled`: `false`
 - `candidate_extraction`: `{}`

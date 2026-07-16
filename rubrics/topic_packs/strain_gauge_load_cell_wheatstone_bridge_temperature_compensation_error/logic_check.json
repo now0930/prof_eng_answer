@@ -6,7 +6,7 @@
     "enabled": false,
     "topic_name": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
     "question_type": "PRINCIPLE_INTERPRETATION",
-    "difficulty_profile": "THEORY_CORE",
+    "difficulty_profile": "FIELD_APPLICATION",
     "topic_aliases": [],
     "fatal_checks": [],
     "major_checks": [],
@@ -16,7 +16,7 @@
   },
   "llm_profile": {
     "display_name": "스트레인 게이지와 로드셀의 원리, 휘트스톤 브리지, 온도보상 및 오차",
-    "difficulty": "THEORY_CORE",
+    "difficulty": "FIELD_APPLICATION",
     "cap_policy": {},
     "candidate_extraction": {},
     "truth_schema": [

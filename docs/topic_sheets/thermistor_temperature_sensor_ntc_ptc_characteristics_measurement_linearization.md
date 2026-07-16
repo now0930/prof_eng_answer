@@ -11,8 +11,8 @@ Source Pack JSON은 이 문서에서 합의한 사실 기준을 직접 반영한
 - Topic ID: `thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization`
 - 제목: Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화
 - 문제 유형: `PRINCIPLE_INTERPRETATION`
-- 이론 깊이: `THEORY_CORE`
-- 준비 우선순위: `CORE_MUST_PREPARE`
+- 이론 깊이: `FIELD_APPLICATION`
+- 준비 우선순위: `NORMAL`
 - 채점 방식: `LLM_ONLY`
 - deterministic checks: 비활성화
 - candidate extraction rules: 빈 객체

@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-16T01:02:08Z-generated-topic-pack-fact-anchors",
+  "version": "2026-07-16T12:47:07Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json",
@@ -3237,7 +3237,7 @@
         },
         {
           "id": "lvdt_demodulated_zero_offset",
-          "anchor_id": "lvdt_null_residual_voltage",
+          "anchor_id": "lvdt_demodulated_zero_offset",
           "statement": "복조 후 DC zero offset은 기준위상 오차, 위상보상 불량, 증폭기 오프셋과 온도 드리프트 때문에 발생할 수 있다. 이는 센서 원시 AC null residual voltage와 구분하여 교정하고 진단한다.",
           "importance": "core",
           "keywords": [
@@ -10853,7 +10853,7 @@
       "anchors": [
         {
           "id": "thermistor_temperature_measurement_chain",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_temperature_measurement_chain",
           "statement": "Thermistor 온도 측정은 감온 소자의 저항 변화, 여기 및 측정회로, ADC 변환, 저항-온도 환산과 보정으로 구성된다.",
           "importance": "must",
           "keywords": [
@@ -10887,7 +10887,7 @@
         },
         {
           "id": "thermistor_semiconductor_resistance_temperature_principle",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_semiconductor_resistance_temperature_principle",
           "statement": "Thermistor는 반도체 세라믹 또는 고분자 재료의 전하 운반자와 전도 메커니즘이 온도에 따라 변하는 저항형 온도센서이다.",
           "importance": "must",
           "keywords": [
@@ -10919,7 +10919,7 @@
         },
         {
           "id": "thermistor_ntc_negative_temperature_coefficient",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_ntc_negative_temperature_coefficient",
           "statement": "NTC Thermistor는 일반적으로 온도가 상승하면 저항이 감소하는 음의 온도계수 특성을 갖는다.",
           "importance": "must",
           "keywords": [
@@ -10951,7 +10951,7 @@
         },
         {
           "id": "thermistor_ntc_beta_equation",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_ntc_beta_equation",
           "statement": "NTC의 제한된 온도범위에서는 B-상수 식으로 저항과 절대온도의 관계를 근사할 수 있다.",
           "importance": "must",
           "keywords": [
@@ -10985,7 +10985,7 @@
         },
         {
           "id": "thermistor_steinhart_hart_linearization",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_steinhart_hart_linearization",
           "statement": "넓은 온도범위 또는 높은 정확도가 필요하면 Steinhart-Hart 식, 다항식, 표준표나 다점 보정을 사용하여 비선형성을 보상한다.",
           "importance": "must",
           "keywords": [
@@ -11017,7 +11017,7 @@
         },
         {
           "id": "thermistor_ptc_positive_temperature_coefficient_switching",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_ptc_positive_temperature_coefficient_switching",
           "statement": "PTC Thermistor는 온도가 상승하면 저항이 증가하며, 재료에 따라 특정 전이온도 부근에서 저항이 급격히 증가하는 스위칭 특성을 이용한다.",
           "importance": "must",
           "keywords": [
@@ -11051,7 +11051,7 @@
         },
         {
           "id": "thermistor_voltage_divider_bridge_current_measurement",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_voltage_divider_bridge_current_measurement",
           "statement": "Thermistor 저항은 전압분배기, 브리지 또는 정전류 여기회로를 이용하여 측정 가능한 전압으로 변환한다.",
           "importance": "must",
           "keywords": [
@@ -11083,7 +11083,7 @@
         },
         {
           "id": "thermistor_adc_reference_ratiometric_conversion",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_adc_reference_ratiometric_conversion",
           "statement": "ADC 기준전압과 센서 여기전압을 함께 사용하는 비율측정 방식은 전원 변동의 영향을 줄일 수 있다.",
           "importance": "must",
           "keywords": [
@@ -11117,7 +11117,7 @@
         },
         {
           "id": "thermistor_self_heating_dissipation_constant",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_self_heating_dissipation_constant",
           "statement": "Thermistor에 인가한 측정전력은 자기발열을 발생시켜 소자온도를 공정온도보다 높이고 측정오차를 만들 수 있다.",
           "importance": "must",
           "keywords": [
@@ -11151,7 +11151,7 @@
         },
         {
           "id": "thermistor_thermal_time_constant_installation",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_thermal_time_constant_installation",
           "statement": "Thermistor의 열시정수와 설치조건은 온도 변화에 대한 동적 응답과 지연오차를 결정한다.",
           "importance": "must",
           "keywords": [
@@ -11185,7 +11185,7 @@
         },
         {
           "id": "thermistor_tolerance_interchangeability_calibration",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_tolerance_interchangeability_calibration",
           "statement": "Thermistor 정확도는 기준저항 공차, B 값 또는 곡선계수 공차, 회로 오차와 교정 불확도의 영향을 함께 받는다.",
           "importance": "must",
           "keywords": [
@@ -11217,7 +11217,7 @@
         },
         {
           "id": "thermistor_operating_range_material_selection_stability",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_operating_range_material_selection_stability",
           "statement": "Thermistor는 요구 온도범위, 감도, 장기 안정성, 사용분위기와 패키지에 맞춰 선정해야 한다.",
           "importance": "must",
           "keywords": [
@@ -11251,7 +11251,7 @@
         },
         {
           "id": "thermistor_wiring_contact_moisture_noise_effects",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_wiring_contact_moisture_noise_effects",
           "statement": "배선저항, 접촉저항, 누설, 습기와 전기잡음은 Thermistor 측정회로의 저항 및 전압 계산에 오차를 만든다.",
           "importance": "must",
           "keywords": [
@@ -11285,7 +11285,7 @@
         },
         {
           "id": "thermistor_fault_diagnostics_open_short_range_fail_safe",
-          "anchor_id": "thermocouple_temperature_measurement_chain",
+          "anchor_id": "thermistor_fault_diagnostics_open_short_range_fail_safe",
           "statement": "Thermistor 입력은 단선, 단락, 범위이탈과 ADC 포화 상태를 구분하고 안전한 고장대응을 수행해야 한다.",
           "importance": "must",
           "keywords": [

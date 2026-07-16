@@ -6,8 +6,8 @@
 - 한글 제목: 열전대 온도센서의 원리, 기준접점 보상 및 보상도선
 - 대표 영문명: Thermocouple temperature sensor, Seebeck effect, reference-junction compensation
 - Question type: `PRINCIPLE_INTERPRETATION`
-- Difficulty: `THEORY_CORE`
-- Selection importance: `CORE_MUST_PREPARE`
+- Difficulty: `FIELD_APPLICATION`
+- Selection importance: `NORMAL`
 - Evaluation method: `LLM_ONLY`
 - Deterministic checks: 비활성화
 - Candidate extraction rules: 비워 둔다.
