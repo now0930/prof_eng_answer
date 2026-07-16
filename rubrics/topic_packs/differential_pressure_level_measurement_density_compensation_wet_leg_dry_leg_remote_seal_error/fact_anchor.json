@@ -1,0 +1,822 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+  "title_ko": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "id": "dp_level_hydrostatic_pressure_principle",
+      "anchor_id": "dp_level_hydrostatic_pressure_principle",
+      "statement": "정지 유체의 두 점 사이 압력차는 ΔP=∫ρg·dz이며, 밀도가 일정하면 ΔP=ρgΔh이다. 차압식 레벨계는 높이만이 아니라 밀도와 높이의 곱인 압력수두를 측정한다.",
+      "importance": "core",
+      "keywords": [
+        "정수압",
+        "ΔP=ρgh",
+        "밀도",
+        "압력수두"
+      ],
+      "core_terms": [
+        "정수압",
+        "ΔP=ρgh",
+        "밀도",
+        "압력수두"
+      ],
+      "accepted_explanations": [
+        "차압식 레벨 측정의 기본식은 ΔP=ρgh이다."
+      ],
+      "rejected_explanations": [
+        "차압식 레벨계는 액체 밀도와 무관하게 높이만 측정한다."
+      ],
+      "grading_notes": "정수압, 밀도와 높이의 관계를 평가한다.",
+      "source_basis": "ISA hydrostatic-level fundamentals and Emerson differential-pressure level guidance.",
+      "claim": "정지 유체의 두 점 사이 압력차는 ΔP=∫ρg·dz이며, 밀도가 일정하면 ΔP=ρgΔh이다. 차압식 레벨계는 높이만이 아니라 밀도와 높이의 곱인 압력수두를 측정한다.",
+      "description": "정지 유체의 두 점 사이 압력차는 ΔP=∫ρg·dz이며, 밀도가 일정하면 ΔP=ρgΔh이다. 차압식 레벨계는 높이만이 아니라 밀도와 높이의 곱인 압력수두를 측정한다."
+    },
+    {
+      "id": "dp_level_open_tank_equation",
+      "anchor_id": "dp_level_open_tank_equation",
+      "statement": "개방탱크에서 고압측은 탱크 하부에 연결하고 저압측은 대기에 개방한다. 동일한 대기압이 상쇄되므로 ΔP=ρ_pgh이며 설치배관의 고정수두는 LRV와 URV에 반영한다.",
+      "importance": "core",
+      "keywords": [
+        "개방탱크",
+        "고압측",
+        "대기개방",
+        "LRV"
+      ],
+      "core_terms": [
+        "개방탱크",
+        "고압측",
+        "대기개방",
+        "LRV"
+      ],
+      "accepted_explanations": [
+        "개방탱크의 대기압은 양측에서 상쇄된다."
+      ],
+      "rejected_explanations": [
+        "개방탱크에서 대기압을 레벨 차압에 다시 더한다."
+      ],
+      "grading_notes": "개방탱크의 기준압력을 평가한다.",
+      "source_basis": "Yokogawa and Emerson open-vessel DP level guidance.",
+      "claim": "개방탱크에서 고압측은 탱크 하부에 연결하고 저압측은 대기에 개방한다. 동일한 대기압이 상쇄되므로 ΔP=ρ_pgh이며 설치배관의 고정수두는 LRV와 URV에 반영한다.",
+      "description": "개방탱크에서 고압측은 탱크 하부에 연결하고 저압측은 대기에 개방한다. 동일한 대기압이 상쇄되므로 ΔP=ρ_pgh이며 설치배관의 고정수두는 LRV와 URV에 반영한다."
+    },
+    {
+      "id": "dp_level_closed_tank_vapor_pressure_cancellation",
+      "anchor_id": "dp_level_closed_tank_vapor_pressure_cancellation",
+      "statement": "밀폐탱크에서 고압측은 P_v+ρ_pgh이고 저압측이 기상부 P_v를 전달하면 ΔP=(P_v+ρ_pgh)-P_v=ρ_pgh로 기상부 압력이 상쇄된다.",
+      "importance": "core",
+      "keywords": [
+        "밀폐탱크",
+        "기상부 압력",
+        "공통압력",
+        "상쇄"
+      ],
+      "core_terms": [
+        "밀폐탱크",
+        "기상부 압력",
+        "공통압력",
+        "상쇄"
+      ],
+      "accepted_explanations": [
+        "밀폐탱크 기상부 압력은 양측에 공통으로 작용하면 상쇄된다."
+      ],
+      "rejected_explanations": [
+        "밀폐탱크 기상부 압력은 항상 레벨 차압에 그대로 더해진다."
+      ],
+      "grading_notes": "공통 기상부 압력의 상쇄조건을 평가한다.",
+      "source_basis": "Emerson and Endress+Hauser closed-vessel DP level guidance.",
+      "claim": "밀폐탱크에서 고압측은 P_v+ρ_pgh이고 저압측이 기상부 P_v를 전달하면 ΔP=(P_v+ρ_pgh)-P_v=ρ_pgh로 기상부 압력이 상쇄된다.",
+      "description": "밀폐탱크에서 고압측은 P_v+ρ_pgh이고 저압측이 기상부 P_v를 전달하면 ΔP=(P_v+ρ_pgh)-P_v=ρ_pgh로 기상부 압력이 상쇄된다."
+    },
+    {
+      "id": "dp_level_reference_elevation_and_span",
+      "anchor_id": "dp_level_reference_elevation_and_span",
+      "statement": "측정차압은 가변 공정수두와 배관·설치에 의한 고정 기준수두의 합이다. Span은 0%와 100%의 가변수두 차이이며 LRV와 URV에는 모든 고정수두를 부호와 함께 반영한다.",
+      "importance": "core",
+      "keywords": [
+        "기준수두",
+        "고정수두",
+        "LRV",
+        "URV",
+        "Span"
+      ],
+      "core_terms": [
+        "기준수두",
+        "고정수두",
+        "LRV",
+        "URV",
+        "Span"
+      ],
+      "accepted_explanations": [
+        "고정수두는 영점에, 가변수두는 span에 영향을 준다."
+      ],
+      "rejected_explanations": [
+        "설치수두를 무시하고 항상 0에서 ρgH로 교정한다."
+      ],
+      "grading_notes": "고정수두와 가변수두를 구분하는지 평가한다.",
+      "source_basis": "Emerson DP level ranging and calibration guidance.",
+      "claim": "측정차압은 가변 공정수두와 배관·설치에 의한 고정 기준수두의 합이다. Span은 0%와 100%의 가변수두 차이이며 LRV와 URV에는 모든 고정수두를 부호와 함께 반영한다.",
+      "description": "측정차압은 가변 공정수두와 배관·설치에 의한 고정 기준수두의 합이다. Span은 0%와 100%의 가변수두 차이이며 LRV와 URV에는 모든 고정수두를 부호와 함께 반영한다."
+    },
+    {
+      "id": "dp_level_dry_leg_configuration",
+      "anchor_id": "dp_level_dry_leg_configuration",
+      "statement": "Dry Leg는 밀폐탱크 저압측 도압관을 기상부에 연결하고 도압관을 기체 또는 증기상태로 유지하는 방식이다. 기체 수두가 무시 가능한 조건에서 기상부 압력만 전달한다.",
+      "importance": "core",
+      "keywords": [
+        "Dry Leg",
+        "저압측",
+        "기상부",
+        "도압관"
+      ],
+      "core_terms": [
+        "Dry Leg",
+        "저압측",
+        "기상부",
+        "도압관"
+      ],
+      "accepted_explanations": [
+        "Dry Leg의 저압측 도압관은 응축되지 않은 기체상태를 유지한다."
+      ],
+      "rejected_explanations": [
+        "Dry Leg는 저압측 도압관을 기준액으로 채우는 방식이다."
+      ],
+      "grading_notes": "Dry Leg의 구성과 적용조건을 평가한다.",
+      "source_basis": "Yokogawa and Emerson dry-leg application guidance.",
+      "claim": "Dry Leg는 밀폐탱크 저압측 도압관을 기상부에 연결하고 도압관을 기체 또는 증기상태로 유지하는 방식이다. 기체 수두가 무시 가능한 조건에서 기상부 압력만 전달한다.",
+      "description": "Dry Leg는 밀폐탱크 저압측 도압관을 기상부에 연결하고 도압관을 기체 또는 증기상태로 유지하는 방식이다. 기체 수두가 무시 가능한 조건에서 기상부 압력만 전달한다."
+    },
+    {
+      "id": "dp_level_dry_leg_condensation_error",
+      "anchor_id": "dp_level_dry_leg_condensation_error",
+      "statement": "Dry Leg에 응축수가 생기면 저압측에 가변 액주수두가 형성되어 측정차압이 감소한다. 지시레벨이 낮아지거나 영점이 불안정해지므로 Wet Leg 또는 Remote Seal을 검토한다.",
+      "importance": "core",
+      "keywords": [
+        "Dry Leg",
+        "응축",
+        "가변수두",
+        "음의 편차"
+      ],
+      "core_terms": [
+        "Dry Leg",
+        "응축",
+        "가변수두",
+        "음의 편차"
+      ],
+      "accepted_explanations": [
+        "저압측 응축수 증가는 측정차압과 지시레벨을 감소시킨다."
+      ],
+      "rejected_explanations": [
+        "Dry Leg의 응축수는 레벨 지시에 영향을 주지 않는다."
+      ],
+      "grading_notes": "응축수 수두의 영향방향을 평가한다.",
+      "source_basis": "Emerson and Yokogawa dry-leg condensation guidance.",
+      "claim": "Dry Leg에 응축수가 생기면 저압측에 가변 액주수두가 형성되어 측정차압이 감소한다. 지시레벨이 낮아지거나 영점이 불안정해지므로 Wet Leg 또는 Remote Seal을 검토한다.",
+      "description": "Dry Leg에 응축수가 생기면 저압측에 가변 액주수두가 형성되어 측정차압이 감소한다. 지시레벨이 낮아지거나 영점이 불안정해지므로 Wet Leg 또는 Remote Seal을 검토한다."
+    },
+    {
+      "id": "dp_level_wet_leg_reference_head",
+      "anchor_id": "dp_level_wet_leg_reference_head",
+      "statement": "Wet Leg는 저압측 도압관을 일정 밀도의 기준액으로 채워 기준수두를 형성한다. 기준액 높이 H_w와 밀도 ρ_w를 사용하면 ΔP=ρ_pgh-ρ_wgH_w이다.",
+      "importance": "core",
+      "keywords": [
+        "Wet Leg",
+        "기준액",
+        "저압측 수두",
+        "ρwHw"
+      ],
+      "core_terms": [
+        "Wet Leg",
+        "기준액",
+        "저압측 수두",
+        "ρwHw"
+      ],
+      "accepted_explanations": [
+        "Wet Leg의 저압측 기준수두는 측정차압에서 차감된다."
+      ],
+      "rejected_explanations": [
+        "Wet Leg의 저압측 수두는 측정차압에 더해진다."
+      ],
+      "grading_notes": "Wet Leg 기준수두의 부호를 평가한다.",
+      "source_basis": "Emerson and Endress+Hauser wet-leg guidance.",
+      "claim": "Wet Leg는 저압측 도압관을 일정 밀도의 기준액으로 채워 기준수두를 형성한다. 기준액 높이 H_w와 밀도 ρ_w를 사용하면 ΔP=ρ_pgh-ρ_wgH_w이다.",
+      "description": "Wet Leg는 저압측 도압관을 일정 밀도의 기준액으로 채워 기준수두를 형성한다. 기준액 높이 H_w와 밀도 ρ_w를 사용하면 ΔP=ρ_pgh-ρ_wgH_w이다."
+    },
+    {
+      "id": "dp_level_wet_leg_zero_elevation",
+      "anchor_id": "dp_level_wet_leg_zero_elevation",
+      "statement": "Wet Leg에서는 0% 레벨에서도 저압측 기준수두 때문에 음의 차압이 발생할 수 있다. 따라서 LRV가 0보다 작은 Zero Elevation 교정을 적용한다.",
+      "importance": "core",
+      "keywords": [
+        "Wet Leg",
+        "Zero Elevation",
+        "음의 LRV"
+      ],
+      "core_terms": [
+        "Wet Leg",
+        "Zero Elevation",
+        "음의 LRV"
+      ],
+      "accepted_explanations": [
+        "Wet Leg의 0% 차압은 음수가 될 수 있다."
+      ],
+      "rejected_explanations": [
+        "Wet Leg는 항상 양의 LRV를 만드는 Zero Suppression이다."
+      ],
+      "grading_notes": "Wet Leg와 Zero Elevation의 관계를 평가한다.",
+      "source_basis": "Emerson wet-leg transmitter ranging guidance.",
+      "claim": "Wet Leg에서는 0% 레벨에서도 저압측 기준수두 때문에 음의 차압이 발생할 수 있다. 따라서 LRV가 0보다 작은 Zero Elevation 교정을 적용한다.",
+      "description": "Wet Leg에서는 0% 레벨에서도 저압측 기준수두 때문에 음의 차압이 발생할 수 있다. 따라서 LRV가 0보다 작은 Zero Elevation 교정을 적용한다."
+    },
+    {
+      "id": "dp_level_density_compensation",
+      "anchor_id": "dp_level_density_compensation",
+      "statement": "고정수두를 보정한 뒤 h_ind=ΔP/(ρ_calg)=(ρ_actual/ρ_cal)h_actual이다. 실제밀도가 교정밀도보다 크면 지시레벨이 실제보다 높아진다.",
+      "importance": "core",
+      "keywords": [
+        "밀도보정",
+        "교정밀도",
+        "실제밀도",
+        "h_ind"
+      ],
+      "core_terms": [
+        "밀도보정",
+        "교정밀도",
+        "실제밀도",
+        "h_ind"
+      ],
+      "accepted_explanations": [
+        "지시레벨은 실제밀도와 교정밀도의 비에 비례한다."
+      ],
+      "rejected_explanations": [
+        "차압식 레벨 측정은 밀도 변화와 무관하다."
+      ],
+      "grading_notes": "밀도비와 오차방향을 평가한다.",
+      "source_basis": "ISA hydrostatic equations and Emerson density guidance.",
+      "claim": "고정수두를 보정한 뒤 h_ind=ΔP/(ρ_calg)=(ρ_actual/ρ_cal)h_actual이다. 실제밀도가 교정밀도보다 크면 지시레벨이 실제보다 높아진다.",
+      "description": "고정수두를 보정한 뒤 h_ind=ΔP/(ρ_calg)=(ρ_actual/ρ_cal)h_actual이다. 실제밀도가 교정밀도보다 크면 지시레벨이 실제보다 높아진다."
+    },
+    {
+      "id": "dp_level_process_temperature_density_error",
+      "anchor_id": "dp_level_process_temperature_density_error",
+      "statement": "공정 유체의 온도, 조성 및 압력 변화는 밀도를 바꾸어 동일 레벨에서도 차압을 변화시킨다. 운전밀도를 사용하고 필요하면 온도·밀도 보정을 적용한다.",
+      "importance": "core",
+      "keywords": [
+        "온도",
+        "조성",
+        "운전밀도",
+        "밀도보정"
+      ],
+      "core_terms": [
+        "온도",
+        "조성",
+        "운전밀도",
+        "밀도보정"
+      ],
+      "accepted_explanations": [
+        "기준밀도가 아니라 실제 운전조건 밀도를 검토한다."
+      ],
+      "rejected_explanations": [
+        "온도 변화는 차압식 레벨 span에 영향을 주지 않는다."
+      ],
+      "grading_notes": "온도와 조성이 밀도오차로 연결되는지 평가한다.",
+      "source_basis": "Endress+Hauser and Yokogawa density-compensation guidance.",
+      "claim": "공정 유체의 온도, 조성 및 압력 변화는 밀도를 바꾸어 동일 레벨에서도 차압을 변화시킨다. 운전밀도를 사용하고 필요하면 온도·밀도 보정을 적용한다.",
+      "description": "공정 유체의 온도, 조성 및 압력 변화는 밀도를 바꾸어 동일 레벨에서도 차압을 변화시킨다. 운전밀도를 사용하고 필요하면 온도·밀도 보정을 적용한다."
+    },
+    {
+      "id": "dp_level_zero_suppression_and_elevation",
+      "anchor_id": "dp_level_zero_suppression_and_elevation",
+      "statement": "Zero Suppression은 0% 입력에서 LRV>0인 경우이고, Zero Elevation은 LRV<0인 경우이다. 트랜스미터의 물리적 설치위치가 아니라 0% 입력차압의 부호로 구분한다.",
+      "importance": "core",
+      "keywords": [
+        "Zero Suppression",
+        "Zero Elevation",
+        "LRV"
+      ],
+      "core_terms": [
+        "Zero Suppression",
+        "Zero Elevation",
+        "LRV"
+      ],
+      "accepted_explanations": [
+        "Suppression과 Elevation은 LRV 부호로 구분한다."
+      ],
+      "rejected_explanations": [
+        "트랜스미터가 탱크 아래에 있으면 항상 Zero Elevation이다."
+      ],
+      "grading_notes": "영점 이동 용어의 정의를 평가한다.",
+      "source_basis": "Emerson transmitter calibration terminology.",
+      "claim": "Zero Suppression은 0% 입력에서 LRV>0인 경우이고, Zero Elevation은 LRV<0인 경우이다. 트랜스미터의 물리적 설치위치가 아니라 0% 입력차압의 부호로 구분한다.",
+      "description": "Zero Suppression은 0% 입력에서 LRV>0인 경우이고, Zero Elevation은 LRV<0인 경우이다. 트랜스미터의 물리적 설치위치가 아니라 0% 입력차압의 부호로 구분한다."
+    },
+    {
+      "id": "dp_level_remote_seal_structure",
+      "anchor_id": "dp_level_remote_seal_structure",
+      "statement": "Remote Diaphragm Seal은 공정압력을 격리막, 비압축성 충전액과 모세관을 통해 차압셀에 전달한다. 고온·부식·점착 공정에 유리하지만 열오차와 동특성 한계를 가진다.",
+      "importance": "core",
+      "keywords": [
+        "Remote Seal",
+        "격리막",
+        "충전액",
+        "모세관"
+      ],
+      "core_terms": [
+        "Remote Seal",
+        "격리막",
+        "충전액",
+        "모세관"
+      ],
+      "accepted_explanations": [
+        "Remote Seal은 충전액으로 공정압력을 차압셀에 전달한다."
+      ],
+      "rejected_explanations": [
+        "Remote Seal은 충전액 없이 전기신호로 압력을 전달한다."
+      ],
+      "grading_notes": "Remote Seal의 압력전달 구조를 평가한다.",
+      "source_basis": "WIKA and Emerson diaphragm-seal system guidance.",
+      "claim": "Remote Diaphragm Seal은 공정압력을 격리막, 비압축성 충전액과 모세관을 통해 차압셀에 전달한다. 고온·부식·점착 공정에 유리하지만 열오차와 동특성 한계를 가진다.",
+      "description": "Remote Diaphragm Seal은 공정압력을 격리막, 비압축성 충전액과 모세관을 통해 차압셀에 전달한다. 고온·부식·점착 공정에 유리하지만 열오차와 동특성 한계를 가진다."
+    },
+    {
+      "id": "dp_level_remote_seal_fill_fluid_head",
+      "anchor_id": "dp_level_remote_seal_fill_fluid_head",
+      "statement": "Remote Seal 모세관의 수직 높이차는 충전액 수두 ρ_fgΔz를 만든다. 고압측과 저압측 Seal의 실제 높이와 부호를 반영하여 LRV와 URV를 계산한다.",
+      "importance": "core",
+      "keywords": [
+        "충전액 수두",
+        "ρfgΔz",
+        "모세관 높이"
+      ],
+      "core_terms": [
+        "충전액 수두",
+        "ρfgΔz",
+        "모세관 높이"
+      ],
+      "accepted_explanations": [
+        "충전액 수두는 설치고도에 따른 고정 영점항이다."
+      ],
+      "rejected_explanations": [
+        "모세관의 수직 높이는 교정에 영향을 주지 않는다."
+      ],
+      "grading_notes": "충전액 수두의 부호를 평가한다.",
+      "source_basis": "Emerson and WIKA remote-seal elevation guidance.",
+      "claim": "Remote Seal 모세관의 수직 높이차는 충전액 수두 ρ_fgΔz를 만든다. 고압측과 저압측 Seal의 실제 높이와 부호를 반영하여 LRV와 URV를 계산한다.",
+      "description": "Remote Seal 모세관의 수직 높이차는 충전액 수두 ρ_fgΔz를 만든다. 고압측과 저압측 Seal의 실제 높이와 부호를 반영하여 LRV와 URV를 계산한다."
+    },
+    {
+      "id": "dp_level_remote_seal_temperature_error",
+      "anchor_id": "dp_level_remote_seal_temperature_error",
+      "statement": "주변·공정온도 변화는 충전액 밀도와 체적, 격리막 강성 및 모세관 내부압력을 변화시켜 영점 이동과 비선형 오차를 만든다. 충전액 선정과 열성능 검토가 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "Remote Seal",
+        "온도오차",
+        "충전액 팽창"
+      ],
+      "core_terms": [
+        "Remote Seal",
+        "온도오차",
+        "충전액 팽창"
+      ],
+      "accepted_explanations": [
+        "Remote Seal 온도오차는 충전액과 격리막에서 발생한다."
+      ],
+      "rejected_explanations": [
+        "Remote Seal은 공정과 격리되므로 온도오차가 없다."
+      ],
+      "grading_notes": "충전액과 격리막의 열오차를 평가한다.",
+      "source_basis": "WIKA and Emerson remote-seal thermal guidance.",
+      "claim": "주변·공정온도 변화는 충전액 밀도와 체적, 격리막 강성 및 모세관 내부압력을 변화시켜 영점 이동과 비선형 오차를 만든다. 충전액 선정과 열성능 검토가 필요하다.",
+      "description": "주변·공정온도 변화는 충전액 밀도와 체적, 격리막 강성 및 모세관 내부압력을 변화시켜 영점 이동과 비선형 오차를 만든다. 충전액 선정과 열성능 검토가 필요하다."
+    },
+    {
+      "id": "dp_level_capillary_length_symmetry",
+      "anchor_id": "dp_level_capillary_length_symmetry",
+      "statement": "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다.",
+      "importance": "core",
+      "keywords": [
+        "Dual Seal",
+        "모세관 대칭",
+        "차동 영점"
+      ],
+      "core_terms": [
+        "Dual Seal",
+        "모세관 대칭",
+        "차동 영점"
+      ],
+      "accepted_explanations": [
+        "양측 모세관 대칭은 차동 열오차를 줄인다."
+      ],
+      "rejected_explanations": [
+        "양측 모세관 길이와 온도조건은 무관하다."
+      ],
+      "grading_notes": "모세관 대칭조건을 평가한다.",
+      "source_basis": "Emerson Tuned-System and WIKA dual-seal guidance.",
+      "claim": "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다.",
+      "description": "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다."
+    },
+    {
+      "id": "dp_level_capillary_response_time",
+      "anchor_id": "dp_level_capillary_response_time",
+      "statement": "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다.",
+      "importance": "core",
+      "keywords": [
+        "응답시간",
+        "충전액 점도",
+        "모세관",
+        "저온"
+      ],
+      "core_terms": [
+        "응답시간",
+        "충전액 점도",
+        "모세관",
+        "저온"
+      ],
+      "accepted_explanations": [
+        "긴 모세관과 높은 충전액 점도는 응답을 늦출 수 있다."
+      ],
+      "rejected_explanations": [
+        "모세관 길이와 온도는 응답시간에 영향을 주지 않는다."
+      ],
+      "grading_notes": "Remote Seal의 유압 동특성을 평가한다.",
+      "source_basis": "Emerson and WIKA remote-seal response guidance.",
+      "claim": "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다.",
+      "description": "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다."
+    },
+    {
+      "id": "dp_level_interface_density_difference",
+      "anchor_id": "dp_level_interface_density_difference",
+      "statement": "전체 액주높이 H가 일정하고 하부 중액 높이가 h_i이면 ΔP=C+g[ρ_LH+(ρ_H-ρ_L)h_i]이다. 계면 감도는 g(ρ_H-ρ_L)이므로 밀도차가 작으면 측정 span이 감소한다.",
+      "importance": "core",
+      "keywords": [
+        "계면",
+        "밀도차",
+        "ρH-ρL",
+        "감도"
+      ],
+      "core_terms": [
+        "계면",
+        "밀도차",
+        "ρH-ρL",
+        "감도"
+      ],
+      "accepted_explanations": [
+        "계면 측정 감도는 두 유체의 밀도차에 비례한다."
+      ],
+      "rejected_explanations": [
+        "계면 측정 감도는 두 유체의 밀도차와 무관하다."
+      ],
+      "grading_notes": "계면식과 밀도차 감도를 평가한다.",
+      "source_basis": "Emerson and Yokogawa DP interface guidance.",
+      "claim": "전체 액주높이 H가 일정하고 하부 중액 높이가 h_i이면 ΔP=C+g[ρ_LH+(ρ_H-ρ_L)h_i]이다. 계면 감도는 g(ρ_H-ρ_L)이므로 밀도차가 작으면 측정 span이 감소한다.",
+      "description": "전체 액주높이 H가 일정하고 하부 중액 높이가 h_i이면 ΔP=C+g[ρ_LH+(ρ_H-ρ_L)h_i]이다. 계면 감도는 g(ρ_H-ρ_L)이므로 밀도차가 작으면 측정 span이 감소한다."
+    },
+    {
+      "id": "dp_level_interface_total_level_condition",
+      "anchor_id": "dp_level_interface_total_level_condition",
+      "statement": "계면 측정은 전체 액주높이, 상부 액체층, 탭 침수조건과 두 유체의 운전밀도가 정의되어야 한다. 전체 레벨이 변하거나 에멀전층이 두꺼우면 단일 차압으로 계면을 유일하게 결정하기 어렵다.",
+      "importance": "core",
+      "keywords": [
+        "계면",
+        "전체 레벨",
+        "에멀전",
+        "경계조건"
+      ],
+      "core_terms": [
+        "계면",
+        "전체 레벨",
+        "에멀전",
+        "경계조건"
+      ],
+      "accepted_explanations": [
+        "계면 측정에는 전체 레벨 또는 상부 경계조건이 필요하다."
+      ],
+      "rejected_explanations": [
+        "전체 레벨이 변해도 단일 차압으로 계면을 항상 결정한다."
+      ],
+      "grading_notes": "계면 측정의 식별조건을 평가한다.",
+      "source_basis": "Endress+Hauser and Emerson interface guidance.",
+      "claim": "계면 측정은 전체 액주높이, 상부 액체층, 탭 침수조건과 두 유체의 운전밀도가 정의되어야 한다. 전체 레벨이 변하거나 에멀전층이 두꺼우면 단일 차압으로 계면을 유일하게 결정하기 어렵다.",
+      "description": "계면 측정은 전체 액주높이, 상부 액체층, 탭 침수조건과 두 유체의 운전밀도가 정의되어야 한다. 전체 레벨이 변하거나 에멀전층이 두꺼우면 단일 차압으로 계면을 유일하게 결정하기 어렵다."
+    },
+    {
+      "id": "dp_level_tank_geometry_volume_conversion",
+      "anchor_id": "dp_level_tank_geometry_volume_conversion",
+      "statement": "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다.",
+      "importance": "core",
+      "keywords": [
+        "탱크 형상",
+        "체적",
+        "Strapping Table"
+      ],
+      "core_terms": [
+        "탱크 형상",
+        "체적",
+        "Strapping Table"
+      ],
+      "accepted_explanations": [
+        "레벨과 체적의 관계는 탱크 형상에 따라 비선형일 수 있다."
+      ],
+      "rejected_explanations": [
+        "모든 탱크에서 레벨 백분율과 체적 백분율은 같다."
+      ],
+      "grading_notes": "레벨-체적 비선형성을 평가한다.",
+      "source_basis": "ISA tank gauging and transmitter characterization guidance.",
+      "claim": "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다.",
+      "description": "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다."
+    },
+    {
+      "id": "dp_level_impulse_line_blockage_leak_bubble",
+      "anchor_id": "dp_level_impulse_line_blockage_leak_bubble",
+      "statement": "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다.",
+      "importance": "core",
+      "keywords": [
+        "도압관",
+        "막힘",
+        "누설",
+        "기포"
+      ],
+      "core_terms": [
+        "도압관",
+        "막힘",
+        "누설",
+        "기포"
+      ],
+      "accepted_explanations": [
+        "도압관 고장은 정적 편차와 응답불량을 모두 만든다."
+      ],
+      "rejected_explanations": [
+        "도압관 상태는 차압 측정에 영향을 주지 않는다."
+      ],
+      "grading_notes": "도압관 고장모드와 진단을 평가한다.",
+      "source_basis": "ISA and Emerson impulse-piping guidance.",
+      "claim": "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다.",
+      "description": "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다."
+    },
+    {
+      "id": "dp_level_impulse_line_freezing_and_heat_tracing",
+      "anchor_id": "dp_level_impulse_line_freezing_and_heat_tracing",
+      "statement": "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "동결",
+        "Heat Tracing",
+        "보온",
+        "열적 비대칭"
+      ],
+      "core_terms": [
+        "동결",
+        "Heat Tracing",
+        "보온",
+        "열적 비대칭"
+      ],
+      "accepted_explanations": [
+        "Heat Tracing은 동결방지와 양측 수두 균형을 함께 고려한다."
+      ],
+      "rejected_explanations": [
+        "양측 가열조건 차이는 영점에 영향을 주지 않는다."
+      ],
+      "grading_notes": "동결대책과 열적 비대칭을 평가한다.",
+      "source_basis": "ISA cold-weather instrumentation guidance.",
+      "claim": "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다.",
+      "description": "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다."
+    },
+    {
+      "id": "dp_level_transmitter_mounting_elevation_error",
+      "anchor_id": "dp_level_transmitter_mounting_elevation_error",
+      "statement": "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다.",
+      "importance": "core",
+      "keywords": [
+        "설치높이",
+        "Mounting Elevation",
+        "고정수두"
+      ],
+      "core_terms": [
+        "설치높이",
+        "Mounting Elevation",
+        "고정수두"
+      ],
+      "accepted_explanations": [
+        "설치높이 수두는 LRV와 URV에 포함한다."
+      ],
+      "rejected_explanations": [
+        "트랜스미터 설치높이는 영점에 영향을 주지 않는다."
+      ],
+      "grading_notes": "설치고도와 고정수두를 평가한다.",
+      "source_basis": "Emerson and Yokogawa transmitter mounting guidance.",
+      "claim": "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다.",
+      "description": "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다."
+    },
+    {
+      "id": "dp_level_calibration_lrv_urv",
+      "anchor_id": "dp_level_calibration_lrv_urv",
+      "statement": "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다.",
+      "importance": "core",
+      "keywords": [
+        "LRV",
+        "URV",
+        "Span",
+        "교정"
+      ],
+      "core_terms": [
+        "LRV",
+        "URV",
+        "Span",
+        "교정"
+      ],
+      "accepted_explanations": [
+        "LRV와 URV에는 모든 고정수두와 운전밀도를 포함한다."
+      ],
+      "rejected_explanations": [
+        "차압식 레벨계는 항상 LRV=0으로 설정한다."
+      ],
+      "grading_notes": "0%와 100%의 완전한 차압계산을 평가한다.",
+      "source_basis": "Emerson DP level ranging and calibration guidance.",
+      "claim": "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다.",
+      "description": "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다."
+    },
+    {
+      "id": "dp_level_overpressure_and_static_pressure_effect",
+      "anchor_id": "dp_level_overpressure_and_static_pressure_effect",
+      "statement": "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "정압효과",
+        "과압",
+        "MWP",
+        "매니폴드"
+      ],
+      "core_terms": [
+        "정압효과",
+        "과압",
+        "MWP",
+        "매니폴드"
+      ],
+      "accepted_explanations": [
+        "작은 차압을 높은 정압에서 측정하므로 정압성능을 검토한다."
+      ],
+      "rejected_explanations": [
+        "차압이 작으면 공정 정압은 센서에 영향을 주지 않는다."
+      ],
+      "grading_notes": "정압효과와 과압보호를 평가한다.",
+      "source_basis": "Emerson, Yokogawa and Endress+Hauser DP specifications.",
+      "claim": "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다.",
+      "description": "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다."
+    },
+    {
+      "id": "dp_level_selection_against_radar_gwr",
+      "anchor_id": "dp_level_selection_against_radar_gwr",
+      "statement": "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다.",
+      "importance": "core",
+      "keywords": [
+        "차압식",
+        "Radar",
+        "GWR",
+        "선정비교"
+      ],
+      "core_terms": [
+        "차압식",
+        "Radar",
+        "GWR",
+        "선정비교"
+      ],
+      "accepted_explanations": [
+        "차압식과 Radar/GWR은 서로 다른 공정의존성을 가진다."
+      ],
+      "rejected_explanations": [
+        "하나의 레벨 측정방식이 모든 공정에서 항상 우수하다."
+      ],
+      "grading_notes": "측정원리별 선정기준을 평가한다.",
+      "source_basis": "Emerson, Siemens and Endress+Hauser selection guidance.",
+      "claim": "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다.",
+      "description": "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "dp_level_fatal_density_independence",
+      "claim": "차압식 레벨 측정이 공정 유체 밀도 변화와 완전히 무관하다고 명시적으로 주장한다.",
+      "correction": "실제 운전밀도와 교정밀도의 차이를 반영한다.",
+      "wrong_claim": "차압식 레벨 측정이 공정 유체 밀도 변화와 완전히 무관하다고 명시적으로 주장한다.",
+      "correct_rule": "실제 운전밀도와 교정밀도의 차이를 반영한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C"
+      ],
+      "message": "차압은 ρgh에 비례한다. 실제 운전밀도와 교정밀도의 차이를 반영한다.",
+      "description": "차압식 레벨 측정이 공정 유체 밀도 변화와 완전히 무관하다고 명시적으로 주장한다.",
+      "grading_notes": "차압식 레벨 측정이 공정 유체 밀도 변화와 완전히 무관하다고 명시적으로 주장한다."
+    },
+    {
+      "id": "dp_level_fatal_closed_tank_vapor_pressure_addition",
+      "claim": "정상 연결된 밀폐탱크에서 기상부 압력이 레벨 차압에 항상 그대로 더해진다고 명시적으로 주장한다.",
+      "correction": "(P_v+ρgh)-P_v=ρgh를 적용한다.",
+      "wrong_claim": "정상 연결된 밀폐탱크에서 기상부 압력이 레벨 차압에 항상 그대로 더해진다고 명시적으로 주장한다.",
+      "correct_rule": "(P_v+ρgh)-P_v=ρgh를 적용한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C"
+      ],
+      "message": "공통 기상부 압력은 양측에서 상쇄된다. (P_v+ρgh)-P_v=ρgh를 적용한다.",
+      "description": "정상 연결된 밀폐탱크에서 기상부 압력이 레벨 차압에 항상 그대로 더해진다고 명시적으로 주장한다.",
+      "grading_notes": "정상 연결된 밀폐탱크에서 기상부 압력이 레벨 차압에 항상 그대로 더해진다고 명시적으로 주장한다."
+    },
+    {
+      "id": "dp_level_fatal_wet_leg_sign_reversal",
+      "claim": "Wet Leg 저압측 수두가 측정차압을 증가시킨다고 명시적으로 부호를 반대로 적용한다.",
+      "correction": "ΔP=ρ_pgh-ρ_wgH_w를 적용한다.",
+      "wrong_claim": "Wet Leg 저압측 수두가 측정차압을 증가시킨다고 명시적으로 부호를 반대로 적용한다.",
+      "correct_rule": "ΔP=ρ_pgh-ρ_wgH_w를 적용한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C"
+      ],
+      "message": "저압측 수두는 P_H-P_L에서 차감된다. ΔP=ρ_pgh-ρ_wgH_w를 적용한다.",
+      "description": "Wet Leg 저압측 수두가 측정차압을 증가시킨다고 명시적으로 부호를 반대로 적용한다.",
+      "grading_notes": "Wet Leg 저압측 수두가 측정차압을 증가시킨다고 명시적으로 부호를 반대로 적용한다."
+    },
+    {
+      "id": "dp_level_fatal_interface_density_difference_denial",
+      "claim": "차압식 계면 측정 감도가 두 유체의 밀도차와 무관하다고 명시적으로 주장한다.",
+      "correction": "밀도차가 작으면 계면 span이 감소한다고 설명한다.",
+      "wrong_claim": "차압식 계면 측정 감도가 두 유체의 밀도차와 무관하다고 명시적으로 주장한다.",
+      "correct_rule": "밀도차가 작으면 계면 span이 감소한다고 설명한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "B",
+        "C"
+      ],
+      "message": "계면 감도는 g(ρ_H-ρ_L)이다. 밀도차가 작으면 계면 span이 감소한다고 설명한다.",
+      "description": "차압식 계면 측정 감도가 두 유체의 밀도차와 무관하다고 명시적으로 주장한다.",
+      "grading_notes": "차압식 계면 측정 감도가 두 유체의 밀도차와 무관하다고 명시적으로 주장한다."
+    }
+  ],
+  "safe_expressions": [
+    "차압식 레벨 측정의 기본식은 ΔP=ρgh이다.",
+    "개방탱크의 대기압은 양측에서 상쇄된다.",
+    "밀폐탱크 기상부 압력은 양측에 공통으로 작용하면 상쇄된다.",
+    "고정수두는 영점에, 가변수두는 span에 영향을 준다.",
+    "Dry Leg의 저압측 도압관은 응축되지 않은 기체상태를 유지한다.",
+    "저압측 응축수 증가는 측정차압과 지시레벨을 감소시킨다.",
+    "Wet Leg의 저압측 기준수두는 측정차압에서 차감된다.",
+    "Wet Leg의 0% 차압은 음수가 될 수 있다.",
+    "지시레벨은 실제밀도와 교정밀도의 비에 비례한다.",
+    "기준밀도가 아니라 실제 운전조건 밀도를 검토한다.",
+    "Suppression과 Elevation은 LRV 부호로 구분한다.",
+    "Remote Seal은 충전액으로 공정압력을 차압셀에 전달한다.",
+    "충전액 수두는 설치고도에 따른 고정 영점항이다.",
+    "Remote Seal 온도오차는 충전액과 격리막에서 발생한다.",
+    "양측 모세관 대칭은 차동 열오차를 줄인다.",
+    "긴 모세관과 높은 충전액 점도는 응답을 늦출 수 있다.",
+    "계면 측정 감도는 두 유체의 밀도차에 비례한다.",
+    "계면 측정에는 전체 레벨 또는 상부 경계조건이 필요하다.",
+    "레벨과 체적의 관계는 탱크 형상에 따라 비선형일 수 있다.",
+    "도압관 고장은 정적 편차와 응답불량을 모두 만든다.",
+    "Heat Tracing은 동결방지와 양측 수두 균형을 함께 고려한다.",
+    "설치높이 수두는 LRV와 URV에 포함한다.",
+    "LRV와 URV에는 모든 고정수두와 운전밀도를 포함한다.",
+    "작은 차압을 높은 정압에서 측정하므로 정압성능을 검토한다.",
+    "차압식과 Radar/GWR은 서로 다른 공정의존성을 가진다."
+  ],
+  "revision_notes": [
+    "정수압·밀도·기준수두 계약을 정의했다.",
+    "Open/Closed Tank와 Dry/Wet Leg를 분리했다.",
+    "Zero Suppression과 Elevation의 부호기준을 정의했다.",
+    "Remote Seal 충전액·온도·모세관 동특성을 반영했다.",
+    "계면 측정의 밀도차와 경계조건을 반영했다.",
+    "도압관·설치고도·정압·과압 오차를 반영했다.",
+    "Fatal 직접 점수 영향은 B/C에 한정했다."
+  ],
+  "topic_label": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차",
+  "core_facts": [
+    "정지 유체의 두 점 사이 압력차는 ΔP=∫ρg·dz이며, 밀도가 일정하면 ΔP=ρgΔh이다. 차압식 레벨계는 높이만이 아니라 밀도와 높이의 곱인 압력수두를 측정한다.",
+    "개방탱크에서 고압측은 탱크 하부에 연결하고 저압측은 대기에 개방한다. 동일한 대기압이 상쇄되므로 ΔP=ρ_pgh이며 설치배관의 고정수두는 LRV와 URV에 반영한다.",
+    "밀폐탱크에서 고압측은 P_v+ρ_pgh이고 저압측이 기상부 P_v를 전달하면 ΔP=(P_v+ρ_pgh)-P_v=ρ_pgh로 기상부 압력이 상쇄된다.",
+    "측정차압은 가변 공정수두와 배관·설치에 의한 고정 기준수두의 합이다. Span은 0%와 100%의 가변수두 차이이며 LRV와 URV에는 모든 고정수두를 부호와 함께 반영한다.",
+    "Dry Leg는 밀폐탱크 저압측 도압관을 기상부에 연결하고 도압관을 기체 또는 증기상태로 유지하는 방식이다. 기체 수두가 무시 가능한 조건에서 기상부 압력만 전달한다.",
+    "Dry Leg에 응축수가 생기면 저압측에 가변 액주수두가 형성되어 측정차압이 감소한다. 지시레벨이 낮아지거나 영점이 불안정해지므로 Wet Leg 또는 Remote Seal을 검토한다.",
+    "Wet Leg는 저압측 도압관을 일정 밀도의 기준액으로 채워 기준수두를 형성한다. 기준액 높이 H_w와 밀도 ρ_w를 사용하면 ΔP=ρ_pgh-ρ_wgH_w이다.",
+    "Wet Leg에서는 0% 레벨에서도 저압측 기준수두 때문에 음의 차압이 발생할 수 있다. 따라서 LRV가 0보다 작은 Zero Elevation 교정을 적용한다.",
+    "고정수두를 보정한 뒤 h_ind=ΔP/(ρ_calg)=(ρ_actual/ρ_cal)h_actual이다. 실제밀도가 교정밀도보다 크면 지시레벨이 실제보다 높아진다.",
+    "공정 유체의 온도, 조성 및 압력 변화는 밀도를 바꾸어 동일 레벨에서도 차압을 변화시킨다. 운전밀도를 사용하고 필요하면 온도·밀도 보정을 적용한다.",
+    "Zero Suppression은 0% 입력에서 LRV>0인 경우이고, Zero Elevation은 LRV<0인 경우이다. 트랜스미터의 물리적 설치위치가 아니라 0% 입력차압의 부호로 구분한다.",
+    "Remote Diaphragm Seal은 공정압력을 격리막, 비압축성 충전액과 모세관을 통해 차압셀에 전달한다. 고온·부식·점착 공정에 유리하지만 열오차와 동특성 한계를 가진다.",
+    "Remote Seal 모세관의 수직 높이차는 충전액 수두 ρ_fgΔz를 만든다. 고압측과 저압측 Seal의 실제 높이와 부호를 반영하여 LRV와 URV를 계산한다.",
+    "주변·공정온도 변화는 충전액 밀도와 체적, 격리막 강성 및 모세관 내부압력을 변화시켜 영점 이동과 비선형 오차를 만든다. 충전액 선정과 열성능 검토가 필요하다.",
+    "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다.",
+    "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다.",
+    "전체 액주높이 H가 일정하고 하부 중액 높이가 h_i이면 ΔP=C+g[ρ_LH+(ρ_H-ρ_L)h_i]이다. 계면 감도는 g(ρ_H-ρ_L)이므로 밀도차가 작으면 측정 span이 감소한다.",
+    "계면 측정은 전체 액주높이, 상부 액체층, 탭 침수조건과 두 유체의 운전밀도가 정의되어야 한다. 전체 레벨이 변하거나 에멀전층이 두꺼우면 단일 차압으로 계면을 유일하게 결정하기 어렵다.",
+    "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다.",
+    "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다.",
+    "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다.",
+    "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다.",
+    "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다.",
+    "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다.",
+    "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다."
+  ]
+}

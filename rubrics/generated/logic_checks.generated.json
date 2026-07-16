@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-15T12:49:13Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-16T01:02:08Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -32,6 +32,26 @@
         "stability margin",
         "대역폭",
         "bandwidth"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "enabled": false,
+      "topic_name": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "차압식 레벨계",
+        "DP level",
+        "differential pressure level",
+        "wet leg",
+        "dry leg",
+        "remote seal level"
       ],
       "fatal_checks": [],
       "major_checks": [],

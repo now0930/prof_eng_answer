@@ -1,0 +1,208 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+  "title_ko": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "차압식 레벨계의 측정원리와 개방·밀폐탱크 적용방법을 설명하시오.",
+      "intent": "정수압식과 Open/Closed Tank 기준압력",
+      "required_anchor_ids": [
+        "정수압식과 Open/Closed Tank 기준압력"
+      ]
+    },
+    {
+      "pattern": "Dry Leg와 Wet Leg를 비교하고 교정범위를 설명하시오.",
+      "intent": "Dry Leg 응축과 Wet Leg 기준수두",
+      "required_anchor_ids": [
+        "Dry Leg 응축과 Wet Leg 기준수두"
+      ]
+    },
+    {
+      "pattern": "Wet Leg에서 Zero Elevation이 필요한 이유를 설명하시오.",
+      "intent": "LRV 부호와 Zero Elevation",
+      "required_anchor_ids": [
+        "LRV 부호와 Zero Elevation"
+      ]
+    },
+    {
+      "pattern": "차압식 레벨계의 밀도 변화 오차와 보정방법을 설명하시오.",
+      "intent": "실제밀도와 교정밀도",
+      "required_anchor_ids": [
+        "실제밀도와 교정밀도"
+      ]
+    },
+    {
+      "pattern": "Remote Diaphragm Seal의 구조와 온도오차를 설명하시오.",
+      "intent": "충전액·격리막·모세관 열동특성",
+      "required_anchor_ids": [
+        "충전액·격리막·모세관 열동특성"
+      ]
+    },
+    {
+      "pattern": "차압식 계면 측정의 원리와 적용조건을 설명하시오.",
+      "intent": "밀도차와 전체 액주 경계조건",
+      "required_anchor_ids": [
+        "밀도차와 전체 액주 경계조건"
+      ]
+    },
+    {
+      "pattern": "도압관과 설치조건에 따른 오차 및 대책을 설명하시오.",
+      "intent": "도압관 및 설치오차 진단",
+      "required_anchor_ids": [
+        "도압관 및 설치오차 진단"
+      ]
+    },
+    {
+      "pattern": "차압식과 Radar·GWR 레벨 측정방식을 비교하시오.",
+      "intent": "공정의존성과 유지보수성 기반 선정",
+      "required_anchor_ids": [
+        "공정의존성과 유지보수성 기반 선정"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    "1. 배경 및 측정원리: ΔP=ρgh",
+    "2. Open/Closed Tank와 Dry/Wet Leg",
+    "3. LRV·URV·Span과 영점 이동",
+    "4. 밀도·온도·설치 오차",
+    "5. Remote Seal과 계면 측정",
+    "6. 개선대책과 방식 선정"
+  ],
+  "high_score_points": [
+    "정지 유체의 두 점 사이 압력차는 ΔP=∫ρg·dz이며, 밀도가 일정하면 ΔP=ρgΔh이다. 차압식 레벨계는 높이만이 아니라 밀도와 높이의 곱인 압력수두를 측정한다.",
+    "개방탱크에서 고압측은 탱크 하부에 연결하고 저압측은 대기에 개방한다. 동일한 대기압이 상쇄되므로 ΔP=ρ_pgh이며 설치배관의 고정수두는 LRV와 URV에 반영한다.",
+    "밀폐탱크에서 고압측은 P_v+ρ_pgh이고 저압측이 기상부 P_v를 전달하면 ΔP=(P_v+ρ_pgh)-P_v=ρ_pgh로 기상부 압력이 상쇄된다.",
+    "측정차압은 가변 공정수두와 배관·설치에 의한 고정 기준수두의 합이다. Span은 0%와 100%의 가변수두 차이이며 LRV와 URV에는 모든 고정수두를 부호와 함께 반영한다.",
+    "Dry Leg는 밀폐탱크 저압측 도압관을 기상부에 연결하고 도압관을 기체 또는 증기상태로 유지하는 방식이다. 기체 수두가 무시 가능한 조건에서 기상부 압력만 전달한다.",
+    "Dry Leg에 응축수가 생기면 저압측에 가변 액주수두가 형성되어 측정차압이 감소한다. 지시레벨이 낮아지거나 영점이 불안정해지므로 Wet Leg 또는 Remote Seal을 검토한다.",
+    "Wet Leg는 저압측 도압관을 일정 밀도의 기준액으로 채워 기준수두를 형성한다. 기준액 높이 H_w와 밀도 ρ_w를 사용하면 ΔP=ρ_pgh-ρ_wgH_w이다.",
+    "Wet Leg에서는 0% 레벨에서도 저압측 기준수두 때문에 음의 차압이 발생할 수 있다. 따라서 LRV가 0보다 작은 Zero Elevation 교정을 적용한다.",
+    "고정수두를 보정한 뒤 h_ind=ΔP/(ρ_calg)=(ρ_actual/ρ_cal)h_actual이다. 실제밀도가 교정밀도보다 크면 지시레벨이 실제보다 높아진다.",
+    "공정 유체의 온도, 조성 및 압력 변화는 밀도를 바꾸어 동일 레벨에서도 차압을 변화시킨다. 운전밀도를 사용하고 필요하면 온도·밀도 보정을 적용한다.",
+    "Zero Suppression은 0% 입력에서 LRV>0인 경우이고, Zero Elevation은 LRV<0인 경우이다. 트랜스미터의 물리적 설치위치가 아니라 0% 입력차압의 부호로 구분한다.",
+    "Remote Diaphragm Seal은 공정압력을 격리막, 비압축성 충전액과 모세관을 통해 차압셀에 전달한다. 고온·부식·점착 공정에 유리하지만 열오차와 동특성 한계를 가진다.",
+    "Remote Seal 모세관의 수직 높이차는 충전액 수두 ρ_fgΔz를 만든다. 고압측과 저압측 Seal의 실제 높이와 부호를 반영하여 LRV와 URV를 계산한다.",
+    "주변·공정온도 변화는 충전액 밀도와 체적, 격리막 강성 및 모세관 내부압력을 변화시켜 영점 이동과 비선형 오차를 만든다. 충전액 선정과 열성능 검토가 필요하다.",
+    "Dual Remote Seal은 양측 모세관 길이, 내경, 충전액, 설치경로와 온도노출을 가능한 한 동일하게 구성해야 한다. 비대칭 조건은 차동 영점 이동을 증가시킨다.",
+    "Remote Seal 응답시간은 충전액 점도, 모세관 길이·내경, 온도, 격리막 면적·강성에 영향을 받는다. 길고 가늘며 저온에서 점도가 높은 시스템은 일반적으로 응답이 느리다.",
+    "전체 액주높이 H가 일정하고 하부 중액 높이가 h_i이면 ΔP=C+g[ρ_LH+(ρ_H-ρ_L)h_i]이다. 계면 감도는 g(ρ_H-ρ_L)이므로 밀도차가 작으면 측정 span이 감소한다.",
+    "계면 측정은 전체 액주높이, 상부 액체층, 탭 침수조건과 두 유체의 운전밀도가 정의되어야 한다. 전체 레벨이 변하거나 에멀전층이 두꺼우면 단일 차압으로 계면을 유일하게 결정하기 어렵다.",
+    "차압식 계기는 액주높이를 측정하며 체적은 탱크 형상으로 변환한다. 수평 원통, 구형 및 비정형 탱크는 비선형이므로 Strapping Table 또는 Characterization을 적용한다.",
+    "도압관 막힘, 누설, 기포, 액봉 손실과 이물은 한쪽 압력전달을 지연하거나 고정해 영점·span·응답 오차를 만든다. Drain, vent, flushing과 equalizing으로 진단한다.",
+    "도압관 액체가 동결되면 압력전달이 차단된다. Heat Tracing과 보온은 동결을 방지하지만 양측 가열조건이 다르면 밀도와 기준수두 차이로 영점오차가 생길 수 있다.",
+    "트랜스미터와 탭의 높이차는 도압관 또는 충전액의 고정수두를 만든다. 정상 교정으로 보상할 수 있지만 센서범위, 정압한계와 배관의 액상·기상 유지조건을 검토한다.",
+    "LRV와 URV는 0%와 100%에서 실제 공정밀도, Wet Leg, 도압관, Remote Seal 충전액과 설치수두를 모두 대입하여 계산한다. Span은 URV-LRV이다.",
+    "높은 정압과 한쪽 포트 과압은 차압센서의 영점 이동, 정압효과 또는 손상을 일으킬 수 있다. Maximum Working Pressure, 단방향 과압한계와 매니폴드 조작순서를 확인한다.",
+    "차압식은 밀폐탱크, 기존 압력탭과 계면 측정에 유리하지만 밀도와 도압관 영향을 받는다. Radar와 GWR은 밀도변화의 직접 영향이 작지만 유전율, 에코 또는 프로브 조건을 검토하므로 공정조건과 유지보수성으로 선정한다."
+  ],
+  "common_missing_points": [
+    "높이만 직접 측정한다고 설명",
+    "밀폐탱크 기상부 압력 상쇄 누락",
+    "Dry Leg 응축수 수두 누락",
+    "Wet Leg 기준수두 부호 오류",
+    "Suppression과 Elevation 혼동",
+    "실제밀도와 교정밀도 혼동",
+    "Remote Seal 충전액 수두와 온도오차 누락",
+    "Dual Seal 모세관 비대칭 누락",
+    "계면 밀도차와 전체 레벨 조건 누락",
+    "탱크 체적 비선형 누락",
+    "도압관 고장과 동결 누락",
+    "정압효과와 과압한계 누락"
+  ],
+  "routing_aliases": [
+    "차압식 레벨계",
+    "차압 레벨계",
+    "차압식 액위계",
+    "DP level",
+    "DP level transmitter",
+    "differential pressure level",
+    "hydrostatic level",
+    "밀폐탱크 레벨",
+    "개방탱크 레벨",
+    "Dry Leg",
+    "Wet Leg",
+    "remote diaphragm seal",
+    "Remote Seal",
+    "Zero Suppression",
+    "Zero Elevation",
+    "밀도 보정 레벨",
+    "계면 레벨",
+    "interface level DP",
+    "도압관 레벨"
+  ],
+  "routing_field_points": [
+    "정수압식과 기준압력",
+    "Dry/Wet Leg와 기준수두",
+    "밀도·온도 오차",
+    "Remote Seal과 도압관",
+    "계면·교정·선정"
+  ],
+  "revision_notes": [
+    "원리·구성·교정·오차·선정을 하나의 답안구조로 통합했다.",
+    "25개 Anchor와 4개 Fatal·10개 Major를 반영했다.",
+    "상위 권장 목차를 6개로 정리했다.",
+    "Radar/GWR는 선정기준으로 연결했다."
+  ],
+  "id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+  "title": "Differential-pressure level measurement, density compensation, dry and wet legs, remote seals, and installation errors",
+  "question_examples": [
+    "차압식 레벨계의 측정원리와 개방·밀폐탱크 적용방법을 설명하시오.",
+    "Dry Leg와 Wet Leg를 비교하고 교정범위를 설명하시오.",
+    "Wet Leg에서 Zero Elevation이 필요한 이유를 설명하시오.",
+    "차압식 레벨계의 밀도 변화 오차와 보정방법을 설명하시오.",
+    "Remote Diaphragm Seal의 구조와 온도오차를 설명하시오.",
+    "차압식 계면 측정의 원리와 적용조건을 설명하시오.",
+    "도압관과 설치조건에 따른 오차 및 대책을 설명하시오.",
+    "차압식과 Radar·GWR 레벨 측정방식을 비교하시오."
+  ],
+  "topic_aliases": [
+    "차압식 레벨계",
+    "차압 레벨계",
+    "차압식 액위계",
+    "DP level",
+    "DP level transmitter",
+    "differential pressure level",
+    "hydrostatic level",
+    "밀폐탱크 레벨",
+    "개방탱크 레벨",
+    "Dry Leg",
+    "Wet Leg",
+    "remote diaphragm seal",
+    "Remote Seal",
+    "Zero Suppression",
+    "Zero Elevation",
+    "밀도 보정 레벨",
+    "계면 레벨",
+    "interface level DP",
+    "도압관 레벨"
+  ],
+  "expected_structure": [
+    "정수압 원리",
+    "Open/Closed Tank 및 Dry/Wet Leg",
+    "LRV·URV·Span",
+    "밀도·온도·설치 오차",
+    "Remote Seal·계면·도압관",
+    "개선대책과 선정"
+  ],
+  "high_score_features": [
+    "기준압력과 고정수두 부호를 포함한 식 전개",
+    "밀도와 Remote Seal 열오차 연결",
+    "계면 밀도차와 전체 레벨 조건",
+    "도압관 진단과 Radar/GWR 선정 연결"
+  ],
+  "low_score_patterns": [
+    "ΔP=ρgh 식만 제시",
+    "Dry/Wet Leg를 정의만 함",
+    "밀도·온도 영향을 나열만 함",
+    "Remote Seal을 완전한 해결책으로 단정",
+    "선정기준 없이 장단점만 나열"
+  ],
+  "field_connection_points": [
+    "Wet Leg 기준액과 응축 관리",
+    "Remote Seal 모세관 대칭과 단열",
+    "도압관 drain/vent/flushing",
+    "실제 운전밀도와 LRV·URV 관리",
+    "독립 HH 보호와 측정원리 선정"
+  ]
+}

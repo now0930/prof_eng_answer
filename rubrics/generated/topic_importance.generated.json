@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-15T12:49:13Z-generated-topic-pack-importance",
+  "version": "2026-07-16T01:02:08Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -26,6 +26,35 @@
         "사람이 검토한 Bode 요구사항 Markdown을 기준으로 직접 작성함.",
         "8개 high-band 조건을 Bode 안정여유·대역폭·보상기 내용으로 작성함."
       ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "Open/Closed Tank 기준압력과 기상부 압력 상쇄를 설명한다.",
+        "Dry Leg 응축과 Wet Leg 기준수두를 식으로 설명한다.",
+        "Suppression과 Elevation을 LRV 부호로 구분한다.",
+        "실제밀도와 교정밀도의 비로 오차를 설명한다.",
+        "Remote Seal 수두와 온도오차를 설명한다.",
+        "Dual Seal 모세관 대칭과 응답시간을 설명한다.",
+        "계면 감도 g(ρ_H-ρ_L)와 전체 레벨 조건을 설명한다.",
+        "비선형 탱크 체적환산을 설명한다.",
+        "도압관 고장과 동결대책을 설명한다.",
+        "모든 고정수두를 LRV와 URV에 반영한다.",
+        "정압효과와 과압한계를 설명한다.",
+        "차압식과 Radar/GWR의 선정기준을 설명한다."
+      ],
+      "note": "정수압, 공통압력 상쇄, 기준수두, 밀도오차, Remote Seal과 계면 측정을 연결하는 핵심 계측 Topic이다.",
+      "revision_notes": [
+        "THEORY_CORE로 설정했다.",
+        "CORE_MUST_PREPARE로 설정했다.",
+        "밀도·Wet Leg·Remote Seal·계면을 고득점 조건에 반영했다.",
+        "LLM_ONLY이며 Deterministic Check는 비활성화했다."
+      ],
+      "topic_label": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
