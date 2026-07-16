@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-16T12:47:07Z-generated-topic-pack-fact-anchors",
+  "version": "2026-07-16T14:25:23Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json",
@@ -561,6 +561,948 @@
         "개루프 안정여유와 폐루프 bandwidth를 분리하고 특수 crossover 조건을 반영함.",
         "14개 Fact Anchor의 rejected_explanations를 정답 복제문에서 실제 오답 및 혼동 예시로 교체했다.",
         "14개 Fact Anchor의 source_basis를 구체적인 공식 문서와 대학 강의자료 기반으로 보완했다."
+      ]
+    },
+    {
+      "schema_version": "fact_anchor.v1",
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "title_ko": "제어밸브에 작용하는 유체력, 불평형력, 마찰력과 액추에이터·Fail-Safe 설계",
+      "question_type_hint": "PRINCIPLE_INTERPRETATION",
+      "anchors": [
+        {
+          "id": "control_valve_moving_assembly_free_body_diagram",
+          "anchor_id": "control_valve_moving_assembly_free_body_diagram",
+          "statement": "직동식 제어밸브의 힘 해석에서는 플러그, 스템과 액추에이터 가동부를 하나의 자유물체로 고립하고 밸브 이동축 방향의 모든 외력을 표시한다.",
+          "importance": "core",
+          "keywords": [
+            "자유물체도",
+            "플러그",
+            "스템",
+            "이동축",
+            "힘 평형"
+          ],
+          "core_terms": [
+            "자유물체도",
+            "플러그",
+            "스템",
+            "이동축",
+            "힘 평형"
+          ],
+          "accepted_explanations": [
+            "직동식 제어밸브의 힘 해석에서는 플러그, 스템과 액추에이터 가동부를 하나의 자유물체로 고립하고 밸브 이동축 방향의 모든 외력을 표시한다.",
+            "액추에이터 힘, 스프링 힘, 유체 불평형력, 패킹 및 가이드 마찰력, 시트 반력, 중량과 동적 유체력을 하나의 좌표계로 나타낸다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "직동식 제어밸브의 힘 해석에서는 플러그, 스템과 액추에이터 가동부를 하나의 자유물체로 고립하고 밸브 이동축 방향의 모든 외력을 표시한다.",
+          "description": "액추에이터 힘, 스프링 힘, 유체 불평형력, 패킹 및 가이드 마찰력, 시트 반력, 중량과 동적 유체력을 하나의 좌표계로 나타낸다."
+        },
+        {
+          "id": "control_valve_pressure_force_surface_integration",
+          "anchor_id": "control_valve_pressure_force_surface_integration",
+          "statement": "밸브 가동부의 축방향 압력력은 젖은 표면의 국부압력과 표면 법선의 축방향 성분을 적분하여 구한다.",
+          "importance": "core",
+          "keywords": [
+            "압력력",
+            "표면적분",
+            "국부압력",
+            "법선",
+            "축방향 합력"
+          ],
+          "core_terms": [
+            "압력력",
+            "표면적분",
+            "국부압력",
+            "법선",
+            "축방향 합력"
+          ],
+          "accepted_explanations": [
+            "밸브 가동부의 축방향 압력력은 젖은 표면의 국부압력과 표면 법선의 축방향 성분을 적분하여 구한다.",
+            "일반식 Fp=∫p·nx·dA를 적용하며 압력이 표면에 수직으로 작용한다는 점을 먼저 정의한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "밸브 가동부의 축방향 압력력은 젖은 표면의 국부압력과 표면 법선의 축방향 성분을 적분하여 구한다.",
+          "description": "일반식 Fp=∫p·nx·dA를 적용하며 압력이 표면에 수직으로 작용한다는 점을 먼저 정의한다."
+        },
+        {
+          "id": "control_valve_unbalance_force_effective_area_approximation",
+          "anchor_id": "control_valve_unbalance_force_effective_area_approximation",
+          "statement": "유체 불평형력은 단순한 조건에서 Fu≈ΔP·Aeff로 근사할 수 있지만 Aeff는 트림 형상과 압력경계로 결정되는 유효 투영면적이다.",
+          "importance": "core",
+          "keywords": [
+            "불평형력",
+            "차압",
+            "유효면적",
+            "포트면적",
+            "조건부 근사"
+          ],
+          "core_terms": [
+            "불평형력",
+            "차압",
+            "유효면적",
+            "포트면적",
+            "조건부 근사"
+          ],
+          "accepted_explanations": [
+            "유체 불평형력은 단순한 조건에서 Fu≈ΔP·Aeff로 근사할 수 있지만 Aeff는 트림 형상과 압력경계로 결정되는 유효 투영면적이다.",
+            "포트면적 근사는 단순 unbalanced single-seat trim의 특정 차단조건에서만 사용한다."
+          ],
+          "rejected_explanations": [
+            "모든 밸브의 불평형력은 항상 (P1-P2)×포트면적이라고 설명한다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "유체 불평형력은 단순한 조건에서 Fu≈ΔP·Aeff로 근사할 수 있지만 Aeff는 트림 형상과 압력경계로 결정되는 유효 투영면적이다.",
+          "description": "포트면적 근사는 단순 unbalanced single-seat trim의 특정 차단조건에서만 사용한다."
+        },
+        {
+          "id": "control_valve_pressure_tends_to_open_close_direction",
+          "anchor_id": "control_valve_pressure_tends_to_open_close_direction",
+          "statement": "Pressure-Tends-to-Open은 순 압력력이 플러그를 시트에서 이탈시키는 방향이고 Pressure-Tends-to-Close는 플러그를 시트 방향으로 이동시키는 상태이다.",
+          "importance": "core",
+          "keywords": [
+            "Pressure-Tends-to-Open",
+            "Pressure-Tends-to-Close",
+            "개방방향",
+            "폐쇄방향",
+            "압력합력"
+          ],
+          "core_terms": [
+            "Pressure-Tends-to-Open",
+            "Pressure-Tends-to-Close",
+            "개방방향",
+            "폐쇄방향",
+            "압력합력"
+          ],
+          "accepted_explanations": [
+            "Pressure-Tends-to-Open은 순 압력력이 플러그를 시트에서 이탈시키는 방향이고 Pressure-Tends-to-Close는 플러그를 시트 방향으로 이동시키는 상태이다.",
+            "이 구분은 개방·폐쇄 요구추력과 Fail-Close 또는 Fail-Open의 불리한 조건을 결정한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "Pressure-Tends-to-Open은 순 압력력이 플러그를 시트에서 이탈시키는 방향이고 Pressure-Tends-to-Close는 플러그를 시트 방향으로 이동시키는 상태이다.",
+          "description": "이 구분은 개방·폐쇄 요구추력과 Fail-Close 또는 Fail-Open의 불리한 조건을 결정한다."
+        },
+        {
+          "id": "control_valve_flow_direction_trim_geometry_dependency",
+          "anchor_id": "control_valve_flow_direction_trim_geometry_dependency",
+          "statement": "FTO와 FTC의 힘 방향은 배관의 상하 유동만이 아니라 플러그 폐쇄방향, 시트 위치, 트림 형상과 압력 작용면을 함께 확인하여 판단한다.",
+          "importance": "core",
+          "keywords": [
+            "FTO",
+            "FTC",
+            "유동방향",
+            "트림형상",
+            "시트위치"
+          ],
+          "core_terms": [
+            "FTO",
+            "FTC",
+            "유동방향",
+            "트림형상",
+            "시트위치"
+          ],
+          "accepted_explanations": [
+            "FTO와 FTC의 힘 방향은 배관의 상하 유동만이 아니라 플러그 폐쇄방향, 시트 위치, 트림 형상과 압력 작용면을 함께 확인하여 판단한다.",
+            "동일한 유동방향도 플러그와 시트의 상대배치가 다르면 압력력의 개폐 방향이 달라질 수 있다."
+          ],
+          "rejected_explanations": [
+            "아래에서 위로 흐르면 항상 FTO이고 반대 방향이면 항상 FTC라고 단정한다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "FTO와 FTC의 힘 방향은 배관의 상하 유동만이 아니라 플러그 폐쇄방향, 시트 위치, 트림 형상과 압력 작용면을 함께 확인하여 판단한다.",
+          "description": "동일한 유동방향도 플러그와 시트의 상대배치가 다르면 압력력의 개폐 방향이 달라질 수 있다."
+        },
+        {
+          "id": "control_valve_stem_area_pressure_force",
+          "anchor_id": "control_valve_stem_area_pressure_force",
+          "statement": "스템이 압력경계를 관통하면 스템 단면적에도 압력력이 작용하므로 순 불평형력에 스템 유효면적을 포함한다.",
+          "importance": "core",
+          "keywords": [
+            "스템면적",
+            "압력경계",
+            "유효면적",
+            "고압밸브",
+            "축방향력"
+          ],
+          "core_terms": [
+            "스템면적",
+            "압력경계",
+            "유효면적",
+            "고압밸브",
+            "축방향력"
+          ],
+          "accepted_explanations": [
+            "스템이 압력경계를 관통하면 스템 단면적에도 압력력이 작용하므로 순 불평형력에 스템 유효면적을 포함한다.",
+            "고압 밸브와 큰 스템에서는 이 압력항이 요구추력과 힘 방향에 의미 있는 영향을 줄 수 있다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "스템이 압력경계를 관통하면 스템 단면적에도 압력력이 작용하므로 순 불평형력에 스템 유효면적을 포함한다.",
+          "description": "고압 밸브와 큰 스템에서는 이 압력항이 요구추력과 힘 방향에 의미 있는 영향을 줄 수 있다."
+        },
+        {
+          "id": "control_valve_balanced_trim_residual_unbalance",
+          "anchor_id": "control_valve_balanced_trim_residual_unbalance",
+          "statement": "Balanced trim은 플러그의 반대 면에 압력을 전달하여 순 정적 불평형력을 줄이지만 잔류 압력력과 마찰을 완전히 제거하지는 않는다.",
+          "importance": "core",
+          "keywords": [
+            "Balanced trim",
+            "잔류 불평형력",
+            "balance seal",
+            "평형구멍",
+            "seal 마찰"
+          ],
+          "core_terms": [
+            "Balanced trim",
+            "잔류 불평형력",
+            "balance seal",
+            "평형구멍",
+            "seal 마찰"
+          ],
+          "accepted_explanations": [
+            "Balanced trim은 플러그의 반대 면에 압력을 전달하여 순 정적 불평형력을 줄이지만 잔류 압력력과 마찰을 완전히 제거하지는 않는다.",
+            "스템 면적, balance-seal 면적, 평형구멍 압력손실, 잔류차압과 seal-ring 마찰이 남을 수 있다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim에서는 유체력과 트림 마찰이 모두 0이라고 설명한다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "Balanced trim은 플러그의 반대 면에 압력을 전달하여 순 정적 불평형력을 줄이지만 잔류 압력력과 마찰을 완전히 제거하지는 않는다.",
+          "description": "스템 면적, balance-seal 면적, 평형구멍 압력손실, 잔류차압과 seal-ring 마찰이 남을 수 있다."
+        },
+        {
+          "id": "control_valve_dynamic_flow_force_momentum_side_load",
+          "anchor_id": "control_valve_dynamic_flow_force_momentum_side_load",
+          "statement": "밸브가 열린 상태에서는 압력분포와 유체 운동량 변화로 축방향 동적 유체력과 비대칭 측면하중이 발생할 수 있다.",
+          "importance": "important",
+          "keywords": [
+            "동적 유체력",
+            "운동량 변화",
+            "제트 반력",
+            "측면하중",
+            "개도"
+          ],
+          "core_terms": [
+            "동적 유체력",
+            "운동량 변화",
+            "제트 반력",
+            "측면하중",
+            "개도"
+          ],
+          "accepted_explanations": [
+            "밸브가 열린 상태에서는 압력분포와 유체 운동량 변화로 축방향 동적 유체력과 비대칭 측면하중이 발생할 수 있다.",
+            "제트 반력과 측면하중은 가이드 접촉력, 진동, 마모와 개도별 요구 액추에이터 힘에 영향을 준다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "밸브가 열린 상태에서는 압력분포와 유체 운동량 변화로 축방향 동적 유체력과 비대칭 측면하중이 발생할 수 있다.",
+          "description": "제트 반력과 측면하중은 가이드 접촉력, 진동, 마모와 개도별 요구 액추에이터 힘에 영향을 준다."
+        },
+        {
+          "id": "control_valve_packing_friction",
+          "anchor_id": "control_valve_packing_friction",
+          "statement": "패킹 마찰력은 스템과 패킹의 접촉에서 발생하며 재질, 조임력, 스템 직경, 압력, 온도와 윤활상태의 영향을 받는다.",
+          "importance": "core",
+          "keywords": [
+            "패킹마찰",
+            "스템",
+            "패킹조임",
+            "stiction",
+            "deadband"
+          ],
+          "core_terms": [
+            "패킹마찰",
+            "스템",
+            "패킹조임",
+            "stiction",
+            "deadband"
+          ],
+          "accepted_explanations": [
+            "패킹 마찰력은 스템과 패킹의 접촉에서 발생하며 재질, 조임력, 스템 직경, 압력, 온도와 윤활상태의 영향을 받는다.",
+            "패킹 마찰은 stiction과 deadband의 주요 원인이며 유체 점성 전단력과 구분한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "패킹 마찰력은 스템과 패킹의 접촉에서 발생하며 재질, 조임력, 스템 직경, 압력, 온도와 윤활상태의 영향을 받는다.",
+          "description": "패킹 마찰은 stiction과 deadband의 주요 원인이며 유체 점성 전단력과 구분한다."
+        },
+        {
+          "id": "control_valve_guide_friction_side_load",
+          "anchor_id": "control_valve_guide_friction_side_load",
+          "statement": "가이드 마찰력은 플러그, 케이지 또는 가이드 면의 접촉에서 발생하며 편심, 스템 휨과 유체 측면하중의 영향을 받는다.",
+          "importance": "core",
+          "keywords": [
+            "가이드마찰",
+            "케이지",
+            "측면하중",
+            "편심",
+            "스템휨"
+          ],
+          "core_terms": [
+            "가이드마찰",
+            "케이지",
+            "측면하중",
+            "편심",
+            "스템휨"
+          ],
+          "accepted_explanations": [
+            "가이드 마찰력은 플러그, 케이지 또는 가이드 면의 접촉에서 발생하며 편심, 스템 휨과 유체 측면하중의 영향을 받는다.",
+            "가이드 마찰은 패킹 마찰과 발생위치가 다르며 이물질, 마모, 열팽창과 간극불량으로 증가한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "가이드 마찰력은 플러그, 케이지 또는 가이드 면의 접촉에서 발생하며 편심, 스템 휨과 유체 측면하중의 영향을 받는다.",
+          "description": "가이드 마찰은 패킹 마찰과 발생위치가 다르며 이물질, 마모, 열팽창과 간극불량으로 증가한다."
+        },
+        {
+          "id": "control_valve_breakaway_running_friction_hysteresis",
+          "anchor_id": "control_valve_breakaway_running_friction_hysteresis",
+          "statement": "장시간 정지한 밸브의 breakaway friction은 운전 중 running friction보다 클 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "breakaway",
+            "running friction",
+            "정지마찰",
+            "히스테리시스",
+            "limit cycle"
+          ],
+          "core_terms": [
+            "breakaway",
+            "running friction",
+            "정지마찰",
+            "히스테리시스",
+            "limit cycle"
+          ],
+          "accepted_explanations": [
+            "장시간 정지한 밸브의 breakaway friction은 운전 중 running friction보다 클 수 있다.",
+            "두 마찰의 차이는 히스테리시스, deadband, 방향전환 지연과 limit cycle을 유발할 수 있다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "장시간 정지한 밸브의 breakaway friction은 운전 중 running friction보다 클 수 있다.",
+          "description": "두 마찰의 차이는 히스테리시스, deadband, 방향전환 지연과 limit cycle을 유발할 수 있다."
+        },
+        {
+          "id": "control_valve_friction_opposes_motion_not_actuator",
+          "anchor_id": "control_valve_friction_opposes_motion_not_actuator",
+          "statement": "마찰력은 액추에이터 힘의 반대 방향으로 고정되지 않고 실제 또는 임박한 밸브 이동방향의 반대로 작용한다.",
+          "importance": "core",
+          "keywords": [
+            "마찰방향",
+            "운동방향",
+            "임박운동",
+            "개방",
+            "폐쇄"
+          ],
+          "core_terms": [
+            "마찰방향",
+            "운동방향",
+            "임박운동",
+            "개방",
+            "폐쇄"
+          ],
+          "accepted_explanations": [
+            "마찰력은 액추에이터 힘의 반대 방향으로 고정되지 않고 실제 또는 임박한 밸브 이동방향의 반대로 작용한다.",
+            "플러그가 위로 움직이려 하면 마찰은 아래로 작용하고 아래로 움직이려 하면 마찰은 위로 작용한다."
+          ],
+          "rejected_explanations": [
+            "밸브의 모든 기계적 마찰은 항상 F_act의 반대 방향이라고 설명한다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "마찰력은 액추에이터 힘의 반대 방향으로 고정되지 않고 실제 또는 임박한 밸브 이동방향의 반대로 작용한다.",
+          "description": "플러그가 위로 움직이려 하면 마찰은 아래로 작용하고 아래로 움직이려 하면 마찰은 위로 작용한다."
+        },
+        {
+          "id": "control_valve_seat_load_shutoff_class",
+          "anchor_id": "control_valve_seat_load_shutoff_class",
+          "statement": "시트 하중은 플러그가 시트에 접촉한 뒤 요구 차단등급을 확보하기 위해 유지해야 하는 접촉력이다.",
+          "importance": "core",
+          "keywords": [
+            "시트하중",
+            "차단등급",
+            "접촉력",
+            "shutoff",
+            "누설등급"
+          ],
+          "core_terms": [
+            "시트하중",
+            "차단등급",
+            "접촉력",
+            "shutoff",
+            "누설등급"
+          ],
+          "accepted_explanations": [
+            "시트 하중은 플러그가 시트에 접촉한 뒤 요구 차단등급을 확보하기 위해 유지해야 하는 접촉력이다.",
+            "시트 하중은 플러그 이동력, 불평형력과 마찰력을 극복하는 힘과 구분한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "시트 하중은 플러그가 시트에 접촉한 뒤 요구 차단등급을 확보하기 위해 유지해야 하는 접촉력이다.",
+          "description": "시트 하중은 플러그 이동력, 불평형력과 마찰력을 극복하는 힘과 구분한다."
+        },
+        {
+          "id": "control_valve_pneumatic_actuator_force_effective_area",
+          "anchor_id": "control_valve_pneumatic_actuator_force_effective_area",
+          "statement": "공압식 다이어프램 또는 피스톤 액추에이터의 기본 힘은 Fair=Pa·Aa이며 Aa는 액추에이터 유효 압력면적이다.",
+          "importance": "core",
+          "keywords": [
+            "공압력",
+            "다이어프램",
+            "피스톤",
+            "유효면적",
+            "가용추력"
+          ],
+          "core_terms": [
+            "공압력",
+            "다이어프램",
+            "피스톤",
+            "유효면적",
+            "가용추력"
+          ],
+          "accepted_explanations": [
+            "공압식 다이어프램 또는 피스톤 액추에이터의 기본 힘은 Fair=Pa·Aa이며 Aa는 액추에이터 유효 압력면적이다.",
+            "다이어프램 유효면적은 스트로크에 따라 달라질 수 있으므로 최종 가용추력은 제조사 자료로 확인한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "공압식 다이어프램 또는 피스톤 액추에이터의 기본 힘은 Fair=Pa·Aa이며 Aa는 액추에이터 유효 압력면적이다.",
+          "description": "다이어프램 유효면적은 스트로크에 따라 달라질 수 있으므로 최종 가용추력은 제조사 자료로 확인한다."
+        },
+        {
+          "id": "control_valve_spring_preload_rate_travel_force",
+          "anchor_id": "control_valve_spring_preload_rate_travel_force",
+          "statement": "선형 근사에서 스프링 힘은 Fs(x)=Fpreload+kx이며 초기 예압, 스프링 레이트와 스트로크 위치를 구분한다.",
+          "importance": "core",
+          "keywords": [
+            "스프링예압",
+            "스프링레이트",
+            "스트로크",
+            "스프링힘",
+            "선형근사"
+          ],
+          "core_terms": [
+            "스프링예압",
+            "스프링레이트",
+            "스트로크",
+            "스프링힘",
+            "선형근사"
+          ],
+          "accepted_explanations": [
+            "선형 근사에서 스프링 힘은 Fs(x)=Fpreload+kx이며 초기 예압, 스프링 레이트와 스트로크 위치를 구분한다.",
+            "스프링 조정기로 예압을 변경하는 것은 스프링 레이트를 증가시키는 것과 다르다."
+          ],
+          "rejected_explanations": [
+            "스프링 예압 조정만으로 스프링 레이트가 증가한다고 설명한다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "선형 근사에서 스프링 힘은 Fs(x)=Fpreload+kx이며 초기 예압, 스프링 레이트와 스트로크 위치를 구분한다.",
+          "description": "스프링 조정기로 예압을 변경하는 것은 스프링 레이트를 증가시키는 것과 다르다."
+        },
+        {
+          "id": "control_valve_bench_set_operating_range_difference",
+          "anchor_id": "control_valve_bench_set_operating_range_difference",
+          "statement": "Bench set은 공정압력과 실제 밸브부하가 없는 기준조건의 액추에이터 스트로크 압력범위이며 operating range와 다르다.",
+          "importance": "core",
+          "keywords": [
+            "Bench set",
+            "Operating range",
+            "공정차압",
+            "스프링조정",
+            "로딩압력"
+          ],
+          "core_terms": [
+            "Bench set",
+            "Operating range",
+            "공정차압",
+            "스프링조정",
+            "로딩압력"
+          ],
+          "accepted_explanations": [
+            "Bench set은 공정압력과 실제 밸브부하가 없는 기준조건의 액추에이터 스트로크 압력범위이며 operating range와 다르다.",
+            "실제 operating range에는 불평형력, 패킹 및 가이드 마찰, 시트 하중, 스프링 힘과 동적 유체력이 반영된다."
+          ],
+          "rejected_explanations": [
+            "차압이 크면 Bench set을 임의로 높이면 된다고 설명한다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "Bench set은 공정압력과 실제 밸브부하가 없는 기준조건의 액추에이터 스트로크 압력범위이며 operating range와 다르다.",
+          "description": "실제 operating range에는 불평형력, 패킹 및 가이드 마찰, 시트 하중, 스프링 힘과 동적 유체력이 반영된다."
+        },
+        {
+          "id": "control_valve_fail_close_force_balance",
+          "anchor_id": "control_valve_fail_close_force_balance",
+          "statement": "Fail-Close 스프링은 공기 상실 시 폐쇄를 방해하는 불평형력과 기계적 마찰을 이기고 요구 시트 하중을 확보해야 한다.",
+          "importance": "core",
+          "keywords": [
+            "Fail-Close",
+            "Air Loss",
+            "폐쇄저항",
+            "시트하중",
+            "안전여유"
+          ],
+          "core_terms": [
+            "Fail-Close",
+            "Air Loss",
+            "폐쇄저항",
+            "시트하중",
+            "안전여유"
+          ],
+          "accepted_explanations": [
+            "Fail-Close 스프링은 공기 상실 시 폐쇄를 방해하는 불평형력과 기계적 마찰을 이기고 요구 시트 하중을 확보해야 한다.",
+            "개념 조건은 Fs,close≥Fu,resist+Ff,close+Fseat+margin이며 최소 차압에서도 스프링 자체 힘을 검증한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "Fail-Close 스프링은 공기 상실 시 폐쇄를 방해하는 불평형력과 기계적 마찰을 이기고 요구 시트 하중을 확보해야 한다.",
+          "description": "개념 조건은 Fs,close≥Fu,resist+Ff,close+Fseat+margin이며 최소 차압에서도 스프링 자체 힘을 검증한다."
+        },
+        {
+          "id": "control_valve_fail_open_force_balance",
+          "anchor_id": "control_valve_fail_open_force_balance",
+          "statement": "Fail-Open 스프링은 공기 상실 시 개방을 방해하는 불평형력, 시트 이탈력과 기계적 마찰을 이겨야 한다.",
+          "importance": "core",
+          "keywords": [
+            "Fail-Open",
+            "시트이탈",
+            "breakout",
+            "개방저항",
+            "최대차압"
+          ],
+          "core_terms": [
+            "Fail-Open",
+            "시트이탈",
+            "breakout",
+            "개방저항",
+            "최대차압"
+          ],
+          "accepted_explanations": [
+            "Fail-Open 스프링은 공기 상실 시 개방을 방해하는 불평형력, 시트 이탈력과 기계적 마찰을 이겨야 한다.",
+            "개념 조건은 Fs,open≥Fu,resist+Ff,open+Fbreakout+margin이며 Pressure-Tends-to-Close에서는 최대차압이 불리할 수 있다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "Fail-Open 스프링은 공기 상실 시 개방을 방해하는 불평형력, 시트 이탈력과 기계적 마찰을 이겨야 한다.",
+          "description": "개념 조건은 Fs,open≥Fu,resist+Ff,open+Fbreakout+margin이며 Pressure-Tends-to-Close에서는 최대차압이 불리할 수 있다."
+        },
+        {
+          "id": "control_valve_actuator_sizing_worst_case_conditions",
+          "anchor_id": "control_valve_actuator_sizing_worst_case_conditions",
+          "statement": "액추에이터 선정은 최대·최소 차압, 개도, 마찰, 시트 접촉과 이탈, 스프링 위치 및 공급압력을 조합한 최악조건별로 수행한다.",
+          "importance": "core",
+          "keywords": [
+            "액추에이터사이징",
+            "최악조건",
+            "최대차압",
+            "최소차압",
+            "안전여유"
+          ],
+          "core_terms": [
+            "액추에이터사이징",
+            "최악조건",
+            "최대차압",
+            "최소차압",
+            "안전여유"
+          ],
+          "accepted_explanations": [
+            "액추에이터 선정은 최대·최소 차압, 개도, 마찰, 시트 접촉과 이탈, 스프링 위치 및 공급압력을 조합한 최악조건별로 수행한다.",
+            "정상 개폐와 Air Loss를 각각 계산하고 스템 좌굴, 노화여유와 제조사 사이징 자료로 최종 확인한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "액추에이터 선정은 최대·최소 차압, 개도, 마찰, 시트 접촉과 이탈, 스프링 위치 및 공급압력을 조합한 최악조건별로 수행한다.",
+          "description": "정상 개폐와 Air Loss를 각각 계산하고 스템 좌굴, 노화여유와 제조사 사이징 자료로 최종 확인한다."
+        },
+        {
+          "id": "control_valve_rotary_valve_torque_boundary",
+          "anchor_id": "control_valve_rotary_valve_torque_boundary",
+          "statement": "볼밸브, 버터플라이밸브와 회전 플러그밸브는 축방향 힘 평형이 아니라 회전축에 대한 토크 평형으로 선정한다.",
+          "importance": "important",
+          "keywords": [
+            "회전식밸브",
+            "토크평형",
+            "breakout torque",
+            "시트마찰",
+            "동적유체토크"
+          ],
+          "core_terms": [
+            "회전식밸브",
+            "토크평형",
+            "breakout torque",
+            "시트마찰",
+            "동적유체토크"
+          ],
+          "accepted_explanations": [
+            "볼밸브, 버터플라이밸브와 회전 플러그밸브는 축방향 힘 평형이 아니라 회전축에 대한 토크 평형으로 선정한다.",
+            "액추에이터, 스프링, breakout, 시트, 베어링과 동적 유체 토크를 개도별로 평가한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "볼밸브, 버터플라이밸브와 회전 플러그밸브는 축방향 힘 평형이 아니라 회전축에 대한 토크 평형으로 선정한다.",
+          "description": "액추에이터, 스프링, breakout, 시트, 베어링과 동적 유체 토크를 개도별로 평가한다."
+        },
+        {
+          "id": "control_valve_stiction_deadband_diagnostics",
+          "anchor_id": "control_valve_stiction_deadband_diagnostics",
+          "statement": "패킹과 가이드 마찰이 증가하면 positioner 출력이 변해도 밸브가 정지하다가 임계힘을 넘을 때 급격히 이동하는 stiction이 나타날 수 있다.",
+          "importance": "important",
+          "keywords": [
+            "stiction",
+            "deadband",
+            "positioner",
+            "방향별응답",
+            "고장진단"
+          ],
+          "core_terms": [
+            "stiction",
+            "deadband",
+            "positioner",
+            "방향별응답",
+            "고장진단"
+          ],
+          "accepted_explanations": [
+            "패킹과 가이드 마찰이 증가하면 positioner 출력이 변해도 밸브가 정지하다가 임계힘을 넘을 때 급격히 이동하는 stiction이 나타날 수 있다.",
+            "스템 위치, 액추에이터 압력과 positioner 출력을 비교하여 마찰, 편심, 이물질과 공급압력 부족을 구분한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "패킹과 가이드 마찰이 증가하면 positioner 출력이 변해도 밸브가 정지하다가 임계힘을 넘을 때 급격히 이동하는 stiction이 나타날 수 있다.",
+          "description": "스템 위치, 액추에이터 압력과 positioner 출력을 비교하여 마찰, 편심, 이물질과 공급압력 부족을 구분한다."
+        },
+        {
+          "id": "control_valve_balanced_trim_tradeoff_maintenance",
+          "anchor_id": "control_valve_balanced_trim_tradeoff_maintenance",
+          "statement": "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다.",
+          "importance": "important",
+          "keywords": [
+            "Balanced trim",
+            "seal 마찰",
+            "누설등급",
+            "평형구멍",
+            "유지보수"
+          ],
+          "core_terms": [
+            "Balanced trim",
+            "seal 마찰",
+            "누설등급",
+            "평형구멍",
+            "유지보수"
+          ],
+          "accepted_explanations": [
+            "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다.",
+            "고차압 적용 이점과 함께 유체 청정도, seal 마모, 정비비용과 기존 설비 호환성을 검토한다."
+          ],
+          "rejected_explanations": [
+            "힘의 작용면, 방향 또는 성립조건을 반대로 설명한다.",
+            "용어만 나열하고 액추에이터 선정과 Fail-Safe 조건에 연결하지 않는다."
+          ],
+          "grading_notes": "표현 일치보다 힘의 작용면, 방향, 성립조건과 액추에이터 선정의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe.md; control-valve manufacturer handbooks; sliding-stem actuator sizing guidance.",
+          "claim": "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다.",
+          "description": "고차압 적용 이점과 함께 유체 청정도, seal 마모, 정비비용과 기존 설비 호환성을 검토한다."
+        }
+      ],
+      "fatal_wrong_claims": [
+        {
+          "id": "control_valve_unbalance_force_universal_port_area",
+          "claim": "모든 밸브의 불평형력은 항상 (P1-P2)×포트면적이다.",
+          "correction": "유효면적은 트림 형상과 압력경계에 따라 달라지며 ΔP×Aeff는 조건부 근사식이다.",
+          "wrong_claim": "모든 밸브의 불평형력은 항상 (P1-P2)×포트면적이다.",
+          "correct_rule": "유효면적은 트림 형상과 압력경계에 따라 달라지며 ΔP×Aeff는 조건부 근사식이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "유효면적은 트림 형상과 압력경계에 따라 달라지며 ΔP×Aeff는 조건부 근사식이다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_pressure_direction_independent_of_trim",
+          "claim": "P1이 P2보다 크면 플러그 힘 방향은 밸브 형상과 무관하다.",
+          "correction": "힘 방향은 플러그·시트 배치와 실제 압력 작용면에 의존한다.",
+          "wrong_claim": "P1이 P2보다 크면 플러그 힘 방향은 밸브 형상과 무관하다.",
+          "correct_rule": "힘 방향은 플러그·시트 배치와 실제 압력 작용면에 의존한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "힘 방향은 플러그·시트 배치와 실제 압력 작용면에 의존한다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_fto_ftc_vertical_flow_only",
+          "claim": "아래에서 위로 흐르면 항상 FTO이고 반대 방향이면 항상 FTC이다.",
+          "correction": "플러그 폐쇄방향, 시트 위치, 트림 형상과 압력 작용면을 함께 확인한다.",
+          "wrong_claim": "아래에서 위로 흐르면 항상 FTO이고 반대 방향이면 항상 FTC이다.",
+          "correct_rule": "플러그 폐쇄방향, 시트 위치, 트림 형상과 압력 작용면을 함께 확인한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "플러그 폐쇄방향, 시트 위치, 트림 형상과 압력 작용면을 함께 확인한다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_balanced_trim_zero_force",
+          "claim": "Balanced trim에서는 유체력과 트림 마찰이 완전히 0이다.",
+          "correction": "스템 및 balance-seal 면적, 잔류차압과 seal 마찰이 남을 수 있다.",
+          "wrong_claim": "Balanced trim에서는 유체력과 트림 마찰이 완전히 0이다.",
+          "correct_rule": "스템 및 balance-seal 면적, 잔류차압과 seal 마찰이 남을 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "스템 및 balance-seal 면적, 잔류차압과 seal 마찰이 남을 수 있다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_friction_always_opposes_actuator",
+          "claim": "밸브의 마찰력은 항상 액추에이터 힘의 반대 방향이다.",
+          "correction": "마찰은 실제 또는 임박한 운동방향의 반대로 작용한다.",
+          "wrong_claim": "밸브의 마찰력은 항상 액추에이터 힘의 반대 방향이다.",
+          "correct_rule": "마찰은 실제 또는 임박한 운동방향의 반대로 작용한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "마찰은 실제 또는 임박한 운동방향의 반대로 작용한다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_fluid_drag_equals_packing_friction",
+          "claim": "플러그 표면의 유체 점성마찰이 곧 패킹 마찰력이다.",
+          "correction": "유체 전단력과 스템·패킹의 고체 접촉마찰은 다른 현상이다.",
+          "wrong_claim": "플러그 표면의 유체 점성마찰이 곧 패킹 마찰력이다.",
+          "correct_rule": "유체 전단력과 스템·패킹의 고체 접촉마찰은 다른 현상이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "유체 전단력과 스템·패킹의 고체 접촉마찰은 다른 현상이다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_fail_safe_spring_ignores_loads",
+          "claim": "Fail-Safe 스프링은 차압 불평형력만 이기면 된다.",
+          "correction": "breakaway, 패킹·가이드 마찰과 시트 하중도 포함해야 한다.",
+          "wrong_claim": "Fail-Safe 스프링은 차압 불평형력만 이기면 된다.",
+          "correct_rule": "breakaway, 패킹·가이드 마찰과 시트 하중도 포함해야 한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "breakaway, 패킹·가이드 마찰과 시트 하중도 포함해야 한다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_bench_set_arbitrary_supply_range",
+          "claim": "차압이 크면 Bench set을 임의로 높이면 된다.",
+          "correction": "Bench set은 무부하 기준이며 실제 추력 부족은 액추에이터 또는 트림 선정으로 해결한다.",
+          "wrong_claim": "차압이 크면 Bench set을 임의로 높이면 된다.",
+          "correct_rule": "Bench set은 무부하 기준이며 실제 추력 부족은 액추에이터 또는 트림 선정으로 해결한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "Bench set은 무부하 기준이며 실제 추력 부족은 액추에이터 또는 트림 선정으로 해결한다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_spring_adjustment_changes_rate",
+          "claim": "스프링 예압을 조정하면 스프링 레이트도 증가한다.",
+          "correction": "예압과 스프링 레이트는 서로 다른 설계변수이다.",
+          "wrong_claim": "스프링 예압을 조정하면 스프링 레이트도 증가한다.",
+          "correct_rule": "예압과 스프링 레이트는 서로 다른 설계변수이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "예압과 스프링 레이트는 서로 다른 설계변수이다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_rotary_uses_linear_force_equation",
+          "claim": "볼밸브와 버터플라이밸브도 축방향 힘만으로 선정한다.",
+          "correction": "회전식 밸브는 회전축에 대한 토크 평형으로 선정한다.",
+          "wrong_claim": "볼밸브와 버터플라이밸브도 축방향 힘만으로 선정한다.",
+          "correct_rule": "회전식 밸브는 회전축에 대한 토크 평형으로 선정한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "회전식 밸브는 회전축에 대한 토크 평형으로 선정한다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_pressure_assist_always_available",
+          "claim": "유체의 개방 또는 폐쇄 보조력은 모든 차압조건에서 항상 충분하다.",
+          "correction": "보조력은 차압과 개도에 따라 감소하며 최대·최소 차압을 각각 확인해야 한다.",
+          "wrong_claim": "유체의 개방 또는 폐쇄 보조력은 모든 차압조건에서 항상 충분하다.",
+          "correct_rule": "보조력은 차압과 개도에 따라 감소하며 최대·최소 차압을 각각 확인해야 한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "보조력은 차압과 개도에 따라 감소하며 최대·최소 차압을 각각 확인해야 한다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        },
+        {
+          "id": "control_valve_seat_load_omitted_from_shutoff",
+          "claim": "차단 시 불평형력과 마찰만 이기면 요구 누설등급을 만족한다.",
+          "correction": "완전 차단에는 제조사가 요구하는 시트 접촉하중도 필요하다.",
+          "wrong_claim": "차단 시 불평형력과 마찰만 이기면 요구 누설등급을 만족한다.",
+          "correct_rule": "완전 차단에는 제조사가 요구하는 시트 접촉하중도 필요하다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "B",
+            "C"
+          ],
+          "message": "완전 차단에는 제조사가 요구하는 시트 접촉하중도 필요하다.",
+          "description": "제어밸브 힘 평형, 트림 구조 또는 액추에이터 선정조건을 반대로 설명하는 중대한 오개념이다.",
+          "grading_notes": "D/E 점수에는 직접 반영하지 않고 Topic trust를 limited로 제한한다."
+        }
+      ],
+      "safe_expressions": [
+        "직동식 제어밸브의 힘 해석에서는 플러그, 스템과 액추에이터 가동부를 하나의 자유물체로 고립하고 밸브 이동축 방향의 모든 외력을 표시한다.",
+        "밸브 가동부의 축방향 압력력은 젖은 표면의 국부압력과 표면 법선의 축방향 성분을 적분하여 구한다.",
+        "유체 불평형력은 단순한 조건에서 Fu≈ΔP·Aeff로 근사할 수 있지만 Aeff는 트림 형상과 압력경계로 결정되는 유효 투영면적이다.",
+        "Pressure-Tends-to-Open은 순 압력력이 플러그를 시트에서 이탈시키는 방향이고 Pressure-Tends-to-Close는 플러그를 시트 방향으로 이동시키는 상태이다.",
+        "FTO와 FTC의 힘 방향은 배관의 상하 유동만이 아니라 플러그 폐쇄방향, 시트 위치, 트림 형상과 압력 작용면을 함께 확인하여 판단한다.",
+        "스템이 압력경계를 관통하면 스템 단면적에도 압력력이 작용하므로 순 불평형력에 스템 유효면적을 포함한다.",
+        "Balanced trim은 플러그의 반대 면에 압력을 전달하여 순 정적 불평형력을 줄이지만 잔류 압력력과 마찰을 완전히 제거하지는 않는다.",
+        "밸브가 열린 상태에서는 압력분포와 유체 운동량 변화로 축방향 동적 유체력과 비대칭 측면하중이 발생할 수 있다.",
+        "패킹 마찰력은 스템과 패킹의 접촉에서 발생하며 재질, 조임력, 스템 직경, 압력, 온도와 윤활상태의 영향을 받는다.",
+        "가이드 마찰력은 플러그, 케이지 또는 가이드 면의 접촉에서 발생하며 편심, 스템 휨과 유체 측면하중의 영향을 받는다.",
+        "장시간 정지한 밸브의 breakaway friction은 운전 중 running friction보다 클 수 있다.",
+        "마찰력은 액추에이터 힘의 반대 방향으로 고정되지 않고 실제 또는 임박한 밸브 이동방향의 반대로 작용한다.",
+        "시트 하중은 플러그가 시트에 접촉한 뒤 요구 차단등급을 확보하기 위해 유지해야 하는 접촉력이다.",
+        "공압식 다이어프램 또는 피스톤 액추에이터의 기본 힘은 Fair=Pa·Aa이며 Aa는 액추에이터 유효 압력면적이다.",
+        "선형 근사에서 스프링 힘은 Fs(x)=Fpreload+kx이며 초기 예압, 스프링 레이트와 스트로크 위치를 구분한다.",
+        "Bench set은 공정압력과 실제 밸브부하가 없는 기준조건의 액추에이터 스트로크 압력범위이며 operating range와 다르다.",
+        "Fail-Close 스프링은 공기 상실 시 폐쇄를 방해하는 불평형력과 기계적 마찰을 이기고 요구 시트 하중을 확보해야 한다.",
+        "Fail-Open 스프링은 공기 상실 시 개방을 방해하는 불평형력, 시트 이탈력과 기계적 마찰을 이겨야 한다.",
+        "액추에이터 선정은 최대·최소 차압, 개도, 마찰, 시트 접촉과 이탈, 스프링 위치 및 공급압력을 조합한 최악조건별로 수행한다.",
+        "볼밸브, 버터플라이밸브와 회전 플러그밸브는 축방향 힘 평형이 아니라 회전축에 대한 토크 평형으로 선정한다.",
+        "패킹과 가이드 마찰이 증가하면 positioner 출력이 변해도 밸브가 정지하다가 임계힘을 넘을 때 급격히 이동하는 stiction이 나타날 수 있다.",
+        "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다."
+      ],
+      "revision_notes": [
+        "approved_requirements_markdown에서 22개 Fact Anchor를 직접 작성했다.",
+        "압력력, FTO·FTC, 마찰, 시트 하중과 Fail-Safe 힘 평형을 구분했다.",
+        "템플릿 Topic 의미를 복사하지 않았다."
+      ],
+      "topic_label": "제어밸브 유체력과 액추에이터 선정",
+      "core_facts": [
+        "직동식 제어밸브의 힘 해석에서는 플러그, 스템과 액추에이터 가동부를 하나의 자유물체로 고립하고 밸브 이동축 방향의 모든 외력을 표시한다.",
+        "밸브 가동부의 축방향 압력력은 젖은 표면의 국부압력과 표면 법선의 축방향 성분을 적분하여 구한다.",
+        "유체 불평형력은 단순한 조건에서 Fu≈ΔP·Aeff로 근사할 수 있지만 Aeff는 트림 형상과 압력경계로 결정되는 유효 투영면적이다.",
+        "Pressure-Tends-to-Open은 순 압력력이 플러그를 시트에서 이탈시키는 방향이고 Pressure-Tends-to-Close는 플러그를 시트 방향으로 이동시키는 상태이다.",
+        "FTO와 FTC의 힘 방향은 배관의 상하 유동만이 아니라 플러그 폐쇄방향, 시트 위치, 트림 형상과 압력 작용면을 함께 확인하여 판단한다.",
+        "스템이 압력경계를 관통하면 스템 단면적에도 압력력이 작용하므로 순 불평형력에 스템 유효면적을 포함한다.",
+        "Balanced trim은 플러그의 반대 면에 압력을 전달하여 순 정적 불평형력을 줄이지만 잔류 압력력과 마찰을 완전히 제거하지는 않는다.",
+        "밸브가 열린 상태에서는 압력분포와 유체 운동량 변화로 축방향 동적 유체력과 비대칭 측면하중이 발생할 수 있다.",
+        "패킹 마찰력은 스템과 패킹의 접촉에서 발생하며 재질, 조임력, 스템 직경, 압력, 온도와 윤활상태의 영향을 받는다.",
+        "가이드 마찰력은 플러그, 케이지 또는 가이드 면의 접촉에서 발생하며 편심, 스템 휨과 유체 측면하중의 영향을 받는다.",
+        "장시간 정지한 밸브의 breakaway friction은 운전 중 running friction보다 클 수 있다.",
+        "마찰력은 액추에이터 힘의 반대 방향으로 고정되지 않고 실제 또는 임박한 밸브 이동방향의 반대로 작용한다.",
+        "시트 하중은 플러그가 시트에 접촉한 뒤 요구 차단등급을 확보하기 위해 유지해야 하는 접촉력이다.",
+        "공압식 다이어프램 또는 피스톤 액추에이터의 기본 힘은 Fair=Pa·Aa이며 Aa는 액추에이터 유효 압력면적이다.",
+        "선형 근사에서 스프링 힘은 Fs(x)=Fpreload+kx이며 초기 예압, 스프링 레이트와 스트로크 위치를 구분한다.",
+        "Bench set은 공정압력과 실제 밸브부하가 없는 기준조건의 액추에이터 스트로크 압력범위이며 operating range와 다르다.",
+        "Fail-Close 스프링은 공기 상실 시 폐쇄를 방해하는 불평형력과 기계적 마찰을 이기고 요구 시트 하중을 확보해야 한다.",
+        "Fail-Open 스프링은 공기 상실 시 개방을 방해하는 불평형력, 시트 이탈력과 기계적 마찰을 이겨야 한다.",
+        "액추에이터 선정은 최대·최소 차압, 개도, 마찰, 시트 접촉과 이탈, 스프링 위치 및 공급압력을 조합한 최악조건별로 수행한다.",
+        "볼밸브, 버터플라이밸브와 회전 플러그밸브는 축방향 힘 평형이 아니라 회전축에 대한 토크 평형으로 선정한다.",
+        "패킹과 가이드 마찰이 증가하면 positioner 출력이 변해도 밸브가 정지하다가 임계힘을 넘을 때 급격히 이동하는 stiction이 나타날 수 있다.",
+        "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다."
       ]
     },
     {

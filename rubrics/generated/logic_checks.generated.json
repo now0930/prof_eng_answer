@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-16T12:47:07Z-generated-topic-pack-logic-checks",
+  "version": "2026-07-16T14:25:23Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -33,6 +33,19 @@
         "대역폭",
         "bandwidth"
       ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "enabled": false,
+      "topic_name": "제어밸브에 작용하는 유체력, 불평형력, 마찰력과 액추에이터·Fail-Safe 설계",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
       "fatal_checks": [],
       "major_checks": [],
       "question_type_checks": [],

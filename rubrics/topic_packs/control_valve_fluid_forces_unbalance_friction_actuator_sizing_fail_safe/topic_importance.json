@@ -1,0 +1,19 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "자유물체도와 축방향 힘 평형을 일관된 부호로 설명한다.",
+    "압력력의 표면적분과 ΔP×Aeff의 적용조건을 구분한다.",
+    "FTO·FTC, balanced trim, 마찰과 시트 하중을 액추에이터 선정에 연결한다.",
+    "Fail-Close와 Fail-Open의 최악조건을 각각 제시한다."
+  ],
+  "note": "제어밸브와 액추에이터 선정에 필요한 현장 응용 Topic이다. 트림 구조와 힘 방향의 인과관계가 중요하므로 FIELD_APPLICATION / NORMAL로 분류한다.",
+  "revision_notes": [
+    "센서·계측·밸브·액추에이터 Application Topic 분류정책을 적용했다.",
+    "CORE_MUST_PREPARE를 사용하지 않았다."
+  ],
+  "topic_label": "제어밸브 유체력과 액추에이터 선정"
+}

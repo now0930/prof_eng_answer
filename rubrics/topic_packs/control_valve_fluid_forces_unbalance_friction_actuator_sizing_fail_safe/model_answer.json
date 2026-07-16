@@ -1,0 +1,246 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+  "title_ko": "제어밸브에 작용하는 유체력, 불평형력, 마찰력과 액추에이터·Fail-Safe 설계",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "제어밸브가 유체 중에서 동작할 때 가동부에 작용하는 힘과 자유물체도를 설명하시오.",
+      "intent": "가동부 자유물체도와 힘 평형",
+      "required_anchor_ids": [
+        "control_valve_moving_assembly_free_body_diagram",
+        "control_valve_pressure_force_surface_integration",
+        "control_valve_packing_friction",
+        "control_valve_guide_friction_side_load",
+        "control_valve_seat_load_shutoff_class",
+        "control_valve_pneumatic_actuator_force_effective_area",
+        "control_valve_spring_preload_rate_travel_force"
+      ]
+    },
+    {
+      "pattern": "제어밸브의 유체 불평형력과 유효 압력면적을 설명하시오.",
+      "intent": "불평형력과 유효면적",
+      "required_anchor_ids": [
+        "control_valve_pressure_force_surface_integration",
+        "control_valve_unbalance_force_effective_area_approximation",
+        "control_valve_flow_direction_trim_geometry_dependency",
+        "control_valve_stem_area_pressure_force"
+      ]
+    },
+    {
+      "pattern": "Pressure-Tends-to-Open과 Pressure-Tends-to-Close를 비교하시오.",
+      "intent": "압력에 의한 개방·폐쇄 방향",
+      "required_anchor_ids": [
+        "control_valve_pressure_tends_to_open_close_direction",
+        "control_valve_flow_direction_trim_geometry_dependency",
+        "control_valve_fail_close_force_balance",
+        "control_valve_fail_open_force_balance"
+      ]
+    },
+    {
+      "pattern": "글로브 제어밸브에서 FTO와 FTC를 결정하는 유로, 플러그 및 시트 형상을 설명하시오.",
+      "intent": "FTO·FTC와 트림 형상",
+      "required_anchor_ids": [
+        "control_valve_pressure_tends_to_open_close_direction",
+        "control_valve_flow_direction_trim_geometry_dependency",
+        "control_valve_balanced_trim_residual_unbalance"
+      ]
+    },
+    {
+      "pattern": "제어밸브의 패킹 마찰력과 플러그·가이드 마찰력을 비교하고 방향을 설명하시오.",
+      "intent": "패킹과 가이드 마찰",
+      "required_anchor_ids": [
+        "control_valve_packing_friction",
+        "control_valve_guide_friction_side_load",
+        "control_valve_breakaway_running_friction_hysteresis",
+        "control_valve_friction_opposes_motion_not_actuator",
+        "control_valve_stiction_deadband_diagnostics"
+      ]
+    },
+    {
+      "pattern": "Balanced trim과 unbalanced trim의 불평형력과 요구추력 차이를 설명하시오.",
+      "intent": "Balanced와 unbalanced trim",
+      "required_anchor_ids": [
+        "control_valve_unbalance_force_effective_area_approximation",
+        "control_valve_stem_area_pressure_force",
+        "control_valve_balanced_trim_residual_unbalance",
+        "control_valve_balanced_trim_tradeoff_maintenance"
+      ]
+    },
+    {
+      "pattern": "공압식 제어밸브 액추에이터의 힘 평형과 선정 절차를 설명하시오.",
+      "intent": "공압 액추에이터 힘과 선정",
+      "required_anchor_ids": [
+        "control_valve_seat_load_shutoff_class",
+        "control_valve_pneumatic_actuator_force_effective_area",
+        "control_valve_spring_preload_rate_travel_force",
+        "control_valve_bench_set_operating_range_difference",
+        "control_valve_actuator_sizing_worst_case_conditions"
+      ]
+    },
+    {
+      "pattern": "Fail-Close와 Fail-Open 제어밸브의 스프링 힘 설계기준을 설명하시오.",
+      "intent": "Fail-Safe 스프링 힘 조건",
+      "required_anchor_ids": [
+        "control_valve_fail_close_force_balance",
+        "control_valve_fail_open_force_balance",
+        "control_valve_actuator_sizing_worst_case_conditions"
+      ]
+    },
+    {
+      "pattern": "공압식 제어밸브의 Bench set과 실제 operating range의 차이를 설명하시오.",
+      "intent": "Bench set과 operating range",
+      "required_anchor_ids": [
+        "control_valve_pneumatic_actuator_force_effective_area",
+        "control_valve_spring_preload_rate_travel_force",
+        "control_valve_bench_set_operating_range_difference"
+      ]
+    },
+    {
+      "pattern": "직동식 제어밸브의 힘 해석과 회전식 밸브의 토크 해석을 비교하시오.",
+      "intent": "직동식 힘과 회전식 토크",
+      "required_anchor_ids": [
+        "control_valve_moving_assembly_free_body_diagram",
+        "control_valve_unbalance_force_effective_area_approximation",
+        "control_valve_rotary_valve_torque_boundary"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "배경과 분석 대상",
+      "intent": "Sliding-stem 가동부를 고립하고 좌표축과 분석경계를 정의한다.",
+      "anchor_refs": [
+        "control_valve_moving_assembly_free_body_diagram",
+        "control_valve_rotary_valve_torque_boundary"
+      ]
+    },
+    {
+      "section": "압력력과 유체 불평형력",
+      "intent": "표면압력 적분을 기본식으로 제시하고 ΔP×Aeff를 조건부 근사식으로 설명한다.",
+      "anchor_refs": [
+        "control_valve_pressure_force_surface_integration",
+        "control_valve_unbalance_force_effective_area_approximation",
+        "control_valve_stem_area_pressure_force"
+      ]
+    },
+    {
+      "section": "FTO·FTC와 Balanced Trim",
+      "intent": "트림 형상으로 Pressure-Tends-to-Open과 Close를 판단하고 balanced trim의 잔류력을 설명한다.",
+      "anchor_refs": [
+        "control_valve_pressure_tends_to_open_close_direction",
+        "control_valve_flow_direction_trim_geometry_dependency",
+        "control_valve_balanced_trim_residual_unbalance",
+        "control_valve_balanced_trim_tradeoff_maintenance"
+      ]
+    },
+    {
+      "section": "마찰력과 시트 하중",
+      "intent": "패킹·가이드·breakaway 마찰과 운동방향에 따른 마찰 부호 및 시트 하중을 설명한다.",
+      "anchor_refs": [
+        "control_valve_packing_friction",
+        "control_valve_guide_friction_side_load",
+        "control_valve_breakaway_running_friction_hysteresis",
+        "control_valve_friction_opposes_motion_not_actuator",
+        "control_valve_seat_load_shutoff_class"
+      ]
+    },
+    {
+      "section": "액추에이터·스프링·Bench Set",
+      "intent": "공압력, 유효면적, 예압과 레이트를 제시하고 Bench set과 operating range를 구분한다.",
+      "anchor_refs": [
+        "control_valve_pneumatic_actuator_force_effective_area",
+        "control_valve_spring_preload_rate_travel_force",
+        "control_valve_bench_set_operating_range_difference"
+      ]
+    },
+    {
+      "section": "Fail-Safe와 현장 검증",
+      "intent": "Fail-Close와 Fail-Open의 최악조건, 사이징, stiction 진단과 조립 후 검증을 정리한다.",
+      "anchor_refs": [
+        "control_valve_fail_close_force_balance",
+        "control_valve_fail_open_force_balance",
+        "control_valve_actuator_sizing_worst_case_conditions",
+        "control_valve_stiction_deadband_diagnostics",
+        "control_valve_dynamic_flow_force_momentum_side_load"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "가동부 자유물체도와 좌표축을 먼저 정의한다.",
+    "압력은 젖은 표면에 수직으로 작용한다고 설명한다.",
+    "축방향 압력합력을 표면적분으로 설명한다.",
+    "ΔP×A를 조건부 근사식으로 제한한다.",
+    "포트면적과 유효면적을 구분한다.",
+    "스템과 balance-seal 면적을 고려한다.",
+    "Pressure-Tends-to-Open과 Close를 구분한다.",
+    "FTO와 FTC를 단순 상하 유동으로 정의하지 않는다.",
+    "Balanced trim의 잔류력과 seal 마찰을 설명한다.",
+    "정적 불평형력과 동적 유체력을 구분한다.",
+    "패킹 마찰과 가이드 마찰을 구분한다.",
+    "Breakaway와 running friction을 구분한다.",
+    "마찰력은 운동방향의 반대라고 설명한다.",
+    "시트 하중을 차단등급과 연결한다.",
+    "Bench set과 operating range를 구분한다.",
+    "스프링 예압과 레이트를 구분한다.",
+    "Fail-Close와 Fail-Open의 최악조건을 각각 검토한다.",
+    "최대 및 최소 차압을 모두 확인한다.",
+    "회전식 밸브는 토크로 해석한다.",
+    "제조사 사이징 자료와 조립 후 시험을 제시한다."
+  ],
+  "common_missing_points": [
+    "모든 밸브에 ΔP×포트면적을 적용한다.",
+    "FTO와 FTC를 유동의 상하 방향만으로 구분한다.",
+    "스템과 balance-seal 면적을 누락한다.",
+    "Balanced trim의 잔류력과 seal 마찰을 누락한다.",
+    "패킹 마찰과 가이드 마찰을 구분하지 않는다.",
+    "마찰력 방향을 액추에이터 힘만으로 결정한다.",
+    "Breakaway friction을 누락한다.",
+    "시트 하중을 누락한다.",
+    "Bench set과 operating range를 동일시한다.",
+    "스프링 예압과 레이트를 혼동한다.",
+    "Fail-Safe 위치만 제시하고 힘 평형을 누락한다.",
+    "회전식 밸브에 직동식 힘 방정식을 적용한다."
+  ],
+  "routing_aliases": [
+    "제어밸브 유체력",
+    "밸브 불평형력",
+    "control valve unbalance force",
+    "valve force balance",
+    "밸브 자유물체도",
+    "control valve free body diagram",
+    "FTO",
+    "FTC",
+    "pressure tends to open",
+    "pressure tends to close",
+    "balanced trim",
+    "unbalanced trim",
+    "패킹 마찰력",
+    "가이드 마찰력",
+    "breakaway force",
+    "공압 액추에이터 선정",
+    "actuator sizing",
+    "Bench set",
+    "Fail-Close spring",
+    "Fail-Open spring",
+    "시트 하중"
+  ],
+  "routing_field_points": [
+    "P1과 P2 및 유효면적에 의한 축방향 압력력",
+    "Pressure-Tends-to-Open과 Pressure-Tends-to-Close",
+    "FTO·FTC의 트림 형상 및 시트 위치 의존성",
+    "패킹·가이드·breakaway 마찰력",
+    "Balanced trim의 잔류 불평형력과 seal 마찰",
+    "시트 하중과 차단등급",
+    "다이어프램 유효면적과 공압 구동력",
+    "스프링 예압·레이트·스트로크",
+    "Bench set과 operating range",
+    "Fail-Close와 Fail-Open 힘 조건",
+    "최악조건 액추에이터 사이징",
+    "회전식 밸브의 토크 해석"
+  ],
+  "revision_notes": [
+    "Rich Question Pattern과 Recommended Outline을 실제 Anchor 참조로 작성했다.",
+    "템플릿 호환용 legacy root field는 사용하지 않았다."
+  ]
+}

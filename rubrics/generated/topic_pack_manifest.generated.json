@@ -1,13 +1,23 @@
 {
-  "version": "2026-07-16T12:47:07Z-generated-topic-pack-manifest",
+  "version": "2026-07-16T14:25:23Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 23,
+  "topic_count": 24,
   "topics": [
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

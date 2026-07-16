@@ -1616,5 +1616,114 @@ class LVDTRVDTRoutingRegressionTests(
         )
 
 
+
+# CONTROL_VALVE_FLUID_FORCE_ROUTING_REGRESSION
+class ControlValveFluidForceRoutingRegressionTests(
+    StrainGaugeLoadCellRoutingRegressionTests
+):
+    CONTROL_VALVE_TOPIC = (
+        "control_valve_fluid_forces_unbalance_"
+        "friction_actuator_sizing_fail_safe"
+    )
+
+    test_exact_question_example_routes_without_pipeline_context = None
+    test_legacy_passive_question_only_is_unmatched_without_leak = None
+    test_legacy_temperature_error_is_unmatched_without_leak = None
+    test_pipeline_direct_strain_question_routes_with_fact_context = None
+    test_pipeline_strain_centered_mixed_question_keeps_primary = None
+    test_pipeline_strain_ignores_temperature_answer_terms = None
+    test_temperature_sensor_topics_do_not_leak_to_strain = None
+
+    @classmethod
+    def setUpClass(cls):
+        super().setUpClass()
+
+        if cls.CONTROL_VALVE_TOPIC not in cls.answer_by_topic:
+            raise AssertionError(
+                "Control-valve Generated Topic is missing"
+            )
+
+    def test_exact_control_valve_aliases_route_without_context(self):
+        result = self._route(
+            "제어밸브 유체력과 밸브 불평형력을 설명하고 "
+            "FTO, FTC, pressure tends to open과 "
+            "pressure tends to close를 비교하시오."
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.CONTROL_VALVE_TOPIC,
+        )
+
+    def test_control_valve_free_body_routes_with_pipeline_context(self):
+        result = self._route(
+            "글로브 제어밸브 플러그와 스템의 자유물체도에서 "
+            "압력력, 패킹 마찰력, 스프링력과 시트 하중을 "
+            "설명하시오.",
+            fact_topic=self.CONTROL_VALVE_TOPIC,
+            question_type_topic=self.CONTROL_VALVE_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.CONTROL_VALVE_TOPIC,
+        )
+
+    def test_control_valve_fto_ftc_routes_with_pipeline_context(self):
+        result = self._route(
+            "제어밸브의 FTO와 FTC를 플러그 형상, 시트 위치, "
+            "P1과 P2 및 유효 압력면적으로 설명하시오.",
+            fact_topic=self.CONTROL_VALVE_TOPIC,
+            question_type_topic=self.CONTROL_VALVE_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.CONTROL_VALVE_TOPIC,
+        )
+
+    def test_control_valve_balanced_trim_routes_with_pipeline_context(self):
+        result = self._route(
+            "Balanced trim과 unbalanced trim의 잔류 불평형력, "
+            "balance seal 마찰과 액추에이터 요구추력을 "
+            "비교하시오.",
+            fact_topic=self.CONTROL_VALVE_TOPIC,
+            question_type_topic=self.CONTROL_VALVE_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.CONTROL_VALVE_TOPIC,
+        )
+
+    def test_control_valve_fail_close_routes_with_pipeline_context(self):
+        result = self._route(
+            "공압식 제어밸브의 Bench set, 스프링 예압, "
+            "breakaway friction과 Fail-Close 힘 조건을 "
+            "설명하시오.",
+            fact_topic=self.CONTROL_VALVE_TOPIC,
+            question_type_topic=self.CONTROL_VALVE_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.CONTROL_VALVE_TOPIC,
+        )
+
+    def test_control_valve_stiction_routes_with_pipeline_context(self):
+        result = self._route(
+            "제어밸브의 패킹 마찰과 가이드 마찰, "
+            "breakaway friction, deadband와 stiction의 "
+            "관계를 설명하시오.",
+            fact_topic=self.CONTROL_VALVE_TOPIC,
+            question_type_topic=self.CONTROL_VALVE_TOPIC,
+        )
+
+        self.assertPrimaryTopic(
+            result,
+            self.CONTROL_VALVE_TOPIC,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()
