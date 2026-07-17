@@ -17,6 +17,11 @@ if str(ROOT) not in sys.path:
 
 from question_type_taxonomy import detect_question_type_from_text
 from question_type_router import detect_question_type
+from grading_identity import (
+    NORMALIZATION_VERSION,
+    build_grading_identity,
+    normalize_grading_text,
+)
 from grading_agents import (
     _phase3_extract_answer_text,
     _phase3_extract_question_text,
@@ -751,6 +756,153 @@ class ControlValveLogicScoreRegressionTests(
             grade.get(
                 "final_total_score"
             ),
+        )
+
+
+
+
+class GradingIdentityRegressionTests(
+    unittest.TestCase
+):
+    SESSION_DIR = Path(
+        "data/sessions/"
+        "20260715_133052_5960502198"
+    )
+
+    def test_emoji_variation_selector_is_ignored(
+        self,
+    ) -> None:
+        with_selector = (
+            build_grading_identity(
+                "동일 문제",
+                "▶️ 동일 답안",
+            )
+        )
+        without_selector = (
+            build_grading_identity(
+                "동일 문제",
+                "▶ 동일 답안",
+            )
+        )
+
+        self.assertEqual(
+            with_selector.question_hash,
+            without_selector.question_hash,
+        )
+        self.assertEqual(
+            with_selector.submission_hash,
+            without_selector.submission_hash,
+        )
+
+    def test_question_and_submission_hash_scope(
+        self,
+    ) -> None:
+        first = build_grading_identity(
+            "문제",
+            "답안 A",
+        )
+        second = build_grading_identity(
+            "문제",
+            "답안 B",
+        )
+        whitespace_only = (
+            build_grading_identity(
+                " 문제 ",
+                "\n답안 A\n\n\n",
+            )
+        )
+
+        self.assertEqual(
+            first.question_hash,
+            second.question_hash,
+        )
+        self.assertNotEqual(
+            first.submission_hash,
+            second.submission_hash,
+        )
+        self.assertEqual(
+            first.submission_hash,
+            whitespace_only.submission_hash,
+        )
+        self.assertEqual(
+            first.normalization_version,
+            NORMALIZATION_VERSION,
+        )
+        self.assertEqual(
+            len(first.question_hash),
+            64,
+        )
+        self.assertEqual(
+            len(first.submission_hash),
+            64,
+        )
+
+    def test_real_session_uses_final_split_text(
+        self,
+    ) -> None:
+        raw_text = (
+            self.SESSION_DIR / "input.txt"
+        ).read_text(
+            encoding="utf-8",
+            errors="replace",
+        )
+
+        question = (
+            _phase3_extract_question_text(
+                raw_text
+            )
+        )
+        answer = (
+            _phase3_extract_answer_text(
+                raw_text
+            )
+        )
+
+        identity = build_grading_identity(
+            question,
+            answer,
+        )
+
+        self.assertEqual(
+            identity.normalized_question,
+            normalize_grading_text(
+                question
+            ),
+        )
+        self.assertEqual(
+            identity.normalized_answer,
+            normalize_grading_text(
+                answer
+            ),
+        )
+        self.assertNotEqual(
+            identity.question_hash,
+            identity.submission_hash,
+        )
+        self.assertLess(
+            len(identity.normalized_question),
+            100,
+        )
+        self.assertGreater(
+            len(identity.normalized_answer),
+            3000,
+        )
+
+        agent_source = Path(
+            "grading_agents.py"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            '"grading_identity": '
+            "grading_identity_dict",
+            agent_source,
+        )
+        self.assertIn(
+            'session_dir / '
+            '"grading_identity.json"',
+            agent_source,
         )
 
 

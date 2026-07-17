@@ -3511,6 +3511,31 @@ def _phase2_postprocess_grade(legacy_result):
         input_text = input_path.read_text(encoding="utf-8", errors="ignore")
 
     answer_text = _phase3_extract_answer_text(input_text)
+    question_text = _phase3_extract_question_text(input_text)
+
+    from grading_identity import (
+        build_grading_identity,
+    )
+
+    grading_identity = build_grading_identity(
+        question_text=question_text,
+        answer_text=answer_text,
+    )
+    grading_identity_dict = (
+        grading_identity.to_dict()
+    )
+
+    try:
+        _phase2_json_write(
+            session_dir / "grading_identity.json",
+            grading_identity_dict,
+        )
+    except Exception as identity_write_error:
+        report(
+            "[agent] grading identity persistence "
+            "failed: "
+            f"{identity_write_error!r}"
+        )
 
     image_count = _phase2_image_count(session_dir)
     volume = _phase2_estimate_volume_level(answer_text, image_count)
@@ -3618,6 +3643,7 @@ def _phase2_postprocess_grade(legacy_result):
         ),
         "volume_evaluation": volume,
         "answer_text_stats": _phase2_text_stats(answer_text),
+        "grading_identity": grading_identity_dict,
         "fact_anchor_evaluation": fact_eval,
         "connection_evaluation": connection_eval,
         "interview_followup": interview_followup,
