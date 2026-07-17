@@ -585,39 +585,131 @@ def _clean_display_list(items):
     return cleaned
 
 
-def call_ollama(prompt):
-    url = OLLAMA_URL + "/api/chat"
+def _build_ollama_request(prompt):
+    from llm_sampling import (
+        build_llm_request_contract,
+    )
+
+    options = {
+        "temperature": 0.0,
+        "top_p": 1.0,
+        "top_k": 64,
+        "seed": 0,
+        "num_predict": 4096,
+    }
+
     payload = {
         "model": OLLAMA_MODEL,
         "stream": False,
         "format": "json",
-        "options": {
-            "temperature": 0.1,
-            "num_predict": 4096
-        },
+        "options": options,
         "messages": [
             {
                 "role": "system",
-                "content": "너는 기술사 답안 채점자다. 반드시 JSON만 출력한다."
+                "content": (
+                    "너는 기술사 답안 채점자다. "
+                    "반드시 JSON만 출력한다."
+                ),
             },
             {
                 "role": "user",
-                "content": prompt
-            }
-        ]
+                "content": prompt,
+            },
+        ],
     }
+
+    request_contract = (
+        build_llm_request_contract(
+            provider="ollama",
+            model=OLLAMA_MODEL,
+            prompt=prompt,
+            requested_sampling={
+                "temperature": 0.0,
+                "top_p": 1.0,
+                "candidate_count": 1,
+                "top_k": 64,
+                "seed": 0,
+            },
+            applied_sampling={
+                "temperature": options[
+                    "temperature"
+                ],
+                "top_p": options["top_p"],
+                "candidate_count": 1,
+                "top_k": options["top_k"],
+                "seed": options["seed"],
+                "num_predict": options[
+                    "num_predict"
+                ],
+            },
+            unsupported_settings=[],
+        )
+    )
+
+    return payload, request_contract
+
+
+def _call_ollama(
+    prompt,
+    *,
+    include_metadata=False,
+):
+    url = OLLAMA_URL + "/api/chat"
+
+    payload, request_contract = (
+        _build_ollama_request(prompt)
+    )
+
+    encoded_payload = json.dumps(
+        payload,
+        ensure_ascii=False,
+        sort_keys=True,
+        separators=(",", ":"),
+    ).encode("utf-8")
 
     req = urllib.request.Request(
         url,
-        data=json.dumps(payload).encode("utf-8"),
-        headers={"Content-Type": "application/json"},
-        method="POST"
+        data=encoded_payload,
+        headers={
+            "Content-Type": "application/json"
+        },
+        method="POST",
     )
 
-    with urllib.request.urlopen(req, timeout=OLLAMA_TIMEOUT) as resp:
-        data = json.loads(resp.read().decode("utf-8"))
+    with urllib.request.urlopen(
+        req,
+        timeout=OLLAMA_TIMEOUT,
+    ) as resp:
+        data = json.loads(
+            resp.read().decode("utf-8")
+        )
 
-    return data.get("message", {}).get("content", "")
+    content = (
+        data.get("message", {})
+        .get("content", "")
+    )
+
+    if include_metadata:
+        return {
+            "content": content,
+            "llm_request": request_contract,
+        }
+
+    return content
+
+
+def call_ollama(prompt):
+    return _call_ollama(
+        prompt,
+        include_metadata=False,
+    )
+
+
+def call_ollama_score_adjudicator(prompt):
+    return _call_ollama(
+        prompt,
+        include_metadata=True,
+    )
 
 
 
@@ -645,7 +737,9 @@ def grade_answer(chat_id, raw_text, state):
         parsed = reconcile_grade_score(
             parsed=parsed,
             raw_text=raw_text,
-            call_llm_fn=call_ollama,
+            call_llm_fn=(
+                call_ollama_score_adjudicator
+            ),
         )
         parsed["backend"] = "ollama"
         parsed["model"] = OLLAMA_MODEL

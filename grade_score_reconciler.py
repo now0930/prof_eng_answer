@@ -478,51 +478,129 @@ def call_llm_cap_adjudicator(
     """
     Ask the LLM to judge cap validity semantically.
 
-    The LLM must not calculate a score.
-    It only returns enum decisions.
-
-    If the LLM violates the schema, run one schema-repair retry.
+    The callback may return either a legacy
+    string or a mapping containing content
+    and llm_request metadata.
     """
-    first_prompt = _build_cap_adjudicator_prompt(
-        raw_text=raw_text,
-        parsed=parsed,
-        current_score=current_score,
-        uncapped_score=uncapped_score,
+    request_metadata = []
+
+    def invoke(prompt: str) -> str:
+        response = call_llm_fn(prompt)
+
+        if isinstance(response, dict):
+            raw = (
+                response.get("content")
+                or response.get("raw_text")
+                or response.get("text")
+                or ""
+            )
+
+            metadata = response.get(
+                "llm_request"
+            )
+
+            if isinstance(metadata, dict):
+                request_metadata.append(
+                    dict(metadata)
+                )
+
+            return str(raw)
+
+        return str(response or "")
+
+    def attach_metadata(
+        result: JsonDict,
+    ) -> JsonDict:
+        output = dict(result)
+
+        if request_metadata:
+            output["llm_request"] = dict(
+                request_metadata[-1]
+            )
+            output["llm_requests"] = [
+                dict(item)
+                for item in request_metadata
+            ]
+
+        return output
+
+    first_prompt = (
+        _build_cap_adjudicator_prompt(
+            raw_text=raw_text,
+            parsed=parsed,
+            current_score=current_score,
+            uncapped_score=uncapped_score,
+        )
     )
 
-    first_raw = call_llm_fn(first_prompt)
-    first_result = _safe_extract_json(first_raw)
-    first_normalized = _normalize_adjudication(first_result)
-
-    if first_normalized.get("schema_valid"):
-        first_normalized.pop("schema_valid", None)
-        return first_normalized
-
-    repair_prompt = _build_schema_repair_prompt(
-        first_response=first_raw,
-        raw_text=raw_text,
-        parsed=parsed,
-        current_score=current_score,
-        uncapped_score=uncapped_score,
+    first_raw = invoke(first_prompt)
+    first_result = _safe_extract_json(
+        first_raw
+    )
+    first_normalized = (
+        _normalize_adjudication(
+            first_result
+        )
     )
 
-    repair_raw = call_llm_fn(repair_prompt)
-    repair_result = _safe_extract_json(repair_raw)
-    repair_normalized = _normalize_adjudication(repair_result)
+    if first_normalized.get(
+        "schema_valid"
+    ):
+        first_normalized.pop(
+            "schema_valid",
+            None,
+        )
+        return attach_metadata(
+            first_normalized
+        )
 
-    if repair_normalized.get("schema_valid"):
-        repair_normalized["schema_repaired"] = True
-        repair_normalized["first_invalid_response"] = first_raw
-        repair_normalized.pop("schema_valid", None)
-        return repair_normalized
+    repair_prompt = (
+        _build_schema_repair_prompt(
+            first_response=first_raw,
+            raw_text=raw_text,
+            parsed=parsed,
+            current_score=current_score,
+            uncapped_score=uncapped_score,
+        )
+    )
 
-    return _structured_cap_fallback(
+    repair_raw = invoke(repair_prompt)
+    repair_result = _safe_extract_json(
+        repair_raw
+    )
+    repair_normalized = (
+        _normalize_adjudication(
+            repair_result
+        )
+    )
+
+    if repair_normalized.get(
+        "schema_valid"
+    ):
+        repair_normalized[
+            "schema_repaired"
+        ] = True
+        repair_normalized[
+            "first_invalid_response"
+        ] = first_raw
+        repair_normalized.pop(
+            "schema_valid",
+            None,
+        )
+
+        return attach_metadata(
+            repair_normalized
+        )
+
+    fallback = _structured_cap_fallback(
         parsed=parsed,
         current_score=current_score,
         uncapped_score=uncapped_score,
         first_invalid_response=first_raw,
         repair_invalid_response=repair_raw,
     )
+
+    return attach_metadata(fallback)
 
 
 

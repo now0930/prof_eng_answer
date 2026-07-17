@@ -474,5 +474,201 @@ class DeterministicSamplingTests(
         )
 
 
+class OllamaCapAdjudicationTests(
+    unittest.TestCase
+):
+    def test_ollama_payload_and_metadata(
+        self,
+    ):
+        import bot
+
+        captured = []
+
+        def fake_urlopen(
+            request,
+            timeout=None,
+        ):
+            del timeout
+
+            captured.append(
+                bytes(request.data)
+            )
+
+            return FakeResponse(
+                {
+                    "message": {
+                        "content": (
+                            '{"ok": true}'
+                        )
+                    }
+                }
+            )
+
+        with mock.patch(
+            "bot.urllib.request.urlopen",
+            side_effect=fake_urlopen,
+        ):
+            result = (
+                bot
+                .call_ollama_score_adjudicator(
+                    "deterministic prompt"
+                )
+            )
+
+        payload = json.loads(
+            captured[0].decode("utf-8")
+        )
+        options = payload["options"]
+
+        self.assertEqual(
+            options["temperature"],
+            0.0,
+        )
+        self.assertEqual(
+            options["top_p"],
+            1.0,
+        )
+        self.assertEqual(
+            options["top_k"],
+            64,
+        )
+        self.assertEqual(
+            options["seed"],
+            0,
+        )
+
+        metadata = result[
+            "llm_request"
+        ]
+
+        self.assertEqual(
+            metadata["provider"],
+            "ollama",
+        )
+        self.assertEqual(
+            len(metadata["prompt_hash"]),
+            64,
+        )
+        self.assertEqual(
+            len(metadata["request_hash"]),
+            64,
+        )
+
+    def test_cap_adjudicator_keeps_metadata(
+        self,
+    ):
+        from grade_score_reconciler import (
+            call_llm_cap_adjudicator,
+        )
+
+        metadata = {
+            "provider": "ollama",
+            "model": "test-model",
+            "prompt_hash": "a" * 64,
+            "request_hash": "b" * 64,
+            "applied_sampling": {
+                "temperature": 0.0,
+            },
+        }
+
+        response = {
+            "fatal_logic_error": False,
+            "cap_decision": "keep",
+            "demand_alignment": "full",
+            "question_type_decision": "keep",
+            "suggested_question_type": (
+                "UNKNOWN"
+            ),
+            "confidence": "high",
+            "reason": "valid",
+        }
+
+        result = call_llm_cap_adjudicator(
+            raw_text="문제와 답안",
+            parsed={},
+            current_score=10.0,
+            uncapped_score=12.0,
+            call_llm_fn=lambda prompt: {
+                "content": json.dumps(
+                    response,
+                    ensure_ascii=False,
+                ),
+                "llm_request": metadata,
+            },
+        )
+
+        self.assertEqual(
+            result["llm_request"],
+            metadata,
+        )
+        self.assertEqual(
+            result["llm_requests"],
+            [metadata],
+        )
+
+    def test_schema_repair_records_requests(
+        self,
+    ):
+        from grade_score_reconciler import (
+            call_llm_cap_adjudicator,
+        )
+
+        responses = [
+            {
+                "content": "not-json",
+                "llm_request": {
+                    "request_hash": "1" * 64,
+                },
+            },
+            {
+                "content": json.dumps(
+                    {
+                        "fatal_logic_error": False,
+                        "cap_decision": "keep",
+                        "demand_alignment": "full",
+                        "question_type_decision": (
+                            "keep"
+                        ),
+                        "suggested_question_type": (
+                            "UNKNOWN"
+                        ),
+                        "confidence": "high",
+                        "reason": "repaired",
+                    },
+                    ensure_ascii=False,
+                ),
+                "llm_request": {
+                    "request_hash": "2" * 64,
+                },
+            },
+        ]
+
+        result = call_llm_cap_adjudicator(
+            raw_text="문제와 답안",
+            parsed={},
+            current_score=10.0,
+            uncapped_score=12.0,
+            call_llm_fn=lambda prompt: (
+                responses.pop(0)
+            ),
+        )
+
+        self.assertTrue(
+            result["schema_repaired"]
+        )
+        self.assertEqual(
+            [
+                item["request_hash"]
+                for item in result[
+                    "llm_requests"
+                ]
+            ],
+            [
+                "1" * 64,
+                "2" * 64,
+            ],
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
