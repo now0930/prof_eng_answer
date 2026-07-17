@@ -3721,11 +3721,6 @@ def _phase2_postprocess_grade(legacy_result):
         session_dir=session_dir
     )
 
-    subject_rubric_for_gemini = _phase9_subject_rubric_with_question_type_lens(
-        subject_rubric,
-        question_type_eval
-    )
-
     model_answer_ref = _phase10_run_model_answer_reference(
         input_text=input_text,
         answer_text=answer_text,
@@ -3735,9 +3730,70 @@ def _phase2_postprocess_grade(legacy_result):
         session_dir=session_dir
     )
 
-    subject_rubric_for_gemini = _phase10_subject_rubric_with_model_answer_reference(
-        subject_rubric_for_gemini,
-        model_answer_ref
+    from question_contract import (
+        apply_question_contract_to_fact_evaluation,
+        apply_question_contract_to_model_reference,
+        apply_question_contract_to_question_type,
+        build_question_contract,
+        load_question_contract,
+        persist_question_contract,
+    )
+
+    question_contract = build_question_contract(
+        grading_identity=grading_identity_dict,
+        question_type_evaluation=question_type_eval,
+        fact_evaluation=fact_eval,
+        model_answer_reference=model_answer_ref,
+        rubric_snapshot_path=(
+            session_dir
+            / "subject_rubric_snapshot.json"
+        ),
+        subject_rubric=subject_rubric,
+    )
+
+    persist_question_contract(
+        session_dir,
+        question_contract,
+    )
+
+    # Score-affecting stages consume the persisted
+    # contract rather than independently deriving
+    # question type or routing metadata again.
+    question_contract = load_question_contract(
+        session_dir
+    )
+
+    question_type_eval = (
+        apply_question_contract_to_question_type(
+            question_type_eval,
+            question_contract,
+        )
+    )
+    fact_eval = (
+        apply_question_contract_to_fact_evaluation(
+            fact_eval,
+            question_contract,
+        )
+    )
+    model_answer_ref = (
+        apply_question_contract_to_model_reference(
+            model_answer_ref,
+            question_contract,
+        )
+    )
+
+    subject_rubric_for_gemini = (
+        _phase9_subject_rubric_with_question_type_lens(
+            subject_rubric,
+            question_type_eval,
+        )
+    )
+
+    subject_rubric_for_gemini = (
+        _phase10_subject_rubric_with_model_answer_reference(
+            subject_rubric_for_gemini,
+            model_answer_ref,
+        )
     )
 
     gemini_eval = _phase6_run_gemini_semantic_grader(
@@ -3808,6 +3864,7 @@ def _phase2_postprocess_grade(legacy_result):
         "volume_evaluation": volume,
         "answer_text_stats": _phase2_text_stats(answer_text),
         "grading_identity": grading_identity_dict,
+        "question_contract": question_contract,
         "fact_anchor_evaluation": fact_eval,
         "connection_evaluation": connection_eval,
         "interview_followup": interview_followup,
