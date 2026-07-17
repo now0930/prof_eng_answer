@@ -2485,55 +2485,218 @@ def _phase3_score_one_anchor(answer_text, anchor):
         "support_terms_found": support_found
     }
 
-def _phase3_evaluate_fact_anchors(raw_text, subject_rubric=None):
-    question_text = _phase3_extract_question_text(raw_text)
-    answer_text = _phase3_extract_answer_text(raw_text)
+def _phase3_evaluate_fact_anchors(
+    raw_text,
+    subject_rubric=None,
+):
+    question_text = (
+        _phase3_extract_question_text(
+            raw_text
+        )
+    )
+    answer_text = (
+        _phase3_extract_answer_text(
+            raw_text
+        )
+    )
 
-    anchors = _phase3_select_fact_anchors(question_text, answer_text, subject_rubric)
-    results = [_phase3_score_one_anchor(answer_text, a) for a in anchors]
+    bank_selection = (
+        _phase3_select_fact_anchors_from_bank(
+            question_text,
+            answer_text,
+            subject_rubric,
+        )
+    )
 
-    avg = round(sum(x["level"] for x in results) / len(results), 3) if results else 0.0
+    if (
+        isinstance(bank_selection, dict)
+        and isinstance(
+            bank_selection.get("anchors"),
+            list,
+        )
+    ):
+        anchors = bank_selection["anchors"]
+    else:
+        bank_selection = None
+        anchors = _phase3_select_fact_anchors(
+            question_text,
+            answer_text,
+            subject_rubric,
+        )
 
-    # C항목 8점 구성:
-    # 핵심 개념 인지 3점, 정확한 설명 3점, 문제점 연결 1.5점, 간결성 0.5점
-    concept_score = round(3.0 * avg, 2)
+    results = [
+        _phase3_score_one_anchor(
+            answer_text,
+            anchor,
+        )
+        for anchor in anchors
+    ]
+
+    avg = (
+        round(
+            sum(
+                item["level"]
+                for item in results
+            )
+            / len(results),
+            3,
+        )
+        if results
+        else 0.0
+    )
+
+    concept_score = round(
+        3.0 * avg,
+        2,
+    )
 
     accuracy_factor = avg
-    if _phase3_contains_any(answer_text, ["포화증기압", "압력 회복", "하류", "침식", "사이징", "운전 조건"]):
-        accuracy_factor = min(1.0, accuracy_factor + 0.1)
-    accuracy_score = round(3.0 * accuracy_factor, 2)
+
+    if _phase3_contains_any(
+        answer_text,
+        [
+            "포화증기압",
+            "압력 회복",
+            "하류",
+            "침식",
+            "사이징",
+            "운전 조건",
+        ],
+    ):
+        accuracy_factor = min(
+            1.0,
+            accuracy_factor + 0.1,
+        )
+
+    accuracy_score = round(
+        3.0 * accuracy_factor,
+        2,
+    )
 
     problem_link_factor = 0.0
-    if _phase3_contains_any(answer_text, ["소음", "진동", "손상", "침식", "제어 불안정", "문제", "위험"]):
+
+    if _phase3_contains_any(
+        answer_text,
+        [
+            "소음",
+            "진동",
+            "손상",
+            "침식",
+            "제어 불안정",
+            "문제",
+            "위험",
+        ],
+    ):
         problem_link_factor += 0.7
-    if _phase3_contains_any(answer_text, ["따라서", "때문", "이로 인해", "유발", "발생"]):
+
+    if _phase3_contains_any(
+        answer_text,
+        [
+            "따라서",
+            "때문",
+            "이로 인해",
+            "유발",
+            "발생",
+        ],
+    ):
         problem_link_factor += 0.3
-    problem_link_score = round(1.5 * min(problem_link_factor, 1.0), 2)
+
+    problem_link_score = round(
+        1.5
+        * min(
+            problem_link_factor,
+            1.0,
+        ),
+        2,
+    )
 
     compactness_score = 0.5
+
     if len(answer_text.strip()) > 2500:
         compactness_score = 0.4
+
     if len(answer_text.strip()) < 80:
         compactness_score = 0.2
 
-    total = round(concept_score + accuracy_score + problem_link_score + compactness_score, 2)
+    total = round(
+        concept_score
+        + accuracy_score
+        + problem_link_score
+        + compactness_score,
+        2,
+    )
     total = min(total, 8.0)
 
-    return {
+    evaluation = {
         "version": "phase3_fact_anchor_v1",
         "question_text": question_text,
-        "answer_char_count": len(answer_text.strip()),
+        "answer_char_count": len(
+            answer_text.strip()
+        ),
         "anchor_count": len(results),
         "average_anchor_level": avg,
         "c_score": total,
         "c_score_detail": {
             "core_concept": concept_score,
             "accuracy": accuracy_score,
-            "problem_link": problem_link_score,
-            "compactness": compactness_score
+            "problem_link": (
+                problem_link_score
+            ),
+            "compactness": (
+                compactness_score
+            ),
         },
-        "anchors": results
+        "anchors": results,
     }
+
+    if isinstance(bank_selection, dict):
+        topic_id = str(
+            bank_selection.get("topic_id")
+            or ""
+        ).strip()
+
+        if topic_id:
+            evaluation["topic_id"] = topic_id
+            evaluation["topic_name"] = (
+                bank_selection.get(
+                    "topic_name"
+                )
+            )
+            evaluation["topic_routing"] = {
+                "source": (
+                    bank_selection.get("source")
+                    or "fact_anchor_bank"
+                ),
+                "score": bank_selection.get(
+                    "score"
+                ),
+                "trigger_hits": list(
+                    bank_selection.get(
+                        "trigger_hits"
+                    )
+                    or []
+                ),
+                "alias_hits": list(
+                    bank_selection.get(
+                        "alias_hits"
+                    )
+                    or []
+                ),
+                "question_trigger_hits": list(
+                    bank_selection.get(
+                        "question_trigger_hits"
+                    )
+                    or []
+                ),
+                "answer_trigger_hits": list(
+                    bank_selection.get(
+                        "answer_trigger_hits"
+                    )
+                    or []
+                ),
+            }
+
+    return evaluation
 
 
 def _phase3_evaluate_connections(raw_text):

@@ -1070,5 +1070,143 @@ class DeterministicQuestionTypeContractTests(
         )
 
 
+class ControlValveTopicMetadataRegressionTests(
+    unittest.TestCase
+):
+    def test_fact_topic_reaches_all_downstream_routers(
+        self,
+    ):
+        import json
+        import os
+        import tempfile
+        from pathlib import Path
+        from unittest import mock
+
+        import grading_agents
+
+        target_topic = (
+            "control_valve_fluid_forces_"
+            "unbalance_friction_actuator_"
+            "sizing_fail_safe"
+        )
+
+        session_dir = Path(
+            "data/sessions/"
+            "20260717_114330_5960502198"
+        )
+
+        raw_text = session_dir.joinpath(
+            "input.txt"
+        ).read_text(
+            encoding="utf-8",
+            errors="replace",
+        )
+
+        subject_rubric = json.loads(
+            session_dir.joinpath(
+                "subject_rubric_snapshot.json"
+            ).read_text(
+                encoding="utf-8"
+            )
+        )
+
+        answer_text = (
+            grading_agents
+            ._phase3_extract_answer_text(
+                raw_text
+            )
+        )
+
+        with mock.patch.dict(
+            os.environ,
+            {
+                "RUBRIC_BANK_MODE": "generated"
+            },
+            clear=False,
+        ):
+            fact_eval = (
+                grading_agents
+                ._phase3_evaluate_fact_anchors(
+                    raw_text,
+                    subject_rubric,
+                )
+            )
+
+            self.assertEqual(
+                fact_eval.get("topic_id"),
+                target_topic,
+            )
+            self.assertEqual(
+                fact_eval.get("anchor_count"),
+                22,
+            )
+            self.assertEqual(
+                (
+                    fact_eval.get(
+                        "topic_routing"
+                    )
+                    or {}
+                ).get("source"),
+                "fact_anchor_bank",
+            )
+
+            with tempfile.TemporaryDirectory() as tmp:
+                question_type_eval = (
+                    grading_agents
+                    ._phase9_run_question_type_lens(
+                        input_text=raw_text,
+                        answer_text=answer_text,
+                        subject_rubric=subject_rubric,
+                        session_dir=Path(tmp),
+                    )
+                )
+
+                model_ref = (
+                    grading_agents
+                    ._phase10_run_model_answer_reference(
+                        input_text=raw_text,
+                        answer_text=answer_text,
+                        question_type_eval=(
+                            question_type_eval
+                        ),
+                        fact_eval=fact_eval,
+                        subject_rubric=subject_rubric,
+                        session_dir=Path(tmp),
+                    )
+                )
+
+            self.assertTrue(
+                model_ref.get("matched")
+            )
+            self.assertEqual(
+                (
+                    model_ref.get(
+                        "primary_reference"
+                    )
+                    or {}
+                ).get("topic_id"),
+                target_topic,
+            )
+
+            self.assertEqual(
+                grading_agents
+                ._phase2_resolve_logic_topic_id(
+                    model_ref,
+                    {},
+                    fact_eval,
+                ),
+                target_topic,
+            )
+
+            self.assertEqual(
+                grading_agents
+                ._phase2_resolve_difficulty_topic_id(
+                    fact_eval,
+                    model_ref,
+                ),
+                target_topic,
+            )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
