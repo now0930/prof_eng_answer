@@ -263,7 +263,9 @@ def gemini_semantic_grade(
             }
         ],
         "generationConfig": {
-            "temperature": 0.1,
+            "temperature": 0.0,
+            "topP": 1.0,
+            "candidateCount": 1,
             "maxOutputTokens": 8192
         }
     }
@@ -621,6 +623,87 @@ def build_gemini_grading_prompt(
 
 
 # ============================================================
+
+# P0_C_DETERMINISTIC_SAMPLING_WRAPPER
+_ORIGINAL_GEMINI_SEMANTIC_GRADE_SAMPLING_V1 = (
+    gemini_semantic_grade
+)
+
+
+def gemini_semantic_grade(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval,
+    timeout=180,
+):
+    prompt = build_gemini_grading_prompt(
+        question_text=question_text,
+        answer_text=answer_text,
+        scoring_model=scoring_model,
+        subject_rubric=subject_rubric,
+        rater_profile=rater_profile,
+        volume=volume,
+        fact_eval=fact_eval,
+        connection_eval=connection_eval,
+    )
+
+    result = (
+        _ORIGINAL_GEMINI_SEMANTIC_GRADE_SAMPLING_V1(
+            question_text=question_text,
+            answer_text=answer_text,
+            scoring_model=scoring_model,
+            subject_rubric=subject_rubric,
+            rater_profile=rater_profile,
+            volume=volume,
+            fact_eval=fact_eval,
+            connection_eval=connection_eval,
+            timeout=timeout,
+        )
+    )
+
+    from llm_sampling import (
+        build_llm_request_contract,
+    )
+
+    sampling_contract = (
+        build_llm_request_contract(
+            provider="gemini",
+            model=os.getenv(
+                "GEMINI_MODEL",
+                "gemini-2.5-flash",
+            ),
+            prompt=prompt,
+            requested_sampling={
+                "temperature": 0.0,
+                "top_p": 1.0,
+                "candidate_count": 1,
+            },
+            applied_sampling={
+                "temperature": 0.0,
+                "top_p": 1.0,
+                "candidate_count": 1,
+                "max_output_tokens": 8192,
+            },
+            unsupported_settings=[
+                "top_k",
+                "seed",
+            ],
+        )
+    )
+
+    if isinstance(result, dict):
+        result["llm_request"] = (
+            sampling_contract
+        )
+
+    return result
+
+
 # PHASE18_GEMINI_SEMANTIC_RETRY_WRAPPER
 # Gemini 503, timeout, connection reset 등 일시 장애 시 재시도
 # 점수 계산 로직은 바꾸지 않고 Gemini 호출 안정성만 높인다.

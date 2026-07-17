@@ -3251,7 +3251,8 @@ def _phase6_merge_gemini_feedback(grade, gemini_eval):
         "ok": True,
         "model": gemini_eval.get("model"),
         "parsed": parsed,
-        "raw_text": gemini_eval.get("raw_text", "")
+        "raw_text": gemini_eval.get("raw_text", ""),
+        "llm_request": gemini_eval.get("llm_request"),
     }
 
     if parsed.get("overall_comment"):
@@ -4295,6 +4296,7 @@ def _phase8_run_originality_evaluator(
             "error": result.get("error", ""),
             "model": result.get("model", ""),
             "raw_text": result.get("raw_text", ""),
+            "llm_request": result.get("llm_request"),
             "parsed": parsed,
         }
 

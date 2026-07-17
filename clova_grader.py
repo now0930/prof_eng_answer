@@ -220,8 +220,8 @@ def _clova_chat(prompt: str) -> str:
                 "content": prompt
             }
         ],
-        "temperature": float(os.getenv("CLOVA_TEMPERATURE", "0.1")),
-        "topP": float(os.getenv("CLOVA_TOP_P", "0.8")),
+        "temperature": 0.0,
+        "topP": 1.0,
         "maxTokens": int(os.getenv("CLOVA_MAX_TOKENS", "2048")),
         "includeAiFilters": False,
     }
@@ -259,42 +259,138 @@ def _clova_chat(prompt: str) -> str:
     return _extract_clova_content(parsed)
 
 
-def clova_semantic_grade(*args, **kwargs) -> Dict[str, Any]:
-    retries = int(os.getenv("CLOVA_RETRIES", "2"))
+def clova_semantic_grade(
+    *args,
+    **kwargs,
+) -> Dict[str, Any]:
+    retries = int(
+        os.getenv(
+            "CLOVA_RETRIES",
+            "2",
+        )
+    )
     delays = [2, 5, 10]
+
+    prompt = _build_prompt(
+        *args,
+        **kwargs,
+    )
+
+    model = (
+        os.getenv(
+            "CLOVA_MODEL",
+            "HCX-003",
+        ).strip()
+        or "HCX-003"
+    )
+
+    max_tokens = int(
+        os.getenv(
+            "CLOVA_MAX_TOKENS",
+            "2048",
+        )
+    )
+
+    from llm_sampling import (
+        build_llm_request_contract,
+    )
+
+    sampling_contract = (
+        build_llm_request_contract(
+            provider="clova",
+            model=model,
+            prompt=prompt,
+            requested_sampling={
+                "temperature": 0.0,
+                "top_p": 1.0,
+                "candidate_count": 1,
+            },
+            applied_sampling={
+                "temperature": 0.0,
+                "top_p": 1.0,
+                "max_tokens": max_tokens,
+            },
+            unsupported_settings=[
+                "candidate_count",
+                "top_k",
+                "seed",
+            ],
+        )
+    )
 
     last_error = None
 
-    for attempt in range(retries + 1):
+    for attempt in range(
+        retries + 1
+    ):
         try:
-            prompt = _build_prompt(*args, **kwargs)
-            content = _clova_chat(prompt)
-            result = _safe_json_loads(content)
+            content = _clova_chat(
+                prompt
+            )
+            result = _safe_json_loads(
+                content
+            )
 
             if isinstance(result, dict):
-                result.setdefault("ok", True)
-                result.setdefault("llm_provider", "clova")
-                result.setdefault("llm_model", os.getenv("CLOVA_MODEL", "HCX-003"))
-                result.setdefault("retry_info", {"attempt": attempt + 1})
+                result.setdefault(
+                    "ok",
+                    True,
+                )
+                result.setdefault(
+                    "llm_provider",
+                    "clova",
+                )
+                result.setdefault(
+                    "llm_model",
+                    model,
+                )
+                result.setdefault(
+                    "retry_info",
+                    {
+                        "attempt": attempt + 1
+                    },
+                )
+                result["llm_request"] = (
+                    sampling_contract
+                )
                 return result
 
             return {
                 "ok": False,
                 "llm_provider": "clova",
-                "error": "CLOVA returned non-dict JSON",
+                "llm_model": model,
+                "error": (
+                    "CLOVA returned "
+                    "non-dict JSON"
+                ),
                 "raw": str(result)[:1000],
+                "llm_request": sampling_contract,
             }
 
-        except Exception as e:
-            last_error = e
+        except Exception as error:
+            last_error = error
+
             if attempt < retries:
-                time.sleep(delays[min(attempt, len(delays) - 1)])
+                time.sleep(
+                    delays[
+                        min(
+                            attempt,
+                            len(delays) - 1,
+                        )
+                    ]
+                )
                 continue
 
     return {
         "ok": False,
         "llm_provider": "clova",
+        "llm_model": model,
         "error": str(last_error),
+        "retry_info": {
+            "attempt": retries + 1,
+            "exhausted": True,
+        },
+        "llm_request": sampling_contract,
     }
 
 

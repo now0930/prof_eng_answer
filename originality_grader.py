@@ -215,10 +215,52 @@ def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, v
             }
         ],
         "generationConfig": {
-            "temperature": 0.1,
+            "temperature": 0.0,
+            "topP": 1.0,
+            "candidateCount": 1,
             "maxOutputTokens": 4096
         }
     }
+
+    from llm_sampling import (
+        build_llm_request_contract,
+    )
+
+    generation_config = (
+        payload.get("generationConfig")
+        or {}
+    )
+
+    sampling_contract = (
+        build_llm_request_contract(
+            provider="gemini",
+            model=str(model),
+            prompt=prompt,
+            requested_sampling={
+                "temperature": 0.0,
+                "top_p": 1.0,
+                "candidate_count": 1,
+            },
+            applied_sampling={
+                "temperature": generation_config.get(
+                    "temperature"
+                ),
+                "top_p": generation_config.get(
+                    "topP"
+                ),
+                "candidate_count": generation_config.get(
+                    "candidateCount"
+                ),
+                "max_output_tokens": generation_config.get(
+                    "maxOutputTokens"
+                ),
+            },
+            unsupported_settings=[
+                "top_k",
+                "seed",
+            ],
+        )
+    )
 
     req = urllib.request.Request(
         url,
@@ -247,7 +289,8 @@ def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, v
             "error": "",
             "model": model,
             "raw_text": raw_text,
-            "parsed": parsed
+            "parsed": parsed,
+            "llm_request": sampling_contract,
         }
 
     except urllib.error.HTTPError as e:
@@ -272,7 +315,8 @@ def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, v
             "error": error_text,
             "model": model,
             "raw_text": "",
-            "parsed": None
+            "parsed": None,
+            "llm_request": sampling_contract,
         }
 
     except Exception as e:
@@ -281,5 +325,6 @@ def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, v
             "error": repr(e),
             "model": model,
             "raw_text": "",
-            "parsed": None
+            "parsed": None,
+            "llm_request": sampling_contract,
         }
