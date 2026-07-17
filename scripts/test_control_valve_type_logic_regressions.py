@@ -394,42 +394,31 @@ class ControlValveLogicScoreRegressionTests(
             "fatal_error_detected": True,
             "findings": [
                 {
-                    "id": NEW_FATAL_ID,
+                    "id": (
+                        "control_valve_fto_ftc_"
+                        "fail_action_conflation"
+                    ),
                     "severity": "fatal",
                     "message": (
                         "FTO/FTC를 fail action으로 "
                         "잘못 정의했다."
                     ),
-                    "affected_layers": [
-                        "B",
-                        "C",
-                    ],
                 }
             ],
             "next_practice_points": [],
-            "de_claim_trust_evaluation": {
-                "enabled": True,
-                "target_layers": [
-                    "D",
-                    "E",
-                ],
-                "score_effect": "none",
-                "status": "limited",
-            },
             "score_policy": {
                 "theory_core_fatal_error": True,
-                "recommended_ceiling": 12.0,
+                "status": "provisional",
                 "scope": "theory_core_topic_profile",
-                "score_effect": "B_C_only",
-                "layer_caps": {
-                    "B": 2.0,
-                    "C": 3.0,
-                },
+                "score_effect": "diagnostic_only",
+                "direct_score_application": False,
+                "layer_caps": {},
+                "recommended_ceiling": None,
                 "direct_d_e_effect": "none",
             },
         }
 
-    def test_logic_fatal_caps_only_b_and_c(
+    def test_logic_fatal_is_diagnostic_only_and_preserves_scores(
         self,
     ) -> None:
         grade = json.loads(
@@ -438,27 +427,28 @@ class ControlValveLogicScoreRegressionTests(
             )
         )
 
-        before = _logic_layer_score_snapshot(
-            grade
-        )
-
-        self.assertEqual(
-            set(before),
-            {
-                "A",
-                "B",
-                "C",
-                "D",
-                "E",
-            },
-        )
-
-        self.assertTrue(
-            all(
-                value is not None
-                for value in before.values()
+        before_layers = (
+            _logic_layer_score_snapshot(
+                grade
             )
         )
+
+        numeric_keys = [
+            "total_score",
+            "final_total_score",
+            "score_range",
+            "official_pass_met",
+            "practical_target_met",
+            "average_target_met",
+            "high_score_met",
+        ]
+
+        before_numeric = {
+            key: copy.deepcopy(
+                grade.get(key)
+            )
+            for key in numeric_keys
+        }
 
         with mock.patch(
             "logic_check_evaluator."
@@ -472,119 +462,49 @@ class ControlValveLogicScoreRegressionTests(
                 )
             )
 
-        after = _logic_layer_score_snapshot(
-            adjusted
-        )
-
         self.assertEqual(
-            after["A"],
-            before["A"],
-        )
-        self.assertEqual(
-            after["D"],
-            before["D"],
-        )
-        self.assertEqual(
-            after["E"],
-            before["E"],
-        )
-
-        self.assertLessEqual(
-            after["B"],
-            2.0,
-        )
-        self.assertLessEqual(
-            after["C"],
-            3.0,
-        )
-
-        expected_total = round(
-            sum(
-                float(after[layer])
-                for layer in [
-                    "A",
-                    "B",
-                    "C",
-                    "D",
-                    "E",
-                ]
+            _logic_layer_score_snapshot(
+                adjusted
             ),
-            2,
+            before_layers,
         )
 
-        self.assertEqual(
-            adjusted.get("total_score"),
-            expected_total,
-        )
-        self.assertEqual(
-            adjusted.get("final_total_score"),
-            expected_total,
-        )
-        self.assertFalse(
-            adjusted.get("official_pass_met")
-        )
-        self.assertFalse(
-            adjusted.get("practical_target_met")
-        )
-        self.assertFalse(
-            adjusted.get("average_target_met")
-        )
-        self.assertGreaterEqual(
-            expected_total,
-            10.5,
-        )
-        self.assertLessEqual(
-            expected_total,
-            13.5,
-        )
+        for key, expected in (
+            before_numeric.items()
+        ):
+            self.assertEqual(
+                adjusted.get(key),
+                expected,
+                key,
+            )
 
         metadata = adjusted.get(
             "logic_score_adjustment"
         ) or {}
 
-        self.assertTrue(
+        self.assertFalse(
             metadata.get("applied")
         )
         self.assertEqual(
-            metadata.get(
-                "affected_layers"
-            ),
-            ["B", "C"],
+            metadata.get("policy"),
+            "diagnostic_only",
         )
-        self.assertEqual(
+        self.assertFalse(
             metadata.get(
-                "preserved_layers"
-            ),
-            ["A", "D", "E"],
-        )
-        self.assertEqual(
-            metadata.get(
-                "direct_d_e_effect"
-            ),
-            "none",
-        )
-
-        score_policy = (
-            adjusted.get(
-                "logic_check_evaluation"
+                "direct_score_application"
             )
-            or {}
-        ).get("score_policy") or {}
-
-        self.assertEqual(
-            score_policy.get(
-                "score_effect"
-            ),
-            "B_C_only",
         )
         self.assertEqual(
-            score_policy.get(
-                "layer_caps"
+            adjusted.get(
+                "grade_confidence"
             ),
-            {
-                "B": 2.0,
-                "C": 3.0,
-            },
+            "low",
+        )
+        self.assertEqual(
+            adjusted.get(
+                "logic_trust_status"
+            ),
+            "limited",
         )
 
     def test_nonfatal_logic_does_not_change_scores(
@@ -733,27 +653,34 @@ class ControlValveLogicScoreRegressionTests(
         ) or {}
 
         self.assertEqual(
+            score_policy.get("status"),
+            "provisional",
+        )
+        self.assertEqual(
             score_policy.get("scope"),
             "theory_core_topic_profile",
         )
         self.assertEqual(
-            score_policy.get("score_effect"),
-            "B_C_only",
+            score_policy.get(
+                "score_effect"
+            ),
+            "diagnostic_only",
+        )
+        self.assertFalse(
+            score_policy.get(
+                "direct_score_application"
+            )
         )
         self.assertEqual(
             score_policy.get(
                 "fatal_layer_caps"
             ),
-            {
-                "B": 2.0,
-                "C": 3.0,
-            },
+            {},
         )
-        self.assertEqual(
+        self.assertIsNone(
             score_policy.get(
                 "recommended_ceiling"
-            ),
-            12.0,
+            )
         )
         self.assertEqual(
             score_policy.get(
@@ -762,7 +689,7 @@ class ControlValveLogicScoreRegressionTests(
             "none",
         )
 
-    def test_recommended_ceiling_is_consistent_with_adjusted_total(
+    def test_diagnostic_only_policy_has_no_numeric_ceiling(
         self,
     ) -> None:
         grade = json.loads(
@@ -786,27 +713,44 @@ class ControlValveLogicScoreRegressionTests(
         logic_eval = adjusted.get(
             "logic_check_evaluation"
         ) or {}
+
         score_policy = logic_eval.get(
             "score_policy"
         ) or {}
 
-        total = float(
-            adjusted.get("total_score")
+        self.assertEqual(
+            score_policy.get(
+                "score_effect"
+            ),
+            "diagnostic_only",
         )
-        final_total = float(
-            adjusted.get("final_total_score")
+        self.assertFalse(
+            score_policy.get(
+                "direct_score_application"
+            )
         )
-        ceiling = float(
+        self.assertEqual(
+            score_policy.get(
+                "layer_caps"
+            ),
+            {},
+        )
+        self.assertIsNone(
             score_policy.get(
                 "recommended_ceiling"
             )
         )
-
-        self.assertEqual(total, final_total)
-        self.assertLessEqual(total, ceiling)
         self.assertEqual(
-            adjusted.get("score_range"),
-            "11.4~12.4",
+            adjusted.get("total_score"),
+            grade.get("total_score"),
+        )
+        self.assertEqual(
+            adjusted.get(
+                "final_total_score"
+            ),
+            grade.get(
+                "final_total_score"
+            ),
         )
 
 

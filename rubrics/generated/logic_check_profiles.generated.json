@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-17T02:35:39Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-07-17T12:50:45Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -213,14 +213,16 @@
       "output_contract": {
         "fatal_true_topic_trust": "limited",
         "fatal_false_topic_trust": "trusted",
-        "direct_score_layers": [
-          "B",
-          "C"
-        ],
+        "direct_score_layers": [],
         "excluded_score_layers": [
           "D",
           "E"
-        ]
+        ],
+        "diagnostic_focus_layers": [
+          "B",
+          "C"
+        ],
+        "score_effect": "diagnostic_only"
       },
       "major_checks": [],
       "feedback_templates": {},
@@ -245,15 +247,14 @@
       ],
       "enabled": true,
       "score_policy": {
+        "status": "provisional",
         "scope": "theory_core_topic_profile",
-        "score_effect": "B_C_only",
-        "fatal_layer_caps": {
-          "B": 2.0,
-          "C": 3.0
-        },
-        "recommended_ceiling": 12.0,
+        "score_effect": "diagnostic_only",
+        "direct_score_application": false,
+        "fatal_layer_caps": {},
+        "recommended_ceiling": null,
         "direct_d_e_effect": "none",
-        "reason": "THEORY_CORE fatal 오류는 문제 요구의 정확한 이해와 Fact 정확성을 훼손하므로 B/C만 제한한다."
+        "reason": "Logic 오류는 유지하되 전문가 calibration 전까지 B/C cap과 총점 ceiling을 자동 적용하지 않는다."
       }
     },
     {

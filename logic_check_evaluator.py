@@ -891,6 +891,16 @@ def evaluate_logic_checks(
     if not isinstance(profile_score_policy, dict):
         profile_score_policy = {}
 
+    explicit_score_effect = str(
+        profile_score_policy.get("score_effect")
+        or ""
+    ).strip()
+
+    diagnostic_only_policy = (
+        explicit_score_effect
+        == "diagnostic_only"
+    )
+
     configured_caps = {}
     raw_caps = profile_score_policy.get(
         "fatal_layer_caps"
@@ -939,13 +949,19 @@ def evaluate_logic_checks(
         fatal_error_detected
         and recommended_ceiling is None
         and not configured_caps
+        and not diagnostic_only_policy
     ):
-        # Legacy deterministic fatal checks retain the historical fallback.
+        # Profiles without explicit diagnostic-only retain legacy fallback.
         recommended_ceiling = 10.0
 
     score_effect = "none"
 
-    if (
+    if diagnostic_only_policy:
+        score_effect = "diagnostic_only"
+        configured_caps = {}
+        recommended_ceiling = None
+
+    elif (
         fatal_error_detected
         and configured_caps
         and profile_score_policy.get(
@@ -981,7 +997,18 @@ def evaluate_logic_checks(
                 "scope",
                 "legacy_logic_check",
             ),
+            "status": profile_score_policy.get(
+                "status",
+                "active",
+            ),
             "score_effect": score_effect,
+            "direct_score_application": bool(
+                profile_score_policy.get(
+                    "direct_score_application",
+                    score_effect == "B_C_only",
+                )
+            )
+            and score_effect == "B_C_only",
             "layer_caps": (
                 configured_caps
                 if score_effect == "B_C_only"
@@ -1686,6 +1713,77 @@ def _logic_apply_fatal_bc_score_policy(
     logic_eval["score_policy"] = (
         score_policy
     )
+
+    score_effect = str(
+        score_policy.get("score_effect")
+        or ""
+    ).strip()
+
+    diagnostic_only = (
+        score_effect == "diagnostic_only"
+        or score_policy.get(
+            "direct_score_application"
+        )
+        is False
+    )
+
+    if diagnostic_only:
+        score_policy["score_effect"] = (
+            "diagnostic_only"
+        )
+        score_policy[
+            "direct_score_application"
+        ] = False
+        score_policy["layer_caps"] = {}
+        score_policy[
+            "recommended_ceiling"
+        ] = None
+
+        logic_eval["score_policy"] = (
+            score_policy
+        )
+
+        grade[
+            "logic_score_adjustment"
+        ] = {
+            "applied": False,
+            "policy": "diagnostic_only",
+            "status": score_policy.get(
+                "status",
+                "provisional",
+            ),
+            "reason": (
+                score_policy.get("reason")
+                or (
+                    "Logic 오류는 진단에만 사용하며 "
+                    "calibration 전에는 점수를 변경하지 않는다."
+                )
+            ),
+            "affected_layers": [],
+            "diagnostic_focus_layers": [
+                "B",
+                "C",
+            ],
+            "preserved_layers": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+            ],
+            "direct_score_application": False,
+            "direct_d_e_effect": "none",
+        }
+
+        if fatal:
+            grade["grade_confidence"] = (
+                "low"
+            )
+            grade["logic_trust_status"] = (
+                "limited"
+            )
+
+        return grade
 
     scope = str(
         score_policy.get("scope")
