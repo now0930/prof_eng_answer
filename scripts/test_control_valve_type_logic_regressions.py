@@ -16,7 +16,10 @@ if str(ROOT) not in sys.path:
 
 
 from question_type_taxonomy import detect_question_type_from_text
-from question_type_router import detect_question_type
+from question_type_router import (
+    detect_question_type,
+    load_question_type_profile,
+)
 from grading_identity import (
     NORMALIZATION_VERSION,
     build_grading_identity,
@@ -902,6 +905,167 @@ class GradingIdentityRegressionTests(
         self.assertIn(
             'session_dir / '
             '"grading_identity.json"',
+            agent_source,
+        )
+
+
+
+
+class DeterministicQuestionTypeContractTests(
+    unittest.TestCase
+):
+    TARGET_QUESTION = (
+        "공압식 밸브 선정시 밸브의 불평형력, "
+        "마찰력 개념 설명. Fail safe 동작 구현을 "
+        "위한 Spring 설계 기준 제시"
+    )
+
+    def test_answer_text_cannot_change_locked_lens(
+        self,
+    ) -> None:
+        profile = (
+            load_question_type_profile()
+        )
+
+        clean = detect_question_type(
+            question_text=(
+                self.TARGET_QUESTION
+            ),
+            answer_text="정확한 답안",
+            profile=profile,
+        )
+
+        compare_like = (
+            detect_question_type(
+                question_text=(
+                    self.TARGET_QUESTION
+                ),
+                answer_text=(
+                    "두 방식을 비교하고 장단점을 "
+                    "선정하여 최적안을 선택한다."
+                ),
+                profile=profile,
+            )
+        )
+
+        self.assertEqual(
+            (
+                clean.get(
+                    "primary_type"
+                )
+                or {}
+            ).get("id"),
+            "PRINCIPLE_INTERPRETATION",
+        )
+        self.assertEqual(
+            (
+                compare_like.get(
+                    "primary_type"
+                )
+                or {}
+            ).get("id"),
+            "PRINCIPLE_INTERPRETATION",
+        )
+        self.assertEqual(
+            clean.get("confidence"),
+            "high",
+        )
+        self.assertEqual(
+            clean.get("status"),
+            "locked",
+        )
+        self.assertTrue(
+            clean.get(
+                "question_type_locked"
+            )
+        )
+        self.assertEqual(
+            clean.get("warning"),
+            "",
+        )
+        self.assertEqual(
+            clean.get("source"),
+            "deterministic_rule",
+        )
+
+        for result in [
+            clean,
+            compare_like,
+        ]:
+            for candidate in (
+                result.get("candidates")
+                or []
+            ):
+                self.assertEqual(
+                    candidate.get(
+                        "answer_hits"
+                    ),
+                    [],
+                )
+
+    def test_generic_explanation_is_provisional(
+        self,
+    ) -> None:
+        result = detect_question_type(
+            question_text=(
+                "제어밸브에 대하여 설명하시오."
+            ),
+            answer_text=(
+                "비교, 장단점, 선정이라는 표현이 "
+                "답안에 반복된다."
+            ),
+            profile=(
+                load_question_type_profile()
+            ),
+        )
+
+        self.assertIn(
+            result.get("confidence"),
+            {
+                "medium",
+                "low",
+            },
+        )
+        self.assertEqual(
+            result.get("status"),
+            "provisional",
+        )
+        self.assertFalse(
+            result.get(
+                "question_type_locked"
+            )
+        )
+        self.assertEqual(
+            result.get("warning"),
+            (
+                "⚠ 이 문제의 유형 분류는 잠정 상태이며 "
+                "확인이 필요합니다"
+            ),
+        )
+
+    def test_locked_lens_has_later_override_guard(
+        self,
+    ) -> None:
+        agent_source = Path(
+            "grading_agents.py"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        self.assertIn(
+            'question_type_eval.get(\n'
+            '            "question_type_locked"',
+            agent_source,
+        )
+        self.assertIn(
+            "return (\n"
+            "            question_type_eval,\n"
+            "            fact_eval,",
+            agent_source,
+        )
+        self.assertNotIn(
+            "answer_text=answer_text,\n"
+            "            profile=profile,",
             agent_source,
         )
 

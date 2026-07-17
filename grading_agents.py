@@ -4712,7 +4712,6 @@ def _phase9_run_question_type_lens(
 
         result = detect_question_type(
             question_text=question_text,
-            answer_text=answer_text,
             profile=profile,
         )
 
@@ -4732,8 +4731,16 @@ def _phase9_run_question_type_lens(
 
     except Exception as error:
         fallback = {
-            "version": "question_type_lens_v1_fallback",
+            "version": "question_type_lens_v2_fallback",
             "confidence": "low",
+            "status": "provisional",
+            "question_type_locked": False,
+            "source": "fallback",
+            "matched_rules": [],
+            "warning": (
+                "⚠ 이 문제의 유형 분류는 잠정 상태이며 "
+                "확인이 필요합니다"
+            ),
             "primary_type": {
                 "id": "GENERAL",
                 "name": "일반 설명형",
@@ -4786,36 +4793,145 @@ def _phase9_subject_rubric_with_question_type_lens(subject_rubric, question_type
     return data
 
 
-def _phase9_merge_question_type_feedback(grade, question_type_eval):
+def _phase9_merge_question_type_feedback(
+    grade,
+    question_type_eval,
+):
     if not isinstance(grade, dict):
         return grade
 
-    grade["question_type_evaluation"] = question_type_eval
+    question_type_eval = (
+        question_type_eval
+        if isinstance(
+            question_type_eval,
+            dict,
+        )
+        else {}
+    )
 
-    primary = (question_type_eval or {}).get("primary_type") or {}
+    grade[
+        "question_type_evaluation"
+    ] = question_type_eval
+
+    primary = (
+        question_type_eval.get(
+            "primary_type"
+        )
+        or {}
+    )
+
     qid = primary.get("id")
     qname = primary.get("name")
     lens = primary.get("c_lens")
 
+    confidence = (
+        question_type_eval.get(
+            "confidence"
+        )
+        or "low"
+    )
+    status = (
+        question_type_eval.get(
+            "status"
+        )
+        or "provisional"
+    )
+    locked = bool(
+        question_type_eval.get(
+            "question_type_locked"
+        )
+    )
+    warning = str(
+        question_type_eval.get(
+            "warning"
+        )
+        or ""
+    ).strip()
+
     if qid and qname:
         grade["question_type"] = qid
-        grade["question_type_name"] = qname
+        grade["question_type_name"] = (
+            qname
+        )
 
-    summary = str(grade.get("summary") or "")
-    msg = f" 문제 유형은 {qid}({qname})로 판단하고, C항목은 해당 유형의 Fact 설명 렌즈로 평가했습니다."
+    grade[
+        "question_type_confidence"
+    ] = confidence
+    grade[
+        "question_type_status"
+    ] = status
+    grade[
+        "question_type_locked"
+    ] = locked
+    grade[
+        "question_type_source"
+    ] = question_type_eval.get(
+        "source",
+        "unknown",
+    )
+
+    if warning:
+        grade[
+            "question_type_warning"
+        ] = warning
+    else:
+        grade.pop(
+            "question_type_warning",
+            None,
+        )
+
+    summary = str(
+        grade.get("summary")
+        or ""
+    )
+
+    message = (
+        f" 문제 유형은 {qid}({qname})로 판단하고, "
+        "C항목은 해당 유형의 Fact 설명 렌즈로 "
+        "평가했습니다."
+    )
+
     if qid and "문제 유형은" not in summary:
-        grade["summary"] = (summary + msg).strip()
+        summary = (
+            summary
+            + message
+        ).strip()
 
-    advice = grade.get("rewrite_advice")
+    if (
+        warning
+        and warning not in summary
+    ):
+        summary = (
+            summary
+            + " "
+            + warning
+        ).strip()
+
+    grade["summary"] = summary
+
+    advice = grade.get(
+        "rewrite_advice"
+    )
+
     if not isinstance(advice, list):
         advice = []
 
     if lens:
-        tip = f"C항목 보완: {qname} 유형에서는 '{lens}'를 충족하도록 답안을 전개하세요."
+        tip = (
+            f"C항목 보완: {qname} 유형에서는 "
+            f"'{lens}'를 충족하도록 답안을 "
+            "전개하세요."
+        )
+
         if tip not in advice:
             advice.append(tip)
 
-    common_tip = "D/E항목 보완: 모든 문제 유형에서 현장 적용성, 문제 해결, 제언, 기술사적 판단성을 반드시 연결하세요."
+    common_tip = (
+        "D/E항목 보완: 모든 문제 유형에서 "
+        "현장 적용성, 문제 해결, 제언, "
+        "기술사적 판단성을 반드시 연결하세요."
+    )
+
     if common_tip not in advice:
         advice.append(common_tip)
 
@@ -4835,6 +4951,21 @@ def _phase10_apply_generated_single_topic_overrides(
     fact_eval,
 ):
     """Apply safe overrides for a generated bank with one model answer."""
+
+    if (
+        isinstance(
+            question_type_eval,
+            dict,
+        )
+        and question_type_eval.get(
+            "question_type_locked"
+        )
+        is True
+    ):
+        return (
+            question_type_eval,
+            fact_eval,
+        )
     answers = (
         bank.get("answers")
         if isinstance(bank, dict)

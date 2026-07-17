@@ -67,25 +67,48 @@ def detect_question_type(
     answer_text: str = "",
     profile: Dict[str, Any] | None = None,
 ) -> Dict[str, Any]:
-    profile = profile or load_question_type_profile()
+    """
+    Detect the grading lens from question demand only.
+
+    answer_text remains in the signature for compatibility, but it must never
+    affect lens selection.
+    """
+    del answer_text
+
+    profile = (
+        profile
+        or load_question_type_profile()
+    )
 
     question = question_text or ""
-    answer = answer_text or ""
 
-    raw_types = profile.get("types", [])
+    raw_types = profile.get(
+        "types",
+        [],
+    )
 
-    # V2 profile은 canonical type ID를 key로 하는 dict를 사용한다.
-    # Legacy list profile도 계속 허용한다.
     if isinstance(raw_types, dict):
         normalized_types = []
 
-        for mapped_id, mapped_value in raw_types.items():
-            if not isinstance(mapped_value, dict):
+        for mapped_id, mapped_value in (
+            raw_types.items()
+        ):
+            if not isinstance(
+                mapped_value,
+                dict,
+            ):
                 continue
 
-            normalized_item = dict(mapped_value)
-            normalized_item.setdefault("id", str(mapped_id))
-            normalized_types.append(normalized_item)
+            normalized_item = dict(
+                mapped_value
+            )
+            normalized_item.setdefault(
+                "id",
+                str(mapped_id),
+            )
+            normalized_types.append(
+                normalized_item
+            )
 
     elif isinstance(raw_types, list):
         normalized_types = [
@@ -118,9 +141,60 @@ def detect_question_type(
         ],
     }
 
-    non_define_strong = (
-        _has_non_define_strong_question_signal(question)
-    )
+    explicit_demand_terms = {
+        "PRINCIPLE_INTERPRETATION": [
+            "개념 설명",
+            "개념을 설명",
+            "원리 설명",
+            "원리를 설명",
+            "설계 기준",
+            "설계기준",
+            "기준 제시",
+            "기준을 제시",
+            "수식을 유도",
+            "공식을 유도",
+            "계산하시오",
+            "구하시오",
+            "해석하시오",
+            "유도하시오",
+        ],
+        "DIAGNOSIS_ACTION": [
+            "원인과 대책",
+            "발생원인과 대책",
+            "발생 원인과 대책",
+            "문제점과 개선",
+            "문제점",
+            "개선방안",
+            "개선 방안",
+            "대책을 제시",
+        ],
+        "COMPARE_SELECTION": [
+            "비교",
+            "차이점",
+            "장단점",
+            "대비",
+            "선정하시오",
+            "선정하여",
+            "선정하고",
+            "선택하시오",
+            "선택하여",
+        ],
+        "IMPLEMENTATION_EVALUATION": [
+            "절차를 설명",
+            "시험 방법",
+            "평가 방법",
+            "적용 사례",
+            "구현 방법",
+            "검증 방법",
+        ],
+    }
+
+    deterministic_priority = {
+        "DIAGNOSIS_ACTION": 0,
+        "COMPARE_SELECTION": 1,
+        "IMPLEMENTATION_EVALUATION": 2,
+        "PRINCIPLE_INTERPRETATION": 3,
+    }
 
     candidates = []
 
@@ -134,16 +208,14 @@ def detect_question_type(
 
         trigger_terms = (
             question_type.get("triggers")
-            or question_type.get("selection_signals")
+            or question_type.get(
+                "selection_signals"
+            )
             or []
         )
 
         profile_question_hits = text_hits(
             question,
-            trigger_terms,
-        )
-        profile_answer_hits = text_hits(
-            answer,
             trigger_terms,
         )
 
@@ -154,28 +226,42 @@ def detect_question_type(
 
         strong_question_hits = []
 
-        for trigger_group_id in trigger_group_ids:
+        for trigger_group_id in (
+            trigger_group_ids
+        ):
             for hit in _strong_hits(
                 trigger_group_id,
                 question,
             ):
-                if hit not in strong_question_hits:
-                    strong_question_hits.append(hit)
+                if (
+                    hit
+                    not in strong_question_hits
+                ):
+                    strong_question_hits.append(
+                        hit
+                    )
+
+        explicit_hits = text_hits(
+            question,
+            explicit_demand_terms.get(
+                type_id,
+                [],
+            ),
+        )
 
         score = 0
-        score += len(strong_question_hits) * 30
-        score += len(profile_question_hits) * 8
-        score += min(len(profile_answer_hits), 3) * 1
-
-        if (
-            type_id == "DEFINE"
-            and not non_define_strong
-            and _has_any(
-                question,
-                STRONG_QUESTION_TRIGGERS["DEFINE"],
-            )
-        ):
-            score += 25
+        score += (
+            len(strong_question_hits)
+            * 30
+        )
+        score += (
+            len(profile_question_hits)
+            * 8
+        )
+        score += (
+            len(explicit_hits)
+            * 40
+        )
 
         compare_strong_hits = _strong_hits(
             "COMPARE",
@@ -183,54 +269,115 @@ def detect_question_type(
         )
 
         if (
-            type_id in {
+            type_id
+            in {
                 "COMPARE",
                 "COMPARE_SELECTION",
             }
             and not compare_strong_hits
+            and not explicit_hits
         ):
-            # '선정 시'와 같은 문맥 표현만으로 비교형을 선택하지 않는다.
-            score = min(score, 5)
+            score = min(
+                score,
+                5,
+            )
 
         if score <= 0:
             continue
 
-        candidates.append({
-            "id": type_id,
-            "name": (
-                question_type.get("name")
-                or question_type.get("name_ko")
-            ),
-            "score": score,
-            "strong_question_hits": strong_question_hits,
-            "trigger_hits": profile_question_hits,
-            "answer_hits": profile_answer_hits,
-            "c_lens": (
-                question_type.get("c_lens")
-                or question_type.get("evaluation_lens")
-            ),
-            "c_required_elements": (
-                question_type.get(
-                    "c_required_elements",
-                    [],
-                )
-                or question_type.get(
-                    "required_elements",
-                    [],
-                )
-            ),
-            "weak_answer_pattern": question_type.get(
-                "weak_answer_pattern"
-            ),
-            "high_score_pattern": question_type.get(
-                "high_score_pattern"
-            ),
-        })
+        matched_rules = []
+
+        for hit in explicit_hits:
+            matched_rules.append(
+                f"explicit_demand:{hit}"
+            )
+
+        for hit in strong_question_hits:
+            matched_rules.append(
+                f"strong_question:{hit}"
+            )
+
+        for hit in profile_question_hits:
+            matched_rules.append(
+                f"profile_question:{hit}"
+            )
+
+        candidates.append(
+            {
+                "id": type_id,
+                "name": (
+                    question_type.get("name")
+                    or question_type.get(
+                        "name_ko"
+                    )
+                ),
+                "score": score,
+                "strong_question_hits": (
+                    strong_question_hits
+                ),
+                "trigger_hits": (
+                    profile_question_hits
+                ),
+                "explicit_demand_hits": (
+                    explicit_hits
+                ),
+                "answer_hits": [],
+                "matched_rules": (
+                    matched_rules
+                ),
+                "c_lens": (
+                    question_type.get(
+                        "c_lens"
+                    )
+                    or question_type.get(
+                        "evaluation_lens"
+                    )
+                ),
+                "c_required_elements": (
+                    question_type.get(
+                        "c_required_elements",
+                        [],
+                    )
+                    or question_type.get(
+                        "required_elements",
+                        [],
+                    )
+                ),
+                "weak_answer_pattern": (
+                    question_type.get(
+                        "weak_answer_pattern"
+                    )
+                ),
+                "high_score_pattern": (
+                    question_type.get(
+                        "high_score_pattern"
+                    )
+                ),
+            }
+        )
 
     if candidates:
         candidates.sort(
-            key=lambda candidate: candidate["score"],
-            reverse=True,
+            key=lambda candidate: (
+                -float(
+                    candidate.get(
+                        "score",
+                        0,
+                    )
+                    or 0
+                ),
+                deterministic_priority.get(
+                    str(
+                        candidate.get("id")
+                        or ""
+                    ),
+                    99,
+                ),
+                str(
+                    candidate.get("id")
+                    or ""
+                ),
+            )
         )
         primary = candidates[0]
 
@@ -241,10 +388,13 @@ def detect_question_type(
             "score": 0,
             "strong_question_hits": [],
             "trigger_hits": [],
+            "explicit_demand_hits": [],
             "answer_hits": [],
+            "matched_rules": [],
             "c_lens": (
-                "문제 요구에 맞는 핵심 fact, 적용 범위, "
-                "한계, 실무 의미를 설명했는가"
+                "문제 요구에 맞는 핵심 fact, "
+                "적용 범위, 한계, 실무 의미를 "
+                "설명했는가"
             ),
             "c_required_elements": [
                 "핵심 fact",
@@ -263,29 +413,105 @@ def detect_question_type(
         }
         candidates = [primary]
 
-    score = float(primary.get("score", 0) or 0)
+    top_score = float(
+        primary.get("score", 0)
+        or 0
+    )
 
-    if score >= 30:
+    second_score = 0.0
+
+    if len(candidates) >= 2:
+        second_score = float(
+            candidates[1].get(
+                "score",
+                0,
+            )
+            or 0
+        )
+
+    margin = top_score - second_score
+
+    explicit_primary_hits = (
+        primary.get(
+            "explicit_demand_hits"
+        )
+        or []
+    )
+    strong_primary_hits = (
+        primary.get(
+            "strong_question_hits"
+        )
+        or []
+    )
+
+    if (
+        explicit_primary_hits
+        and top_score >= 40
+        and margin >= 15
+    ):
         confidence = "high"
-    elif score >= 12:
+
+    elif (
+        (
+            strong_primary_hits
+            or top_score >= 12
+        )
+        and margin >= 5
+    ):
         confidence = "medium"
+
     else:
         confidence = "low"
 
+    question_type_locked = (
+        confidence == "high"
+    )
+
+    if question_type_locked:
+        status = "locked"
+        warning = ""
+    else:
+        status = "provisional"
+        warning = (
+            "⚠ 이 문제의 유형 분류는 잠정 상태이며 "
+            "확인이 필요합니다"
+        )
+
     policy = profile.get("policy")
+
     if not isinstance(policy, dict):
         policy = {}
 
     return {
-        "version": "question_type_lens_v1",
+        "version": (
+            "question_type_lens_v2_"
+            "deterministic"
+        ),
         "policy": policy,
+        "question_type": (
+            primary.get("id")
+        ),
         "primary_type": primary,
         "candidates": candidates[:3],
         "confidence": confidence,
+        "status": status,
+        "question_type_locked": (
+            question_type_locked
+        ),
+        "source": "deterministic_rule",
+        "matched_rules": (
+            primary.get("matched_rules")
+            or []
+        ),
+        "warning": warning,
+        "top_score": top_score,
+        "second_score": second_score,
+        "margin": margin,
         "interpretation": (
-            "문제 유형은 별도 총점 체계가 아니라 "
-            "C항목의 Fact 설명 방식을 결정하는 "
-            "평가 렌즈로 사용한다."
+            "문제 유형은 답안과 무관하게 문제의 "
+            "요구 동사와 명시적 요구만으로 결정한다. "
+            "high confidence만 현재 실행에서 "
+            "잠금 처리한다."
         ),
         "common_D_E_rule": policy.get(
             "common_D_E_rule",
