@@ -72,41 +72,124 @@ def detect_question_type(
     question = question_text or ""
     answer = answer_text or ""
 
-    non_define_strong = _has_non_define_strong_question_signal(question)
+    raw_types = profile.get("types", [])
+
+    # V2 profile은 canonical type ID를 key로 하는 dict를 사용한다.
+    # Legacy list profile도 계속 허용한다.
+    if isinstance(raw_types, dict):
+        normalized_types = []
+
+        for mapped_id, mapped_value in raw_types.items():
+            if not isinstance(mapped_value, dict):
+                continue
+
+            normalized_item = dict(mapped_value)
+            normalized_item.setdefault("id", str(mapped_id))
+            normalized_types.append(normalized_item)
+
+    elif isinstance(raw_types, list):
+        normalized_types = [
+            dict(item)
+            for item in raw_types
+            if isinstance(item, dict)
+        ]
+
+    else:
+        normalized_types = []
+
+    v2_trigger_groups = {
+        "PRINCIPLE_INTERPRETATION": [
+            "DEFINE",
+            "PRINCIPLE",
+            "CALC_DESIGN",
+        ],
+        "DIAGNOSIS_ACTION": [
+            "PROBLEM_SOLVE",
+            "CAUSE_ACTION",
+        ],
+        "COMPARE_SELECTION": [
+            "COMPARE",
+            "STRUCTURE",
+        ],
+        "IMPLEMENTATION_EVALUATION": [
+            "PROCEDURE",
+            "APPLICATION",
+            "EVALUATION",
+        ],
+    }
+
+    non_define_strong = (
+        _has_non_define_strong_question_signal(question)
+    )
 
     candidates = []
 
-    for qt in profile.get("types", []):
-        if not isinstance(qt, dict):
-            continue
+    for question_type in normalized_types:
+        type_id = str(
+            question_type.get("id", "")
+        ).strip()
 
-        type_id = str(qt.get("id", "")).strip()
         if not type_id:
             continue
 
-        profile_question_hits = text_hits(question, qt.get("triggers", []))
-        profile_answer_hits = text_hits(answer, qt.get("triggers", []))
-        strong_question_hits = _strong_hits(type_id, question)
+        trigger_terms = (
+            question_type.get("triggers")
+            or question_type.get("selection_signals")
+            or []
+        )
+
+        profile_question_hits = text_hits(
+            question,
+            trigger_terms,
+        )
+        profile_answer_hits = text_hits(
+            answer,
+            trigger_terms,
+        )
+
+        trigger_group_ids = (
+            v2_trigger_groups.get(type_id)
+            or [type_id]
+        )
+
+        strong_question_hits = []
+
+        for trigger_group_id in trigger_group_ids:
+            for hit in _strong_hits(
+                trigger_group_id,
+                question,
+            ):
+                if hit not in strong_question_hits:
+                    strong_question_hits.append(hit)
 
         score = 0
-
-        # 문제문 강한 trigger가 가장 중요하다.
         score += len(strong_question_hits) * 30
-
-        # profile trigger도 문제문에서는 비교적 강하게 본다.
         score += len(profile_question_hits) * 8
-
-        # 답안 trigger는 보조 신호다. 답안의 "선정" 하나로 COMPARE가 되면 안 된다.
         score += min(len(profile_answer_hits), 3) * 1
 
-        # DEFINE은 "설명하시오" 문제에서 기본값 역할을 한다.
-        # 다만 비교/절차/계산/평가 등 강한 신호가 문제문에 있으면 DEFINE을 과대평가하지 않는다.
-        if type_id == "DEFINE" and not non_define_strong:
-            if _has_any(question, STRONG_QUESTION_TRIGGERS["DEFINE"]):
-                score += 25
+        if (
+            type_id == "DEFINE"
+            and not non_define_strong
+            and _has_any(
+                question,
+                STRONG_QUESTION_TRIGGERS["DEFINE"],
+            )
+        ):
+            score += 25
 
-        # COMPARE는 문제문에 비교성 신호가 없으면 답안의 "선정"만으로 선택하지 않는다.
-        if type_id == "COMPARE" and not _strong_hits("COMPARE", question):
+        compare_strong_hits = _strong_hits(
+            "COMPARE",
+            question,
+        )
+
+        if (
+            type_id in {
+                "COMPARE",
+                "COMPARE_SELECTION",
+            }
+            and not compare_strong_hits
+        ):
+            # '선정 시'와 같은 문맥 표현만으로 비교형을 선택하지 않는다.
             score = min(score, 5)
 
         if score <= 0:
@@ -114,20 +197,43 @@ def detect_question_type(
 
         candidates.append({
             "id": type_id,
-            "name": qt.get("name"),
+            "name": (
+                question_type.get("name")
+                or question_type.get("name_ko")
+            ),
             "score": score,
             "strong_question_hits": strong_question_hits,
             "trigger_hits": profile_question_hits,
             "answer_hits": profile_answer_hits,
-            "c_lens": qt.get("c_lens"),
-            "c_required_elements": qt.get("c_required_elements", []),
-            "weak_answer_pattern": qt.get("weak_answer_pattern"),
-            "high_score_pattern": qt.get("high_score_pattern"),
+            "c_lens": (
+                question_type.get("c_lens")
+                or question_type.get("evaluation_lens")
+            ),
+            "c_required_elements": (
+                question_type.get(
+                    "c_required_elements",
+                    [],
+                )
+                or question_type.get(
+                    "required_elements",
+                    [],
+                )
+            ),
+            "weak_answer_pattern": question_type.get(
+                "weak_answer_pattern"
+            ),
+            "high_score_pattern": question_type.get(
+                "high_score_pattern"
+            ),
         })
 
     if candidates:
-        candidates.sort(key=lambda x: x["score"], reverse=True)
+        candidates.sort(
+            key=lambda candidate: candidate["score"],
+            reverse=True,
+        )
         primary = candidates[0]
+
     else:
         primary = {
             "id": "GENERAL",
@@ -136,14 +242,29 @@ def detect_question_type(
             "strong_question_hits": [],
             "trigger_hits": [],
             "answer_hits": [],
-            "c_lens": "문제 요구에 맞는 핵심 fact, 적용 범위, 한계, 실무 의미를 설명했는가",
-            "c_required_elements": ["핵심 fact", "적용 범위", "한계", "실무 의미"],
-            "weak_answer_pattern": "키워드만 나열하고 설명 구조와 현장 의미가 부족함",
-            "high_score_pattern": "핵심 fact를 구조적으로 설명하고 현실 적용 의미까지 연결함",
+            "c_lens": (
+                "문제 요구에 맞는 핵심 fact, 적용 범위, "
+                "한계, 실무 의미를 설명했는가"
+            ),
+            "c_required_elements": [
+                "핵심 fact",
+                "적용 범위",
+                "한계",
+                "실무 의미",
+            ],
+            "weak_answer_pattern": (
+                "키워드만 나열하고 설명 구조와 "
+                "현장 의미가 부족함"
+            ),
+            "high_score_pattern": (
+                "핵심 fact를 구조적으로 설명하고 "
+                "현실 적용 의미까지 연결함"
+            ),
         }
         candidates = [primary]
 
     score = float(primary.get("score", 0) or 0)
+
     if score >= 30:
         confidence = "high"
     elif score >= 12:
@@ -151,15 +272,26 @@ def detect_question_type(
     else:
         confidence = "low"
 
+    policy = profile.get("policy")
+    if not isinstance(policy, dict):
+        policy = {}
+
     return {
         "version": "question_type_lens_v1",
-        "policy": profile.get("policy", {}),
+        "policy": policy,
         "primary_type": primary,
         "candidates": candidates[:3],
         "confidence": confidence,
-        "interpretation": "문제 유형은 별도 총점 체계가 아니라 C항목의 Fact 설명 방식을 결정하는 평가 렌즈로 사용한다.",
-        "common_D_E_rule": profile.get("policy", {}).get(
+        "interpretation": (
+            "문제 유형은 별도 총점 체계가 아니라 "
+            "C항목의 Fact 설명 방식을 결정하는 "
+            "평가 렌즈로 사용한다."
+        ),
+        "common_D_E_rule": policy.get(
             "common_D_E_rule",
-            "모든 문제 유형은 D/E에서 현실 적용성, 문제 해결, 제언, 독창성을 공통 평가한다."
+            (
+                "모든 문제 유형은 D/E에서 현실 적용성, "
+                "문제 해결, 제언, 독창성을 공통 평가한다."
+            ),
         ),
     }

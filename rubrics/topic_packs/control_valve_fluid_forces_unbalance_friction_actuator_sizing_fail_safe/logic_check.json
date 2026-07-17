@@ -17,7 +17,32 @@
     "display_name": "제어밸브의 압력력, 불평형력, 마찰, 시트 하중과 Fail-Safe 액추에이터 힘 평형을 평가한다.",
     "difficulty": "FIELD_APPLICATION",
     "cap_policy": {},
-    "candidate_extraction": {},
+    "candidate_extraction": {
+      "max_candidates": 20,
+      "nearby_window": 1,
+      "rules": [],
+      "key_terms": [
+        "F.T.O.",
+        "FTO",
+        "Fail to Open",
+        "Fail-to-Open",
+        "F.T.C.",
+        "FTC",
+        "Fail to Close",
+        "Fail-to-Close",
+        "마찰력",
+        "항상 구동기",
+        "Fb",
+        "C * v",
+        "C*v",
+        "Fa + Fs",
+        "Fb - F1 + F2",
+        "F1 - F2",
+        "Fs =",
+        "불평형력",
+        "Spring 설계"
+      ]
+    },
     "truth_schema": [
       "직동식 제어밸브의 힘 해석에서는 플러그, 스템과 액추에이터 가동부를 하나의 자유물체로 고립하고 밸브 이동축 방향의 모든 외력을 표시한다.",
       "밸브 가동부의 축방향 압력력은 젖은 표면의 국부압력과 표면 법선의 축방향 성분을 적분하여 구한다.",
@@ -40,7 +65,8 @@
       "액추에이터 선정은 최대·최소 차압, 개도, 마찰, 시트 접촉과 이탈, 스프링 위치 및 공급압력을 조합한 최악조건별로 수행한다.",
       "볼밸브, 버터플라이밸브와 회전 플러그밸브는 축방향 힘 평형이 아니라 회전축에 대한 토크 평형으로 선정한다.",
       "패킹과 가이드 마찰이 증가하면 positioner 출력이 변해도 밸브가 정지하다가 임계힘을 넘을 때 급격히 이동하는 stiction이 나타날 수 있다.",
-      "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다."
+      "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다.",
+      "FTO/FTC는 Flow-to-Open/Flow-to-Close 또는 Pressure-Tends-to-Open/Pressure-Tends-to-Close의 유체력 방향 문맥이며, Fail-Open/Fail-Close 또는 FO/FC의 상실 시 안전동작과 구분한다."
     ],
     "fatal_conditions": [
       "모든 밸브의 불평형력은 항상 (P1-P2)×포트면적이다.",
@@ -54,7 +80,8 @@
       "스프링 예압을 조정하면 스프링 레이트도 증가한다.",
       "볼밸브와 버터플라이밸브도 축방향 힘만으로 선정한다.",
       "유체의 개방 또는 폐쇄 보조력은 모든 차압조건에서 항상 충분하다.",
-      "차단 시 불평형력과 마찰만 이기면 요구 누설등급을 만족한다."
+      "차단 시 불평형력과 마찰만 이기면 요구 누설등급을 만족한다.",
+      "[control_valve_fto_ftc_fail_action_conflation] FTO/FTC를 Fail-to-Open/Fail-to-Close 또는 Fail-Open/Fail-Close로 정의하여 유체력 방향과 공기·전원 상실 시 fail action을 같은 개념으로 설명한다."
     ],
     "safe_conditions": [
       "직동식 제어밸브의 힘 해석에서는 플러그, 스템과 액추에이터 가동부를 하나의 자유물체로 고립하고 밸브 이동축 방향의 모든 외력을 표시한다.",
@@ -78,7 +105,8 @@
       "액추에이터 선정은 최대·최소 차압, 개도, 마찰, 시트 접촉과 이탈, 스프링 위치 및 공급압력을 조합한 최악조건별로 수행한다.",
       "볼밸브, 버터플라이밸브와 회전 플러그밸브는 축방향 힘 평형이 아니라 회전축에 대한 토크 평형으로 선정한다.",
       "패킹과 가이드 마찰이 증가하면 positioner 출력이 변해도 밸브가 정지하다가 임계힘을 넘을 때 급격히 이동하는 stiction이 나타날 수 있다.",
-      "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다."
+      "Balanced trim은 요구추력을 줄이지만 seal 마찰, 누설등급 제한, 평형구멍 막힘과 유지보수 trade-off가 있다.",
+      "FTO/FTC는 Flow-to-Open/Flow-to-Close 또는 Pressure-Tends-to-Open/Pressure-Tends-to-Close의 유체력 방향 문맥이며, Fail-Open/Fail-Close 또는 FO/FC의 상실 시 안전동작과 구분한다."
     ],
     "output_contract": {
       "fatal_true_topic_trust": "limited",
@@ -110,13 +138,28 @@
       "ΔP×Aeff를 특정 트림의 조건부 근사식으로 사용한 답안을 오류로 판정하지 않는다.",
       "좌표축을 반대로 정의했더라도 모든 힘의 부호가 일관되면 방향 오류로 판정하지 않는다.",
       "FTO 또는 FTC 대신 Pressure-Tends-to-Open과 Close를 정확히 설명한 답안을 누락으로 판정하지 않는다.",
-      "패킹과 가이드 마찰을 총 기계적 마찰로 합산하되 구성항을 설명한 답안을 오류로 판정하지 않는다."
+      "패킹과 가이드 마찰을 총 기계적 마찰로 합산하되 구성항을 설명한 답안을 오류로 판정하지 않는다.",
+      "FTO/FTC를 Flow-to-Open/Flow-to-Close 또는 Pressure-Tends-to-Open/Close로 정의하고 FO/FC와 구분한 답안을 fail-action 혼동으로 판정하지 않는다."
     ],
-    "enabled": true
+    "enabled": true,
+    "score_policy": {
+      "scope": "theory_core_topic_profile",
+      "score_effect": "B_C_only",
+      "fatal_layer_caps": {
+        "B": 2.0,
+        "C": 3.0
+      },
+      "recommended_ceiling": 12.0,
+      "direct_d_e_effect": "none",
+      "reason": "THEORY_CORE fatal 오류는 문제 요구의 정확한 이해와 Fact 정확성을 훼손하므로 B/C만 제한한다."
+    }
   },
   "revision_notes": [
     "결정론 검사를 비활성화했다.",
     "LLM 기반 Topic trust 검사를 활성화했다.",
-    "D/E 점수 직접 반영을 제외했다."
+    "D/E 점수 직접 반영을 제외했다.",
+    "FTO/FTC와 Fail-Open/Fail-Close 혼동 fatal 계약을 추가했다.",
+    "FTO/FTC, 마찰 방향, Fb=C·v 및 스프링 힘 평형 주장을 LLM candidate evidence로 추출하도록 보완했다.",
+    "THEORY_CORE fatal의 점수 효과를 Topic Profile 범위의 B≤2.0, C≤3.0, 총점 권고상한 12.0으로 명시했다."
   ]
 }

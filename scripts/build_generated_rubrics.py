@@ -71,17 +71,262 @@ def load_topic_pack(pack_dir: Path) -> dict[str, Any]:
     }
 
 
-def build_fact_anchors(packs: list[dict[str, Any]], version: str) -> dict[str, Any]:
+def build_fact_anchors(
+    packs: list[dict[str, Any]],
+    version: str,
+) -> dict[str, Any]:
+    """Build runtime-compatible Fact Topics from Topic Packs.
+
+    Fact source files contain truth anchors, while model-answer source files
+    contain the richer routing metadata. The generated Fact Bank combines
+    both contracts so Phase 3 can route a question before scoring anchors.
+    """
+    import re
+
+    generic_terms = {
+        "관계",
+        "차이",
+        "설명",
+        "설명하시오",
+        "비교",
+        "선정",
+        "기준",
+        "제시",
+        "원리",
+        "개념",
+        "방법",
+        "적용",
+        "설계",
+        "동작",
+        "구성",
+        "밸브",
+        "제어밸브",
+        "유체",
+        "힘",
+    }
+
+    def append_unique(
+        target: list[str],
+        value: Any,
+    ) -> None:
+        text = str(value or "").strip()
+
+        if not text:
+            return
+
+        if text not in target:
+            target.append(text)
+
+    def append_terms(
+        target: list[str],
+        value: Any,
+    ) -> None:
+        text = str(value or "").strip()
+
+        if not text:
+            return
+
+        append_unique(target, text)
+
+        tokens = re.findall(
+            r"[A-Za-z][A-Za-z0-9_.-]*|[가-힣]{2,}",
+            text,
+        )
+
+        for token in tokens:
+            normalized = token.strip()
+
+            if (
+                normalized
+                and normalized.casefold()
+                not in {
+                    item.casefold()
+                    for item in generic_terms
+                }
+            ):
+                append_unique(
+                    target,
+                    normalized,
+                )
+
+    def normalize_anchor(
+        source_anchor: dict[str, Any],
+    ) -> dict[str, Any]:
+        anchor = dict(source_anchor)
+
+        expected = (
+            anchor.get("expected")
+            or anchor.get("fact")
+            or anchor.get("statement")
+            or anchor.get("description")
+            or anchor.get("core_fact")
+            or anchor.get("truth")
+            or ""
+        )
+
+        keywords = anchor.get("keywords")
+
+        if not isinstance(keywords, list):
+            keywords = []
+
+        anchor.setdefault(
+            "name",
+            anchor.get("title")
+            or anchor.get("label")
+            or anchor.get("id")
+            or "Fact Anchor",
+        )
+        anchor.setdefault(
+            "expected",
+            expected,
+        )
+        anchor.setdefault(
+            "core_terms",
+            [
+                str(item)
+                for item in keywords
+                if str(item).strip()
+            ],
+        )
+        anchor.setdefault(
+            "support_terms",
+            [],
+        )
+
+        return anchor
+
+    topics: list[dict[str, Any]] = []
+
+    for pack in packs:
+        fact_source = pack["fact_anchor"]
+        model_source = pack["model_answer"]
+        importance_source = pack["topic_importance"]
+
+        fact_topic = dict(fact_source)
+
+        aliases: list[str] = []
+        triggers: list[str] = []
+
+        for value in (
+            model_source.get("routing_aliases")
+            or model_source.get("topic_aliases")
+            or []
+        ):
+            append_unique(aliases, value)
+            append_terms(triggers, value)
+
+        for value in (
+            model_source.get("question_examples")
+            or []
+        ):
+            append_unique(aliases, value)
+            append_terms(triggers, value)
+
+        for value in (
+            model_source.get("routing_field_points")
+            or []
+        ):
+            append_terms(triggers, value)
+
+        patterns = (
+            model_source.get(
+                "expected_question_patterns"
+            )
+            or []
+        )
+
+        for pattern in patterns:
+            if not isinstance(pattern, dict):
+                continue
+
+            pattern_text = pattern.get("pattern")
+            intent_text = pattern.get("intent")
+
+            append_unique(aliases, pattern_text)
+            append_unique(aliases, intent_text)
+            append_terms(triggers, pattern_text)
+            append_terms(triggers, intent_text)
+
+        append_unique(
+            aliases,
+            fact_source.get("title_ko"),
+        )
+        append_unique(
+            aliases,
+            fact_source.get("topic_label"),
+        )
+
+        append_terms(
+            triggers,
+            fact_source.get("title_ko"),
+        )
+        append_terms(
+            triggers,
+            fact_source.get("topic_label"),
+        )
+
+        normalized_anchors = []
+
+        for source_anchor in (
+            fact_source.get("anchors")
+            or []
+        ):
+            if not isinstance(source_anchor, dict):
+                continue
+
+            normalized_anchor = normalize_anchor(
+                source_anchor
+            )
+            normalized_anchors.append(
+                normalized_anchor
+            )
+
+            for keyword in (
+                source_anchor.get("keywords")
+                or []
+            ):
+                append_terms(
+                    triggers,
+                    keyword,
+                )
+
+            append_terms(
+                triggers,
+                normalized_anchor.get("expected"),
+            )
+
+        fact_topic["triggers"] = triggers
+        fact_topic["aliases"] = aliases
+        fact_topic["anchors"] = (
+            normalized_anchors
+        )
+        fact_topic.setdefault(
+            "priority",
+            importance_source.get(
+                "selection_importance",
+                importance_source.get(
+                    "difficulty",
+                    0,
+                ),
+            ),
+        )
+
+        topics.append(fact_topic)
+
     return {
-        "version": f"{version}-generated-topic-pack-fact-anchors",
+        "version": (
+            f"{version}-generated-topic-pack-fact-anchors"
+        ),
         "subject": SUBJECT,
         "schema_version": "generated.fact_anchors.v1",
-        "source": "rubrics/topic_packs/*/fact_anchor.json",
-        "runtime_status": "generated_candidate_not_yet_runtime_default",
-        "topics": [
-            pack["fact_anchor"]
-            for pack in packs
-        ],
+        "source": (
+            "rubrics/topic_packs/*/"
+            "fact_anchor.json+model_answer.json"
+        ),
+        "runtime_status": (
+            "generated_runtime_compatible"
+        ),
+        "topics": topics,
     }
 
 

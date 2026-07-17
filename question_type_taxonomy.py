@@ -77,15 +77,12 @@ def question_type_d_focus(question_type: str | None) -> list[str]:
 
 
 def detect_question_type_from_text(question_text: str) -> str:
-    """Lightweight rule-based detector for v2 question types.
+    """Detect a V2 type with demand verbs taking precedence."""
+    import re
 
-    This is intentionally conservative. LLM/prompt logic may refine it later.
-    """
     text = (question_text or "").lower()
     data = load_question_type_taxonomy()
 
-    # Priority matters. Diagnosis and comparison should not be swallowed by
-    # generic principle keywords.
     priority = [
         "DIAGNOSIS_ACTION",
         "COMPARE_SELECTION",
@@ -93,29 +90,139 @@ def detect_question_type_from_text(question_text: str) -> str:
         "PRINCIPLE_INTERPRETATION",
     ]
 
-    scores: dict[str, int] = {k: 0 for k in priority}
+    scores: dict[str, int] = {
+        question_type: 0
+        for question_type in priority
+    }
 
-    for qt in priority:
-        signals = data["types"][qt].get("selection_signals", [])
-        for sig in signals:
-            if str(sig).lower() in text:
-                scores[qt] += 1
+    selection_context = bool(
+        re.search(
+            (
+                r"선정\s*(?:시|할\s*때|과정에서|단계에서|"
+                r"에\s*있어|을\s*위한)"
+            ),
+            text,
+        )
+    )
 
-    # Strong compound patterns.
-    if any(k in text for k in ["원인과 대책", "발생원인과 대책", "문제점", "개선방안"]):
-        scores["DIAGNOSIS_ACTION"] += 3
+    explicit_compare_demand = any(
+        expression in text
+        for expression in [
+            "비교",
+            "차이점",
+            "장단점",
+            "대비",
+            "선정하시오",
+            "선정하여",
+            "선정하고",
+            "선택하시오",
+            "선택하여",
+        ]
+    )
 
-    if any(k in text for k in ["비교", "차이점", "장단점", "선정"]):
-        scores["COMPARE_SELECTION"] += 3
+    explicit_principle_demand = any(
+        expression in text
+        for expression in [
+            "개념 설명",
+            "개념을 설명",
+            "원리 설명",
+            "원리를 설명",
+            "설계 기준 제시",
+            "설계기준 제시",
+            "기준을 제시",
+            "해석하시오",
+        ]
+    )
 
-    if any(k in text for k in ["절차", "교정", "시험", "평가", "적용 사례", "구성도"]):
-        scores["IMPLEMENTATION_EVALUATION"] += 3
+    explicit_diagnosis_demand = any(
+        expression in text
+        for expression in [
+            "원인과 대책",
+            "발생원인과 대책",
+            "문제점과 개선",
+            "문제점",
+            "개선방안",
+        ]
+    )
 
-    if any(k in text for k in ["원리", "전달함수", "상태방정식", "응답특성", "안정도", "계산", "구하시오"]):
+    explicit_implementation_demand = any(
+        expression in text
+        for expression in [
+            "절차를 설명",
+            "시험 방법",
+            "평가 방법",
+            "적용 사례",
+            "구성도를",
+            "구현 방법",
+        ]
+    )
+
+    for question_type in priority:
+        signals = (
+            data["types"][question_type]
+            .get("selection_signals", [])
+        )
+
+        for signal in signals:
+            normalized_signal = str(signal).lower()
+
+            if (
+                question_type == "COMPARE_SELECTION"
+                and normalized_signal in {
+                    "선정",
+                    "선택",
+                }
+                and selection_context
+                and not explicit_compare_demand
+            ):
+                continue
+
+            if normalized_signal in text:
+                scores[question_type] += 1
+
+    if explicit_diagnosis_demand:
+        scores["DIAGNOSIS_ACTION"] += 5
+
+    if explicit_compare_demand:
+        scores["COMPARE_SELECTION"] += 5
+
+    if explicit_implementation_demand:
+        scores["IMPLEMENTATION_EVALUATION"] += 5
+
+    if explicit_principle_demand:
+        scores["PRINCIPLE_INTERPRETATION"] += 7
+
+    if selection_context and not explicit_compare_demand:
+        scores["COMPARE_SELECTION"] = min(
+            scores["COMPARE_SELECTION"],
+            1,
+        )
+
+    if any(
+        keyword in text
+        for keyword in [
+            "원리",
+            "전달함수",
+            "상태방정식",
+            "응답특성",
+            "안정도",
+            "계산",
+            "구하시오",
+        ]
+    ):
         scores["PRINCIPLE_INTERPRETATION"] += 2
 
-    best = max(priority, key=lambda k: scores[k])
+    best = max(
+        priority,
+        key=lambda question_type: scores[
+            question_type
+        ],
+    )
+
     if scores[best] <= 0:
-        return data.get("fallback_type", "PRINCIPLE_INTERPRETATION")
+        return data.get(
+            "fallback_type",
+            "PRINCIPLE_INTERPRETATION",
+        )
 
     return best

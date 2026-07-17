@@ -513,6 +513,7 @@ def evaluate_logic_checks(
     topic_id = None
     topic_name = None
     recommended_ceiling: float | None = None
+    profile: dict[str, Any] = {}
 
 
     # LOGIC_CHECK_PREFERRED_TOPIC_PATCH
@@ -875,11 +876,84 @@ def evaluate_logic_checks(
             )
 
     mode = _mode_from_findings(findings)
+    fatal_error_detected = any(
+        isinstance(finding, dict)
+        and finding.get("severity") == "fatal"
+        for finding in findings
+    )
 
-    # Safety net: any fatal finding in logic check should carry a ceiling.
-    if mode == "fatal" and recommended_ceiling is None:
+    profile_score_policy = (
+        profile.get("score_policy")
+        if isinstance(profile, dict)
+        else {}
+    )
+
+    if not isinstance(profile_score_policy, dict):
+        profile_score_policy = {}
+
+    configured_caps = {}
+    raw_caps = profile_score_policy.get(
+        "fatal_layer_caps"
+    )
+
+    if isinstance(raw_caps, dict):
+        for layer_id in ("B", "C"):
+            value = raw_caps.get(layer_id)
+
+            if (
+                isinstance(value, (int, float))
+                and not isinstance(value, bool)
+                and float(value) >= 0.0
+            ):
+                configured_caps[layer_id] = float(value)
+
+    configured_ceiling = profile_score_policy.get(
+        "recommended_ceiling"
+    )
+
+    if (
+        fatal_error_detected
+        and isinstance(
+            configured_ceiling,
+            (int, float),
+        )
+        and not isinstance(
+            configured_ceiling,
+            bool,
+        )
+    ):
+        configured_ceiling = float(
+            configured_ceiling
+        )
+
+        recommended_ceiling = (
+            configured_ceiling
+            if recommended_ceiling is None
+            else min(
+                recommended_ceiling,
+                configured_ceiling,
+            )
+        )
+
+    elif (
+        fatal_error_detected
+        and recommended_ceiling is None
+        and not configured_caps
+    ):
+        # Legacy deterministic fatal checks retain the historical fallback.
         recommended_ceiling = 10.0
-    fatal_error_detected = any(f.get("severity") == "fatal" for f in findings)
+
+    score_effect = "none"
+
+    if (
+        fatal_error_detected
+        and configured_caps
+        and profile_score_policy.get(
+            "scope"
+        )
+        == "theory_core_topic_profile"
+    ):
+        score_effect = "B_C_only"
 
     result = {
         "version": "logic_check_evaluator_v1",
@@ -894,7 +968,26 @@ def evaluate_logic_checks(
         "score_policy": {
             "theory_core_fatal_error": fatal_error_detected,
             "recommended_ceiling": recommended_ceiling,
-            "reason": "Logic Check에서 THEORY_CORE 핵심 이론 오류가 감지됨" if fatal_error_detected else "",
+            "reason": (
+                profile_score_policy.get("reason")
+                or (
+                    "Logic Check에서 THEORY_CORE 핵심 "
+                    "이론 오류가 감지됨"
+                    if fatal_error_detected
+                    else ""
+                )
+            ),
+            "scope": profile_score_policy.get(
+                "scope",
+                "legacy_logic_check",
+            ),
+            "score_effect": score_effect,
+            "layer_caps": (
+                configured_caps
+                if score_effect == "B_C_only"
+                else {}
+            ),
+            "direct_d_e_effect": "none",
         },
     }
 
@@ -1287,126 +1380,815 @@ Return JSON only:
 
     return major_findings[:3]
 
+def _logic_normalize_layer_id(value: Any) -> str | None:
+    text = str(value or "").strip().upper()
+
+    if text in {"A", "B", "C", "D", "E"}:
+        return text
+
+    for separator in (
+        ".",
+        ":",
+        "-",
+        "_",
+        " ",
+    ):
+        for layer_id in (
+            "A",
+            "B",
+            "C",
+            "D",
+            "E",
+        ):
+            if text.startswith(
+                layer_id + separator
+            ):
+                return layer_id
+
+    return None
+
+
+def _logic_finite_score(value: Any) -> float | None:
+    import math
+
+    if isinstance(value, bool):
+        return None
+
+    try:
+        score = float(value)
+    except (TypeError, ValueError):
+        return None
+
+    if not math.isfinite(score):
+        return None
+
+    return score
+
+
+def _logic_entry_score_field(
+    entry: dict[str, Any],
+) -> str | None:
+    preferred_fields = [
+        "final_score",
+        "score",
+        "adjusted_score",
+        "weighted_score",
+        "layer_score",
+        "earned_points",
+        "earned",
+        "points",
+        "obtained",
+        "value",
+    ]
+
+    for field_name in preferred_fields:
+        if (
+            field_name in entry
+            and _logic_finite_score(
+                entry.get(field_name)
+            )
+            is not None
+        ):
+            return field_name
+
+    for field_name, value in entry.items():
+        lowered = str(field_name).lower()
+
+        if (
+            "score" not in lowered
+            and "point" not in lowered
+            and "earned" not in lowered
+        ):
+            continue
+
+        if any(
+            token in lowered
+            for token in [
+                "max",
+                "maximum",
+                "cap",
+                "limit",
+                "before",
+                "base",
+                "raw",
+                "possible",
+                "total",
+            ]
+        ):
+            continue
+
+        if _logic_finite_score(value) is not None:
+            return str(field_name)
+
+    return None
+
+
+def _logic_find_layer_targets(
+    breakdown: Any,
+) -> dict[str, tuple[Any, Any]]:
+    targets: dict[str, tuple[Any, Any]] = {}
+
+    def visit(
+        value: Any,
+        inherited_layer: str | None = None,
+    ) -> None:
+        if isinstance(value, dict):
+            explicit_layer = None
+
+            for identity_field in [
+                "id",
+                "layer",
+                "layer_id",
+                "code",
+                "category",
+                "name",
+                "label",
+                "title",
+            ]:
+                candidate = _logic_normalize_layer_id(
+                    value.get(identity_field)
+                )
+
+                if candidate:
+                    explicit_layer = candidate
+                    break
+
+            active_layer = (
+                explicit_layer
+                or inherited_layer
+            )
+
+            if (
+                active_layer
+                and active_layer not in targets
+            ):
+                score_field = (
+                    _logic_entry_score_field(value)
+                )
+
+                if score_field:
+                    targets[active_layer] = (
+                        value,
+                        score_field,
+                    )
+
+            for key, child in value.items():
+                key_layer = (
+                    _logic_normalize_layer_id(key)
+                )
+
+                if (
+                    key_layer
+                    and key_layer not in targets
+                ):
+                    if (
+                        _logic_finite_score(child)
+                        is not None
+                    ):
+                        targets[key_layer] = (
+                            value,
+                            key,
+                        )
+
+                    elif isinstance(child, dict):
+                        score_field = (
+                            _logic_entry_score_field(
+                                child
+                            )
+                        )
+
+                        if score_field:
+                            targets[key_layer] = (
+                                child,
+                                score_field,
+                            )
+
+                visit(
+                    child,
+                    key_layer or active_layer,
+                )
+
+        elif isinstance(value, list):
+            for child in value:
+                visit(
+                    child,
+                    inherited_layer,
+                )
+
+    visit(breakdown)
+
+    return targets
+
+
+def _logic_layer_score_snapshot(
+    grade: dict[str, Any],
+) -> dict[str, float | None]:
+    breakdown = grade.get("breakdown")
+    targets = _logic_find_layer_targets(
+        breakdown
+    )
+
+    snapshot: dict[str, float | None] = {}
+
+    for layer_id in [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+    ]:
+        target = targets.get(layer_id)
+
+        if not target:
+            snapshot[layer_id] = None
+            continue
+
+        container, key = target
+        snapshot[layer_id] = (
+            _logic_finite_score(
+                container.get(key)
+            )
+        )
+
+    return snapshot
+
+
+def _logic_preserve_score_range_width(
+    previous_range: Any,
+    total_score: float,
+) -> str:
+    import re
+
+    text = str(previous_range or "").strip()
+
+    match = re.fullmatch(
+        r"\s*(-?\d+(?:\.\d+)?)\s*~\s*"
+        r"(-?\d+(?:\.\d+)?)\s*",
+        text,
+    )
+
+    if match:
+        lower = float(match.group(1))
+        upper = float(match.group(2))
+        half_width = max(
+            0.0,
+            (upper - lower) / 2.0,
+        )
+    else:
+        half_width = 0.5
+
+    new_lower = max(
+        0.0,
+        total_score - half_width,
+    )
+    new_upper = total_score + half_width
+
+    return (
+        f"{new_lower:.1f}~"
+        f"{new_upper:.1f}"
+    )
+
+
+def _logic_apply_fatal_bc_score_policy(
+    grade: dict[str, Any],
+    logic_eval: dict[str, Any],
+) -> dict[str, Any]:
+    if not isinstance(grade, dict):
+        return grade
+
+    if not isinstance(logic_eval, dict):
+        return grade
+
+    fatal = bool(
+        logic_eval.get(
+            "fatal_error_detected"
+        )
+    ) or (
+        str(
+            logic_eval.get("verdict")
+            or logic_eval.get("mode")
+            or ""
+        )
+        .strip()
+        .lower()
+        == "fatal"
+    )
+
+    score_policy = logic_eval.get(
+        "score_policy"
+    )
+
+    if not isinstance(score_policy, dict):
+        score_policy = {}
+    else:
+        score_policy = dict(score_policy)
+
+    logic_eval["score_policy"] = (
+        score_policy
+    )
+
+    scope = str(
+        score_policy.get("scope")
+        or ""
+    ).strip()
+
+    score_effect = str(
+        score_policy.get("score_effect")
+        or ""
+    ).strip()
+
+    theory_core_fatal = bool(
+        score_policy.get(
+            "theory_core_fatal_error"
+        )
+    )
+
+    raw_caps = score_policy.get(
+        "layer_caps"
+    )
+
+    configured_caps: dict[
+        str,
+        float,
+    ] = {}
+
+    if isinstance(raw_caps, dict):
+        for layer_id in ("B", "C"):
+            value = _logic_finite_score(
+                raw_caps.get(layer_id)
+            )
+
+            if value is not None and value >= 0.0:
+                configured_caps[layer_id] = value
+
+    applicable = (
+        fatal
+        and theory_core_fatal
+        and scope
+        == "theory_core_topic_profile"
+        and score_effect == "B_C_only"
+        and set(configured_caps)
+        == {"B", "C"}
+    )
+
+    if not applicable:
+        grade[
+            "logic_score_adjustment"
+        ] = {
+            "applied": False,
+            "reason": (
+                "Topic Profile에 명시된 THEORY_CORE "
+                "fatal B/C cap이 없어 점수를 변경하지 않았다."
+            ),
+            "affected_layers": [],
+            "preserved_layers": [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+            ],
+            "scope": scope or "unscoped",
+            "direct_d_e_effect": "none",
+        }
+
+        return grade
+
+    targets = _logic_find_layer_targets(
+        grade.get("breakdown")
+    )
+
+    before = _logic_layer_score_snapshot(
+        grade
+    )
+
+    required_layers = {
+        "A",
+        "B",
+        "C",
+        "D",
+        "E",
+    }
+
+    if not required_layers.issubset(
+        targets
+    ):
+        missing = sorted(
+            required_layers - set(targets)
+        )
+
+        grade[
+            "logic_score_adjustment"
+        ] = {
+            "applied": False,
+            "reason": (
+                "B/C cap 적용에 필요한 layer "
+                "score path를 찾지 못했다."
+            ),
+            "missing_layers": missing,
+            "affected_layers": [],
+            "preserved_layers": [
+                "A",
+                "D",
+                "E",
+            ],
+            "scope": scope,
+            "direct_d_e_effect": "none",
+        }
+
+        return grade
+
+    applied_caps: dict[
+        str,
+        dict[str, float],
+    ] = {}
+
+    for layer_id in ("B", "C"):
+        cap = configured_caps[layer_id]
+        container, key = targets[layer_id]
+        current = _logic_finite_score(
+            container.get(key)
+        )
+
+        if current is None:
+            continue
+
+        adjusted = min(
+            current,
+            cap,
+        )
+
+        container[key] = round(
+            adjusted,
+            2,
+        )
+
+        applied_caps[layer_id] = {
+            "before": round(
+                current,
+                2,
+            ),
+            "cap": round(
+                cap,
+                2,
+            ),
+            "after": round(
+                adjusted,
+                2,
+            ),
+        }
+
+    after = _logic_layer_score_snapshot(
+        grade
+    )
+
+    if any(
+        after.get(layer_id) is None
+        for layer_id in required_layers
+    ):
+        grade[
+            "logic_score_adjustment"
+        ] = {
+            "applied": False,
+            "reason": (
+                "B/C cap 적용 후 layer score "
+                "snapshot이 불완전하다."
+            ),
+            "affected_layers": [],
+            "preserved_layers": [
+                "A",
+                "D",
+                "E",
+            ],
+            "before": before,
+            "after": after,
+            "scope": scope,
+            "direct_d_e_effect": "none",
+        }
+
+        return grade
+
+    total_before = _logic_finite_score(
+        grade.get("total_score")
+    )
+
+    recalculated_total = round(
+        sum(
+            float(after[layer_id])
+            for layer_id in [
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+            ]
+        ),
+        2,
+    )
+
+    grade["total_score"] = (
+        recalculated_total
+    )
+
+    applied_cap_record = {
+        "id": (
+            "logic_theory_core_fatal_bc_caps"
+        ),
+        "reason": (
+            score_policy.get("reason")
+            or (
+                "THEORY_CORE fatal 오류로 "
+                "B/C layer cap을 적용함."
+            )
+        ),
+        "affected_layers": [
+            "B",
+            "C",
+        ],
+        "layer_caps": {
+            layer_id: round(
+                configured_caps[layer_id],
+                2,
+            )
+            for layer_id in ("B", "C")
+        },
+        "direct_d_e_effect": "none",
+    }
+
+    applied_caps = grade.get(
+        "applied_caps"
+    )
+
+    if not isinstance(applied_caps, list):
+        applied_caps = []
+
+    applied_caps = [
+        item
+        for item in applied_caps
+        if not (
+            isinstance(item, dict)
+            and item.get("id")
+            == applied_cap_record["id"]
+        )
+    ]
+
+    applied_caps.append(
+        applied_cap_record
+    )
+    grade["applied_caps"] = applied_caps
+
+    adjustment = {
+        "applied": True,
+        "policy": (
+            "topic_profile_theory_core_fatal_B_C"
+        ),
+        "scope": scope,
+        "reason": (
+            score_policy.get("reason")
+            or (
+                "THEORY_CORE fatal 오류가 문제 요구의 "
+                "정확한 이해와 Fact 정확성을 훼손했다."
+            )
+        ),
+        "affected_layers": [
+            "B",
+            "C",
+        ],
+        "preserved_layers": [
+            "A",
+            "D",
+            "E",
+        ],
+        "layer_caps": applied_caps
+        and applied_caps[-1].get(
+            "layer_caps"
+        ),
+        "layer_adjustments": applied_caps
+        and applied_caps[-1].get(
+            "layer_caps"
+        ),
+        "before": before,
+        "after": after,
+        "total_before": total_before,
+        "total_after": recalculated_total,
+        "recommended_ceiling": (
+            score_policy.get(
+                "recommended_ceiling"
+            )
+        ),
+        "direct_d_e_effect": "none",
+    }
+
+    grade[
+        "logic_score_adjustment"
+    ] = adjustment
+
+    # Canonical final writer synchronizes total_score, final_total_score,
+    # score_range and every threshold flag.
+    from grade_score_reconciler import (
+        _apply_numeric_flags,
+    )
+
+    grade = _apply_numeric_flags(grade)
+
+    adjustment[
+        "total_after"
+    ] = grade.get("total_score")
+    adjustment[
+        "final_total_after"
+    ] = grade.get(
+        "final_total_score"
+    )
+    adjustment[
+        "score_range_after"
+    ] = grade.get("score_range")
+
+    grade[
+        "logic_score_adjustment"
+    ] = adjustment
+
+    return grade
+
+
 def attach_logic_check_to_grade(
     grade: dict[str, Any],
     answer_text: str,
 ) -> dict[str, Any]:
     # phase3b can run before final difficulty_strategy is attached.
-    # The topic router may already have stored the selected topic at top-level
-    # fields such as topic_id/inferred_topic_id/logic_check_topic_id.
-    # evaluate_logic_checks currently resolves generated topic packs reliably
-    # through difficulty_strategy.topic_id, so bridge those early topic fields.
+    # Bridge the best known upstream topic into difficulty_strategy.
     if isinstance(grade, dict):
-        difficulty_strategy = grade.get("difficulty_strategy")
-        if not isinstance(difficulty_strategy, dict):
+        difficulty_strategy = grade.get(
+            "difficulty_strategy"
+        )
+
+        if not isinstance(
+            difficulty_strategy,
+            dict,
+        ):
             difficulty_strategy = {}
         else:
-            difficulty_strategy = dict(difficulty_strategy)
+            difficulty_strategy = dict(
+                difficulty_strategy
+            )
 
         topic_id = (
-            difficulty_strategy.get("topic_id")
+            difficulty_strategy.get(
+                "topic_id"
+            )
             or grade.get("topic_id")
-            or grade.get("inferred_topic_id")
-            or grade.get("logic_check_topic_id")
-            or grade.get("rubric_topic_id")
+            or grade.get(
+                "inferred_topic_id"
+            )
+            or grade.get(
+                "logic_check_topic_id"
+            )
+            or grade.get(
+                "rubric_topic_id"
+            )
         )
 
         if not topic_id:
-            question_analysis = grade.get("question_analysis")
-            if isinstance(question_analysis, dict):
+            question_analysis = grade.get(
+                "question_analysis"
+            )
+
+            if isinstance(
+                question_analysis,
+                dict,
+            ):
                 topic_id = (
-                    question_analysis.get("topic_id")
-                    or question_analysis.get("inferred_topic_id")
-                    or question_analysis.get("logic_check_topic_id")
+                    question_analysis.get(
+                        "topic_id"
+                    )
+                    or question_analysis.get(
+                        "inferred_topic_id"
+                    )
+                    or question_analysis.get(
+                        "logic_check_topic_id"
+                    )
                 )
 
         if not topic_id:
-            metadata = grade.get("metadata")
+            metadata = grade.get(
+                "metadata"
+            )
+
             if isinstance(metadata, dict):
                 topic_id = (
-                    metadata.get("topic_id")
-                    or metadata.get("inferred_topic_id")
-                    or metadata.get("logic_check_topic_id")
+                    metadata.get(
+                        "topic_id"
+                    )
+                    or metadata.get(
+                        "inferred_topic_id"
+                    )
+                    or metadata.get(
+                        "logic_check_topic_id"
+                    )
                 )
 
-        if topic_id and not difficulty_strategy.get("topic_id"):
-            difficulty_strategy["topic_id"] = str(topic_id)
-            grade["difficulty_strategy"] = difficulty_strategy
+        if (
+            topic_id
+            and not difficulty_strategy.get(
+                "topic_id"
+            )
+        ):
+            difficulty_strategy[
+                "topic_id"
+            ] = str(topic_id)
+            grade[
+                "difficulty_strategy"
+            ] = difficulty_strategy
 
-    # phase3b can run before final difficulty_strategy is attached.
-    # Bridge early topic routing fields into difficulty_strategy.topic_id
-    # because generated topic-pack logic checks are resolved there.
-    if isinstance(grade, dict):
-        difficulty_strategy = grade.get("difficulty_strategy")
-        if not isinstance(difficulty_strategy, dict):
-            difficulty_strategy = {}
-        else:
-            difficulty_strategy = dict(difficulty_strategy)
-
-        topic_id = (
-            difficulty_strategy.get("topic_id")
-            or grade.get("topic_id")
-            or grade.get("inferred_topic_id")
-            or grade.get("logic_check_topic_id")
-            or grade.get("rubric_topic_id")
-        )
-
-        if not topic_id:
-            question_analysis = grade.get("question_analysis")
-            if isinstance(question_analysis, dict):
-                topic_id = (
-                    question_analysis.get("topic_id")
-                    or question_analysis.get("inferred_topic_id")
-                    or question_analysis.get("logic_check_topic_id")
-                )
-
-        if not topic_id:
-            metadata = grade.get("metadata")
-            if isinstance(metadata, dict):
-                topic_id = (
-                    metadata.get("topic_id")
-                    or metadata.get("inferred_topic_id")
-                    or metadata.get("logic_check_topic_id")
-                )
-
-        if topic_id and not difficulty_strategy.get("topic_id"):
-            difficulty_strategy["topic_id"] = str(topic_id)
-            grade["difficulty_strategy"] = difficulty_strategy
-
-    logic_eval = evaluate_logic_checks(answer_text=answer_text, grade=grade)
+    logic_eval = evaluate_logic_checks(
+        answer_text=answer_text,
+        grade=grade,
+    )
 
     if not logic_eval.get("applicable"):
         return grade
 
-    grade["logic_check_evaluation"] = logic_eval
+    grade["logic_check_evaluation"] = (
+        logic_eval
+    )
 
     weaknesses = grade.get("weaknesses")
+
     if isinstance(weaknesses, list):
-        weakness_items = [str(x) for x in weaknesses if str(x).strip()]
-    elif isinstance(weaknesses, str) and weaknesses.strip():
-        weakness_items = [weaknesses.strip()]
+        weakness_items = [
+            str(item)
+            for item in weaknesses
+            if str(item).strip()
+        ]
+    elif (
+        isinstance(weaknesses, str)
+        and weaknesses.strip()
+    ):
+        weakness_items = [
+            weaknesses.strip()
+        ]
     else:
         weakness_items = []
 
-    for finding in logic_eval.get("findings", []):
-        severity = finding.get("severity", "warn")
-        msg = finding.get("message")
-        if msg:
-            _append_unique(weakness_items, f"[Logic Check/{severity}] {msg}")
+    for finding in logic_eval.get(
+        "findings",
+        [],
+    ):
+        if not isinstance(finding, dict):
+            continue
+
+        severity = finding.get(
+            "severity",
+            "warn",
+        )
+        message = finding.get("message")
+
+        if message:
+            _append_unique(
+                weakness_items,
+                (
+                    f"[Logic Check/{severity}] "
+                    f"{message}"
+                ),
+            )
 
     grade["weaknesses"] = weakness_items
 
     advice = grade.get("rewrite_advice")
+
     if isinstance(advice, list):
-        advice_items = [str(x) for x in advice if str(x).strip()]
-    elif isinstance(advice, str) and advice.strip():
-        advice_items = [advice.strip()]
+        advice_items = [
+            str(item)
+            for item in advice
+            if str(item).strip()
+        ]
+    elif (
+        isinstance(advice, str)
+        and advice.strip()
+    ):
+        advice_items = [
+            advice.strip()
+        ]
     else:
         advice_items = []
 
-    for point in logic_eval.get("next_practice_points", [])[:3]:
-        _append_unique(advice_items, f"[Logic Check] {point}")
+    for point in logic_eval.get(
+        "next_practice_points",
+        [],
+    )[:3]:
+        _append_unique(
+            advice_items,
+            f"[Logic Check] {point}",
+        )
 
-    grade["rewrite_advice"] = advice_items
+    grade["rewrite_advice"] = (
+        advice_items
+    )
+
+    grade = (
+        _logic_apply_fatal_bc_score_policy(
+            grade,
+            logic_eval,
+        )
+    )
 
     return grade

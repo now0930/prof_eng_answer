@@ -1749,7 +1749,10 @@ def _phase2_add_display_aliases(grade):
 # C. 유형별 Fact 기반 내용 설명을 단순 키워드 매칭이 아니라 문제별 Fact Anchor 5개로 평가한다.
 
 def _phase3_extract_question_text(raw_text):
+    import re
+
     text = raw_text or ""
+
     if "답안:" in text:
         before = text.split("답안:", 1)[0]
     else:
@@ -1758,13 +1761,35 @@ def _phase3_extract_question_text(raw_text):
     if "문제:" in before:
         return before.split("문제:", 1)[1].strip()
 
+    # Current Telegram sessions store the question before the first Markdown
+    # section heading and the answer from that heading onward.
+    heading = re.search(
+        r"(?m)^##\s+",
+        before,
+    )
+
+    if heading and heading.start() > 0:
+        return before[: heading.start()].strip()
+
     return before.strip()
 
 
 def _phase3_extract_answer_text(raw_text):
+    import re
+
     text = raw_text or ""
+
     if "답안:" in text:
         return text.split("답안:", 1)[1].strip()
+
+    heading = re.search(
+        r"(?m)^##\s+",
+        text,
+    )
+
+    if heading and heading.start() > 0:
+        return text[heading.start() :].strip()
+
     return text.strip()
 
 
@@ -1784,29 +1809,140 @@ def _phase3_find_terms(text, terms):
 
 
 def _phase3_load_fact_anchor_bank(subject_rubric=None):
+    """Load a merged Fact Bank according to RUBRIC_BANK_MODE.
+
+    Generated Topic Packs override legacy topics with the same topic_id while
+    untouched legacy topics remain available.
+    """
     import json
+    import os
     from pathlib import Path
 
-    candidates = []
+    root = Path(__file__).resolve().parent
+
+    def read_bank(path):
+        try:
+            if path.exists():
+                value = json.loads(
+                    path.read_text(encoding="utf-8")
+                )
+
+                if isinstance(value, dict):
+                    return value
+        except Exception:
+            return None
+
+        return None
+
+    configured_paths = []
 
     if isinstance(subject_rubric, dict):
-        p = subject_rubric.get("fact_anchor_bank")
-        if p:
-            candidates.append(Path(p))
+        configured = subject_rubric.get(
+            "fact_anchor_bank"
+        )
 
-    candidates.extend([
-        Path("rubrics/fact_anchors/industrial_instrumentation_control.json"),
-        Path(__file__).resolve().parent / "rubrics" / "fact_anchors" / "industrial_instrumentation_control.json",
-    ])
+        if configured:
+            configured_path = Path(configured)
 
-    for p in candidates:
-        try:
-            if p.exists():
-                return json.loads(p.read_text(encoding="utf-8"))
-        except Exception:
+            if not configured_path.is_absolute():
+                configured_path = (
+                    root / configured_path
+                )
+
+            configured_paths.append(
+                configured_path
+            )
+
+    configured_paths.extend(
+        [
+            root
+            / "rubrics"
+            / "fact_anchors"
+            / "industrial_instrumentation_control.json",
+            Path(
+                "rubrics/fact_anchors/"
+                "industrial_instrumentation_control.json"
+            ),
+        ]
+    )
+
+    legacy_bank = None
+
+    for path in configured_paths:
+        legacy_bank = read_bank(path)
+
+        if legacy_bank is not None:
+            break
+
+    if legacy_bank is None:
+        legacy_bank = {
+            "version": "legacy_fact_bank_missing",
+            "topics": [],
+        }
+
+    mode = (
+        os.getenv(
+            "RUBRIC_BANK_MODE",
+            "legacy",
+        )
+        .strip()
+        .lower()
+    )
+
+    if mode != "generated":
+        return legacy_bank
+
+    generated_bank = read_bank(
+        root
+        / "rubrics"
+        / "generated"
+        / "fact_anchors.generated.json"
+    )
+
+    if generated_bank is None:
+        return legacy_bank
+
+    merged_topics = {}
+
+    for topic in legacy_bank.get("topics") or []:
+        if not isinstance(topic, dict):
             continue
 
-    return {"topics": []}
+        topic_id = str(
+            topic.get("topic_id")
+            or ""
+        ).strip()
+
+        if topic_id:
+            merged_topics[topic_id] = topic
+
+    for topic in generated_bank.get("topics") or []:
+        if not isinstance(topic, dict):
+            continue
+
+        topic_id = str(
+            topic.get("topic_id")
+            or ""
+        ).strip()
+
+        if topic_id:
+            merged_topics[topic_id] = topic
+
+    result = dict(generated_bank)
+    result["topics"] = list(
+        merged_topics.values()
+    )
+    result["legacy_topic_count"] = len(
+        legacy_bank.get("topics") or []
+    )
+    result["generated_topic_count"] = len(
+        generated_bank.get("topics") or []
+    )
+    result["runtime_status"] = (
+        "generated_topics_override_legacy"
+    )
+
+    return result
 
 
 def _phase3_norm_text_for_anchor(text):
@@ -1873,50 +2009,163 @@ def _phase3_priority_value(value):
         return 0.0
 
 
-def _phase3_select_fact_anchors_from_bank(question_text, answer_text, subject_rubric=None):
-    bank = _phase3_load_fact_anchor_bank(subject_rubric)
+def _phase3_select_fact_anchors_from_bank(
+    question_text,
+    answer_text,
+    subject_rubric=None,
+):
+    bank = _phase3_load_fact_anchor_bank(
+        subject_rubric
+    )
     topics = bank.get("topics", [])
 
-    combined = (question_text or "") + "\n" + (answer_text or "")
+    question = question_text or ""
+    answer = answer_text or ""
 
     scored = []
-    for topic in topics:
-        trigger_hits = _phase3_anchor_term_matches(combined, topic.get("triggers", []))
-        alias_hits = _phase3_anchor_term_matches(combined, topic.get("aliases", []))
 
-        if not trigger_hits:
+    def term_weight(term, base, maximum):
+        length = len(str(term or "").strip())
+        return base + min(length, maximum)
+
+    for topic in topics:
+        if not isinstance(topic, dict):
             continue
 
-        score = len(trigger_hits) * 10 + len(alias_hits) + _phase3_priority_value(topic.get("priority", 0)) / 100.0
+        triggers = topic.get("triggers", [])
+        aliases = topic.get("aliases", [])
 
-        scored.append({
-            "score": score,
-            "topic": topic,
-            "trigger_hits": trigger_hits,
-            "alias_hits": alias_hits
-        })
+        question_trigger_hits = (
+            _phase3_anchor_term_matches(
+                question,
+                triggers,
+            )
+        )
+        question_alias_hits = (
+            _phase3_anchor_term_matches(
+                question,
+                aliases,
+            )
+        )
+        answer_trigger_hits = (
+            _phase3_anchor_term_matches(
+                answer,
+                triggers,
+            )
+        )
+        answer_alias_hits = (
+            _phase3_anchor_term_matches(
+                answer,
+                aliases,
+            )
+        )
+
+        if (
+            not question_trigger_hits
+            and not question_alias_hits
+            and not answer_trigger_hits
+        ):
+            continue
+
+        score = 0.0
+
+        score += sum(
+            term_weight(hit, 30, 20)
+            for hit in question_trigger_hits
+        )
+        score += sum(
+            term_weight(hit, 12, 15)
+            for hit in question_alias_hits
+        )
+        score += sum(
+            term_weight(hit, 3, 8)
+            for hit in answer_trigger_hits
+        )
+        score += sum(
+            term_weight(hit, 1, 5)
+            for hit in answer_alias_hits
+        )
+        score += (
+            _phase3_priority_value(
+                topic.get("priority", 0)
+            )
+            / 100.0
+        )
+
+        scored.append(
+            {
+                "score": score,
+                "topic": topic,
+                "question_trigger_hits": (
+                    question_trigger_hits
+                ),
+                "question_alias_hits": (
+                    question_alias_hits
+                ),
+                "answer_trigger_hits": (
+                    answer_trigger_hits
+                ),
+                "answer_alias_hits": (
+                    answer_alias_hits
+                ),
+            }
+        )
 
     if not scored:
         return None
 
-    scored.sort(key=lambda x: x["score"], reverse=True)
+    scored.sort(
+        key=lambda item: item["score"],
+        reverse=True,
+    )
+
     selected = scored[0]
     topic = selected["topic"]
 
     anchors = []
-    for a in topic.get("anchors", []):
-        aa = dict(a)
-        aa["topic_id"] = topic.get("topic_id")
-        aa["topic_name"] = topic.get("name")
-        anchors.append(aa)
+
+    for source_anchor in (
+        topic.get("anchors")
+        or []
+    ):
+        if not isinstance(source_anchor, dict):
+            continue
+
+        anchor = dict(source_anchor)
+        anchor["topic_id"] = topic.get(
+            "topic_id"
+        )
+        anchor["topic_name"] = (
+            topic.get("name")
+            or topic.get("title_ko")
+            or topic.get("topic_label")
+        )
+        anchors.append(anchor)
 
     return {
         "topic_id": topic.get("topic_id"),
-        "topic_name": topic.get("name"),
+        "topic_name": (
+            topic.get("name")
+            or topic.get("title_ko")
+            or topic.get("topic_label")
+        ),
         "source": "fact_anchor_bank",
-        "trigger_hits": selected["trigger_hits"],
-        "alias_hits": selected["alias_hits"],
-        "anchors": anchors
+        "score": selected["score"],
+        "trigger_hits": (
+            selected["question_trigger_hits"]
+            + selected["answer_trigger_hits"]
+        ),
+        "alias_hits": (
+            selected["question_alias_hits"]
+            + selected["answer_alias_hits"]
+        ),
+        "question_trigger_hits": (
+            selected["question_trigger_hits"]
+        ),
+        "answer_trigger_hits": (
+            selected["answer_trigger_hits"]
+        ),
+        "anchors": anchors,
     }
 
 def _phase3_select_fact_anchors(question_text, answer_text, subject_rubric=None):

@@ -54,6 +54,133 @@ def _make_fallback_coverage(
     return fallback
 
 
+def _canonicalize_semantic_question_type(
+    coverage: dict[str, Any],
+    question_text: str | None,
+    existing_question_type: str | None,
+) -> dict[str, Any]:
+    if not isinstance(coverage, dict):
+        return coverage
+
+    semantic_type = coverage.get("question_type")
+
+    if not semantic_type or not question_text:
+        return coverage
+
+    try:
+        from question_type_taxonomy import (
+            detect_question_type_from_text,
+            normalize_question_type,
+        )
+
+        semantic_normalized = normalize_question_type(
+            str(semantic_type)
+        )
+        detected_type = detect_question_type_from_text(
+            question_text
+        )
+    except Exception:
+        return coverage
+
+    existing_raw = str(
+        existing_question_type or ""
+    ).strip().upper()
+
+    canonical_v2_types = {
+        "COMPARE_SELECTION",
+        "DIAGNOSIS_ACTION",
+        "IMPLEMENTATION_EVALUATION",
+        "PRINCIPLE_INTERPRETATION",
+    }
+
+    existing_normalized = None
+
+    if existing_raw in canonical_v2_types:
+        existing_normalized = normalize_question_type(
+            existing_raw
+        )
+
+    lowered_question = question_text.lower()
+
+    explicit_compare_demand = any(
+        expression in lowered_question
+        for expression in [
+            "비교",
+            "차이점",
+            "장단점",
+            "대비",
+            "선정하시오",
+            "선정하여",
+            "선정하고",
+            "선택하시오",
+        ]
+    )
+
+    contextual_selection = any(
+        expression in lowered_question
+        for expression in [
+            "선정시",
+            "선정 시",
+            "선정할 때",
+            "선정 과정에서",
+            "선정에 있어",
+            "선정을 위한",
+        ]
+    )
+
+    principle_demand = any(
+        expression in lowered_question
+        for expression in [
+            "개념 설명",
+            "개념을 설명",
+            "원리 설명",
+            "원리를 설명",
+            "설계 기준 제시",
+            "설계기준 제시",
+            "기준을 제시",
+        ]
+    )
+
+    canonical_type = None
+    reason = None
+
+    if (
+        existing_normalized
+        and existing_normalized == detected_type
+        and semantic_normalized != detected_type
+    ):
+        canonical_type = detected_type
+        reason = (
+            "Phase 9 and taxonomy demand signals agree"
+        )
+
+    elif (
+        semantic_normalized == "COMPARE_SELECTION"
+        and detected_type
+        == "PRINCIPLE_INTERPRETATION"
+        and contextual_selection
+        and principle_demand
+        and not explicit_compare_demand
+    ):
+        canonical_type = detected_type
+        reason = (
+            "Selection is context; explanation and "
+            "design criteria are the actual demands"
+        )
+
+    if not canonical_type:
+        return coverage
+
+    normalized = dict(coverage)
+    normalized["canonicalized_from"] = (
+        semantic_normalized
+    )
+    normalized["question_type"] = canonical_type
+    normalized["canonicalization_reason"] = reason
+
+    return normalized
+
+
 def ensure_question_type_coverage(
     result: dict[str, Any],
     question_text: str | None = None,
@@ -62,17 +189,36 @@ def ensure_question_type_coverage(
     if not isinstance(result, dict):
         return result
 
-    # Case 1: provider envelope with parsed dict.
     parsed = result.get("parsed")
-    if isinstance(parsed, dict):
-        coverage = parsed.get("question_type_coverage")
 
-        if isinstance(coverage, dict) and coverage.get("question_type"):
-            coverage = _mark_semantic_coverage(coverage)
+    if isinstance(parsed, dict):
+        coverage = parsed.get(
+            "question_type_coverage"
+        )
+
+        if (
+            isinstance(coverage, dict)
+            and coverage.get("question_type")
+        ):
+            coverage = _mark_semantic_coverage(
+                coverage
+            )
+            coverage = (
+                _canonicalize_semantic_question_type(
+                    coverage,
+                    question_text,
+                    existing_question_type,
+                )
+            )
+
             parsed["question_type_coverage"] = coverage
-            parsed["question_type"] = coverage["question_type"]
+            parsed["question_type"] = coverage[
+                "question_type"
+            ]
             result["question_type_coverage"] = coverage
-            result["question_type"] = coverage["question_type"]
+            result["question_type"] = coverage[
+                "question_type"
+            ]
             return result
 
         fallback = _make_fallback_coverage(
@@ -85,25 +231,45 @@ def ensure_question_type_coverage(
         )
 
         parsed["question_type_coverage"] = fallback
-        parsed["question_type"] = fallback["question_type"]
+        parsed["question_type"] = fallback[
+            "question_type"
+        ]
         result["question_type_coverage"] = fallback
-        result["question_type"] = fallback["question_type"]
+        result["question_type"] = fallback[
+            "question_type"
+        ]
         return result
 
-    # Case 2: direct parsed semantic result.
     coverage = result.get("question_type_coverage")
 
-    if isinstance(coverage, dict) and coverage.get("question_type"):
+    if (
+        isinstance(coverage, dict)
+        and coverage.get("question_type")
+    ):
         coverage = _mark_semantic_coverage(coverage)
+        coverage = _canonicalize_semantic_question_type(
+            coverage,
+            question_text,
+            existing_question_type,
+        )
+
         result["question_type_coverage"] = coverage
-        result["question_type"] = coverage["question_type"]
+        result["question_type"] = coverage[
+            "question_type"
+        ]
         return result
 
     fallback = _make_fallback_coverage(
         question_text=question_text,
-        existing_question_type=existing_question_type or result.get("question_type"),
+        existing_question_type=(
+            existing_question_type
+            or result.get("question_type")
+        ),
     )
 
     result["question_type_coverage"] = fallback
-    result["question_type"] = fallback["question_type"]
+    result["question_type"] = fallback[
+        "question_type"
+    ]
+
     return result
