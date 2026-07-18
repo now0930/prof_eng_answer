@@ -1003,3 +1003,53 @@ missing으로 평가하라.
 """.strip()
 
     return base + "\n\n" + explicit_contract
+# === PLAN_B_GENERAL_LAYER_OWNERSHIP_PROMPT_V1 ===
+_PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1 = build_gemini_grading_prompt
+
+
+def _plan_b_general_layer_ownership_prompt_v1():
+    return """
+[PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]
+
+A/B/C/D/E 계층의 역할과 감점 소유권을 다음과 같이 고정한다.
+
+1. A는 문제 진입과 답안 구조만 평가한다. 기술 Fact 정확성, 현장 설계 깊이, 독창성을 A에서 다시 감점하지 않는다.
+2. B는 문제문이 명시적으로 요구한 항목에 직접 응답했는지 평가한다.
+   - missing: 요구항목을 전혀 다루지 않음
+   - partial/shallow: 요구항목을 다뤘으나 일부 범위나 조건이 빠짐
+   - addressed: 요구항목에 직접 대응함
+   Fact 정확성, 공식, 부호, 방향, 물리적 타당성, 기술 깊이는 C의 주된 책임이다.
+   명시적 요구를 다뤘다면 기술 오류나 깊이 부족만으로 B를 누락처럼 감점하지 않는다.
+   explicit_requirement_coverage의 incorrect 진단은 유지할 수 있으나 그 기술 오류의 주된 점수 감점은 C에 한 번만 귀속한다.
+3. C는 기술 Fact, 공식, 부호와 방향, 전제조건, 물리 모델의 정확성을 평가한다.
+   핵심 원리가 틀리면 incorrect, 결론을 반대로 만들거나 안전을 훼손하면 fatal로 본다.
+4. D는 실제 선정·설계·운전 판단을 평가한다. 적용 조건, worst-case, 검증 절차, 비용, 안전, 유지보수, 기존 설비 영향, 실행 가능성과 trade-off를 본다.
+   C의 Fact 부족만을 이유로 D를 다시 감점하지 않는다. C 오류가 D의 현장 결론을 무효화하면 보조 영향으로 기록하되 같은 오류의 전체 감점을 반복하지 않는다.
+5. E는 배경→요구→Fact→판단→결론의 논리 연결, 우선순위, 주장 일관성과 면접 방어 가능성을 평가한다.
+   C의 Fact 누락 또는 D의 현장 깊이 부족을 그대로 반복 감점하지 않는다. E 감점은 연결 단절, 모순, 근거 없는 결론처럼 E 자체 결함이 있을 때만 적용한다.
+6. 동일한 기술 issue는 하나의 primary_owner_layer에만 점수 감점을 귀속한다. 다른 계층은 secondary_context_layers로만 기록하며 deduction_applied=false로 둔다.
+7. 점수 목표, 특정 Topic, 특정 세션, 특정 답안 문자열에 따른 보정을 금지한다.
+
+최종 JSON root에 다음 진단 필드를 포함하라.
+
+"layer_issue_ownership": [
+  {
+    "issue_id": "일반화 가능한 snake_case 식별자",
+    "severity": "missing | partial | incorrect | fatal",
+    "primary_owner_layer": "A | B | C | D | E",
+    "secondary_context_layers": [],
+    "deduction_applied_layers": ["대표 감점 계층 하나"],
+    "reason": "대표 계층과 보조 영향의 구분"
+  }
+]
+
+layer_issue_ownership는 별도 점수체계가 아니라 같은 issue의 중복 감점을 방지하는 진단 계약이다.
+""".strip()
+
+
+def build_gemini_grading_prompt(*args, **kwargs):
+    base_prompt = _PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1(*args, **kwargs)
+    marker = "[PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]"
+    if marker in base_prompt:
+        return base_prompt
+    return base_prompt + "\n\n" + _plan_b_general_layer_ownership_prompt_v1()

@@ -5841,3 +5841,166 @@ def _phase17_final_phrase_cleanup(grade):
         return fix_text(obj)
 
     return walk(grade)
+# === PLAN_B_GENERAL_LAYER_OWNERSHIP_RUNTIME_V1 ===
+_PLAN_B_ORIGINAL_PHASE4_RATER_LAYER_COMMENT_V1 = _phase4_rater_layer_comment
+
+
+def _phase4_rater_layer_comment(rater_id, layer_id):
+    comments = {
+        "professor": {
+            "A": "문제 진입과 답안 구조의 적절성을 평가함.",
+            "B": "문제문 명시 요구의 식별과 응답 완전성을 평가함.",
+            "C": "핵심 Fact, 공식, 전제와 기술 정확성을 평가함.",
+            "D": "현장 설계·선정 조건과 검증 판단을 평가함.",
+            "E": "논리 연결, 일관성과 방어 가능성을 평가함.",
+        },
+        "professional_engineer": {
+            "A": "현장 문제로 들어가는 구조와 전개를 평가함.",
+            "B": "각 명시 요구가 목차와 본문에 직접 대응하는지 평가함.",
+            "C": "기술 설명과 물리 모델이 정확한지 평가함.",
+            "D": "설계·운전·유지보수 적용성과 worst-case 판단을 평가함.",
+            "E": "Fact와 판단, 결론의 연결성과 면접 방어력을 평가함.",
+        },
+        "executive": {
+            "A": "문제의 운영상 중요성과 답안 구조를 평가함.",
+            "B": "핵심 요구 누락 없이 필요한 답을 제공했는지 평가함.",
+            "C": "의사결정에 필요한 기술 Fact가 정확한지 평가함.",
+            "D": "비용, 안전, 일정, 기존 설비 영향과 리스크를 평가함.",
+            "E": "판단 근거, 우선순위와 결론의 일관성을 평가함.",
+        },
+    }
+    return comments.get(rater_id, {}).get(
+        layer_id,
+        _PLAN_B_ORIGINAL_PHASE4_RATER_LAYER_COMMENT_V1(rater_id, layer_id),
+    )
+
+
+def _phase8_plan_b_positive_anchor_summary(parsed):
+    credited = []
+
+    for row in parsed.get("anchors") or []:
+        if not isinstance(row, dict):
+            continue
+
+        try:
+            level = float(row.get("level", 0.0))
+        except (TypeError, ValueError, OverflowError):
+            continue
+
+        if level < 0.5:
+            continue
+
+        name = str(
+            row.get("name")
+            or row.get("id")
+            or ""
+        ).strip()
+
+        if not name:
+            continue
+
+        credited.append(
+            f"{name} {level:.2f}"
+        )
+
+    if credited:
+        return (
+            "구조화된 O1~O5 인정 근거: "
+            + " / ".join(credited[:3])
+        )
+
+    return (
+        "구조화된 O1~O5 근거에 따라 "
+        "독립 판단성을 반영함."
+    )
+
+
+def _phase8_plan_b_trusted_technical_gate(parsed):
+    gate = parsed.get("technical_error_gate") or {}
+    if not isinstance(gate, dict):
+        gate = {}
+    severity = str(gate.get("severity") or parsed.get("technical_error_severity") or "none").strip().lower()
+    trust_source = str(gate.get("trust_source") or parsed.get("technical_error_trust_source") or "none").strip().lower()
+    blocks = gate.get("blocks_originality") is True
+    trusted = trust_source in {"fact_anchor", "logic_check", "formula_check", "explicit_evidence"}
+    severe = severity in {"major", "fatal"}
+    return {
+        "applied": blocks and trusted and severe,
+        "severity": severity,
+        "trust_source": trust_source,
+        "blocks_originality": blocks,
+        "trusted": trusted,
+        "reason": str(gate.get("reason") or "").strip(),
+        "policy": "Originality 차단은 신뢰 가능한 major/fatal 오류가 독립 판단의 결론을 무효화할 때만 적용한다.",
+    }
+
+
+def _phase8_apply_originality_to_layer_scores(layer_scores, originality_eval, volume):
+    parsed = (originality_eval or {}).get("parsed") or {}
+    parsed = _phase8_normalize_originality_evaluation(parsed)
+    raw_score = _phase8_clamp(parsed.get("raw_originality_score"), 0.0, 2.0)
+    applied_caps = []
+    max_allowed = 2.0
+    level = str((volume or {}).get("level") or "") if isinstance(volume, dict) else ""
+
+    if level == "text_only_short_answer":
+        max_allowed = min(max_allowed, 0.7)
+        applied_caps.append({
+            "type": "short_answer_gate",
+            "cap": 0.7,
+            "reason": "짧은 텍스트 답안은 독창성 판단 근거가 제한적이므로 가점을 제한함.",
+        })
+
+    technical_gate = _phase8_plan_b_trusted_technical_gate(parsed)
+    parsed["technical_error_gate_evaluation"] = technical_gate
+    if technical_gate["applied"]:
+        max_allowed = 0.0
+        applied_caps.append({
+            "type": "trusted_technical_error_gate",
+            "cap": 0.0,
+            "reason": technical_gate.get("reason") or "신뢰 가능한 major/fatal 기술 오류가 독립 판단의 결론을 무효화함.",
+        })
+
+    final_score = min(raw_score, max_allowed)
+    target_d_bonus = round(final_score * 0.6, 3)
+    target_e_bonus = round(final_score * 0.4, 3)
+    d_row = _phase8_find_layer(layer_scores, "D")
+    e_row = _phase8_find_layer(layer_scores, "E")
+    actual_d_bonus = 0.0
+    actual_e_bonus = 0.0
+    bonus_summary = _phase8_plan_b_positive_anchor_summary(parsed)
+
+    if d_row is not None and target_d_bonus > 0:
+        before = float(d_row.get("score", 0.0))
+        after = min(_phase8_layer_max(d_row, 6.0), before + target_d_bonus)
+        actual_d_bonus = round(after - before, 3)
+        d_row["score"] = round(after, 3)
+        _phase8_add_reason(d_row, f"독창성/기술사적 판단성 보정 +{actual_d_bonus:.2f}: {bonus_summary}")
+
+    if e_row is not None and target_e_bonus > 0:
+        before = float(e_row.get("score", 0.0))
+        after = min(_phase8_layer_max(e_row, 2.0), before + target_e_bonus)
+        actual_e_bonus = round(after - before, 3)
+        e_row["score"] = round(after, 3)
+        _phase8_add_reason(e_row, f"독창성/기술사적 판단성 보정 +{actual_e_bonus:.2f}: {bonus_summary}")
+
+    parsed["raw_originality_score"] = round(raw_score, 3)
+    parsed["max_allowed_after_gates"] = round(max_allowed, 3)
+    parsed["final_originality_score"] = round(final_score, 3)
+    parsed["applied_caps"] = applied_caps
+    parsed["final_bonus_to_D"] = actual_d_bonus
+    parsed["final_bonus_to_E"] = actual_e_bonus
+    parsed["bonus_evidence_summary"] = bonus_summary
+    parsed["layer_ownership_policy"] = {
+        "version": "plan_b_general_layer_ownership_v1",
+        "c_low_score_blanket_gate": False,
+        "d_low_score_blanket_gate": False,
+        "technical_gate_requires": "trusted major/fatal error",
+        "reason_merge_source": "positive structured O1~O5 evidence",
+    }
+    parsed["bonus_policy"] = (
+        "독창성은 별도 총점이 아니라 D/E 안에서만 보정한다. "
+        "C 또는 D의 낮은 점수만으로 일괄 제한하지 않고, "
+        "구조화된 O1~O5 근거와 신뢰 가능한 기술 오류 gate를 사용한다."
+    )
+    return layer_scores

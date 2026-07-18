@@ -328,3 +328,41 @@ def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, v
             "parsed": None,
             "llm_request": sampling_contract,
         }
+# === PLAN_B_ORIGINALITY_OWNERSHIP_PROMPT_V1 ===
+_PLAN_B_ORIGINAL_BUILD_ORIGINALITY_PROMPT_V1 = build_originality_prompt
+
+
+def _plan_b_originality_ownership_prompt_v1():
+    return """
+[PLAN_B_ORIGINALITY_OWNERSHIP_V1]
+
+Originality는 C의 기술 Fact 점수나 D의 현장 적용 점수를 다시 채점하는 계층이 아니다. O1~O5는 답안에 실제로 존재하는 독립적인 판단 근거를 각각 평가한다.
+
+- C가 낮다는 사실만으로 raw_originality_score 또는 O1~O5를 일괄 제한하지 않는다.
+- Fact가 얕다는 이유만으로 대안 비교, 비용·안전 trade-off, 적용 우선순위, 상태감시, 검증 전략처럼 실제로 제시된 판단을 무효화하지 않는다.
+- 기술 오류는 C의 주된 issue로 기록한다. 그 오류가 특정 O anchor의 판단을 직접 무효화할 때만 해당 anchor에 보조 영향을 준다.
+- D가 낮다는 사실만으로 Originality를 일괄 제한하지 않는다.
+- overall_comment에는 C/D 부족을 반복 나열하기보다 인정한 독립 판단과 부족한 Originality 요소를 구분한다.
+- 특정 Topic, 답안, 세션 또는 목표 점수에 따른 보정을 금지한다.
+
+technical_error_risk만으로 Originality를 차단하지 않는다. 차단은 신뢰 가능한 major/fatal 오류가 독창적 판단의 결론을 무효화할 때만 허용한다.
+
+최종 JSON에 다음 객체를 포함하라.
+
+"technical_error_gate": {
+  "severity": "none | warning | major | fatal",
+  "trust_source": "none | fact_anchor | logic_check | formula_check | explicit_evidence",
+  "blocks_originality": false,
+  "reason": "차단 여부와 근거"
+}
+
+severity가 major/fatal이 아니거나 trust_source가 none이면 blocks_originality=false이다. 단순 C 저점, Fact 깊이 부족, 일반적인 보완 필요는 차단 근거가 아니다.
+""".strip()
+
+
+def build_originality_prompt(*args, **kwargs):
+    base_prompt = _PLAN_B_ORIGINAL_BUILD_ORIGINALITY_PROMPT_V1(*args, **kwargs)
+    marker = "[PLAN_B_ORIGINALITY_OWNERSHIP_V1]"
+    if marker in base_prompt:
+        return base_prompt
+    return base_prompt + "\n\n" + _plan_b_originality_ownership_prompt_v1()
