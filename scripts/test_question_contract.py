@@ -815,6 +815,144 @@ class QuestionContractCacheTests(
                 ),
             )
 
+    def test_cache_key_separates_rubric_bank_modes(
+        self,
+    ):
+        import os
+        from unittest import mock
+
+        from question_contract import (
+            build_question_contract,
+            question_contract_cache_key,
+            resolve_question_contract_cache,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cache_dir = root / "cache"
+            rubric = {
+                "name": "cache mode test rubric",
+                "version": "v1",
+                "question_type_profile": (
+                    "rubrics/cache_mode_test.json"
+                ),
+                "fact_anchor_bank": (
+                    "rubrics/cache_mode_test.json"
+                ),
+                "model_answer_bank": (
+                    "rubrics/cache_mode_test.json"
+                ),
+            }
+            rubric_path = (
+                root
+                / "subject_rubric_mode.json"
+            )
+            rubric_path.write_text(
+                json.dumps(
+                    rubric,
+                    ensure_ascii=False,
+                    indent=2,
+                    sort_keys=True,
+                ),
+                encoding="utf-8",
+            )
+
+            def build(
+                mode: str,
+                topic_id: str,
+            ) -> dict:
+                with mock.patch.dict(
+                    os.environ,
+                    {
+                        "RUBRIC_BANK_MODE": mode,
+                    },
+                    clear=False,
+                ):
+                    return build_question_contract(
+                        grading_identity=(
+                            self._identity(
+                                "동일 답안"
+                            )
+                        ),
+                        question_type_evaluation=(
+                            self._qtype(
+                                "PRINCIPLE_INTERPRETATION"
+                            )
+                        ),
+                        fact_evaluation={
+                            "topic_id": topic_id,
+                        },
+                        model_answer_reference={
+                            "matched": True,
+                            "primary_reference": {
+                                "topic_id": topic_id,
+                            },
+                        },
+                        rubric_snapshot_path=(
+                            rubric_path
+                        ),
+                        subject_rubric=rubric,
+                    )
+
+            legacy = build(
+                "legacy",
+                "legacy_topic",
+            )
+            generated = build(
+                "generated",
+                "generated_topic",
+            )
+
+            self.assertEqual(
+                legacy["rubric"]["bank_mode"],
+                "legacy",
+            )
+            self.assertEqual(
+                generated["rubric"]["bank_mode"],
+                "generated",
+            )
+            self.assertNotEqual(
+                question_contract_cache_key(
+                    legacy
+                ),
+                question_contract_cache_key(
+                    generated
+                ),
+            )
+
+            resolve_question_contract_cache(
+                legacy,
+                cache_dir=cache_dir,
+            )
+            resolved = (
+                resolve_question_contract_cache(
+                    generated,
+                    cache_dir=cache_dir,
+                )
+            )
+
+            self.assertFalse(
+                resolved["cache"]["hit"]
+            )
+            self.assertEqual(
+                resolved["cache"][
+                    "authoritative_source"
+                ],
+                "candidate",
+            )
+            self.assertEqual(
+                resolved["cache"][
+                    "rubric_bank_mode"
+                ],
+                "generated",
+            )
+            self.assertEqual(
+                resolved["routing"][
+                    "canonical_topic_id"
+                ],
+                "generated_topic",
+            )
+
     def test_cache_miss_writes_confirmed_candidate(
         self,
     ):

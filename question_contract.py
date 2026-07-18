@@ -167,6 +167,27 @@ def _model_answer_topic_id(
     return ""
 
 
+def _rubric_bank_mode() -> str:
+    import os
+
+    value = (
+        os.getenv(
+            "RUBRIC_BANK_MODE",
+            "generated",
+        )
+        .strip()
+        .lower()
+    )
+
+    if value not in {
+        "legacy",
+        "generated",
+    }:
+        return "generated"
+
+    return value
+
+
 def _rubric_snapshot_hash(
     snapshot_path: str | Path,
 ) -> str:
@@ -453,6 +474,9 @@ def build_question_contract(
                     rubric_snapshot_path
                 )
             ),
+            "bank_mode": (
+                _rubric_bank_mode()
+            ),
             "name": rubric.get("name"),
             "version": rubric.get(
                 "version"
@@ -616,6 +640,20 @@ def validate_question_contract(
     if not isinstance(rubric, dict):
         raise ValueError(
             "rubric must be a dict"
+        )
+
+    bank_mode = str(
+        rubric.get("bank_mode")
+        or "unspecified"
+    ).strip().lower()
+
+    if bank_mode not in {
+        "legacy",
+        "generated",
+        "unspecified",
+    }:
+        raise ValueError(
+            "Unsupported rubric.bank_mode"
         )
 
     snapshot_hash = str(
@@ -874,7 +912,7 @@ QUESTION_CONTRACT_CACHE_VERSION = (
     "question_contract_cache_v1"
 )
 QUESTION_CONTRACT_CACHE_KEY_VERSION = (
-    "question_contract_cache_key_v1"
+    "question_contract_cache_key_v2"
 )
 
 
@@ -902,6 +940,14 @@ def question_contract_cache_key(
             ),
             "rubric_snapshot_hash": (
                 rubric["snapshot_hash"]
+            ),
+            "rubric_bank_mode": (
+                str(
+                    rubric.get("bank_mode")
+                    or "unspecified"
+                )
+                .strip()
+                .lower()
             ),
         }
     )
@@ -1016,6 +1062,17 @@ def compare_question_contracts(
             ),
         ),
         (
+            "rubric.bank_mode",
+            (
+                cached.get("rubric")
+                or {}
+            ).get("bank_mode"),
+            (
+                candidate.get("rubric")
+                or {}
+            ).get("bank_mode"),
+        ),
+        (
             "rubric.snapshot_hash",
             (
                 cached.get("rubric")
@@ -1118,6 +1175,16 @@ def resolve_question_contract_cache(
             candidate["rubric"][
                 "snapshot_hash"
             ]
+        ),
+        "rubric_bank_mode": (
+            str(
+                candidate["rubric"].get(
+                    "bank_mode"
+                )
+                or "unspecified"
+            )
+            .strip()
+            .lower()
         ),
         "candidate_contract_hash": (
             candidate["contract_hash"]
