@@ -313,3 +313,89 @@ def empty_question_type_coverage(
     )
 
     return coverage
+
+# PLAN_A_GENERIC_DEMAND_AND_LAYER_CONTRACT_V1
+#
+# Generic semantic-grading contract added from the real control-valve
+# regression. It separates explicit numeric demands from design-criteria
+# demands and keeps B completeness distinct from C technical accuracy.
+def _plan_a_generic_demand_and_layer_contract_v1(
+    question_text: str | None,
+) -> str:
+    question = str(question_text or "").strip()
+
+    return (
+        "[계산·설계 기준 요구 및 B/C 역할 분리 계약]\n"
+        f"대상 문제문: {question or '(없음)'}\n\n"
+        "1. '계산하시오', '산정하시오', '구하시오', "
+        "'수치를 도출하시오'처럼 계산 결과가 직접 산출물인 "
+        "경우에만 명시적 수치 계산 요구로 판정한다.\n"
+        "2. '설계 기준을 제시하시오' 또는 "
+        "'선정 기준을 설명하시오'만으로 별도의 수치 계산 요구로 "
+        "자동 변환하지 않는다.\n"
+        "3. calculation_or_interpretation은 관련 물리식, "
+        "힘의 평형식, 변수 관계, 설계 부등식, 선정 방향 또는 "
+        "결과 의미가 있으면 무조건 missing으로 판정하지 않는다. "
+        "식이나 방향은 있으나 조건·최악 조건·전 범위 검증이 "
+        "부족하면 partial로 판정한다.\n"
+        "4. 요구사항을 언급하지 않은 경우는 missing, "
+        "언급했으나 깊이 또는 조건이 부족하면 partial, "
+        "핵심 원리가 반대이면 incorrect로 구분한다.\n"
+        "5. B항목은 명시적 요구사항의 언급·충족과 문제 요구 "
+        "정렬을 평가한다.\n"
+        "6. C항목은 기술적 정확성·Fact 깊이, 물리 모델, "
+        "변수·조건의 타당성을 평가한다.\n"
+        "7. 같은 기술적 약점을 B와 C에서 중복 감점하지 않는다. "
+        "명시적 요구를 다뤘다면 기술 정확성 부족은 주로 C에서 "
+        "평가하고 B에서는 완전 누락처럼 처리하지 않는다."
+    )
+
+
+_ORIGINAL_BUILD_QTYPE_SEMANTIC_GUIDANCE_PLAN_A_V1 = (
+    build_question_type_semantic_guidance
+)
+
+
+def build_question_type_semantic_guidance(
+    question_text: str | None,
+    existing_question_type: str | None = None,
+) -> str:
+    base = (
+        _ORIGINAL_BUILD_QTYPE_SEMANTIC_GUIDANCE_PLAN_A_V1(
+            question_text,
+            existing_question_type,
+        )
+    )
+
+    return (
+        base
+        + "\n\n"
+        + _plan_a_generic_demand_and_layer_contract_v1(
+            question_text
+        )
+    )
+
+
+_ORIGINAL_BUILD_QTYPE_JSON_CONTRACT_PLAN_A_V1 = (
+    build_question_type_json_contract
+)
+
+
+def build_question_type_json_contract(
+    question_text: str | None,
+    existing_question_type: str | None = None,
+) -> str:
+    base = (
+        _ORIGINAL_BUILD_QTYPE_JSON_CONTRACT_PLAN_A_V1(
+            question_text,
+            existing_question_type,
+        )
+    )
+
+    return (
+        base
+        + "\n\n"
+        + _plan_a_generic_demand_and_layer_contract_v1(
+            question_text
+        )
+    )

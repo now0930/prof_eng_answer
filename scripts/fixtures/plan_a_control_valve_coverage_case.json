@@ -1,0 +1,105 @@
+{
+  "case_id": "plan_a_control_valve_design_criteria_coverage",
+  "source_session": "20260718_070722_5960502198",
+  "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "question": "공압식 밸브 선정 시 밸브의 불평형력과 마찰력 개념을 설명하고, Fail-safe 동작 구현을 위한 Spring 설계 기준을 제시하시오.",
+  "answer_evidence": {
+    "force_balance": "Fa + Fs - Fb + F1 - F2 = 0",
+    "spring_relation": "Fs = k × x",
+    "selection_direction": "불평형력과 마찰력을 고려해 공기원 상실 시 요구 방향으로 복귀할 수 있는 Spring 힘을 선정한다.",
+    "known_weaknesses": [
+      "flow direction 설명 부족",
+      "breakaway 및 packing friction 구분 부족",
+      "worst-case sizing 조건 부족",
+      "spring preload와 bench set 설명 부족"
+    ]
+  },
+  "question_type_coverage": {
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "question_type_name": "원리·해석형",
+    "overall_coverage": "adequate",
+    "sub_criteria_coverage": [
+      {
+        "criterion": "principle_mechanism",
+        "status": "partial",
+        "evidence": "불평형력과 마찰력의 기본 원리는 언급했으나 물리적 기전 설명 부족"
+      },
+      {
+        "criterion": "formula_model_variables",
+        "status": "partial",
+        "evidence": "기본적인 힘 평형식은 제시했으나 유효 면적 등 변수 정의가 불완전함"
+      },
+      {
+        "criterion": "calculation_or_interpretation",
+        "status": "missing",
+        "evidence": "실제 사이징 시의 최악 조건 해석 누락"
+      },
+      {
+        "criterion": "result_meaning",
+        "status": "partial",
+        "evidence": "Fail-safe 동작 의미는 설명했으나 힘 평형 결과의 실무적 해석 부족"
+      },
+      {
+        "criterion": "field_judgement",
+        "status": "partial",
+        "evidence": "밸브 선정 시의 구체적 판단 기준 부족"
+      },
+      {
+        "criterion": "answer_structure",
+        "status": "present",
+        "evidence": "개념과 Spring 설계 기준을 구분해 작성함"
+      },
+      {
+        "criterion": "requirement_alignment",
+        "status": "present",
+        "evidence": "명시된 세 가지 요구사항을 모두 언급함"
+      }
+    ],
+    "explicit_requirement_coverage": {
+      "requirements": [
+        {
+          "requirement": "밸브의 불평형력 개념 설명",
+          "status": "present",
+          "evidence": "압력차에 의한 힘으로 설명",
+          "is_core": true
+        },
+        {
+          "requirement": "마찰력 개념 설명",
+          "status": "present",
+          "evidence": "속도 비례 마찰로 설명",
+          "is_core": true
+        },
+        {
+          "requirement": "Fail safe 동작 구현을 위한 Spring 설계 기준 제시",
+          "status": "present",
+          "evidence": "힘 평형식 기반 설계 기준 제시",
+          "is_core": true
+        }
+      ],
+      "source": "question_text",
+      "extraction_confidence": "high"
+    },
+    "missing_sub_criteria": [
+      "calculation_or_interpretation"
+    ],
+    "name_ko": "원리·해석형",
+    "coverage_source": "semantic_grader",
+    "scoring_hint": "C항목의 물리적 해석 깊이와 D항목의 실무적 사이징 기준을 보수적으로 평가할 것"
+  },
+  "verified_semantic_envelope": {
+    "selected_fragments": [
+      "coverage"
+    ],
+    "coverage_metadata": {
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "name_ko": "원리·해석형",
+      "coverage_source": "semantic_grader",
+      "overall_coverage": "adequate",
+      "scoring_hint": "C항목의 물리적 해석 깊이와 D항목의 실무적 사이징 기준을 보수적으로 평가할 것"
+    },
+    "semantic_evaluation_metadata": {},
+    "semantic_parsed_metadata": {},
+    "grade_metadata": {}
+  }
+}

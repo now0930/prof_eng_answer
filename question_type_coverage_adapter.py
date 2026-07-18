@@ -787,3 +787,291 @@ def ensure_grade_question_type_coverage(
             result
         )
     )
+
+# PLAN_A_DESIGN_CRITERIA_COVERAGE_CONSISTENCY_V1
+#
+# Final deterministic trust boundary for semantic coverage. A design-
+# criteria question without an explicit numeric demand must not retain a
+# calculation_or_interpretation=missing contradiction when formula/model
+# evidence and result or field interpretation are already non-missing.
+import re as _plan_a_re
+
+
+_PLAN_A_EXPLICIT_NUMERIC_DEMAND_RE_V1 = _plan_a_re.compile(
+    r"("
+    r"계산\s*하시오|계산하시오|"
+    r"산정\s*하시오|산정하시오|"
+    r"구\s*하시오|구하시오|"
+    r"수치(?:를|값을)?\s*(?:계산|산정|도출)|"
+    r"계산\s*결과"
+    r")",
+    _plan_a_re.IGNORECASE,
+)
+
+_PLAN_A_DESIGN_CRITERIA_DEMAND_RE_V1 = _plan_a_re.compile(
+    r"("
+    r"설계\s*기준(?:을)?\s*(?:제시|설명)|"
+    r"선정\s*기준(?:을)?\s*(?:제시|설명)"
+    r")",
+    _plan_a_re.IGNORECASE,
+)
+
+_PLAN_A_NON_MISSING_STATUSES_V1 = {
+    "present",
+    "partial",
+}
+
+
+def _plan_a_question_text_v1(
+    grade,
+    args,
+    kwargs,
+):
+    explicit = kwargs.get("question_text")
+
+    if isinstance(explicit, str) and explicit.strip():
+        return explicit
+
+    if isinstance(grade, dict):
+        for key in (
+            "question_text",
+            "question",
+            "problem_text",
+            "prompt",
+        ):
+            value = grade.get(key)
+
+            if isinstance(value, str) and value.strip():
+                return value
+
+    for value in args:
+        if isinstance(value, str) and value.strip():
+            return value
+
+    return ""
+
+
+def _plan_a_coverage_blocks_v1(value):
+    seen = set()
+    stack = [value]
+
+    while stack:
+        current = stack.pop()
+        current_id = id(current)
+
+        if current_id in seen:
+            continue
+
+        seen.add(current_id)
+
+        if isinstance(current, dict):
+            rows = current.get("sub_criteria_coverage")
+
+            if (
+                isinstance(rows, list)
+                and any(
+                    isinstance(row, dict)
+                    and row.get("criterion")
+                    == "calculation_or_interpretation"
+                    for row in rows
+                )
+            ):
+                yield current
+
+            stack.extend(current.values())
+
+        elif isinstance(current, list):
+            stack.extend(current)
+
+
+def _plan_a_repair_design_criteria_coverage_v1(
+    grade,
+    question_text,
+):
+    if not isinstance(grade, dict):
+        return grade
+
+    question = str(question_text or "")
+
+    if _PLAN_A_EXPLICIT_NUMERIC_DEMAND_RE_V1.search(
+        question
+    ):
+        return grade
+
+    if not _PLAN_A_DESIGN_CRITERIA_DEMAND_RE_V1.search(
+        question
+    ):
+        return grade
+
+    repaired = False
+
+    for coverage in _plan_a_coverage_blocks_v1(grade):
+        rows = coverage.get("sub_criteria_coverage") or []
+        by_name = {
+            str(row.get("criterion")): row
+            for row in rows
+            if isinstance(row, dict)
+        }
+
+        target = by_name.get(
+            "calculation_or_interpretation"
+        )
+
+        if not isinstance(target, dict):
+            continue
+
+        target_status = str(
+            target.get("status") or ""
+        ).strip().lower()
+
+        if target_status != "missing":
+            continue
+
+        formula_status = str(
+            (
+                by_name.get("formula_model_variables")
+                or {}
+            ).get("status")
+            or ""
+        ).strip().lower()
+
+        result_status = str(
+            (
+                by_name.get("result_meaning")
+                or {}
+            ).get("status")
+            or ""
+        ).strip().lower()
+
+        field_status = str(
+            (
+                by_name.get("field_judgement")
+                or {}
+            ).get("status")
+            or ""
+        ).strip().lower()
+
+        if (
+            formula_status
+            not in _PLAN_A_NON_MISSING_STATUSES_V1
+        ):
+            continue
+
+        if (
+            result_status
+            not in _PLAN_A_NON_MISSING_STATUSES_V1
+            and field_status
+            not in _PLAN_A_NON_MISSING_STATUSES_V1
+        ):
+            continue
+
+        target["status"] = "partial"
+        target["evidence"] = (
+            "관련 식·모델과 설계 방향은 제시했으나 "
+            "계산 조건, 최악 조건 또는 전 범위 검증이 부족함"
+        )
+        target["impact"] = (
+            "명시적 요구의 완전 누락이 아니라 C/D항목의 "
+            "기술적 깊이 부족으로 평가"
+        )
+
+        coverage["missing_sub_criteria"] = [
+            str(row.get("criterion"))
+            for row in rows
+            if (
+                isinstance(row, dict)
+                and str(
+                    row.get("status") or ""
+                ).strip().lower()
+                == "missing"
+                and row.get("criterion")
+            )
+        ]
+
+        coverage["partial_sub_criteria"] = [
+            str(row.get("criterion"))
+            for row in rows
+            if (
+                isinstance(row, dict)
+                and str(
+                    row.get("status") or ""
+                ).strip().lower()
+                == "partial"
+                and row.get("criterion")
+            )
+        ]
+
+        repaired = True
+
+    if repaired:
+        grade = (
+            _apply_incorrect_requirement_status_contract_v3(
+                grade
+            )
+        )
+
+    return grade
+
+
+_ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PLAN_A_V1 = (
+    ensure_grade_question_type_coverage
+)
+
+
+def ensure_grade_question_type_coverage(
+    *args,
+    **kwargs,
+):
+    result = (
+        _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PLAN_A_V1(
+            *args,
+            **kwargs,
+        )
+    )
+    question_text = _plan_a_question_text_v1(
+        result,
+        args,
+        kwargs,
+    )
+
+    return _plan_a_repair_design_criteria_coverage_v1(
+        result,
+        question_text,
+    )
+
+
+_ORIGINAL_ATTACH_QTYPE_COVERAGE_PLAN_A_V1 = (
+    attach_question_type_coverage_feedback
+)
+
+
+# PLAN_A_ATTACH_QUESTION_TEXT_COMPATIBILITY_V1
+def attach_question_type_coverage_feedback(
+    *args,
+    **kwargs,
+):
+    forwarded_kwargs = dict(kwargs)
+    explicit_question_text = forwarded_kwargs.pop(
+        "question_text",
+        None,
+    )
+
+    result = (
+        _ORIGINAL_ATTACH_QTYPE_COVERAGE_PLAN_A_V1(
+            *args,
+            **forwarded_kwargs,
+        )
+    )
+
+    question_text = _plan_a_question_text_v1(
+        result,
+        args,
+        {
+            "question_text": explicit_question_text,
+        },
+    )
+
+    return _plan_a_repair_design_criteria_coverage_v1(
+        result,
+        question_text,
+    )
