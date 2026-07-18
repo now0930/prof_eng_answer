@@ -1,0 +1,182 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "expert_calibration_record_v1.schema.json",
+  "title": "Expert Calibration Record v1",
+  "description": "Offline expert grading record. Python contract validation remains authoritative.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "version",
+    "record_id",
+    "question_text",
+    "answer_text",
+    "question_hash",
+    "submission_hash",
+    "topic_id",
+    "question_type",
+    "rubric_snapshot_hash",
+    "model_total_score",
+    "model_breakdown",
+    "expert_total_score",
+    "expert_breakdown",
+    "reviewer_id",
+    "reviewed_at",
+    "review_method",
+    "adjudication_status",
+    "notes",
+    "score_effect",
+    "direct_score_application",
+    "record_hash"
+  ],
+  "properties": {
+    "version": {
+      "const": "expert_calibration_record_v1"
+    },
+    "record_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "answer_text": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question_hash": {
+      "$ref": "#/$defs/sha256"
+    },
+    "submission_hash": {
+      "$ref": "#/$defs/sha256"
+    },
+    "topic_id": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question_type": {
+      "type": "string",
+      "minLength": 1
+    },
+    "rubric_snapshot_hash": {
+      "$ref": "#/$defs/sha256"
+    },
+    "model_total_score": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 25
+    },
+    "model_breakdown": {
+      "$ref": "#/$defs/breakdown"
+    },
+    "expert_total_score": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 25
+        }
+      ]
+    },
+    "expert_breakdown": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "$ref": "#/$defs/breakdown"
+        }
+      ]
+    },
+    "reviewer_id": {
+      "type": "string"
+    },
+    "reviewed_at": {
+      "oneOf": [
+        {
+          "type": "null"
+        },
+        {
+          "type": "string",
+          "format": "date-time"
+        }
+      ]
+    },
+    "review_method": {
+      "enum": [
+        "pending",
+        "single_expert",
+        "dual_expert",
+        "panel_adjudication",
+        "official_exam_score"
+      ]
+    },
+    "adjudication_status": {
+      "enum": [
+        "draft",
+        "reviewed",
+        "adjudicated",
+        "excluded"
+      ]
+    },
+    "notes": {
+      "type": "string"
+    },
+    "score_effect": {
+      "const": "none"
+    },
+    "direct_score_application": {
+      "const": false
+    },
+    "record_hash": {
+      "$ref": "#/$defs/sha256"
+    }
+  },
+  "$defs": {
+    "sha256": {
+      "type": "string",
+      "pattern": "^[0-9a-f]{64}$"
+    },
+    "breakdown": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "A",
+        "B",
+        "C",
+        "D",
+        "E"
+      ],
+      "properties": {
+        "A": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 3
+        },
+        "B": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "C": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 8
+        },
+        "D": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 6
+        },
+        "E": {
+          "type": "number",
+          "minimum": 0,
+          "maximum": 2
+        }
+      }
+    }
+  }
+}
