@@ -1047,9 +1047,64 @@ layer_issue_ownership는 별도 점수체계가 아니라 같은 issue의 중복
 """.strip()
 
 
+_PLAN_C_DEPTH_VS_ERROR_CONTRACT_V1 = "\n".join(
+    (
+        "[PLAN_C_DEPTH_VS_ERROR_CALIBRATION_V1]",
+        "",
+        "C 계층의 correctness와 depth를 반드시 분리한다.",
+        "",
+        "1. correctness_error",
+        "- 정의, 부호, 공식, 단위, 인과관계 또는 물리 모델이 틀린 경우이다.",
+        "- 실제 오류 문장과 올바른 기준을 evidence에 제시한다.",
+        "- major/fatal은 핵심 결론을 무효화할 때만 사용한다.",
+        "",
+        "2. depth_gap",
+        "- 핵심 정의·원리·변수·방향·해석은 정확하지만 상세 유도,",
+        "  고급 모델, 추가 도식 또는 수치 예시가 부족한 경우이다.",
+        "- depth_gap은 incorrect가 아니며 severity는 partial 또는 minor이다.",
+        "",
+        "3. advanced_detail_missing",
+        "- 명시적으로 요구되지 않은 고급 유도식·정량 예시는",
+        "  고득점 보강 요소이며 핵심 오류의 근거가 아니다.",
+        "",
+        "layer_issue_ownership 각 항목에 다음 필드를 추가한다.",
+        '"issue_type": "correctness_error | depth_gap | advanced_detail_missing",',
+        '"severity": "none | partial | minor | major | fatal",',
+        '"invalidates_core_conclusion": false',
+        "",
+        "'핵심 이론 오류' 표현은 evidence가 있는 major/fatal",
+        "correctness_error에서만 허용한다.",
+    )
+)
+
 def build_gemini_grading_prompt(*args, **kwargs):
-    base_prompt = _PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1(*args, **kwargs)
-    marker = "[PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]"
-    if marker in base_prompt:
-        return base_prompt
-    return base_prompt + "\n\n" + _plan_b_general_layer_ownership_prompt_v1()
+    base_prompt = (
+        _PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1(
+            *args,
+            **kwargs,
+        )
+    )
+
+    plan_b_marker = (
+        "[PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]"
+    )
+
+    if plan_b_marker not in base_prompt:
+        base_prompt = (
+            base_prompt
+            + "\n\n"
+            + _plan_b_general_layer_ownership_prompt_v1()
+        )
+
+    plan_c_marker = (
+        "[PLAN_C_DEPTH_VS_ERROR_CALIBRATION_V1]"
+    )
+
+    if plan_c_marker not in base_prompt:
+        base_prompt = (
+            base_prompt
+            + "\n\n"
+            + _PLAN_C_DEPTH_VS_ERROR_CONTRACT_V1
+        )
+
+    return base_prompt

@@ -368,8 +368,133 @@ def _fallback_section_basis(payload: dict[str, Any]) -> list[str]:
     return result[:5]
 
 
+# PLAN_C_VERDICT_CONSISTENCY_V1
+
+
+def _plan_c_has_major_or_fatal_correctness_error(
+    value,
+    seen=None,
+):
+    if seen is None:
+        seen = set()
+
+    identity = id(value)
+
+    if identity in seen:
+        return False
+
+    seen.add(identity)
+
+    if isinstance(value, dict):
+        issue_type = str(
+            value.get("issue_type") or ""
+        ).strip().lower()
+        severity = str(
+            value.get("severity") or ""
+        ).strip().lower()
+
+        if (
+            issue_type == "correctness_error"
+            and severity in {"major", "fatal"}
+        ):
+            return True
+
+        if value.get("fatal") is True:
+            return True
+
+        if value.get("fatal_error_detected") is True:
+            return True
+
+        if value.get("blocks_originality") is True:
+            return True
+
+        return any(
+            _plan_c_has_major_or_fatal_correctness_error(
+                child,
+                seen,
+            )
+            for child in value.values()
+        )
+
+    if isinstance(value, (list, tuple)):
+        return any(
+            _plan_c_has_major_or_fatal_correctness_error(
+                child,
+                seen,
+            )
+            for child in value
+        )
+
+    return False
+
+
+def _plan_c_sanitize_unverified_core_error(
+    value,
+    payload,
+):
+    if _plan_c_has_major_or_fatal_correctness_error(
+        payload
+    ):
+        return value
+
+    replacement = (
+        "핵심 이론은 정확하나 상세 해석 보완 필요"
+    )
+
+    if isinstance(value, str):
+        return (
+            value
+            .replace(
+                "THEORY_CORE 핵심 이론 오류 cap 적용",
+                replacement,
+            )
+            .replace(
+                "THEORY_CORE 핵심 이론 오류",
+                replacement,
+            )
+            .replace(
+                "핵심 이론 오류",
+                replacement,
+            )
+        )
+
+    if isinstance(value, list):
+        return [
+            _plan_c_sanitize_unverified_core_error(
+                child,
+                payload,
+            )
+            for child in value
+        ]
+
+    if isinstance(value, tuple):
+        return tuple(
+            _plan_c_sanitize_unverified_core_error(
+                child,
+                payload,
+            )
+            for child in value
+        )
+
+    if isinstance(value, dict):
+        return {
+            key: _plan_c_sanitize_unverified_core_error(
+                child,
+                payload,
+            )
+            for key, child in value.items()
+        }
+
+    return value
+
 def _normalise_summary(llm_obj: dict[str, Any] | None, payload: dict[str, Any]) -> dict[str, Any]:
     llm_obj = llm_obj if isinstance(llm_obj, dict) else {}
+    llm_obj = (
+        _plan_c_sanitize_unverified_core_error(
+            llm_obj,
+            payload,
+        )
+    )
 
     fatal = bool((payload.get("logic_check") or {}).get("fatal"))
 
@@ -487,6 +612,12 @@ def _build_prompt(payload: dict[str, Any]) -> str:
 
 def _render(summary: dict[str, Any], payload: dict[str, Any]) -> str:
     score = payload["score"]
+    summary = (
+        _plan_c_sanitize_unverified_core_error(
+            summary,
+            payload,
+        )
+    )
 
     # FINAL_FATAL_RENDER_PRECEDENCE
     # _render is the final trust boundary and may also be called directly by

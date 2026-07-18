@@ -1608,33 +1608,626 @@ def _phase2_layer_scores(text, scoring_model):
     return result
 
 
-def _phase2_apply_caps(layer_scores, volume):
-    total_before = round(sum(float(x.get("score", 0)) for x in layer_scores), 2)
+# PLAN_C_TOPIC_AWARE_FACT_CAP_POLICY_V1
+
+def _plan_c_severity_rank(value):
+    return {
+        "none": 0,
+        "info": 0,
+        "partial": 1,
+        "minor": 2,
+        "major": 3,
+        "fatal": 4,
+    }.get(
+        str(value or "none").strip().lower(),
+        4,
+    )
+
+def _plan_c_load_topic_policy(topic_id):
+    if not isinstance(topic_id, str) or not topic_id:
+        return {
+            "topic_id": topic_id,
+            "difficulty": None,
+            "selection_importance": None,
+            "source": "unresolved",
+            "resolved": False,
+        }
+
+    import json
+    from pathlib import Path
+
+    repo_root = Path(__file__).resolve().parent
+    paths = (
+        repo_root
+        / "rubrics"
+        / "generated"
+        / "topic_importance.generated.json",
+        repo_root
+        / "rubrics"
+        / "topic_importance"
+        / "industrial_instrumentation_control.json",
+    )
+
+    for path in paths:
+        if not path.is_file():
+            continue
+
+        try:
+            data = json.loads(
+                path.read_text(encoding="utf-8")
+            )
+        except (
+            OSError,
+            UnicodeError,
+            json.JSONDecodeError,
+        ):
+            continue
+
+        rows = (
+            data.get("topics")
+            if isinstance(data, dict)
+            else None
+        )
+
+        if not isinstance(rows, list):
+            continue
+
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+
+            if row.get("topic_id") != topic_id:
+                continue
+
+            return {
+                "topic_id": topic_id,
+                "difficulty": row.get("difficulty"),
+                "selection_importance": row.get(
+                    "selection_importance"
+                ),
+                "source": str(
+                    path.relative_to(repo_root)
+                ),
+                "resolved": True,
+            }
+
+    return {
+        "topic_id": topic_id,
+        "difficulty": None,
+        "selection_importance": None,
+        "source": "unresolved",
+        "resolved": False,
+    }
+
+def _plan_c_is_must_prepare_control_theory(policy):
+    if not isinstance(policy, dict):
+        return False
+
+    return (
+        str(
+            policy.get("difficulty") or ""
+        ).strip().upper()
+        == "THEORY_CORE"
+        and str(
+            policy.get("selection_importance")
+            or ""
+        ).strip().upper()
+        == "CORE_MUST_PREPARE"
+    )
+
+def _plan_c_semantic_calibration_from_eval(
+    gemini_eval,
+):
+    parsed = (
+        gemini_eval.get("parsed")
+        if isinstance(gemini_eval, dict)
+        else None
+    )
+
+    if not isinstance(parsed, dict):
+        parsed = {}
+
+    coverage = parsed.get(
+        "question_type_coverage"
+    )
+
+    if not isinstance(coverage, dict):
+        coverage = {}
+
+    criteria = coverage.get(
+        "sub_criteria_coverage"
+    )
+
+    if not isinstance(criteria, list):
+        criteria = []
+
+    incorrect_count = 0
+    missing_count = 0
+
+    for row in criteria:
+        if not isinstance(row, dict):
+            continue
+
+        status = str(
+            row.get("status") or ""
+        ).strip().lower()
+
+        if status == "incorrect":
+            incorrect_count += 1
+        elif status == "missing":
+            missing_count += 1
+
+    explicit = coverage.get(
+        "explicit_requirement_coverage"
+    )
+
+    if not isinstance(explicit, dict):
+        explicit = {}
+
+    requirements = explicit.get("requirements")
+
+    if not isinstance(requirements, list):
+        requirements = []
+
+    explicit_core_incorrect = 0
+    explicit_core_missing = 0
+
+    for row in requirements:
+        if not isinstance(row, dict):
+            continue
+
+        if row.get("is_core") is not True:
+            continue
+
+        status = str(
+            row.get("status") or ""
+        ).strip().lower()
+
+        if status == "incorrect":
+            explicit_core_incorrect += 1
+        elif status == "missing":
+            explicit_core_missing += 1
+
+    semantic_c_score = 0.0
+    semantic_c_max = 8.0
+
+    for row in parsed.get("layers") or []:
+        if not isinstance(row, dict):
+            continue
+
+        if str(row.get("layer_id")) != "C":
+            continue
+
+        try:
+            semantic_c_score = float(
+                row.get("score") or 0.0
+            )
+            semantic_c_max = float(
+                row.get("max") or 8.0
+            )
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+        ):
+            semantic_c_score = 0.0
+            semantic_c_max = 8.0
+
+    max_c_severity_rank = 0
+    has_major_or_fatal_correctness_error = False
+    issue_rows = []
+
+    for row in parsed.get(
+        "layer_issue_ownership"
+    ) or []:
+        if not isinstance(row, dict):
+            continue
+
+        owner = str(
+            row.get("primary_owner_layer") or ""
+        ).strip().upper()
+
+        if owner != "C":
+            continue
+
+        issue_type = str(
+            row.get("issue_type") or ""
+        ).strip().lower()
+        severity = str(
+            row.get("severity") or "none"
+        ).strip().lower()
+        rank = _plan_c_severity_rank(
+            severity
+        )
+
+        max_c_severity_rank = max(
+            max_c_severity_rank,
+            rank,
+        )
+
+        if (
+            rank >= _plan_c_severity_rank("major")
+            and issue_type
+            in {
+                "",
+                "correctness_error",
+            }
+        ):
+            has_major_or_fatal_correctness_error = True
+
+        issue_rows.append(
+            {
+                "issue_id": row.get("issue_id"),
+                "issue_type": (
+                    issue_type or "depth_gap"
+                ),
+                "severity": severity,
+                "reason": row.get("reason"),
+            }
+        )
+
+    semantic_c_ratio = (
+        semantic_c_score / semantic_c_max
+        if semantic_c_max > 0
+        else 0.0
+    )
+    overall_coverage = str(
+        coverage.get("overall_coverage") or ""
+    ).strip().lower()
+
+    semantic_quality_ok = (
+        overall_coverage == "strong"
+        and semantic_c_ratio >= 0.75
+        and incorrect_count == 0
+        and missing_count == 0
+        and explicit_core_incorrect == 0
+        and explicit_core_missing == 0
+        and max_c_severity_rank
+        <= _plan_c_severity_rank("minor")
+        and not has_major_or_fatal_correctness_error
+    )
+
+    return {
+        "version": (
+            "plan_c_topic_aware_fact_cap_v1"
+        ),
+        "overall_coverage": overall_coverage,
+        "semantic_c_score": round(
+            semantic_c_score,
+            4,
+        ),
+        "semantic_c_max": round(
+            semantic_c_max,
+            4,
+        ),
+        "semantic_c_ratio": round(
+            semantic_c_ratio,
+            6,
+        ),
+        "incorrect_count": incorrect_count,
+        "missing_count": missing_count,
+        "explicit_core_incorrect": (
+            explicit_core_incorrect
+        ),
+        "explicit_core_missing": (
+            explicit_core_missing
+        ),
+        "max_c_severity_rank": (
+            max_c_severity_rank
+        ),
+        "has_major_or_fatal_correctness_error": (
+            has_major_or_fatal_correctness_error
+        ),
+        "semantic_quality_ok": semantic_quality_ok,
+        "issue_rows": issue_rows,
+    }
+
+def _plan_c_cap_policy_decision(
+    topic_policy,
+    semantic_calibration,
+):
+    policy = (
+        dict(topic_policy)
+        if isinstance(topic_policy, dict)
+        else {}
+    )
+    calibration = (
+        dict(semantic_calibration)
+        if isinstance(
+            semantic_calibration,
+            dict,
+        )
+        else {}
+    )
+
+    must_prepare_control_theory = (
+        _plan_c_is_must_prepare_control_theory(
+            policy
+        )
+    )
+
+    if must_prepare_control_theory:
+        mode = "hard"
+        reason = (
+            "CORE_MUST_PREPARE와 THEORY_CORE가 "
+            "동시에 확인되어 C 정확성을 D/E "
+            "고득점의 전제로 유지함."
+        )
+    elif policy.get("resolved") is not True:
+        mode = "hard"
+        reason = (
+            "Topic importance 분류가 확인되지 않아 "
+            "보수적으로 기존 hard cap을 유지함."
+        )
+    elif calibration.get(
+        "semantic_quality_ok"
+    ) is not True:
+        mode = "hard"
+        reason = (
+            "semantic C 정확성·완전성 조건을 "
+            "충족하지 않아 기존 hard cap을 유지함."
+        )
+    else:
+        mode = "soft"
+        reason = (
+            "필수 준비 제어이론이 아닌 주제이며 "
+            "semantic C 정확성·완전성이 확인되어 "
+            "D/E Fact 의존 상한을 soft cap으로 완화함."
+        )
+
+    return {
+        "version": (
+            "plan_c_topic_aware_fact_cap_policy_v1"
+        ),
+        "mode": mode,
+        "reason": reason,
+        "topic_id": policy.get("topic_id"),
+        "difficulty": policy.get("difficulty"),
+        "selection_importance": policy.get(
+            "selection_importance"
+        ),
+        "topic_policy_source": policy.get(
+            "source"
+        ),
+        "topic_policy_resolved": (
+            policy.get("resolved") is True
+        ),
+        "must_prepare_control_theory": (
+            must_prepare_control_theory
+        ),
+        "semantic_quality_ok": (
+            calibration.get(
+                "semantic_quality_ok"
+            )
+            is True
+        ),
+        "semantic_c_ratio": calibration.get(
+            "semantic_c_ratio"
+        ),
+    }
+
+def _plan_c_layer_maximum(row, layer_id):
+    if isinstance(row, dict):
+        for key in (
+            "max",
+            "max_score",
+            "maximum",
+        ):
+            try:
+                value = float(row.get(key))
+
+                if value > 0:
+                    return value
+            except (
+                TypeError,
+                ValueError,
+                OverflowError,
+            ):
+                pass
+
+    return {
+        "A": 3.0,
+        "B": 6.0,
+        "C": 8.0,
+        "D": 6.0,
+        "E": 2.0,
+    }.get(layer_id, 0.0)
+
+def _plan_c_apply_topic_aware_soft_cap(
+    layer_rows,
+    cap_records,
+    decision,
+    semantic_calibration,
+):
+    if not isinstance(layer_rows, list):
+        return False
+
+    if not isinstance(decision, dict):
+        return False
+
+    if decision.get("mode") != "soft":
+        return False
+
+    if not cap_records:
+        return False
+
+    try:
+        semantic_ratio = float(
+            semantic_calibration.get(
+                "semantic_c_ratio"
+            )
+            or 0.0
+        )
+    except (
+        TypeError,
+        ValueError,
+        OverflowError,
+    ):
+        return False
+
+    semantic_ratio = max(
+        0.75,
+        min(1.0, semantic_ratio),
+    )
+    by_id = {
+        str(row.get("layer_id")): row
+        for row in layer_rows
+        if isinstance(row, dict)
+    }
+    changed = False
+    soft_caps = {}
+
+    for layer_id in ("D", "E"):
+        row = by_id.get(layer_id)
+
+        if not isinstance(row, dict):
+            continue
+
+        try:
+            current_score = float(
+                row.get("score") or 0.0
+            )
+            pre_cap_score = float(
+                row.get("score_before_fact_cap")
+            )
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+        ):
+            continue
+
+        maximum = _plan_c_layer_maximum(
+            row,
+            layer_id,
+        )
+        soft_cap = round(
+            maximum * semantic_ratio,
+            2,
+        )
+        restored_score = round(
+            min(
+                pre_cap_score,
+                max(
+                    current_score,
+                    soft_cap,
+                ),
+            ),
+            2,
+        )
+
+        soft_caps[layer_id] = soft_cap
+
+        if restored_score > current_score:
+            row["score"] = restored_score
+            row["fact_dependency_cap_mode"] = (
+                "topic_aware_soft"
+            )
+            row["fact_dependency_soft_cap"] = (
+                soft_cap
+            )
+            row[
+                "fact_dependency_semantic_c_ratio"
+            ] = round(
+                semantic_ratio,
+                6,
+            )
+            changed = True
+
+    if not changed:
+        return False
+
+    for record in cap_records:
+        record.update(
+            {
+                "id": (
+                    "fact_topic_aware_soft_limits_"
+                    "solution_and_connection"
+                ),
+                "mode": "soft",
+                "reason": decision.get("reason"),
+                "topic_cap_policy": dict(
+                    decision
+                ),
+                "semantic_c_score": (
+                    semantic_calibration.get(
+                        "semantic_c_score"
+                    )
+                ),
+                "semantic_c_max": (
+                    semantic_calibration.get(
+                        "semantic_c_max"
+                    )
+                ),
+                "semantic_c_ratio": round(
+                    semantic_ratio,
+                    6,
+                ),
+                "d_cap": soft_caps.get("D"),
+                "e_cap": soft_caps.get("E"),
+                "correctness_error": False,
+            }
+        )
+
+    return True
+
+def _phase2_apply_caps(
+    layer_scores,
+    volume,
+    topic_cap_context=None,
+):
+    total_before = round(
+        sum(
+            float(x.get("score", 0))
+            for x in layer_scores
+        ),
+        2,
+    )
     cap = volume.get("cap")
 
     applied = []
     total_after = total_before
 
     if cap is not None and total_before > cap:
-        scale = cap / total_before if total_before > 0 else 0
+        scale = (
+            cap / total_before
+            if total_before > 0
+            else 0
+        )
+
         for x in layer_scores:
             x["score_before_cap"] = x["score"]
-            x["score"] = round(float(x["score"]) * scale, 2)
-        total_after = round(sum(float(x.get("score", 0)) for x in layer_scores), 2)
-        applied.append({
-            "id": volume.get("level"),
-            "cap": cap,
-            "reason": volume.get("reason")
-        })
+            x["score"] = round(
+                float(x["score"]) * scale,
+                2,
+            )
 
-    # Fact(C)가 낮으면 대책(D), 연결성(E)을 제한한다.
-    by_id = {x.get("layer_id"): x for x in layer_scores}
+        total_after = round(
+            sum(
+                float(x.get("score", 0))
+                for x in layer_scores
+            ),
+            2,
+        )
+        applied.append(
+            {
+                "id": volume.get("level"),
+                "cap": cap,
+                "reason": volume.get("reason"),
+            }
+        )
+
+    by_id = {
+        x.get("layer_id"): x
+        for x in layer_scores
+    }
     c = by_id.get("C")
     d = by_id.get("D")
     e = by_id.get("E")
 
     if c and d and e:
         c_score = float(c.get("score", 0))
+
         if c_score < 3.0:
             d_cap, e_cap = 2.0, 0.5
         elif c_score < 5.0:
@@ -1646,20 +2239,82 @@ def _phase2_apply_caps(layer_scores, volume):
 
         if d_cap is not None:
             if float(d.get("score", 0)) > d_cap:
-                d["score_before_fact_cap"] = d["score"]
+                d["score_before_fact_cap"] = (
+                    d["score"]
+                )
                 d["score"] = d_cap
+
             if float(e.get("score", 0)) > e_cap:
-                e["score_before_fact_cap"] = e["score"]
+                e["score_before_fact_cap"] = (
+                    e["score"]
+                )
                 e["score"] = e_cap
-            applied.append({
-                "id": "fact_score_limits_solution_and_connection",
-                "reason": "Fact 기반 설명 점수가 낮아 대책 및 연결성 점수 상한을 적용함.",
+
+            cap_record = {
+                "id": (
+                    "fact_score_limits_"
+                    "solution_and_connection"
+                ),
+                "reason": (
+                    "Fact 기반 설명 점수가 낮아 "
+                    "대책 및 연결성 점수 상한을 적용함."
+                ),
                 "c_score": c_score,
                 "d_cap": d_cap,
-                "e_cap": e_cap
-            })
+                "e_cap": e_cap,
+                "mode": "hard",
+            }
+            context = (
+                topic_cap_context
+                if isinstance(
+                    topic_cap_context,
+                    dict,
+                )
+                else {}
+            )
+            decision = (
+                context.get("decision")
+                if isinstance(
+                    context.get("decision"),
+                    dict,
+                )
+                else {}
+            )
+            semantic_calibration = (
+                context.get(
+                    "semantic_calibration"
+                )
+                if isinstance(
+                    context.get(
+                        "semantic_calibration"
+                    ),
+                    dict,
+                )
+                else {}
+            )
 
-    total_after = round(sum(float(x.get("score", 0)) for x in layer_scores), 2)
+            if decision.get("mode") == "soft":
+                _plan_c_apply_topic_aware_soft_cap(
+                    layer_scores,
+                    [cap_record],
+                    decision,
+                    semantic_calibration,
+                )
+            else:
+                cap_record[
+                    "topic_cap_policy"
+                ] = dict(decision)
+
+            applied.append(cap_record)
+
+    total_after = round(
+        sum(
+            float(x.get("score", 0))
+            for x in layer_scores
+        ),
+        2,
+    )
+
     return total_before, total_after, applied
 
 
@@ -3838,7 +4493,45 @@ def _phase2_postprocess_grade(legacy_result):
         volume=volume
     )
 
-    total_before_cap, total_after_cap, applied_caps = _phase2_apply_caps(layer_scores, volume)
+    topic_cap_topic_id = (
+        _phase2_resolve_difficulty_topic_id(
+            fact_eval,
+            model_answer_ref,
+        )
+    )
+    topic_cap_policy = (
+        _plan_c_load_topic_policy(
+            topic_cap_topic_id
+        )
+    )
+    topic_cap_semantic_calibration = (
+        _plan_c_semantic_calibration_from_eval(
+            gemini_eval
+        )
+    )
+    topic_cap_decision = (
+        _plan_c_cap_policy_decision(
+            topic_cap_policy,
+            topic_cap_semantic_calibration,
+        )
+    )
+    topic_cap_context = {
+        "topic_policy": topic_cap_policy,
+        "semantic_calibration": (
+            topic_cap_semantic_calibration
+        ),
+        "decision": topic_cap_decision,
+    }
+
+    (
+        total_before_cap,
+        total_after_cap,
+        applied_caps,
+    ) = _phase2_apply_caps(
+        layer_scores,
+        volume,
+        topic_cap_context,
+    )
 
     max_score = float(scoring_model.get("total_points", 25))
     total_score = round(total_after_cap, 2)
@@ -3901,6 +4594,7 @@ def _phase2_postprocess_grade(legacy_result):
         "originality_evaluation": originality_eval,
         "total_before_cap": total_before_cap,
         "applied_caps": applied_caps,
+        "topic_aware_fact_cap_policy": topic_cap_decision,
         "breakdown": layer_scores,
         "rater_results": _phase2_make_rater_results(total_score, max_score, raters),
         "strengths": [
