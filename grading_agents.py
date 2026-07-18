@@ -3982,7 +3982,52 @@ def _phase2_postprocess_grade(legacy_result):
     except Exception as e:
         print(f"[agent] phase3b logic check failed: {e!r}")
 
+    # Diagnostic-only formula validation runs
+    # after precise Logic Check topic routing.
+    try:
+        from control_valve_formula_checker import (
+            attach_control_valve_formula_check,
+        )
 
+        grade = attach_control_valve_formula_check(
+            grade,
+            answer_text,
+        )
+        formula_eval = grade.get(
+            "formula_check_evaluation"
+        )
+
+        if isinstance(formula_eval, dict):
+            print(
+                "[agent] control-valve formula "
+                "check applied: "
+                f"applicable="
+                f"{formula_eval.get('applicable')}, "
+                f"verdict="
+                f"{formula_eval.get('verdict')}, "
+                f"major="
+                f"{formula_eval.get('major_error_detected')}"
+            )
+
+            try:
+                _phase2_json_write(
+                    session_dir
+                    / "formula_check_evaluation.json",
+                    formula_eval,
+                )
+            except Exception as write_error:
+                report(
+                    "[agent] formula check "
+                    "persistence failed: "
+                    f"{write_error!r}"
+                )
+
+    except Exception as formula_error:
+        report(
+            "[agent] control-valve formula "
+            "check failed: "
+            f"{formula_error!r}"
+        )
 
     grade = _phase15_hide_internal_metric_dict(grade)
     grade = _phase16_polish_final_output(grade)
