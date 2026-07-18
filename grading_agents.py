@@ -3737,6 +3737,7 @@ def _phase2_postprocess_grade(legacy_result):
         build_question_contract,
         load_question_contract,
         persist_question_contract,
+        resolve_question_contract_cache,
     )
 
     question_contract = build_question_contract(
@@ -3749,6 +3750,17 @@ def _phase2_postprocess_grade(legacy_result):
             / "subject_rubric_snapshot.json"
         ),
         subject_rubric=subject_rubric,
+    )
+
+    question_contract = (
+        resolve_question_contract_cache(
+            question_contract,
+            cache_dir=(
+                BASE_DIR
+                / "data"
+                / "question_contract_cache"
+            ),
+        )
     )
 
     persist_question_contract(
@@ -3865,6 +3877,21 @@ def _phase2_postprocess_grade(legacy_result):
         "answer_text_stats": _phase2_text_stats(answer_text),
         "grading_identity": grading_identity_dict,
         "question_contract": question_contract,
+        "question_contract_cache": (
+            question_contract.get(
+                "cache"
+            )
+            or {}
+        ),
+        "question_contract_deviation_warning": (
+            (
+                question_contract.get(
+                    "cache"
+                )
+                or {}
+            ).get("warning")
+            or None
+        ),
         "fact_anchor_evaluation": fact_eval,
         "connection_evaluation": connection_eval,
         "interview_followup": interview_followup,

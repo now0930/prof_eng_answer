@@ -647,6 +647,550 @@ class QuestionContractIntegrationTests(
         )
 
 
+class QuestionContractCacheTests(
+    unittest.TestCase
+):
+    @staticmethod
+    def _identity(
+        answer: str = "답안",
+    ) -> dict:
+        return build_grading_identity(
+            "동일한 문제",
+            answer,
+        ).to_dict()
+
+    @staticmethod
+    def _qtype(
+        question_type: str,
+        *,
+        confidence: str = "high",
+        status: str = "locked",
+        locked: bool = True,
+        source: str = (
+            "deterministic_question_router"
+        ),
+    ) -> dict:
+        return {
+            "question_type": question_type,
+            "primary_type": {
+                "id": question_type,
+            },
+            "confidence": confidence,
+            "status": status,
+            "question_type_locked": locked,
+            "source": source,
+            "matched_rules": [
+                "focused_test"
+            ],
+        }
+
+    def _build(
+        self,
+        *,
+        root: Path,
+        question_type: str = (
+            "PRINCIPLE_INTERPRETATION"
+        ),
+        answer: str = "답안",
+        rubric_version: str = "v1",
+        confidence: str = "high",
+        status: str = "locked",
+        locked: bool = True,
+        source: str = (
+            "deterministic_question_router"
+        ),
+    ) -> dict:
+        from question_contract import (
+            build_question_contract,
+        )
+
+        rubric = {
+            "name": "cache test rubric",
+            "version": rubric_version,
+            "question_type_profile": (
+                "rubrics/cache_test.json"
+            ),
+        }
+        rubric_path = (
+            root
+            / (
+                "subject_rubric_"
+                + rubric_version
+                + ".json"
+            )
+        )
+        rubric_path.write_text(
+            json.dumps(
+                rubric,
+                ensure_ascii=False,
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+
+        return build_question_contract(
+            grading_identity=self._identity(
+                answer
+            ),
+            question_type_evaluation=(
+                self._qtype(
+                    question_type,
+                    confidence=confidence,
+                    status=status,
+                    locked=locked,
+                    source=source,
+                )
+            ),
+            fact_evaluation={
+                "topic_id": TARGET_TOPIC,
+            },
+            model_answer_reference={
+                "matched": True,
+                "primary_reference": {
+                    "topic_id": TARGET_TOPIC,
+                },
+            },
+            rubric_snapshot_path=(
+                rubric_path
+            ),
+            subject_rubric=rubric,
+        )
+
+    def test_cache_key_ignores_answer_and_tracks_rubric(
+        self,
+    ):
+        from question_contract import (
+            question_contract_cache_key,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+
+            first = self._build(
+                root=root,
+                answer="첫 답안",
+                rubric_version="v1",
+            )
+            second = self._build(
+                root=root,
+                answer="다른 답안",
+                rubric_version="v1",
+            )
+            changed_rubric = self._build(
+                root=root,
+                answer="첫 답안",
+                rubric_version="v2",
+            )
+
+            self.assertEqual(
+                first[
+                    "immutable_identity"
+                ]["question_hash"],
+                second[
+                    "immutable_identity"
+                ]["question_hash"],
+            )
+            self.assertNotEqual(
+                first[
+                    "immutable_identity"
+                ]["submission_hash"],
+                second[
+                    "immutable_identity"
+                ]["submission_hash"],
+            )
+            self.assertEqual(
+                question_contract_cache_key(
+                    first
+                ),
+                question_contract_cache_key(
+                    second
+                ),
+            )
+            self.assertNotEqual(
+                question_contract_cache_key(
+                    first
+                ),
+                question_contract_cache_key(
+                    changed_rubric
+                ),
+            )
+
+    def test_cache_miss_writes_confirmed_candidate(
+        self,
+    ):
+        from question_contract import (
+            question_contract_cache_key,
+            resolve_question_contract_cache,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cache_dir = root / "cache"
+            candidate = self._build(
+                root=root
+            )
+
+            resolved = (
+                resolve_question_contract_cache(
+                    candidate,
+                    cache_dir=cache_dir,
+                )
+            )
+
+            metadata = resolved["cache"]
+            key = question_contract_cache_key(
+                candidate
+            )
+            cached_path = (
+                cache_dir
+                / f"{key}.json"
+            )
+
+            self.assertEqual(
+                metadata["status"],
+                "miss",
+            )
+            self.assertFalse(
+                metadata["hit"]
+            )
+            self.assertTrue(
+                metadata["cache_written"]
+            )
+            self.assertEqual(
+                metadata[
+                    "authoritative_source"
+                ],
+                "candidate",
+            )
+            self.assertTrue(
+                cached_path.exists()
+            )
+
+    def test_cache_hit_reuses_confirmed_contract(
+        self,
+    ):
+        from question_contract import (
+            resolve_question_contract_cache,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cache_dir = root / "cache"
+            candidate = self._build(
+                root=root
+            )
+
+            resolve_question_contract_cache(
+                candidate,
+                cache_dir=cache_dir,
+            )
+            resolved = (
+                resolve_question_contract_cache(
+                    candidate,
+                    cache_dir=cache_dir,
+                )
+            )
+
+            metadata = resolved["cache"]
+
+            self.assertTrue(
+                metadata["hit"]
+            )
+            self.assertEqual(
+                metadata["status"],
+                "hit",
+            )
+            self.assertEqual(
+                metadata[
+                    "authoritative_source"
+                ],
+                "confirmed_cache",
+            )
+            self.assertFalse(
+                metadata[
+                    "deviation_detected"
+                ]
+            )
+            self.assertEqual(
+                metadata["deviations"],
+                [],
+            )
+            self.assertEqual(
+                metadata["warning"],
+                "",
+            )
+
+    def test_confirmed_cache_wins_on_routing_deviation(
+        self,
+    ):
+        from question_contract import (
+            resolve_question_contract_cache,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cache_dir = root / "cache"
+
+            cached_candidate = self._build(
+                root=root,
+                question_type=(
+                    "PRINCIPLE_INTERPRETATION"
+                ),
+            )
+            resolve_question_contract_cache(
+                cached_candidate,
+                cache_dir=cache_dir,
+            )
+
+            deviated_candidate = self._build(
+                root=root,
+                question_type=(
+                    "COMPARE_SELECTION"
+                ),
+            )
+            resolved = (
+                resolve_question_contract_cache(
+                    deviated_candidate,
+                    cache_dir=cache_dir,
+                )
+            )
+
+            metadata = resolved["cache"]
+            fields = {
+                item["field"]
+                for item in metadata[
+                    "deviations"
+                ]
+            }
+
+            self.assertEqual(
+                resolved["lens"],
+                "PRINCIPLE_INTERPRETATION",
+            )
+            self.assertTrue(
+                metadata[
+                    "deviation_detected"
+                ]
+            )
+            self.assertIn(
+                "lens",
+                fields,
+            )
+            self.assertIn(
+                "question_type.id",
+                fields,
+            )
+            self.assertEqual(
+                metadata["score_effect"],
+                "diagnostic_only",
+            )
+            self.assertFalse(
+                metadata[
+                    "direct_score_application"
+                ]
+            )
+            self.assertTrue(
+                metadata["warning"]
+            )
+
+    def test_pending_cache_is_not_authoritative(
+        self,
+    ):
+        from question_contract import (
+            question_contract_cache_key,
+            resolve_question_contract_cache,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cache_dir = root / "cache"
+            cache_dir.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+
+            pending = self._build(
+                root=root,
+                confidence="medium",
+                status="provisional",
+                locked=False,
+            )
+            key = question_contract_cache_key(
+                pending
+            )
+            path = (
+                cache_dir
+                / f"{key}.json"
+            )
+            path.write_text(
+                json.dumps(
+                    pending,
+                    ensure_ascii=False,
+                    indent=2,
+                ),
+                encoding="utf-8",
+            )
+
+            confirmed = self._build(
+                root=root,
+                question_type=(
+                    "COMPARE_SELECTION"
+                ),
+            )
+            resolved = (
+                resolve_question_contract_cache(
+                    confirmed,
+                    cache_dir=cache_dir,
+                )
+            )
+
+            metadata = resolved["cache"]
+
+            self.assertEqual(
+                resolved["lens"],
+                "COMPARE_SELECTION",
+            )
+            self.assertEqual(
+                metadata["status"],
+                "pending_cache_replaced",
+            )
+            self.assertEqual(
+                metadata[
+                    "authoritative_source"
+                ],
+                "candidate",
+            )
+            self.assertTrue(
+                metadata["cache_written"]
+            )
+
+    def test_manual_confirmed_cache_is_authoritative(
+        self,
+    ):
+        from question_contract import (
+            confirm_question_contract,
+            resolve_question_contract_cache,
+        )
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            cache_dir = root / "cache"
+
+            pending = self._build(
+                root=root,
+                confidence="medium",
+                status="provisional",
+                locked=False,
+            )
+            manual = (
+                confirm_question_contract(
+                    pending,
+                    question_type=(
+                        "PRINCIPLE_INTERPRETATION"
+                    ),
+                    actor="operator:test",
+                    method="focused_test",
+                    confirmed_at=(
+                        "2026-07-18T00:00:00+00:00"
+                    ),
+                )
+            )
+
+            resolve_question_contract_cache(
+                manual,
+                cache_dir=cache_dir,
+            )
+
+            changed = self._build(
+                root=root,
+                question_type=(
+                    "COMPARE_SELECTION"
+                ),
+            )
+            resolved = (
+                resolve_question_contract_cache(
+                    changed,
+                    cache_dir=cache_dir,
+                )
+            )
+
+            self.assertEqual(
+                resolved["lens"],
+                "PRINCIPLE_INTERPRETATION",
+            )
+            self.assertEqual(
+                resolved["confirmation"][
+                    "status"
+                ],
+                "manual_confirmed",
+            )
+            self.assertEqual(
+                resolved["confirmation"][
+                    "actor"
+                ],
+                "operator:test",
+            )
+            self.assertTrue(
+                resolved["cache"][
+                    "deviation_detected"
+                ]
+            )
+
+    def test_production_resolves_cache_before_persist(
+        self,
+    ):
+        source = Path(
+            "grading_agents.py"
+        ).read_text(
+            encoding="utf-8"
+        )
+
+        build_position = source.index(
+            "question_contract = "
+            "build_question_contract("
+        )
+        resolve_position = source.index(
+            "resolve_question_contract_cache("
+        )
+        persist_position = source.index(
+            "persist_question_contract("
+        )
+        load_position = source.index(
+            "question_contract = "
+            "load_question_contract("
+        )
+        gemini_position = source.index(
+            "gemini_eval = "
+            "_phase6_run_gemini_semantic_"
+            "grader("
+        )
+
+        self.assertLess(
+            build_position,
+            resolve_position,
+        )
+        self.assertLess(
+            resolve_position,
+            persist_position,
+        )
+        self.assertLess(
+            persist_position,
+            load_position,
+        )
+        self.assertLess(
+            load_position,
+            gemini_position,
+        )
+        self.assertIn(
+            '"question_contract_cache": (',
+            source,
+        )
+        self.assertIn(
+            '"question_contract_deviation_warning": (',
+            source,
+        )
+
+
 if __name__ == "__main__":
     unittest.main(
         verbosity=2

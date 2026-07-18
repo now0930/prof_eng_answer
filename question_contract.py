@@ -869,6 +869,418 @@ def apply_question_contract_to_model_reference(
     return output
 
 
+
+QUESTION_CONTRACT_CACHE_VERSION = (
+    "question_contract_cache_v1"
+)
+QUESTION_CONTRACT_CACHE_KEY_VERSION = (
+    "question_contract_cache_key_v1"
+)
+
+
+def question_contract_cache_key(
+    contract: dict[str, Any],
+) -> str:
+    validated = (
+        validate_question_contract(
+            contract
+        )
+    )
+
+    identity = validated[
+        "immutable_identity"
+    ]
+    rubric = validated["rubric"]
+
+    return _hash_json(
+        {
+            "version": (
+                QUESTION_CONTRACT_CACHE_KEY_VERSION
+            ),
+            "question_hash": (
+                identity["question_hash"]
+            ),
+            "rubric_snapshot_hash": (
+                rubric["snapshot_hash"]
+            ),
+        }
+    )
+
+
+def _confirmed_contract(
+    contract: dict[str, Any],
+) -> bool:
+    confirmation = contract.get(
+        "confirmation"
+    )
+
+    if not isinstance(
+        confirmation,
+        dict,
+    ):
+        return False
+
+    return (
+        confirmation.get("status")
+        in {
+            "auto_confirmed",
+            "manual_confirmed",
+        }
+        and confirmation.get("required")
+        is False
+    )
+
+
+def _without_cache_metadata(
+    contract: dict[str, Any],
+) -> dict[str, Any]:
+    output = copy.deepcopy(contract)
+    output.pop("cache", None)
+
+    output = _with_contract_hash(
+        output
+    )
+
+    validate_question_contract(
+        output
+    )
+
+    return output
+
+
+def _with_cache_metadata(
+    contract: dict[str, Any],
+    metadata: dict[str, Any],
+) -> dict[str, Any]:
+    output = copy.deepcopy(contract)
+    output["cache"] = copy.deepcopy(
+        metadata
+    )
+
+    output = _with_contract_hash(
+        output
+    )
+
+    validate_question_contract(
+        output
+    )
+
+    return output
+
+
+def compare_question_contracts(
+    cached_contract: dict[str, Any],
+    candidate_contract: dict[str, Any],
+) -> list[dict[str, Any]]:
+    cached = validate_question_contract(
+        cached_contract
+    )
+    candidate = validate_question_contract(
+        candidate_contract
+    )
+
+    comparisons = [
+        (
+            "lens",
+            cached.get("lens"),
+            candidate.get("lens"),
+        ),
+        (
+            "question_type.id",
+            (
+                cached.get(
+                    "question_type"
+                )
+                or {}
+            ).get("id"),
+            (
+                candidate.get(
+                    "question_type"
+                )
+                or {}
+            ).get("id"),
+        ),
+        (
+            "routing.canonical_topic_id",
+            (
+                cached.get("routing")
+                or {}
+            ).get(
+                "canonical_topic_id"
+            ),
+            (
+                candidate.get("routing")
+                or {}
+            ).get(
+                "canonical_topic_id"
+            ),
+        ),
+        (
+            "rubric.snapshot_hash",
+            (
+                cached.get("rubric")
+                or {}
+            ).get("snapshot_hash"),
+            (
+                candidate.get("rubric")
+                or {}
+            ).get("snapshot_hash"),
+        ),
+    ]
+
+    return [
+        {
+            "field": field,
+            "cached": cached_value,
+            "current": current_value,
+        }
+        for (
+            field,
+            cached_value,
+            current_value,
+        ) in comparisons
+        if cached_value != current_value
+    ]
+
+
+def _cache_path(
+    cache_dir: str | Path,
+    cache_key: str,
+) -> Path:
+    return (
+        Path(cache_dir)
+        / f"{cache_key}.json"
+    )
+
+
+def _write_authoritative_cache(
+    *,
+    cache_path: Path,
+    contract: dict[str, Any],
+) -> None:
+    authoritative = (
+        _without_cache_metadata(
+            contract
+        )
+    )
+
+    if not _confirmed_contract(
+        authoritative
+    ):
+        raise ValueError(
+            "Only confirmed contracts may be "
+            "persisted as authoritative cache"
+        )
+
+    _write_json_atomic(
+        cache_path,
+        authoritative,
+    )
+
+
+def resolve_question_contract_cache(
+    candidate_contract: dict[str, Any],
+    *,
+    cache_dir: str | Path,
+) -> dict[str, Any]:
+    candidate = (
+        _without_cache_metadata(
+            validate_question_contract(
+                candidate_contract
+            )
+        )
+    )
+    cache_key = (
+        question_contract_cache_key(
+            candidate
+        )
+    )
+    cache_path = _cache_path(
+        cache_dir,
+        cache_key,
+    )
+
+    base_metadata = {
+        "version": (
+            QUESTION_CONTRACT_CACHE_VERSION
+        ),
+        "key_version": (
+            QUESTION_CONTRACT_CACHE_KEY_VERSION
+        ),
+        "cache_key": cache_key,
+        "cache_path": str(cache_path),
+        "question_hash": (
+            candidate[
+                "immutable_identity"
+            ]["question_hash"]
+        ),
+        "rubric_snapshot_hash": (
+            candidate["rubric"][
+                "snapshot_hash"
+            ]
+        ),
+        "candidate_contract_hash": (
+            candidate["contract_hash"]
+        ),
+        "hit": False,
+        "status": "miss",
+        "authoritative_source": (
+            "candidate"
+        ),
+        "cached_confirmation_status": (
+            None
+        ),
+        "candidate_confirmation_status": (
+            candidate[
+                "confirmation"
+            ]["status"]
+        ),
+        "cache_written": False,
+        "deviation_detected": False,
+        "deviations": [],
+        "warning": "",
+        "score_effect": (
+            "diagnostic_only"
+        ),
+        "direct_score_application": False,
+    }
+
+    if not cache_path.exists():
+        if _confirmed_contract(candidate):
+            _write_authoritative_cache(
+                cache_path=cache_path,
+                contract=candidate,
+            )
+            base_metadata[
+                "cache_written"
+            ] = True
+
+        return _with_cache_metadata(
+            candidate,
+            base_metadata,
+        )
+
+    try:
+        cached = validate_question_contract(
+            _read_json(cache_path)
+        )
+
+        cached_key = (
+            question_contract_cache_key(
+                cached
+            )
+        )
+
+        if cached_key != cache_key:
+            raise ValueError(
+                "Cached contract key mismatch"
+            )
+
+    except Exception as error:
+        metadata = copy.deepcopy(
+            base_metadata
+        )
+        metadata["status"] = (
+            "invalid_cache"
+        )
+        metadata["warning"] = (
+            "Question contract cache entry "
+            "was invalid and was not used: "
+            f"{error!r}"
+        )
+
+        if _confirmed_contract(candidate):
+            _write_authoritative_cache(
+                cache_path=cache_path,
+                contract=candidate,
+            )
+            metadata["cache_written"] = (
+                True
+            )
+            metadata["status"] = (
+                "invalid_cache_replaced"
+            )
+
+        return _with_cache_metadata(
+            candidate,
+            metadata,
+        )
+
+    deviations = (
+        compare_question_contracts(
+            cached,
+            candidate,
+        )
+    )
+    cached_confirmed = (
+        _confirmed_contract(cached)
+    )
+
+    metadata = copy.deepcopy(
+        base_metadata
+    )
+    metadata["hit"] = True
+    metadata[
+        "cached_contract_hash"
+    ] = cached["contract_hash"]
+    metadata[
+        "cached_confirmation_status"
+    ] = cached["confirmation"][
+        "status"
+    ]
+    metadata[
+        "deviation_detected"
+    ] = bool(deviations)
+    metadata["deviations"] = deviations
+
+    if cached_confirmed:
+        metadata["status"] = "hit"
+        metadata[
+            "authoritative_source"
+        ] = "confirmed_cache"
+
+        if deviations:
+            metadata["warning"] = (
+                "Question contract routing "
+                "deviation detected. The "
+                "confirmed cached contract was "
+                "retained; this warning is "
+                "diagnostic-only."
+            )
+
+        return _with_cache_metadata(
+            cached,
+            metadata,
+        )
+
+    metadata["status"] = (
+        "pending_cache_bypassed"
+    )
+    metadata[
+        "authoritative_source"
+    ] = "candidate"
+    metadata["warning"] = (
+        "A pending cached question contract "
+        "was not used as an authoritative "
+        "classification."
+    )
+
+    if _confirmed_contract(candidate):
+        _write_authoritative_cache(
+            cache_path=cache_path,
+            contract=candidate,
+        )
+        metadata["cache_written"] = True
+        metadata["status"] = (
+            "pending_cache_replaced"
+        )
+
+    return _with_cache_metadata(
+        candidate,
+        metadata,
+    )
+
+
 def confirm_question_contract(
     contract: dict[str, Any],
     *,
