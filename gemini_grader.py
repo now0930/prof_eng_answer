@@ -1258,3 +1258,99 @@ def gemini_semantic_grade(*args, **kwargs):
     )
 
     return attach_general_evidence_contract(result)
+
+# QUESTION_DEMAND_CONTRACT_PROMPT_V1
+import json as _question_demand_json
+from functools import wraps as _question_demand_wraps
+
+_question_demand_previous_build_gemini_grading_prompt = (
+    build_gemini_grading_prompt
+)
+
+
+@_question_demand_wraps(
+    _question_demand_previous_build_gemini_grading_prompt
+)
+def build_gemini_grading_prompt(*args, **kwargs):
+    prompt = _question_demand_previous_build_gemini_grading_prompt(
+        *args,
+        **kwargs,
+    )
+
+    from question_demand_contract import (
+        build_question_demand_contract,
+        extract_question_text_from_call,
+    )
+
+    question_text = extract_question_text_from_call(
+        _question_demand_previous_build_gemini_grading_prompt,
+        args,
+        kwargs,
+    )
+    contract = build_question_demand_contract(
+        question_text
+    )
+    contract_json = _question_demand_json.dumps(
+        contract,
+        ensure_ascii=False,
+        sort_keys=True,
+    )
+
+    guidance = """
+[QUESTION_DEMAND_CONTRACT_V1]
+
+다음 question_demand_contract는 질문 문장만으로 생성된 고정 계약이다.
+답안 내용으로 primary_lens를 변경하거나 재분류하지 않는다.
+
+question_demand_contract:
+{contract_json}
+
+적용 규칙:
+1. primary_lens는 전체 답안의 주 평가 관점이다.
+2. secondary_demands는 primary_lens를 대체하지 않고 추가 요구로 평가한다.
+3. requirements의 각 requirement_id를 question_type_coverage 및
+   general_evidence_contract의 requirement_id와 연결한다.
+4. 답안에 특정 유형의 표현이 많더라도 질문에 없는 요구를 새로 만들지 않는다.
+5. 비교 표현이 답안에 있다는 이유만으로 COMPARE_SELECTION으로 바꾸지 않는다.
+6. 설계·계산·검증 요구가 secondary_demands에 있으면 해당 요구를 별도로 평가한다.
+7. primary_lens_locked가 true이므로 답안 기반 lens override는 허용하지 않는다.
+8. 이 계약 자체는 Python 점수·상한·하드캡을 직접 변경하지 않는다.
+""".strip().format(
+        contract_json=contract_json,
+    )
+
+    if "[QUESTION_DEMAND_CONTRACT_V1]" in prompt:
+        return prompt
+
+    return prompt.rstrip() + "\n\n" + guidance + "\n"
+
+
+_question_demand_previous_gemini_semantic_grade = (
+    gemini_semantic_grade
+)
+
+
+@_question_demand_wraps(
+    _question_demand_previous_gemini_semantic_grade
+)
+def gemini_semantic_grade(*args, **kwargs):
+    result = _question_demand_previous_gemini_semantic_grade(
+        *args,
+        **kwargs,
+    )
+
+    from question_demand_contract import (
+        attach_question_demand_contract,
+        extract_question_text_from_call,
+    )
+
+    question_text = extract_question_text_from_call(
+        _question_demand_previous_gemini_semantic_grade,
+        args,
+        kwargs,
+    )
+
+    return attach_question_demand_contract(
+        result,
+        question_text,
+    )
