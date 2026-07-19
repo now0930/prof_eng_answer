@@ -682,3 +682,408 @@ def reconcile_verified_defects_with_coverage(
         )
 
     return output
+
+
+# === VERIFIED_DEFECT_EMPTY_REQUIREMENT_FALLBACK_V2 ===
+_VERIFIED_DEFECT_PREVIOUS_SELECT_REQUIREMENT_V2 = (
+    _select_requirement_index
+)
+
+
+def _verified_requirement_text_v2(
+    row: Any,
+) -> str:
+    if not isinstance(row, dict):
+        return ""
+
+    return " ".join(
+        str(row.get(key) or "")
+        for key in (
+            "requirement",
+            "category",
+            "criterion",
+            "evidence",
+        )
+    ).lower()
+
+
+def _verified_finding_keyword_groups_v2(
+    finding_id: str,
+) -> tuple[tuple[str, ...], ...]:
+    mappings = {
+        (
+            "friction_viscous_model_"
+            "overgeneralized"
+        ): (
+            ("마찰",),
+            ("friction",),
+        ),
+        (
+            "force_balance_requirement_"
+            "sign_contradiction"
+        ): (
+            ("fail", "safe"),
+            ("스프링",),
+            ("spring",),
+            ("힘", "평형"),
+        ),
+    }
+    return mappings.get(
+        finding_id,
+        (),
+    )
+
+
+def _verified_unique_keyword_index_v2(
+    rows: Any,
+    keyword_groups: tuple[
+        tuple[str, ...],
+        ...,
+    ],
+) -> int | None:
+    if not isinstance(rows, list):
+        return None
+
+    scored = []
+
+    for index, row in enumerate(rows):
+        text = _verified_requirement_text_v2(
+            row
+        )
+
+        if not text:
+            continue
+
+        score = 0
+
+        for group in keyword_groups:
+            if all(
+                token.lower() in text
+                for token in group
+            ):
+                score += len(group) * 10
+
+        if score > 0:
+            scored.append((score, index))
+
+    if not scored:
+        return None
+
+    scored.sort(
+        key=lambda item: (
+            -item[0],
+            item[1],
+        )
+    )
+    top_score = scored[0][0]
+    top_indexes = [
+        index
+        for score, index in scored
+        if score == top_score
+    ]
+
+    if len(top_indexes) != 1:
+        return None
+
+    return top_indexes[0]
+
+
+def _select_requirement_index(
+    rows: list[dict[str, Any]],
+    defect: dict[str, Any],
+    requirement_map: dict[str, Any],
+) -> int | None:
+    if isinstance(defect, dict):
+        requirement_id = str(
+            defect.get("requirement_id")
+            or ""
+        ).strip()
+        defect_type = str(
+            defect.get("defect_type")
+            or ""
+        ).lower()
+        owner_layer = str(
+            defect.get("owner_layer")
+            or ""
+        ).upper()
+        source = str(
+            defect.get("source")
+            or ""
+        )
+        finding_id = str(
+            defect.get("source_finding_id")
+            or ""
+        )
+
+        is_known_empty_control_valve_defect = (
+            not requirement_id
+            and defect_type
+            == "correctness_error"
+            and owner_layer == "C"
+            and source
+            == "control_valve_formula_check"
+        )
+
+        if is_known_empty_control_valve_defect:
+            keyword_groups = (
+                _verified_finding_keyword_groups_v2(
+                    finding_id
+                )
+            )
+
+            if keyword_groups:
+                selected = (
+                    _verified_unique_keyword_index_v2(
+                        rows,
+                        keyword_groups,
+                    )
+                )
+
+                if selected is not None:
+                    return selected
+
+    return (
+        _VERIFIED_DEFECT_PREVIOUS_SELECT_REQUIREMENT_V2(
+            rows,
+            defect,
+            requirement_map,
+        )
+    )
+
+
+# === VERIFIED_DEFECT_DISPLAY_SUMMARY_SYNC_V4 ===
+_VERIFIED_DEFECT_PREVIOUS_RECONCILE_DISPLAY_V4 = (
+    reconcile_verified_defects_with_coverage
+)
+
+
+def _verified_display_rows_v4(
+    coverage: Any,
+) -> list[dict[str, Any]]:
+    if not isinstance(coverage, dict):
+        return []
+
+    explicit = coverage.get(
+        "explicit_requirement_coverage"
+    )
+
+    if not isinstance(explicit, dict):
+        return []
+
+    rows = explicit.get("requirements")
+
+    if not isinstance(rows, list):
+        return []
+
+    return [
+        row
+        for row in rows
+        if isinstance(row, dict)
+    ]
+
+
+def _verified_display_summary_v4(
+    coverage: dict[str, Any],
+    previous_summary: Any,
+) -> dict[str, Any]:
+    rows = _verified_display_rows_v4(
+        coverage
+    )
+
+    if not rows:
+        return (
+            copy.deepcopy(previous_summary)
+            if isinstance(previous_summary, dict)
+            else {}
+        )
+
+    normalised = []
+    counts = {
+        "present": 0,
+        "partial": 0,
+        "incorrect": 0,
+        "missing": 0,
+    }
+    weights = {
+        "present": 1.0,
+        "partial": 0.5,
+        "incorrect": 0.0,
+        "missing": 0.0,
+    }
+
+    for row in rows:
+        status = str(
+            row.get("status") or ""
+        ).strip().lower()
+
+        if status not in counts:
+            status = "missing"
+
+        criterion = str(
+            row.get("requirement")
+            or row.get("criterion")
+            or ""
+        ).strip()
+
+        evidence = str(
+            row.get("evidence") or ""
+        ).strip()
+
+        counts[status] += 1
+        normalised.append(
+            {
+                "criterion": criterion,
+                "status": status,
+                "evidence": evidence,
+            }
+        )
+
+    total = len(normalised)
+    weighted_score = sum(
+        weights[row["status"]]
+        for row in normalised
+    )
+    ratio = (
+        weighted_score / total
+        if total
+        else 0.0
+    )
+
+    summary = (
+        copy.deepcopy(previous_summary)
+        if isinstance(previous_summary, dict)
+        else {}
+    )
+    summary.update(
+        {
+            "question_type": coverage.get(
+                "question_type"
+            ),
+            "name_ko": coverage.get(
+                "name_ko"
+            ),
+            "overall_coverage": coverage.get(
+                "overall_coverage"
+            ),
+            "sub_criteria_total": total,
+            "sub_criteria_present": (
+                counts["present"]
+            ),
+            "sub_criteria_partial": (
+                counts["partial"]
+            ),
+            "sub_criteria_incorrect": (
+                counts["incorrect"]
+            ),
+            "sub_criteria_missing": (
+                counts["missing"]
+            ),
+            "weighted_coverage_score": round(
+                weighted_score,
+                2,
+            ),
+            "weighted_coverage_ratio": round(
+                ratio,
+                4,
+            ),
+            "weighted_coverage_percent": round(
+                ratio * 100.0,
+                1,
+            ),
+            "present_criteria": [
+                row["criterion"]
+                for row in normalised
+                if row["status"] == "present"
+            ],
+            "partial_criteria": [
+                row["criterion"]
+                for row in normalised
+                if row["status"] == "partial"
+            ],
+            "incorrect_criteria": [
+                row["criterion"]
+                for row in normalised
+                if row["status"] == "incorrect"
+            ],
+            "missing_criteria": [
+                row["criterion"]
+                for row in normalised
+                if row["status"] == "missing"
+            ],
+            "criteria_status_rows": normalised,
+            "verified_defect_display_sync": {
+                "marker": (
+                    "VERIFIED_DEFECT_DISPLAY_SUMMARY_SYNC_V4"
+                ),
+                "source": (
+                    "explicit_requirement_coverage"
+                ),
+                "overall_coverage": coverage.get(
+                    "overall_coverage"
+                ),
+                "status_counts": copy.deepcopy(
+                    counts
+                ),
+                "score_effect": "none",
+            },
+        }
+    )
+    return summary
+
+
+def reconcile_verified_defects_with_coverage(
+    grade: Any,
+) -> Any:
+    output = (
+        _VERIFIED_DEFECT_PREVIOUS_RECONCILE_DISPLAY_V4(
+            grade
+        )
+    )
+
+    if not isinstance(output, dict):
+        return output
+
+    reconciliation = output.get(
+        "verified_defect_reconciliation"
+    )
+
+    if not isinstance(reconciliation, dict):
+        return output
+
+    if (
+        reconciliation.get("marker")
+        != "VERIFIED_DEFECT_RECONCILIATION_V1"
+    ):
+        return output
+
+    before = _score_snapshot(output)
+
+    from question_type_coverage_adapter import (
+        attach_question_type_coverage_feedback,
+    )
+
+    output = attach_question_type_coverage_feedback(
+        output
+    )
+
+    coverage = output.get(
+        "question_type_coverage"
+    )
+
+    if isinstance(coverage, dict):
+        output[
+            "question_type_coverage_summary"
+        ] = _verified_display_summary_v4(
+            coverage,
+            output.get(
+                "question_type_coverage_summary"
+            ),
+        )
+
+    if before != _score_snapshot(output):
+        raise RuntimeError(
+            "Verified-defect display summary sync "
+            "changed numeric score state"
+        )
+
+    return output

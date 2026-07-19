@@ -1382,3 +1382,208 @@ def evaluate_control_valve_formula_check(
         "명시적 모순이 없습니다."
     )
     return output
+
+
+# === CONTROL_VALVE_NEGATION_FILTER_V3 ===
+import copy as _cv_negation_copy_v3
+import re as _cv_negation_re_v3
+
+
+_CONTROL_VALVE_PREVIOUS_EVALUATE_NEGATION_V3 = (
+    evaluate_control_valve_formula_check
+)
+
+
+def _cv_compact_text_v3(value: Any) -> str:
+    return _cv_negation_re_v3.sub(
+        r"[^0-9a-zA-Z가-힣]+",
+        "",
+        str(value or "").lower(),
+    )
+
+
+def _cv_has_explicit_viscous_formula_v3(
+    answer_text: str,
+) -> bool:
+    return bool(
+        _cv_negation_re_v3.search(
+            r"(?ix)"
+            r"\b(?:f_?b|f_?f(?:riction)?)\s*"
+            r"=\s*"
+            r"(?:c|b|k|mu|μ)\s*"
+            r"(?:\*|·|×)\s*v\b",
+            str(answer_text or ""),
+        )
+    )
+
+
+def _cv_is_negated_viscous_claim_v3(
+    evidence: Any,
+) -> bool:
+    compact = _cv_compact_text_v3(
+        evidence
+    )
+
+    if not compact:
+        return False
+
+    negated_tokens = (
+        "비례하는힘이아니다",
+        "비례하는힘은아니다",
+        "비례하는것이아니다",
+        "비례하는관계가아니다",
+        "비례모델이아니다",
+        "단순비례가아니다",
+        "비례하지않는다",
+        "비례하지않으며",
+        "비례하지않고",
+        "비례하지않음",
+        "비례한다고볼수없",
+        "비례한다고할수없",
+    )
+    return any(
+        token in compact
+        for token in negated_tokens
+    )
+
+
+def _cv_recompute_verdict_v3(
+    result: dict[str, Any],
+) -> None:
+    findings = result.get("findings")
+
+    if not isinstance(findings, list):
+        findings = []
+        result["findings"] = findings
+
+    severities = {
+        str(
+            row.get("severity") or ""
+        ).lower()
+        for row in findings
+        if isinstance(row, dict)
+    }
+    has_major = bool(
+        severities.intersection(
+            {"major", "fatal"}
+        )
+    )
+    has_warning = bool(
+        severities.intersection(
+            {
+                "warning",
+                "minor",
+                "partial",
+            }
+        )
+    )
+
+    result["major_error_detected"] = (
+        has_major
+    )
+    result["warning_detected"] = (
+        has_warning
+    )
+
+    if has_major:
+        result["verdict"] = "major"
+        result["summary"] = (
+            "명시적 제어밸브 힘 모델 또는 "
+            "방향 관계의 기술 모순을 확인했습니다."
+        )
+    elif has_warning:
+        result["verdict"] = "warning"
+        result["summary"] = (
+            "제어밸브 힘 모델의 보완 가능한 "
+            "표현 또는 조건 누락을 확인했습니다."
+        )
+    else:
+        result["verdict"] = "pass"
+        result["summary"] = (
+            "검증 대상 제어밸브 힘 모델에서 "
+            "중대 기술 모순을 확인하지 않았습니다."
+        )
+
+
+def evaluate_control_valve_formula_check(
+    *,
+    answer_text: str,
+    topic_id: str,
+) -> dict[str, Any]:
+    result = _cv_negation_copy_v3.deepcopy(
+        _CONTROL_VALVE_PREVIOUS_EVALUATE_NEGATION_V3(
+            answer_text=answer_text,
+            topic_id=topic_id,
+        )
+    )
+
+    if not isinstance(result, dict):
+        return result
+
+    findings = result.get("findings")
+
+    if not isinstance(findings, list):
+        return result
+
+    explicit_viscous_formula = (
+        _cv_has_explicit_viscous_formula_v3(
+            answer_text
+        )
+    )
+    retained = []
+    removed_ids = []
+
+    for row in findings:
+        if not isinstance(row, dict):
+            retained.append(row)
+            continue
+
+        finding_id = str(
+            row.get("id") or ""
+        )
+
+        should_remove = (
+            finding_id
+            == (
+                "friction_viscous_model_"
+                "overgeneralized"
+            )
+            and not explicit_viscous_formula
+            and _cv_is_negated_viscous_claim_v3(
+                row.get("evidence")
+            )
+        )
+
+        if should_remove:
+            removed_ids.append(
+                finding_id
+            )
+            continue
+
+        retained.append(row)
+
+    if not removed_ids:
+        return result
+
+    result["findings"] = retained
+    result[
+        "negation_filter"
+    ] = {
+        "marker": (
+            "CONTROL_VALVE_NEGATION_FILTER_V3"
+        ),
+        "removed_finding_ids": (
+            removed_ids
+        ),
+        "reason": (
+            "속도 비례 일반화를 부정하는 "
+            "한국어 서술격 부정문을 오류 주장으로 "
+            "해석하지 않음."
+        ),
+        "explicit_viscous_formula": (
+            explicit_viscous_formula
+        ),
+        "direct_score_application": False,
+    }
+    _cv_recompute_verdict_v3(result)
+    return result
