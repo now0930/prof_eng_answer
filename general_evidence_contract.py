@@ -518,3 +518,22 @@ def attach_general_evidence_contract(
         parsed["general_evidence_contract"] = copy.deepcopy(normalized)
 
     return updated
+
+# GENERIC_FORMULA_INTEGRITY_INTEGRATION_V1
+_formula_integrity_previous_attach_general_evidence_contract = (
+    attach_general_evidence_contract
+)
+
+
+def attach_general_evidence_contract(result: Any) -> Any:
+    normalized = (
+        _formula_integrity_previous_attach_general_evidence_contract(
+            result
+        )
+    )
+
+    from generic_formula_integrity import (
+        apply_formula_integrity_to_result,
+    )
+
+    return apply_formula_integrity_to_result(normalized)
