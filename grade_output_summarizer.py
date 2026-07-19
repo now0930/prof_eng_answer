@@ -787,3 +787,71 @@ def summarize_grade_for_telegram(
         summary,
         payload,
     )
+
+# STRUCTURED_VERDICT_CONSISTENCY_INTEGRATION_V1
+from copy import deepcopy as _verdict_consistency_deepcopy
+
+_verdict_consistency_previous_build_payload = (
+    _build_payload
+)
+
+
+def _build_payload(grade):
+    payload = _verdict_consistency_previous_build_payload(
+        grade
+    )
+
+    if not isinstance(payload, dict):
+        return payload
+
+    if not isinstance(grade, dict):
+        return payload
+
+    parsed = grade.get("parsed")
+
+    if not isinstance(parsed, dict):
+        parsed = {}
+
+    for key in (
+        "general_evidence_contract",
+        "question_demand_contract",
+        "question_type_coverage",
+        "layer_issue_ownership",
+        "semantic_downward_guard",
+    ):
+        value = grade.get(key)
+
+        if value is None:
+            value = parsed.get(key)
+
+        if value is not None:
+            payload[key] = (
+                _verdict_consistency_deepcopy(
+                    value
+                )
+            )
+
+    return payload
+
+
+_verdict_consistency_previous_normalise_summary = (
+    _normalise_summary
+)
+
+
+def _normalise_summary(llm_obj, payload):
+    summary = (
+        _verdict_consistency_previous_normalise_summary(
+            llm_obj,
+            payload,
+        )
+    )
+
+    from verdict_consistency import (
+        reconcile_verdict_summary,
+    )
+
+    return reconcile_verdict_summary(
+        summary,
+        payload,
+    )
