@@ -5158,6 +5158,13 @@ def _phase2_postprocess_grade(legacy_result):
 
     grade = _phase2_add_display_aliases(grade)
 
+    # FINAL_VERIFIED_COVERAGE_PERSISTENCE_V1
+    grade = (
+        _phase2_finalize_verified_coverage_for_persistence(
+            grade
+        )
+    )
+
     _phase2_json_write(session_dir / "grade.json", grade)
     _phase2_json_write(session_dir / "volume_evaluation.json", volume)
     _phase2_json_write(session_dir / "fact_anchor_evaluation.json", fact_eval)
@@ -7166,3 +7173,80 @@ def _phase6_apply_semantic_downward_guard(
             _phase6_semantic_guard_maximum
         ),
     )
+
+# === FINAL_VERIFIED_COVERAGE_PERSISTENCE_V1 ===
+import copy as _phase2_final_copy_v1
+
+
+def _phase2_final_score_snapshot_v1(
+    grade,
+):
+    if not isinstance(grade, dict):
+        return None
+
+    return {
+        key: grade.get(key)
+        for key in (
+            "score",
+            "total_score",
+            "final_total_score",
+            "uncapped_total_score",
+            "score_range",
+            "layer_scores",
+            "breakdown",
+            "applied_caps",
+        )
+    }
+
+
+def _phase2_finalize_verified_coverage_for_persistence(
+    grade,
+):
+    if not isinstance(grade, dict):
+        return grade
+
+    before = _phase2_final_copy_v1.deepcopy(
+        _phase2_final_score_snapshot_v1(
+            grade
+        )
+    )
+
+    from verified_defect_reconciliation import (
+        reconcile_verified_defects_with_coverage,
+    )
+
+    output = (
+        reconcile_verified_defects_with_coverage(
+            grade
+        )
+    )
+
+    after = _phase2_final_score_snapshot_v1(
+        output
+    )
+
+    if before != after:
+        raise RuntimeError(
+            "Final verified coverage persistence "
+            "changed numeric score state"
+        )
+
+    if isinstance(output, dict):
+        reconciliation = output.get(
+            "verified_defect_reconciliation"
+        )
+
+        if isinstance(reconciliation, dict):
+            reconciliation[
+                "final_persistence"
+            ] = {
+                "marker": (
+                    "FINAL_VERIFIED_COVERAGE_PERSISTENCE_V1"
+                ),
+                "position": (
+                    "after_display_aliases_before_grade_json_write"
+                ),
+                "score_effect": "none",
+            }
+
+    return output

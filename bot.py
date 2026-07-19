@@ -261,8 +261,18 @@ def chat_allowed(chat_id):
 
 
 def new_session(chat_id, state):
-    sid = datetime.now().strftime("%Y%m%d_%H%M%S") + f"_{chat_id}"
+    # COLLISION_SAFE_SESSION_ID_V1
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+    sid = f"{timestamp}_{chat_id}"
     session_dir = SESSIONS_DIR / sid
+    collision_index = 1
+
+    while session_dir.exists():
+        sid = (
+            f"{timestamp}_{collision_index}_{chat_id}"
+        )
+        session_dir = SESSIONS_DIR / sid
+        collision_index += 1
     (session_dir / "images").mkdir(parents=True, exist_ok=True)
 
     state["chats"][str(chat_id)] = {
@@ -1345,6 +1355,29 @@ def _clear_pending_grade(chat_id, state):
     save_state(state)
 
 
+# === GRADE_SESSION_ISOLATION_V1 ===
+def _ensure_fresh_grade_session(
+    chat_id,
+    state,
+):
+    sid = get_active_session(
+        chat_id,
+        state,
+    )
+    meta = load_meta(sid)
+    status = str(
+        meta.get("status") or ""
+    ).strip().lower()
+
+    if status == "graded":
+        sid = new_session(
+            chat_id,
+            state,
+        )
+
+    return sid
+
+
 def _finalize_pending_grade(chat_id, state):
     chat = _chat_state(state, chat_id)
     pending = chat.pop("pending_grade", None)
@@ -1368,7 +1401,21 @@ def _finalize_pending_grade(chat_id, state):
         f"보조 모델: {OLLAMA_MODEL}",
     )
 
-    sid, raw_result, parsed = grade_answer(chat_id, full_answer, state)
+    prepared_sid = _ensure_fresh_grade_session(
+        chat_id,
+        state,
+    )
+    sid, raw_result, parsed = grade_answer(
+        chat_id,
+        full_answer,
+        state,
+    )
+
+    if sid != prepared_sid:
+        log(
+            "grade session mismatch: "
+            f"prepared={prepared_sid} actual={sid}"
+        )
     send_message(chat_id, format_result(parsed, raw_result))
     send_message(chat_id, f"저장 위치: /workspace/prof_eng_answer/data/sessions/{sid}")
 
