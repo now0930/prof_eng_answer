@@ -1077,6 +1077,61 @@ _PLAN_C_DEPTH_VS_ERROR_CONTRACT_V1 = "\n".join(
     )
 )
 
+_PLAN_C_SEMANTIC_SCORING_CALIBRATION_V2 = "\n".join(
+    (
+        "[PLAN_C_SEMANTIC_SCORING_CALIBRATION_V2]",
+        "",
+        "동일한 결함을 A/B/C/D/E 여러 계층에서 반복 감점하지 않는다.",
+        "각 계층은 아래의 고유 평가 대상만 채점한다.",
+        "",
+        "A 구조:",
+        "- 제목, 번호, 소제목, 도식, 결론과 전개 순서를 평가한다.",
+        "- 배경 문장이 일반적이라는 이유만으로 구조 점수를 크게 낮추지 않는다.",
+        "- 배경→원리→설계→현장 적용→결론 흐름이 있으면 구조는 strong이다.",
+        "",
+        "B 명시 요구 대응:",
+        "- 문제에서 요구한 항목을 직접 다뤘는지만 평가한다.",
+        "- 요구 항목이 존재하고 핵심 의미가 맞으면 present로 판정한다.",
+        "- 상세 유도, 정량 예시, 고급 모델의 부족은 B가 아니라 C 또는 D의 depth_gap이다.",
+        "",
+        "C 기술 정확성과 해석:",
+        "- 정의, 부호, 공식, 단위, 물리 방향, 인과관계의 정확성을 평가한다.",
+        "- 핵심 개념이 맞고 상세 모델만 부족하면 depth_gap 또는 advanced_detail_missing이다.",
+        "- depth_gap은 incorrect가 아니며 다른 계층의 감점 근거로 재사용하지 않는다.",
+        "",
+        "D 현장 적용·설계 판단:",
+        "- fail 방향 선정, worst-case, 안전, 비용, 정비, 검증, 운전 리스크,",
+        "  CBM/TBM, 상태감시, 스마트 계기 활용을 현장 판단 근거로 인정한다.",
+        "- 정량 예시가 없더라도 설계 방향과 검증 항목이 있으면 field_judgement는 present이다.",
+        "- 수치 예시 부족은 D의 minor depth_gap이며 D 전체 부재로 판정하지 않는다.",
+        "",
+        "E 연결성과 방어 가능성:",
+        "- 원리→설계 기준→현장 운영의 인과 연결과 일관성을 평가한다.",
+        "- C 또는 D의 동일한 깊이 부족을 E에서 다시 감점하지 않는다.",
+        "",
+        "coverage status 계약:",
+        "- present: 요구 범주를 직접 다루고 핵심 의미가 맞음.",
+        "- partial: 요구 범주의 핵심 일부가 실제로 빠졌거나 의미가 불완전함.",
+        "- missing: 해당 범주를 전혀 다루지 않음.",
+        "- incorrect: 명시적 기술 오류가 있음.",
+        "- 단순히 더 깊게 쓸 수 있다는 이유로 present를 partial로 낮추지 않는다.",
+        "",
+        "원리·해석형 세부 판정:",
+        "- principle_mechanism은 핵심 작용 원리와 힘 방향을 설명하면 present이다.",
+        "- calculation_or_interpretation은 식과 변수 의미가 있으면 present,",
+        "  식 없이 정성 설명만 있으면 partial이다.",
+        "- result_meaning은 계산 결과 또는 설계식의 공학적 의미를 설명하면 present이다.",
+        "- field_judgement는 안전 위치, 선정 기준, 유지관리, 검증 또는 비용 판단 중",
+        "  두 가지 이상을 제시하면 present이다.",
+        "",
+        "점수 안정성:",
+        "- incorrect=0, missing=0, core requirement 누락=0인 depth-only 답안은",
+        "  A/B/D/E를 중간 이하 band로 동시에 낮추지 않는다.",
+        "- 핵심 오류가 없는 경우 각 계층의 reason은 정확한 강점과 하나의 보완점으로 작성한다.",
+    )
+)
+
+
 def build_gemini_grading_prompt(*args, **kwargs):
     base_prompt = (
         _PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1(
@@ -1085,26 +1140,27 @@ def build_gemini_grading_prompt(*args, **kwargs):
         )
     )
 
-    plan_b_marker = (
-        "[PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]"
+    contracts = (
+        (
+            "[PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]",
+            _plan_b_general_layer_ownership_prompt_v1(),
+        ),
+        (
+            "[PLAN_C_DEPTH_VS_ERROR_CALIBRATION_V1]",
+            _PLAN_C_DEPTH_VS_ERROR_CONTRACT_V1,
+        ),
+        (
+            "[PLAN_C_SEMANTIC_SCORING_CALIBRATION_V2]",
+            _PLAN_C_SEMANTIC_SCORING_CALIBRATION_V2,
+        ),
     )
 
-    if plan_b_marker not in base_prompt:
-        base_prompt = (
-            base_prompt
-            + "\n\n"
-            + _plan_b_general_layer_ownership_prompt_v1()
-        )
-
-    plan_c_marker = (
-        "[PLAN_C_DEPTH_VS_ERROR_CALIBRATION_V1]"
-    )
-
-    if plan_c_marker not in base_prompt:
-        base_prompt = (
-            base_prompt
-            + "\n\n"
-            + _PLAN_C_DEPTH_VS_ERROR_CONTRACT_V1
-        )
+    for marker, contract in contracts:
+        if marker not in base_prompt:
+            base_prompt = (
+                base_prompt
+                + "\n\n"
+                + contract
+            )
 
     return base_prompt

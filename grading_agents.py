@@ -3851,6 +3851,388 @@ def _phase6_get_layer_max(scoring_model):
     }
 
 
+# PLAN_C_SEMANTIC_DOWNWARD_GUARD_V1
+
+
+def _phase6_semantic_guard_maximum(
+    layer_id,
+    layer_row,
+    scoring_model,
+):
+    if isinstance(layer_row, dict):
+        for key in (
+            "max_score",
+            "max",
+            "maximum",
+        ):
+            try:
+                value = float(
+                    layer_row.get(key)
+                )
+
+                if value > 0:
+                    return value
+            except (
+                TypeError,
+                ValueError,
+                OverflowError,
+            ):
+                pass
+
+    if isinstance(scoring_model, dict):
+        for row in (
+            scoring_model.get("layers")
+            or []
+        ):
+            if not isinstance(row, dict):
+                continue
+
+            candidate_id = str(
+                row.get("id")
+                or row.get("layer_id")
+                or ""
+            ).strip().upper()
+
+            if candidate_id != layer_id:
+                continue
+
+            for key in (
+                "points",
+                "max_score",
+                "max",
+                "maximum",
+            ):
+                try:
+                    value = float(
+                        row.get(key)
+                    )
+
+                    if value > 0:
+                        return value
+                except (
+                    TypeError,
+                    ValueError,
+                    OverflowError,
+                ):
+                    pass
+
+    return {
+        "A": 3.0,
+        "B": 6.0,
+        "C": 8.0,
+        "D": 6.0,
+        "E": 2.0,
+    }.get(layer_id, 0.0)
+
+
+def _phase6_semantic_guard_evidence(
+    gemini_eval,
+):
+    parsed = (
+        gemini_eval.get("parsed")
+        if isinstance(gemini_eval, dict)
+        else None
+    )
+
+    if not isinstance(parsed, dict):
+        parsed = {}
+
+    coverage = parsed.get(
+        "question_type_coverage"
+    )
+
+    if not isinstance(coverage, dict):
+        coverage = {}
+
+    incorrect_count = 0
+    missing_count = 0
+
+    for row in (
+        coverage.get(
+            "sub_criteria_coverage"
+        )
+        or []
+    ):
+        if not isinstance(row, dict):
+            continue
+
+        status = str(
+            row.get("status") or ""
+        ).strip().lower()
+
+        if status == "incorrect":
+            incorrect_count += 1
+        elif status == "missing":
+            missing_count += 1
+
+    explicit = coverage.get(
+        "explicit_requirement_coverage"
+    )
+
+    if not isinstance(explicit, dict):
+        explicit = {}
+
+    core_incorrect = 0
+    core_missing = 0
+
+    for row in (
+        explicit.get("requirements")
+        or []
+    ):
+        if not isinstance(row, dict):
+            continue
+
+        if row.get("is_core") is not True:
+            continue
+
+        status = str(
+            row.get("status") or ""
+        ).strip().lower()
+
+        if status == "incorrect":
+            core_incorrect += 1
+        elif status == "missing":
+            core_missing += 1
+
+    major_or_fatal_correctness_error = False
+    issue_rows = []
+
+    for row in (
+        parsed.get("layer_issue_ownership")
+        or []
+    ):
+        if not isinstance(row, dict):
+            continue
+
+        issue_type = str(
+            row.get("issue_type") or ""
+        ).strip().lower()
+        severity = str(
+            row.get("severity") or ""
+        ).strip().lower()
+        invalidates = (
+            row.get(
+                "invalidates_core_conclusion"
+            )
+            is True
+        )
+
+        if (
+            issue_type == "correctness_error"
+            and (
+                severity in {"major", "fatal"}
+                or invalidates
+            )
+        ):
+            major_or_fatal_correctness_error = True
+
+        issue_rows.append(
+            {
+                "issue_id": row.get("issue_id"),
+                "primary_owner_layer": row.get(
+                    "primary_owner_layer"
+                ),
+                "issue_type": issue_type,
+                "severity": severity,
+                "invalidates_core_conclusion": (
+                    invalidates
+                ),
+            }
+        )
+
+    eligible = (
+        incorrect_count == 0
+        and missing_count == 0
+        and core_incorrect == 0
+        and core_missing == 0
+        and not major_or_fatal_correctness_error
+    )
+
+    return {
+        "version": (
+            "plan_c_semantic_downward_guard_v1"
+        ),
+        "eligible": eligible,
+        "overall_coverage": str(
+            coverage.get("overall_coverage")
+            or ""
+        ).strip().lower(),
+        "incorrect_count": incorrect_count,
+        "missing_count": missing_count,
+        "core_incorrect": core_incorrect,
+        "core_missing": core_missing,
+        "major_or_fatal_correctness_error": (
+            major_or_fatal_correctness_error
+        ),
+        "issue_rows": issue_rows,
+    }
+
+
+def _phase6_apply_semantic_downward_guard(
+    layer_scores,
+    baseline_scores,
+    gemini_eval,
+    scoring_model,
+):
+    evidence = (
+        _phase6_semantic_guard_evidence(
+            gemini_eval
+        )
+    )
+    diagnostic = {
+        **evidence,
+        "applied": False,
+        "adjustments": [],
+        "policy": {
+            "A": 0.15,
+            "B": 0.15,
+            "C": 0.20,
+            "D": 0.15,
+            "E": 0.15,
+        },
+        "reason": (
+            "incorrect, missing 또는 major/fatal "
+            "correctness error가 있어 semantic "
+            "하향 제한을 적용하지 않음."
+        ),
+    }
+
+    if not isinstance(layer_scores, list):
+        return layer_scores, diagnostic
+
+    if evidence.get("eligible") is not True:
+        return layer_scores, diagnostic
+
+    baseline = (
+        dict(baseline_scores)
+        if isinstance(baseline_scores, dict)
+        else {}
+    )
+    max_drop_ratio = {
+        "A": 0.15,
+        "B": 0.15,
+        "C": 0.20,
+        "D": 0.15,
+        "E": 0.15,
+    }
+
+    for row in layer_scores:
+        if not isinstance(row, dict):
+            continue
+
+        layer_id = str(
+            row.get("layer_id") or ""
+        ).strip().upper()
+
+        if layer_id not in max_drop_ratio:
+            continue
+
+        try:
+            before_semantic = float(
+                baseline.get(layer_id)
+            )
+            current_score = float(
+                row.get("score") or 0.0
+            )
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+        ):
+            continue
+
+        maximum = (
+            _phase6_semantic_guard_maximum(
+                layer_id,
+                row,
+                scoring_model,
+            )
+        )
+        max_drop = round(
+            maximum
+            * max_drop_ratio[layer_id],
+            4,
+        )
+        minimum_allowed = round(
+            max(
+                0.0,
+                before_semantic - max_drop,
+            ),
+            4,
+        )
+
+        if current_score >= minimum_allowed:
+            continue
+
+        guarded_score = round(
+            min(
+                before_semantic,
+                minimum_allowed,
+            ),
+            2,
+        )
+        row[
+            "score_before_semantic_downward_guard"
+        ] = current_score
+        row["score"] = guarded_score
+        row[
+            "semantic_downward_guard_floor"
+        ] = round(
+            minimum_allowed,
+            2,
+        )
+        row[
+            "semantic_downward_guard_applied"
+        ] = True
+
+        reason = str(
+            row.get("reason") or ""
+        ).strip()
+        guard_reason = (
+            "명시 요구 누락·오답 및 major/fatal "
+            "핵심 오류가 없는 depth-only 평가이므로 "
+            "단일 semantic pass의 과도한 하향폭을 제한함."
+        )
+
+        if guard_reason not in reason:
+            row["reason"] = (
+                reason + " / " + guard_reason
+            ).strip(" /")
+
+        diagnostic["adjustments"].append(
+            {
+                "layer_id": layer_id,
+                "before_semantic": round(
+                    before_semantic,
+                    4,
+                ),
+                "semantic_result": round(
+                    current_score,
+                    4,
+                ),
+                "maximum": round(
+                    maximum,
+                    4,
+                ),
+                "max_drop": round(
+                    max_drop,
+                    4,
+                ),
+                "guarded_score": guarded_score,
+            }
+        )
+
+    diagnostic["applied"] = bool(
+        diagnostic["adjustments"]
+    )
+    diagnostic["reason"] = (
+        "명시 요구 누락·오답과 major/fatal "
+        "correctness error가 없는 depth-only "
+        "평가에서 계층별 semantic 하향폭을 제한함."
+    )
+
+    return layer_scores, diagnostic
+
 def _phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model):
     if not gemini_eval or not gemini_eval.get("ok"):
         return layer_scores
@@ -4475,7 +4857,31 @@ def _phase2_postprocess_grade(legacy_result):
         session_dir=session_dir
     )
 
-    layer_scores = _phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model)
+    semantic_guard_baseline = {
+        str(row.get("layer_id")): float(
+            row.get("score") or 0.0
+        )
+        for row in layer_scores
+        if isinstance(row, dict)
+        and row.get("layer_id")
+    }
+
+    layer_scores = (
+        _phase6_apply_gemini_layer_scores(
+            layer_scores,
+            gemini_eval,
+            scoring_model,
+        )
+    )
+    (
+        layer_scores,
+        semantic_downward_guard_eval,
+    ) = _phase6_apply_semantic_downward_guard(
+        layer_scores,
+        semantic_guard_baseline,
+        gemini_eval,
+        scoring_model,
+    )
 
     originality_eval = _phase8_run_originality_evaluator(
         input_text=input_text,
@@ -4589,6 +4995,7 @@ def _phase2_postprocess_grade(legacy_result):
         "connection_evaluation": connection_eval,
         "interview_followup": interview_followup,
         "gemini_semantic_evaluation": gemini_eval,
+        "semantic_downward_guard_evaluation": semantic_downward_guard_eval,
         "question_type_evaluation": question_type_eval,
         "model_answer_reference": model_answer_ref,
         "originality_evaluation": originality_eval,
