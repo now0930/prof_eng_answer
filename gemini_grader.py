@@ -1164,3 +1164,97 @@ def build_gemini_grading_prompt(*args, **kwargs):
             )
 
     return base_prompt
+
+# GENERAL_EVIDENCE_CONTRACT_PROMPT_V1
+from functools import wraps as _general_evidence_wraps
+
+_GENERAL_EVIDENCE_CONTRACT_PROMPT_V1 = """
+[GENERAL_EVIDENCE_CONTRACT_V1]
+
+기존 question_type_coverage와 layer_issue_ownership 계약을 유지하면서,
+최종 JSON root object에 다음 진단 필드를 추가한다.
+
+"general_evidence_contract": {
+  "schema_version": "1.0",
+  "mode": "diagnostic_only",
+  "score_effect": "none",
+  "claims": [],
+  "formulas": [],
+  "defects": [],
+  "field_judgements": []
+}
+
+claims에는 requirement_id, claim_text, evidence_text, evidence_type,
+status, owner_layer, conditions를 포함한다.
+
+formulas에는 requirement_id, formula_text, variables, conditions,
+interpretation, integrity_status, integrity_notes, owner_layer를 포함한다.
+
+defects에는 defect_type, severity, owner_layer, requirement_id,
+evidence_text, explanation, affected_claim_ids, diagnostic_only를 포함한다.
+
+defect_type은 다음 네 값만 사용한다.
+- correctness_error
+- core_depth_gap
+- advanced_detail_missing
+- presentation_issue
+
+판정 규칙:
+1. 이 필드는 진단 전용이다. 이 단계에서 점수·상한·하드캡을 직접 변경하지 않는다.
+2. claim은 답안에 직접 근거가 있을 때만 supported로 판정한다.
+3. correctness_error는 명백한 정의·원리·수식·단위·부호·인과 오류에만 사용한다.
+4. core_depth_gap은 문제의 핵심 해석·설계·선정·검증 요소가 부족한 경우다.
+5. advanced_detail_missing은 핵심 결론은 성립하지만 고득점 세부사항이 부족한 경우다.
+6. presentation_issue는 연산자 유실, 변수 정의 불명확, 문장 중단 등 표현 무결성 문제다.
+7. presentation_issue를 근거 없이 correctness_error로 승격하지 않는다.
+8. 하나의 결함에는 primary owner layer 하나만 지정한다.
+9. 같은 결함을 여러 계층의 감점 사유로 복제하지 않는다.
+10. 기존 depth_gap은 general_evidence_contract에서 core_depth_gap으로 정규화한다.
+11. 답안에 없는 고급 내용을 단순 미기재했다는 이유로 correctness_error를 만들지 않는다.
+12. 출력은 반드시 valid JSON이어야 한다.
+""".strip()
+
+_general_evidence_contract_previous_build_gemini_grading_prompt = (
+    build_gemini_grading_prompt
+)
+
+
+@_general_evidence_wraps(
+    _general_evidence_contract_previous_build_gemini_grading_prompt
+)
+def build_gemini_grading_prompt(*args, **kwargs):
+    prompt = _general_evidence_contract_previous_build_gemini_grading_prompt(
+        *args,
+        **kwargs,
+    )
+
+    if "[GENERAL_EVIDENCE_CONTRACT_V1]" in prompt:
+        return prompt
+
+    return (
+        prompt.rstrip()
+        + "\n\n"
+        + _GENERAL_EVIDENCE_CONTRACT_PROMPT_V1
+        + "\n"
+    )
+
+
+_general_evidence_contract_previous_gemini_semantic_grade = (
+    gemini_semantic_grade
+)
+
+
+@_general_evidence_wraps(
+    _general_evidence_contract_previous_gemini_semantic_grade
+)
+def gemini_semantic_grade(*args, **kwargs):
+    result = _general_evidence_contract_previous_gemini_semantic_grade(
+        *args,
+        **kwargs,
+    )
+
+    from general_evidence_contract import (
+        attach_general_evidence_contract,
+    )
+
+    return attach_general_evidence_contract(result)
