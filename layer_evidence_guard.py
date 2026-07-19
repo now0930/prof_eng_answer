@@ -598,3 +598,329 @@ def apply_layer_specific_evidence_guard(
         diagnostic["adjustments"]
     )
     return result, diagnostic
+
+
+# === VERIFIED_DEFECT_SINGLE_OWNER_GUARD_V1 ===
+import copy as _verified_owner_copy_module_v1
+
+
+_LAYER_EVIDENCE_PREVIOUS_APPLY_VERIFIED_OWNER_V1 = (
+    apply_layer_specific_evidence_guard
+)
+
+
+def _verified_owner_general_contract_v1(
+    payload: dict[str, Any],
+) -> dict[str, Any]:
+    direct = payload.get(
+        "general_evidence_contract"
+    )
+
+    if isinstance(direct, dict):
+        return direct
+
+    parsed = payload.get("parsed")
+
+    if isinstance(parsed, dict):
+        nested = parsed.get(
+            "general_evidence_contract"
+        )
+
+        if isinstance(nested, dict):
+            return nested
+
+    return {}
+
+
+def _verified_owner_defect_map_v1(
+    payload: dict[str, Any],
+) -> dict[str, dict[str, Any]]:
+    defects = _verified_owner_general_contract_v1(
+        payload
+    ).get("defects")
+
+    if not isinstance(defects, list):
+        return {}
+
+    result = {}
+
+    for row in defects:
+        if not isinstance(row, dict):
+            continue
+
+        defect_id = str(
+            row.get("defect_id")
+            or row.get("id")
+            or ""
+        )
+
+        if defect_id:
+            result[defect_id] = row
+
+    return result
+
+
+def _verified_owner_reconciliation_enabled_v1(
+    payload: dict[str, Any],
+) -> bool:
+    metadata = payload.get(
+        "verified_defect_reconciliation"
+    )
+
+    if not isinstance(metadata, dict):
+        return False
+
+    if (
+        metadata.get(
+            "b_completeness_double_deduction"
+        )
+        is not False
+    ):
+        return False
+
+    owner = str(
+        metadata.get("primary_score_owner")
+        or ""
+    ).upper()
+    return owner == "C"
+
+
+def _verified_owner_coverage_objects_v1(
+    payload: dict[str, Any],
+) -> list[dict[str, Any]]:
+    result = []
+
+    direct = payload.get(
+        "question_type_coverage"
+    )
+
+    if isinstance(direct, dict):
+        result.append(direct)
+
+    parsed = payload.get("parsed")
+
+    if isinstance(parsed, dict):
+        nested = parsed.get(
+            "question_type_coverage"
+        )
+
+        if (
+            isinstance(nested, dict)
+            and nested is not direct
+        ):
+            result.append(nested)
+
+    return result
+
+
+def _verified_owner_guard_copy_v1(
+    gemini_eval: Any,
+) -> tuple[Any, list[str]]:
+    if not isinstance(gemini_eval, dict):
+        return gemini_eval, []
+
+    if not _verified_owner_reconciliation_enabled_v1(
+        gemini_eval
+    ):
+        return gemini_eval, []
+
+    output = _verified_owner_copy_module_v1.deepcopy(
+        gemini_eval
+    )
+    defect_map = _verified_owner_defect_map_v1(
+        output
+    )
+
+    if not defect_map:
+        return output, []
+
+    suppressed_requirement_ids = []
+
+    for coverage in (
+        _verified_owner_coverage_objects_v1(
+            output
+        )
+    ):
+        explicit = coverage.get(
+            "explicit_requirement_coverage"
+        )
+
+        if not isinstance(explicit, dict):
+            continue
+
+        rows = explicit.get("requirements")
+
+        if not isinstance(rows, list):
+            continue
+
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+
+            if (
+                str(
+                    row.get("status")
+                    or ""
+                ).lower()
+                != "incorrect"
+            ):
+                continue
+
+            previous_status = str(
+                row.get(
+                    "status_before_verified_defect"
+                )
+                or ""
+            ).lower()
+
+            if previous_status not in {
+                "present",
+                "partial",
+            }:
+                continue
+
+            defect_ids = row.get(
+                "verified_defect_ids"
+            )
+
+            if not isinstance(
+                defect_ids,
+                list,
+            ) or not defect_ids:
+                continue
+
+            linked_defects = [
+                defect_map.get(
+                    str(defect_id)
+                )
+                for defect_id in defect_ids
+            ]
+
+            if any(
+                not isinstance(
+                    defect,
+                    dict,
+                )
+                for defect in linked_defects
+            ):
+                continue
+
+            is_single_c_owner = all(
+                str(
+                    defect.get("defect_type")
+                    or ""
+                ).lower()
+                == "correctness_error"
+                and str(
+                    defect.get("owner_layer")
+                    or ""
+                ).upper()
+                == "C"
+                and str(
+                    defect.get("severity")
+                    or ""
+                ).lower()
+                in {
+                    "major",
+                    "fatal",
+                }
+                for defect in linked_defects
+            )
+
+            if not is_single_c_owner:
+                continue
+
+            row["status"] = previous_status
+            row[
+                "guard_status_override"
+            ] = {
+                "marker": (
+                    "VERIFIED_DEFECT_SINGLE_OWNER_GUARD_V1"
+                ),
+                "display_status": "incorrect",
+                "effective_guard_status": (
+                    previous_status
+                ),
+                "primary_score_owner": "C",
+                "b_completeness_deduction": False,
+                "d_secondary_deduction": False,
+                "verified_defect_ids": [
+                    str(value)
+                    for value in defect_ids
+                ],
+            }
+            requirement_id = str(
+                row.get("requirement_id")
+                or ""
+            )
+
+            if (
+                requirement_id
+                and requirement_id
+                not in suppressed_requirement_ids
+            ):
+                suppressed_requirement_ids.append(
+                    requirement_id
+                )
+
+    return output, suppressed_requirement_ids
+
+
+def apply_layer_specific_evidence_guard(
+    layer_scores,
+    baseline_scores,
+    gemini_eval,
+    scoring_model,
+    *,
+    maximum_resolver,
+):
+    guard_input, suppressed_requirement_ids = (
+        _verified_owner_guard_copy_v1(
+            gemini_eval
+        )
+    )
+    guarded_layers, diagnostic = (
+        _LAYER_EVIDENCE_PREVIOUS_APPLY_VERIFIED_OWNER_V1(
+            layer_scores,
+            baseline_scores,
+            guard_input,
+            scoring_model,
+            maximum_resolver=maximum_resolver,
+        )
+    )
+
+    if (
+        isinstance(diagnostic, dict)
+        and suppressed_requirement_ids
+    ):
+        diagnostic = (
+            _verified_owner_copy_module_v1.deepcopy(
+                diagnostic
+            )
+        )
+        diagnostic[
+            "verified_defect_single_owner_guard"
+        ] = {
+            "marker": (
+                "VERIFIED_DEFECT_SINGLE_OWNER_GUARD_V1"
+            ),
+            "display_coverage_status": (
+                "incorrect"
+            ),
+            "guard_status_source": (
+                "status_before_verified_defect"
+            ),
+            "primary_score_owner": "C",
+            "suppressed_duplicate_layers": [
+                "B",
+                "D",
+            ],
+            "suppressed_requirement_ids": (
+                suppressed_requirement_ids
+            ),
+            "score_effect": (
+                "existing_owner_guard_only"
+            ),
+        }
+
+    return guarded_layers, diagnostic
