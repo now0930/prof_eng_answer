@@ -1,0 +1,289 @@
+{
+  "schema_version": "1.0",
+  "corpus_id": "general_grading_cross_topic_v1",
+  "purpose": "Deterministic regression corpus for topic-independent grading contracts",
+  "question_contract_cases": [
+    {
+      "id": "valve_principle_design",
+      "domain": "VALVE",
+      "question": "밸브 불평형력과 마찰력의 개념을 설명하고 Fail-safe 스프링 설계 기준을 제시하시오.",
+      "expected_primary_lens": "PRINCIPLE_INTERPRETATION",
+      "required_secondary_demands": ["DESIGN"],
+      "required_demand_kinds": ["DEFINE_EXPLAIN", "DESIGN"]
+    },
+    {
+      "id": "sensor_compare_selection",
+      "domain": "SENSOR",
+      "question": "열전대와 RTD의 특성을 비교하고 적용 조건에 따른 선정 기준을 제시하시오.",
+      "expected_primary_lens": "COMPARE_SELECTION",
+      "required_secondary_demands": [],
+      "required_demand_kinds": ["COMPARE", "SELECT"]
+    },
+    {
+      "id": "pid_principle_procedure",
+      "domain": "PID",
+      "question": "PID 제어의 동작 원리를 설명하고 현장 튜닝 절차를 제시하시오.",
+      "expected_primary_lens": "PRINCIPLE_INTERPRETATION",
+      "required_secondary_demands": ["PROCEDURE"],
+      "required_demand_kinds": ["DEFINE_EXPLAIN", "PRINCIPLE_INTERPRET", "PROCEDURE"]
+    },
+    {
+      "id": "sis_implementation_evaluation",
+      "domain": "SAFETY",
+      "question": "SIS 적용 방법과 안전 성능 검증 절차를 평가하시오.",
+      "expected_primary_lens": "IMPLEMENTATION_EVALUATION",
+      "required_secondary_demands": [],
+      "required_demand_kinds": ["IMPLEMENT", "EVALUATE_VERIFY", "PROCEDURE"]
+    },
+    {
+      "id": "industrial_network_compare_selection",
+      "domain": "COMMUNICATION",
+      "question": "산업용 이더넷 프로토콜을 비교하고 실시간 제어용 선정 기준을 제시하시오.",
+      "expected_primary_lens": "COMPARE_SELECTION",
+      "required_secondary_demands": [],
+      "required_demand_kinds": ["COMPARE", "SELECT"]
+    },
+    {
+      "id": "noise_cause_action",
+      "domain": "NOISE",
+      "question": "계장 신호 노이즈의 원인을 분석하고 접지와 차폐 개선 대책을 제시하시오.",
+      "expected_primary_lens": "DIAGNOSIS_ACTION",
+      "required_secondary_demands": [],
+      "required_demand_kinds": ["DIAGNOSE_CAUSE", "ACTION_IMPROVE"]
+    },
+    {
+      "id": "second_order_principle_calculation",
+      "domain": "CONTROL_THEORY",
+      "question": "2차 시스템 공진의 원리를 설명하고 공진주파수 계산 방법을 제시하시오.",
+      "expected_primary_lens": "PRINCIPLE_INTERPRETATION",
+      "required_secondary_demands": ["PROCEDURE"],
+      "required_demand_kinds": ["DEFINE_EXPLAIN", "PRINCIPLE_INTERPRET", "CALCULATE", "PROCEDURE"]
+    }
+  ],
+  "normalization_cases": [
+    {
+      "id": "emoji_variant_stability",
+      "domain": "PID",
+      "question_variants": [
+        "▶️ PID 제어 원리를 설명하시오.",
+        "▶ PID 제어 원리를 설명하시오."
+      ]
+    }
+  ],
+  "formula_integrity_cases": [
+    {
+      "id": "valid_single_line",
+      "domain": "SENSOR",
+      "formula": "V = I * R",
+      "expected_status": "valid",
+      "required_issue_codes": []
+    },
+    {
+      "id": "valid_multiline",
+      "domain": "VALVE",
+      "formula": "F_available\n>= F_spring\n+ F_unbalance\n+ F_friction",
+      "expected_status": "valid",
+      "required_issue_codes": []
+    },
+    {
+      "id": "missing_multiline_operator",
+      "domain": "VALVE",
+      "formula": "F_available = F_spring\nF_unbalance\nF_friction",
+      "expected_status": "warning",
+      "required_issue_codes": ["missing_term_operator"]
+    },
+    {
+      "id": "unbalanced_delimiter",
+      "domain": "CONTROL_THEORY",
+      "formula": "G(s) = K / (s * (s + a)",
+      "expected_status": "invalid",
+      "required_issue_codes": ["unbalanced_delimiter"]
+    }
+  ],
+  "guard_cases": [
+    {
+      "id": "sensor_correctness_owned_by_c",
+      "domain": "SENSOR",
+      "defects": [
+        {
+          "defect_id": "sensor_sign_error",
+          "defect_type": "correctness_error",
+          "severity": "major",
+          "owner_layer": "C",
+          "explanation": "센서 출력 극성 설명이 반대다."
+        }
+      ],
+      "requirements": [],
+      "demand_requirements": [],
+      "expected_blocked_layers": ["C"]
+    },
+    {
+      "id": "valve_design_gap_owned_by_d",
+      "domain": "VALVE",
+      "defects": [
+        {
+          "defect_id": "valve_worst_case_gap",
+          "defect_type": "core_depth_gap",
+          "severity": "major",
+          "owner_layer": "D",
+          "explanation": "최악 차압 조건의 설계 검증이 없다."
+        }
+      ],
+      "requirements": [],
+      "demand_requirements": [],
+      "expected_blocked_layers": ["D"]
+    },
+    {
+      "id": "safety_design_requirement_missing",
+      "domain": "SAFETY",
+      "defects": [],
+      "requirements": [
+        {
+          "requirement_id": "safety_design_requirement",
+          "status": "missing",
+          "is_core": true
+        }
+      ],
+      "demand_requirements": [
+        {
+          "requirement_id": "safety_design_requirement",
+          "demand_kind": "DESIGN"
+        }
+      ],
+      "expected_blocked_layers": ["B", "D"]
+    },
+    {
+      "id": "communication_presentation_only",
+      "domain": "COMMUNICATION",
+      "defects": [
+        {
+          "defect_id": "network_formula_format",
+          "defect_type": "presentation_issue",
+          "severity": "partial",
+          "owner_layer": "C",
+          "explanation": "지연시간 식의 연산자 표시가 불명확하다."
+        }
+      ],
+      "requirements": [],
+      "demand_requirements": [],
+      "expected_blocked_layers": []
+    }
+  ],
+  "verdict_cases": [
+    {
+      "id": "pid_depth_only",
+      "domain": "PID",
+      "defects": [
+        {
+          "defect_id": "pid_depth",
+          "defect_type": "core_depth_gap",
+          "severity": "partial",
+          "owner_layer": "C",
+          "explanation": "적분 포화와 anti-windup 해석이 부족하다."
+        }
+      ],
+      "requirements": [],
+      "demand_requirements": [],
+      "logic_fatal": false,
+      "initial_headline": "핵심 이론 오류",
+      "expected_headline": "핵심 내용은 성립하나 상세 해석 보완 필요",
+      "required_improvement_fragments": ["핵심 해석·설계 깊이"],
+      "forbidden_fragments": ["핵심 이론 오류", "fatal 오류"]
+    },
+    {
+      "id": "valve_presentation_only",
+      "domain": "VALVE",
+      "defects": [
+        {
+          "defect_id": "valve_formula_operator",
+          "defect_type": "presentation_issue",
+          "severity": "warning",
+          "owner_layer": "C",
+          "explanation": "힘 평형식의 항 연결 연산자가 보이지 않는다."
+        }
+      ],
+      "requirements": [],
+      "demand_requirements": [],
+      "logic_fatal": false,
+      "initial_headline": "명백한 기술 오류",
+      "expected_headline": "핵심 내용은 유지되며 수식·표현 확인 필요",
+      "required_improvement_fragments": ["수식·표현 무결성"],
+      "forbidden_fragments": ["명백한 기술 오류", "핵심 이론 오류"]
+    },
+    {
+      "id": "sensor_major_correctness",
+      "domain": "SENSOR",
+      "defects": [
+        {
+          "defect_id": "sensor_major_error",
+          "defect_type": "correctness_error",
+          "severity": "major",
+          "owner_layer": "C",
+          "explanation": "브리지 출력 부호가 반대다."
+        }
+      ],
+      "requirements": [],
+      "demand_requirements": [],
+      "logic_fatal": false,
+      "initial_headline": "상세 해석 보완 필요",
+      "expected_headline": "검증된 핵심 기술 오류 보완 필요",
+      "required_improvement_fragments": ["기술 정확성"],
+      "forbidden_fragments": []
+    },
+    {
+      "id": "communication_advanced_detail",
+      "domain": "COMMUNICATION",
+      "defects": [
+        {
+          "defect_id": "network_advanced",
+          "defect_type": "advanced_detail_missing",
+          "severity": "minor",
+          "owner_layer": "C",
+          "explanation": "시간 동기화 정량 기준이 없다."
+        }
+      ],
+      "requirements": [],
+      "demand_requirements": [],
+      "logic_fatal": false,
+      "initial_headline": "채점 결과",
+      "expected_headline": "핵심 요구 충족, 고득점 세부사항 보완 필요",
+      "required_improvement_fragments": ["고득점 세부사항"],
+      "forbidden_fragments": ["핵심 이론 오류"]
+    },
+    {
+      "id": "safety_missing_requirement",
+      "domain": "SAFETY",
+      "defects": [],
+      "requirements": [
+        {
+          "requirement_id": "verification_requirement",
+          "status": "missing",
+          "is_core": true
+        }
+      ],
+      "demand_requirements": [
+        {
+          "requirement_id": "verification_requirement",
+          "demand_label": "평가·검증·시험"
+        }
+      ],
+      "logic_fatal": false,
+      "initial_headline": "채점 결과",
+      "expected_headline": "문제 요구 일부 보완 필요",
+      "required_improvement_fragments": ["평가·검증·시험"],
+      "forbidden_fragments": ["일반적인 내용을 보완"]
+    },
+    {
+      "id": "control_logic_fatal_preserved",
+      "domain": "CONTROL_THEORY",
+      "defects": [],
+      "requirements": [],
+      "demand_requirements": [],
+      "logic_fatal": true,
+      "initial_headline": "THEORY_CORE 핵심 이론 오류",
+      "expected_headline": "THEORY_CORE 핵심 이론 오류",
+      "required_improvement_fragments": [],
+      "forbidden_fragments": []
+    }
+  ]
+}
