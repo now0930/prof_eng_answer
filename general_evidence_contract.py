@@ -86,6 +86,24 @@ def _text(value: Any, limit: int = 2400) -> str:
     return re.sub(r"\s+", " ", text).strip()[:limit]
 
 
+# FORMULA_NEWLINE_PRESERVATION_V1
+def _formula_text(value: Any, limit: int = 5000) -> str:
+    if value is None:
+        return ""
+
+    text = value if isinstance(value, str) else str(value)
+    text = text.replace("\r\n", "\n").replace("\r", "\n")
+    lines = []
+
+    for raw_line in text.split("\n"):
+        line = re.sub(r"[ \t\f\v]+", " ", raw_line).strip()
+
+        if line:
+            lines.append(line)
+
+    return "\n".join(lines).strip()[:limit]
+
+
 def _token(value: Any) -> str:
     text = _text(value, 200).lower()
     return re.sub(r"[^a-z0-9가-힣]+", "_", text).strip("_")
@@ -228,7 +246,7 @@ def _normalize_formula(raw: Any) -> dict[str, Any] | None:
     if not isinstance(raw, dict):
         raw = {"formula_text": _text(raw)}
 
-    formula_text = _text(
+    formula_text = _formula_text(
         raw.get("formula_text")
         or raw.get("formula")
         or raw.get("expression")
