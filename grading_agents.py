@@ -7105,3 +7105,42 @@ def _phase8_apply_originality_to_layer_scores(layer_scores, originality_eval, vo
         "구조화된 O1~O5 근거와 신뢰 가능한 기술 오류 gate를 사용한다."
     )
     return layer_scores
+
+# LAYER_SPECIFIC_EVIDENCE_GUARD_INTEGRATION_V1
+_layer_evidence_previous_apply_semantic_downward_guard = (
+    _phase6_apply_semantic_downward_guard
+)
+
+
+def _phase6_apply_semantic_downward_guard(
+    layer_scores,
+    baseline_scores,
+    gemini_eval,
+    scoring_model,
+):
+    from layer_evidence_guard import (
+        apply_layer_specific_evidence_guard,
+        has_general_evidence_contract,
+    )
+
+    if not has_general_evidence_contract(
+        gemini_eval
+    ):
+        return (
+            _layer_evidence_previous_apply_semantic_downward_guard(
+                layer_scores,
+                baseline_scores,
+                gemini_eval,
+                scoring_model,
+            )
+        )
+
+    return apply_layer_specific_evidence_guard(
+        layer_scores,
+        baseline_scores,
+        gemini_eval,
+        scoring_model,
+        maximum_resolver=(
+            _phase6_semantic_guard_maximum
+        ),
+    )
