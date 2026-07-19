@@ -1027,3 +1027,358 @@ def attach_control_valve_formula_check(
         )
 
     return output
+
+
+# === CONTROL_VALVE_DETERMINISTIC_CORRECTNESS_V2 ===
+_CONTROL_VALVE_CORRECTNESS_PREVIOUS_EVALUATE_V2 = (
+    evaluate_control_valve_formula_check
+)
+
+
+def _first_matching_line(
+    text: str,
+    pattern: str,
+) -> str:
+    compiled = re.compile(
+        pattern,
+        flags=re.IGNORECASE,
+    )
+
+    for line in _normalize_text(text).splitlines():
+        if compiled.search(line):
+            return line.strip()
+
+    return ""
+
+
+def _viscous_friction_overgeneralization_finding(
+    answer_text: str,
+) -> dict[str, Any] | None:
+    normalized = _normalize_text(answer_text)
+    compact = normalized.upper()
+
+    equation_pattern = (
+        r"(?<![A-Z0-9_])"
+        r"F[_\s]?(?:B|F)"
+        r"(?![A-Z0-9_])"
+        r"\s*=\s*C\s*\*\s*V"
+        r"(?![A-Z0-9_])"
+    )
+    proportional_pattern = (
+        r"(?:마찰력|FRICTION)"
+        r".{0,80}"
+        r"(?:속도|VELOCITY)"
+        r".{0,40}"
+        r"(?:비례|PROPORTIONAL)"
+    )
+
+    equation_match = re.search(
+        equation_pattern,
+        compact,
+        flags=re.IGNORECASE,
+    )
+    proportional_match = re.search(
+        proportional_pattern,
+        normalized,
+        flags=(
+            re.IGNORECASE
+            | re.DOTALL
+        ),
+    )
+    negated_proportional = bool(
+        re.search(
+            r"(?:단순히|항상|일반적으로)?"
+            r".{0,20}"
+            r"(?:속도|VELOCITY)"
+            r".{0,20}"
+            r"(?:비례하지\s*않|"
+            r"비례하는\s*것이\s*아니|"
+            r"NOT\s+PROPORTIONAL)",
+            normalized,
+            flags=(
+                re.IGNORECASE
+                | re.DOTALL
+            ),
+        )
+    )
+    has_viscous_generalization = bool(
+        equation_match
+        or (
+            proportional_match
+            and not negated_proportional
+        )
+    )
+
+    if not has_viscous_generalization:
+        return None
+
+    friction_components = (
+        "breakaway",
+        "stiction",
+        "packing",
+        "패킹",
+        "정지마찰",
+        "운동마찰",
+        "coulomb",
+        "hysteresis",
+        "히스테리시스",
+        "stick-slip",
+        "가이드 마찰",
+        "guide friction",
+    )
+    lowered = normalized.lower()
+
+    has_real_valve_friction_context = any(
+        token.lower() in lowered
+        for token in friction_components
+    )
+    has_limited_model_qualification = bool(
+        re.search(
+            r"(?:점성\s*성분|일부\s*동적|"
+            r"단순화(?:한)?\s*모델|"
+            r"viscous\s+component|"
+            r"simplified\s+dynamic)",
+            normalized,
+            flags=re.IGNORECASE,
+        )
+    )
+
+    if (
+        has_real_valve_friction_context
+        and has_limited_model_qualification
+    ):
+        return None
+
+    evidence = _first_matching_line(
+        normalized,
+        equation_pattern,
+    )
+
+    if not evidence:
+        evidence = _first_matching_line(
+            normalized,
+            proportional_pattern,
+        )
+
+    return _finding(
+        finding_id=(
+            "friction_viscous_model_"
+            "overgeneralized"
+        ),
+        severity="major",
+        message=(
+            "제어밸브 선정용 마찰력을 "
+            "속도 비례 점성력으로 일반화했습니다."
+        ),
+        evidence=evidence,
+        correct_rule=(
+            "Fail-Safe 힘 선정에서는 패킹·가이드 "
+            "마찰, 정지마찰, Breakaway, Stiction과 "
+            "운동마찰을 구분하고 최악 저항력을 "
+            "사용해야 합니다. Fb=C·v는 점성 성분의 "
+            "제한된 동적 모델로만 사용할 수 있습니다."
+        ),
+    )
+
+
+def _force_balance_sign_contradiction_finding(
+    answer_text: str,
+) -> dict[str, Any] | None:
+    normalized = _normalize_text(answer_text)
+    compact = re.sub(
+        r"\s+",
+        "",
+        normalized.upper(),
+    )
+
+    derived_formula = bool(
+        re.search(
+            r"FS=FB-F1\+F2",
+            compact,
+        )
+    )
+    opposite_formula = bool(
+        re.search(
+            r"FS(?:>=|>|≥)"
+            r"(?:FB\+F1-F2|"
+            r"\(?F1-F2\)?\+FB)",
+            compact,
+        )
+    )
+    opposite_prose = bool(
+        re.search(
+            r"F1\s*-\s*F2"
+            r".{0,180}"
+            r"FB"
+            r".{0,120}"
+            r"(?:합산|합|더한|크)",
+            normalized,
+            flags=(
+                re.IGNORECASE
+                | re.DOTALL
+            ),
+        )
+        or re.search(
+            r"FB"
+            r".{0,180}"
+            r"F1\s*-\s*F2"
+            r".{0,120}"
+            r"(?:합산|합|더한|크)",
+            normalized,
+            flags=(
+                re.IGNORECASE
+                | re.DOTALL
+            ),
+        )
+    )
+
+    if not (
+        derived_formula
+        and (
+            opposite_formula
+            or opposite_prose
+        )
+    ):
+        return None
+
+    evidence_parts = []
+
+    for pattern in (
+        r"FS\s*=\s*FB\s*-\s*F1\s*\+\s*F2",
+        r"F1\s*-\s*F2.{0,180}FB.{0,120}(?:합산|합|더한|크)",
+    ):
+        match = re.search(
+            pattern,
+            normalized,
+            flags=(
+                re.IGNORECASE
+                | re.DOTALL
+            ),
+        )
+
+        if match:
+            evidence_parts.append(
+                re.sub(
+                    r"\s+",
+                    " ",
+                    match.group(0),
+                ).strip()[:240]
+            )
+
+    return _finding(
+        finding_id=(
+            "force_balance_requirement_"
+            "sign_contradiction"
+        ),
+        severity="major",
+        message=(
+            "동일 답안에서 Fail-Safe 스프링 요구력의 "
+            "압력력 부호가 서로 반대로 제시되었습니다."
+        ),
+        evidence=" | ".join(evidence_parts),
+        correct_rule=(
+            "양의 이동 방향과 각 힘의 작용 방향을 먼저 "
+            "정한 뒤 하나의 부호 규약으로 힘 평형식과 "
+            "최악조건 부등식을 일관되게 전개해야 합니다."
+        ),
+    )
+
+
+def _additional_control_valve_correctness_findings_v2(
+    answer_text: str,
+) -> list[dict[str, Any]]:
+    findings = []
+
+    for candidate in (
+        _viscous_friction_overgeneralization_finding(
+            answer_text
+        ),
+        _force_balance_sign_contradiction_finding(
+            answer_text
+        ),
+    ):
+        if isinstance(candidate, dict):
+            findings.append(candidate)
+
+    return findings
+
+
+def evaluate_control_valve_formula_check(
+    *,
+    answer_text: str,
+    topic_id: str,
+) -> dict[str, Any]:
+    result = (
+        _CONTROL_VALVE_CORRECTNESS_PREVIOUS_EVALUATE_V2(
+            answer_text=answer_text,
+            topic_id=topic_id,
+        )
+    )
+
+    if not isinstance(result, dict):
+        return result
+
+    if not result.get("applicable"):
+        return result
+
+    output = copy.deepcopy(result)
+    findings = output.get("findings")
+
+    if not isinstance(findings, list):
+        findings = []
+
+    existing_ids = {
+        str(item.get("id") or "")
+        for item in findings
+        if isinstance(item, dict)
+    }
+
+    for finding in (
+        _additional_control_valve_correctness_findings_v2(
+            answer_text
+        )
+    ):
+        finding_id = str(finding.get("id") or "")
+
+        if finding_id in existing_ids:
+            continue
+
+        findings.append(finding)
+        existing_ids.add(finding_id)
+
+    output["findings"] = findings
+    major = any(
+        isinstance(item, dict)
+        and str(item.get("severity") or "").lower()
+        in {"major", "fatal"}
+        for item in findings
+    )
+    warning = any(
+        isinstance(item, dict)
+        and str(item.get("severity") or "").lower()
+        in {"warning", "minor", "partial"}
+        for item in findings
+    )
+
+    output["major_error_detected"] = major
+    output["warning_detected"] = warning
+    output["verdict"] = (
+        "major"
+        if major
+        else "warn"
+        if warning
+        else "pass"
+    )
+    output[
+        "deterministic_correctness_marker"
+    ] = "CONTROL_VALVE_DETERMINISTIC_CORRECTNESS_V2"
+    output["summary"] = (
+        "명시적 제어밸브 힘 모델 또는 방향 관계의 "
+        "기술 모순을 확인했습니다."
+        if major
+        else "수식·방향 정의 보완 경고가 있습니다."
+        if warning
+        else "확인 가능한 수식과 방향 관계에 "
+        "명시적 모순이 없습니다."
+    )
+    return output

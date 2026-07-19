@@ -5094,6 +5094,17 @@ def _phase2_postprocess_grade(legacy_result):
             grade,
             answer_text,
         )
+
+        # CONTROL_VALVE_CORRECTNESS_BRIDGE_V1
+        from control_valve_correctness_bridge import (
+            merge_control_valve_findings_into_evidence,
+        )
+
+        grade = (
+            merge_control_valve_findings_into_evidence(
+                grade
+            )
+        )
         formula_eval = grade.get(
             "formula_check_evaluation"
         )
