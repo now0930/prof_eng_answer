@@ -5105,6 +5105,17 @@ def _phase2_postprocess_grade(legacy_result):
                 grade
             )
         )
+
+        # VERIFIED_DEFECT_RECONCILIATION_V1
+        from verified_defect_reconciliation import (
+            reconcile_verified_defects_with_coverage,
+        )
+
+        grade = (
+            reconcile_verified_defects_with_coverage(
+                grade
+            )
+        )
         formula_eval = grade.get(
             "formula_check_evaluation"
         )
