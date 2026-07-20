@@ -433,5 +433,159 @@ class GradeSessionIsolationTests(
         )
 
 
+
+
+class BotSecondWriterPersistenceTests(
+    unittest.TestCase
+):
+    def test_grade_answer_returns_and_saves_finalized_grade(
+        self,
+    ):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            sessions = Path(temp_dir)
+            sid = "20260719_230000_5960502198"
+            session_dir = sessions / sid
+            session_dir.mkdir(
+                parents=True,
+                exist_ok=True,
+            )
+            state = {
+                "chats": {
+                    "5960502198": {
+                        "active_session": sid,
+                    },
+                },
+            }
+
+            with (
+                patch.object(
+                    bot,
+                    "SESSIONS_DIR",
+                    sessions,
+                ),
+                patch.object(
+                    bot,
+                    "get_active_session",
+                    return_value=sid,
+                ),
+                patch.object(
+                    bot,
+                    "load_meta",
+                    return_value={
+                        "session_id": sid,
+                        "images": [],
+                        "status": "created",
+                    },
+                ),
+                patch.object(
+                    bot,
+                    "save_meta",
+                    lambda _sid, _meta: None,
+                ),
+                patch.object(
+                    bot,
+                    "load_rubric",
+                    return_value={},
+                ),
+                patch.object(
+                    bot,
+                    "run_agent_pipeline",
+                    return_value=(
+                        "raw semantic result",
+                        stale_verified_grade(),
+                    ),
+                ),
+                patch.object(
+                    bot,
+                    "reconcile_grade_score",
+                    side_effect=(
+                        lambda **kwargs: kwargs[
+                            "parsed"
+                        ]
+                    ),
+                ),
+            ):
+                (
+                    returned_sid,
+                    raw_result,
+                    parsed,
+                ) = bot.grade_answer(
+                    5960502198,
+                    "bad answer fixture",
+                    state,
+                )
+
+            saved = json.loads(
+                (
+                    session_dir / "grade.json"
+                ).read_text(encoding="utf-8")
+            )
+
+        self.assertEqual(returned_sid, sid)
+        self.assertEqual(
+            raw_result,
+            "raw semantic result",
+        )
+
+        for payload in (parsed, saved):
+            coverage = payload[
+                "question_type_coverage"
+            ]
+            summary = payload[
+                "question_type_coverage_summary"
+            ]
+            reconciliation = payload[
+                "verified_defect_reconciliation"
+            ]
+
+            self.assertEqual(
+                coverage["overall_coverage"],
+                "weak",
+            )
+            self.assertEqual(
+                summary["sub_criteria_incorrect"],
+                2,
+            )
+            self.assertEqual(
+                reconciliation[
+                    "final_persistence"
+                ]["marker"],
+                "FINAL_VERIFIED_COVERAGE_PERSISTENCE_V1",
+            )
+            self.assertEqual(
+                reconciliation[
+                    "bot_persistence"
+                ]["marker"],
+                "BOT_FINAL_GRADE_PERSISTENCE_V1",
+            )
+
+    def test_bot_finalizer_order_is_exact(self):
+        source = Path(
+            bot.__file__
+        ).read_text(encoding="utf-8")
+
+        start = source.index("def grade_answer(")
+        score_reconcile = source.index(
+            "parsed = reconcile_grade_score(",
+            start,
+        )
+        finalizer = source.index(
+            "_finalize_grade_before_bot_persistence(",
+            score_reconcile,
+        )
+        write = source.index(
+            '(session_dir / "grade.json").write_text(',
+            finalizer,
+        )
+        returned = source.index(
+            "return sid, raw_result, parsed",
+            write,
+        )
+
+        self.assertLess(score_reconcile, finalizer)
+        self.assertLess(finalizer, write)
+        self.assertLess(write, returned)
+
+
 if __name__ == "__main__":
     unittest.main()

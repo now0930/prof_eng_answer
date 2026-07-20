@@ -723,6 +723,45 @@ def call_ollama_score_adjudicator(prompt):
 
 
 
+# === BOT_FINAL_GRADE_PERSISTENCE_V1 ===
+def _finalize_grade_before_bot_persistence(
+    parsed,
+):
+    if not isinstance(parsed, dict):
+        return parsed
+
+    from grading_agents import (
+        _phase2_finalize_verified_coverage_for_persistence,
+    )
+
+    output = (
+        _phase2_finalize_verified_coverage_for_persistence(
+            parsed
+        )
+    )
+
+    if isinstance(output, dict):
+        reconciliation = output.get(
+            "verified_defect_reconciliation"
+        )
+
+        if isinstance(reconciliation, dict):
+            reconciliation[
+                "bot_persistence"
+            ] = {
+                "marker": (
+                    "BOT_FINAL_GRADE_PERSISTENCE_V1"
+                ),
+                "position": (
+                    "after_reconcile_grade_score_"
+                    "before_grade_json_write"
+                ),
+                "score_effect": "none",
+            }
+
+    return output
+
+
 def grade_answer(chat_id, raw_text, state):
     sid = get_active_session(chat_id, state)
     session_dir = SESSIONS_DIR / sid
@@ -751,6 +790,14 @@ def grade_answer(chat_id, raw_text, state):
                 call_ollama_score_adjudicator
             ),
         )
+
+        # BOT_FINAL_GRADE_PERSISTENCE_V1
+        parsed = (
+            _finalize_grade_before_bot_persistence(
+                parsed
+            )
+        )
+
         parsed["backend"] = "ollama"
         parsed["model"] = OLLAMA_MODEL
 
