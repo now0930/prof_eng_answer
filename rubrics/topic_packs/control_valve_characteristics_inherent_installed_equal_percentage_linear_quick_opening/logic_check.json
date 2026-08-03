@@ -1,0 +1,173 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "제어밸브 고유·설치 유량특성과 Linear·Equal Percentage·Quick Opening",
+    "question_type": "COMPARE_SELECTION",
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_aliases": [
+      "제어밸브 고유 유량특성",
+      "제어밸브 설치 유량특성",
+      "inherent flow characteristic",
+      "installed flow characteristic",
+      "equal percentage valve characteristic",
+      "linear valve characteristic",
+      "quick opening valve characteristic"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "제어밸브의 Inherent·Installed Flow Characteristic와 Linear·Equal Percentage·Quick Opening 선정 논리를 평가한다.",
+    "difficulty": "FIELD_APPLICATION",
+    "cap_policy": {},
+    "candidate_extraction": {
+      "max_candidates": 24,
+      "nearby_window": 1,
+      "rules": [],
+      "key_terms": [
+        "Inherent Characteristic",
+        "Installed Characteristic",
+        "고유 유량특성",
+        "설치 유량특성",
+        "Equal Percentage",
+        "등비 유량특성",
+        "Linear Characteristic",
+        "Quick Opening",
+        "같은 절대량",
+        "같은 비율",
+        "항상 선형",
+        "system resistance",
+        "pump curve",
+        "static head",
+        "valve differential pressure"
+      ]
+    },
+    "truth_schema": [
+      "Inherent Flow Characteristic는 유체 조건과 밸브 전후 차압을 일정한 기준조건으로 유지할 때 valve travel과 flow coefficient 또는 이에 비례하는 유량 사이의 관계이다.",
+      "Installed Flow Characteristic는 밸브가 실제 배관계에 설치된 상태에서 valve travel과 실제 유량 사이에 나타나는 관계이다.",
+      "Inherent Characteristic는 밸브·trim 자체의 기준특성이고 Installed Characteristic는 밸브와 공정 시스템의 결합특성이므로 두 개념을 구분해야 한다.",
+      "유량특성곡선은 일반적으로 normalized travel x=l/l_rated와 relative capacity y=Cv/Cv_rated의 관계로 비교한다.",
+      "비압축성·비초크 조건에서 유량은 정성적으로 Q∝Cv(x)√(ΔPv(x)/SG)의 관계를 가지므로 actual flow는 Cv와 valve differential pressure의 결합 결과이다.",
+      "이상적인 Linear Characteristic는 동일한 valve travel 증가마다 flow coefficient가 같은 절대량만큼 증가하는 특성이다.",
+      "Equal Percentage Characteristic는 동일한 valve travel 증가마다 현재 flow coefficient에 대해 같은 비율로 증가하는 특성이다.",
+      "이상적인 Equal Percentage 곡선은 y=R^(x-1)과 같이 relative Cv가 travel에 대해 지수적으로 증가하는 형태로 표현할 수 있다.",
+      "Equal Percentage는 같은 비율로 증가하므로 동일 travel 변화에 대한 절대 Cv 증가는 저개도에서 작고 고개도에서 커진다.",
+      "Quick Opening Characteristic는 초기 travel에서 큰 capacity 증가가 발생하고 이후 travel 증가에 따른 추가 capacity 증가가 작아지는 특성이다.",
+      "Inherent Characteristic는 valve differential pressure와 유체 조건을 일정하게 유지하는 기준조건에서 정의되며 이 조건에서 flow 변화는 trim Cv 곡선을 더 직접적으로 따른다.",
+      "실제 시스템에서는 flow 변화에 따라 배관·기기 압력손실과 valve에 배분되는 differential pressure가 재분배되어 Installed Characteristic가 Inherent curve와 달라질 수 있다.",
+      "난류 영역의 일반적인 pipe와 equipment friction loss는 정성적으로 ΔPsystem≈KQ²로 증가하여 flow 증가 시 valve에 남는 differential pressure를 변화시킨다.",
+      "Centrifugal pump가 공급하는 head는 일반적으로 flow 증가와 함께 감소하므로 pump curve가 운전점별 available pressure와 valve differential pressure에 영향을 준다.",
+      "Static head는 flow와 직접 비례하지 않는 pressure requirement로 작용하여 friction-dominated system과 다른 valve differential pressure 분배를 만들 수 있다.",
+      "Linear inherent trim도 flow 증가에 따라 valve differential pressure가 감소하면 actual installed flow가 모든 travel에서 선형으로 증가하지 않는다.",
+      "Equal Percentage의 travel과 함께 증가하는 inherent slope는 감소하는 valve differential pressure 또는 변하는 공정 민감도를 부분적으로 보상하여 넓은 부하범위의 제어에 유리할 수 있다.",
+      "Valve characteristic는 minimum·normal·maximum flow, valve differential pressure, pump 또는 pressure source, static head, system resistance, load range, control precision과 service purpose를 함께 고려하여 선정한다.",
+      "Linear, Equal Percentage와 Quick Opening의 공정별 적용은 일반적 경향이며 system condition과 control objective를 확인하지 않은 절대적 mapping으로 사용해서는 안 된다.",
+      "Installed curve의 국부기울기는 운전점별 installed valve gain의 정성적 의미를 나타내지만 Authority, Rangeability와 정량 gain 설계는 Topic 3이 담당한다.",
+      "최종 characteristic selection은 manufacturer inherent curve와 예상 pump·system pressure model을 결합하여 minimum·normal·maximum operating point의 installed curve를 검토한다.",
+      "설치 후 commissioning에서는 command, valve travel, upstream·downstream pressure와 flow response를 비교하여 expected Installed Characteristic와 제어성능을 확인한다."
+    ],
+    "fatal_conditions": [
+      "[control_valve_inherent_installed_same_concept] Inherent Characteristic와 Installed Characteristic는 동일한 개념이다.",
+      "[control_valve_inherent_includes_system_resistance] Inherent Characteristic는 배관 저항과 pump curve를 포함한 현장 실측곡선이다.",
+      "[control_valve_installed_is_constant_dp_bench_curve] Installed Characteristic는 밸브 단독으로 차압을 일정하게 유지하여 측정한 곡선이다.",
+      "[control_valve_equal_percentage_equal_absolute_increment] Equal Percentage는 동일 travel마다 유량 또는 Cv가 같은 절대량만큼 증가한다.",
+      "[control_valve_equal_percentage_linear_with_travel] Equal Percentage는 travel에 정비례하는 Linear Characteristic이다.",
+      "[control_valve_equal_percentage_largest_low_travel_increment] Equal Percentage는 저개도에서 동일 travel당 절대 유량 증가가 가장 크다.",
+      "[control_valve_linear_always_installed_linear] Linear trim이면 실제 배관에서도 travel과 유량이 항상 선형이다.",
+      "[control_valve_quick_opening_precision_control_default] Quick Opening은 정밀 연속제어에 가장 적합한 일반 characteristic이다.",
+      "[control_valve_system_pressure_distribution_no_effect] system pressure distribution, pipe resistance와 pump curve는 valve characteristic에 영향을 주지 않는다.",
+      "[control_valve_variable_dp_no_installed_distortion] 운전점에 따라 valve differential pressure가 변해도 inherent curve가 실제 유량에 그대로 나타난다.",
+      "[control_valve_trim_only_determines_installed_curve] Installed Characteristic는 trim 형상만으로 결정된다.",
+      "[control_valve_linear_guarantees_constant_process_gain] Linear trim은 모든 운전범위에서 일정한 process gain 또는 loop gain을 보장한다."
+    ],
+    "safe_conditions": [
+      "Equal Percentage는 같은 절대량이 아니라 같은 비율로 증가한다.",
+      "Linear inherent trim이라도 실제 installed flow가 항상 선형인 것은 아니다.",
+      "Quick Opening은 정밀 연속제어보다 On-Off 또는 bypass service에 일반적으로 적합하다.",
+      "밸브 차압이 거의 일정하면 Installed Characteristic가 Inherent Characteristic에 가까울 수 있다.",
+      "Equal Percentage가 changing valve differential pressure를 부분적으로 보상할 수 있으나 항상 linear installed flow를 보장하지는 않는다.",
+      "Inherent와 Installed를 같은 개념이라고 설명하면 안 된다.",
+      "오답 문장을 인용한 뒤 틀리다고 반박한 문장은 오답 주장으로 판정하지 않는다.",
+      "비압축성·비초크 조건을 명시하고 Q∝Cv√(ΔPv/SG)를 사용하는 것은 허용한다.",
+      "R을 Equal Percentage curve parameter로 정의하여 후속 식에서 재사용할 수 있다.",
+      "특수 service에서 Quick Opening을 제한적으로 modulation할 수 있다고 조건부로 설명할 수 있다."
+    ],
+    "output_contract": {
+      "fatal_true_topic_trust": "limited",
+      "fatal_false_topic_trust": "trusted",
+      "direct_score_layers": [],
+      "excluded_score_layers": [
+        "D",
+        "E"
+      ],
+      "diagnostic_focus_layers": [
+        "B",
+        "C"
+      ],
+      "score_effect": "diagnostic_only"
+    },
+    "major_checks": [
+      {
+        "id": "control_valve_equal_percentage_always_best",
+        "claim": "모든 제어공정에는 Equal Percentage가 항상 최적이다.",
+        "correction": "characteristic selection은 valve ΔP 변화, load range, process response와 service purpose에 의존한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_quick_opening_never_modulates",
+        "claim": "Quick Opening은 구조적으로 어떠한 중간개도 운전도 불가능하다.",
+        "correction": "일반적으로 On-Off에 적합하지만 구조적으로 modulation이 절대 불가능하다고 단정할 수 없다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_heat_exchanger_unconditional_mapping",
+        "claim": "모든 열교환기는 system condition과 무관하게 Equal Percentage만 사용해야 한다.",
+        "correction": "Equal Percentage가 흔히 적합하지만 pump, valve ΔP, load range와 control objective를 확인해야 한다.",
+        "severity": "major"
+      }
+    ],
+    "feedback_templates": {},
+    "next_practice_points": [
+      "Inherent와 Installed의 기준조건을 먼저 구분한다.",
+      "normalized travel과 relative Cv의 축을 정의한다.",
+      "Linear의 동일 절대증가와 Equal Percentage의 동일 비율증가를 비교한다.",
+      "Quick Opening의 초기 급증과 service purpose를 연결한다.",
+      "Q, Cv와 valve differential pressure의 조건부 관계를 설명한다.",
+      "system resistance, pump curve와 static head를 구분한다.",
+      "characteristic mapping을 system condition에 따른 조건부 판단으로 제시한다.",
+      "manufacturer curve와 actual installed response를 확인한다."
+    ],
+    "false_positive_cautions": [
+      "Equal Percentage는 같은 절대량이 아니라 같은 비율로 증가한다고 반박한 문장을 오류로 판정하지 않는다.",
+      "Linear inherent라도 installed flow가 항상 linear인 것은 아니라고 설명한 문장을 오류로 판정하지 않는다.",
+      "밸브 차압이 거의 일정한 제한조건에서 Installed가 Inherent에 가까울 수 있다는 설명을 동일개념 오답으로 판정하지 않는다.",
+      "Equal Percentage가 changing valve ΔP를 부분적으로 보상할 수 있으나 보장하지 않는다는 조건부 설명을 오류로 판정하지 않는다.",
+      "Quick Opening은 On-Off에 일반적으로 적합하지만 특수 service에서 modulation할 수 있다는 조건부 설명을 오류로 판정하지 않는다.",
+      "R을 curve parameter로 정의한 뒤 후속 식에서 재사용한 답안을 Rangeability 오류로 판정하지 않는다.",
+      "오답을 인용한 뒤 틀리다, 아니다 또는 혼동하면 안 된다고 반박한 문장은 fatal claim으로 판정하지 않는다.",
+      "표나 curve sketch의 label만으로 fatal을 확정하지 않고 axis, 본문과 수식을 함께 확인한다."
+    ],
+    "enabled": true,
+    "score_policy": {
+      "status": "provisional",
+      "scope": "field_application_topic_profile",
+      "score_effect": "diagnostic_only",
+      "direct_score_application": false,
+      "fatal_layer_caps": {},
+      "recommended_ceiling": null,
+      "direct_d_e_effect": "none",
+      "reason": "Verified characteristic 오류의 canonical owner는 C이며 Logic 결과는 전문가 calibration 전까지 diagnostic-only로 유지한다."
+    }
+  },
+  "revision_notes": [
+    "deterministic check를 비활성화하고 LLM 기반 Topic trust 검사를 사용한다.",
+    "12개 fatal definition·curve·system-causality 오류와 3개 conditional major 오류를 작성했다.",
+    "negation, contrast, conditional statement와 formula variable reuse에 대한 false-positive guard를 추가했다.",
+    "D/E 직접 점수반영과 B/C 중복감점을 금지했다."
+  ]
+}

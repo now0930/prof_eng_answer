@@ -1,13 +1,23 @@
 {
-  "version": "2026-07-17T12:50:45Z-generated-topic-pack-manifest",
+  "version": "2026-08-03T01:35:01Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 24,
+  "topic_count": 25,
   "topics": [
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

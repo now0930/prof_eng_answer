@@ -1,0 +1,22 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "COMPARE_SELECTION",
+  "high_band_unlock_conditions": [
+    "Inherent와 Installed의 기준조건과 system boundary를 정확히 구분한다.",
+    "Linear, Equal Percentage와 Quick Opening의 curve 의미를 비교한다.",
+    "Equal Percentage의 동일 비율 증가와 저·고개도 절대증가 차이를 설명한다.",
+    "Q, Cv와 valve differential pressure를 조건부 관계로 연결한다.",
+    "pressure-drop redistribution, pump curve, static head와 system resistance를 설명한다.",
+    "application mapping을 조건부로 제시하고 manufacturer·commissioning 검증을 포함한다."
+  ],
+  "note": "제어밸브의 inherent curve를 실제 installed response와 연결하여 characteristic를 선정하는 현장응용 Topic이다. 정의 비교와 system pressure distribution의 인과관계가 중요하므로 FIELD_APPLICATION / NORMAL로 분류한다.",
+  "revision_notes": [
+    "센서·계측·밸브 Application Topic 분류정책을 적용했다.",
+    "로드맵 ★★★★★는 작성 우선순위이며 runtime selection_importance와 분리했다.",
+    "CORE_MUST_PREPARE를 사용하지 않았다."
+  ],
+  "topic_label": "제어밸브 유량특성과 설치특성"
+}

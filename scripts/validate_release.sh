@@ -208,6 +208,9 @@ python3 scripts/test_score_flow_guards.py
 echo
 echo "===== model answer router regression ====="
 python3 scripts/test_model_answer_router.py
+echo
+echo "===== control valve characteristic topic regression ====="
+python3 scripts/test_control_valve_characteristics_topic.py
 
 echo
 echo "===== topic importance scope validation regression ====="

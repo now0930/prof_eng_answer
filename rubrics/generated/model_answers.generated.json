@@ -1,5 +1,5 @@
 {
-  "version": "2026-07-17T12:50:45Z-generated-topic-pack-model-answers",
+  "version": "2026-08-03T01:35:01Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -464,6 +464,338 @@
         "lead·lag·PID 보상 전후 margin과 bandwidth를 비교한다.",
         "저주파 외란 억제와 고주파 센서 잡음의 trade-off를 검토한다.",
         "운전점, 포화, rate limit, deadband와 모델 오차를 확인한다."
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+      "title_ko": "제어밸브 고유·설치 유량특성과 Linear·Equal Percentage·Quick Opening",
+      "question_type": "COMPARE_SELECTION",
+      "expected_question_patterns": [
+        {
+          "pattern": "제어밸브의 Inherent Flow Characteristic와 Installed Flow Characteristic를 비교하시오.",
+          "intent": "고유 유량특성과 설치 유량특성 비교",
+          "required_anchor_ids": [
+            "control_valve_inherent_characteristic_definition",
+            "control_valve_installed_characteristic_definition",
+            "control_valve_inherent_installed_distinction",
+            "control_valve_inherent_constant_pressure_drop_condition",
+            "control_valve_installed_pressure_drop_redistribution"
+          ]
+        },
+        {
+          "pattern": "Linear, Equal Percentage 및 Quick Opening 특성을 비교하고 적용 기준을 설명하시오.",
+          "intent": "세 가지 inherent characteristic 비교와 선정",
+          "required_anchor_ids": [
+            "control_valve_linear_characteristic_definition",
+            "control_valve_equal_percentage_characteristic_definition",
+            "control_valve_equal_percentage_absolute_increment",
+            "control_valve_quick_opening_characteristic_definition",
+            "control_valve_application_mapping_is_conditional"
+          ]
+        },
+        {
+          "pattern": "제어밸브 고유 유량특성이 실제 배관에서 설치 유량특성으로 변형되는 원인을 설명하시오.",
+          "intent": "pressure-drop redistribution과 installed distortion",
+          "required_anchor_ids": [
+            "control_valve_flow_valve_dp_dependency_boundary",
+            "control_valve_installed_pressure_drop_redistribution",
+            "control_valve_system_resistance_flow_squared_relation",
+            "control_valve_linear_installed_distortion"
+          ]
+        },
+        {
+          "pattern": "Equal Percentage 특성이 넓은 부하범위의 공정에 자주 적용되는 이유를 설명하시오.",
+          "intent": "Equal Percentage 곡선과 조건부 보상효과",
+          "required_anchor_ids": [
+            "control_valve_equal_percentage_characteristic_definition",
+            "control_valve_equal_percentage_exponential_relation",
+            "control_valve_equal_percentage_absolute_increment",
+            "control_valve_equal_percentage_partial_compensation",
+            "control_valve_application_mapping_is_conditional"
+          ]
+        },
+        {
+          "pattern": "Quick Opening Characteristic의 곡선 형상과 적용 분야를 설명하시오.",
+          "intent": "Quick Opening 형상과 service 선정",
+          "required_anchor_ids": [
+            "control_valve_quick_opening_characteristic_definition",
+            "control_valve_application_mapping_is_conditional",
+            "control_valve_characteristic_selection_criteria"
+          ]
+        },
+        {
+          "pattern": "pump curve, static head 및 system resistance가 Installed Characteristic에 미치는 영향을 설명하시오.",
+          "intent": "pressure source와 system curve 영향",
+          "required_anchor_ids": [
+            "control_valve_installed_pressure_drop_redistribution",
+            "control_valve_system_resistance_flow_squared_relation",
+            "control_valve_pump_curve_installed_characteristic_effect",
+            "control_valve_static_head_installed_characteristic_effect"
+          ]
+        },
+        {
+          "pattern": "공정 운전범위와 제어 목적에 따른 제어밸브 유량특성 선정절차를 설명하시오.",
+          "intent": "현장 characteristic 선정과 검증",
+          "required_anchor_ids": [
+            "control_valve_characteristic_selection_criteria",
+            "control_valve_application_mapping_is_conditional",
+            "control_valve_manufacturer_curve_system_model_verification",
+            "control_valve_commissioning_characteristic_verification"
+          ]
+        },
+        {
+          "pattern": "Linear, Equal Percentage 및 Quick Opening 곡선을 그리고 동일 travel 변화에 대한 capacity 변화를 비교하시오.",
+          "intent": "정규화 characteristic curve 해석",
+          "required_anchor_ids": [
+            "control_valve_normalized_travel_relative_capacity",
+            "control_valve_linear_characteristic_definition",
+            "control_valve_equal_percentage_characteristic_definition",
+            "control_valve_equal_percentage_absolute_increment",
+            "control_valve_quick_opening_characteristic_definition"
+          ]
+        },
+        {
+          "pattern": "Linear trim이 실제 배관에서도 항상 linear flow를 보장하지 않는 이유를 설명하시오.",
+          "intent": "Linear installed misconception 검토",
+          "required_anchor_ids": [
+            "control_valve_inherent_constant_pressure_drop_condition",
+            "control_valve_flow_valve_dp_dependency_boundary",
+            "control_valve_installed_pressure_drop_redistribution",
+            "control_valve_linear_installed_distortion"
+          ]
+        },
+        {
+          "pattern": "Installed curve의 기울기와 Valve Authority·Rangeability의 관계를 Topic 경계에 유의하여 설명하시오.",
+          "intent": "installed local slope와 Topic 3 경계",
+          "required_anchor_ids": [
+            "control_valve_installed_local_slope_topic_boundary",
+            "control_valve_characteristic_selection_criteria",
+            "control_valve_manufacturer_curve_system_model_verification"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "유량특성의 정의와 좌표",
+          "intent": "normalized travel과 relative Cv를 정의하고 characteristic curve의 분석경계를 제시한다.",
+          "anchor_refs": [
+            "control_valve_normalized_travel_relative_capacity",
+            "control_valve_flow_valve_dp_dependency_boundary"
+          ]
+        },
+        {
+          "section": "Inherent와 Installed 비교",
+          "intent": "constant valve ΔP 기준특성과 실제 system combined characteristic를 구분한다.",
+          "anchor_refs": [
+            "control_valve_inherent_characteristic_definition",
+            "control_valve_installed_characteristic_definition",
+            "control_valve_inherent_installed_distinction",
+            "control_valve_inherent_constant_pressure_drop_condition"
+          ]
+        },
+        {
+          "section": "Linear, Equal Percentage와 Quick Opening",
+          "intent": "동일 절대증가, 동일 비율증가와 초기 급개방의 곡선 의미를 비교한다.",
+          "anchor_refs": [
+            "control_valve_linear_characteristic_definition",
+            "control_valve_equal_percentage_characteristic_definition",
+            "control_valve_equal_percentage_exponential_relation",
+            "control_valve_equal_percentage_absolute_increment",
+            "control_valve_quick_opening_characteristic_definition"
+          ]
+        },
+        {
+          "section": "valve differential pressure와 installed distortion",
+          "intent": "Q, Cv와 valve ΔP의 조건부 관계 및 pressure-drop redistribution을 연결한다.",
+          "anchor_refs": [
+            "control_valve_flow_valve_dp_dependency_boundary",
+            "control_valve_installed_pressure_drop_redistribution",
+            "control_valve_system_resistance_flow_squared_relation",
+            "control_valve_linear_installed_distortion"
+          ]
+        },
+        {
+          "section": "pump curve, static head와 system resistance",
+          "intent": "pressure source와 system curve 구성항이 operating point에 미치는 영향을 설명한다.",
+          "anchor_refs": [
+            "control_valve_pump_curve_installed_characteristic_effect",
+            "control_valve_static_head_installed_characteristic_effect",
+            "control_valve_installed_pressure_drop_redistribution"
+          ]
+        },
+        {
+          "section": "조건부 선정 기준과 Topic 경계",
+          "intent": "service mapping을 조건부로 제시하고 authority·rangeability 정량평가를 Topic 3으로 분리한다.",
+          "anchor_refs": [
+            "control_valve_equal_percentage_partial_compensation",
+            "control_valve_characteristic_selection_criteria",
+            "control_valve_application_mapping_is_conditional",
+            "control_valve_installed_local_slope_topic_boundary"
+          ]
+        },
+        {
+          "section": "설계와 commissioning 검증",
+          "intent": "manufacturer curve, hydraulic model과 actual response를 이용하여 selection을 검증한다.",
+          "anchor_refs": [
+            "control_valve_manufacturer_curve_system_model_verification",
+            "control_valve_commissioning_characteristic_verification"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "normalized travel과 relative Cv의 축을 정의한다.",
+        "Inherent와 Installed의 기준조건을 명확히 구분한다.",
+        "Linear는 동일 절대 Cv 증가임을 설명한다.",
+        "Equal Percentage는 동일 비율 Cv 증가임을 설명한다.",
+        "Equal Percentage의 저개도·고개도 절대 증가량 차이를 설명한다.",
+        "Quick Opening의 초기 급증과 이후 평탄화를 설명한다.",
+        "Q∝Cv√(ΔPv/SG)를 조건부 관계로 제시한다.",
+        "system loss와 valve differential pressure 재분배를 연결한다.",
+        "pump curve와 static head의 영향을 분리한다.",
+        "Linear inherent가 installed에서 항상 linear하지 않음을 설명한다.",
+        "Equal Percentage의 partial compensation을 조건부로 설명한다.",
+        "공정명만으로 characteristic를 절대 선정하지 않는다.",
+        "Authority·Rangeability 정량설계를 Topic 3으로 구분한다.",
+        "manufacturer curve와 hydraulic model로 expected installed curve를 확인한다.",
+        "commissioning에서 command, travel, pressure와 flow response를 확인한다."
+      ],
+      "common_missing_points": [
+        "Inherent와 Installed를 동일시한다.",
+        "constant valve differential pressure 기준조건을 누락한다.",
+        "Linear와 Equal Percentage의 절대량·비율 차이를 누락한다.",
+        "Equal Percentage를 travel에 정비례하는 곡선으로 설명한다.",
+        "Equal Percentage의 low/high travel 절대증가 차이를 누락한다.",
+        "Quick Opening의 초기 급증과 On-Off 목적을 누락한다.",
+        "system resistance와 valve ΔP 변화를 누락한다.",
+        "pump curve와 static head를 누락한다.",
+        "Linear trim이 실제 배관에서도 항상 linear라고 단정한다.",
+        "Equal Percentage가 모든 system에서 최적이라고 단정한다.",
+        "manufacturer data와 predicted installed curve 검토를 누락한다.",
+        "commissioning의 actual flow response 확인을 누락한다."
+      ],
+      "routing_aliases": [
+        "제어밸브 고유 유량특성",
+        "제어밸브 설치 유량특성",
+        "inherent flow characteristic",
+        "installed flow characteristic",
+        "equal percentage valve characteristic",
+        "linear valve characteristic",
+        "quick opening valve characteristic",
+        "밸브 특성곡선 비교",
+        "등비 유량특성",
+        "등퍼센트 유량특성",
+        "선형 유량특성",
+        "퀵 오프닝 특성",
+        "valve travel relative flow characteristic",
+        "installed flow curve distortion"
+      ],
+      "routing_field_points": [
+        "일정 valve differential pressure에서의 inherent curve",
+        "실제 system resistance를 포함한 installed flow curve",
+        "동일 travel 증가에 대한 동일 절대 Cv 증가",
+        "동일 travel 증가에 대한 동일 비율 Cv 증가",
+        "pressure-drop redistribution에 의한 installed distortion",
+        "pump curve와 static head가 valve differential pressure에 미치는 영향",
+        "Linear, Equal Percentage와 Quick Opening 비교",
+        "공정 부하범위에 따른 조건부 characteristic 선정",
+        "manufacturer curve와 commissioning verification"
+      ],
+      "revision_notes": [
+        "Rich Question Pattern 10개와 Recommended Outline 7개를 실제 Anchor 참조로 작성했다.",
+        "broad alias를 배제하고 valve-characteristic 전용 phrase를 사용했다.",
+        "Authority·Rangeability·Cv sizing과 actuator force 영역을 인접 Topic으로 분리했다."
+      ],
+      "id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening_COMPARE_v1",
+      "title": "제어밸브 고유·설치 유량특성과 Linear·Equal Percentage·Quick Opening",
+      "question_examples": [
+        "고유 유량특성과 설치 유량특성 비교",
+        "세 가지 inherent characteristic 비교와 선정",
+        "pressure-drop redistribution과 installed distortion",
+        "Equal Percentage 곡선과 조건부 보상효과",
+        "Quick Opening 형상과 service 선정",
+        "pressure source와 system curve 영향",
+        "현장 characteristic 선정과 검증",
+        "정규화 characteristic curve 해석",
+        "Linear installed misconception 검토",
+        "installed local slope와 Topic 3 경계"
+      ],
+      "topic_aliases": [
+        "제어밸브 고유 유량특성",
+        "제어밸브 설치 유량특성",
+        "inherent flow characteristic",
+        "installed flow characteristic",
+        "equal percentage valve characteristic",
+        "linear valve characteristic",
+        "quick opening valve characteristic",
+        "밸브 특성곡선 비교",
+        "등비 유량특성",
+        "등퍼센트 유량특성",
+        "선형 유량특성",
+        "퀵 오프닝 특성",
+        "valve travel relative flow characteristic",
+        "installed flow curve distortion"
+      ],
+      "expected_structure": [
+        "유량특성의 정의와 좌표",
+        "Inherent와 Installed 비교",
+        "Linear, Equal Percentage와 Quick Opening",
+        "valve differential pressure와 installed distortion",
+        "pump curve, static head와 system resistance",
+        "조건부 선정 기준과 Topic 경계",
+        "설계와 commissioning 검증"
+      ],
+      "model_answer_outline": [
+        "normalized travel과 relative Cv를 정의하고 characteristic curve의 분석경계를 제시한다.",
+        "constant valve ΔP 기준특성과 실제 system combined characteristic를 구분한다.",
+        "동일 절대증가, 동일 비율증가와 초기 급개방의 곡선 의미를 비교한다.",
+        "Q, Cv와 valve ΔP의 조건부 관계 및 pressure-drop redistribution을 연결한다.",
+        "pressure source와 system curve 구성항이 operating point에 미치는 영향을 설명한다.",
+        "service mapping을 조건부로 제시하고 authority·rangeability 정량평가를 Topic 3으로 분리한다.",
+        "manufacturer curve, hydraulic model과 actual response를 이용하여 selection을 검증한다."
+      ],
+      "high_score_features": [
+        "normalized travel과 relative Cv의 축을 정의한다.",
+        "Inherent와 Installed의 기준조건을 명확히 구분한다.",
+        "Linear는 동일 절대 Cv 증가임을 설명한다.",
+        "Equal Percentage는 동일 비율 Cv 증가임을 설명한다.",
+        "Equal Percentage의 저개도·고개도 절대 증가량 차이를 설명한다.",
+        "Quick Opening의 초기 급증과 이후 평탄화를 설명한다.",
+        "Q∝Cv√(ΔPv/SG)를 조건부 관계로 제시한다.",
+        "system loss와 valve differential pressure 재분배를 연결한다.",
+        "pump curve와 static head의 영향을 분리한다.",
+        "Linear inherent가 installed에서 항상 linear하지 않음을 설명한다.",
+        "Equal Percentage의 partial compensation을 조건부로 설명한다.",
+        "공정명만으로 characteristic를 절대 선정하지 않는다.",
+        "Authority·Rangeability 정량설계를 Topic 3으로 구분한다.",
+        "manufacturer curve와 hydraulic model로 expected installed curve를 확인한다.",
+        "commissioning에서 command, travel, pressure와 flow response를 확인한다."
+      ],
+      "low_score_patterns": [
+        "Inherent와 Installed를 동일시한다.",
+        "constant valve differential pressure 기준조건을 누락한다.",
+        "Linear와 Equal Percentage의 절대량·비율 차이를 누락한다.",
+        "Equal Percentage를 travel에 정비례하는 곡선으로 설명한다.",
+        "Equal Percentage의 low/high travel 절대증가 차이를 누락한다.",
+        "Quick Opening의 초기 급증과 On-Off 목적을 누락한다.",
+        "system resistance와 valve ΔP 변화를 누락한다.",
+        "pump curve와 static head를 누락한다.",
+        "Linear trim이 실제 배관에서도 항상 linear라고 단정한다.",
+        "Equal Percentage가 모든 system에서 최적이라고 단정한다.",
+        "manufacturer data와 predicted installed curve 검토를 누락한다.",
+        "commissioning의 actual flow response 확인을 누락한다."
+      ],
+      "field_connection_points": [
+        "일정 valve differential pressure에서의 inherent curve",
+        "실제 system resistance를 포함한 installed flow curve",
+        "동일 travel 증가에 대한 동일 절대 Cv 증가",
+        "동일 travel 증가에 대한 동일 비율 Cv 증가",
+        "pressure-drop redistribution에 의한 installed distortion",
+        "pump curve와 static head가 valve differential pressure에 미치는 영향",
+        "Linear, Equal Percentage와 Quick Opening 비교",
+        "공정 부하범위에 따른 조건부 characteristic 선정",
+        "manufacturer curve와 commissioning verification"
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },
