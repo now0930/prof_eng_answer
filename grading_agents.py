@@ -4712,7 +4712,17 @@ def _phase2_postprocess_grade(legacy_result):
         input_text = input_path.read_text(encoding="utf-8", errors="ignore")
 
     answer_text = _phase3_extract_answer_text(input_text)
-    question_text = _phase3_extract_question_text(input_text)
+    try:
+        question_text = _phase3_extract_question_text(
+            input_text
+        )
+    except Exception as question_error:
+        report(
+            "[agent] phase20 question extraction "
+            "failed; using input text: "
+            f"{question_error!r}"
+        )
+        question_text = input_text
 
     from grading_identity import (
         build_grading_identity,

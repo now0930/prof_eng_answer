@@ -1622,7 +1622,7 @@ class ModelAnswerReferenceResultContractRegressionTest(
 
         self.assertEqual(
             result["version"],
-            "question_type_lens_v1_fallback",
+            "question_type_lens_v2_fallback",
         )
         self.assertEqual(
             result["primary_type"]["id"],
@@ -1765,7 +1765,7 @@ class ModelAnswerReferenceResultContractRegressionTest(
 
         self.assertEqual(
             result["version"],
-            "question_type_lens_v1_fallback",
+            "question_type_lens_v2_fallback",
         )
         self.assertEqual(
             result["primary_type"]["id"],
