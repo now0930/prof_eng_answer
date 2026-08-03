@@ -1,0 +1,343 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+  "title_ko": "제어밸브 본체 형식과 액추에이터 종류 및 선정",
+  "question_type": "COMPARE_SELECTION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Sliding-stem valve와 rotary valve의 구조, 장단점과 적용 조건을 비교하시오.",
+      "intent": "밸브 운동 형식과 body-actuator matching 비교",
+      "required_anchor_ids": [
+        "sliding_stem_rotary_motion_classification",
+        "single_port_globe_throttling_structure",
+        "butterfly_compact_high_capacity",
+        "segmented_v_notch_ball_throttling",
+        "actuator_output_matches_valve_motion"
+      ]
+    },
+    {
+      "pattern": "Single-port, guided, cage-guided와 double-port globe valve를 비교하시오.",
+      "intent": "Globe valve guide와 port 구조 비교",
+      "required_anchor_ids": [
+        "single_port_globe_throttling_structure",
+        "post_guided_plug_alignment",
+        "port_guided_plug_alignment",
+        "cage_guided_alignment_and_flow_path",
+        "double_port_capacity_force_balance_limit"
+      ]
+    },
+    {
+      "pattern": "Three-way valve와 sanitary valve의 구조와 적용 조건을 설명하시오.",
+      "intent": "유로 전환과 clean-service 요구 비교",
+      "required_anchor_ids": [
+        "three_way_mixing_diverting_function",
+        "sanitary_valve_cleanability_drainability",
+        "end_connection_threaded_flanged_welded",
+        "body_actuator_selection_multi_criteria"
+      ]
+    },
+    {
+      "pattern": "Butterfly, segmented ball, eccentric plug와 full-port ball valve를 비교하시오.",
+      "intent": "Rotary body 형식별 유로·용량·차단 비교",
+      "required_anchor_ids": [
+        "butterfly_compact_high_capacity",
+        "high_performance_butterfly_eccentric_sealing",
+        "segmented_v_notch_ball_throttling",
+        "eccentric_plug_noncontact_rotation",
+        "full_port_ball_low_restriction_scope"
+      ]
+    },
+    {
+      "pattern": "Bonnet, plug guiding과 reduced-capacity trim의 기능 및 선정 기준을 설명하시오.",
+      "intent": "Body component의 압력·온도·정렬·용량 기능",
+      "required_anchor_ids": [
+        "standard_bonnet_pressure_boundary",
+        "extension_bonnet_temperature_isolation",
+        "bellows_seal_bonnet_emission_barrier",
+        "plug_guiding_alignment_and_side_load",
+        "reduced_capacity_trim_match_required_flow"
+      ]
+    },
+    {
+      "pattern": "Spring-diaphragm, piston과 rack-and-pinion actuator를 비교하시오.",
+      "intent": "공압 액추에이터의 force·torque·fail-safe 비교",
+      "required_anchor_ids": [
+        "spring_diaphragm_actuator_force_and_fail_safe",
+        "piston_actuator_high_force_and_speed",
+        "rack_pinion_rotary_torque_conversion",
+        "actuator_output_matches_valve_motion"
+      ]
+    },
+    {
+      "pattern": "Pneumatic, electric와 manual actuator의 특징과 적용 조건을 비교하시오.",
+      "intent": "동력원·속도·fail-safe·정비 비교",
+      "required_anchor_ids": [
+        "spring_diaphragm_actuator_force_and_fail_safe",
+        "piston_actuator_high_force_and_speed",
+        "electric_actuator_motor_gear_control",
+        "manual_actuator_local_operation_limit",
+        "body_actuator_selection_multi_criteria"
+      ]
+    },
+    {
+      "pattern": "주어진 공정 조건에 적합한 valve body와 actuator 조합의 선정 절차를 설명하시오.",
+      "intent": "Body 형식과 actuator 조합 선정 workflow",
+      "required_anchor_ids": [
+        "sliding_stem_rotary_motion_classification",
+        "end_connection_threaded_flanged_welded",
+        "actuator_output_matches_valve_motion",
+        "body_actuator_selection_multi_criteria"
+      ]
+    },
+    {
+      "pattern": "잘못된 valve body 또는 actuator 형식 선정으로 발생하는 문제와 개선방안을 설명하시오.",
+      "intent": "Guide·capacity·motion mismatch 진단",
+      "required_anchor_ids": [
+        "plug_guiding_alignment_and_side_load",
+        "reduced_capacity_trim_match_required_flow",
+        "actuator_output_matches_valve_motion",
+        "body_actuator_selection_multi_criteria"
+      ]
+    },
+    {
+      "pattern": "Globe와 rotary valve 및 공압·전동 actuator를 비교하고 적용 조건별 선정 기준을 제시하시오.",
+      "intent": "밸브와 액추에이터 통합 비교·선정",
+      "required_anchor_ids": [
+        "single_port_globe_throttling_structure",
+        "butterfly_compact_high_capacity",
+        "segmented_v_notch_ball_throttling",
+        "spring_diaphragm_actuator_force_and_fail_safe",
+        "piston_actuator_high_force_and_speed",
+        "electric_actuator_motor_gear_control",
+        "body_actuator_selection_multi_criteria"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 분류와 선정 문제",
+      "intent": "밸브 운동과 액추에이터 출력을 함께 선정해야 하는 이유를 제시한다.",
+      "anchor_refs": [
+        "sliding_stem_rotary_motion_classification",
+        "actuator_output_matches_valve_motion",
+        "body_actuator_selection_multi_criteria"
+      ]
+    },
+    {
+      "section": "2. Sliding-stem body 형식",
+      "intent": "Globe 계열과 특수 직선 운동 body를 비교한다.",
+      "anchor_refs": [
+        "single_port_globe_throttling_structure",
+        "angle_valve_flow_direction_change",
+        "post_guided_plug_alignment",
+        "port_guided_plug_alignment",
+        "cage_guided_alignment_and_flow_path",
+        "double_port_capacity_force_balance_limit",
+        "three_way_mixing_diverting_function",
+        "sanitary_valve_cleanability_drainability"
+      ]
+    },
+    {
+      "section": "3. Rotary body 형식",
+      "intent": "Disc·ball·plug 계열의 유로와 적용을 비교한다.",
+      "anchor_refs": [
+        "butterfly_compact_high_capacity",
+        "high_performance_butterfly_eccentric_sealing",
+        "segmented_v_notch_ball_throttling",
+        "eccentric_plug_noncontact_rotation",
+        "full_port_ball_low_restriction_scope",
+        "multiport_selector_flow_routing"
+      ]
+    },
+    {
+      "section": "4. Body 구성 요소",
+      "intent": "끝단 연결, bonnet, guiding과 reduced trim을 설명한다.",
+      "anchor_refs": [
+        "end_connection_threaded_flanged_welded",
+        "standard_bonnet_pressure_boundary",
+        "extension_bonnet_temperature_isolation",
+        "bellows_seal_bonnet_emission_barrier",
+        "plug_guiding_alignment_and_side_load",
+        "reduced_capacity_trim_match_required_flow"
+      ]
+    },
+    {
+      "section": "5. 공압 액추에이터",
+      "intent": "Spring-diaphragm, piston과 rack-and-pinion을 비교한다.",
+      "anchor_refs": [
+        "spring_diaphragm_actuator_force_and_fail_safe",
+        "piston_actuator_high_force_and_speed",
+        "rack_pinion_rotary_torque_conversion"
+      ]
+    },
+    {
+      "section": "6. 전동 및 수동 액추에이터",
+      "intent": "Electric과 manual actuator의 역할과 한계를 설명한다.",
+      "anchor_refs": [
+        "electric_actuator_motor_gear_control",
+        "manual_actuator_local_operation_limit"
+      ]
+    },
+    {
+      "section": "7. Body-actuator matching",
+      "intent": "Valve motion, force·torque, stroke·angle과 fail-safe를 일치시킨다.",
+      "anchor_refs": [
+        "actuator_output_matches_valve_motion",
+        "spring_diaphragm_actuator_force_and_fail_safe",
+        "piston_actuator_high_force_and_speed",
+        "rack_pinion_rotary_torque_conversion",
+        "electric_actuator_motor_gear_control"
+      ]
+    },
+    {
+      "section": "8. 선정표와 최종 검증",
+      "intent": "공정조건, 설치, 정비와 lifecycle을 포함한 선정 절차를 제시한다.",
+      "anchor_refs": [
+        "end_connection_threaded_flanged_welded",
+        "reduced_capacity_trim_match_required_flow",
+        "body_actuator_selection_multi_criteria"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Sliding-stem과 rotary를 폐쇄 부재 운동으로 정확히 분류한다.",
+    "Globe 계열 guide·port 구조의 장점과 한계를 연결한다.",
+    "Butterfly·segmented ball·eccentric plug·full-port ball을 목적별로 구분한다.",
+    "Bonnet, end connection, guide와 reduced trim의 기능을 설명한다.",
+    "Spring-diaphragm, piston, rack-and-pinion과 electric actuator의 출력 특성을 비교한다.",
+    "Valve motion과 actuator force 또는 torque를 일치시킨다.",
+    "Fail-safe와 power source를 구조별로 조건부 설명한다.",
+    "설치 공간, 정비성, 예비품과 lifecycle cost를 선정 근거에 포함한다.",
+    "보편적 우열 대신 공정조건별 trade-off를 제시한다.",
+    "제조사 pressure rating, capacity와 actuator output 자료로 최종 검증한다."
+  ],
+  "common_missing_points": [
+    "밸브 종류를 나열하지만 구조와 선정 근거를 연결하지 않음.",
+    "Sliding-stem과 rotary 운동을 구분하지 않음.",
+    "Double-port를 완전 balanced와 완전 shutoff로 단정함.",
+    "Cage-guided가 모든 solids service에 적합하다고 단정함.",
+    "Segmented ball과 full-port ball을 같은 용도로 설명함.",
+    "Bonnet, guide와 end connection을 누락함.",
+    "Piston actuator를 본질적으로 fail-safe라고 설명함.",
+    "Electric actuator는 fail-safe가 불가능하다고 설명함.",
+    "Body motion과 actuator output matching을 누락함.",
+    "유지보수와 lifecycle cost를 선정 기준에서 제외함."
+  ],
+  "routing_aliases": [
+    "control valve body types and actuator selection",
+    "globe rotary valve actuator comparison",
+    "sliding stem rotary valve selection",
+    "globe butterfly ball eccentric plug comparison",
+    "valve body actuator matching force torque",
+    "spring diaphragm piston electric actuator comparison",
+    "제어밸브 본체 종류와 액추에이터 선정",
+    "글로브 회전식 밸브와 액추에이터 비교",
+    "직선 운동 회전 운동 밸브 선정",
+    "밸브 본체와 액추에이터 조합 선정",
+    "글로브 버터플라이 볼 편심 플러그 비교",
+    "스프링 다이어프램 피스톤 전동 액추에이터 비교",
+    "보닛 가이드 패킹 본체 구조 비교",
+    "케이지 가이드 이중 포트 삼방향 밸브",
+    "sanitary valve cleanability actuator selection",
+    "reduced capacity trim body actuator selection"
+  ],
+  "routing_field_points": [
+    "sliding-stem과 rotary motion을 force와 torque 요구로 연결",
+    "single-port, guided, cage-guided와 double-port globe 비교",
+    "three-way mixing·diverting 및 sanitary cleanability",
+    "butterfly, segmented ball, eccentric plug와 full-port ball 비교",
+    "threaded, flanged와 welded end connection 선정",
+    "standard, extension과 bellows-seal bonnet 적용",
+    "plug guiding과 side-load·wear 관계",
+    "reduced-capacity trim과 oversizing 개선",
+    "spring-diaphragm, piston과 rack-and-pinion 비교",
+    "pneumatic, electric와 manual actuator 비교",
+    "fail-safe, speed, power source와 maintenance trade-off",
+    "body motion과 actuator output의 조합 검증"
+  ],
+  "revision_notes": [
+    "Question Pattern 10개와 Outline 8개를 Anchor reference로 작성했다.",
+    "Handbook Chapter 3의 분류를 구조→장단점→적용조건→선정 흐름으로 재구성했다.",
+    "Legacy broad alias를 배제하고 body type과 actuator selection 결합 phrase를 사용했다."
+  ],
+  "id": "control_valve_types_globe_rotary_body_actuator_selection_COMPARE_SELECTION_v1",
+  "title": "제어밸브 본체 형식과 액추에이터 종류 및 선정",
+  "question_examples": [
+    "Sliding-stem valve와 rotary valve의 구조, 장단점과 적용 조건을 비교하시오.",
+    "Single-port, guided, cage-guided와 double-port globe valve를 비교하시오.",
+    "Three-way valve와 sanitary valve의 구조와 적용 조건을 설명하시오.",
+    "Butterfly, segmented ball, eccentric plug와 full-port ball valve를 비교하시오.",
+    "Bonnet, plug guiding과 reduced-capacity trim의 기능 및 선정 기준을 설명하시오.",
+    "Spring-diaphragm, piston과 rack-and-pinion actuator를 비교하시오.",
+    "Pneumatic, electric와 manual actuator의 특징과 적용 조건을 비교하시오.",
+    "주어진 공정 조건에 적합한 valve body와 actuator 조합의 선정 절차를 설명하시오.",
+    "잘못된 valve body 또는 actuator 형식 선정으로 발생하는 문제와 개선방안을 설명하시오.",
+    "Globe와 rotary valve 및 공압·전동 actuator를 비교하고 적용 조건별 선정 기준을 제시하시오."
+  ],
+  "topic_aliases": [
+    "control valve body types and actuator selection",
+    "globe rotary valve actuator comparison",
+    "sliding stem rotary valve selection",
+    "globe butterfly ball eccentric plug comparison",
+    "valve body actuator matching force torque",
+    "spring diaphragm piston electric actuator comparison",
+    "제어밸브 본체 종류와 액추에이터 선정",
+    "글로브 회전식 밸브와 액추에이터 비교",
+    "직선 운동 회전 운동 밸브 선정",
+    "밸브 본체와 액추에이터 조합 선정",
+    "글로브 버터플라이 볼 편심 플러그 비교",
+    "스프링 다이어프램 피스톤 전동 액추에이터 비교",
+    "보닛 가이드 패킹 본체 구조 비교",
+    "케이지 가이드 이중 포트 삼방향 밸브",
+    "sanitary valve cleanability actuator selection",
+    "reduced capacity trim body actuator selection"
+  ],
+  "expected_structure": [
+    "1. 분류와 선정 문제",
+    "2. Sliding-stem body 형식",
+    "3. Rotary body 형식",
+    "4. Body 구성 요소",
+    "5. 공압 액추에이터",
+    "6. 전동 및 수동 액추에이터",
+    "7. Body-actuator matching",
+    "8. 선정표와 최종 검증"
+  ],
+  "high_score_features": [
+    "Sliding-stem과 rotary를 폐쇄 부재 운동으로 정확히 분류한다.",
+    "Globe 계열 guide·port 구조의 장점과 한계를 연결한다.",
+    "Butterfly·segmented ball·eccentric plug·full-port ball을 목적별로 구분한다.",
+    "Bonnet, end connection, guide와 reduced trim의 기능을 설명한다.",
+    "Spring-diaphragm, piston, rack-and-pinion과 electric actuator의 출력 특성을 비교한다.",
+    "Valve motion과 actuator force 또는 torque를 일치시킨다.",
+    "Fail-safe와 power source를 구조별로 조건부 설명한다.",
+    "설치 공간, 정비성, 예비품과 lifecycle cost를 선정 근거에 포함한다.",
+    "보편적 우열 대신 공정조건별 trade-off를 제시한다.",
+    "제조사 pressure rating, capacity와 actuator output 자료로 최종 검증한다."
+  ],
+  "low_score_patterns": [
+    "밸브 종류를 나열하지만 구조와 선정 근거를 연결하지 않음.",
+    "Sliding-stem과 rotary 운동을 구분하지 않음.",
+    "Double-port를 완전 balanced와 완전 shutoff로 단정함.",
+    "Cage-guided가 모든 solids service에 적합하다고 단정함.",
+    "Segmented ball과 full-port ball을 같은 용도로 설명함.",
+    "Bonnet, guide와 end connection을 누락함.",
+    "Piston actuator를 본질적으로 fail-safe라고 설명함.",
+    "Electric actuator는 fail-safe가 불가능하다고 설명함.",
+    "Body motion과 actuator output matching을 누락함.",
+    "유지보수와 lifecycle cost를 선정 기준에서 제외함."
+  ],
+  "field_connection_points": [
+    "sliding-stem과 rotary motion을 force와 torque 요구로 연결",
+    "single-port, guided, cage-guided와 double-port globe 비교",
+    "three-way mixing·diverting 및 sanitary cleanability",
+    "butterfly, segmented ball, eccentric plug와 full-port ball 비교",
+    "threaded, flanged와 welded end connection 선정",
+    "standard, extension과 bellows-seal bonnet 적용",
+    "plug guiding과 side-load·wear 관계",
+    "reduced-capacity trim과 oversizing 개선",
+    "spring-diaphragm, piston과 rack-and-pinion 비교",
+    "pneumatic, electric와 manual actuator 비교",
+    "fail-safe, speed, power source와 maintenance trade-off",
+    "body motion과 actuator output의 조합 검증"
+  ]
+}

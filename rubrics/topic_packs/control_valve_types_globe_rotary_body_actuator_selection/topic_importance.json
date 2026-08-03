@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "COMPARE_SELECTION",
+  "high_band_unlock_conditions": [
+    "Sliding-stem과 rotary 운동을 구조와 actuator output으로 연결한다.",
+    "Globe 및 rotary body 형식의 장점과 한계를 비교한다.",
+    "Bonnet, guide, end connection과 reduced trim의 기능을 포함한다.",
+    "Spring-diaphragm, piston, rack-and-pinion과 electric actuator를 비교한다.",
+    "Force·torque, speed, fail-safe와 power source로 조합을 선정한다.",
+    "설치 공간, 유지보수와 lifecycle cost를 포함한다.",
+    "보편적 우열을 피하고 조건부 선정 근거를 제시한다.",
+    "제조사 pressure, capacity와 actuator output 자료로 최종 검증한다."
+  ],
+  "note": "제어밸브 body 형식과 actuator 종류는 후속 sizing·accessory·severe-service Topic의 기반이 되는 핵심 FIELD_APPLICATION 비교·선정 주제이다.",
+  "revision_notes": [
+    "Handbook Chapter 3을 주 자료로 사용했다.",
+    "기존 body/trim 및 actuator legacy Topic의 핵심 범위를 modern Topic Pack으로 통합했다."
+  ],
+  "topic_label": "제어밸브 본체·액추에이터 종류와 선정"
+}

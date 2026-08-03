@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-03T06:32:01Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-08-03T07:10:08Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -581,6 +581,221 @@
         "recommended_ceiling": null,
         "direct_d_e_effect": "none",
         "reason": "Logic 오류는 유지하되 전문가 calibration 전까지 B/C cap과 총점 ceiling을 자동 적용하지 않는다."
+      }
+    },
+    {
+      "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+      "display_name": "제어밸브 body 형식과 actuator 종류의 구조·장단점·조합 선정을 평가한다.",
+      "difficulty": "FIELD_APPLICATION",
+      "cap_policy": {},
+      "candidate_extraction": {
+        "max_candidates": 36,
+        "nearby_window": 1,
+        "rules": [],
+        "key_terms": [
+          "sliding-stem",
+          "rotary valve",
+          "single-port globe",
+          "angle valve",
+          "post-guided",
+          "port-guided",
+          "cage-guided",
+          "double-port",
+          "three-way valve",
+          "mixing",
+          "diverting",
+          "sanitary valve",
+          "butterfly valve",
+          "high-performance butterfly",
+          "segmented ball",
+          "V-notch ball",
+          "eccentric plug",
+          "full-port ball",
+          "multiport selector",
+          "threaded connection",
+          "flanged connection",
+          "welded connection",
+          "standard bonnet",
+          "extension bonnet",
+          "bellows seal",
+          "plug guiding",
+          "reduced-capacity trim",
+          "spring-diaphragm",
+          "piston actuator",
+          "rack-and-pinion",
+          "electric actuator",
+          "manual actuator",
+          "linear force",
+          "rotary torque",
+          "fail-safe",
+          "lifecycle cost"
+        ]
+      },
+      "truth_schema": [
+        "제어밸브 본체는 폐쇄 부재의 운동에 따라 sliding-stem과 rotary 형식으로 크게 구분할 수 있으며, 이 구분은 유로 구조와 액추에이터 결합 방식의 기본 축이 된다.",
+        "Single-port globe valve는 하나의 seat와 plug를 사용하고 직선 이동으로 유로 면적을 조절하므로 일반적인 throttling과 차단 요구에 폭넓게 적용된다.",
+        "Angle valve는 입구와 출구의 방향을 바꾸는 본체 형식으로 배관 elbow 기능과 throttling 기능을 한 body에 결합할 수 있으며 유동 방향과 침식 위치를 함께 검토해야 한다.",
+        "Post-guided 구조는 plug 또는 stem의 가이드 부분으로 정렬을 유지하며 가이드 면의 위치와 길이는 횡하중, 진동과 마모에 영향을 준다.",
+        "Port-guided 구조는 port 또는 seat 인접부에서 plug를 안내하며 가이드 간극과 유체 오염은 움직임과 마모에 영향을 줄 수 있다.",
+        "Cage-guided 구조는 cage가 plug를 안내하고 유로를 형성하며 cage 교체로 일부 유량 특성, 용량 또는 소음 대책을 변경할 수 있지만 모든 입자 함유 유체에 자동으로 적합한 것은 아니다.",
+        "Double-port valve는 두 개의 port를 사용하여 유량 용량과 유체력 상쇄에 유리할 수 있으나 두 seat의 동시 접촉 때문에 tight shutoff와 완전한 힘 상쇄에는 한계가 있다.",
+        "Three-way valve는 두 유로를 혼합하거나 한 유로를 두 방향으로 분기하여 배관과 밸브 수를 줄일 수 있으며 mixing과 diverting 방향은 본체 설계와 압력 조건에 맞춰 적용해야 한다.",
+        "Sanitary valve는 청정성, 배수성, 표면 상태와 오염 방지가 중요하며 식품·제약·생명공정에서는 세척과 멸균 요구를 함께 검토한다.",
+        "Butterfly valve는 disc의 회전으로 유량을 조절하며 구조가 compact하고 대구경에서 중량과 설치 공간에 유리할 수 있으나 seat와 disc 구조에 따라 throttling과 shutoff 성능이 달라진다.",
+        "High-performance butterfly valve는 편심 구조로 disc와 seat의 접촉을 제어하여 sealing, 마모와 작동 torque를 개선할 수 있으며 압력 방향과 seat 구조를 확인해야 한다.",
+        "Segmented ball 또는 V-notch ball valve는 회전 운동과 형상화된 유로를 사용하여 높은 용량과 비교적 넓은 throttling 범위를 제공할 수 있으며 ball 형상과 seat가 제어 특성과 차단 성능을 결정한다.",
+        "Eccentric plug valve는 회전 중 plug와 seat의 지속 접촉을 줄이는 구조를 사용할 수 있어 마모, 침식성 또는 오염 유체 적용에 유리할 수 있으며 실제 적용은 seat와 유로 형상을 확인해야 한다.",
+        "Full-port ball valve는 완전 개방 시 배관과 유사한 유로를 제공하여 낮은 유동 저항과 pigging 요구에 유리할 수 있으나 모든 정밀 throttling에 최적인 것은 아니다.",
+        "Multiport selector는 하나의 body에서 여러 유로를 선택하거나 전환하여 유량 분배와 배관 단순화에 유리하며 내부 port 정렬과 차단 격리를 확인해야 한다.",
+        "Threaded, flanged와 welded end connection은 설치, 분해, 누설 경로와 압력·온도 조건이 다르므로 유지보수와 배관 건전성을 함께 고려해 선정한다.",
+        "Standard bonnet은 stem 통과부와 packing box를 형성하고 body와 함께 압력 경계를 구성하며 trim 접근과 유지보수 기능을 제공한다.",
+        "Extension bonnet은 packing을 공정 유체의 고온 또는 극저온 영향에서 이격하며 필요한 길이와 방향은 실제 온도, 단열과 응축 조건으로 결정한다.",
+        "Bellows-seal bonnet은 stem 이동부에 추가적인 밀봉 장벽을 제공하여 독성 또는 비산 배출 저감에 유리할 수 있으나 bellows 수명과 보조 packing 요구를 함께 검토해야 한다.",
+        "Stem guide, top guide, cage guide와 top-and-bottom guide는 plug 정렬 방식이 다르며 유체 횡하중, 진동, 마찰과 마모를 고려해 선정한다.",
+        "Reduced-capacity trim은 동일 body에서 유효 유로를 줄여 필요한 용량에 맞추고 낮은 정상 개도와 과대 선정 문제를 줄이는 데 사용할 수 있으나 정량 Cv 계산을 대신하지는 않는다.",
+        "Spring-diaphragm actuator는 공기압을 직선 force로 변환하고 구조가 단순하며 spring을 이용한 fail action을 구현하기 쉽지만 가용 force와 stroke 범위를 확인해야 한다.",
+        "Piston actuator는 실린더 압력과 piston 면적으로 force를 발생시켜 높은 force 또는 빠른 stroke 요구에 유리할 수 있으나 fail-safe에는 spring, accumulator 또는 별도 설계가 필요할 수 있다.",
+        "Rack-and-pinion actuator는 piston의 직선 운동을 회전 torque로 변환하여 ball, butterfly와 plug 등 rotary valve에 주로 결합하며 공기압, 회전각과 torque 곡선을 확인해야 한다.",
+        "Electric actuator는 motor와 gear train으로 force 또는 torque를 발생시키며 전기 공급, 속도, duty cycle, 정전 시 동작과 방폭 요구를 고려해야 하고 instrument air가 없을 때만 사용하는 장치는 아니다.",
+        "Manual actuator는 handwheel 또는 lever로 밸브를 조작하여 격리, 정비와 비상 현장 조작에 사용할 수 있으나 연속 원격 자동 제어의 기본 구동기로 간주하지 않는다.",
+        "Sliding-stem valve에는 직선 force가 필요하고 rotary valve에는 회전 torque가 필요하므로 액추에이터와 linkage는 밸브 운동, stroke 또는 회전각과 일치해야 한다.",
+        "밸브와 액추에이터 조합은 유체, 압력·온도, 용량, 차단, force·torque, 속도, fail-safe, 동력원, 설치 공간, 유지보수와 lifecycle cost를 함께 고려해 선정해야 하며 하나의 형식이 모든 조건에서 최적일 수는 없다."
+      ],
+      "fatal_conditions": [
+        "[control_valve_rotary_valve_onoff_only] Rotary valve는 on-off 용도로만 사용할 수 있고 throttling에는 사용할 수 없다.",
+        "[control_valve_globe_always_low_capacity] Globe valve는 항상 낮은 용량이므로 큰 유량에는 사용할 수 없다.",
+        "[control_valve_double_port_fully_balanced_zero_force] Double-port valve의 불평형력은 모든 조건에서 정확히 0이다.",
+        "[control_valve_double_port_best_tight_shutoff] Double-port 구조는 single-port보다 항상 더 우수한 tight shutoff를 제공한다.",
+        "[control_valve_cage_guided_all_solids_service] Cage-guided valve는 모든 입자 함유 또는 slurry service에 자동으로 적합하다.",
+        "[control_valve_butterfly_not_for_control] Butterfly valve는 유량 제어에 사용할 수 없다.",
+        "[control_valve_segmented_ball_same_full_port_ball] Segmented 또는 V-notch ball valve와 full-port ball valve의 구조와 throttling 역할은 동일하다.",
+        "[control_valve_full_port_ball_always_best_throttling] Full-port ball valve는 모든 정밀 throttling 조건에 항상 최적이다.",
+        "[control_valve_three_way_mixing_diverting_unrestricted_interchange] Three-way valve의 mixing과 diverting 방향은 본체 설계와 압력 조건에 관계없이 자유롭게 바꿀 수 있다.",
+        "[control_valve_bellows_eliminates_all_packing] Bellows-seal bonnet을 사용하면 보조 packing과 누설 감시가 항상 불필요하다.",
+        "[control_valve_extension_bonnet_universal_length] Extension bonnet은 유체 온도와 설치 조건에 관계없이 하나의 표준 길이로 사용할 수 있다.",
+        "[control_valve_reduced_trim_replaces_sizing] Reduced-capacity trim을 사용하면 Cv 계산과 valve sizing이 필요 없다.",
+        "[control_valve_actuator_independent_of_valve_motion] 밸브의 직선 또는 회전 운동과 관계없이 어떤 액추에이터든 직접 결합할 수 있다.",
+        "[control_valve_piston_actuator_inherently_fail_safe] 모든 piston actuator는 spring 또는 별도 에너지 저장장치 없이 본질적으로 fail-safe이다.",
+        "[control_valve_electric_actuator_cannot_fail_safe] Electric actuator는 어떤 설계에서도 fail-safe 동작을 구현할 수 없다.",
+        "[control_valve_manual_actuator_automatic_modulating_control] Manual actuator만으로 원격 자동 modulating control을 수행할 수 있다."
+      ],
+      "safe_conditions": [
+        "Rotary valve도 형식과 trim에 따라 throttling에 사용할 수 있다.",
+        "Double-port는 유체력 상쇄에 유리할 수 있으나 완전한 balance를 보장하지 않는다.",
+        "Cage-guided 구조는 정렬과 trim 교체에 유리하지만 입자 막힘을 검토해야 한다.",
+        "Butterfly valve는 compact하고 대구경에 유리할 수 있다.",
+        "Segmented ball과 full-port ball은 목적과 유로 형상이 다르다.",
+        "Bellows seal은 추가 밀봉 장벽이며 수명과 보조 밀봉을 검토해야 한다.",
+        "Reduced-capacity trim은 sizing을 대신하지 않는다.",
+        "Spring-diaphragm은 fail-safe 구현에 유리하지만 force와 stroke 제한을 확인한다.",
+        "Piston actuator의 fail-safe는 구조에 따라 별도 설계가 필요하다.",
+        "Electric actuator도 stored energy를 이용해 정전 시 동작을 설계할 수 있다.",
+        "밸브 본체와 액추에이터는 운동 방식과 force 또는 torque 요구를 일치시켜야 한다.",
+        "최종 선정은 성능뿐 아니라 유지보수와 lifecycle cost를 포함한다.",
+        "Globe와 rotary의 우열은 공정조건과 크기에 따라 달라진다.",
+        "End connection은 압력 외에도 설치와 정비 조건을 함께 고려한다.",
+        "Three-way mixing과 diverting은 body 설계와 압력 방향을 확인한다.",
+        "Manual actuator는 현장 조작과 정비용으로 사용할 수 있다."
+      ],
+      "output_contract": {
+        "json_only": true,
+        "required_fields": [
+          "verdict",
+          "confidence",
+          "reason",
+          "extracted_claims",
+          "contradictions",
+          "findings"
+        ],
+        "verdict_values": [
+          "pass",
+          "warn",
+          "fatal"
+        ],
+        "score_effect": "diagnostic_only",
+        "direct_score_layers": [
+          "C"
+        ],
+        "excluded_score_layers": [
+          "D",
+          "E"
+        ]
+      },
+      "major_checks": [
+        {
+          "id": "control_valve_globe_universally_most_accurate",
+          "claim": "Globe valve는 모든 공정과 크기에서 가장 정확한 제어밸브이다.",
+          "correction": "제어 성능은 body·trim·actuator·sizing·공정조건에 따라 달라지므로 보편적 우위를 단정할 수 없다.",
+          "severity": "major"
+        },
+        {
+          "id": "control_valve_rotary_universally_highest_capacity_lowest_cost",
+          "claim": "Rotary valve는 모든 크기와 조건에서 용량이 가장 크고 비용이 가장 낮다.",
+          "correction": "용량·비용·수명은 size, material, pressure class, trim과 service 조건에 따라 달라진다.",
+          "severity": "major"
+        },
+        {
+          "id": "control_valve_pneumatic_always_better_than_electric",
+          "claim": "Pneumatic actuator는 모든 조건에서 electric actuator보다 우수하다.",
+          "correction": "속도, force, fail-safe, energy source, duty와 maintenance를 비교해 선정한다.",
+          "severity": "major"
+        },
+        {
+          "id": "control_valve_electric_always_lower_maintenance",
+          "claim": "Electric actuator는 모든 환경에서 pneumatic actuator보다 유지보수가 적다.",
+          "correction": "Gear, motor, electronics, sealing, duty와 환경 조건에 따라 유지보수 요구가 달라진다.",
+          "severity": "major"
+        },
+        {
+          "id": "control_valve_sanitary_type_determined_by_industry_name_only",
+          "claim": "산업이 식품 또는 제약이면 유체와 세척 조건을 보지 않고 sanitary valve 형식을 확정할 수 있다.",
+          "correction": "Cleanability, drainability, surface finish, seal material와 CIP·SIP 조건을 확인해야 한다.",
+          "severity": "major"
+        },
+        {
+          "id": "control_valve_end_connection_selected_by_pressure_only",
+          "claim": "끝단 연결은 압력 등급 하나만으로 선정하면 된다.",
+          "correction": "Pressure·temperature뿐 아니라 누설, welding, disassembly, maintenance와 piping integrity를 함께 검토한다.",
+          "severity": "major"
+        }
+      ],
+      "feedback_templates": {
+        "core_theory_positive": "밸브 구조와 액추에이터 출력의 연결 및 선정 근거가 타당합니다.",
+        "core_theory_major": "조건부 형식 장점을 모든 서비스의 보편 법칙으로 일반화했습니다.",
+        "core_theory_fatal": "밸브 또는 액추에이터의 핵심 구조와 적용을 반대로 설명했습니다.",
+        "next_practice": "운동 형식, body 구조, actuator output과 공정조건을 하나의 선정표로 연결하세요."
+      },
+      "next_practice_points": [
+        "Sliding-stem과 rotary 운동을 force·torque 요구로 연결한다.",
+        "Globe guide·port 구조의 장점과 shutoff 한계를 비교한다.",
+        "Rotary valve 형식을 control·isolation 목적별로 구분한다.",
+        "Bonnet, guide와 end connection을 선정표에 포함한다.",
+        "Pneumatic·electric actuator의 fail-safe 구조를 조건부로 설명한다.",
+        "Body와 actuator의 stroke·angle·load matching을 검증한다.",
+        "유지보수와 lifecycle cost를 포함한다.",
+        "Vendor data와 공정조건으로 최종 검증한다."
+      ],
+      "false_positive_cautions": [
+        "Can, may, 유리할 수 있다와 같은 조건부 표현을 보존한다.",
+        "Topic 1의 actuator thrust 계산 질문은 Topic 4로 강제하지 않는다.",
+        "Topic 2의 valve characteristic 질문은 Topic 4로 강제하지 않는다.",
+        "Topic 3의 stiction·response 질문은 Topic 4로 강제하지 않는다.",
+        "Topic 6의 Cv·Kv sizing 질문은 Topic 4로 강제하지 않는다.",
+        "Topic 10의 balanced trim 상세 질문은 Topic 4로 강제하지 않는다.",
+        "Topic 11의 positioner·I/P·booster 질문은 Topic 4로 강제하지 않는다.",
+        "단순 valve 또는 actuator 단어만으로 Topic 4를 선택하지 않는다.",
+        "Legacy Topic 이름의 broad alias보다 body type과 actuator selection 결합 phrase를 우선한다.",
+        "제품명이나 특정 모델의 장점을 보편적 구조 사실로 확장하지 않는다."
+      ],
+      "enabled": true,
+      "score_policy": {
+        "status": "provisional",
+        "score_effect": "diagnostic_only",
+        "direct_score_application": false,
+        "recommended_ceiling": null,
+        "layer_caps": {},
+        "direct_d_e_effect": "none",
+        "reason": "Logic Check는 C-layer correctness evidence만 제공하며 D/E 직접효과와 숫자 ceiling을 적용하지 않는다."
       }
     },
     {
