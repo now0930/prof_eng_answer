@@ -230,3 +230,7 @@ python3 scripts/test_control_valve_deadband_stiction_response_topic.py
 echo
 echo "===== control valve body and actuator topic regression ====="
 python3 scripts/test_control_valve_types_body_actuator_topic.py
+
+echo
+echo "===== control valve authority and installed-gain topic regression ====="
+python3 scripts/test_control_valve_authority_rangeability_gain_topic.py

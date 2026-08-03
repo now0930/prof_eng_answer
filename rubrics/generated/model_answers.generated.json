@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-03T07:10:08Z-generated-topic-pack-model-answers",
+  "version": "2026-08-03T07:58:50Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -464,6 +464,358 @@
         "lead·lag·PID 보상 전후 margin과 bandwidth를 비교한다.",
         "저주파 외란 억제와 고주파 센서 잡음의 trade-off를 검토한다.",
         "운전점, 포화, rate limit, deadband와 모델 오차를 확인한다."
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+      "title_ko": "제어밸브의 Authority·Rangeability·Installed Gain 및 공정 성능",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "Valve Authority의 정의, 계산 경계와 제어 성능에 미치는 영향을 설명하시오.",
+          "intent": "Authority definition, formula boundary and performance",
+          "required_anchor_ids": [
+            "valve_authority_physical_meaning",
+            "authority_simple_series_formula",
+            "authority_system_boundary_definition",
+            "pressure_drop_redistribution_with_flow",
+            "low_authority_installed_characteristic_distortion"
+          ]
+        },
+        {
+          "pattern": "낮은 Valve Authority가 installed characteristic와 installed gain을 왜곡하는 원리를 설명하시오.",
+          "intent": "Low authority and installed curve distortion",
+          "required_anchor_ids": [
+            "pressure_drop_redistribution_with_flow",
+            "low_authority_installed_characteristic_distortion",
+            "inherent_gain_constant_pressure_drop",
+            "installed_gain_actual_system_slope",
+            "installed_gain_differs_from_inherent_gain"
+          ]
+        },
+        {
+          "pattern": "제어밸브 과대 선정이 normal travel, Authority와 공정 제어 성능에 미치는 영향을 설명하시오.",
+          "intent": "Oversizing and installed performance",
+          "required_anchor_ids": [
+            "oversizing_low_normal_travel",
+            "oversizing_reduces_effective_valve_drop",
+            "oversizing_increases_local_gain_sensitivity",
+            "minimum_controllable_flow_limits",
+            "min_normal_max_operating_point_validation"
+          ]
+        },
+        {
+          "pattern": "Inherent valve gain과 installed valve gain을 비교하시오.",
+          "intent": "Inherent versus installed gain",
+          "required_anchor_ids": [
+            "inherent_gain_constant_pressure_drop",
+            "installed_gain_actual_system_slope",
+            "installed_gain_operating_point_dependency",
+            "installed_gain_differs_from_inherent_gain"
+          ]
+        },
+        {
+          "pattern": "Installed valve gain, process gain과 loop gain의 관계를 설명하시오.",
+          "intent": "Valve, process and loop gain relationship",
+          "required_anchor_ids": [
+            "process_gain_operating_point_dependency",
+            "loop_gain_component_product",
+            "valve_process_gain_compensation",
+            "gain_variation_affects_control_performance"
+          ]
+        },
+        {
+          "pattern": "Equal-percentage characteristic가 공정 gain 변화의 보상에 사용되는 원리와 적용 한계를 설명하시오.",
+          "intent": "Conditional equal-percentage gain compensation",
+          "required_anchor_ids": [
+            "valve_process_gain_compensation",
+            "equal_percentage_compensation_is_conditional",
+            "gain_variation_affects_control_performance",
+            "control_range_gain_acceptance_concept"
+          ]
+        },
+        {
+          "pattern": "Rated rangeability, installed rangeability와 process turndown을 비교하시오.",
+          "intent": "Rangeability and turndown boundaries",
+          "required_anchor_ids": [
+            "rangeability_controllable_cv_ratio",
+            "rangeability_not_travel_ratio",
+            "installed_rangeability_flow_ratio",
+            "installed_rangeability_differs_from_rated",
+            "process_turndown_distinct_from_rangeability"
+          ]
+        },
+        {
+          "pattern": "제어밸브의 minimum controllable flow를 제한하는 요소를 설명하시오.",
+          "intent": "Minimum controllable flow limitations",
+          "required_anchor_ids": [
+            "minimum_controllable_flow_limits",
+            "seat_leakage_not_minimum_control_flow",
+            "installed_rangeability_differs_from_rated",
+            "min_normal_max_operating_point_validation"
+          ]
+        },
+        {
+          "pattern": "낮은 Authority와 과대 선정으로 발생하는 installed performance 문제를 진단하고 개선방안을 제시하시오.",
+          "intent": "Diagnose and improve bad installed performance",
+          "required_anchor_ids": [
+            "low_authority_installed_characteristic_distortion",
+            "oversizing_low_normal_travel",
+            "oversizing_reduces_effective_valve_drop",
+            "oversizing_increases_local_gain_sensitivity",
+            "gain_curve_installed_curve_final_verification"
+          ]
+        },
+        {
+          "pattern": "Authority, rangeability, installed gain과 process gain을 이용한 제어밸브 성능 평가 절차를 설명하시오.",
+          "intent": "Integrated installed performance evaluation",
+          "required_anchor_ids": [
+            "valve_authority_physical_meaning",
+            "installed_gain_operating_point_dependency",
+            "loop_gain_component_product",
+            "control_range_gain_acceptance_concept",
+            "installed_rangeability_flow_ratio",
+            "min_normal_max_operating_point_validation",
+            "gain_curve_installed_curve_final_verification"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "1. 성능 문제 정의",
+          "intent": "밸브를 배관계와 제어루프의 일부로 정의한다.",
+          "anchor_refs": [
+            "valve_authority_physical_meaning",
+            "pressure_drop_redistribution_with_flow",
+            "loop_gain_component_product"
+          ]
+        },
+        {
+          "section": "2. Authority 정의와 경계",
+          "intent": "Authority 식, system boundary와 낮은 Authority 영향을 설명한다.",
+          "anchor_refs": [
+            "authority_simple_series_formula",
+            "authority_system_boundary_definition",
+            "low_authority_installed_characteristic_distortion",
+            "authority_not_fixed_universal_target"
+          ]
+        },
+        {
+          "section": "3. Oversizing 메커니즘",
+          "intent": "과대 capacity가 normal travel, valve ΔP와 local gain에 미치는 영향을 설명한다.",
+          "anchor_refs": [
+            "oversizing_low_normal_travel",
+            "oversizing_reduces_effective_valve_drop",
+            "oversizing_increases_local_gain_sensitivity"
+          ]
+        },
+        {
+          "section": "4. Inherent와 installed gain",
+          "intent": "두 gain의 정의와 operating-point dependency를 비교한다.",
+          "anchor_refs": [
+            "inherent_gain_constant_pressure_drop",
+            "installed_gain_actual_system_slope",
+            "installed_gain_operating_point_dependency",
+            "installed_gain_differs_from_inherent_gain"
+          ]
+        },
+        {
+          "section": "5. Process와 loop gain",
+          "intent": "Process gain, loop gain과 valve-process compensation을 설명한다.",
+          "anchor_refs": [
+            "process_gain_operating_point_dependency",
+            "valve_process_gain_compensation",
+            "equal_percentage_compensation_is_conditional",
+            "gain_variation_affects_control_performance",
+            "control_range_gain_acceptance_concept"
+          ]
+        },
+        {
+          "section": "6. Rangeability 경계",
+          "intent": "Rated, installed rangeability와 process turndown을 구분한다.",
+          "anchor_refs": [
+            "rangeability_controllable_cv_ratio",
+            "rangeability_not_travel_ratio",
+            "installed_rangeability_flow_ratio",
+            "installed_rangeability_differs_from_rated",
+            "process_turndown_distinct_from_rangeability"
+          ]
+        },
+        {
+          "section": "7. Minimum flow와 운전점",
+          "intent": "Minimum controllable flow와 min-normal-max 검증을 설명한다.",
+          "anchor_refs": [
+            "minimum_controllable_flow_limits",
+            "seat_leakage_not_minimum_control_flow",
+            "min_normal_max_operating_point_validation"
+          ]
+        },
+        {
+          "section": "8. 개선과 최종 검증",
+          "intent": "Valve와 system 개선 후 installed flow 및 gain curve로 검증한다.",
+          "anchor_refs": [
+            "gain_curve_installed_curve_final_verification",
+            "min_normal_max_operating_point_validation",
+            "authority_not_fixed_universal_target"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "Authority를 design point와 system boundary를 포함해 정의한다.",
+        "단순 직렬계 식과 pump·static head·parallel branch 경계를 구분한다.",
+        "Pressure-drop redistribution과 installed characteristic distortion을 연결한다.",
+        "Oversizing을 low normal travel, low valve ΔP와 local gain 변화로 설명한다.",
+        "Inherent gain과 installed gain의 시험조건과 slope를 구분한다.",
+        "Installed valve gain과 process gain을 loop gain으로 연결한다.",
+        "Equal-percentage 보상을 조건부로 설명한다.",
+        "Rated rangeability, installed rangeability와 process turndown을 구분한다.",
+        "Seat leakage와 minimum controllable flow를 구분한다.",
+        "Minimum·normal·maximum points와 gain curve로 최종 검증한다."
+      ],
+      "common_missing_points": [
+        "Authority를 valve opening으로 설명함.",
+        "Authority 식에 system boundary와 design point가 없음.",
+        "특정 Authority 숫자를 보편 기준으로 단정함.",
+        "Oversizing을 nominal body size 하나로만 판단함.",
+        "Inherent gain과 installed gain을 동일시함.",
+        "Loop gain을 valve gain 하나로 설명함.",
+        "Equal-percentage가 항상 constant loop gain을 보장한다고 단정함.",
+        "Rangeability를 travel ratio로 설명함.",
+        "Catalog rangeability와 process turndown을 동일시함.",
+        "Minimum·normal·maximum operating-point 검증이 없음."
+      ],
+      "routing_aliases": [
+        "control valve authority and installed gain",
+        "valve authority rangeability process performance",
+        "installed valve gain and process gain compensation",
+        "inherent gain versus installed gain",
+        "valve authority pressure drop redistribution",
+        "installed rangeability versus process turndown",
+        "oversized valve low travel installed gain",
+        "minimum controllable flow and rangeability",
+        "installed flow curve and gain curve",
+        "equal percentage process gain compensation",
+        "제어밸브 Authority와 Installed Gain",
+        "밸브 권한과 레인지어빌리티",
+        "설치 이득과 공정 이득 보상",
+        "고유 이득과 설치 이득 비교",
+        "과대 선정과 낮은 정상 개도",
+        "설치 레인지어빌리티와 공정 turndown",
+        "최소 제어 유량과 실제 운전범위",
+        "밸브 차압 분배와 설치 특성 왜곡"
+      ],
+      "routing_field_points": [
+        "Authority를 design point와 system boundary로 정의",
+        "Pressure-drop redistribution과 installed curve distortion",
+        "Oversizing, low normal travel와 local gain sensitivity",
+        "Inherent gain과 installed gain 구분",
+        "Installed valve gain과 process gain compensation",
+        "Controller·actuator·valve·process·measurement loop gain",
+        "Equal-percentage compensation의 조건부 적용",
+        "Rated rangeability와 installed rangeability 구분",
+        "Process turndown과 valve capability 비교",
+        "Minimum controllable flow 제한 요소",
+        "Minimum·normal·maximum operating point validation",
+        "Installed flow curve와 gain curve 최종 검증"
+      ],
+      "revision_notes": [
+        "Question Pattern 10개와 Outline 8개를 Anchor reference로 작성했다.",
+        "Authority→installed gain→loop gain→rangeability→operating-point verification 흐름을 사용했다.",
+        "Topic count와 canonical position을 모델 답안에 하드코딩하지 않았다."
+      ],
+      "id": "control_valve_authority_rangeability_gain_installed_performance_PRINCIPLE_INTERPRETATION_v1",
+      "title": "제어밸브의 Authority·Rangeability·Installed Gain 및 공정 성능",
+      "question_examples": [
+        "Valve Authority의 정의, 계산 경계와 제어 성능에 미치는 영향을 설명하시오.",
+        "낮은 Valve Authority가 installed characteristic와 installed gain을 왜곡하는 원리를 설명하시오.",
+        "제어밸브 과대 선정이 normal travel, Authority와 공정 제어 성능에 미치는 영향을 설명하시오.",
+        "Inherent valve gain과 installed valve gain을 비교하시오.",
+        "Installed valve gain, process gain과 loop gain의 관계를 설명하시오.",
+        "Equal-percentage characteristic가 공정 gain 변화의 보상에 사용되는 원리와 적용 한계를 설명하시오.",
+        "Rated rangeability, installed rangeability와 process turndown을 비교하시오.",
+        "제어밸브의 minimum controllable flow를 제한하는 요소를 설명하시오.",
+        "낮은 Authority와 과대 선정으로 발생하는 installed performance 문제를 진단하고 개선방안을 제시하시오.",
+        "Authority, rangeability, installed gain과 process gain을 이용한 제어밸브 성능 평가 절차를 설명하시오."
+      ],
+      "topic_aliases": [
+        "control valve authority and installed gain",
+        "valve authority rangeability process performance",
+        "installed valve gain and process gain compensation",
+        "inherent gain versus installed gain",
+        "valve authority pressure drop redistribution",
+        "installed rangeability versus process turndown",
+        "oversized valve low travel installed gain",
+        "minimum controllable flow and rangeability",
+        "installed flow curve and gain curve",
+        "equal percentage process gain compensation",
+        "제어밸브 Authority와 Installed Gain",
+        "밸브 권한과 레인지어빌리티",
+        "설치 이득과 공정 이득 보상",
+        "고유 이득과 설치 이득 비교",
+        "과대 선정과 낮은 정상 개도",
+        "설치 레인지어빌리티와 공정 turndown",
+        "최소 제어 유량과 실제 운전범위",
+        "밸브 차압 분배와 설치 특성 왜곡"
+      ],
+      "expected_structure": [
+        "1. 성능 문제 정의",
+        "2. Authority 정의와 경계",
+        "3. Oversizing 메커니즘",
+        "4. Inherent와 installed gain",
+        "5. Process와 loop gain",
+        "6. Rangeability 경계",
+        "7. Minimum flow와 운전점",
+        "8. 개선과 최종 검증"
+      ],
+      "high_score_features": [
+        "Authority를 design point와 system boundary를 포함해 정의한다.",
+        "단순 직렬계 식과 pump·static head·parallel branch 경계를 구분한다.",
+        "Pressure-drop redistribution과 installed characteristic distortion을 연결한다.",
+        "Oversizing을 low normal travel, low valve ΔP와 local gain 변화로 설명한다.",
+        "Inherent gain과 installed gain의 시험조건과 slope를 구분한다.",
+        "Installed valve gain과 process gain을 loop gain으로 연결한다.",
+        "Equal-percentage 보상을 조건부로 설명한다.",
+        "Rated rangeability, installed rangeability와 process turndown을 구분한다.",
+        "Seat leakage와 minimum controllable flow를 구분한다.",
+        "Minimum·normal·maximum points와 gain curve로 최종 검증한다."
+      ],
+      "low_score_patterns": [
+        "Authority를 valve opening으로 설명함.",
+        "Authority 식에 system boundary와 design point가 없음.",
+        "특정 Authority 숫자를 보편 기준으로 단정함.",
+        "Oversizing을 nominal body size 하나로만 판단함.",
+        "Inherent gain과 installed gain을 동일시함.",
+        "Loop gain을 valve gain 하나로 설명함.",
+        "Equal-percentage가 항상 constant loop gain을 보장한다고 단정함.",
+        "Rangeability를 travel ratio로 설명함.",
+        "Catalog rangeability와 process turndown을 동일시함.",
+        "Minimum·normal·maximum operating-point 검증이 없음."
+      ],
+      "field_connection_points": [
+        "Authority를 design point와 system boundary로 정의",
+        "Pressure-drop redistribution과 installed curve distortion",
+        "Oversizing, low normal travel와 local gain sensitivity",
+        "Inherent gain과 installed gain 구분",
+        "Installed valve gain과 process gain compensation",
+        "Controller·actuator·valve·process·measurement loop gain",
+        "Equal-percentage compensation의 조건부 적용",
+        "Rated rangeability와 installed rangeability 구분",
+        "Process turndown과 valve capability 비교",
+        "Minimum controllable flow 제한 요소",
+        "Minimum·normal·maximum operating point validation",
+        "Installed flow curve와 gain curve 최종 검증"
+      ],
+      "model_answer_outline": [
+        "밸브를 배관계와 제어루프의 일부로 정의한다.",
+        "Authority 식, system boundary와 낮은 Authority 영향을 설명한다.",
+        "과대 capacity가 normal travel, valve ΔP와 local gain에 미치는 영향을 설명한다.",
+        "두 gain의 정의와 operating-point dependency를 비교한다.",
+        "Process gain, loop gain과 valve-process compensation을 설명한다.",
+        "Rated, installed rangeability와 process turndown을 구분한다.",
+        "Minimum controllable flow와 min-normal-max 검증을 설명한다.",
+        "Valve와 system 개선 후 installed flow 및 gain curve로 검증한다."
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

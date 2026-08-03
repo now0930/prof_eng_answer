@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "Authority를 design point와 system boundary로 정의한다.",
+    "Pressure-drop redistribution과 installed curve distortion을 연결한다.",
+    "Oversizing을 low normal travel과 local gain 변화로 설명한다.",
+    "Inherent와 installed gain을 구분한다.",
+    "Installed valve gain과 process gain을 loop performance로 연결한다.",
+    "Equal-percentage 보상의 조건성을 설명한다.",
+    "Rated·installed rangeability와 process turndown을 구분한다.",
+    "Minimum·normal·maximum points와 gain curve로 검증한다."
+  ],
+  "note": "밸브의 고유 특성을 실제 배관계와 제어루프 성능으로 연결하는 핵심 THEORY_CORE 주제이다.",
+  "revision_notes": [
+    "Handbook Chapter 2를 주 자료로 사용했다.",
+    "Authority, rangeability와 installed gain을 하나의 system-performance Topic으로 통합했다."
+  ],
+  "topic_label": "제어밸브 Authority·Rangeability·Installed Gain"
+}

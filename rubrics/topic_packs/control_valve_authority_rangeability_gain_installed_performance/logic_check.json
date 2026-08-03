@@ -1,0 +1,258 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+  "title": "제어밸브의 Authority·Rangeability·Installed Gain 및 공정 성능",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "제어밸브의 Authority·Rangeability·Installed Gain 및 공정 성능",
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [
+      "control valve authority and installed gain",
+      "valve authority rangeability process performance",
+      "installed valve gain and process gain compensation",
+      "inherent gain versus installed gain",
+      "valve authority pressure drop redistribution",
+      "installed rangeability versus process turndown",
+      "oversized valve low travel installed gain",
+      "minimum controllable flow and rangeability",
+      "installed flow curve and gain curve",
+      "equal percentage process gain compensation",
+      "제어밸브 Authority와 Installed Gain",
+      "밸브 권한과 레인지어빌리티",
+      "설치 이득과 공정 이득 보상",
+      "고유 이득과 설치 이득 비교",
+      "과대 선정과 낮은 정상 개도",
+      "설치 레인지어빌리티와 공정 turndown",
+      "최소 제어 유량과 실제 운전범위",
+      "밸브 차압 분배와 설치 특성 왜곡"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "Valve Authority, rangeability, installed gain과 process-loop performance의 인과관계를 평가한다.",
+    "difficulty": "THEORY_CORE",
+    "cap_policy": {},
+    "candidate_extraction": {
+      "max_candidates": 36,
+      "nearby_window": 1,
+      "rules": [],
+      "key_terms": [
+        "valve authority",
+        "밸브 권한",
+        "design point",
+        "system boundary",
+        "pressure drop redistribution",
+        "valve pressure drop",
+        "system resistance",
+        "pump curve",
+        "static head",
+        "parallel branch",
+        "low authority",
+        "oversized valve",
+        "low normal travel",
+        "inherent valve gain",
+        "installed valve gain",
+        "installed gain curve",
+        "process gain",
+        "loop gain",
+        "gain compensation",
+        "equal percentage",
+        "control range",
+        "rated rangeability",
+        "installed rangeability",
+        "process turndown",
+        "minimum controllable flow",
+        "seat leakage",
+        "deadband",
+        "stiction",
+        "measurement noise",
+        "minimum flow",
+        "normal flow",
+        "maximum flow",
+        "installed flow curve",
+        "reduced capacity trim",
+        "valve resize",
+        "pressure allocation"
+      ]
+    },
+    "truth_schema": [
+      "Valve Authority는 정의한 운전점과 시스템 경계에서 가변 압력강하 중 제어밸브가 담당하는 비율이다.",
+      "단순 직렬 배관계의 설계점 Authority는 밸브 압력강하를 밸브와 나머지 가변 시스템 저항의 압력강하 합으로 나누어 표현할 수 있다.",
+      "Authority 계산은 밸브, 배관 저항, pump curve, static head, bypass와 parallel branch를 포함하는 시스템 경계를 먼저 정의해야 한다.",
+      "유량이 변하면 밸브와 배관계 사이의 압력강하 분배도 변하며 배관 마찰손실은 일반적으로 유량에 따라 크게 달라진다.",
+      "Authority가 낮으면 밸브 travel 변화가 실제 유량 변화로 전달되는 관계가 고유 특성에서 크게 왜곡될 수 있으며 왜곡의 방향과 크기는 고유 특성 및 시스템 저항에 따라 달라진다.",
+      "권장 Authority는 제어 목적, 에너지, 펌프 여유, 운전범위와 허용 gain variation에 따라 달라지므로 하나의 고정 숫자를 모든 계통의 합격 기준으로 사용할 수 없다.",
+      "Oversized valve는 요구 유량을 낮은 travel에서 처리하게 하며 낮은 정상 개도는 travel 활용도와 실제 제어 분해능을 악화시킬 수 있다.",
+      "같은 유량에서 과도하게 큰 유량 용량은 밸브 저항과 밸브 압력강하를 낮출 수 있으며 그 결과 Authority와 설치 특성이 불리해질 수 있다.",
+      "과대 선정은 낮은 travel 영역의 국부 설치 이득을 크게 하거나 불균일하게 만들 수 있고 deadband와 resolution의 상대적 영향도 증가시킬 수 있다.",
+      "Inherent valve gain은 밸브 압력강하를 일정하게 유지한 시험조건에서 travel 대비 고유 유량 또는 유량계수 변화의 국부 기울기이다.",
+      "Installed valve gain은 실제 시스템에서 travel 대비 실제 유량 변화의 국부 기울기이다.",
+      "Installed gain은 유량, travel, valve pressure drop와 system resistance가 변하면 달라지므로 전체 운전범위에서 하나의 상수로 취급하지 않는다.",
+      "밸브 압력강하가 travel과 유량에 따라 달라지므로 installed gain은 inherent gain과 같지 않을 수 있다.",
+      "Process gain은 유량, 부하, 열·물질수지와 운전점에 따라 달라질 수 있다.",
+      "루프의 정적 민감도는 controller, actuator·positioner, installed valve, process와 measurement gain의 결합으로 해석할 수 있다.",
+      "Installed valve gain과 process gain의 변화가 서로 보상되면 운전범위의 loop gain 변화를 줄일 수 있다.",
+      "Equal-percentage characteristic는 유량 증가에 따라 감소하는 공정 이득 또는 변화하는 밸브 차압을 보상하는 데 유리할 수 있으나 모든 공정에서 loop gain을 완전히 일정하게 만드는 것은 아니다.",
+      "운전점에 따른 loop gain 변화가 크면 한 운전점에서의 controller tuning이 다른 운전점에서 과민하거나 둔감해질 수 있다.",
+      "Control range는 정의한 gain 또는 성능 허용 기준을 만족하며 제어 가능한 운전 범위로 해석할 수 있으며 허용 기준은 공정과 평가 방법에 따라 명시한다.",
+      "Rated 또는 inherent rangeability는 명시된 시험조건에서 최대 제어 가능 Cv와 최소 제어 가능 Cv의 비이다.",
+      "Rangeability는 최대 travel과 최소 travel의 단순 비가 아니다.",
+      "Installed rangeability는 실제 계통에서 안정적이고 반복 가능하게 제어할 수 있는 최대 유량과 최소 유량의 비이다.",
+      "가변 차압, 배관 저항, actuator·valve 비선형성과 측정 한계 때문에 installed rangeability는 catalog rangeability보다 작거나 다를 수 있다.",
+      "Process turndown은 공정이 요구하는 최대 운전량과 최소 운전량의 비이며 밸브 rangeability와 동일 개념이 아니다.",
+      "최소 제어 가능 유량은 seat leakage, trim 형상, Reynolds effect, actuator·valve resolution, deadband, stiction와 measurement noise의 영향을 받는다.",
+      "Seat leakage가 작거나 0에 가깝더라도 최소 제어 가능 유량이 0이 되는 것은 아니며 차단 성능과 조절 성능을 구분한다.",
+      "Installed performance는 minimum, normal과 maximum flow에서 travel, pressure drop, gain과 제어 여유를 모두 검증해야 한다.",
+      "최종 선정은 installed flow curve, installed gain curve, 공정 gain과 실제 운전점 자료를 함께 검토하여 검증한다."
+    ],
+    "fatal_conditions": [
+      "[control_valve_authority_total_pressure_without_boundary] Authority는 시스템 경계와 운전점을 정의하지 않고 밸브 압력강하를 모든 압력 차의 합으로 나누면 된다.",
+      "[control_valve_authority_is_valve_opening] Authority는 밸브 개도율 또는 travel 비율이다.",
+      "[control_valve_authority_always_one_target] 모든 제어계통은 동일한 하나의 Authority 목표값을 반드시 만족해야 한다.",
+      "[control_valve_low_authority_no_characteristic_effect] Authority가 낮아도 installed characteristic와 installed gain은 전혀 변하지 않는다.",
+      "[control_valve_oversizing_improves_control_range] 밸브를 크게 선정할수록 항상 control range와 제어 정밀도가 향상된다.",
+      "[control_valve_installed_gain_equals_inherent_gain] Installed gain은 모든 운전점에서 inherent gain과 동일하다.",
+      "[control_valve_installed_gain_constant_all_travel] Installed gain은 전체 travel에서 하나의 상수이다.",
+      "[control_valve_equal_percentage_constant_loop_gain_always] Equal-percentage valve는 모든 공정에서 loop gain을 정확히 일정하게 만든다.",
+      "[control_valve_loop_gain_valve_gain_only] Loop gain은 installed valve gain 하나만으로 결정된다.",
+      "[control_valve_rangeability_is_travel_ratio] Rangeability는 최대 travel과 최소 travel의 비이다.",
+      "[control_valve_rangeability_is_rated_cv_only] Rangeability는 rated Cv 하나만 알면 계산된다.",
+      "[control_valve_rated_equals_installed_rangeability] Catalog rangeability와 실제 installed rangeability는 항상 같다.",
+      "[control_valve_rangeability_equals_process_turndown] Valve rangeability와 process turndown은 동일한 값이다.",
+      "[control_valve_zero_leakage_zero_minimum_flow] Seat leakage가 0이면 최소 제어 가능 유량도 0이다.",
+      "[control_valve_controller_tuning_fixes_bad_authority] Controller tuning만으로 낮은 Authority, 과대 선정과 잘못된 installed characteristic를 완전히 해결할 수 있다.",
+      "[control_valve_single_design_point_proves_full_performance] 설계 유량 한 점에서 travel과 Cv가 적절하면 전체 운전범위의 installed performance가 검증된다."
+    ],
+    "safe_conditions": [
+      "Authority는 정의한 설계점과 시스템 경계에서 계산한다.",
+      "단순 직렬계에서는 밸브와 나머지 가변 시스템 저항의 차압 합을 분모로 사용할 수 있다.",
+      "낮은 Authority는 installed characteristic를 왜곡할 수 있다.",
+      "과대 선정은 낮은 정상 개도와 불균일한 installed gain을 유발할 수 있다.",
+      "Inherent gain은 일정 차압 시험조건의 기울기이다.",
+      "Installed gain은 실제 계통과 운전점의 함수이다.",
+      "Equal-percentage는 특정 공정에서 gain compensation에 유리할 수 있다.",
+      "Loop gain은 valve gain뿐 아니라 controller와 process gain을 포함한다.",
+      "Rangeability는 명시된 조건에서 제어 가능한 최대와 최소 유량계수의 비이다.",
+      "Installed rangeability는 실제 루프의 제어 가능 유량비이다.",
+      "Process turndown은 valve rangeability와 구분한다.",
+      "Seat leakage와 minimum controllable flow는 다른 성능 항목이다.",
+      "최소 유량에서는 deadband, stiction와 measurement noise의 영향이 커질 수 있다.",
+      "Minimum, normal과 maximum 운전점을 모두 검증해야 한다.",
+      "Valve resize 또는 reduced trim은 낮은 normal travel을 개선할 수 있다.",
+      "특정 Authority 또는 gain band 숫자는 적용조건과 근거를 함께 제시한다.",
+      "Higher Authority는 control influence를 높일 수 있지만 pressure-loss trade-off가 있다.",
+      "Installed flow curve와 gain curve로 최종 성능을 검증한다."
+    ],
+    "output_contract": {
+      "json_only": true,
+      "required_fields": [
+        "verdict",
+        "confidence",
+        "reason",
+        "extracted_claims",
+        "contradictions",
+        "findings"
+      ],
+      "verdict_values": [
+        "pass",
+        "warn",
+        "fatal"
+      ],
+      "score_effect": "diagnostic_only",
+      "direct_score_layers": [
+        "C"
+      ],
+      "excluded_score_layers": [
+        "D",
+        "E"
+      ]
+    },
+    "major_checks": [
+      {
+        "id": "control_valve_authority_fixed_recommended_value",
+        "claim": "특정 Authority 숫자를 모든 배관계의 보편 권장값 또는 절대 합격선으로 제시한다.",
+        "correction": "수치는 system boundary, service, energy와 allowable gain variation 조건을 함께 제시한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_equal_percentage_always_best",
+        "claim": "Equal-percentage characteristic가 모든 공정에서 항상 최적이라고 일반화한다.",
+        "correction": "Process gain, system curve와 operating range를 검토해 characteristic를 선정한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_high_authority_always_best",
+        "claim": "Authority는 높을수록 에너지와 제어 성능을 포함한 모든 측면에서 항상 좋다고 일반화한다.",
+        "correction": "Higher authority의 control benefit과 pressure-loss·energy cost를 함께 평가한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_catalog_rangeability_guarantees_process_turndown",
+        "claim": "Catalog rangeability가 공정 turndown을 자동으로 보장한다고 일반화한다.",
+        "correction": "Installed rangeability를 계산하고 process turndown requirement와 비교한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_gain_band_universal_standard",
+        "claim": "특정 installed gain 평균값 또는 gain variation band를 모든 서비스의 국제 표준 한계로 일반화한다.",
+        "correction": "Gain acceptance criterion은 source, normalization과 process performance requirement를 명시한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_oversizing_body_size_only",
+        "claim": "Oversizing을 nominal body size 하나로만 판단하고 trim capacity, required Cv, normal travel와 system pressure allocation을 무시한다.",
+        "correction": "Body, trim Cv, required flow, travel와 ΔP allocation을 함께 검토한다.",
+        "severity": "major"
+      }
+    ],
+    "feedback_templates": {
+      "core_theory_positive": "Authority, gain과 rangeability를 설치 계통과 loop performance로 정확히 연결했습니다.",
+      "core_theory_major": "조건부 권장값 또는 gain 관계를 모든 계통의 보편 법칙으로 일반화했습니다.",
+      "core_theory_fatal": "Authority, installed gain 또는 rangeability의 핵심 정의를 반대로 설명했습니다.",
+      "next_practice": "System boundary, min-normal-max operating points와 installed gain curve를 한 흐름으로 연결하세요."
+    },
+    "next_practice_points": [
+      "Authority 식의 design point와 system boundary를 명시한다.",
+      "Pressure-drop redistribution을 installed curve 왜곡과 연결한다.",
+      "Oversizing을 normal travel과 local gain 변화로 설명한다.",
+      "Inherent와 installed gain을 구분한다.",
+      "Valve gain과 process gain을 loop gain으로 연결한다.",
+      "Rated와 installed rangeability를 분리한다.",
+      "Process turndown requirement를 별도로 확인한다.",
+      "Installed flow와 gain curve로 최종 검증한다."
+    ],
+    "false_positive_cautions": [
+      "Can, may, 유리할 수 있다와 같은 조건부 표현을 보존한다.",
+      "특정 Authority 숫자를 언급하더라도 적용조건과 source가 있으면 자동 fatal로 판정하지 않는다.",
+      "Topic 2의 linear·equal-percentage·quick-opening 형상 비교를 Topic 5로 강제하지 않는다.",
+      "Topic 3의 deadband·stiction·response 질문을 Topic 5로 강제하지 않는다.",
+      "Topic 4의 valve body와 actuator 종류 질문을 Topic 5로 강제하지 않는다.",
+      "Topic 6의 Cv·Kv liquid sizing 계산 질문을 Topic 5로 강제하지 않는다.",
+      "Gain이라는 단어 하나만으로 Topic 5를 선택하지 않는다.",
+      "Rangeability와 turndown을 비교하며 정확히 구분한 답안을 contradiction으로 판단하지 않는다.",
+      "Seat leakage를 minimum-flow limitation 중 하나로 언급하는 것은 허용한다.",
+      "Handbook의 경험적 gain band는 source 조건이 있을 때 참고값으로 취급한다."
+    ],
+    "enabled": true,
+    "score_policy": {
+      "status": "provisional",
+      "score_effect": "diagnostic_only",
+      "direct_score_application": false,
+      "recommended_ceiling": null,
+      "layer_caps": {},
+      "direct_d_e_effect": "none",
+      "reason": "Logic Check는 C-layer correctness evidence만 제공하며 D/E 직접효과와 숫자 ceiling을 적용하지 않는다."
+    }
+  },
+  "revision_notes": [
+    "Deterministic verdict는 비활성화하고 semantic profile만 사용한다.",
+    "Fatal 16개와 conditional major 6개를 Requirements와 동일한 순서로 작성했다.",
+    "특정 Authority 또는 gain band 숫자를 deterministic rule로 고정하지 않았다."
+  ],
+  "topic_label": "제어밸브 Authority·Rangeability·Installed Gain"
+}
