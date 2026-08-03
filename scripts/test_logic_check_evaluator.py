@@ -377,16 +377,28 @@ class SystemTypeClosedLoopOrderRegressionTest(
             fatal_ids,
         )
 
-        self.assertEqual(
-            (
-                evaluation.get(
-                    "score_policy"
-                )
-                or {}
-            ).get(
+        score_policy = (
+            evaluation.get("score_policy")
+            or {}
+        )
+        self.assertFalse(
+            score_policy.get(
+                "direct_score_application"
+            )
+        )
+        self.assertIsNone(
+            score_policy.get(
                 "recommended_ceiling"
-            ),
-            10.0,
+            )
+        )
+        self.assertIsNone(
+            evaluation.get(
+                "recommended_ceiling"
+            )
+        )
+        self.assertEqual(
+            evaluation.get("mode"),
+            "fatal",
         )
 
     def test_llm_profile_pass_does_not_apply_fatal(
