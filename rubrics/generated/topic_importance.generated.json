@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-03T01:35:01Z-generated-topic-pack-importance",
+  "version": "2026-08-03T06:32:01Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -48,6 +48,27 @@
         "CORE_MUST_PREPARE를 사용하지 않았다."
       ],
       "topic_label": "제어밸브 유량특성과 설치특성"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "DIAGNOSIS_ACTION",
+      "high_band_unlock_conditions": [
+        "Deadband, backlash, hysteresis와 dead time을 구분한다.",
+        "Stiction과 stick-slip의 물리적 운동을 command·pressure·travel로 연결한다.",
+        "Small-step, large-step, reversal과 step sensitivity 시험을 구분한다.",
+        "Positioner feedback의 효과와 기계적·추력 한계를 함께 설명한다.",
+        "공압 용량과 volume booster의 조건부 적용 및 hunting 위험을 설명한다.",
+        "개선 후 동일 시험과 실제 공정 성과를 검증한다."
+      ],
+      "note": "Final Control Element의 deadband·stiction·response time은 공정변동성과 직접 연결되는 핵심 FIELD_APPLICATION 주제이다. 용어 정의, trend 진단, 시험과 원인별 개선을 연결해야 고득점이 가능하다.",
+      "revision_notes": [
+        "Chapter 2-aligned scope와 기술사형 진단·대책 구조를 반영했다.",
+        "검증되지 않은 보편 수치와 gain 단정은 high-band 조건에서 제외했다."
+      ],
+      "topic_label": "제어밸브 데드밴드·스틱션·동특성"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

@@ -222,3 +222,7 @@ git diff --check
 
 echo
 echo "VALIDATION OK"
+
+echo
+echo "===== control valve deadband stiction response topic regression ====="
+python3 scripts/test_control_valve_deadband_stiction_response_topic.py

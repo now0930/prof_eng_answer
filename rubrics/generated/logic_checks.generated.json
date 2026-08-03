@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-03T01:35:01Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-03T06:32:01Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -53,6 +53,32 @@
         "equal percentage valve characteristic",
         "linear valve characteristic",
         "quick opening valve characteristic"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "enabled": false,
+      "topic_name": "제어밸브의 데드밴드·스틱션·응답시간 및 포지셔너 동특성",
+      "question_type": "DIAGNOSIS_ACTION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [
+        "제어밸브 데드밴드와 스틱션",
+        "제어밸브 스틱슬립 현상",
+        "control valve deadband stiction",
+        "valve stick slip",
+        "제어밸브 응답시간",
+        "valve response time",
+        "dead time dynamic time valve",
+        "제어밸브 스텝 응답시험",
+        "valve step response test",
+        "step sensitivity control valve",
+        "포지셔너 동특성",
+        "positioner dynamic performance"
       ],
       "fatal_checks": [],
       "major_checks": [],

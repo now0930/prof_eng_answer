@@ -1,0 +1,317 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+  "title_ko": "제어밸브의 데드밴드·스틱션·응답시간 및 포지셔너 동특성",
+  "question_type": "DIAGNOSIS_ACTION",
+  "expected_question_patterns": [
+    {
+      "pattern": "제어밸브의 데드밴드와 스틱션을 설명하고 개선방안을 제시하시오.",
+      "intent": "Deadband·stiction 원인, 공정 영향과 개선",
+      "required_anchor_ids": [
+        "deadband_definition_direction_reversal",
+        "deadband_not_dead_time",
+        "stiction_stick_then_jump",
+        "stiction_limit_cycle_path",
+        "improvement_verify_same_test_and_process_result"
+      ]
+    },
+    {
+      "pattern": "제어밸브의 stick-slip이 공정변동을 유발하는 과정을 설명하시오.",
+      "intent": "Stick-slip과 PV limit cycle 인과관계",
+      "required_anchor_ids": [
+        "static_friction_starting_force",
+        "stiction_stick_then_jump",
+        "stick_slip_repeated_motion",
+        "stiction_limit_cycle_path",
+        "oscillation_requires_differential_diagnosis"
+      ]
+    },
+    {
+      "pattern": "제어밸브 응답시간을 dead time과 dynamic time으로 구분하여 설명하시오.",
+      "intent": "Valve response time 구간과 영향인자",
+      "required_anchor_ids": [
+        "response_time_dead_dynamic_separation",
+        "opening_closing_response_asymmetry",
+        "pneumatic_supply_tubing_spool_capacity"
+      ]
+    },
+    {
+      "pattern": "제어밸브의 small-step과 large-step 응답시험을 비교하시오.",
+      "intent": "작은 신호와 큰 신호 시험 목적 비교",
+      "required_anchor_ids": [
+        "small_step_test_control_resolution",
+        "large_step_test_pneumatic_capacity",
+        "reversal_test_deadband_hysteresis",
+        "step_sensitivity_not_resolution_only"
+      ]
+    },
+    {
+      "pattern": "Step sensitivity 시험의 목적과 평가 시 주의사항을 설명하시오.",
+      "intent": "최소 command와 실제 movement 평가",
+      "required_anchor_ids": [
+        "small_step_test_control_resolution",
+        "reversal_test_deadband_hysteresis",
+        "step_sensitivity_not_resolution_only"
+      ]
+    },
+    {
+      "pattern": "Positioner가 제어밸브 동특성에 미치는 영향을 설명하시오.",
+      "intent": "Position feedback 효과, 한계와 gain trade-off",
+      "required_anchor_ids": [
+        "positioner_closed_loop_position_feedback",
+        "positioner_cannot_remove_mechanical_backlash",
+        "positioner_cannot_replace_actuator_thrust",
+        "positioner_gain_speed_stability_tradeoff"
+      ]
+    },
+    {
+      "pattern": "공압 공급계통이 제어밸브 응답속도에 미치는 영향을 설명하시오.",
+      "intent": "Supply·tubing·relay capacity와 응답",
+      "required_anchor_ids": [
+        "response_time_dead_dynamic_separation",
+        "pneumatic_supply_tubing_spool_capacity",
+        "large_step_test_pneumatic_capacity"
+      ]
+    },
+    {
+      "pattern": "Volume booster의 적용 목적과 주의사항을 설명하시오.",
+      "intent": "Booster capacity 효과와 안정성 조건",
+      "required_anchor_ids": [
+        "volume_booster_flow_capacity_feedback_condition",
+        "positioner_gain_speed_stability_tradeoff",
+        "hunting_multicausal_diagnosis"
+      ]
+    },
+    {
+      "pattern": "제어밸브 hunting의 원인과 개선방안을 설명하시오.",
+      "intent": "Hunting 다원인 진단과 tuning trade-off",
+      "required_anchor_ids": [
+        "positioner_gain_speed_stability_tradeoff",
+        "volume_booster_flow_capacity_feedback_condition",
+        "hunting_multicausal_diagnosis",
+        "oscillation_requires_differential_diagnosis"
+      ]
+    },
+    {
+      "pattern": "Final Control Element 성능이 공정변동성에 미치는 영향을 설명하시오.",
+      "intent": "Command-travel-flow-PV 경로와 성능 개선",
+      "required_anchor_ids": [
+        "final_control_element_variability_path",
+        "stiction_limit_cycle_path",
+        "oscillation_requires_differential_diagnosis",
+        "improvement_verify_same_test_and_process_result"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 배경과 문제 정의",
+      "intent": "Final Control Element의 비선형성과 지연이 공정변동성에 미치는 영향을 제시한다.",
+      "anchor_refs": [
+        "final_control_element_variability_path"
+      ]
+    },
+    {
+      "section": "2. 신호 전달 경로",
+      "intent": "Command, positioner, actuator pressure, travel, flow와 PV를 연결한다.",
+      "anchor_refs": [
+        "final_control_element_variability_path",
+        "positioner_closed_loop_position_feedback"
+      ]
+    },
+    {
+      "section": "3. Deadband·Backlash·Hysteresis",
+      "intent": "입력 불감 영역과 방향 의존 기계 비선형성을 구분한다.",
+      "anchor_refs": [
+        "deadband_definition_direction_reversal",
+        "deadband_not_dead_time",
+        "backlash_mechanical_clearance",
+        "hysteresis_direction_dependent_output"
+      ]
+    },
+    {
+      "section": "4. Stiction·Stick-Slip",
+      "intent": "Static friction, sticking, jump와 반복 운동을 설명한다.",
+      "anchor_refs": [
+        "static_friction_starting_force",
+        "stiction_stick_then_jump",
+        "stick_slip_repeated_motion",
+        "stiction_limit_cycle_path"
+      ]
+    },
+    {
+      "section": "5. Response Time과 시험",
+      "intent": "Dead time·dynamic time 및 small/large/reversal test를 구분한다.",
+      "anchor_refs": [
+        "response_time_dead_dynamic_separation",
+        "opening_closing_response_asymmetry",
+        "small_step_test_control_resolution",
+        "large_step_test_pneumatic_capacity",
+        "reversal_test_deadband_hysteresis",
+        "step_sensitivity_not_resolution_only"
+      ]
+    },
+    {
+      "section": "6. Positioner 동특성",
+      "intent": "Position feedback의 효과와 backlash·thrust 한계 및 gain trade-off를 설명한다.",
+      "anchor_refs": [
+        "positioner_closed_loop_position_feedback",
+        "positioner_cannot_remove_mechanical_backlash",
+        "positioner_cannot_replace_actuator_thrust",
+        "positioner_gain_speed_stability_tradeoff"
+      ]
+    },
+    {
+      "section": "7. 공압 용량과 Volume Booster",
+      "intent": "Supply, tubing, spool capacity와 booster 적용조건을 설명한다.",
+      "anchor_refs": [
+        "pneumatic_supply_tubing_spool_capacity",
+        "volume_booster_flow_capacity_feedback_condition",
+        "hunting_multicausal_diagnosis"
+      ]
+    },
+    {
+      "section": "8. 개선과 검증",
+      "intent": "기계·actuator·positioner·pneumatic path 개선 후 동일 시험과 공정성과를 비교한다.",
+      "anchor_refs": [
+        "oscillation_requires_differential_diagnosis",
+        "improvement_verify_same_test_and_process_result"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Deadband, backlash, hysteresis와 dead time을 정확히 구분한다.",
+    "Static friction, stiction과 stick-slip의 순차 메커니즘을 설명한다.",
+    "Controller output 누적과 sudden travel이 PV limit cycle로 연결되는 과정을 제시한다.",
+    "Dead time과 dynamic time 및 opening/closing 비대칭을 구분한다.",
+    "Small-step, large-step, reversal과 step sensitivity 시험 목적을 구분한다.",
+    "Positioner feedback의 효과와 backlash·actuator thrust 한계를 함께 쓴다.",
+    "Positioner gain과 booster 적용의 속도·안정성 trade-off를 설명한다.",
+    "Supply pressure, tubing, spool capacity와 actuator volume을 함께 검토한다.",
+    "개선 후 동일 시험과 품질·에너지·air consumption으로 효과를 확인한다."
+  ],
+  "common_missing_points": [
+    "Deadband와 dead time을 같은 개념으로 설명함.",
+    "Stiction을 단순 느린 응답으로만 설명함.",
+    "모든 oscillation을 stiction 하나로 단정함.",
+    "Small-step과 large-step 시험 목적을 구분하지 않음.",
+    "Positioner가 backlash 또는 부족한 thrust를 제거한다고 설명함.",
+    "Positioner gain 또는 booster는 높을수록 좋다고 단정함.",
+    "공압 배관과 relay capacity를 누락함.",
+    "개선 전후 동일 시험과 실제 공정 성과 검증을 누락함."
+  ],
+  "routing_aliases": [
+    "제어밸브 데드밴드와 스틱션",
+    "제어밸브 스틱슬립 현상",
+    "control valve deadband stiction",
+    "valve stick slip",
+    "제어밸브 응답시간",
+    "valve response time",
+    "dead time dynamic time valve",
+    "제어밸브 스텝 응답시험",
+    "valve step response test",
+    "step sensitivity control valve",
+    "포지셔너 동특성",
+    "positioner dynamic performance",
+    "valve hunting overshoot",
+    "volume booster response",
+    "공압 배관과 밸브 응답속도",
+    "final control element variability"
+  ],
+  "routing_field_points": [
+    "command 변화에도 valve travel이 정지하는 deadband 구간",
+    "packing friction을 극복한 뒤 stem이 jump하는 stiction",
+    "stick-slip과 PV limit cycle의 인과관계",
+    "dead time과 dynamic time의 구분",
+    "small-step과 large-step 응답시험의 목적 차이",
+    "direction reversal을 이용한 backlash와 hysteresis 평가",
+    "position feedback의 효과와 mechanical limitation",
+    "positioner gain의 response speed와 hunting trade-off",
+    "supply pressure, tubing과 relay capacity의 공압 응답 영향",
+    "volume booster의 feedback·bypass 조건",
+    "opening과 closing response 비대칭",
+    "동일 시험과 실제 PV variability를 이용한 개선 검증"
+  ],
+  "revision_notes": [
+    "Rich Question Pattern 10개와 Recommended Outline 8개를 Anchor 참조로 작성했다.",
+    "Deadband·stiction·response time·positioner dynamic performance를 원인-시험-개선 구조로 연결했다.",
+    "광범위한 단독 alias를 배제하고 valve dynamic-performance 전용 phrase를 사용했다."
+  ],
+  "id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance_DIAGNOSIS_ACTION_v1",
+  "title": "제어밸브의 데드밴드·스틱션·응답시간 및 포지셔너 동특성",
+  "question_examples": [
+    "제어밸브의 데드밴드와 스틱션을 설명하고 개선방안을 제시하시오.",
+    "제어밸브의 stick-slip이 공정변동을 유발하는 과정을 설명하시오.",
+    "제어밸브 응답시간을 dead time과 dynamic time으로 구분하여 설명하시오.",
+    "제어밸브의 small-step과 large-step 응답시험을 비교하시오.",
+    "Step sensitivity 시험의 목적과 평가 시 주의사항을 설명하시오.",
+    "Positioner가 제어밸브 동특성에 미치는 영향을 설명하시오.",
+    "공압 공급계통이 제어밸브 응답속도에 미치는 영향을 설명하시오.",
+    "Volume booster의 적용 목적과 주의사항을 설명하시오.",
+    "제어밸브 hunting의 원인과 개선방안을 설명하시오.",
+    "Final Control Element 성능이 공정변동성에 미치는 영향을 설명하시오."
+  ],
+  "topic_aliases": [
+    "제어밸브 데드밴드와 스틱션",
+    "제어밸브 스틱슬립 현상",
+    "control valve deadband stiction",
+    "valve stick slip",
+    "제어밸브 응답시간",
+    "valve response time",
+    "dead time dynamic time valve",
+    "제어밸브 스텝 응답시험",
+    "valve step response test",
+    "step sensitivity control valve",
+    "포지셔너 동특성",
+    "positioner dynamic performance",
+    "valve hunting overshoot",
+    "volume booster response",
+    "공압 배관과 밸브 응답속도",
+    "final control element variability"
+  ],
+  "expected_structure": [
+    "1. 배경과 문제 정의",
+    "2. 신호 전달 경로",
+    "3. Deadband·Backlash·Hysteresis",
+    "4. Stiction·Stick-Slip",
+    "5. Response Time과 시험",
+    "6. Positioner 동특성",
+    "7. 공압 용량과 Volume Booster",
+    "8. 개선과 검증"
+  ],
+  "high_score_features": [
+    "Deadband, backlash, hysteresis와 dead time을 정확히 구분한다.",
+    "Static friction, stiction과 stick-slip의 순차 메커니즘을 설명한다.",
+    "Controller output 누적과 sudden travel이 PV limit cycle로 연결되는 과정을 제시한다.",
+    "Dead time과 dynamic time 및 opening/closing 비대칭을 구분한다.",
+    "Small-step, large-step, reversal과 step sensitivity 시험 목적을 구분한다.",
+    "Positioner feedback의 효과와 backlash·actuator thrust 한계를 함께 쓴다.",
+    "Positioner gain과 booster 적용의 속도·안정성 trade-off를 설명한다.",
+    "Supply pressure, tubing, spool capacity와 actuator volume을 함께 검토한다.",
+    "개선 후 동일 시험과 품질·에너지·air consumption으로 효과를 확인한다."
+  ],
+  "low_score_patterns": [
+    "Deadband와 dead time을 같은 개념으로 설명함.",
+    "Stiction을 단순 느린 응답으로만 설명함.",
+    "모든 oscillation을 stiction 하나로 단정함.",
+    "Small-step과 large-step 시험 목적을 구분하지 않음.",
+    "Positioner가 backlash 또는 부족한 thrust를 제거한다고 설명함.",
+    "Positioner gain 또는 booster는 높을수록 좋다고 단정함.",
+    "공압 배관과 relay capacity를 누락함.",
+    "개선 전후 동일 시험과 실제 공정 성과 검증을 누락함."
+  ],
+  "field_connection_points": [
+    "command 변화에도 valve travel이 정지하는 deadband 구간",
+    "packing friction을 극복한 뒤 stem이 jump하는 stiction",
+    "stick-slip과 PV limit cycle의 인과관계",
+    "dead time과 dynamic time의 구분",
+    "small-step과 large-step 응답시험의 목적 차이",
+    "direction reversal을 이용한 backlash와 hysteresis 평가",
+    "position feedback의 효과와 mechanical limitation",
+    "positioner gain의 response speed와 hunting trade-off",
+    "supply pressure, tubing과 relay capacity의 공압 응답 영향",
+    "volume booster의 feedback·bypass 조건",
+    "opening과 closing response 비대칭",
+    "동일 시험과 실제 PV variability를 이용한 개선 검증"
+  ]
+}
