@@ -358,15 +358,19 @@ class GeneratedContractRegressionTests(unittest.TestCase):
         manifest = load_json(
             GENERATED_DIR / "topic_pack_manifest.generated.json"
         )
-        self.assertEqual(len(manifest["topics"]), 26)
-        self.assertEqual(
-            [
-                index
-                for index, row in enumerate(manifest["topics"])
-                if row.get("topic_id") == TOPIC
-            ],
-            [2],
+        source_topic_ids = sorted(
+            item.name
+            for item in (
+                ROOT / "rubrics" / "topic_packs"
+            ).iterdir()
+            if item.is_dir() and not item.name.startswith(".")
         )
+        generated_topic_ids = [
+            row["topic_id"]
+            for row in manifest["topics"]
+        ]
+        self.assertEqual(generated_topic_ids, source_topic_ids)
+        self.assertEqual(generated_topic_ids.count(TOPIC), 1)
 
     def test_anchor_contract_is_exact_and_unique(self) -> None:
         source_ids = [
