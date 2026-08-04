@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-03T07:58:50Z-generated-topic-pack-importance",
+  "version": "2026-08-04T00:48:01Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -111,6 +111,29 @@
         "CORE_MUST_PREPARE를 사용하지 않았다."
       ],
       "topic_label": "제어밸브 유체력과 액추에이터 선정"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "CALC_DESIGN",
+      "high_band_unlock_conditions": [
+        "Cv·Kv reference condition, conversion과 units를 정확히 쓴다.",
+        "Basic liquid square-root relation과 SG direction을 설명한다.",
+        "Minimum·normal·maximum required coefficient를 각각 계산한다.",
+        "Required·rated coefficient와 body·trim capacity를 구분한다.",
+        "Fp와 FR correction direction을 정확히 적용한다.",
+        "Valve Reynolds와 corrected coefficient를 반복 수렴시킨다.",
+        "Operating travel로 oversize와 undersize를 검증한다.",
+        "Cavitation·flashing·choked screening과 vendor crosscheck를 수행한다."
+      ],
+      "note": "액체 제어밸브의 계산과 실제 trim selection을 연결하는 핵심 FIELD_APPLICATION 주제이다.",
+      "revision_notes": [
+        "Handbook와 Primer의 liquid sizing flow를 주 자료로 사용했다.",
+        "Legacy cv_valve_flow_coefficient를 modern source로 대체하지 않고 경계만 유지했다."
+      ],
+      "topic_label": "제어밸브 Cv·Kv 액체 사이징과 Reynolds 보정"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

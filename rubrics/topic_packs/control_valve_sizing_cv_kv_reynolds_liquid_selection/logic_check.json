@@ -1,0 +1,281 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+  "title": "제어밸브의 Cv·Kv, 액체 사이징, Reynolds 보정 및 선정",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "제어밸브의 Cv·Kv, 액체 사이징, Reynolds 보정 및 선정",
+    "question_type": "CALC_DESIGN",
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_aliases": [
+      "control valve Cv Kv liquid sizing",
+      "Cv Kv conversion and unit consistency",
+      "non-choked liquid valve sizing",
+      "required Cv and rated trim capacity",
+      "minimum normal maximum flow sizing",
+      "piping geometry factor Fp control valve",
+      "reducer expander valve capacity correction",
+      "valve Reynolds number factor FR",
+      "viscous liquid control valve sizing",
+      "Reynolds correction iterative Cv calculation",
+      "small flow trim Reynolds correction",
+      "corrected required Cv selected trim",
+      "control valve oversize undersize capacity",
+      "liquid sizing cavitation choked screening",
+      "제어밸브 Cv Kv 액체 사이징",
+      "Cv Kv 변환과 단위계 일관성",
+      "최소 정상 최대 유량 Cv 계산",
+      "배관 형상 계수 Fp와 밸브 용량",
+      "점성 액체 Reynolds 보정",
+      "FR 반복 계산과 trim 선정",
+      "required Cv와 rated Cv 비교",
+      "액체 밸브 과대 과소 선정"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "Cv·Kv definition, liquid sizing formula, Fp·FR correction과 trim selection의 계산·설계 정합성을 평가한다.",
+    "difficulty": "FIELD_APPLICATION",
+    "cap_policy": {},
+    "candidate_extraction": {
+      "max_candidates": 40,
+      "nearby_window": 1,
+      "rules": [],
+      "key_terms": [
+        "control valve Cv",
+        "control valve Kv",
+        "flow capacity coefficient",
+        "60 F water",
+        "1 psi",
+        "US gpm",
+        "1 bar",
+        "m3/h",
+        "Cv Kv conversion",
+        "unit consistency",
+        "non-choked liquid",
+        "turbulent liquid",
+        "square root pressure drop",
+        "specific gravity",
+        "required Cv",
+        "rated Cv",
+        "trim capacity",
+        "body size",
+        "minimum flow",
+        "normal flow",
+        "maximum flow",
+        "operating travel",
+        "piping geometry factor",
+        "Fp",
+        "reducer",
+        "expander",
+        "viscosity",
+        "valve Reynolds number",
+        "Reynolds factor",
+        "FR",
+        "small flow trim",
+        "iterative calculation",
+        "corrected required Cv",
+        "oversized valve",
+        "undersized valve",
+        "cavitation screening",
+        "flashing",
+        "liquid choked",
+        "two phase",
+        "non-Newtonian",
+        "vendor sizing",
+        "hand calculation"
+      ]
+    },
+    "truth_schema": [
+      "Cv는 valve geometry와 유동 손실을 하나의 계수로 나타낸 유량 용량 지표이며 travel, valve opening ratio 또는 line size가 아니다.",
+      "일반적인 Cv 정의는 60°F 물이 밸브 전후 1 psi 차압에서 흐르는 US gpm 유량을 기준으로 한다.",
+      "Kv는 지정된 기준상태의 물이 밸브 전후 1 bar 차압에서 흐르는 m³/h 유량을 기준으로 하며 정확한 기준온도 wording은 적용 표준과 제조사 문서를 확인한다.",
+      "Cv와 Kv는 서로 변환 가능하며 통상 Kv≈0.865Cv, Cv≈1.156Kv를 사용한다.",
+      "Cv 또는 Kv 계산에서는 flow, pressure drop, density term, coefficient와 vendor catalog의 단위계를 일치시켜야 한다.",
+      "단상·비압축성·비초크·난류 액체에서는 유량이 flow coefficient와 sqrt(ΔP/ρr)에 비례한다.",
+      "동일 유량과 density에서 required coefficient는 valve pressure drop의 제곱근에 반비례한다.",
+      "동일 유량과 pressure drop에서 specific gravity 또는 relative density가 증가하면 required coefficient도 증가한다.",
+      "기본 액체식은 단상·비압축성·비초크·난류 조건을 전제로 하며 cavitation, flashing, choked, two-phase와 non-Newtonian service에는 추가 검토가 필요하다.",
+      "액체 sizing에는 minimum·normal·maximum flow, inlet·outlet pressure, temperature, density 또는 specific gravity, vapor pressure, critical pressure와 viscosity가 필요하다.",
+      "Sizing pressure drop은 정의한 운전점의 valve inlet pressure와 outlet pressure 차이며 available system differential과 valve에 실제 배분되는 pressure drop을 구분한다.",
+      "Required Cv 또는 Kv는 공정조건에서 필요한 용량이고 rated Cv 또는 Kv는 selected valve·trim이 제공하는 catalog capacity이며 두 값을 동일시하지 않는다.",
+      "Nominal body size와 trim flow capacity는 다른 개념이며 같은 body size에서도 reduced-capacity 또는 다른 trim으로 rated coefficient가 달라질 수 있다.",
+      "Minimum, normal과 maximum flow 조건에서 각각 required coefficient를 계산해야 한다.",
+      "Required coefficient를 selected trim의 inherent characteristic와 rated coefficient에 대응시켜 operating travel을 추정한다.",
+      "정상 운전 travel의 적정 범위는 valve type, characteristic, actuator·positioner resolution, process turndown과 project 기준에 따라 결정하며 하나의 opening band를 보편 기준으로 고정하지 않는다.",
+      "Fp는 밸브에 직접 연결된 reducer, expander, elbow 또는 tee 등의 부착 fitting이 effective flow capacity에 미치는 영향을 보정한다.",
+      "Fp<1이면 부착 fitting을 포함한 assembly의 effective capacity가 bare valve capacity보다 작아진다.",
+      "Fp는 valve size, pipe size, fitting type, reducer·expander geometry와 selected valve coefficient에 따라 달라질 수 있다.",
+      "고점도, 저유량, 소형 trim 또는 작은 flow coefficient에서는 valve Reynolds number가 낮아져 난류식의 오차가 커질 수 있다.",
+      "Valve Reynolds number는 valve 내부 유동의 관성력과 점성력의 상대적 영향을 판단하는 지표이며 일반 배관 Reynolds number와 식과 characteristic length가 같다고 단정하지 않는다.",
+      "Valve Reynolds 계산과 FR 보정에는 valve style, trim geometry, flow passage와 pressure recovery 특성을 나타내는 계수가 포함될 수 있다.",
+      "비난류 조건에서 FR<1이면 동일 유량을 확보하기 위한 corrected required Cv 또는 Kv는 기본 난류식 결과보다 증가한다.",
+      "FR은 임의의 고정 상수가 아니며 valve Reynolds number, valve style과 적용 standard correlation으로 결정한다.",
+      "Corrected coefficient, selected trim과 valve Reynolds number가 상호 의존하면 FR 계산을 반복하여 수렴시켜야 한다.",
+      "극저유량 또는 small-flow trim은 conventional full-size trim과 다른 geometry factor와 Reynolds correlation이 필요할 수 있다.",
+      "Piping과 Reynolds 보정 후 corrected required coefficient를 selected trim의 available rated coefficient와 다시 비교한다.",
+      "Selected rated capacity가 지나치게 크면 normal travel이 낮아지고 실제 resolution, installed gain과 control performance가 악화될 수 있다.",
+      "Selected capacity가 부족하면 maximum flow를 확보하지 못하거나 과도한 pressure drop와 high travel operation이 발생할 수 있다.",
+      "Basic liquid sizing 후 vapor pressure, pressure recovery와 downstream pressure를 이용해 cavitation, flashing과 liquid choked 가능성을 screening해야 하며 상세 criterion과 damage prevention은 Topic 8이 소유한다.",
+      "Two-phase, slurry, non-Newtonian, polymer 또는 고형물 포함 service에는 clean single-phase liquid correlation을 무조건 적용하지 않는다.",
+      "Vendor sizing result는 project unit basis, process data, hand calculation, selected coefficients와 service limitation으로 교차 검증한다."
+    ],
+    "fatal_conditions": [
+      "[control_valve_cv_is_opening_or_line_size] Cv는 valve opening percentage 또는 line size와 동일하다.",
+      "[control_valve_cv_reference_condition_wrong] Cv를 기준 유체, US gpm, 1 psi 차압과 reference temperature 없이 임의 유량계수로 정의한다.",
+      "[control_valve_cv_kv_numerically_identical] 같은 밸브의 Cv와 Kv 숫자는 단위변환 없이 항상 동일하다.",
+      "[control_valve_cv_superior_to_kv] Cv가 Kv보다 물리적으로 더 정확하거나 우수한 계수이다.",
+      "[control_valve_liquid_flow_linear_with_pressure_drop] 비초크 액체 유량은 pressure drop에 선형 비례한다.",
+      "[control_valve_required_coefficient_decreases_with_density] 동일 유량과 pressure drop에서 liquid density 또는 SG가 증가하면 required coefficient가 감소한다.",
+      "[control_valve_basic_liquid_equation_all_services] 기본 비초크 난류 액체식을 cavitating, flashing, choked, two-phase 또는 non-Newtonian service에 그대로 적용하면 된다.",
+      "[control_valve_required_equals_rated_coefficient] Required coefficient와 selected valve의 rated coefficient는 동일한 값이다.",
+      "[control_valve_body_size_equals_trim_capacity] Nominal body size만 알면 trim capacity와 required coefficient가 자동으로 결정된다.",
+      "[control_valve_single_flow_point_sufficient] Normal flow 한 점의 Cv 또는 Kv만 계산하면 minimum과 maximum 조건을 검토할 필요가 없다.",
+      "[control_valve_ignore_attached_fittings] Reducer, expander 또는 직접 연결 fitting은 valve sizing capacity에 영향을 주지 않으므로 항상 무시해도 된다.",
+      "[control_valve_fp_below_one_reduces_required_capacity] Fp<1이면 required coefficient가 감소한다.",
+      "[control_valve_viscosity_never_affects_cv] Liquid viscosity와 Reynolds number는 required Cv 또는 Kv에 영향을 주지 않는다.",
+      "[control_valve_fr_below_one_reduces_required_capacity] FR<1이면 corrected required coefficient가 기본 난류식 결과보다 감소한다.",
+      "[control_valve_fr_arbitrary_fixed_value] FR을 valve style, Reynolds number와 standard correlation에 관계없이 임의의 고정값으로 사용해도 된다.",
+      "[control_valve_reynolds_iteration_unnecessary] Corrected coefficient와 valve Reynolds number가 상호 의존해도 한 번 계산하면 항상 충분하다.",
+      "[control_valve_catalog_capacity_proves_selection] Catalog rated Cv 또는 Kv가 required coefficient보다 크기만 하면 operating travel과 service limitation 검토 없이 선정이 완료된다.",
+      "[control_valve_clean_liquid_equation_for_complex_fluid] Slurry, non-Newtonian 또는 two-phase service에 clean single-phase liquid equation을 아무 보정 없이 적용한다."
+    ],
+    "safe_conditions": [
+      "Cv와 Kv는 모두 valve flow capacity를 나타내며 사용하는 단위계가 다르다.",
+      "일반적인 Cv 정의는 60°F 물, 1 psi와 US gpm을 기준으로 한다.",
+      "Kv는 물, 1 bar와 m³/h 기준의 metric coefficient이다.",
+      "Kv≈0.865Cv, Cv≈1.156Kv를 사용할 수 있다.",
+      "단위변환 후 flow와 pressure 단위도 일치시켜야 한다.",
+      "비초크 난류 액체에서 유량은 coefficient와 pressure-drop square root에 비례한다.",
+      "동일 유량에서 SG가 증가하면 required coefficient도 증가한다.",
+      "부착 fitting이 없으면 Fp=1로 둘 수 있다.",
+      "충분한 난류이면 FR=1로 둘 수 있다.",
+      "Fp<1 또는 FR<1이면 required coefficient가 증가할 수 있다.",
+      "고점도, 저유량과 small trim에서는 Reynolds correction을 검토한다.",
+      "FR은 valve style과 Reynolds number의 함수이다.",
+      "Reynolds correction은 반복 계산이 필요할 수 있다.",
+      "Body size와 trim rated capacity는 구분한다.",
+      "Minimum, normal과 maximum flow를 각각 계산한다.",
+      "Rated coefficient가 required coefficient보다 큰지만으로 최종 선정을 확정하지 않는다.",
+      "Normal travel 범위는 valve와 project 조건에 따라 설정한다.",
+      "Cavitation과 liquid choked 가능성은 별도 screening한다.",
+      "Slurry 또는 non-Newtonian service는 별도 method를 검토한다.",
+      "Vendor software 결과는 hand calculation과 unit basis로 교차 확인한다."
+    ],
+    "output_contract": {
+      "json_only": true,
+      "required_fields": [
+        "verdict",
+        "confidence",
+        "reason",
+        "extracted_claims",
+        "contradictions",
+        "findings"
+      ],
+      "verdict_values": [
+        "pass",
+        "warn",
+        "fatal"
+      ],
+      "score_effect": "diagnostic_only",
+      "direct_score_layers": [
+        "C"
+      ],
+      "excluded_score_layers": [
+        "D",
+        "E"
+      ]
+    },
+    "major_checks": [
+      {
+        "id": "control_valve_kv_reference_temperature_universal_wording",
+        "claim": "Kv의 reference water temperature를 적용 표준과 source 없이 하나의 보편 문장으로 고정한다.",
+        "correction": "적용 standard edition 또는 manufacturer definition을 명시한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_fixed_normal_travel_band",
+        "claim": "특정 normal travel band를 모든 valve type과 service의 절대 합격 기준으로 제시한다.",
+        "correction": "Valve type, characteristic, resolution과 project criterion으로 target travel을 정한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_fixed_capacity_margin",
+        "claim": "Selected rated Cv 또는 Kv가 required value보다 반드시 일정 percentage만큼 커야 한다고 보편 규격으로 제시한다.",
+        "correction": "Capacity margin은 process uncertainty, trim availability와 operating travel로 결정한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_fp_always_one_or_always_required",
+        "claim": "Fp가 모든 설치에서 항상 1이거나 모든 설치에서 반드시 1보다 작다고 일반화한다.",
+        "correction": "Directly attached fitting geometry를 확인해 Fp 적용 여부를 결정한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_universal_reynolds_threshold",
+        "claim": "특정 valve Reynolds number 하나를 모든 valve style과 standard의 난류·천이·층류 절대 경계로 일반화한다.",
+        "correction": "Threshold와 correlation은 applicable standard와 valve style을 명시한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_universal_fr_correlation",
+        "claim": "하나의 FR correlation을 small-flow, globe, rotary와 모든 trim에 보편 적용한다.",
+        "correction": "Valve style과 trim geometry에 맞는 correlation을 선택한다.",
+        "severity": "major"
+      },
+      {
+        "id": "control_valve_cavitation_screening_optional",
+        "claim": "Basic capacity 계산이 완료되면 cavitation, flashing과 choked screening은 선택사항이라고 일반화한다.",
+        "correction": "Liquid sizing 이후 pressure-limit screening을 수행하고 Topic 8 상세검토 여부를 정한다.",
+        "severity": "major"
+      }
+    ],
+    "feedback_templates": {
+      "core_theory_positive": "Cv·Kv 단위계와 액체식, Fp·FR 보정 및 trim 선정 절차를 정확히 연결했습니다.",
+      "core_theory_major": "특정 travel, margin, Reynolds threshold 또는 correlation을 조건 없이 보편화했습니다.",
+      "core_theory_fatal": "Cv·Kv 정의, square-root relation, density 또는 Fp·FR 보정 방향을 반대로 설명했습니다.",
+      "next_practice": "Units→basic equation→Fp→Reynolds·FR→min-normal-max travel 순서로 다시 작성하세요."
+    },
+    "next_practice_points": [
+      "Cv·Kv reference condition과 conversion을 명시한다.",
+      "Flow, pressure와 density units를 일치시킨다.",
+      "Square-root relation과 SG 방향을 검증한다.",
+      "Required와 rated coefficient를 구분한다.",
+      "Minimum·normal·maximum point를 각각 계산한다.",
+      "Attached fitting의 Fp를 검토한다.",
+      "Viscous service에서 Reynolds와 FR을 반복 계산한다.",
+      "Corrected capacity와 selected trim travel을 재검증한다.",
+      "Cavitation·flashing·choked screening을 수행한다."
+    ],
+    "false_positive_cautions": [
+      "Kv reference temperature를 source와 standard를 붙여 조건부로 설명하면 자동 오류로 판단하지 않는다.",
+      "Normal travel 또는 capacity margin 숫자가 project criterion과 함께 제시되면 자동 major로 판단하지 않는다.",
+      "Fp=1 또는 FR=1을 applicability 조건과 함께 사용하면 허용한다.",
+      "Topic 2 characteristic 형상 설명을 Topic 6의 필수 계산으로 강제하지 않는다.",
+      "Topic 5 Authority·rangeability 질문을 Topic 6으로 흡수하지 않는다.",
+      "Topic 7 gas sizing을 liquid sizing으로 판정하지 않는다.",
+      "Topic 8 cavitation·flashing 상세식을 Topic 6 답안에 강제하지 않는다.",
+      "Cv 또는 Reynolds라는 단어 하나만으로 Topic 6을 선택하지 않는다."
+    ],
+    "enabled": true,
+    "score_policy": {
+      "status": "provisional",
+      "score_effect": "diagnostic_only",
+      "direct_score_application": false,
+      "recommended_ceiling": null,
+      "layer_caps": {},
+      "direct_d_e_effect": "none",
+      "reason": "Logic Check는 C-layer correctness evidence만 제공하며 D/E 직접효과와 숫자 ceiling을 적용하지 않는다."
+    }
+  },
+  "revision_notes": [
+    "Deterministic verdict는 비활성화하고 semantic profile만 사용한다.",
+    "Fatal 18개와 conditional major 7개를 Requirements 순서로 작성했다.",
+    "Formula regression은 focused test에서 수행하고 production direct score에는 사용하지 않는다."
+  ],
+  "topic_label": "제어밸브 Cv·Kv 액체 사이징과 Reynolds 보정"
+}

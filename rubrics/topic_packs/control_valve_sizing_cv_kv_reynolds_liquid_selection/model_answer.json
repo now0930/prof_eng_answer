@@ -1,0 +1,365 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+  "title_ko": "제어밸브의 Cv·Kv, 액체 사이징, Reynolds 보정 및 선정",
+  "question_type": "CALC_DESIGN",
+  "expected_question_patterns": [
+    {
+      "pattern": "Cv와 Kv의 정의, 기준 단위와 상호 변환 관계를 설명하시오.",
+      "intent": "Cv Kv definition, unit basis and conversion",
+      "required_anchor_ids": [
+        "cv_flow_capacity_physical_meaning",
+        "cv_reference_definition_us_units",
+        "kv_reference_definition_metric_units",
+        "cv_kv_conversion_relation",
+        "unit_system_consistency"
+      ]
+    },
+    {
+      "pattern": "단상 비초크 난류 액체의 유량과 차압 조건에서 required Cv를 계산하고 적용조건을 설명하시오.",
+      "intent": "Basic non-choked liquid Cv calculation",
+      "required_anchor_ids": [
+        "basic_nonchoked_liquid_flow_relation",
+        "required_coefficient_inverse_pressure_root",
+        "specific_gravity_direction",
+        "basic_equation_applicability_boundary",
+        "sizing_pressure_drop_definition"
+      ]
+    },
+    {
+      "pattern": "액체 제어밸브 sizing에 필요한 입력자료와 단위계 검증 절차를 설명하시오.",
+      "intent": "Liquid sizing input and unit audit",
+      "required_anchor_ids": [
+        "unit_system_consistency",
+        "liquid_sizing_input_data",
+        "sizing_pressure_drop_definition",
+        "required_vs_rated_coefficient",
+        "vendor_hand_calculation_crosscheck"
+      ]
+    },
+    {
+      "pattern": "Minimum, normal과 maximum flow 조건으로 required coefficient와 selected trim을 검증하는 절차를 설명하시오.",
+      "intent": "Min normal max sizing and trim selection",
+      "required_anchor_ids": [
+        "minimum_normal_maximum_sizing_points",
+        "required_vs_rated_coefficient",
+        "body_size_vs_trim_capacity",
+        "selected_characteristic_travel_mapping",
+        "normal_operating_travel_is_conditional"
+      ]
+    },
+    {
+      "pattern": "Reducer와 expander가 연결된 제어밸브에서 piping geometry factor의 의미와 sizing 영향을 설명하시오.",
+      "intent": "Piping geometry factor correction",
+      "required_anchor_ids": [
+        "piping_geometry_factor_meaning",
+        "piping_factor_reduces_effective_capacity",
+        "piping_factor_geometry_dependency",
+        "corrected_required_vs_available_trim"
+      ]
+    },
+    {
+      "pattern": "고점도 액체의 valve Reynolds number와 FR 보정 절차를 설명하시오.",
+      "intent": "Viscous liquid Reynolds correction",
+      "required_anchor_ids": [
+        "viscosity_low_reynolds_trigger",
+        "valve_reynolds_number_meaning",
+        "valve_style_modifier_dependency",
+        "reynolds_factor_correction_direction",
+        "reynolds_correction_not_arbitrary_constant",
+        "reynolds_correction_iteration"
+      ]
+    },
+    {
+      "pattern": "Small-flow trim 또는 극저유량 valve sizing의 주의사항을 설명하시오.",
+      "intent": "Small-flow trim sizing",
+      "required_anchor_ids": [
+        "viscosity_low_reynolds_trigger",
+        "valve_style_modifier_dependency",
+        "reynolds_correction_iteration",
+        "small_flow_trim_special_review",
+        "corrected_required_vs_available_trim"
+      ]
+    },
+    {
+      "pattern": "Required coefficient, rated capacity와 operating travel을 이용하여 oversized와 undersized valve를 진단하시오.",
+      "intent": "Over and under sizing diagnosis",
+      "required_anchor_ids": [
+        "required_vs_rated_coefficient",
+        "selected_characteristic_travel_mapping",
+        "oversized_valve_selection_consequence",
+        "undersized_valve_selection_consequence",
+        "minimum_normal_maximum_sizing_points"
+      ]
+    },
+    {
+      "pattern": "Basic liquid sizing 이후 cavitation, flashing, choked와 복잡 유체 적용 한계를 screening하는 절차를 설명하시오.",
+      "intent": "Liquid service limitation screening",
+      "required_anchor_ids": [
+        "basic_equation_applicability_boundary",
+        "cavitation_flashing_choked_screening",
+        "complex_fluid_separate_method",
+        "liquid_sizing_input_data"
+      ]
+    },
+    {
+      "pattern": "Cv·Kv, Fp, FR, minimum·normal·maximum 조건과 vendor data를 이용한 액체 제어밸브 선정 절차를 설명하시오.",
+      "intent": "Integrated liquid valve selection",
+      "required_anchor_ids": [
+        "cv_kv_conversion_relation",
+        "unit_system_consistency",
+        "liquid_sizing_input_data",
+        "piping_geometry_factor_meaning",
+        "reynolds_factor_correction_direction",
+        "reynolds_correction_iteration",
+        "corrected_required_vs_available_trim",
+        "vendor_hand_calculation_crosscheck"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 계수 정의와 단위",
+      "intent": "Cv·Kv의 물리적 의미, 기준조건과 변환을 설명한다.",
+      "anchor_refs": [
+        "cv_flow_capacity_physical_meaning",
+        "cv_reference_definition_us_units",
+        "kv_reference_definition_metric_units",
+        "cv_kv_conversion_relation",
+        "unit_system_consistency"
+      ]
+    },
+    {
+      "section": "2. 기본 액체식과 적용 경계",
+      "intent": "Basic non-choked relation과 pressure·density 방향을 설명한다.",
+      "anchor_refs": [
+        "basic_nonchoked_liquid_flow_relation",
+        "required_coefficient_inverse_pressure_root",
+        "specific_gravity_direction",
+        "basic_equation_applicability_boundary"
+      ]
+    },
+    {
+      "section": "3. 공정자료와 차압",
+      "intent": "Sizing input data와 valve pressure drop를 정의한다.",
+      "anchor_refs": [
+        "liquid_sizing_input_data",
+        "sizing_pressure_drop_definition"
+      ]
+    },
+    {
+      "section": "4. 용량과 운전점",
+      "intent": "Required·rated coefficient, body·trim 및 min-normal-max를 설명한다.",
+      "anchor_refs": [
+        "required_vs_rated_coefficient",
+        "body_size_vs_trim_capacity",
+        "minimum_normal_maximum_sizing_points",
+        "selected_characteristic_travel_mapping",
+        "normal_operating_travel_is_conditional"
+      ]
+    },
+    {
+      "section": "5. 배관 형상 보정",
+      "intent": "Attached fitting과 Fp 영향을 설명한다.",
+      "anchor_refs": [
+        "piping_geometry_factor_meaning",
+        "piping_factor_reduces_effective_capacity",
+        "piping_factor_geometry_dependency"
+      ]
+    },
+    {
+      "section": "6. Reynolds와 점도 보정",
+      "intent": "Viscosity trigger, valve Reynolds, FR과 iteration을 설명한다.",
+      "anchor_refs": [
+        "viscosity_low_reynolds_trigger",
+        "valve_reynolds_number_meaning",
+        "valve_style_modifier_dependency",
+        "reynolds_factor_correction_direction",
+        "reynolds_correction_not_arbitrary_constant",
+        "reynolds_correction_iteration",
+        "small_flow_trim_special_review"
+      ]
+    },
+    {
+      "section": "7. 선정과 서비스 한계",
+      "intent": "Corrected capacity, over·under sizing과 service screening을 설명한다.",
+      "anchor_refs": [
+        "corrected_required_vs_available_trim",
+        "oversized_valve_selection_consequence",
+        "undersized_valve_selection_consequence",
+        "cavitation_flashing_choked_screening",
+        "complex_fluid_separate_method"
+      ]
+    },
+    {
+      "section": "8. Vendor 교차검증과 결론",
+      "intent": "Vendor result와 hand calculation으로 최종 trim을 검증한다.",
+      "anchor_refs": [
+        "vendor_hand_calculation_crosscheck",
+        "corrected_required_vs_available_trim",
+        "minimum_normal_maximum_sizing_points"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Cv와 Kv의 기준조건과 단위를 구분한다.",
+    "Cv·Kv conversion과 project unit consistency를 제시한다.",
+    "Basic liquid equation의 square-root와 SG 방향을 정확히 설명한다.",
+    "Single-phase, non-choked, turbulent applicability를 명시한다.",
+    "Minimum·normal·maximum required coefficient를 각각 계산한다.",
+    "Required와 rated coefficient 및 body와 trim capacity를 구분한다.",
+    "Attached fittings가 있으면 Fp를 검토한다.",
+    "High viscosity와 small trim에서 valve Reynolds와 FR을 검토한다.",
+    "FR correction의 증가 방향과 iteration을 설명한다.",
+    "Operating travel로 oversize와 undersize를 검증한다.",
+    "Cavitation·flashing·choked 가능성을 screening한다.",
+    "Vendor result를 hand calculation과 unit basis로 교차 검증한다."
+  ],
+  "common_missing_points": [
+    "Cv를 opening 또는 line size로 설명함.",
+    "Cv와 Kv 숫자를 동일시함.",
+    "Flow가 pressure drop에 선형 비례한다고 설명함.",
+    "SG 증가 시 required coefficient 방향을 반대로 설명함.",
+    "Basic equation의 applicability가 없음.",
+    "Required와 rated coefficient를 동일시함.",
+    "Minimum·normal·maximum case가 없음.",
+    "Fp와 attached fitting을 누락함.",
+    "Viscosity와 FR correction을 무시함.",
+    "FR<1일 때 required coefficient 방향을 반대로 설명함.",
+    "Operating travel과 service limitation 검증이 없음."
+  ],
+  "routing_aliases": [
+    "control valve Cv Kv liquid sizing",
+    "Cv Kv conversion and unit consistency",
+    "non-choked liquid valve sizing",
+    "required Cv and rated trim capacity",
+    "minimum normal maximum flow sizing",
+    "piping geometry factor Fp control valve",
+    "reducer expander valve capacity correction",
+    "valve Reynolds number factor FR",
+    "viscous liquid control valve sizing",
+    "Reynolds correction iterative Cv calculation",
+    "small flow trim Reynolds correction",
+    "corrected required Cv selected trim",
+    "control valve oversize undersize capacity",
+    "liquid sizing cavitation choked screening",
+    "제어밸브 Cv Kv 액체 사이징",
+    "Cv Kv 변환과 단위계 일관성",
+    "최소 정상 최대 유량 Cv 계산",
+    "배관 형상 계수 Fp와 밸브 용량",
+    "점성 액체 Reynolds 보정",
+    "FR 반복 계산과 trim 선정",
+    "required Cv와 rated Cv 비교",
+    "액체 밸브 과대 과소 선정"
+  ],
+  "routing_field_points": [
+    "Cv·Kv 기준조건과 변환",
+    "Flow·pressure·density unit consistency",
+    "Non-choked turbulent liquid square-root relation",
+    "Minimum·normal·maximum required coefficient",
+    "Required와 rated trim capacity 구분",
+    "Body size와 trim capacity 구분",
+    "Piping geometry factor Fp",
+    "Valve Reynolds와 FR correction",
+    "Reynolds iterative convergence",
+    "Small-flow trim special correlation",
+    "Oversize·undersize와 operating travel",
+    "Cavitation·flashing·choked screening",
+    "Vendor sizing와 hand calculation crosscheck"
+  ],
+  "revision_notes": [
+    "Question Pattern 10개와 Outline 8개를 Anchor reference로 작성했다.",
+    "Definition→units→basic formula→Fp→FR→selection 순서를 사용했다.",
+    "Topic count와 canonical position을 모델 답안에 하드코딩하지 않았다."
+  ],
+  "id": "control_valve_sizing_cv_kv_reynolds_liquid_selection_CALC_DESIGN_v1",
+  "title": "제어밸브의 Cv·Kv, 액체 사이징, Reynolds 보정 및 선정",
+  "question_examples": [
+    "Cv와 Kv의 정의, 기준 단위와 상호 변환 관계를 설명하시오.",
+    "단상 비초크 난류 액체의 유량과 차압 조건에서 required Cv를 계산하고 적용조건을 설명하시오.",
+    "액체 제어밸브 sizing에 필요한 입력자료와 단위계 검증 절차를 설명하시오.",
+    "Minimum, normal과 maximum flow 조건으로 required coefficient와 selected trim을 검증하는 절차를 설명하시오.",
+    "Reducer와 expander가 연결된 제어밸브에서 piping geometry factor의 의미와 sizing 영향을 설명하시오.",
+    "고점도 액체의 valve Reynolds number와 FR 보정 절차를 설명하시오.",
+    "Small-flow trim 또는 극저유량 valve sizing의 주의사항을 설명하시오.",
+    "Required coefficient, rated capacity와 operating travel을 이용하여 oversized와 undersized valve를 진단하시오.",
+    "Basic liquid sizing 이후 cavitation, flashing, choked와 복잡 유체 적용 한계를 screening하는 절차를 설명하시오.",
+    "Cv·Kv, Fp, FR, minimum·normal·maximum 조건과 vendor data를 이용한 액체 제어밸브 선정 절차를 설명하시오."
+  ],
+  "topic_aliases": [
+    "control valve Cv Kv liquid sizing",
+    "Cv Kv conversion and unit consistency",
+    "non-choked liquid valve sizing",
+    "required Cv and rated trim capacity",
+    "minimum normal maximum flow sizing",
+    "piping geometry factor Fp control valve",
+    "reducer expander valve capacity correction",
+    "valve Reynolds number factor FR",
+    "viscous liquid control valve sizing",
+    "Reynolds correction iterative Cv calculation",
+    "small flow trim Reynolds correction",
+    "corrected required Cv selected trim",
+    "control valve oversize undersize capacity",
+    "liquid sizing cavitation choked screening",
+    "제어밸브 Cv Kv 액체 사이징",
+    "Cv Kv 변환과 단위계 일관성",
+    "최소 정상 최대 유량 Cv 계산",
+    "배관 형상 계수 Fp와 밸브 용량",
+    "점성 액체 Reynolds 보정",
+    "FR 반복 계산과 trim 선정",
+    "required Cv와 rated Cv 비교",
+    "액체 밸브 과대 과소 선정"
+  ],
+  "expected_structure": [
+    "1. 계수 정의와 단위",
+    "2. 기본 액체식과 적용 경계",
+    "3. 공정자료와 차압",
+    "4. 용량과 운전점",
+    "5. 배관 형상 보정",
+    "6. Reynolds와 점도 보정",
+    "7. 선정과 서비스 한계",
+    "8. Vendor 교차검증과 결론"
+  ],
+  "high_score_features": [
+    "Cv와 Kv의 기준조건과 단위를 구분한다.",
+    "Cv·Kv conversion과 project unit consistency를 제시한다.",
+    "Basic liquid equation의 square-root와 SG 방향을 정확히 설명한다.",
+    "Single-phase, non-choked, turbulent applicability를 명시한다.",
+    "Minimum·normal·maximum required coefficient를 각각 계산한다.",
+    "Required와 rated coefficient 및 body와 trim capacity를 구분한다.",
+    "Attached fittings가 있으면 Fp를 검토한다.",
+    "High viscosity와 small trim에서 valve Reynolds와 FR을 검토한다.",
+    "FR correction의 증가 방향과 iteration을 설명한다.",
+    "Operating travel로 oversize와 undersize를 검증한다.",
+    "Cavitation·flashing·choked 가능성을 screening한다.",
+    "Vendor result를 hand calculation과 unit basis로 교차 검증한다."
+  ],
+  "low_score_patterns": [
+    "Cv를 opening 또는 line size로 설명함.",
+    "Cv와 Kv 숫자를 동일시함.",
+    "Flow가 pressure drop에 선형 비례한다고 설명함.",
+    "SG 증가 시 required coefficient 방향을 반대로 설명함.",
+    "Basic equation의 applicability가 없음.",
+    "Required와 rated coefficient를 동일시함.",
+    "Minimum·normal·maximum case가 없음.",
+    "Fp와 attached fitting을 누락함.",
+    "Viscosity와 FR correction을 무시함.",
+    "FR<1일 때 required coefficient 방향을 반대로 설명함.",
+    "Operating travel과 service limitation 검증이 없음."
+  ],
+  "field_connection_points": [
+    "Cv·Kv 기준조건과 변환",
+    "Flow·pressure·density unit consistency",
+    "Non-choked turbulent liquid square-root relation",
+    "Minimum·normal·maximum required coefficient",
+    "Required와 rated trim capacity 구분",
+    "Body size와 trim capacity 구분",
+    "Piping geometry factor Fp",
+    "Valve Reynolds와 FR correction",
+    "Reynolds iterative convergence",
+    "Small-flow trim special correlation",
+    "Oversize·undersize와 operating travel",
+    "Cavitation·flashing·choked screening",
+    "Vendor sizing와 hand calculation crosscheck"
+  ]
+}

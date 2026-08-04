@@ -234,3 +234,7 @@ python3 scripts/test_control_valve_types_body_actuator_topic.py
 echo
 echo "===== control valve authority and installed-gain topic regression ====="
 python3 scripts/test_control_valve_authority_rangeability_gain_topic.py
+
+echo
+echo "===== control valve liquid sizing topic regression ====="
+python3 scripts/test_control_valve_sizing_cv_kv_reynolds_topic.py
