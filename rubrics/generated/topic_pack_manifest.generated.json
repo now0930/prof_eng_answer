@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-04T13:06:31Z-generated-topic-pack-manifest",
+  "version": "2026-08-04T14:37:59Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 33,
+  "topic_count": 34,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -88,6 +88,16 @@
     },
     {
       "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

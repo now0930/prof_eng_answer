@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "Command-current-pressure-travel feedback chain을 제시한다.",
+    "Positioner와 I/P converter 기능을 구분한다.",
+    "Negative feedback와 current-pressure mapping을 설명한다.",
+    "Direct·reverse action과 fail action을 분리한다.",
+    "Booster와 pneumatic accessories의 기능을 구분한다.",
+    "Zero·span·multipoint·split-range calibration을 설명한다.",
+    "Failure response, operating cases와 records를 포함한다.",
+    "Topic handoff와 vendor crosscheck를 설명한다."
+  ],
+  "note": "Positioner·I/P·booster·accessory와 calibration은 electrical command, pneumatic pressure, mechanical travel와 fail response를 연결하는 final-control-element 핵심 현장 주제이다.",
+  "revision_notes": [
+    "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+    "PRINCIPLE_INTERPRETATION을 Primary Question Type으로 적용했다."
+  ],
+  "topic_label": "포지셔너·I/P·부스터·부속기기·교정"
+}

@@ -1,0 +1,346 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+  "title_ko": "제어밸브 포지셔너·I/P 변환기·부스터·부속기기 및 교정",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "4–20 mA command부터 I/P, positioner, actuator와 travel feedback까지 signal chain을 설명하시오.",
+      "intent": "Electrical command부터 pneumatic pressure와 mechanical travel까지 전체 feedback chain을 설명한다.",
+      "required_anchor_ids": [
+        "control_valve_positioner_accessory_scope",
+        "command_ip_positioner_actuator_feedback_chain",
+        "positioner_travel_feedback_controller",
+        "position_error_negative_feedback",
+        "final_signal_pressure_travel_fail_action_verification"
+      ]
+    },
+    {
+      "pattern": "Nozzle-flapper, force balance와 relay를 이용한 pneumatic positioner 원리를 설명하시오.",
+      "intent": "Pneumatic positioner의 force-balance와 fill·vent mechanism을 설명한다.",
+      "required_anchor_ids": [
+        "pneumatic_positioner_force_balance_mechanism",
+        "positioner_travel_feedback_controller",
+        "travel_feedback_linkage_cam_alignment",
+        "ip_supply_air_dependency"
+      ]
+    },
+    {
+      "pattern": "I/P converter의 4–20 mA·3–15 psi mapping과 supply-air dependency를 설명하시오.",
+      "intent": "I/P 기능, normalized current, pressure mapping과 conventional endpoint를 설명한다.",
+      "required_anchor_ids": [
+        "electropneumatic_positioner_separate_ip_boundary",
+        "ip_converter_current_pressure_transduction",
+        "normalized_current_command",
+        "ip_linear_pressure_mapping",
+        "conventional_4_20ma_3_15psi_endpoints",
+        "ip_supply_air_dependency"
+      ]
+    },
+    {
+      "pattern": "Positioner direct·reverse action, actuator air action과 valve fail action을 비교하시오.",
+      "intent": "Positioner action과 actuator·spring·fail action chain을 분리한다.",
+      "required_anchor_ids": [
+        "positioner_direct_reverse_action",
+        "actuator_action_fail_action_separation",
+        "loss_signal_air_power_failure_response",
+        "sis_esd_pst_topic15_handoff"
+      ]
+    },
+    {
+      "pattern": "Volume booster의 pilot-pressure following, flow-capacity 기능과 bypass tradeoff를 설명하시오.",
+      "intent": "Booster를 pressure amplifier가 아닌 flow-capacity 장치로 설명한다.",
+      "required_anchor_ids": [
+        "volume_booster_flow_capacity_function",
+        "booster_pressure_follower_boundary",
+        "booster_bypass_hunting_topic3_handoff",
+        "tubing_output_capacity_pressure_drop"
+      ]
+    },
+    {
+      "pattern": "Filter regulator, lock-up relay, quick exhaust, solenoid valve와 volume tank를 비교하시오.",
+      "intent": "Pneumatic accessory별 기능, failure condition과 response tradeoff를 비교한다.",
+      "required_anchor_ids": [
+        "filter_regulator_supply_conditioning",
+        "lockup_relay_supply_failure_holding",
+        "quick_exhaust_rapid_vent_function",
+        "solenoid_on_off_pneumatic_switching",
+        "volume_tank_energy_storage_response_tradeoff"
+      ]
+    },
+    {
+      "pattern": "Zero·span·linkage·endpoint와 multipoint upstroke·downstroke calibration 절차를 설명하시오.",
+      "intent": "Mechanical alignment, endpoint iteration과 multipoint verification을 설명한다.",
+      "required_anchor_ids": [
+        "travel_feedback_linkage_cam_alignment",
+        "positioner_zero_span_travel_calibration",
+        "multipoint_upstroke_downstroke_verification",
+        "seat_endpoint_overtravel_mechanical_stop",
+        "as_found_as_left_traceability"
+      ]
+    },
+    {
+      "pattern": "Split-range local mapping, gap·overlap와 calibration 방법을 설명하시오.",
+      "intent": "각 segment의 local normalization과 sequencing을 설명한다.",
+      "required_anchor_ids": [
+        "split_range_local_mapping",
+        "positioner_direct_reverse_action",
+        "command_pressure_travel_loop_test",
+        "vendor_action_cam_relay_setting_crosscheck"
+      ]
+    },
+    {
+      "pattern": "Loss of signal·air·power와 I/P·positioner·booster·accessory failure를 signal chain으로 진단하시오.",
+      "intent": "Air quality, signal loss와 accessory failure를 signal chain 순서로 진단한다.",
+      "required_anchor_ids": [
+        "air_quality_leakage_nozzle_restriction_failure",
+        "loss_signal_air_power_failure_response",
+        "operating_pressure_case_calibration_validity",
+        "maintenance_bypass_manual_operation_boundary",
+        "lockup_relay_supply_failure_holding"
+      ]
+    },
+    {
+      "pattern": "Command, current, pressure, travel, fail action과 calibration record를 통합 검증하시오.",
+      "intent": "Loop test, records, vendor crosscheck와 Topic handoff를 통합한다.",
+      "required_anchor_ids": [
+        "command_pressure_travel_loop_test",
+        "hysteresis_deadband_stiction_topic3_handoff",
+        "as_found_as_left_traceability",
+        "vendor_action_cam_relay_setting_crosscheck",
+        "smart_diagnostics_topic12_handoff",
+        "sis_esd_pst_topic15_handoff",
+        "package_workflow_topic16_handoff",
+        "final_signal_pressure_travel_fail_action_verification"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "Signal chain and feedback",
+      "intent": "Command→I/P→positioner→actuator→travel feedback와 negative feedback를 설명한다.",
+      "anchor_refs": [
+        "control_valve_positioner_accessory_scope",
+        "command_ip_positioner_actuator_feedback_chain",
+        "positioner_travel_feedback_controller",
+        "position_error_negative_feedback"
+      ]
+    },
+    {
+      "section": "Positioner and I/P principle",
+      "intent": "Pneumatic positioner mechanism과 current-pressure transduction을 구분한다.",
+      "anchor_refs": [
+        "pneumatic_positioner_force_balance_mechanism",
+        "electropneumatic_positioner_separate_ip_boundary",
+        "ip_converter_current_pressure_transduction",
+        "normalized_current_command",
+        "ip_linear_pressure_mapping",
+        "conventional_4_20ma_3_15psi_endpoints",
+        "ip_supply_air_dependency"
+      ]
+    },
+    {
+      "section": "Action and fail chain",
+      "intent": "Direct·reverse action, actuator action과 fail action을 독립적으로 설명한다.",
+      "anchor_refs": [
+        "positioner_direct_reverse_action",
+        "actuator_action_fail_action_separation",
+        "loss_signal_air_power_failure_response"
+      ]
+    },
+    {
+      "section": "Mechanical feedback and calibration",
+      "intent": "Linkage·cam, zero·span, multipoint와 split-range calibration을 설명한다.",
+      "anchor_refs": [
+        "travel_feedback_linkage_cam_alignment",
+        "positioner_zero_span_travel_calibration",
+        "multipoint_upstroke_downstroke_verification",
+        "split_range_local_mapping",
+        "seat_endpoint_overtravel_mechanical_stop",
+        "command_pressure_travel_loop_test"
+      ]
+    },
+    {
+      "section": "Booster and pneumatic accessories",
+      "intent": "Booster, filter regulator, lock-up, quick exhaust, solenoid와 tank를 비교한다.",
+      "anchor_refs": [
+        "volume_booster_flow_capacity_function",
+        "booster_pressure_follower_boundary",
+        "booster_bypass_hunting_topic3_handoff",
+        "filter_regulator_supply_conditioning",
+        "lockup_relay_supply_failure_holding",
+        "quick_exhaust_rapid_vent_function",
+        "solenoid_on_off_pneumatic_switching",
+        "volume_tank_energy_storage_response_tradeoff",
+        "tubing_output_capacity_pressure_drop"
+      ]
+    },
+    {
+      "section": "Failure, operating cases and records",
+      "intent": "Failure modes, pressure cases, bypass, as-found·as-left와 vendor settings를 검토한다.",
+      "anchor_refs": [
+        "bench_set_calibration_boundary",
+        "hysteresis_deadband_stiction_topic3_handoff",
+        "air_quality_leakage_nozzle_restriction_failure",
+        "operating_pressure_case_calibration_validity",
+        "maintenance_bypass_manual_operation_boundary",
+        "as_found_as_left_traceability",
+        "vendor_action_cam_relay_setting_crosscheck"
+      ]
+    },
+    {
+      "section": "Topic handoffs",
+      "intent": "Dynamic diagnostics, smart diagnostics, SIS·ESD와 package workflow 경계를 정리한다.",
+      "anchor_refs": [
+        "smart_diagnostics_topic12_handoff",
+        "sis_esd_pst_topic15_handoff",
+        "package_workflow_topic16_handoff"
+      ]
+    },
+    {
+      "section": "Final integrated verification",
+      "intent": "Command, current, pressure, travel와 fail action을 최종 교차 확인한다.",
+      "anchor_refs": [
+        "final_signal_pressure_travel_fail_action_verification"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Command→I/P→positioner→actuator→travel feedback chain을 제시한다.",
+    "Positioner를 local travel-feedback controller로 설명한다.",
+    "I/P를 current-to-pressure transducer로 구분한다.",
+    "e=r-y와 negative-feedback polarity를 설명한다.",
+    "Pneumatic positioner의 nozzle-flapper·force-balance·relay mechanism을 설명한다.",
+    "4–20 mA·3–15 psi endpoint와 inverse mapping을 계산한다.",
+    "Direct·reverse action, actuator action과 fail action을 분리한다.",
+    "Feedback linkage·cam alignment와 endpoint를 확인한다.",
+    "Zero·span 상호작용과 multipoint up/down calibration을 설명한다.",
+    "Split-range local normalization과 gap·overlap을 설명한다.",
+    "Booster를 pressure follower·flow-capacity 장치로 설명한다.",
+    "Filter regulator, lock-up, quick exhaust, solenoid와 tank를 구분한다.",
+    "Bench set과 positioner calibration을 구분한다.",
+    "Loss-of-signal·air·power response와 operating cases를 검토한다.",
+    "As-found·as-left와 vendor manual crosscheck를 포함한다.",
+    "Topic 1·3·4·10·12·15·16 경계를 명시한다."
+  ],
+  "common_missing_points": [
+    "Positioner와 I/P converter의 기능을 동일시한다.",
+    "Feedback polarity와 position error를 설명하지 않는다.",
+    "4–20 mA·3–15 psi endpoint를 잘못 연결한다.",
+    "Direct·reverse action을 fail-open·fail-close와 동일시한다.",
+    "Booster를 pressure amplifier로 설명한다.",
+    "Quick exhaust, lock-up, solenoid와 tank 기능을 구분하지 않는다.",
+    "Zero·span endpoint만 확인하고 intermediate·downstroke를 생략한다.",
+    "Split-range segment local mapping을 생략한다.",
+    "Bench set과 positioner calibration을 동일시한다.",
+    "Loss-of-signal·air·power와 vendor settings를 검증하지 않는다."
+  ],
+  "routing_aliases": [
+    "control valve positioner travel feedback controller",
+    "command IP positioner actuator travel feedback",
+    "pneumatic positioner nozzle flapper force balance relay",
+    "electropneumatic positioner separate IP converter",
+    "IP converter 4–20 mA 3–15 psi mapping",
+    "positioner direct reverse actuator fail action",
+    "positioner feedback linkage cam alignment",
+    "positioner zero span multipoint calibration",
+    "split range local current mapping",
+    "volume booster pilot pressure flow capacity",
+    "booster bypass hunting tuning boundary",
+    "filter regulator lockup quick exhaust solenoid",
+    "volume tank pneumatic energy response",
+    "command current pressure travel loop test",
+    "loss of signal air power fail response",
+    "as-found as-left valve calibration",
+    "밸브 포지셔너 위치 피드백 제어",
+    "I/P 변환기 전류 공기압 매핑",
+    "공압식 포지셔너 노즐 플래퍼 릴레이",
+    "포지셔너 정역동작 액추에이터 고장동작",
+    "포지셔너 영점 스팬 다점 교정",
+    "분할범위 로컬 전류 매핑",
+    "볼륨 부스터 파일럿 압력 유량 용량",
+    "필터 레귤레이터 록업 급속배기 솔레노이드",
+    "신호 공기 전원 상실 응답"
+  ],
+  "routing_field_points": [
+    "Loop drawing과 command-current-pressure-travel chain 확인",
+    "Positioner feedback polarity와 action 확인",
+    "I/P input·output range와 supply pressure 확인",
+    "4·12·20 mA pressure endpoint 확인",
+    "Feedback lever·cam·linkage alignment 확인",
+    "Zero·span과 0·25·50·75·100% up/down calibration",
+    "Split-range local current endpoint와 overlap·gap 확인",
+    "Booster pilot/output pressure와 fill·vent capacity 확인",
+    "Filter regulator, lock-up, quick exhaust, solenoid와 tank 기능 확인",
+    "Tubing length·diameter, fittings와 exhaust path 확인",
+    "Bench set, seat endpoint와 mechanical stop 확인",
+    "Loss-of-signal·air·power 및 accessory failure test",
+    "As-found·as-left와 acceptance record",
+    "Topic 1·3·4·10·12·15·16 handoff"
+  ],
+  "revision_notes": [
+    "10개 Question Pattern과 8개 Recommended Outline을 추가했다.",
+    "Broad positioner·I/P·booster·calibration alias를 금지하고 복합 routing phrase를 사용했다.",
+    "Topic 1·3·4·10·12·15·16 경계를 독립적으로 명시했다."
+  ],
+  "id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+  "title": "제어밸브 포지셔너·I/P 변환기·부스터·부속기기 및 교정",
+  "question_examples": [
+    "4–20 mA command부터 I/P, positioner, actuator와 travel feedback까지 signal chain을 설명하시오.",
+    "Nozzle-flapper, force balance와 relay를 이용한 pneumatic positioner 원리를 설명하시오.",
+    "I/P converter의 4–20 mA·3–15 psi mapping과 supply-air dependency를 설명하시오.",
+    "Positioner direct·reverse action, actuator air action과 valve fail action을 비교하시오.",
+    "Volume booster의 pilot-pressure following, flow-capacity 기능과 bypass tradeoff를 설명하시오.",
+    "Filter regulator, lock-up relay, quick exhaust, solenoid valve와 volume tank를 비교하시오.",
+    "Zero·span·linkage·endpoint와 multipoint upstroke·downstroke calibration 절차를 설명하시오.",
+    "Split-range local mapping, gap·overlap와 calibration 방법을 설명하시오.",
+    "Loss of signal·air·power와 I/P·positioner·booster·accessory failure를 signal chain으로 진단하시오.",
+    "Command, current, pressure, travel, fail action과 calibration record를 통합 검증하시오."
+  ],
+  "topic_aliases": [
+    "control valve positioner travel feedback controller",
+    "command IP positioner actuator travel feedback",
+    "pneumatic positioner nozzle flapper force balance relay",
+    "electropneumatic positioner separate IP converter",
+    "IP converter 4–20 mA 3–15 psi mapping",
+    "positioner direct reverse actuator fail action",
+    "positioner feedback linkage cam alignment",
+    "positioner zero span multipoint calibration",
+    "split range local current mapping",
+    "volume booster pilot pressure flow capacity",
+    "booster bypass hunting tuning boundary",
+    "filter regulator lockup quick exhaust solenoid",
+    "volume tank pneumatic energy response",
+    "command current pressure travel loop test",
+    "loss of signal air power fail response",
+    "as-found as-left valve calibration",
+    "밸브 포지셔너 위치 피드백 제어",
+    "I/P 변환기 전류 공기압 매핑",
+    "공압식 포지셔너 노즐 플래퍼 릴레이",
+    "포지셔너 정역동작 액추에이터 고장동작",
+    "포지셔너 영점 스팬 다점 교정",
+    "분할범위 로컬 전류 매핑",
+    "볼륨 부스터 파일럿 압력 유량 용량",
+    "필터 레귤레이터 록업 급속배기 솔레노이드",
+    "신호 공기 전원 상실 응답"
+  ],
+  "expected_structure": [
+    "Signal chain and feedback",
+    "Positioner and I/P principle",
+    "Action and fail chain",
+    "Mechanical feedback and calibration",
+    "Booster and pneumatic accessories",
+    "Failure, operating cases and records",
+    "Topic handoffs",
+    "Final integrated verification"
+  ],
+  "high_score_features": [
+    "Signal chain, feedback, mapping, action, accessory, calibration, failure response와 records를 연결한다."
+  ],
+  "low_score_patterns": [
+    "Device functions를 혼동하거나 fixed settings를 보편값으로 제시한다."
+  ],
+  "field_connection_points": [
+    "DCS loop test, instrument-air quality, actuator chamber pressure, travel calibration과 fail-action test"
+  ]
+}

@@ -254,3 +254,7 @@ python3 scripts/test_control_valve_noise_aerodynamic_hydrodynamic_topic.py
 echo
 echo "===== control valve balanced and unbalanced trim topic regression ====="
 python3 scripts/test_control_valve_balanced_unbalanced_trim_topic.py
+
+echo
+echo "===== control valve positioner IP booster accessories topic regression ====="
+python3 scripts/test_control_valve_positioner_ip_booster_accessories_topic.py
