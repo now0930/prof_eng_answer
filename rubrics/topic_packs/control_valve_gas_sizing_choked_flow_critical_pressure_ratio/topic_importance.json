@@ -1,0 +1,22 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "CALC_DESIGN",
+  "high_band_unlock_conditions": [
+    "Flow basis와 standard condition을 정확히 구분한다.",
+    "Absolute P·T와 gas-property input을 일관되게 사용한다.",
+    "x, Fγ, xT/xTP와 Y의 물리적 의미를 설명한다.",
+    "Subcritical과 choked flow를 식과 방향으로 구분한다.",
+    "Required Cv와 selected trim travel을 반복 검증한다.",
+    "Minimum·normal·maximum 및 fail-open case를 검토한다.",
+    "Steam phase, Topic 8·9 경계와 vendor crosscheck를 설명한다."
+  ],
+  "note": "가스·증기 제어밸브 sizing은 압축성 유동, 초크 한계와 실제 trim 선정을 연결하는 현장 핵심 주제이다. 단순 Cv 식 암기보다 flow basis, absolute condition, gas properties, x·Y 방향과 travel iteration이 고득점의 핵심이다.",
+  "revision_notes": [
+    "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+    "CALC_DESIGN을 Primary Question Type으로 적용했다."
+  ],
+  "topic_label": "가스·증기 제어밸브 사이징"
+}

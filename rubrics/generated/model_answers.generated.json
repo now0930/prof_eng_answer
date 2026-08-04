@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-04T00:48:01Z-generated-topic-pack-model-answers",
+  "version": "2026-08-04T05:13:23Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -1826,6 +1826,374 @@
         "Fail-Close와 Fail-Open 힘 조건",
         "최악조건 액추에이터 사이징",
         "회전식 밸브의 토크 해석"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "title_ko": "제어밸브의 가스·증기 사이징, 팽창계수 및 초크 유동",
+      "question_type": "CALC_DESIGN",
+      "expected_question_patterns": [
+        {
+          "pattern": "압축성 유체 제어밸브 sizing의 flow basis, pressure·temperature와 gas property 입력자료를 설명하시오.",
+          "intent": "Flow basis와 absolute-condition input을 정의한다.",
+          "required_anchor_ids": [
+            "compressible_control_valve_sizing_scope",
+            "flow_basis_standard_actual_mass_distinction",
+            "standard_condition_definition_required",
+            "absolute_pressure_required",
+            "absolute_temperature_required",
+            "gas_property_input_selection",
+            "compressibility_factor_meaning"
+          ]
+        },
+        {
+          "pattern": "P1, P2, γ와 xT로 actual pressure ratio와 choked limit를 계산하고 flow regime을 판정하시오.",
+          "intent": "Actual ratio와 choked ratio를 계산하여 regime을 판정한다.",
+          "required_anchor_ids": [
+            "pressure_drop_ratio_definition",
+            "pressure_ratio_direction",
+            "heat_capacity_ratio_factor",
+            "valve_pressure_drop_ratio_factor_meaning",
+            "choked_pressure_ratio_limit",
+            "sizing_ratio_minimum_selection"
+          ]
+        },
+        {
+          "pattern": "Expansion factor Y의 의미, 계산방향과 subcritical·choked limit를 설명하시오.",
+          "intent": "Y의 물리적 의미와 방향·범위를 해석한다.",
+          "required_anchor_ids": [
+            "expansion_factor_physical_meaning",
+            "expansion_factor_subcritical_relation",
+            "expansion_factor_bounds",
+            "subcritical_flow_behavior",
+            "choked_flow_physical_meaning"
+          ]
+        },
+        {
+          "pattern": "Subcritical flow와 choked flow를 비교하고 downstream pressure 변화가 유량에 미치는 영향을 설명하시오.",
+          "intent": "두 regime과 downstream-pressure sensitivity를 비교한다.",
+          "required_anchor_ids": [
+            "subcritical_flow_behavior",
+            "choked_flow_physical_meaning",
+            "choked_flow_not_zero_flow",
+            "choked_flow_downstream_independence",
+            "sizing_ratio_minimum_selection"
+          ]
+        },
+        {
+          "pattern": "Standard volumetric flow 조건에서 gas valve required Cv 계산 구조와 units 검증 절차를 설명하시오.",
+          "intent": "Standard-volume equation과 base condition·units를 연결한다.",
+          "required_anchor_ids": [
+            "flow_basis_standard_actual_mass_distinction",
+            "standard_condition_definition_required",
+            "standard_volume_formula_structure",
+            "unit_constant_equation_dependency",
+            "absolute_pressure_required",
+            "absolute_temperature_required"
+          ]
+        },
+        {
+          "pattern": "Mass flow와 inlet density를 이용한 gas valve required Cv 계산 구조를 설명하시오.",
+          "intent": "Mass-flow equation의 property와 pressure-ratio input을 연결한다.",
+          "required_anchor_ids": [
+            "gas_property_input_selection",
+            "mass_flow_formula_structure",
+            "unit_constant_equation_dependency",
+            "pressure_drop_ratio_definition",
+            "expansion_factor_physical_meaning"
+          ]
+        },
+        {
+          "pattern": "Reducer 또는 expander가 직접 연결된 gas control valve의 FP, xTP와 choked limit 보정을 설명하시오.",
+          "intent": "Fitting-adjusted gas sizing을 설명한다.",
+          "required_anchor_ids": [
+            "piping_geometry_factor_gas_service",
+            "xTP_fitting_adjusted_factor",
+            "no_fitting_reference_condition",
+            "choked_pressure_ratio_limit",
+            "sizing_ratio_minimum_selection"
+          ]
+        },
+        {
+          "pattern": "Required Cv, rated trim capacity, selected travel와 xT/xTP 반복검증 절차를 설명하시오.",
+          "intent": "Trim selection과 travel-dependent iteration을 설명한다.",
+          "required_anchor_ids": [
+            "required_vs_rated_gas_coefficient",
+            "xT_valve_style_trim_travel_dependency",
+            "selected_travel_xT_iteration",
+            "minimum_normal_maximum_gas_cases",
+            "vendor_hand_calculation_crosscheck_gas"
+          ]
+        },
+        {
+          "pattern": "Fail-open gas valve의 credible maximum flow와 choked possibility 검토 절차를 설명하시오.",
+          "intent": "Fail-open maximum-flow boundary를 검토한다.",
+          "required_anchor_ids": [
+            "absolute_pressure_required",
+            "pressure_drop_ratio_definition",
+            "choked_pressure_ratio_limit",
+            "fail_open_maximum_flow_case",
+            "choked_flow_downstream_independence"
+          ]
+        },
+        {
+          "pattern": "Flow basis, absolute P·T, gas property, x, Fγ, xT/xTP, Y, Cv와 travel을 이용한 gas·steam control valve 선정 절차를 설명하시오.",
+          "intent": "압축성 유체 sizing과 trim selection을 통합한다.",
+          "required_anchor_ids": [
+            "flow_basis_standard_actual_mass_distinction",
+            "absolute_pressure_required",
+            "absolute_temperature_required",
+            "gas_property_input_selection",
+            "pressure_drop_ratio_definition",
+            "heat_capacity_ratio_factor",
+            "choked_pressure_ratio_limit",
+            "expansion_factor_physical_meaning",
+            "selected_travel_xT_iteration",
+            "steam_vapor_property_boundary",
+            "vendor_hand_calculation_crosscheck_gas"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "Flow basis와 process inputs",
+          "intent": "Flow basis, standard condition, absolute P·T와 gas properties를 정의한다.",
+          "anchor_refs": [
+            "compressible_control_valve_sizing_scope",
+            "flow_basis_standard_actual_mass_distinction",
+            "standard_condition_definition_required",
+            "absolute_pressure_required",
+            "absolute_temperature_required",
+            "gas_property_input_selection",
+            "compressibility_factor_meaning"
+          ]
+        },
+        {
+          "section": "Pressure ratio와 heat-capacity ratio",
+          "intent": "x의 정의·방향과 Fγ를 설명한다.",
+          "anchor_refs": [
+            "pressure_drop_ratio_definition",
+            "pressure_ratio_direction",
+            "heat_capacity_ratio_factor"
+          ]
+        },
+        {
+          "section": "Valve와 fitting pressure-ratio factors",
+          "intent": "xT, travel dependency, FP와 xTP를 설명한다.",
+          "anchor_refs": [
+            "valve_pressure_drop_ratio_factor_meaning",
+            "xT_valve_style_trim_travel_dependency",
+            "piping_geometry_factor_gas_service",
+            "xTP_fitting_adjusted_factor",
+            "no_fitting_reference_condition"
+          ]
+        },
+        {
+          "section": "Choked limit와 expansion factor",
+          "intent": "Choked ratio, sizing ratio와 Y의 식·범위를 설명한다.",
+          "anchor_refs": [
+            "choked_pressure_ratio_limit",
+            "sizing_ratio_minimum_selection",
+            "expansion_factor_physical_meaning",
+            "expansion_factor_subcritical_relation",
+            "expansion_factor_bounds"
+          ]
+        },
+        {
+          "section": "Subcritical과 choked behavior",
+          "intent": "두 regime과 downstream pressure 영향을 설명한다.",
+          "anchor_refs": [
+            "subcritical_flow_behavior",
+            "choked_flow_physical_meaning",
+            "choked_flow_not_zero_flow",
+            "choked_flow_downstream_independence"
+          ]
+        },
+        {
+          "section": "Gas-capacity equation forms",
+          "intent": "Standard-volume·mass-flow equation과 unit constants를 설명한다.",
+          "anchor_refs": [
+            "standard_volume_formula_structure",
+            "mass_flow_formula_structure",
+            "unit_constant_equation_dependency"
+          ]
+        },
+        {
+          "section": "Trim selection과 operating cases",
+          "intent": "Required·rated capacity, travel iteration과 min-normal-max·fail-open case를 검토한다.",
+          "anchor_refs": [
+            "required_vs_rated_gas_coefficient",
+            "selected_travel_xT_iteration",
+            "minimum_normal_maximum_gas_cases",
+            "fail_open_maximum_flow_case"
+          ]
+        },
+        {
+          "section": "Steam·noise boundary와 vendor verification",
+          "intent": "Steam property, Topic 9 hand-off와 vendor crosscheck로 정리한다.",
+          "anchor_refs": [
+            "steam_vapor_property_boundary",
+            "aerodynamic_noise_handoff",
+            "vendor_hand_calculation_crosscheck_gas"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "Standard·actual volume와 mass-flow basis를 구분한다.",
+        "P1·P2와 T1을 absolute basis로 사용한다.",
+        "M·Gg·ρ1, γ와 Z1 중 equation에 필요한 property를 선정한다.",
+        "x와 FγxT 또는 FγxTP를 비교해 작은 값을 사용한다.",
+        "Y의 감소 방향과 2/3≤Y≤1 범위를 설명한다.",
+        "Standard-volume와 mass-flow equation structure를 구분한다.",
+        "Required와 rated coefficient를 구분한다.",
+        "Selected travel의 xT/xTP로 반복 계산한다.",
+        "Minimum·normal·maximum과 fail-open case를 검토한다.",
+        "Wet steam과 aerodynamic noise를 인접 Topic으로 hand-off한다."
+      ],
+      "common_missing_points": [
+        "Gauge pressure를 absolute pressure로 변환하지 않는다.",
+        "Standard volume와 actual volume를 혼용한다.",
+        "x의 분모를 P2로 잘못 사용한다.",
+        "Actual x와 choked limit 중 큰 값을 사용한다.",
+        "Y의 방향 또는 lower bound를 반대로 설명한다.",
+        "xT를 universal constant로 취급한다.",
+        "Selected travel에서 xT를 재검토하지 않는다.",
+        "Wet steam과 noise boundary를 생략한다."
+      ],
+      "routing_aliases": [
+        "control valve gas sizing pressure ratio",
+        "compressible fluid valve sizing x Fgamma",
+        "gas valve xT xTP expansion factor",
+        "choked gas flow required Cv",
+        "standard volume gas valve sizing",
+        "mass flow gas control valve sizing",
+        "absolute pressure temperature gas sizing",
+        "compressibility factor Z1 valve sizing",
+        "gas specific gravity molecular weight Cv",
+        "piping factor FP xTP gas valve",
+        "expansion factor Y choked limit",
+        "minimum normal maximum gas flow valve",
+        "fail-open choked gas flow",
+        "selected travel xT iteration",
+        "steam vapor control valve sizing",
+        "gas sizing vendor hand calculation",
+        "제어밸브 가스 사이징 압력비",
+        "압축성 유체 x Fgamma xT",
+        "가스 밸브 xTP 팽창계수",
+        "초크 가스 유량 required Cv",
+        "절대압력 절대온도 가스 sizing",
+        "표준유량 질량유량 밸브 sizing",
+        "selected travel xT 반복 계산",
+        "steam vapor 제어밸브 선정"
+      ],
+      "routing_field_points": [
+        "Gas composition과 property source 확인",
+        "Standard-condition 명세서 확인",
+        "Reducer·expander 설치조건 확인",
+        "Manufacturer xT travel curve 확인",
+        "Minimum·normal·maximum case table",
+        "Fail-open downstream equipment 검토",
+        "Vendor sizing input audit",
+        "Aerodynamic-noise screening"
+      ],
+      "revision_notes": [
+        "10개 Question Pattern과 8개 Recommended Outline을 추가했다.",
+        "Topic 6 liquid sizing과 Topic 8·9 경계를 분리했다.",
+        "Answer text만으로 Topic을 변경하지 않도록 구체 routing phrase를 사용했다."
+      ],
+      "id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "title": "제어밸브의 가스·증기 사이징, 팽창계수 및 초크 유동",
+      "question_examples": [
+        "압축성 유체 제어밸브 sizing의 flow basis, pressure·temperature와 gas property 입력자료를 설명하시오.",
+        "P1, P2, γ와 xT로 actual pressure ratio와 choked limit를 계산하고 flow regime을 판정하시오.",
+        "Expansion factor Y의 의미, 계산방향과 subcritical·choked limit를 설명하시오.",
+        "Subcritical flow와 choked flow를 비교하고 downstream pressure 변화가 유량에 미치는 영향을 설명하시오.",
+        "Standard volumetric flow 조건에서 gas valve required Cv 계산 구조와 units 검증 절차를 설명하시오.",
+        "Mass flow와 inlet density를 이용한 gas valve required Cv 계산 구조를 설명하시오.",
+        "Reducer 또는 expander가 직접 연결된 gas control valve의 FP, xTP와 choked limit 보정을 설명하시오.",
+        "Required Cv, rated trim capacity, selected travel와 xT/xTP 반복검증 절차를 설명하시오.",
+        "Fail-open gas valve의 credible maximum flow와 choked possibility 검토 절차를 설명하시오.",
+        "Flow basis, absolute P·T, gas property, x, Fγ, xT/xTP, Y, Cv와 travel을 이용한 gas·steam control valve 선정 절차를 설명하시오."
+      ],
+      "topic_aliases": [
+        "control valve gas sizing pressure ratio",
+        "compressible fluid valve sizing x Fgamma",
+        "gas valve xT xTP expansion factor",
+        "choked gas flow required Cv",
+        "standard volume gas valve sizing",
+        "mass flow gas control valve sizing",
+        "absolute pressure temperature gas sizing",
+        "compressibility factor Z1 valve sizing",
+        "gas specific gravity molecular weight Cv",
+        "piping factor FP xTP gas valve",
+        "expansion factor Y choked limit",
+        "minimum normal maximum gas flow valve",
+        "fail-open choked gas flow",
+        "selected travel xT iteration",
+        "steam vapor control valve sizing",
+        "gas sizing vendor hand calculation",
+        "제어밸브 가스 사이징 압력비",
+        "압축성 유체 x Fgamma xT",
+        "가스 밸브 xTP 팽창계수",
+        "초크 가스 유량 required Cv",
+        "절대압력 절대온도 가스 sizing",
+        "표준유량 질량유량 밸브 sizing",
+        "selected travel xT 반복 계산",
+        "steam vapor 제어밸브 선정"
+      ],
+      "expected_structure": [
+        "Flow basis와 process inputs",
+        "Pressure ratio와 heat-capacity ratio",
+        "Valve와 fitting pressure-ratio factors",
+        "Choked limit와 expansion factor",
+        "Subcritical과 choked behavior",
+        "Gas-capacity equation forms",
+        "Trim selection과 operating cases",
+        "Steam·noise boundary와 vendor verification"
+      ],
+      "high_score_features": [
+        "Standard·actual volume와 mass-flow basis를 구분한다.",
+        "P1·P2와 T1을 absolute basis로 사용한다.",
+        "M·Gg·ρ1, γ와 Z1 중 equation에 필요한 property를 선정한다.",
+        "x와 FγxT 또는 FγxTP를 비교해 작은 값을 사용한다.",
+        "Y의 감소 방향과 2/3≤Y≤1 범위를 설명한다.",
+        "Standard-volume와 mass-flow equation structure를 구분한다.",
+        "Required와 rated coefficient를 구분한다.",
+        "Selected travel의 xT/xTP로 반복 계산한다.",
+        "Minimum·normal·maximum과 fail-open case를 검토한다.",
+        "Wet steam과 aerodynamic noise를 인접 Topic으로 hand-off한다."
+      ],
+      "low_score_patterns": [
+        "Gauge pressure를 absolute pressure로 변환하지 않는다.",
+        "Standard volume와 actual volume를 혼용한다.",
+        "x의 분모를 P2로 잘못 사용한다.",
+        "Actual x와 choked limit 중 큰 값을 사용한다.",
+        "Y의 방향 또는 lower bound를 반대로 설명한다.",
+        "xT를 universal constant로 취급한다.",
+        "Selected travel에서 xT를 재검토하지 않는다.",
+        "Wet steam과 noise boundary를 생략한다."
+      ],
+      "field_connection_points": [
+        "Gas composition과 property source 확인",
+        "Standard-condition 명세서 확인",
+        "Reducer·expander 설치조건 확인",
+        "Manufacturer xT travel curve 확인",
+        "Minimum·normal·maximum case table",
+        "Fail-open downstream equipment 검토",
+        "Vendor sizing input audit",
+        "Aerodynamic-noise screening"
+      ],
+      "model_answer_outline": [
+        "Flow basis, standard condition, absolute P·T와 gas properties를 정의한다.",
+        "x의 정의·방향과 Fγ를 설명한다.",
+        "xT, travel dependency, FP와 xTP를 설명한다.",
+        "Choked ratio, sizing ratio와 Y의 식·범위를 설명한다.",
+        "두 regime과 downstream pressure 영향을 설명한다.",
+        "Standard-volume·mass-flow equation과 unit constants를 설명한다.",
+        "Required·rated capacity, travel iteration과 min-normal-max·fail-open case를 검토한다.",
+        "Steam property, Topic 9 hand-off와 vendor crosscheck로 정리한다."
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

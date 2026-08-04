@@ -238,3 +238,7 @@ python3 scripts/test_control_valve_authority_rangeability_gain_topic.py
 echo
 echo "===== control valve liquid sizing topic regression ====="
 python3 scripts/test_control_valve_sizing_cv_kv_reynolds_topic.py
+
+echo
+echo "===== control valve gas sizing and choked flow topic regression ====="
+python3 scripts/test_control_valve_gas_sizing_choked_flow_topic.py

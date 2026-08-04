@@ -1,0 +1,1362 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+  "title_ko": "제어밸브의 가스·증기 사이징, 팽창계수 및 초크 유동",
+  "question_type_hint": "CALC_DESIGN",
+  "anchors": [
+    {
+      "id": "compressible_control_valve_sizing_scope",
+      "anchor_id": "compressible_control_valve_sizing_scope",
+      "statement": "압축성 유체 제어밸브 sizing은 single-phase gas, vapor와 steam의 required flow coefficient 및 trim capacity를 결정하는 절차이다.",
+      "importance": "core",
+      "keywords": [
+        "compressible fluid sizing",
+        "gas valve sizing",
+        "steam valve sizing",
+        "required coefficient",
+        "trim capacity"
+      ],
+      "core_terms": [
+        "압축성 유체",
+        "가스·증기",
+        "required Cv",
+        "trim capacity"
+      ],
+      "accepted_explanations": [
+        "압축성 유체 제어밸브 sizing은 single-phase gas, vapor와 steam의 required flow coefficient 및 trim capacity를 결정하는 절차이다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "압축성 유체 제어밸브 sizing은 single-phase gas, vapor와 steam의 required flow coefficient 및 trim capacity를 결정하는 절차이다.",
+      "description": "compressible_control_valve_sizing_scope 계약을 평가한다."
+    },
+    {
+      "id": "flow_basis_standard_actual_mass_distinction",
+      "anchor_id": "flow_basis_standard_actual_mass_distinction",
+      "statement": "Standard·normal volumetric flow, actual volumetric flow와 mass flow는 서로 다른 flow basis이며 같은 숫자로 취급하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "standard flow",
+        "normal flow",
+        "actual volumetric flow",
+        "mass flow",
+        "flow basis"
+      ],
+      "core_terms": [
+        "표준유량",
+        "실제부피유량",
+        "질량유량",
+        "flow basis"
+      ],
+      "accepted_explanations": [
+        "Standard·normal volumetric flow, actual volumetric flow와 mass flow는 서로 다른 flow basis이며 같은 숫자로 취급하지 않는다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Standard·normal volumetric flow, actual volumetric flow와 mass flow는 서로 다른 flow basis이며 같은 숫자로 취급하지 않는다.",
+      "description": "flow_basis_standard_actual_mass_distinction 계약을 평가한다."
+    },
+    {
+      "id": "standard_condition_definition_required",
+      "anchor_id": "standard_condition_definition_required",
+      "statement": "Standard 또는 normal volumetric flow를 사용할 때는 base pressure와 base temperature를 함께 정의해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "standard condition",
+        "base pressure",
+        "base temperature",
+        "normal condition",
+        "reference condition"
+      ],
+      "core_terms": [
+        "기준압력",
+        "기준온도",
+        "표준상태",
+        "normal condition"
+      ],
+      "accepted_explanations": [
+        "Standard 또는 normal volumetric flow를 사용할 때는 base pressure와 base temperature를 함께 정의해야 한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Standard 또는 normal volumetric flow를 사용할 때는 base pressure와 base temperature를 함께 정의해야 한다.",
+      "description": "standard_condition_definition_required 계약을 평가한다."
+    },
+    {
+      "id": "absolute_pressure_required",
+      "anchor_id": "absolute_pressure_required",
+      "statement": "Gas sizing의 P1, P2와 pressure ratio에는 absolute pressure를 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "absolute pressure",
+        "P1 absolute",
+        "P2 absolute",
+        "gauge conversion",
+        "gas sizing"
+      ],
+      "core_terms": [
+        "절대압력",
+        "입구압력",
+        "출구압력",
+        "게이지압력 변환"
+      ],
+      "accepted_explanations": [
+        "Gas sizing의 P1, P2와 pressure ratio에는 absolute pressure를 사용한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Gas sizing의 P1, P2와 pressure ratio에는 absolute pressure를 사용한다.",
+      "description": "absolute_pressure_required 계약을 평가한다."
+    },
+    {
+      "id": "absolute_temperature_required",
+      "anchor_id": "absolute_temperature_required",
+      "statement": "Gas sizing의 upstream temperature T1은 absolute temperature로 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "absolute temperature",
+        "T1 Kelvin",
+        "Rankine",
+        "upstream temperature",
+        "gas equation"
+      ],
+      "core_terms": [
+        "절대온도",
+        "상류온도",
+        "Kelvin",
+        "Rankine"
+      ],
+      "accepted_explanations": [
+        "Gas sizing의 upstream temperature T1은 absolute temperature로 사용한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Gas sizing의 upstream temperature T1은 absolute temperature로 사용한다.",
+      "description": "absolute_temperature_required 계약을 평가한다."
+    },
+    {
+      "id": "pressure_drop_ratio_definition",
+      "anchor_id": "pressure_drop_ratio_definition",
+      "statement": "Pressure-drop ratio는 x=(P1-P2)/P1=ΔP/P1이다.",
+      "importance": "core",
+      "keywords": [
+        "pressure drop ratio",
+        "x delta P over P1",
+        "P1 P2",
+        "dimensionless ratio",
+        "absolute pressure"
+      ],
+      "core_terms": [
+        "압력강하비",
+        "x",
+        "ΔP/P1",
+        "무차원비"
+      ],
+      "accepted_explanations": [
+        "Pressure-drop ratio는 x=(P1-P2)/P1=ΔP/P1이다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Pressure-drop ratio는 x=(P1-P2)/P1=ΔP/P1이다.",
+      "description": "pressure_drop_ratio_definition 계약을 평가한다."
+    },
+    {
+      "id": "pressure_ratio_direction",
+      "anchor_id": "pressure_ratio_direction",
+      "statement": "동일 P1에서 P2가 감소하면 actual pressure-drop ratio x는 증가한다.",
+      "importance": "core",
+      "keywords": [
+        "pressure ratio direction",
+        "P2 decrease",
+        "x increase",
+        "downstream pressure",
+        "subcritical"
+      ],
+      "core_terms": [
+        "출구압력 감소",
+        "압력강하비 증가",
+        "방향성"
+      ],
+      "accepted_explanations": [
+        "동일 P1에서 P2가 감소하면 actual pressure-drop ratio x는 증가한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "동일 P1에서 P2가 감소하면 actual pressure-drop ratio x는 증가한다.",
+      "description": "pressure_ratio_direction 계약을 평가한다."
+    },
+    {
+      "id": "gas_property_input_selection",
+      "anchor_id": "gas_property_input_selection",
+      "statement": "Gas sizing은 선택한 equation form에 따라 molecular weight, gas specific gravity 또는 inlet density를 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "molecular weight",
+        "gas specific gravity",
+        "inlet density",
+        "property selection",
+        "equation form"
+      ],
+      "core_terms": [
+        "분자량",
+        "가스 비중",
+        "입구밀도",
+        "물성 선택"
+      ],
+      "accepted_explanations": [
+        "Gas sizing은 선택한 equation form에 따라 molecular weight, gas specific gravity 또는 inlet density를 사용한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Gas sizing은 선택한 equation form에 따라 molecular weight, gas specific gravity 또는 inlet density를 사용한다.",
+      "description": "gas_property_input_selection 계약을 평가한다."
+    },
+    {
+      "id": "compressibility_factor_meaning",
+      "anchor_id": "compressibility_factor_meaning",
+      "statement": "Z1은 inlet condition에서 real-gas behavior가 ideal-gas relation에서 벗어나는 정도를 보정한다.",
+      "importance": "core",
+      "keywords": [
+        "compressibility factor Z1",
+        "real gas",
+        "ideal gas",
+        "inlet condition",
+        "property correction"
+      ],
+      "core_terms": [
+        "압축성계수",
+        "실제기체",
+        "이상기체",
+        "입구조건"
+      ],
+      "accepted_explanations": [
+        "Z1은 inlet condition에서 real-gas behavior가 ideal-gas relation에서 벗어나는 정도를 보정한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Z1은 inlet condition에서 real-gas behavior가 ideal-gas relation에서 벗어나는 정도를 보정한다.",
+      "description": "compressibility_factor_meaning 계약을 평가한다."
+    },
+    {
+      "id": "heat_capacity_ratio_factor",
+      "anchor_id": "heat_capacity_ratio_factor",
+      "statement": "Fγ는 gas의 specific heat ratio가 choked limit와 expansion behavior에 미치는 영향을 보정한다.",
+      "importance": "core",
+      "keywords": [
+        "heat capacity ratio factor",
+        "F gamma",
+        "specific heat ratio",
+        "gamma over 1.4",
+        "choked limit"
+      ],
+      "core_terms": [
+        "비열비",
+        "Fγ",
+        "초크한계",
+        "팽창거동"
+      ],
+      "accepted_explanations": [
+        "Fγ는 gas의 specific heat ratio가 choked limit와 expansion behavior에 미치는 영향을 보정한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Fγ는 gas의 specific heat ratio가 choked limit와 expansion behavior에 미치는 영향을 보정한다.",
+      "description": "heat_capacity_ratio_factor 계약을 평가한다."
+    },
+    {
+      "id": "valve_pressure_drop_ratio_factor_meaning",
+      "anchor_id": "valve_pressure_drop_ratio_factor_meaning",
+      "statement": "xT는 bare valve의 choked-flow pressure-ratio 특성을 나타내는 manufacturer coefficient이다.",
+      "importance": "core",
+      "keywords": [
+        "xT",
+        "pressure drop ratio factor",
+        "bare valve",
+        "manufacturer coefficient",
+        "choked flow"
+      ],
+      "core_terms": [
+        "xT",
+        "밸브 고유계수",
+        "bare valve",
+        "초크특성"
+      ],
+      "accepted_explanations": [
+        "xT는 bare valve의 choked-flow pressure-ratio 특성을 나타내는 manufacturer coefficient이다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "xT는 bare valve의 choked-flow pressure-ratio 특성을 나타내는 manufacturer coefficient이다.",
+      "description": "valve_pressure_drop_ratio_factor_meaning 계약을 평가한다."
+    },
+    {
+      "id": "xT_valve_style_trim_travel_dependency",
+      "anchor_id": "xT_valve_style_trim_travel_dependency",
+      "statement": "xT는 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "xT dependency",
+        "valve style",
+        "trim geometry",
+        "flow direction",
+        "travel"
+      ],
+      "core_terms": [
+        "밸브 형식",
+        "트림 형상",
+        "유동방향",
+        "개도 의존성"
+      ],
+      "accepted_explanations": [
+        "xT는 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "xT는 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+      "description": "xT_valve_style_trim_travel_dependency 계약을 평가한다."
+    },
+    {
+      "id": "piping_geometry_factor_gas_service",
+      "anchor_id": "piping_geometry_factor_gas_service",
+      "statement": "Gas sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+      "importance": "core",
+      "keywords": [
+        "piping geometry factor FP",
+        "reducer",
+        "expander",
+        "attached fitting",
+        "assembly capacity"
+      ],
+      "core_terms": [
+        "FP",
+        "리듀서",
+        "익스팬더",
+        "부착 피팅"
+      ],
+      "accepted_explanations": [
+        "Gas sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Gas sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+      "description": "piping_geometry_factor_gas_service 계약을 평가한다."
+    },
+    {
+      "id": "xTP_fitting_adjusted_factor",
+      "anchor_id": "xTP_fitting_adjusted_factor",
+      "statement": "xTP는 attached fittings의 영향을 포함한 pressure-drop-ratio factor이다.",
+      "importance": "core",
+      "keywords": [
+        "xTP",
+        "fitting adjusted factor",
+        "attached fittings",
+        "pressure recovery",
+        "gas valve assembly"
+      ],
+      "core_terms": [
+        "xTP",
+        "피팅 보정",
+        "압력회복",
+        "assembly"
+      ],
+      "accepted_explanations": [
+        "xTP는 attached fittings의 영향을 포함한 pressure-drop-ratio factor이다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "xTP는 attached fittings의 영향을 포함한 pressure-drop-ratio factor이다.",
+      "description": "xTP_fitting_adjusted_factor 계약을 평가한다."
+    },
+    {
+      "id": "no_fitting_reference_condition",
+      "anchor_id": "no_fitting_reference_condition",
+      "statement": "Sizing method가 요구하는 조건에서 attached fitting 영향이 없으면 일반적으로 FP=1이고 xTP=xT로 취급할 수 있다.",
+      "importance": "important",
+      "keywords": [
+        "FP equals one",
+        "xTP equals xT",
+        "no fitting",
+        "reference condition",
+        "bare valve"
+      ],
+      "core_terms": [
+        "피팅 없음",
+        "FP=1",
+        "xTP=xT",
+        "기준조건"
+      ],
+      "accepted_explanations": [
+        "Sizing method가 요구하는 조건에서 attached fitting 영향이 없으면 일반적으로 FP=1이고 xTP=xT로 취급할 수 있다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Sizing method가 요구하는 조건에서 attached fitting 영향이 없으면 일반적으로 FP=1이고 xTP=xT로 취급할 수 있다.",
+      "description": "no_fitting_reference_condition 계약을 평가한다."
+    },
+    {
+      "id": "choked_pressure_ratio_limit",
+      "anchor_id": "choked_pressure_ratio_limit",
+      "statement": "Common relation에서 choked pressure-ratio limit는 bare valve에서 FγxT, fitting assembly에서 FγxTP로 표현된다.",
+      "importance": "core",
+      "keywords": [
+        "choked pressure ratio",
+        "F gamma xT",
+        "F gamma xTP",
+        "critical pressure ratio",
+        "flow limit"
+      ],
+      "core_terms": [
+        "초크 압력강하비",
+        "FγxT",
+        "FγxTP",
+        "한계비"
+      ],
+      "accepted_explanations": [
+        "Common relation에서 choked pressure-ratio limit는 bare valve에서 FγxT, fitting assembly에서 FγxTP로 표현된다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Common relation에서 choked pressure-ratio limit는 bare valve에서 FγxT, fitting assembly에서 FγxTP로 표현된다.",
+      "description": "choked_pressure_ratio_limit 계약을 평가한다."
+    },
+    {
+      "id": "sizing_ratio_minimum_selection",
+      "anchor_id": "sizing_ratio_minimum_selection",
+      "statement": "Sizing ratio는 actual x와 choked limit 중 작은 값을 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "sizing ratio",
+        "minimum selection",
+        "min x choked",
+        "actual pressure ratio",
+        "choked limit"
+      ],
+      "core_terms": [
+        "sizing ratio",
+        "작은 값 선택",
+        "actual x",
+        "초크한계"
+      ],
+      "accepted_explanations": [
+        "Sizing ratio는 actual x와 choked limit 중 작은 값을 사용한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Sizing ratio는 actual x와 choked limit 중 작은 값을 사용한다.",
+      "description": "sizing_ratio_minimum_selection 계약을 평가한다."
+    },
+    {
+      "id": "expansion_factor_physical_meaning",
+      "anchor_id": "expansion_factor_physical_meaning",
+      "statement": "Expansion factor Y는 gas가 valve 통과 중 팽창하면서 density가 감소하는 영향을 보정한다.",
+      "importance": "core",
+      "keywords": [
+        "expansion factor Y",
+        "gas expansion",
+        "density decrease",
+        "compressible flow",
+        "capacity correction"
+      ],
+      "core_terms": [
+        "팽창계수",
+        "밀도감소",
+        "압축성유동",
+        "Y"
+      ],
+      "accepted_explanations": [
+        "Expansion factor Y는 gas가 valve 통과 중 팽창하면서 density가 감소하는 영향을 보정한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Expansion factor Y는 gas가 valve 통과 중 팽창하면서 density가 감소하는 영향을 보정한다.",
+      "description": "expansion_factor_physical_meaning 계약을 평가한다."
+    },
+    {
+      "id": "expansion_factor_subcritical_relation",
+      "anchor_id": "expansion_factor_subcritical_relation",
+      "statement": "Common subcritical relation에서 Y=1-xsizing/(3FγxT) 또는 fitting-adjusted xTP 형태를 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "Y relation",
+        "subcritical expansion factor",
+        "one minus x over three",
+        "F gamma xT",
+        "xTP form"
+      ],
+      "core_terms": [
+        "Y 식",
+        "subcritical",
+        "FγxT",
+        "xTP 보정"
+      ],
+      "accepted_explanations": [
+        "Common subcritical relation에서 Y=1-xsizing/(3FγxT) 또는 fitting-adjusted xTP 형태를 사용한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Common subcritical relation에서 Y=1-xsizing/(3FγxT) 또는 fitting-adjusted xTP 형태를 사용한다.",
+      "description": "expansion_factor_subcritical_relation 계약을 평가한다."
+    },
+    {
+      "id": "expansion_factor_bounds",
+      "anchor_id": "expansion_factor_bounds",
+      "statement": "Common standard relation에서 Y는 1 이하이고 choked limit에서 2/3에 도달한다.",
+      "importance": "core",
+      "keywords": [
+        "Y bounds",
+        "two thirds",
+        "Y less than one",
+        "choked expansion factor",
+        "lower bound"
+      ],
+      "core_terms": [
+        "Y 범위",
+        "2/3",
+        "상한 1",
+        "초크한계"
+      ],
+      "accepted_explanations": [
+        "Common standard relation에서 Y는 1 이하이고 choked limit에서 2/3에 도달한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Common standard relation에서 Y는 1 이하이고 choked limit에서 2/3에 도달한다.",
+      "description": "expansion_factor_bounds 계약을 평가한다."
+    },
+    {
+      "id": "subcritical_flow_behavior",
+      "anchor_id": "subcritical_flow_behavior",
+      "statement": "Subcritical flow에서는 downstream pressure가 감소하여 x가 증가하면 flow가 증가하며 Y는 감소한다.",
+      "importance": "core",
+      "keywords": [
+        "subcritical flow",
+        "downstream pressure decrease",
+        "flow increase",
+        "Y decrease",
+        "pressure ratio"
+      ],
+      "core_terms": [
+        "비초크 유동",
+        "출구압력 감소",
+        "유량 증가",
+        "Y 감소"
+      ],
+      "accepted_explanations": [
+        "Subcritical flow에서는 downstream pressure가 감소하여 x가 증가하면 flow가 증가하며 Y는 감소한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Subcritical flow에서는 downstream pressure가 감소하여 x가 증가하면 flow가 증가하며 Y는 감소한다.",
+      "description": "subcritical_flow_behavior 계약을 평가한다."
+    },
+    {
+      "id": "choked_flow_physical_meaning",
+      "anchor_id": "choked_flow_physical_meaning",
+      "statement": "Choked flow는 valve 내부 제한부에서 compressible-flow limit에 도달하여 downstream pressure 감소에 대한 mass-flow 민감도가 크게 줄어든 상태이다.",
+      "importance": "core",
+      "keywords": [
+        "choked flow",
+        "compressible flow limit",
+        "restriction",
+        "mass flow sensitivity",
+        "downstream pressure"
+      ],
+      "core_terms": [
+        "초크유동",
+        "제한부",
+        "질량유량 한계",
+        "하류압력 민감도"
+      ],
+      "accepted_explanations": [
+        "Choked flow는 valve 내부 제한부에서 compressible-flow limit에 도달하여 downstream pressure 감소에 대한 mass-flow 민감도가 크게 줄어든 상태이다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Choked flow는 valve 내부 제한부에서 compressible-flow limit에 도달하여 downstream pressure 감소에 대한 mass-flow 민감도가 크게 줄어든 상태이다.",
+      "description": "choked_flow_physical_meaning 계약을 평가한다."
+    },
+    {
+      "id": "choked_flow_not_zero_flow",
+      "anchor_id": "choked_flow_not_zero_flow",
+      "statement": "Choked flow는 유량이 정지하거나 0이 되는 현상이 아니다.",
+      "importance": "core",
+      "keywords": [
+        "choked not zero flow",
+        "flow continues",
+        "maximum mass flow",
+        "not blockage",
+        "compressible limit"
+      ],
+      "core_terms": [
+        "유량정지 아님",
+        "0 유량 아님",
+        "최대질량유량",
+        "초크"
+      ],
+      "accepted_explanations": [
+        "Choked flow는 유량이 정지하거나 0이 되는 현상이 아니다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Choked flow는 유량이 정지하거나 0이 되는 현상이 아니다.",
+      "description": "choked_flow_not_zero_flow 계약을 평가한다."
+    },
+    {
+      "id": "choked_flow_downstream_independence",
+      "anchor_id": "choked_flow_downstream_independence",
+      "statement": "Choked limit 이후 downstream pressure를 더 낮춰도 동일 upstream condition과 valve state에서 flow가 무한히 증가하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "choked plateau",
+        "downstream independence",
+        "flow saturation",
+        "upstream condition",
+        "valve state"
+      ],
+      "core_terms": [
+        "초크 plateau",
+        "하류압력 독립성",
+        "유량 포화",
+        "상류조건"
+      ],
+      "accepted_explanations": [
+        "Choked limit 이후 downstream pressure를 더 낮춰도 동일 upstream condition과 valve state에서 flow가 무한히 증가하지 않는다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Choked limit 이후 downstream pressure를 더 낮춰도 동일 upstream condition과 valve state에서 flow가 무한히 증가하지 않는다.",
+      "description": "choked_flow_downstream_independence 계약을 평가한다."
+    },
+    {
+      "id": "standard_volume_formula_structure",
+      "anchor_id": "standard_volume_formula_structure",
+      "statement": "Standard-volume gas equation은 FP·C·P1·Y와 sqrt(xsizing/(M·T1·Z1)) 또는 대응 gas-specific-gravity term의 구조를 갖는다.",
+      "importance": "core",
+      "keywords": [
+        "standard volume formula",
+        "FP C P1 Y",
+        "molecular weight",
+        "T1 Z1",
+        "gas specific gravity"
+      ],
+      "core_terms": [
+        "표준부피식",
+        "P1Y",
+        "M·T1·Z1",
+        "가스비중식"
+      ],
+      "accepted_explanations": [
+        "Standard-volume gas equation은 FP·C·P1·Y와 sqrt(xsizing/(M·T1·Z1)) 또는 대응 gas-specific-gravity term의 구조를 갖는다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Standard-volume gas equation은 FP·C·P1·Y와 sqrt(xsizing/(M·T1·Z1)) 또는 대응 gas-specific-gravity term의 구조를 갖는다.",
+      "description": "standard_volume_formula_structure 계약을 평가한다."
+    },
+    {
+      "id": "mass_flow_formula_structure",
+      "anchor_id": "mass_flow_formula_structure",
+      "statement": "Mass-flow equation은 FP·C·Y와 sqrt(xsizing·P1·ρ1) 구조를 갖는다.",
+      "importance": "core",
+      "keywords": [
+        "mass flow formula",
+        "FP C Y",
+        "x P1 density",
+        "inlet density",
+        "gas mass flow"
+      ],
+      "core_terms": [
+        "질량유량식",
+        "FP·C·Y",
+        "P1·ρ1",
+        "입구밀도"
+      ],
+      "accepted_explanations": [
+        "Mass-flow equation은 FP·C·Y와 sqrt(xsizing·P1·ρ1) 구조를 갖는다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Mass-flow equation은 FP·C·Y와 sqrt(xsizing·P1·ρ1) 구조를 갖는다.",
+      "description": "mass_flow_formula_structure 계약을 평가한다."
+    },
+    {
+      "id": "unit_constant_equation_dependency",
+      "anchor_id": "unit_constant_equation_dependency",
+      "statement": "N 상수는 flow basis, pressure·temperature unit, molecular-weight·density representation과 equation form에 따라 선택한다.",
+      "importance": "core",
+      "keywords": [
+        "unit constant N",
+        "flow basis",
+        "pressure unit",
+        "temperature unit",
+        "equation form"
+      ],
+      "core_terms": [
+        "단위상수",
+        "유량기준",
+        "압력단위",
+        "온도단위",
+        "식 형태"
+      ],
+      "accepted_explanations": [
+        "N 상수는 flow basis, pressure·temperature unit, molecular-weight·density representation과 equation form에 따라 선택한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "N 상수는 flow basis, pressure·temperature unit, molecular-weight·density representation과 equation form에 따라 선택한다.",
+      "description": "unit_constant_equation_dependency 계약을 평가한다."
+    },
+    {
+      "id": "required_vs_rated_gas_coefficient",
+      "anchor_id": "required_vs_rated_gas_coefficient",
+      "statement": "Required Cv 또는 Kv는 process gas condition에서 필요한 capacity이고 rated coefficient는 selected trim이 제공하는 catalog capacity이다.",
+      "importance": "core",
+      "keywords": [
+        "required Cv",
+        "rated Cv",
+        "gas condition",
+        "catalog capacity",
+        "selected trim"
+      ],
+      "core_terms": [
+        "요구 Cv",
+        "정격 Cv",
+        "가스조건",
+        "선정 트림"
+      ],
+      "accepted_explanations": [
+        "Required Cv 또는 Kv는 process gas condition에서 필요한 capacity이고 rated coefficient는 selected trim이 제공하는 catalog capacity이다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Required Cv 또는 Kv는 process gas condition에서 필요한 capacity이고 rated coefficient는 selected trim이 제공하는 catalog capacity이다.",
+      "description": "required_vs_rated_gas_coefficient 계약을 평가한다."
+    },
+    {
+      "id": "selected_travel_xT_iteration",
+      "anchor_id": "selected_travel_xT_iteration",
+      "statement": "Selected trim과 travel에서 xT 또는 xTP가 최초 가정과 달라지면 required coefficient와 travel을 반복 계산한다.",
+      "importance": "core",
+      "keywords": [
+        "selected travel",
+        "xT iteration",
+        "xTP iteration",
+        "required coefficient recalculation",
+        "self consistent"
+      ],
+      "core_terms": [
+        "선정 개도",
+        "xT 반복",
+        "xTP 반복",
+        "수렴 계산"
+      ],
+      "accepted_explanations": [
+        "Selected trim과 travel에서 xT 또는 xTP가 최초 가정과 달라지면 required coefficient와 travel을 반복 계산한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Selected trim과 travel에서 xT 또는 xTP가 최초 가정과 달라지면 required coefficient와 travel을 반복 계산한다.",
+      "description": "selected_travel_xT_iteration 계약을 평가한다."
+    },
+    {
+      "id": "minimum_normal_maximum_gas_cases",
+      "anchor_id": "minimum_normal_maximum_gas_cases",
+      "statement": "Minimum, normal과 maximum gas-flow 조건에서 pressure, temperature, property와 required coefficient를 각각 검토한다.",
+      "importance": "core",
+      "keywords": [
+        "minimum normal maximum",
+        "gas flow cases",
+        "pressure temperature",
+        "property cases",
+        "required coefficient"
+      ],
+      "core_terms": [
+        "최소·정상·최대",
+        "가스 유량조건",
+        "압력온도",
+        "요구계수"
+      ],
+      "accepted_explanations": [
+        "Minimum, normal과 maximum gas-flow 조건에서 pressure, temperature, property와 required coefficient를 각각 검토한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Minimum, normal과 maximum gas-flow 조건에서 pressure, temperature, property와 required coefficient를 각각 검토한다.",
+      "description": "minimum_normal_maximum_gas_cases 계약을 평가한다."
+    },
+    {
+      "id": "fail_open_maximum_flow_case",
+      "anchor_id": "fail_open_maximum_flow_case",
+      "statement": "Fail-open valve는 credible maximum upstream pressure와 minimum downstream pressure에서 choked possibility와 maximum gas flow를 검토한다.",
+      "importance": "core",
+      "keywords": [
+        "fail open",
+        "maximum upstream pressure",
+        "minimum downstream pressure",
+        "maximum gas flow",
+        "choked possibility"
+      ],
+      "core_terms": [
+        "Fail-open",
+        "최대 상류압력",
+        "최소 하류압력",
+        "최대 가스유량"
+      ],
+      "accepted_explanations": [
+        "Fail-open valve는 credible maximum upstream pressure와 minimum downstream pressure에서 choked possibility와 maximum gas flow를 검토한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Fail-open valve는 credible maximum upstream pressure와 minimum downstream pressure에서 choked possibility와 maximum gas flow를 검토한다.",
+      "description": "fail_open_maximum_flow_case 계약을 평가한다."
+    },
+    {
+      "id": "steam_vapor_property_boundary",
+      "anchor_id": "steam_vapor_property_boundary",
+      "statement": "Saturated 또는 superheated single-phase steam·vapor는 일관된 thermodynamic properties를 사용하고 wet-steam two-phase condition은 별도 method를 검토한다.",
+      "importance": "important",
+      "keywords": [
+        "steam sizing",
+        "saturated steam",
+        "superheated steam",
+        "wet steam",
+        "two phase method"
+      ],
+      "core_terms": [
+        "포화증기",
+        "과열증기",
+        "습증기",
+        "2상유동"
+      ],
+      "accepted_explanations": [
+        "Saturated 또는 superheated single-phase steam·vapor는 일관된 thermodynamic properties를 사용하고 wet-steam two-phase condition은 별도 method를 검토한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Saturated 또는 superheated single-phase steam·vapor는 일관된 thermodynamic properties를 사용하고 wet-steam two-phase condition은 별도 method를 검토한다.",
+      "description": "steam_vapor_property_boundary 계약을 평가한다."
+    },
+    {
+      "id": "aerodynamic_noise_handoff",
+      "anchor_id": "aerodynamic_noise_handoff",
+      "statement": "Gas sizing 결과의 pressure ratio와 choked condition은 aerodynamic noise 검토 입력이지만 상세 noise prediction과 low-noise trim은 Topic 9가 소유한다.",
+      "importance": "important",
+      "keywords": [
+        "aerodynamic noise",
+        "choked gas",
+        "noise screening",
+        "low noise trim",
+        "Topic 9"
+      ],
+      "core_terms": [
+        "공력소음",
+        "초크가스",
+        "소음 screening",
+        "Topic 9"
+      ],
+      "accepted_explanations": [
+        "Gas sizing 결과의 pressure ratio와 choked condition은 aerodynamic noise 검토 입력이지만 상세 noise prediction과 low-noise trim은 Topic 9가 소유한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Gas sizing 결과의 pressure ratio와 choked condition은 aerodynamic noise 검토 입력이지만 상세 noise prediction과 low-noise trim은 Topic 9가 소유한다.",
+      "description": "aerodynamic_noise_handoff 계약을 평가한다."
+    },
+    {
+      "id": "vendor_hand_calculation_crosscheck_gas",
+      "anchor_id": "vendor_hand_calculation_crosscheck_gas",
+      "statement": "Vendor sizing result는 flow basis, absolute pressure·temperature, gas properties, FP, xT/xTP, Y, selected travel과 hand calculation으로 교차 검증한다.",
+      "importance": "important",
+      "keywords": [
+        "vendor sizing",
+        "hand calculation",
+        "input audit",
+        "xT xTP Y",
+        "selected travel"
+      ],
+      "core_terms": [
+        "Vendor 결과",
+        "수계산",
+        "입력검증",
+        "선정 개도"
+      ],
+      "accepted_explanations": [
+        "Vendor sizing result는 flow basis, absolute pressure·temperature, gas properties, FP, xT/xTP, Y, selected travel과 hand calculation으로 교차 검증한다.",
+        "변수, 단위, 적용조건과 인접 Topic 경계를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "정의, 수식 방향, 절대조건 또는 적용 경계를 반대로 설명한다."
+      ],
+      "grading_notes": "Flow basis→absolute P·T→gas property→x→Fγ→xT/xTP→Y→required coefficient→selected travel iteration의 인과관계를 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_gas_sizing_choked_flow_critical_pressure_ratio.md; Control Valve Handbook Chapter 5; Control Valve Primer Chapter 5; gemini_script/20260804_topic07_gas_sizing_requirements.md.",
+      "claim": "Vendor sizing result는 flow basis, absolute pressure·temperature, gas properties, FP, xT/xTP, Y, selected travel과 hand calculation으로 교차 검증한다.",
+      "description": "vendor_hand_calculation_crosscheck_gas 계약을 평가한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "control_valve_gas_use_gauge_pressure_in_ratio",
+      "claim": "Gauge pressure를 그대로 x=ΔP/P1의 P1 또는 P2에 사용한다.",
+      "correction": "P1과 P2는 absolute pressure로 변환한다.",
+      "wrong_claim": "Gauge pressure를 그대로 x=ΔP/P1의 P1 또는 P2에 사용한다.",
+      "correct_rule": "P1과 P2는 absolute pressure로 변환한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Gauge pressure를 그대로 x=ΔP/P1의 P1 또는 P2에 사용한다.",
+      "description": "P1과 P2는 absolute pressure로 변환한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_pressure_ratio_uses_p2_denominator",
+      "claim": "Pressure-drop ratio는 ΔP/P2이다.",
+      "correction": "Pressure-drop ratio는 ΔP/P1이다.",
+      "wrong_claim": "Pressure-drop ratio는 ΔP/P2이다.",
+      "correct_rule": "Pressure-drop ratio는 ΔP/P1이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Pressure-drop ratio는 ΔP/P2이다.",
+      "description": "Pressure-drop ratio는 ΔP/P1이다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_standard_actual_mass_flow_identical",
+      "claim": "Standard volume, actual volume와 mass flow는 조건과 단위에 관계없이 같은 값이다.",
+      "correction": "Flow basis와 base condition을 구분한다.",
+      "wrong_claim": "Standard volume, actual volume와 mass flow는 조건과 단위에 관계없이 같은 값이다.",
+      "correct_rule": "Flow basis와 base condition을 구분한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Standard volume, actual volume와 mass flow는 조건과 단위에 관계없이 같은 값이다.",
+      "description": "Flow basis와 base condition을 구분한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_ignore_absolute_temperature",
+      "claim": "Gas sizing에서 Celsius 또는 Fahrenheit 숫자를 T1에 그대로 사용한다.",
+      "correction": "T1은 Kelvin 또는 Rankine의 absolute temperature를 사용한다.",
+      "wrong_claim": "Gas sizing에서 Celsius 또는 Fahrenheit 숫자를 T1에 그대로 사용한다.",
+      "correct_rule": "T1은 Kelvin 또는 Rankine의 absolute temperature를 사용한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Gas sizing에서 Celsius 또는 Fahrenheit 숫자를 T1에 그대로 사용한다.",
+      "description": "T1은 Kelvin 또는 Rankine의 absolute temperature를 사용한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_z_always_one",
+      "claim": "모든 pressure와 gas에서 Z1=1이다.",
+      "correction": "Z1은 inlet real-gas property를 확인한다.",
+      "wrong_claim": "모든 pressure와 gas에서 Z1=1이다.",
+      "correct_rule": "Z1은 inlet real-gas property를 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: 모든 pressure와 gas에서 Z1=1이다.",
+      "description": "Z1은 inlet real-gas property를 확인한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_fgamma_always_one",
+      "claim": "모든 gas에서 Fγ=1이다.",
+      "correction": "Fγ는 specific heat ratio와 적용 standard에 따라 결정한다.",
+      "wrong_claim": "모든 gas에서 Fγ=1이다.",
+      "correct_rule": "Fγ는 specific heat ratio와 적용 standard에 따라 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: 모든 gas에서 Fγ=1이다.",
+      "description": "Fγ는 specific heat ratio와 적용 standard에 따라 결정한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_xT_universal_constant",
+      "claim": "xT는 모든 valve style과 trim에 동일한 universal constant이다.",
+      "correction": "xT는 manufacturer data와 valve·trim 조건을 확인한다.",
+      "wrong_claim": "xT는 모든 valve style과 trim에 동일한 universal constant이다.",
+      "correct_rule": "xT는 manufacturer data와 valve·trim 조건을 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: xT는 모든 valve style과 trim에 동일한 universal constant이다.",
+      "description": "xT는 manufacturer data와 valve·trim 조건을 확인한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_xT_independent_of_travel",
+      "claim": "xT는 travel과 무관하므로 selected travel에서 재검토하지 않는다.",
+      "correction": "Selected travel의 xT 또는 xTP로 반복 계산한다.",
+      "wrong_claim": "xT는 travel과 무관하므로 selected travel에서 재검토하지 않는다.",
+      "correct_rule": "Selected travel의 xT 또는 xTP로 반복 계산한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: xT는 travel과 무관하므로 selected travel에서 재검토하지 않는다.",
+      "description": "Selected travel의 xT 또는 xTP로 반복 계산한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_xTP_always_equals_xT_with_fittings",
+      "claim": "Reducer 또는 expander가 연결돼도 항상 FP=1이고 xTP=xT이다.",
+      "correction": "Attached fitting이 있으면 FP와 xTP를 검토한다.",
+      "wrong_claim": "Reducer 또는 expander가 연결돼도 항상 FP=1이고 xTP=xT이다.",
+      "correct_rule": "Attached fitting이 있으면 FP와 xTP를 검토한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Reducer 또는 expander가 연결돼도 항상 FP=1이고 xTP=xT이다.",
+      "description": "Attached fitting이 있으면 FP와 xTP를 검토한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_use_max_pressure_ratio",
+      "claim": "Sizing ratio는 actual x와 choked limit 중 큰 값을 사용한다.",
+      "correction": "Sizing ratio는 두 값 중 작은 값을 사용한다.",
+      "wrong_claim": "Sizing ratio는 actual x와 choked limit 중 큰 값을 사용한다.",
+      "correct_rule": "Sizing ratio는 두 값 중 작은 값을 사용한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Sizing ratio는 actual x와 choked limit 중 큰 값을 사용한다.",
+      "description": "Sizing ratio는 두 값 중 작은 값을 사용한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_y_increases_with_pressure_ratio",
+      "claim": "Subcritical range에서 pressure ratio가 증가할수록 Y가 증가한다.",
+      "correction": "Common relation에서 pressure ratio가 증가하면 Y는 감소한다.",
+      "wrong_claim": "Subcritical range에서 pressure ratio가 증가할수록 Y가 증가한다.",
+      "correct_rule": "Common relation에서 pressure ratio가 증가하면 Y는 감소한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Subcritical range에서 pressure ratio가 증가할수록 Y가 증가한다.",
+      "description": "Common relation에서 pressure ratio가 증가하면 Y는 감소한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_y_below_two_thirds_standard_relation",
+      "claim": "Common standard relation에서 choked 이후 Y를 2/3보다 계속 낮춘다.",
+      "correction": "Common relation의 choked limit에서 Y는 2/3이다.",
+      "wrong_claim": "Common standard relation에서 choked 이후 Y를 2/3보다 계속 낮춘다.",
+      "correct_rule": "Common relation의 choked limit에서 Y는 2/3이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Common standard relation에서 choked 이후 Y를 2/3보다 계속 낮춘다.",
+      "description": "Common relation의 choked limit에서 Y는 2/3이다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_choked_means_zero_flow",
+      "claim": "Choked flow는 유량이 막혀 0이 되는 상태이다.",
+      "correction": "Choked flow는 maximum compressible-flow limit이며 유량 정지가 아니다.",
+      "wrong_claim": "Choked flow는 유량이 막혀 0이 되는 상태이다.",
+      "correct_rule": "Choked flow는 maximum compressible-flow limit이며 유량 정지가 아니다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Choked flow는 유량이 막혀 0이 되는 상태이다.",
+      "description": "Choked flow는 maximum compressible-flow limit이며 유량 정지가 아니다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_choked_flow_increases_indefinitely",
+      "claim": "Choked limit 이후 downstream pressure를 낮추면 flow가 계속 비례 증가한다.",
+      "correction": "Choked 이후 sizing ratio와 capacity term은 limit에 고정된다.",
+      "wrong_claim": "Choked limit 이후 downstream pressure를 낮추면 flow가 계속 비례 증가한다.",
+      "correct_rule": "Choked 이후 sizing ratio와 capacity term은 limit에 고정된다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Choked limit 이후 downstream pressure를 낮추면 flow가 계속 비례 증가한다.",
+      "description": "Choked 이후 sizing ratio와 capacity term은 limit에 고정된다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_use_liquid_equation_unchanged",
+      "claim": "Gas·steam에 liquid equation Q=C√(ΔP/SG)를 그대로 최종 적용한다.",
+      "correction": "압축성 유체 equation과 expansion·choked correction을 사용한다.",
+      "wrong_claim": "Gas·steam에 liquid equation Q=C√(ΔP/SG)를 그대로 최종 적용한다.",
+      "correct_rule": "압축성 유체 equation과 expansion·choked correction을 사용한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Gas·steam에 liquid equation Q=C√(ΔP/SG)를 그대로 최종 적용한다.",
+      "description": "압축성 유체 equation과 expansion·choked correction을 사용한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_capacity_independent_of_inlet_pressure",
+      "claim": "Gas capacity는 inlet absolute pressure P1과 무관하다.",
+      "correction": "Gas-capacity equation은 P1의 영향을 포함한다.",
+      "wrong_claim": "Gas capacity는 inlet absolute pressure P1과 무관하다.",
+      "correct_rule": "Gas-capacity equation은 P1의 영향을 포함한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Gas capacity는 inlet absolute pressure P1과 무관하다.",
+      "description": "Gas-capacity equation은 P1의 영향을 포함한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_required_equals_rated",
+      "claim": "Required coefficient와 selected trim rated coefficient는 동일한 값이다.",
+      "correction": "Required process need와 rated catalog capacity를 구분한다.",
+      "wrong_claim": "Required coefficient와 selected trim rated coefficient는 동일한 값이다.",
+      "correct_rule": "Required process need와 rated catalog capacity를 구분한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Required coefficient와 selected trim rated coefficient는 동일한 값이다.",
+      "description": "Required process need와 rated catalog capacity를 구분한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_gas_single_operating_point_sufficient",
+      "claim": "Normal gas-flow 한 점만 계산하면 minimum, maximum과 fail-open case는 필요 없다.",
+      "correction": "Minimum·normal·maximum 및 fail-open case를 검토한다.",
+      "wrong_claim": "Normal gas-flow 한 점만 계산하면 minimum, maximum과 fail-open case는 필요 없다.",
+      "correct_rule": "Minimum·normal·maximum 및 fail-open case를 검토한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Normal gas-flow 한 점만 계산하면 minimum, maximum과 fail-open case는 필요 없다.",
+      "description": "Minimum·normal·maximum 및 fail-open case를 검토한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    },
+    {
+      "id": "control_valve_wet_steam_same_as_single_phase_gas",
+      "claim": "Wet steam에 single-phase gas equation을 property 검토 없이 그대로 적용한다.",
+      "correction": "Wet steam은 two-phase property와 별도 method를 검토한다.",
+      "wrong_claim": "Wet steam에 single-phase gas equation을 property 검토 없이 그대로 적용한다.",
+      "correct_rule": "Wet steam은 two-phase property와 별도 method를 검토한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축성 유체 sizing 핵심 오류: Wet steam에 single-phase gas equation을 property 검토 없이 그대로 적용한다.",
+      "description": "Wet steam은 two-phase property와 별도 method를 검토한다.",
+      "grading_notes": "문맥을 확인하고 실제로 해당 주장을 한 경우에만 fatal로 판단한다."
+    }
+  ],
+  "safe_expressions": [
+    "압축성 유체 sizing은 gas, vapor와 single-phase steam에 적용한다.",
+    "Standard volume, actual volume와 mass flow를 구분한다.",
+    "Standard flow에는 base pressure와 temperature를 기록한다.",
+    "P1과 P2는 absolute pressure를 사용한다.",
+    "T1은 absolute temperature를 사용한다.",
+    "x=(P1-P2)/P1이다.",
+    "Molecular weight, gas specific gravity 또는 inlet density 중 equation이 요구하는 property를 사용한다.",
+    "Z1은 real-gas behavior를 보정한다.",
+    "Common notation에서 Fγ=γ/1.4를 사용할 수 있다.",
+    "xT는 valve style, trim과 travel에 의존할 수 있다.",
+    "Attached fitting이 있으면 FP와 xTP를 검토한다.",
+    "Sizing ratio는 actual x와 choked limit 중 작은 값을 사용한다.",
+    "Y는 gas expansion을 보정하며 pressure ratio 증가에 따라 감소한다.",
+    "Common relation에서 2/3≤Y≤1이다.",
+    "Choked flow는 flow stop이 아니다.",
+    "Choked limit 이후 downstream pressure 감소에 대한 flow 증가가 제한된다.",
+    "Required와 rated coefficient를 구분한다.",
+    "Selected travel에서 xT가 달라지면 반복 계산한다.",
+    "Minimum, normal, maximum과 fail-open gas flow를 검토한다.",
+    "Wet steam은 별도 two-phase property method를 검토한다.",
+    "Aerodynamic noise 상세는 Topic 9에서 검토한다.",
+    "Vendor software 결과는 hand calculation과 input sheet로 교차 확인한다."
+  ],
+  "revision_notes": [
+    "압축성 유체 flow basis와 absolute P·T 계약을 추가했다.",
+    "x, Fγ, xT/xTP, Y와 choked-flow 계약을 추가했다.",
+    "Topic 6·8·9 경계를 분리했다."
+  ],
+  "topic_label": "가스·증기 제어밸브 사이징",
+  "core_facts": [
+    "압축성 유체 제어밸브 sizing은 single-phase gas, vapor와 steam의 required flow coefficient 및 trim capacity를 결정하는 절차이다.",
+    "Standard·normal volumetric flow, actual volumetric flow와 mass flow는 서로 다른 flow basis이며 같은 숫자로 취급하지 않는다.",
+    "Standard 또는 normal volumetric flow를 사용할 때는 base pressure와 base temperature를 함께 정의해야 한다.",
+    "Gas sizing의 P1, P2와 pressure ratio에는 absolute pressure를 사용한다.",
+    "Gas sizing의 upstream temperature T1은 absolute temperature로 사용한다.",
+    "Pressure-drop ratio는 x=(P1-P2)/P1=ΔP/P1이다.",
+    "동일 P1에서 P2가 감소하면 actual pressure-drop ratio x는 증가한다.",
+    "Gas sizing은 선택한 equation form에 따라 molecular weight, gas specific gravity 또는 inlet density를 사용한다.",
+    "Z1은 inlet condition에서 real-gas behavior가 ideal-gas relation에서 벗어나는 정도를 보정한다.",
+    "Fγ는 gas의 specific heat ratio가 choked limit와 expansion behavior에 미치는 영향을 보정한다.",
+    "xT는 bare valve의 choked-flow pressure-ratio 특성을 나타내는 manufacturer coefficient이다.",
+    "xT는 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+    "Gas sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+    "xTP는 attached fittings의 영향을 포함한 pressure-drop-ratio factor이다.",
+    "Sizing method가 요구하는 조건에서 attached fitting 영향이 없으면 일반적으로 FP=1이고 xTP=xT로 취급할 수 있다.",
+    "Common relation에서 choked pressure-ratio limit는 bare valve에서 FγxT, fitting assembly에서 FγxTP로 표현된다.",
+    "Sizing ratio는 actual x와 choked limit 중 작은 값을 사용한다.",
+    "Expansion factor Y는 gas가 valve 통과 중 팽창하면서 density가 감소하는 영향을 보정한다.",
+    "Common subcritical relation에서 Y=1-xsizing/(3FγxT) 또는 fitting-adjusted xTP 형태를 사용한다.",
+    "Common standard relation에서 Y는 1 이하이고 choked limit에서 2/3에 도달한다.",
+    "Subcritical flow에서는 downstream pressure가 감소하여 x가 증가하면 flow가 증가하며 Y는 감소한다.",
+    "Choked flow는 valve 내부 제한부에서 compressible-flow limit에 도달하여 downstream pressure 감소에 대한 mass-flow 민감도가 크게 줄어든 상태이다.",
+    "Choked flow는 유량이 정지하거나 0이 되는 현상이 아니다.",
+    "Choked limit 이후 downstream pressure를 더 낮춰도 동일 upstream condition과 valve state에서 flow가 무한히 증가하지 않는다.",
+    "Standard-volume gas equation은 FP·C·P1·Y와 sqrt(xsizing/(M·T1·Z1)) 또는 대응 gas-specific-gravity term의 구조를 갖는다.",
+    "Mass-flow equation은 FP·C·Y와 sqrt(xsizing·P1·ρ1) 구조를 갖는다.",
+    "N 상수는 flow basis, pressure·temperature unit, molecular-weight·density representation과 equation form에 따라 선택한다.",
+    "Required Cv 또는 Kv는 process gas condition에서 필요한 capacity이고 rated coefficient는 selected trim이 제공하는 catalog capacity이다.",
+    "Selected trim과 travel에서 xT 또는 xTP가 최초 가정과 달라지면 required coefficient와 travel을 반복 계산한다.",
+    "Minimum, normal과 maximum gas-flow 조건에서 pressure, temperature, property와 required coefficient를 각각 검토한다.",
+    "Fail-open valve는 credible maximum upstream pressure와 minimum downstream pressure에서 choked possibility와 maximum gas flow를 검토한다.",
+    "Saturated 또는 superheated single-phase steam·vapor는 일관된 thermodynamic properties를 사용하고 wet-steam two-phase condition은 별도 method를 검토한다.",
+    "Gas sizing 결과의 pressure ratio와 choked condition은 aerodynamic noise 검토 입력이지만 상세 noise prediction과 low-noise trim은 Topic 9가 소유한다.",
+    "Vendor sizing result는 flow basis, absolute pressure·temperature, gas properties, FP, xT/xTP, Y, selected travel과 hand calculation으로 교차 검증한다."
+  ]
+}

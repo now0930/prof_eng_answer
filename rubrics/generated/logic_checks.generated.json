@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-04T00:48:01Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-04T05:13:23Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -123,6 +123,19 @@
       "enabled": false,
       "topic_name": "제어밸브에 작용하는 유체력, 불평형력, 마찰력과 액추에이터·Fail-Safe 설계",
       "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "enabled": false,
+      "topic_name": "제어밸브의 가스·증기 사이징, 팽창계수 및 초크 유동",
+      "question_type": "CALC_DESIGN",
       "difficulty_profile": "FIELD_APPLICATION",
       "topic_aliases": [],
       "fatal_checks": [],
