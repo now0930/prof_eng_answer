@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-04T05:13:23Z-generated-topic-pack-fact-anchors",
+  "version": "2026-08-04T06:39:12Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -2735,6 +2735,2231 @@
         "Integrated installed performance evaluation",
         "제어밸브의 Authority·Rangeability·Installed Gain 및 공정 성능",
         "제어밸브 Authority·Rangeability·Installed Gain"
+      ],
+      "priority": "CORE_MUST_PREPARE"
+    },
+    {
+      "schema_version": "fact_anchor.v1",
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "title_ko": "제어밸브의 캐비테이션·플래싱·액체 초크 유동 및 손상 방지",
+      "question_type_hint": "PRINCIPLE_INTERPRETATION",
+      "anchors": [
+        {
+          "id": "liquid_pressure_profile_scope",
+          "anchor_id": "liquid_pressure_profile_scope",
+          "statement": "Liquid control valve의 cavitation·flashing·choked-flow 해석은 P1, Pvc, P2, Pv와 Pc의 pressure relation에서 시작한다.",
+          "importance": "core",
+          "keywords": [
+            "liquid pressure profile",
+            "P1 Pvc P2",
+            "vapor pressure Pv",
+            "critical pressure Pc",
+            "phase change"
+          ],
+          "core_terms": [
+            "액체 압력분포",
+            "P1→Pvc→P2",
+            "Pv",
+            "Pc"
+          ],
+          "accepted_explanations": [
+            "Liquid control valve의 cavitation·flashing·choked-flow 해석은 P1, Pvc, P2, Pv와 Pc의 pressure relation에서 시작한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Liquid control valve의 cavitation·flashing·choked-flow 해석은 P1, Pvc, P2, Pv와 Pc의 pressure relation에서 시작한다.",
+          "description": "liquid_pressure_profile_scope 계약을 평가한다.",
+          "name": "liquid_pressure_profile_scope",
+          "expected": "Liquid control valve의 cavitation·flashing·choked-flow 해석은 P1, Pvc, P2, Pv와 Pc의 pressure relation에서 시작한다.",
+          "support_terms": []
+        },
+        {
+          "id": "absolute_pressure_basis_liquid_phase_change",
+          "anchor_id": "absolute_pressure_basis_liquid_phase_change",
+          "statement": "P1, P2, Pvc, Pv와 Pc는 absolute pressure와 동일 pressure unit을 사용한다.",
+          "importance": "core",
+          "keywords": [
+            "absolute pressure",
+            "P1 P2 Pvc",
+            "vapor pressure",
+            "critical pressure",
+            "unit consistency"
+          ],
+          "core_terms": [
+            "절대압력",
+            "동일 단위",
+            "Pvc",
+            "Pv·Pc"
+          ],
+          "accepted_explanations": [
+            "P1, P2, Pvc, Pv와 Pc는 absolute pressure와 동일 pressure unit을 사용한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "P1, P2, Pvc, Pv와 Pc는 absolute pressure와 동일 pressure unit을 사용한다.",
+          "description": "absolute_pressure_basis_liquid_phase_change 계약을 평가한다.",
+          "name": "absolute_pressure_basis_liquid_phase_change",
+          "expected": "P1, P2, Pvc, Pv와 Pc는 absolute pressure와 동일 pressure unit을 사용한다.",
+          "support_terms": []
+        },
+        {
+          "id": "vapor_pressure_operating_temperature",
+          "anchor_id": "vapor_pressure_operating_temperature",
+          "statement": "Pv는 operating temperature에서의 liquid vapor pressure이며 temperature가 변하면 다시 확인한다.",
+          "importance": "core",
+          "keywords": [
+            "vapor pressure Pv",
+            "operating temperature",
+            "liquid property",
+            "temperature dependence",
+            "phase equilibrium"
+          ],
+          "core_terms": [
+            "증기압",
+            "운전온도",
+            "온도 의존성",
+            "액체 물성"
+          ],
+          "accepted_explanations": [
+            "Pv는 operating temperature에서의 liquid vapor pressure이며 temperature가 변하면 다시 확인한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Pv는 operating temperature에서의 liquid vapor pressure이며 temperature가 변하면 다시 확인한다.",
+          "description": "vapor_pressure_operating_temperature 계약을 평가한다.",
+          "name": "vapor_pressure_operating_temperature",
+          "expected": "Pv는 operating temperature에서의 liquid vapor pressure이며 temperature가 변하면 다시 확인한다.",
+          "support_terms": []
+        },
+        {
+          "id": "thermodynamic_critical_pressure_meaning",
+          "anchor_id": "thermodynamic_critical_pressure_meaning",
+          "statement": "Pc는 liquid의 thermodynamic critical pressure이며 valve pressure-recovery coefficient가 아니다.",
+          "importance": "core",
+          "keywords": [
+            "critical pressure Pc",
+            "thermodynamic critical point",
+            "phase boundary",
+            "not valve coefficient",
+            "liquid property"
+          ],
+          "core_terms": [
+            "임계압력",
+            "열역학 임계점",
+            "밸브계수 아님",
+            "Pc"
+          ],
+          "accepted_explanations": [
+            "Pc는 liquid의 thermodynamic critical pressure이며 valve pressure-recovery coefficient가 아니다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Pc는 liquid의 thermodynamic critical pressure이며 valve pressure-recovery coefficient가 아니다.",
+          "description": "thermodynamic_critical_pressure_meaning 계약을 평가한다.",
+          "name": "thermodynamic_critical_pressure_meaning",
+          "expected": "Pc는 liquid의 thermodynamic critical pressure이며 valve pressure-recovery coefficient가 아니다.",
+          "support_terms": []
+        },
+        {
+          "id": "vena_contracta_minimum_pressure",
+          "anchor_id": "vena_contracta_minimum_pressure",
+          "statement": "Valve restriction을 통과한 liquid의 minimum local pressure는 vena contracta 부근의 Pvc로 표현한다.",
+          "importance": "core",
+          "keywords": [
+            "vena contracta",
+            "minimum local pressure",
+            "restriction",
+            "velocity increase",
+            "Pvc"
+          ],
+          "core_terms": [
+            "베나 콘트랙타",
+            "최저 국부압력",
+            "제한부",
+            "Pvc"
+          ],
+          "accepted_explanations": [
+            "Valve restriction을 통과한 liquid의 minimum local pressure는 vena contracta 부근의 Pvc로 표현한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Valve restriction을 통과한 liquid의 minimum local pressure는 vena contracta 부근의 Pvc로 표현한다.",
+          "description": "vena_contracta_minimum_pressure 계약을 평가한다.",
+          "name": "vena_contracta_minimum_pressure",
+          "expected": "Valve restriction을 통과한 liquid의 minimum local pressure는 vena contracta 부근의 Pvc로 표현한다.",
+          "support_terms": []
+        },
+        {
+          "id": "vapor_formation_condition",
+          "anchor_id": "vapor_formation_condition",
+          "statement": "Pvc가 Pv보다 낮으면 local vapor formation이 시작될 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "Pvc below Pv",
+            "vapor formation",
+            "phase change",
+            "bubble generation",
+            "local pressure"
+          ],
+          "core_terms": [
+            "Pvc<Pv",
+            "증기 기포 생성",
+            "상변화",
+            "국부압력"
+          ],
+          "accepted_explanations": [
+            "Pvc가 Pv보다 낮으면 local vapor formation이 시작될 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Pvc가 Pv보다 낮으면 local vapor formation이 시작될 수 있다.",
+          "description": "vapor_formation_condition 계약을 평가한다.",
+          "name": "vapor_formation_condition",
+          "expected": "Pvc가 Pv보다 낮으면 local vapor formation이 시작될 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "downstream_pressure_recovery",
+          "anchor_id": "downstream_pressure_recovery",
+          "statement": "Vena contracta 이후 일부 kinetic energy가 static pressure로 회복되어 pressure가 P2까지 상승한다.",
+          "importance": "core",
+          "keywords": [
+            "downstream pressure recovery",
+            "kinetic energy",
+            "static pressure",
+            "Pvc to P2",
+            "flow area recovery"
+          ],
+          "core_terms": [
+            "하류 압력회복",
+            "속도에너지",
+            "정압",
+            "Pvc→P2"
+          ],
+          "accepted_explanations": [
+            "Vena contracta 이후 일부 kinetic energy가 static pressure로 회복되어 pressure가 P2까지 상승한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Vena contracta 이후 일부 kinetic energy가 static pressure로 회복되어 pressure가 P2까지 상승한다.",
+          "description": "downstream_pressure_recovery 계약을 평가한다.",
+          "name": "downstream_pressure_recovery",
+          "expected": "Vena contracta 이후 일부 kinetic energy가 static pressure로 회복되어 pressure가 P2까지 상승한다.",
+          "support_terms": []
+        },
+        {
+          "id": "pressure_recovery_factor_fl_meaning",
+          "anchor_id": "pressure_recovery_factor_fl_meaning",
+          "statement": "FL은 bare valve의 pressure-recovery 특성을 나타내는 manufacturer coefficient이다.",
+          "importance": "core",
+          "keywords": [
+            "pressure recovery factor FL",
+            "bare valve",
+            "manufacturer coefficient",
+            "liquid sizing",
+            "recovery characteristic"
+          ],
+          "core_terms": [
+            "FL",
+            "압력회복계수",
+            "bare valve",
+            "제조사 계수"
+          ],
+          "accepted_explanations": [
+            "FL은 bare valve의 pressure-recovery 특성을 나타내는 manufacturer coefficient이다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "FL은 bare valve의 pressure-recovery 특성을 나타내는 manufacturer coefficient이다.",
+          "description": "pressure_recovery_factor_fl_meaning 계약을 평가한다.",
+          "name": "pressure_recovery_factor_fl_meaning",
+          "expected": "FL은 bare valve의 pressure-recovery 특성을 나타내는 manufacturer coefficient이다.",
+          "support_terms": []
+        },
+        {
+          "id": "fl_direction_and_cavitation_susceptibility",
+          "anchor_id": "fl_direction_and_cavitation_susceptibility",
+          "statement": "낮은 FL은 큰 pressure recovery와 더 낮은 Pvc를 의미할 수 있으므로 cavitation susceptibility를 높일 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "low FL",
+            "high pressure recovery",
+            "lower Pvc",
+            "cavitation susceptibility",
+            "recovery direction"
+          ],
+          "core_terms": [
+            "낮은 FL",
+            "큰 압력회복",
+            "낮은 Pvc",
+            "캐비테이션 민감도"
+          ],
+          "accepted_explanations": [
+            "낮은 FL은 큰 pressure recovery와 더 낮은 Pvc를 의미할 수 있으므로 cavitation susceptibility를 높일 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "낮은 FL은 큰 pressure recovery와 더 낮은 Pvc를 의미할 수 있으므로 cavitation susceptibility를 높일 수 있다.",
+          "description": "fl_direction_and_cavitation_susceptibility 계약을 평가한다.",
+          "name": "fl_direction_and_cavitation_susceptibility",
+          "expected": "낮은 FL은 큰 pressure recovery와 더 낮은 Pvc를 의미할 수 있으므로 cavitation susceptibility를 높일 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "fl_style_trim_travel_dependency",
+          "anchor_id": "fl_style_trim_travel_dependency",
+          "statement": "FL은 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "FL dependency",
+            "valve style",
+            "trim geometry",
+            "flow direction",
+            "selected travel"
+          ],
+          "core_terms": [
+            "밸브 형식",
+            "트림 형상",
+            "유동방향",
+            "개도 의존성"
+          ],
+          "accepted_explanations": [
+            "FL은 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "FL은 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+          "description": "fl_style_trim_travel_dependency 계약을 평가한다.",
+          "name": "fl_style_trim_travel_dependency",
+          "expected": "FL은 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "critical_pressure_ratio_factor_ff",
+          "anchor_id": "critical_pressure_ratio_factor_ff",
+          "statement": "Common relation의 FF는 Pv/Pc 함수이며 thermodynamic critical-pressure effect를 보정한다.",
+          "importance": "core",
+          "keywords": [
+            "liquid critical pressure ratio factor FF",
+            "Pv over Pc",
+            "thermodynamic correction",
+            "IEC ISA relation",
+            "critical pressure effect"
+          ],
+          "core_terms": [
+            "FF",
+            "Pv/Pc",
+            "임계압력 보정",
+            "액체 계수"
+          ],
+          "accepted_explanations": [
+            "Common relation의 FF는 Pv/Pc 함수이며 thermodynamic critical-pressure effect를 보정한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Common relation의 FF는 Pv/Pc 함수이며 thermodynamic critical-pressure effect를 보정한다.",
+          "description": "critical_pressure_ratio_factor_ff 계약을 평가한다.",
+          "name": "critical_pressure_ratio_factor_ff",
+          "expected": "Common relation의 FF는 Pv/Pc 함수이며 thermodynamic critical-pressure effect를 보정한다.",
+          "support_terms": []
+        },
+        {
+          "id": "bare_valve_liquid_choked_limit",
+          "anchor_id": "bare_valve_liquid_choked_limit",
+          "statement": "Common bare-valve liquid choked pressure-drop limit는 FL²(P1-FF·Pv) 구조를 갖는다.",
+          "importance": "core",
+          "keywords": [
+            "bare valve choked limit",
+            "FL squared",
+            "P1 minus FF Pv",
+            "liquid choked pressure drop",
+            "capacity limit"
+          ],
+          "core_terms": [
+            "액체 초크한계",
+            "FL²",
+            "P1-FF·Pv",
+            "bare valve"
+          ],
+          "accepted_explanations": [
+            "Common bare-valve liquid choked pressure-drop limit는 FL²(P1-FF·Pv) 구조를 갖는다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Common bare-valve liquid choked pressure-drop limit는 FL²(P1-FF·Pv) 구조를 갖는다.",
+          "description": "bare_valve_liquid_choked_limit 계약을 평가한다.",
+          "name": "bare_valve_liquid_choked_limit",
+          "expected": "Common bare-valve liquid choked pressure-drop limit는 FL²(P1-FF·Pv) 구조를 갖는다.",
+          "support_terms": []
+        },
+        {
+          "id": "piping_geometry_factor_fp_liquid",
+          "anchor_id": "piping_geometry_factor_fp_liquid",
+          "statement": "Liquid sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+          "importance": "core",
+          "keywords": [
+            "piping geometry factor FP",
+            "reducer",
+            "expander",
+            "attached fitting",
+            "assembly capacity"
+          ],
+          "core_terms": [
+            "FP",
+            "리듀서",
+            "익스팬더",
+            "피팅 보정"
+          ],
+          "accepted_explanations": [
+            "Liquid sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Liquid sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+          "description": "piping_geometry_factor_fp_liquid 계약을 평가한다.",
+          "name": "piping_geometry_factor_fp_liquid",
+          "expected": "Liquid sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+          "support_terms": []
+        },
+        {
+          "id": "combined_recovery_factor_flp",
+          "anchor_id": "combined_recovery_factor_flp",
+          "statement": "FLP는 valve와 directly attached fittings의 combined pressure-recovery 특성을 나타낸다.",
+          "importance": "core",
+          "keywords": [
+            "combined recovery factor FLP",
+            "valve fittings assembly",
+            "pressure recovery",
+            "attached fittings",
+            "liquid service"
+          ],
+          "core_terms": [
+            "FLP",
+            "복합 압력회복",
+            "밸브·피팅 조립체",
+            "액체"
+          ],
+          "accepted_explanations": [
+            "FLP는 valve와 directly attached fittings의 combined pressure-recovery 특성을 나타낸다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "FLP는 valve와 directly attached fittings의 combined pressure-recovery 특성을 나타낸다.",
+          "description": "combined_recovery_factor_flp 계약을 평가한다.",
+          "name": "combined_recovery_factor_flp",
+          "expected": "FLP는 valve와 directly attached fittings의 combined pressure-recovery 특성을 나타낸다.",
+          "support_terms": []
+        },
+        {
+          "id": "fitting_adjusted_liquid_choked_limit",
+          "anchor_id": "fitting_adjusted_liquid_choked_limit",
+          "statement": "Common fitting-adjusted liquid choked limit는 (FLP/FP)²(P1-FF·Pv) 구조를 갖는다.",
+          "importance": "core",
+          "keywords": [
+            "fitting adjusted choked limit",
+            "FLP over FP squared",
+            "P1 minus FF Pv",
+            "liquid assembly",
+            "attached fittings"
+          ],
+          "core_terms": [
+            "피팅 보정 초크한계",
+            "FLP/FP",
+            "P1-FF·Pv",
+            "assembly"
+          ],
+          "accepted_explanations": [
+            "Common fitting-adjusted liquid choked limit는 (FLP/FP)²(P1-FF·Pv) 구조를 갖는다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Common fitting-adjusted liquid choked limit는 (FLP/FP)²(P1-FF·Pv) 구조를 갖는다.",
+          "description": "fitting_adjusted_liquid_choked_limit 계약을 평가한다.",
+          "name": "fitting_adjusted_liquid_choked_limit",
+          "expected": "Common fitting-adjusted liquid choked limit는 (FLP/FP)²(P1-FF·Pv) 구조를 갖는다.",
+          "support_terms": []
+        },
+        {
+          "id": "effective_liquid_sizing_pressure_drop",
+          "anchor_id": "effective_liquid_sizing_pressure_drop",
+          "statement": "Liquid sizing의 ΔPsizing은 actual pressure drop과 liquid choked limit 중 작은 값이다.",
+          "importance": "core",
+          "keywords": [
+            "effective sizing pressure drop",
+            "minimum selection",
+            "actual pressure drop",
+            "choked limit",
+            "delta P sizing"
+          ],
+          "core_terms": [
+            "ΔPsizing",
+            "작은 값 선택",
+            "actual ΔP",
+            "초크한계"
+          ],
+          "accepted_explanations": [
+            "Liquid sizing의 ΔPsizing은 actual pressure drop과 liquid choked limit 중 작은 값이다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Liquid sizing의 ΔPsizing은 actual pressure drop과 liquid choked limit 중 작은 값이다.",
+          "description": "effective_liquid_sizing_pressure_drop 계약을 평가한다.",
+          "name": "effective_liquid_sizing_pressure_drop",
+          "expected": "Liquid sizing의 ΔPsizing은 actual pressure drop과 liquid choked limit 중 작은 값이다.",
+          "support_terms": []
+        },
+        {
+          "id": "liquid_choked_flow_capacity_limit",
+          "anchor_id": "liquid_choked_flow_capacity_limit",
+          "statement": "Liquid choked flow는 downstream pressure 감소에 대한 flow 증가가 제한되는 capacity limit이다.",
+          "importance": "core",
+          "keywords": [
+            "liquid choked flow",
+            "capacity limit",
+            "downstream pressure",
+            "flow saturation",
+            "pressure drop limit"
+          ],
+          "core_terms": [
+            "액체 초크유동",
+            "유량한계",
+            "하류압력",
+            "capacity limit"
+          ],
+          "accepted_explanations": [
+            "Liquid choked flow는 downstream pressure 감소에 대한 flow 증가가 제한되는 capacity limit이다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Liquid choked flow는 downstream pressure 감소에 대한 flow 증가가 제한되는 capacity limit이다.",
+          "description": "liquid_choked_flow_capacity_limit 계약을 평가한다.",
+          "name": "liquid_choked_flow_capacity_limit",
+          "expected": "Liquid choked flow는 downstream pressure 감소에 대한 flow 증가가 제한되는 capacity limit이다.",
+          "support_terms": []
+        },
+        {
+          "id": "liquid_choked_flow_not_zero",
+          "anchor_id": "liquid_choked_flow_not_zero",
+          "statement": "Liquid choked flow는 유량이 정지하거나 0이 되는 상태가 아니다.",
+          "importance": "core",
+          "keywords": [
+            "choked flow not zero",
+            "flow continues",
+            "not blockage",
+            "capacity saturation",
+            "liquid flow"
+          ],
+          "core_terms": [
+            "0 유량 아님",
+            "유량정지 아님",
+            "초크",
+            "capacity"
+          ],
+          "accepted_explanations": [
+            "Liquid choked flow는 유량이 정지하거나 0이 되는 상태가 아니다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Liquid choked flow는 유량이 정지하거나 0이 되는 상태가 아니다.",
+          "description": "liquid_choked_flow_not_zero 계약을 평가한다.",
+          "name": "liquid_choked_flow_not_zero",
+          "expected": "Liquid choked flow는 유량이 정지하거나 0이 되는 상태가 아니다.",
+          "support_terms": []
+        },
+        {
+          "id": "cavitation_classification",
+          "anchor_id": "cavitation_classification",
+          "statement": "Pvc<Pv이고 P2>Pv이면 vapor bubble이 형성된 뒤 downstream pressure recovery로 collapse하는 cavitation이다.",
+          "importance": "core",
+          "keywords": [
+            "cavitation classification",
+            "Pvc below Pv",
+            "P2 above Pv",
+            "bubble collapse",
+            "pressure recovery"
+          ],
+          "core_terms": [
+            "캐비테이션",
+            "Pvc<Pv",
+            "P2>Pv",
+            "기포 붕괴"
+          ],
+          "accepted_explanations": [
+            "Pvc<Pv이고 P2>Pv이면 vapor bubble이 형성된 뒤 downstream pressure recovery로 collapse하는 cavitation이다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Pvc<Pv이고 P2>Pv이면 vapor bubble이 형성된 뒤 downstream pressure recovery로 collapse하는 cavitation이다.",
+          "description": "cavitation_classification 계약을 평가한다.",
+          "name": "cavitation_classification",
+          "expected": "Pvc<Pv이고 P2>Pv이면 vapor bubble이 형성된 뒤 downstream pressure recovery로 collapse하는 cavitation이다.",
+          "support_terms": []
+        },
+        {
+          "id": "flashing_classification",
+          "anchor_id": "flashing_classification",
+          "statement": "Pvc<Pv이고 P2≤Pv이면 vapor가 downstream까지 지속되는 flashing이다.",
+          "importance": "core",
+          "keywords": [
+            "flashing classification",
+            "Pvc below Pv",
+            "P2 at or below Pv",
+            "persistent vapor",
+            "two phase flow"
+          ],
+          "core_terms": [
+            "플래싱",
+            "P2≤Pv",
+            "지속 증기",
+            "2상 유동"
+          ],
+          "accepted_explanations": [
+            "Pvc<Pv이고 P2≤Pv이면 vapor가 downstream까지 지속되는 flashing이다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Pvc<Pv이고 P2≤Pv이면 vapor가 downstream까지 지속되는 flashing이다.",
+          "description": "flashing_classification 계약을 평가한다.",
+          "name": "flashing_classification",
+          "expected": "Pvc<Pv이고 P2≤Pv이면 vapor가 downstream까지 지속되는 flashing이다.",
+          "support_terms": []
+        },
+        {
+          "id": "cavitation_flashing_commonality",
+          "anchor_id": "cavitation_flashing_commonality",
+          "statement": "Cavitation과 flashing은 모두 Pvc<Pv에서 local vapor formation이 시작된다는 공통점이 있다.",
+          "importance": "core",
+          "keywords": [
+            "cavitation flashing commonality",
+            "local vapor formation",
+            "Pvc below Pv",
+            "phase change",
+            "bubble formation"
+          ],
+          "core_terms": [
+            "공통점",
+            "Pvc<Pv",
+            "국부 증기화",
+            "기포 생성"
+          ],
+          "accepted_explanations": [
+            "Cavitation과 flashing은 모두 Pvc<Pv에서 local vapor formation이 시작된다는 공통점이 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Cavitation과 flashing은 모두 Pvc<Pv에서 local vapor formation이 시작된다는 공통점이 있다.",
+          "description": "cavitation_flashing_commonality 계약을 평가한다.",
+          "name": "cavitation_flashing_commonality",
+          "expected": "Cavitation과 flashing은 모두 Pvc<Pv에서 local vapor formation이 시작된다는 공통점이 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "cavitation_flashing_difference",
+          "anchor_id": "cavitation_flashing_difference",
+          "statement": "Cavitation은 pressure recovery에 의한 bubble collapse가 핵심이고 flashing은 persistent downstream vapor flow가 핵심이다.",
+          "importance": "core",
+          "keywords": [
+            "cavitation flashing difference",
+            "bubble collapse",
+            "persistent vapor",
+            "pressure recovery",
+            "downstream phase"
+          ],
+          "core_terms": [
+            "기포 붕괴",
+            "지속 증기",
+            "현상 차이",
+            "하류 상"
+          ],
+          "accepted_explanations": [
+            "Cavitation은 pressure recovery에 의한 bubble collapse가 핵심이고 flashing은 persistent downstream vapor flow가 핵심이다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Cavitation은 pressure recovery에 의한 bubble collapse가 핵심이고 flashing은 persistent downstream vapor flow가 핵심이다.",
+          "description": "cavitation_flashing_difference 계약을 평가한다.",
+          "name": "cavitation_flashing_difference",
+          "expected": "Cavitation은 pressure recovery에 의한 bubble collapse가 핵심이고 flashing은 persistent downstream vapor flow가 핵심이다.",
+          "support_terms": []
+        },
+        {
+          "id": "cavitation_inception_development_damage_levels",
+          "anchor_id": "cavitation_inception_development_damage_levels",
+          "statement": "Incipient, developed와 damaging cavitation은 service와 vendor 기준에 따라 조건부로 구분하며 하나의 universal threshold로 고정하지 않는다.",
+          "importance": "important",
+          "keywords": [
+            "incipient cavitation",
+            "developed cavitation",
+            "damaging cavitation",
+            "conditional threshold",
+            "vendor criterion"
+          ],
+          "core_terms": [
+            "초기 캐비테이션",
+            "발달 캐비테이션",
+            "손상성 캐비테이션",
+            "조건부 기준"
+          ],
+          "accepted_explanations": [
+            "Incipient, developed와 damaging cavitation은 service와 vendor 기준에 따라 조건부로 구분하며 하나의 universal threshold로 고정하지 않는다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Incipient, developed와 damaging cavitation은 service와 vendor 기준에 따라 조건부로 구분하며 하나의 universal threshold로 고정하지 않는다.",
+          "description": "cavitation_inception_development_damage_levels 계약을 평가한다.",
+          "name": "cavitation_inception_development_damage_levels",
+          "expected": "Incipient, developed와 damaging cavitation은 service와 vendor 기준에 따라 조건부로 구분하며 하나의 universal threshold로 고정하지 않는다.",
+          "support_terms": []
+        },
+        {
+          "id": "cavitation_damage_mechanism",
+          "anchor_id": "cavitation_damage_mechanism",
+          "statement": "Cavitation bubble collapse는 local microjet와 shock pressure를 만들어 pitting, vibration, erosion과 trim·body damage를 유발할 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "cavitation damage",
+            "microjet",
+            "shock pressure",
+            "pitting erosion",
+            "trim body damage"
+          ],
+          "core_terms": [
+            "microjet",
+            "충격압",
+            "피팅",
+            "침식 손상"
+          ],
+          "accepted_explanations": [
+            "Cavitation bubble collapse는 local microjet와 shock pressure를 만들어 pitting, vibration, erosion과 trim·body damage를 유발할 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Cavitation bubble collapse는 local microjet와 shock pressure를 만들어 pitting, vibration, erosion과 trim·body damage를 유발할 수 있다.",
+          "description": "cavitation_damage_mechanism 계약을 평가한다.",
+          "name": "cavitation_damage_mechanism",
+          "expected": "Cavitation bubble collapse는 local microjet와 shock pressure를 만들어 pitting, vibration, erosion과 trim·body damage를 유발할 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "flashing_damage_mechanism",
+          "anchor_id": "flashing_damage_mechanism",
+          "statement": "Flashing은 persistent two-phase high-velocity jet와 liquid-droplet impact에 의해 downstream erosion을 유발할 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "flashing damage",
+            "two phase high velocity",
+            "droplet impact",
+            "downstream erosion",
+            "persistent vapor"
+          ],
+          "core_terms": [
+            "2상 고속제트",
+            "액적 충돌",
+            "하류 침식",
+            "플래싱 손상"
+          ],
+          "accepted_explanations": [
+            "Flashing은 persistent two-phase high-velocity jet와 liquid-droplet impact에 의해 downstream erosion을 유발할 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Flashing은 persistent two-phase high-velocity jet와 liquid-droplet impact에 의해 downstream erosion을 유발할 수 있다.",
+          "description": "flashing_damage_mechanism 계약을 평가한다.",
+          "name": "flashing_damage_mechanism",
+          "expected": "Flashing은 persistent two-phase high-velocity jet와 liquid-droplet impact에 의해 downstream erosion을 유발할 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "choked_vapor_damage_axes_separated",
+          "anchor_id": "choked_vapor_damage_axes_separated",
+          "statement": "Choked 여부, vapor formation 여부와 physical damage severity는 서로 다른 판정축이다.",
+          "importance": "core",
+          "keywords": [
+            "axis separation",
+            "choked condition",
+            "vapor formation",
+            "damage severity",
+            "independent assessment"
+          ],
+          "core_terms": [
+            "판정축 분리",
+            "초크",
+            "증기화",
+            "손상도"
+          ],
+          "accepted_explanations": [
+            "Choked 여부, vapor formation 여부와 physical damage severity는 서로 다른 판정축이다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Choked 여부, vapor formation 여부와 physical damage severity는 서로 다른 판정축이다.",
+          "description": "choked_vapor_damage_axes_separated 계약을 평가한다.",
+          "name": "choked_vapor_damage_axes_separated",
+          "expected": "Choked 여부, vapor formation 여부와 physical damage severity는 서로 다른 판정축이다.",
+          "support_terms": []
+        },
+        {
+          "id": "liquid_phase_change_operating_cases",
+          "anchor_id": "liquid_phase_change_operating_cases",
+          "statement": "Minimum·normal·maximum 및 startup·shutdown의 pressure와 temperature case를 각각 검토한다.",
+          "importance": "core",
+          "keywords": [
+            "minimum normal maximum",
+            "startup shutdown",
+            "pressure cases",
+            "temperature cases",
+            "liquid phase change"
+          ],
+          "core_terms": [
+            "최소·정상·최대",
+            "기동·정지",
+            "압력조건",
+            "온도조건"
+          ],
+          "accepted_explanations": [
+            "Minimum·normal·maximum 및 startup·shutdown의 pressure와 temperature case를 각각 검토한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Minimum·normal·maximum 및 startup·shutdown의 pressure와 temperature case를 각각 검토한다.",
+          "description": "liquid_phase_change_operating_cases 계약을 평가한다.",
+          "name": "liquid_phase_change_operating_cases",
+          "expected": "Minimum·normal·maximum 및 startup·shutdown의 pressure와 temperature case를 각각 검토한다.",
+          "support_terms": []
+        },
+        {
+          "id": "increase_downstream_pressure_prevention",
+          "anchor_id": "increase_downstream_pressure_prevention",
+          "statement": "Process에서 가능한 경우 downstream pressure를 높이면 bubble collapse risk를 줄이거나 vapor formation margin을 개선할 수 있다.",
+          "importance": "important",
+          "keywords": [
+            "increase downstream pressure",
+            "cavitation prevention",
+            "pressure recovery",
+            "process feasibility",
+            "vapor margin"
+          ],
+          "core_terms": [
+            "하류압력 증가",
+            "예방대책",
+            "공정 가능성",
+            "증기화 여유"
+          ],
+          "accepted_explanations": [
+            "Process에서 가능한 경우 downstream pressure를 높이면 bubble collapse risk를 줄이거나 vapor formation margin을 개선할 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Process에서 가능한 경우 downstream pressure를 높이면 bubble collapse risk를 줄이거나 vapor formation margin을 개선할 수 있다.",
+          "description": "increase_downstream_pressure_prevention 계약을 평가한다.",
+          "name": "increase_downstream_pressure_prevention",
+          "expected": "Process에서 가능한 경우 downstream pressure를 높이면 bubble collapse risk를 줄이거나 vapor formation margin을 개선할 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "reduce_liquid_temperature_prevention",
+          "anchor_id": "reduce_liquid_temperature_prevention",
+          "statement": "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+          "importance": "important",
+          "keywords": [
+            "reduce liquid temperature",
+            "lower vapor pressure",
+            "cavitation margin",
+            "flashing margin",
+            "cooling"
+          ],
+          "core_terms": [
+            "온도 저하",
+            "Pv 감소",
+            "캐비테이션 여유",
+            "플래싱 여유"
+          ],
+          "accepted_explanations": [
+            "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+          "description": "reduce_liquid_temperature_prevention 계약을 평가한다.",
+          "name": "reduce_liquid_temperature_prevention",
+          "expected": "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "reduce_total_pressure_drop_prevention",
+          "anchor_id": "reduce_total_pressure_drop_prevention",
+          "statement": "Valve across total pressure drop을 줄이면 vena-contracta pressure 저하와 liquid choked 가능성을 줄일 수 있다.",
+          "importance": "important",
+          "keywords": [
+            "reduce total pressure drop",
+            "vena contracta pressure",
+            "liquid choke prevention",
+            "process modification",
+            "valve differential"
+          ],
+          "core_terms": [
+            "차압 감소",
+            "Pvc 저하 완화",
+            "초크 예방",
+            "공정 변경"
+          ],
+          "accepted_explanations": [
+            "Valve across total pressure drop을 줄이면 vena-contracta pressure 저하와 liquid choked 가능성을 줄일 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Valve across total pressure drop을 줄이면 vena-contracta pressure 저하와 liquid choked 가능성을 줄일 수 있다.",
+          "description": "reduce_total_pressure_drop_prevention 계약을 평가한다.",
+          "name": "reduce_total_pressure_drop_prevention",
+          "expected": "Valve across total pressure drop을 줄이면 vena-contracta pressure 저하와 liquid choked 가능성을 줄일 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "pressure_drop_staging_prevention",
+          "anchor_id": "pressure_drop_staging_prevention",
+          "statement": "Series restriction 또는 multi-stage trim으로 pressure drop을 분할하면 각 stage의 local pressure가 Pv 아래로 과도하게 떨어지는 것을 줄일 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "pressure drop staging",
+            "multi stage trim",
+            "series restriction",
+            "local pressure",
+            "anti cavitation"
+          ],
+          "core_terms": [
+            "다단 감압",
+            "multi-stage trim",
+            "series restriction",
+            "국부압력"
+          ],
+          "accepted_explanations": [
+            "Series restriction 또는 multi-stage trim으로 pressure drop을 분할하면 각 stage의 local pressure가 Pv 아래로 과도하게 떨어지는 것을 줄일 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Series restriction 또는 multi-stage trim으로 pressure drop을 분할하면 각 stage의 local pressure가 Pv 아래로 과도하게 떨어지는 것을 줄일 수 있다.",
+          "description": "pressure_drop_staging_prevention 계약을 평가한다.",
+          "name": "pressure_drop_staging_prevention",
+          "expected": "Series restriction 또는 multi-stage trim으로 pressure drop을 분할하면 각 stage의 local pressure가 Pv 아래로 과도하게 떨어지는 것을 줄일 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "higher_fl_low_recovery_selection",
+          "anchor_id": "higher_fl_low_recovery_selection",
+          "statement": "Higher FL의 low-recovery valve·trim은 동일 process condition에서 cavitation resistance를 높일 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "higher FL",
+            "low recovery trim",
+            "cavitation resistance",
+            "valve selection",
+            "pressure recovery"
+          ],
+          "core_terms": [
+            "높은 FL",
+            "저회복 트림",
+            "내캐비테이션성",
+            "선정"
+          ],
+          "accepted_explanations": [
+            "Higher FL의 low-recovery valve·trim은 동일 process condition에서 cavitation resistance를 높일 수 있다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Higher FL의 low-recovery valve·trim은 동일 process condition에서 cavitation resistance를 높일 수 있다.",
+          "description": "higher_fl_low_recovery_selection 계약을 평가한다.",
+          "name": "higher_fl_low_recovery_selection",
+          "expected": "Higher FL의 low-recovery valve·trim은 동일 process condition에서 cavitation resistance를 높일 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "flashing_service_geometry_location",
+          "anchor_id": "flashing_service_geometry_location",
+          "statement": "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+          "importance": "important",
+          "keywords": [
+            "flashing service geometry",
+            "valve location",
+            "outlet geometry",
+            "downstream pipe size",
+            "erosion path"
+          ],
+          "core_terms": [
+            "밸브 위치",
+            "출구 형상",
+            "하류 배관",
+            "침식 경로"
+          ],
+          "accepted_explanations": [
+            "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+          "description": "flashing_service_geometry_location 계약을 평가한다.",
+          "name": "flashing_service_geometry_location",
+          "expected": "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+          "support_terms": []
+        },
+        {
+          "id": "anti_cavitation_trim_not_flashing_cure",
+          "anchor_id": "anti_cavitation_trim_not_flashing_cure",
+          "statement": "Anti-cavitation trim은 pressure drop을 분할해 cavitation을 억제하지만 이미 지속되는 flashing vapor를 재응축하는 장치가 아니다.",
+          "importance": "core",
+          "keywords": [
+            "anti cavitation trim",
+            "pressure drop staging",
+            "not flashing cure",
+            "not recondensation",
+            "persistent vapor"
+          ],
+          "core_terms": [
+            "anti-cavitation trim",
+            "플래싱 치료 아님",
+            "재응축 아님",
+            "다단 감압"
+          ],
+          "accepted_explanations": [
+            "Anti-cavitation trim은 pressure drop을 분할해 cavitation을 억제하지만 이미 지속되는 flashing vapor를 재응축하는 장치가 아니다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Anti-cavitation trim은 pressure drop을 분할해 cavitation을 억제하지만 이미 지속되는 flashing vapor를 재응축하는 장치가 아니다.",
+          "description": "anti_cavitation_trim_not_flashing_cure 계약을 평가한다.",
+          "name": "anti_cavitation_trim_not_flashing_cure",
+          "expected": "Anti-cavitation trim은 pressure drop을 분할해 cavitation을 억제하지만 이미 지속되는 flashing vapor를 재응축하는 장치가 아니다.",
+          "support_terms": []
+        },
+        {
+          "id": "vendor_crosscheck_liquid_phase_change",
+          "anchor_id": "vendor_crosscheck_liquid_phase_change",
+          "statement": "Vendor result는 Pv, Pc, FF, FL, FP, FLP, selected travel, pressure cases와 hand calculation으로 교차 검증한다.",
+          "importance": "important",
+          "keywords": [
+            "vendor cavitation sizing",
+            "hand calculation",
+            "Pv Pc FF",
+            "FL FP FLP",
+            "selected travel"
+          ],
+          "core_terms": [
+            "Vendor 결과",
+            "수계산",
+            "선정 개도",
+            "입력 검증"
+          ],
+          "accepted_explanations": [
+            "Vendor result는 Pv, Pc, FF, FL, FP, FLP, selected travel, pressure cases와 hand calculation으로 교차 검증한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Vendor result는 Pv, Pc, FF, FL, FP, FLP, selected travel, pressure cases와 hand calculation으로 교차 검증한다.",
+          "description": "vendor_crosscheck_liquid_phase_change 계약을 평가한다.",
+          "name": "vendor_crosscheck_liquid_phase_change",
+          "expected": "Vendor result는 Pv, Pc, FF, FL, FP, FLP, selected travel, pressure cases와 hand calculation으로 교차 검증한다.",
+          "support_terms": []
+        },
+        {
+          "id": "topic9_topic14_handoff",
+          "anchor_id": "topic9_topic14_handoff",
+          "statement": "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다.",
+          "importance": "important",
+          "keywords": [
+            "Topic 9 hydrodynamic noise",
+            "Topic 14 material",
+            "hardfacing",
+            "severe service",
+            "scope handoff"
+          ],
+          "core_terms": [
+            "Topic 9",
+            "Topic 14",
+            "수력소음",
+            "재질 경계"
+          ],
+          "accepted_explanations": [
+            "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다.",
+            "Pressure profile, absolute pressure basis, 적용조건과 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Pressure-recovery 방향, phase classification, choked-limit 선택 또는 적용 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "P1→Pvc→P2→Pv·Pc→FF→FL·FP·FLP→liquid choked limit→cavitation·flashing classification→damage→prevention의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_cavitation_flashing_choked_flow_damage_prevention.md; Control Valve Handbook liquid sizing and cavitation/flashing sections; Control Valve Primer cavitation and flashing sections; gemini_script/20260804_topic08_cavitation_flashing_requirements.md.",
+          "claim": "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다.",
+          "description": "topic9_topic14_handoff 계약을 평가한다.",
+          "name": "topic9_topic14_handoff",
+          "expected": "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다.",
+          "support_terms": []
+        }
+      ],
+      "fatal_wrong_claims": [
+        {
+          "id": "control_valve_liquid_use_gauge_pressure_for_phase_change",
+          "claim": "Gauge pressure를 그대로 P1, P2, Pv 또는 Pc에 사용한다.",
+          "correction": "P1, P2, Pvc, Pv와 Pc는 absolute pressure로 변환하고 동일 unit을 사용한다.",
+          "wrong_claim": "Gauge pressure를 그대로 P1, P2, Pv 또는 Pc에 사용한다.",
+          "correct_rule": "P1, P2, Pvc, Pv와 Pc는 absolute pressure로 변환하고 동일 unit을 사용한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Gauge pressure를 그대로 P1, P2, Pv 또는 Pc에 사용한다.",
+          "description": "P1, P2, Pvc, Pv와 Pc는 absolute pressure로 변환하고 동일 unit을 사용한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_vapor_pressure_independent_of_temperature",
+          "claim": "Liquid vapor pressure는 temperature와 무관하다.",
+          "correction": "Pv는 operating temperature에서 다시 확인한다.",
+          "wrong_claim": "Liquid vapor pressure는 temperature와 무관하다.",
+          "correct_rule": "Pv는 operating temperature에서 다시 확인한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Liquid vapor pressure는 temperature와 무관하다.",
+          "description": "Pv는 operating temperature에서 다시 확인한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_critical_pressure_equals_vapor_pressure",
+          "claim": "Thermodynamic critical pressure Pc와 operating vapor pressure Pv는 같은 값이다.",
+          "correction": "Pc와 Pv는 서로 다른 thermodynamic property이다.",
+          "wrong_claim": "Thermodynamic critical pressure Pc와 operating vapor pressure Pv는 같은 값이다.",
+          "correct_rule": "Pc와 Pv는 서로 다른 thermodynamic property이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Thermodynamic critical pressure Pc와 operating vapor pressure Pv는 같은 값이다.",
+          "description": "Pc와 Pv는 서로 다른 thermodynamic property이다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_lower_fl_means_lower_pressure_recovery",
+          "claim": "낮은 FL은 pressure recovery가 작다는 뜻이다.",
+          "correction": "낮은 FL은 일반적으로 큰 pressure recovery와 더 낮은 Pvc를 의미한다.",
+          "wrong_claim": "낮은 FL은 pressure recovery가 작다는 뜻이다.",
+          "correct_rule": "낮은 FL은 일반적으로 큰 pressure recovery와 더 낮은 Pvc를 의미한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: 낮은 FL은 pressure recovery가 작다는 뜻이다.",
+          "description": "낮은 FL은 일반적으로 큰 pressure recovery와 더 낮은 Pvc를 의미한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_fl_universal_constant",
+          "claim": "FL은 모든 valve style, trim과 travel에 동일한 universal constant이다.",
+          "correction": "FL은 manufacturer data와 style·trim·flow direction·travel을 확인한다.",
+          "wrong_claim": "FL은 모든 valve style, trim과 travel에 동일한 universal constant이다.",
+          "correct_rule": "FL은 manufacturer data와 style·trim·flow direction·travel을 확인한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: FL은 모든 valve style, trim과 travel에 동일한 universal constant이다.",
+          "description": "FL은 manufacturer data와 style·trim·flow direction·travel을 확인한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_flp_always_equals_fl_with_fittings",
+          "claim": "Reducer 또는 expander가 있어도 항상 FLP=FL이고 FP=1이다.",
+          "correction": "Attached fittings가 있으면 FP와 FLP를 검토한다.",
+          "wrong_claim": "Reducer 또는 expander가 있어도 항상 FLP=FL이고 FP=1이다.",
+          "correct_rule": "Attached fittings가 있으면 FP와 FLP를 검토한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Reducer 또는 expander가 있어도 항상 FLP=FL이고 FP=1이다.",
+          "description": "Attached fittings가 있으면 FP와 FLP를 검토한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_liquid_use_max_actual_choked_drop",
+          "claim": "Liquid sizing에 actual pressure drop과 choked limit 중 큰 값을 사용한다.",
+          "correction": "ΔPsizing은 actual pressure drop과 choked limit 중 작은 값이다.",
+          "wrong_claim": "Liquid sizing에 actual pressure drop과 choked limit 중 큰 값을 사용한다.",
+          "correct_rule": "ΔPsizing은 actual pressure drop과 choked limit 중 작은 값이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Liquid sizing에 actual pressure drop과 choked limit 중 큰 값을 사용한다.",
+          "description": "ΔPsizing은 actual pressure drop과 choked limit 중 작은 값이다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_liquid_choked_means_zero_flow",
+          "claim": "Liquid choked flow는 유량이 막혀 0이 되는 상태이다.",
+          "correction": "Liquid choked flow는 capacity limit이며 유량 정지가 아니다.",
+          "wrong_claim": "Liquid choked flow는 유량이 막혀 0이 되는 상태이다.",
+          "correct_rule": "Liquid choked flow는 capacity limit이며 유량 정지가 아니다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Liquid choked flow는 유량이 막혀 0이 되는 상태이다.",
+          "description": "Liquid choked flow는 capacity limit이며 유량 정지가 아니다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_liquid_choked_flow_increases_indefinitely",
+          "claim": "Choked limit 이후 P2를 낮추면 flow가 계속 비례 증가한다.",
+          "correction": "Choked 이후 effective sizing pressure drop은 limit에 고정된다.",
+          "wrong_claim": "Choked limit 이후 P2를 낮추면 flow가 계속 비례 증가한다.",
+          "correct_rule": "Choked 이후 effective sizing pressure drop은 limit에 고정된다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Choked limit 이후 P2를 낮추면 flow가 계속 비례 증가한다.",
+          "description": "Choked 이후 effective sizing pressure drop은 limit에 고정된다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_cavitation_defined_by_p2_below_pv",
+          "claim": "P2≤Pv이면 bubble-collapse cavitation이라고만 판정한다.",
+          "correction": "Pvc<Pv이고 P2>Pv이면 cavitation이며 P2≤Pv이면 flashing이다.",
+          "wrong_claim": "P2≤Pv이면 bubble-collapse cavitation이라고만 판정한다.",
+          "correct_rule": "Pvc<Pv이고 P2>Pv이면 cavitation이며 P2≤Pv이면 flashing이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: P2≤Pv이면 bubble-collapse cavitation이라고만 판정한다.",
+          "description": "Pvc<Pv이고 P2>Pv이면 cavitation이며 P2≤Pv이면 flashing이다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_flashing_means_bubble_collapse",
+          "claim": "Flashing의 핵심은 downstream bubble collapse이다.",
+          "correction": "Flashing은 persistent downstream vapor와 two-phase flow가 핵심이다.",
+          "wrong_claim": "Flashing의 핵심은 downstream bubble collapse이다.",
+          "correct_rule": "Flashing은 persistent downstream vapor와 two-phase flow가 핵심이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Flashing의 핵심은 downstream bubble collapse이다.",
+          "description": "Flashing은 persistent downstream vapor와 two-phase flow가 핵심이다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_cavitation_flashing_identical",
+          "claim": "Cavitation과 flashing은 pressure recovery와 downstream phase에 관계없이 동일하다.",
+          "correction": "P2와 Pv 관계로 collapse cavitation과 persistent flashing을 구분한다.",
+          "wrong_claim": "Cavitation과 flashing은 pressure recovery와 downstream phase에 관계없이 동일하다.",
+          "correct_rule": "P2와 Pv 관계로 collapse cavitation과 persistent flashing을 구분한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Cavitation과 flashing은 pressure recovery와 downstream phase에 관계없이 동일하다.",
+          "description": "P2와 Pv 관계로 collapse cavitation과 persistent flashing을 구분한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_all_cavitation_immediate_severe_damage",
+          "claim": "Cavitation이 발생하면 모든 service에서 즉시 severe material damage가 발생한다.",
+          "correction": "Inception, development와 damaging cavitation을 service 조건에 따라 구분한다.",
+          "wrong_claim": "Cavitation이 발생하면 모든 service에서 즉시 severe material damage가 발생한다.",
+          "correct_rule": "Inception, development와 damaging cavitation을 service 조건에 따라 구분한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Cavitation이 발생하면 모든 service에서 즉시 severe material damage가 발생한다.",
+          "description": "Inception, development와 damaging cavitation을 service 조건에 따라 구분한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_all_liquid_choked_flow_is_damaging_cavitation",
+          "claim": "Liquid choked flow이면 항상 damaging cavitation이다.",
+          "correction": "Choked condition, vapor formation과 damage severity를 별도로 판정한다.",
+          "wrong_claim": "Liquid choked flow이면 항상 damaging cavitation이다.",
+          "correct_rule": "Choked condition, vapor formation과 damage severity를 별도로 판정한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Liquid choked flow이면 항상 damaging cavitation이다.",
+          "description": "Choked condition, vapor formation과 damage severity를 별도로 판정한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_flashing_always_collapses_downstream",
+          "claim": "Flashing vapor는 downstream에서 반드시 collapse한다.",
+          "correction": "P2≤Pv가 유지되면 vapor가 downstream까지 지속될 수 있다.",
+          "wrong_claim": "Flashing vapor는 downstream에서 반드시 collapse한다.",
+          "correct_rule": "P2≤Pv가 유지되면 vapor가 downstream까지 지속될 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Flashing vapor는 downstream에서 반드시 collapse한다.",
+          "description": "P2≤Pv가 유지되면 vapor가 downstream까지 지속될 수 있다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_anti_cavitation_trim_recondenses_flashing",
+          "claim": "Anti-cavitation trim이 flashing vapor를 liquid로 재응축한다.",
+          "correction": "Anti-cavitation trim은 pressure-drop staging 장치이며 flashing 재응축 장치가 아니다.",
+          "wrong_claim": "Anti-cavitation trim이 flashing vapor를 liquid로 재응축한다.",
+          "correct_rule": "Anti-cavitation trim은 pressure-drop staging 장치이며 flashing 재응축 장치가 아니다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Anti-cavitation trim이 flashing vapor를 liquid로 재응축한다.",
+          "description": "Anti-cavitation trim은 pressure-drop staging 장치이며 flashing 재응축 장치가 아니다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_larger_valve_always_solves_cavitation",
+          "claim": "Valve size를 키우기만 하면 cavitation과 flashing이 항상 해결된다.",
+          "correction": "Pressure profile, FL, travel, geometry와 process condition을 함께 검토한다.",
+          "wrong_claim": "Valve size를 키우기만 하면 cavitation과 flashing이 항상 해결된다.",
+          "correct_rule": "Pressure profile, FL, travel, geometry와 process condition을 함께 검토한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Valve size를 키우기만 하면 cavitation과 flashing이 항상 해결된다.",
+          "description": "Pressure profile, FL, travel, geometry와 process condition을 함께 검토한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_hard_material_alone_prevents_phase_change_damage",
+          "claim": "Hard material만 적용하면 pressure profile을 바꾸지 않아도 cavitation·flashing 손상이 예방된다.",
+          "correction": "Material은 damage resistance를 높일 뿐 phase-change 원인을 제거하지 않는다.",
+          "wrong_claim": "Hard material만 적용하면 pressure profile을 바꾸지 않아도 cavitation·flashing 손상이 예방된다.",
+          "correct_rule": "Material은 damage resistance를 높일 뿐 phase-change 원인을 제거하지 않는다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Hard material만 적용하면 pressure profile을 바꾸지 않아도 cavitation·flashing 손상이 예방된다.",
+          "description": "Material은 damage resistance를 높일 뿐 phase-change 원인을 제거하지 않는다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_use_gas_xt_y_formula_for_liquid_choke",
+          "claim": "Liquid choked flow에 gas xT, Fγ와 Y 식을 그대로 적용한다.",
+          "correction": "Liquid choked flow는 FF, FL 또는 fitting-adjusted FLP·FP relation을 사용한다.",
+          "wrong_claim": "Liquid choked flow에 gas xT, Fγ와 Y 식을 그대로 적용한다.",
+          "correct_rule": "Liquid choked flow는 FF, FL 또는 fitting-adjusted FLP·FP relation을 사용한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Liquid choked flow에 gas xT, Fγ와 Y 식을 그대로 적용한다.",
+          "description": "Liquid choked flow는 FF, FL 또는 fitting-adjusted FLP·FP relation을 사용한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_single_normal_case_sufficient_for_cavitation",
+          "claim": "Normal operating point 한 점만 검토하면 startup·shutdown과 minimum·maximum case는 필요 없다.",
+          "correction": "Minimum·normal·maximum 및 startup·shutdown condition을 각각 검토한다.",
+          "wrong_claim": "Normal operating point 한 점만 검토하면 startup·shutdown과 minimum·maximum case는 필요 없다.",
+          "correct_rule": "Minimum·normal·maximum 및 startup·shutdown condition을 각각 검토한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "액체 phase-change sizing 핵심 오류: Normal operating point 한 점만 검토하면 startup·shutdown과 minimum·maximum case는 필요 없다.",
+          "description": "Minimum·normal·maximum 및 startup·shutdown condition을 각각 검토한다.",
+          "grading_notes": "오답 예시 인용이 아니라 실제 주장인지 문맥을 확인한 후 fatal로 판단한다."
+        }
+      ],
+      "safe_expressions": [
+        "P1, P2, Pvc, Pv와 Pc는 absolute pressure를 사용한다.",
+        "Pv는 operating temperature에서 확인한다.",
+        "Valve restriction에서 vena-contracta pressure가 형성된다.",
+        "FL은 pressure-recovery factor이다.",
+        "낮은 FL은 큰 pressure recovery를 의미한다.",
+        "FL은 style, trim과 travel에 의존할 수 있다.",
+        "Common relation에서 FF는 Pv/Pc 함수이다.",
+        "Attached fittings가 있으면 FP와 FLP를 검토한다.",
+        "Liquid sizing pressure drop은 actual과 choked limit 중 작은 값을 사용한다.",
+        "Liquid choked flow는 zero flow가 아니다.",
+        "Pvc<Pv이면 vapor formation이 시작될 수 있다.",
+        "Pvc<Pv이고 P2>Pv이면 cavitation이다.",
+        "Pvc<Pv이고 P2≤Pv이면 flashing이다.",
+        "Cavitation은 bubble collapse와 연계된다.",
+        "Flashing은 persistent two-phase flow와 연계된다.",
+        "Choked flow와 material damage severity를 분리한다.",
+        "Cavitation inception과 damaging cavitation을 조건부로 구분한다.",
+        "Downstream pressure 증가가 가능한 경우 예방대책이 될 수 있다.",
+        "Temperature 저하는 Pv를 낮출 수 있다.",
+        "Pressure-drop split은 local pressure 저하를 완화할 수 있다.",
+        "Higher FL trim은 cavitation resistance를 높일 수 있다.",
+        "Anti-cavitation trim은 flashing vapor 재응축 장치가 아니다.",
+        "Flashing service에서는 downstream erosion path를 검토한다.",
+        "Hydrodynamic-noise 상세는 Topic 9에서 검토한다.",
+        "Material·hardfacing 상세는 Topic 14에서 검토한다.",
+        "Vendor result를 hand calculation으로 교차 확인한다."
+      ],
+      "revision_notes": [
+        "Liquid pressure profile과 absolute-pressure basis를 추가했다.",
+        "FF, FL, FP, FLP와 liquid choked-limit 계약을 추가했다.",
+        "Cavitation·flashing classification과 damage-prevention 경계를 추가했다."
+      ],
+      "topic_label": "액체 캐비테이션·플래싱·초크 유동",
+      "core_facts": [
+        "Liquid control valve의 cavitation·flashing·choked-flow 해석은 P1, Pvc, P2, Pv와 Pc의 pressure relation에서 시작한다.",
+        "P1, P2, Pvc, Pv와 Pc는 absolute pressure와 동일 pressure unit을 사용한다.",
+        "Pv는 operating temperature에서의 liquid vapor pressure이며 temperature가 변하면 다시 확인한다.",
+        "Pc는 liquid의 thermodynamic critical pressure이며 valve pressure-recovery coefficient가 아니다.",
+        "Valve restriction을 통과한 liquid의 minimum local pressure는 vena contracta 부근의 Pvc로 표현한다.",
+        "Pvc가 Pv보다 낮으면 local vapor formation이 시작될 수 있다.",
+        "Vena contracta 이후 일부 kinetic energy가 static pressure로 회복되어 pressure가 P2까지 상승한다.",
+        "FL은 bare valve의 pressure-recovery 특성을 나타내는 manufacturer coefficient이다.",
+        "낮은 FL은 큰 pressure recovery와 더 낮은 Pvc를 의미할 수 있으므로 cavitation susceptibility를 높일 수 있다.",
+        "FL은 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+        "Common relation의 FF는 Pv/Pc 함수이며 thermodynamic critical-pressure effect를 보정한다.",
+        "Common bare-valve liquid choked pressure-drop limit는 FL²(P1-FF·Pv) 구조를 갖는다.",
+        "Liquid sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+        "FLP는 valve와 directly attached fittings의 combined pressure-recovery 특성을 나타낸다.",
+        "Common fitting-adjusted liquid choked limit는 (FLP/FP)²(P1-FF·Pv) 구조를 갖는다.",
+        "Liquid sizing의 ΔPsizing은 actual pressure drop과 liquid choked limit 중 작은 값이다.",
+        "Liquid choked flow는 downstream pressure 감소에 대한 flow 증가가 제한되는 capacity limit이다.",
+        "Liquid choked flow는 유량이 정지하거나 0이 되는 상태가 아니다.",
+        "Pvc<Pv이고 P2>Pv이면 vapor bubble이 형성된 뒤 downstream pressure recovery로 collapse하는 cavitation이다.",
+        "Pvc<Pv이고 P2≤Pv이면 vapor가 downstream까지 지속되는 flashing이다.",
+        "Cavitation과 flashing은 모두 Pvc<Pv에서 local vapor formation이 시작된다는 공통점이 있다.",
+        "Cavitation은 pressure recovery에 의한 bubble collapse가 핵심이고 flashing은 persistent downstream vapor flow가 핵심이다.",
+        "Incipient, developed와 damaging cavitation은 service와 vendor 기준에 따라 조건부로 구분하며 하나의 universal threshold로 고정하지 않는다.",
+        "Cavitation bubble collapse는 local microjet와 shock pressure를 만들어 pitting, vibration, erosion과 trim·body damage를 유발할 수 있다.",
+        "Flashing은 persistent two-phase high-velocity jet와 liquid-droplet impact에 의해 downstream erosion을 유발할 수 있다.",
+        "Choked 여부, vapor formation 여부와 physical damage severity는 서로 다른 판정축이다.",
+        "Minimum·normal·maximum 및 startup·shutdown의 pressure와 temperature case를 각각 검토한다.",
+        "Process에서 가능한 경우 downstream pressure를 높이면 bubble collapse risk를 줄이거나 vapor formation margin을 개선할 수 있다.",
+        "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+        "Valve across total pressure drop을 줄이면 vena-contracta pressure 저하와 liquid choked 가능성을 줄일 수 있다.",
+        "Series restriction 또는 multi-stage trim으로 pressure drop을 분할하면 각 stage의 local pressure가 Pv 아래로 과도하게 떨어지는 것을 줄일 수 있다.",
+        "Higher FL의 low-recovery valve·trim은 동일 process condition에서 cavitation resistance를 높일 수 있다.",
+        "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+        "Anti-cavitation trim은 pressure drop을 분할해 cavitation을 억제하지만 이미 지속되는 flashing vapor를 재응축하는 장치가 아니다.",
+        "Vendor result는 Pv, Pc, FF, FL, FP, FLP, selected travel, pressure cases와 hand calculation으로 교차 검증한다.",
+        "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다."
+      ],
+      "triggers": [
+        "control valve cavitation vena contracta pressure",
+        "control",
+        "valve",
+        "cavitation",
+        "vena",
+        "contracta",
+        "pressure",
+        "liquid valve flashing vapor pressure",
+        "liquid",
+        "flashing",
+        "vapor",
+        "liquid choked flow FL FF",
+        "choked",
+        "flow",
+        "FL",
+        "FF",
+        "pressure recovery factor FL cavitation",
+        "recovery",
+        "factor",
+        "fitting adjusted FLP FP liquid choke",
+        "fitting",
+        "adjusted",
+        "FLP",
+        "FP",
+        "choke",
+        "cavitation flashing Pvc Pv P2 comparison",
+        "Pvc",
+        "Pv",
+        "P2",
+        "comparison",
+        "anti-cavitation trim pressure drop staging",
+        "anti-cavitation",
+        "trim",
+        "drop",
+        "staging",
+        "flashing erosion downstream geometry",
+        "erosion",
+        "downstream",
+        "geometry",
+        "liquid choked effective pressure drop",
+        "effective",
+        "vapor pressure critical pressure FF",
+        "critical",
+        "selected travel FL cavitation sizing",
+        "selected",
+        "travel",
+        "sizing",
+        "minimum normal maximum cavitation cases",
+        "minimum",
+        "normal",
+        "maximum",
+        "cases",
+        "startup shutdown vapor pressure review",
+        "startup",
+        "shutdown",
+        "review",
+        "hydrodynamic noise cavitation handoff",
+        "hydrodynamic",
+        "noise",
+        "handoff",
+        "severe service material flashing handoff",
+        "severe",
+        "service",
+        "material",
+        "vendor cavitation sizing hand calculation",
+        "vendor",
+        "hand",
+        "calculation",
+        "제어밸브 캐비테이션 베나 콘트랙타",
+        "캐비테이션",
+        "베나",
+        "콘트랙타",
+        "액체 플래싱 증기압",
+        "액체",
+        "플래싱",
+        "증기압",
+        "액체 초크 FL FF",
+        "초크",
+        "Pvc Pv P2 현상 판별",
+        "현상",
+        "판별",
+        "FLP FP 피팅 보정",
+        "피팅",
+        "보정",
+        "다단 감압 anti-cavitation trim",
+        "다단",
+        "감압",
+        "flashing erosion downstream pipe",
+        "pipe",
+        "selected travel FL 반복 검토",
+        "반복",
+        "검토",
+        "Liquid control valve의 P1→Pvc→P2 pressure profile과 pressure recovery를 설명하시오.",
+        "Liquid",
+        "P1",
+        "profile",
+        "FL, FF, vapor pressure와 liquid choked pressure-drop limit의 관계를 설명하시오.",
+        "pressure-drop",
+        "limit",
+        "관계를",
+        "Reducer·expander가 직접 연결된 valve의 FP, FLP와 fitting-adjusted choked limit를 설명하시오.",
+        "Reducer",
+        "expander",
+        "직접",
+        "연결된",
+        "fitting-adjusted",
+        "Pvc, Pv와 P2를 이용하여 cavitation과 flashing을 비교하시오.",
+        "이용하여",
+        "비교하시오",
+        "Liquid choked flow의 발생조건, capacity limit와 cavitation·flashing의 관계를 설명하시오.",
+        "발생조건",
+        "capacity",
+        "Cavitation의 inception·development·damage mechanism과 현장 징후를 설명하시오.",
+        "Cavitation",
+        "inception",
+        "development",
+        "damage",
+        "mechanism",
+        "현장",
+        "징후를",
+        "Flashing의 persistent two-phase flow와 erosion mechanism 및 valve installation 대책을 설명하시오.",
+        "Flashing",
+        "persistent",
+        "two-phase",
+        "installation",
+        "대책을",
+        "Cavitation prevention을 위한 process condition, valve FL, pressure-drop staging과 anti-cavitation trim 선정 기준을 설명하시오.",
+        "prevention",
+        "위한",
+        "process",
+        "condition",
+        "기준을",
+        "Minimum·normal·maximum 및 startup·shutdown 조건에서 cavitation·flashing risk를 진단하시오.",
+        "Minimum",
+        "조건에서",
+        "risk",
+        "진단하시오",
+        "P1, P2, Pv, Pc, FF, FL, FP, FLP와 selected travel을 이용한 liquid severe-service valve 선정 절차를 설명하시오.",
+        "Pc",
+        "이용한",
+        "severe-service",
+        "절차를",
+        "Process datasheet의 P1·P2 absolute basis 확인",
+        "Process",
+        "datasheet",
+        "absolute",
+        "basis",
+        "확인",
+        "Liquid composition과 temperature별 Pv 확인",
+        "composition",
+        "temperature",
+        "Manufacturer selected-travel FL 확인",
+        "Manufacturer",
+        "selected-travel",
+        "Reducer·expander geometry와 FP·FLP 확인",
+        "Minimum·normal·maximum 및 startup·shutdown case matrix",
+        "case",
+        "matrix",
+        "Multi-stage trim pressure profile 확인",
+        "Multi-stage",
+        "Flashing outlet erosion path 확인",
+        "outlet",
+        "path",
+        "Vendor sizing input과 hand calculation 비교",
+        "Vendor",
+        "input",
+        "Pressure profile과 vena-contracta minimum pressure를 설명한다.",
+        "Pressure",
+        "vena-contracta",
+        "설명한다",
+        "Thermodynamic property와 recovery factor를 liquid choked limit에 연결한다.",
+        "Thermodynamic",
+        "property",
+        "연결한다",
+        "Attached-fitting liquid choked correction을 설명한다.",
+        "Attached-fitting",
+        "correction",
+        "Vapor formation 이후 downstream phase behavior를 비교한다.",
+        "Vapor",
+        "formation",
+        "이후",
+        "phase",
+        "behavior",
+        "비교한다",
+        "Choked capacity와 phase-change·damage axes를 구분한다.",
+        "Choked",
+        "phase-change",
+        "axes",
+        "구분한다",
+        "Cavitation level과 collapse damage mechanism을 설명한다.",
+        "level",
+        "collapse",
+        "Flashing damage와 geometry mitigation을 설명한다.",
+        "mitigation",
+        "Process modification과 staged pressure reduction을 설명한다.",
+        "modification",
+        "staged",
+        "reduction",
+        "Operating-case matrix로 phase-change risk를 진단한다.",
+        "Operating-case",
+        "진단한다",
+        "Liquid phase-change sizing과 prevention·handoff를 통합한다.",
+        "통합한다",
+        "제어밸브의 캐비테이션·플래싱·액체 초크 유동 및 손상 방지",
+        "제어밸브의",
+        "유동",
+        "손상",
+        "방지",
+        "액체 캐비테이션·플래싱·초크 유동",
+        "liquid pressure profile",
+        "P1 Pvc P2",
+        "vapor pressure Pv",
+        "critical pressure Pc",
+        "phase change",
+        "change",
+        "Liquid control valve의 cavitation·flashing·choked-flow 해석은 P1, Pvc, P2, Pv와 Pc의 pressure relation에서 시작한다.",
+        "choked-flow",
+        "해석은",
+        "relation",
+        "에서",
+        "시작한다",
+        "absolute pressure",
+        "P1 P2 Pvc",
+        "vapor pressure",
+        "critical pressure",
+        "unit consistency",
+        "unit",
+        "consistency",
+        "P1, P2, Pvc, Pv와 Pc는 absolute pressure와 동일 pressure unit을 사용한다.",
+        "동일",
+        "사용한다",
+        "operating temperature",
+        "operating",
+        "liquid property",
+        "temperature dependence",
+        "dependence",
+        "phase equilibrium",
+        "equilibrium",
+        "Pv는 operating temperature에서의 liquid vapor pressure이며 temperature가 변하면 다시 확인한다.",
+        "에서의",
+        "이며",
+        "변하면",
+        "다시",
+        "확인한다",
+        "thermodynamic critical point",
+        "thermodynamic",
+        "point",
+        "phase boundary",
+        "boundary",
+        "not valve coefficient",
+        "not",
+        "coefficient",
+        "Pc는 liquid의 thermodynamic critical pressure이며 valve pressure-recovery coefficient가 아니다.",
+        "pressure-recovery",
+        "아니다",
+        "vena contracta",
+        "minimum local pressure",
+        "local",
+        "restriction",
+        "velocity increase",
+        "velocity",
+        "increase",
+        "Valve restriction을 통과한 liquid의 minimum local pressure는 vena contracta 부근의 Pvc로 표현한다.",
+        "Valve",
+        "통과한",
+        "부근의",
+        "표현한다",
+        "Pvc below Pv",
+        "below",
+        "vapor formation",
+        "bubble generation",
+        "bubble",
+        "generation",
+        "local pressure",
+        "Pvc가 Pv보다 낮으면 local vapor formation이 시작될 수 있다.",
+        "보다",
+        "낮으면",
+        "시작될",
+        "있다",
+        "downstream pressure recovery",
+        "kinetic energy",
+        "kinetic",
+        "energy",
+        "static pressure",
+        "static",
+        "Pvc to P2",
+        "to",
+        "flow area recovery",
+        "area",
+        "Vena contracta 이후 일부 kinetic energy가 static pressure로 회복되어 pressure가 P2까지 상승한다.",
+        "Vena",
+        "일부",
+        "회복되어",
+        "까지",
+        "상승한다",
+        "pressure recovery factor FL",
+        "bare valve",
+        "bare",
+        "manufacturer coefficient",
+        "manufacturer",
+        "liquid sizing",
+        "recovery characteristic",
+        "characteristic",
+        "FL은 bare valve의 pressure-recovery 특성을 나타내는 manufacturer coefficient이다.",
+        "특성을",
+        "나타내는",
+        "이다",
+        "low FL",
+        "low",
+        "high pressure recovery",
+        "high",
+        "lower Pvc",
+        "lower",
+        "cavitation susceptibility",
+        "susceptibility",
+        "recovery direction",
+        "direction",
+        "낮은 FL은 큰 pressure recovery와 더 낮은 Pvc를 의미할 수 있으므로 cavitation susceptibility를 높일 수 있다.",
+        "낮은",
+        "의미할",
+        "있으므로",
+        "높일",
+        "FL dependency",
+        "dependency",
+        "valve style",
+        "style",
+        "trim geometry",
+        "flow direction",
+        "selected travel",
+        "FL은 valve style, trim geometry, flow direction과 travel에 따라 달라질 수 있다.",
+        "따라",
+        "달라질",
+        "liquid critical pressure ratio factor FF",
+        "ratio",
+        "Pv over Pc",
+        "over",
+        "thermodynamic correction",
+        "IEC ISA relation",
+        "IEC",
+        "ISA",
+        "critical pressure effect",
+        "effect",
+        "Common relation의 FF는 Pv/Pc 함수이며 thermodynamic critical-pressure effect를 보정한다.",
+        "Common",
+        "함수이며",
+        "critical-pressure",
+        "보정한다",
+        "bare valve choked limit",
+        "FL squared",
+        "squared",
+        "P1 minus FF Pv",
+        "minus",
+        "liquid choked pressure drop",
+        "capacity limit",
+        "Common bare-valve liquid choked pressure-drop limit는 FL²(P1-FF·Pv) 구조를 갖는다.",
+        "bare-valve",
+        "P1-FF",
+        "구조를",
+        "갖는다",
+        "piping geometry factor FP",
+        "piping",
+        "reducer",
+        "attached fitting",
+        "attached",
+        "assembly capacity",
+        "assembly",
+        "Liquid sizing의 FP는 directly attached reducer·expander와 fitting이 assembly capacity에 미치는 영향을 보정한다.",
+        "directly",
+        "미치는",
+        "영향을",
+        "combined recovery factor FLP",
+        "combined",
+        "valve fittings assembly",
+        "fittings",
+        "pressure recovery",
+        "attached fittings",
+        "liquid service",
+        "FLP는 valve와 directly attached fittings의 combined pressure-recovery 특성을 나타낸다.",
+        "나타낸다",
+        "fitting adjusted choked limit",
+        "FLP over FP squared",
+        "liquid assembly",
+        "Common fitting-adjusted liquid choked limit는 (FLP/FP)²(P1-FF·Pv) 구조를 갖는다.",
+        "effective sizing pressure drop",
+        "minimum selection",
+        "selection",
+        "actual pressure drop",
+        "actual",
+        "choked limit",
+        "delta P sizing",
+        "delta",
+        "P",
+        "Liquid sizing의 ΔPsizing은 actual pressure drop과 liquid choked limit 중 작은 값이다.",
+        "Psizing",
+        "작은",
+        "값이다",
+        "liquid choked flow",
+        "downstream pressure",
+        "flow saturation",
+        "saturation",
+        "pressure drop limit",
+        "Liquid choked flow는 downstream pressure 감소에 대한 flow 증가가 제한되는 capacity limit이다.",
+        "감소에",
+        "대한",
+        "증가가",
+        "제한되는",
+        "choked flow not zero",
+        "zero",
+        "flow continues",
+        "continues",
+        "not blockage",
+        "blockage",
+        "capacity saturation",
+        "liquid flow",
+        "Liquid choked flow는 유량이 정지하거나 0이 되는 상태가 아니다.",
+        "유량이",
+        "정지하거나",
+        "되는",
+        "상태가",
+        "cavitation classification",
+        "classification",
+        "P2 above Pv",
+        "above",
+        "bubble collapse",
+        "Pvc<Pv이고 P2>Pv이면 vapor bubble이 형성된 뒤 downstream pressure recovery로 collapse하는 cavitation이다.",
+        "이고",
+        "이면",
+        "형성된",
+        "하는",
+        "flashing classification",
+        "P2 at or below Pv",
+        "at",
+        "or",
+        "persistent vapor",
+        "two phase flow",
+        "two",
+        "Pvc<Pv이고 P2≤Pv이면 vapor가 downstream까지 지속되는 flashing이다.",
+        "지속되는",
+        "cavitation flashing commonality",
+        "commonality",
+        "local vapor formation",
+        "bubble formation",
+        "Cavitation과 flashing은 모두 Pvc<Pv에서 local vapor formation이 시작된다는 공통점이 있다.",
+        "모두",
+        "시작된다는",
+        "공통점이",
+        "cavitation flashing difference",
+        "difference",
+        "downstream phase",
+        "Cavitation은 pressure recovery에 의한 bubble collapse가 핵심이고 flashing은 persistent downstream vapor flow가 핵심이다.",
+        "의한",
+        "핵심이고",
+        "핵심이다",
+        "incipient cavitation",
+        "incipient",
+        "developed cavitation",
+        "developed",
+        "damaging cavitation",
+        "damaging",
+        "conditional threshold",
+        "conditional",
+        "threshold",
+        "vendor criterion",
+        "criterion",
+        "Incipient, developed와 damaging cavitation은 service와 vendor 기준에 따라 조건부로 구분하며 하나의 universal threshold로 고정하지 않는다.",
+        "Incipient",
+        "기준에",
+        "조건부로",
+        "구분하며",
+        "하나의",
+        "universal",
+        "고정하지",
+        "않는다",
+        "cavitation damage",
+        "microjet",
+        "shock pressure",
+        "shock",
+        "pitting erosion",
+        "pitting",
+        "trim body damage",
+        "body",
+        "Cavitation bubble collapse는 local microjet와 shock pressure를 만들어 pitting, vibration, erosion과 trim·body damage를 유발할 수 있다.",
+        "만들어",
+        "vibration",
+        "유발할",
+        "flashing damage",
+        "two phase high velocity",
+        "droplet impact",
+        "droplet",
+        "impact",
+        "downstream erosion",
+        "Flashing은 persistent two-phase high-velocity jet와 liquid-droplet impact에 의해 downstream erosion을 유발할 수 있다.",
+        "high-velocity",
+        "jet",
+        "liquid-droplet",
+        "의해",
+        "axis separation",
+        "axis",
+        "separation",
+        "choked condition",
+        "damage severity",
+        "severity",
+        "independent assessment",
+        "independent",
+        "assessment",
+        "Choked 여부, vapor formation 여부와 physical damage severity는 서로 다른 판정축이다.",
+        "여부",
+        "여부와",
+        "physical",
+        "서로",
+        "다른",
+        "판정축이다",
+        "minimum normal maximum",
+        "startup shutdown",
+        "pressure cases",
+        "temperature cases",
+        "liquid phase change",
+        "Minimum·normal·maximum 및 startup·shutdown의 pressure와 temperature case를 각각 검토한다.",
+        "각각",
+        "검토한다",
+        "increase downstream pressure",
+        "cavitation prevention",
+        "process feasibility",
+        "feasibility",
+        "vapor margin",
+        "margin",
+        "Process에서 가능한 경우 downstream pressure를 높이면 bubble collapse risk를 줄이거나 vapor formation margin을 개선할 수 있다.",
+        "가능한",
+        "경우",
+        "높이면",
+        "줄이거나",
+        "개선할",
+        "reduce liquid temperature",
+        "reduce",
+        "lower vapor pressure",
+        "cavitation margin",
+        "flashing margin",
+        "cooling",
+        "Liquid temperature를 낮추면 Pv가 감소하여 cavitation·flashing margin을 늘릴 수 있다.",
+        "낮추면",
+        "감소하여",
+        "늘릴",
+        "reduce total pressure drop",
+        "total",
+        "vena contracta pressure",
+        "liquid choke prevention",
+        "process modification",
+        "valve differential",
+        "differential",
+        "Valve across total pressure drop을 줄이면 vena-contracta pressure 저하와 liquid choked 가능성을 줄일 수 있다.",
+        "across",
+        "줄이면",
+        "저하와",
+        "가능성을",
+        "줄일",
+        "pressure drop staging",
+        "multi stage trim",
+        "multi",
+        "stage",
+        "series restriction",
+        "series",
+        "anti cavitation",
+        "anti",
+        "Series restriction 또는 multi-stage trim으로 pressure drop을 분할하면 각 stage의 local pressure가 Pv 아래로 과도하게 떨어지는 것을 줄일 수 있다.",
+        "Series",
+        "또는",
+        "multi-stage",
+        "으로",
+        "분할하면",
+        "아래로",
+        "과도하게",
+        "떨어지는",
+        "것을",
+        "higher FL",
+        "higher",
+        "low recovery trim",
+        "cavitation resistance",
+        "resistance",
+        "valve selection",
+        "Higher FL의 low-recovery valve·trim은 동일 process condition에서 cavitation resistance를 높일 수 있다.",
+        "Higher",
+        "low-recovery",
+        "flashing service geometry",
+        "valve location",
+        "location",
+        "outlet geometry",
+        "downstream pipe size",
+        "size",
+        "erosion path",
+        "Flashing service는 valve location, outlet geometry, downstream pipe size와 persistent two-phase erosion path를 함께 검토한다.",
+        "함께",
+        "anti cavitation trim",
+        "not flashing cure",
+        "cure",
+        "not recondensation",
+        "recondensation",
+        "Anti-cavitation trim은 pressure drop을 분할해 cavitation을 억제하지만 이미 지속되는 flashing vapor를 재응축하는 장치가 아니다.",
+        "Anti-cavitation",
+        "분할해",
+        "억제하지만",
+        "이미",
+        "재응축하는",
+        "장치가",
+        "vendor cavitation sizing",
+        "hand calculation",
+        "Pv Pc FF",
+        "FL FP FLP",
+        "Vendor result는 Pv, Pc, FF, FL, FP, FLP, selected travel, pressure cases와 hand calculation으로 교차 검증한다.",
+        "result",
+        "교차",
+        "검증한다",
+        "Topic 9 hydrodynamic noise",
+        "Topic",
+        "Topic 14 material",
+        "hardfacing",
+        "severe service",
+        "scope handoff",
+        "scope",
+        "Hydrodynamic-noise prediction은 Topic 9, hardfacing alloy와 severe-service material 상세는 Topic 14가 소유한다.",
+        "Hydrodynamic-noise",
+        "prediction",
+        "alloy",
+        "상세는",
+        "소유한다"
+      ],
+      "aliases": [
+        "control valve cavitation vena contracta pressure",
+        "liquid valve flashing vapor pressure",
+        "liquid choked flow FL FF",
+        "pressure recovery factor FL cavitation",
+        "fitting adjusted FLP FP liquid choke",
+        "cavitation flashing Pvc Pv P2 comparison",
+        "anti-cavitation trim pressure drop staging",
+        "flashing erosion downstream geometry",
+        "liquid choked effective pressure drop",
+        "vapor pressure critical pressure FF",
+        "selected travel FL cavitation sizing",
+        "minimum normal maximum cavitation cases",
+        "startup shutdown vapor pressure review",
+        "hydrodynamic noise cavitation handoff",
+        "severe service material flashing handoff",
+        "vendor cavitation sizing hand calculation",
+        "제어밸브 캐비테이션 베나 콘트랙타",
+        "액체 플래싱 증기압",
+        "액체 초크 FL FF",
+        "Pvc Pv P2 현상 판별",
+        "FLP FP 피팅 보정",
+        "다단 감압 anti-cavitation trim",
+        "flashing erosion downstream pipe",
+        "selected travel FL 반복 검토",
+        "Liquid control valve의 P1→Pvc→P2 pressure profile과 pressure recovery를 설명하시오.",
+        "FL, FF, vapor pressure와 liquid choked pressure-drop limit의 관계를 설명하시오.",
+        "Reducer·expander가 직접 연결된 valve의 FP, FLP와 fitting-adjusted choked limit를 설명하시오.",
+        "Pvc, Pv와 P2를 이용하여 cavitation과 flashing을 비교하시오.",
+        "Liquid choked flow의 발생조건, capacity limit와 cavitation·flashing의 관계를 설명하시오.",
+        "Cavitation의 inception·development·damage mechanism과 현장 징후를 설명하시오.",
+        "Flashing의 persistent two-phase flow와 erosion mechanism 및 valve installation 대책을 설명하시오.",
+        "Cavitation prevention을 위한 process condition, valve FL, pressure-drop staging과 anti-cavitation trim 선정 기준을 설명하시오.",
+        "Minimum·normal·maximum 및 startup·shutdown 조건에서 cavitation·flashing risk를 진단하시오.",
+        "P1, P2, Pv, Pc, FF, FL, FP, FLP와 selected travel을 이용한 liquid severe-service valve 선정 절차를 설명하시오.",
+        "Pressure profile과 vena-contracta minimum pressure를 설명한다.",
+        "Thermodynamic property와 recovery factor를 liquid choked limit에 연결한다.",
+        "Attached-fitting liquid choked correction을 설명한다.",
+        "Vapor formation 이후 downstream phase behavior를 비교한다.",
+        "Choked capacity와 phase-change·damage axes를 구분한다.",
+        "Cavitation level과 collapse damage mechanism을 설명한다.",
+        "Flashing damage와 geometry mitigation을 설명한다.",
+        "Process modification과 staged pressure reduction을 설명한다.",
+        "Operating-case matrix로 phase-change risk를 진단한다.",
+        "Liquid phase-change sizing과 prevention·handoff를 통합한다.",
+        "제어밸브의 캐비테이션·플래싱·액체 초크 유동 및 손상 방지",
+        "액체 캐비테이션·플래싱·초크 유동"
       ],
       "priority": "CORE_MUST_PREPARE"
     },

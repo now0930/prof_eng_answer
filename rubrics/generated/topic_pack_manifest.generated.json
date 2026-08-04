@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-04T05:13:23Z-generated-topic-pack-manifest",
+  "version": "2026-08-04T06:39:12Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 30,
+  "topic_count": 31,
   "topics": [
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
@@ -18,6 +18,16 @@
     },
     {
       "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

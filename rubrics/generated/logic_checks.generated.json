@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-04T05:13:23Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-04T06:39:12Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -65,6 +65,19 @@
         "최소 제어 유량과 실제 운전범위",
         "밸브 차압 분배와 설치 특성 왜곡"
       ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+      "enabled": false,
+      "topic_name": "제어밸브의 캐비테이션·플래싱·액체 초크 유동 및 손상 방지",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
       "fatal_checks": [],
       "major_checks": [],
       "question_type_checks": [],
