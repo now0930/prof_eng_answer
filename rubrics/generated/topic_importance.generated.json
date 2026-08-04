@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-04T06:39:12Z-generated-topic-pack-importance",
+  "version": "2026-08-04T08:08:26Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -156,6 +156,29 @@
         "CALC_DESIGN을 Primary Question Type으로 적용했다."
       ],
       "topic_label": "가스·증기 제어밸브 사이징"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "Sound power·sound pressure와 10·log·20·log를 구분한다.",
+        "Independent source logarithmic sum을 정확히 설명한다.",
+        "Overall spectrum과 dBA를 구분한다.",
+        "Aerodynamic·hydrodynamic source mechanism을 분리한다.",
+        "Topic 7·8 input handoff를 설명한다.",
+        "Pipe transmission loss와 external SPL observation condition을 설명한다.",
+        "Low-noise trim과 path treatment를 구분한다.",
+        "Operating-case matrix, field measurement와 vendor crosscheck를 설명한다."
+      ],
+      "note": "Control valve noise는 valve sizing, fluid regime과 acoustic transmission을 연결하는 현장 핵심 주제이다. 단일 dBA 값보다 source·path·receiver와 operating condition을 일관되게 연결하는 것이 고득점의 핵심이다.",
+      "revision_notes": [
+        "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+        "PRINCIPLE_INTERPRETATION을 Primary Question Type으로 적용했다."
+      ],
+      "topic_label": "제어밸브 공력·수력 소음과 저소음 트림"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

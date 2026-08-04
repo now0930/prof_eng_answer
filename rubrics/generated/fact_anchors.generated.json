@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-04T06:39:12Z-generated-topic-pack-fact-anchors",
+  "version": "2026-08-04T08:08:26Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -11633,6 +11633,2384 @@
         "압축성 유체 sizing과 trim selection을 통합한다.",
         "제어밸브의 가스·증기 사이징, 팽창계수 및 초크 유동",
         "가스·증기 제어밸브 사이징"
+      ],
+      "priority": "CORE_MUST_PREPARE"
+    },
+    {
+      "schema_version": "fact_anchor.v1",
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "title_ko": "제어밸브의 공력·수력 소음, 소음 예측 및 저소음 트림",
+      "question_type_hint": "PRINCIPLE_INTERPRETATION",
+      "anchors": [
+        {
+          "id": "control_valve_noise_scope",
+          "anchor_id": "control_valve_noise_scope",
+          "statement": "Control valve noise 평가는 acoustic quantity, source mechanism, transmission path, mitigation과 field verification을 통합한다.",
+          "importance": "core",
+          "keywords": [
+            "control valve noise scope",
+            "acoustic quantity",
+            "source mechanism",
+            "transmission path",
+            "field verification"
+          ],
+          "core_terms": [
+            "소음 평가범위",
+            "음향 물리량",
+            "발생원",
+            "전달경로",
+            "현장검증"
+          ],
+          "accepted_explanations": [
+            "Control valve noise 평가는 acoustic quantity, source mechanism, transmission path, mitigation과 field verification을 통합한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Control valve noise 평가는 acoustic quantity, source mechanism, transmission path, mitigation과 field verification을 통합한다.",
+          "description": "control_valve_noise_scope 계약을 평가한다.",
+          "name": "control_valve_noise_scope",
+          "expected": "Control valve noise 평가는 acoustic quantity, source mechanism, transmission path, mitigation과 field verification을 통합한다.",
+          "support_terms": []
+        },
+        {
+          "id": "process_flow_vs_accessory_noise",
+          "anchor_id": "process_flow_vs_accessory_noise",
+          "statement": "Process-flow noise와 actuator·positioner·booster exhaust noise를 구분한다.",
+          "importance": "core",
+          "keywords": [
+            "process flow noise",
+            "accessory noise",
+            "actuator exhaust",
+            "positioner exhaust",
+            "booster exhaust"
+          ],
+          "core_terms": [
+            "유동소음",
+            "부속기기 소음",
+            "배기소음",
+            "소음원 구분"
+          ],
+          "accepted_explanations": [
+            "Process-flow noise와 actuator·positioner·booster exhaust noise를 구분한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Process-flow noise와 actuator·positioner·booster exhaust noise를 구분한다.",
+          "description": "process_flow_vs_accessory_noise 계약을 평가한다.",
+          "name": "process_flow_vs_accessory_noise",
+          "expected": "Process-flow noise와 actuator·positioner·booster exhaust noise를 구분한다.",
+          "support_terms": []
+        },
+        {
+          "id": "source_path_receiver_hierarchy",
+          "anchor_id": "source_path_receiver_hierarchy",
+          "statement": "Noise control은 source, transmission path와 receiver 순서로 구분하고 효과를 중복 산정하지 않는다.",
+          "importance": "core",
+          "keywords": [
+            "source path receiver",
+            "noise control hierarchy",
+            "source treatment",
+            "path treatment",
+            "receiver protection"
+          ],
+          "core_terms": [
+            "Source",
+            "Path",
+            "Receiver",
+            "대책 계층",
+            "중복 산정 금지"
+          ],
+          "accepted_explanations": [
+            "Noise control은 source, transmission path와 receiver 순서로 구분하고 효과를 중복 산정하지 않는다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Noise control은 source, transmission path와 receiver 순서로 구분하고 효과를 중복 산정하지 않는다.",
+          "description": "source_path_receiver_hierarchy 계약을 평가한다.",
+          "name": "source_path_receiver_hierarchy",
+          "expected": "Noise control은 source, transmission path와 receiver 순서로 구분하고 효과를 중복 산정하지 않는다.",
+          "support_terms": []
+        },
+        {
+          "id": "sound_power_level_definition",
+          "anchor_id": "sound_power_level_definition",
+          "statement": "Sound power level은 acoustic power ratio에 10·log10을 적용한 source-energy level이다.",
+          "importance": "core",
+          "keywords": [
+            "sound power level",
+            "acoustic power",
+            "10 log10",
+            "source energy",
+            "reference power"
+          ],
+          "core_terms": [
+            "음향파워레벨",
+            "10log",
+            "음향에너지율",
+            "기준파워"
+          ],
+          "accepted_explanations": [
+            "Sound power level은 acoustic power ratio에 10·log10을 적용한 source-energy level이다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Sound power level은 acoustic power ratio에 10·log10을 적용한 source-energy level이다.",
+          "description": "sound_power_level_definition 계약을 평가한다.",
+          "name": "sound_power_level_definition",
+          "expected": "Sound power level은 acoustic power ratio에 10·log10을 적용한 source-energy level이다.",
+          "support_terms": []
+        },
+        {
+          "id": "sound_pressure_level_definition",
+          "anchor_id": "sound_pressure_level_definition",
+          "statement": "Sound pressure level은 rms acoustic pressure ratio에 20·log10을 적용한 observation-point level이다.",
+          "importance": "core",
+          "keywords": [
+            "sound pressure level",
+            "rms acoustic pressure",
+            "20 log10",
+            "observation point",
+            "reference pressure"
+          ],
+          "core_terms": [
+            "음압레벨",
+            "20log",
+            "rms 음압",
+            "관측점"
+          ],
+          "accepted_explanations": [
+            "Sound pressure level은 rms acoustic pressure ratio에 20·log10을 적용한 observation-point level이다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Sound pressure level은 rms acoustic pressure ratio에 20·log10을 적용한 observation-point level이다.",
+          "description": "sound_pressure_level_definition 계약을 평가한다.",
+          "name": "sound_pressure_level_definition",
+          "expected": "Sound pressure level은 rms acoustic pressure ratio에 20·log10을 적용한 observation-point level이다.",
+          "support_terms": []
+        },
+        {
+          "id": "decibel_logarithmic_scale",
+          "anchor_id": "decibel_logarithmic_scale",
+          "statement": "dB는 logarithmic ratio이며 level을 단순 산술합하지 않는다.",
+          "importance": "core",
+          "keywords": [
+            "decibel logarithmic scale",
+            "logarithmic ratio",
+            "not arithmetic sum",
+            "level calculation",
+            "dB"
+          ],
+          "core_terms": [
+            "데시벨",
+            "로그비",
+            "산술합 금지",
+            "레벨"
+          ],
+          "accepted_explanations": [
+            "dB는 logarithmic ratio이며 level을 단순 산술합하지 않는다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "dB는 logarithmic ratio이며 level을 단순 산술합하지 않는다.",
+          "description": "decibel_logarithmic_scale 계약을 평가한다.",
+          "name": "decibel_logarithmic_scale",
+          "expected": "dB는 logarithmic ratio이며 level을 단순 산술합하지 않는다.",
+          "support_terms": []
+        },
+        {
+          "id": "independent_source_logarithmic_sum",
+          "anchor_id": "independent_source_logarithmic_sum",
+          "statement": "Independent source level은 10·log10[Σ10^(Li/10)] 구조로 합산한다.",
+          "importance": "core",
+          "keywords": [
+            "independent source",
+            "logarithmic level sum",
+            "10 log sum",
+            "multiple noise sources",
+            "energy addition"
+          ],
+          "core_terms": [
+            "독립 소음원",
+            "로그합산",
+            "에너지합",
+            "다중소음원"
+          ],
+          "accepted_explanations": [
+            "Independent source level은 10·log10[Σ10^(Li/10)] 구조로 합산한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Independent source level은 10·log10[Σ10^(Li/10)] 구조로 합산한다.",
+          "description": "independent_source_logarithmic_sum 계약을 평가한다.",
+          "name": "independent_source_logarithmic_sum",
+          "expected": "Independent source level은 10·log10[Σ10^(Li/10)] 구조로 합산한다.",
+          "support_terms": []
+        },
+        {
+          "id": "identical_source_doubling",
+          "anchor_id": "identical_source_doubling",
+          "statement": "동일한 독립 source 두 개는 total level을 약 3.01 dB 증가시킨다.",
+          "importance": "core",
+          "keywords": [
+            "identical source doubling",
+            "plus 3 dB",
+            "two independent sources",
+            "power doubling",
+            "logarithmic addition"
+          ],
+          "core_terms": [
+            "동일 소음원 2개",
+            "+3.01 dB",
+            "파워 두배",
+            "독립소음원"
+          ],
+          "accepted_explanations": [
+            "동일한 독립 source 두 개는 total level을 약 3.01 dB 증가시킨다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "동일한 독립 source 두 개는 total level을 약 3.01 dB 증가시킨다.",
+          "description": "identical_source_doubling 계약을 평가한다.",
+          "name": "identical_source_doubling",
+          "expected": "동일한 독립 source 두 개는 total level을 약 3.01 dB 증가시킨다.",
+          "support_terms": []
+        },
+        {
+          "id": "pressure_amplitude_doubling",
+          "anchor_id": "pressure_amplitude_doubling",
+          "statement": "동일 조건에서 acoustic pressure amplitude 두 배는 sound-pressure level을 약 6.02 dB 증가시킨다.",
+          "importance": "core",
+          "keywords": [
+            "pressure amplitude doubling",
+            "plus 6 dB",
+            "20 log10 two",
+            "sound pressure",
+            "amplitude ratio"
+          ],
+          "core_terms": [
+            "음압진폭 두배",
+            "+6.02 dB",
+            "20log",
+            "진폭비"
+          ],
+          "accepted_explanations": [
+            "동일 조건에서 acoustic pressure amplitude 두 배는 sound-pressure level을 약 6.02 dB 증가시킨다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "동일 조건에서 acoustic pressure amplitude 두 배는 sound-pressure level을 약 6.02 dB 증가시킨다.",
+          "description": "pressure_amplitude_doubling 계약을 평가한다.",
+          "name": "pressure_amplitude_doubling",
+          "expected": "동일 조건에서 acoustic pressure amplitude 두 배는 sound-pressure level을 약 6.02 dB 증가시킨다.",
+          "support_terms": []
+        },
+        {
+          "id": "overall_spectrum_octave_distinction",
+          "anchor_id": "overall_spectrum_octave_distinction",
+          "statement": "Overall level, frequency spectrum과 octave-band level은 서로 다른 정보를 제공한다.",
+          "importance": "core",
+          "keywords": [
+            "overall level",
+            "frequency spectrum",
+            "octave band",
+            "one third octave",
+            "peak frequency"
+          ],
+          "core_terms": [
+            "전체레벨",
+            "주파수스펙트럼",
+            "옥타브밴드",
+            "피크주파수"
+          ],
+          "accepted_explanations": [
+            "Overall level, frequency spectrum과 octave-band level은 서로 다른 정보를 제공한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Overall level, frequency spectrum과 octave-band level은 서로 다른 정보를 제공한다.",
+          "description": "overall_spectrum_octave_distinction 계약을 평가한다.",
+          "name": "overall_spectrum_octave_distinction",
+          "expected": "Overall level, frequency spectrum과 octave-band level은 서로 다른 정보를 제공한다.",
+          "support_terms": []
+        },
+        {
+          "id": "a_weighting_dba_meaning",
+          "anchor_id": "a_weighting_dba_meaning",
+          "statement": "dBA는 사람 청감 특성을 근사한 frequency-weighted level이며 unweighted dB와 동일하지 않다.",
+          "importance": "core",
+          "keywords": [
+            "A weighting",
+            "dBA",
+            "frequency weighted",
+            "human hearing",
+            "unweighted dB"
+          ],
+          "core_terms": [
+            "A가중",
+            "dBA",
+            "청감특성",
+            "주파수가중"
+          ],
+          "accepted_explanations": [
+            "dBA는 사람 청감 특성을 근사한 frequency-weighted level이며 unweighted dB와 동일하지 않다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "dBA는 사람 청감 특성을 근사한 frequency-weighted level이며 unweighted dB와 동일하지 않다.",
+          "description": "a_weighting_dba_meaning 계약을 평가한다.",
+          "name": "a_weighting_dba_meaning",
+          "expected": "dBA는 사람 청감 특성을 근사한 frequency-weighted level이며 unweighted dB와 동일하지 않다.",
+          "support_terms": []
+        },
+        {
+          "id": "sound_power_pressure_boundary",
+          "anchor_id": "sound_power_pressure_boundary",
+          "statement": "Sound power와 sound pressure는 area, directivity, distance, environment와 transmission loss 없이 직접 등치하지 않는다.",
+          "importance": "core",
+          "keywords": [
+            "sound power versus pressure",
+            "directivity",
+            "distance",
+            "environment",
+            "transmission loss"
+          ],
+          "core_terms": [
+            "음향파워·음압 구분",
+            "지향성",
+            "거리",
+            "투과손실"
+          ],
+          "accepted_explanations": [
+            "Sound power와 sound pressure는 area, directivity, distance, environment와 transmission loss 없이 직접 등치하지 않는다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Sound power와 sound pressure는 area, directivity, distance, environment와 transmission loss 없이 직접 등치하지 않는다.",
+          "description": "sound_power_pressure_boundary 계약을 평가한다.",
+          "name": "sound_power_pressure_boundary",
+          "expected": "Sound power와 sound pressure는 area, directivity, distance, environment와 transmission loss 없이 직접 등치하지 않는다.",
+          "support_terms": []
+        },
+        {
+          "id": "aerodynamic_turbulent_jet_noise",
+          "anchor_id": "aerodynamic_turbulent_jet_noise",
+          "statement": "Aerodynamic noise는 high-velocity compressible jet의 turbulent mixing과 downstream interaction에서 발생한다.",
+          "importance": "core",
+          "keywords": [
+            "aerodynamic noise",
+            "compressible turbulent jet",
+            "turbulent mixing",
+            "gas valve",
+            "downstream interaction"
+          ],
+          "core_terms": [
+            "공력소음",
+            "압축성 제트",
+            "난류혼합",
+            "가스밸브"
+          ],
+          "accepted_explanations": [
+            "Aerodynamic noise는 high-velocity compressible jet의 turbulent mixing과 downstream interaction에서 발생한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Aerodynamic noise는 high-velocity compressible jet의 turbulent mixing과 downstream interaction에서 발생한다.",
+          "description": "aerodynamic_turbulent_jet_noise 계약을 평가한다.",
+          "name": "aerodynamic_turbulent_jet_noise",
+          "expected": "Aerodynamic noise는 high-velocity compressible jet의 turbulent mixing과 downstream interaction에서 발생한다.",
+          "support_terms": []
+        },
+        {
+          "id": "aerodynamic_expansion_shock_noise",
+          "anchor_id": "aerodynamic_expansion_shock_noise",
+          "statement": "High pressure-ratio 또는 choked gas service는 expansion과 shock-related noise를 만들 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "gas expansion noise",
+            "shock related noise",
+            "high pressure ratio",
+            "choked gas",
+            "shock cell"
+          ],
+          "core_terms": [
+            "팽창소음",
+            "충격파소음",
+            "고압력비",
+            "초크가스"
+          ],
+          "accepted_explanations": [
+            "High pressure-ratio 또는 choked gas service는 expansion과 shock-related noise를 만들 수 있다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "High pressure-ratio 또는 choked gas service는 expansion과 shock-related noise를 만들 수 있다.",
+          "description": "aerodynamic_expansion_shock_noise 계약을 평가한다.",
+          "name": "aerodynamic_expansion_shock_noise",
+          "expected": "High pressure-ratio 또는 choked gas service는 expansion과 shock-related noise를 만들 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "gas_choked_regime_noise_input",
+          "anchor_id": "gas_choked_regime_noise_input",
+          "statement": "Gas choked regime은 aerodynamic-noise prediction input이며 zero flow를 의미하지 않는다.",
+          "importance": "core",
+          "keywords": [
+            "gas choked regime",
+            "aerodynamic input",
+            "not zero flow",
+            "capacity limit",
+            "noise prediction"
+          ],
+          "core_terms": [
+            "가스 초크",
+            "공력소음 입력",
+            "0유량 아님",
+            "용량한계"
+          ],
+          "accepted_explanations": [
+            "Gas choked regime은 aerodynamic-noise prediction input이며 zero flow를 의미하지 않는다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Gas choked regime은 aerodynamic-noise prediction input이며 zero flow를 의미하지 않는다.",
+          "description": "gas_choked_regime_noise_input 계약을 평가한다.",
+          "name": "gas_choked_regime_noise_input",
+          "expected": "Gas choked regime은 aerodynamic-noise prediction input이며 zero flow를 의미하지 않는다.",
+          "support_terms": []
+        },
+        {
+          "id": "gas_outlet_velocity_mach_geometry",
+          "anchor_id": "gas_outlet_velocity_mach_geometry",
+          "statement": "Gas outlet velocity, Mach number와 downstream pipe geometry는 aerodynamic-noise risk에 영향을 준다.",
+          "importance": "core",
+          "keywords": [
+            "gas outlet velocity",
+            "Mach number",
+            "downstream pipe geometry",
+            "sonic velocity",
+            "noise risk"
+          ],
+          "core_terms": [
+            "출구속도",
+            "마하수",
+            "하류배관",
+            "음속"
+          ],
+          "accepted_explanations": [
+            "Gas outlet velocity, Mach number와 downstream pipe geometry는 aerodynamic-noise risk에 영향을 준다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Gas outlet velocity, Mach number와 downstream pipe geometry는 aerodynamic-noise risk에 영향을 준다.",
+          "description": "gas_outlet_velocity_mach_geometry 계약을 평가한다.",
+          "name": "gas_outlet_velocity_mach_geometry",
+          "expected": "Gas outlet velocity, Mach number와 downstream pipe geometry는 aerodynamic-noise risk에 영향을 준다.",
+          "support_terms": []
+        },
+        {
+          "id": "topic7_aerodynamic_noise_handoff",
+          "anchor_id": "topic7_aerodynamic_noise_handoff",
+          "statement": "Gas capacity, xT, xTP, Y, mass flow와 selected travel은 Topic 7에서 인계받는다.",
+          "importance": "core",
+          "keywords": [
+            "Topic 7 handoff",
+            "gas capacity",
+            "xT xTP",
+            "expansion factor Y",
+            "selected travel"
+          ],
+          "core_terms": [
+            "Topic 7",
+            "가스용량",
+            "xT·xTP",
+            "Y",
+            "선정개도"
+          ],
+          "accepted_explanations": [
+            "Gas capacity, xT, xTP, Y, mass flow와 selected travel은 Topic 7에서 인계받는다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Gas capacity, xT, xTP, Y, mass flow와 selected travel은 Topic 7에서 인계받는다.",
+          "description": "topic7_aerodynamic_noise_handoff 계약을 평가한다.",
+          "name": "topic7_aerodynamic_noise_handoff",
+          "expected": "Gas capacity, xT, xTP, Y, mass flow와 selected travel은 Topic 7에서 인계받는다.",
+          "support_terms": []
+        },
+        {
+          "id": "hydrodynamic_turbulence_noise",
+          "anchor_id": "hydrodynamic_turbulence_noise",
+          "statement": "Single-phase liquid turbulence는 broadband pressure fluctuation과 noise를 만들 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "hydrodynamic turbulence noise",
+            "single phase liquid",
+            "broadband pressure fluctuation",
+            "liquid valve",
+            "turbulence"
+          ],
+          "core_terms": [
+            "수력 난류소음",
+            "단상액체",
+            "광대역 압력변동",
+            "난류"
+          ],
+          "accepted_explanations": [
+            "Single-phase liquid turbulence는 broadband pressure fluctuation과 noise를 만들 수 있다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Single-phase liquid turbulence는 broadband pressure fluctuation과 noise를 만들 수 있다.",
+          "description": "hydrodynamic_turbulence_noise 계약을 평가한다.",
+          "name": "hydrodynamic_turbulence_noise",
+          "expected": "Single-phase liquid turbulence는 broadband pressure fluctuation과 noise를 만들 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "cavitation_bubble_collapse_noise",
+          "anchor_id": "cavitation_bubble_collapse_noise",
+          "statement": "Cavitation bubble collapse는 impulsive pressure와 broadband noise를 만들 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "cavitation noise",
+            "bubble collapse",
+            "impulsive pressure",
+            "broadband noise",
+            "vena contracta"
+          ],
+          "core_terms": [
+            "캐비테이션소음",
+            "기포붕괴",
+            "충격압",
+            "광대역소음"
+          ],
+          "accepted_explanations": [
+            "Cavitation bubble collapse는 impulsive pressure와 broadband noise를 만들 수 있다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Cavitation bubble collapse는 impulsive pressure와 broadband noise를 만들 수 있다.",
+          "description": "cavitation_bubble_collapse_noise 계약을 평가한다.",
+          "name": "cavitation_bubble_collapse_noise",
+          "expected": "Cavitation bubble collapse는 impulsive pressure와 broadband noise를 만들 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "flashing_two_phase_noise",
+          "anchor_id": "flashing_two_phase_noise",
+          "statement": "Flashing의 persistent two-phase flow와 droplet impact는 broadband noise와 vibration을 만들 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "flashing noise",
+            "persistent two phase flow",
+            "droplet impact",
+            "broadband noise",
+            "vibration"
+          ],
+          "core_terms": [
+            "플래싱소음",
+            "지속 2상유동",
+            "액적충돌",
+            "진동"
+          ],
+          "accepted_explanations": [
+            "Flashing의 persistent two-phase flow와 droplet impact는 broadband noise와 vibration을 만들 수 있다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Flashing의 persistent two-phase flow와 droplet impact는 broadband noise와 vibration을 만들 수 있다.",
+          "description": "flashing_two_phase_noise 계약을 평가한다.",
+          "name": "flashing_two_phase_noise",
+          "expected": "Flashing의 persistent two-phase flow와 droplet impact는 broadband noise와 vibration을 만들 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "topic8_hydrodynamic_noise_handoff",
+          "anchor_id": "topic8_hydrodynamic_noise_handoff",
+          "statement": "Cavitation, flashing, liquid choked regime과 FL 계열 정보는 Topic 8에서 인계받는다.",
+          "importance": "core",
+          "keywords": [
+            "Topic 8 handoff",
+            "cavitation flashing",
+            "liquid choked",
+            "FL FP FLP",
+            "hydrodynamic regime"
+          ],
+          "core_terms": [
+            "Topic 8",
+            "캐비테이션·플래싱",
+            "액체초크",
+            "FL계열"
+          ],
+          "accepted_explanations": [
+            "Cavitation, flashing, liquid choked regime과 FL 계열 정보는 Topic 8에서 인계받는다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Cavitation, flashing, liquid choked regime과 FL 계열 정보는 Topic 8에서 인계받는다.",
+          "description": "topic8_hydrodynamic_noise_handoff 계약을 평가한다.",
+          "name": "topic8_hydrodynamic_noise_handoff",
+          "expected": "Cavitation, flashing, liquid choked regime과 FL 계열 정보는 Topic 8에서 인계받는다.",
+          "support_terms": []
+        },
+        {
+          "id": "acoustic_power_pipe_radiation_path",
+          "anchor_id": "acoustic_power_pipe_radiation_path",
+          "statement": "Internal acoustic power는 fluid와 pipe wall을 통해 전달되고 external sound로 radiation된다.",
+          "importance": "core",
+          "keywords": [
+            "internal acoustic power",
+            "pipe wall",
+            "sound radiation",
+            "fluid propagation",
+            "external sound"
+          ],
+          "core_terms": [
+            "내부 음향파워",
+            "배관벽",
+            "외부 방사",
+            "전달경로"
+          ],
+          "accepted_explanations": [
+            "Internal acoustic power는 fluid와 pipe wall을 통해 전달되고 external sound로 radiation된다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Internal acoustic power는 fluid와 pipe wall을 통해 전달되고 external sound로 radiation된다.",
+          "description": "acoustic_power_pipe_radiation_path 계약을 평가한다.",
+          "name": "acoustic_power_pipe_radiation_path",
+          "expected": "Internal acoustic power는 fluid와 pipe wall을 통해 전달되고 external sound로 radiation된다.",
+          "support_terms": []
+        },
+        {
+          "id": "pipe_transmission_loss_dependency",
+          "anchor_id": "pipe_transmission_loss_dependency",
+          "statement": "Pipe transmission loss는 diameter, wall thickness, material, frequency와 service condition에 의존한다.",
+          "importance": "core",
+          "keywords": [
+            "pipe transmission loss",
+            "diameter",
+            "wall thickness",
+            "material",
+            "frequency"
+          ],
+          "core_terms": [
+            "배관 투과손실",
+            "직경",
+            "두께",
+            "재질",
+            "주파수"
+          ],
+          "accepted_explanations": [
+            "Pipe transmission loss는 diameter, wall thickness, material, frequency와 service condition에 의존한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Pipe transmission loss는 diameter, wall thickness, material, frequency와 service condition에 의존한다.",
+          "description": "pipe_transmission_loss_dependency 계약을 평가한다.",
+          "name": "pipe_transmission_loss_dependency",
+          "expected": "Pipe transmission loss는 diameter, wall thickness, material, frequency와 service condition에 의존한다.",
+          "support_terms": []
+        },
+        {
+          "id": "external_spl_observation_condition",
+          "anchor_id": "external_spl_observation_condition",
+          "statement": "External SPL은 distance, directivity, reflection, enclosure와 measurement location에 의존한다.",
+          "importance": "core",
+          "keywords": [
+            "external SPL",
+            "distance",
+            "directivity",
+            "reflection",
+            "measurement location"
+          ],
+          "core_terms": [
+            "외부 음압레벨",
+            "거리",
+            "지향성",
+            "반사",
+            "측정위치"
+          ],
+          "accepted_explanations": [
+            "External SPL은 distance, directivity, reflection, enclosure와 measurement location에 의존한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "External SPL은 distance, directivity, reflection, enclosure와 measurement location에 의존한다.",
+          "description": "external_spl_observation_condition 계약을 평가한다.",
+          "name": "external_spl_observation_condition",
+          "expected": "External SPL은 distance, directivity, reflection, enclosure와 measurement location에 의존한다.",
+          "support_terms": []
+        },
+        {
+          "id": "prediction_standard_vendor_method",
+          "anchor_id": "prediction_standard_vendor_method",
+          "statement": "Noise prediction은 적용 IEC·ISA edition, manufacturer method와 observation condition을 명시한다.",
+          "importance": "core",
+          "keywords": [
+            "noise prediction standard",
+            "IEC 60534-8",
+            "ISA edition",
+            "manufacturer method",
+            "observation condition"
+          ],
+          "core_terms": [
+            "소음예측표준",
+            "IEC·ISA 판본",
+            "제조사방법",
+            "관측조건"
+          ],
+          "accepted_explanations": [
+            "Noise prediction은 적용 IEC·ISA edition, manufacturer method와 observation condition을 명시한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Noise prediction은 적용 IEC·ISA edition, manufacturer method와 observation condition을 명시한다.",
+          "description": "prediction_standard_vendor_method 계약을 평가한다.",
+          "name": "prediction_standard_vendor_method",
+          "expected": "Noise prediction은 적용 IEC·ISA edition, manufacturer method와 observation condition을 명시한다.",
+          "support_terms": []
+        },
+        {
+          "id": "multi_hole_jet_division",
+          "anchor_id": "multi_hole_jet_division",
+          "statement": "Multi-hole·multi-path trim은 큰 jet를 여러 작은 jet로 분할하여 acoustic source 특성을 변경한다.",
+          "importance": "core",
+          "keywords": [
+            "multi hole trim",
+            "multi path trim",
+            "jet division",
+            "small jets",
+            "acoustic source"
+          ],
+          "core_terms": [
+            "다공트림",
+            "다경로트림",
+            "제트분할",
+            "음향원 변화"
+          ],
+          "accepted_explanations": [
+            "Multi-hole·multi-path trim은 큰 jet를 여러 작은 jet로 분할하여 acoustic source 특성을 변경한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Multi-hole·multi-path trim은 큰 jet를 여러 작은 jet로 분할하여 acoustic source 특성을 변경한다.",
+          "description": "multi_hole_jet_division 계약을 평가한다.",
+          "name": "multi_hole_jet_division",
+          "expected": "Multi-hole·multi-path trim은 큰 jet를 여러 작은 jet로 분할하여 acoustic source 특성을 변경한다.",
+          "support_terms": []
+        },
+        {
+          "id": "multi_stage_pressure_ratio_velocity_control",
+          "anchor_id": "multi_stage_pressure_ratio_velocity_control",
+          "statement": "Multi-stage trim은 stage별 pressure ratio와 velocity를 제한하여 source noise를 줄인다.",
+          "importance": "core",
+          "keywords": [
+            "multi stage trim",
+            "pressure ratio staging",
+            "velocity control",
+            "source noise reduction",
+            "staged pressure drop"
+          ],
+          "core_terms": [
+            "다단트림",
+            "압력비 분할",
+            "속도제한",
+            "소음원 저감"
+          ],
+          "accepted_explanations": [
+            "Multi-stage trim은 stage별 pressure ratio와 velocity를 제한하여 source noise를 줄인다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Multi-stage trim은 stage별 pressure ratio와 velocity를 제한하여 source noise를 줄인다.",
+          "description": "multi_stage_pressure_ratio_velocity_control 계약을 평가한다.",
+          "name": "multi_stage_pressure_ratio_velocity_control",
+          "expected": "Multi-stage trim은 stage별 pressure ratio와 velocity를 제한하여 source noise를 줄인다.",
+          "support_terms": []
+        },
+        {
+          "id": "diffuser_pressure_drop_distribution",
+          "anchor_id": "diffuser_pressure_drop_distribution",
+          "statement": "Diffuser·orifice는 system pressure drop을 분담하지만 capacity, erosion과 자체 noise를 함께 검토한다.",
+          "importance": "important",
+          "keywords": [
+            "diffuser",
+            "orifice plate",
+            "pressure drop distribution",
+            "capacity effect",
+            "diffuser noise"
+          ],
+          "core_terms": [
+            "디퓨저",
+            "오리피스",
+            "차압분담",
+            "용량영향",
+            "자체소음"
+          ],
+          "accepted_explanations": [
+            "Diffuser·orifice는 system pressure drop을 분담하지만 capacity, erosion과 자체 noise를 함께 검토한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Diffuser·orifice는 system pressure drop을 분담하지만 capacity, erosion과 자체 noise를 함께 검토한다.",
+          "description": "diffuser_pressure_drop_distribution 계약을 평가한다.",
+          "name": "diffuser_pressure_drop_distribution",
+          "expected": "Diffuser·orifice는 system pressure drop을 분담하지만 capacity, erosion과 자체 noise를 함께 검토한다.",
+          "support_terms": []
+        },
+        {
+          "id": "silencer_insulation_enclosure_path_treatment",
+          "anchor_id": "silencer_insulation_enclosure_path_treatment",
+          "statement": "Silencer, insulation과 enclosure는 서로 다른 transmission-path treatment이다.",
+          "importance": "important",
+          "keywords": [
+            "silencer",
+            "acoustic insulation",
+            "enclosure",
+            "path treatment",
+            "attenuation"
+          ],
+          "core_terms": [
+            "소음기",
+            "방음재",
+            "인클로저",
+            "경로대책"
+          ],
+          "accepted_explanations": [
+            "Silencer, insulation과 enclosure는 서로 다른 transmission-path treatment이다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Silencer, insulation과 enclosure는 서로 다른 transmission-path treatment이다.",
+          "description": "silencer_insulation_enclosure_path_treatment 계약을 평가한다.",
+          "name": "silencer_insulation_enclosure_path_treatment",
+          "expected": "Silencer, insulation과 enclosure는 서로 다른 transmission-path treatment이다.",
+          "support_terms": []
+        },
+        {
+          "id": "valve_size_capacity_velocity_tradeoff",
+          "anchor_id": "valve_size_capacity_velocity_tradeoff",
+          "statement": "Valve size 확대는 velocity를 줄일 수 있으나 low-travel, rangeability와 installed-performance tradeoff를 만든다.",
+          "importance": "core",
+          "keywords": [
+            "valve size noise tradeoff",
+            "velocity reduction",
+            "low travel",
+            "rangeability",
+            "installed performance"
+          ],
+          "core_terms": [
+            "밸브크기",
+            "속도저감",
+            "저개도",
+            "rangeability",
+            "성능상충"
+          ],
+          "accepted_explanations": [
+            "Valve size 확대는 velocity를 줄일 수 있으나 low-travel, rangeability와 installed-performance tradeoff를 만든다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Valve size 확대는 velocity를 줄일 수 있으나 low-travel, rangeability와 installed-performance tradeoff를 만든다.",
+          "description": "valve_size_capacity_velocity_tradeoff 계약을 평가한다.",
+          "name": "valve_size_capacity_velocity_tradeoff",
+          "expected": "Valve size 확대는 velocity를 줄일 수 있으나 low-travel, rangeability와 installed-performance tradeoff를 만든다.",
+          "support_terms": []
+        },
+        {
+          "id": "low_noise_trim_capacity_rangeability_tradeoff",
+          "anchor_id": "low_noise_trim_capacity_rangeability_tradeoff",
+          "statement": "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+          "importance": "core",
+          "keywords": [
+            "low noise trim tradeoff",
+            "Cv capacity",
+            "rangeability",
+            "noise reduction",
+            "trim selection"
+          ],
+          "core_terms": [
+            "저소음트림",
+            "Cv용량",
+            "rangeability",
+            "선정상충"
+          ],
+          "accepted_explanations": [
+            "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+          "description": "low_noise_trim_capacity_rangeability_tradeoff 계약을 평가한다.",
+          "name": "low_noise_trim_capacity_rangeability_tradeoff",
+          "expected": "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+          "support_terms": []
+        },
+        {
+          "id": "plugging_erosion_maintenance_tradeoff",
+          "anchor_id": "plugging_erosion_maintenance_tradeoff",
+          "statement": "Small passage와 multi-stage trim은 plugging, erosion, particle tolerance와 maintenance를 검토한다.",
+          "importance": "important",
+          "keywords": [
+            "small passage",
+            "plugging",
+            "erosion",
+            "particle tolerance",
+            "maintenance"
+          ],
+          "core_terms": [
+            "소유로",
+            "막힘",
+            "침식",
+            "입자허용",
+            "정비"
+          ],
+          "accepted_explanations": [
+            "Small passage와 multi-stage trim은 plugging, erosion, particle tolerance와 maintenance를 검토한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Small passage와 multi-stage trim은 plugging, erosion, particle tolerance와 maintenance를 검토한다.",
+          "description": "plugging_erosion_maintenance_tradeoff 계약을 평가한다.",
+          "name": "plugging_erosion_maintenance_tradeoff",
+          "expected": "Small passage와 multi-stage trim은 plugging, erosion, particle tolerance와 maintenance를 검토한다.",
+          "support_terms": []
+        },
+        {
+          "id": "operating_case_noise_matrix",
+          "anchor_id": "operating_case_noise_matrix",
+          "statement": "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
+          "importance": "core",
+          "keywords": [
+            "operating case noise",
+            "minimum normal maximum",
+            "startup shutdown",
+            "case matrix",
+            "noise prediction"
+          ],
+          "core_terms": [
+            "운전조건행렬",
+            "최소·정상·최대",
+            "기동·정지",
+            "소음예측"
+          ],
+          "accepted_explanations": [
+            "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
+          "description": "operating_case_noise_matrix 계약을 평가한다.",
+          "name": "operating_case_noise_matrix",
+          "expected": "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
+          "support_terms": []
+        },
+        {
+          "id": "multiple_source_parallel_bypass_combination",
+          "anchor_id": "multiple_source_parallel_bypass_combination",
+          "statement": "Parallel valve와 bypass source는 independent-source logarithmic sum으로 결합한다.",
+          "importance": "core",
+          "keywords": [
+            "parallel valve noise",
+            "bypass source",
+            "multiple sources",
+            "logarithmic combination",
+            "independent sources"
+          ],
+          "core_terms": [
+            "병렬밸브",
+            "바이패스",
+            "다중소음원",
+            "로그합산"
+          ],
+          "accepted_explanations": [
+            "Parallel valve와 bypass source는 independent-source logarithmic sum으로 결합한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Parallel valve와 bypass source는 independent-source logarithmic sum으로 결합한다.",
+          "description": "multiple_source_parallel_bypass_combination 계약을 평가한다.",
+          "name": "multiple_source_parallel_bypass_combination",
+          "expected": "Parallel valve와 bypass source는 independent-source logarithmic sum으로 결합한다.",
+          "support_terms": []
+        },
+        {
+          "id": "field_measurement_background_correction",
+          "anchor_id": "field_measurement_background_correction",
+          "statement": "Field measurement는 위치, weighting, operating condition과 background correction을 기록한다.",
+          "importance": "core",
+          "keywords": [
+            "field noise measurement",
+            "measurement location",
+            "weighting",
+            "operating condition",
+            "background correction"
+          ],
+          "core_terms": [
+            "현장소음측정",
+            "측정위치",
+            "가중특성",
+            "배경보정"
+          ],
+          "accepted_explanations": [
+            "Field measurement는 위치, weighting, operating condition과 background correction을 기록한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Field measurement는 위치, weighting, operating condition과 background correction을 기록한다.",
+          "description": "field_measurement_background_correction 계약을 평가한다.",
+          "name": "field_measurement_background_correction",
+          "expected": "Field measurement는 위치, weighting, operating condition과 background correction을 기록한다.",
+          "support_terms": []
+        },
+        {
+          "id": "prediction_measurement_gap_diagnosis",
+          "anchor_id": "prediction_measurement_gap_diagnosis",
+          "statement": "Prediction과 measurement 차이는 input, regime, pipe, observation point, reflection과 background 순서로 진단한다.",
+          "importance": "important",
+          "keywords": [
+            "prediction measurement gap",
+            "input diagnosis",
+            "flow regime",
+            "observation point",
+            "background noise"
+          ],
+          "core_terms": [
+            "예측·측정차이",
+            "입력진단",
+            "유동영역",
+            "관측점",
+            "배경소음"
+          ],
+          "accepted_explanations": [
+            "Prediction과 measurement 차이는 input, regime, pipe, observation point, reflection과 background 순서로 진단한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Prediction과 measurement 차이는 input, regime, pipe, observation point, reflection과 background 순서로 진단한다.",
+          "description": "prediction_measurement_gap_diagnosis 계약을 평가한다.",
+          "name": "prediction_measurement_gap_diagnosis",
+          "expected": "Prediction과 measurement 차이는 input, regime, pipe, observation point, reflection과 background 순서로 진단한다.",
+          "support_terms": []
+        },
+        {
+          "id": "occupational_limit_local_standard",
+          "anchor_id": "occupational_limit_local_standard",
+          "statement": "Occupational noise limit은 적용 국가, 노출시간과 회사 기준을 확인한다.",
+          "importance": "important",
+          "keywords": [
+            "occupational noise limit",
+            "country regulation",
+            "exposure time",
+            "company standard",
+            "hearing conservation"
+          ],
+          "core_terms": [
+            "직업성소음기준",
+            "국가법규",
+            "노출시간",
+            "회사기준"
+          ],
+          "accepted_explanations": [
+            "Occupational noise limit은 적용 국가, 노출시간과 회사 기준을 확인한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Occupational noise limit은 적용 국가, 노출시간과 회사 기준을 확인한다.",
+          "description": "occupational_limit_local_standard 계약을 평가한다.",
+          "name": "occupational_limit_local_standard",
+          "expected": "Occupational noise limit은 적용 국가, 노출시간과 회사 기준을 확인한다.",
+          "support_terms": []
+        },
+        {
+          "id": "vendor_crosscheck_noise",
+          "anchor_id": "vendor_crosscheck_noise",
+          "statement": "Vendor result는 source level, octave spectrum, external SPL, selected travel와 mitigation 조건으로 교차 검증한다.",
+          "importance": "important",
+          "keywords": [
+            "vendor noise prediction",
+            "source level",
+            "octave spectrum",
+            "external SPL",
+            "selected travel"
+          ],
+          "core_terms": [
+            "제조사예측",
+            "음원레벨",
+            "옥타브스펙트럼",
+            "외부SPL",
+            "선정개도"
+          ],
+          "accepted_explanations": [
+            "Vendor result는 source level, octave spectrum, external SPL, selected travel와 mitigation 조건으로 교차 검증한다.",
+            "정의, 발생 메커니즘, 적용조건, 전달경로와 인접 Topic 경계를 함께 설명한다."
+          ],
+          "rejected_explanations": [
+            "Sound power·sound pressure, dB 합산, aerodynamic·hydrodynamic 또는 source·path 경계를 반대로 설명한다."
+          ],
+          "grading_notes": "Acoustic quantity→source mechanism→transmission→prediction→mitigation→operating cases→field verification의 인과관계를 평가한다.",
+          "source_basis": "docs/topic_sheets/control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim.md; Control Valve Handbook aerodynamic-noise, hydrodynamic-noise and noise-abatement sections; Control Valve Primer valve-noise sections; Topic 7 gas-sizing and Topic 8 cavitation-flashing source packs; gemini_script/20260804_topic09_noise_requirements.md.",
+          "claim": "Vendor result는 source level, octave spectrum, external SPL, selected travel와 mitigation 조건으로 교차 검증한다.",
+          "description": "vendor_crosscheck_noise 계약을 평가한다.",
+          "name": "vendor_crosscheck_noise",
+          "expected": "Vendor result는 source level, octave spectrum, external SPL, selected travel와 mitigation 조건으로 교차 검증한다.",
+          "support_terms": []
+        }
+      ],
+      "fatal_wrong_claims": [
+        {
+          "id": "control_valve_sound_power_equals_sound_pressure",
+          "claim": "Sound power level과 sound pressure level은 같은 물리량이며 항상 같은 숫자이다.",
+          "correction": "Sound power와 sound pressure는 서로 다른 acoustic quantity이며 transmission과 observation condition 없이 직접 등치하지 않는다.",
+          "wrong_claim": "Sound power level과 sound pressure level은 같은 물리량이며 항상 같은 숫자이다.",
+          "correct_rule": "Sound power와 sound pressure는 서로 다른 acoustic quantity이며 transmission과 observation condition 없이 직접 등치하지 않는다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Sound power level과 sound pressure level은 같은 물리량이며 항상 같은 숫자이다.",
+          "description": "Sound power와 sound pressure는 서로 다른 acoustic quantity이며 transmission과 observation condition 없이 직접 등치하지 않는다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_db_levels_arithmetic_sum",
+          "claim": "독립 소음원의 dB level을 산술합한다.",
+          "correction": "Independent source level은 10·log10[Σ10^(Li/10)] 구조로 합산한다.",
+          "wrong_claim": "독립 소음원의 dB level을 산술합한다.",
+          "correct_rule": "Independent source level은 10·log10[Σ10^(Li/10)] 구조로 합산한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: 독립 소음원의 dB level을 산술합한다.",
+          "description": "Independent source level은 10·log10[Σ10^(Li/10)] 구조로 합산한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_identical_source_doubling_plus_six_db",
+          "claim": "동일한 독립 source 두 개는 6 dB 증가한다.",
+          "correction": "동일한 독립 source 두 개는 약 3.01 dB 증가한다.",
+          "wrong_claim": "동일한 독립 source 두 개는 6 dB 증가한다.",
+          "correct_rule": "동일한 독립 source 두 개는 약 3.01 dB 증가한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: 동일한 독립 source 두 개는 6 dB 증가한다.",
+          "description": "동일한 독립 source 두 개는 약 3.01 dB 증가한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_pressure_doubling_plus_three_db",
+          "claim": "Acoustic pressure amplitude 두 배는 3 dB 증가한다.",
+          "correction": "Acoustic pressure amplitude 두 배는 약 6.02 dB 증가한다.",
+          "wrong_claim": "Acoustic pressure amplitude 두 배는 3 dB 증가한다.",
+          "correct_rule": "Acoustic pressure amplitude 두 배는 약 6.02 dB 증가한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Acoustic pressure amplitude 두 배는 3 dB 증가한다.",
+          "description": "Acoustic pressure amplitude 두 배는 약 6.02 dB 증가한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_dba_equals_unweighted_db",
+          "claim": "dBA와 unweighted dB는 frequency weighting과 무관하게 동일하다.",
+          "correction": "dBA는 frequency weighting이 적용된 level이며 unweighted dB와 구분한다.",
+          "wrong_claim": "dBA와 unweighted dB는 frequency weighting과 무관하게 동일하다.",
+          "correct_rule": "dBA는 frequency weighting이 적용된 level이며 unweighted dB와 구분한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: dBA와 unweighted dB는 frequency weighting과 무관하게 동일하다.",
+          "description": "dBA는 frequency weighting이 적용된 level이며 unweighted dB와 구분한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_overall_level_equals_spectrum",
+          "claim": "Overall level 하나만 알면 frequency spectrum과 octave-band distribution도 동일하게 결정된다.",
+          "correction": "Overall level과 spectrum은 서로 다른 정보를 제공한다.",
+          "wrong_claim": "Overall level 하나만 알면 frequency spectrum과 octave-band distribution도 동일하게 결정된다.",
+          "correct_rule": "Overall level과 spectrum은 서로 다른 정보를 제공한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Overall level 하나만 알면 frequency spectrum과 octave-band distribution도 동일하게 결정된다.",
+          "description": "Overall level과 spectrum은 서로 다른 정보를 제공한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_distance_does_not_affect_spl",
+          "claim": "Observation distance와 acoustic environment는 sound-pressure level에 영향을 주지 않는다.",
+          "correction": "External SPL은 distance, directivity, reflection과 environment에 의존한다.",
+          "wrong_claim": "Observation distance와 acoustic environment는 sound-pressure level에 영향을 주지 않는다.",
+          "correct_rule": "External SPL은 distance, directivity, reflection과 environment에 의존한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Observation distance와 acoustic environment는 sound-pressure level에 영향을 주지 않는다.",
+          "description": "External SPL은 distance, directivity, reflection과 environment에 의존한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_gas_noise_independent_of_flow_pressure",
+          "claim": "Aerodynamic noise는 flow rate, pressure ratio와 gas property에 무관하다.",
+          "correction": "Aerodynamic noise는 mass flow, pressure ratio, gas property와 geometry를 입력으로 사용한다.",
+          "wrong_claim": "Aerodynamic noise는 flow rate, pressure ratio와 gas property에 무관하다.",
+          "correct_rule": "Aerodynamic noise는 mass flow, pressure ratio, gas property와 geometry를 입력으로 사용한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Aerodynamic noise는 flow rate, pressure ratio와 gas property에 무관하다.",
+          "description": "Aerodynamic noise는 mass flow, pressure ratio, gas property와 geometry를 입력으로 사용한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_choked_gas_means_no_noise",
+          "claim": "Choked gas flow는 유량과 jet가 없어 noise가 발생하지 않는다.",
+          "correction": "Choked gas flow는 zero flow가 아니며 high-velocity jet와 shock-related noise가 발생할 수 있다.",
+          "wrong_claim": "Choked gas flow는 유량과 jet가 없어 noise가 발생하지 않는다.",
+          "correct_rule": "Choked gas flow는 zero flow가 아니며 high-velocity jet와 shock-related noise가 발생할 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Choked gas flow는 유량과 jet가 없어 noise가 발생하지 않는다.",
+          "description": "Choked gas flow는 zero flow가 아니며 high-velocity jet와 shock-related noise가 발생할 수 있다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_universal_outlet_mach_limit",
+          "claim": "하나의 outlet Mach number가 모든 valve와 project의 universal acceptance limit이다.",
+          "correction": "Mach acceptance criterion은 manufacturer와 project specification을 확인한다.",
+          "wrong_claim": "하나의 outlet Mach number가 모든 valve와 project의 universal acceptance limit이다.",
+          "correct_rule": "Mach acceptance criterion은 manufacturer와 project specification을 확인한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: 하나의 outlet Mach number가 모든 valve와 project의 universal acceptance limit이다.",
+          "description": "Mach acceptance criterion은 manufacturer와 project specification을 확인한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_cavitation_noise_equals_flashing_noise",
+          "claim": "Cavitation bubble-collapse noise와 flashing persistent two-phase noise는 동일 mechanism이다.",
+          "correction": "Cavitation collapse와 flashing persistent two-phase mechanism을 구분한다.",
+          "wrong_claim": "Cavitation bubble-collapse noise와 flashing persistent two-phase noise는 동일 mechanism이다.",
+          "correct_rule": "Cavitation collapse와 flashing persistent two-phase mechanism을 구분한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Cavitation bubble-collapse noise와 flashing persistent two-phase noise는 동일 mechanism이다.",
+          "description": "Cavitation collapse와 flashing persistent two-phase mechanism을 구분한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_hydrodynamic_noise_only_cavitation",
+          "claim": "Hydrodynamic noise는 cavitation에서만 발생하고 single-phase turbulence와 flashing에서는 발생하지 않는다.",
+          "correction": "Hydrodynamic noise는 turbulence, cavitation과 flashing regime을 구분한다.",
+          "wrong_claim": "Hydrodynamic noise는 cavitation에서만 발생하고 single-phase turbulence와 flashing에서는 발생하지 않는다.",
+          "correct_rule": "Hydrodynamic noise는 turbulence, cavitation과 flashing regime을 구분한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Hydrodynamic noise는 cavitation에서만 발생하고 single-phase turbulence와 flashing에서는 발생하지 않는다.",
+          "description": "Hydrodynamic noise는 turbulence, cavitation과 flashing regime을 구분한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_flashing_noise_is_bubble_collapse",
+          "claim": "Flashing noise의 핵심은 downstream bubble collapse이다.",
+          "correction": "Flashing noise는 persistent two-phase flow와 droplet interaction이 핵심이다.",
+          "wrong_claim": "Flashing noise의 핵심은 downstream bubble collapse이다.",
+          "correct_rule": "Flashing noise는 persistent two-phase flow와 droplet interaction이 핵심이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Flashing noise의 핵심은 downstream bubble collapse이다.",
+          "description": "Flashing noise는 persistent two-phase flow와 droplet interaction이 핵심이다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_pipe_transmission_loss_irrelevant",
+          "claim": "Internal acoustic power와 external SPL 사이에서 pipe transmission loss는 필요 없다.",
+          "correction": "Internal acoustic source에서 external SPL로 변환할 때 pipe transmission loss와 radiation condition을 적용한다.",
+          "wrong_claim": "Internal acoustic power와 external SPL 사이에서 pipe transmission loss는 필요 없다.",
+          "correct_rule": "Internal acoustic source에서 external SPL로 변환할 때 pipe transmission loss와 radiation condition을 적용한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Internal acoustic power와 external SPL 사이에서 pipe transmission loss는 필요 없다.",
+          "description": "Internal acoustic source에서 external SPL로 변환할 때 pipe transmission loss와 radiation condition을 적용한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_insulation_always_reduces_all_noise",
+          "claim": "어떤 insulation도 모든 frequency와 installation에서 동일하게 noise를 감소시킨다.",
+          "correction": "Insulation attenuation은 frequency, installation과 structural coupling에 의존한다.",
+          "wrong_claim": "어떤 insulation도 모든 frequency와 installation에서 동일하게 noise를 감소시킨다.",
+          "correct_rule": "Insulation attenuation은 frequency, installation과 structural coupling에 의존한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: 어떤 insulation도 모든 frequency와 installation에서 동일하게 noise를 감소시킨다.",
+          "description": "Insulation attenuation은 frequency, installation과 structural coupling에 의존한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_low_noise_trim_eliminates_noise",
+          "claim": "Low-noise trim을 적용하면 모든 operating condition에서 noise가 0이 된다.",
+          "correction": "Low-noise trim은 source level을 줄일 수 있으나 noise를 0으로 보장하지 않는다.",
+          "wrong_claim": "Low-noise trim을 적용하면 모든 operating condition에서 noise가 0이 된다.",
+          "correct_rule": "Low-noise trim은 source level을 줄일 수 있으나 noise를 0으로 보장하지 않는다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Low-noise trim을 적용하면 모든 operating condition에서 noise가 0이 된다.",
+          "description": "Low-noise trim은 source level을 줄일 수 있으나 noise를 0으로 보장하지 않는다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_larger_size_always_quieter",
+          "claim": "Valve size를 확대하면 capacity와 travel 조건에 관계없이 항상 더 조용하다.",
+          "correction": "Valve size는 velocity, travel, rangeability와 installed performance를 함께 검토한다.",
+          "wrong_claim": "Valve size를 확대하면 capacity와 travel 조건에 관계없이 항상 더 조용하다.",
+          "correct_rule": "Valve size는 velocity, travel, rangeability와 installed performance를 함께 검토한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Valve size를 확대하면 capacity와 travel 조건에 관계없이 항상 더 조용하다.",
+          "description": "Valve size는 velocity, travel, rangeability와 installed performance를 함께 검토한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_diffuser_has_no_capacity_effect",
+          "claim": "Diffuser와 downstream restriction은 pressure loss와 capacity에 영향을 주지 않는다.",
+          "correction": "Diffuser는 pressure drop을 분담하며 capacity, choked condition과 자체 noise를 검토한다.",
+          "wrong_claim": "Diffuser와 downstream restriction은 pressure loss와 capacity에 영향을 주지 않는다.",
+          "correct_rule": "Diffuser는 pressure drop을 분담하며 capacity, choked condition과 자체 noise를 검토한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Diffuser와 downstream restriction은 pressure loss와 capacity에 영향을 주지 않는다.",
+          "description": "Diffuser는 pressure drop을 분담하며 capacity, choked condition과 자체 noise를 검토한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_mitigation_reductions_arithmetic_sum",
+          "claim": "Source, path와 receiver reduction 값을 검증 없이 산술합한다.",
+          "correction": "Reduction은 동일 frequency·basis에서 적용하고 같은 mechanism을 중복 산정하지 않는다.",
+          "wrong_claim": "Source, path와 receiver reduction 값을 검증 없이 산술합한다.",
+          "correct_rule": "Reduction은 동일 frequency·basis에서 적용하고 같은 mechanism을 중복 산정하지 않는다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Source, path와 receiver reduction 값을 검증 없이 산술합한다.",
+          "description": "Reduction은 동일 frequency·basis에서 적용하고 같은 mechanism을 중복 산정하지 않는다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_single_normal_noise_case_sufficient",
+          "claim": "Normal operating point 한 점만 검토하면 maximum, startup와 bypass condition은 필요 없다.",
+          "correction": "Minimum·normal·maximum 및 startup·shutdown·bypass condition을 검토한다.",
+          "wrong_claim": "Normal operating point 한 점만 검토하면 maximum, startup와 bypass condition은 필요 없다.",
+          "correct_rule": "Minimum·normal·maximum 및 startup·shutdown·bypass condition을 검토한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: Normal operating point 한 점만 검토하면 maximum, startup와 bypass condition은 필요 없다.",
+          "description": "Minimum·normal·maximum 및 startup·shutdown·bypass condition을 검토한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_universal_dba_limit",
+          "claim": "하나의 dBA 값이 모든 국가, 노출시간과 회사의 universal occupational limit이다.",
+          "correction": "Occupational limit은 적용 국가, 노출시간과 회사 기준을 확인한다.",
+          "wrong_claim": "하나의 dBA 값이 모든 국가, 노출시간과 회사의 universal occupational limit이다.",
+          "correct_rule": "Occupational limit은 적용 국가, 노출시간과 회사 기준을 확인한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "제어밸브 소음 핵심 오류: 하나의 dBA 값이 모든 국가, 노출시간과 회사의 universal occupational limit이다.",
+          "description": "Occupational limit은 적용 국가, 노출시간과 회사 기준을 확인한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        }
+      ],
+      "safe_expressions": [
+        "Sound power와 sound pressure는 서로 다른 acoustic quantity이다.",
+        "Sound power level은 10·log10 구조를 사용한다.",
+        "Sound pressure level은 20·log10 구조를 사용한다.",
+        "독립 source level은 logarithmic sum으로 합산한다.",
+        "동일한 독립 source 두 개는 약 3 dB 증가한다.",
+        "Acoustic pressure amplitude 두 배는 약 6 dB 증가한다.",
+        "Overall dB와 octave spectrum은 서로 다른 정보를 제공한다.",
+        "dBA는 frequency weighting이 적용된 level이다.",
+        "Aerodynamic noise는 turbulent gas jet와 연계된다.",
+        "Choked gas flow는 zero flow가 아니다.",
+        "Gas sizing 결과는 Topic 7에서 인계한다.",
+        "Hydrodynamic noise는 turbulence, cavitation과 flashing을 구분한다.",
+        "Cavitation은 bubble collapse noise와 연계된다.",
+        "Flashing은 persistent two-phase noise와 연계된다.",
+        "Liquid regime은 Topic 8에서 인계한다.",
+        "Internal acoustic power와 external SPL 사이에 pipe transmission loss를 적용한다.",
+        "Multi-hole trim은 jet를 분할한다.",
+        "Multi-stage trim은 stage별 pressure ratio와 velocity를 제한한다.",
+        "Diffuser는 system pressure drop을 분담할 수 있다.",
+        "Silencer, insulation과 enclosure는 path treatment이다.",
+        "Valve size 확대는 조건부 대책이다.",
+        "Low-noise trim은 Cv와 rangeability tradeoff를 갖는다.",
+        "Small passage는 plugging과 maintenance를 검토한다.",
+        "Minimum·normal·maximum 및 startup·shutdown을 검토한다.",
+        "Parallel source는 logarithmic sum을 사용한다.",
+        "Field measurement는 background correction을 검토한다.",
+        "Occupational limit은 적용 법규와 회사 기준을 확인한다.",
+        "Vendor prediction을 field data로 교차 검증한다."
+      ],
+      "revision_notes": [
+        "Sound power, sound pressure, logarithmic dB와 dBA 계약을 추가했다.",
+        "Aerodynamic·hydrodynamic source와 Topic 7·8 handoff를 추가했다.",
+        "Low-noise trim, path treatment와 field verification 경계를 추가했다."
+      ],
+      "topic_label": "제어밸브 공력·수력 소음과 저소음 트림",
+      "core_facts": [
+        "Control valve noise 평가는 acoustic quantity, source mechanism, transmission path, mitigation과 field verification을 통합한다.",
+        "Process-flow noise와 actuator·positioner·booster exhaust noise를 구분한다.",
+        "Noise control은 source, transmission path와 receiver 순서로 구분하고 효과를 중복 산정하지 않는다.",
+        "Sound power level은 acoustic power ratio에 10·log10을 적용한 source-energy level이다.",
+        "Sound pressure level은 rms acoustic pressure ratio에 20·log10을 적용한 observation-point level이다.",
+        "dB는 logarithmic ratio이며 level을 단순 산술합하지 않는다.",
+        "Independent source level은 10·log10[Σ10^(Li/10)] 구조로 합산한다.",
+        "동일한 독립 source 두 개는 total level을 약 3.01 dB 증가시킨다.",
+        "동일 조건에서 acoustic pressure amplitude 두 배는 sound-pressure level을 약 6.02 dB 증가시킨다.",
+        "Overall level, frequency spectrum과 octave-band level은 서로 다른 정보를 제공한다.",
+        "dBA는 사람 청감 특성을 근사한 frequency-weighted level이며 unweighted dB와 동일하지 않다.",
+        "Sound power와 sound pressure는 area, directivity, distance, environment와 transmission loss 없이 직접 등치하지 않는다.",
+        "Aerodynamic noise는 high-velocity compressible jet의 turbulent mixing과 downstream interaction에서 발생한다.",
+        "High pressure-ratio 또는 choked gas service는 expansion과 shock-related noise를 만들 수 있다.",
+        "Gas choked regime은 aerodynamic-noise prediction input이며 zero flow를 의미하지 않는다.",
+        "Gas outlet velocity, Mach number와 downstream pipe geometry는 aerodynamic-noise risk에 영향을 준다.",
+        "Gas capacity, xT, xTP, Y, mass flow와 selected travel은 Topic 7에서 인계받는다.",
+        "Single-phase liquid turbulence는 broadband pressure fluctuation과 noise를 만들 수 있다.",
+        "Cavitation bubble collapse는 impulsive pressure와 broadband noise를 만들 수 있다.",
+        "Flashing의 persistent two-phase flow와 droplet impact는 broadband noise와 vibration을 만들 수 있다.",
+        "Cavitation, flashing, liquid choked regime과 FL 계열 정보는 Topic 8에서 인계받는다.",
+        "Internal acoustic power는 fluid와 pipe wall을 통해 전달되고 external sound로 radiation된다.",
+        "Pipe transmission loss는 diameter, wall thickness, material, frequency와 service condition에 의존한다.",
+        "External SPL은 distance, directivity, reflection, enclosure와 measurement location에 의존한다.",
+        "Noise prediction은 적용 IEC·ISA edition, manufacturer method와 observation condition을 명시한다.",
+        "Multi-hole·multi-path trim은 큰 jet를 여러 작은 jet로 분할하여 acoustic source 특성을 변경한다.",
+        "Multi-stage trim은 stage별 pressure ratio와 velocity를 제한하여 source noise를 줄인다.",
+        "Diffuser·orifice는 system pressure drop을 분담하지만 capacity, erosion과 자체 noise를 함께 검토한다.",
+        "Silencer, insulation과 enclosure는 서로 다른 transmission-path treatment이다.",
+        "Valve size 확대는 velocity를 줄일 수 있으나 low-travel, rangeability와 installed-performance tradeoff를 만든다.",
+        "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+        "Small passage와 multi-stage trim은 plugging, erosion, particle tolerance와 maintenance를 검토한다.",
+        "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
+        "Parallel valve와 bypass source는 independent-source logarithmic sum으로 결합한다.",
+        "Field measurement는 위치, weighting, operating condition과 background correction을 기록한다.",
+        "Prediction과 measurement 차이는 input, regime, pipe, observation point, reflection과 background 순서로 진단한다.",
+        "Occupational noise limit은 적용 국가, 노출시간과 회사 기준을 확인한다.",
+        "Vendor result는 source level, octave spectrum, external SPL, selected travel와 mitigation 조건으로 교차 검증한다."
+      ],
+      "triggers": [
+        "control valve aerodynamic noise choked gas",
+        "control",
+        "valve",
+        "aerodynamic",
+        "noise",
+        "choked",
+        "gas",
+        "valve hydrodynamic noise cavitation flashing",
+        "hydrodynamic",
+        "cavitation",
+        "flashing",
+        "sound power sound pressure valve prediction",
+        "sound",
+        "power",
+        "pressure",
+        "prediction",
+        "logarithmic dB addition parallel valves",
+        "logarithmic",
+        "dB",
+        "addition",
+        "parallel",
+        "valves",
+        "octave spectrum dBA valve noise",
+        "octave",
+        "spectrum",
+        "dBA",
+        "low-noise trim multi-hole jet division",
+        "low-noise",
+        "trim",
+        "multi-hole",
+        "jet",
+        "division",
+        "multi-stage trim pressure ratio velocity",
+        "multi-stage",
+        "ratio",
+        "velocity",
+        "valve diffuser system pressure drop noise",
+        "diffuser",
+        "system",
+        "drop",
+        "pipe transmission loss external SPL",
+        "pipe",
+        "transmission",
+        "loss",
+        "external",
+        "SPL",
+        "valve noise field measurement background correction",
+        "field",
+        "measurement",
+        "background",
+        "correction",
+        "gas outlet Mach downstream pipe noise",
+        "outlet",
+        "Mach",
+        "downstream",
+        "flashing two-phase broadband noise",
+        "two-phase",
+        "broadband",
+        "cavitation bubble collapse sound",
+        "bubble",
+        "collapse",
+        "source path receiver valve noise",
+        "source",
+        "path",
+        "receiver",
+        "selected travel octave spectrum vendor prediction",
+        "selected",
+        "travel",
+        "vendor",
+        "제어밸브 공력소음 초크가스",
+        "공력소음",
+        "초크가스",
+        "제어밸브 수력소음 캐비테이션 플래싱",
+        "수력소음",
+        "캐비테이션",
+        "플래싱",
+        "음향파워 음압레벨 차이",
+        "음향파워",
+        "음압레벨",
+        "dB 로그합산 병렬밸브",
+        "로그합산",
+        "병렬밸브",
+        "저소음 트림 다공 제트분할",
+        "저소음",
+        "트림",
+        "다공",
+        "제트분할",
+        "다단 감압 속도제한 소음",
+        "다단",
+        "감압",
+        "속도제한",
+        "소음",
+        "배관 투과손실 외부 음압",
+        "배관",
+        "투과손실",
+        "외부",
+        "음압",
+        "현장 소음 측정 배경보정",
+        "현장",
+        "측정",
+        "배경보정",
+        "Sound power, sound pressure, dB, dBA와 octave spectrum을 구분하여 설명하시오.",
+        "Sound",
+        "구분하여",
+        "Parallel valve의 independent source level을 logarithmic sum으로 계산하고 동일 source doubling을 설명하시오.",
+        "Parallel",
+        "independent",
+        "level",
+        "sum",
+        "으로",
+        "계산하고",
+        "동일",
+        "doubling",
+        "Gas control valve의 turbulent jet, choked-flow regime, outlet Mach와 aerodynamic noise를 설명하시오.",
+        "Gas",
+        "turbulent",
+        "choked-flow",
+        "regime",
+        "Single-phase turbulence, cavitation과 flashing의 hydrodynamic-noise mechanism을 비교하시오.",
+        "Single-phase",
+        "turbulence",
+        "hydrodynamic-noise",
+        "mechanism",
+        "비교하시오",
+        "Internal acoustic power가 pipe transmission loss와 radiation을 거쳐 external SPL로 나타나는 과정을 설명하시오.",
+        "Internal",
+        "acoustic",
+        "radiation",
+        "거쳐",
+        "나타나는",
+        "과정을",
+        "Multi-hole, multi-path와 multi-stage low-noise trim의 원리와 선정 tradeoff를 설명하시오.",
+        "Multi-hole",
+        "multi-path",
+        "원리와",
+        "tradeoff",
+        "Diffuser, silencer, insulation과 enclosure의 역할을 source·path 관점에서 비교하시오.",
+        "Diffuser",
+        "silencer",
+        "insulation",
+        "enclosure",
+        "역할을",
+        "관점에서",
+        "Minimum·normal·maximum 및 startup·shutdown condition별 valve noise risk를 평가하시오.",
+        "Minimum",
+        "normal",
+        "maximum",
+        "startup",
+        "shutdown",
+        "condition",
+        "risk",
+        "평가하시오",
+        "Vendor prediction과 field measurement의 차이를 진단하는 절차를 설명하시오.",
+        "Vendor",
+        "차이를",
+        "진단하는",
+        "절차를",
+        "Process input, acoustic prediction, selected travel, low-noise trim과 path treatment를 이용한 control-valve noise 대책 선정 절차를 설명하시오.",
+        "Process",
+        "input",
+        "treatment",
+        "이용한",
+        "control-valve",
+        "대책",
+        "Gas sizing의 pressure ratio, choked regime와 selected travel 확인",
+        "sizing",
+        "확인",
+        "Liquid cavitation·flashing regime와 FL 계열 확인",
+        "Liquid",
+        "FL",
+        "계열",
+        "Sound power·octave spectrum·external SPL target 구분",
+        "target",
+        "구분",
+        "Downstream pipe diameter·schedule·transmission loss 확인",
+        "Downstream",
+        "diameter",
+        "schedule",
+        "Multi-hole·multi-stage trim과 diffuser pressure-drop distribution",
+        "pressure-drop",
+        "distribution",
+        "Silencer·insulation·enclosure의 frequency별 효과",
+        "Silencer",
+        "frequency",
+        "효과",
+        "Minimum·normal·maximum과 startup·shutdown condition",
+        "Measurement distance·weighting·background correction 기록",
+        "Measurement",
+        "distance",
+        "weighting",
+        "기록",
+        "Topic 10 balanced·unbalanced trim structure boundary",
+        "Topic",
+        "balanced",
+        "unbalanced",
+        "structure",
+        "boundary",
+        "Topic 11 positioner·I/P·booster accessory boundary",
+        "positioner",
+        "I",
+        "P",
+        "booster",
+        "accessory",
+        "Topic 14 severe-service material·hardfacing boundary",
+        "severe-service",
+        "material",
+        "hardfacing",
+        "Topic 16 full valve-package workflow boundary",
+        "full",
+        "valve-package",
+        "workflow",
+        "Acoustic quantity와 logarithmic level을 구분한다.",
+        "Acoustic",
+        "quantity",
+        "구분한다",
+        "Multiple-source dB addition을 계산한다.",
+        "Multiple-source",
+        "계산한다",
+        "Aerodynamic source mechanism과 Topic 7 handoff를 설명한다.",
+        "Aerodynamic",
+        "handoff",
+        "설명한다",
+        "Hydrodynamic noise regime을 비교한다.",
+        "Hydrodynamic",
+        "비교한다",
+        "Internal source에서 observation point까지의 전달을 설명한다.",
+        "에서",
+        "observation",
+        "point",
+        "까지의",
+        "전달을",
+        "Low-noise source treatment와 설계 상충을 설명한다.",
+        "Low-noise",
+        "상충을",
+        "Pressure-drop distribution과 transmission-path treatment를 비교한다.",
+        "Pressure-drop",
+        "transmission-path",
+        "Operating-case matrix와 multiple source를 적용한다.",
+        "Operating-case",
+        "matrix",
+        "multiple",
+        "적용한다",
+        "Prediction·measurement gap과 compliance 조건을 진단한다.",
+        "Prediction",
+        "gap",
+        "compliance",
+        "조건을",
+        "진단한다",
+        "Noise source, prediction, mitigation과 verification을 통합한다.",
+        "Noise",
+        "mitigation",
+        "verification",
+        "통합한다",
+        "제어밸브의 공력·수력 소음, 소음 예측 및 저소음 트림",
+        "제어밸브의",
+        "공력",
+        "수력",
+        "예측",
+        "제어밸브 공력·수력 소음과 저소음 트림",
+        "소음과",
+        "control valve noise scope",
+        "scope",
+        "acoustic quantity",
+        "source mechanism",
+        "transmission path",
+        "field verification",
+        "Control valve noise 평가는 acoustic quantity, source mechanism, transmission path, mitigation과 field verification을 통합한다.",
+        "Control",
+        "평가는",
+        "process flow noise",
+        "process",
+        "flow",
+        "accessory noise",
+        "actuator exhaust",
+        "actuator",
+        "exhaust",
+        "positioner exhaust",
+        "booster exhaust",
+        "Process-flow noise와 actuator·positioner·booster exhaust noise를 구분한다.",
+        "Process-flow",
+        "source path receiver",
+        "noise control hierarchy",
+        "hierarchy",
+        "source treatment",
+        "path treatment",
+        "receiver protection",
+        "protection",
+        "Noise control은 source, transmission path와 receiver 순서로 구분하고 효과를 중복 산정하지 않는다.",
+        "순서로",
+        "구분하고",
+        "효과를",
+        "중복",
+        "산정하지",
+        "않는다",
+        "sound power level",
+        "acoustic power",
+        "10 log10",
+        "log10",
+        "source energy",
+        "energy",
+        "reference power",
+        "reference",
+        "Sound power level은 acoustic power ratio에 10·log10을 적용한 source-energy level이다.",
+        "적용한",
+        "source-energy",
+        "이다",
+        "sound pressure level",
+        "rms acoustic pressure",
+        "rms",
+        "20 log10",
+        "observation point",
+        "reference pressure",
+        "Sound pressure level은 rms acoustic pressure ratio에 20·log10을 적용한 observation-point level이다.",
+        "observation-point",
+        "decibel logarithmic scale",
+        "decibel",
+        "scale",
+        "logarithmic ratio",
+        "not arithmetic sum",
+        "not",
+        "arithmetic",
+        "level calculation",
+        "calculation",
+        "dB는 logarithmic ratio이며 level을 단순 산술합하지 않는다.",
+        "이며",
+        "단순",
+        "산술합하지",
+        "independent source",
+        "logarithmic level sum",
+        "10 log sum",
+        "log",
+        "multiple noise sources",
+        "sources",
+        "energy addition",
+        "Independent source level은 10·log10[Σ10^(Li/10)] 구조로 합산한다.",
+        "Independent",
+        "Li",
+        "구조로",
+        "합산한다",
+        "identical source doubling",
+        "identical",
+        "plus 3 dB",
+        "plus",
+        "two independent sources",
+        "two",
+        "power doubling",
+        "logarithmic addition",
+        "동일한 독립 source 두 개는 total level을 약 3.01 dB 증가시킨다.",
+        "동일한",
+        "독립",
+        "개는",
+        "total",
+        "증가시킨다",
+        "pressure amplitude doubling",
+        "amplitude",
+        "plus 6 dB",
+        "20 log10 two",
+        "sound pressure",
+        "amplitude ratio",
+        "동일 조건에서 acoustic pressure amplitude 두 배는 sound-pressure level을 약 6.02 dB 증가시킨다.",
+        "조건에서",
+        "배는",
+        "sound-pressure",
+        "overall level",
+        "overall",
+        "frequency spectrum",
+        "octave band",
+        "band",
+        "one third octave",
+        "one",
+        "third",
+        "peak frequency",
+        "peak",
+        "Overall level, frequency spectrum과 octave-band level은 서로 다른 정보를 제공한다.",
+        "Overall",
+        "octave-band",
+        "서로",
+        "다른",
+        "정보를",
+        "제공한다",
+        "A weighting",
+        "A",
+        "frequency weighted",
+        "weighted",
+        "human hearing",
+        "human",
+        "hearing",
+        "unweighted dB",
+        "unweighted",
+        "dBA는 사람 청감 특성을 근사한 frequency-weighted level이며 unweighted dB와 동일하지 않다.",
+        "사람",
+        "청감",
+        "특성을",
+        "근사한",
+        "frequency-weighted",
+        "동일하지",
+        "않다",
+        "sound power versus pressure",
+        "versus",
+        "directivity",
+        "environment",
+        "transmission loss",
+        "Sound power와 sound pressure는 area, directivity, distance, environment와 transmission loss 없이 직접 등치하지 않는다.",
+        "area",
+        "없이",
+        "직접",
+        "등치하지",
+        "aerodynamic noise",
+        "compressible turbulent jet",
+        "compressible",
+        "turbulent mixing",
+        "mixing",
+        "gas valve",
+        "downstream interaction",
+        "interaction",
+        "Aerodynamic noise는 high-velocity compressible jet의 turbulent mixing과 downstream interaction에서 발생한다.",
+        "high-velocity",
+        "발생한다",
+        "gas expansion noise",
+        "expansion",
+        "shock related noise",
+        "shock",
+        "related",
+        "high pressure ratio",
+        "high",
+        "choked gas",
+        "shock cell",
+        "cell",
+        "High pressure-ratio 또는 choked gas service는 expansion과 shock-related noise를 만들 수 있다.",
+        "High",
+        "pressure-ratio",
+        "또는",
+        "service",
+        "shock-related",
+        "만들",
+        "있다",
+        "gas choked regime",
+        "aerodynamic input",
+        "not zero flow",
+        "zero",
+        "capacity limit",
+        "capacity",
+        "limit",
+        "noise prediction",
+        "Gas choked regime은 aerodynamic-noise prediction input이며 zero flow를 의미하지 않는다.",
+        "aerodynamic-noise",
+        "의미하지",
+        "gas outlet velocity",
+        "Mach number",
+        "number",
+        "downstream pipe geometry",
+        "geometry",
+        "sonic velocity",
+        "sonic",
+        "noise risk",
+        "Gas outlet velocity, Mach number와 downstream pipe geometry는 aerodynamic-noise risk에 영향을 준다.",
+        "영향을",
+        "준다",
+        "Topic 7 handoff",
+        "gas capacity",
+        "xT xTP",
+        "xT",
+        "xTP",
+        "expansion factor Y",
+        "factor",
+        "Y",
+        "selected travel",
+        "Gas capacity, xT, xTP, Y, mass flow와 selected travel은 Topic 7에서 인계받는다.",
+        "mass",
+        "인계받는다",
+        "hydrodynamic turbulence noise",
+        "single phase liquid",
+        "single",
+        "phase",
+        "liquid",
+        "broadband pressure fluctuation",
+        "fluctuation",
+        "liquid valve",
+        "Single-phase liquid turbulence는 broadband pressure fluctuation과 noise를 만들 수 있다.",
+        "cavitation noise",
+        "bubble collapse",
+        "impulsive pressure",
+        "impulsive",
+        "broadband noise",
+        "vena contracta",
+        "vena",
+        "contracta",
+        "Cavitation bubble collapse는 impulsive pressure와 broadband noise를 만들 수 있다.",
+        "Cavitation",
+        "flashing noise",
+        "persistent two phase flow",
+        "persistent",
+        "droplet impact",
+        "droplet",
+        "impact",
+        "vibration",
+        "Flashing의 persistent two-phase flow와 droplet impact는 broadband noise와 vibration을 만들 수 있다.",
+        "Flashing",
+        "Topic 8 handoff",
+        "cavitation flashing",
+        "liquid choked",
+        "FL FP FLP",
+        "FP",
+        "FLP",
+        "hydrodynamic regime",
+        "Cavitation, flashing, liquid choked regime과 FL 계열 정보는 Topic 8에서 인계받는다.",
+        "정보는",
+        "internal acoustic power",
+        "internal",
+        "pipe wall",
+        "wall",
+        "sound radiation",
+        "fluid propagation",
+        "fluid",
+        "propagation",
+        "external sound",
+        "Internal acoustic power는 fluid와 pipe wall을 통해 전달되고 external sound로 radiation된다.",
+        "통해",
+        "전달되고",
+        "된다",
+        "pipe transmission loss",
+        "wall thickness",
+        "thickness",
+        "Pipe transmission loss는 diameter, wall thickness, material, frequency와 service condition에 의존한다.",
+        "Pipe",
+        "의존한다",
+        "external SPL",
+        "reflection",
+        "measurement location",
+        "location",
+        "External SPL은 distance, directivity, reflection, enclosure와 measurement location에 의존한다.",
+        "External",
+        "noise prediction standard",
+        "standard",
+        "IEC 60534-8",
+        "IEC",
+        "ISA edition",
+        "ISA",
+        "edition",
+        "manufacturer method",
+        "manufacturer",
+        "method",
+        "observation condition",
+        "Noise prediction은 적용 IEC·ISA edition, manufacturer method와 observation condition을 명시한다.",
+        "명시한다",
+        "multi hole trim",
+        "multi",
+        "hole",
+        "multi path trim",
+        "jet division",
+        "small jets",
+        "small",
+        "jets",
+        "acoustic source",
+        "Multi-hole·multi-path trim은 큰 jet를 여러 작은 jet로 분할하여 acoustic source 특성을 변경한다.",
+        "여러",
+        "작은",
+        "분할하여",
+        "변경한다",
+        "multi stage trim",
+        "stage",
+        "pressure ratio staging",
+        "staging",
+        "velocity control",
+        "source noise reduction",
+        "reduction",
+        "staged pressure drop",
+        "staged",
+        "Multi-stage trim은 stage별 pressure ratio와 velocity를 제한하여 source noise를 줄인다.",
+        "Multi-stage",
+        "제한하여",
+        "줄인다",
+        "orifice plate",
+        "orifice",
+        "plate",
+        "pressure drop distribution",
+        "capacity effect",
+        "effect",
+        "diffuser noise",
+        "Diffuser·orifice는 system pressure drop을 분담하지만 capacity, erosion과 자체 noise를 함께 검토한다.",
+        "분담하지만",
+        "erosion",
+        "자체",
+        "함께",
+        "검토한다",
+        "acoustic insulation",
+        "attenuation",
+        "Silencer, insulation과 enclosure는 서로 다른 transmission-path treatment이다.",
+        "valve size noise tradeoff",
+        "size",
+        "velocity reduction",
+        "low travel",
+        "low",
+        "rangeability",
+        "installed performance",
+        "installed",
+        "performance",
+        "Valve size 확대는 velocity를 줄일 수 있으나 low-travel, rangeability와 installed-performance tradeoff를 만든다.",
+        "Valve",
+        "확대는",
+        "줄일",
+        "있으나",
+        "low-travel",
+        "installed-performance",
+        "만든다",
+        "low noise trim tradeoff",
+        "Cv capacity",
+        "Cv",
+        "noise reduction",
+        "trim selection",
+        "selection",
+        "Low-noise trim은 noise reduction과 Cv capacity·rangeability 사이의 tradeoff를 갖는다.",
+        "사이의",
+        "갖는다",
+        "small passage",
+        "passage",
+        "plugging",
+        "particle tolerance",
+        "particle",
+        "tolerance",
+        "maintenance",
+        "Small passage와 multi-stage trim은 plugging, erosion, particle tolerance와 maintenance를 검토한다.",
+        "Small",
+        "operating case noise",
+        "operating",
+        "case",
+        "minimum normal maximum",
+        "minimum",
+        "startup shutdown",
+        "case matrix",
+        "Minimum·normal·maximum 및 startup·shutdown condition별로 noise를 예측한다.",
+        "별로",
+        "예측한다",
+        "parallel valve noise",
+        "bypass source",
+        "bypass",
+        "multiple sources",
+        "logarithmic combination",
+        "combination",
+        "independent sources",
+        "Parallel valve와 bypass source는 independent-source logarithmic sum으로 결합한다.",
+        "independent-source",
+        "결합한다",
+        "field noise measurement",
+        "operating condition",
+        "background correction",
+        "Field measurement는 위치, weighting, operating condition과 background correction을 기록한다.",
+        "Field",
+        "위치",
+        "기록한다",
+        "prediction measurement gap",
+        "input diagnosis",
+        "diagnosis",
+        "flow regime",
+        "background noise",
+        "Prediction과 measurement 차이는 input, regime, pipe, observation point, reflection과 background 순서로 진단한다.",
+        "차이는",
+        "occupational noise limit",
+        "occupational",
+        "country regulation",
+        "country",
+        "regulation",
+        "exposure time",
+        "exposure",
+        "time",
+        "company standard",
+        "company",
+        "hearing conservation",
+        "conservation",
+        "Occupational noise limit은 적용 국가, 노출시간과 회사 기준을 확인한다.",
+        "Occupational",
+        "국가",
+        "노출시간과",
+        "회사",
+        "기준을",
+        "확인한다",
+        "vendor noise prediction",
+        "source level",
+        "octave spectrum",
+        "Vendor result는 source level, octave spectrum, external SPL, selected travel와 mitigation 조건으로 교차 검증한다.",
+        "result",
+        "조건으로",
+        "교차",
+        "검증한다"
+      ],
+      "aliases": [
+        "control valve aerodynamic noise choked gas",
+        "valve hydrodynamic noise cavitation flashing",
+        "sound power sound pressure valve prediction",
+        "logarithmic dB addition parallel valves",
+        "octave spectrum dBA valve noise",
+        "low-noise trim multi-hole jet division",
+        "multi-stage trim pressure ratio velocity",
+        "valve diffuser system pressure drop noise",
+        "pipe transmission loss external SPL",
+        "valve noise field measurement background correction",
+        "gas outlet Mach downstream pipe noise",
+        "flashing two-phase broadband noise",
+        "cavitation bubble collapse sound",
+        "source path receiver valve noise",
+        "selected travel octave spectrum vendor prediction",
+        "제어밸브 공력소음 초크가스",
+        "제어밸브 수력소음 캐비테이션 플래싱",
+        "음향파워 음압레벨 차이",
+        "dB 로그합산 병렬밸브",
+        "저소음 트림 다공 제트분할",
+        "다단 감압 속도제한 소음",
+        "배관 투과손실 외부 음압",
+        "현장 소음 측정 배경보정",
+        "Sound power, sound pressure, dB, dBA와 octave spectrum을 구분하여 설명하시오.",
+        "Parallel valve의 independent source level을 logarithmic sum으로 계산하고 동일 source doubling을 설명하시오.",
+        "Gas control valve의 turbulent jet, choked-flow regime, outlet Mach와 aerodynamic noise를 설명하시오.",
+        "Single-phase turbulence, cavitation과 flashing의 hydrodynamic-noise mechanism을 비교하시오.",
+        "Internal acoustic power가 pipe transmission loss와 radiation을 거쳐 external SPL로 나타나는 과정을 설명하시오.",
+        "Multi-hole, multi-path와 multi-stage low-noise trim의 원리와 선정 tradeoff를 설명하시오.",
+        "Diffuser, silencer, insulation과 enclosure의 역할을 source·path 관점에서 비교하시오.",
+        "Minimum·normal·maximum 및 startup·shutdown condition별 valve noise risk를 평가하시오.",
+        "Vendor prediction과 field measurement의 차이를 진단하는 절차를 설명하시오.",
+        "Process input, acoustic prediction, selected travel, low-noise trim과 path treatment를 이용한 control-valve noise 대책 선정 절차를 설명하시오.",
+        "Acoustic quantity와 logarithmic level을 구분한다.",
+        "Multiple-source dB addition을 계산한다.",
+        "Aerodynamic source mechanism과 Topic 7 handoff를 설명한다.",
+        "Hydrodynamic noise regime을 비교한다.",
+        "Internal source에서 observation point까지의 전달을 설명한다.",
+        "Low-noise source treatment와 설계 상충을 설명한다.",
+        "Pressure-drop distribution과 transmission-path treatment를 비교한다.",
+        "Operating-case matrix와 multiple source를 적용한다.",
+        "Prediction·measurement gap과 compliance 조건을 진단한다.",
+        "Noise source, prediction, mitigation과 verification을 통합한다.",
+        "제어밸브의 공력·수력 소음, 소음 예측 및 저소음 트림",
+        "제어밸브 공력·수력 소음과 저소음 트림"
       ],
       "priority": "CORE_MUST_PREPARE"
     },

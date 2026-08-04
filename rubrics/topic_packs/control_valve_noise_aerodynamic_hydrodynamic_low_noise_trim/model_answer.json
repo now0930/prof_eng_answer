@@ -1,0 +1,359 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+  "title_ko": "제어밸브의 공력·수력 소음, 소음 예측 및 저소음 트림",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Sound power, sound pressure, dB, dBA와 octave spectrum을 구분하여 설명하시오.",
+      "intent": "Acoustic quantity와 logarithmic level을 구분한다.",
+      "required_anchor_ids": [
+        "sound_power_level_definition",
+        "sound_pressure_level_definition",
+        "decibel_logarithmic_scale",
+        "overall_spectrum_octave_distinction",
+        "a_weighting_dba_meaning",
+        "sound_power_pressure_boundary"
+      ]
+    },
+    {
+      "pattern": "Parallel valve의 independent source level을 logarithmic sum으로 계산하고 동일 source doubling을 설명하시오.",
+      "intent": "Multiple-source dB addition을 계산한다.",
+      "required_anchor_ids": [
+        "independent_source_logarithmic_sum",
+        "identical_source_doubling",
+        "pressure_amplitude_doubling",
+        "multiple_source_parallel_bypass_combination"
+      ]
+    },
+    {
+      "pattern": "Gas control valve의 turbulent jet, choked-flow regime, outlet Mach와 aerodynamic noise를 설명하시오.",
+      "intent": "Aerodynamic source mechanism과 Topic 7 handoff를 설명한다.",
+      "required_anchor_ids": [
+        "aerodynamic_turbulent_jet_noise",
+        "aerodynamic_expansion_shock_noise",
+        "gas_choked_regime_noise_input",
+        "gas_outlet_velocity_mach_geometry",
+        "topic7_aerodynamic_noise_handoff"
+      ]
+    },
+    {
+      "pattern": "Single-phase turbulence, cavitation과 flashing의 hydrodynamic-noise mechanism을 비교하시오.",
+      "intent": "Hydrodynamic noise regime을 비교한다.",
+      "required_anchor_ids": [
+        "hydrodynamic_turbulence_noise",
+        "cavitation_bubble_collapse_noise",
+        "flashing_two_phase_noise",
+        "topic8_hydrodynamic_noise_handoff"
+      ]
+    },
+    {
+      "pattern": "Internal acoustic power가 pipe transmission loss와 radiation을 거쳐 external SPL로 나타나는 과정을 설명하시오.",
+      "intent": "Internal source에서 observation point까지의 전달을 설명한다.",
+      "required_anchor_ids": [
+        "acoustic_power_pipe_radiation_path",
+        "pipe_transmission_loss_dependency",
+        "external_spl_observation_condition",
+        "prediction_standard_vendor_method"
+      ]
+    },
+    {
+      "pattern": "Multi-hole, multi-path와 multi-stage low-noise trim의 원리와 선정 tradeoff를 설명하시오.",
+      "intent": "Low-noise source treatment와 설계 상충을 설명한다.",
+      "required_anchor_ids": [
+        "multi_hole_jet_division",
+        "multi_stage_pressure_ratio_velocity_control",
+        "low_noise_trim_capacity_rangeability_tradeoff",
+        "plugging_erosion_maintenance_tradeoff"
+      ]
+    },
+    {
+      "pattern": "Diffuser, silencer, insulation과 enclosure의 역할을 source·path 관점에서 비교하시오.",
+      "intent": "Pressure-drop distribution과 transmission-path treatment를 비교한다.",
+      "required_anchor_ids": [
+        "source_path_receiver_hierarchy",
+        "diffuser_pressure_drop_distribution",
+        "silencer_insulation_enclosure_path_treatment",
+        "valve_size_capacity_velocity_tradeoff"
+      ]
+    },
+    {
+      "pattern": "Minimum·normal·maximum 및 startup·shutdown condition별 valve noise risk를 평가하시오.",
+      "intent": "Operating-case matrix와 multiple source를 적용한다.",
+      "required_anchor_ids": [
+        "operating_case_noise_matrix",
+        "gas_choked_regime_noise_input",
+        "topic8_hydrodynamic_noise_handoff",
+        "multiple_source_parallel_bypass_combination"
+      ]
+    },
+    {
+      "pattern": "Vendor prediction과 field measurement의 차이를 진단하는 절차를 설명하시오.",
+      "intent": "Prediction·measurement gap과 compliance 조건을 진단한다.",
+      "required_anchor_ids": [
+        "prediction_standard_vendor_method",
+        "field_measurement_background_correction",
+        "prediction_measurement_gap_diagnosis",
+        "occupational_limit_local_standard"
+      ]
+    },
+    {
+      "pattern": "Process input, acoustic prediction, selected travel, low-noise trim과 path treatment를 이용한 control-valve noise 대책 선정 절차를 설명하시오.",
+      "intent": "Noise source, prediction, mitigation과 verification을 통합한다.",
+      "required_anchor_ids": [
+        "control_valve_noise_scope",
+        "process_flow_vs_accessory_noise",
+        "source_path_receiver_hierarchy",
+        "topic7_aerodynamic_noise_handoff",
+        "topic8_hydrodynamic_noise_handoff",
+        "multi_stage_pressure_ratio_velocity_control",
+        "silencer_insulation_enclosure_path_treatment",
+        "operating_case_noise_matrix",
+        "vendor_crosscheck_noise"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "Acoustic fundamentals",
+      "intent": "Sound power, sound pressure, dB, spectrum과 dBA를 정의한다.",
+      "anchor_refs": [
+        "sound_power_level_definition",
+        "sound_pressure_level_definition",
+        "decibel_logarithmic_scale",
+        "independent_source_logarithmic_sum",
+        "identical_source_doubling",
+        "pressure_amplitude_doubling",
+        "overall_spectrum_octave_distinction",
+        "a_weighting_dba_meaning",
+        "sound_power_pressure_boundary"
+      ]
+    },
+    {
+      "section": "Noise source classification",
+      "intent": "Process-flow noise와 accessory noise를 구분하고 source·path·receiver를 정의한다.",
+      "anchor_refs": [
+        "control_valve_noise_scope",
+        "process_flow_vs_accessory_noise",
+        "source_path_receiver_hierarchy"
+      ]
+    },
+    {
+      "section": "Aerodynamic mechanism",
+      "intent": "Gas turbulent jet, expansion·shock와 Topic 7 input을 설명한다.",
+      "anchor_refs": [
+        "aerodynamic_turbulent_jet_noise",
+        "aerodynamic_expansion_shock_noise",
+        "gas_choked_regime_noise_input",
+        "gas_outlet_velocity_mach_geometry",
+        "topic7_aerodynamic_noise_handoff"
+      ]
+    },
+    {
+      "section": "Hydrodynamic mechanism",
+      "intent": "Liquid turbulence, cavitation, flashing과 Topic 8 input을 설명한다.",
+      "anchor_refs": [
+        "hydrodynamic_turbulence_noise",
+        "cavitation_bubble_collapse_noise",
+        "flashing_two_phase_noise",
+        "topic8_hydrodynamic_noise_handoff"
+      ]
+    },
+    {
+      "section": "Propagation and prediction",
+      "intent": "Acoustic power, pipe transmission, external SPL과 prediction method를 설명한다.",
+      "anchor_refs": [
+        "acoustic_power_pipe_radiation_path",
+        "pipe_transmission_loss_dependency",
+        "external_spl_observation_condition",
+        "prediction_standard_vendor_method"
+      ]
+    },
+    {
+      "section": "Source and path treatment",
+      "intent": "Low-noise trim, diffuser, silencer, insulation과 enclosure를 설명한다.",
+      "anchor_refs": [
+        "multi_hole_jet_division",
+        "multi_stage_pressure_ratio_velocity_control",
+        "diffuser_pressure_drop_distribution",
+        "silencer_insulation_enclosure_path_treatment"
+      ]
+    },
+    {
+      "section": "Tradeoff and operating cases",
+      "intent": "Capacity·rangeability·maintenance tradeoff와 operating-case matrix를 설명한다.",
+      "anchor_refs": [
+        "valve_size_capacity_velocity_tradeoff",
+        "low_noise_trim_capacity_rangeability_tradeoff",
+        "plugging_erosion_maintenance_tradeoff",
+        "operating_case_noise_matrix",
+        "multiple_source_parallel_bypass_combination"
+      ]
+    },
+    {
+      "section": "Measurement and verification",
+      "intent": "Field measurement, occupational limit와 vendor crosscheck로 결론을 정리한다.",
+      "anchor_refs": [
+        "field_measurement_background_correction",
+        "prediction_measurement_gap_diagnosis",
+        "occupational_limit_local_standard",
+        "vendor_crosscheck_noise"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Process-flow noise와 accessory noise를 구분한다.",
+    "Source·path·receiver hierarchy를 설명한다.",
+    "Sound power와 sound pressure를 구분한다.",
+    "10·log와 20·log를 구분한다.",
+    "Independent source를 logarithmic sum으로 합산한다.",
+    "Overall level, spectrum과 dBA를 구분한다.",
+    "Aerodynamic turbulent jet·shock mechanism을 설명한다.",
+    "Hydrodynamic turbulence·cavitation·flashing을 구분한다.",
+    "Topic 7·8 upstream input을 명시한다.",
+    "Pipe transmission loss와 external radiation을 설명한다.",
+    "Multi-hole jet division과 multi-stage velocity control을 설명한다.",
+    "Diffuser와 silencer·insulation·enclosure를 구분한다.",
+    "Capacity·rangeability·plugging·maintenance tradeoff를 설명한다.",
+    "Operating-case matrix와 field verification을 적용한다."
+  ],
+  "common_missing_points": [
+    "Sound power와 sound pressure를 동일시한다.",
+    "dB level을 산술합한다.",
+    "동일 source doubling과 pressure-amplitude doubling을 혼동한다.",
+    "Overall level과 spectrum·dBA를 구분하지 않는다.",
+    "Aerodynamic과 hydrodynamic mechanism을 혼합한다.",
+    "Internal source level과 external SPL을 직접 등치한다.",
+    "Low-noise trim의 capacity·maintenance tradeoff를 생략한다.",
+    "Normal case 한 점만 검토한다."
+  ],
+  "routing_aliases": [
+    "control valve aerodynamic noise choked gas",
+    "valve hydrodynamic noise cavitation flashing",
+    "sound power sound pressure valve prediction",
+    "logarithmic dB addition parallel valves",
+    "octave spectrum dBA valve noise",
+    "low-noise trim multi-hole jet division",
+    "multi-stage trim pressure ratio velocity",
+    "valve diffuser system pressure drop noise",
+    "pipe transmission loss external SPL",
+    "valve noise field measurement background correction",
+    "gas outlet Mach downstream pipe noise",
+    "flashing two-phase broadband noise",
+    "cavitation bubble collapse sound",
+    "source path receiver valve noise",
+    "selected travel octave spectrum vendor prediction",
+    "제어밸브 공력소음 초크가스",
+    "제어밸브 수력소음 캐비테이션 플래싱",
+    "음향파워 음압레벨 차이",
+    "dB 로그합산 병렬밸브",
+    "저소음 트림 다공 제트분할",
+    "다단 감압 속도제한 소음",
+    "배관 투과손실 외부 음압",
+    "현장 소음 측정 배경보정"
+  ],
+  "routing_field_points": [
+    "Gas sizing의 pressure ratio, choked regime와 selected travel 확인",
+    "Liquid cavitation·flashing regime와 FL 계열 확인",
+    "Sound power·octave spectrum·external SPL target 구분",
+    "Downstream pipe diameter·schedule·transmission loss 확인",
+    "Multi-hole·multi-stage trim과 diffuser pressure-drop distribution",
+    "Silencer·insulation·enclosure의 frequency별 효과",
+    "Minimum·normal·maximum과 startup·shutdown condition",
+    "Measurement distance·weighting·background correction 기록",
+    "Topic 10 balanced·unbalanced trim structure boundary",
+    "Topic 11 positioner·I/P·booster accessory boundary",
+    "Topic 14 severe-service material·hardfacing boundary",
+    "Topic 16 full valve-package workflow boundary"
+  ],
+  "revision_notes": [
+    "10개 Question Pattern과 8개 Recommended Outline을 추가했다.",
+    "Topic 7·8 upstream handoff와 Topic 10, Topic 11, Topic 14와 Topic 16 scope boundary를 분리했다.",
+    "Broad noise·dB alias를 금지하고 복합 routing phrase를 사용했다."
+  ],
+  "id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+  "title": "제어밸브의 공력·수력 소음, 소음 예측 및 저소음 트림",
+  "question_examples": [
+    "Sound power, sound pressure, dB, dBA와 octave spectrum을 구분하여 설명하시오.",
+    "Parallel valve의 independent source level을 logarithmic sum으로 계산하고 동일 source doubling을 설명하시오.",
+    "Gas control valve의 turbulent jet, choked-flow regime, outlet Mach와 aerodynamic noise를 설명하시오.",
+    "Single-phase turbulence, cavitation과 flashing의 hydrodynamic-noise mechanism을 비교하시오.",
+    "Internal acoustic power가 pipe transmission loss와 radiation을 거쳐 external SPL로 나타나는 과정을 설명하시오.",
+    "Multi-hole, multi-path와 multi-stage low-noise trim의 원리와 선정 tradeoff를 설명하시오.",
+    "Diffuser, silencer, insulation과 enclosure의 역할을 source·path 관점에서 비교하시오.",
+    "Minimum·normal·maximum 및 startup·shutdown condition별 valve noise risk를 평가하시오.",
+    "Vendor prediction과 field measurement의 차이를 진단하는 절차를 설명하시오.",
+    "Process input, acoustic prediction, selected travel, low-noise trim과 path treatment를 이용한 control-valve noise 대책 선정 절차를 설명하시오."
+  ],
+  "topic_aliases": [
+    "control valve aerodynamic noise choked gas",
+    "valve hydrodynamic noise cavitation flashing",
+    "sound power sound pressure valve prediction",
+    "logarithmic dB addition parallel valves",
+    "octave spectrum dBA valve noise",
+    "low-noise trim multi-hole jet division",
+    "multi-stage trim pressure ratio velocity",
+    "valve diffuser system pressure drop noise",
+    "pipe transmission loss external SPL",
+    "valve noise field measurement background correction",
+    "gas outlet Mach downstream pipe noise",
+    "flashing two-phase broadband noise",
+    "cavitation bubble collapse sound",
+    "source path receiver valve noise",
+    "selected travel octave spectrum vendor prediction",
+    "제어밸브 공력소음 초크가스",
+    "제어밸브 수력소음 캐비테이션 플래싱",
+    "음향파워 음압레벨 차이",
+    "dB 로그합산 병렬밸브",
+    "저소음 트림 다공 제트분할",
+    "다단 감압 속도제한 소음",
+    "배관 투과손실 외부 음압",
+    "현장 소음 측정 배경보정"
+  ],
+  "expected_structure": [
+    "Acoustic fundamentals",
+    "Noise source classification",
+    "Aerodynamic mechanism",
+    "Hydrodynamic mechanism",
+    "Propagation and prediction",
+    "Source and path treatment",
+    "Tradeoff and operating cases",
+    "Measurement and verification"
+  ],
+  "high_score_features": [
+    "Process-flow noise와 accessory noise를 구분한다.",
+    "Source·path·receiver hierarchy를 설명한다.",
+    "Sound power와 sound pressure를 구분한다.",
+    "10·log와 20·log를 구분한다.",
+    "Independent source를 logarithmic sum으로 합산한다.",
+    "Overall level, spectrum과 dBA를 구분한다.",
+    "Aerodynamic turbulent jet·shock mechanism을 설명한다.",
+    "Hydrodynamic turbulence·cavitation·flashing을 구분한다.",
+    "Topic 7·8 upstream input을 명시한다.",
+    "Pipe transmission loss와 external radiation을 설명한다.",
+    "Multi-hole jet division과 multi-stage velocity control을 설명한다.",
+    "Diffuser와 silencer·insulation·enclosure를 구분한다.",
+    "Capacity·rangeability·plugging·maintenance tradeoff를 설명한다.",
+    "Operating-case matrix와 field verification을 적용한다."
+  ],
+  "low_score_patterns": [
+    "Sound power와 sound pressure를 동일시한다.",
+    "dB level을 산술합한다.",
+    "동일 source doubling과 pressure-amplitude doubling을 혼동한다.",
+    "Overall level과 spectrum·dBA를 구분하지 않는다.",
+    "Aerodynamic과 hydrodynamic mechanism을 혼합한다.",
+    "Internal source level과 external SPL을 직접 등치한다.",
+    "Low-noise trim의 capacity·maintenance tradeoff를 생략한다.",
+    "Normal case 한 점만 검토한다."
+  ],
+  "field_connection_points": [
+    "Gas sizing의 pressure ratio, choked regime와 selected travel 확인",
+    "Liquid cavitation·flashing regime와 FL 계열 확인",
+    "Sound power·octave spectrum·external SPL target 구분",
+    "Downstream pipe diameter·schedule·transmission loss 확인",
+    "Multi-hole·multi-stage trim과 diffuser pressure-drop distribution",
+    "Silencer·insulation·enclosure의 frequency별 효과",
+    "Minimum·normal·maximum과 startup·shutdown condition",
+    "Measurement distance·weighting·background correction 기록"
+  ]
+}
