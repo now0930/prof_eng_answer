@@ -1,11 +1,24 @@
 {
-  "version": "2026-08-04T08:08:26Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-04T13:06:31Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs/*/logic_check.json:deterministic_checks",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "topic_logic_checks": [
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "enabled": false,
+      "topic_name": "Balanced·Unbalanced Trim의 구조, 밀봉 및 적용",
+      "question_type": "COMPARE_SELECTION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
       "enabled": false,

@@ -250,3 +250,7 @@ python3 scripts/test_control_valve_cavitation_flashing_choked_flow_topic.py
 echo
 echo "===== control valve aerodynamic hydrodynamic noise topic regression ====="
 python3 scripts/test_control_valve_noise_aerodynamic_hydrodynamic_topic.py
+
+echo
+echo "===== control valve balanced and unbalanced trim topic regression ====="
+python3 scripts/test_control_valve_balanced_unbalanced_trim_topic.py

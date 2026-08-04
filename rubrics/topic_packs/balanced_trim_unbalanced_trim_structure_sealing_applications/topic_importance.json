@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "COMPARE_SELECTION",
+  "high_band_unlock_conditions": [
+    "Pressure boundary와 balanced·unbalanced structure를 비교한다.",
+    "Effective area와 nominal seat area를 구분한다.",
+    "Fu·Fr와 Au·Ar를 정확히 연결한다.",
+    "Ideal full balance와 residual force를 구분한다.",
+    "Balance seal·seat seal과 두 leakage path를 구분한다.",
+    "Seal friction direction과 breakaway·running friction을 설명한다.",
+    "Pressure equalization transient와 passage plugging을 설명한다.",
+    "Service별 적용, Topic handoff와 vendor crosscheck를 설명한다."
+  ],
+  "note": "Balanced·unbalanced trim은 actuator force, shutoff, dynamic response, seal compatibility와 maintenance를 연결하는 현장 핵심 선정 주제이다.",
+  "revision_notes": [
+    "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+    "COMPARE_SELECTION을 Primary Question Type으로 적용했다."
+  ],
+  "topic_label": "Balanced·Unbalanced Trim 구조·밀봉·적용"
+}

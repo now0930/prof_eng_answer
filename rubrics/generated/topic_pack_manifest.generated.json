@@ -1,11 +1,21 @@
 {
-  "version": "2026-08-04T08:08:26Z-generated-topic-pack-manifest",
+  "version": "2026-08-04T13:06:31Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 32,
+  "topic_count": 33,
   "topics": [
+    {
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
       "files": [

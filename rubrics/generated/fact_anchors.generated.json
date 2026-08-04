@@ -1,10 +1,2220 @@
 {
-  "version": "2026-08-04T08:08:26Z-generated-topic-pack-fact-anchors",
+  "version": "2026-08-04T13:06:31Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
   "runtime_status": "generated_runtime_compatible",
   "topics": [
+    {
+      "schema_version": "fact_anchor.v1",
+      "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+      "title_ko": "Balanced·Unbalanced Trim의 구조, 밀봉 및 적용",
+      "question_type_hint": "COMPARE_SELECTION",
+      "anchors": [
+        {
+          "id": "control_valve_balanced_unbalanced_scope",
+          "anchor_id": "control_valve_balanced_unbalanced_scope",
+          "statement": "Balanced·unbalanced trim 평가는 structure, pressure path, effective area, residual force, sealing과 application을 통합한다.",
+          "importance": "core",
+          "keywords": [
+            "balanced unbalanced trim scope",
+            "structure",
+            "pressure path",
+            "effective area",
+            "application"
+          ],
+          "core_terms": [
+            "밸런스드·언밸런스드 트림",
+            "구조",
+            "압력경로",
+            "유효면적",
+            "적용"
+          ],
+          "accepted_explanations": [
+            "Balanced·unbalanced trim 평가는 structure, pressure path, effective area, residual force, sealing과 application을 통합한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balanced·unbalanced trim 평가는 structure, pressure path, effective area, residual force, sealing과 application을 통합한다.",
+          "description": "control_valve_balanced_unbalanced_scope 계약을 평가한다.",
+          "name": "control_valve_balanced_unbalanced_scope",
+          "expected": "Balanced·unbalanced trim 평가는 structure, pressure path, effective area, residual force, sealing과 application을 통합한다.",
+          "support_terms": []
+        },
+        {
+          "id": "trim_pressure_boundary_terms",
+          "anchor_id": "trim_pressure_boundary_terms",
+          "statement": "Body, plug, cage, seat, stem, balance chamber와 seal의 pressure boundary를 구분한다.",
+          "importance": "core",
+          "keywords": [
+            "trim pressure boundary",
+            "body plug cage seat stem",
+            "balance chamber",
+            "seal boundary",
+            "pressure path"
+          ],
+          "core_terms": [
+            "압력경계",
+            "바디",
+            "플러그",
+            "케이지",
+            "밸런스 챔버"
+          ],
+          "accepted_explanations": [
+            "Body, plug, cage, seat, stem, balance chamber와 seal의 pressure boundary를 구분한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Body, plug, cage, seat, stem, balance chamber와 seal의 pressure boundary를 구분한다.",
+          "description": "trim_pressure_boundary_terms 계약을 평가한다.",
+          "name": "trim_pressure_boundary_terms",
+          "expected": "Body, plug, cage, seat, stem, balance chamber와 seal의 pressure boundary를 구분한다.",
+          "support_terms": []
+        },
+        {
+          "id": "unbalanced_trim_direct_pressure_loading",
+          "anchor_id": "unbalanced_trim_direct_pressure_loading",
+          "statement": "Unbalanced trim에서는 differential pressure의 net effect가 plug에 크게 상쇄되지 않고 작용한다.",
+          "importance": "core",
+          "keywords": [
+            "unbalanced trim",
+            "direct pressure loading",
+            "differential pressure",
+            "plug force",
+            "net pressure effect"
+          ],
+          "core_terms": [
+            "언밸런스드 트림",
+            "직접 압력하중",
+            "차압",
+            "플러그 힘"
+          ],
+          "accepted_explanations": [
+            "Unbalanced trim에서는 differential pressure의 net effect가 plug에 크게 상쇄되지 않고 작용한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Unbalanced trim에서는 differential pressure의 net effect가 plug에 크게 상쇄되지 않고 작용한다.",
+          "description": "unbalanced_trim_direct_pressure_loading 계약을 평가한다.",
+          "name": "unbalanced_trim_direct_pressure_loading",
+          "expected": "Unbalanced trim에서는 differential pressure의 net effect가 plug에 크게 상쇄되지 않고 작용한다.",
+          "support_terms": []
+        },
+        {
+          "id": "effective_unbalanced_area",
+          "anchor_id": "effective_unbalanced_area",
+          "statement": "Effective unbalanced area는 pressure field가 net axial force를 만드는 equivalent projected area이다.",
+          "importance": "core",
+          "keywords": [
+            "effective unbalanced area",
+            "pressure field",
+            "net axial force",
+            "equivalent projected area",
+            "trim force"
+          ],
+          "core_terms": [
+            "유효 불평형 면적",
+            "압력장",
+            "축방향 합력",
+            "등가 투영면적"
+          ],
+          "accepted_explanations": [
+            "Effective unbalanced area는 pressure field가 net axial force를 만드는 equivalent projected area이다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Effective unbalanced area는 pressure field가 net axial force를 만드는 equivalent projected area이다.",
+          "description": "effective_unbalanced_area 계약을 평가한다.",
+          "name": "effective_unbalanced_area",
+          "expected": "Effective unbalanced area는 pressure field가 net axial force를 만드는 equivalent projected area이다.",
+          "support_terms": []
+        },
+        {
+          "id": "nominal_seat_area_boundary",
+          "anchor_id": "nominal_seat_area_boundary",
+          "statement": "Effective unbalanced area를 nominal seat area와 항상 동일하게 취급하지 않는다.",
+          "importance": "core",
+          "keywords": [
+            "nominal seat area boundary",
+            "effective area difference",
+            "seat bore",
+            "plug geometry",
+            "not always equal"
+          ],
+          "core_terms": [
+            "공칭 시트 면적",
+            "유효면적 구분",
+            "항상 동일 아님",
+            "시트 보어"
+          ],
+          "accepted_explanations": [
+            "Effective unbalanced area를 nominal seat area와 항상 동일하게 취급하지 않는다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Effective unbalanced area를 nominal seat area와 항상 동일하게 취급하지 않는다.",
+          "description": "nominal_seat_area_boundary 계약을 평가한다.",
+          "name": "nominal_seat_area_boundary",
+          "expected": "Effective unbalanced area를 nominal seat area와 항상 동일하게 취급하지 않는다.",
+          "support_terms": []
+        },
+        {
+          "id": "unbalanced_force_equation",
+          "anchor_id": "unbalanced_force_equation",
+          "statement": "Unbalanced pressure-force magnitude의 기본 구조는 Fu=ΔP·Au이다.",
+          "importance": "core",
+          "keywords": [
+            "unbalanced force equation",
+            "Fu delta P Au",
+            "pressure force",
+            "linear relation",
+            "effective area"
+          ],
+          "core_terms": [
+            "불평형력 식",
+            "Fu=ΔP·Au",
+            "차압",
+            "유효면적"
+          ],
+          "accepted_explanations": [
+            "Unbalanced pressure-force magnitude의 기본 구조는 Fu=ΔP·Au이다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Unbalanced pressure-force magnitude의 기본 구조는 Fu=ΔP·Au이다.",
+          "description": "unbalanced_force_equation 계약을 평가한다.",
+          "name": "unbalanced_force_equation",
+          "expected": "Unbalanced pressure-force magnitude의 기본 구조는 Fu=ΔP·Au이다.",
+          "support_terms": []
+        },
+        {
+          "id": "force_direction_sign_convention",
+          "anchor_id": "force_direction_sign_convention",
+          "statement": "Pressure force direction은 positive stem axis와 actual pressure geometry로 정의한다.",
+          "importance": "core",
+          "keywords": [
+            "force direction sign convention",
+            "positive stem axis",
+            "actual pressure geometry",
+            "signed force",
+            "flow direction"
+          ],
+          "core_terms": [
+            "힘 방향",
+            "부호 규약",
+            "스템 축",
+            "실제 압력 형상"
+          ],
+          "accepted_explanations": [
+            "Pressure force direction은 positive stem axis와 actual pressure geometry로 정의한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Pressure force direction은 positive stem axis와 actual pressure geometry로 정의한다.",
+          "description": "force_direction_sign_convention 계약을 평가한다.",
+          "name": "force_direction_sign_convention",
+          "expected": "Pressure force direction은 positive stem axis와 actual pressure geometry로 정의한다.",
+          "support_terms": []
+        },
+        {
+          "id": "balanced_trim_pressure_communication",
+          "anchor_id": "balanced_trim_pressure_communication",
+          "statement": "Balanced trim은 plug 양측 또는 balance chamber 사이에 pressure communication path를 제공한다.",
+          "importance": "core",
+          "keywords": [
+            "balanced trim",
+            "pressure communication",
+            "plug both sides",
+            "balance chamber",
+            "pressure path"
+          ],
+          "core_terms": [
+            "밸런스드 트림",
+            "압력 전달",
+            "플러그 양측",
+            "밸런스 챔버"
+          ],
+          "accepted_explanations": [
+            "Balanced trim은 plug 양측 또는 balance chamber 사이에 pressure communication path를 제공한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balanced trim은 plug 양측 또는 balance chamber 사이에 pressure communication path를 제공한다.",
+          "description": "balanced_trim_pressure_communication 계약을 평가한다.",
+          "name": "balanced_trim_pressure_communication",
+          "expected": "Balanced trim은 plug 양측 또는 balance chamber 사이에 pressure communication path를 제공한다.",
+          "support_terms": []
+        },
+        {
+          "id": "balance_hole_passage_function",
+          "anchor_id": "balance_hole_passage_function",
+          "statement": "Balance hole·passage는 pressure를 전달하여 net pressure force를 줄이는 기능을 수행한다.",
+          "importance": "core",
+          "keywords": [
+            "balance hole",
+            "balance passage",
+            "pressure transfer",
+            "net force reduction",
+            "pressure equalization"
+          ],
+          "core_terms": [
+            "평형공",
+            "평형 통로",
+            "압력 전달",
+            "합력 저감"
+          ],
+          "accepted_explanations": [
+            "Balance hole·passage는 pressure를 전달하여 net pressure force를 줄이는 기능을 수행한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balance hole·passage는 pressure를 전달하여 net pressure force를 줄이는 기능을 수행한다.",
+          "description": "balance_hole_passage_function 계약을 평가한다.",
+          "name": "balance_hole_passage_function",
+          "expected": "Balance hole·passage는 pressure를 전달하여 net pressure force를 줄이는 기능을 수행한다.",
+          "support_terms": []
+        },
+        {
+          "id": "balanced_trim_residual_force",
+          "anchor_id": "balanced_trim_residual_force",
+          "statement": "Balanced trim에도 residual effective area와 residual pressure force가 남을 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "balanced residual force",
+            "residual effective area",
+            "not zero force",
+            "pressure force remains",
+            "actual balance"
+          ],
+          "core_terms": [
+            "잔류 불평형력",
+            "잔류 유효면적",
+            "힘 0 아님",
+            "실제 평형"
+          ],
+          "accepted_explanations": [
+            "Balanced trim에도 residual effective area와 residual pressure force가 남을 수 있다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balanced trim에도 residual effective area와 residual pressure force가 남을 수 있다.",
+          "description": "balanced_trim_residual_force 계약을 평가한다.",
+          "name": "balanced_trim_residual_force",
+          "expected": "Balanced trim에도 residual effective area와 residual pressure force가 남을 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "residual_effective_area",
+          "anchor_id": "residual_effective_area",
+          "statement": "Residual force의 기본 구조는 Fr=ΔP·Ar이며 Ar은 manufacturer geometry에 의존한다.",
+          "importance": "core",
+          "keywords": [
+            "residual effective area",
+            "Fr delta P Ar",
+            "manufacturer geometry",
+            "balanced trim force",
+            "residual area"
+          ],
+          "core_terms": [
+            "잔류 유효면적",
+            "Fr=ΔP·Ar",
+            "제조사 형상",
+            "잔류력"
+          ],
+          "accepted_explanations": [
+            "Residual force의 기본 구조는 Fr=ΔP·Ar이며 Ar은 manufacturer geometry에 의존한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Residual force의 기본 구조는 Fr=ΔP·Ar이며 Ar은 manufacturer geometry에 의존한다.",
+          "description": "residual_effective_area 계약을 평가한다.",
+          "name": "residual_effective_area",
+          "expected": "Residual force의 기본 구조는 Fr=ΔP·Ar이며 Ar은 manufacturer geometry에 의존한다.",
+          "support_terms": []
+        },
+        {
+          "id": "ideal_full_balance_boundary",
+          "anchor_id": "ideal_full_balance_boundary",
+          "statement": "Ar=0과 Fr=0은 ideal full-balance model이며 universal actual condition이 아니다.",
+          "importance": "core",
+          "keywords": [
+            "ideal full balance",
+            "Ar zero",
+            "Fr zero",
+            "ideal model",
+            "not universal actual"
+          ],
+          "core_terms": [
+            "이상 완전평형",
+            "Ar=0",
+            "Fr=0",
+            "실제 조건 아님"
+          ],
+          "accepted_explanations": [
+            "Ar=0과 Fr=0은 ideal full-balance model이며 universal actual condition이 아니다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Ar=0과 Fr=0은 ideal full-balance model이며 universal actual condition이 아니다.",
+          "description": "ideal_full_balance_boundary 계약을 평가한다.",
+          "name": "ideal_full_balance_boundary",
+          "expected": "Ar=0과 Fr=0은 ideal full-balance model이며 universal actual condition이 아니다.",
+          "support_terms": []
+        },
+        {
+          "id": "force_reduction_ratio_conditional",
+          "anchor_id": "force_reduction_ratio_conditional",
+          "statement": "동일 ΔP와 static basis에서 |Fr|/|Fu|=Ar/Au를 조건부로 사용할 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "force reduction ratio",
+            "Fr over Fu",
+            "Ar over Au",
+            "same differential pressure",
+            "static basis"
+          ],
+          "core_terms": [
+            "힘 저감비",
+            "면적비",
+            "동일 차압",
+            "정적 조건"
+          ],
+          "accepted_explanations": [
+            "동일 ΔP와 static basis에서 |Fr|/|Fu|=Ar/Au를 조건부로 사용할 수 있다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "동일 ΔP와 static basis에서 |Fr|/|Fu|=Ar/Au를 조건부로 사용할 수 있다.",
+          "description": "force_reduction_ratio_conditional 계약을 평가한다.",
+          "name": "force_reduction_ratio_conditional",
+          "expected": "동일 ΔP와 static basis에서 |Fr|/|Fu|=Ar/Au를 조건부로 사용할 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "cage_guided_balanced_plug_structure",
+          "anchor_id": "cage_guided_balanced_plug_structure",
+          "statement": "Cage-guided balanced plug는 guiding, pressure chamber, seal support와 flow-area 기능을 결합할 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "cage guided balanced plug",
+            "guiding",
+            "pressure chamber",
+            "seal support",
+            "flow area"
+          ],
+          "core_terms": [
+            "케이지 가이드 밸런스 플러그",
+            "안내",
+            "압력실",
+            "씰 지지"
+          ],
+          "accepted_explanations": [
+            "Cage-guided balanced plug는 guiding, pressure chamber, seal support와 flow-area 기능을 결합할 수 있다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Cage-guided balanced plug는 guiding, pressure chamber, seal support와 flow-area 기능을 결합할 수 있다.",
+          "description": "cage_guided_balanced_plug_structure 계약을 평가한다.",
+          "name": "cage_guided_balanced_plug_structure",
+          "expected": "Cage-guided balanced plug는 guiding, pressure chamber, seal support와 flow-area 기능을 결합할 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "balance_seal_function",
+          "anchor_id": "balance_seal_function",
+          "statement": "Balance seal은 balance chamber의 pressure boundary를 형성하며 seat seal과 구분된다.",
+          "importance": "core",
+          "keywords": [
+            "balance seal function",
+            "balance chamber boundary",
+            "seat seal distinction",
+            "pressure boundary",
+            "seal ring"
+          ],
+          "core_terms": [
+            "밸런스 씰",
+            "압력경계",
+            "시트 씰 구분",
+            "씰 링"
+          ],
+          "accepted_explanations": [
+            "Balance seal은 balance chamber의 pressure boundary를 형성하며 seat seal과 구분된다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balance seal은 balance chamber의 pressure boundary를 형성하며 seat seal과 구분된다.",
+          "description": "balance_seal_function 계약을 평가한다.",
+          "name": "balance_seal_function",
+          "expected": "Balance seal은 balance chamber의 pressure boundary를 형성하며 seat seal과 구분된다.",
+          "support_terms": []
+        },
+        {
+          "id": "balance_seal_loading",
+          "anchor_id": "balance_seal_loading",
+          "statement": "Balance seal loading은 differential pressure, preload, geometry, temperature와 wear에 의존한다.",
+          "importance": "core",
+          "keywords": [
+            "balance seal loading",
+            "differential pressure",
+            "preload",
+            "temperature",
+            "wear"
+          ],
+          "core_terms": [
+            "밸런스 씰 하중",
+            "차압",
+            "예압",
+            "온도",
+            "마모"
+          ],
+          "accepted_explanations": [
+            "Balance seal loading은 differential pressure, preload, geometry, temperature와 wear에 의존한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balance seal loading은 differential pressure, preload, geometry, temperature와 wear에 의존한다.",
+          "description": "balance_seal_loading 계약을 평가한다.",
+          "name": "balance_seal_loading",
+          "expected": "Balance seal loading은 differential pressure, preload, geometry, temperature와 wear에 의존한다.",
+          "support_terms": []
+        },
+        {
+          "id": "balance_seal_friction",
+          "anchor_id": "balance_seal_friction",
+          "statement": "Balance-seal friction은 plug motion을 반대하고 actuator-force input에 포함된다.",
+          "importance": "core",
+          "keywords": [
+            "balance seal friction",
+            "opposes motion",
+            "plug motion",
+            "actuator force input",
+            "seal drag"
+          ],
+          "core_terms": [
+            "밸런스 씰 마찰",
+            "운동 반대",
+            "액추에이터 힘 입력",
+            "씰 저항"
+          ],
+          "accepted_explanations": [
+            "Balance-seal friction은 plug motion을 반대하고 actuator-force input에 포함된다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balance-seal friction은 plug motion을 반대하고 actuator-force input에 포함된다.",
+          "description": "balance_seal_friction 계약을 평가한다.",
+          "name": "balance_seal_friction",
+          "expected": "Balance-seal friction은 plug motion을 반대하고 actuator-force input에 포함된다.",
+          "support_terms": []
+        },
+        {
+          "id": "breakaway_running_friction_boundary",
+          "anchor_id": "breakaway_running_friction_boundary",
+          "statement": "Breakaway friction과 running friction을 구분하고 고정 ratio로 일반화하지 않는다.",
+          "importance": "core",
+          "keywords": [
+            "breakaway friction",
+            "running friction",
+            "static dynamic friction",
+            "not fixed ratio",
+            "seal friction"
+          ],
+          "core_terms": [
+            "브레이크어웨이 마찰",
+            "운전 마찰",
+            "정지·운동 마찰",
+            "고정비 금지"
+          ],
+          "accepted_explanations": [
+            "Breakaway friction과 running friction을 구분하고 고정 ratio로 일반화하지 않는다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Breakaway friction과 running friction을 구분하고 고정 ratio로 일반화하지 않는다.",
+          "description": "breakaway_running_friction_boundary 계약을 평가한다.",
+          "name": "breakaway_running_friction_boundary",
+          "expected": "Breakaway friction과 running friction을 구분하고 고정 ratio로 일반화하지 않는다.",
+          "support_terms": []
+        },
+        {
+          "id": "balance_seal_leakage_path",
+          "anchor_id": "balance_seal_leakage_path",
+          "statement": "Balance-seal leakage는 pressure chamber 사이의 internal leakage path이다.",
+          "importance": "core",
+          "keywords": [
+            "balance seal leakage",
+            "internal leakage path",
+            "pressure chamber",
+            "balance effectiveness",
+            "internal recirculation"
+          ],
+          "core_terms": [
+            "밸런스 씰 누설",
+            "내부 누설경로",
+            "압력실",
+            "내부 순환"
+          ],
+          "accepted_explanations": [
+            "Balance-seal leakage는 pressure chamber 사이의 internal leakage path이다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balance-seal leakage는 pressure chamber 사이의 internal leakage path이다.",
+          "description": "balance_seal_leakage_path 계약을 평가한다.",
+          "name": "balance_seal_leakage_path",
+          "expected": "Balance-seal leakage는 pressure chamber 사이의 internal leakage path이다.",
+          "support_terms": []
+        },
+        {
+          "id": "seat_leakage_path_boundary",
+          "anchor_id": "seat_leakage_path_boundary",
+          "statement": "Seat leakage는 closed seat boundary leakage이며 balance-seal leakage와 다른 rating basis를 갖는다.",
+          "importance": "core",
+          "keywords": [
+            "seat leakage path",
+            "closed seat boundary",
+            "balance leakage distinction",
+            "rating basis",
+            "shutoff leakage"
+          ],
+          "core_terms": [
+            "시트 누설",
+            "폐쇄 시트 경계",
+            "밸런스 누설 구분",
+            "차단 등급"
+          ],
+          "accepted_explanations": [
+            "Seat leakage는 closed seat boundary leakage이며 balance-seal leakage와 다른 rating basis를 갖는다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Seat leakage는 closed seat boundary leakage이며 balance-seal leakage와 다른 rating basis를 갖는다.",
+          "description": "seat_leakage_path_boundary 계약을 평가한다.",
+          "name": "seat_leakage_path_boundary",
+          "expected": "Seat leakage는 closed seat boundary leakage이며 balance-seal leakage와 다른 rating basis를 갖는다.",
+          "support_terms": []
+        },
+        {
+          "id": "pressure_equalization_transient",
+          "anchor_id": "pressure_equalization_transient",
+          "statement": "Rapid stroke와 pressure transient에서는 balance chamber가 즉시 steady pressure에 도달하지 않을 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "pressure equalization transient",
+            "rapid stroke",
+            "balance chamber lag",
+            "steady pressure delay",
+            "passage conductance"
+          ],
+          "core_terms": [
+            "압력 평형 과도",
+            "급속 스트로크",
+            "챔버 지연",
+            "통로 전도도"
+          ],
+          "accepted_explanations": [
+            "Rapid stroke와 pressure transient에서는 balance chamber가 즉시 steady pressure에 도달하지 않을 수 있다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Rapid stroke와 pressure transient에서는 balance chamber가 즉시 steady pressure에 도달하지 않을 수 있다.",
+          "description": "pressure_equalization_transient 계약을 평가한다.",
+          "name": "pressure_equalization_transient",
+          "expected": "Rapid stroke와 pressure transient에서는 balance chamber가 즉시 steady pressure에 도달하지 않을 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "passage_plugging_dynamic_imbalance",
+          "anchor_id": "passage_plugging_dynamic_imbalance",
+          "statement": "Balance passage plugging은 pressure communication을 저해하여 residual force와 dynamic behavior를 변화시킬 수 있다.",
+          "importance": "core",
+          "keywords": [
+            "balance passage plugging",
+            "pressure communication loss",
+            "residual force change",
+            "dynamic imbalance",
+            "particulate"
+          ],
+          "core_terms": [
+            "평형 통로 막힘",
+            "압력 전달 저해",
+            "잔류력 변화",
+            "동적 불평형"
+          ],
+          "accepted_explanations": [
+            "Balance passage plugging은 pressure communication을 저해하여 residual force와 dynamic behavior를 변화시킬 수 있다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balance passage plugging은 pressure communication을 저해하여 residual force와 dynamic behavior를 변화시킬 수 있다.",
+          "description": "passage_plugging_dynamic_imbalance 계약을 평가한다.",
+          "name": "passage_plugging_dynamic_imbalance",
+          "expected": "Balance passage plugging은 pressure communication을 저해하여 residual force와 dynamic behavior를 변화시킬 수 있다.",
+          "support_terms": []
+        },
+        {
+          "id": "flow_direction_geometry_dependency",
+          "anchor_id": "flow_direction_geometry_dependency",
+          "statement": "Flow-to-open·flow-to-close의 force direction은 actual plug, seat, chamber와 pressure geometry로 확인한다.",
+          "importance": "core",
+          "keywords": [
+            "flow to open flow to close",
+            "geometry dependent",
+            "plug seat chamber",
+            "pressure geometry",
+            "force direction"
+          ],
+          "core_terms": [
+            "Flow-to-open",
+            "Flow-to-close",
+            "형상 의존",
+            "힘 방향"
+          ],
+          "accepted_explanations": [
+            "Flow-to-open·flow-to-close의 force direction은 actual plug, seat, chamber와 pressure geometry로 확인한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Flow-to-open·flow-to-close의 force direction은 actual plug, seat, chamber와 pressure geometry로 확인한다.",
+          "description": "flow_direction_geometry_dependency 계약을 평가한다.",
+          "name": "flow_direction_geometry_dependency",
+          "expected": "Flow-to-open·flow-to-close의 force direction은 actual plug, seat, chamber와 pressure geometry로 확인한다.",
+          "support_terms": []
+        },
+        {
+          "id": "seat_load_shutoff_margin_boundary",
+          "anchor_id": "seat_load_shutoff_margin_boundary",
+          "statement": "Seat load, residual pressure force, friction, spring force와 design margin을 별도 actuator inputs로 구분한다.",
+          "importance": "core",
+          "keywords": [
+            "seat load",
+            "shutoff margin",
+            "residual pressure force",
+            "spring force",
+            "actuator inputs"
+          ],
+          "core_terms": [
+            "시트 하중",
+            "차단 여유",
+            "잔류 압력힘",
+            "스프링 힘",
+            "입력 분리"
+          ],
+          "accepted_explanations": [
+            "Seat load, residual pressure force, friction, spring force와 design margin을 별도 actuator inputs로 구분한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Seat load, residual pressure force, friction, spring force와 design margin을 별도 actuator inputs로 구분한다.",
+          "description": "seat_load_shutoff_margin_boundary 계약을 평가한다.",
+          "name": "seat_load_shutoff_margin_boundary",
+          "expected": "Seat load, residual pressure force, friction, spring force와 design margin을 별도 actuator inputs로 구분한다.",
+          "support_terms": []
+        },
+        {
+          "id": "actuator_sizing_topic1_handoff",
+          "anchor_id": "actuator_sizing_topic1_handoff",
+          "statement": "Quantitative actuator thrust와 fail-safe spring sizing은 Topic 1로 hand-off한다.",
+          "importance": "core",
+          "keywords": [
+            "Topic 1 handoff",
+            "actuator thrust sizing",
+            "fail safe spring",
+            "force input",
+            "sizing boundary"
+          ],
+          "core_terms": [
+            "Topic 1",
+            "액추에이터 추력",
+            "Fail-safe 스프링",
+            "사이징 경계"
+          ],
+          "accepted_explanations": [
+            "Quantitative actuator thrust와 fail-safe spring sizing은 Topic 1로 hand-off한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Quantitative actuator thrust와 fail-safe spring sizing은 Topic 1로 hand-off한다.",
+          "description": "actuator_sizing_topic1_handoff 계약을 평가한다.",
+          "name": "actuator_sizing_topic1_handoff",
+          "expected": "Quantitative actuator thrust와 fail-safe spring sizing은 Topic 1로 hand-off한다.",
+          "support_terms": []
+        },
+        {
+          "id": "dynamic_friction_topic3_handoff",
+          "anchor_id": "dynamic_friction_topic3_handoff",
+          "statement": "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+          "importance": "important",
+          "keywords": [
+            "Topic 3 handoff",
+            "deadband",
+            "stiction",
+            "hysteresis",
+            "seal friction diagnosis"
+          ],
+          "core_terms": [
+            "Topic 3",
+            "데드밴드",
+            "스틱션",
+            "히스테리시스",
+            "마찰 진단"
+          ],
+          "accepted_explanations": [
+            "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+          "description": "dynamic_friction_topic3_handoff 계약을 평가한다.",
+          "name": "dynamic_friction_topic3_handoff",
+          "expected": "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+          "support_terms": []
+        },
+        {
+          "id": "body_cage_guide_topic4_handoff",
+          "anchor_id": "body_cage_guide_topic4_handoff",
+          "statement": "General body, cage, guide와 actuator-type selection은 Topic 4가 소유한다.",
+          "importance": "important",
+          "keywords": [
+            "Topic 4 handoff",
+            "body cage guide",
+            "actuator type",
+            "general structure",
+            "selection boundary"
+          ],
+          "core_terms": [
+            "Topic 4",
+            "바디·케이지·가이드",
+            "액추에이터 종류",
+            "일반 구조"
+          ],
+          "accepted_explanations": [
+            "General body, cage, guide와 actuator-type selection은 Topic 4가 소유한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "General body, cage, guide와 actuator-type selection은 Topic 4가 소유한다.",
+          "description": "body_cage_guide_topic4_handoff 계약을 평가한다.",
+          "name": "body_cage_guide_topic4_handoff",
+          "expected": "General body, cage, guide와 actuator-type selection은 Topic 4가 소유한다.",
+          "support_terms": []
+        },
+        {
+          "id": "low_noise_trim_topic9_boundary",
+          "anchor_id": "low_noise_trim_topic9_boundary",
+          "statement": "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+          "importance": "important",
+          "keywords": [
+            "Topic 9 boundary",
+            "low noise trim",
+            "multi stage trim",
+            "balanced trim distinction",
+            "noise handoff"
+          ],
+          "core_terms": [
+            "Topic 9",
+            "저소음 트림",
+            "다단 트림",
+            "밸런스드 트림 구분"
+          ],
+          "accepted_explanations": [
+            "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+          "description": "low_noise_trim_topic9_boundary 계약을 평가한다.",
+          "name": "low_noise_trim_topic9_boundary",
+          "expected": "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+          "support_terms": []
+        },
+        {
+          "id": "leakage_packing_topic13_boundary",
+          "anchor_id": "leakage_packing_topic13_boundary",
+          "statement": "Seat leakage class, packing과 fugitive emissions 상세는 Topic 13으로 hand-off한다.",
+          "importance": "important",
+          "keywords": [
+            "Topic 13 boundary",
+            "seat leakage class",
+            "packing",
+            "fugitive emissions",
+            "stem sealing"
+          ],
+          "core_terms": [
+            "Topic 13",
+            "시트 누설 등급",
+            "패킹",
+            "비산배출"
+          ],
+          "accepted_explanations": [
+            "Seat leakage class, packing과 fugitive emissions 상세는 Topic 13으로 hand-off한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Seat leakage class, packing과 fugitive emissions 상세는 Topic 13으로 hand-off한다.",
+          "description": "leakage_packing_topic13_boundary 계약을 평가한다.",
+          "name": "leakage_packing_topic13_boundary",
+          "expected": "Seat leakage class, packing과 fugitive emissions 상세는 Topic 13으로 hand-off한다.",
+          "support_terms": []
+        },
+        {
+          "id": "severe_service_material_topic14_boundary",
+          "anchor_id": "severe_service_material_topic14_boundary",
+          "statement": "Hardfacing, erosion-resistant material과 severe-service construction은 Topic 14로 hand-off한다.",
+          "importance": "important",
+          "keywords": [
+            "Topic 14 boundary",
+            "hardfacing",
+            "erosion resistant material",
+            "severe service construction",
+            "material handoff"
+          ],
+          "core_terms": [
+            "Topic 14",
+            "하드페이싱",
+            "내침식 재료",
+            "가혹 서비스 구조"
+          ],
+          "accepted_explanations": [
+            "Hardfacing, erosion-resistant material과 severe-service construction은 Topic 14로 hand-off한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Hardfacing, erosion-resistant material과 severe-service construction은 Topic 14로 hand-off한다.",
+          "description": "severe_service_material_topic14_boundary 계약을 평가한다.",
+          "name": "severe_service_material_topic14_boundary",
+          "expected": "Hardfacing, erosion-resistant material과 severe-service construction은 Topic 14로 hand-off한다.",
+          "support_terms": []
+        },
+        {
+          "id": "clean_high_dp_large_size_application",
+          "anchor_id": "clean_high_dp_large_size_application",
+          "statement": "Clean high-ΔP 또는 large-size service에서 balanced trim의 thrust-reduction 이점을 조건부로 평가한다.",
+          "importance": "core",
+          "keywords": [
+            "clean high differential pressure",
+            "large size valve",
+            "balanced trim application",
+            "thrust reduction",
+            "conditional selection"
+          ],
+          "core_terms": [
+            "청정 고차압",
+            "대구경",
+            "밸런스드 트림 적용",
+            "추력 저감"
+          ],
+          "accepted_explanations": [
+            "Clean high-ΔP 또는 large-size service에서 balanced trim의 thrust-reduction 이점을 조건부로 평가한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Clean high-ΔP 또는 large-size service에서 balanced trim의 thrust-reduction 이점을 조건부로 평가한다.",
+          "description": "clean_high_dp_large_size_application 계약을 평가한다.",
+          "name": "clean_high_dp_large_size_application",
+          "expected": "Clean high-ΔP 또는 large-size service에서 balanced trim의 thrust-reduction 이점을 조건부로 평가한다.",
+          "support_terms": []
+        },
+        {
+          "id": "dirty_slurry_particulate_limit",
+          "anchor_id": "dirty_slurry_particulate_limit",
+          "statement": "Dirty·slurry·particulate service에서는 passage plugging, seal wear와 maintainability를 검토한다.",
+          "importance": "core",
+          "keywords": [
+            "dirty slurry particulate",
+            "passage plugging",
+            "seal wear",
+            "maintainability",
+            "contamination"
+          ],
+          "core_terms": [
+            "오염·슬러리·입자",
+            "통로 막힘",
+            "씰 마모",
+            "정비성"
+          ],
+          "accepted_explanations": [
+            "Dirty·slurry·particulate service에서는 passage plugging, seal wear와 maintainability를 검토한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Dirty·slurry·particulate service에서는 passage plugging, seal wear와 maintainability를 검토한다.",
+          "description": "dirty_slurry_particulate_limit 계약을 평가한다.",
+          "name": "dirty_slurry_particulate_limit",
+          "expected": "Dirty·slurry·particulate service에서는 passage plugging, seal wear와 maintainability를 검토한다.",
+          "support_terms": []
+        },
+        {
+          "id": "high_temperature_cryogenic_seal_limit",
+          "anchor_id": "high_temperature_cryogenic_seal_limit",
+          "statement": "High-temperature와 cryogenic service에서는 seal material, clearance, friction과 leakage limit를 확인한다.",
+          "importance": "core",
+          "keywords": [
+            "high temperature cryogenic",
+            "seal material limit",
+            "clearance",
+            "friction",
+            "leakage limit"
+          ],
+          "core_terms": [
+            "고온·극저온",
+            "씰 재료 한계",
+            "간극",
+            "마찰",
+            "누설"
+          ],
+          "accepted_explanations": [
+            "High-temperature와 cryogenic service에서는 seal material, clearance, friction과 leakage limit를 확인한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "High-temperature와 cryogenic service에서는 seal material, clearance, friction과 leakage limit를 확인한다.",
+          "description": "high_temperature_cryogenic_seal_limit 계약을 평가한다.",
+          "name": "high_temperature_cryogenic_seal_limit",
+          "expected": "High-temperature와 cryogenic service에서는 seal material, clearance, friction과 leakage limit를 확인한다.",
+          "support_terms": []
+        },
+        {
+          "id": "fluid_compatibility_seal_degradation",
+          "anchor_id": "fluid_compatibility_seal_degradation",
+          "statement": "Seal swelling, hardening, extrusion, permeation과 wear를 fluid·temperature·pressure 조건으로 평가한다.",
+          "importance": "important",
+          "keywords": [
+            "fluid compatibility",
+            "seal swelling",
+            "hardening extrusion",
+            "permeation",
+            "wear"
+          ],
+          "core_terms": [
+            "유체 적합성",
+            "팽윤",
+            "경화·압출",
+            "투과",
+            "마모"
+          ],
+          "accepted_explanations": [
+            "Seal swelling, hardening, extrusion, permeation과 wear를 fluid·temperature·pressure 조건으로 평가한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Seal swelling, hardening, extrusion, permeation과 wear를 fluid·temperature·pressure 조건으로 평가한다.",
+          "description": "fluid_compatibility_seal_degradation 계약을 평가한다.",
+          "name": "fluid_compatibility_seal_degradation",
+          "expected": "Seal swelling, hardening, extrusion, permeation과 wear를 fluid·temperature·pressure 조건으로 평가한다.",
+          "support_terms": []
+        },
+        {
+          "id": "operating_case_force_matrix",
+          "anchor_id": "operating_case_force_matrix",
+          "statement": "Minimum·normal·maximum 및 startup·shutdown case별 pressure path, force와 seal loading을 검토한다.",
+          "importance": "core",
+          "keywords": [
+            "operating case force matrix",
+            "minimum normal maximum",
+            "startup shutdown",
+            "pressure path",
+            "seal loading"
+          ],
+          "core_terms": [
+            "운전조건 힘 행렬",
+            "최소·정상·최대",
+            "기동·정지",
+            "씰 하중"
+          ],
+          "accepted_explanations": [
+            "Minimum·normal·maximum 및 startup·shutdown case별 pressure path, force와 seal loading을 검토한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Minimum·normal·maximum 및 startup·shutdown case별 pressure path, force와 seal loading을 검토한다.",
+          "description": "operating_case_force_matrix 계약을 평가한다.",
+          "name": "operating_case_force_matrix",
+          "expected": "Minimum·normal·maximum 및 startup·shutdown case별 pressure path, force와 seal loading을 검토한다.",
+          "support_terms": []
+        },
+        {
+          "id": "vendor_cutaway_force_table_crosscheck",
+          "anchor_id": "vendor_cutaway_force_table_crosscheck",
+          "statement": "Vendor cutaway, effective-area·force table, seal limit와 maintenance data를 교차 검증한다.",
+          "importance": "core",
+          "keywords": [
+            "vendor cutaway",
+            "effective area force table",
+            "seal limit",
+            "maintenance data",
+            "crosscheck"
+          ],
+          "core_terms": [
+            "제조사 단면도",
+            "유효면적·힘 표",
+            "씰 한계",
+            "정비 자료",
+            "교차검증"
+          ],
+          "accepted_explanations": [
+            "Vendor cutaway, effective-area·force table, seal limit와 maintenance data를 교차 검증한다.",
+            "Structure→pressure path→effective area→force→seal→application→vendor verification의 인과관계를 설명한다."
+          ],
+          "rejected_explanations": [
+            "Balanced trim을 universal zero-force construction으로 설명하거나 balance seal과 seat seal을 동일시한다."
+          ],
+          "grading_notes": "Pressure boundary, Fu·Fr, Au·Ar, seal friction·leakage와 service limitation을 논리적으로 연결하는지 평가한다.",
+          "source_basis": "docs/topic_sheets/balanced_trim_unbalanced_trim_structure_sealing_applications.md; Control Valve Handbook trim, cage-guided plug, pressure-balanced construction and actuator-force sections; Control Valve Primer balanced and unbalanced trim sections; Topic 1 force sizing, Topic 3 friction dynamics, Topic 4 body/trim structure and Topic 9 low-noise source packs; gemini_script/20260804_topic10_balanced_unbalanced_trim_requirements.md.",
+          "claim": "Vendor cutaway, effective-area·force table, seal limit와 maintenance data를 교차 검증한다.",
+          "description": "vendor_cutaway_force_table_crosscheck 계약을 평가한다.",
+          "name": "vendor_cutaway_force_table_crosscheck",
+          "expected": "Vendor cutaway, effective-area·force table, seal limit와 maintenance data를 교차 검증한다.",
+          "support_terms": []
+        }
+      ],
+      "fatal_wrong_claims": [
+        {
+          "id": "control_valve_balanced_unbalanced_same_structure",
+          "claim": "Balanced trim과 unbalanced trim은 pressure path와 sealing 구조가 동일하다.",
+          "correction": "Balanced와 unbalanced trim은 pressure communication path, effective area와 seal 구조가 다를 수 있다.",
+          "wrong_claim": "Balanced trim과 unbalanced trim은 pressure path와 sealing 구조가 동일하다.",
+          "correct_rule": "Balanced와 unbalanced trim은 pressure communication path, effective area와 seal 구조가 다를 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balanced trim과 unbalanced trim은 pressure path와 sealing 구조가 동일하다.",
+          "description": "Balanced와 unbalanced trim은 pressure communication path, effective area와 seal 구조가 다를 수 있다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balanced_trim_zero_force_all_cases",
+          "claim": "Balanced trim은 모든 pressure·travel·transient condition에서 pressure force가 정확히 0이다.",
+          "correction": "Balanced trim에도 residual effective area와 transient pressure imbalance가 남을 수 있다.",
+          "wrong_claim": "Balanced trim은 모든 pressure·travel·transient condition에서 pressure force가 정확히 0이다.",
+          "correct_rule": "Balanced trim에도 residual effective area와 transient pressure imbalance가 남을 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balanced trim은 모든 pressure·travel·transient condition에서 pressure force가 정확히 0이다.",
+          "description": "Balanced trim에도 residual effective area와 transient pressure imbalance가 남을 수 있다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_nominal_seat_area_always_effective_area",
+          "claim": "Nominal seat area가 모든 trim의 effective unbalanced area와 항상 같다.",
+          "correction": "Effective unbalanced area는 actual pressure boundary와 geometry로 결정한다.",
+          "wrong_claim": "Nominal seat area가 모든 trim의 effective unbalanced area와 항상 같다.",
+          "correct_rule": "Effective unbalanced area는 actual pressure boundary와 geometry로 결정한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Nominal seat area가 모든 trim의 effective unbalanced area와 항상 같다.",
+          "description": "Effective unbalanced area는 actual pressure boundary와 geometry로 결정한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balance_holes_instant_complete_equalization",
+          "claim": "Balance hole이 있으면 모든 transient에서 plug 양측 pressure가 즉시 완전히 같다.",
+          "correction": "Balance-chamber equalization은 passage conductance, chamber volume과 fluid condition에 의존한다.",
+          "wrong_claim": "Balance hole이 있으면 모든 transient에서 plug 양측 pressure가 즉시 완전히 같다.",
+          "correct_rule": "Balance-chamber equalization은 passage conductance, chamber volume과 fluid condition에 의존한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balance hole이 있으면 모든 transient에서 plug 양측 pressure가 즉시 완전히 같다.",
+          "description": "Balance-chamber equalization은 passage conductance, chamber volume과 fluid condition에 의존한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balance_seal_same_as_seat_seal",
+          "claim": "Balance seal과 seat seal은 같은 위치와 기능을 갖는다.",
+          "correction": "Balance seal은 balance chamber boundary이고 seat seal은 shutoff boundary이다.",
+          "wrong_claim": "Balance seal과 seat seal은 같은 위치와 기능을 갖는다.",
+          "correct_rule": "Balance seal은 balance chamber boundary이고 seat seal은 shutoff boundary이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balance seal과 seat seal은 같은 위치와 기능을 갖는다.",
+          "description": "Balance seal은 balance chamber boundary이고 seat seal은 shutoff boundary이다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balance_leakage_equals_seat_leakage",
+          "claim": "Balance-seal internal leakage와 seat shutoff leakage가 같은 leakage path와 rating이다.",
+          "correction": "Balance leakage와 seat leakage는 위치, 기능과 rating basis가 다르다.",
+          "wrong_claim": "Balance-seal internal leakage와 seat shutoff leakage가 같은 leakage path와 rating이다.",
+          "correct_rule": "Balance leakage와 seat leakage는 위치, 기능과 rating basis가 다르다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balance-seal internal leakage와 seat shutoff leakage가 같은 leakage path와 rating이다.",
+          "description": "Balance leakage와 seat leakage는 위치, 기능과 rating basis가 다르다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balanced_trim_no_seal_friction",
+          "claim": "Balanced trim에는 balance seal friction이 존재하지 않는다.",
+          "correction": "Balance-seal friction은 plug motion을 반대하고 actuator-force input에 포함될 수 있다.",
+          "wrong_claim": "Balanced trim에는 balance seal friction이 존재하지 않는다.",
+          "correct_rule": "Balance-seal friction은 plug motion을 반대하고 actuator-force input에 포함될 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balanced trim에는 balance seal friction이 존재하지 않는다.",
+          "description": "Balance-seal friction은 plug motion을 반대하고 actuator-force input에 포함될 수 있다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_seal_friction_assists_motion",
+          "claim": "Balance-seal friction이 항상 plug motion을 돕는 방향이다.",
+          "correction": "Friction force는 motion을 반대하며 Fbs·v≤0 방향 계약을 따른다.",
+          "wrong_claim": "Balance-seal friction이 항상 plug motion을 돕는 방향이다.",
+          "correct_rule": "Friction force는 motion을 반대하며 Fbs·v≤0 방향 계약을 따른다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balance-seal friction이 항상 plug motion을 돕는 방향이다.",
+          "description": "Friction force는 motion을 반대하며 Fbs·v≤0 방향 계약을 따른다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_flow_to_open_universal_force_sign",
+          "claim": "Flow-to-open label만으로 모든 valve의 pressure-force sign과 actuator-thrust 감소를 고정한다.",
+          "correction": "Force sign은 actual plug, seat, chamber와 pressure geometry로 판단한다.",
+          "wrong_claim": "Flow-to-open label만으로 모든 valve의 pressure-force sign과 actuator-thrust 감소를 고정한다.",
+          "correct_rule": "Force sign은 actual plug, seat, chamber와 pressure geometry로 판단한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Flow-to-open label만으로 모든 valve의 pressure-force sign과 actuator-thrust 감소를 고정한다.",
+          "description": "Force sign은 actual plug, seat, chamber와 pressure geometry로 판단한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_unbalanced_trim_never_high_dp",
+          "claim": "Unbalanced trim은 어떤 high-ΔP service에도 사용할 수 없다.",
+          "correction": "Unbalanced trim 적용 가능성은 size, geometry, actuator force와 shutoff condition으로 판단한다.",
+          "wrong_claim": "Unbalanced trim은 어떤 high-ΔP service에도 사용할 수 없다.",
+          "correct_rule": "Unbalanced trim 적용 가능성은 size, geometry, actuator force와 shutoff condition으로 판단한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Unbalanced trim은 어떤 high-ΔP service에도 사용할 수 없다.",
+          "description": "Unbalanced trim 적용 가능성은 size, geometry, actuator force와 shutoff condition으로 판단한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balanced_trim_required_all_high_dp",
+          "claim": "모든 high-ΔP service에는 balanced trim이 반드시 필요하다.",
+          "correction": "High-ΔP라도 leakage, contamination, maintenance와 actuator capability를 함께 비교한다.",
+          "wrong_claim": "모든 high-ΔP service에는 balanced trim이 반드시 필요하다.",
+          "correct_rule": "High-ΔP라도 leakage, contamination, maintenance와 actuator capability를 함께 비교한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: 모든 high-ΔP service에는 balanced trim이 반드시 필요하다.",
+          "description": "High-ΔP라도 leakage, contamination, maintenance와 actuator capability를 함께 비교한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balanced_trim_always_lower_seat_leakage",
+          "claim": "Balanced trim은 seal·seat 설계와 관계없이 항상 더 낮은 seat leakage를 보장한다.",
+          "correction": "Seat leakage class는 seat design과 qualification에 의해 결정되며 trim balance만으로 보장되지 않는다.",
+          "wrong_claim": "Balanced trim은 seal·seat 설계와 관계없이 항상 더 낮은 seat leakage를 보장한다.",
+          "correct_rule": "Seat leakage class는 seat design과 qualification에 의해 결정되며 trim balance만으로 보장되지 않는다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balanced trim은 seal·seat 설계와 관계없이 항상 더 낮은 seat leakage를 보장한다.",
+          "description": "Seat leakage class는 seat design과 qualification에 의해 결정되며 trim balance만으로 보장되지 않는다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balanced_trim_eliminates_cavitation_noise",
+          "claim": "Balanced trim이 cavitation, flashing과 valve noise를 자동 제거한다.",
+          "correction": "Balanced construction은 pressure-force reduction 개념이며 cavitation·flashing·noise는 별도 mechanism이다.",
+          "wrong_claim": "Balanced trim이 cavitation, flashing과 valve noise를 자동 제거한다.",
+          "correct_rule": "Balanced construction은 pressure-force reduction 개념이며 cavitation·flashing·noise는 별도 mechanism이다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balanced trim이 cavitation, flashing과 valve noise를 자동 제거한다.",
+          "description": "Balanced construction은 pressure-force reduction 개념이며 cavitation·flashing·noise는 별도 mechanism이다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balanced_trim_needs_no_actuator_margin",
+          "claim": "Balanced trim은 actuator margin, seat load, friction과 spring force 검토가 필요 없다.",
+          "correction": "Residual pressure force, seat load, packing, balance-seal friction, spring과 margin을 분리한다.",
+          "wrong_claim": "Balanced trim은 actuator margin, seat load, friction과 spring force 검토가 필요 없다.",
+          "correct_rule": "Residual pressure force, seat load, packing, balance-seal friction, spring과 margin을 분리한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balanced trim은 actuator margin, seat load, friction과 spring force 검토가 필요 없다.",
+          "description": "Residual pressure force, seat load, packing, balance-seal friction, spring과 margin을 분리한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balance_chamber_dynamics_irrelevant",
+          "claim": "Balance-chamber pressure transient와 passage conductance는 residual force에 영향을 주지 않는다.",
+          "correction": "Dynamic pressure equalization은 residual force와 response를 변화시킬 수 있다.",
+          "wrong_claim": "Balance-chamber pressure transient와 passage conductance는 residual force에 영향을 주지 않는다.",
+          "correct_rule": "Dynamic pressure equalization은 residual force와 response를 변화시킬 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balance-chamber pressure transient와 passage conductance는 residual force에 영향을 주지 않는다.",
+          "description": "Dynamic pressure equalization은 residual force와 response를 변화시킬 수 있다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_passage_plugging_no_force_effect",
+          "claim": "Balance passage plugging은 pressure force와 dynamic response에 영향을 주지 않는다.",
+          "correction": "Passage plugging은 pressure communication을 저해하여 residual force와 dynamic behavior를 바꿀 수 있다.",
+          "wrong_claim": "Balance passage plugging은 pressure force와 dynamic response에 영향을 주지 않는다.",
+          "correct_rule": "Passage plugging은 pressure communication을 저해하여 residual force와 dynamic behavior를 바꿀 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balance passage plugging은 pressure force와 dynamic response에 영향을 주지 않는다.",
+          "description": "Passage plugging은 pressure communication을 저해하여 residual force와 dynamic behavior를 바꿀 수 있다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_any_seal_all_temperature_fluids",
+          "claim": "하나의 balance-seal material을 모든 pressure, temperature와 fluid에 사용할 수 있다.",
+          "correction": "Seal compatibility와 limit는 material grade, pressure, temperature와 fluid로 확인한다.",
+          "wrong_claim": "하나의 balance-seal material을 모든 pressure, temperature와 fluid에 사용할 수 있다.",
+          "correct_rule": "Seal compatibility와 limit는 material grade, pressure, temperature와 fluid로 확인한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: 하나의 balance-seal material을 모든 pressure, temperature와 fluid에 사용할 수 있다.",
+          "description": "Seal compatibility와 limit는 material grade, pressure, temperature와 fluid로 확인한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_balanced_trim_no_maintenance",
+          "claim": "Balanced trim은 seal, passage와 cage maintenance가 필요 없다.",
+          "correction": "Balanced trim은 seal replacement, passage cleaning과 cage·plug inspection이 필요할 수 있다.",
+          "wrong_claim": "Balanced trim은 seal, passage와 cage maintenance가 필요 없다.",
+          "correct_rule": "Balanced trim은 seal replacement, passage cleaning과 cage·plug inspection이 필요할 수 있다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balanced trim은 seal, passage와 cage maintenance가 필요 없다.",
+          "description": "Balanced trim은 seal replacement, passage cleaning과 cage·plug inspection이 필요할 수 있다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_single_normal_case_sufficient",
+          "claim": "Normal operating point 한 점만 검토하면 maximum, startup·shutdown과 reverse-pressure case는 필요 없다.",
+          "correction": "Minimum·normal·maximum 및 startup·shutdown·reverse-pressure case를 검토한다.",
+          "wrong_claim": "Normal operating point 한 점만 검토하면 maximum, startup·shutdown과 reverse-pressure case는 필요 없다.",
+          "correct_rule": "Minimum·normal·maximum 및 startup·shutdown·reverse-pressure case를 검토한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Normal operating point 한 점만 검토하면 maximum, startup·shutdown과 reverse-pressure case는 필요 없다.",
+          "description": "Minimum·normal·maximum 및 startup·shutdown·reverse-pressure case를 검토한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        },
+        {
+          "id": "control_valve_residual_force_ignored_in_actuator_input",
+          "claim": "Balanced trim의 residual force와 seal friction을 actuator input에서 무시해도 된다.",
+          "correction": "Residual pressure force와 balance-seal friction은 actuator input 항으로 구분한다.",
+          "wrong_claim": "Balanced trim의 residual force와 seal friction을 actuator input에서 무시해도 된다.",
+          "correct_rule": "Residual pressure force와 balance-seal friction은 actuator input 항으로 구분한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ],
+          "message": "Balanced·unbalanced trim 핵심 오류: Balanced trim의 residual force와 seal friction을 actuator input에서 무시해도 된다.",
+          "description": "Residual pressure force와 balance-seal friction은 actuator input 항으로 구분한다.",
+          "grading_notes": "대표 오답 인용이 아니라 실제 주장인지 문맥을 확인한 뒤 fatal로 판단한다."
+        }
+      ],
+      "safe_expressions": [
+        "Unbalanced trim은 differential pressure가 effective area에 직접 작용한다.",
+        "Unbalanced-force magnitude는 Fu=ΔP·Au 구조로 설명할 수 있다.",
+        "Effective unbalanced area와 nominal seat area는 항상 같지 않다.",
+        "Force sign은 정의한 stem axis와 actual pressure geometry로 결정한다.",
+        "Balanced trim은 pressure communication path를 사용한다.",
+        "Balance hole은 plug 반대편 chamber로 pressure를 전달한다.",
+        "Balanced trim에도 residual force가 남을 수 있다.",
+        "Residual-force magnitude는 Fr=ΔP·Ar 구조로 설명할 수 있다.",
+        "Ar=0은 ideal full-balance model이다.",
+        "동일 basis에서 force ratio와 area ratio를 조건부로 비교할 수 있다.",
+        "Cage-guided plug는 guiding과 balance chamber 기능을 결합할 수 있다.",
+        "Balance seal과 seat seal은 다르다.",
+        "Balance-seal friction은 motion을 반대한다.",
+        "Breakaway와 running friction을 구분한다.",
+        "Balance-seal leakage와 seat leakage를 구분한다.",
+        "Rapid stroke에서 pressure equalization lag가 발생할 수 있다.",
+        "Passage plugging은 residual force를 변화시킬 수 있다.",
+        "Flow-to-open·flow-to-close는 geometry-dependent이다.",
+        "Seat load와 residual pressure force를 구분한다.",
+        "Actuator sizing과 fail-safe spring은 Topic 1로 hand-off한다.",
+        "Dynamic friction diagnosis는 Topic 3으로 hand-off한다.",
+        "General body·cage selection은 Topic 4로 hand-off한다.",
+        "Low-noise trim은 Topic 9와 구분한다.",
+        "Seat leakage class와 packing은 Topic 13과 구분한다.",
+        "Severe-service material은 Topic 14와 구분한다.",
+        "Clean high-ΔP service에서 balanced trim이 유리할 수 있다.",
+        "Dirty service에서는 passage plugging과 seal wear를 검토한다.",
+        "High-temperature·cryogenic seal limit를 vendor에서 확인한다.",
+        "Minimum·normal·maximum 및 startup·shutdown case를 검토한다.",
+        "Vendor cutaway와 force table을 교차 검증한다."
+      ],
+      "revision_notes": [
+        "Balanced·unbalanced pressure path와 effective-area force 계약을 추가했다.",
+        "Balance seal·seat seal과 leakage-path 경계를 추가했다.",
+        "Topic 1, Topic 3, Topic 4, Topic 9, Topic 13, Topic 14와 Topic 16 경계를 추가했다."
+      ],
+      "topic_label": "Balanced·Unbalanced Trim 구조·밀봉·적용",
+      "core_facts": [
+        "Balanced·unbalanced trim 평가는 structure, pressure path, effective area, residual force, sealing과 application을 통합한다.",
+        "Body, plug, cage, seat, stem, balance chamber와 seal의 pressure boundary를 구분한다.",
+        "Unbalanced trim에서는 differential pressure의 net effect가 plug에 크게 상쇄되지 않고 작용한다.",
+        "Effective unbalanced area는 pressure field가 net axial force를 만드는 equivalent projected area이다.",
+        "Effective unbalanced area를 nominal seat area와 항상 동일하게 취급하지 않는다.",
+        "Unbalanced pressure-force magnitude의 기본 구조는 Fu=ΔP·Au이다.",
+        "Pressure force direction은 positive stem axis와 actual pressure geometry로 정의한다.",
+        "Balanced trim은 plug 양측 또는 balance chamber 사이에 pressure communication path를 제공한다.",
+        "Balance hole·passage는 pressure를 전달하여 net pressure force를 줄이는 기능을 수행한다.",
+        "Balanced trim에도 residual effective area와 residual pressure force가 남을 수 있다.",
+        "Residual force의 기본 구조는 Fr=ΔP·Ar이며 Ar은 manufacturer geometry에 의존한다.",
+        "Ar=0과 Fr=0은 ideal full-balance model이며 universal actual condition이 아니다.",
+        "동일 ΔP와 static basis에서 |Fr|/|Fu|=Ar/Au를 조건부로 사용할 수 있다.",
+        "Cage-guided balanced plug는 guiding, pressure chamber, seal support와 flow-area 기능을 결합할 수 있다.",
+        "Balance seal은 balance chamber의 pressure boundary를 형성하며 seat seal과 구분된다.",
+        "Balance seal loading은 differential pressure, preload, geometry, temperature와 wear에 의존한다.",
+        "Balance-seal friction은 plug motion을 반대하고 actuator-force input에 포함된다.",
+        "Breakaway friction과 running friction을 구분하고 고정 ratio로 일반화하지 않는다.",
+        "Balance-seal leakage는 pressure chamber 사이의 internal leakage path이다.",
+        "Seat leakage는 closed seat boundary leakage이며 balance-seal leakage와 다른 rating basis를 갖는다.",
+        "Rapid stroke와 pressure transient에서는 balance chamber가 즉시 steady pressure에 도달하지 않을 수 있다.",
+        "Balance passage plugging은 pressure communication을 저해하여 residual force와 dynamic behavior를 변화시킬 수 있다.",
+        "Flow-to-open·flow-to-close의 force direction은 actual plug, seat, chamber와 pressure geometry로 확인한다.",
+        "Seat load, residual pressure force, friction, spring force와 design margin을 별도 actuator inputs로 구분한다.",
+        "Quantitative actuator thrust와 fail-safe spring sizing은 Topic 1로 hand-off한다.",
+        "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+        "General body, cage, guide와 actuator-type selection은 Topic 4가 소유한다.",
+        "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+        "Seat leakage class, packing과 fugitive emissions 상세는 Topic 13으로 hand-off한다.",
+        "Hardfacing, erosion-resistant material과 severe-service construction은 Topic 14로 hand-off한다.",
+        "Clean high-ΔP 또는 large-size service에서 balanced trim의 thrust-reduction 이점을 조건부로 평가한다.",
+        "Dirty·slurry·particulate service에서는 passage plugging, seal wear와 maintainability를 검토한다.",
+        "High-temperature와 cryogenic service에서는 seal material, clearance, friction과 leakage limit를 확인한다.",
+        "Seal swelling, hardening, extrusion, permeation과 wear를 fluid·temperature·pressure 조건으로 평가한다.",
+        "Minimum·normal·maximum 및 startup·shutdown case별 pressure path, force와 seal loading을 검토한다.",
+        "Vendor cutaway, effective-area·force table, seal limit와 maintenance data를 교차 검증한다."
+      ],
+      "triggers": [
+        "balanced trim pressure communication residual force",
+        "balanced",
+        "trim",
+        "pressure",
+        "communication",
+        "residual",
+        "force",
+        "unbalanced trim effective area pressure force",
+        "unbalanced",
+        "effective",
+        "area",
+        "balance hole cage guided plug structure",
+        "balance",
+        "hole",
+        "cage",
+        "guided",
+        "plug",
+        "structure",
+        "balance seal seat seal leakage path",
+        "seal",
+        "seat",
+        "leakage",
+        "path",
+        "balanced trim seal friction breakaway",
+        "friction",
+        "breakaway",
+        "residual effective area actuator handoff",
+        "actuator",
+        "handoff",
+        "flow to open pressure geometry trim",
+        "flow",
+        "to",
+        "open",
+        "geometry",
+        "dirty service balance passage plugging",
+        "dirty",
+        "service",
+        "passage",
+        "plugging",
+        "high temperature balanced trim seal limit",
+        "high",
+        "temperature",
+        "limit",
+        "cryogenic pressure balanced plug seal",
+        "cryogenic",
+        "balanced unbalanced trim selection high differential pressure",
+        "selection",
+        "differential",
+        "vendor cutaway force table balance diameter",
+        "vendor",
+        "cutaway",
+        "table",
+        "diameter",
+        "밸런스드 트림 잔류 불평형력",
+        "밸런스드",
+        "트림",
+        "잔류",
+        "불평형력",
+        "언밸런스드 트림 유효면적 압력힘",
+        "언밸런스드",
+        "유효면적",
+        "압력힘",
+        "밸런스 홀 압력평형 케이지 가이드",
+        "밸런스",
+        "압력평형",
+        "케이지",
+        "가이드",
+        "밸런스 씰 시트 누설 경로",
+        "시트",
+        "누설",
+        "경로",
+        "밸런스 씰 마찰 브레이크어웨이",
+        "마찰",
+        "브레이크어웨이",
+        "고차압 밸런스드 트림 선정",
+        "고차압",
+        "오염 유체 평형공 막힘",
+        "오염",
+        "평형공",
+        "막힘",
+        "고온 극저온 밸런스 씰 제한",
+        "고온",
+        "극저온",
+        "제한",
+        "Balanced trim과 unbalanced trim을 pressure path, effective area, force와 sealing 구조 관점에서 비교하시오.",
+        "Balanced",
+        "sealing",
+        "구조",
+        "관점에서",
+        "비교하시오",
+        "Unbalanced force와 balanced residual force의 식, effective area와 sign convention을 설명하시오.",
+        "Unbalanced",
+        "sign",
+        "convention",
+        "Balance hole·passage, cage-guided plug와 pressure equalization의 원리를 설명하시오.",
+        "Balance",
+        "cage-guided",
+        "equalization",
+        "원리를",
+        "Balance seal, seat seal과 두 leakage path를 비교하시오.",
+        "Balance-seal friction, breakaway·running friction과 dynamic symptom을 설명하시오.",
+        "Balance-seal",
+        "running",
+        "dynamic",
+        "symptom",
+        "Clean high-ΔP, large-size service에서 balanced·unbalanced trim 선정기준을 설명하시오.",
+        "Clean",
+        "high-",
+        "P",
+        "large-size",
+        "에서",
+        "선정기준을",
+        "Dirty·slurry·particulate service에서 passage plugging, seal wear와 maintainability를 고려하여 trim을 선정하시오.",
+        "Dirty",
+        "slurry",
+        "particulate",
+        "wear",
+        "maintainability",
+        "고려하여",
+        "선정하시오",
+        "High-temperature와 cryogenic service의 balance-seal 선정 제한을 설명하시오.",
+        "High-temperature",
+        "balance-seal",
+        "제한을",
+        "Minimum·normal·maximum 및 startup·shutdown case에서 residual force, friction과 actuator-sizing input을 설명하시오.",
+        "Minimum",
+        "normal",
+        "maximum",
+        "startup",
+        "shutdown",
+        "case",
+        "actuator-sizing",
+        "input",
+        "Structure, force, seal, leakage, service condition와 lifecycle을 이용한 balanced·unbalanced trim 선정 절차를 설명하시오.",
+        "Structure",
+        "condition",
+        "lifecycle",
+        "이용한",
+        "절차를",
+        "Trim cutaway와 pressure arrows 확인",
+        "Trim",
+        "arrows",
+        "확인",
+        "Effective unbalanced area Au와 residual area Ar 확인",
+        "Effective",
+        "Au",
+        "Ar",
+        "Fu=ΔP·Au와 Fr=ΔP·Ar 계산",
+        "Fu",
+        "Fr",
+        "계산",
+        "Positive stem axis와 force sign 확인",
+        "Positive",
+        "stem",
+        "axis",
+        "Balance hole·passage와 chamber pressure response 확인",
+        "chamber",
+        "response",
+        "Balance seal type, loading, friction과 leakage 확인",
+        "type",
+        "loading",
+        "Seat leakage와 internal balance leakage 분리",
+        "Seat",
+        "internal",
+        "분리",
+        "Minimum·normal·maximum 및 startup·shutdown pressure cases",
+        "cases",
+        "Clean·dirty·high-temperature·cryogenic application comparison",
+        "high-temperature",
+        "application",
+        "comparison",
+        "Topic 1 actuator sizing handoff",
+        "Topic",
+        "sizing",
+        "Topic 3 dynamic friction handoff",
+        "Topic 4 general body·cage structure boundary",
+        "general",
+        "body",
+        "boundary",
+        "Topic 9 low-noise trim boundary",
+        "low-noise",
+        "Topic 13 seat leakage·packing boundary",
+        "packing",
+        "Topic 14 severe-service material boundary",
+        "severe-service",
+        "material",
+        "Topic 16 package workflow boundary",
+        "package",
+        "workflow",
+        "Balanced·unbalanced 구조와 pressure boundary를 비교한다.",
+        "구조와",
+        "비교한다",
+        "Fu·Fr, Au·Ar와 force sign을 설명한다.",
+        "설명한다",
+        "Pressure communication structure와 dynamic equalization을 설명한다.",
+        "Pressure",
+        "Balance boundary와 shutoff boundary를 비교한다.",
+        "shutoff",
+        "Seal friction direction과 dynamic handoff를 설명한다.",
+        "Seal",
+        "direction",
+        "Pressure force와 lifecycle을 고려해 clean service를 선정한다.",
+        "고려해",
+        "clean",
+        "선정한다",
+        "Contamination risk와 정비성을 비교한다.",
+        "Contamination",
+        "risk",
+        "정비성을",
+        "Temperature와 fluid compatibility에 따른 seal limit를 설명한다.",
+        "Temperature",
+        "fluid",
+        "compatibility",
+        "따른",
+        "Operating-case force matrix와 Topic 1 handoff를 설명한다.",
+        "Operating-case",
+        "matrix",
+        "구조·힘·씰·적용·검증을 통합한다.",
+        "검증을",
+        "통합한다",
+        "Balanced·Unbalanced Trim의 구조, 밀봉 및 적용",
+        "밀봉",
+        "Balanced·Unbalanced Trim 구조·밀봉·적용",
+        "balanced unbalanced trim scope",
+        "scope",
+        "pressure path",
+        "effective area",
+        "Balanced·unbalanced trim 평가는 structure, pressure path, effective area, residual force, sealing과 application을 통합한다.",
+        "평가는",
+        "trim pressure boundary",
+        "body plug cage seat stem",
+        "balance chamber",
+        "seal boundary",
+        "Body, plug, cage, seat, stem, balance chamber와 seal의 pressure boundary를 구분한다.",
+        "Body",
+        "구분한다",
+        "unbalanced trim",
+        "direct pressure loading",
+        "direct",
+        "differential pressure",
+        "plug force",
+        "net pressure effect",
+        "net",
+        "effect",
+        "Unbalanced trim에서는 differential pressure의 net effect가 plug에 크게 상쇄되지 않고 작용한다.",
+        "에서는",
+        "크게",
+        "상쇄되지",
+        "않고",
+        "작용한다",
+        "effective unbalanced area",
+        "pressure field",
+        "field",
+        "net axial force",
+        "axial",
+        "equivalent projected area",
+        "equivalent",
+        "projected",
+        "trim force",
+        "Effective unbalanced area는 pressure field가 net axial force를 만드는 equivalent projected area이다.",
+        "만드는",
+        "이다",
+        "nominal seat area boundary",
+        "nominal",
+        "effective area difference",
+        "difference",
+        "seat bore",
+        "bore",
+        "plug geometry",
+        "not always equal",
+        "not",
+        "always",
+        "equal",
+        "Effective unbalanced area를 nominal seat area와 항상 동일하게 취급하지 않는다.",
+        "항상",
+        "동일하게",
+        "취급하지",
+        "않는다",
+        "unbalanced force equation",
+        "equation",
+        "Fu delta P Au",
+        "delta",
+        "pressure force",
+        "linear relation",
+        "linear",
+        "relation",
+        "Unbalanced pressure-force magnitude의 기본 구조는 Fu=ΔP·Au이다.",
+        "pressure-force",
+        "magnitude",
+        "기본",
+        "구조는",
+        "force direction sign convention",
+        "positive stem axis",
+        "positive",
+        "actual pressure geometry",
+        "actual",
+        "signed force",
+        "signed",
+        "flow direction",
+        "Pressure force direction은 positive stem axis와 actual pressure geometry로 정의한다.",
+        "정의한다",
+        "balanced trim",
+        "pressure communication",
+        "plug both sides",
+        "both",
+        "sides",
+        "Balanced trim은 plug 양측 또는 balance chamber 사이에 pressure communication path를 제공한다.",
+        "양측",
+        "또는",
+        "사이에",
+        "제공한다",
+        "balance hole",
+        "balance passage",
+        "pressure transfer",
+        "transfer",
+        "net force reduction",
+        "reduction",
+        "pressure equalization",
+        "Balance hole·passage는 pressure를 전달하여 net pressure force를 줄이는 기능을 수행한다.",
+        "전달하여",
+        "줄이는",
+        "기능을",
+        "수행한다",
+        "balanced residual force",
+        "residual effective area",
+        "not zero force",
+        "zero",
+        "pressure force remains",
+        "remains",
+        "actual balance",
+        "Balanced trim에도 residual effective area와 residual pressure force가 남을 수 있다.",
+        "에도",
+        "남을",
+        "있다",
+        "Fr delta P Ar",
+        "manufacturer geometry",
+        "manufacturer",
+        "balanced trim force",
+        "residual area",
+        "Residual force의 기본 구조는 Fr=ΔP·Ar이며 Ar은 manufacturer geometry에 의존한다.",
+        "Residual",
+        "이며",
+        "의존한다",
+        "ideal full balance",
+        "ideal",
+        "full",
+        "Ar zero",
+        "Fr zero",
+        "ideal model",
+        "model",
+        "not universal actual",
+        "universal",
+        "Ar=0과 Fr=0은 ideal full-balance model이며 universal actual condition이 아니다.",
+        "full-balance",
+        "아니다",
+        "force reduction ratio",
+        "ratio",
+        "Fr over Fu",
+        "over",
+        "Ar over Au",
+        "same differential pressure",
+        "same",
+        "static basis",
+        "static",
+        "basis",
+        "동일 ΔP와 static basis에서 |Fr|/|Fu|=Ar/Au를 조건부로 사용할 수 있다.",
+        "동일",
+        "조건부로",
+        "사용할",
+        "cage guided balanced plug",
+        "guiding",
+        "pressure chamber",
+        "seal support",
+        "support",
+        "flow area",
+        "Cage-guided balanced plug는 guiding, pressure chamber, seal support와 flow-area 기능을 결합할 수 있다.",
+        "Cage-guided",
+        "flow-area",
+        "결합할",
+        "balance seal function",
+        "function",
+        "balance chamber boundary",
+        "seat seal distinction",
+        "distinction",
+        "pressure boundary",
+        "seal ring",
+        "ring",
+        "Balance seal은 balance chamber의 pressure boundary를 형성하며 seat seal과 구분된다.",
+        "형성하며",
+        "구분된다",
+        "balance seal loading",
+        "preload",
+        "Balance seal loading은 differential pressure, preload, geometry, temperature와 wear에 의존한다.",
+        "balance seal friction",
+        "opposes motion",
+        "opposes",
+        "motion",
+        "plug motion",
+        "actuator force input",
+        "seal drag",
+        "drag",
+        "Balance-seal friction은 plug motion을 반대하고 actuator-force input에 포함된다.",
+        "반대하고",
+        "actuator-force",
+        "포함된다",
+        "breakaway friction",
+        "running friction",
+        "static dynamic friction",
+        "not fixed ratio",
+        "fixed",
+        "seal friction",
+        "Breakaway friction과 running friction을 구분하고 고정 ratio로 일반화하지 않는다.",
+        "Breakaway",
+        "구분하고",
+        "고정",
+        "일반화하지",
+        "balance seal leakage",
+        "internal leakage path",
+        "balance effectiveness",
+        "effectiveness",
+        "internal recirculation",
+        "recirculation",
+        "Balance-seal leakage는 pressure chamber 사이의 internal leakage path이다.",
+        "사이의",
+        "seat leakage path",
+        "closed seat boundary",
+        "closed",
+        "balance leakage distinction",
+        "rating basis",
+        "rating",
+        "shutoff leakage",
+        "Seat leakage는 closed seat boundary leakage이며 balance-seal leakage와 다른 rating basis를 갖는다.",
+        "다른",
+        "갖는다",
+        "pressure equalization transient",
+        "transient",
+        "rapid stroke",
+        "rapid",
+        "stroke",
+        "balance chamber lag",
+        "lag",
+        "steady pressure delay",
+        "steady",
+        "delay",
+        "passage conductance",
+        "conductance",
+        "Rapid stroke와 pressure transient에서는 balance chamber가 즉시 steady pressure에 도달하지 않을 수 있다.",
+        "Rapid",
+        "즉시",
+        "도달하지",
+        "않을",
+        "balance passage plugging",
+        "pressure communication loss",
+        "loss",
+        "residual force change",
+        "change",
+        "dynamic imbalance",
+        "imbalance",
+        "Balance passage plugging은 pressure communication을 저해하여 residual force와 dynamic behavior를 변화시킬 수 있다.",
+        "저해하여",
+        "behavior",
+        "변화시킬",
+        "flow to open flow to close",
+        "close",
+        "geometry dependent",
+        "dependent",
+        "plug seat chamber",
+        "pressure geometry",
+        "force direction",
+        "Flow-to-open·flow-to-close의 force direction은 actual plug, seat, chamber와 pressure geometry로 확인한다.",
+        "Flow-to-open",
+        "flow-to-close",
+        "확인한다",
+        "seat load",
+        "load",
+        "shutoff margin",
+        "margin",
+        "residual pressure force",
+        "spring force",
+        "spring",
+        "actuator inputs",
+        "inputs",
+        "Seat load, residual pressure force, friction, spring force와 design margin을 별도 actuator inputs로 구분한다.",
+        "design",
+        "별도",
+        "Topic 1 handoff",
+        "actuator thrust sizing",
+        "thrust",
+        "fail safe spring",
+        "fail",
+        "safe",
+        "force input",
+        "sizing boundary",
+        "Quantitative actuator thrust와 fail-safe spring sizing은 Topic 1로 hand-off한다.",
+        "Quantitative",
+        "fail-safe",
+        "hand-off",
+        "한다",
+        "Topic 3 handoff",
+        "deadband",
+        "stiction",
+        "hysteresis",
+        "seal friction diagnosis",
+        "diagnosis",
+        "Seal friction의 deadband·stiction·hysteresis 진단은 Topic 3으로 hand-off한다.",
+        "진단은",
+        "으로",
+        "Topic 4 handoff",
+        "body cage guide",
+        "guide",
+        "actuator type",
+        "general structure",
+        "selection boundary",
+        "General body, cage, guide와 actuator-type selection은 Topic 4가 소유한다.",
+        "General",
+        "actuator-type",
+        "소유한다",
+        "Topic 9 boundary",
+        "low noise trim",
+        "low",
+        "noise",
+        "multi stage trim",
+        "multi",
+        "stage",
+        "balanced trim distinction",
+        "noise handoff",
+        "Balanced trim과 low-noise·multi-stage trim을 구분하고 noise 상세는 Topic 9로 hand-off한다.",
+        "multi-stage",
+        "상세는",
+        "Topic 13 boundary",
+        "seat leakage class",
+        "class",
+        "fugitive emissions",
+        "fugitive",
+        "emissions",
+        "stem sealing",
+        "Seat leakage class, packing과 fugitive emissions 상세는 Topic 13으로 hand-off한다.",
+        "Topic 14 boundary",
+        "hardfacing",
+        "erosion resistant material",
+        "erosion",
+        "resistant",
+        "severe service construction",
+        "severe",
+        "construction",
+        "material handoff",
+        "Hardfacing, erosion-resistant material과 severe-service construction은 Topic 14로 hand-off한다.",
+        "Hardfacing",
+        "erosion-resistant",
+        "clean high differential pressure",
+        "large size valve",
+        "large",
+        "size",
+        "valve",
+        "balanced trim application",
+        "thrust reduction",
+        "conditional selection",
+        "conditional",
+        "Clean high-ΔP 또는 large-size service에서 balanced trim의 thrust-reduction 이점을 조건부로 평가한다.",
+        "thrust-reduction",
+        "이점을",
+        "평가한다",
+        "dirty slurry particulate",
+        "passage plugging",
+        "seal wear",
+        "contamination",
+        "Dirty·slurry·particulate service에서는 passage plugging, seal wear와 maintainability를 검토한다.",
+        "검토한다",
+        "high temperature cryogenic",
+        "seal material limit",
+        "clearance",
+        "leakage limit",
+        "High-temperature와 cryogenic service에서는 seal material, clearance, friction과 leakage limit를 확인한다.",
+        "fluid compatibility",
+        "seal swelling",
+        "swelling",
+        "hardening extrusion",
+        "hardening",
+        "extrusion",
+        "permeation",
+        "Seal swelling, hardening, extrusion, permeation과 wear를 fluid·temperature·pressure 조건으로 평가한다.",
+        "조건으로",
+        "operating case force matrix",
+        "operating",
+        "minimum normal maximum",
+        "minimum",
+        "startup shutdown",
+        "seal loading",
+        "Minimum·normal·maximum 및 startup·shutdown case별 pressure path, force와 seal loading을 검토한다.",
+        "vendor cutaway",
+        "effective area force table",
+        "seal limit",
+        "maintenance data",
+        "maintenance",
+        "data",
+        "crosscheck",
+        "Vendor cutaway, effective-area·force table, seal limit와 maintenance data를 교차 검증한다.",
+        "Vendor",
+        "effective-area",
+        "교차",
+        "검증한다"
+      ],
+      "aliases": [
+        "balanced trim pressure communication residual force",
+        "unbalanced trim effective area pressure force",
+        "balance hole cage guided plug structure",
+        "balance seal seat seal leakage path",
+        "balanced trim seal friction breakaway",
+        "residual effective area actuator handoff",
+        "flow to open pressure geometry trim",
+        "dirty service balance passage plugging",
+        "high temperature balanced trim seal limit",
+        "cryogenic pressure balanced plug seal",
+        "balanced unbalanced trim selection high differential pressure",
+        "vendor cutaway force table balance diameter",
+        "밸런스드 트림 잔류 불평형력",
+        "언밸런스드 트림 유효면적 압력힘",
+        "밸런스 홀 압력평형 케이지 가이드",
+        "밸런스 씰 시트 누설 경로",
+        "밸런스 씰 마찰 브레이크어웨이",
+        "고차압 밸런스드 트림 선정",
+        "오염 유체 평형공 막힘",
+        "고온 극저온 밸런스 씰 제한",
+        "Balanced trim과 unbalanced trim을 pressure path, effective area, force와 sealing 구조 관점에서 비교하시오.",
+        "Unbalanced force와 balanced residual force의 식, effective area와 sign convention을 설명하시오.",
+        "Balance hole·passage, cage-guided plug와 pressure equalization의 원리를 설명하시오.",
+        "Balance seal, seat seal과 두 leakage path를 비교하시오.",
+        "Balance-seal friction, breakaway·running friction과 dynamic symptom을 설명하시오.",
+        "Clean high-ΔP, large-size service에서 balanced·unbalanced trim 선정기준을 설명하시오.",
+        "Dirty·slurry·particulate service에서 passage plugging, seal wear와 maintainability를 고려하여 trim을 선정하시오.",
+        "High-temperature와 cryogenic service의 balance-seal 선정 제한을 설명하시오.",
+        "Minimum·normal·maximum 및 startup·shutdown case에서 residual force, friction과 actuator-sizing input을 설명하시오.",
+        "Structure, force, seal, leakage, service condition와 lifecycle을 이용한 balanced·unbalanced trim 선정 절차를 설명하시오.",
+        "Balanced·unbalanced 구조와 pressure boundary를 비교한다.",
+        "Fu·Fr, Au·Ar와 force sign을 설명한다.",
+        "Pressure communication structure와 dynamic equalization을 설명한다.",
+        "Balance boundary와 shutoff boundary를 비교한다.",
+        "Seal friction direction과 dynamic handoff를 설명한다.",
+        "Pressure force와 lifecycle을 고려해 clean service를 선정한다.",
+        "Contamination risk와 정비성을 비교한다.",
+        "Temperature와 fluid compatibility에 따른 seal limit를 설명한다.",
+        "Operating-case force matrix와 Topic 1 handoff를 설명한다.",
+        "구조·힘·씰·적용·검증을 통합한다.",
+        "Balanced·Unbalanced Trim의 구조, 밀봉 및 적용",
+        "Balanced·Unbalanced Trim 구조·밀봉·적용"
+      ],
+      "priority": "CORE_MUST_PREPARE"
+    },
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
       "schema_version": "fact_anchor.v1",
