@@ -262,3 +262,7 @@ python3 scripts/test_control_valve_positioner_ip_booster_accessories_topic.py
 echo
 echo "===== smart positioner diagnostics valve signature predictive maintenance topic regression ====="
 python3 scripts/test_control_valve_smart_positioner_diagnostics_topic.py
+
+echo
+echo "===== control valve seat leakage shutoff class packing fugitive emissions topic regression ====="
+python3 scripts/test_control_valve_seat_leakage_packing_emissions_topic.py

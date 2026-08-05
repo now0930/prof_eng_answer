@@ -1,0 +1,1994 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+  "title_ko": "제어밸브 시트 누설, 차단 등급, 패킹 및 비산배출",
+  "question_type_hint": "COMPARE_SELECTION",
+  "anchors": [
+    {
+      "id": "internal_external_leakage_boundary",
+      "anchor_id": "internal_external_leakage_boundary",
+      "statement": "Internal through-seat leakage는 닫힌 밸브의 trim을 통과하는 내부 누설이고 external atmospheric leakage는 stem·shaft packing, bonnet와 body joint를 통해 대기로 방출되는 외부 누설이다.",
+      "importance": "core",
+      "keywords": [
+        "internal through-seat leakage",
+        "external atmospheric leakage",
+        "seat leakage packing leakage boundary",
+        "내부 누설 외부 누설",
+        "through-seat versus packing leakage",
+        "internal_external_leakage_boundary",
+        "internal external leakage boundary",
+        "Internal through-seat leakage는 닫힌 밸브의 trim을 통과하는 내부 누설"
+      ],
+      "core_terms": [
+        "internal through-seat leakage",
+        "external atmospheric leakage",
+        "seat leakage packing leakage boundary",
+        "내부 누설 외부 누설",
+        "through-seat versus packing leakage",
+        "internal_external_leakage_boundary",
+        "internal external leakage boundary",
+        "Internal through-seat leakage는 닫힌 밸브의 trim을 통과하는 내부 누설"
+      ],
+      "accepted_explanations": [
+        "Internal through-seat leakage는 닫힌 밸브의 trim을 통과하는 내부 누설이고 external atmospheric leakage는 stem·shaft packing, bonnet와 body joint를 통해 대기로 방출되는 외부 누설이다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Internal through-seat leakage는 닫힌 밸브의 trim을 통과하는 내부 누설이고 external atmospheric leakage는 stem·shaft packing, bonnet와 body joint를 통해 대기로 방출되는 외부 누설이다.",
+      "description": "internal_external_leakage_boundary 계약을 평가한다."
+    },
+    {
+      "id": "shutoff_class_purpose_scope",
+      "anchor_id": "shutoff_class_purpose_scope",
+      "statement": "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매·검사 계약이며 실제 공정의 모든 운전조건을 자동 보증하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "control valve shutoff class",
+        "leakage class acceptance contract",
+        "shop shutoff test",
+        "차단 등급 누설 등급",
+        "field leakage boundary",
+        "shutoff_class_purpose_scope",
+        "shutoff class purpose scope",
+        "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매 검사 계약"
+      ],
+      "core_terms": [
+        "control valve shutoff class",
+        "leakage class acceptance contract",
+        "shop shutoff test",
+        "차단 등급 누설 등급",
+        "field leakage boundary",
+        "shutoff_class_purpose_scope",
+        "shutoff class purpose scope",
+        "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매 검사 계약"
+      ],
+      "accepted_explanations": [
+        "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매·검사 계약이며 실제 공정의 모든 운전조건을 자동 보증하지 않는다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매·검사 계약이며 실제 공정의 모든 운전조건을 자동 보증하지 않는다.",
+      "description": "shutoff_class_purpose_scope 계약을 평가한다."
+    },
+    {
+      "id": "class_test_condition_dependency",
+      "anchor_id": "class_test_condition_dependency",
+      "statement": "Leakage class는 test medium, inlet·outlet pressure, pressure direction, temperature, duration, stabilization과 measurement basis를 함께 명시해야 의미가 있다.",
+      "importance": "core",
+      "keywords": [
+        "shutoff class test conditions",
+        "test medium pressure direction temperature",
+        "leakage acceptance procedure",
+        "시험 유체 압력 방향 온도",
+        "class condition dependency",
+        "class_test_condition_dependency",
+        "class test condition dependency"
+      ],
+      "core_terms": [
+        "shutoff class test conditions",
+        "test medium pressure direction temperature",
+        "leakage acceptance procedure",
+        "시험 유체 압력 방향 온도",
+        "class condition dependency",
+        "class_test_condition_dependency",
+        "class test condition dependency"
+      ],
+      "accepted_explanations": [
+        "Leakage class는 test medium, inlet·outlet pressure, pressure direction, temperature, duration, stabilization과 measurement basis를 함께 명시해야 의미가 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Leakage class는 test medium, inlet·outlet pressure, pressure direction, temperature, duration, stabilization과 measurement basis를 함께 명시해야 의미가 있다.",
+      "description": "class_test_condition_dependency 계약을 평가한다."
+    },
+    {
+      "id": "shop_test_field_service_boundary",
+      "anchor_id": "shop_test_field_service_boundary",
+      "statement": "Shop shutoff test의 결과와 field operating leakage는 fluid property, temperature, differential pressure, contamination와 cycling history가 달라 직접 동일시할 수 없다.",
+      "importance": "core",
+      "keywords": [
+        "shop_test_field_service_boundary",
+        "shop test field service boundary",
+        "shop test field service",
+        "test field service boundary",
+        "shop test field service boundary control valve"
+      ],
+      "core_terms": [
+        "shop_test_field_service_boundary",
+        "shop test field service boundary",
+        "shop test field service",
+        "test field service boundary",
+        "shop test field service boundary control valve"
+      ],
+      "accepted_explanations": [
+        "Shop shutoff test의 결과와 field operating leakage는 fluid property, temperature, differential pressure, contamination와 cycling history가 달라 직접 동일시할 수 없다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Shop shutoff test의 결과와 field operating leakage는 fluid property, temperature, differential pressure, contamination와 cycling history가 달라 직접 동일시할 수 없다.",
+      "description": "shop_test_field_service_boundary 계약을 평가한다."
+    },
+    {
+      "id": "soft_metal_seat_tradeoff",
+      "anchor_id": "soft_metal_seat_tradeoff",
+      "statement": "Soft seat는 낮은 시험 누설에 유리할 수 있으나 temperature, chemical compatibility, extrusion과 wear 제한이 있고 metal seat는 harsh service 내구성과 temperature 범위에 유리하지만 허용 누설과 surface condition을 함께 검토한다.",
+      "importance": "core",
+      "keywords": [
+        "soft seat metal seat comparison",
+        "seat tightness temperature wear",
+        "chemical compatibility extrusion galling",
+        "소프트 시트 메탈 시트",
+        "seat material trade-off",
+        "soft_metal_seat_tradeoff",
+        "soft metal seat tradeoff"
+      ],
+      "core_terms": [
+        "soft seat metal seat comparison",
+        "seat tightness temperature wear",
+        "chemical compatibility extrusion galling",
+        "소프트 시트 메탈 시트",
+        "seat material trade-off",
+        "soft_metal_seat_tradeoff",
+        "soft metal seat tradeoff"
+      ],
+      "accepted_explanations": [
+        "Soft seat는 낮은 시험 누설에 유리할 수 있으나 temperature, chemical compatibility, extrusion과 wear 제한이 있고 metal seat는 harsh service 내구성과 temperature 범위에 유리하지만 허용 누설과 surface condition을 함께 검토한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Soft seat는 낮은 시험 누설에 유리할 수 있으나 temperature, chemical compatibility, extrusion과 wear 제한이 있고 metal seat는 harsh service 내구성과 temperature 범위에 유리하지만 허용 누설과 surface condition을 함께 검토한다.",
+      "description": "soft_metal_seat_tradeoff 계약을 평가한다."
+    },
+    {
+      "id": "single_double_seat_leakage_paths",
+      "anchor_id": "single_double_seat_leakage_paths",
+      "statement": "Single-seat와 double-seat trim은 seat 수, force balance와 leakage path가 다르며 double-seat 구조는 두 접촉면의 동시 정렬과 누설 합산을 고려한다.",
+      "importance": "core",
+      "keywords": [
+        "single_double_seat_leakage_paths",
+        "single double seat leakage paths",
+        "single double seat leakage",
+        "double seat leakage paths",
+        "single double seat leakage paths control valve"
+      ],
+      "core_terms": [
+        "single_double_seat_leakage_paths",
+        "single double seat leakage paths",
+        "single double seat leakage",
+        "double seat leakage paths",
+        "single double seat leakage paths control valve"
+      ],
+      "accepted_explanations": [
+        "Single-seat와 double-seat trim은 seat 수, force balance와 leakage path가 다르며 double-seat 구조는 두 접촉면의 동시 정렬과 누설 합산을 고려한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Single-seat와 double-seat trim은 seat 수, force balance와 leakage path가 다르며 double-seat 구조는 두 접촉면의 동시 정렬과 누설 합산을 고려한다.",
+      "description": "single_double_seat_leakage_paths 계약을 평가한다."
+    },
+    {
+      "id": "balanced_trim_additional_leakage_path",
+      "anchor_id": "balanced_trim_additional_leakage_path",
+      "statement": "Balanced trim은 unbalanced force를 줄이지만 balance seal·piston ring·cage clearance와 같은 additional internal leakage path를 가질 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "balanced_trim_additional_leakage_path",
+        "balanced trim additional leakage path",
+        "balanced trim additional leakage",
+        "trim additional leakage path",
+        "balanced trim additional leakage path control valve"
+      ],
+      "core_terms": [
+        "balanced_trim_additional_leakage_path",
+        "balanced trim additional leakage path",
+        "balanced trim additional leakage",
+        "trim additional leakage path",
+        "balanced trim additional leakage path control valve"
+      ],
+      "accepted_explanations": [
+        "Balanced trim은 unbalanced force를 줄이지만 balance seal·piston ring·cage clearance와 같은 additional internal leakage path를 가질 수 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Balanced trim은 unbalanced force를 줄이지만 balance seal·piston ring·cage clearance와 같은 additional internal leakage path를 가질 수 있다.",
+      "description": "balanced_trim_additional_leakage_path 계약을 평가한다."
+    },
+    {
+      "id": "seat_contact_geometry",
+      "anchor_id": "seat_contact_geometry",
+      "statement": "Seat ring, plug, ball, disc와 seal ring의 contact geometry, alignment와 contact width는 sealing stress와 leakage path를 결정한다.",
+      "importance": "core",
+      "keywords": [
+        "seat_contact_geometry",
+        "seat contact geometry",
+        "seat contact geometry control valve",
+        "seat contact geometry control valve",
+        "seat contact geometry control valve"
+      ],
+      "core_terms": [
+        "seat_contact_geometry",
+        "seat contact geometry",
+        "seat contact geometry control valve",
+        "seat contact geometry control valve",
+        "seat contact geometry control valve"
+      ],
+      "accepted_explanations": [
+        "Seat ring, plug, ball, disc와 seal ring의 contact geometry, alignment와 contact width는 sealing stress와 leakage path를 결정한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Seat ring, plug, ball, disc와 seal ring의 contact geometry, alignment와 contact width는 sealing stress와 leakage path를 결정한다.",
+      "description": "seat_contact_geometry 계약을 평가한다."
+    },
+    {
+      "id": "seat_load_contact_stress_relation",
+      "anchor_id": "seat_load_contact_stress_relation",
+      "statement": "Seating force와 seat load는 contact area를 통해 sealing contact stress를 형성하며 필요한 값은 trim geometry, pressure direction, seat material과 service condition에 의존한다.",
+      "importance": "core",
+      "keywords": [
+        "seat load contact stress",
+        "seating force sealing stress",
+        "actuator margin shutoff",
+        "시트 하중 접촉 응력",
+        "pressure direction seat contact",
+        "seat_load_contact_stress_relation",
+        "seat load contact stress relation",
+        "load contact stress relation"
+      ],
+      "core_terms": [
+        "seat load contact stress",
+        "seating force sealing stress",
+        "actuator margin shutoff",
+        "시트 하중 접촉 응력",
+        "pressure direction seat contact",
+        "seat_load_contact_stress_relation",
+        "seat load contact stress relation",
+        "load contact stress relation"
+      ],
+      "accepted_explanations": [
+        "Seating force와 seat load는 contact area를 통해 sealing contact stress를 형성하며 필요한 값은 trim geometry, pressure direction, seat material과 service condition에 의존한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Seating force와 seat load는 contact area를 통해 sealing contact stress를 형성하며 필요한 값은 trim geometry, pressure direction, seat material과 service condition에 의존한다.",
+      "description": "seat_load_contact_stress_relation 계약을 평가한다."
+    },
+    {
+      "id": "insufficient_seat_load_leakage",
+      "anchor_id": "insufficient_seat_load_leakage",
+      "statement": "Seat load가 부족하면 surface irregularity와 pressure force를 극복하지 못하여 shutoff leakage가 증가할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "insufficient_seat_load_leakage",
+        "insufficient seat load leakage",
+        "Seat load가 부족하면 surface irregularity와 pressure force를 극복하지 못하여 shutoff leakage가 증가할 수 있다",
+        "insufficient seat load leakage control valve",
+        "insufficient seat load leakage control valve"
+      ],
+      "core_terms": [
+        "insufficient_seat_load_leakage",
+        "insufficient seat load leakage",
+        "Seat load가 부족하면 surface irregularity와 pressure force를 극복하지 못하여 shutoff leakage가 증가할 수 있다",
+        "insufficient seat load leakage control valve",
+        "insufficient seat load leakage control valve"
+      ],
+      "accepted_explanations": [
+        "Seat load가 부족하면 surface irregularity와 pressure force를 극복하지 못하여 shutoff leakage가 증가할 수 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Seat load가 부족하면 surface irregularity와 pressure force를 극복하지 못하여 shutoff leakage가 증가할 수 있다.",
+      "description": "insufficient_seat_load_leakage 계약을 평가한다."
+    },
+    {
+      "id": "excessive_seat_load_damage",
+      "anchor_id": "excessive_seat_load_damage",
+      "statement": "Seat load가 과도하면 seat·plug deformation, indentation, galling, wear와 actuator demand가 증가할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "excessive_seat_load_damage",
+        "excessive seat load damage",
+        "Seat load가 과도하면 seat plug deformation indentation galling wear와 actuator demand가 증가할 수 있다",
+        "excessive seat load damage control valve",
+        "excessive seat load damage control valve"
+      ],
+      "core_terms": [
+        "excessive_seat_load_damage",
+        "excessive seat load damage",
+        "Seat load가 과도하면 seat plug deformation indentation galling wear와 actuator demand가 증가할 수 있다",
+        "excessive seat load damage control valve",
+        "excessive seat load damage control valve"
+      ],
+      "accepted_explanations": [
+        "Seat load가 과도하면 seat·plug deformation, indentation, galling, wear와 actuator demand가 증가할 수 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Seat load가 과도하면 seat·plug deformation, indentation, galling, wear와 actuator demand가 증가할 수 있다.",
+      "description": "excessive_seat_load_damage 계약을 평가한다."
+    },
+    {
+      "id": "pressure_direction_sealing",
+      "anchor_id": "pressure_direction_sealing",
+      "statement": "Pressure direction은 pressure-assisted 또는 pressure-unbalanced sealing을 만들 수 있으므로 normal flow와 reverse-pressure condition을 분리하여 평가한다.",
+      "importance": "core",
+      "keywords": [
+        "pressure_direction_sealing",
+        "pressure direction sealing",
+        "pressure direction sealing control valve",
+        "pressure direction sealing control valve",
+        "pressure direction sealing control valve"
+      ],
+      "core_terms": [
+        "pressure_direction_sealing",
+        "pressure direction sealing",
+        "pressure direction sealing control valve",
+        "pressure direction sealing control valve",
+        "pressure direction sealing control valve"
+      ],
+      "accepted_explanations": [
+        "Pressure direction은 pressure-assisted 또는 pressure-unbalanced sealing을 만들 수 있으므로 normal flow와 reverse-pressure condition을 분리하여 평가한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Pressure direction은 pressure-assisted 또는 pressure-unbalanced sealing을 만들 수 있으므로 normal flow와 reverse-pressure condition을 분리하여 평가한다.",
+      "description": "pressure_direction_sealing 계약을 평가한다."
+    },
+    {
+      "id": "gas_liquid_test_medium_difference",
+      "anchor_id": "gas_liquid_test_medium_difference",
+      "statement": "Gas와 liquid test medium은 compressibility, density, viscosity, surface tension과 detection method가 달라 같은 숫자의 leakage rate를 직접 비교할 수 없다.",
+      "importance": "core",
+      "keywords": [
+        "gas_liquid_test_medium_difference",
+        "gas liquid test medium difference",
+        "gas liquid test medium",
+        "liquid test medium difference",
+        "gas liquid test medium difference control valve"
+      ],
+      "core_terms": [
+        "gas_liquid_test_medium_difference",
+        "gas liquid test medium difference",
+        "gas liquid test medium",
+        "liquid test medium difference",
+        "gas liquid test medium difference control valve"
+      ],
+      "accepted_explanations": [
+        "Gas와 liquid test medium은 compressibility, density, viscosity, surface tension과 detection method가 달라 같은 숫자의 leakage rate를 직접 비교할 수 없다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Gas와 liquid test medium은 compressibility, density, viscosity, surface tension과 detection method가 달라 같은 숫자의 leakage rate를 직접 비교할 수 없다.",
+      "description": "gas_liquid_test_medium_difference 계약을 평가한다."
+    },
+    {
+      "id": "test_pressure_temperature_duration_stabilization",
+      "anchor_id": "test_pressure_temperature_duration_stabilization",
+      "statement": "Leakage 시험은 test pressure, differential pressure, temperature, hold duration와 thermal·pressure stabilization 조건을 기록한다.",
+      "importance": "core",
+      "keywords": [
+        "test_pressure_temperature_duration_stabilization",
+        "test pressure temperature duration stabilization",
+        "test pressure temperature duration",
+        "pressure temperature duration stabilization",
+        "test pressure temperature duration stabilization control valve"
+      ],
+      "core_terms": [
+        "test_pressure_temperature_duration_stabilization",
+        "test pressure temperature duration stabilization",
+        "test pressure temperature duration",
+        "pressure temperature duration stabilization",
+        "test pressure temperature duration stabilization control valve"
+      ],
+      "accepted_explanations": [
+        "Leakage 시험은 test pressure, differential pressure, temperature, hold duration와 thermal·pressure stabilization 조건을 기록한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Leakage 시험은 test pressure, differential pressure, temperature, hold duration와 thermal·pressure stabilization 조건을 기록한다.",
+      "description": "test_pressure_temperature_duration_stabilization 계약을 평가한다."
+    },
+    {
+      "id": "volumetric_mass_bubble_basis",
+      "anchor_id": "volumetric_mass_bubble_basis",
+      "statement": "Leakage rate는 volumetric flow, mass flow 또는 bubble count basis로 표현할 수 있으며 unit와 reference condition을 명시한다.",
+      "importance": "core",
+      "keywords": [
+        "volumetric_mass_bubble_basis",
+        "volumetric mass bubble basis",
+        "volumetric mass bubble basis control valve",
+        "volumetric mass bubble basis control valve",
+        "volumetric mass bubble basis control valve"
+      ],
+      "core_terms": [
+        "volumetric_mass_bubble_basis",
+        "volumetric mass bubble basis",
+        "volumetric mass bubble basis control valve",
+        "volumetric mass bubble basis control valve",
+        "volumetric mass bubble basis control valve"
+      ],
+      "accepted_explanations": [
+        "Leakage rate는 volumetric flow, mass flow 또는 bubble count basis로 표현할 수 있으며 unit와 reference condition을 명시한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Leakage rate는 volumetric flow, mass flow 또는 bubble count basis로 표현할 수 있으며 unit와 reference condition을 명시한다.",
+      "description": "volumetric_mass_bubble_basis 계약을 평가한다."
+    },
+    {
+      "id": "size_normalization_basis",
+      "anchor_id": "size_normalization_basis",
+      "statement": "Allowable leakage가 nominal size, port diameter, seat diameter 또는 rated capacity에 정규화될 수 있으므로 governing basis를 명시한다.",
+      "importance": "core",
+      "keywords": [
+        "size_normalization_basis",
+        "size normalization basis",
+        "size normalization basis control valve",
+        "size normalization basis control valve",
+        "size normalization basis control valve"
+      ],
+      "core_terms": [
+        "size_normalization_basis",
+        "size normalization basis",
+        "size normalization basis control valve",
+        "size normalization basis control valve",
+        "size normalization basis control valve"
+      ],
+      "accepted_explanations": [
+        "Allowable leakage가 nominal size, port diameter, seat diameter 또는 rated capacity에 정규화될 수 있으므로 governing basis를 명시한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Allowable leakage가 nominal size, port diameter, seat diameter 또는 rated capacity에 정규화될 수 있으므로 governing basis를 명시한다.",
+      "description": "size_normalization_basis 계약을 평가한다."
+    },
+    {
+      "id": "ideal_gas_reference_conversion",
+      "anchor_id": "ideal_gas_reference_conversion",
+      "statement": "Gas volumetric leakage를 reference condition으로 환산할 때 absolute pressure와 absolute temperature를 사용하고 gas behavior 가정을 밝힌다.",
+      "importance": "core",
+      "keywords": [
+        "gas leakage reference conversion",
+        "absolute pressure absolute temperature",
+        "Qref Qtest Ptest Pref Tref Ttest",
+        "기준 상태 누설 환산",
+        "gas volume normalization",
+        "ideal_gas_reference_conversion",
+        "ideal gas reference conversion"
+      ],
+      "core_terms": [
+        "gas leakage reference conversion",
+        "absolute pressure absolute temperature",
+        "Qref Qtest Ptest Pref Tref Ttest",
+        "기준 상태 누설 환산",
+        "gas volume normalization",
+        "ideal_gas_reference_conversion",
+        "ideal gas reference conversion"
+      ],
+      "accepted_explanations": [
+        "Gas volumetric leakage를 reference condition으로 환산할 때 absolute pressure와 absolute temperature를 사용하고 gas behavior 가정을 밝힌다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Gas volumetric leakage를 reference condition으로 환산할 때 absolute pressure와 absolute temperature를 사용하고 gas behavior 가정을 밝힌다.",
+      "description": "ideal_gas_reference_conversion 계약을 평가한다."
+    },
+    {
+      "id": "bubble_count_conversion",
+      "anchor_id": "bubble_count_conversion",
+      "statement": "Bubble count를 volumetric leakage로 환산하려면 representative bubble volume, counting duration, test gas와 pressure·temperature condition을 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "bubble count leakage conversion",
+        "bubble volume counting duration",
+        "gas leakage bubble test",
+        "기포 수 누설 환산",
+        "Nb Vb delta t",
+        "bubble_count_conversion",
+        "bubble count conversion"
+      ],
+      "core_terms": [
+        "bubble count leakage conversion",
+        "bubble volume counting duration",
+        "gas leakage bubble test",
+        "기포 수 누설 환산",
+        "Nb Vb delta t",
+        "bubble_count_conversion",
+        "bubble count conversion"
+      ],
+      "accepted_explanations": [
+        "Bubble count를 volumetric leakage로 환산하려면 representative bubble volume, counting duration, test gas와 pressure·temperature condition을 확인한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Bubble count를 volumetric leakage로 환산하려면 representative bubble volume, counting duration, test gas와 pressure·temperature condition을 확인한다.",
+      "description": "bubble_count_conversion 계약을 평가한다."
+    },
+    {
+      "id": "seat_damage_erosion_wire_drawing",
+      "anchor_id": "seat_damage_erosion_wire_drawing",
+      "statement": "Seat damage, erosion, wire drawing, scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "seat_damage_erosion_wire_drawing",
+        "seat damage erosion wire drawing",
+        "seat damage erosion wire",
+        "damage erosion wire drawing",
+        "Seat damage erosion wire drawing scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다"
+      ],
+      "core_terms": [
+        "seat_damage_erosion_wire_drawing",
+        "seat damage erosion wire drawing",
+        "seat damage erosion wire",
+        "damage erosion wire drawing",
+        "Seat damage erosion wire drawing scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다"
+      ],
+      "accepted_explanations": [
+        "Seat damage, erosion, wire drawing, scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Seat damage, erosion, wire drawing, scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다.",
+      "description": "seat_damage_erosion_wire_drawing 계약을 평가한다."
+    },
+    {
+      "id": "cavitation_flashing_damage_handoff",
+      "anchor_id": "cavitation_flashing_damage_handoff",
+      "statement": "Cavitation과 flashing이 seat·trim damage를 유발할 수 있으나 유동 regime와 방지 설계의 물리 원인은 Topic 8이 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "cavitation_flashing_damage_handoff",
+        "cavitation flashing damage handoff",
+        "Cavitation과 flashing이 seat trim damage를 유발할 수 있으나 유동 regime와 방지 설계의 물리 원인은 Topic 8이 소유",
+        "cavitation flashing damage handoff control valve",
+        "cavitation flashing damage handoff control valve"
+      ],
+      "core_terms": [
+        "cavitation_flashing_damage_handoff",
+        "cavitation flashing damage handoff",
+        "Cavitation과 flashing이 seat trim damage를 유발할 수 있으나 유동 regime와 방지 설계의 물리 원인은 Topic 8이 소유",
+        "cavitation flashing damage handoff control valve",
+        "cavitation flashing damage handoff control valve"
+      ],
+      "accepted_explanations": [
+        "Cavitation과 flashing이 seat·trim damage를 유발할 수 있으나 유동 regime와 방지 설계의 물리 원인은 Topic 8이 소유한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Cavitation과 flashing이 seat·trim damage를 유발할 수 있으나 유동 regime와 방지 설계의 물리 원인은 Topic 8이 소유한다.",
+      "description": "cavitation_flashing_damage_handoff 계약을 평가한다."
+    },
+    {
+      "id": "foreign_material_contamination",
+      "anchor_id": "foreign_material_contamination",
+      "statement": "Foreign material, scale, polymerization product와 solid particle이 seat 사이에 끼면 일시적 또는 반복적인 shutoff leakage가 발생할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "foreign_material_contamination",
+        "foreign material contamination",
+        "foreign material contamination control valve",
+        "foreign material contamination control valve",
+        "foreign material contamination control valve"
+      ],
+      "core_terms": [
+        "foreign_material_contamination",
+        "foreign material contamination",
+        "foreign material contamination control valve",
+        "foreign material contamination control valve",
+        "foreign material contamination control valve"
+      ],
+      "accepted_explanations": [
+        "Foreign material, scale, polymerization product와 solid particle이 seat 사이에 끼면 일시적 또는 반복적인 shutoff leakage가 발생할 수 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Foreign material, scale, polymerization product와 solid particle이 seat 사이에 끼면 일시적 또는 반복적인 shutoff leakage가 발생할 수 있다.",
+      "description": "foreign_material_contamination 계약을 평가한다."
+    },
+    {
+      "id": "thermal_distortion_hot_leakage",
+      "anchor_id": "thermal_distortion_hot_leakage",
+      "statement": "Thermal distortion과 differential expansion은 cold shop test에서 양호한 valve도 hot operating condition에서 seat alignment와 contact stress를 변화시킬 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "thermal_distortion_hot_leakage",
+        "thermal distortion hot leakage",
+        "thermal distortion hot leakage control valve",
+        "thermal distortion hot leakage control valve",
+        "thermal distortion hot leakage control valve"
+      ],
+      "core_terms": [
+        "thermal_distortion_hot_leakage",
+        "thermal distortion hot leakage",
+        "thermal distortion hot leakage control valve",
+        "thermal distortion hot leakage control valve",
+        "thermal distortion hot leakage control valve"
+      ],
+      "accepted_explanations": [
+        "Thermal distortion과 differential expansion은 cold shop test에서 양호한 valve도 hot operating condition에서 seat alignment와 contact stress를 변화시킬 수 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Thermal distortion과 differential expansion은 cold shop test에서 양호한 valve도 hot operating condition에서 seat alignment와 contact stress를 변화시킬 수 있다.",
+      "description": "thermal_distortion_hot_leakage 계약을 평가한다."
+    },
+    {
+      "id": "misalignment_stem_guide_wear",
+      "anchor_id": "misalignment_stem_guide_wear",
+      "statement": "Stem bending, shaft deflection, guide·bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다.",
+      "importance": "core",
+      "keywords": [
+        "misalignment_stem_guide_wear",
+        "misalignment stem guide wear",
+        "Stem bending shaft deflection guide bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다",
+        "misalignment stem guide wear control valve",
+        "misalignment stem guide wear control valve"
+      ],
+      "core_terms": [
+        "misalignment_stem_guide_wear",
+        "misalignment stem guide wear",
+        "Stem bending shaft deflection guide bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다",
+        "misalignment stem guide wear control valve",
+        "misalignment stem guide wear control valve"
+      ],
+      "accepted_explanations": [
+        "Stem bending, shaft deflection, guide·bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Stem bending, shaft deflection, guide·bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다.",
+      "description": "misalignment_stem_guide_wear 계약을 평가한다."
+    },
+    {
+      "id": "surface_finish_lapping_hardness_coating",
+      "anchor_id": "surface_finish_lapping_hardness_coating",
+      "statement": "Surface finish, lapping quality, hardness pairing, coating와 corrosion 상태는 seat sealing과 wear mechanism에 영향을 준다.",
+      "importance": "core",
+      "keywords": [
+        "surface_finish_lapping_hardness_coating",
+        "surface finish lapping hardness coating",
+        "surface finish lapping hardness",
+        "finish lapping hardness coating",
+        "surface finish lapping hardness coating control valve"
+      ],
+      "core_terms": [
+        "surface_finish_lapping_hardness_coating",
+        "surface finish lapping hardness coating",
+        "surface finish lapping hardness",
+        "finish lapping hardness coating",
+        "surface finish lapping hardness coating control valve"
+      ],
+      "accepted_explanations": [
+        "Surface finish, lapping quality, hardness pairing, coating와 corrosion 상태는 seat sealing과 wear mechanism에 영향을 준다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Surface finish, lapping quality, hardness pairing, coating와 corrosion 상태는 seat sealing과 wear mechanism에 영향을 준다.",
+      "description": "surface_finish_lapping_hardness_coating 계약을 평가한다."
+    },
+    {
+      "id": "special_service_sealing_boundary",
+      "anchor_id": "special_service_sealing_boundary",
+      "statement": "Fire-safe, high-temperature와 cryogenic sealing은 material, thermal contraction와 qualification 조건이 중요하며 package 설계의 상세는 Topic 14 경계를 따른다.",
+      "importance": "core",
+      "keywords": [
+        "special_service_sealing_boundary",
+        "special service sealing boundary",
+        "Fire-safe high-temperature와 cryogenic sealing은 material thermal contraction와 qualification 조건이 중요",
+        "package 설계의 상세는 Topic 14 경계를 따른다",
+        "special service sealing boundary control valve"
+      ],
+      "core_terms": [
+        "special_service_sealing_boundary",
+        "special service sealing boundary",
+        "Fire-safe high-temperature와 cryogenic sealing은 material thermal contraction와 qualification 조건이 중요",
+        "package 설계의 상세는 Topic 14 경계를 따른다",
+        "special service sealing boundary control valve"
+      ],
+      "accepted_explanations": [
+        "Fire-safe, high-temperature와 cryogenic sealing은 material, thermal contraction와 qualification 조건이 중요하며 package 설계의 상세는 Topic 14 경계를 따른다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Fire-safe, high-temperature와 cryogenic sealing은 material, thermal contraction와 qualification 조건이 중요하며 package 설계의 상세는 Topic 14 경계를 따른다.",
+      "description": "special_service_sealing_boundary 계약을 평가한다."
+    },
+    {
+      "id": "stem_shaft_packing_leakage_paths",
+      "anchor_id": "stem_shaft_packing_leakage_paths",
+      "statement": "Sliding-stem packing과 rotary-shaft packing은 reciprocating·rotary motion, surface speed와 geometry가 달라 external leakage path와 wear mode를 구분한다.",
+      "importance": "core",
+      "keywords": [
+        "stem_shaft_packing_leakage_paths",
+        "stem shaft packing leakage paths",
+        "stem shaft packing leakage",
+        "shaft packing leakage paths",
+        "stem shaft packing leakage paths control valve"
+      ],
+      "core_terms": [
+        "stem_shaft_packing_leakage_paths",
+        "stem shaft packing leakage paths",
+        "stem shaft packing leakage",
+        "shaft packing leakage paths",
+        "stem shaft packing leakage paths control valve"
+      ],
+      "accepted_explanations": [
+        "Sliding-stem packing과 rotary-shaft packing은 reciprocating·rotary motion, surface speed와 geometry가 달라 external leakage path와 wear mode를 구분한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Sliding-stem packing과 rotary-shaft packing은 reciprocating·rotary motion, surface speed와 geometry가 달라 external leakage path와 wear mode를 구분한다.",
+      "description": "stem_shaft_packing_leakage_paths 계약을 평가한다."
+    },
+    {
+      "id": "packing_material_ring_arrangement",
+      "anchor_id": "packing_material_ring_arrangement",
+      "statement": "Packing material, ring arrangement, spacer, lantern ring와 anti-extrusion component는 pressure, temperature, chemical compatibility와 motion에 맞게 선정한다.",
+      "importance": "core",
+      "keywords": [
+        "packing_material_ring_arrangement",
+        "packing material ring arrangement",
+        "packing material ring arrangement control valve",
+        "packing material ring arrangement control valve",
+        "packing material ring arrangement control valve"
+      ],
+      "core_terms": [
+        "packing_material_ring_arrangement",
+        "packing material ring arrangement",
+        "packing material ring arrangement control valve",
+        "packing material ring arrangement control valve",
+        "packing material ring arrangement control valve"
+      ],
+      "accepted_explanations": [
+        "Packing material, ring arrangement, spacer, lantern ring와 anti-extrusion component는 pressure, temperature, chemical compatibility와 motion에 맞게 선정한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Packing material, ring arrangement, spacer, lantern ring와 anti-extrusion component는 pressure, temperature, chemical compatibility와 motion에 맞게 선정한다.",
+      "description": "packing_material_ring_arrangement 계약을 평가한다."
+    },
+    {
+      "id": "gland_geometry_compression",
+      "anchor_id": "gland_geometry_compression",
+      "statement": "Gland follower, stud load, packing-box dimensions와 installed compression은 sealing contact와 friction을 결정하므로 assembly procedure와 함께 관리한다.",
+      "importance": "core",
+      "keywords": [
+        "gland_geometry_compression",
+        "gland geometry compression",
+        "gland geometry compression control valve",
+        "gland geometry compression control valve",
+        "gland geometry compression control valve"
+      ],
+      "core_terms": [
+        "gland_geometry_compression",
+        "gland geometry compression",
+        "gland geometry compression control valve",
+        "gland geometry compression control valve",
+        "gland geometry compression control valve"
+      ],
+      "accepted_explanations": [
+        "Gland follower, stud load, packing-box dimensions와 installed compression은 sealing contact와 friction을 결정하므로 assembly procedure와 함께 관리한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Gland follower, stud load, packing-box dimensions와 installed compression은 sealing contact와 friction을 결정하므로 assembly procedure와 함께 관리한다.",
+      "description": "gland_geometry_compression 계약을 평가한다."
+    },
+    {
+      "id": "packing_leakage_friction_tradeoff",
+      "anchor_id": "packing_leakage_friction_tradeoff",
+      "statement": "Packing compression을 높이면 leakage가 감소할 수 있지만 stem·shaft friction, deadband, actuator demand와 wear가 증가할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "packing leakage friction trade-off",
+        "gland compression actuator demand",
+        "packing deadband stiction boundary",
+        "패킹 누설 마찰 상충",
+        "packing tightening limit",
+        "packing_leakage_friction_tradeoff",
+        "packing leakage friction tradeoff"
+      ],
+      "core_terms": [
+        "packing leakage friction trade-off",
+        "gland compression actuator demand",
+        "packing deadband stiction boundary",
+        "패킹 누설 마찰 상충",
+        "packing tightening limit",
+        "packing_leakage_friction_tradeoff",
+        "packing leakage friction tradeoff"
+      ],
+      "accepted_explanations": [
+        "Packing compression을 높이면 leakage가 감소할 수 있지만 stem·shaft friction, deadband, actuator demand와 wear가 증가할 수 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Packing compression을 높이면 leakage가 감소할 수 있지만 stem·shaft friction, deadband, actuator demand와 wear가 증가할 수 있다.",
+      "description": "packing_leakage_friction_tradeoff 계약을 평가한다."
+    },
+    {
+      "id": "packing_consolidation_relaxation",
+      "anchor_id": "packing_consolidation_relaxation",
+      "statement": "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "packing_consolidation_relaxation",
+        "packing consolidation relaxation",
+        "packing consolidation relaxation control valve",
+        "packing consolidation relaxation control valve",
+        "packing consolidation relaxation control valve"
+      ],
+      "core_terms": [
+        "packing_consolidation_relaxation",
+        "packing consolidation relaxation",
+        "packing consolidation relaxation control valve",
+        "packing consolidation relaxation control valve",
+        "packing consolidation relaxation control valve"
+      ],
+      "accepted_explanations": [
+        "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
+      "description": "packing_consolidation_relaxation 계약을 평가한다."
+    },
+    {
+      "id": "live_loaded_packing_function",
+      "anchor_id": "live_loaded_packing_function",
+      "statement": "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "live-loaded packing spring load",
+        "packing consolidation relaxation",
+        "installed compression spring range",
+        "라이브 로드 패킹",
+        "low emission packing maintenance",
+        "live_loaded_packing_function",
+        "live loaded packing function"
+      ],
+      "core_terms": [
+        "live-loaded packing spring load",
+        "packing consolidation relaxation",
+        "installed compression spring range",
+        "라이브 로드 패킹",
+        "low emission packing maintenance",
+        "live_loaded_packing_function",
+        "live loaded packing function"
+      ],
+      "accepted_explanations": [
+        "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
+      "description": "live_loaded_packing_function 계약을 평가한다."
+    },
+    {
+      "id": "bellows_backup_packing_boundary",
+      "anchor_id": "bellows_backup_packing_boundary",
+      "statement": "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
+      "importance": "core",
+      "keywords": [
+        "bellows_backup_packing_boundary",
+        "bellows backup packing boundary",
+        "bellows backup packing boundary control valve",
+        "bellows backup packing boundary control valve",
+        "bellows backup packing boundary control valve"
+      ],
+      "core_terms": [
+        "bellows_backup_packing_boundary",
+        "bellows backup packing boundary",
+        "bellows backup packing boundary control valve",
+        "bellows backup packing boundary control valve",
+        "bellows backup packing boundary control valve"
+      ],
+      "accepted_explanations": [
+        "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
+      "description": "bellows_backup_packing_boundary 계약을 평가한다."
+    },
+    {
+      "id": "low_emission_qualification_field_boundary",
+      "anchor_id": "low_emission_qualification_field_boundary",
+      "statement": "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "low_emission_qualification_field_boundary",
+        "low emission qualification field boundary",
+        "low emission qualification field",
+        "emission qualification field boundary",
+        "Low-emission packing qualification은 지정된 cycle temperature pressure 시험의 성능",
+        "field installation stem condition와 maintenance 성능을 자동 보증하지 않는다"
+      ],
+      "core_terms": [
+        "low_emission_qualification_field_boundary",
+        "low emission qualification field boundary",
+        "low emission qualification field",
+        "emission qualification field boundary",
+        "Low-emission packing qualification은 지정된 cycle temperature pressure 시험의 성능",
+        "field installation stem condition와 maintenance 성능을 자동 보증하지 않는다"
+      ],
+      "accepted_explanations": [
+        "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+      "description": "low_emission_qualification_field_boundary 계약을 평가한다."
+    },
+    {
+      "id": "fugitive_emission_source_monitoring",
+      "anchor_id": "fugitive_emission_source_monitoring",
+      "statement": "Fugitive emission 평가는 packing, bonnet·body joint와 accessory connection의 source, monitoring point, background와 measurement condition을 구분한다.",
+      "importance": "core",
+      "keywords": [
+        "control valve fugitive emissions",
+        "packing emission monitoring point",
+        "background screening measurement",
+        "비산배출 측정",
+        "stem shaft packing emissions",
+        "fugitive_emission_source_monitoring",
+        "fugitive emission source monitoring"
+      ],
+      "core_terms": [
+        "control valve fugitive emissions",
+        "packing emission monitoring point",
+        "background screening measurement",
+        "비산배출 측정",
+        "stem shaft packing emissions",
+        "fugitive_emission_source_monitoring",
+        "fugitive emission source monitoring"
+      ],
+      "accepted_explanations": [
+        "Fugitive emission 평가는 packing, bonnet·body joint와 accessory connection의 source, monitoring point, background와 measurement condition을 구분한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Fugitive emission 평가는 packing, bonnet·body joint와 accessory connection의 source, monitoring point, background와 measurement condition을 구분한다.",
+      "description": "fugitive_emission_source_monitoring 계약을 평가한다."
+    },
+    {
+      "id": "concentration_mass_emission_boundary",
+      "anchor_id": "concentration_mass_emission_boundary",
+      "statement": "Local concentration reading은 측정지점의 농도이고 mass-emission rate는 flow와 species mass를 포함하므로 동일한 물리량이 아니다.",
+      "importance": "core",
+      "keywords": [
+        "concentration versus mass emission rate",
+        "screening concentration quantification",
+        "species fraction enclosure flow",
+        "농도 질량 배출률 구분",
+        "emission quantity boundary",
+        "concentration_mass_emission_boundary",
+        "concentration mass emission boundary",
+        "Local concentration reading은 측정지점의 농도"
+      ],
+      "core_terms": [
+        "concentration versus mass emission rate",
+        "screening concentration quantification",
+        "species fraction enclosure flow",
+        "농도 질량 배출률 구분",
+        "emission quantity boundary",
+        "concentration_mass_emission_boundary",
+        "concentration mass emission boundary",
+        "Local concentration reading은 측정지점의 농도"
+      ],
+      "accepted_explanations": [
+        "Local concentration reading은 측정지점의 농도이고 mass-emission rate는 flow와 species mass를 포함하므로 동일한 물리량이 아니다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Local concentration reading은 측정지점의 농도이고 mass-emission rate는 flow와 species mass를 포함하므로 동일한 물리량이 아니다.",
+      "description": "concentration_mass_emission_boundary 계약을 평가한다."
+    },
+    {
+      "id": "screening_bagging_quantification_methods",
+      "anchor_id": "screening_bagging_quantification_methods",
+      "statement": "Sniffing·screening은 누설 source 탐지와 상대 비교에 사용하고 bagging·enclosure·flow measurement는 정량화를 위해 별도 조건과 장비가 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "screening_bagging_quantification_methods",
+        "screening bagging quantification methods",
+        "screening bagging quantification methods control valve",
+        "screening bagging quantification methods control valve",
+        "screening bagging quantification methods control valve"
+      ],
+      "core_terms": [
+        "screening_bagging_quantification_methods",
+        "screening bagging quantification methods",
+        "screening bagging quantification methods control valve",
+        "screening bagging quantification methods control valve",
+        "screening bagging quantification methods control valve"
+      ],
+      "accepted_explanations": [
+        "Sniffing·screening은 누설 source 탐지와 상대 비교에 사용하고 bagging·enclosure·flow measurement는 정량화를 위해 별도 조건과 장비가 필요하다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Sniffing·screening은 누설 source 탐지와 상대 비교에 사용하고 bagging·enclosure·flow measurement는 정량화를 위해 별도 조건과 장비가 필요하다.",
+      "description": "screening_bagging_quantification_methods 계약을 평가한다."
+    },
+    {
+      "id": "packing_adjustment_replacement_inspection",
+      "anchor_id": "packing_adjustment_replacement_inspection",
+      "statement": "Packing leakage 조치는 controlled gland adjustment, packing replacement, stem·shaft surface와 packing-box inspection을 포함하며 과도한 조임을 피한다.",
+      "importance": "core",
+      "keywords": [
+        "packing_adjustment_replacement_inspection",
+        "packing adjustment replacement inspection",
+        "과도한 조임을 피",
+        "packing adjustment replacement inspection control valve",
+        "packing adjustment replacement inspection control valve"
+      ],
+      "core_terms": [
+        "packing_adjustment_replacement_inspection",
+        "packing adjustment replacement inspection",
+        "과도한 조임을 피",
+        "packing adjustment replacement inspection control valve",
+        "packing adjustment replacement inspection control valve"
+      ],
+      "accepted_explanations": [
+        "Packing leakage 조치는 controlled gland adjustment, packing replacement, stem·shaft surface와 packing-box inspection을 포함하며 과도한 조임을 피한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Packing leakage 조치는 controlled gland adjustment, packing replacement, stem·shaft surface와 packing-box inspection을 포함하며 과도한 조임을 피한다.",
+      "description": "packing_adjustment_replacement_inspection 계약을 평가한다."
+    },
+    {
+      "id": "as_found_as_left_leakage",
+      "anchor_id": "as_found_as_left_leakage",
+      "statement": "Repair 전 as-found leakage와 repair 후 as-left leakage를 같은 medium, pressure, temperature, method와 stabilization condition에서 기록한다.",
+      "importance": "core",
+      "keywords": [
+        "as-found as-left leakage",
+        "repair before after leakage test",
+        "same test condition comparison",
+        "정비 전 정비 후 누설",
+        "work order leakage verification",
+        "as_found_as_left_leakage",
+        "as found as left leakage",
+        "as found as left"
+      ],
+      "core_terms": [
+        "as-found as-left leakage",
+        "repair before after leakage test",
+        "same test condition comparison",
+        "정비 전 정비 후 누설",
+        "work order leakage verification",
+        "as_found_as_left_leakage",
+        "as found as left leakage",
+        "as found as left"
+      ],
+      "accepted_explanations": [
+        "Repair 전 as-found leakage와 repair 후 as-left leakage를 같은 medium, pressure, temperature, method와 stabilization condition에서 기록한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Repair 전 as-found leakage와 repair 후 as-left leakage를 같은 medium, pressure, temperature, method와 stabilization condition에서 기록한다.",
+      "description": "as_found_as_left_leakage 계약을 평가한다."
+    },
+    {
+      "id": "seat_packing_acceptance_separation",
+      "anchor_id": "seat_packing_acceptance_separation",
+      "statement": "Seat leakage acceptance와 packing fugitive-emission acceptance는 leakage path, method, unit와 governing requirement가 다르므로 별도 판정한다.",
+      "importance": "core",
+      "keywords": [
+        "seat_packing_acceptance_separation",
+        "seat packing acceptance separation",
+        "seat packing acceptance separation control valve",
+        "seat packing acceptance separation control valve",
+        "seat packing acceptance separation control valve"
+      ],
+      "core_terms": [
+        "seat_packing_acceptance_separation",
+        "seat packing acceptance separation",
+        "seat packing acceptance separation control valve",
+        "seat packing acceptance separation control valve",
+        "seat packing acceptance separation control valve"
+      ],
+      "accepted_explanations": [
+        "Seat leakage acceptance와 packing fugitive-emission acceptance는 leakage path, method, unit와 governing requirement가 다르므로 별도 판정한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Seat leakage acceptance와 packing fugitive-emission acceptance는 leakage path, method, unit와 governing requirement가 다르므로 별도 판정한다.",
+      "description": "seat_packing_acceptance_separation 계약을 평가한다."
+    },
+    {
+      "id": "orientation_thermal_cycle_history",
+      "anchor_id": "orientation_thermal_cycle_history",
+      "statement": "Valve orientation, thermal state, pressure cycle, stroke cycle와 long-term service history는 seat·packing leakage의 field context이다.",
+      "importance": "core",
+      "keywords": [
+        "orientation_thermal_cycle_history",
+        "orientation thermal cycle history",
+        "orientation thermal cycle history control valve",
+        "orientation thermal cycle history control valve",
+        "orientation thermal cycle history control valve"
+      ],
+      "core_terms": [
+        "orientation_thermal_cycle_history",
+        "orientation thermal cycle history",
+        "orientation thermal cycle history control valve",
+        "orientation thermal cycle history control valve",
+        "orientation thermal cycle history control valve"
+      ],
+      "accepted_explanations": [
+        "Valve orientation, thermal state, pressure cycle, stroke cycle와 long-term service history는 seat·packing leakage의 field context이다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Valve orientation, thermal state, pressure cycle, stroke cycle와 long-term service history는 seat·packing leakage의 field context이다.",
+      "description": "orientation_thermal_cycle_history 계약을 평가한다."
+    },
+    {
+      "id": "specification_test_lifecycle_workflow",
+      "anchor_id": "specification_test_lifecycle_workflow",
+      "statement": "Leakage 관리 workflow는 specification→selection→shop test→installation→commissioning→monitoring→maintenance→as-left verification 순서로 구성한다.",
+      "importance": "core",
+      "keywords": [
+        "specification_test_lifecycle_workflow",
+        "specification test lifecycle workflow",
+        "specification test lifecycle workflow control valve",
+        "specification test lifecycle workflow control valve",
+        "specification test lifecycle workflow control valve"
+      ],
+      "core_terms": [
+        "specification_test_lifecycle_workflow",
+        "specification test lifecycle workflow",
+        "specification test lifecycle workflow control valve",
+        "specification test lifecycle workflow control valve",
+        "specification test lifecycle workflow control valve"
+      ],
+      "accepted_explanations": [
+        "Leakage 관리 workflow는 specification→selection→shop test→installation→commissioning→monitoring→maintenance→as-left verification 순서로 구성한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Leakage 관리 workflow는 specification→selection→shop test→installation→commissioning→monitoring→maintenance→as-left verification 순서로 구성한다.",
+      "description": "specification_test_lifecycle_workflow 계약을 평가한다."
+    },
+    {
+      "id": "measurement_calibration_detection_uncertainty",
+      "anchor_id": "measurement_calibration_detection_uncertainty",
+      "statement": "Leakage 측정은 instrument calibration, range, resolution, detection limit, repeatability와 measurement uncertainty를 함께 보고한다.",
+      "importance": "core",
+      "keywords": [
+        "leakage measurement uncertainty",
+        "instrument calibration detection limit",
+        "repeatability resolution range",
+        "누설 측정 불확도",
+        "uncertainty-aware acceptance",
+        "measurement_calibration_detection_uncertainty",
+        "measurement calibration detection uncertainty"
+      ],
+      "core_terms": [
+        "leakage measurement uncertainty",
+        "instrument calibration detection limit",
+        "repeatability resolution range",
+        "누설 측정 불확도",
+        "uncertainty-aware acceptance",
+        "measurement_calibration_detection_uncertainty",
+        "measurement calibration detection uncertainty"
+      ],
+      "accepted_explanations": [
+        "Leakage 측정은 instrument calibration, range, resolution, detection limit, repeatability와 measurement uncertainty를 함께 보고한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Leakage 측정은 instrument calibration, range, resolution, detection limit, repeatability와 measurement uncertainty를 함께 보고한다.",
+      "description": "measurement_calibration_detection_uncertainty 계약을 평가한다."
+    },
+    {
+      "id": "false_pass_false_fail_background",
+      "anchor_id": "false_pass_false_fail_background",
+      "statement": "Background contamination, temperature drift, insufficient stabilization와 detection limit는 false pass 또는 false fail을 만들 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "false_pass_false_fail_background",
+        "false pass false fail background",
+        "false pass false fail",
+        "pass false fail background",
+        "false pass false fail background control valve"
+      ],
+      "core_terms": [
+        "false_pass_false_fail_background",
+        "false pass false fail background",
+        "false pass false fail",
+        "pass false fail background",
+        "false pass false fail background control valve"
+      ],
+      "accepted_explanations": [
+        "Background contamination, temperature drift, insufficient stabilization와 detection limit는 false pass 또는 false fail을 만들 수 있다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Background contamination, temperature drift, insufficient stabilization와 detection limit는 false pass 또는 false fail을 만들 수 있다.",
+      "description": "false_pass_false_fail_background 계약을 평가한다."
+    },
+    {
+      "id": "standard_edition_exact_citation",
+      "anchor_id": "standard_edition_exact_citation",
+      "statement": "Leakage class, test procedure와 emission qualification은 적용 standard, edition, amendment와 purchaser requirement를 exact citation으로 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "standard_edition_exact_citation",
+        "standard edition exact citation",
+        "standard edition exact citation control valve",
+        "standard edition exact citation control valve",
+        "standard edition exact citation control valve"
+      ],
+      "core_terms": [
+        "standard_edition_exact_citation",
+        "standard edition exact citation",
+        "standard edition exact citation control valve",
+        "standard edition exact citation control valve",
+        "standard edition exact citation control valve"
+      ],
+      "accepted_explanations": [
+        "Leakage class, test procedure와 emission qualification은 적용 standard, edition, amendment와 purchaser requirement를 exact citation으로 확인한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Leakage class, test procedure와 emission qualification은 적용 standard, edition, amendment와 purchaser requirement를 exact citation으로 확인한다.",
+      "description": "standard_edition_exact_citation 계약을 평가한다."
+    },
+    {
+      "id": "vendor_purchase_spec_alignment",
+      "anchor_id": "vendor_purchase_spec_alignment",
+      "statement": "Vendor datasheet, quotation guarantee, purchase specification와 acceptance test procedure의 class, medium, pressure, unit와 direction을 일치시킨다.",
+      "importance": "core",
+      "keywords": [
+        "vendor_purchase_spec_alignment",
+        "vendor purchase spec alignment",
+        "vendor purchase spec alignment control valve",
+        "vendor purchase spec alignment control valve",
+        "vendor purchase spec alignment control valve"
+      ],
+      "core_terms": [
+        "vendor_purchase_spec_alignment",
+        "vendor purchase spec alignment",
+        "vendor purchase spec alignment control valve",
+        "vendor purchase spec alignment control valve",
+        "vendor purchase spec alignment control valve"
+      ],
+      "accepted_explanations": [
+        "Vendor datasheet, quotation guarantee, purchase specification와 acceptance test procedure의 class, medium, pressure, unit와 direction을 일치시킨다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Vendor datasheet, quotation guarantee, purchase specification와 acceptance test procedure의 class, medium, pressure, unit와 direction을 일치시킨다.",
+      "description": "vendor_purchase_spec_alignment 계약을 평가한다."
+    },
+    {
+      "id": "topic1_topic3_topic10_boundary",
+      "anchor_id": "topic1_topic3_topic10_boundary",
+      "statement": "Actuator thrust와 fail-safe spring sizing은 Topic 1, packing friction·stiction·dynamic response는 Topic 3, balanced·unbalanced trim과 balance-seal mechanics는 Topic 10이 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "topic1_topic3_topic10_boundary",
+        "topic1 topic3 topic10 boundary",
+        "topic1 topic3 topic10 boundary control valve",
+        "topic1 topic3 topic10 boundary control valve",
+        "topic1 topic3 topic10 boundary control valve"
+      ],
+      "core_terms": [
+        "topic1_topic3_topic10_boundary",
+        "topic1 topic3 topic10 boundary",
+        "topic1 topic3 topic10 boundary control valve",
+        "topic1 topic3 topic10 boundary control valve",
+        "topic1 topic3 topic10 boundary control valve"
+      ],
+      "accepted_explanations": [
+        "Actuator thrust와 fail-safe spring sizing은 Topic 1, packing friction·stiction·dynamic response는 Topic 3, balanced·unbalanced trim과 balance-seal mechanics는 Topic 10이 소유한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Actuator thrust와 fail-safe spring sizing은 Topic 1, packing friction·stiction·dynamic response는 Topic 3, balanced·unbalanced trim과 balance-seal mechanics는 Topic 10이 소유한다.",
+      "description": "topic1_topic3_topic10_boundary 계약을 평가한다."
+    },
+    {
+      "id": "topic11_topic12_topic14_boundary",
+      "anchor_id": "topic11_topic12_topic14_boundary",
+      "statement": "Positioner·I/P calibration은 Topic 11, valve signature와 predictive diagnostics는 Topic 12, severe-service material·cryogenic·high-temperature package design은 Topic 14가 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "topic11_topic12_topic14_boundary",
+        "topic11 topic12 topic14 boundary",
+        "topic11 topic12 topic14 boundary control valve",
+        "topic11 topic12 topic14 boundary control valve",
+        "topic11 topic12 topic14 boundary control valve"
+      ],
+      "core_terms": [
+        "topic11_topic12_topic14_boundary",
+        "topic11 topic12 topic14 boundary",
+        "topic11 topic12 topic14 boundary control valve",
+        "topic11 topic12 topic14 boundary control valve",
+        "topic11 topic12 topic14 boundary control valve"
+      ],
+      "accepted_explanations": [
+        "Positioner·I/P calibration은 Topic 11, valve signature와 predictive diagnostics는 Topic 12, severe-service material·cryogenic·high-temperature package design은 Topic 14가 소유한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "Positioner·I/P calibration은 Topic 11, valve signature와 predictive diagnostics는 Topic 12, severe-service material·cryogenic·high-temperature package design은 Topic 14가 소유한다.",
+      "description": "topic11_topic12_topic14_boundary 계약을 평가한다."
+    },
+    {
+      "id": "topic15_topic16_standard_boundary",
+      "anchor_id": "topic15_topic16_standard_boundary",
+      "statement": "SIS·ESD, PST와 proof-test credit는 Topic 15, full valve-package selection과 lifecycle economics는 Topic 16이 소유하며 특정 최신 standard 수치는 governing document로 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "SIS ESD PST proof test boundary",
+        "valve lifecycle selection boundary",
+        "standard edition exact citation",
+        "Topic 15 Topic 16",
+        "governing document verification",
+        "topic15_topic16_standard_boundary",
+        "topic15 topic16 standard boundary",
+        "특정 최신 standard 수치는 governing document로 확인"
+      ],
+      "core_terms": [
+        "SIS ESD PST proof test boundary",
+        "valve lifecycle selection boundary",
+        "standard edition exact citation",
+        "Topic 15 Topic 16",
+        "governing document verification",
+        "topic15_topic16_standard_boundary",
+        "topic15 topic16 standard boundary",
+        "특정 최신 standard 수치는 governing document로 확인"
+      ],
+      "accepted_explanations": [
+        "SIS·ESD, PST와 proof-test credit는 Topic 15, full valve-package selection과 lifecycle economics는 Topic 16이 소유하며 특정 최신 standard 수치는 governing document로 확인한다.",
+        "Leakage path→governing class와 test condition→seat·packing mechanism→measurement basis→uncertainty-aware acceptance→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Class 명칭이나 단일 leakage 숫자만으로 모든 field condition, root cause와 acceptance를 확정하고 medium, pressure, direction, temperature, measurement basis와 uncertainty를 생략한다."
+      ],
+      "grading_notes": "Internal·external leakage, class-test condition dependency, seat material·load·direction, packing-emission trade-off, reference conversion, uncertainty, lifecycle workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md; Control Valve Handbook seat leakage, shutoff classification, packing and emissions sections; Control Valve Primer seat sealing, packing and field-maintenance sections; Topic 1 actuator-force/seat-load, Topic 3 packing-friction/dynamic-response, Topic 8 cavitation-flashing damage, Topic 10 balanced-trim/seal, Topic 11 positioner-calibration and Topic 12 diagnostic source packs; Topic 14 severe-service, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md.",
+      "claim": "SIS·ESD, PST와 proof-test credit는 Topic 15, full valve-package selection과 lifecycle economics는 Topic 16이 소유하며 특정 최신 standard 수치는 governing document로 확인한다.",
+      "description": "topic15_topic16_standard_boundary 계약을 평가한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "internal_external_leakage_identical",
+      "claim": "Internal seat leakage와 external packing leakage가 같은 leakage path와 시험이라는 주장은 오답이다.",
+      "wrong_claim": "Internal seat leakage와 external packing leakage가 같은 leakage path와 시험이라는 주장은 오답이다.",
+      "correction": "Internal through-seat leakage와 external atmospheric leakage는 path, test method, unit와 acceptance가 다르므로 분리한다.",
+      "correct_rule": "Internal through-seat leakage와 external atmospheric leakage는 path, test method, unit와 acceptance가 다르므로 분리한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Internal seat leakage와 external packing leakage가 같은 leakage path와 시험이라는 주장은 오답이다.",
+      "description": "Internal through-seat leakage와 external atmospheric leakage는 path, test method, unit와 acceptance가 다르므로 분리한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "class_guarantees_all_field_conditions",
+      "claim": "Shutoff class가 모든 실제 공정조건에서 동일한 leakage를 보장한다는 주장은 오답이다.",
+      "wrong_claim": "Shutoff class가 모든 실제 공정조건에서 동일한 leakage를 보장한다는 주장은 오답이다.",
+      "correction": "Shutoff class는 지정된 shop-test condition의 acceptance이며 모든 field operating condition을 자동 보증하지 않는다.",
+      "correct_rule": "Shutoff class는 지정된 shop-test condition의 acceptance이며 모든 field operating condition을 자동 보증하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Shutoff class가 모든 실제 공정조건에서 동일한 leakage를 보장한다는 주장은 오답이다.",
+      "description": "Shutoff class는 지정된 shop-test condition의 acceptance이며 모든 field operating condition을 자동 보증하지 않는다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "class_independent_of_test_conditions",
+      "claim": "Leakage class는 test medium, pressure, direction와 temperature와 무관하다는 주장은 오답이다.",
+      "wrong_claim": "Leakage class는 test medium, pressure, direction와 temperature와 무관하다는 주장은 오답이다.",
+      "correction": "Leakage class는 test medium, pressure, direction, temperature, duration와 measurement basis를 함께 명시한다.",
+      "correct_rule": "Leakage class는 test medium, pressure, direction, temperature, duration와 measurement basis를 함께 명시한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Leakage class는 test medium, pressure, direction와 temperature와 무관하다는 주장은 오답이다.",
+      "description": "Leakage class는 test medium, pressure, direction, temperature, duration와 measurement basis를 함께 명시한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "higher_class_universally_better",
+      "claim": "더 높은 leakage class가 service, material, actuator와 lifecycle trade-off와 무관하게 항상 최선이라는 주장은 오답이다.",
+      "wrong_claim": "더 높은 leakage class가 service, material, actuator와 lifecycle trade-off와 무관하게 항상 최선이라는 주장은 오답이다.",
+      "correction": "Leakage class는 service consequence, seat material, actuator margin, wear와 lifecycle trade-off로 선정한다.",
+      "correct_rule": "Leakage class는 service consequence, seat material, actuator margin, wear와 lifecycle trade-off로 선정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: 더 높은 leakage class가 service, material, actuator와 lifecycle trade-off와 무관하게 항상 최선이라는 주장은 오답이다.",
+      "description": "Leakage class는 service consequence, seat material, actuator margin, wear와 lifecycle trade-off로 선정한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "soft_seat_always_zero_leakage",
+      "claim": "Soft seat는 모든 pressure·temperature·fluid에서 영구적인 zero leakage를 보장한다는 주장은 오답이다.",
+      "wrong_claim": "Soft seat는 모든 pressure·temperature·fluid에서 영구적인 zero leakage를 보장한다는 주장은 오답이다.",
+      "correction": "Soft seat는 낮은 leakage에 유리할 수 있으나 temperature, chemical compatibility, extrusion와 wear limitation을 확인한다.",
+      "correct_rule": "Soft seat는 낮은 leakage에 유리할 수 있으나 temperature, chemical compatibility, extrusion와 wear limitation을 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Soft seat는 모든 pressure·temperature·fluid에서 영구적인 zero leakage를 보장한다는 주장은 오답이다.",
+      "description": "Soft seat는 낮은 leakage에 유리할 수 있으나 temperature, chemical compatibility, extrusion와 wear limitation을 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "metal_seat_cannot_tight_shutoff",
+      "claim": "Metal seat는 어떤 조건에서도 tight shutoff를 달성할 수 없다는 주장은 오답이다.",
+      "wrong_claim": "Metal seat는 어떤 조건에서도 tight shutoff를 달성할 수 없다는 주장은 오답이다.",
+      "correction": "Metal seat의 shutoff capability는 surface finish, lapping, contact stress와 governing test condition에 의존한다.",
+      "correct_rule": "Metal seat의 shutoff capability는 surface finish, lapping, contact stress와 governing test condition에 의존한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Metal seat는 어떤 조건에서도 tight shutoff를 달성할 수 없다는 주장은 오답이다.",
+      "description": "Metal seat의 shutoff capability는 surface finish, lapping, contact stress와 governing test condition에 의존한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "balanced_trim_has_no_extra_leakage",
+      "claim": "Balanced trim은 balance seal·clearance를 통한 additional leakage path가 없다는 주장은 오답이다.",
+      "wrong_claim": "Balanced trim은 balance seal·clearance를 통한 additional leakage path가 없다는 주장은 오답이다.",
+      "correction": "Balanced trim은 balance seal, piston ring와 cage clearance의 additional internal leakage path를 가질 수 있다.",
+      "correct_rule": "Balanced trim은 balance seal, piston ring와 cage clearance의 additional internal leakage path를 가질 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Balanced trim은 balance seal·clearance를 통한 additional leakage path가 없다는 주장은 오답이다.",
+      "description": "Balanced trim은 balance seal, piston ring와 cage clearance의 additional internal leakage path를 가질 수 있다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "more_seat_load_always_better",
+      "claim": "Seat load는 클수록 leakage와 valve life에 항상 유리하다는 주장은 오답이다.",
+      "wrong_claim": "Seat load는 클수록 leakage와 valve life에 항상 유리하다는 주장은 오답이다.",
+      "correction": "Seat load는 부족하면 leakage가 증가하고 과도하면 deformation, galling, wear와 actuator demand가 증가한다.",
+      "correct_rule": "Seat load는 부족하면 leakage가 증가하고 과도하면 deformation, galling, wear와 actuator demand가 증가한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Seat load는 클수록 leakage와 valve life에 항상 유리하다는 주장은 오답이다.",
+      "description": "Seat load는 부족하면 leakage가 증가하고 과도하면 deformation, galling, wear와 actuator demand가 증가한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "seat_load_unrelated_to_actuator",
+      "claim": "Seat load 요구는 actuator available thrust와 무관하다는 주장은 오답이다.",
+      "wrong_claim": "Seat load 요구는 actuator available thrust와 무관하다는 주장은 오답이다.",
+      "correction": "Seat load requirement는 available actuator thrust, pressure force와 mechanical margin을 함께 확인한다.",
+      "correct_rule": "Seat load requirement는 available actuator thrust, pressure force와 mechanical margin을 함께 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Seat load 요구는 actuator available thrust와 무관하다는 주장은 오답이다.",
+      "description": "Seat load requirement는 available actuator thrust, pressure force와 mechanical margin을 함께 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "pressure_direction_irrelevant",
+      "claim": "Pressure direction과 reverse-pressure condition은 sealing performance에 영향을 주지 않는다는 주장은 오답이다.",
+      "wrong_claim": "Pressure direction과 reverse-pressure condition은 sealing performance에 영향을 주지 않는다는 주장은 오답이다.",
+      "correction": "Normal과 reverse pressure direction에서 pressure-assisted와 pressure-unbalanced sealing을 별도 평가한다.",
+      "correct_rule": "Normal과 reverse pressure direction에서 pressure-assisted와 pressure-unbalanced sealing을 별도 평가한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Pressure direction과 reverse-pressure condition은 sealing performance에 영향을 주지 않는다는 주장은 오답이다.",
+      "description": "Normal과 reverse pressure direction에서 pressure-assisted와 pressure-unbalanced sealing을 별도 평가한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "gas_liquid_leakage_numbers_directly_equal",
+      "claim": "Gas와 liquid 시험의 같은 숫자 leakage rate를 medium·reference condition 없이 직접 동일시하는 주장은 오답이다.",
+      "wrong_claim": "Gas와 liquid 시험의 같은 숫자 leakage rate를 medium·reference condition 없이 직접 동일시하는 주장은 오답이다.",
+      "correction": "Gas와 liquid leakage는 medium property, unit, method와 reference condition을 맞춘 뒤 비교한다.",
+      "correct_rule": "Gas와 liquid leakage는 medium property, unit, method와 reference condition을 맞춘 뒤 비교한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Gas와 liquid 시험의 같은 숫자 leakage rate를 medium·reference condition 없이 직접 동일시하는 주장은 오답이다.",
+      "description": "Gas와 liquid leakage는 medium property, unit, method와 reference condition을 맞춘 뒤 비교한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "bubble_volume_is_universal",
+      "claim": "모든 bubble count 시험에서 bubble volume이 동일하고 환산조건이 불필요하다는 주장은 오답이다.",
+      "wrong_claim": "모든 bubble count 시험에서 bubble volume이 동일하고 환산조건이 불필요하다는 주장은 오답이다.",
+      "correction": "Bubble-count 환산은 apparatus별 representative bubble volume, duration와 gas condition을 확인한다.",
+      "correct_rule": "Bubble-count 환산은 apparatus별 representative bubble volume, duration와 gas condition을 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: 모든 bubble count 시험에서 bubble volume이 동일하고 환산조건이 불필요하다는 주장은 오답이다.",
+      "description": "Bubble-count 환산은 apparatus별 representative bubble volume, duration와 gas condition을 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "gauge_pressure_valid_for_gas_reference",
+      "claim": "Gas reference-volume 환산에 gauge pressure와 섭씨온도를 그대로 사용해도 된다는 주장은 오답이다.",
+      "wrong_claim": "Gas reference-volume 환산에 gauge pressure와 섭씨온도를 그대로 사용해도 된다는 주장은 오답이다.",
+      "correction": "Gas reference-volume conversion은 absolute pressure와 absolute temperature를 사용한다.",
+      "correct_rule": "Gas reference-volume conversion은 absolute pressure와 absolute temperature를 사용한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Gas reference-volume 환산에 gauge pressure와 섭씨온도를 그대로 사용해도 된다는 주장은 오답이다.",
+      "description": "Gas reference-volume conversion은 absolute pressure와 absolute temperature를 사용한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "all_leakage_units_directly_comparable",
+      "claim": "Volumetric, mass와 bubble-count leakage는 unit와 reference basis 없이 직접 비교할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Volumetric, mass와 bubble-count leakage는 unit와 reference basis 없이 직접 비교할 수 있다는 주장은 오답이다.",
+      "correction": "Volumetric, mass와 bubble-count leakage는 unit와 reference basis를 변환·정렬한 뒤 비교한다.",
+      "correct_rule": "Volumetric, mass와 bubble-count leakage는 unit와 reference basis를 변환·정렬한 뒤 비교한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Volumetric, mass와 bubble-count leakage는 unit와 reference basis 없이 직접 비교할 수 있다는 주장은 오답이다.",
+      "description": "Volumetric, mass와 bubble-count leakage는 unit와 reference basis를 변환·정렬한 뒤 비교한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "packing_tightening_always_solves_leakage",
+      "claim": "Packing leakage는 gland를 계속 조이면 마찰·손상 없이 항상 해결된다는 주장은 오답이다.",
+      "wrong_claim": "Packing leakage는 gland를 계속 조이면 마찰·손상 없이 항상 해결된다는 주장은 오답이다.",
+      "correction": "Packing adjustment는 controlled gland procedure로 수행하고 friction, stem·shaft damage와 actuator demand를 함께 확인한다.",
+      "correct_rule": "Packing adjustment는 controlled gland procedure로 수행하고 friction, stem·shaft damage와 actuator demand를 함께 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Packing leakage는 gland를 계속 조이면 마찰·손상 없이 항상 해결된다는 주장은 오답이다.",
+      "description": "Packing adjustment는 controlled gland procedure로 수행하고 friction, stem·shaft damage와 actuator demand를 함께 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "packing_compression_has_no_friction_effect",
+      "claim": "Packing compression은 stem·shaft friction과 actuator demand에 영향을 주지 않는다는 주장은 오답이다.",
+      "wrong_claim": "Packing compression은 stem·shaft friction과 actuator demand에 영향을 주지 않는다는 주장은 오답이다.",
+      "correction": "Packing compression 증가는 leakage를 줄일 수 있지만 friction, deadband, actuator demand와 wear를 증가시킬 수 있다.",
+      "correct_rule": "Packing compression 증가는 leakage를 줄일 수 있지만 friction, deadband, actuator demand와 wear를 증가시킬 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Packing compression은 stem·shaft friction과 actuator demand에 영향을 주지 않는다는 주장은 오답이다.",
+      "description": "Packing compression 증가는 leakage를 줄일 수 있지만 friction, deadband, actuator demand와 wear를 증가시킬 수 있다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "live_loaded_packing_is_maintenance_free",
+      "claim": "Live-loaded packing은 설치 후 spring range와 gland condition 점검이 전혀 필요 없다는 주장은 오답이다.",
+      "wrong_claim": "Live-loaded packing은 설치 후 spring range와 gland condition 점검이 전혀 필요 없다는 주장은 오답이다.",
+      "correction": "Live-loaded packing은 spring range, installed compression, corrosion, consolidation와 inspection을 관리한다.",
+      "correct_rule": "Live-loaded packing은 spring range, installed compression, corrosion, consolidation와 inspection을 관리한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Live-loaded packing은 설치 후 spring range와 gland condition 점검이 전혀 필요 없다는 주장은 오답이다.",
+      "description": "Live-loaded packing은 spring range, installed compression, corrosion, consolidation와 inspection을 관리한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "bellows_eliminates_all_external_leakage",
+      "claim": "Bellows seal이 모든 joint와 backup packing의 external leakage를 영구적으로 제거한다는 주장은 오답이다.",
+      "wrong_claim": "Bellows seal이 모든 joint와 backup packing의 external leakage를 영구적으로 제거한다는 주장은 오답이다.",
+      "correction": "Bellows seal은 stem leakage를 격리하지만 joint, fatigue, cycle-life와 backup packing limitation을 별도 평가한다.",
+      "correct_rule": "Bellows seal은 stem leakage를 격리하지만 joint, fatigue, cycle-life와 backup packing limitation을 별도 평가한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Bellows seal이 모든 joint와 backup packing의 external leakage를 영구적으로 제거한다는 주장은 오답이다.",
+      "description": "Bellows seal은 stem leakage를 격리하지만 joint, fatigue, cycle-life와 backup packing limitation을 별도 평가한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "qualification_guarantees_field_emissions",
+      "claim": "Low-emission qualification 통과가 모든 field installation의 fugitive emission 성능을 자동 보증한다는 주장은 오답이다.",
+      "wrong_claim": "Low-emission qualification 통과가 모든 field installation의 fugitive emission 성능을 자동 보증한다는 주장은 오답이다.",
+      "correction": "Low-emission qualification은 지정된 test cycle의 결과이며 field installation, stem condition와 maintenance를 자동 보증하지 않는다.",
+      "correct_rule": "Low-emission qualification은 지정된 test cycle의 결과이며 field installation, stem condition와 maintenance를 자동 보증하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Low-emission qualification 통과가 모든 field installation의 fugitive emission 성능을 자동 보증한다는 주장은 오답이다.",
+      "description": "Low-emission qualification은 지정된 test cycle의 결과이며 field installation, stem condition와 maintenance를 자동 보증하지 않는다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "concentration_equals_mass_emission",
+      "claim": "Local concentration reading이 mass-emission rate와 동일한 물리량이라는 주장은 오답이다.",
+      "wrong_claim": "Local concentration reading이 mass-emission rate와 동일한 물리량이라는 주장은 오답이다.",
+      "correction": "Local concentration은 species fraction이고 mass-emission rate는 flow와 species mass를 포함하므로 구분한다.",
+      "correct_rule": "Local concentration은 species fraction이고 mass-emission rate는 flow와 species mass를 포함하므로 구분한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Local concentration reading이 mass-emission rate와 동일한 물리량이라는 주장은 오답이다.",
+      "description": "Local concentration은 species fraction이고 mass-emission rate는 flow와 species mass를 포함하므로 구분한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "seat_test_proves_packing_emissions",
+      "claim": "Seat leakage test만으로 packing fugitive-emission acceptance까지 증명할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Seat leakage test만으로 packing fugitive-emission acceptance까지 증명할 수 있다는 주장은 오답이다.",
+      "correction": "Seat leakage test와 packing fugitive-emission test는 path, method, unit와 acceptance가 달라 별도 검증한다.",
+      "correct_rule": "Seat leakage test와 packing fugitive-emission test는 path, method, unit와 acceptance가 달라 별도 검증한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Seat leakage test만으로 packing fugitive-emission acceptance까지 증명할 수 있다는 주장은 오답이다.",
+      "description": "Seat leakage test와 packing fugitive-emission test는 path, method, unit와 acceptance가 달라 별도 검증한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "as_left_only_is_sufficient",
+      "claim": "As-left 결과만 기록하면 as-found condition과 repair 효과 비교는 불필요하다는 주장은 오답이다.",
+      "wrong_claim": "As-left 결과만 기록하면 as-found condition과 repair 효과 비교는 불필요하다는 주장은 오답이다.",
+      "correction": "As-found와 as-left를 같은 condition에서 기록하여 repair effect와 remaining risk를 비교한다.",
+      "correct_rule": "As-found와 as-left를 같은 condition에서 기록하여 repair effect와 remaining risk를 비교한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: As-left 결과만 기록하면 as-found condition과 repair 효과 비교는 불필요하다는 주장은 오답이다.",
+      "description": "As-found와 as-left를 같은 condition에서 기록하여 repair effect와 remaining risk를 비교한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "standard_edition_irrelevant",
+      "claim": "Standard edition, amendment와 purchaser test procedure가 달라도 class 의미와 판정은 항상 같다는 주장은 오답이다.",
+      "wrong_claim": "Standard edition, amendment와 purchaser test procedure가 달라도 class 의미와 판정은 항상 같다는 주장은 오답이다.",
+      "correction": "Governing standard edition, amendment, vendor guarantee와 purchaser test procedure를 exact citation으로 확인한다.",
+      "correct_rule": "Governing standard edition, amendment, vendor guarantee와 purchaser test procedure를 exact citation으로 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: Standard edition, amendment와 purchaser test procedure가 달라도 class 의미와 판정은 항상 같다는 주장은 오답이다.",
+      "description": "Governing standard edition, amendment, vendor guarantee와 purchaser test procedure를 exact citation으로 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "pst_automatically_proves_shutoff_class",
+      "claim": "PST 또는 smart diagnostic data가 governing shutoff test와 SIS proof-test를 자동 대체한다는 주장은 오답이다.",
+      "wrong_claim": "PST 또는 smart diagnostic data가 governing shutoff test와 SIS proof-test를 자동 대체한다는 주장은 오답이다.",
+      "correction": "PST와 smart diagnostics는 보조 evidence이며 governing shutoff test와 Topic 15 proof-test requirement를 자동 대체하지 않는다.",
+      "correct_rule": "PST와 smart diagnostics는 보조 evidence이며 governing shutoff test와 Topic 15 proof-test requirement를 자동 대체하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Seat leakage·packing·emissions 핵심 오류: PST 또는 smart diagnostic data가 governing shutoff test와 SIS proof-test를 자동 대체한다는 주장은 오답이다.",
+      "description": "PST와 smart diagnostics는 보조 evidence이며 governing shutoff test와 Topic 15 proof-test requirement를 자동 대체하지 않는다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    }
+  ],
+  "safe_expressions": [
+    "Internal through-seat leakage와 external atmospheric leakage를 분리한다.",
+    "Shutoff class는 지정된 test condition의 acceptance contract이다.",
+    "Shop test class는 모든 field operating leakage를 자동 보증하지 않는다.",
+    "Soft seat와 metal seat는 tightness·temperature·wear trade-off로 비교한다.",
+    "Balanced trim은 additional balance-seal leakage path를 가질 수 있다.",
+    "Seat load는 부족과 과다의 문제를 모두 검토한다.",
+    "Normal과 reverse pressure direction을 별도 평가한다.",
+    "Gas와 liquid leakage는 medium와 reference condition을 맞춘다.",
+    "Volumetric, mass와 bubble-count leakage basis를 구분한다.",
+    "Gas reference conversion은 absolute pressure와 temperature를 사용한다.",
+    "Bubble volume은 apparatus와 test condition에서 확인한다.",
+    "Seat damage, contamination, thermal distortion와 misalignment를 구분한다.",
+    "Packing compression과 leakage-friction trade-off를 함께 평가한다.",
+    "Live-loaded packing은 spring range와 installed compression을 관리한다.",
+    "Bellows seal은 pressure, temperature와 cycle-life limitation을 가진다.",
+    "Low-emission qualification과 field performance를 구분한다.",
+    "Concentration reading과 mass-emission rate를 구분한다.",
+    "Seat leakage test와 packing emission test를 분리한다.",
+    "As-found와 as-left를 같은 condition에서 비교한다.",
+    "Detection limit 이하를 정확한 zero leakage로 표현하지 않는다.",
+    "Measured leakage와 uncertainty를 acceptance에 함께 반영한다.",
+    "Vendor guarantee와 purchaser acceptance procedure를 정렬한다.",
+    "PST와 smart diagnostics는 governing shutoff test를 자동 대체하지 않는다.",
+    "SIS proof-test credit는 Topic 15 governing requirement를 따른다.",
+    "Actuator thrust sizing은 Topic 1 경계를 따른다.",
+    "Packing stiction·dynamic response는 Topic 3 경계를 따른다.",
+    "Balanced trim mechanics는 Topic 10 경계를 따른다.",
+    "Positioner calibration은 Topic 11 경계를 따른다.",
+    "Predictive diagnostics는 Topic 12 경계를 따른다.",
+    "Severe-service package design은 Topic 14 경계를 따른다.",
+    "Full valve-package lifecycle selection은 Topic 16 경계를 따른다."
+  ],
+  "revision_notes": [
+    "Internal seat leakage와 external packing leakage 경계를 추가했다.",
+    "Shutoff class와 medium·pressure·direction·temperature 시험계약을 추가했다.",
+    "Soft·metal seat, seat load, packing, fugitive-emission과 uncertainty 수식 계약을 추가했다.",
+    "Topic 1·3·8·10·11·12·14·15·16 ownership 경계를 추가했다."
+  ],
+  "topic_label": "시트 누설·차단 등급·패킹·비산배출",
+  "core_facts": [
+    "Internal through-seat leakage는 닫힌 밸브의 trim을 통과하는 내부 누설이고 external atmospheric leakage는 stem·shaft packing, bonnet와 body joint를 통해 대기로 방출되는 외부 누설이다.",
+    "Shutoff 또는 leakage class는 지정된 시험절차에서 허용 누설량을 분류하는 구매·검사 계약이며 실제 공정의 모든 운전조건을 자동 보증하지 않는다.",
+    "Leakage class는 test medium, inlet·outlet pressure, pressure direction, temperature, duration, stabilization과 measurement basis를 함께 명시해야 의미가 있다.",
+    "Shop shutoff test의 결과와 field operating leakage는 fluid property, temperature, differential pressure, contamination와 cycling history가 달라 직접 동일시할 수 없다.",
+    "Soft seat는 낮은 시험 누설에 유리할 수 있으나 temperature, chemical compatibility, extrusion과 wear 제한이 있고 metal seat는 harsh service 내구성과 temperature 범위에 유리하지만 허용 누설과 surface condition을 함께 검토한다.",
+    "Single-seat와 double-seat trim은 seat 수, force balance와 leakage path가 다르며 double-seat 구조는 두 접촉면의 동시 정렬과 누설 합산을 고려한다.",
+    "Balanced trim은 unbalanced force를 줄이지만 balance seal·piston ring·cage clearance와 같은 additional internal leakage path를 가질 수 있다.",
+    "Seat ring, plug, ball, disc와 seal ring의 contact geometry, alignment와 contact width는 sealing stress와 leakage path를 결정한다.",
+    "Seating force와 seat load는 contact area를 통해 sealing contact stress를 형성하며 필요한 값은 trim geometry, pressure direction, seat material과 service condition에 의존한다.",
+    "Seat load가 부족하면 surface irregularity와 pressure force를 극복하지 못하여 shutoff leakage가 증가할 수 있다.",
+    "Seat load가 과도하면 seat·plug deformation, indentation, galling, wear와 actuator demand가 증가할 수 있다.",
+    "Pressure direction은 pressure-assisted 또는 pressure-unbalanced sealing을 만들 수 있으므로 normal flow와 reverse-pressure condition을 분리하여 평가한다.",
+    "Gas와 liquid test medium은 compressibility, density, viscosity, surface tension과 detection method가 달라 같은 숫자의 leakage rate를 직접 비교할 수 없다.",
+    "Leakage 시험은 test pressure, differential pressure, temperature, hold duration와 thermal·pressure stabilization 조건을 기록한다.",
+    "Leakage rate는 volumetric flow, mass flow 또는 bubble count basis로 표현할 수 있으며 unit와 reference condition을 명시한다.",
+    "Allowable leakage가 nominal size, port diameter, seat diameter 또는 rated capacity에 정규화될 수 있으므로 governing basis를 명시한다.",
+    "Gas volumetric leakage를 reference condition으로 환산할 때 absolute pressure와 absolute temperature를 사용하고 gas behavior 가정을 밝힌다.",
+    "Bubble count를 volumetric leakage로 환산하려면 representative bubble volume, counting duration, test gas와 pressure·temperature condition을 확인한다.",
+    "Seat damage, erosion, wire drawing, scoring과 galling은 sealing surface에 지속적인 leakage path를 만들 수 있다.",
+    "Cavitation과 flashing이 seat·trim damage를 유발할 수 있으나 유동 regime와 방지 설계의 물리 원인은 Topic 8이 소유한다.",
+    "Foreign material, scale, polymerization product와 solid particle이 seat 사이에 끼면 일시적 또는 반복적인 shutoff leakage가 발생할 수 있다.",
+    "Thermal distortion과 differential expansion은 cold shop test에서 양호한 valve도 hot operating condition에서 seat alignment와 contact stress를 변화시킬 수 있다.",
+    "Stem bending, shaft deflection, guide·bearing wear와 actuator alignment 불량은 seat contact를 비균일하게 만든다.",
+    "Surface finish, lapping quality, hardness pairing, coating와 corrosion 상태는 seat sealing과 wear mechanism에 영향을 준다.",
+    "Fire-safe, high-temperature와 cryogenic sealing은 material, thermal contraction와 qualification 조건이 중요하며 package 설계의 상세는 Topic 14 경계를 따른다.",
+    "Sliding-stem packing과 rotary-shaft packing은 reciprocating·rotary motion, surface speed와 geometry가 달라 external leakage path와 wear mode를 구분한다.",
+    "Packing material, ring arrangement, spacer, lantern ring와 anti-extrusion component는 pressure, temperature, chemical compatibility와 motion에 맞게 선정한다.",
+    "Gland follower, stud load, packing-box dimensions와 installed compression은 sealing contact와 friction을 결정하므로 assembly procedure와 함께 관리한다.",
+    "Packing compression을 높이면 leakage가 감소할 수 있지만 stem·shaft friction, deadband, actuator demand와 wear가 증가할 수 있다.",
+    "Packing은 installation 후 consolidation, thermal cycle, wear, creep와 relaxation으로 gland load와 leakage가 변할 수 있다.",
+    "Live-loaded packing은 spring element로 gland load 변화를 보상하지만 spring range, installed compression, corrosion와 inspection이 필요하다.",
+    "Bellows seal은 stem을 통한 process leakage를 격리할 수 있으나 pressure, temperature, cycle life와 fatigue 제한이 있으며 backup packing의 역할을 함께 정의한다.",
+    "Low-emission packing qualification은 지정된 cycle·temperature·pressure 시험의 성능이고 field installation, stem condition와 maintenance 성능을 자동 보증하지 않는다.",
+    "Fugitive emission 평가는 packing, bonnet·body joint와 accessory connection의 source, monitoring point, background와 measurement condition을 구분한다.",
+    "Local concentration reading은 측정지점의 농도이고 mass-emission rate는 flow와 species mass를 포함하므로 동일한 물리량이 아니다.",
+    "Sniffing·screening은 누설 source 탐지와 상대 비교에 사용하고 bagging·enclosure·flow measurement는 정량화를 위해 별도 조건과 장비가 필요하다.",
+    "Packing leakage 조치는 controlled gland adjustment, packing replacement, stem·shaft surface와 packing-box inspection을 포함하며 과도한 조임을 피한다.",
+    "Repair 전 as-found leakage와 repair 후 as-left leakage를 같은 medium, pressure, temperature, method와 stabilization condition에서 기록한다.",
+    "Seat leakage acceptance와 packing fugitive-emission acceptance는 leakage path, method, unit와 governing requirement가 다르므로 별도 판정한다.",
+    "Valve orientation, thermal state, pressure cycle, stroke cycle와 long-term service history는 seat·packing leakage의 field context이다.",
+    "Leakage 관리 workflow는 specification→selection→shop test→installation→commissioning→monitoring→maintenance→as-left verification 순서로 구성한다.",
+    "Leakage 측정은 instrument calibration, range, resolution, detection limit, repeatability와 measurement uncertainty를 함께 보고한다.",
+    "Background contamination, temperature drift, insufficient stabilization와 detection limit는 false pass 또는 false fail을 만들 수 있다.",
+    "Leakage class, test procedure와 emission qualification은 적용 standard, edition, amendment와 purchaser requirement를 exact citation으로 확인한다.",
+    "Vendor datasheet, quotation guarantee, purchase specification와 acceptance test procedure의 class, medium, pressure, unit와 direction을 일치시킨다.",
+    "Actuator thrust와 fail-safe spring sizing은 Topic 1, packing friction·stiction·dynamic response는 Topic 3, balanced·unbalanced trim과 balance-seal mechanics는 Topic 10이 소유한다.",
+    "Positioner·I/P calibration은 Topic 11, valve signature와 predictive diagnostics는 Topic 12, severe-service material·cryogenic·high-temperature package design은 Topic 14가 소유한다.",
+    "SIS·ESD, PST와 proof-test credit는 Topic 15, full valve-package selection과 lifecycle economics는 Topic 16이 소유하며 특정 최신 standard 수치는 governing document로 확인한다."
+  ]
+}

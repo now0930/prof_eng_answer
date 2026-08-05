@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-05T02:50:41Z-generated-topic-pack-importance",
+  "version": "2026-08-05T08:33:24Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -225,6 +225,29 @@
         "PRINCIPLE_INTERPRETATION을 Primary Question Type으로 적용했다."
       ],
       "topic_label": "포지셔너·I/P·부스터·부속기기·교정"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "COMPARE_SELECTION",
+      "high_band_unlock_conditions": [
+        "Internal seat leakage와 external packing leakage를 구분한다.",
+        "Shutoff class와 test condition을 하나의 acceptance contract로 설명한다.",
+        "Soft·metal seat와 seat load·pressure direction trade-off를 설명한다.",
+        "Gas·liquid, volumetric·mass·bubble basis와 reference conversion을 구분한다.",
+        "Seat damage·contamination·thermal distortion 원인을 진단한다.",
+        "Packing compression, live loading와 bellows limitation을 설명한다.",
+        "Fugitive-emission measurement와 qualification을 구분한다.",
+        "As-found·as-left, detection limit와 uncertainty를 포함한다."
+      ],
+      "note": "Seat leakage, packing와 fugitive emissions는 shutoff performance, environmental compliance와 lifecycle maintenance를 연결하는 핵심 현장 주제이다.",
+      "revision_notes": [
+        "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+        "COMPARE_SELECTION을 Primary Question Type으로 적용했다."
+      ],
+      "topic_label": "시트 누설·차단 등급·패킹·비산배출"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

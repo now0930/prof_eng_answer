@@ -1,0 +1,374 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+  "title_ko": "제어밸브 시트 누설, 차단 등급, 패킹 및 비산배출",
+  "question_type": "COMPARE_SELECTION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Internal seat leakage와 external packing leakage를 구분하고 shutoff class와 시험조건의 관계를 설명하시오.",
+      "intent": "Internal seat leakage와 external packing leakage를 구분하고 shutoff class와 시험조건의 관계를 설명의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "internal_external_leakage_boundary",
+        "shutoff_class_purpose_scope",
+        "class_test_condition_dependency",
+        "shop_test_field_service_boundary",
+        "seat_packing_acceptance_separation"
+      ]
+    },
+    {
+      "pattern": "Soft seat와 metal seat의 tightness, temperature, wear와 chemical-compatibility trade-off를 비교하시오.",
+      "intent": "Soft seat와 metal seat의 tightness, temperature, wear와 chemical-compatibility trade-off를 비교의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "soft_metal_seat_tradeoff",
+        "single_double_seat_leakage_paths",
+        "balanced_trim_additional_leakage_path",
+        "seat_contact_geometry",
+        "special_service_sealing_boundary"
+      ]
+    },
+    {
+      "pattern": "Seat load, contact stress, pressure direction와 actuator margin이 shutoff leakage에 미치는 영향을 설명하시오.",
+      "intent": "Seat load, contact stress, pressure direction와 actuator margin이 shutoff leakage에 미치는 영향을 설명의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "seat_load_contact_stress_relation",
+        "insufficient_seat_load_leakage",
+        "excessive_seat_load_damage",
+        "pressure_direction_sealing",
+        "topic1_topic3_topic10_boundary"
+      ]
+    },
+    {
+      "pattern": "Volumetric·mass·bubble leakage와 gas reference-condition conversion을 계산하고 domain을 설명하시오.",
+      "intent": "Volumetric·mass·bubble leakage와 gas reference-condition conversion을 계산하고 domain을 설명의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "gas_liquid_test_medium_difference",
+        "test_pressure_temperature_duration_stabilization",
+        "volumetric_mass_bubble_basis",
+        "size_normalization_basis",
+        "ideal_gas_reference_conversion",
+        "bubble_count_conversion",
+        "measurement_calibration_detection_uncertainty"
+      ]
+    },
+    {
+      "pattern": "Seat damage, contamination, thermal distortion, misalignment와 guide wear에 의한 leakage 원인을 진단하시오.",
+      "intent": "Seat damage, contamination, thermal distortion, misalignment와 guide wear에 의한 leakage 원인을 진단의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "seat_damage_erosion_wire_drawing",
+        "cavitation_flashing_damage_handoff",
+        "foreign_material_contamination",
+        "thermal_distortion_hot_leakage",
+        "misalignment_stem_guide_wear",
+        "surface_finish_lapping_hardness_coating",
+        "orientation_thermal_cycle_history"
+      ]
+    },
+    {
+      "pattern": "Conventional, live-loaded, low-emission packing과 bellows seal의 구조, 장단점과 적용 한계를 비교하시오.",
+      "intent": "Conventional, live-loaded, low-emission packing과 bellows seal의 구조, 장단점과 적용 한계를 비교의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "stem_shaft_packing_leakage_paths",
+        "packing_material_ring_arrangement",
+        "gland_geometry_compression",
+        "packing_leakage_friction_tradeoff",
+        "packing_consolidation_relaxation",
+        "live_loaded_packing_function",
+        "bellows_backup_packing_boundary",
+        "low_emission_qualification_field_boundary"
+      ]
+    },
+    {
+      "pattern": "Sniffing·screening·bagging method, concentration와 mass-emission rate를 비교하시오.",
+      "intent": "Sniffing·screening·bagging method, concentration와 mass-emission rate를 비교의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "fugitive_emission_source_monitoring",
+        "concentration_mass_emission_boundary",
+        "screening_bagging_quantification_methods",
+        "measurement_calibration_detection_uncertainty",
+        "false_pass_false_fail_background"
+      ]
+    },
+    {
+      "pattern": "Purchase specification, shop test, installation, commissioning과 maintenance의 leakage acceptance workflow를 설계하시오.",
+      "intent": "Purchase specification, shop test, installation, commissioning과 maintenance의 leakage acceptance workflow를 설계의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "packing_adjustment_replacement_inspection",
+        "as_found_as_left_leakage",
+        "seat_packing_acceptance_separation",
+        "specification_test_lifecycle_workflow",
+        "standard_edition_exact_citation",
+        "vendor_purchase_spec_alignment"
+      ]
+    },
+    {
+      "pattern": "As-found·as-left leakage, detection limit, uncertainty와 false pass·false fail을 평가하시오.",
+      "intent": "As-found·as-left leakage, detection limit, uncertainty와 false pass·false fail을 평가의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "as_found_as_left_leakage",
+        "measurement_calibration_detection_uncertainty",
+        "false_pass_false_fail_background",
+        "orientation_thermal_cycle_history"
+      ]
+    },
+    {
+      "pattern": "Seat type, leakage class, packing, emission requirement와 lifecycle maintenance를 통합 선정하시오.",
+      "intent": "Seat type, leakage class, packing, emission requirement와 lifecycle maintenance를 통합 선정의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "soft_metal_seat_tradeoff",
+        "seat_load_contact_stress_relation",
+        "packing_leakage_friction_tradeoff",
+        "low_emission_qualification_field_boundary",
+        "specification_test_lifecycle_workflow",
+        "topic1_topic3_topic10_boundary",
+        "topic11_topic12_topic14_boundary",
+        "topic15_topic16_standard_boundary"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "Leakage Taxonomy And Class",
+      "intent": "Internal·external leakage taxonomy와 shutoff-class·test-condition 계약을 설명한다.",
+      "anchor_refs": [
+        "internal_external_leakage_boundary",
+        "shutoff_class_purpose_scope",
+        "class_test_condition_dependency",
+        "shop_test_field_service_boundary",
+        "soft_metal_seat_tradeoff",
+        "single_double_seat_leakage_paths"
+      ]
+    },
+    {
+      "section": "Seat Structure Load And Direction",
+      "intent": "Seat material, trim leakage path, contact geometry, seat load와 pressure direction을 설명한다.",
+      "anchor_refs": [
+        "balanced_trim_additional_leakage_path",
+        "seat_contact_geometry",
+        "seat_load_contact_stress_relation",
+        "insufficient_seat_load_leakage",
+        "excessive_seat_load_damage",
+        "pressure_direction_sealing"
+      ]
+    },
+    {
+      "section": "Test Condition Rate And Conversion",
+      "intent": "Test medium·pressure·temperature·duration, leakage unit, normalization과 reference conversion을 설명한다.",
+      "anchor_refs": [
+        "gas_liquid_test_medium_difference",
+        "test_pressure_temperature_duration_stabilization",
+        "volumetric_mass_bubble_basis",
+        "size_normalization_basis",
+        "ideal_gas_reference_conversion",
+        "bubble_count_conversion"
+      ]
+    },
+    {
+      "section": "Seat Damage And Service Context",
+      "intent": "Damage, contamination, thermal distortion, misalignment와 special-service 영향을 설명한다.",
+      "anchor_refs": [
+        "seat_damage_erosion_wire_drawing",
+        "cavitation_flashing_damage_handoff",
+        "foreign_material_contamination",
+        "thermal_distortion_hot_leakage",
+        "misalignment_stem_guide_wear",
+        "surface_finish_lapping_hardness_coating",
+        "special_service_sealing_boundary"
+      ]
+    },
+    {
+      "section": "Packing Design And Tradeoff",
+      "intent": "Packing material·compression·friction, live loading와 bellows seal을 비교한다.",
+      "anchor_refs": [
+        "stem_shaft_packing_leakage_paths",
+        "packing_material_ring_arrangement",
+        "gland_geometry_compression",
+        "packing_leakage_friction_tradeoff",
+        "packing_consolidation_relaxation",
+        "live_loaded_packing_function",
+        "bellows_backup_packing_boundary",
+        "low_emission_qualification_field_boundary"
+      ]
+    },
+    {
+      "section": "Fugitive Emission Measurement",
+      "intent": "Emission source, concentration·mass rate, screening·quantification과 qualification을 설명한다.",
+      "anchor_refs": [
+        "fugitive_emission_source_monitoring",
+        "concentration_mass_emission_boundary",
+        "screening_bagging_quantification_methods",
+        "packing_adjustment_replacement_inspection"
+      ]
+    },
+    {
+      "section": "Acceptance Uncertainty And Workflow",
+      "intent": "As-found·as-left, calibration, uncertainty, false decision과 lifecycle workflow를 설명한다.",
+      "anchor_refs": [
+        "as_found_as_left_leakage",
+        "seat_packing_acceptance_separation",
+        "orientation_thermal_cycle_history",
+        "specification_test_lifecycle_workflow",
+        "measurement_calibration_detection_uncertainty",
+        "false_pass_false_fail_background",
+        "standard_edition_exact_citation",
+        "vendor_purchase_spec_alignment"
+      ]
+    },
+    {
+      "section": "Handoff Boundaries And Verification",
+      "intent": "Topic 1·3·10·11·12·14·15·16 경계와 standard·vendor verify-first 원칙을 정리한다.",
+      "anchor_refs": [
+        "topic1_topic3_topic10_boundary",
+        "topic11_topic12_topic14_boundary",
+        "topic15_topic16_standard_boundary"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Internal through-seat leakage와 external atmospheric leakage를 구분한다.",
+    "Shutoff class와 complete test-condition contract를 연결한다.",
+    "Shop-test class와 field operating leakage의 차이를 설명한다.",
+    "Soft seat와 metal seat의 tightness·temperature·wear trade-off를 설명한다.",
+    "Single·double seat와 balanced-trim additional leakage path를 설명한다.",
+    "Seat load 부족·과다와 contact stress를 설명한다.",
+    "Normal·reverse pressure direction의 sealing effect를 설명한다.",
+    "Gas·liquid와 volumetric·mass·bubble basis를 구분한다.",
+    "Absolute pressure·temperature reference conversion을 적용한다.",
+    "Seat damage·contamination·thermal distortion·misalignment를 진단한다.",
+    "Packing compression과 leakage-friction trade-off를 설명한다.",
+    "Live-loaded packing, low-emission qualification와 bellows limitation을 설명한다.",
+    "Concentration과 mass-emission rate를 구분한다.",
+    "As-found·as-left를 같은 test condition에서 비교한다.",
+    "Detection limit와 uncertainty를 acceptance에 반영한다.",
+    "Topic 1·3·8·10·11·12·14·15·16 경계를 명시한다."
+  ],
+  "common_missing_points": [
+    "Internal seat leakage와 external packing leakage를 혼동한다.",
+    "Class 명칭만 제시하고 test medium·pressure·direction·temperature를 누락한다.",
+    "Shop test와 field service condition을 동일시한다.",
+    "Soft·metal seat trade-off를 누락한다.",
+    "Seat load 부족 또는 과다 중 한쪽만 설명한다.",
+    "Gas volume conversion에 gauge pressure 또는 Celsius를 사용한다.",
+    "Bubble volume을 확인하지 않는다.",
+    "Packing tightening의 friction·wear 영향을 누락한다.",
+    "Low-emission qualification과 field performance를 동일시한다.",
+    "Concentration과 mass-emission rate를 혼동한다.",
+    "As-found 기록과 uncertainty를 누락한다.",
+    "PST·diagnostics가 governing shutoff test를 대체한다고 단정한다."
+  ],
+  "routing_aliases": [
+    "control valve seat leakage shutoff class test conditions",
+    "internal through-seat leakage external packing leakage",
+    "soft seat metal seat leakage trade-off",
+    "single double seat balanced trim leakage paths",
+    "seat load contact stress pressure direction shutoff",
+    "gas liquid valve leakage test comparison",
+    "volumetric mass bubble count leakage conversion",
+    "gas leakage absolute pressure temperature reference conversion",
+    "bubble count leakage rate apparatus condition",
+    "seat damage contamination thermal distortion leakage",
+    "stem bending guide wear seat contact leakage",
+    "surface finish lapping hardness coating seat leakage",
+    "stem shaft packing leakage friction trade-off",
+    "packing compression gland load actuator demand",
+    "live-loaded low-emission packing qualification",
+    "bellows seal backup packing cycle limitation",
+    "control valve fugitive emission screening quantification",
+    "concentration mass emission rate valve packing",
+    "as-found as-left leakage acceptance uncertainty",
+    "leakage detection limit false pass false fail",
+    "purchase specification vendor leakage acceptance alignment",
+    "제어밸브 시트 누설 차단 등급 시험 조건",
+    "내부 누설 패킹 외부 누설 구분",
+    "소프트 시트 메탈 시트 누설 비교",
+    "패킹 압축 글랜드 하중 비산배출",
+    "라이브 로드 저배출 패킹 벨로즈 실",
+    "누설 기준 상태 환산 기포 수 불확도",
+    "정비 전 정비 후 누설 판정"
+  ],
+  "routing_field_points": [
+    "Internal·external leakage path 확인",
+    "Governing class·standard·edition 확인",
+    "Test medium·pressure·direction·temperature 확인",
+    "Soft·metal seat material compatibility 확인",
+    "Seat load·contact geometry·actuator margin 확인",
+    "Gas·liquid measurement basis 확인",
+    "Reference pressure·temperature 확인",
+    "Bubble-volume apparatus 확인",
+    "Seat damage·contamination·thermal alignment 확인",
+    "Packing material·ring arrangement·gland procedure 확인",
+    "Live-load spring range와 bellows cycle limitation 확인",
+    "Fugitive-emission source·background·method 확인",
+    "As-found·as-left와 work-order 기록",
+    "Detection limit·uncertainty와 borderline retest",
+    "Vendor guarantee·purchase specification alignment",
+    "Repair 후 full functional stroke와 sealing verification"
+  ],
+  "revision_notes": [
+    "10개 leakage·packing Question Pattern과 8개 Outline을 추가했다.",
+    "Broad leakage·packing·seat·emission alias를 금지하고 복합 phrase를 사용했다.",
+    "Topic 1·3·8·10·11·12·14·15·16 ownership 경계를 명시했다."
+  ],
+  "id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+  "title": "제어밸브 시트 누설, 차단 등급, 패킹 및 비산배출",
+  "question_examples": [
+    "Internal seat leakage와 external packing leakage를 구분하고 shutoff class와 시험조건의 관계를 설명하시오.",
+    "Soft seat와 metal seat의 tightness, temperature, wear와 chemical-compatibility trade-off를 비교하시오.",
+    "Seat load, contact stress, pressure direction와 actuator margin이 shutoff leakage에 미치는 영향을 설명하시오.",
+    "Volumetric·mass·bubble leakage와 gas reference-condition conversion을 계산하고 domain을 설명하시오.",
+    "Seat damage, contamination, thermal distortion, misalignment와 guide wear에 의한 leakage 원인을 진단하시오.",
+    "Conventional, live-loaded, low-emission packing과 bellows seal의 구조, 장단점과 적용 한계를 비교하시오.",
+    "Sniffing·screening·bagging method, concentration와 mass-emission rate를 비교하시오.",
+    "Purchase specification, shop test, installation, commissioning과 maintenance의 leakage acceptance workflow를 설계하시오.",
+    "As-found·as-left leakage, detection limit, uncertainty와 false pass·false fail을 평가하시오.",
+    "Seat type, leakage class, packing, emission requirement와 lifecycle maintenance를 통합 선정하시오."
+  ],
+  "topic_aliases": [
+    "control valve seat leakage shutoff class test conditions",
+    "internal through-seat leakage external packing leakage",
+    "soft seat metal seat leakage trade-off",
+    "single double seat balanced trim leakage paths",
+    "seat load contact stress pressure direction shutoff",
+    "gas liquid valve leakage test comparison",
+    "volumetric mass bubble count leakage conversion",
+    "gas leakage absolute pressure temperature reference conversion",
+    "bubble count leakage rate apparatus condition",
+    "seat damage contamination thermal distortion leakage",
+    "stem bending guide wear seat contact leakage",
+    "surface finish lapping hardness coating seat leakage",
+    "stem shaft packing leakage friction trade-off",
+    "packing compression gland load actuator demand",
+    "live-loaded low-emission packing qualification",
+    "bellows seal backup packing cycle limitation",
+    "control valve fugitive emission screening quantification",
+    "concentration mass emission rate valve packing",
+    "as-found as-left leakage acceptance uncertainty",
+    "leakage detection limit false pass false fail",
+    "purchase specification vendor leakage acceptance alignment",
+    "제어밸브 시트 누설 차단 등급 시험 조건",
+    "내부 누설 패킹 외부 누설 구분",
+    "소프트 시트 메탈 시트 누설 비교",
+    "패킹 압축 글랜드 하중 비산배출",
+    "라이브 로드 저배출 패킹 벨로즈 실",
+    "누설 기준 상태 환산 기포 수 불확도",
+    "정비 전 정비 후 누설 판정"
+  ],
+  "expected_structure": [
+    "Leakage Taxonomy And Class",
+    "Seat Structure Load And Direction",
+    "Test Condition Rate And Conversion",
+    "Seat Damage And Service Context",
+    "Packing Design And Tradeoff",
+    "Fugitive Emission Measurement",
+    "Acceptance Uncertainty And Workflow",
+    "Handoff Boundaries And Verification"
+  ],
+  "high_score_features": [
+    "Leakage path, test-condition class, seat·packing mechanism, measurement conversion, uncertainty와 lifecycle verification을 연결한다."
+  ],
+  "low_score_patterns": [
+    "Class 또는 단일 leakage 숫자를 universal guarantee로 사용하거나 test condition, path, uncertainty와 field verification을 생략한다."
+  ],
+  "field_connection_points": [
+    "Seat test, packing adjustment, fugitive-emission measurement, purchase acceptance와 as-found·as-left work-order verification"
+  ]
+}
