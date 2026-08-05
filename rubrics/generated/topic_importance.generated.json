@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-04T14:37:59Z-generated-topic-pack-importance",
+  "version": "2026-08-05T02:50:41Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -651,6 +651,29 @@
         "fatal logic error가 없다."
       ],
       "note": "2차 시스템의 공진주파수와 주파수응답은 제어이론 핵심 변별 주제이며, 단순 공식 암기를 넘어 시간응답-주파수응답의 개념적 차이와 현장 설계(진동, 노이즈, 대역폭) 간의 연결 능력이 고득점의 핵심이다."
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "DIAGNOSIS_ACTION",
+      "high_band_unlock_conditions": [
+        "Smart-positioner diagnostic data chain과 data-quality basis를 제시한다.",
+        "Online·offline과 static·dynamic signature를 구분한다.",
+        "Comparable as-left baseline과 operating context를 정의한다.",
+        "Travel error, hysteresis와 pressure-band feature를 계산한다.",
+        "Conditional friction proxy와 process-force confounding을 설명한다.",
+        "Supply·I/P·relay·air·feedback-sensor health를 구분한다.",
+        "Usage·response·residual trend와 alarm persistence를 설명한다.",
+        "Multi-evidence isolation, confidence와 closed-loop maintenance workflow를 설명한다."
+      ],
+      "note": "Smart-positioner diagnostics와 valve signature는 final-control-element 상태를 data-driven maintenance decision으로 연결하는 핵심 현장 주제이다.",
+      "revision_notes": [
+        "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+        "DIAGNOSIS_ACTION을 Primary Question Type으로 적용했다."
+      ],
+      "topic_label": "스마트 포지셔너 진단·밸브 시그니처·예지보전"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

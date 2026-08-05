@@ -1,0 +1,360 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+  "title_ko": "스마트 포지셔너 진단, 밸브 시그니처 및 예지보전",
+  "question_type": "DIAGNOSIS_ACTION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Smart positioner의 diagnostic data source, device status와 signal chain을 설명하시오.",
+      "intent": "Smart positioner의 diagnostic data source, device status와 signal chain을 평가·설명",
+      "required_anchor_ids": [
+        "smart_positioner_diagnostic_scope",
+        "diagnostic_signal_data_chain",
+        "device_status_event_configuration_history",
+        "data_quality_time_sync_units",
+        "vendor_variable_dictionary_verification"
+      ]
+    },
+    {
+      "pattern": "Online monitoring, offline test, static signature와 dynamic signature를 비교하시오.",
+      "intent": "Online monitoring, offline test, static signature와 dynamic signature를 비교",
+      "required_anchor_ids": [
+        "online_monitoring_offline_test_boundary",
+        "static_dynamic_signature_boundary",
+        "as_left_reference_signature",
+        "comparable_context_baseline",
+        "offline_test_process_risk"
+      ]
+    },
+    {
+      "pattern": "Travel error, hysteresis, actuator-pressure band와 friction proxy를 계산하고 한계를 설명하시오.",
+      "intent": "Travel error, hysteresis, actuator-pressure band와 friction proxy를 계산하고 한계를 평가·설명",
+      "required_anchor_ids": [
+        "command_travel_error_signed",
+        "full_span_travel_error",
+        "up_down_hysteresis_signature",
+        "actuator_pressure_open_close_band",
+        "pressure_band_friction_proxy",
+        "process_force_confounding",
+        "baseline_residual_context",
+        "percent_change_domain",
+        "rate_of_change_time_domain"
+      ]
+    },
+    {
+      "pattern": "Supply regulator, I/P, relay, fill·vent path 이상을 diagnostic data로 구분하시오.",
+      "intent": "Supply regulator, I/P, relay, fill·vent path 이상을 diagnostic data로 구분",
+      "required_anchor_ids": [
+        "supply_pressure_regulator_droop",
+        "ip_zero_span_drift_trend",
+        "relay_pilot_fill_vent_health",
+        "stroke_time_response_trend"
+      ]
+    },
+    {
+      "pattern": "Air consumption·leakage와 feedback-sensor drift·noise·dropout을 진단하시오.",
+      "intent": "Air consumption·leakage와 feedback-sensor drift·noise·dropout을 진단",
+      "required_anchor_ids": [
+        "pneumatic_air_consumption_leakage",
+        "feedback_sensor_drift_noise_dropout",
+        "diagnostic_confidence_data_quality",
+        "false_positive_negative_context"
+      ]
+    },
+    {
+      "pattern": "Cycle count, accumulated travel, direction reversal와 stroke-time trend를 설명하시오.",
+      "intent": "Cycle count, accumulated travel, direction reversal와 stroke-time trend를 평가·설명",
+      "required_anchor_ids": [
+        "cycle_count_definition",
+        "accumulated_travel_direction_reversal",
+        "stroke_time_response_trend",
+        "endpoint_seat_contact_mechanical_stop",
+        "packing_stem_shaft_resistance_trend",
+        "trim_balance_seal_friction_handoff"
+      ]
+    },
+    {
+      "pattern": "Baseline residual, trend, persistence, data quality와 diagnostic confidence를 설계하시오.",
+      "intent": "Baseline residual, trend, persistence, data quality와 diagnostic confidence를 설계",
+      "required_anchor_ids": [
+        "baseline_residual_context",
+        "percent_change_domain",
+        "rate_of_change_time_domain",
+        "threshold_persistence_deadband",
+        "multi_evidence_failure_isolation",
+        "diagnostic_confidence_data_quality",
+        "false_positive_negative_context",
+        "detection_confirmation_boundary"
+      ]
+    },
+    {
+      "pattern": "Time-based, condition-based와 predictive maintenance를 비교하고 적용 기준을 제시하시오.",
+      "intent": "Time-based, condition-based와 predictive maintenance를 비교하고 적용 기준을 제시",
+      "required_anchor_ids": [
+        "time_condition_predictive_maintenance_compare",
+        "degradation_trend_lead_time",
+        "maintenance_priority_consequence"
+      ]
+    },
+    {
+      "pattern": "Detect→verify→diagnose→prioritize→plan→repair→as-left workflow를 설명하시오.",
+      "intent": "Detect→verify→diagnose→prioritize→plan→repair→as-left workflow를 평가·설명",
+      "required_anchor_ids": [
+        "multi_evidence_failure_isolation",
+        "detection_confirmation_boundary",
+        "detect_verify_diagnose_priority_workflow",
+        "maintenance_priority_consequence",
+        "as_found_as_left_work_order_feedback",
+        "final_closed_loop_diagnostic_verification"
+      ]
+    },
+    {
+      "pattern": "HART·Fieldbus·asset-management 연계, offline-test risk와 work-order feedback을 평가하시오.",
+      "intent": "HART·Fieldbus·asset-management 연계, offline-test risk와 work-order feedback을 평가",
+      "required_anchor_ids": [
+        "device_status_event_configuration_history",
+        "data_quality_time_sync_units",
+        "vendor_variable_dictionary_verification",
+        "hart_fieldbus_asset_integration",
+        "offline_test_process_risk",
+        "as_found_as_left_work_order_feedback",
+        "topic1_topic3_topic11_boundary",
+        "topic13_topic15_topic16_boundary",
+        "final_closed_loop_diagnostic_verification"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "Diagnostic architecture and data",
+      "intent": "Smart-positioner data source, signal chain, status, event와 data-quality architecture를 설명한다.",
+      "anchor_refs": [
+        "smart_positioner_diagnostic_scope",
+        "diagnostic_signal_data_chain",
+        "device_status_event_configuration_history",
+        "data_quality_time_sync_units",
+        "vendor_variable_dictionary_verification"
+      ]
+    },
+    {
+      "section": "Signature mode and comparable baseline",
+      "intent": "Online·offline, static·dynamic signature와 context-conditioned as-left baseline을 설명한다.",
+      "anchor_refs": [
+        "online_monitoring_offline_test_boundary",
+        "static_dynamic_signature_boundary",
+        "as_left_reference_signature",
+        "comparable_context_baseline"
+      ]
+    },
+    {
+      "section": "Travel pressure and friction features",
+      "intent": "Travel error, hysteresis, pressure band, friction proxy와 process-force 교란을 설명한다.",
+      "anchor_refs": [
+        "command_travel_error_signed",
+        "full_span_travel_error",
+        "up_down_hysteresis_signature",
+        "actuator_pressure_open_close_band",
+        "pressure_band_friction_proxy",
+        "process_force_confounding"
+      ]
+    },
+    {
+      "section": "Pneumatic and sensor health",
+      "intent": "Supply, I/P, relay, air usage와 feedback-sensor 이상을 구분한다.",
+      "anchor_refs": [
+        "supply_pressure_regulator_droop",
+        "ip_zero_span_drift_trend",
+        "relay_pilot_fill_vent_health",
+        "pneumatic_air_consumption_leakage",
+        "feedback_sensor_drift_noise_dropout"
+      ]
+    },
+    {
+      "section": "Usage response and resistance trends",
+      "intent": "Cycle, accumulated travel, stroke time, endpoint와 resistance trend를 설명한다.",
+      "anchor_refs": [
+        "cycle_count_definition",
+        "accumulated_travel_direction_reversal",
+        "stroke_time_response_trend",
+        "endpoint_seat_contact_mechanical_stop",
+        "packing_stem_shaft_resistance_trend",
+        "trim_balance_seal_friction_handoff"
+      ]
+    },
+    {
+      "section": "Alarm confidence and failure isolation",
+      "intent": "Residual, percentage, rate, persistence, multi-evidence, confidence와 false alarm을 설명한다.",
+      "anchor_refs": [
+        "baseline_residual_context",
+        "percent_change_domain",
+        "rate_of_change_time_domain",
+        "threshold_persistence_deadband",
+        "multi_evidence_failure_isolation",
+        "diagnostic_confidence_data_quality",
+        "false_positive_negative_context",
+        "detection_confirmation_boundary"
+      ]
+    },
+    {
+      "section": "Maintenance strategy and workflow",
+      "intent": "Time·condition·predictive maintenance와 closed-loop repair workflow를 설명한다.",
+      "anchor_refs": [
+        "detect_verify_diagnose_priority_workflow",
+        "time_condition_predictive_maintenance_compare",
+        "degradation_trend_lead_time",
+        "maintenance_priority_consequence"
+      ]
+    },
+    {
+      "section": "Integration risk boundaries and feedback",
+      "intent": "Asset integration, offline-test risk, work-order feedback와 Topic 경계를 정리한다.",
+      "anchor_refs": [
+        "hart_fieldbus_asset_integration",
+        "offline_test_process_risk",
+        "as_found_as_left_work_order_feedback",
+        "topic1_topic3_topic11_boundary",
+        "topic13_topic15_topic16_boundary",
+        "final_closed_loop_diagnostic_verification"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Command→pressure→travel→status·event diagnostic data chain을 제시한다.",
+    "Online monitoring과 offline diagnostic test를 구분한다.",
+    "Static valve signature와 dynamic operating signature를 구분한다.",
+    "Comparable operating context와 as-left reference signature를 정의한다.",
+    "Signed travel error와 full-span normalization을 설명한다.",
+    "Upstroke·downstroke hysteresis와 opening·closing pressure band를 계산한다.",
+    "Friction proxy의 effective-area·process-force 가정과 한계를 설명한다.",
+    "Supply, I/P, relay, air usage와 feedback sensor failure를 구분한다.",
+    "Cycle, accumulated travel, direction reversal와 stroke-time trend를 설명한다.",
+    "Baseline residual, percentage change와 rate-of-change domain을 설명한다.",
+    "Threshold, persistence, reset logic와 deadband를 함께 사용한다.",
+    "Multi-evidence failure isolation과 diagnostic confidence·data quality를 포함한다.",
+    "False positive·negative와 detection·confirmation 경계를 설명한다.",
+    "Time-based·condition-based·predictive maintenance를 비교한다.",
+    "Detect→verify→diagnose→prioritize→plan→repair→as-left workflow를 제시한다.",
+    "Topic 1·3·11·13·15·16 경계와 field feedback을 설명한다."
+  ],
+  "common_missing_points": [
+    "Operating context가 다른 baseline을 직접 비교한다.",
+    "Static·dynamic 또는 online·offline signature를 구분하지 않는다.",
+    "Travel-error sign convention과 domain을 누락한다.",
+    "Pressure band를 조건 없이 friction force로 단정한다.",
+    "Supply·process force와 sensor quality를 무시한다.",
+    "Single threshold만 사용하고 persistence를 누락한다.",
+    "Diagnostic confidence와 false alarm을 누락한다.",
+    "Detection을 root-cause confirmation으로 오인한다.",
+    "Predictive maintenance가 exact failure date를 보장한다고 단정한다.",
+    "As-found·as-left와 work-order feedback을 누락한다.",
+    "Topic 13 leakage와 Topic 15 PST 경계를 혼동한다."
+  ],
+  "routing_aliases": [
+    "smart positioner diagnostic data chain",
+    "digital valve controller status event diagnostics",
+    "online monitoring offline valve signature test",
+    "static valve signature dynamic operating signature",
+    "as-left reference signature operating context",
+    "command actual travel deviation diagnostic",
+    "upstroke downstroke hysteresis signature",
+    "opening closing actuator pressure band",
+    "conditional pressure band friction proxy",
+    "supply regulator I/P relay health diagnosis",
+    "air consumption pneumatic leakage trend",
+    "travel feedback sensor drift noise dropout",
+    "cycle count accumulated travel direction reversal",
+    "stroke time response degradation trend",
+    "baseline residual percentage rate of change",
+    "alarm persistence deadband diagnostic confidence",
+    "multi evidence valve failure isolation",
+    "condition based predictive valve maintenance",
+    "detect verify diagnose repair as-left workflow",
+    "HART Fieldbus valve asset diagnostic integration",
+    "스마트 포지셔너 진단 데이터 체인",
+    "밸브 시그니처 기준선 행정 압력 추세",
+    "온라인 모니터링 오프라인 시그니처 시험",
+    "공기 소비 누설 센서 이상 진단",
+    "상태기반 예지보전 정비 의사결정"
+  ],
+  "routing_field_points": [
+    "Device status·event·configuration history 확인",
+    "Command·actual travel·pressure timestamp synchronization",
+    "Online trend와 offline signature test mode 확인",
+    "As-left baseline과 comparable process condition 확인",
+    "Travel-error·hysteresis·pressure-band feature 계산",
+    "Supply regulator·I/P·relay health 분리",
+    "Air-consumption·feedback-sensor quality 확인",
+    "Cycle·accumulated travel·stroke-time trend 확인",
+    "Baseline residual·percentage·rate window 확인",
+    "Threshold·persistence·deadband·reset logic 확인",
+    "Multi-evidence isolation과 confidence 확인",
+    "Maintenance priority와 consequence 연결",
+    "HART·Fieldbus update rate와 communication quality 확인",
+    "As-found·as-left와 work-order feedback 연결"
+  ],
+  "revision_notes": [
+    "10개 diagnostic Question Pattern과 8개 Recommended Outline을 추가했다.",
+    "Broad smart·diagnostic·signature·trend·maintenance alias를 금지하고 복합 routing phrase를 사용했다.",
+    "Topic 1·3·11·13·15·16 ownership 경계를 독립적으로 명시했다."
+  ],
+  "id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+  "title": "스마트 포지셔너 진단, 밸브 시그니처 및 예지보전",
+  "question_examples": [
+    "Smart positioner의 diagnostic data source, device status와 signal chain을 설명하시오.",
+    "Online monitoring, offline test, static signature와 dynamic signature를 비교하시오.",
+    "Travel error, hysteresis, actuator-pressure band와 friction proxy를 계산하고 한계를 설명하시오.",
+    "Supply regulator, I/P, relay, fill·vent path 이상을 diagnostic data로 구분하시오.",
+    "Air consumption·leakage와 feedback-sensor drift·noise·dropout을 진단하시오.",
+    "Cycle count, accumulated travel, direction reversal와 stroke-time trend를 설명하시오.",
+    "Baseline residual, trend, persistence, data quality와 diagnostic confidence를 설계하시오.",
+    "Time-based, condition-based와 predictive maintenance를 비교하고 적용 기준을 제시하시오.",
+    "Detect→verify→diagnose→prioritize→plan→repair→as-left workflow를 설명하시오.",
+    "HART·Fieldbus·asset-management 연계, offline-test risk와 work-order feedback을 평가하시오."
+  ],
+  "topic_aliases": [
+    "smart positioner diagnostic data chain",
+    "digital valve controller status event diagnostics",
+    "online monitoring offline valve signature test",
+    "static valve signature dynamic operating signature",
+    "as-left reference signature operating context",
+    "command actual travel deviation diagnostic",
+    "upstroke downstroke hysteresis signature",
+    "opening closing actuator pressure band",
+    "conditional pressure band friction proxy",
+    "supply regulator I/P relay health diagnosis",
+    "air consumption pneumatic leakage trend",
+    "travel feedback sensor drift noise dropout",
+    "cycle count accumulated travel direction reversal",
+    "stroke time response degradation trend",
+    "baseline residual percentage rate of change",
+    "alarm persistence deadband diagnostic confidence",
+    "multi evidence valve failure isolation",
+    "condition based predictive valve maintenance",
+    "detect verify diagnose repair as-left workflow",
+    "HART Fieldbus valve asset diagnostic integration",
+    "스마트 포지셔너 진단 데이터 체인",
+    "밸브 시그니처 기준선 행정 압력 추세",
+    "온라인 모니터링 오프라인 시그니처 시험",
+    "공기 소비 누설 센서 이상 진단",
+    "상태기반 예지보전 정비 의사결정"
+  ],
+  "expected_structure": [
+    "Diagnostic architecture and data",
+    "Signature mode and comparable baseline",
+    "Travel pressure and friction features",
+    "Pneumatic and sensor health",
+    "Usage response and resistance trends",
+    "Alarm confidence and failure isolation",
+    "Maintenance strategy and workflow",
+    "Integration risk boundaries and feedback"
+  ],
+  "high_score_features": [
+    "Diagnostic data chain, comparable baseline, signature feature, multi-evidence isolation와 closed-loop maintenance를 연결한다."
+  ],
+  "low_score_patterns": [
+    "Single alarm·feature를 root cause로 확정하거나 context·data quality·field verification을 생략한다."
+  ],
+  "field_connection_points": [
+    "Smart-positioner status, valve signature, HART·Fieldbus asset data, work order와 as-found·as-left verification"
+  ]
+}

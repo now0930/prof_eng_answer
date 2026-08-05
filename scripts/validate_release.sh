@@ -258,3 +258,7 @@ python3 scripts/test_control_valve_balanced_unbalanced_trim_topic.py
 echo
 echo "===== control valve positioner IP booster accessories topic regression ====="
 python3 scripts/test_control_valve_positioner_ip_booster_accessories_topic.py
+
+echo
+echo "===== smart positioner diagnostics valve signature predictive maintenance topic regression ====="
+python3 scripts/test_control_valve_smart_positioner_diagnostics_topic.py

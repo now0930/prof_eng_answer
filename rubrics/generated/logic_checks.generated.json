@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-04T14:37:59Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-05T02:50:41Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -1404,6 +1404,19 @@
         "fatal_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 충돌하므로 현장 적용 주장을 강하게 신뢰하지 않는다.",
         "pass_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 직접 충돌하지 않으므로 현장 적용 주장을 이론적으로 신뢰할 수 있다."
       }
+    },
+    {
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "enabled": false,
+      "topic_name": "스마트 포지셔너 진단, 밸브 시그니처 및 예지보전",
+      "question_type": "DIAGNOSIS_ACTION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",

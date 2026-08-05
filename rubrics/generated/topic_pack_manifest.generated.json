@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-04T14:37:59Z-generated-topic-pack-manifest",
+  "version": "2026-08-05T02:50:41Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 34,
+  "topic_count": 35,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -268,6 +268,16 @@
     },
     {
       "topic_id": "second_order_system_resonance_frequency_response",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

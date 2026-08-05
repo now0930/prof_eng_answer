@@ -1,0 +1,1802 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+  "title_ko": "스마트 포지셔너 진단, 밸브 시그니처 및 예지보전",
+  "question_type_hint": "DIAGNOSIS_ACTION",
+  "anchors": [
+    {
+      "id": "smart_positioner_diagnostic_scope",
+      "anchor_id": "smart_positioner_diagnostic_scope",
+      "statement": "Smart positioner 진단은 device data, valve signature, operating context, failure isolation과 maintenance feedback을 통합한다.",
+      "importance": "core",
+      "keywords": [
+        "smart positioner diagnostics",
+        "valve signature",
+        "operating context",
+        "failure isolation",
+        "maintenance feedback"
+      ],
+      "core_terms": [
+        "smart positioner diagnostics",
+        "valve signature",
+        "operating context",
+        "failure isolation",
+        "maintenance feedback"
+      ],
+      "accepted_explanations": [
+        "Smart positioner 진단은 device data, valve signature, operating context, failure isolation과 maintenance feedback을 통합한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Smart positioner 진단은 device data, valve signature, operating context, failure isolation과 maintenance feedback을 통합한다.",
+      "description": "smart_positioner_diagnostic_scope 계약을 평가한다."
+    },
+    {
+      "id": "diagnostic_signal_data_chain",
+      "anchor_id": "diagnostic_signal_data_chain",
+      "statement": "Command, actual travel, supply pressure, actuator pressure, output signal과 device status를 하나의 diagnostic data chain으로 연결한다.",
+      "importance": "core",
+      "keywords": [
+        "command travel pressure status",
+        "diagnostic data chain",
+        "actual travel",
+        "actuator pressure",
+        "device status"
+      ],
+      "core_terms": [
+        "command travel pressure status",
+        "diagnostic data chain",
+        "actual travel",
+        "actuator pressure",
+        "device status"
+      ],
+      "accepted_explanations": [
+        "Command, actual travel, supply pressure, actuator pressure, output signal과 device status를 하나의 diagnostic data chain으로 연결한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Command, actual travel, supply pressure, actuator pressure, output signal과 device status를 하나의 diagnostic data chain으로 연결한다.",
+      "description": "diagnostic_signal_data_chain 계약을 평가한다."
+    },
+    {
+      "id": "online_monitoring_offline_test_boundary",
+      "anchor_id": "online_monitoring_offline_test_boundary",
+      "statement": "Online monitoring은 운전 중 trend를 관찰하고 offline diagnostic test는 계획된 stroke·signature 시험을 수행하므로 목적과 위험을 구분한다.",
+      "importance": "core",
+      "keywords": [
+        "online monitoring",
+        "offline diagnostic test",
+        "full stroke risk",
+        "planned excitation",
+        "operating trend"
+      ],
+      "core_terms": [
+        "online monitoring",
+        "offline diagnostic test",
+        "full stroke risk",
+        "planned excitation",
+        "operating trend"
+      ],
+      "accepted_explanations": [
+        "Online monitoring은 운전 중 trend를 관찰하고 offline diagnostic test는 계획된 stroke·signature 시험을 수행하므로 목적과 위험을 구분한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Online monitoring은 운전 중 trend를 관찰하고 offline diagnostic test는 계획된 stroke·signature 시험을 수행하므로 목적과 위험을 구분한다.",
+      "description": "online_monitoring_offline_test_boundary 계약을 평가한다."
+    },
+    {
+      "id": "static_dynamic_signature_boundary",
+      "anchor_id": "static_dynamic_signature_boundary",
+      "statement": "Static valve signature와 dynamic operating signature는 excitation, sampling, process condition과 해석 목적이 다르다.",
+      "importance": "core",
+      "keywords": [
+        "static valve signature",
+        "dynamic operating signature",
+        "quasi static",
+        "time response",
+        "test mode"
+      ],
+      "core_terms": [
+        "static valve signature",
+        "dynamic operating signature",
+        "quasi static",
+        "time response",
+        "test mode"
+      ],
+      "accepted_explanations": [
+        "Static valve signature와 dynamic operating signature는 excitation, sampling, process condition과 해석 목적이 다르다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Static valve signature와 dynamic operating signature는 excitation, sampling, process condition과 해석 목적이 다르다.",
+      "description": "static_dynamic_signature_boundary 계약을 평가한다."
+    },
+    {
+      "id": "device_status_event_configuration_history",
+      "anchor_id": "device_status_event_configuration_history",
+      "statement": "Device status, event log, alarm history와 configuration change history를 함께 검토한다.",
+      "importance": "core",
+      "keywords": [
+        "device status event configuration history",
+        "device_status_event_configuration_history",
+        "Device status, event log, alarm history와 configuration chang",
+        "Device",
+        "status"
+      ],
+      "core_terms": [
+        "device status event configuration history",
+        "device status event configuration history",
+        "Device status, event log, alarm history와 configuration chang",
+        "Device",
+        "status"
+      ],
+      "accepted_explanations": [
+        "Device status, event log, alarm history와 configuration change history를 함께 검토한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Device status, event log, alarm history와 configuration change history를 함께 검토한다.",
+      "description": "device_status_event_configuration_history 계약을 평가한다."
+    },
+    {
+      "id": "data_quality_time_sync_units",
+      "anchor_id": "data_quality_time_sync_units",
+      "statement": "Diagnostic data는 quality flag, timestamp synchronization, engineering unit와 sampling basis를 확인해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "data quality time sync units",
+        "data_quality_time_sync_units",
+        "Diagnostic data는 quality flag, timestamp synchronization, en",
+        "Diagnostic",
+        "data"
+      ],
+      "core_terms": [
+        "data quality time sync units",
+        "data quality time sync units",
+        "Diagnostic data는 quality flag, timestamp synchronization, en",
+        "Diagnostic",
+        "data"
+      ],
+      "accepted_explanations": [
+        "Diagnostic data는 quality flag, timestamp synchronization, engineering unit와 sampling basis를 확인해야 한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Diagnostic data는 quality flag, timestamp synchronization, engineering unit와 sampling basis를 확인해야 한다.",
+      "description": "data_quality_time_sync_units 계약을 평가한다."
+    },
+    {
+      "id": "vendor_variable_dictionary_verification",
+      "anchor_id": "vendor_variable_dictionary_verification",
+      "statement": "Available diagnostic variable, status code와 signature definition은 exact device manual과 vendor dictionary로 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "vendor variable dictionary verification",
+        "vendor_variable_dictionary_verification",
+        "Available diagnostic variable, status code와 signature defini",
+        "Available",
+        "diagnostic"
+      ],
+      "core_terms": [
+        "vendor variable dictionary verification",
+        "vendor variable dictionary verification",
+        "Available diagnostic variable, status code와 signature defini",
+        "Available",
+        "diagnostic"
+      ],
+      "accepted_explanations": [
+        "Available diagnostic variable, status code와 signature definition은 exact device manual과 vendor dictionary로 확인한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Available diagnostic variable, status code와 signature definition은 exact device manual과 vendor dictionary로 확인한다.",
+      "description": "vendor_variable_dictionary_verification 계약을 평가한다."
+    },
+    {
+      "id": "as_left_reference_signature",
+      "anchor_id": "as_left_reference_signature",
+      "statement": "Commissioning 또는 overhaul 후 정상 as-left 상태를 reference signature로 저장한다.",
+      "importance": "core",
+      "keywords": [
+        "as-left reference signature",
+        "commissioning baseline",
+        "overhaul baseline",
+        "normal signature",
+        "reference data"
+      ],
+      "core_terms": [
+        "as-left reference signature",
+        "commissioning baseline",
+        "overhaul baseline",
+        "normal signature",
+        "reference data"
+      ],
+      "accepted_explanations": [
+        "Commissioning 또는 overhaul 후 정상 as-left 상태를 reference signature로 저장한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Commissioning 또는 overhaul 후 정상 as-left 상태를 reference signature로 저장한다.",
+      "description": "as_left_reference_signature 계약을 평가한다."
+    },
+    {
+      "id": "comparable_context_baseline",
+      "anchor_id": "comparable_context_baseline",
+      "statement": "Baseline 비교는 동일 valve, stroke direction, supply pressure, process ΔP, temperature와 test mode에서 수행한다.",
+      "importance": "core",
+      "keywords": [
+        "comparable baseline",
+        "stroke direction",
+        "supply pressure",
+        "process delta p",
+        "temperature context"
+      ],
+      "core_terms": [
+        "comparable baseline",
+        "stroke direction",
+        "supply pressure",
+        "process delta p",
+        "temperature context"
+      ],
+      "accepted_explanations": [
+        "Baseline 비교는 동일 valve, stroke direction, supply pressure, process ΔP, temperature와 test mode에서 수행한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Baseline 비교는 동일 valve, stroke direction, supply pressure, process ΔP, temperature와 test mode에서 수행한다.",
+      "description": "comparable_context_baseline 계약을 평가한다."
+    },
+    {
+      "id": "command_travel_error_signed",
+      "anchor_id": "command_travel_error_signed",
+      "statement": "Signed travel error는 ex=xcmd-xmeas로 정의하고 sign convention을 일관되게 유지한다.",
+      "importance": "core",
+      "keywords": [
+        "signed travel error",
+        "xcmd xmeas",
+        "sign convention",
+        "command travel deviation",
+        "position error"
+      ],
+      "core_terms": [
+        "signed travel error",
+        "xcmd xmeas",
+        "sign convention",
+        "command travel deviation",
+        "position error"
+      ],
+      "accepted_explanations": [
+        "Signed travel error는 ex=xcmd-xmeas로 정의하고 sign convention을 일관되게 유지한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Signed travel error는 ex=xcmd-xmeas로 정의하고 sign convention을 일관되게 유지한다.",
+      "description": "command_travel_error_signed 계약을 평가한다."
+    },
+    {
+      "id": "full_span_travel_error",
+      "anchor_id": "full_span_travel_error",
+      "statement": "Full-span travel error는 EFS=100(xcmd-xmeas)/(xmax-xmin)이며 xmax>xmin domain을 갖는다.",
+      "importance": "core",
+      "keywords": [
+        "full span error",
+        "xmax xmin",
+        "normalized travel error",
+        "domain guard",
+        "travel span"
+      ],
+      "core_terms": [
+        "full span error",
+        "xmax xmin",
+        "normalized travel error",
+        "domain guard",
+        "travel span"
+      ],
+      "accepted_explanations": [
+        "Full-span travel error는 EFS=100(xcmd-xmeas)/(xmax-xmin)이며 xmax>xmin domain을 갖는다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Full-span travel error는 EFS=100(xcmd-xmeas)/(xmax-xmin)이며 xmax>xmin domain을 갖는다.",
+      "description": "full_span_travel_error 계약을 평가한다."
+    },
+    {
+      "id": "up_down_hysteresis_signature",
+      "anchor_id": "up_down_hysteresis_signature",
+      "statement": "동일 command와 comparable condition에서 H(u)=|xup(u)-xdown(u)|로 upstroke·downstroke hysteresis를 계산한다.",
+      "importance": "core",
+      "keywords": [
+        "upstroke downstroke hysteresis",
+        "same command",
+        "hysteresis signature",
+        "comparable condition",
+        "travel loop"
+      ],
+      "core_terms": [
+        "upstroke downstroke hysteresis",
+        "same command",
+        "hysteresis signature",
+        "comparable condition",
+        "travel loop"
+      ],
+      "accepted_explanations": [
+        "동일 command와 comparable condition에서 H(u)=|xup(u)-xdown(u)|로 upstroke·downstroke hysteresis를 계산한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "동일 command와 comparable condition에서 H(u)=|xup(u)-xdown(u)|로 upstroke·downstroke hysteresis를 계산한다.",
+      "description": "up_down_hysteresis_signature 계약을 평가한다."
+    },
+    {
+      "id": "actuator_pressure_open_close_band",
+      "anchor_id": "actuator_pressure_open_close_band",
+      "statement": "동일 position에서 opening·closing actuator pressure band를 ΔPsig(x)=|Popen(x)-Pclose(x)|로 비교할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "opening closing pressure band",
+        "actuator pressure signature",
+        "same position",
+        "pressure loop",
+        "pressure difference"
+      ],
+      "core_terms": [
+        "opening closing pressure band",
+        "actuator pressure signature",
+        "same position",
+        "pressure loop",
+        "pressure difference"
+      ],
+      "accepted_explanations": [
+        "동일 position에서 opening·closing actuator pressure band를 ΔPsig(x)=|Popen(x)-Pclose(x)|로 비교할 수 있다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "동일 position에서 opening·closing actuator pressure band를 ΔPsig(x)=|Popen(x)-Pclose(x)|로 비교할 수 있다.",
+      "description": "actuator_pressure_open_close_band 계약을 평가한다."
+    },
+    {
+      "id": "pressure_band_friction_proxy",
+      "anchor_id": "pressure_band_friction_proxy",
+      "statement": "Fproxy≈Aeff·ΔPsig/2는 effective area와 opposing force가 적절히 가정될 때 friction proxy로 사용할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "friction proxy",
+        "effective actuator area",
+        "pressure band",
+        "conditional model",
+        "process force assumption"
+      ],
+      "core_terms": [
+        "friction proxy",
+        "effective actuator area",
+        "pressure band",
+        "conditional model",
+        "process force assumption"
+      ],
+      "accepted_explanations": [
+        "Fproxy≈Aeff·ΔPsig/2는 effective area와 opposing force가 적절히 가정될 때 friction proxy로 사용할 수 있다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Fproxy≈Aeff·ΔPsig/2는 effective area와 opposing force가 적절히 가정될 때 friction proxy로 사용할 수 있다.",
+      "description": "pressure_band_friction_proxy 계약을 평가한다."
+    },
+    {
+      "id": "process_force_confounding",
+      "anchor_id": "process_force_confounding",
+      "statement": "Process ΔP, flow direction, fluid temperature와 unbalanced force는 pressure signature와 travel response의 confounding factor이다.",
+      "importance": "core",
+      "keywords": [
+        "process force confounding",
+        "unbalanced force",
+        "flow direction",
+        "process delta p",
+        "fluid temperature"
+      ],
+      "core_terms": [
+        "process force confounding",
+        "unbalanced force",
+        "flow direction",
+        "process delta p",
+        "fluid temperature"
+      ],
+      "accepted_explanations": [
+        "Process ΔP, flow direction, fluid temperature와 unbalanced force는 pressure signature와 travel response의 confounding factor이다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Process ΔP, flow direction, fluid temperature와 unbalanced force는 pressure signature와 travel response의 confounding factor이다.",
+      "description": "process_force_confounding 계약을 평가한다."
+    },
+    {
+      "id": "supply_pressure_regulator_droop",
+      "anchor_id": "supply_pressure_regulator_droop",
+      "statement": "Supply-pressure drop, regulator droop와 restriction은 actuator-pressure·stroke-time trend를 왜곡할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "supply pressure drop",
+        "regulator droop",
+        "restriction",
+        "stroke time distortion",
+        "actuator pressure"
+      ],
+      "core_terms": [
+        "supply pressure drop",
+        "regulator droop",
+        "restriction",
+        "stroke time distortion",
+        "actuator pressure"
+      ],
+      "accepted_explanations": [
+        "Supply-pressure drop, regulator droop와 restriction은 actuator-pressure·stroke-time trend를 왜곡할 수 있다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Supply-pressure drop, regulator droop와 restriction은 actuator-pressure·stroke-time trend를 왜곡할 수 있다.",
+      "description": "supply_pressure_regulator_droop 계약을 평가한다."
+    },
+    {
+      "id": "ip_zero_span_drift_trend",
+      "anchor_id": "ip_zero_span_drift_trend",
+      "statement": "I/P current-pressure response와 zero·span drift를 baseline과 비교하되 sensor·supply condition을 함께 확인한다.",
+      "importance": "important",
+      "keywords": [
+        "I/P drift trend",
+        "current pressure response",
+        "zero span drift",
+        "sensor condition",
+        "supply condition"
+      ],
+      "core_terms": [
+        "I/P drift trend",
+        "current pressure response",
+        "zero span drift",
+        "sensor condition",
+        "supply condition"
+      ],
+      "accepted_explanations": [
+        "I/P current-pressure response와 zero·span drift를 baseline과 비교하되 sensor·supply condition을 함께 확인한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "I/P current-pressure response와 zero·span drift를 baseline과 비교하되 sensor·supply condition을 함께 확인한다.",
+      "description": "ip_zero_span_drift_trend 계약을 평가한다."
+    },
+    {
+      "id": "relay_pilot_fill_vent_health",
+      "anchor_id": "relay_pilot_fill_vent_health",
+      "statement": "Relay, pilot stage와 fill·vent path 이상은 pressure response, asymmetry와 stroke-time trend로 진단한다.",
+      "importance": "important",
+      "keywords": [
+        "relay health",
+        "pilot stage",
+        "fill vent asymmetry",
+        "pressure response",
+        "stroke time"
+      ],
+      "core_terms": [
+        "relay health",
+        "pilot stage",
+        "fill vent asymmetry",
+        "pressure response",
+        "stroke time"
+      ],
+      "accepted_explanations": [
+        "Relay, pilot stage와 fill·vent path 이상은 pressure response, asymmetry와 stroke-time trend로 진단한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Relay, pilot stage와 fill·vent path 이상은 pressure response, asymmetry와 stroke-time trend로 진단한다.",
+      "description": "relay_pilot_fill_vent_health 계약을 평가한다."
+    },
+    {
+      "id": "pneumatic_air_consumption_leakage",
+      "anchor_id": "pneumatic_air_consumption_leakage",
+      "statement": "Air-consumption·pneumatic-leakage trend는 동일 supply와 command condition의 baseline 차이로 평가한다.",
+      "importance": "important",
+      "keywords": [
+        "air consumption trend",
+        "pneumatic leakage",
+        "supply condition",
+        "command condition",
+        "baseline delta"
+      ],
+      "core_terms": [
+        "air consumption trend",
+        "pneumatic leakage",
+        "supply condition",
+        "command condition",
+        "baseline delta"
+      ],
+      "accepted_explanations": [
+        "Air-consumption·pneumatic-leakage trend는 동일 supply와 command condition의 baseline 차이로 평가한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Air-consumption·pneumatic-leakage trend는 동일 supply와 command condition의 baseline 차이로 평가한다.",
+      "description": "pneumatic_air_consumption_leakage 계약을 평가한다."
+    },
+    {
+      "id": "feedback_sensor_drift_noise_dropout",
+      "anchor_id": "feedback_sensor_drift_noise_dropout",
+      "statement": "Travel-feedback sensor의 drift, noise, dropout와 calibration error를 mechanical friction과 구분한다.",
+      "importance": "important",
+      "keywords": [
+        "feedback sensor drift",
+        "sensor noise",
+        "dropout",
+        "calibration error",
+        "mechanical friction separation"
+      ],
+      "core_terms": [
+        "feedback sensor drift",
+        "sensor noise",
+        "dropout",
+        "calibration error",
+        "mechanical friction separation"
+      ],
+      "accepted_explanations": [
+        "Travel-feedback sensor의 drift, noise, dropout와 calibration error를 mechanical friction과 구분한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Travel-feedback sensor의 drift, noise, dropout와 calibration error를 mechanical friction과 구분한다.",
+      "description": "feedback_sensor_drift_noise_dropout 계약을 평가한다."
+    },
+    {
+      "id": "cycle_count_definition",
+      "anchor_id": "cycle_count_definition",
+      "statement": "Cycle count는 full·partial cycle, direction reversal과 counting rule을 명시해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "cycle count definition",
+        "full cycle",
+        "partial cycle",
+        "direction reversal",
+        "counting rule"
+      ],
+      "core_terms": [
+        "cycle count definition",
+        "full cycle",
+        "partial cycle",
+        "direction reversal",
+        "counting rule"
+      ],
+      "accepted_explanations": [
+        "Cycle count는 full·partial cycle, direction reversal과 counting rule을 명시해야 한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Cycle count는 full·partial cycle, direction reversal과 counting rule을 명시해야 한다.",
+      "description": "cycle_count_definition 계약을 평가한다."
+    },
+    {
+      "id": "accumulated_travel_direction_reversal",
+      "anchor_id": "accumulated_travel_direction_reversal",
+      "statement": "Accumulated travel은 TAT=Σ|xk-xk-1|로 계산할 수 있으며 sampling·normalization basis를 기록한다.",
+      "importance": "important",
+      "keywords": [
+        "accumulated travel",
+        "total absolute travel",
+        "direction reversal",
+        "sampling basis",
+        "normalization"
+      ],
+      "core_terms": [
+        "accumulated travel",
+        "total absolute travel",
+        "direction reversal",
+        "sampling basis",
+        "normalization"
+      ],
+      "accepted_explanations": [
+        "Accumulated travel은 TAT=Σ|xk-xk-1|로 계산할 수 있으며 sampling·normalization basis를 기록한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Accumulated travel은 TAT=Σ|xk-xk-1|로 계산할 수 있으며 sampling·normalization basis를 기록한다.",
+      "description": "accumulated_travel_direction_reversal 계약을 평가한다."
+    },
+    {
+      "id": "stroke_time_response_trend",
+      "anchor_id": "stroke_time_response_trend",
+      "statement": "Stroke-time trend는 direction, command range, supply, process load와 exhaust path를 같은 조건에서 비교한다.",
+      "importance": "important",
+      "keywords": [
+        "stroke time trend",
+        "response time",
+        "direction specific",
+        "command range",
+        "process load"
+      ],
+      "core_terms": [
+        "stroke time trend",
+        "response time",
+        "direction specific",
+        "command range",
+        "process load"
+      ],
+      "accepted_explanations": [
+        "Stroke-time trend는 direction, command range, supply, process load와 exhaust path를 같은 조건에서 비교한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Stroke-time trend는 direction, command range, supply, process load와 exhaust path를 같은 조건에서 비교한다.",
+      "description": "stroke_time_response_trend 계약을 평가한다."
+    },
+    {
+      "id": "endpoint_seat_contact_mechanical_stop",
+      "anchor_id": "endpoint_seat_contact_mechanical_stop",
+      "statement": "Seat contact, endpoint, overtravel와 mechanical stop 변화는 signature의 끝점 형상과 pressure response에 나타날 수 있다.",
+      "importance": "important",
+      "keywords": [
+        "endpoint signature",
+        "seat contact",
+        "mechanical stop",
+        "overtravel",
+        "pressure response"
+      ],
+      "core_terms": [
+        "endpoint signature",
+        "seat contact",
+        "mechanical stop",
+        "overtravel",
+        "pressure response"
+      ],
+      "accepted_explanations": [
+        "Seat contact, endpoint, overtravel와 mechanical stop 변화는 signature의 끝점 형상과 pressure response에 나타날 수 있다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Seat contact, endpoint, overtravel와 mechanical stop 변화는 signature의 끝점 형상과 pressure response에 나타날 수 있다.",
+      "description": "endpoint_seat_contact_mechanical_stop 계약을 평가한다."
+    },
+    {
+      "id": "packing_stem_shaft_resistance_trend",
+      "anchor_id": "packing_stem_shaft_resistance_trend",
+      "statement": "Packing, stem·shaft와 bearing resistance 변화는 hysteresis·pressure band·travel response를 함께 사용해 평가한다.",
+      "importance": "important",
+      "keywords": [
+        "packing friction trend",
+        "stem shaft resistance",
+        "bearing resistance",
+        "hysteresis",
+        "pressure band"
+      ],
+      "core_terms": [
+        "packing friction trend",
+        "stem shaft resistance",
+        "bearing resistance",
+        "hysteresis",
+        "pressure band"
+      ],
+      "accepted_explanations": [
+        "Packing, stem·shaft와 bearing resistance 변화는 hysteresis·pressure band·travel response를 함께 사용해 평가한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Packing, stem·shaft와 bearing resistance 변화는 hysteresis·pressure band·travel response를 함께 사용해 평가한다.",
+      "description": "packing_stem_shaft_resistance_trend 계약을 평가한다."
+    },
+    {
+      "id": "trim_balance_seal_friction_handoff",
+      "anchor_id": "trim_balance_seal_friction_handoff",
+      "statement": "Trim·balance-seal friction이 signature에 영향을 줄 수 있으나 구조와 물리 원인은 Topic 10 경계를 따른다.",
+      "importance": "important",
+      "keywords": [
+        "trim friction handoff",
+        "balance seal friction",
+        "Topic 10",
+        "structural cause",
+        "signature effect"
+      ],
+      "core_terms": [
+        "trim friction handoff",
+        "balance seal friction",
+        "Topic 10",
+        "structural cause",
+        "signature effect"
+      ],
+      "accepted_explanations": [
+        "Trim·balance-seal friction이 signature에 영향을 줄 수 있으나 구조와 물리 원인은 Topic 10 경계를 따른다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Trim·balance-seal friction이 signature에 영향을 줄 수 있으나 구조와 물리 원인은 Topic 10 경계를 따른다.",
+      "description": "trim_balance_seal_friction_handoff 계약을 평가한다."
+    },
+    {
+      "id": "baseline_residual_context",
+      "anchor_id": "baseline_residual_context",
+      "statement": "Context-conditioned baseline residual은 rz=zcurrent-zbaseline(context)로 정의한다.",
+      "importance": "important",
+      "keywords": [
+        "context baseline residual",
+        "current baseline difference",
+        "operating context",
+        "signed residual",
+        "reference feature"
+      ],
+      "core_terms": [
+        "context baseline residual",
+        "current baseline difference",
+        "operating context",
+        "signed residual",
+        "reference feature"
+      ],
+      "accepted_explanations": [
+        "Context-conditioned baseline residual은 rz=zcurrent-zbaseline(context)로 정의한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Context-conditioned baseline residual은 rz=zcurrent-zbaseline(context)로 정의한다.",
+      "description": "baseline_residual_context 계약을 평가한다."
+    },
+    {
+      "id": "percent_change_domain",
+      "anchor_id": "percent_change_domain",
+      "statement": "Percentage change는 100(zcurrent-zbaseline)/|zbaseline|이며 nonzero baseline에서만 사용한다.",
+      "importance": "important",
+      "keywords": [
+        "percentage change",
+        "nonzero baseline",
+        "relative trend",
+        "domain guard",
+        "baseline magnitude"
+      ],
+      "core_terms": [
+        "percentage change",
+        "nonzero baseline",
+        "relative trend",
+        "domain guard",
+        "baseline magnitude"
+      ],
+      "accepted_explanations": [
+        "Percentage change는 100(zcurrent-zbaseline)/|zbaseline|이며 nonzero baseline에서만 사용한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Percentage change는 100(zcurrent-zbaseline)/|zbaseline|이며 nonzero baseline에서만 사용한다.",
+      "description": "percent_change_domain 계약을 평가한다."
+    },
+    {
+      "id": "rate_of_change_time_domain",
+      "anchor_id": "rate_of_change_time_domain",
+      "statement": "Rate of change는 (z2-z1)/(t2-t1)이며 t2>t1 domain과 consistent sampling window를 사용한다.",
+      "importance": "important",
+      "keywords": [
+        "rate of change",
+        "time ordered trend",
+        "t2 greater t1",
+        "sampling window",
+        "degradation slope"
+      ],
+      "core_terms": [
+        "rate of change",
+        "time ordered trend",
+        "t2 greater t1",
+        "sampling window",
+        "degradation slope"
+      ],
+      "accepted_explanations": [
+        "Rate of change는 (z2-z1)/(t2-t1)이며 t2>t1 domain과 consistent sampling window를 사용한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Rate of change는 (z2-z1)/(t2-t1)이며 t2>t1 domain과 consistent sampling window를 사용한다.",
+      "description": "rate_of_change_time_domain 계약을 평가한다."
+    },
+    {
+      "id": "threshold_persistence_deadband",
+      "anchor_id": "threshold_persistence_deadband",
+      "statement": "Warning·alarm은 threshold뿐 아니라 persistence, reset logic와 alarm deadband를 함께 정의한다.",
+      "importance": "core",
+      "keywords": [
+        "alarm threshold persistence",
+        "reset logic",
+        "alarm deadband",
+        "nuisance alarm",
+        "time persistence"
+      ],
+      "core_terms": [
+        "alarm threshold persistence",
+        "reset logic",
+        "alarm deadband",
+        "nuisance alarm",
+        "time persistence"
+      ],
+      "accepted_explanations": [
+        "Warning·alarm은 threshold뿐 아니라 persistence, reset logic와 alarm deadband를 함께 정의한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Warning·alarm은 threshold뿐 아니라 persistence, reset logic와 alarm deadband를 함께 정의한다.",
+      "description": "threshold_persistence_deadband 계약을 평가한다."
+    },
+    {
+      "id": "multi_evidence_failure_isolation",
+      "anchor_id": "multi_evidence_failure_isolation",
+      "statement": "Root-cause isolation은 travel, pressure, supply, air usage, timing, status와 process context의 multi-evidence를 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "multi evidence isolation",
+        "travel pressure supply",
+        "air usage timing",
+        "device status",
+        "root cause candidate"
+      ],
+      "core_terms": [
+        "multi evidence isolation",
+        "travel pressure supply",
+        "air usage timing",
+        "device status",
+        "root cause candidate"
+      ],
+      "accepted_explanations": [
+        "Root-cause isolation은 travel, pressure, supply, air usage, timing, status와 process context의 multi-evidence를 사용한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Root-cause isolation은 travel, pressure, supply, air usage, timing, status와 process context의 multi-evidence를 사용한다.",
+      "description": "multi_evidence_failure_isolation 계약을 평가한다."
+    },
+    {
+      "id": "diagnostic_confidence_data_quality",
+      "anchor_id": "diagnostic_confidence_data_quality",
+      "statement": "Diagnostic result에는 confidence, data-quality flag와 missing·invalid data 처리를 포함한다.",
+      "importance": "core",
+      "keywords": [
+        "diagnostic confidence",
+        "data quality flag",
+        "missing data",
+        "invalid data",
+        "uncertainty"
+      ],
+      "core_terms": [
+        "diagnostic confidence",
+        "data quality flag",
+        "missing data",
+        "invalid data",
+        "uncertainty"
+      ],
+      "accepted_explanations": [
+        "Diagnostic result에는 confidence, data-quality flag와 missing·invalid data 처리를 포함한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Diagnostic result에는 confidence, data-quality flag와 missing·invalid data 처리를 포함한다.",
+      "description": "diagnostic_confidence_data_quality 계약을 평가한다."
+    },
+    {
+      "id": "false_positive_negative_context",
+      "anchor_id": "false_positive_negative_context",
+      "statement": "False positive와 false negative를 줄이기 위해 operating context와 maintenance confirmation을 사용한다.",
+      "importance": "important",
+      "keywords": [
+        "false positive",
+        "false negative",
+        "operating context validation",
+        "maintenance confirmation",
+        "diagnostic error"
+      ],
+      "core_terms": [
+        "false positive",
+        "false negative",
+        "operating context validation",
+        "maintenance confirmation",
+        "diagnostic error"
+      ],
+      "accepted_explanations": [
+        "False positive와 false negative를 줄이기 위해 operating context와 maintenance confirmation을 사용한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "False positive와 false negative를 줄이기 위해 operating context와 maintenance confirmation을 사용한다.",
+      "description": "false_positive_negative_context 계약을 평가한다."
+    },
+    {
+      "id": "detection_confirmation_boundary",
+      "anchor_id": "detection_confirmation_boundary",
+      "statement": "Anomaly detection은 이상 징후를 찾는 단계이고 physical inspection과 test는 root cause를 확인하는 단계이다.",
+      "importance": "important",
+      "keywords": [
+        "anomaly detection",
+        "root cause confirmation",
+        "physical inspection",
+        "functional test",
+        "evidence boundary"
+      ],
+      "core_terms": [
+        "anomaly detection",
+        "root cause confirmation",
+        "physical inspection",
+        "functional test",
+        "evidence boundary"
+      ],
+      "accepted_explanations": [
+        "Anomaly detection은 이상 징후를 찾는 단계이고 physical inspection과 test는 root cause를 확인하는 단계이다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Anomaly detection은 이상 징후를 찾는 단계이고 physical inspection과 test는 root cause를 확인하는 단계이다.",
+      "description": "detection_confirmation_boundary 계약을 평가한다."
+    },
+    {
+      "id": "detect_verify_diagnose_priority_workflow",
+      "anchor_id": "detect_verify_diagnose_priority_workflow",
+      "statement": "Maintenance workflow는 detect→verify→diagnose→prioritize→plan→repair→as-left 순서로 구성한다.",
+      "importance": "core",
+      "keywords": [
+        "detect verify diagnose",
+        "maintenance priority",
+        "repair workflow",
+        "as-left verification",
+        "closed loop"
+      ],
+      "core_terms": [
+        "detect verify diagnose",
+        "maintenance priority",
+        "repair workflow",
+        "as-left verification",
+        "closed loop"
+      ],
+      "accepted_explanations": [
+        "Maintenance workflow는 detect→verify→diagnose→prioritize→plan→repair→as-left 순서로 구성한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Maintenance workflow는 detect→verify→diagnose→prioritize→plan→repair→as-left 순서로 구성한다.",
+      "description": "detect_verify_diagnose_priority_workflow 계약을 평가한다."
+    },
+    {
+      "id": "time_condition_predictive_maintenance_compare",
+      "anchor_id": "time_condition_predictive_maintenance_compare",
+      "statement": "Time-based, condition-based와 predictive maintenance를 trigger, data requirement, cost와 risk 측면에서 비교한다.",
+      "importance": "important",
+      "keywords": [
+        "time based maintenance",
+        "condition based maintenance",
+        "predictive maintenance",
+        "trigger comparison",
+        "cost risk"
+      ],
+      "core_terms": [
+        "time based maintenance",
+        "condition based maintenance",
+        "predictive maintenance",
+        "trigger comparison",
+        "cost risk"
+      ],
+      "accepted_explanations": [
+        "Time-based, condition-based와 predictive maintenance를 trigger, data requirement, cost와 risk 측면에서 비교한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Time-based, condition-based와 predictive maintenance를 trigger, data requirement, cost와 risk 측면에서 비교한다.",
+      "description": "time_condition_predictive_maintenance_compare 계약을 평가한다."
+    },
+    {
+      "id": "degradation_trend_lead_time",
+      "anchor_id": "degradation_trend_lead_time",
+      "statement": "Predictive maintenance는 degradation trend와 actionable lead time을 제시하지만 exact failure date를 보장하지 않는다.",
+      "importance": "important",
+      "keywords": [
+        "degradation trend",
+        "actionable lead time",
+        "failure prediction",
+        "RUL uncertainty",
+        "maintenance planning"
+      ],
+      "core_terms": [
+        "degradation trend",
+        "actionable lead time",
+        "failure prediction",
+        "RUL uncertainty",
+        "maintenance planning"
+      ],
+      "accepted_explanations": [
+        "Predictive maintenance는 degradation trend와 actionable lead time을 제시하지만 exact failure date를 보장하지 않는다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Predictive maintenance는 degradation trend와 actionable lead time을 제시하지만 exact failure date를 보장하지 않는다.",
+      "description": "degradation_trend_lead_time 계약을 평가한다."
+    },
+    {
+      "id": "maintenance_priority_consequence",
+      "anchor_id": "maintenance_priority_consequence",
+      "statement": "Maintenance priority는 diagnostic severity와 production, safety, quality, environmental consequence를 결합한다.",
+      "importance": "important",
+      "keywords": [
+        "maintenance priority",
+        "production consequence",
+        "safety consequence",
+        "quality consequence",
+        "environmental consequence"
+      ],
+      "core_terms": [
+        "maintenance priority",
+        "production consequence",
+        "safety consequence",
+        "quality consequence",
+        "environmental consequence"
+      ],
+      "accepted_explanations": [
+        "Maintenance priority는 diagnostic severity와 production, safety, quality, environmental consequence를 결합한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Maintenance priority는 diagnostic severity와 production, safety, quality, environmental consequence를 결합한다.",
+      "description": "maintenance_priority_consequence 계약을 평가한다."
+    },
+    {
+      "id": "hart_fieldbus_asset_integration",
+      "anchor_id": "hart_fieldbus_asset_integration",
+      "statement": "HART·Fieldbus·asset-management integration에서는 update rate, communication quality와 configuration governance를 확인한다.",
+      "importance": "important",
+      "keywords": [
+        "HART Fieldbus integration",
+        "asset management",
+        "update rate",
+        "communication quality",
+        "configuration governance"
+      ],
+      "core_terms": [
+        "HART Fieldbus integration",
+        "asset management",
+        "update rate",
+        "communication quality",
+        "configuration governance"
+      ],
+      "accepted_explanations": [
+        "HART·Fieldbus·asset-management integration에서는 update rate, communication quality와 configuration governance를 확인한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "HART·Fieldbus·asset-management integration에서는 update rate, communication quality와 configuration governance를 확인한다.",
+      "description": "hart_fieldbus_asset_integration 계약을 평가한다."
+    },
+    {
+      "id": "offline_test_process_risk",
+      "anchor_id": "offline_test_process_risk",
+      "statement": "Offline signature test는 process interruption, full-stroke risk, mechanical limit와 safety authorization을 검토한다.",
+      "importance": "important",
+      "keywords": [
+        "offline signature risk",
+        "process interruption",
+        "full stroke risk",
+        "mechanical limit",
+        "safety authorization"
+      ],
+      "core_terms": [
+        "offline signature risk",
+        "process interruption",
+        "full stroke risk",
+        "mechanical limit",
+        "safety authorization"
+      ],
+      "accepted_explanations": [
+        "Offline signature test는 process interruption, full-stroke risk, mechanical limit와 safety authorization을 검토한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Offline signature test는 process interruption, full-stroke risk, mechanical limit와 safety authorization을 검토한다.",
+      "description": "offline_test_process_risk 계약을 평가한다."
+    },
+    {
+      "id": "as_found_as_left_work_order_feedback",
+      "anchor_id": "as_found_as_left_work_order_feedback",
+      "statement": "Repair 전 as-found와 repair 후 as-left signature를 work-order result와 연결해 diagnostic rule을 검증한다.",
+      "importance": "core",
+      "keywords": [
+        "as-found as-left",
+        "work order feedback",
+        "repair verification",
+        "diagnostic rule validation",
+        "traceability"
+      ],
+      "core_terms": [
+        "as-found as-left",
+        "work order feedback",
+        "repair verification",
+        "diagnostic rule validation",
+        "traceability"
+      ],
+      "accepted_explanations": [
+        "Repair 전 as-found와 repair 후 as-left signature를 work-order result와 연결해 diagnostic rule을 검증한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Repair 전 as-found와 repair 후 as-left signature를 work-order result와 연결해 diagnostic rule을 검증한다.",
+      "description": "as_found_as_left_work_order_feedback 계약을 평가한다."
+    },
+    {
+      "id": "topic1_topic3_topic11_boundary",
+      "anchor_id": "topic1_topic3_topic11_boundary",
+      "statement": "Physical force·friction sizing은 Topic 1, deadband·stiction 시험과 tuning은 Topic 3, positioner·I/P·accessory 원리와 calibration은 Topic 11이 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "Topic 1 Topic 3 Topic 11",
+        "force friction sizing",
+        "dynamic test tuning",
+        "positioner calibration",
+        "ownership boundary"
+      ],
+      "core_terms": [
+        "Topic 1 Topic 3 Topic 11",
+        "force friction sizing",
+        "dynamic test tuning",
+        "positioner calibration",
+        "ownership boundary"
+      ],
+      "accepted_explanations": [
+        "Physical force·friction sizing은 Topic 1, deadband·stiction 시험과 tuning은 Topic 3, positioner·I/P·accessory 원리와 calibration은 Topic 11이 소유한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Physical force·friction sizing은 Topic 1, deadband·stiction 시험과 tuning은 Topic 3, positioner·I/P·accessory 원리와 calibration은 Topic 11이 소유한다.",
+      "description": "topic1_topic3_topic11_boundary 계약을 평가한다."
+    },
+    {
+      "id": "topic13_topic15_topic16_boundary",
+      "anchor_id": "topic13_topic15_topic16_boundary",
+      "statement": "Seat leakage·packing emissions는 Topic 13, SIS·ESD·PST는 Topic 15, full package lifecycle은 Topic 16이 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "Topic 13 Topic 15 Topic 16",
+        "seat leakage packing",
+        "SIS ESD PST",
+        "valve lifecycle",
+        "ownership boundary"
+      ],
+      "core_terms": [
+        "Topic 13 Topic 15 Topic 16",
+        "seat leakage packing",
+        "SIS ESD PST",
+        "valve lifecycle",
+        "ownership boundary"
+      ],
+      "accepted_explanations": [
+        "Seat leakage·packing emissions는 Topic 13, SIS·ESD·PST는 Topic 15, full package lifecycle은 Topic 16이 소유한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Seat leakage·packing emissions는 Topic 13, SIS·ESD·PST는 Topic 15, full package lifecycle은 Topic 16이 소유한다.",
+      "description": "topic13_topic15_topic16_boundary 계약을 평가한다."
+    },
+    {
+      "id": "final_closed_loop_diagnostic_verification",
+      "anchor_id": "final_closed_loop_diagnostic_verification",
+      "statement": "Final verification은 baseline, trend, alarm, physical inspection, repair와 as-left result를 closed-loop로 교차 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "final diagnostic verification",
+        "baseline trend alarm",
+        "physical inspection",
+        "repair as-left",
+        "closed loop crosscheck"
+      ],
+      "core_terms": [
+        "final diagnostic verification",
+        "baseline trend alarm",
+        "physical inspection",
+        "repair as-left",
+        "closed loop crosscheck"
+      ],
+      "accepted_explanations": [
+        "Final verification은 baseline, trend, alarm, physical inspection, repair와 as-left result를 closed-loop로 교차 확인한다.",
+        "Diagnostic data chain→comparable as-left baseline→signature feature→context correction→multi-evidence isolation→maintenance priority→repair→as-left verification의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Single alarm이나 단일 signature feature만으로 root cause·leakage·failure date를 확정하고 operating context, data quality와 field verification을 생략한다."
+      ],
+      "grading_notes": "Online·offline, static·dynamic, baseline comparability, travel·pressure·air·time trend, confidence, false alarm, maintenance workflow와 Topic 경계를 논리적으로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/smart_positioner_diagnostics_valve_signature_predictive_maintenance.md; Control Valve Handbook smart positioner, digital valve controller, diagnostic data, valve signature and maintenance sections; Control Valve Primer valve-positioner diagnostics and field-maintenance sections; Topic 1 actuator-force/friction, Topic 3 deadband-stiction-response, Topic 10 trim-seal friction and Topic 11 positioner-I/P-accessory-calibration source packs; Topic 13 leakage-packing, Topic 15 SIS-ESD-PST and Topic 16 lifecycle boundaries; gemini_script/20260805_topic12_smart_positioner_diagnostics_requirements.md.",
+      "claim": "Final verification은 baseline, trend, alarm, physical inspection, repair와 as-left result를 closed-loop로 교차 확인한다.",
+      "description": "final_closed_loop_diagnostic_verification 계약을 평가한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "smart_diagnostic_guarantees_root_cause",
+      "claim": "Smart-positioner alarm 하나만으로 physical root cause가 확정된다는 주장은 오답이다.",
+      "wrong_claim": "Smart-positioner alarm 하나만으로 physical root cause가 확정된다는 주장은 오답이다.",
+      "correction": "Smart-positioner alarm은 root-cause 후보이며 physical inspection과 functional test로 확인한다.",
+      "correct_rule": "Smart-positioner alarm은 root-cause 후보이며 physical inspection과 functional test로 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Smart-positioner alarm 하나만으로 physical root cause가 확정된다는 주장은 오답이다.",
+      "description": "Smart-positioner alarm은 root-cause 후보이며 physical inspection과 functional test로 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "valve_signature_alone_proves_seat_leakage",
+      "claim": "Valve signature 변화만으로 seat leakage를 확정할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Valve signature 변화만으로 seat leakage를 확정할 수 있다는 주장은 오답이다.",
+      "correction": "Valve signature 변화는 anomaly evidence이며 seat leakage는 Topic 13의 shutoff test와 inspection으로 확인한다.",
+      "correct_rule": "Valve signature 변화는 anomaly evidence이며 seat leakage는 Topic 13의 shutoff test와 inspection으로 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Valve signature 변화만으로 seat leakage를 확정할 수 있다는 주장은 오답이다.",
+      "description": "Valve signature 변화는 anomaly evidence이며 seat leakage는 Topic 13의 shutoff test와 inspection으로 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "static_dynamic_signature_identical",
+      "claim": "Static signature와 dynamic operating signature는 같은 조건과 의미라는 주장은 오답이다.",
+      "wrong_claim": "Static signature와 dynamic operating signature는 같은 조건과 의미라는 주장은 오답이다.",
+      "correction": "Static signature와 dynamic operating signature는 excitation, sampling, process condition과 목적이 다르다.",
+      "correct_rule": "Static signature와 dynamic operating signature는 excitation, sampling, process condition과 목적이 다르다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Static signature와 dynamic operating signature는 같은 조건과 의미라는 주장은 오답이다.",
+      "description": "Static signature와 dynamic operating signature는 excitation, sampling, process condition과 목적이 다르다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "baseline_context_irrelevant",
+      "claim": "Supply·process ΔP·temperature·direction과 무관하게 모든 baseline을 직접 비교할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Supply·process ΔP·temperature·direction과 무관하게 모든 baseline을 직접 비교할 수 있다는 주장은 오답이다.",
+      "correction": "Baseline은 동일 valve, direction, supply, process ΔP, temperature와 test mode에서 비교한다.",
+      "correct_rule": "Baseline은 동일 valve, direction, supply, process ΔP, temperature와 test mode에서 비교한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Supply·process ΔP·temperature·direction과 무관하게 모든 baseline을 직접 비교할 수 있다는 주장은 오답이다.",
+      "description": "Baseline은 동일 valve, direction, supply, process ΔP, temperature와 test mode에서 비교한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "travel_error_sign_can_change",
+      "claim": "Travel-error sign convention을 분석마다 임의로 바꾸어도 된다는 주장은 오답이다.",
+      "wrong_claim": "Travel-error sign convention을 분석마다 임의로 바꾸어도 된다는 주장은 오답이다.",
+      "correction": "Travel error는 ex=xcmd-xmeas 같은 sign convention을 고정한다.",
+      "correct_rule": "Travel error는 ex=xcmd-xmeas 같은 sign convention을 고정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Travel-error sign convention을 분석마다 임의로 바꾸어도 된다는 주장은 오답이다.",
+      "description": "Travel error는 ex=xcmd-xmeas 같은 sign convention을 고정한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "ip_drift_is_only_zero_span",
+      "claim": "I/P current-pressure drift는 zero·span 조정 문제만으로 항상 설명된다는 주장은 오답이다.",
+      "wrong_claim": "I/P current-pressure drift는 zero·span 조정 문제만으로 항상 설명된다는 주장은 오답이다.",
+      "correction": "I/P drift는 current-pressure response, supply, sensor, relay와 zero·span을 함께 확인한다.",
+      "correct_rule": "I/P drift는 current-pressure response, supply, sensor, relay와 zero·span을 함께 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: I/P current-pressure drift는 zero·span 조정 문제만으로 항상 설명된다는 주장은 오답이다.",
+      "description": "I/P drift는 current-pressure response, supply, sensor, relay와 zero·span을 함께 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "pressure_band_equals_friction_universally",
+      "claim": "Opening·closing pressure band 전체가 조건 없이 friction force와 같다는 주장은 오답이다.",
+      "wrong_claim": "Opening·closing pressure band 전체가 조건 없이 friction force와 같다는 주장은 오답이다.",
+      "correction": "Pressure band는 effective area와 process-force 가정이 성립할 때만 friction proxy로 해석한다.",
+      "correct_rule": "Pressure band는 effective area와 process-force 가정이 성립할 때만 friction proxy로 해석한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Opening·closing pressure band 전체가 조건 없이 friction force와 같다는 주장은 오답이다.",
+      "description": "Pressure band는 effective area와 process-force 가정이 성립할 때만 friction proxy로 해석한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "pressure_signature_ignores_process_force",
+      "claim": "Pressure signature는 process ΔP와 unbalanced force의 영향을 받지 않는다는 주장은 오답이다.",
+      "wrong_claim": "Pressure signature는 process ΔP와 unbalanced force의 영향을 받지 않는다는 주장은 오답이다.",
+      "correction": "Pressure signature는 process ΔP, unbalanced force, spring force와 temperature의 영향을 받을 수 있다.",
+      "correct_rule": "Pressure signature는 process ΔP, unbalanced force, spring force와 temperature의 영향을 받을 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Pressure signature는 process ΔP와 unbalanced force의 영향을 받지 않는다는 주장은 오답이다.",
+      "description": "Pressure signature는 process ΔP, unbalanced force, spring force와 temperature의 영향을 받을 수 있다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "air_consumption_alone_proves_leakage",
+      "claim": "Air-consumption 증가만으로 pneumatic leakage 위치와 원인이 확정된다는 주장은 오답이다.",
+      "wrong_claim": "Air-consumption 증가만으로 pneumatic leakage 위치와 원인이 확정된다는 주장은 오답이다.",
+      "correction": "Air-consumption 증가는 leakage 후보이며 supply condition, duty와 internal model을 교차 확인한다.",
+      "correct_rule": "Air-consumption 증가는 leakage 후보이며 supply condition, duty와 internal model을 교차 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Air-consumption 증가만으로 pneumatic leakage 위치와 원인이 확정된다는 주장은 오답이다.",
+      "description": "Air-consumption 증가는 leakage 후보이며 supply condition, duty와 internal model을 교차 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "stroke_time_alone_proves_stiction",
+      "claim": "Stroke-time 증가만으로 stiction이 확정된다는 주장은 오답이다.",
+      "wrong_claim": "Stroke-time 증가만으로 stiction이 확정된다는 주장은 오답이다.",
+      "correction": "Stroke-time 증가는 supply, tubing, relay, load와 friction을 함께 진단한다.",
+      "correct_rule": "Stroke-time 증가는 supply, tubing, relay, load와 friction을 함께 진단한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Stroke-time 증가만으로 stiction이 확정된다는 주장은 오답이다.",
+      "description": "Stroke-time 증가는 supply, tubing, relay, load와 friction을 함께 진단한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "cycle_count_universal_definition",
+      "claim": "모든 제조사와 시스템에서 cycle count 정의가 동일하다는 주장은 오답이다.",
+      "wrong_claim": "모든 제조사와 시스템에서 cycle count 정의가 동일하다는 주장은 오답이다.",
+      "correction": "Cycle count는 manufacturer와 system의 full·partial cycle, reversal counting rule을 확인한다.",
+      "correct_rule": "Cycle count는 manufacturer와 system의 full·partial cycle, reversal counting rule을 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: 모든 제조사와 시스템에서 cycle count 정의가 동일하다는 주장은 오답이다.",
+      "description": "Cycle count는 manufacturer와 system의 full·partial cycle, reversal counting rule을 확인한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "accumulated_travel_without_sampling_basis",
+      "claim": "Sampling·normalization basis 없이 accumulated travel 값만 직접 비교할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Sampling·normalization basis 없이 accumulated travel 값만 직접 비교할 수 있다는 주장은 오답이다.",
+      "correction": "Accumulated travel은 sampling, normalization과 stroke basis를 함께 기록한다.",
+      "correct_rule": "Accumulated travel은 sampling, normalization과 stroke basis를 함께 기록한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Sampling·normalization basis 없이 accumulated travel 값만 직접 비교할 수 있다는 주장은 오답이다.",
+      "description": "Accumulated travel은 sampling, normalization과 stroke basis를 함께 기록한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "single_threshold_is_sufficient",
+      "claim": "단일 instantaneous threshold만으로 안정적인 alarm과 maintenance decision이 가능하다는 주장은 오답이다.",
+      "wrong_claim": "단일 instantaneous threshold만으로 안정적인 alarm과 maintenance decision이 가능하다는 주장은 오답이다.",
+      "correction": "Alarm은 threshold, persistence, reset logic, deadband와 multi-evidence를 함께 사용한다.",
+      "correct_rule": "Alarm은 threshold, persistence, reset logic, deadband와 multi-evidence를 함께 사용한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: 단일 instantaneous threshold만으로 안정적인 alarm과 maintenance decision이 가능하다는 주장은 오답이다.",
+      "description": "Alarm은 threshold, persistence, reset logic, deadband와 multi-evidence를 함께 사용한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "universal_health_index_weights",
+      "claim": "모든 valve에 동일한 health-index feature와 weight를 적용할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "모든 valve에 동일한 health-index feature와 weight를 적용할 수 있다는 주장은 오답이다.",
+      "correction": "Health index는 feature, normalization, weight와 threshold를 valve·service별로 공개하고 검증한다.",
+      "correct_rule": "Health index는 feature, normalization, weight와 threshold를 valve·service별로 공개하고 검증한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: 모든 valve에 동일한 health-index feature와 weight를 적용할 수 있다는 주장은 오답이다.",
+      "description": "Health index는 feature, normalization, weight와 threshold를 valve·service별로 공개하고 검증한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "alarm_requires_immediate_repair",
+      "claim": "모든 diagnostic alarm은 확인 절차 없이 즉시 repair를 요구한다는 주장은 오답이다.",
+      "wrong_claim": "모든 diagnostic alarm은 확인 절차 없이 즉시 repair를 요구한다는 주장은 오답이다.",
+      "correction": "Diagnostic alarm은 verify·diagnose·prioritize 단계를 거쳐 maintenance action을 결정한다.",
+      "correct_rule": "Diagnostic alarm은 verify·diagnose·prioritize 단계를 거쳐 maintenance action을 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: 모든 diagnostic alarm은 확인 절차 없이 즉시 repair를 요구한다는 주장은 오답이다.",
+      "description": "Diagnostic alarm은 verify·diagnose·prioritize 단계를 거쳐 maintenance action을 결정한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "data_quality_flag_unnecessary",
+      "claim": "Missing·bad-quality data도 정상 데이터와 동일하게 진단에 사용할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Missing·bad-quality data도 정상 데이터와 동일하게 진단에 사용할 수 있다는 주장은 오답이다.",
+      "correction": "Missing·bad-quality data는 quality status에 따라 제외·보정·보류한다.",
+      "correct_rule": "Missing·bad-quality data는 quality status에 따라 제외·보정·보류한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Missing·bad-quality data도 정상 데이터와 동일하게 진단에 사용할 수 있다는 주장은 오답이다.",
+      "description": "Missing·bad-quality data는 quality status에 따라 제외·보정·보류한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "offline_signature_always_safe",
+      "claim": "Offline full-stroke signature test는 process와 safety 검토 없이 항상 안전하다는 주장은 오답이다.",
+      "wrong_claim": "Offline full-stroke signature test는 process와 safety 검토 없이 항상 안전하다는 주장은 오답이다.",
+      "correction": "Offline signature test는 process interruption, full-stroke risk, mechanical limit와 safety authorization을 검토한다.",
+      "correct_rule": "Offline signature test는 process interruption, full-stroke risk, mechanical limit와 safety authorization을 검토한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Offline full-stroke signature test는 process와 safety 검토 없이 항상 안전하다는 주장은 오답이다.",
+      "description": "Offline signature test는 process interruption, full-stroke risk, mechanical limit와 safety authorization을 검토한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "predictive_maintenance_exact_failure_date",
+      "claim": "Predictive maintenance가 exact failure date와 RUL을 항상 보장한다는 주장은 오답이다.",
+      "wrong_claim": "Predictive maintenance가 exact failure date와 RUL을 항상 보장한다는 주장은 오답이다.",
+      "correction": "Predictive maintenance는 degradation trend와 lead time을 제공하며 exact failure date를 보장하지 않는다.",
+      "correct_rule": "Predictive maintenance는 degradation trend와 lead time을 제공하며 exact failure date를 보장하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Predictive maintenance가 exact failure date와 RUL을 항상 보장한다는 주장은 오답이다.",
+      "description": "Predictive maintenance는 degradation trend와 lead time을 제공하며 exact failure date를 보장하지 않는다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "correlation_proves_causation",
+      "claim": "Feature correlation만으로 failure mechanism의 causation이 증명된다는 주장은 오답이다.",
+      "wrong_claim": "Feature correlation만으로 failure mechanism의 causation이 증명된다는 주장은 오답이다.",
+      "correction": "Feature correlation은 hypothesis이며 physical mechanism과 maintenance result로 causation을 검증한다.",
+      "correct_rule": "Feature correlation은 hypothesis이며 physical mechanism과 maintenance result로 causation을 검증한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Feature correlation만으로 failure mechanism의 causation이 증명된다는 주장은 오답이다.",
+      "description": "Feature correlation은 hypothesis이며 physical mechanism과 maintenance result로 causation을 검증한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "pst_data_automatic_proof_test_credit",
+      "claim": "Smart-positioner 또는 PST data가 자동으로 SIS proof-test credit를 제공한다는 주장은 오답이다.",
+      "wrong_claim": "Smart-positioner 또는 PST data가 자동으로 SIS proof-test credit를 제공한다는 주장은 오답이다.",
+      "correction": "PST·diagnostic data의 SIS proof-test credit는 Topic 15의 safety requirement와 validation에 따라 판단한다.",
+      "correct_rule": "PST·diagnostic data의 SIS proof-test credit는 Topic 15의 safety requirement와 validation에 따라 판단한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Smart-positioner 또는 PST data가 자동으로 SIS proof-test credit를 제공한다는 주장은 오답이다.",
+      "description": "PST·diagnostic data의 SIS proof-test credit는 Topic 15의 safety requirement와 validation에 따라 판단한다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "friction_source_uniquely_identifiable",
+      "claim": "하나의 pressure-band feature로 packing, stem, trim과 balance-seal friction을 항상 구분할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "하나의 pressure-band feature로 packing, stem, trim과 balance-seal friction을 항상 구분할 수 있다는 주장은 오답이다.",
+      "correction": "Packing, stem, trim과 balance-seal friction은 여러 feature와 inspection을 사용해 구분하며 단일 feature로 항상 식별되지 않는다.",
+      "correct_rule": "Packing, stem, trim과 balance-seal friction은 여러 feature와 inspection을 사용해 구분하며 단일 feature로 항상 식별되지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: 하나의 pressure-band feature로 packing, stem, trim과 balance-seal friction을 항상 구분할 수 있다는 주장은 오답이다.",
+      "description": "Packing, stem, trim과 balance-seal friction은 여러 feature와 inspection을 사용해 구분하며 단일 feature로 항상 식별되지 않는다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "smart_positioner_replaces_inspection",
+      "claim": "Smart-positioner diagnostics가 physical inspection과 functional test를 완전히 대체한다는 주장은 오답이다.",
+      "wrong_claim": "Smart-positioner diagnostics가 physical inspection과 functional test를 완전히 대체한다는 주장은 오답이다.",
+      "correction": "Smart-positioner diagnostics는 inspection과 functional test를 보완하며 대체하지 않는다.",
+      "correct_rule": "Smart-positioner diagnostics는 inspection과 functional test를 보완하며 대체하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: Smart-positioner diagnostics가 physical inspection과 functional test를 완전히 대체한다는 주장은 오답이다.",
+      "description": "Smart-positioner diagnostics는 inspection과 functional test를 보완하며 대체하지 않는다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "as_left_only_record_sufficient",
+      "claim": "As-left 결과만 기록하면 as-found 상태와 degradation history는 불필요하다는 주장은 오답이다.",
+      "wrong_claim": "As-left 결과만 기록하면 as-found 상태와 degradation history는 불필요하다는 주장은 오답이다.",
+      "correction": "As-found와 as-left를 모두 기록해야 degradation, repair effect와 diagnostic rule을 추적할 수 있다.",
+      "correct_rule": "As-found와 as-left를 모두 기록해야 degradation, repair effect와 diagnostic rule을 추적할 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: As-left 결과만 기록하면 as-found 상태와 degradation history는 불필요하다는 주장은 오답이다.",
+      "description": "As-found와 as-left를 모두 기록해야 degradation, repair effect와 diagnostic rule을 추적할 수 있다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    },
+    {
+      "id": "hart_fieldbus_is_realtime_unlimited",
+      "claim": "HART·Fieldbus diagnostic data는 항상 고속·실시간·무손실",
+      "wrong_claim": "HART·Fieldbus diagnostic data는 항상 고속·실시간·무손실이라는 주장은 오답이다.",
+      "correction": "HART·Fieldbus data는 protocol, update rate, communication quality와 buffering 제약을 갖는다.",
+      "correct_rule": "HART·Fieldbus data는 protocol, update rate, communication quality와 buffering 제약을 갖는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Smart diagnostics·signature 핵심 오류: HART·Fieldbus diagnostic data는 항상 고속·실시간·무손실이라는 주장은 오답이다.",
+      "description": "HART·Fieldbus data는 protocol, update rate, communication quality와 buffering 제약을 갖는다.",
+      "grading_notes": "대표 오답·질문·인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 fatal로 판단한다."
+    }
+  ],
+  "safe_expressions": [
+    "Smart-positioner alarm은 root-cause 후보이며 field verification이 필요하다.",
+    "Online monitoring과 offline diagnostic test는 목적과 risk가 다르다.",
+    "Static valve signature와 dynamic operating signature를 구분한다.",
+    "As-left reference는 comparable operating context와 함께 저장한다.",
+    "Travel error는 ex=xcmd-xmeas의 sign convention을 고정한다.",
+    "Full-span travel error는 xmax>xmin에서 계산한다.",
+    "Hysteresis는 동일 command의 upstroke·downstroke 차이로 계산한다.",
+    "Actuator-pressure band는 동일 position과 comparable condition에서 계산한다.",
+    "Pressure band는 conditional friction proxy로 사용할 수 있다.",
+    "Process ΔP와 unbalanced force는 pressure signature의 confounding factor이다.",
+    "Supply-pressure drop과 regulator droop를 먼저 확인한다.",
+    "I/P drift는 current-pressure response와 supply condition을 함께 확인한다.",
+    "Relay·pilot·fill·vent asymmetry를 pressure response로 진단한다.",
+    "Air-consumption 증가는 pneumatic leakage 후보 중 하나이다.",
+    "Feedback-sensor drift·noise·dropout을 mechanical friction과 구분한다.",
+    "Cycle count의 full·partial cycle 정의를 명시한다.",
+    "Accumulated travel의 sampling·normalization basis를 기록한다.",
+    "Stroke-time trend는 direction과 command range를 함께 기록한다.",
+    "Endpoint signature 변화는 seat contact·overtravel·mechanical stop 후보를 제시한다.",
+    "Packing·stem·shaft resistance는 multiple features와 inspection으로 확인한다.",
+    "Baseline residual은 operating context를 조건으로 계산한다.",
+    "Percentage change는 nonzero baseline에서만 계산한다.",
+    "Rate of change는 t2>t1과 consistent window를 사용한다.",
+    "Alarm은 threshold, persistence, reset logic와 deadband를 함께 사용한다.",
+    "Failure isolation은 travel, pressure, supply, air usage, timing와 status를 결합한다.",
+    "Diagnostic confidence와 data-quality flag를 함께 제공한다.",
+    "False positive·negative는 maintenance confirmation으로 검증한다.",
+    "Anomaly detection과 root-cause confirmation을 구분한다.",
+    "Maintenance workflow는 detect→verify→diagnose→prioritize→plan→repair→as-left 순서이다.",
+    "Time-based, condition-based와 predictive maintenance를 trigger와 risk로 비교한다.",
+    "Predictive maintenance는 exact failure date를 보장하지 않는다.",
+    "Maintenance priority는 production·safety·quality consequence를 포함한다.",
+    "HART·Fieldbus integration은 update rate와 communication quality를 확인한다.",
+    "Offline signature test는 process interruption과 safety authorization을 검토한다.",
+    "As-found와 as-left signature를 work-order result와 연결한다.",
+    "Physical force sizing은 Topic 1, dynamic test는 Topic 3, hardware calibration은 Topic 11이 소유한다.",
+    "Seat leakage는 Topic 13, SIS·PST는 Topic 15, lifecycle은 Topic 16이 소유한다."
+  ],
+  "revision_notes": [
+    "Smart-positioner diagnostic data chain과 data-quality 계약을 추가했다.",
+    "Online·offline, static·dynamic signature와 comparable as-left baseline을 구분했다.",
+    "Travel·pressure·air·usage·time trend와 conditional friction proxy 수식 계약을 추가했다.",
+    "Multi-evidence isolation, predictive-maintenance workflow와 Topic 1·3·11·13·15·16 경계를 추가했다."
+  ],
+  "topic_label": "스마트 포지셔너 진단·밸브 시그니처·예지보전",
+  "core_facts": [
+    "Smart positioner 진단은 device data, valve signature, operating context, failure isolation과 maintenance feedback을 통합한다.",
+    "Command, actual travel, supply pressure, actuator pressure, output signal과 device status를 하나의 diagnostic data chain으로 연결한다.",
+    "Online monitoring은 운전 중 trend를 관찰하고 offline diagnostic test는 계획된 stroke·signature 시험을 수행하므로 목적과 위험을 구분한다.",
+    "Static valve signature와 dynamic operating signature는 excitation, sampling, process condition과 해석 목적이 다르다.",
+    "Device status, event log, alarm history와 configuration change history를 함께 검토한다.",
+    "Diagnostic data는 quality flag, timestamp synchronization, engineering unit와 sampling basis를 확인해야 한다.",
+    "Available diagnostic variable, status code와 signature definition은 exact device manual과 vendor dictionary로 확인한다.",
+    "Commissioning 또는 overhaul 후 정상 as-left 상태를 reference signature로 저장한다.",
+    "Baseline 비교는 동일 valve, stroke direction, supply pressure, process ΔP, temperature와 test mode에서 수행한다.",
+    "Signed travel error는 ex=xcmd-xmeas로 정의하고 sign convention을 일관되게 유지한다.",
+    "Full-span travel error는 EFS=100(xcmd-xmeas)/(xmax-xmin)이며 xmax>xmin domain을 갖는다.",
+    "동일 command와 comparable condition에서 H(u)=|xup(u)-xdown(u)|로 upstroke·downstroke hysteresis를 계산한다.",
+    "동일 position에서 opening·closing actuator pressure band를 ΔPsig(x)=|Popen(x)-Pclose(x)|로 비교할 수 있다.",
+    "Fproxy≈Aeff·ΔPsig/2는 effective area와 opposing force가 적절히 가정될 때 friction proxy로 사용할 수 있다.",
+    "Process ΔP, flow direction, fluid temperature와 unbalanced force는 pressure signature와 travel response의 confounding factor이다.",
+    "Supply-pressure drop, regulator droop와 restriction은 actuator-pressure·stroke-time trend를 왜곡할 수 있다.",
+    "I/P current-pressure response와 zero·span drift를 baseline과 비교하되 sensor·supply condition을 함께 확인한다.",
+    "Relay, pilot stage와 fill·vent path 이상은 pressure response, asymmetry와 stroke-time trend로 진단한다.",
+    "Air-consumption·pneumatic-leakage trend는 동일 supply와 command condition의 baseline 차이로 평가한다.",
+    "Travel-feedback sensor의 drift, noise, dropout와 calibration error를 mechanical friction과 구분한다.",
+    "Cycle count는 full·partial cycle, direction reversal과 counting rule을 명시해야 한다.",
+    "Accumulated travel은 TAT=Σ|xk-xk-1|로 계산할 수 있으며 sampling·normalization basis를 기록한다.",
+    "Stroke-time trend는 direction, command range, supply, process load와 exhaust path를 같은 조건에서 비교한다.",
+    "Seat contact, endpoint, overtravel와 mechanical stop 변화는 signature의 끝점 형상과 pressure response에 나타날 수 있다.",
+    "Packing, stem·shaft와 bearing resistance 변화는 hysteresis·pressure band·travel response를 함께 사용해 평가한다.",
+    "Trim·balance-seal friction이 signature에 영향을 줄 수 있으나 구조와 물리 원인은 Topic 10 경계를 따른다.",
+    "Context-conditioned baseline residual은 rz=zcurrent-zbaseline(context)로 정의한다.",
+    "Percentage change는 100(zcurrent-zbaseline)/|zbaseline|이며 nonzero baseline에서만 사용한다.",
+    "Rate of change는 (z2-z1)/(t2-t1)이며 t2>t1 domain과 consistent sampling window를 사용한다.",
+    "Warning·alarm은 threshold뿐 아니라 persistence, reset logic와 alarm deadband를 함께 정의한다.",
+    "Root-cause isolation은 travel, pressure, supply, air usage, timing, status와 process context의 multi-evidence를 사용한다.",
+    "Diagnostic result에는 confidence, data-quality flag와 missing·invalid data 처리를 포함한다.",
+    "False positive와 false negative를 줄이기 위해 operating context와 maintenance confirmation을 사용한다.",
+    "Anomaly detection은 이상 징후를 찾는 단계이고 physical inspection과 test는 root cause를 확인하는 단계이다.",
+    "Maintenance workflow는 detect→verify→diagnose→prioritize→plan→repair→as-left 순서로 구성한다.",
+    "Time-based, condition-based와 predictive maintenance를 trigger, data requirement, cost와 risk 측면에서 비교한다.",
+    "Predictive maintenance는 degradation trend와 actionable lead time을 제시하지만 exact failure date를 보장하지 않는다.",
+    "Maintenance priority는 diagnostic severity와 production, safety, quality, environmental consequence를 결합한다.",
+    "HART·Fieldbus·asset-management integration에서는 update rate, communication quality와 configuration governance를 확인한다.",
+    "Offline signature test는 process interruption, full-stroke risk, mechanical limit와 safety authorization을 검토한다.",
+    "Repair 전 as-found와 repair 후 as-left signature를 work-order result와 연결해 diagnostic rule을 검증한다.",
+    "Physical force·friction sizing은 Topic 1, deadband·stiction 시험과 tuning은 Topic 3, positioner·I/P·accessory 원리와 calibration은 Topic 11이 소유한다.",
+    "Seat leakage·packing emissions는 Topic 13, SIS·ESD·PST는 Topic 15, full package lifecycle은 Topic 16이 소유한다.",
+    "Final verification은 baseline, trend, alarm, physical inspection, repair와 as-left result를 closed-loop로 교차 확인한다."
+  ]
+}
