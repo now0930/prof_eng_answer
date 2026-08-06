@@ -113,7 +113,8 @@
         "physical_ai_definition",
         "industrial_robot_architecture",
         "closed_loop_ai"
-      ]
+      ],
+      "intent": "Physical AI의 Sensor–AI–Planner–Controller–Actuator–Feedback 구조와 Robot System 경계를 설명한다."
     },
     {
       "section": 2,
@@ -125,7 +126,8 @@
         "calibration_coordinate_frame",
         "fusion_uncertainty",
         "common_cause_and_fault_detection"
-      ]
+      ],
+      "intent": "Camera·LiDAR·Radar·Encoder·Force Sensor의 특성, 시간동기, Calibration, 불확실성과 공통원인을 설명한다."
     },
     {
       "section": 3,
@@ -137,7 +139,8 @@
         "slam_relation",
         "observability_limits",
         "world_model"
-      ]
+      ],
+      "intent": "State Estimation, Localization, SLAM, Observability와 World Model의 관계를 설명한다."
     },
     {
       "section": 4,
@@ -149,7 +152,8 @@
         "digital_twin_synchronization",
         "simulation_scenario_coverage",
         "synthetic_data_domain_gap"
-      ]
+      ],
+      "intent": "Twin의 목적·Fidelity·동기화, Simulation Coverage와 Synthetic Data Domain Gap을 설명한다."
     },
     {
       "section": 5,
@@ -159,7 +163,8 @@
         "robot_planning_hierarchy",
         "edge_on_device_ai",
         "latency_deadline_budget"
-      ]
+      ],
+      "intent": "Task·Motion·Trajectory Planning, Closed-loop Feedback, Edge AI와 End-to-end Latency를 연결한다."
     },
     {
       "section": 6,
@@ -169,7 +174,8 @@
         "autonomous_manufacturing",
         "collaborative_robot_application",
         "human_robot_collaboration"
-      ]
+      ],
+      "intent": "자율제조의 승인 운영범위, Human–Robot Collaboration과 Human Factors를 설명한다."
     },
     {
       "section": 7,
@@ -180,7 +186,8 @@
         "safe_state_fallback_degraded_mode",
         "supervisory_control_human_override",
         "functional_safety_separation"
-      ]
+      ],
+      "intent": "Safety Envelope, Safe State, Fallback, Degraded Mode, Supervisory Control과 Human Override를 설명한다."
     },
     {
       "section": 8,
@@ -189,7 +196,8 @@
       "anchor_refs": [
         "operational_design_domain_validation",
         "runtime_monitoring_change_control"
-      ]
+      ],
+      "intent": "운영범위의 경계·희귀·고장 Scenario, Runtime Monitoring과 변경관리를 결론으로 제시한다."
     }
   ],
   "high_score_points": [

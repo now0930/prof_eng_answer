@@ -8,7 +8,7 @@
       "id": "physical_ai_definition",
       "anchor_id": "physical_ai_definition",
       "statement": "Physical AI는 AI의 인식·추론·계획 결과가 Sensor와 Actuator를 통해 실제 물리환경에 작용하고 그 결과를 다시 Feedback으로 받는 폐루프 시스템 영역이다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "Physical AI",
         "sensor",
@@ -42,7 +42,7 @@
       "id": "industrial_robot_architecture",
       "anchor_id": "industrial_robot_architecture",
       "statement": "Industrial Robot System은 Manipulator, Controller, Drive, End-effector, Sensor, Cell 설비와 Safety 기능을 포함한 시스템 경계로 평가한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "industrial robot",
         "controller",
@@ -75,7 +75,7 @@
       "id": "collaborative_robot_application",
       "anchor_id": "collaborative_robot_application",
       "statement": "Collaborative Robot은 협업기능을 지원하는 Robot이며 실제 협업 Application의 안전성은 Tool, Payload, 속도, 힘, 작업공간, 공정위험과 보호조치를 포함해 평가한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "collaborative robot",
         "payload",
@@ -108,7 +108,7 @@
       "id": "sensor_complementarity",
       "anchor_id": "sensor_complementarity",
       "statement": "Camera, LiDAR, Radar, Encoder와 Force·Torque Sensor는 측정원리, 범위, 해상도, 지연과 환경민감도가 달라 상호 보완적으로 사용한다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "camera",
         "LiDAR",
@@ -141,7 +141,7 @@
       "id": "timestamp_and_synchronization",
       "anchor_id": "timestamp_and_synchronization",
       "statement": "Sensor Fusion은 측정값뿐 아니라 Timestamp, Sample Rate, Transport Delay와 Clock Synchronization을 관리하여 동일 물리상태의 관측을 정렬해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "timestamp",
         "sample rate",
@@ -173,7 +173,7 @@
       "id": "calibration_coordinate_frame",
       "anchor_id": "calibration_coordinate_frame",
       "statement": "다중 Sensor는 Intrinsic·Extrinsic Calibration과 좌표계 변환을 통해 공통 Frame에 정렬하며 Calibration Drift를 Monitoring해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "intrinsic calibration",
         "extrinsic calibration",
@@ -205,7 +205,7 @@
       "id": "fusion_uncertainty",
       "anchor_id": "fusion_uncertainty",
       "statement": "Sensor Fusion은 각 Sensor의 Bias, Noise, Covariance와 신뢰도를 반영해 상태와 불확실성을 추정하며 단순 평균이 항상 최적은 아니다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "sensor fusion",
         "bias",
@@ -237,7 +237,7 @@
       "id": "common_cause_and_fault_detection",
       "anchor_id": "common_cause_and_fault_detection",
       "statement": "Sensor를 여러 개 사용해도 공통전원, 공통시야, 동일 환경조건, Calibration 오류와 공통 Software 결함이 남을 수 있으므로 Residual, Plausibility와 상태진단이 필요하다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "common cause",
         "residual",
@@ -269,7 +269,7 @@
       "id": "state_estimation",
       "anchor_id": "state_estimation",
       "statement": "State Estimation은 직접 측정할 수 없는 위치, 속도, 자세와 외력 등을 System Model과 Sensor 관측으로 추정하고 오차공분산을 함께 관리한다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "state estimation",
         "position",
@@ -302,7 +302,7 @@
       "id": "localization",
       "anchor_id": "localization",
       "statement": "Localization은 Robot 또는 이동체의 위치와 자세를 기준좌표계에서 추정하는 기능이며 Map, Landmark, Odometry와 Sensor 불확실성에 의존한다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "localization",
         "pose",
@@ -334,7 +334,7 @@
       "id": "slam_relation",
       "anchor_id": "slam_relation",
       "statement": "SLAM은 위치추정과 Map 생성을 상호 의존적으로 수행하지만 안전정지, 충돌회피와 Functional Safety를 단독으로 보장하지 않는다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "SLAM",
         "mapping",
@@ -366,7 +366,7 @@
       "id": "observability_limits",
       "anchor_id": "observability_limits",
       "statement": "State Estimator의 성능은 Sensor 배치와 Motion에 따른 Observability에 제한되며 관측되지 않는 상태는 Model만으로 확정할 수 없다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "observability",
         "sensor placement",
@@ -398,7 +398,7 @@
       "id": "world_model",
       "anchor_id": "world_model",
       "statement": "World Model은 Robot 주변의 객체, 자유공간, 작업상태, 관계와 불확실성을 표현하여 Planning과 Supervisory 판단에 제공한다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "world model",
         "object",
@@ -431,7 +431,7 @@
       "id": "digital_twin_definition",
       "anchor_id": "digital_twin_definition",
       "statement": "Digital Twin은 특정 목적과 수명주기 범위에서 실제 자산·공정의 상태와 거동을 데이터와 Model로 연결한 디지털 표현이다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "digital twin",
         "asset",
@@ -464,7 +464,7 @@
       "id": "digital_twin_fidelity",
       "anchor_id": "digital_twin_fidelity",
       "statement": "Digital Twin의 Fidelity는 목적, Model 가정, 해상도, Parameter, Boundary Condition과 Validation 범위에 따라 달라지며 실제 설비와 항상 완전히 동일하지 않다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "fidelity",
         "model assumption",
@@ -496,7 +496,7 @@
       "id": "digital_twin_synchronization",
       "anchor_id": "digital_twin_synchronization",
       "statement": "Digital Twin은 실제 설비와의 Data Synchronization, Version, Timestamp, Latency와 상태정합성을 Monitoring해야 하며 Stale Twin은 잘못된 의사결정을 만들 수 있다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "synchronization",
         "version",
@@ -529,7 +529,7 @@
       "id": "simulation_scenario_coverage",
       "anchor_id": "simulation_scenario_coverage",
       "statement": "Simulation은 반복가능한 시험과 위험 Scenario 탐색에 유용하지만 Model 경계와 Scenario Coverage 밖의 실제환경 성능을 자동 증명하지 않는다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "simulation",
         "scenario coverage",
@@ -561,7 +561,7 @@
       "id": "synthetic_data_domain_gap",
       "anchor_id": "synthetic_data_domain_gap",
       "statement": "Synthetic Data는 희귀상황과 위험상황을 보강할 수 있으나 Sensor Noise, Material, Lighting, Contact와 Human 행동의 Domain Gap을 실제 Data로 확인해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "synthetic data",
         "domain gap",
@@ -594,7 +594,7 @@
       "id": "robot_planning_hierarchy",
       "anchor_id": "robot_planning_hierarchy",
       "statement": "Robot Planning은 Task·Motion·Trajectory 계획으로 목표와 제약을 결정하고 저수준 Control은 계획을 추종하므로 두 계층의 책임과 Interface를 구분한다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "task planning",
         "motion planning",
@@ -626,7 +626,7 @@
       "id": "closed_loop_ai",
       "anchor_id": "closed_loop_ai",
       "statement": "Closed-loop AI는 인식과 추론 결과를 Control Action으로 적용하고 물리결과를 다시 관측하므로 Model 오류, Delay와 Actuator 제한이 누적되는 Feedback Risk를 검토한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "closed-loop AI",
         "control action",
@@ -659,7 +659,7 @@
       "id": "edge_on_device_ai",
       "anchor_id": "edge_on_device_ai",
       "statement": "Edge AI와 On-device AI는 Latency, 대역폭과 연결의존성을 줄일 수 있으나 Resource, Thermal, Version, Cybersecurity와 중앙 Monitoring 책임을 제거하지 않는다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "edge AI",
         "on-device AI",
@@ -692,7 +692,7 @@
       "id": "latency_deadline_budget",
       "anchor_id": "latency_deadline_budget",
       "statement": "Physical AI의 Loop는 Sensing, 전처리, Inference, Planning, 통신과 Actuation 지연을 합한 End-to-end Latency와 Jitter가 Control Deadline을 만족해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "latency",
         "jitter",
@@ -724,7 +724,7 @@
       "id": "autonomous_manufacturing",
       "anchor_id": "autonomous_manufacturing",
       "statement": "Autonomous Manufacturing은 상태인식, 계획, 실행, 품질확인과 재계획을 연결하되 생산목표보다 Safety Constraint와 승인된 운영범위를 우선한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "autonomous manufacturing",
         "replanning",
@@ -756,7 +756,7 @@
       "id": "human_robot_collaboration",
       "anchor_id": "human_robot_collaboration",
       "statement": "Human–Robot Collaboration은 작업분담, 접근감지, 속도·힘 제한, 정지·복구, 의도전달, Ergonomics와 비정상상황의 인간행동을 포함한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "human robot collaboration",
         "speed",
@@ -789,7 +789,7 @@
       "id": "safety_envelope",
       "anchor_id": "safety_envelope",
       "statement": "Safety Envelope은 위치, 속도, 힘, 거리, 공정상태와 금지영역의 허용범위를 정의하고 AI 명령보다 우선하는 독립 Constraint로 집행한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "safety envelope",
         "speed",
@@ -822,7 +822,7 @@
       "id": "safe_state_fallback_degraded_mode",
       "anchor_id": "safe_state_fallback_degraded_mode",
       "statement": "Sensor, Model, Network 또는 Actuator 이상 시 Safe State, Fallback과 Degraded Mode를 위험분석으로 정의하고 전환조건과 복구조건을 검증한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "safe state",
         "fallback",
@@ -854,7 +854,7 @@
       "id": "supervisory_control_human_override",
       "anchor_id": "supervisory_control_human_override",
       "statement": "Supervisory Control은 AI 명령의 권한, 한계, 상태와 이상을 감시하며 Human Override는 접근성, 우선권, 표시, 기록과 안전한 복구를 포함해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "supervisory control",
         "human override",
@@ -886,7 +886,7 @@
       "id": "functional_safety_separation",
       "anchor_id": "functional_safety_separation",
       "statement": "AI Model의 Accuracy와 Robot Functional Safety는 서로 다른 증거이며 Safety Function은 위험분석, 독립성, 진단, 검증과 Lifecycle 관리로 입증한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "functional safety",
         "accuracy",
@@ -918,7 +918,7 @@
       "id": "operational_design_domain_validation",
       "anchor_id": "operational_design_domain_validation",
       "statement": "Physical AI는 속도, Payload, 조도, 바닥, 작업물, 사람행동과 Network 조건을 포함한 승인 운영범위를 정의하고 경계·희귀·고장 Scenario를 검증해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "operating domain",
         "payload",
@@ -951,7 +951,7 @@
       "id": "runtime_monitoring_change_control",
       "anchor_id": "runtime_monitoring_change_control",
       "statement": "배포 후에는 Sensor Health, Calibration, Localization Confidence, Twin Error, Latency, Intervention과 Near-miss를 Monitoring하고 Model·Map·Tool·Safety Parameter 변경을 통제한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "runtime monitoring",
         "calibration",
