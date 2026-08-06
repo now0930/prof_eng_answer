@@ -77,7 +77,8 @@
         "sw07_communication_requirements",
         "sw07_layered_view",
         "sw07_selection_multicriteria"
-      ]
+      ],
+      "intent": "전송기능, 장치 수·거리·환경, 진단, 기존 설비, 유지보수와 수명주기 요구를 정의하고 다기준 선정절차를 제시한다."
     },
     {
       "section": "2. 물리매체와 topology",
@@ -89,7 +90,8 @@
         "sw07_rs485_multidrop",
         "sw07_topology_selection",
         "sw07_termination_grounding"
-      ]
+      ],
+      "intent": "Copper·fiber·serial의 특성과 termination·grounding·topology를 연결한다."
     },
     {
       "section": "3. Process Fieldbus",
@@ -101,7 +103,8 @@
         "sw07_foundation_fieldbus",
         "sw07_foundation_fieldbus_function_blocks",
         "sw07_profibus_pa"
-      ]
+      ],
+      "intent": "HART, FOUNDATION Fieldbus와 PROFIBUS PA의 역할·구성·장치통합 차이를 설명한다."
     },
     {
       "section": "4. Modbus와 Industrial Ethernet",
@@ -112,7 +115,8 @@
         "sw07_ethernetip_cip",
         "sw07_profinet",
         "sw07_ethercat"
-      ]
+      ],
+      "intent": "Modbus RTU/TCP, EtherNet/IP, PROFINET과 EtherCAT의 application model과 integration file을 비교한다."
     },
     {
       "section": "5. OPC UA와 산업 무선",
@@ -124,7 +128,8 @@
         "sw07_isa10011a",
         "sw07_wireless_site_survey",
         "sw07_wireless_power_lifecycle"
-      ]
+      ],
+      "intent": "OPC UA의 information model 역할과 WirelessHART·ISA100.11a의 구조·site survey·battery 조건을 설명한다."
     },
     {
       "section": "6. 상호운용성과 Gateway",
@@ -136,7 +141,8 @@
         "sw07_device_description",
         "sw07_interoperability_levels",
         "sw07_conformance_vs_interoperability"
-      ]
+      ],
+      "intent": "Gateway·protocol conversion, device profile, Device Description, certification과 integration test를 연결한다."
     },
     {
       "section": "7. Commissioning과 수명주기",
@@ -148,7 +154,8 @@
         "sw07_installed_base_transition",
         "sw07_lifecycle_compatibility",
         "sw07_vendor_tool_dependency"
-      ]
+      ],
+      "intent": "주소·name·parameter·fault test, diagnostics, brownfield 전환과 compatibility matrix를 제시한다."
     },
     {
       "section": "8. 결론과 ownership 경계",
@@ -156,7 +163,8 @@
       "anchor_refs": [
         "sw07_sw08_boundary",
         "sw07_sw09_boundary"
-      ]
+      ],
+      "intent": "기능·상호운용성 중심 선정결론을 내리고 정량적 실시간성은 SW-08, 보안통제는 SW-09로 구분한다."
     }
   ],
   "expected_question_patterns": [
