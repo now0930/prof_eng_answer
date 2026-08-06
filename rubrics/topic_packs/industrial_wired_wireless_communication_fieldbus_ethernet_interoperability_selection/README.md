@@ -1,0 +1,387 @@
+# 계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성
+
+## Topic ID
+
+`industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection`
+
+## Lane and status
+
+- `LANE=SOFTWARE_LLM_LANE_B`
+- `SW_NUMBER=SW-07`
+- Source-only Topic Pack
+- Topic별 focused 검증과 독립 local commit 대상
+- generated rebuild, validate-all, release promotion과 push는 Lane 통합 단계로 이관
+
+## 목적
+
+산업 통신을 protocol 명칭 암기가 아니라 물리매체, application function, 장치통합, 상호운용성, commissioning과 lifecycle compatibility의 연결관계로 평가한다.
+
+## Ownership 경계
+
+### SW-08과의 경계
+
+SW-07은 protocol 종류, 구조, 기능, device integration, interoperability와 selection criteria를 담당한다.
+
+다음은 SW-08이 담당한다.
+
+- Latency
+- Jitter
+- Cycle time와 response time
+- Determinism
+- Network load와 QoS의 정량평가
+- PTP·IEEE 1588 시간동기 성능
+- Ring·PRP·HSR·MRP·DLR의 복구시간
+- Failover와 network resilience의 정량 성능
+
+### SW-09와의 경계
+
+SW-07은 통신기능과 상호운용성을 담당한다.
+
+다음은 SW-09가 담당한다.
+
+- Authentication과 authorization
+- Encryption과 key management
+- Segmentation, DMZ와 firewall
+- Secure remote access와 jump server
+- IDS·IPS와 보안 logging
+- Vulnerability, patch와 supply-chain control
+- Cyber incident response와 recovery
+
+## 대표 문제
+
+- 계측제어 시스템의 유·무선 통신방식 선정절차와 평가항목을 설명하시오.
+- Copper, fiber 및 serial communication의 특성과 산업현장 적용 시 고려사항을 비교하시오.
+- HART, FOUNDATION Fieldbus 및 PROFIBUS PA의 구조·기능과 선정기준을 비교하시오.
+- Modbus RTU와 Modbus TCP의 차이 및 Gateway 적용 시 데이터 mapping 고려사항을 설명하시오.
+- EtherNet/IP, PROFINET 및 EtherCAT의 구조와 상호운용성 확보방안을 비교하시오.
+- OPC UA의 information model 기반 상호운용성과 Fieldbus와의 역할 차이를 설명하시오.
+- WirelessHART와 ISA100.11a의 구성 및 산업현장 적용 시 고려사항을 설명하시오.
+- Device profile, Device Description와 conformance certification이 상호운용성에 미치는 영향을 설명하시오.
+- 산업 통신망 commissioning 절차와 다중 vendor 장치의 통합시험 항목을 설명하시오.
+- Brownfield 제어시스템의 통신 protocol 전환 및 수명주기 호환성 관리방안을 설명하시오.
+
+## 핵심 정답 기준
+
+- 산업 통신방식 선정은 전송할 데이터의 종류·방향·갱신 필요성, 연결 장치 수, 거리, 환경, 가용성, 진단, 상호운용성, 유지보수성과 수명주기 요구를 먼저 정의한 뒤 수행해야 한다.
+- 통신시스템은 물리매체, 신호·링크, 전송·응용 프로토콜, 장치 프로파일과 정보모델의 계층으로 나누어 보아야 하며, 같은 케이블이나 Ethernet을 사용해도 상위 계층이 다르면 직접 상호운용되지 않을 수 있다.
+- 통신방식의 최종 선정은 기능 적합성, 설치환경, 기존 설비, 진단성, 엔지니어링 도구, 공급자 지원, 교육, 예비품, 확장성과 총수명주기비용을 함께 비교하는 다기준 의사결정이어야 한다.
+- Copper 매체는 설치와 접속이 용이하고 전원중첩 또는 기존 배선 활용이 가능할 수 있으나 거리, 대역폭, 전자기 간섭, 접지전위차, 피뢰와 케이블 규격을 고려해야 한다.
+- 광섬유는 전자기 간섭과 접지전위차의 영향을 줄이고 장거리·전기적 절연에 유리하지만 광모듈, connector 관리, 굴곡반경, 오염, 접속손실, 수리기술과 전원 이중화를 고려해야 한다.
+- Serial communication은 비트를 순차 전송하는 방식이며 물리계층의 전기적 규격, baud rate, character format, duplex, addressing과 상위 프로토콜을 구분하여 설계해야 한다.
+- RS-485 다중점 구성은 차동전송을 사용하지만 bus topology, 종단저항, bias, stub 길이, 공통모드 범위, 주소 중복과 접지·차폐를 올바르게 관리해야 한다.
+- Bus, star, tree, ring, line, mesh 등의 topology는 배선량, 확장성, 단일고장 영향, 유지보수 접근성, 전원분배와 프로토콜 허용구조를 비교하여 선정해야 한다.
+- 산업 통신의 commissioning에는 cable type, polarity, shield, grounding, termination, connector, segment length와 전원품질 확인이 포함되어야 하며 논리 설정만으로 물리계층 검증을 대체할 수 없다.
+- Fieldbus는 다수의 현장장치와 제어시스템 사이에 측정값·명령·상태·진단을 디지털로 교환하고 장치구성 및 자산정보를 통합할 수 있게 하는 산업 통신체계이다.
+- HART는 기존 4–20 mA 아날로그 신호 위에 디지털 통신을 중첩하여 주 변수와 함께 설정·상태·추가 변수·진단정보를 교환할 수 있게 한다.
+- HART multidrop 구성은 여러 장치의 디지털 통신을 한 쌍에 연결할 수 있지만 loop current 운용방식, 주소, polling, 전원과 사용 목적을 점대점 구성과 구분해야 한다.
+- FOUNDATION Fieldbus는 현장장치의 통신, 표준화된 function block, 장치관리와 진단을 통합하며 segment 설계 시 전원, trunk·spur, terminator, barrier와 장치 수를 함께 검토해야 한다.
+- FOUNDATION Fieldbus function block은 장치 기능과 제어 연산을 표준화하여 분산 실행과 상호연결을 지원하지만 실제 기능 호환성은 block 종류, parameter, schedule, host 지원과 인증범위를 확인해야 한다.
+- PROFIBUS PA는 공정계측용 fieldbus로서 PA device profile과 bus-powered 물리구성을 활용하며 DP/PA coupling 또는 linking device, segment 전원·terminator·방폭구성을 함께 설계해야 한다.
+- Modbus RTU는 serial link에서 주소, function code, data와 오류검사를 교환하는 단순한 register 기반 프로토콜이며 register 의미·단위·scale·byte order는 장치 문서와 mapping에 의존한다.
+- Modbus TCP는 Modbus application data를 TCP/IP 네트워크에서 교환하도록 mapping한 방식이며 IP 설계, unit identifier 사용, connection 관리와 register mapping을 별도로 확인해야 한다.
+- EtherNet/IP는 표준 Ethernet과 IP 위에서 CIP object·service·connection model을 사용하는 산업 통신이며 EDS, device profile, I/O connection과 controller·scanner 지원을 확인해야 한다.
+- PROFINET은 Ethernet 기반 산업 자동화 통신으로 cyclic I/O, acyclic parameter·diagnostics와 engineering integration을 제공하며 device role, conformance class, profile, GSDML과 controller 지원을 확인해야 한다.
+- EtherCAT은 Ethernet frame이 line 또는 ring을 통과하는 동안 각 slave가 지정 데이터를 처리하는 구조를 사용하며 master configuration, process data mapping, ESI와 network topology 적합성을 확인해야 한다.
+- OPC UA는 platform-independent service, address space, information model과 method·event·subscription을 제공하여 시스템 간 의미 있는 데이터 교환을 지원하는 상호운용 아키텍처이다.
+- OPC UA는 controller·SCADA·MES·gateway·cloud 사이의 정보통합에 강점이 있지만 모든 현장 I/O bus를 자동 대체하거나 정량적 실시간성을 보장하는 것은 아니다.
+- WirelessHART는 HART device data를 무선 mesh로 전달하기 위한 산업 무선체계이며 field device, gateway, network manager, access point, join 절차와 기존 host 연계를 함께 고려해야 한다.
+- ISA100.11a는 산업용 무선 sensor·actuator 통신을 위한 체계로서 field device, backbone router, gateway/system manager와 application mapping을 구성하며 지원 profile과 host integration을 확인해야 한다.
+- 산업 무선망은 배치 전에 site survey로 거리, 구조물, 차폐, 반사, 이동설비, 간섭원, 공존채널과 설치높이를 조사하고 설치 후 실제 link 상태를 검증해야 한다.
+- Battery-powered 무선장치는 update 요구, 송신횟수, routing 역할, 온도, battery chemistry, 교체절차와 접근성을 고려하여 전원 수명과 유지보수 계획을 수립해야 한다.
+- Gateway는 서로 다른 네트워크나 계층을 연결하고 주소·data type·status·quality·diagnostics를 mapping할 수 있지만 연결 양쪽의 기능과 장애모드를 이해해야 한다.
+- Protocol conversion은 frame·address·data representation을 변환하는 것뿐 아니라 register, object, tag, unit, scale, quality, timestamp와 command semantics를 명시적으로 mapping해야 한다.
+- Device profile은 장치 class별 필수·선택 기능, parameter, status와 동작규칙을 공통화하여 host와 다중 vendor 장치의 기능 상호운용성을 높인다.
+- Device Description은 장치 parameter, menu, range, unit, method와 diagnostics를 engineering tool 또는 host가 해석하도록 제공하는 통합정보이며 DD/EDD, GSD/GSDML, EDS, ESI 등은 protocol ecosystem별로 역할이 다르다.
+- Interoperability는 물리 연결, protocol communication, data syntax, semantic meaning, device behavior와 engineering integration의 여러 수준으로 구분하여 검증해야 한다.
+- Conformance test나 certification은 장치가 지정 규격을 충족함을 보여주지만 실제 controller·host·gateway·option 조합의 상호운용성은 integration test와 승인목록으로 확인해야 한다.
+- 통신 commissioning은 문서검토, physical inspection, address·name 설정, device description 등록, parameter·unit 확인, communication test, command·fail behavior, diagnostics와 기록갱신의 순서로 수행해야 한다.
+- IP, node address, station name, tag, device ID와 asset identifier는 중복 없이 관리하고 도면·database·controller·host 사이에서 일관되게 매핑해야 한다.
+- 통신 진단은 link·signal·error counter·device status·quality·gateway mapping과 host alarm을 계층별로 구분하고 baseline과 trend를 사용하여 물리, protocol, device, application 원인을 좁혀야 한다.
+- 기존 4–20 mA, HART, serial, fieldbus와 Industrial Ethernet이 혼재하는 설비에서는 brownfield 조건, shutdown 가능시간, adapter·gateway, 병행운전, 교육과 spare를 고려하여 단계적으로 전환할 수 있다.
+- 통신수명주기 관리는 protocol version, device profile, firmware, controller·host revision, Device Description, engineering tool, OS, license와 gateway 지원조합을 compatibility matrix로 추적해야 한다.
+- 상호운용성과 유지보수성 평가는 vendor engineering tool, driver·library, license, source configuration export, diagnostic access와 지원종료 시 대체경로까지 포함해야 한다.
+- SW-07은 통신방식의 구조·기능·상호운용성과 선정기준을 담당하고, latency, jitter, cycle time, determinism, 시간동기, network load와 정량적 장애복구 성능은 SW-08이 담당한다.
+- SW-07은 통신기능과 상호운용성을 담당하고, 인증, 암호화, 접근통제, 방화벽, secure remote access, 보안감시와 침해대응은 SW-09가 담당한다.
+
+## 정답으로 인정할 표현
+
+- 같은 물리매체나 Ethernet을 사용해도 상위 protocol과 profile이 다르면 직접 호환되지 않을 수 있다.
+- 통신방식은 속도 하나가 아니라 기능, 환경, 기존 설비, 진단, 유지보수와 수명주기비용으로 선정한다.
+- RS-485는 물리계층이고 Modbus RTU 등 응용 protocol과 구분한다.
+- Copper는 설치성과 전원중첩에 유리할 수 있으나 EMI, 거리, 접지와 차폐를 검토한다.
+- Fiber는 EMI와 전기적 절연에 유리하지만 광모듈·connector·전원과 수리기술을 관리한다.
+- HART 점대점은 4–20 mA 위에 digital communication을 중첩할 수 있다.
+- HART multidrop은 점대점과 주소·loop current·polling 운용을 구분한다.
+- FOUNDATION Fieldbus와 PROFIBUS PA는 유사한 배선요소가 있어도 protocol과 profile이 달라 직접 교환되지 않는다.
+- Modbus register의 의미와 scale은 장치별 mapping 문서로 확인한다.
+- EtherNet/IP 상호운용성은 CIP object, profile와 EDS·controller 지원을 포함한다.
+- PROFINET은 device role, profile, GSDML과 controller 지원범위를 함께 확인한다.
+- EtherCAT은 구조와 process data mapping을 SW-07에서, 정량적 성능은 SW-08에서 다룬다.
+- OPC UA는 information model 기반 시스템통합에 강점이 있지만 모든 fieldbus를 자동 대체하지 않는다.
+- WirelessHART와 ISA100.11a는 별도 protocol ecosystem이므로 직접 상호교환을 가정하지 않는다.
+- 산업 무선은 site survey, 간섭, antenna 배치와 실제 link 검증이 필요하다.
+- Battery 수명은 update와 routing, 온도, 교체절차를 포함해 관리한다.
+- Gateway는 주소와 data뿐 아니라 unit, quality, diagnostics와 장애상태 mapping을 검토한다.
+- Device profile은 기능 상호운용성을 높이지만 optional feature와 host 지원을 확인해야 한다.
+- Device Description은 engineering integration을 돕지만 protocol과 physical compatibility를 대체하지 않는다.
+- Certification은 중요한 근거지만 실제 controller·host·gateway 조합의 integration test가 필요하다.
+- Commissioning은 physical, address·name, parameter, normal communication, fail behavior와 문서갱신을 포함한다.
+- Brownfield 설비는 gateway·adapter와 단계적 전환을 사용하여 기존 자산을 유지할 수 있다.
+- Protocol version, firmware, profile, host, engineering tool와 license를 compatibility matrix로 관리한다.
+- Latency, jitter, determinism, 시간동기와 복구시간은 SW-08에서 평가한다.
+- 인증, 암호화, 접근통제, firewall와 사고대응은 SW-09에서 평가한다.
+
+## 핵심 Fatal 오류
+
+- **sw07_fatal_physical_connector_interoperability** — 같은 Ethernet connector와 IP 주소를 사용하면 모든 Industrial Ethernet 장치가 직접 상호운용된다.
+교정: 물리 연결과 상위 protocol·profile·object·information model 적합성은 별도로 확인해야 한다.
+- **sw07_fatal_rs485_is_protocol** — RS-485는 register 의미, 명령과 장치 profile까지 정의하는 완전한 응용 protocol이다.
+교정: RS-485는 주로 전기적 물리계층 규격이며 Modbus RTU 등 상위 protocol과 구분해야 한다.
+- **sw07_fatal_speed_only_selection** — 통신속도가 가장 높은 방식이 모든 계측제어 응용에서 최선이다.
+교정: 기능, 환경, 기존 설비, 진단, 상호운용성, 유지보수와 수명주기비용을 함께 비교해야 한다.
+- **sw07_fatal_fiber_solves_all** — 광섬유를 사용하면 통신장애, 전원고장과 모든 접지문제가 자동으로 제거된다.
+교정: 광섬유는 EMI와 전기적 절연에 유리하지만 광모듈·connector·전원·시공과 유지보수 고장은 남는다.
+- **sw07_fatal_hart_removes_analog** — HART를 적용하면 4–20 mA 아날로그 신호는 항상 제거되고 완전한 digital bus가 된다.
+교정: 점대점 HART는 4–20 mA 위에 digital signal을 중첩할 수 있으며 multidrop은 별도 운용조건을 갖는다.
+- **sw07_fatal_ff_pa_interchangeable** — FOUNDATION Fieldbus와 PROFIBUS PA는 배선이 유사하므로 장치를 서로 교환하여 사용할 수 있다.
+교정: 물리구성이 유사할 수 있어도 protocol, profile, host integration과 engineering file이 달라 직접 호환되지 않는다.
+- **sw07_fatal_modbus_self_describing** — Modbus register 번호만 알면 제조사와 무관하게 공학단위, scale과 tag 의미가 자동 결정된다.
+교정: Modbus data meaning은 장치별 register map, data type, byte order, scale과 문서에 의존한다.
+- **sw07_fatal_serial_to_tcp_plug** — Serial Modbus 장치를 Ethernet port에 연결하면 자동으로 Modbus TCP 장치가 된다.
+교정: 물리연결과 application mapping이 다르므로 gateway 또는 native interface와 주소·register mapping이 필요하다.
+- **sw07_fatal_ethernetip_is_ethernet_only** — EtherNet/IP는 Ethernet cable과 IP 주소만 정의하므로 CIP object와 profile은 필요 없다.
+교정: EtherNet/IP 상호운용성은 CIP object·service·connection과 device profile·EDS 지원에 달려 있다.
+- **sw07_fatal_profinet_is_profibus_tunnel** — PROFINET은 PROFIBUS telegram을 Ethernet cable로 그대로 전달하는 단순 converter 방식이다.
+교정: PROFINET은 독자적인 Ethernet 기반 automation model과 device role, cyclic·acyclic service 및 GSDML을 사용한다.
+- **sw07_fatal_ethercat_any_switch** — EtherCAT line에는 일반 office Ethernet switch를 임의로 삽입해도 network 구조와 device processing이 항상 동일하다.
+교정: EtherCAT topology와 master·slave processing 규칙에 맞는 구성인지 확인해야 하며 임의의 switch 삽입을 일반화할 수 없다.
+- **sw07_fatal_opcua_guarantees_field_realtime** — OPC UA를 사용하면 모든 field I/O bus와 별도의 실시간성 검토가 불필요하다.
+교정: OPC UA는 정보모델과 시스템 통합에 강점이 있으나 fieldbus 대체와 정량적 실시간성은 요구별로 검토해야 한다.
+- **sw07_fatal_wireless_no_survey** — 산업 무선은 케이블이 없으므로 site survey, 간섭과 antenna 배치 검토 없이 설치해도 된다.
+교정: RF propagation, 구조물, 간섭, 공존채널과 실제 link 상태를 조사·검증해야 한다.
+- **sw07_fatal_wireless_interchangeable** — WirelessHART와 ISA100.11a 장치는 2.4 GHz를 사용하므로 gateway 없이 직접 상호교환된다.
+교정: 각 체계의 protocol, joining, application profile과 gateway·host 지원이 달라 직접 호환을 가정할 수 없다.
+- **sw07_fatal_gateway_lossless** — Gateway를 설치하면 양쪽 protocol의 모든 parameter, diagnostics, quality와 command 의미가 손실 없이 자동 변환된다.
+교정: Gateway mapping 범위와 unsupported function, quality·timeout·startup 처리 및 장애모드를 명시해야 한다.
+- **sw07_fatal_profile_guarantees_all** — 같은 device profile을 지원하면 모든 optional function과 host engineering 기능이 자동으로 plug-and-play 된다.
+교정: Profile version, optional feature, host support, Device Description와 실제 integration test가 필요하다.
+- **sw07_fatal_certification_guarantees_combination** — 각 장치가 개별 certification을 받았으므로 어떤 controller·host·gateway 조합에서도 상호운용성이 보장된다.
+교정: Conformance와 실제 조합의 interoperability는 다르므로 승인조합과 integration test를 확인해야 한다.
+- **sw07_fatal_device_description_replaces_protocol** — Device Description 파일이 있으면 wiring, protocol stack, controller 지원과 device behavior 검토가 모두 필요 없다.
+교정: Device Description은 parameter와 engineering integration을 돕지만 물리·protocol·profile·host 적합성을 대체하지 않는다.
+- **sw07_fatal_same_protocol_all_versions** — 제품에 같은 protocol 이름이 표시되면 firmware, profile, controller와 engineering tool version에 관계없이 영구 호환된다.
+교정: Version·profile·option·firmware·host·tool 조합을 compatibility matrix와 시험으로 확인해야 한다.
+- **sw07_fatal_protocol_name_proves_performance_security** — Protocol 종류만 알면 latency, jitter, 복구시간과 인증·암호화 수준까지 자동으로 확정할 수 있다.
+교정: 정량적 실시간·복구성능은 SW-08에서, 보안통제는 SW-09에서 별도 요구와 구성으로 평가해야 한다.
+
+## Warn/Major 수준의 부족한 표현
+
+- **sw07_major_requirements_without_environment** — 데이터 종류와 protocol 이름만 제시하고 거리, 환경, 장치 수, 진단, 수명주기 요구를 누락한다.
+보완: Communication requirement를 기능·환경·운영·수명주기 항목으로 구조화한다.
+- **sw07_major_media_without_physical_rules** — Copper와 fiber의 장단점만 나열하고 termination, grounding, connector, transceiver와 시공조건을 설명하지 않는다.
+보완: Physical media 선정과 commissioning 조건을 연결한다.
+- **sw07_major_protocol_catalog_only** — HART, Fieldbus, Industrial Ethernet 명칭만 나열하고 역할·장치통합·선정기준을 비교하지 않는다.
+보완: 각 protocol의 적용계층, data model, engineering integration과 brownfield 조건을 비교한다.
+- **sw07_major_modbus_without_mapping** — Modbus를 개방형 protocol이라고만 설명하고 register map, data type, scale와 byte order를 누락한다.
+보완: Device-specific mapping과 semantic validation을 포함한다.
+- **sw07_major_gateway_without_semantics** — Gateway 연결만 제시하고 data direction, unit, quality, timeout와 unsupported function을 정의하지 않는다.
+보완: Protocol conversion table과 장애상태 처리를 구체화한다.
+- **sw07_major_profile_description_missing** — Protocol 호환성만 설명하고 device profile과 Device Description revision을 누락한다.
+보완: 기능 profile, engineering file와 host 지원범위를 함께 확인한다.
+- **sw07_major_certification_without_integration** — Certification 제품을 선정했다고만 쓰고 controller·host·gateway 조합의 integration test를 누락한다.
+보완: Conformance와 interoperability를 구분하고 승인조합 시험을 수행한다.
+- **sw07_major_commissioning_happy_path_only** — 정상값 표시만 확인하고 주소중복, 단선, timeout, device replacement와 fail behavior를 시험하지 않는다.
+보완: Physical·logical·functional·fault commissioning을 단계화한다.
+- **sw07_major_wireless_without_site_power** — 무선의 배선절감만 설명하고 site survey, 간섭, battery와 유지보수 접근성을 누락한다.
+보완: RF와 전원 수명주기 조건을 선정기준에 포함한다.
+- **sw07_major_lifecycle_without_matrix** — 초기 호환성만 확인하고 firmware, profile, host, tool, OS, license와 description revision의 장기 조합을 관리하지 않는다.
+보완: Compatibility matrix와 교체·upgrade 절차를 유지한다.
+- **sw07_major_brownfield_without_transition** — 신규 protocol의 장점만 설명하고 기존 4–20 mA·serial·fieldbus와의 coexistence, gateway와 shutdown 제약을 누락한다.
+보완: Installed base를 반영한 단계적 전환방안을 제시한다.
+- **sw07_major_boundary_blurring** — SW-07 답안을 latency·jitter·복구시간 또는 firewall·암호화·사고대응 중심으로 전개한다.
+보완: SW-07은 구조·기능·상호운용·선정에 집중하고 SW-08·SW-09 경계를 명시한다.
+
+## False positive 주의사항
+
+- Copper를 선정했다는 이유만으로 낮은 수준의 답안으로 보지 말고 거리·EMI·접지·수명주기 근거를 확인한다.
+- Fiber를 사용하지 않았다는 이유만으로 오답 처리하지 말고 실제 거리와 전기적 절연 요구를 본다.
+- HART를 4–20 mA와 함께 설명한 답안은 정상적인 점대점 구조로 인정한다.
+- FOUNDATION Fieldbus와 PROFIBUS PA의 공통 물리요소를 언급해도 protocol과 profile 차이를 함께 설명하면 오류가 아니다.
+- Modbus를 단순 protocol이라고 표현해도 register mapping과 data meaning 한계를 설명하면 인정한다.
+- Industrial Ethernet protocol 중 하나만 선정해도 요구사항 기반 비교와 host 지원근거가 있으면 인정한다.
+- OPC UA를 field device 가까이에 적용했다는 이유만으로 오답 처리하지 말고 역할과 실시간성 한계를 구분했는지 본다.
+- WirelessHART 또는 ISA100.11a 중 하나만 채택해도 device·gateway·host ecosystem과 site 조건 근거가 있으면 인정한다.
+- Gateway 사용 자체를 상호운용 실패로 보지 말고 semantic mapping과 장애상태 처리가 있는지 본다.
+- Vendor-specific Device Description나 tool 사용 자체는 오류가 아니며 version·지원·exit 조건을 관리하면 인정한다.
+- Certification을 상호운용성 근거로 제시하는 것은 맞으며 실제 조합시험을 완전히 대체한다고 단정할 때만 Fatal로 본다.
+- Cycle time 또는 latency를 간단히 언급해도 주된 답안이 구조·기능·상호운용성 선정이면 SW-07로 인정한다.
+- 보안기능의 존재를 선정조건으로 언급해도 인증·암호화·방화벽 설계가 주된 논지가 아니면 SW-07 경계 위반이 아니다.
+- Brownfield에서 기존 serial 또는 4–20 mA를 유지하는 결정은 위험·비용·전환계획 근거가 있으면 인정한다.
+- Protocol 이름의 한글·영문 표기와 대소문자 차이는 의미가 동일하면 허용한다.
+
+## 권장 답안 구조
+
+- **1. 요구사항과 선정 원칙** — 전송기능, 장치 수·거리·환경, 진단, 기존 설비, 유지보수와 수명주기 요구를 정의하고 다기준 선정절차를 제시한다.
+- **2. 물리매체와 topology** — Copper·fiber·serial의 특성과 termination·grounding·topology를 연결한다.
+- **3. Process Fieldbus** — HART, FOUNDATION Fieldbus와 PROFIBUS PA의 역할·구성·장치통합 차이를 설명한다.
+- **4. Modbus와 Industrial Ethernet** — Modbus RTU/TCP, EtherNet/IP, PROFINET과 EtherCAT의 application model과 integration file을 비교한다.
+- **5. OPC UA와 산업 무선** — OPC UA의 information model 역할과 WirelessHART·ISA100.11a의 구조·site survey·battery 조건을 설명한다.
+- **6. 상호운용성과 Gateway** — Gateway·protocol conversion, device profile, Device Description, certification과 integration test를 연결한다.
+- **7. Commissioning과 수명주기** — 주소·name·parameter·fault test, diagnostics, brownfield 전환과 compatibility matrix를 제시한다.
+- **8. 결론과 ownership 경계** — 기능·상호운용성 중심 선정결론을 내리고 정량적 실시간성은 SW-08, 보안통제는 SW-09로 구분한다.
+
+## 모범답안
+
+### 1. 개요
+
+산업계측제어 통신은 측정값과 명령을 전달하는 배선기술을 넘어 장치설정, 상태·진단, 자산정보와 시스템 간 의미를 연결하는 기반이다. 따라서 선정은 최고속도 중심이 아니라 데이터 종류와 방향, 장치 수, 거리, 설치환경, 기존 설비, 진단성, 상호운용성, 유지보수성과 수명주기비용을 먼저 정의한 뒤 수행해야 한다.
+
+### 2. 물리매체와 Serial communication
+
+Copper는 설치성과 기존 배선 활용에 유리하지만 거리, EMI, 접지전위차, 차폐와 피뢰를 검토해야 한다. Fiber는 전기적 절연과 EMI 내성에 유리하지만 광모듈·connector 오염·굴곡·접속손실·전원과 수리기술을 관리해야 한다. Serial 통신에서는 RS-485 같은 물리계층과 Modbus RTU 같은 응용 protocol을 구분하며 baud, parity, address, bus topology, termination, bias, stub와 grounding을 함께 확인한다.
+
+### 3. HART와 Process Fieldbus
+
+HART는 4–20 mA 위에 digital communication을 중첩하여 설정, 추가 변수와 diagnostics를 제공한다. 점대점과 multidrop은 loop current, 주소와 polling 운용이 다르다. FOUNDATION Fieldbus는 function block과 장치관리·진단을 통합하며 segment 전원, trunk·spur와 terminator를 설계한다. PROFIBUS PA는 PA profile과 DP/PA coupling 또는 linking device를 사용한다. 두 Fieldbus는 물리구성이 유사할 수 있어도 protocol, profile, host와 engineering file이 달라 직접 교환되지 않는다.
+
+### 4. Modbus와 Industrial Ethernet
+
+Modbus RTU/TCP는 단순하고 널리 사용되지만 register 의미, data type, byte order, unit와 scale가 장치 mapping에 의존한다. EtherNet/IP는 CIP object·service·connection과 EDS를, PROFINET은 device role·profile·GSDML을, EtherCAT은 master configuration·process data mapping·ESI를 확인해야 한다. 같은 Ethernet cable과 IP를 사용해도 application model과 device profile이 다르면 직접 상호운용되지 않는다.
+
+### 5. OPC UA와 산업 무선
+
+OPC UA는 address space와 information model로 data type, relationship, method, event와 subscription을 표현하여 SCADA, MES, gateway와 상위시스템 통합에 유리하다. 그러나 모든 field I/O bus와 정량적 실시간성을 자동 대체하지는 않는다. WirelessHART와 ISA100.11a는 각각 device, gateway와 network/system manager를 포함하는 별도 ecosystem이다. 무선 선정에는 site survey, 구조물과 간섭, antenna 배치, gateway 위치, battery 수명과 교체 접근성을 포함한다.
+
+### 6. 상호운용성과 Gateway
+
+상호운용성은 physical link, protocol frame, data syntax, semantic meaning, device behavior와 engineering integration의 여러 수준으로 확인한다. Gateway와 protocol converter는 address와 값만 전달하는 장치가 아니라 unit, scale, quality, timestamp, read/write 방향, timeout와 startup state를 mapping하는 경계이다. Device profile은 공통 기능을, Device Description은 parameter와 engineering menu를 제공한다. Certification은 규격 적합성의 근거이지만 실제 controller·host·gateway 조합은 integration test로 검증해야 한다.
+
+### 7. Commissioning과 수명주기 관리
+
+Commissioning은 문서검토와 cable·polarity·shield·termination 검사, address·station name 설정, Device Description 등록, parameter·unit 확인, 정상통신, command와 fail behavior, diagnostics와 문서갱신 순서로 수행한다. Brownfield에서는 기존 4–20 mA, HART, serial과 fieldbus를 gateway나 adapter로 공존시키고 shutdown 제약에 맞춰 단계 전환할 수 있다. 장기 운전에는 protocol version, profile, firmware, host, engineering tool, OS, license와 Device Description revision을 compatibility matrix로 관리한다.
+
+### 8. 결론
+
+적정 통신방식은 요구기능과 설치환경, 기존설비, 상호운용성 증거, commissioning 가능성, 공급자 지원과 총수명주기비용을 비교하여 선정한다. SW-07은 통신 구조·기능·상호운용성과 선정기준을 담당한다. Latency, jitter, cycle time, determinism, 시간동기와 정량적 장애복구는 SW-08에서 평가하고, 인증·암호화·접근통제·방화벽과 침해대응은 SW-09에서 평가한다.
+
+## Routing 설계
+
+### Routing aliases
+
+- `계측제어 유무선 통신 Fieldbus Industrial Ethernet`
+- `industrial wired wireless communication fieldbus ethernet`
+- `산업 통신방식 선정 상호운용성`
+- `communication media protocol interoperability selection`
+- `copper fiber serial fieldbus selection`
+- `구리 광섬유 직렬통신 선정`
+- `HART FOUNDATION Fieldbus PROFIBUS PA 비교`
+- `HART FF PROFIBUS PA interoperability`
+- `Modbus RTU Modbus TCP gateway mapping`
+- `Modbus register protocol conversion`
+- `EtherNet/IP CIP EDS device profile`
+- `PROFINET GSDML device integration`
+- `EtherCAT ESI process data mapping`
+- `OPC UA information model interoperability`
+- `WirelessHART ISA100.11a gateway`
+- `산업 무선 site survey battery lifecycle`
+- `gateway protocol converter semantic mapping`
+- `device profile device description interoperability`
+- `DD EDD GSD GSDML EDS ESI`
+- `field device commissioning communication`
+- `brownfield communication migration gateway`
+- `protocol firmware host compatibility matrix`
+- `industrial communication topology termination grounding`
+- `multi vendor device interoperability certification`
+- `industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection`
+
+### Field connection points
+
+- 4–20 mA HART smart transmitter integration
+- FOUNDATION Fieldbus segment and host integration
+- PROFIBUS PA DP/PA linking device
+- Modbus RTU RS-485 register mapping
+- Modbus TCP serial gateway
+- EtherNet/IP remote I/O and EDS
+- PROFINET controller device and GSDML
+- EtherCAT master slave and ESI
+- OPC UA SCADA MES information integration
+- WirelessHART gateway and network manager
+- ISA100.11a gateway and system manager
+- copper shield grounding termination
+- fiber transceiver connector and splice
+- bus star ring mesh topology selection
+- device profile and optional function
+- DD EDD GSD GSDML EDS ESI revision
+- Gateway unit scale quality mapping
+- controller host device interoperability test
+- address station name tag consistency
+- commissioning normal and fault test
+- brownfield coexistence and phased transition
+- firmware profile host compatibility matrix
+- vendor engineering tool and license dependency
+- spare device replacement and parameter download
+- physical layer diagnostic and error counter
+- wireless site survey and interference
+- battery replacement and maintenance route
+- protocol conversion timeout startup state
+- certification approved combination list
+- SW-08 realtime performance boundary
+- SW-09 cybersecurity control boundary
+
+### Broad alias 금지
+
+다음 단독 alias는 SW-08·SW-09 및 일반 software Topic과 충돌하므로 사용하지 않는다.
+
+- `communication`
+- `network`
+- `Ethernet`
+- `wireless`
+- `security`
+- `realtime`
+- `latency`
+- `jitter`
+- `firewall`
+- `cybersecurity`
+
+Compound alias에서 protocol, fieldbus, interoperability, device profile, gateway 또는 commissioning 맥락을 함께 사용한다.
+
+## Focused regression 범위
+
+- 40개 Fact Anchor의 schema와 순서
+- 20개 Fatal과 C-layer ownership
+- 12개 Major/Warn 기준
+- 25개 이상의 safe expression
+- 10개 question pattern과 local anchor reference
+- 8개 recommended outline
+- 20개 이상의 narrow routing alias
+- 100개 이상의 semantic key term
+- Device profile·Device Description·Gateway·commissioning·lifecycle compatibility
+- SW-08과 SW-09 ownership boundary
+- deterministic check 비활성화와 LLM semantic verification
+- source 7개만 변경하는 Lane B ownership
+
+## Source basis
+
+웹 검색 없이 기존 확정 schema와 산업 통신 표준체계의 안정적인 개념을 기준으로 작성하였다.
+
+- IEC 61158 industrial communication networks
+- IEC 61784 communication profiles
+- IEC 61804 device integration and EDDL concepts
+- IEC 62591 WirelessHART
+- IEC 62734 ISA100.11a
+- FieldComm Group HART and FOUNDATION Fieldbus
+- PI PROFIBUS and PROFINET
+- ODVA CIP and EtherNet/IP
+- Modbus Organization
+- EtherCAT Technology Group
+- OPC Foundation OPC UA
+- IEEE 802.3 physical media principles
+- 현장 commissioning과 lifecycle compatibility 절차
+
+## 검토 메모
+
+- Protocol 이름만으로 실시간 성능이나 보안수준을 단정하지 않는다.
+- Gateway가 semantic과 diagnostics를 무손실 변환한다고 가정하지 않는다.
+- Certification과 실제 multi-vendor interoperability를 구분한다.
+- 표준 protocol 사용과 vendor tool·profile·license 의존성을 동시에 평가한다.
+- 외부 LLM 검증은 실행 스크립트에서 수행하지 않는다.

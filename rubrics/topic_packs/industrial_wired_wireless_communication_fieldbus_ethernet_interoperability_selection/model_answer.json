@@ -1,0 +1,419 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection_COMPARE_SELECTION_v1",
+  "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+  "title": "계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성",
+  "title_ko": "계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성",
+  "question_type": "COMPARE_SELECTION",
+  "topic_aliases": [
+    "계측제어 유무선 통신 Fieldbus Industrial Ethernet",
+    "industrial wired wireless communication fieldbus ethernet",
+    "산업 통신방식 선정 상호운용성",
+    "communication media protocol interoperability selection",
+    "copper fiber serial fieldbus selection",
+    "구리 광섬유 직렬통신 선정",
+    "HART FOUNDATION Fieldbus PROFIBUS PA 비교",
+    "HART FF PROFIBUS PA interoperability",
+    "Modbus RTU Modbus TCP gateway mapping",
+    "Modbus register protocol conversion",
+    "EtherNet/IP CIP EDS device profile",
+    "PROFINET GSDML device integration",
+    "EtherCAT ESI process data mapping",
+    "OPC UA information model interoperability",
+    "WirelessHART ISA100.11a gateway",
+    "산업 무선 site survey battery lifecycle",
+    "gateway protocol converter semantic mapping",
+    "device profile device description interoperability",
+    "DD EDD GSD GSDML EDS ESI",
+    "field device commissioning communication",
+    "brownfield communication migration gateway",
+    "protocol firmware host compatibility matrix",
+    "industrial communication topology termination grounding",
+    "multi vendor device interoperability certification",
+    "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+  ],
+  "routing_aliases": [
+    "계측제어 유무선 통신 Fieldbus Industrial Ethernet",
+    "industrial wired wireless communication fieldbus ethernet",
+    "산업 통신방식 선정 상호운용성",
+    "communication media protocol interoperability selection",
+    "copper fiber serial fieldbus selection",
+    "구리 광섬유 직렬통신 선정",
+    "HART FOUNDATION Fieldbus PROFIBUS PA 비교",
+    "HART FF PROFIBUS PA interoperability",
+    "Modbus RTU Modbus TCP gateway mapping",
+    "Modbus register protocol conversion",
+    "EtherNet/IP CIP EDS device profile",
+    "PROFINET GSDML device integration",
+    "EtherCAT ESI process data mapping",
+    "OPC UA information model interoperability",
+    "WirelessHART ISA100.11a gateway",
+    "산업 무선 site survey battery lifecycle",
+    "gateway protocol converter semantic mapping",
+    "device profile device description interoperability",
+    "DD EDD GSD GSDML EDS ESI",
+    "field device commissioning communication",
+    "brownfield communication migration gateway",
+    "protocol firmware host compatibility matrix",
+    "industrial communication topology termination grounding",
+    "multi vendor device interoperability certification",
+    "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+  ],
+  "expected_structure": [
+    "1. 요구사항과 선정 원칙",
+    "2. 물리매체와 topology",
+    "3. Process Fieldbus",
+    "4. Modbus와 Industrial Ethernet",
+    "5. OPC UA와 산업 무선",
+    "6. 상호운용성과 Gateway",
+    "7. Commissioning과 수명주기",
+    "8. 결론과 ownership 경계"
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 요구사항과 선정 원칙",
+      "content": "전송기능, 장치 수·거리·환경, 진단, 기존 설비, 유지보수와 수명주기 요구를 정의하고 다기준 선정절차를 제시한다.",
+      "anchor_refs": [
+        "sw07_communication_requirements",
+        "sw07_layered_view",
+        "sw07_selection_multicriteria"
+      ]
+    },
+    {
+      "section": "2. 물리매체와 topology",
+      "content": "Copper·fiber·serial의 특성과 termination·grounding·topology를 연결한다.",
+      "anchor_refs": [
+        "sw07_copper_media",
+        "sw07_fiber_media",
+        "sw07_serial_communication",
+        "sw07_rs485_multidrop",
+        "sw07_topology_selection",
+        "sw07_termination_grounding"
+      ]
+    },
+    {
+      "section": "3. Process Fieldbus",
+      "content": "HART, FOUNDATION Fieldbus와 PROFIBUS PA의 역할·구성·장치통합 차이를 설명한다.",
+      "anchor_refs": [
+        "sw07_fieldbus_concept",
+        "sw07_hart_overlay",
+        "sw07_hart_multidrop",
+        "sw07_foundation_fieldbus",
+        "sw07_foundation_fieldbus_function_blocks",
+        "sw07_profibus_pa"
+      ]
+    },
+    {
+      "section": "4. Modbus와 Industrial Ethernet",
+      "content": "Modbus RTU/TCP, EtherNet/IP, PROFINET과 EtherCAT의 application model과 integration file을 비교한다.",
+      "anchor_refs": [
+        "sw07_modbus_rtu",
+        "sw07_modbus_tcp",
+        "sw07_ethernetip_cip",
+        "sw07_profinet",
+        "sw07_ethercat"
+      ]
+    },
+    {
+      "section": "5. OPC UA와 산업 무선",
+      "content": "OPC UA의 information model 역할과 WirelessHART·ISA100.11a의 구조·site survey·battery 조건을 설명한다.",
+      "anchor_refs": [
+        "sw07_opcua",
+        "sw07_opcua_role_boundary",
+        "sw07_wirelesshart",
+        "sw07_isa10011a",
+        "sw07_wireless_site_survey",
+        "sw07_wireless_power_lifecycle"
+      ]
+    },
+    {
+      "section": "6. 상호운용성과 Gateway",
+      "content": "Gateway·protocol conversion, device profile, Device Description, certification과 integration test를 연결한다.",
+      "anchor_refs": [
+        "sw07_gateway_role",
+        "sw07_protocol_conversion",
+        "sw07_device_profile",
+        "sw07_device_description",
+        "sw07_interoperability_levels",
+        "sw07_conformance_vs_interoperability"
+      ]
+    },
+    {
+      "section": "7. Commissioning과 수명주기",
+      "content": "주소·name·parameter·fault test, diagnostics, brownfield 전환과 compatibility matrix를 제시한다.",
+      "anchor_refs": [
+        "sw07_commissioning_workflow",
+        "sw07_addressing_naming",
+        "sw07_diagnostics_maintenance",
+        "sw07_installed_base_transition",
+        "sw07_lifecycle_compatibility",
+        "sw07_vendor_tool_dependency"
+      ]
+    },
+    {
+      "section": "8. 결론과 ownership 경계",
+      "content": "기능·상호운용성 중심 선정결론을 내리고 정량적 실시간성은 SW-08, 보안통제는 SW-09로 구분한다.",
+      "anchor_refs": [
+        "sw07_sw08_boundary",
+        "sw07_sw09_boundary"
+      ]
+    }
+  ],
+  "expected_question_patterns": [
+    {
+      "id": "sw07_qp_communication_selection",
+      "pattern": "통신 요구사항을 정의하고 유·무선 통신방식을 선정하는 문제",
+      "required_anchor_ids": [
+        "sw07_communication_requirements",
+        "sw07_selection_multicriteria",
+        "sw07_layered_view",
+        "sw07_lifecycle_compatibility"
+      ]
+    },
+    {
+      "id": "sw07_qp_media_serial",
+      "pattern": "Copper, fiber와 serial communication의 특성·선정·시공을 묻는 문제",
+      "required_anchor_ids": [
+        "sw07_copper_media",
+        "sw07_fiber_media",
+        "sw07_serial_communication",
+        "sw07_rs485_multidrop",
+        "sw07_termination_grounding"
+      ]
+    },
+    {
+      "id": "sw07_qp_fieldbus_compare",
+      "pattern": "HART, FOUNDATION Fieldbus와 PROFIBUS PA를 비교하는 문제",
+      "required_anchor_ids": [
+        "sw07_fieldbus_concept",
+        "sw07_hart_overlay",
+        "sw07_hart_multidrop",
+        "sw07_foundation_fieldbus",
+        "sw07_profibus_pa"
+      ]
+    },
+    {
+      "id": "sw07_qp_modbus_integration",
+      "pattern": "Modbus RTU/TCP와 gateway mapping을 설명하는 문제",
+      "required_anchor_ids": [
+        "sw07_modbus_rtu",
+        "sw07_modbus_tcp",
+        "sw07_gateway_role",
+        "sw07_protocol_conversion"
+      ]
+    },
+    {
+      "id": "sw07_qp_industrial_ethernet",
+      "pattern": "EtherNet/IP, PROFINET과 EtherCAT의 구조와 선정기준을 비교하는 문제",
+      "required_anchor_ids": [
+        "sw07_ethernetip_cip",
+        "sw07_profinet",
+        "sw07_ethercat",
+        "sw07_interoperability_levels"
+      ]
+    },
+    {
+      "id": "sw07_qp_opcua",
+      "pattern": "OPC UA information model과 산업 통합 적용을 묻는 문제",
+      "required_anchor_ids": [
+        "sw07_opcua",
+        "sw07_opcua_role_boundary",
+        "sw07_protocol_conversion",
+        "sw07_sw08_boundary"
+      ]
+    },
+    {
+      "id": "sw07_qp_wireless",
+      "pattern": "WirelessHART와 ISA100.11a 구조·선정·현장적용을 묻는 문제",
+      "required_anchor_ids": [
+        "sw07_wirelesshart",
+        "sw07_isa10011a",
+        "sw07_wireless_site_survey",
+        "sw07_wireless_power_lifecycle"
+      ]
+    },
+    {
+      "id": "sw07_qp_interoperability",
+      "pattern": "Device profile, Device Description, certification과 상호운용성을 묻는 문제",
+      "required_anchor_ids": [
+        "sw07_device_profile",
+        "sw07_device_description",
+        "sw07_interoperability_levels",
+        "sw07_conformance_vs_interoperability"
+      ]
+    },
+    {
+      "id": "sw07_qp_commissioning_lifecycle",
+      "pattern": "통신 commissioning과 수명주기 호환성 관리 문제",
+      "required_anchor_ids": [
+        "sw07_commissioning_workflow",
+        "sw07_addressing_naming",
+        "sw07_diagnostics_maintenance",
+        "sw07_lifecycle_compatibility",
+        "sw07_vendor_tool_dependency"
+      ]
+    },
+    {
+      "id": "sw07_qp_brownfield_boundary",
+      "pattern": "기존 설비 통신 전환과 SW-08·SW-09 경계를 묻는 문제",
+      "required_anchor_ids": [
+        "sw07_installed_base_transition",
+        "sw07_gateway_role",
+        "sw07_sw08_boundary",
+        "sw07_sw09_boundary"
+      ]
+    }
+  ],
+  "question_examples": [
+    "계측제어 시스템의 유·무선 통신방식 선정절차와 평가항목을 설명하시오.",
+    "Copper, fiber 및 serial communication의 특성과 산업현장 적용 시 고려사항을 비교하시오.",
+    "HART, FOUNDATION Fieldbus 및 PROFIBUS PA의 구조·기능과 선정기준을 비교하시오.",
+    "Modbus RTU와 Modbus TCP의 차이 및 Gateway 적용 시 데이터 mapping 고려사항을 설명하시오.",
+    "EtherNet/IP, PROFINET 및 EtherCAT의 구조와 상호운용성 확보방안을 비교하시오.",
+    "OPC UA의 information model 기반 상호운용성과 Fieldbus와의 역할 차이를 설명하시오.",
+    "WirelessHART와 ISA100.11a의 구성 및 산업현장 적용 시 고려사항을 설명하시오.",
+    "Device profile, Device Description와 conformance certification이 상호운용성에 미치는 영향을 설명하시오.",
+    "산업 통신망 commissioning 절차와 다중 vendor 장치의 통합시험 항목을 설명하시오.",
+    "Brownfield 제어시스템의 통신 protocol 전환 및 수명주기 호환성 관리방안을 설명하시오."
+  ],
+  "high_score_points": [
+    "통신 요구를 data type·direction·device count·distance·environment·diagnostics·lifecycle로 먼저 정의한다.",
+    "Physical media, protocol, profile와 information model의 계층을 구분한다.",
+    "Copper와 fiber의 장단점을 EMI·접지·거리·시공·전원·유지보수와 연결한다.",
+    "RS-485와 Modbus RTU를 물리계층과 응용 protocol로 구분하고 termination·bias·address를 제시한다.",
+    "HART 점대점과 multidrop, FOUNDATION Fieldbus와 PROFIBUS PA의 구조·host integration 차이를 설명한다.",
+    "Modbus register mapping에서 data type, unit, scale와 byte order를 확인한다.",
+    "EtherNet/IP의 CIP·EDS, PROFINET의 profile·GSDML, EtherCAT의 master·ESI를 상호운용성 조건으로 연결한다.",
+    "OPC UA의 information model 강점과 fieldbus·정량적 실시간성의 역할 차이를 설명한다.",
+    "WirelessHART와 ISA100.11a의 device·gateway·manager ecosystem을 구분하고 site survey를 포함한다.",
+    "Gateway와 protocol conversion에서 unit, quality, diagnostics, timeout와 command semantics를 mapping한다.",
+    "Device profile, Device Description, conformance와 actual interoperability test의 차이를 설명한다.",
+    "Commissioning을 physical-address-parameter-normal-fault-diagnostics-documentation 단계로 제시한다.",
+    "Brownfield coexistence와 단계적 전환을 기존 자산·shutdown·교육·spare 관점에서 판단한다.",
+    "Firmware, profile, host, engineering tool, description file와 license의 compatibility matrix를 유지한다.",
+    "SW-08 정량적 실시간성·복구성능과 SW-09 보안통제의 ownership 경계를 명확히 한다."
+  ],
+  "high_score_features": [
+    "통신 요구를 data type·direction·device count·distance·environment·diagnostics·lifecycle로 먼저 정의한다.",
+    "Physical media, protocol, profile와 information model의 계층을 구분한다.",
+    "Copper와 fiber의 장단점을 EMI·접지·거리·시공·전원·유지보수와 연결한다.",
+    "RS-485와 Modbus RTU를 물리계층과 응용 protocol로 구분하고 termination·bias·address를 제시한다.",
+    "HART 점대점과 multidrop, FOUNDATION Fieldbus와 PROFIBUS PA의 구조·host integration 차이를 설명한다.",
+    "Modbus register mapping에서 data type, unit, scale와 byte order를 확인한다.",
+    "EtherNet/IP의 CIP·EDS, PROFINET의 profile·GSDML, EtherCAT의 master·ESI를 상호운용성 조건으로 연결한다.",
+    "OPC UA의 information model 강점과 fieldbus·정량적 실시간성의 역할 차이를 설명한다.",
+    "WirelessHART와 ISA100.11a의 device·gateway·manager ecosystem을 구분하고 site survey를 포함한다.",
+    "Gateway와 protocol conversion에서 unit, quality, diagnostics, timeout와 command semantics를 mapping한다.",
+    "Device profile, Device Description, conformance와 actual interoperability test의 차이를 설명한다.",
+    "Commissioning을 physical-address-parameter-normal-fault-diagnostics-documentation 단계로 제시한다.",
+    "Brownfield coexistence와 단계적 전환을 기존 자산·shutdown·교육·spare 관점에서 판단한다.",
+    "Firmware, profile, host, engineering tool, description file와 license의 compatibility matrix를 유지한다.",
+    "SW-08 정량적 실시간성·복구성능과 SW-09 보안통제의 ownership 경계를 명확히 한다."
+  ],
+  "common_missing_points": [
+    "Protocol 이름과 속도만 나열하고 communication requirement를 정의하지 않는다.",
+    "Physical media와 application protocol의 계층을 혼동한다.",
+    "RS-485를 Modbus와 같은 완전한 protocol로 설명한다.",
+    "Copper·fiber 선정에서 termination, grounding, transceiver와 시공조건을 누락한다.",
+    "HART, FOUNDATION Fieldbus와 PROFIBUS PA의 host·profile 차이를 설명하지 않는다.",
+    "Modbus register mapping과 data meaning 한계를 누락한다.",
+    "Industrial Ethernet을 Ethernet cable과 IP 주소만으로 설명한다.",
+    "OPC UA를 모든 fieldbus와 실시간 요구의 자동 대체로 설명한다.",
+    "무선망에서 site survey, 간섭과 battery lifecycle을 누락한다.",
+    "Gateway가 모든 기능과 진단을 자동 보존한다고 가정한다.",
+    "Device profile, Device Description와 certification의 역할을 구분하지 않는다.",
+    "Commissioning에서 fault behavior와 replacement test를 누락한다.",
+    "Brownfield coexistence와 단계적 전환을 고려하지 않는다.",
+    "Firmware·host·tool·license 호환성의 수명주기 관리를 누락한다.",
+    "SW-08과 SW-09 범위를 혼합하여 답안 중심이 실시간성 또는 보안통제로 이동한다."
+  ],
+  "low_score_patterns": [
+    "Protocol 이름과 속도만 나열하고 communication requirement를 정의하지 않는다.",
+    "Physical media와 application protocol의 계층을 혼동한다.",
+    "RS-485를 Modbus와 같은 완전한 protocol로 설명한다.",
+    "Copper·fiber 선정에서 termination, grounding, transceiver와 시공조건을 누락한다.",
+    "HART, FOUNDATION Fieldbus와 PROFIBUS PA의 host·profile 차이를 설명하지 않는다.",
+    "Modbus register mapping과 data meaning 한계를 누락한다.",
+    "Industrial Ethernet을 Ethernet cable과 IP 주소만으로 설명한다.",
+    "OPC UA를 모든 fieldbus와 실시간 요구의 자동 대체로 설명한다.",
+    "무선망에서 site survey, 간섭과 battery lifecycle을 누락한다.",
+    "Gateway가 모든 기능과 진단을 자동 보존한다고 가정한다.",
+    "Device profile, Device Description와 certification의 역할을 구분하지 않는다.",
+    "Commissioning에서 fault behavior와 replacement test를 누락한다.",
+    "Brownfield coexistence와 단계적 전환을 고려하지 않는다.",
+    "Firmware·host·tool·license 호환성의 수명주기 관리를 누락한다.",
+    "SW-08과 SW-09 범위를 혼합하여 답안 중심이 실시간성 또는 보안통제로 이동한다."
+  ],
+  "field_connection_points": [
+    "4–20 mA HART smart transmitter integration",
+    "FOUNDATION Fieldbus segment and host integration",
+    "PROFIBUS PA DP/PA linking device",
+    "Modbus RTU RS-485 register mapping",
+    "Modbus TCP serial gateway",
+    "EtherNet/IP remote I/O and EDS",
+    "PROFINET controller device and GSDML",
+    "EtherCAT master slave and ESI",
+    "OPC UA SCADA MES information integration",
+    "WirelessHART gateway and network manager",
+    "ISA100.11a gateway and system manager",
+    "copper shield grounding termination",
+    "fiber transceiver connector and splice",
+    "bus star ring mesh topology selection",
+    "device profile and optional function",
+    "DD EDD GSD GSDML EDS ESI revision",
+    "Gateway unit scale quality mapping",
+    "controller host device interoperability test",
+    "address station name tag consistency",
+    "commissioning normal and fault test",
+    "brownfield coexistence and phased transition",
+    "firmware profile host compatibility matrix",
+    "vendor engineering tool and license dependency",
+    "spare device replacement and parameter download",
+    "physical layer diagnostic and error counter",
+    "wireless site survey and interference",
+    "battery replacement and maintenance route",
+    "protocol conversion timeout startup state",
+    "certification approved combination list",
+    "SW-08 realtime performance boundary",
+    "SW-09 cybersecurity control boundary"
+  ],
+  "routing_field_points": [
+    "4–20 mA HART smart transmitter integration",
+    "FOUNDATION Fieldbus segment and host integration",
+    "PROFIBUS PA DP/PA linking device",
+    "Modbus RTU RS-485 register mapping",
+    "Modbus TCP serial gateway",
+    "EtherNet/IP remote I/O and EDS",
+    "PROFINET controller device and GSDML",
+    "EtherCAT master slave and ESI",
+    "OPC UA SCADA MES information integration",
+    "WirelessHART gateway and network manager",
+    "ISA100.11a gateway and system manager",
+    "copper shield grounding termination",
+    "fiber transceiver connector and splice",
+    "bus star ring mesh topology selection",
+    "device profile and optional function",
+    "DD EDD GSD GSDML EDS ESI revision",
+    "Gateway unit scale quality mapping",
+    "controller host device interoperability test",
+    "address station name tag consistency",
+    "commissioning normal and fault test",
+    "brownfield coexistence and phased transition",
+    "firmware profile host compatibility matrix",
+    "vendor engineering tool and license dependency",
+    "spare device replacement and parameter download",
+    "physical layer diagnostic and error counter",
+    "wireless site survey and interference",
+    "battery replacement and maintenance route",
+    "protocol conversion timeout startup state",
+    "certification approved combination list",
+    "SW-08 realtime performance boundary",
+    "SW-09 cybersecurity control boundary"
+  ],
+  "revision_notes": [
+    "created_for_SOFTWARE_LLM_LANE_B_SW_07",
+    "rich_question_patterns_reference_only_local_anchor_ids",
+    "router_aliases_are_compound_and_exclude_broad_network_security_terms",
+    "full_prose_model_answer_is_documented_in_README_and_Topic_Sheet"
+  ]
+}

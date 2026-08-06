@@ -1,0 +1,27 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "HIGH",
+  "question_type": "COMPARE_SELECTION",
+  "high_band_unlock_conditions": [
+    "Communication requirement와 다기준 선정절차를 먼저 제시한다.",
+    "Physical media, protocol, profile와 information model의 계층을 구분한다.",
+    "HART, FOUNDATION Fieldbus, PROFIBUS PA와 Modbus의 구조·통합 차이를 정확히 설명한다.",
+    "EtherNet/IP, PROFINET, EtherCAT의 device model과 engineering file을 구분한다.",
+    "OPC UA와 fieldbus의 역할 차이를 설명한다.",
+    "WirelessHART와 ISA100.11a의 구조, site survey와 battery lifecycle을 포함한다.",
+    "Gateway·protocol conversion의 semantic mapping과 장애상태 처리를 제시한다.",
+    "Device profile·Device Description·certification·integration test의 관계를 설명한다.",
+    "Commissioning과 lifecycle compatibility matrix를 현장절차로 제시한다.",
+    "SW-08과 SW-09 ownership 경계를 명확히 유지하고 Fatal 오류가 없다."
+  ],
+  "note": "산업계측제어 통신은 물리매체 선택부터 protocol, device integration, gateway, commissioning과 장기 호환성까지 연결되는 시스템 통합 주제이다. SW-07은 protocol 명칭의 암기가 아니라 기능·상호운용성·현장선정 판단을 평가한다.",
+  "revision_notes": [
+    "created_for_SOFTWARE_LLM_LANE_B_SW_07",
+    "difficulty_set_to_DESIGN_EVALUATION",
+    "selection_importance_set_to_HIGH",
+    "high_band_requires_explicit_SW_08_and_SW_09_boundaries"
+  ],
+  "topic_label": "계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성"
+}
