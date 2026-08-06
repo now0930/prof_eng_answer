@@ -394,7 +394,7 @@
       "[sw06_fatal_small_change_no_impact_analysis] Setpoint나 한 줄 로직 같은 작은 변경은 영향분석과 Regression이 불필요하다. 교정: 변경 크기만으로 위험을 판단하지 말고 영향받는 기능, 인터페이스와 공정 결과를 기준으로 범위를 정한다.",
       "[sw06_fatal_emergency_change_no_record] 긴급변경은 기록, Backup, 승인과 사후검토를 모두 생략해도 된다. 교정: 긴급절차는 단축할 수 있지만 최소 통제와 사후 정식 MOC·Baseline 반영이 필요하다.",
       "[sw06_fatal_release_is_file_copy] 실행파일을 현장에 복사하거나 Download하면 Release가 완료된다. 교정: 승인 artifact, 의존성, 설치·검증·Rollback, 인수와 As-built 갱신까지 통제해야 한다.",
-      "[sw06_fatal_rebuild_equals_authorized_artifact] 같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다. 교정: Build 환경과 dependency 차이를 고려하여 승인된 checksum·서명·artifact를 그대로 배포해야 한다.",
+      "[sw06_fatal_rebuild_equals_authorized_artifact] 같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다. 교정: 승인된 Release artifact를 우선 사용한다. 다만 대상 PLC·DCS·Engineering Tool이 Download 또는 설치 과정에서 object 생성을 요구하는 플랫폼이라면 현장 build 자체를 금지하지 않는다. 이 경우 승인 source, 검증된 toolchain, dependency, library version, build option과 target 설정을 고정하고 생성 결과를 승인 기준과 비교하며, Download 또는 설치 후 version, checksum, configuration과 동작을 검증해야 한다.",
       "[sw06_fatal_backup_exists_recoverable] Backup 파일이 존재하거나 작업 로그가 성공이면 복구 가능성이 보장된다. 교정: Backup 범위·무결성·도구·라이선스·의존성을 확인하고 Restore 시험으로 복구성을 입증해야 한다.",
       "[sw06_fatal_restore_equals_rollback] Restore와 Rollback은 동일한 행위이며 구분할 필요가 없다. 교정: Restore는 백업 기반 복구 행위이고 Rollback은 변경을 철회하여 이전 승인 형상으로 복귀하는 관리 결정이다.",
       "[sw06_fatal_rollback_after_failure_only] Rollback 계획은 장애가 발생한 후 이전 파일을 찾아 복사하면 충분하다. 교정: 변경 전에 trigger, 시간제한, 대상 baseline, 데이터 처리와 의사결정권한을 정해야 한다.",
@@ -572,7 +572,8 @@
       "Cold, warm, hot standby 또는 DR site의 명칭은 시스템 맥락 없이 단정적으로 채점하지 않는다.",
       "Checksum, signature, hash 중 하나를 사용해 artifact 동일성을 설명하면 동등 표현으로 인정한다.",
       "MOC의 승인단계를 조직 규모에 맞게 간소화한 답안은 위험기반 근거가 있으면 인정한다.",
-      "Obsolescence 대책으로 예비품을 제시한 것 자체는 맞으며 그것만으로 충분하다고 단정할 때만 부족으로 본다."
+      "Obsolescence 대책으로 예비품을 제시한 것 자체는 맞으며 그것만으로 충분하다고 단정할 때만 부족으로 본다.",
+      "대상 PLC·DCS·Engineering Tool이 Download 또는 설치 과정에서 object 생성을 요구하더라도 승인 source와 검증된 toolchain·dependency·library version·build option·target 설정을 고정하고 생성 결과와 설치 후 version·checksum·configuration·동작을 검증한 Controlled Build는 Fatal로 판정하지 않는다."
     ],
     "score_policy": {
       "direct_score_application": false,

@@ -1378,14 +1378,14 @@
     {
       "id": "sw06_fatal_rebuild_equals_authorized_artifact",
       "claim": "같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다.",
-      "correction": "Build 환경과 dependency 차이를 고려하여 승인된 checksum·서명·artifact를 그대로 배포해야 한다.",
+      "correction": "승인된 Release artifact를 우선 사용한다. 다만 대상 PLC·DCS·Engineering Tool이 Download 또는 설치 과정에서 object 생성을 요구하는 플랫폼이라면 현장 build 자체를 금지하지 않는다. 이 경우 승인 source, 검증된 toolchain, dependency, library version, build option과 target 설정을 고정하고 생성 결과를 승인 기준과 비교하며, Download 또는 설치 후 version, checksum, configuration과 동작을 검증해야 한다.",
       "severity": "fatal",
       "affected_layers": [
         "C"
       ],
       "examples_or_patterns": [
         "같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다.",
-        "Build 환경과 dependency 차이를 고려하여 승인된 checksum·서명·artifact를 그대로 배포해야 한다."
+        "승인된 Release artifact를 우선 사용한다. 다만 대상 PLC·DCS·Engineering Tool이 Download 또는 설치 과정에서 object 생성을 요구하는 플랫폼이라면 현장 build 자체를 금지하지 않는다. 이 경우 승인 source, 검증된 toolchain, dependency, library version, build option과 target 설정을 고정하고 생성 결과를 승인 기준과 비교하며, Download 또는 설치 후 version, checksum, configuration과 동작을 검증해야 한다."
       ],
       "wrong_patterns": [
         "같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다."

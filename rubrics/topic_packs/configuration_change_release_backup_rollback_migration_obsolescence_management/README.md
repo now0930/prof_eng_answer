@@ -135,7 +135,7 @@ SW-09는 공격, 악성코드, 권한침해, 방어통제와 사이버 사고대
 6. **실행파일을 현장에 복사하거나 Download하면 Release가 완료된다.**
    교정: 승인 artifact, 의존성, 설치·검증·Rollback, 인수와 As-built 갱신까지 통제해야 한다.
 7. **같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다.**
-   교정: Build 환경과 dependency 차이를 고려하여 승인된 checksum·서명·artifact를 그대로 배포해야 한다.
+   교정: 승인된 Release artifact를 우선 사용한다. 다만 대상 PLC·DCS·Engineering Tool이 Download 또는 설치 과정에서 object 생성을 요구하는 플랫폼이라면 현장 build 자체를 금지하지 않는다. 이 경우 승인 source, 검증된 toolchain, dependency, library version, build option과 target 설정을 고정하고 생성 결과를 승인 기준과 비교하며, Download 또는 설치 후 version, checksum, configuration과 동작을 검증해야 한다.
 8. **Backup 파일이 존재하거나 작업 로그가 성공이면 복구 가능성이 보장된다.**
    교정: Backup 범위·무결성·도구·라이선스·의존성을 확인하고 Restore 시험으로 복구성을 입증해야 한다.
 9. **Restore와 Rollback은 동일한 행위이며 구분할 필요가 없다.**
@@ -205,6 +205,7 @@ SW-09는 공격, 악성코드, 권한침해, 방어통제와 사이버 사고대
 - SW-09의 보안 Backup을 언급해도 주된 논지가 운영 변경복구이면 SW-06 답안으로 인정할 수 있다.
 - Cold, warm, hot standby 또는 DR site의 명칭은 시스템 맥락 없이 단정적으로 채점하지 않는다.
 - Checksum, signature, hash 중 하나를 사용해 artifact 동일성을 설명하면 동등 표현으로 인정한다.
+- 대상 PLC·DCS·Engineering Tool이 Download 또는 설치 과정에서 object 생성을 요구하더라도 승인 source와 검증된 toolchain·dependency·library version·build option·target 설정을 고정하고 생성 결과와 설치 후 version·checksum·configuration·동작을 검증한 Controlled Build는 Fatal로 판정하지 않는다.
 - MOC의 승인단계를 조직 규모에 맞게 간소화한 답안은 위험기반 근거가 있으면 인정한다.
 - Obsolescence 대책으로 예비품을 제시한 것 자체는 맞으며 그것만으로 충분하다고 단정할 때만 부족으로 본다.
 

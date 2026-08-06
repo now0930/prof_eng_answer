@@ -244,6 +244,51 @@ class TestSW06BoundaryAndDocuments(unittest.TestCase):
         for path in files:
             self.assertTrue(path.read_text(encoding="utf-8").endswith("\n"), str(path))
 
+
+class TestSW06ControlledBuildRepair(unittest.TestCase):
+    def test_controlled_platform_build_is_not_blanket_fatal(self) -> None:
+        row = next(
+            item for item in FACT["fatal_wrong_claims"]
+            if item["id"] == "sw06_fatal_rebuild_equals_authorized_artifact"
+        )
+        self.assertEqual(
+            row["claim"],
+            "같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다.",
+        )
+        correction = row["correction"]
+        for marker in (
+            "승인된 Release artifact를 우선",
+            "object 생성을 요구하는 플랫폼",
+            "승인 source",
+            "toolchain",
+            "dependency",
+            "library version",
+            "build option",
+            "target 설정",
+            "version",
+            "checksum",
+            "configuration",
+            "동작",
+        ):
+            self.assertIn(marker, correction)
+        cautions = " ".join(LOGIC["llm_profile"]["false_positive_cautions"])
+        self.assertIn("Controlled Build", cautions)
+        self.assertIn("Fatal로 판정하지 않는다", cautions)
+
+    def test_uncontrolled_rebuild_remains_fatal_candidate(self) -> None:
+        fatal = next(
+            value for value in LOGIC["llm_profile"]["fatal_conditions"]
+            if value.startswith("[sw06_fatal_rebuild_equals_authorized_artifact]")
+        )
+        self.assertIn(
+            "같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다.",
+            fatal,
+        )
+        self.assertIn("toolchain", fatal)
+        self.assertIn("dependency", fatal)
+        self.assertIn("build option", fatal)
+        self.assertIn("target 설정", fatal)
+
 if __name__ == "__main__":
     suite = unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__])
     count = suite.countTestCases()
