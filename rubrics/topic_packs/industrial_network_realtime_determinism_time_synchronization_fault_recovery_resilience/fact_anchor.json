@@ -1,0 +1,1534 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+  "topic_label": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력",
+  "title_ko": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력",
+  "question_type_hint": "CALC_DESIGN",
+  "anchors": [
+    {
+      "id": "sw08_performance_requirements",
+      "anchor_id": "sw08_performance_requirements",
+      "statement": "산업 네트워크 설계는 허용 Latency, Jitter, Cycle time, Response time, Packet loss, 동기정확도, 장애복구시간과 가용성 목표를 정량적으로 먼저 정의해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "performance requirement",
+        "latency budget",
+        "jitter limit",
+        "cycle time",
+        "recovery time",
+        "availability"
+      ],
+      "core_terms": [
+        "performance requirement",
+        "quantitative target",
+        "acceptance criterion"
+      ],
+      "accepted_explanations": [
+        "제어기능별 허용값과 시험조건을 수치로 정한다."
+      ],
+      "rejected_explanations": [
+        "빠른 네트워크라는 표현만으로 실시간 요구를 충족한다고 본다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 performance requirements의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "산업 네트워크 설계는 허용 Latency, Jitter, Cycle time, Response time, Packet loss, 동기정확도, 장애복구시간과 가용성 목표를 정량적으로 먼저 정의해야 한다.",
+      "description": "performance requirements의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_latency_definition",
+      "anchor_id": "sw08_latency_definition",
+      "statement": "Latency는 데이터가 송신 지점에서 수신 지점까지 전달되는 지연이며 serialization, switching, queueing, propagation과 protocol processing 지연의 합으로 평가해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "latency",
+        "serialization delay",
+        "switching delay",
+        "queueing delay",
+        "propagation delay",
+        "processing delay"
+      ],
+      "core_terms": [
+        "latency",
+        "delay components",
+        "end-to-end"
+      ],
+      "accepted_explanations": [
+        "단일 링크속도가 아니라 end-to-end 경로의 지연성분을 합산한다."
+      ],
+      "rejected_explanations": [
+        "케이블 전파시간만을 전체 Latency로 본다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 latency definition의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Latency는 데이터가 송신 지점에서 수신 지점까지 전달되는 지연이며 serialization, switching, queueing, propagation과 protocol processing 지연의 합으로 평가해야 한다.",
+      "description": "latency definition의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_jitter_definition",
+      "anchor_id": "sw08_jitter_definition",
+      "statement": "Jitter는 반복 전송 또는 도착시각 간 지연의 변동이며 평균 Latency와 구분하여 최대값, 범위 또는 통계분포로 관리해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "jitter",
+        "delay variation",
+        "maximum",
+        "distribution",
+        "arrival time"
+      ],
+      "core_terms": [
+        "jitter",
+        "delay variation",
+        "maximum"
+      ],
+      "accepted_explanations": [
+        "같은 평균지연이라도 변동폭이 크면 주기제어 품질이 저하될 수 있다."
+      ],
+      "rejected_explanations": [
+        "Jitter는 Latency와 완전히 같은 값이다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 jitter definition의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Jitter는 반복 전송 또는 도착시각 간 지연의 변동이며 평균 Latency와 구분하여 최대값, 범위 또는 통계분포로 관리해야 한다.",
+      "description": "jitter definition의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_cycle_time_definition",
+      "anchor_id": "sw08_cycle_time_definition",
+      "statement": "Cycle time은 제어 또는 통신 작업이 반복되는 주기이며 패킷 1개의 전송시간과 동일하지 않고 생산자·네트워크·소비자의 주기와 위상관계를 포함한다.",
+      "importance": "core",
+      "keywords": [
+        "cycle time",
+        "task period",
+        "update period",
+        "phase",
+        "producer consumer"
+      ],
+      "core_terms": [
+        "cycle time",
+        "period",
+        "phase"
+      ],
+      "accepted_explanations": [
+        "PLC task, network update와 remote I/O update의 주기 조합을 확인한다."
+      ],
+      "rejected_explanations": [
+        "패킷이 선로를 통과하는 시간만 Cycle time이다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 cycle time definition의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Cycle time은 제어 또는 통신 작업이 반복되는 주기이며 패킷 1개의 전송시간과 동일하지 않고 생산자·네트워크·소비자의 주기와 위상관계를 포함한다.",
+      "description": "cycle time definition의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_response_time_definition",
+      "anchor_id": "sw08_response_time_definition",
+      "statement": "Response time은 입력 변화 또는 사건 발생부터 필요한 출력 또는 조치가 완료될 때까지의 end-to-end 시간으로 센싱, 연산, 통신, 출력 갱신과 장치동작을 포함한다.",
+      "importance": "core",
+      "keywords": [
+        "response time",
+        "sensor",
+        "controller",
+        "network",
+        "actuator",
+        "end-to-end"
+      ],
+      "core_terms": [
+        "response time",
+        "end-to-end",
+        "control loop"
+      ],
+      "accepted_explanations": [
+        "네트워크 지연은 전체 response budget의 일부이다."
+      ],
+      "rejected_explanations": [
+        "Network Latency와 전체 설비 Response time은 항상 같다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 response time definition의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Response time은 입력 변화 또는 사건 발생부터 필요한 출력 또는 조치가 완료될 때까지의 end-to-end 시간으로 센싱, 연산, 통신, 출력 갱신과 장치동작을 포함한다.",
+      "description": "response time definition의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_throughput_distinction",
+      "anchor_id": "sw08_throughput_distinction",
+      "statement": "Throughput은 단위시간당 전달 가능한 데이터량이며 낮은 Latency나 Determinism을 자동 보장하지 않으므로 대역폭과 시간성능을 분리해 평가해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "throughput",
+        "bandwidth",
+        "latency",
+        "determinism",
+        "traffic"
+      ],
+      "core_terms": [
+        "throughput",
+        "bandwidth",
+        "determinism"
+      ],
+      "accepted_explanations": [
+        "고대역폭에서도 queueing과 burst로 최악지연이 커질 수 있다."
+      ],
+      "rejected_explanations": [
+        "Throughput이 높으면 반드시 결정적이다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 throughput distinction의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Throughput은 단위시간당 전달 가능한 데이터량이며 낮은 Latency나 Determinism을 자동 보장하지 않으므로 대역폭과 시간성능을 분리해 평가해야 한다.",
+      "description": "throughput distinction의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_determinism_definition",
+      "anchor_id": "sw08_determinism_definition",
+      "statement": "Determinism은 주어진 부하와 고장조건에서 통신 완료시간이 예측 가능한 상한 내에 있음을 뜻하며 단순히 평균속도가 빠르다는 의미가 아니다.",
+      "importance": "core",
+      "keywords": [
+        "determinism",
+        "bounded delay",
+        "worst case",
+        "predictability",
+        "deadline"
+      ],
+      "core_terms": [
+        "determinism",
+        "bounded worst case",
+        "deadline"
+      ],
+      "accepted_explanations": [
+        "Worst-case delay가 deadline보다 작다는 근거가 필요하다."
+      ],
+      "rejected_explanations": [
+        "평균 Latency가 낮으면 Determinism이 보장된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 determinism definition의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Determinism은 주어진 부하와 고장조건에서 통신 완료시간이 예측 가능한 상한 내에 있음을 뜻하며 단순히 평균속도가 빠르다는 의미가 아니다.",
+      "description": "determinism definition의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_worst_case_analysis",
+      "anchor_id": "sw08_worst_case_analysis",
+      "statement": "실시간 설계는 평균값보다 worst-case traffic, 최대 frame, queue interference, topology depth, clock error와 failure transient를 포함한 상한 분석을 우선해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "worst case",
+        "maximum frame",
+        "queue interference",
+        "topology depth",
+        "failure transient"
+      ],
+      "core_terms": [
+        "worst-case analysis",
+        "upper bound",
+        "failure transient"
+      ],
+      "accepted_explanations": [
+        "정상 평균뿐 아니라 고장 전환 중의 최대지연도 시험한다."
+      ],
+      "rejected_explanations": [
+        "평균 측정값만 통과하면 모든 운전조건을 만족한다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 worst case analysis의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "실시간 설계는 평균값보다 worst-case traffic, 최대 frame, queue interference, topology depth, clock error와 failure transient를 포함한 상한 분석을 우선해야 한다.",
+      "description": "worst case analysis의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_network_load_headroom",
+      "anchor_id": "sw08_network_load_headroom",
+      "statement": "Network load는 정상·시작·진단·알람·복구 시 traffic을 합산하고 burst와 성장여유를 포함해 설계하며 평균 utilization만으로 충분성을 판단하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "network load",
+        "utilization",
+        "burst",
+        "headroom",
+        "growth",
+        "alarm storm"
+      ],
+      "core_terms": [
+        "network load",
+        "headroom",
+        "burst"
+      ],
+      "accepted_explanations": [
+        "정상부하 외 startup과 alarm burst를 포함한다."
+      ],
+      "rejected_explanations": [
+        "평균 utilization이 낮으면 순간 혼잡은 발생하지 않는다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 network load headroom의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Network load는 정상·시작·진단·알람·복구 시 traffic을 합산하고 burst와 성장여유를 포함해 설계하며 평균 utilization만으로 충분성을 판단하지 않는다.",
+      "description": "network load headroom의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_priority_qos",
+      "anchor_id": "sw08_priority_qos",
+      "statement": "Priority와 QoS는 중요 traffic의 queueing 우선순위를 조정하지만 admission control, policing, queue 설계와 부하제한 없이 모든 deadline을 보장하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "priority",
+        "QoS",
+        "queue",
+        "admission control",
+        "policing",
+        "deadline"
+      ],
+      "core_terms": [
+        "QoS",
+        "priority",
+        "admission control"
+      ],
+      "accepted_explanations": [
+        "우선순위 역전과 저우선 traffic starvation도 검토한다."
+      ],
+      "rejected_explanations": [
+        "Priority 설정만으로 congestion과 deadline miss가 사라진다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 priority qos의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Priority와 QoS는 중요 traffic의 queueing 우선순위를 조정하지만 admission control, policing, queue 설계와 부하제한 없이 모든 deadline을 보장하지 않는다.",
+      "description": "priority qos의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_scheduling",
+      "anchor_id": "sw08_scheduling",
+      "statement": "Cyclic scheduling과 traffic shaping은 frame 송신창, queue, producer phase와 경로를 조정하여 간섭을 제한하며 schedule의 end-to-end 일관성과 변경관리가 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "scheduling",
+        "traffic shaping",
+        "time slot",
+        "queue",
+        "phase",
+        "configuration"
+      ],
+      "core_terms": [
+        "scheduling",
+        "traffic shaping",
+        "end-to-end"
+      ],
+      "accepted_explanations": [
+        "스위치마다 동일한 schedule 기준과 배포검증이 필요하다."
+      ],
+      "rejected_explanations": [
+        "한 스위치의 schedule만 설정하면 전체 경로가 결정적이다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 scheduling의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Cyclic scheduling과 traffic shaping은 frame 송신창, queue, producer phase와 경로를 조정하여 간섭을 제한하며 schedule의 end-to-end 일관성과 변경관리가 필요하다.",
+      "description": "scheduling의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_tsn_toolbox",
+      "anchor_id": "sw08_tsn_toolbox",
+      "statement": "TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy와 자원예약 기능을 조합하는 IEEE 802.1 기술군이며 적용 profile과 end-to-end 구성이 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "TSN",
+        "IEEE 802.1",
+        "time synchronization",
+        "scheduling",
+        "policing",
+        "profile"
+      ],
+      "core_terms": [
+        "TSN",
+        "toolbox",
+        "profile"
+      ],
+      "accepted_explanations": [
+        "필요 기능과 장치 지원범위를 profile로 확인한다."
+      ],
+      "rejected_explanations": [
+        "TSN capable 스위치 한 대를 설치하면 자동으로 실시간성이 보장된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 tsn toolbox의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy와 자원예약 기능을 조합하는 IEEE 802.1 기술군이며 적용 profile과 end-to-end 구성이 필요하다.",
+      "description": "tsn toolbox의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_tsn_qbv",
+      "anchor_id": "sw08_tsn_qbv",
+      "statement": "IEEE 802.1Qbv Time-Aware Shaper는 공통 시간기준에 따라 queue gate를 개폐해 scheduled traffic의 송신창을 만들며 guard band, schedule cycle과 clock accuracy를 함께 설계해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "IEEE 802.1Qbv",
+        "Time-Aware Shaper",
+        "gate control list",
+        "guard band",
+        "schedule"
+      ],
+      "core_terms": [
+        "Qbv",
+        "time-aware shaping",
+        "gate schedule"
+      ],
+      "accepted_explanations": [
+        "Gate schedule과 link speed·frame size를 함께 계산한다."
+      ],
+      "rejected_explanations": [
+        "Qbv는 clock synchronization 없이도 동일하게 동작한다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 tsn qbv의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "IEEE 802.1Qbv Time-Aware Shaper는 공통 시간기준에 따라 queue gate를 개폐해 scheduled traffic의 송신창을 만들며 guard band, schedule cycle과 clock accuracy를 함께 설계해야 한다.",
+      "description": "tsn qbv의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_tsn_preemption",
+      "anchor_id": "sw08_tsn_preemption",
+      "statement": "Frame preemption은 긴 저우선 frame이 고우선 frame을 지연시키는 blocking time을 줄이지만 양단 지원, fragment overhead와 검증이 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "frame preemption",
+        "IEEE 802.1Qbu",
+        "IEEE 802.3br",
+        "blocking time",
+        "fragment"
+      ],
+      "core_terms": [
+        "frame preemption",
+        "blocking time",
+        "support"
+      ],
+      "accepted_explanations": [
+        "Preemption은 최대 blocking을 줄이는 수단이지 모든 queueing을 제거하지 않는다."
+      ],
+      "rejected_explanations": [
+        "Frame preemption을 사용하면 전송지연이 0이 된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 tsn preemption의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Frame preemption은 긴 저우선 frame이 고우선 frame을 지연시키는 blocking time을 줄이지만 양단 지원, fragment overhead와 검증이 필요하다.",
+      "description": "tsn preemption의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_tsn_policing",
+      "anchor_id": "sw08_tsn_policing",
+      "statement": "Per-stream filtering and policing은 stream별 rate·burst·gate 위반을 제한하여 faulty talker의 영향을 격리하지만 정책 오설정에 따른 정상 traffic 차단을 시험해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "IEEE 802.1Qci",
+        "per-stream filtering",
+        "policing",
+        "faulty talker",
+        "rate limit"
+      ],
+      "core_terms": [
+        "Qci",
+        "stream policing",
+        "fault containment"
+      ],
+      "accepted_explanations": [
+        "Traffic contract와 위반처리 정책을 정의한다."
+      ],
+      "rejected_explanations": [
+        "Policing은 설정 없이 모든 비정상 traffic을 자동 식별한다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 tsn policing의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Per-stream filtering and policing은 stream별 rate·burst·gate 위반을 제한하여 faulty talker의 영향을 격리하지만 정책 오설정에 따른 정상 traffic 차단을 시험해야 한다.",
+      "description": "tsn policing의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_ptp_purpose",
+      "anchor_id": "sw08_ptp_purpose",
+      "statement": "PTP는 분산 clock의 시간 또는 위상을 맞추는 protocol이며 측정, sequence of events와 scheduled communication을 지원하지만 자체만으로 control deadline을 보장하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "PTP",
+        "IEEE 1588",
+        "clock synchronization",
+        "phase",
+        "timestamp"
+      ],
+      "core_terms": [
+        "PTP",
+        "clock synchronization",
+        "phase"
+      ],
+      "accepted_explanations": [
+        "동기오차 요구를 application과 연결한다."
+      ],
+      "rejected_explanations": [
+        "PTP를 사용하면 모든 network traffic이 결정적으로 된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 ptp purpose의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "PTP는 분산 clock의 시간 또는 위상을 맞추는 protocol이며 측정, sequence of events와 scheduled communication을 지원하지만 자체만으로 control deadline을 보장하지 않는다.",
+      "description": "ptp purpose의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_ptp_clock_architecture",
+      "anchor_id": "sw08_ptp_clock_architecture",
+      "statement": "PTP 설계는 Grandmaster, ordinary clock, boundary clock, transparent clock과 network path를 정의하고 Best Master Clock 선정과 holdover 동작을 검토해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "grandmaster",
+        "ordinary clock",
+        "boundary clock",
+        "transparent clock",
+        "BMCA",
+        "holdover"
+      ],
+      "core_terms": [
+        "grandmaster",
+        "boundary clock",
+        "transparent clock"
+      ],
+      "accepted_explanations": [
+        "Clock role과 failover 우선순위를 문서화한다."
+      ],
+      "rejected_explanations": [
+        "모든 switch는 단순 전달만 하므로 clock architecture가 필요 없다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 ptp clock architecture의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "PTP 설계는 Grandmaster, ordinary clock, boundary clock, transparent clock과 network path를 정의하고 Best Master Clock 선정과 holdover 동작을 검토해야 한다.",
+      "description": "ptp clock architecture의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_timestamping_accuracy",
+      "anchor_id": "sw08_timestamping_accuracy",
+      "statement": "시간동기 정확도는 hardware timestamping, residence time 보정, link asymmetry, oscillator 성능, profile과 network topology의 영향을 받으므로 end-to-end 측정으로 검증해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "hardware timestamping",
+        "residence time",
+        "asymmetry",
+        "oscillator",
+        "PTP profile"
+      ],
+      "core_terms": [
+        "timestamping",
+        "asymmetry",
+        "accuracy"
+      ],
+      "accepted_explanations": [
+        "Software timestamping과 hardware timestamping의 오차범위를 구분한다."
+      ],
+      "rejected_explanations": [
+        "Software timestamping은 모든 부하에서 hardware timestamping과 동일한 정확도를 낸다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 timestamping accuracy의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "시간동기 정확도는 hardware timestamping, residence time 보정, link asymmetry, oscillator 성능, profile과 network topology의 영향을 받으므로 end-to-end 측정으로 검증해야 한다.",
+      "description": "timestamping accuracy의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_sync_not_determinism",
+      "anchor_id": "sw08_sync_not_determinism",
+      "statement": "Clock synchronization은 schedule과 event ordering의 공통 기준을 제공하지만 queue, load, forwarding과 application scheduling을 제어하지 않으면 Determinism이 성립하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "clock synchronization",
+        "determinism",
+        "queue",
+        "load",
+        "application schedule"
+      ],
+      "core_terms": [
+        "synchronization",
+        "determinism",
+        "queueing"
+      ],
+      "accepted_explanations": [
+        "동기정확도와 전달지연 상한을 별도 acceptance criterion으로 둔다."
+      ],
+      "rejected_explanations": [
+        "Clock이 맞으면 packet delivery deadline도 자동 충족된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 sync not determinism의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Clock synchronization은 schedule과 event ordering의 공통 기준을 제공하지만 queue, load, forwarding과 application scheduling을 제어하지 않으면 Determinism이 성립하지 않는다.",
+      "description": "sync not determinism의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_redundancy_objectives",
+      "anchor_id": "sw08_redundancy_objectives",
+      "statement": "Redundancy 설계는 보호할 고장, 허용 packet loss, 허용 recovery time, topology, common-cause failure와 유지보수 방식을 먼저 정의한 뒤 protocol을 선정해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "redundancy",
+        "fault model",
+        "packet loss",
+        "recovery time",
+        "common cause"
+      ],
+      "core_terms": [
+        "redundancy objective",
+        "fault model",
+        "recovery time"
+      ],
+      "accepted_explanations": [
+        "단일 link, switch, power, path 고장을 구분한다."
+      ],
+      "rejected_explanations": [
+        "Redundant라는 명칭만 있으면 모든 고장을 보호한다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 redundancy objectives의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Redundancy 설계는 보호할 고장, 허용 packet loss, 허용 recovery time, topology, common-cause failure와 유지보수 방식을 먼저 정의한 뒤 protocol을 선정해야 한다.",
+      "description": "redundancy objectives의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_recovery_time_components",
+      "anchor_id": "sw08_recovery_time_components",
+      "statement": "장애복구시간은 고장검출, 상태판단, topology 재구성, route 또는 port 전환, address relearning, application timeout과 control state recovery의 합으로 보아야 한다.",
+      "importance": "core",
+      "keywords": [
+        "failure detection",
+        "reconfiguration",
+        "failover",
+        "relearning",
+        "application timeout"
+      ],
+      "core_terms": [
+        "recovery time",
+        "failure detection",
+        "reconfiguration"
+      ],
+      "accepted_explanations": [
+        "Network reconvergence와 application recovery를 분리 측정한다."
+      ],
+      "rejected_explanations": [
+        "Ring protocol의 port 전환시간만 전체 복구시간이다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 recovery time components의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "장애복구시간은 고장검출, 상태판단, topology 재구성, route 또는 port 전환, address relearning, application timeout과 control state recovery의 합으로 보아야 한다.",
+      "description": "recovery time components의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_ring_recovery_general",
+      "anchor_id": "sw08_ring_recovery_general",
+      "statement": "Ring redundancy는 link 또는 node 고장 시 대체경로를 제공하지만 recovery time은 protocol, ring size, supervision interval, switch implementation과 fault type에 따라 달라진다.",
+      "importance": "core",
+      "keywords": [
+        "ring recovery",
+        "ring size",
+        "supervision interval",
+        "switch",
+        "fault type"
+      ],
+      "core_terms": [
+        "ring redundancy",
+        "recovery time",
+        "fault type"
+      ],
+      "accepted_explanations": [
+        "보장값은 적용 profile과 장치조합으로 확인한다."
+      ],
+      "rejected_explanations": [
+        "모든 ring은 고장 시 무손실·무지연으로 전환된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 ring recovery general의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Ring redundancy는 link 또는 node 고장 시 대체경로를 제공하지만 recovery time은 protocol, ring size, supervision interval, switch implementation과 fault type에 따라 달라진다.",
+      "description": "ring recovery general의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_mrp",
+      "anchor_id": "sw08_mrp",
+      "statement": "MRP는 일반적으로 ring manager와 ring client가 상태를 감시하고 고장 시 blocked path를 전환하는 방식이며 구성 profile과 ring 조건에 따른 복구시간을 검증해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "MRP",
+        "IEC 62439-2",
+        "media redundancy manager",
+        "client",
+        "ring"
+      ],
+      "core_terms": [
+        "MRP",
+        "ring manager",
+        "recovery"
+      ],
+      "accepted_explanations": [
+        "MRP domain, manager role과 recovery profile을 확인한다."
+      ],
+      "rejected_explanations": [
+        "MRP는 모든 구성에서 zero-time recovery를 보장한다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 mrp의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "MRP는 일반적으로 ring manager와 ring client가 상태를 감시하고 고장 시 blocked path를 전환하는 방식이며 구성 profile과 ring 조건에 따른 복구시간을 검증해야 한다.",
+      "description": "mrp의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_dlr",
+      "anchor_id": "sw08_dlr",
+      "statement": "DLR은 EtherNet/IP 계열 device-level ring에서 supervisor와 ring node가 beacon 또는 announce를 이용해 고장을 감지·복구하며 모든 Ethernet protocol의 범용 ring 표준으로 보아서는 안 된다.",
+      "importance": "core",
+      "keywords": [
+        "DLR",
+        "Device Level Ring",
+        "supervisor",
+        "beacon",
+        "EtherNet/IP"
+      ],
+      "core_terms": [
+        "DLR",
+        "ring supervisor",
+        "EtherNet/IP"
+      ],
+      "accepted_explanations": [
+        "Supervisor redundancy와 device support를 확인한다."
+      ],
+      "rejected_explanations": [
+        "DLR은 모든 산업 Ethernet 장치에 protocol 독립적으로 적용된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 dlr의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "DLR은 EtherNet/IP 계열 device-level ring에서 supervisor와 ring node가 beacon 또는 announce를 이용해 고장을 감지·복구하며 모든 Ethernet protocol의 범용 ring 표준으로 보아서는 안 된다.",
+      "description": "dlr의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_prp",
+      "anchor_id": "sw08_prp",
+      "statement": "PRP는 동일 frame을 독립된 두 LAN으로 동시에 보내고 수신 노드가 중복을 제거하여 단일 LAN 고장 시 재수렴 없이 통신을 지속하도록 설계한다.",
+      "importance": "core",
+      "keywords": [
+        "PRP",
+        "IEC 62439-3",
+        "parallel LAN",
+        "duplicate discard",
+        "seamless"
+      ],
+      "core_terms": [
+        "PRP",
+        "dual LAN",
+        "duplicate discard"
+      ],
+      "accepted_explanations": [
+        "LAN A와 LAN B의 독립성과 supervision을 확보한다."
+      ],
+      "rejected_explanations": [
+        "PRP는 한 개의 공유 LAN 안에서 이중 port만 연결하면 같은 보호효과를 낸다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 prp의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "PRP는 동일 frame을 독립된 두 LAN으로 동시에 보내고 수신 노드가 중복을 제거하여 단일 LAN 고장 시 재수렴 없이 통신을 지속하도록 설계한다.",
+      "description": "prp의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_hsr",
+      "anchor_id": "sw08_hsr",
+      "statement": "HSR은 ring 양방향으로 frame을 중복 전송하고 node가 frame을 전달·중복제거하여 단일 고장에 대한 seamless communication을 목표로 하며 node forwarding과 traffic overhead를 고려해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "HSR",
+        "IEC 62439-3",
+        "duplicate frame",
+        "ring",
+        "forwarding"
+      ],
+      "core_terms": [
+        "HSR",
+        "duplicate transmission",
+        "ring"
+      ],
+      "accepted_explanations": [
+        "HSR node와 RedBox 경계를 명확히 한다."
+      ],
+      "rejected_explanations": [
+        "HSR은 일반 switch ring과 동일하며 중복제거나 forwarding 규칙이 필요 없다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 hsr의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "HSR은 ring 양방향으로 frame을 중복 전송하고 node가 frame을 전달·중복제거하여 단일 고장에 대한 seamless communication을 목표로 하며 node forwarding과 traffic overhead를 고려해야 한다.",
+      "description": "hsr의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_seamless_independence",
+      "anchor_id": "sw08_seamless_independence",
+      "statement": "PRP와 HSR의 seamless 특성은 정의된 단일고장과 적합한 node·path 구성에서 성립하며 공통 전원, shared switch, configuration error와 다중고장은 별도 보호가 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "seamless redundancy",
+        "independence",
+        "common cause",
+        "single fault",
+        "shared switch"
+      ],
+      "core_terms": [
+        "seamless",
+        "independent path",
+        "common cause"
+      ],
+      "accepted_explanations": [
+        "이중화 경로의 물리·전원·구성 독립성을 감사한다."
+      ],
+      "rejected_explanations": [
+        "PRP 또는 HSR이면 공통원인과 다중고장도 자동 제거된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 seamless independence의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "PRP와 HSR의 seamless 특성은 정의된 단일고장과 적합한 node·path 구성에서 성립하며 공통 전원, shared switch, configuration error와 다중고장은 별도 보호가 필요하다.",
+      "description": "seamless independence의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_packet_loss",
+      "anchor_id": "sw08_packet_loss",
+      "statement": "Packet loss는 bit error, buffer overflow, link flap, policing, topology change와 receiver overload에서 발생할 수 있으며 loss budget, sequence monitoring과 application의 stale-data 처리를 정의해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "packet loss",
+        "sequence number",
+        "buffer overflow",
+        "stale data",
+        "loss budget"
+      ],
+      "core_terms": [
+        "packet loss",
+        "sequence monitoring",
+        "stale data"
+      ],
+      "accepted_explanations": [
+        "Loss를 숨기지 말고 품질상태와 timeout으로 상위제어에 전달한다."
+      ],
+      "rejected_explanations": [
+        "소량 packet loss는 제어와 상태판단에 항상 영향이 없다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 packet loss의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Packet loss는 bit error, buffer overflow, link flap, policing, topology change와 receiver overload에서 발생할 수 있으며 loss budget, sequence monitoring과 application의 stale-data 처리를 정의해야 한다.",
+      "description": "packet loss의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_broadcast_storm",
+      "anchor_id": "sw08_broadcast_storm",
+      "statement": "Broadcast storm은 loop, malfunction 또는 과도한 discovery로 대역폭과 CPU를 소진할 수 있으므로 loop prevention, storm control, segmentation과 fault containment가 필요하다.",
+      "importance": "important",
+      "keywords": [
+        "broadcast storm",
+        "loop",
+        "storm control",
+        "segmentation",
+        "CPU load"
+      ],
+      "core_terms": [
+        "broadcast storm",
+        "loop prevention",
+        "storm control"
+      ],
+      "accepted_explanations": [
+        "Storm control threshold와 정상 burst의 충돌을 시험한다."
+      ],
+      "rejected_explanations": [
+        "Managed switch를 사용하면 broadcast storm은 발생하지 않는다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 broadcast storm의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Broadcast storm은 loop, malfunction 또는 과도한 discovery로 대역폭과 CPU를 소진할 수 있으므로 loop prevention, storm control, segmentation과 fault containment가 필요하다.",
+      "description": "broadcast storm의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_multicast_management",
+      "anchor_id": "sw08_multicast_management",
+      "statement": "Multicast traffic은 one-to-many 전달에 효율적이지만 group membership, snooping·querier, flooding 범위와 receiver capacity를 관리하지 않으면 불필요한 부하가 확산될 수 있다.",
+      "importance": "important",
+      "keywords": [
+        "multicast",
+        "group membership",
+        "IGMP snooping",
+        "querier",
+        "flooding"
+      ],
+      "core_terms": [
+        "multicast",
+        "group management",
+        "flooding"
+      ],
+      "accepted_explanations": [
+        "Multicast 경로와 가입상태를 commissioning에서 확인한다."
+      ],
+      "rejected_explanations": [
+        "Multicast는 switch가 항상 필요한 port로만 자동 전달한다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 multicast management의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Multicast traffic은 one-to-many 전달에 효율적이지만 group membership, snooping·querier, flooding 범위와 receiver capacity를 관리하지 않으면 불필요한 부하가 확산될 수 있다.",
+      "description": "multicast management의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_congestion_buffering",
+      "anchor_id": "sw08_congestion_buffering",
+      "statement": "Congestion은 ingress traffic이 link 또는 queue service capacity를 초과할 때 지연·drop을 발생시키며 buffer 증설만으로 deadline을 보장할 수 없고 traffic engineering이 필요하다.",
+      "importance": "important",
+      "keywords": [
+        "congestion",
+        "buffer",
+        "queue",
+        "drop",
+        "traffic engineering"
+      ],
+      "core_terms": [
+        "congestion",
+        "buffering",
+        "deadline"
+      ],
+      "accepted_explanations": [
+        "Bufferbloat와 burst absorption의 균형을 검토한다."
+      ],
+      "rejected_explanations": [
+        "Buffer를 크게 하면 packet loss와 실시간 지연이 모두 제거된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 congestion buffering의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Congestion은 ingress traffic이 link 또는 queue service capacity를 초과할 때 지연·drop을 발생시키며 buffer 증설만으로 deadline을 보장할 수 없고 traffic engineering이 필요하다.",
+      "description": "congestion buffering의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_failover_state_consistency",
+      "anchor_id": "sw08_failover_state_consistency",
+      "statement": "Network failover 후에도 controller, remote I/O, sequence, redundancy manager와 application session의 상태가 일관되어야 하며 duplicate, out-of-order, stale command를 검증해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "failover",
+        "state consistency",
+        "duplicate",
+        "out-of-order",
+        "stale command"
+      ],
+      "core_terms": [
+        "failover",
+        "state consistency",
+        "application"
+      ],
+      "accepted_explanations": [
+        "통신 복구와 공정상태 복구를 구분한다."
+      ],
+      "rejected_explanations": [
+        "Link가 복구되면 application state도 항상 자동 정상화된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 failover state consistency의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Network failover 후에도 controller, remote I/O, sequence, redundancy manager와 application session의 상태가 일관되어야 하며 duplicate, out-of-order, stale command를 검증해야 한다.",
+      "description": "failover state consistency의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_fallback_local_control",
+      "anchor_id": "sw08_fallback_local_control",
+      "statement": "Network 상실 시 critical equipment는 정의된 local control, hold-last, safe state 또는 제한운전으로 전환하도록 설계하고 전환조건과 복귀절차를 검증해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "fallback local control",
+        "hold last",
+        "safe state",
+        "local mode",
+        "network loss"
+      ],
+      "core_terms": [
+        "fallback",
+        "local control",
+        "safe state"
+      ],
+      "accepted_explanations": [
+        "공정위험에 따라 hold, trip, local autonomous control을 선택한다."
+      ],
+      "rejected_explanations": [
+        "네트워크 이중화가 있으면 local fallback은 불필요하다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 fallback local control의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Network 상실 시 critical equipment는 정의된 local control, hold-last, safe state 또는 제한운전으로 전환하도록 설계하고 전환조건과 복귀절차를 검증해야 한다.",
+      "description": "fallback local control의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_graceful_degradation",
+      "anchor_id": "sw08_graceful_degradation",
+      "statement": "Graceful degradation은 일부 통신·진단·최적화 기능을 제한하면서 핵심 제어와 안전기능을 유지하는 전략이며 기능우선순위와 operator indication을 사전에 정의해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "graceful degradation",
+        "function priority",
+        "operator indication",
+        "limited operation"
+      ],
+      "core_terms": [
+        "graceful degradation",
+        "priority",
+        "limited operation"
+      ],
+      "accepted_explanations": [
+        "비핵심 traffic을 제한하고 핵심기능을 유지하는 단계를 정의한다."
+      ],
+      "rejected_explanations": [
+        "장애 시 정상모드와 완전정지 중 하나만 가능하다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 graceful degradation의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Graceful degradation은 일부 통신·진단·최적화 기능을 제한하면서 핵심 제어와 안전기능을 유지하는 전략이며 기능우선순위와 operator indication을 사전에 정의해야 한다.",
+      "description": "graceful degradation의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_redundancy_health_monitoring",
+      "anchor_id": "sw08_redundancy_health_monitoring",
+      "statement": "Redundancy는 standby path와 duplicate channel의 건강상태를 지속 감시하고 latent failure를 알람·시험해야 실제 가용성을 유지할 수 있다.",
+      "importance": "important",
+      "keywords": [
+        "redundancy health",
+        "latent failure",
+        "supervision",
+        "alarm",
+        "proof test"
+      ],
+      "core_terms": [
+        "redundancy health",
+        "latent failure",
+        "monitoring"
+      ],
+      "accepted_explanations": [
+        "정상운전 중 비활성 경로의 단선과 설정불일치를 검출한다."
+      ],
+      "rejected_explanations": [
+        "이중화 경로는 사용되지 않으므로 정기점검이 필요 없다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 redundancy health monitoring의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Redundancy는 standby path와 duplicate channel의 건강상태를 지속 감시하고 latent failure를 알람·시험해야 실제 가용성을 유지할 수 있다.",
+      "description": "redundancy health monitoring의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_failure_domain_independence",
+      "anchor_id": "sw08_failure_domain_independence",
+      "statement": "복원력은 link뿐 아니라 switch, power, cabinet, cable route, clock source, controller interface와 configuration의 failure domain을 분리하고 common-cause failure를 줄여야 한다.",
+      "importance": "core",
+      "keywords": [
+        "failure domain",
+        "power",
+        "cable route",
+        "clock source",
+        "common cause"
+      ],
+      "core_terms": [
+        "failure domain",
+        "independence",
+        "common cause"
+      ],
+      "accepted_explanations": [
+        "두 경로가 같은 전원·트레이·스위치를 공유하는지 확인한다."
+      ],
+      "rejected_explanations": [
+        "포트가 두 개면 물리적으로 완전 독립된 이중화이다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 failure domain independence의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "복원력은 link뿐 아니라 switch, power, cabinet, cable route, clock source, controller interface와 configuration의 failure domain을 분리하고 common-cause failure를 줄여야 한다.",
+      "description": "failure domain independence의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_fault_injection_testing",
+      "anchor_id": "sw08_fault_injection_testing",
+      "statement": "복구성능은 cable open, switch power loss, node failure, clock loss, traffic burst, loop와 packet impairment를 계획적으로 주입하여 검출·전환·공정영향·복귀를 측정해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "fault injection",
+        "cable open",
+        "switch failure",
+        "clock loss",
+        "traffic burst"
+      ],
+      "core_terms": [
+        "fault injection",
+        "recovery test",
+        "measurement"
+      ],
+      "accepted_explanations": [
+        "운전위험을 통제한 시험절차와 합격기준을 둔다."
+      ],
+      "rejected_explanations": [
+        "정상 ping 시험만 통과하면 장애복구 검증이 완료된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 fault injection testing의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "복구성능은 cable open, switch power loss, node failure, clock loss, traffic burst, loop와 packet impairment를 계획적으로 주입하여 검출·전환·공정영향·복귀를 측정해야 한다.",
+      "description": "fault injection testing의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_measurement_acceptance",
+      "anchor_id": "sw08_measurement_acceptance",
+      "statement": "검증은 synchronized capture, device diagnostics와 application timestamp를 이용해 최대·분위수 Latency, Jitter, loss, clock offset, recovery time과 deadline miss를 기록하고 요구값과 비교해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "measurement",
+        "packet capture",
+        "clock offset",
+        "percentile",
+        "deadline miss",
+        "acceptance"
+      ],
+      "core_terms": [
+        "measurement",
+        "acceptance criterion",
+        "evidence"
+      ],
+      "accepted_explanations": [
+        "평균값과 함께 maximum·percentile·failure transient를 기록한다."
+      ],
+      "rejected_explanations": [
+        "Link up 상태만 확인하면 실시간성 acceptance가 완료된다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 measurement acceptance의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "검증은 synchronized capture, device diagnostics와 application timestamp를 이용해 최대·분위수 Latency, Jitter, loss, clock offset, recovery time과 deadline miss를 기록하고 요구값과 비교해야 한다.",
+      "description": "measurement acceptance의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_sw07_boundary",
+      "anchor_id": "sw08_sw07_boundary",
+      "statement": "Protocol 종류, 물리매체, 일반 통신구조, Device Profile과 상호운용성 선정은 SW-07의 범위이고 SW-08은 정량적 시간성능·동기·복구·복원력을 담당한다.",
+      "importance": "important",
+      "keywords": [
+        "SW-07",
+        "protocol selection",
+        "physical media",
+        "interoperability",
+        "SW-08 boundary"
+      ],
+      "core_terms": [
+        "SW-07 boundary",
+        "protocol structure",
+        "performance"
+      ],
+      "accepted_explanations": [
+        "Protocol 설명은 필요한 범위만 쓰고 시간성능 설계로 중심을 이동한다."
+      ],
+      "rejected_explanations": [
+        "SW-08 답안을 protocol 종류 나열만으로 구성한다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 sw07 boundary의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Protocol 종류, 물리매체, 일반 통신구조, Device Profile과 상호운용성 선정은 SW-07의 범위이고 SW-08은 정량적 시간성능·동기·복구·복원력을 담당한다.",
+      "description": "sw07 boundary의 정확성과 현장 적용조건을 평가한다."
+    },
+    {
+      "id": "sw08_sw09_boundary",
+      "anchor_id": "sw08_sw09_boundary",
+      "statement": "Authentication, encryption, access control, firewall와 cyber incident response는 SW-09의 범위이며 SW-08은 장애·혼잡·고장전환에 대한 성능과 복원력에 집중한다.",
+      "importance": "important",
+      "keywords": [
+        "SW-09",
+        "authentication",
+        "encryption",
+        "firewall",
+        "incident response"
+      ],
+      "core_terms": [
+        "SW-09 boundary",
+        "cybersecurity",
+        "resilience"
+      ],
+      "accepted_explanations": [
+        "보안공격이 원인일 수 있어도 방어통제의 상세는 SW-09로 넘긴다."
+      ],
+      "rejected_explanations": [
+        "SW-08을 방화벽·MFA·allowlisting 중심의 보안답안으로 작성한다."
+      ],
+      "grading_notes": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력에서 sw09 boundary의 정확성과 정량적 설계·검증 연결을 평가한다.",
+      "source_basis": "IEC 61158 industrial communication networks; IEC 61784-2 real-time Ethernet communication profiles; IEEE 802.1 Time-Sensitive Networking family including IEEE 802.1AS, IEEE 802.1Qbv, IEEE 802.1Qbu and IEEE 802.1Qci; IEEE 1588 Precision Time Protocol; IEC 62439-2 Media Redundancy Protocol; IEC 62439-3 Parallel Redundancy Protocol and High-availability Seamless Redundancy; ODVA Device Level Ring specifications; IEC 61508 and IEC 61511 availability, independence and fail-safe design principles; vendor-neutral industrial network design, commissioning, measurement, redundancy and fault-injection practices.",
+      "claim": "Authentication, encryption, access control, firewall와 cyber incident response는 SW-09의 범위이며 SW-08은 장애·혼잡·고장전환에 대한 성능과 복원력에 집중한다.",
+      "description": "sw09 boundary의 정확성과 현장 적용조건을 평가한다."
+    }
+  ],
+  "core_facts": [
+    "산업 네트워크 설계는 허용 Latency, Jitter, Cycle time, Response time, Packet loss, 동기정확도, 장애복구시간과 가용성 목표를 정량적으로 먼저 정의해야 한다.",
+    "Latency는 데이터가 송신 지점에서 수신 지점까지 전달되는 지연이며 serialization, switching, queueing, propagation과 protocol processing 지연의 합으로 평가해야 한다.",
+    "Jitter는 반복 전송 또는 도착시각 간 지연의 변동이며 평균 Latency와 구분하여 최대값, 범위 또는 통계분포로 관리해야 한다.",
+    "Cycle time은 제어 또는 통신 작업이 반복되는 주기이며 패킷 1개의 전송시간과 동일하지 않고 생산자·네트워크·소비자의 주기와 위상관계를 포함한다.",
+    "Response time은 입력 변화 또는 사건 발생부터 필요한 출력 또는 조치가 완료될 때까지의 end-to-end 시간으로 센싱, 연산, 통신, 출력 갱신과 장치동작을 포함한다.",
+    "Throughput은 단위시간당 전달 가능한 데이터량이며 낮은 Latency나 Determinism을 자동 보장하지 않으므로 대역폭과 시간성능을 분리해 평가해야 한다.",
+    "Determinism은 주어진 부하와 고장조건에서 통신 완료시간이 예측 가능한 상한 내에 있음을 뜻하며 단순히 평균속도가 빠르다는 의미가 아니다.",
+    "실시간 설계는 평균값보다 worst-case traffic, 최대 frame, queue interference, topology depth, clock error와 failure transient를 포함한 상한 분석을 우선해야 한다.",
+    "Network load는 정상·시작·진단·알람·복구 시 traffic을 합산하고 burst와 성장여유를 포함해 설계하며 평균 utilization만으로 충분성을 판단하지 않는다.",
+    "Priority와 QoS는 중요 traffic의 queueing 우선순위를 조정하지만 admission control, policing, queue 설계와 부하제한 없이 모든 deadline을 보장하지 않는다.",
+    "Cyclic scheduling과 traffic shaping은 frame 송신창, queue, producer phase와 경로를 조정하여 간섭을 제한하며 schedule의 end-to-end 일관성과 변경관리가 필요하다.",
+    "TSN은 단일 protocol이 아니라 시간동기, scheduling, shaping, policing, redundancy와 자원예약 기능을 조합하는 IEEE 802.1 기술군이며 적용 profile과 end-to-end 구성이 필요하다.",
+    "IEEE 802.1Qbv Time-Aware Shaper는 공통 시간기준에 따라 queue gate를 개폐해 scheduled traffic의 송신창을 만들며 guard band, schedule cycle과 clock accuracy를 함께 설계해야 한다.",
+    "Frame preemption은 긴 저우선 frame이 고우선 frame을 지연시키는 blocking time을 줄이지만 양단 지원, fragment overhead와 검증이 필요하다.",
+    "Per-stream filtering and policing은 stream별 rate·burst·gate 위반을 제한하여 faulty talker의 영향을 격리하지만 정책 오설정에 따른 정상 traffic 차단을 시험해야 한다.",
+    "PTP는 분산 clock의 시간 또는 위상을 맞추는 protocol이며 측정, sequence of events와 scheduled communication을 지원하지만 자체만으로 control deadline을 보장하지 않는다.",
+    "PTP 설계는 Grandmaster, ordinary clock, boundary clock, transparent clock과 network path를 정의하고 Best Master Clock 선정과 holdover 동작을 검토해야 한다.",
+    "시간동기 정확도는 hardware timestamping, residence time 보정, link asymmetry, oscillator 성능, profile과 network topology의 영향을 받으므로 end-to-end 측정으로 검증해야 한다.",
+    "Clock synchronization은 schedule과 event ordering의 공통 기준을 제공하지만 queue, load, forwarding과 application scheduling을 제어하지 않으면 Determinism이 성립하지 않는다.",
+    "Redundancy 설계는 보호할 고장, 허용 packet loss, 허용 recovery time, topology, common-cause failure와 유지보수 방식을 먼저 정의한 뒤 protocol을 선정해야 한다.",
+    "장애복구시간은 고장검출, 상태판단, topology 재구성, route 또는 port 전환, address relearning, application timeout과 control state recovery의 합으로 보아야 한다.",
+    "Ring redundancy는 link 또는 node 고장 시 대체경로를 제공하지만 recovery time은 protocol, ring size, supervision interval, switch implementation과 fault type에 따라 달라진다.",
+    "MRP는 일반적으로 ring manager와 ring client가 상태를 감시하고 고장 시 blocked path를 전환하는 방식이며 구성 profile과 ring 조건에 따른 복구시간을 검증해야 한다.",
+    "DLR은 EtherNet/IP 계열 device-level ring에서 supervisor와 ring node가 beacon 또는 announce를 이용해 고장을 감지·복구하며 모든 Ethernet protocol의 범용 ring 표준으로 보아서는 안 된다.",
+    "PRP는 동일 frame을 독립된 두 LAN으로 동시에 보내고 수신 노드가 중복을 제거하여 단일 LAN 고장 시 재수렴 없이 통신을 지속하도록 설계한다.",
+    "HSR은 ring 양방향으로 frame을 중복 전송하고 node가 frame을 전달·중복제거하여 단일 고장에 대한 seamless communication을 목표로 하며 node forwarding과 traffic overhead를 고려해야 한다.",
+    "PRP와 HSR의 seamless 특성은 정의된 단일고장과 적합한 node·path 구성에서 성립하며 공통 전원, shared switch, configuration error와 다중고장은 별도 보호가 필요하다.",
+    "Packet loss는 bit error, buffer overflow, link flap, policing, topology change와 receiver overload에서 발생할 수 있으며 loss budget, sequence monitoring과 application의 stale-data 처리를 정의해야 한다.",
+    "Broadcast storm은 loop, malfunction 또는 과도한 discovery로 대역폭과 CPU를 소진할 수 있으므로 loop prevention, storm control, segmentation과 fault containment가 필요하다.",
+    "Multicast traffic은 one-to-many 전달에 효율적이지만 group membership, snooping·querier, flooding 범위와 receiver capacity를 관리하지 않으면 불필요한 부하가 확산될 수 있다.",
+    "Congestion은 ingress traffic이 link 또는 queue service capacity를 초과할 때 지연·drop을 발생시키며 buffer 증설만으로 deadline을 보장할 수 없고 traffic engineering이 필요하다.",
+    "Network failover 후에도 controller, remote I/O, sequence, redundancy manager와 application session의 상태가 일관되어야 하며 duplicate, out-of-order, stale command를 검증해야 한다.",
+    "Network 상실 시 critical equipment는 정의된 local control, hold-last, safe state 또는 제한운전으로 전환하도록 설계하고 전환조건과 복귀절차를 검증해야 한다.",
+    "Graceful degradation은 일부 통신·진단·최적화 기능을 제한하면서 핵심 제어와 안전기능을 유지하는 전략이며 기능우선순위와 operator indication을 사전에 정의해야 한다.",
+    "Redundancy는 standby path와 duplicate channel의 건강상태를 지속 감시하고 latent failure를 알람·시험해야 실제 가용성을 유지할 수 있다.",
+    "복원력은 link뿐 아니라 switch, power, cabinet, cable route, clock source, controller interface와 configuration의 failure domain을 분리하고 common-cause failure를 줄여야 한다.",
+    "복구성능은 cable open, switch power loss, node failure, clock loss, traffic burst, loop와 packet impairment를 계획적으로 주입하여 검출·전환·공정영향·복귀를 측정해야 한다.",
+    "검증은 synchronized capture, device diagnostics와 application timestamp를 이용해 최대·분위수 Latency, Jitter, loss, clock offset, recovery time과 deadline miss를 기록하고 요구값과 비교해야 한다.",
+    "Protocol 종류, 물리매체, 일반 통신구조, Device Profile과 상호운용성 선정은 SW-07의 범위이고 SW-08은 정량적 시간성능·동기·복구·복원력을 담당한다.",
+    "Authentication, encryption, access control, firewall와 cyber incident response는 SW-09의 범위이며 SW-08은 장애·혼잡·고장전환에 대한 성능과 복원력에 집중한다."
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "sw08_fatal_throughput_is_determinism",
+      "claim": "Throughput이 높으면 Latency와 Jitter의 상한도 자동 보장되어 Determinism이 성립한다.",
+      "correction": "Throughput과 Determinism을 분리하고 worst-case delay와 deadline을 검증해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Throughput이 높으면 Latency와 Jitter의 상한도 자동 보장되어 Determinism이 성립한다.",
+        "Throughput과 Determinism을 분리하고 worst-case delay와 deadline을 검증해야 한다."
+      ],
+      "wrong_patterns": [
+        "Throughput이 높으면 Latency와 Jitter의 상한도 자동 보장되어 Determinism이 성립한다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_average_only",
+      "claim": "평균 Latency만 낮으면 worst-case와 deadline miss는 고려할 필요가 없다.",
+      "correction": "최대값·분위수·burst·고장전환을 포함한 worst-case를 확인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "평균 Latency만 낮으면 worst-case와 deadline miss는 고려할 필요가 없다.",
+        "최대값·분위수·burst·고장전환을 포함한 worst-case를 확인해야 한다."
+      ],
+      "wrong_patterns": [
+        "평균 Latency만 낮으면 worst-case와 deadline miss는 고려할 필요가 없다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_jitter_equals_latency",
+      "claim": "Jitter는 Latency와 동일한 개념이며 별도 측정할 필요가 없다.",
+      "correction": "Latency는 지연량이고 Jitter는 지연의 변동이므로 별도 관리해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Jitter는 Latency와 동일한 개념이며 별도 측정할 필요가 없다.",
+        "Latency는 지연량이고 Jitter는 지연의 변동이므로 별도 관리해야 한다."
+      ],
+      "wrong_patterns": [
+        "Jitter는 Latency와 동일한 개념이며 별도 측정할 필요가 없다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_cycle_is_serialization",
+      "claim": "Cycle time은 frame 한 개의 serialization time과 항상 같다.",
+      "correction": "Cycle time은 task, network update와 producer-consumer phase를 포함한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Cycle time은 frame 한 개의 serialization time과 항상 같다.",
+        "Cycle time은 task, network update와 producer-consumer phase를 포함한다."
+      ],
+      "wrong_patterns": [
+        "Cycle time은 frame 한 개의 serialization time과 항상 같다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_ptp_guarantees_deadline",
+      "claim": "PTP를 적용하면 모든 packet의 deadline과 Determinism이 자동 보장된다.",
+      "correction": "PTP는 clock synchronization을 제공하며 traffic scheduling과 queue control은 별도 설계해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "PTP를 적용하면 모든 packet의 deadline과 Determinism이 자동 보장된다.",
+        "PTP는 clock synchronization을 제공하며 traffic scheduling과 queue control은 별도 설계해야 한다."
+      ],
+      "wrong_patterns": [
+        "PTP를 적용하면 모든 packet의 deadline과 Determinism이 자동 보장된다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_software_timestamp_equal",
+      "claim": "Software timestamping은 모든 부하에서 hardware timestamping과 동일한 정확도를 보장한다.",
+      "correction": "Timestamp 위치와 processing jitter가 다르므로 요구정확도에 따라 hardware timestamping을 검토해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Software timestamping은 모든 부하에서 hardware timestamping과 동일한 정확도를 보장한다.",
+        "Timestamp 위치와 processing jitter가 다르므로 요구정확도에 따라 hardware timestamping을 검토해야 한다."
+      ],
+      "wrong_patterns": [
+        "Software timestamping은 모든 부하에서 hardware timestamping과 동일한 정확도를 보장한다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_qos_eliminates_congestion",
+      "claim": "Priority 또는 QoS 설정만으로 congestion과 deadline miss를 완전히 제거할 수 있다.",
+      "correction": "Admission control, policing, scheduling, load limit과 queue 검증이 함께 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Priority 또는 QoS 설정만으로 congestion과 deadline miss를 완전히 제거할 수 있다.",
+        "Admission control, policing, scheduling, load limit과 queue 검증이 함께 필요하다."
+      ],
+      "wrong_patterns": [
+        "Priority 또는 QoS 설정만으로 congestion과 deadline miss를 완전히 제거할 수 있다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_tsn_automatic",
+      "claim": "TSN capable 장비를 연결하면 profile·schedule·clock 구성 없이 자동으로 결정적 통신이 된다.",
+      "correction": "TSN 기능조합, end-to-end profile, schedule와 clock configuration이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "TSN capable 장비를 연결하면 profile·schedule·clock 구성 없이 자동으로 결정적 통신이 된다.",
+        "TSN 기능조합, end-to-end profile, schedule와 clock configuration이 필요하다."
+      ],
+      "wrong_patterns": [
+        "TSN capable 장비를 연결하면 profile·schedule·clock 구성 없이 자동으로 결정적 통신이 된다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_redundancy_zero_recovery",
+      "claim": "네트워크를 이중화하면 모든 고장에서 packet loss와 recovery time이 0이 된다.",
+      "correction": "보호고장과 protocol 특성, path independence와 application recovery를 구분해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "네트워크를 이중화하면 모든 고장에서 packet loss와 recovery time이 0이 된다.",
+        "보호고장과 protocol 특성, path independence와 application recovery를 구분해야 한다."
+      ],
+      "wrong_patterns": [
+        "네트워크를 이중화하면 모든 고장에서 packet loss와 recovery time이 0이 된다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_all_ring_seamless",
+      "claim": "모든 ring topology는 단선 시 무손실·무지연으로 자동 전환된다.",
+      "correction": "Ring recovery는 protocol, ring size, supervision과 fault type에 따라 달라진다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "모든 ring topology는 단선 시 무손실·무지연으로 자동 전환된다.",
+        "Ring recovery는 protocol, ring size, supervision과 fault type에 따라 달라진다."
+      ],
+      "wrong_patterns": [
+        "모든 ring topology는 단선 시 무손실·무지연으로 자동 전환된다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_mrp_zero_universal",
+      "claim": "MRP는 모든 장치와 ring 규모에서 zero-time recovery를 보장한다.",
+      "correction": "MRP recovery profile과 실제 장치·ring 조건에서 복구시간을 검증해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "MRP는 모든 장치와 ring 규모에서 zero-time recovery를 보장한다.",
+        "MRP recovery profile과 실제 장치·ring 조건에서 복구시간을 검증해야 한다."
+      ],
+      "wrong_patterns": [
+        "MRP는 모든 장치와 ring 규모에서 zero-time recovery를 보장한다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_dlr_universal",
+      "claim": "DLR은 모든 Ethernet protocol과 임의 switch에 공통 적용되는 범용 ring 기능이다.",
+      "correction": "DLR은 EtherNet/IP 생태계의 device-level ring 구조와 지원 장치조건을 가진다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "DLR은 모든 Ethernet protocol과 임의 switch에 공통 적용되는 범용 ring 기능이다.",
+        "DLR은 EtherNet/IP 생태계의 device-level ring 구조와 지원 장치조건을 가진다."
+      ],
+      "wrong_patterns": [
+        "DLR은 모든 Ethernet protocol과 임의 switch에 공통 적용되는 범용 ring 기능이다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_prp_shared_path",
+      "claim": "PRP는 두 port가 같은 switch와 cable path를 공유해도 독립 dual LAN과 같은 보호효과를 낸다.",
+      "correction": "PRP의 LAN A와 LAN B는 failure domain을 실질적으로 분리해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "PRP는 두 port가 같은 switch와 cable path를 공유해도 독립 dual LAN과 같은 보호효과를 낸다.",
+        "PRP의 LAN A와 LAN B는 failure domain을 실질적으로 분리해야 한다."
+      ],
+      "wrong_patterns": [
+        "PRP는 두 port가 같은 switch와 cable path를 공유해도 독립 dual LAN과 같은 보호효과를 낸다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_hsr_plain_ring",
+      "claim": "HSR은 일반 switch ring과 동일하여 duplicate transmission, forwarding와 duplicate discard가 필요 없다.",
+      "correction": "HSR은 양방향 중복전송과 node forwarding·duplicate discard를 전제로 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "HSR은 일반 switch ring과 동일하여 duplicate transmission, forwarding와 duplicate discard가 필요 없다.",
+        "HSR은 양방향 중복전송과 node forwarding·duplicate discard를 전제로 한다."
+      ],
+      "wrong_patterns": [
+        "HSR은 일반 switch ring과 동일하여 duplicate transmission, forwarding와 duplicate discard가 필요 없다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_packet_loss_harmless",
+      "claim": "소량 Packet loss는 sequence와 stale data 처리 없이도 제어에 항상 무해하다.",
+      "correction": "Application별 loss budget, sequence monitoring, timeout와 stale-data 정책이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "소량 Packet loss는 sequence와 stale data 처리 없이도 제어에 항상 무해하다.",
+        "Application별 loss budget, sequence monitoring, timeout와 stale-data 정책이 필요하다."
+      ],
+      "wrong_patterns": [
+        "소량 Packet loss는 sequence와 stale data 처리 없이도 제어에 항상 무해하다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_multicast_always_filtered",
+      "claim": "Multicast는 설정하지 않아도 switch가 항상 필요한 receiver port로만 전달한다.",
+      "correction": "Group management와 snooping·querier 동작을 확인하지 않으면 flooding될 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Multicast는 설정하지 않아도 switch가 항상 필요한 receiver port로만 전달한다.",
+        "Group management와 snooping·querier 동작을 확인하지 않으면 flooding될 수 있다."
+      ],
+      "wrong_patterns": [
+        "Multicast는 설정하지 않아도 switch가 항상 필요한 receiver port로만 전달한다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_buffer_solves_all",
+      "claim": "Switch buffer를 크게 하면 Packet loss와 실시간 지연을 동시에 완전히 제거한다.",
+      "correction": "Buffer는 burst를 흡수하지만 queueing delay를 늘릴 수 있으므로 traffic engineering이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Switch buffer를 크게 하면 Packet loss와 실시간 지연을 동시에 완전히 제거한다.",
+        "Buffer는 burst를 흡수하지만 queueing delay를 늘릴 수 있으므로 traffic engineering이 필요하다."
+      ],
+      "wrong_patterns": [
+        "Switch buffer를 크게 하면 Packet loss와 실시간 지연을 동시에 완전히 제거한다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_failover_state_automatic",
+      "claim": "Link가 복구되면 controller와 remote I/O의 application state도 검증 없이 항상 정상화된다.",
+      "correction": "Failover 후 duplicate, sequence, stale command와 state consistency를 시험해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Link가 복구되면 controller와 remote I/O의 application state도 검증 없이 항상 정상화된다.",
+        "Failover 후 duplicate, sequence, stale command와 state consistency를 시험해야 한다."
+      ],
+      "wrong_patterns": [
+        "Link가 복구되면 controller와 remote I/O의 application state도 검증 없이 항상 정상화된다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_dual_port_independent",
+      "claim": "장치에 network port 두 개가 있으면 power, switch와 cable route도 자동으로 독립된다.",
+      "correction": "Failure domain과 common-cause path를 별도로 확인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "장치에 network port 두 개가 있으면 power, switch와 cable route도 자동으로 독립된다.",
+        "Failure domain과 common-cause path를 별도로 확인해야 한다."
+      ],
+      "wrong_patterns": [
+        "장치에 network port 두 개가 있으면 power, switch와 cable route도 자동으로 독립된다."
+      ]
+    },
+    {
+      "id": "sw08_fatal_no_local_fallback",
+      "claim": "네트워크 redundancy가 있으면 critical equipment의 local fallback 또는 safe-state 설계는 불필요하다.",
+      "correction": "Residual failure에 대비해 공정위험에 맞는 local fallback·safe state를 정의해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "네트워크 redundancy가 있으면 critical equipment의 local fallback 또는 safe-state 설계는 불필요하다.",
+        "Residual failure에 대비해 공정위험에 맞는 local fallback·safe state를 정의해야 한다."
+      ],
+      "wrong_patterns": [
+        "네트워크 redundancy가 있으면 critical equipment의 local fallback 또는 safe-state 설계는 불필요하다."
+      ]
+    }
+  ],
+  "safe_expressions": [
+    "Determinism은 평균속도가 아니라 정의된 조건에서의 bounded worst-case delay로 설명한다.",
+    "Latency, Jitter, Cycle time과 Response time을 각각 정의하고 연결한다.",
+    "Network delay는 sensing·logic·output을 포함한 end-to-end response budget의 일부이다.",
+    "Throughput과 시간성능을 분리하여 평가한다.",
+    "평균 utilization뿐 아니라 burst, startup, alarm과 recovery traffic을 포함한다.",
+    "QoS는 우선순위를 제공하지만 admission control 없이 절대 deadline을 보장하지 않는다.",
+    "TSN은 여러 IEEE 802.1 기능을 profile로 조합하는 기술군이다.",
+    "Qbv schedule은 clock accuracy, guard band와 frame size 조건을 함께 검토한다.",
+    "Frame preemption은 blocking time을 줄이지만 모든 지연을 제거하지 않는다.",
+    "PTP는 clock synchronization을 제공하며 Determinism과 동일하지 않다.",
+    "Hardware timestamping, path asymmetry와 oscillator가 동기오차에 영향을 준다.",
+    "Redundancy protocol은 보호고장과 허용 recovery time에 맞추어 선정한다.",
+    "Recovery time은 network reconvergence와 application recovery를 포함한다.",
+    "MRP와 DLR은 구성조건에 따라 recovery time이 달라질 수 있다.",
+    "PRP는 두 LAN의 병렬전송과 수신측 duplicate discard를 사용한다.",
+    "HSR은 ring 양방향 중복전송과 node forwarding을 사용한다.",
+    "Seamless redundancy도 common-cause와 다중고장을 자동 제거하지 않는다.",
+    "Packet loss는 sequence, quality와 stale-data 정책으로 상위제어에 반영한다.",
+    "Broadcast와 multicast는 loop·flooding·receiver load 관점에서 관리한다.",
+    "Congestion은 buffer만이 아니라 traffic engineering으로 관리한다.",
+    "Failover 후 application state consistency를 별도로 검증한다.",
+    "Network loss 시 local control, hold-last, safe state 또는 제한운전을 위험기반으로 선택한다.",
+    "Graceful degradation은 핵심기능 우선순위와 operator indication을 포함한다.",
+    "Redundant standby path의 latent failure를 감시하고 시험한다.",
+    "실시간성과 복원력은 synchronized measurement와 fault injection으로 acceptance한다."
+  ],
+  "revision_notes": [
+    "created_for_SOFTWARE_LLM_LANE_B_SW_08",
+    "scope_owns_quantitative_realtime_time_sync_fault_recovery_and_resilience",
+    "protocol_structure_and_general_interoperability_delegated_to_SW_07",
+    "cybersecurity_controls_and_incident_response_delegated_to_SW_09"
+  ]
+}

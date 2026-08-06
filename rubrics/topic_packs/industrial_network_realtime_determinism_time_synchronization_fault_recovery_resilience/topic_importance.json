@@ -1,0 +1,28 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "HIGH",
+  "question_type": "CALC_DESIGN",
+  "high_band_unlock_conditions": [
+    "Latency, Jitter, Cycle time와 Response time를 구분하고 정량목표를 제시한다.",
+    "Determinism을 bounded worst-case delay와 deadline으로 설명한다.",
+    "Traffic matrix, burst, load headroom과 QoS·scheduling을 연결한다.",
+    "TSN의 Qbv, frame preemption, policing과 profile 조건을 설명한다.",
+    "PTP clock hierarchy, timestamping, asymmetry와 holdover를 설명한다.",
+    "MRP, DLR, PRP와 HSR의 구조·복구시간·failure coverage를 비교한다.",
+    "Packet loss, broadcast storm, multicast와 congestion containment를 제시한다.",
+    "Failover 후 application state consistency와 redundancy health를 포함한다.",
+    "Fallback local control과 graceful degradation을 위험기반으로 설계한다.",
+    "Fault injection과 synchronized measurement로 acceptance evidence를 제시한다.",
+    "SW-07과 SW-09 ownership 경계를 유지하고 Fatal 오류가 없다."
+  ],
+  "note": "산업 네트워크는 nominal speed보다 worst-case deadline, synchronization accuracy, fault recovery와 degraded operation을 함께 만족해야 한다. SW-08은 protocol 명칭 암기가 아니라 정량 성능예산, failure coverage와 검증 가능한 복원력 설계를 평가한다.",
+  "revision_notes": [
+    "created_for_SOFTWARE_LLM_LANE_B_SW_08",
+    "difficulty_set_to_DESIGN_EVALUATION",
+    "selection_importance_set_to_HIGH",
+    "high_band_requires_explicit_SW_07_and_SW_09_boundaries"
+  ],
+  "topic_label": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력"
+}
