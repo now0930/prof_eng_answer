@@ -1,0 +1,27 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "NORMAL",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "CI, Baseline, Version control, 상태기록과 As-built consistency의 관계를 정확히 설명한다.",
+    "MOC 절차를 영향분석·승인·실행·검증·종결의 폐루프로 제시한다.",
+    "Release package, 승인 artifact와 risk-based Regression을 구체화한다.",
+    "Backup, Restore, Rollback과 Disaster recovery의 차이와 연계를 설명한다.",
+    "Rollback trigger와 비가역 변경의 forward recovery를 제시한다.",
+    "Migration discovery, compatibility matrix, data reconciliation과 Cutover go/no-go를 연결한다.",
+    "Parallel operation의 제어권·데이터·운전 위험을 함께 평가한다.",
+    "Legacy·Obsolescence·Spare·Vendor lock-in·License·Firmware를 수명주기 관점에서 판단한다.",
+    "긴급변경과 As-built 갱신, 교육·문서화까지 변경종결에 포함한다.",
+    "SW-04와 SW-09 ownership 경계를 명확히 유지하고 Fatal 오류가 없다."
+  ],
+  "note": "산업용 제어시스템은 장기간 운전되고 변경 실패가 비계획 정지와 현장 형상 불일치로 이어질 수 있다. SW-06은 개발 V&V 자체가 아니라 운영 중 형상·변경·Release·복구·Migration과 노후화 수명주기 판단을 평가한다.",
+  "revision_notes": [
+    "created_for_SOFTWARE_LLM_LANE_B_SW_06",
+    "difficulty_set_to_DESIGN_EVALUATION",
+    "selection_importance_set_to_NORMAL",
+    "high_band_requires_explicit_SW_04_and_SW_09_boundaries"
+  ],
+  "topic_label": "형상관리, 변경관리, Release, Backup, Rollback, Migration 및 Obsolescence 관리"
+}

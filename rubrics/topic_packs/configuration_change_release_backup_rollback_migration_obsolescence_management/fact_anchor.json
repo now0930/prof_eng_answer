@@ -1,0 +1,1678 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+  "title_ko": "형상관리, 변경관리, Release, Backup, Rollback, Migration 및 Obsolescence 관리",
+  "question_type_hint": "IMPLEMENTATION_EVALUATION",
+  "anchors": [
+    {
+      "id": "sw06_configuration_item_scope",
+      "anchor_id": "sw06_configuration_item_scope",
+      "statement": "Configuration Item(CI)은 식별·변경·상태기록의 통제를 받아야 하는 하드웨어, 소프트웨어, 펌웨어, 설정값, 화면, 데이터 구조, 인터페이스, 문서와 라이선스 등의 관리 단위이다.",
+      "importance": "core",
+      "keywords": [
+        "configuration item",
+        "CI",
+        "hardware",
+        "software",
+        "firmware",
+        "configuration",
+        "document",
+        "license"
+      ],
+      "core_terms": [
+        "configuration item",
+        "CI",
+        "hardware",
+        "software",
+        "firmware"
+      ],
+      "accepted_explanations": [
+        "PLC·DCS 프로그램뿐 아니라 HMI 화면, 통신 설정, 펌웨어, 데이터베이스 스키마, 라이선스와 운전 문서도 CI가 될 수 있다."
+      ],
+      "rejected_explanations": [
+        "CI를 소스코드 파일로만 한정한다."
+      ],
+      "grading_notes": "CI의 범위와 식별 기준을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Configuration Item(CI)은 식별·변경·상태기록의 통제를 받아야 하는 하드웨어, 소프트웨어, 펌웨어, 설정값, 화면, 데이터 구조, 인터페이스, 문서와 라이선스 등의 관리 단위이다.",
+      "description": "CI의 범위와 식별 기준을 평가한다."
+    },
+    {
+      "id": "sw06_configuration_identification_relationship",
+      "anchor_id": "sw06_configuration_identification_relationship",
+      "statement": "형상식별은 CI의 고유 식별자, 버전, 위치, 소유자, 의존관계, 승인상태와 적용 설비를 추적할 수 있게 정의하는 활동이다.",
+      "importance": "core",
+      "keywords": [
+        "configuration identification",
+        "unique identifier",
+        "version",
+        "owner",
+        "dependency",
+        "approval status",
+        "asset mapping"
+      ],
+      "core_terms": [
+        "configuration identification",
+        "unique identifier",
+        "version",
+        "owner",
+        "dependency"
+      ],
+      "accepted_explanations": [
+        "버전 번호만이 아니라 어느 설비에 어떤 조합이 설치되었는지 관계를 추적해야 한다."
+      ],
+      "rejected_explanations": [
+        "파일 이름만 있으면 형상식별이 완료되었다고 본다."
+      ],
+      "grading_notes": "CI 관계와 설치대상 추적성을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "형상식별은 CI의 고유 식별자, 버전, 위치, 소유자, 의존관계, 승인상태와 적용 설비를 추적할 수 있게 정의하는 활동이다.",
+      "description": "CI 관계와 설치대상 추적성을 평가한다."
+    },
+    {
+      "id": "sw06_baseline_approved_reference",
+      "anchor_id": "sw06_baseline_approved_reference",
+      "statement": "Baseline은 검토와 승인을 거쳐 이후 변경의 기준이 되는 특정 시점의 형상 집합이며 단순히 가장 최신 파일이나 최근 백업을 뜻하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "baseline",
+        "approved reference",
+        "configuration set",
+        "change reference",
+        "latest file"
+      ],
+      "core_terms": [
+        "baseline",
+        "approved reference",
+        "configuration set",
+        "change reference",
+        "latest file"
+      ],
+      "accepted_explanations": [
+        "승인된 프로그램·설정·문서·버전 조합을 기준선으로 고정하고 변경은 정식 절차로 통제한다."
+      ],
+      "rejected_explanations": [
+        "가장 최근 저장된 파일을 자동으로 baseline이라 부른다."
+      ],
+      "grading_notes": "Baseline의 승인성과 기준 기능을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Baseline은 검토와 승인을 거쳐 이후 변경의 기준이 되는 특정 시점의 형상 집합이며 단순히 가장 최신 파일이나 최근 백업을 뜻하지 않는다.",
+      "description": "Baseline의 승인성과 기준 기능을 평가한다."
+    },
+    {
+      "id": "sw06_version_control_status_accounting",
+      "anchor_id": "sw06_version_control_status_accounting",
+      "statement": "Version control은 변경 이력과 작성자를 기록하는 도구이고, 형상상태기록은 승인·배포·설치·폐기 상태까지 보고해야 하므로 Version control만으로 전체 형상관리가 완성되지는 않는다.",
+      "importance": "core",
+      "keywords": [
+        "version control",
+        "history",
+        "author",
+        "status accounting",
+        "deployment",
+        "installation",
+        "retirement"
+      ],
+      "core_terms": [
+        "version control",
+        "history",
+        "author",
+        "status accounting",
+        "deployment"
+      ],
+      "accepted_explanations": [
+        "Git 또는 vendor repository는 중요한 수단이지만 승인, 배포, 설치상태와 현장 일치성 관리가 추가로 필요하다."
+      ],
+      "rejected_explanations": [
+        "버전관리 시스템을 사용하면 MOC와 Release control이 자동으로 충족된다고 단정한다."
+      ],
+      "grading_notes": "도구와 관리체계의 차이를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Version control은 변경 이력과 작성자를 기록하는 도구이고, 형상상태기록은 승인·배포·설치·폐기 상태까지 보고해야 하므로 Version control만으로 전체 형상관리가 완성되지는 않는다.",
+      "description": "도구와 관리체계의 차이를 평가한다."
+    },
+    {
+      "id": "sw06_as_built_consistency",
+      "anchor_id": "sw06_as_built_consistency",
+      "statement": "As-built consistency는 저장소의 승인 형상, 현장에 실제 설치된 형상, 백업본과 관련 문서가 서로 일치하고 그 차이를 설명할 수 있는 상태이다.",
+      "importance": "core",
+      "keywords": [
+        "as-built consistency",
+        "repository",
+        "installed configuration",
+        "backup",
+        "documentation",
+        "reconciliation"
+      ],
+      "core_terms": [
+        "as-built consistency",
+        "repository",
+        "installed configuration",
+        "backup",
+        "documentation"
+      ],
+      "accepted_explanations": [
+        "온라인 Upload·checksum·version inventory와 승인 기록을 비교하여 현장 무단변경 또는 미반영 변경을 찾아낸다."
+      ],
+      "rejected_explanations": [
+        "설비가 정상 운전 중이면 as-built 불일치를 허용해도 된다고 본다."
+      ],
+      "grading_notes": "저장소와 실제 설비의 일치성을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "As-built consistency는 저장소의 승인 형상, 현장에 실제 설치된 형상, 백업본과 관련 문서가 서로 일치하고 그 차이를 설명할 수 있는 상태이다.",
+      "description": "저장소와 실제 설비의 일치성을 평가한다."
+    },
+    {
+      "id": "sw06_moc_trigger_and_scope",
+      "anchor_id": "sw06_moc_trigger_and_scope",
+      "statement": "Management of Change(MOC)는 운전·안전·품질·환경·보안·유지보수 또는 규제 영향이 있는 영구·임시·긴급 변경을 식별하고 통제하는 운영 절차이다.",
+      "importance": "core",
+      "keywords": [
+        "management of change",
+        "MOC",
+        "permanent change",
+        "temporary change",
+        "emergency change",
+        "operational impact"
+      ],
+      "core_terms": [
+        "management of change",
+        "MOC",
+        "permanent change",
+        "temporary change",
+        "emergency change"
+      ],
+      "accepted_explanations": [
+        "소프트웨어 수정뿐 아니라 setpoint, alarm, recipe, network, firmware, license, interface와 임시 우회도 MOC 대상이 될 수 있다."
+      ],
+      "rejected_explanations": [
+        "코드가 바뀌지 않으면 MOC가 필요 없다고 단정한다."
+      ],
+      "grading_notes": "MOC 대상과 범위를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Management of Change(MOC)는 운전·안전·품질·환경·보안·유지보수 또는 규제 영향이 있는 영구·임시·긴급 변경을 식별하고 통제하는 운영 절차이다.",
+      "description": "MOC 대상과 범위를 평가한다."
+    },
+    {
+      "id": "sw06_change_request_problem_objective",
+      "anchor_id": "sw06_change_request_problem_objective",
+      "statement": "변경요청은 현상, 변경 목적, 대상 CI, 기대효과, 위험, 우선순위, 요청자와 완료기준을 명확히 해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "change request",
+        "problem statement",
+        "objective",
+        "target CI",
+        "risk",
+        "priority",
+        "acceptance criteria"
+      ],
+      "core_terms": [
+        "change request",
+        "problem statement",
+        "objective",
+        "target CI",
+        "risk"
+      ],
+      "accepted_explanations": [
+        "변경 사유와 완료조건을 구체화해야 영향분석과 승인 판단이 가능하다."
+      ],
+      "rejected_explanations": [
+        "'개선 필요'와 같은 포괄적 사유만으로 변경을 시작한다."
+      ],
+      "grading_notes": "변경요청의 입력 품질을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "변경요청은 현상, 변경 목적, 대상 CI, 기대효과, 위험, 우선순위, 요청자와 완료기준을 명확히 해야 한다.",
+      "description": "변경요청의 입력 품질을 평가한다."
+    },
+    {
+      "id": "sw06_impact_analysis_multidisciplinary",
+      "anchor_id": "sw06_impact_analysis_multidisciplinary",
+      "statement": "Impact analysis는 변경 대상뿐 아니라 연동 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, 예비품, 라이선스와 복구계획에 미치는 영향을 다학제적으로 검토해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "impact analysis",
+        "interface",
+        "HMI",
+        "historian",
+        "alarm",
+        "safety",
+        "procedure",
+        "training",
+        "spare",
+        "license"
+      ],
+      "core_terms": [
+        "impact analysis",
+        "interface",
+        "HMI",
+        "historian",
+        "alarm"
+      ],
+      "accepted_explanations": [
+        "작은 parameter 변경도 영향받는 루프·설비·운전절차와 rollback 가능성을 확인한다."
+      ],
+      "rejected_explanations": [
+        "변경 파일 하나만 검토하고 연동 시스템은 고려하지 않는다."
+      ],
+      "grading_notes": "변경 영향의 폭과 다학제 검토를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Impact analysis는 변경 대상뿐 아니라 연동 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, 예비품, 라이선스와 복구계획에 미치는 영향을 다학제적으로 검토해야 한다.",
+      "description": "변경 영향의 폭과 다학제 검토를 평가한다."
+    },
+    {
+      "id": "sw06_risk_based_approval_authority",
+      "anchor_id": "sw06_risk_based_approval_authority",
+      "statement": "변경 승인권한과 검토 깊이는 위험도, 설비 중요도, 변경 범위와 가역성에 따라 정하고 요청·검토·승인·배포 역할을 가능한 범위에서 분리한다.",
+      "importance": "core",
+      "keywords": [
+        "approval authority",
+        "risk based",
+        "criticality",
+        "reversibility",
+        "segregation of duties",
+        "authorization"
+      ],
+      "core_terms": [
+        "approval authority",
+        "risk based",
+        "criticality",
+        "reversibility",
+        "segregation of duties"
+      ],
+      "accepted_explanations": [
+        "저위험 표준변경은 간소화할 수 있으나 승인기준과 책임은 명확해야 한다."
+      ],
+      "rejected_explanations": [
+        "모든 변경을 동일 절차로 처리하거나 개발자가 단독으로 승인·배포한다."
+      ],
+      "grading_notes": "위험기반 승인과 역할분리를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "변경 승인권한과 검토 깊이는 위험도, 설비 중요도, 변경 범위와 가역성에 따라 정하고 요청·검토·승인·배포 역할을 가능한 범위에서 분리한다.",
+      "description": "위험기반 승인과 역할분리를 평가한다."
+    },
+    {
+      "id": "sw06_change_implementation_plan",
+      "anchor_id": "sw06_change_implementation_plan",
+      "statement": "변경 실행계획은 작업 순서, 인력, 도구, 운전조건, 정지창, 통신방법, 백업, 검증, 중단기준, Rollback과 책임자를 포함해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "implementation plan",
+        "work sequence",
+        "maintenance window",
+        "backup",
+        "validation",
+        "abort criteria",
+        "rollback",
+        "responsibility"
+      ],
+      "core_terms": [
+        "implementation plan",
+        "work sequence",
+        "maintenance window",
+        "backup",
+        "validation"
+      ],
+      "accepted_explanations": [
+        "작업 전 go/no-go 조건과 중단 후 안전상태를 정의한다."
+      ],
+      "rejected_explanations": [
+        "수정 파일과 작업시간만 기재하고 실패 시 조치를 두지 않는다."
+      ],
+      "grading_notes": "실행계획의 완결성을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "변경 실행계획은 작업 순서, 인력, 도구, 운전조건, 정지창, 통신방법, 백업, 검증, 중단기준, Rollback과 책임자를 포함해야 한다.",
+      "description": "실행계획의 완결성을 평가한다."
+    },
+    {
+      "id": "sw06_pre_change_backup_restore_readiness",
+      "anchor_id": "sw06_pre_change_backup_restore_readiness",
+      "statement": "변경 전 Backup은 대상 CI와 의존 데이터를 포함해 복구 가능한 형태로 확보하고, 사용 도구·버전·권한·매체와 Restore 절차의 실행 가능성을 확인해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "pre-change backup",
+        "restore readiness",
+        "tool version",
+        "credential",
+        "media",
+        "dependency data"
+      ],
+      "core_terms": [
+        "pre-change backup",
+        "restore readiness",
+        "tool version",
+        "credential",
+        "media"
+      ],
+      "accepted_explanations": [
+        "PLC source, compiled object, HMI project, recipe, database, firmware, license와 설정을 시스템 특성에 맞게 묶어 확보한다."
+      ],
+      "rejected_explanations": [
+        "백업 파일이 존재하기만 하면 복구 준비가 완료되었다고 본다."
+      ],
+      "grading_notes": "변경 전 복구 준비를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "변경 전 Backup은 대상 CI와 의존 데이터를 포함해 복구 가능한 형태로 확보하고, 사용 도구·버전·권한·매체와 Restore 절차의 실행 가능성을 확인해야 한다.",
+      "description": "변경 전 복구 준비를 평가한다."
+    },
+    {
+      "id": "sw06_release_package_content",
+      "anchor_id": "sw06_release_package_content",
+      "statement": "Release package는 승인된 실행물과 source, 버전·checksum, 변경목록, 의존성, 설치절차, 시험결과, Backup·Rollback 절차, 알려진 제약과 승인기록을 포함해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "release package",
+        "checksum",
+        "change log",
+        "dependency",
+        "installation procedure",
+        "test result",
+        "rollback",
+        "known issue"
+      ],
+      "core_terms": [
+        "release package",
+        "checksum",
+        "change log",
+        "dependency",
+        "installation procedure"
+      ],
+      "accepted_explanations": [
+        "릴리스 노트와 manifest를 이용해 무엇을 어디에 어떤 순서로 설치하는지 재현할 수 있게 한다."
+      ],
+      "rejected_explanations": [
+        "실행파일 하나를 전달하면 Release control이 완료된다고 본다."
+      ],
+      "grading_notes": "릴리스 패키지의 재현성과 추적성을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Release package는 승인된 실행물과 source, 버전·checksum, 변경목록, 의존성, 설치절차, 시험결과, Backup·Rollback 절차, 알려진 제약과 승인기록을 포함해야 한다.",
+      "description": "릴리스 패키지의 재현성과 추적성을 평가한다."
+    },
+    {
+      "id": "sw06_release_control_authorized_artifact",
+      "anchor_id": "sw06_release_control_authorized_artifact",
+      "statement": "Release control은 승인된 동일 artifact만 지정 환경에 배포되도록 식별·보관·전달·설치·확인하고 임의 재빌드 또는 현장 직접수정을 방지하는 활동이다.",
+      "importance": "core",
+      "keywords": [
+        "release control",
+        "authorized artifact",
+        "artifact repository",
+        "deployment",
+        "checksum verification",
+        "field edit"
+      ],
+      "core_terms": [
+        "release control",
+        "authorized artifact",
+        "artifact repository",
+        "deployment",
+        "checksum verification"
+      ],
+      "accepted_explanations": [
+        "승인 checksum과 설치 후 checksum 또는 버전을 비교한다."
+      ],
+      "rejected_explanations": [
+        "현장에서 동일 소스를 다시 빌드했으므로 승인 artifact와 같다고 간주한다."
+      ],
+      "grading_notes": "승인 산출물의 동일성 통제를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Release control은 승인된 동일 artifact만 지정 환경에 배포되도록 식별·보관·전달·설치·확인하고 임의 재빌드 또는 현장 직접수정을 방지하는 활동이다.",
+      "description": "승인 산출물의 동일성 통제를 평가한다."
+    },
+    {
+      "id": "sw06_risk_based_regression",
+      "anchor_id": "sw06_risk_based_regression",
+      "statement": "Regression은 변경이 기존 기능과 인터페이스를 훼손하지 않았는지 확인하는 위험기반 재시험이며, 영향분석으로 범위를 정하고 변경 기능·인접 기능·핵심 운전 시나리오를 포함한다.",
+      "importance": "core",
+      "keywords": [
+        "regression test",
+        "risk based",
+        "existing function",
+        "interface",
+        "adjacent function",
+        "operating scenario"
+      ],
+      "core_terms": [
+        "regression test",
+        "risk based",
+        "existing function",
+        "interface",
+        "adjacent function"
+      ],
+      "accepted_explanations": [
+        "모든 경우 전체시험이 필요한 것은 아니지만 변경과 영향받는 영역은 근거를 두고 검증한다."
+      ],
+      "rejected_explanations": [
+        "코드 변경이 작거나 parameter 변경이므로 regression을 생략한다."
+      ],
+      "grading_notes": "SW-04와의 경계를 유지한 운영 Release regression을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Regression은 변경이 기존 기능과 인터페이스를 훼손하지 않았는지 확인하는 위험기반 재시험이며, 영향분석으로 범위를 정하고 변경 기능·인접 기능·핵심 운전 시나리오를 포함한다.",
+      "description": "SW-04와의 경계를 유지한 운영 Release regression을 평가한다."
+    },
+    {
+      "id": "sw06_release_acceptance_and_asbuilt_update",
+      "anchor_id": "sw06_release_acceptance_and_asbuilt_update",
+      "statement": "Release 완료는 설치 성공만이 아니라 기능·알람·인터페이스·운전성 확인, 이상 유무 감시, 문서와 As-built 갱신, 사용자 인수와 변경종결을 포함한다.",
+      "importance": "core",
+      "keywords": [
+        "release acceptance",
+        "commissioning",
+        "alarm",
+        "interface",
+        "monitoring",
+        "as-built update",
+        "closure"
+      ],
+      "core_terms": [
+        "release acceptance",
+        "commissioning",
+        "alarm",
+        "interface",
+        "monitoring"
+      ],
+      "accepted_explanations": [
+        "설치 후 관찰기간과 인수기준을 충족하고 현장 버전을 상태기록에 반영한다."
+      ],
+      "rejected_explanations": [
+        "프로그램 Download가 완료되면 변경을 즉시 종료한다."
+      ],
+      "grading_notes": "배포 후 인수와 종결을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Release 완료는 설치 성공만이 아니라 기능·알람·인터페이스·운전성 확인, 이상 유무 감시, 문서와 As-built 갱신, 사용자 인수와 변경종결을 포함한다.",
+      "description": "배포 후 인수와 종결을 평가한다."
+    },
+    {
+      "id": "sw06_rollback_preplanned_criteria",
+      "anchor_id": "sw06_rollback_preplanned_criteria",
+      "statement": "Rollback은 변경 전 정의한 trigger, 허용시간, 복귀대상 baseline, 데이터 처리, 책임자와 의사결정권한에 따라 수행하는 계획된 이전 형상 복귀이다.",
+      "importance": "core",
+      "keywords": [
+        "rollback",
+        "trigger",
+        "time limit",
+        "previous baseline",
+        "data handling",
+        "decision authority"
+      ],
+      "core_terms": [
+        "rollback",
+        "trigger",
+        "time limit",
+        "previous baseline",
+        "data handling"
+      ],
+      "accepted_explanations": [
+        "응답불능, 핵심 기능 실패, 성능저하 또는 검증 미통과를 정량·정성 trigger로 정의한다."
+      ],
+      "rejected_explanations": [
+        "실패 후 현장에서 즉흥적으로 이전 파일을 찾는 것을 Rollback 계획이라 한다."
+      ],
+      "grading_notes": "Rollback의 사전계획성과 판단기준을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Rollback은 변경 전 정의한 trigger, 허용시간, 복귀대상 baseline, 데이터 처리, 책임자와 의사결정권한에 따라 수행하는 계획된 이전 형상 복귀이다.",
+      "description": "Rollback의 사전계획성과 판단기준을 평가한다."
+    },
+    {
+      "id": "sw06_restore_rollback_distinction",
+      "anchor_id": "sw06_restore_rollback_distinction",
+      "statement": "Restore는 Backup으로부터 데이터·설정·시스템을 재구성하는 복구 행위이고, Rollback은 변경을 철회하여 승인된 이전 release 또는 baseline으로 되돌리는 변경관리 결정이다.",
+      "importance": "core",
+      "keywords": [
+        "restore",
+        "rollback",
+        "backup recovery",
+        "previous release",
+        "change decision",
+        "distinction"
+      ],
+      "core_terms": [
+        "restore",
+        "rollback",
+        "backup recovery",
+        "previous release",
+        "change decision"
+      ],
+      "accepted_explanations": [
+        "Rollback 과정에서 Restore를 사용할 수 있지만 두 용어의 목적과 범위는 동일하지 않다."
+      ],
+      "rejected_explanations": [
+        "Restore와 Rollback을 완전히 같은 의미로 사용한다."
+      ],
+      "grading_notes": "복구 행위와 변경 철회의 차이를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Restore는 Backup으로부터 데이터·설정·시스템을 재구성하는 복구 행위이고, Rollback은 변경을 철회하여 승인된 이전 release 또는 baseline으로 되돌리는 변경관리 결정이다.",
+      "description": "복구 행위와 변경 철회의 차이를 평가한다."
+    },
+    {
+      "id": "sw06_irreversible_change_forward_recovery",
+      "anchor_id": "sw06_irreversible_change_forward_recovery",
+      "statement": "데이터 변환, 장비 교체 또는 외부 인터페이스 변경처럼 완전한 Rollback이 불가능한 변경은 사전에 가역성 한계를 밝히고 checkpoint, reconciliation, forward recovery 또는 대체운전 방안을 준비해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "irreversible change",
+        "forward recovery",
+        "checkpoint",
+        "reconciliation",
+        "fallback operation",
+        "reversibility"
+      ],
+      "core_terms": [
+        "irreversible change",
+        "forward recovery",
+        "checkpoint",
+        "reconciliation",
+        "fallback operation"
+      ],
+      "accepted_explanations": [
+        "Rollback 불가를 숨기지 않고 데이터 보정과 수동운전 같은 대안을 승인받는다."
+      ],
+      "rejected_explanations": [
+        "모든 변경은 파일만 되돌리면 완전 복구된다고 단정한다."
+      ],
+      "grading_notes": "비가역 변경의 현실적 복구전략을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "데이터 변환, 장비 교체 또는 외부 인터페이스 변경처럼 완전한 Rollback이 불가능한 변경은 사전에 가역성 한계를 밝히고 checkpoint, reconciliation, forward recovery 또는 대체운전 방안을 준비해야 한다.",
+      "description": "비가역 변경의 현실적 복구전략을 평가한다."
+    },
+    {
+      "id": "sw06_backup_scope_and_consistency",
+      "anchor_id": "sw06_backup_scope_and_consistency",
+      "statement": "Backup 범위는 프로그램 파일뿐 아니라 설정, 레시피, 데이터베이스, 화면, 인증서·키의 적절한 보관정보, 펌웨어, 드라이버, 라이선스, 설치도구와 복구 문서를 포함하고 상호 일관된 시점으로 관리해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "backup scope",
+        "recipe",
+        "database",
+        "certificate",
+        "firmware",
+        "driver",
+        "license",
+        "tool",
+        "consistent point"
+      ],
+      "core_terms": [
+        "backup scope",
+        "recipe",
+        "database",
+        "certificate",
+        "firmware"
+      ],
+      "accepted_explanations": [
+        "복구 시 필요한 종속요소와 버전 조합을 inventory로 관리한다."
+      ],
+      "rejected_explanations": [
+        "PLC source 하나만 있으면 전체 제어시스템을 복구할 수 있다고 본다."
+      ],
+      "grading_notes": "백업 범위와 일관성 시점을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Backup 범위는 프로그램 파일뿐 아니라 설정, 레시피, 데이터베이스, 화면, 인증서·키의 적절한 보관정보, 펌웨어, 드라이버, 라이선스, 설치도구와 복구 문서를 포함하고 상호 일관된 시점으로 관리해야 한다.",
+      "description": "백업 범위와 일관성 시점을 평가한다."
+    },
+    {
+      "id": "sw06_backup_integrity_separation_retention",
+      "anchor_id": "sw06_backup_integrity_separation_retention",
+      "statement": "Backup은 무결성 확인, 접근통제, 원본 장애와 분리된 보관, 세대별 보존과 보존기간을 적용하고 정상본이 손상본으로 덮어써지지 않게 관리해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "backup integrity",
+        "checksum",
+        "separation",
+        "retention",
+        "generation",
+        "overwrite protection"
+      ],
+      "core_terms": [
+        "backup integrity",
+        "checksum",
+        "separation",
+        "retention",
+        "generation"
+      ],
+      "accepted_explanations": [
+        "온라인 백업 외에 원본과 독립된 사본을 두고 checksum·읽기검사를 수행한다."
+      ],
+      "rejected_explanations": [
+        "항상 최신 한 벌만 유지하고 이전 정상본을 자동 삭제한다."
+      ],
+      "grading_notes": "백업 매체와 보존정책을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Backup은 무결성 확인, 접근통제, 원본 장애와 분리된 보관, 세대별 보존과 보존기간을 적용하고 정상본이 손상본으로 덮어써지지 않게 관리해야 한다.",
+      "description": "백업 매체와 보존정책을 평가한다."
+    },
+    {
+      "id": "sw06_restore_test_recovery_evidence",
+      "anchor_id": "sw06_restore_test_recovery_evidence",
+      "statement": "Backup의 유효성은 정기적인 Restore 시험 또는 대표 복구훈련으로 확인하고 복구시간, 누락 의존성, 절차 오류와 결과 증적을 기록해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "restore test",
+        "recovery drill",
+        "recovery time",
+        "dependency",
+        "procedure error",
+        "evidence"
+      ],
+      "core_terms": [
+        "restore test",
+        "recovery drill",
+        "recovery time",
+        "dependency",
+        "procedure error"
+      ],
+      "accepted_explanations": [
+        "시험환경 또는 격리된 장비에서 복구 가능성을 검증하고 실제 복구절차를 개선한다."
+      ],
+      "rejected_explanations": [
+        "백업 작업의 성공 로그만으로 복구 가능성을 입증한다."
+      ],
+      "grading_notes": "복구 시험과 증적을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Backup의 유효성은 정기적인 Restore 시험 또는 대표 복구훈련으로 확인하고 복구시간, 누락 의존성, 절차 오류와 결과 증적을 기록해야 한다.",
+      "description": "복구 시험과 증적을 평가한다."
+    },
+    {
+      "id": "sw06_disaster_recovery_objectives",
+      "anchor_id": "sw06_disaster_recovery_objectives",
+      "statement": "Disaster recovery는 시스템 중요도와 공정 허용중단에 따라 복구 우선순위, 목표 복구시간, 허용 데이터 손실, 대체운전, 인력·장비·예비품과 통신체계를 정의한다.",
+      "importance": "important",
+      "keywords": [
+        "disaster recovery",
+        "recovery priority",
+        "RTO",
+        "RPO",
+        "fallback operation",
+        "resource",
+        "communication"
+      ],
+      "core_terms": [
+        "disaster recovery",
+        "recovery priority",
+        "RTO",
+        "RPO",
+        "fallback operation"
+      ],
+      "accepted_explanations": [
+        "RTO·RPO는 일률값이 아니라 공정 위험과 운영 요구에 맞춰 설정한다."
+      ],
+      "rejected_explanations": [
+        "Backup 저장 위치만 정하면 Disaster recovery 계획이 완성된다고 본다."
+      ],
+      "grading_notes": "운영 복구목표와 자원을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Disaster recovery는 시스템 중요도와 공정 허용중단에 따라 복구 우선순위, 목표 복구시간, 허용 데이터 손실, 대체운전, 인력·장비·예비품과 통신체계를 정의한다.",
+      "description": "운영 복구목표와 자원을 평가한다."
+    },
+    {
+      "id": "sw06_migration_discovery_dependency_inventory",
+      "anchor_id": "sw06_migration_discovery_dependency_inventory",
+      "statement": "Migration은 기존 시스템의 CI, 인터페이스, 데이터, timing, custom logic, 운전절차, 라이선스, 예비품과 숨은 의존성을 먼저 조사하여 범위와 제약을 확정해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "migration",
+        "discovery",
+        "dependency inventory",
+        "interface",
+        "custom logic",
+        "timing",
+        "license",
+        "legacy"
+      ],
+      "core_terms": [
+        "migration",
+        "discovery",
+        "dependency inventory",
+        "interface",
+        "custom logic"
+      ],
+      "accepted_explanations": [
+        "Undocumented logic와 vendor-specific driver까지 현장조사와 test로 확인한다."
+      ],
+      "rejected_explanations": [
+        "새 시스템 기능목록만 검토하고 기존 시스템 의존성은 생략한다."
+      ],
+      "grading_notes": "Migration 사전조사와 의존성 관리를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Migration은 기존 시스템의 CI, 인터페이스, 데이터, timing, custom logic, 운전절차, 라이선스, 예비품과 숨은 의존성을 먼저 조사하여 범위와 제약을 확정해야 한다.",
+      "description": "Migration 사전조사와 의존성 관리를 평가한다."
+    },
+    {
+      "id": "sw06_compatibility_matrix",
+      "anchor_id": "sw06_compatibility_matrix",
+      "statement": "Migration과 upgrade 전에는 하드웨어, OS, application, firmware, driver, protocol option, database와 license의 지원 조합을 Compatibility matrix로 확인해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "compatibility matrix",
+        "hardware",
+        "operating system",
+        "application",
+        "firmware",
+        "driver",
+        "database",
+        "license"
+      ],
+      "core_terms": [
+        "compatibility matrix",
+        "hardware",
+        "operating system",
+        "application",
+        "firmware"
+      ],
+      "accepted_explanations": [
+        "제조사 지원정보와 현장 시험을 조합해 승인된 버전 조합을 만든다."
+      ],
+      "rejected_explanations": [
+        "각 구성요소가 최신이면 서로 자동 호환된다고 본다."
+      ],
+      "grading_notes": "버전 조합 호환성을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Migration과 upgrade 전에는 하드웨어, OS, application, firmware, driver, protocol option, database와 license의 지원 조합을 Compatibility matrix로 확인해야 한다.",
+      "description": "버전 조합 호환성을 평가한다."
+    },
+    {
+      "id": "sw06_data_configuration_transformation_validation",
+      "anchor_id": "sw06_data_configuration_transformation_validation",
+      "statement": "데이터·설정 Migration은 mapping, 변환규칙, 단위·범위·encoding, 누락·중복 처리, checksum·record count·sample 비교와 운전 의미 검증을 포함해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "data migration",
+        "configuration mapping",
+        "transformation",
+        "unit",
+        "encoding",
+        "record count",
+        "reconciliation"
+      ],
+      "core_terms": [
+        "data migration",
+        "configuration mapping",
+        "transformation",
+        "unit",
+        "encoding"
+      ],
+      "accepted_explanations": [
+        "Tag, alarm limit, recipe, historian data를 단순 복사하지 않고 의미와 완전성을 검증한다."
+      ],
+      "rejected_explanations": [
+        "파일 복사가 성공하면 데이터 Migration도 성공했다고 판단한다."
+      ],
+      "grading_notes": "데이터 변환과 정합성 검증을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "데이터·설정 Migration은 mapping, 변환규칙, 단위·범위·encoding, 누락·중복 처리, checksum·record count·sample 비교와 운전 의미 검증을 포함해야 한다.",
+      "description": "데이터 변환과 정합성 검증을 평가한다."
+    },
+    {
+      "id": "sw06_migration_strategy_selection",
+      "anchor_id": "sw06_migration_strategy_selection",
+      "statement": "Migration 방식은 일괄 Cutover, 단계적 전환, Parallel operation, pilot 또는 hybrid 중 공정 중단 허용시간, 인터페이스 복잡도, 가역성, 비용과 위험을 비교하여 선정한다.",
+      "importance": "core",
+      "keywords": [
+        "big bang",
+        "phased migration",
+        "parallel operation",
+        "pilot",
+        "hybrid",
+        "downtime",
+        "risk"
+      ],
+      "core_terms": [
+        "big bang",
+        "phased migration",
+        "parallel operation",
+        "pilot",
+        "hybrid"
+      ],
+      "accepted_explanations": [
+        "고가용 공정은 단계전환이나 병행운전을 검토하되 인터페이스 중복과 운영부담도 평가한다."
+      ],
+      "rejected_explanations": [
+        "모든 현장에 Parallel operation 또는 Big-bang 중 하나가 항상 최선이라고 단정한다."
+      ],
+      "grading_notes": "Migration 방식의 조건부 선정을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Migration 방식은 일괄 Cutover, 단계적 전환, Parallel operation, pilot 또는 hybrid 중 공정 중단 허용시간, 인터페이스 복잡도, 가역성, 비용과 위험을 비교하여 선정한다.",
+      "description": "Migration 방식의 조건부 선정을 평가한다."
+    },
+    {
+      "id": "sw06_parallel_operation_controls",
+      "anchor_id": "sw06_parallel_operation_controls",
+      "statement": "Parallel operation은 결과 비교와 복귀 여지를 제공하지만 이중 입력, 제어권 충돌, 데이터 불일치, 운전자 혼란과 공통원인 오류를 통제해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "parallel operation",
+        "dual input",
+        "control ownership",
+        "data mismatch",
+        "operator confusion",
+        "common cause"
+      ],
+      "core_terms": [
+        "parallel operation",
+        "dual input",
+        "control ownership",
+        "data mismatch",
+        "operator confusion"
+      ],
+      "accepted_explanations": [
+        "한 시스템만 최종 제어권을 갖게 하거나 명확한 전환규칙과 데이터 reconciliation을 둔다."
+      ],
+      "rejected_explanations": [
+        "두 시스템을 동시에 연결하면 자동으로 안전성과 신뢰성이 높아진다고 본다."
+      ],
+      "grading_notes": "병행운전의 장점과 위험을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Parallel operation은 결과 비교와 복귀 여지를 제공하지만 이중 입력, 제어권 충돌, 데이터 불일치, 운전자 혼란과 공통원인 오류를 통제해야 한다.",
+      "description": "병행운전의 장점과 위험을 평가한다."
+    },
+    {
+      "id": "sw06_cutover_freeze_gonogo",
+      "anchor_id": "sw06_cutover_freeze_gonogo",
+      "statement": "Cutover 전에는 변경 freeze, 최종 동기화, Backup, readiness checklist, 승인, 연락망, go/no-go 기준, Rollback 가능시간과 공정 안전조건을 확인해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "cutover",
+        "change freeze",
+        "final synchronization",
+        "readiness",
+        "go no-go",
+        "rollback window",
+        "safe condition"
+      ],
+      "core_terms": [
+        "cutover",
+        "change freeze",
+        "final synchronization",
+        "readiness",
+        "go no-go"
+      ],
+      "accepted_explanations": [
+        "Cutover 직전 baseline을 고정하고 미해결 defect와 우회조치를 공개한다."
+      ],
+      "rejected_explanations": [
+        "일정이 정해지면 readiness 미충족 상태에서도 전환한다."
+      ],
+      "grading_notes": "Cutover 통제와 의사결정을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Cutover 전에는 변경 freeze, 최종 동기화, Backup, readiness checklist, 승인, 연락망, go/no-go 기준, Rollback 가능시간과 공정 안전조건을 확인해야 한다.",
+      "description": "Cutover 통제와 의사결정을 평가한다."
+    },
+    {
+      "id": "sw06_post_cutover_stabilization_decommission",
+      "anchor_id": "sw06_post_cutover_stabilization_decommission",
+      "statement": "Cutover 후에는 성능·알람·통신·데이터 정합성을 집중 감시하고 안정화 기준을 충족한 뒤 기존 시스템을 보존·격리·폐기하며 기록과 책임을 종결한다.",
+      "importance": "important",
+      "keywords": [
+        "post-cutover",
+        "stabilization",
+        "monitoring",
+        "data reconciliation",
+        "decommission",
+        "archive",
+        "closure"
+      ],
+      "core_terms": [
+        "post-cutover",
+        "stabilization",
+        "monitoring",
+        "data reconciliation",
+        "decommission"
+      ],
+      "accepted_explanations": [
+        "기존 시스템은 즉시 폐기하지 않고 승인된 보존기간과 복귀 가능성을 고려한다."
+      ],
+      "rejected_explanations": [
+        "새 화면이 표시되면 안정화와 기존 시스템 정리가 완료되었다고 본다."
+      ],
+      "grading_notes": "전환 후 안정화와 폐기를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Cutover 후에는 성능·알람·통신·데이터 정합성을 집중 감시하고 안정화 기준을 충족한 뒤 기존 시스템을 보존·격리·폐기하며 기록과 책임을 종결한다.",
+      "description": "전환 후 안정화와 폐기를 평가한다."
+    },
+    {
+      "id": "sw06_legacy_system_risk_based_management",
+      "anchor_id": "sw06_legacy_system_risk_based_management",
+      "statement": "Legacy system은 오래되었다는 이유만으로 즉시 폐기하거나 무기한 유지할 대상이 아니라 고장·지원·보안·예비품·지식·호환성·중단위험을 평가하여 유지, 보강, 격리, 교체 또는 Migration을 결정한다.",
+      "importance": "core",
+      "keywords": [
+        "legacy system",
+        "risk assessment",
+        "support",
+        "spare",
+        "knowledge",
+        "compatibility",
+        "replacement"
+      ],
+      "core_terms": [
+        "legacy system",
+        "risk assessment",
+        "support",
+        "spare",
+        "knowledge"
+      ],
+      "accepted_explanations": [
+        "위험과 비용을 비교해 단계적 대응과 보상통제를 선택한다."
+      ],
+      "rejected_explanations": [
+        "Legacy는 항상 위험하므로 즉시 교체하거나, 운전 중이므로 계속 사용해도 된다고 단정한다."
+      ],
+      "grading_notes": "Legacy 시스템의 위험기반 의사결정을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Legacy system은 오래되었다는 이유만으로 즉시 폐기하거나 무기한 유지할 대상이 아니라 고장·지원·보안·예비품·지식·호환성·중단위험을 평가하여 유지, 보강, 격리, 교체 또는 Migration을 결정한다.",
+      "description": "Legacy 시스템의 위험기반 의사결정을 평가한다."
+    },
+    {
+      "id": "sw06_obsolescence_proactive_process",
+      "anchor_id": "sw06_obsolescence_proactive_process",
+      "statement": "Obsolescence 관리는 단종 공지 이후 구매하는 활동이 아니라 수명주기 상태를 감시하고 영향·발생시점·대안을 평가하여 사전 계획하는 지속적 프로세스이다.",
+      "importance": "core",
+      "keywords": [
+        "obsolescence management",
+        "lifecycle monitoring",
+        "end of sale",
+        "end of support",
+        "impact",
+        "mitigation plan"
+      ],
+      "core_terms": [
+        "obsolescence management",
+        "lifecycle monitoring",
+        "end of sale",
+        "end of support",
+        "impact"
+      ],
+      "accepted_explanations": [
+        "vendor roadmap, 부품 수명, 운영기간과 교체 lead time을 주기적으로 갱신한다."
+      ],
+      "rejected_explanations": [
+        "Vendor EOL 공지를 받은 후에만 대응을 시작한다."
+      ],
+      "grading_notes": "사전적 노후화 관리 프로세스를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Obsolescence 관리는 단종 공지 이후 구매하는 활동이 아니라 수명주기 상태를 감시하고 영향·발생시점·대안을 평가하여 사전 계획하는 지속적 프로세스이다.",
+      "description": "사전적 노후화 관리 프로세스를 평가한다."
+    },
+    {
+      "id": "sw06_obsolescence_mitigation_options",
+      "anchor_id": "sw06_obsolescence_mitigation_options",
+      "statement": "Obsolescence 대응은 last-time buy, lifetime buy, repair, approved substitute, redesign, emulation, cannibalization, service contract와 Migration을 위험·비용·기간에 따라 조합한다.",
+      "importance": "important",
+      "keywords": [
+        "last-time buy",
+        "lifetime buy",
+        "repair",
+        "substitute",
+        "redesign",
+        "emulation",
+        "cannibalization",
+        "service contract"
+      ],
+      "core_terms": [
+        "last-time buy",
+        "lifetime buy",
+        "repair",
+        "substitute",
+        "redesign"
+      ],
+      "accepted_explanations": [
+        "예비품 구매만이 아니라 저장수명, 시험, 공급자와 장기 교체계획을 함께 검토한다."
+      ],
+      "rejected_explanations": [
+        "예비품을 많이 사두면 모든 Obsolescence 위험이 제거된다고 본다."
+      ],
+      "grading_notes": "노후화 완화대안의 폭과 선정기준을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Obsolescence 대응은 last-time buy, lifetime buy, repair, approved substitute, redesign, emulation, cannibalization, service contract와 Migration을 위험·비용·기간에 따라 조합한다.",
+      "description": "노후화 완화대안의 폭과 선정기준을 평가한다."
+    },
+    {
+      "id": "sw06_spare_lifecycle_management",
+      "anchor_id": "sw06_spare_lifecycle_management",
+      "statement": "예비품 관리는 수량뿐 아니라 호환 버전, 저장환경, 주기시험, 배터리·콘덴서 열화, firmware·license, 수리 가능성, 위치와 사용이력을 관리해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "spare management",
+        "storage condition",
+        "periodic test",
+        "aging",
+        "firmware",
+        "license",
+        "repairability",
+        "usage history"
+      ],
+      "core_terms": [
+        "spare management",
+        "storage condition",
+        "periodic test",
+        "aging",
+        "firmware"
+      ],
+      "accepted_explanations": [
+        "오래 보관한 spare는 투입 전 기능·버전·설정과 열화를 확인한다."
+      ],
+      "rejected_explanations": [
+        "미개봉 예비품은 기간과 환경에 관계없이 항상 사용 가능하다고 본다."
+      ],
+      "grading_notes": "예비품의 실제 사용가능성을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "예비품 관리는 수량뿐 아니라 호환 버전, 저장환경, 주기시험, 배터리·콘덴서 열화, firmware·license, 수리 가능성, 위치와 사용이력을 관리해야 한다.",
+      "description": "예비품의 실제 사용가능성을 평가한다."
+    },
+    {
+      "id": "sw06_vendor_lockin_lifecycle_risk",
+      "anchor_id": "sw06_vendor_lockin_lifecycle_risk",
+      "statement": "Vendor lock-in은 특정 공급자 종속 자체를 금지하는 개념이 아니라 데이터·설정 export, open interface, 대체품, 서비스조건, 소스·도구 접근성과 전환비용을 관리해야 하는 수명주기 위험이다.",
+      "importance": "important",
+      "keywords": [
+        "vendor lock-in",
+        "data export",
+        "open interface",
+        "alternative supplier",
+        "service term",
+        "tool access",
+        "switching cost"
+      ],
+      "core_terms": [
+        "vendor lock-in",
+        "data export",
+        "open interface",
+        "alternative supplier",
+        "service term"
+      ],
+      "accepted_explanations": [
+        "Vendor-specific 기능의 이익과 장기 지원·전환 위험을 계약과 아키텍처로 균형화한다."
+      ],
+      "rejected_explanations": [
+        "Vendor 제품을 사용하면 모두 부적절하거나, 초기 가격만 낮으면 종속 위험은 무시해도 된다고 본다."
+      ],
+      "grading_notes": "공급자 종속의 조건부 판단을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Vendor lock-in은 특정 공급자 종속 자체를 금지하는 개념이 아니라 데이터·설정 export, open interface, 대체품, 서비스조건, 소스·도구 접근성과 전환비용을 관리해야 하는 수명주기 위험이다.",
+      "description": "공급자 종속의 조건부 판단을 평가한다."
+    },
+    {
+      "id": "sw06_license_entitlement_continuity",
+      "anchor_id": "sw06_license_entitlement_continuity",
+      "statement": "License 관리는 entitlement, 버전·장비 귀속, dongle·server 의존성, 갱신기한, 비상복구, 가상화·이전 권한과 공급자 종료 시 사용권을 확인하여 운전 연속성을 확보해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "license",
+        "entitlement",
+        "dongle",
+        "license server",
+        "renewal",
+        "disaster recovery",
+        "virtualization",
+        "transfer right"
+      ],
+      "core_terms": [
+        "license",
+        "entitlement",
+        "dongle",
+        "license server",
+        "renewal"
+      ],
+      "accepted_explanations": [
+        "복구장비에서도 합법적·기술적으로 실행 가능한 라이선스 사본과 절차를 준비한다."
+      ],
+      "rejected_explanations": [
+        "프로그램 파일이 있으면 라이선스 없이도 언제든 복구할 수 있다고 본다."
+      ],
+      "grading_notes": "라이선스의 운영 의존성을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "License 관리는 entitlement, 버전·장비 귀속, dongle·server 의존성, 갱신기한, 비상복구, 가상화·이전 권한과 공급자 종료 시 사용권을 확인하여 운전 연속성을 확보해야 한다.",
+      "description": "라이선스의 운영 의존성을 평가한다."
+    },
+    {
+      "id": "sw06_firmware_compatibility_control",
+      "anchor_id": "sw06_firmware_compatibility_control",
+      "statement": "Firmware는 최신 버전 여부보다 승인된 하드웨어 revision, engineering tool, application, communication module과의 호환성, 변경내용, 복귀 가능성과 시험결과를 기준으로 선정한다.",
+      "importance": "core",
+      "keywords": [
+        "firmware compatibility",
+        "hardware revision",
+        "engineering tool",
+        "communication module",
+        "release note",
+        "downgrade"
+      ],
+      "core_terms": [
+        "firmware compatibility",
+        "hardware revision",
+        "engineering tool",
+        "communication module",
+        "release note"
+      ],
+      "accepted_explanations": [
+        "최신 firmware도 vendor matrix와 test 환경에서 검증한 후 적용한다."
+      ],
+      "rejected_explanations": [
+        "최신 firmware는 항상 가장 안전하고 호환성이 높으므로 즉시 적용한다."
+      ],
+      "grading_notes": "Firmware 변경의 조합 호환성을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "Firmware는 최신 버전 여부보다 승인된 하드웨어 revision, engineering tool, application, communication module과의 호환성, 변경내용, 복귀 가능성과 시험결과를 기준으로 선정한다.",
+      "description": "Firmware 변경의 조합 호환성을 평가한다."
+    },
+    {
+      "id": "sw06_documentation_training_knowledge_retention",
+      "anchor_id": "sw06_documentation_training_knowledge_retention",
+      "statement": "변경·Release·Migration 후에는 도면, cause and effect, alarm list, network·I/O list, backup 절차, 운영·정비 절차와 교육자료를 갱신하고 지식이 특정 개인에게만 남지 않게 해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "documentation",
+        "training",
+        "knowledge retention",
+        "drawing",
+        "alarm list",
+        "network list",
+        "procedure"
+      ],
+      "core_terms": [
+        "documentation",
+        "training",
+        "knowledge retention",
+        "drawing",
+        "alarm list"
+      ],
+      "accepted_explanations": [
+        "As-built 문서와 교육완료 기록을 변경종결 조건으로 둔다."
+      ],
+      "rejected_explanations": [
+        "시스템이 정상 작동하면 문서와 교육은 추후 처리해도 무방하다고 본다."
+      ],
+      "grading_notes": "문서화와 지식 이전을 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "변경·Release·Migration 후에는 도면, cause and effect, alarm list, network·I/O list, backup 절차, 운영·정비 절차와 교육자료를 갱신하고 지식이 특정 개인에게만 남지 않게 해야 한다.",
+      "description": "문서화와 지식 이전을 평가한다."
+    },
+    {
+      "id": "sw06_emergency_change_retrospective_control",
+      "anchor_id": "sw06_emergency_change_retrospective_control",
+      "statement": "긴급변경은 안전과 생산복구를 위해 승인절차를 단축할 수 있지만 최소 권한·기록·Backup·검증·통신을 유지하고 사후 정식 검토와 baseline 반영을 해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "emergency change",
+        "expedited approval",
+        "minimum control",
+        "record",
+        "backup",
+        "post review",
+        "baseline update"
+      ],
+      "core_terms": [
+        "emergency change",
+        "expedited approval",
+        "minimum control",
+        "record",
+        "backup"
+      ],
+      "accepted_explanations": [
+        "긴급조치 후 정해진 시간 내 MOC, 원인검토와 영구조치 여부를 승인한다."
+      ],
+      "rejected_explanations": [
+        "긴급상황이면 기록·승인·사후검토를 모두 생략해도 된다고 본다."
+      ],
+      "grading_notes": "긴급변경의 예외와 사후통제를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "긴급변경은 안전과 생산복구를 위해 승인절차를 단축할 수 있지만 최소 권한·기록·Backup·검증·통신을 유지하고 사후 정식 검토와 baseline 반영을 해야 한다.",
+      "description": "긴급변경의 예외와 사후통제를 평가한다."
+    },
+    {
+      "id": "sw06_sw04_boundary",
+      "anchor_id": "sw06_sw04_boundary",
+      "statement": "SW-06은 운영 중인 승인 형상의 변경·Release·복구·Migration 통제를 담당하고, 요구사항 개발, 설계검증, 독립 V&V와 개발 수명주기 자체는 SW-04가 담당한다.",
+      "importance": "important",
+      "keywords": [
+        "SW-04 boundary",
+        "development lifecycle",
+        "V&V",
+        "operational change",
+        "release management"
+      ],
+      "core_terms": [
+        "SW-04 boundary",
+        "development lifecycle",
+        "V&V",
+        "operational change",
+        "release management"
+      ],
+      "accepted_explanations": [
+        "SW-04의 시험 산출물을 SW-06 Release acceptance의 입력으로 사용할 수 있으나 ownership은 구분한다."
+      ],
+      "rejected_explanations": [
+        "SW-06을 전체 소프트웨어 개발 수명주기 Topic으로 확장한다."
+      ],
+      "grading_notes": "SW-04와의 ownership 경계를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "SW-06은 운영 중인 승인 형상의 변경·Release·복구·Migration 통제를 담당하고, 요구사항 개발, 설계검증, 독립 V&V와 개발 수명주기 자체는 SW-04가 담당한다.",
+      "description": "SW-04와의 ownership 경계를 평가한다."
+    },
+    {
+      "id": "sw06_sw09_boundary",
+      "anchor_id": "sw06_sw09_boundary",
+      "statement": "SW-06의 Backup·Recovery는 운영 형상과 변경 복구체계를 중심으로 하고, 공격·침해·악성코드 대응, 보안통제와 사이버 사고복구는 SW-09가 담당한다.",
+      "importance": "important",
+      "keywords": [
+        "SW-09 boundary",
+        "operational recovery",
+        "cyber incident",
+        "security control",
+        "backup ownership"
+      ],
+      "core_terms": [
+        "SW-09 boundary",
+        "operational recovery",
+        "cyber incident",
+        "security control",
+        "backup ownership"
+      ],
+      "accepted_explanations": [
+        "같은 Backup이라도 질문의 주된 목적이 변경복구이면 SW-06, 침해복구와 방어이면 SW-09로 라우팅한다."
+      ],
+      "rejected_explanations": [
+        "Backup이라는 단어만으로 항상 SW-06 또는 항상 SW-09로 라우팅한다."
+      ],
+      "grading_notes": "SW-09와의 ownership 경계를 평가한다.",
+      "source_basis": "ISO 10007:2017 configuration management guidance; IEC 62402:2019 obsolescence management guidance; NIST SP 800-82 Rev.3 OT operational and configuration context; NIST SP 1339 OT backup management context; site MOC, release, backup, migration and lifecycle procedures.",
+      "claim": "SW-06의 Backup·Recovery는 운영 형상과 변경 복구체계를 중심으로 하고, 공격·침해·악성코드 대응, 보안통제와 사이버 사고복구는 SW-09가 담당한다.",
+      "description": "SW-09와의 ownership 경계를 평가한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "sw06_fatal_baseline_equals_latest",
+      "claim": "가장 최신 파일이나 최근 백업이 자동으로 승인 Baseline이다.",
+      "correction": "Baseline은 식별된 형상 집합이 검토·승인되어 변경 기준으로 지정된 상태여야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "가장 최신 파일이나 최근 백업이 자동으로 승인 Baseline이다.",
+        "Baseline은 식별된 형상 집합이 검토·승인되어 변경 기준으로 지정된 상태여야 한다."
+      ],
+      "wrong_patterns": [
+        "가장 최신 파일이나 최근 백업이 자동으로 승인 Baseline이다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_version_control_equals_moc",
+      "claim": "Version control을 사용하면 별도의 MOC, 영향분석과 승인이 필요 없다.",
+      "correction": "Version control은 이력 도구이며 MOC의 위험평가, 승인, 실행·복구·종결 통제를 대체하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Version control을 사용하면 별도의 MOC, 영향분석과 승인이 필요 없다.",
+        "Version control은 이력 도구이며 MOC의 위험평가, 승인, 실행·복구·종결 통제를 대체하지 않는다."
+      ],
+      "wrong_patterns": [
+        "Version control을 사용하면 별도의 MOC, 영향분석과 승인이 필요 없다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_running_system_proves_asbuilt",
+      "claim": "설비가 정상 운전 중이면 저장소와 현장 형상의 불일치는 문제가 아니다.",
+      "correction": "운전 여부와 별개로 승인본·설치본·문서·백업의 일치성과 차이 추적이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "설비가 정상 운전 중이면 저장소와 현장 형상의 불일치는 문제가 아니다.",
+        "운전 여부와 별개로 승인본·설치본·문서·백업의 일치성과 차이 추적이 필요하다."
+      ],
+      "wrong_patterns": [
+        "설비가 정상 운전 중이면 저장소와 현장 형상의 불일치는 문제가 아니다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_small_change_no_impact_analysis",
+      "claim": "Setpoint나 한 줄 로직 같은 작은 변경은 영향분석과 Regression이 불필요하다.",
+      "correction": "변경 크기만으로 위험을 판단하지 말고 영향받는 기능, 인터페이스와 공정 결과를 기준으로 범위를 정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Setpoint나 한 줄 로직 같은 작은 변경은 영향분석과 Regression이 불필요하다.",
+        "변경 크기만으로 위험을 판단하지 말고 영향받는 기능, 인터페이스와 공정 결과를 기준으로 범위를 정한다."
+      ],
+      "wrong_patterns": [
+        "Setpoint나 한 줄 로직 같은 작은 변경은 영향분석과 Regression이 불필요하다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_emergency_change_no_record",
+      "claim": "긴급변경은 기록, Backup, 승인과 사후검토를 모두 생략해도 된다.",
+      "correction": "긴급절차는 단축할 수 있지만 최소 통제와 사후 정식 MOC·Baseline 반영이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "긴급변경은 기록, Backup, 승인과 사후검토를 모두 생략해도 된다.",
+        "긴급절차는 단축할 수 있지만 최소 통제와 사후 정식 MOC·Baseline 반영이 필요하다."
+      ],
+      "wrong_patterns": [
+        "긴급변경은 기록, Backup, 승인과 사후검토를 모두 생략해도 된다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_release_is_file_copy",
+      "claim": "실행파일을 현장에 복사하거나 Download하면 Release가 완료된다.",
+      "correction": "승인 artifact, 의존성, 설치·검증·Rollback, 인수와 As-built 갱신까지 통제해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "실행파일을 현장에 복사하거나 Download하면 Release가 완료된다.",
+        "승인 artifact, 의존성, 설치·검증·Rollback, 인수와 As-built 갱신까지 통제해야 한다."
+      ],
+      "wrong_patterns": [
+        "실행파일을 현장에 복사하거나 Download하면 Release가 완료된다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_rebuild_equals_authorized_artifact",
+      "claim": "같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다.",
+      "correction": "Build 환경과 dependency 차이를 고려하여 승인된 checksum·서명·artifact를 그대로 배포해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다.",
+        "Build 환경과 dependency 차이를 고려하여 승인된 checksum·서명·artifact를 그대로 배포해야 한다."
+      ],
+      "wrong_patterns": [
+        "같은 source를 현장에서 다시 build하면 승인된 Release artifact와 동일하다고 볼 수 있다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_backup_exists_recoverable",
+      "claim": "Backup 파일이 존재하거나 작업 로그가 성공이면 복구 가능성이 보장된다.",
+      "correction": "Backup 범위·무결성·도구·라이선스·의존성을 확인하고 Restore 시험으로 복구성을 입증해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Backup 파일이 존재하거나 작업 로그가 성공이면 복구 가능성이 보장된다.",
+        "Backup 범위·무결성·도구·라이선스·의존성을 확인하고 Restore 시험으로 복구성을 입증해야 한다."
+      ],
+      "wrong_patterns": [
+        "Backup 파일이 존재하거나 작업 로그가 성공이면 복구 가능성이 보장된다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_restore_equals_rollback",
+      "claim": "Restore와 Rollback은 동일한 행위이며 구분할 필요가 없다.",
+      "correction": "Restore는 백업 기반 복구 행위이고 Rollback은 변경을 철회하여 이전 승인 형상으로 복귀하는 관리 결정이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Restore와 Rollback은 동일한 행위이며 구분할 필요가 없다.",
+        "Restore는 백업 기반 복구 행위이고 Rollback은 변경을 철회하여 이전 승인 형상으로 복귀하는 관리 결정이다."
+      ],
+      "wrong_patterns": [
+        "Restore와 Rollback은 동일한 행위이며 구분할 필요가 없다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_rollback_after_failure_only",
+      "claim": "Rollback 계획은 장애가 발생한 후 이전 파일을 찾아 복사하면 충분하다.",
+      "correction": "변경 전에 trigger, 시간제한, 대상 baseline, 데이터 처리와 의사결정권한을 정해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Rollback 계획은 장애가 발생한 후 이전 파일을 찾아 복사하면 충분하다.",
+        "변경 전에 trigger, 시간제한, 대상 baseline, 데이터 처리와 의사결정권한을 정해야 한다."
+      ],
+      "wrong_patterns": [
+        "Rollback 계획은 장애가 발생한 후 이전 파일을 찾아 복사하면 충분하다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_all_changes_fully_reversible",
+      "claim": "모든 변경은 이전 파일만 다시 설치하면 데이터와 외부 인터페이스까지 완전히 복구된다.",
+      "correction": "비가역 변경은 checkpoint, reconciliation, forward recovery와 대체운전을 사전에 준비해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "모든 변경은 이전 파일만 다시 설치하면 데이터와 외부 인터페이스까지 완전히 복구된다.",
+        "비가역 변경은 checkpoint, reconciliation, forward recovery와 대체운전을 사전에 준비해야 한다."
+      ],
+      "wrong_patterns": [
+        "모든 변경은 이전 파일만 다시 설치하면 데이터와 외부 인터페이스까지 완전히 복구된다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_single_latest_backup",
+      "claim": "공간 절약을 위해 항상 최신 Backup 한 벌만 남기고 이전 세대는 덮어쓰는 것이 최선이다.",
+      "correction": "손상·오배포가 정상본을 덮어쓸 수 있으므로 세대별 보존과 분리·무결성 통제가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "공간 절약을 위해 항상 최신 Backup 한 벌만 남기고 이전 세대는 덮어쓰는 것이 최선이다.",
+        "손상·오배포가 정상본을 덮어쓸 수 있으므로 세대별 보존과 분리·무결성 통제가 필요하다."
+      ],
+      "wrong_patterns": [
+        "공간 절약을 위해 항상 최신 Backup 한 벌만 남기고 이전 세대는 덮어쓰는 것이 최선이다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_dr_is_backup_location",
+      "claim": "Disaster recovery는 Backup 저장 위치만 정하면 완성된다.",
+      "correction": "복구 우선순위, 목표시간·데이터손실, 자원, 대체운전, 통신과 훈련이 함께 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Disaster recovery는 Backup 저장 위치만 정하면 완성된다.",
+        "복구 우선순위, 목표시간·데이터손실, 자원, 대체운전, 통신과 훈련이 함께 필요하다."
+      ],
+      "wrong_patterns": [
+        "Disaster recovery는 Backup 저장 위치만 정하면 완성된다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_migration_success_by_boot",
+      "claim": "새 시스템이 부팅되고 화면이 열리면 Migration은 성공이다.",
+      "correction": "기능, 인터페이스, 알람, 데이터·설정 정합성, 성능, 운전 인수와 안정화 기준을 확인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "새 시스템이 부팅되고 화면이 열리면 Migration은 성공이다.",
+        "기능, 인터페이스, 알람, 데이터·설정 정합성, 성능, 운전 인수와 안정화 기준을 확인해야 한다."
+      ],
+      "wrong_patterns": [
+        "새 시스템이 부팅되고 화면이 열리면 Migration은 성공이다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_latest_components_compatible",
+      "claim": "OS, application, firmware와 driver를 각각 최신으로 올리면 상호 호환성이 자동 보장된다.",
+      "correction": "지원 Compatibility matrix와 통합시험으로 승인된 조합을 확인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "OS, application, firmware와 driver를 각각 최신으로 올리면 상호 호환성이 자동 보장된다.",
+        "지원 Compatibility matrix와 통합시험으로 승인된 조합을 확인해야 한다."
+      ],
+      "wrong_patterns": [
+        "OS, application, firmware와 driver를 각각 최신으로 올리면 상호 호환성이 자동 보장된다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_parallel_always_safer",
+      "claim": "신·구 시스템을 동시에 연결해 Parallel operation하면 항상 안전성과 신뢰성이 높아진다.",
+      "correction": "제어권 충돌, 이중입력, 데이터 불일치와 운전자 혼란을 통제할 때만 장점을 얻을 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "신·구 시스템을 동시에 연결해 Parallel operation하면 항상 안전성과 신뢰성이 높아진다.",
+        "제어권 충돌, 이중입력, 데이터 불일치와 운전자 혼란을 통제할 때만 장점을 얻을 수 있다."
+      ],
+      "wrong_patterns": [
+        "신·구 시스템을 동시에 연결해 Parallel operation하면 항상 안전성과 신뢰성이 높아진다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_schedule_overrides_gonogo",
+      "claim": "Cutover 일정이 승인되면 readiness, Backup 또는 Rollback 조건이 미충족이어도 진행해야 한다.",
+      "correction": "Go/no-go 기준과 공정 안전조건을 충족하지 못하면 연기 또는 중단해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Cutover 일정이 승인되면 readiness, Backup 또는 Rollback 조건이 미충족이어도 진행해야 한다.",
+        "Go/no-go 기준과 공정 안전조건을 충족하지 못하면 연기 또는 중단해야 한다."
+      ],
+      "wrong_patterns": [
+        "Cutover 일정이 승인되면 readiness, Backup 또는 Rollback 조건이 미충족이어도 진행해야 한다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_legacy_absolute_decision",
+      "claim": "Legacy system은 모두 즉시 교체해야 하거나, 현재 운전 중이므로 무기한 유지해도 된다.",
+      "correction": "지원성·안전·가용성·비용·교체위험을 비교하여 유지·보강·교체·Migration을 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Legacy system은 모두 즉시 교체해야 하거나, 현재 운전 중이므로 무기한 유지해도 된다.",
+        "지원성·안전·가용성·비용·교체위험을 비교하여 유지·보강·교체·Migration을 결정한다."
+      ],
+      "wrong_patterns": [
+        "Legacy system은 모두 즉시 교체해야 하거나, 현재 운전 중이므로 무기한 유지해도 된다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_obsolescence_only_eol",
+      "claim": "Obsolescence 관리는 Vendor EOL 공지가 나온 뒤 예비품을 사는 활동이다.",
+      "correction": "수명주기 상태, lead time, 영향과 완화대안을 사전에 감시·계획하는 지속 프로세스다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "Obsolescence 관리는 Vendor EOL 공지가 나온 뒤 예비품을 사는 활동이다.",
+        "수명주기 상태, lead time, 영향과 완화대안을 사전에 감시·계획하는 지속 프로세스다."
+      ],
+      "wrong_patterns": [
+        "Obsolescence 관리는 Vendor EOL 공지가 나온 뒤 예비품을 사는 활동이다."
+      ]
+    },
+    {
+      "id": "sw06_fatal_latest_firmware_always_best",
+      "claim": "최신 firmware는 항상 가장 안전하고 호환성이 높으므로 시험 없이 즉시 적용해야 한다.",
+      "correction": "하드웨어 revision, engineering tool, 통신모듈, release note, downgrade 가능성과 시험결과를 확인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "examples_or_patterns": [
+        "최신 firmware는 항상 가장 안전하고 호환성이 높으므로 시험 없이 즉시 적용해야 한다.",
+        "하드웨어 revision, engineering tool, 통신모듈, release note, downgrade 가능성과 시험결과를 확인해야 한다."
+      ],
+      "wrong_patterns": [
+        "최신 firmware는 항상 가장 안전하고 호환성이 높으므로 시험 없이 즉시 적용해야 한다."
+      ]
+    }
+  ],
+  "safe_expressions": [
+    "Baseline은 최신본이 아니라 승인된 특정 형상 집합이다.",
+    "Version control은 형상관리의 도구이지만 MOC와 Release control을 대체하지 않는다.",
+    "변경 크기가 작아도 공정 영향이 크면 강화된 영향분석과 검증이 필요하다.",
+    "저위험 표준변경은 승인된 표준절차에 따라 간소화할 수 있다.",
+    "긴급변경은 절차를 단축할 수 있으나 최소 기록과 사후검토가 필요하다.",
+    "Backup 성공과 Restore 성공은 구분하며 정기적인 복구시험이 필요하다.",
+    "Restore는 복구 행위이고 Rollback은 이전 승인 형상으로 복귀하는 변경관리 결정이다.",
+    "Rollback이 불가능한 데이터 변환은 forward recovery와 reconciliation을 준비한다.",
+    "Backup 범위는 프로그램뿐 아니라 설정, 데이터, firmware, tool과 license를 포함할 수 있다.",
+    "온라인 Backup도 보호와 분리가 충분하면 유효할 수 있으나 원본 장애와 독립된 사본을 검토한다.",
+    "Regression 범위는 영향분석과 위험도에 따라 정하며 모든 변경에 무조건 전체시험을 요구하지 않는다.",
+    "Release 완료에는 설치 후 확인, As-built 갱신과 사용자 인수가 포함된다.",
+    "Parallel operation은 필수 방식이 아니며 공정 중단과 인터페이스 위험에 따라 선택한다.",
+    "Big-bang Cutover도 충분한 준비와 Rollback 조건이 있으면 적절할 수 있다.",
+    "최신 firmware도 승인된 Compatibility matrix와 시험을 거치면 적용할 수 있다.",
+    "Legacy system 유지도 보상통제와 수명주기 계획이 있으면 합리적일 수 있다.",
+    "Vendor-specific 기능 사용 자체가 오류는 아니며 장기 지원성과 exit 조건을 관리한다.",
+    "Last-time buy는 하나의 Obsolescence 완화수단이지만 저장수명과 장기대안을 함께 검토한다.",
+    "RTO와 RPO는 시스템 중요도와 공정 허용중단에 맞게 정한다.",
+    "SW-04의 V&V 산출물은 SW-06 Release acceptance의 입력으로 사용할 수 있다.",
+    "변경복구 목적의 Backup은 SW-06이 중심이고 침해사고 대응 목적은 SW-09가 중심이다.",
+    "Rollback 과정에서 Backup Restore를 사용할 수 있으므로 두 개념은 연관되지만 동일하지 않다.",
+    "License는 기술구성의 일부이자 법적 사용권이므로 복구와 Migration에서 확인한다.",
+    "현장 Download가 필요한 경우에도 승인 artifact와 설치 후 버전을 대조해야 한다."
+  ],
+  "revision_notes": [
+    "created_for_SOFTWARE_LLM_LANE_B_SW_06",
+    "ownership_boundary_locked_against_SW_04_and_SW_09",
+    "deterministic_logic_checks_disabled_for_semantic_context",
+    "source_only_authoring_without_generated_rebuild_or_release_promotion"
+  ],
+  "topic_label": "형상관리, 변경관리, Release, Backup, Rollback, Migration 및 Obsolescence 관리",
+  "core_facts": [
+    "Configuration Item(CI)은 식별·변경·상태기록의 통제를 받아야 하는 하드웨어, 소프트웨어, 펌웨어, 설정값, 화면, 데이터 구조, 인터페이스, 문서와 라이선스 등의 관리 단위이다.",
+    "형상식별은 CI의 고유 식별자, 버전, 위치, 소유자, 의존관계, 승인상태와 적용 설비를 추적할 수 있게 정의하는 활동이다.",
+    "Baseline은 검토와 승인을 거쳐 이후 변경의 기준이 되는 특정 시점의 형상 집합이며 단순히 가장 최신 파일이나 최근 백업을 뜻하지 않는다.",
+    "Version control은 변경 이력과 작성자를 기록하는 도구이고, 형상상태기록은 승인·배포·설치·폐기 상태까지 보고해야 하므로 Version control만으로 전체 형상관리가 완성되지는 않는다.",
+    "As-built consistency는 저장소의 승인 형상, 현장에 실제 설치된 형상, 백업본과 관련 문서가 서로 일치하고 그 차이를 설명할 수 있는 상태이다.",
+    "Management of Change(MOC)는 운전·안전·품질·환경·보안·유지보수 또는 규제 영향이 있는 영구·임시·긴급 변경을 식별하고 통제하는 운영 절차이다.",
+    "변경요청은 현상, 변경 목적, 대상 CI, 기대효과, 위험, 우선순위, 요청자와 완료기준을 명확히 해야 한다.",
+    "Impact analysis는 변경 대상뿐 아니라 연동 로직, 통신, HMI, historian, 보고서, 알람, 안전기능, 절차, 교육, 예비품, 라이선스와 복구계획에 미치는 영향을 다학제적으로 검토해야 한다.",
+    "변경 승인권한과 검토 깊이는 위험도, 설비 중요도, 변경 범위와 가역성에 따라 정하고 요청·검토·승인·배포 역할을 가능한 범위에서 분리한다.",
+    "변경 실행계획은 작업 순서, 인력, 도구, 운전조건, 정지창, 통신방법, 백업, 검증, 중단기준, Rollback과 책임자를 포함해야 한다.",
+    "변경 전 Backup은 대상 CI와 의존 데이터를 포함해 복구 가능한 형태로 확보하고, 사용 도구·버전·권한·매체와 Restore 절차의 실행 가능성을 확인해야 한다.",
+    "Release package는 승인된 실행물과 source, 버전·checksum, 변경목록, 의존성, 설치절차, 시험결과, Backup·Rollback 절차, 알려진 제약과 승인기록을 포함해야 한다.",
+    "Release control은 승인된 동일 artifact만 지정 환경에 배포되도록 식별·보관·전달·설치·확인하고 임의 재빌드 또는 현장 직접수정을 방지하는 활동이다.",
+    "Regression은 변경이 기존 기능과 인터페이스를 훼손하지 않았는지 확인하는 위험기반 재시험이며, 영향분석으로 범위를 정하고 변경 기능·인접 기능·핵심 운전 시나리오를 포함한다.",
+    "Release 완료는 설치 성공만이 아니라 기능·알람·인터페이스·운전성 확인, 이상 유무 감시, 문서와 As-built 갱신, 사용자 인수와 변경종결을 포함한다.",
+    "Rollback은 변경 전 정의한 trigger, 허용시간, 복귀대상 baseline, 데이터 처리, 책임자와 의사결정권한에 따라 수행하는 계획된 이전 형상 복귀이다.",
+    "Restore는 Backup으로부터 데이터·설정·시스템을 재구성하는 복구 행위이고, Rollback은 변경을 철회하여 승인된 이전 release 또는 baseline으로 되돌리는 변경관리 결정이다.",
+    "데이터 변환, 장비 교체 또는 외부 인터페이스 변경처럼 완전한 Rollback이 불가능한 변경은 사전에 가역성 한계를 밝히고 checkpoint, reconciliation, forward recovery 또는 대체운전 방안을 준비해야 한다.",
+    "Backup 범위는 프로그램 파일뿐 아니라 설정, 레시피, 데이터베이스, 화면, 인증서·키의 적절한 보관정보, 펌웨어, 드라이버, 라이선스, 설치도구와 복구 문서를 포함하고 상호 일관된 시점으로 관리해야 한다.",
+    "Backup은 무결성 확인, 접근통제, 원본 장애와 분리된 보관, 세대별 보존과 보존기간을 적용하고 정상본이 손상본으로 덮어써지지 않게 관리해야 한다.",
+    "Backup의 유효성은 정기적인 Restore 시험 또는 대표 복구훈련으로 확인하고 복구시간, 누락 의존성, 절차 오류와 결과 증적을 기록해야 한다.",
+    "Disaster recovery는 시스템 중요도와 공정 허용중단에 따라 복구 우선순위, 목표 복구시간, 허용 데이터 손실, 대체운전, 인력·장비·예비품과 통신체계를 정의한다.",
+    "Migration은 기존 시스템의 CI, 인터페이스, 데이터, timing, custom logic, 운전절차, 라이선스, 예비품과 숨은 의존성을 먼저 조사하여 범위와 제약을 확정해야 한다.",
+    "Migration과 upgrade 전에는 하드웨어, OS, application, firmware, driver, protocol option, database와 license의 지원 조합을 Compatibility matrix로 확인해야 한다.",
+    "데이터·설정 Migration은 mapping, 변환규칙, 단위·범위·encoding, 누락·중복 처리, checksum·record count·sample 비교와 운전 의미 검증을 포함해야 한다.",
+    "Migration 방식은 일괄 Cutover, 단계적 전환, Parallel operation, pilot 또는 hybrid 중 공정 중단 허용시간, 인터페이스 복잡도, 가역성, 비용과 위험을 비교하여 선정한다.",
+    "Parallel operation은 결과 비교와 복귀 여지를 제공하지만 이중 입력, 제어권 충돌, 데이터 불일치, 운전자 혼란과 공통원인 오류를 통제해야 한다.",
+    "Cutover 전에는 변경 freeze, 최종 동기화, Backup, readiness checklist, 승인, 연락망, go/no-go 기준, Rollback 가능시간과 공정 안전조건을 확인해야 한다.",
+    "Cutover 후에는 성능·알람·통신·데이터 정합성을 집중 감시하고 안정화 기준을 충족한 뒤 기존 시스템을 보존·격리·폐기하며 기록과 책임을 종결한다.",
+    "Legacy system은 오래되었다는 이유만으로 즉시 폐기하거나 무기한 유지할 대상이 아니라 고장·지원·보안·예비품·지식·호환성·중단위험을 평가하여 유지, 보강, 격리, 교체 또는 Migration을 결정한다.",
+    "Obsolescence 관리는 단종 공지 이후 구매하는 활동이 아니라 수명주기 상태를 감시하고 영향·발생시점·대안을 평가하여 사전 계획하는 지속적 프로세스이다.",
+    "Obsolescence 대응은 last-time buy, lifetime buy, repair, approved substitute, redesign, emulation, cannibalization, service contract와 Migration을 위험·비용·기간에 따라 조합한다.",
+    "예비품 관리는 수량뿐 아니라 호환 버전, 저장환경, 주기시험, 배터리·콘덴서 열화, firmware·license, 수리 가능성, 위치와 사용이력을 관리해야 한다.",
+    "Vendor lock-in은 특정 공급자 종속 자체를 금지하는 개념이 아니라 데이터·설정 export, open interface, 대체품, 서비스조건, 소스·도구 접근성과 전환비용을 관리해야 하는 수명주기 위험이다.",
+    "License 관리는 entitlement, 버전·장비 귀속, dongle·server 의존성, 갱신기한, 비상복구, 가상화·이전 권한과 공급자 종료 시 사용권을 확인하여 운전 연속성을 확보해야 한다.",
+    "Firmware는 최신 버전 여부보다 승인된 하드웨어 revision, engineering tool, application, communication module과의 호환성, 변경내용, 복귀 가능성과 시험결과를 기준으로 선정한다.",
+    "변경·Release·Migration 후에는 도면, cause and effect, alarm list, network·I/O list, backup 절차, 운영·정비 절차와 교육자료를 갱신하고 지식이 특정 개인에게만 남지 않게 해야 한다.",
+    "긴급변경은 안전과 생산복구를 위해 승인절차를 단축할 수 있지만 최소 권한·기록·Backup·검증·통신을 유지하고 사후 정식 검토와 baseline 반영을 해야 한다.",
+    "SW-06은 운영 중인 승인 형상의 변경·Release·복구·Migration 통제를 담당하고, 요구사항 개발, 설계검증, 독립 V&V와 개발 수명주기 자체는 SW-04가 담당한다.",
+    "SW-06의 Backup·Recovery는 운영 형상과 변경 복구체계를 중심으로 하고, 공격·침해·악성코드 대응, 보안통제와 사이버 사고복구는 SW-09가 담당한다."
+  ]
+}
