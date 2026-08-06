@@ -106,7 +106,7 @@
   ],
   "recommended_outline": [
     {
-      "section": 1,
+      "section": "1",
       "title": "1. Physical AI와 System Boundary",
       "content": "Physical AI의 Sensor–AI–Planner–Controller–Actuator–Feedback 구조와 Robot System 경계를 설명한다.",
       "anchor_refs": [
@@ -117,7 +117,7 @@
       "intent": "Physical AI의 Sensor–AI–Planner–Controller–Actuator–Feedback 구조와 Robot System 경계를 설명한다."
     },
     {
-      "section": 2,
+      "section": "2",
       "title": "2. Perception과 Sensor Fusion",
       "content": "Camera·LiDAR·Radar·Encoder·Force Sensor의 특성, 시간동기, Calibration, 불확실성과 공통원인을 설명한다.",
       "anchor_refs": [
@@ -130,7 +130,7 @@
       "intent": "Camera·LiDAR·Radar·Encoder·Force Sensor의 특성, 시간동기, Calibration, 불확실성과 공통원인을 설명한다."
     },
     {
-      "section": 3,
+      "section": "3",
       "title": "3. State와 World Model",
       "content": "State Estimation, Localization, SLAM, Observability와 World Model의 관계를 설명한다.",
       "anchor_refs": [
@@ -143,7 +143,7 @@
       "intent": "State Estimation, Localization, SLAM, Observability와 World Model의 관계를 설명한다."
     },
     {
-      "section": 4,
+      "section": "4",
       "title": "4. Digital Twin과 Simulation",
       "content": "Twin의 목적·Fidelity·동기화, Simulation Coverage와 Synthetic Data Domain Gap을 설명한다.",
       "anchor_refs": [
@@ -156,7 +156,7 @@
       "intent": "Twin의 목적·Fidelity·동기화, Simulation Coverage와 Synthetic Data Domain Gap을 설명한다."
     },
     {
-      "section": 5,
+      "section": "5",
       "title": "5. Planning과 실시간 제어",
       "content": "Task·Motion·Trajectory Planning, Closed-loop Feedback, Edge AI와 End-to-end Latency를 연결한다.",
       "anchor_refs": [
@@ -167,7 +167,7 @@
       "intent": "Task·Motion·Trajectory Planning, Closed-loop Feedback, Edge AI와 End-to-end Latency를 연결한다."
     },
     {
-      "section": 6,
+      "section": "6",
       "title": "6. 자율제조와 협업",
       "content": "자율제조의 승인 운영범위, Human–Robot Collaboration과 Human Factors를 설명한다.",
       "anchor_refs": [
@@ -178,7 +178,7 @@
       "intent": "자율제조의 승인 운영범위, Human–Robot Collaboration과 Human Factors를 설명한다."
     },
     {
-      "section": 7,
+      "section": "7",
       "title": "7. 안전제어",
       "content": "Safety Envelope, Safe State, Fallback, Degraded Mode, Supervisory Control과 Human Override를 설명한다.",
       "anchor_refs": [
@@ -190,7 +190,7 @@
       "intent": "Safety Envelope, Safe State, Fallback, Degraded Mode, Supervisory Control과 Human Override를 설명한다."
     },
     {
-      "section": 8,
+      "section": "8",
       "title": "8. Validation과 Lifecycle",
       "content": "운영범위의 경계·희귀·고장 Scenario, Runtime Monitoring과 변경관리를 결론으로 제시한다.",
       "anchor_refs": [
