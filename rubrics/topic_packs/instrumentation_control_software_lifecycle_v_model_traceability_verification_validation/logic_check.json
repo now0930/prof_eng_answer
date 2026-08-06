@@ -196,14 +196,14 @@
         "id": "sw04_fatal_hil_requires_real_plant",
         "severity": "fatal",
         "message": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
-        "description": "명시적 반대 주장만 fatal 후보로 본다. HIL은 실제 제어 HW 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 실제 plant 가동 없이 HW·SW 상호작용을 검증할 수 있다.",
+        "description": "명시적 반대 주장만 검출한다. HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
         "wrong_patterns": [
           "(?im)^\\s*(?:[-*•]\\s*)?HIL은\\ 반드시\\ 실제\\ 생산설비를\\ 가동해야만\\ 수행할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
         ],
         "examples_or_patterns": [
           "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다."
         ],
-        "correct_rule": "HIL은 실제 제어 HW 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 실제 plant 가동 없이 HW·SW 상호작용을 검증할 수 있다.",
+        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
         "affected_layers": [
           "C",
           "D"
@@ -559,7 +559,7 @@
       },
       {
         "id": "sw04_hil",
-        "correct_rule": "HIL은 실제 제어 하드웨어 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다.",
+        "correct_rule": "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
         "fatal_if_opposite": true
       },
       {
@@ -712,7 +712,7 @@
         "id": "sw04_fatal_hil_requires_real_plant",
         "severity": "fatal",
         "wrong_claim": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
-        "correct_rule": "HIL은 실제 제어 HW 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 실제 plant 가동 없이 HW·SW 상호작용을 검증할 수 있다.",
+        "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
         "affected_layers": [
           "C",
           "D"
@@ -921,7 +921,7 @@
       "V-Model을 선형 그림으로 단순화했더라도 조기 시험계획과 대응관계를 설명하면 직접 오답으로 보지 않는다.",
       "RTM의 역방향이라는 용어가 없어도 시험결과에서 요구사항을 확인하는 의미가 분명하면 인정한다.",
       "정적분석 도구명을 제시하지 않았다는 이유만으로 major를 적용하지 않는다.",
-      "HIL 대신 Simulation만 요구한 문항에서 HIL 누락을 fatal로 보지 않는다.",
+      "HIL, Software-in-the-loop와 Virtual Commissioning은 하드웨어 포함 여부로 구분하며, 문항이 Simulation만 요구하면 HIL 누락을 fatal로 보지 않는다.",
       "Fault injection을 일부 고장유형으로 제한한 설명은 직접 반대 주장과 구분한다.",
       "일반 SW review의 독립성을 언급해도 이를 SW-05 Safety independence 주장으로 자동 확대하지 않는다.",
       "FAT·SAT를 V-Model 우측의 프로젝트 증적으로 연계한 설명은 SW-10 경계를 침범한 것으로 보지 않는다.",
@@ -948,7 +948,8 @@
   "revision_notes": [
     "SW-04 일반 계측제어 SW lifecycle과 V&V truth schema를 정의했다.",
     "직접 반대 주장만 deterministic fatal 후보가 되도록 full-line pattern을 사용했다.",
-    "SW-05 Safety lifecycle과 SW-10 프로젝트 인수 경계를 false-positive 기준에 반영했다."
+    "SW-05 Safety lifecycle과 SW-10 프로젝트 인수 경계를 false-positive 기준에 반영했다.",
+    "2026-08-07 LLM 의미 감사 수리: HIL Fatal correction과 SIL·Virtual Commissioning 경계를 일치시켰다."
   ],
   "topic_label": "SW-04 계측제어 SW 수명주기·V-Model·V&V"
 }

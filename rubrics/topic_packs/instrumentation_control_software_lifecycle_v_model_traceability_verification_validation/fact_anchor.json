@@ -640,7 +640,7 @@
     {
       "id": "sw04_hil",
       "anchor_id": "sw04_hil",
-      "statement": "HIL은 실제 제어 하드웨어 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다.",
+      "statement": "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
       "keywords": [
         "HIL",
         "실제 제어 하드웨어",
@@ -656,11 +656,11 @@
         "폐루프"
       ],
       "accepted_explanations": [
-        "HIL은 실제 제어 하드웨어 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다.",
-        "실제 plant를 위험하게 운전하지 않고 HW·SW 상호작용을 검증한다."
+        "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
+        "HIL은 실제 생산설비 대신 실시간 모델을 사용하지만 시험 폐루프에는 실제 대상 제어기 또는 실제 I/O 하드웨어가 포함된다."
       ],
       "rejected_explanations": [
-        "HIL은 반드시 실제 생산설비를 가동해야만 가능하다고 본다."
+        "하드웨어 없는 Software-in-the-loop나 Virtual Commissioning을 HIL과 동일시하거나 HIL에 실제 제어·I/O 하드웨어가 필요 없다고 본다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 소프트웨어 lifecycle, V-Model 및 V&V 원칙",
@@ -1083,7 +1083,7 @@
       "wrong_claim": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
       "message": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
       "description": "명시적 반대 주장만 fatal 후보로 본다. HIL은 실제 제어 HW 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 실제 plant 가동 없이 HW·SW 상호작용을 검증할 수 있다.",
-      "correct_rule": "HIL은 실제 제어 HW 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 실제 plant 가동 없이 HW·SW 상호작용을 검증할 수 있다.",
+      "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
       "correction": "HIL은 실제 제어 HW 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 실제 plant 가동 없이 HW·SW 상호작용을 검증할 수 있다.",
       "affected_layers": [
         "C",
@@ -1191,7 +1191,7 @@
     "동적분석은 실행 중 경로, 시간, 자원과 반응을 관찰한다.",
     "회귀시험은 변경 기능과 영향받는 기존 기능을 함께 확인한다.",
     "Simulation은 모델 가정과 한계를 가진다.",
-    "HIL은 실제 제어 HW와 실시간 plant 모델을 폐루프로 연결할 수 있다.",
+    "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하며 실제 생산설비 가동은 필요하지 않다.",
     "Fault injection은 통제된 시험환경에서 장애 검출과 복구를 검증한다.",
     "시험 실패는 결함 또는 승인된 변경으로 추적한다.",
     "Review는 동적시험을 보완하지만 모두 대체하지 않는다.",
@@ -1205,7 +1205,8 @@
   "revision_notes": [
     "SW-04 일반 계측제어 소프트웨어 lifecycle ownership을 정의했다.",
     "SW-05 Safety lifecycle과 SW-10 프로젝트 FAT·SAT·Acceptance 경계를 명시했다.",
-    "V-Model, 양방향 RTM, 정적·동적·회귀시험, Simulation·HIL·Fault injection을 연결했다."
+    "V-Model, 양방향 RTM, 정적·동적·회귀시험, Simulation·HIL·Fault injection을 연결했다.",
+    "2026-08-07 LLM 의미 감사 수리: HIL과 Software-in-the-loop·Virtual Commissioning 경계를 교정했다."
   ],
   "topic_label": "SW-04 계측제어 SW 수명주기·V-Model·V&V",
   "core_facts": [
@@ -1230,7 +1231,7 @@
     "동적분석은 실행된 소프트웨어의 경로, 시간, 메모리·자원, 인터페이스와 실제 반응을 입력 조건별로 관찰한다.",
     "회귀시험은 변경된 기능뿐 아니라 영향받을 수 있는 기존 기능과 인터페이스가 유지되는지 반복 확인한다.",
     "Simulation은 plant·process·device의 모델을 사용하여 다양한 정상·비정상 시나리오를 반복 검증하지만 모델의 가정과 한계를 관리해야 한다.",
-    "HIL은 실제 제어 하드웨어 또는 실행환경을 실시간 plant 모델과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다.",
+    "HIL은 실제 대상 제어기 하드웨어 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하여 I/O, timing, 통신과 제어동작을 시험한다. 하드웨어 없이 소프트웨어 실행환경만 모델과 연결하는 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
     "Fault injection은 센서단선, 고착, 통신지연·손실, 전원복귀, 데이터오염과 task 이상 등을 의도적으로 주입해 검출·격리·복구를 검증한다.",
     "시험명세는 목적, 사전조건, 입력, 절차, 예상결과, 허용오차, 판정기준, 환경, 증적과 요구사항 참조를 포함한다.",
     "시험 완료는 단순 실행 건수가 아니라 요구사항·위험·경로·인터페이스 coverage와 미해결 결함, exit criteria를 함께 평가한다.",
