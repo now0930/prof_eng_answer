@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-06T01:28:22Z-generated-topic-pack-manifest",
+  "version": "2026-08-06T03:08:42Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 38,
+  "topic_count": 39,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -108,6 +108,16 @@
     },
     {
       "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

@@ -274,3 +274,7 @@ python3 scripts/test_control_valve_severe_service_topic.py
 echo
 echo "===== final control element SIL SIS ESD valve partial stroke test topic regression ====="
 python3 scripts/test_final_control_element_sil_sis_esd_pst_topic.py
+
+echo
+echo "===== control valve integrated selection process and lifecycle topic regression ====="
+python3 scripts/test_control_valve_selection_process_lifecycle_topic.py

@@ -1,0 +1,24 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "COMPARE_SELECTION",
+  "high_band_unlock_conditions": [
+    "Governing document와 operating-case completeness를 제시한다.",
+    "Pressure·temperature·flow·phase·composition basis를 검증한다.",
+    "Topic 1~15의 전문 결과를 assumption·margin·limitation과 함께 통합한다.",
+    "Body·trim·characteristic·material·actuator·accessory package를 trade-off한다.",
+    "Mandatory gate와 uncertainty·double-margin control을 설명한다.",
+    "Datasheet·requisition·vendor bid·deviation·guarantee를 통제한다.",
+    "ITP·FAT·SAT·commissioning 및 installed performance evidence를 제시한다.",
+    "Reliability·maintainability·spares·lifecycle cost·MOC를 폐루프로 연결한다."
+  ],
+  "note": "Topic 16은 제어밸브 영역의 종합 선정 문제를 소유한다. 개별 물리와 계산은 Topic 1~15가 담당하며, Topic 16은 결과의 정합성, trade-off, procurement, acceptance와 lifecycle closure를 FIELD_APPLICATION 수준으로 평가한다.",
+  "revision_notes": [
+    "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+    "COMPARE_SELECTION을 Primary Question Type으로 적용했다.",
+    "IMPLEMENTATION_EVALUATION과 PROCEDURE를 보조 유형으로 적용했다."
+  ],
+  "topic_label": "제어밸브 통합 선정·공정조건·Vendor 평가·검증·수명주기"
+}
