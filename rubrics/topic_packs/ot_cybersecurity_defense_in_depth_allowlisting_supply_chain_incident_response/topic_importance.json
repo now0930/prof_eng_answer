@@ -1,0 +1,28 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "HIGH",
+  "question_type": "PROBLEM_SOLVE",
+  "high_band_unlock_conditions": [
+    "OT와 IT 보안 우선순위 차이를 availability·safety·integrity 관점에서 설명한다.",
+    "Asset inventory, criticality, SUC와 risk assessment를 연결한다.",
+    "Zone and Conduit, segmentation, Industrial DMZ와 Firewall을 data flow로 설계한다.",
+    "Allowlisting, least privilege, authentication·authorization을 구분한다.",
+    "Jump server, MFA와 session recording을 포함한 remote access를 설계한다.",
+    "Patch·vulnerability·legacy compensating control의 위험기반 결정을 제시한다.",
+    "Supply chain, supplier assurance, SBOM과 firmware integrity를 연결한다.",
+    "Logging, time synchronization, detection과 incident response를 설계한다.",
+    "Offline·immutable backup과 trusted recovery·business continuity를 구분한다.",
+    "SW-06의 운영 변경·Backup과 SW-09의 cyber control·trusted recovery 경계를 유지한다.",
+    "SW-07의 통신기능 및 SW-08의 정량 네트워크 복원력과 SW-09 보안통제를 구분한다."
+  ],
+  "note": "OT 사이버보안은 제품 나열보다 자산·위험·경계·identity·공급망·monitoring·incident response·trusted recovery를 공정안전과 가용성에 연결할 때 고득점이 가능하다.",
+  "revision_notes": [
+    "SOFTWARE_LLM_LANE_B SW-09 source authoring.",
+    "SW-06 운영 변경·Backup과 SW-09 cyber threat·trusted recovery ownership을 분리했다.",
+    "SW-07 통신기능 및 SW-08 정량 네트워크 복원력과의 경계를 명시했다.",
+    "Generated bank, Router와 production Python은 수정하지 않는다."
+  ],
+  "topic_label": "OT 사이버보안, 심층방어, Allowlisting, 공급망 보안 및 사고대응"
+}
