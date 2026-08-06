@@ -1,0 +1,47 @@
+{
+  "version": "question_contract_v1",
+  "revision": 1,
+  "immutable_identity": {
+    "normalization_version": "grading_text_normalization_v1",
+    "question_hash": "5a96f8b1e6124800f9b964742bb5e449ba832fb5687bd6debd0c5e591dbe049e",
+    "submission_hash": "1e290baff0febbffd2337906e1e4ce6f1e3bc734adfa98bcc2f4d992e8d1cdcd"
+  },
+  "lens": "PRINCIPLE_INTERPRETATION",
+  "question_type": {
+    "id": "PRINCIPLE_INTERPRETATION",
+    "confidence": "high",
+    "status": "locked",
+    "locked": true,
+    "source": "deterministic_rule",
+    "matched_rules": [
+      "explicit_demand:설계 기준",
+      "explicit_demand:설계기준",
+      "strong_question:설계",
+      "profile_question:설계"
+    ],
+    "warning": ""
+  },
+  "routing": {
+    "fact_topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+    "model_answer_topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+    "canonical_topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+  },
+  "rubric": {
+    "snapshot_hash": "6afe653e9cc710f059b0685821907158f8cc6a092cbfeba8aa994d195b125bc7",
+    "bank_mode": "generated",
+    "name": "industrial_instrumentation_control",
+    "version": "2026-06-28-v2-demand-axis-json-only",
+    "question_type_profile": "rubrics/question_types/default.json",
+    "fact_anchor_bank": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+    "model_answer_bank": "rubrics/model_answers/industrial_instrumentation_control.json"
+  },
+  "confirmation": {
+    "required": false,
+    "status": "auto_confirmed",
+    "actor": "deterministic_router",
+    "method": "automatic",
+    "confirmed_at": null,
+    "audit": []
+  },
+  "contract_hash": "d6765586be54067928a912f175bde6e9540001d30b2103887cf50f601ca19e44"
+}

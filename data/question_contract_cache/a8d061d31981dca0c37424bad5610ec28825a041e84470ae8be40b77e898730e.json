@@ -1,0 +1,58 @@
+{
+  "version": "question_contract_v1",
+  "revision": 1,
+  "immutable_identity": {
+    "normalization_version": "grading_text_normalization_v1",
+    "question_hash": "aabd081cf2a792c8b19c2b16a9f882bd3ad7a7412d4cc7038aecd3c05066fd19",
+    "submission_hash": "66132d00a0cdee6e7ef52c9df991c4e6b78b0cb05dc3e560cd79a3e0617c9ad7"
+  },
+  "lens": "PRINCIPLE_INTERPRETATION",
+  "question_type": {
+    "id": "PRINCIPLE_INTERPRETATION",
+    "confidence": "high",
+    "status": "locked",
+    "locked": true,
+    "source": "deterministic_rule",
+    "matched_rules": [
+      "explicit_demand:개념 설명",
+      "explicit_demand:설계 기준",
+      "explicit_demand:설계기준",
+      "strong_question:개념",
+      "strong_question:원리",
+      "strong_question:메커니즘",
+      "strong_question:동작 원리",
+      "strong_question:계산",
+      "strong_question:수식",
+      "strong_question:설계",
+      "profile_question:원리",
+      "profile_question:동작",
+      "profile_question:계산",
+      "profile_question:설계",
+      "profile_question:제어"
+    ],
+    "warning": ""
+  },
+  "routing": {
+    "fact_topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+    "model_answer_topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+    "canonical_topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+  },
+  "rubric": {
+    "snapshot_hash": "6afe653e9cc710f059b0685821907158f8cc6a092cbfeba8aa994d195b125bc7",
+    "bank_mode": "generated",
+    "name": "industrial_instrumentation_control",
+    "version": "2026-06-28-v2-demand-axis-json-only",
+    "question_type_profile": "rubrics/question_types/default.json",
+    "fact_anchor_bank": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+    "model_answer_bank": "rubrics/model_answers/industrial_instrumentation_control.json"
+  },
+  "confirmation": {
+    "required": false,
+    "status": "auto_confirmed",
+    "actor": "deterministic_router",
+    "method": "automatic",
+    "confirmed_at": null,
+    "audit": []
+  },
+  "contract_hash": "67a2f943c2d16191a1f3f5e663f7192724789637b53de6cbfb06e71d6f150023"
+}
