@@ -5,7 +5,7 @@
   "question_type": "PRINCIPLE_INTERPRETATION",
   "expected_question_patterns": [
     {
-      "question": "Historian·MES·ERP의 역할과 ISA-95 기반 IT/OT 통합 구조를 설명하시오.",
+      "pattern": "Historian·MES·ERP의 역할과 ISA-95 기반 IT/OT 통합 구조를 설명하시오.",
       "intent": "Historian·MES·ERP의 역할과 ISA-95 기반 IT/OT 통합 구조를 설명하시오.",
       "required_anchor_ids": [
         "historian_time_series_role",
@@ -16,7 +16,7 @@
       ]
     },
     {
-      "question": "산업 Historian의 Timestamp, Quality Code와 Time alignment 관리방안을 설명하시오.",
+      "pattern": "산업 Historian의 Timestamp, Quality Code와 Time alignment 관리방안을 설명하시오.",
       "intent": "산업 Historian의 Timestamp, Quality Code와 Time alignment 관리방안을 설명하시오.",
       "required_anchor_ids": [
         "source_timestamp_event_time",
@@ -26,7 +26,7 @@
       ]
     },
     {
-      "question": "산업데이터 품질의 완전성·적시성·일관성 관리방안을 설명하시오.",
+      "pattern": "산업데이터 품질의 완전성·적시성·일관성 관리방안을 설명하시오.",
       "intent": "산업데이터 품질의 완전성·적시성·일관성 관리방안을 설명하시오.",
       "required_anchor_ids": [
         "data_completeness_metric",
@@ -36,7 +36,7 @@
       ]
     },
     {
-      "question": "Edge·Gateway와 Store-and-forward를 이용한 산업데이터 수집 구조를 설명하시오.",
+      "pattern": "Edge·Gateway와 Store-and-forward를 이용한 산업데이터 수집 구조를 설명하시오.",
       "intent": "Edge·Gateway와 Store-and-forward를 이용한 산업데이터 수집 구조를 설명하시오.",
       "required_anchor_ids": [
         "edge_gateway_role",
@@ -46,7 +46,7 @@
       ]
     },
     {
-      "question": "Historian의 Compression·Deadband 적용 시 고려사항을 설명하시오.",
+      "pattern": "Historian의 Compression·Deadband 적용 시 고려사항을 설명하시오.",
       "intent": "Historian의 Compression·Deadband 적용 시 고려사항을 설명하시오.",
       "required_anchor_ids": [
         "compression_deadband_tradeoff",
@@ -56,7 +56,7 @@
       ]
     },
     {
-      "question": "Tag Naming, Namespace, Metadata와 Information Model의 관계를 설명하시오.",
+      "pattern": "Tag Naming, Namespace, Metadata와 Information Model의 관계를 설명하시오.",
       "intent": "Tag Naming, Namespace, Metadata와 Information Model의 관계를 설명하시오.",
       "required_anchor_ids": [
         "tag_naming_namespace",
@@ -66,7 +66,7 @@
       ]
     },
     {
-      "question": "산업데이터 Governance, Retention과 Traceability를 설명하시오.",
+      "pattern": "산업데이터 Governance, Retention과 Traceability를 설명하시오.",
       "intent": "산업데이터 Governance, Retention과 Traceability를 설명하시오.",
       "required_anchor_ids": [
         "data_governance_ownership",
@@ -76,7 +76,7 @@
       ]
     },
     {
-      "question": "MES의 Batch Genealogy와 생산 추적성 구현방안을 설명하시오.",
+      "pattern": "MES의 Batch Genealogy와 생산 추적성 구현방안을 설명하시오.",
       "intent": "MES의 Batch Genealogy와 생산 추적성 구현방안을 설명하시오.",
       "required_anchor_ids": [
         "mes_execution_role",
@@ -86,7 +86,7 @@
       ]
     },
     {
-      "question": "산업 Streaming과 실시간 처리에서 Event Time, Window와 Late Data를 설명하시오.",
+      "pattern": "산업 Streaming과 실시간 처리에서 Event Time, Window와 Late Data를 설명하시오.",
       "intent": "산업 Streaming과 실시간 처리에서 Event Time, Window와 Late Data를 설명하시오.",
       "required_anchor_ids": [
         "streaming_event_processing",
@@ -96,7 +96,7 @@
       ]
     },
     {
-      "question": "Protocol 상호운용성과 Semantic Interoperability의 차이를 설명하시오.",
+      "pattern": "Protocol 상호운용성과 Semantic Interoperability의 차이를 설명하시오.",
       "intent": "Protocol 상호운용성과 Semantic Interoperability의 차이를 설명하시오.",
       "required_anchor_ids": [
         "semantic_interoperability",
