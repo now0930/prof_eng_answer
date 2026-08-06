@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-06T03:08:42Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-06T13:04:11Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -756,6 +756,34 @@
         "접촉공진",
         "공진주파수",
         "저주파 차단"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "enabled": false,
+      "topic_name": "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어시스템 선정 절차",
+      "question_type": "COMPARE_SELECTION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [
+        "PLC DCS SCADA Remote I/O 구조와 선정",
+        "PLC DCS 및 Remote I/O 구성 비교",
+        "분산제어시스템 CPU 전원 통신망 이중화",
+        "DCS 이중화 고장진단 무정전 절체",
+        "PLC 이중화 Active Standby 절체",
+        "제어시스템 가용도 신뢰도 MTBF MTTR",
+        "제어시스템 단일고장점 공통원인고장",
+        "Remote I/O 통신장애 신뢰성 확보",
+        "제어기 상태동기화 Bumpless Transfer",
+        "제어시스템 Degraded Mode Local Control",
+        "control system redundancy availability reliability",
+        "PLC DCS failover bumpless transfer",
+        "remote io architecture communication failure",
+        "CPU power network redundancy common cause failure"
       ],
       "fatal_checks": [],
       "major_checks": [],

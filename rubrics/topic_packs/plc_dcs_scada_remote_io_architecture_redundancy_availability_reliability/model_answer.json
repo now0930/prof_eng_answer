@@ -1,0 +1,354 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+  "title_ko": "PLC·DCS·SCADA·PC 기반 및 Remote I/O 제어시스템의 구조·이중화·가용도·신뢰도",
+  "question_type": "COMPARE_SELECTION",
+  "expected_question_patterns": [
+    {
+      "pattern": "PLC·DCS·SCADA·PC 기반 제어시스템과 Remote I/O의 구조, 특징 및 선정기준을 비교하시오.",
+      "intent": "PLC·DCS·SCADA·PC 기반 제어시스템과 Remote I/O의 구조, 특징 및 선정기준을 비교하시오.",
+      "required_anchor_ids": [
+        "sw01_platform_role_selection",
+        "sw01_hierarchical_architecture",
+        "sw01_plc_architecture",
+        "sw01_dcs_architecture",
+        "sw01_scada_pc_role",
+        "sw01_remote_io_architecture",
+        "sw01_selection_tradeoff"
+      ]
+    },
+    {
+      "pattern": "PLC 또는 DCS 이중화 시스템의 대상, 구조, 진단, 절체조건과 유지보수를 설명하시오.",
+      "intent": "PLC 또는 DCS 이중화 시스템의 대상, 구조, 진단, 절체조건과 유지보수를 설명하시오.",
+      "required_anchor_ids": [
+        "sw01_redundancy_scope",
+        "sw01_active_standby_architecture",
+        "sw01_power_io_server_network_redundancy",
+        "sw01_fault_detection_isolation",
+        "sw01_failover_criteria",
+        "sw01_maintenance_online_test"
+      ]
+    },
+    {
+      "pattern": "Active/Standby 제어기의 상태동기화와 Bumpless Transfer 절차를 설명하시오.",
+      "intent": "Active/Standby 제어기의 상태동기화와 Bumpless Transfer 절차를 설명하시오.",
+      "required_anchor_ids": [
+        "sw01_active_standby_architecture",
+        "sw01_fault_detection_isolation",
+        "sw01_state_synchronization",
+        "sw01_bumpless_transfer",
+        "sw01_failover_criteria",
+        "sw01_recovery_resynchronization"
+      ]
+    },
+    {
+      "pattern": "Remote I/O의 구조, 장단점, 통신장애 영향과 신뢰성 확보방안을 설명하시오.",
+      "intent": "Remote I/O의 구조, 장단점, 통신장애 영향과 신뢰성 확보방안을 설명하시오.",
+      "required_anchor_ids": [
+        "sw01_hierarchical_architecture",
+        "sw01_remote_io_architecture",
+        "sw01_redundancy_scope",
+        "sw01_degraded_mode_local_control",
+        "sw01_single_point_failure"
+      ]
+    },
+    {
+      "pattern": "제어시스템의 Reliability·Maintainability·Availability와 MTBF·MTTR의 관계를 설명하시오.",
+      "intent": "제어시스템의 Reliability·Maintainability·Availability와 MTBF·MTTR의 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "sw01_reliability_definition",
+        "sw01_maintainability_definition",
+        "sw01_availability_definition",
+        "sw01_availability_formula",
+        "sw01_series_parallel_reliability"
+      ]
+    },
+    {
+      "pattern": "이중화 제어시스템의 Single Point of Failure와 Common Cause Failure 및 저감대책을 설명하시오.",
+      "intent": "이중화 제어시스템의 Single Point of Failure와 Common Cause Failure 및 저감대책을 설명하시오.",
+      "required_anchor_ids": [
+        "sw01_redundancy_scope",
+        "sw01_single_point_failure",
+        "sw01_common_cause_failure",
+        "sw01_independence_diversity_separation",
+        "sw01_selection_tradeoff"
+      ]
+    },
+    {
+      "pattern": "제어시스템 고장 시 Degraded Mode·Local Control·복구 및 재동기화 절차를 설명하시오.",
+      "intent": "제어시스템 고장 시 Degraded Mode·Local Control·복구 및 재동기화 절차를 설명하시오.",
+      "required_anchor_ids": [
+        "sw01_fault_detection_isolation",
+        "sw01_degraded_mode_local_control",
+        "sw01_recovery_resynchronization",
+        "sw01_maintenance_online_test"
+      ]
+    },
+    {
+      "pattern": "DCS 이중화의 고장주입 시험과 FAT·SAT 수용기준을 설명하시오.",
+      "intent": "DCS 이중화의 고장주입 시험과 FAT·SAT 수용기준을 설명하시오.",
+      "required_anchor_ids": [
+        "sw01_fault_detection_isolation",
+        "sw01_state_synchronization",
+        "sw01_bumpless_transfer",
+        "sw01_failover_criteria",
+        "sw01_acceptance_metrics"
+      ]
+    },
+    {
+      "pattern": "제어시스템 이중화 수준의 선정절차와 비용·복잡도·가용도 Trade-off를 설명하시오.",
+      "intent": "제어시스템 이중화 수준의 선정절차와 비용·복잡도·가용도 Trade-off를 설명하시오.",
+      "required_anchor_ids": [
+        "sw01_redundancy_scope",
+        "sw01_availability_definition",
+        "sw01_single_point_failure",
+        "sw01_common_cause_failure",
+        "sw01_maintenance_online_test",
+        "sw01_selection_tradeoff"
+      ]
+    },
+    {
+      "pattern": "연속공정 제어시스템의 고가용도 아키텍처를 설계하고 고장검출·무충격 절체·복구방안을 제시하시오.",
+      "intent": "연속공정 제어시스템의 고가용도 아키텍처를 설계하고 고장검출·무충격 절체·복구방안을 제시하시오.",
+      "required_anchor_ids": [
+        "sw01_platform_role_selection",
+        "sw01_hierarchical_architecture",
+        "sw01_plc_architecture",
+        "sw01_dcs_architecture",
+        "sw01_scada_pc_role",
+        "sw01_remote_io_architecture",
+        "sw01_redundancy_scope",
+        "sw01_active_standby_architecture",
+        "sw01_power_io_server_network_redundancy",
+        "sw01_fault_detection_isolation",
+        "sw01_state_synchronization",
+        "sw01_bumpless_transfer",
+        "sw01_failover_criteria",
+        "sw01_degraded_mode_local_control",
+        "sw01_recovery_resynchronization",
+        "sw01_reliability_definition",
+        "sw01_maintainability_definition",
+        "sw01_availability_definition",
+        "sw01_availability_formula",
+        "sw01_series_parallel_reliability",
+        "sw01_single_point_failure",
+        "sw01_common_cause_failure",
+        "sw01_independence_diversity_separation",
+        "sw01_maintenance_online_test",
+        "sw01_selection_tradeoff",
+        "sw01_acceptance_metrics"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 배경과 목적",
+      "intent": "공정중단 결과와 제어시스템의 요구기능을 정의하고 고가용도 설계의 목적을 제시한다.",
+      "anchor_refs": [
+        "sw01_platform_role_selection",
+        "sw01_selection_tradeoff"
+      ]
+    },
+    {
+      "section": "2. 플랫폼과 계층구조",
+      "intent": "PLC·DCS·SCADA·PC 기반 제어, Remote I/O와 현장·제어·감시계층의 역할을 비교한다.",
+      "anchor_refs": [
+        "sw01_hierarchical_architecture",
+        "sw01_plc_architecture",
+        "sw01_dcs_architecture",
+        "sw01_scada_pc_role",
+        "sw01_remote_io_architecture"
+      ]
+    },
+    {
+      "section": "3. 이중화 대상과 구조",
+      "intent": "CPU·전원·I/O·서버·네트워크와 Active/Standby 구조를 End-to-End로 설명한다.",
+      "anchor_refs": [
+        "sw01_redundancy_scope",
+        "sw01_active_standby_architecture",
+        "sw01_power_io_server_network_redundancy"
+      ]
+    },
+    {
+      "section": "4. 고장검출과 무충격 절체",
+      "intent": "고장검출·격리, 상태동기화, Bumpless Transfer와 절체판정 기준을 설명한다.",
+      "anchor_refs": [
+        "sw01_fault_detection_isolation",
+        "sw01_state_synchronization",
+        "sw01_bumpless_transfer",
+        "sw01_failover_criteria"
+      ]
+    },
+    {
+      "section": "5. 성능저하 운전과 복구",
+      "intent": "Degraded Mode·Local Control·Fallback 및 계획된 재동기화·원복절차를 제시한다.",
+      "anchor_refs": [
+        "sw01_degraded_mode_local_control",
+        "sw01_recovery_resynchronization"
+      ]
+    },
+    {
+      "section": "6. RAM 정량평가",
+      "intent": "Reliability·Maintainability·Availability, MTBF·MTTR과 직렬·병렬 신뢰도 관계를 설명한다.",
+      "anchor_refs": [
+        "sw01_reliability_definition",
+        "sw01_maintainability_definition",
+        "sw01_availability_definition",
+        "sw01_availability_formula",
+        "sw01_series_parallel_reliability"
+      ]
+    },
+    {
+      "section": "7. 단일고장점과 공통원인고장",
+      "intent": "SPOF와 CCF를 식별하고 독립성·다양성·물리적 분리 대책을 제시한다.",
+      "anchor_refs": [
+        "sw01_single_point_failure",
+        "sw01_common_cause_failure",
+        "sw01_independence_diversity_separation"
+      ]
+    },
+    {
+      "section": "8. 유지보수·시험·선정",
+      "intent": "온라인 유지보수, 정기 절체시험, 수용기준과 생애주기 Trade-off를 정리한다.",
+      "anchor_refs": [
+        "sw01_maintenance_online_test",
+        "sw01_selection_tradeoff",
+        "sw01_acceptance_metrics"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "PLC·DCS·SCADA·PC 기반 제어와 Remote I/O의 역할을 공정특성과 장애영향으로 비교한다.",
+    "현장·제어·감시계층과 End-to-End 제어경로를 도식화한다.",
+    "CPU뿐 아니라 전원·I/O·서버·네트워크 이중화를 구분한다.",
+    "고장검출·격리·판정·절체의 시간흐름을 설명한다.",
+    "상태동기화와 Bumpless Transfer의 인과관계를 제시한다.",
+    "Degraded Mode·Local Control·Fallback과 복구·재동기화를 포함한다.",
+    "Reliability·Maintainability·Availability와 MTBF·MTTR을 정확히 구분한다.",
+    "A = MTBF/(MTBF+MTTR)의 적용조건을 명시한다.",
+    "Single Point of Failure와 Common Cause Failure를 구분한다.",
+    "독립성·다양성·물리적 분리 대책의 한계와 비용을 설명한다.",
+    "정기 절체시험·복구훈련과 실제 운용가용도를 연결한다.",
+    "절체시간·출력변동·데이터손실·복구시간을 수용기준으로 정량화한다."
+  ],
+  "common_missing_points": [
+    "PLC·DCS·SCADA의 명칭만 나열하고 선정근거를 제시하지 않는다.",
+    "CPU 이중화만 설명하고 전원·I/O·서버·네트워크 단일고장점을 누락한다.",
+    "고장검출과 고장격리, 절체판정을 구분하지 않는다.",
+    "상태동기화 없이 Bumpless Transfer가 가능하다고 본다.",
+    "통신상실 시 Hold Last를 모든 신호에 일괄 적용한다.",
+    "Reliability와 Availability를 동일하게 설명한다.",
+    "MTBF만 제시하고 MTTR과 복구절차를 누락한다.",
+    "병렬 이중화의 독립고장 가정을 명시하지 않는다.",
+    "공통원인고장과 단일고장점을 구분하지 않는다.",
+    "정기시험과 복구훈련 없이 자동절체 기능만 제시한다.",
+    "Alarm·산업통신·SIL·프로젝트 영역을 SW-01에 과도하게 흡수한다."
+  ],
+  "routing_aliases": [
+    "PLC DCS SCADA Remote I/O 구조와 선정",
+    "PLC DCS 및 Remote I/O 구성 비교",
+    "분산제어시스템 CPU 전원 통신망 이중화",
+    "DCS 이중화 고장진단 무정전 절체",
+    "PLC 이중화 Active Standby 절체",
+    "제어시스템 가용도 신뢰도 MTBF MTTR",
+    "제어시스템 단일고장점 공통원인고장",
+    "Remote I/O 통신장애 신뢰성 확보",
+    "제어기 상태동기화 Bumpless Transfer",
+    "제어시스템 Degraded Mode Local Control",
+    "control system redundancy availability reliability",
+    "PLC DCS failover bumpless transfer",
+    "remote io architecture communication failure",
+    "CPU power network redundancy common cause failure"
+  ],
+  "routing_field_points": [
+    "PLC CPU 이중화",
+    "DCS 제어기 이중화",
+    "SCADA 서버 이중화",
+    "Remote I/O 분산구조",
+    "CPU 전원 I/O 통신망 이중화",
+    "Active Standby 제어기",
+    "Heartbeat Watchdog 고장검출",
+    "상태동기화 출력추종",
+    "Bumpless Transfer",
+    "Failover 절체시간",
+    "Degraded Mode Local Control",
+    "Reliability Maintainability Availability",
+    "MTBF MTTR 가용도",
+    "Single Point of Failure",
+    "Common Cause Failure",
+    "독립성 다양성 물리적 분리",
+    "정기 절체시험 복구훈련"
+  ],
+  "revision_notes": [
+    "2026-08-06: SW-01 L2 Canonical Source Topic Pack 최초 작성.",
+    "기존 plc_dcs_remote_io, reliability_maintainability_availability_ram을 Legacy Seed로 보존.",
+    "hmi_scada는 SW-01 구조와 SW-03 운전정보 관리로 Handoff.",
+    "고장검출·Bumpless Transfer·SPOF·CCF·복구·정량 수용기준을 보완."
+  ],
+  "id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+  "title": "PLC·DCS·SCADA·PC 기반 및 Remote I/O 제어시스템의 구조·이중화·가용도·신뢰도",
+  "question_examples": [
+    "PLC·DCS·SCADA·PC 기반 제어시스템과 Remote I/O의 구조, 특징 및 선정기준을 비교하시오.",
+    "PLC 또는 DCS 이중화 시스템의 대상, 구조, 진단, 절체조건과 유지보수를 설명하시오.",
+    "Active/Standby 제어기의 상태동기화와 Bumpless Transfer 절차를 설명하시오.",
+    "Remote I/O의 구조, 장단점, 통신장애 영향과 신뢰성 확보방안을 설명하시오.",
+    "제어시스템의 Reliability·Maintainability·Availability와 MTBF·MTTR의 관계를 설명하시오.",
+    "이중화 제어시스템의 Single Point of Failure와 Common Cause Failure 및 저감대책을 설명하시오.",
+    "제어시스템 고장 시 Degraded Mode·Local Control·복구 및 재동기화 절차를 설명하시오.",
+    "DCS 이중화의 고장주입 시험과 FAT·SAT 수용기준을 설명하시오.",
+    "제어시스템 이중화 수준의 선정절차와 비용·복잡도·가용도 Trade-off를 설명하시오.",
+    "연속공정 제어시스템의 고가용도 아키텍처를 설계하고 고장검출·무충격 절체·복구방안을 제시하시오."
+  ],
+  "topic_aliases": [
+    "PLC DCS SCADA Remote I/O 구조와 선정",
+    "PLC DCS 및 Remote I/O 구성 비교",
+    "분산제어시스템 CPU 전원 통신망 이중화",
+    "DCS 이중화 고장진단 무정전 절체",
+    "PLC 이중화 Active Standby 절체",
+    "제어시스템 가용도 신뢰도 MTBF MTTR",
+    "제어시스템 단일고장점 공통원인고장",
+    "Remote I/O 통신장애 신뢰성 확보",
+    "제어기 상태동기화 Bumpless Transfer",
+    "제어시스템 Degraded Mode Local Control",
+    "control system redundancy availability reliability",
+    "PLC DCS failover bumpless transfer",
+    "remote io architecture communication failure",
+    "CPU power network redundancy common cause failure"
+  ],
+  "expected_structure": [
+    "1. 배경과 목적: 공정중단 결과와 제어시스템의 요구기능을 정의하고 고가용도 설계의 목적을 제시한다.",
+    "2. 플랫폼과 계층구조: PLC·DCS·SCADA·PC 기반 제어, Remote I/O와 현장·제어·감시계층의 역할을 비교한다.",
+    "3. 이중화 대상과 구조: CPU·전원·I/O·서버·네트워크와 Active/Standby 구조를 End-to-End로 설명한다.",
+    "4. 고장검출과 무충격 절체: 고장검출·격리, 상태동기화, Bumpless Transfer와 절체판정 기준을 설명한다.",
+    "5. 성능저하 운전과 복구: Degraded Mode·Local Control·Fallback 및 계획된 재동기화·원복절차를 제시한다.",
+    "6. RAM 정량평가: Reliability·Maintainability·Availability, MTBF·MTTR과 직렬·병렬 신뢰도 관계를 설명한다.",
+    "7. 단일고장점과 공통원인고장: SPOF와 CCF를 식별하고 독립성·다양성·물리적 분리 대책을 제시한다.",
+    "8. 유지보수·시험·선정: 온라인 유지보수, 정기 절체시험, 수용기준과 생애주기 Trade-off를 정리한다."
+  ],
+  "high_score_features": [
+    "PLC·DCS·SCADA·PC 기반 제어와 Remote I/O의 역할을 공정특성과 장애영향으로 비교한다.",
+    "현장·제어·감시계층과 End-to-End 제어경로를 도식화한다.",
+    "CPU뿐 아니라 전원·I/O·서버·네트워크 이중화를 구분한다.",
+    "고장검출·격리·판정·절체의 시간흐름을 설명한다.",
+    "상태동기화와 Bumpless Transfer의 인과관계를 제시한다.",
+    "Degraded Mode·Local Control·Fallback과 복구·재동기화를 포함한다."
+  ],
+  "low_score_patterns": [
+    "PLC·DCS·SCADA의 명칭만 나열하고 선정근거를 제시하지 않는다.",
+    "CPU 이중화만 설명하고 전원·I/O·서버·네트워크 단일고장점을 누락한다.",
+    "고장검출과 고장격리, 절체판정을 구분하지 않는다.",
+    "상태동기화 없이 Bumpless Transfer가 가능하다고 본다.",
+    "통신상실 시 Hold Last를 모든 신호에 일괄 적용한다.",
+    "Reliability와 Availability를 동일하게 설명한다."
+  ],
+  "field_connection_points": [
+    "SW-03은 Alarm·Setpoint·Trip·SOE·화면·운전권한의 상세 관리를 담당하고, SW-01은 HMI·SCADA 서버의 아키텍처와 이중화 역할만 담당한다.",
+    "SW-05는 SIS·SIL 안전무결성과 체계적 고장을 담당하고, SW-01은 일반 제어시스템의 가용도·고장허용·공통원인고장을 담당한다.",
+    "SW-07은 프로토콜·매체·토폴로지·상호운용성 선정을 담당하고, SW-01은 통신망을 이중화 아키텍처 구성요소로 다룬다.",
+    "SW-08은 Latency·Jitter·결정성·시간동기화·복구시간을 담당하고, SW-01은 시스템 수준의 네트워크 이중화 목적과 절체결과를 담당한다.",
+    "SW-09는 Zone·Conduit·DMZ·Firewall·Allowlisting·공급망 보안을 담당하며 SW-01은 가용도와 복구 관점의 최소 보안 고려만 포함한다.",
+    "SW-10은 설계문서·FAT·SAT·시운전·인수 절차를 담당하고, SW-01은 기술적 구조와 수용기준을 담당한다.",
+    "SW-11은 Historian·MES·ERP·IT/OT 데이터 통합과 데이터 품질을 담당하고, SW-01은 SCADA·서버·통신의 제어 아키텍처를 담당한다.",
+    "SW-12는 진단데이터 기반 이상탐지·예지보전·AI 모델을 담당하고, SW-01은 제어플랫폼의 구조와 신뢰성을 담당한다."
+  ]
+}

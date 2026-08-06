@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-06T03:08:42Z-generated-topic-pack-importance",
+  "version": "2026-08-06T13:04:11Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -606,6 +606,31 @@
         "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ],
       "topic_label": "압전식 센서의 원리, 전하증폭기, 동적 힘·압력·가속도 측정 및 오차"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "COMPARE_SELECTION",
+      "high_band_unlock_conditions": [
+        "PLC·DCS·SCADA·PC 기반 제어와 Remote I/O의 역할을 공정특성과 장애영향으로 비교한다.",
+        "현장·제어·감시계층과 End-to-End 제어경로를 도식화한다.",
+        "CPU뿐 아니라 전원·I/O·서버·네트워크 이중화를 구분한다.",
+        "고장검출·격리·판정·절체의 시간흐름을 설명한다.",
+        "상태동기화와 Bumpless Transfer의 인과관계를 제시한다.",
+        "Degraded Mode·Local Control·Fallback과 복구·재동기화를 포함한다.",
+        "Reliability·Maintainability·Availability와 MTBF·MTTR을 정확히 구분한다.",
+        "A = MTBF/(MTBF+MTTR)의 적용조건을 명시한다."
+      ],
+      "note": "PLC·DCS·SCADA·Remote I/O 구조, 이중화, RAM, Bumpless Transfer, SPOF·CCF를 통합하는 반복출제 핵심 Topic.",
+      "revision_notes": [
+        "2026-08-06: SW-01 L2 Canonical Source Topic Pack 최초 작성.",
+        "기존 plc_dcs_remote_io, reliability_maintainability_availability_ram을 Legacy Seed로 보존.",
+        "hmi_scada는 SW-01 구조와 SW-03 운전정보 관리로 Handoff.",
+        "고장검출·Bumpless Transfer·SPOF·CCF·복구·정량 수용기준을 보완."
+      ],
+      "topic_label": "제어시스템 구조·이중화·가용도·신뢰도"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

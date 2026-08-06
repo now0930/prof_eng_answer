@@ -1,0 +1,1051 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+  "title_ko": "PLC·DCS·SCADA·PC 기반 및 Remote I/O 제어시스템의 구조·이중화·가용도·신뢰도",
+  "question_type_hint": "COMPARE_SELECTION",
+  "anchors": [
+    {
+      "id": "sw01_platform_role_selection",
+      "anchor_id": "sw01_platform_role_selection",
+      "statement": "PLC, DCS, SCADA, PC 기반 제어와 Remote I/O는 제어주기, 공정 연속성, 분산범위, 확장성, 유지보수성 및 장애영향을 기준으로 역할을 구분하고 선정해야 한다.",
+      "importance": "PLC, DCS, SCADA, PC 기반 제어와 Remote I/O는 제어주기, 공정 연속성, 분산범위, 확장성, 유지보수성 및 장애영향을 기준으로 역할을 구분하고 선정해야 한다.",
+      "keywords": [
+        "PLC",
+        "DCS",
+        "SCADA",
+        "PC-based control",
+        "Remote I/O",
+        "selection"
+      ],
+      "core_terms": [
+        "PLC",
+        "DCS",
+        "SCADA",
+        "PC-based control",
+        "Remote I/O",
+        "selection"
+      ],
+      "accepted_explanations": [
+        "PLC는 고속 논리·시퀀스와 기계제어에 강하고, DCS는 연속공정의 분산제어·통합운전·고가용성에 강하다고 설명한다.",
+        "SCADA는 광역 감시·데이터 수집·원격운전 계층이며, 실제 폐루프 제어의 위치와 장애영향을 별도로 판단한다."
+      ],
+      "rejected_explanations": [
+        "PLC, DCS, SCADA를 명칭만 다르고 동일한 시스템이라고 단정한다."
+      ],
+      "grading_notes": "PLC, DCS, SCADA, PC 기반 제어와 Remote I/O는 제어주기, 공정 연속성, 분산범위, 확장성, 유지보수성 및 장애영향을 기준으로 역할을 구분하고 선정해야 한다.",
+      "source_basis": "PLC, DCS, SCADA, PC 기반 제어와 Remote I/O는 제어주기, 공정 연속성, 분산범위, 확장성, 유지보수성 및 장애영향을 기준으로 역할을 구분하고 선정해야 한다.",
+      "claim": "PLC, DCS, SCADA, PC 기반 제어와 Remote I/O는 제어주기, 공정 연속성, 분산범위, 확장성, 유지보수성 및 장애영향을 기준으로 역할을 구분하고 선정해야 한다.",
+      "description": "PLC, DCS, SCADA, PC 기반 제어와 Remote I/O는 제어주기, 공정 연속성, 분산범위, 확장성, 유지보수성 및 장애영향을 기준으로 역할을 구분하고 선정해야 한다."
+    },
+    {
+      "id": "sw01_hierarchical_architecture",
+      "anchor_id": "sw01_hierarchical_architecture",
+      "statement": "제어시스템은 현장기기·Remote I/O·제어기·제어네트워크·운전서버·운전원 단말의 계층으로 구성되며 제어경로와 감시경로의 장애영향을 구분해야 한다.",
+      "importance": "제어시스템은 현장기기·Remote I/O·제어기·제어네트워크·운전서버·운전원 단말의 계층으로 구성되며 제어경로와 감시경로의 장애영향을 구분해야 한다.",
+      "keywords": [
+        "field level",
+        "Remote I/O",
+        "controller",
+        "control network",
+        "server",
+        "operator station"
+      ],
+      "core_terms": [
+        "field level",
+        "Remote I/O",
+        "controller",
+        "control network",
+        "server",
+        "operator station"
+      ],
+      "accepted_explanations": [
+        "현장계층, 제어계층, 감시계층의 기능과 데이터 흐름을 구분한다.",
+        "상위 감시서버 장애와 하위 제어기 장애가 공정에 미치는 영향이 다름을 설명한다."
+      ],
+      "rejected_explanations": [
+        "상위 서버 장애가 발생하면 모든 현장 폐루프가 반드시 즉시 정지한다고 일반화한다."
+      ],
+      "grading_notes": "제어시스템은 현장기기·Remote I/O·제어기·제어네트워크·운전서버·운전원 단말의 계층으로 구성되며 제어경로와 감시경로의 장애영향을 구분해야 한다.",
+      "source_basis": "제어시스템은 현장기기·Remote I/O·제어기·제어네트워크·운전서버·운전원 단말의 계층으로 구성되며 제어경로와 감시경로의 장애영향을 구분해야 한다.",
+      "claim": "제어시스템은 현장기기·Remote I/O·제어기·제어네트워크·운전서버·운전원 단말의 계층으로 구성되며 제어경로와 감시경로의 장애영향을 구분해야 한다.",
+      "description": "제어시스템은 현장기기·Remote I/O·제어기·제어네트워크·운전서버·운전원 단말의 계층으로 구성되며 제어경로와 감시경로의 장애영향을 구분해야 한다."
+    },
+    {
+      "id": "sw01_plc_architecture",
+      "anchor_id": "sw01_plc_architecture",
+      "statement": "PLC 시스템은 CPU, 전원, 로컬·Remote I/O, 통신모듈과 엔지니어링 도구로 구성되며 기계·배치·시퀀스 제어에서 결정적 주기와 모듈성을 확보한다.",
+      "importance": "PLC 시스템은 CPU, 전원, 로컬·Remote I/O, 통신모듈과 엔지니어링 도구로 구성되며 기계·배치·시퀀스 제어에서 결정적 주기와 모듈성을 확보한다.",
+      "keywords": [
+        "PLC CPU",
+        "scan cycle",
+        "I/O module",
+        "sequence control",
+        "engineering tool"
+      ],
+      "core_terms": [
+        "PLC CPU",
+        "scan cycle",
+        "I/O module",
+        "sequence control",
+        "engineering tool"
+      ],
+      "accepted_explanations": [
+        "입력 스캔, 로직 실행, 출력 갱신의 주기와 통신·진단부하를 함께 설명한다.",
+        "Remote I/O와 네트워크 장애 시 제어범위가 어떻게 축소되는지 제시한다."
+      ],
+      "rejected_explanations": [
+        "PLC는 통신·진단과 무관하게 CPU만 정상이라면 항상 전체 공정을 제어한다고 단정한다."
+      ],
+      "grading_notes": "PLC 시스템은 CPU, 전원, 로컬·Remote I/O, 통신모듈과 엔지니어링 도구로 구성되며 기계·배치·시퀀스 제어에서 결정적 주기와 모듈성을 확보한다.",
+      "source_basis": "PLC 시스템은 CPU, 전원, 로컬·Remote I/O, 통신모듈과 엔지니어링 도구로 구성되며 기계·배치·시퀀스 제어에서 결정적 주기와 모듈성을 확보한다.",
+      "claim": "PLC 시스템은 CPU, 전원, 로컬·Remote I/O, 통신모듈과 엔지니어링 도구로 구성되며 기계·배치·시퀀스 제어에서 결정적 주기와 모듈성을 확보한다.",
+      "description": "PLC 시스템은 CPU, 전원, 로컬·Remote I/O, 통신모듈과 엔지니어링 도구로 구성되며 기계·배치·시퀀스 제어에서 결정적 주기와 모듈성을 확보한다."
+    },
+    {
+      "id": "sw01_dcs_architecture",
+      "anchor_id": "sw01_dcs_architecture",
+      "statement": "DCS는 공정제어기, 분산 I/O, 제어네트워크, 운전·엔지니어링 서버와 공통 데이터베이스를 통합하여 연속공정의 가용성과 운전일관성을 확보한다.",
+      "importance": "DCS는 공정제어기, 분산 I/O, 제어네트워크, 운전·엔지니어링 서버와 공통 데이터베이스를 통합하여 연속공정의 가용성과 운전일관성을 확보한다.",
+      "keywords": [
+        "DCS controller",
+        "distributed I/O",
+        "control network",
+        "operator server",
+        "engineering server"
+      ],
+      "core_terms": [
+        "DCS controller",
+        "distributed I/O",
+        "control network",
+        "operator server",
+        "engineering server"
+      ],
+      "accepted_explanations": [
+        "분산제어와 통합운전의 관계를 설명한다.",
+        "제어기, 서버, 네트워크의 이중화 범위를 구분한다."
+      ],
+      "rejected_explanations": [
+        "DCS를 단순히 대형 PLC와 완전히 동일한 구조라고 설명한다."
+      ],
+      "grading_notes": "DCS는 공정제어기, 분산 I/O, 제어네트워크, 운전·엔지니어링 서버와 공통 데이터베이스를 통합하여 연속공정의 가용성과 운전일관성을 확보한다.",
+      "source_basis": "DCS는 공정제어기, 분산 I/O, 제어네트워크, 운전·엔지니어링 서버와 공통 데이터베이스를 통합하여 연속공정의 가용성과 운전일관성을 확보한다.",
+      "claim": "DCS는 공정제어기, 분산 I/O, 제어네트워크, 운전·엔지니어링 서버와 공통 데이터베이스를 통합하여 연속공정의 가용성과 운전일관성을 확보한다.",
+      "description": "DCS는 공정제어기, 분산 I/O, 제어네트워크, 운전·엔지니어링 서버와 공통 데이터베이스를 통합하여 연속공정의 가용성과 운전일관성을 확보한다."
+    },
+    {
+      "id": "sw01_scada_pc_role",
+      "anchor_id": "sw01_scada_pc_role",
+      "statement": "SCADA와 PC 기반 제어는 감시·수집·분석·원격운전 또는 소프트웨어 기반 제어에 유리하지만 운영체제, 네트워크, 서버 장애와 패치 영향까지 설계해야 한다.",
+      "importance": "SCADA와 PC 기반 제어는 감시·수집·분석·원격운전 또는 소프트웨어 기반 제어에 유리하지만 운영체제, 네트워크, 서버 장애와 패치 영향까지 설계해야 한다.",
+      "keywords": [
+        "SCADA",
+        "PC-based control",
+        "server",
+        "operating system",
+        "remote operation"
+      ],
+      "core_terms": [
+        "SCADA",
+        "PC-based control",
+        "server",
+        "operating system",
+        "remote operation"
+      ],
+      "accepted_explanations": [
+        "SCADA 감시기능과 현장 제어기의 독립성을 구분한다.",
+        "PC 기반 제어는 유연성이 높지만 실시간성·가용성·보안·수명주기 관리가 필요하다고 설명한다."
+      ],
+      "rejected_explanations": [
+        "상용 PC를 사용하면 산업용 제어기의 신뢰성 요구가 자동으로 충족된다고 본다."
+      ],
+      "grading_notes": "SCADA와 PC 기반 제어는 감시·수집·분석·원격운전 또는 소프트웨어 기반 제어에 유리하지만 운영체제, 네트워크, 서버 장애와 패치 영향까지 설계해야 한다.",
+      "source_basis": "SCADA와 PC 기반 제어는 감시·수집·분석·원격운전 또는 소프트웨어 기반 제어에 유리하지만 운영체제, 네트워크, 서버 장애와 패치 영향까지 설계해야 한다.",
+      "claim": "SCADA와 PC 기반 제어는 감시·수집·분석·원격운전 또는 소프트웨어 기반 제어에 유리하지만 운영체제, 네트워크, 서버 장애와 패치 영향까지 설계해야 한다.",
+      "description": "SCADA와 PC 기반 제어는 감시·수집·분석·원격운전 또는 소프트웨어 기반 제어에 유리하지만 운영체제, 네트워크, 서버 장애와 패치 영향까지 설계해야 한다."
+    },
+    {
+      "id": "sw01_remote_io_architecture",
+      "anchor_id": "sw01_remote_io_architecture",
+      "statement": "Remote I/O는 현장 배선을 줄이고 분산 설치와 확장을 용이하게 하지만 통신망·커플러·전원 장애가 다수 신호에 공통 영향을 줄 수 있다.",
+      "importance": "Remote I/O는 현장 배선을 줄이고 분산 설치와 확장을 용이하게 하지만 통신망·커플러·전원 장애가 다수 신호에 공통 영향을 줄 수 있다.",
+      "keywords": [
+        "Remote I/O",
+        "field wiring",
+        "I/O coupler",
+        "communication loss",
+        "distributed installation"
+      ],
+      "core_terms": [
+        "Remote I/O",
+        "field wiring",
+        "I/O coupler",
+        "communication loss",
+        "distributed installation"
+      ],
+      "accepted_explanations": [
+        "배선 절감과 분산 설치 장점을 설명한다.",
+        "통신경로와 공통전원 장애가 다수 채널의 단일고장점이 될 수 있음을 지적한다."
+      ],
+      "rejected_explanations": [
+        "Remote I/O는 배선이 줄기 때문에 로컬 I/O보다 항상 신뢰도가 높다고 단정한다."
+      ],
+      "grading_notes": "Remote I/O는 현장 배선을 줄이고 분산 설치와 확장을 용이하게 하지만 통신망·커플러·전원 장애가 다수 신호에 공통 영향을 줄 수 있다.",
+      "source_basis": "Remote I/O는 현장 배선을 줄이고 분산 설치와 확장을 용이하게 하지만 통신망·커플러·전원 장애가 다수 신호에 공통 영향을 줄 수 있다.",
+      "claim": "Remote I/O는 현장 배선을 줄이고 분산 설치와 확장을 용이하게 하지만 통신망·커플러·전원 장애가 다수 신호에 공통 영향을 줄 수 있다.",
+      "description": "Remote I/O는 현장 배선을 줄이고 분산 설치와 확장을 용이하게 하지만 통신망·커플러·전원 장애가 다수 신호에 공통 영향을 줄 수 있다."
+    },
+    {
+      "id": "sw01_redundancy_scope",
+      "anchor_id": "sw01_redundancy_scope",
+      "statement": "이중화 범위는 CPU뿐 아니라 전원, I/O, 서버, 네트워크, 시간동기, 데이터베이스와 현장 공통설비까지 End-to-End 경로로 검토해야 한다.",
+      "importance": "이중화 범위는 CPU뿐 아니라 전원, I/O, 서버, 네트워크, 시간동기, 데이터베이스와 현장 공통설비까지 End-to-End 경로로 검토해야 한다.",
+      "keywords": [
+        "CPU redundancy",
+        "power redundancy",
+        "I/O redundancy",
+        "server redundancy",
+        "network redundancy",
+        "end-to-end"
+      ],
+      "core_terms": [
+        "CPU redundancy",
+        "power redundancy",
+        "I/O redundancy",
+        "server redundancy",
+        "network redundancy",
+        "end-to-end"
+      ],
+      "accepted_explanations": [
+        "제어경로 전체의 단일고장점을 식별한다.",
+        "필요한 계층만 선택적으로 이중화하고 수용 가능한 장애영향을 제시한다."
+      ],
+      "rejected_explanations": [
+        "CPU만 이중화하면 전체 시스템의 단일고장점이 제거된다고 설명한다."
+      ],
+      "grading_notes": "이중화 범위는 CPU뿐 아니라 전원, I/O, 서버, 네트워크, 시간동기, 데이터베이스와 현장 공통설비까지 End-to-End 경로로 검토해야 한다.",
+      "source_basis": "이중화 범위는 CPU뿐 아니라 전원, I/O, 서버, 네트워크, 시간동기, 데이터베이스와 현장 공통설비까지 End-to-End 경로로 검토해야 한다.",
+      "claim": "이중화 범위는 CPU뿐 아니라 전원, I/O, 서버, 네트워크, 시간동기, 데이터베이스와 현장 공통설비까지 End-to-End 경로로 검토해야 한다.",
+      "description": "이중화 범위는 CPU뿐 아니라 전원, I/O, 서버, 네트워크, 시간동기, 데이터베이스와 현장 공통설비까지 End-to-End 경로로 검토해야 한다."
+    },
+    {
+      "id": "sw01_active_standby_architecture",
+      "anchor_id": "sw01_active_standby_architecture",
+      "statement": "Active/Standby 제어기 이중화는 주제어기와 대기제어기의 상태감시, 데이터 동기화, 절체판단 및 역할전환으로 구성된다.",
+      "importance": "Active/Standby 제어기 이중화는 주제어기와 대기제어기의 상태감시, 데이터 동기화, 절체판단 및 역할전환으로 구성된다.",
+      "keywords": [
+        "Active",
+        "Standby",
+        "redundant controller",
+        "heartbeat",
+        "role transition"
+      ],
+      "core_terms": [
+        "Active",
+        "Standby",
+        "redundant controller",
+        "heartbeat",
+        "role transition"
+      ],
+      "accepted_explanations": [
+        "Active와 Standby의 역할과 감시경로를 설명한다.",
+        "Split-brain 방지를 위한 역할결정과 통신경로를 언급한다."
+      ],
+      "rejected_explanations": [
+        "두 제어기가 동시에 출력을 구동해도 이중화 성능이 향상된다고 설명한다."
+      ],
+      "grading_notes": "Active/Standby 제어기 이중화는 주제어기와 대기제어기의 상태감시, 데이터 동기화, 절체판단 및 역할전환으로 구성된다.",
+      "source_basis": "Active/Standby 제어기 이중화는 주제어기와 대기제어기의 상태감시, 데이터 동기화, 절체판단 및 역할전환으로 구성된다.",
+      "claim": "Active/Standby 제어기 이중화는 주제어기와 대기제어기의 상태감시, 데이터 동기화, 절체판단 및 역할전환으로 구성된다.",
+      "description": "Active/Standby 제어기 이중화는 주제어기와 대기제어기의 상태감시, 데이터 동기화, 절체판단 및 역할전환으로 구성된다."
+    },
+    {
+      "id": "sw01_power_io_server_network_redundancy",
+      "anchor_id": "sw01_power_io_server_network_redundancy",
+      "statement": "전원·I/O·서버·네트워크 이중화는 각 계층의 고장모드, 공통부품, 절체시간, 유지보수 방법을 기준으로 독립적으로 설계해야 한다.",
+      "importance": "전원·I/O·서버·네트워크 이중화는 각 계층의 고장모드, 공통부품, 절체시간, 유지보수 방법을 기준으로 독립적으로 설계해야 한다.",
+      "keywords": [
+        "dual power supply",
+        "redundant I/O",
+        "redundant server",
+        "dual network",
+        "failure mode"
+      ],
+      "core_terms": [
+        "dual power supply",
+        "redundant I/O",
+        "redundant server",
+        "dual network",
+        "failure mode"
+      ],
+      "accepted_explanations": [
+        "전원 OR-ing, I/O 채널 또는 모듈 이중화, 서버 클러스터, 이중 네트워크의 차이를 구분한다.",
+        "각 이중화가 제거하지 못하는 공통고장점을 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 계층의 이중화를 모두 같은 절체방식으로 설명한다."
+      ],
+      "grading_notes": "전원·I/O·서버·네트워크 이중화는 각 계층의 고장모드, 공통부품, 절체시간, 유지보수 방법을 기준으로 독립적으로 설계해야 한다.",
+      "source_basis": "전원·I/O·서버·네트워크 이중화는 각 계층의 고장모드, 공통부품, 절체시간, 유지보수 방법을 기준으로 독립적으로 설계해야 한다.",
+      "claim": "전원·I/O·서버·네트워크 이중화는 각 계층의 고장모드, 공통부품, 절체시간, 유지보수 방법을 기준으로 독립적으로 설계해야 한다.",
+      "description": "전원·I/O·서버·네트워크 이중화는 각 계층의 고장모드, 공통부품, 절체시간, 유지보수 방법을 기준으로 독립적으로 설계해야 한다."
+    },
+    {
+      "id": "sw01_fault_detection_isolation",
+      "anchor_id": "sw01_fault_detection_isolation",
+      "statement": "절체는 Watchdog, Heartbeat, 자가진단, 통신상태, I/O Quality와 출력추종 상태를 조합하여 고장을 검출·격리한 뒤 수행해야 한다.",
+      "importance": "절체는 Watchdog, Heartbeat, 자가진단, 통신상태, I/O Quality와 출력추종 상태를 조합하여 고장을 검출·격리한 뒤 수행해야 한다.",
+      "keywords": [
+        "Watchdog",
+        "Heartbeat",
+        "self-diagnostic",
+        "I/O quality",
+        "fault detection",
+        "fault isolation"
+      ],
+      "core_terms": [
+        "Watchdog",
+        "Heartbeat",
+        "self-diagnostic",
+        "I/O quality",
+        "fault detection",
+        "fault isolation"
+      ],
+      "accepted_explanations": [
+        "단일 진단신호가 아니라 복수 증거와 지속시간을 이용해 오절체를 줄인다고 설명한다.",
+        "고장검출과 고장격리를 구분한다."
+      ],
+      "rejected_explanations": [
+        "Heartbeat 한 번 누락만으로 항상 즉시 절체해야 한다고 단정한다."
+      ],
+      "grading_notes": "절체는 Watchdog, Heartbeat, 자가진단, 통신상태, I/O Quality와 출력추종 상태를 조합하여 고장을 검출·격리한 뒤 수행해야 한다.",
+      "source_basis": "절체는 Watchdog, Heartbeat, 자가진단, 통신상태, I/O Quality와 출력추종 상태를 조합하여 고장을 검출·격리한 뒤 수행해야 한다.",
+      "claim": "절체는 Watchdog, Heartbeat, 자가진단, 통신상태, I/O Quality와 출력추종 상태를 조합하여 고장을 검출·격리한 뒤 수행해야 한다.",
+      "description": "절체는 Watchdog, Heartbeat, 자가진단, 통신상태, I/O Quality와 출력추종 상태를 조합하여 고장을 검출·격리한 뒤 수행해야 한다."
+    },
+    {
+      "id": "sw01_state_synchronization",
+      "anchor_id": "sw01_state_synchronization",
+      "statement": "Standby 제어기는 프로그램 버전, 내부상태, PID 적분상태, Sequence 상태, Setpoint와 출력값을 필요한 주기와 일관성으로 동기화해야 한다.",
+      "importance": "Standby 제어기는 프로그램 버전, 내부상태, PID 적분상태, Sequence 상태, Setpoint와 출력값을 필요한 주기와 일관성으로 동기화해야 한다.",
+      "keywords": [
+        "state synchronization",
+        "program version",
+        "PID integral state",
+        "sequence state",
+        "setpoint",
+        "output tracking"
+      ],
+      "core_terms": [
+        "state synchronization",
+        "program version",
+        "PID integral state",
+        "sequence state",
+        "setpoint",
+        "output tracking"
+      ],
+      "accepted_explanations": [
+        "정적 구성과 동적 운전상태의 동기화를 구분한다.",
+        "동기화 지연 또는 불일치가 절체 후 출력충격과 Sequence 역행을 만들 수 있음을 설명한다."
+      ],
+      "rejected_explanations": [
+        "프로그램 파일만 같으면 운전 중 상태동기화가 필요 없다고 본다."
+      ],
+      "grading_notes": "Standby 제어기는 프로그램 버전, 내부상태, PID 적분상태, Sequence 상태, Setpoint와 출력값을 필요한 주기와 일관성으로 동기화해야 한다.",
+      "source_basis": "Standby 제어기는 프로그램 버전, 내부상태, PID 적분상태, Sequence 상태, Setpoint와 출력값을 필요한 주기와 일관성으로 동기화해야 한다.",
+      "claim": "Standby 제어기는 프로그램 버전, 내부상태, PID 적분상태, Sequence 상태, Setpoint와 출력값을 필요한 주기와 일관성으로 동기화해야 한다.",
+      "description": "Standby 제어기는 프로그램 버전, 내부상태, PID 적분상태, Sequence 상태, Setpoint와 출력값을 필요한 주기와 일관성으로 동기화해야 한다."
+    },
+    {
+      "id": "sw01_bumpless_transfer",
+      "anchor_id": "sw01_bumpless_transfer",
+      "statement": "Bumpless Transfer는 절체 전 Standby의 내부상태와 출력명령을 Active에 추종시키고 절체 후 출력연속성과 제어모드를 유지하도록 설계하는 것이다.",
+      "importance": "Bumpless Transfer는 절체 전 Standby의 내부상태와 출력명령을 Active에 추종시키고 절체 후 출력연속성과 제어모드를 유지하도록 설계하는 것이다.",
+      "keywords": [
+        "Bumpless Transfer",
+        "output tracking",
+        "state tracking",
+        "output continuity",
+        "mode continuity"
+      ],
+      "core_terms": [
+        "Bumpless Transfer",
+        "output tracking",
+        "state tracking",
+        "output continuity",
+        "mode continuity"
+      ],
+      "accepted_explanations": [
+        "출력값뿐 아니라 PID 적분상태와 모드·Sequence 상태의 추종을 설명한다.",
+        "무정전 절체와 무충격 절체가 동일한 주장만은 아님을 구분한다."
+      ],
+      "rejected_explanations": [
+        "전원을 끊지 않으면 상태동기화 없이도 자동으로 무충격 절체가 된다고 설명한다."
+      ],
+      "grading_notes": "Bumpless Transfer는 절체 전 Standby의 내부상태와 출력명령을 Active에 추종시키고 절체 후 출력연속성과 제어모드를 유지하도록 설계하는 것이다.",
+      "source_basis": "Bumpless Transfer는 절체 전 Standby의 내부상태와 출력명령을 Active에 추종시키고 절체 후 출력연속성과 제어모드를 유지하도록 설계하는 것이다.",
+      "claim": "Bumpless Transfer는 절체 전 Standby의 내부상태와 출력명령을 Active에 추종시키고 절체 후 출력연속성과 제어모드를 유지하도록 설계하는 것이다.",
+      "description": "Bumpless Transfer는 절체 전 Standby의 내부상태와 출력명령을 Active에 추종시키고 절체 후 출력연속성과 제어모드를 유지하도록 설계하는 것이다."
+    },
+    {
+      "id": "sw01_failover_criteria",
+      "anchor_id": "sw01_failover_criteria",
+      "statement": "Failover 기준은 검출시간, 판정지속시간, 절체시간, 허용 공정중단시간, 오절체 위험과 복귀정책을 함께 고려해야 한다.",
+      "importance": "Failover 기준은 검출시간, 판정지속시간, 절체시간, 허용 공정중단시간, 오절체 위험과 복귀정책을 함께 고려해야 한다.",
+      "keywords": [
+        "failover criteria",
+        "detection time",
+        "decision delay",
+        "transfer time",
+        "process tolerance",
+        "false switchover"
+      ],
+      "core_terms": [
+        "failover criteria",
+        "detection time",
+        "decision delay",
+        "transfer time",
+        "process tolerance",
+        "false switchover"
+      ],
+      "accepted_explanations": [
+        "고장검출부터 출력회복까지의 전체 시간을 공정 허용시간과 비교한다.",
+        "즉시 절체와 지연검증의 Trade-off를 설명한다."
+      ],
+      "rejected_explanations": [
+        "절체가 빠를수록 오절체 위험과 관계없이 항상 더 안전하다고 단정한다."
+      ],
+      "grading_notes": "Failover 기준은 검출시간, 판정지속시간, 절체시간, 허용 공정중단시간, 오절체 위험과 복귀정책을 함께 고려해야 한다.",
+      "source_basis": "Failover 기준은 검출시간, 판정지속시간, 절체시간, 허용 공정중단시간, 오절체 위험과 복귀정책을 함께 고려해야 한다.",
+      "claim": "Failover 기준은 검출시간, 판정지속시간, 절체시간, 허용 공정중단시간, 오절체 위험과 복귀정책을 함께 고려해야 한다.",
+      "description": "Failover 기준은 검출시간, 판정지속시간, 절체시간, 허용 공정중단시간, 오절체 위험과 복귀정책을 함께 고려해야 한다."
+    },
+    {
+      "id": "sw01_degraded_mode_local_control",
+      "anchor_id": "sw01_degraded_mode_local_control",
+      "statement": "이중화 계층 일부가 상실되면 Degraded Mode, Local Control, Hold Last, Substitute Value 또는 안전상태 중 공정위험에 맞는 동작을 선택해야 한다.",
+      "importance": "이중화 계층 일부가 상실되면 Degraded Mode, Local Control, Hold Last, Substitute Value 또는 안전상태 중 공정위험에 맞는 동작을 선택해야 한다.",
+      "keywords": [
+        "Degraded Mode",
+        "Local Control",
+        "Hold Last",
+        "Substitute Value",
+        "safe state"
+      ],
+      "core_terms": [
+        "Degraded Mode",
+        "Local Control",
+        "Hold Last",
+        "Substitute Value",
+        "safe state"
+      ],
+      "accepted_explanations": [
+        "신호 성격과 공정동특성에 따라 Hold Last와 대체값의 적합성이 달라진다고 설명한다.",
+        "상위 통신 상실 시 현장제어의 독립성과 운전원 대응을 제시한다."
+      ],
+      "rejected_explanations": [
+        "통신장애 시 모든 신호에 Hold Last를 적용하면 항상 안전하다고 설명한다."
+      ],
+      "grading_notes": "이중화 계층 일부가 상실되면 Degraded Mode, Local Control, Hold Last, Substitute Value 또는 안전상태 중 공정위험에 맞는 동작을 선택해야 한다.",
+      "source_basis": "이중화 계층 일부가 상실되면 Degraded Mode, Local Control, Hold Last, Substitute Value 또는 안전상태 중 공정위험에 맞는 동작을 선택해야 한다.",
+      "claim": "이중화 계층 일부가 상실되면 Degraded Mode, Local Control, Hold Last, Substitute Value 또는 안전상태 중 공정위험에 맞는 동작을 선택해야 한다.",
+      "description": "이중화 계층 일부가 상실되면 Degraded Mode, Local Control, Hold Last, Substitute Value 또는 안전상태 중 공정위험에 맞는 동작을 선택해야 한다."
+    },
+    {
+      "id": "sw01_recovery_resynchronization",
+      "anchor_id": "sw01_recovery_resynchronization",
+      "statement": "고장복구 후에는 원인확인, 건전성검증, 버전·상태 재동기화, 부하전환, 재발감시를 거쳐 계획적으로 원복해야 한다.",
+      "importance": "고장복구 후에는 원인확인, 건전성검증, 버전·상태 재동기화, 부하전환, 재발감시를 거쳐 계획적으로 원복해야 한다.",
+      "keywords": [
+        "recovery",
+        "resynchronization",
+        "health verification",
+        "planned switchback",
+        "recurrence monitoring"
+      ],
+      "core_terms": [
+        "recovery",
+        "resynchronization",
+        "health verification",
+        "planned switchback",
+        "recurrence monitoring"
+      ],
+      "accepted_explanations": [
+        "절체 성공과 복구 완료를 구분한다.",
+        "원복 전 상태동기화와 공정안정 확인을 요구한다."
+      ],
+      "rejected_explanations": [
+        "고장장치가 재기동되면 검증 없이 즉시 Active로 원복해야 한다고 설명한다."
+      ],
+      "grading_notes": "고장복구 후에는 원인확인, 건전성검증, 버전·상태 재동기화, 부하전환, 재발감시를 거쳐 계획적으로 원복해야 한다.",
+      "source_basis": "고장복구 후에는 원인확인, 건전성검증, 버전·상태 재동기화, 부하전환, 재발감시를 거쳐 계획적으로 원복해야 한다.",
+      "claim": "고장복구 후에는 원인확인, 건전성검증, 버전·상태 재동기화, 부하전환, 재발감시를 거쳐 계획적으로 원복해야 한다.",
+      "description": "고장복구 후에는 원인확인, 건전성검증, 버전·상태 재동기화, 부하전환, 재발감시를 거쳐 계획적으로 원복해야 한다."
+    },
+    {
+      "id": "sw01_reliability_definition",
+      "anchor_id": "sw01_reliability_definition",
+      "statement": "Reliability는 정해진 조건과 기간 동안 요구기능을 고장 없이 수행할 확률이며 시간구간을 포함하는 개념이다.",
+      "importance": "Reliability는 정해진 조건과 기간 동안 요구기능을 고장 없이 수행할 확률이며 시간구간을 포함하는 개념이다.",
+      "keywords": [
+        "Reliability",
+        "mission time",
+        "failure-free probability",
+        "MTBF"
+      ],
+      "core_terms": [
+        "Reliability",
+        "mission time",
+        "failure-free probability",
+        "MTBF"
+      ],
+      "accepted_explanations": [
+        "신뢰도는 시간과 운전조건을 포함한다고 설명한다.",
+        "가용도와 동일한 값이 아님을 구분한다."
+      ],
+      "rejected_explanations": [
+        "신뢰도를 수리시간과 무관한 순간 운전가능 비율로만 정의한다."
+      ],
+      "grading_notes": "Reliability는 정해진 조건과 기간 동안 요구기능을 고장 없이 수행할 확률이며 시간구간을 포함하는 개념이다.",
+      "source_basis": "Reliability는 정해진 조건과 기간 동안 요구기능을 고장 없이 수행할 확률이며 시간구간을 포함하는 개념이다.",
+      "claim": "Reliability는 정해진 조건과 기간 동안 요구기능을 고장 없이 수행할 확률이며 시간구간을 포함하는 개념이다.",
+      "description": "Reliability는 정해진 조건과 기간 동안 요구기능을 고장 없이 수행할 확률이며 시간구간을 포함하는 개념이다."
+    },
+    {
+      "id": "sw01_maintainability_definition",
+      "anchor_id": "sw01_maintainability_definition",
+      "statement": "Maintainability는 정해진 조건에서 고장난 시스템을 규정시간 내 복구할 수 있는 능력이며 진단성, 접근성, 모듈교체와 절차 표준화에 좌우된다.",
+      "importance": "Maintainability는 정해진 조건에서 고장난 시스템을 규정시간 내 복구할 수 있는 능력이며 진단성, 접근성, 모듈교체와 절차 표준화에 좌우된다.",
+      "keywords": [
+        "Maintainability",
+        "repair time",
+        "MTTR",
+        "diagnosability",
+        "modular replacement"
+      ],
+      "core_terms": [
+        "Maintainability",
+        "repair time",
+        "MTTR",
+        "diagnosability",
+        "modular replacement"
+      ],
+      "accepted_explanations": [
+        "MTTR 감소와 진단·교체·복구절차의 관계를 설명한다.",
+        "예비품과 교육, 문서화가 정비도에 미치는 영향을 포함한다."
+      ],
+      "rejected_explanations": [
+        "정비도를 예비품 수량만으로 결정되는 값이라고 설명한다."
+      ],
+      "grading_notes": "Maintainability는 정해진 조건에서 고장난 시스템을 규정시간 내 복구할 수 있는 능력이며 진단성, 접근성, 모듈교체와 절차 표준화에 좌우된다.",
+      "source_basis": "Maintainability는 정해진 조건에서 고장난 시스템을 규정시간 내 복구할 수 있는 능력이며 진단성, 접근성, 모듈교체와 절차 표준화에 좌우된다.",
+      "claim": "Maintainability는 정해진 조건에서 고장난 시스템을 규정시간 내 복구할 수 있는 능력이며 진단성, 접근성, 모듈교체와 절차 표준화에 좌우된다.",
+      "description": "Maintainability는 정해진 조건에서 고장난 시스템을 규정시간 내 복구할 수 있는 능력이며 진단성, 접근성, 모듈교체와 절차 표준화에 좌우된다."
+    },
+    {
+      "id": "sw01_availability_definition",
+      "anchor_id": "sw01_availability_definition",
+      "statement": "Availability는 요구 시점에 시스템이 기능을 수행할 수 있는 확률 또는 시간비율이며 고장빈도와 복구시간의 영향을 함께 받는다.",
+      "importance": "Availability는 요구 시점에 시스템이 기능을 수행할 수 있는 확률 또는 시간비율이며 고장빈도와 복구시간의 영향을 함께 받는다.",
+      "keywords": [
+        "Availability",
+        "uptime",
+        "downtime",
+        "MTBF",
+        "MTTR"
+      ],
+      "core_terms": [
+        "Availability",
+        "uptime",
+        "downtime",
+        "MTBF",
+        "MTTR"
+      ],
+      "accepted_explanations": [
+        "가용도는 MTBF 증가와 MTTR 감소의 영향을 모두 받는다고 설명한다.",
+        "계획정지 포함 여부와 운용가용도 조건을 명시한다."
+      ],
+      "rejected_explanations": [
+        "MTBF만 알면 MTTR과 무관하게 가용도가 결정된다고 설명한다."
+      ],
+      "grading_notes": "Availability는 요구 시점에 시스템이 기능을 수행할 수 있는 확률 또는 시간비율이며 고장빈도와 복구시간의 영향을 함께 받는다.",
+      "source_basis": "Availability는 요구 시점에 시스템이 기능을 수행할 수 있는 확률 또는 시간비율이며 고장빈도와 복구시간의 영향을 함께 받는다.",
+      "claim": "Availability는 요구 시점에 시스템이 기능을 수행할 수 있는 확률 또는 시간비율이며 고장빈도와 복구시간의 영향을 함께 받는다.",
+      "description": "Availability는 요구 시점에 시스템이 기능을 수행할 수 있는 확률 또는 시간비율이며 고장빈도와 복구시간의 영향을 함께 받는다."
+    },
+    {
+      "id": "sw01_availability_formula",
+      "anchor_id": "sw01_availability_formula",
+      "statement": "수리가능 시스템의 단순 정상상태 고유가용도는 일정 고장률·수리율과 평균시간 가정에서 A = MTBF / (MTBF + MTTR)로 평가할 수 있다.",
+      "importance": "수리가능 시스템의 단순 정상상태 고유가용도는 일정 고장률·수리율과 평균시간 가정에서 A = MTBF / (MTBF + MTTR)로 평가할 수 있다.",
+      "keywords": [
+        "A=MTBF/(MTBF+MTTR)",
+        "inherent availability",
+        "steady state",
+        "repairable system"
+      ],
+      "core_terms": [
+        "A=MTBF/(MTBF+MTTR)",
+        "inherent availability",
+        "steady state",
+        "repairable system"
+      ],
+      "accepted_explanations": [
+        "식의 적용가정과 MTBF·MTTR 단위를 함께 제시한다.",
+        "계획정지와 물류지연을 포함하면 운용가용도는 별도로 평가해야 한다고 설명한다."
+      ],
+      "rejected_explanations": [
+        "A = MTTR / (MTBF + MTTR)로 정의하거나 적용조건 없이 모든 시스템에 동일하게 적용한다."
+      ],
+      "grading_notes": "수리가능 시스템의 단순 정상상태 고유가용도는 일정 고장률·수리율과 평균시간 가정에서 A = MTBF / (MTBF + MTTR)로 평가할 수 있다.",
+      "source_basis": "수리가능 시스템의 단순 정상상태 고유가용도는 일정 고장률·수리율과 평균시간 가정에서 A = MTBF / (MTBF + MTTR)로 평가할 수 있다.",
+      "claim": "수리가능 시스템의 단순 정상상태 고유가용도는 일정 고장률·수리율과 평균시간 가정에서 A = MTBF / (MTBF + MTTR)로 평가할 수 있다.",
+      "description": "수리가능 시스템의 단순 정상상태 고유가용도는 일정 고장률·수리율과 평균시간 가정에서 A = MTBF / (MTBF + MTTR)로 평가할 수 있다."
+    },
+    {
+      "id": "sw01_series_parallel_reliability",
+      "anchor_id": "sw01_series_parallel_reliability",
+      "statement": "독립고장 가정에서 직렬구조 신뢰도는 구성요소 신뢰도의 곱으로 감소하고, 병렬 이중화는 동시고장 확률을 줄이지만 공통원인고장을 별도로 반영해야 한다.",
+      "importance": "독립고장 가정에서 직렬구조 신뢰도는 구성요소 신뢰도의 곱으로 감소하고, 병렬 이중화는 동시고장 확률을 줄이지만 공통원인고장을 별도로 반영해야 한다.",
+      "keywords": [
+        "series reliability",
+        "parallel redundancy",
+        "independent failure",
+        "common cause failure"
+      ],
+      "core_terms": [
+        "series reliability",
+        "parallel redundancy",
+        "independent failure",
+        "common cause failure"
+      ],
+      "accepted_explanations": [
+        "직렬경로의 약한 구성요소와 병렬구조의 독립성 가정을 설명한다.",
+        "이중화 효과가 공통원인고장으로 제한됨을 지적한다."
+      ],
+      "rejected_explanations": [
+        "병렬 이중화의 두 채널은 항상 완전히 독립이라고 가정한다."
+      ],
+      "grading_notes": "독립고장 가정에서 직렬구조 신뢰도는 구성요소 신뢰도의 곱으로 감소하고, 병렬 이중화는 동시고장 확률을 줄이지만 공통원인고장을 별도로 반영해야 한다.",
+      "source_basis": "독립고장 가정에서 직렬구조 신뢰도는 구성요소 신뢰도의 곱으로 감소하고, 병렬 이중화는 동시고장 확률을 줄이지만 공통원인고장을 별도로 반영해야 한다.",
+      "claim": "독립고장 가정에서 직렬구조 신뢰도는 구성요소 신뢰도의 곱으로 감소하고, 병렬 이중화는 동시고장 확률을 줄이지만 공통원인고장을 별도로 반영해야 한다.",
+      "description": "독립고장 가정에서 직렬구조 신뢰도는 구성요소 신뢰도의 곱으로 감소하고, 병렬 이중화는 동시고장 확률을 줄이지만 공통원인고장을 별도로 반영해야 한다."
+    },
+    {
+      "id": "sw01_single_point_failure",
+      "anchor_id": "sw01_single_point_failure",
+      "statement": "Single Point of Failure는 하나의 고장만으로 요구기능 전체가 상실되는 구성요소 또는 경로이며 제어·전원·통신·냉각·시간동기·공통배선을 포함해 식별해야 한다.",
+      "importance": "Single Point of Failure는 하나의 고장만으로 요구기능 전체가 상실되는 구성요소 또는 경로이며 제어·전원·통신·냉각·시간동기·공통배선을 포함해 식별해야 한다.",
+      "keywords": [
+        "Single Point of Failure",
+        "SPOF",
+        "power",
+        "network",
+        "common wiring",
+        "time source"
+      ],
+      "core_terms": [
+        "Single Point of Failure",
+        "SPOF",
+        "power",
+        "network",
+        "common wiring",
+        "time source"
+      ],
+      "accepted_explanations": [
+        "CPU 외의 공통전원, 스위치, 커플러와 공통 케이블도 단일고장점으로 검토한다.",
+        "기능블록도와 고장경로를 이용해 End-to-End로 확인한다."
+      ],
+      "rejected_explanations": [
+        "제어기 두 대가 있으면 단일고장점 분석이 더 이상 필요 없다고 설명한다."
+      ],
+      "grading_notes": "Single Point of Failure는 하나의 고장만으로 요구기능 전체가 상실되는 구성요소 또는 경로이며 제어·전원·통신·냉각·시간동기·공통배선을 포함해 식별해야 한다.",
+      "source_basis": "Single Point of Failure는 하나의 고장만으로 요구기능 전체가 상실되는 구성요소 또는 경로이며 제어·전원·통신·냉각·시간동기·공통배선을 포함해 식별해야 한다.",
+      "claim": "Single Point of Failure는 하나의 고장만으로 요구기능 전체가 상실되는 구성요소 또는 경로이며 제어·전원·통신·냉각·시간동기·공통배선을 포함해 식별해야 한다.",
+      "description": "Single Point of Failure는 하나의 고장만으로 요구기능 전체가 상실되는 구성요소 또는 경로이며 제어·전원·통신·냉각·시간동기·공통배선을 포함해 식별해야 한다."
+    },
+    {
+      "id": "sw01_common_cause_failure",
+      "anchor_id": "sw01_common_cause_failure",
+      "statement": "Common Cause Failure는 공유 원인 하나가 다중 채널을 함께 고장내는 현상으로 동일 설계결함, 공통전원, 환경, 소프트웨어, 유지보수 오류가 원인이 될 수 있다.",
+      "importance": "Common Cause Failure는 공유 원인 하나가 다중 채널을 함께 고장내는 현상으로 동일 설계결함, 공통전원, 환경, 소프트웨어, 유지보수 오류가 원인이 될 수 있다.",
+      "keywords": [
+        "Common Cause Failure",
+        "CCF",
+        "common power",
+        "common software",
+        "environment",
+        "maintenance error"
+      ],
+      "core_terms": [
+        "Common Cause Failure",
+        "CCF",
+        "common power",
+        "common software",
+        "environment",
+        "maintenance error"
+      ],
+      "accepted_explanations": [
+        "이중화 채널의 독립성 한계를 설명한다.",
+        "공통원인고장은 단순 병렬 신뢰도식만으로 제거되지 않는다고 설명한다."
+      ],
+      "rejected_explanations": [
+        "하드웨어를 두 세트 설치하면 공통원인고장이 자동으로 제거된다고 설명한다."
+      ],
+      "grading_notes": "Common Cause Failure는 공유 원인 하나가 다중 채널을 함께 고장내는 현상으로 동일 설계결함, 공통전원, 환경, 소프트웨어, 유지보수 오류가 원인이 될 수 있다.",
+      "source_basis": "Common Cause Failure는 공유 원인 하나가 다중 채널을 함께 고장내는 현상으로 동일 설계결함, 공통전원, 환경, 소프트웨어, 유지보수 오류가 원인이 될 수 있다.",
+      "claim": "Common Cause Failure는 공유 원인 하나가 다중 채널을 함께 고장내는 현상으로 동일 설계결함, 공통전원, 환경, 소프트웨어, 유지보수 오류가 원인이 될 수 있다.",
+      "description": "Common Cause Failure는 공유 원인 하나가 다중 채널을 함께 고장내는 현상으로 동일 설계결함, 공통전원, 환경, 소프트웨어, 유지보수 오류가 원인이 될 수 있다."
+    },
+    {
+      "id": "sw01_independence_diversity_separation",
+      "anchor_id": "sw01_independence_diversity_separation",
+      "statement": "공통원인고장 저감은 전원·통신·배선의 독립성, 물리적 분리, 환경격리, 설계다양성, 독립시험과 변경통제를 조합하여 수행한다.",
+      "importance": "공통원인고장 저감은 전원·통신·배선의 독립성, 물리적 분리, 환경격리, 설계다양성, 독립시험과 변경통제를 조합하여 수행한다.",
+      "keywords": [
+        "independence",
+        "physical separation",
+        "diversity",
+        "environmental separation",
+        "independent test"
+      ],
+      "core_terms": [
+        "independence",
+        "physical separation",
+        "diversity",
+        "environmental separation",
+        "independent test"
+      ],
+      "accepted_explanations": [
+        "독립성과 다양성을 목적에 맞게 선택한다.",
+        "다양성이 복잡도와 유지보수 위험을 증가시킬 수 있음을 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 공급업체 제품을 사용하면 검증 없이 완전한 독립성이 보장된다고 설명한다."
+      ],
+      "grading_notes": "공통원인고장 저감은 전원·통신·배선의 독립성, 물리적 분리, 환경격리, 설계다양성, 독립시험과 변경통제를 조합하여 수행한다.",
+      "source_basis": "공통원인고장 저감은 전원·통신·배선의 독립성, 물리적 분리, 환경격리, 설계다양성, 독립시험과 변경통제를 조합하여 수행한다.",
+      "claim": "공통원인고장 저감은 전원·통신·배선의 독립성, 물리적 분리, 환경격리, 설계다양성, 독립시험과 변경통제를 조합하여 수행한다.",
+      "description": "공통원인고장 저감은 전원·통신·배선의 독립성, 물리적 분리, 환경격리, 설계다양성, 독립시험과 변경통제를 조합하여 수행한다."
+    },
+    {
+      "id": "sw01_maintenance_online_test",
+      "anchor_id": "sw01_maintenance_online_test",
+      "statement": "고가용성은 온라인 교체, 정기 절체시험, 진단시험, 예비품, 장애기록과 복구훈련을 포함한 유지보수 체계가 실제로 작동할 때 달성된다.",
+      "importance": "고가용성은 온라인 교체, 정기 절체시험, 진단시험, 예비품, 장애기록과 복구훈련을 포함한 유지보수 체계가 실제로 작동할 때 달성된다.",
+      "keywords": [
+        "online maintenance",
+        "switchover test",
+        "diagnostic test",
+        "spare parts",
+        "failure record",
+        "recovery drill"
+      ],
+      "core_terms": [
+        "online maintenance",
+        "switchover test",
+        "diagnostic test",
+        "spare parts",
+        "failure record",
+        "recovery drill"
+      ],
+      "accepted_explanations": [
+        "설계상 이중화와 실제 정비절차의 관계를 설명한다.",
+        "시험 자체가 공정위험을 만들 수 있으므로 조건과 복구절차를 정한다고 설명한다."
+      ],
+      "rejected_explanations": [
+        "이중화 시스템은 고장 시 자동절체되므로 정기시험과 복구훈련이 필요 없다고 설명한다."
+      ],
+      "grading_notes": "고가용성은 온라인 교체, 정기 절체시험, 진단시험, 예비품, 장애기록과 복구훈련을 포함한 유지보수 체계가 실제로 작동할 때 달성된다.",
+      "source_basis": "고가용성은 온라인 교체, 정기 절체시험, 진단시험, 예비품, 장애기록과 복구훈련을 포함한 유지보수 체계가 실제로 작동할 때 달성된다.",
+      "claim": "고가용성은 온라인 교체, 정기 절체시험, 진단시험, 예비품, 장애기록과 복구훈련을 포함한 유지보수 체계가 실제로 작동할 때 달성된다.",
+      "description": "고가용성은 온라인 교체, 정기 절체시험, 진단시험, 예비품, 장애기록과 복구훈련을 포함한 유지보수 체계가 실제로 작동할 때 달성된다."
+    },
+    {
+      "id": "sw01_selection_tradeoff",
+      "anchor_id": "sw01_selection_tradeoff",
+      "statement": "이중화 수준은 공정중단 결과, 허용중단시간, 복구자원, 정비능력, 생애주기비용과 복잡도를 비교하여 선정해야 한다.",
+      "importance": "이중화 수준은 공정중단 결과, 허용중단시간, 복구자원, 정비능력, 생애주기비용과 복잡도를 비교하여 선정해야 한다.",
+      "keywords": [
+        "risk-based selection",
+        "allowable downtime",
+        "lifecycle cost",
+        "complexity",
+        "maintainability"
+      ],
+      "core_terms": [
+        "risk-based selection",
+        "allowable downtime",
+        "lifecycle cost",
+        "complexity",
+        "maintainability"
+      ],
+      "accepted_explanations": [
+        "모든 계층의 최대 이중화가 항상 최적은 아니며 위험기반으로 선정한다고 설명한다.",
+        "초기비용뿐 아니라 시험·예비품·교육·단종대응 비용을 포함한다."
+      ],
+      "rejected_explanations": [
+        "이중화 수준은 공정위험과 무관하게 장비 수량이 많을수록 항상 우수하다고 설명한다."
+      ],
+      "grading_notes": "이중화 수준은 공정중단 결과, 허용중단시간, 복구자원, 정비능력, 생애주기비용과 복잡도를 비교하여 선정해야 한다.",
+      "source_basis": "이중화 수준은 공정중단 결과, 허용중단시간, 복구자원, 정비능력, 생애주기비용과 복잡도를 비교하여 선정해야 한다.",
+      "claim": "이중화 수준은 공정중단 결과, 허용중단시간, 복구자원, 정비능력, 생애주기비용과 복잡도를 비교하여 선정해야 한다.",
+      "description": "이중화 수준은 공정중단 결과, 허용중단시간, 복구자원, 정비능력, 생애주기비용과 복잡도를 비교하여 선정해야 한다."
+    },
+    {
+      "id": "sw01_acceptance_metrics",
+      "anchor_id": "sw01_acceptance_metrics",
+      "statement": "수용기준은 고장검출시간, 절체시간, 출력변동, 데이터손실, 복구시간, 가용도 목표와 정기시험 결과로 정량화해야 한다.",
+      "importance": "수용기준은 고장검출시간, 절체시간, 출력변동, 데이터손실, 복구시간, 가용도 목표와 정기시험 결과로 정량화해야 한다.",
+      "keywords": [
+        "detection time",
+        "failover time",
+        "output deviation",
+        "data loss",
+        "recovery time",
+        "availability target"
+      ],
+      "core_terms": [
+        "detection time",
+        "failover time",
+        "output deviation",
+        "data loss",
+        "recovery time",
+        "availability target"
+      ],
+      "accepted_explanations": [
+        "FAT·SAT에서 재현 가능한 고장주입과 계측기준을 제시한다.",
+        "정상절체뿐 아니라 통신·전원·서버·I/O 고장 시나리오를 포함한다."
+      ],
+      "rejected_explanations": [
+        "이중화 장비가 설치되어 있으면 절체시간과 출력변동 시험은 생략할 수 있다고 설명한다."
+      ],
+      "grading_notes": "수용기준은 고장검출시간, 절체시간, 출력변동, 데이터손실, 복구시간, 가용도 목표와 정기시험 결과로 정량화해야 한다.",
+      "source_basis": "수용기준은 고장검출시간, 절체시간, 출력변동, 데이터손실, 복구시간, 가용도 목표와 정기시험 결과로 정량화해야 한다.",
+      "claim": "수용기준은 고장검출시간, 절체시간, 출력변동, 데이터손실, 복구시간, 가용도 목표와 정기시험 결과로 정량화해야 한다.",
+      "description": "수용기준은 고장검출시간, 절체시간, 출력변동, 데이터손실, 복구시간, 가용도 목표와 정기시험 결과로 정량화해야 한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "sw01_fatal_redundancy_removes_all_ccf",
+      "claim": "이중화 구성만 하면 공통원인고장이 제거된다.",
+      "wrong_claim": "이중화 구성만 하면 공통원인고장이 제거된다.",
+      "correction": "이중화는 독립고장에 대한 가용도를 높이지만 공통전원·환경·소프트웨어·정비오류 등 공통원인고장은 별도로 분석하고 저감해야 한다.",
+      "correct_rule": "이중화 구성만 하면 공통원인고장이 제거된다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "이중화 구성만 하면 공통원인고장이 제거된다.",
+      "description": "이중화 구성만 하면 공통원인고장이 제거된다.",
+      "grading_notes": "이중화 구성만 하면 공통원인고장이 제거된다."
+    },
+    {
+      "id": "sw01_fatal_bumpless_without_sync",
+      "claim": "Standby 제어기는 상태·출력 동기화 없이 즉시 무충격 절체할 수 있다.",
+      "wrong_claim": "Standby 제어기는 상태·출력 동기화 없이 즉시 무충격 절체할 수 있다.",
+      "correction": "Bumpless Transfer에는 프로그램과 내부상태, PID 적분상태, Sequence 상태, Setpoint와 출력추종이 필요하다.",
+      "correct_rule": "Standby 제어기는 상태·출력 동기화 없이 즉시 무충격 절체할 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Standby 제어기는 상태·출력 동기화 없이 즉시 무충격 절체할 수 있다.",
+      "description": "Standby 제어기는 상태·출력 동기화 없이 즉시 무충격 절체할 수 있다.",
+      "grading_notes": "Standby 제어기는 상태·출력 동기화 없이 즉시 무충격 절체할 수 있다."
+    },
+    {
+      "id": "sw01_fatal_remote_io_always_normal",
+      "claim": "Remote I/O 통신이 단절되어도 모든 제어기능은 항상 정상 유지된다.",
+      "wrong_claim": "Remote I/O 통신이 단절되어도 모든 제어기능은 항상 정상 유지된다.",
+      "correction": "통신상실 영향은 제어위치와 I/O Fallback 설정에 따라 달라지며 Hold Last, 대체값, Local Control 또는 안전상태를 설계해야 한다.",
+      "correct_rule": "Remote I/O 통신이 단절되어도 모든 제어기능은 항상 정상 유지된다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Remote I/O 통신이 단절되어도 모든 제어기능은 항상 정상 유지된다.",
+      "description": "Remote I/O 통신이 단절되어도 모든 제어기능은 항상 정상 유지된다.",
+      "grading_notes": "Remote I/O 통신이 단절되어도 모든 제어기능은 항상 정상 유지된다."
+    },
+    {
+      "id": "sw01_fatal_reliability_equals_availability",
+      "claim": "신뢰도와 가용도는 동일한 개념이다.",
+      "wrong_claim": "신뢰도와 가용도는 동일한 개념이다.",
+      "correction": "신뢰도는 기간 동안 무고장 수행확률이고 가용도는 요구 시 기능수행 가능비율로서 MTBF와 MTTR의 영향을 함께 받는다.",
+      "correct_rule": "신뢰도와 가용도는 동일한 개념이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "신뢰도와 가용도는 동일한 개념이다.",
+      "description": "신뢰도와 가용도는 동일한 개념이다.",
+      "grading_notes": "신뢰도와 가용도는 동일한 개념이다."
+    },
+    {
+      "id": "sw01_fatal_mtbf_alone_determines_availability",
+      "claim": "MTBF만 높으면 MTTR과 관계없이 가용도는 항상 높다.",
+      "wrong_claim": "MTBF만 높으면 MTTR과 관계없이 가용도는 항상 높다.",
+      "correction": "단순 정상상태 고유가용도는 A = MTBF/(MTBF+MTTR)이므로 MTBF와 MTTR을 함께 평가한다.",
+      "correct_rule": "MTBF만 높으면 MTTR과 관계없이 가용도는 항상 높다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "MTBF만 높으면 MTTR과 관계없이 가용도는 항상 높다.",
+      "description": "MTBF만 높으면 MTTR과 관계없이 가용도는 항상 높다.",
+      "grading_notes": "MTBF만 높으면 MTTR과 관계없이 가용도는 항상 높다."
+    },
+    {
+      "id": "sw01_fatal_cpu_redundancy_is_end_to_end",
+      "claim": "CPU 이중화만으로 전원·I/O·통신망의 단일고장점도 모두 제거된다.",
+      "wrong_claim": "CPU 이중화만으로 전원·I/O·통신망의 단일고장점도 모두 제거된다.",
+      "correction": "End-to-End 제어경로에서 전원, I/O, 서버, 네트워크, 공통배선과 시간원까지 단일고장점을 검토한다.",
+      "correct_rule": "CPU 이중화만으로 전원·I/O·통신망의 단일고장점도 모두 제거된다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "CPU 이중화만으로 전원·I/O·통신망의 단일고장점도 모두 제거된다.",
+      "description": "CPU 이중화만으로 전원·I/O·통신망의 단일고장점도 모두 제거된다.",
+      "grading_notes": "CPU 이중화만으로 전원·I/O·통신망의 단일고장점도 모두 제거된다."
+    },
+    {
+      "id": "sw01_fatal_immediate_switchback",
+      "claim": "고장절체 후 원인분석과 재동기화 없이 즉시 원복하는 것이 최선이다.",
+      "wrong_claim": "고장절체 후 원인분석과 재동기화 없이 즉시 원복하는 것이 최선이다.",
+      "correction": "원복 전 건전성 확인, 버전·상태 재동기화, 공정안정 확인과 계획된 부하전환이 필요하다.",
+      "correct_rule": "고장절체 후 원인분석과 재동기화 없이 즉시 원복하는 것이 최선이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "고장절체 후 원인분석과 재동기화 없이 즉시 원복하는 것이 최선이다.",
+      "description": "고장절체 후 원인분석과 재동기화 없이 즉시 원복하는 것이 최선이다.",
+      "grading_notes": "고장절체 후 원인분석과 재동기화 없이 즉시 원복하는 것이 최선이다."
+    },
+    {
+      "id": "sw01_fatal_fastest_failover_always_best",
+      "claim": "절체시간은 짧을수록 오절체 위험과 관계없이 항상 안전하다.",
+      "wrong_claim": "절체시간은 짧을수록 오절체 위험과 관계없이 항상 안전하다.",
+      "correction": "검출·판정지연·절체시간은 공정 허용시간과 오절체 위험 사이의 Trade-off로 결정한다.",
+      "correct_rule": "절체시간은 짧을수록 오절체 위험과 관계없이 항상 안전하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "절체시간은 짧을수록 오절체 위험과 관계없이 항상 안전하다.",
+      "description": "절체시간은 짧을수록 오절체 위험과 관계없이 항상 안전하다.",
+      "grading_notes": "절체시간은 짧을수록 오절체 위험과 관계없이 항상 안전하다."
+    },
+    {
+      "id": "sw01_fatal_hold_last_always_safe",
+      "claim": "통신장애 시 모든 신호를 Hold Last로 유지하면 항상 안전하다.",
+      "wrong_claim": "통신장애 시 모든 신호를 Hold Last로 유지하면 항상 안전하다.",
+      "correction": "신호 역할과 공정동특성에 따라 Hold Last, 대체값, Local Control 또는 안전상태를 선택한다.",
+      "correct_rule": "통신장애 시 모든 신호를 Hold Last로 유지하면 항상 안전하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "통신장애 시 모든 신호를 Hold Last로 유지하면 항상 안전하다.",
+      "description": "통신장애 시 모든 신호를 Hold Last로 유지하면 항상 안전하다.",
+      "grading_notes": "통신장애 시 모든 신호를 Hold Last로 유지하면 항상 안전하다."
+    },
+    {
+      "id": "sw01_fatal_parallel_assumes_no_ccf",
+      "claim": "병렬 이중화 채널은 항상 완전히 독립이므로 동시고장을 고려할 필요가 없다.",
+      "wrong_claim": "병렬 이중화 채널은 항상 완전히 독립이므로 동시고장을 고려할 필요가 없다.",
+      "correction": "병렬 신뢰도식의 독립고장 가정을 명시하고 공통원인고장을 별도로 반영해야 한다.",
+      "correct_rule": "병렬 이중화 채널은 항상 완전히 독립이므로 동시고장을 고려할 필요가 없다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "병렬 이중화 채널은 항상 완전히 독립이므로 동시고장을 고려할 필요가 없다.",
+      "description": "병렬 이중화 채널은 항상 완전히 독립이므로 동시고장을 고려할 필요가 없다.",
+      "grading_notes": "병렬 이중화 채널은 항상 완전히 독립이므로 동시고장을 고려할 필요가 없다."
+    },
+    {
+      "id": "sw01_fatal_no_periodic_test_needed",
+      "claim": "자동절체 기능이 있으므로 이중화 시스템은 정기 절체시험과 복구훈련이 필요 없다.",
+      "wrong_claim": "자동절체 기능이 있으므로 이중화 시스템은 정기 절체시험과 복구훈련이 필요 없다.",
+      "correction": "진단기능, 절체경로와 복구절차의 잠재고장을 확인하려면 위험을 통제한 정기시험과 훈련이 필요하다.",
+      "correct_rule": "자동절체 기능이 있으므로 이중화 시스템은 정기 절체시험과 복구훈련이 필요 없다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "자동절체 기능이 있으므로 이중화 시스템은 정기 절체시험과 복구훈련이 필요 없다.",
+      "description": "자동절체 기능이 있으므로 이중화 시스템은 정기 절체시험과 복구훈련이 필요 없다.",
+      "grading_notes": "자동절체 기능이 있으므로 이중화 시스템은 정기 절체시험과 복구훈련이 필요 없다."
+    },
+    {
+      "id": "sw01_fatal_scada_failure_stops_all_loops",
+      "claim": "SCADA 서버가 고장나면 모든 현장 폐루프는 반드시 즉시 정지한다.",
+      "wrong_claim": "SCADA 서버가 고장나면 모든 현장 폐루프는 반드시 즉시 정지한다.",
+      "correction": "현장제어기와 상위 감시계층의 독립성에 따라 폐루프는 유지될 수 있으나 운전가시성·명령·기록 기능 저하를 별도로 평가해야 한다.",
+      "correct_rule": "SCADA 서버가 고장나면 모든 현장 폐루프는 반드시 즉시 정지한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "SCADA 서버가 고장나면 모든 현장 폐루프는 반드시 즉시 정지한다.",
+      "description": "SCADA 서버가 고장나면 모든 현장 폐루프는 반드시 즉시 정지한다.",
+      "grading_notes": "SCADA 서버가 고장나면 모든 현장 폐루프는 반드시 즉시 정지한다."
+    }
+  ],
+  "safe_expressions": [
+    "PLC, DCS, SCADA와 PC 기반 제어는 공정특성·제어주기·장애영향에 따라 역할과 선정기준이 달라진다.",
+    "Remote I/O는 배선을 줄이지만 통신망·커플러·공통전원 장애의 영향범위를 분석해야 한다.",
+    "이중화는 CPU뿐 아니라 전원·I/O·서버·네트워크를 포함한 End-to-End 경로로 검토한다.",
+    "절체는 고장검출, 고장격리, 판정지속시간과 공정 허용시간을 함께 고려한다.",
+    "Bumpless Transfer에는 동적상태와 출력추종이 필요하다.",
+    "Degraded Mode와 Local Control은 공정위험에 맞게 사전에 정의한다.",
+    "Reliability와 Availability는 관련되지만 동일하지 않다.",
+    "단순 고유가용도는 일정 고장률·수리율 가정에서 A = MTBF/(MTBF+MTTR)로 평가할 수 있다.",
+    "병렬 이중화의 신뢰도 향상은 독립고장 가정에 의존한다.",
+    "공통원인고장은 독립성·다양성·물리적 분리와 변경통제로 저감한다.",
+    "절체 성공과 완전한 복구·재동기화 완료는 구분해야 한다.",
+    "정기시험과 복구훈련은 잠재고장과 절차결함을 확인하는 수단이다.",
+    "상위 SCADA 장애와 현장 제어기 장애의 공정영향은 다르게 평가한다.",
+    "Hold Last와 Substitute Value는 신호기능과 공정동특성에 따라 선택한다.",
+    "이중화 선정은 가용도 목표, 공정중단 결과, 정비능력과 생애주기비용을 함께 고려한다.",
+    "절체 수용기준은 검출시간, 절체시간, 출력변동, 데이터손실과 복구시간으로 정량화한다."
+  ],
+  "revision_notes": [
+    "2026-08-06: SW-01 L2 Canonical Source Topic Pack 최초 작성.",
+    "기존 plc_dcs_remote_io, reliability_maintainability_availability_ram을 Legacy Seed로 보존.",
+    "hmi_scada는 SW-01 구조와 SW-03 운전정보 관리로 Handoff.",
+    "고장검출·Bumpless Transfer·SPOF·CCF·복구·정량 수용기준을 보완."
+  ],
+  "topic_label": "제어시스템 구조·이중화·가용도·신뢰도",
+  "core_facts": [
+    "PLC, DCS, SCADA, PC 기반 제어와 Remote I/O는 제어주기, 공정 연속성, 분산범위, 확장성, 유지보수성 및 장애영향을 기준으로 역할을 구분하고 선정해야 한다.",
+    "제어시스템은 현장기기·Remote I/O·제어기·제어네트워크·운전서버·운전원 단말의 계층으로 구성되며 제어경로와 감시경로의 장애영향을 구분해야 한다.",
+    "PLC 시스템은 CPU, 전원, 로컬·Remote I/O, 통신모듈과 엔지니어링 도구로 구성되며 기계·배치·시퀀스 제어에서 결정적 주기와 모듈성을 확보한다.",
+    "DCS는 공정제어기, 분산 I/O, 제어네트워크, 운전·엔지니어링 서버와 공통 데이터베이스를 통합하여 연속공정의 가용성과 운전일관성을 확보한다.",
+    "SCADA와 PC 기반 제어는 감시·수집·분석·원격운전 또는 소프트웨어 기반 제어에 유리하지만 운영체제, 네트워크, 서버 장애와 패치 영향까지 설계해야 한다.",
+    "Remote I/O는 현장 배선을 줄이고 분산 설치와 확장을 용이하게 하지만 통신망·커플러·전원 장애가 다수 신호에 공통 영향을 줄 수 있다.",
+    "이중화 범위는 CPU뿐 아니라 전원, I/O, 서버, 네트워크, 시간동기, 데이터베이스와 현장 공통설비까지 End-to-End 경로로 검토해야 한다.",
+    "Active/Standby 제어기 이중화는 주제어기와 대기제어기의 상태감시, 데이터 동기화, 절체판단 및 역할전환으로 구성된다.",
+    "전원·I/O·서버·네트워크 이중화는 각 계층의 고장모드, 공통부품, 절체시간, 유지보수 방법을 기준으로 독립적으로 설계해야 한다.",
+    "절체는 Watchdog, Heartbeat, 자가진단, 통신상태, I/O Quality와 출력추종 상태를 조합하여 고장을 검출·격리한 뒤 수행해야 한다.",
+    "Standby 제어기는 프로그램 버전, 내부상태, PID 적분상태, Sequence 상태, Setpoint와 출력값을 필요한 주기와 일관성으로 동기화해야 한다.",
+    "Bumpless Transfer는 절체 전 Standby의 내부상태와 출력명령을 Active에 추종시키고 절체 후 출력연속성과 제어모드를 유지하도록 설계하는 것이다.",
+    "Failover 기준은 검출시간, 판정지속시간, 절체시간, 허용 공정중단시간, 오절체 위험과 복귀정책을 함께 고려해야 한다.",
+    "이중화 계층 일부가 상실되면 Degraded Mode, Local Control, Hold Last, Substitute Value 또는 안전상태 중 공정위험에 맞는 동작을 선택해야 한다.",
+    "고장복구 후에는 원인확인, 건전성검증, 버전·상태 재동기화, 부하전환, 재발감시를 거쳐 계획적으로 원복해야 한다.",
+    "Reliability는 정해진 조건과 기간 동안 요구기능을 고장 없이 수행할 확률이며 시간구간을 포함하는 개념이다.",
+    "Maintainability는 정해진 조건에서 고장난 시스템을 규정시간 내 복구할 수 있는 능력이며 진단성, 접근성, 모듈교체와 절차 표준화에 좌우된다.",
+    "Availability는 요구 시점에 시스템이 기능을 수행할 수 있는 확률 또는 시간비율이며 고장빈도와 복구시간의 영향을 함께 받는다.",
+    "수리가능 시스템의 단순 정상상태 고유가용도는 일정 고장률·수리율과 평균시간 가정에서 A = MTBF / (MTBF + MTTR)로 평가할 수 있다.",
+    "독립고장 가정에서 직렬구조 신뢰도는 구성요소 신뢰도의 곱으로 감소하고, 병렬 이중화는 동시고장 확률을 줄이지만 공통원인고장을 별도로 반영해야 한다.",
+    "Single Point of Failure는 하나의 고장만으로 요구기능 전체가 상실되는 구성요소 또는 경로이며 제어·전원·통신·냉각·시간동기·공통배선을 포함해 식별해야 한다.",
+    "Common Cause Failure는 공유 원인 하나가 다중 채널을 함께 고장내는 현상으로 동일 설계결함, 공통전원, 환경, 소프트웨어, 유지보수 오류가 원인이 될 수 있다.",
+    "공통원인고장 저감은 전원·통신·배선의 독립성, 물리적 분리, 환경격리, 설계다양성, 독립시험과 변경통제를 조합하여 수행한다.",
+    "고가용성은 온라인 교체, 정기 절체시험, 진단시험, 예비품, 장애기록과 복구훈련을 포함한 유지보수 체계가 실제로 작동할 때 달성된다.",
+    "이중화 수준은 공정중단 결과, 허용중단시간, 복구자원, 정비능력, 생애주기비용과 복잡도를 비교하여 선정해야 한다.",
+    "수용기준은 고장검출시간, 절체시간, 출력변동, 데이터손실, 복구시간, 가용도 목표와 정기시험 결과로 정량화해야 한다."
+  ]
+}
