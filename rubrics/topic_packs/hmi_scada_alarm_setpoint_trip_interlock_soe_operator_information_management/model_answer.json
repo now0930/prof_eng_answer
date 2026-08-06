@@ -1,0 +1,293 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+  "title_ko": "HMI·SCADA·Alarm·Setpoint·Trip·Interlock·SOE 및 운전정보 관리",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "HMI와 SCADA의 구조, 기능 및 신뢰성 설계기준을 설명하시오.",
+      "intent": "감시구조와 운전정보 신뢰성",
+      "required_anchor_ids": [
+        "sw03_hmi_scada_architecture",
+        "sw03_architecture_redundancy_quality",
+        "sw03_data_quality_display"
+      ]
+    },
+    {
+      "pattern": "High-performance HMI의 설계원칙과 화면계층을 설명하시오.",
+      "intent": "상황인식 중심 화면설계",
+      "required_anchor_ids": [
+        "sw03_high_performance_hmi",
+        "sw03_display_hierarchy",
+        "sw03_color_context_navigation"
+      ]
+    },
+    {
+      "pattern": "Alarm philosophy와 Alarm rationalization의 목적 및 절차를 설명하시오.",
+      "intent": "경보정책과 개별경보 승인",
+      "required_anchor_ids": [
+        "sw03_alarm_philosophy",
+        "sw03_alarm_rationalization",
+        "sw03_alarm_priority"
+      ]
+    },
+    {
+      "pattern": "Alarm priority, Deadband와 Delay의 선정기준을 설명하시오.",
+      "intent": "경보 우선순위와 nuisance 저감",
+      "required_anchor_ids": [
+        "sw03_alarm_priority",
+        "sw03_alarm_deadband",
+        "sw03_alarm_delay"
+      ]
+    },
+    {
+      "pattern": "Alarm Shelving과 Suppression의 차이와 관리방안을 설명하시오.",
+      "intent": "임시 숨김과 상태기반 자동제외",
+      "required_anchor_ids": [
+        "sw03_alarm_shelving",
+        "sw03_alarm_suppression",
+        "sw03_audit_trail"
+      ]
+    },
+    {
+      "pattern": "Setpoint, Alarm value, Trip value와 Interlock value의 차이 및 관리기준을 설명하시오.",
+      "intent": "값의 목적·소유권·변경관리",
+      "required_anchor_ids": [
+        "sw03_setpoint_value_classes",
+        "sw03_setpoint_governance",
+        "sw03_alarm_trip_interlock_boundary"
+      ]
+    },
+    {
+      "pattern": "SOE의 원리와 시각동기, Historian 및 First-out과의 관계를 설명하시오.",
+      "intent": "이벤트 선후관계와 원인분석",
+      "required_anchor_ids": [
+        "sw03_soe_definition",
+        "sw03_time_sync_resolution",
+        "sw03_historian_vs_soe",
+        "sw03_first_out_relation"
+      ]
+    },
+    {
+      "pattern": "운전정보 시스템의 Audit trail과 운전자 권한 관리방안을 설명하시오.",
+      "intent": "사용자 행위와 중요조작 통제",
+      "required_anchor_ids": [
+        "sw03_audit_trail",
+        "sw03_operator_authority",
+        "sw03_human_error_prevention"
+      ]
+    },
+    {
+      "pattern": "Alarm flood와 Chattering의 문제점 및 개선방안을 설명하시오.",
+      "intent": "경보과부하 진단과 개선",
+      "required_anchor_ids": [
+        "sw03_alarm_flood_chattering",
+        "sw03_alarm_performance_kpi",
+        "sw03_alarm_rationalization"
+      ]
+    },
+    {
+      "pattern": "HMI·SCADA를 이용한 Abnormal situation management 방안을 설명하시오.",
+      "intent": "발견·진단·대응·복구",
+      "required_anchor_ids": [
+        "sw03_abnormal_situation_management",
+        "sw03_high_performance_hmi",
+        "sw03_alarm_state_acknowledgement",
+        "sw03_data_quality_display"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 배경과 SW-03 소유범위",
+      "intent": "운전정보 관리의 목적과 SW-02·SW-04·SW-10 경계를 제시한다.",
+      "anchor_refs": [
+        "sw03_scope_operator_information",
+        "sw03_sw02_boundary",
+        "sw03_sw04_sw10_boundary"
+      ]
+    },
+    {
+      "section": "2. HMI·SCADA 구조와 정보신뢰성",
+      "intent": "감시구조, Failover, 데이터 품질과 통신단절 표시를 설명한다.",
+      "anchor_refs": [
+        "sw03_hmi_scada_architecture",
+        "sw03_architecture_redundancy_quality",
+        "sw03_data_quality_display"
+      ]
+    },
+    {
+      "section": "3. High-performance HMI와 화면계층",
+      "intent": "Overview, 상세화면, 추세, 색상과 맥락을 상황인식 관점에서 연결한다.",
+      "anchor_refs": [
+        "sw03_high_performance_hmi",
+        "sw03_display_hierarchy",
+        "sw03_color_context_navigation"
+      ]
+    },
+    {
+      "section": "4. Alarm 철학·합리화·우선순위",
+      "intent": "Alarm의 정의, 상위정책, 원인-결과-조치-응답시간과 우선순위를 설명한다.",
+      "anchor_refs": [
+        "sw03_alarm_definition",
+        "sw03_alarm_philosophy",
+        "sw03_alarm_rationalization",
+        "sw03_alarm_priority"
+      ]
+    },
+    {
+      "section": "5. Alarm 상태와 Nuisance 관리",
+      "intent": "Active·Acknowledge·Return-to-normal과 Deadband, Delay, Shelving, Suppression을 비교한다.",
+      "anchor_refs": [
+        "sw03_alarm_state_acknowledgement",
+        "sw03_alarm_deadband",
+        "sw03_alarm_delay",
+        "sw03_alarm_shelving",
+        "sw03_alarm_suppression"
+      ]
+    },
+    {
+      "section": "6. Setpoint·Alarm·Trip·Interlock 값 관리",
+      "intent": "값의 목적과 소유권, Setpoint list, 권한과 변경이력을 제시한다.",
+      "anchor_refs": [
+        "sw03_setpoint_value_classes",
+        "sw03_setpoint_governance",
+        "sw03_alarm_trip_interlock_boundary"
+      ]
+    },
+    {
+      "section": "7. SOE·Historian·First-out·Audit trail",
+      "intent": "기록대상, Timestamp, 시각동기, 선후관계와 사용자 행위기록을 구분한다.",
+      "anchor_refs": [
+        "sw03_soe_definition",
+        "sw03_time_sync_resolution",
+        "sw03_historian_vs_soe",
+        "sw03_first_out_relation",
+        "sw03_audit_trail"
+      ]
+    },
+    {
+      "section": "8. 권한·Human error·비정상상황 대응",
+      "intent": "역할기반 권한, 명령·Feedback 확인과 Detect-Diagnose-Respond-Recover 흐름을 결론으로 정리한다.",
+      "anchor_refs": [
+        "sw03_operator_authority",
+        "sw03_human_error_prevention",
+        "sw03_alarm_flood_chattering",
+        "sw03_alarm_performance_kpi",
+        "sw03_abnormal_situation_management"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Alarm을 운전자 조치가 필요한 비정상 상태로 정의하고 단순 Event·Status와 구분한다.",
+    "HMI와 SCADA의 역할을 화면 인터페이스와 상위 감시·데이터수집 구조로 구분한다.",
+    "Failover, 통신단절, Bad·Stale quality와 재연결 상태를 운전자 정보신뢰성과 연결한다.",
+    "High-performance HMI를 Overview, 화면계층, 추세, 제한된 색상과 맥락 유지로 설명한다.",
+    "Alarm philosophy와 rationalization을 상위정책과 개별 Alarm 승인활동으로 구분한다.",
+    "Alarm priority를 결과 심각도와 허용 응답시간으로 결정한다.",
+    "Acknowledge가 원인 제거 또는 Return-to-normal을 의미하지 않는다고 설명한다.",
+    "Deadband와 Delay를 값 기반 이력폭과 시간 기반 필터로 구분한다.",
+    "Shelving과 Suppression을 적용주체, 조건, 제한시간, 이력과 복귀로 비교한다.",
+    "Alarm flood, Chattering, Standing alarm과 KPI를 반복개선에 연결한다.",
+    "Setpoint·Alarm·Trip·Interlock 값을 목적·소유권·변경권한으로 구분한다.",
+    "Setpoint list에 단위, 방향, 적용모드, 근거, 승인과 변경이력을 포함한다.",
+    "SOE를 Source timestamp, 시각동기, 분해능과 Time quality로 설명한다.",
+    "Historian, SOE, First-out과 Audit trail의 기록대상과 분석목적을 구분한다.",
+    "운전자 권한을 역할기반 최소권한, 중요조작 확인과 Audit trail로 통제한다.",
+    "Command와 Feedback을 분리하고 Mode·Interlock 사유·복구경로로 Human error를 줄인다.",
+    "비정상상황을 Detect-Diagnose-Respond-Recover 흐름으로 설명한다.",
+    "SW-02 실행논리, SW-04 V&V, SW-10 프로젝트 인수와 ownership을 분리한다."
+  ],
+  "common_missing_points": [
+    "HMI와 SCADA를 같은 장치명으로만 설명함.",
+    "서버·통신구조를 설명하고 데이터 품질과 Failover 표시를 누락함.",
+    "High-performance HMI를 단순 색상 변경으로만 설명함.",
+    "모든 Event를 Alarm으로 간주함.",
+    "Alarm philosophy와 rationalization의 계층관계를 누락함.",
+    "우선순위를 측정값 크기나 장비 중요도 하나로만 결정함.",
+    "Acknowledge와 Return-to-normal을 혼동함.",
+    "Deadband, Delay, Shelving과 Suppression을 같은 nuisance 대책으로 설명함.",
+    "Shelving의 권한·사유·만료·이력을 누락함.",
+    "Setpoint·Alarm·Trip·Interlock 값의 소유권과 변경통제를 누락함.",
+    "SOE에서 시각동기, Timestamp 출처와 Time quality를 누락함.",
+    "Historian, SOE, First-out과 Audit trail을 같은 이력기능으로 설명함.",
+    "운전자 권한을 Login 등급만으로 설명하고 중요조작 확인과 Audit를 누락함.",
+    "Alarm flood 대책을 우선순위 상향 또는 Alarm 추가로만 제시함.",
+    "Command 전송만으로 현장설비 동작완료를 판단함.",
+    "SW-02의 Trip·Interlock 상태전이와 SW-10의 FAT·SAT를 본 Topic 핵심으로 확장함."
+  ],
+  "routing_aliases": [
+    "HMI SCADA alarm management SOE",
+    "고성능 HMI 경보 합리화 SOE",
+    "HMI SCADA Alarm Setpoint Trip Interlock",
+    "운전정보 경보 설정값 이벤트순서",
+    "alarm philosophy rationalization priority",
+    "경보 철학 합리화 우선순위",
+    "alarm deadband delay shelving suppression",
+    "경보 데드밴드 지연 쉘빙 억제",
+    "setpoint alarm trip interlock value management",
+    "설정값 경보값 트립값 인터록값 관리",
+    "sequence of events audit trail time synchronization",
+    "SOE 감사추적 시각동기",
+    "high performance HMI display hierarchy",
+    "고성능 HMI 화면계층 상황인식",
+    "operator authority human error prevention",
+    "운전자 권한 휴먼에러 방지",
+    "alarm flood chattering standing alarm",
+    "경보폭주 채터링 상시경보",
+    "abnormal situation management HMI alarm",
+    "비정상상황 관리 SCADA 운전정보"
+  ],
+  "routing_field_points": [
+    "hmi",
+    "scada",
+    "supervisory control",
+    "data acquisition",
+    "high-performance hmi",
+    "display hierarchy",
+    "overview display",
+    "situational awareness",
+    "color coding",
+    "navigation context",
+    "alarm philosophy",
+    "alarm rationalization",
+    "alarm priority",
+    "consequence severity",
+    "operator response time",
+    "alarm acknowledgement",
+    "return to normal",
+    "deadband",
+    "on-delay",
+    "off-delay",
+    "shelving",
+    "suppression",
+    "alarm flood",
+    "chattering alarm",
+    "standing alarm",
+    "alarm performance kpi",
+    "setpoint list",
+    "alarm value",
+    "trip value",
+    "interlock value",
+    "sequence of events",
+    "soe",
+    "source timestamp",
+    "time synchronization",
+    "time quality",
+    "historian",
+    "first-out",
+    "audit trail",
+    "operator authority",
+    "role based access",
+    "least privilege",
+    "human error prevention",
+    "data quality",
+    "stale data",
+    "abnormal situation management"
+  ],
+  "revision_notes": [
+    "2026-08-06: 대표 문제 10개와 8단계 Model Answer 구조를 확정했다.",
+    "HMI·SCADA, Alarm lifecycle, Setpoint governance, SOE와 권한을 하나의 운전정보 흐름으로 연결했다.",
+    "SW-02 실행논리와 SW-04·SW-10 수행체계를 명시적으로 분리했다."
+  ]
+}

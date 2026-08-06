@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "HMI·SCADA 구조를 데이터 품질, Failover와 운전자 상황인식으로 연결한다.",
+    "High-performance HMI의 Overview, 화면계층, 추세와 제한된 색상 원칙을 설명한다.",
+    "Alarm philosophy와 rationalization을 구분하고 결과·조치·응답시간·우선순위를 연결한다.",
+    "Acknowledge, Return-to-normal, Deadband, Delay, Shelving과 Suppression을 정확히 구분한다.",
+    "Setpoint·Alarm·Trip·Interlock 값의 목적, 소유권, 변경권한과 이력을 제시한다.",
+    "SOE의 Source timestamp, 시각동기, 분해능과 Time quality를 설명한다.",
+    "Historian, First-out, SOE와 Audit trail의 기록대상과 분석목적을 비교한다.",
+    "운전자 권한, Human error 방지와 Detect-Diagnose-Respond-Recover 흐름을 제시한다."
+  ],
+  "note": "HMI·SCADA와 Alarm·SOE는 제어시스템의 운전성, 비정상상황 대응과 사고원인 분석을 연결하는 핵심 분야이다. 용어 나열보다 정보의 목적, 운전자 조치, 시간품질, 권한과 이력관리까지 설명해야 고득점이 가능하므로 핵심 준비 Topic으로 분류한다.",
+  "revision_notes": [
+    "2026-08-06: difficulty=DESIGN_EVALUATION, selection_importance=CORE_MUST_PREPARE로 확정했다.",
+    "question_type은 운전정보 기능의 원리·비교·설계판단이 중심이므로 PRINCIPLE_INTERPRETATION으로 설정했다."
+  ],
+  "topic_label": "SW-03 HMI·SCADA·Alarm·SOE"
+}

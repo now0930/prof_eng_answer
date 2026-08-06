@@ -1,0 +1,1213 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+  "title_ko": "HMI·SCADA·Alarm·Setpoint·Trip·Interlock·SOE 및 운전정보 관리",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "id": "sw03_scope_operator_information",
+      "anchor_id": "sw03_scope_operator_information",
+      "statement": "SW-03는 HMI·SCADA 구조, 고성능 HMI, Alarm 관리, Setpoint·Alarm·Trip·Interlock 값 관리, SOE, Audit trail, 운전자 권한과 비정상상황 대응을 운전정보 관리 체계로 연결한다.",
+      "importance": "must",
+      "keywords": [
+        "운전정보 관리",
+        "HMI",
+        "SCADA",
+        "Alarm",
+        "Setpoint",
+        "SOE",
+        "운전자 권한"
+      ],
+      "core_terms": [
+        "운전정보 관리",
+        "HMI",
+        "Alarm",
+        "SOE"
+      ],
+      "accepted_explanations": [
+        "SW-03는 HMI·SCADA 구조, 고성능 HMI, Alarm 관리, Setpoint·Alarm·Trip·Interlock 값 관리, SOE, Audit trail, 운전자 권한과 비정상상황 대응을 운전정보 관리 체계로 연결한다.",
+        "운전정보 관리, HMI, Alarm, SOE의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_hmi_scada_architecture",
+      "anchor_id": "sw03_hmi_scada_architecture",
+      "statement": "HMI는 운전자와 제어시스템의 상호작용 화면을 제공하고, SCADA는 원격 감시·데이터 수집·명령·경보·이력 기능을 서버, 통신망, 현장 제어기와 연계하는 상위 감시체계이다.",
+      "importance": "must",
+      "keywords": [
+        "HMI",
+        "SCADA",
+        "서버",
+        "현장 제어기",
+        "데이터 수집",
+        "감시",
+        "명령"
+      ],
+      "core_terms": [
+        "HMI",
+        "SCADA",
+        "상위 감시체계",
+        "현장 제어기"
+      ],
+      "accepted_explanations": [
+        "HMI는 운전자와 제어시스템의 상호작용 화면을 제공하고, SCADA는 원격 감시·데이터 수집·명령·경보·이력 기능을 서버, 통신망, 현장 제어기와 연계하는 상위 감시체계이다.",
+        "HMI, SCADA, 상위 감시체계, 현장 제어기의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_architecture_redundancy_quality",
+      "anchor_id": "sw03_architecture_redundancy_quality",
+      "statement": "HMI·SCADA 구조는 서버와 네트워크의 이중화 여부뿐 아니라 통신 단절, Failover, 데이터 품질, Stale 상태 및 재연결 후 데이터 일치성을 운전자에게 명확히 전달해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "Redundancy",
+        "Failover",
+        "Data quality",
+        "Stale",
+        "통신 단절",
+        "재연결"
+      ],
+      "core_terms": [
+        "Failover",
+        "데이터 품질",
+        "Stale",
+        "재연결"
+      ],
+      "accepted_explanations": [
+        "HMI·SCADA 구조는 서버와 네트워크의 이중화 여부뿐 아니라 통신 단절, Failover, 데이터 품질, Stale 상태 및 재연결 후 데이터 일치성을 운전자에게 명확히 전달해야 한다.",
+        "Failover, 데이터 품질, Stale, 재연결의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_high_performance_hmi",
+      "anchor_id": "sw03_high_performance_hmi",
+      "statement": "High-performance HMI는 정상상태의 불필요한 장식을 줄이고 공정상태, 편차, 추세와 비정상 징후를 빠르게 인지하도록 정보 밀도와 시각적 우선순위를 설계한다.",
+      "importance": "must",
+      "keywords": [
+        "High-performance HMI",
+        "상황인식",
+        "편차",
+        "추세",
+        "시각적 우선순위"
+      ],
+      "core_terms": [
+        "High-performance HMI",
+        "상황인식",
+        "추세",
+        "우선순위"
+      ],
+      "accepted_explanations": [
+        "High-performance HMI는 정상상태의 불필요한 장식을 줄이고 공정상태, 편차, 추세와 비정상 징후를 빠르게 인지하도록 정보 밀도와 시각적 우선순위를 설계한다.",
+        "High-performance HMI, 상황인식, 추세, 우선순위의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_display_hierarchy",
+      "anchor_id": "sw03_display_hierarchy",
+      "statement": "화면계층은 일반적으로 Level 1 공정 전체 Overview, Level 2 Unit·Area, Level 3 상세 운전, Level 4 진단·정비 정보로 구성하며 상위에서 이상 위치를 찾고 하위에서 원인과 조치를 확인하도록 연결한다.",
+      "importance": "must",
+      "keywords": [
+        "Display hierarchy",
+        "Level 1",
+        "Level 2",
+        "Level 3",
+        "Level 4",
+        "Overview",
+        "진단"
+      ],
+      "core_terms": [
+        "Display hierarchy",
+        "Overview",
+        "상세 운전",
+        "진단"
+      ],
+      "accepted_explanations": [
+        "화면계층은 일반적으로 Level 1 공정 전체 Overview, Level 2 Unit·Area, Level 3 상세 운전, Level 4 진단·정비 정보로 구성하며 상위에서 이상 위치를 찾고 하위에서 원인과 조치를 확인하도록 연결한다.",
+        "Display hierarchy, Overview, 상세 운전, 진단의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_color_context_navigation",
+      "anchor_id": "sw03_color_context_navigation",
+      "statement": "색상은 정상 장식보다 Alarm, 비정상, 선택상태와 품질저하 등 제한된 의미에 일관되게 사용하고, 화면 이동 시 설비 위치·운전모드·추세·관련 Alarm의 맥락이 유지되어야 한다.",
+      "importance": "important",
+      "keywords": [
+        "Color coding",
+        "Context",
+        "Navigation",
+        "운전모드",
+        "Alarm",
+        "품질저하"
+      ],
+      "core_terms": [
+        "색상",
+        "맥락",
+        "화면 이동",
+        "품질저하"
+      ],
+      "accepted_explanations": [
+        "색상은 정상 장식보다 Alarm, 비정상, 선택상태와 품질저하 등 제한된 의미에 일관되게 사용하고, 화면 이동 시 설비 위치·운전모드·추세·관련 Alarm의 맥락이 유지되어야 한다.",
+        "색상, 맥락, 화면 이동, 품질저하의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_definition",
+      "anchor_id": "sw03_alarm_definition",
+      "statement": "Alarm은 비정상 상태를 운전자에게 알리고 정해진 시간 안에 판단 또는 조치를 요구하는 기능이며, 조치가 필요하지 않은 단순 Event·Status·Notification과 구분한다.",
+      "importance": "must",
+      "keywords": [
+        "Alarm",
+        "운전자 조치",
+        "비정상 상태",
+        "Event",
+        "Status",
+        "Notification"
+      ],
+      "core_terms": [
+        "Alarm",
+        "운전자 조치",
+        "Event",
+        "비정상 상태"
+      ],
+      "accepted_explanations": [
+        "Alarm은 비정상 상태를 운전자에게 알리고 정해진 시간 안에 판단 또는 조치를 요구하는 기능이며, 조치가 필요하지 않은 단순 Event·Status·Notification과 구분한다.",
+        "Alarm, 운전자 조치, Event, 비정상 상태의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_philosophy",
+      "anchor_id": "sw03_alarm_philosophy",
+      "statement": "Alarm philosophy는 Alarm의 목적, 역할, 우선순위 기준, 상태표현, 승인권한, Shelving·Suppression, 성능지표, 변경관리와 주기적 검토 원칙을 조직 차원에서 정의한 상위 정책이다.",
+      "importance": "must",
+      "keywords": [
+        "Alarm philosophy",
+        "정책",
+        "우선순위",
+        "Shelving",
+        "Suppression",
+        "성능지표",
+        "변경관리"
+      ],
+      "core_terms": [
+        "Alarm philosophy",
+        "상위 정책",
+        "우선순위",
+        "변경관리"
+      ],
+      "accepted_explanations": [
+        "Alarm philosophy는 Alarm의 목적, 역할, 우선순위 기준, 상태표현, 승인권한, Shelving·Suppression, 성능지표, 변경관리와 주기적 검토 원칙을 조직 차원에서 정의한 상위 정책이다.",
+        "Alarm philosophy, 상위 정책, 우선순위, 변경관리의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_rationalization",
+      "anchor_id": "sw03_alarm_rationalization",
+      "statement": "Alarm rationalization은 각 후보 Alarm에 대해 원인, 결과, 운전자 조치, 허용 응답시간, 우선순위, 설정값, Deadband, Delay, Shelving 허용조건과 문서 근거를 검토하여 필요한 Alarm만 승인하는 활동이다.",
+      "importance": "must",
+      "keywords": [
+        "Alarm rationalization",
+        "원인",
+        "결과",
+        "운전자 조치",
+        "응답시간",
+        "Deadband",
+        "Delay"
+      ],
+      "core_terms": [
+        "Alarm rationalization",
+        "운전자 조치",
+        "응답시간",
+        "설정값"
+      ],
+      "accepted_explanations": [
+        "Alarm rationalization은 각 후보 Alarm에 대해 원인, 결과, 운전자 조치, 허용 응답시간, 우선순위, 설정값, Deadband, Delay, Shelving 허용조건과 문서 근거를 검토하여 필요한 Alarm만 승인하는 활동이다.",
+        "Alarm rationalization, 운전자 조치, 응답시간, 설정값의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_priority",
+      "anchor_id": "sw03_alarm_priority",
+      "statement": "Alarm priority는 단순 측정값 크기가 아니라 조치하지 않았을 때의 결과 심각도와 운전자에게 허용된 응답시간을 함께 평가하여 결정하며, 우선순위별 표시와 대응절차가 일관되어야 한다.",
+      "importance": "must",
+      "keywords": [
+        "Alarm priority",
+        "Consequence severity",
+        "Response time",
+        "우선순위",
+        "대응절차"
+      ],
+      "core_terms": [
+        "Alarm priority",
+        "결과 심각도",
+        "응답시간",
+        "대응절차"
+      ],
+      "accepted_explanations": [
+        "Alarm priority는 단순 측정값 크기가 아니라 조치하지 않았을 때의 결과 심각도와 운전자에게 허용된 응답시간을 함께 평가하여 결정하며, 우선순위별 표시와 대응절차가 일관되어야 한다.",
+        "Alarm priority, 결과 심각도, 응답시간, 대응절차의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_state_acknowledgement",
+      "anchor_id": "sw03_alarm_state_acknowledgement",
+      "statement": "Alarm의 Process condition, Active·Return-to-normal 상태와 Acknowledgement 상태는 별개이며, 운전자 Acknowledge는 인지 기록일 뿐 원인 제거 또는 Alarm 조건 해제를 의미하지 않는다.",
+      "importance": "must",
+      "keywords": [
+        "Alarm state",
+        "Active",
+        "Return to normal",
+        "Acknowledgement",
+        "원인 제거"
+      ],
+      "core_terms": [
+        "Alarm state",
+        "Acknowledgement",
+        "Return-to-normal",
+        "원인"
+      ],
+      "accepted_explanations": [
+        "Alarm의 Process condition, Active·Return-to-normal 상태와 Acknowledgement 상태는 별개이며, 운전자 Acknowledge는 인지 기록일 뿐 원인 제거 또는 Alarm 조건 해제를 의미하지 않는다.",
+        "Alarm state, Acknowledgement, Return-to-normal, 원인의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_deadband",
+      "anchor_id": "sw03_alarm_deadband",
+      "statement": "Deadband는 Alarm이 발생한 뒤 정상 복귀 임계값을 발생 임계값과 다르게 두는 값의 이력폭으로, 경계 부근 노이즈에 의한 반복 발생과 해제를 줄인다.",
+      "importance": "must",
+      "keywords": [
+        "Deadband",
+        "Hysteresis",
+        "발생 임계값",
+        "복귀 임계값",
+        "Chattering"
+      ],
+      "core_terms": [
+        "Deadband",
+        "발생 임계값",
+        "복귀 임계값",
+        "Chattering"
+      ],
+      "accepted_explanations": [
+        "Deadband는 Alarm이 발생한 뒤 정상 복귀 임계값을 발생 임계값과 다르게 두는 값의 이력폭으로, 경계 부근 노이즈에 의한 반복 발생과 해제를 줄인다.",
+        "Deadband, 발생 임계값, 복귀 임계값, Chattering의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_delay",
+      "anchor_id": "sw03_alarm_delay",
+      "statement": "Alarm delay는 조건이 일정 시간 연속 유지될 때 발생시키거나 정상상태가 일정 시간 유지될 때 해제하는 시간 필터이며, 실제로 필요한 짧은 응답을 가리지 않도록 공정 동특성과 허용 응답시간을 고려한다.",
+      "importance": "must",
+      "keywords": [
+        "Alarm delay",
+        "On-delay",
+        "Off-delay",
+        "시간 필터",
+        "공정 동특성",
+        "응답시간"
+      ],
+      "core_terms": [
+        "Alarm delay",
+        "시간 필터",
+        "공정 동특성",
+        "응답시간"
+      ],
+      "accepted_explanations": [
+        "Alarm delay는 조건이 일정 시간 연속 유지될 때 발생시키거나 정상상태가 일정 시간 유지될 때 해제하는 시간 필터이며, 실제로 필요한 짧은 응답을 가리지 않도록 공정 동특성과 허용 응답시간을 고려한다.",
+        "Alarm delay, 시간 필터, 공정 동특성, 응답시간의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_shelving",
+      "anchor_id": "sw03_alarm_shelving",
+      "statement": "Shelving은 권한 있는 운전자가 알려진 사유로 특정 Alarm을 제한시간 동안 Active display에서 임시로 숨기는 운전행위이며, Alarm 정의와 이력은 유지하고 사유·사용자·시작·만료를 기록한다.",
+      "importance": "must",
+      "keywords": [
+        "Shelving",
+        "제한시간",
+        "권한",
+        "Active display",
+        "사유",
+        "만료",
+        "이력"
+      ],
+      "core_terms": [
+        "Shelving",
+        "제한시간",
+        "권한",
+        "이력"
+      ],
+      "accepted_explanations": [
+        "Shelving은 권한 있는 운전자가 알려진 사유로 특정 Alarm을 제한시간 동안 Active display에서 임시로 숨기는 운전행위이며, Alarm 정의와 이력은 유지하고 사유·사용자·시작·만료를 기록한다.",
+        "Shelving, 제한시간, 권한, 이력의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_suppression",
+      "anchor_id": "sw03_alarm_suppression",
+      "statement": "Suppression은 설비상태, 운전모드 또는 논리조건상 의미가 없는 Alarm을 설계된 조건에 따라 자동으로 발생하지 않게 하거나 표시대상에서 제외하는 기능이며, 운전자 임의 Shelving과 구분한다.",
+      "importance": "must",
+      "keywords": [
+        "Suppression",
+        "운전모드",
+        "설비상태",
+        "자동 조건",
+        "Shelving 구분"
+      ],
+      "core_terms": [
+        "Suppression",
+        "설계 조건",
+        "운전모드",
+        "Shelving"
+      ],
+      "accepted_explanations": [
+        "Suppression은 설비상태, 운전모드 또는 논리조건상 의미가 없는 Alarm을 설계된 조건에 따라 자동으로 발생하지 않게 하거나 표시대상에서 제외하는 기능이며, 운전자 임의 Shelving과 구분한다.",
+        "Suppression, 설계 조건, 운전모드, Shelving의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_flood_chattering",
+      "anchor_id": "sw03_alarm_flood_chattering",
+      "statement": "Alarm flood는 짧은 시간에 많은 Alarm이 집중되어 운전자의 인지·진단·조치를 방해하는 상태이고, Chattering은 같은 Alarm이 반복 발생·해제되는 현상이므로 원인 제거, 합리화, Deadband·Delay와 상태기반 Suppression으로 개선한다.",
+      "importance": "must",
+      "keywords": [
+        "Alarm flood",
+        "Chattering",
+        "인지부하",
+        "Deadband",
+        "Delay",
+        "Suppression"
+      ],
+      "core_terms": [
+        "Alarm flood",
+        "Chattering",
+        "인지부하",
+        "원인 제거"
+      ],
+      "accepted_explanations": [
+        "Alarm flood는 짧은 시간에 많은 Alarm이 집중되어 운전자의 인지·진단·조치를 방해하는 상태이고, Chattering은 같은 Alarm이 반복 발생·해제되는 현상이므로 원인 제거, 합리화, Deadband·Delay와 상태기반 Suppression으로 개선한다.",
+        "Alarm flood, Chattering, 인지부하, 원인 제거의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_performance_kpi",
+      "anchor_id": "sw03_alarm_performance_kpi",
+      "statement": "Alarm 성능은 시간당 발생률, Peak alarm rate, Standing alarm, Chattering alarm, Flood 구간, 우선순위 분포와 Shelving 사용을 현장 기준으로 추적하고 반복 원인을 개선해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "Alarm KPI",
+        "Alarm rate",
+        "Standing alarm",
+        "Chattering",
+        "Flood",
+        "Priority distribution"
+      ],
+      "core_terms": [
+        "Alarm KPI",
+        "Standing alarm",
+        "Flood",
+        "우선순위 분포"
+      ],
+      "accepted_explanations": [
+        "Alarm 성능은 시간당 발생률, Peak alarm rate, Standing alarm, Chattering alarm, Flood 구간, 우선순위 분포와 Shelving 사용을 현장 기준으로 추적하고 반복 원인을 개선해야 한다.",
+        "Alarm KPI, Standing alarm, Flood, 우선순위 분포의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_setpoint_value_classes",
+      "anchor_id": "sw03_setpoint_value_classes",
+      "statement": "운전 Setpoint, Alarm value, Trip value와 Interlock value는 목적과 소유권이 다르며, Alarm은 운전자 조치를 촉구하고 Trip·Interlock은 자동 보호 또는 동작제약에 사용되므로 같은 값으로 임의 통합하지 않는다.",
+      "importance": "must",
+      "keywords": [
+        "Setpoint",
+        "Alarm value",
+        "Trip value",
+        "Interlock value",
+        "소유권",
+        "보호"
+      ],
+      "core_terms": [
+        "Setpoint",
+        "Alarm value",
+        "Trip value",
+        "Interlock value"
+      ],
+      "accepted_explanations": [
+        "운전 Setpoint, Alarm value, Trip value와 Interlock value는 목적과 소유권이 다르며, Alarm은 운전자 조치를 촉구하고 Trip·Interlock은 자동 보호 또는 동작제약에 사용되므로 같은 값으로 임의 통합하지 않는다.",
+        "Setpoint, Alarm value, Trip value, Interlock value의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_setpoint_governance",
+      "anchor_id": "sw03_setpoint_governance",
+      "statement": "Setpoint list는 Tag, 기능, 값, 단위, 방향, Deadband·Delay, 적용모드, 근거, 승인자, 변경이력과 관련 Trip·Interlock 참조를 관리하고 온라인 변경은 권한·검토·기록·복구절차를 거쳐야 한다.",
+      "importance": "must",
+      "keywords": [
+        "Setpoint list",
+        "Tag",
+        "단위",
+        "적용모드",
+        "승인",
+        "변경이력",
+        "복구"
+      ],
+      "core_terms": [
+        "Setpoint list",
+        "승인",
+        "변경이력",
+        "근거"
+      ],
+      "accepted_explanations": [
+        "Setpoint list는 Tag, 기능, 값, 단위, 방향, Deadband·Delay, 적용모드, 근거, 승인자, 변경이력과 관련 Trip·Interlock 참조를 관리하고 온라인 변경은 권한·검토·기록·복구절차를 거쳐야 한다.",
+        "Setpoint list, 승인, 변경이력, 근거의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_alarm_trip_interlock_boundary",
+      "anchor_id": "sw03_alarm_trip_interlock_boundary",
+      "statement": "Alarm은 운전자 판단과 조치를 지원하는 정보 기능이고 Trip은 보호조건에 따른 자동 정지, Interlock은 위험하거나 허용되지 않은 동작을 금지·강제하는 논리이므로 표시정보와 실행논리를 구분한다.",
+      "importance": "must",
+      "keywords": [
+        "Alarm",
+        "Trip",
+        "Interlock",
+        "운전자 조치",
+        "자동 정지",
+        "금지 논리"
+      ],
+      "core_terms": [
+        "Alarm",
+        "Trip",
+        "Interlock",
+        "실행논리"
+      ],
+      "accepted_explanations": [
+        "Alarm은 운전자 판단과 조치를 지원하는 정보 기능이고 Trip은 보호조건에 따른 자동 정지, Interlock은 위험하거나 허용되지 않은 동작을 금지·강제하는 논리이므로 표시정보와 실행논리를 구분한다.",
+        "Alarm, Trip, Interlock, 실행논리의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_soe_definition",
+      "anchor_id": "sw03_soe_definition",
+      "statement": "SOE는 접점·상태·명령·보호동작 등의 변화 시각, 신호원, 이전값·새값과 품질을 공통 시간축에 고해상도로 기록하여 사건의 선후관계와 원인전파를 분석하는 기능이다.",
+      "importance": "must",
+      "keywords": [
+        "SOE",
+        "Sequence of Events",
+        "Timestamp",
+        "State change",
+        "Signal source",
+        "Quality"
+      ],
+      "core_terms": [
+        "SOE",
+        "Timestamp",
+        "상태변화",
+        "공통 시간축"
+      ],
+      "accepted_explanations": [
+        "SOE는 접점·상태·명령·보호동작 등의 변화 시각, 신호원, 이전값·새값과 품질을 공통 시간축에 고해상도로 기록하여 사건의 선후관계와 원인전파를 분석하는 기능이다.",
+        "SOE, Timestamp, 상태변화, 공통 시간축의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_time_sync_resolution",
+      "anchor_id": "sw03_time_sync_resolution",
+      "statement": "SOE의 인과순서를 신뢰하려면 PLC·DCS·SCADA·보호장치의 시계를 동기화하고 Source timestamp, 시간정확도, 분해능, 통신지연과 Time quality를 함께 관리해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "Time synchronization",
+        "Source timestamp",
+        "Resolution",
+        "Accuracy",
+        "Time quality",
+        "통신지연"
+      ],
+      "core_terms": [
+        "시각동기",
+        "Source timestamp",
+        "분해능",
+        "Time quality"
+      ],
+      "accepted_explanations": [
+        "SOE의 인과순서를 신뢰하려면 PLC·DCS·SCADA·보호장치의 시계를 동기화하고 Source timestamp, 시간정확도, 분해능, 통신지연과 Time quality를 함께 관리해야 한다.",
+        "시각동기, Source timestamp, 분해능, Time quality의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_historian_vs_soe",
+      "anchor_id": "sw03_historian_vs_soe",
+      "statement": "Historian은 주기 또는 변화기반으로 공정값 추세를 장기 저장하는 기능이 중심이고 SOE는 이산 이벤트의 정확한 발생순서를 분석하는 기능이 중심이므로 표본주기와 Timestamp 출처를 구분한다.",
+      "importance": "important",
+      "keywords": [
+        "Historian",
+        "SOE",
+        "Sampling",
+        "Event order",
+        "Timestamp source",
+        "Trend"
+      ],
+      "core_terms": [
+        "Historian",
+        "SOE",
+        "표본주기",
+        "발생순서"
+      ],
+      "accepted_explanations": [
+        "Historian은 주기 또는 변화기반으로 공정값 추세를 장기 저장하는 기능이 중심이고 SOE는 이산 이벤트의 정확한 발생순서를 분석하는 기능이 중심이므로 표본주기와 Timestamp 출처를 구분한다.",
+        "Historian, SOE, 표본주기, 발생순서의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_first_out_relation",
+      "anchor_id": "sw03_first_out_relation",
+      "statement": "First-out은 한 연쇄사건에서 최초로 유효해진 원인을 Latch하여 보존하는 논리이고 SOE는 전체 이벤트 순서를 기록하므로, First-out은 빠른 원인지시를 제공하고 SOE는 상세 검증을 보완한다.",
+      "importance": "important",
+      "keywords": [
+        "First-out",
+        "SOE",
+        "최초 원인",
+        "Latch",
+        "이벤트 순서",
+        "원인분석"
+      ],
+      "core_terms": [
+        "First-out",
+        "SOE",
+        "최초 원인",
+        "원인분석"
+      ],
+      "accepted_explanations": [
+        "First-out은 한 연쇄사건에서 최초로 유효해진 원인을 Latch하여 보존하는 논리이고 SOE는 전체 이벤트 순서를 기록하므로, First-out은 빠른 원인지시를 제공하고 SOE는 상세 검증을 보완한다.",
+        "First-out, SOE, 최초 원인, 원인분석의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_audit_trail",
+      "anchor_id": "sw03_audit_trail",
+      "statement": "Audit trail은 사용자가 수행한 Acknowledge, Shelving, Suppression 승인, Setpoint 변경, Login·Logout과 화면 명령에 대해 사용자, 시각, 대상, 이전값·새값, 사유와 결과를 기록한다.",
+      "importance": "must",
+      "keywords": [
+        "Audit trail",
+        "User",
+        "Setpoint change",
+        "Acknowledge",
+        "Shelving",
+        "Old value",
+        "New value"
+      ],
+      "core_terms": [
+        "Audit trail",
+        "사용자",
+        "변경기록",
+        "사유"
+      ],
+      "accepted_explanations": [
+        "Audit trail은 사용자가 수행한 Acknowledge, Shelving, Suppression 승인, Setpoint 변경, Login·Logout과 화면 명령에 대해 사용자, 시각, 대상, 이전값·새값, 사유와 결과를 기록한다.",
+        "Audit trail, 사용자, 변경기록, 사유의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_operator_authority",
+      "anchor_id": "sw03_operator_authority",
+      "statement": "운전자 권한은 역할기반 최소권한, 설비·기능·운전모드별 범위, 중요조작의 재확인 또는 이중승인, 세션관리와 Audit trail을 통해 통제한다.",
+      "importance": "must",
+      "keywords": [
+        "Operator authority",
+        "Role based access",
+        "Least privilege",
+        "이중승인",
+        "세션관리",
+        "Audit trail"
+      ],
+      "core_terms": [
+        "운전자 권한",
+        "역할기반",
+        "최소권한",
+        "Audit trail"
+      ],
+      "accepted_explanations": [
+        "운전자 권한은 역할기반 최소권한, 설비·기능·운전모드별 범위, 중요조작의 재확인 또는 이중승인, 세션관리와 Audit trail을 통해 통제한다.",
+        "운전자 권한, 역할기반, 최소권한, Audit trail의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_human_error_prevention",
+      "anchor_id": "sw03_human_error_prevention",
+      "statement": "Human error 방지는 현재 Mode·소유권·Interlock 사유·명령대상·예상결과를 명확히 표시하고, 중요조작 확인, 잘못된 대상 선택 방지, Command와 Feedback 분리, 취소·복구 경로를 제공하는 방식으로 구현한다.",
+      "importance": "must",
+      "keywords": [
+        "Human error",
+        "Mode",
+        "Interlock reason",
+        "Confirmation",
+        "Command feedback",
+        "Recovery"
+      ],
+      "core_terms": [
+        "Human error",
+        "Mode",
+        "Command",
+        "Feedback"
+      ],
+      "accepted_explanations": [
+        "Human error 방지는 현재 Mode·소유권·Interlock 사유·명령대상·예상결과를 명확히 표시하고, 중요조작 확인, 잘못된 대상 선택 방지, Command와 Feedback 분리, 취소·복구 경로를 제공하는 방식으로 구현한다.",
+        "Human error, Mode, Command, Feedback의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_data_quality_display",
+      "anchor_id": "sw03_data_quality_display",
+      "statement": "Bad, Uncertain, Stale, Communication lost와 Manual substitution 같은 데이터 품질은 값 자체와 별도 상태로 표시하고, 품질이 나쁜 값을 정상 최신값처럼 제어판단이나 운전자 판단에 사용하지 않도록 한다.",
+      "importance": "must",
+      "keywords": [
+        "Data quality",
+        "Bad",
+        "Uncertain",
+        "Stale",
+        "Communication lost",
+        "Manual substitution"
+      ],
+      "core_terms": [
+        "Data quality",
+        "Bad",
+        "Stale",
+        "Communication lost"
+      ],
+      "accepted_explanations": [
+        "Bad, Uncertain, Stale, Communication lost와 Manual substitution 같은 데이터 품질은 값 자체와 별도 상태로 표시하고, 품질이 나쁜 값을 정상 최신값처럼 제어판단이나 운전자 판단에 사용하지 않도록 한다.",
+        "Data quality, Bad, Stale, Communication lost의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_abnormal_situation_management",
+      "anchor_id": "sw03_abnormal_situation_management",
+      "statement": "Abnormal situation management는 Overview에서 이상 징후를 조기에 발견하고 Alarm과 Trend로 진단하며 절차와 권한에 따라 대응한 뒤 정상복구와 사후분석으로 이어지는 Detect-Diagnose-Respond-Recover 흐름이다.",
+      "importance": "must",
+      "keywords": [
+        "Abnormal situation management",
+        "Detect",
+        "Diagnose",
+        "Respond",
+        "Recover",
+        "Trend"
+      ],
+      "core_terms": [
+        "비정상상황",
+        "Detect",
+        "Diagnose",
+        "Recover"
+      ],
+      "accepted_explanations": [
+        "Abnormal situation management는 Overview에서 이상 징후를 조기에 발견하고 Alarm과 Trend로 진단하며 절차와 권한에 따라 대응한 뒤 정상복구와 사후분석으로 이어지는 Detect-Diagnose-Respond-Recover 흐름이다.",
+        "비정상상황, Detect, Diagnose, Recover의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_sw02_boundary",
+      "anchor_id": "sw03_sw02_boundary",
+      "statement": "SW-03는 Alarm·Setpoint·SOE·화면·권한 등 운전자 정보와 관리정책을 소유하고, Interlock·Trip의 실제 논리구조, 상태전이, Latch·Reset 및 Fail-safe 동작은 SW-02로 넘긴다.",
+      "importance": "must",
+      "keywords": [
+        "SW-03",
+        "SW-02",
+        "Alarm 정보",
+        "Setpoint",
+        "SOE",
+        "상태전이",
+        "Latch Reset"
+      ],
+      "core_terms": [
+        "SW-03",
+        "SW-02",
+        "운전자 정보",
+        "실행논리"
+      ],
+      "accepted_explanations": [
+        "SW-03는 Alarm·Setpoint·SOE·화면·권한 등 운전자 정보와 관리정책을 소유하고, Interlock·Trip의 실제 논리구조, 상태전이, Latch·Reset 및 Fail-safe 동작은 SW-02로 넘긴다.",
+        "SW-03, SW-02, 운전자 정보, 실행논리의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    },
+    {
+      "id": "sw03_sw04_sw10_boundary",
+      "anchor_id": "sw03_sw04_sw10_boundary",
+      "statement": "SW-03는 운전정보의 내용과 운영관리 원칙을 소유하고, 일반 소프트웨어 V-Model·추적성·시험체계는 SW-04, 프로젝트 문서 인도·FAT·SAT·시운전 절차는 SW-10으로 넘긴다.",
+      "importance": "must",
+      "keywords": [
+        "SW-03",
+        "SW-04",
+        "SW-10",
+        "V-Model",
+        "FAT",
+        "SAT",
+        "운전정보"
+      ],
+      "core_terms": [
+        "SW-03",
+        "SW-04",
+        "SW-10",
+        "ownership"
+      ],
+      "accepted_explanations": [
+        "SW-03는 운전정보의 내용과 운영관리 원칙을 소유하고, 일반 소프트웨어 V-Model·추적성·시험체계는 SW-04, 프로젝트 문서 인도·FAT·SAT·시운전 절차는 SW-10으로 넘긴다.",
+        "SW-03, SW-04, SW-10, ownership의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
+      ],
+      "rejected_explanations": [
+        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+      ],
+      "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
+      "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "sw03_fatal_all_events_are_alarms",
+      "claim": "모든 Event와 Status는 Alarm으로 만들어야 한다.",
+      "wrong_claim": "모든 Event와 Status는 Alarm으로 만들어야 한다.",
+      "correction": "Alarm은 정해진 시간 안에 운전자 조치가 필요한 비정상 상태만 대상으로 하며 단순 Event·Status와 구분한다.",
+      "correct_rule": "Alarm은 정해진 시간 안에 운전자 조치가 필요한 비정상 상태만 대상으로 하며 단순 Event·Status와 구분한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "모든 Event와 Status는 Alarm으로 만들어야 한다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Alarm은 정해진 시간 안에 운전자 조치가 필요한 비정상 상태만 대상으로 하며 단순 Event·Status와 구분한다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_alarm_equals_trip_interlock",
+      "claim": "Alarm, Trip과 Interlock은 같은 기능이다.",
+      "wrong_claim": "Alarm, Trip과 Interlock은 같은 기능이다.",
+      "correction": "Alarm은 운전자 조치를 지원하는 정보 기능이고 Trip·Interlock은 자동 보호 또는 동작제약 논리이다.",
+      "correct_rule": "Alarm은 운전자 조치를 지원하는 정보 기능이고 Trip·Interlock은 자동 보호 또는 동작제약 논리이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Alarm, Trip과 Interlock은 같은 기능이다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Alarm은 운전자 조치를 지원하는 정보 기능이고 Trip·Interlock은 자동 보호 또는 동작제약 논리이다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_ack_clears_condition",
+      "claim": "Alarm을 Acknowledge하면 공정 원인과 Alarm 조건이 해제된다.",
+      "wrong_claim": "Alarm을 Acknowledge하면 공정 원인과 Alarm 조건이 해제된다.",
+      "correction": "Acknowledge는 운전자 인지 기록이며 Process condition과 Active 상태를 해제하지 않는다.",
+      "correct_rule": "Acknowledge는 운전자 인지 기록이며 Process condition과 Active 상태를 해제하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Alarm을 Acknowledge하면 공정 원인과 Alarm 조건이 해제된다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Acknowledge는 운전자 인지 기록이며 Process condition과 Active 상태를 해제하지 않는다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_priority_by_pv_only",
+      "claim": "Alarm 우선순위는 측정값의 크기만으로 정한다.",
+      "wrong_claim": "Alarm 우선순위는 측정값의 크기만으로 정한다.",
+      "correction": "Alarm 우선순위는 결과 심각도와 허용 응답시간을 함께 평가하여 정한다.",
+      "correct_rule": "Alarm 우선순위는 결과 심각도와 허용 응답시간을 함께 평가하여 정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Alarm 우선순위는 측정값의 크기만으로 정한다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Alarm 우선순위는 결과 심각도와 허용 응답시간을 함께 평가하여 정한다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_deadband_equals_delay",
+      "claim": "Alarm Deadband와 Delay는 같은 기능이다.",
+      "wrong_claim": "Alarm Deadband와 Delay는 같은 기능이다.",
+      "correction": "Deadband는 값의 복귀 이력폭이고 Delay는 조건 지속시간을 이용하는 시간 필터이다.",
+      "correct_rule": "Deadband는 값의 복귀 이력폭이고 Delay는 조건 지속시간을 이용하는 시간 필터이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Alarm Deadband와 Delay는 같은 기능이다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Deadband는 값의 복귀 이력폭이고 Delay는 조건 지속시간을 이용하는 시간 필터이다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_shelving_deletes_history",
+      "claim": "Shelving하면 Alarm 정의와 이력이 삭제된다.",
+      "wrong_claim": "Shelving하면 Alarm 정의와 이력이 삭제된다.",
+      "correction": "Shelving은 제한시간 동안 Active display에서 임시로 숨기는 기능이며 정의와 이력은 유지한다.",
+      "correct_rule": "Shelving은 제한시간 동안 Active display에서 임시로 숨기는 기능이며 정의와 이력은 유지한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Shelving하면 Alarm 정의와 이력이 삭제된다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Shelving은 제한시간 동안 Active display에서 임시로 숨기는 기능이며 정의와 이력은 유지한다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_suppression_equals_shelving",
+      "claim": "Suppression과 Shelving은 운전자가 임의로 Alarm을 숨기는 동일 기능이다.",
+      "wrong_claim": "Suppression과 Shelving은 운전자가 임의로 Alarm을 숨기는 동일 기능이다.",
+      "correction": "Suppression은 설계된 상태·논리조건에 따른 자동 제외이고 Shelving은 권한 있는 운전자의 제한시간 임시 조치이다.",
+      "correct_rule": "Suppression은 설계된 상태·논리조건에 따른 자동 제외이고 Shelving은 권한 있는 운전자의 제한시간 임시 조치이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Suppression과 Shelving은 운전자가 임의로 Alarm을 숨기는 동일 기능이다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Suppression은 설계된 상태·논리조건에 따른 자동 제외이고 Shelving은 권한 있는 운전자의 제한시간 임시 조치이다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_indefinite_shelving",
+      "claim": "Alarm Shelving은 사유와 만료시간 없이 무기한 유지해도 된다.",
+      "wrong_claim": "Alarm Shelving은 사유와 만료시간 없이 무기한 유지해도 된다.",
+      "correction": "Shelving은 승인권한, 사유, 제한시간, 표시, 만료와 복구확인을 관리해야 한다.",
+      "correct_rule": "Shelving은 승인권한, 사유, 제한시간, 표시, 만료와 복구확인을 관리해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Alarm Shelving은 사유와 만료시간 없이 무기한 유지해도 된다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Shelving은 승인권한, 사유, 제한시간, 표시, 만료와 복구확인을 관리해야 한다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_values_interchangeable",
+      "claim": "운전 Setpoint, Alarm value, Trip value와 Interlock value는 서로 바꾸어 사용해도 된다.",
+      "wrong_claim": "운전 Setpoint, Alarm value, Trip value와 Interlock value는 서로 바꾸어 사용해도 된다.",
+      "correction": "네 값은 목적과 소유권이 다르므로 근거와 변경관리를 분리해야 한다.",
+      "correct_rule": "네 값은 목적과 소유권이 다르므로 근거와 변경관리를 분리해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "운전 Setpoint, Alarm value, Trip value와 Interlock value는 서로 바꾸어 사용해도 된다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. 네 값은 목적과 소유권이 다르므로 근거와 변경관리를 분리해야 한다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_soe_without_sync",
+      "claim": "시각동기가 없어도 SOE의 이벤트 선후관계는 항상 정확하다.",
+      "wrong_claim": "시각동기가 없어도 SOE의 이벤트 선후관계는 항상 정확하다.",
+      "correction": "SOE의 인과순서를 신뢰하려면 공통 시간동기, Timestamp 출처, 정확도와 Time quality가 필요하다.",
+      "correct_rule": "SOE의 인과순서를 신뢰하려면 공통 시간동기, Timestamp 출처, 정확도와 Time quality가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "시각동기가 없어도 SOE의 이벤트 선후관계는 항상 정확하다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. SOE의 인과순서를 신뢰하려면 공통 시간동기, Timestamp 출처, 정확도와 Time quality가 필요하다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_historian_equals_soe",
+      "claim": "Historian 표본시간만으로 SOE와 동일한 이벤트 순서를 항상 재현할 수 있다.",
+      "wrong_claim": "Historian 표본시간만으로 SOE와 동일한 이벤트 순서를 항상 재현할 수 있다.",
+      "correction": "Historian 추세와 SOE 이벤트순서는 표본주기와 Timestamp 출처가 다르므로 동일하다고 단정할 수 없다.",
+      "correct_rule": "Historian 추세와 SOE 이벤트순서는 표본주기와 Timestamp 출처가 다르므로 동일하다고 단정할 수 없다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Historian 표본시간만으로 SOE와 동일한 이벤트 순서를 항상 재현할 수 있다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Historian 추세와 SOE 이벤트순서는 표본주기와 Timestamp 출처가 다르므로 동일하다고 단정할 수 없다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_audit_equals_soe",
+      "claim": "Audit trail과 SOE는 동일한 기록이다.",
+      "wrong_claim": "Audit trail과 SOE는 동일한 기록이다.",
+      "correction": "Audit trail은 사용자 행위와 변경을 기록하고 SOE는 공정·설비 상태변화의 순서를 기록한다.",
+      "correct_rule": "Audit trail은 사용자 행위와 변경을 기록하고 SOE는 공정·설비 상태변화의 순서를 기록한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Audit trail과 SOE는 동일한 기록이다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Audit trail은 사용자 행위와 변경을 기록하고 SOE는 공정·설비 상태변화의 순서를 기록한다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_bright_colors",
+      "claim": "High-performance HMI는 밝은 색을 많이 사용할수록 상황인식이 좋아진다.",
+      "wrong_claim": "High-performance HMI는 밝은 색을 많이 사용할수록 상황인식이 좋아진다.",
+      "correction": "High-performance HMI는 색상을 제한된 비정상 의미에 일관되게 사용하여 시각적 우선순위를 만든다.",
+      "correct_rule": "High-performance HMI는 색상을 제한된 비정상 의미에 일관되게 사용하여 시각적 우선순위를 만든다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "High-performance HMI는 밝은 색을 많이 사용할수록 상황인식이 좋아진다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. High-performance HMI는 색상을 제한된 비정상 의미에 일관되게 사용하여 시각적 우선순위를 만든다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_unrestricted_authority",
+      "claim": "운전자에게 모든 Setpoint와 보호관련 값을 제한 없이 변경하게 해야 안전하다.",
+      "wrong_claim": "운전자에게 모든 Setpoint와 보호관련 값을 제한 없이 변경하게 해야 안전하다.",
+      "correction": "중요 값과 조작은 역할기반 최소권한, 승인, 확인과 Audit trail로 통제해야 한다.",
+      "correct_rule": "중요 값과 조작은 역할기반 최소권한, 승인, 확인과 Audit trail로 통제해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "운전자에게 모든 Setpoint와 보호관련 값을 제한 없이 변경하게 해야 안전하다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. 중요 값과 조작은 역할기반 최소권한, 승인, 확인과 Audit trail로 통제해야 한다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_command_proves_action",
+      "claim": "HMI에서 명령을 전송하면 현장설비 동작이 완료된 것으로 판단한다.",
+      "wrong_claim": "HMI에서 명령을 전송하면 현장설비 동작이 완료된 것으로 판단한다.",
+      "correction": "명령 전송과 실제 Feedback을 분리하고 Timeout·불일치·품질상태를 확인해야 한다.",
+      "correct_rule": "명령 전송과 실제 Feedback을 분리하고 Timeout·불일치·품질상태를 확인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "HMI에서 명령을 전송하면 현장설비 동작이 완료된 것으로 판단한다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. 명령 전송과 실제 Feedback을 분리하고 Timeout·불일치·품질상태를 확인해야 한다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "sw03_fatal_raise_all_priorities",
+      "claim": "Alarm flood는 모든 Alarm 우선순위를 높이면 해결된다.",
+      "wrong_claim": "Alarm flood는 모든 Alarm 우선순위를 높이면 해결된다.",
+      "correction": "Alarm flood는 원인 제거, 합리화, Chattering 개선, 상태기반 Suppression과 화면·절차 개선으로 줄인다.",
+      "correct_rule": "Alarm flood는 원인 제거, 합리화, Chattering 개선, 상태기반 Suppression과 화면·절차 개선으로 줄인다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "message": "Alarm flood는 모든 Alarm 우선순위를 높이면 해결된다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. Alarm flood는 원인 제거, 합리화, Chattering 개선, 상태기반 Suppression과 화면·절차 개선으로 줄인다.",
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    }
+  ],
+  "safe_expressions": [
+    "Alarm과 Trip은 연계될 수 있지만 목적과 실행주체가 다르다.",
+    "모든 Event가 Alarm인 것은 아니다.",
+    "Acknowledge는 운전자 인지를 기록하며 공정조건 해제와 별개이다.",
+    "Deadband와 Delay는 모두 Chattering을 줄일 수 있으나 값 기반과 시간 기반으로 구분된다.",
+    "Shelving 중에도 Alarm 이력과 사용기록은 유지한다.",
+    "Suppression은 설계된 운전상태 조건에 따라 자동 적용할 수 있다.",
+    "High-performance HMI도 의미가 명확한 제한된 색상을 사용한다.",
+    "Trip 값과 Alarm 값의 상대순서는 공정 위험방향과 응답시간에 따라 정한다.",
+    "Interlock value는 연속 수치가 아니라 이산 상태 또는 논리조건일 수 있다.",
+    "SOE 정확도는 시간동기와 장치 Timestamp 품질에 의존한다.",
+    "Historian은 SOE 분석을 보완할 수 있지만 항상 대체하지는 않는다.",
+    "First-out과 SOE를 함께 사용하면 최초 원인과 전체 전파순서를 비교할 수 있다.",
+    "Audit trail은 사용자 행위 추적에 중점을 둔다.",
+    "비상절차에서도 권한 확대와 사후 Audit 기록 조건을 명확히 해야 한다.",
+    "Alarm priority는 현장 철학에 정의된 결과와 응답시간 기준을 따른다.",
+    "Shelving 허용시간은 Alarm 특성과 현장 정책에 따라 달라질 수 있다.",
+    "Display hierarchy의 세부 Level 명칭은 시스템에 따라 달라도 상위 Overview와 상세 진단의 흐름은 유지한다.",
+    "SCADA 구성은 중앙집중형, 분산형 또는 가상화 구조가 가능하다."
+  ],
+  "revision_notes": [
+    "2026-08-06: SW-03 운전정보 관리 ownership과 SW-02 실행논리 경계를 확정했다.",
+    "Alarm philosophy, rationalization, Deadband, Delay, Shelving, Suppression, SOE와 Audit trail을 분리된 Fact로 구성했다.",
+    "SIL 산정, V-Model과 프로젝트 FAT·SAT는 인접 Topic으로 넘겼다."
+  ],
+  "topic_label": "SW-03 HMI·SCADA·Alarm·SOE",
+  "core_facts": [
+    "SW-03는 HMI·SCADA 구조, 고성능 HMI, Alarm 관리, Setpoint·Alarm·Trip·Interlock 값 관리, SOE, Audit trail, 운전자 권한과 비정상상황 대응을 운전정보 관리 체계로 연결한다.",
+    "HMI는 운전자와 제어시스템의 상호작용 화면을 제공하고, SCADA는 원격 감시·데이터 수집·명령·경보·이력 기능을 서버, 통신망, 현장 제어기와 연계하는 상위 감시체계이다.",
+    "HMI·SCADA 구조는 서버와 네트워크의 이중화 여부뿐 아니라 통신 단절, Failover, 데이터 품질, Stale 상태 및 재연결 후 데이터 일치성을 운전자에게 명확히 전달해야 한다.",
+    "High-performance HMI는 정상상태의 불필요한 장식을 줄이고 공정상태, 편차, 추세와 비정상 징후를 빠르게 인지하도록 정보 밀도와 시각적 우선순위를 설계한다.",
+    "화면계층은 일반적으로 Level 1 공정 전체 Overview, Level 2 Unit·Area, Level 3 상세 운전, Level 4 진단·정비 정보로 구성하며 상위에서 이상 위치를 찾고 하위에서 원인과 조치를 확인하도록 연결한다.",
+    "색상은 정상 장식보다 Alarm, 비정상, 선택상태와 품질저하 등 제한된 의미에 일관되게 사용하고, 화면 이동 시 설비 위치·운전모드·추세·관련 Alarm의 맥락이 유지되어야 한다.",
+    "Alarm은 비정상 상태를 운전자에게 알리고 정해진 시간 안에 판단 또는 조치를 요구하는 기능이며, 조치가 필요하지 않은 단순 Event·Status·Notification과 구분한다.",
+    "Alarm philosophy는 Alarm의 목적, 역할, 우선순위 기준, 상태표현, 승인권한, Shelving·Suppression, 성능지표, 변경관리와 주기적 검토 원칙을 조직 차원에서 정의한 상위 정책이다.",
+    "Alarm rationalization은 각 후보 Alarm에 대해 원인, 결과, 운전자 조치, 허용 응답시간, 우선순위, 설정값, Deadband, Delay, Shelving 허용조건과 문서 근거를 검토하여 필요한 Alarm만 승인하는 활동이다.",
+    "Alarm priority는 단순 측정값 크기가 아니라 조치하지 않았을 때의 결과 심각도와 운전자에게 허용된 응답시간을 함께 평가하여 결정하며, 우선순위별 표시와 대응절차가 일관되어야 한다.",
+    "Alarm의 Process condition, Active·Return-to-normal 상태와 Acknowledgement 상태는 별개이며, 운전자 Acknowledge는 인지 기록일 뿐 원인 제거 또는 Alarm 조건 해제를 의미하지 않는다.",
+    "Deadband는 Alarm이 발생한 뒤 정상 복귀 임계값을 발생 임계값과 다르게 두는 값의 이력폭으로, 경계 부근 노이즈에 의한 반복 발생과 해제를 줄인다.",
+    "Alarm delay는 조건이 일정 시간 연속 유지될 때 발생시키거나 정상상태가 일정 시간 유지될 때 해제하는 시간 필터이며, 실제로 필요한 짧은 응답을 가리지 않도록 공정 동특성과 허용 응답시간을 고려한다.",
+    "Shelving은 권한 있는 운전자가 알려진 사유로 특정 Alarm을 제한시간 동안 Active display에서 임시로 숨기는 운전행위이며, Alarm 정의와 이력은 유지하고 사유·사용자·시작·만료를 기록한다.",
+    "Suppression은 설비상태, 운전모드 또는 논리조건상 의미가 없는 Alarm을 설계된 조건에 따라 자동으로 발생하지 않게 하거나 표시대상에서 제외하는 기능이며, 운전자 임의 Shelving과 구분한다.",
+    "Alarm flood는 짧은 시간에 많은 Alarm이 집중되어 운전자의 인지·진단·조치를 방해하는 상태이고, Chattering은 같은 Alarm이 반복 발생·해제되는 현상이므로 원인 제거, 합리화, Deadband·Delay와 상태기반 Suppression으로 개선한다.",
+    "Alarm 성능은 시간당 발생률, Peak alarm rate, Standing alarm, Chattering alarm, Flood 구간, 우선순위 분포와 Shelving 사용을 현장 기준으로 추적하고 반복 원인을 개선해야 한다.",
+    "운전 Setpoint, Alarm value, Trip value와 Interlock value는 목적과 소유권이 다르며, Alarm은 운전자 조치를 촉구하고 Trip·Interlock은 자동 보호 또는 동작제약에 사용되므로 같은 값으로 임의 통합하지 않는다.",
+    "Setpoint list는 Tag, 기능, 값, 단위, 방향, Deadband·Delay, 적용모드, 근거, 승인자, 변경이력과 관련 Trip·Interlock 참조를 관리하고 온라인 변경은 권한·검토·기록·복구절차를 거쳐야 한다.",
+    "Alarm은 운전자 판단과 조치를 지원하는 정보 기능이고 Trip은 보호조건에 따른 자동 정지, Interlock은 위험하거나 허용되지 않은 동작을 금지·강제하는 논리이므로 표시정보와 실행논리를 구분한다.",
+    "SOE는 접점·상태·명령·보호동작 등의 변화 시각, 신호원, 이전값·새값과 품질을 공통 시간축에 고해상도로 기록하여 사건의 선후관계와 원인전파를 분석하는 기능이다.",
+    "SOE의 인과순서를 신뢰하려면 PLC·DCS·SCADA·보호장치의 시계를 동기화하고 Source timestamp, 시간정확도, 분해능, 통신지연과 Time quality를 함께 관리해야 한다.",
+    "Historian은 주기 또는 변화기반으로 공정값 추세를 장기 저장하는 기능이 중심이고 SOE는 이산 이벤트의 정확한 발생순서를 분석하는 기능이 중심이므로 표본주기와 Timestamp 출처를 구분한다.",
+    "First-out은 한 연쇄사건에서 최초로 유효해진 원인을 Latch하여 보존하는 논리이고 SOE는 전체 이벤트 순서를 기록하므로, First-out은 빠른 원인지시를 제공하고 SOE는 상세 검증을 보완한다.",
+    "Audit trail은 사용자가 수행한 Acknowledge, Shelving, Suppression 승인, Setpoint 변경, Login·Logout과 화면 명령에 대해 사용자, 시각, 대상, 이전값·새값, 사유와 결과를 기록한다.",
+    "운전자 권한은 역할기반 최소권한, 설비·기능·운전모드별 범위, 중요조작의 재확인 또는 이중승인, 세션관리와 Audit trail을 통해 통제한다.",
+    "Human error 방지는 현재 Mode·소유권·Interlock 사유·명령대상·예상결과를 명확히 표시하고, 중요조작 확인, 잘못된 대상 선택 방지, Command와 Feedback 분리, 취소·복구 경로를 제공하는 방식으로 구현한다.",
+    "Bad, Uncertain, Stale, Communication lost와 Manual substitution 같은 데이터 품질은 값 자체와 별도 상태로 표시하고, 품질이 나쁜 값을 정상 최신값처럼 제어판단이나 운전자 판단에 사용하지 않도록 한다.",
+    "Abnormal situation management는 Overview에서 이상 징후를 조기에 발견하고 Alarm과 Trend로 진단하며 절차와 권한에 따라 대응한 뒤 정상복구와 사후분석으로 이어지는 Detect-Diagnose-Respond-Recover 흐름이다.",
+    "SW-03는 Alarm·Setpoint·SOE·화면·권한 등 운전자 정보와 관리정책을 소유하고, Interlock·Trip의 실제 논리구조, 상태전이, Latch·Reset 및 Fail-safe 동작은 SW-02로 넘긴다.",
+    "SW-03는 운전정보의 내용과 운영관리 원칙을 소유하고, 일반 소프트웨어 V-Model·추적성·시험체계는 SW-04, 프로젝트 문서 인도·FAT·SAT·시운전 절차는 SW-10으로 넘긴다."
+  ]
+}
