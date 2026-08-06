@@ -205,6 +205,9 @@ echo
 echo "===== score flow guard regression ====="
 python3 scripts/test_score_flow_guards.py
 
+echo "===== ascii-only answer volume regression ====="
+python3 scripts/test_ascii_answer_volume.py
+
 echo
 echo "===== model answer router regression ====="
 python3 scripts/test_model_answer_router.py
