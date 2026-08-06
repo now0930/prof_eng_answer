@@ -121,7 +121,8 @@
         "sw06_configuration_item_scope",
         "sw06_moc_trigger_and_scope",
         "sw06_legacy_system_risk_based_management"
-      ]
+      ],
+      "intent": "제어시스템은 장기간 운전되며 작은 변경도 공정·안전·품질에 영향을 주므로 승인된 형상과 복구 가능성을 유지해야 한다."
     },
     {
       "section": "2. 형상 기준선",
@@ -131,7 +132,8 @@
         "sw06_baseline_approved_reference",
         "sw06_version_control_status_accounting",
         "sw06_as_built_consistency"
-      ]
+      ],
+      "intent": "CI 식별, Baseline 승인, Version control, 상태기록과 As-built consistency의 관계를 설명한다."
     },
     {
       "section": "3. 변경관리 절차",
@@ -142,7 +144,8 @@
         "sw06_risk_based_approval_authority",
         "sw06_change_implementation_plan",
         "sw06_emergency_change_retrospective_control"
-      ]
+      ],
+      "intent": "변경요청, 영향분석, 위험기반 승인, 실행계획과 긴급변경의 사후통제를 제시한다."
     },
     {
       "section": "4. Release와 Regression",
@@ -152,7 +155,8 @@
         "sw06_release_control_authorized_artifact",
         "sw06_risk_based_regression",
         "sw06_release_acceptance_and_asbuilt_update"
-      ]
+      ],
+      "intent": "Release package, 승인 artifact, risk-based Regression, 현장 인수와 As-built 갱신을 연결한다."
     },
     {
       "section": "5. Backup·Restore·Rollback",
@@ -164,7 +168,8 @@
         "sw06_irreversible_change_forward_recovery",
         "sw06_backup_integrity_separation_retention",
         "sw06_restore_test_recovery_evidence"
-      ]
+      ],
+      "intent": "변경 전 Backup, 세대·무결성 관리, Restore 시험, Rollback 기준과 비가역 변경대책을 구분한다."
     },
     {
       "section": "6. Migration과 Cutover",
@@ -177,7 +182,8 @@
         "sw06_parallel_operation_controls",
         "sw06_cutover_freeze_gonogo",
         "sw06_post_cutover_stabilization_decommission"
-      ]
+      ],
+      "intent": "Discovery, Compatibility matrix, 데이터 변환, 전환방식, Parallel operation, go/no-go와 안정화를 설명한다."
     },
     {
       "section": "7. Legacy·Obsolescence 관리",
@@ -190,7 +196,8 @@
         "sw06_vendor_lockin_lifecycle_risk",
         "sw06_license_entitlement_continuity",
         "sw06_firmware_compatibility_control"
-      ]
+      ],
+      "intent": "위험기반 Legacy 판단, proactive Obsolescence, 예비품, Vendor lock-in, License와 Firmware 수명주기를 설명한다."
     },
     {
       "section": "8. 운영 종결과 경계",
@@ -199,7 +206,8 @@
         "sw06_documentation_training_knowledge_retention",
         "sw06_sw04_boundary",
         "sw06_sw09_boundary"
-      ]
+      ],
+      "intent": "문서·교육·지식이전, 변경종결과 SW-04·SW-09 ownership 경계를 명시한다."
     }
   ],
   "high_score_points": [
