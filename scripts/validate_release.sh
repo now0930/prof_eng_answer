@@ -5,6 +5,7 @@ cd "$(dirname "$0")/.."
 
 PROMOTE_GENERATED="${PROMOTE_GENERATED:-1}"
 RUN_SMOKE_TOPIC_PACKS="${RUN_SMOKE_TOPIC_PACKS:-0}"
+RUN_GRADING_REPRODUCIBILITY="${RUN_GRADING_REPRODUCIBILITY:-0}"
 
 TOPIC_IDS=(
   "pid_controller_tuning_sequence_gain_effects"
@@ -281,3 +282,144 @@ python3 scripts/test_final_control_element_sil_sis_esd_pst_topic.py
 echo
 echo "===== control valve integrated selection process and lifecycle topic regression ====="
 python3 scripts/test_control_valve_selection_process_lifecycle_topic.py
+echo
+echo "===== additional release host regression matrix ====="
+
+echo "----- host regression: configuration change release backup rollback migration obsolescence management -----"
+python3 -B scripts/test_configuration_change_release_backup_rollback_migration_obsolescence_management.py
+
+echo "----- host regression: control logic sequence interlock permissive trip state transition -----"
+python3 -B scripts/test_control_logic_sequence_interlock_permissive_trip_state_transition.py
+
+echo "----- host regression: control software project fat sat commissioning acceptance -----"
+python3 -B scripts/test_control_software_project_fat_sat_commissioning_acceptance.py
+
+echo "----- host regression: control valve correctness bridge -----"
+python3 -B scripts/test_control_valve_correctness_bridge.py
+
+echo "----- host regression: control valve formula checker -----"
+python3 -B scripts/test_control_valve_formula_checker.py
+
+echo "----- host regression: control valve type logic regressions -----"
+python3 -B scripts/test_control_valve_type_logic_regressions.py
+
+echo "----- host regression: cross topic calibration corpus -----"
+python3 -B scripts/test_cross_topic_calibration_corpus.py
+
+echo "----- host regression: deterministic llm sampling -----"
+python3 -B scripts/test_deterministic_llm_sampling.py
+
+echo "----- host regression: expert calibration dataset -----"
+python3 -B scripts/test_expert_calibration_dataset.py
+
+echo "----- host regression: export expert calibration record -----"
+python3 -B scripts/test_export_expert_calibration_record.py
+
+echo "----- host regression: final verified coverage and session isolation -----"
+python3 -B scripts/test_final_verified_coverage_and_session_isolation.py
+
+echo "----- host regression: gemini semantic calibration regressions -----"
+python3 -B scripts/test_gemini_semantic_calibration_regressions.py
+
+echo "----- host regression: general evidence contract -----"
+python3 -B scripts/test_general_evidence_contract.py
+
+echo "----- host regression: general grading runtime e2e -----"
+python3 -B scripts/test_general_grading_runtime_e2e.py
+
+echo "----- host regression: generate expert calibration report -----"
+python3 -B scripts/test_generate_expert_calibration_report.py
+
+echo "----- host regression: generic formula integrity -----"
+python3 -B scripts/test_generic_formula_integrity.py
+
+echo "----- host regression: historian mes it ot cross lane ownership repair -----"
+python3 -B scripts/test_historian_mes_it_ot_cross_lane_ownership_repair.py
+
+echo "----- host regression: historian mes it ot data integration topic -----"
+python3 -B scripts/test_historian_mes_it_ot_data_integration_topic.py
+
+echo "----- host regression: hmi scada alarm setpoint soe operator information -----"
+python3 -B scripts/test_hmi_scada_alarm_setpoint_soe_operator_information.py
+
+echo "----- host regression: industrial ai ml model lifecycle topic -----"
+python3 -B scripts/test_industrial_ai_ml_model_lifecycle_topic.py
+
+echo "----- host regression: industrial network realtime determinism time synchronization fault recovery resilience -----"
+python3 -B scripts/test_industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience.py
+
+echo "----- host regression: industrial wired wireless communication fieldbus ethernet interoperability selection -----"
+python3 -B scripts/test_industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection.py
+
+echo "----- host regression: instrumentation control software lifecycle v model -----"
+python3 -B scripts/test_instrumentation_control_software_lifecycle_v_model.py
+
+echo "----- host regression: layer evidence guard -----"
+python3 -B scripts/test_layer_evidence_guard.py
+
+echo "----- host regression: ot cybersecurity defense in depth allowlisting supply chain incident response -----"
+python3 -B scripts/test_ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response.py
+
+echo "----- host regression: physical ai cross lane ownership repair -----"
+python3 -B scripts/test_physical_ai_cross_lane_ownership_repair.py
+
+echo "----- host regression: physical ai robot sensor fusion safety topic -----"
+python3 -B scripts/test_physical_ai_robot_sensor_fusion_safety_topic.py
+
+echo "----- host regression: plan a requirement coverage regressions -----"
+python3 -B scripts/test_plan_a_requirement_coverage_regressions.py
+
+echo "----- host regression: plan b semantic layer ownership regressions -----"
+python3 -B scripts/test_plan_b_semantic_layer_ownership_regressions.py
+
+echo "----- host regression: plan c topic aware fact cap regressions -----"
+python3 -B scripts/test_plan_c_topic_aware_fact_cap_regressions.py
+
+echo "----- host regression: plc dcs scada remote io architecture redundancy topic -----"
+python3 -B scripts/test_plc_dcs_scada_remote_io_architecture_redundancy_topic.py
+
+echo "----- host regression: post release control valve live regressions -----"
+python3 -B scripts/test_post_release_control_valve_live_regressions.py
+
+echo "----- host regression: question contract -----"
+python3 -B scripts/test_question_contract.py
+
+echo "----- host regression: question demand contract -----"
+python3 -B scripts/test_question_demand_contract.py
+
+echo "----- host regression: review expert calibration record -----"
+python3 -B scripts/test_review_expert_calibration_record.py
+
+echo "----- host regression: sis sil safety software topic -----"
+python3 -B scripts/test_sis_sil_safety_software_topic.py
+
+echo "----- host regression: topic classification policy -----"
+python3 -B scripts/test_topic_classification_policy.py
+
+echo "----- host regression: topic pack validator multischema -----"
+python3 -B scripts/test_topic_pack_validator_multischema.py
+
+echo "----- host regression: verdict recommendation consistency -----"
+python3 -B scripts/test_verdict_recommendation_consistency.py
+
+echo "----- host regression: verified defect reconciliation -----"
+python3 -B scripts/test_verified_defect_reconciliation.py
+
+echo "----- host regression: verified defect single owner guard -----"
+python3 -B scripts/test_verified_defect_single_owner_guard.py
+
+# RELEASE_DEDICATED_TEST: scripts/test_grading_reproducibility.py
+echo
+echo "===== dedicated grading reproducibility P0 gate ====="
+if [[ "${RUN_GRADING_REPRODUCIBILITY}" == "1" ]]; then
+  (
+    repro_dir="$(mktemp -d "${TMPDIR:-/tmp}/prof_eng_answer_repro.XXXXXX")"
+    trap 'rm -rf -- "${repro_dir}"' EXIT
+    python3 -B scripts/test_grading_reproducibility.py \
+      --runs 10 \
+      --output-json "${repro_dir}/grading_reproducibility.json" \
+      --output-md "${repro_dir}/grading_reproducibility.md"
+  )
+else
+  echo "SKIP: dedicated reproducibility gate is opt-in. Set RUN_GRADING_REPRODUCIBILITY=1 to run exact 10-run P0 validation."
+fi

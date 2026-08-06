@@ -19,6 +19,10 @@ _TEST_PATH_RE = re.compile(
 _TEST_MODULE_RE = re.compile(
     r"^(scripts\.test_[A-Za-z0-9_]+)"
 )
+_DEDICATED_TEST_RE = re.compile(
+    r"^\s*#\s*RELEASE_DEDICATED_TEST:\s*"
+    r"(scripts/test_[A-Za-z0-9_]+\.py)\s*$"
+)
 
 
 def logical_shell_lines(text: str) -> list[str]:
@@ -157,6 +161,20 @@ def discover_test_paths(root: Path) -> list[str]:
     )
 
 
+def collect_dedicated_test_paths(
+    release_text: str,
+) -> set[str]:
+    dedicated: set[str] = set()
+
+    for raw_line in release_text.splitlines():
+        match = _DEDICATED_TEST_RE.match(raw_line)
+
+        if match:
+            dedicated.add(match.group(1))
+
+    return dedicated
+
+
 def find_missing_test_paths(
     root: Path,
     release_text: str,
@@ -165,11 +183,15 @@ def find_missing_test_paths(
     executed = collect_executed_test_paths(
         release_text
     )
+    dedicated = collect_dedicated_test_paths(
+        release_text
+    )
+    covered = executed | dedicated
 
     return [
         path
         for path in discovered
-        if path not in executed
+        if path not in covered
     ]
 
 
@@ -193,24 +215,46 @@ def main() -> int:
     executed = collect_executed_test_paths(
         release_text
     )
-    missing = find_missing_test_paths(
-        ROOT,
-        release_text,
+    dedicated = collect_dedicated_test_paths(
+        release_text
     )
+
+    unknown_dedicated = sorted(
+        dedicated - set(test_paths)
+    )
+    if unknown_dedicated:
+        print(
+            "ERROR: dedicated release test markers reference "
+            "unknown test modules:"
+        )
+        for path in unknown_dedicated:
+            print(f"- {path}")
+        return 1
+
+    ordinary_executed = executed - dedicated
+    covered = ordinary_executed | dedicated
+    missing = [
+        path
+        for path in test_paths
+        if path not in covered
+    ]
 
     print("=== Release test execution coverage validation ===")
 
     for path in test_paths:
-        state = (
-            "COVERED"
-            if path in executed
-            else "MISSING"
-        )
+        if path in dedicated:
+            state = "DEDICATED"
+        elif path in ordinary_executed:
+            state = "EXECUTED"
+        else:
+            state = "MISSING"
         print(f"{state}: {path}")
 
     print()
     print(f"test modules: {len(test_paths)}")
-    print(f"covered: {len(test_paths) - len(missing)}")
+    print(f"executed: {len(ordinary_executed)}")
+    print(f"dedicated: {len(dedicated)}")
+    print(f"covered: {len(covered)}")
     print(f"missing: {len(missing)}")
 
     if missing:

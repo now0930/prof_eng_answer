@@ -123,5 +123,43 @@ python3 -m unittest scripts.test_executed
             )
 
 
+    def test_dedicated_marker_is_collected(
+        self,
+    ) -> None:
+        text = """
+# RELEASE_DEDICATED_TEST: scripts/test_repro.py
+"""
+
+        self.assertEqual(
+            target.collect_dedicated_test_paths(text),
+            {"scripts/test_repro.py"},
+        )
+
+    def test_dedicated_test_is_not_missing(
+        self,
+    ) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            scripts = root / "scripts"
+            scripts.mkdir()
+
+            (scripts / "test_repro.py").write_text(
+                "def test_example():\n    pass\n",
+                encoding="utf-8",
+            )
+
+            release_text = """
+# RELEASE_DEDICATED_TEST: scripts/test_repro.py
+"""
+
+            self.assertEqual(
+                target.find_missing_test_paths(
+                    root,
+                    release_text,
+                ),
+                [],
+            )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
