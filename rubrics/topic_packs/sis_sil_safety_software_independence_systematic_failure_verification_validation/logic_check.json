@@ -12,7 +12,7 @@
     "major_checks": [],
     "question_type_checks": [],
     "next_practice_points": [],
-    "de_claim_trust": "none"
+    "de_claim_trust": {}
   },
   "llm_profile": {
     "display_name": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
