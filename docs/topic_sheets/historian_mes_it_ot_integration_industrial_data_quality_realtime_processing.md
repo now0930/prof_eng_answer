@@ -316,11 +316,11 @@ Data quality
 ### Negative Boundary
 
 1. OPC UA, Modbus TCP와 MQTT Protocol의 Frame 및 QoS를 비교하시오. → SW-07
-2. 산업 Ethernet의 실시간 통신과 TSN을 설명하시오. → SW-07
+2. 산업 Ethernet의 실시간 통신과 TSN을 설명하시오. → SW-08
 3. AI 이상탐지 모델의 Precision, Recall과 F1을 설명하시오. → SW-12
 4. 예지보전 Model의 Drift와 Retraining 절차를 설명하시오. → SW-12
 5. PLC Sequence, Interlock과 Trip Logic을 설명하시오. → SW-02
-6. 산업제어시스템 Network Segmentation과 Zero Trust를 설명하시오. → SW-08
+6. 산업제어시스템 Network Segmentation과 Zero Trust를 설명하시오. → SW-09
 7. Digital Twin 기반 Robot 자율제어를 설명하시오. → SW-13
 8. 일반 Software 요구분석과 Unit Test 절차를 설명하시오. → SW-04
 

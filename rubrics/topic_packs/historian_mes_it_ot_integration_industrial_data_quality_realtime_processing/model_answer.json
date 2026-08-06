@@ -311,7 +311,7 @@
     },
     {
       "question": "산업 Ethernet의 실시간 통신과 TSN을 설명하시오.",
-      "owner": "SW-07"
+      "owner": "SW-08"
     },
     {
       "question": "AI 이상탐지 모델의 Precision, Recall과 F1을 설명하시오.",
@@ -327,7 +327,7 @@
     },
     {
       "question": "산업제어시스템 Network Segmentation과 Zero Trust를 설명하시오.",
-      "owner": "SW-08"
+      "owner": "SW-09"
     },
     {
       "question": "Digital Twin 기반 Robot 자율제어를 설명하시오.",
