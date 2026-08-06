@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PROCEDURE",
+  "high_band_unlock_conditions": [
+    "시험 가능한 요구사항과 V-Model 좌·우 대응을 설명한다.",
+    "Verification과 Validation을 명세 적합성과 사용목적 적합성으로 구분한다.",
+    "RTM의 순방향·역방향 추적을 설계·코드·시험·결과까지 연결한다.",
+    "단위·통합·시스템시험의 대상과 검출결함을 구분한다.",
+    "정적·동적·회귀시험을 실행여부와 변경영향 관점에서 설명한다.",
+    "Simulation·HIL·Fault injection의 환경, 한계와 복구검증을 비교한다.",
+    "결함·변경·baseline·회귀·승인 증적을 폐루프로 연결한다.",
+    "SW-05 Safety lifecycle과 SW-10 프로젝트 수행 경계를 침범하지 않는다."
+  ],
+  "note": "계측제어 소프트웨어 수명주기와 V&V는 요구사항부터 시험·승인까지 모든 소프트웨어 문제의 공통 기반이다. 단계 나열보다 V-Model 대응, 양방향 추적성, 시험수준별 목적과 변경·결함 환류를 설명해야 고득점이 가능하므로 핵심 준비 Topic으로 분류한다.",
+  "revision_notes": [
+    "일반 계측제어 SW lifecycle의 난이도와 선택 중요도를 정의했다.",
+    "V-Model·RTM·시험전략·결함환류를 high-band 조건으로 반영했다."
+  ],
+  "topic_label": "SW-04 계측제어 SW 수명주기·V-Model·V&V"
+}
