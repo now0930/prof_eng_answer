@@ -262,6 +262,7 @@ class SemanticAuditRepairTests(unittest.TestCase):
         self.fact = load_json(FACT)
         self.logic = load_json(LOGIC)
         self.anchors = {item["id"]: item for item in self.fact["anchors"]}
+        self.fatals = {item["id"]: item for item in self.fact["fatal_wrong_claims"]}
 
     def test_hil_sil_virtual_commissioning_boundary(self) -> None:
         text = self.anchors["sw04_hil"]["statement"]
@@ -272,10 +273,18 @@ class SemanticAuditRepairTests(unittest.TestCase):
         self.assertIn("하드웨어 없이", text)
 
     def test_hil_fatal_keeps_real_plant_exception(self) -> None:
-        fatal = next(item for item in self.logic["llm_profile"]["fatal_conditions"] if item["id"] == "sw04_fatal_hil_requires_real_plant")
-        self.assertIn("실제 생산설비 가동은 필요하지 않다", fatal["correct_rule"])
-        self.assertNotIn("실제 제어 HW 또는 실행환경", fatal["correct_rule"])
-        self.assertIn("실제 I/O 하드웨어", fatal["correct_rule"])
+        logic_fatal = next(item for item in self.logic["llm_profile"]["fatal_conditions"] if item["id"] == "sw04_fatal_hil_requires_real_plant")
+        fact_fatal = self.fatals["sw04_fatal_hil_requires_real_plant"]
+        self.assertIn("실제 생산설비 가동은 필요하지 않다", logic_fatal["correct_rule"])
+        for field in ("correction", "correct_rule", "description"):
+            text = fact_fatal[field]
+            self.assertIn("실제 대상 제어기", text)
+            self.assertIn("실제 I/O 하드웨어", text)
+            self.assertIn("실시간 Plant Model", text)
+            self.assertIn("SIL(Software-in-the-loop)", text)
+            self.assertIn("Virtual Commissioning", text)
+            self.assertNotIn("실제 제어 HW 또는 실행환경", text)
+        self.assertIn("실제 생산설비를 가동할 필요는 없다", fact_fatal["correction"])
 
 
 if __name__ == "__main__":
