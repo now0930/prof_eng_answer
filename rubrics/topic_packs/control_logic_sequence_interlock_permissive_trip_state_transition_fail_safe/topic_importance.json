@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "Sequence를 State, 진입조건, 동작, 완료 피드백, Timeout과 실패·복구 경로로 설명한다.",
+    "Permissive, Interlock, Trip 및 정상 Shutdown을 목적·시점·우선순위·Latch·Reset 기준으로 구분한다.",
+    "상태전이 논리식 또는 허용 전이표를 제시하고 이상전이 방지조건을 설명한다.",
+    "Cause & Effect, M-out-of-N Voting과 First-out의 역할과 한계를 구분한다.",
+    "Bypass와 Override의 권한, 표시, 제한시간, 대체조치 및 복구확인을 제시한다.",
+    "Fail-safe를 공정별 Safe state로 정의하고 Watchdog·Bad quality·Degraded mode를 연결한다.",
+    "Restart 시 실제 설비상태 재수집, State reconciliation, Permissive 재확인과 Latch 보존을 설명한다.",
+    "SW-03의 운전정보 관리와 SW-05의 SIL·안전수명주기를 ownership 경계로 명확히 분리한다."
+  ],
+  "note": "Sequence와 Interlock·Permissive·Trip은 PLC·DCS 응용문제, Cause & Effect, 시운전 및 이상상황 대응의 공통 기반이다. 단순 용어 암기가 아니라 상태전이, 우선순위, 피드백 확인, Fail-safe와 복구까지 연결해야 고득점이 가능하므로 핵심 준비 Topic으로 분류한다.",
+  "revision_notes": [
+    "2026-08-06: difficulty=DESIGN_EVALUATION, selection_importance=CORE_MUST_PREPARE로 확정했다.",
+    "question_type은 개념과 동작 메커니즘 비교가 중심이므로 PRINCIPLE_INTERPRETATION으로 설정했다."
+  ],
+  "topic_label": "SW-02 제어논리·Sequence·Interlock·Trip"
+}

@@ -1,0 +1,294 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+  "title_ko": "제어논리, Sequence, Interlock, Permissive, Trip, 상태전이 및 Fail-Safe",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Sequence control의 상태전이, 단계완료 조건 및 비정상 전이 방지방법을 설명하시오.",
+      "intent": "Sequence와 상태전이 설계",
+      "required_anchor_ids": [
+        "sw02_sequence_definition",
+        "sw02_state_transition_model",
+        "sw02_transition_guard",
+        "sw02_feedback_confirmation_timeout",
+        "sw02_abnormal_transition_prevention"
+      ]
+    },
+    {
+      "pattern": "Interlock, Permissive 및 Trip의 차이와 적용방법을 설명하시오.",
+      "intent": "세 논리의 목적과 동작 차이",
+      "required_anchor_ids": [
+        "sw02_permissive_definition",
+        "sw02_interlock_definition",
+        "sw02_trip_definition",
+        "sw02_trip_latch_reset"
+      ]
+    },
+    {
+      "pattern": "공정 Shutdown 논리와 Cause & Effect 작성 시 고려사항을 설명하시오.",
+      "intent": "정상정지와 보호정지 및 원인-결과 문서",
+      "required_anchor_ids": [
+        "sw02_shutdown_classes",
+        "sw02_cause_effect",
+        "sw02_command_arbitration"
+      ]
+    },
+    {
+      "pattern": "2oo3 Voting과 First-out 논리의 원리 및 설계 유의사항을 설명하시오.",
+      "intent": "다중 입력 판정과 최초 원인 보존",
+      "required_anchor_ids": [
+        "sw02_voting_logic",
+        "sw02_first_out",
+        "sw02_signal_quality"
+      ]
+    },
+    {
+      "pattern": "Bypass와 Override의 차이, 위험요인 및 관리방안을 설명하시오.",
+      "intent": "우회와 강제명령의 구분",
+      "required_anchor_ids": [
+        "sw02_bypass",
+        "sw02_override",
+        "sw02_command_arbitration"
+      ]
+    },
+    {
+      "pattern": "Fail-safe와 Watchdog의 개념을 설명하고 고장 시 제어논리를 제시하시오.",
+      "intent": "고장 검출과 안전상태 전환",
+      "required_anchor_ids": [
+        "sw02_fail_safe",
+        "sw02_watchdog",
+        "sw02_signal_quality",
+        "sw02_degraded_mode"
+      ]
+    },
+    {
+      "pattern": "제어시스템 Restart 및 Recovery 논리의 설계기준을 설명하시오.",
+      "intent": "재기동과 상태 일치화",
+      "required_anchor_ids": [
+        "sw02_restart_recovery",
+        "sw02_trip_latch_reset",
+        "sw02_signal_quality",
+        "sw02_command_arbitration"
+      ]
+    },
+    {
+      "pattern": "PLC Sequence에서 Timer, Feedback, Edge 및 Latch 적용 시 주의사항을 설명하시오.",
+      "intent": "Scan 기반 구현 상세",
+      "required_anchor_ids": [
+        "sw02_feedback_confirmation_timeout",
+        "sw02_scan_edge_memory",
+        "sw02_debounce_hysteresis",
+        "sw02_trip_latch_reset"
+      ]
+    },
+    {
+      "pattern": "Manual·Auto, Local·Remote 운전모드의 명령 우선순위와 보호논리를 설명하시오.",
+      "intent": "모드와 명령 중재",
+      "required_anchor_ids": [
+        "sw02_command_arbitration",
+        "sw02_manual_mode_boundary",
+        "sw02_interlock_definition",
+        "sw02_trip_definition"
+      ]
+    },
+    {
+      "pattern": "제어논리에서 상태전이표를 이용한 이상전이 방지 및 복구방안을 설명하시오.",
+      "intent": "Illegal state 방지와 복구",
+      "required_anchor_ids": [
+        "sw02_state_transition_model",
+        "sw02_abnormal_transition_prevention",
+        "sw02_restart_recovery",
+        "sw02_degraded_mode"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 배경과 제어논리 계층",
+      "intent": "운전요구를 Sequence, 상태전이, 제약논리와 보호동작으로 구조화하고 SW-02의 소유범위를 제시한다.",
+      "anchor_refs": [
+        "sw02_scope_operational_logic",
+        "sw02_sw03_boundary",
+        "sw02_sw05_boundary"
+      ]
+    },
+    {
+      "section": "2. Sequence와 상태전이 모델",
+      "intent": "Step·State, Entry/Exit action, 전이조건과 결정론적 다음 상태를 설명한다.",
+      "anchor_refs": [
+        "sw02_sequence_definition",
+        "sw02_state_transition_model",
+        "sw02_transition_guard",
+        "sw02_state_entry_exit_actions"
+      ]
+    },
+    {
+      "section": "3. Permissive·Interlock·Trip·Shutdown",
+      "intent": "기동 허가, 운전 제약, 보호정지와 정상정지의 목적·우선순위·Reset 차이를 비교한다.",
+      "anchor_refs": [
+        "sw02_permissive_definition",
+        "sw02_interlock_definition",
+        "sw02_trip_definition",
+        "sw02_shutdown_classes",
+        "sw02_trip_latch_reset"
+      ]
+    },
+    {
+      "section": "4. Cause & Effect·Voting·First-out",
+      "intent": "원인-결과 설계문서, M-out-of-N 판정과 최초 원인 보존 메커니즘을 연결한다.",
+      "anchor_refs": [
+        "sw02_cause_effect",
+        "sw02_voting_logic",
+        "sw02_first_out"
+      ]
+    },
+    {
+      "section": "5. Bypass·Override·명령 우선순위",
+      "intent": "우회와 강제명령을 구분하고 Local/Remote, Manual/Auto 및 Trip 우선순위를 제시한다.",
+      "anchor_refs": [
+        "sw02_bypass",
+        "sw02_override",
+        "sw02_command_arbitration",
+        "sw02_manual_mode_boundary"
+      ]
+    },
+    {
+      "section": "6. Fail-safe·Watchdog·신호품질",
+      "intent": "고장 검출, 안전상태, Bad quality와 제한운전 정책을 설명한다.",
+      "anchor_refs": [
+        "sw02_fail_safe",
+        "sw02_watchdog",
+        "sw02_signal_quality",
+        "sw02_degraded_mode"
+      ]
+    },
+    {
+      "section": "7. 이상전이 방지와 구현 상세",
+      "intent": "피드백 확인, Timeout, 전이표, Mutual exclusion, Scan·Edge·Latch와 Debounce를 설명한다.",
+      "anchor_refs": [
+        "sw02_feedback_confirmation_timeout",
+        "sw02_abnormal_transition_prevention",
+        "sw02_scan_edge_memory",
+        "sw02_debounce_hysteresis"
+      ]
+    },
+    {
+      "section": "8. Restart·Recovery와 현장 적용 결론",
+      "intent": "상태 일치화, Latch 보존, 재기동 승인과 시험 시나리오를 통해 안전하고 복구 가능한 논리설계를 정리한다.",
+      "anchor_refs": [
+        "sw02_restart_recovery",
+        "sw02_trip_latch_reset",
+        "sw02_signal_quality",
+        "sw02_command_arbitration"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Sequence를 Step 나열이 아니라 State, 진입조건, 동작, 완료조건, Timeout과 실패처리로 구조화한다.",
+    "Permissive, Interlock, Trip을 사전 허가·운전 제약·보호 강제정지로 구분한다.",
+    "정상 Shutdown과 Trip의 목적, 우선순위와 동작속도 차이를 설명한다.",
+    "상태전이식을 제시하고 Command, Permissive, Feedback, Trip과 Inhibit의 논리관계를 설명한다.",
+    "Trip Latch와 Reset valid 조건을 원인 제거, 안전조건, 권한과 Reset edge로 제시한다.",
+    "Cause & Effect가 설계 의도 문서이며 상세 실행논리를 완전히 대체하지 않는다고 설명한다.",
+    "Voting을 M-out-of-N 식과 채널 독립성·공통원인·진단·불일치 처리로 연결한다.",
+    "First-out을 최초 유효 원인 보존과 연쇄 결과 구분으로 설명한다.",
+    "Bypass와 Override의 목적을 구분하고 승인, 시간제한, 표시, 대체조치와 해제를 제시한다.",
+    "Fail-safe를 공정별 Safe state로 정의하고 Fail-close 절대론을 피한다.",
+    "Watchdog와 Bad quality를 Hold, Controlled stop, Trip 또는 Degraded mode 정책으로 연결한다.",
+    "명령 출력과 실제 설비 피드백을 구분하고 Timeout과 고착·불일치 진단을 포함한다.",
+    "허용 전이표, Mutual exclusion, One-hot, Edge, Latch, Debounce로 이상전이를 방지한다.",
+    "Restart 시 실제 상태 재수집, State reconciliation, Permissive 재확인과 Latch 보존을 설명한다.",
+    "SW-03과 SW-05의 소유범위를 명확히 구분하여 Alarm 관리나 SIL 산정으로 범위를 확장하지 않는다.",
+    "비용과 구현 난이도뿐 아니라 운전성, 유지보수, 기존 설비 I/O와 시험 가능성을 고려한다."
+  ],
+  "common_missing_points": [
+    "Sequence를 단순 순서도나 Timer 나열로만 설명하고 상태·완료조건·실패처리를 누락함.",
+    "Permissive, Interlock, Trip을 같은 의미로 사용함.",
+    "Trip의 Latch와 Reset 조건을 설명하지 않음.",
+    "정상 Shutdown과 보호 Trip의 차이를 누락함.",
+    "Cause & Effect를 실행 프로그램과 동일시함.",
+    "Voting 숫자만 제시하고 채널 독립성·공통원인·불일치 처리를 누락함.",
+    "First-out을 Alarm 우선순위 또는 마지막 잔류신호와 혼동함.",
+    "Bypass와 Override의 승인, 표시, 시간제한과 복구확인을 누락함.",
+    "Fail-safe를 모든 밸브 Fail-close로 일반화함.",
+    "Watchdog를 단순 상태감시로만 설명하고 Timeout 후 동작을 누락함.",
+    "Restart 시 이전 Step과 출력을 그대로 복원한다고 설명함.",
+    "Manual mode에서 보호논리 유지와 명령 우선순위를 누락함.",
+    "Bad quality와 stale data 처리정책을 누락함.",
+    "SW-03의 Alarm·SOE 운영정보와 SW-05의 SIL·Safety V&V를 본 Topic의 핵심으로 확장함."
+  ],
+  "routing_aliases": [
+    "제어논리 Sequence Interlock Permissive Trip",
+    "시퀀스 상태전이 인터록 퍼미시브 트립",
+    "Sequence control state transition interlock permissive trip",
+    "운전 제어논리와 상태전이",
+    "Interlock Permissive Trip 차이",
+    "인터록 퍼미시브 트립 차이",
+    "Cause & Effect Voting First-out",
+    "원인 결과표 Voting First-out",
+    "Bypass Override 제어논리",
+    "바이패스 오버라이드 명령 우선순위",
+    "Fail-safe Watchdog Restart Recovery",
+    "Fail safe watchdog 재기동 복구논리",
+    "Sequence abnormal transition prevention",
+    "시퀀스 이상전이 방지",
+    "Trip latch reset logic",
+    "트립 래치 리셋 조건",
+    "Manual Auto Local Remote command arbitration",
+    "수동 자동 로컬 리모트 명령 중재",
+    "PLC sequence feedback timeout one-shot latch",
+    "상태전이표 mutual exclusion illegal state recovery"
+  ],
+  "routing_field_points": [
+    "sequence control",
+    "step",
+    "state",
+    "state transition",
+    "transition guard",
+    "entry action",
+    "exit action",
+    "permissive",
+    "interlock",
+    "trip",
+    "shutdown",
+    "cause and effect",
+    "cause & effect",
+    "voting",
+    "m-out-of-n",
+    "2oo3",
+    "first-out",
+    "bypass",
+    "override",
+    "fail-safe",
+    "safe state",
+    "watchdog",
+    "heartbeat",
+    "timeout",
+    "restart",
+    "recovery",
+    "state reconciliation",
+    "abnormal transition",
+    "mutual exclusion",
+    "one-hot",
+    "illegal state",
+    "command arbitration",
+    "manual auto",
+    "local remote",
+    "feedback confirmation",
+    "trip latch",
+    "reset condition",
+    "bad quality",
+    "stale data",
+    "degraded mode",
+    "debounce",
+    "hysteresis",
+    "one-shot",
+    "scan"
+  ],
+  "revision_notes": [
+    "2026-08-06: SW-02 대표 출제문제 10개와 8단계 Model Answer 구조를 작성했다.",
+    "단독 broad alias인 PLC, SCADA, Alarm, Trip, Interlock, SIS는 routing_aliases에서 제외했다.",
+    "SW-03 및 SW-05 경계 질문은 보조 범위로만 포함했다."
+  ]
+}
