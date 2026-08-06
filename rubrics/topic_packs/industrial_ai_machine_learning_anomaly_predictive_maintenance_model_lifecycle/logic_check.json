@@ -1,0 +1,936 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+  "source_policy": {
+    "primary_basis": [
+      "industrial machine-learning lifecycle principles",
+      "time-series validation and model-governance principles",
+      "project data, operating modes and maintenance procedures"
+    ],
+    "verify_first": [
+      "applicable AI governance and safety-standard edition",
+      "site-specific false-alarm and missed-detection cost",
+      "RUL failure threshold and confidence method",
+      "drift threshold and retraining approval criteria",
+      "edge runtime, latency and cybersecurity requirement",
+      "closed-loop automation safety and regulatory acceptance"
+    ],
+    "prohibited_generalizations": [
+      "high accuracy automatically guarantees field safety",
+      "predictive maintenance eliminates all failures",
+      "retraining always improves the model",
+      "explainability proves causality"
+    ]
+  },
+  "deterministic_checks": {
+    "enabled": false,
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "reason": "Industrial AI claims require context-aware review of data split, cost, drift, deployment and field risk."
+  },
+  "llm_profile": {
+    "enabled": true,
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "truth_schema": [
+      {
+        "id": "ai_ml_dl_hierarchy",
+        "statement": "AI는 지능적 과업을 수행하는 기술의 상위 개념이고 Machine Learning은 데이터에서 패턴을 학습하는 AI의 부분집합이며 Deep Learning은 다층 신경망을 사용하는 Machine Learning의 부분집합이다.",
+        "keywords": [
+          "AI",
+          "machine learning",
+          "deep learning",
+          "부분집합"
+        ],
+        "core_terms": [
+          "AI",
+          "ML",
+          "DL"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "supervised_learning",
+        "statement": "Supervised Learning은 입력과 정답 Label의 관계를 학습하며 Classification, Regression과 일부 Forecasting 문제에 사용한다.",
+        "keywords": [
+          "supervised learning",
+          "label",
+          "classification",
+          "regression"
+        ],
+        "core_terms": [
+          "supervised learning",
+          "label"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "unsupervised_learning",
+        "statement": "Unsupervised Learning은 정답 Label 없이 구조, 군집 또는 정상 패턴을 학습할 수 있으나 결과의 현장 타당성 검토와 별도 평가가 필요하다.",
+        "keywords": [
+          "unsupervised learning",
+          "clustering",
+          "normal pattern",
+          "validation"
+        ],
+        "core_terms": [
+          "unsupervised learning",
+          "field validation"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "task_type_selection",
+        "statement": "Classification은 범주를, Regression은 연속값을, Forecasting은 미래 시계열을 예측하므로 목표변수와 의사결정 방식에 맞게 문제를 정의해야 한다.",
+        "keywords": [
+          "classification",
+          "regression",
+          "forecasting",
+          "target"
+        ],
+        "core_terms": [
+          "task definition",
+          "target variable"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "anomaly_detection_score_threshold",
+        "statement": "Anomaly Detection은 정상에서 벗어난 정도를 Score로 산출하고 Threshold로 경보를 결정하며 높은 Score가 특정 고장원인의 확정을 의미하지 않는다.",
+        "keywords": [
+          "anomaly detection",
+          "score",
+          "threshold",
+          "diagnosis"
+        ],
+        "core_terms": [
+          "anomaly score",
+          "threshold"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "predictive_maintenance_scope",
+        "statement": "Predictive Maintenance는 상태데이터를 이용해 고장 가능성, 열화상태 또는 정비시점을 추정하여 계획정비를 지원하지만 모든 고장을 제거하지 않는다.",
+        "keywords": [
+          "predictive maintenance",
+          "condition data",
+          "maintenance planning"
+        ],
+        "core_terms": [
+          "predictive maintenance",
+          "failure risk"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "remaining_useful_life_uncertainty",
+        "statement": "Remaining Useful Life는 현재 상태에서 정의된 고장기준까지 남은 시간 또는 Cycle의 추정치이며 불확실성, 신뢰구간과 적용조건을 함께 제시해야 한다.",
+        "keywords": [
+          "remaining useful life",
+          "RUL",
+          "uncertainty",
+          "failure threshold"
+        ],
+        "core_terms": [
+          "RUL",
+          "uncertainty"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "process_optimization_boundary",
+        "statement": "Process Optimization Model은 품질, 생산량, 에너지와 제약조건의 Trade-off를 지원하며 제어출력 적용 전 안전범위, 제약, 승인과 Supervisory Control을 분리해야 한다.",
+        "keywords": [
+          "process optimization",
+          "constraint",
+          "safety envelope",
+          "supervisory control"
+        ],
+        "core_terms": [
+          "optimization",
+          "constraint"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "feature_engineering_context",
+        "statement": "Feature Engineering은 원시데이터를 공정지식과 시간 Context에 맞는 통계량, 변화율, Window, 주파수 또는 상태특징으로 변환하며 미래정보를 포함해서는 안 된다.",
+        "keywords": [
+          "feature engineering",
+          "window",
+          "domain knowledge",
+          "future information"
+        ],
+        "core_terms": [
+          "feature engineering",
+          "time context"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "representative_data",
+        "statement": "Training Data는 정상·고장·운전모드·제품·계절·정비상태와 Sensor 품질을 대표해야 하며 수집 편향과 Label 품질을 기록해야 한다.",
+        "keywords": [
+          "training data",
+          "representativeness",
+          "label quality",
+          "sampling bias"
+        ],
+        "core_terms": [
+          "representative data",
+          "label quality"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "train_validation_test_separation",
+        "statement": "Training Set은 Parameter 학습에, Validation Set은 Model과 Hyperparameter 선택에, Test Set은 최종 일반화 성능 확인에 사용하며 역할을 분리한다.",
+        "keywords": [
+          "training set",
+          "validation set",
+          "test set",
+          "generalization"
+        ],
+        "core_terms": [
+          "train validation test",
+          "separation"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "chronological_group_split",
+        "statement": "산업 시계열은 시간순 분할과 설비·Batch·제품 단위 Group 분할을 적용하여 동일 Episode와 미래정보가 Train과 Test에 섞이지 않게 해야 한다.",
+        "keywords": [
+          "chronological split",
+          "group split",
+          "time series",
+          "episode"
+        ],
+        "core_terms": [
+          "time split",
+          "group split"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "data_leakage",
+        "statement": "Data Leakage는 예측시점에 사용할 수 없는 미래정보, Target 파생정보 또는 동일 사건의 중복표본이 학습에 유입되어 성능을 과대평가하는 현상이다.",
+        "keywords": [
+          "data leakage",
+          "future information",
+          "target leakage",
+          "duplicate episode"
+        ],
+        "core_terms": [
+          "data leakage",
+          "future information"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "class_imbalance",
+        "statement": "고장과 이상 Event가 희소한 Class Imbalance 문제에서는 Accuracy만으로 성능을 판단하지 말고 Sampling, Class Weight, Precision, Recall과 PR 관점으로 평가한다.",
+        "keywords": [
+          "class imbalance",
+          "accuracy",
+          "class weight",
+          "precision recall"
+        ],
+        "core_terms": [
+          "class imbalance",
+          "accuracy"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "confusion_matrix",
+        "statement": "Binary Classification은 TP, FP, TN, FN의 Confusion Matrix로 결과를 구분하여 오경보와 미검출을 별도로 해석해야 한다.",
+        "keywords": [
+          "TP",
+          "FP",
+          "TN",
+          "FN",
+          "confusion matrix"
+        ],
+        "core_terms": [
+          "confusion matrix",
+          "false positive",
+          "false negative"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "precision_metric",
+        "statement": "Precision은 모델이 Positive로 판정한 사례 중 실제 Positive의 비율이며 오경보가 많은 경우 낮아진다.",
+        "keywords": [
+          "precision",
+          "TP",
+          "FP",
+          "false alarm"
+        ],
+        "core_terms": [
+          "precision",
+          "false positive"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "recall_metric",
+        "statement": "Recall은 실제 Positive 중 모델이 검출한 비율이며 위험 고장의 미검출이 중요한 경우 핵심 지표가 된다.",
+        "keywords": [
+          "recall",
+          "TP",
+          "FN",
+          "missed detection"
+        ],
+        "core_terms": [
+          "recall",
+          "false negative"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "f1_metric",
+        "statement": "F1 Score는 Precision과 Recall의 조화평균으로 두 지표의 균형을 요약하지만 비용과 운전조건을 단독으로 대체하지 않는다.",
+        "keywords": [
+          "F1",
+          "harmonic mean",
+          "precision",
+          "recall"
+        ],
+        "core_terms": [
+          "F1",
+          "harmonic mean"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "false_alarm_miss_tradeoff",
+        "statement": "Threshold를 낮추면 일반적으로 Recall은 증가하고 False Alarm도 증가할 수 있으므로 미검출 비용, 확인인력과 정비부하를 함께 최적화한다.",
+        "keywords": [
+          "threshold",
+          "false alarm",
+          "missed detection",
+          "trade-off"
+        ],
+        "core_terms": [
+          "threshold trade-off",
+          "false alarm"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "decision_cost_and_lead_time",
+        "statement": "현장 성과는 Model Metric뿐 아니라 경보 Lead Time, 확인 소요, 정비 Action 가능성, Downtime과 오경보 비용으로 평가해야 한다.",
+        "keywords": [
+          "lead time",
+          "maintenance action",
+          "downtime",
+          "false alarm cost"
+        ],
+        "core_terms": [
+          "business metric",
+          "lead time"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "calibration_and_uncertainty",
+        "statement": "예측확률은 Calibration을 확인해야 하며 Confidence 또는 Probability가 실제 발생빈도와 일치하지 않으면 Threshold와 Risk 판단이 왜곡될 수 있다.",
+        "keywords": [
+          "calibration",
+          "probability",
+          "confidence",
+          "reliability"
+        ],
+        "core_terms": [
+          "calibration",
+          "uncertainty"
+        ],
+        "importance": "high",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "deployment_environment",
+        "statement": "Deployment 시 Training 환경과 현장 Runtime의 Sensor, 전처리, Library, Hardware, Latency와 입력 Schema 차이를 검증해야 한다.",
+        "keywords": [
+          "deployment",
+          "runtime",
+          "preprocessing",
+          "schema",
+          "latency"
+        ],
+        "core_terms": [
+          "deployment environment",
+          "training serving skew"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "model_version_traceability",
+        "statement": "Model, Dataset, Feature, Code, Hyperparameter, Threshold와 배포환경의 Version을 연결하여 결과 재현, Rollback과 Audit이 가능해야 한다.",
+        "keywords": [
+          "model version",
+          "dataset version",
+          "feature version",
+          "rollback"
+        ],
+        "core_terms": [
+          "version traceability",
+          "model registry"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "production_monitoring",
+        "statement": "운영 중에는 입력 품질, Missing, Range, Latency, Prediction 분포, 성능, False Alarm, 사용자 조치와 System Health를 지속 Monitoring한다.",
+        "keywords": [
+          "monitoring",
+          "input quality",
+          "latency",
+          "prediction distribution"
+        ],
+        "core_terms": [
+          "production monitoring",
+          "model health"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "drift_types",
+        "statement": "Data Drift는 입력분포 변화, Concept Drift는 입력과 Target 관계 변화이며 운전모드·제품·Sensor·정비정책 변화와 구분해 진단한다.",
+        "keywords": [
+          "data drift",
+          "concept drift",
+          "operating mode",
+          "sensor"
+        ],
+        "core_terms": [
+          "drift",
+          "distribution change"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "retraining_trigger",
+        "statement": "Retraining은 일정주기만이 아니라 성능저하, Drift, 공정변경, Label 축적과 위험기준에 따른 Trigger로 수행하고 승인된 Data Window를 사용한다.",
+        "keywords": [
+          "retraining",
+          "trigger",
+          "drift",
+          "performance degradation"
+        ],
+        "core_terms": [
+          "retraining trigger",
+          "approved data"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "regression_and_champion_challenger",
+        "statement": "새 Model은 기존 Champion과 동일 Test Set·현장 Replay·Stress Scenario로 비교하고 성능, 안정성, Latency와 운영비용의 Regression을 확인한다.",
+        "keywords": [
+          "champion challenger",
+          "regression test",
+          "replay",
+          "stress scenario"
+        ],
+        "core_terms": [
+          "model regression",
+          "champion challenger"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "explainability_limits",
+        "statement": "Explainability는 입력과 예측의 관계를 해석하는 보조수단이며 설명 가능성이 인과성, 정확성 또는 안전성을 자동 증명하지 않는다.",
+        "keywords": [
+          "explainability",
+          "feature attribution",
+          "causality",
+          "safety"
+        ],
+        "core_terms": [
+          "explainability",
+          "causality"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "human_review_fallback",
+        "statement": "고위험 경보와 정비의사결정에는 Human Review, 확인절차, 불확실성 표시, Model 장애 시 Fallback과 Override 책임을 정의한다.",
+        "keywords": [
+          "human review",
+          "fallback",
+          "override",
+          "uncertainty"
+        ],
+        "core_terms": [
+          "human in the loop",
+          "fallback"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      },
+      {
+        "id": "mlops_lifecycle",
+        "statement": "MLOps는 Data·Feature·Model·Code의 Version, 자동화된 Test, Registry, Deployment, Monitoring, Approval, Rollback과 재학습을 연결하는 Model Lifecycle 운영체계다.",
+        "keywords": [
+          "MLOps",
+          "registry",
+          "deployment",
+          "monitoring",
+          "rollback"
+        ],
+        "core_terms": [
+          "MLOps",
+          "model lifecycle"
+        ],
+        "importance": "critical",
+        "grading_notes": "정의, 작동원리, 평가방법, 현장 Trade-off와 Lifecycle 연결을 함께 평가한다."
+      }
+    ],
+    "fatal_conditions": [
+      {
+        "id": "accuracy_guarantees_safety",
+        "claim": "AI 모델의 Accuracy가 높으면 현장 안전성과 정비효과가 자동으로 보장된다.",
+        "correction": "Model Metric과 현장 Risk, 미검출·오경보 비용, 운전범위, Human Review와 안전제어를 별도로 검증한다.",
+        "wrong_claim": "AI 모델의 Accuracy가 높으면 현장 안전성과 정비효과가 자동으로 보장된다.",
+        "correct_rule": "Model Metric과 현장 Risk, 미검출·오경보 비용, 운전범위, Human Review와 안전제어를 별도로 검증한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "AI 모델의 Accuracy가 높으면 현장 안전성과 정비효과가 자동으로 보장된다.",
+        "description": "Model Metric과 현장 Risk, 미검출·오경보 비용, 운전범위, Human Review와 안전제어를 별도로 검증한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "train_test_same_data",
+        "claim": "Training과 Test에 같은 데이터나 같은 고장 Episode를 사용해도 일반화 성능을 정확히 평가할 수 있다.",
+        "correction": "Training·Validation·Test 역할을 분리하고 시간·설비·Episode 단위 누수를 차단한다.",
+        "wrong_claim": "Training과 Test에 같은 데이터나 같은 고장 Episode를 사용해도 일반화 성능을 정확히 평가할 수 있다.",
+        "correct_rule": "Training·Validation·Test 역할을 분리하고 시간·설비·Episode 단위 누수를 차단한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Training과 Test에 같은 데이터나 같은 고장 Episode를 사용해도 일반화 성능을 정확히 평가할 수 있다.",
+        "description": "Training·Validation·Test 역할을 분리하고 시간·설비·Episode 단위 누수를 차단한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "future_leakage_valid",
+        "claim": "예측시점 이후의 값이나 정비결과를 Feature에 포함하면 모델이 더 정확해지므로 허용된다.",
+        "correction": "운영 시점에 이용 가능한 정보만 Feature로 사용하고 미래·Target Leakage를 제거한다.",
+        "wrong_claim": "예측시점 이후의 값이나 정비결과를 Feature에 포함하면 모델이 더 정확해지므로 허용된다.",
+        "correct_rule": "운영 시점에 이용 가능한 정보만 Feature로 사용하고 미래·Target Leakage를 제거한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "예측시점 이후의 값이나 정비결과를 Feature에 포함하면 모델이 더 정확해지므로 허용된다.",
+        "description": "운영 시점에 이용 가능한 정보만 Feature로 사용하고 미래·Target Leakage를 제거한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "imbalance_accuracy_sufficient",
+        "claim": "고장 데이터가 희소해도 Accuracy 하나가 높으면 이상탐지 모델이 우수하다.",
+        "correction": "불균형 데이터에서는 Confusion Matrix, Precision, Recall, F1, PR와 비용을 함께 평가한다.",
+        "wrong_claim": "고장 데이터가 희소해도 Accuracy 하나가 높으면 이상탐지 모델이 우수하다.",
+        "correct_rule": "불균형 데이터에서는 Confusion Matrix, Precision, Recall, F1, PR와 비용을 함께 평가한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "고장 데이터가 희소해도 Accuracy 하나가 높으면 이상탐지 모델이 우수하다.",
+        "description": "불균형 데이터에서는 Confusion Matrix, Precision, Recall, F1, PR와 비용을 함께 평가한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "anomaly_score_certain_fault",
+        "claim": "Anomaly Score가 높으면 특정 부품 고장이 확정되므로 추가 진단이 필요 없다.",
+        "correction": "Anomaly Score는 정상 이탈 신호이며 원인진단, Context와 Human Review를 별도로 수행한다.",
+        "wrong_claim": "Anomaly Score가 높으면 특정 부품 고장이 확정되므로 추가 진단이 필요 없다.",
+        "correct_rule": "Anomaly Score는 정상 이탈 신호이며 원인진단, Context와 Human Review를 별도로 수행한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Anomaly Score가 높으면 특정 부품 고장이 확정되므로 추가 진단이 필요 없다.",
+        "description": "Anomaly Score는 정상 이탈 신호이며 원인진단, Context와 Human Review를 별도로 수행한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "predictive_maintenance_prevents_all_failures",
+        "claim": "예지보전 모델을 도입하면 설비 고장과 비계획정지가 더 이상 발생하지 않는다.",
+        "correction": "예지보전은 위험을 줄이고 계획정비를 지원하지만 미관측 고장과 불확실성을 제거하지 않는다.",
+        "wrong_claim": "예지보전 모델을 도입하면 설비 고장과 비계획정지가 더 이상 발생하지 않는다.",
+        "correct_rule": "예지보전은 위험을 줄이고 계획정비를 지원하지만 미관측 고장과 불확실성을 제거하지 않는다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "예지보전 모델을 도입하면 설비 고장과 비계획정지가 더 이상 발생하지 않는다.",
+        "description": "예지보전은 위험을 줄이고 계획정비를 지원하지만 미관측 고장과 불확실성을 제거하지 않는다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "rul_exact_date",
+        "claim": "RUL 예측값은 설비가 실제로 고장날 정확한 날짜이므로 불확실성 표시가 필요 없다.",
+        "correction": "RUL은 정의된 고장기준과 조건에 따른 추정치이며 오차, 신뢰구간과 적용범위를 제시한다.",
+        "wrong_claim": "RUL 예측값은 설비가 실제로 고장날 정확한 날짜이므로 불확실성 표시가 필요 없다.",
+        "correct_rule": "RUL은 정의된 고장기준과 조건에 따른 추정치이며 오차, 신뢰구간과 적용범위를 제시한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "RUL 예측값은 설비가 실제로 고장날 정확한 날짜이므로 불확실성 표시가 필요 없다.",
+        "description": "RUL은 정의된 고장기준과 조건에 따른 추정치이며 오차, 신뢰구간과 적용범위를 제시한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "threshold_no_tradeoff",
+        "claim": "Threshold를 낮추면 Recall만 높아지고 False Alarm이나 정비부하는 증가하지 않는다.",
+        "correction": "Threshold 변경은 Recall, Precision, False Alarm, 미검출과 운영비용 사이의 Trade-off를 만든다.",
+        "wrong_claim": "Threshold를 낮추면 Recall만 높아지고 False Alarm이나 정비부하는 증가하지 않는다.",
+        "correct_rule": "Threshold 변경은 Recall, Precision, False Alarm, 미검출과 운영비용 사이의 Trade-off를 만든다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Threshold를 낮추면 Recall만 높아지고 False Alarm이나 정비부하는 증가하지 않는다.",
+        "description": "Threshold 변경은 Recall, Precision, False Alarm, 미검출과 운영비용 사이의 Trade-off를 만든다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "unsupervised_no_validation",
+        "claim": "Unsupervised Learning은 Label을 사용하지 않으므로 Validation과 현장 검토가 필요 없다.",
+        "correction": "Label이 없더라도 정상성, 군집 의미, 경보 유효성, 안정성과 현장 Action 가능성을 검증한다.",
+        "wrong_claim": "Unsupervised Learning은 Label을 사용하지 않으므로 Validation과 현장 검토가 필요 없다.",
+        "correct_rule": "Label이 없더라도 정상성, 군집 의미, 경보 유효성, 안정성과 현장 Action 가능성을 검증한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Unsupervised Learning은 Label을 사용하지 않으므로 Validation과 현장 검토가 필요 없다.",
+        "description": "Label이 없더라도 정상성, 군집 의미, 경보 유효성, 안정성과 현장 Action 가능성을 검증한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "retraining_always_improves",
+        "claim": "최신 데이터로 Retraining하면 새 Model은 항상 기존 Model보다 좋아지므로 Regression Test가 필요 없다.",
+        "correction": "Champion–Challenger 비교, 고정 Test, Replay, Stress Test와 승인 후 교체를 수행한다.",
+        "wrong_claim": "최신 데이터로 Retraining하면 새 Model은 항상 기존 Model보다 좋아지므로 Regression Test가 필요 없다.",
+        "correct_rule": "Champion–Challenger 비교, 고정 Test, Replay, Stress Test와 승인 후 교체를 수행한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "최신 데이터로 Retraining하면 새 Model은 항상 기존 Model보다 좋아지므로 Regression Test가 필요 없다.",
+        "description": "Champion–Challenger 비교, 고정 Test, Replay, Stress Test와 승인 후 교체를 수행한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "drift_no_monitoring",
+        "claim": "배포 시 성능이 확인되면 공정과 데이터가 변해도 Model Monitoring은 필요 없다.",
+        "correction": "Data·Concept Drift, 입력품질, 성능, Latency와 운영지표를 지속 Monitoring한다.",
+        "wrong_claim": "배포 시 성능이 확인되면 공정과 데이터가 변해도 Model Monitoring은 필요 없다.",
+        "correct_rule": "Data·Concept Drift, 입력품질, 성능, Latency와 운영지표를 지속 Monitoring한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "배포 시 성능이 확인되면 공정과 데이터가 변해도 Model Monitoring은 필요 없다.",
+        "description": "Data·Concept Drift, 입력품질, 성능, Latency와 운영지표를 지속 Monitoring한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "explainability_proves_causality",
+        "claim": "설명가능성 도구가 중요 Feature를 표시하면 그 Feature가 고장의 인과원인임이 증명된다.",
+        "correction": "Feature Attribution은 예측관계를 설명할 뿐 인과성은 실험, 공정지식과 별도 검증이 필요하다.",
+        "wrong_claim": "설명가능성 도구가 중요 Feature를 표시하면 그 Feature가 고장의 인과원인임이 증명된다.",
+        "correct_rule": "Feature Attribution은 예측관계를 설명할 뿐 인과성은 실험, 공정지식과 별도 검증이 필요하다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "설명가능성 도구가 중요 Feature를 표시하면 그 Feature가 고장의 인과원인임이 증명된다.",
+        "description": "Feature Attribution은 예측관계를 설명할 뿐 인과성은 실험, 공정지식과 별도 검증이 필요하다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "deployment_no_monitoring",
+        "claim": "Training Notebook에서 동작한 Model은 현장 Deployment에서도 동일하므로 Runtime 검증과 Rollback이 필요 없다.",
+        "correction": "Training–Serving 차이, 전처리, Schema, Latency, 자원, Failure Mode와 Rollback을 검증한다.",
+        "wrong_claim": "Training Notebook에서 동작한 Model은 현장 Deployment에서도 동일하므로 Runtime 검증과 Rollback이 필요 없다.",
+        "correct_rule": "Training–Serving 차이, 전처리, Schema, Latency, 자원, Failure Mode와 Rollback을 검증한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Training Notebook에서 동작한 Model은 현장 Deployment에서도 동일하므로 Runtime 검증과 Rollback이 필요 없다.",
+        "description": "Training–Serving 차이, 전처리, Schema, Latency, 자원, Failure Mode와 Rollback을 검증한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "model_version_irrelevant",
+        "claim": "Model 파일만 보관하면 Dataset, Feature, Threshold와 Code Version은 기록하지 않아도 결과를 재현할 수 있다.",
+        "correction": "Model과 Data·Feature·Code·Parameter·Threshold·환경 Version을 함께 추적한다.",
+        "wrong_claim": "Model 파일만 보관하면 Dataset, Feature, Threshold와 Code Version은 기록하지 않아도 결과를 재현할 수 있다.",
+        "correct_rule": "Model과 Data·Feature·Code·Parameter·Threshold·환경 Version을 함께 추적한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Model 파일만 보관하면 Dataset, Feature, Threshold와 Code Version은 기록하지 않아도 결과를 재현할 수 있다.",
+        "description": "Model과 Data·Feature·Code·Parameter·Threshold·환경 Version을 함께 추적한다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "closed_loop_without_constraints",
+        "claim": "공정최적화 AI의 출력은 Accuracy가 높으면 안전제약과 운영자 승인 없이 제어기에 직접 적용해도 된다.",
+        "correction": "폐루프 적용은 SW-13 영역이며 안전범위, Supervisory Control, Fallback, Human Override와 별도 검증이 필요하다.",
+        "wrong_claim": "공정최적화 AI의 출력은 Accuracy가 높으면 안전제약과 운영자 승인 없이 제어기에 직접 적용해도 된다.",
+        "correct_rule": "폐루프 적용은 SW-13 영역이며 안전범위, Supervisory Control, Fallback, Human Override와 별도 검증이 필요하다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "공정최적화 AI의 출력은 Accuracy가 높으면 안전제약과 운영자 승인 없이 제어기에 직접 적용해도 된다.",
+        "description": "폐루프 적용은 SW-13 영역이며 안전범위, Supervisory Control, Fallback, Human Override와 별도 검증이 필요하다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      },
+      {
+        "id": "mlops_ci_cd_guarantees_safety",
+        "claim": "MLOps CI/CD가 성공하면 Model의 현장 적합성, 기능안전과 정비효과가 자동으로 보장된다.",
+        "correction": "자동화 Pipeline은 증거 생성수단이며 현장 Validation, Risk 검토, 승인과 운영 Monitoring을 대체하지 않는다.",
+        "wrong_claim": "MLOps CI/CD가 성공하면 Model의 현장 적합성, 기능안전과 정비효과가 자동으로 보장된다.",
+        "correct_rule": "자동화 Pipeline은 증거 생성수단이며 현장 Validation, Risk 검토, 승인과 운영 Monitoring을 대체하지 않는다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "MLOps CI/CD가 성공하면 Model의 현장 적합성, 기능안전과 정비효과가 자동으로 보장된다.",
+        "description": "자동화 Pipeline은 증거 생성수단이며 현장 Validation, Risk 검토, 승인과 운영 Monitoring을 대체하지 않는다.",
+        "grading_notes": "문맥상 명백히 단정한 경우 Fatal 후보로 평가하고, 제한조건이나 반례를 함께 제시하면 문맥을 확인한다."
+      }
+    ],
+    "major_checks": [
+      {
+        "id": "task_definition_weak",
+        "condition": "Classification, Regression, Forecasting과 Anomaly Detection을 나열하지만 목표변수와 의사결정 연결이 불명확함",
+        "correction": "예측대상, Horizon, 출력단위, Action과 실패비용을 함께 정의한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Classification, Regression, Forecasting과 Anomaly Detection을 나열하지만 목표변수와 의사결정 연결이 불명확함",
+        "description": "예측대상, Horizon, 출력단위, Action과 실패비용을 함께 정의한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "split_strategy_missing",
+        "condition": "Train·Validation·Test를 언급하지만 시간순·설비·Episode 분할이 없음",
+        "correction": "산업 시계열의 시간·Group Leakage 방지전략을 제시한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Train·Validation·Test를 언급하지만 시간순·설비·Episode 분할이 없음",
+        "description": "산업 시계열의 시간·Group Leakage 방지전략을 제시한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "leakage_check_missing",
+        "condition": "높은 성능을 제시하지만 미래정보, Target 파생값과 중복 Episode의 Leakage 검토가 없음",
+        "correction": "Feature 가용시점과 Data Lineage를 기준으로 Leakage를 점검한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "높은 성능을 제시하지만 미래정보, Target 파생값과 중복 Episode의 Leakage 검토가 없음",
+        "description": "Feature 가용시점과 Data Lineage를 기준으로 Leakage를 점검한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "imbalance_metric_missing",
+        "condition": "희소 고장 문제에서 Accuracy만 제시하거나 Class 분포를 누락함",
+        "correction": "Confusion Matrix, Precision, Recall, F1과 PR 기준을 함께 제시한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "희소 고장 문제에서 Accuracy만 제시하거나 Class 분포를 누락함",
+        "description": "Confusion Matrix, Precision, Recall, F1과 PR 기준을 함께 제시한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "threshold_cost_missing",
+        "condition": "Threshold를 제시하지만 False Alarm, 미검출, Lead Time과 정비부하의 Trade-off가 없음",
+        "correction": "업무비용과 Action 가능성을 기준으로 Threshold를 선정한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Threshold를 제시하지만 False Alarm, 미검출, Lead Time과 정비부하의 Trade-off가 없음",
+        "description": "업무비용과 Action 가능성을 기준으로 Threshold를 선정한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "rul_uncertainty_missing",
+        "condition": "RUL Point Estimate만 제시하고 고장기준, 오차와 불확실성이 없음",
+        "correction": "Failure Threshold, Horizon, 신뢰구간과 적용조건을 명시한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "RUL Point Estimate만 제시하고 고장기준, 오차와 불확실성이 없음",
+        "description": "Failure Threshold, Horizon, 신뢰구간과 적용조건을 명시한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "deployment_skew_missing",
+        "condition": "Model 배포를 언급하지만 전처리·Schema·Library·Latency 차이 검증이 없음",
+        "correction": "Training–Serving Skew와 Runtime 제한을 시험한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Model 배포를 언급하지만 전처리·Schema·Library·Latency 차이 검증이 없음",
+        "description": "Training–Serving Skew와 Runtime 제한을 시험한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "monitoring_scope_incomplete",
+        "condition": "운영 Monitoring이 Accuracy 확인에만 한정되고 입력품질·Latency·분포·Action 결과가 없음",
+        "correction": "Data, Model, System과 Business Metric을 함께 Monitoring한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "운영 Monitoring이 Accuracy 확인에만 한정되고 입력품질·Latency·분포·Action 결과가 없음",
+        "description": "Data, Model, System과 Business Metric을 함께 Monitoring한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "drift_response_missing",
+        "condition": "Drift를 언급하지만 Data/Concept 구분, 원인분석과 대응 Trigger가 없음",
+        "correction": "Drift 종류와 공정변경을 구분하고 Retraining·Rollback 조건을 정한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Drift를 언급하지만 Data/Concept 구분, 원인분석과 대응 Trigger가 없음",
+        "description": "Drift 종류와 공정변경을 구분하고 Retraining·Rollback 조건을 정한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "version_traceability_missing",
+        "condition": "Model Version만 관리하고 Dataset·Feature·Code·Threshold 연결이 없음",
+        "correction": "Registry와 Lineage로 재현·Audit·Rollback 범위를 완성한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Model Version만 관리하고 Dataset·Feature·Code·Threshold 연결이 없음",
+        "description": "Registry와 Lineage로 재현·Audit·Rollback 범위를 완성한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "explainability_overstated",
+        "condition": "Explainability를 제시하지만 인과성·정확성·안전성의 한계를 설명하지 않음",
+        "correction": "설명은 검토 보조수단이며 현장 지식과 Validation이 필요함을 밝힌다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Explainability를 제시하지만 인과성·정확성·안전성의 한계를 설명하지 않음",
+        "description": "설명은 검토 보조수단이며 현장 지식과 Validation이 필요함을 밝힌다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      },
+      {
+        "id": "sw11_sw13_boundary_blurred",
+        "condition": "데이터 기반 분석과 물리 설비 폐루프 제어를 같은 Topic으로 혼용함",
+        "correction": "SW-11은 데이터 기반, SW-12는 Model 분석수명주기, SW-13은 물리 상호작용·안전제어로 구분한다.",
+        "severity": "major",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "데이터 기반 분석과 물리 설비 폐루프 제어를 같은 Topic으로 혼용함",
+        "description": "SW-11은 데이터 기반, SW-12는 Model 분석수명주기, SW-13은 물리 상호작용·안전제어로 구분한다.",
+        "grading_notes": "핵심 개념은 언급했지만 적용조건, 검증 또는 운영통제가 빠진 경우 Major 또는 Warn 후보로 판단한다."
+      }
+    ],
+    "false_positive_cautions": [
+      "Accuracy는 Class가 균형이고 오류비용이 유사한 제한된 문제에서는 유효한 보조지표로 사용할 수 있다.",
+      "Unsupervised Anomaly Detection은 Label 부족 상황에서 사용할 수 있으나 현장 검증과 경보 품질평가가 필요하다.",
+      "Synthetic Data와 Simulation Data는 희귀상황 보강에 사용할 수 있으나 실제 분포 대표성과 Domain Gap을 확인한다.",
+      "Threshold는 고정값 또는 운전모드별 동적값으로 설계할 수 있으나 Version과 선정근거를 기록한다.",
+      "RUL은 Point Estimate로 제공할 수 있으나 불확실성과 사용조건을 함께 관리한다.",
+      "AutoML은 Model 후보 탐색을 자동화할 수 있으나 Data Leakage와 현장 Validation 책임을 제거하지 않는다.",
+      "Deep Learning은 Feature를 자동학습할 수 있으나 Sensor Context, Data 품질과 설명 책임이 사라지지 않는다.",
+      "Retraining은 일정주기로 수행할 수 있으나 Trigger, 승인, Regression과 Rollback 절차를 둔다.",
+      "Explainability 값은 Model 동작 검토에 유용하지만 인과관계를 단독 증명하지 않는다.",
+      "Precision과 Recall 중 하나를 우선할 수 있으나 업무 Risk와 Threshold Trade-off를 명시한다.",
+      "Label 지연이 긴 환경에서는 Proxy Metric과 후행평가를 사용할 수 있으나 최종 성능확인을 생략하지 않는다.",
+      "Edge Inference는 Latency와 연결성을 개선할 수 있으나 중앙 Registry, Monitoring과 Cybersecurity 검토를 대체하지 않는다.",
+      "Human Review는 모든 경보를 수동 승인한다는 뜻이 아니라 Risk에 따른 역할분담과 Escalation을 의미할 수 있다.",
+      "Model Output을 Advisory로 사용할 수 있으며 이 경우에도 사용자 Action, 오경보와 무시율을 Monitoring한다.",
+      "Process Optimization은 Recommendation Mode로 시작해 검증 후 제한적 자동화로 확장할 수 있다.",
+      "MLOps 자동화는 반복성과 추적성을 높이지만 현장 적합성 판단과 안전 승인을 자동 대체하지 않는다."
+    ],
+    "candidate_extraction": {
+      "enabled": false,
+      "rules": [],
+      "reason": "Keyword-only or numeric-only fatal decisions are not permitted."
+    },
+    "score_policy": {
+      "direct_score_application": false,
+      "direct_d_e_effect": "none",
+      "affected_layers": [
+        "C"
+      ],
+      "reason": "Logic review owns factual and lifecycle correctness only."
+    },
+    "output_contract": {
+      "allowed_severities": [
+        "fatal",
+        "major",
+        "warn",
+        "ok"
+      ],
+      "must_return_correction": true,
+      "must_preserve_false_positive_cautions": true,
+      "must_distinguish_sw11_sw12_sw13": true
+    }
+  }
+}

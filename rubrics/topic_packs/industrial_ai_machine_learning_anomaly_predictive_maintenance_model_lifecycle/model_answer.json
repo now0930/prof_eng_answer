@@ -1,0 +1,301 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+  "title_ko": "산업 AI·Machine Learning, 이상탐지, 예지보전 및 모델 수명주기",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "산업 AI·Machine Learning의 유형과 Model Lifecycle을 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "ai_ml_dl_hierarchy",
+        "supervised_learning",
+        "unsupervised_learning",
+        "mlops_lifecycle"
+      ]
+    },
+    {
+      "pattern": "산업 이상탐지 Model의 Score, Threshold, False Alarm과 미검출 관리방안을 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "anomaly_detection_score_threshold",
+        "confusion_matrix",
+        "false_alarm_miss_tradeoff",
+        "decision_cost_and_lead_time"
+      ]
+    },
+    {
+      "pattern": "예지보전과 Remaining Useful Life Model의 구축 및 평가방안을 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "predictive_maintenance_scope",
+        "remaining_useful_life_uncertainty",
+        "representative_data",
+        "regression_and_champion_challenger"
+      ]
+    },
+    {
+      "pattern": "산업 시계열 Machine Learning에서 Train·Validation·Test 분리와 Data Leakage 방지방안을 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "train_validation_test_separation",
+        "chronological_group_split",
+        "data_leakage",
+        "feature_engineering_context"
+      ]
+    },
+    {
+      "pattern": "고장 데이터 불균형에서 Precision, Recall과 F1의 의미를 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "class_imbalance",
+        "confusion_matrix",
+        "precision_metric",
+        "recall_metric",
+        "f1_metric"
+      ]
+    },
+    {
+      "pattern": "산업 AI Model의 Drift Monitoring과 Retraining 절차를 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "production_monitoring",
+        "drift_types",
+        "retraining_trigger",
+        "regression_and_champion_challenger"
+      ]
+    },
+    {
+      "pattern": "MLOps 기반 Model Version, Deployment, Monitoring과 Rollback을 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "deployment_environment",
+        "model_version_traceability",
+        "production_monitoring",
+        "mlops_lifecycle"
+      ]
+    },
+    {
+      "pattern": "산업 AI의 Explainability, Human Review와 현장 적용 한계를 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "explainability_limits",
+        "human_review_fallback",
+        "calibration_and_uncertainty"
+      ]
+    },
+    {
+      "pattern": "산업 Process Optimization Model의 제약조건과 안전한 적용방안을 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "process_optimization_boundary",
+        "decision_cost_and_lead_time",
+        "human_review_fallback"
+      ]
+    },
+    {
+      "pattern": "Classification, Regression, Forecasting과 Anomaly Detection의 적용 차이를 설명하시오.",
+      "intent": "industrial AI model design, evaluation and lifecycle",
+      "required_anchor_ids": [
+        "task_type_selection",
+        "anomaly_detection_score_threshold",
+        "supervised_learning",
+        "unsupervised_learning"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": 1,
+      "title": "1. 개념과 문제정의",
+      "content": "AI–ML–DL의 포함관계와 Supervised·Unsupervised, Classification·Regression·Forecasting·Anomaly Detection의 목표를 구분한다.",
+      "anchor_refs": [
+        "ai_ml_dl_hierarchy",
+        "supervised_learning",
+        "unsupervised_learning",
+        "task_type_selection"
+      ]
+    },
+    {
+      "section": 2,
+      "title": "2. 산업 적용",
+      "content": "Anomaly Detection, Predictive Maintenance, RUL과 Process Optimization의 출력·의사결정·한계를 연결한다.",
+      "anchor_refs": [
+        "anomaly_detection_score_threshold",
+        "predictive_maintenance_scope",
+        "remaining_useful_life_uncertainty",
+        "process_optimization_boundary"
+      ]
+    },
+    {
+      "section": 3,
+      "title": "3. 데이터와 Feature",
+      "content": "Feature Engineering, 대표성, Label 품질과 Train·Validation·Test 분리를 설명한다.",
+      "anchor_refs": [
+        "feature_engineering_context",
+        "representative_data",
+        "train_validation_test_separation"
+      ]
+    },
+    {
+      "section": 4,
+      "title": "4. 누수 방지와 분할",
+      "content": "산업 시계열의 시간·설비·Episode 분할과 Data Leakage, Class Imbalance 통제를 설명한다.",
+      "anchor_refs": [
+        "chronological_group_split",
+        "data_leakage",
+        "class_imbalance"
+      ]
+    },
+    {
+      "section": 5,
+      "title": "5. 성능과 Threshold",
+      "content": "Confusion Matrix, Precision, Recall, F1, False Alarm·미검출 Trade-off와 현장비용을 설명한다.",
+      "anchor_refs": [
+        "confusion_matrix",
+        "precision_metric",
+        "recall_metric",
+        "f1_metric",
+        "false_alarm_miss_tradeoff",
+        "decision_cost_and_lead_time"
+      ]
+    },
+    {
+      "section": 6,
+      "title": "6. 배포와 추적성",
+      "content": "Calibration, Runtime 차이, Model·Data·Feature·Threshold Version과 Deployment 검증을 설명한다.",
+      "anchor_refs": [
+        "calibration_and_uncertainty",
+        "deployment_environment",
+        "model_version_traceability"
+      ]
+    },
+    {
+      "section": 7,
+      "title": "7. Monitoring과 개선",
+      "content": "운영 Monitoring, Data·Concept Drift, Retraining Trigger와 Champion–Challenger Regression을 설명한다.",
+      "anchor_refs": [
+        "production_monitoring",
+        "drift_types",
+        "retraining_trigger",
+        "regression_and_champion_challenger"
+      ]
+    },
+    {
+      "section": 8,
+      "title": "8. 책임 있는 운영",
+      "content": "Explainability의 한계, Human Review·Fallback과 MLOps Lifecycle을 결론으로 연결한다.",
+      "anchor_refs": [
+        "explainability_limits",
+        "human_review_fallback",
+        "mlops_lifecycle"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "AI–Machine Learning–Deep Learning의 포함관계를 정확히 설명한다.",
+    "Classification·Regression·Forecasting·Anomaly Detection을 목표변수와 Action으로 구분한다.",
+    "Training·Validation·Test의 역할과 시간·설비·Episode 분할을 설명한다.",
+    "미래정보와 Target Leakage가 성능을 과대평가하는 원리를 설명한다.",
+    "불균형 고장데이터에서 Accuracy의 한계와 Precision·Recall·F1을 제시한다.",
+    "Threshold 변화에 따른 오경보·미검출·Lead Time·정비부하 Trade-off를 설명한다.",
+    "RUL을 불확실성이 있는 추정치로 설명한다.",
+    "Training–Serving Skew와 Runtime 검증을 제시한다.",
+    "Model·Dataset·Feature·Code·Threshold Version Traceability를 제시한다.",
+    "Data Drift와 Concept Drift를 구분하고 Retraining Trigger를 설명한다.",
+    "Champion–Challenger, Replay와 Regression Test를 제시한다.",
+    "Explainability가 인과성·안전성을 자동 증명하지 않음을 설명한다.",
+    "Human Review, Fallback과 Rollback을 위험도에 맞게 배치한다.",
+    "SW-11·SW-12·SW-13의 Ownership 경계를 구분한다."
+  ],
+  "common_missing_points": [
+    "AI, ML과 DL을 동의어처럼 사용함",
+    "Classification·Regression·Anomaly Detection의 목표 구분 누락",
+    "Train·Validation·Test 역할 혼용",
+    "시간순·설비·Episode 분할 누락",
+    "Data Leakage 검토 누락",
+    "Class Imbalance에서 Accuracy만 사용",
+    "Threshold와 오경보·미검출 Trade-off 누락",
+    "RUL 불확실성 누락",
+    "Deployment Runtime 차이와 Rollback 누락",
+    "Data·Concept Drift 구분 누락",
+    "Retraining Regression 검증 누락",
+    "Model·Data·Feature Version Traceability 누락",
+    "Explainability를 인과성으로 과장",
+    "Human Review와 Fallback 누락"
+  ],
+  "routing_aliases": [
+    "industrial AI anomaly predictive maintenance lifecycle",
+    "machine learning training validation test leakage",
+    "industrial anomaly detection threshold false alarm",
+    "predictive maintenance remaining useful life uncertainty",
+    "imbalanced failure data precision recall F1",
+    "industrial time series model drift retraining",
+    "feature engineering process sensor data",
+    "MLOps model registry deployment monitoring rollback",
+    "data drift concept drift industrial process",
+    "model explainability human review maintenance",
+    "classification regression forecasting industrial AI",
+    "AI process optimization constraint recommendation",
+    "training serving skew edge inference monitoring",
+    "champion challenger model regression validation"
+  ],
+  "routing_field_points": [
+    "AI–ML–DL 포함관계",
+    "Supervised와 Unsupervised Learning",
+    "Classification·Regression·Forecasting·Anomaly Detection",
+    "Predictive Maintenance와 RUL 불확실성",
+    "Feature Engineering과 미래정보 금지",
+    "대표성·Label 품질·수집편향",
+    "Train·Validation·Test 분리",
+    "시간·설비·Episode 분할",
+    "Data Leakage",
+    "Class Imbalance",
+    "Confusion Matrix와 Precision·Recall·F1",
+    "Threshold·False Alarm·미검출·Lead Time Trade-off",
+    "Calibration과 불확실성",
+    "Deployment와 Training–Serving Skew",
+    "Model·Data·Feature·Threshold Version",
+    "Production Monitoring",
+    "Data Drift와 Concept Drift",
+    "Retraining Trigger와 Champion–Challenger",
+    "Explainability 한계",
+    "Human Review·Fallback·Rollback",
+    "MLOps Model Lifecycle"
+  ],
+  "representative_answer": "산업 AI는 공정과 설비 데이터에서 상태를 진단하고 미래를 예측하여 운전과 정비 의사결정을 지원한다. AI는 상위 개념이고 Machine Learning은 데이터에서 패턴을 학습하는 부분집합이며 Deep Learning은 다층 신경망을 사용하는 Machine Learning의 부분집합이다. Supervised Learning은 Label을 이용해 Classification, Regression과 Forecasting을 수행한다. Unsupervised Learning은 정상 패턴과 군집을 학습할 수 있지만 Label이 없다는 이유로 현장 검증을 생략할 수 없다.\n\n이상탐지는 정상에서 벗어난 정도를 Score로 산출하고 Threshold로 경보를 결정한다. 높은 Anomaly Score는 특정 고장의 확정진단이 아니다. 예지보전은 고장확률, 열화상태 또는 RUL을 추정해 계획정비를 지원한다. RUL은 정의된 고장기준까지 남은 시간의 추정치이므로 오차와 불확실성을 제시해야 한다.\n\n데이터 단계에서는 공정지식을 이용해 Window, 변화율, 통계량과 주파수 Feature를 만들되 예측시점 이후 정보가 포함되지 않게 한다. Training, Validation과 Test의 역할을 분리한다. 산업 시계열은 시간순과 설비·Batch·고장 Episode 단위로 분할하여 동일 사건이 Train과 Test에 섞이는 Leakage를 막는다. 희소 고장 문제에서는 Accuracy보다 Confusion Matrix, Precision, Recall과 F1을 함께 본다.\n\nPrecision은 경보 중 실제 고장의 비율이고 Recall은 실제 고장 중 검출한 비율이다. Threshold를 낮추면 Recall이 증가할 수 있지만 False Alarm과 정비부하도 증가한다. 따라서 경보 Lead Time, 미검출 비용, 확인인력과 Action 가능성을 포함해 Threshold를 정한다.\n\n배포 단계에서는 Training과 현장 Runtime의 Sensor, 전처리, 입력 Schema, Library, Hardware와 Latency 차이를 검증한다. Model, Dataset, Feature, Code, Hyperparameter와 Threshold의 Version을 연결해 재현과 Rollback을 보장한다. 운영 중에는 입력품질, Missing, Latency, Prediction 분포, False Alarm과 사용자 조치를 Monitoring한다.\n\nData Drift는 입력분포의 변화이고 Concept Drift는 입력과 Target 관계의 변화다. Drift나 성능저하가 나타나면 승인된 Data Window로 Retraining하고 기존 Champion과 동일 Test, Replay와 Stress Scenario로 비교한다. 최신 데이터로 재학습했다는 이유만으로 개선을 가정하지 않는다.\n\nExplainability는 Model 검토를 돕지만 인과성, 정확성이나 안전성을 자동 증명하지 않는다. 고위험 정비결정에는 Human Review, 불확실성 표시, Fallback과 Override 책임을 둔다. MLOps는 Data·Feature·Model·Code Version, Test, Registry, Deployment, Monitoring, Approval과 Rollback을 연결한다. 결론적으로 SW-11은 데이터 품질과 Context 기반을, SW-12는 학습·추론과 Model Lifecycle을, SW-13은 AI가 물리 시스템에 폐루프로 작용하는 안전제어를 담당한다.",
+  "negative_boundary_examples": [
+    {
+      "question": "Historian의 Timestamp, Quality Code와 Batch Genealogy를 설명하시오.",
+      "owner": "SW-11"
+    },
+    {
+      "question": "MES·ERP와 ISA-95 기반 IT/OT 통합 구조를 설명하시오.",
+      "owner": "SW-11"
+    },
+    {
+      "question": "Physical AI와 Robot Sensor Fusion 기반 자율제어를 설명하시오.",
+      "owner": "SW-13"
+    },
+    {
+      "question": "Digital Twin 기반 Closed-loop Robot Planning의 안전제어를 설명하시오.",
+      "owner": "SW-13"
+    },
+    {
+      "question": "OPC UA, MQTT와 Modbus Protocol을 비교하시오.",
+      "owner": "SW-07"
+    },
+    {
+      "question": "PLC Sequence, Interlock과 Trip Logic을 설명하시오.",
+      "owner": "SW-02"
+    },
+    {
+      "question": "SIS Safety Application Program의 SIL과 Verification을 설명하시오.",
+      "owner": "SW-05"
+    },
+    {
+      "question": "일반 Software 요구분석, Unit Test와 Configuration Management를 설명하시오.",
+      "owner": "SW-04"
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "AI–ML–DL의 포함관계와 학습유형을 정확히 설명한다.",
+    "Anomaly Detection, Predictive Maintenance와 RUL의 출력·한계를 구분한다.",
+    "Train·Validation·Test와 시간·설비·Episode 분할을 설명한다.",
+    "Data Leakage와 Class Imbalance의 성능 왜곡을 설명한다.",
+    "Confusion Matrix, Precision, Recall과 F1을 수식과 함께 적용한다.",
+    "Threshold, False Alarm, 미검출, Lead Time과 비용의 Trade-off를 설명한다.",
+    "Training–Serving Skew와 Deployment 검증을 설명한다.",
+    "Model·Dataset·Feature·Code·Threshold Version Traceability를 제시한다.",
+    "Data Drift와 Concept Drift를 구분하고 Retraining Trigger를 설명한다.",
+    "Champion–Challenger와 Regression·Replay 검증을 제시한다.",
+    "Explainability의 한계와 Human Review·Fallback을 제시한다.",
+    "SW-11·SW-12·SW-13의 Ownership 경계를 명확히 한다."
+  ],
+  "note": "Model Metric은 현장 안전성·정비효과를 자동 보장하지 않는다. 정량 Threshold, Drift 기준, RUL 신뢰구간과 적용 표준은 verify-first 한다."
+}
