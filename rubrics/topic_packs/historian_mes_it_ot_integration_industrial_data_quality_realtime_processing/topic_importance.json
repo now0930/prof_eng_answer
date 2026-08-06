@@ -1,0 +1,20 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "Historian–MES–ERP와 ISA-95 계층 관계를 정확히 설명한다.",
+    "Event Time, Clock 동기화, Time alignment와 Latency를 연결한다.",
+    "Quality Code와 Bad·Uncertain 데이터 처리정책을 제시한다.",
+    "Completeness·Timeliness·Compression Ratio 등 품질지표를 적용한다.",
+    "Compression·Deadband와 Event 보존의 Trade-off를 설명한다.",
+    "Store-and-forward의 Buffer와 Recovery 설계를 설명한다.",
+    "Metadata·Tag Naming·Master Data·Information Model의 관계를 설명한다.",
+    "Governance·Retention·Traceability·Batch Genealogy를 연결한다.",
+    "Protocol 연결과 Semantic Interoperability를 구분한다.",
+    "SW-07·SW-11·SW-12의 Topic Ownership을 구분한다."
+  ],
+  "note": "산업데이터의 값·시간·품질·Context·Lineage를 분리하지 않고 계층형 IT/OT 통합으로 연결하는 것이 핵심이다. 표준 세부 Level, Vendor Quality Bit와 정량 Deadline은 verify-first 한다."
+}

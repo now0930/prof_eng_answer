@@ -1,0 +1,341 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+  "title_ko": "Historian·MES·IT/OT 통합, 산업데이터 품질 및 실시간 처리",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "question": "Historian·MES·ERP의 역할과 ISA-95 기반 IT/OT 통합 구조를 설명하시오.",
+      "intent": "Historian·MES·ERP의 역할과 ISA-95 기반 IT/OT 통합 구조를 설명하시오.",
+      "required_anchor_ids": [
+        "historian_time_series_role",
+        "mes_execution_role",
+        "erp_business_role",
+        "isa95_hierarchy_interface",
+        "it_ot_layered_integration"
+      ]
+    },
+    {
+      "question": "산업 Historian의 Timestamp, Quality Code와 Time alignment 관리방안을 설명하시오.",
+      "intent": "산업 Historian의 Timestamp, Quality Code와 Time alignment 관리방안을 설명하시오.",
+      "required_anchor_ids": [
+        "source_timestamp_event_time",
+        "time_sync_alignment",
+        "quality_code_semantics",
+        "bad_uncertain_propagation"
+      ]
+    },
+    {
+      "question": "산업데이터 품질의 완전성·적시성·일관성 관리방안을 설명하시오.",
+      "intent": "산업데이터 품질의 완전성·적시성·일관성 관리방안을 설명하시오.",
+      "required_anchor_ids": [
+        "data_completeness_metric",
+        "timeliness_latency_metric",
+        "quality_code_semantics",
+        "master_data_consistency"
+      ]
+    },
+    {
+      "question": "Edge·Gateway와 Store-and-forward를 이용한 산업데이터 수집 구조를 설명하시오.",
+      "intent": "Edge·Gateway와 Store-and-forward를 이용한 산업데이터 수집 구조를 설명하시오.",
+      "required_anchor_ids": [
+        "edge_gateway_role",
+        "store_and_forward_recovery",
+        "acquisition_sampling_semantics",
+        "it_ot_layered_integration"
+      ]
+    },
+    {
+      "question": "Historian의 Compression·Deadband 적용 시 고려사항을 설명하시오.",
+      "intent": "Historian의 Compression·Deadband 적용 시 고려사항을 설명하시오.",
+      "required_anchor_ids": [
+        "compression_deadband_tradeoff",
+        "quality_event_preservation",
+        "historian_time_series_role",
+        "event_snapshot_distinction"
+      ]
+    },
+    {
+      "question": "Tag Naming, Namespace, Metadata와 Information Model의 관계를 설명하시오.",
+      "intent": "Tag Naming, Namespace, Metadata와 Information Model의 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "tag_naming_namespace",
+        "metadata_context_role",
+        "information_model_semantics",
+        "master_data_consistency"
+      ]
+    },
+    {
+      "question": "산업데이터 Governance, Retention과 Traceability를 설명하시오.",
+      "intent": "산업데이터 Governance, Retention과 Traceability를 설명하시오.",
+      "required_anchor_ids": [
+        "data_governance_ownership",
+        "retention_lifecycle",
+        "traceability_audit",
+        "master_data_consistency"
+      ]
+    },
+    {
+      "question": "MES의 Batch Genealogy와 생산 추적성 구현방안을 설명하시오.",
+      "intent": "MES의 Batch Genealogy와 생산 추적성 구현방안을 설명하시오.",
+      "required_anchor_ids": [
+        "mes_execution_role",
+        "batch_genealogy",
+        "traceability_audit",
+        "source_timestamp_event_time"
+      ]
+    },
+    {
+      "question": "산업 Streaming과 실시간 처리에서 Event Time, Window와 Late Data를 설명하시오.",
+      "intent": "산업 Streaming과 실시간 처리에서 Event Time, Window와 Late Data를 설명하시오.",
+      "required_anchor_ids": [
+        "streaming_event_processing",
+        "source_timestamp_event_time",
+        "realtime_fit_for_purpose",
+        "time_sync_alignment"
+      ]
+    },
+    {
+      "question": "Protocol 상호운용성과 Semantic Interoperability의 차이를 설명하시오.",
+      "intent": "Protocol 상호운용성과 Semantic Interoperability의 차이를 설명하시오.",
+      "required_anchor_ids": [
+        "semantic_interoperability",
+        "information_model_semantics",
+        "quality_code_semantics",
+        "topic_boundary_transport_model"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 계층과 역할",
+      "points": [
+        "Historian은 공정·설비의 시계열 데이터를 장기간 수집·압축·조회하고 품질·시간 정보를 함께 보존하는 운영 데이터 기반이다.",
+        "Historian은 단순 백업 저장소가 아니며 추세, Event, 품질, 압축, Context와 추적성 조회를 지원한다.",
+        "MES는 생산지시를 현장 실행으로 전개하고 작업·실적·품질·자원·공정상태와 Genealogy를 관리하는 제조운영 계층이다.",
+        "ERP는 주문, 계획, 자재, 원가, 재무와 기업 자원을 관리하며 MES의 상세 실시간 제어 기능을 대체하지 않는다.",
+        "ISA-95는 기업과 제조운영·제어 계층의 기능, 정보객체와 인터페이스 경계를 정리하는 참조모델이지 단일 통신 Protocol이 아니다."
+      ],
+      "anchor_refs": [
+        "historian_time_series_role",
+        "historian_not_backup_only",
+        "mes_execution_role",
+        "erp_business_role",
+        "isa95_hierarchy_interface"
+      ]
+    },
+    {
+      "section": "2. IT/OT 수집·통합 구조",
+      "points": [
+        "IT/OT 통합은 제어 안정성을 보존하면서 Edge·Gateway·Historian·MES·ERP 사이의 책임, 데이터 계약과 보안 경계를 계층적으로 설계해야 한다.",
+        "Edge와 Gateway는 현장 Protocol 수용, Buffering, 전처리, 품질 매핑과 Store-and-forward를 수행할 수 있으나 중앙 Context와 Governance를 대체하지 않는다.",
+        "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다."
+      ],
+      "anchor_refs": [
+        "it_ot_layered_integration",
+        "edge_gateway_role",
+        "acquisition_sampling_semantics"
+      ]
+    },
+    {
+      "section": "3. 시간과 실시간 처리",
+      "points": [
+        "Timestamp는 가능하면 데이터 발생원에 가까운 곳에서 Event Time으로 생성하고 수집·처리·저장 시간과 구분한다.",
+        "다중 설비 데이터의 인과관계와 순서를 비교하려면 Clock 동기화, 시간대·Offset·Drift 관리와 Time alignment가 필요하다.",
+        "데이터 적시성은 Event 발생부터 소비 시스템에서 사용 가능해질 때까지의 지연과 변동을 업무 요구와 비교해 평가한다.",
+        "Streaming 처리는 연속 데이터와 Event를 도착 즉시 또는 작은 Window 단위로 처리하며 Event Time, 순서 뒤바뀜과 Late Data 정책을 가져야 한다.",
+        "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다."
+      ],
+      "anchor_refs": [
+        "source_timestamp_event_time",
+        "time_sync_alignment",
+        "timeliness_latency_metric",
+        "streaming_event_processing",
+        "realtime_fit_for_purpose"
+      ]
+    },
+    {
+      "section": "4. 품질과 손실관리",
+      "points": [
+        "Quality Code는 Good·Bad·Uncertain과 원인·상태 정보를 데이터 값과 함께 전달하며 시스템 간 의미 매핑이 필요하다.",
+        "Bad·Uncertain 데이터는 유효값이나 0으로 묵시 변환하지 말고 원 품질, 대체 규칙, 추정 여부와 사용 제한을 전파해야 한다.",
+        "데이터 완전성은 기대한 Record 또는 Tag·주기 대비 실제 유효하게 수집된 데이터의 비율과 Gap 분포로 평가한다.",
+        "Compression과 Deadband는 저장량·통신량을 줄이지만 작은 변화, 짧은 Event와 분석 재현성을 손상할 수 있어 목적별 한계와 예외를 설정한다.",
+        "값 변화가 작아도 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 Deadband와 Compression에서 별도 보존해야 한다."
+      ],
+      "anchor_refs": [
+        "quality_code_semantics",
+        "bad_uncertain_propagation",
+        "data_completeness_metric",
+        "compression_deadband_tradeoff",
+        "quality_event_preservation"
+      ]
+    },
+    {
+      "section": "5. 의미와 식별체계",
+      "points": [
+        "Metadata와 Context는 Tag의 단위, 설비, 위치, 측정점, 공정단계, 제품, Batch와 Calibration 상태를 연결해 데이터 의미를 만든다.",
+        "Tag Naming과 Namespace는 중복과 충돌을 줄이는 식별체계이며 이름만으로 전체 의미를 표현하려 하지 말고 Metadata와 Information Model에 연결한다.",
+        "Information Model은 Asset·공정·제품·상태와 관계를 구조화하여 서로 다른 시스템이 같은 의미로 데이터를 해석하도록 한다.",
+        "설비, 품목, 공정, Recipe, 작업장과 단위 같은 Master Data의 식별자와 Version을 시스템 간 일관되게 관리해야 한다.",
+        "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다."
+      ],
+      "anchor_refs": [
+        "metadata_context_role",
+        "tag_naming_namespace",
+        "information_model_semantics",
+        "master_data_consistency",
+        "semantic_interoperability"
+      ]
+    },
+    {
+      "section": "6. 저장·복구·보존",
+      "points": [
+        "Store-and-forward는 통신 단절 중 데이터를 Local Buffer에 보관하고 복구 후 재전송하지만 용량, 순서, 중복, 만료와 재전송 속도를 설계해야 한다.",
+        "Retention 정책은 원시값·압축값·Event·Audit 데이터별 보존기간, 법규·업무 요구, 비용, 삭제와 Archive를 구분한다.",
+        "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다."
+      ],
+      "anchor_refs": [
+        "store_and_forward_recovery",
+        "retention_lifecycle",
+        "event_snapshot_distinction"
+      ]
+    },
+    {
+      "section": "7. Governance와 추적성",
+      "points": [
+        "Data Governance는 데이터 Owner·Steward, 정의, 품질규칙, 접근권한, 변경승인과 문제조치 책임을 정한다.",
+        "Traceability는 원천, 변환, 품질판정, 전송, 저장, 소비와 변경이력을 연결해 결과의 재현과 Audit을 가능하게 한다.",
+        "Batch Genealogy는 원자재 Lot, 설비, Recipe·Version, 작업·공정조건, 품질결과와 완제품 Lot의 관계를 시간과 식별자로 연결한다."
+      ],
+      "anchor_refs": [
+        "data_governance_ownership",
+        "traceability_audit",
+        "batch_genealogy"
+      ]
+    },
+    {
+      "section": "8. Topic 경계와 결론",
+      "points": [
+        "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
+      ],
+      "anchor_refs": [
+        "topic_boundary_transport_model"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Historian, MES와 ERP의 책임을 계층과 데이터 흐름으로 연결한다.",
+    "ISA-95를 참조모델로 설명하고 단일 Protocol과 구분한다.",
+    "Event Time, 도착시간과 처리시간을 분리한다.",
+    "Clock 동기화, Drift와 Time alignment의 필요성을 인과관계 분석과 연결한다.",
+    "Quality Code와 Bad·Uncertain 데이터의 전파·대체 정책을 설명한다.",
+    "Completeness와 Timeliness를 수식과 운영 KPI로 제시한다.",
+    "Compression·Deadband의 절감효과와 Event 손실 Trade-off를 함께 설명한다.",
+    "Store-and-forward의 Buffer·순서·중복·Backlog 해소조건을 제시한다.",
+    "Tag Naming, Metadata, Master Data와 Information Model의 포함관계를 설명한다.",
+    "Protocol 상호운용성과 Semantic Interoperability를 구분한다.",
+    "Data Governance, Retention, Traceability와 Batch Genealogy를 연결한다.",
+    "실시간을 0 지연이 아니라 Deadline·지연예산 충족으로 정의한다.",
+    "SW-07·SW-11·SW-12의 Ownership 경계를 명확히 한다."
+  ],
+  "common_missing_points": [
+    "Historian을 단순 Database 또는 Backup으로만 설명함",
+    "MES와 ERP의 책임 구분 누락",
+    "ISA-95를 Protocol로 오해함",
+    "Timestamp의 발생위치와 Event Time 누락",
+    "Clock 동기화와 Time alignment 누락",
+    "Quality Code와 Bad·Uncertain 처리 누락",
+    "Compression·Deadband의 정보손실 가능성 누락",
+    "Store-and-forward의 Buffer·순서·중복 검토 누락",
+    "Tag Naming만으로 Context가 완성된다고 설명함",
+    "Master Data와 Data Governance 누락",
+    "Retention과 Traceability 연결 누락",
+    "Batch Genealogy의 Lot·Recipe Version 관계 누락",
+    "실시간을 0 지연으로 설명함",
+    "SW-07 또는 SW-12 범위와 혼용함"
+  ],
+  "routing_aliases": [
+    "historian MES ISA-95 integration",
+    "industrial historian timestamp quality code",
+    "IT OT data contextualization",
+    "edge gateway store and forward",
+    "event time processing time alignment",
+    "bad uncertain industrial data quality",
+    "historian compression deadband retention",
+    "tag naming namespace information model",
+    "master data metadata data governance",
+    "MES ERP production integration",
+    "batch genealogy traceability",
+    "industrial streaming real-time processing",
+    "semantic interoperability industrial data",
+    "historian MES edge architecture"
+  ],
+  "routing_field_points": [
+    "Historian은 공정·설비의 시계열 데이터를 장기간 수집·압축·조회하고 품질·시간 정보를 함께 보존하는 운영 데이터 기반이다.",
+    "Historian은 단순 백업 저장소가 아니며 추세, Event, 품질, 압축, Context와 추적성 조회를 지원한다.",
+    "MES는 생산지시를 현장 실행으로 전개하고 작업·실적·품질·자원·공정상태와 Genealogy를 관리하는 제조운영 계층이다.",
+    "ERP는 주문, 계획, 자재, 원가, 재무와 기업 자원을 관리하며 MES의 상세 실시간 제어 기능을 대체하지 않는다.",
+    "ISA-95는 기업과 제조운영·제어 계층의 기능, 정보객체와 인터페이스 경계를 정리하는 참조모델이지 단일 통신 Protocol이 아니다.",
+    "IT/OT 통합은 제어 안정성을 보존하면서 Edge·Gateway·Historian·MES·ERP 사이의 책임, 데이터 계약과 보안 경계를 계층적으로 설계해야 한다.",
+    "Edge와 Gateway는 현장 Protocol 수용, Buffering, 전처리, 품질 매핑과 Store-and-forward를 수행할 수 있으나 중앙 Context와 Governance를 대체하지 않는다.",
+    "Timestamp는 가능하면 데이터 발생원에 가까운 곳에서 Event Time으로 생성하고 수집·처리·저장 시간과 구분한다.",
+    "다중 설비 데이터의 인과관계와 순서를 비교하려면 Clock 동기화, 시간대·Offset·Drift 관리와 Time alignment가 필요하다.",
+    "Quality Code는 Good·Bad·Uncertain과 원인·상태 정보를 데이터 값과 함께 전달하며 시스템 간 의미 매핑이 필요하다.",
+    "Bad·Uncertain 데이터는 유효값이나 0으로 묵시 변환하지 말고 원 품질, 대체 규칙, 추정 여부와 사용 제한을 전파해야 한다.",
+    "데이터 완전성은 기대한 Record 또는 Tag·주기 대비 실제 유효하게 수집된 데이터의 비율과 Gap 분포로 평가한다.",
+    "데이터 적시성은 Event 발생부터 소비 시스템에서 사용 가능해질 때까지의 지연과 변동을 업무 요구와 비교해 평가한다.",
+    "Store-and-forward는 통신 단절 중 데이터를 Local Buffer에 보관하고 복구 후 재전송하지만 용량, 순서, 중복, 만료와 재전송 속도를 설계해야 한다.",
+    "Streaming 처리는 연속 데이터와 Event를 도착 즉시 또는 작은 Window 단위로 처리하며 Event Time, 순서 뒤바뀜과 Late Data 정책을 가져야 한다.",
+    "Compression과 Deadband는 저장량·통신량을 줄이지만 작은 변화, 짧은 Event와 분석 재현성을 손상할 수 있어 목적별 한계와 예외를 설정한다.",
+    "값 변화가 작아도 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 Deadband와 Compression에서 별도 보존해야 한다.",
+    "Metadata와 Context는 Tag의 단위, 설비, 위치, 측정점, 공정단계, 제품, Batch와 Calibration 상태를 연결해 데이터 의미를 만든다.",
+    "Tag Naming과 Namespace는 중복과 충돌을 줄이는 식별체계이며 이름만으로 전체 의미를 표현하려 하지 말고 Metadata와 Information Model에 연결한다.",
+    "Information Model은 Asset·공정·제품·상태와 관계를 구조화하여 서로 다른 시스템이 같은 의미로 데이터를 해석하도록 한다.",
+    "설비, 품목, 공정, Recipe, 작업장과 단위 같은 Master Data의 식별자와 Version을 시스템 간 일관되게 관리해야 한다.",
+    "Data Governance는 데이터 Owner·Steward, 정의, 품질규칙, 접근권한, 변경승인과 문제조치 책임을 정한다.",
+    "Retention 정책은 원시값·압축값·Event·Audit 데이터별 보존기간, 법규·업무 요구, 비용, 삭제와 Archive를 구분한다.",
+    "Traceability는 원천, 변환, 품질판정, 전송, 저장, 소비와 변경이력을 연결해 결과의 재현과 Audit을 가능하게 한다.",
+    "Batch Genealogy는 원자재 Lot, 설비, Recipe·Version, 작업·공정조건, 품질결과와 완제품 Lot의 관계를 시간과 식별자로 연결한다.",
+    "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다.",
+    "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다.",
+    "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다.",
+    "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다.",
+    "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
+  ],
+  "model_answer_text": "Historian은 공정과 설비의 시계열 데이터를 Timestamp와 Quality Code와 함께 수집하고, 압축·보존·추세·Event 조회를 제공하는 운영 데이터 기반이다. MES는 생산지시를 현장 실행으로 전개하여 작업실적, 자원, 품질과 Batch Genealogy를 관리한다. ERP는 주문, 계획, 자재, 원가와 기업자원을 관리한다. ISA-95는 이 계층의 기능과 정보 인터페이스를 정리하는 참조모델이며 단일 통신 Protocol이 아니다.\n\nIT/OT 통합은 PLC를 ERP에 직접 연결하는 작업이 아니다. 제어 안정성을 보존하면서 Edge·Gateway, Historian, MES와 ERP의 책임을 계층적으로 배치한다. Edge와 Gateway는 Protocol 수용, Buffering, 전처리, 품질 Mapping과 Store-and-forward를 수행할 수 있다. 통신 단절 후에는 Buffer 용량, 순서, 중복, 만료와 Backlog 해소속도를 검증해야 한다.\n\n산업데이터의 핵심은 값뿐 아니라 시간과 품질이다. Timestamp는 가능한 한 발생원에서 생성한 Event Time을 보존하고 도착시간·처리시간과 구분한다. 여러 설비의 인과관계를 분석하려면 Clock 동기화, Offset, Drift와 Time alignment가 필요하다. Quality Code의 Good·Bad·Uncertain 상태는 값과 함께 전파한다. Bad 값을 0이나 최근값으로 대체할 때는 원 품질, 대체 Flag와 사용 제한을 남긴다.\n\n데이터 품질은 정확도만이 아니다. 완전성은 기대 Record 대비 유효 수집비율과 Gap으로, 적시성은 Event 발생부터 사용 가능 시점까지의 Latency로 평가한다. Compression과 Deadband는 저장량을 줄이지만 작은 변화와 짧은 Event를 잃을 수 있다. 따라서 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 별도 보존한다.\n\nTag Naming과 Namespace는 식별체계다. 단위, 설비, 위치, 공정단계, 제품과 Batch 의미는 Metadata, Master Data와 Information Model로 연결한다. Protocol 연결이 성공해도 Timestamp, Quality, 단위와 Context가 다르면 Semantic Interoperability는 달성되지 않는다.\n\nData Governance는 Owner·Steward, 정의, 품질규칙, 접근, 변경승인과 조치책임을 정한다. Retention은 원시값, 압축값, Event와 Audit 데이터별 보존·Archive·삭제 정책을 구분한다. Traceability와 Batch Genealogy는 원천, 변환, Lot, Recipe Version, 설비, 공정조건, 품질결과와 완제품 관계를 시간과 식별자로 연결한다.\n\n실시간 처리는 지연이 0인 상태가 아니라 업무 목적에 맞는 Deadline과 지연예산을 만족하는 것이다. 결론적으로 SW-07은 데이터를 전달하는 Protocol을, SW-11은 전달된 데이터의 시간·품질·의미·저장·Context와 상위 시스템 통합을, SW-12는 해당 데이터를 이용한 학습과 추론을 담당한다.",
+  "negative_boundary_questions": [
+    {
+      "question": "OPC UA, Modbus TCP와 MQTT Protocol의 Frame 및 QoS를 비교하시오.",
+      "owner": "SW-07"
+    },
+    {
+      "question": "산업 Ethernet의 실시간 통신과 TSN을 설명하시오.",
+      "owner": "SW-07"
+    },
+    {
+      "question": "AI 이상탐지 모델의 Precision, Recall과 F1을 설명하시오.",
+      "owner": "SW-12"
+    },
+    {
+      "question": "예지보전 Model의 Drift와 Retraining 절차를 설명하시오.",
+      "owner": "SW-12"
+    },
+    {
+      "question": "PLC Sequence, Interlock과 Trip Logic을 설명하시오.",
+      "owner": "SW-02"
+    },
+    {
+      "question": "산업제어시스템 Network Segmentation과 Zero Trust를 설명하시오.",
+      "owner": "SW-08"
+    },
+    {
+      "question": "Digital Twin 기반 Robot 자율제어를 설명하시오.",
+      "owner": "SW-13"
+    },
+    {
+      "question": "일반 Software 요구분석과 Unit Test 절차를 설명하시오.",
+      "owner": "SW-04"
+    }
+  ]
+}

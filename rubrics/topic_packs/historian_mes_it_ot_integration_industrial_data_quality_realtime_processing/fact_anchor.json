@@ -1,0 +1,1147 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+  "title_ko": "Historian·MES·IT/OT 통합, 산업데이터 품질 및 실시간 처리",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "id": "historian_time_series_role",
+      "anchor_id": "historian_time_series_role",
+      "statement": "Historian은 공정·설비의 시계열 데이터를 장기간 수집·압축·조회하고 품질·시간 정보를 함께 보존하는 운영 데이터 기반이다.",
+      "importance": "essential",
+      "keywords": [
+        "historian",
+        "time series",
+        "retention"
+      ],
+      "core_terms": [
+        "Historian",
+        "시계열",
+        "보존"
+      ],
+      "accepted_explanations": [
+        "Historian은 공정·설비의 시계열 데이터를 장기간 수집·압축·조회하고 품질·시간 정보를 함께 보존하는 운영 데이터 기반이다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Historian은 공정·설비의 시계열 데이터를 장기간 수집·압축·조회하고 품질·시간 정보를 함께 보존하는 운영 데이터 기반이다.",
+      "description": "Historian은 공정·설비의 시계열 데이터를 장기간 수집·압축·조회하고 품질·시간 정보를 함께 보존하는 운영 데이터 기반이다."
+    },
+    {
+      "id": "historian_not_backup_only",
+      "anchor_id": "historian_not_backup_only",
+      "statement": "Historian은 단순 백업 저장소가 아니며 추세, Event, 품질, 압축, Context와 추적성 조회를 지원한다.",
+      "importance": "essential",
+      "keywords": [
+        "historian",
+        "trend",
+        "event",
+        "context"
+      ],
+      "core_terms": [
+        "backup",
+        "trend",
+        "context"
+      ],
+      "accepted_explanations": [
+        "Historian은 단순 백업 저장소가 아니며 추세, Event, 품질, 압축, Context와 추적성 조회를 지원한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Historian은 단순 백업 저장소가 아니며 추세, Event, 품질, 압축, Context와 추적성 조회를 지원한다.",
+      "description": "Historian은 단순 백업 저장소가 아니며 추세, Event, 품질, 압축, Context와 추적성 조회를 지원한다."
+    },
+    {
+      "id": "mes_execution_role",
+      "anchor_id": "mes_execution_role",
+      "statement": "MES는 생산지시를 현장 실행으로 전개하고 작업·실적·품질·자원·공정상태와 Genealogy를 관리하는 제조운영 계층이다.",
+      "importance": "essential",
+      "keywords": [
+        "MES",
+        "production execution",
+        "genealogy"
+      ],
+      "core_terms": [
+        "MES",
+        "제조실행",
+        "실적"
+      ],
+      "accepted_explanations": [
+        "MES는 생산지시를 현장 실행으로 전개하고 작업·실적·품질·자원·공정상태와 Genealogy를 관리하는 제조운영 계층이다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "MES는 생산지시를 현장 실행으로 전개하고 작업·실적·품질·자원·공정상태와 Genealogy를 관리하는 제조운영 계층이다.",
+      "description": "MES는 생산지시를 현장 실행으로 전개하고 작업·실적·품질·자원·공정상태와 Genealogy를 관리하는 제조운영 계층이다."
+    },
+    {
+      "id": "erp_business_role",
+      "anchor_id": "erp_business_role",
+      "statement": "ERP는 주문, 계획, 자재, 원가, 재무와 기업 자원을 관리하며 MES의 상세 실시간 제어 기능을 대체하지 않는다.",
+      "importance": "essential",
+      "keywords": [
+        "ERP",
+        "order",
+        "material",
+        "cost"
+      ],
+      "core_terms": [
+        "ERP",
+        "기업자원",
+        "계획"
+      ],
+      "accepted_explanations": [
+        "ERP는 주문, 계획, 자재, 원가, 재무와 기업 자원을 관리하며 MES의 상세 실시간 제어 기능을 대체하지 않는다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "ERP는 주문, 계획, 자재, 원가, 재무와 기업 자원을 관리하며 MES의 상세 실시간 제어 기능을 대체하지 않는다.",
+      "description": "ERP는 주문, 계획, 자재, 원가, 재무와 기업 자원을 관리하며 MES의 상세 실시간 제어 기능을 대체하지 않는다."
+    },
+    {
+      "id": "isa95_hierarchy_interface",
+      "anchor_id": "isa95_hierarchy_interface",
+      "statement": "ISA-95는 기업과 제조운영·제어 계층의 기능, 정보객체와 인터페이스 경계를 정리하는 참조모델이지 단일 통신 Protocol이 아니다.",
+      "importance": "essential",
+      "keywords": [
+        "ISA-95",
+        "hierarchy",
+        "interface",
+        "information object"
+      ],
+      "core_terms": [
+        "ISA-95",
+        "계층",
+        "인터페이스"
+      ],
+      "accepted_explanations": [
+        "ISA-95는 기업과 제조운영·제어 계층의 기능, 정보객체와 인터페이스 경계를 정리하는 참조모델이지 단일 통신 Protocol이 아니다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "ISA-95는 기업과 제조운영·제어 계층의 기능, 정보객체와 인터페이스 경계를 정리하는 참조모델이지 단일 통신 Protocol이 아니다.",
+      "description": "ISA-95는 기업과 제조운영·제어 계층의 기능, 정보객체와 인터페이스 경계를 정리하는 참조모델이지 단일 통신 Protocol이 아니다."
+    },
+    {
+      "id": "it_ot_layered_integration",
+      "anchor_id": "it_ot_layered_integration",
+      "statement": "IT/OT 통합은 제어 안정성을 보존하면서 Edge·Gateway·Historian·MES·ERP 사이의 책임, 데이터 계약과 보안 경계를 계층적으로 설계해야 한다.",
+      "importance": "essential",
+      "keywords": [
+        "IT/OT integration",
+        "layered architecture",
+        "data contract"
+      ],
+      "core_terms": [
+        "IT/OT",
+        "계층",
+        "책임"
+      ],
+      "accepted_explanations": [
+        "IT/OT 통합은 제어 안정성을 보존하면서 Edge·Gateway·Historian·MES·ERP 사이의 책임, 데이터 계약과 보안 경계를 계층적으로 설계해야 한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "IT/OT 통합은 제어 안정성을 보존하면서 Edge·Gateway·Historian·MES·ERP 사이의 책임, 데이터 계약과 보안 경계를 계층적으로 설계해야 한다.",
+      "description": "IT/OT 통합은 제어 안정성을 보존하면서 Edge·Gateway·Historian·MES·ERP 사이의 책임, 데이터 계약과 보안 경계를 계층적으로 설계해야 한다."
+    },
+    {
+      "id": "edge_gateway_role",
+      "anchor_id": "edge_gateway_role",
+      "statement": "Edge와 Gateway는 현장 Protocol 수용, Buffering, 전처리, 품질 매핑과 Store-and-forward를 수행할 수 있으나 중앙 Context와 Governance를 대체하지 않는다.",
+      "importance": "important",
+      "keywords": [
+        "edge",
+        "gateway",
+        "buffering",
+        "store and forward"
+      ],
+      "core_terms": [
+        "Edge",
+        "Gateway",
+        "전처리"
+      ],
+      "accepted_explanations": [
+        "Edge와 Gateway는 현장 Protocol 수용, Buffering, 전처리, 품질 매핑과 Store-and-forward를 수행할 수 있으나 중앙 Context와 Governance를 대체하지 않는다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Edge와 Gateway는 현장 Protocol 수용, Buffering, 전처리, 품질 매핑과 Store-and-forward를 수행할 수 있으나 중앙 Context와 Governance를 대체하지 않는다.",
+      "description": "Edge와 Gateway는 현장 Protocol 수용, Buffering, 전처리, 품질 매핑과 Store-and-forward를 수행할 수 있으나 중앙 Context와 Governance를 대체하지 않는다."
+    },
+    {
+      "id": "source_timestamp_event_time",
+      "anchor_id": "source_timestamp_event_time",
+      "statement": "Timestamp는 가능하면 데이터 발생원에 가까운 곳에서 Event Time으로 생성하고 수집·처리·저장 시간과 구분한다.",
+      "importance": "essential",
+      "keywords": [
+        "timestamp",
+        "event time",
+        "processing time",
+        "source time"
+      ],
+      "core_terms": [
+        "Timestamp",
+        "Event Time",
+        "발생시각"
+      ],
+      "accepted_explanations": [
+        "Timestamp는 가능하면 데이터 발생원에 가까운 곳에서 Event Time으로 생성하고 수집·처리·저장 시간과 구분한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Timestamp는 가능하면 데이터 발생원에 가까운 곳에서 Event Time으로 생성하고 수집·처리·저장 시간과 구분한다.",
+      "description": "Timestamp는 가능하면 데이터 발생원에 가까운 곳에서 Event Time으로 생성하고 수집·처리·저장 시간과 구분한다."
+    },
+    {
+      "id": "time_sync_alignment",
+      "anchor_id": "time_sync_alignment",
+      "statement": "다중 설비 데이터의 인과관계와 순서를 비교하려면 Clock 동기화, 시간대·Offset·Drift 관리와 Time alignment가 필요하다.",
+      "importance": "essential",
+      "keywords": [
+        "time synchronization",
+        "clock drift",
+        "time alignment"
+      ],
+      "core_terms": [
+        "동기화",
+        "Drift",
+        "정렬"
+      ],
+      "accepted_explanations": [
+        "다중 설비 데이터의 인과관계와 순서를 비교하려면 Clock 동기화, 시간대·Offset·Drift 관리와 Time alignment가 필요하다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "다중 설비 데이터의 인과관계와 순서를 비교하려면 Clock 동기화, 시간대·Offset·Drift 관리와 Time alignment가 필요하다.",
+      "description": "다중 설비 데이터의 인과관계와 순서를 비교하려면 Clock 동기화, 시간대·Offset·Drift 관리와 Time alignment가 필요하다."
+    },
+    {
+      "id": "quality_code_semantics",
+      "anchor_id": "quality_code_semantics",
+      "statement": "Quality Code는 Good·Bad·Uncertain과 원인·상태 정보를 데이터 값과 함께 전달하며 시스템 간 의미 매핑이 필요하다.",
+      "importance": "essential",
+      "keywords": [
+        "quality code",
+        "good",
+        "bad",
+        "uncertain"
+      ],
+      "core_terms": [
+        "Quality Code",
+        "Bad",
+        "Uncertain"
+      ],
+      "accepted_explanations": [
+        "Quality Code는 Good·Bad·Uncertain과 원인·상태 정보를 데이터 값과 함께 전달하며 시스템 간 의미 매핑이 필요하다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Quality Code는 Good·Bad·Uncertain과 원인·상태 정보를 데이터 값과 함께 전달하며 시스템 간 의미 매핑이 필요하다.",
+      "description": "Quality Code는 Good·Bad·Uncertain과 원인·상태 정보를 데이터 값과 함께 전달하며 시스템 간 의미 매핑이 필요하다."
+    },
+    {
+      "id": "bad_uncertain_propagation",
+      "anchor_id": "bad_uncertain_propagation",
+      "statement": "Bad·Uncertain 데이터는 유효값이나 0으로 묵시 변환하지 말고 원 품질, 대체 규칙, 추정 여부와 사용 제한을 전파해야 한다.",
+      "importance": "essential",
+      "keywords": [
+        "bad data",
+        "uncertain data",
+        "substitution",
+        "imputation"
+      ],
+      "core_terms": [
+        "Bad",
+        "Uncertain",
+        "대체"
+      ],
+      "accepted_explanations": [
+        "Bad·Uncertain 데이터는 유효값이나 0으로 묵시 변환하지 말고 원 품질, 대체 규칙, 추정 여부와 사용 제한을 전파해야 한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Bad·Uncertain 데이터는 유효값이나 0으로 묵시 변환하지 말고 원 품질, 대체 규칙, 추정 여부와 사용 제한을 전파해야 한다.",
+      "description": "Bad·Uncertain 데이터는 유효값이나 0으로 묵시 변환하지 말고 원 품질, 대체 규칙, 추정 여부와 사용 제한을 전파해야 한다."
+    },
+    {
+      "id": "data_completeness_metric",
+      "anchor_id": "data_completeness_metric",
+      "statement": "데이터 완전성은 기대한 Record 또는 Tag·주기 대비 실제 유효하게 수집된 데이터의 비율과 Gap 분포로 평가한다.",
+      "importance": "important",
+      "keywords": [
+        "completeness",
+        "expected records",
+        "data gap"
+      ],
+      "core_terms": [
+        "완전성",
+        "결측",
+        "기대 Record"
+      ],
+      "accepted_explanations": [
+        "데이터 완전성은 기대한 Record 또는 Tag·주기 대비 실제 유효하게 수집된 데이터의 비율과 Gap 분포로 평가한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "데이터 완전성은 기대한 Record 또는 Tag·주기 대비 실제 유효하게 수집된 데이터의 비율과 Gap 분포로 평가한다.",
+      "description": "데이터 완전성은 기대한 Record 또는 Tag·주기 대비 실제 유효하게 수집된 데이터의 비율과 Gap 분포로 평가한다."
+    },
+    {
+      "id": "timeliness_latency_metric",
+      "anchor_id": "timeliness_latency_metric",
+      "statement": "데이터 적시성은 Event 발생부터 소비 시스템에서 사용 가능해질 때까지의 지연과 변동을 업무 요구와 비교해 평가한다.",
+      "importance": "important",
+      "keywords": [
+        "timeliness",
+        "latency",
+        "jitter"
+      ],
+      "core_terms": [
+        "적시성",
+        "지연",
+        "변동"
+      ],
+      "accepted_explanations": [
+        "데이터 적시성은 Event 발생부터 소비 시스템에서 사용 가능해질 때까지의 지연과 변동을 업무 요구와 비교해 평가한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "데이터 적시성은 Event 발생부터 소비 시스템에서 사용 가능해질 때까지의 지연과 변동을 업무 요구와 비교해 평가한다.",
+      "description": "데이터 적시성은 Event 발생부터 소비 시스템에서 사용 가능해질 때까지의 지연과 변동을 업무 요구와 비교해 평가한다."
+    },
+    {
+      "id": "store_and_forward_recovery",
+      "anchor_id": "store_and_forward_recovery",
+      "statement": "Store-and-forward는 통신 단절 중 데이터를 Local Buffer에 보관하고 복구 후 재전송하지만 용량, 순서, 중복, 만료와 재전송 속도를 설계해야 한다.",
+      "importance": "essential",
+      "keywords": [
+        "store and forward",
+        "buffer",
+        "replay",
+        "ordering"
+      ],
+      "core_terms": [
+        "Store-and-forward",
+        "Buffer",
+        "재전송"
+      ],
+      "accepted_explanations": [
+        "Store-and-forward는 통신 단절 중 데이터를 Local Buffer에 보관하고 복구 후 재전송하지만 용량, 순서, 중복, 만료와 재전송 속도를 설계해야 한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Store-and-forward는 통신 단절 중 데이터를 Local Buffer에 보관하고 복구 후 재전송하지만 용량, 순서, 중복, 만료와 재전송 속도를 설계해야 한다.",
+      "description": "Store-and-forward는 통신 단절 중 데이터를 Local Buffer에 보관하고 복구 후 재전송하지만 용량, 순서, 중복, 만료와 재전송 속도를 설계해야 한다."
+    },
+    {
+      "id": "streaming_event_processing",
+      "anchor_id": "streaming_event_processing",
+      "statement": "Streaming 처리는 연속 데이터와 Event를 도착 즉시 또는 작은 Window 단위로 처리하며 Event Time, 순서 뒤바뀜과 Late Data 정책을 가져야 한다.",
+      "importance": "important",
+      "keywords": [
+        "streaming",
+        "window",
+        "late data",
+        "event time"
+      ],
+      "core_terms": [
+        "Streaming",
+        "Window",
+        "Late Data"
+      ],
+      "accepted_explanations": [
+        "Streaming 처리는 연속 데이터와 Event를 도착 즉시 또는 작은 Window 단위로 처리하며 Event Time, 순서 뒤바뀜과 Late Data 정책을 가져야 한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Streaming 처리는 연속 데이터와 Event를 도착 즉시 또는 작은 Window 단위로 처리하며 Event Time, 순서 뒤바뀜과 Late Data 정책을 가져야 한다.",
+      "description": "Streaming 처리는 연속 데이터와 Event를 도착 즉시 또는 작은 Window 단위로 처리하며 Event Time, 순서 뒤바뀜과 Late Data 정책을 가져야 한다."
+    },
+    {
+      "id": "compression_deadband_tradeoff",
+      "anchor_id": "compression_deadband_tradeoff",
+      "statement": "Compression과 Deadband는 저장량·통신량을 줄이지만 작은 변화, 짧은 Event와 분석 재현성을 손상할 수 있어 목적별 한계와 예외를 설정한다.",
+      "importance": "essential",
+      "keywords": [
+        "compression",
+        "deadband",
+        "exception reporting"
+      ],
+      "core_terms": [
+        "Compression",
+        "Deadband",
+        "정보손실"
+      ],
+      "accepted_explanations": [
+        "Compression과 Deadband는 저장량·통신량을 줄이지만 작은 변화, 짧은 Event와 분석 재현성을 손상할 수 있어 목적별 한계와 예외를 설정한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Compression과 Deadband는 저장량·통신량을 줄이지만 작은 변화, 짧은 Event와 분석 재현성을 손상할 수 있어 목적별 한계와 예외를 설정한다.",
+      "description": "Compression과 Deadband는 저장량·통신량을 줄이지만 작은 변화, 짧은 Event와 분석 재현성을 손상할 수 있어 목적별 한계와 예외를 설정한다."
+    },
+    {
+      "id": "quality_event_preservation",
+      "anchor_id": "quality_event_preservation",
+      "statement": "값 변화가 작아도 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 Deadband와 Compression에서 별도 보존해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "quality transition",
+        "state change",
+        "event preservation"
+      ],
+      "core_terms": [
+        "Quality 변경",
+        "상태 전이",
+        "Event"
+      ],
+      "accepted_explanations": [
+        "값 변화가 작아도 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 Deadband와 Compression에서 별도 보존해야 한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "값 변화가 작아도 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 Deadband와 Compression에서 별도 보존해야 한다.",
+      "description": "값 변화가 작아도 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 Deadband와 Compression에서 별도 보존해야 한다."
+    },
+    {
+      "id": "metadata_context_role",
+      "anchor_id": "metadata_context_role",
+      "statement": "Metadata와 Context는 Tag의 단위, 설비, 위치, 측정점, 공정단계, 제품, Batch와 Calibration 상태를 연결해 데이터 의미를 만든다.",
+      "importance": "essential",
+      "keywords": [
+        "metadata",
+        "context",
+        "unit",
+        "asset"
+      ],
+      "core_terms": [
+        "Metadata",
+        "Context",
+        "단위"
+      ],
+      "accepted_explanations": [
+        "Metadata와 Context는 Tag의 단위, 설비, 위치, 측정점, 공정단계, 제품, Batch와 Calibration 상태를 연결해 데이터 의미를 만든다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Metadata와 Context는 Tag의 단위, 설비, 위치, 측정점, 공정단계, 제품, Batch와 Calibration 상태를 연결해 데이터 의미를 만든다.",
+      "description": "Metadata와 Context는 Tag의 단위, 설비, 위치, 측정점, 공정단계, 제품, Batch와 Calibration 상태를 연결해 데이터 의미를 만든다."
+    },
+    {
+      "id": "tag_naming_namespace",
+      "anchor_id": "tag_naming_namespace",
+      "statement": "Tag Naming과 Namespace는 중복과 충돌을 줄이는 식별체계이며 이름만으로 전체 의미를 표현하려 하지 말고 Metadata와 Information Model에 연결한다.",
+      "importance": "important",
+      "keywords": [
+        "tag naming",
+        "namespace",
+        "identifier"
+      ],
+      "core_terms": [
+        "Tag Naming",
+        "Namespace",
+        "식별자"
+      ],
+      "accepted_explanations": [
+        "Tag Naming과 Namespace는 중복과 충돌을 줄이는 식별체계이며 이름만으로 전체 의미를 표현하려 하지 말고 Metadata와 Information Model에 연결한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Tag Naming과 Namespace는 중복과 충돌을 줄이는 식별체계이며 이름만으로 전체 의미를 표현하려 하지 말고 Metadata와 Information Model에 연결한다.",
+      "description": "Tag Naming과 Namespace는 중복과 충돌을 줄이는 식별체계이며 이름만으로 전체 의미를 표현하려 하지 말고 Metadata와 Information Model에 연결한다."
+    },
+    {
+      "id": "information_model_semantics",
+      "anchor_id": "information_model_semantics",
+      "statement": "Information Model은 Asset·공정·제품·상태와 관계를 구조화하여 서로 다른 시스템이 같은 의미로 데이터를 해석하도록 한다.",
+      "importance": "essential",
+      "keywords": [
+        "information model",
+        "asset model",
+        "semantic"
+      ],
+      "core_terms": [
+        "Information Model",
+        "Asset",
+        "의미"
+      ],
+      "accepted_explanations": [
+        "Information Model은 Asset·공정·제품·상태와 관계를 구조화하여 서로 다른 시스템이 같은 의미로 데이터를 해석하도록 한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Information Model은 Asset·공정·제품·상태와 관계를 구조화하여 서로 다른 시스템이 같은 의미로 데이터를 해석하도록 한다.",
+      "description": "Information Model은 Asset·공정·제품·상태와 관계를 구조화하여 서로 다른 시스템이 같은 의미로 데이터를 해석하도록 한다."
+    },
+    {
+      "id": "master_data_consistency",
+      "anchor_id": "master_data_consistency",
+      "statement": "설비, 품목, 공정, Recipe, 작업장과 단위 같은 Master Data의 식별자와 Version을 시스템 간 일관되게 관리해야 한다.",
+      "importance": "essential",
+      "keywords": [
+        "master data",
+        "identifier",
+        "version"
+      ],
+      "core_terms": [
+        "Master Data",
+        "식별자",
+        "Version"
+      ],
+      "accepted_explanations": [
+        "설비, 품목, 공정, Recipe, 작업장과 단위 같은 Master Data의 식별자와 Version을 시스템 간 일관되게 관리해야 한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "설비, 품목, 공정, Recipe, 작업장과 단위 같은 Master Data의 식별자와 Version을 시스템 간 일관되게 관리해야 한다.",
+      "description": "설비, 품목, 공정, Recipe, 작업장과 단위 같은 Master Data의 식별자와 Version을 시스템 간 일관되게 관리해야 한다."
+    },
+    {
+      "id": "data_governance_ownership",
+      "anchor_id": "data_governance_ownership",
+      "statement": "Data Governance는 데이터 Owner·Steward, 정의, 품질규칙, 접근권한, 변경승인과 문제조치 책임을 정한다.",
+      "importance": "important",
+      "keywords": [
+        "data governance",
+        "data owner",
+        "steward"
+      ],
+      "core_terms": [
+        "Governance",
+        "Owner",
+        "Steward"
+      ],
+      "accepted_explanations": [
+        "Data Governance는 데이터 Owner·Steward, 정의, 품질규칙, 접근권한, 변경승인과 문제조치 책임을 정한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Data Governance는 데이터 Owner·Steward, 정의, 품질규칙, 접근권한, 변경승인과 문제조치 책임을 정한다.",
+      "description": "Data Governance는 데이터 Owner·Steward, 정의, 품질규칙, 접근권한, 변경승인과 문제조치 책임을 정한다."
+    },
+    {
+      "id": "retention_lifecycle",
+      "anchor_id": "retention_lifecycle",
+      "statement": "Retention 정책은 원시값·압축값·Event·Audit 데이터별 보존기간, 법규·업무 요구, 비용, 삭제와 Archive를 구분한다.",
+      "importance": "important",
+      "keywords": [
+        "retention",
+        "archive",
+        "deletion",
+        "lifecycle"
+      ],
+      "core_terms": [
+        "Retention",
+        "Archive",
+        "삭제"
+      ],
+      "accepted_explanations": [
+        "Retention 정책은 원시값·압축값·Event·Audit 데이터별 보존기간, 법규·업무 요구, 비용, 삭제와 Archive를 구분한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Retention 정책은 원시값·압축값·Event·Audit 데이터별 보존기간, 법규·업무 요구, 비용, 삭제와 Archive를 구분한다.",
+      "description": "Retention 정책은 원시값·압축값·Event·Audit 데이터별 보존기간, 법규·업무 요구, 비용, 삭제와 Archive를 구분한다."
+    },
+    {
+      "id": "traceability_audit",
+      "anchor_id": "traceability_audit",
+      "statement": "Traceability는 원천, 변환, 품질판정, 전송, 저장, 소비와 변경이력을 연결해 결과의 재현과 Audit을 가능하게 한다.",
+      "importance": "essential",
+      "keywords": [
+        "traceability",
+        "lineage",
+        "audit trail"
+      ],
+      "core_terms": [
+        "Traceability",
+        "Lineage",
+        "Audit"
+      ],
+      "accepted_explanations": [
+        "Traceability는 원천, 변환, 품질판정, 전송, 저장, 소비와 변경이력을 연결해 결과의 재현과 Audit을 가능하게 한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Traceability는 원천, 변환, 품질판정, 전송, 저장, 소비와 변경이력을 연결해 결과의 재현과 Audit을 가능하게 한다.",
+      "description": "Traceability는 원천, 변환, 품질판정, 전송, 저장, 소비와 변경이력을 연결해 결과의 재현과 Audit을 가능하게 한다."
+    },
+    {
+      "id": "batch_genealogy",
+      "anchor_id": "batch_genealogy",
+      "statement": "Batch Genealogy는 원자재 Lot, 설비, Recipe·Version, 작업·공정조건, 품질결과와 완제품 Lot의 관계를 시간과 식별자로 연결한다.",
+      "importance": "essential",
+      "keywords": [
+        "batch genealogy",
+        "lot",
+        "recipe",
+        "product"
+      ],
+      "core_terms": [
+        "Batch Genealogy",
+        "Lot",
+        "Recipe"
+      ],
+      "accepted_explanations": [
+        "Batch Genealogy는 원자재 Lot, 설비, Recipe·Version, 작업·공정조건, 품질결과와 완제품 Lot의 관계를 시간과 식별자로 연결한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Batch Genealogy는 원자재 Lot, 설비, Recipe·Version, 작업·공정조건, 품질결과와 완제품 Lot의 관계를 시간과 식별자로 연결한다.",
+      "description": "Batch Genealogy는 원자재 Lot, 설비, Recipe·Version, 작업·공정조건, 품질결과와 완제품 Lot의 관계를 시간과 식별자로 연결한다."
+    },
+    {
+      "id": "acquisition_sampling_semantics",
+      "anchor_id": "acquisition_sampling_semantics",
+      "statement": "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다.",
+      "importance": "important",
+      "keywords": [
+        "data acquisition",
+        "sampling",
+        "scan rate",
+        "scaling"
+      ],
+      "core_terms": [
+        "수집",
+        "Sampling",
+        "Scaling"
+      ],
+      "accepted_explanations": [
+        "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다.",
+      "description": "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다."
+    },
+    {
+      "id": "event_snapshot_distinction",
+      "anchor_id": "event_snapshot_distinction",
+      "statement": "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다.",
+      "importance": "important",
+      "keywords": [
+        "event",
+        "snapshot",
+        "sequence of events"
+      ],
+      "core_terms": [
+        "Event",
+        "Snapshot",
+        "순서"
+      ],
+      "accepted_explanations": [
+        "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다.",
+      "description": "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다."
+    },
+    {
+      "id": "realtime_fit_for_purpose",
+      "anchor_id": "realtime_fit_for_purpose",
+      "statement": "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다.",
+      "importance": "essential",
+      "keywords": [
+        "real-time",
+        "deadline",
+        "latency budget",
+        "determinism"
+      ],
+      "core_terms": [
+        "실시간",
+        "Deadline",
+        "지연예산"
+      ],
+      "accepted_explanations": [
+        "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다.",
+      "description": "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다."
+    },
+    {
+      "id": "semantic_interoperability",
+      "anchor_id": "semantic_interoperability",
+      "statement": "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다.",
+      "importance": "essential",
+      "keywords": [
+        "semantic interoperability",
+        "unit",
+        "quality",
+        "context"
+      ],
+      "core_terms": [
+        "의미 상호운용성",
+        "단위",
+        "Context"
+      ],
+      "accepted_explanations": [
+        "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다.",
+      "description": "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다."
+    },
+    {
+      "id": "topic_boundary_transport_model",
+      "anchor_id": "topic_boundary_transport_model",
+      "statement": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
+      "importance": "essential",
+      "keywords": [
+        "SW-07",
+        "SW-11",
+        "SW-12",
+        "ownership boundary"
+      ],
+      "core_terms": [
+        "Protocol",
+        "데이터 기반",
+        "학습"
+      ],
+      "accepted_explanations": [
+        "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
+      ],
+      "rejected_explanations": [],
+      "grading_notes": "핵심 개념과 인과관계를 설명하면 인정하며 단순 키워드 나열은 부분 인정한다.",
+      "source_basis": [
+        "industrial historian and manufacturing-operations architecture principles",
+        "ISA-95 conceptual hierarchy and information-interface principles",
+        "industrial data quality, contextualization and traceability practices"
+      ],
+      "claim": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
+      "description": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "historian_backup_only",
+      "claim": "Historian은 장기 백업용 Database이므로 Timestamp, Quality, Event와 Context를 별도로 관리할 필요가 없다.",
+      "correction": "Historian은 시계열 운용 데이터의 시간·품질·Event·압축·Context와 조회 요구를 함께 관리한다.",
+      "wrong_claim": "Historian은 장기 백업용 Database이므로 Timestamp, Quality, Event와 Context를 별도로 관리할 필요가 없다.",
+      "correct_rule": "Historian은 시계열 운용 데이터의 시간·품질·Event·압축·Context와 조회 요구를 함께 관리한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Historian은 시계열 운용 데이터의 시간·품질·Event·압축·Context와 조회 요구를 함께 관리한다.",
+      "description": "Historian은 장기 백업용 Database이므로 Timestamp, Quality, Event와 Context를 별도로 관리할 필요가 없다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "mes_equals_erp",
+      "claim": "MES와 ERP는 같은 시스템이므로 생산실행과 기업자원관리 기능을 구분할 필요가 없다.",
+      "correction": "MES는 제조운영 실행을, ERP는 기업자원·계획·원가를 중심으로 하며 책임과 인터페이스를 구분한다.",
+      "wrong_claim": "MES와 ERP는 같은 시스템이므로 생산실행과 기업자원관리 기능을 구분할 필요가 없다.",
+      "correct_rule": "MES는 제조운영 실행을, ERP는 기업자원·계획·원가를 중심으로 하며 책임과 인터페이스를 구분한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "MES는 제조운영 실행을, ERP는 기업자원·계획·원가를 중심으로 하며 책임과 인터페이스를 구분한다.",
+      "description": "MES와 ERP는 같은 시스템이므로 생산실행과 기업자원관리 기능을 구분할 필요가 없다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "isa95_wire_protocol",
+      "claim": "ISA-95는 PLC와 ERP 사이에 사용하는 단일 통신 Protocol이다.",
+      "correction": "ISA-95는 기능·계층·정보객체와 인터페이스 경계를 정리하는 참조모델이며 특정 전송 Protocol과 동일하지 않다.",
+      "wrong_claim": "ISA-95는 PLC와 ERP 사이에 사용하는 단일 통신 Protocol이다.",
+      "correct_rule": "ISA-95는 기능·계층·정보객체와 인터페이스 경계를 정리하는 참조모델이며 특정 전송 Protocol과 동일하지 않다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "ISA-95는 기능·계층·정보객체와 인터페이스 경계를 정리하는 참조모델이며 특정 전송 Protocol과 동일하지 않다.",
+      "description": "ISA-95는 PLC와 ERP 사이에 사용하는 단일 통신 Protocol이다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "mes_replaces_realtime_control",
+      "claim": "MES를 도입하면 PLC·DCS의 실시간 제어 Loop와 Interlock을 MES가 직접 대체한다.",
+      "correction": "MES는 제조운영 실행계층이며 시간결정적 제어와 보호논리는 적합한 OT 제어계층에 유지한다.",
+      "wrong_claim": "MES를 도입하면 PLC·DCS의 실시간 제어 Loop와 Interlock을 MES가 직접 대체한다.",
+      "correct_rule": "MES는 제조운영 실행계층이며 시간결정적 제어와 보호논리는 적합한 OT 제어계층에 유지한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "MES는 제조운영 실행계층이며 시간결정적 제어와 보호논리는 적합한 OT 제어계층에 유지한다.",
+      "description": "MES를 도입하면 PLC·DCS의 실시간 제어 Loop와 Interlock을 MES가 직접 대체한다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "direct_plc_to_erp_default",
+      "claim": "IT/OT 통합은 PLC를 ERP에 직접 연결할수록 지연이 작고 가장 바람직하다.",
+      "correction": "직접 연결이 아니라 계층적 책임, Gateway·Historian·MES, 보안경계와 데이터 계약을 설계한다.",
+      "wrong_claim": "IT/OT 통합은 PLC를 ERP에 직접 연결할수록 지연이 작고 가장 바람직하다.",
+      "correct_rule": "직접 연결이 아니라 계층적 책임, Gateway·Historian·MES, 보안경계와 데이터 계약을 설계한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "직접 연결이 아니라 계층적 책임, Gateway·Historian·MES, 보안경계와 데이터 계약을 설계한다.",
+      "description": "IT/OT 통합은 PLC를 ERP에 직접 연결할수록 지연이 작고 가장 바람직하다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "arrival_time_equals_event_time",
+      "claim": "중앙 Server의 도착시간을 기록하면 모든 데이터의 실제 발생시간을 정확히 알 수 있다.",
+      "correction": "Event Time과 수집·도착·처리시간을 구분하고 가능한 한 원천 Timestamp와 Clock 품질을 보존한다.",
+      "wrong_claim": "중앙 Server의 도착시간을 기록하면 모든 데이터의 실제 발생시간을 정확히 알 수 있다.",
+      "correct_rule": "Event Time과 수집·도착·처리시간을 구분하고 가능한 한 원천 Timestamp와 Clock 품질을 보존한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Event Time과 수집·도착·처리시간을 구분하고 가능한 한 원천 Timestamp와 Clock 품질을 보존한다.",
+      "description": "중앙 Server의 도착시간을 기록하면 모든 데이터의 실제 발생시간을 정확히 알 수 있다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "time_sync_optional",
+      "claim": "Tag 값만 비교하면 되므로 여러 설비의 Clock 동기화와 Time alignment는 필요 없다.",
+      "correction": "인과관계·순서·Batch 분석을 위해 동기화, Drift, Offset과 시간대 관리를 수행한다.",
+      "wrong_claim": "Tag 값만 비교하면 되므로 여러 설비의 Clock 동기화와 Time alignment는 필요 없다.",
+      "correct_rule": "인과관계·순서·Batch 분석을 위해 동기화, Drift, Offset과 시간대 관리를 수행한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "인과관계·순서·Batch 분석을 위해 동기화, Drift, Offset과 시간대 관리를 수행한다.",
+      "description": "Tag 값만 비교하면 되므로 여러 설비의 Clock 동기화와 Time alignment는 필요 없다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "bad_uncertain_as_valid_zero",
+      "claim": "Bad 또는 Uncertain 데이터는 계산 편의를 위해 0이나 최근값으로 바꾸면 정상 데이터와 동일하게 사용할 수 있다.",
+      "correction": "대체값은 원 품질, 대체·추정 표시, 규칙과 사용 제한을 함께 전파해야 한다.",
+      "wrong_claim": "Bad 또는 Uncertain 데이터는 계산 편의를 위해 0이나 최근값으로 바꾸면 정상 데이터와 동일하게 사용할 수 있다.",
+      "correct_rule": "대체값은 원 품질, 대체·추정 표시, 규칙과 사용 제한을 함께 전파해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "대체값은 원 품질, 대체·추정 표시, 규칙과 사용 제한을 함께 전파해야 한다.",
+      "description": "Bad 또는 Uncertain 데이터는 계산 편의를 위해 0이나 최근값으로 바꾸면 정상 데이터와 동일하게 사용할 수 있다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "quality_code_discard",
+      "claim": "상위 시스템에는 값만 전송하면 되므로 Quality Code는 저장하거나 전달하지 않아도 된다.",
+      "correction": "Quality 의미를 값과 함께 보존하고 시스템 간 상태 Mapping과 소비정책을 정의한다.",
+      "wrong_claim": "상위 시스템에는 값만 전송하면 되므로 Quality Code는 저장하거나 전달하지 않아도 된다.",
+      "correct_rule": "Quality 의미를 값과 함께 보존하고 시스템 간 상태 Mapping과 소비정책을 정의한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Quality 의미를 값과 함께 보존하고 시스템 간 상태 Mapping과 소비정책을 정의한다.",
+      "description": "상위 시스템에는 값만 전송하면 되므로 Quality Code는 저장하거나 전달하지 않아도 된다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "compression_deadband_lossless",
+      "claim": "Historian Compression과 Deadband를 적용해도 모든 짧은 Event와 원시 변화가 완전히 보존된다.",
+      "correction": "압축·Deadband는 정보손실 가능성이 있으므로 목적별 한계, Event·Quality 예외와 원시데이터 정책을 정한다.",
+      "wrong_claim": "Historian Compression과 Deadband를 적용해도 모든 짧은 Event와 원시 변화가 완전히 보존된다.",
+      "correct_rule": "압축·Deadband는 정보손실 가능성이 있으므로 목적별 한계, Event·Quality 예외와 원시데이터 정책을 정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "압축·Deadband는 정보손실 가능성이 있으므로 목적별 한계, Event·Quality 예외와 원시데이터 정책을 정한다.",
+      "description": "Historian Compression과 Deadband를 적용해도 모든 짧은 Event와 원시 변화가 완전히 보존된다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "store_forward_guarantees_no_loss",
+      "claim": "Store-and-forward를 사용하면 Buffer 용량과 재전송 순서에 관계없이 데이터 유실·중복이 절대 발생하지 않는다.",
+      "correction": "Buffer 용량, 단절시간, 순서, 중복제거, 만료와 Recovery 처리율을 설계하고 검증한다.",
+      "wrong_claim": "Store-and-forward를 사용하면 Buffer 용량과 재전송 순서에 관계없이 데이터 유실·중복이 절대 발생하지 않는다.",
+      "correct_rule": "Buffer 용량, 단절시간, 순서, 중복제거, 만료와 Recovery 처리율을 설계하고 검증한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Buffer 용량, 단절시간, 순서, 중복제거, 만료와 Recovery 처리율을 설계하고 검증한다.",
+      "description": "Store-and-forward를 사용하면 Buffer 용량과 재전송 순서에 관계없이 데이터 유실·중복이 절대 발생하지 않는다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "tag_name_complete_context",
+      "claim": "Tag 이름을 표준화하면 단위, 설비관계, Batch와 품질을 포함한 모든 Context가 자동 완성된다.",
+      "correction": "Tag Naming은 식별체계의 일부이며 Metadata, Master Data와 Information Model에 연결해야 한다.",
+      "wrong_claim": "Tag 이름을 표준화하면 단위, 설비관계, Batch와 품질을 포함한 모든 Context가 자동 완성된다.",
+      "correct_rule": "Tag Naming은 식별체계의 일부이며 Metadata, Master Data와 Information Model에 연결해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Tag Naming은 식별체계의 일부이며 Metadata, Master Data와 Information Model에 연결해야 한다.",
+      "description": "Tag 이름을 표준화하면 단위, 설비관계, Batch와 품질을 포함한 모든 Context가 자동 완성된다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "realtime_zero_latency",
+      "claim": "실시간 처리는 Network와 연산 지연이 항상 0인 처리다.",
+      "correction": "실시간성은 목적에 맞는 Deadline, 지연예산과 결정성 요구를 만족하는 것으로 정의한다.",
+      "wrong_claim": "실시간 처리는 Network와 연산 지연이 항상 0인 처리다.",
+      "correct_rule": "실시간성은 목적에 맞는 Deadline, 지연예산과 결정성 요구를 만족하는 것으로 정의한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "실시간성은 목적에 맞는 Deadline, 지연예산과 결정성 요구를 만족하는 것으로 정의한다.",
+      "description": "실시간 처리는 Network와 연산 지연이 항상 0인 처리다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "edge_eliminates_governance",
+      "claim": "Edge에서 데이터를 처리하면 중앙 Historian, Metadata, Retention과 Data Governance가 필요 없다.",
+      "correction": "Edge 처리와 중앙 Context·보존·Governance는 상호보완 관계이며 책임과 동기화 정책이 필요하다.",
+      "wrong_claim": "Edge에서 데이터를 처리하면 중앙 Historian, Metadata, Retention과 Data Governance가 필요 없다.",
+      "correct_rule": "Edge 처리와 중앙 Context·보존·Governance는 상호보완 관계이며 책임과 동기화 정책이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Edge 처리와 중앙 Context·보존·Governance는 상호보완 관계이며 책임과 동기화 정책이 필요하다.",
+      "description": "Edge에서 데이터를 처리하면 중앙 Historian, Metadata, Retention과 Data Governance가 필요 없다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "protocol_guarantees_semantics",
+      "claim": "OPC UA나 MQTT로 연결되면 단위, Timestamp, Quality와 설비 의미도 자동으로 일치한다.",
+      "correction": "전송 연결과 Semantic Interoperability를 구분하고 공통 Information Model과 Mapping을 검증한다.",
+      "wrong_claim": "OPC UA나 MQTT로 연결되면 단위, Timestamp, Quality와 설비 의미도 자동으로 일치한다.",
+      "correct_rule": "전송 연결과 Semantic Interoperability를 구분하고 공통 Information Model과 Mapping을 검증한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "전송 연결과 Semantic Interoperability를 구분하고 공통 Information Model과 Mapping을 검증한다.",
+      "description": "OPC UA나 MQTT로 연결되면 단위, Timestamp, Quality와 설비 의미도 자동으로 일치한다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    },
+    {
+      "id": "genealogy_from_current_values",
+      "claim": "현재 Historian 값만 조회하면 원자재 Lot부터 완제품까지 Batch Genealogy가 자동 재구성된다.",
+      "correction": "Genealogy에는 Lot·작업·Recipe Version·설비·공정조건·품질결과의 식별자와 Event 관계를 보존해야 한다.",
+      "wrong_claim": "현재 Historian 값만 조회하면 원자재 Lot부터 완제품까지 Batch Genealogy가 자동 재구성된다.",
+      "correct_rule": "Genealogy에는 Lot·작업·Recipe Version·설비·공정조건·품질결과의 식별자와 Event 관계를 보존해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Genealogy에는 Lot·작업·Recipe Version·설비·공정조건·품질결과의 식별자와 Event 관계를 보존해야 한다.",
+      "description": "현재 Historian 값만 조회하면 원자재 Lot부터 완제품까지 Batch Genealogy가 자동 재구성된다.",
+      "grading_notes": "문맥상 같은 단정을 하면 핵심 사실 오류로 판정한다."
+    }
+  ],
+  "safe_expressions": [
+    "Historian이 관계형 Database를 내부적으로 사용한다는 설명은 틀리지 않지만 시계열·품질·시간 기능을 함께 평가한다.",
+    "MES가 설비와 직접 Interface할 수 있으나 PLC·DCS의 시간결정적 제어와 보호논리를 자동 대체한다는 뜻은 아니다.",
+    "ISA-95 기반 Interface라는 표현은 허용하되 ISA-95 자체를 Wire Protocol로 단정하면 오류다.",
+    "실시간은 0 ms가 아니라 업무 목적에 맞는 Deadline과 지연예산으로 정의할 수 있다.",
+    "Deadband와 Compression은 허용되는 Engineering 수단이며 적용 자체를 오류로 보지 않는다.",
+    "Bad 데이터의 대체는 명시된 규칙, Flag와 원 품질 보존이 있으면 허용할 수 있다.",
+    "Source Timestamp를 얻을 수 없는 경우 Server Timestamp를 사용할 수 있으나 한계와 불확실성을 표시해야 한다.",
+    "Edge Historian 또는 Local Store는 중앙 Historian과 병행할 수 있다.",
+    "Tag Naming Convention은 Context 구성요소이며 Metadata·Information Model을 모두 대체한다고 하지 않으면 허용한다.",
+    "Compression은 구현에 따라 Lossless 또는 Lossy일 수 있으므로 방식과 목적을 확인한다.",
+    "ERP가 Near-real-time 생산정보를 받을 수 있으나 제어 Loop를 소유한다는 뜻은 아니다.",
+    "Quality Code 명칭과 Bit 구조는 Vendor별로 다를 수 있으나 Good·Bad·Uncertain 의미 Mapping은 필요하다.",
+    "Store-and-forward는 유실 저감수단이며 충분한 Buffer와 전달보장이 입증된 범위에서 높은 신뢰성을 가질 수 있다.",
+    "Streaming Window는 Processing Time 또는 Event Time 기준으로 설계할 수 있으나 선택과 Late Data 정책을 명시한다.",
+    "Batch Genealogy는 Historian, MES, LIMS 등 여러 시스템의 Event를 결합해 구성할 수 있다.",
+    "표준 계층 번호나 세부 기능 배치는 적용 Edition과 조직 Architecture로 verify-first 한다."
+  ],
+  "revision_notes": [
+    "created_for=SOFTWARE_LLM_LANE_C_SW11",
+    "scope_boundary=SW07 transport protocol; SW11 data meaning quality storage context integration; SW12 learning inference",
+    "generated_bank_promotion=excluded",
+    "standard_clause_numbers_and_vendor_quality_bits=verify_first"
+  ],
+  "topic_label": "Historian·MES·IT/OT 통합, 산업데이터 품질 및 실시간 처리",
+  "core_facts": [
+    "Historian은 공정·설비의 시계열 데이터를 장기간 수집·압축·조회하고 품질·시간 정보를 함께 보존하는 운영 데이터 기반이다.",
+    "Historian은 단순 백업 저장소가 아니며 추세, Event, 품질, 압축, Context와 추적성 조회를 지원한다.",
+    "MES는 생산지시를 현장 실행으로 전개하고 작업·실적·품질·자원·공정상태와 Genealogy를 관리하는 제조운영 계층이다.",
+    "ERP는 주문, 계획, 자재, 원가, 재무와 기업 자원을 관리하며 MES의 상세 실시간 제어 기능을 대체하지 않는다.",
+    "ISA-95는 기업과 제조운영·제어 계층의 기능, 정보객체와 인터페이스 경계를 정리하는 참조모델이지 단일 통신 Protocol이 아니다.",
+    "IT/OT 통합은 제어 안정성을 보존하면서 Edge·Gateway·Historian·MES·ERP 사이의 책임, 데이터 계약과 보안 경계를 계층적으로 설계해야 한다.",
+    "Edge와 Gateway는 현장 Protocol 수용, Buffering, 전처리, 품질 매핑과 Store-and-forward를 수행할 수 있으나 중앙 Context와 Governance를 대체하지 않는다.",
+    "Timestamp는 가능하면 데이터 발생원에 가까운 곳에서 Event Time으로 생성하고 수집·처리·저장 시간과 구분한다.",
+    "다중 설비 데이터의 인과관계와 순서를 비교하려면 Clock 동기화, 시간대·Offset·Drift 관리와 Time alignment가 필요하다.",
+    "Quality Code는 Good·Bad·Uncertain과 원인·상태 정보를 데이터 값과 함께 전달하며 시스템 간 의미 매핑이 필요하다.",
+    "Bad·Uncertain 데이터는 유효값이나 0으로 묵시 변환하지 말고 원 품질, 대체 규칙, 추정 여부와 사용 제한을 전파해야 한다.",
+    "데이터 완전성은 기대한 Record 또는 Tag·주기 대비 실제 유효하게 수집된 데이터의 비율과 Gap 분포로 평가한다.",
+    "데이터 적시성은 Event 발생부터 소비 시스템에서 사용 가능해질 때까지의 지연과 변동을 업무 요구와 비교해 평가한다.",
+    "Store-and-forward는 통신 단절 중 데이터를 Local Buffer에 보관하고 복구 후 재전송하지만 용량, 순서, 중복, 만료와 재전송 속도를 설계해야 한다.",
+    "Streaming 처리는 연속 데이터와 Event를 도착 즉시 또는 작은 Window 단위로 처리하며 Event Time, 순서 뒤바뀜과 Late Data 정책을 가져야 한다.",
+    "Compression과 Deadband는 저장량·통신량을 줄이지만 작은 변화, 짧은 Event와 분석 재현성을 손상할 수 있어 목적별 한계와 예외를 설정한다.",
+    "값 변화가 작아도 Quality 변경, 상태 전이, Alarm·Event와 Batch 경계는 Deadband와 Compression에서 별도 보존해야 한다.",
+    "Metadata와 Context는 Tag의 단위, 설비, 위치, 측정점, 공정단계, 제품, Batch와 Calibration 상태를 연결해 데이터 의미를 만든다.",
+    "Tag Naming과 Namespace는 중복과 충돌을 줄이는 식별체계이며 이름만으로 전체 의미를 표현하려 하지 말고 Metadata와 Information Model에 연결한다.",
+    "Information Model은 Asset·공정·제품·상태와 관계를 구조화하여 서로 다른 시스템이 같은 의미로 데이터를 해석하도록 한다.",
+    "설비, 품목, 공정, Recipe, 작업장과 단위 같은 Master Data의 식별자와 Version을 시스템 간 일관되게 관리해야 한다.",
+    "Data Governance는 데이터 Owner·Steward, 정의, 품질규칙, 접근권한, 변경승인과 문제조치 책임을 정한다.",
+    "Retention 정책은 원시값·압축값·Event·Audit 데이터별 보존기간, 법규·업무 요구, 비용, 삭제와 Archive를 구분한다.",
+    "Traceability는 원천, 변환, 품질판정, 전송, 저장, 소비와 변경이력을 연결해 결과의 재현과 Audit을 가능하게 한다.",
+    "Batch Genealogy는 원자재 Lot, 설비, Recipe·Version, 작업·공정조건, 품질결과와 완제품 Lot의 관계를 시간과 식별자로 연결한다.",
+    "Data Acquisition은 Scan 주기, Sampling, Exception·Report 정책, Scaling, 단위와 품질을 함께 정의해야 하며 단순 수집속도만의 문제가 아니다.",
+    "Event와 상태 Snapshot은 목적이 다르며 Event 순서·원인 분석에는 상태 변화 기록과 Sequence 정보가 필요하다.",
+    "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다.",
+    "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다.",
+    "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다."
+  ]
+}
