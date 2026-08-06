@@ -1,0 +1,195 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+  "title_ko": "제어 소프트웨어 프로젝트, 설계문서, FAT·SAT·시운전 및 인수",
+  "question_type": "PROCEDURE",
+  "expected_question_patterns": [
+    "제어 소프트웨어 프로젝트의 Feasibility, Scope, Schedule과 Cost 관리 절차를 설명하시오.",
+    "URS, FRS, FDS와 SDS의 목적과 상호 추적관계를 설명하시오.",
+    "I/O list, Tag list, Alarm list, Interlock list와 Cause & Effect의 역할을 비교하시오.",
+    "제어시스템 FAT와 SAT의 목적, 시험환경, 시험항목과 한계를 비교하시오.",
+    "Loop test와 Site integration test의 대상, 절차와 판정기준을 설명하시오.",
+    "제어시스템 Commissioning 절차와 단계별 안전·품질 관리사항을 설명하시오.",
+    "Performance test와 Acceptance의 기준 및 증적 관리방안을 설명하시오.",
+    "Punch list, As-built document와 Handover 관리방안을 설명하시오.",
+    "FAT 이후 변경 발생 시 영향분석, baseline 갱신과 재시험 절차를 설명하시오.",
+    "제어 소프트웨어 프로젝트의 문서·시험·시운전·인수 전 과정을 연계하여 설명하시오."
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 프로젝트 목적과 SW-10 소유범위",
+      "intent": "실제 프로젝트 수행과 문서·현장시험·인수의 범위 및 SW-04·SW-02·SW-03 경계를 제시한다.",
+      "anchor_refs": [
+        "sw10_scope_project_execution",
+        "sw10_sw04_boundary",
+        "sw10_sw02_boundary",
+        "sw10_sw03_boundary"
+      ]
+    },
+    {
+      "section": "2. Feasibility·Scope·Schedule·Cost",
+      "intent": "프로젝트 착수와 baseline 관리의 판단항목을 설명한다.",
+      "anchor_refs": [
+        "sw10_feasibility",
+        "sw10_scope_baseline",
+        "sw10_schedule_dependencies",
+        "sw10_cost_change_control"
+      ]
+    },
+    {
+      "section": "3. 설계문서 계층과 추적성",
+      "intent": "Control philosophy와 URS→FRS→FDS→SDS의 추상화 수준과 추적관계를 설명한다.",
+      "anchor_refs": [
+        "sw10_control_philosophy",
+        "sw10_urs",
+        "sw10_frs",
+        "sw10_fds",
+        "sw10_sds",
+        "sw10_document_hierarchy_traceability"
+      ]
+    },
+    {
+      "section": "4. 엔지니어링 목록과 Logic 문서",
+      "intent": "I/O·Tag·Alarm·Interlock list, Cause & Effect와 Logic diagram의 역할을 구분한다.",
+      "anchor_refs": [
+        "sw10_io_list",
+        "sw10_tag_list",
+        "sw10_alarm_list",
+        "sw10_interlock_list",
+        "sw10_cause_effect",
+        "sw10_logic_diagram"
+      ]
+    },
+    {
+      "section": "5. 시험명세와 FAT·SAT",
+      "intent": "시험명세의 판정기준과 FAT·SAT의 환경·검출결함·한계를 비교한다.",
+      "anchor_refs": [
+        "sw10_test_specification",
+        "sw10_fat",
+        "sw10_fat_limit",
+        "sw10_sat",
+        "sw10_fat_sat_relation"
+      ]
+    },
+    {
+      "section": "6. Loop·현장통합·시운전",
+      "intent": "신호경로, 시스템 간 연동과 단계별 기동 절차를 연결한다.",
+      "anchor_refs": [
+        "sw10_loop_test",
+        "sw10_site_integration_test",
+        "sw10_commissioning"
+      ]
+    },
+    {
+      "section": "7. 성능시험·인수·Punch closure",
+      "intent": "정량 성능기준, 계약상 인수와 미결항목 폐루프를 설명한다.",
+      "anchor_refs": [
+        "sw10_performance_test",
+        "sw10_acceptance",
+        "sw10_punch_list",
+        "sw10_change_punch_closure"
+      ]
+    },
+    {
+      "section": "8. As-built·Handover와 구성보존",
+      "intent": "최종 실제상태, 백업·복구, 증적·교육과 유지보수 이관을 정리한다.",
+      "anchor_refs": [
+        "sw10_as_built_handover",
+        "sw10_configuration_backup"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "프로젝트 범위·일정·비용을 승인 baseline과 변경영향으로 연결한다.",
+    "URS·FRS·FDS·SDS의 관점과 양방향 추적을 구분한다.",
+    "I/O·Tag·Alarm·Interlock list와 Cause & Effect의 소유정보를 구분한다.",
+    "FAT와 SAT의 시험환경·검출결함·한계를 비교한다.",
+    "Loop test, Site integration과 Commissioning의 순서와 대상을 연결한다.",
+    "Performance test의 정량기준과 Acceptance의 계약 수락조건을 제시한다.",
+    "Punch closure, As-built, backup·복구와 Handover 증적을 폐루프로 설명한다.",
+    "SW-04 lifecycle, SW-02 논리, SW-03 Alarm 원리와의 경계를 침범하지 않는다."
+  ],
+  "common_missing_points": [
+    "문서명만 나열하고 각 문서의 관점과 추적관계를 설명하지 않는다.",
+    "FAT와 SAT를 시험장소 차이로만 설명하고 검출결함과 한계를 누락한다.",
+    "Loop test를 HMI 표시 확인으로 축소한다.",
+    "Commissioning 전에 필요한 안전조건과 단계별 승인점을 누락한다.",
+    "Performance test의 정량조건·기간·판정기준이 없다.",
+    "Acceptance를 설치완료 또는 FAT 합격과 동일시한다.",
+    "Punch closure와 As-built 최종상태 반영이 없다.",
+    "변경 후 baseline·문서 갱신과 재시험 연결이 없다."
+  ],
+  "routing_aliases": [
+    "제어 소프트웨어 프로젝트 FAT SAT 시운전",
+    "제어 시스템 설계문서 FAT SAT 인수",
+    "control software project FAT SAT commissioning",
+    "URS FRS FDS SDS 제어 프로젝트",
+    "제어 프로젝트 문서 추적 FAT 시험",
+    "Control philosophy URS FRS FDS",
+    "I/O list Tag list Alarm Interlock list",
+    "Cause Effect logic diagram FAT",
+    "공장 인수시험 현장 인수시험 비교",
+    "FAT SAT loop test site integration",
+    "제어시스템 시운전 성능시험 인수",
+    "commissioning performance test acceptance",
+    "Punch list As-built handover 제어시스템",
+    "제어 소프트웨어 인수 문서 handover",
+    "현장 loop test SAT 시운전 절차",
+    "프로젝트 feasibility scope schedule cost 제어",
+    "제어 프로젝트 시험명세 acceptance criteria",
+    "FAT simulation SAT field wiring",
+    "제어시스템 구성 baseline backup 인계",
+    "프로젝트 변경관리 punch closure 회귀시험"
+  ],
+  "routing_field_points": [
+    "Feasibility 기술성 기존설비 일정 비용 위험 평가",
+    "Scope 포함 제외 인터페이스 산출물 책임 수용기준",
+    "Schedule 승인 제작 FAT 설치 SAT 시운전 critical path",
+    "Cost 인력 장비 라이선스 시험 현장지원 교육",
+    "Control philosophy 운전목표 모드 Alarm Interlock Fail-safe",
+    "URS 사용자 기능 성능 환경 인수조건",
+    "FRS 입력 처리 출력 운전모드 예외처리",
+    "FDS 제어전략 시퀀스 화면 데이터 권한",
+    "SDS 모듈 데이터 태스크 통신 I/O 처리",
+    "URS FRS FDS SDS 시험 양방향 추적",
+    "I/O list 채널 주소 신호 범위 단위 스케일링",
+    "Tag list 고유식별 위치 서비스 문서연계",
+    "Alarm list 설정 우선순위 지연 Deadband 조치",
+    "Interlock list 원인 차단 Latch Reset Bypass",
+    "Cause & Effect 원인 결과 Trip Shutdown Voting",
+    "Logic diagram Boolean Sequence State Timer Feedback",
+    "Test specification 사전조건 절차 예상결과 허용오차",
+    "FAT 승인 baseline 통제환경 기능 시퀀스 HMI",
+    "FAT Simulation I/O 모사와 현장 한계",
+    "SAT 실제 배선 전원 네트워크 설비 인터페이스",
+    "FAT SAT 환경과 검출결함 상호보완",
+    "Loop test 센서 배선 I/O HMI 최종요소",
+    "Site integration data command handshake time sync",
+    "Commissioning safety energization 단계기동 tuning",
+    "Performance test 처리량 품질 편차 응답 가용성",
+    "Acceptance 요구 시험 성능 문서 교육 예비품",
+    "Punch 등급 책임 목표일 임시조치 재시험 closure",
+    "As-built 최종 설치 설정 버전 배선 logic",
+    "Handover backup recovery manual training maintenance",
+    "Configuration hardware software firmware library baseline",
+    "FAT 이후 변경 영향분석 승인 회귀시험",
+    "시험결과 evidence witness deviation closure",
+    "현장 조건과 통제 시험환경 구분",
+    "인수조건과 시험합격 조건 구분",
+    "조건부 인수와 미결 Punch 통제",
+    "Loop test와 Site integration 대상 구분",
+    "SAT와 Commissioning 목적 구분",
+    "Performance test와 기능시험 구분",
+    "URS 사용자 관점 FRS 기능 관점",
+    "FDS 설계 관점 SDS 구현 관점",
+    "문서 revision approval distribution",
+    "backup restore 검증과 최종 인계",
+    "교육 운영 유지보수 책임이관",
+    "temporary bypass override 제거 확인",
+    "SW-04 lifecycle SW-10 project boundary"
+  ],
+  "revision_notes": [
+    "SW-10 프로젝트 수행·문서·시험·시운전·인수의 답안 구조를 정의했다.",
+    "FAT·SAT·Loop·현장통합·Performance·Acceptance의 구분을 강화했다."
+  ]
+}

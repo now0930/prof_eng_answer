@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PROCEDURE",
+  "high_band_unlock_conditions": [
+    "Feasibility·Scope·Schedule·Cost를 승인 baseline과 변경관리로 연결한다.",
+    "URS→FRS→FDS→SDS→시험명세→결과의 양방향 추적을 설명한다.",
+    "I/O·Tag·Alarm·Interlock list와 Cause & Effect·Logic diagram을 구분한다.",
+    "FAT와 SAT의 환경, 검출결함과 한계를 비교한다.",
+    "Loop test·Site integration·Commissioning의 대상과 순서를 구분한다.",
+    "Performance test를 정량조건·기간·측정방법·허용기준으로 설명한다.",
+    "Acceptance·Punch closure·As-built·Handover를 증적과 책임이관으로 연결한다.",
+    "SW-04 일반 lifecycle 및 SW-02·SW-03의 논리·Alarm ownership 경계를 유지한다."
+  ],
+  "note": "제어 소프트웨어 프로젝트 문제는 설계문서와 시험단계 명칭을 나열하는 수준을 넘어 문서 추적성, FAT·SAT의 차이, 현장 시운전과 정량 성능인수의 폐루프를 요구한다. 실제 프로젝트 수행능력과 현장 판단을 함께 평가하므로 핵심 준비 Topic으로 분류한다.",
+  "revision_notes": [
+    "SW-10 프로젝트 수행의 난이도와 선택 중요도를 정의했다.",
+    "문서·시험·시운전·인수 폐루프를 high-band 조건으로 반영했다."
+  ],
+  "topic_label": "SW-10 제어 SW 프로젝트·FAT·SAT·시운전·인수"
+}

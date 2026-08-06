@@ -1,0 +1,942 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+  "title": "제어 소프트웨어 프로젝트·설계문서·FAT·SAT·시운전·인수 Logic Check",
+  "deterministic_checks": {
+    "enabled": true,
+    "topic_name": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+    "question_type": "PROCEDURE",
+    "difficulty_profile": "DESIGN_EVALUATION",
+    "topic_aliases": [
+      "제어 소프트웨어 프로젝트 FAT SAT 시운전",
+      "제어 시스템 설계문서 FAT SAT 인수",
+      "control software project FAT SAT commissioning",
+      "URS FRS FDS SDS 제어 프로젝트",
+      "제어 프로젝트 문서 추적 FAT 시험",
+      "Control philosophy URS FRS FDS",
+      "I/O list Tag list Alarm Interlock list",
+      "Cause Effect logic diagram FAT",
+      "공장 인수시험 현장 인수시험 비교",
+      "FAT SAT loop test site integration",
+      "제어시스템 시운전 성능시험 인수",
+      "commissioning performance test acceptance",
+      "Punch list As-built handover 제어시스템",
+      "제어 소프트웨어 인수 문서 handover",
+      "현장 loop test SAT 시운전 절차",
+      "프로젝트 feasibility scope schedule cost 제어",
+      "제어 프로젝트 시험명세 acceptance criteria",
+      "FAT simulation SAT field wiring",
+      "제어시스템 구성 baseline backup 인계",
+      "프로젝트 변경관리 punch closure 회귀시험"
+    ],
+    "fatal_checks": [
+      {
+        "id": "sw10_fatal_fat_equals_sat",
+        "severity": "fatal",
+        "message": "FAT와 SAT는 시험장소만 다를 뿐 완전히 같은 시험이다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. FAT는 통제된 제작·공급자 환경에서 기능과 구성 baseline을 검증하고, SAT는 실제 현장 설치·배선·인터페이스 조건을 검증하므로 상호보완적이다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?FAT와\\ SAT는\\ 시험장소만\\ 다를\\ 뿐\\ 완전히\\ 같은\\ 시험이다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "FAT와 SAT는 시험장소만 다를 뿐 완전히 같은 시험이다."
+        ],
+        "correct_rule": "FAT는 통제된 제작·공급자 환경에서 기능과 구성 baseline을 검증하고, SAT는 실제 현장 설치·배선·인터페이스 조건을 검증하므로 상호보완적이다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_fat_proves_field",
+        "severity": "fatal",
+        "message": "FAT 합격만으로 실제 현장 배선과 설치환경까지 모두 검증된다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. FAT는 현장 배선·설치환경·실공정 부하의 한계가 있으므로 SAT·Loop test와 현장 통합시험이 필요하다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?FAT\\ 합격만으로\\ 실제\\ 현장\\ 배선과\\ 설치환경까지\\ 모두\\ 검증된다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "FAT 합격만으로 실제 현장 배선과 설치환경까지 모두 검증된다."
+        ],
+        "correct_rule": "FAT는 현장 배선·설치환경·실공정 부하의 한계가 있으므로 SAT·Loop test와 현장 통합시험이 필요하다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_fat_skips_sat",
+        "severity": "fatal",
+        "message": "FAT에 합격하면 SAT는 생략해도 된다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. FAT 합격은 SAT 생략 근거가 아니며 실제 현장조건에서 별도 SAT를 수행해야 한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?FAT에\\ 합격하면\\ SAT는\\ 생략해도\\ 된다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "FAT에 합격하면 SAT는 생략해도 된다."
+        ],
+        "correct_rule": "FAT 합격은 SAT 생략 근거가 아니며 실제 현장조건에서 별도 SAT를 수행해야 한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_loop_screen_only",
+        "severity": "fatal",
+        "message": "Loop test는 HMI 화면의 값만 확인하면 완료된다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. Loop test는 센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지 종단 간 신호경로를 확인한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?Loop\\ test는\\ HMI\\ 화면의\\ 값만\\ 확인하면\\ 완료된다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "Loop test는 HMI 화면의 값만 확인하면 완료된다."
+        ],
+        "correct_rule": "Loop test는 센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지 종단 간 신호경로를 확인한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_commission_before_safe",
+        "severity": "fatal",
+        "message": "안전조건과 사전점검이 완료되지 않아도 시운전을 먼저 시작할 수 있다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. Commissioning은 승인된 절차, 안전조건, Energization 허가와 선행점검 완료 후 단계적으로 수행한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?안전조건과\\ 사전점검이\\ 완료되지\\ 않아도\\ 시운전을\\ 먼저\\ 시작할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "안전조건과 사전점검이 완료되지 않아도 시운전을 먼저 시작할 수 있다."
+        ],
+        "correct_rule": "Commissioning은 승인된 절차, 안전조건, Energization 허가와 선행점검 완료 후 단계적으로 수행한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_performance_no_criteria",
+        "severity": "fatal",
+        "message": "성능시험은 정량적인 운전조건과 수용기준 없이 정상 동작만 보면 된다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. Performance test는 조건·기간·측정방법·허용기준을 사전에 정의하여 계약 성능을 정량 검증한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?성능시험은\\ 정량적인\\ 운전조건과\\ 수용기준\\ 없이\\ 정상\\ 동작만\\ 보면\\ 된다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "성능시험은 정량적인 운전조건과 수용기준 없이 정상 동작만 보면 된다."
+        ],
+        "correct_rule": "Performance test는 조건·기간·측정방법·허용기준을 사전에 정의하여 계약 성능을 정량 검증한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_accept_install_only",
+        "severity": "fatal",
+        "message": "설치가 완료되면 시험결과와 문서가 없어도 자동으로 인수된다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. Acceptance는 요구사항, 시험결과, 성능, 문서, 교육, 예비품과 Punch 조건을 종합하여 승인한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?설치가\\ 완료되면\\ 시험결과와\\ 문서가\\ 없어도\\ 자동으로\\ 인수된다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "설치가 완료되면 시험결과와 문서가 없어도 자동으로 인수된다."
+        ],
+        "correct_rule": "Acceptance는 요구사항, 시험결과, 성능, 문서, 교육, 예비품과 Punch 조건을 종합하여 승인한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_punch_all_open",
+        "severity": "fatal",
+        "message": "Punch list 항목은 등급과 무관하게 인수 후 무기한 미완료로 남겨도 된다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. Punch는 영향에 따라 등급화하고 인수 전 필수 closure 또는 승인된 조건부 인수와 목표일·책임·재시험 증적을 관리한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?Punch\\ list\\ 항목은\\ 등급과\\ 무관하게\\ 인수\\ 후\\ 무기한\\ 미완료로\\ 남겨도\\ 된다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "Punch list 항목은 등급과 무관하게 인수 후 무기한 미완료로 남겨도 된다."
+        ],
+        "correct_rule": "Punch는 영향에 따라 등급화하고 인수 전 필수 closure 또는 승인된 조건부 인수와 목표일·책임·재시험 증적을 관리한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_asbuilt_design_version",
+        "severity": "fatal",
+        "message": "As-built 문서는 최초 설계본을 그대로 제출해도 된다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. As-built는 최종 설치·설정·배선·Logic·버전과 일치해야 하며 승인된 변경을 모두 반영한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?As\\-built\\ 문서는\\ 최초\\ 설계본을\\ 그대로\\ 제출해도\\ 된다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "As-built 문서는 최초 설계본을 그대로 제출해도 된다."
+        ],
+        "correct_rule": "As-built는 최종 설치·설정·배선·Logic·버전과 일치해야 하며 승인된 변경을 모두 반영한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_documents_interchangeable",
+        "severity": "fatal",
+        "message": "URS, FRS, FDS와 SDS는 이름만 다르고 서로 대체 가능한 동일 문서이다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. URS·FRS·FDS·SDS는 사용자 요구, 기능, 설계, 상세구현 수준이 다르며 식별자와 추적성으로 연결한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?URS,\\ FRS,\\ FDS와\\ SDS는\\ 이름만\\ 다르고\\ 서로\\ 대체\\ 가능한\\ 동일\\ 문서이다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "URS, FRS, FDS와 SDS는 이름만 다르고 서로 대체 가능한 동일 문서이다."
+        ],
+        "correct_rule": "URS·FRS·FDS·SDS는 사용자 요구, 기능, 설계, 상세구현 수준이 다르며 식별자와 추적성으로 연결한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_cause_effect_alarm_only",
+        "severity": "fatal",
+        "message": "Cause & Effect는 Alarm 목록만 나열하는 문서이다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. Cause & Effect는 원인과 Alarm·Trip·Shutdown·출력 동작, 지연·Voting·Latch·Reset 관계를 행렬로 표현한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?Cause\\ \\&\\ Effect는\\ Alarm\\ 목록만\\ 나열하는\\ 문서이다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "Cause & Effect는 Alarm 목록만 나열하는 문서이다."
+        ],
+        "correct_rule": "Cause & Effect는 원인과 Alarm·Trip·Shutdown·출력 동작, 지연·Voting·Latch·Reset 관계를 행렬로 표현한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_io_equals_tag",
+        "severity": "fatal",
+        "message": "I/O list와 Tag list는 완전히 같은 목록이다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. I/O list는 채널·신호·스케일링과 연결정보를, Tag list는 객체 식별·서비스·위치와 문서연계를 관리한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?I/O\\ list와\\ Tag\\ list는\\ 완전히\\ 같은\\ 목록이다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "I/O list와 Tag list는 완전히 같은 목록이다."
+        ],
+        "correct_rule": "I/O list는 채널·신호·스케일링과 연결정보를, Tag list는 객체 식별·서비스·위치와 문서연계를 관리한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_change_no_retest",
+        "severity": "fatal",
+        "message": "FAT 이후 소프트웨어를 변경해도 영향분석과 재시험은 필요 없다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. FAT 이후 변경은 영향분석, 승인, baseline·문서 갱신과 선택된 회귀·현장 재시험을 수행한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?FAT\\ 이후\\ 소프트웨어를\\ 변경해도\\ 영향분석과\\ 재시험은\\ 필요\\ 없다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "FAT 이후 소프트웨어를 변경해도 영향분석과 재시험은 필요 없다."
+        ],
+        "correct_rule": "FAT 이후 변경은 영향분석, 승인, baseline·문서 갱신과 선택된 회귀·현장 재시험을 수행한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_accept_no_approved_test",
+        "severity": "fatal",
+        "message": "승인된 시험명세가 없어도 시험자의 경험만으로 FAT와 SAT 합격을 판정할 수 있다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. FAT·SAT는 승인된 시험명세의 사전조건, 절차, 예상결과, 허용오차와 판정기준에 따라 증적을 남긴다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?승인된\\ 시험명세가\\ 없어도\\ 시험자의\\ 경험만으로\\ FAT와\\ SAT\\ 합격을\\ 판정할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "승인된 시험명세가 없어도 시험자의 경험만으로 FAT와 SAT 합격을 판정할 수 있다."
+        ],
+        "correct_rule": "FAT·SAT는 승인된 시험명세의 사전조건, 절차, 예상결과, 허용오차와 판정기준에 따라 증적을 남긴다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_site_integration_unneeded",
+        "severity": "fatal",
+        "message": "개별 장비가 정상이라면 시스템 간 Site integration test는 필요 없다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. 개별 장비 정상과 별개로 시스템 간 데이터·명령·Handshake·시간동기·장애복구를 현장에서 검증해야 한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?개별\\ 장비가\\ 정상이라면\\ 시스템\\ 간\\ Site\\ integration\\ test는\\ 필요\\ 없다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "개별 장비가 정상이라면 시스템 간 Site integration test는 필요 없다."
+        ],
+        "correct_rule": "개별 장비 정상과 별개로 시스템 간 데이터·명령·Handshake·시간동기·장애복구를 현장에서 검증해야 한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_sw10_owns_vmodel",
+        "severity": "fatal",
+        "message": "일반 소프트웨어 V-Model과 단위시험 체계는 전적으로 SW-10의 현장 인수 범위이다.",
+        "description": "명시적 반대 주장만 fatal 후보로 본다. 일반 SW lifecycle·V-Model·단위·통합·시스템시험 체계는 SW-04가 소유하고 SW-10은 프로젝트 문서·FAT·SAT·시운전·인수를 소유한다.",
+        "wrong_patterns": [
+          "(?im)^\\s*(?:[-*•]\\s*)?일반\\ 소프트웨어\\ V\\-Model과\\ 단위시험\\ 체계는\\ 전적으로\\ SW\\-10의\\ 현장\\ 인수\\ 범위이다\\.\\s*[.!]?\\s*$"
+        ],
+        "examples_or_patterns": [
+          "일반 소프트웨어 V-Model과 단위시험 체계는 전적으로 SW-10의 현장 인수 범위이다."
+        ],
+        "correct_rule": "일반 SW lifecycle·V-Model·단위·통합·시스템시험 체계는 SW-04가 소유하고 SW-10은 프로젝트 문서·FAT·SAT·시운전·인수를 소유한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      }
+    ],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "URS·FRS·FDS·SDS 추적표를 정리한다.",
+      "FAT·SAT·Loop·Site integration 차이를 표로 비교한다.",
+      "Commissioning부터 Acceptance까지 단계별 진입·종료기준을 정리한다."
+    ],
+    "de_claim_trust": {
+      "formula_claims": "수식보다 문서·시험 단계의 논리관계와 수용기준을 우선 확인한다.",
+      "field_claims": "프로젝트별 명칭 차이는 허용하되 시험환경·대상·판정기준·증적 관계를 확인한다."
+    }
+  },
+  "llm_profile": {
+    "display_name": "SW-10 제어 SW 프로젝트·FAT·SAT·시운전·인수",
+    "difficulty": "DESIGN_EVALUATION",
+    "enabled": true,
+    "cap_policy": {
+      "fatal_default_ceiling": 15.0,
+      "major_default_ceiling": 17.0,
+      "fatal_requires_explicit_contradiction": true,
+      "omission_is_not_fatal": true
+    },
+    "candidate_extraction": {
+      "topic_terms": [
+        "제어 소프트웨어 프로젝트 FAT SAT 시운전",
+        "제어 시스템 설계문서 FAT SAT 인수",
+        "control software project FAT SAT commissioning",
+        "URS FRS FDS SDS 제어 프로젝트",
+        "제어 프로젝트 문서 추적 FAT 시험",
+        "Control philosophy URS FRS FDS",
+        "I/O list Tag list Alarm Interlock list",
+        "Cause Effect logic diagram FAT",
+        "공장 인수시험 현장 인수시험 비교",
+        "FAT SAT loop test site integration",
+        "제어시스템 시운전 성능시험 인수",
+        "commissioning performance test acceptance",
+        "Punch list As-built handover 제어시스템",
+        "제어 소프트웨어 인수 문서 handover",
+        "현장 loop test SAT 시운전 절차",
+        "프로젝트 feasibility scope schedule cost 제어",
+        "제어 프로젝트 시험명세 acceptance criteria",
+        "FAT simulation SAT field wiring",
+        "제어시스템 구성 baseline backup 인계",
+        "프로젝트 변경관리 punch closure 회귀시험"
+      ],
+      "key_terms": [
+        "control software project",
+        "feasibility",
+        "scope baseline",
+        "schedule",
+        "cost",
+        "control philosophy",
+        "URS",
+        "FRS",
+        "FDS",
+        "SDS",
+        "I/O list",
+        "Tag list",
+        "Alarm list",
+        "Interlock list",
+        "Cause & Effect",
+        "Logic diagram",
+        "test specification",
+        "FAT",
+        "SAT",
+        "Loop test",
+        "site integration test",
+        "commissioning",
+        "performance test",
+        "acceptance",
+        "handover",
+        "as-built",
+        "punch list",
+        "configuration baseline",
+        "backup restore"
+      ],
+      "required_context_groups": [
+        [
+          "project",
+          "URS",
+          "FRS",
+          "FDS",
+          "SDS",
+          "설계문서",
+          "제어 프로젝트"
+        ],
+        [
+          "FAT",
+          "SAT",
+          "Loop test",
+          "site integration",
+          "시험명세",
+          "공장 인수시험",
+          "현장 인수시험"
+        ],
+        [
+          "commissioning",
+          "performance test",
+          "acceptance",
+          "punch",
+          "as-built",
+          "handover",
+          "시운전",
+          "인수"
+        ]
+      ],
+      "exclude_if_only": [
+        "V-Model unit integration system test RTM static dynamic analysis",
+        "SIL PFDavg PFH safety lifecycle independence",
+        "HMI alarm philosophy shelving SOE",
+        "Sequence state transition trip latch reset",
+        "network protocol cybersecurity architecture"
+      ],
+      "minimum_distinct_groups": 2
+    },
+    "truth_schema": [
+      {
+        "id": "sw10_scope_project_execution",
+        "correct_rule": "SW-10은 제어 소프트웨어 프로젝트의 타당성·범위·일정·비용, 엔지니어링 문서, FAT·SAT·현장시험, 시운전, 성능시험, 인수와 인계까지의 수행체계를 다룬다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_sw04_boundary",
+        "correct_rule": "요구사항·설계·코딩·단위·통합·시스템시험과 일반 V-Model·RTM 체계는 SW-04가 소유하고, SW-10은 프로젝트 산출물과 현장 검증·인수 실행을 소유한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_sw02_boundary",
+        "correct_rule": "Interlock·Trip의 실제 상태전이, Latch·Reset과 Fail-safe 동작 논리는 SW-02가 소유하고, SW-10은 Interlock list·Cause & Effect·Logic diagram과 시험 증적을 관리한다.",
+        "fatal_if_opposite": false
+      },
+      {
+        "id": "sw10_sw03_boundary",
+        "correct_rule": "Alarm philosophy·Priority·Deadband·Shelving·SOE 운전정보 원리는 SW-03이 소유하고, SW-10은 승인된 Alarm list와 시험·인수 문서를 관리한다.",
+        "fatal_if_opposite": false
+      },
+      {
+        "id": "sw10_feasibility",
+        "correct_rule": "Feasibility 단계는 기술성, 기존 설비 인터페이스, 일정, 비용, 인력, 위험과 기대효과를 평가하여 수행 가능성과 대안을 결정한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_scope_baseline",
+        "correct_rule": "Scope는 대상 공정·시스템, 포함·제외 범위, 경계 인터페이스, 산출물, 책임, 수용기준을 정의하고 승인된 baseline으로 관리한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_schedule_dependencies",
+        "correct_rule": "Schedule은 설계승인, 구매·제작, 소프트웨어 구현, 시험환경, FAT, 현장설치, SAT, 시운전과 인수의 선후관계 및 critical path를 반영한다.",
+        "fatal_if_opposite": false
+      },
+      {
+        "id": "sw10_cost_change_control",
+        "correct_rule": "Cost는 인력·장비·라이선스·시험·현장지원·예비품·교육을 포함하고, 범위변경은 영향분석과 승인 후 예산·일정 baseline에 반영한다.",
+        "fatal_if_opposite": false
+      },
+      {
+        "id": "sw10_control_philosophy",
+        "correct_rule": "Control philosophy는 운전목표, 제어구조, 운전모드, 자동·수동 전환, Alarm·Interlock 원칙, Fail-safe와 비정상 운전 대응의 상위 기준이다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_urs",
+        "correct_rule": "URS는 사용자가 필요로 하는 기능, 성능, 운전환경, 규제·품질, 인터페이스와 인수조건을 사용자 관점에서 정의한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_frs",
+        "correct_rule": "FRS는 URS를 기능별 입력·처리·출력, 운전모드, Alarm·Interlock, 예외처리와 성능 요구로 구체화한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_fds",
+        "correct_rule": "FDS는 기능 요구를 제어전략, 시퀀스, 화면, 데이터, 인터페이스, 권한과 진단 동작으로 설계 수준에서 정의한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_sds",
+        "correct_rule": "SDS는 소프트웨어 모듈, 데이터 구조, 태스크, 통신, I/O 처리, 상태관리와 구현 제약을 상세 수준에서 정의한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_document_hierarchy_traceability",
+        "correct_rule": "URS→FRS→FDS→SDS→시험명세→시험결과의 식별자와 양방향 추적을 유지하여 누락, 과잉구현과 미시험 요구를 검출한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_io_list",
+        "correct_rule": "I/O list는 채널·주소, 신호형식, 범위·단위, 정상·고장값, 절연·전원, 스케일링과 연결 대상을 정의한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_tag_list",
+        "correct_rule": "Tag list는 설비·계기·소프트웨어 객체의 고유 Tag, 명칭, 위치, 서비스와 관련 문서 식별자를 관리한다.",
+        "fatal_if_opposite": false
+      },
+      {
+        "id": "sw10_alarm_list",
+        "correct_rule": "Alarm list는 Tag, 조건, 설정값, 우선순위, 지연·Deadband, 메시지, 운전자 조치와 시험기준을 승인 상태로 관리한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_interlock_list",
+        "correct_rule": "Interlock list는 원인, 허용조건, 차단대상, 동작, Latch·Reset, Bypass 권한, Fail-safe와 시험항목을 정의한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_cause_effect",
+        "correct_rule": "Cause & Effect는 각 원인 신호와 Alarm·Trip·Shutdown·출력 동작의 관계, 지연, Voting, Latch·Reset과 우선순위를 행렬로 표현한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_logic_diagram",
+        "correct_rule": "Logic diagram은 Boolean 조건, Sequence·State, Timer, Interlock, 명령·Feedback과 예외경로를 구현 가능한 형태로 나타낸다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_test_specification",
+        "correct_rule": "Test specification은 시험목적, 대상 baseline, 사전조건, 입력·절차, 예상결과, 허용오차, 판정기준, 증적과 결함처리를 정의한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_fat",
+        "correct_rule": "FAT는 공급자 또는 통제된 시험환경에서 승인된 하드웨어·소프트웨어 구성과 문서 baseline을 대상으로 기능, 시퀀스, HMI, Alarm·Interlock, 통신과 복구를 검증한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_fat_limit",
+        "correct_rule": "FAT는 Simulation과 I/O 모사를 활용할 수 있으나 실제 현장 배선, 설치환경, 공정 부하와 최종 인터페이스를 완전히 증명하지 못한다.",
+        "fatal_if_opposite": false
+      },
+      {
+        "id": "sw10_sat",
+        "correct_rule": "SAT는 현장 설치 후 실제 배선·전원·네트워크·설비 인터페이스와 설치조건에서 기능, 통신, Alarm·Interlock과 운전 연계를 확인한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_fat_sat_relation",
+        "correct_rule": "FAT와 SAT는 중복 대체 관계가 아니라 시험환경과 검출결함이 다른 상호보완 단계이며 FAT 합격이 SAT 생략 근거가 되지 않는다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_loop_test",
+        "correct_rule": "Loop test는 현장 센서·배선·I/O·스케일링·제어기·HMI 표시와 최종 요소까지 신호경로의 방향, 범위와 동작을 종단 간 확인한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_site_integration_test",
+        "correct_rule": "Site integration test는 DCS·PLC·SIS·패키지 설비·상위시스템 간 데이터, 명령, Handshake, 시간동기, 장애복구와 운전 시나리오를 확인한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_commissioning",
+        "correct_rule": "Commissioning은 안전조건과 승인된 절차 아래 Energization, 정적점검, Loop·기능시험, 단계별 기동, Tuning, 부하시험과 안정화 순으로 수행한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_performance_test",
+        "correct_rule": "Performance test는 처리량, 품질, 제어편차, 응답시간, 가용성, Alarm 부하 등 계약 성능을 정의된 조건·기간·측정방법과 허용기준으로 검증한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_acceptance",
+        "correct_rule": "Acceptance는 승인된 범위와 요구사항, FAT·SAT·시운전·성능시험 결과, 문서, 교육, 예비품과 잔여 Punch 조건을 종합하여 계약상 수락을 결정한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_punch_list",
+        "correct_rule": "Punch list는 결함·미완료 항목을 안전·운전 영향과 인수조건에 따라 등급화하고 책임자, 목표일, 임시조치, 재시험과 closure 증적을 관리한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_as_built_handover",
+        "correct_rule": "As-built와 Handover는 최종 설치·설정·버전·배선·Logic·목록, 백업·복구절차, 시험증적, 매뉴얼, 교육과 유지보수 정보를 실제 상태와 일치시켜 인계한다.",
+        "fatal_if_opposite": true
+      },
+      {
+        "id": "sw10_configuration_backup",
+        "correct_rule": "프로젝트 전 과정에서 하드웨어·소프트웨어·Firmware·라이브러리·설정·문서 baseline과 백업을 식별하고 배포·복구 가능성을 확인한다.",
+        "fatal_if_opposite": false
+      },
+      {
+        "id": "sw10_change_punch_closure",
+        "correct_rule": "FAT 이후 변경과 Punch 수정은 영향분석, 승인, 문서·baseline 갱신, 선택된 회귀시험, 결과 승인과 closure까지 폐루프로 관리한다.",
+        "fatal_if_opposite": true
+      }
+    ],
+    "fatal_conditions": [
+      {
+        "id": "sw10_fatal_fat_equals_sat",
+        "severity": "fatal",
+        "wrong_claim": "FAT와 SAT는 시험장소만 다를 뿐 완전히 같은 시험이다.",
+        "correct_rule": "FAT는 통제된 제작·공급자 환경에서 기능과 구성 baseline을 검증하고, SAT는 실제 현장 설치·배선·인터페이스 조건을 검증하므로 상호보완적이다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_fat_proves_field",
+        "severity": "fatal",
+        "wrong_claim": "FAT 합격만으로 실제 현장 배선과 설치환경까지 모두 검증된다.",
+        "correct_rule": "FAT는 현장 배선·설치환경·실공정 부하의 한계가 있으므로 SAT·Loop test와 현장 통합시험이 필요하다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_fat_skips_sat",
+        "severity": "fatal",
+        "wrong_claim": "FAT에 합격하면 SAT는 생략해도 된다.",
+        "correct_rule": "FAT 합격은 SAT 생략 근거가 아니며 실제 현장조건에서 별도 SAT를 수행해야 한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_loop_screen_only",
+        "severity": "fatal",
+        "wrong_claim": "Loop test는 HMI 화면의 값만 확인하면 완료된다.",
+        "correct_rule": "Loop test는 센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지 종단 간 신호경로를 확인한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_commission_before_safe",
+        "severity": "fatal",
+        "wrong_claim": "안전조건과 사전점검이 완료되지 않아도 시운전을 먼저 시작할 수 있다.",
+        "correct_rule": "Commissioning은 승인된 절차, 안전조건, Energization 허가와 선행점검 완료 후 단계적으로 수행한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_performance_no_criteria",
+        "severity": "fatal",
+        "wrong_claim": "성능시험은 정량적인 운전조건과 수용기준 없이 정상 동작만 보면 된다.",
+        "correct_rule": "Performance test는 조건·기간·측정방법·허용기준을 사전에 정의하여 계약 성능을 정량 검증한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_accept_install_only",
+        "severity": "fatal",
+        "wrong_claim": "설치가 완료되면 시험결과와 문서가 없어도 자동으로 인수된다.",
+        "correct_rule": "Acceptance는 요구사항, 시험결과, 성능, 문서, 교육, 예비품과 Punch 조건을 종합하여 승인한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_punch_all_open",
+        "severity": "fatal",
+        "wrong_claim": "Punch list 항목은 등급과 무관하게 인수 후 무기한 미완료로 남겨도 된다.",
+        "correct_rule": "Punch는 영향에 따라 등급화하고 인수 전 필수 closure 또는 승인된 조건부 인수와 목표일·책임·재시험 증적을 관리한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_asbuilt_design_version",
+        "severity": "fatal",
+        "wrong_claim": "As-built 문서는 최초 설계본을 그대로 제출해도 된다.",
+        "correct_rule": "As-built는 최종 설치·설정·배선·Logic·버전과 일치해야 하며 승인된 변경을 모두 반영한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_documents_interchangeable",
+        "severity": "fatal",
+        "wrong_claim": "URS, FRS, FDS와 SDS는 이름만 다르고 서로 대체 가능한 동일 문서이다.",
+        "correct_rule": "URS·FRS·FDS·SDS는 사용자 요구, 기능, 설계, 상세구현 수준이 다르며 식별자와 추적성으로 연결한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_cause_effect_alarm_only",
+        "severity": "fatal",
+        "wrong_claim": "Cause & Effect는 Alarm 목록만 나열하는 문서이다.",
+        "correct_rule": "Cause & Effect는 원인과 Alarm·Trip·Shutdown·출력 동작, 지연·Voting·Latch·Reset 관계를 행렬로 표현한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_io_equals_tag",
+        "severity": "fatal",
+        "wrong_claim": "I/O list와 Tag list는 완전히 같은 목록이다.",
+        "correct_rule": "I/O list는 채널·신호·스케일링과 연결정보를, Tag list는 객체 식별·서비스·위치와 문서연계를 관리한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_change_no_retest",
+        "severity": "fatal",
+        "wrong_claim": "FAT 이후 소프트웨어를 변경해도 영향분석과 재시험은 필요 없다.",
+        "correct_rule": "FAT 이후 변경은 영향분석, 승인, baseline·문서 갱신과 선택된 회귀·현장 재시험을 수행한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_accept_no_approved_test",
+        "severity": "fatal",
+        "wrong_claim": "승인된 시험명세가 없어도 시험자의 경험만으로 FAT와 SAT 합격을 판정할 수 있다.",
+        "correct_rule": "FAT·SAT는 승인된 시험명세의 사전조건, 절차, 예상결과, 허용오차와 판정기준에 따라 증적을 남긴다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_site_integration_unneeded",
+        "severity": "fatal",
+        "wrong_claim": "개별 장비가 정상이라면 시스템 간 Site integration test는 필요 없다.",
+        "correct_rule": "개별 장비 정상과 별개로 시스템 간 데이터·명령·Handshake·시간동기·장애복구를 현장에서 검증해야 한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      },
+      {
+        "id": "sw10_fatal_sw10_owns_vmodel",
+        "severity": "fatal",
+        "wrong_claim": "일반 소프트웨어 V-Model과 단위시험 체계는 전적으로 SW-10의 현장 인수 범위이다.",
+        "correct_rule": "일반 SW lifecycle·V-Model·단위·통합·시스템시험 체계는 SW-04가 소유하고 SW-10은 프로젝트 문서·FAT·SAT·시운전·인수를 소유한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 15.0
+      }
+    ],
+    "safe_conditions": [
+      "FAT와 SAT는 환경과 검출결함이 다른 상호보완 시험이다.",
+      "FAT의 Simulation과 I/O 모사는 현장 설치조건 검증을 대체하지 않는다.",
+      "Loop test는 센서에서 최종 요소까지 종단 간 신호경로를 확인한다.",
+      "Commissioning은 안전조건과 선행점검 완료 후 단계적으로 수행한다.",
+      "Acceptance는 설치완료가 아니라 요구사항·시험·성능·문서·교육과 Punch 조건의 종합 승인이다.",
+      "As-built는 승인된 최종 설치와 버전을 반영한다.",
+      "URS·FRS·FDS·SDS는 추상화 수준이 다르고 추적성으로 연결된다.",
+      "Cause & Effect는 원인과 Alarm·Trip·Shutdown·출력의 관계를 정의한다.",
+      "FAT 이후 변경은 영향분석과 재시험을 거친다.",
+      "일반 V-Model은 SW-04, 현장 프로젝트 인수는 SW-10의 소유범위이다."
+    ],
+    "major_checks": [
+      {
+        "id": "sw10_major_documents_without_trace",
+        "severity": "major",
+        "condition": "문항이 설계문서 체계를 요구하고 URS·FRS·FDS·SDS의 관점 또는 추적성이 부족한 경우",
+        "message": "문서 목록은 있으나 추상화 수준과 양방향 추적관계가 부족하다.",
+        "description": "각 문서의 관점과 식별자 기반 추적을 시험명세·결과까지 연결한다.",
+        "correct_rule": "각 문서의 관점과 식별자 기반 추적을 시험명세·결과까지 연결한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "id": "sw10_major_fat_sat_weak",
+        "severity": "major",
+        "condition": "FAT·SAT 비교 문항에서 시험환경, 대상 또는 검출결함 구분이 부족한 경우",
+        "message": "FAT와 SAT의 장소만 구분하고 시험목적과 한계가 부족하다.",
+        "description": "통제환경과 실제 현장조건, 모사 한계와 현장 인터페이스 결함을 비교한다.",
+        "correct_rule": "통제환경과 실제 현장조건, 모사 한계와 현장 인터페이스 결함을 비교한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "id": "sw10_major_loop_integration_weak",
+        "severity": "major",
+        "condition": "Loop test 또는 Site integration test의 종단 간 범위와 시스템 간 연동항목이 부족한 경우",
+        "message": "현장시험의 대상과 신호·Handshake·시간동기 범위가 부족하다.",
+        "description": "Loop 신호경로와 시스템 간 데이터·명령·복구 시나리오를 구분한다.",
+        "correct_rule": "Loop 신호경로와 시스템 간 데이터·명령·복구 시나리오를 구분한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "id": "sw10_major_commissioning_sequence_weak",
+        "severity": "major",
+        "condition": "시운전 문항에서 안전조건, Energization, 단계기동과 부하시험 순서가 부족한 경우",
+        "message": "Commissioning의 선행조건과 단계별 승인점이 부족하다.",
+        "description": "안전허가와 선행점검 후 정적·기능·단계기동·Tuning·부하시험으로 전개한다.",
+        "correct_rule": "안전허가와 선행점검 후 정적·기능·단계기동·Tuning·부하시험으로 전개한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "id": "sw10_major_performance_acceptance_weak",
+        "severity": "major",
+        "condition": "성능시험·인수 문항에서 정량 조건, 기간, 판정기준 또는 계약 수락조건이 부족한 경우",
+        "message": "정상운전만 제시하고 정량 성능기준과 Acceptance 조건이 부족하다.",
+        "description": "측정조건·기간·허용기준과 문서·교육·Punch 조건을 함께 제시한다.",
+        "correct_rule": "측정조건·기간·허용기준과 문서·교육·Punch 조건을 함께 제시한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "id": "sw10_major_punch_asbuilt_weak",
+        "severity": "major",
+        "condition": "Punch·As-built·Handover 문항에서 등급, closure, 최종상태와 백업·복구 증적이 부족한 경우",
+        "message": "미결항목 폐루프와 최종 문서·백업 인계가 부족하다.",
+        "description": "Punch 등급·책임·재시험·closure와 실제 설치상태·버전·백업 인계를 연결한다.",
+        "correct_rule": "Punch 등급·책임·재시험·closure와 실제 설치상태·버전·백업 인계를 연결한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "id": "sw10_major_change_control_weak",
+        "severity": "major",
+        "condition": "FAT 이후 변경 또는 현장 수정의 영향분석, 승인, baseline과 회귀시험이 부족한 경우",
+        "message": "변경 후 문서·baseline·재시험 연결이 부족하다.",
+        "description": "변경 영향, 승인, 구성·문서 갱신과 선택된 회귀·현장 재시험을 수행한다.",
+        "correct_rule": "변경 영향, 승인, 구성·문서 갱신과 선택된 회귀·현장 재시험을 수행한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ]
+      },
+      {
+        "id": "sw10_major_boundary_weak",
+        "severity": "major",
+        "condition": "SW-04 lifecycle 또는 SW-02·SW-03 원리와 SW-10 프로젝트 실행의 ownership 경계가 부족한 경우",
+        "message": "인접 Topic의 소유범위를 SW-10에 과도하게 포함한다.",
+        "description": "일반 lifecycle은 SW-04, 논리 메커니즘은 SW-02, Alarm 원리는 SW-03, 프로젝트 문서와 현장 인수는 SW-10으로 구분한다.",
+        "correct_rule": "일반 lifecycle은 SW-04, 논리 메커니즘은 SW-02, Alarm 원리는 SW-03, 프로젝트 문서와 현장 인수는 SW-10으로 구분한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ]
+      }
+    ],
+    "feedback_templates": {
+      "fatal": "프로젝트 문서·시험·인수의 핵심 관계가 반대로 서술되었습니다: {message}",
+      "major": "문서 추적, 시험환경 또는 인수 폐루프가 부족합니다: {message}",
+      "warn": "문항 범위 또는 보조조건이 부족합니다: {message}"
+    },
+    "next_practice_points": [
+      "문서 hierarchy와 시험 traceability를 연결한다.",
+      "FAT·SAT·Loop·Site integration의 대상과 한계를 비교한다.",
+      "Performance·Acceptance·Punch·As-built의 종료조건을 정리한다."
+    ],
+    "false_positive_cautions": [
+      "FAT·SAT를 언급하지 않은 답안이라도 문항이 문서체계만 요구하면 fatal로 판단하지 않는다.",
+      "오답 문장을 인용한 뒤 즉시 부정·정정한 경우 직접 오답으로 판정하지 않는다.",
+      "FAT와 SAT의 일부 시험항목이 중복된다는 설명은 두 시험이 동일하다는 주장과 다르다.",
+      "조건부 인수 자체는 오류가 아니며 Punch 등급·책임·기한·승인이 없을 때 부족으로 본다.",
+      "Simulation을 FAT에 사용하는 것은 허용되며 실제 현장조건을 완전히 대체한다고 할 때만 오류이다.",
+      "프로젝트 규모에 따라 문서가 통합될 수 있으나 URS·기능·설계·구현 관점과 추적성은 유지해야 한다.",
+      "Loop test 범위가 최종 요소를 포함하지 않는 프로젝트도 있으므로 문항의 실제 경계를 고려한다.",
+      "Performance test 지표는 공정별로 다르므로 특정 숫자의 누락만으로 오류 처리하지 않는다.",
+      "SW-04·SW-02·SW-03을 비교 설명하는 것은 경계 침범이 아니며 ownership을 혼동할 때만 감점한다.",
+      "단순 누락은 fatal이 아니며 문항 핵심 요구와 답안 분량에 따라 major 또는 warn으로 평가한다."
+    ],
+    "output_contract": {
+      "required_fields": [
+        "id",
+        "severity",
+        "message",
+        "correct_rule",
+        "affected_layers"
+      ],
+      "allowed_severity": [
+        "fatal",
+        "major",
+        "warn",
+        "info"
+      ],
+      "fatal_requires_direct_opposite_claim": true,
+      "cite_answer_evidence": true
+    }
+  },
+  "revision_notes": [
+    "SW-10 프로젝트 문서·시험·시운전·인수의 fatal·major 기준을 정의했다.",
+    "단순 누락과 명시적 반대 주장을 구분하고 인접 Topic false positive를 방지했다."
+  ],
+  "topic_label": "SW-10 제어 SW 프로젝트·FAT·SAT·시운전·인수"
+}
