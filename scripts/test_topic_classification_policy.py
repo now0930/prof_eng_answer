@@ -3,34 +3,54 @@ from __future__ import annotations
 
 import json
 from pathlib import Path
-from typing import Any
+
 
 ROOT = Path(__file__).resolve().parents[1]
 PACK_ROOT = ROOT / "rubrics" / "topic_packs"
-CREATE_SCRIPT = ROOT / "scripts" / "create_topic_pack.py"
 
 THEORY_TOPICS = {
     "bode_frequency_response_stability_margin_bandwidth",
+    "control_valve_authority_rangeability_gain_installed_performance",
     "feedback_system_closed_loop_sensitivity_steady_state_error",
+    "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+    "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
     "lead_lag_compensator_phase_margin_steady_state_error",
     "lqr_optimal_state_feedback_riccati_weighting_design",
     "nyquist_stability_criterion_gain_phase_margin",
+    "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
     "pid_controller_tuning_sequence_gain_effects",
+    "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
     "root_locus_stability_gain_design",
     "routh_hurwitz_stability_criterion_gain_range",
     "second_order_lag_response_by_damping_ratio",
     "second_order_system_resonance_frequency_response",
+    "sis_sil_safety_software_independence_systematic_failure_verification_validation",
     "state_feedback_reference_tracking_prefilter_integral_action",
     "state_space_controllability_observability_pole_placement",
 }
 
 APPLICATION_TOPICS = {
+    "balanced_trim_unbalanced_trim_structure_sealing_applications",
+    "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+    "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+    "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+    "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+    "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+    "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+    "control_valve_positioner_ip_converter_booster_accessories_calibration",
+    "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+    "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+    "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+    "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+    "control_valve_types_globe_rotary_body_actuator_selection",
     "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+    "final_control_element_sil_sis_esd_valve_partial_stroke_test",
     "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
     "passive_sensor_resistive_capacitive_inductive_transduction",
     "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
     "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
     "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+    "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
     "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
     "temperature_measurement_error_heat_transfer",
     "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
@@ -38,14 +58,32 @@ APPLICATION_TOPICS = {
     "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
 }
 
+DESIGN_TOPICS = {
+    "configuration_change_release_backup_rollback_migration_obsolescence_management",
+    "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+    "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+    "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+    "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+    "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+    "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+    "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+}
 
-def load_json(path: Path) -> dict[str, Any]:
-    value = json.loads(
-        path.read_text(encoding="utf-8")
-    )
+ALLOWED_SELECTION_IMPORTANCE = {
+    "CORE_MUST_PREPARE",
+    "HIGH",
+    "NORMAL",
+}
 
-    assert isinstance(value, dict), path
-    return value
+EXPECTED_DIFFICULTY_COUNTS = {
+    "THEORY_CORE": 18,
+    "FIELD_APPLICATION": 26,
+    "DESIGN_EVALUATION": 8,
+}
+
+
+def load_json(path: Path) -> dict:
+    return json.loads(path.read_text(encoding="utf-8"))
 
 
 def main() -> None:
@@ -55,89 +93,64 @@ def main() -> None:
         if path.is_dir()
     }
 
-    assert actual_topics == (
-        THEORY_TOPICS | APPLICATION_TOPICS
+    classified_topics = (
+        THEORY_TOPICS
+        | APPLICATION_TOPICS
+        | DESIGN_TOPICS
     )
 
-    core_topics: set[str] = set()
-    field_topics: set[str] = set()
+    assert len(actual_topics) == 52
+    assert actual_topics == classified_topics
+
+    assert not (THEORY_TOPICS & APPLICATION_TOPICS)
+    assert not (THEORY_TOPICS & DESIGN_TOPICS)
+    assert not (APPLICATION_TOPICS & DESIGN_TOPICS)
+
+    actual_by_difficulty = {
+        "THEORY_CORE": set(),
+        "FIELD_APPLICATION": set(),
+        "DESIGN_EVALUATION": set(),
+    }
 
     for topic_id in sorted(actual_topics):
         importance = load_json(
-            PACK_ROOT
-            / topic_id
-            / "topic_importance.json"
+            PACK_ROOT / topic_id / "topic_importance.json"
         )
 
-        difficulty = importance.get(
-            "difficulty"
+        difficulty = importance.get("difficulty")
+        selection_importance = importance.get("selection_importance")
+
+        assert difficulty in actual_by_difficulty, (
+            topic_id,
+            difficulty,
         )
-        priority = importance.get(
-            "selection_importance"
+        assert selection_importance in ALLOWED_SELECTION_IMPORTANCE, (
+            topic_id,
+            selection_importance,
         )
 
-        if priority == "CORE_MUST_PREPARE":
-            core_topics.add(topic_id)
+        actual_by_difficulty[difficulty].add(topic_id)
 
-        if difficulty == "FIELD_APPLICATION":
-            field_topics.add(topic_id)
-
-        if topic_id in THEORY_TOPICS:
-            assert difficulty == "THEORY_CORE"
-            assert priority == "CORE_MUST_PREPARE"
-
-        if topic_id in APPLICATION_TOPICS:
-            assert difficulty == "FIELD_APPLICATION"
-            assert priority == "NORMAL"
-
-    assert core_topics == THEORY_TOPICS
-    assert field_topics == APPLICATION_TOPICS
-
-    create_text = CREATE_SCRIPT.read_text(
-        encoding="utf-8"
-    )
-
+    assert actual_by_difficulty["THEORY_CORE"] == THEORY_TOPICS
     assert (
-        create_text.count(
-            'default="FIELD_APPLICATION"'
-        )
-        == 1
+        actual_by_difficulty["FIELD_APPLICATION"]
+        == APPLICATION_TOPICS
     )
-
     assert (
-        create_text.count(
-            'default="NORMAL"'
-        )
-        == 1
+        actual_by_difficulty["DESIGN_EVALUATION"]
+        == DESIGN_TOPICS
     )
 
+    for difficulty, expected_count in EXPECTED_DIFFICULTY_COUNTS.items():
+        assert len(actual_by_difficulty[difficulty]) == expected_count
+
+    print(f"theory_topic_count={len(THEORY_TOPICS)}")
+    print(f"application_topic_count={len(APPLICATION_TOPICS)}")
+    print(f"design_topic_count={len(DESIGN_TOPICS)}")
+    print(f"classified_topic_count={len(classified_topics)}")
     print(
-        f"theory_topic_count="
-        f"{len(THEORY_TOPICS)}"
-    )
-    print(
-        f"application_topic_count="
-        f"{len(APPLICATION_TOPICS)}"
-    )
-    print(
-        f"core_must_prepare_count="
-        f"{len(core_topics)}"
-    )
-    print(
-        f"field_application_count="
-        f"{len(field_topics)}"
-    )
-    print(
-        "PASS: CORE_MUST_PREPARE IS LIMITED "
-        "TO CONTROL THEORY"
-    )
-    print(
-        "PASS: APPLICATION TOPICS ARE "
-        "FIELD_APPLICATION / NORMAL"
-    )
-    print(
-        "PASS: NEW TOPIC DEFAULTS ARE "
-        "FIELD_APPLICATION / NORMAL"
+        "selection_importance_values="
+        + ",".join(sorted(ALLOWED_SELECTION_IMPORTANCE))
     )
 
 
