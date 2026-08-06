@@ -1,0 +1,365 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+  "title_ko": "제어밸브 가혹 운전: 고·저유량, 고온·저온·극저온 및 입자성 유체",
+  "question_type": "COMPARE_SELECTION",
+  "expected_question_patterns": [
+    {
+      "pattern": "제어밸브 severe service의 복합 위험 정의, operating envelope와 선정 절차를 설명하시오.",
+      "intent": "제어밸브 severe service의 복합 위험 정의, operating envelope와 선정 절차를 설명의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "severe_service_combined_risk_definition",
+        "operating_case_envelope",
+        "process_fluid_geometry_consequence_chain",
+        "min_normal_max_transient_cases",
+        "specification_material_sizing_workflow"
+      ]
+    },
+    {
+      "pattern": "High-flow와 low-flow·micro-flow service의 failure mechanism과 trim 선정 기준을 비교하시오.",
+      "intent": "High-flow와 low-flow·micro-flow service의 failure mechanism과 trim 선정 기준을 비교의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "high_flow_velocity_area_relation",
+        "high_flow_kinetic_energy_density",
+        "high_flow_hydraulic_power",
+        "staged_pressure_reduction_distribution",
+        "low_flow_minimum_controllable_flow",
+        "installed_rangeability_handoff",
+        "microflow_trim_geometry"
+      ]
+    },
+    {
+      "pattern": "Minimum controllable flow, Reynolds effect, plugging과 cleanability를 고려하여 micro-flow trim을 선정하시오.",
+      "intent": "Minimum controllable flow, Reynolds effect, plugging과 cleanability를 고려하여 micro-flow trim을 선정의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "low_flow_minimum_controllable_flow",
+        "microflow_trim_geometry",
+        "low_reynolds_laminar_correction",
+        "low_flow_plugging_sensitivity",
+        "high_viscosity_non_newtonian_sizing"
+      ]
+    },
+    {
+      "pattern": "High-temperature service의 material strength, thermal expansion, packing와 instrument heat isolation을 평가하시오.",
+      "intent": "High-temperature service의 material strength, thermal expansion, packing와 instrument heat isolation을 평가의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "high_temperature_material_strength_oxidation",
+        "thermal_expansion_clearance",
+        "differential_growth_binding_leakage",
+        "packing_gasket_seat_coating_temperature",
+        "thermal_cycling_heat_soak",
+        "actuator_positioner_heat_isolation"
+      ]
+    },
+    {
+      "pattern": "Cryogenic valve의 material toughness, thermal contraction, extended bonnet, vaporization와 cavity pressure를 설명하시오.",
+      "intent": "Cryogenic valve의 material toughness, thermal contraction, extended bonnet, vaporization와 cavity pressure를 설명의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "low_temperature_toughness_brittle_fracture",
+        "cryogenic_thermal_contraction",
+        "extended_bonnet_packing_isolation",
+        "cryogenic_vaporization_two_phase",
+        "trapped_liquid_cavity_pressure",
+        "icing_condensation_insulation_interface"
+      ]
+    },
+    {
+      "pattern": "Particle·slurry·fibrous fluid의 geometry, material, purge와 orientation을 비교 선정하시오.",
+      "intent": "Particle·slurry·fibrous fluid의 geometry, material, purge와 orientation을 비교 선정의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "particle_characterization",
+        "slurry_erosion_impingement",
+        "fibrous_sticky_polymerizing_plugging",
+        "valve_geometry_solids_passage",
+        "cage_multihole_particle_sensitivity",
+        "hardfacing_coating_ceramic",
+        "purge_flushing_cleanout",
+        "orientation_flow_direction_self_cleaning"
+      ]
+    },
+    {
+      "pattern": "Erosion, plugging, thermal binding, corrosion와 performance degradation의 원인을 진단하시오.",
+      "intent": "Erosion, plugging, thermal binding, corrosion와 performance degradation의 원인을 진단의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "high_flow_erosion_vibration",
+        "differential_growth_binding_leakage",
+        "slurry_erosion_impingement",
+        "fibrous_sticky_polymerizing_plugging",
+        "corrosion_erosion_corrosion",
+        "fouling_wear_clearance_trend"
+      ]
+    },
+    {
+      "pattern": "Velocity, hydraulic power, turndown, thermal growth, heat leak와 particle settling proxy를 계산하고 적용 한계를 설명하시오.",
+      "intent": "Velocity, hydraulic power, turndown, thermal growth, heat leak와 particle settling proxy를 계산하고 적용 한계를 설명의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "high_flow_velocity_area_relation",
+        "high_flow_kinetic_energy_density",
+        "high_flow_hydraulic_power",
+        "installed_rangeability_handoff",
+        "thermal_expansion_clearance",
+        "cryogenic_vaporization_two_phase",
+        "particle_characterization",
+        "fouling_wear_clearance_trend"
+      ]
+    },
+    {
+      "pattern": "Operating envelope, material review, sizing, vendor review, test, commissioning와 maintenance workflow를 설계하시오.",
+      "intent": "Operating envelope, material review, sizing, vendor review, test, commissioning와 maintenance workflow를 설계의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "operating_case_envelope",
+        "specification_material_sizing_workflow",
+        "vendor_qualification_purchaser_acceptance",
+        "inspection_monitoring_trim_replacement",
+        "repair_reverification_worst_case"
+      ]
+    },
+    {
+      "pattern": "Capital cost, pressure-loss energy, purge, spare trim, service life와 turnaround time의 lifecycle trade-off를 평가하시오.",
+      "intent": "Capital cost, pressure-loss energy, purge, spare trim, service life와 turnaround time의 lifecycle trade-off를 평가의 비교·선정·진단 논리를 평가",
+      "required_anchor_ids": [
+        "maintainability_spares_turnaround",
+        "lifecycle_cost_energy_service_life",
+        "inspection_monitoring_trim_replacement",
+        "vendor_qualification_purchaser_acceptance",
+        "repair_reverification_worst_case"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "Risk Definition And Operating Envelope",
+      "intent": "Severe-service 복합 위험, operating case와 consequence chain을 설명한다.",
+      "anchor_refs": [
+        "severe_service_combined_risk_definition",
+        "operating_case_envelope",
+        "process_fluid_geometry_consequence_chain",
+        "min_normal_max_transient_cases"
+      ]
+    },
+    {
+      "section": "High Flow Energy And Geometry",
+      "intent": "High-flow velocity, hydraulic power, staging, downstream effect와 vibration을 설명한다.",
+      "anchor_refs": [
+        "high_flow_velocity_area_relation",
+        "high_flow_kinetic_energy_density",
+        "high_flow_hydraulic_power",
+        "downstream_piping_outlet_effect",
+        "staged_pressure_reduction_distribution",
+        "high_flow_erosion_vibration"
+      ]
+    },
+    {
+      "section": "Low Flow Microflow Control",
+      "intent": "Minimum controllable flow, installed rangeability, micro-flow geometry와 plugging을 설명한다.",
+      "anchor_refs": [
+        "low_flow_minimum_controllable_flow",
+        "installed_rangeability_handoff",
+        "microflow_trim_geometry",
+        "low_reynolds_laminar_correction",
+        "low_flow_plugging_sensitivity"
+      ]
+    },
+    {
+      "section": "High Temperature Thermal Design",
+      "intent": "High-temperature material, thermal expansion, heat soak와 instrument isolation을 설명한다.",
+      "anchor_refs": [
+        "high_temperature_material_strength_oxidation",
+        "thermal_expansion_clearance",
+        "differential_growth_binding_leakage",
+        "packing_gasket_seat_coating_temperature",
+        "thermal_cycling_heat_soak",
+        "actuator_positioner_heat_isolation"
+      ]
+    },
+    {
+      "section": "Low Temperature Cryogenic Design",
+      "intent": "Low-temperature toughness, cryogenic contraction, extended bonnet, vaporization와 icing을 설명한다.",
+      "anchor_refs": [
+        "low_temperature_toughness_brittle_fracture",
+        "cryogenic_thermal_contraction",
+        "extended_bonnet_packing_isolation",
+        "cryogenic_vaporization_two_phase",
+        "trapped_liquid_cavity_pressure",
+        "icing_condensation_insulation_interface"
+      ]
+    },
+    {
+      "section": "Particle Slurry Material Geometry",
+      "intent": "Particle characterization, slurry erosion, fibrous plugging, geometry, hardfacing와 purge를 설명한다.",
+      "anchor_refs": [
+        "particle_characterization",
+        "slurry_erosion_impingement",
+        "fibrous_sticky_polymerizing_plugging",
+        "valve_geometry_solids_passage",
+        "cage_multihole_particle_sensitivity",
+        "hardfacing_coating_ceramic",
+        "purge_flushing_cleanout",
+        "orientation_flow_direction_self_cleaning",
+        "corrosion_erosion_corrosion",
+        "high_viscosity_non_newtonian_sizing",
+        "multiphase_entrained_gas_uncertainty",
+        "seat_packing_material_tradeoff",
+        "actuator_breakaway_thermal_friction_handoff",
+        "cavitation_flashing_noise_handoff"
+      ]
+    },
+    {
+      "section": "Monitoring Maintenance And Repair",
+      "intent": "Fouling·wear trend, inspection, spare trim, maintainability와 repair verification을 설명한다.",
+      "anchor_refs": [
+        "fouling_wear_clearance_trend",
+        "inspection_monitoring_trim_replacement",
+        "maintainability_spares_turnaround",
+        "lifecycle_cost_energy_service_life",
+        "repair_reverification_worst_case"
+      ]
+    },
+    {
+      "section": "Handoff Verification And Lifecycle",
+      "intent": "Topic 1·3·4·5·6·7·8·9·10·12·13·15·16 경계, vendor verification와 lifecycle을 정리한다.",
+      "anchor_refs": [
+        "specification_material_sizing_workflow",
+        "vendor_qualification_purchaser_acceptance"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Severe service를 combined operating envelope로 정의한다.",
+    "High-flow velocity, power, staging와 downstream effect를 연결한다.",
+    "Minimum controllable flow와 micro-flow plugging trade-off를 설명한다.",
+    "High-temperature strength, derating, expansion와 heat soak를 설명한다.",
+    "Cryogenic toughness, contraction, extended bonnet와 cavity pressure를 설명한다.",
+    "Particle size·concentration·hardness·shape를 함께 정의한다.",
+    "Slurry erosion과 fibrous·sticky plugging을 구분한다.",
+    "Geometry, hardfacing, ceramic, purge와 orientation을 mechanism에 연결한다.",
+    "Formula의 domain과 proxy limitation을 명시한다.",
+    "Inspection, spare trim, lifecycle cost와 repair verification을 포함한다.",
+    "Vendor qualification와 purchaser operating envelope를 정렬한다.",
+    "Topic 1·3·4·5·6·7·8·9·10·12·13·15·16 경계를 명시한다."
+  ],
+  "common_missing_points": [
+    "Severe service를 단일 threshold로 설명한다.",
+    "High-flow와 low-flow mechanism을 구분하지 않는다.",
+    "Hydraulic power를 universal damage law로 사용한다.",
+    "Catalog rangeability와 minimum controllable flow를 혼동한다.",
+    "Micro-flow plugging과 cleanability를 누락한다.",
+    "Temperature derating와 differential growth를 누락한다.",
+    "Cryogenic toughness, cavity pressure 또는 icing을 누락한다.",
+    "Particle concentration, hardness와 shape를 누락한다.",
+    "Hardfacing·ceramic limitation을 누락한다.",
+    "Purge의 process·disposal trade-off를 누락한다.",
+    "Inspection·spare·repair reverification을 누락한다.",
+    "Topic 6·7·8·9·13 경계를 혼동한다."
+  ],
+  "routing_aliases": [
+    "control valve severe service operating envelope selection",
+    "high flow velocity hydraulic power downstream erosion valve",
+    "high flow pressure staging vibration trim selection",
+    "low flow minimum controllable flow microflow trim",
+    "micro flow small orifice needle plugging cleanability",
+    "low Reynolds high viscosity non Newtonian valve service",
+    "high temperature valve material thermal expansion heat soak",
+    "high temperature packing gasket coating compatibility valve",
+    "cryogenic valve thermal contraction extended bonnet packing isolation",
+    "cryogenic vaporization cavity pressure icing insulation valve",
+    "particle slurry fibrous sticky fluid valve selection",
+    "slurry erosion impingement hardfacing ceramic valve trim",
+    "fibrous polymerizing plugging dead zone full port valve",
+    "particle service cage multihole trim blockage risk",
+    "purge flushing drain vent cleanout severe service valve",
+    "erosion corrosion material compatibility severe service",
+    "multiphase entrained gas severe service valve uncertainty",
+    "severe service inspection wear clearance spare trim",
+    "severe service vendor qualification purchaser acceptance",
+    "severe service lifecycle energy service life turnaround",
+    "제어밸브 가혹 운전 고유량 저유량 선정",
+    "제어밸브 고온 열팽창 극저온 연장 보닛",
+    "입자 슬러리 섬유질 막힘 밸브 형식 선정",
+    "경화 코팅 세라믹 퍼지 플러싱 가혹 운전",
+    "최소 제어 유량 미소 유량 트림 막힘"
+  ],
+  "routing_field_points": [
+    "Min·normal·max와 startup·shutdown·upset operating cases",
+    "Fluid phase, density, viscosity와 particle data",
+    "Local flow area, velocity와 downstream geometry",
+    "Pressure staging와 energy concentration",
+    "Minimum controllable flow와 micro-flow resolution",
+    "Material strength와 pressure derating",
+    "Thermal expansion와 differential growth",
+    "Cryogenic toughness와 extended bonnet",
+    "Trapped-liquid cavity pressure와 icing",
+    "Particle size distribution·concentration·hardness·shape",
+    "Slurry impingement와 fibrous plugging",
+    "Hardfacing·coating·ceramic limitation",
+    "Purge·flushing·drain·clean-out access",
+    "Wear·clearance trend와 inspection interval",
+    "Spare trim·repairability·turnaround time",
+    "Vendor qualification와 purchaser acceptance"
+  ],
+  "revision_notes": [
+    "10개 severe-service Question Pattern과 8개 Outline을 추가했다.",
+    "Broad single-word alias를 금지하고 compound routing phrase를 사용했다.",
+    "High·low flow, thermal·cryogenic, particle와 lifecycle 경계를 명시했다."
+  ],
+  "id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+  "title": "제어밸브 가혹 운전: 고·저유량, 고온·저온·극저온 및 입자성 유체",
+  "question_examples": [
+    "제어밸브 severe service의 복합 위험 정의, operating envelope와 선정 절차를 설명하시오.",
+    "High-flow와 low-flow·micro-flow service의 failure mechanism과 trim 선정 기준을 비교하시오.",
+    "Minimum controllable flow, Reynolds effect, plugging과 cleanability를 고려하여 micro-flow trim을 선정하시오.",
+    "High-temperature service의 material strength, thermal expansion, packing와 instrument heat isolation을 평가하시오.",
+    "Cryogenic valve의 material toughness, thermal contraction, extended bonnet, vaporization와 cavity pressure를 설명하시오.",
+    "Particle·slurry·fibrous fluid의 geometry, material, purge와 orientation을 비교 선정하시오.",
+    "Erosion, plugging, thermal binding, corrosion와 performance degradation의 원인을 진단하시오.",
+    "Velocity, hydraulic power, turndown, thermal growth, heat leak와 particle settling proxy를 계산하고 적용 한계를 설명하시오.",
+    "Operating envelope, material review, sizing, vendor review, test, commissioning와 maintenance workflow를 설계하시오.",
+    "Capital cost, pressure-loss energy, purge, spare trim, service life와 turnaround time의 lifecycle trade-off를 평가하시오."
+  ],
+  "topic_aliases": [
+    "control valve severe service operating envelope selection",
+    "high flow velocity hydraulic power downstream erosion valve",
+    "high flow pressure staging vibration trim selection",
+    "low flow minimum controllable flow microflow trim",
+    "micro flow small orifice needle plugging cleanability",
+    "low Reynolds high viscosity non Newtonian valve service",
+    "high temperature valve material thermal expansion heat soak",
+    "high temperature packing gasket coating compatibility valve",
+    "cryogenic valve thermal contraction extended bonnet packing isolation",
+    "cryogenic vaporization cavity pressure icing insulation valve",
+    "particle slurry fibrous sticky fluid valve selection",
+    "slurry erosion impingement hardfacing ceramic valve trim",
+    "fibrous polymerizing plugging dead zone full port valve",
+    "particle service cage multihole trim blockage risk",
+    "purge flushing drain vent cleanout severe service valve",
+    "erosion corrosion material compatibility severe service",
+    "multiphase entrained gas severe service valve uncertainty",
+    "severe service inspection wear clearance spare trim",
+    "severe service vendor qualification purchaser acceptance",
+    "severe service lifecycle energy service life turnaround",
+    "제어밸브 가혹 운전 고유량 저유량 선정",
+    "제어밸브 고온 열팽창 극저온 연장 보닛",
+    "입자 슬러리 섬유질 막힘 밸브 형식 선정",
+    "경화 코팅 세라믹 퍼지 플러싱 가혹 운전",
+    "최소 제어 유량 미소 유량 트림 막힘"
+  ],
+  "expected_structure": [
+    "Risk Definition And Operating Envelope",
+    "High Flow Energy And Geometry",
+    "Low Flow Microflow Control",
+    "High Temperature Thermal Design",
+    "Low Temperature Cryogenic Design",
+    "Particle Slurry Material Geometry",
+    "Monitoring Maintenance And Repair",
+    "Handoff Verification And Lifecycle"
+  ],
+  "high_score_features": [
+    "Operating envelope, mechanism, geometry·material selection, formula domain, vendor verification와 lifecycle maintenance를 연결한다."
+  ],
+  "low_score_patterns": [
+    "단일 threshold 또는 vendor severe-service label로 suitability를 확정하고 phase, geometry, material, inspection와 domain을 생략한다."
+  ],
+  "field_connection_points": [
+    "Operating case review, material certificate, vendor qualification, shop test, commissioning, inspection와 repair reverification"
+  ]
+}

@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-05T08:33:24Z-generated-topic-pack-importance",
+  "version": "2026-08-05T11:33:00Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -248,6 +248,29 @@
         "COMPARE_SELECTION을 Primary Question Type으로 적용했다."
       ],
       "topic_label": "시트 누설·차단 등급·패킹·비산배출"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "COMPARE_SELECTION",
+      "high_band_unlock_conditions": [
+        "Severe service를 combined operating envelope로 정의한다.",
+        "High-flow와 low-flow mechanism을 구분한다.",
+        "Velocity·power proxy의 적용 한계를 설명한다.",
+        "High-temperature와 cryogenic thermal design을 비교한다.",
+        "Particle·slurry·fibrous service를 구분한다.",
+        "Geometry·material·purge를 failure mechanism에 연결한다.",
+        "Inspection·spare·repair verification을 포함한다.",
+        "Topic ownership 경계를 명시한다."
+      ],
+      "note": "Severe service는 여러 Topic의 physics와 field-selection 조건을 통합하지만 각 sizing·damage·leakage·SIS 상세의 소유권을 유지해야 하는 핵심 현장 응용 주제이다.",
+      "revision_notes": [
+        "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+        "COMPARE_SELECTION을 Primary Question Type으로 적용했다."
+      ],
+      "topic_label": "가혹 운전·고저유량·고온·극저온·입자성 유체"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

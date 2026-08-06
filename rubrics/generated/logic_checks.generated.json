@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-05T08:33:24Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-05T11:33:00Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -200,6 +200,19 @@
       "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
       "enabled": false,
       "topic_name": "제어밸브 시트 누설, 차단 등급, 패킹 및 비산배출",
+      "question_type": "COMPARE_SELECTION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "enabled": false,
+      "topic_name": "제어밸브 가혹 운전: 고·저유량, 고온·저온·극저온 및 입자성 유체",
       "question_type": "COMPARE_SELECTION",
       "difficulty_profile": "FIELD_APPLICATION",
       "topic_aliases": [],

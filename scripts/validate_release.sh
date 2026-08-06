@@ -266,3 +266,7 @@ python3 scripts/test_control_valve_smart_positioner_diagnostics_topic.py
 echo
 echo "===== control valve seat leakage shutoff class packing fugitive emissions topic regression ====="
 python3 scripts/test_control_valve_seat_leakage_packing_emissions_topic.py
+
+echo
+echo "===== control valve severe service high low flow temperature cryogenic particle topic regression ====="
+python3 scripts/test_control_valve_severe_service_topic.py
