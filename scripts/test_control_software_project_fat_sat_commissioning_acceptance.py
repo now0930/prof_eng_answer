@@ -132,6 +132,16 @@ class SemanticAuditRepairTests(unittest.TestCase):
         self.assertIn("해당 입력 종단", text)
         cautions = " ".join(self.logic["llm_profile"]["false_positive_cautions"])
         self.assertIn("정보·감시 Loop", cautions)
+        fatal = next(item for item in self.fact["fatal_wrong_claims"] if item["id"] == "sw10_fatal_loop_screen_only")
+        for field in ("correction", "correct_rule", "description"):
+            value = fatal[field]
+            self.assertIn("현장 입력 또는 출력 종단", value)
+            self.assertIn("폐루프 제어 Loop", value)
+            self.assertIn("정보·감시 Loop", value)
+        for field in ("correction", "description"):
+            self.assertIn("출력 전용 Loop", fatal[field])
+            self.assertIn("제어기 출력", fatal[field])
+        self.assertNotIn("센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지", fatal["correction"])
 
     def test_distributed_approved_documents_are_allowed(self):
         for anchor_id in ("sw10_alarm_list", "sw10_interlock_list", "sw10_cause_effect"):
