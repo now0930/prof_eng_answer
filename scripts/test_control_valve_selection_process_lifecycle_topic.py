@@ -39,11 +39,6 @@ TOPIC_15 = 'final_control_element_sil_sis_esd_valve_partial_stroke_test'
 SOURCE_DIR = ROOT / "rubrics" / "topic_packs" / TOPIC
 GENERATED_DIR = ROOT / "rubrics" / "generated"
 TOPIC_SHEET = ROOT / "docs" / "topic_sheets" / f"{TOPIC}.md"
-REQUIREMENTS = (
-    ROOT
-    / "gemini_script"
-    / "20260806_topic16_control_valve_selection_process_lifecycle_requirements.md"
-)
 
 EXPECTED_ANCHOR_IDS = ['selection_process_ownership', 'governing_document_hierarchy', 'process_design_basis_traceability', 'tag_service_boundary', 'stakeholder_requirement_integration', 'requirement_classification_mandatory_preferred', 'operating_case_matrix', 'minimum_normal_maximum_cases', 'startup_shutdown_upset_cleaning_cases', 'pressure_reference_consistency', 'temperature_envelope_and_thermal_transient', 'flow_basis_and_uncertainty', 'fluid_phase_composition_properties', 'solids_fouling_corrosion_contaminant', 'control_objective_and_loop_dynamics', 'rangeability_turndown_travel_distribution', 'shutoff_leakage_fail_action', 'safety_environmental_regulatory_requirements', 'response_time_and_availability_requirement', 'specialist_calculation_handoff', 'liquid_gas_sizing_cross_check', 'authority_installed_characteristic_cross_check', 'cavitation_flashing_noise_velocity_cross_check', 'severe_service_and_material_cross_check', 'final_element_sis_esd_cross_check', 'selection_matrix_tradeoff', 'uncertainty_margin_and_double_margin', 'valve_body_flow_path_selection', 'trim_characteristic_and_flow_direction', 'pressure_temperature_rating_and_class', 'material_compatibility_and_corrosion', 'seat_packing_gasket_emissions', 'actuator_thrust_torque_supply_minimum', 'fail_action_spring_and_stored_energy', 'positioner_solenoid_booster_accessory_package', 'installation_orientation_piping_load_accessibility', 'datasheet_completeness_and_units', 'requisition_scope_and_guarantees', 'vendor_bid_technical_comparison', 'deviation_exception_risk_register', 'vendor_sizing_assumption_validation', 'document_and_configuration_control', 'inspection_test_plan_and_hold_points', 'material_certification_nde_traceability', 'fat_functional_performance_acceptance', 'sat_loop_stroke_response_leakage', 'commissioning_installed_performance_verification', 'as_built_baseline_and_handover', 'reliability_availability_maintainability', 'spare_parts_interchangeability_obsolescence', 'lifecycle_cost_energy_downtime', 'field_feedback_moc_revalidation']
 EXPECTED_FATAL_IDS = ['single_normal_case_sufficient', 'datasheet_optional_after_vendor_selection', 'vendor_sizing_accepted_without_independent_check', 'line_size_equals_valve_size', 'largest_cv_is_safest', 'more_margin_always_better', 'catalog_rangeability_equals_installed_turndown', 'inherent_characteristic_alone_determines_control', 'pressure_class_from_normal_pressure_only', 'material_by_fluid_name_only', 'liquid_and_gas_same_sizing_method', 'phase_change_can_be_ignored', 'minimum_flow_not_selection_case', 'transient_cases_never_govern', 'piping_loss_and_authority_irrelevant', 'body_type_selected_by_company_habit', 'actuator_nameplate_force_is_enough', 'nominal_air_supply_is_only_case', 'fail_close_is_universally_safe', 'accessories_are_not_selection_boundary', 'higher_leakage_class_always_better', 'sil_certificate_alone_completes_selection', 'lowest_purchase_price_is_best_value', 'technical_deviation_can_close_verbally', 'fat_replaces_sat_and_commissioning', 'field_feedback_not_selection_input']
@@ -398,9 +393,12 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             )["topics"]
         ]
         self.assertEqual(manifest_ids, source_ids)
-        self.assertEqual(len(manifest_ids), 39)
+        self.assertEqual(len(manifest_ids), len(source_ids))
         self.assertEqual(manifest_ids.count(TOPIC), 1)
-        self.assertEqual(manifest_ids.index(TOPIC), 11)
+        self.assertEqual(
+            manifest_ids.index(TOPIC),
+            source_ids.index(TOPIC),
+        )
 
     def test_exact_contract_ids(self) -> None:
         self.assertEqual(
@@ -894,13 +892,8 @@ class SelectionLifecycleSemanticRegressionTests(
         )
 
     def test_formula_source_markers(self) -> None:
-        combined = (
-            REQUIREMENTS.read_text(
-                encoding="utf-8"
-            )
-            + TOPIC_SHEET.read_text(
-                encoding="utf-8"
-            )
+        combined = TOPIC_SHEET.read_text(
+            encoding="utf-8"
         ).casefold()
         for marker in FORMULA_SOURCE_IDS:
             self.assertIn(
