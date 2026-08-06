@@ -106,7 +106,7 @@
   ],
   "recommended_outline": [
     {
-      "section": 1,
+      "section": "1",
       "title": "1. 개념과 문제정의",
       "content": "AI–ML–DL의 포함관계와 Supervised·Unsupervised, Classification·Regression·Forecasting·Anomaly Detection의 목표를 구분한다.",
       "anchor_refs": [
@@ -118,7 +118,7 @@
       "intent": "AI–ML–DL의 포함관계와 Supervised·Unsupervised, Classification·Regression·Forecasting·Anomaly Detection의 목표를 구분한다."
     },
     {
-      "section": 2,
+      "section": "2",
       "title": "2. 산업 적용",
       "content": "Anomaly Detection, Predictive Maintenance, RUL과 Process Optimization의 출력·의사결정·한계를 연결한다.",
       "anchor_refs": [
@@ -130,7 +130,7 @@
       "intent": "Anomaly Detection, Predictive Maintenance, RUL과 Process Optimization의 출력·의사결정·한계를 연결한다."
     },
     {
-      "section": 3,
+      "section": "3",
       "title": "3. 데이터와 Feature",
       "content": "Feature Engineering, 대표성, Label 품질과 Train·Validation·Test 분리를 설명한다.",
       "anchor_refs": [
@@ -141,7 +141,7 @@
       "intent": "Feature Engineering, 대표성, Label 품질과 Train·Validation·Test 분리를 설명한다."
     },
     {
-      "section": 4,
+      "section": "4",
       "title": "4. 누수 방지와 분할",
       "content": "산업 시계열의 시간·설비·Episode 분할과 Data Leakage, Class Imbalance 통제를 설명한다.",
       "anchor_refs": [
@@ -152,7 +152,7 @@
       "intent": "산업 시계열의 시간·설비·Episode 분할과 Data Leakage, Class Imbalance 통제를 설명한다."
     },
     {
-      "section": 5,
+      "section": "5",
       "title": "5. 성능과 Threshold",
       "content": "Confusion Matrix, Precision, Recall, F1, False Alarm·미검출 Trade-off와 현장비용을 설명한다.",
       "anchor_refs": [
@@ -166,7 +166,7 @@
       "intent": "Confusion Matrix, Precision, Recall, F1, False Alarm·미검출 Trade-off와 현장비용을 설명한다."
     },
     {
-      "section": 6,
+      "section": "6",
       "title": "6. 배포와 추적성",
       "content": "Calibration, Runtime 차이, Model·Data·Feature·Threshold Version과 Deployment 검증을 설명한다.",
       "anchor_refs": [
@@ -177,7 +177,7 @@
       "intent": "Calibration, Runtime 차이, Model·Data·Feature·Threshold Version과 Deployment 검증을 설명한다."
     },
     {
-      "section": 7,
+      "section": "7",
       "title": "7. Monitoring과 개선",
       "content": "운영 Monitoring, Data·Concept Drift, Retraining Trigger와 Champion–Challenger Regression을 설명한다.",
       "anchor_refs": [
@@ -189,7 +189,7 @@
       "intent": "운영 Monitoring, Data·Concept Drift, Retraining Trigger와 Champion–Challenger Regression을 설명한다."
     },
     {
-      "section": 8,
+      "section": "8",
       "title": "8. 책임 있는 운영",
       "content": "Explainability의 한계, Human Review·Fallback과 MLOps Lifecycle을 결론으로 연결한다.",
       "anchor_refs": [
