@@ -29,7 +29,7 @@
         "운전정보 관리, HMI, Alarm, SOE의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "HMI·Alarm·SOE를 같은 기능으로 취급하거나 SW-02 실행논리와 SW-10 인수절차까지 SW-03이 직접 소유한다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -59,7 +59,7 @@
         "HMI, SCADA, 상위 감시체계, 현장 제어기의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "HMI와 SCADA를 동일 장치로 보거나 SCADA의 원격수집·서버·통신·이력 구조를 설명하지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -88,7 +88,7 @@
         "Failover, 데이터 품질, Stale, 재연결의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "서버·네트워크 이중화만 있으면 Failover 중 품질·Stale·통신단절·재연결 불일치를 표시할 필요가 없다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -116,7 +116,7 @@
         "High-performance HMI, 상황인식, 추세, 우선순위의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "밝은 색과 3D 장식을 많이 사용할수록 상황인식이 향상된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -146,7 +146,7 @@
         "Display hierarchy, Overview, 상세 운전, 진단의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Overview 없이 상세화면만 제공하거나 화면계층 사이의 이상 위치·원인·조치 맥락 연결이 필요 없다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -175,7 +175,7 @@
         "색상, 맥락, 화면 이동, 품질저하의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "정상상태까지 강한 색으로 상시 장식하거나 화면 이동 시 설비 위치·Mode·Trend·관련 Alarm 맥락을 잃어도 된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -204,7 +204,7 @@
         "Alarm, 운전자 조치, Event, 비정상 상태의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "모든 Event·Status·Notification을 Alarm으로 만들거나 운전자 조치가 필요 없는 상태도 Alarm이라고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -234,7 +234,7 @@
         "Alarm philosophy, 상위 정책, 우선순위, 변경관리의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Alarm philosophy를 개별 Tag 설정표와 동일시하거나 우선순위·Shelving·Suppression·변경관리 원칙 없이 운영한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -264,7 +264,7 @@
         "Alarm rationalization, 운전자 조치, 응답시간, 설정값의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "원인·결과·운전자 조치·허용 응답시간 검토 없이 후보 신호를 모두 Alarm으로 승인한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -292,7 +292,7 @@
         "Alarm priority, 결과 심각도, 응답시간, 대응절차의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "PV 크기나 장비 중요도 하나만으로 Alarm priority를 정하고 결과 심각도와 허용 응답시간을 고려하지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -320,7 +320,7 @@
         "Alarm state, Acknowledgement, Return-to-normal, 원인의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Acknowledge가 공정 원인 제거와 Active condition 해제를 의미한다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -348,7 +348,7 @@
         "Deadband, 발생 임계값, 복귀 임계값, Chattering의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Deadband를 시간지연과 동일시하거나 발생·복귀 임계값 차이 없이 Chattering을 해결한다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -377,7 +377,7 @@
         "Alarm delay, 시간 필터, 공정 동특성, 응답시간의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Delay를 값의 이력폭으로 설명하거나 공정 동특성과 허용 응답시간에 관계없이 길게 설정해도 된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -407,7 +407,7 @@
         "Shelving, 제한시간, 권한, 이력의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Shelving이 Alarm 정의·이력을 삭제한다고 보거나 사유·권한·만료 없이 무기한 숨겨도 된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -435,7 +435,7 @@
         "Suppression, 설계 조건, 운전모드, Shelving의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Suppression을 운전자의 임의 Shelving과 동일시하거나 설계된 상태·Mode 조건 없이 수동으로 숨기는 기능이라고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -464,7 +464,7 @@
         "Alarm flood, Chattering, 인지부하, 원인 제거의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Alarm flood를 모든 Priority 상향이나 Alarm 추가로 해결하고 Chattering·반복원인·상태기반 Suppression을 검토하지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -493,7 +493,7 @@
         "Alarm KPI, Standing alarm, Flood, 우선순위 분포의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "단일 평균 발생률만으로 Alarm 성능이 충분하다고 보고 Peak·Standing·Chattering·Flood 구간을 추적하지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -522,7 +522,7 @@
         "Setpoint, Alarm value, Trip value, Interlock value의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "운전 Setpoint, Alarm, Trip과 Interlock 값을 같은 목적의 값으로 보고 서로 임의 교환한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -552,7 +552,7 @@
         "Setpoint list, 승인, 변경이력, 근거의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "근거·권한·승인·변경이력·복구절차 없이 온라인 Setpoint나 보호관련 값을 변경해도 된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -581,7 +581,7 @@
         "Alarm, Trip, Interlock, 실행논리의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Alarm을 자동정지·동작차단 논리와 동일시하거나 Trip·Interlock을 단순 표시정보로 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -610,7 +610,7 @@
         "SOE, Timestamp, 상태변화, 공통 시간축의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "수집 서버 도착시간만 기록해도 원 신호의 정확한 발생순서와 품질을 항상 알 수 있다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -639,7 +639,7 @@
         "시각동기, Source timestamp, 분해능, Time quality의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "시각동기·Timestamp source·정확도·분해능·Time quality 없이도 SOE 인과순서가 항상 정확하다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -668,7 +668,7 @@
         "Historian, SOE, 표본주기, 발생순서의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Historian 표본값만으로 이산 사건의 SOE 순서를 항상 동일하게 재현할 수 있다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -697,7 +697,7 @@
         "First-out, SOE, 최초 원인, 원인분석의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "First-out을 전체 이벤트 이력이나 마지막 잔류신호와 동일시하고 SOE와 같은 기능이라고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -727,7 +727,7 @@
         "Audit trail, 사용자, 변경기록, 사유의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Audit trail을 공정 이벤트 순서 기록으로만 보거나 사용자·대상·이전값·새값·사유를 기록하지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -756,7 +756,7 @@
         "운전자 권한, 역할기반, 최소권한, Audit trail의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "모든 사용자에게 보호관련 값과 중요조작 권한을 제한 없이 부여하는 것이 안전하다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -785,7 +785,7 @@
         "Human error, Mode, Command, Feedback의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Command 전송을 설비 동작완료로 표시하거나 Mode·대상·Feedback·취소·복구경로를 구분하지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -814,7 +814,7 @@
         "Data quality, Bad, Stale, Communication lost의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Bad·Uncertain·Stale·Communication lost 값을 최신 정상값처럼 표시하고 운전자·제어 판단에 사용한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -843,7 +843,7 @@
         "비정상상황, Detect, Diagnose, Recover의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Alarm 표시만으로 비정상상황 대응이 끝난다고 보고 진단·절차·권한·복구·사후분석 흐름을 두지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -873,7 +873,7 @@
         "SW-03, SW-02, 운전자 정보, 실행논리의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "Interlock·Trip의 실제 상태전이와 Latch·Reset·Fail-safe를 SW-03의 화면·운영정책 범위로 흡수한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -903,7 +903,7 @@
         "SW-03, SW-04, SW-10, ownership의 관계를 목적, 조건, 표시, 운전자 조치와 기록 관점에서 설명한다."
       ],
       "rejected_explanations": [
-        "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        "V-Model·일반 V&V 또는 FAT·SAT·시운전·인수를 SW-03의 운전정보 원리와 같은 소유범위로 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 HMI·SCADA 및 Alarm·운전정보 관리 원칙"
@@ -1174,7 +1174,8 @@
   "revision_notes": [
     "2026-08-06: SW-03 운전정보 관리 ownership과 SW-02 실행논리 경계를 확정했다.",
     "Alarm philosophy, rationalization, Deadband, Delay, Shelving, Suppression, SOE와 Audit trail을 분리된 Fact로 구성했다.",
-    "SIL 산정, V-Model과 프로젝트 FAT·SAT는 인접 Topic으로 넘겼다."
+    "SIL 산정, V-Model과 프로젝트 FAT·SAT는 인접 Topic으로 넘겼다.",
+    "2026-08-07 LLM 의미 감사 수리: 31개 Anchor의 rejected 설명을 기능별 실제 반대개념으로 교체했다."
   ],
   "topic_label": "SW-03 HMI·SCADA·Alarm·SOE",
   "core_facts": [

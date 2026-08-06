@@ -261,6 +261,26 @@ class ContentQualityTests(unittest.TestCase):
         self.assertIn("상태", soe["statement"])
         self.assertNotEqual(audit["statement"], soe["statement"])
 
+
+class SemanticAuditRepairTests(unittest.TestCase):
+    def test_all_anchor_rejections_are_specific(self) -> None:
+        rejected = [tuple(item["rejected_explanations"]) for item in FACT["anchors"]]
+        self.assertEqual(len(rejected), 31)
+        self.assertEqual(len(set(rejected)), 31)
+        generic = "서로 다른 정보관리 기능을 같은 의미로 취급하거나 조건, 권한, 이력과 운전자 조치를 생략한다."
+        self.assertFalse(any(generic in value for values in rejected for value in values))
+
+    def test_rejections_cover_key_function_boundaries(self) -> None:
+        by_id = {item["id"]: " ".join(item["rejected_explanations"]) for item in FACT["anchors"]}
+        self.assertIn("동일 장치", by_id["sw03_hmi_scada_architecture"])
+        self.assertIn("모든 Event", by_id["sw03_alarm_definition"])
+        self.assertIn("공정 원인 제거", by_id["sw03_alarm_state_acknowledgement"])
+        self.assertIn("PV 크기", by_id["sw03_alarm_priority"])
+        self.assertIn("시간지연", by_id["sw03_alarm_deadband"])
+        self.assertIn("임의 Shelving", by_id["sw03_alarm_suppression"])
+        self.assertIn("Historian 표본값", by_id["sw03_historian_vs_soe"])
+        self.assertIn("사용자·대상", by_id["sw03_audit_trail"])
+
 if __name__ == "__main__":
     suite = unittest.defaultTestLoader.loadTestsFromModule(__import__(__name__))
     count = suite.countTestCases()
