@@ -38,11 +38,11 @@ JSON_PATHS=(
 declare -A EXPECTED_SHA256=(
     ["docs/topic_sheets/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe.md"]="f93c707e8d43cf0714547f3080fa308da0d491874b1d2fb3c56fae0e5a5a7cf1"
     ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/README.md"]="496b1adf8a8f3c68877dd654dd8402a4f13ea409dfd5592e4b4d8e358d155d32"
-    ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/fact_anchor.json"]="0ebfa710ba88af72f72492b6e45fa5450cb96b770c7bbda1b61fb57b0e67996b"
+    ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/fact_anchor.json"]="c528ee538dc911e2693a466ee6bc7f41cbd7acea876cc5c8959e2b8f383f04a1"
     ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/logic_check.json"]="9d2317dbd82a8c553daadf737c77409ab2ee7f3cb8587d523116b3ba0ea0347f"
     ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/model_answer.json"]="5daefe4095b905bca7e311f6d9ab5e5bf8b600263acbd32fc00cd9cdfc11a32c"
     ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/topic_importance.json"]="3b8a3fd6a05cf53d0d12917154c31c266faa9e3ce5ecfee0afcb392974096190"
-    ["scripts/test_control_logic_sequence_interlock_permissive_trip_state_transition.py"]="aa0cc705858360646e5bb9da4248a8c3b42cf71cbda366033a4835087761498b"
+    ["scripts/test_control_logic_sequence_interlock_permissive_trip_state_transition.py"]="2a4ce107a9dce88e2f38ccdc543e2371737ffb0fadd8479009516d25e0cabd2f"
 )
 
 
@@ -2077,7 +2077,7 @@ if [ "$failure_count" -eq 0 ]; then
       "id": "sw02_fatal_watchdog_monitor_only",
       "claim": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
       "wrong_claim": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
-      "correction": "Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
+      "correction": "제어기 Task, 필수 통신, 원격 I/O와 보호 관련 경로의 Watchdog Timeout은 위험분석에 따라 Hold, Controlled stop 또는 Safe action에 연결한다. 비중요 Historian, 상태수집과 진단 경로는 공정위험에 직접 영향을 주지 않는 경우 Alarm-only 처리를 적용할 수 있다.",
       "correct_rule": "제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
       "severity": "fatal",
       "affected_layers": [
@@ -2085,7 +2085,7 @@ if [ "$failure_count" -eq 0 ]; then
         "D"
       ],
       "message": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
-      "description": "핵심 운전논리의 의미를 반대로 설명한 오류이다. Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
+      "description": "핵심 운전논리의 의미를 반대로 설명한 오류이다. 제어기 Task, 필수 통신, 원격 I/O와 보호 관련 경로의 Watchdog Timeout은 위험분석에 따라 Hold, Controlled stop 또는 Safe action에 연결한다. 비중요 Historian, 상태수집과 진단 경로는 공정위험에 직접 영향을 주지 않는 경우 Alarm-only 처리를 적용할 수 있다.",
       "grading_notes": "문맥상 명시적 주장일 때만 fatal로 판정하고, 단순 미언급은 fatal로 판정하지 않는다."
     },
     {
@@ -2120,9 +2120,9 @@ if [ "$failure_count" -eq 0 ]; then
     },
     {
       "id": "sw02_fatal_timer_is_feedback",
-      "claim": "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.",
+      "claim": "밸브 개폐, 모터 기동, 위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다.",
       "wrong_claim": "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다.",
-      "correction": "Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
+      "correction": "물리적 동작 완료는 필요한 설비 Feedback으로 확인한다. 다만 Purge 유지시간, 안정화 대기, 혼합시간처럼 시간 자체가 공정 요구조건인 Step은 Timer 만료를 정상 완료조건으로 사용할 수 있다.",
       "correct_rule": "물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
       "severity": "fatal",
       "affected_layers": [
@@ -2130,7 +2130,7 @@ if [ "$failure_count" -eq 0 ]; then
         "D"
       ],
       "message": "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.",
-      "description": "핵심 운전논리의 의미를 반대로 설명한 오류이다. Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
+      "description": "핵심 운전논리의 의미를 반대로 설명한 오류이다. 물리적 동작 확인이 필요한 Step은 필요한 설비 Feedback으로 완료를 확인한다. 다만 Purge 유지시간, 안정화 대기, 혼합시간처럼 시간 자체가 공정 요구조건인 Step은 Timer 만료를 정상 완료조건으로 사용할 수 있다.",
       "grading_notes": "문맥상 명시적 주장일 때만 fatal로 판정하고, 단순 미언급은 fatal로 판정하지 않는다."
     },
     {
@@ -3972,15 +3972,28 @@ class SemanticAuditRepairTests(unittest.TestCase):
 
     def test_timer_fatal_is_limited_to_physical_action_steps(self) -> None:
         fatal = self.fatals["sw02_fatal_timer_is_feedback"]
-        self.assertIn("물리적 동작 확인이 필요한 Step", fatal["wrong_claim"])
-        self.assertIn("Purge 유지시간", fatal["correct_rule"])
-        self.assertIn("시간 자체가 요구조건", fatal["correct_rule"])
+        for field in ("claim", "wrong_claim"):
+            self.assertIn("물리적 동작 확인이 필요한 Step", fatal[field])
+            self.assertIn("실제 설비 Feedback", fatal[field])
+        for field in ("correction", "correct_rule", "description"):
+            self.assertIn("Purge 유지시간", fatal[field])
+            self.assertIn("시간 자체가", fatal[field])
+            self.assertIn("정상 완료조건", fatal[field])
+        self.assertNotEqual(fatal["claim"], "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.")
 
     def test_timer_and_noncritical_watchdog_safe_boundaries(self) -> None:
         cautions = " ".join(self.logic["llm_profile"]["false_positive_cautions"])
         self.assertIn("혼합시간", cautions)
         self.assertIn("Historian", cautions)
         self.assertIn("Alarm-only", cautions)
+        fatal = self.fatals["sw02_fatal_watchdog_monitor_only"]
+        for field in ("correction", "correct_rule", "description"):
+            self.assertIn("제어기 Task", fatal[field])
+            self.assertIn("필수 통신", fatal[field])
+            self.assertIn("원격 I/O", fatal[field])
+            self.assertIn("Historian", fatal[field])
+            self.assertIn("Alarm-only", fatal[field])
+        self.assertNotIn("연결해야 한다.", fatal["description"].split("비중요 Historian", 1)[-1])
 
     def test_fail_safe_negated_absolute_remains_unchanged(self) -> None:
         text = self.anchors["sw02_fail_safe"]["statement"]

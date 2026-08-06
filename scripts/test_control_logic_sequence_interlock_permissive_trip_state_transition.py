@@ -395,15 +395,28 @@ class SemanticAuditRepairTests(unittest.TestCase):
 
     def test_timer_fatal_is_limited_to_physical_action_steps(self) -> None:
         fatal = self.fatals["sw02_fatal_timer_is_feedback"]
-        self.assertIn("물리적 동작 확인이 필요한 Step", fatal["wrong_claim"])
-        self.assertIn("Purge 유지시간", fatal["correct_rule"])
-        self.assertIn("시간 자체가 요구조건", fatal["correct_rule"])
+        for field in ("claim", "wrong_claim"):
+            self.assertIn("물리적 동작 확인이 필요한 Step", fatal[field])
+            self.assertIn("실제 설비 Feedback", fatal[field])
+        for field in ("correction", "correct_rule", "description"):
+            self.assertIn("Purge 유지시간", fatal[field])
+            self.assertIn("시간 자체가", fatal[field])
+            self.assertIn("정상 완료조건", fatal[field])
+        self.assertNotEqual(fatal["claim"], "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.")
 
     def test_timer_and_noncritical_watchdog_safe_boundaries(self) -> None:
         cautions = " ".join(self.logic["llm_profile"]["false_positive_cautions"])
         self.assertIn("혼합시간", cautions)
         self.assertIn("Historian", cautions)
         self.assertIn("Alarm-only", cautions)
+        fatal = self.fatals["sw02_fatal_watchdog_monitor_only"]
+        for field in ("correction", "correct_rule", "description"):
+            self.assertIn("제어기 Task", fatal[field])
+            self.assertIn("필수 통신", fatal[field])
+            self.assertIn("원격 I/O", fatal[field])
+            self.assertIn("Historian", fatal[field])
+            self.assertIn("Alarm-only", fatal[field])
+        self.assertNotIn("연결해야 한다.", fatal["description"].split("비중요 Historian", 1)[-1])
 
     def test_fail_safe_negated_absolute_remains_unchanged(self) -> None:
         text = self.anchors["sw02_fail_safe"]["statement"]
