@@ -199,7 +199,7 @@
     },
     {
       "section": "4. Endpoint·Identity·Remote access",
-      "content": "Allowlisting, least privilege, authentication·authorization, jump server, MFA와 session recording을 결합한다.",
+      "content": "Allowlisting, least privilege, authentication·authorization, jump server, MFA와 접속방식에 적합한 활동기록을 결합하여 재구성 가능한 audit trail을 확보한다.",
       "anchor_refs": [
         "sw09_allowlisting",
         "sw09_least_privilege",
@@ -246,7 +246,7 @@
     },
     {
       "section": "8. 신뢰복구와 지속개선",
-      "content": "Offline·immutable backup, trusted recovery, business continuity, exercise와 lifecycle decommissioning으로 복구증적을 확보한다.",
+      "content": "Offline·immutable backup, trusted recovery, business continuity와 exercise를 연결하고 MTTD와 MTTC(Mean Time to Contain)의 측정경계를 명시하여 복구증적을 확보한다.",
       "anchor_refs": [
         "sw09_trusted_recovery",
         "sw09_backup_recovery_security",
@@ -287,7 +287,7 @@
     "Remote access는 business need, 승인, time window, source, destination, protocol과 session owner를 제한하고 direct inbound exposure를 피해야 한다.",
     "Jump server는 remote user와 OT target 사이의 관리경로를 집중시키며 hardened host, isolated credential, logging, malware control과 session termination을 제공해야 한다.",
     "MFA는 특히 remote와 privileged access의 account takeover 위험을 줄이지만 target authorization, endpoint trust, session control과 recovery 절차를 대체하지 않는다.",
-    "원격 세션은 암호화, 명시적 승인, 화면·명령 기록, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용해야 한다.",
+    "원격 접속은 암호화, 명시적 승인, 강한 인증, 최소권한, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용하고, 위험도·접속방식·대상 장치의 기술적 특성에 따라 화면 기록, 명령 기록, protocol transaction log, engineering change audit 또는 jump server session recording 중 적절한 수단이나 조합으로 모든 접속·변경행위를 사용자·시간·대상·결과와 연결하여 재구성 가능한 audit trail을 확보해야 한다.",
     "OT patch management는 vulnerability severity뿐 아니라 exploitability, exposure, safety·availability 영향, vendor support, test evidence, outage window와 rollback을 평가하여 우선순위를 정해야 한다."
   ],
   "high_score_features": [
@@ -299,7 +299,7 @@
     "Firewall rule의 source·destination·service·owner·expiry를 제시한다.",
     "Allowlisting의 learning, update와 emergency exception을 설명한다.",
     "Authentication과 Authorization, least privilege를 구분한다.",
-    "Remote access의 승인·시간·jump server·MFA·recording을 연결한다.",
+    "Remote access의 승인·시간·jump server·MFA·최소권한과 위험기반 activity audit trail을 연결한다.",
     "Patch decision에 exploitability, exposure, test와 rollback을 포함한다.",
     "Legacy compensating control과 residual risk를 제시한다.",
     "Secure baseline과 drift detection을 설명한다.",
@@ -310,12 +310,12 @@
     "Logging use case와 공통 time source를 포렌식에 연결한다.",
     "Containment와 eradication을 구분한다.",
     "Trusted recovery와 restore를 구분한다.",
-    "Tabletop·technical drill과 recovery metric을 개선조치에 연결한다."
+    "Tabletop·technical drill 결과를 MTTD와 MTTC(Mean Time to Contain)의 명확한 측정경계 및 recovery metric 개선조치에 연결한다."
   ],
   "common_missing_points": [
     "자산목록을 언급하지만 firmware, account, data flow, owner와 criticality가 빠진다.",
     "방화벽 제품만 나열하고 Zone, Conduit, trust boundary와 허용 data flow가 없다.",
-    "MFA만 제시하고 jump server, 승인시간, recording과 target 제한이 없다.",
+    "MFA만 제시하고 jump server, 승인시간, target 제한 또는 사용자·시간·대상·결과를 재구성할 수 있는 활동기록·audit trail이 없다.",
     "Patch 적용만 설명하고 시험, outage, rollback, exception과 보완통제가 없다.",
     "Legacy 문제를 언급하지만 compensating control과 residual risk 관리가 없다.",
     "공급망 위험을 언급하지만 계약요건, provenance, support와 breach notification이 없다.",
@@ -324,7 +324,7 @@
     "로그 수집만 제시하고 time sync, retention, correlation, alert와 response owner가 없다.",
     "Incident 단계는 나열하지만 운전·안전·보안·vendor 역할과 decision authority가 없다.",
     "Backup은 언급하지만 offline/immutable copy, credential 분리, restore test와 clean recovery가 없다.",
-    "정책과 절차만 있고 tabletop, technical drill, recovery exercise와 개선지표가 없다.",
+    "정책과 절차만 있고 tabletop, technical drill, recovery exercise와 개선지표가 없거나, MTTC를 확장어와 측정 시작·종료 경계 없이 약어로만 나열한다.",
     "Safety coordination과 SIS 독립성 보호가 빠진다.",
     "Incident 중 business continuity와 manual fallback이 빠진다.",
     "Credential reset과 heightened monitoring 없는 restore만 제시한다.",
@@ -361,7 +361,7 @@
     "Purdue model을 맹목 적용하지 않는 실제 data flow Zone 설계",
     "Historian relay와 patch staging을 Industrial DMZ에 분리",
     "Engineering workstation Application Allowlisting",
-    "Vendor laptop quarantine와 Jump server session recording",
+    "Vendor laptop quarantine와 Jump server 또는 동등한 session activity audit trail",
     "Firewall rule owner·expiry·recertification",
     "Passive IDS baseline과 process anomaly correlation",
     "Legacy PLC cell segmentation과 read-only monitoring",
@@ -378,7 +378,7 @@
     "Manual operation checklist와 reduced production mode",
     "Incident command role과 vendor escalation tree",
     "Tabletop ransomware scenario와 technical isolation drill",
-    "MTTD·MTTC·restore success metric",
+    "MTTD와 MTTC(Mean Time to Contain) 측정경계·restore success metric",
     "Supplier vulnerability disclosure SLA",
     "End-of-life remote account revocation",
     "SW-06 MOC와 security impact review 연계",
@@ -391,7 +391,7 @@
     "Purdue model을 맹목 적용하지 않는 실제 data flow Zone 설계",
     "Historian relay와 patch staging을 Industrial DMZ에 분리",
     "Engineering workstation Application Allowlisting",
-    "Vendor laptop quarantine와 Jump server session recording",
+    "Vendor laptop quarantine와 Jump server 또는 동등한 session activity audit trail",
     "Firewall rule owner·expiry·recertification",
     "Passive IDS baseline과 process anomaly correlation",
     "Legacy PLC cell segmentation과 read-only monitoring",
@@ -408,7 +408,7 @@
     "Manual operation checklist와 reduced production mode",
     "Incident command role과 vendor escalation tree",
     "Tabletop ransomware scenario와 technical isolation drill",
-    "MTTD·MTTC·restore success metric",
+    "MTTD와 MTTC(Mean Time to Contain) 측정경계·restore success metric",
     "Supplier vulnerability disclosure SLA",
     "End-of-life remote account revocation",
     "SW-06 MOC와 security impact review 연계",

@@ -220,11 +220,63 @@ class TestSW09BoundaryAndDocuments(unittest.TestCase):
         for path in files:
             self.assertTrue(path.read_bytes().endswith(b"\n"), str(path))
 
+
+class TestSW09SemanticRepairRegressions(unittest.TestCase):
+    def test_equivalent_remote_activity_audit_is_accepted(self) -> None:
+        anchor = next(row for row in FACT["anchors"] if row["id"] == "sw09_secure_remote_session")
+        text = " ".join([anchor["statement"], *anchor["accepted_explanations"]])
+        for marker in (
+            "Engineering Change Audit",
+            "Protocol Transaction Log",
+            "Command Log",
+            "Session Metadata",
+            "사용자·시간·대상·결과",
+            "Audit Trail",
+        ):
+            self.assertIn(marker, text)
+        cautions = " ".join(LOGIC["llm_profile"]["false_positive_cautions"])
+        self.assertIn("화면 녹화가 없더라도", cautions)
+        self.assertIn("GUI가 없는 장치", cautions)
+
+    def test_missing_remote_audit_trail_remains_major(self) -> None:
+        major = next(
+            row for row in LOGIC["llm_profile"]["major_checks"]
+            if row["id"] == "sw09_major_remote_session_missing"
+        )
+        self.assertIn("활동기록·audit trail이 없다", major["claim"])
+        for marker in ("사용자·시간·대상·결과", "재구성 가능한 audit trail"):
+            self.assertIn(marker, major["correction"])
+        rejected = " ".join(
+            next(row for row in FACT["anchors"] if row["id"] == "sw09_secure_remote_session")["rejected_explanations"]
+        )
+        self.assertIn("MFA만 적용하면 활동기록은 필요 없다", rejected)
+        self.assertIn("Vendor 접속", rejected)
+
+    def test_mttc_definition_and_measurement_interval(self) -> None:
+        anchor = next(row for row in FACT["anchors"] if row["id"] == "sw09_exercise_metrics")
+        text = " ".join([anchor["statement"], *anchor["accepted_explanations"]])
+        self.assertIn("MTTC(Mean Time to Contain", text)
+        self.assertIn("탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점", text)
+        self.assertIn("확산 경로가 차단되고 추가 전파가 억제된 시점", text)
+        for equivalent in ("Time to Containment", "Containment Completion Time", "확산 억제 완료시간"):
+            self.assertIn(equivalent, text)
+
+    def test_ambiguous_mttc_acronym_is_incomplete_but_equivalent_terms_are_allowed(self) -> None:
+        major = next(
+            row for row in LOGIC["llm_profile"]["major_checks"]
+            if row["id"] == "sw09_major_exercise_metric_missing"
+        )
+        self.assertIn("확장어와 측정 시작·종료 경계 없이 약어로만", major["claim"])
+        self.assertIn("Mean Time to Contain", major["correction"])
+        cautions = " ".join(LOGIC["llm_profile"]["false_positive_cautions"])
+        for equivalent in ("Time to Containment", "Containment Completion Time", "확산 억제 완료시간"):
+            self.assertIn(equivalent, cautions)
+
 if __name__ == "__main__":
     suite = unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__])
     count = suite.countTestCases()
     print(f"SW09_FOCUSED_TEST_COUNT={count}")
-    if count != 37:
-        raise SystemExit(f"expected 37 tests, got {count}")
+    if count != 41:
+        raise SystemExit(f"expected 41 tests, got {count}")
     result = unittest.TextTestRunner(verbosity=2).run(suite)
     raise SystemExit(0 if result.wasSuccessful() else 1)

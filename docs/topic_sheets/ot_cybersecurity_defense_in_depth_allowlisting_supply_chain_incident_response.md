@@ -38,7 +38,7 @@ Asset inventory에는 PLC·DCS·SIS·HMI뿐 아니라 firmware, software, accoun
 
 ## 6. 심층방어와 접근통제
 
-Zone and Conduit, segmentation, Industrial DMZ, Firewall와 필요한 경우 unidirectional gateway를 구성한다. Endpoint에는 Allowlisting과 secure baseline을 적용한다. Identity 영역에서는 least privilege, Authentication·Authorization, Jump server, MFA와 session recording을 결합한다.
+Zone and Conduit, segmentation, Industrial DMZ, Firewall와 필요한 경우 unidirectional gateway를 구성한다. Endpoint에는 Allowlisting과 secure baseline을 적용한다. Identity 영역에서는 least privilege, Authentication·Authorization, Jump server, MFA와 접속방식에 적합한 활동기록을 결합하여 재구성 가능한 audit trail을 확보한다.
 
 ## 7. Patch·Legacy와 공급망
 
@@ -103,8 +103,8 @@ Online backup 하나로는 destructive attack에 충분하지 않다. Offline �
   - 보완: 물리·논리 자산, 책임자와 공정중요도를 함께 관리한다.
 - **sw09_major_zone_conduit_missing**: 방화벽 제품만 나열하고 Zone, Conduit, trust boundary와 허용 data flow가 없다.
   - 보완: SUC와 data flow를 기준으로 구역·경계를 설계한다.
-- **sw09_major_remote_session_missing**: MFA만 제시하고 jump server, 승인시간, recording과 target 제한이 없다.
-  - 보완: Remote session의 시작부터 종료까지 통제한다.
+- **sw09_major_remote_session_missing**: MFA만 제시하고 jump server, 승인시간, target 제한 또는 사용자·시간·대상·결과를 재구성할 수 있는 활동기록·audit trail이 없다.
+  - 보완: Remote session의 시작부터 종료까지 통제하고, 접속방식에 적합한 화면·명령·transaction·engineering change·jump server 기록 중 적절한 수단 또는 조합으로 사용자·시간·대상·결과가 연결되는 재구성 가능한 audit trail을 확보한다.
 - **sw09_major_patch_exception_missing**: Patch 적용만 설명하고 시험, outage, rollback, exception과 보완통제가 없다.
   - 보완: 위험기반 patch decision과 미적용 보완책을 제시한다.
 - **sw09_major_legacy_control_missing**: Legacy 문제를 언급하지만 compensating control과 residual risk 관리가 없다.
@@ -121,8 +121,8 @@ Online backup 하나로는 destructive attack에 충분하지 않다. Offline �
   - 보완: 역할·연락·승인·evidence handling을 사전 정의한다.
 - **sw09_major_trusted_restore_missing**: Backup은 언급하지만 offline/immutable copy, credential 분리, restore test와 clean recovery가 없다.
   - 보완: 공격에 견디는 backup과 trusted recovery를 검증한다.
-- **sw09_major_exercise_metric_missing**: 정책과 절차만 있고 tabletop, technical drill, recovery exercise와 개선지표가 없다.
-  - 보완: 훈련결과와 MTTD·MTTC·복구성공률을 개선조치로 연결한다.
+- **sw09_major_exercise_metric_missing**: 정책과 절차만 있고 tabletop, technical drill, recovery exercise와 개선지표가 없거나, MTTC를 확장어와 측정 시작·종료 경계 없이 약어로만 나열한다.
+  - 보완: 훈련결과와 MTTD, MTTC(Mean Time to Contain: 탐지 또는 공식 사고 선언부터 확산 경로 차단과 추가 전파 억제 완료까지), 복구성공률을 개선조치로 연결한다.
 
 ### False positive
 
@@ -134,6 +134,9 @@ Online backup 하나로는 destructive attack에 충분하지 않다. Offline �
 - IPS를 inline으로 쓰지 않아도 공정위험 때문에 passive IDS를 선택하고 대응절차를 갖추면 인정한다.
 - Allowlisting이 모든 장치에 적용되지 않아도 지원대상·예외·보완통제가 명확하면 인정한다.
 - MFA를 적용하지 못하는 legacy target은 jump server에서 강제하고 내부권한을 제한하는 설계를 인정한다.
+- 화면 녹화가 없더라도 Engineering Change Audit과 Protocol Transaction Log로 사용자·시간·대상·결과가 충분히 추적되면 원격 활동기록 누락으로 판정하지 않는다.
+- GUI가 없는 장치에서 Command Log와 Session Metadata로 동일 수준의 추적성과 재구성 가능한 Audit Trail을 확보한 경우를 인정한다.
+- MTTC 대신 Mean Time to Contain, Time to Containment, Containment Completion Time 또는 확산 억제 완료시간을 사용해도 측정 시작·종료 경계를 명확히 제시하면 동등 표현으로 인정한다.
 - Patch를 즉시 적용하지 않아도 exploitability, exposure, 시험과 compensating control 근거가 있으면 인정한다.
 - SBOM 형식이나 표준명이 달라도 component·version·dependency와 vulnerability response에 활용하면 인정한다.
 - Removable media를 완전 금지하지 않아도 승인된 operational workflow와 evidence가 있으면 인정한다.
@@ -196,7 +199,7 @@ IT와 OT 사이 직접세션을 줄이기 위해 Industrial DMZ에 historian rel
 
 ### 4. Endpoint·Identity·Remote access
 
-Engineering workstation과 server에는 Application Allowlisting과 secure baseline을 적용한다. 사용자·service·application에는 least privilege를 적용하고 Authentication과 Authorization을 구분한다. Vendor 원격접속은 승인된 time window에 Jump server와 MFA를 거쳐 수행하며 session recording, file transfer 통제와 emergency termination을 적용한다.
+Engineering workstation과 server에는 Application Allowlisting과 secure baseline을 적용한다. 사용자·service·application에는 least privilege를 적용하고 Authentication과 Authorization을 구분한다. Vendor 원격접속은 승인된 time window에 Jump server와 MFA를 거쳐 수행하며, 위험도와 접속방식에 적합한 화면·명령·transaction·engineering change·jump server 기록 중 적절한 수단 또는 조합으로 활동을 추적하고 file transfer 통제와 emergency termination을 적용한다.
 
 ### 5. Patch·Legacy·공급망
 
@@ -212,4 +215,4 @@ Incident response plan에는 운전·안전·보안·vendor의 역할과 decisio
 
 ### 8. Trusted recovery와 지속성
 
-Restore는 incident 종결과 같지 않다. Offline 또는 immutable backup, 분리 credential, clean baseline, integrity check, credential reset과 staged restore를 통해 trusted recovery를 수행한다. Business continuity에는 안전정지, local·manual operation, reduced production과 recovery priority를 포함한다. Tabletop과 technical drill로 MTTD, MTTC, restore success와 미완료 개선조치를 관리한다.
+Restore는 incident 종결과 같지 않다. Offline 또는 immutable backup, 분리 credential, clean baseline, integrity check, credential reset과 staged restore를 통해 trusted recovery를 수행한다. Business continuity에는 안전정지, local·manual operation, reduced production과 recovery priority를 포함한다. Tabletop과 technical drill로 MTTD와 MTTC(Mean Time to Contain)를 관리하며, MTTC의 시작은 탐지 또는 공식 사고 선언, 종료는 확산 경로 차단과 추가 전파 억제 완료로 정의하고 restore success와 미완료 개선조치를 함께 관리한다.

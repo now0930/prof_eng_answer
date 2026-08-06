@@ -499,28 +499,31 @@
     {
       "id": "sw09_secure_remote_session",
       "anchor_id": "sw09_secure_remote_session",
-      "statement": "원격 세션은 암호화, 명시적 승인, 화면·명령 기록, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용해야 한다.",
+      "statement": "원격 접속은 암호화, 명시적 승인, 강한 인증, 최소권한, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용하고, 위험도·접속방식·대상 장치의 기술적 특성에 따라 화면 기록, 명령 기록, protocol transaction log, engineering change audit 또는 jump server session recording 중 적절한 수단이나 조합으로 모든 접속·변경행위를 사용자·시간·대상·결과와 연결하여 재구성 가능한 audit trail을 확보해야 한다.",
       "importance": "core",
       "keywords": [
-        "session recording",
+        "remote activity audit trail",
         "encrypted session",
         "file transfer control",
-        "timeout"
+        "session metadata"
       ],
       "core_terms": [
-        "session recording",
-        "encrypted session",
-        "file transfer control"
+        "remote activity audit trail",
+        "strong authentication",
+        "least privilege",
+        "session metadata"
       ],
       "accepted_explanations": [
-        "세션 전체 수명주기를 통제한다."
+        "화면 녹화가 없더라도 Engineering Change Audit과 Protocol Transaction Log로 사용자·시간·대상·결과가 연결되면 동등한 활동기록으로 인정한다.",
+        "GUI가 없는 장치에서 Command Log와 Session Metadata로 동일 수준의 추적성과 재구성 가능한 Audit Trail을 확보할 수 있다."
       ],
       "rejected_explanations": [
-        "접속 성공 여부만 기록하고 수행행위는 남기지 않는다."
+        "MFA만 적용하면 활동기록은 필요 없다고 본다.",
+        "승인된 원격접속 또는 Vendor 접속은 사후 추적이 불가능해도 된다고 본다."
       ],
       "grading_notes": "OT 사이버보안, 심층방어, Allowlisting, 공급망 보안 및 사고대응에서 secure remote session의 정확성, 적용조건과 운영·안전 연결을 평가한다.",
       "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
-      "claim": "원격 세션은 암호화, 명시적 승인, 화면·명령 기록, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용해야 한다.",
+      "claim": "원격 접속은 암호화, 명시적 승인, 강한 인증, 최소권한, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용하고, 위험도·접속방식·대상 장치의 기술적 특성에 따라 화면 기록, 명령 기록, protocol transaction log, engineering change audit 또는 jump server session recording 중 적절한 수단이나 조합으로 모든 접속·변경행위를 사용자·시간·대상·결과와 연결하여 재구성 가능한 audit trail을 확보해야 한다.",
       "description": "secure remote session의 정확성과 현장 적용조건을 평가한다."
     },
     {
@@ -1040,29 +1043,32 @@
     {
       "id": "sw09_exercise_metrics",
       "anchor_id": "sw09_exercise_metrics",
-      "statement": "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC, recovery success와 overdue action을 개선지표로 관리해야 한다.",
+      "statement": "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.",
       "importance": "important",
       "keywords": [
         "tabletop exercise",
         "technical drill",
         "MTTD",
-        "MTTC",
-        "recovery metric"
+        "MTTC Mean Time to Contain",
+        "Time to Containment"
       ],
       "core_terms": [
         "tabletop exercise",
         "technical drill",
-        "MTTD"
+        "MTTD",
+        "MTTC Mean Time to Contain"
       ],
       "accepted_explanations": [
-        "훈련결과를 개선조치와 지표로 연결한다."
+        "MTTC의 시작점을 탐지 시점 또는 공식 사고 선언 시점, 종료점을 확산 경로 차단과 추가 전파 억제 완료 시점으로 명시한다.",
+        "Mean Time to Contain, Time to Containment, Containment Completion Time과 확산 억제 완료시간은 측정 경계가 명확하면 동등 표현으로 인정한다."
       ],
       "rejected_explanations": [
-        "문서가 있으면 실제 incident 훈련은 필요 없다고 본다."
+        "문서가 있으면 실제 incident 훈련은 필요 없다고 본다.",
+        "MTTC의 확장어와 측정 시작·종료 경계를 설명하지 않고 약어만 나열한다."
       ],
       "grading_notes": "OT 사이버보안, 심층방어, Allowlisting, 공급망 보안 및 사고대응에서 exercise metrics의 정확성, 적용조건과 운영·안전 연결을 평가한다.",
       "source_basis": "IEC 62443-2-1 security program requirements; IEC 62443-3-2 security risk assessment and system under consideration; IEC 62443-3-3 system security requirements and security levels; IEC 62443-4-1 secure product development lifecycle; IEC 62443-4-2 component security requirements; NIST SP 800-82 Rev. 3 Guide to Operational Technology Security; NIST SP 800-53 Rev. 5 security and privacy controls; NIST SP 800-61 incident handling lifecycle; NIST SP 800-161 Rev. 1 cyber supply chain risk management; NIST SP 800-218 Secure Software Development Framework; NIST Cybersecurity Framework 2.0; vendor-neutral OT asset inventory, segmentation, remote access, allowlisting, patch, backup, incident response, recovery and business-continuity practices.",
-      "claim": "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC, recovery success와 overdue action을 개선지표로 관리해야 한다.",
+      "claim": "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.",
       "description": "exercise metrics의 정확성과 현장 적용조건을 평가한다."
     },
     {
@@ -1112,7 +1118,7 @@
     "Remote access는 business need, 승인, time window, source, destination, protocol과 session owner를 제한하고 direct inbound exposure를 피해야 한다.",
     "Jump server는 remote user와 OT target 사이의 관리경로를 집중시키며 hardened host, isolated credential, logging, malware control과 session termination을 제공해야 한다.",
     "MFA는 특히 remote와 privileged access의 account takeover 위험을 줄이지만 target authorization, endpoint trust, session control과 recovery 절차를 대체하지 않는다.",
-    "원격 세션은 암호화, 명시적 승인, 화면·명령 기록, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용해야 한다.",
+    "원격 접속은 암호화, 명시적 승인, 강한 인증, 최소권한, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용하고, 위험도·접속방식·대상 장치의 기술적 특성에 따라 화면 기록, 명령 기록, protocol transaction log, engineering change audit 또는 jump server session recording 중 적절한 수단이나 조합으로 모든 접속·변경행위를 사용자·시간·대상·결과와 연결하여 재구성 가능한 audit trail을 확보해야 한다.",
     "OT patch management는 vulnerability severity뿐 아니라 exploitability, exposure, safety·availability 영향, vendor support, test evidence, outage window와 rollback을 평가하여 우선순위를 정해야 한다.",
     "Vulnerability management는 discovery, validation, risk ranking, remediation·mitigation, exception approval, verification와 closure evidence를 반복 수행해야 한다.",
     "Legacy system이 patch, MFA 또는 modern protocol을 지원하지 못하면 segmentation, allowlisting, access broker, monitoring, physical control와 reduced service 같은 compensating control을 위험기반으로 적용해야 한다.",
@@ -1132,7 +1138,7 @@
     "보안 목적 Backup은 offline 또는 immutable copy, 분리 credential, retention, encryption, malware exposure 관리와 정기 restore test를 포함해야 한다.",
     "Business continuity는 cyber incident 중 안전정지, local control, manual operation, reduced production, alternate communication과 recovery priority를 정의해야 한다.",
     "Cyber response는 SIS·interlock·emergency shutdown의 독립성과 기능을 유지하고 안전담당자 승인 없이 보호기능을 우회하거나 비활성화해서는 안 된다.",
-    "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC, recovery success와 overdue action을 개선지표로 관리해야 한다.",
+    "Tabletop, technical drill과 recovery exercise는 realistic scenario로 역할·의사결정·통신·복구를 시험하고 MTTD, MTTC(Mean Time to Contain: 탐지 시점 또는 조직이 공식적으로 사용하는 사고 선언 시점부터 영향받은 Zone·Account·Remote Session·Network Path 등의 확산 경로가 차단되고 추가 전파가 억제된 시점까지), recovery success와 overdue action을 개선지표로 관리해야 한다.",
     "자산 폐기·교체 시 account, certificate, key, remote path, license, data, backup, supplier access와 inventory record를 제거·갱신하여 잔존 attack path를 없애야 한다."
   ],
   "fatal_wrong_claims": [
