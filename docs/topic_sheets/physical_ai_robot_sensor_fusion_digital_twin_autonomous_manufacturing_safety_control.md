@@ -396,7 +396,7 @@ Planning
 5. OPC UA와 MQTT Protocol의 상호운용성을 설명하시오. → SW-07
 6. PLC Sequence, Interlock, Trip과 Fail-safe Logic을 설명하시오. → SW-02
 7. 일반 Software V-Model과 Configuration Management를 설명하시오. → SW-04
-8. Robot용 Ethernet의 Frame, QoS와 Redundancy Protocol을 설명하시오. → SW-07
+8. Robot 제어망의 QoS, Redundancy와 장애복구 성능을 설명하시오. → SW-08
 
 
 ## Focused Regression

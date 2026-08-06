@@ -300,8 +300,8 @@
       "owner": "SW-04"
     },
     {
-      "question": "Robot용 Ethernet의 Frame, QoS와 Redundancy Protocol을 설명하시오.",
-      "owner": "SW-07"
+      "question": "Robot 제어망의 QoS, Redundancy와 장애복구 성능을 설명하시오.",
+      "owner": "SW-08"
     }
   ]
 }
