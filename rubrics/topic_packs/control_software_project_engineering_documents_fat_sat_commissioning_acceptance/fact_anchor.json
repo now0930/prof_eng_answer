@@ -24,12 +24,11 @@
         "시운전"
       ],
       "accepted_explanations": [
-        "SW-10은 제어 소프트웨어 프로젝트의 타당성·범위·일정·비용, 엔지니어링 문서, FAT·SAT·현장시험, 시운전, 성능시험, 인수와 인계까지의 수행체계를 다룬다.",
-        "프로젝트 수행 · 엔지니어링 문서 · FAT",
-        "프로젝트 수행의 목적과 적용조건을 구분한다."
+        "SW-10은 개발 원리 자체보다 프로젝트가 승인된 범위·문서·시험·현장 실행·인수 증적으로 닫히는 수행체계를 설명한다.",
+        "타당성·범위·일정·비용에서 FAT·SAT·시운전·인계까지의 책임과 승인점을 연결한다."
       ],
       "rejected_explanations": [
-        "프로젝트 수행를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "프로젝트를 문서목록이나 설치작업 하나로 축소하고 범위·승인·시험·인수의 연결 없이 완료로 처리한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -52,12 +51,11 @@
         "현장 검증"
       ],
       "accepted_explanations": [
-        "요구사항·설계·코딩·단위·통합·시스템시험과 일반 V-Model·RTM 체계는 SW-04가 소유하고, SW-10은 프로젝트 산출물과 현장 검증·인수 실행을 소유한다.",
-        "SW-04 경계 · V-Model · 프로젝트 실행",
-        "SW-04 경계의 목적과 적용조건을 구분한다."
+        "SW-04의 개발 lifecycle과 V&V 결과를 SW-10의 FAT·SAT·인수 증거로 활용할 수 있지만 시험단계의 목적과 소유권은 구분한다.",
+        "단위·통합·시스템시험 체계는 SW-04, 프로젝트 현장검증과 계약 인수는 SW-10으로 설명한다."
       ],
       "rejected_explanations": [
-        "SW-04 경계를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "일반 V-Model·단위·통합시험과 FAT·SAT·현장 인수를 같은 단계로 보거나 모두 SW-10이 소유한다고 본다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -80,12 +78,11 @@
         "Logic diagram"
       ],
       "accepted_explanations": [
-        "Interlock·Trip의 실제 상태전이, Latch·Reset과 Fail-safe 동작 논리는 SW-02가 소유하고, SW-10은 Interlock list·Cause & Effect·Logic diagram과 시험 증적을 관리한다.",
-        "SW-02 경계 · Interlock list · Cause & Effect",
-        "SW-02 경계의 목적과 적용조건을 구분한다."
+        "SW-02에서 정의한 Interlock·Trip 실행논리를 SW-10의 Interlock list·Cause & Effect·Logic diagram과 시험 증적으로 추적한다.",
+        "논리 메커니즘과 프로젝트 산출물·시험관리를 구분한다."
       ],
       "rejected_explanations": [
-        "SW-02 경계를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Interlock·Trip 실행 메커니즘과 Interlock list·시험증적을 동일시하여 논리 소유권과 프로젝트 문서 소유권을 혼동한다."
       ],
       "importance": "important",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -108,12 +105,11 @@
         "인수문서"
       ],
       "accepted_explanations": [
-        "Alarm philosophy·Priority·Deadband·Shelving·SOE 운전정보 원리는 SW-03이 소유하고, SW-10은 승인된 Alarm list와 시험·인수 문서를 관리한다.",
-        "SW-03 경계 · Alarm list · 운전정보",
-        "SW-03 경계의 목적과 적용조건을 구분한다."
+        "SW-03의 Alarm·SOE 운전정보 원리를 승인된 Alarm list와 FAT·SAT·인수 문서로 구현·검증한다.",
+        "Alarm 원리와 프로젝트 문서·시험의 소유권을 구분한다."
       ],
       "rejected_explanations": [
-        "SW-03 경계를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Alarm philosophy·Shelving·SOE 원리와 승인 Alarm list·FAT·SAT 문서를 같은 산출물로 본다."
       ],
       "importance": "important",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -138,12 +134,11 @@
         "위험"
       ],
       "accepted_explanations": [
-        "Feasibility 단계는 기술성, 기존 설비 인터페이스, 일정, 비용, 인력, 위험과 기대효과를 평가하여 수행 가능성과 대안을 결정한다.",
-        "Feasibility · 기술성 · 일정",
-        "Feasibility의 목적과 적용조건을 구분한다."
+        "대안별 기술성, 기존 설비 인터페이스, 일정, 비용, 인력, 위험과 기대효과를 비교하여 Go/No-go와 수행방식을 결정한다.",
+        "정의 단계에서는 아직 FAT·SAT 증적을 요구하지 않고 판단 근거와 가정을 명확히 한다."
       ],
       "rejected_explanations": [
-        "Feasibility를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "기존 설비 인터페이스·위험·비용·일정·대안을 평가하지 않고 착수결정을 확정한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -168,12 +163,11 @@
         "baseline"
       ],
       "accepted_explanations": [
-        "Scope는 대상 공정·시스템, 포함·제외 범위, 경계 인터페이스, 산출물, 책임, 수용기준을 정의하고 승인된 baseline으로 관리한다.",
-        "Scope · 포함범위 · 제외범위",
-        "Scope의 목적과 적용조건을 구분한다."
+        "대상 공정·시스템의 포함·제외범위, 인터페이스, 산출물, 책임과 수용기준을 승인 baseline으로 고정한다.",
+        "변경 시 영향분석과 승인으로 Scope baseline을 갱신한다."
       ],
       "rejected_explanations": [
-        "Scope를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "포함·제외범위, 인터페이스, 산출물, 책임과 수용기준 없이 Scope를 구두 합의로만 운영한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -198,12 +192,11 @@
         "SAT"
       ],
       "accepted_explanations": [
-        "Schedule은 설계승인, 구매·제작, 소프트웨어 구현, 시험환경, FAT, 현장설치, SAT, 시운전과 인수의 선후관계 및 critical path를 반영한다.",
-        "Schedule · 선후관계 · critical path",
-        "Schedule의 목적과 적용조건을 구분한다."
+        "설계승인·구매·구현·시험환경·FAT·설치·SAT·시운전·인수의 선후관계와 critical path를 일정에 반영한다.",
+        "승인 지연과 현장 준비조건을 주요 dependency로 관리한다."
       ],
       "rejected_explanations": [
-        "Schedule를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "FAT·설치·SAT·시운전의 dependency와 critical path를 무시하고 독립 일정으로 계획한다."
       ],
       "importance": "important",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -228,12 +221,11 @@
         "일정"
       ],
       "accepted_explanations": [
-        "Cost는 인력·장비·라이선스·시험·현장지원·예비품·교육을 포함하고, 범위변경은 영향분석과 승인 후 예산·일정 baseline에 반영한다.",
-        "Cost · 변경관리 · 영향분석",
-        "Cost의 목적과 적용조건을 구분한다."
+        "인력·장비·라이선스·시험·현장지원·예비품·교육을 포함한 총비용을 산정한다.",
+        "범위변경은 비용·일정 영향분석과 승인 후 baseline에 반영한다."
       ],
       "rejected_explanations": [
-        "Cost를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "현장지원·시험·라이선스·교육 비용을 제외하거나 승인되지 않은 범위변경을 예산·일정에 반영하지 않는다."
       ],
       "importance": "important",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -256,12 +248,11 @@
         "Fail-safe"
       ],
       "accepted_explanations": [
-        "Control philosophy는 운전목표, 제어구조, 운전모드, 자동·수동 전환, Alarm·Interlock 원칙, Fail-safe와 비정상 운전 대응의 상위 기준이다.",
-        "Control philosophy · 운전모드 · 제어구조",
-        "Control philosophy의 목적과 적용조건을 구분한다."
+        "Control philosophy는 운전목표, 제어구조, Mode 전환, Alarm·Interlock 원칙, Fail-safe와 비정상 대응의 상위 기준을 제시한다.",
+        "상세 Boolean 논리나 Tag별 시험절차와 구분한다."
       ],
       "rejected_explanations": [
-        "Control philosophy를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Control philosophy를 Tag별 상세 Logic diagram과 동일시하거나 Mode·Fail-safe·비정상운전의 상위 원칙을 두지 않는다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -286,12 +277,11 @@
         "인수조건"
       ],
       "accepted_explanations": [
-        "URS는 사용자가 필요로 하는 기능, 성능, 운전환경, 규제·품질, 인터페이스와 인수조건을 사용자 관점에서 정의한다.",
-        "URS · 사용자 요구 · 성능",
-        "URS의 목적과 적용조건을 구분한다."
+        "URS는 사용자의 기능·성능·운전환경·규제·인터페이스와 인수조건을 사용자 관점에서 정의한다.",
+        "구현방법보다 사용 목적과 측정 가능한 요구를 중심으로 작성한다."
       ],
       "rejected_explanations": [
-        "URS를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "사용자 목적과 인수조건 없이 구현방법과 장비모델만을 URS로 작성한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -316,12 +306,11 @@
         "출력"
       ],
       "accepted_explanations": [
-        "FRS는 URS를 기능별 입력·처리·출력, 운전모드, Alarm·Interlock, 예외처리와 성능 요구로 구체화한다.",
-        "FRS · 기능요구 · 입력",
-        "FRS의 목적과 적용조건을 구분한다."
+        "FRS는 URS를 기능별 입력·처리·출력, Mode, Alarm·Interlock, 예외응답과 성능 요구로 구체화한다.",
+        "설계수단보다 시스템이 수행해야 할 기능을 기술한다."
       ],
       "rejected_explanations": [
-        "FRS를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "URS를 기능별 입력·처리·출력과 예외응답으로 구체화하지 않고 상세 코드구조만 기술한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -346,12 +335,11 @@
         "인터페이스"
       ],
       "accepted_explanations": [
-        "FDS는 기능 요구를 제어전략, 시퀀스, 화면, 데이터, 인터페이스, 권한과 진단 동작으로 설계 수준에서 정의한다.",
-        "FDS · 제어전략 · 시퀀스",
-        "FDS의 목적과 적용조건을 구분한다."
+        "FDS는 기능요구를 제어전략, Sequence, HMI, 데이터, 인터페이스, 권한과 진단 설계로 변환한다.",
+        "FRS 요구 ID와 SDS·시험 ID로 추적될 수 있어야 한다."
       ],
       "rejected_explanations": [
-        "FDS를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "제어전략·Sequence·화면·인터페이스 설계 없이 기능요구를 그대로 반복하거나 SDS와 동일 문서로 본다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -376,12 +364,11 @@
         "통신"
       ],
       "accepted_explanations": [
-        "SDS는 소프트웨어 모듈, 데이터 구조, 태스크, 통신, I/O 처리, 상태관리와 구현 제약을 상세 수준에서 정의한다.",
-        "SDS · 모듈 · 데이터 구조",
-        "SDS의 목적과 적용조건을 구분한다."
+        "SDS는 모듈, 데이터 구조, Task, 통신, I/O 처리, 상태관리와 구현제약을 코드 작성 가능한 수준으로 정의한다.",
+        "상세 설계단위와 시험케이스의 연결을 유지한다."
       ],
       "rejected_explanations": [
-        "SDS를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "모듈·데이터·Task·통신·I/O 처리와 구현제약 없이 상위 기능설명만을 SDS로 본다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -407,12 +394,11 @@
         "FDS"
       ],
       "accepted_explanations": [
-        "URS→FRS→FDS→SDS→시험명세→시험결과의 식별자와 양방향 추적을 유지하여 누락, 과잉구현과 미시험 요구를 검출한다.",
-        "문서계층 · 추적성 · URS",
-        "문서계층의 목적과 적용조건을 구분한다."
+        "URS→FRS→FDS→SDS→시험명세→시험결과를 식별자로 연결하고 순방향·역방향 추적을 유지한다.",
+        "문서 통합 여부와 무관하게 누락·과잉구현·미시험 요구를 검출할 수 있어야 한다."
       ],
       "rejected_explanations": [
-        "문서계층를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "문서 이름만 나열하고 요구사항에서 설계·시험·결과까지의 순방향·역방향 추적을 두지 않는다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -437,12 +423,11 @@
         "스케일링"
       ],
       "accepted_explanations": [
-        "I/O list는 채널·주소, 신호형식, 범위·단위, 정상·고장값, 절연·전원, 스케일링과 연결 대상을 정의한다.",
-        "I/O list · 채널 · 신호형식",
-        "I/O list의 목적과 적용조건을 구분한다."
+        "I/O list는 채널·주소, 신호형식, 범위·단위, 정상·고장값, 절연·전원, 스케일링과 연결대상을 관리한다.",
+        "현장배선·제어기 I/O·시험기준의 공통 기준으로 사용한다."
       ],
       "rejected_explanations": [
-        "I/O list를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Tag 명칭만 기록하고 채널·신호형식·범위·단위·고장값·스케일링·연결정보를 관리하지 않는다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -467,12 +452,11 @@
         "소프트웨어 객체"
       ],
       "accepted_explanations": [
-        "Tag list는 설비·계기·소프트웨어 객체의 고유 Tag, 명칭, 위치, 서비스와 관련 문서 식별자를 관리한다.",
-        "Tag list · Tag · 설비",
-        "Tag list의 목적과 적용조건을 구분한다."
+        "Tag list는 설비·계기·소프트웨어 객체의 고유 식별자, 명칭, 위치, 서비스와 관련 문서 링크를 관리한다.",
+        "I/O 채널정보와 객체 식별정보를 구분한다."
       ],
       "rejected_explanations": [
-        "Tag list를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "I/O 주소표를 Tag list와 완전히 동일시하거나 객체의 고유식별·서비스·위치·관련문서 정보를 관리하지 않는다."
       ],
       "importance": "important",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -481,7 +465,7 @@
     {
       "id": "sw10_alarm_list",
       "anchor_id": "sw10_alarm_list",
-      "statement": "Alarm list는 Tag, 조건, 설정값, 우선순위, 지연·Deadband, 메시지, 운전자 조치와 시험기준을 승인 상태로 관리한다.",
+      "statement": "Alarm list는 Tag, 조건, 설정값, 우선순위, 지연·Deadband, 메시지와 운전자 조치를 직접 기록하거나 식별자로 연결된 승인 문서에서 관리하고 시험기준까지 추적한다.",
       "keywords": [
         "Alarm list",
         "설정값",
@@ -497,12 +481,11 @@
         "운전자 조치"
       ],
       "accepted_explanations": [
-        "Alarm list는 Tag, 조건, 설정값, 우선순위, 지연·Deadband, 메시지, 운전자 조치와 시험기준을 승인 상태로 관리한다.",
-        "Alarm list · 설정값 · 우선순위",
-        "Alarm list의 목적과 적용조건을 구분한다."
+        "Alarm list는 Tag, 조건, 설정값, 우선순위, Delay·Deadband, 메시지와 운전자 조치를 직접 기록하거나 식별자로 연결된 승인 문서에서 관리한다.",
+        "Alarm philosophy·rationalization 근거와 시험기준까지 추적한다."
       ],
       "rejected_explanations": [
-        "Alarm list를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Alarm 조건·설정·우선순위·운전자 조치가 어느 승인 문서에도 없거나 식별자 추적 없이 비공식 파일에 분산한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -511,7 +494,7 @@
     {
       "id": "sw10_interlock_list",
       "anchor_id": "sw10_interlock_list",
-      "statement": "Interlock list는 원인, 허용조건, 차단대상, 동작, Latch·Reset, Bypass 권한, Fail-safe와 시험항목을 정의한다.",
+      "statement": "Interlock list는 원인, 허용조건, 차단대상, 동작과 Latch·Reset을 정의하고 Bypass 권한, Fail-safe와 시험정보는 해당 문서 또는 식별자로 연결된 승인 문서에서 관리할 수 있다.",
       "keywords": [
         "Interlock list",
         "원인",
@@ -528,12 +511,11 @@
         "Reset"
       ],
       "accepted_explanations": [
-        "Interlock list는 원인, 허용조건, 차단대상, 동작, Latch·Reset, Bypass 권한, Fail-safe와 시험항목을 정의한다.",
-        "Interlock list · 원인 · 차단대상",
-        "Interlock list의 목적과 적용조건을 구분한다."
+        "Interlock list는 원인, 허용조건, 차단대상, 동작과 Latch·Reset을 기록하고 Bypass·Fail-safe·시험정보는 해당 문서 또는 식별자로 연결된 승인 문서에서 관리할 수 있다.",
+        "실행논리·Cause & Effect·시험명세 사이의 소유권과 추적성을 유지한다."
       ],
       "rejected_explanations": [
-        "Interlock list를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "원인·차단대상·동작·Latch·Reset과 관련 Bypass·Fail-safe·시험정보가 어느 승인 문서에도 추적되지 않는다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -542,7 +524,7 @@
     {
       "id": "sw10_cause_effect",
       "anchor_id": "sw10_cause_effect",
-      "statement": "Cause & Effect는 각 원인 신호와 Alarm·Trip·Shutdown·출력 동작의 관계, 지연, Voting, Latch·Reset과 우선순위를 행렬로 표현한다.",
+      "statement": "Cause & Effect는 각 원인 신호와 Alarm·Trip·Shutdown·출력동작의 관계를 행렬로 표현하고 지연, Voting, Latch·Reset과 우선순위는 행렬 또는 식별자로 연결된 승인 문서에서 관리할 수 있다.",
       "keywords": [
         "Cause & Effect",
         "원인",
@@ -559,12 +541,11 @@
         "Shutdown"
       ],
       "accepted_explanations": [
-        "Cause & Effect는 각 원인 신호와 Alarm·Trip·Shutdown·출력 동작의 관계, 지연, Voting, Latch·Reset과 우선순위를 행렬로 표현한다.",
-        "Cause & Effect · 원인 · 결과",
-        "Cause & Effect의 목적과 적용조건을 구분한다."
+        "Cause & Effect는 원인과 Alarm·Trip·Shutdown·출력동작의 관계를 행렬로 나타내며 상세 지연·Voting·Latch·Reset·우선순위는 행렬 또는 식별자로 연결된 승인 문서에서 관리할 수 있다.",
+        "행렬과 Logic diagram·Interlock narrative·시험명세의 추적성을 유지한다."
       ],
       "rejected_explanations": [
-        "Cause & Effect를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Cause & Effect를 Alarm 이름만 나열한 목록으로 보거나 상세 지연·Voting·Latch·Reset 자료와 식별자 연결을 두지 않는다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -589,12 +570,11 @@
         "Feedback"
       ],
       "accepted_explanations": [
-        "Logic diagram은 Boolean 조건, Sequence·State, Timer, Interlock, 명령·Feedback과 예외경로를 구현 가능한 형태로 나타낸다.",
-        "Logic diagram · Boolean · Sequence",
-        "Logic diagram의 목적과 적용조건을 구분한다."
+        "Logic diagram은 Boolean 조건, Sequence·State, Timer, Interlock, Command·Feedback과 예외경로를 구현 가능한 형태로 표현한다.",
+        "Cause & Effect의 설계의도를 상세 실행논리로 구체화한다."
       ],
       "rejected_explanations": [
-        "Logic diagram를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Boolean 조건·State·Timer·Command·Feedback·예외경로 없이 화면 순서도만을 실행 가능한 Logic diagram으로 본다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -619,12 +599,11 @@
         "증적"
       ],
       "accepted_explanations": [
-        "Test specification은 시험목적, 대상 baseline, 사전조건, 입력·절차, 예상결과, 허용오차, 판정기준, 증적과 결함처리를 정의한다.",
-        "Test specification · 사전조건 · 예상결과",
-        "Test specification의 목적과 적용조건을 구분한다."
+        "시험 전 대상 baseline, 사전조건, 입력·절차, 예상결과, 허용오차, 판정기준, 증적과 결함처리를 승인한다.",
+        "결과에 맞춰 예상결과를 사후 변경하지 않는다."
       ],
       "rejected_explanations": [
-        "Test specification를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "시험 전 baseline·사전조건·예상결과·허용오차·판정기준을 승인하지 않고 시험자 경험으로 합격을 결정한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -649,12 +628,11 @@
         "문서 baseline"
       ],
       "accepted_explanations": [
-        "FAT는 공급자 또는 통제된 시험환경에서 승인된 하드웨어·소프트웨어 구성과 문서 baseline을 대상으로 기능, 시퀀스, HMI, Alarm·Interlock, 통신과 복구를 검증한다.",
-        "FAT · 공급자 시험 · 통제환경",
-        "FAT의 목적과 적용조건을 구분한다."
+        "FAT는 공급자 또는 통제환경에서 승인 HW·SW·문서 baseline의 기능, Sequence, HMI, Alarm·Interlock, 통신과 복구를 시험한다.",
+        "Simulation과 I/O 모사를 사용하되 실제 현장조건의 한계를 기록한다."
       ],
       "rejected_explanations": [
-        "FAT를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "FAT를 문서검토만으로 끝내거나 실제 현장 배선·설치환경까지 모두 검증하는 시험이라고 본다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -677,12 +655,11 @@
         "현장 배선"
       ],
       "accepted_explanations": [
-        "FAT는 Simulation과 I/O 모사를 활용할 수 있으나 실제 현장 배선, 설치환경, 공정 부하와 최종 인터페이스를 완전히 증명하지 못한다.",
-        "FAT 한계 · Simulation · I/O 모사",
-        "FAT 한계의 목적과 적용조건을 구분한다."
+        "FAT는 현장 설치 전에 많은 기능결함을 찾지만 실제 배선·전원·설치환경·공정부하·최종 인터페이스를 완전히 증명하지 못한다.",
+        "남은 현장 위험은 SAT·Loop·통합시험으로 이어간다."
       ],
       "rejected_explanations": [
-        "FAT 한계를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Simulation과 I/O 모사만으로 실제 배선·전원·공정부하·최종 인터페이스까지 완전히 증명된다고 본다."
       ],
       "importance": "important",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -707,12 +684,11 @@
         "설비 인터페이스"
       ],
       "accepted_explanations": [
-        "SAT는 현장 설치 후 실제 배선·전원·네트워크·설비 인터페이스와 설치조건에서 기능, 통신, Alarm·Interlock과 운전 연계를 확인한다.",
-        "SAT · 현장시험 · 실제 배선",
-        "SAT의 목적과 적용조건을 구분한다."
+        "SAT는 설치 후 실제 현장 배선·전원·네트워크·설비 인터페이스와 운전조건에서 기능과 연동을 확인한다.",
+        "통제환경 FAT로 확인할 수 없는 설치·인터페이스 결함을 검출한다."
       ],
       "rejected_explanations": [
-        "SAT를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "통제된 공급자 시험만으로 실제 현장 설치·배선·네트워크·설비 인터페이스 검증이 충분하다고 본다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -735,12 +711,11 @@
         "상호보완"
       ],
       "accepted_explanations": [
-        "FAT와 SAT는 중복 대체 관계가 아니라 시험환경과 검출결함이 다른 상호보완 단계이며 FAT 합격이 SAT 생략 근거가 되지 않는다.",
-        "FAT SAT 관계 · 시험환경 · 검출결함",
-        "FAT SAT 관계의 목적과 적용조건을 구분한다."
+        "FAT와 SAT는 일부 기능항목이 중복될 수 있으나 환경과 검출결함이 다른 상호보완 단계이다.",
+        "FAT 합격을 SAT 생략 근거로 사용하지 않는다."
       ],
       "rejected_explanations": [
-        "FAT SAT 관계를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "FAT와 SAT를 완전히 같은 시험으로 보거나 FAT 합격을 이유로 SAT를 생략한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -749,7 +724,7 @@
     {
       "id": "sw10_loop_test",
       "anchor_id": "sw10_loop_test",
-      "statement": "Loop test는 현장 센서·배선·I/O·스케일링·제어기·HMI 표시와 최종 요소까지 신호경로의 방향, 범위와 동작을 종단 간 확인한다.",
+      "statement": "Loop test는 해당 Loop의 현장 입력 또는 출력 종단에서 배선·I/O·스케일링·제어기·HMI까지 신호의 방향, 범위와 동작을 종단 간 확인한다. 폐루프 제어 Loop는 센서부터 제어기와 최종요소까지 확인하며, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
       "keywords": [
         "Loop test",
         "센서",
@@ -766,12 +741,11 @@
         "HMI"
       ],
       "accepted_explanations": [
-        "Loop test는 현장 센서·배선·I/O·스케일링·제어기·HMI 표시와 최종 요소까지 신호경로의 방향, 범위와 동작을 종단 간 확인한다.",
-        "Loop test · 센서 · 배선",
-        "Loop test의 목적과 적용조건을 구분한다."
+        "Loop test는 해당 Loop의 현장 입력 또는 출력 종단에서 배선·I/O·스케일링·제어기·HMI까지 신호의 방향, 범위와 동작을 종단 간 확인한다.",
+        "폐루프 제어 Loop는 센서부터 제어기와 최종요소까지 확인하고, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다."
       ],
       "rejected_explanations": [
-        "Loop test를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Loop test를 HMI 화면의 값만 확인하는 시험으로 축소하거나 해당 Loop의 현장 입력·출력 종단을 확인하지 않는다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -796,12 +770,11 @@
         "시간동기"
       ],
       "accepted_explanations": [
-        "Site integration test는 DCS·PLC·SIS·패키지 설비·상위시스템 간 데이터, 명령, Handshake, 시간동기, 장애복구와 운전 시나리오를 확인한다.",
-        "Site integration test · DCS · PLC",
-        "Site integration test의 목적과 적용조건을 구분한다."
+        "Site integration test는 DCS·PLC·SIS·패키지·상위시스템 사이의 데이터, 명령, Handshake, 시간동기, 장애복구와 운전 시나리오를 확인한다.",
+        "개별 장비 시험과 시스템 간 연동시험을 구분한다."
       ],
       "rejected_explanations": [
-        "Site integration test를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "개별 장비 정상만 확인하고 시스템 간 데이터·명령·Handshake·시간동기·장애복구 시험을 생략한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -826,12 +799,11 @@
         "부하시험"
       ],
       "accepted_explanations": [
-        "Commissioning은 안전조건과 승인된 절차 아래 Energization, 정적점검, Loop·기능시험, 단계별 기동, Tuning, 부하시험과 안정화 순으로 수행한다.",
-        "Commissioning · Energization · 단계별 기동",
-        "Commissioning의 목적과 적용조건을 구분한다."
+        "Commissioning은 안전조건과 승인절차 아래 Energization, 정적점검, Loop·기능시험, 단계기동, Tuning, 부하시험과 안정화 순으로 진행한다.",
+        "각 단계의 선행조건과 승인점을 확인한 뒤 다음 단계로 이동한다."
       ],
       "rejected_explanations": [
-        "Commissioning를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "안전허가·선행점검 없이 Energization과 부하시험을 먼저 수행하거나 단계별 승인 없이 일괄 기동한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -856,12 +828,11 @@
         "가용성"
       ],
       "accepted_explanations": [
-        "Performance test는 처리량, 품질, 제어편차, 응답시간, 가용성, Alarm 부하 등 계약 성능을 정의된 조건·기간·측정방법과 허용기준으로 검증한다.",
-        "Performance test · 처리량 · 제어편차",
-        "Performance test의 목적과 적용조건을 구분한다."
+        "Performance test는 정의된 운전조건·기간·측정방법으로 처리량, 품질, 제어편차, 응답시간, 가용성 등 계약성능을 정량 검증한다.",
+        "사전 허용기준과 예외·재시험 조건을 적용한다."
       ],
       "rejected_explanations": [
-        "Performance test를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "정의된 조건·기간·측정방법·허용기준 없이 정상 동작 여부만으로 계약성능을 통과시킨다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -886,12 +857,11 @@
         "교육"
       ],
       "accepted_explanations": [
-        "Acceptance는 승인된 범위와 요구사항, FAT·SAT·시운전·성능시험 결과, 문서, 교육, 예비품과 잔여 Punch 조건을 종합하여 계약상 수락을 결정한다.",
-        "Acceptance · 수용기준 · 시험결과",
-        "Acceptance의 목적과 적용조건을 구분한다."
+        "Acceptance는 승인 Scope·요구사항, FAT·SAT·시운전·성능 결과, 문서, 교육, 예비품과 Punch 조건을 종합한 계약상 수락결정이다.",
+        "설치완료나 단일 시험 합격과 동일시하지 않는다."
       ],
       "rejected_explanations": [
-        "Acceptance를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "설치완료 또는 FAT 합격만으로 문서·SAT·성능·교육·Punch 조건과 무관하게 자동 인수된다고 본다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -916,12 +886,11 @@
         "closure"
       ],
       "accepted_explanations": [
-        "Punch list는 결함·미완료 항목을 안전·운전 영향과 인수조건에 따라 등급화하고 책임자, 목표일, 임시조치, 재시험과 closure 증적을 관리한다.",
-        "Punch list · 등급 · 책임자",
-        "Punch list의 목적과 적용조건을 구분한다."
+        "Punch는 안전·운전·계약 영향으로 등급화하고 책임자, 목표일, 임시조치, 재시험과 closure 증적을 관리한다.",
+        "조건부 인수 시 허용범위·승인·기한을 명확히 한다."
       ],
       "rejected_explanations": [
-        "Punch list를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "Punch의 영향등급·책임·기한·임시조치·재시험·closure 없이 인수 후 무기한 미완료로 둔다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -946,12 +915,11 @@
         "시험증적"
       ],
       "accepted_explanations": [
-        "As-built와 Handover는 최종 설치·설정·버전·배선·Logic·목록, 백업·복구절차, 시험증적, 매뉴얼, 교육과 유지보수 정보를 실제 상태와 일치시켜 인계한다.",
-        "As-built · Handover · 최종 버전",
-        "As-built의 목적과 적용조건을 구분한다."
+        "As-built는 최종 설치·배선·Logic·설정·버전과 일치해야 하며 백업·복구절차, 시험증적, 매뉴얼, 교육과 유지보수 정보를 인계한다.",
+        "최초 설계본이 아니라 승인 변경이 반영된 실제 상태를 전달한다."
       ],
       "rejected_explanations": [
-        "As-built를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "최초 설계본을 As-built로 제출하거나 최종 설정·버전·배선·백업·복구·교육정보를 인계하지 않는다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -976,12 +944,11 @@
         "백업 복구"
       ],
       "accepted_explanations": [
-        "프로젝트 전 과정에서 하드웨어·소프트웨어·Firmware·라이브러리·설정·문서 baseline과 백업을 식별하고 배포·복구 가능성을 확인한다.",
-        "구성관리 · 버전 · Firmware",
-        "구성관리의 목적과 적용조건을 구분한다."
+        "프로젝트 전 과정의 HW·SW·Firmware·library·설정·문서 baseline과 백업을 식별한다.",
+        "복원시험 또는 검증된 절차로 배포·복구 가능성을 확인한다."
       ],
       "rejected_explanations": [
-        "구성관리를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "대상 버전과 설정을 식별하지 않은 단일 백업파일만 보관하고 복구 가능성을 확인하지 않는다."
       ],
       "importance": "important",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -1006,12 +973,11 @@
         "승인"
       ],
       "accepted_explanations": [
-        "FAT 이후 변경과 Punch 수정은 영향분석, 승인, 문서·baseline 갱신, 선택된 회귀시험, 결과 승인과 closure까지 폐루프로 관리한다.",
-        "변경관리 · Punch 수정 · 영향분석",
-        "변경관리의 목적과 적용조건을 구분한다."
+        "FAT 이후 변경과 Punch 수정은 영향분석, 승인, 문서·baseline 갱신, 선택 회귀·현장 재시험, 결과승인과 closure로 닫는다.",
+        "변경된 산출물과 시험증적을 추적 가능하게 연결한다."
       ],
       "rejected_explanations": [
-        "변경관리를 다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다."
+        "FAT 이후 변경을 영향분석·승인·문서갱신·회귀·현장 재시험 없이 현장에 직접 반영한다."
       ],
       "importance": "must",
       "source_basis": "일반 산업 계측제어 프로젝트 엔지니어링, FAT·SAT·시운전 및 인수 실무 원칙",
@@ -1071,7 +1037,7 @@
       "wrong_claim": "Loop test는 HMI 화면의 값만 확인하면 완료된다.",
       "message": "Loop test는 HMI 화면의 값만 확인하면 완료된다.",
       "description": "명시적 반대 주장만 fatal 후보로 본다. Loop test는 센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지 종단 간 신호경로를 확인한다.",
-      "correct_rule": "Loop test는 센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지 종단 간 신호경로를 확인한다.",
+      "correct_rule": "Loop test는 해당 Loop의 현장 입력 또는 출력 종단까지 신호경로를 확인한다. 폐루프 제어 Loop는 센서·배선·I/O·제어기·HMI와 최종요소까지 확인하고, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
       "correction": "Loop test는 센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지 종단 간 신호경로를 확인한다.",
       "affected_layers": [
         "C",
@@ -1263,18 +1229,19 @@
   "safe_expressions": [
     "FAT와 SAT는 환경과 검출결함이 다른 상호보완 시험이다.",
     "FAT의 Simulation과 I/O 모사는 현장 설치조건 검증을 대체하지 않는다.",
-    "Loop test는 센서에서 최종 요소까지 종단 간 신호경로를 확인한다.",
+    "Loop test는 해당 Loop의 현장 입력 또는 출력 종단까지 확인하며 폐루프 제어 Loop는 센서부터 최종요소까지 확인한다.",
     "Commissioning은 안전조건과 선행점검 완료 후 단계적으로 수행한다.",
     "Acceptance는 설치완료가 아니라 요구사항·시험·성능·문서·교육과 Punch 조건의 종합 승인이다.",
     "As-built는 승인된 최종 설치와 버전을 반영한다.",
     "URS·FRS·FDS·SDS는 추상화 수준이 다르고 추적성으로 연결된다.",
-    "Cause & Effect는 원인과 Alarm·Trip·Shutdown·출력의 관계를 정의한다.",
+    "Cause & Effect의 상세 속성은 행렬 또는 식별자로 연결된 승인 문서에서 관리할 수 있으나 추적성과 승인은 유지한다.",
     "FAT 이후 변경은 영향분석과 재시험을 거친다.",
     "일반 V-Model은 SW-04, 현장 프로젝트 인수는 SW-10의 소유범위이다."
   ],
   "revision_notes": [
     "SW-10 프로젝트 수행과 엔지니어링 문서의 ownership을 정의했다.",
-    "FAT·SAT·Loop·현장통합·시운전·성능시험·인수의 차이와 연결을 반영했다."
+    "FAT·SAT·Loop·현장통합·시운전·성능시험·인수의 차이와 연결을 반영했다.",
+    "2026-08-07 LLM 의미 감사 수리: 34개 accepted/rejected 설명, Loop 범위와 분산 승인문서 추적성을 교정했다."
   ],
   "topic_label": "SW-10 제어 SW 프로젝트·FAT·SAT·시운전·인수",
   "core_facts": [
@@ -1294,16 +1261,16 @@
     "URS→FRS→FDS→SDS→시험명세→시험결과의 식별자와 양방향 추적을 유지하여 누락, 과잉구현과 미시험 요구를 검출한다.",
     "I/O list는 채널·주소, 신호형식, 범위·단위, 정상·고장값, 절연·전원, 스케일링과 연결 대상을 정의한다.",
     "Tag list는 설비·계기·소프트웨어 객체의 고유 Tag, 명칭, 위치, 서비스와 관련 문서 식별자를 관리한다.",
-    "Alarm list는 Tag, 조건, 설정값, 우선순위, 지연·Deadband, 메시지, 운전자 조치와 시험기준을 승인 상태로 관리한다.",
-    "Interlock list는 원인, 허용조건, 차단대상, 동작, Latch·Reset, Bypass 권한, Fail-safe와 시험항목을 정의한다.",
-    "Cause & Effect는 각 원인 신호와 Alarm·Trip·Shutdown·출력 동작의 관계, 지연, Voting, Latch·Reset과 우선순위를 행렬로 표현한다.",
+    "Alarm list는 Tag, 조건, 설정값, 우선순위, 지연·Deadband, 메시지와 운전자 조치를 직접 기록하거나 식별자로 연결된 승인 문서에서 관리하고 시험기준까지 추적한다.",
+    "Interlock list는 원인, 허용조건, 차단대상, 동작과 Latch·Reset을 정의하고 Bypass 권한, Fail-safe와 시험정보는 해당 문서 또는 식별자로 연결된 승인 문서에서 관리할 수 있다.",
+    "Cause & Effect는 각 원인 신호와 Alarm·Trip·Shutdown·출력동작의 관계를 행렬로 표현하고 지연, Voting, Latch·Reset과 우선순위는 행렬 또는 식별자로 연결된 승인 문서에서 관리할 수 있다.",
     "Logic diagram은 Boolean 조건, Sequence·State, Timer, Interlock, 명령·Feedback과 예외경로를 구현 가능한 형태로 나타낸다.",
     "Test specification은 시험목적, 대상 baseline, 사전조건, 입력·절차, 예상결과, 허용오차, 판정기준, 증적과 결함처리를 정의한다.",
     "FAT는 공급자 또는 통제된 시험환경에서 승인된 하드웨어·소프트웨어 구성과 문서 baseline을 대상으로 기능, 시퀀스, HMI, Alarm·Interlock, 통신과 복구를 검증한다.",
     "FAT는 Simulation과 I/O 모사를 활용할 수 있으나 실제 현장 배선, 설치환경, 공정 부하와 최종 인터페이스를 완전히 증명하지 못한다.",
     "SAT는 현장 설치 후 실제 배선·전원·네트워크·설비 인터페이스와 설치조건에서 기능, 통신, Alarm·Interlock과 운전 연계를 확인한다.",
     "FAT와 SAT는 중복 대체 관계가 아니라 시험환경과 검출결함이 다른 상호보완 단계이며 FAT 합격이 SAT 생략 근거가 되지 않는다.",
-    "Loop test는 현장 센서·배선·I/O·스케일링·제어기·HMI 표시와 최종 요소까지 신호경로의 방향, 범위와 동작을 종단 간 확인한다.",
+    "Loop test는 해당 Loop의 현장 입력 또는 출력 종단에서 배선·I/O·스케일링·제어기·HMI까지 신호의 방향, 범위와 동작을 종단 간 확인한다. 폐루프 제어 Loop는 센서부터 제어기와 최종요소까지 확인하며, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
     "Site integration test는 DCS·PLC·SIS·패키지 설비·상위시스템 간 데이터, 명령, Handshake, 시간동기, 장애복구와 운전 시나리오를 확인한다.",
     "Commissioning은 안전조건과 승인된 절차 아래 Energization, 정적점검, Loop·기능시험, 단계별 기동, Tuning, 부하시험과 안정화 순으로 수행한다.",
     "Performance test는 처리량, 품질, 제어편차, 응답시간, 가용성, Alarm 부하 등 계약 성능을 정의된 조건·기간·측정방법과 허용기준으로 검증한다.",

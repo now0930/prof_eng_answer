@@ -67,7 +67,11 @@ class ProjectRelationshipTests(unittest.TestCase):
     def test_fat_sat_distinct(self):
         self.assertIn("통제",self.by["sw10_fat"]); self.assertIn("현장",self.by["sw10_sat"]); self.assertIn("생략",self.by["sw10_fat_sat_relation"])
     def test_loop_is_end_to_end(self):
-        text=self.by["sw10_loop_test"]; self.assertIn("센서",text); self.assertIn("최종 요소",text); self.assertIn("종단 간",text)
+        text=self.by["sw10_loop_test"]
+        self.assertIn("현장 입력 또는 출력 종단",text)
+        self.assertIn("폐루프 제어 Loop",text)
+        self.assertIn("최종요소가 없는 정보·감시 Loop",text)
+        self.assertIn("종단 간",text)
     def test_site_integration_has_handshake_time(self):
         text=self.by["sw10_site_integration_test"]; self.assertIn("Handshake",text); self.assertIn("시간동기",text); self.assertIn("장애복구",text)
     def test_commissioning_sequence_has_safety(self):
@@ -101,9 +105,43 @@ class ContentQualityTests(unittest.TestCase):
     def test_alarm_interlock_document_boundary(self):
         text=load("fact_anchor.json")["core_facts"]; joined=" ".join(text); self.assertIn("SW-03",joined); self.assertIn("SW-02",joined)
 
+
+class SemanticAuditRepairTests(unittest.TestCase):
+    def setUp(self):
+        self.fact = load("fact_anchor.json")
+        self.logic = load("logic_check.json")
+        self.by = {item["id"]: item for item in self.fact["anchors"]}
+
+    def test_anchor_explanations_are_stage_specific(self):
+        accepted = [tuple(item["accepted_explanations"]) for item in self.fact["anchors"]]
+        rejected = [tuple(item["rejected_explanations"]) for item in self.fact["anchors"]]
+        self.assertEqual(len(set(accepted)), 34)
+        self.assertEqual(len(set(rejected)), 34)
+        joined = " ".join(value for item in self.fact["anchors"] for value in item["rejected_explanations"])
+        self.assertNotIn("다른 단계나 문서와 동일한 것으로 간주하거나 승인·시험 증적 없이 완료로 처리한다", joined)
+
+    def test_definition_anchors_do_not_require_test_evidence(self):
+        feasibility = " ".join(self.by["sw10_feasibility"]["accepted_explanations"])
+        scope = " ".join(self.by["sw10_scope_baseline"]["accepted_explanations"])
+        self.assertIn("아직 FAT·SAT 증적을 요구하지 않고", feasibility)
+        self.assertIn("포함·제외범위", scope)
+
+    def test_loop_test_protects_monitoring_loop_boundary(self):
+        text = self.by["sw10_loop_test"]["statement"]
+        self.assertIn("최종요소가 없는 정보·감시 Loop", text)
+        self.assertIn("해당 입력 종단", text)
+        cautions = " ".join(self.logic["llm_profile"]["false_positive_cautions"])
+        self.assertIn("정보·감시 Loop", cautions)
+
+    def test_distributed_approved_documents_are_allowed(self):
+        for anchor_id in ("sw10_alarm_list", "sw10_interlock_list", "sw10_cause_effect"):
+            text = self.by[anchor_id]["statement"]
+            self.assertIn("식별자로 연결된 승인 문서", text)
+        self.assertIn("추적성", " ".join(self.by["sw10_interlock_list"]["accepted_explanations"]))
+
 if __name__ == "__main__":
     suite=unittest.defaultTestLoader.loadTestsFromModule(sys.modules[__name__])
     count=suite.countTestCases(); print(f"SW10_FOCUSED_TEST_COUNT={count}")
-    if count != 29: raise SystemExit(f"expected 29, got {count}")
+    if count != 33: raise SystemExit(f"expected 33, got {count}")
     result=unittest.TextTestRunner(verbosity=2).run(suite)
     raise SystemExit(0 if result.wasSuccessful() else 1)

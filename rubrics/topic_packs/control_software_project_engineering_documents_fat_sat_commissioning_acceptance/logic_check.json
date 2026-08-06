@@ -88,14 +88,14 @@
         "id": "sw10_fatal_loop_screen_only",
         "severity": "fatal",
         "message": "Loop test는 HMI 화면의 값만 확인하면 완료된다.",
-        "description": "명시적 반대 주장만 fatal 후보로 본다. Loop test는 센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지 종단 간 신호경로를 확인한다.",
+        "description": "명시적 반대 주장만 검출한다. Loop test는 해당 Loop의 현장 입력 또는 출력 종단까지 신호경로를 확인한다. 폐루프 제어 Loop는 센서·배선·I/O·제어기·HMI와 최종요소까지 확인하고, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
         "wrong_patterns": [
           "(?im)^\\s*(?:[-*•]\\s*)?Loop\\ test는\\ HMI\\ 화면의\\ 값만\\ 확인하면\\ 완료된다\\.\\s*[.!]?\\s*$"
         ],
         "examples_or_patterns": [
           "Loop test는 HMI 화면의 값만 확인하면 완료된다."
         ],
-        "correct_rule": "Loop test는 센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지 종단 간 신호경로를 확인한다.",
+        "correct_rule": "Loop test는 해당 Loop의 현장 입력 또는 출력 종단까지 신호경로를 확인한다. 폐루프 제어 Loop는 센서·배선·I/O·제어기·HMI와 최종요소까지 확인하고, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
         "affected_layers": [
           "C",
           "D"
@@ -517,17 +517,17 @@
       },
       {
         "id": "sw10_alarm_list",
-        "correct_rule": "Alarm list는 Tag, 조건, 설정값, 우선순위, 지연·Deadband, 메시지, 운전자 조치와 시험기준을 승인 상태로 관리한다.",
+        "correct_rule": "Alarm list는 Tag, 조건, 설정값, 우선순위, 지연·Deadband, 메시지와 운전자 조치를 직접 기록하거나 식별자로 연결된 승인 문서에서 관리하고 시험기준까지 추적한다.",
         "fatal_if_opposite": true
       },
       {
         "id": "sw10_interlock_list",
-        "correct_rule": "Interlock list는 원인, 허용조건, 차단대상, 동작, Latch·Reset, Bypass 권한, Fail-safe와 시험항목을 정의한다.",
+        "correct_rule": "Interlock list는 원인, 허용조건, 차단대상, 동작과 Latch·Reset을 정의하고 Bypass 권한, Fail-safe와 시험정보는 해당 문서 또는 식별자로 연결된 승인 문서에서 관리할 수 있다.",
         "fatal_if_opposite": true
       },
       {
         "id": "sw10_cause_effect",
-        "correct_rule": "Cause & Effect는 각 원인 신호와 Alarm·Trip·Shutdown·출력 동작의 관계, 지연, Voting, Latch·Reset과 우선순위를 행렬로 표현한다.",
+        "correct_rule": "Cause & Effect는 각 원인 신호와 Alarm·Trip·Shutdown·출력동작의 관계를 행렬로 표현하고 지연, Voting, Latch·Reset과 우선순위는 행렬 또는 식별자로 연결된 승인 문서에서 관리할 수 있다.",
         "fatal_if_opposite": true
       },
       {
@@ -562,7 +562,7 @@
       },
       {
         "id": "sw10_loop_test",
-        "correct_rule": "Loop test는 현장 센서·배선·I/O·스케일링·제어기·HMI 표시와 최종 요소까지 신호경로의 방향, 범위와 동작을 종단 간 확인한다.",
+        "correct_rule": "Loop test는 해당 Loop의 현장 입력 또는 출력 종단에서 배선·I/O·스케일링·제어기·HMI까지 신호의 방향, 범위와 동작을 종단 간 확인한다. 폐루프 제어 Loop는 센서부터 제어기와 최종요소까지 확인하며, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
         "fatal_if_opposite": true
       },
       {
@@ -644,7 +644,7 @@
         "id": "sw10_fatal_loop_screen_only",
         "severity": "fatal",
         "wrong_claim": "Loop test는 HMI 화면의 값만 확인하면 완료된다.",
-        "correct_rule": "Loop test는 센서부터 배선·I/O·스케일링·제어기·HMI·최종 요소까지 종단 간 신호경로를 확인한다.",
+        "correct_rule": "Loop test는 해당 Loop의 현장 입력 또는 출력 종단까지 신호경로를 확인한다. 폐루프 제어 Loop는 센서·배선·I/O·제어기·HMI와 최종요소까지 확인하고, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
         "affected_layers": [
           "C",
           "D"
@@ -911,7 +911,7 @@
       "조건부 인수 자체는 오류가 아니며 Punch 등급·책임·기한·승인이 없을 때 부족으로 본다.",
       "Simulation을 FAT에 사용하는 것은 허용되며 실제 현장조건을 완전히 대체한다고 할 때만 오류이다.",
       "프로젝트 규모에 따라 문서가 통합될 수 있으나 URS·기능·설계·구현 관점과 추적성은 유지해야 한다.",
-      "Loop test 범위가 최종 요소를 포함하지 않는 프로젝트도 있으므로 문항의 실제 경계를 고려한다.",
+      "최종요소가 없는 정보·감시 Loop는 해당 현장 입력 종단까지 확인하는 것이 정상 범위이며 폐루프 제어 Loop와 구분한다.",
       "Performance test 지표는 공정별로 다르므로 특정 숫자의 누락만으로 오류 처리하지 않는다.",
       "SW-04·SW-02·SW-03을 비교 설명하는 것은 경계 침범이 아니며 ownership을 혼동할 때만 감점한다.",
       "단순 누락은 fatal이 아니며 문항 핵심 요구와 답안 분량에 따라 major 또는 warn으로 평가한다."
@@ -936,7 +936,8 @@
   },
   "revision_notes": [
     "SW-10 프로젝트 문서·시험·시운전·인수의 fatal·major 기준을 정의했다.",
-    "단순 누락과 명시적 반대 주장을 구분하고 인접 Topic false positive를 방지했다."
+    "단순 누락과 명시적 반대 주장을 구분하고 인접 Topic false positive를 방지했다.",
+    "2026-08-07 LLM 의미 감사 수리: Loop test 범위와 연결 승인문서 경계를 일치시켰다."
   ],
   "topic_label": "SW-10 제어 SW 프로젝트·FAT·SAT·시운전·인수"
 }
