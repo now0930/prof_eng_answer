@@ -270,3 +270,7 @@ python3 scripts/test_control_valve_seat_leakage_packing_emissions_topic.py
 echo
 echo "===== control valve severe service high low flow temperature cryogenic particle topic regression ====="
 python3 scripts/test_control_valve_severe_service_topic.py
+
+echo
+echo "===== final control element SIL SIS ESD valve partial stroke test topic regression ====="
+python3 scripts/test_final_control_element_sil_sis_esd_pst_topic.py

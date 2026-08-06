@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "SIS·SIF·SIL context와 Final Element subsystem boundary를 구분한다.",
+    "Safe State와 fail action을 SRS·hazard basis로 설명한다.",
+    "Valve·actuator·solenoid·utility trip chain을 설명한다.",
+    "Dangerous·safe·spurious failure mode와 failure-rate partition을 설명한다.",
+    "Demand mode에 따라 PFDavg와 PFH를 구분한다.",
+    "Diagnostic Coverage, Proof Test Coverage와 PST coverage를 구분한다.",
+    "PST와 Full Stroke Proof Test의 detectable set과 한계를 설명한다.",
+    "Response time, bypass·restoration, common cause와 lifecycle evidence를 연결한다."
+  ],
+  "note": "Final Element는 SIF의 실제 process action과 PFDavg·PFH 기여를 결정하는 핵심 subsystem이다. THEORY_CORE 개념과 FIELD_APPLICATION proof-test·response·bypass·lifecycle 검증을 함께 요구한다.",
+  "revision_notes": [
+    "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+    "IMPLEMENTATION_EVALUATION을 Primary Question Type으로 적용했다."
+  ],
+  "topic_label": "최종제어요소·SIS·ESD·PST·Proof Test"
+}

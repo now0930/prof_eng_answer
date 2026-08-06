@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-05T11:33:00Z-generated-topic-pack-manifest",
+  "version": "2026-08-06T01:28:22Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 37,
+  "topic_count": 38,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -158,6 +158,16 @@
     },
     {
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

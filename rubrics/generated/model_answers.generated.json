@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-05T11:33:00Z-generated-topic-pack-model-answers",
+  "version": "2026-08-06T01:28:22Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -5666,6 +5666,410 @@
         "measurement noise",
         "phase margin",
         "anti-windup"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "title_ko": "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "SIF에서 Final Element의 역할과 구성, subsystem boundary를 설명하시오.",
+          "intent": "explain_final_element_in_sif의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "final_element_role_in_sif",
+            "system_sif_sil_context_boundary",
+            "safe_state_process_hazard_basis",
+            "deenergize_to_trip_energy_philosophy",
+            "final_element_subsystem_boundary",
+            "valve_actuator_solenoid_architecture",
+            "utility_supply_and_shared_dependencies",
+            "trip_signal_and_output_chain"
+          ]
+        },
+        {
+          "pattern": "Partial Stroke Test와 Full Stroke Proof Test의 목적, coverage와 한계를 비교하시오.",
+          "intent": "compare_pst_full_stroke의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "diagnostic_coverage_definition",
+            "proof_test_coverage_definition",
+            "pst_coverage_definition",
+            "pst_detectable_failure_set",
+            "pst_not_full_proof_test",
+            "full_stroke_proof_test_scope",
+            "imperfect_test_residual_risk"
+          ]
+        },
+        {
+          "pattern": "Final Element의 PFDavg 또는 PFH 기여를 계산하고 적용 가정을 설명하시오.",
+          "intent": "calculate_pfdavg_pfh의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "failure_rate_partition_dd_du_sd_su",
+            "low_demand_pfdavg_contribution",
+            "high_continuous_demand_pfh_contribution",
+            "series_subsystem_pfd",
+            "final_element_budget_allocation",
+            "diagnostic_coverage_definition",
+            "proof_test_coverage_definition",
+            "pst_coverage_definition"
+          ]
+        },
+        {
+          "pattern": "ESD valve, actuator, solenoid와 utility를 포함한 final-element architecture를 설계하시오.",
+          "intent": "design_esd_valve_architecture의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "final_element_role_in_sif",
+            "final_element_subsystem_boundary",
+            "valve_actuator_solenoid_architecture",
+            "utility_supply_and_shared_dependencies",
+            "trip_signal_and_output_chain",
+            "dangerous_failure_modes"
+          ]
+        },
+        {
+          "pattern": "Safe State, fail action과 de-energize-to-trip 철학의 일치성을 평가하시오.",
+          "intent": "evaluate_safe_state_trip_action의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "safe_state_process_hazard_basis",
+            "deenergize_to_trip_energy_philosophy",
+            "fail_action_vs_safe_state",
+            "deenergized_energized_test_condition",
+            "response_time_process_safety_time"
+          ]
+        },
+        {
+          "pattern": "Final Element의 dangerous·safe·spurious failure mode와 diagnostic coverage를 분석하시오.",
+          "intent": "analyze_failure_modes_diagnostics의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "dangerous_failure_modes",
+            "safe_failure_and_spurious_trip",
+            "hidden_stuck_failure",
+            "failure_rate_partition_dd_du_sd_su",
+            "diagnostic_coverage_definition",
+            "diagnostic_credit_validation"
+          ]
+        },
+        {
+          "pattern": "PST, Full Stroke Proof Test, test interval과 restoration을 포함한 proof-test program을 설계하시오.",
+          "intent": "design_proof_test_program의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "proof_test_coverage_definition",
+            "pst_coverage_definition",
+            "pst_detectable_failure_set",
+            "pst_not_full_proof_test",
+            "full_stroke_proof_test_scope",
+            "test_interval_and_repair_time",
+            "imperfect_test_residual_risk",
+            "proof_test_procedure_repeatability",
+            "response_time_process_safety_time",
+            "partial_stroke_test_risk_controls",
+            "pst_interval_and_online_demand_exposure",
+            "proof_test_records_traceability"
+          ]
+        },
+        {
+          "pattern": "Final-element response time과 Process Safety Time의 margin을 평가하시오.",
+          "intent": "evaluate_response_time의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "response_time_process_safety_time",
+            "component_response_time_sum",
+            "worst_case_trip_time",
+            "deenergized_energized_test_condition",
+            "trip_signal_and_output_chain",
+            "utility_supply_and_shared_dependencies"
+          ]
+        },
+        {
+          "pattern": "SIF bypass, override, impairment와 restoration 관리 기준을 설명하시오.",
+          "intent": "manage_bypass_override의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "bypass_override_inhibit_controls",
+            "impairment_alarm_and_permit",
+            "restoration_independent_verification",
+            "common_cause_beta_factor_context",
+            "redundancy_independence_boundary",
+            "shared_air_power_environment",
+            "partial_stroke_test_risk_controls",
+            "pst_interval_and_online_demand_exposure"
+          ]
+        },
+        {
+          "pattern": "Vendor data, acceptance test, proof-test records와 MOC를 연결한 lifecycle 관리방안을 제시하시오.",
+          "intent": "lifecycle_acceptance_and_moc의 Final Element implementation, evaluation, calculation와 lifecycle verification 논리를 평가",
+          "required_anchor_ids": [
+            "diagnostic_credit_validation",
+            "valve_signature_pst_handoff",
+            "proof_test_records_traceability",
+            "fmeca_fmeda_vendor_data_assumptions",
+            "systematic_capability_software_procedure",
+            "maintenance_moc_spares",
+            "acceptance_criteria_and_srs_traceability",
+            "lifecycle_closed_loop_reverification"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "Context Scope",
+          "intent": "SIS·SIF·SIL 문맥, Topic 15 소유 범위와 다른 Topic hand-off를 정의한다.",
+          "anchor_refs": [
+            "final_element_role_in_sif",
+            "system_sif_sil_context_boundary",
+            "safe_state_process_hazard_basis",
+            "deenergize_to_trip_energy_philosophy",
+            "final_element_subsystem_boundary",
+            "valve_actuator_solenoid_architecture"
+          ]
+        },
+        {
+          "section": "Architecture Safe State",
+          "intent": "Final-element boundary, valve-actuator-solenoid architecture, safe state와 trip action을 설명한다.",
+          "anchor_refs": [
+            "utility_supply_and_shared_dependencies",
+            "trip_signal_and_output_chain",
+            "dangerous_failure_modes",
+            "safe_failure_and_spurious_trip",
+            "hidden_stuck_failure",
+            "seat_leakage_as_safety_requirement",
+            "actuator_force_margin_handoff",
+            "fail_action_vs_safe_state"
+          ]
+        },
+        {
+          "section": "Failure Modes Reliability",
+          "intent": "Dangerous·safe·spurious failure mode와 PFDavg·PFH 기여를 설명한다.",
+          "anchor_refs": [
+            "failure_rate_partition_dd_du_sd_su",
+            "low_demand_pfdavg_contribution",
+            "high_continuous_demand_pfh_contribution",
+            "series_subsystem_pfd",
+            "final_element_budget_allocation",
+            "diagnostic_coverage_definition",
+            "proof_test_coverage_definition"
+          ]
+        },
+        {
+          "section": "Diagnostics Pst",
+          "intent": "Diagnostic Coverage, PST coverage, detectable failure set와 한계를 설명한다.",
+          "anchor_refs": [
+            "pst_coverage_definition",
+            "pst_detectable_failure_set",
+            "pst_not_full_proof_test",
+            "full_stroke_proof_test_scope",
+            "test_interval_and_repair_time",
+            "imperfect_test_residual_risk",
+            "proof_test_procedure_repeatability"
+          ]
+        },
+        {
+          "section": "Full Proof Test Response",
+          "intent": "Full Stroke Proof Test, response time, acceptance criterion와 restoration을 설명한다.",
+          "anchor_refs": [
+            "response_time_process_safety_time",
+            "component_response_time_sum",
+            "worst_case_trip_time",
+            "deenergized_energized_test_condition"
+          ]
+        },
+        {
+          "section": "Common Cause Bypass",
+          "intent": "Redundancy, common cause, shared utility, bypass와 impairment control을 설명한다.",
+          "anchor_refs": [
+            "bypass_override_inhibit_controls",
+            "impairment_alarm_and_permit",
+            "restoration_independent_verification",
+            "common_cause_beta_factor_context",
+            "redundancy_independence_boundary",
+            "shared_air_power_environment",
+            "partial_stroke_test_risk_controls",
+            "pst_interval_and_online_demand_exposure"
+          ]
+        },
+        {
+          "section": "Acceptance Records",
+          "intent": "Vendor data, FMECA·FMEDA, test records와 SRS traceability를 설명한다.",
+          "anchor_refs": [
+            "diagnostic_credit_validation",
+            "valve_signature_pst_handoff",
+            "proof_test_records_traceability",
+            "fmeca_fmeda_vendor_data_assumptions"
+          ]
+        },
+        {
+          "section": "Lifecycle Handoff",
+          "intent": "Maintenance, MOC, failure feedback, revalidation과 Topic 간 책임 경계를 정리한다.",
+          "anchor_refs": [
+            "systematic_capability_software_procedure",
+            "maintenance_moc_spares",
+            "acceptance_criteria_and_srs_traceability",
+            "lifecycle_closed_loop_reverification"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "SIS·SIF·SIL 문맥과 Final Element subsystem 소유 범위를 구분한다.",
+        "Safe State와 fail action을 hazard analysis와 SRS로 연결한다.",
+        "Valve·actuator·solenoid·utility의 complete trip chain을 정의한다.",
+        "Dangerous·safe·spurious·hidden failure mode를 구분한다.",
+        "Demand mode에 따라 PFDavg와 PFH를 구분한다.",
+        "Series PFD exact 식과 small-probability approximation을 구분한다.",
+        "Diagnostic Coverage, Proof Test Coverage와 PST coverage를 구분한다.",
+        "PST가 Full Stroke Proof Test를 대체하지 못하는 failure set을 설명한다.",
+        "Worst-case response time과 Process Safety Time margin을 검증한다.",
+        "Bypass·override·impairment·restoration control을 설명한다.",
+        "Redundancy, common cause와 shared utility dependency를 설명한다.",
+        "FMEDA·test record·MOC·revalidation을 closed-loop lifecycle로 연결한다."
+      ],
+      "common_missing_points": [
+        "SIL을 device certificate와 동일시한다.",
+        "Safe State를 모든 공정의 fail-close로 고정한다.",
+        "Solenoid와 utility를 Final Element boundary에서 누락한다.",
+        "Dangerous failure와 spurious trip을 구분하지 않는다.",
+        "Low-demand와 high-demand 계산 mode를 혼용한다.",
+        "PST coverage를 Full Stroke Proof Test coverage로 사용한다.",
+        "Proof-test interval, repair time와 restoration을 생략한다.",
+        "Trip time을 valve travel time 하나로 축소한다.",
+        "Bypass authorization와 compensating measure를 생략한다.",
+        "Redundancy만으로 common cause가 제거된다고 단정한다.",
+        "Vendor SIL certificate의 application assumption을 검증하지 않는다.",
+        "As-found·repair·as-left와 MOC feedback을 생략한다."
+      ],
+      "routing_aliases": [
+        "SIF final element subsystem valve actuator solenoid architecture",
+        "safety instrumented function final element safe state verification",
+        "ESD shutdown valve actuator solenoid utility failure boundary",
+        "final element PFDavg PFH contribution SIL budget",
+        "low demand PFDavg high demand PFH final element",
+        "diagnostic coverage proof test coverage final element",
+        "partial stroke test full stroke proof test comparison",
+        "PST detectable failure set residual dangerous failure",
+        "ESD valve proof test interval coverage restoration",
+        "shutdown valve response time process safety time margin",
+        "solenoid actuator valve trip-time chain",
+        "SIF bypass override impairment restoration management",
+        "redundant shutdown valves common cause beta factor",
+        "shared instrument air power independence final element",
+        "online partial stroke test spurious trip risk",
+        "ESD valve FMEDA failure-rate application assumptions",
+        "final element proof-test record as-found as-left",
+        "SRS safe direction trip time leakage acceptance",
+        "shutdown valve diagnostic credit proof-test evidence",
+        "final element lifecycle maintenance MOC revalidation",
+        "최종제어요소 안전계장기능 구성과 검증",
+        "긴급차단밸브 액추에이터 솔레노이드 안전상태",
+        "부분행정시험과 전행정 증명시험 비교",
+        "최종제어요소 평균요구고장확률과 시간당고장빈도",
+        "우회 무효화 복구 공통원인 관리"
+      ],
+      "routing_field_points": [
+        "SIF tag, SRS revision와 cause-and-effect 확인",
+        "Safe direction와 energized·de-energized state 확인",
+        "Output module·relay·solenoid·actuator·valve boundary 확인",
+        "Instrument air·power·vent·tubing dependency 확인",
+        "Dangerous detected·dangerous undetected failure partition 확인",
+        "PFDavg·PFH budget와 demand mode 확인",
+        "Diagnostic Coverage와 Proof Test Coverage evidence 확인",
+        "PST stroke fraction·permissive·abort logic 확인",
+        "Full Stroke Proof Test complete travel 확인",
+        "Worst-case response time와 Process Safety Time 확인",
+        "Seat-leakage requirement와 test condition 확인",
+        "Bypass·override·impairment permit 확인",
+        "Restoration independent verification 확인",
+        "Redundant channel separation와 beta assumption 확인",
+        "FMEDA mission profile와 useful-life assumption 확인",
+        "As-found·repair·as-left·MOC·revalidation record 확인"
+      ],
+      "revision_notes": [
+        "10개 implementation·evaluation Question Pattern과 8개 Outline을 추가했다.",
+        "Broad SIL·SIS·SIF·valve·test alias를 금지하고 복합 routing phrase를 사용했다.",
+        "Topic 1·3·4·8·10·11·12·13·14·16 ownership boundary를 명시했다."
+      ],
+      "id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "title": "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험",
+      "question_examples": [
+        "SIF에서 Final Element의 역할과 구성, subsystem boundary를 설명하시오.",
+        "Partial Stroke Test와 Full Stroke Proof Test의 목적, coverage와 한계를 비교하시오.",
+        "Final Element의 PFDavg 또는 PFH 기여를 계산하고 적용 가정을 설명하시오.",
+        "ESD valve, actuator, solenoid와 utility를 포함한 final-element architecture를 설계하시오.",
+        "Safe State, fail action과 de-energize-to-trip 철학의 일치성을 평가하시오.",
+        "Final Element의 dangerous·safe·spurious failure mode와 diagnostic coverage를 분석하시오.",
+        "PST, Full Stroke Proof Test, test interval과 restoration을 포함한 proof-test program을 설계하시오.",
+        "Final-element response time과 Process Safety Time의 margin을 평가하시오.",
+        "SIF bypass, override, impairment와 restoration 관리 기준을 설명하시오.",
+        "Vendor data, acceptance test, proof-test records와 MOC를 연결한 lifecycle 관리방안을 제시하시오."
+      ],
+      "topic_aliases": [
+        "SIF final element subsystem valve actuator solenoid architecture",
+        "safety instrumented function final element safe state verification",
+        "ESD shutdown valve actuator solenoid utility failure boundary",
+        "final element PFDavg PFH contribution SIL budget",
+        "low demand PFDavg high demand PFH final element",
+        "diagnostic coverage proof test coverage final element",
+        "partial stroke test full stroke proof test comparison",
+        "PST detectable failure set residual dangerous failure",
+        "ESD valve proof test interval coverage restoration",
+        "shutdown valve response time process safety time margin",
+        "solenoid actuator valve trip-time chain",
+        "SIF bypass override impairment restoration management",
+        "redundant shutdown valves common cause beta factor",
+        "shared instrument air power independence final element",
+        "online partial stroke test spurious trip risk",
+        "ESD valve FMEDA failure-rate application assumptions",
+        "final element proof-test record as-found as-left",
+        "SRS safe direction trip time leakage acceptance",
+        "shutdown valve diagnostic credit proof-test evidence",
+        "final element lifecycle maintenance MOC revalidation",
+        "최종제어요소 안전계장기능 구성과 검증",
+        "긴급차단밸브 액추에이터 솔레노이드 안전상태",
+        "부분행정시험과 전행정 증명시험 비교",
+        "최종제어요소 평균요구고장확률과 시간당고장빈도",
+        "우회 무효화 복구 공통원인 관리"
+      ],
+      "expected_structure": [
+        "Context Scope",
+        "Architecture Safe State",
+        "Failure Modes Reliability",
+        "Diagnostics Pst",
+        "Full Proof Test Response",
+        "Common Cause Bypass",
+        "Acceptance Records",
+        "Lifecycle Handoff"
+      ],
+      "high_score_features": [
+        "SIF boundary, safe state, failure mode, PFDavg·PFH, diagnostic·proof-test coverage, PST limitation, response time, bypass·common cause와 lifecycle evidence를 하나의 verification chain으로 연결한다."
+      ],
+      "low_score_patterns": [
+        "SIL certificate, fail-close, PST 또는 단일 fixed number만 나열하고 SRS, demand mode, failure set, worst-case response, restoration와 common-cause evidence를 생략한다."
+      ],
+      "field_connection_points": [
+        "SIF tag, SRS revision와 cause-and-effect 확인",
+        "Safe direction와 energized·de-energized state 확인",
+        "Output module·relay·solenoid·actuator·valve boundary 확인",
+        "Instrument air·power·vent·tubing dependency 확인",
+        "Dangerous detected·dangerous undetected failure partition 확인",
+        "PFDavg·PFH budget와 demand mode 확인",
+        "Diagnostic Coverage와 Proof Test Coverage evidence 확인",
+        "PST stroke fraction·permissive·abort logic 확인",
+        "Full Stroke Proof Test complete travel 확인",
+        "Worst-case response time와 Process Safety Time 확인",
+        "Seat-leakage requirement와 test condition 확인",
+        "Bypass·override·impairment permit 확인",
+        "Restoration independent verification 확인",
+        "Redundant channel separation와 beta assumption 확인",
+        "FMEDA mission profile와 useful-life assumption 확인",
+        "As-found·repair·as-left·MOC·revalidation record 확인"
+      ],
+      "model_answer_outline": [
+        "SIS·SIF·SIL 문맥, Topic 15 소유 범위와 다른 Topic hand-off를 정의한다.",
+        "Final-element boundary, valve-actuator-solenoid architecture, safe state와 trip action을 설명한다.",
+        "Dangerous·safe·spurious failure mode와 PFDavg·PFH 기여를 설명한다.",
+        "Diagnostic Coverage, PST coverage, detectable failure set와 한계를 설명한다.",
+        "Full Stroke Proof Test, response time, acceptance criterion와 restoration을 설명한다.",
+        "Redundancy, common cause, shared utility, bypass와 impairment control을 설명한다.",
+        "Vendor data, FMECA·FMEDA, test records와 SRS traceability를 설명한다.",
+        "Maintenance, MOC, failure feedback, revalidation과 Topic 간 책임 경계를 정리한다."
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

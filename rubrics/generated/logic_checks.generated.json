@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-05T11:33:00Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-06T01:28:22Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -356,6 +356,19 @@
         "fatal_meaning": "핵심 이론 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 적용·결론을 강하게 신뢰하지 않는다.",
         "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
       }
+    },
+    {
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "enabled": false,
+      "topic_name": "최종제어요소의 SIL·SIS·ESD 밸브와 부분행정시험",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
