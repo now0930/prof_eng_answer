@@ -161,8 +161,8 @@
         "id": "sw02_fatal_watchdog_monitor_only",
         "severity": "fatal",
         "message": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
-        "description": "명시적 반대 주장만 검출한다. Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
-        "correct_rule": "Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
+        "description": "명시적 반대 주장만 검출한다. 제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
+        "correct_rule": "제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
         "recommended_ceiling": 15.0,
         "wrong_patterns": [
           "(?im)^\\s*(?:[-*•]\\s*)?Watchdog는\\ 상태를\\ 표시만\\ 하며\\ 제어동작과\\ 연결할\\ 필요가\\ 없다\\s*[.!]?\\s*$"
@@ -214,15 +214,15 @@
       {
         "id": "sw02_fatal_timer_is_feedback",
         "severity": "fatal",
-        "message": "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.",
-        "description": "명시적 반대 주장만 검출한다. Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
-        "correct_rule": "Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
+        "message": "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다.",
+        "description": "명시적 반대 주장만 검출한다. 물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
+        "correct_rule": "물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
         "recommended_ceiling": 15.0,
         "wrong_patterns": [
-          "(?im)^\\s*(?:[-*•]\\s*)?Timer가\\ 만료되면\\ 실제\\ 설비\\ 피드백과\\ 관계없이\\ Step\\ 완료로\\ 판단해도\\ 된다\\s*[.!]?\\s*$"
+          "(?im)^\\s*(?:[-*•]\\s*)?밸브\\ 개폐·모터\\ 기동·위치이동처럼\\ 물리적\\ 동작\\ 확인이\\ 필요한\\ Step도\\ Timer가\\ 만료되면\\ 실제\\ 설비\\ Feedback과\\ 관계없이\\ 완료로\\ 판단해도\\ 된다\\.\\s*[.!]?\\s*$"
         ],
         "examples_or_patterns": [
-          "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다."
+          "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다."
         ],
         "affected_layers": [
           "C",
@@ -468,7 +468,7 @@
       },
       {
         "id": "sw02_transition_guard",
-        "correct_rule": "Transition guard는 상태변화를 허용하는 논리조건이며 일반적으로 Command AND 모든 필수 Permissive AND 정상 피드백 AND NOT Trip AND NOT Inhibit 조건을 만족할 때만 참이 된다.",
+        "correct_rule": "Transition guard는 상태변화를 허용하는 논리조건이다. 기동·명령 기반 전이의 대표식은 Command AND 모든 필수 Permissive AND 필요한 선행 Feedback AND NOT Trip AND NOT Inhibit로 나타낼 수 있다. 자동 진행, 시간 유지 완료 또는 공정조건 도달 전이는 Command 없이 성립할 수 있으며, Feedback은 전이의 선행조건 또는 동작 완료 확인조건으로 구분한다.",
         "fatal_if_opposite": false
       },
       {
@@ -674,7 +674,7 @@
       {
         "id": "sw02_fatal_watchdog_monitor_only",
         "wrong_claim": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
-        "correct_rule": "Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
+        "correct_rule": "제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
         "severity": "fatal",
         "affected_layers": [
           "C",
@@ -706,8 +706,8 @@
       },
       {
         "id": "sw02_fatal_timer_is_feedback",
-        "wrong_claim": "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.",
-        "correct_rule": "Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
+        "wrong_claim": "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다.",
+        "correct_rule": "물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
         "severity": "fatal",
         "affected_layers": [
           "C",
@@ -783,13 +783,14 @@
       "Override는 강제 명령이고 Bypass는 보호경로 우회이므로 목적과 권한을 구분한다.",
       "Watchdog Timeout 시 Hold 또는 안전동작은 공정 위험과 복구전략에 따라 선택한다.",
       "Restart 후 자동재개가 가능한 비위험 설비도 있으나 상태 일치와 Permissive 검증이 선행되어야 한다.",
-      "Timer는 피드백 확인을 보조하며 실제 완료조건을 무조건 대체하지 않는다.",
+      "Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
       "Manual mode에서도 필수 보호논리는 유지해야 한다.",
       "Cause & Effect는 논리 설계의 기준문서이며 상세 상태전이와 구현검증이 추가로 필요하다.",
       "운전 Interlock이 모두 SIS인 것은 아니며 SIL 산정은 별도 안전수명주기 범위이다.",
       "Alarm Deadband, Shelving, SOE 표시와 Operator authority는 SW-03의 주 소유범위이다.",
       "SW-02는 SOE에 표시될 이벤트의 실제 발생논리와 First-out 메커니즘을 다루되 화면·Alarm 관리정책은 SW-03에 넘긴다.",
-      "SIL 산정, 체계적 고장, 독립성 및 Safety V&V는 SW-05로 넘긴다."
+      "SIL 산정, 체계적 고장, 독립성 및 Safety V&V는 SW-05로 넘긴다.",
+      "비중요 Historian·상태수집·진단경로의 Watchdog는 위험분석에 따라 Alarm-only로 처리할 수 있다."
     ],
     "major_checks": [
       {
@@ -909,7 +910,9 @@
       "Cause & Effect를 핵심 설계문서라고 한 표현은 안전하며 실행논리를 완전히 대체한다고 단정할 때만 오류다.",
       "Voting을 신뢰도 향상 수단으로 설명한 것 자체는 안전하며 독립성·공통원인을 무시한 절대 주장을 구분한다.",
       "First-out과 SOE를 함께 설명할 수 있으나 최초 원인 선정 메커니즘은 SW-02, 표시·기록 운영은 SW-03 소유다.",
-      "Manual mode에서 일부 자동 Sequence를 우회하는 것은 가능하지만 보호 Interlock과 Trip까지 전부 무효화한다고 단정할 때만 fatal이다."
+      "Manual mode에서 일부 자동 Sequence를 우회하는 것은 가능하지만 보호 Interlock과 Trip까지 전부 무효화한다고 단정할 때만 fatal이다.",
+      "Purge 유지시간, 안정화 대기, 혼합시간처럼 시간 자체가 공정 요구조건인 Step은 Timer 완료를 정상 완료조건으로 인정한다.",
+      "비중요 Historian·상태수집·진단경로의 Watchdog는 위험분석상 제어동작이 필요 없으면 Alarm-only로 처리할 수 있다."
     ],
     "output_contract": {
       "required_fields": [
@@ -932,7 +935,8 @@
   "revision_notes": [
     "2026-08-06: 16개 명시적 fatal 오개념과 문항별 major/warn 기준을 작성했다.",
     "결정론적 fatal은 직접적인 반대 주장만 검출하도록 복합 정규식을 사용했다.",
-    "SW-03 및 SW-05 범위 이동은 false positive caution과 warn으로 처리한다."
+    "SW-03 및 SW-05 범위 이동은 false positive caution과 warn으로 처리한다.",
+    "2026-08-07 LLM 의미 감사 수리: Timer·Watchdog 조건부 정상표현과 Transition guard 범위를 명확히 했다."
   ],
   "topic_label": "SW-02 제어논리·Sequence·Interlock·Trip"
 }

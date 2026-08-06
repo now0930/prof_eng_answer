@@ -372,5 +372,43 @@ class FocusedRoutingBoundaryTests(unittest.TestCase):
                 self.assertEqual(alias_hits, 0)
 
 
+class SemanticAuditRepairTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.fact = load_json("fact_anchor.json")
+        cls.logic = load_json("logic_check.json")
+        cls.anchors = {item["id"]: item for item in cls.fact["anchors"]}
+        cls.fatals = {item["id"]: item for item in cls.fact["fatal_wrong_claims"]}
+
+    def test_rejected_explanations_are_anchor_specific(self) -> None:
+        rejected = [tuple(item["rejected_explanations"]) for item in self.fact["anchors"]]
+        self.assertEqual(len(rejected), 28)
+        self.assertEqual(len(set(rejected)), 28)
+        generic = "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        self.assertFalse(any(generic in value for values in rejected for value in values))
+
+    def test_transition_guard_is_representative_not_universal(self) -> None:
+        text = self.anchors["sw02_transition_guard"]["statement"]
+        self.assertIn("기동·명령 기반 전이의 대표식", text)
+        self.assertIn("Command 없이", text)
+        self.assertIn("선행조건 또는 동작 완료 확인조건", text)
+
+    def test_timer_fatal_is_limited_to_physical_action_steps(self) -> None:
+        fatal = self.fatals["sw02_fatal_timer_is_feedback"]
+        self.assertIn("물리적 동작 확인이 필요한 Step", fatal["wrong_claim"])
+        self.assertIn("Purge 유지시간", fatal["correct_rule"])
+        self.assertIn("시간 자체가 요구조건", fatal["correct_rule"])
+
+    def test_timer_and_noncritical_watchdog_safe_boundaries(self) -> None:
+        cautions = " ".join(self.logic["llm_profile"]["false_positive_cautions"])
+        self.assertIn("혼합시간", cautions)
+        self.assertIn("Historian", cautions)
+        self.assertIn("Alarm-only", cautions)
+
+    def test_fail_safe_negated_absolute_remains_unchanged(self) -> None:
+        text = self.anchors["sw02_fail_safe"]["statement"]
+        self.assertIn("항상 Fail-close 또는 항상 De-energize로 고정되는 개념이 아니라", text)
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

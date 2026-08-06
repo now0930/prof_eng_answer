@@ -38,11 +38,11 @@ JSON_PATHS=(
 declare -A EXPECTED_SHA256=(
     ["docs/topic_sheets/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe.md"]="f93c707e8d43cf0714547f3080fa308da0d491874b1d2fb3c56fae0e5a5a7cf1"
     ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/README.md"]="496b1adf8a8f3c68877dd654dd8402a4f13ea409dfd5592e4b4d8e358d155d32"
-    ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/fact_anchor.json"]="b7207812eeeaa2a9479d77d1ec56eef5e6cecaed9f28fb6e954169bd83dab315"
-    ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/logic_check.json"]="e4c356bd0033b1012448ebffda48e1cfc9a242710dcd2c5bdf8d88a64453ecaf"
+    ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/fact_anchor.json"]="0ebfa710ba88af72f72492b6e45fa5450cb96b770c7bbda1b61fb57b0e67996b"
+    ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/logic_check.json"]="9d2317dbd82a8c553daadf737c77409ab2ee7f3cb8587d523116b3ba0ea0347f"
     ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/model_answer.json"]="5daefe4095b905bca7e311f6d9ab5e5bf8b600263acbd32fc00cd9cdfc11a32c"
     ["rubrics/topic_packs/control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe/topic_importance.json"]="3b8a3fd6a05cf53d0d12917154c31c266faa9e3ce5ecfee0afcb392974096190"
-    ["scripts/test_control_logic_sequence_interlock_permissive_trip_state_transition.py"]="1ea41e6cbf810e6beba7a83c5bcbdc92282ca535c573c670a4b4985c4969de48"
+    ["scripts/test_control_logic_sequence_interlock_permissive_trip_state_transition.py"]="aa0cc705858360646e5bb9da4248a8c3b42cf71cbda366033a4835087761498b"
 )
 
 
@@ -1198,7 +1198,7 @@ if [ "$failure_count" -eq 0 ]; then
         "운전 제어논리, 상태전이, 보호동작, 복구의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "SW-02의 핵심을 HMI Alarm 운영이나 SIL 산정으로 확장하거나 Sequence·보호동작·복구를 서로 같은 기능으로 설명한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1228,7 +1228,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Sequence control, Step, 완료조건, 실패처리의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Sequence를 Timer와 출력의 순서 나열로만 정의하고 Step의 진입조건·완료조건·실패처리를 두지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1258,7 +1258,7 @@ if [ "$failure_count" -eq 0 ]; then
         "상태전이, 결정론, 현재 상태, 다음 상태의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "현재 상태를 고려하지 않거나 동일한 상태와 입력에서 임의로 다른 다음 상태가 허용된다고 설명한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1266,7 +1266,7 @@ if [ "$failure_count" -eq 0 ]; then
     {
       "id": "sw02_transition_guard",
       "anchor_id": "sw02_transition_guard",
-      "statement": "Transition guard는 상태변화를 허용하는 논리조건이며 일반적으로 Command AND 모든 필수 Permissive AND 정상 피드백 AND NOT Trip AND NOT Inhibit 조건을 만족할 때만 참이 된다.",
+      "statement": "Transition guard는 상태변화를 허용하는 논리조건이다. 기동·명령 기반 전이의 대표식은 Command AND 모든 필수 Permissive AND 필요한 선행 Feedback AND NOT Trip AND NOT Inhibit로 나타낼 수 있다. 자동 진행, 시간 유지 완료 또는 공정조건 도달 전이는 Command 없이 성립할 수 있으며, Feedback은 전이의 선행조건 또는 동작 완료 확인조건으로 구분한다.",
       "importance": "must",
       "keywords": [
         "Transition guard",
@@ -1284,11 +1284,11 @@ if [ "$failure_count" -eq 0 ]; then
         "피드백"
       ],
       "accepted_explanations": [
-        "Transition guard는 상태변화를 허용하는 논리조건이며 일반적으로 Command AND 모든 필수 Permissive AND 정상 피드백 AND NOT Trip AND NOT Inhibit 조건을 만족할 때만 참이 된다.",
-        "Transition guard, Permissive, Trip, 피드백의 관계를 원인-조건-동작-복구 순서로 설명한다."
+        "Transition guard는 상태변화를 허용하는 논리조건이다. 기동·명령 기반 전이의 대표식은 Command AND 모든 필수 Permissive AND 필요한 선행 Feedback AND NOT Trip AND NOT Inhibit로 나타낼 수 있다. 자동 진행, 시간 유지 완료 또는 공정조건 도달 전이는 Command 없이 성립할 수 있으며, Feedback은 전이의 선행조건 또는 동작 완료 확인조건으로 구분한다.",
+        "기동 전이의 선행조건과 동작 완료 후 확인조건을 구분하고, Command가 없는 자동 전이도 별도로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "모든 전이에 Command가 반드시 필요하다고 일반화하거나 기동·명령 기반 전이에서 필수 Permissive와 Trip 차단조건을 무시한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1316,7 +1316,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Entry action, Exit action, 출력 소유권의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Entry·지속·Exit 동작의 소유권을 구분하지 않고 여러 State가 같은 출력을 동시에 지배해도 된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1343,7 +1343,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Permissive, 사전 허가조건, AND의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Permissive를 운전 중 강제정지인 Trip과 동일시하거나 필수 허가조건 중 일부만 만족해도 기동할 수 있다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1371,7 +1371,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Interlock, 금지, 강제동작, Alarm의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Interlock을 표시용 Alarm으로만 보거나 허용되지 않은 동작을 차단·강제하지 않는다고 설명한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1400,7 +1400,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Trip, 강제 보호동작, Latch, Reset의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Trip을 정상 Sequence와 같은 우선순위의 일반 정지명령으로 보거나 모든 Trip이 무조건 자동 Reset된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1428,7 +1428,7 @@ if [ "$failure_count" -eq 0 ]; then
         "정상정지, Trip, Shutdown의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "정상 Shutdown과 보호 Trip의 목적·우선순위·동작절차가 완전히 같다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1456,7 +1456,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Cause & Effect, 원인-결과, 실행논리의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Cause & Effect 표만으로 상태전이·Timer·Reset·우선순위의 구현과 검증이 모두 완료된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1484,7 +1484,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Voting, M-out-of-N, 채널 독립성의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "M-out-of-N 채널 수만 늘리면 독립성·공통원인·진단과 무관하게 항상 안전해진다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1511,7 +1511,7 @@ if [ "$failure_count" -eq 0 ]; then
         "First-out, 최초 원인, 연쇄의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "마지막에 남은 Trip 신호나 가장 높은 Alarm priority를 최초 원인으로 저장한다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1541,7 +1541,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Bypass, 시간제한, 대체조치, 복구의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "승인·표시·기간·대체조치·복구확인 없이 입력 또는 보호경로를 계속 우회해도 된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1569,7 +1569,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Override, 강제 명령, 우선순위의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Override를 입력·보호경로를 우회하는 Bypass와 동일시하거나 우선순위와 해제조건 없이 강제명령해도 된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1597,7 +1597,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Fail-safe, Safe state, 공정 위험의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "모든 최종요소를 항상 Fail-close 또는 De-energize 상태로 만들어야 한다고 일반화한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1626,7 +1626,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Watchdog, Heartbeat, Timeout, Safe action의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "운전·보호에 필요한 제어기 Task나 필수 통신의 Heartbeat 상실을 표시만 하고 사전 정의 대응동작은 필요 없다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1654,7 +1654,7 @@ if [ "$failure_count" -eq 0 ]; then
         "피드백 확인, Timeout, 단계완료의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step에서 Command 출력이나 Timer 만료만으로 완료를 선언한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1682,7 +1682,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Trip latch, Reset 조건, 원인 제거의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "원인이 순간적으로 사라지면 안전조건·권한·Reset edge 확인 없이 Latch를 해제하고 재기동한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1710,7 +1710,7 @@ if [ "$failure_count" -eq 0 ]; then
         "허용 전이표, Mutual exclusion, Illegal state의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "허용되지 않은 상태조합·중복상태·전이 중 재명령·불량입력을 정상 전이로 처리하고 Illegal-state recovery를 두지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1738,7 +1738,7 @@ if [ "$failure_count" -eq 0 ]; then
         "명령 우선순위, 출력 소유자, Trip 우선의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Local·Remote, Manual·Auto와 Trip 명령의 우선순위·단일 출력 소유자를 정의하지 않아 여러 명령이 동시에 출력을 지배해도 된다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1766,7 +1766,7 @@ if [ "$failure_count" -eq 0 ]; then
         "신호 품질, Stale data, Degraded mode의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Bad·Stale·통신단절 값을 최신 정상값으로 간주하고 입력 품질별 대응정책을 두지 않는다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1794,7 +1794,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Restart, State reconciliation, Permissive 재확인의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "전원·통신 복구 즉시 실제 설비상태와 Permissive를 확인하지 않고 이전 Step과 출력을 그대로 복원한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1821,7 +1821,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Degraded mode, 제한운전, 종료조건의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Degraded mode를 제한범위·금지동작·감시강화·종료조건이 없는 무조건 계속운전으로 정의한다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1849,7 +1849,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Scan, Edge, Set Reset 우선순위의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Level·Edge·One-shot·Latch와 Set·Reset 실행순서가 Scan 결과와 우선순위에 영향을 주지 않는다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1877,7 +1877,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Debounce, Hysteresis, 응답지연의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Debounce·Delay·Hysteresis를 무조건 크게 하면 보호성능이 향상되고 응답지연이나 사건 놓침 위험은 없다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1904,7 +1904,7 @@ if [ "$failure_count" -eq 0 ]; then
         "Manual mode, 보호 Interlock, 금지조건의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Manual mode가 필수 보호 Interlock과 Trip을 자동으로 모두 무효화한다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1932,7 +1932,7 @@ if [ "$failure_count" -eq 0 ]; then
         "SW-03, 운전정보, 논리 소유권의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "Alarm philosophy·Shelving·SOE 표시 운영을 SW-02 실행논리 자체로 소유하거나 실제 Interlock·Trip 상태전이를 SW-03에 넘긴다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -1960,7 +1960,7 @@ if [ "$failure_count" -eq 0 ]; then
         "SW-05, SIL 산정 제외, 운전논리의 관계를 원인-조건-동작-복구 순서로 설명한다."
       ],
       "rejected_explanations": [
-        "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        "일반 운전논리 설명만으로 SIL 산정·Safety lifecycle·독립성·Safety V&V까지 충족했다고 본다."
       ],
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며, 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다.",
       "source_basis": "일반 산업 제어공학 및 운전 제어논리 설계 원칙"
@@ -2078,7 +2078,7 @@ if [ "$failure_count" -eq 0 ]; then
       "claim": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
       "wrong_claim": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
       "correction": "Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
-      "correct_rule": "Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
+      "correct_rule": "제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
       "severity": "fatal",
       "affected_layers": [
         "C",
@@ -2121,9 +2121,9 @@ if [ "$failure_count" -eq 0 ]; then
     {
       "id": "sw02_fatal_timer_is_feedback",
       "claim": "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.",
-      "wrong_claim": "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.",
+      "wrong_claim": "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다.",
       "correction": "Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
-      "correct_rule": "Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
+      "correct_rule": "물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
       "severity": "fatal",
       "affected_layers": [
         "C",
@@ -2221,25 +2221,27 @@ if [ "$failure_count" -eq 0 ]; then
     "Override는 강제 명령이고 Bypass는 보호경로 우회이므로 목적과 권한을 구분한다.",
     "Watchdog Timeout 시 Hold 또는 안전동작은 공정 위험과 복구전략에 따라 선택한다.",
     "Restart 후 자동재개가 가능한 비위험 설비도 있으나 상태 일치와 Permissive 검증이 선행되어야 한다.",
-    "Timer는 피드백 확인을 보조하며 실제 완료조건을 무조건 대체하지 않는다.",
+    "Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
     "Manual mode에서도 필수 보호논리는 유지해야 한다.",
     "Cause & Effect는 논리 설계의 기준문서이며 상세 상태전이와 구현검증이 추가로 필요하다.",
     "운전 Interlock이 모두 SIS인 것은 아니며 SIL 산정은 별도 안전수명주기 범위이다.",
     "Alarm Deadband, Shelving, SOE 표시와 Operator authority는 SW-03의 주 소유범위이다.",
     "SW-02는 SOE에 표시될 이벤트의 실제 발생논리와 First-out 메커니즘을 다루되 화면·Alarm 관리정책은 SW-03에 넘긴다.",
-    "SIL 산정, 체계적 고장, 독립성 및 Safety V&V는 SW-05로 넘긴다."
+    "SIL 산정, 체계적 고장, 독립성 및 Safety V&V는 SW-05로 넘긴다.",
+    "비중요 Historian·상태수집·진단경로의 Watchdog는 위험분석에 따라 Alarm-only로 처리할 수 있다."
   ],
   "revision_notes": [
     "2026-08-06: SOFTWARE_LLM_LANE_A SW-02 source Topic Pack 최초 작성.",
     "SW-03의 HMI·Alarm·SOE·권한과 SW-05의 SIL·안전수명주기·Safety V&V를 ownership 경계로 분리했다.",
-    "generated bank, 공통 Router, 기존 Topic Pack은 변경하지 않는다."
+    "generated bank, 공통 Router, 기존 Topic Pack은 변경하지 않는다.",
+    "2026-08-07 LLM 의미 감사 수리: Anchor별 rejected 설명, 조건부 Transition guard, Timer·Watchdog false-positive 경계를 반영했다."
   ],
   "topic_label": "SW-02 제어논리·Sequence·Interlock·Trip",
   "core_facts": [
     "SW-02는 운전 제어논리의 동작 메커니즘을 다루며 Sequence, 상태전이, Interlock, Permissive, Trip, Shutdown, Cause & Effect, Voting, First-out, Bypass, Override, Fail-safe, Watchdog 및 Restart·Recovery를 하나의 운전 논리 체계로 연결한다.",
     "Sequence control은 공정을 여러 Step 또는 State로 나누고, 각 단계의 진입조건·실행동작·완료조건·시간제한·실패처리를 정의하여 정해진 순서로 운전하는 제어방식이다.",
     "상태전이는 현재 상태와 명령, Permissive, Interlock, Trip, 설비 피드백 및 시간조건을 입력으로 다음 상태를 결정하는 함수로 표현할 수 있으며, 동일 입력에서 결정론적 결과가 나와야 한다.",
-    "Transition guard는 상태변화를 허용하는 논리조건이며 일반적으로 Command AND 모든 필수 Permissive AND 정상 피드백 AND NOT Trip AND NOT Inhibit 조건을 만족할 때만 참이 된다.",
+    "Transition guard는 상태변화를 허용하는 논리조건이다. 기동·명령 기반 전이의 대표식은 Command AND 모든 필수 Permissive AND 필요한 선행 Feedback AND NOT Trip AND NOT Inhibit로 나타낼 수 있다. 자동 진행, 시간 유지 완료 또는 공정조건 도달 전이는 Command 없이 성립할 수 있으며, Feedback은 전이의 선행조건 또는 동작 완료 확인조건으로 구분한다.",
     "각 State에는 Entry action, 지속 동작, Exit action을 구분하여 정의해야 하며, 출력은 상태와 전이 이벤트의 소유관계를 명확히 하여 중복 명령과 잔류 출력을 방지한다.",
     "Permissive는 기동 또는 특정 전이를 시작하기 전에 만족해야 하는 사전 허가조건이며, 보통 모든 필수 조건의 AND 논리로 구성한다.",
     "Interlock은 위험하거나 비정상적인 조합을 방지하기 위해 동작을 금지하거나 운전 중 특정 출력을 강제하는 제약논리이며, 단순 Alarm 표시와 구분된다.",
@@ -2441,8 +2443,8 @@ if [ "$failure_count" -eq 0 ]; then
         "id": "sw02_fatal_watchdog_monitor_only",
         "severity": "fatal",
         "message": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
-        "description": "명시적 반대 주장만 검출한다. Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
-        "correct_rule": "Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
+        "description": "명시적 반대 주장만 검출한다. 제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
+        "correct_rule": "제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
         "recommended_ceiling": 15.0,
         "wrong_patterns": [
           "(?im)^\\s*(?:[-*•]\\s*)?Watchdog는\\ 상태를\\ 표시만\\ 하며\\ 제어동작과\\ 연결할\\ 필요가\\ 없다\\s*[.!]?\\s*$"
@@ -2494,15 +2496,15 @@ if [ "$failure_count" -eq 0 ]; then
       {
         "id": "sw02_fatal_timer_is_feedback",
         "severity": "fatal",
-        "message": "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.",
-        "description": "명시적 반대 주장만 검출한다. Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
-        "correct_rule": "Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
+        "message": "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다.",
+        "description": "명시적 반대 주장만 검출한다. 물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
+        "correct_rule": "물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
         "recommended_ceiling": 15.0,
         "wrong_patterns": [
-          "(?im)^\\s*(?:[-*•]\\s*)?Timer가\\ 만료되면\\ 실제\\ 설비\\ 피드백과\\ 관계없이\\ Step\\ 완료로\\ 판단해도\\ 된다\\s*[.!]?\\s*$"
+          "(?im)^\\s*(?:[-*•]\\s*)?밸브\\ 개폐·모터\\ 기동·위치이동처럼\\ 물리적\\ 동작\\ 확인이\\ 필요한\\ Step도\\ Timer가\\ 만료되면\\ 실제\\ 설비\\ Feedback과\\ 관계없이\\ 완료로\\ 판단해도\\ 된다\\.\\s*[.!]?\\s*$"
         ],
         "examples_or_patterns": [
-          "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다."
+          "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다."
         ],
         "affected_layers": [
           "C",
@@ -2748,7 +2750,7 @@ if [ "$failure_count" -eq 0 ]; then
       },
       {
         "id": "sw02_transition_guard",
-        "correct_rule": "Transition guard는 상태변화를 허용하는 논리조건이며 일반적으로 Command AND 모든 필수 Permissive AND 정상 피드백 AND NOT Trip AND NOT Inhibit 조건을 만족할 때만 참이 된다.",
+        "correct_rule": "Transition guard는 상태변화를 허용하는 논리조건이다. 기동·명령 기반 전이의 대표식은 Command AND 모든 필수 Permissive AND 필요한 선행 Feedback AND NOT Trip AND NOT Inhibit로 나타낼 수 있다. 자동 진행, 시간 유지 완료 또는 공정조건 도달 전이는 Command 없이 성립할 수 있으며, Feedback은 전이의 선행조건 또는 동작 완료 확인조건으로 구분한다.",
         "fatal_if_opposite": false
       },
       {
@@ -2954,7 +2956,7 @@ if [ "$failure_count" -eq 0 ]; then
       {
         "id": "sw02_fatal_watchdog_monitor_only",
         "wrong_claim": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
-        "correct_rule": "Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결해야 한다.",
+        "correct_rule": "제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
         "severity": "fatal",
         "affected_layers": [
           "C",
@@ -2986,8 +2988,8 @@ if [ "$failure_count" -eq 0 ]; then
       },
       {
         "id": "sw02_fatal_timer_is_feedback",
-        "wrong_claim": "Timer가 만료되면 실제 설비 피드백과 관계없이 Step 완료로 판단해도 된다.",
-        "correct_rule": "Timer는 최대 허용시간 또는 지연조건이며 실제 완료는 필요한 설비 피드백으로 확인해야 한다.",
+        "wrong_claim": "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다.",
+        "correct_rule": "물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
         "severity": "fatal",
         "affected_layers": [
           "C",
@@ -3063,13 +3065,14 @@ if [ "$failure_count" -eq 0 ]; then
       "Override는 강제 명령이고 Bypass는 보호경로 우회이므로 목적과 권한을 구분한다.",
       "Watchdog Timeout 시 Hold 또는 안전동작은 공정 위험과 복구전략에 따라 선택한다.",
       "Restart 후 자동재개가 가능한 비위험 설비도 있으나 상태 일치와 Permissive 검증이 선행되어야 한다.",
-      "Timer는 피드백 확인을 보조하며 실제 완료조건을 무조건 대체하지 않는다.",
+      "Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
       "Manual mode에서도 필수 보호논리는 유지해야 한다.",
       "Cause & Effect는 논리 설계의 기준문서이며 상세 상태전이와 구현검증이 추가로 필요하다.",
       "운전 Interlock이 모두 SIS인 것은 아니며 SIL 산정은 별도 안전수명주기 범위이다.",
       "Alarm Deadband, Shelving, SOE 표시와 Operator authority는 SW-03의 주 소유범위이다.",
       "SW-02는 SOE에 표시될 이벤트의 실제 발생논리와 First-out 메커니즘을 다루되 화면·Alarm 관리정책은 SW-03에 넘긴다.",
-      "SIL 산정, 체계적 고장, 독립성 및 Safety V&V는 SW-05로 넘긴다."
+      "SIL 산정, 체계적 고장, 독립성 및 Safety V&V는 SW-05로 넘긴다.",
+      "비중요 Historian·상태수집·진단경로의 Watchdog는 위험분석에 따라 Alarm-only로 처리할 수 있다."
     ],
     "major_checks": [
       {
@@ -3189,7 +3192,9 @@ if [ "$failure_count" -eq 0 ]; then
       "Cause & Effect를 핵심 설계문서라고 한 표현은 안전하며 실행논리를 완전히 대체한다고 단정할 때만 오류다.",
       "Voting을 신뢰도 향상 수단으로 설명한 것 자체는 안전하며 독립성·공통원인을 무시한 절대 주장을 구분한다.",
       "First-out과 SOE를 함께 설명할 수 있으나 최초 원인 선정 메커니즘은 SW-02, 표시·기록 운영은 SW-03 소유다.",
-      "Manual mode에서 일부 자동 Sequence를 우회하는 것은 가능하지만 보호 Interlock과 Trip까지 전부 무효화한다고 단정할 때만 fatal이다."
+      "Manual mode에서 일부 자동 Sequence를 우회하는 것은 가능하지만 보호 Interlock과 Trip까지 전부 무효화한다고 단정할 때만 fatal이다.",
+      "Purge 유지시간, 안정화 대기, 혼합시간처럼 시간 자체가 공정 요구조건인 Step은 Timer 완료를 정상 완료조건으로 인정한다.",
+      "비중요 Historian·상태수집·진단경로의 Watchdog는 위험분석상 제어동작이 필요 없으면 Alarm-only로 처리할 수 있다."
     ],
     "output_contract": {
       "required_fields": [
@@ -3212,7 +3217,8 @@ if [ "$failure_count" -eq 0 ]; then
   "revision_notes": [
     "2026-08-06: 16개 명시적 fatal 오개념과 문항별 major/warn 기준을 작성했다.",
     "결정론적 fatal은 직접적인 반대 주장만 검출하도록 복합 정규식을 사용했다.",
-    "SW-03 및 SW-05 범위 이동은 false positive caution과 warn으로 처리한다."
+    "SW-03 및 SW-05 범위 이동은 false positive caution과 warn으로 처리한다.",
+    "2026-08-07 LLM 의미 감사 수리: Timer·Watchdog 조건부 정상표현과 Transition guard 범위를 명확히 했다."
   ],
   "topic_label": "SW-02 제어논리·Sequence·Interlock·Trip"
 }
@@ -3941,6 +3947,44 @@ class FocusedRoutingBoundaryTests(unittest.TestCase):
                     for alias in self.aliases
                 )
                 self.assertEqual(alias_hits, 0)
+
+
+class SemanticAuditRepairTests(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls) -> None:
+        cls.fact = load_json("fact_anchor.json")
+        cls.logic = load_json("logic_check.json")
+        cls.anchors = {item["id"]: item for item in cls.fact["anchors"]}
+        cls.fatals = {item["id"]: item for item in cls.fact["fatal_wrong_claims"]}
+
+    def test_rejected_explanations_are_anchor_specific(self) -> None:
+        rejected = [tuple(item["rejected_explanations"]) for item in self.fact["anchors"]]
+        self.assertEqual(len(rejected), 28)
+        self.assertEqual(len(set(rejected)), 28)
+        generic = "용어를 서로 같은 의미로 취급하거나 보호동작의 조건·우선순위·복구를 생략한다."
+        self.assertFalse(any(generic in value for values in rejected for value in values))
+
+    def test_transition_guard_is_representative_not_universal(self) -> None:
+        text = self.anchors["sw02_transition_guard"]["statement"]
+        self.assertIn("기동·명령 기반 전이의 대표식", text)
+        self.assertIn("Command 없이", text)
+        self.assertIn("선행조건 또는 동작 완료 확인조건", text)
+
+    def test_timer_fatal_is_limited_to_physical_action_steps(self) -> None:
+        fatal = self.fatals["sw02_fatal_timer_is_feedback"]
+        self.assertIn("물리적 동작 확인이 필요한 Step", fatal["wrong_claim"])
+        self.assertIn("Purge 유지시간", fatal["correct_rule"])
+        self.assertIn("시간 자체가 요구조건", fatal["correct_rule"])
+
+    def test_timer_and_noncritical_watchdog_safe_boundaries(self) -> None:
+        cautions = " ".join(self.logic["llm_profile"]["false_positive_cautions"])
+        self.assertIn("혼합시간", cautions)
+        self.assertIn("Historian", cautions)
+        self.assertIn("Alarm-only", cautions)
+
+    def test_fail_safe_negated_absolute_remains_unchanged(self) -> None:
+        text = self.anchors["sw02_fail_safe"]["statement"]
+        self.assertIn("항상 Fail-close 또는 항상 De-energize로 고정되는 개념이 아니라", text)
 
 
 if __name__ == "__main__":
