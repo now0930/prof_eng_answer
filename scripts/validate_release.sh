@@ -283,6 +283,8 @@ echo
 echo "===== control valve integrated selection process and lifecycle topic regression ====="
 python3 scripts/test_control_valve_selection_process_lifecycle_topic.py
 echo
+RELEASE_REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+export PYTHONPATH="${RELEASE_REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
 echo "===== additional release host regression matrix ====="
 
 echo "----- host regression: configuration change release backup rollback migration obsolescence management -----"
