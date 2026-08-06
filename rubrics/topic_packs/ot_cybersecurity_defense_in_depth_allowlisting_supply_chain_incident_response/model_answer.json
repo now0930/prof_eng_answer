@@ -176,7 +176,8 @@
         "sw09_system_under_consideration",
         "sw09_asset_inventory",
         "sw09_criticality_classification"
-      ]
+      ],
+      "intent": "OT의 availability·safety·integrity 우선순위, SUC, 중요자산과 책임범위를 정의한다."
     },
     {
       "section": "2. 위험평가와 심층방어 구조",
@@ -185,7 +186,8 @@
         "sw09_risk_assessment",
         "sw09_zone_conduit",
         "sw09_segmentation"
-      ]
+      ],
+      "intent": "Threat·vulnerability·consequence를 평가하고 Zone·Conduit와 segmentation으로 trust boundary를 설계한다."
     },
     {
       "section": "3. 경계와 통신통제",
@@ -195,7 +197,8 @@
         "sw09_firewall_policy",
         "sw09_unidirectional_gateway",
         "sw09_ids_ips_monitoring"
-      ]
+      ],
+      "intent": "Industrial DMZ, Firewall, unidirectional gateway와 IDS·IPS를 data flow와 공정영향에 맞게 배치한다."
     },
     {
       "section": "4. Endpoint·Identity·Remote access",
@@ -208,7 +211,8 @@
         "sw09_remote_access",
         "sw09_jump_server",
         "sw09_mfa"
-      ]
+      ],
+      "intent": "Allowlisting, least privilege, authentication·authorization, jump server, MFA와 접속방식에 적합한 활동기록을 결합하여 재구성 가능한 audit trail을 확보한다."
     },
     {
       "section": "5. Vulnerability·Legacy·Configuration",
@@ -219,7 +223,8 @@
         "sw09_legacy_compensating_control",
         "sw09_secure_configuration_baseline",
         "sw09_security_change_control"
-      ]
+      ],
+      "intent": "위험기반 patch·vulnerability lifecycle, secure baseline과 legacy compensating control을 운영한다."
     },
     {
       "section": "6. 공급망과 이동경로",
@@ -230,7 +235,8 @@
         "sw09_sbom",
         "sw09_software_firmware_integrity",
         "sw09_removable_media"
-      ]
+      ],
+      "intent": "Supplier assurance, SBOM, software·firmware integrity와 removable media를 계약·검증·추적 workflow로 관리한다."
     },
     {
       "section": "7. 탐지와 사고대응",
@@ -242,7 +248,8 @@
         "sw09_incident_response_plan",
         "sw09_containment_eradication",
         "sw09_safety_coordination"
-      ]
+      ],
+      "intent": "Logging·time sync·triage를 기반으로 역할, containment, eradication과 safety coordination을 수행한다."
     },
     {
       "section": "8. 신뢰복구와 지속개선",
@@ -253,7 +260,8 @@
         "sw09_business_continuity",
         "sw09_exercise_metrics",
         "sw09_lifecycle_decommissioning"
-      ]
+      ],
+      "intent": "Offline·immutable backup, trusted recovery, business continuity와 exercise를 연결하고 MTTD와 MTTC(Mean Time to Contain)의 측정경계를 명시하여 복구증적을 확보한다."
     }
   ],
   "question_examples": [
