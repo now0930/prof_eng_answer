@@ -8,7 +8,7 @@
       "id": "historian_time_series_role",
       "anchor_id": "historian_time_series_role",
       "statement": "Historian은 공정·설비의 시계열 데이터를 장기간 수집·압축·조회하고 품질·시간 정보를 함께 보존하는 운영 데이터 기반이다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "historian",
         "time series",
@@ -36,7 +36,7 @@
       "id": "historian_not_backup_only",
       "anchor_id": "historian_not_backup_only",
       "statement": "Historian은 단순 백업 저장소가 아니며 추세, Event, 품질, 압축, Context와 추적성 조회를 지원한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "historian",
         "trend",
@@ -65,7 +65,7 @@
       "id": "mes_execution_role",
       "anchor_id": "mes_execution_role",
       "statement": "MES는 생산지시를 현장 실행으로 전개하고 작업·실적·품질·자원·공정상태와 Genealogy를 관리하는 제조운영 계층이다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "MES",
         "production execution",
@@ -93,7 +93,7 @@
       "id": "erp_business_role",
       "anchor_id": "erp_business_role",
       "statement": "ERP는 주문, 계획, 자재, 원가, 재무와 기업 자원을 관리하며 MES의 상세 실시간 제어 기능을 대체하지 않는다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "ERP",
         "order",
@@ -122,7 +122,7 @@
       "id": "isa95_hierarchy_interface",
       "anchor_id": "isa95_hierarchy_interface",
       "statement": "ISA-95는 기업과 제조운영·제어 계층의 기능, 정보객체와 인터페이스 경계를 정리하는 참조모델이지 단일 통신 Protocol이 아니다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "ISA-95",
         "hierarchy",
@@ -151,7 +151,7 @@
       "id": "it_ot_layered_integration",
       "anchor_id": "it_ot_layered_integration",
       "statement": "IT/OT 통합은 제어 안정성을 보존하면서 Edge·Gateway·Historian·MES·ERP 사이의 책임, 데이터 계약과 보안 경계를 계층적으로 설계해야 한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "IT/OT integration",
         "layered architecture",
@@ -208,7 +208,7 @@
       "id": "source_timestamp_event_time",
       "anchor_id": "source_timestamp_event_time",
       "statement": "Timestamp는 가능하면 데이터 발생원에 가까운 곳에서 Event Time으로 생성하고 수집·처리·저장 시간과 구분한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "timestamp",
         "event time",
@@ -237,7 +237,7 @@
       "id": "time_sync_alignment",
       "anchor_id": "time_sync_alignment",
       "statement": "다중 설비 데이터의 인과관계와 순서를 비교하려면 Clock 동기화, 시간대·Offset·Drift 관리와 Time alignment가 필요하다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "time synchronization",
         "clock drift",
@@ -265,7 +265,7 @@
       "id": "quality_code_semantics",
       "anchor_id": "quality_code_semantics",
       "statement": "Quality Code는 Good·Bad·Uncertain과 원인·상태 정보를 데이터 값과 함께 전달하며 시스템 간 의미 매핑이 필요하다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "quality code",
         "good",
@@ -294,7 +294,7 @@
       "id": "bad_uncertain_propagation",
       "anchor_id": "bad_uncertain_propagation",
       "statement": "Bad·Uncertain 데이터는 유효값이나 0으로 묵시 변환하지 말고 원 품질, 대체 규칙, 추정 여부와 사용 제한을 전파해야 한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "bad data",
         "uncertain data",
@@ -379,7 +379,7 @@
       "id": "store_and_forward_recovery",
       "anchor_id": "store_and_forward_recovery",
       "statement": "Store-and-forward는 통신 단절 중 데이터를 Local Buffer에 보관하고 복구 후 재전송하지만 용량, 순서, 중복, 만료와 재전송 속도를 설계해야 한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "store and forward",
         "buffer",
@@ -437,7 +437,7 @@
       "id": "compression_deadband_tradeoff",
       "anchor_id": "compression_deadband_tradeoff",
       "statement": "Compression과 Deadband는 저장량·통신량을 줄이지만 작은 변화, 짧은 Event와 분석 재현성을 손상할 수 있어 목적별 한계와 예외를 설정한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "compression",
         "deadband",
@@ -493,7 +493,7 @@
       "id": "metadata_context_role",
       "anchor_id": "metadata_context_role",
       "statement": "Metadata와 Context는 Tag의 단위, 설비, 위치, 측정점, 공정단계, 제품, Batch와 Calibration 상태를 연결해 데이터 의미를 만든다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "metadata",
         "context",
@@ -550,7 +550,7 @@
       "id": "information_model_semantics",
       "anchor_id": "information_model_semantics",
       "statement": "Information Model은 Asset·공정·제품·상태와 관계를 구조화하여 서로 다른 시스템이 같은 의미로 데이터를 해석하도록 한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "information model",
         "asset model",
@@ -578,7 +578,7 @@
       "id": "master_data_consistency",
       "anchor_id": "master_data_consistency",
       "statement": "설비, 품목, 공정, Recipe, 작업장과 단위 같은 Master Data의 식별자와 Version을 시스템 간 일관되게 관리해야 한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "master data",
         "identifier",
@@ -663,7 +663,7 @@
       "id": "traceability_audit",
       "anchor_id": "traceability_audit",
       "statement": "Traceability는 원천, 변환, 품질판정, 전송, 저장, 소비와 변경이력을 연결해 결과의 재현과 Audit을 가능하게 한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "traceability",
         "lineage",
@@ -691,7 +691,7 @@
       "id": "batch_genealogy",
       "anchor_id": "batch_genealogy",
       "statement": "Batch Genealogy는 원자재 Lot, 설비, Recipe·Version, 작업·공정조건, 품질결과와 완제품 Lot의 관계를 시간과 식별자로 연결한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "batch genealogy",
         "lot",
@@ -777,7 +777,7 @@
       "id": "realtime_fit_for_purpose",
       "anchor_id": "realtime_fit_for_purpose",
       "statement": "실시간 처리는 지연이 0이라는 뜻이 아니라 업무·제어 목적에 맞는 유한한 Deadline, 지연 예산과 결정성 수준을 만족하는 것이다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "real-time",
         "deadline",
@@ -806,7 +806,7 @@
       "id": "semantic_interoperability",
       "anchor_id": "semantic_interoperability",
       "statement": "Protocol 연결이 성공해도 단위, 품질, Timestamp, 식별자와 Context가 일치하지 않으면 Semantic Interoperability는 달성되지 않는다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "semantic interoperability",
         "unit",
@@ -835,7 +835,7 @@
       "id": "topic_boundary_transport_model",
       "anchor_id": "topic_boundary_transport_model",
       "statement": "SW-07은 데이터 전달 Protocol과 상호운용을, SW-11은 전달된 데이터의 의미·품질·저장·Context와 상위 통합을, SW-12는 그 데이터를 이용한 학습·추론을 소유한다.",
-      "importance": "essential",
+      "importance": "must",
       "keywords": [
         "SW-07",
         "SW-11",

@@ -122,7 +122,8 @@
         "mes_execution_role",
         "erp_business_role",
         "isa95_hierarchy_interface"
-      ]
+      ],
+      "intent": "1. 계층과 역할"
     },
     {
       "section": "2. IT/OT 수집·통합 구조",
@@ -135,7 +136,8 @@
         "it_ot_layered_integration",
         "edge_gateway_role",
         "acquisition_sampling_semantics"
-      ]
+      ],
+      "intent": "2. IT/OT 수집·통합 구조"
     },
     {
       "section": "3. 시간과 실시간 처리",
@@ -152,7 +154,8 @@
         "timeliness_latency_metric",
         "streaming_event_processing",
         "realtime_fit_for_purpose"
-      ]
+      ],
+      "intent": "3. 시간과 실시간 처리"
     },
     {
       "section": "4. 품질과 손실관리",
@@ -169,7 +172,8 @@
         "data_completeness_metric",
         "compression_deadband_tradeoff",
         "quality_event_preservation"
-      ]
+      ],
+      "intent": "4. 품질과 손실관리"
     },
     {
       "section": "5. 의미와 식별체계",
@@ -186,7 +190,8 @@
         "information_model_semantics",
         "master_data_consistency",
         "semantic_interoperability"
-      ]
+      ],
+      "intent": "5. 의미와 식별체계"
     },
     {
       "section": "6. 저장·복구·보존",
@@ -199,7 +204,8 @@
         "store_and_forward_recovery",
         "retention_lifecycle",
         "event_snapshot_distinction"
-      ]
+      ],
+      "intent": "6. 저장·복구·보존"
     },
     {
       "section": "7. Governance와 추적성",
@@ -212,7 +218,8 @@
         "data_governance_ownership",
         "traceability_audit",
         "batch_genealogy"
-      ]
+      ],
+      "intent": "7. Governance와 추적성"
     },
     {
       "section": "8. Topic 경계와 결론",
@@ -221,7 +228,8 @@
       ],
       "anchor_refs": [
         "topic_boundary_transport_model"
-      ]
+      ],
+      "intent": "8. Topic 경계와 결론"
     }
   ],
   "high_score_points": [
