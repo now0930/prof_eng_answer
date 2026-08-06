@@ -181,7 +181,8 @@
         "sw08_jitter_definition",
         "sw08_cycle_time_definition",
         "sw08_response_time_definition"
-      ]
+      ],
+      "intent": "제어기능별 Latency, Jitter, Cycle time, Response time, loss, 동기오차와 recovery 목표를 수치화한다."
     },
     {
       "section": "2. Determinism과 traffic budget",
@@ -191,7 +192,8 @@
         "sw08_determinism_definition",
         "sw08_worst_case_analysis",
         "sw08_network_load_headroom"
-      ]
+      ],
+      "intent": "Worst-case delay, traffic matrix, burst, load headroom과 deadline으로 결정성을 설계한다."
     },
     {
       "section": "3. QoS·Scheduling·TSN",
@@ -203,7 +205,8 @@
         "sw08_tsn_qbv",
         "sw08_tsn_preemption",
         "sw08_tsn_policing"
-      ]
+      ],
+      "intent": "Priority, admission control, scheduling과 TSN shaping·preemption·policing의 역할을 연결한다."
     },
     {
       "section": "4. 시간동기화",
@@ -213,7 +216,8 @@
         "sw08_ptp_clock_architecture",
         "sw08_timestamping_accuracy",
         "sw08_sync_not_determinism"
-      ]
+      ],
+      "intent": "PTP clock hierarchy, timestamping, asymmetry, holdover와 동기오차 acceptance를 설명한다."
     },
     {
       "section": "5. Redundancy와 복구기술",
@@ -226,7 +230,8 @@
         "sw08_dlr",
         "sw08_prp",
         "sw08_hsr"
-      ]
+      ],
+      "intent": "보호고장과 허용복구시간을 기준으로 ring, MRP, DLR, PRP와 HSR을 비교한다."
     },
     {
       "section": "6. Fault traffic와 failover",
@@ -237,7 +242,8 @@
         "sw08_multicast_management",
         "sw08_congestion_buffering",
         "sw08_failover_state_consistency"
-      ]
+      ],
+      "intent": "Packet loss, storm, multicast, congestion과 application state consistency를 다룬다."
     },
     {
       "section": "7. Resilience 운전전략",
@@ -247,7 +253,8 @@
         "sw08_graceful_degradation",
         "sw08_redundancy_health_monitoring",
         "sw08_failure_domain_independence"
-      ]
+      ],
+      "intent": "Failure domain 독립성, redundancy health, local fallback과 graceful degradation을 제시한다."
     },
     {
       "section": "8. 검증과 결론",
@@ -257,7 +264,8 @@
         "sw08_measurement_acceptance",
         "sw08_sw07_boundary",
         "sw08_sw09_boundary"
-      ]
+      ],
+      "intent": "Synchronized measurement와 fault injection으로 acceptance하고 SW-07·SW-09 경계를 정리한다."
     }
   ],
   "question_examples": [
