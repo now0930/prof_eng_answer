@@ -1,0 +1,1118 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+  "title_ko": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "id": "sis_sif_relation",
+      "anchor_id": "sis_sif_relation",
+      "statement": "SIS는 하나 이상의 SIF를 구현하는 계장 시스템이다.",
+      "importance": "core",
+      "keywords": [
+        "SIS",
+        "SIF",
+        "safety instrumented system"
+      ],
+      "core_terms": [
+        "SIS",
+        "SIF",
+        "safety instrumented system"
+      ],
+      "accepted_explanations": [
+        "SIS는 하나 이상의 SIF를 구현하는 계장 시스템이다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "SIS는 하나 이상의 SIF를 구현하는 계장 시스템이다.",
+      "description": "SIS는 하나 이상의 SIF를 구현하는 계장 시스템이다."
+    },
+    {
+      "id": "sil_property_of_safety_function",
+      "anchor_id": "sil_property_of_safety_function",
+      "statement": "SIL은 개별 제품명이 아니라 Safety Function에 요구되는 Safety Integrity의 이산 수준이다.",
+      "importance": "core",
+      "keywords": [
+        "SIL",
+        "safety function",
+        "safety integrity"
+      ],
+      "core_terms": [
+        "SIL",
+        "safety function",
+        "safety integrity"
+      ],
+      "accepted_explanations": [
+        "SIL은 개별 제품명이 아니라 Safety Function에 요구되는 Safety Integrity의 이산 수준이다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "SIL은 개별 제품명이 아니라 Safety Function에 요구되는 Safety Integrity의 이산 수준이다.",
+      "description": "SIL은 개별 제품명이 아니라 Safety Function에 요구되는 Safety Integrity의 이산 수준이다."
+    },
+    {
+      "id": "sif_end_to_end_boundary",
+      "anchor_id": "sif_end_to_end_boundary",
+      "statement": "SIF는 Sensor, Logic Solver, Final Element와 관련 지원요소의 전체 안전 기능 경로로 평가한다.",
+      "importance": "core",
+      "keywords": [
+        "sensor",
+        "logic solver",
+        "final element",
+        "SIF"
+      ],
+      "core_terms": [
+        "sensor",
+        "logic solver",
+        "final element",
+        "SIF"
+      ],
+      "accepted_explanations": [
+        "SIF는 Sensor, Logic Solver, Final Element와 관련 지원요소의 전체 안전 기능 경로로 평가한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "SIF는 Sensor, Logic Solver, Final Element와 관련 지원요소의 전체 안전 기능 경로로 평가한다.",
+      "description": "SIF는 Sensor, Logic Solver, Final Element와 관련 지원요소의 전체 안전 기능 경로로 평가한다."
+    },
+    {
+      "id": "risk_to_srs_flow",
+      "anchor_id": "risk_to_srs_flow",
+      "statement": "Hazard와 Risk 분석 결과는 보호계층 할당과 SRS의 기능·무결성 요구로 연결된다.",
+      "importance": "core",
+      "keywords": [
+        "hazard",
+        "risk",
+        "SRS",
+        "allocation"
+      ],
+      "core_terms": [
+        "hazard",
+        "risk",
+        "SRS",
+        "allocation"
+      ],
+      "accepted_explanations": [
+        "Hazard와 Risk 분석 결과는 보호계층 할당과 SRS의 기능·무결성 요구로 연결된다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Hazard와 Risk 분석 결과는 보호계층 할당과 SRS의 기능·무결성 요구로 연결된다.",
+      "description": "Hazard와 Risk 분석 결과는 보호계층 할당과 SRS의 기능·무결성 요구로 연결된다."
+    },
+    {
+      "id": "srs_functional_integrity_requirements",
+      "anchor_id": "srs_functional_integrity_requirements",
+      "statement": "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다.",
+      "importance": "core",
+      "keywords": [
+        "SRS",
+        "functional requirement",
+        "integrity requirement"
+      ],
+      "core_terms": [
+        "SRS",
+        "functional requirement",
+        "integrity requirement"
+      ],
+      "accepted_explanations": [
+        "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다.",
+      "description": "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다."
+    },
+    {
+      "id": "application_program_role",
+      "anchor_id": "application_program_role",
+      "statement": "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다.",
+      "importance": "core",
+      "keywords": [
+        "application program",
+        "safety PLC",
+        "logic solver"
+      ],
+      "core_terms": [
+        "application program",
+        "safety PLC",
+        "logic solver"
+      ],
+      "accepted_explanations": [
+        "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다.",
+      "description": "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다."
+    },
+    {
+      "id": "software_safety_lifecycle",
+      "anchor_id": "software_safety_lifecycle",
+      "statement": "Safety Software는 명세, 설계, 구현, 통합, Verification, Validation, 운전지원 및 변경의 수명주기로 관리한다.",
+      "importance": "core",
+      "keywords": [
+        "software safety lifecycle",
+        "verification",
+        "validation"
+      ],
+      "core_terms": [
+        "software safety lifecycle",
+        "verification",
+        "validation"
+      ],
+      "accepted_explanations": [
+        "Safety Software는 명세, 설계, 구현, 통합, Verification, Validation, 운전지원 및 변경의 수명주기로 관리한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Safety Software는 명세, 설계, 구현, 통합, Verification, Validation, 운전지원 및 변경의 수명주기로 관리한다.",
+      "description": "Safety Software는 명세, 설계, 구현, 통합, Verification, Validation, 운전지원 및 변경의 수명주기로 관리한다."
+    },
+    {
+      "id": "random_hardware_failure",
+      "anchor_id": "random_hardware_failure",
+      "statement": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다.",
+      "importance": "core",
+      "keywords": [
+        "random hardware failure",
+        "degradation",
+        "failure rate"
+      ],
+      "core_terms": [
+        "random hardware failure",
+        "degradation",
+        "failure rate"
+      ],
+      "accepted_explanations": [
+        "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다.",
+      "description": "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다."
+    },
+    {
+      "id": "systematic_failure",
+      "anchor_id": "systematic_failure",
+      "statement": "Systematic Failure는 특정 조건에서 반복 재현될 수 있는 요구, 설계, Software, Tool, 설치 또는 변경 결함이다.",
+      "importance": "core",
+      "keywords": [
+        "systematic failure",
+        "software error",
+        "specification"
+      ],
+      "core_terms": [
+        "systematic failure",
+        "software error",
+        "specification"
+      ],
+      "accepted_explanations": [
+        "Systematic Failure는 특정 조건에서 반복 재현될 수 있는 요구, 설계, Software, Tool, 설치 또는 변경 결함이다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Systematic Failure는 특정 조건에서 반복 재현될 수 있는 요구, 설계, Software, Tool, 설치 또는 변경 결함이다.",
+      "description": "Systematic Failure는 특정 조건에서 반복 재현될 수 있는 요구, 설계, Software, Tool, 설치 또는 변경 결함이다."
+    },
+    {
+      "id": "systematic_not_simple_rate",
+      "anchor_id": "systematic_not_simple_rate",
+      "statement": "Software의 체계적 고장은 단순한 일정 고장률 계산만으로 충분히 통제할 수 없다.",
+      "importance": "core",
+      "keywords": [
+        "systematic capability",
+        "lifecycle",
+        "software failure rate"
+      ],
+      "core_terms": [
+        "systematic capability",
+        "lifecycle",
+        "software failure rate"
+      ],
+      "accepted_explanations": [
+        "Software의 체계적 고장은 단순한 일정 고장률 계산만으로 충분히 통제할 수 없다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Software의 체계적 고장은 단순한 일정 고장률 계산만으로 충분히 통제할 수 없다.",
+      "description": "Software의 체계적 고장은 단순한 일정 고장률 계산만으로 충분히 통제할 수 없다."
+    },
+    {
+      "id": "verification_definition",
+      "anchor_id": "verification_definition",
+      "statement": "Verification은 각 단계 산출물이 그 단계의 입력 요구를 만족하는지 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "verification",
+        "phase output",
+        "requirements"
+      ],
+      "core_terms": [
+        "verification",
+        "phase output",
+        "requirements"
+      ],
+      "accepted_explanations": [
+        "Verification은 각 단계 산출물이 그 단계의 입력 요구를 만족하는지 확인한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Verification은 각 단계 산출물이 그 단계의 입력 요구를 만족하는지 확인한다.",
+      "description": "Verification은 각 단계 산출물이 그 단계의 입력 요구를 만족하는지 확인한다."
+    },
+    {
+      "id": "validation_definition",
+      "anchor_id": "validation_definition",
+      "statement": "Validation은 통합된 SIS가 의도된 운전환경에서 SRS를 만족하는지 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "validation",
+        "integrated SIS",
+        "intended operation"
+      ],
+      "core_terms": [
+        "validation",
+        "integrated SIS",
+        "intended operation"
+      ],
+      "accepted_explanations": [
+        "Validation은 통합된 SIS가 의도된 운전환경에서 SRS를 만족하는지 확인한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Validation은 통합된 SIS가 의도된 운전환경에서 SRS를 만족하는지 확인한다.",
+      "description": "Validation은 통합된 SIS가 의도된 운전환경에서 SRS를 만족하는지 확인한다."
+    },
+    {
+      "id": "functional_test_boundary",
+      "anchor_id": "functional_test_boundary",
+      "statement": "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다.",
+      "importance": "core",
+      "keywords": [
+        "functional test",
+        "test case",
+        "validation"
+      ],
+      "core_terms": [
+        "functional test",
+        "test case",
+        "validation"
+      ],
+      "accepted_explanations": [
+        "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다.",
+      "description": "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다."
+    },
+    {
+      "id": "proof_test_relation",
+      "anchor_id": "proof_test_relation",
+      "statement": "Proof Test는 진단으로 발견되지 않은 위험 고장을 검출하고 기능을 복원하기 위한 주기 시험이며 Software Validation을 대체하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "proof test",
+        "dangerous undetected",
+        "validation"
+      ],
+      "core_terms": [
+        "proof test",
+        "dangerous undetected",
+        "validation"
+      ],
+      "accepted_explanations": [
+        "Proof Test는 진단으로 발견되지 않은 위험 고장을 검출하고 기능을 복원하기 위한 주기 시험이며 Software Validation을 대체하지 않는다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Proof Test는 진단으로 발견되지 않은 위험 고장을 검출하고 기능을 복원하기 위한 주기 시험이며 Software Validation을 대체하지 않는다.",
+      "description": "Proof Test는 진단으로 발견되지 않은 위험 고장을 검출하고 기능을 복원하기 위한 주기 시험이며 Software Validation을 대체하지 않는다."
+    },
+    {
+      "id": "independence_purpose",
+      "anchor_id": "independence_purpose",
+      "statement": "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다.",
+      "importance": "core",
+      "keywords": [
+        "independence",
+        "verification",
+        "assessment"
+      ],
+      "core_terms": [
+        "independence",
+        "verification",
+        "assessment"
+      ],
+      "accepted_explanations": [
+        "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다.",
+      "description": "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다."
+    },
+    {
+      "id": "separation_shared_resources",
+      "anchor_id": "separation_shared_resources",
+      "statement": "BPCS와 SIS를 분리해도 Sensor, 전원, Network, Engineering Tool 또는 유지보수 절차를 공유하면 공통원인이 남을 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "BPCS",
+        "SIS",
+        "separation",
+        "shared resource"
+      ],
+      "core_terms": [
+        "BPCS",
+        "SIS",
+        "separation",
+        "shared resource"
+      ],
+      "accepted_explanations": [
+        "BPCS와 SIS를 분리해도 Sensor, 전원, Network, Engineering Tool 또는 유지보수 절차를 공유하면 공통원인이 남을 수 있다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "BPCS와 SIS를 분리해도 Sensor, 전원, Network, Engineering Tool 또는 유지보수 절차를 공유하면 공통원인이 남을 수 있다.",
+      "description": "BPCS와 SIS를 분리해도 Sensor, 전원, Network, Engineering Tool 또는 유지보수 절차를 공유하면 공통원인이 남을 수 있다."
+    },
+    {
+      "id": "common_cause_dependency",
+      "anchor_id": "common_cause_dependency",
+      "statement": "공통원인과 종속성은 독립 채널 가정을 훼손하므로 정량·정성 평가에서 별도 고려한다.",
+      "importance": "core",
+      "keywords": [
+        "common cause",
+        "dependency",
+        "beta factor"
+      ],
+      "core_terms": [
+        "common cause",
+        "dependency",
+        "beta factor"
+      ],
+      "accepted_explanations": [
+        "공통원인과 종속성은 독립 채널 가정을 훼손하므로 정량·정성 평가에서 별도 고려한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "공통원인과 종속성은 독립 채널 가정을 훼손하므로 정량·정성 평가에서 별도 고려한다.",
+      "description": "공통원인과 종속성은 독립 채널 가정을 훼손하므로 정량·정성 평가에서 별도 고려한다."
+    },
+    {
+      "id": "diversity_tradeoff",
+      "anchor_id": "diversity_tradeoff",
+      "statement": "Diversity는 일부 공통원인을 줄일 수 있으나 복잡성과 새로운 체계적 오류를 증가시킬 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "diversity",
+        "common cause",
+        "complexity"
+      ],
+      "core_terms": [
+        "diversity",
+        "common cause",
+        "complexity"
+      ],
+      "accepted_explanations": [
+        "Diversity는 일부 공통원인을 줄일 수 있으나 복잡성과 새로운 체계적 오류를 증가시킬 수 있다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Diversity는 일부 공통원인을 줄일 수 있으나 복잡성과 새로운 체계적 오류를 증가시킬 수 있다.",
+      "description": "Diversity는 일부 공통원인을 줄일 수 있으나 복잡성과 새로운 체계적 오류를 증가시킬 수 있다."
+    },
+    {
+      "id": "certified_product_scope",
+      "anchor_id": "certified_product_scope",
+      "statement": "인증 제품은 인증 범위, Systematic Capability, Architecture 조건과 Safety Manual 제한을 만족할 때만 증거가 된다.",
+      "importance": "core",
+      "keywords": [
+        "certified product",
+        "systematic capability",
+        "certificate"
+      ],
+      "core_terms": [
+        "certified product",
+        "systematic capability",
+        "certificate"
+      ],
+      "accepted_explanations": [
+        "인증 제품은 인증 범위, Systematic Capability, Architecture 조건과 Safety Manual 제한을 만족할 때만 증거가 된다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "인증 제품은 인증 범위, Systematic Capability, Architecture 조건과 Safety Manual 제한을 만족할 때만 증거가 된다.",
+      "description": "인증 제품은 인증 범위, Systematic Capability, Architecture 조건과 Safety Manual 제한을 만족할 때만 증거가 된다."
+    },
+    {
+      "id": "safety_manual_constraints",
+      "anchor_id": "safety_manual_constraints",
+      "statement": "Safety Manual의 가정, 사용조건, Diagnostic, Proof Test 및 제한사항은 SIF 설계에 반영해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "safety manual",
+        "assumption",
+        "constraint"
+      ],
+      "core_terms": [
+        "safety manual",
+        "assumption",
+        "constraint"
+      ],
+      "accepted_explanations": [
+        "Safety Manual의 가정, 사용조건, Diagnostic, Proof Test 및 제한사항은 SIF 설계에 반영해야 한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Safety Manual의 가정, 사용조건, Diagnostic, Proof Test 및 제한사항은 SIF 설계에 반영해야 한다.",
+      "description": "Safety Manual의 가정, 사용조건, Diagnostic, Proof Test 및 제한사항은 SIF 설계에 반영해야 한다."
+    },
+    {
+      "id": "proven_in_use_evidence",
+      "anchor_id": "proven_in_use_evidence",
+      "statement": "Proven in Use는 식별된 Version, 대표성 있는 환경, 충분한 운전이력과 결함기록을 요구한다.",
+      "importance": "core",
+      "keywords": [
+        "proven in use",
+        "operating history",
+        "version"
+      ],
+      "core_terms": [
+        "proven in use",
+        "operating history",
+        "version"
+      ],
+      "accepted_explanations": [
+        "Proven in Use는 식별된 Version, 대표성 있는 환경, 충분한 운전이력과 결함기록을 요구한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Proven in Use는 식별된 Version, 대표성 있는 환경, 충분한 운전이력과 결함기록을 요구한다.",
+      "description": "Proven in Use는 식별된 Version, 대표성 있는 환경, 충분한 운전이력과 결함기록을 요구한다."
+    },
+    {
+      "id": "tool_qualification_basis",
+      "anchor_id": "tool_qualification_basis",
+      "statement": "Tool Qualification은 Tool 오류의 Safety 영향과 후속 단계의 오류 검출 가능성을 근거로 정한다.",
+      "importance": "core",
+      "keywords": [
+        "tool qualification",
+        "compiler",
+        "code generator"
+      ],
+      "core_terms": [
+        "tool qualification",
+        "compiler",
+        "code generator"
+      ],
+      "accepted_explanations": [
+        "Tool Qualification은 Tool 오류의 Safety 영향과 후속 단계의 오류 검출 가능성을 근거로 정한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Tool Qualification은 Tool 오류의 Safety 영향과 후속 단계의 오류 검출 가능성을 근거로 정한다.",
+      "description": "Tool Qualification은 Tool 오류의 Safety 영향과 후속 단계의 오류 검출 가능성을 근거로 정한다."
+    },
+    {
+      "id": "library_validation_control",
+      "anchor_id": "library_validation_control",
+      "statement": "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다.",
+      "importance": "core",
+      "keywords": [
+        "library validation",
+        "function block",
+        "version"
+      ],
+      "core_terms": [
+        "library validation",
+        "function block",
+        "version"
+      ],
+      "accepted_explanations": [
+        "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다.",
+      "description": "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다."
+    },
+    {
+      "id": "bidirectional_traceability",
+      "anchor_id": "bidirectional_traceability",
+      "statement": "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다.",
+      "importance": "core",
+      "keywords": [
+        "traceability",
+        "SRS",
+        "test result"
+      ],
+      "core_terms": [
+        "traceability",
+        "SRS",
+        "test result"
+      ],
+      "accepted_explanations": [
+        "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다.",
+      "description": "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다."
+    },
+    {
+      "id": "modification_revalidation",
+      "anchor_id": "modification_revalidation",
+      "statement": "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다.",
+      "importance": "core",
+      "keywords": [
+        "modification",
+        "impact analysis",
+        "regression",
+        "revalidation"
+      ],
+      "core_terms": [
+        "modification",
+        "impact analysis",
+        "regression",
+        "revalidation"
+      ],
+      "accepted_explanations": [
+        "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다.",
+      "description": "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다."
+    },
+    {
+      "id": "bypass_override_controls",
+      "anchor_id": "bypass_override_controls",
+      "statement": "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다.",
+      "importance": "core",
+      "keywords": [
+        "bypass",
+        "override",
+        "compensating measure"
+      ],
+      "core_terms": [
+        "bypass",
+        "override",
+        "compensating measure"
+      ],
+      "accepted_explanations": [
+        "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다.",
+      "description": "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다."
+    },
+    {
+      "id": "audit_role",
+      "anchor_id": "audit_role",
+      "statement": "Functional Safety Audit은 수명주기 활동과 관리체계가 계획대로 수행되는지 확인한다.",
+      "importance": "important",
+      "keywords": [
+        "audit",
+        "functional safety management",
+        "lifecycle"
+      ],
+      "core_terms": [
+        "audit",
+        "functional safety management",
+        "lifecycle"
+      ],
+      "accepted_explanations": [
+        "Functional Safety Audit은 수명주기 활동과 관리체계가 계획대로 수행되는지 확인한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Functional Safety Audit은 수명주기 활동과 관리체계가 계획대로 수행되는지 확인한다.",
+      "description": "Functional Safety Audit은 수명주기 활동과 관리체계가 계획대로 수행되는지 확인한다."
+    },
+    {
+      "id": "competence_management",
+      "anchor_id": "competence_management",
+      "statement": "Competence는 역할별 교육, 경험, 책임과 평가 근거로 관리한다.",
+      "importance": "core",
+      "keywords": [
+        "competence",
+        "role",
+        "training"
+      ],
+      "core_terms": [
+        "competence",
+        "role",
+        "training"
+      ],
+      "accepted_explanations": [
+        "Competence는 역할별 교육, 경험, 책임과 평가 근거로 관리한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "Competence는 역할별 교육, 경험, 책임과 평가 근거로 관리한다.",
+      "description": "Competence는 역할별 교육, 경험, 책임과 평가 근거로 관리한다."
+    },
+    {
+      "id": "pfd_pfh_mode_boundary",
+      "anchor_id": "pfd_pfh_mode_boundary",
+      "statement": "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "PFDavg",
+        "PFH",
+        "demand mode"
+      ],
+      "core_terms": [
+        "PFDavg",
+        "PFH",
+        "demand mode"
+      ],
+      "accepted_explanations": [
+        "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
+      "description": "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다."
+    },
+    {
+      "id": "quantitative_assumptions",
+      "anchor_id": "quantitative_assumptions",
+      "statement": "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
+      "importance": "core",
+      "keywords": [
+        "PFD",
+        "proof test interval",
+        "repair",
+        "assumption"
+      ],
+      "core_terms": [
+        "PFD",
+        "proof test interval",
+        "repair",
+        "assumption"
+      ],
+      "accepted_explanations": [
+        "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
+        "정의, 적용조건, 수명주기 단계와 인접 개념의 관계를 인과적으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "약어와 키워드만 나열하거나 기능안전의 적용조건과 전체 SIF 경계를 생략한다."
+      ],
+      "grading_notes": "기능안전 용어의 소유관계, 적용조건, 전 수명주기 증거와 과장 없는 한계 설명을 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
+      "description": "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "certified_product_auto_sil",
+      "claim": "SIL 인증 제품을 사용하면 전체 SIF가 자동으로 SIL을 만족한다.",
+      "correction": "인증 제품은 전체 SIF 적합성의 일부 증거이며 적용범위와 SIF 전체 설계·운영 증거를 확인한다.",
+      "wrong_claim": "SIL 인증 제품을 사용하면 전체 SIF가 자동으로 SIL을 만족한다.",
+      "correct_rule": "인증 제품은 전체 SIF 적합성의 일부 증거이며 적용범위와 SIF 전체 설계·운영 증거를 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "인증 제품은 전체 SIF 적합성의 일부 증거이며 적용범위와 SIF 전체 설계·운영 증거를 확인한다.",
+      "description": "SIL 인증 제품을 사용하면 전체 SIF가 자동으로 SIL을 만족한다.",
+      "grading_notes": "인증 제품은 전체 SIF 적합성의 일부 증거이며 적용범위와 SIF 전체 설계·운영 증거를 확인한다."
+    },
+    {
+      "id": "sil_is_device_rating_only",
+      "claim": "SIL은 PLC나 Sensor 같은 개별 장치에만 부여되는 제품 등급이다.",
+      "correction": "SIL은 Safety Function의 요구 무결성 수준이며 제품 인증은 적용 가능성 증거다.",
+      "wrong_claim": "SIL은 PLC나 Sensor 같은 개별 장치에만 부여되는 제품 등급이다.",
+      "correct_rule": "SIL은 Safety Function의 요구 무결성 수준이며 제품 인증은 적용 가능성 증거다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "SIL은 Safety Function의 요구 무결성 수준이며 제품 인증은 적용 가능성 증거다.",
+      "description": "SIL은 PLC나 Sensor 같은 개별 장치에만 부여되는 제품 등급이다.",
+      "grading_notes": "SIL은 Safety Function의 요구 무결성 수준이며 제품 인증은 적용 가능성 증거다."
+    },
+    {
+      "id": "software_accuracy_guarantees_safety",
+      "claim": "Safety Application Program의 정확한 동작만 확인하면 Hardware와 운영절차 검토는 필요 없다.",
+      "correction": "기능안전은 Hardware, Software, 사람, 절차와 Lifecycle 증거를 함께 요구한다.",
+      "wrong_claim": "Safety Application Program의 정확한 동작만 확인하면 Hardware와 운영절차 검토는 필요 없다.",
+      "correct_rule": "기능안전은 Hardware, Software, 사람, 절차와 Lifecycle 증거를 함께 요구한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "기능안전은 Hardware, Software, 사람, 절차와 Lifecycle 증거를 함께 요구한다.",
+      "description": "Safety Application Program의 정확한 동작만 확인하면 Hardware와 운영절차 검토는 필요 없다.",
+      "grading_notes": "기능안전은 Hardware, Software, 사람, 절차와 Lifecycle 증거를 함께 요구한다."
+    },
+    {
+      "id": "software_random_failure_rate_only",
+      "claim": "Software 고장은 모두 Random Hardware Failure처럼 일정 고장률로 계산할 수 있다.",
+      "correction": "Software 결함은 주로 체계적 고장으로 수명주기·검증·형상통제로 억제한다.",
+      "wrong_claim": "Software 고장은 모두 Random Hardware Failure처럼 일정 고장률로 계산할 수 있다.",
+      "correct_rule": "Software 결함은 주로 체계적 고장으로 수명주기·검증·형상통제로 억제한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Software 결함은 주로 체계적 고장으로 수명주기·검증·형상통제로 억제한다.",
+      "description": "Software 고장은 모두 Random Hardware Failure처럼 일정 고장률로 계산할 수 있다.",
+      "grading_notes": "Software 결함은 주로 체계적 고장으로 수명주기·검증·형상통제로 억제한다."
+    },
+    {
+      "id": "pfd_pfh_interchangeable",
+      "claim": "PFDavg와 PFH는 동일하므로 Demand Mode와 관계없이 바꾸어 쓸 수 있다.",
+      "correction": "PFDavg와 PFH는 적용 Demand Mode가 다르므로 구분한다.",
+      "wrong_claim": "PFDavg와 PFH는 동일하므로 Demand Mode와 관계없이 바꾸어 쓸 수 있다.",
+      "correct_rule": "PFDavg와 PFH는 적용 Demand Mode가 다르므로 구분한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "PFDavg와 PFH는 적용 Demand Mode가 다르므로 구분한다.",
+      "description": "PFDavg와 PFH는 동일하므로 Demand Mode와 관계없이 바꾸어 쓸 수 있다.",
+      "grading_notes": "PFDavg와 PFH는 적용 Demand Mode가 다르므로 구분한다."
+    },
+    {
+      "id": "proof_test_equals_validation",
+      "claim": "Proof Test를 수행하면 Safety Software Validation이 완료된다.",
+      "correction": "Proof Test와 Software/System Validation은 목적·시점·고장집합이 다른 활동이다.",
+      "wrong_claim": "Proof Test를 수행하면 Safety Software Validation이 완료된다.",
+      "correct_rule": "Proof Test와 Software/System Validation은 목적·시점·고장집합이 다른 활동이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Proof Test와 Software/System Validation은 목적·시점·고장집합이 다른 활동이다.",
+      "description": "Proof Test를 수행하면 Safety Software Validation이 완료된다.",
+      "grading_notes": "Proof Test와 Software/System Validation은 목적·시점·고장집합이 다른 활동이다."
+    },
+    {
+      "id": "functional_test_equals_full_validation",
+      "claim": "Functional Test 몇 건이 통과하면 전체 SRS Validation이 완료된다.",
+      "correction": "Validation은 전체 적용 SRS와 의도 운전환경을 대상으로 한다.",
+      "wrong_claim": "Functional Test 몇 건이 통과하면 전체 SRS Validation이 완료된다.",
+      "correct_rule": "Validation은 전체 적용 SRS와 의도 운전환경을 대상으로 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Validation은 전체 적용 SRS와 의도 운전환경을 대상으로 한다.",
+      "description": "Functional Test 몇 건이 통과하면 전체 SRS Validation이 완료된다.",
+      "grading_notes": "Validation은 전체 적용 SRS와 의도 운전환경을 대상으로 한다."
+    },
+    {
+      "id": "different_cpu_guarantees_independence",
+      "claim": "BPCS와 SIS가 다른 CPU이면 독립성이 자동 보장된다.",
+      "correction": "공유 Sensor, 전원, Network, Tool, 절차와 인적 공통원인을 함께 검토한다.",
+      "wrong_claim": "BPCS와 SIS가 다른 CPU이면 독립성이 자동 보장된다.",
+      "correct_rule": "공유 Sensor, 전원, Network, Tool, 절차와 인적 공통원인을 함께 검토한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "공유 Sensor, 전원, Network, Tool, 절차와 인적 공통원인을 함께 검토한다.",
+      "description": "BPCS와 SIS가 다른 CPU이면 독립성이 자동 보장된다.",
+      "grading_notes": "공유 Sensor, 전원, Network, Tool, 절차와 인적 공통원인을 함께 검토한다."
+    },
+    {
+      "id": "diversity_eliminates_ccf",
+      "claim": "Diversity를 적용하면 Common Cause Failure가 제거된다.",
+      "correction": "Diversity는 일부 CCF를 줄일 수 있으나 제거를 보장하지 않으며 복잡성을 추가한다.",
+      "wrong_claim": "Diversity를 적용하면 Common Cause Failure가 제거된다.",
+      "correct_rule": "Diversity는 일부 CCF를 줄일 수 있으나 제거를 보장하지 않으며 복잡성을 추가한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Diversity는 일부 CCF를 줄일 수 있으나 제거를 보장하지 않으며 복잡성을 추가한다.",
+      "description": "Diversity를 적용하면 Common Cause Failure가 제거된다.",
+      "grading_notes": "Diversity는 일부 CCF를 줄일 수 있으나 제거를 보장하지 않으며 복잡성을 추가한다."
+    },
+    {
+      "id": "safety_manual_optional",
+      "claim": "Safety Manual은 제품 설명서이므로 설계 가정과 제한을 확인할 필요가 없다.",
+      "correction": "Safety Manual의 가정·제약·시험 요구를 적용 설계에 반영한다.",
+      "wrong_claim": "Safety Manual은 제품 설명서이므로 설계 가정과 제한을 확인할 필요가 없다.",
+      "correct_rule": "Safety Manual의 가정·제약·시험 요구를 적용 설계에 반영한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Safety Manual의 가정·제약·시험 요구를 적용 설계에 반영한다.",
+      "description": "Safety Manual은 제품 설명서이므로 설계 가정과 제한을 확인할 필요가 없다.",
+      "grading_notes": "Safety Manual의 가정·제약·시험 요구를 적용 설계에 반영한다."
+    },
+    {
+      "id": "certified_library_no_version_control",
+      "claim": "인증된 Library Block은 Version과 Parameter에 관계없이 재검증이 필요 없다.",
+      "correction": "승인 Version, Parameter 범위, 사용조건과 변경영향을 통제한다.",
+      "wrong_claim": "인증된 Library Block은 Version과 Parameter에 관계없이 재검증이 필요 없다.",
+      "correct_rule": "승인 Version, Parameter 범위, 사용조건과 변경영향을 통제한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "승인 Version, Parameter 범위, 사용조건과 변경영향을 통제한다.",
+      "description": "인증된 Library Block은 Version과 Parameter에 관계없이 재검증이 필요 없다.",
+      "grading_notes": "승인 Version, Parameter 범위, 사용조건과 변경영향을 통제한다."
+    },
+    {
+      "id": "proven_in_use_anecdote",
+      "claim": "Proven in Use는 현장에서 오래 사용했다는 진술만으로 성립한다.",
+      "correction": "식별된 Version, 대표 환경, 운전이력과 결함 데이터가 필요하다.",
+      "wrong_claim": "Proven in Use는 현장에서 오래 사용했다는 진술만으로 성립한다.",
+      "correct_rule": "식별된 Version, 대표 환경, 운전이력과 결함 데이터가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "식별된 Version, 대표 환경, 운전이력과 결함 데이터가 필요하다.",
+      "description": "Proven in Use는 현장에서 오래 사용했다는 진술만으로 성립한다.",
+      "grading_notes": "식별된 Version, 대표 환경, 운전이력과 결함 데이터가 필요하다."
+    },
+    {
+      "id": "tool_output_infallible",
+      "claim": "Tool에서 생성한 Code는 Tool 오류 가능성이 없으므로 검증하지 않아도 된다.",
+      "correction": "Tool 오류 영향과 검출 가능성에 따라 Qualification과 독립 확인을 수행한다.",
+      "wrong_claim": "Tool에서 생성한 Code는 Tool 오류 가능성이 없으므로 검증하지 않아도 된다.",
+      "correct_rule": "Tool 오류 영향과 검출 가능성에 따라 Qualification과 독립 확인을 수행한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Tool 오류 영향과 검출 가능성에 따라 Qualification과 독립 확인을 수행한다.",
+      "description": "Tool에서 생성한 Code는 Tool 오류 가능성이 없으므로 검증하지 않아도 된다.",
+      "grading_notes": "Tool 오류 영향과 검출 가능성에 따라 Qualification과 독립 확인을 수행한다."
+    },
+    {
+      "id": "bypass_no_sil_effect",
+      "claim": "Bypass와 Override는 운전 편의 기능이므로 SIL과 무관하다.",
+      "correction": "Bypass/Override는 SIF 가용 Risk Reduction을 훼손할 수 있어 엄격히 관리한다.",
+      "wrong_claim": "Bypass와 Override는 운전 편의 기능이므로 SIL과 무관하다.",
+      "correct_rule": "Bypass/Override는 SIF 가용 Risk Reduction을 훼손할 수 있어 엄격히 관리한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Bypass/Override는 SIF 가용 Risk Reduction을 훼손할 수 있어 엄격히 관리한다.",
+      "description": "Bypass와 Override는 운전 편의 기능이므로 SIL과 무관하다.",
+      "grading_notes": "Bypass/Override는 SIF 가용 Risk Reduction을 훼손할 수 있어 엄격히 관리한다."
+    },
+    {
+      "id": "small_change_no_regression",
+      "claim": "변경이 작으면 영향분석과 Regression 없이 Online Modification을 적용해도 된다.",
+      "correction": "모든 Safety Modification은 영향분석과 적정 Regression/Revalidation이 필요하다.",
+      "wrong_claim": "변경이 작으면 영향분석과 Regression 없이 Online Modification을 적용해도 된다.",
+      "correct_rule": "모든 Safety Modification은 영향분석과 적정 Regression/Revalidation이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "모든 Safety Modification은 영향분석과 적정 Regression/Revalidation이 필요하다.",
+      "description": "변경이 작으면 영향분석과 Regression 없이 Online Modification을 적용해도 된다.",
+      "grading_notes": "모든 Safety Modification은 영향분석과 적정 Regression/Revalidation이 필요하다."
+    },
+    {
+      "id": "audit_competence_paperwork_only",
+      "claim": "Audit와 Competence는 문서행위일 뿐 기능안전 성과와 관계없다.",
+      "correction": "관리체계 수행과 인적 역량은 체계적 고장 억제의 핵심 요소다.",
+      "wrong_claim": "Audit와 Competence는 문서행위일 뿐 기능안전 성과와 관계없다.",
+      "correct_rule": "관리체계 수행과 인적 역량은 체계적 고장 억제의 핵심 요소다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "관리체계 수행과 인적 역량은 체계적 고장 억제의 핵심 요소다.",
+      "description": "Audit와 Competence는 문서행위일 뿐 기능안전 성과와 관계없다.",
+      "grading_notes": "관리체계 수행과 인적 역량은 체계적 고장 억제의 핵심 요소다."
+    }
+  ],
+  "safe_expressions": [
+    "SIL 2 PLC라는 현장 표현은 Certificate와 Safety Manual의 적용범위를 확인하는 전제로 사용할 수 있다.",
+    "독립 검증은 요구 SIL과 조직조건에 따라 내부의 독립 역할 또는 외부조직으로 수행할 수 있다.",
+    "검증된 Library는 승인 Version과 사용범위 내 재사용 증거가 될 수 있다.",
+    "Proof Test 중 Logic 기능을 시험할 수 있으나 전체 Software Validation과 동일하지 않다.",
+    "BPCS와 SIS의 분리는 공통원인 저감수단이지만 완전 독립을 자동 보장하지 않는다.",
+    "Diversity는 Common Cause 저감수단으로 사용할 수 있으나 제거를 보장하지 않는다.",
+    "PFD 합산식은 작은 확률과 독립성 가정이 명시된 근사식이면 허용한다.",
+    "IEC 61508의 SIL 4 표기는 일반 표준 설명에서 허용하되 Process Sector 적용은 verify-first 한다.",
+    "Bypass 자체는 필요한 운영수단일 수 있으며 무통제 운용이 문제다.",
+    "표준 Clause 번호와 독립성 수준은 적용 Edition으로 verify-first 한다.",
+    "SIL 적합 제품은 적용범위와 Safety Manual 조건을 만족할 때 SIF 설계의 유효한 증거가 될 수 있다.",
+    "Functional Test는 Safety Validation의 일부 시험 증거가 될 수 있으나 전체 Validation과 동일하지 않다.",
+    "Proof Test는 Logic Solver와 Application Program의 일부 기능을 확인할 수 있으나 Software Lifecycle 증거를 대체하지 않는다.",
+    "독립성은 반드시 외부기관만을 뜻하지 않으며 요구 수준에 맞는 역할·조직·기술 분리를 뜻한다.",
+    "BPCS와 SIS의 물리적 또는 논리적 분리는 Common Cause 저감수단이지만 공유자원 평가가 추가로 필요하다.",
+    "Diversity는 공통 오류 가능성을 줄이는 선택지이며 복잡성 증가와 별도 V&V 부담을 함께 평가한다.",
+    "Proven in Use는 인증의 대체 표현이 아니라 식별된 Version과 운전·결함 증거에 기반한 주장이다.",
+    "Tool Qualification은 모든 Tool에 같은 절차를 적용하는 것이 아니라 Safety 영향과 오류 검출 가능성에 비례한다.",
+    "검증된 Library도 승인 Version, Parameter 범위와 사용제약 안에서만 재사용 증거가 된다.",
+    "Bypass와 Override는 금지어가 아니라 승인·표시·시간제한·보상조치·복구확인을 갖춘 관리대상이다.",
+    "PFDavg 단순 합산은 작은 확률, 독립성 및 공통원인 별도 반영을 명시한 근사로 사용할 수 있다.",
+    "IEC 61508의 일반 SIL 범위를 설명한 뒤 Process Sector 적용범위를 verify-first 하는 답안은 허용한다."
+  ],
+  "revision_notes": [
+    "created_for=SOFTWARE_LLM_LANE_C_SW05",
+    "modern_source_schema=anchors/fatal_wrong_claims/llm_profile/model_anchor_refs",
+    "scope_boundary=SW02 general logic; SW04 general SDLC; SW05 functional-safety lifecycle and assurance",
+    "generated_bank_promotion=excluded",
+    "standard_clause_numbers_and_numeric_limits=verify_first"
+  ],
+  "topic_label": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
+  "core_facts": [
+    "SIS는 하나 이상의 SIF를 구현하는 계장 시스템이다.",
+    "SIL은 개별 제품명이 아니라 Safety Function에 요구되는 Safety Integrity의 이산 수준이다.",
+    "SIF는 Sensor, Logic Solver, Final Element와 관련 지원요소의 전체 안전 기능 경로로 평가한다.",
+    "Hazard와 Risk 분석 결과는 보호계층 할당과 SRS의 기능·무결성 요구로 연결된다.",
+    "SRS는 기능 요구와 무결성 요구를 명확하고 검증 가능하게 규정한다.",
+    "Safety Application Program은 SRS를 Logic Solver에서 구현하는 안전 관련 소프트웨어다.",
+    "Safety Software는 명세, 설계, 구현, 통합, Verification, Validation, 운전지원 및 변경의 수명주기로 관리한다.",
+    "Random Hardware Failure는 시간에 따른 물리적 열화에서 발생하는 확률적 고장이다.",
+    "Systematic Failure는 특정 조건에서 반복 재현될 수 있는 요구, 설계, Software, Tool, 설치 또는 변경 결함이다.",
+    "Software의 체계적 고장은 단순한 일정 고장률 계산만으로 충분히 통제할 수 없다.",
+    "Verification은 각 단계 산출물이 그 단계의 입력 요구를 만족하는지 확인한다.",
+    "Validation은 통합된 SIS가 의도된 운전환경에서 SRS를 만족하는지 확인한다.",
+    "Functional Test는 특정 기능의 입출력과 논리를 시험하지만 전체 Safety Validation과 동일하지 않다.",
+    "Proof Test는 진단으로 발견되지 않은 위험 고장을 검출하고 기능을 복원하기 위한 주기 시험이며 Software Validation을 대체하지 않는다.",
+    "독립성은 검토자의 이해충돌과 공통 오류 가능성을 줄이기 위한 조직적·기술적 수단이다.",
+    "BPCS와 SIS를 분리해도 Sensor, 전원, Network, Engineering Tool 또는 유지보수 절차를 공유하면 공통원인이 남을 수 있다.",
+    "공통원인과 종속성은 독립 채널 가정을 훼손하므로 정량·정성 평가에서 별도 고려한다.",
+    "Diversity는 일부 공통원인을 줄일 수 있으나 복잡성과 새로운 체계적 오류를 증가시킬 수 있다.",
+    "인증 제품은 인증 범위, Systematic Capability, Architecture 조건과 Safety Manual 제한을 만족할 때만 증거가 된다.",
+    "Safety Manual의 가정, 사용조건, Diagnostic, Proof Test 및 제한사항은 SIF 설계에 반영해야 한다.",
+    "Proven in Use는 식별된 Version, 대표성 있는 환경, 충분한 운전이력과 결함기록을 요구한다.",
+    "Tool Qualification은 Tool 오류의 Safety 영향과 후속 단계의 오류 검출 가능성을 근거로 정한다.",
+    "Library와 Function Block은 승인 Version, 검증 범위, Parameter 제한과 변경이력을 통제한다.",
+    "SRS–설계–Program–Test Case–Result 간 양방향 Traceability를 유지한다.",
+    "Safety Software 변경은 영향분석, 승인, Regression, 필요한 Revalidation과 As-built 갱신을 수반한다.",
+    "Bypass와 Override는 승인, 표시, 시간 제한, 보상조치, 기록 및 독립적 복구 확인으로 관리한다.",
+    "Functional Safety Audit은 수명주기 활동과 관리체계가 계획대로 수행되는지 확인한다.",
+    "Competence는 역할별 교육, 경험, 책임과 평가 근거로 관리한다.",
+    "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
+    "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다."
+  ]
+}

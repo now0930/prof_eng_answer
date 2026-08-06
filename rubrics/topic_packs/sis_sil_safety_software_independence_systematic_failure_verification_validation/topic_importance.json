@@ -1,0 +1,24 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "SIS–SIF–SIL 관계와 전체 SIF 경계를 정확히 설명한다.",
+    "SRS의 기능 요구와 무결성 요구를 Lifecycle에 연결한다.",
+    "Random Hardware Failure와 Systematic Failure의 통제방식 차이를 설명한다.",
+    "Verification, Validation, Functional Test와 Proof Test를 구분한다.",
+    "독립성·분리·공통원인·다양성의 Trade-off를 설명한다.",
+    "인증·Safety Manual·Proven in Use·Tool·Library의 증거 한계를 설명한다.",
+    "Modification, Bypass, Override, Audit와 Competence를 운영통제로 연결한다.",
+    "PFDavg/PFH/RRF와 근사식의 적용 가정을 명시한다."
+  ],
+  "note": "기능안전의 정량 목표와 체계적 고장 억제는 상호 대체할 수 없다. 표준 Clause, 인증범위와 정량 가정은 verify-first 한다.",
+  "revision_notes": [
+    "created_for=SOFTWARE_LLM_LANE_C_SW05",
+    "theory_core_and_cross-layer_safety_topic",
+    "quantitative targets and systematic assurance are complementary, not substitutes"
+  ],
+  "topic_label": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인"
+}

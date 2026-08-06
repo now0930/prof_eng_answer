@@ -1,0 +1,341 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+  "title_ko": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "SIS·SIF·SIL의 관계와 Safety Software Lifecycle을 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "sis_sif_relation",
+        "sil_property_of_safety_function",
+        "sif_end_to_end_boundary",
+        "software_safety_lifecycle"
+      ]
+    },
+    {
+      "pattern": "Safety Application Program의 Systematic Failure 억제방안을 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "application_program_role",
+        "systematic_failure",
+        "systematic_not_simple_rate",
+        "tool_qualification_basis",
+        "library_validation_control"
+      ]
+    },
+    {
+      "pattern": "SIS에서 Verification과 Validation의 차이를 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "verification_definition",
+        "validation_definition",
+        "functional_test_boundary",
+        "proof_test_relation"
+      ]
+    },
+    {
+      "pattern": "SRS와 양방향 Traceability의 필요성을 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "risk_to_srs_flow",
+        "srs_functional_integrity_requirements",
+        "bidirectional_traceability",
+        "modification_revalidation"
+      ]
+    },
+    {
+      "pattern": "Safety Software의 독립성, 분리, Common Cause와 Diversity를 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "independence_purpose",
+        "separation_shared_resources",
+        "common_cause_dependency",
+        "diversity_tradeoff"
+      ]
+    },
+    {
+      "pattern": "Certified Product, Safety Manual과 Proven in Use의 적용 한계를 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "certified_product_scope",
+        "safety_manual_constraints",
+        "proven_in_use_evidence"
+      ]
+    },
+    {
+      "pattern": "기능안전 Tool Qualification과 Library Validation 방안을 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "tool_qualification_basis",
+        "library_validation_control",
+        "systematic_failure",
+        "verification_definition"
+      ]
+    },
+    {
+      "pattern": "Safety Software Modification의 영향분석과 Revalidation 절차를 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "modification_revalidation",
+        "bidirectional_traceability",
+        "audit_role",
+        "competence_management"
+      ]
+    },
+    {
+      "pattern": "SIS의 Bypass·Override 관리방안을 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "bypass_override_controls",
+        "srs_functional_integrity_requirements",
+        "independence_purpose",
+        "audit_role"
+      ]
+    },
+    {
+      "pattern": "Functional Test, Proof Test와 Safety Validation의 관계를 설명하시오.",
+      "intent": "functional safety software lifecycle and assurance",
+      "required_anchor_ids": [
+        "functional_test_boundary",
+        "proof_test_relation",
+        "validation_definition",
+        "pfd_pfh_mode_boundary",
+        "quantitative_assumptions"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "정의와 경계",
+      "intent": "SIS–SIF–SIL 및 전체 Safety Function 경계를 확립한다.",
+      "anchor_refs": [
+        "sis_sif_relation",
+        "sil_property_of_safety_function",
+        "sif_end_to_end_boundary"
+      ]
+    },
+    {
+      "section": "Safety Lifecycle과 SRS",
+      "intent": "Risk에서 SRS와 Application Program으로 이어지는 요구 흐름을 설명한다.",
+      "anchor_refs": [
+        "risk_to_srs_flow",
+        "srs_functional_integrity_requirements",
+        "application_program_role",
+        "software_safety_lifecycle",
+        "bidirectional_traceability"
+      ]
+    },
+    {
+      "section": "고장 유형과 통제",
+      "intent": "Random Hardware Failure와 Systematic Failure의 차이 및 통제수단을 연결한다.",
+      "anchor_refs": [
+        "random_hardware_failure",
+        "systematic_failure",
+        "systematic_not_simple_rate",
+        "pfd_pfh_mode_boundary",
+        "quantitative_assumptions"
+      ]
+    },
+    {
+      "section": "V&V와 시험",
+      "intent": "Verification, Validation, Functional Test와 Proof Test를 구분한다.",
+      "anchor_refs": [
+        "verification_definition",
+        "validation_definition",
+        "functional_test_boundary",
+        "proof_test_relation"
+      ]
+    },
+    {
+      "section": "독립성과 공통원인",
+      "intent": "조직·기술 분리, 공유자원, Common Cause와 Diversity의 Trade-off를 설명한다.",
+      "anchor_refs": [
+        "independence_purpose",
+        "separation_shared_resources",
+        "common_cause_dependency",
+        "diversity_tradeoff"
+      ]
+    },
+    {
+      "section": "제품·도구·재사용 증거",
+      "intent": "Certificate, Safety Manual, Proven in Use, Tool과 Library의 증거 한계를 설명한다.",
+      "anchor_refs": [
+        "certified_product_scope",
+        "safety_manual_constraints",
+        "proven_in_use_evidence",
+        "tool_qualification_basis",
+        "library_validation_control"
+      ]
+    },
+    {
+      "section": "운영·변경 통제",
+      "intent": "Modification, Bypass, Override와 As-built 복구를 설명한다.",
+      "anchor_refs": [
+        "modification_revalidation",
+        "bypass_override_controls"
+      ]
+    },
+    {
+      "section": "관리체계와 결론",
+      "intent": "Audit와 Competence를 포함해 전 수명주기 증거의 결합으로 결론낸다.",
+      "anchor_refs": [
+        "audit_role",
+        "competence_management"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "SIL이 제품이 아니라 Safety Function의 속성임을 명시한다.",
+    "SRS의 기능 요구와 무결성 요구를 분리한다.",
+    "Random/Systematic Failure의 차이를 통제방식과 연결한다.",
+    "Verification과 Validation을 목적·대상·시점으로 구분한다.",
+    "Proof Test가 Software Validation을 대체하지 않음을 설명한다.",
+    "독립성을 조직뿐 아니라 공유 Sensor·전원·Network·Tool·절차까지 확장한다.",
+    "인증서와 Safety Manual의 범위·가정·제약을 설명한다.",
+    "Proven in Use의 Version·환경·운전이력·결함기록을 제시한다.",
+    "Tool Qualification과 Library Version/Parameter 통제를 설명한다.",
+    "Bypass/Override의 승인·표시·시간 제한·보상조치·복구 확인을 제시한다.",
+    "변경 영향분석, Regression, Revalidation과 As-built 갱신을 연결한다.",
+    "PFDavg/PFH 적용 모드와 근사식 가정을 명시한다."
+  ],
+  "common_missing_points": [
+    "SIS·SIF·SIL 관계 없이 약어만 나열함",
+    "SRS와 Traceability 누락",
+    "Random/Systematic Failure 통제방식 누락",
+    "Verification과 Validation 혼용",
+    "Proof Test와 Software Validation 혼용",
+    "공유자원과 Common Cause 누락",
+    "인증 제품 자동충족으로 과장",
+    "Tool/Library/Version 통제 누락",
+    "Bypass/Override와 Modification 관리 누락",
+    "Audit와 Competence 누락"
+  ],
+  "routing_aliases": [
+    "SIS safety software lifecycle",
+    "SIF SIL safety application program",
+    "Safety Requirement Specification SRS",
+    "functional safety verification validation",
+    "systematic failure random hardware failure",
+    "safety PLC application program validation",
+    "independence separation common cause diversity",
+    "IEC 61508 software lifecycle",
+    "IEC 61511 SIS application program",
+    "safety manual certified product",
+    "proven in use functional safety",
+    "tool qualification safety software",
+    "validated library function block",
+    "safety bypass override modification audit competence"
+  ],
+  "routing_field_points": [
+    "SIS가 하나 이상의 SIF를 구현하며 SIL은 SIF 요구 무결성 수준이라는 관계",
+    "SRS의 기능 요구와 무결성 요구",
+    "Safety Application Program과 Software Safety Lifecycle",
+    "Random Hardware Failure와 Systematic Failure 구분",
+    "Verification과 Validation 목적 차이",
+    "Functional Test와 Proof Test 관계",
+    "Independence, Separation, Shared Resource와 Common Cause",
+    "Diversity의 저감효과와 복잡성 Trade-off",
+    "Certified Product와 Safety Manual 적용범위",
+    "Proven in Use의 증거조건",
+    "Tool Qualification의 영향·검출 기반",
+    "Library/Function Block의 Version·Parameter Validation",
+    "양방향 Traceability",
+    "Modification 영향분석과 Revalidation",
+    "Bypass/Override 통제",
+    "Functional Safety Audit와 Competence",
+    "PFDavg, PFH, RRF 및 1oo1 근사가정"
+  ],
+  "revision_notes": [
+    "created_for=SOFTWARE_LLM_LANE_C_SW05",
+    "rich_question_patterns_include_required_anchor_ids",
+    "recommended_outline_anchor_refs_cover_all_fact_anchors",
+    "broad_single_term_aliases_excluded"
+  ],
+  "id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+  "title": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
+  "question_examples": [
+    "SIS·SIF·SIL의 관계와 Safety Software Lifecycle을 설명하시오.",
+    "Safety Application Program의 Systematic Failure 억제방안을 설명하시오.",
+    "SIS에서 Verification과 Validation의 차이를 설명하시오.",
+    "SRS와 양방향 Traceability의 필요성을 설명하시오.",
+    "Safety Software의 독립성, 분리, Common Cause와 Diversity를 설명하시오.",
+    "Certified Product, Safety Manual과 Proven in Use의 적용 한계를 설명하시오.",
+    "기능안전 Tool Qualification과 Library Validation 방안을 설명하시오.",
+    "Safety Software Modification의 영향분석과 Revalidation 절차를 설명하시오.",
+    "SIS의 Bypass·Override 관리방안을 설명하시오.",
+    "Functional Test, Proof Test와 Safety Validation의 관계를 설명하시오."
+  ],
+  "topic_aliases": [
+    "SIS safety software lifecycle",
+    "SIF SIL safety application program",
+    "Safety Requirement Specification SRS",
+    "functional safety verification validation",
+    "systematic failure random hardware failure",
+    "safety PLC application program validation",
+    "independence separation common cause diversity",
+    "IEC 61508 software lifecycle",
+    "IEC 61511 SIS application program",
+    "safety manual certified product",
+    "proven in use functional safety",
+    "tool qualification safety software",
+    "validated library function block",
+    "safety bypass override modification audit competence"
+  ],
+  "expected_structure": [
+    "정의와 경계",
+    "Safety Lifecycle과 SRS",
+    "고장 유형과 통제",
+    "V&V와 시험",
+    "독립성과 공통원인",
+    "제품·도구·재사용 증거",
+    "운영·변경 통제",
+    "관리체계와 결론"
+  ],
+  "high_score_features": [
+    "SIL이 제품이 아니라 Safety Function의 속성임을 명시한다.",
+    "SRS의 기능 요구와 무결성 요구를 분리한다.",
+    "Random/Systematic Failure의 차이를 통제방식과 연결한다.",
+    "Verification과 Validation을 목적·대상·시점으로 구분한다.",
+    "Proof Test가 Software Validation을 대체하지 않음을 설명한다.",
+    "독립성을 조직뿐 아니라 공유 Sensor·전원·Network·Tool·절차까지 확장한다.",
+    "인증서와 Safety Manual의 범위·가정·제약을 설명한다.",
+    "Proven in Use의 Version·환경·운전이력·결함기록을 제시한다.",
+    "Tool Qualification과 Library Version/Parameter 통제를 설명한다.",
+    "Bypass/Override의 승인·표시·시간 제한·보상조치·복구 확인을 제시한다.",
+    "변경 영향분석, Regression, Revalidation과 As-built 갱신을 연결한다.",
+    "PFDavg/PFH 적용 모드와 근사식 가정을 명시한다."
+  ],
+  "low_score_patterns": [
+    "SIS·SIF·SIL 관계 없이 약어만 나열함",
+    "SRS와 Traceability 누락",
+    "Random/Systematic Failure 통제방식 누락",
+    "Verification과 Validation 혼용",
+    "Proof Test와 Software Validation 혼용",
+    "공유자원과 Common Cause 누락",
+    "인증 제품 자동충족으로 과장",
+    "Tool/Library/Version 통제 누락",
+    "Bypass/Override와 Modification 관리 누락",
+    "Audit와 Competence 누락"
+  ],
+  "field_connection_points": [
+    "SIS가 하나 이상의 SIF를 구현하며 SIL은 SIF 요구 무결성 수준이라는 관계",
+    "SRS의 기능 요구와 무결성 요구",
+    "Safety Application Program과 Software Safety Lifecycle",
+    "Random Hardware Failure와 Systematic Failure 구분",
+    "Verification과 Validation 목적 차이",
+    "Functional Test와 Proof Test 관계",
+    "Independence, Separation, Shared Resource와 Common Cause",
+    "Diversity의 저감효과와 복잡성 Trade-off",
+    "Certified Product와 Safety Manual 적용범위",
+    "Proven in Use의 증거조건",
+    "Tool Qualification의 영향·검출 기반",
+    "Library/Function Block의 Version·Parameter Validation",
+    "양방향 Traceability",
+    "Modification 영향분석과 Revalidation",
+    "Bypass/Override 통제",
+    "Functional Safety Audit와 Competence",
+    "PFDavg, PFH, RRF 및 1oo1 근사가정"
+  ]
+}
