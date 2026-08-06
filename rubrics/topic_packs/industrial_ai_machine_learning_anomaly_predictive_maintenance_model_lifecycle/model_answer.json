@@ -114,7 +114,8 @@
         "supervised_learning",
         "unsupervised_learning",
         "task_type_selection"
-      ]
+      ],
+      "intent": "AI–ML–DL의 포함관계와 Supervised·Unsupervised, Classification·Regression·Forecasting·Anomaly Detection의 목표를 구분한다."
     },
     {
       "section": 2,
@@ -125,7 +126,8 @@
         "predictive_maintenance_scope",
         "remaining_useful_life_uncertainty",
         "process_optimization_boundary"
-      ]
+      ],
+      "intent": "Anomaly Detection, Predictive Maintenance, RUL과 Process Optimization의 출력·의사결정·한계를 연결한다."
     },
     {
       "section": 3,
@@ -135,7 +137,8 @@
         "feature_engineering_context",
         "representative_data",
         "train_validation_test_separation"
-      ]
+      ],
+      "intent": "Feature Engineering, 대표성, Label 품질과 Train·Validation·Test 분리를 설명한다."
     },
     {
       "section": 4,
@@ -145,7 +148,8 @@
         "chronological_group_split",
         "data_leakage",
         "class_imbalance"
-      ]
+      ],
+      "intent": "산업 시계열의 시간·설비·Episode 분할과 Data Leakage, Class Imbalance 통제를 설명한다."
     },
     {
       "section": 5,
@@ -158,7 +162,8 @@
         "f1_metric",
         "false_alarm_miss_tradeoff",
         "decision_cost_and_lead_time"
-      ]
+      ],
+      "intent": "Confusion Matrix, Precision, Recall, F1, False Alarm·미검출 Trade-off와 현장비용을 설명한다."
     },
     {
       "section": 6,
@@ -168,7 +173,8 @@
         "calibration_and_uncertainty",
         "deployment_environment",
         "model_version_traceability"
-      ]
+      ],
+      "intent": "Calibration, Runtime 차이, Model·Data·Feature·Threshold Version과 Deployment 검증을 설명한다."
     },
     {
       "section": 7,
@@ -179,7 +185,8 @@
         "drift_types",
         "retraining_trigger",
         "regression_and_champion_challenger"
-      ]
+      ],
+      "intent": "운영 Monitoring, Data·Concept Drift, Retraining Trigger와 Champion–Challenger Regression을 설명한다."
     },
     {
       "section": 8,
@@ -189,7 +196,8 @@
         "explainability_limits",
         "human_review_fallback",
         "mlops_lifecycle"
-      ]
+      ],
+      "intent": "Explainability의 한계, Human Review·Fallback과 MLOps Lifecycle을 결론으로 연결한다."
     }
   ],
   "high_score_points": [

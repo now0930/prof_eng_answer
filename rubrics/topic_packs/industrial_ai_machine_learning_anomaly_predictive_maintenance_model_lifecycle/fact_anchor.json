@@ -8,7 +8,7 @@
       "id": "ai_ml_dl_hierarchy",
       "anchor_id": "ai_ml_dl_hierarchy",
       "statement": "AI는 지능적 과업을 수행하는 기술의 상위 개념이고 Machine Learning은 데이터에서 패턴을 학습하는 AI의 부분집합이며 Deep Learning은 다층 신경망을 사용하는 Machine Learning의 부분집합이다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "AI",
         "machine learning",
@@ -41,7 +41,7 @@
       "id": "supervised_learning",
       "anchor_id": "supervised_learning",
       "statement": "Supervised Learning은 입력과 정답 Label의 관계를 학습하며 Classification, Regression과 일부 Forecasting 문제에 사용한다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "supervised learning",
         "label",
@@ -73,7 +73,7 @@
       "id": "unsupervised_learning",
       "anchor_id": "unsupervised_learning",
       "statement": "Unsupervised Learning은 정답 Label 없이 구조, 군집 또는 정상 패턴을 학습할 수 있으나 결과의 현장 타당성 검토와 별도 평가가 필요하다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "unsupervised learning",
         "clustering",
@@ -105,7 +105,7 @@
       "id": "task_type_selection",
       "anchor_id": "task_type_selection",
       "statement": "Classification은 범주를, Regression은 연속값을, Forecasting은 미래 시계열을 예측하므로 목표변수와 의사결정 방식에 맞게 문제를 정의해야 한다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "classification",
         "regression",
@@ -137,7 +137,7 @@
       "id": "anomaly_detection_score_threshold",
       "anchor_id": "anomaly_detection_score_threshold",
       "statement": "Anomaly Detection은 정상에서 벗어난 정도를 Score로 산출하고 Threshold로 경보를 결정하며 높은 Score가 특정 고장원인의 확정을 의미하지 않는다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "anomaly detection",
         "score",
@@ -169,7 +169,7 @@
       "id": "predictive_maintenance_scope",
       "anchor_id": "predictive_maintenance_scope",
       "statement": "Predictive Maintenance는 상태데이터를 이용해 고장 가능성, 열화상태 또는 정비시점을 추정하여 계획정비를 지원하지만 모든 고장을 제거하지 않는다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "predictive maintenance",
         "condition data",
@@ -200,7 +200,7 @@
       "id": "remaining_useful_life_uncertainty",
       "anchor_id": "remaining_useful_life_uncertainty",
       "statement": "Remaining Useful Life는 현재 상태에서 정의된 고장기준까지 남은 시간 또는 Cycle의 추정치이며 불확실성, 신뢰구간과 적용조건을 함께 제시해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "remaining useful life",
         "RUL",
@@ -232,7 +232,7 @@
       "id": "process_optimization_boundary",
       "anchor_id": "process_optimization_boundary",
       "statement": "Process Optimization Model은 품질, 생산량, 에너지와 제약조건의 Trade-off를 지원하며 제어출력 적용 전 안전범위, 제약, 승인과 Supervisory Control을 분리해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "process optimization",
         "constraint",
@@ -264,7 +264,7 @@
       "id": "feature_engineering_context",
       "anchor_id": "feature_engineering_context",
       "statement": "Feature Engineering은 원시데이터를 공정지식과 시간 Context에 맞는 통계량, 변화율, Window, 주파수 또는 상태특징으로 변환하며 미래정보를 포함해서는 안 된다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "feature engineering",
         "window",
@@ -296,7 +296,7 @@
       "id": "representative_data",
       "anchor_id": "representative_data",
       "statement": "Training Data는 정상·고장·운전모드·제품·계절·정비상태와 Sensor 품질을 대표해야 하며 수집 편향과 Label 품질을 기록해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "training data",
         "representativeness",
@@ -328,7 +328,7 @@
       "id": "train_validation_test_separation",
       "anchor_id": "train_validation_test_separation",
       "statement": "Training Set은 Parameter 학습에, Validation Set은 Model과 Hyperparameter 선택에, Test Set은 최종 일반화 성능 확인에 사용하며 역할을 분리한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "training set",
         "validation set",
@@ -360,7 +360,7 @@
       "id": "chronological_group_split",
       "anchor_id": "chronological_group_split",
       "statement": "산업 시계열은 시간순 분할과 설비·Batch·제품 단위 Group 분할을 적용하여 동일 Episode와 미래정보가 Train과 Test에 섞이지 않게 해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "chronological split",
         "group split",
@@ -392,7 +392,7 @@
       "id": "data_leakage",
       "anchor_id": "data_leakage",
       "statement": "Data Leakage는 예측시점에 사용할 수 없는 미래정보, Target 파생정보 또는 동일 사건의 중복표본이 학습에 유입되어 성능을 과대평가하는 현상이다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "data leakage",
         "future information",
@@ -424,7 +424,7 @@
       "id": "class_imbalance",
       "anchor_id": "class_imbalance",
       "statement": "고장과 이상 Event가 희소한 Class Imbalance 문제에서는 Accuracy만으로 성능을 판단하지 말고 Sampling, Class Weight, Precision, Recall과 PR 관점으로 평가한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "class imbalance",
         "accuracy",
@@ -456,7 +456,7 @@
       "id": "confusion_matrix",
       "anchor_id": "confusion_matrix",
       "statement": "Binary Classification은 TP, FP, TN, FN의 Confusion Matrix로 결과를 구분하여 오경보와 미검출을 별도로 해석해야 한다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "TP",
         "FP",
@@ -490,7 +490,7 @@
       "id": "precision_metric",
       "anchor_id": "precision_metric",
       "statement": "Precision은 모델이 Positive로 판정한 사례 중 실제 Positive의 비율이며 오경보가 많은 경우 낮아진다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "precision",
         "TP",
@@ -522,7 +522,7 @@
       "id": "recall_metric",
       "anchor_id": "recall_metric",
       "statement": "Recall은 실제 Positive 중 모델이 검출한 비율이며 위험 고장의 미검출이 중요한 경우 핵심 지표가 된다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "recall",
         "TP",
@@ -554,7 +554,7 @@
       "id": "f1_metric",
       "anchor_id": "f1_metric",
       "statement": "F1 Score는 Precision과 Recall의 조화평균으로 두 지표의 균형을 요약하지만 비용과 운전조건을 단독으로 대체하지 않는다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "F1",
         "harmonic mean",
@@ -586,7 +586,7 @@
       "id": "false_alarm_miss_tradeoff",
       "anchor_id": "false_alarm_miss_tradeoff",
       "statement": "Threshold를 낮추면 일반적으로 Recall은 증가하고 False Alarm도 증가할 수 있으므로 미검출 비용, 확인인력과 정비부하를 함께 최적화한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "threshold",
         "false alarm",
@@ -618,7 +618,7 @@
       "id": "decision_cost_and_lead_time",
       "anchor_id": "decision_cost_and_lead_time",
       "statement": "현장 성과는 Model Metric뿐 아니라 경보 Lead Time, 확인 소요, 정비 Action 가능성, Downtime과 오경보 비용으로 평가해야 한다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "lead time",
         "maintenance action",
@@ -650,7 +650,7 @@
       "id": "calibration_and_uncertainty",
       "anchor_id": "calibration_and_uncertainty",
       "statement": "예측확률은 Calibration을 확인해야 하며 Confidence 또는 Probability가 실제 발생빈도와 일치하지 않으면 Threshold와 Risk 판단이 왜곡될 수 있다.",
-      "importance": "high",
+      "importance": "important",
       "keywords": [
         "calibration",
         "probability",
@@ -682,7 +682,7 @@
       "id": "deployment_environment",
       "anchor_id": "deployment_environment",
       "statement": "Deployment 시 Training 환경과 현장 Runtime의 Sensor, 전처리, Library, Hardware, Latency와 입력 Schema 차이를 검증해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "deployment",
         "runtime",
@@ -715,7 +715,7 @@
       "id": "model_version_traceability",
       "anchor_id": "model_version_traceability",
       "statement": "Model, Dataset, Feature, Code, Hyperparameter, Threshold와 배포환경의 Version을 연결하여 결과 재현, Rollback과 Audit이 가능해야 한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "model version",
         "dataset version",
@@ -747,7 +747,7 @@
       "id": "production_monitoring",
       "anchor_id": "production_monitoring",
       "statement": "운영 중에는 입력 품질, Missing, Range, Latency, Prediction 분포, 성능, False Alarm, 사용자 조치와 System Health를 지속 Monitoring한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "monitoring",
         "input quality",
@@ -779,7 +779,7 @@
       "id": "drift_types",
       "anchor_id": "drift_types",
       "statement": "Data Drift는 입력분포 변화, Concept Drift는 입력과 Target 관계 변화이며 운전모드·제품·Sensor·정비정책 변화와 구분해 진단한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "data drift",
         "concept drift",
@@ -811,7 +811,7 @@
       "id": "retraining_trigger",
       "anchor_id": "retraining_trigger",
       "statement": "Retraining은 일정주기만이 아니라 성능저하, Drift, 공정변경, Label 축적과 위험기준에 따른 Trigger로 수행하고 승인된 Data Window를 사용한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "retraining",
         "trigger",
@@ -843,7 +843,7 @@
       "id": "regression_and_champion_challenger",
       "anchor_id": "regression_and_champion_challenger",
       "statement": "새 Model은 기존 Champion과 동일 Test Set·현장 Replay·Stress Scenario로 비교하고 성능, 안정성, Latency와 운영비용의 Regression을 확인한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "champion challenger",
         "regression test",
@@ -875,7 +875,7 @@
       "id": "explainability_limits",
       "anchor_id": "explainability_limits",
       "statement": "Explainability는 입력과 예측의 관계를 해석하는 보조수단이며 설명 가능성이 인과성, 정확성 또는 안전성을 자동 증명하지 않는다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "explainability",
         "feature attribution",
@@ -907,7 +907,7 @@
       "id": "human_review_fallback",
       "anchor_id": "human_review_fallback",
       "statement": "고위험 경보와 정비의사결정에는 Human Review, 확인절차, 불확실성 표시, Model 장애 시 Fallback과 Override 책임을 정의한다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "human review",
         "fallback",
@@ -939,7 +939,7 @@
       "id": "mlops_lifecycle",
       "anchor_id": "mlops_lifecycle",
       "statement": "MLOps는 Data·Feature·Model·Code의 Version, 자동화된 Test, Registry, Deployment, Monitoring, Approval, Rollback과 재학습을 연결하는 Model Lifecycle 운영체계다.",
-      "importance": "critical",
+      "importance": "must",
       "keywords": [
         "MLOps",
         "registry",
