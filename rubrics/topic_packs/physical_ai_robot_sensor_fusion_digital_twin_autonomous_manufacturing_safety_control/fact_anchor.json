@@ -1,0 +1,1228 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+  "title_ko": "Physical AI, 로봇, 센서융합, Digital Twin, 자율제조 및 안전제어",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "id": "physical_ai_definition",
+      "anchor_id": "physical_ai_definition",
+      "statement": "Physical AI는 AI의 인식·추론·계획 결과가 Sensor와 Actuator를 통해 실제 물리환경에 작용하고 그 결과를 다시 Feedback으로 받는 폐루프 시스템 영역이다.",
+      "importance": "critical",
+      "keywords": [
+        "Physical AI",
+        "sensor",
+        "actuator",
+        "feedback",
+        "closed loop"
+      ],
+      "core_terms": [
+        "Physical AI",
+        "physical interaction",
+        "closed loop"
+      ],
+      "accepted_explanations": [
+        "Physical AI는 AI의 인식·추론·계획 결과가 Sensor와 Actuator를 통해 실제 물리환경에 작용하고 그 결과를 다시 Feedback으로 받는 폐루프 시스템 영역이다.",
+        "Physical AI, physical interaction, closed loop의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Physical AI는 AI의 인식·추론·계획 결과가 Sensor와 Actuator를 통해 실제 물리환경에 작용하고 그 결과를 다시 Feedback으로 받는 폐루프 시스템 영역이다.",
+      "description": "Physical AI는 AI의 인식·추론·계획 결과가 Sensor와 Actuator를 통해 실제 물리환경에 작용하고 그 결과를 다시 Feedback으로 받는 폐루프 시스템 영역이다."
+    },
+    {
+      "id": "industrial_robot_architecture",
+      "anchor_id": "industrial_robot_architecture",
+      "statement": "Industrial Robot System은 Manipulator, Controller, Drive, End-effector, Sensor, Cell 설비와 Safety 기능을 포함한 시스템 경계로 평가한다.",
+      "importance": "critical",
+      "keywords": [
+        "industrial robot",
+        "controller",
+        "drive",
+        "end-effector",
+        "cell"
+      ],
+      "core_terms": [
+        "robot system",
+        "system boundary"
+      ],
+      "accepted_explanations": [
+        "Industrial Robot System은 Manipulator, Controller, Drive, End-effector, Sensor, Cell 설비와 Safety 기능을 포함한 시스템 경계로 평가한다.",
+        "robot system, system boundary의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Industrial Robot System은 Manipulator, Controller, Drive, End-effector, Sensor, Cell 설비와 Safety 기능을 포함한 시스템 경계로 평가한다.",
+      "description": "Industrial Robot System은 Manipulator, Controller, Drive, End-effector, Sensor, Cell 설비와 Safety 기능을 포함한 시스템 경계로 평가한다."
+    },
+    {
+      "id": "collaborative_robot_application",
+      "anchor_id": "collaborative_robot_application",
+      "statement": "Collaborative Robot은 협업기능을 지원하는 Robot이며 실제 협업 Application의 안전성은 Tool, Payload, 속도, 힘, 작업공간, 공정위험과 보호조치를 포함해 평가한다.",
+      "importance": "critical",
+      "keywords": [
+        "collaborative robot",
+        "payload",
+        "speed",
+        "force",
+        "risk assessment"
+      ],
+      "core_terms": [
+        "collaborative application",
+        "risk assessment"
+      ],
+      "accepted_explanations": [
+        "Collaborative Robot은 협업기능을 지원하는 Robot이며 실제 협업 Application의 안전성은 Tool, Payload, 속도, 힘, 작업공간, 공정위험과 보호조치를 포함해 평가한다.",
+        "collaborative application, risk assessment의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Collaborative Robot은 협업기능을 지원하는 Robot이며 실제 협업 Application의 안전성은 Tool, Payload, 속도, 힘, 작업공간, 공정위험과 보호조치를 포함해 평가한다.",
+      "description": "Collaborative Robot은 협업기능을 지원하는 Robot이며 실제 협업 Application의 안전성은 Tool, Payload, 속도, 힘, 작업공간, 공정위험과 보호조치를 포함해 평가한다."
+    },
+    {
+      "id": "sensor_complementarity",
+      "anchor_id": "sensor_complementarity",
+      "statement": "Camera, LiDAR, Radar, Encoder와 Force·Torque Sensor는 측정원리, 범위, 해상도, 지연과 환경민감도가 달라 상호 보완적으로 사용한다.",
+      "importance": "high",
+      "keywords": [
+        "camera",
+        "LiDAR",
+        "radar",
+        "encoder",
+        "force torque sensor"
+      ],
+      "core_terms": [
+        "sensor complementarity",
+        "measurement characteristics"
+      ],
+      "accepted_explanations": [
+        "Camera, LiDAR, Radar, Encoder와 Force·Torque Sensor는 측정원리, 범위, 해상도, 지연과 환경민감도가 달라 상호 보완적으로 사용한다.",
+        "sensor complementarity, measurement characteristics의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Camera, LiDAR, Radar, Encoder와 Force·Torque Sensor는 측정원리, 범위, 해상도, 지연과 환경민감도가 달라 상호 보완적으로 사용한다.",
+      "description": "Camera, LiDAR, Radar, Encoder와 Force·Torque Sensor는 측정원리, 범위, 해상도, 지연과 환경민감도가 달라 상호 보완적으로 사용한다."
+    },
+    {
+      "id": "timestamp_and_synchronization",
+      "anchor_id": "timestamp_and_synchronization",
+      "statement": "Sensor Fusion은 측정값뿐 아니라 Timestamp, Sample Rate, Transport Delay와 Clock Synchronization을 관리하여 동일 물리상태의 관측을 정렬해야 한다.",
+      "importance": "critical",
+      "keywords": [
+        "timestamp",
+        "sample rate",
+        "delay",
+        "clock synchronization"
+      ],
+      "core_terms": [
+        "time synchronization",
+        "time alignment"
+      ],
+      "accepted_explanations": [
+        "Sensor Fusion은 측정값뿐 아니라 Timestamp, Sample Rate, Transport Delay와 Clock Synchronization을 관리하여 동일 물리상태의 관측을 정렬해야 한다.",
+        "time synchronization, time alignment의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Sensor Fusion은 측정값뿐 아니라 Timestamp, Sample Rate, Transport Delay와 Clock Synchronization을 관리하여 동일 물리상태의 관측을 정렬해야 한다.",
+      "description": "Sensor Fusion은 측정값뿐 아니라 Timestamp, Sample Rate, Transport Delay와 Clock Synchronization을 관리하여 동일 물리상태의 관측을 정렬해야 한다."
+    },
+    {
+      "id": "calibration_coordinate_frame",
+      "anchor_id": "calibration_coordinate_frame",
+      "statement": "다중 Sensor는 Intrinsic·Extrinsic Calibration과 좌표계 변환을 통해 공통 Frame에 정렬하며 Calibration Drift를 Monitoring해야 한다.",
+      "importance": "critical",
+      "keywords": [
+        "intrinsic calibration",
+        "extrinsic calibration",
+        "coordinate frame",
+        "drift"
+      ],
+      "core_terms": [
+        "calibration",
+        "coordinate transform"
+      ],
+      "accepted_explanations": [
+        "다중 Sensor는 Intrinsic·Extrinsic Calibration과 좌표계 변환을 통해 공통 Frame에 정렬하며 Calibration Drift를 Monitoring해야 한다.",
+        "calibration, coordinate transform의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "다중 Sensor는 Intrinsic·Extrinsic Calibration과 좌표계 변환을 통해 공통 Frame에 정렬하며 Calibration Drift를 Monitoring해야 한다.",
+      "description": "다중 Sensor는 Intrinsic·Extrinsic Calibration과 좌표계 변환을 통해 공통 Frame에 정렬하며 Calibration Drift를 Monitoring해야 한다."
+    },
+    {
+      "id": "fusion_uncertainty",
+      "anchor_id": "fusion_uncertainty",
+      "statement": "Sensor Fusion은 각 Sensor의 Bias, Noise, Covariance와 신뢰도를 반영해 상태와 불확실성을 추정하며 단순 평균이 항상 최적은 아니다.",
+      "importance": "critical",
+      "keywords": [
+        "sensor fusion",
+        "bias",
+        "covariance",
+        "uncertainty"
+      ],
+      "core_terms": [
+        "uncertainty",
+        "covariance"
+      ],
+      "accepted_explanations": [
+        "Sensor Fusion은 각 Sensor의 Bias, Noise, Covariance와 신뢰도를 반영해 상태와 불확실성을 추정하며 단순 평균이 항상 최적은 아니다.",
+        "uncertainty, covariance의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Sensor Fusion은 각 Sensor의 Bias, Noise, Covariance와 신뢰도를 반영해 상태와 불확실성을 추정하며 단순 평균이 항상 최적은 아니다.",
+      "description": "Sensor Fusion은 각 Sensor의 Bias, Noise, Covariance와 신뢰도를 반영해 상태와 불확실성을 추정하며 단순 평균이 항상 최적은 아니다."
+    },
+    {
+      "id": "common_cause_and_fault_detection",
+      "anchor_id": "common_cause_and_fault_detection",
+      "statement": "Sensor를 여러 개 사용해도 공통전원, 공통시야, 동일 환경조건, Calibration 오류와 공통 Software 결함이 남을 수 있으므로 Residual, Plausibility와 상태진단이 필요하다.",
+      "importance": "critical",
+      "keywords": [
+        "common cause",
+        "residual",
+        "plausibility",
+        "diagnostics"
+      ],
+      "core_terms": [
+        "common cause",
+        "fault detection"
+      ],
+      "accepted_explanations": [
+        "Sensor를 여러 개 사용해도 공통전원, 공통시야, 동일 환경조건, Calibration 오류와 공통 Software 결함이 남을 수 있으므로 Residual, Plausibility와 상태진단이 필요하다.",
+        "common cause, fault detection의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Sensor를 여러 개 사용해도 공통전원, 공통시야, 동일 환경조건, Calibration 오류와 공통 Software 결함이 남을 수 있으므로 Residual, Plausibility와 상태진단이 필요하다.",
+      "description": "Sensor를 여러 개 사용해도 공통전원, 공통시야, 동일 환경조건, Calibration 오류와 공통 Software 결함이 남을 수 있으므로 Residual, Plausibility와 상태진단이 필요하다."
+    },
+    {
+      "id": "state_estimation",
+      "anchor_id": "state_estimation",
+      "statement": "State Estimation은 직접 측정할 수 없는 위치, 속도, 자세와 외력 등을 System Model과 Sensor 관측으로 추정하고 오차공분산을 함께 관리한다.",
+      "importance": "high",
+      "keywords": [
+        "state estimation",
+        "position",
+        "velocity",
+        "pose",
+        "covariance"
+      ],
+      "core_terms": [
+        "state estimation",
+        "covariance"
+      ],
+      "accepted_explanations": [
+        "State Estimation은 직접 측정할 수 없는 위치, 속도, 자세와 외력 등을 System Model과 Sensor 관측으로 추정하고 오차공분산을 함께 관리한다.",
+        "state estimation, covariance의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "State Estimation은 직접 측정할 수 없는 위치, 속도, 자세와 외력 등을 System Model과 Sensor 관측으로 추정하고 오차공분산을 함께 관리한다.",
+      "description": "State Estimation은 직접 측정할 수 없는 위치, 속도, 자세와 외력 등을 System Model과 Sensor 관측으로 추정하고 오차공분산을 함께 관리한다."
+    },
+    {
+      "id": "localization",
+      "anchor_id": "localization",
+      "statement": "Localization은 Robot 또는 이동체의 위치와 자세를 기준좌표계에서 추정하는 기능이며 Map, Landmark, Odometry와 Sensor 불확실성에 의존한다.",
+      "importance": "high",
+      "keywords": [
+        "localization",
+        "pose",
+        "map",
+        "odometry"
+      ],
+      "core_terms": [
+        "localization",
+        "pose estimation"
+      ],
+      "accepted_explanations": [
+        "Localization은 Robot 또는 이동체의 위치와 자세를 기준좌표계에서 추정하는 기능이며 Map, Landmark, Odometry와 Sensor 불확실성에 의존한다.",
+        "localization, pose estimation의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Localization은 Robot 또는 이동체의 위치와 자세를 기준좌표계에서 추정하는 기능이며 Map, Landmark, Odometry와 Sensor 불확실성에 의존한다.",
+      "description": "Localization은 Robot 또는 이동체의 위치와 자세를 기준좌표계에서 추정하는 기능이며 Map, Landmark, Odometry와 Sensor 불확실성에 의존한다."
+    },
+    {
+      "id": "slam_relation",
+      "anchor_id": "slam_relation",
+      "statement": "SLAM은 위치추정과 Map 생성을 상호 의존적으로 수행하지만 안전정지, 충돌회피와 Functional Safety를 단독으로 보장하지 않는다.",
+      "importance": "critical",
+      "keywords": [
+        "SLAM",
+        "mapping",
+        "localization",
+        "safety"
+      ],
+      "core_terms": [
+        "SLAM",
+        "mapping"
+      ],
+      "accepted_explanations": [
+        "SLAM은 위치추정과 Map 생성을 상호 의존적으로 수행하지만 안전정지, 충돌회피와 Functional Safety를 단독으로 보장하지 않는다.",
+        "SLAM, mapping의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "SLAM은 위치추정과 Map 생성을 상호 의존적으로 수행하지만 안전정지, 충돌회피와 Functional Safety를 단독으로 보장하지 않는다.",
+      "description": "SLAM은 위치추정과 Map 생성을 상호 의존적으로 수행하지만 안전정지, 충돌회피와 Functional Safety를 단독으로 보장하지 않는다."
+    },
+    {
+      "id": "observability_limits",
+      "anchor_id": "observability_limits",
+      "statement": "State Estimator의 성능은 Sensor 배치와 Motion에 따른 Observability에 제한되며 관측되지 않는 상태는 Model만으로 확정할 수 없다.",
+      "importance": "high",
+      "keywords": [
+        "observability",
+        "sensor placement",
+        "motion",
+        "state estimator"
+      ],
+      "core_terms": [
+        "observability",
+        "unobservable state"
+      ],
+      "accepted_explanations": [
+        "State Estimator의 성능은 Sensor 배치와 Motion에 따른 Observability에 제한되며 관측되지 않는 상태는 Model만으로 확정할 수 없다.",
+        "observability, unobservable state의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "State Estimator의 성능은 Sensor 배치와 Motion에 따른 Observability에 제한되며 관측되지 않는 상태는 Model만으로 확정할 수 없다.",
+      "description": "State Estimator의 성능은 Sensor 배치와 Motion에 따른 Observability에 제한되며 관측되지 않는 상태는 Model만으로 확정할 수 없다."
+    },
+    {
+      "id": "world_model",
+      "anchor_id": "world_model",
+      "statement": "World Model은 Robot 주변의 객체, 자유공간, 작업상태, 관계와 불확실성을 표현하여 Planning과 Supervisory 판단에 제공한다.",
+      "importance": "high",
+      "keywords": [
+        "world model",
+        "object",
+        "free space",
+        "uncertainty",
+        "planning"
+      ],
+      "core_terms": [
+        "world model",
+        "environment representation"
+      ],
+      "accepted_explanations": [
+        "World Model은 Robot 주변의 객체, 자유공간, 작업상태, 관계와 불확실성을 표현하여 Planning과 Supervisory 판단에 제공한다.",
+        "world model, environment representation의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "World Model은 Robot 주변의 객체, 자유공간, 작업상태, 관계와 불확실성을 표현하여 Planning과 Supervisory 판단에 제공한다.",
+      "description": "World Model은 Robot 주변의 객체, 자유공간, 작업상태, 관계와 불확실성을 표현하여 Planning과 Supervisory 판단에 제공한다."
+    },
+    {
+      "id": "digital_twin_definition",
+      "anchor_id": "digital_twin_definition",
+      "statement": "Digital Twin은 특정 목적과 수명주기 범위에서 실제 자산·공정의 상태와 거동을 데이터와 Model로 연결한 디지털 표현이다.",
+      "importance": "critical",
+      "keywords": [
+        "digital twin",
+        "asset",
+        "process",
+        "model",
+        "lifecycle"
+      ],
+      "core_terms": [
+        "digital twin",
+        "purpose and scope"
+      ],
+      "accepted_explanations": [
+        "Digital Twin은 특정 목적과 수명주기 범위에서 실제 자산·공정의 상태와 거동을 데이터와 Model로 연결한 디지털 표현이다.",
+        "digital twin, purpose and scope의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Digital Twin은 특정 목적과 수명주기 범위에서 실제 자산·공정의 상태와 거동을 데이터와 Model로 연결한 디지털 표현이다.",
+      "description": "Digital Twin은 특정 목적과 수명주기 범위에서 실제 자산·공정의 상태와 거동을 데이터와 Model로 연결한 디지털 표현이다."
+    },
+    {
+      "id": "digital_twin_fidelity",
+      "anchor_id": "digital_twin_fidelity",
+      "statement": "Digital Twin의 Fidelity는 목적, Model 가정, 해상도, Parameter, Boundary Condition과 Validation 범위에 따라 달라지며 실제 설비와 항상 완전히 동일하지 않다.",
+      "importance": "critical",
+      "keywords": [
+        "fidelity",
+        "model assumption",
+        "boundary condition",
+        "validation"
+      ],
+      "core_terms": [
+        "twin fidelity",
+        "model limitation"
+      ],
+      "accepted_explanations": [
+        "Digital Twin의 Fidelity는 목적, Model 가정, 해상도, Parameter, Boundary Condition과 Validation 범위에 따라 달라지며 실제 설비와 항상 완전히 동일하지 않다.",
+        "twin fidelity, model limitation의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Digital Twin의 Fidelity는 목적, Model 가정, 해상도, Parameter, Boundary Condition과 Validation 범위에 따라 달라지며 실제 설비와 항상 완전히 동일하지 않다.",
+      "description": "Digital Twin의 Fidelity는 목적, Model 가정, 해상도, Parameter, Boundary Condition과 Validation 범위에 따라 달라지며 실제 설비와 항상 완전히 동일하지 않다."
+    },
+    {
+      "id": "digital_twin_synchronization",
+      "anchor_id": "digital_twin_synchronization",
+      "statement": "Digital Twin은 실제 설비와의 Data Synchronization, Version, Timestamp, Latency와 상태정합성을 Monitoring해야 하며 Stale Twin은 잘못된 의사결정을 만들 수 있다.",
+      "importance": "critical",
+      "keywords": [
+        "synchronization",
+        "version",
+        "timestamp",
+        "latency",
+        "stale data"
+      ],
+      "core_terms": [
+        "twin synchronization",
+        "staleness"
+      ],
+      "accepted_explanations": [
+        "Digital Twin은 실제 설비와의 Data Synchronization, Version, Timestamp, Latency와 상태정합성을 Monitoring해야 하며 Stale Twin은 잘못된 의사결정을 만들 수 있다.",
+        "twin synchronization, staleness의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Digital Twin은 실제 설비와의 Data Synchronization, Version, Timestamp, Latency와 상태정합성을 Monitoring해야 하며 Stale Twin은 잘못된 의사결정을 만들 수 있다.",
+      "description": "Digital Twin은 실제 설비와의 Data Synchronization, Version, Timestamp, Latency와 상태정합성을 Monitoring해야 하며 Stale Twin은 잘못된 의사결정을 만들 수 있다."
+    },
+    {
+      "id": "simulation_scenario_coverage",
+      "anchor_id": "simulation_scenario_coverage",
+      "statement": "Simulation은 반복가능한 시험과 위험 Scenario 탐색에 유용하지만 Model 경계와 Scenario Coverage 밖의 실제환경 성능을 자동 증명하지 않는다.",
+      "importance": "critical",
+      "keywords": [
+        "simulation",
+        "scenario coverage",
+        "model boundary",
+        "validation"
+      ],
+      "core_terms": [
+        "simulation",
+        "scenario coverage"
+      ],
+      "accepted_explanations": [
+        "Simulation은 반복가능한 시험과 위험 Scenario 탐색에 유용하지만 Model 경계와 Scenario Coverage 밖의 실제환경 성능을 자동 증명하지 않는다.",
+        "simulation, scenario coverage의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Simulation은 반복가능한 시험과 위험 Scenario 탐색에 유용하지만 Model 경계와 Scenario Coverage 밖의 실제환경 성능을 자동 증명하지 않는다.",
+      "description": "Simulation은 반복가능한 시험과 위험 Scenario 탐색에 유용하지만 Model 경계와 Scenario Coverage 밖의 실제환경 성능을 자동 증명하지 않는다."
+    },
+    {
+      "id": "synthetic_data_domain_gap",
+      "anchor_id": "synthetic_data_domain_gap",
+      "statement": "Synthetic Data는 희귀상황과 위험상황을 보강할 수 있으나 Sensor Noise, Material, Lighting, Contact와 Human 행동의 Domain Gap을 실제 Data로 확인해야 한다.",
+      "importance": "critical",
+      "keywords": [
+        "synthetic data",
+        "domain gap",
+        "sensor noise",
+        "lighting",
+        "contact"
+      ],
+      "core_terms": [
+        "synthetic data",
+        "domain gap"
+      ],
+      "accepted_explanations": [
+        "Synthetic Data는 희귀상황과 위험상황을 보강할 수 있으나 Sensor Noise, Material, Lighting, Contact와 Human 행동의 Domain Gap을 실제 Data로 확인해야 한다.",
+        "synthetic data, domain gap의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Synthetic Data는 희귀상황과 위험상황을 보강할 수 있으나 Sensor Noise, Material, Lighting, Contact와 Human 행동의 Domain Gap을 실제 Data로 확인해야 한다.",
+      "description": "Synthetic Data는 희귀상황과 위험상황을 보강할 수 있으나 Sensor Noise, Material, Lighting, Contact와 Human 행동의 Domain Gap을 실제 Data로 확인해야 한다."
+    },
+    {
+      "id": "robot_planning_hierarchy",
+      "anchor_id": "robot_planning_hierarchy",
+      "statement": "Robot Planning은 Task·Motion·Trajectory 계획으로 목표와 제약을 결정하고 저수준 Control은 계획을 추종하므로 두 계층의 책임과 Interface를 구분한다.",
+      "importance": "high",
+      "keywords": [
+        "task planning",
+        "motion planning",
+        "trajectory",
+        "control"
+      ],
+      "core_terms": [
+        "robot planning",
+        "planning control boundary"
+      ],
+      "accepted_explanations": [
+        "Robot Planning은 Task·Motion·Trajectory 계획으로 목표와 제약을 결정하고 저수준 Control은 계획을 추종하므로 두 계층의 책임과 Interface를 구분한다.",
+        "robot planning, planning control boundary의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Robot Planning은 Task·Motion·Trajectory 계획으로 목표와 제약을 결정하고 저수준 Control은 계획을 추종하므로 두 계층의 책임과 Interface를 구분한다.",
+      "description": "Robot Planning은 Task·Motion·Trajectory 계획으로 목표와 제약을 결정하고 저수준 Control은 계획을 추종하므로 두 계층의 책임과 Interface를 구분한다."
+    },
+    {
+      "id": "closed_loop_ai",
+      "anchor_id": "closed_loop_ai",
+      "statement": "Closed-loop AI는 인식과 추론 결과를 Control Action으로 적용하고 물리결과를 다시 관측하므로 Model 오류, Delay와 Actuator 제한이 누적되는 Feedback Risk를 검토한다.",
+      "importance": "critical",
+      "keywords": [
+        "closed-loop AI",
+        "control action",
+        "feedback",
+        "delay",
+        "actuator"
+      ],
+      "core_terms": [
+        "closed loop",
+        "feedback risk"
+      ],
+      "accepted_explanations": [
+        "Closed-loop AI는 인식과 추론 결과를 Control Action으로 적용하고 물리결과를 다시 관측하므로 Model 오류, Delay와 Actuator 제한이 누적되는 Feedback Risk를 검토한다.",
+        "closed loop, feedback risk의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Closed-loop AI는 인식과 추론 결과를 Control Action으로 적용하고 물리결과를 다시 관측하므로 Model 오류, Delay와 Actuator 제한이 누적되는 Feedback Risk를 검토한다.",
+      "description": "Closed-loop AI는 인식과 추론 결과를 Control Action으로 적용하고 물리결과를 다시 관측하므로 Model 오류, Delay와 Actuator 제한이 누적되는 Feedback Risk를 검토한다."
+    },
+    {
+      "id": "edge_on_device_ai",
+      "anchor_id": "edge_on_device_ai",
+      "statement": "Edge AI와 On-device AI는 Latency, 대역폭과 연결의존성을 줄일 수 있으나 Resource, Thermal, Version, Cybersecurity와 중앙 Monitoring 책임을 제거하지 않는다.",
+      "importance": "critical",
+      "keywords": [
+        "edge AI",
+        "on-device AI",
+        "latency",
+        "resource",
+        "cybersecurity"
+      ],
+      "core_terms": [
+        "edge AI",
+        "resource constraint"
+      ],
+      "accepted_explanations": [
+        "Edge AI와 On-device AI는 Latency, 대역폭과 연결의존성을 줄일 수 있으나 Resource, Thermal, Version, Cybersecurity와 중앙 Monitoring 책임을 제거하지 않는다.",
+        "edge AI, resource constraint의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Edge AI와 On-device AI는 Latency, 대역폭과 연결의존성을 줄일 수 있으나 Resource, Thermal, Version, Cybersecurity와 중앙 Monitoring 책임을 제거하지 않는다.",
+      "description": "Edge AI와 On-device AI는 Latency, 대역폭과 연결의존성을 줄일 수 있으나 Resource, Thermal, Version, Cybersecurity와 중앙 Monitoring 책임을 제거하지 않는다."
+    },
+    {
+      "id": "latency_deadline_budget",
+      "anchor_id": "latency_deadline_budget",
+      "statement": "Physical AI의 Loop는 Sensing, 전처리, Inference, Planning, 통신과 Actuation 지연을 합한 End-to-end Latency와 Jitter가 Control Deadline을 만족해야 한다.",
+      "importance": "critical",
+      "keywords": [
+        "latency",
+        "jitter",
+        "deadline",
+        "end-to-end"
+      ],
+      "core_terms": [
+        "latency budget",
+        "control deadline"
+      ],
+      "accepted_explanations": [
+        "Physical AI의 Loop는 Sensing, 전처리, Inference, Planning, 통신과 Actuation 지연을 합한 End-to-end Latency와 Jitter가 Control Deadline을 만족해야 한다.",
+        "latency budget, control deadline의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Physical AI의 Loop는 Sensing, 전처리, Inference, Planning, 통신과 Actuation 지연을 합한 End-to-end Latency와 Jitter가 Control Deadline을 만족해야 한다.",
+      "description": "Physical AI의 Loop는 Sensing, 전처리, Inference, Planning, 통신과 Actuation 지연을 합한 End-to-end Latency와 Jitter가 Control Deadline을 만족해야 한다."
+    },
+    {
+      "id": "autonomous_manufacturing",
+      "anchor_id": "autonomous_manufacturing",
+      "statement": "Autonomous Manufacturing은 상태인식, 계획, 실행, 품질확인과 재계획을 연결하되 생산목표보다 Safety Constraint와 승인된 운영범위를 우선한다.",
+      "importance": "critical",
+      "keywords": [
+        "autonomous manufacturing",
+        "replanning",
+        "quality",
+        "safety constraint"
+      ],
+      "core_terms": [
+        "autonomous manufacturing",
+        "operating envelope"
+      ],
+      "accepted_explanations": [
+        "Autonomous Manufacturing은 상태인식, 계획, 실행, 품질확인과 재계획을 연결하되 생산목표보다 Safety Constraint와 승인된 운영범위를 우선한다.",
+        "autonomous manufacturing, operating envelope의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Autonomous Manufacturing은 상태인식, 계획, 실행, 품질확인과 재계획을 연결하되 생산목표보다 Safety Constraint와 승인된 운영범위를 우선한다.",
+      "description": "Autonomous Manufacturing은 상태인식, 계획, 실행, 품질확인과 재계획을 연결하되 생산목표보다 Safety Constraint와 승인된 운영범위를 우선한다."
+    },
+    {
+      "id": "human_robot_collaboration",
+      "anchor_id": "human_robot_collaboration",
+      "statement": "Human–Robot Collaboration은 작업분담, 접근감지, 속도·힘 제한, 정지·복구, 의도전달, Ergonomics와 비정상상황의 인간행동을 포함한다.",
+      "importance": "critical",
+      "keywords": [
+        "human robot collaboration",
+        "speed",
+        "force",
+        "stop",
+        "recovery"
+      ],
+      "core_terms": [
+        "human robot collaboration",
+        "human factors"
+      ],
+      "accepted_explanations": [
+        "Human–Robot Collaboration은 작업분담, 접근감지, 속도·힘 제한, 정지·복구, 의도전달, Ergonomics와 비정상상황의 인간행동을 포함한다.",
+        "human robot collaboration, human factors의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Human–Robot Collaboration은 작업분담, 접근감지, 속도·힘 제한, 정지·복구, 의도전달, Ergonomics와 비정상상황의 인간행동을 포함한다.",
+      "description": "Human–Robot Collaboration은 작업분담, 접근감지, 속도·힘 제한, 정지·복구, 의도전달, Ergonomics와 비정상상황의 인간행동을 포함한다."
+    },
+    {
+      "id": "safety_envelope",
+      "anchor_id": "safety_envelope",
+      "statement": "Safety Envelope은 위치, 속도, 힘, 거리, 공정상태와 금지영역의 허용범위를 정의하고 AI 명령보다 우선하는 독립 Constraint로 집행한다.",
+      "importance": "critical",
+      "keywords": [
+        "safety envelope",
+        "speed",
+        "force",
+        "distance",
+        "constraint"
+      ],
+      "core_terms": [
+        "safety envelope",
+        "independent constraint"
+      ],
+      "accepted_explanations": [
+        "Safety Envelope은 위치, 속도, 힘, 거리, 공정상태와 금지영역의 허용범위를 정의하고 AI 명령보다 우선하는 독립 Constraint로 집행한다.",
+        "safety envelope, independent constraint의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Safety Envelope은 위치, 속도, 힘, 거리, 공정상태와 금지영역의 허용범위를 정의하고 AI 명령보다 우선하는 독립 Constraint로 집행한다.",
+      "description": "Safety Envelope은 위치, 속도, 힘, 거리, 공정상태와 금지영역의 허용범위를 정의하고 AI 명령보다 우선하는 독립 Constraint로 집행한다."
+    },
+    {
+      "id": "safe_state_fallback_degraded_mode",
+      "anchor_id": "safe_state_fallback_degraded_mode",
+      "statement": "Sensor, Model, Network 또는 Actuator 이상 시 Safe State, Fallback과 Degraded Mode를 위험분석으로 정의하고 전환조건과 복구조건을 검증한다.",
+      "importance": "critical",
+      "keywords": [
+        "safe state",
+        "fallback",
+        "degraded mode",
+        "recovery"
+      ],
+      "core_terms": [
+        "safe state",
+        "fallback"
+      ],
+      "accepted_explanations": [
+        "Sensor, Model, Network 또는 Actuator 이상 시 Safe State, Fallback과 Degraded Mode를 위험분석으로 정의하고 전환조건과 복구조건을 검증한다.",
+        "safe state, fallback의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Sensor, Model, Network 또는 Actuator 이상 시 Safe State, Fallback과 Degraded Mode를 위험분석으로 정의하고 전환조건과 복구조건을 검증한다.",
+      "description": "Sensor, Model, Network 또는 Actuator 이상 시 Safe State, Fallback과 Degraded Mode를 위험분석으로 정의하고 전환조건과 복구조건을 검증한다."
+    },
+    {
+      "id": "supervisory_control_human_override",
+      "anchor_id": "supervisory_control_human_override",
+      "statement": "Supervisory Control은 AI 명령의 권한, 한계, 상태와 이상을 감시하며 Human Override는 접근성, 우선권, 표시, 기록과 안전한 복구를 포함해야 한다.",
+      "importance": "critical",
+      "keywords": [
+        "supervisory control",
+        "human override",
+        "authority",
+        "recovery"
+      ],
+      "core_terms": [
+        "supervisory control",
+        "human override"
+      ],
+      "accepted_explanations": [
+        "Supervisory Control은 AI 명령의 권한, 한계, 상태와 이상을 감시하며 Human Override는 접근성, 우선권, 표시, 기록과 안전한 복구를 포함해야 한다.",
+        "supervisory control, human override의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Supervisory Control은 AI 명령의 권한, 한계, 상태와 이상을 감시하며 Human Override는 접근성, 우선권, 표시, 기록과 안전한 복구를 포함해야 한다.",
+      "description": "Supervisory Control은 AI 명령의 권한, 한계, 상태와 이상을 감시하며 Human Override는 접근성, 우선권, 표시, 기록과 안전한 복구를 포함해야 한다."
+    },
+    {
+      "id": "functional_safety_separation",
+      "anchor_id": "functional_safety_separation",
+      "statement": "AI Model의 Accuracy와 Robot Functional Safety는 서로 다른 증거이며 Safety Function은 위험분석, 독립성, 진단, 검증과 Lifecycle 관리로 입증한다.",
+      "importance": "critical",
+      "keywords": [
+        "functional safety",
+        "accuracy",
+        "independence",
+        "lifecycle"
+      ],
+      "core_terms": [
+        "functional safety",
+        "independent safety evidence"
+      ],
+      "accepted_explanations": [
+        "AI Model의 Accuracy와 Robot Functional Safety는 서로 다른 증거이며 Safety Function은 위험분석, 독립성, 진단, 검증과 Lifecycle 관리로 입증한다.",
+        "functional safety, independent safety evidence의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "AI Model의 Accuracy와 Robot Functional Safety는 서로 다른 증거이며 Safety Function은 위험분석, 독립성, 진단, 검증과 Lifecycle 관리로 입증한다.",
+      "description": "AI Model의 Accuracy와 Robot Functional Safety는 서로 다른 증거이며 Safety Function은 위험분석, 독립성, 진단, 검증과 Lifecycle 관리로 입증한다."
+    },
+    {
+      "id": "operational_design_domain_validation",
+      "anchor_id": "operational_design_domain_validation",
+      "statement": "Physical AI는 속도, Payload, 조도, 바닥, 작업물, 사람행동과 Network 조건을 포함한 승인 운영범위를 정의하고 경계·희귀·고장 Scenario를 검증해야 한다.",
+      "importance": "critical",
+      "keywords": [
+        "operating domain",
+        "payload",
+        "lighting",
+        "network",
+        "scenario"
+      ],
+      "core_terms": [
+        "operational design domain",
+        "scenario validation"
+      ],
+      "accepted_explanations": [
+        "Physical AI는 속도, Payload, 조도, 바닥, 작업물, 사람행동과 Network 조건을 포함한 승인 운영범위를 정의하고 경계·희귀·고장 Scenario를 검증해야 한다.",
+        "operational design domain, scenario validation의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "Physical AI는 속도, Payload, 조도, 바닥, 작업물, 사람행동과 Network 조건을 포함한 승인 운영범위를 정의하고 경계·희귀·고장 Scenario를 검증해야 한다.",
+      "description": "Physical AI는 속도, Payload, 조도, 바닥, 작업물, 사람행동과 Network 조건을 포함한 승인 운영범위를 정의하고 경계·희귀·고장 Scenario를 검증해야 한다."
+    },
+    {
+      "id": "runtime_monitoring_change_control",
+      "anchor_id": "runtime_monitoring_change_control",
+      "statement": "배포 후에는 Sensor Health, Calibration, Localization Confidence, Twin Error, Latency, Intervention과 Near-miss를 Monitoring하고 Model·Map·Tool·Safety Parameter 변경을 통제한다.",
+      "importance": "critical",
+      "keywords": [
+        "runtime monitoring",
+        "calibration",
+        "latency",
+        "near miss",
+        "change control"
+      ],
+      "core_terms": [
+        "runtime assurance",
+        "change control"
+      ],
+      "accepted_explanations": [
+        "배포 후에는 Sensor Health, Calibration, Localization Confidence, Twin Error, Latency, Intervention과 Near-miss를 Monitoring하고 Model·Map·Tool·Safety Parameter 변경을 통제한다.",
+        "runtime assurance, change control의 관계, 불확실성, 물리적 제약과 안전통제를 연결한다."
+      ],
+      "rejected_explanations": [
+        "기술명을 나열하고 Sensor–Actuator Feedback과 Runtime Risk를 설명하지 않는다.",
+        "AI, Fusion, Twin 또는 Simulation이 물리적 안전을 자동 보장한다고 일반화한다."
+      ],
+      "grading_notes": "정의, 동작관계, 불확실성, Failure Mode, Safety Control과 Lifecycle 연결을 함께 평가한다.",
+      "source_basis": [
+        "robotics state-estimation and sensor-fusion principles",
+        "digital-twin and simulation validation principles",
+        "functional-safety and runtime-assurance principles"
+      ],
+      "claim": "배포 후에는 Sensor Health, Calibration, Localization Confidence, Twin Error, Latency, Intervention과 Near-miss를 Monitoring하고 Model·Map·Tool·Safety Parameter 변경을 통제한다.",
+      "description": "배포 후에는 Sensor Health, Calibration, Localization Confidence, Twin Error, Latency, Intervention과 Near-miss를 Monitoring하고 Model·Map·Tool·Safety Parameter 변경을 통제한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "digital_twin_always_identical",
+      "claim": "Digital Twin은 실제 설비와 항상 완전히 동일하므로 별도 Calibration과 Validation이 필요 없다.",
+      "correction": "Twin은 목적과 범위가 제한된 Model이므로 Fidelity, 동기화오차, 가정과 Validation 범위를 관리한다.",
+      "wrong_claim": "Digital Twin은 실제 설비와 항상 완전히 동일하므로 별도 Calibration과 Validation이 필요 없다.",
+      "correct_rule": "Twin은 목적과 범위가 제한된 Model이므로 Fidelity, 동기화오차, 가정과 Validation 범위를 관리한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Digital Twin은 실제 설비와 항상 완전히 동일하므로 별도 Calibration과 Validation이 필요 없다.",
+      "description": "Twin은 목적과 범위가 제한된 Model이므로 Fidelity, 동기화오차, 가정과 Validation 범위를 관리한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "sensor_fusion_eliminates_failures",
+      "claim": "Sensor Fusion을 사용하면 개별 Sensor 고장과 측정오류가 자동으로 제거된다.",
+      "correction": "Fusion은 불확실성을 결합할 뿐 고장을 자동 제거하지 않으므로 진단, Residual, 공통원인과 Fallback을 설계한다.",
+      "wrong_claim": "Sensor Fusion을 사용하면 개별 Sensor 고장과 측정오류가 자동으로 제거된다.",
+      "correct_rule": "Fusion은 불확실성을 결합할 뿐 고장을 자동 제거하지 않으므로 진단, Residual, 공통원인과 Fallback을 설계한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Sensor Fusion을 사용하면 개별 Sensor 고장과 측정오류가 자동으로 제거된다.",
+      "description": "Fusion은 불확실성을 결합할 뿐 고장을 자동 제거하지 않으므로 진단, Residual, 공통원인과 Fallback을 설계한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "accuracy_guarantees_physical_safety",
+      "claim": "AI Model의 Accuracy가 높으면 Robot과 자율제조의 현장 안전성이 자동으로 보장된다.",
+      "correction": "Model 성능과 Functional Safety는 별도 증거이며 Safety Envelope, 독립감시, Safe State와 Scenario Validation이 필요하다.",
+      "wrong_claim": "AI Model의 Accuracy가 높으면 Robot과 자율제조의 현장 안전성이 자동으로 보장된다.",
+      "correct_rule": "Model 성능과 Functional Safety는 별도 증거이며 Safety Envelope, 독립감시, Safe State와 Scenario Validation이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "AI Model의 Accuracy가 높으면 Robot과 자율제조의 현장 안전성이 자동으로 보장된다.",
+      "description": "Model 성능과 Functional Safety는 별도 증거이며 Safety Envelope, 독립감시, Safe State와 Scenario Validation이 필요하다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "edge_ai_removes_network_cybersecurity",
+      "claim": "Edge AI를 적용하면 Network와 Cybersecurity 검토가 더 이상 필요 없다.",
+      "correction": "Edge에서도 Update, 중앙연계, 시간동기, Device 자원, 접근통제와 Cybersecurity를 검토한다.",
+      "wrong_claim": "Edge AI를 적용하면 Network와 Cybersecurity 검토가 더 이상 필요 없다.",
+      "correct_rule": "Edge에서도 Update, 중앙연계, 시간동기, Device 자원, 접근통제와 Cybersecurity를 검토한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Edge AI를 적용하면 Network와 Cybersecurity 검토가 더 이상 필요 없다.",
+      "description": "Edge에서도 Update, 중앙연계, 시간동기, Device 자원, 접근통제와 Cybersecurity를 검토한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "collaborative_robot_inherently_safe",
+      "claim": "Collaborative Robot 제품을 사용하면 Tool, Payload와 공정위험에 관계없이 사람과 안전하게 협업할 수 있다.",
+      "correction": "실제 협업 Application 전체의 위험과 보호조치를 평가해야 한다.",
+      "wrong_claim": "Collaborative Robot 제품을 사용하면 Tool, Payload와 공정위험에 관계없이 사람과 안전하게 협업할 수 있다.",
+      "correct_rule": "실제 협업 Application 전체의 위험과 보호조치를 평가해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Collaborative Robot 제품을 사용하면 Tool, Payload와 공정위험에 관계없이 사람과 안전하게 협업할 수 있다.",
+      "description": "실제 협업 Application 전체의 위험과 보호조치를 평가해야 한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "single_camera_all_conditions",
+      "claim": "Camera 한 대가 정상 동작하면 모든 조도, 가림과 반사조건에서 작업자와 장애물을 확실히 검출한다.",
+      "correction": "환경조건, Occlusion, Blind Spot, Diagnostic와 보완 Sensor를 운영범위에 맞게 검증한다.",
+      "wrong_claim": "Camera 한 대가 정상 동작하면 모든 조도, 가림과 반사조건에서 작업자와 장애물을 확실히 검출한다.",
+      "correct_rule": "환경조건, Occlusion, Blind Spot, Diagnostic와 보완 Sensor를 운영범위에 맞게 검증한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Camera 한 대가 정상 동작하면 모든 조도, 가림과 반사조건에서 작업자와 장애물을 확실히 검출한다.",
+      "description": "환경조건, Occlusion, Blind Spot, Diagnostic와 보완 Sensor를 운영범위에 맞게 검증한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "time_calibration_irrelevant",
+      "claim": "Sensor Fusion에서는 Timestamp와 좌표계 Calibration이 달라도 Algorithm이 자동 보정하므로 영향이 없다.",
+      "correction": "시간정렬과 좌표계 오차는 상태추정을 왜곡하므로 동기화, Calibration과 Drift Monitoring이 필요하다.",
+      "wrong_claim": "Sensor Fusion에서는 Timestamp와 좌표계 Calibration이 달라도 Algorithm이 자동 보정하므로 영향이 없다.",
+      "correct_rule": "시간정렬과 좌표계 오차는 상태추정을 왜곡하므로 동기화, Calibration과 Drift Monitoring이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Sensor Fusion에서는 Timestamp와 좌표계 Calibration이 달라도 Algorithm이 자동 보정하므로 영향이 없다.",
+      "description": "시간정렬과 좌표계 오차는 상태추정을 왜곡하므로 동기화, Calibration과 Drift Monitoring이 필요하다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "slam_certifies_collision_safety",
+      "claim": "SLAM이 정확히 동작하면 충돌회피와 Functional Safety가 자동으로 인증된다.",
+      "correction": "SLAM은 Localization·Mapping 기능이며 안전정지와 충돌방지는 독립된 위험통제와 검증이 필요하다.",
+      "wrong_claim": "SLAM이 정확히 동작하면 충돌회피와 Functional Safety가 자동으로 인증된다.",
+      "correct_rule": "SLAM은 Localization·Mapping 기능이며 안전정지와 충돌방지는 독립된 위험통제와 검증이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "SLAM이 정확히 동작하면 충돌회피와 Functional Safety가 자동으로 인증된다.",
+      "description": "SLAM은 Localization·Mapping 기능이며 안전정지와 충돌방지는 독립된 위험통제와 검증이 필요하다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "simulation_pass_proves_real_world",
+      "claim": "Simulation에서 모든 시험이 통과하면 실제 설비 Validation은 생략할 수 있다.",
+      "correction": "Simulation Coverage와 Model Gap을 분석하고 실제 설비와 단계적 현장시험으로 확인한다.",
+      "wrong_claim": "Simulation에서 모든 시험이 통과하면 실제 설비 Validation은 생략할 수 있다.",
+      "correct_rule": "Simulation Coverage와 Model Gap을 분석하고 실제 설비와 단계적 현장시험으로 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Simulation에서 모든 시험이 통과하면 실제 설비 Validation은 생략할 수 있다.",
+      "description": "Simulation Coverage와 Model Gap을 분석하고 실제 설비와 단계적 현장시험으로 확인한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "synthetic_data_replaces_real_data",
+      "claim": "Synthetic Data가 충분하면 실제 Sensor와 현장 Data는 필요 없다.",
+      "correction": "Synthetic Data는 보강수단이며 Domain Gap과 실제 분포를 현장 Data로 확인한다.",
+      "wrong_claim": "Synthetic Data가 충분하면 실제 Sensor와 현장 Data는 필요 없다.",
+      "correct_rule": "Synthetic Data는 보강수단이며 Domain Gap과 실제 분포를 현장 Data로 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Synthetic Data가 충분하면 실제 Sensor와 현장 Data는 필요 없다.",
+      "description": "Synthetic Data는 보강수단이며 Domain Gap과 실제 분포를 현장 Data로 확인한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "planner_direct_actuation_no_guard",
+      "claim": "AI Planner가 생성한 명령은 별도 Safety Constraint나 Supervisory Control 없이 Actuator에 직접 적용해도 된다.",
+      "correction": "명령은 독립 Safety Envelope, 권한검사, Interlock와 Fallback을 거쳐야 한다.",
+      "wrong_claim": "AI Planner가 생성한 명령은 별도 Safety Constraint나 Supervisory Control 없이 Actuator에 직접 적용해도 된다.",
+      "correct_rule": "명령은 독립 Safety Envelope, 권한검사, Interlock와 Fallback을 거쳐야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "AI Planner가 생성한 명령은 별도 Safety Constraint나 Supervisory Control 없이 Actuator에 직접 적용해도 된다.",
+      "description": "명령은 독립 Safety Envelope, 권한검사, Interlock와 Fallback을 거쳐야 한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "safe_state_fallback_unnecessary",
+      "claim": "AI가 실시간으로 재계획하므로 Sensor나 Model 장애 시 Safe State와 Fallback이 필요 없다.",
+      "correction": "재계획 실패와 불확실성을 고려해 위험분석 기반 Safe State, Degraded Mode와 복구조건을 정의한다.",
+      "wrong_claim": "AI가 실시간으로 재계획하므로 Sensor나 Model 장애 시 Safe State와 Fallback이 필요 없다.",
+      "correct_rule": "재계획 실패와 불확실성을 고려해 위험분석 기반 Safe State, Degraded Mode와 복구조건을 정의한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "AI가 실시간으로 재계획하므로 Sensor나 Model 장애 시 Safe State와 Fallback이 필요 없다.",
+      "description": "재계획 실패와 불확실성을 고려해 위험분석 기반 Safe State, Degraded Mode와 복구조건을 정의한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "human_override_unnecessary",
+      "claim": "자율제조 시스템은 사람이 개입하면 성능이 낮아지므로 Human Override와 비상개입을 제거해야 한다.",
+      "correction": "권한과 위험도에 맞는 Human Override, Emergency Action, 표시와 안전한 복구를 제공한다.",
+      "wrong_claim": "자율제조 시스템은 사람이 개입하면 성능이 낮아지므로 Human Override와 비상개입을 제거해야 한다.",
+      "correct_rule": "권한과 위험도에 맞는 Human Override, Emergency Action, 표시와 안전한 복구를 제공한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "자율제조 시스템은 사람이 개입하면 성능이 낮아지므로 Human Override와 비상개입을 제거해야 한다.",
+      "description": "권한과 위험도에 맞는 Human Override, Emergency Action, 표시와 안전한 복구를 제공한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "on_device_zero_latency_deterministic",
+      "claim": "On-device AI는 Network를 거치지 않으므로 Latency가 0이고 실행시간이 항상 결정적이다.",
+      "correction": "Inference, Preprocessing, Scheduling, Thermal Throttling과 Actuation 지연·Jitter를 측정한다.",
+      "wrong_claim": "On-device AI는 Network를 거치지 않으므로 Latency가 0이고 실행시간이 항상 결정적이다.",
+      "correct_rule": "Inference, Preprocessing, Scheduling, Thermal Throttling과 Actuation 지연·Jitter를 측정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "On-device AI는 Network를 거치지 않으므로 Latency가 0이고 실행시간이 항상 결정적이다.",
+      "description": "Inference, Preprocessing, Scheduling, Thermal Throttling과 Actuation 지연·Jitter를 측정한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "redundancy_removes_common_cause",
+      "claim": "Sensor를 여러 개 설치하면 공통원인고장은 자동으로 제거된다.",
+      "correction": "공통전원, 환경, 위치, Algorithm과 Calibration의 종속성을 분석하고 다양성·분리·진단을 적용한다.",
+      "wrong_claim": "Sensor를 여러 개 설치하면 공통원인고장은 자동으로 제거된다.",
+      "correct_rule": "공통전원, 환경, 위치, Algorithm과 Calibration의 종속성을 분석하고 다양성·분리·진단을 적용한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Sensor를 여러 개 설치하면 공통원인고장은 자동으로 제거된다.",
+      "description": "공통전원, 환경, 위치, Algorithm과 Calibration의 종속성을 분석하고 다양성·분리·진단을 적용한다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    },
+    {
+      "id": "uncontrolled_online_learning",
+      "claim": "Physical AI는 현장에서 계속 학습할수록 좋아지므로 Model과 Safety Parameter를 승인 없이 Online 변경해도 된다.",
+      "correction": "Online Learning과 Parameter 변경은 운영범위, 검증, 승인, Rollback과 변경관리 대상이다.",
+      "wrong_claim": "Physical AI는 현장에서 계속 학습할수록 좋아지므로 Model과 Safety Parameter를 승인 없이 Online 변경해도 된다.",
+      "correct_rule": "Online Learning과 Parameter 변경은 운영범위, 검증, 승인, Rollback과 변경관리 대상이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Physical AI는 현장에서 계속 학습할수록 좋아지므로 Model과 Safety Parameter를 승인 없이 Online 변경해도 된다.",
+      "description": "Online Learning과 Parameter 변경은 운영범위, 검증, 승인, Rollback과 변경관리 대상이다.",
+      "grading_notes": "문맥상 무조건적 보장 또는 안전통제 제거를 단정한 경우 Fatal 후보로 평가한다."
+    }
+  ],
+  "safe_expressions": [
+    "Sensor Fusion은 독립적이고 적절히 Calibration된 Sensor의 추정오차를 줄일 수 있으나 고장제거를 자동 보장하지 않는다.",
+    "Camera 중심 Perception은 승인된 조도와 시야조건에서 사용할 수 있으나 Blind Spot과 환경변화를 검증한다.",
+    "Collaborative Robot은 협업기능을 제공할 수 있으나 실제 Application Risk Assessment를 대체하지 않는다.",
+    "Digital Twin은 목적에 충분한 Fidelity를 가질 수 있으나 모든 물리현상을 동일하게 재현할 필요는 없다.",
+    "Simulation은 실제시험을 줄이고 위험 Scenario를 탐색할 수 있으나 현장 Validation을 전부 대체하지 않는다.",
+    "Synthetic Data는 희귀 Event를 보강할 수 있으나 실제 Sensor 분포와 Domain Gap을 확인한다.",
+    "SLAM은 Localization과 Mapping의 유효한 방법이지만 독립 Safety Function으로 자동 간주하지 않는다.",
+    "Edge AI는 Latency와 연결의존성을 줄일 수 있으나 Device 관리, Update와 Cybersecurity가 필요하다.",
+    "On-device 처리는 Network 장애 시 일부 기능을 유지할 수 있으나 Resource와 Thermal 제한을 평가한다.",
+    "AI Planner 출력은 Recommendation 또는 제한적 자동명령으로 사용할 수 있으며 권한과 Safety Constraint를 별도로 둔다.",
+    "Degraded Mode는 즉시정지보다 안전하고 합리적일 수 있으나 위험분석과 허용조건을 명시한다.",
+    "Human Override는 항상 수동운전만을 뜻하지 않고 위험도에 따른 승인·개입·정지권한을 의미할 수 있다.",
+    "Online Adaptation은 제한된 Parameter에 사용할 수 있으나 검증범위, Monitor와 Rollback을 둔다.",
+    "World Model은 불확실한 환경표현이며 Ground Truth와 동일하다고 가정하지 않는다.",
+    "Digital Twin Error는 단일 Threshold로 관리할 수 있으나 Variable, Mode와 안전영향에 따라 기준을 달리할 수 있다.",
+    "Functional Safety와 AI 성능은 연계해 평가할 수 있으나 어느 한쪽이 다른 쪽의 증거를 자동 대체하지 않는다."
+  ]
+}

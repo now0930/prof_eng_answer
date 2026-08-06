@@ -1,0 +1,22 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "Physical AI를 Sensor–Actuator Feedback 폐루프로 정의한다.",
+    "Robot System Boundary에 Tool, Payload, Cell과 Safety 기능을 포함한다.",
+    "Sensor Fusion의 Time Alignment, Calibration, Covariance와 공통원인을 설명한다.",
+    "State Estimation, Localization, SLAM, Observability와 World Model을 구분한다.",
+    "Digital Twin의 목적, Fidelity, Synchronization, Version과 Staleness를 설명한다.",
+    "Simulation Coverage와 Synthetic Data Domain Gap을 설명한다.",
+    "Planning과 Control 계층 및 End-to-end Latency를 설명한다.",
+    "Collaborative Robot 제품과 협업 Application 안전성을 구분한다.",
+    "Safety Envelope, Safe State, Fallback과 Degraded Mode를 설명한다.",
+    "Supervisory Control과 Human Override를 설명한다.",
+    "AI Accuracy와 Functional Safety 증거를 분리한다.",
+    "운영범위, Scenario Validation, Runtime Monitoring과 Change Control을 연결한다."
+  ],
+  "note": "Sensor Fusion, Digital Twin, Simulation, Edge AI와 Model Accuracy는 물리적 안전을 자동 보장하지 않는다. 정량한계와 표준 요구는 위험분석과 적용 Edition으로 verify-first 한다."
+}

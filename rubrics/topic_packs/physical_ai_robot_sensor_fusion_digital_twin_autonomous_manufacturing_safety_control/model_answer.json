@@ -1,0 +1,307 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+  "title_ko": "Physical AI, 로봇, 센서융합, Digital Twin, 자율제조 및 안전제어",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Physical AI의 개념과 산업 Robot Closed-loop 구조를 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "physical_ai_definition",
+        "industrial_robot_architecture",
+        "closed_loop_ai",
+        "latency_deadline_budget"
+      ]
+    },
+    {
+      "pattern": "Camera·LiDAR·Radar·Encoder·Force Sensor의 Sensor Fusion 방안을 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "sensor_complementarity",
+        "timestamp_and_synchronization",
+        "calibration_coordinate_frame",
+        "fusion_uncertainty",
+        "common_cause_and_fault_detection"
+      ]
+    },
+    {
+      "pattern": "Robot State Estimation, Localization과 SLAM의 관계를 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "state_estimation",
+        "localization",
+        "slam_relation",
+        "observability_limits"
+      ]
+    },
+    {
+      "pattern": "Digital Twin의 구성, Fidelity, 동기화와 Validation 방안을 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "digital_twin_definition",
+        "digital_twin_fidelity",
+        "digital_twin_synchronization",
+        "runtime_monitoring_change_control"
+      ]
+    },
+    {
+      "pattern": "Robot Simulation과 Synthetic Data의 활용 및 Domain Gap 관리방안을 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "simulation_scenario_coverage",
+        "synthetic_data_domain_gap",
+        "operational_design_domain_validation"
+      ]
+    },
+    {
+      "pattern": "Robot Planning, Control과 Safety Envelope의 관계를 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "robot_planning_hierarchy",
+        "closed_loop_ai",
+        "safety_envelope",
+        "supervisory_control_human_override"
+      ]
+    },
+    {
+      "pattern": "Edge AI·On-device AI의 장점과 Physical Control 적용 한계를 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "edge_on_device_ai",
+        "latency_deadline_budget",
+        "safe_state_fallback_degraded_mode"
+      ]
+    },
+    {
+      "pattern": "자율제조에서 Safe State, Fallback, Supervisory Control과 Human Override를 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "autonomous_manufacturing",
+        "safe_state_fallback_degraded_mode",
+        "supervisory_control_human_override",
+        "functional_safety_separation"
+      ]
+    },
+    {
+      "pattern": "Collaborative Robot과 Human–Robot Collaboration의 안전설계 방안을 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "collaborative_robot_application",
+        "human_robot_collaboration",
+        "safety_envelope",
+        "functional_safety_separation"
+      ]
+    },
+    {
+      "pattern": "Physical AI의 운영범위, Scenario Validation과 Runtime Monitoring을 설명하시오.",
+      "intent": "physical AI robotics, sensor fusion, digital twin and safe autonomous control",
+      "required_anchor_ids": [
+        "operational_design_domain_validation",
+        "runtime_monitoring_change_control",
+        "digital_twin_synchronization",
+        "functional_safety_separation"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": 1,
+      "title": "1. Physical AI와 System Boundary",
+      "content": "Physical AI의 Sensor–AI–Planner–Controller–Actuator–Feedback 구조와 Robot System 경계를 설명한다.",
+      "anchor_refs": [
+        "physical_ai_definition",
+        "industrial_robot_architecture",
+        "closed_loop_ai"
+      ]
+    },
+    {
+      "section": 2,
+      "title": "2. Perception과 Sensor Fusion",
+      "content": "Camera·LiDAR·Radar·Encoder·Force Sensor의 특성, 시간동기, Calibration, 불확실성과 공통원인을 설명한다.",
+      "anchor_refs": [
+        "sensor_complementarity",
+        "timestamp_and_synchronization",
+        "calibration_coordinate_frame",
+        "fusion_uncertainty",
+        "common_cause_and_fault_detection"
+      ]
+    },
+    {
+      "section": 3,
+      "title": "3. State와 World Model",
+      "content": "State Estimation, Localization, SLAM, Observability와 World Model의 관계를 설명한다.",
+      "anchor_refs": [
+        "state_estimation",
+        "localization",
+        "slam_relation",
+        "observability_limits",
+        "world_model"
+      ]
+    },
+    {
+      "section": 4,
+      "title": "4. Digital Twin과 Simulation",
+      "content": "Twin의 목적·Fidelity·동기화, Simulation Coverage와 Synthetic Data Domain Gap을 설명한다.",
+      "anchor_refs": [
+        "digital_twin_definition",
+        "digital_twin_fidelity",
+        "digital_twin_synchronization",
+        "simulation_scenario_coverage",
+        "synthetic_data_domain_gap"
+      ]
+    },
+    {
+      "section": 5,
+      "title": "5. Planning과 실시간 제어",
+      "content": "Task·Motion·Trajectory Planning, Closed-loop Feedback, Edge AI와 End-to-end Latency를 연결한다.",
+      "anchor_refs": [
+        "robot_planning_hierarchy",
+        "edge_on_device_ai",
+        "latency_deadline_budget"
+      ]
+    },
+    {
+      "section": 6,
+      "title": "6. 자율제조와 협업",
+      "content": "자율제조의 승인 운영범위, Human–Robot Collaboration과 Human Factors를 설명한다.",
+      "anchor_refs": [
+        "autonomous_manufacturing",
+        "collaborative_robot_application",
+        "human_robot_collaboration"
+      ]
+    },
+    {
+      "section": 7,
+      "title": "7. 안전제어",
+      "content": "Safety Envelope, Safe State, Fallback, Degraded Mode, Supervisory Control과 Human Override를 설명한다.",
+      "anchor_refs": [
+        "safety_envelope",
+        "safe_state_fallback_degraded_mode",
+        "supervisory_control_human_override",
+        "functional_safety_separation"
+      ]
+    },
+    {
+      "section": 8,
+      "title": "8. Validation과 Lifecycle",
+      "content": "운영범위의 경계·희귀·고장 Scenario, Runtime Monitoring과 변경관리를 결론으로 제시한다.",
+      "anchor_refs": [
+        "operational_design_domain_validation",
+        "runtime_monitoring_change_control"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Physical AI를 Sensor–Actuator Feedback을 가진 폐루프 시스템으로 정의한다.",
+    "Robot 개체가 아니라 Tool, Payload, Cell과 Safety 기능을 포함한 System Boundary를 제시한다.",
+    "Sensor별 측정특성과 시간동기·좌표 Calibration을 설명한다.",
+    "Fusion이 불확실성을 줄일 수 있으나 고장과 공통원인을 자동 제거하지 않음을 설명한다.",
+    "State Estimation, Localization, SLAM과 Observability를 구분한다.",
+    "World Model을 불확실성을 가진 환경표현으로 설명한다.",
+    "Digital Twin의 목적, Fidelity, 동기화, Version과 Staleness를 설명한다.",
+    "Simulation Coverage와 Synthetic Data Domain Gap을 제시한다.",
+    "Planning과 저수준 Control의 책임을 구분한다.",
+    "End-to-end Latency와 Jitter를 Deadline에 연결한다.",
+    "Collaborative Robot 제품과 협업 Application 안전성을 구분한다.",
+    "Safety Envelope을 AI보다 우선하는 독립 Constraint로 설명한다.",
+    "Safe State, Fallback, Degraded Mode와 복구조건을 제시한다.",
+    "Supervisory Control과 Human Override의 권한·표시·기록을 제시한다.",
+    "AI Accuracy와 Functional Safety 증거를 분리한다.",
+    "운영범위, Scenario Validation, Runtime Monitoring과 변경관리를 연결한다."
+  ],
+  "common_missing_points": [
+    "Physical AI를 일반 예측 AI와 동일시함",
+    "Robot System Boundary와 End-effector·Payload 누락",
+    "Sensor Fusion의 Timestamp·Calibration·Covariance 누락",
+    "공통원인과 고장진단 누락",
+    "SLAM과 Functional Safety 혼용",
+    "Digital Twin을 실제설비와 완전히 동일하다고 가정",
+    "Twin Synchronization과 Stale Data 누락",
+    "Simulation Coverage와 Domain Gap 누락",
+    "Planning과 Control 책임 혼용",
+    "Latency·Jitter·Deadline 누락",
+    "협업 Robot을 본질적으로 안전하다고 단정",
+    "Safety Envelope과 독립감시 누락",
+    "Safe State·Fallback·복구조건 누락",
+    "Human Override와 Human Factors 누락",
+    "Runtime Monitoring과 변경관리 누락"
+  ],
+  "routing_aliases": [
+    "physical AI robot closed loop safety control",
+    "industrial robot sensor fusion state estimation",
+    "collaborative robot human robot safety application",
+    "camera LiDAR radar encoder sensor fusion",
+    "robot localization SLAM world model",
+    "digital twin fidelity synchronization validation",
+    "simulation synthetic data domain gap robot",
+    "robot planning trajectory supervisory control",
+    "autonomous manufacturing safety envelope fallback",
+    "edge AI on-device latency control deadline",
+    "human robot collaboration safe state override",
+    "functional safety AI model physical system",
+    "sensor calibration coordinate frame observability",
+    "closed-loop AI runtime monitoring change control"
+  ],
+  "routing_field_points": [
+    "Physical AI Sensor–Actuator Feedback",
+    "Industrial Robot System Boundary",
+    "Collaborative Robot Application Risk",
+    "Camera·LiDAR·Radar·Encoder·Force Sensor",
+    "Timestamp·Clock Synchronization",
+    "Intrinsic·Extrinsic Calibration과 Coordinate Frame",
+    "Covariance·Uncertainty·Residual",
+    "Common Cause와 Fault Detection",
+    "State Estimation과 Observability",
+    "Localization·SLAM·World Model",
+    "Digital Twin Fidelity·Synchronization·Staleness",
+    "Simulation Scenario Coverage",
+    "Synthetic Data Domain Gap",
+    "Task·Motion·Trajectory Planning",
+    "Closed-loop AI Feedback Risk",
+    "Edge AI·On-device Resource",
+    "Latency·Jitter·Deadline",
+    "Autonomous Manufacturing",
+    "Human–Robot Collaboration",
+    "Safety Envelope",
+    "Safe State·Fallback·Degraded Mode",
+    "Supervisory Control·Human Override",
+    "Functional Safety Evidence",
+    "Operational Domain·Runtime Monitoring"
+  ],
+  "representative_answer": "Physical AI는 AI의 인식과 계획 결과가 Robot·설비의 Actuator에 적용되고 물리결과를 다시 Sensor로 관측하는 폐루프 시스템이다. 따라서 Offline Model Accuracy만이 아니라 Sensor, Controller, Actuator, Tool, Payload, 작업공간과 사람을 포함한 System Boundary를 평가해야 한다.\n\nPerception 단계에서는 Camera, LiDAR, Radar, Encoder와 Force·Torque Sensor의 측정특성을 상호 보완적으로 사용한다. Fusion 전에 Timestamp, Clock, Sample Rate와 Transport Delay를 정렬하고 Intrinsic·Extrinsic Calibration으로 공통 좌표계에 변환한다. 각 Sensor의 Bias와 Covariance를 반영해 상태와 불확실성을 추정한다. Sensor를 여러 개 사용해도 공통전원, 동일시야, 환경조건과 공통 Algorithm의 고장은 남으므로 Residual과 Plausibility 진단, Fallback이 필요하다.\n\nState Estimation은 직접 측정하기 어려운 위치, 속도, 자세와 외력을 추정한다. Localization은 기준좌표계의 Pose를 구하고 SLAM은 Localization과 Mapping을 동시에 수행한다. 그러나 SLAM 성능이 충돌회피나 Functional Safety를 자동 보장하지 않는다. World Model은 객체, 자유공간과 불확실성을 Planning에 제공한다.\n\nDigital Twin은 실제 자산의 모든 현상을 동일하게 복제하는 것이 아니라 특정 목적과 범위의 Model이다. 따라서 Fidelity, Boundary Condition, Parameter, Version, Timestamp와 실제 설비와의 Synchronization Error를 관리한다. Simulation과 Synthetic Data는 위험 Scenario와 희귀상황을 시험하는 데 유용하지만 Model Gap과 Domain Gap을 실제 Data와 현장시험으로 확인해야 한다.\n\nRobot Planning은 Task, Motion과 Trajectory를 결정하고 저수준 Control은 계획을 추종한다. Closed-loop AI에서는 Perception 오류와 Delay가 Feedback을 통해 누적될 수 있다. Sensing, 전처리, Inference, Planning, 통신과 Actuation의 End-to-end Latency와 Jitter가 Control Deadline을 만족해야 한다. Edge AI는 지연과 연결의존성을 낮출 수 있지만 Resource, Thermal, Version, Network와 Cybersecurity 검토를 제거하지 않는다.\n\n자율제조와 Human–Robot Collaboration은 생산목표보다 Safety Constraint를 우선한다. Collaborative Robot 제품을 사용하더라도 Tool, Payload, 속도, 힘, 작업공간과 공정위험을 포함한 Application Risk를 평가한다. 위치, 속도, 힘, 거리와 금지영역의 Safety Envelope은 AI 명령보다 우선하는 독립계층에서 집행한다.\n\nSensor, Model, Network나 Actuator 이상 시 위험분석에 따른 Safe State, Fallback과 Degraded Mode로 전환한다. Supervisory Control은 AI 권한과 상태를 감시하고 Human Override의 우선권, 표시, 기록과 안전한 복구를 제공한다. AI Accuracy와 Functional Safety는 다른 증거이므로 독립 Safety Function과 Scenario Validation이 필요하다.\n\n마지막으로 승인 운영범위의 정상·경계·희귀·고장 Scenario를 검증하고, 배포 후 Sensor Health, Calibration, Localization Confidence, Twin Error, Latency, Intervention과 Near-miss를 Monitoring한다. Model, Map, Tool과 Safety Parameter 변경은 영향분석, Regression, 승인과 Rollback으로 관리한다.",
+  "negative_boundary_examples": [
+    {
+      "question": "산업 AI Model의 Train·Validation·Test와 Data Leakage를 설명하시오.",
+      "owner": "SW-12"
+    },
+    {
+      "question": "예지보전 Model의 Precision, Recall, Drift와 Retraining을 설명하시오.",
+      "owner": "SW-12"
+    },
+    {
+      "question": "Historian, MES, Timestamp와 Batch Genealogy를 설명하시오.",
+      "owner": "SW-11"
+    },
+    {
+      "question": "SIS Safety Application Program의 SIL, 독립성과 Verification을 설명하시오.",
+      "owner": "SW-05"
+    },
+    {
+      "question": "OPC UA와 MQTT Protocol의 상호운용성을 설명하시오.",
+      "owner": "SW-07"
+    },
+    {
+      "question": "PLC Sequence, Interlock, Trip과 Fail-safe Logic을 설명하시오.",
+      "owner": "SW-02"
+    },
+    {
+      "question": "일반 Software V-Model과 Configuration Management를 설명하시오.",
+      "owner": "SW-04"
+    },
+    {
+      "question": "Robot용 Ethernet의 Frame, QoS와 Redundancy Protocol을 설명하시오.",
+      "owner": "SW-07"
+    }
+  ]
+}
