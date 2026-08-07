@@ -1,0 +1,25 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "Hardware requirement→architecture/interface→verification evidence traceability를 설명한다.",
+    "Component selection에서 rating·derating·environment·lifecycle·maintainability를 통합한다.",
+    "Power/thermal/I/O/interface architecture와 design margin을 평가한다.",
+    "Verification과 validation을 구분한다.",
+    "Prototype pass와 production readiness를 분리한다.",
+    "DFM/DFA, BOM/configuration, incoming/process control을 포함한다.",
+    "Production test coverage, EOL와 fixture control을 설명한다.",
+    "Change impact에 따라 DV/environmental requalification/production-test update 범위를 결정한다.",
+    "Topic 1/2/3/5, software lifecycle, FAT/SAT ownership boundary를 명확히 한다."
+  ],
+  "note": "IC-2027-W-3-9의 제어 Hardware 개발·생산·검증을 product/panel hardware lifecycle 관점에서 평가하는 핵심 설계 주제이다. Prototype/FAT 단일 합격이 production readiness를 대체하지 않으며, 구체적 derating/test 값은 applicable requirement에 따라야 한다. Historical frequency는 사용하지 않았다.",
+  "revision_notes": [
+    "IMPLEMENTATION_EVALUATION + DESIGN_EVALUATION으로 분류했다.",
+    "Software V-model과 대칭되는 hardware lifecycle을 소유하되 software lifecycle 자체는 제외했다.",
+    "Historical frequency를 사용하지 않았다."
+  ],
+  "topic_label": "제어 Hardware Lifecycle·Panel Architecture·생산·V&V"
+}
