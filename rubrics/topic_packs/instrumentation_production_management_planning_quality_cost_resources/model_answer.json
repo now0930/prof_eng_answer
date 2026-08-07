@@ -1,0 +1,292 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+  "title_ko": "계측·제어 생산관리: 생산계획, 능력·일정, 품질·원가, 자원 및 성과관리",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "생산관리의 기능과 생산계획·품질·원가·자원관리 체계를 설명하시오.",
+      "intent": "수요를 실행가능한 plan으로 변환하고 capacity·quality·cost·resource와 KPI를 폐루프로 관리한다.",
+      "required_anchor_ids": [
+        "production_management_objective_scope",
+        "production_demand_order_plan_translation",
+        "production_capacity_available_time_rate",
+        "production_quality_plan_ctq_spec",
+        "production_cost_structure",
+        "production_manpower_skill_shift",
+        "production_pdca_tradeoff_improvement"
+      ]
+    },
+    {
+      "pattern": "생산계획 수립 시 Takt Time, Cycle Time, 생산능력과 Bottleneck의 관계를 설명하시오.",
+      "intent": "수요속도와 공정속도, effective capacity와 시스템 제약을 연결한다.",
+      "required_anchor_ids": [
+        "production_takt_cycle_time_boundary",
+        "production_capacity_available_time_rate",
+        "production_bottleneck_throughput_constraint",
+        "production_line_balancing_workload"
+      ]
+    },
+    {
+      "pattern": "다품종 생산의 일정계획과 Changeover·Batch Size·WIP 관리방법을 설명하시오.",
+      "intent": "finite capacity와 setup/sequence, batch, buffer/lead-time trade-off를 설계한다.",
+      "required_anchor_ids": [
+        "production_finite_capacity_schedule_dispatch",
+        "production_changeover_sequence_batch_tradeoff",
+        "production_wip_flow_lead_time",
+        "production_schedule_adherence_delivery_kpi"
+      ]
+    },
+    {
+      "pattern": "생산자원 계획에서 인력·자재·설비를 어떻게 관리하는지 설명하시오.",
+      "intent": "BOM/lead time, skill/shift, available equipment capability를 schedule과 연결한다.",
+      "required_anchor_ids": [
+        "production_material_requirement_availability",
+        "production_manpower_skill_shift",
+        "production_equipment_resource_availability",
+        "production_finite_capacity_schedule_dispatch"
+      ]
+    },
+    {
+      "pattern": "생산품질 관리와 FPY, Yield, Scrap, Rework 지표의 활용방법을 설명하시오.",
+      "intent": "CTQ/control plan, quality KPI boundary, process feedback와 containment를 설명한다.",
+      "required_anchor_ids": [
+        "production_quality_plan_ctq_spec",
+        "production_fpy_yield_scrap_rework",
+        "production_process_quality_feedback",
+        "production_defect_containment_traceability"
+      ]
+    },
+    {
+      "pattern": "생산원가의 구성과 원가절감 관리방법을 설명하시오.",
+      "intent": "cost boundary, standard-actual variance, yield/volume, energy loss를 운영개선과 연결한다.",
+      "required_anchor_ids": [
+        "production_cost_structure",
+        "production_standard_actual_cost_variance",
+        "production_unit_cost_volume_yield",
+        "production_energy_consumables_cost"
+      ]
+    },
+    {
+      "pattern": "OEE의 구성과 생산관리 KPI 적용 시 유의사항을 설명하시오.",
+      "intent": "OEE A×P×Q와 flow/delivery KPI를 함께 보고 metric boundary와 한계를 설명한다.",
+      "required_anchor_ids": [
+        "production_oee_apq_formula_boundary",
+        "production_throughput_cycle_lead_wip_kpi",
+        "production_schedule_adherence_delivery_kpi",
+        "production_pdca_tradeoff_improvement"
+      ]
+    },
+    {
+      "pattern": "MES·ERP·Historian과 생산관리의 역할 및 정보 흐름을 설명하시오.",
+      "intent": "데이터/실행 계층과 production decision ownership을 계층적으로 구분한다.",
+      "required_anchor_ids": [
+        "production_mes_data_handoff",
+        "production_erp_mes_role_boundary",
+        "production_demand_order_plan_translation",
+        "production_defect_containment_traceability"
+      ]
+    },
+    {
+      "pattern": "생산계획 대비 실적 편차가 발생할 때 개선 절차를 설명하시오.",
+      "intent": "capacity·material·manpower·quality·cost·bottleneck 원인을 분류하고 daily management와 PDCA로 닫는다.",
+      "required_anchor_ids": [
+        "production_daily_management_visual_control",
+        "production_capacity_available_time_rate",
+        "production_material_requirement_availability",
+        "production_manpower_skill_shift",
+        "production_process_quality_feedback",
+        "production_standard_actual_cost_variance",
+        "production_pdca_tradeoff_improvement"
+      ]
+    },
+    {
+      "pattern": "프로젝트 관리·유지보수 관리·생산관리의 Cost, Schedule, Resource KPI ownership을 구분하시오.",
+      "intent": "양산 생산 schedule/cost/resource와 project/O&M의 lifecycle boundary를 설명한다.",
+      "required_anchor_ids": [
+        "production_equipment_resource_availability",
+        "production_standard_actual_cost_variance",
+        "production_schedule_adherence_delivery_kpi",
+        "production_mes_data_handoff",
+        "production_pdca_tradeoff_improvement"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 생산관리 목적과 Planning Hierarchy",
+      "intent": "수요·주문을 장중단기 생산계획과 현장 실행계획으로 변환한다.",
+      "anchor_refs": [
+        "production_management_objective_scope",
+        "production_demand_order_plan_translation",
+        "production_horizon_master_detailed_schedule"
+      ]
+    },
+    {
+      "section": "2. Capacity·Takt·Bottleneck·Line Balance",
+      "intent": "수요속도와 공정속도, 유효능력과 제약을 연결한다.",
+      "anchor_refs": [
+        "production_takt_cycle_time_boundary",
+        "production_capacity_available_time_rate",
+        "production_bottleneck_throughput_constraint",
+        "production_line_balancing_workload"
+      ]
+    },
+    {
+      "section": "3. Schedule·Sequence·Batch·WIP",
+      "intent": "finite capacity와 changeover, batch, buffer를 납기와 흐름관점에서 관리한다.",
+      "anchor_refs": [
+        "production_finite_capacity_schedule_dispatch",
+        "production_changeover_sequence_batch_tradeoff",
+        "production_wip_flow_lead_time"
+      ]
+    },
+    {
+      "section": "4. Resource Planning",
+      "intent": "자재·인력·설비 가용성과 제약을 생산일정에 반영한다.",
+      "anchor_refs": [
+        "production_material_requirement_availability",
+        "production_manpower_skill_shift",
+        "production_equipment_resource_availability"
+      ]
+    },
+    {
+      "section": "5. Production Quality",
+      "intent": "CTQ·FPY/Yield·process quality·traceability와 containment를 관리한다.",
+      "anchor_refs": [
+        "production_quality_plan_ctq_spec",
+        "production_fpy_yield_scrap_rework",
+        "production_process_quality_feedback",
+        "production_defect_containment_traceability"
+      ]
+    },
+    {
+      "section": "6. Production Cost",
+      "intent": "원가구조, standard-actual variance와 yield/energy loss를 관리한다.",
+      "anchor_refs": [
+        "production_cost_structure",
+        "production_standard_actual_cost_variance",
+        "production_unit_cost_volume_yield",
+        "production_energy_consumables_cost"
+      ]
+    },
+    {
+      "section": "7. KPI·MES/ERP Boundary",
+      "intent": "OEE·flow·delivery KPI와 data/execution system handoff를 정의한다.",
+      "anchor_refs": [
+        "production_oee_apq_formula_boundary",
+        "production_throughput_cycle_lead_wip_kpi",
+        "production_schedule_adherence_delivery_kpi",
+        "production_mes_data_handoff",
+        "production_erp_mes_role_boundary"
+      ]
+    },
+    {
+      "section": "8. Daily Management·PDCA",
+      "intent": "shift-level review와 multi-objective improvement loop를 닫는다.",
+      "anchor_refs": [
+        "production_daily_management_visual_control",
+        "production_pdca_tradeoff_improvement"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "생산관리를 생산량 극대화가 아니라 안전·품질·납기·원가와 resource constraint의 통합운영으로 정의한다.",
+    "수요·주문·제품 Mix를 planning horizon별 계획과 상세 schedule로 전개한다.",
+    "Takt Time을 수요 기준, Cycle Time을 실제 공정 속도로 구분한다.",
+    "Nameplate capacity와 effective capacity를 구분한다.",
+    "Bottleneck과 blocking/starvation이 line throughput을 제한함을 설명한다.",
+    "Line balancing을 표준시간·Takt·precedence·resource constraint와 연결한다.",
+    "Finite-capacity scheduling과 changeover·due date를 설명한다.",
+    "Batch Size의 setup 감소효과와 WIP·Lead Time 증가 trade-off를 설명한다.",
+    "BOM·inventory·lead time을 이용한 material availability를 설명한다.",
+    "Skill Matrix·Shift·표준작업량을 manpower planning에 반영한다.",
+    "설비 가용시간을 생산계획에 반영하되 maintenance policy는 Topic 2로 handoff한다.",
+    "CTQ·control item·inspection·reaction plan을 공정단계에 전개한다.",
+    "FPY·Yield·Scrap·Rework의 분모와 재작업 경계를 구분한다.",
+    "Standard Cost와 Actual Cost variance를 material/labor/scrap/energy/downtime 원인으로 분해한다.",
+    "OEE=Availability×Performance×Quality와 지표의 적용한계를 함께 설명한다.",
+    "Throughput·Cycle Time·Lead Time·WIP를 서로 구분한다.",
+    "Schedule Adherence와 On-Time 지표의 freeze/due-date 경계를 정의한다.",
+    "MES/Historian은 execution/data layer이고 production decision은 생산관리가 소유한다고 구분한다.",
+    "ERP-MES-Production Management의 계획·실행·피드백 계층을 설명한다.",
+    "Daily review와 PDCA를 통해 bottleneck·sequence·batch·resource·quality 개선을 안전·품질·납기·원가로 재검증한다."
+  ],
+  "common_missing_points": [
+    "생산관리를 생산량 최대화만으로 설명한다.",
+    "Takt Time과 Cycle Time을 동일하게 설명한다.",
+    "정격속도와 실제 유효생산능력을 구분하지 않는다.",
+    "Bottleneck과 line throughput의 관계를 생략한다.",
+    "Finite capacity와 changeover·resource availability를 일정에 반영하지 않는다.",
+    "Batch Size·WIP·Lead Time trade-off를 생략한다.",
+    "BOM·lead time과 material shortage를 생산계획에 연결하지 않는다.",
+    "Skill Matrix와 manpower requirement를 생략한다.",
+    "CTQ·reaction plan 없이 최종검사만 품질관리로 설명한다.",
+    "FPY와 Yield, Scrap과 Rework를 구분하지 않는다.",
+    "생산원가를 재료비만으로 설명한다.",
+    "Actual Cost만 보고 standard/variance 원인을 분석하지 않는다.",
+    "OEE 하나만으로 모든 생산성과를 판단한다.",
+    "Throughput·Cycle Time·Lead Time·WIP를 같은 의미로 사용한다.",
+    "MES/Historian 도입이 생산관리 의사결정을 자동대체한다고 설명한다.",
+    "프로젝트 cost/schedule과 양산 production cost/schedule의 lifecycle 경계를 구분하지 않는다.",
+    "Maintenance KPI와 production KPI의 ownership을 구분하지 않는다."
+  ],
+  "routing_aliases": [
+    "instrumentation production management planning quality cost resources",
+    "instrumentation production planning capacity quality cost",
+    "instrumentation production resource management",
+    "production management for instrumentation control systems",
+    "manufacturing production planning quality cost resources",
+    "production capacity scheduling quality cost kpi",
+    "instrumentation manufacturing performance management",
+    "production plan capacity manpower material equipment",
+    "production quality yield scrap cost resource management",
+    "production performance oee throughput cycle time wip",
+    "계측 생산관리 계획 품질 원가 자원",
+    "계장 생산관리 생산계획 품질 원가",
+    "계측 생산능력 일정 품질 비용 관리",
+    "생산계획 자원배분 품질 원가 KPI",
+    "생산능력 인력 자재 설비 자원관리",
+    "생산 수율 불량 원가 생산성 관리",
+    "OEE 생산성 수율 재공 생산관리",
+    "계측제어 생산 운영 계획 성과관리"
+  ],
+  "routing_field_points": [
+    "수요·주문·재고정책·제품 Mix를 기간별 생산계획으로 변환",
+    "Planning Horizon·MPS·단기 상세일정·작업지시 계층",
+    "Takt Time과 Cycle Time의 정의·산식·역할 구분",
+    "가용시간·실제 Cycle Time·효율을 반영한 effective capacity",
+    "Bottleneck·Blocking·Starvation과 line Throughput 제약",
+    "Line Balancing·표준시간·Precedence·Takt",
+    "Finite Capacity Scheduling·Dispatching·Due Date·Changeover",
+    "Sequence-dependent setup·Batch Size·WIP·Lead Time trade-off",
+    "Buffer·WIP·Flow·Lead Time 관리",
+    "BOM·생산계획·재고·Lead Time 기반 material availability",
+    "Shift·Skill Matrix·표준작업량 기반 manpower planning",
+    "Equipment available time·capability·tooling과 O&M handoff",
+    "CTQ·Specification·Control Item·Inspection·Reaction Plan",
+    "FPY·Yield·Scrap·Rework의 metric boundary",
+    "공정품질 trend·관리한계·containment·corrective action",
+    "Lot·설비·공정·자재 traceability와 defect containment",
+    "직접재료·노무·제조간접비·에너지·불량·재작업 production cost",
+    "Standard Cost·Actual Cost·Variance analysis",
+    "양품 생산량·Yield·Scrap 변화와 Unit Cost",
+    "에너지·Utility·소모품의 specific consumption과 idle loss",
+    "OEE=Availability×Performance×Quality와 적용한계",
+    "Throughput·Cycle Time·Lead Time·WIP의 정의와 경계",
+    "Schedule Adherence·On-Time Completion/Delivery와 원인분류",
+    "MES/Historian execution-data layer와 production decision ownership 경계",
+    "ERP order/resource layer·MES execution layer·production management 연계",
+    "Daily Production Management·shift review·action owner·due date",
+    "PDCA와 bottleneck·sequence·batch·resource allocation 개선",
+    "Safety·Quality·Delivery·Cost 다목적 trade-off 검증"
+  ],
+  "revision_notes": [
+    "STEP 0에서 historian/MES/ERP Topic의 production-management direct signal은 0이었다.",
+    "신규 Topic은 반복 양산단계의 planning, capacity/schedule, quality, production cost, resources와 performance management를 소유한다.",
+    "Historian/MES/ERP의 data quality·genealogy·semantic integration 상세는 기존 historian_mes_it_ot_integration_industrial_data_quality_realtime_processing Topic으로 handoff한다.",
+    "Maintenance strategy·calibration·spares·MTBF/MTTR은 Topic 2, project estimate/budget/project schedule은 Topic 3로 handoff한다.",
+    "bare production, quality, cost, OEE 같은 generic alias는 사용하지 않았다.",
+    "historical frequency는 사용하지 않았다."
+  ]
+}

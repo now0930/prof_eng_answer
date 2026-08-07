@@ -1,0 +1,26 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "광전식 존재검출과 optical distance measurement를 구분한다.",
+    "Direct ToF의 d=c·Δt/2와 왕복시간 의미를 정확히 설명한다.",
+    "Indirect ToF의 위상지연과 phase ambiguity를 설명한다.",
+    "laser triangulation을 기준선·spot 위치의 기하학 원리로 설명한다.",
+    "삼각측량의 장치별 geometry calibration 필요성을 설명한다.",
+    "반사율·색상·재질·파장이 SNR과 측정오차에 미치는 영향을 설명한다.",
+    "고광택·투명체의 정반사·투과·다중반사 문제를 설명한다.",
+    "주변광·speckle·정렬·occlusion·saturation·multipath 중 주요 오차를 원인과 대책으로 연결한다.",
+    "accuracy·resolution·repeatability를 구분한다.",
+    "범위·분해능·속도·표면·환경·안전·비용으로 광전식·ToF·triangulation을 선정한다."
+  ],
+  "note": "IC-2027-W-2-2의 기존 radar·ultrasonic Topic이 다루지 못한 광학식 비접촉 측정과 광센서·레이저 알고리즘의 잔여 범위를 보완한다. Step 0 analog에 따라 FIELD_APPLICATION / PRINCIPLE_INTERPRETATION으로 분류하며 historical frequency는 근거가 없어 사용하지 않는다.",
+  "revision_notes": [
+    "STEP 0 radar·ultrasonic analog evidence에 따라 difficulty를 FIELD_APPLICATION으로 설정했다.",
+    "Question Type은 PRINCIPLE_INTERPRETATION으로 설정했다.",
+    "historical frequency 근거가 없으므로 selection_importance는 보수적으로 NORMAL을 사용했다."
+  ],
+  "topic_label": "광학·레이저 비접촉 측정"
+}

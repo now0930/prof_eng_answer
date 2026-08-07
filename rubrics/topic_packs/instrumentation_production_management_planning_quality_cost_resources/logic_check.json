@@ -1,0 +1,231 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+  "title": "계측·제어 생산관리: 생산계획, 능력·일정, 품질·원가, 자원 및 성과관리",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "계측·제어 생산관리: 생산계획, 능력·일정, 품질·원가, 자원 및 성과관리",
+    "question_type": "IMPLEMENTATION_EVALUATION",
+    "difficulty_profile": "DESIGN_EVALUATION",
+    "topic_aliases": [],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "양산단계의 생산계획, capacity/schedule, 품질·원가·자원과 KPI 개선체계를 평가한다.",
+    "difficulty": "DESIGN_EVALUATION",
+    "cap_policy": {},
+    "candidate_extraction": {
+      "max_candidates": 32,
+      "nearby_window": 1,
+      "rules": [],
+      "key_terms": [
+        "production planning",
+        "takt time",
+        "cycle time",
+        "capacity",
+        "bottleneck",
+        "finite capacity",
+        "changeover",
+        "batch size",
+        "WIP",
+        "skill matrix",
+        "FPY",
+        "yield",
+        "scrap",
+        "standard cost",
+        "variance",
+        "OEE",
+        "throughput",
+        "schedule adherence",
+        "MES",
+        "ERP"
+      ]
+    },
+    "truth_schema": [
+      "생산관리는 고객·수요 요구를 안전·품질·납기·원가 목표와 생산능력·인력·자재·설비 제약에 맞춰 실행 가능한 생산계획으로 변환하고, 실적과 편차를 피드백하여 지속적으로 조정하는 운영관리 체계다.",
+      "생산계획은 수요·주문, 재고정책, 납기, 제품 Mix와 우선순위를 입력으로 받아 기간별 생산량과 품목구성을 정하며, 수요 변동과 공급 제약에 따라 rolling 방식으로 재계획할 수 있어야 한다.",
+      "생산계획은 장·중기 자원계획, Master Production Schedule과 단기 상세일정처럼 시간 Horizon을 구분하고, 상위 계획의 생산량·납기 목표를 하위 작업순서와 작업지시로 점진적으로 구체화해야 한다.",
+      "Takt Time은 일반적으로 가용 생산시간을 고객 요구수량으로 나눈 수요 기준 속도이고, Cycle Time은 실제 공정 또는 설비가 한 단위를 처리하는 데 걸리는 시간 또는 단위 배출간격이므로 서로 구분하여 비교해야 한다.",
+      "생산능력은 가용시간, 설비·인력 수, 표준 Cycle Time 또는 처리율, 계획정지와 현실적 효율을 기준으로 산정하며, 이론능력과 실제 유효능력을 구분해 병목과 납기 가능성을 판단해야 한다.",
+      "연속된 공정의 지속 가능한 Throughput은 일반적으로 가장 제약이 큰 Bottleneck의 유효능력과 차단·기아·buffer 상태에 의해 제한되므로, 비병목 설비의 국부 효율만 높여도 전체 생산량이 같은 비율로 증가하는 것은 아니다.",
+      "라인 밸런싱은 작업요소와 표준시간을 작업장·설비에 배분하여 Takt 요구를 만족시키면서 공정 간 유휴·과부하와 병목을 줄이는 활동이며, precedence와 작업자·설비 제약을 함께 고려해야 한다.",
+      "단기 생산일정은 설비·인력·금형·치공구·자재의 실제 가용성과 changeover, 선후관계, due date를 반영하는 finite-capacity 관점으로 작성하고, 현장 dispatching rule은 상위 납기·우선순위와 모순되지 않게 운영해야 한다.",
+      "다품종 생산에서는 Changeover 시간과 순서의존성을 고려해 제품 Sequence와 Batch Size를 정해야 하며, 큰 Batch는 setup 손실을 줄일 수 있지만 WIP·Lead Time·재고와 수요변동 대응성을 악화시킬 수 있다.",
+      "WIP는 공정 사이의 완충과 변동 흡수에 필요할 수 있지만 과도하면 흐름을 가리고 Lead Time과 재고비용을 증가시키므로, Throughput·Cycle Time·buffer 용량과 함께 관리해야 한다.",
+      "자재관리는 BOM·생산계획·재고·Lead Time과 lot/대체품 조건을 이용해 소요량과 필요시점을 계산하고, 결품·과잉재고를 줄이도록 발주·공급·라인투입을 동기화해야 한다.",
+      "인력계획은 생산량과 공정별 표준작업량, Shift, Skill Matrix, 휴무·교육·교대 제약을 반영해 필요한 인원과 배치를 정하고, 단순 인원수뿐 아니라 자격·숙련도와 다기능성을 함께 관리해야 한다.",
+      "생산설비 자원계획은 생산에 실제 사용할 수 있는 설비의 가용시간, capability, tooling과 계획정지 정보를 반영하되, 고장정비 전략·MTBF·MTTR·예방정비 KPI 자체의 관리는 O&M Topic으로 handoff한다.",
+      "품질관리는 고객·제품 요구를 CTQ와 공정·검사 기준으로 전개하고, 공정단계별 specification·control item·sampling/inspection·reaction plan을 정의하여 생산계획과 동일한 제품·revision 기준으로 운영해야 한다.",
+      "생산품질 KPI는 FPY, Yield, Scrap, Rework 등으로 불량과 손실을 구분할 수 있으며, 분모·재작업 포함여부·검사단계 정의를 일관되게 해야 제품·라인 간 비교가 의미 있다.",
+      "공정 품질은 검사결과와 공정변수의 trend·이상·관리한계 등을 이용해 이상을 조기에 검출하고, 이상 시 생산격리·조건확인·원인분석·복구·재발방지로 연결해야 하며 단순 검사수치 저장으로 끝나지 않아야 한다.",
+      "불량 발생 시 영향 Lot·시간·설비·공정·자재를 추적해 의심범위를 격리하고, 선별·재작업·폐기와 원인·조치를 기록해야 하며 Traceability는 MES/Historian의 genealogy data를 활용할 수 있지만 생산판정과 containment 책임을 대체하지 않는다.",
+      "생산원가는 목적과 회계정책에 따라 직접재료비, 직접노무비, 제조간접비와 에너지·소모품·불량·재작업 등으로 구성할 수 있으며, 어떤 비용을 단위원가에 포함하는지 기준을 일관되게 정의해야 한다.",
+      "원가관리는 표준 또는 계획 원가와 Actual Cost를 비교하여 material usage·price, labor efficiency, scrap/rework, energy, downtime 등 variance의 원인을 분해하고 생산조건·계획·품질 개선으로 환류해야 한다.",
+      "단위원가는 총 생산비용을 적절한 양품 생산량으로 나누는 방식 등으로 관리할 수 있으며, 생산량·Yield·Scrap·가동손실 변화가 분모와 비용구조에 미치는 영향을 함께 봐야 한다.",
+      "에너지·Utility·소모품 사용량은 생산량, 제품 Mix, 설비상태와 운전조건에 따라 변하므로 단위제품당 사용량과 peak·idle loss를 함께 추적하여 원가와 효율개선에 반영할 수 있다.",
+      "OEE는 통상 Availability×Performance×Quality의 곱으로 표현하며, 각 요소의 시간·속도·양품 기준을 동일한 planned production context에서 정의해야 하고, OEE 하나만으로 납기·원가·안전·수요대응을 모두 대표할 수는 없다.",
+      "Throughput, Cycle Time, Lead Time과 WIP는 서로 다른 흐름 KPI이므로 동일한 것으로 취급하지 않고, 공정경계와 측정시점을 정의하여 병목·대기·재공의 원인을 분석해야 한다.",
+      "생산계획 준수율, Schedule Adherence, On-Time Completion/Delivery 등 납기 KPI는 계획 freeze 기준, due time, 완료판정과 분모를 정의하고, 긴급순서변경·결품·품질hold 같은 원인을 구분해 개선에 사용해야 한다.",
+      "MES·Historian은 작업지시, 실적, 품질, 상태, genealogy와 시계열 데이터를 수집·전달하는 실행·정보 계층으로 활용할 수 있지만, 어떤 생산량·우선순위·capacity·quality·cost·resource 목표를 선택할지는 생산관리 의사결정이 소유한다.",
+      "ERP는 주문·수요·자재·원가·기업자원을 상위 수준에서 관리하고 MES는 제조실행과 현장실적을 연결할 수 있으며, 생산관리는 두 계층의 정보를 이용해 실제 capacity·sequence·quality·resource 제약을 반영한 실행계획을 조정한다.",
+      "Daily Production Management는 계획 대비 생산량, 품질, downtime, manpower, material shortage, WIP와 주요 이상을 짧은 주기로 review하고, owner·조치·due date를 명확히 하여 다음 Shift와 계획에 반영해야 한다.",
+      "생산관리 개선은 Plan-Do-Check-Act 관점에서 수요·capacity·schedule·quality·cost·resource·KPI의 편차와 원인을 검토하고, 병목·작업방법·sequence·batch·자원배치·품질조건을 변경한 뒤 안전·품질·납기·원가 효과를 함께 재검증해야 한다."
+    ],
+    "fatal_conditions": [
+      "[production_fatal_max_output_only] 생산관리는 생산량을 최대화하는 활동이므로 품질·납기·원가·안전과 자원제약은 부차적이다. | correction: 생산관리는 수요를 안전·품질·납기·원가 목표와 capacity·resource 제약에 맞춰 실행 가능한 계획으로 최적화해야 한다.",
+      "[production_fatal_takt_equals_cycle] Takt Time과 Cycle Time은 같은 개념이며 항상 같은 산식으로 계산된다. | correction: Takt Time은 수요 기준 생산속도이고 Cycle Time은 실제 공정의 처리시간 또는 배출간격이므로 구분해야 한다.",
+      "[production_fatal_nameplate_equals_capacity] 설비 정격속도와 근무시간만 곱하면 계획정지·인력·자재·효율과 관계없이 실제 생산능력을 정확히 알 수 있다. | correction: 실제 유효능력은 가용시간, 실제 cycle/rate, 계획정지와 자원·운영 제약을 반영해 산정해야 한다.",
+      "[production_fatal_local_oee_guarantees_throughput] 각 설비 OEE를 높이면 병목과 buffer 상태에 관계없이 line throughput이 같은 비율로 반드시 증가한다. | correction: 시스템 throughput은 병목의 유효능력과 blocking·starvation·flow에 제한되므로 국부 OEE 향상과 전체생산량은 구분해야 한다.",
+      "[production_fatal_infinite_capacity_schedule] 생산일정은 설비·인력·자재 가용성과 changeover를 확인하지 않고 주문순서대로 작성해도 실행 가능하다. | correction: 단기 일정은 finite capacity와 실제 resource availability, precedence, changeover와 due date를 반영해야 한다.",
+      "[production_fatal_large_batch_always_best] Changeover가 있는 공정에서는 Batch Size가 클수록 WIP·Lead Time·재고와 관계없이 항상 최적이다. | correction: Batch Size는 setup 손실과 WIP·Lead Time·inventory·수요변동 대응성의 trade-off로 결정해야 한다.",
+      "[production_fatal_more_wip_always_better] WIP를 늘릴수록 설비 starvation이 줄어들기 때문에 lead time과 생산성은 항상 동시에 좋아진다. | correction: WIP는 변동 흡수에 도움을 줄 수 있지만 과도하면 lead time과 재고비용을 증가시키므로 flow 관점에서 적정 수준을 관리해야 한다.",
+      "[production_fatal_quality_final_inspection_only] 최종검사에서 합격 여부만 확인하면 생산 중 CTQ, 공정관리항목과 reaction plan은 필요 없다. | correction: 품질은 CTQ와 공정 control item·inspection·reaction plan을 공정단계에 전개하고 이상 시 즉시 containment·조치해야 한다.",
+      "[production_fatal_fpy_equals_final_yield] FPY와 최종 Yield는 재작업 여부와 검사단계에 관계없이 항상 같은 값이다. | correction: FPY는 first-pass 성과이고 최종 Yield는 재작업·검사경계에 따라 달라질 수 있으므로 정의와 분모를 구분해야 한다.",
+      "[production_fatal_material_cost_only] 생산원가는 원재료비만 의미하므로 노무·간접비·에너지·불량·재작업 손실은 원가관리 대상이 아니다. | correction: 생산원가는 목적에 따라 재료·노무·간접비와 에너지·불량·재작업 등 관련 비용항목을 정의해 관리해야 한다.",
+      "[production_fatal_oee_proves_all_performance] OEE가 높으면 납기·원가·수요대응·안전·품질이 모두 자동으로 최적화됐다고 판단할 수 있다. | correction: OEE는 Availability·Performance·Quality 기반의 설비효율 지표이며 납기·원가·안전·수요대응은 별도 KPI와 함께 평가해야 한다.",
+      "[production_fatal_flow_kpis_interchangeable] Throughput, Cycle Time, Lead Time과 WIP는 모두 생산속도를 의미하므로 동일한 값처럼 서로 바꿔 사용해도 된다. | correction: 네 지표는 서로 다른 물리·운영 의미를 가지므로 공정경계와 측정시점을 정의하여 구분해야 한다.",
+      "[production_fatal_mes_automates_management] MES/Historian을 구축하면 생산량·우선순위·capacity·quality·cost·resource 의사결정이 자동으로 최적화되므로 생산관리 기능은 불필요하다. | correction: MES/Historian은 실행·데이터 계층이고 생산계획·자원배분·품질·원가 trade-off는 별도의 production management 의사결정이 필요하다.",
+      "[production_fatal_project_or_maintenance_scope_takeover] 생산관리 Topic이 프로젝트 투자예산·EPC 일정과 설비의 MTBF·MTTR·교정주기·예비품 정책까지 모두 직접 소유한다. | correction: 양산 생산 schedule/cost/resource는 본 Topic이 소유하지만 프로젝트 cost/schedule은 Topic 3, maintenance·calibration·spares·MTBF/MTTR은 Topic 2로 handoff해야 한다."
+    ],
+    "safe_conditions": [
+      "생산관리는 고객·수요 요구를 안전·품질·납기·원가 목표와 생산능력·인력·자재·설비 제약에 맞춰 실행 가능한 생산계획으로 변환하고, 실적과 편차를 피드백하여 지속적으로 조정하는 운영관리 체계다.",
+      "생산계획은 수요·주문, 재고정책, 납기, 제품 Mix와 우선순위를 입력으로 받아 기간별 생산량과 품목구성을 정하며, 수요 변동과 공급 제약에 따라 rolling 방식으로 재계획할 수 있어야 한다.",
+      "생산계획은 장·중기 자원계획, Master Production Schedule과 단기 상세일정처럼 시간 Horizon을 구분하고, 상위 계획의 생산량·납기 목표를 하위 작업순서와 작업지시로 점진적으로 구체화해야 한다.",
+      "Takt Time은 일반적으로 가용 생산시간을 고객 요구수량으로 나눈 수요 기준 속도이고, Cycle Time은 실제 공정 또는 설비가 한 단위를 처리하는 데 걸리는 시간 또는 단위 배출간격이므로 서로 구분하여 비교해야 한다.",
+      "생산능력은 가용시간, 설비·인력 수, 표준 Cycle Time 또는 처리율, 계획정지와 현실적 효율을 기준으로 산정하며, 이론능력과 실제 유효능력을 구분해 병목과 납기 가능성을 판단해야 한다.",
+      "연속된 공정의 지속 가능한 Throughput은 일반적으로 가장 제약이 큰 Bottleneck의 유효능력과 차단·기아·buffer 상태에 의해 제한되므로, 비병목 설비의 국부 효율만 높여도 전체 생산량이 같은 비율로 증가하는 것은 아니다.",
+      "라인 밸런싱은 작업요소와 표준시간을 작업장·설비에 배분하여 Takt 요구를 만족시키면서 공정 간 유휴·과부하와 병목을 줄이는 활동이며, precedence와 작업자·설비 제약을 함께 고려해야 한다.",
+      "단기 생산일정은 설비·인력·금형·치공구·자재의 실제 가용성과 changeover, 선후관계, due date를 반영하는 finite-capacity 관점으로 작성하고, 현장 dispatching rule은 상위 납기·우선순위와 모순되지 않게 운영해야 한다.",
+      "다품종 생산에서는 Changeover 시간과 순서의존성을 고려해 제품 Sequence와 Batch Size를 정해야 하며, 큰 Batch는 setup 손실을 줄일 수 있지만 WIP·Lead Time·재고와 수요변동 대응성을 악화시킬 수 있다.",
+      "WIP는 공정 사이의 완충과 변동 흡수에 필요할 수 있지만 과도하면 흐름을 가리고 Lead Time과 재고비용을 증가시키므로, Throughput·Cycle Time·buffer 용량과 함께 관리해야 한다.",
+      "자재관리는 BOM·생산계획·재고·Lead Time과 lot/대체품 조건을 이용해 소요량과 필요시점을 계산하고, 결품·과잉재고를 줄이도록 발주·공급·라인투입을 동기화해야 한다.",
+      "인력계획은 생산량과 공정별 표준작업량, Shift, Skill Matrix, 휴무·교육·교대 제약을 반영해 필요한 인원과 배치를 정하고, 단순 인원수뿐 아니라 자격·숙련도와 다기능성을 함께 관리해야 한다.",
+      "생산설비 자원계획은 생산에 실제 사용할 수 있는 설비의 가용시간, capability, tooling과 계획정지 정보를 반영하되, 고장정비 전략·MTBF·MTTR·예방정비 KPI 자체의 관리는 O&M Topic으로 handoff한다.",
+      "품질관리는 고객·제품 요구를 CTQ와 공정·검사 기준으로 전개하고, 공정단계별 specification·control item·sampling/inspection·reaction plan을 정의하여 생산계획과 동일한 제품·revision 기준으로 운영해야 한다.",
+      "생산품질 KPI는 FPY, Yield, Scrap, Rework 등으로 불량과 손실을 구분할 수 있으며, 분모·재작업 포함여부·검사단계 정의를 일관되게 해야 제품·라인 간 비교가 의미 있다.",
+      "공정 품질은 검사결과와 공정변수의 trend·이상·관리한계 등을 이용해 이상을 조기에 검출하고, 이상 시 생산격리·조건확인·원인분석·복구·재발방지로 연결해야 하며 단순 검사수치 저장으로 끝나지 않아야 한다.",
+      "불량 발생 시 영향 Lot·시간·설비·공정·자재를 추적해 의심범위를 격리하고, 선별·재작업·폐기와 원인·조치를 기록해야 하며 Traceability는 MES/Historian의 genealogy data를 활용할 수 있지만 생산판정과 containment 책임을 대체하지 않는다.",
+      "생산원가는 목적과 회계정책에 따라 직접재료비, 직접노무비, 제조간접비와 에너지·소모품·불량·재작업 등으로 구성할 수 있으며, 어떤 비용을 단위원가에 포함하는지 기준을 일관되게 정의해야 한다.",
+      "원가관리는 표준 또는 계획 원가와 Actual Cost를 비교하여 material usage·price, labor efficiency, scrap/rework, energy, downtime 등 variance의 원인을 분해하고 생산조건·계획·품질 개선으로 환류해야 한다.",
+      "단위원가는 총 생산비용을 적절한 양품 생산량으로 나누는 방식 등으로 관리할 수 있으며, 생산량·Yield·Scrap·가동손실 변화가 분모와 비용구조에 미치는 영향을 함께 봐야 한다.",
+      "에너지·Utility·소모품 사용량은 생산량, 제품 Mix, 설비상태와 운전조건에 따라 변하므로 단위제품당 사용량과 peak·idle loss를 함께 추적하여 원가와 효율개선에 반영할 수 있다.",
+      "OEE는 통상 Availability×Performance×Quality의 곱으로 표현하며, 각 요소의 시간·속도·양품 기준을 동일한 planned production context에서 정의해야 하고, OEE 하나만으로 납기·원가·안전·수요대응을 모두 대표할 수는 없다.",
+      "Throughput, Cycle Time, Lead Time과 WIP는 서로 다른 흐름 KPI이므로 동일한 것으로 취급하지 않고, 공정경계와 측정시점을 정의하여 병목·대기·재공의 원인을 분석해야 한다.",
+      "생산계획 준수율, Schedule Adherence, On-Time Completion/Delivery 등 납기 KPI는 계획 freeze 기준, due time, 완료판정과 분모를 정의하고, 긴급순서변경·결품·품질hold 같은 원인을 구분해 개선에 사용해야 한다.",
+      "MES·Historian은 작업지시, 실적, 품질, 상태, genealogy와 시계열 데이터를 수집·전달하는 실행·정보 계층으로 활용할 수 있지만, 어떤 생산량·우선순위·capacity·quality·cost·resource 목표를 선택할지는 생산관리 의사결정이 소유한다.",
+      "ERP는 주문·수요·자재·원가·기업자원을 상위 수준에서 관리하고 MES는 제조실행과 현장실적을 연결할 수 있으며, 생산관리는 두 계층의 정보를 이용해 실제 capacity·sequence·quality·resource 제약을 반영한 실행계획을 조정한다.",
+      "Daily Production Management는 계획 대비 생산량, 품질, downtime, manpower, material shortage, WIP와 주요 이상을 짧은 주기로 review하고, owner·조치·due date를 명확히 하여 다음 Shift와 계획에 반영해야 한다.",
+      "생산관리 개선은 Plan-Do-Check-Act 관점에서 수요·capacity·schedule·quality·cost·resource·KPI의 편차와 원인을 검토하고, 병목·작업방법·sequence·batch·자원배치·품질조건을 변경한 뒤 안전·품질·납기·원가 효과를 함께 재검증해야 한다."
+    ],
+    "output_contract": {},
+    "major_checks": [
+      {
+        "id": "production_major_planning_hierarchy_missing",
+        "claim": "생산계획을 하나의 일정표로만 설명하고 수요·planning horizon·상세 schedule 연계를 생략한다.",
+        "correction": "수요·주문을 장중단기 계획과 상세작업순서로 점진적으로 전개해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "production_major_takt_capacity_boundary_missing",
+        "claim": "Takt, Cycle Time과 effective capacity를 구분하지 않는다.",
+        "correction": "수요속도, 공정속도와 실제 가용능력의 정의·가정을 분리해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "production_major_bottleneck_flow_missing",
+        "claim": "개별설비 효율만 제시하고 병목·blocking·starvation과 line throughput을 설명하지 않는다.",
+        "correction": "시스템 생산량을 bottleneck과 flow constraint 관점에서 설명해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "production_major_resource_constraint_missing",
+        "claim": "생산일정에서 인력·자재·설비·changeover의 실제 가용성을 생략한다.",
+        "correction": "finite-capacity schedule과 resource availability를 함께 관리해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "production_major_quality_reaction_missing",
+        "claim": "품질 KPI만 제시하고 CTQ·control item·reaction plan·containment를 생략한다.",
+        "correction": "품질요구를 공정관리 항목과 이상반응·격리·개선으로 연결해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "production_major_cost_variance_missing",
+        "claim": "단위원가만 제시하고 표준-실제 편차와 scrap·labor·energy·downtime 원인을 분석하지 않는다.",
+        "correction": "원가편차를 생산운영 원인으로 분해하고 개선에 환류해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "production_major_oee_scope_missing",
+        "claim": "OEE를 제시하지만 A×P×Q 정의 또는 지표의 적용한계를 설명하지 않는다.",
+        "correction": "OEE 요소와 planned-production context를 정의하고 납기·원가·안전 KPI를 별도로 봐야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "production_major_flow_metric_boundary_missing",
+        "claim": "Throughput·Cycle Time·Lead Time·WIP를 구분하지 않는다.",
+        "correction": "각 지표의 물리적 의미와 공정경계·측정시점을 명확히 해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "production_major_mes_decision_boundary_missing",
+        "claim": "MES/Historian의 데이터 기능과 생산관리 의사결정을 구분하지 않는다.",
+        "correction": "MES/Historian은 execution/data 계층이고 plan/capacity/quality/cost/resource trade-off는 production management가 소유한다.",
+        "severity": "major"
+      },
+      {
+        "id": "production_major_lifecycle_boundary_missing",
+        "claim": "양산 생산 cost/schedule와 프로젝트 cost/schedule, maintenance KPI를 같은 관리대상으로 설명한다.",
+        "correction": "Production management, Project management, O&M management의 lifecycle ownership을 분리해야 한다.",
+        "severity": "major"
+      }
+    ],
+    "feedback_templates": {},
+    "next_practice_points": [
+      "Takt Time·Cycle Time·effective capacity를 수요·공정·능력 관점에서 구분한다.",
+      "Bottleneck·Throughput·WIP·Lead Time의 흐름관계를 정리한다.",
+      "Finite-capacity schedule과 changeover·batch trade-off를 정리한다.",
+      "BOM·Lead Time·Skill Matrix·equipment availability를 resource planning에 연결한다.",
+      "CTQ·FPY·Yield·Scrap·Rework와 containment를 정리한다.",
+      "Standard Cost·Actual Cost·variance·unit cost를 정리한다.",
+      "OEE A×P×Q와 flow/delivery KPI의 적용경계를 정리한다.",
+      "MES/ERP/Historian과 production management의 ownership 경계를 정리한다."
+    ],
+    "false_positive_cautions": [
+      "MES가 작업·품질·자원·실적을 관리한다고 언급해도 production decision ownership을 자동으로 MES Topic에 넘기지 않는다.",
+      "Historian의 quality code와 생산품질의 FPY/Yield는 서로 다른 quality 의미이므로 단어 중복만으로 충돌 판정하지 않는다.",
+      "Project Topic의 cost/schedule과 production cost/schedule은 lifecycle이 다르므로 동일 단어만으로 duplicate 처리하지 않는다.",
+      "O&M Topic의 equipment availability와 production OEE Availability는 사용목적·시간경계가 다를 수 있으므로 문맥을 확인한다.",
+      "Takt Time은 고객수요 기반 대표식을 사용하되 조직별 휴게·계획정지 포함 기준을 명시하면 인정한다.",
+      "Cycle Time을 처리시간 또는 단위배출간격으로 정의할 수 있으므로 답안의 측정경계가 명확하면 인정한다.",
+      "OEE 각 요소의 세부 계산식은 조직 표준에 따라 다를 수 있으므로 planned production time과 분모 정의가 명확하면 인정한다.",
+      "Line balancing에서 자동화설비·작업자 제약을 서로 다른 방법으로 모델링해도 Takt와 workload 관계가 정확하면 인정한다.",
+      "Batch Size를 크게 하는 전략 자체를 오류로 보지 않고 setup/WIP/lead-time trade-off 평가 여부를 본다.",
+      "Safety stock, Kanban, MRP 등 특정 자재관리 기법 하나를 강제하지 않는다.",
+      "Skill Matrix 대신 동등한 자격·숙련도 관리체계를 사용해도 인정한다.",
+      "품질관리에서 SPC의 특정 통계공식이 없어도 CTQ·control/reaction·containment 체계가 있으면 인정한다.",
+      "Unit Cost의 정확한 회계분류는 조직정책에 따라 다를 수 있으므로 cost boundary가 명확하면 인정한다.",
+      "OEE 외 자체 생산성 KPI를 사용해도 정의·분모·목적이 명확하면 인정한다.",
+      "Daily management를 digital board가 아닌 회의·시각관리로 운영해도 action owner·due date·feedback이 있으면 인정한다."
+    ],
+    "enabled": true,
+    "score_policy": {
+      "direct_score_application": false,
+      "direct_d_e_effect": "none",
+      "affected_layers": [
+        "C"
+      ]
+    }
+  },
+  "revision_notes": [
+    "deterministic semantic verdict는 비활성화하고 LLM semantic profile만 사용한다.",
+    "Fact Anchor statement와 truth_schema를 1:1 순서 투영했다.",
+    "Fact Fatal과 Logic fatal_conditions를 ID·순서 일치로 투영했다.",
+    "직접 score 또는 D/E 영향 없이 C-layer semantic ownership만 허용한다."
+  ],
+  "topic_label": "계측·제어 생산관리"
+}

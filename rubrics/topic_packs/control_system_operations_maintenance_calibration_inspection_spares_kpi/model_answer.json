@@ -1,0 +1,277 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+  "title_ko": "계측제어시스템 운영·유지보수, 검교정·점검, 예비품 및 KPI 관리",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "계측제어시스템의 운영 및 유지보수 관리체계를 설명하시오.",
+      "intent": "자산경계부터 정비전략, 검교정, 점검, 예비품, KPI와 개선폐루프를 설계한다.",
+      "required_anchor_ids": [
+        "om_asset_register_system_boundary",
+        "maintenance_strategy_corrective_preventive_condition_predictive",
+        "maintenance_criticality_risk_prioritization",
+        "maintenance_plan_task_interval_basis",
+        "work_order_history_closed_loop",
+        "om_continuous_improvement_pdca_lifecycle_cost"
+      ]
+    },
+    {
+      "pattern": "제어시스템 예방정비와 상태기반·예지정비의 적용기준을 설명하시오.",
+      "intent": "정비전략을 trigger basis와 risk로 구분하고 주기를 최적화한다.",
+      "required_anchor_ids": [
+        "maintenance_strategy_corrective_preventive_condition_predictive",
+        "maintenance_criticality_risk_prioritization",
+        "maintenance_plan_task_interval_basis",
+        "failure_coding_rca_bad_actor_feedback"
+      ]
+    },
+    {
+      "pattern": "계측기 검교정 관리계획과 교정주기 결정기준을 설명하시오.",
+      "intent": "calibration program, interval, as-found/as-left, OOT와 기준기 통제를 설명한다.",
+      "required_anchor_ids": [
+        "calibration_program_traceability",
+        "calibration_interval_risk_history",
+        "calibration_as_found_as_left_oot",
+        "calibration_reference_standard_control"
+      ]
+    },
+    {
+      "pattern": "계측제어 설비의 점검 종류와 결함조치 절차를 설명하시오.",
+      "intent": "routine inspection, functional test, loop check와 finding closeout을 설명한다.",
+      "required_anchor_ids": [
+        "inspection_program_routine_functional_loop",
+        "inspection_findings_defect_priority_closeout",
+        "deferred_maintenance_risk_control",
+        "work_order_history_closed_loop"
+      ]
+    },
+    {
+      "pattern": "계측제어 예비품의 Critical Spare 선정과 재고관리 방법을 설명하시오.",
+      "intent": "criticality, lead time, stock policy, preservation과 obsolescence를 설계한다.",
+      "required_anchor_ids": [
+        "spares_criticality_classification",
+        "spares_stock_policy_reorder_leadtime",
+        "spares_preservation_shelf_life_rotation",
+        "spares_obsolescence_substitution_moc"
+      ]
+    },
+    {
+      "pattern": "MTBF, MTTR, Availability의 의미와 유지보수 KPI 적용 시 유의사항을 설명하시오.",
+      "intent": "metric definitions, intrinsic availability equation과 운영 KPI boundary를 설명한다.",
+      "required_anchor_ids": [
+        "kpi_mtbf_definition_boundary",
+        "kpi_mttr_definition_boundary",
+        "kpi_intrinsic_availability_equation",
+        "kpi_gaming_single_metric_tradeoff"
+      ]
+    },
+    {
+      "pattern": "제어시스템 유지보수 KPI 체계를 설계하고 개선에 활용하는 방법을 설명하시오.",
+      "intent": "결과·프로세스 KPI와 data quality, review feedback loop를 설계한다.",
+      "required_anchor_ids": [
+        "kpi_mtbf_definition_boundary",
+        "kpi_mttr_definition_boundary",
+        "kpi_intrinsic_availability_equation",
+        "kpi_pm_compliance_backlog_schedule",
+        "kpi_gaming_single_metric_tradeoff",
+        "maintenance_data_quality_cmms_taxonomy",
+        "om_continuous_improvement_pdca_lifecycle_cost"
+      ]
+    },
+    {
+      "pattern": "교정 결과 Out-of-Tolerance 발생 시 관리 절차를 설명하시오.",
+      "intent": "as-found, impact period, measurement validity, corrective action과 interval feedback을 설명한다.",
+      "required_anchor_ids": [
+        "calibration_as_found_as_left_oot",
+        "calibration_interval_risk_history",
+        "work_order_history_closed_loop",
+        "failure_coding_rca_bad_actor_feedback"
+      ]
+    },
+    {
+      "pattern": "계측제어시스템 단종 대응과 예비품 수명주기 관리방법을 설명하시오.",
+      "intent": "obsolescence risk, last-time buy, substitution, compatibility와 change handoff를 설명한다.",
+      "required_anchor_ids": [
+        "spares_criticality_classification",
+        "spares_preservation_shelf_life_rotation",
+        "spares_obsolescence_substitution_moc",
+        "maintenance_configuration_backup_change_handoff"
+      ]
+    },
+    {
+      "pattern": "운영 중 정비계획을 생산·안전·비용과 연계하여 최적화하는 방법을 설명하시오.",
+      "intent": "criticality, deferred maintenance, KPI와 lifecycle cost의 trade-off를 평가한다.",
+      "required_anchor_ids": [
+        "maintenance_criticality_risk_prioritization",
+        "maintenance_plan_task_interval_basis",
+        "deferred_maintenance_risk_control",
+        "kpi_pm_compliance_backlog_schedule",
+        "kpi_gaming_single_metric_tradeoff",
+        "om_continuous_improvement_pdca_lifecycle_cost"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 운영관리 기준정보와 경계",
+      "intent": "자산대장, Tag, system boundary와 관리기준을 확정한다.",
+      "anchor_refs": [
+        "om_asset_register_system_boundary"
+      ]
+    },
+    {
+      "section": "2. 정비전략과 계획",
+      "intent": "정비방식, criticality, task/interval, work order와 RCA를 설계한다.",
+      "anchor_refs": [
+        "maintenance_strategy_corrective_preventive_condition_predictive",
+        "maintenance_criticality_risk_prioritization",
+        "maintenance_plan_task_interval_basis",
+        "work_order_history_closed_loop",
+        "failure_coding_rca_bad_actor_feedback"
+      ]
+    },
+    {
+      "section": "3. 검교정 관리",
+      "intent": "교정 프로그램, 주기, as-found/as-left·OOT, 기준기 통제를 설명한다.",
+      "anchor_refs": [
+        "calibration_program_traceability",
+        "calibration_interval_risk_history",
+        "calibration_as_found_as_left_oot",
+        "calibration_reference_standard_control"
+      ]
+    },
+    {
+      "section": "4. 점검·결함관리",
+      "intent": "routine/functional/loop inspection과 finding·deferred maintenance를 관리한다.",
+      "anchor_refs": [
+        "inspection_program_routine_functional_loop",
+        "inspection_findings_defect_priority_closeout",
+        "deferred_maintenance_risk_control"
+      ]
+    },
+    {
+      "section": "5. 예비품·단종관리",
+      "intent": "critical spare, stock policy, preservation과 obsolescence를 관리한다.",
+      "anchor_refs": [
+        "spares_criticality_classification",
+        "spares_stock_policy_reorder_leadtime",
+        "spares_preservation_shelf_life_rotation",
+        "spares_obsolescence_substitution_moc"
+      ]
+    },
+    {
+      "section": "6. 신뢰성·유지보수 KPI",
+      "intent": "MTBF·MTTR·availability와 process KPI의 정의·경계를 관리한다.",
+      "anchor_refs": [
+        "kpi_mtbf_definition_boundary",
+        "kpi_mttr_definition_boundary",
+        "kpi_intrinsic_availability_equation",
+        "kpi_pm_compliance_backlog_schedule",
+        "kpi_gaming_single_metric_tradeoff"
+      ]
+    },
+    {
+      "section": "7. 데이터·조직·변경통제",
+      "intent": "CMMS/EAM 데이터, 역할·역량·허가 및 configuration handoff를 관리한다.",
+      "anchor_refs": [
+        "maintenance_data_quality_cmms_taxonomy",
+        "maintenance_roles_competence_permit_restoration",
+        "maintenance_configuration_backup_change_handoff"
+      ]
+    },
+    {
+      "section": "8. 정기 Review와 지속개선",
+      "intent": "KPI·이력·OOT·결함·RCA를 정비정책과 lifecycle cost 개선으로 환류한다.",
+      "anchor_refs": [
+        "om_continuous_improvement_pdca_lifecycle_cost"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "자산대장과 system boundary를 운영·유지보수의 기준정보로 먼저 정의한다.",
+    "Corrective·Preventive·CBM·Predictive Maintenance의 trigger basis를 구분한다.",
+    "Criticality와 failure consequence를 정비주기·자원·예비품 우선순위로 연결한다.",
+    "Work Order와 failure code·RCA·Bad Actor 분석을 정비이력 폐루프로 설명한다.",
+    "Calibration을 단순 adjustment와 구분하고 tolerance·traceability·reference standard를 설명한다.",
+    "As-Found·As-Left와 OOT 영향평가를 명확히 구분한다.",
+    "Routine Inspection과 Functional Test·Loop Check의 목적 차이를 설명한다.",
+    "Critical Spare를 사용빈도·단가가 아니라 consequence·lead time·substitutability·obsolescence로 선정한다.",
+    "예비품 min/max 또는 reorder 정책과 preservation·shelf-life를 함께 관리한다.",
+    "MTBF·MTTR의 산식보다 고장·시간 boundary 정의를 먼저 명확히 한다.",
+    "A_i=MTBF/(MTBF+MTTR)의 적용조건과 Operational Availability 차이를 설명한다.",
+    "PM compliance·schedule compliance·backlog 같은 process KPI와 결과 KPI를 함께 사용한다.",
+    "KPI gaming을 방지하기 위해 reliability·cost·safety·production을 균형평가한다.",
+    "CMMS/EAM 도입 자체보다 asset ID·failure code·downtime 등 데이터 taxonomy와 품질을 강조한다.",
+    "정비 변경은 backup·configuration·as-built·MOC handoff와 연결한다.",
+    "KPI·교정 OOT·점검결함·예비품·RCA를 주기적으로 review하여 PDCA와 lifecycle cost 개선으로 환류한다."
+  ],
+  "common_missing_points": [
+    "유지보수를 고장 후 수리만으로 설명하고 정비전략을 구분하지 않는다.",
+    "자산 criticality와 failure consequence 없이 정비주기와 예비품을 정한다.",
+    "Calibration을 zero/span adjustment와 동일하게 설명한다.",
+    "As-Found와 As-Left, OOT 영향평가를 생략한다.",
+    "점검과 기능시험·Loop Check를 같은 활동으로 취급한다.",
+    "Critical Spare를 가격 또는 사용빈도만으로 결정한다.",
+    "예비품 lead time, shelf-life, obsolescence와 호환성을 생략한다.",
+    "MTBF·MTTR·Availability 식만 제시하고 metric boundary를 정의하지 않는다.",
+    "A=MTBF/(MTBF+MTTR)을 모든 운영가용도에 무조건 적용한다.",
+    "KPI 하나만 최적화하고 비용·안전·생산영향을 고려하지 않는다.",
+    "CMMS 도입만으로 데이터 품질이 자동 확보된다고 본다.",
+    "정비 후 configuration·backup·as-built 변경관리를 누락한다.",
+    "고장이력과 KPI가 정비주기·예비품·설계 개선으로 환류되지 않는다."
+  ],
+  "routing_aliases": [
+    "control system operations maintenance management",
+    "instrumentation operations maintenance program",
+    "instrumentation maintenance management",
+    "control system preventive maintenance program",
+    "instrument calibration management program",
+    "instrumentation calibration interval management",
+    "instrument inspection maintenance program",
+    "control system inspection maintenance planning",
+    "instrumentation critical spare management",
+    "control system spare parts inventory management",
+    "maintenance KPI MTBF MTTR availability",
+    "instrumentation maintenance KPI management",
+    "계측제어 시스템 운영 유지보수 관리",
+    "계측제어 예방정비 관리",
+    "계측기 검교정 주기 관리",
+    "계측제어 점검 정비계획",
+    "계측제어 예비품 재고 관리",
+    "유지보수 KPI MTBF MTTR 가용도"
+  ],
+  "routing_field_points": [
+    "계측제어 자산대장·Tag·system boundary·configuration reference 관리",
+    "Corrective·Preventive·Condition-Based·Predictive Maintenance 전략 구분",
+    "Criticality·Risk 기반 정비 우선순위와 자원배분",
+    "정비 task·interval·window·acceptance criteria 관리",
+    "Work Order·failure code·정비이력·RCA·Bad Actor 폐루프",
+    "검교정 tolerance·reference standard·traceability·acceptance criteria",
+    "Calibration interval과 drift·as-found 이력 기반 주기 최적화",
+    "As-Found·As-Left·Out-of-Tolerance 영향평가",
+    "Routine Inspection·Functional Test·Loop Check 구분",
+    "Inspection finding·defect priority·retest·closeout",
+    "Deferred Maintenance risk assessment와 승인·추적",
+    "Critical Spare·Lead Time·substitutability·obsolescence 분류",
+    "Min/Max·Reorder Point·Lead Time 기반 예비품 재고정책",
+    "Shelf-life·보관환경·rotation·firmware/license 예비품 보존",
+    "Obsolescence·대체품 compatibility·MOC handoff",
+    "MTBF·MTTR의 정의와 데이터 boundary",
+    "Intrinsic Availability와 Operational Availability의 구분",
+    "PM Compliance·Schedule Compliance·Backlog·Emergency Maintenance KPI",
+    "KPI gaming 방지와 reliability·cost·safety balanced review",
+    "CMMS/EAM data quality·taxonomy·failure history",
+    "역할·역량·작업허가·LOTO·bypass·복구승인",
+    "정비 전후 configuration·backup·as-built 변경관리 handoff",
+    "KPI·OOT·결함·spares·RCA 기반 PDCA와 lifecycle cost 최적화"
+  ],
+  "revision_notes": [
+    "운영·유지보수 관리 프로그램 자체가 routing ownership이 되도록 구체 alias를 사용했다.",
+    "bare maintenance, calibration, KPI 같은 generic alias는 사용하지 않았다.",
+    "개별 장비 진단은 smart_positioner diagnostics 등 장비별 Topic으로 handoff한다.",
+    "software/configuration 변경관리 상세는 configuration_change_release_backup_rollback_migration_obsolescence_management로 handoff한다.",
+    "프로젝트 FAT/SAT·commissioning·acceptance는 control_software_project_engineering_documents_fat_sat_commissioning_acceptance로 handoff한다.",
+    "historical frequency는 사용하지 않았다."
+  ]
+}

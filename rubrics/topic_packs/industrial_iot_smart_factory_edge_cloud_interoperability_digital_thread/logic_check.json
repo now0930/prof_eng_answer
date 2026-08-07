@@ -1,0 +1,231 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+  "title": "산업 IoT·스마트공장: Device–Edge–Cloud 아키텍처, 상호운용성 및 Digital Thread",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "산업 IoT·스마트공장: Device–Edge–Cloud 아키텍처, 상호운용성 및 Digital Thread",
+    "question_type": "IMPLEMENTATION_EVALUATION",
+    "difficulty_profile": "DESIGN_EVALUATION",
+    "topic_aliases": [],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "IIoT·Smart Factory의 Device–Edge–Cloud architecture, semantic interoperability와 Digital Thread lifecycle을 평가한다.",
+    "difficulty": "DESIGN_EVALUATION",
+    "cap_policy": {},
+    "candidate_extraction": {
+      "max_candidates": 32,
+      "nearby_window": 1,
+      "rules": [],
+      "key_terms": [
+        "IIoT",
+        "smart factory",
+        "edge gateway",
+        "edge computing",
+        "cloud",
+        "workload placement",
+        "semantic interoperability",
+        "information model",
+        "asset model",
+        "namespace",
+        "digital thread",
+        "asset administration shell",
+        "device onboarding",
+        "fleet management",
+        "remote update",
+        "observability",
+        "data residency",
+        "brownfield migration"
+      ]
+    },
+    "truth_schema": [
+      "산업 IoT와 스마트공장은 현장 Asset·Sensor·Controller의 데이터를 Edge·Platform·Cloud와 업무시스템에 연결하여 상태인지, 분석, 최적화와 lifecycle 의사결정을 지원하는 제조 아키텍처이며, 단순 원격접속이나 Cloud 사용 자체와 동일하지 않다.",
+      "IIoT 아키텍처는 일반적으로 Device/Control, Edge/Gateway, Data/Platform, Application/Enterprise/Cloud 계층으로 역할을 분리하고, 각 계층의 책임·데이터 계약·보안·가용성 경계를 명시해야 한다.",
+      "실시간 제어·Interlock·SIS처럼 결정성·안전성이 요구되는 기능은 통신 단절이나 Cloud 지연에 의존하지 않도록 OT 제어경계를 보존하고, IIoT 분석·최적화 계층은 제어 안정성을 침해하지 않는 방식으로 연계해야 한다.",
+      "Fieldbus, Industrial Ethernet, Wireless와 Protocol/Gateway의 물리·통신 특성 및 선정 상세는 industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection Topic이 소유하고, 본 Topic은 그 연결을 이용한 상위 Device–Edge–Platform integration을 소유한다.",
+      "Edge/Gateway는 Protocol termination·normalization, buffering, filtering, aggregation, local rule/analytics, quality·timestamp 보존과 Store-and-forward를 수행할 수 있으며, 현장 요구에 따라 중앙 Platform 장애 시 제한된 local operation을 유지하도록 설계할 수 있다.",
+      "Workload Placement는 latency·jitter·bandwidth, 데이터량, privacy/security, compute resource, 운영비용, 장애 시 요구동작과 중앙집중 관리 필요성을 비교하여 Device·Edge·Cloud 중 실행위치를 결정해야 한다.",
+      "Cloud·WAN·Platform 단절을 고려하여 Edge buffer 용량, 데이터 만료·우선순위, local fallback/degraded mode, 재접속 후 backlog 재전송과 state resynchronization을 설계해야 한다.",
+      "IIoT 데이터 계약은 value뿐 아니라 unit, timestamp, quality, source identity, engineering range, asset/context와 schema version을 포함하여 Edge·Platform·Cloud에서 동일한 의미로 해석되도록 해야 한다.",
+      "Historian·MES·ERP, timestamp·quality code·compression·retention·data governance와 genealogy의 상세 데이터 관리 원리는 historian_mes_it_ot_integration_industrial_data_quality_realtime_processing Topic이 소유하며, 본 Topic은 해당 데이터 기능을 IIoT platform architecture와 lifecycle continuity 관점에서 사용한다.",
+      "Connectivity와 Syntactic Interoperability는 data transport·format 호환성을 의미할 수 있지만, Semantic Interoperability는 asset, property, unit, quality와 관계의 의미까지 공통으로 해석할 수 있어야 하므로 단순 protocol 연결만으로 달성되지 않는다.",
+      "Information Model은 Asset, component, property, event, command와 관계를 구조화하고 identifier·unit·semantic definition을 연결하여 서로 다른 시스템이 동일한 제조 객체를 일관되게 해석하도록 한다.",
+      "Asset hierarchy·namespace와 globally 또는 조직 내에서 일관된 identifier를 정의하여 동일 자산의 Device, Edge, MES, Historian, Cloud와 engineering 문서 표현을 연결하고 중복·충돌을 방지해야 한다.",
+      "Asset Model과 schema는 설비 변경, firmware·configuration, software release와 engineering revision에 따라 version을 관리하고, 생산·분석 결과가 어떤 asset/model version과 연결되는지 추적할 수 있어야 한다.",
+      "Asset Administration Shell(AAS) 같은 표준화된 digital representation은 asset identification, submodel과 property/relationship 구조를 이용해 cross-system exchange를 지원할 수 있으나, 특정 표준 하나를 사용했다는 사실만으로 semantic completeness나 interoperability가 자동 보장되는 것은 아니다.",
+      "Digital Thread는 요구·설계·구매·설치·시운전·운전·정비·변경에 걸친 동일 Asset의 identifier, model, configuration, document와 operational data를 추적 가능하게 연결하는 lifecycle data continuity 개념이다.",
+      "Digital Thread는 object ID와 version을 기준으로 requirement, P&ID·datasheet·loop/cable document, vendor data, software/configuration, maintenance record와 operational event를 link하여 source와 변경이력을 추적할 수 있어야 한다.",
+      "Digital Thread는 lifecycle data continuity와 traceability를 소유하고, 동적 모델의 fidelity·state synchronization·simulation·autonomous control에 초점을 둔 Digital Twin 상세 원리는 physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control Topic으로 handoff한다.",
+      "Platform interface는 API, event/message, file/batch 등 사용 방식에 맞춰 schema, version, idempotency, ordering, retry, timeout와 error handling을 정의하여 생산자·소비자 간 계약을 명확히 해야 한다.",
+      "Device onboarding은 asset identity 확인, credential/ certificate 발급, configuration baseline, data mapping과 ownership 등록을 포함해야 하며, 임의 연결된 장비가 자동으로 신뢰된 자산이 되어서는 안 된다.",
+      "대규모 IIoT 운영은 device/edge inventory, health, connectivity, storage·CPU·memory, software/firmware/configuration version, certificate expiry와 alarm을 fleet 관점에서 관찰하고 batch/rolling change를 통제해야 한다.",
+      "원격 software/firmware/configuration 배포는 compatibility, signed artifact·integrity, 단계적 rollout, health check와 rollback/recovery 경로를 가져야 하며 실패 시 제어기능의 안전한 상태와 현장 복구 가능성을 보존해야 한다.",
+      "IIoT Platform은 device/edge/platform의 metrics, log, event와 필요 시 distributed trace·correlation ID를 이용해 수집지연, message loss, resource saturation, interface error와 end-to-end data path 상태를 관찰할 수 있어야 한다.",
+      "IIoT 보안은 asset identity, authentication, authorization, least privilege, network segmentation, encryption, certificate/key lifecycle와 audit를 계층별로 적용하고 OT availability·safety 요구와 함께 설계해야 한다.",
+      "Cloud·cross-site 데이터 이용은 산업기밀, 개인정보, 계약·규제 요구와 data residency를 고려하여 수집 최소화, access policy, retention과 export boundary를 정의해야 한다.",
+      "Platform scalability는 device/tag/event 수, sampling/message rate, storage growth, retention, concurrent consumer와 multi-site 연결을 기준으로 capacity를 계획하고, scale-out 시 ordering·partition·consistency와 비용 영향을 함께 검토해야 한다.",
+      "IIoT 서비스는 업무 중요도에 따라 redundancy, failover, backup/restore와 disaster recovery를 설계하고 RTO·RPO 또는 동등한 복구목표를 정의하되, OT 제어 안전성은 Platform 가용성과 분리하여 보장해야 한다.",
+      "스마트공장 아키텍처는 기술도입 자체가 아니라 traceability, downtime reduction, quality improvement, energy optimization, faster changeover, remote support 등 명확한 use case와 KPI를 기준으로 필요한 data·latency·availability·security 수준을 역으로 정의해야 한다.",
+      "Brownfield 스마트공장 전환은 기존 PLC/DCS/SCADA·protocol·vendor tool·legacy tag와 생산중단 제약을 고려하여 gateway/adapter와 coexistence, pilot, 단계적 migration, rollback를 계획하고 기존 제어기능의 안정성을 보존해야 한다.",
+      "IIoT/Smart Factory 운영은 architecture, asset model, interface schema, security policy, device fleet, cost와 KPI를 정기 review하고 변경 영향과 technical debt를 관리하여 lifecycle 동안 표준화·확장성·운영성을 지속 개선해야 한다."
+    ],
+    "fatal_conditions": [
+      "[iiot_fatal_internet_connection_equals_smart_factory] PLC나 센서를 인터넷 또는 Cloud에 연결하면 그것만으로 스마트공장이 완성된다. | correction: 스마트공장은 현장자산, Edge/Platform, 업무·분석과 lifecycle 의사결정을 역할·데이터·보안 경계로 통합해야 한다.",
+      "[iiot_fatal_cloud_replaces_ot_control] Interlock·SIS·실시간 제어를 Cloud로 이전해도 네트워크 단절과 지연에 관계없이 동일한 결정성과 안전성이 자동 보장된다. | correction: 결정성·안전성 요구가 있는 OT 제어는 Cloud/WAN 의존과 분리된 local control boundary를 보존해야 한다.",
+      "[iiot_fatal_edge_is_protocol_converter_only] Edge Gateway는 protocol converter일 뿐이므로 buffering, local processing, store-and-forward와 offline mode는 고려할 필요가 없다. | correction: Edge는 통신변환 외에도 buffering, normalization, local analytics와 단절 시 continuity 기능을 수행할 수 있다.",
+      "[iiot_fatal_all_workloads_cloud] 모든 IIoT workload는 항상 Cloud에서 실행하는 것이 latency·bandwidth·cost·availability 관점에서 최적이다. | correction: 실행위치는 latency, bandwidth, data volume, privacy, compute, cost와 장애 시 동작 요구를 비교해 Device/Edge/Cloud로 배치해야 한다.",
+      "[iiot_fatal_protocol_equals_semantic_interop] OPC UA, MQTT 또는 특정 protocol로 통신이 되면 서로 다른 vendor 시스템 간 semantic interoperability도 자동으로 완전 달성된다. | correction: protocol connectivity와 semantic interoperability는 구분하며 asset/property/unit/quality/relationship 의미를 공통 해석할 수 있어야 한다.",
+      "[iiot_fatal_tag_name_is_information_model] Tag naming 규칙만 통일하면 Information Model과 Asset relationship은 별도로 정의할 필요가 없다. | correction: Naming은 식별 규칙이고 Information Model은 asset, property와 관계·semantic definition을 구조화한다.",
+      "[iiot_fatal_digital_thread_is_cloud_trend] Digital Thread는 sensor trend 데이터를 Cloud에 저장하는 것과 동일하다. | correction: Digital Thread는 동일 asset의 requirement·engineering·configuration·operation·maintenance 정보를 identifier와 version으로 lifecycle 전반에 연결하는 data continuity다.",
+      "[iiot_fatal_digital_thread_equals_digital_twin] Digital Thread와 Digital Twin은 이름만 다른 동일 개념이다. | correction: Digital Thread는 lifecycle traceability를, Digital Twin은 동적 모델의 fidelity·state synchronization·simulation 등 다른 초점을 가진다.",
+      "[iiot_fatal_offline_auto_recovers] 통신이 복구되면 누락 데이터와 상태가 자동으로 완전 복원되므로 buffer·ordering·backlog·resynchronization 정책은 불필요하다. | correction: offline buffer, ordering/expiry, backlog replay와 state resynchronization을 명시적으로 설계해야 한다.",
+      "[iiot_fatal_untrusted_device_auto_onboard] IP 주소가 할당된 장비는 identity와 credential 검증 없이 trusted IIoT asset으로 자동 등록해도 된다. | correction: Device onboarding은 asset identity, credential/certificate, configuration baseline과 data mapping을 검증해야 한다.",
+      "[iiot_fatal_mass_update_without_rollback] 모든 Edge 장비에 firmware를 동시에 배포하면 검증, 단계적 rollout와 rollback은 필요 없다. | correction: 원격배포는 compatibility·integrity 검증, staged rollout, health check와 rollback/recovery를 가져야 한다.",
+      "[iiot_fatal_cloud_removes_capacity_planning] Cloud platform을 사용하면 device/tag/message/storage 증가에 대한 capacity planning이 자동으로 해결된다. | correction: Device/tag/message rate, storage growth, consumer, multi-site와 consistency/cost를 기준으로 scalability를 설계해야 한다.",
+      "[iiot_fatal_platform_ha_replaces_local_safety] Platform 이중화가 있으면 field control의 local autonomy, fail-safe와 degraded mode는 고려할 필요가 없다. | correction: Platform HA와 OT local control/safe-state 요구는 별도 계층에서 설계해야 한다.",
+      "[iiot_fatal_adjacent_topics_owned_all] 본 Topic이 Historian/MES data quality·retention, fieldbus/protocol 상세, Digital Twin fidelity·simulation과 production planning까지 모두 직접 소유한다. | correction: 본 Topic은 IIoT/Smart Factory architecture·Edge/Cloud·semantic platform·Digital Thread lifecycle을 소유하고 인접 상세는 각 기존 Topic으로 handoff해야 한다."
+    ],
+    "safe_conditions": [
+      "산업 IoT와 스마트공장은 현장 Asset·Sensor·Controller의 데이터를 Edge·Platform·Cloud와 업무시스템에 연결하여 상태인지, 분석, 최적화와 lifecycle 의사결정을 지원하는 제조 아키텍처이며, 단순 원격접속이나 Cloud 사용 자체와 동일하지 않다.",
+      "IIoT 아키텍처는 일반적으로 Device/Control, Edge/Gateway, Data/Platform, Application/Enterprise/Cloud 계층으로 역할을 분리하고, 각 계층의 책임·데이터 계약·보안·가용성 경계를 명시해야 한다.",
+      "실시간 제어·Interlock·SIS처럼 결정성·안전성이 요구되는 기능은 통신 단절이나 Cloud 지연에 의존하지 않도록 OT 제어경계를 보존하고, IIoT 분석·최적화 계층은 제어 안정성을 침해하지 않는 방식으로 연계해야 한다.",
+      "Fieldbus, Industrial Ethernet, Wireless와 Protocol/Gateway의 물리·통신 특성 및 선정 상세는 industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection Topic이 소유하고, 본 Topic은 그 연결을 이용한 상위 Device–Edge–Platform integration을 소유한다.",
+      "Edge/Gateway는 Protocol termination·normalization, buffering, filtering, aggregation, local rule/analytics, quality·timestamp 보존과 Store-and-forward를 수행할 수 있으며, 현장 요구에 따라 중앙 Platform 장애 시 제한된 local operation을 유지하도록 설계할 수 있다.",
+      "Workload Placement는 latency·jitter·bandwidth, 데이터량, privacy/security, compute resource, 운영비용, 장애 시 요구동작과 중앙집중 관리 필요성을 비교하여 Device·Edge·Cloud 중 실행위치를 결정해야 한다.",
+      "Cloud·WAN·Platform 단절을 고려하여 Edge buffer 용량, 데이터 만료·우선순위, local fallback/degraded mode, 재접속 후 backlog 재전송과 state resynchronization을 설계해야 한다.",
+      "IIoT 데이터 계약은 value뿐 아니라 unit, timestamp, quality, source identity, engineering range, asset/context와 schema version을 포함하여 Edge·Platform·Cloud에서 동일한 의미로 해석되도록 해야 한다.",
+      "Historian·MES·ERP, timestamp·quality code·compression·retention·data governance와 genealogy의 상세 데이터 관리 원리는 historian_mes_it_ot_integration_industrial_data_quality_realtime_processing Topic이 소유하며, 본 Topic은 해당 데이터 기능을 IIoT platform architecture와 lifecycle continuity 관점에서 사용한다.",
+      "Connectivity와 Syntactic Interoperability는 data transport·format 호환성을 의미할 수 있지만, Semantic Interoperability는 asset, property, unit, quality와 관계의 의미까지 공통으로 해석할 수 있어야 하므로 단순 protocol 연결만으로 달성되지 않는다.",
+      "Information Model은 Asset, component, property, event, command와 관계를 구조화하고 identifier·unit·semantic definition을 연결하여 서로 다른 시스템이 동일한 제조 객체를 일관되게 해석하도록 한다.",
+      "Asset hierarchy·namespace와 globally 또는 조직 내에서 일관된 identifier를 정의하여 동일 자산의 Device, Edge, MES, Historian, Cloud와 engineering 문서 표현을 연결하고 중복·충돌을 방지해야 한다.",
+      "Asset Model과 schema는 설비 변경, firmware·configuration, software release와 engineering revision에 따라 version을 관리하고, 생산·분석 결과가 어떤 asset/model version과 연결되는지 추적할 수 있어야 한다.",
+      "Asset Administration Shell(AAS) 같은 표준화된 digital representation은 asset identification, submodel과 property/relationship 구조를 이용해 cross-system exchange를 지원할 수 있으나, 특정 표준 하나를 사용했다는 사실만으로 semantic completeness나 interoperability가 자동 보장되는 것은 아니다.",
+      "Digital Thread는 요구·설계·구매·설치·시운전·운전·정비·변경에 걸친 동일 Asset의 identifier, model, configuration, document와 operational data를 추적 가능하게 연결하는 lifecycle data continuity 개념이다.",
+      "Digital Thread는 object ID와 version을 기준으로 requirement, P&ID·datasheet·loop/cable document, vendor data, software/configuration, maintenance record와 operational event를 link하여 source와 변경이력을 추적할 수 있어야 한다.",
+      "Digital Thread는 lifecycle data continuity와 traceability를 소유하고, 동적 모델의 fidelity·state synchronization·simulation·autonomous control에 초점을 둔 Digital Twin 상세 원리는 physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control Topic으로 handoff한다.",
+      "Platform interface는 API, event/message, file/batch 등 사용 방식에 맞춰 schema, version, idempotency, ordering, retry, timeout와 error handling을 정의하여 생산자·소비자 간 계약을 명확히 해야 한다.",
+      "Device onboarding은 asset identity 확인, credential/ certificate 발급, configuration baseline, data mapping과 ownership 등록을 포함해야 하며, 임의 연결된 장비가 자동으로 신뢰된 자산이 되어서는 안 된다.",
+      "대규모 IIoT 운영은 device/edge inventory, health, connectivity, storage·CPU·memory, software/firmware/configuration version, certificate expiry와 alarm을 fleet 관점에서 관찰하고 batch/rolling change를 통제해야 한다.",
+      "원격 software/firmware/configuration 배포는 compatibility, signed artifact·integrity, 단계적 rollout, health check와 rollback/recovery 경로를 가져야 하며 실패 시 제어기능의 안전한 상태와 현장 복구 가능성을 보존해야 한다.",
+      "IIoT Platform은 device/edge/platform의 metrics, log, event와 필요 시 distributed trace·correlation ID를 이용해 수집지연, message loss, resource saturation, interface error와 end-to-end data path 상태를 관찰할 수 있어야 한다.",
+      "IIoT 보안은 asset identity, authentication, authorization, least privilege, network segmentation, encryption, certificate/key lifecycle와 audit를 계층별로 적용하고 OT availability·safety 요구와 함께 설계해야 한다.",
+      "Cloud·cross-site 데이터 이용은 산업기밀, 개인정보, 계약·규제 요구와 data residency를 고려하여 수집 최소화, access policy, retention과 export boundary를 정의해야 한다.",
+      "Platform scalability는 device/tag/event 수, sampling/message rate, storage growth, retention, concurrent consumer와 multi-site 연결을 기준으로 capacity를 계획하고, scale-out 시 ordering·partition·consistency와 비용 영향을 함께 검토해야 한다.",
+      "IIoT 서비스는 업무 중요도에 따라 redundancy, failover, backup/restore와 disaster recovery를 설계하고 RTO·RPO 또는 동등한 복구목표를 정의하되, OT 제어 안전성은 Platform 가용성과 분리하여 보장해야 한다.",
+      "스마트공장 아키텍처는 기술도입 자체가 아니라 traceability, downtime reduction, quality improvement, energy optimization, faster changeover, remote support 등 명확한 use case와 KPI를 기준으로 필요한 data·latency·availability·security 수준을 역으로 정의해야 한다.",
+      "Brownfield 스마트공장 전환은 기존 PLC/DCS/SCADA·protocol·vendor tool·legacy tag와 생산중단 제약을 고려하여 gateway/adapter와 coexistence, pilot, 단계적 migration, rollback를 계획하고 기존 제어기능의 안정성을 보존해야 한다.",
+      "IIoT/Smart Factory 운영은 architecture, asset model, interface schema, security policy, device fleet, cost와 KPI를 정기 review하고 변경 영향과 technical debt를 관리하여 lifecycle 동안 표준화·확장성·운영성을 지속 개선해야 한다."
+    ],
+    "output_contract": {},
+    "major_checks": [
+      {
+        "id": "iiot_major_layer_boundary_missing",
+        "claim": "IIoT를 구성요소 나열로만 설명하고 Device–Edge–Platform–Cloud 역할과 OT boundary를 구분하지 않는다.",
+        "correction": "각 계층 책임과 real-time OT control boundary를 명확히 해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "iiot_major_workload_placement_missing",
+        "claim": "Edge/Cloud를 나열하지만 latency·bandwidth·compute·cost·offline 요구에 따른 workload 배치를 설명하지 않는다.",
+        "correction": "비기능 요구와 장애모드에 따라 workload placement를 평가해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "iiot_major_offline_resync_missing",
+        "claim": "통신단절 시 buffer만 언급하고 backlog·ordering·expiry·state resynchronization을 생략한다.",
+        "correction": "단절과 복구 lifecycle 전체를 설계해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "iiot_major_semantic_interop_missing",
+        "claim": "Protocol connectivity를 interoperability로만 설명하고 semantic meaning과 Information Model을 생략한다.",
+        "correction": "Connectivity/Syntactic/Semantic Interoperability를 구분하고 asset/property 관계를 공통 해석해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "iiot_major_asset_identity_version_missing",
+        "claim": "Asset model을 설명하지만 namespace/identifier와 schema/configuration version을 lifecycle로 연결하지 않는다.",
+        "correction": "동일 asset identity와 version continuity를 cross-system으로 유지해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "iiot_major_digital_thread_boundary_missing",
+        "claim": "Digital Thread를 sensor data 저장 또는 Digital Twin과 동일하게 설명한다.",
+        "correction": "Digital Thread는 lifecycle data continuity/traceability이고 Digital Twin은 동적 모델 fidelity/synchronization에 초점이 있다.",
+        "severity": "major"
+      },
+      {
+        "id": "iiot_major_device_lifecycle_missing",
+        "claim": "Device connectivity만 설명하고 onboarding identity, fleet health, version과 update/rollback을 생략한다.",
+        "correction": "Device/Edge를 full lifecycle fleet로 운영해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "iiot_major_security_availability_missing",
+        "claim": "Cloud 연결을 설명하지만 identity/least privilege/segmentation 또는 HA/DR/local autonomy를 생략한다.",
+        "correction": "Security와 availability를 계층별 non-functional requirement로 설계해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "iiot_major_brownfield_missing",
+        "claim": "Smart Factory target architecture만 제시하고 legacy OT coexistence·pilot·migration/rollback을 생략한다.",
+        "correction": "Brownfield 제약과 단계적 전환을 포함해야 한다.",
+        "severity": "major"
+      },
+      {
+        "id": "iiot_major_adjacent_ownership_missing",
+        "claim": "Historian/MES data management, communication protocol 상세, Digital Twin과 IIoT architecture ownership을 구분하지 않는다.",
+        "correction": "신규 Topic의 platform architecture/Digital Thread와 인접 Topic의 세부 ownership을 분리해야 한다.",
+        "severity": "major"
+      }
+    ],
+    "feedback_templates": {},
+    "next_practice_points": [
+      "Device–Edge–Platform–Cloud 계층과 OT local control boundary를 정리한다.",
+      "Latency·bandwidth·cost·offline requirement 기반 workload placement를 정리한다.",
+      "Data contract와 syntactic/semantic interoperability를 구분한다.",
+      "Asset hierarchy·namespace·identifier·versioned model을 정리한다.",
+      "Digital Thread와 Digital Twin의 차이를 lifecycle continuity와 model fidelity 관점에서 정리한다.",
+      "Device onboarding·fleet health·remote update/rollback을 정리한다.",
+      "IIoT security·scalability·availability·RTO/RPO를 정리한다.",
+      "Historian/MES·Communication·Physical AI Topic과 ownership 경계를 정리한다."
+    ],
+    "false_positive_cautions": [
+      "Historian/MES Topic이 Edge·Gateway·semantic interoperability를 언급한다고 해서 IIoT/Smart Factory architecture 전체와 중복으로 판정하지 않는다.",
+      "Communication Topic에서 OPC UA Information Model을 다뤄도 본 Topic의 cross-platform asset model·digital thread ownership을 자동으로 넘기지 않는다.",
+      "Digital Twin Topic이 Edge AI와 asset synchronization을 다뤄도 Digital Thread lifecycle traceability와 구분한다.",
+      "MQTT, OPC UA, HTTP 등 특정 protocol 예시를 사용해도 protocol 선정 상세를 신규 Topic 필수로 강제하지 않는다.",
+      "Edge와 Gateway를 조직에 따라 분리 또는 통합해도 역할·boundary가 명확하면 인정한다.",
+      "Cloud가 private/public/hybrid 어떤 형태라도 latency·security·residency·cost 요구를 설명하면 인정한다.",
+      "AAS는 대표 예시일 뿐 필수 구현표준으로 강제하지 않는다.",
+      "Digital Thread 구현에 PLM·MES·Historian·CMMS 등 특정 제품군을 필수로 강제하지 않는다.",
+      "Zero Trust 용어를 쓰지 않아도 identity·least privilege·segmentation 원칙이 명확하면 인정한다.",
+      "RTO/RPO 대신 동등한 서비스 복구목표와 데이터 손실허용치를 정의해도 인정한다.",
+      "Distributed tracing을 모든 단순 IIoT 시스템에 필수로 강제하지 않되 end-to-end observability 방법이 있어야 한다.",
+      "Store-and-forward의 정확한 buffer size는 workload와 outage requirement에 따라 달라질 수 있으므로 고정값을 강제하지 않는다.",
+      "Asset identifier가 UUID가 아니어도 조직 내 unique/stable mapping과 version traceability가 확보되면 인정한다.",
+      "Brownfield 전환에서 gateway를 쓰지 않는 구조도 coexistence·migration·rollback이 명확하면 인정한다.",
+      "Smart Factory KPI는 조직마다 다를 수 있으므로 특정 OEE/품질 KPI 하나를 필수로 강제하지 않는다."
+    ],
+    "enabled": true,
+    "score_policy": {
+      "direct_score_application": false,
+      "direct_d_e_effect": "none",
+      "affected_layers": [
+        "C"
+      ]
+    }
+  },
+  "revision_notes": [
+    "deterministic semantic verdict는 비활성화하고 LLM semantic profile만 사용한다.",
+    "Fact Anchor statement와 truth_schema를 1:1 순서 투영했다.",
+    "Fact Fatal과 Logic fatal_conditions를 ID·순서 일치로 투영했다.",
+    "직접 score 또는 D/E 영향 없이 C-layer semantic ownership만 허용한다."
+  ],
+  "topic_label": "산업 IoT·스마트공장 아키텍처"
+}

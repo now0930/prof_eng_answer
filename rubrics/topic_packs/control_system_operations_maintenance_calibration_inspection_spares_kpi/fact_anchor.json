@@ -1,0 +1,1048 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+  "title_ko": "계측제어시스템 운영·유지보수, 검교정·점검, 예비품 및 KPI 관리",
+  "question_type_hint": "IMPLEMENTATION_EVALUATION",
+  "anchors": [
+    {
+      "id": "om_asset_register_system_boundary",
+      "anchor_id": "om_asset_register_system_boundary",
+      "statement": "계측제어시스템 운영·유지보수는 자산대장과 시스템 경계를 먼저 확정하고 Tag, 위치, 기능, 제조사·모델, firmware·software, 중요도, 예비품 및 문서 연결정보를 기준정보로 관리해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "자산대장",
+        "system boundary",
+        "Tag",
+        "설비정보",
+        "기준정보"
+      ],
+      "core_terms": [
+        "asset register",
+        "system boundary",
+        "tag master",
+        "configuration reference",
+        "asset data"
+      ],
+      "accepted_explanations": [
+        "무엇을 유지보수할지 자산과 경계부터 정의한다."
+      ],
+      "rejected_explanations": [
+        "정비는 고장난 장비만 현장에서 확인하면 되므로 자산대장이 불필요하다고 설명한다."
+      ],
+      "grading_notes": "운영관리의 출발점을 개별 고장조치가 아니라 관리대상 식별로 둔다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "계측제어시스템 운영·유지보수는 자산대장과 시스템 경계를 먼저 확정하고 Tag, 위치, 기능, 제조사·모델, firmware·software, 중요도, 예비품 및 문서 연결정보를 기준정보로 관리해야 한다.",
+      "description": "계측제어시스템 운영·유지보수는 자산대장과 시스템 경계를 먼저 확정하고 Tag, 위치, 기능, 제조사·모델, firmware·software, 중요도, 예비품 및 문서 연결정보를 기준정보로 관리해야 한다."
+    },
+    {
+      "id": "maintenance_strategy_corrective_preventive_condition_predictive",
+      "anchor_id": "maintenance_strategy_corrective_preventive_condition_predictive",
+      "statement": "정비전략은 고장 후 수리하는 Corrective Maintenance, 시간·사용량 기반 Preventive Maintenance, 상태지표 기반 Condition-Based Maintenance, 데이터 모델을 활용하는 Predictive Maintenance를 자산 특성과 위험에 따라 조합한다.",
+      "importance": "must",
+      "keywords": [
+        "Corrective",
+        "Preventive",
+        "CBM",
+        "Predictive",
+        "정비전략"
+      ],
+      "core_terms": [
+        "corrective maintenance",
+        "preventive maintenance",
+        "condition based maintenance",
+        "predictive maintenance"
+      ],
+      "accepted_explanations": [
+        "네 전략의 triggering basis를 구분하고 혼합 적용을 설명한다."
+      ],
+      "rejected_explanations": [
+        "예방정비와 예지정비를 모두 일정주기 교체로 동일하게 설명한다."
+      ],
+      "grading_notes": "정비방식 용어를 전략 선택과 연결한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "정비전략은 고장 후 수리하는 Corrective Maintenance, 시간·사용량 기반 Preventive Maintenance, 상태지표 기반 Condition-Based Maintenance, 데이터 모델을 활용하는 Predictive Maintenance를 자산 특성과 위험에 따라 조합한다.",
+      "description": "정비전략은 고장 후 수리하는 Corrective Maintenance, 시간·사용량 기반 Preventive Maintenance, 상태지표 기반 Condition-Based Maintenance, 데이터 모델을 활용하는 Predictive Maintenance를 자산 특성과 위험에 따라 조합한다."
+    },
+    {
+      "id": "maintenance_criticality_risk_prioritization",
+      "anchor_id": "maintenance_criticality_risk_prioritization",
+      "statement": "정비 우선순위와 자원배분은 고장확률만이 아니라 안전·환경·생산·품질·규제·복구시간·대체 가능성 등의 고장영향을 함께 반영한 중요도·위험도 평가로 결정해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "Criticality",
+        "Risk",
+        "고장영향",
+        "우선순위",
+        "자원배분"
+      ],
+      "core_terms": [
+        "criticality",
+        "failure consequence",
+        "risk priority",
+        "business impact",
+        "safety impact"
+      ],
+      "accepted_explanations": [
+        "확률과 결과를 함께 보고 우선순위를 결정한다."
+      ],
+      "rejected_explanations": [
+        "단가가 높은 계측기부터 무조건 최우선 정비대상으로 정한다."
+      ],
+      "grading_notes": "예비품과 정비주기까지 이어지는 공통 risk basis다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "정비 우선순위와 자원배분은 고장확률만이 아니라 안전·환경·생산·품질·규제·복구시간·대체 가능성 등의 고장영향을 함께 반영한 중요도·위험도 평가로 결정해야 한다.",
+      "description": "정비 우선순위와 자원배분은 고장확률만이 아니라 안전·환경·생산·품질·규제·복구시간·대체 가능성 등의 고장영향을 함께 반영한 중요도·위험도 평가로 결정해야 한다."
+    },
+    {
+      "id": "maintenance_plan_task_interval_basis",
+      "anchor_id": "maintenance_plan_task_interval_basis",
+      "statement": "정비계획은 자산별 작업내용, 주기 또는 상태기준, 책임자, 필요 공구·예비품, 안전조치, 정지창과 완료기준을 정의하며, 주기는 제조사 권고·법규·고장이력·환경·criticality와 상태추세를 근거로 조정한다.",
+      "importance": "must",
+      "keywords": [
+        "정비계획",
+        "정비주기",
+        "작업기준",
+        "정지창",
+        "완료기준"
+      ],
+      "core_terms": [
+        "maintenance plan",
+        "task interval",
+        "maintenance window",
+        "acceptance criteria",
+        "resource plan"
+      ],
+      "accepted_explanations": [
+        "주기의 근거와 작업 완료기준을 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기는 제조사 권고주기를 설비조건과 무관하게 영구 고정해야 한다."
+      ],
+      "grading_notes": "주기 최적화를 정비전략의 일부로 본다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "정비계획은 자산별 작업내용, 주기 또는 상태기준, 책임자, 필요 공구·예비품, 안전조치, 정지창과 완료기준을 정의하며, 주기는 제조사 권고·법규·고장이력·환경·criticality와 상태추세를 근거로 조정한다.",
+      "description": "정비계획은 자산별 작업내용, 주기 또는 상태기준, 책임자, 필요 공구·예비품, 안전조치, 정지창과 완료기준을 정의하며, 주기는 제조사 권고·법규·고장이력·환경·criticality와 상태추세를 근거로 조정한다."
+    },
+    {
+      "id": "work_order_history_closed_loop",
+      "anchor_id": "work_order_history_closed_loop",
+      "statement": "정비 작업은 Work Order 또는 동등한 작업지시로 요청·우선순위·허가·수행·시험·복구·종결을 추적하고, 고장모드·원인·조치·사용부품·소요시간·as-found/as-left 결과를 이력으로 남겨 다음 계획에 환류해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "Work Order",
+        "정비이력",
+        "고장모드",
+        "조치",
+        "환류"
+      ],
+      "core_terms": [
+        "work order",
+        "maintenance history",
+        "failure mode",
+        "repair action",
+        "closeout"
+      ],
+      "accepted_explanations": [
+        "작업과 이력을 폐루프로 연결한다."
+      ],
+      "rejected_explanations": [
+        "작업 완료 여부만 기록하고 원인·부품·시간 정보는 불필요하다고 설명한다."
+      ],
+      "grading_notes": "KPI와 반복고장 분석의 데이터 기반을 만든다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "정비 작업은 Work Order 또는 동등한 작업지시로 요청·우선순위·허가·수행·시험·복구·종결을 추적하고, 고장모드·원인·조치·사용부품·소요시간·as-found/as-left 결과를 이력으로 남겨 다음 계획에 환류해야 한다.",
+      "description": "정비 작업은 Work Order 또는 동등한 작업지시로 요청·우선순위·허가·수행·시험·복구·종결을 추적하고, 고장모드·원인·조치·사용부품·소요시간·as-found/as-left 결과를 이력으로 남겨 다음 계획에 환류해야 한다."
+    },
+    {
+      "id": "failure_coding_rca_bad_actor_feedback",
+      "anchor_id": "failure_coding_rca_bad_actor_feedback",
+      "statement": "반복고장과 중대한 장애는 일관된 failure code와 원인분류를 사용해 Bad Actor를 식별하고, 필요 시 RCA를 수행하여 설계개선·주기조정·운전조건·교육·예비품 전략으로 환류한다.",
+      "importance": "important",
+      "keywords": [
+        "Failure code",
+        "Bad Actor",
+        "RCA",
+        "반복고장",
+        "재발방지"
+      ],
+      "core_terms": [
+        "failure coding",
+        "bad actor",
+        "root cause analysis",
+        "repeat failure",
+        "corrective action"
+      ],
+      "accepted_explanations": [
+        "반복고장을 개별 수리로 끝내지 않고 원인과 시스템 개선으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "MTTR만 줄이면 반복고장 원인은 분석할 필요가 없다고 설명한다."
+      ],
+      "grading_notes": "지속개선의 대표 진단·행동 연결이다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "반복고장과 중대한 장애는 일관된 failure code와 원인분류를 사용해 Bad Actor를 식별하고, 필요 시 RCA를 수행하여 설계개선·주기조정·운전조건·교육·예비품 전략으로 환류한다.",
+      "description": "반복고장과 중대한 장애는 일관된 failure code와 원인분류를 사용해 Bad Actor를 식별하고, 필요 시 RCA를 수행하여 설계개선·주기조정·운전조건·교육·예비품 전략으로 환류한다."
+    },
+    {
+      "id": "calibration_program_traceability",
+      "anchor_id": "calibration_program_traceability",
+      "statement": "검교정 프로그램은 측정기능의 요구 정확도·허용오차, 교정방법, 기준기, 추적성, 환경조건, 주기, 기록 및 합격기준을 정의하여 측정결과의 신뢰성을 유지해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "검교정",
+        "허용오차",
+        "기준기",
+        "추적성",
+        "합격기준"
+      ],
+      "core_terms": [
+        "calibration program",
+        "tolerance",
+        "reference standard",
+        "traceability",
+        "acceptance criteria"
+      ],
+      "accepted_explanations": [
+        "교정을 조정행위가 아니라 비교·판정·필요 시 조정과 기록의 관리프로그램으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "교정은 항상 zero와 span을 조정하는 행위와 동일하다고 설명한다."
+      ],
+      "grading_notes": "개별 센서 교정 절차가 아니라 프로그램 관리영역을 소유한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "검교정 프로그램은 측정기능의 요구 정확도·허용오차, 교정방법, 기준기, 추적성, 환경조건, 주기, 기록 및 합격기준을 정의하여 측정결과의 신뢰성을 유지해야 한다.",
+      "description": "검교정 프로그램은 측정기능의 요구 정확도·허용오차, 교정방법, 기준기, 추적성, 환경조건, 주기, 기록 및 합격기준을 정의하여 측정결과의 신뢰성을 유지해야 한다."
+    },
+    {
+      "id": "calibration_interval_risk_history",
+      "anchor_id": "calibration_interval_risk_history",
+      "statement": "교정주기는 모든 계측기에 동일하게 적용하지 않고 측정 중요도, 안정성, drift 이력, 사용빈도, 환경, 제조사 권고, 법규 및 as-found 결과를 근거로 단축·유지·연장한다.",
+      "importance": "must",
+      "keywords": [
+        "교정주기",
+        "drift",
+        "as-found",
+        "risk-based",
+        "interval"
+      ],
+      "core_terms": [
+        "calibration interval",
+        "as-found history",
+        "drift",
+        "risk based interval",
+        "stability"
+      ],
+      "accepted_explanations": [
+        "과거 교정결과와 risk를 이용해 주기를 최적화한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기는 1년마다 교정해야 하며 어떤 경우에도 주기를 바꾸면 안 된다고 설명한다."
+      ],
+      "grading_notes": "고정주기 만능론을 방지한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "교정주기는 모든 계측기에 동일하게 적용하지 않고 측정 중요도, 안정성, drift 이력, 사용빈도, 환경, 제조사 권고, 법규 및 as-found 결과를 근거로 단축·유지·연장한다.",
+      "description": "교정주기는 모든 계측기에 동일하게 적용하지 않고 측정 중요도, 안정성, drift 이력, 사용빈도, 환경, 제조사 권고, 법규 및 as-found 결과를 근거로 단축·유지·연장한다."
+    },
+    {
+      "id": "calibration_as_found_as_left_oot",
+      "anchor_id": "calibration_as_found_as_left_oot",
+      "statement": "교정에서는 조정 전 As-Found 값과 조정·교정 후 As-Left 값을 구분해 기록하고, 허용오차를 벗어난 Out-of-Tolerance가 발견되면 영향기간과 관련 공정·품질 데이터의 유효성을 평가해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "As-Found",
+        "As-Left",
+        "OOT",
+        "허용오차",
+        "영향평가"
+      ],
+      "core_terms": [
+        "as found",
+        "as left",
+        "out of tolerance",
+        "impact assessment",
+        "measurement validity"
+      ],
+      "accepted_explanations": [
+        "조정 전 상태와 조정 후 상태, OOT 영향평가를 연결한다."
+      ],
+      "rejected_explanations": [
+        "As-Left 값이 정상이라면 As-Found 초과와 과거 측정값 영향은 검토할 필요가 없다고 설명한다."
+      ],
+      "grading_notes": "교정 관리에서 가장 중요한 폐루프 중 하나다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "교정에서는 조정 전 As-Found 값과 조정·교정 후 As-Left 값을 구분해 기록하고, 허용오차를 벗어난 Out-of-Tolerance가 발견되면 영향기간과 관련 공정·품질 데이터의 유효성을 평가해야 한다.",
+      "description": "교정에서는 조정 전 As-Found 값과 조정·교정 후 As-Left 값을 구분해 기록하고, 허용오차를 벗어난 Out-of-Tolerance가 발견되면 영향기간과 관련 공정·품질 데이터의 유효성을 평가해야 한다."
+    },
+    {
+      "id": "calibration_reference_standard_control",
+      "anchor_id": "calibration_reference_standard_control",
+      "statement": "교정용 기준기는 피교정기의 요구 불확도와 허용오차에 적합한 성능을 가져야 하며, 유효한 교정상태·식별·환경조건·보관·사용이력과 상위표준에 대한 추적성을 관리해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "기준기",
+        "불확도",
+        "추적성",
+        "교정상태",
+        "상위표준"
+      ],
+      "core_terms": [
+        "reference standard",
+        "measurement uncertainty",
+        "traceability",
+        "calibration status",
+        "standard control"
+      ],
+      "accepted_explanations": [
+        "기준기의 성능과 상태가 피교정 결과의 신뢰성에 연결됨을 설명한다."
+      ],
+      "rejected_explanations": [
+        "기준기는 단순히 분해능이 더 좋으면 교정상태와 추적성을 확인할 필요가 없다고 설명한다."
+      ],
+      "grading_notes": "개별 불확도 계산보다 기준기 관리계약에 초점을 둔다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "교정용 기준기는 피교정기의 요구 불확도와 허용오차에 적합한 성능을 가져야 하며, 유효한 교정상태·식별·환경조건·보관·사용이력과 상위표준에 대한 추적성을 관리해야 한다.",
+      "description": "교정용 기준기는 피교정기의 요구 불확도와 허용오차에 적합한 성능을 가져야 하며, 유효한 교정상태·식별·환경조건·보관·사용이력과 상위표준에 대한 추적성을 관리해야 한다."
+    },
+    {
+      "id": "inspection_program_routine_functional_loop",
+      "anchor_id": "inspection_program_routine_functional_loop",
+      "statement": "점검 프로그램은 외관·전원·배선·접지·배관·누설·환경상태 같은 Routine Inspection과 기능시험, Loop Check, 인터록·알람 시험 등 기능검증을 목적과 위험에 따라 구분해 계획한다.",
+      "importance": "must",
+      "keywords": [
+        "Routine Inspection",
+        "기능시험",
+        "Loop Check",
+        "알람",
+        "인터록"
+      ],
+      "core_terms": [
+        "routine inspection",
+        "functional test",
+        "loop check",
+        "alarm test",
+        "interlock test"
+      ],
+      "accepted_explanations": [
+        "육안점검과 기능검증을 구분하고 목적에 맞게 구성한다."
+      ],
+      "rejected_explanations": [
+        "외관점검이 정상이라면 기능시험과 loop check도 자동으로 정상으로 본다."
+      ],
+      "grading_notes": "점검=교정 또는 점검=시험이라는 단순화를 방지한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "점검 프로그램은 외관·전원·배선·접지·배관·누설·환경상태 같은 Routine Inspection과 기능시험, Loop Check, 인터록·알람 시험 등 기능검증을 목적과 위험에 따라 구분해 계획한다.",
+      "description": "점검 프로그램은 외관·전원·배선·접지·배관·누설·환경상태 같은 Routine Inspection과 기능시험, Loop Check, 인터록·알람 시험 등 기능검증을 목적과 위험에 따라 구분해 계획한다."
+    },
+    {
+      "id": "inspection_findings_defect_priority_closeout",
+      "anchor_id": "inspection_findings_defect_priority_closeout",
+      "statement": "점검에서 발견된 결함은 안전·생산·품질 영향과 열화속도에 따라 우선순위를 정하고, 즉시조치·계획정비·운전제한·임시대책을 결정한 뒤 Work Order와 재시험으로 종결을 확인해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "결함",
+        "우선순위",
+        "임시대책",
+        "재시험",
+        "종결"
+      ],
+      "core_terms": [
+        "inspection finding",
+        "defect priority",
+        "temporary measure",
+        "retest",
+        "closeout"
+      ],
+      "accepted_explanations": [
+        "점검 발견사항을 실제 조치와 검증까지 연결한다."
+      ],
+      "rejected_explanations": [
+        "점검표에 이상을 표시하면 결함처리가 완료된 것으로 본다."
+      ],
+      "grading_notes": "검사기록 자체가 목적이 아니라 defect closure가 목적이다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "점검에서 발견된 결함은 안전·생산·품질 영향과 열화속도에 따라 우선순위를 정하고, 즉시조치·계획정비·운전제한·임시대책을 결정한 뒤 Work Order와 재시험으로 종결을 확인해야 한다.",
+      "description": "점검에서 발견된 결함은 안전·생산·품질 영향과 열화속도에 따라 우선순위를 정하고, 즉시조치·계획정비·운전제한·임시대책을 결정한 뒤 Work Order와 재시험으로 종결을 확인해야 한다."
+    },
+    {
+      "id": "deferred_maintenance_risk_control",
+      "anchor_id": "deferred_maintenance_risk_control",
+      "statement": "정비 또는 점검을 계획일에 수행하지 못해 Deferred Maintenance가 발생하면 단순 연기가 아니라 위험평가, 임시보호조치, 승인, 새로운 기한과 추적책임을 명확히 해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "Deferred Maintenance",
+        "연기정비",
+        "위험평가",
+        "승인",
+        "기한"
+      ],
+      "core_terms": [
+        "deferred maintenance",
+        "risk assessment",
+        "temporary safeguard",
+        "approval",
+        "due date"
+      ],
+      "accepted_explanations": [
+        "연기된 작업도 risk-controlled management 대상임을 설명한다."
+      ],
+      "rejected_explanations": [
+        "생산일정 때문에 정비를 연기하면 별도 위험평가나 승인 없이 다음 shutdown까지 미뤄도 된다고 설명한다."
+      ],
+      "grading_notes": "현실적 운영제약을 관리계약으로 포함한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "정비 또는 점검을 계획일에 수행하지 못해 Deferred Maintenance가 발생하면 단순 연기가 아니라 위험평가, 임시보호조치, 승인, 새로운 기한과 추적책임을 명확히 해야 한다.",
+      "description": "정비 또는 점검을 계획일에 수행하지 못해 Deferred Maintenance가 발생하면 단순 연기가 아니라 위험평가, 임시보호조치, 승인, 새로운 기한과 추적책임을 명확히 해야 한다."
+    },
+    {
+      "id": "spares_criticality_classification",
+      "anchor_id": "spares_criticality_classification",
+      "statement": "예비품은 사용빈도보다 자산 criticality, 고장 시 생산·안전 영향, 조달 Lead Time, 수리 가능성, 대체 가능성, 단종위험을 고려해 Critical Spare와 일반 Spare를 분류한다.",
+      "importance": "must",
+      "keywords": [
+        "Critical Spare",
+        "Lead Time",
+        "대체 가능성",
+        "단종",
+        "예비품"
+      ],
+      "core_terms": [
+        "critical spare",
+        "lead time",
+        "substitutability",
+        "repairability",
+        "obsolescence risk"
+      ],
+      "accepted_explanations": [
+        "예비품 중요도를 가격이나 사용량만으로 판단하지 않는다."
+      ],
+      "rejected_explanations": [
+        "비싼 부품은 모두 Critical Spare이고 저가 부품은 보유할 필요가 없다고 설명한다."
+      ],
+      "grading_notes": "예비품 전략의 핵심 risk basis다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "예비품은 사용빈도보다 자산 criticality, 고장 시 생산·안전 영향, 조달 Lead Time, 수리 가능성, 대체 가능성, 단종위험을 고려해 Critical Spare와 일반 Spare를 분류한다.",
+      "description": "예비품은 사용빈도보다 자산 criticality, 고장 시 생산·안전 영향, 조달 Lead Time, 수리 가능성, 대체 가능성, 단종위험을 고려해 Critical Spare와 일반 Spare를 분류한다."
+    },
+    {
+      "id": "spares_stock_policy_reorder_leadtime",
+      "anchor_id": "spares_stock_policy_reorder_leadtime",
+      "statement": "예비품 재고수준은 예상수요, 고장률, Lead Time, 최소 주문량, 수리 turnaround, 공용화 가능성, 서비스 수준과 재고비용을 고려해 min/max, reorder point 또는 동등한 보충정책으로 관리한다.",
+      "importance": "must",
+      "keywords": [
+        "min/max",
+        "Reorder Point",
+        "Lead Time",
+        "재고정책",
+        "서비스 수준"
+      ],
+      "core_terms": [
+        "minimum maximum stock",
+        "reorder point",
+        "lead time",
+        "service level",
+        "inventory cost"
+      ],
+      "accepted_explanations": [
+        "고장영향과 공급리스크를 재고비용과 trade-off한다."
+      ],
+      "rejected_explanations": [
+        "사용빈도가 낮은 부품은 Lead Time과 고장영향에 관계없이 재고 0이 최적이라고 설명한다."
+      ],
+      "grading_notes": "과잉재고와 품절을 동시에 관리한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "예비품 재고수준은 예상수요, 고장률, Lead Time, 최소 주문량, 수리 turnaround, 공용화 가능성, 서비스 수준과 재고비용을 고려해 min/max, reorder point 또는 동등한 보충정책으로 관리한다.",
+      "description": "예비품 재고수준은 예상수요, 고장률, Lead Time, 최소 주문량, 수리 turnaround, 공용화 가능성, 서비스 수준과 재고비용을 고려해 min/max, reorder point 또는 동등한 보충정책으로 관리한다."
+    },
+    {
+      "id": "spares_preservation_shelf_life_rotation",
+      "anchor_id": "spares_preservation_shelf_life_rotation",
+      "statement": "보유 예비품은 단순 수량뿐 아니라 보관환경, 방습·방진, 배터리·전해콘덴서 등 shelf-life, 정기 기능확인, firmware·license 상태와 선입선출·rotation을 관리해야 실제 고장 시 사용 가능하다.",
+      "importance": "important",
+      "keywords": [
+        "보관환경",
+        "Shelf Life",
+        "Rotation",
+        "기능확인",
+        "Firmware"
+      ],
+      "core_terms": [
+        "preservation",
+        "shelf life",
+        "rotation",
+        "storage condition",
+        "functional check"
+      ],
+      "accepted_explanations": [
+        "재고가 있다는 것과 사용 가능하다는 것을 구분한다."
+      ],
+      "rejected_explanations": [
+        "예비품은 창고 수량만 맞으면 장기간 아무 점검 없이도 항상 즉시 사용 가능하다고 설명한다."
+      ],
+      "grading_notes": "전자계장품 특유의 장기보관 리스크를 포함한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "보유 예비품은 단순 수량뿐 아니라 보관환경, 방습·방진, 배터리·전해콘덴서 등 shelf-life, 정기 기능확인, firmware·license 상태와 선입선출·rotation을 관리해야 실제 고장 시 사용 가능하다.",
+      "description": "보유 예비품은 단순 수량뿐 아니라 보관환경, 방습·방진, 배터리·전해콘덴서 등 shelf-life, 정기 기능확인, firmware·license 상태와 선입선출·rotation을 관리해야 실제 고장 시 사용 가능하다."
+    },
+    {
+      "id": "spares_obsolescence_substitution_moc",
+      "anchor_id": "spares_obsolescence_substitution_moc",
+      "statement": "단종·노후화 부품은 Last-Time Buy, 호환 대체품, repair service, redesign과 migration 대안을 검토하되, 대체품 적용은 I/O·통신·전원·기능·안전·환경·software/firmware 호환성을 확인하고 변경관리와 시험을 거쳐야 한다.",
+      "importance": "must",
+      "keywords": [
+        "Obsolescence",
+        "Last-Time Buy",
+        "호환성",
+        "대체품",
+        "변경관리"
+      ],
+      "core_terms": [
+        "obsolescence",
+        "last time buy",
+        "substitution",
+        "compatibility",
+        "management of change"
+      ],
+      "accepted_explanations": [
+        "예비품 수명주기와 변경관리의 handoff를 설명한다."
+      ],
+      "rejected_explanations": [
+        "Part number가 비슷한 대체품이면 기능·통신·안전 영향 확인 없이 즉시 교체해도 된다고 설명한다."
+      ],
+      "grading_notes": "상세 변경관리 자체는 기존 configuration Topic으로 handoff한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "단종·노후화 부품은 Last-Time Buy, 호환 대체품, repair service, redesign과 migration 대안을 검토하되, 대체품 적용은 I/O·통신·전원·기능·안전·환경·software/firmware 호환성을 확인하고 변경관리와 시험을 거쳐야 한다.",
+      "description": "단종·노후화 부품은 Last-Time Buy, 호환 대체품, repair service, redesign과 migration 대안을 검토하되, 대체품 적용은 I/O·통신·전원·기능·안전·환경·software/firmware 호환성을 확인하고 변경관리와 시험을 거쳐야 한다."
+    },
+    {
+      "id": "kpi_mtbf_definition_boundary",
+      "anchor_id": "kpi_mtbf_definition_boundary",
+      "statement": "MTBF는 수리 가능한 자산에서 운전시간을 해당 기간의 고장횟수로 나눈 평균 고장간 운전시간의 대표 지표이며, 고장 정의와 관찰기간·운전시간 경계를 일관되게 해야 비교가 의미 있다.",
+      "importance": "must",
+      "keywords": [
+        "MTBF",
+        "운전시간",
+        "고장횟수",
+        "경계",
+        "신뢰성"
+      ],
+      "core_terms": [
+        "mean time between failures",
+        "operating time",
+        "failure count",
+        "metric boundary",
+        "reliability"
+      ],
+      "accepted_explanations": [
+        "MTBF의 산식뿐 아니라 고장·시간 경계 정의를 설명한다."
+      ],
+      "rejected_explanations": [
+        "MTBF 값은 고장 정의와 데이터 기간이 달라도 서로 직접 비교할 수 있다고 설명한다."
+      ],
+      "grading_notes": "KPI는 계산식보다 데이터 정의가 먼저다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "MTBF는 수리 가능한 자산에서 운전시간을 해당 기간의 고장횟수로 나눈 평균 고장간 운전시간의 대표 지표이며, 고장 정의와 관찰기간·운전시간 경계를 일관되게 해야 비교가 의미 있다.",
+      "description": "MTBF는 수리 가능한 자산에서 운전시간을 해당 기간의 고장횟수로 나눈 평균 고장간 운전시간의 대표 지표이며, 고장 정의와 관찰기간·운전시간 경계를 일관되게 해야 비교가 의미 있다."
+    },
+    {
+      "id": "kpi_mttr_definition_boundary",
+      "anchor_id": "kpi_mttr_definition_boundary",
+      "statement": "MTTR은 고장 후 복구에 소요되는 평균시간을 나타내며 조직의 정의에 따라 진단·수리·시험·복구 승인 시간을 포함할 수 있으므로 시작·종료 기준과 대기시간 포함 여부를 명확히 해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "MTTR",
+        "복구시간",
+        "진단",
+        "수리",
+        "시작종료 기준"
+      ],
+      "core_terms": [
+        "mean time to repair",
+        "restoration time",
+        "diagnosis",
+        "repair",
+        "metric definition"
+      ],
+      "accepted_explanations": [
+        "MTTR의 시간경계를 조직적으로 정의해야 함을 설명한다."
+      ],
+      "rejected_explanations": [
+        "MTTR은 모든 조직에서 순수 공구 작업시간만을 뜻하므로 정의가 필요 없다고 설명한다."
+      ],
+      "grading_notes": "운영 KPI의 boundary sensitivity를 강조한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "MTTR은 고장 후 복구에 소요되는 평균시간을 나타내며 조직의 정의에 따라 진단·수리·시험·복구 승인 시간을 포함할 수 있으므로 시작·종료 기준과 대기시간 포함 여부를 명확히 해야 한다.",
+      "description": "MTTR은 고장 후 복구에 소요되는 평균시간을 나타내며 조직의 정의에 따라 진단·수리·시험·복구 승인 시간을 포함할 수 있으므로 시작·종료 기준과 대기시간 포함 여부를 명확히 해야 한다."
+    },
+    {
+      "id": "kpi_intrinsic_availability_equation",
+      "anchor_id": "kpi_intrinsic_availability_equation",
+      "statement": "단순한 수리 가능 2상태 모델에서 고유가용도는 A_i=MTBF/(MTBF+MTTR)로 표현할 수 있지만, 실제 운영가용도에는 예방정비·물류대기·행정지연·계획정지 등 추가 시간요소가 포함될 수 있어 지표 정의를 구분해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "Availability",
+        "Ai",
+        "MTBF/(MTBF+MTTR)",
+        "운영가용도",
+        "계획정지"
+      ],
+      "core_terms": [
+        "intrinsic availability",
+        "operational availability",
+        "MTBF",
+        "MTTR",
+        "planned downtime"
+      ],
+      "accepted_explanations": [
+        "대표식의 적용경계와 실제 운영가용도의 차이를 함께 설명한다."
+      ],
+      "rejected_explanations": [
+        "MTBF/(MTBF+MTTR)은 계획정지와 물류대기를 포함한 모든 가용도 정의에 항상 그대로 적용된다고 설명한다."
+      ],
+      "grading_notes": "공식 암기와 현장 KPI 정의를 분리한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "단순한 수리 가능 2상태 모델에서 고유가용도는 A_i=MTBF/(MTBF+MTTR)로 표현할 수 있지만, 실제 운영가용도에는 예방정비·물류대기·행정지연·계획정지 등 추가 시간요소가 포함될 수 있어 지표 정의를 구분해야 한다.",
+      "description": "단순한 수리 가능 2상태 모델에서 고유가용도는 A_i=MTBF/(MTBF+MTTR)로 표현할 수 있지만, 실제 운영가용도에는 예방정비·물류대기·행정지연·계획정지 등 추가 시간요소가 포함될 수 있어 지표 정의를 구분해야 한다."
+    },
+    {
+      "id": "kpi_pm_compliance_backlog_schedule",
+      "anchor_id": "kpi_pm_compliance_backlog_schedule",
+      "statement": "유지보수 관리 KPI는 MTBF·MTTR·가용도 외에도 PM Compliance, Schedule Compliance, Maintenance Backlog, 긴급정비 비율 등을 사용할 수 있으며, 각 지표는 목표·분모·제외조건과 데이터 수집규칙을 먼저 정의해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "PM Compliance",
+        "Schedule Compliance",
+        "Backlog",
+        "긴급정비",
+        "KPI"
+      ],
+      "core_terms": [
+        "preventive maintenance compliance",
+        "schedule compliance",
+        "maintenance backlog",
+        "emergency maintenance"
+      ],
+      "accepted_explanations": [
+        "결과 KPI와 실행 프로세스 KPI를 함께 관리한다."
+      ],
+      "rejected_explanations": [
+        "KPI 이름만 동일하면 사업장마다 분모·제외조건이 달라도 직접 비교해도 된다고 설명한다."
+      ],
+      "grading_notes": "운영관리의 선행/후행지표 균형을 유도한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "유지보수 관리 KPI는 MTBF·MTTR·가용도 외에도 PM Compliance, Schedule Compliance, Maintenance Backlog, 긴급정비 비율 등을 사용할 수 있으며, 각 지표는 목표·분모·제외조건과 데이터 수집규칙을 먼저 정의해야 한다.",
+      "description": "유지보수 관리 KPI는 MTBF·MTTR·가용도 외에도 PM Compliance, Schedule Compliance, Maintenance Backlog, 긴급정비 비율 등을 사용할 수 있으며, 각 지표는 목표·분모·제외조건과 데이터 수집규칙을 먼저 정의해야 한다."
+    },
+    {
+      "id": "kpi_gaming_single_metric_tradeoff",
+      "anchor_id": "kpi_gaming_single_metric_tradeoff",
+      "statement": "단일 KPI를 목표로 최적화하면 고장 미등록, 정비 조기종결, 과잉 예방정비 같은 왜곡이 생길 수 있으므로 신뢰성·복구성·비용·안전·생산영향을 균형 있게 보고 원자료와 정의를 감사해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "KPI Gaming",
+        "균형지표",
+        "원자료",
+        "비용",
+        "안전"
+      ],
+      "core_terms": [
+        "metric gaming",
+        "balanced KPI",
+        "data audit",
+        "cost",
+        "safety"
+      ],
+      "accepted_explanations": [
+        "KPI의 부작용과 균형관리 필요성을 설명한다."
+      ],
+      "rejected_explanations": [
+        "MTBF 하나만 높이면 비용·안전·생산성과 관계없이 유지보수 체계가 최적이라고 설명한다."
+      ],
+      "grading_notes": "KPI 자체가 목적이 되는 오류를 방지한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "단일 KPI를 목표로 최적화하면 고장 미등록, 정비 조기종결, 과잉 예방정비 같은 왜곡이 생길 수 있으므로 신뢰성·복구성·비용·안전·생산영향을 균형 있게 보고 원자료와 정의를 감사해야 한다.",
+      "description": "단일 KPI를 목표로 최적화하면 고장 미등록, 정비 조기종결, 과잉 예방정비 같은 왜곡이 생길 수 있으므로 신뢰성·복구성·비용·안전·생산영향을 균형 있게 보고 원자료와 정의를 감사해야 한다."
+    },
+    {
+      "id": "maintenance_data_quality_cmms_taxonomy",
+      "anchor_id": "maintenance_data_quality_cmms_taxonomy",
+      "statement": "CMMS/EAM 또는 동등한 관리체계의 유지보수 데이터는 자산ID, failure code, 작업유형, 시작·종료시간, downtime, 사용부품, 원인·조치 등을 표준 taxonomy로 기록해야 KPI와 RCA가 재현 가능하다.",
+      "importance": "must",
+      "keywords": [
+        "CMMS",
+        "EAM",
+        "Data Quality",
+        "Failure Code",
+        "Taxonomy"
+      ],
+      "core_terms": [
+        "computerized maintenance management system",
+        "enterprise asset management",
+        "data quality",
+        "taxonomy",
+        "work history"
+      ],
+      "accepted_explanations": [
+        "도구명이 아니라 표준화된 데이터 항목과 품질을 핵심으로 설명한다."
+      ],
+      "rejected_explanations": [
+        "CMMS를 도입하면 입력기준이 없어도 KPI와 RCA의 정확성이 자동으로 확보된다고 설명한다."
+      ],
+      "grading_notes": "시스템 도입과 데이터 거버넌스를 구분한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "CMMS/EAM 또는 동등한 관리체계의 유지보수 데이터는 자산ID, failure code, 작업유형, 시작·종료시간, downtime, 사용부품, 원인·조치 등을 표준 taxonomy로 기록해야 KPI와 RCA가 재현 가능하다.",
+      "description": "CMMS/EAM 또는 동등한 관리체계의 유지보수 데이터는 자산ID, failure code, 작업유형, 시작·종료시간, downtime, 사용부품, 원인·조치 등을 표준 taxonomy로 기록해야 KPI와 RCA가 재현 가능하다."
+    },
+    {
+      "id": "maintenance_roles_competence_permit_restoration",
+      "anchor_id": "maintenance_roles_competence_permit_restoration",
+      "statement": "정비 작업은 운전·정비·계측·전기·안전·협력사 간 역할과 승인권한을 정의하고, 필요한 역량·교육, 작업허가·격리·LOTO, bypass 관리와 작업 후 기능확인·복구승인을 포함해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "역할",
+        "역량",
+        "작업허가",
+        "LOTO",
+        "복구승인"
+      ],
+      "core_terms": [
+        "roles responsibility",
+        "competence",
+        "permit to work",
+        "lockout tagout",
+        "restoration"
+      ],
+      "accepted_explanations": [
+        "사람·절차·설비 복구를 하나의 운영통제로 설명한다."
+      ],
+      "rejected_explanations": [
+        "숙련된 정비원이라면 작업허가와 기능확인 없이 현장에서 즉시 변경·복구해도 된다고 설명한다."
+      ],
+      "grading_notes": "운영단계의 실제 실행가능성과 안전성을 포함한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "정비 작업은 운전·정비·계측·전기·안전·협력사 간 역할과 승인권한을 정의하고, 필요한 역량·교육, 작업허가·격리·LOTO, bypass 관리와 작업 후 기능확인·복구승인을 포함해야 한다.",
+      "description": "정비 작업은 운전·정비·계측·전기·안전·협력사 간 역할과 승인권한을 정의하고, 필요한 역량·교육, 작업허가·격리·LOTO, bypass 관리와 작업 후 기능확인·복구승인을 포함해야 한다."
+    },
+    {
+      "id": "maintenance_configuration_backup_change_handoff",
+      "anchor_id": "maintenance_configuration_backup_change_handoff",
+      "statement": "제어시스템 정비 전후에는 현재 configuration과 backup, setpoint·logic·firmware·network 설정의 변경 여부를 확인하고, 변경이 발생하면 승인된 변경관리와 as-built 문서 갱신으로 handoff해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "Configuration",
+        "Backup",
+        "Setpoint",
+        "As-Built",
+        "변경관리"
+      ],
+      "core_terms": [
+        "configuration backup",
+        "as built",
+        "setpoint",
+        "logic change",
+        "change control"
+      ],
+      "accepted_explanations": [
+        "정비와 형상관리의 접점을 명확히 한다."
+      ],
+      "rejected_explanations": [
+        "정비 목적의 setpoint·logic 변경은 임시작업이므로 변경기록과 backup 확인이 필요 없다고 설명한다."
+      ],
+      "grading_notes": "상세 MOC 절차는 configuration Topic이 소유한다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "제어시스템 정비 전후에는 현재 configuration과 backup, setpoint·logic·firmware·network 설정의 변경 여부를 확인하고, 변경이 발생하면 승인된 변경관리와 as-built 문서 갱신으로 handoff해야 한다.",
+      "description": "제어시스템 정비 전후에는 현재 configuration과 backup, setpoint·logic·firmware·network 설정의 변경 여부를 확인하고, 변경이 발생하면 승인된 변경관리와 as-built 문서 갱신으로 handoff해야 한다."
+    },
+    {
+      "id": "om_continuous_improvement_pdca_lifecycle_cost",
+      "anchor_id": "om_continuous_improvement_pdca_lifecycle_cost",
+      "statement": "운영·유지보수 체계는 KPI, 고장이력, 교정 OOT, 점검결함, 예비품 소진, RCA 결과를 정기 review하여 정비전략·주기·재고·설계·교육을 개선하고, 신뢰성·가용도뿐 아니라 lifecycle cost와 생산·안전효과를 함께 평가하는 폐루프로 운영한다.",
+      "importance": "must",
+      "keywords": [
+        "PDCA",
+        "정기 Review",
+        "Lifecycle Cost",
+        "지속개선",
+        "폐루프"
+      ],
+      "core_terms": [
+        "continuous improvement",
+        "periodic review",
+        "lifecycle cost",
+        "feedback loop",
+        "maintenance optimization"
+      ],
+      "accepted_explanations": [
+        "여러 운영데이터를 관리정책 개선으로 환류한다."
+      ],
+      "rejected_explanations": [
+        "정비계획과 예비품 수준은 최초 설정 후 KPI가 좋아도 나빠도 변경하지 않는 것이 표준이라고 설명한다."
+      ],
+      "grading_notes": "Topic 전체를 닫는 management loop anchor다.",
+      "source_basis": "계측제어시스템 운영·유지보수 및 자산관리의 일반 공학 원칙",
+      "claim": "운영·유지보수 체계는 KPI, 고장이력, 교정 OOT, 점검결함, 예비품 소진, RCA 결과를 정기 review하여 정비전략·주기·재고·설계·교육을 개선하고, 신뢰성·가용도뿐 아니라 lifecycle cost와 생산·안전효과를 함께 평가하는 폐루프로 운영한다.",
+      "description": "운영·유지보수 체계는 KPI, 고장이력, 교정 OOT, 점검결함, 예비품 소진, RCA 결과를 정기 review하여 정비전략·주기·재고·설계·교육을 개선하고, 신뢰성·가용도뿐 아니라 lifecycle cost와 생산·안전효과를 함께 평가하는 폐루프로 운영한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "om_fatal_run_to_failure_for_all",
+      "claim": "모든 계측제어 자산은 고장 후 수리하는 Run-to-Failure가 항상 가장 경제적이므로 criticality나 예방정비를 고려할 필요가 없다.",
+      "correction": "정비전략은 자산 criticality, 고장영향, 상태와 비용을 기준으로 Corrective·Preventive·CBM·Predictive를 조합해야 한다.",
+      "wrong_claim": "모든 계측제어 자산은 고장 후 수리하는 Run-to-Failure가 항상 가장 경제적이므로 criticality나 예방정비를 고려할 필요가 없다.",
+      "correct_rule": "정비전략은 자산 criticality, 고장영향, 상태와 비용을 기준으로 Corrective·Preventive·CBM·Predictive를 조합해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "정비전략은 자산 criticality, 고장영향, 상태와 비용을 기준으로 Corrective·Preventive·CBM·Predictive를 조합해야 한다.",
+      "description": "모든 계측제어 자산은 고장 후 수리하는 Run-to-Failure가 항상 가장 경제적이므로 criticality나 예방정비를 고려할 필요가 없다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_price_only_criticality",
+      "claim": "정비 우선순위와 Critical Spare 여부는 장비 단가만으로 결정하면 된다.",
+      "correction": "안전·생산·품질 영향, 고장확률, 복구시간, 대체 가능성, lead time과 단종위험을 포함한 criticality/risk가 기준이 되어야 한다.",
+      "wrong_claim": "정비 우선순위와 Critical Spare 여부는 장비 단가만으로 결정하면 된다.",
+      "correct_rule": "안전·생산·품질 영향, 고장확률, 복구시간, 대체 가능성, lead time과 단종위험을 포함한 criticality/risk가 기준이 되어야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "안전·생산·품질 영향, 고장확률, 복구시간, 대체 가능성, lead time과 단종위험을 포함한 criticality/risk가 기준이 되어야 한다.",
+      "description": "정비 우선순위와 Critical Spare 여부는 장비 단가만으로 결정하면 된다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_calibration_equals_adjustment",
+      "claim": "교정은 계측기의 zero와 span을 조정하는 작업과 완전히 동일하다.",
+      "correction": "Calibration은 기준과 비교하여 오차와 적합성을 확인·기록하는 활동이며 조정은 필요 시 별도 수행될 수 있다.",
+      "wrong_claim": "교정은 계측기의 zero와 span을 조정하는 작업과 완전히 동일하다.",
+      "correct_rule": "Calibration은 기준과 비교하여 오차와 적합성을 확인·기록하는 활동이며 조정은 필요 시 별도 수행될 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Calibration은 기준과 비교하여 오차와 적합성을 확인·기록하는 활동이며 조정은 필요 시 별도 수행될 수 있다.",
+      "description": "교정은 계측기의 zero와 span을 조정하는 작업과 완전히 동일하다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_fixed_calibration_interval",
+      "claim": "모든 계측기는 설비조건과 이력에 관계없이 동일한 고정주기로 교정해야 하며 as-found 결과로 주기를 조정하면 안 된다.",
+      "correction": "교정주기는 중요도, drift 이력, 환경, 법규, 제조사 권고와 as-found 결과에 따라 위험기반으로 조정할 수 있다.",
+      "wrong_claim": "모든 계측기는 설비조건과 이력에 관계없이 동일한 고정주기로 교정해야 하며 as-found 결과로 주기를 조정하면 안 된다.",
+      "correct_rule": "교정주기는 중요도, drift 이력, 환경, 법규, 제조사 권고와 as-found 결과에 따라 위험기반으로 조정할 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "교정주기는 중요도, drift 이력, 환경, 법규, 제조사 권고와 as-found 결과에 따라 위험기반으로 조정할 수 있다.",
+      "description": "모든 계측기는 설비조건과 이력에 관계없이 동일한 고정주기로 교정해야 하며 as-found 결과로 주기를 조정하면 안 된다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_ignore_as_found_oot",
+      "claim": "교정 후 As-Left가 허용범위에 들어오면 이전 As-Found OOT와 과거 공정·품질 데이터 영향은 검토할 필요가 없다.",
+      "correction": "As-Found OOT는 영향기간과 관련 측정결과의 유효성에 대한 영향평가가 필요하다.",
+      "wrong_claim": "교정 후 As-Left가 허용범위에 들어오면 이전 As-Found OOT와 과거 공정·품질 데이터 영향은 검토할 필요가 없다.",
+      "correct_rule": "As-Found OOT는 영향기간과 관련 측정결과의 유효성에 대한 영향평가가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "As-Found OOT는 영향기간과 관련 측정결과의 유효성에 대한 영향평가가 필요하다.",
+      "description": "교정 후 As-Left가 허용범위에 들어오면 이전 As-Found OOT와 과거 공정·품질 데이터 영향은 검토할 필요가 없다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_visual_inspection_equals_function_test",
+      "claim": "외관점검이 정상인 계측 Loop는 기능시험이나 Loop Check 없이도 기능이 정상이라고 확정할 수 있다.",
+      "correction": "외관·환경 점검과 기능시험·Loop Check·알람/인터록 검증은 목적이 다르므로 필요한 검증을 별도로 수행해야 한다.",
+      "wrong_claim": "외관점검이 정상인 계측 Loop는 기능시험이나 Loop Check 없이도 기능이 정상이라고 확정할 수 있다.",
+      "correct_rule": "외관·환경 점검과 기능시험·Loop Check·알람/인터록 검증은 목적이 다르므로 필요한 검증을 별도로 수행해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "외관·환경 점검과 기능시험·Loop Check·알람/인터록 검증은 목적이 다르므로 필요한 검증을 별도로 수행해야 한다.",
+      "description": "외관점검이 정상인 계측 Loop는 기능시험이나 Loop Check 없이도 기능이 정상이라고 확정할 수 있다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_more_pm_always_better",
+      "claim": "예방정비 횟수를 늘릴수록 설비 신뢰성은 항상 향상되므로 정비주기는 가능한 한 짧게 해야 한다.",
+      "correction": "과잉정비는 비용·인적오류·초기고장을 늘릴 수 있어 고장이력, 상태와 risk를 근거로 적정 주기를 정해야 한다.",
+      "wrong_claim": "예방정비 횟수를 늘릴수록 설비 신뢰성은 항상 향상되므로 정비주기는 가능한 한 짧게 해야 한다.",
+      "correct_rule": "과잉정비는 비용·인적오류·초기고장을 늘릴 수 있어 고장이력, 상태와 risk를 근거로 적정 주기를 정해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "과잉정비는 비용·인적오류·초기고장을 늘릴 수 있어 고장이력, 상태와 risk를 근거로 적정 주기를 정해야 한다.",
+      "description": "예방정비 횟수를 늘릴수록 설비 신뢰성은 항상 향상되므로 정비주기는 가능한 한 짧게 해야 한다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_low_usage_zero_spares",
+      "claim": "사용빈도가 낮은 예비품은 lead time이나 고장영향과 관계없이 재고를 0으로 유지하는 것이 항상 최적이다.",
+      "correction": "Critical spare 재고는 수요빈도뿐 아니라 고장영향, lead time, 대체·수리 가능성, 단종위험과 재고비용을 함께 고려해야 한다.",
+      "wrong_claim": "사용빈도가 낮은 예비품은 lead time이나 고장영향과 관계없이 재고를 0으로 유지하는 것이 항상 최적이다.",
+      "correct_rule": "Critical spare 재고는 수요빈도뿐 아니라 고장영향, lead time, 대체·수리 가능성, 단종위험과 재고비용을 함께 고려해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Critical spare 재고는 수요빈도뿐 아니라 고장영향, lead time, 대체·수리 가능성, 단종위험과 재고비용을 함께 고려해야 한다.",
+      "description": "사용빈도가 낮은 예비품은 lead time이나 고장영향과 관계없이 재고를 0으로 유지하는 것이 항상 최적이다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_inventory_count_only",
+      "claim": "창고에 예비품 수량만 확보되어 있으면 shelf-life, 보관환경, firmware나 기능상태는 관리하지 않아도 된다.",
+      "correction": "예비품은 보관환경, shelf-life, 기능확인, firmware/license와 호환상태까지 관리해야 실제 사용 가능성을 확보할 수 있다.",
+      "wrong_claim": "창고에 예비품 수량만 확보되어 있으면 shelf-life, 보관환경, firmware나 기능상태는 관리하지 않아도 된다.",
+      "correct_rule": "예비품은 보관환경, shelf-life, 기능확인, firmware/license와 호환상태까지 관리해야 실제 사용 가능성을 확보할 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "예비품은 보관환경, shelf-life, 기능확인, firmware/license와 호환상태까지 관리해야 실제 사용 가능성을 확보할 수 있다.",
+      "description": "창고에 예비품 수량만 확보되어 있으면 shelf-life, 보관환경, firmware나 기능상태는 관리하지 않아도 된다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_uncontrolled_substitution",
+      "claim": "단종부품은 part number나 외형이 비슷한 대체품으로 시험이나 변경관리 없이 즉시 교체해도 된다.",
+      "correction": "대체품은 전원·I/O·통신·기능·안전·환경·software/firmware 호환성을 검증하고 승인된 변경관리와 시험을 거쳐야 한다.",
+      "wrong_claim": "단종부품은 part number나 외형이 비슷한 대체품으로 시험이나 변경관리 없이 즉시 교체해도 된다.",
+      "correct_rule": "대체품은 전원·I/O·통신·기능·안전·환경·software/firmware 호환성을 검증하고 승인된 변경관리와 시험을 거쳐야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "대체품은 전원·I/O·통신·기능·안전·환경·software/firmware 호환성을 검증하고 승인된 변경관리와 시험을 거쳐야 한다.",
+      "description": "단종부품은 part number나 외형이 비슷한 대체품으로 시험이나 변경관리 없이 즉시 교체해도 된다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_mtbf_alone_proves_availability",
+      "claim": "MTBF가 증가하면 MTTR과 정지형태를 보지 않아도 실제 운영가용도가 반드시 같은 비율로 좋아진다.",
+      "correction": "가용도는 고장간격뿐 아니라 복구시간과 계획정지·물류대기 등 정의된 downtime 구조에 영향을 받으므로 MTBF 단독으로 판단할 수 없다.",
+      "wrong_claim": "MTBF가 증가하면 MTTR과 정지형태를 보지 않아도 실제 운영가용도가 반드시 같은 비율로 좋아진다.",
+      "correct_rule": "가용도는 고장간격뿐 아니라 복구시간과 계획정지·물류대기 등 정의된 downtime 구조에 영향을 받으므로 MTBF 단독으로 판단할 수 없다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "가용도는 고장간격뿐 아니라 복구시간과 계획정지·물류대기 등 정의된 downtime 구조에 영향을 받으므로 MTBF 단독으로 판단할 수 없다.",
+      "description": "MTBF가 증가하면 MTTR과 정지형태를 보지 않아도 실제 운영가용도가 반드시 같은 비율로 좋아진다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_availability_formula_universal",
+      "claim": "A=MTBF/(MTBF+MTTR)은 계획정지, 물류대기, 행정지연을 포함한 모든 가용도 정의에 조건 없이 적용되는 범용식이다.",
+      "correction": "MTBF/(MTBF+MTTR)은 단순 수리 가능 2상태 모델의 고유가용도 대표식이며 운영가용도는 추가 downtime 요소와 정의를 포함할 수 있다.",
+      "wrong_claim": "A=MTBF/(MTBF+MTTR)은 계획정지, 물류대기, 행정지연을 포함한 모든 가용도 정의에 조건 없이 적용되는 범용식이다.",
+      "correct_rule": "MTBF/(MTBF+MTTR)은 단순 수리 가능 2상태 모델의 고유가용도 대표식이며 운영가용도는 추가 downtime 요소와 정의를 포함할 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "MTBF/(MTBF+MTTR)은 단순 수리 가능 2상태 모델의 고유가용도 대표식이며 운영가용도는 추가 downtime 요소와 정의를 포함할 수 있다.",
+      "description": "A=MTBF/(MTBF+MTTR)은 계획정지, 물류대기, 행정지연을 포함한 모든 가용도 정의에 조건 없이 적용되는 범용식이다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_mttr_hands_on_only_universal",
+      "claim": "MTTR은 모든 조직에서 공구를 사용하는 순수 수리시간만 뜻하므로 시작·종료와 대기시간의 정의가 필요 없다.",
+      "correction": "MTTR은 조직의 복구 프로세스 정의에 따라 진단·수리·시험·복구시간 범위가 달라질 수 있으므로 시간경계를 명시해야 한다.",
+      "wrong_claim": "MTTR은 모든 조직에서 공구를 사용하는 순수 수리시간만 뜻하므로 시작·종료와 대기시간의 정의가 필요 없다.",
+      "correct_rule": "MTTR은 조직의 복구 프로세스 정의에 따라 진단·수리·시험·복구시간 범위가 달라질 수 있으므로 시간경계를 명시해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "MTTR은 조직의 복구 프로세스 정의에 따라 진단·수리·시험·복구시간 범위가 달라질 수 있으므로 시간경계를 명시해야 한다.",
+      "description": "MTTR은 모든 조직에서 공구를 사용하는 순수 수리시간만 뜻하므로 시작·종료와 대기시간의 정의가 필요 없다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    },
+    {
+      "id": "om_fatal_single_kpi_optimization",
+      "claim": "유지보수 성과는 MTBF 같은 단일 KPI 하나만 최대화하면 안전·비용·생산 영향과 관계없이 최적이라고 판단할 수 있다.",
+      "correction": "KPI는 정의와 원자료를 감사하고 MTBF·MTTR·가용도·PM compliance·backlog·비용·안전 등 균형된 지표와 실제 결과를 함께 평가해야 한다.",
+      "wrong_claim": "유지보수 성과는 MTBF 같은 단일 KPI 하나만 최대화하면 안전·비용·생산 영향과 관계없이 최적이라고 판단할 수 있다.",
+      "correct_rule": "KPI는 정의와 원자료를 감사하고 MTBF·MTTR·가용도·PM compliance·backlog·비용·안전 등 균형된 지표와 실제 결과를 함께 평가해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "KPI는 정의와 원자료를 감사하고 MTBF·MTTR·가용도·PM compliance·backlog·비용·안전 등 균형된 지표와 실제 결과를 함께 평가해야 한다.",
+      "description": "유지보수 성과는 MTBF 같은 단일 KPI 하나만 최대화하면 안전·비용·생산 영향과 관계없이 최적이라고 판단할 수 있다.",
+      "grading_notes": "운영·유지보수 체계의 핵심 관리원칙을 반대로 설명하는 경우 C-layer semantic fatal 후보로 본다."
+    }
+  ],
+  "safe_expressions": [
+    "계측제어시스템 운영·유지보수는 자산대장과 시스템 경계를 먼저 확정하고 Tag, 위치, 기능, 제조사·모델, firmware·software, 중요도, 예비품 및 문서 연결정보를 기준정보로 관리해야 한다.",
+    "정비전략은 고장 후 수리하는 Corrective Maintenance, 시간·사용량 기반 Preventive Maintenance, 상태지표 기반 Condition-Based Maintenance, 데이터 모델을 활용하는 Predictive Maintenance를 자산 특성과 위험에 따라 조합한다.",
+    "정비 우선순위와 자원배분은 고장확률만이 아니라 안전·환경·생산·품질·규제·복구시간·대체 가능성 등의 고장영향을 함께 반영한 중요도·위험도 평가로 결정해야 한다.",
+    "정비계획은 자산별 작업내용, 주기 또는 상태기준, 책임자, 필요 공구·예비품, 안전조치, 정지창과 완료기준을 정의하며, 주기는 제조사 권고·법규·고장이력·환경·criticality와 상태추세를 근거로 조정한다.",
+    "정비 작업은 Work Order 또는 동등한 작업지시로 요청·우선순위·허가·수행·시험·복구·종결을 추적하고, 고장모드·원인·조치·사용부품·소요시간·as-found/as-left 결과를 이력으로 남겨 다음 계획에 환류해야 한다.",
+    "반복고장과 중대한 장애는 일관된 failure code와 원인분류를 사용해 Bad Actor를 식별하고, 필요 시 RCA를 수행하여 설계개선·주기조정·운전조건·교육·예비품 전략으로 환류한다.",
+    "검교정 프로그램은 측정기능의 요구 정확도·허용오차, 교정방법, 기준기, 추적성, 환경조건, 주기, 기록 및 합격기준을 정의하여 측정결과의 신뢰성을 유지해야 한다.",
+    "교정주기는 모든 계측기에 동일하게 적용하지 않고 측정 중요도, 안정성, drift 이력, 사용빈도, 환경, 제조사 권고, 법규 및 as-found 결과를 근거로 단축·유지·연장한다.",
+    "교정에서는 조정 전 As-Found 값과 조정·교정 후 As-Left 값을 구분해 기록하고, 허용오차를 벗어난 Out-of-Tolerance가 발견되면 영향기간과 관련 공정·품질 데이터의 유효성을 평가해야 한다.",
+    "교정용 기준기는 피교정기의 요구 불확도와 허용오차에 적합한 성능을 가져야 하며, 유효한 교정상태·식별·환경조건·보관·사용이력과 상위표준에 대한 추적성을 관리해야 한다.",
+    "점검 프로그램은 외관·전원·배선·접지·배관·누설·환경상태 같은 Routine Inspection과 기능시험, Loop Check, 인터록·알람 시험 등 기능검증을 목적과 위험에 따라 구분해 계획한다.",
+    "점검에서 발견된 결함은 안전·생산·품질 영향과 열화속도에 따라 우선순위를 정하고, 즉시조치·계획정비·운전제한·임시대책을 결정한 뒤 Work Order와 재시험으로 종결을 확인해야 한다.",
+    "정비 또는 점검을 계획일에 수행하지 못해 Deferred Maintenance가 발생하면 단순 연기가 아니라 위험평가, 임시보호조치, 승인, 새로운 기한과 추적책임을 명확히 해야 한다.",
+    "예비품은 사용빈도보다 자산 criticality, 고장 시 생산·안전 영향, 조달 Lead Time, 수리 가능성, 대체 가능성, 단종위험을 고려해 Critical Spare와 일반 Spare를 분류한다.",
+    "예비품 재고수준은 예상수요, 고장률, Lead Time, 최소 주문량, 수리 turnaround, 공용화 가능성, 서비스 수준과 재고비용을 고려해 min/max, reorder point 또는 동등한 보충정책으로 관리한다.",
+    "보유 예비품은 단순 수량뿐 아니라 보관환경, 방습·방진, 배터리·전해콘덴서 등 shelf-life, 정기 기능확인, firmware·license 상태와 선입선출·rotation을 관리해야 실제 고장 시 사용 가능하다.",
+    "단종·노후화 부품은 Last-Time Buy, 호환 대체품, repair service, redesign과 migration 대안을 검토하되, 대체품 적용은 I/O·통신·전원·기능·안전·환경·software/firmware 호환성을 확인하고 변경관리와 시험을 거쳐야 한다.",
+    "MTBF는 수리 가능한 자산에서 운전시간을 해당 기간의 고장횟수로 나눈 평균 고장간 운전시간의 대표 지표이며, 고장 정의와 관찰기간·운전시간 경계를 일관되게 해야 비교가 의미 있다.",
+    "MTTR은 고장 후 복구에 소요되는 평균시간을 나타내며 조직의 정의에 따라 진단·수리·시험·복구 승인 시간을 포함할 수 있으므로 시작·종료 기준과 대기시간 포함 여부를 명확히 해야 한다.",
+    "단순한 수리 가능 2상태 모델에서 고유가용도는 A_i=MTBF/(MTBF+MTTR)로 표현할 수 있지만, 실제 운영가용도에는 예방정비·물류대기·행정지연·계획정지 등 추가 시간요소가 포함될 수 있어 지표 정의를 구분해야 한다.",
+    "유지보수 관리 KPI는 MTBF·MTTR·가용도 외에도 PM Compliance, Schedule Compliance, Maintenance Backlog, 긴급정비 비율 등을 사용할 수 있으며, 각 지표는 목표·분모·제외조건과 데이터 수집규칙을 먼저 정의해야 한다.",
+    "단일 KPI를 목표로 최적화하면 고장 미등록, 정비 조기종결, 과잉 예방정비 같은 왜곡이 생길 수 있으므로 신뢰성·복구성·비용·안전·생산영향을 균형 있게 보고 원자료와 정의를 감사해야 한다.",
+    "CMMS/EAM 또는 동등한 관리체계의 유지보수 데이터는 자산ID, failure code, 작업유형, 시작·종료시간, downtime, 사용부품, 원인·조치 등을 표준 taxonomy로 기록해야 KPI와 RCA가 재현 가능하다.",
+    "정비 작업은 운전·정비·계측·전기·안전·협력사 간 역할과 승인권한을 정의하고, 필요한 역량·교육, 작업허가·격리·LOTO, bypass 관리와 작업 후 기능확인·복구승인을 포함해야 한다.",
+    "제어시스템 정비 전후에는 현재 configuration과 backup, setpoint·logic·firmware·network 설정의 변경 여부를 확인하고, 변경이 발생하면 승인된 변경관리와 as-built 문서 갱신으로 handoff해야 한다.",
+    "운영·유지보수 체계는 KPI, 고장이력, 교정 OOT, 점검결함, 예비품 소진, RCA 결과를 정기 review하여 정비전략·주기·재고·설계·교육을 개선하고, 신뢰성·가용도뿐 아니라 lifecycle cost와 생산·안전효과를 함께 평가하는 폐루프로 운영한다."
+  ],
+  "revision_notes": [
+    "IC-2027-W-4-6의 제어시스템 운영·관리 범위를 lifecycle O&M management Topic으로 구성했다.",
+    "개별 센서 교정원리·밸브 진단 알고리즘과 구분하고 검교정·점검 프로그램의 관리정책을 소유한다.",
+    "예비품 criticality·재고정책·obsolescence와 MTBF·MTTR·availability·process KPI를 하나의 폐루프로 연결했다.",
+    "STEP 0 narrow ownership audit 결과 기존 Topic과 true duplicate가 없음을 근거로 독립 Topic으로 작성했다.",
+    "historical frequency는 근거가 없어 사용하지 않았다."
+  ],
+  "topic_label": "계측제어 운영·유지보수 관리",
+  "core_facts": [
+    "계측제어시스템 운영·유지보수는 자산대장과 시스템 경계를 먼저 확정하고 Tag, 위치, 기능, 제조사·모델, firmware·software, 중요도, 예비품 및 문서 연결정보를 기준정보로 관리해야 한다.",
+    "정비전략은 고장 후 수리하는 Corrective Maintenance, 시간·사용량 기반 Preventive Maintenance, 상태지표 기반 Condition-Based Maintenance, 데이터 모델을 활용하는 Predictive Maintenance를 자산 특성과 위험에 따라 조합한다.",
+    "정비 우선순위와 자원배분은 고장확률만이 아니라 안전·환경·생산·품질·규제·복구시간·대체 가능성 등의 고장영향을 함께 반영한 중요도·위험도 평가로 결정해야 한다.",
+    "정비계획은 자산별 작업내용, 주기 또는 상태기준, 책임자, 필요 공구·예비품, 안전조치, 정지창과 완료기준을 정의하며, 주기는 제조사 권고·법규·고장이력·환경·criticality와 상태추세를 근거로 조정한다.",
+    "정비 작업은 Work Order 또는 동등한 작업지시로 요청·우선순위·허가·수행·시험·복구·종결을 추적하고, 고장모드·원인·조치·사용부품·소요시간·as-found/as-left 결과를 이력으로 남겨 다음 계획에 환류해야 한다.",
+    "반복고장과 중대한 장애는 일관된 failure code와 원인분류를 사용해 Bad Actor를 식별하고, 필요 시 RCA를 수행하여 설계개선·주기조정·운전조건·교육·예비품 전략으로 환류한다.",
+    "검교정 프로그램은 측정기능의 요구 정확도·허용오차, 교정방법, 기준기, 추적성, 환경조건, 주기, 기록 및 합격기준을 정의하여 측정결과의 신뢰성을 유지해야 한다.",
+    "교정주기는 모든 계측기에 동일하게 적용하지 않고 측정 중요도, 안정성, drift 이력, 사용빈도, 환경, 제조사 권고, 법규 및 as-found 결과를 근거로 단축·유지·연장한다.",
+    "교정에서는 조정 전 As-Found 값과 조정·교정 후 As-Left 값을 구분해 기록하고, 허용오차를 벗어난 Out-of-Tolerance가 발견되면 영향기간과 관련 공정·품질 데이터의 유효성을 평가해야 한다.",
+    "교정용 기준기는 피교정기의 요구 불확도와 허용오차에 적합한 성능을 가져야 하며, 유효한 교정상태·식별·환경조건·보관·사용이력과 상위표준에 대한 추적성을 관리해야 한다.",
+    "점검 프로그램은 외관·전원·배선·접지·배관·누설·환경상태 같은 Routine Inspection과 기능시험, Loop Check, 인터록·알람 시험 등 기능검증을 목적과 위험에 따라 구분해 계획한다.",
+    "점검에서 발견된 결함은 안전·생산·품질 영향과 열화속도에 따라 우선순위를 정하고, 즉시조치·계획정비·운전제한·임시대책을 결정한 뒤 Work Order와 재시험으로 종결을 확인해야 한다.",
+    "정비 또는 점검을 계획일에 수행하지 못해 Deferred Maintenance가 발생하면 단순 연기가 아니라 위험평가, 임시보호조치, 승인, 새로운 기한과 추적책임을 명확히 해야 한다.",
+    "예비품은 사용빈도보다 자산 criticality, 고장 시 생산·안전 영향, 조달 Lead Time, 수리 가능성, 대체 가능성, 단종위험을 고려해 Critical Spare와 일반 Spare를 분류한다.",
+    "예비품 재고수준은 예상수요, 고장률, Lead Time, 최소 주문량, 수리 turnaround, 공용화 가능성, 서비스 수준과 재고비용을 고려해 min/max, reorder point 또는 동등한 보충정책으로 관리한다.",
+    "보유 예비품은 단순 수량뿐 아니라 보관환경, 방습·방진, 배터리·전해콘덴서 등 shelf-life, 정기 기능확인, firmware·license 상태와 선입선출·rotation을 관리해야 실제 고장 시 사용 가능하다.",
+    "단종·노후화 부품은 Last-Time Buy, 호환 대체품, repair service, redesign과 migration 대안을 검토하되, 대체품 적용은 I/O·통신·전원·기능·안전·환경·software/firmware 호환성을 확인하고 변경관리와 시험을 거쳐야 한다.",
+    "MTBF는 수리 가능한 자산에서 운전시간을 해당 기간의 고장횟수로 나눈 평균 고장간 운전시간의 대표 지표이며, 고장 정의와 관찰기간·운전시간 경계를 일관되게 해야 비교가 의미 있다.",
+    "MTTR은 고장 후 복구에 소요되는 평균시간을 나타내며 조직의 정의에 따라 진단·수리·시험·복구 승인 시간을 포함할 수 있으므로 시작·종료 기준과 대기시간 포함 여부를 명확히 해야 한다.",
+    "단순한 수리 가능 2상태 모델에서 고유가용도는 A_i=MTBF/(MTBF+MTTR)로 표현할 수 있지만, 실제 운영가용도에는 예방정비·물류대기·행정지연·계획정지 등 추가 시간요소가 포함될 수 있어 지표 정의를 구분해야 한다.",
+    "유지보수 관리 KPI는 MTBF·MTTR·가용도 외에도 PM Compliance, Schedule Compliance, Maintenance Backlog, 긴급정비 비율 등을 사용할 수 있으며, 각 지표는 목표·분모·제외조건과 데이터 수집규칙을 먼저 정의해야 한다.",
+    "단일 KPI를 목표로 최적화하면 고장 미등록, 정비 조기종결, 과잉 예방정비 같은 왜곡이 생길 수 있으므로 신뢰성·복구성·비용·안전·생산영향을 균형 있게 보고 원자료와 정의를 감사해야 한다.",
+    "CMMS/EAM 또는 동등한 관리체계의 유지보수 데이터는 자산ID, failure code, 작업유형, 시작·종료시간, downtime, 사용부품, 원인·조치 등을 표준 taxonomy로 기록해야 KPI와 RCA가 재현 가능하다.",
+    "정비 작업은 운전·정비·계측·전기·안전·협력사 간 역할과 승인권한을 정의하고, 필요한 역량·교육, 작업허가·격리·LOTO, bypass 관리와 작업 후 기능확인·복구승인을 포함해야 한다.",
+    "제어시스템 정비 전후에는 현재 configuration과 backup, setpoint·logic·firmware·network 설정의 변경 여부를 확인하고, 변경이 발생하면 승인된 변경관리와 as-built 문서 갱신으로 handoff해야 한다.",
+    "운영·유지보수 체계는 KPI, 고장이력, 교정 OOT, 점검결함, 예비품 소진, RCA 결과를 정기 review하여 정비전략·주기·재고·설계·교육을 개선하고, 신뢰성·가용도뿐 아니라 lifecycle cost와 생산·안전효과를 함께 평가하는 폐루프로 운영한다."
+  ]
+}
