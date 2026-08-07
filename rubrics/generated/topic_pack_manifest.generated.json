@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-07T12:15:17Z-generated-topic-pack-manifest",
+  "version": "2026-08-07T15:18:27Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 54,
+  "topic_count": 69,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -37,6 +37,16 @@
       ]
     },
     {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
       "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
       "files": [
         "fact_anchor.json",
@@ -48,6 +58,16 @@
     },
     {
       "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -197,6 +217,16 @@
       ]
     },
     {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
       "files": [
         "fact_anchor.json",
@@ -208,6 +238,16 @@
     },
     {
       "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -237,7 +277,27 @@
       ]
     },
     {
+      "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
       "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -268,6 +328,66 @@
     },
     {
       "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -308,6 +428,16 @@
     },
     {
       "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -378,6 +508,16 @@
     },
     {
       "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -468,6 +608,16 @@
     },
     {
       "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

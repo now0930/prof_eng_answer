@@ -372,6 +372,23 @@ echo "----- host regression: pid piping instrumentation diagram symbols tags loo
 python3 -B scripts/test_pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative.py
 
 echo "----- host regression: plan a requirement coverage regressions -----"
+# Parallel Topic expansion focused regressions (15)
+python3 -B scripts/test_instrumentation_power_grounding_shielding_ups_ground_loop_emc_topic.py
+python3 -B scripts/test_instrumentation_installation_wiring_impulse_tubing_inspection_codes_topic.py
+python3 -B scripts/test_instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification_topic.py
+python3 -B scripts/test_control_hardware_lifecycle_panel_architecture_component_selection_production_verification_topic.py
+python3 -B scripts/test_electronics_error_noise_drift_tolerance_aging_power_mitigation_topic.py
+python3 -B tests/test_hazardous_area_explosion_protection_intrinsic_safety_equipment_selection_topic_pack.py
+python3 -B tests/test_instrumentation_system_design_basis_codes_standards_specification_deviation_management_topic_pack.py
+python3 -B tests/test_pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error_topic_pack.py
+python3 -B tests/test_speed_rotation_measurement_encoder_proximity_tachometer_selection_error_topic_pack.py
+python3 -B tests/test_humidity_measurement_capacitive_resistive_dew_point_selection_compensation_topic_pack.py
+python3 -B scripts/test_optical_laser_photoelectric_noncontact_measurement_topic.py
+python3 -B scripts/test_control_system_operations_maintenance_calibration_inspection_spares_kpi.py
+python3 -B scripts/test_instrumentation_project_management_basic_design_cost_schedule_documents_acceptance.py
+python3 -B scripts/test_instrumentation_production_management_planning_quality_cost_resources.py
+python3 -B scripts/test_industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread.py
+
 python3 -B scripts/test_plan_a_requirement_coverage_regressions.py
 
 echo "----- host regression: plan b semantic layer ownership regressions -----"

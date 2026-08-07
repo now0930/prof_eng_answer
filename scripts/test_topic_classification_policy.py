@@ -45,13 +45,22 @@ APPLICATION_TOPICS = {
     "control_valve_sizing_cv_kv_reynolds_liquid_selection",
     "control_valve_types_globe_rotary_body_actuator_selection",
     "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+    "electronics_error_noise_drift_tolerance_aging_power_mitigation",
     "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+    "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+    "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+    "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+    "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+    "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
     "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+    "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
     "passive_sensor_resistive_capacitive_inductive_transduction",
     "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+    "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
     "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
     "rtd_temperature_sensor_principle_pt100_wiring_compensation",
     "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+    "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
     "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
     "temperature_measurement_error_heat_transfer",
     "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
@@ -61,12 +70,18 @@ APPLICATION_TOPICS = {
 
 DESIGN_TOPICS = {
     "configuration_change_release_backup_rollback_migration_obsolescence_management",
+    "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
     "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
     "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+    "control_system_operations_maintenance_calibration_inspection_spares_kpi",
     "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+    "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
     "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
     "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
     "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+    "instrumentation_production_management_planning_quality_cost_resources",
+    "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+    "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
     "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
     "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
 }
@@ -79,8 +94,8 @@ ALLOWED_SELECTION_IMPORTANCE = {
 
 EXPECTED_DIFFICULTY_COUNTS = {
     "THEORY_CORE": 19,
-    "FIELD_APPLICATION": 26,
-    "DESIGN_EVALUATION": 9,
+    "FIELD_APPLICATION": 35,
+    "DESIGN_EVALUATION": 15,
 }
 
 
@@ -101,7 +116,7 @@ def main() -> None:
         | DESIGN_TOPICS
     )
 
-    assert len(actual_topics) == 54
+    assert len(actual_topics) == 69
     assert actual_topics == classified_topics
 
     assert not (THEORY_TOPICS & APPLICATION_TOPICS)
