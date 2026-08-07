@@ -1,0 +1,264 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+  "title_ko": "광전·레이저 비접촉 측정의 검출원리, ToF·삼각측량 알고리즘 및 오차·선정",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "광학식 또는 레이저 비접촉 측정의 원리와 특징을 설명하시오.",
+      "intent": "광학 비접촉 측정의 전체 측정사슬과 주요 방식의 차이를 설명한다.",
+      "required_anchor_ids": [
+        "optical_noncontact_measurement_chain",
+        "photoelectric_conversion_principle",
+        "optical_direct_tof_round_trip",
+        "laser_triangulation_principle",
+        "optical_method_selection_tradeoff"
+      ]
+    },
+    {
+      "pattern": "광전식 센서의 투과형, 미러반사형, 확산반사형을 비교하시오.",
+      "intent": "세 광전 검출방식의 광로와 대상·배경 의존성을 비교한다.",
+      "required_anchor_ids": [
+        "photoelectric_conversion_principle",
+        "photoelectric_through_beam_mode",
+        "photoelectric_retroreflective_mode",
+        "photoelectric_diffuse_reflective_mode",
+        "photoelectric_intensity_boundary"
+      ]
+    },
+    {
+      "pattern": "레이저 ToF 거리측정 원리와 거리식을 설명하시오.",
+      "intent": "Direct ToF의 왕복시간과 거리식을 설명한다.",
+      "required_anchor_ids": [
+        "optical_direct_tof_round_trip",
+        "optical_direct_tof_distance_equation",
+        "tof_timing_jitter_resolution",
+        "detector_saturation_dynamic_range"
+      ]
+    },
+    {
+      "pattern": "Direct ToF와 Indirect ToF를 비교하고 iToF의 거리 모호성을 설명하시오.",
+      "intent": "펄스 시간계측과 위상기반 추정을 구분하고 위상래핑 한계를 설명한다.",
+      "required_anchor_ids": [
+        "optical_direct_tof_round_trip",
+        "optical_direct_tof_distance_equation",
+        "optical_indirect_tof_phase_principle",
+        "optical_itof_phase_ambiguity"
+      ]
+    },
+    {
+      "pattern": "레이저 삼각측량 센서의 측정원리와 보정방법을 설명하시오.",
+      "intent": "삼각측량 기하와 검출기 spot 위치, 장치 보정을 설명한다.",
+      "required_anchor_ids": [
+        "laser_triangulation_principle",
+        "laser_triangulation_detector_coordinate",
+        "laser_triangulation_calibration",
+        "triangulation_range_resolution_tradeoff"
+      ]
+    },
+    {
+      "pattern": "광학 비접촉 측정의 오차요인과 대책을 설명하시오.",
+      "intent": "표면·주변광·speckle·정렬·SNR·다중경로 오차와 대책을 연결한다.",
+      "required_anchor_ids": [
+        "surface_reflectivity_color_effect",
+        "specular_transparent_surface_error",
+        "ambient_light_filtering",
+        "laser_speckle_effect",
+        "alignment_occlusion_geometry",
+        "detector_saturation_dynamic_range",
+        "multipath_mixed_pixel_error"
+      ]
+    },
+    {
+      "pattern": "광학 ToF의 측정 정확도에 영향을 주는 요소를 설명하시오.",
+      "intent": "timing, threshold, SNR, multipath와 calibration을 거리 불확도로 연결한다.",
+      "required_anchor_ids": [
+        "tof_timing_jitter_resolution",
+        "detector_saturation_dynamic_range",
+        "multipath_mixed_pixel_error",
+        "calibration_reference_traceability",
+        "accuracy_resolution_repeatability_boundary"
+      ]
+    },
+    {
+      "pattern": "투명체나 고광택 대상에서 레이저 측정 오류가 발생하는 원인과 대책을 설명하시오.",
+      "intent": "정반사·투과·다중반사·SNR과 설치 및 신호처리 대책을 설명한다.",
+      "required_anchor_ids": [
+        "surface_reflectivity_color_effect",
+        "specular_transparent_surface_error",
+        "ambient_light_filtering",
+        "alignment_occlusion_geometry",
+        "detector_saturation_dynamic_range"
+      ]
+    },
+    {
+      "pattern": "광학 비접촉 센서의 선정기준을 제시하시오.",
+      "intent": "측정목적, range, resolution, speed, target surface, ambient, safety, cost로 방식을 선정한다.",
+      "required_anchor_ids": [
+        "photoelectric_intensity_boundary",
+        "triangulation_range_resolution_tradeoff",
+        "surface_reflectivity_color_effect",
+        "wavelength_material_selection",
+        "accuracy_resolution_repeatability_boundary",
+        "optical_method_selection_tradeoff"
+      ]
+    },
+    {
+      "pattern": "비접촉 거리측정에서 초음파 방식과 달리 광학·레이저 방식에서 고려할 핵심 원리를 설명하시오.",
+      "intent": "광속 기반 ToF, 광학 반사특성, 삼각측량 기하와 광학 고유 오차를 설명한다.",
+      "required_anchor_ids": [
+        "optical_direct_tof_distance_equation",
+        "laser_triangulation_principle",
+        "surface_reflectivity_color_effect",
+        "laser_speckle_effect",
+        "tof_timing_jitter_resolution"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. 정의와 측정사슬",
+      "intent": "광학 비접촉 계측의 발광-대상-수광-전기변환-추정 구조를 제시한다.",
+      "anchor_refs": [
+        "optical_noncontact_measurement_chain",
+        "photoelectric_conversion_principle"
+      ]
+    },
+    {
+      "section": "2. 광전식 존재검출",
+      "intent": "투과형·미러반사형·확산반사형과 수광세기 해석 경계를 설명한다.",
+      "anchor_refs": [
+        "photoelectric_through_beam_mode",
+        "photoelectric_retroreflective_mode",
+        "photoelectric_diffuse_reflective_mode",
+        "photoelectric_intensity_boundary"
+      ]
+    },
+    {
+      "section": "3. Optical ToF",
+      "intent": "Direct ToF와 iToF의 시간·위상 알고리즘과 거리 모호성을 설명한다.",
+      "anchor_refs": [
+        "optical_direct_tof_round_trip",
+        "optical_direct_tof_distance_equation",
+        "optical_indirect_tof_phase_principle",
+        "optical_itof_phase_ambiguity",
+        "tof_timing_jitter_resolution"
+      ]
+    },
+    {
+      "section": "4. Laser triangulation",
+      "intent": "기준선·spot 위치·검출기 좌표·장치보정과 range-resolution trade-off를 설명한다.",
+      "anchor_refs": [
+        "laser_triangulation_principle",
+        "laser_triangulation_detector_coordinate",
+        "laser_triangulation_calibration",
+        "triangulation_range_resolution_tradeoff"
+      ]
+    },
+    {
+      "section": "5. 대상 표면과 광학환경",
+      "intent": "반사율·재질·정반사·투명체·주변광·speckle 오차를 설명한다.",
+      "anchor_refs": [
+        "surface_reflectivity_color_effect",
+        "specular_transparent_surface_error",
+        "ambient_light_filtering",
+        "laser_speckle_effect",
+        "wavelength_material_selection"
+      ]
+    },
+    {
+      "section": "6. 설치와 신호품질",
+      "intent": "정렬·occlusion, 포화·SNR, multipath를 현장오차로 설명한다.",
+      "anchor_refs": [
+        "alignment_occlusion_geometry",
+        "detector_saturation_dynamic_range",
+        "multipath_mixed_pixel_error"
+      ]
+    },
+    {
+      "section": "7. 교정과 성능지표",
+      "intent": "zero·scale·기하보정과 accuracy·resolution·repeatability를 구분한다.",
+      "anchor_refs": [
+        "calibration_reference_traceability",
+        "accuracy_resolution_repeatability_boundary"
+      ]
+    },
+    {
+      "section": "8. 방식 선정",
+      "intent": "범위·분해능·속도·표면·환경·안전·비용을 종합하여 방식을 선정한다.",
+      "anchor_refs": [
+        "optical_method_selection_tradeoff"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "광전식 존재검출과 절대거리 측정 알고리즘을 구분한다.",
+    "반사형 Direct ToF에서 d=c·Δt/2와 2의 왕복 의미를 정확히 설명한다.",
+    "iToF의 위상지연 식과 2π phase wrapping에 따른 비모호 거리 한계를 설명한다.",
+    "laser triangulation을 ToF가 아닌 기준선·투사각·spot 위치의 기하문제로 설명한다.",
+    "삼각측량 거리변환이 실제 광학계 보정에 의존함을 설명한다.",
+    "반사율·색상·재질·파장과 SNR의 관계를 제시한다.",
+    "고광택·투명체에서 정반사·투과·다중반사 오차를 설명한다.",
+    "주변광, speckle, 정렬, occlusion, 포화, multipath를 구체적 오차 메커니즘으로 연결한다.",
+    "accuracy·resolution·repeatability를 구분한다.",
+    "측정범위·분해능·응답속도·표면·환경·안전·비용으로 센서방식을 선정한다."
+  ],
+  "common_missing_points": [
+    "레이저라는 키워드만 제시하고 광전변환 또는 거리 알고리즘을 설명하지 않는다.",
+    "투과형·미러반사형·확산반사형을 모두 거리측정 방식으로 혼동한다.",
+    "Direct ToF 거리식에서 왕복경로의 1/2를 누락한다.",
+    "광학 ToF에 음속을 적용한다.",
+    "iToF의 phase wrapping과 비모호 거리 한계를 생략한다.",
+    "삼각측량을 비행시간 방식으로 설명한다.",
+    "삼각측량의 detector spot 위치와 calibration을 생략한다.",
+    "대상 반사율·표면각·투명도·주변광 영향을 생략한다.",
+    "분해능과 정확도를 같은 의미로 사용한다.",
+    "비접촉이므로 교정과 설치오차가 없다고 단정한다."
+  ],
+  "routing_aliases": [
+    "광학식 비접촉 측정",
+    "광학 비접촉 센서",
+    "광전식 센서",
+    "photoelectric sensor",
+    "laser noncontact measurement",
+    "레이저 비접촉 측정",
+    "optical time of flight",
+    "optical ToF sensor",
+    "laser ToF sensor",
+    "Direct ToF",
+    "Indirect ToF",
+    "iToF distance measurement",
+    "레이저 삼각측량",
+    "laser triangulation sensor",
+    "triangulation displacement sensor",
+    "광학 거리 센서",
+    "비접촉 거리 측정",
+    "광센서 측정원리"
+  ],
+  "routing_field_points": [
+    "투과형·미러반사형·확산반사형 광전센서의 검출원리",
+    "광전 검출과 절대거리 측정 알고리즘의 경계",
+    "반사형 Direct ToF의 왕복 비행시간과 d=c·Δt/2",
+    "Indirect ToF의 위상지연과 비모호 거리",
+    "레이저 삼각측량의 기준선·투사각·spot 위치",
+    "PSD·CCD·CMOS 검출기 좌표와 거리·변위 변환",
+    "삼각측량 장치별 기하보정",
+    "대상 반사율·색상·재질·파장의 영향",
+    "거울면·투명체의 정반사·투과·다중반사",
+    "주변광 필터링·동기검파·시간게이팅",
+    "laser speckle과 centroid 변동",
+    "정렬·시야각·occlusion·설치거리",
+    "ToF timing resolution·jitter·pulse width",
+    "수광기 saturation·dynamic range·SNR",
+    "multipath·mixed-pixel 거리 오차",
+    "zero·scale·linearity·기하 calibration",
+    "accuracy·resolution·repeatability 구분",
+    "범위·분해능·속도·표면·환경·안전·비용에 따른 방식 선정"
+  ],
+  "revision_notes": [
+    "광학식 비접촉 측정의 잔여 출제범위를 독립 Topic으로 구성했다.",
+    "routing alias는 광학·광전·laser ToF·triangulation의 구체 표현으로 한정하고 bare 'laser' 같은 과도한 generic alias는 사용하지 않았다.",
+    "recommended_outline의 anchor_refs 합집합이 모든 Fact Anchor를 포함하도록 구성했다.",
+    "historical frequency는 사용하지 않았다."
+  ]
+}
