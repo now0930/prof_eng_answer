@@ -1,0 +1,364 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+  "title": "회전속도 계측의 원리, 선정 및 오차 — Encoder·Proximity·Tachometer",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_aliases": [
+      "회전속도 계측 엔코더 근접센서 타코미터",
+      "회전수 측정 센서 선정 오차",
+      "엔코더 회전속도 측정",
+      "인코더 PPR 회전속도",
+      "회전속도 pulse frequency rpm",
+      "rotational speed measurement sensor",
+      "speed rotation measurement encoder proximity tachometer",
+      "incremental encoder speed direction",
+      "absolute encoder speed measurement",
+      "quadrature encoder A B Z",
+      "encoder PPR CPR resolution",
+      "pulse frequency rpm calculation",
+      "gear tooth proximity speed sensor",
+      "inductive proximity rotation speed",
+      "magnetic pickup speed measurement",
+      "tachometer tachogenerator speed sensor",
+      "DC tachogenerator speed voltage",
+      "회전속도 센서 air gap 오차"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "n = 60f/N_eff에서 N_eff를 먼저 정의한다.",
+      "Encoder A/B/Z와 incremental/absolute를 한 문단으로 구분한다.",
+      "Low-speed count/period trade-off를 설명한다.",
+      "Proximity의 air gap과 gear-tooth event 수를 확인한다.",
+      "Tachogenerator의 V-Kn 관계와 polarity를 설명한다."
+    ],
+    "reason": "PPR, pulse, direction, frequency, air gap 같은 단어는 정상설명과 오답문장 모두에 등장하므로 deterministic keyword Fatal을 사용하지 않는다."
+  },
+  "llm_profile": {
+    "enabled": true,
+    "display_name": "회전속도 계측의 원리, 선정 및 오차 — Encoder·Proximity·Tachometer",
+    "difficulty": "FIELD_APPLICATION",
+    "candidate_extraction": {
+      "enabled": false,
+      "rules": [],
+      "reason": "속도식의 N_eff/PPR 정의, quadrature lead/lag, proximity target 조건과 tachogenerator polarity는 문맥과 방향을 함께 해석해야 한다."
+    },
+    "truth_schema": [
+      "회전속도는 회전수, 각속도 또는 pulse frequency로 표현할 수 있다. 회전속도 n[rpm]과 각속도 ω[rad/s]의 관계는 ω = 2πn/60이며, pulse 방식에서는 1회전당 유효 count 수를 확인해야 한다.",
+      "회전당 유효 count 수를 N_eff, 측정 pulse frequency를 f[Hz]라 하면 n[rpm] = 60f/N_eff로 계산한다. N_eff는 encoder PPR뿐 아니라 edge counting과 x1/x2/x4 decoding 정의를 반영해야 한다.",
+      "고정 측정창 Δt 동안 m개의 유효 count를 세면 n = 60m/(N_eff·Δt)로 계산할 수 있다. 낮은 속도에서는 한 count가 만드는 속도 step이 커져 quantization 또는 resolution error가 증가할 수 있다.",
+      "저속에서는 연속 유효 pulse 사이의 시간 T_c를 측정하여 n = 60/(N_eff·T_c)로 계산하는 reciprocal/period 방식이 fixed-window count 방식보다 유리할 수 있다. 단, timer resolution과 jitter의 영향을 검토해야 한다.",
+      "Incremental rotary encoder는 optical 또는 magnetic pattern의 회전에 따라 일정한 pulse train을 발생시키며 pulse 수 또는 주파수로 상대 위치와 속도를 계산한다. 전원이 제거되면 누적 count 상태는 controller가 별도 보존하지 않는 한 절대위치를 직접 제공하지 않는다.",
+      "Quadrature incremental encoder는 A와 B 두 channel을 약 90 electrical degree 위상차로 출력하며 어느 channel이 선행하는지로 회전방향을 판별한다. x1/x2/x4 decoding에 따라 유효 count/rev가 달라질 수 있다.",
+      "Incremental encoder의 Z 또는 index channel은 일반적으로 1회전당 기준 pulse를 제공하여 homing, revolution reference 또는 count verification에 사용할 수 있다. Z pulse만으로 다회전 absolute position을 제공하는 것은 아니다.",
+      "Absolute encoder는 각 angular position에 대응하는 고유 digital word를 출력한다. 속도는 연속 position sample의 변화량과 sample interval로 계산할 수 있으며 resolution, update rate, communication latency를 함께 고려한다.",
+      "Encoder resolution은 PPR, CPR 또는 bit 수로 표현될 수 있지만 제조사와 controller가 PPR/CPR를 정의하는 방식이 다를 수 있다. 따라서 catalog의 cycle/pulse 정의와 controller의 edge-decoding mode를 확인해 N_eff를 확정해야 한다.",
+      "Encoder와 receiving counter/PLC에는 최대 output/input frequency가 있으므로 최고 회전속도와 N_eff의 곱이 허용 주파수를 넘지 않도록 선정한다. 해상도를 높이면 동일 속도에서 pulse frequency도 증가한다.",
+      "Inductive proximity sensor는 sensing face의 교번 전자기장에 금속 target이 접근할 때 발생하는 eddy-current loss 또는 oscillator 변화로 target 존재를 검출한다. Gear tooth나 flag를 반복 검출하면 passage frequency에서 회전속도를 계산할 수 있다.",
+      "회전당 Z개의 동일한 tooth 또는 target event가 있고 각 event당 1 pulse를 얻는다면 n = 60f/Z이다. 실제 missing-tooth, multiple-edge counting 또는 target pattern이 있으면 Z 대신 회전당 유효 event 수를 사용한다.",
+      "Variable-reluctance magnetic pickup은 ferromagnetic tooth가 pole piece를 지나갈 때 magnetic flux가 변하여 유도전압을 발생시키는 passive speed pickup이다. 출력 amplitude는 속도, air gap, target geometry에 영향을 받아 저속 검출성이 제한될 수 있다.",
+      "Proximity 기반 속도계측은 air gap, target material/size, tooth geometry, shaft runout/eccentricity와 mounting vibration에 의해 pulse amplitude·duty·dropout이 달라질 수 있으므로 assured sensing distance와 target 조건을 확인한다.",
+      "Permanent-magnet DC tachogenerator는 회전에 의해 생성되는 DC voltage가 정상 동작범위에서 회전속도에 대체로 비례하도록 설계된 analog speed transducer다. V_t ≈ K_t·n의 sensitivity로 표현할 수 있다.",
+      "DC tachogenerator는 회전방향에 따라 출력 polarity가 바뀔 수 있으며, brush/commutator ripple, temperature coefficient, loading, bearing/coupling 상태와 calibration이 linearity와 zero에 영향을 줄 수 있다.",
+      "Digital tachometer는 encoder·proximity·optical pickup 등의 pulse를 계수하거나 period를 측정해 RPM을 표시하는 instrument일 수 있다. Tachometer라는 명칭만으로 sensing principle이 tachogenerator라고 단정하지 않는다.",
+      "속도센서 선정에서는 최소·정상·최대 RPM, acceleration, overspeed, starting/creeping speed와 required response time을 확인한다. 저속에서는 pulse scarcity와 pickup amplitude, 고속에서는 frequency limit와 mechanical limit가 중요하다.",
+      "속도만 필요한지, 회전방향·relative position·absolute position까지 필요한지에 따라 one-channel pulse, quadrature incremental 또는 absolute encoder를 구분한다. 필요한 angular resolution과 control bandwidth도 함께 선정한다.",
+      "Shaft encoder와 tachogenerator는 shaft/coupling misalignment, radial/axial load, runout, loose mounting, torsional vibration과 slip이 측정오차와 수명에 영향을 줄 수 있다. Hollow-shaft나 flexible coupling도 제조사 허용치를 확인해야 한다.",
+      "Pulse speed signal은 output type, supply level, cable length, shielding, grounding, common-mode noise와 receiver threshold의 영향을 받는다. Differential line driver나 proper termination이 필요한 경우 controller interface까지 포함해 검토한다.",
+      "최종 선정은 정확도만이 아니라 sensor replacement, alignment/air-gap adjustment, spare, diagnostic access, PLC high-speed input, shutdown, hazardous-area requirement와 lifecycle cost까지 포함해야 한다."
+    ],
+    "fatal_conditions": [
+      {
+        "id": "speed_fatal_frequency_direct_rpm",
+        "claim": "Encoder pulse frequency Hz와 RPM은 항상 같은 수치이므로 PPR을 고려할 필요가 없다.",
+        "correction": "Pulse 방식은 회전당 유효 count 수를 반영해야 하며 기본적으로 n = 60f/N_eff로 계산한다.",
+        "wrong_claim": "Encoder pulse frequency Hz와 RPM은 항상 같은 수치이므로 PPR을 고려할 필요가 없다.",
+        "correct_rule": "Pulse 방식은 회전당 유효 count 수를 반영해야 하며 기본적으로 n = 60f/N_eff로 계산한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Pulse 방식은 회전당 유효 count 수를 반영해야 하며 기본적으로 n = 60f/N_eff로 계산한다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_ppr_ignore_decode",
+        "claim": "Encoder의 PPR만 알면 controller의 x1/x2/x4 edge decoding과 관계없이 유효 count/rev는 항상 동일하다.",
+        "correction": "PPR/CPR 정의와 edge decoding mode에 따라 controller가 세는 N_eff가 달라질 수 있으므로 catalog와 counter 설정을 함께 확인해야 한다.",
+        "wrong_claim": "Encoder의 PPR만 알면 controller의 x1/x2/x4 edge decoding과 관계없이 유효 count/rev는 항상 동일하다.",
+        "correct_rule": "PPR/CPR 정의와 edge decoding mode에 따라 controller가 세는 N_eff가 달라질 수 있으므로 catalog와 counter 설정을 함께 확인해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "PPR/CPR 정의와 edge decoding mode에 따라 controller가 세는 N_eff가 달라질 수 있으므로 catalog와 counter 설정을 함께 확인해야 한다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_quadrature_no_direction",
+        "claim": "Quadrature encoder의 A와 B 신호는 완전히 같은 위상이며 회전방향 정보는 제공할 수 없다.",
+        "correction": "Quadrature encoder는 A/B 위상 선행·지연 관계로 방향을 판별하며 통상 약 90 electrical degree 위상차를 사용한다.",
+        "wrong_claim": "Quadrature encoder의 A와 B 신호는 완전히 같은 위상이며 회전방향 정보는 제공할 수 없다.",
+        "correct_rule": "Quadrature encoder는 A/B 위상 선행·지연 관계로 방향을 판별하며 통상 약 90 electrical degree 위상차를 사용한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Quadrature encoder는 A/B 위상 선행·지연 관계로 방향을 판별하며 통상 약 90 electrical degree 위상차를 사용한다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_index_absolute",
+        "claim": "Incremental encoder의 Z pulse 하나만 있으면 전원 재인가 후 모든 multi-turn absolute position을 자동으로 알 수 있다.",
+        "correction": "Z/index는 회전 기준 또는 homing에 쓰는 reference pulse이며 multi-turn absolute position은 별도 absolute encoding/state가 필요하다.",
+        "wrong_claim": "Incremental encoder의 Z pulse 하나만 있으면 전원 재인가 후 모든 multi-turn absolute position을 자동으로 알 수 있다.",
+        "correct_rule": "Z/index는 회전 기준 또는 homing에 쓰는 reference pulse이며 multi-turn absolute position은 별도 absolute encoding/state가 필요하다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Z/index는 회전 기준 또는 homing에 쓰는 reference pulse이며 multi-turn absolute position은 별도 absolute encoding/state가 필요하다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_absolute_only_speed",
+        "claim": "Absolute encoder는 위치를 출력하지 않고 오직 RPM analog signal만 출력한다.",
+        "correction": "Absolute encoder는 각 위치에 대응하는 digital word를 제공하며 속도는 연속 position 변화와 시간으로 계산할 수 있다.",
+        "wrong_claim": "Absolute encoder는 위치를 출력하지 않고 오직 RPM analog signal만 출력한다.",
+        "correct_rule": "Absolute encoder는 각 위치에 대응하는 digital word를 제공하며 속도는 연속 position 변화와 시간으로 계산할 수 있다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Absolute encoder는 각 위치에 대응하는 digital word를 제공하며 속도는 연속 position 변화와 시간으로 계산할 수 있다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_proximity_any_target",
+        "claim": "Inductive proximity sensor는 target 재질·크기·air gap과 무관하게 모든 물체를 같은 거리에서 검출한다.",
+        "correction": "Inductive proximity의 sensing distance는 금속 target의 재질·크기·형상과 air gap에 영향을 받으므로 지정 target과 assured distance 조건을 확인해야 한다.",
+        "wrong_claim": "Inductive proximity sensor는 target 재질·크기·air gap과 무관하게 모든 물체를 같은 거리에서 검출한다.",
+        "correct_rule": "Inductive proximity의 sensing distance는 금속 target의 재질·크기·형상과 air gap에 영향을 받으므로 지정 target과 assured distance 조건을 확인해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Inductive proximity의 sensing distance는 금속 target의 재질·크기·형상과 air gap에 영향을 받으므로 지정 target과 assured distance 조건을 확인해야 한다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_gear_frequency_no_teeth",
+        "claim": "Gear tooth sensor는 tooth 수와 관계없이 pulse frequency에 60만 곱하면 RPM이 된다.",
+        "correction": "회전당 Z개의 유효 tooth event가 있으면 n = 60f/Z이며 실제 event 수와 edge counting 정의를 반영해야 한다.",
+        "wrong_claim": "Gear tooth sensor는 tooth 수와 관계없이 pulse frequency에 60만 곱하면 RPM이 된다.",
+        "correct_rule": "회전당 Z개의 유효 tooth event가 있으면 n = 60f/Z이며 실제 event 수와 edge counting 정의를 반영해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "회전당 Z개의 유효 tooth event가 있으면 n = 60f/Z이며 실제 event 수와 edge counting 정의를 반영해야 한다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_vr_low_speed_constant",
+        "claim": "Variable-reluctance magnetic pickup은 속도와 air gap에 관계없이 항상 동일한 출력전압을 만들어 zero speed도 같은 품질로 검출한다.",
+        "correction": "VR pickup의 induced voltage는 flux 변화율에 좌우되어 속도·air gap·target geometry 영향을 받으며 매우 낮은 속도에서는 신호가 약해질 수 있다.",
+        "wrong_claim": "Variable-reluctance magnetic pickup은 속도와 air gap에 관계없이 항상 동일한 출력전압을 만들어 zero speed도 같은 품질로 검출한다.",
+        "correct_rule": "VR pickup의 induced voltage는 flux 변화율에 좌우되어 속도·air gap·target geometry 영향을 받으며 매우 낮은 속도에서는 신호가 약해질 수 있다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "VR pickup의 induced voltage는 flux 변화율에 좌우되어 속도·air gap·target geometry 영향을 받으며 매우 낮은 속도에서는 신호가 약해질 수 있다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_tacho_constant_voltage",
+        "claim": "DC tachogenerator의 출력전압은 회전속도와 무관하게 항상 일정하다.",
+        "correction": "Permanent-magnet DC tachogenerator는 정상범위에서 속도에 대체로 비례하는 전압을 출력하며 V_t ≈ K_t·n으로 표현할 수 있다.",
+        "wrong_claim": "DC tachogenerator의 출력전압은 회전속도와 무관하게 항상 일정하다.",
+        "correct_rule": "Permanent-magnet DC tachogenerator는 정상범위에서 속도에 대체로 비례하는 전압을 출력하며 V_t ≈ K_t·n으로 표현할 수 있다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Permanent-magnet DC tachogenerator는 정상범위에서 속도에 대체로 비례하는 전압을 출력하며 V_t ≈ K_t·n으로 표현할 수 있다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_tacho_no_direction",
+        "claim": "DC tachogenerator는 회전방향이 바뀌어도 출력 polarity가 절대 바뀌지 않는다.",
+        "correction": "일반적인 DC tachogenerator는 회전방향 변화에 따라 출력 polarity가 반전될 수 있으므로 polarity와 wiring을 방향판별에 활용할 수 있다.",
+        "wrong_claim": "DC tachogenerator는 회전방향이 바뀌어도 출력 polarity가 절대 바뀌지 않는다.",
+        "correct_rule": "일반적인 DC tachogenerator는 회전방향 변화에 따라 출력 polarity가 반전될 수 있으므로 polarity와 wiring을 방향판별에 활용할 수 있다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "일반적인 DC tachogenerator는 회전방향 변화에 따라 출력 polarity가 반전될 수 있으므로 polarity와 wiring을 방향판별에 활용할 수 있다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_more_ppr_always_better",
+        "claim": "Encoder PPR은 높을수록 항상 좋고 최대 회전속도나 counter input frequency는 고려할 필요가 없다.",
+        "correction": "PPR 증가는 resolution을 높일 수 있지만 동일 RPM에서 pulse frequency도 증가하므로 encoder/receiver frequency limit와 control requirement를 함께 선정해야 한다.",
+        "wrong_claim": "Encoder PPR은 높을수록 항상 좋고 최대 회전속도나 counter input frequency는 고려할 필요가 없다.",
+        "correct_rule": "PPR 증가는 resolution을 높일 수 있지만 동일 RPM에서 pulse frequency도 증가하므로 encoder/receiver frequency limit와 control requirement를 함께 선정해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "PPR 증가는 resolution을 높일 수 있지만 동일 RPM에서 pulse frequency도 증가하므로 encoder/receiver frequency limit와 control requirement를 함께 선정해야 한다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_fixed_window_no_low_speed_error",
+        "claim": "Fixed counting-window 방식은 저속에서도 pulse 수가 적어져도 resolution이 전혀 나빠지지 않는다.",
+        "correction": "저속에서 fixed-window count 수가 작으면 한 count가 만드는 RPM step이 커지므로 period/reciprocal 측정 또는 더 긴 window를 검토해야 한다.",
+        "wrong_claim": "Fixed counting-window 방식은 저속에서도 pulse 수가 적어져도 resolution이 전혀 나빠지지 않는다.",
+        "correct_rule": "저속에서 fixed-window count 수가 작으면 한 count가 만드는 RPM step이 커지므로 period/reciprocal 측정 또는 더 긴 window를 검토해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "저속에서 fixed-window count 수가 작으면 한 count가 만드는 RPM step이 커지므로 period/reciprocal 측정 또는 더 긴 window를 검토해야 한다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "speed_fatal_mounting_no_error",
+        "claim": "Encoder, proximity, tachogenerator의 air gap·runout·misalignment·coupling 상태는 속도 측정에 영향을 주지 않는다.",
+        "correction": "Air gap, runout, eccentricity, misalignment, slip와 mounting vibration은 pulse dropout·phase error·mechanical error를 만들 수 있어 설치 허용치를 관리해야 한다.",
+        "wrong_claim": "Encoder, proximity, tachogenerator의 air gap·runout·misalignment·coupling 상태는 속도 측정에 영향을 주지 않는다.",
+        "correct_rule": "Air gap, runout, eccentricity, misalignment, slip와 mounting vibration은 pulse dropout·phase error·mechanical error를 만들 수 있어 설치 허용치를 관리해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Air gap, runout, eccentricity, misalignment, slip와 mounting vibration은 pulse dropout·phase error·mechanical error를 만들 수 있어 설치 허용치를 관리해야 한다.",
+        "description": "회전속도 계산식, encoder/proximity/tachogenerator 원리 또는 설치오차의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 speed conversion, direction, effective counts, sensing principle 또는 error direction을 반대로 설명한 경우에만 Fatal로 판정한다."
+      }
+    ],
+    "major_checks": [
+      {
+        "id": "speed_major_formula",
+        "check": "RPM과 pulse frequency 관계에서 N_eff/PPR 정의를 정확히 설명했는지 검토한다."
+      },
+      {
+        "id": "speed_major_low_speed",
+        "check": "Fixed-window와 period 방식의 저속 resolution trade-off를 설명했는지 검토한다."
+      },
+      {
+        "id": "speed_major_encoder",
+        "check": "Incremental/absolute encoder와 A/B/Z signal 기능을 구분했는지 검토한다."
+      },
+      {
+        "id": "speed_major_decode",
+        "check": "PPR/CPR와 x1/x2/x4 effective count 정의를 구분했는지 검토한다."
+      },
+      {
+        "id": "speed_major_frequency",
+        "check": "Resolution과 encoder/controller maximum frequency의 trade-off를 설명했는지 검토한다."
+      },
+      {
+        "id": "speed_major_proximity",
+        "check": "Inductive proximity, gear tooth equation, VR pickup의 원리를 구분했는지 검토한다."
+      },
+      {
+        "id": "speed_major_tacho",
+        "check": "Tachogenerator의 speed-proportional voltage와 polarity/error를 설명했는지 검토한다."
+      },
+      {
+        "id": "speed_major_mounting",
+        "check": "Air gap, runout, misalignment, slip, shaft load와 vibration을 installation error로 다뤘는지 검토한다."
+      },
+      {
+        "id": "speed_major_interface",
+        "check": "PLC high-speed input, output type, shielding/noise를 interface 선정에 포함했는지 검토한다."
+      },
+      {
+        "id": "speed_major_lifecycle",
+        "check": "Retrofit, spare, diagnostic, shutdown과 lifecycle cost를 현장 적용과 연결했는지 검토한다."
+      }
+    ],
+    "false_positive_cautions": [
+      "Encoder resolution을 PPR 또는 CPR로 표현하면서 제조사 정의가 다를 수 있음을 명시하면 용어 차이는 허용한다.",
+      "Quadrature A/B를 90 degree out-of-phase라고 설명하면 exact phase tolerance 수치가 없어도 허용한다.",
+      "x4 decoding을 A/B rising/falling edge 활용이라고 설명하면 controller별 세부 count convention 차이를 허용한다.",
+      "Z/index를 one pulse per revolution reference라고 설명하되 gated/ungated 차이는 생략할 수 있다.",
+      "Absolute encoder의 speed를 position difference/sample time으로 구한다고 설명하면 protocol 세부는 없어도 된다.",
+      "Low-speed에서 period measurement가 유리할 수 있다고 설명하면 exact threshold RPM은 제품별이라 없어도 된다.",
+      "Inductive proximity를 eddy-current loss 또는 oscillator change로 설명하면 회로 세부 topology는 없어도 된다.",
+      "VR pickup의 output amplitude가 speed와 air gap에 영향을 받는다고 설명하면 exact voltage curve가 없어도 된다.",
+      "Gear tooth 수 대신 effective events/rev라고 일반화하면 target pattern을 반영한 올바른 설명이다.",
+      "DC tachogenerator voltage가 speed에 대체로 proportional하다고 설명하면 K_t의 구체 수치가 없어도 된다.",
+      "Differential line driver/RS-422를 장거리 noise immunity 대책으로 제시하면 구체 cable length는 제품별이라 없어도 된다.",
+      "Legacy retrofit에서 performance보다 mechanical/electrical compatibility와 shutdown을 함께 고려하는 설명은 적절하다."
+    ],
+    "safe_conditions": [
+      "Incremental encoder의 resolution을 PPR 또는 CPR로 표현하되 제조사 정의를 확인해야 한다고 설명한다.",
+      "Quadrature A/B가 약 90 electrical degree 위상차를 갖는다고 설명하며 정확한 tolerance는 제품별이라고 말한다.",
+      "x1/x2/x4 decoding에 따라 effective counts per revolution이 달라질 수 있다고 설명한다.",
+      "Z/index가 일반적으로 1 pulse/rev reference라고 설명하면서 제품별 index width/gating 차이를 인정한다.",
+      "Absolute encoder의 속도는 successive position sample과 sample interval에서 계산할 수 있다고 설명한다.",
+      "Fixed-window count와 reciprocal period 방식의 저속/고속 trade-off를 정성적으로 설명해도 된다.",
+      "Inductive proximity가 metal target의 eddy-current/oscillator 변화를 이용한다고 설명한다.",
+      "Gear tooth speed 계산에서 실제 유효 target event 수를 사용한다고 설명한다.",
+      "VR magnetic pickup이 passive transducer이고 저속에서 amplitude가 약해질 수 있다고 설명한다.",
+      "Proximity sensing distance가 target material과 size에 따라 달라질 수 있다고 설명한다.",
+      "DC tachogenerator가 speed-proportional voltage를 출력한다고 설명하되 sensitivity K_t는 제품별이라고 말한다.",
+      "Tachogenerator의 brush/commutator ripple과 temperature drift를 대표 error source로 설명한다."
+    ],
+    "next_practice_points": [
+      "Pulse frequency→effective count→RPM 순서로 식을 쓴다.",
+      "A/B quadrature direction과 Z index 기능을 분리한다.",
+      "Fixed-window와 period method의 저속 resolution 차이를 연습한다.",
+      "Inductive proximity와 VR pickup의 energy/transduction mechanism을 구분한다.",
+      "Encoder frequency limit와 PLC high-speed input을 한 선정항목으로 연결한다."
+    ],
+    "score_policy": {
+      "direct_score_application": false,
+      "direct_d_e_effect": "none",
+      "affected_layers": [
+        "C"
+      ],
+      "reason": "Logic Check는 Fact/Logic 의미오류의 evidence를 제공하며 직접 점수층을 변경하지 않는다."
+    },
+    "output_contract": {
+      "direct_score_layers": [],
+      "excluded_score_layers": [
+        "D",
+        "E"
+      ],
+      "requires_evidence": true
+    },
+    "cap_policy": {
+      "fatal_recommended_ceiling": 10.0
+    },
+    "feedback_templates": {
+      "major": "회전→pulse/voltage 변환→time/frequency 처리→RPM 계산→선정·설치오차의 연결이 부족한 부분을 지적한다.",
+      "fatal": "PPR/effective count, quadrature direction, proximity/tachogenerator 원리 또는 속도 산출식 방향을 뒤집는 중대한 오개념을 명확히 지적한다."
+    }
+  },
+  "revision_notes": [
+    "step0_analog_decision_PRINCIPLE_INTERPRETATION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used",
+    "ppr_cpr_decode_definition_caution"
+  ],
+  "topic_label": "회전속도 계측의 원리, 선정 및 오차 — Encoder·Proximity·Tachometer"
+}

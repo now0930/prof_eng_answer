@@ -1,0 +1,331 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+  "title_ko": "회전속도 계측의 원리, 선정 및 오차 — Encoder·Proximity·Tachometer",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "회전속도 계측에서 pulse frequency와 RPM의 관계 및 측정방법을 설명하시오.",
+      "intent": "N_eff, frequency, counting-window, period method를 연결한다.",
+      "required_anchor_ids": [
+        "speed_angular_frequency_relation",
+        "pulse_frequency_speed_equation",
+        "counting_window_speed_equation",
+        "period_measurement_low_speed"
+      ]
+    },
+    {
+      "pattern": "Incremental encoder의 원리와 A/B/Z signal의 기능을 설명하시오.",
+      "intent": "Pulse generation, quadrature direction, index reference를 설명한다.",
+      "required_anchor_ids": [
+        "incremental_encoder_principle",
+        "quadrature_direction_principle",
+        "index_z_channel_role"
+      ]
+    },
+    {
+      "pattern": "Incremental encoder와 absolute encoder를 비교하고 속도계측 적용을 설명하시오.",
+      "intent": "Relative pulse feedback와 unique-position word, speed derivation을 구분한다.",
+      "required_anchor_ids": [
+        "incremental_encoder_principle",
+        "absolute_encoder_principle",
+        "encoder_resolution_ppr_cpr_definition"
+      ]
+    },
+    {
+      "pattern": "Encoder의 PPR/CPR, quadrature decoding 및 maximum frequency 선정관계를 설명하시오.",
+      "intent": "Resolution과 effective counts, frequency limit의 trade-off를 평가한다.",
+      "required_anchor_ids": [
+        "encoder_resolution_ppr_cpr_definition",
+        "quadrature_direction_principle",
+        "encoder_frequency_limit_selection"
+      ]
+    },
+    {
+      "pattern": "Inductive proximity sensor를 이용한 gear-tooth 회전속도 측정원리와 오차를 설명하시오.",
+      "intent": "Eddy-current switching, tooth frequency, air-gap/target error를 연결한다.",
+      "required_anchor_ids": [
+        "inductive_proximity_principle",
+        "gear_tooth_speed_equation",
+        "proximity_airgap_target_error"
+      ]
+    },
+    {
+      "pattern": "Variable-reluctance magnetic pickup의 속도검출 원리와 저속 한계를 설명하시오.",
+      "intent": "Flux change induced voltage와 speed/air-gap dependence를 설명한다.",
+      "required_anchor_ids": [
+        "magnetic_pickup_variable_reluctance",
+        "selection_speed_range_low_high"
+      ]
+    },
+    {
+      "pattern": "DC tachogenerator의 원리, 특징 및 오차요인을 설명하시오.",
+      "intent": "Speed-proportional voltage, polarity, ripple/temperature/loading을 설명한다.",
+      "required_anchor_ids": [
+        "tachogenerator_voltage_speed_principle",
+        "tachogenerator_direction_loading_error",
+        "digital_tachometer_instrument_boundary"
+      ]
+    },
+    {
+      "pattern": "Encoder, proximity, tachometer 방식의 회전속도 센서를 비교하고 선정기준을 설명하시오.",
+      "intent": "Speed range, direction/position, resolution, mounting/interface를 비교한다.",
+      "required_anchor_ids": [
+        "selection_speed_range_low_high",
+        "selection_direction_position_resolution",
+        "mechanical_mounting_coupling_error",
+        "electrical_interface_noise_error"
+      ]
+    },
+    {
+      "pattern": "저속과 고속의 회전수 측정에서 resolution과 response time trade-off를 설명하시오.",
+      "intent": "Fixed-window count, reciprocal period, frequency limit를 비교한다.",
+      "required_anchor_ids": [
+        "counting_window_speed_equation",
+        "period_measurement_low_speed",
+        "encoder_frequency_limit_selection"
+      ]
+    },
+    {
+      "pattern": "기존 회전속도 센서를 encoder로 retrofit할 때 고려사항을 설명하시오.",
+      "intent": "Mechanical/electrical interface, PLC input, shutdown, lifecycle을 평가한다.",
+      "required_anchor_ids": [
+        "mechanical_mounting_coupling_error",
+        "electrical_interface_noise_error",
+        "lifecycle_maintainability_selection"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. Speed Relationship",
+      "intent": "RPM, angular velocity, pulse frequency의 기본관계를 정의한다.",
+      "anchor_refs": [
+        "speed_angular_frequency_relation",
+        "pulse_frequency_speed_equation"
+      ]
+    },
+    {
+      "section": "2. Time/Frequency Measurement",
+      "intent": "Fixed counting-window와 reciprocal period 방식을 비교한다.",
+      "anchor_refs": [
+        "counting_window_speed_equation",
+        "period_measurement_low_speed"
+      ]
+    },
+    {
+      "section": "3. Encoder Principle",
+      "intent": "Incremental, quadrature, index, absolute와 resolution 정의를 설명한다.",
+      "anchor_refs": [
+        "incremental_encoder_principle",
+        "quadrature_direction_principle",
+        "index_z_channel_role",
+        "absolute_encoder_principle",
+        "encoder_resolution_ppr_cpr_definition"
+      ]
+    },
+    {
+      "section": "4. Encoder Frequency Limit",
+      "intent": "Resolution과 maximum input/output frequency trade-off를 설명한다.",
+      "anchor_refs": [
+        "encoder_frequency_limit_selection"
+      ]
+    },
+    {
+      "section": "5. Proximity / Gear Tooth",
+      "intent": "Inductive proximity, tooth speed equation, VR pickup과 air-gap error를 설명한다.",
+      "anchor_refs": [
+        "inductive_proximity_principle",
+        "gear_tooth_speed_equation",
+        "magnetic_pickup_variable_reluctance",
+        "proximity_airgap_target_error"
+      ]
+    },
+    {
+      "section": "6. Tachometer",
+      "intent": "Tachogenerator와 digital tachometer의 원리·경계를 설명한다.",
+      "anchor_refs": [
+        "tachogenerator_voltage_speed_principle",
+        "tachogenerator_direction_loading_error",
+        "digital_tachometer_instrument_boundary"
+      ]
+    },
+    {
+      "section": "7. Selection & Installation",
+      "intent": "Speed range, direction/position, mechanical/electrical interface를 선정한다.",
+      "anchor_refs": [
+        "selection_speed_range_low_high",
+        "selection_direction_position_resolution",
+        "mechanical_mounting_coupling_error",
+        "electrical_interface_noise_error"
+      ]
+    },
+    {
+      "section": "8. Lifecycle Application",
+      "intent": "Retrofit, spare, diagnostic, shutdown과 lifecycle cost를 연결한다.",
+      "anchor_refs": [
+        "lifecycle_maintainability_selection"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "n = 60f/N_eff에서 N_eff가 controller가 실제 세는 유효 count/rev임을 정의한다.",
+    "Fixed-window count와 reciprocal period method의 저속 resolution trade-off를 설명한다.",
+    "Incremental encoder의 pulse train과 A/B quadrature direction을 설명한다.",
+    "Z/index를 homing/revolution reference로 설명하고 absolute position과 구분한다.",
+    "Absolute encoder의 unique position word와 update-rate 기반 speed derivation을 설명한다.",
+    "PPR/CPR 용어와 x1/x2/x4 decoding 정의가 다를 수 있음을 지적한다.",
+    "Encoder resolution 증가와 maximum output/input frequency의 trade-off를 설명한다.",
+    "Inductive proximity와 VR magnetic pickup의 sensing mechanism을 구분한다.",
+    "Gear-tooth speed를 n = 60f/Z로 설명하고 실제 effective event 수를 확인한다.",
+    "DC tachogenerator의 V_t ≈ K_t n과 direction polarity를 설명한다.",
+    "Air gap, runout, misalignment, slip, pulse dropout과 electrical noise를 error source로 연결한다.",
+    "기존설비에서는 coupling, PLC high-speed input, shutdown, spare, lifecycle cost까지 제시한다."
+  ],
+  "common_missing_points": [
+    "Pulse frequency를 PPR/count 정의 없이 곧바로 RPM으로 취급한다.",
+    "PPR와 quadrature x4 effective count를 동일한 용어로 단정한다.",
+    "A/B quadrature를 방향정보 없이 단순 중복 pulse로 설명한다.",
+    "Z index를 multi-turn absolute position으로 설명한다.",
+    "Inductive proximity와 VR magnetic pickup을 같은 원리로 설명한다.",
+    "Gear tooth 수를 속도식에서 누락한다.",
+    "PPR은 높을수록 무조건 좋다고 하고 frequency limit를 누락한다.",
+    "저속 fixed-window quantization 문제를 누락한다.",
+    "Tachogenerator의 speed-proportional voltage와 polarity를 누락한다.",
+    "Air gap, runout, misalignment, cable/noise를 설치오차에서 누락한다."
+  ],
+  "routing_aliases": [
+    "회전속도 계측 엔코더 근접센서 타코미터",
+    "회전수 측정 센서 선정 오차",
+    "엔코더 회전속도 측정",
+    "인코더 PPR 회전속도",
+    "회전속도 pulse frequency rpm",
+    "rotational speed measurement sensor",
+    "speed rotation measurement encoder proximity tachometer",
+    "incremental encoder speed direction",
+    "absolute encoder speed measurement",
+    "quadrature encoder A B Z",
+    "encoder PPR CPR resolution",
+    "pulse frequency rpm calculation",
+    "gear tooth proximity speed sensor",
+    "inductive proximity rotation speed",
+    "magnetic pickup speed measurement",
+    "tachometer tachogenerator speed sensor",
+    "DC tachogenerator speed voltage",
+    "회전속도 센서 air gap 오차"
+  ],
+  "routing_field_points": [
+    "RPM/angular velocity relation",
+    "n = 60f/N_eff",
+    "fixed counting window",
+    "period reciprocal measurement",
+    "incremental encoder",
+    "A/B quadrature",
+    "Z index",
+    "absolute encoder",
+    "PPR/CPR/effective counts",
+    "encoder maximum frequency",
+    "inductive proximity",
+    "gear tooth n = 60f/Z",
+    "variable-reluctance magnetic pickup",
+    "air gap/target/runout",
+    "DC tachogenerator V_t≈K_t n",
+    "tachogenerator direction polarity",
+    "digital tachometer",
+    "low/high speed selection",
+    "direction/position requirement",
+    "mechanical coupling/misalignment",
+    "electrical interface/noise",
+    "retrofit/lifecycle"
+  ],
+  "revision_notes": [
+    "step0_analog_decision_PRINCIPLE_INTERPRETATION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used",
+    "ppr_cpr_decode_definition_caution"
+  ],
+  "id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+  "title": "회전속도 계측의 원리, 선정 및 오차 — Encoder·Proximity·Tachometer",
+  "question_examples": [
+    "회전속도 계측에서 pulse frequency와 RPM의 관계 및 측정방법을 설명하시오.",
+    "Incremental encoder의 원리와 A/B/Z signal의 기능을 설명하시오.",
+    "Incremental encoder와 absolute encoder를 비교하고 속도계측 적용을 설명하시오.",
+    "Encoder의 PPR/CPR, quadrature decoding 및 maximum frequency 선정관계를 설명하시오.",
+    "Inductive proximity sensor를 이용한 gear-tooth 회전속도 측정원리와 오차를 설명하시오.",
+    "Variable-reluctance magnetic pickup의 속도검출 원리와 저속 한계를 설명하시오.",
+    "DC tachogenerator의 원리, 특징 및 오차요인을 설명하시오.",
+    "Encoder, proximity, tachometer 방식의 회전속도 센서를 비교하고 선정기준을 설명하시오.",
+    "저속과 고속의 회전수 측정에서 resolution과 response time trade-off를 설명하시오.",
+    "기존 회전속도 센서를 encoder로 retrofit할 때 고려사항을 설명하시오."
+  ],
+  "topic_aliases": [
+    "회전속도 계측 엔코더 근접센서 타코미터",
+    "회전수 측정 센서 선정 오차",
+    "엔코더 회전속도 측정",
+    "인코더 PPR 회전속도",
+    "회전속도 pulse frequency rpm",
+    "rotational speed measurement sensor",
+    "speed rotation measurement encoder proximity tachometer",
+    "incremental encoder speed direction",
+    "absolute encoder speed measurement",
+    "quadrature encoder A B Z",
+    "encoder PPR CPR resolution",
+    "pulse frequency rpm calculation",
+    "gear tooth proximity speed sensor",
+    "inductive proximity rotation speed",
+    "magnetic pickup speed measurement",
+    "tachometer tachogenerator speed sensor",
+    "DC tachogenerator speed voltage",
+    "회전속도 센서 air gap 오차"
+  ],
+  "expected_structure": [
+    "1. Speed Relationship",
+    "2. Time/Frequency Measurement",
+    "3. Encoder Principle",
+    "4. Encoder Frequency Limit",
+    "5. Proximity / Gear Tooth",
+    "6. Tachometer",
+    "7. Selection & Installation",
+    "8. Lifecycle Application"
+  ],
+  "high_score_features": [
+    "n = 60f/N_eff에서 N_eff가 controller가 실제 세는 유효 count/rev임을 정의한다.",
+    "Fixed-window count와 reciprocal period method의 저속 resolution trade-off를 설명한다.",
+    "Incremental encoder의 pulse train과 A/B quadrature direction을 설명한다.",
+    "Z/index를 homing/revolution reference로 설명하고 absolute position과 구분한다.",
+    "Absolute encoder의 unique position word와 update-rate 기반 speed derivation을 설명한다.",
+    "PPR/CPR 용어와 x1/x2/x4 decoding 정의가 다를 수 있음을 지적한다.",
+    "Encoder resolution 증가와 maximum output/input frequency의 trade-off를 설명한다.",
+    "Inductive proximity와 VR magnetic pickup의 sensing mechanism을 구분한다.",
+    "Gear-tooth speed를 n = 60f/Z로 설명하고 실제 effective event 수를 확인한다.",
+    "DC tachogenerator의 V_t ≈ K_t n과 direction polarity를 설명한다.",
+    "Air gap, runout, misalignment, slip, pulse dropout과 electrical noise를 error source로 연결한다.",
+    "기존설비에서는 coupling, PLC high-speed input, shutdown, spare, lifecycle cost까지 제시한다."
+  ],
+  "low_score_patterns": [
+    "Pulse frequency를 PPR/count 정의 없이 곧바로 RPM으로 취급한다.",
+    "PPR와 quadrature x4 effective count를 동일한 용어로 단정한다.",
+    "A/B quadrature를 방향정보 없이 단순 중복 pulse로 설명한다.",
+    "Z index를 multi-turn absolute position으로 설명한다.",
+    "Inductive proximity와 VR magnetic pickup을 같은 원리로 설명한다.",
+    "Gear tooth 수를 속도식에서 누락한다.",
+    "PPR은 높을수록 무조건 좋다고 하고 frequency limit를 누락한다.",
+    "저속 fixed-window quantization 문제를 누락한다.",
+    "Tachogenerator의 speed-proportional voltage와 polarity를 누락한다.",
+    "Air gap, runout, misalignment, cable/noise를 설치오차에서 누락한다."
+  ],
+  "field_connection_points": [
+    "Motor/shaft RPM feedback",
+    "PLC high-speed counter",
+    "Quadrature direction",
+    "Index/homing",
+    "Gear tooth pickup",
+    "Low-speed reciprocal measurement",
+    "Encoder maximum frequency",
+    "Air-gap adjustment",
+    "Tachogenerator analog feedback",
+    "Coupling and shaft load",
+    "Shielding/line driver",
+    "Retrofit and lifecycle"
+  ]
+}
