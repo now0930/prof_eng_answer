@@ -29,9 +29,7 @@ TARGET_TOPIC = (
     "sizing_fail_safe"
 )
 
-INCIDENT_SESSION = Path(
-    "data/sessions/20260717_114330_5960502198"
-)
+INCIDENT_SESSION = Path("scripts/fixtures/control_valve_incident_contract")
 
 
 def load_incident() -> tuple[

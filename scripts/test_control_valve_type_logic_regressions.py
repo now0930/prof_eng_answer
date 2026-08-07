@@ -189,9 +189,7 @@ class ControlValveFactRoutingRegressionTests(
         "actuator_sizing_fail_safe"
     )
 
-    SESSION_DIR = Path(
-        "data/sessions/20260715_133052_5960502198"
-    )
+    SESSION_DIR = Path("scripts/fixtures/control_valve_force_routing")
 
     def test_generated_fact_topic_has_runtime_routing_metadata(
         self,
@@ -383,10 +381,7 @@ class ControlValveFactRoutingRegressionTests(
 class ControlValveLogicScoreRegressionTests(
     unittest.TestCase
 ):
-    SESSION_GRADE = Path(
-        "data/sessions/20260715_133052_5960502198/"
-        "grade.json"
-    )
+    SESSION_GRADE = Path("scripts/fixtures/control_valve_force_routing/grade.json")
 
     TOPIC_ID = (
         "control_valve_fluid_forces_unbalance_friction_"
@@ -767,10 +762,7 @@ class ControlValveLogicScoreRegressionTests(
 class GradingIdentityRegressionTests(
     unittest.TestCase
 ):
-    SESSION_DIR = Path(
-        "data/sessions/"
-        "20260715_133052_5960502198"
-    )
+    SESSION_DIR = Path("scripts/fixtures/control_valve_force_routing")
 
     def test_emoji_variation_selector_is_ignored(
         self,
@@ -1090,10 +1082,7 @@ class ControlValveTopicMetadataRegressionTests(
             "sizing_fail_safe"
         )
 
-        session_dir = Path(
-            "data/sessions/"
-            "20260717_114330_5960502198"
-        )
+        session_dir = Path("scripts/fixtures/control_valve_incident_contract")
 
         raw_text = session_dir.joinpath(
             "input.txt"

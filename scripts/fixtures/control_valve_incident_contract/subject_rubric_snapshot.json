@@ -1,0 +1,296 @@
+{
+  "name": "industrial_instrumentation_control",
+  "subject_name": "산업계측제어기술사",
+  "version": "2026-06-28-v2-demand-axis-json-only",
+  "editable": true,
+  "description": "산업계측제어기술사 채점용 종목 기준. 출제범위, 기출 키워드, fact anchor 후보, 모범답안 작성 기준을 관리한다.",
+  "exam_scope": [
+    "자동제어",
+    "전자기기",
+    "공업계획",
+    "전자측정 및 계장",
+    "계측기기 및 제어기기의 설계·제조·관리 기술"
+  ],
+  "answer_guideline": {
+    "preferred_structure": [
+      "배경",
+      "문제점",
+      "유형별 Fact 기반 내용 설명",
+      "기술사적 의견과 현장 적용·제언"
+    ],
+    "fixed_parts": [
+      "문제점",
+      "유형별 Fact 기반 내용 설명"
+    ],
+    "flexible_parts": [
+      "배경",
+      "기술사적 의견과 현장 적용·제언"
+    ],
+    "connection_rules": [
+      "배경은 문제점으로 자연스럽게 연결되어야 한다.",
+      "Fact 설명은 문제점을 설명하는 근거여야 한다.",
+      "기술사적 의견은 fact에서 도출되고 문제점 해결로 돌아와야 한다.",
+      "대책은 현실의 한계, 비용, 시간, 적용 가능성을 고려해야 한다."
+    ],
+    "demand_alignment_rules": [
+      "문제문에 제시된 기준축을 답안 목차의 중심으로 삼는다.",
+      "감쇠비, 비교축, 절차, 판정기준, 설치조건 등 출제자가 지정한 축을 누락하면 관련 설명이 맞아도 낮게 평가한다.",
+      "유사 개념으로 치환하지 않는다. 예: 2차 지연시스템은 표준 2차 동특성 모델이며 순수 시간지연 dead time이 아니다."
+    ]
+  },
+  "fact_explanation_policy": {
+    "required_level": "core_concept_check",
+    "description": "Fact 설명은 핵심 개념을 알고 있고 정확하고 간결하게 설명할 수 있는지 확인하는 수준이다. 문제가 직접 요구하지 않는 수식 유도, 세부 계산, 과도한 이론 전개는 필수로 보지 않는다.",
+    "focus": [
+      "핵심 개념 인지",
+      "정확한 설명",
+      "문제점과의 연결",
+      "간결성"
+    ],
+    "question_demand_alignment": {
+      "description": "Fact 설명은 단순히 맞는 지식을 쓰는 것이 아니라 문제에서 요구한 형태로 설명되어야 한다. 출제자가 '감쇠비에 따라', '비교하여', '절차를', '판별하시오'라고 제시하면 그 요구가 C항목의 중심 평가축이다.",
+      "low_score_cases": [
+        "문제는 감쇠비별 응답특성인데 답안은 시간지연 dead time 중심으로 설명",
+        "문제는 비교인데 장단점 나열만 있고 비교축이 없음",
+        "문제는 절차인데 순서, 입력자료, 판정기준, 산출물이 없음"
+      ]
+    }
+  },
+  "keyword_groups": {
+    "자동제어": [
+      "피드백 제어",
+      "PID",
+      "전달함수",
+      "상태방정식",
+      "안정도",
+      "응답성",
+      "정상상태 오차",
+      "제어 루프",
+      "제어 로직",
+      "2차 시스템",
+      "2차 지연시스템",
+      "감쇠비",
+      "ζ",
+      "zeta",
+      "고유진동수",
+      "ωn",
+      "표준 2차 전달함수",
+      "부족감쇠",
+      "임계감쇠",
+      "과감쇠",
+      "무감쇠",
+      "오버슈트",
+      "정착시간",
+      "상승시간",
+      "피크시간",
+      "순수 시간지연",
+      "dead time",
+      "e^{-Ls}"
+    ],
+    "계측·센서": [
+      "압력",
+      "차압",
+      "유량",
+      "온도",
+      "레벨",
+      "트랜스미터",
+      "센서",
+      "정확도",
+      "정밀도",
+      "오차",
+      "불확도",
+      "교정",
+      "검교정"
+    ],
+    "계장·제어시스템": [
+      "P&ID",
+      "Loop Diagram",
+      "I/O List",
+      "Cause & Effect",
+      "PLC",
+      "DCS",
+      "SCADA",
+      "HMI",
+      "인터록",
+      "알람",
+      "이중화"
+    ],
+    "제어밸브": [
+      "제어밸브",
+      "Control Valve",
+      "Cv",
+      "캐비테이션",
+      "플래싱",
+      "차압",
+      "포화증기압",
+      "기포",
+      "트림",
+      "포지셔너",
+      "밸브 사이징",
+      "다단 감압"
+    ],
+    "산업통신·데이터": [
+      "Modbus",
+      "HART",
+      "Profibus",
+      "Profinet",
+      "OPC UA",
+      "IIoT",
+      "산업 데이터",
+      "Edge",
+      "스마트팩토리",
+      "디지털 트윈"
+    ],
+    "안전·보안": [
+      "SIS",
+      "SIL",
+      "ESD",
+      "Fail-safe",
+      "방폭",
+      "OT 보안",
+      "화이트리스트",
+      "방화벽",
+      "위험성 평가"
+    ],
+    "현장 적용·제언 판단": [
+      "비용",
+      "시간",
+      "적용 가능성",
+      "정기보수",
+      "운전 조건",
+      "기존 설비",
+      "리스크",
+      "유지보수성",
+      "신뢰성",
+      "경제성"
+    ]
+  },
+  "past_question_analysis": {
+    "source_id": "now0930_past_question_analysis_12_rounds",
+    "analyzed_unique_rounds": 12,
+    "analyzed_problem_count": 372,
+    "top_keywords": [
+      {
+        "keyword": "제어/제어시스템",
+        "count": 85
+      },
+      {
+        "keyword": "계측/센서",
+        "count": 78
+      },
+      {
+        "keyword": "통신/네트워크",
+        "count": 62
+      },
+      {
+        "keyword": "밸브/Control Valve",
+        "count": 55
+      },
+      {
+        "keyword": "인공지능/빅데이터/IoT",
+        "count": 48
+      },
+      {
+        "keyword": "오차/정밀도",
+        "count": 40
+      },
+      {
+        "keyword": "방폭/안전(SIL)",
+        "count": 38
+      },
+      {
+        "keyword": "PLC/DCS",
+        "count": 35
+      },
+      {
+        "keyword": "유량계",
+        "count": 31
+      },
+      {
+        "keyword": "온도(열전대/RTD)",
+        "count": 29
+      }
+    ],
+    "core_topics": [
+      "제어이론 및 시스템 해석",
+      "유량·압력·온도 계측 원리 및 응용",
+      "제어밸브 특성 및 사이징",
+      "스마트팩토리·IIoT",
+      "산업용 통신 및 사이버 보안",
+      "방폭 및 기능안전",
+      "PLC/DCS 및 원격 I/O",
+      "계측기 오차·보정·교정",
+      "모터 및 구동계",
+      "신호처리·노이즈·접지 대책"
+    ]
+  },
+  "fact_anchor_examples": [
+    {
+      "question_pattern": "제어밸브의 캐비테이션 발생 원인과 방지대책",
+      "problem_anchors": [
+        "제어밸브 내부 국부 압력 저하",
+        "증기 기포 발생",
+        "하류 압력 회복부에서 기포 붕괴",
+        "소음·진동·트림 침식",
+        "제어 불안정과 유지보전 비용 증가"
+      ],
+      "fact_anchors": [
+        {
+          "id": "F1",
+          "keyword": "국부 압력 저하",
+          "expected_explanation": "밸브 내부 유속 증가로 국부 압력이 낮아질 수 있음을 설명한다."
+        },
+        {
+          "id": "F2",
+          "keyword": "포화증기압",
+          "expected_explanation": "국부 압력이 유체의 포화증기압 이하가 되면 기포가 발생함을 설명한다."
+        },
+        {
+          "id": "F3",
+          "keyword": "기포 붕괴",
+          "expected_explanation": "하류 압력 회복부에서 기포가 붕괴하며 충격을 만든다는 흐름을 설명한다."
+        },
+        {
+          "id": "F4",
+          "keyword": "소음·진동·침식",
+          "expected_explanation": "기포 붕괴가 소음, 진동, 트림 침식, 제어 불안정으로 이어짐을 설명한다."
+        },
+        {
+          "id": "F5",
+          "keyword": "차압 분산·다단 감압",
+          "expected_explanation": "대책은 차압 분산, 다단 감압 트림, 적정 사이징, 운전 조건 검토로 접근함을 설명한다."
+        }
+      ],
+      "realistic_solution_points": [
+        "운전 데이터에서 밸브 개도, 전후 차압, 소음·진동 발생 조건 확인",
+        "단기적으로 운전 조건과 점검 주기 조정",
+        "정기보수 시 트림 손상 확인",
+        "반복 손상 시 다단 감압형 안티 캐비테이션 트림 또는 밸브 재선정 검토",
+        "비용, 정지 시간, 기존 설비 변경 가능성을 함께 판단"
+      ],
+      "interview_followup_examples": [
+        "제어밸브에서 캐비테이션 발생 가능성을 판단할 때 어떤 운전 데이터를 확인하겠습니까?",
+        "다단 감압 트림을 적용할 조건과 단순 재질 개선을 우선할 조건은 어떻게 구분하겠습니까?",
+        "밸브 과대 사이징이 제어성과 캐비테이션 문제에 어떤 영향을 줄 수 있습니까?"
+      ]
+    }
+  ],
+  "user_added_keywords": [],
+  "user_added_fact_anchors": [
+    {
+      "id": "second_order_lag_response_by_damping_ratio",
+      "question_pattern": "2차 지연시스템의 응답특성을 감쇠비에 따라 구분하고 비교",
+      "problem_anchors": [
+        "2차 지연시스템을 순수 시간지연과 구분",
+        "표준 2차 전달함수 제시",
+        "감쇠비 ζ에 따른 응답 분류",
+        "오버슈트·진동·정착시간 비교",
+        "실제 제어계 응답성·안정성 의미"
+      ],
+      "low_score_warning": "σ, λ, 시간지연 e^{-Ls}, 일반 안정도 설명만 중심으로 쓰면 관련 지식은 일부 맞아도 출제 요구인 감쇠비별 응답특성 비교를 충족하지 못한다."
+    }
+  ],
+  "fact_anchor_bank": "rubrics/fact_anchors/industrial_instrumentation_control.json",
+  "question_type_profile": "rubrics/question_types/default.json",
+  "model_answer_bank": "rubrics/model_answers/industrial_instrumentation_control.json"
+}

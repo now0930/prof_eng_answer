@@ -1,0 +1,35 @@
+{
+  "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+  "breakdown": [
+    {
+      "id": "A",
+      "score": 2.5
+    },
+    {
+      "id": "B",
+      "score": 4.5
+    },
+    {
+      "id": "C",
+      "score": 5.5
+    },
+    {
+      "id": "D",
+      "score": 4.0
+    },
+    {
+      "id": "E",
+      "score": 1.5
+    }
+  ],
+  "total_score": 18.0,
+  "final_total_score": 18.0,
+  "score_range": "17.5~18.5",
+  "official_pass_met": true,
+  "practical_target_met": true,
+  "average_target_met": true,
+  "high_score_met": false,
+  "grade_confidence": "high",
+  "weaknesses": [],
+  "rewrite_advice": []
+}
