@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T12:15:17Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-07T14:42:01Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -88,6 +88,19 @@
       "fatal_checks": [],
       "major_checks": [],
       "question_type_checks": []
+    },
+    {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "enabled": false,
+      "topic_name": "제어 Hardware Lifecycle·Panel Architecture·부품선정·생산검증",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "difficulty_profile": "DESIGN_EVALUATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
@@ -1022,6 +1035,19 @@
       "de_claim_trust": {}
     },
     {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "enabled": false,
+      "topic_name": "전자기기 오차·Noise·Drift·Tolerance·Aging·Power 영향 및 대책",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
       "enabled": false,
       "topic_name": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
@@ -1836,6 +1862,45 @@
         "formula_claims": "medium",
         "field_claims": "medium"
       }
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "enabled": false,
+      "topic_name": "계측기 환경·EMC/EMI·온도·습도·진동 Qualification 및 검증",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "enabled": false,
+      "topic_name": "계측설비 설치·배선·도압배관·시공검사 및 기술기준",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "enabled": false,
+      "topic_name": "계장 전원·접지·차폐·UPS·Ground Loop·EMC 진단 및 대책",
+      "question_type": "DIAGNOSIS_ACTION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",

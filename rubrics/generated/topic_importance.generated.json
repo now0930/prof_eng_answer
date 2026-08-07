@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T12:15:17Z-generated-topic-pack-importance",
+  "version": "2026-08-07T14:42:01Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -76,6 +76,31 @@
         "high_band_requires_explicit_SW_04_and_SW_09_boundaries"
       ],
       "topic_label": "형상관리, 변경관리, Release, Backup, Rollback, Migration 및 Obsolescence 관리"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "difficulty": "DESIGN_EVALUATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "high_band_unlock_conditions": [
+        "Hardware requirement→architecture/interface→verification evidence traceability를 설명한다.",
+        "Component selection에서 rating·derating·environment·lifecycle·maintainability를 통합한다.",
+        "Power/thermal/I/O/interface architecture와 design margin을 평가한다.",
+        "Verification과 validation을 구분한다.",
+        "Prototype pass와 production readiness를 분리한다.",
+        "DFM/DFA, BOM/configuration, incoming/process control을 포함한다.",
+        "Production test coverage, EOL와 fixture control을 설명한다.",
+        "Change impact에 따라 DV/environmental requalification/production-test update 범위를 결정한다.",
+        "Topic 1/2/3/5, software lifecycle, FAT/SAT ownership boundary를 명확히 한다."
+      ],
+      "note": "IC-2027-W-3-9의 제어 Hardware 개발·생산·검증을 product/panel hardware lifecycle 관점에서 평가하는 핵심 설계 주제이다. Prototype/FAT 단일 합격이 production readiness를 대체하지 않으며, 구체적 derating/test 값은 applicable requirement에 따라야 한다. Historical frequency는 사용하지 않았다.",
+      "revision_notes": [
+        "IMPLEMENTATION_EVALUATION + DESIGN_EVALUATION으로 분류했다.",
+        "Software V-model과 대칭되는 hardware lifecycle을 소유하되 software lifecycle 자체는 제외했다.",
+        "Historical frequency를 사용하지 않았다."
+      ],
+      "topic_label": "제어 Hardware Lifecycle·Panel Architecture·생산·V&V"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
@@ -447,6 +472,31 @@
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "HIGH",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "Noise, offset/gain/linearity, drift, tolerance와 aging을 구분한다.",
+        "Error contributor의 signal-chain propagation을 설명한다.",
+        "Bandwidth와 integrated noise/SNR trade-off를 설명한다.",
+        "PSRR/reference/supply sensitivity의 역할을 설명한다.",
+        "ADC resolution/quantization과 accuracy를 구분한다.",
+        "Error budget과 worst-case/RSS 적용 조건을 설명한다.",
+        "Filtering과 calibration의 효과/한계를 구분한다.",
+        "Mitigation 후 residual error를 재검증한다.",
+        "Topic 1/3/4 및 sensor/metrology boundary를 명확히 한다."
+      ],
+      "note": "IC-2027-W-1-4의 전자기기 오차를 cross-cutting circuit-level mechanism으로 직접 소유하는 TIER_2 보강 주제이다. 실제 계측전자에서는 noise, drift, tolerance, reference, ADC와 supply sensitivity를 error budget으로 연결해야 한다. 고정 PSRR·drift·tolerance·filter cutoff·calibration interval과 historical frequency는 사용하지 않는다.",
+      "revision_notes": [
+        "PRINCIPLE_INTERPRETATION + FIELD_APPLICATION으로 분류했다.",
+        "TIER_2 특성을 반영해 selection_importance를 HIGH로 두었다.",
+        "Adjacent Topic ownership과 fixed-number policy를 명시했다."
+      ],
+      "topic_label": "전자기기 Error Chain·Noise·Drift·Tolerance·Aging"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
       "difficulty": "THEORY_CORE",
       "selection_importance": "CORE_MUST_PREPARE",
@@ -633,6 +683,80 @@
         "V-Model·RTM·시험전략·결함환류를 high-band 조건으로 반영했다."
       ],
       "topic_label": "SW-04 계측제어 SW 수명주기·V-Model·V&V"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "high_band_unlock_conditions": [
+        "EMC/EMI와 emission/immunity를 정확히 구분한다.",
+        "Requirement traceability로 test category/severity/duration을 결정한다.",
+        "Representative setup과 worst-case DUT operating mode를 설명한다.",
+        "Pre-test baseline과 in-test functional monitoring을 포함한다.",
+        "Temperature/humidity/vibration stress별 failure mechanism과 setup을 구분한다.",
+        "Acceptance criteria를 시험 전에 정의하고 allowable degradation/recovery를 설명한다.",
+        "Failure evidence→root cause→corrective action→re-test를 closed loop로 설명한다.",
+        "Qualification report와 change/requalification traceability를 설명한다.",
+        "Topic 1/2/4/5 ownership boundary를 명확히 한다."
+      ],
+      "note": "IC-2027-W-3-10의 환경시험 및 EMC/EMI qualification을 실제 시험계획·기능감시·acceptance evidence·re-test 관점에서 평가하는 핵심 계장 주제이다. Specific standard edition/severity/duration은 applicable requirement에 따라야 하며 Historical frequency는 사용하지 않았다.",
+      "revision_notes": [
+        "IMPLEMENTATION_EVALUATION + FIELD_APPLICATION으로 분류했다.",
+        "Field EMI troubleshooting과 qualification을 분리했다.",
+        "Historical frequency를 사용하지 않았다."
+      ],
+      "topic_label": "환경·EMC/EMI·온도·습도·진동 Qualification"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "high_band_unlock_conditions": [
+        "Applicable document hierarchy와 formal clarification/deviation 절차를 설명한다.",
+        "Location/orientation/accessibility와 enclosure/gland integrity를 평가한다.",
+        "Cable routing, segregation, bend/tension, termination/identification을 field implementation 관점으로 설명한다.",
+        "Shield/grounding 및 IS/hazardous-area 승인 설계와 field execution의 경계를 지킨다.",
+        "Impulse tubing slope/elevation을 gas/liquid/steam service에 따라 구분한다.",
+        "DP high/low path의 hydrostatic/thermal bias와 fitting/support/cleanliness를 설명한다.",
+        "Continuity/test boundary와 sensitive electronics 보호를 포함한다.",
+        "Inspection→punch→reinspection→closure→as-built evidence를 연결한다.",
+        "FAT, Design Basis/Code, P&ID, hazardous-area selection, Topic 1과 ownership boundary를 명확히 한다."
+      ],
+      "note": "IC-2027-W-4-9의 설치 및 기술기준을 실제 field implementation과 inspection evidence로 평가하는 핵심 계장 주제이다. 특정 법규/표준 edition은 프로젝트 실행 시 확인해야 하며 Historical frequency는 근거로 사용하지 않았다.",
+      "revision_notes": [
+        "IMPLEMENTATION_EVALUATION + FIELD_APPLICATION으로 분류했다.",
+        "설치·배선·impulse tubing·inspection/as-built가 중심이며 상위 standards governance는 별도 Topic과 분리했다.",
+        "Historical frequency를 사용하지 않았다."
+      ],
+      "topic_label": "계측설비 설치·배선·도압배관·시공검사 및 기술기준"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "DIAGNOSIS_ACTION",
+      "high_band_unlock_conditions": [
+        "PE와 signal/reference ground의 기능을 분리하고 safety boundary를 지킨다.",
+        "Single-point·multi-point grounding과 shield termination을 frequency/bonding 조건에 따라 설명한다.",
+        "Ground loop의 multiple return path·potential difference·circulating current mechanism을 설명한다.",
+        "Common-mode·differential-mode와 source-path-victim coupling을 진단한다.",
+        "DC distribution·redundant supply·UPS sizing과 common-point risk를 설명한다.",
+        "UPS normal·battery·bypass와 neutral/ground reference를 확인한다.",
+        "Before/after evidence와 one-change-at-a-time diagnostic workflow를 적용한다.",
+        "Lane A Topic 2~5 boundary와 대책 후 closed-loop verification을 설명한다."
+      ],
+      "note": "IC-2027-W-2-6 범위의 전원/접지 문제를 현장 noise·ground-loop·UPS·EMC 진단과 대책으로 연결하는 핵심 계장 주제이다. Historical frequency는 근거로 사용하지 않았다.",
+      "revision_notes": [
+        "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+        "DIAGNOSIS_ACTION을 Primary Question Type으로 적용했다.",
+        "Historical frequency가 아니라 criterion ownership과 field relevance를 근거로 분류했다."
+      ],
+      "topic_label": "계장 전원·접지·차폐·UPS·Ground Loop·EMC"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

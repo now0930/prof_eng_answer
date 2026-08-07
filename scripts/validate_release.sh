@@ -401,6 +401,21 @@ python3 -B scripts/test_review_expert_calibration_record.py
 echo "----- host regression: sis sil safety software topic -----"
 python3 -B scripts/test_sis_sil_safety_software_topic.py
 
+echo "----- host regression: instrumentation power grounding shielding UPS ground-loop EMC topic -----"
+python3 -B scripts/test_instrumentation_power_grounding_shielding_ups_ground_loop_emc_topic.py
+echo
+echo "----- host regression: instrumentation installation wiring impulse tubing inspection codes topic -----"
+python3 -B scripts/test_instrumentation_installation_wiring_impulse_tubing_inspection_codes_topic.py
+echo
+echo "----- host regression: instrumentation environmental EMC EMI temperature humidity vibration qualification topic -----"
+python3 -B scripts/test_instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification_topic.py
+echo
+echo "----- host regression: control hardware lifecycle panel architecture component selection production verification topic -----"
+python3 -B scripts/test_control_hardware_lifecycle_panel_architecture_component_selection_production_verification_topic.py
+echo
+echo "----- host regression: electronics error noise drift tolerance aging power mitigation topic -----"
+python3 -B scripts/test_electronics_error_noise_drift_tolerance_aging_power_mitigation_topic.py
+echo
 echo "----- host regression: topic classification policy -----"
 python3 -B scripts/test_topic_classification_policy.py
 

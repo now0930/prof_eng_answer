@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T12:15:17Z-generated-topic-pack-model-answers",
+  "version": "2026-08-07T14:42:01Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -1287,6 +1287,349 @@
         "Discovery, Compatibility matrix, 데이터 변환, 전환방식, Parallel operation, go/no-go와 안정화를 설명한다.",
         "위험기반 Legacy 판단, proactive Obsolescence, 예비품, Vendor lock-in, License와 Firmware 수명주기를 설명한다.",
         "문서·교육·지식이전, 변경종결과 SW-04·SW-09 ownership 경계를 명시한다."
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "title_ko": "제어 Hardware Lifecycle·Panel Architecture·부품선정·생산검증",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "제어시스템 Hardware Lifecycle과 단계별 검증절차를 설명하시오.",
+          "intent": "Requirement부터 architecture, DV, production verification, configuration/release까지 lifecycle을 평가",
+          "required_anchor_ids": [
+            "chl_scope_chain",
+            "chl_requirement_traceability",
+            "chl_design_review",
+            "chl_verification_plan",
+            "chl_prototype_design_verification",
+            "chl_release_gate"
+          ]
+        },
+        {
+          "pattern": "계측제어 Panel Hardware Architecture 설계 시 고려사항을 설명하시오.",
+          "intent": "Power/protection, I/O, communication, isolation, thermal/layout와 interface partitioning을 평가",
+          "required_anchor_ids": [
+            "chl_architecture_partitioning",
+            "chl_interface_definition",
+            "chl_power_budget",
+            "chl_power_protection",
+            "chl_thermal_design",
+            "chl_panel_layout"
+          ]
+        },
+        {
+          "pattern": "제어 Hardware의 부품선정 기준과 derating 방법을 설명하시오.",
+          "intent": "Rating, environment, derating, interface, availability/lifecycle와 maintainability를 평가",
+          "required_anchor_ids": [
+            "chl_component_selection_multicriteria",
+            "chl_derating_rule",
+            "chl_obsolescence_availability",
+            "chl_tolerance_stack_boundary"
+          ]
+        },
+        {
+          "pattern": "PLC/Controller Panel의 I/O 및 communication hardware 선정 시 고려사항을 설명하시오.",
+          "intent": "Signal range/loading/isolation/diagnostics/fault state와 physical communication interface compatibility를 평가",
+          "required_anchor_ids": [
+            "chl_io_selection",
+            "chl_communication_interface",
+            "chl_connector_terminal_selection",
+            "chl_interface_definition"
+          ]
+        },
+        {
+          "pattern": "Prototype 검증과 Production Verification의 차이를 설명하시오.",
+          "intent": "설계기능/마진 검증과 제조변동/양산품 검사 coverage의 목적 차이를 평가",
+          "required_anchor_ids": [
+            "chl_prototype_not_production",
+            "chl_prototype_design_verification",
+            "chl_dfm_dfa",
+            "chl_production_test_coverage",
+            "chl_eol_test"
+          ]
+        },
+        {
+          "pattern": "Hardware Verification과 Validation의 차이 및 traceability를 설명하시오.",
+          "intent": "Specified requirements와 intended use의 차이, verification method/evidence traceability를 평가",
+          "required_anchor_ids": [
+            "chl_verification_vs_validation",
+            "chl_requirement_traceability",
+            "chl_verification_plan",
+            "chl_release_gate"
+          ]
+        },
+        {
+          "pattern": "제어반 Hardware의 양산 준비와 생산검증 절차를 설명하시오.",
+          "intent": "DFM/DFA, BOM/configuration, incoming/process control, production test와 NCR closure를 평가",
+          "required_anchor_ids": [
+            "chl_dfm_dfa",
+            "chl_bom_configuration",
+            "chl_incoming_material_control",
+            "chl_work_instruction_process_control",
+            "chl_production_test_coverage",
+            "chl_nonconformance_rework"
+          ]
+        },
+        {
+          "pattern": "Hardware production test fixture와 end-of-line test 관리방법을 설명하시오.",
+          "intent": "Fixture/test software control, unit-level coverage와 result traceability를 평가",
+          "required_anchor_ids": [
+            "chl_test_fixture_control",
+            "chl_eol_test",
+            "chl_production_test_coverage",
+            "chl_bom_configuration"
+          ]
+        },
+        {
+          "pattern": "부품 대체 또는 Hardware 설계변경 시 재검증 범위 결정방법을 설명하시오.",
+          "intent": "Change impact로 DV, environmental requalification와 production test update를 결정",
+          "required_anchor_ids": [
+            "chl_change_impact",
+            "chl_environmental_qualification_boundary",
+            "chl_bom_configuration",
+            "chl_release_gate"
+          ]
+        },
+        {
+          "pattern": "Hardware Design Verification, 환경 Qualification, FAT/SAT의 역할 차이를 설명하시오.",
+          "intent": "Product hardware DV, environmental qualification, project acceptance의 ownership을 분리",
+          "required_anchor_ids": [
+            "chl_prototype_design_verification",
+            "chl_environmental_qualification_boundary",
+            "chl_fat_boundary",
+            "chl_software_lifecycle_boundary",
+            "chl_grounding_emc_boundary"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "Hardware requirements and lifecycle",
+          "intent": "Requirement를 architecture와 verification/release evidence까지 trace한다.",
+          "anchor_refs": [
+            "chl_scope_chain",
+            "chl_requirement_traceability",
+            "chl_verification_vs_validation"
+          ]
+        },
+        {
+          "section": "Panel/product architecture and interfaces",
+          "intent": "Power/protection, processing, I/O, communication, isolation과 interface partition을 설계한다.",
+          "anchor_refs": [
+            "chl_architecture_partitioning",
+            "chl_interface_definition",
+            "chl_power_budget",
+            "chl_power_protection",
+            "chl_io_selection",
+            "chl_communication_interface"
+          ]
+        },
+        {
+          "section": "Component and physical design",
+          "intent": "Component rating/derating/lifecycle, thermal/layout, connector/terminal과 maintainability를 평가한다.",
+          "anchor_refs": [
+            "chl_component_selection_multicriteria",
+            "chl_derating_rule",
+            "chl_obsolescence_availability",
+            "chl_thermal_design",
+            "chl_panel_layout",
+            "chl_connector_terminal_selection"
+          ]
+        },
+        {
+          "section": "Design review and prototype verification",
+          "intent": "Review, verification plan과 prototype test를 requirement evidence로 연결한다.",
+          "anchor_refs": [
+            "chl_design_review",
+            "chl_verification_plan",
+            "chl_prototype_design_verification",
+            "chl_prototype_not_production"
+          ]
+        },
+        {
+          "section": "Manufacturability and configuration",
+          "intent": "DFM/DFA, BOM baseline, incoming/process control로 반복 가능한 생산을 준비한다.",
+          "anchor_refs": [
+            "chl_dfm_dfa",
+            "chl_bom_configuration",
+            "chl_incoming_material_control",
+            "chl_work_instruction_process_control"
+          ]
+        },
+        {
+          "section": "Production verification",
+          "intent": "Production test coverage, EOL, fixture control과 nonconformance closure를 평가한다.",
+          "anchor_refs": [
+            "chl_production_test_coverage",
+            "chl_eol_test",
+            "chl_test_fixture_control",
+            "chl_nonconformance_rework"
+          ]
+        },
+        {
+          "section": "Change impact and release gate",
+          "intent": "설계/부품/공정 변경의 impact와 re-verification 범위를 정하고 release evidence를 baseline으로 고정한다.",
+          "anchor_refs": [
+            "chl_change_impact",
+            "chl_release_gate"
+          ]
+        },
+        {
+          "section": "Ownership boundaries",
+          "intent": "Topic 1/2/3/5, software lifecycle, FAT/SAT와 hardware lifecycle ownership을 분리한다.",
+          "anchor_refs": [
+            "chl_grounding_emc_boundary",
+            "chl_field_installation_boundary",
+            "chl_environmental_qualification_boundary",
+            "chl_tolerance_stack_boundary",
+            "chl_fat_boundary",
+            "chl_software_lifecycle_boundary"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "Requirement→architecture/interface→component selection→DV→production control/test→release evidence를 하나의 lifecycle로 연결한다.",
+        "Hardware architecture를 power/protection, controller, I/O, communication, isolation, terminal, thermal 영역으로 partition한다.",
+        "Component selection에서 rating뿐 아니라 derating, environment, interface, lifecycle/availability와 maintainability를 포함한다.",
+        "Power budget과 thermal design을 margin/evidence 관점으로 설명한다.",
+        "Verification과 validation의 목적 차이를 명확히 한다.",
+        "Prototype pass와 production readiness를 구분한다.",
+        "DFM/DFA, BOM/configuration, incoming/process control을 생산준비에 포함한다.",
+        "Production test coverage와 EOL/fixture control을 제조변동·unit defect 검출 관점으로 설명한다.",
+        "Nonconformance→rework→reinspection/retest closure를 포함한다.",
+        "Component/design/process change의 impact로 re-verification 범위를 결정한다.",
+        "Topic 3 environmental qualification 및 FAT/SAT project acceptance와 hardware DV를 구분한다."
+      ],
+      "common_missing_points": [
+        "Prototype 기능시험 합격을 production readiness와 동일시한다.",
+        "FAT를 hardware design verification 전체의 대체 evidence로 사용한다.",
+        "부품 nominal rating만 보고 derating/environment/lifecycle을 누락한다.",
+        "모든 component에 동일 derating percentage를 적용한다.",
+        "Verification과 validation을 동일 개념으로 설명한다.",
+        "DFM/DFA와 configuration baseline을 누락한다.",
+        "Production test를 design verification 전체의 단순 반복으로 설명한다.",
+        "Test fixture/test software의 version/calibration/change control을 누락한다.",
+        "부품 substitution을 impact assessment 없이 허용한다.",
+        "Rework 후 reinspection/retest를 생략한다.",
+        "Hardware lifecycle과 software V-model, FAT/SAT ownership을 혼합한다."
+      ],
+      "routing_aliases": [
+        "control hardware lifecycle panel architecture component selection production verification",
+        "control system hardware development production verification",
+        "instrumentation control panel hardware architecture component selection",
+        "control hardware prototype design verification production test",
+        "control panel hardware component derating thermal design verification",
+        "industrial control hardware lifecycle validation production",
+        "hardware requirements architecture component selection verification production",
+        "control hardware manufacturability DFM production verification",
+        "control hardware BOM configuration production test",
+        "panel hardware power budget I/O communication architecture",
+        "제어시스템 하드웨어 개발 생산 검증",
+        "계측제어 패널 하드웨어 아키텍처 부품선정",
+        "제어반 부품 derating 생산검증",
+        "하드웨어 prototype design verification 양산검증",
+        "제어 hardware BOM configuration EOL test"
+      ],
+      "routing_field_points": [
+        "Hardware requirement와 verification evidence traceability",
+        "Panel power/protection/controller/I/O/communication/isolation architecture",
+        "Interface signal range electrical level loading isolation fault behavior",
+        "Power budget startup load supply tolerance conversion loss",
+        "Component rating derating environment lifecycle maintainability",
+        "Thermal loss enclosure hotspot airflow verification",
+        "I/O module signal conditioning diagnostics fault state",
+        "Prototype design verification와 production readiness 구분",
+        "Verification plan method DUT configuration acceptance evidence",
+        "DFM/DFA와 assembly mistake proofing",
+        "BOM drawing schematic revision configuration baseline",
+        "Incoming material와 controlled work instruction/process control",
+        "Production test coverage와 end-of-line functional test",
+        "Test fixture/test software version calibration change control",
+        "Nonconformance rework reinspection retest closure"
+      ],
+      "revision_notes": [
+        "Primary Question Type을 IMPLEMENTATION_EVALUATION으로 설정했다.",
+        "Difficulty를 DESIGN_EVALUATION으로 설정했다.",
+        "Prototype/DV/production verification과 FAT/SAT를 분리했다.",
+        "Specific derating percentage와 fixed test limit를 hard-code하지 않았다.",
+        "Historical frequency를 사용하지 않았다."
+      ],
+      "id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "title": "제어 Hardware Lifecycle·Panel Architecture·부품선정·생산검증",
+      "question_examples": [
+        "제어시스템 Hardware Lifecycle과 단계별 검증절차를 설명하시오.",
+        "계측제어 Panel Hardware Architecture 설계 시 고려사항을 설명하시오.",
+        "제어 Hardware의 부품선정 기준과 derating 방법을 설명하시오.",
+        "PLC/Controller Panel의 I/O 및 communication hardware 선정 시 고려사항을 설명하시오.",
+        "Prototype 검증과 Production Verification의 차이를 설명하시오.",
+        "Hardware Verification과 Validation의 차이 및 traceability를 설명하시오.",
+        "제어반 Hardware의 양산 준비와 생산검증 절차를 설명하시오.",
+        "Hardware production test fixture와 end-of-line test 관리방법을 설명하시오.",
+        "부품 대체 또는 Hardware 설계변경 시 재검증 범위 결정방법을 설명하시오.",
+        "Hardware Design Verification, 환경 Qualification, FAT/SAT의 역할 차이를 설명하시오."
+      ],
+      "topic_aliases": [
+        "control hardware lifecycle panel architecture component selection production verification",
+        "control system hardware development production verification",
+        "instrumentation control panel hardware architecture component selection",
+        "control hardware prototype design verification production test",
+        "control panel hardware component derating thermal design verification",
+        "industrial control hardware lifecycle validation production",
+        "hardware requirements architecture component selection verification production",
+        "control hardware manufacturability DFM production verification",
+        "control hardware BOM configuration production test",
+        "panel hardware power budget I/O communication architecture",
+        "제어시스템 하드웨어 개발 생산 검증",
+        "계측제어 패널 하드웨어 아키텍처 부품선정",
+        "제어반 부품 derating 생산검증",
+        "하드웨어 prototype design verification 양산검증",
+        "제어 hardware BOM configuration EOL test"
+      ],
+      "expected_structure": [
+        "Hardware requirements and lifecycle",
+        "Panel/product architecture and interfaces",
+        "Component and physical design",
+        "Design review and prototype verification",
+        "Manufacturability and configuration",
+        "Production verification",
+        "Change impact and release gate",
+        "Ownership boundaries"
+      ],
+      "high_score_features": [
+        "요구사항에서 설계·검증·생산·release까지 evidence traceability와 production variability를 함께 다룬다."
+      ],
+      "low_score_patterns": [
+        "Prototype/FAT 통과만으로 설계검증과 양산준비가 끝났다고 설명하거나 component nominal rating만 나열한다."
+      ],
+      "field_connection_points": [
+        "Hardware requirement와 verification evidence traceability",
+        "Panel power/protection/controller/I/O/communication/isolation architecture",
+        "Interface signal range electrical level loading isolation fault behavior",
+        "Power budget startup load supply tolerance conversion loss",
+        "Component rating derating environment lifecycle maintainability",
+        "Thermal loss enclosure hotspot airflow verification",
+        "I/O module signal conditioning diagnostics fault state",
+        "Prototype design verification와 production readiness 구분",
+        "Verification plan method DUT configuration acceptance evidence",
+        "DFM/DFA와 assembly mistake proofing",
+        "BOM drawing schematic revision configuration baseline",
+        "Incoming material와 controlled work instruction/process control",
+        "Production test coverage와 end-of-line functional test",
+        "Test fixture/test software version calibration change control",
+        "Nonconformance rework reinspection retest closure"
+      ],
+      "model_answer_outline": [
+        "Requirement를 architecture와 verification/release evidence까지 trace한다.",
+        "Power/protection, processing, I/O, communication, isolation과 interface partition을 설계한다.",
+        "Component rating/derating/lifecycle, thermal/layout, connector/terminal과 maintainability를 평가한다.",
+        "Review, verification plan과 prototype test를 requirement evidence로 연결한다.",
+        "DFM/DFA, BOM baseline, incoming/process control로 반복 가능한 생산을 준비한다.",
+        "Production test coverage, EOL, fixture control과 nonconformance closure를 평가한다.",
+        "설계/부품/공정 변경의 impact와 re-verification 범위를 정하고 release evidence를 baseline으로 고정한다.",
+        "Topic 1/2/3/5, software lifecycle, FAT/SAT와 hardware lifecycle ownership을 분리한다."
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },
@@ -7160,6 +7503,350 @@
     },
     {
       "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "title_ko": "전자기기 오차·Noise·Drift·Tolerance·Aging·Power 영향 및 대책",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "전자기기 오차의 종류와 발생원인 및 대책을 설명하시오.",
+          "intent": "Systematic/random/drift 계열을 구분하고 electronics error chain과 mitigation을 평가",
+          "required_anchor_ids": [
+            "eem_scope_chain",
+            "eem_error_classification",
+            "eem_offset_error",
+            "eem_gain_error",
+            "eem_random_noise",
+            "eem_drift_definition",
+            "eem_mitigation_hierarchy"
+          ]
+        },
+        {
+          "pattern": "전자회로의 Noise 종류와 저감방법을 설명하시오.",
+          "intent": "Random noise, bandwidth, SNR, filtering과 local layout mitigation을 평가",
+          "required_anchor_ids": [
+            "eem_random_noise",
+            "eem_noise_bandwidth",
+            "eem_snr_dynamic_range",
+            "eem_filter_noise_mitigation",
+            "eem_layout_local_mitigation"
+          ]
+        },
+        {
+          "pattern": "전자기기의 Drift, Tolerance, Aging 차이와 대책을 설명하시오.",
+          "intent": "초기 제조편차, 조건/시간 변화, 장기변화를 구분",
+          "required_anchor_ids": [
+            "eem_drift_definition",
+            "eem_temperature_coefficient",
+            "eem_tolerance_definition",
+            "eem_tolerance_propagation",
+            "eem_aging_definition",
+            "eem_calibration_interval"
+          ]
+        },
+        {
+          "pattern": "전원 변동이 계측 전자회로 정확도에 미치는 영향을 설명하시오.",
+          "intent": "Local supply/reference/regulator path와 PSRR를 error contributor로 평가",
+          "required_anchor_ids": [
+            "eem_power_supply_sensitivity",
+            "eem_psrr",
+            "eem_reference_error",
+            "eem_error_budget"
+          ]
+        },
+        {
+          "pattern": "ADC의 resolution, quantization과 accuracy의 관계를 설명하시오.",
+          "intent": "Resolution/quantization과 offset/gain/INL/DNL/reference/noise 포함 accuracy를 구분",
+          "required_anchor_ids": [
+            "eem_adc_quantization",
+            "eem_adc_resolution_accuracy",
+            "eem_reference_error",
+            "eem_random_noise"
+          ]
+        },
+        {
+          "pattern": "전자계측기의 Error Budget 작성방법을 설명하시오.",
+          "intent": "Contributor 환산, sensitivity, worst-case/RSS와 dominant source 식별을 평가",
+          "required_anchor_ids": [
+            "eem_error_budget",
+            "eem_tolerance_propagation",
+            "eem_rss_worstcase",
+            "eem_temperature_coefficient",
+            "eem_reference_error"
+          ]
+        },
+        {
+          "pattern": "Filtering과 Calibration의 전자오차 저감 효과와 한계를 설명하시오.",
+          "intent": "Noise bandwidth 저감과 systematic correction의 역할/한계를 구분",
+          "required_anchor_ids": [
+            "eem_filter_noise_mitigation",
+            "eem_filter_not_offset_fix",
+            "eem_calibration_systematic",
+            "eem_calibration_interval"
+          ]
+        },
+        {
+          "pattern": "전자계측 회로의 Offset/Gain/Linearity Error를 설명하시오.",
+          "intent": "Transfer characteristic의 서로 다른 systematic error를 구분",
+          "required_anchor_ids": [
+            "eem_offset_error",
+            "eem_gain_error",
+            "eem_linearity_error",
+            "eem_calibration_systematic"
+          ]
+        },
+        {
+          "pattern": "전자오차 발생 시 진단절차와 개선방안을 설명하시오.",
+          "intent": "Zero/span, temperature, supply/reference, bandwidth, time trend를 사용한 원인분리와 residual verification을 평가",
+          "required_anchor_ids": [
+            "eem_diagnosis_chain",
+            "eem_mitigation_hierarchy",
+            "eem_residual_verification",
+            "eem_power_supply_sensitivity"
+          ]
+        },
+        {
+          "pattern": "센서 인터페이스 전자회로의 공통 오차요인과 센서 고유오차의 경계를 설명하시오.",
+          "intent": "Cross-cutting electronics error와 sensor-specific/metrology/EMC/qualification ownership을 구분",
+          "required_anchor_ids": [
+            "eem_sensor_specific_boundary",
+            "eem_metrology_boundary",
+            "eem_ground_emc_boundary",
+            "eem_environment_qualification_boundary",
+            "eem_hardware_lifecycle_boundary"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "Error chain and classification",
+          "intent": "전자오차를 systematic/random/drift 계열로 분류하고 signal chain에서 전파를 설명한다.",
+          "anchor_refs": [
+            "eem_scope_chain",
+            "eem_error_classification",
+            "eem_error_budget"
+          ]
+        },
+        {
+          "section": "Systematic transfer errors",
+          "intent": "Offset, gain, linearity의 발생원인과 calibration 한계를 설명한다.",
+          "anchor_refs": [
+            "eem_offset_error",
+            "eem_gain_error",
+            "eem_linearity_error",
+            "eem_calibration_systematic"
+          ]
+        },
+        {
+          "section": "Random noise and bandwidth",
+          "intent": "Noise source, bandwidth/SNR와 filtering trade-off를 설명한다.",
+          "anchor_refs": [
+            "eem_random_noise",
+            "eem_noise_bandwidth",
+            "eem_snr_dynamic_range",
+            "eem_filter_noise_mitigation",
+            "eem_filter_not_offset_fix"
+          ]
+        },
+        {
+          "section": "Drift, tolerance and aging",
+          "intent": "Manufacturing spread, condition/time change와 long-term aging을 구분한다.",
+          "anchor_refs": [
+            "eem_drift_definition",
+            "eem_temperature_coefficient",
+            "eem_tolerance_definition",
+            "eem_tolerance_propagation",
+            "eem_aging_definition",
+            "eem_aging_reliability_boundary"
+          ]
+        },
+        {
+          "section": "Power, reference and ADC",
+          "intent": "Supply/reference sensitivity, PSRR, quantization/resolution와 accuracy를 설명한다.",
+          "anchor_refs": [
+            "eem_power_supply_sensitivity",
+            "eem_psrr",
+            "eem_reference_error",
+            "eem_adc_quantization",
+            "eem_adc_resolution_accuracy",
+            "eem_adc_aliasing_boundary"
+          ]
+        },
+        {
+          "section": "Mitigation and calibration",
+          "intent": "Architecture/layout/filter/calibration/compensation의 역할과 한계를 원인별로 적용한다.",
+          "anchor_refs": [
+            "eem_auto_zero_ratiometric",
+            "eem_layout_local_mitigation",
+            "eem_calibration_interval",
+            "eem_mitigation_hierarchy",
+            "eem_residual_verification"
+          ]
+        },
+        {
+          "section": "Error combination and diagnosis",
+          "intent": "Worst-case/RSS 조건, dominant contributor와 symptom-based diagnosis를 설명한다.",
+          "anchor_refs": [
+            "eem_rss_worstcase",
+            "eem_diagnosis_chain",
+            "eem_error_budget"
+          ]
+        },
+        {
+          "section": "Ownership boundaries",
+          "intent": "Plant grounding/EMC, qualification, HW lifecycle, sensor-specific error와 metrology 정의를 분리한다.",
+          "anchor_refs": [
+            "eem_ground_emc_boundary",
+            "eem_environment_qualification_boundary",
+            "eem_hardware_lifecycle_boundary",
+            "eem_sensor_specific_boundary",
+            "eem_metrology_boundary"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "Random noise, systematic offset/gain/linearity error와 drift를 명확히 구분한다.",
+        "Tolerance, drift, aging을 제조편차·조건/시간 변화·장기변화로 구분한다.",
+        "전자 signal chain에서 error contributor의 전달경로를 설명한다.",
+        "Noise spectral density와 measurement bandwidth의 관계를 설명한다.",
+        "ADC resolution/quantization과 전체 accuracy를 구분한다.",
+        "Supply/reference sensitivity와 PSRR의 주파수/조건 의존성을 설명한다.",
+        "Error budget을 input/output referred 기준으로 환산하고 dominant contributor를 찾는다.",
+        "Worst-case와 RSS를 상관성/분포 조건에 맞게 구분한다.",
+        "Filtering과 calibration의 적용 대상 및 한계를 구분한다.",
+        "Mitigation 후 residual error를 requirement와 재검증한다.",
+        "Topic 1/3/4 및 sensor/metrology boundary를 명확히 한다."
+      ],
+      "common_missing_points": [
+        "Offset, gain, drift와 tolerance를 모두 noise라고 표현한다.",
+        "Tolerance와 drift를 동일시한다.",
+        "Aging과 초기 tolerance를 동일시한다.",
+        "ADC bit 수 또는 resolution을 accuracy와 동일시한다.",
+        "Filter만으로 deterministic offset/gain error가 제거된다고 설명한다.",
+        "한 번 calibration하면 future drift/noise/aging이 영구 제거된다고 설명한다.",
+        "PSRR nominal 한 값만으로 모든 주파수의 supply 영향이 제거된다고 설명한다.",
+        "Error contributor를 상관성과 분포 없이 항상 단순 합산한다.",
+        "Plant ground loop/shield termination까지 electronics circuit Topic이 소유한다고 확장한다.",
+        "Mitigation 후 residual verification을 생략한다."
+      ],
+      "routing_aliases": [
+        "electronics error noise drift tolerance aging power mitigation",
+        "instrumentation electronics noise drift tolerance aging power error",
+        "electronic circuit error budget noise drift aging power supply variation",
+        "measurement electronics error sources noise offset drift tolerance",
+        "analog electronics error mitigation tolerance aging power",
+        "sensor interface electronics noise drift error budget",
+        "electronics offset gain linearity noise drift error",
+        "ADC resolution quantization accuracy electronics error",
+        "power supply reference PSRR instrumentation error",
+        "electronics calibration filtering noise drift mitigation",
+        "전자회로 오차 노이즈 드리프트 공차 열화 전원 영향",
+        "계측 전자오차 noise drift tolerance aging power mitigation",
+        "전자기기 offset gain linearity error",
+        "ADC resolution quantization accuracy 오차",
+        "전자계측 error budget PSRR reference drift"
+      ],
+      "routing_field_points": [
+        "Offset gain linearity systematic electronics error",
+        "Random noise spectral density measurement bandwidth SNR",
+        "Temperature drift tempco self-heating operating condition",
+        "Component tolerance manufacturing spread sensitivity propagation",
+        "Aging long-term parameter shift calibration stability",
+        "Power supply variation ripple regulator noise electronics error",
+        "PSRR frequency-dependent supply rejection",
+        "Reference initial accuracy noise tempco load sensitivity aging",
+        "ADC quantization resolution INL DNL accuracy distinction",
+        "Anti-alias filter sampling Nyquist error",
+        "Filter noise reduction versus response delay trade-off",
+        "Calibration systematic correction versus future drift limitation",
+        "Error budget input-referred output-referred dominant contributor",
+        "Worst-case versus RSS error combination correlation",
+        "Residual error verification after mitigation"
+      ],
+      "revision_notes": [
+        "Primary Question Type을 PRINCIPLE_INTERPRETATION으로 설정했다.",
+        "Difficulty를 FIELD_APPLICATION으로 설정했다.",
+        "전자오차 mechanism과 mitigation을 cross-cutting electronics level로 소유한다.",
+        "Plant EMC/grounding, qualification, HW lifecycle와 sensor-specific ownership을 분리했다.",
+        "Fixed universal numeric parameters와 historical frequency를 사용하지 않았다."
+      ],
+      "id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "title": "전자기기 오차·Noise·Drift·Tolerance·Aging·Power 영향 및 대책",
+      "question_examples": [
+        "전자기기 오차의 종류와 발생원인 및 대책을 설명하시오.",
+        "전자회로의 Noise 종류와 저감방법을 설명하시오.",
+        "전자기기의 Drift, Tolerance, Aging 차이와 대책을 설명하시오.",
+        "전원 변동이 계측 전자회로 정확도에 미치는 영향을 설명하시오.",
+        "ADC의 resolution, quantization과 accuracy의 관계를 설명하시오.",
+        "전자계측기의 Error Budget 작성방법을 설명하시오.",
+        "Filtering과 Calibration의 전자오차 저감 효과와 한계를 설명하시오.",
+        "전자계측 회로의 Offset/Gain/Linearity Error를 설명하시오.",
+        "전자오차 발생 시 진단절차와 개선방안을 설명하시오.",
+        "센서 인터페이스 전자회로의 공통 오차요인과 센서 고유오차의 경계를 설명하시오."
+      ],
+      "topic_aliases": [
+        "electronics error noise drift tolerance aging power mitigation",
+        "instrumentation electronics noise drift tolerance aging power error",
+        "electronic circuit error budget noise drift aging power supply variation",
+        "measurement electronics error sources noise offset drift tolerance",
+        "analog electronics error mitigation tolerance aging power",
+        "sensor interface electronics noise drift error budget",
+        "electronics offset gain linearity noise drift error",
+        "ADC resolution quantization accuracy electronics error",
+        "power supply reference PSRR instrumentation error",
+        "electronics calibration filtering noise drift mitigation",
+        "전자회로 오차 노이즈 드리프트 공차 열화 전원 영향",
+        "계측 전자오차 noise drift tolerance aging power mitigation",
+        "전자기기 offset gain linearity error",
+        "ADC resolution quantization accuracy 오차",
+        "전자계측 error budget PSRR reference drift"
+      ],
+      "expected_structure": [
+        "Error chain and classification",
+        "Systematic transfer errors",
+        "Random noise and bandwidth",
+        "Drift tolerance and aging",
+        "Power reference and ADC",
+        "Mitigation and calibration",
+        "Error combination and diagnosis",
+        "Ownership boundaries"
+      ],
+      "high_score_features": [
+        "오차 source→회로 sensitivity/전달→output contribution→원인별 mitigation→residual verification으로 연결한다."
+      ],
+      "low_score_patterns": [
+        "모든 오차를 noise로 묶거나 ADC resolution=accuracy, filter/calibration=만능대책으로 설명한다."
+      ],
+      "field_connection_points": [
+        "Offset gain linearity systematic electronics error",
+        "Random noise spectral density measurement bandwidth SNR",
+        "Temperature drift tempco self-heating operating condition",
+        "Component tolerance manufacturing spread sensitivity propagation",
+        "Aging long-term parameter shift calibration stability",
+        "Power supply variation ripple regulator noise electronics error",
+        "PSRR frequency-dependent supply rejection",
+        "Reference initial accuracy noise tempco load sensitivity aging",
+        "ADC quantization resolution INL DNL accuracy distinction",
+        "Anti-alias filter sampling Nyquist error",
+        "Filter noise reduction versus response delay trade-off",
+        "Calibration systematic correction versus future drift limitation",
+        "Error budget input-referred output-referred dominant contributor",
+        "Worst-case versus RSS error combination correlation",
+        "Residual error verification after mitigation"
+      ],
+      "model_answer_outline": [
+        "전자오차를 systematic/random/drift 계열로 분류하고 signal chain에서 전파를 설명한다.",
+        "Offset, gain, linearity의 발생원인과 calibration 한계를 설명한다.",
+        "Noise source, bandwidth/SNR와 filtering trade-off를 설명한다.",
+        "Manufacturing spread, condition/time change와 long-term aging을 구분한다.",
+        "Supply/reference sensitivity, PSRR, quantization/resolution와 accuracy를 설명한다.",
+        "Architecture/layout/filter/calibration/compensation의 역할과 한계를 원인별로 적용한다.",
+        "Worst-case/RSS 조건, dominant contributor와 symptom-based diagnosis를 설명한다.",
+        "Plant grounding/EMC, qualification, HW lifecycle, sensor-specific error와 metrology 정의를 분리한다."
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
       "title_ko": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
       "question_type": "PRINCIPLE_INTERPRETATION",
@@ -10336,6 +11023,995 @@
         "test evidence",
         "review and approval",
         "exit criteria"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "title_ko": "계측기 환경·EMC/EMI·온도·습도·진동 Qualification 및 검증",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "계측기의 환경시험 및 EMC/EMI Qualification 절차와 평가방법을 설명하시오.",
+          "intent": "요구사항 정의부터 setup, stress, monitoring, acceptance, failure/re-test까지 평가",
+          "required_anchor_ids": [
+            "ieeq_scope_chain",
+            "ieeq_requirement_traceability",
+            "ieeq_pretest_baseline",
+            "ieeq_in_test_monitoring",
+            "ieeq_acceptance_criteria_predefined",
+            "ieeq_traceable_report"
+          ]
+        },
+        {
+          "pattern": "EMC에서 emission과 immunity의 차이와 시험 시 고려사항을 설명하시오.",
+          "intent": "EMC/EMI 개념과 emission/immunity를 구분하고 representative setup과 DUT mode를 평가",
+          "required_anchor_ids": [
+            "ieeq_emc_emi_distinction",
+            "ieeq_emission_immunity_distinction",
+            "ieeq_emc_test_categories",
+            "ieeq_test_setup_representative",
+            "ieeq_operating_mode_worst_case"
+          ]
+        },
+        {
+          "pattern": "계측기 EMC immunity 시험의 구성과 합격판정 방법을 설명하시오.",
+          "intent": "DUT operating mode, in-test monitoring, predefined degradation/recovery criterion을 평가",
+          "required_anchor_ids": [
+            "ieeq_emc_test_categories",
+            "ieeq_operating_mode_worst_case",
+            "ieeq_in_test_monitoring",
+            "ieeq_acceptance_criteria_predefined"
+          ]
+        },
+        {
+          "pattern": "계측기 온도 Qualification 시험의 목적과 설계 유의사항을 설명하시오.",
+          "intent": "Operating/storage와 stabilization, transition/cycle requirement를 구분",
+          "required_anchor_ids": [
+            "ieeq_temperature_operating_storage",
+            "ieeq_temperature_transition_boundary",
+            "ieeq_pretest_baseline",
+            "ieeq_acceptance_criteria_predefined"
+          ]
+        },
+        {
+          "pattern": "계측기 습도시험의 failure mechanism과 검증방법을 설명하시오.",
+          "intent": "Condensation, leakage, corrosion, insulation과 recovery/post-check를 평가",
+          "required_anchor_ids": [
+            "ieeq_humidity_failure_mechanisms",
+            "ieeq_condensation_condition",
+            "ieeq_humidity_recovery_check",
+            "ieeq_in_test_monitoring"
+          ]
+        },
+        {
+          "pattern": "계측기 진동 Qualification 시험의 구성과 검사사항을 설명하시오.",
+          "intent": "Profile/axis, fixture/mounting, in-test intermittent failure와 post inspection을 평가",
+          "required_anchor_ids": [
+            "ieeq_vibration_sine_random",
+            "ieeq_vibration_mounting",
+            "ieeq_vibration_functional_monitor",
+            "ieeq_post_vibration_inspection"
+          ]
+        },
+        {
+          "pattern": "환경시험 중 계측기가 간헐 reset 또는 communication loss를 보일 때 조치방안을 설명하시오.",
+          "intent": "Failure evidence→causal mechanism→corrective action→re-test chain으로 평가",
+          "required_anchor_ids": [
+            "ieeq_in_test_monitoring",
+            "ieeq_failure_evidence_capture",
+            "ieeq_failure_root_cause",
+            "ieeq_corrective_action_retest"
+          ]
+        },
+        {
+          "pattern": "환경/EMC qualification report에 포함해야 할 핵심 evidence를 설명하시오.",
+          "intent": "Requirement, DUT revision, setup, instrument, condition, deviation, result와 disposition traceability 평가",
+          "required_anchor_ids": [
+            "ieeq_measurement_instrument_control",
+            "ieeq_uncertainty_margin",
+            "ieeq_traceable_report",
+            "ieeq_failure_evidence_capture"
+          ]
+        },
+        {
+          "pattern": "설계변경 후 환경/EMC 재검증 범위를 어떻게 결정하는지 설명하시오.",
+          "intent": "Change impact와 risk 기반 requalification 범위 및 이전 pass 승계 제한을 평가",
+          "required_anchor_ids": [
+            "ieeq_corrective_action_retest",
+            "ieeq_change_control_requalification",
+            "ieeq_traceable_report"
+          ]
+        },
+        {
+          "pattern": "Plant의 EMI 문제 진단과 EMC qualification 시험의 차이를 설명하시오.",
+          "intent": "Field troubleshooting과 qualification ownership/목적/조건/evidence 차이를 구분",
+          "required_anchor_ids": [
+            "ieeq_qualification_vs_field_troubleshooting",
+            "ieeq_test_setup_representative",
+            "ieeq_topic2_boundary",
+            "ieeq_topic4_boundary",
+            "ieeq_topic5_boundary"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "Requirement and qualification plan",
+          "intent": "설치환경·제품/프로젝트 요구에서 시험항목, severity, duration, DUT 상태와 acceptance를 추적한다.",
+          "anchor_refs": [
+            "ieeq_scope_chain",
+            "ieeq_requirement_traceability",
+            "ieeq_standard_edition_policy"
+          ]
+        },
+        {
+          "section": "EMC/EMI and emission/immunity",
+          "intent": "EMC/EMI 및 emission/immunity를 구분하고 applicable test categories를 설명한다.",
+          "anchor_refs": [
+            "ieeq_emc_emi_distinction",
+            "ieeq_emission_immunity_distinction",
+            "ieeq_emc_test_categories"
+          ]
+        },
+        {
+          "section": "Representative setup and DUT operation",
+          "intent": "Cable/grounding/setup과 worst-case operating mode, pre-test baseline을 정의한다.",
+          "anchor_refs": [
+            "ieeq_test_setup_representative",
+            "ieeq_operating_mode_worst_case",
+            "ieeq_pretest_baseline"
+          ]
+        },
+        {
+          "section": "Temperature and humidity qualification",
+          "intent": "Operating/storage temperature, transition/cycle, humidity failure mechanism과 condensation 조건을 평가한다.",
+          "anchor_refs": [
+            "ieeq_temperature_operating_storage",
+            "ieeq_temperature_transition_boundary",
+            "ieeq_humidity_failure_mechanisms",
+            "ieeq_condensation_condition",
+            "ieeq_humidity_recovery_check"
+          ]
+        },
+        {
+          "section": "Vibration qualification",
+          "intent": "Sine/random profile, fixture/mounting, in-test monitoring과 post inspection을 평가한다.",
+          "anchor_refs": [
+            "ieeq_vibration_sine_random",
+            "ieeq_vibration_mounting",
+            "ieeq_vibration_functional_monitor",
+            "ieeq_post_vibration_inspection"
+          ]
+        },
+        {
+          "section": "Monitoring and acceptance evidence",
+          "intent": "시험 중 기능감시, predefined acceptance, measurement instrument/uncertainty와 report traceability를 연결한다.",
+          "anchor_refs": [
+            "ieeq_in_test_monitoring",
+            "ieeq_acceptance_criteria_predefined",
+            "ieeq_measurement_instrument_control",
+            "ieeq_uncertainty_margin",
+            "ieeq_traceable_report"
+          ]
+        },
+        {
+          "section": "Failure, corrective action and requalification",
+          "intent": "Failure evidence와 root cause, corrective action/re-test, change impact를 closed loop로 관리한다.",
+          "anchor_refs": [
+            "ieeq_failure_evidence_capture",
+            "ieeq_failure_root_cause",
+            "ieeq_corrective_action_retest",
+            "ieeq_change_control_requalification"
+          ]
+        },
+        {
+          "section": "Ownership boundaries",
+          "intent": "Field EMI troubleshooting, physical installation, HW lifecycle, component error chain과 qualification ownership을 분리한다.",
+          "anchor_refs": [
+            "ieeq_qualification_vs_field_troubleshooting",
+            "ieeq_topic2_boundary",
+            "ieeq_topic4_boundary",
+            "ieeq_topic5_boundary"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "Qualification을 requirement→setup/DUT mode→stress→monitoring→acceptance→failure/re-test chain으로 설명한다.",
+        "EMC와 EMI, emission과 immunity를 각각 정확히 구분한다.",
+        "Applicable requirement에서 시험항목·severity·duration을 추적하고 무근거 수치를 고정하지 않는다.",
+        "Cable/grounding/auxiliary equipment와 operating mode를 representative setup으로 정의한다.",
+        "시험 전 baseline과 시험 중 output/reset/communication/recovery monitoring을 포함한다.",
+        "Temperature operating/storage, humidity condensation 여부, vibration profile/axis/fixture를 구분한다.",
+        "Acceptance criteria를 시험 전에 정의하고 allowable degradation와 recovery를 명확히 한다.",
+        "Failure의 stress/time/DUT mode/log evidence를 보존하고 causal chain으로 root cause를 분석한다.",
+        "Corrective action 후 risk 기반 re-test/requalification을 수행한다.",
+        "Requirement ID, DUT revision, setup, test equipment, deviation, result와 final disposition을 report에 추적한다.",
+        "Topic 1·2·4·5와 ownership boundary를 명확히 한다."
+      ],
+      "common_missing_points": [
+        "EMC와 EMI를 동의어로 사용한다.",
+        "Emission과 immunity를 동일 시험으로 서술한다.",
+        "모든 계측기에 동일 severity·duration을 적용한다.",
+        "시험 중 functional monitoring 없이 시험 후 power-on만 확인한다.",
+        "Temperature operating/storage 요구를 구분하지 않는다.",
+        "Humidity에서 condensation 조건을 구분하지 않는다.",
+        "Vibration fixture/mounting/axis가 결과에 미치는 영향을 누락한다.",
+        "Failure evidence 없이 filter/shield/damping을 임의 추가한다.",
+        "Corrective action 후 re-test를 생략한다.",
+        "Hardware/firmware 변경 후 이전 qualification pass를 자동 승계한다.",
+        "Plant EMI troubleshooting과 qualification을 동일 활동으로 취급한다."
+      ],
+      "routing_aliases": [
+        "instrumentation environmental emc emi temperature humidity vibration qualification",
+        "instrumentation environmental qualification EMC immunity emission",
+        "instrument EMC emission immunity qualification test",
+        "instrumentation temperature humidity vibration qualification",
+        "environmental stress qualification instrumentation",
+        "industrial instrumentation EMC immunity emission test",
+        "instrument temperature humidity vibration test validation",
+        "instrumentation environmental test acceptance criteria",
+        "EMC immunity DUT functional monitoring qualification",
+        "environmental qualification failure corrective action retest",
+        "계장 환경 EMC EMI 온도 습도 진동 검증시험",
+        "계측기 EMC emission immunity qualification",
+        "계측기 온습도 진동 환경시험",
+        "환경시험 합격기준 기능감시 재시험",
+        "계장 환경시험 설계변경 requalification"
+      ],
+      "routing_field_points": [
+        "Applicable requirement에서 qualification severity/duration 추적",
+        "EMC와 EMI 개념 구분",
+        "Emission과 immunity 시험 목적 구분",
+        "Conducted/radiated/ESD/EFT/surge/RF applicable test category 확인",
+        "Representative cable/grounding/auxiliary equipment setup 확인",
+        "Worst-case DUT operating mode와 pre-test baseline 확인",
+        "In-test output/reset/communication/recovery monitoring 확인",
+        "Predefined acceptance criteria와 allowable degradation 확인",
+        "Operating/storage temperature와 stabilization 확인",
+        "Humidity condensation/non-condensing condition 확인",
+        "Vibration profile axis fixture mounting 확인",
+        "Test instrument calibration/verification와 uncertainty 확인",
+        "Failure stress/time/DUT mode/log evidence 확보",
+        "Corrective action 후 risk-based re-test/requalification 확인",
+        "Qualification report와 DUT revision/change traceability 확인"
+      ],
+      "revision_notes": [
+        "Primary Question Type을 IMPLEMENTATION_EVALUATION으로 설정했다.",
+        "Difficulty를 FIELD_APPLICATION으로 설정했다.",
+        "Specific standard edition/severity/duration을 hard-code하지 않았다.",
+        "Historical frequency를 사용하지 않았다.",
+        "Topic 1/2/4/5 ownership boundary를 명시했다."
+      ],
+      "id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "title": "계측기 환경·EMC/EMI·온도·습도·진동 Qualification 및 검증",
+      "question_examples": [
+        "계측기의 환경시험 및 EMC/EMI Qualification 절차와 평가방법을 설명하시오.",
+        "EMC에서 emission과 immunity의 차이와 시험 시 고려사항을 설명하시오.",
+        "계측기 EMC immunity 시험의 구성과 합격판정 방법을 설명하시오.",
+        "계측기 온도 Qualification 시험의 목적과 설계 유의사항을 설명하시오.",
+        "계측기 습도시험의 failure mechanism과 검증방법을 설명하시오.",
+        "계측기 진동 Qualification 시험의 구성과 검사사항을 설명하시오.",
+        "환경시험 중 계측기가 간헐 reset 또는 communication loss를 보일 때 조치방안을 설명하시오.",
+        "환경/EMC qualification report에 포함해야 할 핵심 evidence를 설명하시오.",
+        "설계변경 후 환경/EMC 재검증 범위를 어떻게 결정하는지 설명하시오.",
+        "Plant의 EMI 문제 진단과 EMC qualification 시험의 차이를 설명하시오."
+      ],
+      "topic_aliases": [
+        "instrumentation environmental emc emi temperature humidity vibration qualification",
+        "instrumentation environmental qualification EMC immunity emission",
+        "instrument EMC emission immunity qualification test",
+        "instrumentation temperature humidity vibration qualification",
+        "environmental stress qualification instrumentation",
+        "industrial instrumentation EMC immunity emission test",
+        "instrument temperature humidity vibration test validation",
+        "instrumentation environmental test acceptance criteria",
+        "EMC immunity DUT functional monitoring qualification",
+        "environmental qualification failure corrective action retest",
+        "계장 환경 EMC EMI 온도 습도 진동 검증시험",
+        "계측기 EMC emission immunity qualification",
+        "계측기 온습도 진동 환경시험",
+        "환경시험 합격기준 기능감시 재시험",
+        "계장 환경시험 설계변경 requalification"
+      ],
+      "expected_structure": [
+        "Requirement and qualification plan",
+        "EMC/EMI and emission/immunity",
+        "Representative setup and DUT operation",
+        "Temperature and humidity qualification",
+        "Vibration qualification",
+        "Monitoring and acceptance evidence",
+        "Failure, corrective action and requalification",
+        "Ownership boundaries"
+      ],
+      "high_score_features": [
+        "Requirement→representative setup→stress exposure→in-test monitoring→predefined acceptance→failure/corrective action→re-test/report traceability를 하나의 qualification evidence chain으로 연결한다."
+      ],
+      "low_score_patterns": [
+        "시험조건의 근거 없이 특정 severity나 duration을 절대값으로 제시하거나 시험 후 전원 on만으로 qualification pass를 판단한다."
+      ],
+      "field_connection_points": [
+        "Applicable requirement에서 qualification severity/duration 추적",
+        "EMC와 EMI 개념 구분",
+        "Emission과 immunity 시험 목적 구분",
+        "Conducted/radiated/ESD/EFT/surge/RF applicable test category 확인",
+        "Representative cable/grounding/auxiliary equipment setup 확인",
+        "Worst-case DUT operating mode와 pre-test baseline 확인",
+        "In-test output/reset/communication/recovery monitoring 확인",
+        "Predefined acceptance criteria와 allowable degradation 확인",
+        "Operating/storage temperature와 stabilization 확인",
+        "Humidity condensation/non-condensing condition 확인",
+        "Vibration profile axis fixture mounting 확인",
+        "Test instrument calibration/verification와 uncertainty 확인",
+        "Failure stress/time/DUT mode/log evidence 확보",
+        "Corrective action 후 risk-based re-test/requalification 확인",
+        "Qualification report와 DUT revision/change traceability 확인"
+      ],
+      "model_answer_outline": [
+        "설치환경·제품/프로젝트 요구에서 시험항목, severity, duration, DUT 상태와 acceptance를 추적한다.",
+        "EMC/EMI 및 emission/immunity를 구분하고 applicable test categories를 설명한다.",
+        "Cable/grounding/setup과 worst-case operating mode, pre-test baseline을 정의한다.",
+        "Operating/storage temperature, transition/cycle, humidity failure mechanism과 condensation 조건을 평가한다.",
+        "Sine/random profile, fixture/mounting, in-test monitoring과 post inspection을 평가한다.",
+        "시험 중 기능감시, predefined acceptance, measurement instrument/uncertainty와 report traceability를 연결한다.",
+        "Failure evidence와 root cause, corrective action/re-test, change impact를 closed loop로 관리한다.",
+        "Field EMI troubleshooting, physical installation, HW lifecycle, component error chain과 qualification ownership을 분리한다."
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "title_ko": "계측설비 설치·배선·도압배관·시공검사 및 기술기준",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "계측제어설비의 설치·배선·도압배관 시공 및 검사 절차를 설명하시오.",
+          "intent": "승인도서에서 field installation, inspection, punch, as-built까지 구현·평가",
+          "required_anchor_ids": [
+            "iiwic_scope_chain",
+            "iiwic_document_hierarchy",
+            "iiwic_installation_inspection_sequence",
+            "iiwic_asbuilt_final_acceptance"
+          ]
+        },
+        {
+          "pattern": "계장 cable tray, cable gland 및 terminal 시공 시 유의사항을 설명하시오.",
+          "intent": "routing, mechanical protection, gland/entry integrity와 termination quality 평가",
+          "required_anchor_ids": [
+            "iiwic_cable_route_mechanical_protection",
+            "iiwic_bend_radius_tension",
+            "iiwic_gland_entry_integrity",
+            "iiwic_terminal_quality",
+            "iiwic_wire_identification"
+          ]
+        },
+        {
+          "pattern": "계장 cable과 전력/VFD cable 배선 시 설치상 고려사항과 검사방법을 설명하시오.",
+          "intent": "승인된 segregation/EMC 설계를 실제 tray·route·termination에 구현",
+          "required_anchor_ids": [
+            "iiwic_cable_separation_execution",
+            "iiwic_cable_route_mechanical_protection",
+            "iiwic_shield_execution_boundary",
+            "iiwic_wire_identification"
+          ]
+        },
+        {
+          "pattern": "Pressure/DP transmitter의 impulse tubing 설치 원칙과 검사사항을 설명하시오.",
+          "intent": "service-specific slope/elevation, tubing integrity, support와 drain/vent를 평가",
+          "required_anchor_ids": [
+            "iiwic_impulse_line_general",
+            "iiwic_impulse_slope_service_specific",
+            "iiwic_tubing_fittings_integrity",
+            "iiwic_root_manifold_drain_vent",
+            "iiwic_support_thermal_vibration"
+          ]
+        },
+        {
+          "pattern": "Gas, liquid, steam service의 impulse line 설치 차이를 설명하시오.",
+          "intent": "condensate와 trapped gas/hydrostatic head를 고려해 service별 routing 차이를 설명",
+          "required_anchor_ids": [
+            "iiwic_liquid_service_principle",
+            "iiwic_gas_service_principle",
+            "iiwic_steam_service_principle",
+            "iiwic_impulse_slope_service_specific"
+          ]
+        },
+        {
+          "pattern": "DP 측정용 high/low impulse line의 설치오차 요인과 대책을 설명하시오.",
+          "intent": "high/low path의 elevation·thermal·hydrostatic bias와 support/cleanliness 관리",
+          "required_anchor_ids": [
+            "iiwic_dp_pair_symmetry",
+            "iiwic_impulse_line_general",
+            "iiwic_tubing_fittings_integrity",
+            "iiwic_cleanliness_pressure_boundary"
+          ]
+        },
+        {
+          "pattern": "계측설비 시공검사와 punch 처리 및 as-built 관리방법을 설명하시오.",
+          "intent": "검사 sequence, punch classification, reinspection과 document reconciliation을 평가",
+          "required_anchor_ids": [
+            "iiwic_installation_inspection_sequence",
+            "iiwic_punch_classification",
+            "iiwic_asbuilt_final_acceptance"
+          ]
+        },
+        {
+          "pattern": "계장 설치 시 적용 기술기준과 도면·vendor instruction이 충돌할 때 처리방법을 설명하시오.",
+          "intent": "상위 기준 hierarchy를 확인하고 formal clarification/deviation으로 해결",
+          "required_anchor_ids": [
+            "iiwic_document_hierarchy",
+            "iiwic_design_basis_boundary",
+            "iiwic_install_per_approved_drawings"
+          ]
+        },
+        {
+          "pattern": "본질안전/위험장소 계장 배선의 설치 단계 유의사항을 설명하시오.",
+          "intent": "classification/선정은 별도 Topic으로 두고 승인된 segregation/gland/seal 조건을 구현",
+          "required_anchor_ids": [
+            "iiwic_intrinsic_safety_segregation_execution",
+            "iiwic_hazardous_area_boundary",
+            "iiwic_gland_entry_integrity"
+          ]
+        },
+        {
+          "pattern": "FAT 합격 후 현장 설치검사에서 추가로 확인해야 할 사항을 설명하시오.",
+          "intent": "FAT와 field evidence를 구분하고 wiring, tubing, tag, punch, as-built를 확인",
+          "required_anchor_ids": [
+            "iiwic_fat_sat_boundary",
+            "iiwic_installation_inspection_sequence",
+            "iiwic_continuity_insulation_boundary",
+            "iiwic_asbuilt_final_acceptance"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "Applicable documents and installation basis",
+          "intent": "적용 법규·specification·승인도면·vendor instruction hierarchy와 deviation 절차를 확인한다.",
+          "anchor_refs": [
+            "iiwic_scope_chain",
+            "iiwic_document_hierarchy",
+            "iiwic_install_per_approved_drawings"
+          ]
+        },
+        {
+          "section": "Location, accessibility and environmental integrity",
+          "intent": "현장 위치·방향·정비성·enclosure/gland integrity를 평가한다.",
+          "anchor_refs": [
+            "iiwic_accessibility_maintainability",
+            "iiwic_environment_installation_protection",
+            "iiwic_gland_entry_integrity"
+          ]
+        },
+        {
+          "section": "Cable routing and termination",
+          "intent": "tray/conduit, mechanical protection, segregation, bend/tension, terminal과 identification을 평가한다.",
+          "anchor_refs": [
+            "iiwic_cable_route_mechanical_protection",
+            "iiwic_cable_separation_execution",
+            "iiwic_bend_radius_tension",
+            "iiwic_terminal_quality",
+            "iiwic_wire_identification",
+            "iiwic_spare_core_treatment"
+          ]
+        },
+        {
+          "section": "Special wiring execution",
+          "intent": "승인된 shield/grounding 및 IS/hazardous-area installation condition을 현장에 구현한다.",
+          "anchor_refs": [
+            "iiwic_shield_execution_boundary",
+            "iiwic_intrinsic_safety_segregation_execution"
+          ]
+        },
+        {
+          "section": "Impulse tubing installation",
+          "intent": "service-specific slope/elevation, liquid/gas/steam, DP symmetry와 fitting integrity를 설명한다.",
+          "anchor_refs": [
+            "iiwic_impulse_line_general",
+            "iiwic_impulse_slope_service_specific",
+            "iiwic_liquid_service_principle",
+            "iiwic_gas_service_principle",
+            "iiwic_steam_service_principle",
+            "iiwic_dp_pair_symmetry",
+            "iiwic_tubing_fittings_integrity"
+          ]
+        },
+        {
+          "section": "Valve, support and pressure-boundary checks",
+          "intent": "root/manifold/drain/vent, support, thermal/vibration와 cleanliness/leak inspection을 평가한다.",
+          "anchor_refs": [
+            "iiwic_root_manifold_drain_vent",
+            "iiwic_support_thermal_vibration",
+            "iiwic_cleanliness_pressure_boundary"
+          ]
+        },
+        {
+          "section": "Inspection, punch and evidence",
+          "intent": "inspection sequence, continuity/test boundary, punch closure와 traceability를 확인한다.",
+          "anchor_refs": [
+            "iiwic_installation_inspection_sequence",
+            "iiwic_continuity_insulation_boundary",
+            "iiwic_punch_classification",
+            "iiwic_asbuilt_final_acceptance"
+          ]
+        },
+        {
+          "section": "Ownership boundaries",
+          "intent": "Topic 1, Design Basis/Code, P&ID, hazardous-area selection, FAT/SAT와 중복을 방지한다.",
+          "anchor_refs": [
+            "iiwic_fat_sat_boundary",
+            "iiwic_design_basis_boundary",
+            "iiwic_pid_document_boundary",
+            "iiwic_hazardous_area_boundary",
+            "iiwic_topic1_boundary"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "법규·project specification·승인도면·vendor instruction의 hierarchy와 formal deviation 처리를 설명한다.",
+        "설치 위치·orientation·접근성·정비성과 enclosure/gland integrity를 함께 평가한다.",
+        "Cable tray/conduit route, mechanical protection, segregation, bend radius와 pulling tension을 구체적으로 설명한다.",
+        "Terminal/ferrule/lug, core identification과 spare core 처리까지 termination 품질을 포함한다.",
+        "Shield/grounding philosophy를 설치자가 임의 변경하지 않고 승인도면 구현 대상으로 구분한다.",
+        "Impulse line slope/elevation을 gas/liquid/steam service별 phase behavior와 연결한다.",
+        "DP high/low path의 hydrostatic/thermal bias와 tubing/fitting/support 품질을 설명한다.",
+        "Root valve/manifold/drain/vent의 P&ID/hook-up 일치와 접근성을 확인한다.",
+        "민감한 회로의 continuity/insulation test는 기기 허용조건과 승인 절차를 확인한다.",
+        "Inspection→punch→reinspection→closure evidence→as-built reconciliation을 closed-loop로 설명한다.",
+        "FAT와 field installation evidence를 구분하고 상위 Code governance 및 hazardous-area equipment selection Topic과 경계를 세운다."
+      ],
+      "common_missing_points": [
+        "FAT 합격을 field installation quality의 대체 evidence로 사용한다.",
+        "모든 impulse line에 동일 slope와 transmitter elevation을 적용한다.",
+        "사용하지 않는 cable entry의 blanking/sealing을 누락한다.",
+        "Cable bend radius와 pulling tension을 고려하지 않는다.",
+        "Spare core를 식별·절연하지 않는다.",
+        "Shield 접지방식을 현장 작업자가 임의 변경한다.",
+        "Code/spec/drawing 충돌을 formal deviation 없이 현장에서 임의 처리한다.",
+        "연결기기 확인 없이 동일 insulation test voltage를 일괄 적용한다.",
+        "Punch closure를 서명만으로 종료하고 reinspection evidence를 남기지 않는다.",
+        "As-built와 현장 상태 reconciliation을 누락한다."
+      ],
+      "routing_aliases": [
+        "instrumentation installation wiring impulse tubing inspection codes",
+        "instrumentation field installation wiring tubing inspection",
+        "instrument cable tray gland terminal installation inspection",
+        "instrument wiring cable routing termination field inspection",
+        "pressure transmitter impulse tubing installation slope inspection",
+        "DP transmitter impulse line tubing installation inspection",
+        "gas liquid steam impulse line installation",
+        "instrumentation installation punch as-built inspection",
+        "instrument technical code field installation inspection",
+        "instrumentation cable gland enclosure entry termination",
+        "계장 설치 배선 도압배관 시공검사",
+        "계장 케이블 트레이 글랜드 단자 시공",
+        "압력계기 도압배관 slope drain vent 설치",
+        "계측설비 punch as-built 시공검사",
+        "계장 기술기준 설치검사"
+      ],
+      "routing_field_points": [
+        "적용 법규·project specification·승인도면·vendor instruction 확인",
+        "Field location·orientation·accessibility·maintenance clearance 확인",
+        "Cable tray/conduit route와 mechanical protection 확인",
+        "Power/VFD와 instrumentation cable segregation 구현 확인",
+        "Cable bend radius·pulling tension 확인",
+        "Cable gland·unused entry blanking·enclosure integrity 확인",
+        "Terminal/ferrule/lug·core marking·spare core 처리 확인",
+        "Approved shield/grounding termination drawing 구현 확인",
+        "IS/hazardous-area wiring segregation과 approved gland/seal 확인",
+        "Impulse tubing service-specific slope/elevation 확인",
+        "Liquid/gas/steam condensate·gas pocket behavior 확인",
+        "DP high/low path elevation·thermal·hydrostatic bias 확인",
+        "Root valve/manifold/drain/vent와 hook-up 일치 확인",
+        "Continuity/approved insulation test와 sensitive electronics 보호 확인",
+        "Inspection punch reinspection closure evidence와 as-built reconciliation 확인"
+      ],
+      "revision_notes": [
+        "Primary Question Type을 IMPLEMENTATION_EVALUATION으로 설정했다.",
+        "Difficulty를 FIELD_APPLICATION으로 설정했다.",
+        "Specific code edition을 hard-code하지 않고 project execution 시 applicable edition 확인을 요구한다.",
+        "Historical frequency를 사용하지 않았다.",
+        "Topic 1, Design Basis/Code, P&ID, hazardous-area, FAT/SAT와 ownership boundary를 명시했다."
+      ],
+      "id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "title": "계측설비 설치·배선·도압배관·시공검사 및 기술기준",
+      "question_examples": [
+        "계측제어설비의 설치·배선·도압배관 시공 및 검사 절차를 설명하시오.",
+        "계장 cable tray, cable gland 및 terminal 시공 시 유의사항을 설명하시오.",
+        "계장 cable과 전력/VFD cable 배선 시 설치상 고려사항과 검사방법을 설명하시오.",
+        "Pressure/DP transmitter의 impulse tubing 설치 원칙과 검사사항을 설명하시오.",
+        "Gas, liquid, steam service의 impulse line 설치 차이를 설명하시오.",
+        "DP 측정용 high/low impulse line의 설치오차 요인과 대책을 설명하시오.",
+        "계측설비 시공검사와 punch 처리 및 as-built 관리방법을 설명하시오.",
+        "계장 설치 시 적용 기술기준과 도면·vendor instruction이 충돌할 때 처리방법을 설명하시오.",
+        "본질안전/위험장소 계장 배선의 설치 단계 유의사항을 설명하시오.",
+        "FAT 합격 후 현장 설치검사에서 추가로 확인해야 할 사항을 설명하시오."
+      ],
+      "topic_aliases": [
+        "instrumentation installation wiring impulse tubing inspection codes",
+        "instrumentation field installation wiring tubing inspection",
+        "instrument cable tray gland terminal installation inspection",
+        "instrument wiring cable routing termination field inspection",
+        "pressure transmitter impulse tubing installation slope inspection",
+        "DP transmitter impulse line tubing installation inspection",
+        "gas liquid steam impulse line installation",
+        "instrumentation installation punch as-built inspection",
+        "instrument technical code field installation inspection",
+        "instrumentation cable gland enclosure entry termination",
+        "계장 설치 배선 도압배관 시공검사",
+        "계장 케이블 트레이 글랜드 단자 시공",
+        "압력계기 도압배관 slope drain vent 설치",
+        "계측설비 punch as-built 시공검사",
+        "계장 기술기준 설치검사"
+      ],
+      "expected_structure": [
+        "Applicable documents and installation basis",
+        "Location, accessibility and environmental integrity",
+        "Cable routing and termination",
+        "Special wiring execution",
+        "Impulse tubing installation",
+        "Valve, support and pressure-boundary checks",
+        "Inspection, punch and evidence",
+        "Ownership boundaries"
+      ],
+      "high_score_features": [
+        "승인기준→현장 설치→배선/도압배관 품질→검사/punch→as-built reconciliation을 implementation evidence로 연결한다."
+      ],
+      "low_score_patterns": [
+        "Service·도면·기기조건과 무관한 universal installation rule을 제시하거나 FAT를 현장 시공검사의 대체 evidence로 사용한다."
+      ],
+      "field_connection_points": [
+        "적용 법규·project specification·승인도면·vendor instruction 확인",
+        "Field location·orientation·accessibility·maintenance clearance 확인",
+        "Cable tray/conduit route와 mechanical protection 확인",
+        "Power/VFD와 instrumentation cable segregation 구현 확인",
+        "Cable bend radius·pulling tension 확인",
+        "Cable gland·unused entry blanking·enclosure integrity 확인",
+        "Terminal/ferrule/lug·core marking·spare core 처리 확인",
+        "Approved shield/grounding termination drawing 구현 확인",
+        "IS/hazardous-area wiring segregation과 approved gland/seal 확인",
+        "Impulse tubing service-specific slope/elevation 확인",
+        "Liquid/gas/steam condensate·gas pocket behavior 확인",
+        "DP high/low path elevation·thermal·hydrostatic bias 확인",
+        "Root valve/manifold/drain/vent와 hook-up 일치 확인",
+        "Continuity/approved insulation test와 sensitive electronics 보호 확인",
+        "Inspection punch reinspection closure evidence와 as-built reconciliation 확인"
+      ],
+      "model_answer_outline": [
+        "적용 법규·specification·승인도면·vendor instruction hierarchy와 deviation 절차를 확인한다.",
+        "현장 위치·방향·정비성·enclosure/gland integrity를 평가한다.",
+        "tray/conduit, mechanical protection, segregation, bend/tension, terminal과 identification을 평가한다.",
+        "승인된 shield/grounding 및 IS/hazardous-area installation condition을 현장에 구현한다.",
+        "service-specific slope/elevation, liquid/gas/steam, DP symmetry와 fitting integrity를 설명한다.",
+        "root/manifold/drain/vent, support, thermal/vibration와 cleanliness/leak inspection을 평가한다.",
+        "inspection sequence, continuity/test boundary, punch closure와 traceability를 확인한다.",
+        "Topic 1, Design Basis/Code, P&ID, hazardous-area selection, FAT/SAT와 중복을 방지한다."
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "title_ko": "계장 전원·접지·차폐·UPS·Ground Loop·EMC 진단 및 대책",
+      "question_type": "DIAGNOSIS_ACTION",
+      "expected_question_patterns": [
+        {
+          "pattern": "계장 시스템의 전원, 접지, 차폐와 EMC 문제를 진단하고 대책을 설명하시오.",
+          "intent": "전원-기준전위-결합경로-피해기기 chain으로 진단하고 대책을 제시",
+          "required_anchor_ids": [
+            "ipgse_scope_chain",
+            "ipgse_power_quality_scope",
+            "ipgse_emi_coupling_paths",
+            "ipgse_diagnostic_workflow",
+            "ipgse_final_verification"
+          ]
+        },
+        {
+          "pattern": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+          "intent": "안전접지와 신호 기준전위, 본딩의 목적과 주파수 의존성을 구분",
+          "required_anchor_ids": [
+            "ipgse_pe_signal_reference_boundary",
+            "ipgse_bonding_impedance_frequency",
+            "ipgse_single_multi_point_conditional"
+          ]
+        },
+        {
+          "pattern": "Ground loop의 발생 원인, 진단 방법과 개선 대책을 설명하시오.",
+          "intent": "다중 귀로와 전위차에 의한 순환전류를 진단하고 안전한 개선책을 제시",
+          "required_anchor_ids": [
+            "ipgse_ground_loop_mechanism",
+            "ipgse_ground_loop_safe_mitigation",
+            "ipgse_common_differential_mode",
+            "ipgse_measurement_reference_safety"
+          ]
+        },
+        {
+          "pattern": "계장 cable shield의 접지 방법과 one-end/both-end termination 선정 기준을 설명하시오.",
+          "intent": "Shield와 PE 경계를 세우고 저주파/고주파 조건에 따른 termination을 비교",
+          "required_anchor_ids": [
+            "ipgse_shield_not_pe",
+            "ipgse_shield_termination_frequency",
+            "ipgse_bonding_impedance_frequency"
+          ]
+        },
+        {
+          "pattern": "VFD·motor 주변 계장 신호의 EMI 원인을 진단하고 개선방안을 제시하시오.",
+          "intent": "capacitive/inductive/radiated/conducted coupling을 source-path-victim 관점으로 진단",
+          "required_anchor_ids": [
+            "ipgse_cable_separation_coupling",
+            "ipgse_emi_coupling_paths",
+            "ipgse_source_path_victim_mitigation",
+            "ipgse_filter_entry_bonding"
+          ]
+        },
+        {
+          "pattern": "계장 전원의 power quality 이상이 측정·제어 신호에 미치는 영향과 진단 절차를 설명하시오.",
+          "intent": "sag/interruption/transient/noise와 event time을 연계해 전원 원인을 분리",
+          "required_anchor_ids": [
+            "ipgse_power_quality_scope",
+            "ipgse_dc_supply_distribution",
+            "ipgse_symptom_frequency_correlation",
+            "ipgse_evidence_before_rewire"
+          ]
+        },
+        {
+          "pattern": "계장용 UPS의 역할, 용량 선정과 bypass/grounding 유의점을 설명하시오.",
+          "intent": "UPS 기능 경계를 정의하고 sizing·battery aging·transfer·neutral ground를 검토",
+          "required_anchor_ids": [
+            "ipgse_ups_function_boundary",
+            "ipgse_ups_sizing_factors",
+            "ipgse_ups_bypass_grounding"
+          ]
+        },
+        {
+          "pattern": "계장 전원 이중화의 공통고장점과 가용성 확보 방안을 설명하시오.",
+          "intent": "redundant supply의 common cause와 분배 경로를 평가",
+          "required_anchor_ids": [
+            "ipgse_redundant_supply_boundary",
+            "ipgse_dc_supply_distribution",
+            "ipgse_final_verification"
+          ]
+        },
+        {
+          "pattern": "Surge와 EMC 문제를 source-path-victim 관점에서 구분하고 대책을 제시하시오.",
+          "intent": "SPD, filter, bonding, shielding과 victim immunity를 결합해 대책을 설계",
+          "required_anchor_ids": [
+            "ipgse_spd_coordination",
+            "ipgse_emi_coupling_paths",
+            "ipgse_source_path_victim_mitigation",
+            "ipgse_filter_entry_bonding"
+          ]
+        },
+        {
+          "pattern": "계장 잡음 개선 후 효과를 어떻게 검증할지 현장 절차를 제시하시오.",
+          "intent": "before/after evidence와 동일 운전조건 재현을 통해 closed-loop verification 수행",
+          "required_anchor_ids": [
+            "ipgse_diagnostic_workflow",
+            "ipgse_evidence_before_rewire",
+            "ipgse_measurement_reference_safety",
+            "ipgse_final_verification"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "Power integrity and reference architecture",
+          "intent": "계장 전원 품질과 보호접지·signal reference·bonding의 기능을 구분한다.",
+          "anchor_refs": [
+            "ipgse_scope_chain",
+            "ipgse_power_quality_scope",
+            "ipgse_pe_signal_reference_boundary",
+            "ipgse_bonding_impedance_frequency"
+          ]
+        },
+        {
+          "section": "Ground topology and loop mechanism",
+          "intent": "Single/multi-point 조건과 ground-loop의 다중 귀로·전위차 메커니즘을 설명한다.",
+          "anchor_refs": [
+            "ipgse_single_multi_point_conditional",
+            "ipgse_ground_loop_mechanism",
+            "ipgse_ground_loop_safe_mitigation",
+            "ipgse_common_differential_mode"
+          ]
+        },
+        {
+          "section": "Shielding and coupling paths",
+          "intent": "Shield 기능, termination 조건과 cable coupling path를 설명한다.",
+          "anchor_refs": [
+            "ipgse_shield_not_pe",
+            "ipgse_shield_termination_frequency",
+            "ipgse_cable_separation_coupling",
+            "ipgse_emi_coupling_paths"
+          ]
+        },
+        {
+          "section": "EMC and surge mitigation",
+          "intent": "Source-path-victim, filter, bonding과 SPD coordination을 연결한다.",
+          "anchor_refs": [
+            "ipgse_source_path_victim_mitigation",
+            "ipgse_filter_entry_bonding",
+            "ipgse_spd_coordination"
+          ]
+        },
+        {
+          "section": "DC power redundancy and UPS",
+          "intent": "DC distribution, redundancy common point, UPS sizing과 bypass/grounding을 평가한다.",
+          "anchor_refs": [
+            "ipgse_dc_supply_distribution",
+            "ipgse_redundant_supply_boundary",
+            "ipgse_ups_function_boundary",
+            "ipgse_ups_sizing_factors",
+            "ipgse_ups_bypass_grounding"
+          ]
+        },
+        {
+          "section": "Field diagnosis and evidence",
+          "intent": "증상-주파수-시간 상관과 안전한 measurement reference를 사용해 원인을 분리한다.",
+          "anchor_refs": [
+            "ipgse_symptom_frequency_correlation",
+            "ipgse_measurement_reference_safety",
+            "ipgse_diagnostic_workflow",
+            "ipgse_evidence_before_rewire"
+          ]
+        },
+        {
+          "section": "Ownership boundaries",
+          "intent": "설치, 환경 qualification, HW lifecycle, component error Topic과 중복을 방지한다.",
+          "anchor_refs": [
+            "ipgse_topic2_boundary",
+            "ipgse_topic3_boundary",
+            "ipgse_topic4_boundary",
+            "ipgse_topic5_boundary"
+          ]
+        },
+        {
+          "section": "Closed-loop verification",
+          "intent": "대책 후 정상·과도·UPS transfer·noise-source 조건에서 효과와 부작용을 재검증한다.",
+          "anchor_refs": [
+            "ipgse_final_verification"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "보호접지와 signal/reference ground의 목적을 구분하고 PE 제거를 잡음 대책으로 사용하지 않는다.",
+        "Single-point와 multi-point grounding을 주파수·본딩 조건에 따라 비교한다.",
+        "Ground loop를 다중 귀로·전위차·순환전류로 설명하고 절연·차동입력·적절한 shield termination을 연결한다.",
+        "Shield를 PE나 정상 load-return 도체와 구분한다.",
+        "One-end와 both-end/360-degree shield termination을 저주파·고주파 조건으로 구분한다.",
+        "Conducted/radiated/capacitive/inductive/common-impedance coupling을 source-path-victim으로 진단한다.",
+        "DC distribution의 voltage drop·common return·branch 보호와 redundancy common point를 설명한다.",
+        "UPS를 ride-through 관점으로 정의하고 W/VA·PF·autonomy·battery aging·bypass/grounding을 함께 본다.",
+        "Surge·filter·bonding 대책을 enclosure entry와 짧은 접속 임피던스 관점에서 설명한다.",
+        "현장 evidence를 먼저 확보하고 한 변수씩 대책을 적용한 후 동일 조건에서 재검증한다.",
+        "Lane A Topic 2~5와 ownership 경계를 명확히 한다."
+      ],
+      "common_missing_points": [
+        "잡음 제거를 위해 PE를 해제한다.",
+        "모든 shield는 한쪽 끝 접지가 절대 규칙이라고 단정한다.",
+        "Single-point grounding이 모든 주파수에서 우월하다고 단정한다.",
+        "UPS가 surge·EMC·ground-loop를 모두 해결한다고 단정한다.",
+        "Redundant supply의 공통 입력·분배 경로를 누락한다.",
+        "Common-mode와 differential-mode를 구분하지 않는다.",
+        "EMI coupling path를 설명하지 않고 filter만 제시한다.",
+        "Before/after evidence 없이 shield와 earth를 재결선한다.",
+        "EMC qualification 시험을 Topic 1의 핵심 범위로 확장하여 Topic 3과 중복한다."
+      ],
+      "routing_aliases": [
+        "instrumentation power grounding shielding ground loop EMC diagnosis",
+        "instrumentation power grounding shielding UPS EMC",
+        "instrumentation grounding bonding shield termination ground loop",
+        "instrument ground loop isolation differential input shielding",
+        "UPS instrumentation power quality grounding bypass",
+        "instrumentation EMC grounding bonding shielding",
+        "VFD motor cable instrumentation EMI coupling mitigation",
+        "protective earth signal ground bonding instrumentation",
+        "single point multi point grounding instrumentation",
+        "cable shield one end both end termination EMC",
+        "계장 전원 접지 차폐 ground loop 진단",
+        "계장 보호접지 신호접지 본딩 차폐",
+        "계장 UPS 전원품질 접지 바이패스",
+        "VFD 계장신호 EMI 차폐 접지 대책",
+        "계장 ground loop 절연 차동입력 대책"
+      ],
+      "routing_field_points": [
+        "PE와 signal/reference ground 기능 구분",
+        "Equipotential bonding과 high-frequency impedance 확인",
+        "Single-point와 multi-point topology 조건 확인",
+        "Ground-loop 다중 귀로와 potential difference 확인",
+        "Common-mode·differential-mode 분리",
+        "Shield one-end/both-end/360-degree termination 조건 확인",
+        "Power·VFD cable과 instrumentation cable coupling path 확인",
+        "Power-quality sag·interruption·transient·noise event correlation 확인",
+        "DC distribution voltage drop·common return 확인",
+        "Redundant supply common-point 확인",
+        "UPS W·VA·PF·autonomy·battery aging 확인",
+        "UPS normal·battery·bypass neutral/ground reference 확인",
+        "SPD·filter entry bonding과 short-lead impedance 확인",
+        "Before/after waveform·event·ground-potential evidence 확인",
+        "Mitigation 후 normal·transfer·noise-source 조건 재검증"
+      ],
+      "revision_notes": [
+        "Primary Question Type을 DIAGNOSIS_ACTION으로 설정했다.",
+        "Difficulty를 FIELD_APPLICATION으로 정합화했다.",
+        "Broad generic alias 대신 전원·접지·차폐·UPS·EMC 복합 routing phrase를 사용했다.",
+        "Lane A Topic 2~5와 ownership boundary를 독립 anchor로 분리했다.",
+        "Historical frequency를 사용하지 않았다."
+      ],
+      "id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "title": "계장 전원·접지·차폐·UPS·Ground Loop·EMC 진단 및 대책",
+      "question_examples": [
+        "계장 시스템의 전원, 접지, 차폐와 EMC 문제를 진단하고 대책을 설명하시오.",
+        "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+        "Ground loop의 발생 원인, 진단 방법과 개선 대책을 설명하시오.",
+        "계장 cable shield의 접지 방법과 one-end/both-end termination 선정 기준을 설명하시오.",
+        "VFD·motor 주변 계장 신호의 EMI 원인을 진단하고 개선방안을 제시하시오.",
+        "계장 전원의 power quality 이상이 측정·제어 신호에 미치는 영향과 진단 절차를 설명하시오.",
+        "계장용 UPS의 역할, 용량 선정과 bypass/grounding 유의점을 설명하시오.",
+        "계장 전원 이중화의 공통고장점과 가용성 확보 방안을 설명하시오.",
+        "Surge와 EMC 문제를 source-path-victim 관점에서 구분하고 대책을 제시하시오.",
+        "계장 잡음 개선 후 효과를 어떻게 검증할지 현장 절차를 제시하시오."
+      ],
+      "topic_aliases": [
+        "instrumentation power grounding shielding ground loop EMC diagnosis",
+        "instrumentation power grounding shielding UPS EMC",
+        "instrumentation grounding bonding shield termination ground loop",
+        "instrument ground loop isolation differential input shielding",
+        "UPS instrumentation power quality grounding bypass",
+        "instrumentation EMC grounding bonding shielding",
+        "VFD motor cable instrumentation EMI coupling mitigation",
+        "protective earth signal ground bonding instrumentation",
+        "single point multi point grounding instrumentation",
+        "cable shield one end both end termination EMC",
+        "계장 전원 접지 차폐 ground loop 진단",
+        "계장 보호접지 신호접지 본딩 차폐",
+        "계장 UPS 전원품질 접지 바이패스",
+        "VFD 계장신호 EMI 차폐 접지 대책",
+        "계장 ground loop 절연 차동입력 대책"
+      ],
+      "expected_structure": [
+        "Power integrity and reference architecture",
+        "Ground topology and loop mechanism",
+        "Shielding and coupling paths",
+        "EMC and surge mitigation",
+        "DC power redundancy and UPS",
+        "Field diagnosis and evidence",
+        "Ownership boundaries",
+        "Closed-loop verification"
+      ],
+      "high_score_features": [
+        "전원·기준전위→접지·본딩→차폐·coupling path→ground-loop/EMI evidence→UPS·EMC 대책→closed-loop verification을 인과적으로 연결한다."
+      ],
+      "low_score_patterns": [
+        "PE 해제, universal one-end shield, universal single-point ground, UPS 만능론처럼 조건부 engineering rule을 절대 규칙으로 서술한다."
+      ],
+      "field_connection_points": [
+        "PE와 signal/reference ground 기능 구분",
+        "Equipotential bonding과 high-frequency impedance 확인",
+        "Single-point와 multi-point topology 조건 확인",
+        "Ground-loop 다중 귀로와 potential difference 확인",
+        "Common-mode·differential-mode 분리",
+        "Shield one-end/both-end/360-degree termination 조건 확인",
+        "Power·VFD cable과 instrumentation cable coupling path 확인",
+        "Power-quality sag·interruption·transient·noise event correlation 확인",
+        "DC distribution voltage drop·common return 확인",
+        "Redundant supply common-point 확인",
+        "UPS W·VA·PF·autonomy·battery aging 확인",
+        "UPS normal·battery·bypass neutral/ground reference 확인",
+        "SPD·filter entry bonding과 short-lead impedance 확인",
+        "Before/after waveform·event·ground-potential evidence 확인",
+        "Mitigation 후 normal·transfer·noise-source 조건 재검증"
+      ],
+      "model_answer_outline": [
+        "계장 전원 품질과 보호접지·signal reference·bonding의 기능을 구분한다.",
+        "Single/multi-point 조건과 ground-loop의 다중 귀로·전위차 메커니즘을 설명한다.",
+        "Shield 기능, termination 조건과 cable coupling path를 설명한다.",
+        "Source-path-victim, filter, bonding과 SPD coordination을 연결한다.",
+        "DC distribution, redundancy common point, UPS sizing과 bypass/grounding을 평가한다.",
+        "증상-주파수-시간 상관과 안전한 measurement reference를 사용해 원인을 분리한다.",
+        "설치, 환경 qualification, HW lifecycle, component error Topic과 중복을 방지한다.",
+        "대책 후 정상·과도·UPS transfer·noise-source 조건에서 효과와 부작용을 재검증한다."
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

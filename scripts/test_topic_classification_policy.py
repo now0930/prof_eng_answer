@@ -45,7 +45,11 @@ APPLICATION_TOPICS = {
     "control_valve_sizing_cv_kv_reynolds_liquid_selection",
     "control_valve_types_globe_rotary_body_actuator_selection",
     "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+    "electronics_error_noise_drift_tolerance_aging_power_mitigation",
     "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+    "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+    "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+    "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
     "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
     "passive_sensor_resistive_capacitive_inductive_transduction",
     "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
@@ -61,6 +65,7 @@ APPLICATION_TOPICS = {
 
 DESIGN_TOPICS = {
     "configuration_change_release_backup_rollback_migration_obsolescence_management",
+    "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
     "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
     "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
     "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
@@ -79,8 +84,8 @@ ALLOWED_SELECTION_IMPORTANCE = {
 
 EXPECTED_DIFFICULTY_COUNTS = {
     "THEORY_CORE": 19,
-    "FIELD_APPLICATION": 26,
-    "DESIGN_EVALUATION": 9,
+    "FIELD_APPLICATION": 30,
+    "DESIGN_EVALUATION": 10,
 }
 
 
@@ -101,7 +106,7 @@ def main() -> None:
         | DESIGN_TOPICS
     )
 
-    assert len(actual_topics) == 54
+    assert len(actual_topics) == 59
     assert actual_topics == classified_topics
 
     assert not (THEORY_TOPICS & APPLICATION_TOPICS)

@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-07T12:15:17Z-generated-topic-pack-manifest",
+  "version": "2026-08-07T14:42:01Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 54,
+  "topic_count": 59,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -28,6 +28,16 @@
     },
     {
       "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -197,6 +207,16 @@
       ]
     },
     {
+      "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
       "files": [
         "fact_anchor.json",
@@ -268,6 +288,36 @@
     },
     {
       "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
