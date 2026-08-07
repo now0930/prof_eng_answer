@@ -1,0 +1,1284 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+  "title_ko": "제어 Hardware Lifecycle·Panel Architecture·부품선정·생산검증",
+  "question_type_hint": "IMPLEMENTATION_EVALUATION",
+  "anchors": [
+    {
+      "id": "chl_scope_chain",
+      "anchor_id": "chl_scope_chain",
+      "statement": "제어 Hardware Lifecycle은 요구사항을 hardware requirement로 분해하고 architecture·interface를 설계한 뒤 component selection, schematic/panel implementation, prototype/design verification, manufacturability·production control, production verification, configuration/release evidence로 추적하여 양산 가능한 설계 적합성을 입증하는 과정이다.",
+      "importance": "core",
+      "keywords": [
+        "hardware lifecycle",
+        "requirements",
+        "architecture",
+        "design verification",
+        "production verification"
+      ],
+      "core_terms": [
+        "hardware lifecycle",
+        "requirements",
+        "architecture",
+        "design verification",
+        "production verification"
+      ],
+      "accepted_explanations": [
+        "제어 Hardware Lifecycle은 요구사항을 hardware requirement로 분해하고 architecture·interface를 설계한 뒤 component selection, schematic/panel implementation, prototype/design verification, manufacturability·production control, production verification, configuration/release evidence로 추적하여 양산 가능한 설계 적합성을 입증하는 과정이다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "제어 Hardware Lifecycle은 요구사항을 hardware requirement로 분해하고 architecture·interface를 설계한 뒤 component selection, schematic/panel implementation, prototype/design verification, manufacturability·production control, production verification, configuration/release evidence로 추적하여 양산 가능한 설계 적합성을 입증하는 과정이다.",
+      "description": "chl_scope_chain hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_requirement_traceability",
+      "anchor_id": "chl_requirement_traceability",
+      "statement": "Hardware requirement는 전원, I/O, communication, performance, environment, reliability, maintainability, safety/application constraint와 mechanical/interface 조건을 식별하고 각 requirement가 설계요소와 verification evidence로 추적되어야 한다.",
+      "importance": "core",
+      "keywords": [
+        "hardware requirement",
+        "traceability",
+        "I/O",
+        "reliability",
+        "verification evidence"
+      ],
+      "core_terms": [
+        "hardware requirement",
+        "traceability",
+        "I/O",
+        "reliability",
+        "verification evidence"
+      ],
+      "accepted_explanations": [
+        "Hardware requirement는 전원, I/O, communication, performance, environment, reliability, maintainability, safety/application constraint와 mechanical/interface 조건을 식별하고 각 requirement가 설계요소와 verification evidence로 추적되어야 한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Hardware requirement는 전원, I/O, communication, performance, environment, reliability, maintainability, safety/application constraint와 mechanical/interface 조건을 식별하고 각 requirement가 설계요소와 verification evidence로 추적되어야 한다.",
+      "description": "chl_requirement_traceability hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_architecture_partitioning",
+      "anchor_id": "chl_architecture_partitioning",
+      "statement": "Hardware architecture는 power/protection, controller/processing, analog·digital I/O, communication, isolation, terminal/interface, enclosure·thermal 영역을 기능별로 partitioning하여 fault propagation, maintainability와 verification boundary를 명확히 한다.",
+      "importance": "core",
+      "keywords": [
+        "panel architecture",
+        "partitioning",
+        "power protection",
+        "I/O isolation",
+        "communication"
+      ],
+      "core_terms": [
+        "panel architecture",
+        "partitioning",
+        "power protection",
+        "I/O isolation",
+        "communication"
+      ],
+      "accepted_explanations": [
+        "Hardware architecture는 power/protection, controller/processing, analog·digital I/O, communication, isolation, terminal/interface, enclosure·thermal 영역을 기능별로 partitioning하여 fault propagation, maintainability와 verification boundary를 명확히 한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Hardware architecture는 power/protection, controller/processing, analog·digital I/O, communication, isolation, terminal/interface, enclosure·thermal 영역을 기능별로 partitioning하여 fault propagation, maintainability와 verification boundary를 명확히 한다.",
+      "description": "chl_architecture_partitioning hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_interface_definition",
+      "anchor_id": "chl_interface_definition",
+      "statement": "각 hardware block 간 interface는 signal type/range, electrical level, source/load capability, isolation, connector/terminal, timing 또는 communication condition과 fault behavior를 정의하여 암묵적 interface assumption을 줄인다.",
+      "importance": "core",
+      "keywords": [
+        "interface definition",
+        "signal range",
+        "electrical level",
+        "isolation",
+        "fault behavior"
+      ],
+      "core_terms": [
+        "interface definition",
+        "signal range",
+        "electrical level",
+        "isolation",
+        "fault behavior"
+      ],
+      "accepted_explanations": [
+        "각 hardware block 간 interface는 signal type/range, electrical level, source/load capability, isolation, connector/terminal, timing 또는 communication condition과 fault behavior를 정의하여 암묵적 interface assumption을 줄인다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "각 hardware block 간 interface는 signal type/range, electrical level, source/load capability, isolation, connector/terminal, timing 또는 communication condition과 fault behavior를 정의하여 암묵적 interface assumption을 줄인다.",
+      "description": "chl_interface_definition hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_power_budget",
+      "anchor_id": "chl_power_budget",
+      "statement": "Hardware power design은 normal/peak/startup load, supply tolerance, conversion loss, protection device와 future margin을 포함해 power budget을 작성하고 branch별 voltage/current capability와 brownout·fault response를 검증한다.",
+      "importance": "core",
+      "keywords": [
+        "power budget",
+        "startup load",
+        "supply tolerance",
+        "conversion loss",
+        "fault response"
+      ],
+      "core_terms": [
+        "power budget",
+        "startup load",
+        "supply tolerance",
+        "conversion loss",
+        "fault response"
+      ],
+      "accepted_explanations": [
+        "Hardware power design은 normal/peak/startup load, supply tolerance, conversion loss, protection device와 future margin을 포함해 power budget을 작성하고 branch별 voltage/current capability와 brownout·fault response를 검증한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Hardware power design은 normal/peak/startup load, supply tolerance, conversion loss, protection device와 future margin을 포함해 power budget을 작성하고 branch별 voltage/current capability와 brownout·fault response를 검증한다.",
+      "description": "chl_power_budget hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_power_protection",
+      "anchor_id": "chl_power_protection",
+      "statement": "Power input과 distribution에는 적용 requirement에 따라 overcurrent, reverse polarity, over/undervoltage, surge/transient, short-circuit 또는 branch isolation protection을 배치하고 protection coordination과 정상동작 영향도 함께 검토한다.",
+      "importance": "core",
+      "keywords": [
+        "power protection",
+        "overcurrent",
+        "reverse polarity",
+        "surge transient",
+        "protection coordination"
+      ],
+      "core_terms": [
+        "power protection",
+        "overcurrent",
+        "reverse polarity",
+        "surge transient",
+        "protection coordination"
+      ],
+      "accepted_explanations": [
+        "Power input과 distribution에는 적용 requirement에 따라 overcurrent, reverse polarity, over/undervoltage, surge/transient, short-circuit 또는 branch isolation protection을 배치하고 protection coordination과 정상동작 영향도 함께 검토한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Power input과 distribution에는 적용 requirement에 따라 overcurrent, reverse polarity, over/undervoltage, surge/transient, short-circuit 또는 branch isolation protection을 배치하고 protection coordination과 정상동작 영향도 함께 검토한다.",
+      "description": "chl_power_protection hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_component_selection_multicriteria",
+      "anchor_id": "chl_component_selection_multicriteria",
+      "statement": "Component selection은 nominal 기능만 맞추는 것이 아니라 electrical rating, temperature/environment, tolerance/accuracy requirement, derating margin, interface compatibility, availability/lifecycle, maintainability, quality grade와 application/safety requirement를 함께 평가한다.",
+      "importance": "core",
+      "keywords": [
+        "component selection",
+        "electrical rating",
+        "derating",
+        "availability",
+        "maintainability"
+      ],
+      "core_terms": [
+        "component selection",
+        "electrical rating",
+        "derating",
+        "availability",
+        "maintainability"
+      ],
+      "accepted_explanations": [
+        "Component selection은 nominal 기능만 맞추는 것이 아니라 electrical rating, temperature/environment, tolerance/accuracy requirement, derating margin, interface compatibility, availability/lifecycle, maintainability, quality grade와 application/safety requirement를 함께 평가한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Component selection은 nominal 기능만 맞추는 것이 아니라 electrical rating, temperature/environment, tolerance/accuracy requirement, derating margin, interface compatibility, availability/lifecycle, maintainability, quality grade와 application/safety requirement를 함께 평가한다.",
+      "description": "chl_component_selection_multicriteria hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_derating_rule",
+      "anchor_id": "chl_derating_rule",
+      "statement": "Derating은 component stress를 rating 한계에서 충분히 떨어뜨려 reliability margin을 확보하는 설계수단이며 적용 비율은 부품종류·manufacturer data·프로젝트 requirement에 따라 정하므로 모든 부품에 하나의 고정 percentage를 적용하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "component derating",
+        "stress",
+        "rating",
+        "reliability margin",
+        "manufacturer data"
+      ],
+      "core_terms": [
+        "component derating",
+        "stress",
+        "rating",
+        "reliability margin",
+        "manufacturer data"
+      ],
+      "accepted_explanations": [
+        "Derating은 component stress를 rating 한계에서 충분히 떨어뜨려 reliability margin을 확보하는 설계수단이며 적용 비율은 부품종류·manufacturer data·프로젝트 requirement에 따라 정하므로 모든 부품에 하나의 고정 percentage를 적용하지 않는다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Derating은 component stress를 rating 한계에서 충분히 떨어뜨려 reliability margin을 확보하는 설계수단이며 적용 비율은 부품종류·manufacturer data·프로젝트 requirement에 따라 정하므로 모든 부품에 하나의 고정 percentage를 적용하지 않는다.",
+      "description": "chl_derating_rule hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_tolerance_stack_boundary",
+      "anchor_id": "chl_tolerance_stack_boundary",
+      "statement": "Hardware selection 단계에서는 tolerance·accuracy budget이 requirement를 만족하는지 확인하되, noise·drift·aging·power variation이 측정오차로 전파되는 상세 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "tolerance budget",
+        "accuracy requirement",
+        "error chain",
+        "Topic 5 boundary",
+        "component selection"
+      ],
+      "core_terms": [
+        "tolerance budget",
+        "accuracy requirement",
+        "error chain",
+        "Topic 5 boundary",
+        "component selection"
+      ],
+      "accepted_explanations": [
+        "Hardware selection 단계에서는 tolerance·accuracy budget이 requirement를 만족하는지 확인하되, noise·drift·aging·power variation이 측정오차로 전파되는 상세 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Hardware selection 단계에서는 tolerance·accuracy budget이 requirement를 만족하는지 확인하되, noise·drift·aging·power variation이 측정오차로 전파되는 상세 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유한다.",
+      "description": "chl_tolerance_stack_boundary hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_obsolescence_availability",
+      "anchor_id": "chl_obsolescence_availability",
+      "statement": "장기 운영 제어시스템의 component selection은 lifecycle status, second source 가능성, supply continuity와 replacement compatibility를 고려하여 단종이나 공급중단이 유지보수와 생산에 미치는 위험을 줄인다.",
+      "importance": "important",
+      "keywords": [
+        "obsolescence",
+        "second source",
+        "supply continuity",
+        "replacement compatibility",
+        "lifecycle"
+      ],
+      "core_terms": [
+        "obsolescence",
+        "second source",
+        "supply continuity",
+        "replacement compatibility",
+        "lifecycle"
+      ],
+      "accepted_explanations": [
+        "장기 운영 제어시스템의 component selection은 lifecycle status, second source 가능성, supply continuity와 replacement compatibility를 고려하여 단종이나 공급중단이 유지보수와 생산에 미치는 위험을 줄인다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "장기 운영 제어시스템의 component selection은 lifecycle status, second source 가능성, supply continuity와 replacement compatibility를 고려하여 단종이나 공급중단이 유지보수와 생산에 미치는 위험을 줄인다.",
+      "description": "chl_obsolescence_availability hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_thermal_design",
+      "anchor_id": "chl_thermal_design",
+      "statement": "Panel/product thermal design은 component loss, enclosure 내부 heat accumulation, ambient condition, ventilation/cooling path와 hotspot을 고려하고 온도상승이 component rating·reliability를 침해하지 않는지 계산 또는 시험 evidence로 검증한다.",
+      "importance": "core",
+      "keywords": [
+        "thermal design",
+        "heat loss",
+        "enclosure",
+        "hotspot",
+        "thermal verification"
+      ],
+      "core_terms": [
+        "thermal design",
+        "heat loss",
+        "enclosure",
+        "hotspot",
+        "thermal verification"
+      ],
+      "accepted_explanations": [
+        "Panel/product thermal design은 component loss, enclosure 내부 heat accumulation, ambient condition, ventilation/cooling path와 hotspot을 고려하고 온도상승이 component rating·reliability를 침해하지 않는지 계산 또는 시험 evidence로 검증한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Panel/product thermal design은 component loss, enclosure 내부 heat accumulation, ambient condition, ventilation/cooling path와 hotspot을 고려하고 온도상승이 component rating·reliability를 침해하지 않는지 계산 또는 시험 evidence로 검증한다.",
+      "description": "chl_thermal_design hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_panel_layout",
+      "anchor_id": "chl_panel_layout",
+      "statement": "Panel architecture의 physical layout은 power/heat/noise source와 sensitive I/O, maintenance clearance, airflow, terminal accessibility, cable entry와 replaceability를 고려하여 functional partition과 physical arrangement가 일치하도록 구성한다.",
+      "importance": "core",
+      "keywords": [
+        "panel layout",
+        "airflow",
+        "maintenance clearance",
+        "terminal accessibility",
+        "replaceability"
+      ],
+      "core_terms": [
+        "panel layout",
+        "airflow",
+        "maintenance clearance",
+        "terminal accessibility",
+        "replaceability"
+      ],
+      "accepted_explanations": [
+        "Panel architecture의 physical layout은 power/heat/noise source와 sensitive I/O, maintenance clearance, airflow, terminal accessibility, cable entry와 replaceability를 고려하여 functional partition과 physical arrangement가 일치하도록 구성한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Panel architecture의 physical layout은 power/heat/noise source와 sensitive I/O, maintenance clearance, airflow, terminal accessibility, cable entry와 replaceability를 고려하여 functional partition과 physical arrangement가 일치하도록 구성한다.",
+      "description": "chl_panel_layout hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_grounding_emc_boundary",
+      "anchor_id": "chl_grounding_emc_boundary",
+      "statement": "Grounding topology, shield termination philosophy, ground-loop mechanism과 EMC mitigation 원리는 `instrumentation_power_grounding_shielding_ups_ground_loop_emc` Topic이 소유하며, 본 Topic은 그 requirement를 panel/product architecture와 interface design에 반영하고 design verification에서 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "grounding boundary",
+        "shielding boundary",
+        "EMC requirement",
+        "panel architecture",
+        "Topic 1 boundary"
+      ],
+      "core_terms": [
+        "grounding boundary",
+        "shielding boundary",
+        "EMC requirement",
+        "panel architecture",
+        "Topic 1 boundary"
+      ],
+      "accepted_explanations": [
+        "Grounding topology, shield termination philosophy, ground-loop mechanism과 EMC mitigation 원리는 `instrumentation_power_grounding_shielding_ups_ground_loop_emc` Topic이 소유하며, 본 Topic은 그 requirement를 panel/product architecture와 interface design에 반영하고 design verification에서 확인한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Grounding topology, shield termination philosophy, ground-loop mechanism과 EMC mitigation 원리는 `instrumentation_power_grounding_shielding_ups_ground_loop_emc` Topic이 소유하며, 본 Topic은 그 requirement를 panel/product architecture와 interface design에 반영하고 design verification에서 확인한다.",
+      "description": "chl_grounding_emc_boundary hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_field_installation_boundary",
+      "anchor_id": "chl_field_installation_boundary",
+      "statement": "Cable tray, gland, field wiring, impulse tubing과 site installation inspection은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유하며, 본 Topic은 panel 내부 wiring/terminal architecture, manufacturable assembly와 product-level production verification을 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "field installation boundary",
+        "panel wiring",
+        "terminal architecture",
+        "manufacturing",
+        "Topic 2 boundary"
+      ],
+      "core_terms": [
+        "field installation boundary",
+        "panel wiring",
+        "terminal architecture",
+        "manufacturing",
+        "Topic 2 boundary"
+      ],
+      "accepted_explanations": [
+        "Cable tray, gland, field wiring, impulse tubing과 site installation inspection은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유하며, 본 Topic은 panel 내부 wiring/terminal architecture, manufacturable assembly와 product-level production verification을 소유한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Cable tray, gland, field wiring, impulse tubing과 site installation inspection은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유하며, 본 Topic은 panel 내부 wiring/terminal architecture, manufacturable assembly와 product-level production verification을 소유한다.",
+      "description": "chl_field_installation_boundary hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_io_selection",
+      "anchor_id": "chl_io_selection",
+      "statement": "I/O module과 signal-conditioning hardware는 signal type/range, input impedance or loading, output drive, isolation, conversion accuracy/resolution, update requirement, diagnostic capability와 fault state를 application requirement에 맞게 선정한다.",
+      "importance": "core",
+      "keywords": [
+        "I/O module",
+        "signal conditioning",
+        "isolation",
+        "diagnostics",
+        "fault state"
+      ],
+      "core_terms": [
+        "I/O module",
+        "signal conditioning",
+        "isolation",
+        "diagnostics",
+        "fault state"
+      ],
+      "accepted_explanations": [
+        "I/O module과 signal-conditioning hardware는 signal type/range, input impedance or loading, output drive, isolation, conversion accuracy/resolution, update requirement, diagnostic capability와 fault state를 application requirement에 맞게 선정한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "I/O module과 signal-conditioning hardware는 signal type/range, input impedance or loading, output drive, isolation, conversion accuracy/resolution, update requirement, diagnostic capability와 fault state를 application requirement에 맞게 선정한다.",
+      "description": "chl_io_selection hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_communication_interface",
+      "anchor_id": "chl_communication_interface",
+      "statement": "Communication hardware는 physical layer, connector/media, isolation, port count, network load/throughput requirement, redundancy or recovery requirement와 field device compatibility를 확인하며 protocol software 기능과 hardware interface 책임을 구분한다.",
+      "importance": "important",
+      "keywords": [
+        "communication hardware",
+        "physical layer",
+        "connector media",
+        "isolation",
+        "compatibility"
+      ],
+      "core_terms": [
+        "communication hardware",
+        "physical layer",
+        "connector media",
+        "isolation",
+        "compatibility"
+      ],
+      "accepted_explanations": [
+        "Communication hardware는 physical layer, connector/media, isolation, port count, network load/throughput requirement, redundancy or recovery requirement와 field device compatibility를 확인하며 protocol software 기능과 hardware interface 책임을 구분한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Communication hardware는 physical layer, connector/media, isolation, port count, network load/throughput requirement, redundancy or recovery requirement와 field device compatibility를 확인하며 protocol software 기능과 hardware interface 책임을 구분한다.",
+      "description": "chl_communication_interface hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_connector_terminal_selection",
+      "anchor_id": "chl_connector_terminal_selection",
+      "statement": "Connector와 terminal은 current/voltage rating, conductor size, contact reliability, mating cycle, environmental condition, keying/polarity protection, serviceability와 production assembly error 가능성을 고려하여 선정한다.",
+      "importance": "important",
+      "keywords": [
+        "connector",
+        "terminal",
+        "contact reliability",
+        "keying",
+        "serviceability"
+      ],
+      "core_terms": [
+        "connector",
+        "terminal",
+        "contact reliability",
+        "keying",
+        "serviceability"
+      ],
+      "accepted_explanations": [
+        "Connector와 terminal은 current/voltage rating, conductor size, contact reliability, mating cycle, environmental condition, keying/polarity protection, serviceability와 production assembly error 가능성을 고려하여 선정한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Connector와 terminal은 current/voltage rating, conductor size, contact reliability, mating cycle, environmental condition, keying/polarity protection, serviceability와 production assembly error 가능성을 고려하여 선정한다.",
+      "description": "chl_connector_terminal_selection hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_prototype_not_production",
+      "anchor_id": "chl_prototype_not_production",
+      "statement": "Prototype의 기능시험 합격은 component availability, tolerance spread, assembly variation, process capability, production test coverage와 configuration control을 입증하지 않으므로 production readiness와 동일하지 않다.",
+      "importance": "core",
+      "keywords": [
+        "prototype",
+        "production readiness",
+        "assembly variation",
+        "process capability",
+        "test coverage"
+      ],
+      "core_terms": [
+        "prototype",
+        "production readiness",
+        "assembly variation",
+        "process capability",
+        "test coverage"
+      ],
+      "accepted_explanations": [
+        "Prototype의 기능시험 합격은 component availability, tolerance spread, assembly variation, process capability, production test coverage와 configuration control을 입증하지 않으므로 production readiness와 동일하지 않다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Prototype의 기능시험 합격은 component availability, tolerance spread, assembly variation, process capability, production test coverage와 configuration control을 입증하지 않으므로 production readiness와 동일하지 않다.",
+      "description": "chl_prototype_not_production hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_design_review",
+      "anchor_id": "chl_design_review",
+      "statement": "Hardware design review는 requirement traceability, architecture/interface consistency, schematic/BOM/layout, power/thermal margin, failure risk, testability, manufacturability와 maintainability를 단계별로 검토하고 open action을 closure evidence로 관리한다.",
+      "importance": "core",
+      "keywords": [
+        "design review",
+        "schematic",
+        "BOM",
+        "testability",
+        "manufacturability"
+      ],
+      "core_terms": [
+        "design review",
+        "schematic",
+        "BOM",
+        "testability",
+        "manufacturability"
+      ],
+      "accepted_explanations": [
+        "Hardware design review는 requirement traceability, architecture/interface consistency, schematic/BOM/layout, power/thermal margin, failure risk, testability, manufacturability와 maintainability를 단계별로 검토하고 open action을 closure evidence로 관리한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Hardware design review는 requirement traceability, architecture/interface consistency, schematic/BOM/layout, power/thermal margin, failure risk, testability, manufacturability와 maintainability를 단계별로 검토하고 open action을 closure evidence로 관리한다.",
+      "description": "chl_design_review hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_verification_plan",
+      "anchor_id": "chl_verification_plan",
+      "statement": "Design verification plan은 각 hardware requirement마다 analysis, inspection, test 또는 demonstration 등 적절한 verification method와 DUT configuration, test condition, acceptance criterion, evidence owner를 사전에 정의한다.",
+      "importance": "core",
+      "keywords": [
+        "verification plan",
+        "verification method",
+        "DUT configuration",
+        "acceptance criterion",
+        "evidence owner"
+      ],
+      "core_terms": [
+        "verification plan",
+        "verification method",
+        "DUT configuration",
+        "acceptance criterion",
+        "evidence owner"
+      ],
+      "accepted_explanations": [
+        "Design verification plan은 각 hardware requirement마다 analysis, inspection, test 또는 demonstration 등 적절한 verification method와 DUT configuration, test condition, acceptance criterion, evidence owner를 사전에 정의한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Design verification plan은 각 hardware requirement마다 analysis, inspection, test 또는 demonstration 등 적절한 verification method와 DUT configuration, test condition, acceptance criterion, evidence owner를 사전에 정의한다.",
+      "description": "chl_verification_plan hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_verification_vs_validation",
+      "anchor_id": "chl_verification_vs_validation",
+      "statement": "Verification은 설계가 명시된 requirement대로 구현되었는지를 확인하는 활동이고 validation은 최종 사용목적과 운용 요구에 적합한지를 확인하는 상위 활동이므로 두 용어를 동일하게 취급하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "verification",
+        "validation",
+        "requirements",
+        "intended use",
+        "V&V"
+      ],
+      "core_terms": [
+        "verification",
+        "validation",
+        "requirements",
+        "intended use",
+        "V&V"
+      ],
+      "accepted_explanations": [
+        "Verification은 설계가 명시된 requirement대로 구현되었는지를 확인하는 활동이고 validation은 최종 사용목적과 운용 요구에 적합한지를 확인하는 상위 활동이므로 두 용어를 동일하게 취급하지 않는다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Verification은 설계가 명시된 requirement대로 구현되었는지를 확인하는 활동이고 validation은 최종 사용목적과 운용 요구에 적합한지를 확인하는 상위 활동이므로 두 용어를 동일하게 취급하지 않는다.",
+      "description": "chl_verification_vs_validation hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_prototype_design_verification",
+      "anchor_id": "chl_prototype_design_verification",
+      "statement": "Prototype/design verification에서는 power, I/O, interface, protection, fault response, thermal behavior, diagnostic path와 requirement-specific 기능을 시험하여 design margin과 failure mode를 확인하고 결과를 requirement에 trace한다.",
+      "importance": "core",
+      "keywords": [
+        "prototype verification",
+        "design verification",
+        "fault response",
+        "design margin",
+        "traceability"
+      ],
+      "core_terms": [
+        "prototype verification",
+        "design verification",
+        "fault response",
+        "design margin",
+        "traceability"
+      ],
+      "accepted_explanations": [
+        "Prototype/design verification에서는 power, I/O, interface, protection, fault response, thermal behavior, diagnostic path와 requirement-specific 기능을 시험하여 design margin과 failure mode를 확인하고 결과를 requirement에 trace한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Prototype/design verification에서는 power, I/O, interface, protection, fault response, thermal behavior, diagnostic path와 requirement-specific 기능을 시험하여 design margin과 failure mode를 확인하고 결과를 requirement에 trace한다.",
+      "description": "chl_prototype_design_verification hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_environmental_qualification_boundary",
+      "anchor_id": "chl_environmental_qualification_boundary",
+      "statement": "온도·습도·진동·EMC 시험의 구체적인 setup, stress category, monitoring과 pass/fail evidence는 `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` Topic이 소유하며, 본 Topic은 hardware lifecycle에서 해당 qualification requirement와 결과를 design release gate에 연결한다.",
+      "importance": "core",
+      "keywords": [
+        "environmental qualification boundary",
+        "EMC qualification",
+        "release gate",
+        "Topic 3 boundary",
+        "verification evidence"
+      ],
+      "core_terms": [
+        "environmental qualification boundary",
+        "EMC qualification",
+        "release gate",
+        "Topic 3 boundary",
+        "verification evidence"
+      ],
+      "accepted_explanations": [
+        "온도·습도·진동·EMC 시험의 구체적인 setup, stress category, monitoring과 pass/fail evidence는 `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` Topic이 소유하며, 본 Topic은 hardware lifecycle에서 해당 qualification requirement와 결과를 design release gate에 연결한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "온도·습도·진동·EMC 시험의 구체적인 setup, stress category, monitoring과 pass/fail evidence는 `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` Topic이 소유하며, 본 Topic은 hardware lifecycle에서 해당 qualification requirement와 결과를 design release gate에 연결한다.",
+      "description": "chl_environmental_qualification_boundary hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_dfm_dfa",
+      "anchor_id": "chl_dfm_dfa",
+      "statement": "양산 전에는 design for manufacturability/assembly 관점에서 부품 방향성, 접근성, 공구·작업공간, 조립순서, 오삽입 방지, 검사 가능성, 반복 작업 편차와 repair/rework 가능성을 검토한다.",
+      "importance": "core",
+      "keywords": [
+        "DFM",
+        "DFA",
+        "assembly sequence",
+        "mistake proofing",
+        "rework"
+      ],
+      "core_terms": [
+        "DFM",
+        "DFA",
+        "assembly sequence",
+        "mistake proofing",
+        "rework"
+      ],
+      "accepted_explanations": [
+        "양산 전에는 design for manufacturability/assembly 관점에서 부품 방향성, 접근성, 공구·작업공간, 조립순서, 오삽입 방지, 검사 가능성, 반복 작업 편차와 repair/rework 가능성을 검토한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "양산 전에는 design for manufacturability/assembly 관점에서 부품 방향성, 접근성, 공구·작업공간, 조립순서, 오삽입 방지, 검사 가능성, 반복 작업 편차와 repair/rework 가능성을 검토한다.",
+      "description": "chl_dfm_dfa hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_bom_configuration",
+      "anchor_id": "chl_bom_configuration",
+      "statement": "BOM, drawing, schematic, PCB/panel revision, firmware dependency와 approved component/source 정보는 configuration baseline으로 관리하여 생산된 unit이 어떤 설계 revision으로 만들어졌는지 추적 가능해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "BOM",
+        "configuration baseline",
+        "revision",
+        "approved source",
+        "traceability"
+      ],
+      "core_terms": [
+        "BOM",
+        "configuration baseline",
+        "revision",
+        "approved source",
+        "traceability"
+      ],
+      "accepted_explanations": [
+        "BOM, drawing, schematic, PCB/panel revision, firmware dependency와 approved component/source 정보는 configuration baseline으로 관리하여 생산된 unit이 어떤 설계 revision으로 만들어졌는지 추적 가능해야 한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "BOM, drawing, schematic, PCB/panel revision, firmware dependency와 approved component/source 정보는 configuration baseline으로 관리하여 생산된 unit이 어떤 설계 revision으로 만들어졌는지 추적 가능해야 한다.",
+      "description": "chl_bom_configuration hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_incoming_material_control",
+      "anchor_id": "chl_incoming_material_control",
+      "statement": "Production control은 critical component와 assembly material의 part identity, approved source, revision, certificate/inspection requirement와 storage/handling 조건을 확인하여 잘못된 또는 미승인 부품 투입을 방지한다.",
+      "importance": "important",
+      "keywords": [
+        "incoming inspection",
+        "part identity",
+        "approved source",
+        "material control",
+        "storage handling"
+      ],
+      "core_terms": [
+        "incoming inspection",
+        "part identity",
+        "approved source",
+        "material control",
+        "storage handling"
+      ],
+      "accepted_explanations": [
+        "Production control은 critical component와 assembly material의 part identity, approved source, revision, certificate/inspection requirement와 storage/handling 조건을 확인하여 잘못된 또는 미승인 부품 투입을 방지한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Production control은 critical component와 assembly material의 part identity, approved source, revision, certificate/inspection requirement와 storage/handling 조건을 확인하여 잘못된 또는 미승인 부품 투입을 방지한다.",
+      "description": "chl_incoming_material_control hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_work_instruction_process_control",
+      "anchor_id": "chl_work_instruction_process_control",
+      "statement": "생산 작업은 controlled drawing/BOM/work instruction에 따라 수행하고 crimp, torque, soldering, connector mating, labeling 등 품질에 영향을 주는 공정은 필요한 작업조건·검사방법·tool 상태와 operator evidence를 관리한다.",
+      "importance": "core",
+      "keywords": [
+        "work instruction",
+        "process control",
+        "crimp",
+        "torque",
+        "tool control"
+      ],
+      "core_terms": [
+        "work instruction",
+        "process control",
+        "crimp",
+        "torque",
+        "tool control"
+      ],
+      "accepted_explanations": [
+        "생산 작업은 controlled drawing/BOM/work instruction에 따라 수행하고 crimp, torque, soldering, connector mating, labeling 등 품질에 영향을 주는 공정은 필요한 작업조건·검사방법·tool 상태와 operator evidence를 관리한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "생산 작업은 controlled drawing/BOM/work instruction에 따라 수행하고 crimp, torque, soldering, connector mating, labeling 등 품질에 영향을 주는 공정은 필요한 작업조건·검사방법·tool 상태와 operator evidence를 관리한다.",
+      "description": "chl_work_instruction_process_control hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_production_test_coverage",
+      "anchor_id": "chl_production_test_coverage",
+      "statement": "Production verification은 설계검증 전체를 반복하는 것이 아니라 제조변동·오조립·부품불량을 검출하도록 unit-level 검사와 functional test coverage를 정의하고 critical path가 실제로 검사되는지 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "production test",
+        "test coverage",
+        "manufacturing variation",
+        "functional test",
+        "critical path"
+      ],
+      "core_terms": [
+        "production test",
+        "test coverage",
+        "manufacturing variation",
+        "functional test",
+        "critical path"
+      ],
+      "accepted_explanations": [
+        "Production verification은 설계검증 전체를 반복하는 것이 아니라 제조변동·오조립·부품불량을 검출하도록 unit-level 검사와 functional test coverage를 정의하고 critical path가 실제로 검사되는지 확인한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Production verification은 설계검증 전체를 반복하는 것이 아니라 제조변동·오조립·부품불량을 검출하도록 unit-level 검사와 functional test coverage를 정의하고 critical path가 실제로 검사되는지 확인한다.",
+      "description": "chl_production_test_coverage hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_eol_test",
+      "anchor_id": "chl_eol_test",
+      "statement": "End-of-line 또는 final production test는 적용 product requirement에 따라 power-up, supply current, I/O channels, communication ports, diagnostics, alarms, protection path와 calibration-related checks 중 필요한 항목을 검증하고 unit-specific result를 기록한다.",
+      "importance": "core",
+      "keywords": [
+        "end of line test",
+        "power up",
+        "I/O test",
+        "communication test",
+        "unit record"
+      ],
+      "core_terms": [
+        "end of line test",
+        "power up",
+        "I/O test",
+        "communication test",
+        "unit record"
+      ],
+      "accepted_explanations": [
+        "End-of-line 또는 final production test는 적용 product requirement에 따라 power-up, supply current, I/O channels, communication ports, diagnostics, alarms, protection path와 calibration-related checks 중 필요한 항목을 검증하고 unit-specific result를 기록한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "End-of-line 또는 final production test는 적용 product requirement에 따라 power-up, supply current, I/O channels, communication ports, diagnostics, alarms, protection path와 calibration-related checks 중 필요한 항목을 검증하고 unit-specific result를 기록한다.",
+      "description": "chl_eol_test hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_test_fixture_control",
+      "anchor_id": "chl_test_fixture_control",
+      "statement": "Production test fixture와 test software는 version, calibration/verification 상태, known-good/reference check와 change control을 관리하여 fixture failure를 product defect로 오판하거나 반대로 defect를 놓치는 위험을 줄인다.",
+      "importance": "core",
+      "keywords": [
+        "test fixture",
+        "test software",
+        "calibration",
+        "known good",
+        "change control"
+      ],
+      "core_terms": [
+        "test fixture",
+        "test software",
+        "calibration",
+        "known good",
+        "change control"
+      ],
+      "accepted_explanations": [
+        "Production test fixture와 test software는 version, calibration/verification 상태, known-good/reference check와 change control을 관리하여 fixture failure를 product defect로 오판하거나 반대로 defect를 놓치는 위험을 줄인다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Production test fixture와 test software는 version, calibration/verification 상태, known-good/reference check와 change control을 관리하여 fixture failure를 product defect로 오판하거나 반대로 defect를 놓치는 위험을 줄인다.",
+      "description": "chl_test_fixture_control hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_nonconformance_rework",
+      "anchor_id": "chl_nonconformance_rework",
+      "statement": "Production nonconformance는 defect classification, containment, disposition, rework instruction, reinspection/retest와 recurrence prevention evidence를 남기고 임의 repair 후 정상 unit로 출하하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "nonconformance",
+        "containment",
+        "rework",
+        "reinspection",
+        "recurrence prevention"
+      ],
+      "core_terms": [
+        "nonconformance",
+        "containment",
+        "rework",
+        "reinspection",
+        "recurrence prevention"
+      ],
+      "accepted_explanations": [
+        "Production nonconformance는 defect classification, containment, disposition, rework instruction, reinspection/retest와 recurrence prevention evidence를 남기고 임의 repair 후 정상 unit로 출하하지 않는다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Production nonconformance는 defect classification, containment, disposition, rework instruction, reinspection/retest와 recurrence prevention evidence를 남기고 임의 repair 후 정상 unit로 출하하지 않는다.",
+      "description": "chl_nonconformance_rework hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_fat_boundary",
+      "anchor_id": "chl_fat_boundary",
+      "statement": "FAT는 프로젝트·시스템 acceptance의 한 단계일 수 있으나 hardware requirement traceability, component/thermal margin, design verification와 production process capability 전체를 대체하지 않으며 전체 FAT/SAT/commissioning acceptance는 `control_software_project_engineering_documents_fat_sat_commissioning_acceptance` Topic이 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "FAT boundary",
+        "design verification",
+        "production capability",
+        "commissioning",
+        "acceptance"
+      ],
+      "core_terms": [
+        "FAT boundary",
+        "design verification",
+        "production capability",
+        "commissioning",
+        "acceptance"
+      ],
+      "accepted_explanations": [
+        "FAT는 프로젝트·시스템 acceptance의 한 단계일 수 있으나 hardware requirement traceability, component/thermal margin, design verification와 production process capability 전체를 대체하지 않으며 전체 FAT/SAT/commissioning acceptance는 `control_software_project_engineering_documents_fat_sat_commissioning_acceptance` Topic이 소유한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "FAT는 프로젝트·시스템 acceptance의 한 단계일 수 있으나 hardware requirement traceability, component/thermal margin, design verification와 production process capability 전체를 대체하지 않으며 전체 FAT/SAT/commissioning acceptance는 `control_software_project_engineering_documents_fat_sat_commissioning_acceptance` Topic이 소유한다.",
+      "description": "chl_fat_boundary hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_software_lifecycle_boundary",
+      "anchor_id": "chl_software_lifecycle_boundary",
+      "statement": "Software requirement, implementation, software verification/validation과 V-model traceability는 `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation` Topic이 소유하며, 본 Topic은 processor/I/O/interface/panel hardware lifecycle과 그 verification evidence를 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "software lifecycle boundary",
+        "V model",
+        "hardware lifecycle",
+        "processor I/O",
+        "Topic boundary"
+      ],
+      "core_terms": [
+        "software lifecycle boundary",
+        "V model",
+        "hardware lifecycle",
+        "processor I/O",
+        "Topic boundary"
+      ],
+      "accepted_explanations": [
+        "Software requirement, implementation, software verification/validation과 V-model traceability는 `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation` Topic이 소유하며, 본 Topic은 processor/I/O/interface/panel hardware lifecycle과 그 verification evidence를 소유한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Software requirement, implementation, software verification/validation과 V-model traceability는 `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation` Topic이 소유하며, 본 Topic은 processor/I/O/interface/panel hardware lifecycle과 그 verification evidence를 소유한다.",
+      "description": "chl_software_lifecycle_boundary hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_change_impact",
+      "anchor_id": "chl_change_impact",
+      "statement": "Component substitution, PCB/panel layout, power design, connector, enclosure 또는 manufacturing process 변경 시 requirement와 verified characteristic에 미치는 영향을 평가하여 필요한 design verification, environmental requalification 또는 production-test update 범위를 결정한다.",
+      "importance": "core",
+      "keywords": [
+        "change impact",
+        "component substitution",
+        "layout change",
+        "requalification",
+        "production test update"
+      ],
+      "core_terms": [
+        "change impact",
+        "component substitution",
+        "layout change",
+        "requalification",
+        "production test update"
+      ],
+      "accepted_explanations": [
+        "Component substitution, PCB/panel layout, power design, connector, enclosure 또는 manufacturing process 변경 시 requirement와 verified characteristic에 미치는 영향을 평가하여 필요한 design verification, environmental requalification 또는 production-test update 범위를 결정한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Component substitution, PCB/panel layout, power design, connector, enclosure 또는 manufacturing process 변경 시 requirement와 verified characteristic에 미치는 영향을 평가하여 필요한 design verification, environmental requalification 또는 production-test update 범위를 결정한다.",
+      "description": "chl_change_impact hardware lifecycle 계약을 평가한다."
+    },
+    {
+      "id": "chl_release_gate",
+      "anchor_id": "chl_release_gate",
+      "statement": "Hardware release는 open design action, unresolved nonconformance, requirement verification gap, obsolete/unapproved BOM item 또는 production-test gap이 남아 있지 않은지 확인하고 승인된 configuration과 evidence package를 baseline으로 고정한 뒤 수행한다.",
+      "importance": "core",
+      "keywords": [
+        "release gate",
+        "verification gap",
+        "BOM approval",
+        "production test gap",
+        "configuration baseline"
+      ],
+      "core_terms": [
+        "release gate",
+        "verification gap",
+        "BOM approval",
+        "production test gap",
+        "configuration baseline"
+      ],
+      "accepted_explanations": [
+        "Hardware release는 open design action, unresolved nonconformance, requirement verification gap, obsolete/unapproved BOM item 또는 production-test gap이 남아 있지 않은지 확인하고 승인된 configuration과 evidence package를 baseline으로 고정한 뒤 수행한다.",
+        "Requirement→architecture/interface→component selection→design verification→manufacturing control→production verification→configuration/release evidence로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Prototype 또는 FAT 한 번의 합격만으로 hardware design verification과 production readiness가 모두 입증된다고 설명한다."
+      ],
+      "grading_notes": "설계 requirement, architecture, selection margin, verification evidence, 생산변동과 configuration/release를 lifecycle로 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/control_hardware_lifecycle_panel_architecture_component_selection_production_verification.md; repository exam-scope criterion IC-2027-W-3-9; industrial instrumentation/control hardware lifecycle, panel/product architecture, component/interface selection, design verification, manufacturability, production controls and production verification fundamentals. Specific component derating values, safety margins, test limits and standard editions are not hard-coded without an applicable requirement. Historical frequency is not asserted.",
+      "claim": "Hardware release는 open design action, unresolved nonconformance, requirement verification gap, obsolete/unapproved BOM item 또는 production-test gap이 남아 있지 않은지 확인하고 승인된 configuration과 evidence package를 baseline으로 고정한 뒤 수행한다.",
+      "description": "chl_release_gate hardware lifecycle 계약을 평가한다."
+    }
+  ],
+  "core_facts": [
+    "제어 Hardware Lifecycle은 요구사항을 hardware requirement로 분해하고 architecture·interface를 설계한 뒤 component selection, schematic/panel implementation, prototype/design verification, manufacturability·production control, production verification, configuration/release evidence로 추적하여 양산 가능한 설계 적합성을 입증하는 과정이다.",
+    "Hardware requirement는 전원, I/O, communication, performance, environment, reliability, maintainability, safety/application constraint와 mechanical/interface 조건을 식별하고 각 requirement가 설계요소와 verification evidence로 추적되어야 한다.",
+    "Hardware architecture는 power/protection, controller/processing, analog·digital I/O, communication, isolation, terminal/interface, enclosure·thermal 영역을 기능별로 partitioning하여 fault propagation, maintainability와 verification boundary를 명확히 한다.",
+    "각 hardware block 간 interface는 signal type/range, electrical level, source/load capability, isolation, connector/terminal, timing 또는 communication condition과 fault behavior를 정의하여 암묵적 interface assumption을 줄인다.",
+    "Hardware power design은 normal/peak/startup load, supply tolerance, conversion loss, protection device와 future margin을 포함해 power budget을 작성하고 branch별 voltage/current capability와 brownout·fault response를 검증한다.",
+    "Power input과 distribution에는 적용 requirement에 따라 overcurrent, reverse polarity, over/undervoltage, surge/transient, short-circuit 또는 branch isolation protection을 배치하고 protection coordination과 정상동작 영향도 함께 검토한다.",
+    "Component selection은 nominal 기능만 맞추는 것이 아니라 electrical rating, temperature/environment, tolerance/accuracy requirement, derating margin, interface compatibility, availability/lifecycle, maintainability, quality grade와 application/safety requirement를 함께 평가한다.",
+    "Derating은 component stress를 rating 한계에서 충분히 떨어뜨려 reliability margin을 확보하는 설계수단이며 적용 비율은 부품종류·manufacturer data·프로젝트 requirement에 따라 정하므로 모든 부품에 하나의 고정 percentage를 적용하지 않는다.",
+    "Hardware selection 단계에서는 tolerance·accuracy budget이 requirement를 만족하는지 확인하되, noise·drift·aging·power variation이 측정오차로 전파되는 상세 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유한다.",
+    "Panel/product thermal design은 component loss, enclosure 내부 heat accumulation, ambient condition, ventilation/cooling path와 hotspot을 고려하고 온도상승이 component rating·reliability를 침해하지 않는지 계산 또는 시험 evidence로 검증한다.",
+    "Panel architecture의 physical layout은 power/heat/noise source와 sensitive I/O, maintenance clearance, airflow, terminal accessibility, cable entry와 replaceability를 고려하여 functional partition과 physical arrangement가 일치하도록 구성한다.",
+    "Grounding topology, shield termination philosophy, ground-loop mechanism과 EMC mitigation 원리는 `instrumentation_power_grounding_shielding_ups_ground_loop_emc` Topic이 소유하며, 본 Topic은 그 requirement를 panel/product architecture와 interface design에 반영하고 design verification에서 확인한다.",
+    "Cable tray, gland, field wiring, impulse tubing과 site installation inspection은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유하며, 본 Topic은 panel 내부 wiring/terminal architecture, manufacturable assembly와 product-level production verification을 소유한다.",
+    "I/O module과 signal-conditioning hardware는 signal type/range, input impedance or loading, output drive, isolation, conversion accuracy/resolution, update requirement, diagnostic capability와 fault state를 application requirement에 맞게 선정한다.",
+    "Prototype의 기능시험 합격은 component availability, tolerance spread, assembly variation, process capability, production test coverage와 configuration control을 입증하지 않으므로 production readiness와 동일하지 않다.",
+    "Hardware design review는 requirement traceability, architecture/interface consistency, schematic/BOM/layout, power/thermal margin, failure risk, testability, manufacturability와 maintainability를 단계별로 검토하고 open action을 closure evidence로 관리한다.",
+    "Design verification plan은 각 hardware requirement마다 analysis, inspection, test 또는 demonstration 등 적절한 verification method와 DUT configuration, test condition, acceptance criterion, evidence owner를 사전에 정의한다.",
+    "Verification은 설계가 명시된 requirement대로 구현되었는지를 확인하는 활동이고 validation은 최종 사용목적과 운용 요구에 적합한지를 확인하는 상위 활동이므로 두 용어를 동일하게 취급하지 않는다.",
+    "Prototype/design verification에서는 power, I/O, interface, protection, fault response, thermal behavior, diagnostic path와 requirement-specific 기능을 시험하여 design margin과 failure mode를 확인하고 결과를 requirement에 trace한다.",
+    "온도·습도·진동·EMC 시험의 구체적인 setup, stress category, monitoring과 pass/fail evidence는 `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` Topic이 소유하며, 본 Topic은 hardware lifecycle에서 해당 qualification requirement와 결과를 design release gate에 연결한다.",
+    "양산 전에는 design for manufacturability/assembly 관점에서 부품 방향성, 접근성, 공구·작업공간, 조립순서, 오삽입 방지, 검사 가능성, 반복 작업 편차와 repair/rework 가능성을 검토한다.",
+    "BOM, drawing, schematic, PCB/panel revision, firmware dependency와 approved component/source 정보는 configuration baseline으로 관리하여 생산된 unit이 어떤 설계 revision으로 만들어졌는지 추적 가능해야 한다.",
+    "생산 작업은 controlled drawing/BOM/work instruction에 따라 수행하고 crimp, torque, soldering, connector mating, labeling 등 품질에 영향을 주는 공정은 필요한 작업조건·검사방법·tool 상태와 operator evidence를 관리한다.",
+    "Production verification은 설계검증 전체를 반복하는 것이 아니라 제조변동·오조립·부품불량을 검출하도록 unit-level 검사와 functional test coverage를 정의하고 critical path가 실제로 검사되는지 확인한다.",
+    "End-of-line 또는 final production test는 적용 product requirement에 따라 power-up, supply current, I/O channels, communication ports, diagnostics, alarms, protection path와 calibration-related checks 중 필요한 항목을 검증하고 unit-specific result를 기록한다.",
+    "Production test fixture와 test software는 version, calibration/verification 상태, known-good/reference check와 change control을 관리하여 fixture failure를 product defect로 오판하거나 반대로 defect를 놓치는 위험을 줄인다.",
+    "Production nonconformance는 defect classification, containment, disposition, rework instruction, reinspection/retest와 recurrence prevention evidence를 남기고 임의 repair 후 정상 unit로 출하하지 않는다.",
+    "FAT는 프로젝트·시스템 acceptance의 한 단계일 수 있으나 hardware requirement traceability, component/thermal margin, design verification와 production process capability 전체를 대체하지 않으며 전체 FAT/SAT/commissioning acceptance는 `control_software_project_engineering_documents_fat_sat_commissioning_acceptance` Topic이 소유한다.",
+    "Software requirement, implementation, software verification/validation과 V-model traceability는 `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation` Topic이 소유하며, 본 Topic은 processor/I/O/interface/panel hardware lifecycle과 그 verification evidence를 소유한다.",
+    "Component substitution, PCB/panel layout, power design, connector, enclosure 또는 manufacturing process 변경 시 requirement와 verified characteristic에 미치는 영향을 평가하여 필요한 design verification, environmental requalification 또는 production-test update 범위를 결정한다.",
+    "Hardware release는 open design action, unresolved nonconformance, requirement verification gap, obsolete/unapproved BOM item 또는 production-test gap이 남아 있지 않은지 확인하고 승인된 configuration과 evidence package를 baseline으로 고정한 뒤 수행한다."
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "chl_prototype_equals_production",
+      "claim": "Prototype 기능시험 합격만으로 production readiness가 입증된다는 주장은 오답이다.",
+      "wrong_claim": "Prototype 기능시험 합격만으로 production readiness가 입증된다는 주장은 오답이다.",
+      "correction": "양산변동, process capability, production test coverage와 configuration control을 별도로 검증해야 한다.",
+      "correct_rule": "양산변동, process capability, production test coverage와 configuration control을 별도로 검증해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: Prototype 기능시험 합격만으로 production readiness가 입증된다는 주장은 오답이다.",
+      "description": "양산변동, process capability, production test coverage와 configuration control을 별도로 검증해야 한다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "chl_fat_equals_design_verification",
+      "claim": "FAT 합격이 hardware design verification 전체를 대체한다는 주장은 오답이다.",
+      "wrong_claim": "FAT 합격이 hardware design verification 전체를 대체한다는 주장은 오답이다.",
+      "correction": "FAT는 project acceptance의 일부일 수 있으나 hardware requirement별 design verification evidence를 대체하지 않는다.",
+      "correct_rule": "FAT는 project acceptance의 일부일 수 있으나 hardware requirement별 design verification evidence를 대체하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: FAT 합격이 hardware design verification 전체를 대체한다는 주장은 오답이다.",
+      "description": "FAT는 project acceptance의 일부일 수 있으나 hardware requirement별 design verification evidence를 대체하지 않는다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "chl_fat_equals_production_verification",
+      "claim": "FAT 합격만으로 production process와 unit-level production verification이 충분하다는 주장은 오답이다.",
+      "wrong_claim": "FAT 합격만으로 production process와 unit-level production verification이 충분하다는 주장은 오답이다.",
+      "correction": "Manufacturing variation과 unit defect를 검출하는 production control/test coverage가 별도로 필요하다.",
+      "correct_rule": "Manufacturing variation과 unit defect를 검출하는 production control/test coverage가 별도로 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: FAT 합격만으로 production process와 unit-level production verification이 충분하다는 주장은 오답이다.",
+      "description": "Manufacturing variation과 unit defect를 검출하는 production control/test coverage가 별도로 필요하다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "chl_nominal_rating_only",
+      "claim": "Component는 nominal voltage/current rating만 만족하면 적합하다는 주장은 오답이다.",
+      "wrong_claim": "Component는 nominal voltage/current rating만 만족하면 적합하다는 주장은 오답이다.",
+      "correction": "Environment, derating, tolerance, interface, lifecycle, maintainability와 application requirement를 함께 평가한다.",
+      "correct_rule": "Environment, derating, tolerance, interface, lifecycle, maintainability와 application requirement를 함께 평가한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: Component는 nominal voltage/current rating만 만족하면 적합하다는 주장은 오답이다.",
+      "description": "Environment, derating, tolerance, interface, lifecycle, maintainability와 application requirement를 함께 평가한다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "chl_same_derating_all",
+      "claim": "모든 종류의 부품에 동일한 고정 derating percentage를 적용하면 된다는 주장은 오답이다.",
+      "wrong_claim": "모든 종류의 부품에 동일한 고정 derating percentage를 적용하면 된다는 주장은 오답이다.",
+      "correction": "Derating은 부품종류, manufacturer data와 applicable requirement에 따라 정한다.",
+      "correct_rule": "Derating은 부품종류, manufacturer data와 applicable requirement에 따라 정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: 모든 종류의 부품에 동일한 고정 derating percentage를 적용하면 된다는 주장은 오답이다.",
+      "description": "Derating은 부품종류, manufacturer data와 applicable requirement에 따라 정한다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "chl_verification_validation_same",
+      "claim": "Verification과 validation을 완전히 동일한 활동으로 정의하는 주장은 오답이다.",
+      "wrong_claim": "Verification과 validation을 완전히 동일한 활동으로 정의하는 주장은 오답이다.",
+      "correction": "Verification은 specified requirement 충족, validation은 intended-use/상위 운용적합성을 확인한다.",
+      "correct_rule": "Verification은 specified requirement 충족, validation은 intended-use/상위 운용적합성을 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: Verification과 validation을 완전히 동일한 활동으로 정의하는 주장은 오답이다.",
+      "description": "Verification은 specified requirement 충족, validation은 intended-use/상위 운용적합성을 확인한다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "chl_production_test_repeat_all_dv",
+      "claim": "Production test는 모든 design verification 시험을 매 unit마다 그대로 반복해야 한다는 주장은 오답이다.",
+      "wrong_claim": "Production test는 모든 design verification 시험을 매 unit마다 그대로 반복해야 한다는 주장은 오답이다.",
+      "correction": "생산변동·오조립·부품불량 검출 목적의 효율적 unit-level coverage를 설계한다.",
+      "correct_rule": "생산변동·오조립·부품불량 검출 목적의 효율적 unit-level coverage를 설계한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: Production test는 모든 design verification 시험을 매 unit마다 그대로 반복해야 한다는 주장은 오답이다.",
+      "description": "생산변동·오조립·부품불량 검출 목적의 효율적 unit-level coverage를 설계한다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "chl_uncontrolled_substitution",
+      "claim": "기능이 비슷한 부품이면 impact assessment 없이 production 중 임의 대체할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "기능이 비슷한 부품이면 impact assessment 없이 production 중 임의 대체할 수 있다는 주장은 오답이다.",
+      "correction": "Component substitution은 configuration/change control과 verification impact assessment가 필요하다.",
+      "correct_rule": "Component substitution은 configuration/change control과 verification impact assessment가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: 기능이 비슷한 부품이면 impact assessment 없이 production 중 임의 대체할 수 있다는 주장은 오답이다.",
+      "description": "Component substitution은 configuration/change control과 verification impact assessment가 필요하다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "chl_fixture_uncontrolled",
+      "claim": "Production test fixture와 test software는 제품 BOM이 아니므로 version/calibration/change control이 불필요하다는 주장은 오답이다.",
+      "wrong_claim": "Production test fixture와 test software는 제품 BOM이 아니므로 version/calibration/change control이 불필요하다는 주장은 오답이다.",
+      "correction": "Fixture와 test software도 production evidence를 만드는 측정시스템이므로 통제해야 한다.",
+      "correct_rule": "Fixture와 test software도 production evidence를 만드는 측정시스템이므로 통제해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: Production test fixture와 test software는 제품 BOM이 아니므로 version/calibration/change control이 불필요하다는 주장은 오답이다.",
+      "description": "Fixture와 test software도 production evidence를 만드는 측정시스템이므로 통제해야 한다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "chl_rework_without_retest",
+      "claim": "Nonconforming unit은 repair 후 재검사나 retest 없이 출하할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Nonconforming unit은 repair 후 재검사나 retest 없이 출하할 수 있다는 주장은 오답이다.",
+      "correction": "승인된 disposition/rework와 필요한 reinspection/retest evidence가 필요하다.",
+      "correct_rule": "승인된 disposition/rework와 필요한 reinspection/retest evidence가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "제어 Hardware Lifecycle 핵심 오류: Nonconforming unit은 repair 후 재검사나 retest 없이 출하할 수 있다는 주장은 오답이다.",
+      "description": "승인된 disposition/rework와 필요한 reinspection/retest evidence가 필요하다.",
+      "grading_notes": "실제 응시자의 단정과 문맥을 확인한 뒤 적용한다."
+    }
+  ],
+  "safe_expressions": [
+    "Hardware requirement는 architecture와 verification evidence까지 trace한다.",
+    "Component selection은 rating뿐 아니라 derating, environment, interface와 lifecycle을 함께 본다.",
+    "Prototype pass와 production readiness를 구분한다.",
+    "Verification과 validation을 구분한다.",
+    "Production test는 제조변동과 unit defect 검출 coverage를 설계한다.",
+    "FAT는 design verification 및 production verification 전체의 대체 evidence가 아니다.",
+    "설계·부품·공정 변경은 impact assessment 후 필요한 re-verification 범위를 정한다."
+  ],
+  "revision_notes": [
+    "IC-2027-W-3-9 제어 Hardware 개발·생산·검증 criterion을 직접 소유한다.",
+    "특정 derating percentage, test limit와 standard edition을 근거 없이 고정하지 않는다.",
+    "Historical frequency를 사용하지 않는다.",
+    "Topic 1/2/3/5, software lifecycle 및 FAT/SAT ownership boundary를 명시했다."
+  ],
+  "topic_label": "제어 Hardware Lifecycle·Panel Architecture·생산·V&V"
+}

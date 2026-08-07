@@ -1,0 +1,300 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+  "title_ko": "계측기 환경·EMC/EMI·온도·습도·진동 Qualification 및 검증",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "계측기의 환경시험 및 EMC/EMI Qualification 절차와 평가방법을 설명하시오.",
+      "intent": "요구사항 정의부터 setup, stress, monitoring, acceptance, failure/re-test까지 평가",
+      "required_anchor_ids": [
+        "ieeq_scope_chain",
+        "ieeq_requirement_traceability",
+        "ieeq_pretest_baseline",
+        "ieeq_in_test_monitoring",
+        "ieeq_acceptance_criteria_predefined",
+        "ieeq_traceable_report"
+      ]
+    },
+    {
+      "pattern": "EMC에서 emission과 immunity의 차이와 시험 시 고려사항을 설명하시오.",
+      "intent": "EMC/EMI 개념과 emission/immunity를 구분하고 representative setup과 DUT mode를 평가",
+      "required_anchor_ids": [
+        "ieeq_emc_emi_distinction",
+        "ieeq_emission_immunity_distinction",
+        "ieeq_emc_test_categories",
+        "ieeq_test_setup_representative",
+        "ieeq_operating_mode_worst_case"
+      ]
+    },
+    {
+      "pattern": "계측기 EMC immunity 시험의 구성과 합격판정 방법을 설명하시오.",
+      "intent": "DUT operating mode, in-test monitoring, predefined degradation/recovery criterion을 평가",
+      "required_anchor_ids": [
+        "ieeq_emc_test_categories",
+        "ieeq_operating_mode_worst_case",
+        "ieeq_in_test_monitoring",
+        "ieeq_acceptance_criteria_predefined"
+      ]
+    },
+    {
+      "pattern": "계측기 온도 Qualification 시험의 목적과 설계 유의사항을 설명하시오.",
+      "intent": "Operating/storage와 stabilization, transition/cycle requirement를 구분",
+      "required_anchor_ids": [
+        "ieeq_temperature_operating_storage",
+        "ieeq_temperature_transition_boundary",
+        "ieeq_pretest_baseline",
+        "ieeq_acceptance_criteria_predefined"
+      ]
+    },
+    {
+      "pattern": "계측기 습도시험의 failure mechanism과 검증방법을 설명하시오.",
+      "intent": "Condensation, leakage, corrosion, insulation과 recovery/post-check를 평가",
+      "required_anchor_ids": [
+        "ieeq_humidity_failure_mechanisms",
+        "ieeq_condensation_condition",
+        "ieeq_humidity_recovery_check",
+        "ieeq_in_test_monitoring"
+      ]
+    },
+    {
+      "pattern": "계측기 진동 Qualification 시험의 구성과 검사사항을 설명하시오.",
+      "intent": "Profile/axis, fixture/mounting, in-test intermittent failure와 post inspection을 평가",
+      "required_anchor_ids": [
+        "ieeq_vibration_sine_random",
+        "ieeq_vibration_mounting",
+        "ieeq_vibration_functional_monitor",
+        "ieeq_post_vibration_inspection"
+      ]
+    },
+    {
+      "pattern": "환경시험 중 계측기가 간헐 reset 또는 communication loss를 보일 때 조치방안을 설명하시오.",
+      "intent": "Failure evidence→causal mechanism→corrective action→re-test chain으로 평가",
+      "required_anchor_ids": [
+        "ieeq_in_test_monitoring",
+        "ieeq_failure_evidence_capture",
+        "ieeq_failure_root_cause",
+        "ieeq_corrective_action_retest"
+      ]
+    },
+    {
+      "pattern": "환경/EMC qualification report에 포함해야 할 핵심 evidence를 설명하시오.",
+      "intent": "Requirement, DUT revision, setup, instrument, condition, deviation, result와 disposition traceability 평가",
+      "required_anchor_ids": [
+        "ieeq_measurement_instrument_control",
+        "ieeq_uncertainty_margin",
+        "ieeq_traceable_report",
+        "ieeq_failure_evidence_capture"
+      ]
+    },
+    {
+      "pattern": "설계변경 후 환경/EMC 재검증 범위를 어떻게 결정하는지 설명하시오.",
+      "intent": "Change impact와 risk 기반 requalification 범위 및 이전 pass 승계 제한을 평가",
+      "required_anchor_ids": [
+        "ieeq_corrective_action_retest",
+        "ieeq_change_control_requalification",
+        "ieeq_traceable_report"
+      ]
+    },
+    {
+      "pattern": "Plant의 EMI 문제 진단과 EMC qualification 시험의 차이를 설명하시오.",
+      "intent": "Field troubleshooting과 qualification ownership/목적/조건/evidence 차이를 구분",
+      "required_anchor_ids": [
+        "ieeq_qualification_vs_field_troubleshooting",
+        "ieeq_test_setup_representative",
+        "ieeq_topic2_boundary",
+        "ieeq_topic4_boundary",
+        "ieeq_topic5_boundary"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "Requirement and qualification plan",
+      "intent": "설치환경·제품/프로젝트 요구에서 시험항목, severity, duration, DUT 상태와 acceptance를 추적한다.",
+      "anchor_refs": [
+        "ieeq_scope_chain",
+        "ieeq_requirement_traceability",
+        "ieeq_standard_edition_policy"
+      ]
+    },
+    {
+      "section": "EMC/EMI and emission/immunity",
+      "intent": "EMC/EMI 및 emission/immunity를 구분하고 applicable test categories를 설명한다.",
+      "anchor_refs": [
+        "ieeq_emc_emi_distinction",
+        "ieeq_emission_immunity_distinction",
+        "ieeq_emc_test_categories"
+      ]
+    },
+    {
+      "section": "Representative setup and DUT operation",
+      "intent": "Cable/grounding/setup과 worst-case operating mode, pre-test baseline을 정의한다.",
+      "anchor_refs": [
+        "ieeq_test_setup_representative",
+        "ieeq_operating_mode_worst_case",
+        "ieeq_pretest_baseline"
+      ]
+    },
+    {
+      "section": "Temperature and humidity qualification",
+      "intent": "Operating/storage temperature, transition/cycle, humidity failure mechanism과 condensation 조건을 평가한다.",
+      "anchor_refs": [
+        "ieeq_temperature_operating_storage",
+        "ieeq_temperature_transition_boundary",
+        "ieeq_humidity_failure_mechanisms",
+        "ieeq_condensation_condition",
+        "ieeq_humidity_recovery_check"
+      ]
+    },
+    {
+      "section": "Vibration qualification",
+      "intent": "Sine/random profile, fixture/mounting, in-test monitoring과 post inspection을 평가한다.",
+      "anchor_refs": [
+        "ieeq_vibration_sine_random",
+        "ieeq_vibration_mounting",
+        "ieeq_vibration_functional_monitor",
+        "ieeq_post_vibration_inspection"
+      ]
+    },
+    {
+      "section": "Monitoring and acceptance evidence",
+      "intent": "시험 중 기능감시, predefined acceptance, measurement instrument/uncertainty와 report traceability를 연결한다.",
+      "anchor_refs": [
+        "ieeq_in_test_monitoring",
+        "ieeq_acceptance_criteria_predefined",
+        "ieeq_measurement_instrument_control",
+        "ieeq_uncertainty_margin",
+        "ieeq_traceable_report"
+      ]
+    },
+    {
+      "section": "Failure, corrective action and requalification",
+      "intent": "Failure evidence와 root cause, corrective action/re-test, change impact를 closed loop로 관리한다.",
+      "anchor_refs": [
+        "ieeq_failure_evidence_capture",
+        "ieeq_failure_root_cause",
+        "ieeq_corrective_action_retest",
+        "ieeq_change_control_requalification"
+      ]
+    },
+    {
+      "section": "Ownership boundaries",
+      "intent": "Field EMI troubleshooting, physical installation, HW lifecycle, component error chain과 qualification ownership을 분리한다.",
+      "anchor_refs": [
+        "ieeq_qualification_vs_field_troubleshooting",
+        "ieeq_topic2_boundary",
+        "ieeq_topic4_boundary",
+        "ieeq_topic5_boundary"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Qualification을 requirement→setup/DUT mode→stress→monitoring→acceptance→failure/re-test chain으로 설명한다.",
+    "EMC와 EMI, emission과 immunity를 각각 정확히 구분한다.",
+    "Applicable requirement에서 시험항목·severity·duration을 추적하고 무근거 수치를 고정하지 않는다.",
+    "Cable/grounding/auxiliary equipment와 operating mode를 representative setup으로 정의한다.",
+    "시험 전 baseline과 시험 중 output/reset/communication/recovery monitoring을 포함한다.",
+    "Temperature operating/storage, humidity condensation 여부, vibration profile/axis/fixture를 구분한다.",
+    "Acceptance criteria를 시험 전에 정의하고 allowable degradation와 recovery를 명확히 한다.",
+    "Failure의 stress/time/DUT mode/log evidence를 보존하고 causal chain으로 root cause를 분석한다.",
+    "Corrective action 후 risk 기반 re-test/requalification을 수행한다.",
+    "Requirement ID, DUT revision, setup, test equipment, deviation, result와 final disposition을 report에 추적한다.",
+    "Topic 1·2·4·5와 ownership boundary를 명확히 한다."
+  ],
+  "common_missing_points": [
+    "EMC와 EMI를 동의어로 사용한다.",
+    "Emission과 immunity를 동일 시험으로 서술한다.",
+    "모든 계측기에 동일 severity·duration을 적용한다.",
+    "시험 중 functional monitoring 없이 시험 후 power-on만 확인한다.",
+    "Temperature operating/storage 요구를 구분하지 않는다.",
+    "Humidity에서 condensation 조건을 구분하지 않는다.",
+    "Vibration fixture/mounting/axis가 결과에 미치는 영향을 누락한다.",
+    "Failure evidence 없이 filter/shield/damping을 임의 추가한다.",
+    "Corrective action 후 re-test를 생략한다.",
+    "Hardware/firmware 변경 후 이전 qualification pass를 자동 승계한다.",
+    "Plant EMI troubleshooting과 qualification을 동일 활동으로 취급한다."
+  ],
+  "routing_aliases": [
+    "instrumentation environmental emc emi temperature humidity vibration qualification",
+    "instrumentation environmental qualification EMC immunity emission",
+    "instrument EMC emission immunity qualification test",
+    "instrumentation temperature humidity vibration qualification",
+    "environmental stress qualification instrumentation",
+    "industrial instrumentation EMC immunity emission test",
+    "instrument temperature humidity vibration test validation",
+    "instrumentation environmental test acceptance criteria",
+    "EMC immunity DUT functional monitoring qualification",
+    "environmental qualification failure corrective action retest",
+    "계장 환경 EMC EMI 온도 습도 진동 검증시험",
+    "계측기 EMC emission immunity qualification",
+    "계측기 온습도 진동 환경시험",
+    "환경시험 합격기준 기능감시 재시험",
+    "계장 환경시험 설계변경 requalification"
+  ],
+  "routing_field_points": [
+    "Applicable requirement에서 qualification severity/duration 추적",
+    "EMC와 EMI 개념 구분",
+    "Emission과 immunity 시험 목적 구분",
+    "Conducted/radiated/ESD/EFT/surge/RF applicable test category 확인",
+    "Representative cable/grounding/auxiliary equipment setup 확인",
+    "Worst-case DUT operating mode와 pre-test baseline 확인",
+    "In-test output/reset/communication/recovery monitoring 확인",
+    "Predefined acceptance criteria와 allowable degradation 확인",
+    "Operating/storage temperature와 stabilization 확인",
+    "Humidity condensation/non-condensing condition 확인",
+    "Vibration profile axis fixture mounting 확인",
+    "Test instrument calibration/verification와 uncertainty 확인",
+    "Failure stress/time/DUT mode/log evidence 확보",
+    "Corrective action 후 risk-based re-test/requalification 확인",
+    "Qualification report와 DUT revision/change traceability 확인"
+  ],
+  "revision_notes": [
+    "Primary Question Type을 IMPLEMENTATION_EVALUATION으로 설정했다.",
+    "Difficulty를 FIELD_APPLICATION으로 설정했다.",
+    "Specific standard edition/severity/duration을 hard-code하지 않았다.",
+    "Historical frequency를 사용하지 않았다.",
+    "Topic 1/2/4/5 ownership boundary를 명시했다."
+  ],
+  "id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+  "title": "계측기 환경·EMC/EMI·온도·습도·진동 Qualification 및 검증",
+  "question_examples": [
+    "계측기의 환경시험 및 EMC/EMI Qualification 절차와 평가방법을 설명하시오.",
+    "EMC에서 emission과 immunity의 차이와 시험 시 고려사항을 설명하시오.",
+    "계측기 EMC immunity 시험의 구성과 합격판정 방법을 설명하시오.",
+    "계측기 온도 Qualification 시험의 목적과 설계 유의사항을 설명하시오.",
+    "계측기 습도시험의 failure mechanism과 검증방법을 설명하시오.",
+    "계측기 진동 Qualification 시험의 구성과 검사사항을 설명하시오.",
+    "환경시험 중 계측기가 간헐 reset 또는 communication loss를 보일 때 조치방안을 설명하시오.",
+    "환경/EMC qualification report에 포함해야 할 핵심 evidence를 설명하시오.",
+    "설계변경 후 환경/EMC 재검증 범위를 어떻게 결정하는지 설명하시오.",
+    "Plant의 EMI 문제 진단과 EMC qualification 시험의 차이를 설명하시오."
+  ],
+  "topic_aliases": [
+    "instrumentation environmental emc emi temperature humidity vibration qualification",
+    "instrument EMC emission immunity qualification test",
+    "instrumentation temperature humidity vibration qualification",
+    "environmental qualification failure corrective action retest",
+    "계장 환경 EMC EMI 온도 습도 진동 검증시험",
+    "환경시험 합격기준 기능감시 재시험"
+  ],
+  "expected_structure": [
+    "Requirement and qualification plan",
+    "EMC/EMI and emission/immunity",
+    "Representative setup and DUT operation",
+    "Temperature and humidity qualification",
+    "Vibration qualification",
+    "Monitoring and acceptance evidence",
+    "Failure, corrective action and requalification",
+    "Ownership boundaries"
+  ],
+  "high_score_features": [
+    "Requirement→representative setup→stress exposure→in-test monitoring→predefined acceptance→failure/corrective action→re-test/report traceability를 하나의 qualification evidence chain으로 연결한다."
+  ],
+  "low_score_patterns": [
+    "시험조건의 근거 없이 특정 severity나 duration을 절대값으로 제시하거나 시험 후 전원 on만으로 qualification pass를 판단한다."
+  ],
+  "field_connection_points": [
+    "Field transmitter, analyzer, remote I/O, controller/panel electronics의 EMC/온습도/진동 qualification, DUT setup, chamber/fixture, functional monitoring, failure log와 re-test evidence"
+  ]
+}

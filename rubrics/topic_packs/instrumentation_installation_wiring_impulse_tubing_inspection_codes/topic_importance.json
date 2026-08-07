@@ -1,0 +1,25 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "Applicable document hierarchy와 formal clarification/deviation 절차를 설명한다.",
+    "Location/orientation/accessibility와 enclosure/gland integrity를 평가한다.",
+    "Cable routing, segregation, bend/tension, termination/identification을 field implementation 관점으로 설명한다.",
+    "Shield/grounding 및 IS/hazardous-area 승인 설계와 field execution의 경계를 지킨다.",
+    "Impulse tubing slope/elevation을 gas/liquid/steam service에 따라 구분한다.",
+    "DP high/low path의 hydrostatic/thermal bias와 fitting/support/cleanliness를 설명한다.",
+    "Continuity/test boundary와 sensitive electronics 보호를 포함한다.",
+    "Inspection→punch→reinspection→closure→as-built evidence를 연결한다.",
+    "FAT, Design Basis/Code, P&ID, hazardous-area selection, Topic 1과 ownership boundary를 명확히 한다."
+  ],
+  "note": "IC-2027-W-4-9의 설치 및 기술기준을 실제 field implementation과 inspection evidence로 평가하는 핵심 계장 주제이다. 특정 법규/표준 edition은 프로젝트 실행 시 확인해야 하며 Historical frequency는 근거로 사용하지 않았다.",
+  "revision_notes": [
+    "IMPLEMENTATION_EVALUATION + FIELD_APPLICATION으로 분류했다.",
+    "설치·배선·impulse tubing·inspection/as-built가 중심이며 상위 standards governance는 별도 Topic과 분리했다.",
+    "Historical frequency를 사용하지 않았다."
+  ],
+  "topic_label": "계측설비 설치·배선·도압배관·시공검사 및 기술기준"
+}

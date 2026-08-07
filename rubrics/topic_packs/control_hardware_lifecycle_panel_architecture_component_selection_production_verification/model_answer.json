@@ -1,0 +1,309 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+  "title_ko": "제어 Hardware Lifecycle·Panel Architecture·부품선정·생산검증",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "제어시스템 Hardware Lifecycle과 단계별 검증절차를 설명하시오.",
+      "intent": "Requirement부터 architecture, DV, production verification, configuration/release까지 lifecycle을 평가",
+      "required_anchor_ids": [
+        "chl_scope_chain",
+        "chl_requirement_traceability",
+        "chl_design_review",
+        "chl_verification_plan",
+        "chl_prototype_design_verification",
+        "chl_release_gate"
+      ]
+    },
+    {
+      "pattern": "계측제어 Panel Hardware Architecture 설계 시 고려사항을 설명하시오.",
+      "intent": "Power/protection, I/O, communication, isolation, thermal/layout와 interface partitioning을 평가",
+      "required_anchor_ids": [
+        "chl_architecture_partitioning",
+        "chl_interface_definition",
+        "chl_power_budget",
+        "chl_power_protection",
+        "chl_thermal_design",
+        "chl_panel_layout"
+      ]
+    },
+    {
+      "pattern": "제어 Hardware의 부품선정 기준과 derating 방법을 설명하시오.",
+      "intent": "Rating, environment, derating, interface, availability/lifecycle와 maintainability를 평가",
+      "required_anchor_ids": [
+        "chl_component_selection_multicriteria",
+        "chl_derating_rule",
+        "chl_obsolescence_availability",
+        "chl_tolerance_stack_boundary"
+      ]
+    },
+    {
+      "pattern": "PLC/Controller Panel의 I/O 및 communication hardware 선정 시 고려사항을 설명하시오.",
+      "intent": "Signal range/loading/isolation/diagnostics/fault state와 physical communication interface compatibility를 평가",
+      "required_anchor_ids": [
+        "chl_io_selection",
+        "chl_communication_interface",
+        "chl_connector_terminal_selection",
+        "chl_interface_definition"
+      ]
+    },
+    {
+      "pattern": "Prototype 검증과 Production Verification의 차이를 설명하시오.",
+      "intent": "설계기능/마진 검증과 제조변동/양산품 검사 coverage의 목적 차이를 평가",
+      "required_anchor_ids": [
+        "chl_prototype_not_production",
+        "chl_prototype_design_verification",
+        "chl_dfm_dfa",
+        "chl_production_test_coverage",
+        "chl_eol_test"
+      ]
+    },
+    {
+      "pattern": "Hardware Verification과 Validation의 차이 및 traceability를 설명하시오.",
+      "intent": "Specified requirements와 intended use의 차이, verification method/evidence traceability를 평가",
+      "required_anchor_ids": [
+        "chl_verification_vs_validation",
+        "chl_requirement_traceability",
+        "chl_verification_plan",
+        "chl_release_gate"
+      ]
+    },
+    {
+      "pattern": "제어반 Hardware의 양산 준비와 생산검증 절차를 설명하시오.",
+      "intent": "DFM/DFA, BOM/configuration, incoming/process control, production test와 NCR closure를 평가",
+      "required_anchor_ids": [
+        "chl_dfm_dfa",
+        "chl_bom_configuration",
+        "chl_incoming_material_control",
+        "chl_work_instruction_process_control",
+        "chl_production_test_coverage",
+        "chl_nonconformance_rework"
+      ]
+    },
+    {
+      "pattern": "Hardware production test fixture와 end-of-line test 관리방법을 설명하시오.",
+      "intent": "Fixture/test software control, unit-level coverage와 result traceability를 평가",
+      "required_anchor_ids": [
+        "chl_test_fixture_control",
+        "chl_eol_test",
+        "chl_production_test_coverage",
+        "chl_bom_configuration"
+      ]
+    },
+    {
+      "pattern": "부품 대체 또는 Hardware 설계변경 시 재검증 범위 결정방법을 설명하시오.",
+      "intent": "Change impact로 DV, environmental requalification와 production test update를 결정",
+      "required_anchor_ids": [
+        "chl_change_impact",
+        "chl_environmental_qualification_boundary",
+        "chl_bom_configuration",
+        "chl_release_gate"
+      ]
+    },
+    {
+      "pattern": "Hardware Design Verification, 환경 Qualification, FAT/SAT의 역할 차이를 설명하시오.",
+      "intent": "Product hardware DV, environmental qualification, project acceptance의 ownership을 분리",
+      "required_anchor_ids": [
+        "chl_prototype_design_verification",
+        "chl_environmental_qualification_boundary",
+        "chl_fat_boundary",
+        "chl_software_lifecycle_boundary",
+        "chl_grounding_emc_boundary"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "Hardware requirements and lifecycle",
+      "intent": "Requirement를 architecture와 verification/release evidence까지 trace한다.",
+      "anchor_refs": [
+        "chl_scope_chain",
+        "chl_requirement_traceability",
+        "chl_verification_vs_validation"
+      ]
+    },
+    {
+      "section": "Panel/product architecture and interfaces",
+      "intent": "Power/protection, processing, I/O, communication, isolation과 interface partition을 설계한다.",
+      "anchor_refs": [
+        "chl_architecture_partitioning",
+        "chl_interface_definition",
+        "chl_power_budget",
+        "chl_power_protection",
+        "chl_io_selection",
+        "chl_communication_interface"
+      ]
+    },
+    {
+      "section": "Component and physical design",
+      "intent": "Component rating/derating/lifecycle, thermal/layout, connector/terminal과 maintainability를 평가한다.",
+      "anchor_refs": [
+        "chl_component_selection_multicriteria",
+        "chl_derating_rule",
+        "chl_obsolescence_availability",
+        "chl_thermal_design",
+        "chl_panel_layout",
+        "chl_connector_terminal_selection"
+      ]
+    },
+    {
+      "section": "Design review and prototype verification",
+      "intent": "Review, verification plan과 prototype test를 requirement evidence로 연결한다.",
+      "anchor_refs": [
+        "chl_design_review",
+        "chl_verification_plan",
+        "chl_prototype_design_verification",
+        "chl_prototype_not_production"
+      ]
+    },
+    {
+      "section": "Manufacturability and configuration",
+      "intent": "DFM/DFA, BOM baseline, incoming/process control로 반복 가능한 생산을 준비한다.",
+      "anchor_refs": [
+        "chl_dfm_dfa",
+        "chl_bom_configuration",
+        "chl_incoming_material_control",
+        "chl_work_instruction_process_control"
+      ]
+    },
+    {
+      "section": "Production verification",
+      "intent": "Production test coverage, EOL, fixture control과 nonconformance closure를 평가한다.",
+      "anchor_refs": [
+        "chl_production_test_coverage",
+        "chl_eol_test",
+        "chl_test_fixture_control",
+        "chl_nonconformance_rework"
+      ]
+    },
+    {
+      "section": "Change impact and release gate",
+      "intent": "설계/부품/공정 변경의 impact와 re-verification 범위를 정하고 release evidence를 baseline으로 고정한다.",
+      "anchor_refs": [
+        "chl_change_impact",
+        "chl_release_gate"
+      ]
+    },
+    {
+      "section": "Ownership boundaries",
+      "intent": "Topic 1/2/3/5, software lifecycle, FAT/SAT와 hardware lifecycle ownership을 분리한다.",
+      "anchor_refs": [
+        "chl_grounding_emc_boundary",
+        "chl_field_installation_boundary",
+        "chl_environmental_qualification_boundary",
+        "chl_tolerance_stack_boundary",
+        "chl_fat_boundary",
+        "chl_software_lifecycle_boundary"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Requirement→architecture/interface→component selection→DV→production control/test→release evidence를 하나의 lifecycle로 연결한다.",
+    "Hardware architecture를 power/protection, controller, I/O, communication, isolation, terminal, thermal 영역으로 partition한다.",
+    "Component selection에서 rating뿐 아니라 derating, environment, interface, lifecycle/availability와 maintainability를 포함한다.",
+    "Power budget과 thermal design을 margin/evidence 관점으로 설명한다.",
+    "Verification과 validation의 목적 차이를 명확히 한다.",
+    "Prototype pass와 production readiness를 구분한다.",
+    "DFM/DFA, BOM/configuration, incoming/process control을 생산준비에 포함한다.",
+    "Production test coverage와 EOL/fixture control을 제조변동·unit defect 검출 관점으로 설명한다.",
+    "Nonconformance→rework→reinspection/retest closure를 포함한다.",
+    "Component/design/process change의 impact로 re-verification 범위를 결정한다.",
+    "Topic 3 environmental qualification 및 FAT/SAT project acceptance와 hardware DV를 구분한다."
+  ],
+  "common_missing_points": [
+    "Prototype 기능시험 합격을 production readiness와 동일시한다.",
+    "FAT를 hardware design verification 전체의 대체 evidence로 사용한다.",
+    "부품 nominal rating만 보고 derating/environment/lifecycle을 누락한다.",
+    "모든 component에 동일 derating percentage를 적용한다.",
+    "Verification과 validation을 동일 개념으로 설명한다.",
+    "DFM/DFA와 configuration baseline을 누락한다.",
+    "Production test를 design verification 전체의 단순 반복으로 설명한다.",
+    "Test fixture/test software의 version/calibration/change control을 누락한다.",
+    "부품 substitution을 impact assessment 없이 허용한다.",
+    "Rework 후 reinspection/retest를 생략한다.",
+    "Hardware lifecycle과 software V-model, FAT/SAT ownership을 혼합한다."
+  ],
+  "routing_aliases": [
+    "control hardware lifecycle panel architecture component selection production verification",
+    "control system hardware development production verification",
+    "instrumentation control panel hardware architecture component selection",
+    "control hardware prototype design verification production test",
+    "control panel hardware component derating thermal design verification",
+    "industrial control hardware lifecycle validation production",
+    "hardware requirements architecture component selection verification production",
+    "control hardware manufacturability DFM production verification",
+    "control hardware BOM configuration production test",
+    "panel hardware power budget I/O communication architecture",
+    "제어시스템 하드웨어 개발 생산 검증",
+    "계측제어 패널 하드웨어 아키텍처 부품선정",
+    "제어반 부품 derating 생산검증",
+    "하드웨어 prototype design verification 양산검증",
+    "제어 hardware BOM configuration EOL test"
+  ],
+  "routing_field_points": [
+    "Hardware requirement와 verification evidence traceability",
+    "Panel power/protection/controller/I/O/communication/isolation architecture",
+    "Interface signal range electrical level loading isolation fault behavior",
+    "Power budget startup load supply tolerance conversion loss",
+    "Component rating derating environment lifecycle maintainability",
+    "Thermal loss enclosure hotspot airflow verification",
+    "I/O module signal conditioning diagnostics fault state",
+    "Prototype design verification와 production readiness 구분",
+    "Verification plan method DUT configuration acceptance evidence",
+    "DFM/DFA와 assembly mistake proofing",
+    "BOM drawing schematic revision configuration baseline",
+    "Incoming material와 controlled work instruction/process control",
+    "Production test coverage와 end-of-line functional test",
+    "Test fixture/test software version calibration change control",
+    "Nonconformance rework reinspection retest closure"
+  ],
+  "revision_notes": [
+    "Primary Question Type을 IMPLEMENTATION_EVALUATION으로 설정했다.",
+    "Difficulty를 DESIGN_EVALUATION으로 설정했다.",
+    "Prototype/DV/production verification과 FAT/SAT를 분리했다.",
+    "Specific derating percentage와 fixed test limit를 hard-code하지 않았다.",
+    "Historical frequency를 사용하지 않았다."
+  ],
+  "id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+  "title": "제어 Hardware Lifecycle·Panel Architecture·부품선정·생산검증",
+  "question_examples": [
+    "제어시스템 Hardware Lifecycle과 단계별 검증절차를 설명하시오.",
+    "계측제어 Panel Hardware Architecture 설계 시 고려사항을 설명하시오.",
+    "제어 Hardware의 부품선정 기준과 derating 방법을 설명하시오.",
+    "PLC/Controller Panel의 I/O 및 communication hardware 선정 시 고려사항을 설명하시오.",
+    "Prototype 검증과 Production Verification의 차이를 설명하시오.",
+    "Hardware Verification과 Validation의 차이 및 traceability를 설명하시오.",
+    "제어반 Hardware의 양산 준비와 생산검증 절차를 설명하시오.",
+    "Hardware production test fixture와 end-of-line test 관리방법을 설명하시오.",
+    "부품 대체 또는 Hardware 설계변경 시 재검증 범위 결정방법을 설명하시오.",
+    "Hardware Design Verification, 환경 Qualification, FAT/SAT의 역할 차이를 설명하시오."
+  ],
+  "topic_aliases": [
+    "control hardware lifecycle panel architecture component selection production verification",
+    "control system hardware development production verification",
+    "control hardware prototype design verification production test",
+    "control hardware manufacturability DFM production verification",
+    "제어시스템 하드웨어 개발 생산 검증",
+    "계측제어 패널 하드웨어 아키텍처 부품선정"
+  ],
+  "expected_structure": [
+    "Hardware requirements and lifecycle",
+    "Panel/product architecture and interfaces",
+    "Component and physical design",
+    "Design review and prototype verification",
+    "Manufacturability and configuration",
+    "Production verification",
+    "Change impact and release gate",
+    "Ownership boundaries"
+  ],
+  "high_score_features": [
+    "요구사항에서 설계·검증·생산·release까지 evidence traceability와 production variability를 함께 다룬다."
+  ],
+  "low_score_patterns": [
+    "Prototype/FAT 통과만으로 설계검증과 양산준비가 끝났다고 설명하거나 component nominal rating만 나열한다."
+  ],
+  "field_connection_points": [
+    "PLC/controller panel, remote I/O enclosure, analyzer cabinet, embedded control hardware의 architecture, BOM, DV, production assembly/test와 configuration release"
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "EMC/EMI와 emission/immunity를 정확히 구분한다.",
+    "Requirement traceability로 test category/severity/duration을 결정한다.",
+    "Representative setup과 worst-case DUT operating mode를 설명한다.",
+    "Pre-test baseline과 in-test functional monitoring을 포함한다.",
+    "Temperature/humidity/vibration stress별 failure mechanism과 setup을 구분한다.",
+    "Acceptance criteria를 시험 전에 정의하고 allowable degradation/recovery를 설명한다.",
+    "Failure evidence→root cause→corrective action→re-test를 closed loop로 설명한다.",
+    "Qualification report와 change/requalification traceability를 설명한다.",
+    "Topic 1/2/4/5 ownership boundary를 명확히 한다."
+  ],
+  "note": "IC-2027-W-3-10의 환경시험 및 EMC/EMI qualification을 실제 시험계획·기능감시·acceptance evidence·re-test 관점에서 평가하는 핵심 계장 주제이다. Specific standard edition/severity/duration은 applicable requirement에 따라야 하며 Historical frequency는 사용하지 않았다.",
+  "revision_notes": [
+    "IMPLEMENTATION_EVALUATION + FIELD_APPLICATION으로 분류했다.",
+    "Field EMI troubleshooting과 qualification을 분리했다.",
+    "Historical frequency를 사용하지 않았다."
+  ],
+  "topic_label": "환경·EMC/EMI·온도·습도·진동 Qualification"
+}

@@ -1,0 +1,290 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+  "title_ko": "계장 전원·접지·차폐·UPS·Ground Loop·EMC 진단 및 대책",
+  "question_type": "DIAGNOSIS_ACTION",
+  "expected_question_patterns": [
+    {
+      "pattern": "계장 시스템의 전원, 접지, 차폐와 EMC 문제를 진단하고 대책을 설명하시오.",
+      "intent": "전원-기준전위-결합경로-피해기기 chain으로 진단하고 대책을 제시",
+      "required_anchor_ids": [
+        "ipgse_scope_chain",
+        "ipgse_power_quality_scope",
+        "ipgse_emi_coupling_paths",
+        "ipgse_diagnostic_workflow",
+        "ipgse_final_verification"
+      ]
+    },
+    {
+      "pattern": "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+      "intent": "안전접지와 신호 기준전위, 본딩의 목적과 주파수 의존성을 구분",
+      "required_anchor_ids": [
+        "ipgse_pe_signal_reference_boundary",
+        "ipgse_bonding_impedance_frequency",
+        "ipgse_single_multi_point_conditional"
+      ]
+    },
+    {
+      "pattern": "Ground loop의 발생 원인, 진단 방법과 개선 대책을 설명하시오.",
+      "intent": "다중 귀로와 전위차에 의한 순환전류를 진단하고 안전한 개선책을 제시",
+      "required_anchor_ids": [
+        "ipgse_ground_loop_mechanism",
+        "ipgse_ground_loop_safe_mitigation",
+        "ipgse_common_differential_mode",
+        "ipgse_measurement_reference_safety"
+      ]
+    },
+    {
+      "pattern": "계장 cable shield의 접지 방법과 one-end/both-end termination 선정 기준을 설명하시오.",
+      "intent": "Shield와 PE 경계를 세우고 저주파/고주파 조건에 따른 termination을 비교",
+      "required_anchor_ids": [
+        "ipgse_shield_not_pe",
+        "ipgse_shield_termination_frequency",
+        "ipgse_bonding_impedance_frequency"
+      ]
+    },
+    {
+      "pattern": "VFD·motor 주변 계장 신호의 EMI 원인을 진단하고 개선방안을 제시하시오.",
+      "intent": "capacitive/inductive/radiated/conducted coupling을 source-path-victim 관점으로 진단",
+      "required_anchor_ids": [
+        "ipgse_cable_separation_coupling",
+        "ipgse_emi_coupling_paths",
+        "ipgse_source_path_victim_mitigation",
+        "ipgse_filter_entry_bonding"
+      ]
+    },
+    {
+      "pattern": "계장 전원의 power quality 이상이 측정·제어 신호에 미치는 영향과 진단 절차를 설명하시오.",
+      "intent": "sag/interruption/transient/noise와 event time을 연계해 전원 원인을 분리",
+      "required_anchor_ids": [
+        "ipgse_power_quality_scope",
+        "ipgse_dc_supply_distribution",
+        "ipgse_symptom_frequency_correlation",
+        "ipgse_evidence_before_rewire"
+      ]
+    },
+    {
+      "pattern": "계장용 UPS의 역할, 용량 선정과 bypass/grounding 유의점을 설명하시오.",
+      "intent": "UPS 기능 경계를 정의하고 sizing·battery aging·transfer·neutral ground를 검토",
+      "required_anchor_ids": [
+        "ipgse_ups_function_boundary",
+        "ipgse_ups_sizing_factors",
+        "ipgse_ups_bypass_grounding"
+      ]
+    },
+    {
+      "pattern": "계장 전원 이중화의 공통고장점과 가용성 확보 방안을 설명하시오.",
+      "intent": "redundant supply의 common cause와 분배 경로를 평가",
+      "required_anchor_ids": [
+        "ipgse_redundant_supply_boundary",
+        "ipgse_dc_supply_distribution",
+        "ipgse_final_verification"
+      ]
+    },
+    {
+      "pattern": "Surge와 EMC 문제를 source-path-victim 관점에서 구분하고 대책을 제시하시오.",
+      "intent": "SPD, filter, bonding, shielding과 victim immunity를 결합해 대책을 설계",
+      "required_anchor_ids": [
+        "ipgse_spd_coordination",
+        "ipgse_emi_coupling_paths",
+        "ipgse_source_path_victim_mitigation",
+        "ipgse_filter_entry_bonding"
+      ]
+    },
+    {
+      "pattern": "계장 잡음 개선 후 효과를 어떻게 검증할지 현장 절차를 제시하시오.",
+      "intent": "before/after evidence와 동일 운전조건 재현을 통해 closed-loop verification 수행",
+      "required_anchor_ids": [
+        "ipgse_diagnostic_workflow",
+        "ipgse_evidence_before_rewire",
+        "ipgse_measurement_reference_safety",
+        "ipgse_final_verification"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "Power integrity and reference architecture",
+      "intent": "계장 전원 품질과 보호접지·signal reference·bonding의 기능을 구분한다.",
+      "anchor_refs": [
+        "ipgse_scope_chain",
+        "ipgse_power_quality_scope",
+        "ipgse_pe_signal_reference_boundary",
+        "ipgse_bonding_impedance_frequency"
+      ]
+    },
+    {
+      "section": "Ground topology and loop mechanism",
+      "intent": "Single/multi-point 조건과 ground-loop의 다중 귀로·전위차 메커니즘을 설명한다.",
+      "anchor_refs": [
+        "ipgse_single_multi_point_conditional",
+        "ipgse_ground_loop_mechanism",
+        "ipgse_ground_loop_safe_mitigation",
+        "ipgse_common_differential_mode"
+      ]
+    },
+    {
+      "section": "Shielding and coupling paths",
+      "intent": "Shield 기능, termination 조건과 cable coupling path를 설명한다.",
+      "anchor_refs": [
+        "ipgse_shield_not_pe",
+        "ipgse_shield_termination_frequency",
+        "ipgse_cable_separation_coupling",
+        "ipgse_emi_coupling_paths"
+      ]
+    },
+    {
+      "section": "EMC and surge mitigation",
+      "intent": "Source-path-victim, filter, bonding과 SPD coordination을 연결한다.",
+      "anchor_refs": [
+        "ipgse_source_path_victim_mitigation",
+        "ipgse_filter_entry_bonding",
+        "ipgse_spd_coordination"
+      ]
+    },
+    {
+      "section": "DC power redundancy and UPS",
+      "intent": "DC distribution, redundancy common point, UPS sizing과 bypass/grounding을 평가한다.",
+      "anchor_refs": [
+        "ipgse_dc_supply_distribution",
+        "ipgse_redundant_supply_boundary",
+        "ipgse_ups_function_boundary",
+        "ipgse_ups_sizing_factors",
+        "ipgse_ups_bypass_grounding"
+      ]
+    },
+    {
+      "section": "Field diagnosis and evidence",
+      "intent": "증상-주파수-시간 상관과 안전한 measurement reference를 사용해 원인을 분리한다.",
+      "anchor_refs": [
+        "ipgse_symptom_frequency_correlation",
+        "ipgse_measurement_reference_safety",
+        "ipgse_diagnostic_workflow",
+        "ipgse_evidence_before_rewire"
+      ]
+    },
+    {
+      "section": "Ownership boundaries",
+      "intent": "설치, 환경 qualification, HW lifecycle, component error Topic과 중복을 방지한다.",
+      "anchor_refs": [
+        "ipgse_topic2_boundary",
+        "ipgse_topic3_boundary",
+        "ipgse_topic4_boundary",
+        "ipgse_topic5_boundary"
+      ]
+    },
+    {
+      "section": "Closed-loop verification",
+      "intent": "대책 후 정상·과도·UPS transfer·noise-source 조건에서 효과와 부작용을 재검증한다.",
+      "anchor_refs": [
+        "ipgse_final_verification"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "보호접지와 signal/reference ground의 목적을 구분하고 PE 제거를 잡음 대책으로 사용하지 않는다.",
+    "Single-point와 multi-point grounding을 주파수·본딩 조건에 따라 비교한다.",
+    "Ground loop를 다중 귀로·전위차·순환전류로 설명하고 절연·차동입력·적절한 shield termination을 연결한다.",
+    "Shield를 PE나 정상 load-return 도체와 구분한다.",
+    "One-end와 both-end/360-degree shield termination을 저주파·고주파 조건으로 구분한다.",
+    "Conducted/radiated/capacitive/inductive/common-impedance coupling을 source-path-victim으로 진단한다.",
+    "DC distribution의 voltage drop·common return·branch 보호와 redundancy common point를 설명한다.",
+    "UPS를 ride-through 관점으로 정의하고 W/VA·PF·autonomy·battery aging·bypass/grounding을 함께 본다.",
+    "Surge·filter·bonding 대책을 enclosure entry와 짧은 접속 임피던스 관점에서 설명한다.",
+    "현장 evidence를 먼저 확보하고 한 변수씩 대책을 적용한 후 동일 조건에서 재검증한다.",
+    "Lane A Topic 2~5와 ownership 경계를 명확히 한다."
+  ],
+  "common_missing_points": [
+    "잡음 제거를 위해 PE를 해제한다.",
+    "모든 shield는 한쪽 끝 접지가 절대 규칙이라고 단정한다.",
+    "Single-point grounding이 모든 주파수에서 우월하다고 단정한다.",
+    "UPS가 surge·EMC·ground-loop를 모두 해결한다고 단정한다.",
+    "Redundant supply의 공통 입력·분배 경로를 누락한다.",
+    "Common-mode와 differential-mode를 구분하지 않는다.",
+    "EMI coupling path를 설명하지 않고 filter만 제시한다.",
+    "Before/after evidence 없이 shield와 earth를 재결선한다.",
+    "EMC qualification 시험을 Topic 1의 핵심 범위로 확장하여 Topic 3과 중복한다."
+  ],
+  "routing_aliases": [
+    "instrumentation power grounding shielding ground loop EMC diagnosis",
+    "instrumentation power grounding shielding UPS EMC",
+    "instrumentation grounding bonding shield termination ground loop",
+    "instrument ground loop isolation differential input shielding",
+    "UPS instrumentation power quality grounding bypass",
+    "instrumentation EMC grounding bonding shielding",
+    "VFD motor cable instrumentation EMI coupling mitigation",
+    "protective earth signal ground bonding instrumentation",
+    "single point multi point grounding instrumentation",
+    "cable shield one end both end termination EMC",
+    "계장 전원 접지 차폐 ground loop 진단",
+    "계장 보호접지 신호접지 본딩 차폐",
+    "계장 UPS 전원품질 접지 바이패스",
+    "VFD 계장신호 EMI 차폐 접지 대책",
+    "계장 ground loop 절연 차동입력 대책"
+  ],
+  "routing_field_points": [
+    "PE와 signal/reference ground 기능 구분",
+    "Equipotential bonding과 high-frequency impedance 확인",
+    "Single-point와 multi-point topology 조건 확인",
+    "Ground-loop 다중 귀로와 potential difference 확인",
+    "Common-mode·differential-mode 분리",
+    "Shield one-end/both-end/360-degree termination 조건 확인",
+    "Power·VFD cable과 instrumentation cable coupling path 확인",
+    "Power-quality sag·interruption·transient·noise event correlation 확인",
+    "DC distribution voltage drop·common return 확인",
+    "Redundant supply common-point 확인",
+    "UPS W·VA·PF·autonomy·battery aging 확인",
+    "UPS normal·battery·bypass neutral/ground reference 확인",
+    "SPD·filter entry bonding과 short-lead impedance 확인",
+    "Before/after waveform·event·ground-potential evidence 확인",
+    "Mitigation 후 normal·transfer·noise-source 조건 재검증"
+  ],
+  "revision_notes": [
+    "Primary Question Type을 DIAGNOSIS_ACTION으로 설정했다.",
+    "Difficulty를 FIELD_APPLICATION으로 정합화했다.",
+    "Broad generic alias 대신 전원·접지·차폐·UPS·EMC 복합 routing phrase를 사용했다.",
+    "Lane A Topic 2~5와 ownership boundary를 독립 anchor로 분리했다.",
+    "Historical frequency를 사용하지 않았다."
+  ],
+  "id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+  "title": "계장 전원·접지·차폐·UPS·Ground Loop·EMC 진단 및 대책",
+  "question_examples": [
+    "계장 시스템의 전원, 접지, 차폐와 EMC 문제를 진단하고 대책을 설명하시오.",
+    "보호접지, signal/reference ground와 bonding의 역할 및 설계 유의점을 설명하시오.",
+    "Ground loop의 발생 원인, 진단 방법과 개선 대책을 설명하시오.",
+    "계장 cable shield의 접지 방법과 one-end/both-end termination 선정 기준을 설명하시오.",
+    "VFD·motor 주변 계장 신호의 EMI 원인을 진단하고 개선방안을 제시하시오.",
+    "계장 전원의 power quality 이상이 측정·제어 신호에 미치는 영향과 진단 절차를 설명하시오.",
+    "계장용 UPS의 역할, 용량 선정과 bypass/grounding 유의점을 설명하시오.",
+    "계장 전원 이중화의 공통고장점과 가용성 확보 방안을 설명하시오.",
+    "Surge와 EMC 문제를 source-path-victim 관점에서 구분하고 대책을 제시하시오.",
+    "계장 잡음 개선 후 효과를 어떻게 검증할지 현장 절차를 제시하시오."
+  ],
+  "topic_aliases": [
+    "instrumentation power grounding shielding ground loop EMC diagnosis",
+    "instrumentation grounding bonding shield termination ground loop",
+    "UPS instrumentation power quality grounding bypass",
+    "VFD motor cable instrumentation EMI coupling mitigation",
+    "계장 전원 접지 차폐 ground loop 진단",
+    "계장 UPS 전원품질 접지 바이패스"
+  ],
+  "expected_structure": [
+    "Power integrity and reference architecture",
+    "Ground topology and loop mechanism",
+    "Shielding and coupling paths",
+    "EMC and surge mitigation",
+    "DC power redundancy and UPS",
+    "Field diagnosis and evidence",
+    "Ownership boundaries",
+    "Closed-loop verification"
+  ],
+  "high_score_features": [
+    "전원·기준전위→접지·본딩→차폐·coupling path→ground-loop/EMI evidence→UPS·EMC 대책→closed-loop verification을 인과적으로 연결한다."
+  ],
+  "low_score_patterns": [
+    "PE 해제, universal one-end shield, universal single-point ground, UPS 만능론처럼 조건부 engineering rule을 절대 규칙으로 서술한다."
+  ],
+  "field_connection_points": [
+    "DCS/PLC/remote I/O cabinet, transmitter loop, VFD·motor 인접 cable, UPS·DC distribution, ground bar와 shield termination의 실제 현장 진단"
+  ]
+}

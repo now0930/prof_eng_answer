@@ -1,0 +1,1189 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+  "title_ko": "계측기 환경·EMC/EMI·온도·습도·진동 Qualification 및 검증",
+  "question_type_hint": "IMPLEMENTATION_EVALUATION",
+  "anchors": [
+    {
+      "id": "ieeq_scope_chain",
+      "anchor_id": "ieeq_scope_chain",
+      "statement": "계측기 환경 Qualification은 사용환경과 적용 요구를 정의하고 시험항목·조건·DUT 상태·감시항목·합격기준을 정한 뒤 pre-test baseline→stress exposure→functional monitoring→post-test inspection→failure analysis/corrective action→re-test evidence로 적합성을 입증하는 과정이다.",
+      "importance": "core",
+      "keywords": [
+        "environmental qualification",
+        "DUT",
+        "acceptance criteria",
+        "functional monitoring",
+        "re-test"
+      ],
+      "core_terms": [
+        "environmental qualification",
+        "DUT",
+        "acceptance criteria",
+        "functional monitoring",
+        "re-test"
+      ],
+      "accepted_explanations": [
+        "계측기 환경 Qualification은 사용환경과 적용 요구를 정의하고 시험항목·조건·DUT 상태·감시항목·합격기준을 정한 뒤 pre-test baseline→stress exposure→functional monitoring→post-test inspection→failure analysis/corrective action→re-test evidence로 적합성을 입증하는 과정이다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "계측기 환경 Qualification은 사용환경과 적용 요구를 정의하고 시험항목·조건·DUT 상태·감시항목·합격기준을 정한 뒤 pre-test baseline→stress exposure→functional monitoring→post-test inspection→failure analysis/corrective action→re-test evidence로 적합성을 입증하는 과정이다.",
+      "description": "ieeq_scope_chain qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_requirement_traceability",
+      "anchor_id": "ieeq_requirement_traceability",
+      "statement": "Qualification 시험조건은 적용 제품규격, 프로젝트 specification, 설치환경과 equipment intended use에서 추적되어야 하며 근거 없이 severity나 duration을 임의 선정하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "requirement traceability",
+        "project specification",
+        "installation environment",
+        "severity",
+        "duration"
+      ],
+      "core_terms": [
+        "requirement traceability",
+        "project specification",
+        "installation environment",
+        "severity",
+        "duration"
+      ],
+      "accepted_explanations": [
+        "Qualification 시험조건은 적용 제품규격, 프로젝트 specification, 설치환경과 equipment intended use에서 추적되어야 하며 근거 없이 severity나 duration을 임의 선정하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Qualification 시험조건은 적용 제품규격, 프로젝트 specification, 설치환경과 equipment intended use에서 추적되어야 하며 근거 없이 severity나 duration을 임의 선정하지 않는다.",
+      "description": "ieeq_requirement_traceability qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_emc_emi_distinction",
+      "anchor_id": "ieeq_emc_emi_distinction",
+      "statement": "EMC는 장비가 허용 가능한 전자기 환경에서 과도한 방해를 발생시키지 않으면서 요구 기능을 수행하는 적합성 개념이고, EMI는 기능에 영향을 주는 전자기 간섭 현상을 의미하므로 두 용어를 동일 개념으로 취급하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "EMC",
+        "EMI",
+        "electromagnetic compatibility",
+        "electromagnetic interference",
+        "functional performance"
+      ],
+      "core_terms": [
+        "EMC",
+        "EMI",
+        "electromagnetic compatibility",
+        "electromagnetic interference",
+        "functional performance"
+      ],
+      "accepted_explanations": [
+        "EMC는 장비가 허용 가능한 전자기 환경에서 과도한 방해를 발생시키지 않으면서 요구 기능을 수행하는 적합성 개념이고, EMI는 기능에 영향을 주는 전자기 간섭 현상을 의미하므로 두 용어를 동일 개념으로 취급하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "EMC는 장비가 허용 가능한 전자기 환경에서 과도한 방해를 발생시키지 않으면서 요구 기능을 수행하는 적합성 개념이고, EMI는 기능에 영향을 주는 전자기 간섭 현상을 의미하므로 두 용어를 동일 개념으로 취급하지 않는다.",
+      "description": "ieeq_emc_emi_distinction qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_emission_immunity_distinction",
+      "anchor_id": "ieeq_emission_immunity_distinction",
+      "statement": "EMC qualification은 장비가 외부로 발생시키는 disturbance를 제한하는 emission과 외부 disturbance 하에서 기능을 유지하는 immunity를 구분하여 평가한다.",
+      "importance": "core",
+      "keywords": [
+        "emission",
+        "immunity",
+        "disturbance",
+        "EMC qualification",
+        "functional immunity"
+      ],
+      "core_terms": [
+        "emission",
+        "immunity",
+        "disturbance",
+        "EMC qualification",
+        "functional immunity"
+      ],
+      "accepted_explanations": [
+        "EMC qualification은 장비가 외부로 발생시키는 disturbance를 제한하는 emission과 외부 disturbance 하에서 기능을 유지하는 immunity를 구분하여 평가한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "EMC qualification은 장비가 외부로 발생시키는 disturbance를 제한하는 emission과 외부 disturbance 하에서 기능을 유지하는 immunity를 구분하여 평가한다.",
+      "description": "ieeq_emission_immunity_distinction qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_emc_test_categories",
+      "anchor_id": "ieeq_emc_test_categories",
+      "statement": "EMC 시험은 적용 요구에 따라 conducted/radiated emission, radiated/conducted RF immunity, ESD, EFT/burst, surge 및 전원·자기장 관련 immunity 같은 시험군에서 필요한 항목을 선택하며 모든 장비에 모든 시험을 동일 level로 적용하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "conducted emission",
+        "radiated emission",
+        "RF immunity",
+        "ESD EFT surge",
+        "applicable tests"
+      ],
+      "core_terms": [
+        "conducted emission",
+        "radiated emission",
+        "RF immunity",
+        "ESD EFT surge",
+        "applicable tests"
+      ],
+      "accepted_explanations": [
+        "EMC 시험은 적용 요구에 따라 conducted/radiated emission, radiated/conducted RF immunity, ESD, EFT/burst, surge 및 전원·자기장 관련 immunity 같은 시험군에서 필요한 항목을 선택하며 모든 장비에 모든 시험을 동일 level로 적용하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "EMC 시험은 적용 요구에 따라 conducted/radiated emission, radiated/conducted RF immunity, ESD, EFT/burst, surge 및 전원·자기장 관련 immunity 같은 시험군에서 필요한 항목을 선택하며 모든 장비에 모든 시험을 동일 level로 적용하지 않는다.",
+      "description": "ieeq_emc_test_categories qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_test_setup_representative",
+      "anchor_id": "ieeq_test_setup_representative",
+      "statement": "EMC 시험구성은 실제 사용조건을 대표하도록 DUT 전원, I/O, cable type/length, termination, enclosure, grounding/bonding과 auxiliary equipment를 정의하고 setup 변경을 기록한다.",
+      "importance": "core",
+      "keywords": [
+        "test setup",
+        "cable length",
+        "termination",
+        "grounding bonding",
+        "auxiliary equipment"
+      ],
+      "core_terms": [
+        "test setup",
+        "cable length",
+        "termination",
+        "grounding bonding",
+        "auxiliary equipment"
+      ],
+      "accepted_explanations": [
+        "EMC 시험구성은 실제 사용조건을 대표하도록 DUT 전원, I/O, cable type/length, termination, enclosure, grounding/bonding과 auxiliary equipment를 정의하고 setup 변경을 기록한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "EMC 시험구성은 실제 사용조건을 대표하도록 DUT 전원, I/O, cable type/length, termination, enclosure, grounding/bonding과 auxiliary equipment를 정의하고 setup 변경을 기록한다.",
+      "description": "ieeq_test_setup_representative qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_operating_mode_worst_case",
+      "anchor_id": "ieeq_operating_mode_worst_case",
+      "statement": "Qualification 중 DUT operating mode는 실제 기능을 대표하고 disturbance 발생 또는 susceptibility가 큰 상태를 포함하도록 선정하며, idle 상태 한 가지의 통과만으로 모든 운전모드를 대표한다고 보지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "operating mode",
+        "worst case mode",
+        "susceptibility",
+        "emission state",
+        "functional mode"
+      ],
+      "core_terms": [
+        "operating mode",
+        "worst case mode",
+        "susceptibility",
+        "emission state",
+        "functional mode"
+      ],
+      "accepted_explanations": [
+        "Qualification 중 DUT operating mode는 실제 기능을 대표하고 disturbance 발생 또는 susceptibility가 큰 상태를 포함하도록 선정하며, idle 상태 한 가지의 통과만으로 모든 운전모드를 대표한다고 보지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Qualification 중 DUT operating mode는 실제 기능을 대표하고 disturbance 발생 또는 susceptibility가 큰 상태를 포함하도록 선정하며, idle 상태 한 가지의 통과만으로 모든 운전모드를 대표한다고 보지 않는다.",
+      "description": "ieeq_operating_mode_worst_case qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_pretest_baseline",
+      "anchor_id": "ieeq_pretest_baseline",
+      "statement": "Stress 적용 전에는 기능, output accuracy, communication, alarm/status, insulation/visual condition 등 필요한 baseline을 기록하여 시험 중·후 변화와 비교할 기준을 확보한다.",
+      "importance": "core",
+      "keywords": [
+        "pre-test baseline",
+        "functional check",
+        "accuracy baseline",
+        "communication",
+        "visual inspection"
+      ],
+      "core_terms": [
+        "pre-test baseline",
+        "functional check",
+        "accuracy baseline",
+        "communication",
+        "visual inspection"
+      ],
+      "accepted_explanations": [
+        "Stress 적용 전에는 기능, output accuracy, communication, alarm/status, insulation/visual condition 등 필요한 baseline을 기록하여 시험 중·후 변화와 비교할 기준을 확보한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Stress 적용 전에는 기능, output accuracy, communication, alarm/status, insulation/visual condition 등 필요한 baseline을 기록하여 시험 중·후 변화와 비교할 기준을 확보한다.",
+      "description": "ieeq_pretest_baseline qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_in_test_monitoring",
+      "anchor_id": "ieeq_in_test_monitoring",
+      "statement": "Immunity·온도·습도·진동 시험에서는 단순히 시험 종료 후 전원이 켜지는지만 확인하지 말고 시험 중 요구기능, output deviation, reset, communication loss, alarm과 recovery behavior를 감시한다.",
+      "importance": "core",
+      "keywords": [
+        "in-test monitoring",
+        "output deviation",
+        "reset",
+        "communication loss",
+        "recovery"
+      ],
+      "core_terms": [
+        "in-test monitoring",
+        "output deviation",
+        "reset",
+        "communication loss",
+        "recovery"
+      ],
+      "accepted_explanations": [
+        "Immunity·온도·습도·진동 시험에서는 단순히 시험 종료 후 전원이 켜지는지만 확인하지 말고 시험 중 요구기능, output deviation, reset, communication loss, alarm과 recovery behavior를 감시한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Immunity·온도·습도·진동 시험에서는 단순히 시험 종료 후 전원이 켜지는지만 확인하지 말고 시험 중 요구기능, output deviation, reset, communication loss, alarm과 recovery behavior를 감시한다.",
+      "description": "ieeq_in_test_monitoring qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_acceptance_criteria_predefined",
+      "anchor_id": "ieeq_acceptance_criteria_predefined",
+      "statement": "합격기준은 시험 전에 허용 가능한 기능저하, 자동 recovery 여부, 수동 intervention 허용 여부와 시험 후 residual degradation을 정의해야 하며 결과를 본 뒤 기준을 바꾸지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "acceptance criteria",
+        "performance degradation",
+        "automatic recovery",
+        "manual intervention",
+        "residual degradation"
+      ],
+      "core_terms": [
+        "acceptance criteria",
+        "performance degradation",
+        "automatic recovery",
+        "manual intervention",
+        "residual degradation"
+      ],
+      "accepted_explanations": [
+        "합격기준은 시험 전에 허용 가능한 기능저하, 자동 recovery 여부, 수동 intervention 허용 여부와 시험 후 residual degradation을 정의해야 하며 결과를 본 뒤 기준을 바꾸지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "합격기준은 시험 전에 허용 가능한 기능저하, 자동 recovery 여부, 수동 intervention 허용 여부와 시험 후 residual degradation을 정의해야 하며 결과를 본 뒤 기준을 바꾸지 않는다.",
+      "description": "ieeq_acceptance_criteria_predefined qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_temperature_operating_storage",
+      "anchor_id": "ieeq_temperature_operating_storage",
+      "statement": "Temperature qualification은 operating과 storage/non-operating 요구를 구분하고 DUT 내부 self-heating, stabilization, thermal gradient와 실제 설치환경을 고려하여 hot/cold stress를 평가한다.",
+      "importance": "core",
+      "keywords": [
+        "temperature qualification",
+        "operating temperature",
+        "storage temperature",
+        "self heating",
+        "thermal stabilization"
+      ],
+      "core_terms": [
+        "temperature qualification",
+        "operating temperature",
+        "storage temperature",
+        "self heating",
+        "thermal stabilization"
+      ],
+      "accepted_explanations": [
+        "Temperature qualification은 operating과 storage/non-operating 요구를 구분하고 DUT 내부 self-heating, stabilization, thermal gradient와 실제 설치환경을 고려하여 hot/cold stress를 평가한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Temperature qualification은 operating과 storage/non-operating 요구를 구분하고 DUT 내부 self-heating, stabilization, thermal gradient와 실제 설치환경을 고려하여 hot/cold stress를 평가한다.",
+      "description": "ieeq_temperature_operating_storage qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_temperature_transition_boundary",
+      "anchor_id": "ieeq_temperature_transition_boundary",
+      "statement": "온도 변화율, cycle, dwell 또는 thermal shock 적용 여부는 제품·프로젝트 요구에 따라 달라지므로 모든 계측기에 동일 cycle과 transition rate를 보편 규칙으로 적용하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "temperature cycle",
+        "dwell",
+        "transition rate",
+        "thermal shock",
+        "applicable requirement"
+      ],
+      "core_terms": [
+        "temperature cycle",
+        "dwell",
+        "transition rate",
+        "thermal shock",
+        "applicable requirement"
+      ],
+      "accepted_explanations": [
+        "온도 변화율, cycle, dwell 또는 thermal shock 적용 여부는 제품·프로젝트 요구에 따라 달라지므로 모든 계측기에 동일 cycle과 transition rate를 보편 규칙으로 적용하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "온도 변화율, cycle, dwell 또는 thermal shock 적용 여부는 제품·프로젝트 요구에 따라 달라지므로 모든 계측기에 동일 cycle과 transition rate를 보편 규칙으로 적용하지 않는다.",
+      "description": "ieeq_temperature_transition_boundary qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_humidity_failure_mechanisms",
+      "anchor_id": "ieeq_humidity_failure_mechanisms",
+      "statement": "Humidity stress는 insulation resistance 저하, leakage, corrosion, condensation에 따른 short/creepage risk와 sensor/electronics drift 같은 failure mechanism을 유발할 수 있으므로 기능과 외관을 함께 평가한다.",
+      "importance": "core",
+      "keywords": [
+        "humidity",
+        "insulation resistance",
+        "leakage",
+        "corrosion",
+        "condensation"
+      ],
+      "core_terms": [
+        "humidity",
+        "insulation resistance",
+        "leakage",
+        "corrosion",
+        "condensation"
+      ],
+      "accepted_explanations": [
+        "Humidity stress는 insulation resistance 저하, leakage, corrosion, condensation에 따른 short/creepage risk와 sensor/electronics drift 같은 failure mechanism을 유발할 수 있으므로 기능과 외관을 함께 평가한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Humidity stress는 insulation resistance 저하, leakage, corrosion, condensation에 따른 short/creepage risk와 sensor/electronics drift 같은 failure mechanism을 유발할 수 있으므로 기능과 외관을 함께 평가한다.",
+      "description": "ieeq_humidity_failure_mechanisms qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_condensation_condition",
+      "anchor_id": "ieeq_condensation_condition",
+      "statement": "Humidity qualification에서 condensation이 허용되는 시험인지 비응축 조건인지 구분해야 하며, 두 조건을 동일한 환경 stress로 취급하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "condensation",
+        "non-condensing",
+        "damp heat",
+        "humidity condition",
+        "environmental stress"
+      ],
+      "core_terms": [
+        "condensation",
+        "non-condensing",
+        "damp heat",
+        "humidity condition",
+        "environmental stress"
+      ],
+      "accepted_explanations": [
+        "Humidity qualification에서 condensation이 허용되는 시험인지 비응축 조건인지 구분해야 하며, 두 조건을 동일한 환경 stress로 취급하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Humidity qualification에서 condensation이 허용되는 시험인지 비응축 조건인지 구분해야 하며, 두 조건을 동일한 환경 stress로 취급하지 않는다.",
+      "description": "ieeq_condensation_condition qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_humidity_recovery_check",
+      "anchor_id": "ieeq_humidity_recovery_check",
+      "statement": "습도 노출 후에는 요구된 recovery period와 표면상태를 고려하여 기능·insulation·corrosion evidence를 확인하며 건조 후 정상복귀만으로 시험 중 일시 failure를 무시하지 않는다.",
+      "importance": "important",
+      "keywords": [
+        "humidity recovery",
+        "post-test check",
+        "insulation",
+        "corrosion",
+        "temporary failure"
+      ],
+      "core_terms": [
+        "humidity recovery",
+        "post-test check",
+        "insulation",
+        "corrosion",
+        "temporary failure"
+      ],
+      "accepted_explanations": [
+        "습도 노출 후에는 요구된 recovery period와 표면상태를 고려하여 기능·insulation·corrosion evidence를 확인하며 건조 후 정상복귀만으로 시험 중 일시 failure를 무시하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "습도 노출 후에는 요구된 recovery period와 표면상태를 고려하여 기능·insulation·corrosion evidence를 확인하며 건조 후 정상복귀만으로 시험 중 일시 failure를 무시하지 않는다.",
+      "description": "ieeq_humidity_recovery_check qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_vibration_sine_random",
+      "anchor_id": "ieeq_vibration_sine_random",
+      "statement": "Vibration qualification은 적용 환경에 따라 sine sweep/resonance search, endurance 또는 random vibration 등 필요한 profile을 선택하며 시험 profile과 axis는 requirement에 추적되어야 한다.",
+      "importance": "core",
+      "keywords": [
+        "vibration qualification",
+        "sine vibration",
+        "random vibration",
+        "resonance search",
+        "axis"
+      ],
+      "core_terms": [
+        "vibration qualification",
+        "sine vibration",
+        "random vibration",
+        "resonance search",
+        "axis"
+      ],
+      "accepted_explanations": [
+        "Vibration qualification은 적용 환경에 따라 sine sweep/resonance search, endurance 또는 random vibration 등 필요한 profile을 선택하며 시험 profile과 axis는 requirement에 추적되어야 한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Vibration qualification은 적용 환경에 따라 sine sweep/resonance search, endurance 또는 random vibration 등 필요한 profile을 선택하며 시험 profile과 axis는 requirement에 추적되어야 한다.",
+      "description": "ieeq_vibration_sine_random qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_vibration_mounting",
+      "anchor_id": "ieeq_vibration_mounting",
+      "statement": "Vibration 시험의 fixture, mounting torque, orientation, cable restraint와 sensor location은 실제 설치조건을 대표해야 하며 fixture resonance나 과도한 cable support가 DUT 결과를 왜곡하지 않도록 한다.",
+      "importance": "core",
+      "keywords": [
+        "vibration fixture",
+        "mounting torque",
+        "orientation",
+        "cable restraint",
+        "fixture resonance"
+      ],
+      "core_terms": [
+        "vibration fixture",
+        "mounting torque",
+        "orientation",
+        "cable restraint",
+        "fixture resonance"
+      ],
+      "accepted_explanations": [
+        "Vibration 시험의 fixture, mounting torque, orientation, cable restraint와 sensor location은 실제 설치조건을 대표해야 하며 fixture resonance나 과도한 cable support가 DUT 결과를 왜곡하지 않도록 한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Vibration 시험의 fixture, mounting torque, orientation, cable restraint와 sensor location은 실제 설치조건을 대표해야 하며 fixture resonance나 과도한 cable support가 DUT 결과를 왜곡하지 않도록 한다.",
+      "description": "ieeq_vibration_mounting qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_vibration_functional_monitor",
+      "anchor_id": "ieeq_vibration_functional_monitor",
+      "statement": "Vibration 중에는 intermittent contact, connector/terminal looseness, output noise, relay chatter, communication dropout과 structural resonance 징후를 기능감시 대상으로 포함한다.",
+      "importance": "core",
+      "keywords": [
+        "intermittent contact",
+        "connector looseness",
+        "output noise",
+        "communication dropout",
+        "resonance"
+      ],
+      "core_terms": [
+        "intermittent contact",
+        "connector looseness",
+        "output noise",
+        "communication dropout",
+        "resonance"
+      ],
+      "accepted_explanations": [
+        "Vibration 중에는 intermittent contact, connector/terminal looseness, output noise, relay chatter, communication dropout과 structural resonance 징후를 기능감시 대상으로 포함한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Vibration 중에는 intermittent contact, connector/terminal looseness, output noise, relay chatter, communication dropout과 structural resonance 징후를 기능감시 대상으로 포함한다.",
+      "description": "ieeq_vibration_functional_monitor qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_post_vibration_inspection",
+      "anchor_id": "ieeq_post_vibration_inspection",
+      "statement": "Vibration 후에는 fastener/connector loosening, crack, fretting, cable/PCB/support damage와 calibration shift를 확인하여 단순 functional pass만으로 기계적 손상을 누락하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "post vibration inspection",
+        "loosened fastener",
+        "crack",
+        "fretting",
+        "calibration shift"
+      ],
+      "core_terms": [
+        "post vibration inspection",
+        "loosened fastener",
+        "crack",
+        "fretting",
+        "calibration shift"
+      ],
+      "accepted_explanations": [
+        "Vibration 후에는 fastener/connector loosening, crack, fretting, cable/PCB/support damage와 calibration shift를 확인하여 단순 functional pass만으로 기계적 손상을 누락하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Vibration 후에는 fastener/connector loosening, crack, fretting, cable/PCB/support damage와 calibration shift를 확인하여 단순 functional pass만으로 기계적 손상을 누락하지 않는다.",
+      "description": "ieeq_post_vibration_inspection qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_combined_environment_interaction",
+      "anchor_id": "ieeq_combined_environment_interaction",
+      "statement": "온도·습도·진동·EMC stress는 실제 현장에서 상호 영향을 줄 수 있으므로 qualification 결과 해석 시 test sequence, preconditioning과 이전 stress의 누적 영향을 기록하고 필요 시 requirement 기반 combined/sequential verification을 고려한다.",
+      "importance": "important",
+      "keywords": [
+        "combined environment",
+        "test sequence",
+        "preconditioning",
+        "cumulative stress",
+        "sequential test"
+      ],
+      "core_terms": [
+        "combined environment",
+        "test sequence",
+        "preconditioning",
+        "cumulative stress",
+        "sequential test"
+      ],
+      "accepted_explanations": [
+        "온도·습도·진동·EMC stress는 실제 현장에서 상호 영향을 줄 수 있으므로 qualification 결과 해석 시 test sequence, preconditioning과 이전 stress의 누적 영향을 기록하고 필요 시 requirement 기반 combined/sequential verification을 고려한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "온도·습도·진동·EMC stress는 실제 현장에서 상호 영향을 줄 수 있으므로 qualification 결과 해석 시 test sequence, preconditioning과 이전 stress의 누적 영향을 기록하고 필요 시 requirement 기반 combined/sequential verification을 고려한다.",
+      "description": "ieeq_combined_environment_interaction qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_measurement_instrument_control",
+      "anchor_id": "ieeq_measurement_instrument_control",
+      "statement": "Qualification에 사용하는 chamber, field probe, accelerometer, power analyzer와 functional measurement instrument는 필요한 calibration/verification 상태와 measurement range를 확인하여 test evidence의 신뢰성을 확보한다.",
+      "importance": "core",
+      "keywords": [
+        "test instrumentation",
+        "calibration status",
+        "chamber",
+        "field probe",
+        "accelerometer"
+      ],
+      "core_terms": [
+        "test instrumentation",
+        "calibration status",
+        "chamber",
+        "field probe",
+        "accelerometer"
+      ],
+      "accepted_explanations": [
+        "Qualification에 사용하는 chamber, field probe, accelerometer, power analyzer와 functional measurement instrument는 필요한 calibration/verification 상태와 measurement range를 확인하여 test evidence의 신뢰성을 확보한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Qualification에 사용하는 chamber, field probe, accelerometer, power analyzer와 functional measurement instrument는 필요한 calibration/verification 상태와 measurement range를 확인하여 test evidence의 신뢰성을 확보한다.",
+      "description": "ieeq_measurement_instrument_control qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_uncertainty_margin",
+      "anchor_id": "ieeq_uncertainty_margin",
+      "statement": "Pass/fail 경계에 가까운 결과는 test equipment tolerance, setup repeatability와 measurement uncertainty를 고려하여 근거를 남기며 nominal reading 하나만으로 margin을 과대평가하지 않는다.",
+      "importance": "important",
+      "keywords": [
+        "measurement uncertainty",
+        "test tolerance",
+        "repeatability",
+        "margin",
+        "pass fail boundary"
+      ],
+      "core_terms": [
+        "measurement uncertainty",
+        "test tolerance",
+        "repeatability",
+        "margin",
+        "pass fail boundary"
+      ],
+      "accepted_explanations": [
+        "Pass/fail 경계에 가까운 결과는 test equipment tolerance, setup repeatability와 measurement uncertainty를 고려하여 근거를 남기며 nominal reading 하나만으로 margin을 과대평가하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Pass/fail 경계에 가까운 결과는 test equipment tolerance, setup repeatability와 measurement uncertainty를 고려하여 근거를 남기며 nominal reading 하나만으로 margin을 과대평가하지 않는다.",
+      "description": "ieeq_uncertainty_margin qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_failure_evidence_capture",
+      "anchor_id": "ieeq_failure_evidence_capture",
+      "statement": "Qualification failure 시에는 stress level/time, DUT mode, waveform/log, error code, reset/recovery 상태와 재현조건을 보존하여 root cause analysis가 가능한 evidence를 확보한다.",
+      "importance": "core",
+      "keywords": [
+        "failure evidence",
+        "stress level",
+        "DUT mode",
+        "waveform log",
+        "reproduction"
+      ],
+      "core_terms": [
+        "failure evidence",
+        "stress level",
+        "DUT mode",
+        "waveform log",
+        "reproduction"
+      ],
+      "accepted_explanations": [
+        "Qualification failure 시에는 stress level/time, DUT mode, waveform/log, error code, reset/recovery 상태와 재현조건을 보존하여 root cause analysis가 가능한 evidence를 확보한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Qualification failure 시에는 stress level/time, DUT mode, waveform/log, error code, reset/recovery 상태와 재현조건을 보존하여 root cause analysis가 가능한 evidence를 확보한다.",
+      "description": "ieeq_failure_evidence_capture qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_failure_root_cause",
+      "anchor_id": "ieeq_failure_root_cause",
+      "statement": "Failure 분석은 source/stress→coupling or physical mechanism→affected circuit/function→observed symptom의 인과 chain으로 수행하고 증상만 보고 filter, shield, damping 재료를 임의 추가하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "root cause",
+        "stress mechanism",
+        "affected function",
+        "causal chain",
+        "corrective action"
+      ],
+      "core_terms": [
+        "root cause",
+        "stress mechanism",
+        "affected function",
+        "causal chain",
+        "corrective action"
+      ],
+      "accepted_explanations": [
+        "Failure 분석은 source/stress→coupling or physical mechanism→affected circuit/function→observed symptom의 인과 chain으로 수행하고 증상만 보고 filter, shield, damping 재료를 임의 추가하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Failure 분석은 source/stress→coupling or physical mechanism→affected circuit/function→observed symptom의 인과 chain으로 수행하고 증상만 보고 filter, shield, damping 재료를 임의 추가하지 않는다.",
+      "description": "ieeq_failure_root_cause qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_corrective_action_retest",
+      "anchor_id": "ieeq_corrective_action_retest",
+      "statement": "Corrective action 후에는 변경 영향 범위를 확인하고 실패 시험의 재시험뿐 아니라 변경으로 영향을 받을 수 있는 관련 qualification을 risk 기반으로 재검증하여 closure evidence를 남긴다.",
+      "importance": "core",
+      "keywords": [
+        "corrective action",
+        "retest",
+        "regression qualification",
+        "risk based verification",
+        "closure evidence"
+      ],
+      "core_terms": [
+        "corrective action",
+        "retest",
+        "regression qualification",
+        "risk based verification",
+        "closure evidence"
+      ],
+      "accepted_explanations": [
+        "Corrective action 후에는 변경 영향 범위를 확인하고 실패 시험의 재시험뿐 아니라 변경으로 영향을 받을 수 있는 관련 qualification을 risk 기반으로 재검증하여 closure evidence를 남긴다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Corrective action 후에는 변경 영향 범위를 확인하고 실패 시험의 재시험뿐 아니라 변경으로 영향을 받을 수 있는 관련 qualification을 risk 기반으로 재검증하여 closure evidence를 남긴다.",
+      "description": "ieeq_corrective_action_retest qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_qualification_vs_field_troubleshooting",
+      "anchor_id": "ieeq_qualification_vs_field_troubleshooting",
+      "statement": "Qualification은 정의된 laboratory/test 조건에서 적합성을 입증하는 활동이고, 실제 plant의 EMI noise·ground loop 진단은 `instrumentation_power_grounding_shielding_ups_ground_loop_emc` Topic이 소유하므로 두 활동을 동일 절차로 취급하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "qualification boundary",
+        "field troubleshooting",
+        "EMI noise",
+        "ground loop",
+        "Topic 1 boundary"
+      ],
+      "core_terms": [
+        "qualification boundary",
+        "field troubleshooting",
+        "EMI noise",
+        "ground loop",
+        "Topic 1 boundary"
+      ],
+      "accepted_explanations": [
+        "Qualification은 정의된 laboratory/test 조건에서 적합성을 입증하는 활동이고, 실제 plant의 EMI noise·ground loop 진단은 `instrumentation_power_grounding_shielding_ups_ground_loop_emc` Topic이 소유하므로 두 활동을 동일 절차로 취급하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Qualification은 정의된 laboratory/test 조건에서 적합성을 입증하는 활동이고, 실제 plant의 EMI noise·ground loop 진단은 `instrumentation_power_grounding_shielding_ups_ground_loop_emc` Topic이 소유하므로 두 활동을 동일 절차로 취급하지 않는다.",
+      "description": "ieeq_qualification_vs_field_troubleshooting qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_topic2_boundary",
+      "anchor_id": "ieeq_topic2_boundary",
+      "statement": "Cable tray, gland, physical wiring, tubing과 field installation inspection은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유하며, 본 Topic은 qualification setup이 승인된 representative installation condition을 재현하는지를 평가한다.",
+      "importance": "core",
+      "keywords": [
+        "installation boundary",
+        "cable gland",
+        "field wiring",
+        "representative setup",
+        "Topic 2 boundary"
+      ],
+      "core_terms": [
+        "installation boundary",
+        "cable gland",
+        "field wiring",
+        "representative setup",
+        "Topic 2 boundary"
+      ],
+      "accepted_explanations": [
+        "Cable tray, gland, physical wiring, tubing과 field installation inspection은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유하며, 본 Topic은 qualification setup이 승인된 representative installation condition을 재현하는지를 평가한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Cable tray, gland, physical wiring, tubing과 field installation inspection은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유하며, 본 Topic은 qualification setup이 승인된 representative installation condition을 재현하는지를 평가한다.",
+      "description": "ieeq_topic2_boundary qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_topic4_boundary",
+      "anchor_id": "ieeq_topic4_boundary",
+      "statement": "Hardware architecture, component selection, prototype·production verification의 전체 lifecycle은 `control_hardware_lifecycle_panel_architecture_component_selection_production_verification` Topic이 소유하며, 본 Topic은 그중 환경·EMC qualification evidence를 독립 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "hardware lifecycle boundary",
+        "component selection",
+        "production verification",
+        "qualification evidence",
+        "Topic 4 boundary"
+      ],
+      "core_terms": [
+        "hardware lifecycle boundary",
+        "component selection",
+        "production verification",
+        "qualification evidence",
+        "Topic 4 boundary"
+      ],
+      "accepted_explanations": [
+        "Hardware architecture, component selection, prototype·production verification의 전체 lifecycle은 `control_hardware_lifecycle_panel_architecture_component_selection_production_verification` Topic이 소유하며, 본 Topic은 그중 환경·EMC qualification evidence를 독립 소유한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Hardware architecture, component selection, prototype·production verification의 전체 lifecycle은 `control_hardware_lifecycle_panel_architecture_component_selection_production_verification` Topic이 소유하며, 본 Topic은 그중 환경·EMC qualification evidence를 독립 소유한다.",
+      "description": "ieeq_topic4_boundary qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_topic5_boundary",
+      "anchor_id": "ieeq_topic5_boundary",
+      "statement": "부품 tolerance, drift, aging, internal noise와 power variation의 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유하며, 본 Topic은 환경 stress가 장비 기능에 미치는 qualification 결과를 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "electronics error boundary",
+        "drift aging noise",
+        "component error chain",
+        "environmental stress",
+        "Topic 5 boundary"
+      ],
+      "core_terms": [
+        "electronics error boundary",
+        "drift aging noise",
+        "component error chain",
+        "environmental stress",
+        "Topic 5 boundary"
+      ],
+      "accepted_explanations": [
+        "부품 tolerance, drift, aging, internal noise와 power variation의 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유하며, 본 Topic은 환경 stress가 장비 기능에 미치는 qualification 결과를 소유한다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "부품 tolerance, drift, aging, internal noise와 power variation의 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유하며, 본 Topic은 환경 stress가 장비 기능에 미치는 qualification 결과를 소유한다.",
+      "description": "ieeq_topic5_boundary qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_standard_edition_policy",
+      "anchor_id": "ieeq_standard_edition_policy",
+      "statement": "EMC·환경시험의 표준 edition, test level, severity, dwell time, sweep range와 acceptance class는 적용 규정·제품군·프로젝트 specification에서 결정되므로 출처 없이 특정 값을 고정하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "standard edition",
+        "test level",
+        "severity",
+        "dwell time",
+        "acceptance class"
+      ],
+      "core_terms": [
+        "standard edition",
+        "test level",
+        "severity",
+        "dwell time",
+        "acceptance class"
+      ],
+      "accepted_explanations": [
+        "EMC·환경시험의 표준 edition, test level, severity, dwell time, sweep range와 acceptance class는 적용 규정·제품군·프로젝트 specification에서 결정되므로 출처 없이 특정 값을 고정하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "EMC·환경시험의 표준 edition, test level, severity, dwell time, sweep range와 acceptance class는 적용 규정·제품군·프로젝트 specification에서 결정되므로 출처 없이 특정 값을 고정하지 않는다.",
+      "description": "ieeq_standard_edition_policy qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_traceable_report",
+      "anchor_id": "ieeq_traceable_report",
+      "statement": "Qualification report는 requirement ID, DUT configuration/serial or revision, software/firmware version, setup, test equipment, conditions, deviations, raw/summary result, failure/corrective action과 final disposition을 추적 가능하게 남긴다.",
+      "importance": "core",
+      "keywords": [
+        "qualification report",
+        "DUT configuration",
+        "firmware version",
+        "deviation",
+        "final disposition"
+      ],
+      "core_terms": [
+        "qualification report",
+        "DUT configuration",
+        "firmware version",
+        "deviation",
+        "final disposition"
+      ],
+      "accepted_explanations": [
+        "Qualification report는 requirement ID, DUT configuration/serial or revision, software/firmware version, setup, test equipment, conditions, deviations, raw/summary result, failure/corrective action과 final disposition을 추적 가능하게 남긴다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Qualification report는 requirement ID, DUT configuration/serial or revision, software/firmware version, setup, test equipment, conditions, deviations, raw/summary result, failure/corrective action과 final disposition을 추적 가능하게 남긴다.",
+      "description": "ieeq_traceable_report qualification 계약을 평가한다."
+    },
+    {
+      "id": "ieeq_change_control_requalification",
+      "anchor_id": "ieeq_change_control_requalification",
+      "statement": "Hardware, PCB, enclosure, cable/connector, firmware 또는 filter/bonding 변경이 qualification 결과에 영향을 줄 수 있으면 변경 영향평가를 통해 requalification 범위를 결정하고 이전 pass를 자동 승계하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "change impact",
+        "requalification",
+        "hardware change",
+        "firmware change",
+        "previous qualification"
+      ],
+      "core_terms": [
+        "change impact",
+        "requalification",
+        "hardware change",
+        "firmware change",
+        "previous qualification"
+      ],
+      "accepted_explanations": [
+        "Hardware, PCB, enclosure, cable/connector, firmware 또는 filter/bonding 변경이 qualification 결과에 영향을 줄 수 있으면 변경 영향평가를 통해 requalification 범위를 결정하고 이전 pass를 자동 승계하지 않는다.",
+        "Requirement→test setup/DUT mode→stress exposure→in-test monitoring→acceptance evidence→failure analysis/corrective action→re-test로 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 계측기에 동일 severity·duration·표준 edition을 적용하고 시험 종료 후 전원 on/off만 확인하면 qualification이 완료된다고 설명한다."
+      ],
+      "grading_notes": "시험 목적, stress mechanism, DUT 상태, 합격기준, evidence와 ownership boundary를 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification.md; repository exam-scope criterion IC-2027-W-3-10; instrumentation environmental and EMC qualification engineering fundamentals. Specific standard editions, severity levels, dwell times and test levels are not hard-coded; they must be taken from the applicable product/project/regulatory requirement. Historical frequency is not asserted.",
+      "claim": "Hardware, PCB, enclosure, cable/connector, firmware 또는 filter/bonding 변경이 qualification 결과에 영향을 줄 수 있으면 변경 영향평가를 통해 requalification 범위를 결정하고 이전 pass를 자동 승계하지 않는다.",
+      "description": "ieeq_change_control_requalification qualification 계약을 평가한다."
+    }
+  ],
+  "core_facts": [
+    "계측기 환경 Qualification은 사용환경과 적용 요구를 정의하고 시험항목·조건·DUT 상태·감시항목·합격기준을 정한 뒤 pre-test baseline→stress exposure→functional monitoring→post-test inspection→failure analysis/corrective action→re-test evidence로 적합성을 입증하는 과정이다.",
+    "Qualification 시험조건은 적용 제품규격, 프로젝트 specification, 설치환경과 equipment intended use에서 추적되어야 하며 근거 없이 severity나 duration을 임의 선정하지 않는다.",
+    "EMC는 장비가 허용 가능한 전자기 환경에서 과도한 방해를 발생시키지 않으면서 요구 기능을 수행하는 적합성 개념이고, EMI는 기능에 영향을 주는 전자기 간섭 현상을 의미하므로 두 용어를 동일 개념으로 취급하지 않는다.",
+    "EMC qualification은 장비가 외부로 발생시키는 disturbance를 제한하는 emission과 외부 disturbance 하에서 기능을 유지하는 immunity를 구분하여 평가한다.",
+    "EMC 시험은 적용 요구에 따라 conducted/radiated emission, radiated/conducted RF immunity, ESD, EFT/burst, surge 및 전원·자기장 관련 immunity 같은 시험군에서 필요한 항목을 선택하며 모든 장비에 모든 시험을 동일 level로 적용하지 않는다.",
+    "EMC 시험구성은 실제 사용조건을 대표하도록 DUT 전원, I/O, cable type/length, termination, enclosure, grounding/bonding과 auxiliary equipment를 정의하고 setup 변경을 기록한다.",
+    "Qualification 중 DUT operating mode는 실제 기능을 대표하고 disturbance 발생 또는 susceptibility가 큰 상태를 포함하도록 선정하며, idle 상태 한 가지의 통과만으로 모든 운전모드를 대표한다고 보지 않는다.",
+    "Stress 적용 전에는 기능, output accuracy, communication, alarm/status, insulation/visual condition 등 필요한 baseline을 기록하여 시험 중·후 변화와 비교할 기준을 확보한다.",
+    "Immunity·온도·습도·진동 시험에서는 단순히 시험 종료 후 전원이 켜지는지만 확인하지 말고 시험 중 요구기능, output deviation, reset, communication loss, alarm과 recovery behavior를 감시한다.",
+    "합격기준은 시험 전에 허용 가능한 기능저하, 자동 recovery 여부, 수동 intervention 허용 여부와 시험 후 residual degradation을 정의해야 하며 결과를 본 뒤 기준을 바꾸지 않는다.",
+    "Temperature qualification은 operating과 storage/non-operating 요구를 구분하고 DUT 내부 self-heating, stabilization, thermal gradient와 실제 설치환경을 고려하여 hot/cold stress를 평가한다.",
+    "온도 변화율, cycle, dwell 또는 thermal shock 적용 여부는 제품·프로젝트 요구에 따라 달라지므로 모든 계측기에 동일 cycle과 transition rate를 보편 규칙으로 적용하지 않는다.",
+    "Humidity stress는 insulation resistance 저하, leakage, corrosion, condensation에 따른 short/creepage risk와 sensor/electronics drift 같은 failure mechanism을 유발할 수 있으므로 기능과 외관을 함께 평가한다.",
+    "Humidity qualification에서 condensation이 허용되는 시험인지 비응축 조건인지 구분해야 하며, 두 조건을 동일한 환경 stress로 취급하지 않는다.",
+    "Vibration qualification은 적용 환경에 따라 sine sweep/resonance search, endurance 또는 random vibration 등 필요한 profile을 선택하며 시험 profile과 axis는 requirement에 추적되어야 한다.",
+    "Vibration 시험의 fixture, mounting torque, orientation, cable restraint와 sensor location은 실제 설치조건을 대표해야 하며 fixture resonance나 과도한 cable support가 DUT 결과를 왜곡하지 않도록 한다.",
+    "Vibration 중에는 intermittent contact, connector/terminal looseness, output noise, relay chatter, communication dropout과 structural resonance 징후를 기능감시 대상으로 포함한다.",
+    "Vibration 후에는 fastener/connector loosening, crack, fretting, cable/PCB/support damage와 calibration shift를 확인하여 단순 functional pass만으로 기계적 손상을 누락하지 않는다.",
+    "Qualification에 사용하는 chamber, field probe, accelerometer, power analyzer와 functional measurement instrument는 필요한 calibration/verification 상태와 measurement range를 확인하여 test evidence의 신뢰성을 확보한다.",
+    "Qualification failure 시에는 stress level/time, DUT mode, waveform/log, error code, reset/recovery 상태와 재현조건을 보존하여 root cause analysis가 가능한 evidence를 확보한다.",
+    "Failure 분석은 source/stress→coupling or physical mechanism→affected circuit/function→observed symptom의 인과 chain으로 수행하고 증상만 보고 filter, shield, damping 재료를 임의 추가하지 않는다.",
+    "Corrective action 후에는 변경 영향 범위를 확인하고 실패 시험의 재시험뿐 아니라 변경으로 영향을 받을 수 있는 관련 qualification을 risk 기반으로 재검증하여 closure evidence를 남긴다.",
+    "Qualification은 정의된 laboratory/test 조건에서 적합성을 입증하는 활동이고, 실제 plant의 EMI noise·ground loop 진단은 `instrumentation_power_grounding_shielding_ups_ground_loop_emc` Topic이 소유하므로 두 활동을 동일 절차로 취급하지 않는다.",
+    "Cable tray, gland, physical wiring, tubing과 field installation inspection은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유하며, 본 Topic은 qualification setup이 승인된 representative installation condition을 재현하는지를 평가한다.",
+    "Hardware architecture, component selection, prototype·production verification의 전체 lifecycle은 `control_hardware_lifecycle_panel_architecture_component_selection_production_verification` Topic이 소유하며, 본 Topic은 그중 환경·EMC qualification evidence를 독립 소유한다.",
+    "부품 tolerance, drift, aging, internal noise와 power variation의 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유하며, 본 Topic은 환경 stress가 장비 기능에 미치는 qualification 결과를 소유한다.",
+    "EMC·환경시험의 표준 edition, test level, severity, dwell time, sweep range와 acceptance class는 적용 규정·제품군·프로젝트 specification에서 결정되므로 출처 없이 특정 값을 고정하지 않는다.",
+    "Qualification report는 requirement ID, DUT configuration/serial or revision, software/firmware version, setup, test equipment, conditions, deviations, raw/summary result, failure/corrective action과 final disposition을 추적 가능하게 남긴다.",
+    "Hardware, PCB, enclosure, cable/connector, firmware 또는 filter/bonding 변경이 qualification 결과에 영향을 줄 수 있으면 변경 영향평가를 통해 requalification 범위를 결정하고 이전 pass를 자동 승계하지 않는다."
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "ieeq_emc_emi_same",
+      "claim": "EMC와 EMI를 완전히 동일한 용어로 정의하는 주장은 오답이다.",
+      "wrong_claim": "EMC와 EMI를 완전히 동일한 용어로 정의하는 주장은 오답이다.",
+      "correction": "EMC는 적합성 개념이고 EMI는 간섭 현상이므로 구분한다.",
+      "correct_rule": "EMC는 적합성 개념이고 EMI는 간섭 현상이므로 구분한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: EMC와 EMI를 완전히 동일한 용어로 정의하는 주장은 오답이다.",
+      "description": "EMC는 적합성 개념이고 EMI는 간섭 현상이므로 구분한다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ieeq_emission_immunity_same",
+      "claim": "Emission과 immunity를 동일 시험으로 취급하는 주장은 오답이다.",
+      "wrong_claim": "Emission과 immunity를 동일 시험으로 취급하는 주장은 오답이다.",
+      "correction": "Emission은 DUT가 발생시키는 disturbance, immunity는 외부 disturbance 하 기능유지 능력이다.",
+      "correct_rule": "Emission은 DUT가 발생시키는 disturbance, immunity는 외부 disturbance 하 기능유지 능력이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: Emission과 immunity를 동일 시험으로 취급하는 주장은 오답이다.",
+      "description": "Emission은 DUT가 발생시키는 disturbance, immunity는 외부 disturbance 하 기능유지 능력이다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ieeq_same_severity_all_devices",
+      "claim": "모든 계측기에 동일 EMC/온습도/진동 severity와 duration을 적용하면 된다는 주장은 오답이다.",
+      "wrong_claim": "모든 계측기에 동일 EMC/온습도/진동 severity와 duration을 적용하면 된다는 주장은 오답이다.",
+      "correction": "시험조건은 적용 규격·제품군·프로젝트 및 설치환경 요구에서 추적한다.",
+      "correct_rule": "시험조건은 적용 규격·제품군·프로젝트 및 설치환경 요구에서 추적한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: 모든 계측기에 동일 EMC/온습도/진동 severity와 duration을 적용하면 된다는 주장은 오답이다.",
+      "description": "시험조건은 적용 규격·제품군·프로젝트 및 설치환경 요구에서 추적한다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ieeq_post_power_on_only",
+      "claim": "환경시험 후 전원만 켜지면 합격이라는 주장은 오답이다.",
+      "wrong_claim": "환경시험 후 전원만 켜지면 합격이라는 주장은 오답이다.",
+      "correction": "시험 중 기능감시와 시험 전·후 성능 및 residual degradation 기준이 필요하다.",
+      "correct_rule": "시험 중 기능감시와 시험 전·후 성능 및 residual degradation 기준이 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: 환경시험 후 전원만 켜지면 합격이라는 주장은 오답이다.",
+      "description": "시험 중 기능감시와 시험 전·후 성능 및 residual degradation 기준이 필요하다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ieeq_same_impulse_as_field_fix",
+      "claim": "Qualification 시험과 plant 현장의 EMI/ground-loop troubleshooting을 동일 절차로 보는 주장은 오답이다.",
+      "wrong_claim": "Qualification 시험과 plant 현장의 EMI/ground-loop troubleshooting을 동일 절차로 보는 주장은 오답이다.",
+      "correction": "Qualification은 정의된 시험조건 적합성 입증이고 field troubleshooting은 별도 진단 활동이다.",
+      "correct_rule": "Qualification은 정의된 시험조건 적합성 입증이고 field troubleshooting은 별도 진단 활동이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: Qualification 시험과 plant 현장의 EMI/ground-loop troubleshooting을 동일 절차로 보는 주장은 오답이다.",
+      "description": "Qualification은 정의된 시험조건 적합성 입증이고 field troubleshooting은 별도 진단 활동이다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ieeq_temperature_one_rule",
+      "claim": "모든 계측기에 동일 온도 cycle, dwell, transition rate를 적용한다는 주장은 오답이다.",
+      "wrong_claim": "모든 계측기에 동일 온도 cycle, dwell, transition rate를 적용한다는 주장은 오답이다.",
+      "correction": "Operating/storage 및 applicable requirement에 따라 profile을 결정한다.",
+      "correct_rule": "Operating/storage 및 applicable requirement에 따라 profile을 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: 모든 계측기에 동일 온도 cycle, dwell, transition rate를 적용한다는 주장은 오답이다.",
+      "description": "Operating/storage 및 applicable requirement에 따라 profile을 결정한다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ieeq_humidity_condensation_same",
+      "claim": "Condensing과 non-condensing humidity condition을 동일 stress로 취급하는 주장은 오답이다.",
+      "wrong_claim": "Condensing과 non-condensing humidity condition을 동일 stress로 취급하는 주장은 오답이다.",
+      "correction": "응축 허용 여부와 failure mechanism을 구분한다.",
+      "correct_rule": "응축 허용 여부와 failure mechanism을 구분한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: Condensing과 non-condensing humidity condition을 동일 stress로 취급하는 주장은 오답이다.",
+      "description": "응축 허용 여부와 failure mechanism을 구분한다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ieeq_vibration_fixture_irrelevant",
+      "claim": "Vibration 시험에서 fixture, mounting, axis와 cable restraint는 결과에 영향이 없다는 주장은 오답이다.",
+      "wrong_claim": "Vibration 시험에서 fixture, mounting, axis와 cable restraint는 결과에 영향이 없다는 주장은 오답이다.",
+      "correction": "실제 설치조건을 대표하고 fixture resonance/constraint 영향을 통제해야 한다.",
+      "correct_rule": "실제 설치조건을 대표하고 fixture resonance/constraint 영향을 통제해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: Vibration 시험에서 fixture, mounting, axis와 cable restraint는 결과에 영향이 없다는 주장은 오답이다.",
+      "description": "실제 설치조건을 대표하고 fixture resonance/constraint 영향을 통제해야 한다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ieeq_failure_fix_without_retest",
+      "claim": "Qualification failure 대책을 적용한 뒤 재시험 없이 설계변경만으로 closure할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Qualification failure 대책을 적용한 뒤 재시험 없이 설계변경만으로 closure할 수 있다는 주장은 오답이다.",
+      "correction": "변경 영향평가와 필요한 re-test/requalification evidence가 필요하다.",
+      "correct_rule": "변경 영향평가와 필요한 re-test/requalification evidence가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: Qualification failure 대책을 적용한 뒤 재시험 없이 설계변경만으로 closure할 수 있다는 주장은 오답이다.",
+      "description": "변경 영향평가와 필요한 re-test/requalification evidence가 필요하다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ieeq_previous_pass_auto_inherit",
+      "claim": "Hardware/firmware 변경 후 이전 qualification pass를 항상 자동 승계할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Hardware/firmware 변경 후 이전 qualification pass를 항상 자동 승계할 수 있다는 주장은 오답이다.",
+      "correction": "변경 영향평가로 requalification 범위를 결정한다.",
+      "correct_rule": "변경 영향평가로 requalification 범위를 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "환경/EMC qualification 핵심 오류: Hardware/firmware 변경 후 이전 qualification pass를 항상 자동 승계할 수 있다는 주장은 오답이다.",
+      "description": "변경 영향평가로 requalification 범위를 결정한다.",
+      "grading_notes": "응시자의 실제 단정과 문맥을 확인한 뒤 적용한다."
+    }
+  ],
+  "safe_expressions": [
+    "EMC emission과 immunity를 구분한다.",
+    "시험 severity와 duration은 applicable requirement에서 추적한다.",
+    "시험 중 DUT 기능과 output degradation을 감시한다.",
+    "Humidity의 condensation 여부를 시험조건으로 구분한다.",
+    "Vibration fixture와 mounting condition을 representative setup으로 관리한다.",
+    "Failure 대책 후 변경 영향평가와 필요한 re-test를 수행한다.",
+    "Field EMI troubleshooting과 qualification을 구분한다."
+  ],
+  "revision_notes": [
+    "IC-2027-W-3-10 환경시험/EMC qualification criterion을 직접 소유한다.",
+    "특정 standard edition/severity/dwell 숫자를 근거 없이 고정하지 않는다.",
+    "Historical frequency를 사용하지 않는다.",
+    "Topic 1/2/4/5 ownership boundary를 명시했다."
+  ],
+  "topic_label": "환경·EMC/EMI·온도·습도·진동 Qualification"
+}
