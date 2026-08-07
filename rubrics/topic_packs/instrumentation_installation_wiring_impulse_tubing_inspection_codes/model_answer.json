@@ -1,0 +1,297 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+  "title_ko": "계측설비 설치·배선·도압배관·시공검사 및 기술기준",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "계측제어설비의 설치·배선·도압배관 시공 및 검사 절차를 설명하시오.",
+      "intent": "승인도서에서 field installation, inspection, punch, as-built까지 구현·평가",
+      "required_anchor_ids": [
+        "iiwic_scope_chain",
+        "iiwic_document_hierarchy",
+        "iiwic_installation_inspection_sequence",
+        "iiwic_asbuilt_final_acceptance"
+      ]
+    },
+    {
+      "pattern": "계장 cable tray, cable gland 및 terminal 시공 시 유의사항을 설명하시오.",
+      "intent": "routing, mechanical protection, gland/entry integrity와 termination quality 평가",
+      "required_anchor_ids": [
+        "iiwic_cable_route_mechanical_protection",
+        "iiwic_bend_radius_tension",
+        "iiwic_gland_entry_integrity",
+        "iiwic_terminal_quality",
+        "iiwic_wire_identification"
+      ]
+    },
+    {
+      "pattern": "계장 cable과 전력/VFD cable 배선 시 설치상 고려사항과 검사방법을 설명하시오.",
+      "intent": "승인된 segregation/EMC 설계를 실제 tray·route·termination에 구현",
+      "required_anchor_ids": [
+        "iiwic_cable_separation_execution",
+        "iiwic_cable_route_mechanical_protection",
+        "iiwic_shield_execution_boundary",
+        "iiwic_wire_identification"
+      ]
+    },
+    {
+      "pattern": "Pressure/DP transmitter의 impulse tubing 설치 원칙과 검사사항을 설명하시오.",
+      "intent": "service-specific slope/elevation, tubing integrity, support와 drain/vent를 평가",
+      "required_anchor_ids": [
+        "iiwic_impulse_line_general",
+        "iiwic_impulse_slope_service_specific",
+        "iiwic_tubing_fittings_integrity",
+        "iiwic_root_manifold_drain_vent",
+        "iiwic_support_thermal_vibration"
+      ]
+    },
+    {
+      "pattern": "Gas, liquid, steam service의 impulse line 설치 차이를 설명하시오.",
+      "intent": "condensate와 trapped gas/hydrostatic head를 고려해 service별 routing 차이를 설명",
+      "required_anchor_ids": [
+        "iiwic_liquid_service_principle",
+        "iiwic_gas_service_principle",
+        "iiwic_steam_service_principle",
+        "iiwic_impulse_slope_service_specific"
+      ]
+    },
+    {
+      "pattern": "DP 측정용 high/low impulse line의 설치오차 요인과 대책을 설명하시오.",
+      "intent": "high/low path의 elevation·thermal·hydrostatic bias와 support/cleanliness 관리",
+      "required_anchor_ids": [
+        "iiwic_dp_pair_symmetry",
+        "iiwic_impulse_line_general",
+        "iiwic_tubing_fittings_integrity",
+        "iiwic_cleanliness_pressure_boundary"
+      ]
+    },
+    {
+      "pattern": "계측설비 시공검사와 punch 처리 및 as-built 관리방법을 설명하시오.",
+      "intent": "검사 sequence, punch classification, reinspection과 document reconciliation을 평가",
+      "required_anchor_ids": [
+        "iiwic_installation_inspection_sequence",
+        "iiwic_punch_classification",
+        "iiwic_asbuilt_final_acceptance"
+      ]
+    },
+    {
+      "pattern": "계장 설치 시 적용 기술기준과 도면·vendor instruction이 충돌할 때 처리방법을 설명하시오.",
+      "intent": "상위 기준 hierarchy를 확인하고 formal clarification/deviation으로 해결",
+      "required_anchor_ids": [
+        "iiwic_document_hierarchy",
+        "iiwic_design_basis_boundary",
+        "iiwic_install_per_approved_drawings"
+      ]
+    },
+    {
+      "pattern": "본질안전/위험장소 계장 배선의 설치 단계 유의사항을 설명하시오.",
+      "intent": "classification/선정은 별도 Topic으로 두고 승인된 segregation/gland/seal 조건을 구현",
+      "required_anchor_ids": [
+        "iiwic_intrinsic_safety_segregation_execution",
+        "iiwic_hazardous_area_boundary",
+        "iiwic_gland_entry_integrity"
+      ]
+    },
+    {
+      "pattern": "FAT 합격 후 현장 설치검사에서 추가로 확인해야 할 사항을 설명하시오.",
+      "intent": "FAT와 field evidence를 구분하고 wiring, tubing, tag, punch, as-built를 확인",
+      "required_anchor_ids": [
+        "iiwic_fat_sat_boundary",
+        "iiwic_installation_inspection_sequence",
+        "iiwic_continuity_insulation_boundary",
+        "iiwic_asbuilt_final_acceptance"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "Applicable documents and installation basis",
+      "intent": "적용 법규·specification·승인도면·vendor instruction hierarchy와 deviation 절차를 확인한다.",
+      "anchor_refs": [
+        "iiwic_scope_chain",
+        "iiwic_document_hierarchy",
+        "iiwic_install_per_approved_drawings"
+      ]
+    },
+    {
+      "section": "Location, accessibility and environmental integrity",
+      "intent": "현장 위치·방향·정비성·enclosure/gland integrity를 평가한다.",
+      "anchor_refs": [
+        "iiwic_accessibility_maintainability",
+        "iiwic_environment_installation_protection",
+        "iiwic_gland_entry_integrity"
+      ]
+    },
+    {
+      "section": "Cable routing and termination",
+      "intent": "tray/conduit, mechanical protection, segregation, bend/tension, terminal과 identification을 평가한다.",
+      "anchor_refs": [
+        "iiwic_cable_route_mechanical_protection",
+        "iiwic_cable_separation_execution",
+        "iiwic_bend_radius_tension",
+        "iiwic_terminal_quality",
+        "iiwic_wire_identification",
+        "iiwic_spare_core_treatment"
+      ]
+    },
+    {
+      "section": "Special wiring execution",
+      "intent": "승인된 shield/grounding 및 IS/hazardous-area installation condition을 현장에 구현한다.",
+      "anchor_refs": [
+        "iiwic_shield_execution_boundary",
+        "iiwic_intrinsic_safety_segregation_execution"
+      ]
+    },
+    {
+      "section": "Impulse tubing installation",
+      "intent": "service-specific slope/elevation, liquid/gas/steam, DP symmetry와 fitting integrity를 설명한다.",
+      "anchor_refs": [
+        "iiwic_impulse_line_general",
+        "iiwic_impulse_slope_service_specific",
+        "iiwic_liquid_service_principle",
+        "iiwic_gas_service_principle",
+        "iiwic_steam_service_principle",
+        "iiwic_dp_pair_symmetry",
+        "iiwic_tubing_fittings_integrity"
+      ]
+    },
+    {
+      "section": "Valve, support and pressure-boundary checks",
+      "intent": "root/manifold/drain/vent, support, thermal/vibration와 cleanliness/leak inspection을 평가한다.",
+      "anchor_refs": [
+        "iiwic_root_manifold_drain_vent",
+        "iiwic_support_thermal_vibration",
+        "iiwic_cleanliness_pressure_boundary"
+      ]
+    },
+    {
+      "section": "Inspection, punch and evidence",
+      "intent": "inspection sequence, continuity/test boundary, punch closure와 traceability를 확인한다.",
+      "anchor_refs": [
+        "iiwic_installation_inspection_sequence",
+        "iiwic_continuity_insulation_boundary",
+        "iiwic_punch_classification",
+        "iiwic_asbuilt_final_acceptance"
+      ]
+    },
+    {
+      "section": "Ownership boundaries",
+      "intent": "Topic 1, Design Basis/Code, P&ID, hazardous-area selection, FAT/SAT와 중복을 방지한다.",
+      "anchor_refs": [
+        "iiwic_fat_sat_boundary",
+        "iiwic_design_basis_boundary",
+        "iiwic_pid_document_boundary",
+        "iiwic_hazardous_area_boundary",
+        "iiwic_topic1_boundary"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "법규·project specification·승인도면·vendor instruction의 hierarchy와 formal deviation 처리를 설명한다.",
+    "설치 위치·orientation·접근성·정비성과 enclosure/gland integrity를 함께 평가한다.",
+    "Cable tray/conduit route, mechanical protection, segregation, bend radius와 pulling tension을 구체적으로 설명한다.",
+    "Terminal/ferrule/lug, core identification과 spare core 처리까지 termination 품질을 포함한다.",
+    "Shield/grounding philosophy를 설치자가 임의 변경하지 않고 승인도면 구현 대상으로 구분한다.",
+    "Impulse line slope/elevation을 gas/liquid/steam service별 phase behavior와 연결한다.",
+    "DP high/low path의 hydrostatic/thermal bias와 tubing/fitting/support 품질을 설명한다.",
+    "Root valve/manifold/drain/vent의 P&ID/hook-up 일치와 접근성을 확인한다.",
+    "민감한 회로의 continuity/insulation test는 기기 허용조건과 승인 절차를 확인한다.",
+    "Inspection→punch→reinspection→closure evidence→as-built reconciliation을 closed-loop로 설명한다.",
+    "FAT와 field installation evidence를 구분하고 상위 Code governance 및 hazardous-area equipment selection Topic과 경계를 세운다."
+  ],
+  "common_missing_points": [
+    "FAT 합격을 field installation quality의 대체 evidence로 사용한다.",
+    "모든 impulse line에 동일 slope와 transmitter elevation을 적용한다.",
+    "사용하지 않는 cable entry의 blanking/sealing을 누락한다.",
+    "Cable bend radius와 pulling tension을 고려하지 않는다.",
+    "Spare core를 식별·절연하지 않는다.",
+    "Shield 접지방식을 현장 작업자가 임의 변경한다.",
+    "Code/spec/drawing 충돌을 formal deviation 없이 현장에서 임의 처리한다.",
+    "연결기기 확인 없이 동일 insulation test voltage를 일괄 적용한다.",
+    "Punch closure를 서명만으로 종료하고 reinspection evidence를 남기지 않는다.",
+    "As-built와 현장 상태 reconciliation을 누락한다."
+  ],
+  "routing_aliases": [
+    "instrumentation installation wiring impulse tubing inspection codes",
+    "instrumentation field installation wiring tubing inspection",
+    "instrument cable tray gland terminal installation inspection",
+    "instrument wiring cable routing termination field inspection",
+    "pressure transmitter impulse tubing installation slope inspection",
+    "DP transmitter impulse line tubing installation inspection",
+    "gas liquid steam impulse line installation",
+    "instrumentation installation punch as-built inspection",
+    "instrument technical code field installation inspection",
+    "instrumentation cable gland enclosure entry termination",
+    "계장 설치 배선 도압배관 시공검사",
+    "계장 케이블 트레이 글랜드 단자 시공",
+    "압력계기 도압배관 slope drain vent 설치",
+    "계측설비 punch as-built 시공검사",
+    "계장 기술기준 설치검사"
+  ],
+  "routing_field_points": [
+    "적용 법규·project specification·승인도면·vendor instruction 확인",
+    "Field location·orientation·accessibility·maintenance clearance 확인",
+    "Cable tray/conduit route와 mechanical protection 확인",
+    "Power/VFD와 instrumentation cable segregation 구현 확인",
+    "Cable bend radius·pulling tension 확인",
+    "Cable gland·unused entry blanking·enclosure integrity 확인",
+    "Terminal/ferrule/lug·core marking·spare core 처리 확인",
+    "Approved shield/grounding termination drawing 구현 확인",
+    "IS/hazardous-area wiring segregation과 approved gland/seal 확인",
+    "Impulse tubing service-specific slope/elevation 확인",
+    "Liquid/gas/steam condensate·gas pocket behavior 확인",
+    "DP high/low path elevation·thermal·hydrostatic bias 확인",
+    "Root valve/manifold/drain/vent와 hook-up 일치 확인",
+    "Continuity/approved insulation test와 sensitive electronics 보호 확인",
+    "Inspection punch reinspection closure evidence와 as-built reconciliation 확인"
+  ],
+  "revision_notes": [
+    "Primary Question Type을 IMPLEMENTATION_EVALUATION으로 설정했다.",
+    "Difficulty를 FIELD_APPLICATION으로 설정했다.",
+    "Specific code edition을 hard-code하지 않고 project execution 시 applicable edition 확인을 요구한다.",
+    "Historical frequency를 사용하지 않았다.",
+    "Topic 1, Design Basis/Code, P&ID, hazardous-area, FAT/SAT와 ownership boundary를 명시했다."
+  ],
+  "id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+  "title": "계측설비 설치·배선·도압배관·시공검사 및 기술기준",
+  "question_examples": [
+    "계측제어설비의 설치·배선·도압배관 시공 및 검사 절차를 설명하시오.",
+    "계장 cable tray, cable gland 및 terminal 시공 시 유의사항을 설명하시오.",
+    "계장 cable과 전력/VFD cable 배선 시 설치상 고려사항과 검사방법을 설명하시오.",
+    "Pressure/DP transmitter의 impulse tubing 설치 원칙과 검사사항을 설명하시오.",
+    "Gas, liquid, steam service의 impulse line 설치 차이를 설명하시오.",
+    "DP 측정용 high/low impulse line의 설치오차 요인과 대책을 설명하시오.",
+    "계측설비 시공검사와 punch 처리 및 as-built 관리방법을 설명하시오.",
+    "계장 설치 시 적용 기술기준과 도면·vendor instruction이 충돌할 때 처리방법을 설명하시오.",
+    "본질안전/위험장소 계장 배선의 설치 단계 유의사항을 설명하시오.",
+    "FAT 합격 후 현장 설치검사에서 추가로 확인해야 할 사항을 설명하시오."
+  ],
+  "topic_aliases": [
+    "instrumentation installation wiring impulse tubing inspection codes",
+    "instrument cable tray gland terminal installation inspection",
+    "pressure transmitter impulse tubing installation slope inspection",
+    "instrumentation installation punch as-built inspection",
+    "계장 설치 배선 도압배관 시공검사",
+    "계측설비 punch as-built 시공검사"
+  ],
+  "expected_structure": [
+    "Applicable documents and installation basis",
+    "Location, accessibility and environmental integrity",
+    "Cable routing and termination",
+    "Special wiring execution",
+    "Impulse tubing installation",
+    "Valve, support and pressure-boundary checks",
+    "Inspection, punch and evidence",
+    "Ownership boundaries"
+  ],
+  "high_score_features": [
+    "승인기준→현장 설치→배선/도압배관 품질→검사/punch→as-built reconciliation을 implementation evidence로 연결한다."
+  ],
+  "low_score_patterns": [
+    "Service·도면·기기조건과 무관한 universal installation rule을 제시하거나 FAT를 현장 시공검사의 대체 evidence로 사용한다."
+  ],
+  "field_connection_points": [
+    "Transmitter/JB/panel field cable, cable tray/conduit/gland/terminal, pressure/DP impulse tubing, manifold, punch list와 as-built 현장검사"
+  ]
+}
