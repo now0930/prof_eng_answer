@@ -1,0 +1,24 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "DIAGNOSIS_ACTION",
+  "high_band_unlock_conditions": [
+    "PE와 signal/reference ground의 기능을 분리하고 safety boundary를 지킨다.",
+    "Single-point·multi-point grounding과 shield termination을 frequency/bonding 조건에 따라 설명한다.",
+    "Ground loop의 multiple return path·potential difference·circulating current mechanism을 설명한다.",
+    "Common-mode·differential-mode와 source-path-victim coupling을 진단한다.",
+    "DC distribution·redundant supply·UPS sizing과 common-point risk를 설명한다.",
+    "UPS normal·battery·bypass와 neutral/ground reference를 확인한다.",
+    "Before/after evidence와 one-change-at-a-time diagnostic workflow를 적용한다.",
+    "Lane A Topic 2~5 boundary와 대책 후 closed-loop verification을 설명한다."
+  ],
+  "note": "IC-2027-W-2-6 범위의 전원/접지 문제를 현장 noise·ground-loop·UPS·EMC 진단과 대책으로 연결하는 핵심 계장 주제이다. Historical frequency는 근거로 사용하지 않았다.",
+  "revision_notes": [
+    "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+    "DIAGNOSIS_ACTION을 Primary Question Type으로 적용했다.",
+    "Historical frequency가 아니라 criterion ownership과 field relevance를 근거로 분류했다."
+  ],
+  "topic_label": "계장 전원·접지·차폐·UPS·Ground Loop·EMC"
+}

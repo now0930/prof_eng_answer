@@ -1,0 +1,1072 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+  "title_ko": "계장 전원·접지·차폐·UPS·Ground Loop·EMC 진단 및 대책",
+  "question_type_hint": "DIAGNOSIS_ACTION",
+  "anchors": [
+    {
+      "id": "ipgse_scope_chain",
+      "anchor_id": "ipgse_scope_chain",
+      "statement": "계장 신호 건전성은 전원 품질, 기준전위, 접지·본딩, 차폐, 배선 결합경로, UPS와 EMC 대책을 하나의 원인-경로-피해기기 체인으로 진단해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "instrumentation power integrity",
+        "grounding bonding shielding",
+        "ground loop",
+        "UPS",
+        "EMC"
+      ],
+      "core_terms": [
+        "instrumentation power integrity",
+        "grounding bonding shielding",
+        "ground loop",
+        "UPS",
+        "EMC"
+      ],
+      "accepted_explanations": [
+        "계장 신호 건전성은 전원 품질, 기준전위, 접지·본딩, 차폐, 배선 결합경로, UPS와 EMC 대책을 하나의 원인-경로-피해기기 체인으로 진단해야 한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "계장 신호 건전성은 전원 품질, 기준전위, 접지·본딩, 차폐, 배선 결합경로, UPS와 EMC 대책을 하나의 원인-경로-피해기기 체인으로 진단해야 한다.",
+      "description": "ipgse_scope_chain 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_pe_signal_reference_boundary",
+      "anchor_id": "ipgse_pe_signal_reference_boundary",
+      "statement": "보호접지(PE)는 감전·고장전류 안전 경로이고 signal/reference ground는 계측 기준전위이므로 목적을 구분하며, 잡음 저감을 이유로 보호접지를 임의 해제해서는 안 된다.",
+      "importance": "core",
+      "keywords": [
+        "protective earth",
+        "signal reference ground",
+        "safety earth",
+        "fault current",
+        "reference potential"
+      ],
+      "core_terms": [
+        "protective earth",
+        "signal reference ground",
+        "safety earth",
+        "fault current",
+        "reference potential"
+      ],
+      "accepted_explanations": [
+        "보호접지(PE)는 감전·고장전류 안전 경로이고 signal/reference ground는 계측 기준전위이므로 목적을 구분하며, 잡음 저감을 이유로 보호접지를 임의 해제해서는 안 된다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "보호접지(PE)는 감전·고장전류 안전 경로이고 signal/reference ground는 계측 기준전위이므로 목적을 구분하며, 잡음 저감을 이유로 보호접지를 임의 해제해서는 안 된다.",
+      "description": "ipgse_pe_signal_reference_boundary 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_bonding_impedance_frequency",
+      "anchor_id": "ipgse_bonding_impedance_frequency",
+      "statement": "본딩은 설비 간 전위차와 공통 임피던스를 줄이는 수단이며 고주파에서는 도체의 저항뿐 아니라 인덕턴스와 접속 길이·형상이 중요하다.",
+      "importance": "core",
+      "keywords": [
+        "equipotential bonding",
+        "bond impedance",
+        "high frequency inductance",
+        "short bonding path",
+        "potential difference"
+      ],
+      "core_terms": [
+        "equipotential bonding",
+        "bond impedance",
+        "high frequency inductance",
+        "short bonding path",
+        "potential difference"
+      ],
+      "accepted_explanations": [
+        "본딩은 설비 간 전위차와 공통 임피던스를 줄이는 수단이며 고주파에서는 도체의 저항뿐 아니라 인덕턴스와 접속 길이·형상이 중요하다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "본딩은 설비 간 전위차와 공통 임피던스를 줄이는 수단이며 고주파에서는 도체의 저항뿐 아니라 인덕턴스와 접속 길이·형상이 중요하다.",
+      "description": "ipgse_bonding_impedance_frequency 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_single_multi_point_conditional",
+      "anchor_id": "ipgse_single_multi_point_conditional",
+      "statement": "Single-point와 multi-point grounding은 주파수, 시스템 규모, 공통모드 전류와 구조에 따라 선택하며 어느 한 방식이 모든 계장 시스템에 항상 우월하지 않다.",
+      "importance": "core",
+      "keywords": [
+        "single point grounding",
+        "multi point grounding",
+        "frequency dependent grounding",
+        "common mode current",
+        "ground topology"
+      ],
+      "core_terms": [
+        "single point grounding",
+        "multi point grounding",
+        "frequency dependent grounding",
+        "common mode current",
+        "ground topology"
+      ],
+      "accepted_explanations": [
+        "Single-point와 multi-point grounding은 주파수, 시스템 규모, 공통모드 전류와 구조에 따라 선택하며 어느 한 방식이 모든 계장 시스템에 항상 우월하지 않다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "Single-point와 multi-point grounding은 주파수, 시스템 규모, 공통모드 전류와 구조에 따라 선택하며 어느 한 방식이 모든 계장 시스템에 항상 우월하지 않다.",
+      "description": "ipgse_single_multi_point_conditional 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_ground_loop_mechanism",
+      "anchor_id": "ipgse_ground_loop_mechanism",
+      "statement": "Ground loop는 둘 이상의 도전성 귀로가 형성되고 지점 간 전위차가 존재할 때 순환전류가 흘러 신호 기준전위를 교란하는 현상으로 해석한다.",
+      "importance": "core",
+      "keywords": [
+        "ground loop mechanism",
+        "multiple return paths",
+        "potential difference",
+        "circulating current",
+        "signal reference"
+      ],
+      "core_terms": [
+        "ground loop mechanism",
+        "multiple return paths",
+        "potential difference",
+        "circulating current",
+        "signal reference"
+      ],
+      "accepted_explanations": [
+        "Ground loop는 둘 이상의 도전성 귀로가 형성되고 지점 간 전위차가 존재할 때 순환전류가 흘러 신호 기준전위를 교란하는 현상으로 해석한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "Ground loop는 둘 이상의 도전성 귀로가 형성되고 지점 간 전위차가 존재할 때 순환전류가 흘러 신호 기준전위를 교란하는 현상으로 해석한다.",
+      "description": "ipgse_ground_loop_mechanism 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_ground_loop_safe_mitigation",
+      "anchor_id": "ipgse_ground_loop_safe_mitigation",
+      "statement": "Ground-loop 대책은 신호 경로의 불필요한 다중 귀로를 제거하고 절연·차동입력·적절한 차폐 접속을 적용하되 PE 같은 안전 접지를 제거하는 방식으로 해결하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "galvanic isolation",
+        "differential input",
+        "shield termination",
+        "ground loop mitigation",
+        "protective earth retained"
+      ],
+      "core_terms": [
+        "galvanic isolation",
+        "differential input",
+        "shield termination",
+        "ground loop mitigation",
+        "protective earth retained"
+      ],
+      "accepted_explanations": [
+        "Ground-loop 대책은 신호 경로의 불필요한 다중 귀로를 제거하고 절연·차동입력·적절한 차폐 접속을 적용하되 PE 같은 안전 접지를 제거하는 방식으로 해결하지 않는다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "Ground-loop 대책은 신호 경로의 불필요한 다중 귀로를 제거하고 절연·차동입력·적절한 차폐 접속을 적용하되 PE 같은 안전 접지를 제거하는 방식으로 해결하지 않는다.",
+      "description": "ipgse_ground_loop_safe_mitigation 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_common_differential_mode",
+      "anchor_id": "ipgse_common_differential_mode",
+      "statement": "계장 잡음은 differential-mode와 common-mode 성분을 구분해야 하며 차동입력의 CMRR, 절연, 필터와 본딩 대책의 효과는 결합 모드에 따라 달라진다.",
+      "importance": "core",
+      "keywords": [
+        "common mode",
+        "differential mode",
+        "CMRR",
+        "isolation",
+        "noise mode"
+      ],
+      "core_terms": [
+        "common mode",
+        "differential mode",
+        "CMRR",
+        "isolation",
+        "noise mode"
+      ],
+      "accepted_explanations": [
+        "계장 잡음은 differential-mode와 common-mode 성분을 구분해야 하며 차동입력의 CMRR, 절연, 필터와 본딩 대책의 효과는 결합 모드에 따라 달라진다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "계장 잡음은 differential-mode와 common-mode 성분을 구분해야 하며 차동입력의 CMRR, 절연, 필터와 본딩 대책의 효과는 결합 모드에 따라 달라진다.",
+      "description": "ipgse_common_differential_mode 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_shield_not_pe",
+      "anchor_id": "ipgse_shield_not_pe",
+      "statement": "Cable shield와 drain wire는 전자기 결합을 줄이기 위한 경로이며 보호접지 도체나 정상 부하전류의 귀로를 대신해서는 안 된다.",
+      "importance": "core",
+      "keywords": [
+        "cable shield",
+        "drain wire",
+        "protective earth boundary",
+        "load return current",
+        "shield current"
+      ],
+      "core_terms": [
+        "cable shield",
+        "drain wire",
+        "protective earth boundary",
+        "load return current",
+        "shield current"
+      ],
+      "accepted_explanations": [
+        "Cable shield와 drain wire는 전자기 결합을 줄이기 위한 경로이며 보호접지 도체나 정상 부하전류의 귀로를 대신해서는 안 된다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "Cable shield와 drain wire는 전자기 결합을 줄이기 위한 경로이며 보호접지 도체나 정상 부하전류의 귀로를 대신해서는 안 된다.",
+      "description": "ipgse_shield_not_pe 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_shield_termination_frequency",
+      "anchor_id": "ipgse_shield_termination_frequency",
+      "statement": "저주파 아날로그 회로의 loop-current 억제와 고주파 EMC의 낮은 임피던스 종단 요구는 다르므로 shield의 one-end 또는 both-end/360-degree termination은 주파수와 본딩 조건에 따라 결정한다.",
+      "importance": "core",
+      "keywords": [
+        "single end shield",
+        "both end shield",
+        "360 degree termination",
+        "low frequency noise",
+        "high frequency EMC"
+      ],
+      "core_terms": [
+        "single end shield",
+        "both end shield",
+        "360 degree termination",
+        "low frequency noise",
+        "high frequency EMC"
+      ],
+      "accepted_explanations": [
+        "저주파 아날로그 회로의 loop-current 억제와 고주파 EMC의 낮은 임피던스 종단 요구는 다르므로 shield의 one-end 또는 both-end/360-degree termination은 주파수와 본딩 조건에 따라 결정한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "저주파 아날로그 회로의 loop-current 억제와 고주파 EMC의 낮은 임피던스 종단 요구는 다르므로 shield의 one-end 또는 both-end/360-degree termination은 주파수와 본딩 조건에 따라 결정한다.",
+      "description": "ipgse_shield_termination_frequency 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_cable_separation_coupling",
+      "anchor_id": "ipgse_cable_separation_coupling",
+      "statement": "전력·VFD·motor cable과 저레벨 계장 cable의 물리적 분리, 평행구간 최소화와 불가피한 교차 시 적절한 배치는 capacitive·inductive coupling을 줄이는 기본 대책이다.",
+      "importance": "important",
+      "keywords": [
+        "cable separation",
+        "VFD motor cable",
+        "parallel run",
+        "capacitive coupling",
+        "inductive coupling"
+      ],
+      "core_terms": [
+        "cable separation",
+        "VFD motor cable",
+        "parallel run",
+        "capacitive coupling",
+        "inductive coupling"
+      ],
+      "accepted_explanations": [
+        "전력·VFD·motor cable과 저레벨 계장 cable의 물리적 분리, 평행구간 최소화와 불가피한 교차 시 적절한 배치는 capacitive·inductive coupling을 줄이는 기본 대책이다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "전력·VFD·motor cable과 저레벨 계장 cable의 물리적 분리, 평행구간 최소화와 불가피한 교차 시 적절한 배치는 capacitive·inductive coupling을 줄이는 기본 대책이다.",
+      "description": "ipgse_cable_separation_coupling 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_emi_coupling_paths",
+      "anchor_id": "ipgse_emi_coupling_paths",
+      "statement": "EMI는 conducted, radiated, capacitive, inductive, common-impedance coupling으로 유입될 수 있으므로 source-path-victim 관점에서 경로를 식별한다.",
+      "importance": "core",
+      "keywords": [
+        "conducted EMI",
+        "radiated EMI",
+        "capacitive coupling",
+        "inductive coupling",
+        "common impedance coupling"
+      ],
+      "core_terms": [
+        "conducted EMI",
+        "radiated EMI",
+        "capacitive coupling",
+        "inductive coupling",
+        "common impedance coupling"
+      ],
+      "accepted_explanations": [
+        "EMI는 conducted, radiated, capacitive, inductive, common-impedance coupling으로 유입될 수 있으므로 source-path-victim 관점에서 경로를 식별한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "EMI는 conducted, radiated, capacitive, inductive, common-impedance coupling으로 유입될 수 있으므로 source-path-victim 관점에서 경로를 식별한다.",
+      "description": "ipgse_emi_coupling_paths 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_source_path_victim_mitigation",
+      "anchor_id": "ipgse_source_path_victim_mitigation",
+      "statement": "EMC 대책은 source의 발생 저감, coupling path의 차단·감쇠, victim의 내성 향상을 조합하며 단일 필터나 단일 접지 변경만으로 모든 문제를 해결한다고 가정하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "source path victim",
+        "EMC mitigation",
+        "filtering shielding bonding",
+        "immunity",
+        "coupling path"
+      ],
+      "core_terms": [
+        "source path victim",
+        "EMC mitigation",
+        "filtering shielding bonding",
+        "immunity",
+        "coupling path"
+      ],
+      "accepted_explanations": [
+        "EMC 대책은 source의 발생 저감, coupling path의 차단·감쇠, victim의 내성 향상을 조합하며 단일 필터나 단일 접지 변경만으로 모든 문제를 해결한다고 가정하지 않는다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "EMC 대책은 source의 발생 저감, coupling path의 차단·감쇠, victim의 내성 향상을 조합하며 단일 필터나 단일 접지 변경만으로 모든 문제를 해결한다고 가정하지 않는다.",
+      "description": "ipgse_source_path_victim_mitigation 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_filter_entry_bonding",
+      "anchor_id": "ipgse_filter_entry_bonding",
+      "statement": "EMI filter와 feedthrough 대책은 노이즈가 enclosure 내부로 우회 결합하지 않도록 경계부에 배치하고 짧고 낮은 임피던스의 본딩 경로를 확보해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "EMI filter",
+        "enclosure entry",
+        "feedthrough",
+        "low impedance bonding",
+        "filter bypass coupling"
+      ],
+      "core_terms": [
+        "EMI filter",
+        "enclosure entry",
+        "feedthrough",
+        "low impedance bonding",
+        "filter bypass coupling"
+      ],
+      "accepted_explanations": [
+        "EMI filter와 feedthrough 대책은 노이즈가 enclosure 내부로 우회 결합하지 않도록 경계부에 배치하고 짧고 낮은 임피던스의 본딩 경로를 확보해야 한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "EMI filter와 feedthrough 대책은 노이즈가 enclosure 내부로 우회 결합하지 않도록 경계부에 배치하고 짧고 낮은 임피던스의 본딩 경로를 확보해야 한다.",
+      "description": "ipgse_filter_entry_bonding 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_spd_coordination",
+      "anchor_id": "ipgse_spd_coordination",
+      "statement": "Surge protection은 전원·신호 경로의 SPD를 설비의 접지·본딩 체계와 함께 조정하고 접속 리드의 임피던스를 줄여 잔류 과전압과 우회경로를 관리한다.",
+      "importance": "important",
+      "keywords": [
+        "surge protective device",
+        "SPD coordination",
+        "residual overvoltage",
+        "short leads",
+        "bonding"
+      ],
+      "core_terms": [
+        "surge protective device",
+        "SPD coordination",
+        "residual overvoltage",
+        "short leads",
+        "bonding"
+      ],
+      "accepted_explanations": [
+        "Surge protection은 전원·신호 경로의 SPD를 설비의 접지·본딩 체계와 함께 조정하고 접속 리드의 임피던스를 줄여 잔류 과전압과 우회경로를 관리한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "Surge protection은 전원·신호 경로의 SPD를 설비의 접지·본딩 체계와 함께 조정하고 접속 리드의 임피던스를 줄여 잔류 과전압과 우회경로를 관리한다.",
+      "description": "ipgse_spd_coordination 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_power_quality_scope",
+      "anchor_id": "ipgse_power_quality_scope",
+      "statement": "계장 전원 진단은 nominal voltage만 보지 않고 sag, swell, interruption, transient, harmonic/noise, frequency와 전원 source transfer 조건을 증상 시간대와 연계한다.",
+      "importance": "core",
+      "keywords": [
+        "power quality",
+        "voltage sag",
+        "interruption transient",
+        "harmonic noise",
+        "source transfer"
+      ],
+      "core_terms": [
+        "power quality",
+        "voltage sag",
+        "interruption transient",
+        "harmonic noise",
+        "source transfer"
+      ],
+      "accepted_explanations": [
+        "계장 전원 진단은 nominal voltage만 보지 않고 sag, swell, interruption, transient, harmonic/noise, frequency와 전원 source transfer 조건을 증상 시간대와 연계한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "계장 전원 진단은 nominal voltage만 보지 않고 sag, swell, interruption, transient, harmonic/noise, frequency와 전원 source transfer 조건을 증상 시간대와 연계한다.",
+      "description": "ipgse_power_quality_scope 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_dc_supply_distribution",
+      "anchor_id": "ipgse_dc_supply_distribution",
+      "statement": "DC 계장 전원은 power-supply capacity, distribution voltage drop, fuse/branch selectivity, common return impedance와 load transient를 함께 검토해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "DC power supply",
+        "voltage drop",
+        "branch fuse",
+        "common return impedance",
+        "load transient"
+      ],
+      "core_terms": [
+        "DC power supply",
+        "voltage drop",
+        "branch fuse",
+        "common return impedance",
+        "load transient"
+      ],
+      "accepted_explanations": [
+        "DC 계장 전원은 power-supply capacity, distribution voltage drop, fuse/branch selectivity, common return impedance와 load transient를 함께 검토해야 한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "DC 계장 전원은 power-supply capacity, distribution voltage drop, fuse/branch selectivity, common return impedance와 load transient를 함께 검토해야 한다.",
+      "description": "ipgse_dc_supply_distribution 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_redundant_supply_boundary",
+      "anchor_id": "ipgse_redundant_supply_boundary",
+      "statement": "Redundant power supply는 단일 전원장치 고장에 대한 가용성을 높일 수 있지만 공통 입력전원, 공통 배선, ORing/diode module, 배터리와 분배반이 공통고장점이면 완전한 이중화가 아니다.",
+      "importance": "important",
+      "keywords": [
+        "redundant power supply",
+        "common cause",
+        "ORing",
+        "distribution common point",
+        "availability"
+      ],
+      "core_terms": [
+        "redundant power supply",
+        "common cause",
+        "ORing",
+        "distribution common point",
+        "availability"
+      ],
+      "accepted_explanations": [
+        "Redundant power supply는 단일 전원장치 고장에 대한 가용성을 높일 수 있지만 공통 입력전원, 공통 배선, ORing/diode module, 배터리와 분배반이 공통고장점이면 완전한 이중화가 아니다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "Redundant power supply는 단일 전원장치 고장에 대한 가용성을 높일 수 있지만 공통 입력전원, 공통 배선, ORing/diode module, 배터리와 분배반이 공통고장점이면 완전한 이중화가 아니다.",
+      "description": "ipgse_redundant_supply_boundary 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_ups_function_boundary",
+      "anchor_id": "ipgse_ups_function_boundary",
+      "statement": "UPS의 주 기능은 정전·전압이상 시 요구된 시간 동안 중요 계장 부하에 전원을 유지하는 것이며 모든 EMC, surge 또는 galvanic-isolation 문제를 자동으로 제거하는 장치는 아니다.",
+      "importance": "core",
+      "keywords": [
+        "UPS ride through",
+        "backup power",
+        "autonomy",
+        "EMC boundary",
+        "galvanic isolation boundary"
+      ],
+      "core_terms": [
+        "UPS ride through",
+        "backup power",
+        "autonomy",
+        "EMC boundary",
+        "galvanic isolation boundary"
+      ],
+      "accepted_explanations": [
+        "UPS의 주 기능은 정전·전압이상 시 요구된 시간 동안 중요 계장 부하에 전원을 유지하는 것이며 모든 EMC, surge 또는 galvanic-isolation 문제를 자동으로 제거하는 장치는 아니다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "UPS의 주 기능은 정전·전압이상 시 요구된 시간 동안 중요 계장 부하에 전원을 유지하는 것이며 모든 EMC, surge 또는 galvanic-isolation 문제를 자동으로 제거하는 장치는 아니다.",
+      "description": "ipgse_ups_function_boundary 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_ups_sizing_factors",
+      "anchor_id": "ipgse_ups_sizing_factors",
+      "statement": "UPS 선정은 실제 W와 VA, power factor, efficiency, inrush/crest 특성, autonomy time, redundancy, battery aging과 환경 derating을 함께 고려한다.",
+      "importance": "core",
+      "keywords": [
+        "UPS sizing",
+        "watt VA power factor",
+        "autonomy time",
+        "inrush crest factor",
+        "battery aging"
+      ],
+      "core_terms": [
+        "UPS sizing",
+        "watt VA power factor",
+        "autonomy time",
+        "inrush crest factor",
+        "battery aging"
+      ],
+      "accepted_explanations": [
+        "UPS 선정은 실제 W와 VA, power factor, efficiency, inrush/crest 특성, autonomy time, redundancy, battery aging과 환경 derating을 함께 고려한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "UPS 선정은 실제 W와 VA, power factor, efficiency, inrush/crest 특성, autonomy time, redundancy, battery aging과 환경 derating을 함께 고려한다.",
+      "description": "ipgse_ups_sizing_factors 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_ups_bypass_grounding",
+      "anchor_id": "ipgse_ups_bypass_grounding",
+      "statement": "UPS의 normal·battery·bypass 운전과 transfer 시 neutral/ground reference가 설비 접지 체계와 일관되는지 확인해야 하며 topology를 확인하지 않고 neutral을 임의 결선해서는 안 된다.",
+      "importance": "core",
+      "keywords": [
+        "UPS bypass",
+        "neutral grounding",
+        "transfer mode",
+        "ground reference",
+        "UPS topology"
+      ],
+      "core_terms": [
+        "UPS bypass",
+        "neutral grounding",
+        "transfer mode",
+        "ground reference",
+        "UPS topology"
+      ],
+      "accepted_explanations": [
+        "UPS의 normal·battery·bypass 운전과 transfer 시 neutral/ground reference가 설비 접지 체계와 일관되는지 확인해야 하며 topology를 확인하지 않고 neutral을 임의 결선해서는 안 된다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "UPS의 normal·battery·bypass 운전과 transfer 시 neutral/ground reference가 설비 접지 체계와 일관되는지 확인해야 하며 topology를 확인하지 않고 neutral을 임의 결선해서는 안 된다.",
+      "description": "ipgse_ups_bypass_grounding 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_symptom_frequency_correlation",
+      "anchor_id": "ipgse_symptom_frequency_correlation",
+      "statement": "50/60 Hz 계열 성분, VFD switching 관련 broadband noise, relay·contactor switching transient처럼 증상의 주파수·시간 상관관계는 원인 후보를 좁히는 진단 evidence로 사용한다.",
+      "importance": "important",
+      "keywords": [
+        "50 60 Hz hum",
+        "VFD switching noise",
+        "switching transient",
+        "spectrum correlation",
+        "time correlation"
+      ],
+      "core_terms": [
+        "50 60 Hz hum",
+        "VFD switching noise",
+        "switching transient",
+        "spectrum correlation",
+        "time correlation"
+      ],
+      "accepted_explanations": [
+        "50/60 Hz 계열 성분, VFD switching 관련 broadband noise, relay·contactor switching transient처럼 증상의 주파수·시간 상관관계는 원인 후보를 좁히는 진단 evidence로 사용한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "50/60 Hz 계열 성분, VFD switching 관련 broadband noise, relay·contactor switching transient처럼 증상의 주파수·시간 상관관계는 원인 후보를 좁히는 진단 evidence로 사용한다.",
+      "description": "ipgse_symptom_frequency_correlation 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_measurement_reference_safety",
+      "anchor_id": "ipgse_measurement_reference_safety",
+      "statement": "Ground-loop와 common-mode 진단에서는 측정기의 기준점과 입력 정격을 먼저 확인하고 적절한 차동 측정 수단을 사용하여 측정 자체가 새로운 접지 경로나 위험을 만들지 않게 한다.",
+      "importance": "core",
+      "keywords": [
+        "differential measurement",
+        "measurement reference",
+        "common mode rating",
+        "safe probing",
+        "measurement ground path"
+      ],
+      "core_terms": [
+        "differential measurement",
+        "measurement reference",
+        "common mode rating",
+        "safe probing",
+        "measurement ground path"
+      ],
+      "accepted_explanations": [
+        "Ground-loop와 common-mode 진단에서는 측정기의 기준점과 입력 정격을 먼저 확인하고 적절한 차동 측정 수단을 사용하여 측정 자체가 새로운 접지 경로나 위험을 만들지 않게 한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "Ground-loop와 common-mode 진단에서는 측정기의 기준점과 입력 정격을 먼저 확인하고 적절한 차동 측정 수단을 사용하여 측정 자체가 새로운 접지 경로나 위험을 만들지 않게 한다.",
+      "description": "ipgse_measurement_reference_safety 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_diagnostic_workflow",
+      "anchor_id": "ipgse_diagnostic_workflow",
+      "statement": "현장 진단은 symptom 재현·영향 범위 확인→전원/기준전위/공통모드 측정→coupling source와 path 분리→한 변수씩 대책 적용→운전 조건에서 재검증 순으로 수행한다.",
+      "importance": "core",
+      "keywords": [
+        "diagnostic workflow",
+        "symptom reproduction",
+        "coupling isolation",
+        "one change at a time",
+        "verification"
+      ],
+      "core_terms": [
+        "diagnostic workflow",
+        "symptom reproduction",
+        "coupling isolation",
+        "one change at a time",
+        "verification"
+      ],
+      "accepted_explanations": [
+        "현장 진단은 symptom 재현·영향 범위 확인→전원/기준전위/공통모드 측정→coupling source와 path 분리→한 변수씩 대책 적용→운전 조건에서 재검증 순으로 수행한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "현장 진단은 symptom 재현·영향 범위 확인→전원/기준전위/공통모드 측정→coupling source와 path 분리→한 변수씩 대책 적용→운전 조건에서 재검증 순으로 수행한다.",
+      "description": "ipgse_diagnostic_workflow 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_evidence_before_rewire",
+      "anchor_id": "ipgse_evidence_before_rewire",
+      "statement": "잡음 증상이 있다는 이유만으로 shield나 earth를 즉시 재결선하지 말고 before/after waveform, spectrum, event time, ground-potential difference와 operating-state evidence를 확보한다.",
+      "importance": "important",
+      "keywords": [
+        "before after evidence",
+        "waveform spectrum",
+        "ground potential difference",
+        "event correlation",
+        "rewiring control"
+      ],
+      "core_terms": [
+        "before after evidence",
+        "waveform spectrum",
+        "ground potential difference",
+        "event correlation",
+        "rewiring control"
+      ],
+      "accepted_explanations": [
+        "잡음 증상이 있다는 이유만으로 shield나 earth를 즉시 재결선하지 말고 before/after waveform, spectrum, event time, ground-potential difference와 operating-state evidence를 확보한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "잡음 증상이 있다는 이유만으로 shield나 earth를 즉시 재결선하지 말고 before/after waveform, spectrum, event time, ground-potential difference와 operating-state evidence를 확보한다.",
+      "description": "ipgse_evidence_before_rewire 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_topic2_boundary",
+      "anchor_id": "ipgse_topic2_boundary",
+      "statement": "Cable tray 시공, gland, terminal, impulse tubing, 설치 검사와 법규·기술기준의 상세 적용은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "installation wiring boundary",
+        "impulse tubing",
+        "inspection codes",
+        "cable tray gland",
+        "Topic 2 boundary"
+      ],
+      "core_terms": [
+        "installation wiring boundary",
+        "impulse tubing",
+        "inspection codes",
+        "cable tray gland",
+        "Topic 2 boundary"
+      ],
+      "accepted_explanations": [
+        "Cable tray 시공, gland, terminal, impulse tubing, 설치 검사와 법규·기술기준의 상세 적용은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "Cable tray 시공, gland, terminal, impulse tubing, 설치 검사와 법규·기술기준의 상세 적용은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유한다.",
+      "description": "ipgse_topic2_boundary 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_topic3_boundary",
+      "anchor_id": "ipgse_topic3_boundary",
+      "statement": "EMC emission/immunity qualification 시험의 test method·severity와 temperature, humidity, vibration qualification은 `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` Topic이 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "EMC qualification boundary",
+        "emission immunity test",
+        "temperature humidity vibration",
+        "severity level",
+        "Topic 3 boundary"
+      ],
+      "core_terms": [
+        "EMC qualification boundary",
+        "emission immunity test",
+        "temperature humidity vibration",
+        "severity level",
+        "Topic 3 boundary"
+      ],
+      "accepted_explanations": [
+        "EMC emission/immunity qualification 시험의 test method·severity와 temperature, humidity, vibration qualification은 `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` Topic이 소유한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "EMC emission/immunity qualification 시험의 test method·severity와 temperature, humidity, vibration qualification은 `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` Topic이 소유한다.",
+      "description": "ipgse_topic3_boundary 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_topic4_boundary",
+      "anchor_id": "ipgse_topic4_boundary",
+      "statement": "Panel architecture, component selection, hardware lifecycle, prototype·production verification의 전체 개발 절차는 `control_hardware_lifecycle_panel_architecture_component_selection_production_verification` Topic이 소유한다.",
+      "importance": "important",
+      "keywords": [
+        "hardware lifecycle boundary",
+        "panel architecture",
+        "component selection",
+        "production verification",
+        "Topic 4 boundary"
+      ],
+      "core_terms": [
+        "hardware lifecycle boundary",
+        "panel architecture",
+        "component selection",
+        "production verification",
+        "Topic 4 boundary"
+      ],
+      "accepted_explanations": [
+        "Panel architecture, component selection, hardware lifecycle, prototype·production verification의 전체 개발 절차는 `control_hardware_lifecycle_panel_architecture_component_selection_production_verification` Topic이 소유한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "Panel architecture, component selection, hardware lifecycle, prototype·production verification의 전체 개발 절차는 `control_hardware_lifecycle_panel_architecture_component_selection_production_verification` Topic이 소유한다.",
+      "description": "ipgse_topic4_boundary 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_topic5_boundary",
+      "anchor_id": "ipgse_topic5_boundary",
+      "statement": "전자회로 내부의 noise, drift, tolerance, aging과 power variation이 측정 오차로 전파되는 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유한다.",
+      "importance": "core",
+      "keywords": [
+        "electronics error boundary",
+        "noise drift tolerance aging",
+        "component error chain",
+        "power variation",
+        "Topic 5 boundary"
+      ],
+      "core_terms": [
+        "electronics error boundary",
+        "noise drift tolerance aging",
+        "component error chain",
+        "power variation",
+        "Topic 5 boundary"
+      ],
+      "accepted_explanations": [
+        "전자회로 내부의 noise, drift, tolerance, aging과 power variation이 측정 오차로 전파되는 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "전자회로 내부의 noise, drift, tolerance, aging과 power variation이 측정 오차로 전파되는 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유한다.",
+      "description": "ipgse_topic5_boundary 계약을 평가한다."
+    },
+    {
+      "id": "ipgse_final_verification",
+      "anchor_id": "ipgse_final_verification",
+      "statement": "대책 완료 후에는 정상·과도 운전, UPS transfer, 주요 noise-source on/off 조건에서 신호 품질과 alarm/event를 재확인하여 원인 제거와 부작용 부재를 closed-loop로 검증한다.",
+      "importance": "core",
+      "keywords": [
+        "final verification",
+        "UPS transfer test",
+        "noise source on off",
+        "signal quality",
+        "closed loop verification"
+      ],
+      "core_terms": [
+        "final verification",
+        "UPS transfer test",
+        "noise source on off",
+        "signal quality",
+        "closed loop verification"
+      ],
+      "accepted_explanations": [
+        "대책 완료 후에는 정상·과도 운전, UPS transfer, 주요 noise-source on/off 조건에서 신호 품질과 alarm/event를 재확인하여 원인 제거와 부작용 부재를 closed-loop로 검증한다.",
+        "전원·기준전위→접지·본딩→차폐·결합경로→ground-loop/EMI evidence→UPS·EMC 대책→현장 재검증의 인과관계를 설명한다."
+      ],
+      "rejected_explanations": [
+        "안전 접지를 임의 해제하거나 모든 주파수·모든 설비에 하나의 접지·차폐 규칙을 절대 규칙으로 적용한다."
+      ],
+      "grading_notes": "원인, coupling path, 안전 경계, 현장 확인과 대책 후 검증을 연결하는지 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md; repository exam-scope criterion IC-2027-W-2-6; instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals. Historical frequency is not asserted.",
+      "claim": "대책 완료 후에는 정상·과도 운전, UPS transfer, 주요 noise-source on/off 조건에서 신호 품질과 alarm/event를 재확인하여 원인 제거와 부작용 부재를 closed-loop로 검증한다.",
+      "description": "ipgse_final_verification 계약을 평가한다."
+    }
+  ],
+  "core_facts": [
+    "계장 신호 건전성은 전원 품질, 기준전위, 접지·본딩, 차폐, 배선 결합경로, UPS와 EMC 대책을 하나의 원인-경로-피해기기 체인으로 진단해야 한다.",
+    "보호접지(PE)는 감전·고장전류 안전 경로이고 signal/reference ground는 계측 기준전위이므로 목적을 구분하며, 잡음 저감을 이유로 보호접지를 임의 해제해서는 안 된다.",
+    "본딩은 설비 간 전위차와 공통 임피던스를 줄이는 수단이며 고주파에서는 도체의 저항뿐 아니라 인덕턴스와 접속 길이·형상이 중요하다.",
+    "Single-point와 multi-point grounding은 주파수, 시스템 규모, 공통모드 전류와 구조에 따라 선택하며 어느 한 방식이 모든 계장 시스템에 항상 우월하지 않다.",
+    "Ground loop는 둘 이상의 도전성 귀로가 형성되고 지점 간 전위차가 존재할 때 순환전류가 흘러 신호 기준전위를 교란하는 현상으로 해석한다.",
+    "Ground-loop 대책은 신호 경로의 불필요한 다중 귀로를 제거하고 절연·차동입력·적절한 차폐 접속을 적용하되 PE 같은 안전 접지를 제거하는 방식으로 해결하지 않는다.",
+    "계장 잡음은 differential-mode와 common-mode 성분을 구분해야 하며 차동입력의 CMRR, 절연, 필터와 본딩 대책의 효과는 결합 모드에 따라 달라진다.",
+    "Cable shield와 drain wire는 전자기 결합을 줄이기 위한 경로이며 보호접지 도체나 정상 부하전류의 귀로를 대신해서는 안 된다.",
+    "저주파 아날로그 회로의 loop-current 억제와 고주파 EMC의 낮은 임피던스 종단 요구는 다르므로 shield의 one-end 또는 both-end/360-degree termination은 주파수와 본딩 조건에 따라 결정한다.",
+    "EMI는 conducted, radiated, capacitive, inductive, common-impedance coupling으로 유입될 수 있으므로 source-path-victim 관점에서 경로를 식별한다.",
+    "EMC 대책은 source의 발생 저감, coupling path의 차단·감쇠, victim의 내성 향상을 조합하며 단일 필터나 단일 접지 변경만으로 모든 문제를 해결한다고 가정하지 않는다.",
+    "계장 전원 진단은 nominal voltage만 보지 않고 sag, swell, interruption, transient, harmonic/noise, frequency와 전원 source transfer 조건을 증상 시간대와 연계한다.",
+    "UPS의 주 기능은 정전·전압이상 시 요구된 시간 동안 중요 계장 부하에 전원을 유지하는 것이며 모든 EMC, surge 또는 galvanic-isolation 문제를 자동으로 제거하는 장치는 아니다.",
+    "UPS 선정은 실제 W와 VA, power factor, efficiency, inrush/crest 특성, autonomy time, redundancy, battery aging과 환경 derating을 함께 고려한다.",
+    "UPS의 normal·battery·bypass 운전과 transfer 시 neutral/ground reference가 설비 접지 체계와 일관되는지 확인해야 하며 topology를 확인하지 않고 neutral을 임의 결선해서는 안 된다.",
+    "Ground-loop와 common-mode 진단에서는 측정기의 기준점과 입력 정격을 먼저 확인하고 적절한 차동 측정 수단을 사용하여 측정 자체가 새로운 접지 경로나 위험을 만들지 않게 한다.",
+    "현장 진단은 symptom 재현·영향 범위 확인→전원/기준전위/공통모드 측정→coupling source와 path 분리→한 변수씩 대책 적용→운전 조건에서 재검증 순으로 수행한다.",
+    "Cable tray 시공, gland, terminal, impulse tubing, 설치 검사와 법규·기술기준의 상세 적용은 `instrumentation_installation_wiring_impulse_tubing_inspection_codes` Topic이 소유한다.",
+    "EMC emission/immunity qualification 시험의 test method·severity와 temperature, humidity, vibration qualification은 `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` Topic이 소유한다.",
+    "전자회로 내부의 noise, drift, tolerance, aging과 power variation이 측정 오차로 전파되는 component-level error chain은 `electronics_error_noise_drift_tolerance_aging_power_mitigation` Topic이 소유한다.",
+    "대책 완료 후에는 정상·과도 운전, UPS transfer, 주요 noise-source on/off 조건에서 신호 품질과 alarm/event를 재확인하여 원인 제거와 부작용 부재를 closed-loop로 검증한다."
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "ipgse_remove_pe_to_fix_noise",
+      "claim": "잡음 제거를 위해 보호접지(PE)를 끊으면 된다는 주장은 오답이다.",
+      "wrong_claim": "잡음 제거를 위해 보호접지(PE)를 끊으면 된다는 주장은 오답이다.",
+      "correction": "PE는 안전 기능을 유지하고 signal-loop 절연, 본딩, 차폐와 coupling-path 개선으로 잡음을 해결한다.",
+      "correct_rule": "PE는 안전 기능을 유지하고 signal-loop 절연, 본딩, 차폐와 coupling-path 개선으로 잡음을 해결한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "계장 전원·접지·차폐 핵심 오류: 잡음 제거를 위해 보호접지(PE)를 끊으면 된다는 주장은 오답이다.",
+      "description": "PE는 안전 기능을 유지하고 signal-loop 절연, 본딩, 차폐와 coupling-path 개선으로 잡음을 해결한다.",
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ipgse_single_point_always_best",
+      "claim": "Single-point grounding이 모든 주파수와 모든 설비에서 항상 최선이라는 주장은 오답이다.",
+      "wrong_claim": "Single-point grounding이 모든 주파수와 모든 설비에서 항상 최선이라는 주장은 오답이다.",
+      "correction": "Grounding topology는 주파수, 크기, 공통모드 전류, 본딩 구조에 따라 결정한다.",
+      "correct_rule": "Grounding topology는 주파수, 크기, 공통모드 전류, 본딩 구조에 따라 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "계장 전원·접지·차폐 핵심 오류: Single-point grounding이 모든 주파수와 모든 설비에서 항상 최선이라는 주장은 오답이다.",
+      "description": "Grounding topology는 주파수, 크기, 공통모드 전류, 본딩 구조에 따라 결정한다.",
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ipgse_shield_always_one_end",
+      "claim": "모든 cable shield는 반드시 한쪽 끝만 접지해야 한다는 주장은 오답이다.",
+      "wrong_claim": "모든 cable shield는 반드시 한쪽 끝만 접지해야 한다는 주장은 오답이다.",
+      "correction": "저주파 loop-current 억제와 고주파 EMC 요구가 다르므로 cable·frequency·bonding 조건에 따라 termination을 결정한다.",
+      "correct_rule": "저주파 loop-current 억제와 고주파 EMC 요구가 다르므로 cable·frequency·bonding 조건에 따라 termination을 결정한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "계장 전원·접지·차폐 핵심 오류: 모든 cable shield는 반드시 한쪽 끝만 접지해야 한다는 주장은 오답이다.",
+      "description": "저주파 loop-current 억제와 고주파 EMC 요구가 다르므로 cable·frequency·bonding 조건에 따라 termination을 결정한다.",
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ipgse_shield_replaces_pe",
+      "claim": "Cable shield가 보호접지 도체를 대신할 수 있다는 주장은 오답이다.",
+      "wrong_claim": "Cable shield가 보호접지 도체를 대신할 수 있다는 주장은 오답이다.",
+      "correction": "Shield와 PE의 기능을 분리하며 shield를 정상 load/fault-current 안전도체로 사용하지 않는다.",
+      "correct_rule": "Shield와 PE의 기능을 분리하며 shield를 정상 load/fault-current 안전도체로 사용하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "계장 전원·접지·차폐 핵심 오류: Cable shield가 보호접지 도체를 대신할 수 있다는 주장은 오답이다.",
+      "description": "Shield와 PE의 기능을 분리하며 shield를 정상 load/fault-current 안전도체로 사용하지 않는다.",
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ipgse_ups_solves_all_emc",
+      "claim": "UPS를 설치하면 surge, ground loop, EMI와 galvanic-isolation 문제가 모두 제거된다는 주장은 오답이다.",
+      "wrong_claim": "UPS를 설치하면 surge, ground loop, EMI와 galvanic-isolation 문제가 모두 제거된다는 주장은 오답이다.",
+      "correction": "UPS는 ride-through가 중심이며 grounding, surge, filtering, shielding, isolation은 별도 설계·검증한다.",
+      "correct_rule": "UPS는 ride-through가 중심이며 grounding, surge, filtering, shielding, isolation은 별도 설계·검증한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "계장 전원·접지·차폐 핵심 오류: UPS를 설치하면 surge, ground loop, EMI와 galvanic-isolation 문제가 모두 제거된다는 주장은 오답이다.",
+      "description": "UPS는 ride-through가 중심이며 grounding, surge, filtering, shielding, isolation은 별도 설계·검증한다.",
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ipgse_redundancy_no_common_cause",
+      "claim": "Power supply 두 대를 병렬로 두면 공통고장과 무관하게 완전 이중화가 된다는 주장은 오답이다.",
+      "wrong_claim": "Power supply 두 대를 병렬로 두면 공통고장과 무관하게 완전 이중화가 된다는 주장은 오답이다.",
+      "correction": "입력전원·분배·ORing·배선·battery 등 common point를 함께 분석해야 한다.",
+      "correct_rule": "입력전원·분배·ORing·배선·battery 등 common point를 함께 분석해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "계장 전원·접지·차폐 핵심 오류: Power supply 두 대를 병렬로 두면 공통고장과 무관하게 완전 이중화가 된다는 주장은 오답이다.",
+      "description": "입력전원·분배·ORing·배선·battery 등 common point를 함께 분석해야 한다.",
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ipgse_ground_loop_only_resistance",
+      "claim": "Ground-loop 문제는 도체 저항만 낮추면 항상 해결된다는 주장은 오답이다.",
+      "wrong_claim": "Ground-loop 문제는 도체 저항만 낮추면 항상 해결된다는 주장은 오답이다.",
+      "correction": "다중 귀로와 전위차, common-mode path, 주파수 의존 임피던스와 본딩을 함께 본다.",
+      "correct_rule": "다중 귀로와 전위차, common-mode path, 주파수 의존 임피던스와 본딩을 함께 본다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "계장 전원·접지·차폐 핵심 오류: Ground-loop 문제는 도체 저항만 낮추면 항상 해결된다는 주장은 오답이다.",
+      "description": "다중 귀로와 전위차, common-mode path, 주파수 의존 임피던스와 본딩을 함께 본다.",
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ipgse_emc_single_countermeasure",
+      "claim": "EMC 문제는 filter 하나 또는 earth 한 지점 변경만으로 항상 해결된다는 주장은 오답이다.",
+      "wrong_claim": "EMC 문제는 filter 하나 또는 earth 한 지점 변경만으로 항상 해결된다는 주장은 오답이다.",
+      "correction": "Source-path-victim을 분리하여 발생원·결합경로·victim 내성 대책을 조합한다.",
+      "correct_rule": "Source-path-victim을 분리하여 발생원·결합경로·victim 내성 대책을 조합한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "계장 전원·접지·차폐 핵심 오류: EMC 문제는 filter 하나 또는 earth 한 지점 변경만으로 항상 해결된다는 주장은 오답이다.",
+      "description": "Source-path-victim을 분리하여 발생원·결합경로·victim 내성 대책을 조합한다.",
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+    },
+    {
+      "id": "ipgse_rewire_without_evidence",
+      "claim": "노이즈가 보이면 측정 없이 shield와 earth를 먼저 재결선하는 것이 표준 진단 절차라는 주장은 오답이다.",
+      "wrong_claim": "노이즈가 보이면 측정 없이 shield와 earth를 먼저 재결선하는 것이 표준 진단 절차라는 주장은 오답이다.",
+      "correction": "증상·파형·event·전위차와 operating-state evidence를 먼저 확보하고 한 변수씩 변경한다.",
+      "correct_rule": "증상·파형·event·전위차와 operating-state evidence를 먼저 확보하고 한 변수씩 변경한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "계장 전원·접지·차폐 핵심 오류: 노이즈가 보이면 측정 없이 shield와 earth를 먼저 재결선하는 것이 표준 진단 절차라는 주장은 오답이다.",
+      "description": "증상·파형·event·전위차와 operating-state evidence를 먼저 확보하고 한 변수씩 변경한다.",
+      "grading_notes": "대표 오답 인용이 아니라 응시자의 실제 단정인지 문맥을 확인한 뒤 적용한다."
+    }
+  ],
+  "safe_expressions": [
+    "보호접지는 유지한 상태에서 signal-loop와 EMC 경로를 개선한다.",
+    "Shield termination은 주파수·본딩·cable 구조에 따라 결정한다.",
+    "Single-point와 multi-point grounding은 적용 조건을 비교한다.",
+    "UPS는 ride-through 수단이며 모든 EMC 문제의 만능 해법은 아니다.",
+    "Ground-loop 진단은 전위차·다중 귀로·common-mode evidence를 확인한다.",
+    "대책 전후를 동일 operating condition에서 재검증한다."
+  ],
+  "revision_notes": [
+    "IC-2027-W-2-6 전원/접지 criterion을 직접 소유한다.",
+    "Historical frequency를 사용하지 않고 scope와 engineering relevance로 구성했다.",
+    "Lane A Topic 2~5 ownership 경계를 명시했다."
+  ],
+  "topic_label": "계장 전원·접지·차폐·UPS·Ground Loop·EMC"
+}
