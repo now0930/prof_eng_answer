@@ -1,0 +1,914 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+  "title_ko": "P&ID 배관계장도 기호·태그·제어루프·관련 문서와 설계 검토",
+  "question_type_hint": "IMPLEMENTATION_EVALUATION",
+  "anchors": [
+    {
+      "id": "pid_definition_scope",
+      "anchor_id": "pid_definition_scope",
+      "statement": "P&ID(Piping and Instrumentation Diagram)는 공정 장비, 배관, 밸브, 계기와 주요 제어·신호 관계를 연계하여 설계·시공·운전 정보를 전달하는 배관계장도이다.",
+      "importance": "must",
+      "keywords": [
+        "P&ID",
+        "배관계장도",
+        "계기"
+      ],
+      "core_terms": [
+        "P&ID",
+        "배관계장도",
+        "계기"
+      ],
+      "accepted_explanations": [
+        "P&ID(Piping and Instrumentation Diagram)는 공정 장비, 배관, 밸브, 계기와 주요 제어·신호 관계를 연계하여 설계·시공·운전 정보를 전달하는 배관계장도이다."
+      ],
+      "rejected_explanations": [
+        "P&ID의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "P&ID(Piping and Instrumentation Diagram)는 공정 장비, 배관, 밸브, 계기와 주요 제어·신호 관계를 연계하여 설계·시공·운전 정보를 전달하는 배관계장도이다.",
+      "description": "P&ID(Piping and Instrumentation Diagram)는 공정 장비, 배관, 밸브, 계기와 주요 제어·신호 관계를 연계하여 설계·시공·운전 정보를 전달하는 배관계장도이다."
+    },
+    {
+      "id": "pid_not_pid_controller",
+      "anchor_id": "pid_not_pid_controller",
+      "statement": "P&ID의 도면 문맥은 PID 제어기의 P·I·D 동작 및 튜닝 주제와 구분하며 bare PID 문자열만으로 두 주제를 동일시하지 않는다.",
+      "importance": "must",
+      "keywords": [
+        "P&ID",
+        "PID controller",
+        "routing"
+      ],
+      "core_terms": [
+        "P&ID",
+        "PID controller",
+        "routing"
+      ],
+      "accepted_explanations": [
+        "P&ID의 도면 문맥은 PID 제어기의 P·I·D 동작 및 튜닝 주제와 구분하며 bare PID 문자열만으로 두 주제를 동일시하지 않는다."
+      ],
+      "rejected_explanations": [
+        "P&ID의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "P&ID의 도면 문맥은 PID 제어기의 P·I·D 동작 및 튜닝 주제와 구분하며 bare PID 문자열만으로 두 주제를 동일시하지 않는다.",
+      "description": "P&ID의 도면 문맥은 PID 제어기의 P·I·D 동작 및 튜닝 주제와 구분하며 bare PID 문자열만으로 두 주제를 동일시하지 않는다."
+    },
+    {
+      "id": "pfd_pid_difference",
+      "anchor_id": "pfd_pid_difference",
+      "statement": "PFD는 주요 공정흐름과 물질·에너지 관계를 중심으로 표현하고 P&ID는 배관 상세, 밸브, 계기와 제어 연결을 더 구체화하므로 목적과 상세도가 다르다.",
+      "importance": "must",
+      "keywords": [
+        "PFD",
+        "P&ID",
+        "상세도"
+      ],
+      "core_terms": [
+        "PFD",
+        "P&ID",
+        "상세도"
+      ],
+      "accepted_explanations": [
+        "PFD는 주요 공정흐름과 물질·에너지 관계를 중심으로 표현하고 P&ID는 배관 상세, 밸브, 계기와 제어 연결을 더 구체화하므로 목적과 상세도가 다르다."
+      ],
+      "rejected_explanations": [
+        "PFD의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "PFD는 주요 공정흐름과 물질·에너지 관계를 중심으로 표현하고 P&ID는 배관 상세, 밸브, 계기와 제어 연결을 더 구체화하므로 목적과 상세도가 다르다.",
+      "description": "PFD는 주요 공정흐름과 물질·에너지 관계를 중심으로 표현하고 P&ID는 배관 상세, 밸브, 계기와 제어 연결을 더 구체화하므로 목적과 상세도가 다르다."
+    },
+    {
+      "id": "pid_not_physical_layout",
+      "anchor_id": "pid_not_physical_layout",
+      "statement": "P&ID는 일반적으로 실제 배관의 정확한 공간 배치·길이·축척을 표현하는 설치배치도가 아니며 물리적 위치는 layout·plot plan·piping drawing 등 별도 문서와 함께 확인한다.",
+      "importance": "must",
+      "keywords": [
+        "P&ID",
+        "layout",
+        "축척"
+      ],
+      "core_terms": [
+        "P&ID",
+        "layout",
+        "축척"
+      ],
+      "accepted_explanations": [
+        "P&ID는 일반적으로 실제 배관의 정확한 공간 배치·길이·축척을 표현하는 설치배치도가 아니며 물리적 위치는 layout·plot plan·piping drawing 등 별도 문서와 함께 확인한다."
+      ],
+      "rejected_explanations": [
+        "P&ID의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "P&ID는 일반적으로 실제 배관의 정확한 공간 배치·길이·축척을 표현하는 설치배치도가 아니며 물리적 위치는 layout·plot plan·piping drawing 등 별도 문서와 함께 확인한다.",
+      "description": "P&ID는 일반적으로 실제 배관의 정확한 공간 배치·길이·축척을 표현하는 설치배치도가 아니며 물리적 위치는 layout·plot plan·piping drawing 등 별도 문서와 함께 확인한다."
+    },
+    {
+      "id": "equipment_and_piping_representation",
+      "anchor_id": "equipment_and_piping_representation",
+      "statement": "P&ID에는 주요 장비와 연결 배관, line identification, size·spec 또는 프로젝트가 정한 배관 속성, isolation·drain·vent 등 필요한 요소를 프로젝트 기준에 따라 표시한다.",
+      "importance": "must",
+      "keywords": [
+        "equipment",
+        "piping",
+        "line identification"
+      ],
+      "core_terms": [
+        "equipment",
+        "piping",
+        "line identification"
+      ],
+      "accepted_explanations": [
+        "P&ID에는 주요 장비와 연결 배관, line identification, size·spec 또는 프로젝트가 정한 배관 속성, isolation·drain·vent 등 필요한 요소를 프로젝트 기준에 따라 표시한다."
+      ],
+      "rejected_explanations": [
+        "equipment의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "P&ID에는 주요 장비와 연결 배관, line identification, size·spec 또는 프로젝트가 정한 배관 속성, isolation·drain·vent 등 필요한 요소를 프로젝트 기준에 따라 표시한다.",
+      "description": "P&ID에는 주요 장비와 연결 배관, line identification, size·spec 또는 프로젝트가 정한 배관 속성, isolation·drain·vent 등 필요한 요소를 프로젝트 기준에 따라 표시한다."
+    },
+    {
+      "id": "valve_function_distinction",
+      "anchor_id": "valve_function_distinction",
+      "statement": "P&ID의 밸브 기호는 isolation, check, control, relief 등 기능이 서로 다르므로 모든 밸브를 제어밸브로 해석하지 않고 기호·tag·legend를 함께 확인한다.",
+      "importance": "must",
+      "keywords": [
+        "valve",
+        "control valve",
+        "legend"
+      ],
+      "core_terms": [
+        "valve",
+        "control valve",
+        "legend"
+      ],
+      "accepted_explanations": [
+        "P&ID의 밸브 기호는 isolation, check, control, relief 등 기능이 서로 다르므로 모든 밸브를 제어밸브로 해석하지 않고 기호·tag·legend를 함께 확인한다."
+      ],
+      "rejected_explanations": [
+        "valve의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "P&ID의 밸브 기호는 isolation, check, control, relief 등 기능이 서로 다르므로 모든 밸브를 제어밸브로 해석하지 않고 기호·tag·legend를 함께 확인한다.",
+      "description": "P&ID의 밸브 기호는 isolation, check, control, relief 등 기능이 서로 다르므로 모든 밸브를 제어밸브로 해석하지 않고 기호·tag·legend를 함께 확인한다."
+    },
+    {
+      "id": "instrument_tag_function_letters",
+      "anchor_id": "instrument_tag_function_letters",
+      "statement": "계기 Tag는 문자와 번호 조합으로 측정변수와 기능 및 loop 식별을 표현하며 실제 문자 의미와 numbering rule은 적용 표준과 프로젝트 legend를 따라 해석한다.",
+      "importance": "must",
+      "keywords": [
+        "instrument tag",
+        "function letters",
+        "loop number"
+      ],
+      "core_terms": [
+        "instrument tag",
+        "function letters",
+        "loop number"
+      ],
+      "accepted_explanations": [
+        "계기 Tag는 문자와 번호 조합으로 측정변수와 기능 및 loop 식별을 표현하며 실제 문자 의미와 numbering rule은 적용 표준과 프로젝트 legend를 따라 해석한다."
+      ],
+      "rejected_explanations": [
+        "instrument tag의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "계기 Tag는 문자와 번호 조합으로 측정변수와 기능 및 loop 식별을 표현하며 실제 문자 의미와 numbering rule은 적용 표준과 프로젝트 legend를 따라 해석한다.",
+      "description": "계기 Tag는 문자와 번호 조합으로 측정변수와 기능 및 loop 식별을 표현하며 실제 문자 의미와 numbering rule은 적용 표준과 프로젝트 legend를 따라 해석한다."
+    },
+    {
+      "id": "loop_number_identity",
+      "anchor_id": "loop_number_identity",
+      "statement": "Loop number는 같은 제어·측정 기능에 속한 기기들을 연계하는 식별자로 사용할 수 있지만 번호 구성 방식은 프로젝트 numbering convention을 확인한다.",
+      "importance": "important",
+      "keywords": [
+        "loop number",
+        "numbering convention",
+        "instrument loop"
+      ],
+      "core_terms": [
+        "loop number",
+        "numbering convention",
+        "instrument loop"
+      ],
+      "accepted_explanations": [
+        "Loop number는 같은 제어·측정 기능에 속한 기기들을 연계하는 식별자로 사용할 수 있지만 번호 구성 방식은 프로젝트 numbering convention을 확인한다."
+      ],
+      "rejected_explanations": [
+        "loop number의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "Loop number는 같은 제어·측정 기능에 속한 기기들을 연계하는 식별자로 사용할 수 있지만 번호 구성 방식은 프로젝트 numbering convention을 확인한다.",
+      "description": "Loop number는 같은 제어·측정 기능에 속한 기기들을 연계하는 식별자로 사용할 수 있지만 번호 구성 방식은 프로젝트 numbering convention을 확인한다."
+    },
+    {
+      "id": "instrument_symbol_location_convention",
+      "anchor_id": "instrument_symbol_location_convention",
+      "statement": "계기 원형 symbol과 내부·외부 선 표기는 field, panel, control room 등 위치 또는 접근성을 나타낼 수 있으나 정확한 의미는 해당 도면 legend와 적용 표준을 기준으로 판독한다.",
+      "importance": "must",
+      "keywords": [
+        "instrument bubble",
+        "location",
+        "legend"
+      ],
+      "core_terms": [
+        "instrument bubble",
+        "location",
+        "legend"
+      ],
+      "accepted_explanations": [
+        "계기 원형 symbol과 내부·외부 선 표기는 field, panel, control room 등 위치 또는 접근성을 나타낼 수 있으나 정확한 의미는 해당 도면 legend와 적용 표준을 기준으로 판독한다."
+      ],
+      "rejected_explanations": [
+        "instrument bubble의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "계기 원형 symbol과 내부·외부 선 표기는 field, panel, control room 등 위치 또는 접근성을 나타낼 수 있으나 정확한 의미는 해당 도면 legend와 적용 표준을 기준으로 판독한다.",
+      "description": "계기 원형 symbol과 내부·외부 선 표기는 field, panel, control room 등 위치 또는 접근성을 나타낼 수 있으나 정확한 의미는 해당 도면 legend와 적용 표준을 기준으로 판독한다."
+    },
+    {
+      "id": "signal_line_legend",
+      "anchor_id": "signal_line_legend",
+      "statement": "실선·파선·점선 등 signal/connection line의 의미는 pneumatic, electrical, data, capillary 등 연결 형태를 표현할 수 있으나 선종만으로 보편적 의미를 단정하지 않고 legend를 확인한다.",
+      "importance": "must",
+      "keywords": [
+        "signal line",
+        "pneumatic",
+        "electrical"
+      ],
+      "core_terms": [
+        "signal line",
+        "pneumatic",
+        "electrical"
+      ],
+      "accepted_explanations": [
+        "실선·파선·점선 등 signal/connection line의 의미는 pneumatic, electrical, data, capillary 등 연결 형태를 표현할 수 있으나 선종만으로 보편적 의미를 단정하지 않고 legend를 확인한다."
+      ],
+      "rejected_explanations": [
+        "signal line의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "실선·파선·점선 등 signal/connection line의 의미는 pneumatic, electrical, data, capillary 등 연결 형태를 표현할 수 있으나 선종만으로 보편적 의미를 단정하지 않고 legend를 확인한다.",
+      "description": "실선·파선·점선 등 signal/connection line의 의미는 pneumatic, electrical, data, capillary 등 연결 형태를 표현할 수 있으나 선종만으로 보편적 의미를 단정하지 않고 legend를 확인한다."
+    },
+    {
+      "id": "measurement_loop_chain",
+      "anchor_id": "measurement_loop_chain",
+      "statement": "측정 loop는 process tapping·sensor 또는 primary element·transmitter·indication/recording/controller 등 신호 흐름과 기능 관계를 P&ID에서 추적할 수 있어야 한다.",
+      "importance": "must",
+      "keywords": [
+        "measurement loop",
+        "transmitter",
+        "process tapping"
+      ],
+      "core_terms": [
+        "measurement loop",
+        "transmitter",
+        "process tapping"
+      ],
+      "accepted_explanations": [
+        "측정 loop는 process tapping·sensor 또는 primary element·transmitter·indication/recording/controller 등 신호 흐름과 기능 관계를 P&ID에서 추적할 수 있어야 한다."
+      ],
+      "rejected_explanations": [
+        "measurement loop의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "측정 loop는 process tapping·sensor 또는 primary element·transmitter·indication/recording/controller 등 신호 흐름과 기능 관계를 P&ID에서 추적할 수 있어야 한다.",
+      "description": "측정 loop는 process tapping·sensor 또는 primary element·transmitter·indication/recording/controller 등 신호 흐름과 기능 관계를 P&ID에서 추적할 수 있어야 한다."
+    },
+    {
+      "id": "feedback_control_loop_chain",
+      "anchor_id": "feedback_control_loop_chain",
+      "statement": "Feedback control loop는 process variable 측정, controller 판단, final control element 조작의 기능 연결을 P&ID에서 판독하되 tuning 상세는 별도 PID controller Topic이 소유한다.",
+      "importance": "must",
+      "keywords": [
+        "feedback loop",
+        "controller",
+        "final control element"
+      ],
+      "core_terms": [
+        "feedback loop",
+        "controller",
+        "final control element"
+      ],
+      "accepted_explanations": [
+        "Feedback control loop는 process variable 측정, controller 판단, final control element 조작의 기능 연결을 P&ID에서 판독하되 tuning 상세는 별도 PID controller Topic이 소유한다."
+      ],
+      "rejected_explanations": [
+        "feedback loop의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "Feedback control loop는 process variable 측정, controller 판단, final control element 조작의 기능 연결을 P&ID에서 판독하되 tuning 상세는 별도 PID controller Topic이 소유한다.",
+      "description": "Feedback control loop는 process variable 측정, controller 판단, final control element 조작의 기능 연결을 P&ID에서 판독하되 tuning 상세는 별도 PID controller Topic이 소유한다."
+    },
+    {
+      "id": "control_valve_pid_representation",
+      "anchor_id": "control_valve_pid_representation",
+      "statement": "Control valve는 valve body와 actuator·positioner 등의 표기 및 controller output과의 연결을 P&ID에서 확인하고 fail action·accessory 상세는 tag, note, datasheet와 프로젝트 convention을 함께 본다.",
+      "importance": "must",
+      "keywords": [
+        "control valve",
+        "actuator",
+        "fail action"
+      ],
+      "core_terms": [
+        "control valve",
+        "actuator",
+        "fail action"
+      ],
+      "accepted_explanations": [
+        "Control valve는 valve body와 actuator·positioner 등의 표기 및 controller output과의 연결을 P&ID에서 확인하고 fail action·accessory 상세는 tag, note, datasheet와 프로젝트 convention을 함께 본다."
+      ],
+      "rejected_explanations": [
+        "control valve의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "Control valve는 valve body와 actuator·positioner 등의 표기 및 controller output과의 연결을 P&ID에서 확인하고 fail action·accessory 상세는 tag, note, datasheet와 프로젝트 convention을 함께 본다.",
+      "description": "Control valve는 valve body와 actuator·positioner 등의 표기 및 controller output과의 연결을 P&ID에서 확인하고 fail action·accessory 상세는 tag, note, datasheet와 프로젝트 convention을 함께 본다."
+    },
+    {
+      "id": "alarm_trip_interlock_boundary",
+      "anchor_id": "alarm_trip_interlock_boundary",
+      "statement": "Alarm, trip, permissive, interlock은 P&ID에 기능적으로 표시될 수 있지만 sequence와 Boolean logic의 전체 상세는 Cause & Effect, logic diagram 또는 control narrative로 분리될 수 있다.",
+      "importance": "must",
+      "keywords": [
+        "alarm",
+        "trip",
+        "interlock"
+      ],
+      "core_terms": [
+        "alarm",
+        "trip",
+        "interlock"
+      ],
+      "accepted_explanations": [
+        "Alarm, trip, permissive, interlock은 P&ID에 기능적으로 표시될 수 있지만 sequence와 Boolean logic의 전체 상세는 Cause & Effect, logic diagram 또는 control narrative로 분리될 수 있다."
+      ],
+      "rejected_explanations": [
+        "alarm의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "Alarm, trip, permissive, interlock은 P&ID에 기능적으로 표시될 수 있지만 sequence와 Boolean logic의 전체 상세는 Cause & Effect, logic diagram 또는 control narrative로 분리될 수 있다.",
+      "description": "Alarm, trip, permissive, interlock은 P&ID에 기능적으로 표시될 수 있지만 sequence와 Boolean logic의 전체 상세는 Cause & Effect, logic diagram 또는 control narrative로 분리될 수 있다."
+    },
+    {
+      "id": "pid_control_narrative_relation",
+      "anchor_id": "pid_control_narrative_relation",
+      "statement": "Control narrative는 제어 목적, 정상·비정상 동작, mode, setpoint·override·shutdown 철학을 문장으로 보완하며 P&ID의 기호 연결만으로 모든 운전 의도를 대체하지 않는다.",
+      "importance": "must",
+      "keywords": [
+        "control narrative",
+        "mode",
+        "shutdown"
+      ],
+      "core_terms": [
+        "control narrative",
+        "mode",
+        "shutdown"
+      ],
+      "accepted_explanations": [
+        "Control narrative는 제어 목적, 정상·비정상 동작, mode, setpoint·override·shutdown 철학을 문장으로 보완하며 P&ID의 기호 연결만으로 모든 운전 의도를 대체하지 않는다."
+      ],
+      "rejected_explanations": [
+        "control narrative의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "Control narrative는 제어 목적, 정상·비정상 동작, mode, setpoint·override·shutdown 철학을 문장으로 보완하며 P&ID의 기호 연결만으로 모든 운전 의도를 대체하지 않는다.",
+      "description": "Control narrative는 제어 목적, 정상·비정상 동작, mode, setpoint·override·shutdown 철학을 문장으로 보완하며 P&ID의 기호 연결만으로 모든 운전 의도를 대체하지 않는다."
+    },
+    {
+      "id": "pid_loop_diagram_relation",
+      "anchor_id": "pid_loop_diagram_relation",
+      "statement": "Loop diagram은 한 계기 loop의 단자, 배선, cable, marshalling, I/O channel 등 연결 상세를 다루므로 P&ID의 기능적 연결과 상호 보완 관계에 있다.",
+      "importance": "must",
+      "keywords": [
+        "loop diagram",
+        "wiring",
+        "I/O"
+      ],
+      "core_terms": [
+        "loop diagram",
+        "wiring",
+        "I/O"
+      ],
+      "accepted_explanations": [
+        "Loop diagram은 한 계기 loop의 단자, 배선, cable, marshalling, I/O channel 등 연결 상세를 다루므로 P&ID의 기능적 연결과 상호 보완 관계에 있다."
+      ],
+      "rejected_explanations": [
+        "loop diagram의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "Loop diagram은 한 계기 loop의 단자, 배선, cable, marshalling, I/O channel 등 연결 상세를 다루므로 P&ID의 기능적 연결과 상호 보완 관계에 있다.",
+      "description": "Loop diagram은 한 계기 loop의 단자, 배선, cable, marshalling, I/O channel 등 연결 상세를 다루므로 P&ID의 기능적 연결과 상호 보완 관계에 있다."
+    },
+    {
+      "id": "pid_logic_diagram_relation",
+      "anchor_id": "pid_logic_diagram_relation",
+      "statement": "Logic diagram은 permissive, interlock, trip, sequence 등 논리 조건과 상태 관계를 더 직접적으로 표현하므로 P&ID와 목적이 다르며 두 문서의 tag와 cause/effect가 일치해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "logic diagram",
+        "interlock",
+        "tag consistency"
+      ],
+      "core_terms": [
+        "logic diagram",
+        "interlock",
+        "tag consistency"
+      ],
+      "accepted_explanations": [
+        "Logic diagram은 permissive, interlock, trip, sequence 등 논리 조건과 상태 관계를 더 직접적으로 표현하므로 P&ID와 목적이 다르며 두 문서의 tag와 cause/effect가 일치해야 한다."
+      ],
+      "rejected_explanations": [
+        "logic diagram의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "Logic diagram은 permissive, interlock, trip, sequence 등 논리 조건과 상태 관계를 더 직접적으로 표현하므로 P&ID와 목적이 다르며 두 문서의 tag와 cause/effect가 일치해야 한다.",
+      "description": "Logic diagram은 permissive, interlock, trip, sequence 등 논리 조건과 상태 관계를 더 직접적으로 표현하므로 P&ID와 목적이 다르며 두 문서의 tag와 cause/effect가 일치해야 한다."
+    },
+    {
+      "id": "pid_instrument_index_io_relation",
+      "anchor_id": "pid_instrument_index_io_relation",
+      "statement": "P&ID의 instrument tag는 Instrument Index, I/O List, datasheet 등과 상호 추적 가능해야 하며 tag 누락·중복·service 불일치는 설계 검토 항목이다.",
+      "importance": "must",
+      "keywords": [
+        "Instrument Index",
+        "I/O List",
+        "traceability"
+      ],
+      "core_terms": [
+        "Instrument Index",
+        "I/O List",
+        "traceability"
+      ],
+      "accepted_explanations": [
+        "P&ID의 instrument tag는 Instrument Index, I/O List, datasheet 등과 상호 추적 가능해야 하며 tag 누락·중복·service 불일치는 설계 검토 항목이다."
+      ],
+      "rejected_explanations": [
+        "Instrument Index의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "P&ID의 instrument tag는 Instrument Index, I/O List, datasheet 등과 상호 추적 가능해야 하며 tag 누락·중복·service 불일치는 설계 검토 항목이다.",
+      "description": "P&ID의 instrument tag는 Instrument Index, I/O List, datasheet 등과 상호 추적 가능해야 하며 tag 누락·중복·service 불일치는 설계 검토 항목이다."
+    },
+    {
+      "id": "pid_line_list_spec_relation",
+      "anchor_id": "pid_line_list_spec_relation",
+      "statement": "P&ID의 line identification과 주요 배관 정보는 Line List, piping class/spec 및 equipment nozzle 정보와 정합성을 검토해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "Line List",
+        "piping class",
+        "consistency"
+      ],
+      "core_terms": [
+        "Line List",
+        "piping class",
+        "consistency"
+      ],
+      "accepted_explanations": [
+        "P&ID의 line identification과 주요 배관 정보는 Line List, piping class/spec 및 equipment nozzle 정보와 정합성을 검토해야 한다."
+      ],
+      "rejected_explanations": [
+        "Line List의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "P&ID의 line identification과 주요 배관 정보는 Line List, piping class/spec 및 equipment nozzle 정보와 정합성을 검토해야 한다.",
+      "description": "P&ID의 line identification과 주요 배관 정보는 Line List, piping class/spec 및 equipment nozzle 정보와 정합성을 검토해야 한다."
+    },
+    {
+      "id": "legend_project_convention_priority",
+      "anchor_id": "legend_project_convention_priority",
+      "statement": "기호·약어·line type·tag numbering은 국제 표준 원칙을 활용하더라도 프로젝트별 legend와 engineering specification이 실제 도면 판독의 직접 기준이 된다.",
+      "importance": "must",
+      "keywords": [
+        "legend",
+        "engineering specification",
+        "tag numbering"
+      ],
+      "core_terms": [
+        "legend",
+        "engineering specification",
+        "tag numbering"
+      ],
+      "accepted_explanations": [
+        "기호·약어·line type·tag numbering은 국제 표준 원칙을 활용하더라도 프로젝트별 legend와 engineering specification이 실제 도면 판독의 직접 기준이 된다."
+      ],
+      "rejected_explanations": [
+        "legend의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "기호·약어·line type·tag numbering은 국제 표준 원칙을 활용하더라도 프로젝트별 legend와 engineering specification이 실제 도면 판독의 직접 기준이 된다.",
+      "description": "기호·약어·line type·tag numbering은 국제 표준 원칙을 활용하더라도 프로젝트별 legend와 engineering specification이 실제 도면 판독의 직접 기준이 된다."
+    },
+    {
+      "id": "design_review_cross_document_consistency",
+      "anchor_id": "design_review_cross_document_consistency",
+      "statement": "P&ID 설계검토는 PFD, equipment datasheet, Line List, Instrument Index, I/O List, Cause & Effect, control narrative 등 관련 문서와 tag·service·연결·fail action의 정합성을 교차 확인한다.",
+      "importance": "must",
+      "keywords": [
+        "design review",
+        "cross-document",
+        "consistency"
+      ],
+      "core_terms": [
+        "design review",
+        "cross-document",
+        "consistency"
+      ],
+      "accepted_explanations": [
+        "P&ID 설계검토는 PFD, equipment datasheet, Line List, Instrument Index, I/O List, Cause & Effect, control narrative 등 관련 문서와 tag·service·연결·fail action의 정합성을 교차 확인한다."
+      ],
+      "rejected_explanations": [
+        "design review의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "P&ID 설계검토는 PFD, equipment datasheet, Line List, Instrument Index, I/O List, Cause & Effect, control narrative 등 관련 문서와 tag·service·연결·fail action의 정합성을 교차 확인한다.",
+      "description": "P&ID 설계검토는 PFD, equipment datasheet, Line List, Instrument Index, I/O List, Cause & Effect, control narrative 등 관련 문서와 tag·service·연결·fail action의 정합성을 교차 확인한다."
+    },
+    {
+      "id": "revision_moc_document_control",
+      "anchor_id": "revision_moc_document_control",
+      "statement": "운전 중 P&ID 변경은 현장 redline만 남기는 것으로 끝내지 않고 승인된 revision, 변경관리(MOC), 관련 문서 갱신과 as-built 반영으로 추적성을 유지해야 한다.",
+      "importance": "must",
+      "keywords": [
+        "revision",
+        "MOC",
+        "as-built"
+      ],
+      "core_terms": [
+        "revision",
+        "MOC",
+        "as-built"
+      ],
+      "accepted_explanations": [
+        "운전 중 P&ID 변경은 현장 redline만 남기는 것으로 끝내지 않고 승인된 revision, 변경관리(MOC), 관련 문서 갱신과 as-built 반영으로 추적성을 유지해야 한다."
+      ],
+      "rejected_explanations": [
+        "revision의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "운전 중 P&ID 변경은 현장 redline만 남기는 것으로 끝내지 않고 승인된 revision, 변경관리(MOC), 관련 문서 갱신과 as-built 반영으로 추적성을 유지해야 한다.",
+      "description": "운전 중 P&ID 변경은 현장 redline만 남기는 것으로 끝내지 않고 승인된 revision, 변경관리(MOC), 관련 문서 갱신과 as-built 반영으로 추적성을 유지해야 한다."
+    },
+    {
+      "id": "field_verification_asbuilt",
+      "anchor_id": "field_verification_asbuilt",
+      "statement": "시공·commissioning 단계에서는 P&ID와 실제 배관·valve·instrument tag·connection을 walkdown으로 확인하고 차이는 punch/redline과 승인 절차를 통해 as-built에 반영한다.",
+      "importance": "important",
+      "keywords": [
+        "walkdown",
+        "commissioning",
+        "as-built"
+      ],
+      "core_terms": [
+        "walkdown",
+        "commissioning",
+        "as-built"
+      ],
+      "accepted_explanations": [
+        "시공·commissioning 단계에서는 P&ID와 실제 배관·valve·instrument tag·connection을 walkdown으로 확인하고 차이는 punch/redline과 승인 절차를 통해 as-built에 반영한다."
+      ],
+      "rejected_explanations": [
+        "walkdown의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "시공·commissioning 단계에서는 P&ID와 실제 배관·valve·instrument tag·connection을 walkdown으로 확인하고 차이는 punch/redline과 승인 절차를 통해 as-built에 반영한다.",
+      "description": "시공·commissioning 단계에서는 P&ID와 실제 배관·valve·instrument tag·connection을 walkdown으로 확인하고 차이는 punch/redline과 승인 절차를 통해 as-built에 반영한다."
+    },
+    {
+      "id": "pid_lifecycle_use",
+      "anchor_id": "pid_lifecycle_use",
+      "statement": "P&ID는 설계검토뿐 아니라 위험검토, 시공, commissioning, 운전, 정비, troubleshooting 및 변경관리에서 공통 기준문서로 활용되므로 최신성과 문서 간 일치성이 중요하다.",
+      "importance": "important",
+      "keywords": [
+        "lifecycle",
+        "commissioning",
+        "MOC"
+      ],
+      "core_terms": [
+        "lifecycle",
+        "commissioning",
+        "MOC"
+      ],
+      "accepted_explanations": [
+        "P&ID는 설계검토뿐 아니라 위험검토, 시공, commissioning, 운전, 정비, troubleshooting 및 변경관리에서 공통 기준문서로 활용되므로 최신성과 문서 간 일치성이 중요하다."
+      ],
+      "rejected_explanations": [
+        "lifecycle의 의미를 적용 문서·legend와 무관하게 단정하거나 반대로 설명한다."
+      ],
+      "grading_notes": "핵심 개념과 문서 간 관계를 인과적으로 설명하면 인정하며 단순 기호·약어 나열은 부분 인정한다.",
+      "source_basis": [
+        "ISA-5.1 instrumentation symbols and identification principles",
+        "process-industry P&ID engineering and document-control practice",
+        "project P&ID legend and related engineering-document consistency practice"
+      ],
+      "claim": "P&ID는 설계검토뿐 아니라 위험검토, 시공, commissioning, 운전, 정비, troubleshooting 및 변경관리에서 공통 기준문서로 활용되므로 최신성과 문서 간 일치성이 중요하다.",
+      "description": "P&ID는 설계검토뿐 아니라 위험검토, 시공, commissioning, 운전, 정비, troubleshooting 및 변경관리에서 공통 기준문서로 활용되므로 최신성과 문서 간 일치성이 중요하다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "pid_equals_pfd",
+      "claim": "P&ID와 PFD는 같은 문서이며 상세도와 목적도 동일하다.",
+      "correction": "PFD는 주요 공정흐름 중심, P&ID는 배관·밸브·계기·제어 연결을 더 상세히 표현하므로 목적과 상세도가 다르다.",
+      "wrong_claim": "P&ID와 PFD는 같은 문서이며 상세도와 목적도 동일하다.",
+      "correct_rule": "PFD는 주요 공정흐름 중심, P&ID는 배관·밸브·계기·제어 연결을 더 상세히 표현하므로 목적과 상세도가 다르다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: P&ID와 PFD는 같은 문서이며 상세도와 목적도 동일하다. 정확한 기준: PFD는 주요 공정흐름 중심, P&ID는 배관·밸브·계기·제어 연결을 더 상세히 표현하므로 목적과 상세도가 다르다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "pid_equals_pid_controller",
+      "claim": "P&ID의 PID는 비례·적분·미분 제어기를 뜻하므로 PID tuning과 같은 주제이다.",
+      "correction": "P&ID는 Piping and Instrumentation Diagram 문맥이며 PID controller의 P·I·D 동작·튜닝과 별도 주제이다.",
+      "wrong_claim": "P&ID의 PID는 비례·적분·미분 제어기를 뜻하므로 PID tuning과 같은 주제이다.",
+      "correct_rule": "P&ID는 Piping and Instrumentation Diagram 문맥이며 PID controller의 P·I·D 동작·튜닝과 별도 주제이다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: P&ID의 PID는 비례·적분·미분 제어기를 뜻하므로 PID tuning과 같은 주제이다. 정확한 기준: P&ID는 Piping and Instrumentation Diagram 문맥이며 PID controller의 P·I·D 동작·튜닝과 별도 주제이다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "pid_exact_physical_layout",
+      "claim": "P&ID는 배관의 실제 공간 위치와 길이를 축척대로 표시한다.",
+      "correction": "P&ID는 기능·공정 연결 중심 문서이며 실제 공간배치와 축척은 별도 layout/piping drawing에서 확인한다.",
+      "wrong_claim": "P&ID는 배관의 실제 공간 위치와 길이를 축척대로 표시한다.",
+      "correct_rule": "P&ID는 기능·공정 연결 중심 문서이며 실제 공간배치와 축척은 별도 layout/piping drawing에서 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: P&ID는 배관의 실제 공간 위치와 길이를 축척대로 표시한다. 정확한 기준: P&ID는 기능·공정 연결 중심 문서이며 실제 공간배치와 축척은 별도 layout/piping drawing에서 확인한다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "all_valves_are_control_valves",
+      "claim": "P&ID에 표시된 모든 밸브는 controller output으로 동작하는 control valve이다.",
+      "correction": "Isolation, check, relief, control 등 밸브 기능이 다르므로 symbol, tag, legend로 구분한다.",
+      "wrong_claim": "P&ID에 표시된 모든 밸브는 controller output으로 동작하는 control valve이다.",
+      "correct_rule": "Isolation, check, relief, control 등 밸브 기능이 다르므로 symbol, tag, legend로 구분한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: P&ID에 표시된 모든 밸브는 controller output으로 동작하는 control valve이다. 정확한 기준: Isolation, check, relief, control 등 밸브 기능이 다르므로 symbol, tag, legend로 구분한다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "dashed_line_always_electrical",
+      "claim": "P&ID의 파선은 어느 프로젝트에서도 전기신호를 뜻한다.",
+      "correction": "Signal line type의 의미는 적용 표준과 프로젝트 legend를 확인해야 하며 선종만으로 보편적 의미를 단정하지 않는다.",
+      "wrong_claim": "P&ID의 파선은 어느 프로젝트에서도 전기신호를 뜻한다.",
+      "correct_rule": "Signal line type의 의미는 적용 표준과 프로젝트 legend를 확인해야 하며 선종만으로 보편적 의미를 단정하지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: P&ID의 파선은 어느 프로젝트에서도 전기신호를 뜻한다. 정확한 기준: Signal line type의 의미는 적용 표준과 프로젝트 legend를 확인해야 하며 선종만으로 보편적 의미를 단정하지 않는다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "instrument_bubble_location_universal",
+      "claim": "계기 bubble 모양만 보면 어느 프로젝트에서도 field와 control-room 위치를 동일 규칙으로 확정할 수 있다.",
+      "correction": "Instrument location 표기는 프로젝트 legend와 drawing convention을 직접 확인한다.",
+      "wrong_claim": "계기 bubble 모양만 보면 어느 프로젝트에서도 field와 control-room 위치를 동일 규칙으로 확정할 수 있다.",
+      "correct_rule": "Instrument location 표기는 프로젝트 legend와 drawing convention을 직접 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: 계기 bubble 모양만 보면 어느 프로젝트에서도 field와 control-room 위치를 동일 규칙으로 확정할 수 있다. 정확한 기준: Instrument location 표기는 프로젝트 legend와 drawing convention을 직접 확인한다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "tag_letters_arbitrary",
+      "claim": "Instrument tag의 기능문자는 의미가 없고 번호만 같으면 같은 loop이다.",
+      "correction": "Tag 문자와 번호는 측정변수·기능·loop 식별 의미를 가지며 적용 표준과 numbering rule에 따라 판독한다.",
+      "wrong_claim": "Instrument tag의 기능문자는 의미가 없고 번호만 같으면 같은 loop이다.",
+      "correct_rule": "Tag 문자와 번호는 측정변수·기능·loop 식별 의미를 가지며 적용 표준과 numbering rule에 따라 판독한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: Instrument tag의 기능문자는 의미가 없고 번호만 같으면 같은 loop이다. 정확한 기준: Tag 문자와 번호는 측정변수·기능·loop 식별 의미를 가지며 적용 표준과 numbering rule에 따라 판독한다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "pid_replaces_loop_diagram",
+      "claim": "P&ID가 있으면 loop diagram과 wiring/termination 자료는 필요 없다.",
+      "correction": "P&ID는 기능 연결을, loop diagram은 단자·배선·I/O 상세를 다루므로 상호 보완한다.",
+      "wrong_claim": "P&ID가 있으면 loop diagram과 wiring/termination 자료는 필요 없다.",
+      "correct_rule": "P&ID는 기능 연결을, loop diagram은 단자·배선·I/O 상세를 다루므로 상호 보완한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: P&ID가 있으면 loop diagram과 wiring/termination 자료는 필요 없다. 정확한 기준: P&ID는 기능 연결을, loop diagram은 단자·배선·I/O 상세를 다루므로 상호 보완한다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "pid_replaces_control_narrative",
+      "claim": "P&ID의 기호만으로 mode, override, startup, shutdown 등 모든 운전 의도를 완전하게 정의할 수 있다.",
+      "correction": "Control narrative는 운전·제어 철학을 문장으로 보완하며 P&ID와 함께 사용한다.",
+      "wrong_claim": "P&ID의 기호만으로 mode, override, startup, shutdown 등 모든 운전 의도를 완전하게 정의할 수 있다.",
+      "correct_rule": "Control narrative는 운전·제어 철학을 문장으로 보완하며 P&ID와 함께 사용한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: P&ID의 기호만으로 mode, override, startup, shutdown 등 모든 운전 의도를 완전하게 정의할 수 있다. 정확한 기준: Control narrative는 운전·제어 철학을 문장으로 보완하며 P&ID와 함께 사용한다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "pid_contains_full_interlock_logic",
+      "claim": "P&ID에 trip이나 interlock tag가 있으면 전체 Boolean logic과 sequence가 모두 도면에 포함되어 있다.",
+      "correction": "P&ID는 기능적 관계를 보여주고 상세 logic은 Cause & Effect, logic diagram, control narrative 등에서 관리될 수 있다.",
+      "wrong_claim": "P&ID에 trip이나 interlock tag가 있으면 전체 Boolean logic과 sequence가 모두 도면에 포함되어 있다.",
+      "correct_rule": "P&ID는 기능적 관계를 보여주고 상세 logic은 Cause & Effect, logic diagram, control narrative 등에서 관리될 수 있다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: P&ID에 trip이나 interlock tag가 있으면 전체 Boolean logic과 sequence가 모두 도면에 포함되어 있다. 정확한 기준: P&ID는 기능적 관계를 보여주고 상세 logic은 Cause & Effect, logic diagram, control narrative 등에서 관리될 수 있다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "fail_action_symbol_universal",
+      "claim": "Control valve의 fail-open/fail-close는 모든 P&ID에서 동일한 symbol만 보고 확정할 수 있다.",
+      "correction": "Fail action 표현은 project convention, tag/note, datasheet 등을 함께 확인한다.",
+      "wrong_claim": "Control valve의 fail-open/fail-close는 모든 P&ID에서 동일한 symbol만 보고 확정할 수 있다.",
+      "correct_rule": "Fail action 표현은 project convention, tag/note, datasheet 등을 함께 확인한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: Control valve의 fail-open/fail-close는 모든 P&ID에서 동일한 symbol만 보고 확정할 수 있다. 정확한 기준: Fail action 표현은 project convention, tag/note, datasheet 등을 함께 확인한다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    },
+    {
+      "id": "informal_redline_is_asbuilt",
+      "claim": "현장 redline만 남기면 승인 revision과 MOC 없이도 as-built P&ID가 완료된다.",
+      "correction": "변경은 승인 revision, MOC, 관련 문서 정합성 검토와 as-built 갱신으로 통제한다.",
+      "wrong_claim": "현장 redline만 남기면 승인 revision과 MOC 없이도 as-built P&ID가 완료된다.",
+      "correct_rule": "변경은 승인 revision, MOC, 관련 문서 정합성 검토와 as-built 갱신으로 통제한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "P&ID의 핵심 정의·문서경계·기호해석 또는 변경관리 원칙을 반대로 설명했다.",
+      "description": "잘못된 주장: 현장 redline만 남기면 승인 revision과 MOC 없이도 as-built P&ID가 완료된다. 정확한 기준: 변경은 승인 revision, MOC, 관련 문서 정합성 검토와 as-built 갱신으로 통제한다.",
+      "grading_notes": "해당 주장이 답안의 결론 또는 설계 판단 근거로 사용되면 high-band를 허용하지 않는다."
+    }
+  ],
+  "safe_expressions": [
+    "P&ID의 세부 symbol과 tag convention은 프로젝트 legend를 우선 확인한다고 설명할 수 있다.",
+    "PFD와 P&ID의 deliverable 경계는 프로젝트마다 일부 차이가 있을 수 있다고 설명할 수 있다.",
+    "Instrument bubble의 위치표시는 적용 표준과 project legend에 따라 판독한다고 설명할 수 있다.",
+    "Signal line의 선종 의미는 legend 확인이 필요하다고 설명할 수 있다.",
+    "Control valve fail action은 symbol뿐 아니라 tag, note, datasheet를 함께 확인한다고 설명할 수 있다.",
+    "P&ID는 기능적 연결 중심이며 실제 공간배치는 별도 layout 문서가 소유한다고 설명할 수 있다.",
+    "Loop diagram은 wiring·termination 상세를 보완한다고 설명할 수 있다.",
+    "Control narrative는 P&ID의 제어철학을 문장으로 보완한다고 설명할 수 있다.",
+    "Cause & Effect 또는 logic diagram이 interlock·trip 상세를 별도로 소유할 수 있다고 설명할 수 있다.",
+    "P&ID와 Instrument Index, I/O List, Line List의 정합성을 설계검토 항목으로 제시할 수 있다.",
+    "시공 후 walkdown과 redline을 승인 절차를 통해 as-built로 반영한다고 설명할 수 있다.",
+    "P&ID 변경은 MOC 및 문서관리 절차와 연결된다고 설명할 수 있다.",
+    "Bare PID는 P&ID routing alias로 사용하지 않는다고 설명할 수 있다.",
+    "PID controller tuning은 별도 제어기 Topic으로 분리한다고 설명할 수 있다."
+  ]
+}

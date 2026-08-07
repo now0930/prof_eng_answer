@@ -68,6 +68,7 @@ DESIGN_TOPICS = {
     "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
     "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
     "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+    "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
 }
 
 ALLOWED_SELECTION_IMPORTANCE = {
@@ -79,7 +80,7 @@ ALLOWED_SELECTION_IMPORTANCE = {
 EXPECTED_DIFFICULTY_COUNTS = {
     "THEORY_CORE": 19,
     "FIELD_APPLICATION": 26,
-    "DESIGN_EVALUATION": 8,
+    "DESIGN_EVALUATION": 9,
 }
 
 
@@ -100,7 +101,7 @@ def main() -> None:
         | DESIGN_TOPICS
     )
 
-    assert len(actual_topics) == 53
+    assert len(actual_topics) == 54
     assert actual_topics == classified_topics
 
     assert not (THEORY_TOPICS & APPLICATION_TOPICS)

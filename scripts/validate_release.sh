@@ -368,6 +368,9 @@ python3 -B scripts/test_physical_ai_cross_lane_ownership_repair.py
 echo "----- host regression: physical ai robot sensor fusion safety topic -----"
 python3 -B scripts/test_physical_ai_robot_sensor_fusion_safety_topic.py
 
+echo "----- host regression: pid piping instrumentation diagram symbols tags loops control narrative -----"
+python3 -B scripts/test_pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative.py
+
 echo "----- host regression: plan a requirement coverage regressions -----"
 python3 -B scripts/test_plan_a_requirement_coverage_regressions.py
 

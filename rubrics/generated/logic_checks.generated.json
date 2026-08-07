@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T11:01:31Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-07T12:15:17Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -2215,6 +2215,34 @@
         }
       ],
       "minor_checks": []
+    },
+    {
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "enabled": false,
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "reason": "P&ID symbol과 line convention은 project legend 의존성이 있으므로 keyword-only deterministic fatal 판정을 사용하지 않는다.",
+      "topic_aliases": [
+        "P&ID symbols and tags",
+        "P&ID 계기 심볼 태그",
+        "P&ID 배관계장도",
+        "Piping and Instrumentation Diagram",
+        "Piping Instrumentation Diagram symbols",
+        "배관계장도 기호 태그",
+        "배관 및 계장도 P&ID",
+        "P&ID instrument loop",
+        "P&ID loop number",
+        "P&ID signal line",
+        "P&ID control valve symbol",
+        "P&ID vs PFD",
+        "P&ID loop diagram control narrative",
+        "P&ID 설계 검토",
+        "P&ID revision MOC",
+        "P&ID instrument identification",
+        "P&ID control loop representation",
+        "배관계장도 제어루프"
+      ]
     },
     {
       "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",

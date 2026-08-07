@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T11:01:31Z-generated-topic-pack-model-answers",
+  "version": "2026-08-07T12:15:17Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -12959,6 +12959,354 @@
         "windup",
         "derivative noise",
         "anti-windup"
+      ],
+      "revision_notes": [],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "title_ko": "P&ID 배관계장도 기호·태그·제어루프·관련 문서와 설계 검토",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "P&ID의 목적, 구성요소와 PFD와의 차이를 설명하시오.",
+          "intent": "P&ID의 역할과 문서계층을 설명한다.",
+          "required_anchor_ids": [
+            "pid_definition_scope",
+            "pfd_pid_difference",
+            "pid_not_physical_layout"
+          ]
+        },
+        {
+          "pattern": "P&ID에서 계기 기호, Tag와 Loop number를 판독하는 방법을 설명하시오.",
+          "intent": "계기 식별과 loop 추적방법을 설명한다.",
+          "required_anchor_ids": [
+            "instrument_tag_function_letters",
+            "loop_number_identity",
+            "instrument_symbol_location_convention",
+            "legend_project_convention_priority"
+          ]
+        },
+        {
+          "pattern": "P&ID의 signal line 종류와 계기 위치 표기의 해석 시 주의사항을 설명하시오.",
+          "intent": "선종과 위치기호를 project legend와 연결한다.",
+          "required_anchor_ids": [
+            "instrument_symbol_location_convention",
+            "signal_line_legend",
+            "legend_project_convention_priority"
+          ]
+        },
+        {
+          "pattern": "P&ID에서 측정 및 feedback control loop를 추적하는 방법을 설명하시오.",
+          "intent": "측정점부터 controller와 final element까지 기능 체인을 설명한다.",
+          "required_anchor_ids": [
+            "measurement_loop_chain",
+            "feedback_control_loop_chain",
+            "control_valve_pid_representation"
+          ]
+        },
+        {
+          "pattern": "P&ID, Loop Diagram, Logic Diagram, Control Narrative의 역할을 비교하시오.",
+          "intent": "관련 문서의 ownership 경계를 설명한다.",
+          "required_anchor_ids": [
+            "pid_loop_diagram_relation",
+            "pid_logic_diagram_relation",
+            "pid_control_narrative_relation",
+            "alarm_trip_interlock_boundary"
+          ]
+        },
+        {
+          "pattern": "P&ID 설계검토 시 Instrument Index, I/O List, Line List와의 정합성 확인항목을 설명하시오.",
+          "intent": "cross-document consistency를 설계검토 관점에서 설명한다.",
+          "required_anchor_ids": [
+            "pid_instrument_index_io_relation",
+            "pid_line_list_spec_relation",
+            "design_review_cross_document_consistency"
+          ]
+        },
+        {
+          "pattern": "P&ID의 control valve 표기와 fail action 확인방법을 설명하시오.",
+          "intent": "제어밸브 기호·actuator·fail action을 관련 문서와 연결한다.",
+          "required_anchor_ids": [
+            "valve_function_distinction",
+            "control_valve_pid_representation",
+            "legend_project_convention_priority"
+          ]
+        },
+        {
+          "pattern": "P&ID에서 alarm, trip, interlock 표기와 Cause & Effect의 관계를 설명하시오.",
+          "intent": "기능표현과 상세 logic 문서의 경계를 설명한다.",
+          "required_anchor_ids": [
+            "alarm_trip_interlock_boundary",
+            "pid_logic_diagram_relation",
+            "pid_control_narrative_relation"
+          ]
+        },
+        {
+          "pattern": "P&ID 변경관리와 as-built 작성 절차 및 현장 검증사항을 설명하시오.",
+          "intent": "revision, MOC, walkdown, as-built를 lifecycle로 연결한다.",
+          "required_anchor_ids": [
+            "revision_moc_document_control",
+            "field_verification_asbuilt",
+            "pid_lifecycle_use"
+          ]
+        },
+        {
+          "pattern": "P&ID와 PID 제어기의 차이를 설명하고 혼동 방지방법을 제시하시오.",
+          "intent": "P&ID와 PID controller의 용어·소유범위를 구분한다.",
+          "required_anchor_ids": [
+            "pid_not_pid_controller",
+            "feedback_control_loop_chain",
+            "legend_project_convention_priority"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "1. P&ID 정의와 문서 목적",
+          "intent": "P&ID의 정의, 포함정보와 PFD·layout과의 차이를 제시한다.",
+          "anchor_refs": [
+            "pid_definition_scope",
+            "pfd_pid_difference",
+            "pid_not_physical_layout",
+            "pid_not_pid_controller"
+          ]
+        },
+        {
+          "section": "2. 장비·배관·밸브 표현",
+          "intent": "equipment, piping, line identification과 valve 기능 구분을 설명한다.",
+          "anchor_refs": [
+            "equipment_and_piping_representation",
+            "valve_function_distinction",
+            "pid_line_list_spec_relation"
+          ]
+        },
+        {
+          "section": "3. 계기 Symbol·Tag·Loop 식별",
+          "intent": "instrument symbol, function letters, loop number와 project legend 기반 판독을 설명한다.",
+          "anchor_refs": [
+            "instrument_tag_function_letters",
+            "loop_number_identity",
+            "instrument_symbol_location_convention",
+            "legend_project_convention_priority"
+          ]
+        },
+        {
+          "section": "4. Signal line과 측정·제어 Loop",
+          "intent": "signal/connection line과 measurement-feedback-final element 체인을 추적한다.",
+          "anchor_refs": [
+            "signal_line_legend",
+            "measurement_loop_chain",
+            "feedback_control_loop_chain",
+            "control_valve_pid_representation"
+          ]
+        },
+        {
+          "section": "5. Alarm·Trip·Interlock와 관련 Logic 문서",
+          "intent": "P&ID의 기능표현과 Cause & Effect·logic diagram의 상세 ownership을 구분한다.",
+          "anchor_refs": [
+            "alarm_trip_interlock_boundary",
+            "pid_logic_diagram_relation"
+          ]
+        },
+        {
+          "section": "6. Loop Diagram·Control Narrative 관계",
+          "intent": "P&ID 기능연결과 wiring/termination 및 운전철학 문서의 보완관계를 설명한다.",
+          "anchor_refs": [
+            "pid_loop_diagram_relation",
+            "pid_control_narrative_relation"
+          ]
+        },
+        {
+          "section": "7. 설계검토와 Cross-document consistency",
+          "intent": "Instrument Index, I/O List, Line List, datasheet 등과 tag·service·connection 정합성을 검토한다.",
+          "anchor_refs": [
+            "pid_instrument_index_io_relation",
+            "design_review_cross_document_consistency"
+          ]
+        },
+        {
+          "section": "8. Revision·MOC·현장 검증·As-built",
+          "intent": "시공·commissioning·운전 lifecycle에서 revision과 현장검증의 추적성을 설명한다.",
+          "anchor_refs": [
+            "revision_moc_document_control",
+            "field_verification_asbuilt",
+            "pid_lifecycle_use"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "P&ID를 PFD 및 physical layout과 구분하고 문서 목적·상세도 차이를 설명한다.",
+        "Instrument tag의 function letters와 loop number를 project legend·numbering convention과 연결한다.",
+        "Instrument symbol 위치표기와 signal line type을 보편 규칙으로 단정하지 않고 legend 확인을 명시한다.",
+        "측정점→transmitter→controller→final control element의 기능 체인을 P&ID에서 추적한다.",
+        "Control valve symbol, actuator/positioner, fail action을 tag·note·datasheet와 교차 확인한다.",
+        "Alarm·Trip·Interlock 표기와 Cause & Effect/logic diagram의 ownership 경계를 설명한다.",
+        "P&ID, Loop Diagram, Control Narrative가 기능·배선·운전철학을 각각 보완함을 설명한다.",
+        "Instrument Index, I/O List, Line List, datasheet와 cross-document consistency를 설계검토에 포함한다.",
+        "Revision, MOC, redline, walkdown, as-built를 lifecycle traceability로 연결한다.",
+        "P&ID와 PID controller를 명확히 구분하고 bare PID routing을 배제한다."
+      ],
+      "common_missing_points": [
+        "P&ID를 PFD와 동일한 문서로 설명한다.",
+        "P&ID를 실제 배관 layout 도면으로 설명한다.",
+        "Tag 문자와 loop number를 나열하지만 기능·추적관계를 설명하지 않는다.",
+        "Signal line의 의미를 project legend 확인 없이 보편규칙으로 단정한다.",
+        "P&ID만으로 wiring과 전체 interlock logic을 모두 알 수 있다고 설명한다.",
+        "Control Narrative, Loop Diagram, Cause & Effect와의 관계를 누락한다.",
+        "Instrument Index/I/O List/Line List와의 정합성 검토를 누락한다.",
+        "Revision·MOC·as-built 관리 없이 symbol 설명에만 머문다.",
+        "P&ID와 PID controller를 혼용한다."
+      ],
+      "routing_aliases": [
+        "P&ID symbols and tags",
+        "P&ID 계기 심볼 태그",
+        "P&ID 배관계장도",
+        "Piping and Instrumentation Diagram",
+        "Piping Instrumentation Diagram symbols",
+        "배관계장도 기호 태그",
+        "배관 및 계장도 P&ID",
+        "P&ID instrument loop",
+        "P&ID loop number",
+        "P&ID signal line",
+        "P&ID control valve symbol",
+        "P&ID vs PFD",
+        "P&ID loop diagram control narrative",
+        "P&ID 설계 검토",
+        "P&ID revision MOC",
+        "P&ID instrument identification",
+        "P&ID control loop representation",
+        "배관계장도 제어루프"
+      ],
+      "routing_field_points": [
+        "P&ID와 PFD의 목적·상세도 차이",
+        "P&ID와 physical layout의 경계",
+        "equipment와 piping line identification",
+        "isolation·check·control·relief valve 기능 구분",
+        "instrument function letters와 tag 번호",
+        "loop number와 numbering convention",
+        "instrument bubble 위치표기와 project legend",
+        "signal line type과 pneumatic/electrical/data connection",
+        "process tapping과 transmitter 연결",
+        "measurement loop signal chain",
+        "feedback controller와 final control element",
+        "control valve actuator·positioner·fail action",
+        "alarm·trip·interlock 기능표현",
+        "Cause & Effect와 logic diagram 경계",
+        "Loop Diagram wiring·termination 상세",
+        "Control Narrative 운전·제어 철학",
+        "Instrument Index tag traceability",
+        "I/O List channel consistency",
+        "Line List와 piping class/spec consistency",
+        "datasheet와 tag/service 일치",
+        "revision과 document control",
+        "MOC와 as-built",
+        "field walkdown·redline·commissioning",
+        "P&ID와 PID controller disambiguation"
+      ],
+      "id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative_COMPARE_v1",
+      "title": "P&ID 배관계장도 기호·태그·제어루프·관련 문서와 설계 검토",
+      "question_examples": [
+        "P&ID의 역할과 문서계층을 설명한다.",
+        "계기 식별과 loop 추적방법을 설명한다.",
+        "선종과 위치기호를 project legend와 연결한다.",
+        "측정점부터 controller와 final element까지 기능 체인을 설명한다.",
+        "관련 문서의 ownership 경계를 설명한다.",
+        "cross-document consistency를 설계검토 관점에서 설명한다.",
+        "제어밸브 기호·actuator·fail action을 관련 문서와 연결한다.",
+        "기능표현과 상세 logic 문서의 경계를 설명한다.",
+        "revision, MOC, walkdown, as-built를 lifecycle로 연결한다.",
+        "P&ID와 PID controller의 용어·소유범위를 구분한다."
+      ],
+      "topic_aliases": [
+        "P&ID symbols and tags",
+        "P&ID 계기 심볼 태그",
+        "P&ID 배관계장도",
+        "Piping and Instrumentation Diagram",
+        "Piping Instrumentation Diagram symbols",
+        "배관계장도 기호 태그",
+        "배관 및 계장도 P&ID",
+        "P&ID instrument loop",
+        "P&ID loop number",
+        "P&ID signal line",
+        "P&ID control valve symbol",
+        "P&ID vs PFD",
+        "P&ID loop diagram control narrative",
+        "P&ID 설계 검토",
+        "P&ID revision MOC",
+        "P&ID instrument identification",
+        "P&ID control loop representation",
+        "배관계장도 제어루프"
+      ],
+      "expected_structure": [
+        "1. P&ID 정의와 문서 목적",
+        "2. 장비·배관·밸브 표현",
+        "3. 계기 Symbol·Tag·Loop 식별",
+        "4. Signal line과 측정·제어 Loop",
+        "5. Alarm·Trip·Interlock와 관련 Logic 문서",
+        "6. Loop Diagram·Control Narrative 관계",
+        "7. 설계검토와 Cross-document consistency",
+        "8. Revision·MOC·현장 검증·As-built"
+      ],
+      "model_answer_outline": [
+        "P&ID의 정의, 포함정보와 PFD·layout과의 차이를 제시한다.",
+        "equipment, piping, line identification과 valve 기능 구분을 설명한다.",
+        "instrument symbol, function letters, loop number와 project legend 기반 판독을 설명한다.",
+        "signal/connection line과 measurement-feedback-final element 체인을 추적한다.",
+        "P&ID의 기능표현과 Cause & Effect·logic diagram의 상세 ownership을 구분한다.",
+        "P&ID 기능연결과 wiring/termination 및 운전철학 문서의 보완관계를 설명한다.",
+        "Instrument Index, I/O List, Line List, datasheet 등과 tag·service·connection 정합성을 검토한다.",
+        "시공·commissioning·운전 lifecycle에서 revision과 현장검증의 추적성을 설명한다."
+      ],
+      "high_score_features": [
+        "P&ID를 PFD 및 physical layout과 구분하고 문서 목적·상세도 차이를 설명한다.",
+        "Instrument tag의 function letters와 loop number를 project legend·numbering convention과 연결한다.",
+        "Instrument symbol 위치표기와 signal line type을 보편 규칙으로 단정하지 않고 legend 확인을 명시한다.",
+        "측정점→transmitter→controller→final control element의 기능 체인을 P&ID에서 추적한다.",
+        "Control valve symbol, actuator/positioner, fail action을 tag·note·datasheet와 교차 확인한다.",
+        "Alarm·Trip·Interlock 표기와 Cause & Effect/logic diagram의 ownership 경계를 설명한다.",
+        "P&ID, Loop Diagram, Control Narrative가 기능·배선·운전철학을 각각 보완함을 설명한다.",
+        "Instrument Index, I/O List, Line List, datasheet와 cross-document consistency를 설계검토에 포함한다.",
+        "Revision, MOC, redline, walkdown, as-built를 lifecycle traceability로 연결한다.",
+        "P&ID와 PID controller를 명확히 구분하고 bare PID routing을 배제한다."
+      ],
+      "low_score_patterns": [
+        "P&ID를 PFD와 동일한 문서로 설명한다.",
+        "P&ID를 실제 배관 layout 도면으로 설명한다.",
+        "Tag 문자와 loop number를 나열하지만 기능·추적관계를 설명하지 않는다.",
+        "Signal line의 의미를 project legend 확인 없이 보편규칙으로 단정한다.",
+        "P&ID만으로 wiring과 전체 interlock logic을 모두 알 수 있다고 설명한다.",
+        "Control Narrative, Loop Diagram, Cause & Effect와의 관계를 누락한다.",
+        "Instrument Index/I/O List/Line List와의 정합성 검토를 누락한다.",
+        "Revision·MOC·as-built 관리 없이 symbol 설명에만 머문다.",
+        "P&ID와 PID controller를 혼용한다."
+      ],
+      "field_connection_points": [
+        "P&ID와 PFD의 목적·상세도 차이",
+        "P&ID와 physical layout의 경계",
+        "equipment와 piping line identification",
+        "isolation·check·control·relief valve 기능 구분",
+        "instrument function letters와 tag 번호",
+        "loop number와 numbering convention",
+        "instrument bubble 위치표기와 project legend",
+        "signal line type과 pneumatic/electrical/data connection",
+        "process tapping과 transmitter 연결",
+        "measurement loop signal chain",
+        "feedback controller와 final control element",
+        "control valve actuator·positioner·fail action",
+        "alarm·trip·interlock 기능표현",
+        "Cause & Effect와 logic diagram 경계",
+        "Loop Diagram wiring·termination 상세",
+        "Control Narrative 운전·제어 철학",
+        "Instrument Index tag traceability",
+        "I/O List channel consistency",
+        "Line List와 piping class/spec consistency",
+        "datasheet와 tag/service 일치",
+        "revision과 document control",
+        "MOC와 as-built",
+        "field walkdown·redline·commissioning",
+        "P&ID와 PID controller disambiguation"
       ],
       "revision_notes": [],
       "source_schema_version": "topic_pack.model_answer.v1"

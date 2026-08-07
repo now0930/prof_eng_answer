@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-07T11:01:31Z-generated-topic-pack-manifest",
+  "version": "2026-08-07T12:15:17Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 53,
+  "topic_count": 54,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -348,6 +348,16 @@
     },
     {
       "topic_id": "pid_controller_tuning_sequence_gain_effects",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
