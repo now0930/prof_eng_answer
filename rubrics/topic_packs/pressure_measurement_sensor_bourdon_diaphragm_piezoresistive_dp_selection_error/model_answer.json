@@ -1,0 +1,331 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+  "title_ko": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Absolute, Gauge, Differential pressure의 차이와 압력계측 시 주의사항을 설명하시오.",
+      "intent": "압력 reference와 기본 관계를 구분한다.",
+      "required_anchor_ids": [
+        "pressure_reference_abs_gauge_dp",
+        "pressure_relation_equations"
+      ]
+    },
+    {
+      "pattern": "Bourdon tube pressure gauge의 원리, 특징 및 오차요인을 설명하시오.",
+      "intent": "탄성관 변형과 기계식 지시, 적용범위와 현장오차를 연결한다.",
+      "required_anchor_ids": [
+        "bourdon_elastic_deformation_principle",
+        "bourdon_forms_application",
+        "bourdon_error_protection"
+      ]
+    },
+    {
+      "pattern": "Diaphragm pressure element의 원리와 적용 시 고려사항을 설명하시오.",
+      "intent": "막의 압력차 변형과 sensing element/seal 경계를 구분한다.",
+      "required_anchor_ids": [
+        "diaphragm_deflection_principle",
+        "diaphragm_sensor_vs_seal"
+      ]
+    },
+    {
+      "pattern": "Piezoresistive pressure sensor의 원리와 temperature compensation을 설명하시오.",
+      "intent": "저항변화·Wheatstone bridge·정적측정·온도영향을 설명한다.",
+      "required_anchor_ids": [
+        "piezoresistive_principle_bridge",
+        "piezoresistive_static_capability",
+        "piezoresistive_temperature_compensation"
+      ]
+    },
+    {
+      "pattern": "Bourdon, Diaphragm, Piezoresistive pressure sensor를 비교하고 선정기준을 설명하시오.",
+      "intent": "물리원리와 pressure range, process, environment, maintainability를 비교한다.",
+      "required_anchor_ids": [
+        "bourdon_elastic_deformation_principle",
+        "diaphragm_deflection_principle",
+        "piezoresistive_principle_bridge",
+        "range_turndown_resolution_selection",
+        "process_media_wetted_material_selection"
+      ]
+    },
+    {
+      "pattern": "DP transmitter의 원리와 high static line pressure 영향을 설명하시오.",
+      "intent": "두 포트 차압과 common-mode/static pressure 영향의 구분을 평가한다.",
+      "required_anchor_ids": [
+        "dp_transmitter_two_port_principle",
+        "dp_static_line_pressure_effect",
+        "overrange_working_burst_pressure"
+      ]
+    },
+    {
+      "pattern": "압력 transmitter 선정 시 range, overrange, process condition 및 environment를 설명하시오.",
+      "intent": "측정범위와 기계한계, media/environment compatibility를 함께 선정한다.",
+      "required_anchor_ids": [
+        "range_turndown_resolution_selection",
+        "overrange_working_burst_pressure",
+        "process_media_wetted_material_selection",
+        "ambient_environment_hazardous_selection"
+      ]
+    },
+    {
+      "pattern": "압력계측의 주요 오차원인과 calibration 대책을 설명하시오.",
+      "intent": "reference accuracy와 total performance, zero/span drift와 trim을 구분한다.",
+      "required_anchor_ids": [
+        "accuracy_total_performance_terms",
+        "zero_span_drift_calibration",
+        "pulsation_vibration_dynamic_response"
+      ]
+    },
+    {
+      "pattern": "Impulse line을 사용하는 pressure/DP 측정의 설치오차와 대책을 설명하시오.",
+      "intent": "전달계의 누설·막힘·액주·vent/drain 문제를 진단한다.",
+      "required_anchor_ids": [
+        "impulse_line_installation_error",
+        "dp_transmitter_two_port_principle"
+      ]
+    },
+    {
+      "pattern": "기존 압력계기를 smart pressure transmitter로 교체할 때 선정·적용 고려사항을 설명하시오.",
+      "intent": "process compatibility, interface, shutdown, calibration, lifecycle cost를 평가한다.",
+      "required_anchor_ids": [
+        "range_turndown_resolution_selection",
+        "process_media_wetted_material_selection",
+        "ambient_environment_hazardous_selection",
+        "selection_lifecycle_maintainability"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. Pressure Reference",
+      "intent": "absolute/gauge/differential pressure의 기준과 부호관계를 정의한다.",
+      "anchor_refs": [
+        "pressure_reference_abs_gauge_dp",
+        "pressure_relation_equations"
+      ]
+    },
+    {
+      "section": "2. Mechanical Principles",
+      "intent": "Bourdon과 diaphragm의 탄성변형 원리를 설명한다.",
+      "anchor_refs": [
+        "bourdon_elastic_deformation_principle",
+        "bourdon_forms_application",
+        "diaphragm_deflection_principle",
+        "diaphragm_sensor_vs_seal"
+      ]
+    },
+    {
+      "section": "3. Electronic Principle",
+      "intent": "piezoresistive bridge와 temperature compensation을 설명한다.",
+      "anchor_refs": [
+        "piezoresistive_principle_bridge",
+        "piezoresistive_static_capability",
+        "piezoresistive_temperature_compensation"
+      ]
+    },
+    {
+      "section": "4. Differential Pressure",
+      "intent": "DP two-port principle과 static line pressure 영향 및 level-topic 경계를 설명한다.",
+      "anchor_refs": [
+        "dp_transmitter_two_port_principle",
+        "dp_static_line_pressure_effect",
+        "dp_level_boundary"
+      ]
+    },
+    {
+      "section": "5. Selection",
+      "intent": "range, mechanical limit, process, environment를 기준으로 선정한다.",
+      "anchor_refs": [
+        "range_turndown_resolution_selection",
+        "overrange_working_burst_pressure",
+        "process_media_wetted_material_selection",
+        "ambient_environment_hazardous_selection"
+      ]
+    },
+    {
+      "section": "6. Error Structure",
+      "intent": "reference accuracy, total performance, zero/span drift를 구분한다.",
+      "anchor_refs": [
+        "accuracy_total_performance_terms",
+        "zero_span_drift_calibration"
+      ]
+    },
+    {
+      "section": "7. Installation & Dynamics",
+      "intent": "Bourdon 보호, impulse line, pulsation, vibration과 dynamic response를 다룬다.",
+      "anchor_refs": [
+        "bourdon_error_protection",
+        "impulse_line_installation_error",
+        "pulsation_vibration_dynamic_response"
+      ]
+    },
+    {
+      "section": "8. Lifecycle Application",
+      "intent": "calibration 접근성, spare, retrofit, lifecycle cost까지 연결한다.",
+      "anchor_refs": [
+        "selection_lifecycle_maintainability"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Absolute·Gauge·Differential pressure의 reference를 먼저 구분한다.",
+    "Bourdon tube의 타원형 단면과 탄성관 자유단 변위를 물리적으로 설명한다.",
+    "Diaphragm sensing element와 diaphragm seal의 역할을 구분한다.",
+    "Piezoresistive strain→resistance change→Wheatstone bridge output의 변환사슬을 설명한다.",
+    "Piezoresistive와 piezoelectric의 정적압력 측정 차이를 구분한다.",
+    "DP transmitter의 PH-PL 측정과 static/common-mode pressure 영향을 구분한다.",
+    "DP pressure sensing과 wet/dry leg·density compensation의 level application을 분리한다.",
+    "Range/turndown과 working/overrange/burst pressure를 별도 한계로 설명한다.",
+    "Reference accuracy와 total performance를 구분한다.",
+    "Zero shift와 span shift, zero trim과 calibration을 구분한다.",
+    "Impulse line의 leak·blockage·gas/liquid head를 sensing element 외 설치오차로 설명한다.",
+    "기존설비에서는 process connection, manifold, DCS/PLC interface, shutdown, spare와 lifecycle cost까지 제시한다."
+  ],
+  "common_missing_points": [
+    "Absolute, gauge, differential pressure의 reference를 구분하지 않는다.",
+    "Bourdon tube를 단순 체적 팽창센서로 설명한다.",
+    "Diaphragm sensing element와 diaphragm seal을 동일하게 본다.",
+    "Piezoresistive와 piezoelectric을 같은 원리로 설명한다.",
+    "DP transmitter에서 static line pressure 영향을 무조건 0이라고 단정한다.",
+    "Measurement range와 overrange/burst pressure를 같은 값으로 취급한다.",
+    "Accuracy 숫자 하나만 비교하고 temperature/static pressure/installation effect를 누락한다.",
+    "Zero trim으로 모든 span·linearity 오차가 제거된다고 설명한다.",
+    "Impulse line의 leak, blockage, gas/liquid head를 누락한다.",
+    "DP level의 wet/dry leg·density compensation을 이 Topic과 혼합한다."
+  ],
+  "routing_aliases": [
+    "압력계측 센서 원리 선정 오차",
+    "압력센서 Bourdon Diaphragm Piezoresistive",
+    "압력 transmitter 선정 및 오차",
+    "pressure measurement sensor selection",
+    "pressure sensor principle and error",
+    "bourdon diaphragm pressure sensor",
+    "bourdon tube pressure gauge principle",
+    "diaphragm pressure element selection",
+    "piezoresistive pressure sensor",
+    "piezoresistive pressure transmitter",
+    "differential pressure transmitter selection",
+    "DP transmitter static pressure effect",
+    "pressure gauge absolute gauge differential",
+    "압력계 절대압 게이지압 차압",
+    "부르동관 압력계 원리",
+    "다이어프램 압력센서 원리",
+    "피에조저항 압력센서 Wheatstone bridge",
+    "압력 트랜스미터 도압관 오차"
+  ],
+  "routing_field_points": [
+    "Absolute/Gauge/Differential pressure reference",
+    "P_abs = P_gauge + P_atm",
+    "ΔP = P_H - P_L",
+    "Bourdon elastic deformation",
+    "C-shaped/spiral/helical Bourdon forms",
+    "Diaphragm deflection",
+    "Diaphragm sensing element vs diaphragm seal",
+    "Piezoresistive resistance change",
+    "Wheatstone bridge",
+    "Static pressure capability",
+    "Temperature compensation",
+    "DP high/low side",
+    "Static line pressure zero/span effect",
+    "DP level ownership boundary",
+    "Range/URL/LRL/turndown",
+    "Maximum working/overrange/burst pressure",
+    "Wetted material/process compatibility",
+    "Reference accuracy vs total performance",
+    "Zero/span drift and calibration",
+    "Impulse line leak/blockage/head",
+    "Pulsation/vibration/damping",
+    "Maintainability/lifecycle cost"
+  ],
+  "revision_notes": [
+    "step0_analog_decision_PRINCIPLE_INTERPRETATION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used",
+    "dp_level_topic_ownership_separated"
+  ],
+  "id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+  "title": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP",
+  "question_examples": [
+    "Absolute, Gauge, Differential pressure의 차이와 압력계측 시 주의사항을 설명하시오.",
+    "Bourdon tube pressure gauge의 원리, 특징 및 오차요인을 설명하시오.",
+    "Diaphragm pressure element의 원리와 적용 시 고려사항을 설명하시오.",
+    "Piezoresistive pressure sensor의 원리와 temperature compensation을 설명하시오.",
+    "Bourdon, Diaphragm, Piezoresistive pressure sensor를 비교하고 선정기준을 설명하시오.",
+    "DP transmitter의 원리와 high static line pressure 영향을 설명하시오.",
+    "압력 transmitter 선정 시 range, overrange, process condition 및 environment를 설명하시오.",
+    "압력계측의 주요 오차원인과 calibration 대책을 설명하시오.",
+    "Impulse line을 사용하는 pressure/DP 측정의 설치오차와 대책을 설명하시오.",
+    "기존 압력계기를 smart pressure transmitter로 교체할 때 선정·적용 고려사항을 설명하시오."
+  ],
+  "topic_aliases": [
+    "압력계측 센서 원리 선정 오차",
+    "압력센서 Bourdon Diaphragm Piezoresistive",
+    "압력 transmitter 선정 및 오차",
+    "pressure measurement sensor selection",
+    "pressure sensor principle and error",
+    "bourdon diaphragm pressure sensor",
+    "bourdon tube pressure gauge principle",
+    "diaphragm pressure element selection",
+    "piezoresistive pressure sensor",
+    "piezoresistive pressure transmitter",
+    "differential pressure transmitter selection",
+    "DP transmitter static pressure effect",
+    "pressure gauge absolute gauge differential",
+    "압력계 절대압 게이지압 차압",
+    "부르동관 압력계 원리",
+    "다이어프램 압력센서 원리",
+    "피에조저항 압력센서 Wheatstone bridge",
+    "압력 트랜스미터 도압관 오차"
+  ],
+  "expected_structure": [
+    "1. Pressure Reference",
+    "2. Mechanical Principles",
+    "3. Electronic Principle",
+    "4. Differential Pressure",
+    "5. Selection",
+    "6. Error Structure",
+    "7. Installation & Dynamics",
+    "8. Lifecycle Application"
+  ],
+  "high_score_features": [
+    "Absolute·Gauge·Differential pressure의 reference를 먼저 구분한다.",
+    "Bourdon tube의 타원형 단면과 탄성관 자유단 변위를 물리적으로 설명한다.",
+    "Diaphragm sensing element와 diaphragm seal의 역할을 구분한다.",
+    "Piezoresistive strain→resistance change→Wheatstone bridge output의 변환사슬을 설명한다.",
+    "Piezoresistive와 piezoelectric의 정적압력 측정 차이를 구분한다.",
+    "DP transmitter의 PH-PL 측정과 static/common-mode pressure 영향을 구분한다.",
+    "DP pressure sensing과 wet/dry leg·density compensation의 level application을 분리한다.",
+    "Range/turndown과 working/overrange/burst pressure를 별도 한계로 설명한다.",
+    "Reference accuracy와 total performance를 구분한다.",
+    "Zero shift와 span shift, zero trim과 calibration을 구분한다.",
+    "Impulse line의 leak·blockage·gas/liquid head를 sensing element 외 설치오차로 설명한다.",
+    "기존설비에서는 process connection, manifold, DCS/PLC interface, shutdown, spare와 lifecycle cost까지 제시한다."
+  ],
+  "low_score_patterns": [
+    "Absolute, gauge, differential pressure의 reference를 구분하지 않는다.",
+    "Bourdon tube를 단순 체적 팽창센서로 설명한다.",
+    "Diaphragm sensing element와 diaphragm seal을 동일하게 본다.",
+    "Piezoresistive와 piezoelectric을 같은 원리로 설명한다.",
+    "DP transmitter에서 static line pressure 영향을 무조건 0이라고 단정한다.",
+    "Measurement range와 overrange/burst pressure를 같은 값으로 취급한다.",
+    "Accuracy 숫자 하나만 비교하고 temperature/static pressure/installation effect를 누락한다.",
+    "Zero trim으로 모든 span·linearity 오차가 제거된다고 설명한다.",
+    "Impulse line의 leak, blockage, gas/liquid head를 누락한다.",
+    "DP level의 wet/dry leg·density compensation을 이 Topic과 혼합한다."
+  ],
+  "field_connection_points": [
+    "Gauge/absolute/DP pressure reference",
+    "Bourdon mechanical gauge",
+    "Diaphragm pressure element",
+    "Piezoresistive bridge pressure sensor",
+    "DP transmitter high/low port",
+    "Static pressure zero/span effect",
+    "Range/turndown and overpressure rating",
+    "Process connection and wetted material",
+    "Temperature/static pressure/installation error",
+    "Zero/span calibration",
+    "Impulse line and manifold",
+    "Retrofit and lifecycle"
+  ]
+}

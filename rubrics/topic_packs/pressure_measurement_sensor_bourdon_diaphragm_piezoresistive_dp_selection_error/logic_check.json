@@ -1,0 +1,364 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+  "title": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_aliases": [
+      "압력계측 센서 원리 선정 오차",
+      "압력센서 Bourdon Diaphragm Piezoresistive",
+      "압력 transmitter 선정 및 오차",
+      "pressure measurement sensor selection",
+      "pressure sensor principle and error",
+      "bourdon diaphragm pressure sensor",
+      "bourdon tube pressure gauge principle",
+      "diaphragm pressure element selection",
+      "piezoresistive pressure sensor",
+      "piezoresistive pressure transmitter",
+      "differential pressure transmitter selection",
+      "DP transmitter static pressure effect",
+      "pressure gauge absolute gauge differential",
+      "압력계 절대압 게이지압 차압",
+      "부르동관 압력계 원리",
+      "다이어프램 압력센서 원리",
+      "피에조저항 압력센서 Wheatstone bridge",
+      "압력 트랜스미터 도압관 오차"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "Absolute/Gauge/DP pressure reference를 먼저 구분하는 습관을 만든다.",
+      "Bourdon·Diaphragm·Piezoresistive의 energy/transduction chain을 한 줄로 설명한다.",
+      "Range와 overrange/burst pressure를 분리해 선정한다.",
+      "DP static line pressure와 level wet/dry leg를 혼동하지 않는다.",
+      "Reference accuracy→installation/temperature/static pressure→total performance 순서로 오차를 정리한다."
+    ],
+    "reason": "압력센서의 원리·선정·오차는 동일 키워드가 정상설명과 오답문장 모두에 등장하므로 단순 deterministic keyword Fatal을 사용하지 않는다."
+  },
+  "llm_profile": {
+    "enabled": true,
+    "display_name": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP",
+    "difficulty": "FIELD_APPLICATION",
+    "candidate_extraction": {
+      "enabled": false,
+      "rules": [],
+      "reason": "압력 reference, static pressure, zero/span, piezoresistive/piezoelectric 용어는 문맥과 부호·측정경계를 함께 보아야 한다."
+    },
+    "truth_schema": [
+      "압력계측의 출발점은 기준압을 구분하는 것이다. 절대압은 진공을 기준으로 하고, 게이지압은 대기압을 기준으로 하며, 차압은 두 압력 포트의 차이를 측정한다.",
+      "게이지압이 국소 대기압을 기준으로 정의된 경우 P_abs = P_gauge + P_atm이며, 차압 transmitter는 통상 ΔP = P_H - P_L의 부호관계로 해석한다. 실제 포트 연결과 transmitter 설정을 함께 확인해야 한다.",
+      "Bourdon tube는 타원형 단면의 굽은 탄성관 내부 압력이 증가할 때 단면이 원형에 가까워지고 관이 펴지려는 변위를 이용하여 압력을 기계적으로 표시한다.",
+      "Bourdon element는 C형, spiral, helical 등으로 구성할 수 있으며 형상·재질·두께에 따라 사용 압력범위가 달라진다. 일반적으로 견고한 현장 지시와 중·고압 측정에 널리 사용된다.",
+      "Bourdon gauge는 탄성 hysteresis, 마찰·기구 backlash, 온도, 진동·맥동, 과압과 설치조건의 영향을 받을 수 있으므로 pulsation damper·snubber·siphon·remote mounting 등 필요한 보호방안을 검토한다.",
+      "Diaphragm pressure element는 막 양측의 압력차가 만드는 탄성변형을 변위 또는 전기신호로 변환한다. 얇고 유연한 diaphragm은 작은 압력차에 높은 감도를 얻을 수 있다.",
+      "압력을 직접 감지하는 diaphragm sensing element와 공정유체를 계기에서 격리하는 diaphragm seal은 목적이 다르다. Seal은 fill fluid와 capillary를 포함할 수 있으며 자체로 모든 오차를 제거하지 않는다.",
+      "Piezoresistive pressure sensor는 diaphragm의 변형으로 반도체 또는 strain element의 저항이 변하는 효과를 이용하며, 여러 저항을 Wheatstone bridge로 구성해 작은 저항변화를 차동 전압으로 읽는 방식이 대표적이다.",
+      "Piezoresistive 방식은 외부 excitation과 signal conditioning이 필요하지만 정적 압력과 저주파 압력도 측정할 수 있다. 전하 누설 때문에 정적 측정이 어려운 piezoelectric sensor와 구분해야 한다.",
+      "Piezoresistive sensor의 offset과 sensitivity는 온도 영향을 받을 수 있으므로 bridge compensation, calibration coefficient, ASIC 보정 등 센서 구조에 맞는 temperature compensation이 중요하다.",
+      "DP transmitter는 high-side와 low-side 두 입력의 압력차를 sensing element에 전달하여 차압을 전기신호로 변환한다. 두 포트에 동일한 압력이 인가된 상태는 이상적으로 zero differential pressure 조건이다.",
+      "DP transmitter는 큰 common-mode 또는 static line pressure가 가해진 상태에서 zero 또는 span에 추가 영향이 생길 수 있으며, 영향 크기와 보정법은 transmitter 구조·range·제조사에 따라 달라질 수 있다.",
+      "DP transmitter 자체의 압력측정 원리, static pressure, zero/span과 impulse-line 영향은 이 Topic에서 다루지만, hydrostatic level 변환, density compensation, wet leg·dry leg와 level용 remote-seal head 계산은 별도 DP level Topic의 소유범위다.",
+      "압력계기 선정에서는 정상·최소·최대 압력, calibration range, URL/LRL, turndown, resolution과 필요한 정확도를 함께 검토하여 정상 운전점이 지나치게 range 끝단에 몰리지 않도록 한다.",
+      "측정 range와 maximum working pressure, overrange limit, proof/burst pressure는 서로 다른 개념이므로 정상 측정범위뿐 아니라 upset와 pressure spike에 대한 기계적 허용한계를 확인해야 한다.",
+      "공정유체의 부식성, 점도, 고형물, 위생성, 독성, 응축·결빙 가능성과 process temperature를 고려해 wetted material, process connection, seal/isolator와 flushing·drain 구조를 선정한다.",
+      "주위온도, 습도, 진동, 침수·분진, EMC, 위험장소와 설치공간은 sensor/transmitter enclosure와 인증, mounting 선정에 반영해야 한다. 방폭 상세 선정은 별도 hazardous-area Topic이 소유한다.",
+      "압력계기의 reference accuracy는 linearity, hysteresis, repeatability 등의 일부 또는 조합일 수 있고 제조사 정의가 다를 수 있다. 실제 성능은 온도·static pressure·installation·stability 영향까지 포함한 total performance 관점으로 평가한다.",
+      "Zero shift는 입력 0 또는 LRV 부근의 offset 변화이고 span shift는 sensitivity 또는 URV-LRV 관계의 변화다. 설치·온도·line pressure 영향이 있으면 제조사 절차에 따라 zero trim, sensor trim 또는 calibration을 구분해 수행한다.",
+      "도압관을 사용하는 pressure/DP 측정은 누설, 막힘, gas pocket, liquid head, 배관 온도차, 응축·결빙과 manifold valve 상태 때문에 오차가 생길 수 있으므로 routing, slope, vent/drain과 leak test를 관리한다.",
+      "펌프·압축기·밸브 주변의 pulsation과 vibration은 기계식 gauge의 pointer flutter와 피로, transmitter의 dynamic error를 유발할 수 있어 damping, remote mounting, sampling/response-time 요구를 함께 검토한다.",
+      "최종 선정은 압력종류·range·성능뿐 아니라 calibration 접근성, manifold/valve arrangement, spare, 진단, 교체성, shutdown 영향과 lifecycle cost까지 포함해야 현장 적용성이 높다."
+    ],
+    "fatal_conditions": [
+      {
+        "id": "pressure_fatal_abs_gauge_same",
+        "claim": "절대압과 게이지압은 기준압이 같으므로 같은 값으로 취급해도 된다.",
+        "correction": "절대압은 진공 기준, 게이지압은 대기압 기준이므로 기준압을 구분하고 필요한 경우 P_abs = P_gauge + P_atm 관계로 환산해야 한다.",
+        "wrong_claim": "절대압과 게이지압은 기준압이 같으므로 같은 값으로 취급해도 된다.",
+        "correct_rule": "절대압은 진공 기준, 게이지압은 대기압 기준이므로 기준압을 구분하고 필요한 경우 P_abs = P_gauge + P_atm 관계로 환산해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "절대압은 진공 기준, 게이지압은 대기압 기준이므로 기준압을 구분하고 필요한 경우 P_abs = P_gauge + P_atm 관계로 환산해야 한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_dp_sum",
+        "claim": "DP transmitter는 high-side와 low-side 압력을 더한 값을 출력한다.",
+        "correction": "DP transmitter의 기본 측정량은 두 포트 압력의 차이며 통상 ΔP = P_H - P_L로 해석한다.",
+        "wrong_claim": "DP transmitter는 high-side와 low-side 압력을 더한 값을 출력한다.",
+        "correct_rule": "DP transmitter의 기본 측정량은 두 포트 압력의 차이며 통상 ΔP = P_H - P_L로 해석한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "DP transmitter의 기본 측정량은 두 포트 압력의 차이며 통상 ΔP = P_H - P_L로 해석한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_bourdon_expands_only",
+        "claim": "Bourdon tube는 단순히 관 내부 체적이 커지는 양만 직접 읽는 센서다.",
+        "correction": "Bourdon tube는 압력에 따른 타원형 단면과 굽은 탄성관의 변형으로 자유단 변위를 만들고 이를 지시기구가 압력으로 변환한다.",
+        "wrong_claim": "Bourdon tube는 단순히 관 내부 체적이 커지는 양만 직접 읽는 센서다.",
+        "correct_rule": "Bourdon tube는 압력에 따른 타원형 단면과 굽은 탄성관의 변형으로 자유단 변위를 만들고 이를 지시기구가 압력으로 변환한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Bourdon tube는 압력에 따른 타원형 단면과 굽은 탄성관의 변형으로 자유단 변위를 만들고 이를 지시기구가 압력으로 변환한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_diaphragm_no_dp",
+        "claim": "Diaphragm element는 한쪽 압력만 작용하므로 양측 압력차와 무관하다.",
+        "correction": "Diaphragm 변형의 구동력은 막 양측의 압력차이며 reference side 조건이 측정압의 정의를 결정한다.",
+        "wrong_claim": "Diaphragm element는 한쪽 압력만 작용하므로 양측 압력차와 무관하다.",
+        "correct_rule": "Diaphragm 변형의 구동력은 막 양측의 압력차이며 reference side 조건이 측정압의 정의를 결정한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Diaphragm 변형의 구동력은 막 양측의 압력차이며 reference side 조건이 측정압의 정의를 결정한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_seal_is_sensor",
+        "claim": "Diaphragm seal만 설치하면 별도의 pressure sensing element 없이 항상 압력을 전기적으로 측정할 수 있다.",
+        "correction": "Diaphragm seal은 공정유체를 계기에서 격리·전달하는 인터페이스이고 실제 압력 변환은 연결된 sensing element/transmitter가 수행한다.",
+        "wrong_claim": "Diaphragm seal만 설치하면 별도의 pressure sensing element 없이 항상 압력을 전기적으로 측정할 수 있다.",
+        "correct_rule": "Diaphragm seal은 공정유체를 계기에서 격리·전달하는 인터페이스이고 실제 압력 변환은 연결된 sensing element/transmitter가 수행한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Diaphragm seal은 공정유체를 계기에서 격리·전달하는 인터페이스이고 실제 압력 변환은 연결된 sensing element/transmitter가 수행한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_piezoresistive_no_excitation",
+        "claim": "Piezoresistive sensor는 piezoelectric처럼 외부 excitation 없이 압력변화만으로 전하를 발생한다.",
+        "correction": "Piezoresistive sensor는 strain에 따른 저항변화를 이용하므로 bridge excitation과 신호측정 회로가 필요하며 piezoelectric charge generation과 구분해야 한다.",
+        "wrong_claim": "Piezoresistive sensor는 piezoelectric처럼 외부 excitation 없이 압력변화만으로 전하를 발생한다.",
+        "correct_rule": "Piezoresistive sensor는 strain에 따른 저항변화를 이용하므로 bridge excitation과 신호측정 회로가 필요하며 piezoelectric charge generation과 구분해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Piezoresistive sensor는 strain에 따른 저항변화를 이용하므로 bridge excitation과 신호측정 회로가 필요하며 piezoelectric charge generation과 구분해야 한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_piezoresistive_no_static",
+        "claim": "Piezoresistive pressure sensor는 정적 압력을 측정할 수 없고 빠른 압력변화만 측정한다.",
+        "correction": "Piezoresistive 방식은 bridge의 저항변화를 읽으므로 정적 및 저주파 압력 측정이 가능하며, 정적 측정 제한은 piezoelectric 방식과 구분해야 한다.",
+        "wrong_claim": "Piezoresistive pressure sensor는 정적 압력을 측정할 수 없고 빠른 압력변화만 측정한다.",
+        "correct_rule": "Piezoresistive 방식은 bridge의 저항변화를 읽으므로 정적 및 저주파 압력 측정이 가능하며, 정적 측정 제한은 piezoelectric 방식과 구분해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Piezoresistive 방식은 bridge의 저항변화를 읽으므로 정적 및 저주파 압력 측정이 가능하며, 정적 측정 제한은 piezoelectric 방식과 구분해야 한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_static_pressure_ignored",
+        "claim": "DP transmitter는 differential pressure만 보므로 high static line pressure는 zero나 span에 어떠한 영향도 줄 수 없다.",
+        "correction": "DP transmitter는 구조와 range에 따라 static line pressure가 zero/span에 영향을 줄 수 있으므로 제조사 사양과 line-pressure 보정 절차를 확인해야 한다.",
+        "wrong_claim": "DP transmitter는 differential pressure만 보므로 high static line pressure는 zero나 span에 어떠한 영향도 줄 수 없다.",
+        "correct_rule": "DP transmitter는 구조와 range에 따라 static line pressure가 zero/span에 영향을 줄 수 있으므로 제조사 사양과 line-pressure 보정 절차를 확인해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "DP transmitter는 구조와 range에 따라 static line pressure가 zero/span에 영향을 줄 수 있으므로 제조사 사양과 line-pressure 보정 절차를 확인해야 한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_range_equals_burst",
+        "claim": "Transmitter의 measurement range가 곧 burst pressure이므로 URV 이내면 모든 pressure spike에 안전하다.",
+        "correction": "측정 range, maximum working pressure, overrange/proof와 burst pressure는 별도 한계이므로 정상·이상 압력조건을 각각 확인해야 한다.",
+        "wrong_claim": "Transmitter의 measurement range가 곧 burst pressure이므로 URV 이내면 모든 pressure spike에 안전하다.",
+        "correct_rule": "측정 range, maximum working pressure, overrange/proof와 burst pressure는 별도 한계이므로 정상·이상 압력조건을 각각 확인해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "측정 range, maximum working pressure, overrange/proof와 burst pressure는 별도 한계이므로 정상·이상 압력조건을 각각 확인해야 한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_accuracy_only",
+        "claim": "압력계기의 accuracy 숫자 하나만 같으면 온도·설치·static pressure 조건과 무관하게 실제 현장 오차도 같다.",
+        "correction": "Reference accuracy와 실제 total performance를 구분하고 온도·static pressure·installation·stability 등의 영향조건을 함께 검토해야 한다.",
+        "wrong_claim": "압력계기의 accuracy 숫자 하나만 같으면 온도·설치·static pressure 조건과 무관하게 실제 현장 오차도 같다.",
+        "correct_rule": "Reference accuracy와 실제 total performance를 구분하고 온도·static pressure·installation·stability 등의 영향조건을 함께 검토해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Reference accuracy와 실제 total performance를 구분하고 온도·static pressure·installation·stability 등의 영향조건을 함께 검토해야 한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_zero_trim_fixes_span",
+        "claim": "Zero trim을 수행하면 span error와 모든 nonlinearity가 동시에 제거된다.",
+        "correction": "Zero trim은 주로 offset을 조정하며 span, linearity 또는 sensor characterization은 별도 calibration/trim 절차가 필요할 수 있다.",
+        "wrong_claim": "Zero trim을 수행하면 span error와 모든 nonlinearity가 동시에 제거된다.",
+        "correct_rule": "Zero trim은 주로 offset을 조정하며 span, linearity 또는 sensor characterization은 별도 calibration/trim 절차가 필요할 수 있다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Zero trim은 주로 offset을 조정하며 span, linearity 또는 sensor characterization은 별도 calibration/trim 절차가 필요할 수 있다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_impulse_line_no_effect",
+        "claim": "도압관은 압력을 그대로 전달하므로 누설·막힘·액주·gas pocket은 측정값에 영향을 주지 않는다.",
+        "correction": "도압관의 누설, 막힘, gas/liquid head와 vent/drain 상태는 pressure/DP 측정 오차를 만들 수 있으므로 설치와 상태를 관리해야 한다.",
+        "wrong_claim": "도압관은 압력을 그대로 전달하므로 누설·막힘·액주·gas pocket은 측정값에 영향을 주지 않는다.",
+        "correct_rule": "도압관의 누설, 막힘, gas/liquid head와 vent/drain 상태는 pressure/DP 측정 오차를 만들 수 있으므로 설치와 상태를 관리해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "도압관의 누설, 막힘, gas/liquid head와 vent/drain 상태는 pressure/DP 측정 오차를 만들 수 있으므로 설치와 상태를 관리해야 한다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "pressure_fatal_dp_level_ownership",
+        "claim": "DP transmitter를 사용하면 wet leg·dry leg·밀도보정과 hydrostatic level 계산은 압력센서 원리와 동일하므로 별도 고려가 필요 없다.",
+        "correction": "DP sensor 원리와 level application 계산은 구분해야 하며 wet/dry leg, density compensation과 level용 remote-seal head는 별도 DP level Topic에서 다룬다.",
+        "wrong_claim": "DP transmitter를 사용하면 wet leg·dry leg·밀도보정과 hydrostatic level 계산은 압력센서 원리와 동일하므로 별도 고려가 필요 없다.",
+        "correct_rule": "DP sensor 원리와 level application 계산은 구분해야 하며 wet/dry leg, density compensation과 level용 remote-seal head는 별도 DP level Topic에서 다룬다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "DP sensor 원리와 level application 계산은 구분해야 하며 wet/dry leg, density compensation과 level용 remote-seal head는 별도 DP level Topic에서 다룬다.",
+        "description": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 용어 누락이 아니라 압력 정의·센서원리·측정한계·오차보정의 방향을 반대로 설명한 경우에만 Fatal로 판정한다."
+      }
+    ],
+    "major_checks": [
+      {
+        "id": "pressure_major_reference",
+        "check": "Absolute·Gauge·Differential pressure의 reference를 구분했는지 검토한다."
+      },
+      {
+        "id": "pressure_major_bourdon",
+        "check": "Bourdon의 타원형 단면과 탄성관 변형 원리를 정확히 설명했는지 검토한다."
+      },
+      {
+        "id": "pressure_major_diaphragm",
+        "check": "Diaphragm sensing element와 diaphragm seal을 구분했는지 검토한다."
+      },
+      {
+        "id": "pressure_major_piezoresistive",
+        "check": "Piezoresistive strain→resistance→bridge signal 변환을 설명했는지 검토한다."
+      },
+      {
+        "id": "pressure_major_dp",
+        "check": "DP two-port principle과 static line pressure 영향을 구분했는지 검토한다."
+      },
+      {
+        "id": "pressure_major_selection",
+        "check": "Range, mechanical limit, process material과 environment를 함께 선정했는지 검토한다."
+      },
+      {
+        "id": "pressure_major_error",
+        "check": "Reference accuracy와 total performance, zero/span error를 구분했는지 검토한다."
+      },
+      {
+        "id": "pressure_major_installation",
+        "check": "Impulse line, pulsation, vibration 등 installation error를 설명했는지 검토한다."
+      },
+      {
+        "id": "pressure_major_level_boundary",
+        "check": "DP pressure principle과 hydrostatic level wet/dry leg 계산 ownership을 분리했는지 검토한다."
+      },
+      {
+        "id": "pressure_major_lifecycle",
+        "check": "Calibration, maintainability, retrofit와 lifecycle cost를 현장 적용과 연결했는지 검토한다."
+      }
+    ],
+    "false_positive_cautions": [
+      "Gauge pressure를 단순히 atmospheric reference라고 설명하면 지역 대기압 세부 변동을 생략해도 핵심은 충족한다.",
+      "Bourdon C형·spiral·helical의 정확한 pressure range 수치를 외우지 않아도 원리와 상대적 적용성이 맞으면 허용한다.",
+      "Diaphragm sensor의 전기적 transduction 방식이 capacitive 또는 piezoresistive 등으로 다를 수 있음을 인정한다.",
+      "Diaphragm seal을 process isolator로 설명하면서 실제 sensor가 별도 존재함을 명확히 하면 표현 차이는 허용한다.",
+      "Piezoresistive bridge의 정확한 output equation을 쓰지 않아도 resistance imbalance와 differential voltage 관계를 올바르게 설명하면 허용한다.",
+      "Piezoresistive sensor의 온도보정 방법이 hardware resistor, calibration coefficient, ASIC 등으로 다를 수 있음을 인정한다.",
+      "DP transmitter static pressure effect가 model/range마다 다르다고 설명하면 특정 보정 수치가 없어도 허용한다.",
+      "Reference accuracy에 포함되는 linearity·hysteresis·repeatability 조합이 제조사별로 다를 수 있다고 설명하면 허용한다.",
+      "Total performance 계산방식은 제조사 정의를 따른다고 설명하면 모든 error term의 수식을 제시하지 않아도 된다.",
+      "Impulse line routing과 vent/drain 방향은 gas/liquid/steam service에 따라 다를 수 있다고 설명하면 허용한다.",
+      "Pulsation damper/snubber 적용이 response time을 늦출 수 있다고 설명하는 것은 적절하다.",
+      "Legacy retrofit에서 performance보다 compatibility·shutdown·maintenance를 함께 고려하는 설명은 적절하다."
+    ],
+    "safe_conditions": [
+      "Gauge pressure는 설치 지역의 대기압을 reference로 정의한다고 설명한다.",
+      "Sealed gauge처럼 reference가 고정된 구조가 별도로 존재할 수 있음을 언급해도 된다.",
+      "Bourdon tube의 C형·spiral·helical 적용범위는 제조사와 geometry에 따라 달라질 수 있다고 설명한다.",
+      "Diaphragm element가 기계식 gauge와 전자식 pressure sensor 모두의 sensing element로 사용될 수 있다고 설명한다.",
+      "Diaphragm seal과 diaphragm sensing element를 구분하면 구체 구조 설명은 제조사별 차이를 허용한다.",
+      "Piezoresistive sensor가 silicon diaphragm의 piezoresistor와 Wheatstone bridge를 사용하는 대표 구조라고 설명한다.",
+      "Bridge output의 정확한 식은 resistor 배치와 excitation 방식에 따라 달라질 수 있다고 설명한다.",
+      "Piezoresistive sensor의 offset·sensitivity를 temperature compensation으로 보정한다고 설명한다.",
+      "DP transmitter의 static line pressure effect가 모델·range에 따라 달라질 수 있다고 설명한다.",
+      "High static pressure zero correction 또는 span correction을 제조사 절차에 따라 수행한다고 설명한다.",
+      "Reference accuracy 항목에 포함되는 linearity·hysteresis·repeatability 조합은 제조사 정의를 확인해야 한다고 설명한다.",
+      "Pressure transmitter 선정에서 turndown보다 필요한 total performance와 정상 운전범위를 함께 본다고 설명한다."
+    ],
+    "next_practice_points": [
+      "압력 reference를 먼저 정의한 뒤 sensor principle을 연결한다.",
+      "Piezoresistive와 piezoelectric을 정적 측정 관점에서 비교한다.",
+      "DP transmitter의 static pressure effect를 manufacturer-dependent로 설명한다.",
+      "오차를 sensor intrinsic과 installation/process 영향으로 나눠 정리한다.",
+      "선정 시 mechanical pressure limit와 lifecycle maintainability를 빠뜨리지 않는다."
+    ],
+    "score_policy": {
+      "direct_score_application": false,
+      "direct_d_e_effect": "none",
+      "affected_layers": [
+        "C"
+      ],
+      "reason": "Logic Check는 Fact/Logic 의미오류의 evidence를 제공하며 직접 점수층을 변경하지 않는다."
+    },
+    "output_contract": {
+      "direct_score_layers": [],
+      "excluded_score_layers": [
+        "D",
+        "E"
+      ],
+      "requires_evidence": true
+    },
+    "cap_policy": {
+      "fatal_recommended_ceiling": 10.0
+    },
+    "feedback_templates": {
+      "major": "압력 reference→센서 원리→선정조건→오차원인→보정·보호의 연결이 부족한 부분을 지적한다.",
+      "fatal": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error의 방향을 뒤집는 중대한 오개념을 명확히 지적한다."
+    }
+  },
+  "revision_notes": [
+    "step0_analog_decision_PRINCIPLE_INTERPRETATION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used",
+    "dp_level_topic_ownership_separated"
+  ],
+  "topic_label": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP"
+}
