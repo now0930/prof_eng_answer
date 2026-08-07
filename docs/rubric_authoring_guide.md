@@ -31,46 +31,31 @@ Rubric은 가능한 JSON source로 관리하고, Python 코드는 routing, parsi
 | Topic Importance | topic 난이도, 출제 중요도, high-band unlock 조건 |
 | Logic Check | 정답과 충돌하는 핵심 이론 오류 |
 | Logic Check Profile | LLM verifier가 evidence를 추출하고 truth schema와 비교하는 기준 |
-| Difficulty Ceiling | 난이도와 fatal 오류에 따른 최종 score cap |
+| Difficulty Ceiling | difficulty·Logic evidence로 recommended ceiling을 계산하고 mode에 따라 적용하는 정책 |
 
 ---
 
 ## 2. Topic Pack 작성 순서
 
-새 topic은 다음 순서로 작성한다.
+현재 표준 authoring은 요구사항과 Topic Sheet를 먼저 확정한 뒤 **기존 schema를 기준으로 source JSON을 직접 작성**하는 방식이다.
 
 ```text
-README.md
+요구사항 Markdown / Topic boundary
+  → Topic Pack README
   → Topic Sheet
-  → fact_anchor.json
-  → model_answer.json
-  → topic_importance.json
-  → logic_check.json
-  → generated promote
+  → 인접 Topic schema 확인
+  → fact_anchor.json 직접 작성
+  → model_answer.json 직접 작성
+  → topic_importance.json 직접 작성
+  → logic_check.json 직접 작성
+  → focused validation
+  → Topic 단위 commit
+  → integration 단계 generated rebuild
 ```
 
-명령:
+`generate_topic_sheet_from_readme.py`, `generate_topic_pack_from_sheet.py` 같은 helper가 존재하더라도 최종 source of truth를 자동 생성기에 위임하지 않는다. 사용한다면 초안·schema 참고용으로 한정하고, 최종 JSON은 기존 schema와 validator를 기준으로 사람이 diff를 검토한다.
 
-```bash
-python3 scripts/rubric_manager.py create-topic-pack --topic-id <topic_id>
-
-python3 scripts/generate_topic_sheet_from_readme.py \
-  --topic-id <topic_id> \
-  --model gemini-2.5-flash \
-  --overwrite
-
-python3 scripts/generate_topic_pack_from_sheet.py \
-  --topic-id <topic_id> \
-  --sheet docs/topic_sheets/<topic_id>.md \
-  --model gemini-2.5-flash
-
-python3 scripts/rubric_manager.py validate-topic-pack-release --promote-generated
-```
-
-README와 Topic Sheet는 authoring input이고, JSON source가 runtime 기준이다. generated bank는 build output이다.
-
----
-
+Topic Pack 구조와 current inventory는 `topic_pack_architecture.md`, 전체 실행 순서는 `topic_pack_workflow.md`를 우선한다.
 ## 3. Model Answer 작성 기준
 
 Model Answer는 모범 답안 문장을 외우게 하는 파일이 아니다. 답안 구조, 전개 깊이, 고득점 특징, 현장 적용 방향을 정의한다.
@@ -438,7 +423,7 @@ false positive 주의사항
 
 ## 13. Topic Sheet 작성 기준
 
-Topic Sheet는 JSON 생성을 위한 구조화된 Markdown input이다.
+Topic Sheet는 source JSON authoring을 위한 구조화된 Markdown input이다.
 
 필수 섹션:
 
@@ -463,29 +448,34 @@ README보다 더 구조화되어야 하며, 특히 fatal/warn/false positive/reg
 
 ## 14. Generated Bank 작성 금지
 
-`rubrics/generated/*.generated.json`은 직접 수정하지 않는다.
+`rubrics/generated/*.generated.json`은 build output이다. 직접 수정하지 않는다.
 
-수정 흐름:
+Source 단계:
 
 ```text
-topic pack source JSON 수정
-  → validate-topic-pack-release --promote-generated
-  → generated bank 갱신
+Topic Pack source JSON 수정
+  → topic focused validation
+  → Topic 단위 commit
 ```
 
-명령:
+Integration 단계:
 
-```bash
-python3 scripts/rubric_manager.py validate-topic-pack-release --promote-generated
+```text
+source 의미 감사
+  → generated bank 6개 rebuild
+  → validate-all
+  → PROMOTE_GENERATED=0 release validation
+  → clean checkout / CI
 ```
 
----
+여러 Topic을 병렬로 작성할 때는 각 Topic마다 generated bank를 반복 promote하지 않고 integration에서 한 번 rebuild하는 방식을 권장한다.
 
+기본 runtime mode는 `generated`이며 실제 path 선택은 `rubric_bank_paths.py`가 담당한다.
 ## 15. 검토 체크리스트
 
-JSON을 promote하기 전에 확인한다.
+Topic source를 commit하거나 integration promote하기 전에 확인한다.
 
-- topic_id가 정확한가?
+- `topic_id`가 정확한가?
 - Model Answer alias가 너무 넓지 않은가?
 - Fact Anchor가 정답 coverage 중심인가?
 - Logic Check가 단순 누락을 fatal로 잡지 않는가?
@@ -493,11 +483,11 @@ JSON을 promote하기 전에 확인한다.
 - false positive caution이 충분한가?
 - 표/다이어그램에서 claim을 추출하는 기준이 명확한가?
 - generated bank를 직접 수정하지 않았는가?
-- smoke test에서 primary topic이 기대 topic으로 잡히는가?
-- Telegram 재채점에서 fatal cap이 의도대로 적용되는가?
-
----
-
+- 인접 Topic ownership과 alias가 겹치지 않는가?
+- expected question과 required anchor reference가 실제 source와 일치하는가?
+- clean checkout에서 committed regression이 local `data/sessions` 없이 재현되는가?
+- 필요한 경우 smoke test에서 primary topic이 기대 topic으로 잡히는가?
+- Telegram 재채점이 필요한 runtime 변경이면 fatal/cap 표시가 의도대로 적용되는가?
 ## 16. 검증 명령
 
 ```bash

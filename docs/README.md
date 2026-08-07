@@ -33,6 +33,7 @@
 | Difficulty Profile과 ceiling 확인 | [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) | [`grading_architecture.md`](grading_architecture.md) |
 | Gemini·CLOVA·Ollama 설정 확인 | [`llm_provider.md`](llm_provider.md) | [`operation_runbook.md`](operation_runbook.md) |
 | Rubric source 작성·수정 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
+| Topic Pack 구조·현재 inventory 확인 | [`topic_pack_architecture.md`](topic_pack_architecture.md) | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
 | 새 topic 추가 또는 기존 topic 보강 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
 | Logic Check 운영 기준 확인 | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
 | Logic Check Profile 초안 확인 | [`logic_check_profile_generator_prompt.md`](logic_check_profile_generator_prompt.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
@@ -64,8 +65,9 @@
 
 | 문서 | 책임 |
 |---|---|
+| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, 52개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | Fact Anchor, Model Answer, Topic Importance와 Logic Check source 작성 기준 |
-| [`topic_pack_workflow.md`](topic_pack_workflow.md) | 요구사항 Markdown → Topic Sheet → source JSON → generated bank → focused validation |
+| [`topic_pack_workflow.md`](topic_pack_workflow.md) | 요구사항 → 직접 source JSON authoring → focused validation → integration rebuild → release/CI 검증 |
 
 ### Logic Check
 
@@ -87,9 +89,10 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 |---|---|---|
 | 배점 | A/B/C/D/E = 3/6/8/6/2 | `rubrics/scoring_model/default.json` |
 | Active Question Type | 4종 | `rubrics/question_types/default.json`, Question Type modules |
-| Model Answer | 57개 | `rubrics/model_answers/industrial_instrumentation_control.json` |
-| Fact Topic | 55개 | `rubrics/fact_anchors/industrial_instrumentation_control.json` |
-| Topic Importance | 8개 | `rubrics/topic_importance/industrial_instrumentation_control.json` |
+| Topic Pack | 52개 | `rubrics/generated/topic_pack_manifest.generated.json` |
+| Generated bank | 6개 | `rubrics/generated/*.generated.json` |
+| Software Topic | SW-01~SW-13, 13개 | `docs/topic_pack_architecture.md`, generated manifest |
+| 기본 Rubric Bank | `generated` | `rubric_bank_paths.py` |
 | Lens 입력 | 문제문만 사용 | `question_type_router.py`, `grading_identity.py` |
 | Coverage 상태 | `present`, `partial`, `incorrect`, `missing` | `question_type_coverage_adapter.py` |
 | Hard cap | high-confidence 핵심 `missing`에만 적용 | `explicit_requirement_cap.py` |
@@ -121,8 +124,9 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | 실제 numeric cap과 `cap 적용` 출력 | `grading_architecture.md` | `grade_score_reconciler.py`, `grade_output_summarizer.py` |
 | 최종 coverage persistence | `grading_architecture.md` | `grading_agents.py`, `bot.py` |
 | 완료 세션 격리와 ID 충돌 방지 | `operation_runbook.md` | `bot.py` |
+| Topic Pack 구조·inventory | `topic_pack_architecture.md` | `rubric_bank_paths.py`, generated manifest |
 | Rubric source와 generated bank | `rubric_authoring_guide.md` | `rubric_bank_paths.py`, `rubric_registry.py` |
-| Topic Pack 생성·검증·promote | `topic_pack_workflow.md` | `scripts/rubric_manager.py` |
+| Topic Pack 생성·검증·integration rebuild | `topic_pack_workflow.md` | `scripts/rubric_manager.py`, release validation |
 
 이 인덱스에는 세부 알고리즘을 복제하지 않습니다. 새 정책을 추가할 때는 상세 문서와 runtime owner를 함께 등록합니다.
 
@@ -144,8 +148,8 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | Coverage score adjustment | `question_type_coverage_score_adjuster.py` |
 | Difficulty ceiling | `difficulty_score_ceiling.py` |
 | Logic Check | Logic Check source JSON, profile JSON, evaluator와 verifier |
-| Topic Pack | `rubrics/topic_packs/<topic_id>/` |
-| Generated bank | `rubrics/generated/*.generated.json` |
+| Topic Pack | `rubrics/topic_packs/<topic_id>/`, `docs/topic_pack_architecture.md` |
+| Generated bank | `rubrics/generated/*.generated.json`; runtime 선택은 `rubric_bank_paths.py` |
 | 실제 운영 | 현재 Compose 설정과 실행 중인 container |
 | 회귀 계약 | `scripts/test_*.py`와 release validation 결과 |
 
@@ -170,7 +174,7 @@ Topic Pack source JSON을 만들기 전에 사람이 검토하는 구조화 Mark
 1. 루트 README와 상세 문서의 책임을 분리합니다.
 2. 같은 정책의 세부 수치와 알고리즘을 여러 문서에 복제하지 않습니다.
 3. 현재 존재하는 파일만 인덱스에 등록합니다.
-4. 수치와 개수는 source JSON과 validation 결과로 확인합니다.
+4. Topic 개수는 generated manifest에서 확인하고, legacy bank의 개수를 현재 Topic Pack coverage로 사용하지 않습니다.
 5. Migration 중간 상태와 일회성 실행 로그는 `archive/`에 둡니다.
 6. `incorrect`와 `missing`을 같은 누락으로 설명하지 않습니다.
 7. B completeness와 C correctness를 같은 감점으로 설명하지 않습니다.
@@ -189,7 +193,7 @@ Topic Pack source JSON을 만들기 전에 사람이 검토하는 구조화 Mark
 문서만 수정했을 때 최소 검증:
 
 ```bash
-git diff --check -- README.md docs/README.md
+git diff --check -- README.md docs
 ```
 
 추가로 확인할 항목:
@@ -198,7 +202,7 @@ git diff --check -- README.md docs/README.md
 - 상대 링크 대상 존재 여부
 - A/B/C/D/E 배점
 - Active Question Type 4종
-- Model Answer, Fact Topic과 Topic Importance 개수
+- Topic Pack manifest의 `topic_count`, generated bank 6개와 Software SW-01~SW-13 존재 여부
 - 현재 runtime owner 파일
 - 오래된 semantic lens와 session 재사용 설명 제거
 

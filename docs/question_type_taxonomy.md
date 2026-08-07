@@ -1,6 +1,6 @@
 # Question Type v2 Taxonomy
 
-Question Type v2는 기술사 2~4교시 답안에 맞춰 C항목 Fact 전개와 D항목 현장 판단을 보강하기 위한 lens이다. 별도 점수 체계가 아니며 A/B/C/D/E를 대체하지 않는다.
+Question Type v2는 기술사 2~4교시 답안에서 C항목 Fact 전개와 D항목 현장 판단을 보강하는 lens다. 별도 점수 체계가 아니며 A/B/C/D/E를 대체하지 않는다. 최종 type은 문제문 기반 deterministic routing이 소유하고, semantic grader는 coverage evidence를 제공할 수 있다.
 
 ## 1. v2 대분류
 
@@ -159,7 +159,14 @@ PRINCIPLE_INTERPRETATION
 
 ## 8. Coverage 구조
 
-Semantic grader는 가능하면 `question_type_coverage`를 반환한다.
+Question Type 자체와 coverage의 소유권을 구분한다.
+
+```text
+문제문
+  → deterministic Question Type routing
+  → canonical active type 확정
+  → semantic grader / Python adapter가 coverage evidence 보강
+```
 
 핵심 필드:
 
@@ -169,17 +176,21 @@ Semantic grader는 가능하면 `question_type_coverage`를 반환한다.
 - `sub_criteria_coverage`
 - `c_fact_focus_coverage`
 - `d_field_judgement_focus_coverage`
+- `explicit_requirement_coverage`
 - `missing_sub_criteria`
 - `overall_coverage`
 - `scoring_hint`
 
-Coverage 상태값:
+Coverage 상태:
 
 | 상태 | 의미 |
 |---|---|
-| `present` | 충분히 포함 |
-| `partial` | 일부 언급은 있으나 부족 |
-| `missing` | 사실상 누락 |
+| `present` | 정확하고 충분하게 응답 |
+| `partial` | 직접 응답했지만 설명이 부족 |
+| `incorrect` | 직접 응답했지만 핵심 Fact가 틀림 |
+| `missing` | 실질적으로 응답하지 않음 |
+
+`incorrect`는 correctness 상태이고 `missing`은 completeness 상태다. Verified defect가 explicit requirement와 연결되면 `incorrect`로 동기화될 수 있다.
 
 전체 coverage:
 
@@ -187,10 +198,9 @@ Coverage 상태값:
 |---|---|
 | `strong` | 유형별 요구 충분히 충족 |
 | `adequate` | 핵심 요구 대부분 충족 |
-| `weak` | 주요 요소 일부 누락 |
-| `poor` | 핵심 요구 대부분 누락 |
+| `weak` | 주요 요소 일부 부족 |
+| `poor` | 핵심 요구 대부분 미충족 |
 | `unknown` | 판단 불가 |
-
 ## 9. Coverage score adjustment
 
 환경변수:

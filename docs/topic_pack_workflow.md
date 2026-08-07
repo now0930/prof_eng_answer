@@ -1,57 +1,54 @@
 # Topic Pack Workflow
 
-이 문서는 `prof_eng_answer`에서 새 topic을 추가하거나 기존 topic을 보강할 때의 표준 workflow를 정의한다.
+이 문서는 새 Topic을 추가하거나 기존 Topic을 보강할 때의 현재 표준 workflow를 정의한다.
 
-핵심 목적은 다음과 같다.
+Topic Pack 구조와 현재 inventory는 `topic_pack_architecture.md`, JSON 내용 기준은 `rubric_authoring_guide.md`를 함께 본다.
 
-1. topic별 채점 기준을 사람이 검토 가능한 단위로 관리한다.
-2. README, Topic Sheet, JSON source, generated bank의 역할을 분리한다.
-3. LLM을 사용하더라도 기존 JSON schema를 깨지 않도록 schema lock을 유지한다.
-4. Fact Anchor와 Logic Check의 경계를 명확히 한다.
-5. 표, 다이어그램, ASCII 그림, 수식 전개를 claim 중심으로 평가한다.
-
----
-
-## 1. 전체 흐름
-
-새 topic은 아래 순서로 추가한다.
+## 1. 핵심 원칙
 
 ```text
-1. Topic Pack source 생성
-2. Topic Pack README 작성
-3. README → Topic Sheet 후보 생성
-4. 사람이 Topic Sheet 검토
-5. Topic Sheet → schema-locked JSON candidate 생성
-6. 사람이 JSON diff 검토
-7. Topic Pack quality 검증
-8. generated bank promote
-9. smoke / Telegram 재채점 확인
-10. commit
+요구사항과 Topic 경계를 먼저 확정한다.
+Topic Sheet는 사람이 검토한다.
+source JSON은 기존 schema를 기준으로 직접 작성한다.
+generated bank는 직접 수정하지 않는다.
+Topic source와 integration rebuild를 분리한다.
+한 Topic의 변경은 한 Topic 단위로 검증·commit한다.
 ```
 
-중요 원칙:
+LLM을 사용할 수 있지만, opaque JSON generation 결과를 그대로 source of truth로 채택하지 않는다. 기존 schema와 validator를 기준으로 명시적으로 작성한 JSON diff를 사람이 검토한다.
+
+## 2. 전체 흐름
 
 ```text
-README → JSON 직행 금지
-Topic Sheet 검토 단계 유지
-generated bank 직접 수정 금지
-source JSON과 generated JSON의 역할 분리
+1. 문제 범위와 요구사항 Markdown 확정
+2. 기존 Topic 검색과 ownership 경계 확인
+3. topic_id 확정
+4. Topic Pack skeleton / README 준비
+5. Topic Sheet 작성·검토
+6. 인접 Topic schema 확인
+7. fact_anchor.json 직접 작성
+8. model_answer.json 직접 작성
+9. topic_importance.json 직접 작성
+10. logic_check.json 직접 작성
+11. topic focused validation
+12. 의미 감사와 boundary 검토
+13. Topic 단위 local commit
+14. batch/lane 완료 후 integration
+15. generated bank 6개 rebuild
+16. release validation
+17. clean checkout / GitHub Actions 확인
+18. push
 ```
 
----
-
-## 2. 파일 구조
-
-Topic Pack source:
+## 3. 파일 구조
 
 ```text
 rubrics/topic_packs/<topic_id>/
-  README.md
-  fact_anchor.json
-  logic_check.json
-  model_answer.json
-  topic_importance.json
-  topic_status.json
+├── README.md
+├── fact_anchor.json
+├── logic_check.json
+├── model_answer.json
+└── topic_importance.json
 ```
 
 Topic Sheet:
@@ -63,547 +60,356 @@ docs/topic_sheets/<topic_id>.md
 Generated bank:
 
 ```text
-rubrics/generated/fact_anchors.generated.json
-rubrics/generated/model_answers.generated.json
-rubrics/generated/topic_importance.generated.json
-rubrics/generated/logic_checks.generated.json
-rubrics/generated/logic_check_profiles.generated.json
-rubrics/generated/topic_pack_manifest.generated.json
+rubrics/generated/
+├── fact_anchors.generated.json
+├── logic_check_profiles.generated.json
+├── logic_checks.generated.json
+├── model_answers.generated.json
+├── topic_importance.generated.json
+└── topic_pack_manifest.generated.json
 ```
 
-역할:
-
-| 파일 | 역할 |
-|---|---|
-| `README.md` | 사람이 topic 의도, 정답 기준, 검토 메모를 남기는 설명서 |
-| `docs/topic_sheets/<topic_id>.md` | JSON 생성을 위한 구조화된 Markdown input |
-| `fact_anchor.json` | 핵심 fact coverage source |
-| `logic_check.json` | fatal/warn 이론 오류 source |
-| `model_answer.json` | 고득점 답안 구조 source |
-| `topic_importance.json` | 난이도, 중요도, high-band unlock 조건 source |
-| `topic_status.json` | topic hash와 상태 관리 |
-| `rubrics/generated/*.json` | runtime용 build output |
-
----
-
-## 3. Topic ID 원칙
-
-`topic_id`는 다음 기준으로 정한다.
-
-- 영어 소문자와 underscore 사용
-- 문제의 핵심 개념과 출제 축을 함께 표현
-- 너무 넓은 이름 금지
-- 기존 topic과 겹치지 않게 작성
-- resonance, damping, PID 등 인접 topic과 routing alias 충돌 주의
-
-예:
-
-```text
-좋음:
-second_order_lag_response_by_damping_ratio
-second_order_system_resonance_frequency_response
-
-나쁨:
-second_order_system
-control_theory
-damping
-```
-
-넓은 topic id는 model answer routing, fact anchor matching, logic check 적용 범위를 흐리게 만든다.
-
----
-
-## 4. Topic Pack 생성
-
-새 topic pack skeleton을 생성한다.
-
-```bash
-cd ~/hermes/workspace/prof_eng_answer
-
-python3 scripts/rubric_manager.py create-topic-pack \
-  --topic-id <topic_id>
-```
-
-생성 후 확인:
-
-```bash
-find rubrics/topic_packs/<topic_id> -maxdepth 1 -type f | sort
-```
-
----
-
-## 5. Topic Pack README 작성
-
-`rubrics/topic_packs/<topic_id>/README.md`는 사람이 읽기 위한 검토 문서다.
-
-이 README는 runtime source가 아니다. 하지만 나중에 Topic Sheet를 만들 때 좋은 입력이 된다.
-
-권장 구조:
-
-```markdown
-# <topic title> Topic Pack
-
-## 목적
-
-## 대표 문제
-
-## 핵심 정답 기준
-
-## 정답으로 인정할 표현
-
-## 핵심 fatal 오류
-
-## warn 수준의 부족한 표현
-
-## false positive 주의사항
-
-## 표와 다이어그램 처리 메모
-
-## 현장 적용 판단 기준
-
-## 검토 메모
-```
-
-README에는 자연어 설명을 쓴다. JSON schema를 설명하려고 하지 않는다.
-
----
-
-## 6. README에서 Topic Sheet 후보 생성
-
-README를 바탕으로 Topic Sheet 후보를 생성한다.
-
-```bash
-python3 scripts/generate_topic_sheet_from_readme.py \
-  --topic-id <topic_id> \
-  --model gemini-2.5-flash \
-  --overwrite
-```
-
-출력:
-
-```text
-docs/topic_sheets/<topic_id>.md
-```
-
-프롬프트만 확인하려면:
-
-```bash
-python3 scripts/generate_topic_sheet_from_readme.py \
-  --topic-id <topic_id> \
-  --print-prompt
-```
-
-주의:
-
-- 이 단계는 JSON을 만들지 않는다.
-- 생성된 Topic Sheet는 후보일 뿐이다.
-- 사람이 반드시 검토한다.
-
----
-
-## 7. Topic Sheet 검토
-
-Topic Sheet는 JSON 생성을 위한 구조화된 입력이다.
-
-필수 섹션:
-
-```text
-1. Topic metadata
-2. Core correct facts
-3. Acceptable answer expressions
-4. Fatal wrong claims
-5. Warn-level weak claims
-6. False positive cautions
-7. Regex candidate patterns
-8. fact_anchor.json generation guidance
-9. logic_check.json generation guidance
-10. model_answer.json generation guidance
-11. topic_importance.json generation guidance
-12. Human review checklist
-```
-
-검토 기준:
-
-- 대표 문제가 정확한가?
-- topic_id가 문서에 포함되어 있는가?
-- 정답 fact가 atomic statement로 나뉘어 있는가?
-- fatal 오류와 단순 누락이 구분되어 있는가?
-- false positive caution이 충분한가?
-- regex 후보가 너무 넓지 않은가?
-- 표/다이어그램을 claim 중심으로 해석하도록 되어 있는가?
-- Fact Anchor와 Logic Check의 경계가 분명한가?
-
----
-
-## 8. Topic Sheet에서 JSON candidate 생성
-
-사람이 검토한 Topic Sheet에서 topic pack source JSON candidate를 생성한다.
-
-```bash
-python3 scripts/generate_topic_pack_from_sheet.py \
-  --topic-id <topic_id> \
-  --sheet docs/topic_sheets/<topic_id>.md \
-  --model gemini-2.5-flash
-```
-
-기본 출력은 `.candidate.json`이다.
-
-```text
-rubrics/topic_packs/<topic_id>/fact_anchor.candidate.json
-rubrics/topic_packs/<topic_id>/logic_check.candidate.json
-rubrics/topic_packs/<topic_id>/model_answer.candidate.json
-rubrics/topic_packs/<topic_id>/topic_importance.candidate.json
-```
-
-source JSON을 직접 갱신하려면 `--overwrite`를 사용한다.
-
-```bash
-python3 scripts/generate_topic_pack_from_sheet.py \
-  --topic-id <topic_id> \
-  --sheet docs/topic_sheets/<topic_id>.md \
-  --model gemini-2.5-flash \
-  --overwrite
-```
-
-권장 운영은 다음과 같다.
-
-```text
-초안 생성:
-  candidate 생성
-
-사람 검토:
-  diff 확인
-
-반영:
-  필요 시 --overwrite 또는 수동 반영
-```
-
----
-
-## 9. Schema Lock 원칙
-
-`generate_topic_pack_from_sheet.py`는 기존 source JSON을 schema template으로 사용한다.
+## 4. Topic 범위 확정
+
+작성 전에 다음을 정한다.
+
+- 대표 기출/예상 문제
+- 문제에서 직접 요구하는 축
+- 핵심 정답 Fact
+- 수식과 조건
+- 현장 적용 판단
+- fatal wrong claim
+- warn-level 부족
+- false positive
+- 인접 Topic과 ownership
+- expected question pattern
+
+Topic이 너무 넓으면 routing alias와 Logic Check 적용 범위가 흐려진다.
+
+## 5. Topic ID
 
 원칙:
 
-- 새 schema를 만들지 않는다.
-- 기존 top-level key를 유지한다.
-- 기존 nested key를 유지한다.
-- 기존 list item shape를 유지한다.
-- 기존 schema에 없는 pseudo field를 만들지 않는다.
-- logic_check에 `"condition"` 같은 pseudo-code 필드를 만들지 않는다.
-- LLM이 필드를 누락하면 기존 값을 복구한다.
-- LLM이 schema를 줄이면 post-process merge로 되돌린다.
+- 영어 소문자와 underscore
+- 핵심 개념과 출제 축을 함께 표현
+- 기존 Topic과 겹치지 않음
+- 한 문제군의 ownership을 설명할 수 있을 정도로 구체적
+- broad umbrella 이름 금지
 
-특히 Logic Check에서 금지되는 형태:
-
-```json
-{
-  "condition": "ζ == 1 && pole_type == '중근'"
-}
-```
-
-이 형태가 위험한 이유:
-
-- runtime schema와 맞지 않는다.
-- `ζ=1 → 중근`은 정답인데 fatal로 잡을 수 있다.
-- wrong pattern, safe condition, verifier profile 경계가 무너진다.
-
----
-
-## 10. Fact Anchor 작성 기준
-
-Fact Anchor는 “정답 요소를 언급했는가”를 본다.
-
-Fact Anchor에 넣을 것:
-
-- 정의
-- 핵심 수식
-- 조건
-- 분류 기준
-- 원리
-- 비교축
-- 현장 적용과 연결되는 핵심 fact
-- 표/다이어그램에서 올바르게 읽히는 claim
-
-Fact Anchor에 넣지 말 것:
-
-- 오답 regex
-- fatal cap 정책
-- 감점 문구
-- LLM verifier 판단 조건
-- safe condition
-- 오답 예시 중심의 rule
-
-예:
+좋은 예:
 
 ```text
-Fact Anchor:
-  ζ=1은 임계감쇠이며 중근을 갖는다.
-  ζ>1은 과감쇠이며 서로 다른 두 실근을 갖는다.
-  안정한 부족감쇠 극점은 s=-ζωn±jωd이다.
-
-Logic Check:
-  ζ=1을 overdamped로 분류하면 fatal.
-  overdamped를 중근으로 설명하면 fatal.
-  s=+ζωn±jωd를 안정 극점식으로 쓰면 fatal.
+second_order_lag_response_by_damping_ratio
+control_valve_sizing_cv_kv_reynolds_liquid_selection
+industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience
 ```
 
----
+## 6. Topic README와 Topic Sheet
 
-## 11. Logic Check 작성 기준
+Topic Pack README는 사람이 읽는 설명서다.
 
-Logic Check는 “정답과 충돌하는가”를 본다.
+권장 내용:
 
-Logic Check에 넣을 것:
+- 목적
+- 대표 문제
+- Topic boundary
+- 핵심 정답
+- 인정 가능한 표현
+- fatal 오류
+- warn 수준
+- false positive
+- 현장 적용
+- 인접 Topic handoff
+- 검토 메모
+
+Topic Sheet는 JSON authoring 전 구조화 input이다.
+
+권장 섹션:
+
+1. Topic metadata
+2. Scope and ownership
+3. Core correct facts
+4. Acceptable expressions
+5. Fatal wrong claims
+6. Warn-level weak claims
+7. False positive cautions
+8. Expected question patterns
+9. Fact Anchor guidance
+10. Model Answer guidance
+11. Logic Check guidance
+12. Topic Importance guidance
+13. Cross-topic handoff
+14. Human review checklist
+
+## 7. JSON 직접 authoring
+
+현재 표준 경로는 Topic Sheet를 확정한 뒤 source JSON을 직접 작성하는 방식이다.
+
+기존 Topic Pack 중 schema가 가장 가까운 파일을 template로 사용한다.
+
+작성 전 확인:
+
+```bash
+find rubrics/topic_packs/<reference_topic> \
+  -maxdepth 1 -type f -print | sort
+```
+
+JSON은 다음 원칙을 지킨다.
+
+- 기존 top-level schema 유지
+- nested object/list shape 유지
+- validator가 모르는 pseudo field 금지
+- required field 누락 금지
+- topic_id 일치
+- cross-reference anchor ID 실존 확인
+- broad alias 최소화
+- expected question과 Topic ownership 일치
+
+Generator script가 존재하더라도 표준 source authoring을 대체하지 않는다. 사용한다면 초안 또는 schema 참고용으로만 사용하고 최종 JSON diff를 직접 검토한다.
+
+## 8. Fact Anchor
+
+Fact Anchor는 “정답 요소가 있는가”를 본다.
+
+포함:
+
+- 정의
+- 핵심 식
+- 변수와 단위
+- 조건
+- 분류
+- 원리
+- 인과관계
+- 비교축
+- 현장 판단의 기반 Fact
+
+포함하지 않음:
+
+- 오답 regex
+- 감점 문구
+- fatal cap 정책
+- verifier-only condition
+- safe exception 중심의 rule
+
+Atomic Fact로 분리한다.
+
+## 9. Model Answer
+
+Model Answer는 정답 문장 matching 파일이 아니다.
+
+포함:
+
+- representative question
+- expected question pattern
+- topic aliases
+- 답안 구조
+- high-score features
+- common missing points
+- low-score patterns
+- field connection
+- adjacent Topic handoff
+
+Alias는 routing을 흔들 정도로 넓게 쓰지 않는다.
+
+## 10. Topic Importance
+
+Topic Importance는 difficulty와 시험 전략 metadata를 제공한다.
+
+포함:
+
+- difficulty
+- selection importance
+- primary question type
+- high-band unlock conditions
+- omission/fatal risk
+- field judgement
+- revision note
+
+Difficulty는 점수를 직접 주지 않는다.
+
+## 11. Logic Check
+
+Logic Check는 “정답과 직접 충돌하는가”를 본다.
+
+포함:
 
 - fatal wrong claim
-- major/warn weak claim
-- wrong_patterns
+- major/warn claim
+- wrong pattern
 - safe condition
 - false positive caution
 - affected layer
-- recommended ceiling
+- recommended ceiling metadata
+- verifier focus
 - D/E claim trust metadata
-- LLM verifier focus
 
-Logic Check에 넣지 말 것:
+단순 누락을 fatal로 만들지 않는다.
 
-- 단순 누락을 fatal 처리하는 rule
-- 좋은 답안에도 나올 수 있는 contrastive statement를 잡는 broad regex
-- 표 위치만 보고 판단하는 rule
-- schema에 없는 pseudo field
+좋은 답안에 등장할 수 있는 부정·비교 표현을 broad regex로 잡지 않는다.
 
-fatal로 볼 수 있는 경우:
+## 12. Schema validation 주의
 
-- topic의 핵심 이론을 반대로 설명
-- 수식의 안정성 부호가 반대
-- 분류 mapping이 정답과 충돌
-- 안전/위험 조건을 반대로 설명
-- 현장 판단의 전제가 되는 이론이 깨짐
+최근 Topic Pack 확장에서 특히 확인할 항목:
 
-warn/major로 둘 경우:
+- expected question object의 required anchor reference key
+- recommended outline item의 `section`
+- object type field를 string placeholder로 두지 않음
+- topic_importance의 difficulty classification
+- cross-lane / cross-topic owner
+- generated manifest topic count
+- source와 generated topic_id 일치
 
-- 핵심 항목 누락
-- 비교축 부족
-- 현장 적용 부족
-- 용어가 모호하지만 정답과 직접 충돌하지 않음
-- ASCII 그림은 있으나 설명이 부족함
+Validator가 기대하는 실제 key 이름을 확인하고 임의의 유사 key를 만들지 않는다.
 
----
+## 13. Topic focused validation
 
-## 12. 표와 다이어그램 처리 기준
-
-표, 다이어그램, ASCII 그림, s-plane 그림, block diagram, 수식 전개는 그 자체가 정답 또는 오답이 아니다. 평가 대상은 거기서 읽히는 claim이다.
-
-### 12.1 Fact Anchor에서의 처리
-
-Fact Anchor는 표와 다이어그램에서 올바른 claim을 evidence로 인정한다.
-
-예:
-
-| 답안 표현 | Fact Anchor 처리 |
-|---|---|
-| 표에서 `0<ζ<1 → underdamped → overshoot 있음` | 부족감쇠 응답 특성 evidence |
-| s-plane 그림에서 좌반평면 복소켤레근과 감쇠진동을 설명 | 극점-응답 관계 evidence |
-| block diagram에서 feedback과 dead time을 보조로 설명 | 보조 현장 적용 evidence |
-| 수식으로 `ωd=ωn√(1-ζ²)` 제시 | 부족감쇠 감쇠진동수 evidence |
-
-단, 표가 있어도 의미 claim이 틀리면 Fact Anchor coverage만으로 고득점 처리하면 안 된다.
-
-### 12.2 Logic Check에서의 처리
-
-Logic Check는 표와 다이어그램의 claim이 정답과 충돌할 때 적용한다.
-
-예:
-
-| 답안 표현 | Logic Check 처리 |
-|---|---|
-| 표에서 `ζ=1 → over damped` | fatal 후보 |
-| 표에서 `overdamped → 중근` | fatal 후보 |
-| 수식에서 `s=+ζωn±jωd`를 안정 극점식으로 제시 | fatal 후보 |
-| s-plane 설명에서 `RHP stable`이라고 설명 | fatal 후보 |
-| 그림만 있고 설명이 불명확함 | fatal 아님, warn 또는 coverage 부족 |
-
-### 12.3 ASCII 그림 주의
-
-ASCII 그림은 파싱이 불안정할 수 있으므로 다음 원칙을 따른다.
-
-- 그림 위치만으로 fatal 처리하지 않는다.
-- 그림 주변의 라벨, 표 셀, 본문 설명을 함께 본다.
-- claim이 명시되지 않으면 fatal로 단정하지 않는다.
-- 사람이 읽으면 명확한 오답이라도 regex가 놓칠 수 있으므로 LLM verifier profile에 candidate evidence 추출 지침을 둔다.
-
-### 12.4 표 cell mapping 주의
-
-표는 셀 간 정렬이 깨질 수 있다. 따라서 다음을 함께 확인한다.
-
-- 같은 행의 header와 값
-- 바로 위/아래 행의 라벨
-- 본문 bullet의 재진술
-- 표 뒤의 결론 문장
-
-예를 들어 아래와 같은 답안은 fatal로 볼 수 있다.
+기본 순서:
 
 ```text
-ζ=1 인 경우는 → over damped
-overdamped => 중근
+python3 -m py_compile <변경 관련 Python이 있을 때>
+→ topic focused tests
+→ schema / quality validator
+→ git diff --check
+→ 필요한 범위의 validate-all
 ```
 
-반면 아래 문장은 fatal이 아니다.
+Topic source만 변경했고 runtime Python이 바뀌지 않았다면 container 전체 회귀를 반복하지 않는다.
+
+## 14. 의미 감사
+
+자동 validator 통과만으로 완료하지 않는다.
+
+확인:
+
+- Fact가 실제로 맞는가
+- expected question과 content가 일치하는가
+- high-band 조건이 Topic 내용과 일치하는가
+- Logic Check가 정답을 fatal로 잡지 않는가
+- safe case가 충분한가
+- 인접 Topic ownership을 침범하지 않는가
+- broad alias가 다른 Topic routing을 끌어오지 않는가
+
+여러 Topic을 병렬 작성했다면 integration 전 cross-topic semantic audit를 수행한다.
+
+## 15. Commit 경계
+
+권장:
 
 ```text
-ζ=1은 over damped가 아니라 critical damping이다.
+Topic A 작성
+→ focused validation
+→ Topic A local commit
+
+Topic B 작성
+→ focused validation
+→ Topic B local commit
 ```
 
----
+서로 다른 Topic을 하나의 대형 source commit으로 묶지 않는다.
 
-## 13. False Positive 방지 기준
+공통 validator나 release gate 수정은 Topic source commit과 분리한다.
 
-Logic Check에는 false positive 방지 기준이 반드시 필요하다.
+## 16. 병렬 lane
+
+대규모 확장은 전용 worktree/branch를 사용할 수 있다.
+
+원칙:
+
+- lane별 소유 Topic 명확화
+- 다른 lane source 수정 금지
+- production common code 최소화
+- Topic별 local commit
+- lane-wide validation 후 push
+- integration에서 patch-equivalence와 cross-topic ownership 확인
+
+generated bank는 각 lane이 반복 생성하지 않고 최종 integration에서 한 번 rebuild하는 방식을 권장한다.
+
+## 17. Generated rebuild
+
+Source가 모두 확정된 integration 단계에서 generated bank를 갱신한다.
 
 예:
-
-| 표현 | 처리 |
-|---|---|
-| `ζ=1은 over damped가 아니라 critical damping이다` | 정답 설명 |
-| `σ=ζωn`을 감쇠율 크기로 정의하고 최종 극점식을 `s=-σ±jωd`로 제시 | 허용 가능 |
-| `ζ≈0.707`을 실무 절충값으로 설명 | 허용 가능 |
-| `ζ≈0.707`을 임계감쇠 정의로 설명 | 오류 |
-| `ζ=sinθ`를 허수축 기준 각도로 정의 | 허용 가능 |
-| `ζ=sinθ`를 음의 실수축 기준 각도로 정의 | 오류 후보 |
-
----
-
-## 14. generated bank promote
-
-source JSON을 수정한 뒤에는 generated bank를 갱신한다.
 
 ```bash
-python3 scripts/rubric_manager.py validate-topic-pack-release --promote-generated
+PROMOTE_GENERATED=1 \
+RUN_SMOKE_TOPIC_PACKS=0 \
+RUN_GRADING_REPRODUCIBILITY=0 \
+scripts/validate_release.sh
 ```
 
-이 명령은 다음을 수행한다.
+또는 현재 `rubric_manager.py`의 release/promote 명령을 사용한다.
 
-1. Python compile
-2. topic pack validation
-3. generated bank build
-4. generated bank validation
-5. topic pack quality validation
-6. smoke-topic-pack
-7. generated output promote
+생성 대상은 6개다.
 
-변경되는 파일:
+Generated JSON은 직접 편집하지 않는다.
 
-```text
-rubrics/generated/fact_anchors.generated.json
-rubrics/generated/model_answers.generated.json
-rubrics/generated/topic_importance.generated.json
-rubrics/generated/logic_checks.generated.json
-rubrics/generated/logic_check_profiles.generated.json
-rubrics/generated/topic_pack_manifest.generated.json
-```
+## 18. Non-promote release validation
 
----
-
-## 15. smoke와 Telegram 검증
-
-Topic Pack smoke:
+최종 generated commit 이후에는 GitHub Actions와 같은 non-promote 경로를 검증한다.
 
 ```bash
-python3 scripts/rubric_manager.py smoke-topic-pack --topic-id <topic_id>
+PROMOTE_GENERATED=0 \
+RUN_SMOKE_TOPIC_PACKS=0 \
+RUN_GRADING_REPRODUCIBILITY=0 \
+scripts/validate_release.sh
 ```
 
-legacy/generated 비교:
+이 경로는 generated output을 검증하되 promote하지 않아야 한다.
 
-```bash
-python3 scripts/smoke_compare_rubric_bank_modes.py <session_path>
-```
+## 19. Hermetic regression
 
-Telegram 재채점에서 확인할 것:
+Committed test는 clean checkout에서 재현되어야 한다.
 
-- topic이 맞게 routing되는가?
-- Logic Check가 적용되는가?
-- fatal 오류가 있으면 `mode=fatal, fatal=True`가 나오는가?
-- recommended cap이 의도한 값으로 적용되는가?
-- 최종 Bot 출력이 사용자에게 이해 가능하게 나오나?
-
-예:
+금지:
 
 ```text
-phase3b logic check applied: topic=<topic_id>, mode=fatal, fatal=True
-phase21 final difficulty ceiling evaluated: recommended_cap=10.0, capped_score=10.0
+data/sessions/<local-only-session-id>/input.txt
+data/sessions/<local-only-session-id>/grade.json
 ```
 
----
+재현 fixture:
 
-## 16. commit 전 확인
+```text
+scripts/fixtures/<semantic_fixture_name>/
+```
+
+필요한 historical input을 fixture로 옮길 때는 개인 session ID를 영구 테스트 API로 사용하지 않는다.
+
+## 20. Container smoke
+
+Container smoke는 다음 변경에만 우선 수행한다.
+
+- LLM integration
+- container-only dependency
+- container hostname
+- mount / path
+- runtime env
+- deployment
+- live Telegram persistence/output
+
+Static Topic JSON, docs, pure validator test만 바뀐 경우 host focused validation과 release validation을 우선한다.
+
+## 21. 최종 확인
 
 ```bash
 git status --short
 git diff --stat
 git diff --check
+
+python3 scripts/rubric_manager.py validate-all
+
+PROMOTE_GENERATED=0 \
+RUN_SMOKE_TOPIC_PACKS=0 \
+RUN_GRADING_REPRODUCIBILITY=0 \
+scripts/validate_release.sh
 ```
 
-Python 검증:
+필요하면 detached clean worktree에서 release validation을 한 번 더 실행한다.
 
-```bash
-python3 -m py_compile \
-  scripts/generate_topic_sheet_from_readme.py \
-  scripts/generate_topic_pack_from_sheet.py \
-  scripts/rubric_manager.py \
-  scripts/topic_review_llm.py
-```
+## 22. Push
 
-Topic Pack 검증:
+모든 Topic과 integration 검증이 끝난 뒤 push한다.
 
-```bash
-python3 scripts/rubric_manager.py validate-topic-pack-quality
-python3 scripts/rubric_manager.py validate-topic-pack-release
-```
+대규모 parallel 작업에서는 중간 Topic마다 원격 push를 반복하지 않고 lane/batch 완료 후 push하는 방식을 권장한다.
 
-커밋 대상에 포함할 수 있는 것:
-
-```text
-rubrics/topic_packs/<topic_id>/*.json
-rubrics/topic_packs/<topic_id>/README.md
-docs/topic_sheets/<topic_id>.md
-rubrics/generated/*.generated.json
-scripts/generate_topic_sheet_from_readme.py
-scripts/generate_topic_pack_from_sheet.py
-scripts/rubric_manager.py
-docs/*.md
-README.md
-scripts/README.md
-```
-
-커밋 제외:
-
-```text
-reports/topic_pack_generation_*.json
-reports/topic_sheet_generation_*.json
-__pycache__/
-patch_*.py
-*.candidate.json
-임시 실험 파일
-```
-
----
-
-## 17. 권장 commit 분리
-
-Rubric 동작 수정과 authoring 도구 추가는 분리한다.
-
-예:
-
-```bash
-git commit -m "fix(rubrics): cap fatal damping-ratio logic errors"
-git commit -m "feat(rubrics): add README-to-topic-sheet authoring flow"
-git commit -m "docs: update topic pack authoring workflow"
-```
-
-문서만 수정한 경우:
-
-```bash
-git commit -m "docs: update topic pack authoring workflow"
-```
+Push 후 GitHub Actions validation이 해당 commit에서 `success`인지 확인한다.

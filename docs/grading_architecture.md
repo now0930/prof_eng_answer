@@ -1,163 +1,266 @@
 # Grading Architecture
 
-이 문서는 현재 `prof_eng_answer` 채점 pipeline을 설명한다. 세부 provider 설정은 `llm_provider.md`, Difficulty와 ceiling은 `difficulty_and_selection_strategy.md`, Question Type은 `question_type_taxonomy.md`를 우선한다.
+이 문서는 현재 `prof_eng_answer`의 채점 pipeline과 점수 소유권을 설명한다.
 
-## 1. 현재 채점 철학
+세부 provider 설정은 `llm_provider.md`, Difficulty와 ceiling은 `difficulty_and_selection_strategy.md`, Question Type은 `question_type_taxonomy.md`, Topic Pack 구조는 `topic_pack_architecture.md`를 우선한다.
+
+## 1. 기본 원칙
 
 기술사 답안은 단순 키워드 포함 여부가 아니라 다음을 함께 평가한다.
 
-- 문제 요구를 정확히 잡는가
-- 핵심 Fact를 정확하고 간결하게 설명하는가
-- 답안이 문제 요구축에서 벗어나지 않는가
+- 문제 요구를 직접 충족하는가
+- 핵심 Fact가 정확한가
+- 원리·수식·조건과 결과를 논리적으로 연결하는가
 - 현장 적용 조건, 리스크, 비용, 유지보수성을 판단하는가
-- 결론과 제언이 fact에서 논리적으로 도출되는가
-- 면접에서 근거를 방어할 수 있는가
+- 결론과 제언이 Fact에서 도출되는가
+- 같은 오류를 여러 layer에서 중복 감점하지 않는가
+- 최종 저장 객체와 Telegram 출력 객체가 일치하는가
 
-## 2. Runtime 흐름
+점수의 canonical owner는 A/B/C/D/E layer다. Question Type, Fact Anchor, Model Answer, Logic Check, deterministic checker와 Difficulty는 근거·보정·제한을 제공한다.
+
+## 2. A/B/C/D/E 25점 구조
+
+| Layer | 이름 | 배점 | 평가 초점 |
+|---|---|---:|---|
+| A | 문제 진입·답안 구조 | 3 | 배경, 핵심 쟁점, 목차와 답안 구조 |
+| B | 문제 요구 해석·완전성 | 6 | 요구동사, 세부 요구, 직접 응답과 완전성 |
+| C | 유형별 Fact 기반 내용 설명 | 8 | 핵심 Fact, 원리, 식, 조건, 인과관계의 정확성 |
+| D | 현장 적용·설계 판단·제언 | 6 | 적용조건, trade-off, 비용, 리스크, 검증 가능성 |
+| E | 연결성·면접 방어 가능성 | 2 | 문단 연결, 결론, 근거의 방어 가능성 |
+| 합계 |  | 25 |  |
+
+| 기준 | 점수 |
+|---|---:|
+| 공식 합격선 | 15 |
+| 실전 목표선 | 17 |
+| 고득점 기준 | 20 |
+
+Source of truth는 `rubrics/scoring_model/default.json`이다.
+
+## 3. Runtime 흐름
 
 ```text
 Telegram /grade
-→ bot.py::handle_text()
-→ bot.py::grade_answer()
-→ grading_agents.run_agent_pipeline()
-→ session input/prompt/raw/grade 저장
-→ semantic grader 적용
-→ A/B/C/D/E layer 점수 재산정
-→ Fact Anchor 평가
-→ Model Answer Bank 참조
-→ Originality/connection/volume 평가
-→ Question Type coverage attach
-→ Difficulty strategy attach
-→ Difficulty ceiling 평가
-→ bot.py::format_result()
-→ bot.py::send_message()
+  → bot.py 입력 정규화와 session 준비
+  → grading_identity.py
+  → question-only deterministic Question Type lens
+  → grading_agents.py
+  → LLM provider routing
+  → semantic grading과 3인 rater 합성
+  → Fact Anchor / Model Answer evidence
+  → explicit requirement coverage
+  → Logic Check / deterministic checker
+  → verified defect reconciliation
+  → single-owner layer evidence guard
+  → Difficulty Strategy / recommended ceiling
+  → final score reconciliation
+  → final coverage persistence
+  → grade.json 저장
+  → 동일 객체를 Telegram formatter에 전달
 ```
 
-`run_agent_pipeline()`은 legacy 1차 분석 결과가 약하더라도 phase2 후처리 결과로 grade를 교체할 수 있다. 따라서 최종 사용자 출력은 `grade.json`의 최종 phase2 결과와 `bot.py::format_result()` 기준으로 본다.
-
-## 3. A/B/C/D/E 25점 구조
-
-| 항목 | 배점 | 평가 내용 |
-|---|---:|---|
-| A | 4 | 배경과 문제 진입 |
-| B | 5 | 문제 요구 파악 |
-| C | 8 | 유형별 Fact 기반 내용 설명 |
-| D | 6 | 현장 적용·설계 판단·제언 |
-| E | 2 | 연결성·면접 방어 가능성 |
-| 합계 | 25 | 전체 답안 점수 |
-
-| 기준선 | 점수 |
-|---|---:|
-| 공식 합격선 | 15 |
-| 실전 목표선 | 17.5 |
-| 고득점 기준 | 20 |
+`grading_agents.py`가 최초 최종화한 뒤 `bot.py`에서도 final persistence guard를 수행한다. score-bearing field는 저장 직전에 다시 일관성을 확인한다.
 
 ## 4. 3인 layer 평가
 
 | 채점자 | 중점 |
 |---|---|
-| 교수 채점자 | 원리, 개념 정확성, 체계성, 이론적 설명 |
-| 기술사 채점자 | 현장 절차, 적용 조건, 리스크, 검증 기준 |
+| 교수 채점자 | 원리, 개념 정확성, 체계성 |
+| 기술사 채점자 | 현장 절차, 적용 조건, 리스크, 검증 |
 | 기업 임원 채점자 | 비용, 유지보수성, 기존 설비 영향, 실현 가능성 |
 
-A/B/C/D/E 항목별로 3인 layer 가중치가 다르다. Telegram 출력에서는 3인 단순 평균과 layer 가중 점수를 보여준다. Difficulty ceiling이 적용된 경우 가중 점수는 ceiling 적용 전 점수이며, 최종 점수는 별도로 표시한다.
+Layer별 가중치는 `rubrics/scoring_model/default.json`이 기준이다. 단순 평균, layer 가중 점수와 실제 적용된 cap 이후 최종 점수는 구분한다.
 
-## 5. Semantic grader와 Python rule의 역할
+## 5. Question Type
 
-| 구분 | 역할 |
-|---|---|
-| Gemini/CLOVA semantic grader | 의미, 논리, 누락 요소, 기술사적 깊이 평가 |
-| Ollama 보조 모델 | 1차 분석과 보조 코멘트 생성 |
-| Python rule | 점수 cap, fallback, coverage, ceiling, 출력 정합성 보정 |
-| Fact Anchor | topic별 핵심 fact 충족 여부 평가 |
-| Model Answer Bank | 모범 답안 구조와 고득점/저득점 패턴 참조 |
-| Question Type v2 | C/D 항목의 유형별 요구 lens |
-| Difficulty Profile | 고득점 가능성과 ceiling 후보 |
+Active Question Type은 4종이다.
 
-LLM 응답이 malformed JSON을 반환할 수 있으므로, 파서는 code fence, 일부 괄호 누락, LaTeX backslash 등 흔한 오류를 복구하려고 시도한다. 복구가 실패해도 phase2 semantic/Python scoring이 최종 결과를 보강한다.
+- `PRINCIPLE_INTERPRETATION`
+- `DIAGNOSIS_ACTION`
+- `COMPARE_SELECTION`
+- `IMPLEMENTATION_EVALUATION`
 
-## 6. Fact Anchor 평가
+최종 Question Type lens는 **문제문만** 사용한다. 답안 내용, 길이, 표현 차이로 type을 바꾸지 않는다.
 
-Fact Anchor는 topic별 핵심 fact 기준이다. 일반적으로 한 문제에 핵심 anchor 5개를 선택한다.
+Semantic grader는 coverage evidence를 제공할 수 있지만 type 소유권은 deterministic router와 canonical taxonomy에 있다.
 
-평가 관점:
+## 6. Coverage 상태
 
-- 핵심 개념 인지
-- 정확한 설명
-- 문제 요구와 연결
-- 간결성
-- 현장 의미 또는 한계
-
-Fact Anchor는 Model Answer보다 더 기초적인 factual 기준이며, 같은 topic의 여러 Model Answer가 공유할 수 있다.
-
-## 7. Model Answer Bank 역할
-
-Model Answer Bank는 정답 문장 매칭용이 아니다.
-
-역할:
-
-- 답안 전개 구조 제공
-- 고득점 요소 제공
-- 저득점 패턴 제공
-- 현장 적용 포인트 제공
-- semantic grader와 Python rule 판단 보강
-
-같은 `topic_id`에 여러 `question_type` Model Answer가 존재할 수 있다.
-
-## 8. Question Type coverage
-
-Question Type coverage는 다음을 확인한다.
-
-- 해당 유형의 sub criteria 충족 여부
-- C항목 fact focus 누락 여부
-- D항목 field judgement focus 누락 여부
-- Telegram 출력용 보완 문구
-- coverage 보정 후보
-
-기본 운영은 `warn`으로 두며, 이 경우 점수를 직접 변경하지 않고 보정 후보만 출력한다.
-
-## 9. Difficulty ceiling
-
-Difficulty Profile은 점수를 대체하지 않는다. 다만 `DIFFICULTY_CEILING_MODE=strict`이면 recommended cap이 실제 점수에 적용될 수 있다.
-
-예: `THEORY_CORE`에서 핵심 수식·변수 관계·응답 해석에 fatal error가 감지되면 10점 cap 후보가 적용될 수 있다. 이 경우 사용자 출력에는 다음이 구분되어야 한다.
-
-- ceiling 적용 전 단순 평균
-- ceiling 적용 전 가중 점수
-- ceiling 적용 후 최종 점수
-- cap 사유
-- 구체적 이론 오류 또는 보완 방향
-
-## 10. 답안 분량 cap
-
-25점 문항은 기술사 답안지 기준 충분한 전개량을 요구한다.
-
-대표 cap:
+명시적 요구와 Question Type coverage는 다음 네 상태를 사용한다.
 
 | 상태 | 의미 |
 |---|---|
-| 매우 짧은 텍스트 | 요약 답안으로 보고 낮은 상한 적용 |
-| 1쪽 수준 | 부분 답안 상한 적용 |
-| 2쪽 수준 | 기본 전개는 있으나 고득점 제한 |
-| 약 3쪽 수준 | 구조와 내용이 좋으면 고득점 가능 |
+| `present` | 정확하고 충분하게 응답 |
+| `partial` | 직접 응답했지만 불충분 |
+| `incorrect` | 직접 응답했지만 핵심 Fact가 틀림 |
+| `missing` | 실질적으로 응답하지 않음 |
 
-분량 cap은 자동 고득점/자동 감점이 아니라, A/B/C/D/E 전개 가능성을 제한하는 보정이다.
+`incorrect`와 `missing`은 다르다.
 
-## 11. 관련 파일
+- `incorrect`: correctness 문제
+- `missing`: completeness 문제
+
+직접 답했지만 틀린 내용을 `missing`으로 바꾸지 않는다.
+
+## 7. 명시적 요구 hard cap
+
+`explicit_requirement_cap.py`가 authoritative runtime이다.
+
+Hard cap은 다음 조건을 모두 만족할 때만 적용한다.
+
+- `question_type_coverage.coverage_source=semantic_grader`
+- explicit requirement block의 `source=question_text`
+- `extraction_confidence=high`
+- `is_core=true`
+- 상태가 `missing`
+
+`partial`과 `incorrect`는 hard cap 대상이 아니다.
+
+| 실제 핵심 누락 | B 상한 | 총점 상한 |
+|---|---:|---:|
+| 1개 | 3.5 / 6 | 17.0 / 25 |
+| 2개 이상 | 2.0 / 6 | 14.0 / 25 |
+| 전체 | 1.5 / 6 | 12.5 / 25 |
+
+이 정책은 일반 Question Type sub-criteria 부족을 hard cap으로 바꾸기 위한 기능이 아니다.
+
+## 8. Fact Anchor와 Model Answer
+
+Fact Anchor는 topic별 factual coverage를 제공한다.
+
+- 정의
+- 핵심 수식
+- 조건
+- 분류 기준
+- 인과관계
+- 비교축
+- 현장 판단을 지탱하는 Fact
+
+Model Answer는 정답 문장 매칭용이 아니다.
+
+- 고득점 답안 구조
+- 설명 깊이
+- common missing points
+- field connection
+- question demand와의 관계
+
+현재 기본 runtime bank는 Topic Pack source에서 생성한 `rubrics/generated/` bank다.
+
+## 9. Logic Check와 deterministic checker
+
+Logic Check는 정답과 직접 충돌하는 핵심 이론 오류를 검증한다.
+
+Topic-specific checker는 수식, 부호, 방향, 조건 같은 deterministic defect를 보완한다.
+
+검증된 defect는 evidence bridge를 통해 explicit requirement와 연결될 수 있으며 해당 응답 상태는 `incorrect`로 동기화할 수 있다.
+
+Coverage 표시 동기화 자체는 점수를 직접 변경하지 않는다.
+
+## 10. Single-owner score policy
+
+같은 오류를 여러 layer에서 중복 감점하지 않는다.
+
+기본 원칙:
+
+- B는 요구 응답 여부와 완전성
+- C는 factual correctness의 기본 owner
+- D는 독립적인 현장 판단·설계 판단
+- E는 독립적인 연결성·방어 가능성
+
+예를 들어 C에서 검증된 Fact 오류가 이미 score owner를 갖는다면, 동일 사실을 B completeness와 D/E에서 다시 직접 감점하지 않는다.
+
+D/E 제한은 별도의 field judgement 또는 connection evidence가 있을 때만 독립적으로 적용한다.
+
+## 11. Logic fatal과 Difficulty ceiling
+
+Logic fatal과 numeric cap은 같은 개념이 아니다.
+
+- Logic fatal은 correctness / claim trust evidence다.
+- Difficulty는 고득점 가능성과 recommended ceiling을 계산한다.
+- 실제 numeric cap 적용 여부는 runtime mode와 final reconciler가 결정한다.
+
+환경변수:
+
+```text
+DIFFICULTY_CEILING_MODE=warn | strict | off
+```
+
+`warn`은 cap 후보를 기록하지만 점수를 직접 변경하지 않는다. `strict`에서는 유효한 recommended cap이 실제 점수에 적용될 수 있다.
+
+Telegram의 `cap 적용` 표현은 실제 numeric cap이 적용된 경우에만 사용한다.
+
+## 12. 최종 score reconciliation과 persistence
+
+최종 단계에서는 다음을 일치시킨다.
+
+- A/B/C/D/E breakdown
+- total score
+- applied cap
+- score range
+- official pass / practical target 표시
+- explicit requirement coverage
+- verified defect 표시
+- Telegram summary
+
+최종 저장:
+
+```text
+final grade object
+  → grade.json
+  → same object
+  → Telegram formatter
+```
+
+완료된 session은 다음 채점에서 재사용하지 않는다. 동일 초 session ID 충돌도 방지한다.
+
+## 13. Topic Pack과 runtime bank
+
+Topic Pack source:
+
+```text
+rubrics/topic_packs/<topic_id>/
+```
+
+Generated runtime bank:
+
+```text
+rubrics/generated/
+```
+
+기본 `RUBRIC_BANK_MODE`는 `generated`다. Legacy bank는 호환과 비교 용도로 유지한다.
+
+Topic Pack 개수와 inventory는 `rubrics/generated/topic_pack_manifest.generated.json`을 기준으로 확인한다.
+
+## 14. 검증 경계
+
+기본 순서:
+
+```text
+py_compile
+  → focused regression
+  → git diff --check
+  → validate-all / release validation
+  → 필요한 경우에만 container smoke
+```
+
+Committed regression은 개발자 로컬 `data/sessions/...` 파일에 의존하지 않는다. 필요한 입력은 `scripts/fixtures/`에 tracked fixture로 둔다.
+
+Container smoke는 LLM integration, container-only dependency, hostname, mount, environment 또는 deployment/runtime 차이가 실제로 있는 변경에 한정한다.
+
+## 15. 주요 runtime owner
 
 | 파일 | 역할 |
 |---|---|
-| `bot.py` | Telegram command, display formatter, send boundary cleanup |
-| `grading_agents.py` | 채점 pipeline 중심 |
-| `gemini_grader.py` | Gemini semantic grader |
-| `clova_grader.py` | CLOVA semantic grader |
-| `originality_grader.py` | 독창성·기술사적 판단성 평가 |
-| `model_answer_router.py` | Model Answer Bank 참조 |
-| `difficulty_strategy.py` | Difficulty Profile 분류 |
-| `difficulty_output_adapter.py` | difficulty 설명 attach |
-| `difficulty_score_ceiling.py` | ceiling 후보 계산과 strict 적용 |
-| `question_type_taxonomy.py` | Question Type v2 taxonomy |
-| `question_type_coverage_adapter.py` | coverage 출력 보강 |
-| `question_type_coverage_score_adjuster.py` | coverage 보정 후보 |
-| `semantic_question_type_prompt.py` | semantic grader prompt contract |
-| `semantic_question_type_postprocess.py` | coverage fallback/postprocess |
+| `bot.py` | Telegram 입력, session, 최종 persistence와 formatter boundary |
+| `grading_agents.py` | semantic grading orchestration |
+| `grading_identity.py` | 문제·제출 정규화와 재현성 identity |
+| `question_type_router.py` | question-only deterministic lens |
+| `question_type_coverage_adapter.py` | coverage 정규화 |
+| `explicit_requirement_cap.py` | 실제 핵심 `missing` hard cap |
+| `verified_defect_reconciliation.py` | verified defect와 coverage 동기화 |
+| `layer_evidence_guard.py` | single-owner evidence 제한 |
+| `logic_check_evaluator.py` | Logic Check 병합 |
+| `difficulty_score_ceiling.py` | recommended ceiling과 strict 적용 |
+| `grade_score_reconciler.py` | 최종 점수·cap·score range 정합성 |
+| `grade_output_summarizer.py` | Telegram 요약과 deterministic fallback |
+| `rubric_bank_paths.py` | legacy/generated runtime bank 선택 |

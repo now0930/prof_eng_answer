@@ -2,9 +2,16 @@
 
 이 문서는 산업계측제어기술사 답안 채점기에서 표, 도면, 수식, 비교 구조를 Model Answer, Fact Anchor, Logic Check에 어떻게 나누어 반영할지 정의한다.
 
-Logic Check의 주제별 지식은 Python 코드에 하드코딩하지 않고 다음 JSON 문서로 관리한다.
+Logic Check의 주제별 지식은 Python 코드에 하드코딩하지 않는다.
 
-    rubrics/logic_check_profiles/industrial_instrumentation_control.json
+현재 Topic Pack 기준 source of truth는 각 Topic의 `rubrics/topic_packs/<topic_id>/logic_check.json`이다. Integration 시 source에서 다음 generated bank를 만든다.
+
+```text
+rubrics/generated/logic_checks.generated.json
+rubrics/generated/logic_check_profiles.generated.json
+```
+
+Legacy `rubrics/logic_checks/`와 `rubrics/logic_check_profiles/` bank는 호환·비교 목적으로 남을 수 있다. 기본 runtime mode가 `generated`일 때는 `rubric_bank_paths.py`가 generated path를 선택한다.
 
 ---
 
@@ -241,19 +248,16 @@ candidate extractor rule 예시:
 
 ## 10. 운영 원칙
 
-1. 주제 지식은 Python 코드에 하드코딩하지 않는다.
-2. 주제 지식은 JSON profile에 둔다.
-3. Python은 JSON profile을 읽고 candidate evidence만 추출한다.
-4. LLM은 candidate evidence와 truth_schema를 비교한다.
-5. fatal은 정답과 직접 충돌할 때만 적용한다.
-6. LLM 실패 또는 confidence 부족 시 fatal을 적용하지 않는다.
-7. 좋은 답안에 자주 나오는 표현은 반드시 safe_conditions에 등록한다.
-8. 표와 도면은 문자열이 아니라 claim 구조로 해석한다.
-9. 단순 누락은 major/minor, 핵심 반대 주장은 fatal이다.
-10. THEORY_CORE fatal은 최종 점수 cap을 적용한다.
-
----
-
+1. Topic 지식은 Python 코드에 하드코딩하지 않는다.
+2. Topic별 Logic Check source는 `rubrics/topic_packs/<topic_id>/logic_check.json`에 둔다.
+3. Integration에서 generated Logic Check와 generated profile을 만든다.
+4. Python은 현재 runtime bank를 읽고 candidate evidence와 verifier input을 구성한다.
+5. fatal은 정답과 직접 충돌하는 검증된 핵심 오류에만 사용한다.
+6. LLM verifier 실패 또는 confidence 부족만으로 fatal을 만들지 않는다.
+7. 좋은 답안에 자주 나오는 contrastive 표현은 safe condition으로 보호한다.
+8. 표와 도면은 위치가 아니라 claim 구조로 해석한다.
+9. 단순 누락과 factual contradiction을 구분한다.
+10. Logic fatal은 correctness/claim-trust evidence다. numeric cap 적용 여부는 `difficulty_score_ceiling.py`, `DIFFICULTY_CEILING_MODE`와 final score reconciliation을 따른다.
 ## 11. 2차 감쇠비 문항 정리
 
 정답:

@@ -35,11 +35,12 @@
 | 총점 | 25점 |
 | 채점 Layer | 5개 |
 | Active Question Type | 4개 |
-| Model Answer | 57개 |
-| Fact Topic | 55개 |
-| Topic Importance | 8개 |
+| Topic Pack source | 52개 topic |
+| Generated Rubric Bank | 6개 |
+| Software Topic Pack | SW-01~SW-13, 13개 |
+| 기본 Rubric Bank mode | `generated` |
 
-위 개수는 현재 source bank와 release validation 결과를 기준으로 합니다. Runtime 정책의 최종 기준은 코드와 Rubric JSON입니다.
+Topic Pack 개수는 `rubrics/generated/topic_pack_manifest.generated.json`을 기준으로 확인합니다. Legacy 통합 bank는 호환 목적으로 유지되며, legacy 파일의 Model Answer·Fact Topic 개수를 현재 Topic Pack coverage 개수로 사용하지 않습니다. Runtime bank 선택의 기준은 `rubric_bank_paths.py`와 `RUBRIC_BANK_MODE`입니다.
 
 ---
 
@@ -109,17 +110,18 @@ Telegram 출력도 두 상태를 분리합니다.
 
 Hard cap은 다음 조건을 모두 만족하는 **실제 핵심 요구 누락**에만 적용합니다.
 
-- coverage source가 `question_text`
+- `question_type_coverage.coverage_source=semantic_grader`
+- `explicit_requirement_coverage.source=question_text`
 - 추출 신뢰도가 `high`
-- 명시적 핵심 요구로 판정됨
+- `is_core=true`
 - 상태가 `missing`
 
 `partial`과 `incorrect`는 누락 hard cap 대상이 아닙니다.
 
 | 실제 누락 상태 | B항목 상한 | 총점 상한 |
 |---|---:|---:|
-| 핵심 요구 1개 누락 | 5.0 / 6 | 18.5 / 25 |
-| 핵심 요구 2개 이상 누락 | 3.5 / 6 | 15.0 / 25 |
+| 핵심 요구 1개 누락 | 3.5 / 6 | 17.0 / 25 |
+| 핵심 요구 2개 이상 누락 | 2.0 / 6 | 14.0 / 25 |
 | 핵심 요구 전체 누락 | 1.5 / 6 | 12.5 / 25 |
 
 ### 4.3 Verified defect와 단일 점수 소유권
@@ -268,7 +270,7 @@ RUBRIC_BANK_MODE=generated
 QUESTION_TYPE_COVERAGE_SCORE_MODE=warn
 
 # Difficulty ceiling: warn | strict
-DIFFICULTY_SCORE_CEILING_MODE=warn
+DIFFICULTY_CEILING_MODE=warn
 ```
 
 | 값 | 의미 |
@@ -354,33 +356,66 @@ Telegram /grade
 
 ## 9. Rubric Bank와 Topic Pack
 
-Rubric은 legacy bank와 Topic Pack 기반 generated bank를 지원합니다.
+현재 runtime 기본값은 Topic Pack 기반 `generated` bank입니다. Legacy bank는 비교·호환 목적으로 유지합니다.
 
 | 구분 | 위치 | 역할 |
 |---|---|---|
-| Legacy Rubric Bank | `rubrics/*/*.json` | 기존 통합 Rubric |
-| Topic Pack Source | `rubrics/topic_packs/<topic_id>/` | 사람이 관리하는 source of truth |
-| Generated Rubric Bank | `rubrics/generated/*.generated.json` | Topic Pack source를 합친 runtime output |
-| Topic Sheet | `docs/topic_sheets/<topic_id>.md` | source JSON 작성 전 검토용 Markdown |
+| Topic Pack Source | `rubrics/topic_packs/<topic_id>/` | 사람이 검토하고 직접 관리하는 source of truth |
+| Topic Sheet | `docs/topic_sheets/<topic_id>.md` | source JSON 작성 전 요구사항과 경계를 구조화하는 Markdown |
+| Generated Rubric Bank | `rubrics/generated/*.generated.json` | 52개 Topic Pack source를 runtime bank로 합친 build output |
+| Legacy Rubric Bank | `rubrics/*/industrial_instrumentation_control.json` | 기존 통합 bank와 호환·비교 경로 |
 
-새 topic의 기본 흐름:
+현재 generated bank는 6개입니다.
 
 ```text
-요구사항 Markdown 확정
-  → Topic Sheet 검토
-  → source JSON 직접 작성
-  → schema와 quality validation
-  → generated bank 생성
-  → focused routing/coverage regression
-  → 필요한 경우에만 container smoke
+fact_anchors.generated.json
+model_answers.generated.json
+topic_importance.generated.json
+logic_checks.generated.json
+logic_check_profiles.generated.json
+topic_pack_manifest.generated.json
 ```
 
-Topic Pack JSON은 LLM이 임의 생성한 결과를 바로 채택하지 않습니다. 요구사항과 기존 schema를 먼저 확정하고, 사람이 검토 가능한 source JSON을 직접 작성합니다.
+현재 manifest에는 **52개 Topic Pack**이 등록되어 있습니다. 문서 탐색용으로는 다음 네 영역으로 묶습니다.
 
-작성 기준은 [`docs/rubric_authoring_guide.md`](docs/rubric_authoring_guide.md), 실행 절차는 [`docs/topic_pack_workflow.md`](docs/topic_pack_workflow.md)를 참조합니다.
+| 영역 | Topic 수 |
+|---|---:|
+| Software / OT / Industrial AI | 13 |
+| Control Valve / Final Control Element | 16 |
+| Control Theory | 12 |
+| Instrumentation / Sensor | 11 |
+| 합계 | 52 |
+
+이 분류는 문서 탐색용이며 runtime difficulty나 Question Type 분류를 대체하지 않습니다.
+
+Software 범위는 SW-01~SW-13으로 관리합니다. PLC·DCS·SCADA 구조, 제어논리, HMI/Alarm, Software Lifecycle, SIS/SIL Software, 형상·변경관리, 산업통신, 실시간 네트워크, OT Cybersecurity, 프로젝트/FAT/SAT, Historian·MES·IT/OT, Industrial AI, Physical AI를 포함합니다.
+
+새 Topic의 표준 authoring 흐름은 다음과 같습니다.
+
+```text
+요구사항 Markdown과 Topic 경계 확정
+  → Topic Sheet 검토
+  → 기존 schema를 기준으로 source JSON 직접 작성
+  → topic별 focused validation
+  → topic 단위 commit
+  → 인접 Topic ownership / alias / handoff 의미 감사
+  → integration 시 generated bank를 한 번 rebuild
+  → PROMOTE_GENERATED=0 release validation
+  → clean checkout / CI 확인
+```
+
+원칙:
+
+- `rubrics/generated/*.generated.json`을 직접 수정하지 않습니다.
+- LLM이 만든 opaque JSON을 그대로 source로 채택하지 않습니다.
+- source JSON은 기존 schema와 validator를 기준으로 명시적으로 작성하고 사람이 diff를 검토합니다.
+- 병렬 Topic 작업은 source 단계에서 분리하고 generated rebuild는 통합 단계에서 수행합니다.
+- committed regression은 로컬 `data/sessions/...`에 의존하지 않고 `scripts/fixtures/`의 tracked fixture를 사용합니다.
+- container smoke는 LLM 연동, container-only dependency, hostname, mount, 환경변수 또는 실제 deployment/runtime 차이가 있는 변경에만 수행합니다.
+
+전체 구조와 현재 52개 Topic inventory는 [`docs/topic_pack_architecture.md`](docs/topic_pack_architecture.md), 작성 기준은 [`docs/rubric_authoring_guide.md`](docs/rubric_authoring_guide.md), 실행 절차는 [`docs/topic_pack_workflow.md`](docs/topic_pack_workflow.md)를 참조합니다.
 
 ---
-
 ## 10. 검증
 
 ### 10.1 기본 순서
@@ -447,7 +482,7 @@ python3 -m unittest -v \
 ### 10.4 문서만 수정했을 때
 
 ```bash
-git diff --check -- README.md docs/README.md
+git diff --check -- README.md docs
 ```
 
 상대 링크와 현재 Rubric 수치도 함께 확인합니다.

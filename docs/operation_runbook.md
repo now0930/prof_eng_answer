@@ -307,9 +307,45 @@ cd ~/hermes/workspace/prof_eng_answer
 python3 scripts/rubric_manager.py validate-all
 git diff --check
 git status --short
-git add README.md docs scripts/rubrics
+git add README.md docs
 git commit -m "Update documentation"
 git push origin main
 ```
 
 문서만 바꾼 경우 Bot 재시작은 필수는 아니다. 단, 운영 문서가 live 동작을 설명하는 경우 smoke test를 권장한다.
+
+## 16. Release validation과 GitHub Actions
+
+Runtime 또는 Rubric 변경을 push하기 전에는 host release validation을 확인한다.
+
+```bash
+cd ~/hermes/workspace/prof_eng_answer
+
+PROMOTE_GENERATED=0 RUN_SMOKE_TOPIC_PACKS=0 RUN_GRADING_REPRODUCIBILITY=0 scripts/validate_release.sh
+```
+
+`PROMOTE_GENERATED=0` 경로는 GitHub Actions에서 사용하는 non-promote 검증 경로와 같은 계약을 가져야 한다.
+
+Committed regression은 hermetic해야 한다.
+
+- 로컬 `data/sessions/<session_id>/...`에 의존하지 않는다.
+- 필요한 입력은 `scripts/fixtures/<semantic_name>/`에 tracked fixture로 둔다.
+- clean checkout에서도 같은 focused test와 release validation이 통과해야 한다.
+
+Push 후 해당 commit의 Actions 결과를 확인한다.
+
+```bash
+COMMIT="$(git rev-parse HEAD)"
+
+gh run list   --repo now0930/prof_eng_answer   --workflow validation   --commit "$COMMIT"   --limit 3
+```
+
+정상 기준:
+
+```text
+status=completed
+conclusion=success
+headSha == local HEAD
+```
+
+GitHub runner의 action runtime deprecation warning은 job failure와 구분한다. 실제 `conclusion`과 failed step을 기준으로 판단한다.
