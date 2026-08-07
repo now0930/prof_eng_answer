@@ -1,0 +1,31 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "NORMAL",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "Project lifecycle·stage gate와 scope/interface boundary를 먼저 정의한다.",
+    "Basic Design을 PFD·P&ID·Control Philosophy·공정조건 기반 Design Basis로 설명한다.",
+    "WBS·RACI와 milestone·dependency·critical path를 연결한다.",
+    "Estimate basis·quantity·unit rate·service·contingency로 cost estimate를 설명한다.",
+    "Budget baseline 대비 commitment·actual·ETC와 final forecast를 구분한다.",
+    "Document control과 MDR을 통해 revision·status·transmittal·deliverable schedule을 통제한다.",
+    "Instrument Index·Datasheet·Loop·Hook-up·Cable/JB 문서의 cross-document consistency를 설명한다.",
+    "MTO/BOQ를 design revision과 procurement/cost에 연결한다.",
+    "Requisition→RFQ→TBE→PO와 vendor document review를 설명한다.",
+    "Construction readiness·ITP·hold/witness point·quality evidence를 설명한다.",
+    "Mechanical Completion·punch closeout과 precommissioning readiness를 구분한다.",
+    "Project Acceptance를 계약상 criteria와 evidence로 설명한다.",
+    "As-Built instrumentation dossier와 O&M handover를 설명한다.",
+    "Instrumentation project와 SW project, post-handover O&M의 ownership 경계를 유지한다."
+  ],
+  "note": "IC-2027-W-4-4를 instrumentation-wide project management로 구성한다. STEP 0에서 기존 control software project Topic은 software-specific signal 10, instrumentation-wide signal 0이었고 narrow duplicate blocker는 0이었다. 따라서 신규 Topic은 Basic Design, cost/schedule, instrumentation documents, procurement/vendor, construction/QA, completion/handover/acceptance를 소유한다. Question Type은 IMPLEMENTATION_EVALUATION, difficulty는 DESIGN_EVALUATION으로 설정한다. historical frequency는 근거가 없어 사용하지 않는다.",
+  "revision_notes": [
+    "STEP 0에서 기존 software project Topic과의 ownership 경계를 직접 비교했다.",
+    "Question Type은 프로젝트 lifecycle의 구현·통합·평가 성격을 반영해 IMPLEMENTATION_EVALUATION으로 설정했다.",
+    "Difficulty는 scope·cost·schedule·document·procurement·construction trade-off를 통합하는 성격을 반영해 DESIGN_EVALUATION으로 설정했다.",
+    "historical frequency 근거가 없으므로 selection_importance는 NORMAL을 사용했다."
+  ],
+  "topic_label": "계측 프로젝트 관리"
+}

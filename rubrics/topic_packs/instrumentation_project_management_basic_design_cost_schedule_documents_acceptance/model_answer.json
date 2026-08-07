@@ -1,0 +1,298 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+  "title_ko": "계측 프로젝트 관리: 기본설계, 원가·일정, 설계문서, 조달·시공 및 인수",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "계측 프로젝트의 기본설계부터 인수까지 관리절차를 설명하시오.",
+      "intent": "Design Basis, deliverables, cost/schedule, procurement, construction, completion과 handover를 통합한다.",
+      "required_anchor_ids": [
+        "project_lifecycle_stage_gate",
+        "project_scope_boundary_interface",
+        "project_design_basis_requirements",
+        "project_schedule_milestone_dependency_critical_path",
+        "project_cost_estimate_basis_quantity_rate_contingency",
+        "procurement_requisition_rfq_tbe_po",
+        "construction_installation_readiness",
+        "project_acceptance_criteria_evidence",
+        "asbuilt_handover_document_dossier"
+      ]
+    },
+    {
+      "pattern": "계측 프로젝트 Basic Design의 입력자료와 주요 산출물을 설명하시오.",
+      "intent": "Design Basis와 Instrument Index·Datasheet 및 관련 상세설계로 이어지는 구조를 설명한다.",
+      "required_anchor_ids": [
+        "project_design_basis_requirements",
+        "instrument_index_master_tag_register",
+        "instrument_datasheet_process_mechanical_interface",
+        "instrument_document_set_loop_hookup_cable_jb",
+        "io_list_software_project_handoff"
+      ]
+    },
+    {
+      "pattern": "계측 프로젝트의 Cost Estimate와 Cost Control 방법을 설명하시오.",
+      "intent": "estimate basis에서 budget baseline, commitment, actual, ETC와 change impact까지 연결한다.",
+      "required_anchor_ids": [
+        "project_scope_boundary_interface",
+        "project_cost_estimate_basis_quantity_rate_contingency",
+        "project_cost_baseline_commitment_actual_forecast",
+        "instrument_quantity_mto_boq",
+        "project_change_control_scope_cost_schedule"
+      ]
+    },
+    {
+      "pattern": "계측 프로젝트의 일정 및 진도관리 방법을 설명하시오.",
+      "intent": "WBS, dependency, milestone, critical path와 objective progress/forecast를 설명한다.",
+      "required_anchor_ids": [
+        "project_wbs_responsibility_raci",
+        "project_schedule_milestone_dependency_critical_path",
+        "project_progress_measurement_forecast",
+        "project_risk_register_mitigation"
+      ]
+    },
+    {
+      "pattern": "계측 프로젝트 주요 설계문서의 역할과 상호 정합성 관리방법을 설명하시오.",
+      "intent": "Instrument Index, Datasheet, Loop, Hook-up, Cable/JB와 I/O interface를 연결한다.",
+      "required_anchor_ids": [
+        "project_document_control_revision_transmittal",
+        "project_master_deliverable_register",
+        "instrument_index_master_tag_register",
+        "instrument_datasheet_process_mechanical_interface",
+        "instrument_document_set_loop_hookup_cable_jb",
+        "io_list_software_project_handoff"
+      ]
+    },
+    {
+      "pattern": "계측기기 구매와 Vendor 문서·검사 관리절차를 설명하시오.",
+      "intent": "Requisition, RFQ/TBE, PO, vendor document review와 inspection/punch를 설명한다.",
+      "required_anchor_ids": [
+        "procurement_requisition_rfq_tbe_po",
+        "vendor_document_review_integration",
+        "vendor_inspection_acceptance_handoff",
+        "instrument_quantity_mto_boq"
+      ]
+    },
+    {
+      "pattern": "계측 시공의 착수조건, QA/QC, Mechanical Completion 절차를 설명하시오.",
+      "intent": "AFC/readiness, ITP, quality evidence, systemization과 punch closeout을 연결한다.",
+      "required_anchor_ids": [
+        "construction_installation_readiness",
+        "construction_qa_qc_itp_hold_witness",
+        "mechanical_completion_punch_systemization",
+        "precommissioning_loop_readiness_handoff"
+      ]
+    },
+    {
+      "pattern": "계측 프로젝트 인수기준과 Handover Dossier의 구성 및 관리방법을 설명하시오.",
+      "intent": "acceptance criteria, as-built, quality/vendor record, training·spare와 운영 handoff를 설명한다.",
+      "required_anchor_ids": [
+        "project_acceptance_criteria_evidence",
+        "asbuilt_handover_document_dossier",
+        "operations_maintenance_handover_boundary",
+        "project_closeout_lessons_learned"
+      ]
+    },
+    {
+      "pattern": "계측 프로젝트 변경이 원가·일정·문서·조달에 미치는 영향과 관리방법을 설명하시오.",
+      "intent": "scope/interface와 baseline을 기준으로 integrated change control을 설명한다.",
+      "required_anchor_ids": [
+        "project_scope_boundary_interface",
+        "project_change_control_scope_cost_schedule",
+        "project_cost_baseline_commitment_actual_forecast",
+        "project_schedule_milestone_dependency_critical_path",
+        "project_document_control_revision_transmittal",
+        "project_risk_register_mitigation"
+      ]
+    },
+    {
+      "pattern": "계측 프로젝트와 제어 소프트웨어 프로젝트의 설계문서·시험·인수 ownership을 구분하시오.",
+      "intent": "Instrumentation-wide design/procurement/construction과 SW URS/FRS/FDS/SDS/FAT/SAT의 경계를 설명한다.",
+      "required_anchor_ids": [
+        "instrument_index_master_tag_register",
+        "instrument_datasheet_process_mechanical_interface",
+        "instrument_document_set_loop_hookup_cable_jb",
+        "io_list_software_project_handoff",
+        "vendor_inspection_acceptance_handoff",
+        "precommissioning_loop_readiness_handoff",
+        "project_acceptance_criteria_evidence"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. Scope·Lifecycle·Design Basis",
+      "intent": "project lifecycle와 계측 scope/interface, 기본설계 입력을 확정한다.",
+      "anchor_refs": [
+        "project_lifecycle_stage_gate",
+        "project_scope_boundary_interface",
+        "project_design_basis_requirements"
+      ]
+    },
+    {
+      "section": "2. WBS·일정·진도·Risk",
+      "intent": "work package, 책임, dependency, critical path와 risk를 통합 관리한다.",
+      "anchor_refs": [
+        "project_wbs_responsibility_raci",
+        "project_schedule_milestone_dependency_critical_path",
+        "project_progress_measurement_forecast",
+        "project_risk_register_mitigation"
+      ]
+    },
+    {
+      "section": "3. Cost·Change Control",
+      "intent": "estimate basis, budget/forecast와 integrated change impact를 관리한다.",
+      "anchor_refs": [
+        "project_cost_estimate_basis_quantity_rate_contingency",
+        "project_cost_baseline_commitment_actual_forecast",
+        "project_change_control_scope_cost_schedule"
+      ]
+    },
+    {
+      "section": "4. Document·Basic/Detailed Engineering",
+      "intent": "문서통제와 계측 master/detailed deliverable의 상호 정합성을 관리한다.",
+      "anchor_refs": [
+        "project_document_control_revision_transmittal",
+        "project_master_deliverable_register",
+        "instrument_index_master_tag_register",
+        "instrument_datasheet_process_mechanical_interface",
+        "instrument_document_set_loop_hookup_cable_jb",
+        "io_list_software_project_handoff",
+        "instrument_quantity_mto_boq"
+      ]
+    },
+    {
+      "section": "5. Procurement·Vendor",
+      "intent": "설계사양을 requisition·vendor evaluation·document·inspection으로 연결한다.",
+      "anchor_refs": [
+        "procurement_requisition_rfq_tbe_po",
+        "vendor_document_review_integration",
+        "vendor_inspection_acceptance_handoff"
+      ]
+    },
+    {
+      "section": "6. Construction·QA/QC·Completion",
+      "intent": "시공 readiness, ITP, MC와 precommissioning readiness를 관리한다.",
+      "anchor_refs": [
+        "construction_installation_readiness",
+        "construction_qa_qc_itp_hold_witness",
+        "mechanical_completion_punch_systemization",
+        "precommissioning_loop_readiness_handoff"
+      ]
+    },
+    {
+      "section": "7. Acceptance·Handover",
+      "intent": "계약 criteria와 as-built dossier, 운영조직 인계를 완료한다.",
+      "anchor_refs": [
+        "project_acceptance_criteria_evidence",
+        "asbuilt_handover_document_dossier",
+        "operations_maintenance_handover_boundary"
+      ]
+    },
+    {
+      "section": "8. Closeout·Lessons Learned",
+      "intent": "최종 cost/schedule/scope와 lessons learned를 다음 프로젝트에 환류한다.",
+      "anchor_refs": [
+        "project_closeout_lessons_learned"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "계측 프로젝트 lifecycle과 stage gate를 요구·설계·조달·시공·완성·인수 흐름으로 제시한다.",
+    "Scope에 battery limit, discipline interface, tie-in과 acceptance boundary를 포함한다.",
+    "Basic Design을 PFD·P&ID·Control Philosophy·공정조건과 Design Basis로 시작한다.",
+    "WBS를 scope·deliverable·책임·schedule·cost의 공통구조로 사용한다.",
+    "Milestone과 dependency, critical path, long-lead item으로 일정 영향을 설명한다.",
+    "진도율을 객관적 milestone/evidence와 forecast로 관리한다.",
+    "Estimate basis·quantity·unit rate·service·contingency를 cost estimate 근거로 제시한다.",
+    "Budget baseline과 commitment·actual·ETC·change를 이용해 final forecast를 관리한다.",
+    "Document revision/status/transmittal과 MDR을 이용해 승인본과 발행진도를 통제한다.",
+    "Instrument Index를 Tag 기반 master register로 보고 P&ID·datasheet·loop·cable 문서 정합성을 연결한다.",
+    "Loop Diagram·Hook-up·Cable/JB Schedule의 cross-document consistency를 설명한다.",
+    "MTO/BOQ를 설계 revision과 procurement/cost에 연결한다.",
+    "Requisition→RFQ→TBE→clarification→PO의 procurement chain을 설명한다.",
+    "Vendor document 승인결과를 project design document에 다시 반영한다.",
+    "Construction readiness와 ITP·hold/witness point·quality evidence를 설명한다.",
+    "Mechanical Completion을 단순 설치완료와 구분하고 punch closeout을 포함한다.",
+    "Project Acceptance를 계약상 criteria와 evidence로 설명한다.",
+    "As-Built dossier와 운영조직 handover를 실제 설치상태 재현성과 연결한다.",
+    "I/O List까지만 instrumentation interface로 소유하고 URS/FRS/FDS/SDS·logic/HMI·software FAT/SAT는 기존 SW project Topic으로 handoff한다.",
+    "인수 이후 preventive maintenance·calibration interval·CMMS·KPI는 Topic 2 O&M management로 handoff한다."
+  ],
+  "common_missing_points": [
+    "Project Scope를 장비목록만으로 설명하고 interface와 acceptance boundary를 생략한다.",
+    "Design Basis 없이 산출물 목록부터 제시한다.",
+    "WBS·RACI와 schedule/cost 책임 연결이 없다.",
+    "Critical path와 long-lead dependency 없이 일정표만 제시한다.",
+    "Cost estimate의 수량·단가·assumption·contingency 근거가 없다.",
+    "Actual cost만 보고 commitment·ETC와 final forecast를 생략한다.",
+    "문서 revision·status·transmittal control을 생략한다.",
+    "Instrument Index·P&ID·Datasheet·Loop·Cable/JB 정합성을 연결하지 않는다.",
+    "MTO/BOQ와 procurement·cost 변경영향을 연결하지 않는다.",
+    "Vendor bid를 가격만으로 평가한다.",
+    "Vendor document approval 후 project document 반영을 생략한다.",
+    "Construction readiness와 QA/QC evidence를 생략한다.",
+    "Mechanical Completion을 설치완료와 동일하게 설명한다.",
+    "Acceptance를 단순 정상가동과 동일하게 설명한다.",
+    "As-Built dossier와 training·spare·vendor data 인계를 생략한다.",
+    "Instrumentation project와 software project ownership 경계를 구분하지 않는다."
+  ],
+  "routing_aliases": [
+    "instrumentation project management basic design",
+    "instrumentation project basic engineering",
+    "instrumentation project cost schedule control",
+    "instrumentation engineering deliverables management",
+    "instrumentation project procurement construction handover",
+    "instrumentation design basis cost estimate schedule",
+    "instrument index datasheet loop cable project",
+    "instrumentation material requisition vendor document review",
+    "instrumentation construction mechanical completion handover",
+    "instrumentation project acceptance dossier",
+    "계측 프로젝트 관리 기본설계",
+    "계장 프로젝트 기본설계",
+    "계측 프로젝트 비용 일정 관리",
+    "계장 프로젝트 원가 일정 관리",
+    "계측 설계문서 조달 시공 관리",
+    "계장 Instrument Index Datasheet 문서관리",
+    "계측 프로젝트 Mechanical Completion 인수",
+    "계측 프로젝트 As-Built Handover"
+  ],
+  "routing_field_points": [
+    "Project lifecycle와 stage gate의 입력·산출물·승인기준",
+    "Scope·battery limit·discipline interface·tie-in·acceptance boundary",
+    "PFD·P&ID·Control Philosophy·공정조건 기반 Design Basis",
+    "WBS·work package·RACI와 deliverable 책임",
+    "Milestone·dependency·critical path·long-lead item 일정관리",
+    "객관적 milestone·weighted progress와 completion forecast",
+    "Estimate basis·quantity·unit rate·service·contingency 비용산정",
+    "Budget baseline·commitment·actual·ETC·final forecast 원가통제",
+    "Risk register·risk owner·mitigation·residual risk",
+    "Project change impact의 기술·cost·schedule·document 통합관리",
+    "Document number·revision·status·transmittal·superseded copy 통제",
+    "Master Deliverable Register와 document schedule",
+    "Instrument Index master tag register와 P&ID 정합성",
+    "Instrument Datasheet의 process·mechanical·electrical·communication interface",
+    "Loop Diagram·Hook-up·Cable Schedule·Junction Box Schedule 정합성",
+    "I/O List의 field-control system interface와 software project handoff",
+    "MTO·BOQ·quantity take-off와 procurement/cost 연계",
+    "Material Requisition·RFQ·TBE·Vendor clarification·PO",
+    "Vendor document review와 certified drawing project integration",
+    "Vendor inspection·NCR·punch·shop acceptance와 software FAT handoff",
+    "AFC drawing·material·site/interface readiness와 instrumentation construction",
+    "ITP·hold/witness point·quality record·acceptance criterion",
+    "Mechanical Completion·systemization·punch closeout",
+    "Precommissioning loop readiness와 software SAT/site integration handoff",
+    "Project Acceptance criteria·evidence·document·training·spare",
+    "As-Built instrumentation dossier와 vendor/quality record handover",
+    "O&M training·warranty·initial spare와 Topic 2 maintenance handoff",
+    "Final cost/schedule/vendor performance와 lessons learned feedback"
+  ],
+  "revision_notes": [
+    "STEP 0에서 기존 control software project Topic은 software-specific signal 10, instrumentation-wide signal 0으로 확인됐다.",
+    "신규 Topic은 instrumentation-wide Basic Design, cost/schedule, document, procurement/vendor, construction, completion/handover/acceptance를 소유한다.",
+    "I/O List는 field-control interface까지만 소유하고 URS/FRS/FDS/SDS·logic/HMI·software FAT/SAT는 기존 software project Topic으로 handoff한다.",
+    "인수 이후 O&M program은 control_system_operations_maintenance_calibration_inspection_spares_kpi로 handoff한다.",
+    "bare project, cost, schedule, acceptance 같은 generic alias는 사용하지 않았다.",
+    "historical frequency는 사용하지 않았다."
+  ]
+}
