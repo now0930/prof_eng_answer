@@ -1,0 +1,27 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "n = 60f/N_eff와 low-speed period method를 정확히 설명한다.",
+    "Incremental/absolute encoder와 A/B/Z 기능을 구분한다.",
+    "PPR/CPR와 effective counts/decoding 정의를 구분한다.",
+    "Resolution 증가와 maximum frequency limit trade-off를 설명한다.",
+    "Inductive proximity와 gear-tooth n = 60f/Z를 설명한다.",
+    "VR pickup의 speed/air-gap dependency를 설명한다.",
+    "DC tachogenerator의 V_t≈K_t n과 direction polarity를 설명한다.",
+    "Air gap, runout, misalignment, slip, noise를 error source로 제시한다.",
+    "Speed range, direction/position, mechanical/electrical interface를 선정기준으로 연결한다.",
+    "Legacy retrofit의 PLC input, shutdown, spare와 lifecycle cost를 제시한다."
+  ],
+  "note": "회전속도 계측은 센서의 transduction principle과 pulse/time 계산을 해석하는 것이 중심이고 실제 선정·오차는 현장조건에 좌우되므로 PRINCIPLE_INTERPRETATION / FIELD_APPLICATION으로 분류한다. 출제빈도 근거는 사용하지 않는다.",
+  "revision_notes": [
+    "step0_analog_decision_PRINCIPLE_INTERPRETATION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used",
+    "ppr_cpr_decode_definition_caution"
+  ],
+  "topic_label": "회전속도 계측의 원리, 선정 및 오차 — Encoder·Proximity·Tachometer"
+}

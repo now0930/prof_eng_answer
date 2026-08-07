@@ -1,0 +1,27 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "Absolute·Gauge·Differential pressure의 reference와 기본관계를 정확히 구분한다.",
+    "Bourdon tube의 elastic deformation mechanism을 설명한다.",
+    "Diaphragm sensing element와 diaphragm seal의 경계를 구분한다.",
+    "Piezoresistive strain→resistance→Wheatstone bridge signal 변환을 설명한다.",
+    "Piezoresistive와 piezoelectric의 static-pressure 측정 차이를 구분한다.",
+    "DP transmitter의 PH-PL principle과 static line pressure effect를 설명한다.",
+    "Range/turndown과 working/overrange/burst pressure를 구분한다.",
+    "Process media/wetted material/environment를 선정기준에 포함한다.",
+    "Reference accuracy와 total performance를 구분한다.",
+    "Zero/span shift와 impulse-line installation error의 대책을 제시한다."
+  ],
+  "note": "압력계측은 센서 원리 해석이 핵심이면서 선정·오차가 현장조건에 의해 크게 달라지는 주제이므로 PRINCIPLE_INTERPRETATION / FIELD_APPLICATION으로 분류한다. 출제빈도 근거는 사용하지 않는다.",
+  "revision_notes": [
+    "step0_analog_decision_PRINCIPLE_INTERPRETATION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used",
+    "dp_level_topic_ownership_separated"
+  ],
+  "topic_label": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP"
+}

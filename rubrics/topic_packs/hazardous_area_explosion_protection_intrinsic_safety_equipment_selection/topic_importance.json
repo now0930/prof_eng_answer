@@ -1,0 +1,26 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "COMPARE_SELECTION",
+  "high_band_unlock_conditions": [
+    "Zone과 EPL을 정확히 연결한다.",
+    "가스·분진 위험장소를 구분한다.",
+    "Ex d·e·i·p의 보호원리를 비교한다.",
+    "본질안전 ia·ib·ic의 보호수준 차이를 인증 EPL과 연결한다.",
+    "IS system의 field apparatus·associated apparatus·배선을 하나의 루프로 본다.",
+    "Uo≤Ui, Io≤Ii, Po≤Pi와 케이블 C/L 한계를 모두 제시한다.",
+    "Zener barrier와 galvanic isolator의 접지·절연 trade-off를 설명한다.",
+    "group·temperature·ambient·special condition을 실제 선정조건으로 확인한다.",
+    "gland·배선분리·환경 적합성과 검사문서를 설치 단계까지 연결한다.",
+    "Fatal 방폭 오개념 없이 선정 근거를 일관되게 제시한다."
+  ],
+  "note": "위험장소 방폭은 보호방식 원리만 암기하는 문제가 아니라 Zone·EPL·기기표시·본질안전 회로정합·설치조건을 연결하는 현장 선정 주제이므로 FIELD_APPLICATION / COMPARE_SELECTION으로 분류한다. 출제빈도 근거는 사용하지 않는다.",
+  "revision_notes": [
+    "step0_analog_decision_COMPARE_SELECTION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used"
+  ],
+  "topic_label": "위험장소 방폭 방식, 본질안전 회로 및 계측기기 선정"
+}

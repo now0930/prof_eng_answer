@@ -1,0 +1,858 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+  "title_ko": "계측제어 시스템 설계기준, Code·Standard·Specification 및 Deviation 관리",
+  "question_type_hint": "IMPLEMENTATION_EVALUATION",
+  "anchors": [
+    {
+      "id": "design_basis_purpose",
+      "anchor_id": "design_basis_purpose",
+      "statement": "Design Basis는 공정·운전 조건, 성능목표, 환경·안전 조건, 인터페이스와 설계 가정을 일관된 설계 입력으로 정리하여 이후 사양·도면·검증의 기준선을 제공한다.",
+      "importance": "core",
+      "keywords": [
+        "Design Basis",
+        "설계기준",
+        "design input",
+        "baseline"
+      ],
+      "core_terms": [
+        "Design Basis",
+        "설계기준",
+        "baseline"
+      ],
+      "accepted_explanations": [
+        "Design Basis는 공정·운전 조건, 성능목표, 환경·안전 조건, 인터페이스와 설계 가정을 일관된 설계 입력으로 정리하여 이후 사양·도면·검증의 기준선을 제공한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "Design Basis는 공정·운전 조건, 성능목표, 환경·안전 조건, 인터페이스와 설계 가정을 일관된 설계 입력으로 정리하여 이후 사양·도면·검증의 기준선을 제공한다.",
+      "description": "Design Basis는 공정·운전 조건, 성능목표, 환경·안전 조건, 인터페이스와 설계 가정을 일관된 설계 입력으로 정리하여 이후 사양·도면·검증의 기준선을 제공한다."
+    },
+    {
+      "id": "governing_requirements_register",
+      "anchor_id": "governing_requirements_register",
+      "statement": "계측제어 설계는 적용 법규·규제요건, 계약조건, Owner/EPC 기준, 국제·산업표준과 프로젝트 규격을 식별한 governing requirements register 또는 동등한 목록으로 관리해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "governing requirements",
+        "법규",
+        "계약조건",
+        "standards register"
+      ],
+      "core_terms": [
+        "governing requirements",
+        "법규",
+        "standards register"
+      ],
+      "accepted_explanations": [
+        "계측제어 설계는 적용 법규·규제요건, 계약조건, Owner/EPC 기준, 국제·산업표준과 프로젝트 규격을 식별한 governing requirements register 또는 동등한 목록으로 관리해야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "계측제어 설계는 적용 법규·규제요건, 계약조건, Owner/EPC 기준, 국제·산업표준과 프로젝트 규격을 식별한 governing requirements register 또는 동등한 목록으로 관리해야 한다.",
+      "description": "계측제어 설계는 적용 법규·규제요건, 계약조건, Owner/EPC 기준, 국제·산업표준과 프로젝트 규격을 식별한 governing requirements register 또는 동등한 목록으로 관리해야 한다."
+    },
+    {
+      "id": "code_standard_spec_distinction",
+      "anchor_id": "code_standard_spec_distinction",
+      "statement": "Code, Standard, Specification은 동일한 문서가 아니다. Code는 채택 주체에 따라 강제성이 생길 수 있고, Standard는 공통 기술기준을 제공하며, Specification은 특정 프로젝트·기기·서비스에 요구되는 검증 가능한 조건을 구체화한다.",
+      "importance": "core",
+      "keywords": [
+        "Code",
+        "Standard",
+        "Specification",
+        "강제성"
+      ],
+      "core_terms": [
+        "Code",
+        "Standard",
+        "Specification"
+      ],
+      "accepted_explanations": [
+        "Code, Standard, Specification은 동일한 문서가 아니다. Code는 채택 주체에 따라 강제성이 생길 수 있고, Standard는 공통 기술기준을 제공하며, Specification은 특정 프로젝트·기기·서비스에 요구되는 검증 가능한 조건을 구체화한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "Code, Standard, Specification은 동일한 문서가 아니다. Code는 채택 주체에 따라 강제성이 생길 수 있고, Standard는 공통 기술기준을 제공하며, Specification은 특정 프로젝트·기기·서비스에 요구되는 검증 가능한 조건을 구체화한다.",
+      "description": "Code, Standard, Specification은 동일한 문서가 아니다. Code는 채택 주체에 따라 강제성이 생길 수 있고, Standard는 공통 기술기준을 제공하며, Specification은 특정 프로젝트·기기·서비스에 요구되는 검증 가능한 조건을 구체화한다."
+    },
+    {
+      "id": "applicability_edition_jurisdiction",
+      "anchor_id": "applicability_edition_jurisdiction",
+      "statement": "표준 적용 여부와 판본은 관할 법규, 계약, 발주처 기준, 프로젝트 기준일과 적용범위에 따라 확정해야 하며 항상 최신판을 소급 적용한다고 단정할 수 없다.",
+      "importance": "core",
+      "keywords": [
+        "applicability",
+        "edition",
+        "jurisdiction",
+        "project cut-off"
+      ],
+      "core_terms": [
+        "applicability",
+        "edition",
+        "project cut-off"
+      ],
+      "accepted_explanations": [
+        "표준 적용 여부와 판본은 관할 법규, 계약, 발주처 기준, 프로젝트 기준일과 적용범위에 따라 확정해야 하며 항상 최신판을 소급 적용한다고 단정할 수 없다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "표준 적용 여부와 판본은 관할 법규, 계약, 발주처 기준, 프로젝트 기준일과 적용범위에 따라 확정해야 하며 항상 최신판을 소급 적용한다고 단정할 수 없다.",
+      "description": "표준 적용 여부와 판본은 관할 법규, 계약, 발주처 기준, 프로젝트 기준일과 적용범위에 따라 확정해야 하며 항상 최신판을 소급 적용한다고 단정할 수 없다."
+    },
+    {
+      "id": "hierarchy_precedence_conflict",
+      "anchor_id": "hierarchy_precedence_conflict",
+      "statement": "서로 다른 법규·표준·사양이 충돌할 수 있으므로 프로젝트는 문서 우선순위와 conflict resolution 절차를 명시하고, 임의로 가장 최신 문서나 가장 엄격해 보이는 문서를 자동 우선해서는 안 된다.",
+      "importance": "core",
+      "keywords": [
+        "document precedence",
+        "conflict resolution",
+        "우선순위"
+      ],
+      "core_terms": [
+        "document precedence",
+        "conflict resolution"
+      ],
+      "accepted_explanations": [
+        "서로 다른 법규·표준·사양이 충돌할 수 있으므로 프로젝트는 문서 우선순위와 conflict resolution 절차를 명시하고, 임의로 가장 최신 문서나 가장 엄격해 보이는 문서를 자동 우선해서는 안 된다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "서로 다른 법규·표준·사양이 충돌할 수 있으므로 프로젝트는 문서 우선순위와 conflict resolution 절차를 명시하고, 임의로 가장 최신 문서나 가장 엄격해 보이는 문서를 자동 우선해서는 안 된다.",
+      "description": "서로 다른 법규·표준·사양이 충돌할 수 있으므로 프로젝트는 문서 우선순위와 conflict resolution 절차를 명시하고, 임의로 가장 최신 문서나 가장 엄격해 보이는 문서를 자동 우선해서는 안 된다."
+    },
+    {
+      "id": "process_design_conditions",
+      "anchor_id": "process_design_conditions",
+      "statement": "설계기준에는 정상·최소·최대·시동·정지·비정상 등 주요 공정조건과 압력·온도·유량·조성 범위를 정의하여 계기 range, 재질, 연결부와 보호요건 선정의 입력으로 사용한다.",
+      "importance": "core",
+      "keywords": [
+        "process conditions",
+        "normal minimum maximum",
+        "range",
+        "material"
+      ],
+      "core_terms": [
+        "process conditions",
+        "range",
+        "material"
+      ],
+      "accepted_explanations": [
+        "설계기준에는 정상·최소·최대·시동·정지·비정상 등 주요 공정조건과 압력·온도·유량·조성 범위를 정의하여 계기 range, 재질, 연결부와 보호요건 선정의 입력으로 사용한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "설계기준에는 정상·최소·최대·시동·정지·비정상 등 주요 공정조건과 압력·온도·유량·조성 범위를 정의하여 계기 range, 재질, 연결부와 보호요건 선정의 입력으로 사용한다.",
+      "description": "설계기준에는 정상·최소·최대·시동·정지·비정상 등 주요 공정조건과 압력·온도·유량·조성 범위를 정의하여 계기 range, 재질, 연결부와 보호요건 선정의 입력으로 사용한다."
+    },
+    {
+      "id": "measurement_performance_requirements",
+      "anchor_id": "measurement_performance_requirements",
+      "statement": "측정시스템 요구사항은 정확도만이 아니라 range, turndown, 응답시간, 반복성, 안정성, 진단, 교정·시험 가능성과 필요한 전체 loop 성능을 용도에 맞게 정의해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "accuracy",
+        "range",
+        "response time",
+        "loop performance"
+      ],
+      "core_terms": [
+        "range",
+        "response time",
+        "loop performance"
+      ],
+      "accepted_explanations": [
+        "측정시스템 요구사항은 정확도만이 아니라 range, turndown, 응답시간, 반복성, 안정성, 진단, 교정·시험 가능성과 필요한 전체 loop 성능을 용도에 맞게 정의해야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "측정시스템 요구사항은 정확도만이 아니라 range, turndown, 응답시간, 반복성, 안정성, 진단, 교정·시험 가능성과 필요한 전체 loop 성능을 용도에 맞게 정의해야 한다.",
+      "description": "측정시스템 요구사항은 정확도만이 아니라 range, turndown, 응답시간, 반복성, 안정성, 진단, 교정·시험 가능성과 필요한 전체 loop 성능을 용도에 맞게 정의해야 한다."
+    },
+    {
+      "id": "environment_hazardous_safety_requirements",
+      "anchor_id": "environment_hazardous_safety_requirements",
+      "statement": "설계기준은 주위온도, 습도, 진동, 부식, 침수·분진, 전자기환경과 위험장소·기능안전 등 적용 가능한 환경·안전 제약을 별도 입력으로 포함해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "ambient",
+        "corrosion",
+        "hazardous area",
+        "functional safety"
+      ],
+      "core_terms": [
+        "ambient",
+        "hazardous area",
+        "safety"
+      ],
+      "accepted_explanations": [
+        "설계기준은 주위온도, 습도, 진동, 부식, 침수·분진, 전자기환경과 위험장소·기능안전 등 적용 가능한 환경·안전 제약을 별도 입력으로 포함해야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "설계기준은 주위온도, 습도, 진동, 부식, 침수·분진, 전자기환경과 위험장소·기능안전 등 적용 가능한 환경·안전 제약을 별도 입력으로 포함해야 한다.",
+      "description": "설계기준은 주위온도, 습도, 진동, 부식, 침수·분진, 전자기환경과 위험장소·기능안전 등 적용 가능한 환경·안전 제약을 별도 입력으로 포함해야 한다."
+    },
+    {
+      "id": "architecture_reliability_maintainability",
+      "anchor_id": "architecture_reliability_maintainability",
+      "statement": "계측제어 아키텍처에는 가용성·신뢰성·유지보수성 목표, redundancy 필요성, fail-safe 또는 degraded mode, 예비품·교체성 등을 서비스 중요도와 비용에 맞게 정의한다.",
+      "importance": "important",
+      "keywords": [
+        "availability",
+        "reliability",
+        "maintainability",
+        "redundancy"
+      ],
+      "core_terms": [
+        "availability",
+        "maintainability",
+        "redundancy"
+      ],
+      "accepted_explanations": [
+        "계측제어 아키텍처에는 가용성·신뢰성·유지보수성 목표, redundancy 필요성, fail-safe 또는 degraded mode, 예비품·교체성 등을 서비스 중요도와 비용에 맞게 정의한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "계측제어 아키텍처에는 가용성·신뢰성·유지보수성 목표, redundancy 필요성, fail-safe 또는 degraded mode, 예비품·교체성 등을 서비스 중요도와 비용에 맞게 정의한다.",
+      "description": "계측제어 아키텍처에는 가용성·신뢰성·유지보수성 목표, redundancy 필요성, fail-safe 또는 degraded mode, 예비품·교체성 등을 서비스 중요도와 비용에 맞게 정의한다."
+    },
+    {
+      "id": "interfaces_utilities_communication",
+      "anchor_id": "interfaces_utilities_communication",
+      "statement": "전원, 접지, 공기·유틸리티, 신호형식, I/O, 통신 protocol, 시간동기, 패키지·기계·전기 시스템 경계와 데이터 ownership을 인터페이스 요구사항으로 명확히 해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "interface",
+        "power",
+        "grounding",
+        "I/O",
+        "protocol"
+      ],
+      "core_terms": [
+        "interface",
+        "I/O",
+        "protocol"
+      ],
+      "accepted_explanations": [
+        "전원, 접지, 공기·유틸리티, 신호형식, I/O, 통신 protocol, 시간동기, 패키지·기계·전기 시스템 경계와 데이터 ownership을 인터페이스 요구사항으로 명확히 해야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "전원, 접지, 공기·유틸리티, 신호형식, I/O, 통신 protocol, 시간동기, 패키지·기계·전기 시스템 경계와 데이터 ownership을 인터페이스 요구사항으로 명확히 해야 한다.",
+      "description": "전원, 접지, 공기·유틸리티, 신호형식, I/O, 통신 protocol, 시간동기, 패키지·기계·전기 시스템 경계와 데이터 ownership을 인터페이스 요구사항으로 명확히 해야 한다."
+    },
+    {
+      "id": "documentation_set_consistency",
+      "anchor_id": "documentation_set_consistency",
+      "statement": "P&ID, instrument index, datasheet, I/O list, control narrative, cause & effect, loop diagram 등 관련 문서는 동일 tag와 요구조건을 공유하므로 변경 시 상호 일관성을 검토해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "P&ID",
+        "instrument index",
+        "datasheet",
+        "I/O list",
+        "control narrative"
+      ],
+      "core_terms": [
+        "P&ID",
+        "instrument index",
+        "datasheet"
+      ],
+      "accepted_explanations": [
+        "P&ID, instrument index, datasheet, I/O list, control narrative, cause & effect, loop diagram 등 관련 문서는 동일 tag와 요구조건을 공유하므로 변경 시 상호 일관성을 검토해야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "P&ID, instrument index, datasheet, I/O list, control narrative, cause & effect, loop diagram 등 관련 문서는 동일 tag와 요구조건을 공유하므로 변경 시 상호 일관성을 검토해야 한다.",
+      "description": "P&ID, instrument index, datasheet, I/O list, control narrative, cause & effect, loop diagram 등 관련 문서는 동일 tag와 요구조건을 공유하므로 변경 시 상호 일관성을 검토해야 한다."
+    },
+    {
+      "id": "instrument_identification_standardization",
+      "anchor_id": "instrument_identification_standardization",
+      "statement": "계기 symbol·tag·기능 식별은 프로젝트가 채택한 표준과 naming rule을 일관되게 적용해야 하며, ISA-5.1과 같은 산업표준은 공통 해석을 위한 대표적 기준으로 활용될 수 있다.",
+      "importance": "important",
+      "keywords": [
+        "ISA-5.1",
+        "symbol",
+        "tag",
+        "identification"
+      ],
+      "core_terms": [
+        "ISA-5.1",
+        "tag",
+        "identification"
+      ],
+      "accepted_explanations": [
+        "계기 symbol·tag·기능 식별은 프로젝트가 채택한 표준과 naming rule을 일관되게 적용해야 하며, ISA-5.1과 같은 산업표준은 공통 해석을 위한 대표적 기준으로 활용될 수 있다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "계기 symbol·tag·기능 식별은 프로젝트가 채택한 표준과 naming rule을 일관되게 적용해야 하며, ISA-5.1과 같은 산업표준은 공통 해석을 위한 대표적 기준으로 활용될 수 있다.",
+      "description": "계기 symbol·tag·기능 식별은 프로젝트가 채택한 표준과 naming rule을 일관되게 적용해야 하며, ISA-5.1과 같은 산업표준은 공통 해석을 위한 대표적 기준으로 활용될 수 있다."
+    },
+    {
+      "id": "specification_datasheet_verifiable_requirements",
+      "anchor_id": "specification_datasheet_verifiable_requirements",
+      "statement": "Specification과 datasheet는 설계기준을 구매·제작·시험 가능한 요구사항으로 변환해야 하며 값, 허용오차, 재질, 인증, 검사·시험 및 acceptance criterion처럼 확인 가능한 형태로 작성하는 것이 중요하다.",
+      "importance": "core",
+      "keywords": [
+        "specification",
+        "datasheet",
+        "acceptance criterion",
+        "verification"
+      ],
+      "core_terms": [
+        "specification",
+        "datasheet",
+        "acceptance criterion"
+      ],
+      "accepted_explanations": [
+        "Specification과 datasheet는 설계기준을 구매·제작·시험 가능한 요구사항으로 변환해야 하며 값, 허용오차, 재질, 인증, 검사·시험 및 acceptance criterion처럼 확인 가능한 형태로 작성하는 것이 중요하다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "Specification과 datasheet는 설계기준을 구매·제작·시험 가능한 요구사항으로 변환해야 하며 값, 허용오차, 재질, 인증, 검사·시험 및 acceptance criterion처럼 확인 가능한 형태로 작성하는 것이 중요하다.",
+      "description": "Specification과 datasheet는 설계기준을 구매·제작·시험 가능한 요구사항으로 변환해야 하며 값, 허용오차, 재질, 인증, 검사·시험 및 acceptance criterion처럼 확인 가능한 형태로 작성하는 것이 중요하다."
+    },
+    {
+      "id": "vendor_bid_deviation_list",
+      "anchor_id": "vendor_bid_deviation_list",
+      "statement": "Vendor가 발주 사양을 충족하지 못하거나 다른 방식을 제안할 경우 deviation·exception 목록에 요구조항, 제안내용, 기술근거와 영향범위를 명시하여 숨은 예외가 계약 또는 제작에 유입되지 않게 해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "vendor deviation",
+        "exception list",
+        "bid",
+        "requirement clause"
+      ],
+      "core_terms": [
+        "vendor deviation",
+        "exception list",
+        "requirement clause"
+      ],
+      "accepted_explanations": [
+        "Vendor가 발주 사양을 충족하지 못하거나 다른 방식을 제안할 경우 deviation·exception 목록에 요구조항, 제안내용, 기술근거와 영향범위를 명시하여 숨은 예외가 계약 또는 제작에 유입되지 않게 해야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "Vendor가 발주 사양을 충족하지 못하거나 다른 방식을 제안할 경우 deviation·exception 목록에 요구조항, 제안내용, 기술근거와 영향범위를 명시하여 숨은 예외가 계약 또는 제작에 유입되지 않게 해야 한다.",
+      "description": "Vendor가 발주 사양을 충족하지 못하거나 다른 방식을 제안할 경우 deviation·exception 목록에 요구조항, 제안내용, 기술근거와 영향범위를 명시하여 숨은 예외가 계약 또는 제작에 유입되지 않게 해야 한다."
+    },
+    {
+      "id": "technical_bid_evaluation_traceability",
+      "anchor_id": "technical_bid_evaluation_traceability",
+      "statement": "Technical Bid Evaluation은 단순 가격비교가 아니라 각 핵심 요구사항에 대한 compliance, deviation, clarification과 최종 disposition을 추적하여 구매조건과 최종 vendor document에 반영해야 한다.",
+      "importance": "important",
+      "keywords": [
+        "TBE",
+        "technical bid evaluation",
+        "compliance",
+        "clarification"
+      ],
+      "core_terms": [
+        "TBE",
+        "compliance",
+        "deviation"
+      ],
+      "accepted_explanations": [
+        "Technical Bid Evaluation은 단순 가격비교가 아니라 각 핵심 요구사항에 대한 compliance, deviation, clarification과 최종 disposition을 추적하여 구매조건과 최종 vendor document에 반영해야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "Technical Bid Evaluation은 단순 가격비교가 아니라 각 핵심 요구사항에 대한 compliance, deviation, clarification과 최종 disposition을 추적하여 구매조건과 최종 vendor document에 반영해야 한다.",
+      "description": "Technical Bid Evaluation은 단순 가격비교가 아니라 각 핵심 요구사항에 대한 compliance, deviation, clarification과 최종 disposition을 추적하여 구매조건과 최종 vendor document에 반영해야 한다."
+    },
+    {
+      "id": "deviation_definition_controlled_departure",
+      "anchor_id": "deviation_definition_controlled_departure",
+      "statement": "Deviation은 승인된 requirement 또는 baseline에서 벗어나는 사항을 통제하여 처리하는 기록이며, deviation 승인 자체가 원 요구사항을 삭제하거나 향후 모든 경우에 일반 허용한다는 의미는 아니다.",
+      "importance": "core",
+      "keywords": [
+        "deviation",
+        "baseline",
+        "controlled departure",
+        "requirement"
+      ],
+      "core_terms": [
+        "deviation",
+        "baseline",
+        "controlled departure"
+      ],
+      "accepted_explanations": [
+        "Deviation은 승인된 requirement 또는 baseline에서 벗어나는 사항을 통제하여 처리하는 기록이며, deviation 승인 자체가 원 요구사항을 삭제하거나 향후 모든 경우에 일반 허용한다는 의미는 아니다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "Deviation은 승인된 requirement 또는 baseline에서 벗어나는 사항을 통제하여 처리하는 기록이며, deviation 승인 자체가 원 요구사항을 삭제하거나 향후 모든 경우에 일반 허용한다는 의미는 아니다.",
+      "description": "Deviation은 승인된 requirement 또는 baseline에서 벗어나는 사항을 통제하여 처리하는 기록이며, deviation 승인 자체가 원 요구사항을 삭제하거나 향후 모든 경우에 일반 허용한다는 의미는 아니다."
+    },
+    {
+      "id": "deviation_impact_risk_assessment",
+      "anchor_id": "deviation_impact_risk_assessment",
+      "statement": "Deviation 검토에는 기술적 타당성뿐 아니라 안전, 성능, 가용성, 유지보수, 인터페이스, 규제·인증, 일정·비용과 lifecycle 영향에 대한 적절한 risk/impact assessment가 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "impact assessment",
+        "risk assessment",
+        "safety",
+        "lifecycle"
+      ],
+      "core_terms": [
+        "impact assessment",
+        "risk assessment",
+        "lifecycle"
+      ],
+      "accepted_explanations": [
+        "Deviation 검토에는 기술적 타당성뿐 아니라 안전, 성능, 가용성, 유지보수, 인터페이스, 규제·인증, 일정·비용과 lifecycle 영향에 대한 적절한 risk/impact assessment가 필요하다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "Deviation 검토에는 기술적 타당성뿐 아니라 안전, 성능, 가용성, 유지보수, 인터페이스, 규제·인증, 일정·비용과 lifecycle 영향에 대한 적절한 risk/impact assessment가 필요하다.",
+      "description": "Deviation 검토에는 기술적 타당성뿐 아니라 안전, 성능, 가용성, 유지보수, 인터페이스, 규제·인증, 일정·비용과 lifecycle 영향에 대한 적절한 risk/impact assessment가 필요하다."
+    },
+    {
+      "id": "deviation_approval_authority",
+      "anchor_id": "deviation_approval_authority",
+      "statement": "Deviation은 영향 수준과 프로젝트 governance에 맞는 권한자가 승인 또는 거절해야 하며, 설계자·Vendor의 단독 구두합의만으로 baseline을 변경해서는 안 된다.",
+      "importance": "core",
+      "keywords": [
+        "approval authority",
+        "deviation approval",
+        "governance",
+        "baseline"
+      ],
+      "core_terms": [
+        "approval authority",
+        "deviation approval",
+        "governance"
+      ],
+      "accepted_explanations": [
+        "Deviation은 영향 수준과 프로젝트 governance에 맞는 권한자가 승인 또는 거절해야 하며, 설계자·Vendor의 단독 구두합의만으로 baseline을 변경해서는 안 된다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "Deviation은 영향 수준과 프로젝트 governance에 맞는 권한자가 승인 또는 거절해야 하며, 설계자·Vendor의 단독 구두합의만으로 baseline을 변경해서는 안 된다.",
+      "description": "Deviation은 영향 수준과 프로젝트 governance에 맞는 권한자가 승인 또는 거절해야 하며, 설계자·Vendor의 단독 구두합의만으로 baseline을 변경해서는 안 된다."
+    },
+    {
+      "id": "deviation_disposition_closure",
+      "anchor_id": "deviation_disposition_closure",
+      "statement": "승인된 deviation은 accept, conditional accept, redesign 등 disposition과 후속조치를 기록하고, 관련 사양·도면·계산서·구매문서·시험기준이 실제로 갱신되었는지 확인한 뒤 closure 해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "disposition",
+        "closure",
+        "document update",
+        "conditional accept"
+      ],
+      "core_terms": [
+        "disposition",
+        "closure",
+        "document update"
+      ],
+      "accepted_explanations": [
+        "승인된 deviation은 accept, conditional accept, redesign 등 disposition과 후속조치를 기록하고, 관련 사양·도면·계산서·구매문서·시험기준이 실제로 갱신되었는지 확인한 뒤 closure 해야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "승인된 deviation은 accept, conditional accept, redesign 등 disposition과 후속조치를 기록하고, 관련 사양·도면·계산서·구매문서·시험기준이 실제로 갱신되었는지 확인한 뒤 closure 해야 한다.",
+      "description": "승인된 deviation은 accept, conditional accept, redesign 등 disposition과 후속조치를 기록하고, 관련 사양·도면·계산서·구매문서·시험기준이 실제로 갱신되었는지 확인한 뒤 closure 해야 한다."
+    },
+    {
+      "id": "change_control_moc_boundary",
+      "anchor_id": "change_control_moc_boundary",
+      "statement": "Deviation control과 Management of Change는 모두 변경을 통제하지만 적용 시점과 조직 절차가 다를 수 있다. 프로젝트 또는 운영조직이 정한 경계에 따라 변경 사유·영향·승인·검증·문서갱신을 추적해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "Management of Change",
+        "MOC",
+        "change control",
+        "deviation"
+      ],
+      "core_terms": [
+        "MOC",
+        "change control",
+        "deviation"
+      ],
+      "accepted_explanations": [
+        "Deviation control과 Management of Change는 모두 변경을 통제하지만 적용 시점과 조직 절차가 다를 수 있다. 프로젝트 또는 운영조직이 정한 경계에 따라 변경 사유·영향·승인·검증·문서갱신을 추적해야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "Deviation control과 Management of Change는 모두 변경을 통제하지만 적용 시점과 조직 절차가 다를 수 있다. 프로젝트 또는 운영조직이 정한 경계에 따라 변경 사유·영향·승인·검증·문서갱신을 추적해야 한다.",
+      "description": "Deviation control과 Management of Change는 모두 변경을 통제하지만 적용 시점과 조직 절차가 다를 수 있다. 프로젝트 또는 운영조직이 정한 경계에 따라 변경 사유·영향·승인·검증·문서갱신을 추적해야 한다."
+    },
+    {
+      "id": "as_built_handover_baseline",
+      "anchor_id": "as_built_handover_baseline",
+      "statement": "시공·시운전 후에는 승인된 변경과 deviation을 반영한 as-built 문서, 설정값, software/configuration baseline, 인증·시험기록을 인수자료로 확정해야 운영단계 변경관리의 기준선이 된다.",
+      "importance": "core",
+      "keywords": [
+        "as-built",
+        "handover",
+        "configuration baseline",
+        "records"
+      ],
+      "core_terms": [
+        "as-built",
+        "handover",
+        "baseline"
+      ],
+      "accepted_explanations": [
+        "시공·시운전 후에는 승인된 변경과 deviation을 반영한 as-built 문서, 설정값, software/configuration baseline, 인증·시험기록을 인수자료로 확정해야 운영단계 변경관리의 기준선이 된다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "시공·시운전 후에는 승인된 변경과 deviation을 반영한 as-built 문서, 설정값, software/configuration baseline, 인증·시험기록을 인수자료로 확정해야 운영단계 변경관리의 기준선이 된다.",
+      "description": "시공·시운전 후에는 승인된 변경과 deviation을 반영한 as-built 문서, 설정값, software/configuration baseline, 인증·시험기록을 인수자료로 확정해야 운영단계 변경관리의 기준선이 된다."
+    },
+    {
+      "id": "lifecycle_traceability_verification_acceptance",
+      "anchor_id": "lifecycle_traceability_verification_acceptance",
+      "statement": "설계기준의 핵심 요구사항은 specification·datasheet·도면·구현으로 traceability를 유지하고 design review, vendor document review, FAT, SAT, commissioning 또는 동등한 검증 단계에서 acceptance evidence로 닫혀야 한다.",
+      "importance": "core",
+      "keywords": [
+        "traceability",
+        "design review",
+        "FAT",
+        "SAT",
+        "acceptance evidence"
+      ],
+      "core_terms": [
+        "traceability",
+        "FAT",
+        "SAT",
+        "acceptance"
+      ],
+      "accepted_explanations": [
+        "설계기준의 핵심 요구사항은 specification·datasheet·도면·구현으로 traceability를 유지하고 design review, vendor document review, FAT, SAT, commissioning 또는 동등한 검증 단계에서 acceptance evidence로 닫혀야 한다.",
+        "설계 입력에서 사양·Vendor 문서·검증·인수 기준선까지 요구사항의 흐름을 원인과 결과로 연결한다."
+      ],
+      "rejected_explanations": [
+        "표준명과 문서명만 나열하거나 적용근거·우선순위·deviation 처리 없이 자동 준수된다고 단정한다."
+      ],
+      "grading_notes": "설계기준, 적용규정, 상세사양, deviation 승인과 검증·문서갱신의 연결 논리를 평가한다.",
+      "source_basis": "docs/topic_sheets/instrumentation_system_design_basis_codes_standards_specification_deviation_management.md",
+      "claim": "설계기준의 핵심 요구사항은 specification·datasheet·도면·구현으로 traceability를 유지하고 design review, vendor document review, FAT, SAT, commissioning 또는 동등한 검증 단계에서 acceptance evidence로 닫혀야 한다.",
+      "description": "설계기준의 핵심 요구사항은 specification·datasheet·도면·구현으로 traceability를 유지하고 design review, vendor document review, FAT, SAT, commissioning 또는 동등한 검증 단계에서 acceptance evidence로 닫혀야 한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "design_fatal_code_standard_same",
+      "claim": "Code, Standard, Specification은 모두 같은 의미이며 서로 바꾸어 써도 된다.",
+      "correction": "Code, Standard, Specification은 역할과 적용 강제성의 근거가 다르므로 프로젝트에서 각각의 적용범위와 우선순위를 구분해야 한다.",
+      "wrong_claim": "Code, Standard, Specification은 모두 같은 의미이며 서로 바꾸어 써도 된다.",
+      "correct_rule": "Code, Standard, Specification은 역할과 적용 강제성의 근거가 다르므로 프로젝트에서 각각의 적용범위와 우선순위를 구분해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Code, Standard, Specification은 역할과 적용 강제성의 근거가 다르므로 프로젝트에서 각각의 적용범위와 우선순위를 구분해야 한다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_standard_always_law",
+      "claim": "국제표준은 발행되는 즉시 모든 현장에서 법적 강제규정이 된다.",
+      "correction": "표준의 강제성은 관할 법규의 채택, 계약 또는 조직 요구 등 적용근거에 따라 결정된다.",
+      "wrong_claim": "국제표준은 발행되는 즉시 모든 현장에서 법적 강제규정이 된다.",
+      "correct_rule": "표준의 강제성은 관할 법규의 채택, 계약 또는 조직 요구 등 적용근거에 따라 결정된다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "표준의 강제성은 관할 법규의 채택, 계약 또는 조직 요구 등 적용근거에 따라 결정된다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_latest_retroactive",
+      "claim": "설비 연식과 계약조건에 관계없이 항상 최신 표준판을 기존 설비에 소급 적용해야 한다.",
+      "correction": "적용 판본과 소급 여부는 법규, 계약, 프로젝트 기준일, 변경범위와 조직 절차에 따라 판단해야 한다.",
+      "wrong_claim": "설비 연식과 계약조건에 관계없이 항상 최신 표준판을 기존 설비에 소급 적용해야 한다.",
+      "correct_rule": "적용 판본과 소급 여부는 법규, 계약, 프로젝트 기준일, 변경범위와 조직 절차에 따라 판단해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "적용 판본과 소급 여부는 법규, 계약, 프로젝트 기준일, 변경범위와 조직 절차에 따라 판단해야 한다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_spec_overrides_law",
+      "claim": "프로젝트 Specification에 다르게 적으면 법규나 강제규정도 자동으로 무시할 수 있다.",
+      "correction": "프로젝트 사양은 적용 법규·강제요건을 위반하는 근거가 될 수 없으며 충돌 시 정식 해결·승인 절차가 필요하다.",
+      "wrong_claim": "프로젝트 Specification에 다르게 적으면 법규나 강제규정도 자동으로 무시할 수 있다.",
+      "correct_rule": "프로젝트 사양은 적용 법규·강제요건을 위반하는 근거가 될 수 없으며 충돌 시 정식 해결·승인 절차가 필요하다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "프로젝트 사양은 적용 법규·강제요건을 위반하는 근거가 될 수 없으며 충돌 시 정식 해결·승인 절차가 필요하다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_all_standards_phrase",
+      "claim": "사양서에 '모든 관련 표준 준수'라고 한 줄만 쓰면 적용범위와 판본을 별도로 정할 필요가 없다.",
+      "correction": "적용 표준의 범위, 판본 또는 기준일과 충돌처리 원칙을 식별하여 설계·구매·검증에 사용해야 한다.",
+      "wrong_claim": "사양서에 '모든 관련 표준 준수'라고 한 줄만 쓰면 적용범위와 판본을 별도로 정할 필요가 없다.",
+      "correct_rule": "적용 표준의 범위, 판본 또는 기준일과 충돌처리 원칙을 식별하여 설계·구매·검증에 사용해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "적용 표준의 범위, 판본 또는 기준일과 충돌처리 원칙을 식별하여 설계·구매·검증에 사용해야 한다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_vendor_self_declaration",
+      "claim": "Vendor가 compliance라고 선언하면 기술검토와 deviation 확인 없이 요구사항 충족으로 간주할 수 있다.",
+      "correction": "Vendor compliance는 TBE와 문서검토를 통해 핵심 요구사항, deviation과 clarification을 확인해야 한다.",
+      "wrong_claim": "Vendor가 compliance라고 선언하면 기술검토와 deviation 확인 없이 요구사항 충족으로 간주할 수 있다.",
+      "correct_rule": "Vendor compliance는 TBE와 문서검토를 통해 핵심 요구사항, deviation과 clarification을 확인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Vendor compliance는 TBE와 문서검토를 통해 핵심 요구사항, deviation과 clarification을 확인해야 한다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_oral_deviation",
+      "claim": "사소한 deviation은 담당자끼리 구두 합의하면 기록과 승인 없이 적용해도 된다.",
+      "correction": "Deviation은 영향 수준에 맞는 기록, 검토와 승인 절차를 거쳐 baseline과 후속문서에 반영해야 한다.",
+      "wrong_claim": "사소한 deviation은 담당자끼리 구두 합의하면 기록과 승인 없이 적용해도 된다.",
+      "correct_rule": "Deviation은 영향 수준에 맞는 기록, 검토와 승인 절차를 거쳐 baseline과 후속문서에 반영해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Deviation은 영향 수준에 맞는 기록, 검토와 승인 절차를 거쳐 baseline과 후속문서에 반영해야 한다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_deviation_deletes_requirement",
+      "claim": "Deviation이 한 번 승인되면 해당 원 요구사항은 프로젝트 전체에서 삭제된다.",
+      "correction": "Deviation 승인은 정의된 대상과 범위에 대한 disposition이며 원 요구사항 자체를 자동 삭제하거나 일반 허용으로 바꾸지 않는다.",
+      "wrong_claim": "Deviation이 한 번 승인되면 해당 원 요구사항은 프로젝트 전체에서 삭제된다.",
+      "correct_rule": "Deviation 승인은 정의된 대상과 범위에 대한 disposition이며 원 요구사항 자체를 자동 삭제하거나 일반 허용으로 바꾸지 않는다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Deviation 승인은 정의된 대상과 범위에 대한 disposition이며 원 요구사항 자체를 자동 삭제하거나 일반 허용으로 바꾸지 않는다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_no_impact_assessment",
+      "claim": "Deviation은 비용이나 납기만 맞으면 안전·성능·유지보수 영향평가 없이 승인할 수 있다.",
+      "correction": "Deviation은 필요한 기술·안전·성능·운영·규제·비용·일정 영향평가를 근거로 승인해야 한다.",
+      "wrong_claim": "Deviation은 비용이나 납기만 맞으면 안전·성능·유지보수 영향평가 없이 승인할 수 있다.",
+      "correct_rule": "Deviation은 필요한 기술·안전·성능·운영·규제·비용·일정 영향평가를 근거로 승인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Deviation은 필요한 기술·안전·성능·운영·규제·비용·일정 영향평가를 근거로 승인해야 한다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_close_without_updates",
+      "claim": "Deviation 승인번호만 발행되면 관련 datasheet·도면·시험기준을 수정하지 않아도 closure할 수 있다.",
+      "correction": "Closure 전에 승인 disposition과 후속조치가 관련 설계·구매·시험·as-built 문서에 반영되었는지 확인해야 한다.",
+      "wrong_claim": "Deviation 승인번호만 발행되면 관련 datasheet·도면·시험기준을 수정하지 않아도 closure할 수 있다.",
+      "correct_rule": "Closure 전에 승인 disposition과 후속조치가 관련 설계·구매·시험·as-built 문서에 반영되었는지 확인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Closure 전에 승인 disposition과 후속조치가 관련 설계·구매·시험·as-built 문서에 반영되었는지 확인해야 한다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_newest_doc_auto_precedence",
+      "claim": "문서 간 요구사항이 충돌하면 날짜가 가장 최신인 문서가 항상 자동 우선한다.",
+      "correction": "문서 conflict는 프로젝트가 정한 precedence와 승인된 change/deviation 절차로 해결해야 하며 날짜만으로 우선순위를 정할 수 없다.",
+      "wrong_claim": "문서 간 요구사항이 충돌하면 날짜가 가장 최신인 문서가 항상 자동 우선한다.",
+      "correct_rule": "문서 conflict는 프로젝트가 정한 precedence와 승인된 change/deviation 절차로 해결해야 하며 날짜만으로 우선순위를 정할 수 없다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "문서 conflict는 프로젝트가 정한 precedence와 승인된 change/deviation 절차로 해결해야 하며 날짜만으로 우선순위를 정할 수 없다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_design_basis_never_changes",
+      "claim": "Design Basis는 프로젝트 초기에 한 번 작성하면 이후 조건이 바뀌어도 수정하거나 영향평가할 필요가 없다.",
+      "correction": "설계 입력이 승인 절차에 따라 변경되면 영향범위를 평가하고 관련 baseline과 downstream 문서를 동기화해야 한다.",
+      "wrong_claim": "Design Basis는 프로젝트 초기에 한 번 작성하면 이후 조건이 바뀌어도 수정하거나 영향평가할 필요가 없다.",
+      "correct_rule": "설계 입력이 승인 절차에 따라 변경되면 영향범위를 평가하고 관련 baseline과 downstream 문서를 동기화해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "설계 입력이 승인 절차에 따라 변경되면 영향범위를 평가하고 관련 baseline과 downstream 문서를 동기화해야 한다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    },
+    {
+      "id": "design_fatal_deviation_replaces_moc",
+      "claim": "Deviation 절차만 있으면 운영단계 Management of Change와 변경검증은 필요하지 않다.",
+      "correction": "Deviation과 MOC의 적용경계는 조직 절차에 따르며 운영변경은 필요한 MOC·검증·문서갱신을 별도로 수행해야 한다.",
+      "wrong_claim": "Deviation 절차만 있으면 운영단계 Management of Change와 변경검증은 필요하지 않다.",
+      "correct_rule": "Deviation과 MOC의 적용경계는 조직 절차에 따르며 운영변경은 필요한 MOC·검증·문서갱신을 별도로 수행해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [
+        "C"
+      ],
+      "message": "Deviation과 MOC의 적용경계는 조직 절차에 따르며 운영변경은 필요한 MOC·검증·문서갱신을 별도로 수행해야 한다.",
+      "description": "설계규정의 적용근거, 문서 우선순위 또는 deviation/change control을 반대로 설명하는 중대한 오개념이다.",
+      "grading_notes": "단순 용어 누락이 아니라 승인·적용·변경통제의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+    }
+  ],
+  "safe_expressions": [
+    "Code와 Standard의 법적 지위는 관할과 계약에 따라 달라질 수 있다고 설명한다.",
+    "프로젝트마다 Design Basis, Design Criteria, Engineering Standard의 명칭과 계층이 다를 수 있음을 인정한다.",
+    "최신판 적용이 원칙인지 여부는 법규·계약·project cut-off를 확인해 결정한다고 설명한다.",
+    "문서 충돌은 프로젝트 precedence와 정식 승인 절차로 해결한다고 설명한다.",
+    "Design Basis가 설계 입력과 가정을 정리하는 baseline 기능을 한다고 설명한다.",
+    "Specification이 project-specific하고 검증 가능한 requirement를 구체화한다고 설명한다.",
+    "ISA-5.1을 계기 symbol·identification의 대표 표준 예로 드는 것은 적절하다.",
+    "ISA-20 계열을 계기 specification form의 대표 사례로 드는 것은 적절하다.",
+    "산업·국가에 따라 API, ASME, IEC, ISA, NFPA 등 적용 표준 조합이 달라질 수 있다고 설명한다.",
+    "Vendor deviation은 모든 차이를 자동 부적합으로 만드는 것이 아니라 기술평가와 승인 대상으로 본다.",
+    "Deviation의 승인 authority와 risk assessment 수준은 영향도와 조직절차에 따라 달라질 수 있다고 설명한다.",
+    "Deviation과 waiver, concession, exception의 명칭은 회사 절차마다 다를 수 있다고 설명한다.",
+    "프로젝트 deviation과 운영 MOC의 경계가 조직에 따라 다를 수 있다고 설명한다.",
+    "FAT와 SAT의 구체 시험범위는 시스템과 계약에 따라 달라질 수 있다고 설명한다.",
+    "Legacy 설비 변경은 신규설비와 같은 방법을 기계적으로 적용하기보다 법규·위험·인터페이스·비용을 함께 평가한다고 설명한다.",
+    "문서명보다 requirement traceability, approval, verification, as-built 반영 기능을 충족하는지가 중요하다고 설명한다."
+  ],
+  "revision_notes": [
+    "step0_analog_decision_IMPLEMENTATION_EVALUATION",
+    "step0_analog_decision_DESIGN_EVALUATION",
+    "historical_frequency_not_used"
+  ],
+  "topic_label": "계측제어 시스템 설계기준, Code·Standard·Specification 및 Deviation 관리",
+  "core_facts": [
+    "Design Basis는 공정·운전 조건, 성능목표, 환경·안전 조건, 인터페이스와 설계 가정을 일관된 설계 입력으로 정리하여 이후 사양·도면·검증의 기준선을 제공한다.",
+    "계측제어 설계는 적용 법규·규제요건, 계약조건, Owner/EPC 기준, 국제·산업표준과 프로젝트 규격을 식별한 governing requirements register 또는 동등한 목록으로 관리해야 한다.",
+    "Code, Standard, Specification은 동일한 문서가 아니다. Code는 채택 주체에 따라 강제성이 생길 수 있고, Standard는 공통 기술기준을 제공하며, Specification은 특정 프로젝트·기기·서비스에 요구되는 검증 가능한 조건을 구체화한다.",
+    "표준 적용 여부와 판본은 관할 법규, 계약, 발주처 기준, 프로젝트 기준일과 적용범위에 따라 확정해야 하며 항상 최신판을 소급 적용한다고 단정할 수 없다.",
+    "서로 다른 법규·표준·사양이 충돌할 수 있으므로 프로젝트는 문서 우선순위와 conflict resolution 절차를 명시하고, 임의로 가장 최신 문서나 가장 엄격해 보이는 문서를 자동 우선해서는 안 된다.",
+    "설계기준에는 정상·최소·최대·시동·정지·비정상 등 주요 공정조건과 압력·온도·유량·조성 범위를 정의하여 계기 range, 재질, 연결부와 보호요건 선정의 입력으로 사용한다.",
+    "측정시스템 요구사항은 정확도만이 아니라 range, turndown, 응답시간, 반복성, 안정성, 진단, 교정·시험 가능성과 필요한 전체 loop 성능을 용도에 맞게 정의해야 한다.",
+    "설계기준은 주위온도, 습도, 진동, 부식, 침수·분진, 전자기환경과 위험장소·기능안전 등 적용 가능한 환경·안전 제약을 별도 입력으로 포함해야 한다.",
+    "계측제어 아키텍처에는 가용성·신뢰성·유지보수성 목표, redundancy 필요성, fail-safe 또는 degraded mode, 예비품·교체성 등을 서비스 중요도와 비용에 맞게 정의한다.",
+    "전원, 접지, 공기·유틸리티, 신호형식, I/O, 통신 protocol, 시간동기, 패키지·기계·전기 시스템 경계와 데이터 ownership을 인터페이스 요구사항으로 명확히 해야 한다.",
+    "P&ID, instrument index, datasheet, I/O list, control narrative, cause & effect, loop diagram 등 관련 문서는 동일 tag와 요구조건을 공유하므로 변경 시 상호 일관성을 검토해야 한다.",
+    "계기 symbol·tag·기능 식별은 프로젝트가 채택한 표준과 naming rule을 일관되게 적용해야 하며, ISA-5.1과 같은 산업표준은 공통 해석을 위한 대표적 기준으로 활용될 수 있다.",
+    "Specification과 datasheet는 설계기준을 구매·제작·시험 가능한 요구사항으로 변환해야 하며 값, 허용오차, 재질, 인증, 검사·시험 및 acceptance criterion처럼 확인 가능한 형태로 작성하는 것이 중요하다.",
+    "Vendor가 발주 사양을 충족하지 못하거나 다른 방식을 제안할 경우 deviation·exception 목록에 요구조항, 제안내용, 기술근거와 영향범위를 명시하여 숨은 예외가 계약 또는 제작에 유입되지 않게 해야 한다.",
+    "Technical Bid Evaluation은 단순 가격비교가 아니라 각 핵심 요구사항에 대한 compliance, deviation, clarification과 최종 disposition을 추적하여 구매조건과 최종 vendor document에 반영해야 한다.",
+    "Deviation은 승인된 requirement 또는 baseline에서 벗어나는 사항을 통제하여 처리하는 기록이며, deviation 승인 자체가 원 요구사항을 삭제하거나 향후 모든 경우에 일반 허용한다는 의미는 아니다.",
+    "Deviation 검토에는 기술적 타당성뿐 아니라 안전, 성능, 가용성, 유지보수, 인터페이스, 규제·인증, 일정·비용과 lifecycle 영향에 대한 적절한 risk/impact assessment가 필요하다.",
+    "Deviation은 영향 수준과 프로젝트 governance에 맞는 권한자가 승인 또는 거절해야 하며, 설계자·Vendor의 단독 구두합의만으로 baseline을 변경해서는 안 된다.",
+    "승인된 deviation은 accept, conditional accept, redesign 등 disposition과 후속조치를 기록하고, 관련 사양·도면·계산서·구매문서·시험기준이 실제로 갱신되었는지 확인한 뒤 closure 해야 한다.",
+    "Deviation control과 Management of Change는 모두 변경을 통제하지만 적용 시점과 조직 절차가 다를 수 있다. 프로젝트 또는 운영조직이 정한 경계에 따라 변경 사유·영향·승인·검증·문서갱신을 추적해야 한다.",
+    "시공·시운전 후에는 승인된 변경과 deviation을 반영한 as-built 문서, 설정값, software/configuration baseline, 인증·시험기록을 인수자료로 확정해야 운영단계 변경관리의 기준선이 된다.",
+    "설계기준의 핵심 요구사항은 specification·datasheet·도면·구현으로 traceability를 유지하고 design review, vendor document review, FAT, SAT, commissioning 또는 동등한 검증 단계에서 acceptance evidence로 닫혀야 한다."
+  ]
+}
