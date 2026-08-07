@@ -304,7 +304,17 @@ class SW01GeneratedContractTests(unittest.TestCase):
 
     def test_manifest_topic_count_and_membership(self) -> None:
         manifest = load_json(GENERATED_DIR / "topic_pack_manifest.generated.json")
-        self.assertEqual(40, manifest.get("topic_count"))
+        source_topic_count = len(
+            [
+                path
+                for path in (ROOT / "rubrics" / "topic_packs").iterdir()
+                if path.is_dir() and not path.name.startswith(".")
+            ]
+        )
+        self.assertEqual(
+            source_topic_count,
+            manifest.get("topic_count"),
+        )
         self.assertIsNotNone(find_topic(manifest, TOPIC_ID))
 
 
