@@ -1,0 +1,363 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+  "title": "위험장소 방폭 방식, 본질안전 회로 및 계측기기 선정",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_aliases": [
+      "위험장소 방폭 기기 선정",
+      "위험지역 방폭 계측기 선정",
+      "hazardous area Ex equipment selection",
+      "hazardous location instrumentation selection",
+      "Zone EPL 방폭 선정",
+      "Zone 0 Zone 1 Zone 2 기기 선정",
+      "가스 분진 위험장소 방폭",
+      "방폭 보호방식 비교",
+      "Ex d Ex e Ex i Ex p 비교",
+      "본질안전 회로 선정",
+      "intrinsic safety loop design",
+      "intrinsic safety equipment selection",
+      "Ex ia Ex ib Ex ic",
+      "Entity parameter Uo Ui Io Ii",
+      "Zener barrier galvanic isolator 비교",
+      "본질안전 barrier 선정",
+      "방폭 인증 표시 EPL",
+      "방폭 계장 배선 설치"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "Zone/EPL/Ex marking을 한 장의 선정 flow로 연결한다.",
+      "Ex d/e/i/p의 보호원리를 비교표 없이도 문장으로 설명할 수 있게 한다.",
+      "IS loop Entity parameter 계산 예제를 U/I/P와 C/L 두 단계로 연습한다.",
+      "Barrier와 isolator 선정에서 접지·절연·유지보수 trade-off를 정리한다.",
+      "certificate special condition과 현장 설치검사를 연결한다."
+    ],
+    "reason": "방폭 보호방식과 본질안전 적합성은 인증표시·시스템 구성·설치조건의 문맥을 함께 보아야 하므로 단순 키워드 규칙으로 Fatal을 판정하지 않는다."
+  },
+  "llm_profile": {
+    "enabled": true,
+    "display_name": "위험장소 방폭 방식, 본질안전 회로 및 계측기기 선정",
+    "difficulty": "FIELD_APPLICATION",
+    "candidate_extraction": {
+      "enabled": false,
+      "rules": [],
+      "reason": "Zone, Ex suffix 또는 숫자 하나만으로 적합성 오류를 결정하지 않고 전체 선정 문맥을 검토한다."
+    },
+    "truth_schema": [
+      "위험장소 분류는 폭발성 분위기의 존재 가능성과 지속시간을 기준으로 설비 위치를 구분하며, 그 결과가 방폭기기 보호수준 선정의 입력이 된다.",
+      "가스·증기 위험장소는 폭발성 가스 분위기의 존재 빈도와 지속시간에 따라 Zone 0, Zone 1, Zone 2로 구분하며 숫자가 작을수록 더 높은 보호수준이 요구된다.",
+      "가연성 분진 위험장소는 폭발성 분진 분위기의 존재 빈도와 지속시간에 따라 Zone 20, Zone 21, Zone 22로 구분하며 가스 Zone과 별도로 평가한다.",
+      "일반적인 EPL 선정에서 Zone 0은 Ga, Zone 1은 Ga 또는 Gb, Zone 2는 Ga·Gb 또는 Gc가 요구되며, 분진은 Zone 20에 Da, Zone 21에 Da 또는 Db, Zone 22에 Da·Db 또는 Dc를 적용한다.",
+      "방폭기기 선정은 Zone만 보는 것이 아니라 인증된 Ex 표시와 EPL, 물질 그룹, 온도 조건, 주위온도 범위 및 인증서 조건을 함께 대조해야 한다.",
+      "가스·증기 또는 분진의 그룹과 기기의 인증 그룹이 호환되는지 확인해야 하며, 그룹 표기 하나만으로 다른 환경 조건까지 자동 충족한다고 판단해서는 안 된다.",
+      "가스용 온도등급과 분진용 최대 표면온도 표시는 기기의 허용 표면온도와 점화위험을 연결하는 조건이므로 공정온도와 주위온도를 포함한 실제 열조건에서 적합성을 확인해야 한다.",
+      "방폭 보호방식은 모든 위험장소에 동일하게 적용하는 것이 아니라 요구 EPL, 기기 기능, 전력수준, 유지보수성, 배선 및 환경조건을 고려하여 적합한 보호방식을 선정한다.",
+      "내압방폭 Ex d는 외함 내부에서 발생할 수 있는 폭발압력을 견디고 화염이 외부 폭발성 분위기로 전파되지 않도록 접합부와 구조를 설계하는 방식이지 내부 점화를 원천적으로 없애는 방식은 아니다.",
+      "안전증방폭 Ex e는 정상 운전 및 규정된 이상조건에서 아크·스파크와 과도한 온도 발생 가능성을 낮추도록 절연, 간격, 접속 및 온도상승을 강화하는 방식이다.",
+      "본질안전 Ex i는 정상상태와 규정된 고장조건에서 회로의 전기·열 에너지를 제한하여 폭발성 분위기를 점화할 수 없도록 하는 보호개념이다.",
+      "압력방폭 Ex p는 보호가스의 퍼지와 과압을 이용하여 외부 폭발성 분위기가 외함 내부의 점화원이 있는 공간에 위험하게 존재하지 않도록 하며, 필요한 감시·인터록 조건을 함께 충족해야 한다.",
+      "몰드방폭 Ex m은 점화원이 될 수 있는 부품을 컴파운드로 봉입하고, 분진용 Ex t는 외함의 분진 침입 방지와 표면온도 제한으로 점화를 방지하므로 적용 매체와 인증 표기를 구분해야 한다.",
+      "본질안전 보호수준 ia, ib, ic는 허용 고장조건과 보호수준이 서로 다르며 일반적으로 ia가 가장 높은 보호수준이고, 최종 적용 가능 Zone은 인증된 EPL과 기기 표시로 확인한다.",
+      "본질안전 계측루프는 본질안전 기기, 관련기기 또는 barrier/galvanic isolator, 상호연결 배선으로 하나의 시스템을 이루므로 현장기기만 단독으로 인증되었다고 전체 루프가 자동 적합해지는 것은 아니다.",
+      "Entity parameter 방식에서는 관련기기의 최대 출력 Uo, Io, Po가 현장 본질안전 기기의 허용 입력 Ui, Ii, Pi를 초과하지 않도록 Uo≤Ui, Io≤Ii, Po≤Pi를 확인한다.",
+      "본질안전 루프의 외부 정전용량과 인덕턴스는 현장기기와 케이블 값을 포함하여 인증된 Co·Lo 또는 인증서가 정한 동시 조합 한계 이내인지 검토해야 한다.",
+      "Zener barrier와 galvanic isolator는 모두 본질안전 에너지 제한에 사용될 수 있으나 절연 유무, 접지 요구, 신호 정확도, 전원, 유지보수 및 인증조건이 달라 시스템 조건에 맞게 선정해야 한다.",
+      "본질안전 배선은 비본질안전 회로로부터 요구되는 분리·식별·배선조건을 유지하고, 차폐·접지 방식도 루프 설계와 인증조건에 맞춰 적용하여 고장 시 위험 에너지 유입을 방지한다.",
+      "인증서 번호의 특수사용조건과 제조사 control drawing 또는 시스템 문서는 cable gland, 단자, 배선, 주위온도, 설치방향 등 실제 설치조건을 제한할 수 있으므로 설계·시공 단계에서 반드시 반영한다.",
+      "방폭 인증은 부식성, 침수, 진동, 화학적 적합성 등 모든 환경 적합성을 대신하지 않으므로 IP 등급, 재질, 씰, 주위환경과 공정조건을 별도로 확인해야 한다.",
+      "위험장소 계장설비는 위험장소 도면, 기기목록, 인증서, 본질안전 루프 계산, 설치기록과 검사·정비 이력을 유지하고 변경 시 적합성을 다시 확인해야 한다."
+    ],
+    "fatal_conditions": [
+      {
+        "id": "hazardous_fatal_any_ex_for_zone0",
+        "claim": "Zone 0에서는 Ex 표시가 있는 기기라면 보호방식과 EPL에 관계없이 모두 사용할 수 있다.",
+        "correction": "Zone 0은 요구되는 높은 EPL과 해당 보호방식·인증조건을 만족해야 하며 Ex 표시만으로 적합성을 판단할 수 없다.",
+        "wrong_claim": "Zone 0에서는 Ex 표시가 있는 기기라면 보호방식과 EPL에 관계없이 모두 사용할 수 있다.",
+        "correct_rule": "Zone 0은 요구되는 높은 EPL과 해당 보호방식·인증조건을 만족해야 하며 Ex 표시만으로 적합성을 판단할 수 없다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Zone 0은 요구되는 높은 EPL과 해당 보호방식·인증조건을 만족해야 하며 Ex 표시만으로 적합성을 판단할 수 없다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_ex_mark_all_conditions",
+        "claim": "방폭 인증 표시가 있으면 가스 그룹, 온도등급, 주위온도와 인증서 특수조건은 별도로 확인할 필요가 없다.",
+        "correction": "방폭 선정은 EPL뿐 아니라 물질 그룹, 온도조건, 주위온도 범위와 인증서 특수사용조건을 함께 확인해야 한다.",
+        "wrong_claim": "방폭 인증 표시가 있으면 가스 그룹, 온도등급, 주위온도와 인증서 특수조건은 별도로 확인할 필요가 없다.",
+        "correct_rule": "방폭 선정은 EPL뿐 아니라 물질 그룹, 온도조건, 주위온도 범위와 인증서 특수사용조건을 함께 확인해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "방폭 선정은 EPL뿐 아니라 물질 그룹, 온도조건, 주위온도 범위와 인증서 특수사용조건을 함께 확인해야 한다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_intrinsic_safety_zero_energy",
+        "claim": "본질안전 회로는 전기 에너지가 전혀 없는 무전원 회로이다.",
+        "correction": "본질안전은 전기·열 에너지를 인증된 한계 이내로 제한하여 정상 및 규정된 고장조건에서 점화능력을 억제하는 개념이다.",
+        "wrong_claim": "본질안전 회로는 전기 에너지가 전혀 없는 무전원 회로이다.",
+        "correct_rule": "본질안전은 전기·열 에너지를 인증된 한계 이내로 제한하여 정상 및 규정된 고장조건에서 점화능력을 억제하는 개념이다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "본질안전은 전기·열 에너지를 인증된 한계 이내로 제한하여 정상 및 규정된 고장조건에서 점화능력을 억제하는 개념이다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_ia_ib_ic_identical",
+        "claim": "Ex ia, Ex ib, Ex ic는 보호수준과 적용 가능한 위험장소가 모두 동일하다.",
+        "correction": "ia, ib, ic는 허용 고장조건과 보호수준이 다르며 최종 적용 가능 장소는 인증된 EPL과 표시로 확인해야 한다.",
+        "wrong_claim": "Ex ia, Ex ib, Ex ic는 보호수준과 적용 가능한 위험장소가 모두 동일하다.",
+        "correct_rule": "ia, ib, ic는 허용 고장조건과 보호수준이 다르며 최종 적용 가능 장소는 인증된 EPL과 표시로 확인해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "ia, ib, ic는 허용 고장조건과 보호수준이 다르며 최종 적용 가능 장소는 인증된 EPL과 표시로 확인해야 한다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_entity_direction_reversed",
+        "claim": "본질안전 Entity 검토에서 관련기기 출력 Uo, Io, Po가 현장기기 허용입력 Ui, Ii, Pi보다 커야 안전하다.",
+        "correction": "관련기기의 최대 출력은 현장기기 허용입력을 초과하지 않아야 하므로 Uo≤Ui, Io≤Ii, Po≤Pi 방향으로 확인한다.",
+        "wrong_claim": "본질안전 Entity 검토에서 관련기기 출력 Uo, Io, Po가 현장기기 허용입력 Ui, Ii, Pi보다 커야 안전하다.",
+        "correct_rule": "관련기기의 최대 출력은 현장기기 허용입력을 초과하지 않아야 하므로 Uo≤Ui, Io≤Ii, Po≤Pi 방향으로 확인한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "관련기기의 최대 출력은 현장기기 허용입력을 초과하지 않아야 하므로 Uo≤Ui, Io≤Ii, Po≤Pi 방향으로 확인한다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_ignore_cap_inductance",
+        "claim": "본질안전 루프는 전압과 전류만 맞으면 케이블 정전용량과 인덕턴스는 무시해도 된다.",
+        "correction": "현장기기와 케이블의 정전용량·인덕턴스를 포함하여 인증된 Co·Lo 또는 인증서의 동시 조합 한계 이내인지 확인해야 한다.",
+        "wrong_claim": "본질안전 루프는 전압과 전류만 맞으면 케이블 정전용량과 인덕턴스는 무시해도 된다.",
+        "correct_rule": "현장기기와 케이블의 정전용량·인덕턴스를 포함하여 인증된 Co·Lo 또는 인증서의 동시 조합 한계 이내인지 확인해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "현장기기와 케이블의 정전용량·인덕턴스를 포함하여 인증된 Co·Lo 또는 인증서의 동시 조합 한계 이내인지 확인해야 한다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_zener_ground_irrelevant",
+        "claim": "Zener barrier는 접지 상태와 무관하게 항상 동일한 본질안전 기능을 제공한다.",
+        "correction": "Zener barrier는 설계된 고장에너지를 안전하게 우회시키는 접지·등전위 조건이 중요하며 해당 인증·설치 요구를 만족해야 한다.",
+        "wrong_claim": "Zener barrier는 접지 상태와 무관하게 항상 동일한 본질안전 기능을 제공한다.",
+        "correct_rule": "Zener barrier는 설계된 고장에너지를 안전하게 우회시키는 접지·등전위 조건이 중요하며 해당 인증·설치 요구를 만족해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Zener barrier는 설계된 고장에너지를 안전하게 우회시키는 접지·등전위 조건이 중요하며 해당 인증·설치 요구를 만족해야 한다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_isolator_requires_same_earth",
+        "claim": "Galvanic isolator는 Zener barrier와 동일한 방식의 전용 본질안전 접지가 항상 필요하다.",
+        "correction": "Galvanic isolator는 회로 절연을 이용하므로 접지 요구가 Zener barrier와 다를 수 있으며 최종 요구는 해당 인증과 시스템 설계에 따른다.",
+        "wrong_claim": "Galvanic isolator는 Zener barrier와 동일한 방식의 전용 본질안전 접지가 항상 필요하다.",
+        "correct_rule": "Galvanic isolator는 회로 절연을 이용하므로 접지 요구가 Zener barrier와 다를 수 있으며 최종 요구는 해당 인증과 시스템 설계에 따른다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Galvanic isolator는 회로 절연을 이용하므로 접지 요구가 Zener barrier와 다를 수 있으며 최종 요구는 해당 인증과 시스템 설계에 따른다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_exd_prevents_internal_ignition",
+        "claim": "Ex d 외함은 내부에 폭발성 분위기가 형성되거나 점화되는 것을 원천적으로 방지하는 방식이다.",
+        "correction": "Ex d는 내부 폭발 가능성을 전제로 외함이 폭발압력을 견디고 화염이 외부로 전파되지 않도록 하는 보호방식이다.",
+        "wrong_claim": "Ex d 외함은 내부에 폭발성 분위기가 형성되거나 점화되는 것을 원천적으로 방지하는 방식이다.",
+        "correct_rule": "Ex d는 내부 폭발 가능성을 전제로 외함이 폭발압력을 견디고 화염이 외부로 전파되지 않도록 하는 보호방식이다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Ex d는 내부 폭발 가능성을 전제로 외함이 폭발압력을 견디고 화염이 외부로 전파되지 않도록 하는 보호방식이다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_ip_equals_ex",
+        "claim": "IP66 등급이면 별도의 방폭 인증 없이 위험장소에서 사용할 수 있다.",
+        "correction": "IP 등급은 고체·물 침입 보호 수준이며 방폭 보호방식과 EPL 인증을 대체하지 않는다.",
+        "wrong_claim": "IP66 등급이면 별도의 방폭 인증 없이 위험장소에서 사용할 수 있다.",
+        "correct_rule": "IP 등급은 고체·물 침입 보호 수준이며 방폭 보호방식과 EPL 인증을 대체하지 않는다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "IP 등급은 고체·물 침입 보호 수준이며 방폭 보호방식과 EPL 인증을 대체하지 않는다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_temperature_class_is_ambient",
+        "claim": "방폭기기의 온도등급은 단순히 사용 가능한 주위온도 등급만을 의미한다.",
+        "correction": "가스용 온도등급은 점화위험과 관련된 최대 표면온도를 나타내며 별도의 marked ambient range와 실제 공정 열조건도 함께 확인해야 한다.",
+        "wrong_claim": "방폭기기의 온도등급은 단순히 사용 가능한 주위온도 등급만을 의미한다.",
+        "correct_rule": "가스용 온도등급은 점화위험과 관련된 최대 표면온도를 나타내며 별도의 marked ambient range와 실제 공정 열조건도 함께 확인해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "가스용 온도등급은 점화위험과 관련된 최대 표면온도를 나타내며 별도의 marked ambient range와 실제 공정 열조건도 함께 확인해야 한다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_certificate_ignores_installation",
+        "claim": "방폭 인증 기기이면 cable gland, 단자, 배선 분리와 인증서 특수조건을 지키지 않아도 방폭 성능은 그대로 보장된다.",
+        "correction": "방폭 적합성은 인증된 기기뿐 아니라 지정된 gland·배선·설치 및 특수사용조건을 충족해야 유지된다.",
+        "wrong_claim": "방폭 인증 기기이면 cable gland, 단자, 배선 분리와 인증서 특수조건을 지키지 않아도 방폭 성능은 그대로 보장된다.",
+        "correct_rule": "방폭 적합성은 인증된 기기뿐 아니라 지정된 gland·배선·설치 및 특수사용조건을 충족해야 유지된다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "방폭 적합성은 인증된 기기뿐 아니라 지정된 gland·배선·설치 및 특수사용조건을 충족해야 유지된다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "hazardous_fatal_is_live_work_blanket_permission",
+        "claim": "본질안전 회로는 어떤 작업이라도 전원이 인가된 상태에서 항상 안전하게 분리·접속할 수 있다.",
+        "correction": "본질안전은 인증된 회로와 작업조건 안에서 위험을 제한하는 방식이며 실제 활선 작업 가능 여부는 설치규정, 인증조건과 작업절차를 따라야 한다.",
+        "wrong_claim": "본질안전 회로는 어떤 작업이라도 전원이 인가된 상태에서 항상 안전하게 분리·접속할 수 있다.",
+        "correct_rule": "본질안전은 인증된 회로와 작업조건 안에서 위험을 제한하는 방식이며 실제 활선 작업 가능 여부는 설치규정, 인증조건과 작업절차를 따라야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "본질안전은 인증된 회로와 작업조건 안에서 위험을 제한하는 방식이며 실제 활선 작업 가능 여부는 설치규정, 인증조건과 작업절차를 따라야 한다.",
+        "description": "위험장소 분류, 방폭 보호방식 또는 본질안전 회로 적합성을 반대로 설명하는 중대한 오개념이다.",
+        "grading_notes": "단순 표현 누락이 아니라 안전선정의 방향을 뒤집는 경우에만 Fatal로 판정한다."
+      }
+    ],
+    "major_checks": [
+      {
+        "id": "hazardous_major_zone_to_epl",
+        "check": "Zone 분류를 EPL 및 인증표시와 연결했는지 검토한다."
+      },
+      {
+        "id": "hazardous_major_gas_dust_distinction",
+        "check": "가스·증기 Zone과 분진 Zone을 구분했는지 검토한다."
+      },
+      {
+        "id": "hazardous_major_protection_principles",
+        "check": "Ex d/e/i/p의 원리를 명칭 나열이 아니라 점화방지 메커니즘으로 설명했는지 검토한다."
+      },
+      {
+        "id": "hazardous_major_is_fault_basis",
+        "check": "본질안전을 정상 및 규정 고장조건의 에너지 제한으로 설명했는지 검토한다."
+      },
+      {
+        "id": "hazardous_major_entity_direction",
+        "check": "Uo≤Ui, Io≤Ii, Po≤Pi 방향과 C/L 한계를 정확히 설명했는지 검토한다."
+      },
+      {
+        "id": "hazardous_major_barrier_isolator",
+        "check": "Zener barrier와 galvanic isolator의 접지·절연 차이를 조건부로 설명했는지 검토한다."
+      },
+      {
+        "id": "hazardous_major_temperature",
+        "check": "온도등급 또는 최대표면온도와 ambient/process 조건을 구분했는지 검토한다."
+      },
+      {
+        "id": "hazardous_major_certificate_conditions",
+        "check": "인증서 special condition과 control drawing을 설치조건에 반영했는지 검토한다."
+      },
+      {
+        "id": "hazardous_major_wiring",
+        "check": "본질안전/비본질안전 회로의 배선분리·식별을 고려했는지 검토한다."
+      },
+      {
+        "id": "hazardous_major_environment",
+        "check": "IP·부식·진동 등 환경 적합성을 Ex 인증과 별도로 검토했는지 확인한다."
+      }
+    ],
+    "false_positive_cautions": [
+      "Zone 번호를 간략히 썼더라도 EPL과 인증조건을 올바르게 연결하면 표현 차이만으로 오류로 보지 않는다.",
+      "Ex ia/ib/ic와 Zone 관계를 '일반적으로' 설명하고 최종 인증표시 확인을 명시한 답안은 과도하게 감점하지 않는다.",
+      "Co/Lo 대신 인증서가 요구하는 다른 entity/system parameter 표기를 사용해도 의미가 같으면 허용한다.",
+      "Zener barrier 접지를 언급하지 않았다고 곧바로 Fatal로 보지 말고 해당 질문이 barrier 설치조건을 요구했는지 본다.",
+      "Galvanic isolator의 접지 요구는 제품·시스템별 조건이 있으므로 '절대 접지 불필요'라고 쓰지 않은 답안은 문맥을 본다.",
+      "Ex e의 세부 protection level suffix를 쓰지 않아도 안전증 원리와 EPL 선정이 정확하면 허용한다.",
+      "국가별 인증명칭 차이는 해당 관할을 명시하고 IECEx/IEC 60079 개념과 모순되지 않으면 허용한다.",
+      "온도등급과 최대표면온도를 수치 없이 설명해도 선정 방향이 정확하면 허용한다.",
+      "IP 등급을 보조 환경요건으로 함께 언급한 것은 방폭과 동일시하지 않는 한 오류가 아니다.",
+      "SIS/ESD가 주변 응용으로 잠깐 언급되어도 SIL 수명주기를 방폭선정 원리로 대체하지 않으면 범위오염으로 보지 않는다.",
+      "활선 작업을 조건부로 허용한다고 서술하고 인증·절차 확인을 명시하면 본질안전 오개념으로 보지 않는다.",
+      "표준 판년도는 현행 적용판 확인을 전제로 하면 특정 연도를 쓰지 않아도 감점하지 않는다."
+    ],
+    "safe_conditions": [
+      "Zone은 폭발성 분위기의 존재 빈도와 지속시간을 나타내며 최종 기기 선정은 EPL과 전체 Ex marking을 함께 본다.",
+      "Ex ia·ib·ic의 적용은 인증된 EPL과 기기 표시를 기준으로 확인한다.",
+      "본질안전은 무전원이 아니라 점화 가능한 전기·열 에너지를 규정 조건에서 제한하는 방식이다.",
+      "Entity 검토는 Uo≤Ui, Io≤Ii, Po≤Pi와 함께 케이블을 포함한 C·L 한계를 확인한다.",
+      "Co·Lo의 동시 적용 한계는 인증서 또는 control drawing의 조건을 우선한다.",
+      "Zener barrier의 접지와 galvanic isolator의 절연 특성은 동일하게 취급하지 않는다.",
+      "Ex d는 내부 폭발을 견디고 외부 화염 전파를 제한하는 방식으로 설명한다.",
+      "IP 등급과 Ex 인증은 서로 다른 적합성 항목이다.",
+      "가스·증기 Zone과 분진 Zone을 구분해 설명한다.",
+      "기기 인증뿐 아니라 gland, 단자, 배선, 주위온도와 특수사용조건까지 설치 적합성을 확인한다."
+    ],
+    "next_practice_points": [
+      "Zone/EPL/Ex marking을 한 장의 선정 flow로 연결한다.",
+      "Ex d/e/i/p의 보호원리를 비교표 없이도 문장으로 설명할 수 있게 한다.",
+      "IS loop Entity parameter 계산 예제를 U/I/P와 C/L 두 단계로 연습한다.",
+      "Barrier와 isolator 선정에서 접지·절연·유지보수 trade-off를 정리한다.",
+      "certificate special condition과 현장 설치검사를 연결한다."
+    ],
+    "score_policy": {
+      "direct_score_application": false,
+      "direct_d_e_effect": "none",
+      "affected_layers": [
+        "C"
+      ],
+      "reason": "Logic LLM은 방폭 사실관계와 선정 논리의 정확성만 판정하고 D/E 점수에 직접 관여하지 않는다."
+    },
+    "output_contract": {
+      "direct_score_layers": [
+        "C"
+      ],
+      "excluded_score_layers": [
+        "D",
+        "E"
+      ],
+      "requires_evidence": true
+    },
+    "cap_policy": {
+      "fatal_recommended_ceiling": 10.0
+    },
+    "feedback_templates": {
+      "major": "위험장소 분류→EPL→보호방식→인증·설치조건의 연결이 부족한 부분을 지적한다.",
+      "fatal": "방폭 안전선정의 방향을 뒤집는 오개념을 먼저 수정하세요."
+    }
+  },
+  "revision_notes": [
+    "llm_only_semantic_review",
+    "deterministic_keyword_fatal_disabled",
+    "fatal_conditions_project_fact_anchor_fatals"
+  ],
+  "topic_label": "위험장소 방폭 방식, 본질안전 회로 및 계측기기 선정"
+}
