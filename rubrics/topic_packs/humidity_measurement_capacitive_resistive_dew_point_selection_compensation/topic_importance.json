@@ -1,0 +1,27 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "RH = 100 Pw/Pws(T)와 temperature dependence를 정확히 설명한다.",
+    "Absolute humidity와 RH를 구분한다.",
+    "Dew point, frost point와 pressure dew point를 구분한다.",
+    "Capacitive polymer dielectric→capacitance 원리를 설명한다.",
+    "Resistive hygroscopic material→resistance/impedance 원리를 설명한다.",
+    "Chilled mirror의 condensation optical detection과 mirror temperature를 설명한다.",
+    "Sensor temperature, condensation, warmed probe를 실제 RH 계산과 연결한다.",
+    "High/low humidity, pressure, contamination, response time을 선정기준으로 제시한다.",
+    "Hysteresis, drift, contamination과 calibration traceability를 설명한다.",
+    "Legacy retrofit의 location, DCS/PLC interface, access, shutdown, spare와 lifecycle cost를 제시한다."
+  ],
+  "note": "습도계측은 humidity parameter와 sensing principle을 해석하는 것이 중심이고 temperature/condensation/pressure에 의한 실제 오차와 선정이 현장조건에 좌우되므로 PRINCIPLE_INTERPRETATION / FIELD_APPLICATION으로 분류한다. 출제빈도 근거는 사용하지 않는다.",
+  "revision_notes": [
+    "step0_analog_decision_PRINCIPLE_INTERPRETATION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used",
+    "temperature_and_pressure_basis_explicit"
+  ],
+  "topic_label": "습도계측의 원리, 선정 및 보상 — Capacitive·Resistive·Dew Point"
+}

@@ -1,0 +1,364 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+  "title": "습도계측의 원리, 선정 및 보상 — Capacitive·Resistive·Dew Point",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_aliases": [
+      "습도계측 정전용량식 저항식 노점",
+      "상대습도 센서 선정 오차",
+      "정전용량식 습도센서 원리",
+      "저항식 습도센서 원리",
+      "노점 이슬점 계측",
+      "습도센서 온도보상 결로",
+      "humidity measurement capacitive resistive dew point",
+      "relative humidity sensor selection error",
+      "capacitive humidity sensor principle",
+      "resistive humidity sensor principle",
+      "dew point humidity measurement",
+      "pressure dew point measurement",
+      "humidity temperature compensation",
+      "humidity condensation hysteresis drift",
+      "chilled mirror dew point hygrometer",
+      "wet bulb dry bulb humidity",
+      "low humidity dew point selection",
+      "humidity calibration traceability"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "RH = Pw/Pws(T)에서 temperature dependence를 먼저 설명한다.",
+      "Capacitive와 resistive transduction principle을 한 줄로 구분한다.",
+      "Dew point, frost point, wet-bulb를 구분한다.",
+      "Condensation와 warmed-probe 논리를 sensor temperature와 연결한다.",
+      "Calibration reference와 equilibration time을 빠뜨리지 않는다."
+    ],
+    "reason": "RH, dew point, condensation, temperature 같은 용어는 정상설명과 오답문장 모두에 등장하므로 deterministic keyword Fatal을 사용하지 않는다."
+  },
+  "llm_profile": {
+    "enabled": true,
+    "display_name": "습도계측의 원리, 선정 및 보상 — Capacitive·Resistive·Dew Point",
+    "difficulty": "FIELD_APPLICATION",
+    "candidate_extraction": {
+      "enabled": false,
+      "rules": [],
+      "reason": "RH/dew-point 정의, capacitive/resistive transduction, pressure basis와 warmed-probe actual-RH 계산은 문맥과 방향을 함께 해석해야 한다."
+    },
+    "truth_schema": [
+      "기체 혼합물에서 수증기는 partial pressure P_w로 표현할 수 있으며 습도계측의 RH, dew point, mixing ratio 계산은 수증기 분압과 포화수증기압의 관계를 바탕으로 해석한다.",
+      "Relative humidity는 같은 온도에서 실제 수증기 분압 P_w를 포화수증기압 P_ws(T)로 나눈 비이며 RH[%] = 100·P_w/P_ws(T)로 정의한다. 포화수증기압은 온도함수이므로 RH는 온도에 강하게 의존한다.",
+      "수증기량이 거의 변하지 않아도 공기온도가 올라가면 P_ws(T)가 증가하여 RH가 낮아질 수 있고, 냉각하면 RH가 증가하여 100%에 접근할 수 있다. 따라서 RH sensor는 sensor temperature와 process temperature의 차이에 민감하다.",
+      "Absolute humidity는 단위 체적당 수증기 질량 ρ_v = m_v/V로 정의할 수 있으며 이상기체 근사에서는 ρ_v = P_w/(R_v T)로 연결된다. RH와 달리 같은 수증기 상태라도 온도·압력과 체적변화의 영향을 받는다.",
+      "Dew point T_d는 현재 수증기 함량과 압력조건에서 기체를 냉각할 때 liquid water condensation이 시작되는 온도다. Ambient temperature가 dew point에 가까워질수록 condensation risk가 증가한다.",
+      "0°C 이하의 매우 건조한 조건에서는 응축상이 ice인지 liquid water인지에 따라 frost point와 dew point를 구분할 수 있다. Subzero moisture specification에서는 사용한 정의와 계산 기준을 확인해야 한다.",
+      "Dew point는 pressure condition의 영향을 받으므로 compressed gas에서는 pressure dew point와 atmospheric-equivalent dew point를 혼동하지 않는다. 압력변화 시 같은 moisture content라도 condensation condition이 달라질 수 있다.",
+      "Capacitive humidity sensor는 porous electrode 사이의 hygroscopic polymer dielectric이 수분을 흡수·방출하면 dielectric constant가 변하고 이에 따라 capacitance가 변하는 원리를 이용한다. 이 capacitance를 전자회로가 RH 신호로 변환한다.",
+      "Capacitive RH sensor는 polymer response, electronics와 RH 정의 자체가 temperature의 영향을 받으므로 colocated temperature sensing과 calibration coefficient를 이용한 temperature compensation이 중요하다.",
+      "Polymer capacitive sensor는 adsorption/desorption path 차이에 따른 hysteresis, long-term drift, chemical exposure, contamination과 repeated condensation의 영향을 받을 수 있어 calibration interval과 recovery characteristic을 확인한다.",
+      "Resistive humidity sensor는 hygroscopic polymer, salt 또는 ceramic 등 sensing material이 수분을 흡수할 때 ionic/electronic conduction 특성이 변하여 resistance 또는 impedance가 변하는 원리를 이용한다.",
+      "Resistive humidity element는 재료와 구조에 따라 DC polarization 또는 electrode degradation을 피하기 위해 AC excitation/impedance measurement를 사용하는 경우가 있다. 구체 excitation frequency와 circuit는 제조사 사양을 따른다.",
+      "Resistive humidity sensor의 sensitivity와 usable RH range는 sensing material에 따라 달라지며 high humidity, condensation, contamination과 temperature에서 nonlinearity 또는 recovery error가 증가할 수 있다.",
+      "Chilled-mirror hygrometer는 mirror를 냉각하면서 reflected light 변화를 관찰해 condensation onset을 검출하고 evaporation-condensation equilibrium에서 mirror temperature를 dew/frost point로 읽는 직접적 측정원리를 사용한다.",
+      "Chilled mirror는 높은 정확도의 reference measurement에 유리할 수 있지만 mirror contamination, optical fouling, cleaning, sampling flow와 frost/dew phase 판별이 측정품질에 영향을 주므로 유지보수 요구가 크다.",
+      "Psychrometric method는 dry-bulb와 wetted wet-bulb의 증발냉각 차이를 이용하고, airflow·wick·water purity·pressure를 고려한 psychrometric relation으로 humidity를 구한다. Wet-bulb temperature를 dew point와 동일시하지 않는다.",
+      "Sensor surface가 주변공기보다 차가워 local RH가 높아지거나 dew point 이하로 내려가면 condensation이 발생할 수 있다. 반대로 self-heating이나 warm surface는 local RH를 낮춰 실제 process RH와 차이를 만들 수 있다.",
+      "High-RH와 condensation risk 환경에서는 warmed probe 또는 heated sensor head로 sensing surface를 dew point보다 높게 유지하고 별도 ambient temperature를 이용해 actual RH를 계산하는 방식이 사용될 수 있다.",
+      "Very low humidity에서는 RH 값이 작고 temperature sensitivity와 RH calibration uncertainty의 영향이 커질 수 있어 dew point/frost point 또는 trace-moisture 방식이 더 적합할 수 있다. 선정은 required range와 uncertainty에 따라 결정한다.",
+      "습도계기 선정은 RH/dew-point range뿐 아니라 process temperature, pressure, contaminants, condensation, chemical compatibility, airflow, response time, enclosure와 hazardous-area requirement를 함께 검토한다.",
+      "습도센서는 salt solution, humidity generator, reference hygrometer 또는 chilled mirror 등 적합한 reference와 비교하여 calibration할 수 있으며 field check와 full calibration의 목적을 구분하고 traceability와 equilibration time을 관리한다.",
+      "최종 선정은 sensor replacement, filter cleaning, calibration access, spare, contamination recovery, DCS/PLC interface, shutdown, hazardous-area requirement와 lifecycle cost까지 포함해야 현장 적용성이 높다."
+    ],
+    "fatal_conditions": [
+      {
+        "id": "humidity_fatal_rh_absolute_same",
+        "claim": "Relative humidity와 absolute humidity는 온도와 관계없이 항상 같은 물리량이고 단위만 다르다.",
+        "correction": "RH는 P_w/P_ws(T)의 비이고 absolute humidity는 단위체적당 수증기 질량이므로 정의와 온도·체적 의존성이 다르다.",
+        "wrong_claim": "Relative humidity와 absolute humidity는 온도와 관계없이 항상 같은 물리량이고 단위만 다르다.",
+        "correct_rule": "RH는 P_w/P_ws(T)의 비이고 absolute humidity는 단위체적당 수증기 질량이므로 정의와 온도·체적 의존성이 다르다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "RH는 P_w/P_ws(T)의 비이고 absolute humidity는 단위체적당 수증기 질량이므로 정의와 온도·체적 의존성이 다르다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_rh_temperature_independent",
+        "claim": "수증기량이 같으면 공기온도가 변해도 relative humidity는 절대 변하지 않는다.",
+        "correction": "RH의 분모인 saturation vapor pressure P_ws(T)가 온도함수이므로 수증기량이 같아도 온도변화로 RH가 달라질 수 있다.",
+        "wrong_claim": "수증기량이 같으면 공기온도가 변해도 relative humidity는 절대 변하지 않는다.",
+        "correct_rule": "RH의 분모인 saturation vapor pressure P_ws(T)가 온도함수이므로 수증기량이 같아도 온도변화로 RH가 달라질 수 있다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "RH의 분모인 saturation vapor pressure P_ws(T)가 온도함수이므로 수증기량이 같아도 온도변화로 RH가 달라질 수 있다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_dew_point_equals_rh",
+        "claim": "Dew point는 relative humidity의 백분율 값을 섭씨온도로 그대로 읽은 값이다.",
+        "correction": "Dew point는 현재 수증기량과 압력에서 냉각 시 condensation이 시작되는 온도이며 RH와 단위·정의가 다르다.",
+        "wrong_claim": "Dew point는 relative humidity의 백분율 값을 섭씨온도로 그대로 읽은 값이다.",
+        "correct_rule": "Dew point는 현재 수증기량과 압력에서 냉각 시 condensation이 시작되는 온도이며 RH와 단위·정의가 다르다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Dew point는 현재 수증기량과 압력에서 냉각 시 condensation이 시작되는 온도이며 RH와 단위·정의가 다르다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_wetbulb_equals_dewpoint",
+        "claim": "Wet-bulb temperature와 dew point는 항상 동일하므로 서로 바꾸어 사용해도 된다.",
+        "correction": "Wet-bulb는 증발냉각 평형과 psychrometric relation에 따른 온도이고 dew point는 saturation/condensation onset 온도이므로 일반적으로 서로 다르다.",
+        "wrong_claim": "Wet-bulb temperature와 dew point는 항상 동일하므로 서로 바꾸어 사용해도 된다.",
+        "correct_rule": "Wet-bulb는 증발냉각 평형과 psychrometric relation에 따른 온도이고 dew point는 saturation/condensation onset 온도이므로 일반적으로 서로 다르다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Wet-bulb는 증발냉각 평형과 psychrometric relation에 따른 온도이고 dew point는 saturation/condensation onset 온도이므로 일반적으로 서로 다르다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_capacitive_resistance",
+        "claim": "Capacitive humidity sensor는 polymer의 저항변화를 직접 측정하는 resistive sensor다.",
+        "correction": "Capacitive sensor는 수분흡수에 따른 dielectric constant와 capacitance 변화를 측정하며 resistive humidity sensor의 resistance/impedance principle과 구분한다.",
+        "wrong_claim": "Capacitive humidity sensor는 polymer의 저항변화를 직접 측정하는 resistive sensor다.",
+        "correct_rule": "Capacitive sensor는 수분흡수에 따른 dielectric constant와 capacitance 변화를 측정하며 resistive humidity sensor의 resistance/impedance principle과 구분한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Capacitive sensor는 수분흡수에 따른 dielectric constant와 capacitance 변화를 측정하며 resistive humidity sensor의 resistance/impedance principle과 구분한다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_resistive_capacitance",
+        "claim": "Resistive humidity sensor는 항상 capacitance만 변화시키고 resistance나 impedance는 변하지 않는다.",
+        "correction": "Resistive humidity sensor는 hygroscopic material의 수분상태에 따른 resistance 또는 impedance 변화를 이용한다.",
+        "wrong_claim": "Resistive humidity sensor는 항상 capacitance만 변화시키고 resistance나 impedance는 변하지 않는다.",
+        "correct_rule": "Resistive humidity sensor는 hygroscopic material의 수분상태에 따른 resistance 또는 impedance 변화를 이용한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Resistive humidity sensor는 hygroscopic material의 수분상태에 따른 resistance 또는 impedance 변화를 이용한다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_no_temperature_comp",
+        "claim": "RH sensor는 습도만 측정하므로 sensor temperature와 temperature compensation은 필요하지 않다.",
+        "correction": "RH 정의와 sensor material response가 temperature 영향을 받으므로 accurate RH measurement에는 sensor/process temperature와 적절한 compensation을 고려해야 한다.",
+        "wrong_claim": "RH sensor는 습도만 측정하므로 sensor temperature와 temperature compensation은 필요하지 않다.",
+        "correct_rule": "RH 정의와 sensor material response가 temperature 영향을 받으므로 accurate RH measurement에는 sensor/process temperature와 적절한 compensation을 고려해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "RH 정의와 sensor material response가 temperature 영향을 받으므로 accurate RH measurement에는 sensor/process temperature와 적절한 compensation을 고려해야 한다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_condensation_no_effect",
+        "claim": "Humidity sensor에 condensation이나 contamination이 생겨도 hysteresis, drift, recovery와 정확도에는 영향을 주지 않는다.",
+        "correction": "Condensation과 contamination은 sensor response, recovery, hysteresis와 long-term accuracy에 영향을 줄 수 있어 환경·filter·recovery·calibration을 관리해야 한다.",
+        "wrong_claim": "Humidity sensor에 condensation이나 contamination이 생겨도 hysteresis, drift, recovery와 정확도에는 영향을 주지 않는다.",
+        "correct_rule": "Condensation과 contamination은 sensor response, recovery, hysteresis와 long-term accuracy에 영향을 줄 수 있어 환경·filter·recovery·calibration을 관리해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Condensation과 contamination은 sensor response, recovery, hysteresis와 long-term accuracy에 영향을 줄 수 있어 환경·filter·recovery·calibration을 관리해야 한다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_chilled_mirror_no_condensation",
+        "claim": "Chilled-mirror hygrometer는 mirror에 condensation을 만들지 않고 단순히 주변 RH 전압을 읽는다.",
+        "correction": "Chilled mirror는 mirror를 냉각해 condensation onset/equilibrium을 optical하게 검출하고 mirror temperature를 dew/frost point로 측정한다.",
+        "wrong_claim": "Chilled-mirror hygrometer는 mirror에 condensation을 만들지 않고 단순히 주변 RH 전압을 읽는다.",
+        "correct_rule": "Chilled mirror는 mirror를 냉각해 condensation onset/equilibrium을 optical하게 검출하고 mirror temperature를 dew/frost point로 측정한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Chilled mirror는 mirror를 냉각해 condensation onset/equilibrium을 optical하게 검출하고 mirror temperature를 dew/frost point로 측정한다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_pressure_dewpoint_same",
+        "claim": "Compressed gas의 pressure dew point는 압력과 무관하므로 atmospheric dew point와 항상 같은 값이다.",
+        "correction": "Dew/frost point는 pressure condition에 영향을 받으므로 compressed gas에서는 measurement pressure와 pressure-dew-point basis를 명확히 해야 한다.",
+        "wrong_claim": "Compressed gas의 pressure dew point는 압력과 무관하므로 atmospheric dew point와 항상 같은 값이다.",
+        "correct_rule": "Dew/frost point는 pressure condition에 영향을 받으므로 compressed gas에서는 measurement pressure와 pressure-dew-point basis를 명확히 해야 한다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Dew/frost point는 pressure condition에 영향을 받으므로 compressed gas에서는 measurement pressure와 pressure-dew-point basis를 명확히 해야 한다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_low_rh_always_capacitive",
+        "claim": "Very low humidity에서도 RH sensor가 항상 최선이며 dew point 측정은 불필요하다.",
+        "correction": "매우 낮은 humidity에서는 required uncertainty와 range에 따라 dew/frost-point 또는 trace-moisture 방식이 더 적합할 수 있다.",
+        "wrong_claim": "Very low humidity에서도 RH sensor가 항상 최선이며 dew point 측정은 불필요하다.",
+        "correct_rule": "매우 낮은 humidity에서는 required uncertainty와 range에 따라 dew/frost-point 또는 trace-moisture 방식이 더 적합할 수 있다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "매우 낮은 humidity에서는 required uncertainty와 range에 따라 dew/frost-point 또는 trace-moisture 방식이 더 적합할 수 있다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_warmed_probe_direct_rh",
+        "claim": "Warmed humidity probe가 표시하는 sensor-local RH를 그대로 ambient RH로 사용하면 별도 온도정보가 필요 없다.",
+        "correction": "Warmed probe는 sensor-local RH를 낮춰 condensation을 피하므로 actual process RH 계산에는 별도 ambient/process temperature와 sensor algorithm이 필요하다.",
+        "wrong_claim": "Warmed humidity probe가 표시하는 sensor-local RH를 그대로 ambient RH로 사용하면 별도 온도정보가 필요 없다.",
+        "correct_rule": "Warmed probe는 sensor-local RH를 낮춰 condensation을 피하므로 actual process RH 계산에는 별도 ambient/process temperature와 sensor algorithm이 필요하다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Warmed probe는 sensor-local RH를 낮춰 condensation을 피하므로 actual process RH 계산에는 별도 ambient/process temperature와 sensor algorithm이 필요하다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      },
+      {
+        "id": "humidity_fatal_calibration_no_equilibrium",
+        "claim": "Humidity calibration은 sensor와 reference가 안정화되기 전에 즉시 한 점만 비교해도 모든 range의 drift와 hysteresis를 제거한다.",
+        "correction": "Humidity calibration은 적절한 reference, equilibration time, 필요한 calibration points와 traceability를 관리해야 하며 한 점 field check가 모든 error를 제거하지 않는다.",
+        "wrong_claim": "Humidity calibration은 sensor와 reference가 안정화되기 전에 즉시 한 점만 비교해도 모든 range의 drift와 hysteresis를 제거한다.",
+        "correct_rule": "Humidity calibration은 적절한 reference, equilibration time, 필요한 calibration points와 traceability를 관리해야 하며 한 점 field check가 모든 error를 제거하지 않는다.",
+        "severity": "fatal",
+        "affected_layers": [
+          "C"
+        ],
+        "message": "Humidity calibration은 적절한 reference, equilibration time, 필요한 calibration points와 traceability를 관리해야 하며 한 점 field check가 모든 error를 제거하지 않는다.",
+        "description": "습도 물리량 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/condensation 보상의 방향을 뒤집는 중대한 오개념이다.",
+        "grading_notes": "단순 누락이 아니라 RH/dew-point 정의, sensing mechanism, pressure/temperature dependence 또는 calibration 원리를 반대로 설명한 경우에만 Fatal로 판정한다."
+      }
+    ],
+    "major_checks": [
+      {
+        "id": "humidity_major_parameters",
+        "check": "RH, absolute humidity와 dew/frost point를 올바르게 구분했는지 검토한다."
+      },
+      {
+        "id": "humidity_major_temperature",
+        "check": "RH의 P_ws(T) dependence와 sensor temperature effect를 설명했는지 검토한다."
+      },
+      {
+        "id": "humidity_major_capacitive",
+        "check": "Capacitive polymer dielectric→capacitance 변환을 설명했는지 검토한다."
+      },
+      {
+        "id": "humidity_major_resistive",
+        "check": "Resistive humidity의 hygroscopic resistance/impedance 변환을 설명했는지 검토한다."
+      },
+      {
+        "id": "humidity_major_dewpoint",
+        "check": "Chilled-mirror의 condensation onset/equilibrium dew-point 원리를 설명했는지 검토한다."
+      },
+      {
+        "id": "humidity_major_pressure",
+        "check": "Pressure dew point와 atmospheric basis를 구분했는지 검토한다."
+      },
+      {
+        "id": "humidity_major_condensation",
+        "check": "Condensation, self-heating, warmed probe와 local sensor RH를 연결했는지 검토한다."
+      },
+      {
+        "id": "humidity_major_selection",
+        "check": "High/low humidity, pressure, contamination, response time을 선정기준에 포함했는지 검토한다."
+      },
+      {
+        "id": "humidity_major_calibration",
+        "check": "Calibration reference, equilibration, traceability와 field check를 설명했는지 검토한다."
+      },
+      {
+        "id": "humidity_major_lifecycle",
+        "check": "Filter, spare, calibration access, shutdown과 lifecycle cost를 현장 적용과 연결했는지 검토한다."
+      }
+    ],
+    "false_positive_cautions": [
+      "RH를 Pw/Pws 비로 설명하면 saturation vapor pressure의 세부 empirical equation을 쓰지 않아도 허용한다.",
+      "Absolute humidity ideal-gas 식을 생략해도 mass per unit volume 정의가 정확하면 허용한다.",
+      "Subzero에서 dew point라는 용어를 넓게 쓰더라도 frost point와 phase difference를 인지하면 허용한다.",
+      "Capacitive polymer의 exact dielectric constant 수치를 쓰지 않아도 water uptake와 capacitance change가 맞으면 허용한다.",
+      "Temperature compensation을 integrated temperature sensor와 calibration coefficients로 설명하면 polynomial 세부는 없어도 된다.",
+      "Resistive humidity sensing material을 polymer/salt/ceramic으로 일반화해도 된다.",
+      "AC excitation을 일부 resistive elements에서 사용하는 방법이라고 조건부로 설명하면 허용한다.",
+      "Chilled mirror를 high-accuracy/reference method로 설명하면서 exact accuracy 수치가 없어도 된다.",
+      "Psychrometer의 exact psychrometric coefficient를 쓰지 않아도 airflow/wick/water condition을 설명하면 허용한다.",
+      "Warmed probe가 sensor-local RH를 낮춰 condensation을 피하고 ambient temperature로 actual RH를 계산한다고 설명하면 heater setpoint 수치가 없어도 된다.",
+      "Low humidity에서 dew point가 유리할 수 있다고 설명하면서 exact %RH threshold를 특정하지 않아도 된다.",
+      "Legacy retrofit에서 accuracy보다 location, condensation history, interface와 maintenance access를 함께 고려하는 설명은 적절하다."
+    ],
+    "safe_conditions": [
+      "RH를 water-vapor partial pressure와 saturation vapor pressure의 비로 설명하면 saturation-pressure 식 자체를 쓰지 않아도 된다.",
+      "Absolute humidity를 mass per unit volume로 정의하고 ideal-gas relation은 선택적으로 제시해도 된다.",
+      "Dew point와 frost point를 subzero 조건에서 구분하되 일반 현장에서는 dew point라는 용어가 넓게 쓰일 수 있음을 인정한다.",
+      "Capacitive sensor의 polymer dielectric이 water를 absorb/desorb하여 capacitance가 변한다고 설명하면 구체 polymer chemistry는 없어도 된다.",
+      "Capacitive humidity sensor가 temperature sensor와 calibration data를 함께 사용한다고 설명하면 compensation polynomial 세부는 없어도 된다.",
+      "Resistive humidity sensor의 sensing material을 polymer, salt 또는 ceramic 등으로 일반화해도 된다.",
+      "Resistive element에서 AC impedance measurement가 사용될 수 있다고 설명하면 excitation frequency는 제품별이라 없어도 된다.",
+      "Chilled mirror를 reference-grade dew-point measurement로 설명하되 accuracy 수치는 제품별이라고 명시하면 된다.",
+      "Psychrometric wet/dry bulb 방식에서 airflow와 wick condition을 중요 오차원인으로 설명하면 된다.",
+      "High-humidity에서 warmed probe가 condensation을 줄이는 방법이라고 설명하면 구체 heater temperature는 제품별이라 없어도 된다.",
+      "Low-humidity에서 RH보다 dew point가 유리할 수 있다고 정성적으로 설명하면 exact RH threshold는 제조사/application에 따라 다를 수 있다.",
+      "Condensation 후 sensor recovery가 가능하더라도 contaminated condensate가 accuracy에 영향을 줄 수 있다고 설명하면 적절하다."
+    ],
+    "next_practice_points": [
+      "RH, absolute humidity, dew point를 한 표로 구분한다.",
+      "Polymer capacitance와 hygroscopic resistance 변화를 대비한다.",
+      "Chilled mirror의 optical condensation detection을 설명한다.",
+      "High-RH condensation와 low-RH dew-point selection을 양끝 조건으로 정리한다.",
+      "Calibration/field check와 lifecycle maintenance를 답안 마지막에 연결한다."
+    ],
+    "score_policy": {
+      "direct_score_application": false,
+      "direct_d_e_effect": "none",
+      "affected_layers": [
+        "C"
+      ],
+      "reason": "Logic Check는 Fact/Logic 의미오류의 evidence를 제공하며 직접 점수층을 변경하지 않는다."
+    },
+    "output_contract": {
+      "direct_score_layers": [],
+      "excluded_score_layers": [
+        "D",
+        "E"
+      ],
+      "requires_evidence": true
+    },
+    "cap_policy": {
+      "fatal_recommended_ceiling": 10.0
+    },
+    "feedback_templates": {
+      "major": "Water-vapor state→humidity parameter→sensor principle→temperature/condensation error→selection/calibration 연결이 부족한 부분을 지적한다.",
+      "fatal": "RH/dew-point 정의, capacitive/resistive/chilled-mirror 원리 또는 temperature/pressure dependence를 뒤집는 중대한 오개념을 명확히 지적한다."
+    }
+  },
+  "revision_notes": [
+    "step0_analog_decision_PRINCIPLE_INTERPRETATION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used",
+    "temperature_and_pressure_basis_explicit"
+  ],
+  "topic_label": "습도계측의 원리, 선정 및 보상 — Capacitive·Resistive·Dew Point"
+}

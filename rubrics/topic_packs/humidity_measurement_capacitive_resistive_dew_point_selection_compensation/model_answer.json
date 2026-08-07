@@ -1,0 +1,337 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+  "title_ko": "습도계측의 원리, 선정 및 보상 — Capacitive·Resistive·Dew Point",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "Relative humidity, absolute humidity 및 dew point를 비교하여 설명하시오.",
+      "intent": "Water-vapor partial pressure, saturation pressure, mass/volume, condensation temperature를 구분한다.",
+      "required_anchor_ids": [
+        "humidity_water_vapor_partial_pressure",
+        "relative_humidity_definition",
+        "rh_temperature_dependence",
+        "absolute_humidity_definition",
+        "dew_point_definition"
+      ]
+    },
+    {
+      "pattern": "Capacitive humidity sensor의 원리와 temperature compensation을 설명하시오.",
+      "intent": "Polymer dielectric water uptake→capacitance와 temperature 영향/보상을 연결한다.",
+      "required_anchor_ids": [
+        "capacitive_polymer_principle",
+        "capacitive_sensor_temperature_compensation",
+        "capacitive_sensor_hysteresis_drift"
+      ]
+    },
+    {
+      "pattern": "Resistive humidity sensor의 원리, 특징 및 오차를 설명하시오.",
+      "intent": "Hygroscopic material의 resistance/impedance 변화와 AC measurement, high-RH limitation을 설명한다.",
+      "required_anchor_ids": [
+        "resistive_humidity_principle",
+        "resistive_sensor_ac_measurement",
+        "resistive_sensor_limits"
+      ]
+    },
+    {
+      "pattern": "Chilled-mirror hygrometer의 dew-point 측정원리와 유지보수 고려사항을 설명하시오.",
+      "intent": "Condensation onset/equilibrium과 mirror temperature, contamination/cleaning을 설명한다.",
+      "required_anchor_ids": [
+        "chilled_mirror_principle",
+        "chilled_mirror_maintenance",
+        "dew_point_definition"
+      ]
+    },
+    {
+      "pattern": "습도계측에서 dew point와 frost point 및 pressure dew point를 설명하시오.",
+      "intent": "Liquid/ice phase와 compressed-gas pressure basis를 구분한다.",
+      "required_anchor_ids": [
+        "dew_point_definition",
+        "frost_point_distinction",
+        "pressure_dew_point_effect"
+      ]
+    },
+    {
+      "pattern": "Capacitive, resistive, chilled-mirror 습도계측 방식을 비교하고 선정기준을 설명하시오.",
+      "intent": "Transduction principle, range, accuracy, condensation, contamination과 maintenance를 비교한다.",
+      "required_anchor_ids": [
+        "capacitive_polymer_principle",
+        "resistive_humidity_principle",
+        "chilled_mirror_principle",
+        "selection_environment_process"
+      ]
+    },
+    {
+      "pattern": "High humidity 및 condensation 환경에서 습도센서의 오차와 대책을 설명하시오.",
+      "intent": "Sensor temperature, condensation, warmed probe, hysteresis/drift를 연결한다.",
+      "required_anchor_ids": [
+        "condensation_sensor_temperature_error",
+        "high_humidity_warmed_probe",
+        "capacitive_sensor_hysteresis_drift"
+      ]
+    },
+    {
+      "pattern": "Very low humidity에서 RH 대신 dew point 측정을 고려하는 이유를 설명하시오.",
+      "intent": "Temperature sensitivity와 uncertainty, dew/frost point/trace moisture 선정논리를 설명한다.",
+      "required_anchor_ids": [
+        "low_humidity_dew_point_selection",
+        "rh_temperature_dependence",
+        "pressure_dew_point_effect"
+      ]
+    },
+    {
+      "pattern": "습도센서의 calibration 및 field verification 방법을 설명하시오.",
+      "intent": "Reference, equilibrium, traceability, field check/full calibration을 구분한다.",
+      "required_anchor_ids": [
+        "calibration_traceability_field_check",
+        "capacitive_sensor_hysteresis_drift",
+        "resistive_sensor_limits"
+      ]
+    },
+    {
+      "pattern": "기존 공조/공정 습도센서를 교체할 때 선정 및 적용 고려사항을 설명하시오.",
+      "intent": "Process environment, installation, interface, calibration access, shutdown/lifecycle을 평가한다.",
+      "required_anchor_ids": [
+        "selection_environment_process",
+        "humidity_lifecycle_maintainability_selection",
+        "condensation_sensor_temperature_error"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. Humidity Parameters",
+      "intent": "Water-vapor partial pressure, RH와 absolute humidity를 정의한다.",
+      "anchor_refs": [
+        "humidity_water_vapor_partial_pressure",
+        "relative_humidity_definition",
+        "rh_temperature_dependence",
+        "absolute_humidity_definition"
+      ]
+    },
+    {
+      "section": "2. Dew/Frost Point",
+      "intent": "Dew point, frost point와 pressure basis를 설명한다.",
+      "anchor_refs": [
+        "dew_point_definition",
+        "frost_point_distinction",
+        "pressure_dew_point_effect"
+      ]
+    },
+    {
+      "section": "3. Capacitive Sensor",
+      "intent": "Polymer dielectric principle, temperature compensation와 hysteresis/drift를 설명한다.",
+      "anchor_refs": [
+        "capacitive_polymer_principle",
+        "capacitive_sensor_temperature_compensation",
+        "capacitive_sensor_hysteresis_drift"
+      ]
+    },
+    {
+      "section": "4. Resistive Sensor",
+      "intent": "Resistance/impedance principle과 excitation/limitation을 설명한다.",
+      "anchor_refs": [
+        "resistive_humidity_principle",
+        "resistive_sensor_ac_measurement",
+        "resistive_sensor_limits"
+      ]
+    },
+    {
+      "section": "5. Reference / Psychrometric Methods",
+      "intent": "Chilled mirror와 wet/dry-bulb 방법 및 유지보수경계를 설명한다.",
+      "anchor_refs": [
+        "chilled_mirror_principle",
+        "chilled_mirror_maintenance",
+        "psychrometric_wet_dry_bulb"
+      ]
+    },
+    {
+      "section": "6. Temperature & Condensation",
+      "intent": "Sensor temperature, condensation, warmed probe와 low-humidity selection을 설명한다.",
+      "anchor_refs": [
+        "condensation_sensor_temperature_error",
+        "high_humidity_warmed_probe",
+        "low_humidity_dew_point_selection"
+      ]
+    },
+    {
+      "section": "7. Selection & Calibration",
+      "intent": "Process/environment 선정과 traceable calibration을 설명한다.",
+      "anchor_refs": [
+        "selection_environment_process",
+        "calibration_traceability_field_check"
+      ]
+    },
+    {
+      "section": "8. Lifecycle Application",
+      "intent": "Maintenance, retrofit, spare, interface와 lifecycle cost를 연결한다.",
+      "anchor_refs": [
+        "humidity_lifecycle_maintainability_selection"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "RH = 100·P_w/P_ws(T)로 정의하고 RH의 temperature dependence를 설명한다.",
+    "Absolute humidity를 mass/volume으로 정의하여 RH와 구분한다.",
+    "Dew point를 condensation onset temperature로 설명하고 frost/pressure dew point를 구분한다.",
+    "Capacitive sensor의 water absorption→dielectric constant→capacitance 변환을 설명한다.",
+    "Capacitive RH의 colocated temperature compensation을 설명한다.",
+    "Resistive sensor의 hygroscopic material→resistance/impedance 변환을 설명한다.",
+    "Chilled mirror의 cooling→condensation optical detection→mirror temperature 원리를 설명한다.",
+    "Wet-bulb와 dew point를 구분한다.",
+    "Sensor surface temperature, self-heating, condensation와 warmed-probe 논리를 설명한다.",
+    "Low-humidity에서 RH보다 dew/frost-point가 유리할 수 있는 선정논리를 설명한다.",
+    "Hysteresis, drift, contamination, recovery와 calibration을 연결한다.",
+    "기존설비에서는 location, airflow, interface, access, shutdown, spare와 lifecycle cost까지 제시한다."
+  ],
+  "common_missing_points": [
+    "RH와 absolute humidity를 같은 물리량으로 설명한다.",
+    "RH가 temperature independent라고 설명한다.",
+    "Dew point를 RH percentage와 같은 값으로 취급한다.",
+    "Capacitive sensor를 resistance-change sensor로 설명한다.",
+    "Resistive sensor를 capacitance-change sensor로 설명한다.",
+    "Temperature compensation 필요성을 누락한다.",
+    "Condensation/contamination이 accuracy와 recovery에 영향을 주지 않는다고 설명한다.",
+    "Chilled mirror의 condensation detection principle을 누락한다.",
+    "Wet-bulb와 dew point를 동일시한다.",
+    "Pressure dew point의 pressure basis를 누락한다.",
+    "Low-humidity application에서 dew/frost-point 선정 가능성을 누락한다.",
+    "Calibration equilibrium/traceability와 lifecycle maintenance를 누락한다."
+  ],
+  "routing_aliases": [
+    "습도계측 정전용량식 저항식 노점",
+    "상대습도 센서 선정 오차",
+    "정전용량식 습도센서 원리",
+    "저항식 습도센서 원리",
+    "노점 이슬점 계측",
+    "습도센서 온도보상 결로",
+    "humidity measurement capacitive resistive dew point",
+    "relative humidity sensor selection error",
+    "capacitive humidity sensor principle",
+    "resistive humidity sensor principle",
+    "dew point humidity measurement",
+    "pressure dew point measurement",
+    "humidity temperature compensation",
+    "humidity condensation hysteresis drift",
+    "chilled mirror dew point hygrometer",
+    "wet bulb dry bulb humidity",
+    "low humidity dew point selection",
+    "humidity calibration traceability"
+  ],
+  "routing_field_points": [
+    "water-vapor partial pressure",
+    "RH = 100 Pw/Pws(T)",
+    "RH temperature dependence",
+    "absolute humidity mass per volume",
+    "dew point",
+    "frost point",
+    "pressure dew point",
+    "capacitive polymer dielectric",
+    "capacitance change",
+    "temperature compensation",
+    "hysteresis/drift/contamination",
+    "resistive humidity resistance/impedance",
+    "AC impedance measurement",
+    "chilled mirror",
+    "psychrometric wet/dry bulb",
+    "sensor surface temperature",
+    "warmed probe",
+    "low-humidity dew point",
+    "process pressure/contamination/response",
+    "calibration traceability",
+    "filter/replacement/spare",
+    "lifecycle cost"
+  ],
+  "revision_notes": [
+    "step0_analog_decision_PRINCIPLE_INTERPRETATION",
+    "step0_analog_decision_FIELD_APPLICATION",
+    "historical_frequency_not_used",
+    "temperature_and_pressure_basis_explicit"
+  ],
+  "id": "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+  "title": "습도계측의 원리, 선정 및 보상 — Capacitive·Resistive·Dew Point",
+  "question_examples": [
+    "Relative humidity, absolute humidity 및 dew point를 비교하여 설명하시오.",
+    "Capacitive humidity sensor의 원리와 temperature compensation을 설명하시오.",
+    "Resistive humidity sensor의 원리, 특징 및 오차를 설명하시오.",
+    "Chilled-mirror hygrometer의 dew-point 측정원리와 유지보수 고려사항을 설명하시오.",
+    "습도계측에서 dew point와 frost point 및 pressure dew point를 설명하시오.",
+    "Capacitive, resistive, chilled-mirror 습도계측 방식을 비교하고 선정기준을 설명하시오.",
+    "High humidity 및 condensation 환경에서 습도센서의 오차와 대책을 설명하시오.",
+    "Very low humidity에서 RH 대신 dew point 측정을 고려하는 이유를 설명하시오.",
+    "습도센서의 calibration 및 field verification 방법을 설명하시오.",
+    "기존 공조/공정 습도센서를 교체할 때 선정 및 적용 고려사항을 설명하시오."
+  ],
+  "topic_aliases": [
+    "습도계측 정전용량식 저항식 노점",
+    "상대습도 센서 선정 오차",
+    "정전용량식 습도센서 원리",
+    "저항식 습도센서 원리",
+    "노점 이슬점 계측",
+    "습도센서 온도보상 결로",
+    "humidity measurement capacitive resistive dew point",
+    "relative humidity sensor selection error",
+    "capacitive humidity sensor principle",
+    "resistive humidity sensor principle",
+    "dew point humidity measurement",
+    "pressure dew point measurement",
+    "humidity temperature compensation",
+    "humidity condensation hysteresis drift",
+    "chilled mirror dew point hygrometer",
+    "wet bulb dry bulb humidity",
+    "low humidity dew point selection",
+    "humidity calibration traceability"
+  ],
+  "expected_structure": [
+    "1. Humidity Parameters",
+    "2. Dew/Frost Point",
+    "3. Capacitive Sensor",
+    "4. Resistive Sensor",
+    "5. Reference / Psychrometric Methods",
+    "6. Temperature & Condensation",
+    "7. Selection & Calibration",
+    "8. Lifecycle Application"
+  ],
+  "high_score_features": [
+    "RH = 100·P_w/P_ws(T)로 정의하고 RH의 temperature dependence를 설명한다.",
+    "Absolute humidity를 mass/volume으로 정의하여 RH와 구분한다.",
+    "Dew point를 condensation onset temperature로 설명하고 frost/pressure dew point를 구분한다.",
+    "Capacitive sensor의 water absorption→dielectric constant→capacitance 변환을 설명한다.",
+    "Capacitive RH의 colocated temperature compensation을 설명한다.",
+    "Resistive sensor의 hygroscopic material→resistance/impedance 변환을 설명한다.",
+    "Chilled mirror의 cooling→condensation optical detection→mirror temperature 원리를 설명한다.",
+    "Wet-bulb와 dew point를 구분한다.",
+    "Sensor surface temperature, self-heating, condensation와 warmed-probe 논리를 설명한다.",
+    "Low-humidity에서 RH보다 dew/frost-point가 유리할 수 있는 선정논리를 설명한다.",
+    "Hysteresis, drift, contamination, recovery와 calibration을 연결한다.",
+    "기존설비에서는 location, airflow, interface, access, shutdown, spare와 lifecycle cost까지 제시한다."
+  ],
+  "low_score_patterns": [
+    "RH와 absolute humidity를 같은 물리량으로 설명한다.",
+    "RH가 temperature independent라고 설명한다.",
+    "Dew point를 RH percentage와 같은 값으로 취급한다.",
+    "Capacitive sensor를 resistance-change sensor로 설명한다.",
+    "Resistive sensor를 capacitance-change sensor로 설명한다.",
+    "Temperature compensation 필요성을 누락한다.",
+    "Condensation/contamination이 accuracy와 recovery에 영향을 주지 않는다고 설명한다.",
+    "Chilled mirror의 condensation detection principle을 누락한다.",
+    "Wet-bulb와 dew point를 동일시한다.",
+    "Pressure dew point의 pressure basis를 누락한다.",
+    "Low-humidity application에서 dew/frost-point 선정 가능성을 누락한다.",
+    "Calibration equilibrium/traceability와 lifecycle maintenance를 누락한다."
+  ],
+  "field_connection_points": [
+    "HVAC duct RH",
+    "High-humidity condensation",
+    "Dry air/compressed air dew point",
+    "Polymer capacitive RH probe",
+    "Resistive humidity element",
+    "Chilled-mirror reference",
+    "Warmed probe",
+    "Temperature gradient",
+    "Chemical contamination",
+    "Field calibration",
+    "DCS/PLC interface",
+    "Retrofit/lifecycle"
+  ]
+}
