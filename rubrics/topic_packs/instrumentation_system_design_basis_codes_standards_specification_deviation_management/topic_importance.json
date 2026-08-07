@@ -1,0 +1,26 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "NORMAL",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "Design Basis의 baseline 기능과 downstream requirement 연결을 설명한다.",
+    "Code·Standard·Specification의 역할과 강제성 근거를 구분한다.",
+    "적용 법규·표준의 판본과 project cut-off를 관리한다.",
+    "Document precedence와 conflict resolution 절차를 설명한다.",
+    "공정·성능·환경·architecture·interface 설계입력을 구체화한다.",
+    "Specification/Datasheet를 verifiable requirement와 acceptance criterion으로 연결한다.",
+    "Vendor deviation과 TBE disposition을 요구조항 단위로 추적한다.",
+    "Deviation의 impact/risk, approval authority와 closure를 연결한다.",
+    "Deviation과 MOC의 적용경계를 조직절차에 맞게 구분한다.",
+    "As-built baseline과 FAT/SAT/commissioning evidence까지 lifecycle traceability를 제시한다."
+  ],
+  "note": "설계규정은 단순 표준 암기가 아니라 governing requirement를 설계입력·상세사양·Vendor deviation·검증·인수 baseline까지 관리하는 설계 governance 주제이므로 DESIGN_EVALUATION / IMPLEMENTATION_EVALUATION으로 분류한다. 출제빈도 근거는 사용하지 않는다.",
+  "revision_notes": [
+    "step0_analog_decision_IMPLEMENTATION_EVALUATION",
+    "step0_analog_decision_DESIGN_EVALUATION",
+    "historical_frequency_not_used"
+  ],
+  "topic_label": "계측제어 시스템 설계기준, Code·Standard·Specification 및 Deviation 관리"
+}
