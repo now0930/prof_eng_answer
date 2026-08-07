@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T15:18:27Z-generated-topic-pack-model-answers",
+  "version": "2026-08-07T16:56:26Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -9221,6 +9221,379 @@
         "에너지 제한기기와 접지·절연·배선분리 조건을 비교한다.",
         "certificate special condition과 환경 적합성을 현장 설치에 반영한다.",
         "도면·계산서·인증서·검사기록을 변경관리까지 유지한다."
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "title_ko": "철도·발전·건축 등 비폭발 위험환경의 Fail-Safe 제어요소, Safe State 및 검증",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "철도·발전·건축 등 위험환경에서 고려해야 할 제어요소와 대책을 설명하시오.",
+          "intent": "폭발위험 외 적용환경별 hazard와 safe-state 기반 제어대책을 구조화한다.",
+          "required_anchor_ids": [
+            "hec_hazardous_environment_scope",
+            "hec_hazard_scenario_chain",
+            "hec_required_safe_state_context",
+            "hec_rail_hazard_context",
+            "hec_power_generation_hazard_context",
+            "hec_building_hazard_context"
+          ]
+        },
+        {
+          "pattern": "Fail-safe 설계에서 전원·통신 상실 시 제어시스템의 대응을 설명하시오.",
+          "intent": "전원·통신 상실 검출과 safe response, local protection을 설명한다.",
+          "required_anchor_ids": [
+            "hec_fail_safe_not_universal_deenergize",
+            "hec_loss_of_power_strategy",
+            "hec_loss_of_communication_strategy",
+            "hec_local_autonomous_protection"
+          ]
+        },
+        {
+          "pattern": "위험환경 제어시스템의 safe state와 최종제어요소 선정방법을 설명하시오.",
+          "intent": "Hazard별 safe state와 final element fail action을 연결한다.",
+          "required_anchor_ids": [
+            "hec_required_safe_state_context",
+            "hec_final_element_safe_action",
+            "hec_residual_stored_energy"
+          ]
+        },
+        {
+          "pattern": "철도시스템의 위험환경에서 fail-safe 제어대책을 설명하시오.",
+          "intent": "속도·위치·진로권한·통신 불확실성과 제한동작을 연결한다.",
+          "required_anchor_ids": [
+            "hec_rail_hazard_context",
+            "hec_rail_uncertain_authority_response",
+            "hec_loss_of_communication_strategy"
+          ]
+        },
+        {
+          "pattern": "발전설비의 trip 및 안전정지 시 계측제어 고려사항을 설명하시오.",
+          "intent": "고에너지 차단과 auxiliary 유지가 함께 필요한 shutdown sequence를 설명한다.",
+          "required_anchor_ids": [
+            "hec_power_generation_hazard_context",
+            "hec_power_shutdown_auxiliaries",
+            "hec_loss_of_power_strategy",
+            "hec_residual_stored_energy"
+          ]
+        },
+        {
+          "pattern": "건축설비 화재·연기 제어의 fail-safe 원칙과 제어요소를 설명하시오.",
+          "intent": "화재 시나리오별 팬·댐퍼·비상전원·피드백 동작을 설명한다.",
+          "required_anchor_ids": [
+            "hec_building_hazard_context",
+            "hec_building_fire_smoke_scenario",
+            "hec_final_element_safe_action"
+          ]
+        },
+        {
+          "pattern": "위험환경 제어시스템의 센서·이중화·인터록·bypass 설계 시 고려사항을 설명하시오.",
+          "intent": "진단·CCF·논리역할·bypass 관리의 실제 적용원칙을 설명한다.",
+          "required_anchor_ids": [
+            "hec_sensor_selection_diagnostics",
+            "hec_redundancy_common_cause",
+            "hec_permissive_interlock_trip_roles",
+            "hec_bypass_override_management"
+          ]
+        },
+        {
+          "pattern": "위험환경 fail-safe 기능의 검증 및 유지관리 방안을 설명하시오.",
+          "intent": "고장시나리오 검증, functional/proof test, MOC와 재검증을 연결한다.",
+          "required_anchor_ids": [
+            "hec_verification_loss_scenarios",
+            "hec_maintenance_proof_moc",
+            "hec_requirement_traceability"
+          ]
+        },
+        {
+          "pattern": "기존 위험환경 제어설비를 retrofit할 때의 기술적·경제적 고려사항을 설명하시오.",
+          "intent": "Legacy interface, shutdown window, cost와 risk-based 우선순위를 설명한다.",
+          "required_anchor_ids": [
+            "hec_legacy_retrofit_risk_priority",
+            "hec_hazard_scenario_chain",
+            "hec_maintenance_proof_moc"
+          ]
+        },
+        {
+          "pattern": "위험환경 제어와 방폭·EMC·SIS의 범위를 구분하여 설명하시오.",
+          "intent": "본 Topic과 인접 Topic의 ownership을 구분한다.",
+          "required_anchor_ids": [
+            "hec_environmental_application_controls",
+            "hec_requirement_traceability",
+            "hec_ownership_boundary"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "1. 위험환경과 Hazard 정의",
+          "intent": "폭발위험에 한정하지 않고 적용환경·initiating event·consequence를 정의한다.",
+          "anchor_refs": [
+            "hec_hazardous_environment_scope",
+            "hec_hazard_scenario_chain",
+            "hec_requirement_traceability"
+          ]
+        },
+        {
+          "section": "2. Required Safe State와 Fail-Safe 원칙",
+          "intent": "Hazard별 safe state와 de-energize의 적용경계를 설명한다.",
+          "anchor_refs": [
+            "hec_required_safe_state_context",
+            "hec_fail_safe_not_universal_deenergize",
+            "hec_residual_stored_energy"
+          ]
+        },
+        {
+          "section": "3. 전원·통신·제어상실 대책",
+          "intent": "Loss detection, backup, timeout, local protection을 safe response로 연결한다.",
+          "anchor_refs": [
+            "hec_loss_of_power_strategy",
+            "hec_loss_of_communication_strategy",
+            "hec_local_autonomous_protection"
+          ]
+        },
+        {
+          "section": "4. Sensor·Logic·Final Element 설계",
+          "intent": "진단·CCF·interlock·trip·bypass와 최종제어요소 fail action을 구성한다.",
+          "anchor_refs": [
+            "hec_sensor_selection_diagnostics",
+            "hec_redundancy_common_cause",
+            "hec_final_element_safe_action",
+            "hec_permissive_interlock_trip_roles",
+            "hec_bypass_override_management"
+          ]
+        },
+        {
+          "section": "5. 철도 위험환경 적용",
+          "intent": "이동·속도·위치·진로권한 불확실성의 제한동작을 설명한다.",
+          "anchor_refs": [
+            "hec_rail_hazard_context",
+            "hec_rail_uncertain_authority_response"
+          ]
+        },
+        {
+          "section": "6. 발전·건축 위험환경 적용",
+          "intent": "발전 safe shutdown과 건축 fire/smoke scenario의 상이한 safe state를 설명한다.",
+          "anchor_refs": [
+            "hec_power_generation_hazard_context",
+            "hec_power_shutdown_auxiliaries",
+            "hec_building_hazard_context",
+            "hec_building_fire_smoke_scenario"
+          ]
+        },
+        {
+          "section": "7. 환경·Alarm·검증 및 Lifecycle",
+          "intent": "환경대책, operator action boundary, failure scenario 검증과 MOC를 연결한다.",
+          "anchor_refs": [
+            "hec_environmental_application_controls",
+            "hec_alarm_operator_action_boundary",
+            "hec_verification_loss_scenarios",
+            "hec_maintenance_proof_moc"
+          ]
+        },
+        {
+          "section": "8. 기존설비 적용과 Ownership Boundary",
+          "intent": "Legacy retrofit의 비용·정지시간·compatibility를 반영하고 인접 Topic과 범위를 분리한다.",
+          "anchor_refs": [
+            "hec_legacy_retrofit_risk_priority",
+            "hec_ownership_boundary"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "위험환경을 폭발위험과 동일시하지 않고 철도·발전·건축의 기능·환경 hazard까지 확장한다.",
+        "Hazard→required safe state→sensing→logic→final element→verification chain을 그린다.",
+        "Fail-safe와 단순 de-energize-to-trip을 구분한다.",
+        "전원상실에서 필요한 안전기능 유지시간과 잔류에너지를 함께 고려한다.",
+        "통신상실에서 timeout/watchdog/status와 local safe action을 연결한다.",
+        "Redundancy의 CCF 한계를 separation·diversity·diagnostics와 함께 설명한다.",
+        "최종제어요소의 fail action을 hazard별로 선정한다.",
+        "Permissive·interlock·trip과 bypass를 역할·권한·복구 관점에서 구분한다.",
+        "철도에서는 위치·속도·진로권한 불확실성을 제한동작과 연결한다.",
+        "발전에서는 주에너지원 차단과 cooling·lubrication 등 필요한 auxiliary 유지의 sequence를 설명한다.",
+        "건축에서는 fire/smoke scenario에 따라 fan·damper 목표상태가 달라질 수 있음을 설명한다.",
+        "Normal I/O test와 failure/loss scenario verification을 구분한다.",
+        "MOC·functional/proof test·revalidation을 lifecycle 폐루프로 설명한다.",
+        "Legacy retrofit의 cost·downtime·기존 wiring/logic compatibility를 risk 우선순위와 연결한다."
+      ],
+      "common_missing_points": [
+        "위험환경을 방폭 Zone 문제로만 축소한다.",
+        "Required safe state를 정의하지 않고 fail-safe라는 단어만 쓴다.",
+        "모든 설비에서 de-energize가 자동으로 안전하다고 단정한다.",
+        "전원상실 시 잔류·저장에너지를 누락한다.",
+        "통신상실에서 stale data·timeout·watchdog를 다루지 않는다.",
+        "이중화가 CCF를 제거한다고 단정한다.",
+        "Final element의 실제 fail action과 구동에너지를 설명하지 않는다.",
+        "Rail·power generation·building 적용별 차이를 제시하지 않는다.",
+        "Alarm과 operator action을 자동보호와 구분하지 않는다.",
+        "Bypass·override의 권한·시간·복구관리를 누락한다.",
+        "정상운전 시험만 제시하고 loss/failure scenario 검증을 누락한다.",
+        "기존설비 비용·shutdown·legacy interface 없이 이상적 신규설비 대책만 제시한다."
+      ],
+      "routing_aliases": [
+        "철도 발전 건축 위험환경 제어요소",
+        "비폭발 위험환경 fail-safe 제어",
+        "철도 위험환경 안전제어",
+        "발전설비 위험환경 안전제어",
+        "건축설비 위험환경 안전제어",
+        "전원 상실 safe state 설계",
+        "통신 상실 safe state 설계",
+        "required safe state 선정",
+        "hazardous environment control measures",
+        "rail power building hazard controls",
+        "environmental functional hazard control",
+        "fail-safe final element selection",
+        "loss of power fail-safe control",
+        "loss of communication fail-safe control",
+        "bypass override risk management",
+        "failure scenario verification",
+        "legacy safety control retrofit",
+        "위험환경 제어대책 검증"
+      ],
+      "routing_field_points": [
+        "hazard identification",
+        "initiating event",
+        "consequence",
+        "required safe state",
+        "fail-safe",
+        "loss of power",
+        "UPS and battery duration",
+        "stored energy",
+        "loss of communication",
+        "timeout watchdog heartbeat",
+        "local autonomous protection",
+        "sensor diagnostics",
+        "redundancy common cause",
+        "final element fail action",
+        "permissive interlock trip",
+        "bypass override",
+        "rail speed position movement authority",
+        "power generation auxiliary cooling lubrication",
+        "building fire smoke control",
+        "cause and effect",
+        "FAT SAT failure scenario",
+        "MOC revalidation",
+        "legacy retrofit",
+        "risk cost downtime"
+      ],
+      "revision_notes": [
+        "공식 criterion IC-2027-W-4-2의 non-explosion residual scope에 맞춰 rail·power generation·building 적용을 포함했다.",
+        "위험환경 답안을 hazard-safe state-control-verification chain으로 구성한다.",
+        "Zone/EPL/Ex, EMC qualification, grounding/UPS generic design, SIL/SIS lifecycle의 깊이는 인접 Topic으로 분리했다.",
+        "Historical frequency를 사용하지 않았다."
+      ],
+      "id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards_IMPLEMENTATION_v1",
+      "title": "철도·발전·건축 등 비폭발 위험환경의 Fail-Safe 제어요소, Safe State 및 검증",
+      "question_examples": [
+        "철도·발전·건축 등 위험환경에서 고려해야 할 제어요소와 대책을 설명하시오.",
+        "Fail-safe 설계에서 전원·통신 상실 시 제어시스템의 대응을 설명하시오.",
+        "위험환경 제어시스템의 safe state와 최종제어요소 선정방법을 설명하시오.",
+        "철도시스템의 위험환경에서 fail-safe 제어대책을 설명하시오.",
+        "발전설비의 trip 및 안전정지 시 계측제어 고려사항을 설명하시오.",
+        "건축설비 화재·연기 제어의 fail-safe 원칙과 제어요소를 설명하시오.",
+        "위험환경 제어시스템의 센서·이중화·인터록·bypass 설계 시 고려사항을 설명하시오.",
+        "위험환경 fail-safe 기능의 검증 및 유지관리 방안을 설명하시오.",
+        "기존 위험환경 제어설비를 retrofit할 때의 기술적·경제적 고려사항을 설명하시오.",
+        "위험환경 제어와 방폭·EMC·SIS의 범위를 구분하여 설명하시오."
+      ],
+      "topic_aliases": [
+        "철도 발전 건축 위험환경 제어요소",
+        "비폭발 위험환경 fail-safe 제어",
+        "철도 위험환경 안전제어",
+        "발전설비 위험환경 안전제어",
+        "건축설비 위험환경 안전제어",
+        "전원 상실 safe state 설계",
+        "통신 상실 safe state 설계",
+        "required safe state 선정",
+        "hazardous environment control measures",
+        "rail power building hazard controls",
+        "environmental functional hazard control",
+        "fail-safe final element selection",
+        "loss of power fail-safe control",
+        "loss of communication fail-safe control",
+        "bypass override risk management",
+        "failure scenario verification",
+        "legacy safety control retrofit",
+        "위험환경 제어대책 검증"
+      ],
+      "expected_structure": [
+        "1. 위험환경과 Hazard 정의",
+        "2. Required Safe State와 Fail-Safe 원칙",
+        "3. 전원·통신·제어상실 대책",
+        "4. Sensor·Logic·Final Element 설계",
+        "5. 철도 위험환경 적용",
+        "6. 발전·건축 위험환경 적용",
+        "7. 환경·Alarm·검증 및 Lifecycle",
+        "8. 기존설비 적용과 Ownership Boundary"
+      ],
+      "high_score_features": [
+        "위험환경을 폭발위험과 동일시하지 않고 철도·발전·건축의 기능·환경 hazard까지 확장한다.",
+        "Hazard→required safe state→sensing→logic→final element→verification chain을 그린다.",
+        "Fail-safe와 단순 de-energize-to-trip을 구분한다.",
+        "전원상실에서 필요한 안전기능 유지시간과 잔류에너지를 함께 고려한다.",
+        "통신상실에서 timeout/watchdog/status와 local safe action을 연결한다.",
+        "Redundancy의 CCF 한계를 separation·diversity·diagnostics와 함께 설명한다.",
+        "최종제어요소의 fail action을 hazard별로 선정한다.",
+        "Permissive·interlock·trip과 bypass를 역할·권한·복구 관점에서 구분한다.",
+        "철도에서는 위치·속도·진로권한 불확실성을 제한동작과 연결한다.",
+        "발전에서는 주에너지원 차단과 cooling·lubrication 등 필요한 auxiliary 유지의 sequence를 설명한다.",
+        "건축에서는 fire/smoke scenario에 따라 fan·damper 목표상태가 달라질 수 있음을 설명한다.",
+        "Normal I/O test와 failure/loss scenario verification을 구분한다.",
+        "MOC·functional/proof test·revalidation을 lifecycle 폐루프로 설명한다.",
+        "Legacy retrofit의 cost·downtime·기존 wiring/logic compatibility를 risk 우선순위와 연결한다."
+      ],
+      "low_score_patterns": [
+        "위험환경을 방폭 Zone 문제로만 축소한다.",
+        "Required safe state를 정의하지 않고 fail-safe라는 단어만 쓴다.",
+        "모든 설비에서 de-energize가 자동으로 안전하다고 단정한다.",
+        "전원상실 시 잔류·저장에너지를 누락한다.",
+        "통신상실에서 stale data·timeout·watchdog를 다루지 않는다.",
+        "이중화가 CCF를 제거한다고 단정한다.",
+        "Final element의 실제 fail action과 구동에너지를 설명하지 않는다.",
+        "Rail·power generation·building 적용별 차이를 제시하지 않는다.",
+        "Alarm과 operator action을 자동보호와 구분하지 않는다.",
+        "Bypass·override의 권한·시간·복구관리를 누락한다.",
+        "정상운전 시험만 제시하고 loss/failure scenario 검증을 누락한다.",
+        "기존설비 비용·shutdown·legacy interface 없이 이상적 신규설비 대책만 제시한다."
+      ],
+      "field_connection_points": [
+        "hazard identification",
+        "initiating event",
+        "consequence",
+        "required safe state",
+        "fail-safe",
+        "loss of power",
+        "UPS and battery duration",
+        "stored energy",
+        "loss of communication",
+        "timeout watchdog heartbeat",
+        "local autonomous protection",
+        "sensor diagnostics",
+        "redundancy common cause",
+        "final element fail action",
+        "permissive interlock trip",
+        "bypass override",
+        "rail speed position movement authority",
+        "power generation auxiliary cooling lubrication",
+        "building fire smoke control",
+        "cause and effect",
+        "FAT SAT failure scenario",
+        "MOC revalidation",
+        "legacy retrofit",
+        "risk cost downtime"
+      ],
+      "model_answer_outline": [
+        "폭발위험에 한정하지 않고 적용환경·initiating event·consequence를 정의한다.",
+        "Hazard별 safe state와 de-energize의 적용경계를 설명한다.",
+        "Loss detection, backup, timeout, local protection을 safe response로 연결한다.",
+        "진단·CCF·interlock·trip·bypass와 최종제어요소 fail action을 구성한다.",
+        "이동·속도·위치·진로권한 불확실성의 제한동작을 설명한다.",
+        "발전 safe shutdown과 건축 fire/smoke scenario의 상이한 safe state를 설명한다.",
+        "환경대책, operator action boundary, failure scenario 검증과 MOC를 연결한다.",
+        "Legacy retrofit의 비용·정지시간·compatibility를 반영하고 인접 Topic과 범위를 분리한다."
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

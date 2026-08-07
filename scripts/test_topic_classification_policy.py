@@ -66,6 +66,7 @@ APPLICATION_TOPICS = {
     "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
     "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
     "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
+    "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
 }
 
 DESIGN_TOPICS = {
@@ -94,7 +95,7 @@ ALLOWED_SELECTION_IMPORTANCE = {
 
 EXPECTED_DIFFICULTY_COUNTS = {
     "THEORY_CORE": 19,
-    "FIELD_APPLICATION": 35,
+    "FIELD_APPLICATION": 36,
     "DESIGN_EVALUATION": 15,
 }
 
@@ -116,7 +117,7 @@ def main() -> None:
         | DESIGN_TOPICS
     )
 
-    assert len(actual_topics) == 69
+    assert len(actual_topics) == 70
     assert actual_topics == classified_topics
 
     assert not (THEORY_TOPICS & APPLICATION_TOPICS)

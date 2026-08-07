@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T15:18:27Z-generated-topic-pack-importance",
+  "version": "2026-08-07T16:56:26Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -595,6 +595,34 @@
         "historical_frequency_not_used"
       ],
       "topic_label": "위험장소 방폭 방식, 본질안전 회로 및 계측기기 선정"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "high_band_unlock_conditions": [
+        "위험환경을 폭발위험만이 아니라 rail·power generation·building의 기능·환경 hazard까지 정의한다.",
+        "Hazard와 initiating event에서 required safe state까지 논리적으로 연결한다.",
+        "Fail-safe와 단순 de-energize를 구분한다.",
+        "Loss of power와 loss of communication의 detection·safe response를 각각 설명한다.",
+        "Stored energy와 shutdown auxiliary function을 safe-state 설계에 포함한다.",
+        "Redundancy와 common cause failure의 trade-off를 설명한다.",
+        "Final element fail action을 hazard별로 선정한다.",
+        "Permissive·interlock·trip·bypass의 역할과 lifecycle 통제를 설명한다.",
+        "철도·발전·건축 적용별 서로 다른 hazard와 대책을 최소 하나씩 연결한다.",
+        "Failure/loss scenario를 FAT/SAT·functional test·Cause-and-Effect로 검증한다.",
+        "MOC와 revalidation을 설계변경 이후까지 연결한다.",
+        "Legacy retrofit에서 cost·downtime·existing interface를 실제 회사 적용조건으로 반영한다."
+      ],
+      "note": "IC-2027-W-4-2의 기존 hazardous-area Topic이 닫지 못한 철도·발전·건축 등 비폭발 위험환경 residual scope를 직접 소유한다. 공식 출제기준의 미충족 범위를 닫는 우선순위 1 static backlog이므로 CORE_MUST_PREPARE로 두되 historical frequency는 사용하지 않는다. 구현·검증·통합 후 semantic coverage 재감사 전까지 criterion을 자동 승격하지 않는다.",
+      "revision_notes": [
+        "IMPLEMENTATION_EVALUATION / FIELD_APPLICATION으로 분류했다.",
+        "Roadmap static backlog priority 1을 반영하되 historical frequency를 근거로 사용하지 않았다.",
+        "기존 방폭·환경 qualification·power grounding·SIS Topic과 ownership을 분리했다."
+      ],
+      "topic_label": "비폭발 위험환경 Fail-Safe 제어요소 및 대책"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

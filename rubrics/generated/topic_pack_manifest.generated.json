@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-07T15:18:27Z-generated-topic-pack-manifest",
+  "version": "2026-08-07T16:56:26Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 69,
+  "topic_count": 70,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -248,6 +248,16 @@
     },
     {
       "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

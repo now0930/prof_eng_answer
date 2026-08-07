@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T15:18:27Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-07T16:56:26Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -1156,6 +1156,38 @@
         "certificate special condition과 현장 설치검사를 연결한다."
       ],
       "reason": "방폭 보호방식과 본질안전 적합성은 인증표시·시스템 구성·설치조건의 문맥을 함께 보아야 하므로 단순 키워드 규칙으로 Fatal을 판정하지 않는다."
+    },
+    {
+      "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "enabled": false,
+      "topic_name": "철도·발전·건축 등 비폭발 위험환경의 Fail-Safe 제어요소, Safe State 및 검증",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [
+        "철도 발전 건축 위험환경 제어요소",
+        "비폭발 위험환경 fail-safe 제어",
+        "철도 위험환경 안전제어",
+        "발전설비 위험환경 안전제어",
+        "건축설비 위험환경 안전제어",
+        "전원 상실 safe state 설계",
+        "통신 상실 safe state 설계",
+        "required safe state 선정",
+        "hazardous environment control measures",
+        "rail power building hazard controls",
+        "environmental functional hazard control",
+        "fail-safe final element selection",
+        "loss of power fail-safe control",
+        "loss of communication fail-safe control",
+        "bypass override risk management",
+        "failure scenario verification",
+        "legacy safety control retrofit",
+        "위험환경 제어대책 검증"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
