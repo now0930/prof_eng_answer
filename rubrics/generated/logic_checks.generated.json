@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T00:02:07Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-07T11:01:31Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -2289,6 +2289,64 @@
       "question_type_checks": [],
       "next_practice_points": [],
       "de_claim_trust": {}
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "enabled": false,
+      "topic_name": "공정제어 Loop Architecture: Cascade·Ratio·Feedforward·Override·Split-Range",
+      "question_type": "COMPARE_SELECTION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "공정제어 루프",
+        "process control loop",
+        "단일루프",
+        "single loop",
+        "다중루프",
+        "multi loop",
+        "cascade control",
+        "캐스케이드 제어",
+        "master slave control",
+        "primary secondary control",
+        "ratio control",
+        "비율 제어",
+        "wild stream",
+        "feedforward control",
+        "피드포워드 제어",
+        "선행제어",
+        "override control",
+        "selective control",
+        "오버라이드 제어",
+        "high selector",
+        "low selector",
+        "split range",
+        "split-range control",
+        "분할범위 제어",
+        "feedforward feedback",
+        "remote setpoint"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "Cascade의 primary CO→secondary SP와 inner-loop 속도조건을 그림으로 설명한다.",
+        "Ratio는 wild stream, ratio station과 controlled-flow loop를 한 흐름으로 그린다.",
+        "Feedforward는 measured disturbance, model compensation과 feedback trim을 연결한다.",
+        "Override는 selector와 non-selected controller tracking을 함께 설명한다.",
+        "Split-range는 combined installed response와 transition test를 제시한다.",
+        "구조선정 기준을 공정 외란·dynamics·constraint·legacy cost와 연결한다."
+      ],
+      "de_claim_trust": {
+        "enabled": true,
+        "target_layers": [
+          "D",
+          "E"
+        ],
+        "score_effect": "none",
+        "trust_effect": "logic_pass_supports_d_e_claim_reliability",
+        "pass_meaning": "Loop architecture의 핵심 구조와 적용조건이 정답과 직접 충돌하지 않아 현장 적용·제언을 이론적으로 신뢰할 수 있다.",
+        "fatal_meaning": "구조 연결 또는 적용조건의 핵심 주장이 정답과 직접 충돌하여 이를 기반으로 한 현장 제언을 강하게 신뢰하지 않는다.",
+        "rule": "Logic Check는 D/E 점수를 직접 산정하지 않으며 A/B/C/D/E scoring model의 결과를 대체하지 않는다."
+      }
     },
     {
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",

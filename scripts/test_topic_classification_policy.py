@@ -20,6 +20,7 @@ THEORY_TOPICS = {
     "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
     "pid_controller_tuning_sequence_gain_effects",
     "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+    "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
     "root_locus_stability_gain_design",
     "routh_hurwitz_stability_criterion_gain_range",
     "second_order_lag_response_by_damping_ratio",
@@ -76,7 +77,7 @@ ALLOWED_SELECTION_IMPORTANCE = {
 }
 
 EXPECTED_DIFFICULTY_COUNTS = {
-    "THEORY_CORE": 18,
+    "THEORY_CORE": 19,
     "FIELD_APPLICATION": 26,
     "DESIGN_EVALUATION": 8,
 }
@@ -99,7 +100,7 @@ def main() -> None:
         | DESIGN_TOPICS
     )
 
-    assert len(actual_topics) == 52
+    assert len(actual_topics) == 53
     assert actual_topics == classified_topics
 
     assert not (THEORY_TOPICS & APPLICATION_TOPICS)

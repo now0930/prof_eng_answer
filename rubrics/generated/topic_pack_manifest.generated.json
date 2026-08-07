@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-07T00:02:07Z-generated-topic-pack-manifest",
+  "version": "2026-08-07T11:01:31Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 52,
+  "topic_count": 53,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -368,6 +368,16 @@
     },
     {
       "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

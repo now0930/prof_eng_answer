@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T00:02:07Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-08-07T11:01:31Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -19915,6 +19915,213 @@
           "C"
         ]
       }
+    },
+    {
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "display_name": "공정제어 Loop Architecture: Cascade·Ratio·Feedforward·Override·Split-Range",
+      "difficulty": "THEORY_CORE",
+      "cap_policy": {
+        "fatal_recommended_ceiling": 10.0,
+        "fatal_confidence_threshold": 0.75
+      },
+      "candidate_extraction": {
+        "max_candidates": 24,
+        "nearby_window": 2,
+        "key_terms": [
+          "공정제어 루프",
+          "process control loop",
+          "단일루프",
+          "single loop",
+          "다중루프",
+          "multi loop",
+          "cascade control",
+          "캐스케이드 제어",
+          "master slave control",
+          "primary secondary control",
+          "ratio control",
+          "비율 제어",
+          "wild stream",
+          "feedforward control",
+          "피드포워드 제어",
+          "선행제어",
+          "override control",
+          "selective control",
+          "오버라이드 제어",
+          "high selector",
+          "low selector",
+          "split range",
+          "split-range control",
+          "분할범위 제어",
+          "feedforward feedback",
+          "remote setpoint",
+          "PV SP CO MV",
+          "primary CO secondary SP",
+          "secondary loop faster",
+          "inner loop outer loop",
+          "wild stream controlled stream",
+          "SPc=R Fw",
+          "measured disturbance",
+          "Gff=-Gd/Gu",
+          "feedforward plus feedback",
+          "high selector low selector",
+          "external reset feedback",
+          "output tracking",
+          "one controller multiple valves",
+          "split point overlap deadband",
+          "loop interaction",
+          "bumpless transfer",
+          "legacy DCS PLC"
+        ],
+        "rules": []
+      },
+      "truth_schema": [
+        "기본 공정제어 루프는 공정변수(PV)를 센서·트랜스미터가 측정하고, 제어기가 설정값(SP)과 비교해 제어출력(CO)을 만들며, 최종제어요소가 조작변수(MV)를 변화시켜 공정에 작용하는 폐루프 구조이다.",
+        "단일루프 제어는 하나의 주 제어변수에 대해 하나의 주요 feedback loop가 최종제어요소를 조작하는 가장 기본적인 공정제어 구조이며, 구조가 단순하고 유지보수가 용이하지만 측정 가능한 주요 외란을 선제적으로 보상하거나 내부의 더 빠른 동특성을 별도로 제어하지는 않는다.",
+        "Cascade 제어는 primary(master) controller의 출력이 secondary(slave) controller의 설정값이 되고, secondary controller가 최종제어요소를 직접 조작하는 중첩 feedback 구조이다.",
+        "Cascade가 효과적이려면 secondary loop가 primary loop보다 충분히 빠르게 응답해야 하며, secondary loop의 동특성이 느리면 두 루프의 상호작용으로 오히려 응답이 악화될 수 있다. 특정 속도비를 모든 공정의 절대 기준으로 고정해서는 안 된다.",
+        "Cascade의 실질적 장점은 secondary PV가 조작경로의 주요 외란을 primary PV보다 먼저 감지하여 내부루프에서 보상할 수 있을 때 커진다. 단순히 측정변수를 하나 더 추가한다고 성능이 자동으로 개선되는 것은 아니다.",
+        "Ratio 제어는 기준이 되는 wild/master stream과 조작되는 controlled stream 사이의 비를 유지하는 구조이며, 비의 정의를 명시하면 일반적으로 controlled-flow setpoint를 SP_c=R·F_w와 같이 생성해 secondary flow controller가 조작한다.",
+        "Ratio 제어에서는 두 측정값의 단위·범위·밀도 또는 보정 기준을 일치시켜야 하며, wild stream이 매우 작거나 0에 가까운 영역에서는 나눗셈형 ratio 계산과 noise가 불안정해질 수 있어 low-flow logic, limit 또는 startup mode가 필요하다.",
+        "Feedforward 제어는 측정 가능한 외란 d를 이용해 controlled variable이 변하기 전에 조작량을 보정하는 구조이다. 선형 모델 y=G_u u+G_d d에서 이상적 보상은 조건이 허용되면 G_ff=-G_d/G_u로 표현할 수 있으나 실제 구현은 안정성·인과성·properness·model uncertainty를 고려한 실현 가능한 근사여야 한다.",
+        "Feedforward는 측정된 외란의 선제 보상에 강하지만 미측정 외란, 모델오차 및 장기 offset을 일반적으로 제거하지 못하므로 feedback과 결합해 feedforward가 선행 보상하고 feedback이 잔여오차를 보정하는 구조가 실무적으로 유리하다.",
+        "Override 또는 selective control은 정상 제어목표와 안전·제약 제한목표를 가진 복수 controller 신호 중 high/low selector 등으로 제한조건에 맞는 신호를 선택하여 하나의 최종제어요소를 지배하게 하는 구조이다.",
+        "Override에서 선택되지 않은 controller가 적분을 계속 누적하면 selector 전환 시 bump와 windup이 발생할 수 있으므로 external reset feedback, output tracking, anti-windup 또는 bumpless transfer를 설계해야 한다.",
+        "Split-range 제어는 하나의 controller output 범위를 둘 이상의 최종제어요소에 분할하여 각 요소가 서로 다른 출력구간에서 작동하도록 하는 구조이다. 예를 들어 heating과 cooling valve를 하나의 temperature controller가 서로 다른 범위에서 구동할 수 있다.",
+        "Split-range 전환부의 deadband, overlap, valve characteristic, fail action 및 installed gain 불연속은 hunting과 응답 불연속을 유발할 수 있으므로 combined installed response를 기준으로 split point와 overlap/deadband를 조정하고 현장에서 transition test를 수행해야 한다.",
+        "구조 선정은 외란의 측정 가능성·발생 위치, 내부 동특성의 속도, 유지해야 할 변수 간 관계, 안전·제약조건, 최종제어요소 수, loop interaction, 센서 신뢰도, 비용과 기존 DCS/PLC 기능을 함께 고려해야 한다.",
+        "다중루프에서는 controller 간 상호작용, shared actuator, saturation, signal direction 및 mode transition이 성능을 좌우하므로 각 loop의 역할과 authority를 분리하고 필요 시 decoupling 또는 상위 coordination을 검토해야 한다. 이 Topic의 중심은 classical loop architecture이며 MIMO/LQR/MPC 설계 자체는 별도 범위이다.",
+        "현장 적용에서는 signal scaling, controller action, manual/auto와 remote/local mode, output tracking, anti-windup, saturation, sensor failure, valve fail action, startup/shutdown sequence, alarm·interlock 경계, trend/step/disturbance test, 기존 DCS/PLC block 가용성 및 변경비용을 검증해야 한다."
+      ],
+      "fatal_conditions": [
+        "[cascade_secondary_slower_is_better] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Cascade에서는 secondary loop가 primary loop보다 느릴수록 항상 성능이 좋아진다고 직접 주장한다. 정정 기준: Secondary loop는 primary loop보다 충분히 빨라야 하며 실제 속도분리는 공정별로 검증한다.",
+        "[cascade_signal_direction_reversed] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 일반 cascade에서 secondary controller의 출력이 primary controller의 설정값이 된다고 직접 주장한다. 정정 기준: Primary controller의 출력이 secondary controller의 설정값이 되고 secondary가 final element를 조작한다.",
+        "[cascade_extra_measurement_always_improves] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Secondary 측정변수를 하나 추가하기만 하면 외란 위치와 동특성에 관계없이 cascade 성능이 항상 개선된다고 직접 주장한다. 정정 기준: Secondary PV가 유효한 외란을 먼저 감지하고 secondary loop가 충분히 빠른 조건이 중요하다.",
+        "[ratio_independent_setpoints] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Ratio 제어는 두 stream을 서로 무관한 독립 setpoint로 각각 유지하는 구조라고 직접 주장한다. 정정 기준: Ratio 제어는 한 stream을 기준으로 다른 stream의 setpoint를 ratio 관계로 생성하여 비율을 유지한다.",
+        "[feedforward_no_disturbance_measurement] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Feedforward는 외란 측정이나 외란-공정 관계 없이도 모든 외란을 항상 선제적으로 정확히 제거한다고 직접 주장한다. 정정 기준: Feedforward는 측정 가능한 외란과 적절한 process relationship/model이 필요하며 model mismatch와 미측정 외란에는 한계가 있다.",
+        "[feedforward_makes_feedback_unnecessary] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Feedforward를 사용하면 feedback은 모든 공정에서 항상 불필요하다고 직접 주장한다. 정정 기준: Feedback은 미측정 외란과 model error의 잔여오차를 보정하므로 FF+FB 결합이 일반적으로 유용하다.",
+        "[override_averages_outputs] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Override/selective control은 복수 controller 출력을 평균하여 actuator에 전달하는 구조라고 직접 주장한다. 정정 기준: Override는 목적과 signal direction에 맞는 high/low selector 등으로 제한조건을 만족하는 controller signal을 선택한다.",
+        "[override_high_selector_always_safe] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 모든 override 구조에서는 high selector를 사용해야만 안전하다고 직접 주장한다. 정정 기준: High/low selector 선택은 controller action, signal direction, fail action과 보호해야 할 제약에 따라 달라진다.",
+        "[split_range_equals_override] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Split-range와 override/selective control은 동일한 구조라고 직접 주장한다. 정정 기준: Split-range는 한 controller output을 복수 final element의 구간으로 분할하고, override는 복수 controller 중 지배 signal을 선택한다.",
+        "[split_range_transition_automatic] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: Split-range는 split point를 정하기만 하면 deadband, overlap, installed gain 변화와 관계없이 항상 부드럽게 전환된다고 직접 주장한다. 정정 기준: Transition의 deadband/overlap과 combined installed response를 설계·검증해야 한다.",
+        "[multiloop_complexity_always_better] 답안이 다음 오개념을 실제 정답으로 직접 주장할 때만 fatal 후보로 판정한다: 다중루프와 복합구조는 복잡할수록 모든 공정에서 항상 제어성능이 좋아진다고 직접 주장한다. 정정 기준: 추가 sensor, dynamics, interaction, maintenance와 failure mode를 포함해 구조의 필요성과 편익을 검증해야 한다."
+      ],
+      "safe_conditions": [
+        "오답 문장을 인용한 뒤 틀렸다, 오류이다, 아니다 또는 금지해야 한다고 반박·정정하는 문맥은 fatal이 아니다.",
+        "주의할 오류나 오개념 목록에 등장한 문장을 수험생의 실제 주장으로 해석하지 않는다.",
+        "Cascade의 inner loop가 outer loop보다 충분히 빠르다고 조건부로 설명하는 것은 정상이다.",
+        "Cascade 속도비에 경험값을 언급하더라도 공정별 검증이 필요하다고 쓰면 자동 오류가 아니다.",
+        "Ratio 정의를 F_controlled/F_wild 또는 그 역으로 두더라도 정의와 계산을 일관되게 쓰면 정상이다.",
+        "Feedforward가 측정외란에 선제 대응한다고 설명하면서 model mismatch와 미측정 외란의 한계를 함께 쓰는 것은 정상이다.",
+        "Feedforward와 feedback을 결합하여 선행보상과 잔여오차 보정을 나누는 설명은 정상이다.",
+        "Override에서 high selector 또는 low selector 어느 쪽을 사용해도 signal direction과 보호목적이 일관되면 정상이다.",
+        "Split-range의 split point, overlap 또는 deadband는 공정별로 달라질 수 있다.",
+        "Split-range 예로 heating/cooling, vent/makeup, large/small valve를 드는 것은 정상이다.",
+        "다중루프 interaction이 강하면 decoupling이나 상위 coordination을 검토할 수 있다고 설명하는 것은 정상이다.",
+        "PID gain tuning 세부방법을 보조적으로 언급하는 것은 허용하지만 이 Topic의 핵심 ownership은 loop architecture이다.",
+        "Valve authority나 installed characteristic를 final-element 영향으로 언급하는 것은 허용하지만 상세 계산은 기존 valve Topic의 ownership이다.",
+        "State-space, LQR, MPC를 강한 interaction의 대안으로 짧게 언급하는 것은 허용하지만 본 Topic의 필수 핵심은 아니다.",
+        "단순 누락, 짧은 설명, 적용조건 부족은 fatal이 아니라 major 또는 minor로 판단한다.",
+        "candidate evidence에 없는 주장을 추론해서 fatal로 만들지 않는다.",
+        "confidence가 fatal threshold보다 낮으면 fatal이 아니라 major로 판정한다.",
+        "LLM 호출 실패나 JSON parse 실패는 fatal cap을 만들지 않는다."
+      ],
+      "output_contract": {
+        "json_only": true,
+        "required_fields": [
+          "verdict",
+          "confidence",
+          "reason",
+          "checks",
+          "findings"
+        ],
+        "verdict_values": [
+          "pass",
+          "warn",
+          "fatal"
+        ]
+      },
+      "major_checks": [
+        {
+          "id": "cascade_selection_conditions_missing",
+          "severity": "major",
+          "description": "Cascade 구조는 설명했지만 secondary loop 속도 또는 disturbance early-detection 조건이 부족하다.",
+          "correct_rule": "Primary CO→secondary SP 구조와 함께 inner loop가 충분히 빠르고 유효한 disturbance를 먼저 감지하는 조건을 설명한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "ratio_scaling_low_flow_missing",
+          "severity": "major",
+          "description": "Ratio 식만 제시하고 ratio convention, engineering-unit scaling 또는 low-flow 예외 처리가 부족하다.",
+          "correct_rule": "Ratio 정의 방향을 명시하고 scaling 및 0 근처 low-flow logic을 설명한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "feedforward_model_limit_missing",
+          "severity": "major",
+          "description": "Feedforward의 장점만 설명하고 measured disturbance, process-model, realizability 또는 feedback trim 한계를 설명하지 않는다.",
+          "correct_rule": "측정외란·model 기반 선행보상과 model mismatch/미측정 외란에 대한 feedback 보완을 함께 설명한다.",
+          "affected_layers": [
+            "C"
+          ]
+        },
+        {
+          "id": "override_tracking_missing",
+          "severity": "major",
+          "description": "Selector 논리만 설명하고 non-selected controller tracking, anti-windup 또는 bumpless transfer가 빠진다.",
+          "correct_rule": "Selector 전환 시 controller state가 튀지 않도록 external reset/output tracking 또는 anti-windup을 검토한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "split_range_transition_missing",
+          "severity": "major",
+          "description": "Split-range 정의만 설명하고 split point, overlap/deadband, combined installed gain 또는 transition 검증이 부족하다.",
+          "correct_rule": "복수 final element의 결합 응답과 transition 문제를 설계·commissioning에서 검증한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "architecture_selection_field_validation_missing",
+          "severity": "major",
+          "description": "구조를 나열했지만 공정별 선정기준, failure mode, legacy DCS/PLC와 비용·검증 절차가 부족하다.",
+          "correct_rule": "외란·dynamics·ratio·constraint·actuator·interaction·legacy를 기준으로 구조를 선택하고 단계적 검증을 제시한다.",
+          "affected_layers": [
+            "D",
+            "E"
+          ]
+        }
+      ],
+      "feedback_templates": {
+        "core_theory_positive": "Cascade·Ratio·Feedforward·Override·Split-range 구조와 선정조건을 공정 신호 흐름으로 정확히 연결했습니다.",
+        "core_theory_major": "구조 자체는 대체로 맞지만 속도조건, selector tracking, split transition 또는 현장 선정근거를 보강해야 합니다.",
+        "core_theory_fatal": "Cascade 신호방향, Feedforward 조건 또는 Override/Split-range 구분과 같은 핵심 구조를 반대로 설명했습니다.",
+        "next_practice": "각 구조를 블록선도와 함께 외란·목적·필수조건·현장검증 4열로 비교하세요."
+      },
+      "next_practice_points": [
+        "Cascade에서 primary/secondary signal path와 속도분리를 그린다.",
+        "Ratio에서 wild stream과 controlled stream의 정의·단위·저유량 예외를 정리한다.",
+        "Feedforward의 ideal relation과 실제 realizable approximation을 구분한다.",
+        "Override에서 high/low selector 방향과 controller tracking을 함께 설명한다.",
+        "Split-range transition의 deadband/overlap과 combined response를 trend로 검증한다.",
+        "단일루프 대비 다중루프의 추가 센서·logic·maintenance cost를 답안에 연결한다."
+      ],
+      "false_positive_cautions": [
+        "Cascade 속도비에 경험값을 언급해도 절대규칙으로 단정하지 않고 공정별 검증을 붙이면 자동 fatal이 아니다.",
+        "Ratio convention을 역으로 정의해도 정의와 계산이 일관되면 오류가 아니다.",
+        "High selector 또는 low selector 어느 쪽도 signal direction과 보호목적이 타당하면 허용한다.",
+        "Split-range의 overlap 또는 deadband 중 하나를 선택한 것은 공정조건 설명이 있으면 오류가 아니다.",
+        "Feedforward transfer 식의 부호는 model/sign convention에 따라 달라질 수 있으므로 정의를 먼저 확인한다.",
+        "PID, valve characteristic 또는 state-space를 보조적으로 언급했다고 routing ownership 오류로 보지 않는다."
+      ]
     },
     {
       "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",

@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T00:02:07Z-generated-topic-pack-model-answers",
+  "version": "2026-08-07T11:01:31Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -13662,6 +13662,268 @@
         "Reliability·Maintainability·Availability, MTBF·MTTR과 직렬·병렬 신뢰도 관계를 설명한다.",
         "SPOF와 CCF를 식별하고 독립성·다양성·물리적 분리 대책을 제시한다.",
         "온라인 유지보수, 정기 절체시험, 수용기준과 생애주기 Trade-off를 정리한다."
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "title_ko": "공정제어 Loop Architecture: Cascade·Ratio·Feedforward·Override·Split-Range",
+      "question_type": "COMPARE_SELECTION",
+      "expected_question_patterns": [
+        "단일루프와 다중루프 제어의 구조와 선정기준을 설명하시오.",
+        "Cascade 제어의 구성, 적용조건과 장단점을 설명하시오.",
+        "Ratio 제어와 Feedforward 제어의 원리 및 적용방법을 비교하시오.",
+        "Feedforward와 Feedback 결합제어의 필요성과 구현 시 고려사항을 설명하시오.",
+        "Override 또는 Selective Control의 구조와 적용 시 주의사항을 설명하시오.",
+        "Split-range Control의 원리, 적용사례와 전환부 문제점을 설명하시오.",
+        "Cascade, Ratio, Feedforward, Override, Split-range 제어방식을 비교하고 공정별 선정기준을 제시하시오.",
+        "공정제어의 단일·다중루프 제어설계와 현장 적용 시 고려사항을 설명하시오."
+      ],
+      "high_score_points": [
+        "PV, SP, CO, MV와 transmitter-controller-final element-process의 기본 loop를 정확히 정의한다.",
+        "Cascade에서 primary CO가 secondary SP가 되고 secondary가 final element를 조작하는 구조를 정확히 설명한다.",
+        "Cascade의 secondary loop가 충분히 빠르고 주요 외란을 primary보다 먼저 감지해야 하는 적용조건을 설명한다.",
+        "Ratio control의 wild/controlled stream과 ratio setpoint 생성을 단위·scaling 조건과 함께 설명한다.",
+        "Feedforward의 측정외란 선행보상과 ideal Gff=-Gd/Gu의 적용조건·실현성 한계를 설명한다.",
+        "Feedforward와 feedback을 선행보상과 잔여오차 보정으로 연결한다.",
+        "Override의 high/low selector 목적과 non-selected controller tracking·anti-windup을 설명한다.",
+        "Split-range를 one-controller/multiple-final-element 구조로 정의하고 transition deadband/overlap/gain 문제를 설명한다.",
+        "외란 측정 가능성, dynamics, ratio requirement, constraint, actuator 수, interaction을 구조선정 기준으로 연결한다.",
+        "signal direction, fail action, startup/shutdown, saturation, sensor failure와 mode transfer를 현장설계에 반영한다.",
+        "기존 DCS/PLC function block, 추가 센서·밸브 비용, 유지보수와 단계적 commissioning을 적용성 판단에 포함한다.",
+        "PID tuning·state-space·valve characteristic의 상세는 기존 Topic ownership으로 분리한다."
+      ],
+      "recommended_outline": [
+        {
+          "section": "배경과 기본 process loop",
+          "intent": "PV-SP-CO-MV와 transmitter-controller-final element-process의 기본 signal chain을 제시하고 단일루프의 역할과 한계를 설명한다.",
+          "anchor_refs": [
+            "process_loop_signal_chain",
+            "single_loop_architecture"
+          ]
+        },
+        {
+          "section": "Cascade 제어",
+          "intent": "primary CO→secondary SP 구조, secondary loop 속도조건과 외란 선행감지 조건을 설명한다.",
+          "anchor_refs": [
+            "cascade_structure",
+            "cascade_secondary_faster",
+            "cascade_disturbance_condition"
+          ]
+        },
+        {
+          "section": "Ratio 제어",
+          "intent": "wild stream과 controlled stream, ratio setpoint 생성 및 scaling·low-flow 예외를 설명한다.",
+          "anchor_refs": [
+            "ratio_control_structure",
+            "ratio_scaling_and_low_flow"
+          ]
+        },
+        {
+          "section": "Feedforward 및 Feedback 결합",
+          "intent": "측정외란의 선행보상, 이상적 feedforward 관계와 실현성, feedback trim의 필요성을 연결한다.",
+          "anchor_refs": [
+            "feedforward_principle",
+            "feedforward_feedback_combination"
+          ]
+        },
+        {
+          "section": "Override·Selective 제어",
+          "intent": "복수 controller와 high/low selector의 제약보호 원리, non-selected controller tracking과 anti-windup을 설명한다.",
+          "anchor_refs": [
+            "override_selective_control",
+            "override_tracking_antiwindup"
+          ]
+        },
+        {
+          "section": "Split-range 제어",
+          "intent": "하나의 controller output을 복수 final element에 분할하는 구조와 transition 설계를 설명한다.",
+          "anchor_refs": [
+            "split_range_control",
+            "split_range_transition_design"
+          ]
+        },
+        {
+          "section": "구조 비교와 선정",
+          "intent": "외란 측정 가능성, dynamics, ratio requirement, constraint, actuator 수와 interaction을 기준으로 구조를 선정한다.",
+          "anchor_refs": [
+            "architecture_selection_criteria",
+            "loop_interaction_coordination"
+          ]
+        },
+        {
+          "section": "현장 구현·문제점·개선",
+          "intent": "mode transfer, scaling, saturation, failure, startup/shutdown, DCS/PLC legacy와 FAT/SAT/commissioning 검증을 제시한다.",
+          "anchor_refs": [
+            "field_implementation_validation"
+          ]
+        }
+      ],
+      "common_missing_points": [
+        "단일루프와 다중루프의 차이를 구조적으로 설명하지 않는다.",
+        "Cascade에서 primary와 secondary 신호 방향 또는 속도조건이 빠진다.",
+        "Ratio control에서 ratio 정의와 scaling/low-flow 예외가 빠진다.",
+        "Feedforward의 측정외란·model requirement와 feedback trim이 빠진다.",
+        "Override의 selector 방향과 non-selected controller tracking이 빠진다.",
+        "Split-range와 override를 혼동하거나 transition 문제를 설명하지 않는다.",
+        "구조별 선정기준 없이 장단점만 나열한다.",
+        "legacy DCS/PLC, 추가계기 비용, fail action, mode transfer와 commissioning 검증이 빠진다."
+      ],
+      "routing_aliases": [
+        "공정제어 루프",
+        "process control loop",
+        "단일루프",
+        "single loop",
+        "다중루프",
+        "multi loop",
+        "cascade control",
+        "캐스케이드 제어",
+        "master slave control",
+        "primary secondary control",
+        "ratio control",
+        "비율 제어",
+        "wild stream",
+        "feedforward control",
+        "피드포워드 제어",
+        "선행제어",
+        "override control",
+        "selective control",
+        "오버라이드 제어",
+        "high selector",
+        "low selector",
+        "split range",
+        "split-range control",
+        "분할범위 제어",
+        "feedforward feedback",
+        "remote setpoint"
+      ],
+      "routing_field_points": [
+        "PV SP CO MV",
+        "primary CO secondary SP",
+        "secondary loop faster",
+        "inner loop outer loop",
+        "wild stream controlled stream",
+        "SPc=R Fw",
+        "measured disturbance",
+        "Gff=-Gd/Gu",
+        "feedforward plus feedback",
+        "high selector low selector",
+        "external reset feedback",
+        "output tracking",
+        "one controller multiple valves",
+        "split point overlap deadband",
+        "loop interaction",
+        "bumpless transfer",
+        "legacy DCS PLC"
+      ],
+      "revision_notes": [
+        "Official criteria IC-2027-W-3-1 and IC-2027-W-3-4의 PARTIAL gap을 동시에 보완하도록 작성했다.",
+        "PID tuning, state-space/LQR, control-valve characteristic 상세는 기존 Topic ownership으로 명시적으로 제외했다.",
+        "Historical exam frequency는 Stage 4A-2에서 정량 사용이 금지되어 본 Topic importance에 반영하지 않았다."
+      ],
+      "id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range_COMPARE_v1",
+      "title": "공정제어 Loop Architecture: Cascade·Ratio·Feedforward·Override·Split-Range",
+      "question_examples": [
+        "단일루프와 다중루프 제어의 구조와 선정기준을 설명하시오.",
+        "Cascade 제어의 구성, 적용조건과 장단점을 설명하시오.",
+        "Ratio 제어와 Feedforward 제어의 원리 및 적용방법을 비교하시오.",
+        "Feedforward와 Feedback 결합제어의 필요성과 구현 시 고려사항을 설명하시오.",
+        "Override 또는 Selective Control의 구조와 적용 시 주의사항을 설명하시오.",
+        "Split-range Control의 원리, 적용사례와 전환부 문제점을 설명하시오.",
+        "Cascade, Ratio, Feedforward, Override, Split-range 제어방식을 비교하고 공정별 선정기준을 제시하시오.",
+        "공정제어의 단일·다중루프 제어설계와 현장 적용 시 고려사항을 설명하시오."
+      ],
+      "topic_aliases": [
+        "공정제어 루프",
+        "process control loop",
+        "단일루프",
+        "single loop",
+        "다중루프",
+        "multi loop",
+        "cascade control",
+        "캐스케이드 제어",
+        "master slave control",
+        "primary secondary control",
+        "ratio control",
+        "비율 제어",
+        "wild stream",
+        "feedforward control",
+        "피드포워드 제어",
+        "선행제어",
+        "override control",
+        "selective control",
+        "오버라이드 제어",
+        "high selector",
+        "low selector",
+        "split range",
+        "split-range control",
+        "분할범위 제어",
+        "feedforward feedback",
+        "remote setpoint"
+      ],
+      "expected_structure": [
+        "배경과 기본 process loop",
+        "Cascade 제어",
+        "Ratio 제어",
+        "Feedforward 및 Feedback 결합",
+        "Override·Selective 제어",
+        "Split-range 제어",
+        "구조 비교와 선정",
+        "현장 구현·문제점·개선"
+      ],
+      "model_answer_outline": [
+        "PV-SP-CO-MV와 transmitter-controller-final element-process의 기본 signal chain을 제시하고 단일루프의 역할과 한계를 설명한다.",
+        "primary CO→secondary SP 구조, secondary loop 속도조건과 외란 선행감지 조건을 설명한다.",
+        "wild stream과 controlled stream, ratio setpoint 생성 및 scaling·low-flow 예외를 설명한다.",
+        "측정외란의 선행보상, 이상적 feedforward 관계와 실현성, feedback trim의 필요성을 연결한다.",
+        "복수 controller와 high/low selector의 제약보호 원리, non-selected controller tracking과 anti-windup을 설명한다.",
+        "하나의 controller output을 복수 final element에 분할하는 구조와 transition 설계를 설명한다.",
+        "외란 측정 가능성, dynamics, ratio requirement, constraint, actuator 수와 interaction을 기준으로 구조를 선정한다.",
+        "mode transfer, scaling, saturation, failure, startup/shutdown, DCS/PLC legacy와 FAT/SAT/commissioning 검증을 제시한다."
+      ],
+      "high_score_features": [
+        "PV, SP, CO, MV와 transmitter-controller-final element-process의 기본 loop를 정확히 정의한다.",
+        "Cascade에서 primary CO가 secondary SP가 되고 secondary가 final element를 조작하는 구조를 정확히 설명한다.",
+        "Cascade의 secondary loop가 충분히 빠르고 주요 외란을 primary보다 먼저 감지해야 하는 적용조건을 설명한다.",
+        "Ratio control의 wild/controlled stream과 ratio setpoint 생성을 단위·scaling 조건과 함께 설명한다.",
+        "Feedforward의 측정외란 선행보상과 ideal Gff=-Gd/Gu의 적용조건·실현성 한계를 설명한다.",
+        "Feedforward와 feedback을 선행보상과 잔여오차 보정으로 연결한다.",
+        "Override의 high/low selector 목적과 non-selected controller tracking·anti-windup을 설명한다.",
+        "Split-range를 one-controller/multiple-final-element 구조로 정의하고 transition deadband/overlap/gain 문제를 설명한다.",
+        "외란 측정 가능성, dynamics, ratio requirement, constraint, actuator 수, interaction을 구조선정 기준으로 연결한다.",
+        "signal direction, fail action, startup/shutdown, saturation, sensor failure와 mode transfer를 현장설계에 반영한다.",
+        "기존 DCS/PLC function block, 추가 센서·밸브 비용, 유지보수와 단계적 commissioning을 적용성 판단에 포함한다.",
+        "PID tuning·state-space·valve characteristic의 상세는 기존 Topic ownership으로 분리한다."
+      ],
+      "low_score_patterns": [
+        "단일루프와 다중루프의 차이를 구조적으로 설명하지 않는다.",
+        "Cascade에서 primary와 secondary 신호 방향 또는 속도조건이 빠진다.",
+        "Ratio control에서 ratio 정의와 scaling/low-flow 예외가 빠진다.",
+        "Feedforward의 측정외란·model requirement와 feedback trim이 빠진다.",
+        "Override의 selector 방향과 non-selected controller tracking이 빠진다.",
+        "Split-range와 override를 혼동하거나 transition 문제를 설명하지 않는다.",
+        "구조별 선정기준 없이 장단점만 나열한다.",
+        "legacy DCS/PLC, 추가계기 비용, fail action, mode transfer와 commissioning 검증이 빠진다."
+      ],
+      "field_connection_points": [
+        "PV SP CO MV",
+        "primary CO secondary SP",
+        "secondary loop faster",
+        "inner loop outer loop",
+        "wild stream controlled stream",
+        "SPc=R Fw",
+        "measured disturbance",
+        "Gff=-Gd/Gu",
+        "feedforward plus feedback",
+        "high selector low selector",
+        "external reset feedback",
+        "output tracking",
+        "one controller multiple valves",
+        "split point overlap deadband",
+        "loop interaction",
+        "bumpless transfer",
+        "legacy DCS PLC"
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

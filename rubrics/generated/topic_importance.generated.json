@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T00:02:07Z-generated-topic-pack-importance",
+  "version": "2026-08-07T11:01:31Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -897,6 +897,29 @@
         "고장검출·Bumpless Transfer·SPOF·CCF·복구·정량 수용기준을 보완."
       ],
       "topic_label": "제어시스템 구조·이중화·가용도·신뢰도"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "COMPARE_SELECTION",
+      "high_band_unlock_conditions": [
+        "기본 PV-SP-CO-MV process loop를 정의한다.",
+        "Cascade의 primary CO→secondary SP 구조와 inner-loop 속도·외란 조건을 설명한다.",
+        "Ratio의 wild/controlled stream, ratio setpoint와 scaling/low-flow 조건을 설명한다.",
+        "Feedforward의 measured disturbance와 model-based compensation, feedback trim을 연결한다.",
+        "Override의 selector 목적과 non-selected controller tracking을 설명한다.",
+        "Split-range의 one-controller/multiple-final-element 구조와 transition 문제를 설명한다.",
+        "외란, dynamics, ratio requirement, constraint, actuator와 interaction을 구조선정 기준으로 연결한다.",
+        "legacy DCS/PLC, fail action, saturation, startup/shutdown, 비용과 commissioning 검증을 포함한다."
+      ],
+      "note": "공식 criterion 3-1과 3-4의 PARTIAL gap을 동시에 보완하며, 단일루프에서 복합 process-control architecture로 확장하는 THEORY_CORE 주제이다. Historical frequency는 근거 부족으로 점수화하지 않는다.",
+      "revision_notes": [
+        "Roadmap TIER 1 Priority 1으로 지정된 Topic이다.",
+        "기출 빈도 숫자는 Stage 4A-2 정책에 따라 사용하지 않았다.",
+        "PID tuning, state-space/LQR와 valve characteristic 상세는 기존 Topic ownership으로 유지한다."
+      ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

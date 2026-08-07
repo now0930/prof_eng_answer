@@ -383,6 +383,9 @@ python3 -B scripts/test_plc_dcs_scada_remote_io_architecture_redundancy_topic.py
 echo "----- host regression: post release control valve live regressions -----"
 python3 -B scripts/test_post_release_control_valve_live_regressions.py
 
+echo "----- host regression: process control loop architecture cascade ratio feedforward override split range -----"
+python3 -B scripts/test_process_control_loop_architecture_cascade_ratio_feedforward_override_split_range.py
+
 echo "----- host regression: question contract -----"
 python3 -B scripts/test_question_contract.py
 
