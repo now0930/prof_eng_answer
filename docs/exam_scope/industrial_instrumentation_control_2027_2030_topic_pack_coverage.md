@@ -3,7 +3,7 @@
 ## 1. 목적
 
 이 문서는 산업계측제어기술사 2027~2030 필기 공식 출제기준 33개 세부항목에 대해
-현재 69개 Topic Pack의 실제 의미 범위를 기준으로 coverage 수준을 평가한다.
+현재 70개 Topic Pack의 실제 의미 범위를 기준으로 coverage 수준을 평가한다.
 
 공식 기준과 Topic Pack 분류는 다음 문서를 기준으로 한다.
 
@@ -21,17 +21,18 @@
 - Coverage는 Question Type과 독립된 축이다.
 
 Stage 3B semantic coverage review SHA-256: `59c670736c94f98d57cd8e0fb2c63537112b46cbdd0cfdf723525bfe344dc27f`
+Stage 8J post-push semantic re-audit: `IC-2027-W-4-2` = **COVERED** (source commit `ee53a07da8d269b98a29cd2c22321d446420dab9`)
 
 ## 3. 전체 현황
 
-확장 전 frozen baseline과 69개 Topic Pack 통합 후 semantic 재감사 결과는 다음과 같다.
+확장 전 frozen baseline과 70개 Topic Pack 및 Static Backlog 1 완료 후 semantic 재감사 결과는 다음과 같다.
 
 | 시점 | COVERED | PARTIAL | GAP | TOTAL |
 |---|---:|---:|---:|---:|
 | 확장 전 baseline | 16 | 8 | 9 | 33 |
-| 확장 후 현재 | **30** | **2** | **1** | **33** |
+| 확장 후 현재 | **31** | **1** | **1** | **33** |
 
-확장 후 미완전 criterion은 `IC-2027-W-4-2`, `IC-2027-W-5-1`, `IC-2027-W-5-2` 3개다.
+`IC-2027-W-4-2`는 Static Backlog 1 완료 후 **COVERED**로 승격되었다. 현재 미완전 criterion은 `IC-2027-W-5-1`, `IC-2027-W-5-2` 2개다.
 Roadmap 인접문맥은 planning evidence로만 사용하며 실제 Topic source 의미가 없으면 coverage로 자동 승격하지 않는다.
 ## 4. 공식 세부항목 Coverage Matrix
 
@@ -60,7 +61,7 @@ Roadmap 인접문맥은 planning evidence로만 사용하며 실제 Topic source
 | `IC-2027-W-3-9` | 계측제어시스템의 하드웨어 개발, 생산 및 검증 | **COVERED** | HIGH | 1 | 0 |
 | `IC-2027-W-3-10` | 계측제어시스템의 환경 검증시험 및 대책(온도, 습도, 전자기파 등) | **COVERED** | HIGH | 1 | 0 |
 | `IC-2027-W-4-1` | 가용도(availability), 신뢰도(reliability) | **COVERED** | HIGH | 0 | 2 |
-| `IC-2027-W-4-2` | 가스, 정유, 철도, 발전, 건축 등 위험 환경에서 고려해야 할 제어요소 및 대책 | **PARTIAL** | HIGH | 1 | 0 |
+| `IC-2027-W-4-2` | 가스, 정유, 철도, 발전, 건축 등 위험 환경에서 고려해야 할 제어요소 및 대책 | **COVERED** | HIGH | 2 | 0 |
 | `IC-2027-W-4-3` | 안전, 방재 등 재난대비 목적의 계측제어시스템 설계 | **COVERED** | HIGH | 2 | 2 |
 | `IC-2027-W-4-4` | 프로젝트 관리(원가, 인력, 수행일정 등) | **COVERED** | HIGH | 2 | 0 |
 | `IC-2027-W-4-5` | 생산관리(원가, 인력, 수행일정 등) | **COVERED** | HIGH | 1 | 0 |
@@ -71,15 +72,18 @@ Roadmap 인접문맥은 planning evidence로만 사용하며 실제 Topic source
 | `IC-2027-W-5-1` | 계측제어 관련 신기술(로봇, 인공지능, IoT, 스마트팩토리, 양자컴퓨팅 등) | **PARTIAL** | HIGH | 3 | 0 |
 | `IC-2027-W-5-2` | 계측제어 관련 동향 | **GAP** | HIGH | 0 | 0 |
 
-## 5. PARTIAL 상세
+## 5. Coverage 변경 및 PARTIAL 상세
 
 ### `IC-2027-W-4-2` 가스, 정유, 철도, 발전, 건축 등 위험 환경에서 고려해야 할 제어요소 및 대책
 
-- 판정: **PARTIAL**
-- 근거: 새 Topic은 Zone/EPL/Ex marking, 방폭방식, intrinsic safety entity/barrier/wiring 등 가스·정유의 폭발위험 환경을 강하게 닫는다. 그러나 공식 문구는 철도·발전·건축 등을 포함한 위험 환경 전반의 제어요소와 대책을 요구한다.
-- 잔여범위: 철도·발전·건축 등 비폭발 위험환경의 fail-safe, environmental/functional hazard, 적용별 제어대책을 별도 보강할 필요가 있다.
-- 신규 직접 Topic:
+- 판정: **COVERED**
+- 승격 근거: 기존 `hazardous_area_explosion_protection_intrinsic_safety_equipment_selection`이 가스·정유 중심의 hazardous-area classification, Zone/EPL/Ex marking, 방폭방식, intrinsic safety, entity/barrier/wiring 및 기기선정을 직접 소유한다.
+- 보강 근거: 신규 `hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards`이 철도·발전·건축 등 비폭발 위험환경의 hazard-specific required safe state, fail-safe, 전원·통신 상실, 저장·잔류에너지, redundancy/common-cause failure, 최종제어요소 fail action과 적용별 제어대책을 직접 소유한다.
+- 적용별 closure: 철도는 movement·speed·position·authority uncertainty와 braking/protected mode, 발전은 고온·고압·회전체·연료·전기에너지와 shutdown auxiliary 유지, 건축은 화재·연기·HVAC·댐퍼·승강기·비상전원의 cause-and-effect를 다룬다.
+- 검증 closure: loss of power/communication, sensor failure, stuck final element, bypass, restart를 Cause-and-Effect, FAT/SAT, functional test 또는 동등한 방법으로 검증하고 MOC·revalidation·legacy retrofit까지 연결한다.
+- 직접 Topic:
   - `hazardous_area_explosion_protection_intrinsic_safety_equipment_selection`
+  - `hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards`
 
 ### `IC-2027-W-5-1` 계측제어 관련 신기술(로봇, 인공지능, IoT, 스마트팩토리, 양자컴퓨팅 등)
 
@@ -114,13 +118,12 @@ Roadmap 인접문맥은 planning evidence로만 사용하며 실제 Topic source
 
 ## 9. 확장 후 잔여범위 및 다음 단계
 
-69개 Topic Pack 기준 semantic coverage는 `COVERED 30 / PARTIAL 2 / GAP 1`이다.
+70개 Topic Pack 기준 semantic coverage는 `COVERED 31 / PARTIAL 1 / GAP 1`이다.
 
-잔여범위는 다음 3개 criterion으로 한정한다.
+잔여범위는 다음 2개 criterion으로 한정한다.
 
-- `IC-2027-W-4-2` **PARTIAL**: 방폭·본질안전은 확보했으나 철도·발전·건축 등 비폭발 위험환경의 적용별 제어요소와 대책이 남아 있다.
 - `IC-2027-W-5-1` **PARTIAL**: AI/ML·Physical AI·Digital Twin·IIoT/Smart Factory는 확보했으나 양자컴퓨팅 등 기타 emerging technology 축이 남아 있다.
 - `IC-2027-W-5-2` **GAP**: 정적 Topic Pack이 아니라 최신 동향·법령·표준을 주기적으로 갱신하는 `DYNAMIC_REVIEW_LANE`으로 관리한다.
 
-다음 단계는 이 문서를 read-only로 재감사한 뒤 documentation-only commit 여부를 결정한다.
+다음 static backlog는 `IC-2027-W-5-1`이며, `IC-2027-W-5-2`는 `DYNAMIC_REVIEW_LANE`으로 유지한다.
 Question Type, Topic Pack source, generated rubric은 이 coverage 문서 갱신 단계에서 변경하지 않는다.
