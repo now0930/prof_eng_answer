@@ -127,30 +127,36 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 
 ## 7. 현재 잔여 criterion
 
+현재 authoritative coverage는 `COVERED 31 / PARTIAL 1 / GAP 1`이다.
+`IC-2027-W-4-2`는 Static Backlog 1 완료로 **COVERED**가 되었으므로 잔여 목록에서 제외한다.
+
 | Priority | Criterion | Coverage | 남은 범위 | 처리 방식 |
 |---:|---|:---:|---|---|
-| 1 | `IC-2027-W-4-2` 위험 환경 제어요소 및 대책 | **PARTIAL** | 방폭·본질안전 외 철도·발전·건축 등 비폭발 위험환경의 fail-safe, environmental/functional hazard, 적용별 제어대책 | STATIC_TOPIC |
-| 2 | `IC-2027-W-5-1` 계측제어 관련 신기술 | **PARTIAL** | 양자컴퓨팅 등 기타 emerging technology의 개념·계측제어 적용·한계·성숙도 평가 | STATIC_TOPIC |
-| 3 | `IC-2027-W-5-2` 계측제어 관련 동향 | **GAP** | 최신동향·법령·표준의 지속 갱신 | DYNAMIC_REVIEW_LANE |
+| 1 | `IC-2027-W-5-1` 계측제어 관련 신기술 | **PARTIAL** | 양자컴퓨팅 등 기타 emerging technology의 개념·계측제어 적용·한계·성숙도 평가 | STATIC_TOPIC |
+| 2 | `IC-2027-W-5-2` 계측제어 관련 동향 | **GAP** | 최신동향·법령·표준의 지속 갱신 | DYNAMIC_REVIEW_LANE |
 
-## 8. STATIC BACKLOG 1 — `IC-2027-W-4-2`
+## 8. STATIC BACKLOG 1 — `IC-2027-W-4-2` — COMPLETE
 
-- 현재 확보: hazardous area classification, Zone/EPL/Ex marking, 방폭방식, intrinsic safety entity/barrier/wiring, 계측기기 선정.
-- 잔여범위: 철도·발전·건축 등 비폭발 위험환경에서의 fail-safe, 환경/기능 hazard, 전원·통신·제어 상실 시 대책, 적용별 제어요소 선정.
-- 기존 Topic을 억지로 확장하지 않고 별도 Topic으로 ownership을 분리한다.
-- 추천 Topic ID:
+- 상태: **COMPLETE**
+- Coverage: **COVERED**
+- 완료 Topic ID:
   - `hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards`
-- 우선순위: **1**
-- 완료조건: `IC-2027-W-4-2`의 잔여범위를 직접 소유하고 기존 방폭 Topic과 중복 없이 설명·선정·대책까지 grading 가능해야 한다.
+- Complementary owner:
+  - `hazardous_area_explosion_protection_intrinsic_safety_equipment_selection`
+- 완료 범위: 기존 방폭 Topic이 가스·정유의 hazardous-area/Ex/intrinsic-safety 영역을 유지하고, 신규 Topic이 철도·발전·건축 등 비폭발 위험환경의 required safe state, fail-safe, 전원·통신 상실, 잔류에너지, redundancy/common-cause failure, 적용별 제어대책과 failure-scenario verification을 직접 소유한다.
+- 완료 검증: 신규 Topic 통합 commit `ee53a07da8d269b98a29cd2c22321d446420dab9`, coverage 승격 commit `fc0176763526fec2e2cfda5625d9cf4f3b16d85f`.
+- 완료조건: **충족**. 기존 방폭 Topic과 ownership을 분리하면서 `IC-2027-W-4-2`를 설명·선정·대책·검증 관점에서 grading 가능하게 닫았다.
 
-## 9. STATIC BACKLOG 2 — `IC-2027-W-5-1`
+## 9. STATIC BACKLOG 2 — `IC-2027-W-5-1` — ACTIVE
 
+- 상태: **ACTIVE**
+- Coverage: **PARTIAL**
 - 현재 확보: AI/ML, Physical AI, robot, Digital Twin, IIoT, Smart Factory, Edge/Cloud, interoperability, Digital Thread.
 - 잔여범위: 양자컴퓨팅 등 기타 emerging technology의 최소 개념, 계측제어 적용 가능성, 성숙도, 한계, 적용 전제.
 - 신기술은 변화가 빠르므로 특정 제품·기업 중심이 아니라 원리·적용·한계·성숙도 평가 프레임을 중심으로 작성한다.
 - 추천 Topic ID:
   - `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
-- 우선순위: **2**
+- 우선순위: **1**
 - 완료조건: `IC-2027-W-5-1`의 양자컴퓨팅 및 기타 신기술 잔여축을 보완하되 기존 AI/IIoT Topic과 ownership을 분리해야 한다.
 
 ## 10. DYNAMIC BACKLOG — `IC-2027-W-5-2`
@@ -164,14 +170,13 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 
 ## 11. 후속 작업 순서
 
-1. `IC-2027-W-4-2` non-explosion hazardous-environment Topic authoring.
-2. `IC-2027-W-5-1` quantum/emerging-technology Topic authoring.
-3. `IC-2027-W-5-2` Dynamic Review Lane 운영 규칙 작성.
-4. Thermocouple mixed TC+RTD source repair를 별도 commit으로 수행.
-5. 위 작업 후 공식 Coverage를 다시 read-only 재감사한다.
+1. `IC-2027-W-5-1` quantum/emerging-technology Topic authoring.
+2. `IC-2027-W-5-2` Dynamic Review Lane 운영 규칙 작성.
+3. Thermocouple mixed TC+RTD source repair를 별도 commit으로 수행.
+4. 위 작업 후 공식 Coverage를 다시 read-only 재감사한다.
 
-새 static Topic은 각각 독립 authoring → focused validation → 개별 commit 순서로 처리한다.
-두 static Topic 완료 전에는 coverage를 기계적으로 `COVERED`로 승격하지 않는다.
+남은 static Topic은 독립 authoring → focused validation → 개별 commit 순서로 처리한다.
+`IC-2027-W-5-1` 완료 전에는 해당 criterion을 기계적으로 `COVERED`로 승격하지 않는다.
 
 ## 12. Architecture boundary
 
@@ -180,4 +185,4 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 - `IC-2027-W-5-2`는 static Topic이 아니라 `DYNAMIC_REVIEW_LANE`으로 유지한다.
 - Thermocouple Topic의 mixed TC+RTD content 문제는 coverage backlog가 아니라 별도 source repair다.
 - 이 Roadmap 갱신 단계에서는 Topic source JSON, generated rubric, production Python을 변경하지 않는다.
-- 기존 완료 17 Topic의 source 또는 generated 결과를 재작성하지 않는다.
+- 기존 완료 18 Topic의 source 또는 generated 결과를 재작성하지 않는다.
