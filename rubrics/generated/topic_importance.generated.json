@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-06T13:04:11Z-generated-topic-pack-importance",
+  "version": "2026-08-07T00:02:07Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -49,6 +49,79 @@
         "사람이 검토한 Bode 요구사항 Markdown을 기준으로 직접 작성함.",
         "8개 high-band 조건을 Bode 안정여유·대역폭·보상기 내용으로 작성함."
       ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "difficulty": "DESIGN_EVALUATION",
+      "selection_importance": "NORMAL",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "high_band_unlock_conditions": [
+        "CI, Baseline, Version control, 상태기록과 As-built consistency의 관계를 정확히 설명한다.",
+        "MOC 절차를 영향분석·승인·실행·검증·종결의 폐루프로 제시한다.",
+        "Release package, 승인 artifact와 risk-based Regression을 구체화한다.",
+        "Backup, Restore, Rollback과 Disaster recovery의 차이와 연계를 설명한다.",
+        "Rollback trigger와 비가역 변경의 forward recovery를 제시한다.",
+        "Migration discovery, compatibility matrix, data reconciliation과 Cutover go/no-go를 연결한다.",
+        "Parallel operation의 제어권·데이터·운전 위험을 함께 평가한다.",
+        "Legacy·Obsolescence·Spare·Vendor lock-in·License·Firmware를 수명주기 관점에서 판단한다.",
+        "긴급변경과 As-built 갱신, 교육·문서화까지 변경종결에 포함한다.",
+        "SW-04와 SW-09 ownership 경계를 명확히 유지하고 Fatal 오류가 없다."
+      ],
+      "note": "산업용 제어시스템은 장기간 운전되고 변경 실패가 비계획 정지와 현장 형상 불일치로 이어질 수 있다. SW-06은 개발 V&V 자체가 아니라 운영 중 형상·변경·Release·복구·Migration과 노후화 수명주기 판단을 평가한다.",
+      "revision_notes": [
+        "created_for_SOFTWARE_LLM_LANE_B_SW_06",
+        "difficulty_set_to_DESIGN_EVALUATION",
+        "selection_importance_set_to_NORMAL",
+        "high_band_requires_explicit_SW_04_and_SW_09_boundaries"
+      ],
+      "topic_label": "형상관리, 변경관리, Release, Backup, Rollback, Migration 및 Obsolescence 관리"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "difficulty": "DESIGN_EVALUATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "Sequence를 State, 진입조건, 동작, 완료 피드백, Timeout과 실패·복구 경로로 설명한다.",
+        "Permissive, Interlock, Trip 및 정상 Shutdown을 목적·시점·우선순위·Latch·Reset 기준으로 구분한다.",
+        "상태전이 논리식 또는 허용 전이표를 제시하고 이상전이 방지조건을 설명한다.",
+        "Cause & Effect, M-out-of-N Voting과 First-out의 역할과 한계를 구분한다.",
+        "Bypass와 Override의 권한, 표시, 제한시간, 대체조치 및 복구확인을 제시한다.",
+        "Fail-safe를 공정별 Safe state로 정의하고 Watchdog·Bad quality·Degraded mode를 연결한다.",
+        "Restart 시 실제 설비상태 재수집, State reconciliation, Permissive 재확인과 Latch 보존을 설명한다.",
+        "SW-03의 운전정보 관리와 SW-05의 SIL·안전수명주기를 ownership 경계로 명확히 분리한다."
+      ],
+      "note": "Sequence와 Interlock·Permissive·Trip은 PLC·DCS 응용문제, Cause & Effect, 시운전 및 이상상황 대응의 공통 기반이다. 단순 용어 암기가 아니라 상태전이, 우선순위, 피드백 확인, Fail-safe와 복구까지 연결해야 고득점이 가능하므로 핵심 준비 Topic으로 분류한다.",
+      "revision_notes": [
+        "2026-08-06: difficulty=DESIGN_EVALUATION, selection_importance=CORE_MUST_PREPARE로 확정했다.",
+        "question_type은 개념과 동작 메커니즘 비교가 중심이므로 PRINCIPLE_INTERPRETATION으로 설정했다."
+      ],
+      "topic_label": "SW-02 제어논리·Sequence·Interlock·Trip"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "difficulty": "DESIGN_EVALUATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PROCEDURE",
+      "high_band_unlock_conditions": [
+        "Feasibility·Scope·Schedule·Cost를 승인 baseline과 변경관리로 연결한다.",
+        "URS→FRS→FDS→SDS→시험명세→결과의 양방향 추적을 설명한다.",
+        "I/O·Tag·Alarm·Interlock list와 Cause & Effect·Logic diagram을 구분한다.",
+        "FAT와 SAT의 환경, 검출결함과 한계를 비교한다.",
+        "Loop test·Site integration·Commissioning의 대상과 순서를 구분한다.",
+        "Performance test를 정량조건·기간·측정방법·허용기준으로 설명한다.",
+        "Acceptance·Punch closure·As-built·Handover를 증적과 책임이관으로 연결한다.",
+        "SW-04 일반 lifecycle 및 SW-02·SW-03의 논리·Alarm ownership 경계를 유지한다."
+      ],
+      "note": "제어 소프트웨어 프로젝트 문제는 설계문서와 시험단계 명칭을 나열하는 수준을 넘어 문서 추적성, FAT·SAT의 차이, 현장 시운전과 정량 성능인수의 폐루프를 요구한다. 실제 프로젝트 수행능력과 현장 판단을 함께 평가하므로 핵심 준비 Topic으로 분류한다.",
+      "revision_notes": [
+        "SW-10 프로젝트 수행의 난이도와 선택 중요도를 정의했다.",
+        "문서·시험·시운전·인수 폐루프를 high-band 조건으로 반영했다."
+      ],
+      "topic_label": "SW-10 제어 SW 프로젝트·FAT·SAT·시운전·인수"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
@@ -420,6 +493,149 @@
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "Historian–MES–ERP와 ISA-95 계층 관계를 정확히 설명한다.",
+        "Event Time, Clock 동기화, Time alignment와 Latency를 연결한다.",
+        "Quality Code와 Bad·Uncertain 데이터 처리정책을 제시한다.",
+        "Completeness·Timeliness·Compression Ratio 등 품질지표를 적용한다.",
+        "Compression·Deadband와 Event 보존의 Trade-off를 설명한다.",
+        "Store-and-forward의 Buffer와 Recovery 설계를 설명한다.",
+        "Metadata·Tag Naming·Master Data·Information Model의 관계를 설명한다.",
+        "Governance·Retention·Traceability·Batch Genealogy를 연결한다.",
+        "Protocol 연결과 Semantic Interoperability를 구분한다.",
+        "SW-07·SW-11·SW-12의 Topic Ownership을 구분한다."
+      ],
+      "note": "산업데이터의 값·시간·품질·Context·Lineage를 분리하지 않고 계층형 IT/OT 통합으로 연결하는 것이 핵심이다. 표준 세부 Level, Vendor Quality Bit와 정량 Deadline은 verify-first 한다."
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "difficulty": "DESIGN_EVALUATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "HMI·SCADA 구조를 데이터 품질, Failover와 운전자 상황인식으로 연결한다.",
+        "High-performance HMI의 Overview, 화면계층, 추세와 제한된 색상 원칙을 설명한다.",
+        "Alarm philosophy와 rationalization을 구분하고 결과·조치·응답시간·우선순위를 연결한다.",
+        "Acknowledge, Return-to-normal, Deadband, Delay, Shelving과 Suppression을 정확히 구분한다.",
+        "Setpoint·Alarm·Trip·Interlock 값의 목적, 소유권, 변경권한과 이력을 제시한다.",
+        "SOE의 Source timestamp, 시각동기, 분해능과 Time quality를 설명한다.",
+        "Historian, First-out, SOE와 Audit trail의 기록대상과 분석목적을 비교한다.",
+        "운전자 권한, Human error 방지와 Detect-Diagnose-Respond-Recover 흐름을 제시한다."
+      ],
+      "note": "HMI·SCADA와 Alarm·SOE는 제어시스템의 운전성, 비정상상황 대응과 사고원인 분석을 연결하는 핵심 분야이다. 용어 나열보다 정보의 목적, 운전자 조치, 시간품질, 권한과 이력관리까지 설명해야 고득점이 가능하므로 핵심 준비 Topic으로 분류한다.",
+      "revision_notes": [
+        "2026-08-06: difficulty=DESIGN_EVALUATION, selection_importance=CORE_MUST_PREPARE로 확정했다.",
+        "question_type은 운전정보 기능의 원리·비교·설계판단이 중심이므로 PRINCIPLE_INTERPRETATION으로 설정했다."
+      ],
+      "topic_label": "SW-03 HMI·SCADA·Alarm·SOE"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "AI–ML–DL의 포함관계와 학습유형을 정확히 설명한다.",
+        "Anomaly Detection, Predictive Maintenance와 RUL의 출력·한계를 구분한다.",
+        "Train·Validation·Test와 시간·설비·Episode 분할을 설명한다.",
+        "Data Leakage와 Class Imbalance의 성능 왜곡을 설명한다.",
+        "Confusion Matrix, Precision, Recall과 F1을 수식과 함께 적용한다.",
+        "Threshold, False Alarm, 미검출, Lead Time과 비용의 Trade-off를 설명한다.",
+        "Training–Serving Skew와 Deployment 검증을 설명한다.",
+        "Model·Dataset·Feature·Code·Threshold Version Traceability를 제시한다.",
+        "Data Drift와 Concept Drift를 구분하고 Retraining Trigger를 설명한다.",
+        "Champion–Challenger와 Regression·Replay 검증을 제시한다.",
+        "Explainability의 한계와 Human Review·Fallback을 제시한다.",
+        "SW-11·SW-12·SW-13의 Ownership 경계를 명확히 한다."
+      ],
+      "note": "Model Metric은 현장 안전성·정비효과를 자동 보장하지 않는다. 정량 Threshold, Drift 기준, RUL 신뢰구간과 적용 표준은 verify-first 한다."
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "difficulty": "DESIGN_EVALUATION",
+      "selection_importance": "HIGH",
+      "question_type": "CALC_DESIGN",
+      "high_band_unlock_conditions": [
+        "Latency, Jitter, Cycle time와 Response time를 구분하고 정량목표를 제시한다.",
+        "Determinism을 bounded worst-case delay와 deadline으로 설명한다.",
+        "Traffic matrix, burst, load headroom과 QoS·scheduling을 연결한다.",
+        "TSN의 Qbv, frame preemption, policing과 profile 조건을 설명한다.",
+        "PTP clock hierarchy, timestamping, asymmetry와 holdover를 설명한다.",
+        "MRP, DLR, PRP와 HSR의 구조·복구시간·failure coverage를 비교한다.",
+        "Packet loss, broadcast storm, multicast와 congestion containment를 제시한다.",
+        "Failover 후 application state consistency와 redundancy health를 포함한다.",
+        "Fallback local control과 graceful degradation을 위험기반으로 설계한다.",
+        "Fault injection과 synchronized measurement로 acceptance evidence를 제시한다.",
+        "SW-07과 SW-09 ownership 경계를 유지하고 Fatal 오류가 없다."
+      ],
+      "note": "산업 네트워크는 nominal speed보다 worst-case deadline, synchronization accuracy, fault recovery와 degraded operation을 함께 만족해야 한다. SW-08은 protocol 명칭 암기가 아니라 정량 성능예산, failure coverage와 검증 가능한 복원력 설계를 평가한다.",
+      "revision_notes": [
+        "created_for_SOFTWARE_LLM_LANE_B_SW_08",
+        "difficulty_set_to_DESIGN_EVALUATION",
+        "selection_importance_set_to_HIGH",
+        "high_band_requires_explicit_SW_07_and_SW_09_boundaries"
+      ],
+      "topic_label": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "difficulty": "DESIGN_EVALUATION",
+      "selection_importance": "HIGH",
+      "question_type": "COMPARE_SELECTION",
+      "high_band_unlock_conditions": [
+        "Communication requirement와 다기준 선정절차를 먼저 제시한다.",
+        "Physical media, protocol, profile와 information model의 계층을 구분한다.",
+        "HART, FOUNDATION Fieldbus, PROFIBUS PA와 Modbus의 구조·통합 차이를 정확히 설명한다.",
+        "EtherNet/IP, PROFINET, EtherCAT의 device model과 engineering file을 구분한다.",
+        "OPC UA와 fieldbus의 역할 차이를 설명한다.",
+        "WirelessHART와 ISA100.11a의 구조, site survey와 battery lifecycle을 포함한다.",
+        "Gateway·protocol conversion의 semantic mapping과 장애상태 처리를 제시한다.",
+        "Device profile·Device Description·certification·integration test의 관계를 설명한다.",
+        "Commissioning과 lifecycle compatibility matrix를 현장절차로 제시한다.",
+        "SW-08과 SW-09 ownership 경계를 명확히 유지하고 Fatal 오류가 없다."
+      ],
+      "note": "산업계측제어 통신은 물리매체 선택부터 protocol, device integration, gateway, commissioning과 장기 호환성까지 연결되는 시스템 통합 주제이다. SW-07은 protocol 명칭의 암기가 아니라 기능·상호운용성·현장선정 판단을 평가한다.",
+      "revision_notes": [
+        "created_for_SOFTWARE_LLM_LANE_B_SW_07",
+        "difficulty_set_to_DESIGN_EVALUATION",
+        "selection_importance_set_to_HIGH",
+        "high_band_requires_explicit_SW_08_and_SW_09_boundaries"
+      ],
+      "topic_label": "계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "difficulty": "DESIGN_EVALUATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PROCEDURE",
+      "high_band_unlock_conditions": [
+        "시험 가능한 요구사항과 V-Model 좌·우 대응을 설명한다.",
+        "Verification과 Validation을 명세 적합성과 사용목적 적합성으로 구분한다.",
+        "RTM의 순방향·역방향 추적을 설계·코드·시험·결과까지 연결한다.",
+        "단위·통합·시스템시험의 대상과 검출결함을 구분한다.",
+        "정적·동적·회귀시험을 실행여부와 변경영향 관점에서 설명한다.",
+        "Simulation·HIL·Fault injection의 환경, 한계와 복구검증을 비교한다.",
+        "결함·변경·baseline·회귀·승인 증적을 폐루프로 연결한다.",
+        "SW-05 Safety lifecycle과 SW-10 프로젝트 수행 경계를 침범하지 않는다."
+      ],
+      "note": "계측제어 소프트웨어 수명주기와 V&V는 요구사항부터 시험·승인까지 모든 소프트웨어 문제의 공통 기반이다. 단계 나열보다 V-Model 대응, 양방향 추적성, 시험수준별 목적과 변경·결함 환류를 설명해야 고득점이 가능하므로 핵심 준비 Topic으로 분류한다.",
+      "revision_notes": [
+        "일반 계측제어 SW lifecycle의 난이도와 선택 중요도를 정의했다.",
+        "V-Model·RTM·시험전략·결함환류를 high-band 조건으로 반영했다."
+      ],
+      "topic_label": "SW-04 계측제어 SW 수명주기·V-Model·V&V"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
       "difficulty": "THEORY_CORE",
       "selection_importance": "CORE_MUST_PREPARE",
@@ -539,6 +755,34 @@
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "difficulty": "DESIGN_EVALUATION",
+      "selection_importance": "HIGH",
+      "question_type": "PROBLEM_SOLVE",
+      "high_band_unlock_conditions": [
+        "OT와 IT 보안 우선순위 차이를 availability·safety·integrity 관점에서 설명한다.",
+        "Asset inventory, criticality, SUC와 risk assessment를 연결한다.",
+        "Zone and Conduit, segmentation, Industrial DMZ와 Firewall을 data flow로 설계한다.",
+        "Allowlisting, least privilege, authentication·authorization을 구분한다.",
+        "Jump server, MFA와 session recording을 포함한 remote access를 설계한다.",
+        "Patch·vulnerability·legacy compensating control의 위험기반 결정을 제시한다.",
+        "Supply chain, supplier assurance, SBOM과 firmware integrity를 연결한다.",
+        "Logging, time synchronization, detection과 incident response를 설계한다.",
+        "Offline·immutable backup과 trusted recovery·business continuity를 구분한다.",
+        "SW-06의 운영 변경·Backup과 SW-09의 cyber control·trusted recovery 경계를 유지한다.",
+        "SW-07의 통신기능 및 SW-08의 정량 네트워크 복원력과 SW-09 보안통제를 구분한다."
+      ],
+      "note": "OT 사이버보안은 제품 나열보다 자산·위험·경계·identity·공급망·monitoring·incident response·trusted recovery를 공정안전과 가용성에 연결할 때 고득점이 가능하다.",
+      "revision_notes": [
+        "SOFTWARE_LLM_LANE_B SW-09 source authoring.",
+        "SW-06 운영 변경·Backup과 SW-09 cyber threat·trusted recovery ownership을 분리했다.",
+        "SW-07 통신기능 및 SW-08 정량 네트워크 복원력과의 경계를 명시했다.",
+        "Generated bank, Router와 production Python은 수정하지 않는다."
+      ],
+      "topic_label": "OT 사이버보안, 심층방어, Allowlisting, 공급망 보안 및 사고대응"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
       "difficulty": "FIELD_APPLICATION",
       "selection_importance": "NORMAL",
@@ -558,6 +802,28 @@
         "2026-07-12: PRINCIPLE / FIELD_APPLICATION / NORMAL로 확정했다.",
         "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "Physical AI를 Sensor–Actuator Feedback 폐루프로 정의한다.",
+        "Robot System Boundary에 Tool, Payload, Cell과 Safety 기능을 포함한다.",
+        "Sensor Fusion의 Time Alignment, Calibration, Covariance와 공통원인을 설명한다.",
+        "State Estimation, Localization, SLAM, Observability와 World Model을 구분한다.",
+        "Digital Twin의 목적, Fidelity, Synchronization, Version과 Staleness를 설명한다.",
+        "Simulation Coverage와 Synthetic Data Domain Gap을 설명한다.",
+        "Planning과 Control 계층 및 End-to-end Latency를 설명한다.",
+        "Collaborative Robot 제품과 협업 Application 안전성을 구분한다.",
+        "Safety Envelope, Safe State, Fallback과 Degraded Mode를 설명한다.",
+        "Supervisory Control과 Human Override를 설명한다.",
+        "AI Accuracy와 Functional Safety 증거를 분리한다.",
+        "운영범위, Scenario Validation, Runtime Monitoring과 Change Control을 연결한다."
+      ],
+      "note": "Sensor Fusion, Digital Twin, Simulation, Edge AI와 Model Accuracy는 물리적 안전을 자동 보장하지 않는다. 정량한계와 표준 요구는 위험분석과 적용 Edition으로 verify-first 한다."
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
@@ -769,6 +1035,30 @@
         "fatal logic error가 없다."
       ],
       "note": "2차 시스템의 공진주파수와 주파수응답은 제어이론 핵심 변별 주제이며, 단순 공식 암기를 넘어 시간응답-주파수응답의 개념적 차이와 현장 설계(진동, 노이즈, 대역폭) 간의 연결 능력이 고득점의 핵심이다."
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "SIS–SIF–SIL 관계와 전체 SIF 경계를 정확히 설명한다.",
+        "SRS의 기능 요구와 무결성 요구를 Lifecycle에 연결한다.",
+        "Random Hardware Failure와 Systematic Failure의 통제방식 차이를 설명한다.",
+        "Verification, Validation, Functional Test와 Proof Test를 구분한다.",
+        "독립성·분리·공통원인·다양성의 Trade-off를 설명한다.",
+        "인증·Safety Manual·Proven in Use·Tool·Library의 증거 한계를 설명한다.",
+        "Modification, Bypass, Override, Audit와 Competence를 운영통제로 연결한다.",
+        "PFDavg/PFH/RRF와 근사식의 적용 가정을 명시한다."
+      ],
+      "note": "기능안전의 정량 목표와 체계적 고장 억제는 상호 대체할 수 없다. 표준 Clause, 인증범위와 정량 가정은 verify-first 한다.",
+      "revision_notes": [
+        "created_for=SOFTWARE_LLM_LANE_C_SW05",
+        "theory_core_and_cross-layer_safety_topic",
+        "quantitative targets and systematic assurance are complementary, not substitutes"
+      ],
+      "topic_label": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

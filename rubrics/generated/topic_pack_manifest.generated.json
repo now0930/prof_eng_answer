@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-06T13:04:11Z-generated-topic-pack-manifest",
+  "version": "2026-08-07T00:02:07Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 40,
+  "topic_count": 52,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -18,6 +18,36 @@
     },
     {
       "topic_id": "bode_frequency_response_stability_margin_bandwidth",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -187,6 +217,66 @@
       ]
     },
     {
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
       "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
       "files": [
         "fact_anchor.json",
@@ -227,7 +317,27 @@
       ]
     },
     {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
       "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -318,6 +428,16 @@
     },
     {
       "topic_id": "second_order_system_resonance_frequency_response",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

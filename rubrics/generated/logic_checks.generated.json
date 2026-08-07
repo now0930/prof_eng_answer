@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-06T13:04:11Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-07T00:02:07Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -51,6 +51,706 @@
       "question_type_checks": [],
       "next_practice_points": [],
       "de_claim_trust": {}
+    },
+    {
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "enabled": false,
+      "topic_name": "형상관리, 변경관리, Release, Backup, Rollback, Migration 및 Obsolescence 관리",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "difficulty_profile": "DESIGN_EVALUATION",
+      "topic_aliases": [
+        "형상관리 변경관리 릴리스 백업 롤백",
+        "configuration management change management release rollback",
+        "configuration item baseline version control",
+        "관리 기준선 형상항목 버전관리",
+        "Management of Change MOC software change",
+        "제어시스템 변경 승인 영향분석",
+        "release control release package deployment",
+        "PLC DCS software release management",
+        "backup restore rollback disaster recovery",
+        "제어시스템 백업 복구 롤백",
+        "as-built configuration consistency",
+        "현장 프로그램 저장소 일치성",
+        "migration cutover parallel operation",
+        "시스템 마이그레이션 컷오버 병행운전",
+        "legacy system migration management",
+        "레거시 시스템 전환",
+        "obsolescence management lifecycle",
+        "단종 노후화 수명주기 관리",
+        "firmware compatibility matrix",
+        "펌웨어 호환성 버전 조합",
+        "vendor lock-in license lifecycle",
+        "벤더 종속 라이선스 관리",
+        "spare lifecycle last time buy",
+        "예비품 수명주기 단종 대응",
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": []
+    },
+    {
+      "topic_id": "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
+      "enabled": true,
+      "topic_name": "제어논리, Sequence, Interlock, Permissive, Trip, 상태전이 및 Fail-Safe",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "DESIGN_EVALUATION",
+      "topic_aliases": [
+        "제어논리 Sequence Interlock Permissive Trip",
+        "시퀀스 상태전이 인터록 퍼미시브 트립",
+        "Sequence control state transition interlock permissive trip",
+        "운전 제어논리와 상태전이",
+        "Interlock Permissive Trip 차이",
+        "인터록 퍼미시브 트립 차이",
+        "Cause & Effect Voting First-out",
+        "원인 결과표 Voting First-out",
+        "Bypass Override 제어논리",
+        "바이패스 오버라이드 명령 우선순위",
+        "Fail-safe Watchdog Restart Recovery",
+        "Fail safe watchdog 재기동 복구논리",
+        "Sequence abnormal transition prevention",
+        "시퀀스 이상전이 방지",
+        "Trip latch reset logic",
+        "트립 래치 리셋 조건",
+        "Manual Auto Local Remote command arbitration",
+        "수동 자동 로컬 리모트 명령 중재",
+        "PLC sequence feedback timeout one-shot latch",
+        "상태전이표 mutual exclusion illegal state recovery"
+      ],
+      "fatal_checks": [
+        {
+          "id": "sw02_fatal_permissive_equals_trip",
+          "severity": "fatal",
+          "message": "Permissive와 Trip은 같은 논리이다.",
+          "description": "명시적 반대 주장만 검출한다. Permissive는 기동·전이 전의 허가조건이고 Trip은 운전 중 보호조건에 의한 강제정지 동작이다.",
+          "correct_rule": "Permissive는 기동·전이 전의 허가조건이고 Trip은 운전 중 보호조건에 의한 강제정지 동작이다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Permissive와\\ Trip은\\ 같은\\ 논리이다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Permissive와 Trip은 같은 논리이다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_interlock_alarm_only",
+          "severity": "fatal",
+          "message": "Interlock은 Alarm만 발생시키며 동작을 차단하거나 강제하지 않는다.",
+          "description": "명시적 반대 주장만 검출한다. Interlock은 금지 또는 강제동작을 수행하는 제약논리이며 Alarm 표시는 별도 운전정보 기능이다.",
+          "correct_rule": "Interlock은 금지 또는 강제동작을 수행하는 제약논리이며 Alarm 표시는 별도 운전정보 기능이다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Interlock은\\ Alarm만\\ 발생시키며\\ 동작을\\ 차단하거나\\ 강제하지\\ 않는다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Interlock은 Alarm만 발생시키며 동작을 차단하거나 강제하지 않는다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_trip_unconditional_auto_reset",
+          "severity": "fatal",
+          "message": "Trip 원인이 사라지면 즉시 자동 Reset하여 운전을 재개해야 한다.",
+          "description": "명시적 반대 주장만 검출한다. Latch 적용 Trip은 원인 제거와 안전조건·권한 확인 후 Reset해야 하며 자동복귀 여부는 위험도와 설계에 따라 제한한다.",
+          "correct_rule": "Latch 적용 Trip은 원인 제거와 안전조건·권한 확인 후 Reset해야 하며 자동복귀 여부는 위험도와 설계에 따라 제한한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Trip\\ 원인이\\ 사라지면\\ 즉시\\ 자동\\ Reset하여\\ 운전을\\ 재개해야\\ 한다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Trip 원인이 사라지면 즉시 자동 Reset하여 운전을 재개해야 한다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_bypass_unmanaged",
+          "severity": "fatal",
+          "message": "Bypass는 점검 편의를 위해 승인이나 시간제한 없이 계속 유지해도 된다.",
+          "description": "명시적 반대 주장만 검출한다. Bypass는 승인, 표시, 제한시간, 대체조치와 복구확인이 필요한 관리 기능이다.",
+          "correct_rule": "Bypass는 승인, 표시, 제한시간, 대체조치와 복구확인이 필요한 관리 기능이다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Bypass는\\ 점검\\ 편의를\\ 위해\\ 승인이나\\ 시간제한\\ 없이\\ 계속\\ 유지해도\\ 된다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Bypass는 점검 편의를 위해 승인이나 시간제한 없이 계속 유지해도 된다."
+          ],
+          "affected_layers": [
+            "C",
+            "D",
+            "E"
+          ]
+        },
+        {
+          "id": "sw02_fatal_fail_safe_always_close",
+          "severity": "fatal",
+          "message": "Fail-safe는 모든 설비를 무조건 Fail-close 또는 De-energize로 만드는 것이다.",
+          "description": "명시적 반대 주장만 검출한다. 안전상태는 공정 위험과 최종요소 기능에 따라 Fail-close, Fail-open, Hold 또는 Controlled stop 등으로 정한다.",
+          "correct_rule": "안전상태는 공정 위험과 최종요소 기능에 따라 Fail-close, Fail-open, Hold 또는 Controlled stop 등으로 정한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Fail\\-safe는\\ 모든\\ 설비를\\ 무조건\\ Fail\\-close\\ 또는\\ De\\-energize로\\ 만드는\\ 것이다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Fail-safe는 모든 설비를 무조건 Fail-close 또는 De-energize로 만드는 것이다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_voting_always_safer",
+          "severity": "fatal",
+          "message": "Voting 채널 수를 늘리면 독립성이나 공통원인과 관계없이 항상 더 안전해진다.",
+          "description": "명시적 반대 주장만 검출한다. Voting 성능은 M-out-of-N 구조, 채널 독립성, 공통원인, 진단과 불일치 처리에 좌우된다.",
+          "correct_rule": "Voting 성능은 M-out-of-N 구조, 채널 독립성, 공통원인, 진단과 불일치 처리에 좌우된다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Voting\\ 채널\\ 수를\\ 늘리면\\ 독립성이나\\ 공통원인과\\ 관계없이\\ 항상\\ 더\\ 안전해진다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Voting 채널 수를 늘리면 독립성이나 공통원인과 관계없이 항상 더 안전해진다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_first_out_last_cause",
+          "severity": "fatal",
+          "message": "First-out은 마지막에 남은 Trip 신호 또는 가장 우선순위가 높은 Alarm을 기록한다.",
+          "description": "명시적 반대 주장만 검출한다. First-out은 연쇄 결과 이전에 최초로 발생한 유효 원인을 시간순으로 고정한다.",
+          "correct_rule": "First-out은 연쇄 결과 이전에 최초로 발생한 유효 원인을 시간순으로 고정한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?First\\-out은\\ 마지막에\\ 남은\\ Trip\\ 신호\\ 또는\\ 가장\\ 우선순위가\\ 높은\\ Alarm을\\ 기록한다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "First-out은 마지막에 남은 Trip 신호 또는 가장 우선순위가 높은 Alarm을 기록한다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_watchdog_monitor_only",
+          "severity": "fatal",
+          "message": "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다.",
+          "description": "명시적 반대 주장만 검출한다. 제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
+          "correct_rule": "제어기 Task, 필수 통신, 원격 I/O 등 운전·보호에 필요한 Watchdog Timeout은 진단과 함께 Hold, Controlled stop 또는 Safe action으로 연결한다. 비중요 Historian·상태수집·진단경로는 위험분석에 따라 Alarm-only 처리가 가능하다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Watchdog는\\ 상태를\\ 표시만\\ 하며\\ 제어동작과\\ 연결할\\ 필요가\\ 없다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Watchdog는 상태를 표시만 하며 제어동작과 연결할 필요가 없다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_restart_blind_resume",
+          "severity": "fatal",
+          "message": "전원이나 통신이 복구되면 이전 출력과 Sequence Step을 조건 확인 없이 그대로 복원해야 한다.",
+          "description": "명시적 반대 주장만 검출한다. Restart는 실제 설비상태 재수집, 상태 일치화, Permissive 확인, Latch 보존과 승인 조건을 거쳐야 한다.",
+          "correct_rule": "Restart는 실제 설비상태 재수집, 상태 일치화, Permissive 확인, Latch 보존과 승인 조건을 거쳐야 한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?전원이나\\ 통신이\\ 복구되면\\ 이전\\ 출력과\\ Sequence\\ Step을\\ 조건\\ 확인\\ 없이\\ 그대로\\ 복원해야\\ 한다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "전원이나 통신이 복구되면 이전 출력과 Sequence Step을 조건 확인 없이 그대로 복원해야 한다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_cause_effect_is_executable_complete",
+          "severity": "fatal",
+          "message": "Cause & Effect 표만 작성하면 상태전이, Timer, Reset, 우선순위를 포함한 실행논리가 완성된다.",
+          "description": "명시적 반대 주장만 검출한다. Cause & Effect는 설계 의도를 표현하지만 상세 Sequence와 상태전이 사양 및 실행논리 검증이 별도로 필요하다.",
+          "correct_rule": "Cause & Effect는 설계 의도를 표현하지만 상세 Sequence와 상태전이 사양 및 실행논리 검증이 별도로 필요하다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Cause\\ \\&\\ Effect\\ 표만\\ 작성하면\\ 상태전이,\\ Timer,\\ Reset,\\ 우선순위를\\ 포함한\\ 실행논리가\\ 완성된다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Cause & Effect 표만 작성하면 상태전이, Timer, Reset, 우선순위를 포함한 실행논리가 완성된다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_timer_is_feedback",
+          "severity": "fatal",
+          "message": "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다.",
+          "description": "명시적 반대 주장만 검출한다. 물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
+          "correct_rule": "물리적 동작 확인이 필요한 Step에서 Timer는 최대 허용시간 또는 지연조건일 뿐이며 완료는 필요한 설비 Feedback으로 확인한다. 반면 Purge 유지시간·안정화 대기·혼합시간처럼 시간 자체가 요구조건인 Step은 Timer 완료를 정상 완료조건으로 사용할 수 있다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?밸브\\ 개폐·모터\\ 기동·위치이동처럼\\ 물리적\\ 동작\\ 확인이\\ 필요한\\ Step도\\ Timer가\\ 만료되면\\ 실제\\ 설비\\ Feedback과\\ 관계없이\\ 완료로\\ 판단해도\\ 된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "밸브 개폐·모터 기동·위치이동처럼 물리적 동작 확인이 필요한 Step도 Timer가 만료되면 실제 설비 Feedback과 관계없이 완료로 판단해도 된다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_override_equals_bypass",
+          "severity": "fatal",
+          "message": "Override와 Bypass는 완전히 같은 기능이다.",
+          "description": "명시적 반대 주장만 검출한다. Override는 명령 우선 강제이고 Bypass는 입력 또는 보호경로 우회이므로 목적과 통제가 다르다.",
+          "correct_rule": "Override는 명령 우선 강제이고 Bypass는 입력 또는 보호경로 우회이므로 목적과 통제가 다르다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Override와\\ Bypass는\\ 완전히\\ 같은\\ 기능이다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Override와 Bypass는 완전히 같은 기능이다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_shutdown_equals_trip",
+          "severity": "fatal",
+          "message": "정상 Shutdown과 Trip은 목적, 우선순위, 동작속도가 모두 같다.",
+          "description": "명시적 반대 주장만 검출한다. 정상정지는 순차 운전절차이고 Trip은 보호목적의 우선 강제동작으로 구분한다.",
+          "correct_rule": "정상정지는 순차 운전절차이고 Trip은 보호목적의 우선 강제동작으로 구분한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?정상\\ Shutdown과\\ Trip은\\ 목적,\\ 우선순위,\\ 동작속도가\\ 모두\\ 같다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "정상 Shutdown과 Trip은 목적, 우선순위, 동작속도가 모두 같다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_all_interlocks_are_sis",
+          "severity": "fatal",
+          "message": "모든 Interlock은 자동으로 SIS이며 SIL 등급을 가진다.",
+          "description": "명시적 반대 주장만 검출한다. 운전 Interlock과 안전기능은 구분해야 하며 SIL·안전수명주기 판단은 SW-05 범위의 별도 분석이 필요하다.",
+          "correct_rule": "운전 Interlock과 안전기능은 구분해야 하며 SIL·안전수명주기 판단은 SW-05 범위의 별도 분석이 필요하다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?모든\\ Interlock은\\ 자동으로\\ SIS이며\\ SIL\\ 등급을\\ 가진다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "모든 Interlock은 자동으로 SIS이며 SIL 등급을 가진다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_manual_disables_protection",
+          "severity": "fatal",
+          "message": "Manual mode에서는 보호 Interlock과 Trip을 모두 무효화해도 된다.",
+          "description": "명시적 반대 주장만 검출한다. Manual mode에서도 필수 보호논리는 유지하고 허용 가능한 수동조작 범위를 제한해야 한다.",
+          "correct_rule": "Manual mode에서도 필수 보호논리는 유지하고 허용 가능한 수동조작 범위를 제한해야 한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Manual\\ mode에서는\\ 보호\\ Interlock과\\ Trip을\\ 모두\\ 무효화해도\\ 된다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Manual mode에서는 보호 Interlock과 Trip을 모두 무효화해도 된다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw02_fatal_bad_signal_is_healthy",
+          "severity": "fatal",
+          "message": "통신단절이나 Bad quality 입력은 마지막 값이 남아 있으므로 정상 신호로 간주한다.",
+          "description": "명시적 반대 주장만 검출한다. Bad quality와 stale data는 별도 상태로 처리하고 Hold, 대체값, Degraded mode 또는 Trip 정책을 적용한다.",
+          "correct_rule": "Bad quality와 stale data는 별도 상태로 처리하고 Hold, 대체값, Degraded mode 또는 Trip 정책을 적용한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?통신단절이나\\ Bad\\ quality\\ 입력은\\ 마지막\\ 값이\\ 남아\\ 있으므로\\ 정상\\ 신호로\\ 간주한다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "통신단절이나 Bad quality 입력은 마지막 값이 남아 있으므로 정상 신호로 간주한다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "Permissive·Interlock·Trip을 목적, 성립시점, 출력동작, Latch와 Reset으로 비교표 작성.",
+        "State transition 식과 허용 전이표를 이용해 정상·실패·복구 경로를 함께 작성.",
+        "2oo3 Voting, First-out, Bad quality와 Bypass 시나리오를 Cause & Effect에 연결.",
+        "Watchdog Timeout과 통신복구 시 Hold·Controlled stop·재기동 조건을 설계.",
+        "Cold/Warm restart 시 실제 설비상태와 메모리 상태를 일치시키는 절차 작성."
+      ],
+      "de_claim_trust": {
+        "formula_claims": "논리식은 변수 정의와 우선순위, Latch·Reset 조건 및 실제 피드백 위치가 일치할 때 신뢰한다.",
+        "field_claims": "Fail-safe, Bypass, Auto restart 주장은 공정 위험, 권한, 표시, 제한조건과 복구검증이 함께 있을 때 신뢰한다."
+      }
+    },
+    {
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "enabled": true,
+      "topic_name": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "question_type": "PROCEDURE",
+      "difficulty_profile": "DESIGN_EVALUATION",
+      "topic_aliases": [
+        "제어 소프트웨어 프로젝트 FAT SAT 시운전",
+        "제어 시스템 설계문서 FAT SAT 인수",
+        "control software project FAT SAT commissioning",
+        "URS FRS FDS SDS 제어 프로젝트",
+        "제어 프로젝트 문서 추적 FAT 시험",
+        "Control philosophy URS FRS FDS",
+        "I/O list Tag list Alarm Interlock list",
+        "Cause Effect logic diagram FAT",
+        "공장 인수시험 현장 인수시험 비교",
+        "FAT SAT loop test site integration",
+        "제어시스템 시운전 성능시험 인수",
+        "commissioning performance test acceptance",
+        "Punch list As-built handover 제어시스템",
+        "제어 소프트웨어 인수 문서 handover",
+        "현장 loop test SAT 시운전 절차",
+        "프로젝트 feasibility scope schedule cost 제어",
+        "제어 프로젝트 시험명세 acceptance criteria",
+        "FAT simulation SAT field wiring",
+        "제어시스템 구성 baseline backup 인계",
+        "프로젝트 변경관리 punch closure 회귀시험"
+      ],
+      "fatal_checks": [
+        {
+          "id": "sw10_fatal_fat_equals_sat",
+          "severity": "fatal",
+          "message": "FAT와 SAT는 시험장소만 다를 뿐 완전히 같은 시험이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. FAT는 통제된 제작·공급자 환경에서 기능과 구성 baseline을 검증하고, SAT는 실제 현장 설치·배선·인터페이스 조건을 검증하므로 상호보완적이다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?FAT와\\ SAT는\\ 시험장소만\\ 다를\\ 뿐\\ 완전히\\ 같은\\ 시험이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "FAT와 SAT는 시험장소만 다를 뿐 완전히 같은 시험이다."
+          ],
+          "correct_rule": "FAT는 통제된 제작·공급자 환경에서 기능과 구성 baseline을 검증하고, SAT는 실제 현장 설치·배선·인터페이스 조건을 검증하므로 상호보완적이다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_fat_proves_field",
+          "severity": "fatal",
+          "message": "FAT 합격만으로 실제 현장 배선과 설치환경까지 모두 검증된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. FAT는 현장 배선·설치환경·실공정 부하의 한계가 있으므로 SAT·Loop test와 현장 통합시험이 필요하다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?FAT\\ 합격만으로\\ 실제\\ 현장\\ 배선과\\ 설치환경까지\\ 모두\\ 검증된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "FAT 합격만으로 실제 현장 배선과 설치환경까지 모두 검증된다."
+          ],
+          "correct_rule": "FAT는 현장 배선·설치환경·실공정 부하의 한계가 있으므로 SAT·Loop test와 현장 통합시험이 필요하다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_fat_skips_sat",
+          "severity": "fatal",
+          "message": "FAT에 합격하면 SAT는 생략해도 된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. FAT 합격은 SAT 생략 근거가 아니며 실제 현장조건에서 별도 SAT를 수행해야 한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?FAT에\\ 합격하면\\ SAT는\\ 생략해도\\ 된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "FAT에 합격하면 SAT는 생략해도 된다."
+          ],
+          "correct_rule": "FAT 합격은 SAT 생략 근거가 아니며 실제 현장조건에서 별도 SAT를 수행해야 한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_loop_screen_only",
+          "severity": "fatal",
+          "message": "Loop test는 HMI 화면의 값만 확인하면 완료된다.",
+          "description": "명시적 반대 주장만 검출한다. Loop test는 해당 Loop의 현장 입력 또는 출력 종단까지 신호경로를 확인한다. 폐루프 제어 Loop는 센서·배선·I/O·제어기·HMI와 최종요소까지 확인하고, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Loop\\ test는\\ HMI\\ 화면의\\ 값만\\ 확인하면\\ 완료된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Loop test는 HMI 화면의 값만 확인하면 완료된다."
+          ],
+          "correct_rule": "Loop test는 해당 Loop의 현장 입력 또는 출력 종단까지 신호경로를 확인한다. 폐루프 제어 Loop는 센서·배선·I/O·제어기·HMI와 최종요소까지 확인하고, 최종요소가 없는 정보·감시 Loop는 해당 입력 종단까지 확인한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_commission_before_safe",
+          "severity": "fatal",
+          "message": "안전조건과 사전점검이 완료되지 않아도 시운전을 먼저 시작할 수 있다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Commissioning은 승인된 절차, 안전조건, Energization 허가와 선행점검 완료 후 단계적으로 수행한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?안전조건과\\ 사전점검이\\ 완료되지\\ 않아도\\ 시운전을\\ 먼저\\ 시작할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "안전조건과 사전점검이 완료되지 않아도 시운전을 먼저 시작할 수 있다."
+          ],
+          "correct_rule": "Commissioning은 승인된 절차, 안전조건, Energization 허가와 선행점검 완료 후 단계적으로 수행한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_performance_no_criteria",
+          "severity": "fatal",
+          "message": "성능시험은 정량적인 운전조건과 수용기준 없이 정상 동작만 보면 된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Performance test는 조건·기간·측정방법·허용기준을 사전에 정의하여 계약 성능을 정량 검증한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?성능시험은\\ 정량적인\\ 운전조건과\\ 수용기준\\ 없이\\ 정상\\ 동작만\\ 보면\\ 된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "성능시험은 정량적인 운전조건과 수용기준 없이 정상 동작만 보면 된다."
+          ],
+          "correct_rule": "Performance test는 조건·기간·측정방법·허용기준을 사전에 정의하여 계약 성능을 정량 검증한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_accept_install_only",
+          "severity": "fatal",
+          "message": "설치가 완료되면 시험결과와 문서가 없어도 자동으로 인수된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Acceptance는 요구사항, 시험결과, 성능, 문서, 교육, 예비품과 Punch 조건을 종합하여 승인한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?설치가\\ 완료되면\\ 시험결과와\\ 문서가\\ 없어도\\ 자동으로\\ 인수된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "설치가 완료되면 시험결과와 문서가 없어도 자동으로 인수된다."
+          ],
+          "correct_rule": "Acceptance는 요구사항, 시험결과, 성능, 문서, 교육, 예비품과 Punch 조건을 종합하여 승인한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_punch_all_open",
+          "severity": "fatal",
+          "message": "Punch list 항목은 등급과 무관하게 인수 후 무기한 미완료로 남겨도 된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Punch는 영향에 따라 등급화하고 인수 전 필수 closure 또는 승인된 조건부 인수와 목표일·책임·재시험 증적을 관리한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Punch\\ list\\ 항목은\\ 등급과\\ 무관하게\\ 인수\\ 후\\ 무기한\\ 미완료로\\ 남겨도\\ 된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Punch list 항목은 등급과 무관하게 인수 후 무기한 미완료로 남겨도 된다."
+          ],
+          "correct_rule": "Punch는 영향에 따라 등급화하고 인수 전 필수 closure 또는 승인된 조건부 인수와 목표일·책임·재시험 증적을 관리한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_asbuilt_design_version",
+          "severity": "fatal",
+          "message": "As-built 문서는 최초 설계본을 그대로 제출해도 된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. As-built는 최종 설치·설정·배선·Logic·버전과 일치해야 하며 승인된 변경을 모두 반영한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?As\\-built\\ 문서는\\ 최초\\ 설계본을\\ 그대로\\ 제출해도\\ 된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "As-built 문서는 최초 설계본을 그대로 제출해도 된다."
+          ],
+          "correct_rule": "As-built는 최종 설치·설정·배선·Logic·버전과 일치해야 하며 승인된 변경을 모두 반영한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_documents_interchangeable",
+          "severity": "fatal",
+          "message": "URS, FRS, FDS와 SDS는 이름만 다르고 서로 대체 가능한 동일 문서이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. URS·FRS·FDS·SDS는 사용자 요구, 기능, 설계, 상세구현 수준이 다르며 식별자와 추적성으로 연결한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?URS,\\ FRS,\\ FDS와\\ SDS는\\ 이름만\\ 다르고\\ 서로\\ 대체\\ 가능한\\ 동일\\ 문서이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "URS, FRS, FDS와 SDS는 이름만 다르고 서로 대체 가능한 동일 문서이다."
+          ],
+          "correct_rule": "URS·FRS·FDS·SDS는 사용자 요구, 기능, 설계, 상세구현 수준이 다르며 식별자와 추적성으로 연결한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_cause_effect_alarm_only",
+          "severity": "fatal",
+          "message": "Cause & Effect는 Alarm 목록만 나열하는 문서이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Cause & Effect는 원인과 Alarm·Trip·Shutdown·출력 동작, 지연·Voting·Latch·Reset 관계를 행렬로 표현한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Cause\\ \\&\\ Effect는\\ Alarm\\ 목록만\\ 나열하는\\ 문서이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Cause & Effect는 Alarm 목록만 나열하는 문서이다."
+          ],
+          "correct_rule": "Cause & Effect는 원인과 Alarm·Trip·Shutdown·출력 동작, 지연·Voting·Latch·Reset 관계를 행렬로 표현한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_io_equals_tag",
+          "severity": "fatal",
+          "message": "I/O list와 Tag list는 완전히 같은 목록이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. I/O list는 채널·신호·스케일링과 연결정보를, Tag list는 객체 식별·서비스·위치와 문서연계를 관리한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?I/O\\ list와\\ Tag\\ list는\\ 완전히\\ 같은\\ 목록이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "I/O list와 Tag list는 완전히 같은 목록이다."
+          ],
+          "correct_rule": "I/O list는 채널·신호·스케일링과 연결정보를, Tag list는 객체 식별·서비스·위치와 문서연계를 관리한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_change_no_retest",
+          "severity": "fatal",
+          "message": "FAT 이후 소프트웨어를 변경해도 영향분석과 재시험은 필요 없다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. FAT 이후 변경은 영향분석, 승인, baseline·문서 갱신과 선택된 회귀·현장 재시험을 수행한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?FAT\\ 이후\\ 소프트웨어를\\ 변경해도\\ 영향분석과\\ 재시험은\\ 필요\\ 없다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "FAT 이후 소프트웨어를 변경해도 영향분석과 재시험은 필요 없다."
+          ],
+          "correct_rule": "FAT 이후 변경은 영향분석, 승인, baseline·문서 갱신과 선택된 회귀·현장 재시험을 수행한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_accept_no_approved_test",
+          "severity": "fatal",
+          "message": "승인된 시험명세가 없어도 시험자의 경험만으로 FAT와 SAT 합격을 판정할 수 있다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. FAT·SAT는 승인된 시험명세의 사전조건, 절차, 예상결과, 허용오차와 판정기준에 따라 증적을 남긴다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?승인된\\ 시험명세가\\ 없어도\\ 시험자의\\ 경험만으로\\ FAT와\\ SAT\\ 합격을\\ 판정할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "승인된 시험명세가 없어도 시험자의 경험만으로 FAT와 SAT 합격을 판정할 수 있다."
+          ],
+          "correct_rule": "FAT·SAT는 승인된 시험명세의 사전조건, 절차, 예상결과, 허용오차와 판정기준에 따라 증적을 남긴다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_site_integration_unneeded",
+          "severity": "fatal",
+          "message": "개별 장비가 정상이라면 시스템 간 Site integration test는 필요 없다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 개별 장비 정상과 별개로 시스템 간 데이터·명령·Handshake·시간동기·장애복구를 현장에서 검증해야 한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?개별\\ 장비가\\ 정상이라면\\ 시스템\\ 간\\ Site\\ integration\\ test는\\ 필요\\ 없다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "개별 장비가 정상이라면 시스템 간 Site integration test는 필요 없다."
+          ],
+          "correct_rule": "개별 장비 정상과 별개로 시스템 간 데이터·명령·Handshake·시간동기·장애복구를 현장에서 검증해야 한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw10_fatal_sw10_owns_vmodel",
+          "severity": "fatal",
+          "message": "일반 소프트웨어 V-Model과 단위시험 체계는 전적으로 SW-10의 현장 인수 범위이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 일반 SW lifecycle·V-Model·단위·통합·시스템시험 체계는 SW-04가 소유하고 SW-10은 프로젝트 문서·FAT·SAT·시운전·인수를 소유한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?일반\\ 소프트웨어\\ V\\-Model과\\ 단위시험\\ 체계는\\ 전적으로\\ SW\\-10의\\ 현장\\ 인수\\ 범위이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "일반 소프트웨어 V-Model과 단위시험 체계는 전적으로 SW-10의 현장 인수 범위이다."
+          ],
+          "correct_rule": "일반 SW lifecycle·V-Model·단위·통합·시스템시험 체계는 SW-04가 소유하고 SW-10은 프로젝트 문서·FAT·SAT·시운전·인수를 소유한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        }
+      ],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "URS·FRS·FDS·SDS 추적표를 정리한다.",
+        "FAT·SAT·Loop·Site integration 차이를 표로 비교한다.",
+        "Commissioning부터 Acceptance까지 단계별 진입·종료기준을 정리한다."
+      ],
+      "de_claim_trust": {
+        "formula_claims": "수식보다 문서·시험 단계의 논리관계와 수용기준을 우선 확인한다.",
+        "field_claims": "프로젝트별 명칭 차이는 허용하되 시험환경·대상·판정기준·증적 관계를 확인한다."
+      }
     },
     {
       "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
@@ -384,6 +1084,760 @@
       "de_claim_trust": {}
     },
     {
+      "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+      "enabled": false,
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "reason": "산업데이터 Architecture와 품질 판단은 문맥·가정·시스템 경계를 함께 해석해야 한다."
+    },
+    {
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "enabled": true,
+      "topic_name": "HMI·SCADA·Alarm·Setpoint·Trip·Interlock·SOE 및 운전정보 관리",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "DESIGN_EVALUATION",
+      "topic_aliases": [
+        "HMI SCADA alarm management SOE",
+        "고성능 HMI 경보 합리화 SOE",
+        "HMI SCADA Alarm Setpoint Trip Interlock",
+        "운전정보 경보 설정값 이벤트순서",
+        "alarm philosophy rationalization priority",
+        "경보 철학 합리화 우선순위",
+        "alarm deadband delay shelving suppression",
+        "경보 데드밴드 지연 쉘빙 억제",
+        "setpoint alarm trip interlock value management",
+        "설정값 경보값 트립값 인터록값 관리",
+        "sequence of events audit trail time synchronization",
+        "SOE 감사추적 시각동기",
+        "high performance HMI display hierarchy",
+        "고성능 HMI 화면계층 상황인식",
+        "operator authority human error prevention",
+        "운전자 권한 휴먼에러 방지",
+        "alarm flood chattering standing alarm",
+        "경보폭주 채터링 상시경보",
+        "abnormal situation management HMI alarm",
+        "비정상상황 관리 SCADA 운전정보"
+      ],
+      "fatal_checks": [
+        {
+          "id": "sw03_fatal_all_events_are_alarms",
+          "severity": "fatal",
+          "message": "모든 Event와 Status는 Alarm으로 만들어야 한다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Alarm은 정해진 시간 안에 운전자 조치가 필요한 비정상 상태만 대상으로 하며 단순 Event·Status와 구분한다.",
+          "correct_rule": "Alarm은 정해진 시간 안에 운전자 조치가 필요한 비정상 상태만 대상으로 하며 단순 Event·Status와 구분한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?모든\\ Event와\\ Status는\\ Alarm으로\\ 만들어야\\ 한다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "모든 Event와 Status는 Alarm으로 만들어야 한다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_alarm_equals_trip_interlock",
+          "severity": "fatal",
+          "message": "Alarm, Trip과 Interlock은 같은 기능이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Alarm은 운전자 조치를 지원하는 정보 기능이고 Trip·Interlock은 자동 보호 또는 동작제약 논리이다.",
+          "correct_rule": "Alarm은 운전자 조치를 지원하는 정보 기능이고 Trip·Interlock은 자동 보호 또는 동작제약 논리이다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Alarm,\\ Trip과\\ Interlock은\\ 같은\\ 기능이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Alarm, Trip과 Interlock은 같은 기능이다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_ack_clears_condition",
+          "severity": "fatal",
+          "message": "Alarm을 Acknowledge하면 공정 원인과 Alarm 조건이 해제된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Acknowledge는 운전자 인지 기록이며 Process condition과 Active 상태를 해제하지 않는다.",
+          "correct_rule": "Acknowledge는 운전자 인지 기록이며 Process condition과 Active 상태를 해제하지 않는다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Alarm을\\ Acknowledge하면\\ 공정\\ 원인과\\ Alarm\\ 조건이\\ 해제된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Alarm을 Acknowledge하면 공정 원인과 Alarm 조건이 해제된다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_priority_by_pv_only",
+          "severity": "fatal",
+          "message": "Alarm 우선순위는 측정값의 크기만으로 정한다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Alarm 우선순위는 결과 심각도와 허용 응답시간을 함께 평가하여 정한다.",
+          "correct_rule": "Alarm 우선순위는 결과 심각도와 허용 응답시간을 함께 평가하여 정한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Alarm\\ 우선순위는\\ 측정값의\\ 크기만으로\\ 정한다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Alarm 우선순위는 측정값의 크기만으로 정한다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_deadband_equals_delay",
+          "severity": "fatal",
+          "message": "Alarm Deadband와 Delay는 같은 기능이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Deadband는 값의 복귀 이력폭이고 Delay는 조건 지속시간을 이용하는 시간 필터이다.",
+          "correct_rule": "Deadband는 값의 복귀 이력폭이고 Delay는 조건 지속시간을 이용하는 시간 필터이다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Alarm\\ Deadband와\\ Delay는\\ 같은\\ 기능이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Alarm Deadband와 Delay는 같은 기능이다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_shelving_deletes_history",
+          "severity": "fatal",
+          "message": "Shelving하면 Alarm 정의와 이력이 삭제된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Shelving은 제한시간 동안 Active display에서 임시로 숨기는 기능이며 정의와 이력은 유지한다.",
+          "correct_rule": "Shelving은 제한시간 동안 Active display에서 임시로 숨기는 기능이며 정의와 이력은 유지한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Shelving하면\\ Alarm\\ 정의와\\ 이력이\\ 삭제된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Shelving하면 Alarm 정의와 이력이 삭제된다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_suppression_equals_shelving",
+          "severity": "fatal",
+          "message": "Suppression과 Shelving은 운전자가 임의로 Alarm을 숨기는 동일 기능이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Suppression은 설계된 상태·논리조건에 따른 자동 제외이고 Shelving은 권한 있는 운전자의 제한시간 임시 조치이다.",
+          "correct_rule": "Suppression은 설계된 상태·논리조건에 따른 자동 제외이고 Shelving은 권한 있는 운전자의 제한시간 임시 조치이다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Suppression과\\ Shelving은\\ 운전자가\\ 임의로\\ Alarm을\\ 숨기는\\ 동일\\ 기능이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Suppression과 Shelving은 운전자가 임의로 Alarm을 숨기는 동일 기능이다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_indefinite_shelving",
+          "severity": "fatal",
+          "message": "Alarm Shelving은 사유와 만료시간 없이 무기한 유지해도 된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Shelving은 승인권한, 사유, 제한시간, 표시, 만료와 복구확인을 관리해야 한다.",
+          "correct_rule": "Shelving은 승인권한, 사유, 제한시간, 표시, 만료와 복구확인을 관리해야 한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Alarm\\ Shelving은\\ 사유와\\ 만료시간\\ 없이\\ 무기한\\ 유지해도\\ 된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Alarm Shelving은 사유와 만료시간 없이 무기한 유지해도 된다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_values_interchangeable",
+          "severity": "fatal",
+          "message": "운전 Setpoint, Alarm value, Trip value와 Interlock value는 서로 바꾸어 사용해도 된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 네 값은 목적과 소유권이 다르므로 근거와 변경관리를 분리해야 한다.",
+          "correct_rule": "네 값은 목적과 소유권이 다르므로 근거와 변경관리를 분리해야 한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?운전\\ Setpoint,\\ Alarm\\ value,\\ Trip\\ value와\\ Interlock\\ value는\\ 서로\\ 바꾸어\\ 사용해도\\ 된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "운전 Setpoint, Alarm value, Trip value와 Interlock value는 서로 바꾸어 사용해도 된다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_soe_without_sync",
+          "severity": "fatal",
+          "message": "시각동기가 없어도 SOE의 이벤트 선후관계는 항상 정확하다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. SOE의 인과순서를 신뢰하려면 공통 시간동기, Timestamp 출처, 정확도와 Time quality가 필요하다.",
+          "correct_rule": "SOE의 인과순서를 신뢰하려면 공통 시간동기, Timestamp 출처, 정확도와 Time quality가 필요하다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?시각동기가\\ 없어도\\ SOE의\\ 이벤트\\ 선후관계는\\ 항상\\ 정확하다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "시각동기가 없어도 SOE의 이벤트 선후관계는 항상 정확하다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_historian_equals_soe",
+          "severity": "fatal",
+          "message": "Historian 표본시간만으로 SOE와 동일한 이벤트 순서를 항상 재현할 수 있다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Historian 추세와 SOE 이벤트순서는 표본주기와 Timestamp 출처가 다르므로 동일하다고 단정할 수 없다.",
+          "correct_rule": "Historian 추세와 SOE 이벤트순서는 표본주기와 Timestamp 출처가 다르므로 동일하다고 단정할 수 없다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Historian\\ 표본시간만으로\\ SOE와\\ 동일한\\ 이벤트\\ 순서를\\ 항상\\ 재현할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Historian 표본시간만으로 SOE와 동일한 이벤트 순서를 항상 재현할 수 있다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_audit_equals_soe",
+          "severity": "fatal",
+          "message": "Audit trail과 SOE는 동일한 기록이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Audit trail은 사용자 행위와 변경을 기록하고 SOE는 공정·설비 상태변화의 순서를 기록한다.",
+          "correct_rule": "Audit trail은 사용자 행위와 변경을 기록하고 SOE는 공정·설비 상태변화의 순서를 기록한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Audit\\ trail과\\ SOE는\\ 동일한\\ 기록이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Audit trail과 SOE는 동일한 기록이다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_bright_colors",
+          "severity": "fatal",
+          "message": "High-performance HMI는 밝은 색을 많이 사용할수록 상황인식이 좋아진다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. High-performance HMI는 색상을 제한된 비정상 의미에 일관되게 사용하여 시각적 우선순위를 만든다.",
+          "correct_rule": "High-performance HMI는 색상을 제한된 비정상 의미에 일관되게 사용하여 시각적 우선순위를 만든다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?High\\-performance\\ HMI는\\ 밝은\\ 색을\\ 많이\\ 사용할수록\\ 상황인식이\\ 좋아진다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "High-performance HMI는 밝은 색을 많이 사용할수록 상황인식이 좋아진다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_unrestricted_authority",
+          "severity": "fatal",
+          "message": "운전자에게 모든 Setpoint와 보호관련 값을 제한 없이 변경하게 해야 안전하다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 중요 값과 조작은 역할기반 최소권한, 승인, 확인과 Audit trail로 통제해야 한다.",
+          "correct_rule": "중요 값과 조작은 역할기반 최소권한, 승인, 확인과 Audit trail로 통제해야 한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?운전자에게\\ 모든\\ Setpoint와\\ 보호관련\\ 값을\\ 제한\\ 없이\\ 변경하게\\ 해야\\ 안전하다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "운전자에게 모든 Setpoint와 보호관련 값을 제한 없이 변경하게 해야 안전하다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_command_proves_action",
+          "severity": "fatal",
+          "message": "HMI에서 명령을 전송하면 현장설비 동작이 완료된 것으로 판단한다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 명령 전송과 실제 Feedback을 분리하고 Timeout·불일치·품질상태를 확인해야 한다.",
+          "correct_rule": "명령 전송과 실제 Feedback을 분리하고 Timeout·불일치·품질상태를 확인해야 한다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?HMI에서\\ 명령을\\ 전송하면\\ 현장설비\\ 동작이\\ 완료된\\ 것으로\\ 판단한다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "HMI에서 명령을 전송하면 현장설비 동작이 완료된 것으로 판단한다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        },
+        {
+          "id": "sw03_fatal_raise_all_priorities",
+          "severity": "fatal",
+          "message": "Alarm flood는 모든 Alarm 우선순위를 높이면 해결된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Alarm flood는 원인 제거, 합리화, Chattering 개선, 상태기반 Suppression과 화면·절차 개선으로 줄인다.",
+          "correct_rule": "Alarm flood는 원인 제거, 합리화, Chattering 개선, 상태기반 Suppression과 화면·절차 개선으로 줄인다.",
+          "recommended_ceiling": 15.0,
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Alarm\\ flood는\\ 모든\\ Alarm\\ 우선순위를\\ 높이면\\ 해결된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Alarm flood는 모든 Alarm 우선순위를 높이면 해결된다."
+          ],
+          "affected_layers": [
+            "C",
+            "D"
+          ]
+        }
+      ],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "Alarm, Event, Trip과 Interlock의 목적과 실행주체를 비교한다.",
+        "Deadband, Delay, Shelving과 Suppression의 적용조건을 표로 정리한다.",
+        "SOE, Historian, First-out과 Audit trail의 기록대상과 시간품질을 구분한다.",
+        "Setpoint list의 변경권한, 근거와 Audit 항목을 설계한다.",
+        "High-performance HMI 화면계층과 비정상상황 대응흐름을 연결한다."
+      ],
+      "de_claim_trust": {
+        "formula_claims": "medium",
+        "field_claims": "medium"
+      }
+    },
+    {
+      "topic_id": "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
+      "enabled": false,
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "reason": "Industrial AI claims require context-aware review of data split, cost, drift, deployment and field risk."
+    },
+    {
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "enabled": false,
+      "topic_name": "산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력",
+      "question_type": "CALC_DESIGN",
+      "difficulty_profile": "DESIGN_EVALUATION",
+      "topic_aliases": [
+        "산업 네트워크 실시간성 결정성 시간동기 장애복구",
+        "industrial network realtime determinism time synchronization resilience",
+        "latency jitter cycle time response time design",
+        "worst case network delay deadline analysis",
+        "industrial ethernet deterministic performance engineering",
+        "network load QoS scheduling congestion control",
+        "TSN PTP deterministic industrial network",
+        "IEEE 802.1Qbv time aware shaper design",
+        "IEEE 1588 PTP clock synchronization architecture",
+        "grandmaster boundary clock transparent clock",
+        "MRP DLR PRP HSR redundancy comparison",
+        "industrial ring recovery time evaluation",
+        "PRP HSR seamless redundancy failure domain",
+        "packet loss broadcast storm multicast congestion",
+        "network failover application state consistency",
+        "fallback local control graceful degradation",
+        "network resilience fault injection acceptance test",
+        "redundancy health monitoring latent failure",
+        "clock offset jitter latency recovery measurement",
+        "industrial network deadline miss analysis",
+        "TSN scheduling policing frame preemption",
+        "network recovery fault containment common cause",
+        "control network performance acceptance criteria",
+        "산업망 복원력 이중화 고장주입 시험",
+        "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": []
+    },
+    {
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "enabled": false,
+      "topic_name": "계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성",
+      "question_type": "COMPARE_SELECTION",
+      "difficulty_profile": "DESIGN_EVALUATION",
+      "topic_aliases": [
+        "계측제어 유무선 통신 Fieldbus Industrial Ethernet",
+        "industrial wired wireless communication fieldbus ethernet",
+        "산업 통신방식 선정 상호운용성",
+        "communication media protocol interoperability selection",
+        "copper fiber serial fieldbus selection",
+        "구리 광섬유 직렬통신 선정",
+        "HART FOUNDATION Fieldbus PROFIBUS PA 비교",
+        "HART FF PROFIBUS PA interoperability",
+        "Modbus RTU Modbus TCP gateway mapping",
+        "Modbus register protocol conversion",
+        "EtherNet/IP CIP EDS device profile",
+        "PROFINET GSDML device integration",
+        "EtherCAT ESI process data mapping",
+        "OPC UA information model interoperability",
+        "WirelessHART ISA100.11a gateway",
+        "산업 무선 site survey battery lifecycle",
+        "gateway protocol converter semantic mapping",
+        "device profile device description interoperability",
+        "DD EDD GSD GSDML EDS ESI",
+        "field device commissioning communication",
+        "brownfield communication migration gateway",
+        "protocol firmware host compatibility matrix",
+        "industrial communication topology termination grounding",
+        "multi vendor device interoperability certification",
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": []
+    },
+    {
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "enabled": true,
+      "topic_name": "계측제어 소프트웨어 수명주기, V-Model, 추적성, 검증 및 확인",
+      "question_type": "PROCEDURE",
+      "difficulty_profile": "DESIGN_EVALUATION",
+      "topic_aliases": [
+        "instrumentation control software lifecycle V-Model",
+        "계측제어 소프트웨어 수명주기 V-Model",
+        "requirement architecture design coding test lifecycle",
+        "요구사항 아키텍처 상세설계 구현 시험",
+        "verification validation requirement traceability matrix",
+        "검증 확인 요구사항 추적성 매트릭스",
+        "unit integration system test control software",
+        "단위시험 통합시험 시스템시험 제어 SW",
+        "static dynamic analysis regression test",
+        "정적분석 동적분석 회귀시험",
+        "simulation HIL fault injection software test",
+        "시뮬레이션 HIL 결함주입 SW 시험",
+        "software requirement test bidirectional traceability",
+        "소프트웨어 요구사항 시험 양방향 추적성",
+        "coding standard review defect management",
+        "코딩표준 검토 결함관리",
+        "configuration baseline change impact regression",
+        "구성 baseline 변경 영향 회귀",
+        "control software verification evidence approval",
+        "제어 소프트웨어 V&V 증적 승인"
+      ],
+      "fatal_checks": [
+        {
+          "id": "sw04_fatal_verification_equals_validation",
+          "severity": "fatal",
+          "message": "Verification과 Validation은 완전히 같은 활동이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Verification은 단계 산출물의 명세 적합성을, Validation은 의도된 사용목적과 사용자 요구 충족을 확인하며 상호보완적이다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Verification과\\ Validation은\\ 완전히\\ 같은\\ 활동이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Verification과 Validation은 완전히 같은 활동이다."
+          ],
+          "correct_rule": "Verification은 단계 산출물의 명세 적합성을, Validation은 의도된 사용목적과 사용자 요구 충족을 확인하며 상호보완적이다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_validation_is_coding_standard",
+          "severity": "fatal",
+          "message": "Validation은 코딩 표준 준수 여부만 확인하는 활동이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 코딩 표준 준수는 Verification의 일부가 될 수 있으나 Validation은 통합 시스템의 사용목적과 사용자 요구 충족을 확인한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?Validation은\\ 코딩\\ 표준\\ 준수\\ 여부만\\ 확인하는\\ 활동이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "Validation은 코딩 표준 준수 여부만 확인하는 활동이다."
+          ],
+          "correct_rule": "코딩 표준 준수는 Verification의 일부가 될 수 있으나 Validation은 통합 시스템의 사용목적과 사용자 요구 충족을 확인한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_vmodel_test_after_coding",
+          "severity": "fatal",
+          "message": "V-Model에서는 모든 코딩이 끝난 뒤에 시험을 처음 계획한다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. V-Model은 개발 초기부터 각 요구사항·설계 단계에 대응하는 시험과 수용기준을 함께 준비한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?V\\-Model에서는\\ 모든\\ 코딩이\\ 끝난\\ 뒤에\\ 시험을\\ 처음\\ 계획한다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "V-Model에서는 모든 코딩이 끝난 뒤에 시험을 처음 계획한다."
+          ],
+          "correct_rule": "V-Model은 개발 초기부터 각 요구사항·설계 단계에 대응하는 시험과 수용기준을 함께 준비한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_one_way_rtm_complete",
+          "severity": "fatal",
+          "message": "요구사항에서 시험 번호로 한 번 연결하면 양방향 RTM이 완성된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. RTM은 요구사항에서 설계·코드·시험·결과로의 순방향과 시험·결과에서 요구사항으로의 역방향 추적을 모두 제공해야 한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?요구사항에서\\ 시험\\ 번호로\\ 한\\ 번\\ 연결하면\\ 양방향\\ RTM이\\ 완성된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "요구사항에서 시험 번호로 한 번 연결하면 양방향 RTM이 완성된다."
+          ],
+          "correct_rule": "RTM은 요구사항에서 설계·코드·시험·결과로의 순방향과 시험·결과에서 요구사항으로의 역방향 추적을 모두 제공해야 한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_unit_test_proves_system",
+          "severity": "fatal",
+          "message": "모든 단위시험이 통과하면 통합시험과 시스템시험은 필요 없다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 단위시험은 최소 설계단위를 검증하며 모듈 상호작용과 end-to-end 요구사항은 통합시험과 시스템시험으로 별도 확인한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?모든\\ 단위시험이\\ 통과하면\\ 통합시험과\\ 시스템시험은\\ 필요\\ 없다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "모든 단위시험이 통과하면 통합시험과 시스템시험은 필요 없다."
+          ],
+          "correct_rule": "단위시험은 최소 설계단위를 검증하며 모듈 상호작용과 end-to-end 요구사항은 통합시험과 시스템시험으로 별도 확인한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_static_analysis_executes",
+          "severity": "fatal",
+          "message": "정적분석은 프로그램을 실행하여 입력과 출력을 측정하는 시험이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 정적분석은 프로그램을 실행하지 않고 코드·모델의 규칙, 흐름, 복잡도와 잠재결함을 분석한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?정적분석은\\ 프로그램을\\ 실행하여\\ 입력과\\ 출력을\\ 측정하는\\ 시험이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "정적분석은 프로그램을 실행하여 입력과 출력을 측정하는 시험이다."
+          ],
+          "correct_rule": "정적분석은 프로그램을 실행하지 않고 코드·모델의 규칙, 흐름, 복잡도와 잠재결함을 분석한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_dynamic_analysis_no_execution",
+          "severity": "fatal",
+          "message": "동적분석은 프로그램을 실행하지 않는 문서 검토이다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 동적분석은 실행된 소프트웨어의 경로, 시간, 자원과 반응을 입력 조건별로 관찰한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?동적분석은\\ 프로그램을\\ 실행하지\\ 않는\\ 문서\\ 검토이다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "동적분석은 프로그램을 실행하지 않는 문서 검토이다."
+          ],
+          "correct_rule": "동적분석은 실행된 소프트웨어의 경로, 시간, 자원과 반응을 입력 조건별로 관찰한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_regression_new_only",
+          "severity": "fatal",
+          "message": "회귀시험은 새로 추가된 기능만 시험하면 된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 회귀시험은 변경 기능과 함께 영향받을 수 있는 기존 기능·인터페이스의 유지 여부를 확인한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?회귀시험은\\ 새로\\ 추가된\\ 기능만\\ 시험하면\\ 된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "회귀시험은 새로 추가된 기능만 시험하면 된다."
+          ],
+          "correct_rule": "회귀시험은 변경 기능과 함께 영향받을 수 있는 기존 기능·인터페이스의 유지 여부를 확인한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_simulation_identical_field",
+          "severity": "fatal",
+          "message": "시뮬레이션 결과는 실제 현장과 항상 완전히 동일하다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Simulation은 모델 기반이므로 모델 가정과 한계를 평가하고 필요하면 HIL·현장 단계의 추가 검증으로 보완한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?시뮬레이션\\ 결과는\\ 실제\\ 현장과\\ 항상\\ 완전히\\ 동일하다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "시뮬레이션 결과는 실제 현장과 항상 완전히 동일하다."
+          ],
+          "correct_rule": "Simulation은 모델 기반이므로 모델 가정과 한계를 평가하고 필요하면 HIL·현장 단계의 추가 검증으로 보완한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_hil_requires_real_plant",
+          "severity": "fatal",
+          "message": "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다.",
+          "description": "명시적 반대 주장만 검출한다. HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?HIL은\\ 반드시\\ 실제\\ 생산설비를\\ 가동해야만\\ 수행할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "HIL은 반드시 실제 생산설비를 가동해야만 수행할 수 있다."
+          ],
+          "correct_rule": "HIL은 실제 대상 제어기 또는 실제 I/O 하드웨어를 실시간 Plant Model과 폐루프로 연결하므로 실제 생산설비 가동은 필요하지 않다. 하드웨어 없는 소프트웨어 실행환경 시험은 SIL(Software-in-the-loop) 또는 Virtual Commissioning으로 구분한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_fault_injection_not_software",
+          "severity": "fatal",
+          "message": "결함주입은 파괴시험이므로 소프트웨어 시험에는 사용할 수 없다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Fault injection은 통제된 환경에서 센서·통신·전원·데이터·task 이상을 주입해 검출·격리·복구를 검증한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?결함주입은\\ 파괴시험이므로\\ 소프트웨어\\ 시험에는\\ 사용할\\ 수\\ 없다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "결함주입은 파괴시험이므로 소프트웨어 시험에는 사용할 수 없다."
+          ],
+          "correct_rule": "Fault injection은 통제된 환경에서 센서·통신·전원·데이터·task 이상을 주입해 검출·격리·복구를 검증한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_change_expected_result",
+          "severity": "fatal",
+          "message": "시험이 실패하면 예상결과를 실제 결과로 바꾸어 통과 처리하면 된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 시험 전 고정한 예상결과와 판정기준을 유지하고 실패는 결함 또는 승인된 요구사항 변경으로 추적해야 한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?시험이\\ 실패하면\\ 예상결과를\\ 실제\\ 결과로\\ 바꾸어\\ 통과\\ 처리하면\\ 된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "시험이 실패하면 예상결과를 실제 결과로 바꾸어 통과 처리하면 된다."
+          ],
+          "correct_rule": "시험 전 고정한 예상결과와 판정기준을 유지하고 실패는 결함 또는 승인된 요구사항 변경으로 추적해야 한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_review_replaces_test",
+          "severity": "fatal",
+          "message": "코드 리뷰를 수행하면 동적 시험과 시스템시험을 모두 생략할 수 있다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. Review와 정적분석은 실행 기반 시험을 보완하지만 대체하지 않으며 요구사항 수준에 맞는 동적·통합·시스템 시험이 필요하다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?코드\\ 리뷰를\\ 수행하면\\ 동적\\ 시험과\\ 시스템시험을\\ 모두\\ 생략할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "코드 리뷰를 수행하면 동적 시험과 시스템시험을 모두 생략할 수 있다."
+          ],
+          "correct_rule": "Review와 정적분석은 실행 기반 시험을 보완하지만 대체하지 않으며 요구사항 수준에 맞는 동적·통합·시스템 시험이 필요하다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_no_version_needed",
+          "severity": "fatal",
+          "message": "시험결과에 대상 버전과 시험환경을 기록하지 않아도 재현할 수 있다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 시험대상 baseline, HW·OS·firmware·tool과 설정을 식별해야 결과의 재현성과 감사가능성을 확보할 수 있다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?시험결과에\\ 대상\\ 버전과\\ 시험환경을\\ 기록하지\\ 않아도\\ 재현할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "시험결과에 대상 버전과 시험환경을 기록하지 않아도 재현할 수 있다."
+          ],
+          "correct_rule": "시험대상 baseline, HW·OS·firmware·tool과 설정을 식별해야 결과의 재현성과 감사가능성을 확보할 수 있다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_small_change_no_impact",
+          "severity": "fatal",
+          "message": "작은 변경은 영향분석과 회귀시험을 항상 생략할 수 있다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. 변경 규모와 무관하게 영향범위를 평가하고 그 결과에 따라 RTM·산출물·회귀시험 범위를 갱신해야 한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?작은\\ 변경은\\ 영향분석과\\ 회귀시험을\\ 항상\\ 생략할\\ 수\\ 있다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "작은 변경은 영향분석과 회귀시험을 항상 생략할 수 있다."
+          ],
+          "correct_rule": "변경 규모와 무관하게 영향범위를 평가하고 그 결과에 따라 RTM·산출물·회귀시험 범위를 갱신해야 한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_general_vv_proves_sil",
+          "severity": "fatal",
+          "message": "일반 소프트웨어 V&V를 완료하면 별도 Safety lifecycle 없이 SIS의 SIL 충족이 자동으로 증명된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. SW-04의 일반 V&V와 SW-05의 Safety Integrity, 독립성, 체계적 고장 통제와 Safety V&V를 구분해야 한다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?일반\\ 소프트웨어\\ V\\&V를\\ 완료하면\\ 별도\\ Safety\\ lifecycle\\ 없이\\ SIS의\\ SIL\\ 충족이\\ 자동으로\\ 증명된다\\.\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "일반 소프트웨어 V&V를 완료하면 별도 Safety lifecycle 없이 SIS의 SIL 충족이 자동으로 증명된다."
+          ],
+          "correct_rule": "SW-04의 일반 V&V와 SW-05의 Safety Integrity, 독립성, 체계적 고장 통제와 Safety V&V를 구분해야 한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 15.0
+        }
+      ],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "V-Model 좌·우 단계 대응을 도식으로 설명한다.",
+        "Verification과 Validation의 목적 차이를 답안 첫 부분에서 구분한다.",
+        "RTM의 순방향·역방향 추적과 고아 산출물 탐지를 설명한다.",
+        "Simulation·HIL·Fault injection의 시험환경과 한계를 비교한다.",
+        "결함·변경·baseline·회귀시험·승인 증적을 하나의 흐름으로 연결한다."
+      ],
+      "de_claim_trust": {
+        "formula_claims": "medium",
+        "field_claims": "medium"
+      }
+    },
+    {
       "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
       "enabled": false,
       "topic_name": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
@@ -538,6 +1992,43 @@
       }
     },
     {
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "enabled": false,
+      "topic_name": "OT 사이버보안, 심층방어, Allowlisting, 공급망 보안 및 사고대응",
+      "question_type": "PROBLEM_SOLVE",
+      "difficulty_profile": "DESIGN_EVALUATION",
+      "topic_aliases": [
+        "OT 사이버보안 심층방어 공급망 사고대응",
+        "operational technology defense in depth incident response",
+        "OT asset inventory zone conduit security architecture",
+        "industrial DMZ firewall unidirectional gateway design",
+        "OT application allowlisting least privilege access control",
+        "industrial remote access jump server MFA session recording",
+        "OT patch vulnerability legacy compensating control",
+        "industrial control system supply chain risk management",
+        "SBOM firmware integrity vendor assurance for control systems",
+        "removable media logging monitoring incident triage OT",
+        "OT cyber incident containment eradication trusted recovery",
+        "offline immutable backup business continuity industrial control",
+        "IEC 62443 zone conduit security level architecture",
+        "NIST SP 800-82 OT security controls",
+        "PLC DCS SIS cybersecurity segmentation",
+        "vendor remote maintenance security control",
+        "OT privileged access management engineering workstation",
+        "industrial cybersecurity tabletop recovery exercise",
+        "legacy PLC security compensating safeguards",
+        "cyber safety coordination SIS interlock protection",
+        "OT security monitoring forensic timeline time synchronization",
+        "supply chain SBOM vulnerability disclosure support lifecycle",
+        "industrial control ransomware recovery clean baseline",
+        "OT defense architecture risk assessment data flow",
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": []
+    },
+    {
       "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
       "enabled": false,
       "topic_name": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
@@ -568,6 +2059,14 @@
       "question_type_checks": [],
       "next_practice_points": [],
       "de_claim_trust": {}
+    },
+    {
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "enabled": false,
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "reason": "Physical-AI claims require context-aware review of uncertainty, operating domain, latency, failure modes and independent safety controls."
     },
     {
       "topic_id": "pid_controller_tuning_sequence_gain_effects",
@@ -1484,6 +2983,19 @@
         "fatal_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 충돌하므로 현장 적용 주장을 강하게 신뢰하지 않는다.",
         "pass_meaning": "핵심 주파수응답·공진 조건 주장이 정답과 직접 충돌하지 않으므로 현장 적용 주장을 이론적으로 신뢰할 수 있다."
       }
+    },
+    {
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "enabled": false,
+      "topic_name": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
     },
     {
       "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
