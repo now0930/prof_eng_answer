@@ -1,0 +1,31 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "NORMAL",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "IIoT/Smart Factory를 Device–Edge–Platform–Cloud 제조 architecture로 정의한다.",
+    "OT real-time control boundary와 Cloud/analytics 기능을 분리한다.",
+    "Edge buffering·local processing·store-and-forward와 offline/degraded mode를 설명한다.",
+    "Latency·bandwidth·security·compute·cost 기반 workload placement를 설명한다.",
+    "Data contract에 unit·timestamp·quality·context·schema version을 포함한다.",
+    "Connectivity/Syntactic/Semantic interoperability를 구분한다.",
+    "Information Model·Asset hierarchy·namespace·identifier를 설명한다.",
+    "Asset Model과 firmware/configuration/schema version을 lifecycle로 추적한다.",
+    "Digital Thread를 lifecycle data continuity와 traceability로 정의하고 Digital Twin과 구분한다.",
+    "Device onboarding·fleet management·remote update/rollback을 설명한다.",
+    "Observability와 security identity/least privilege/certificate lifecycle을 설명한다.",
+    "Scalability와 RTO/RPO/DR를 workload·business requirement로 설계한다.",
+    "Use case/KPI와 Brownfield migration·rollback을 연결한다.",
+    "Historian/MES, Communication, Physical AI/Digital Twin Topic과 ownership 경계를 유지한다."
+  ],
+  "note": "IC-2027-W-5-1을 IIoT·Smart Factory architecture와 Digital Thread lifecycle Topic으로 구성한다. STEP 0에서 narrow duplicate blocker 0, routing alias collision 0을 확인했다. Question Type은 architecture 구현·trade-off·lifecycle 평가 성격을 반영해 IMPLEMENTATION_EVALUATION, difficulty는 DESIGN_EVALUATION으로 설정한다. historical frequency 근거가 없어 selection_importance는 NORMAL을 사용한다.",
+  "revision_notes": [
+    "STEP 0에서 Historian/MES, communication, Physical AI/Digital Twin Topic과 ownership을 직접 비교했다.",
+    "Question Type은 architecture implementation/evaluation 성격으로 IMPLEMENTATION_EVALUATION을 사용한다.",
+    "Difficulty는 edge/cloud placement, semantic model, resilience/security/brownfield trade-off를 통합하므로 DESIGN_EVALUATION으로 설정한다.",
+    "historical frequency 근거가 없어 selection_importance는 NORMAL로 유지했다."
+  ],
+  "topic_label": "산업 IoT·스마트공장 아키텍처"
+}
