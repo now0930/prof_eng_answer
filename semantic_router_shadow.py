@@ -1611,10 +1611,23 @@ conflicting interpretation:
    - demands not sufficiently owned by an allowed Topic MUST remain in
      uncovered_demand_ids.
 
-4. routing_mode == "AMBIGUOUS":
+4. Mixed Topic + uncovered-demand coverage:
+   - If at least one allowed candidate Topic clearly owns at least one demand,
+     routing_mode MUST NOT be GENERAL merely because other demands are not
+     covered by Topic Packs.
+   - Use SINGLE_TOPIC when exactly one Topic is positively selected.
+   - Use MULTI_TOPIC when multiple Topics are positively selected.
+   - Keep every non-owned demand in uncovered_demand_ids.
+   - This is how hybrid Topic + General coverage is represented. Do NOT invent
+     a new routing mode named HYBRID.
+   - Example: D1 is owned by Topic A and D2 is not owned by any Topic:
+     routing_mode="SINGLE_TOPIC", primary_topic_ids=["Topic A"],
+     D1 has a positive Topic mapping, and uncovered_demand_ids=["D2"].
+
+5. routing_mode == "AMBIGUOUS":
    - do not convert uncertainty into GENERAL merely to avoid choosing a Topic.
 
-5. Never invent Topic ids. Never use the student answer for routing.
+6. Never invent Topic ids. Never use the student answer for routing.
 
 Before returning JSON, perform this consistency check:
 - If mode is GENERAL, erase all positive Topic assignments and mark all valid

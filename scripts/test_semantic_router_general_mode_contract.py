@@ -59,6 +59,27 @@ class SemanticRouterGeneralModeContractTest(unittest.TestCase):
             "If any positive Topic assignment remains, mode MUST NOT be GENERAL",
             prompt,
         )
+        self.assertIn(
+            "Mixed Topic + uncovered-demand coverage",
+            prompt,
+        )
+        self.assertIn(
+            "routing_mode MUST NOT be GENERAL merely because other demands are not",
+            prompt,
+        )
+        self.assertIn(
+            "Use SINGLE_TOPIC when exactly one Topic is positively selected",
+            prompt,
+        )
+        self.assertIn(
+            "Keep every non-owned demand in uncovered_demand_ids",
+            prompt,
+        )
+        normalized_prompt = " ".join(prompt.split())
+        self.assertIn(
+            "Do NOT invent a new routing mode named HYBRID",
+            normalized_prompt,
+        )
 
     def test_consistent_general_payload_passes(self):
         calls = {"n": 0}
