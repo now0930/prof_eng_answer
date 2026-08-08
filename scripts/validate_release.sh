@@ -111,6 +111,10 @@ echo "===== release-test coverage validator regression ====="
 python3 -m unittest scripts.test_release_test_coverage_validator
 
 echo
+echo "===== thermocouple source semantic integrity regression ====="
+python3 scripts/test_thermocouple_source_semantic_integrity.py
+
+echo
 echo "===== formatter regression tests ====="
 python3 -m unittest scripts.test_grade_output_formatter
 
