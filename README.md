@@ -358,19 +358,30 @@ Telegram /grade
 
 현재 runtime 기본값은 Topic Pack 기반 `generated` bank입니다. Legacy bank는 비교·호환 목적으로 유지합니다.
 
-현재 저장소의 Topic 구조는 다음 순서로 관리합니다.
+현재 저장소의 출제범위·Topic·runtime 관계는 다음 순서로 관리합니다.
 
 ```text
+한국산업인력공단 공식 출제기준
+    ↓
+Exam Scope / Criterion
+    ↓
+Classification / Coverage
+PRIMARY / SECONDARY · COVERED / PARTIAL / GAP
+    ↓
 Topic Sheet
     ↓
 Topic Pack Source
     ↓
-Focused Regression / Semantic Review
-    ↓
 Generated Rubric Bank
+    ↓
+Topic Router
     ↓
 Runtime Grading
 ```
+
+공식 출제기준과 Topic은 반드시 1:1이 아닙니다. 하나의 criterion이 여러 Topic을 요구하거나 하나의 Topic이 여러 criterion을 지원할 수 있으므로 `docs/topic_pack_classification.md`에서 PRIMARY/SECONDARY ownership을 관리합니다. 반면 **Topic Sheet와 Topic Pack은 동일 `<topic_id>`의 1:1 관계**입니다.
+
+출제범위와 Topic Pack의 상세 연결 원칙은 [`docs/exam_scope/industrial_instrumentation_control_exam_scope_to_topic_pack_model.md`](docs/exam_scope/industrial_instrumentation_control_exam_scope_to_topic_pack_model.md)에서 관리합니다.
 
 ### 9.1 Topic Sheet와 Topic Pack의 관계
 
@@ -512,7 +523,32 @@ py_compile
   → 필요한 경우에만 container smoke
 ```
 
-### 9.4 로컬 운영 스크립트와 Git tracking
+### 9.4 Topic Router v2 방향
+
+Topic Pack은 문제은행이 아니므로 실제 시험문제가 항상 Topic 하나와 1:1로 일치한다고 가정하지 않습니다. Router는 장기적으로 다음 네 상태를 구분합니다.
+
+- `SINGLE_TOPIC`: 하나의 Topic evidence로 충분
+- `MULTI_TOPIC`: 둘 이상의 Topic을 실제 문제 요구사항이 함께 요구
+- `GENERAL`: 문제는 명확하지만 현재 Topic evidence가 충분하지 않음
+- `AMBIGUOUS`: 문제 자체가 모호하여 Topic을 안정적으로 결정하기 어려움
+
+구현 원칙은 **Rule → LLM → Rule** 구조입니다.
+
+```text
+Rule: candidate generation / guard
+    ↓
+LLM: question demand decomposition / semantic adjudication
+    ↓
+Rule: schema / topic / confidence / fallback policy validation
+```
+
+Rule은 재현 가능한 후보 검색과 안전장치를 담당하고, LLM은 Topic Sheet의 positive ownership·negative boundary를 이용한 의미 판단을 담당합니다. LLM은 존재하지 않는 Topic을 만들거나 점수를 직접 결정하지 않습니다.
+
+초기에는 기존 deterministic Router를 production에 유지하고 LLM 결과만 기록하는 **shadow mode**로 시작하며, 이후 `ambiguous/unmatched` 보완 → multi-topic → hybrid general 순으로 점진적으로 확대합니다.
+
+상세 설계는 [`docs/topic_router_v2_design.md`](docs/topic_router_v2_design.md)를 기준으로 합니다.
+
+### 9.5 로컬 운영 스크립트와 Git tracking
 
 `gemini_script/`는 authoring, audit, commit, push를 보조하는 **로컬 일회성 운영 스크립트 공간**입니다.
 
