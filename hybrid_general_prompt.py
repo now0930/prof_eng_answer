@@ -83,6 +83,10 @@ def build_hybrid_general_prompt_section(
         )
         or [],
         "topic_evidence": topic_payload,
+        "demand_mappings": evidence.get(
+            "demand_mappings"
+        )
+        or [],
         "general_engineering_demands": demands,
         "uncovered_demand_ids": evidence.get(
             "uncovered_demand_ids"

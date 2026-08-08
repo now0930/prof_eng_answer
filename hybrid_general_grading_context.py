@@ -330,6 +330,20 @@ def build_hybrid_general_grading_context(
         for demand_id in uncovered_demand_ids
     ]
 
+    demand_mappings = []
+    for raw_mapping in semantic_result.get("demand_mappings") or []:
+        if not isinstance(raw_mapping, dict):
+            continue
+
+        mapping = copy.deepcopy(raw_mapping)
+        demand_id = str(
+            mapping.get("demand_id") or ""
+        ).strip()
+        demand_text = demands.get(demand_id)
+        if demand_text:
+            mapping["demand_text"] = demand_text
+        demand_mappings.append(mapping)
+
     return {
         "version": HYBRID_GENERAL_GRADING_CONTEXT_VERSION,
         "enabled": True,
@@ -338,9 +352,7 @@ def build_hybrid_general_grading_context(
         "coverage_kind": coverage_kind,
         "primary_topic_ids": primary_topic_ids,
         "topic_evidence": topic_evidence,
-        "demand_mappings": copy.deepcopy(
-            semantic_result.get("demand_mappings") or []
-        ),
+        "demand_mappings": demand_mappings,
         "uncovered_demand_ids": uncovered_demand_ids,
         "general_engineering_evidence": {
             "basis": "question_demands_only",

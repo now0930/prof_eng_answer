@@ -40,7 +40,7 @@ class MultiTopicDemandScopePromptTest(unittest.TestCase):
             normalized,
         )
         self.assertIn(
-            "load-cell eccentric-load or overload",
+            "load-cell eccentric-load, overload",
             normalized,
         )
         self.assertIn(
