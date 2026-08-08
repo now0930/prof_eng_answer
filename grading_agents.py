@@ -6370,13 +6370,21 @@ def _phase10_run_semantic_router_shadow(
     try:
         from semantic_router_shadow import (
             SEMANTIC_ROUTER_SHADOW_FILE,
+            augment_rule_candidates_for_shadow,
             semantic_route_shadow,
+        )
+
+        shadow_rule_result = (
+            augment_rule_candidates_for_shadow(
+                question_text=question_text,
+                rule_result=rule_result,
+            )
         )
 
         result = semantic_route_shadow(
             question_text=question_text,
             question_demand_result=question_demand_result,
-            rule_result=rule_result,
+            rule_result=shadow_rule_result,
         )
 
         if not isinstance(result, dict):

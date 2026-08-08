@@ -187,6 +187,422 @@ def _candidate_title(candidate: Any) -> str:
     ).strip()
 
 
+_SHADOW_RECALL_STOP_TERMS = {
+    "설명",
+    "설명하시오",
+    "비교",
+    "특성",
+    "영향",
+    "관계",
+    "역할",
+    "원리",
+    "방법",
+    "기준",
+    "적용",
+    "동작",
+    "제어",
+    "시스템",
+    "및",
+    "with",
+    "and",
+    "the",
+}
+
+SHADOW_RECALL_SCORE_DELTA = 4
+
+
+def _shadow_recall_terms(text: str) -> set[str]:
+    raw_terms = re.findall(
+        r"[0-9A-Za-z가-힣]+",
+        str(text or "").casefold(),
+    )
+
+    terms: set[str] = set()
+    for raw in raw_terms:
+        term = raw.strip()
+        if len(term) < 2:
+            continue
+        if term in _SHADOW_RECALL_STOP_TERMS:
+            continue
+        terms.add(term)
+
+    return terms
+
+
+def _shadow_recall_question_compact(
+    text: str,
+) -> str:
+    return "".join(
+        re.findall(
+            r"[0-9A-Za-z가-힣]+",
+            str(text or "").casefold(),
+        )
+    )
+
+
+def _iter_topic_entries(value: Any):
+    if isinstance(value, dict):
+        topic_id = str(
+            value.get("topic_id") or ""
+        ).strip()
+        if topic_id:
+            yield value
+            return
+
+        for child in value.values():
+            yield from _iter_topic_entries(child)
+
+    elif isinstance(value, list):
+        for child in value:
+            yield from _iter_topic_entries(child)
+
+
+def _collect_shadow_routing_signals(
+    entry: dict[str, Any],
+) -> list[str]:
+    signals: list[str] = []
+    seen: set[str] = set()
+
+    def add(value: Any) -> None:
+        text = str(value or "").strip()
+        if not text:
+            return
+        key = text.casefold()
+        if key in seen:
+            return
+        seen.add(key)
+        signals.append(text)
+
+    add(entry.get("title"))
+    add(entry.get("display_name"))
+    add(entry.get("name"))
+
+    def walk(value: Any, key_hint: str = "") -> None:
+        if isinstance(value, dict):
+            for key, child in value.items():
+                key_l = str(key).casefold()
+                relevant = any(
+                    token in key_l
+                    for token in (
+                        "alias",
+                        "field",
+                        "connection",
+                        "question",
+                        "example",
+                        "keyword",
+                    )
+                )
+
+                if relevant:
+                    if isinstance(child, str):
+                        add(child)
+                    elif isinstance(child, list):
+                        for item in child:
+                            if isinstance(item, str):
+                                add(item)
+                            elif isinstance(item, (dict, list)):
+                                walk(item, key_l)
+                    elif isinstance(child, dict):
+                        walk(child, key_l)
+                else:
+                    walk(child, key_l)
+
+        elif isinstance(value, list):
+            for child in value:
+                walk(child, key_hint)
+
+        elif isinstance(value, str) and key_hint:
+            if any(
+                token in key_hint
+                for token in (
+                    "alias",
+                    "field",
+                    "connection",
+                    "question",
+                    "example",
+                    "keyword",
+                )
+            ):
+                add(value)
+
+    walk(entry)
+    return signals
+
+
+def _shadow_recall_signal_score(
+    question_text: str,
+    signals: list[str],
+    *,
+    term_document_frequency: dict[str, int],
+    topic_count: int,
+) -> tuple[int, list[str]]:
+    question_compact = _shadow_recall_question_compact(
+        question_text
+    )
+
+    matched_terms: set[str] = set()
+    strong_phrase_hits = 0
+
+    for signal in signals:
+        signal_terms = _shadow_recall_terms(signal)
+        signal_compact = _shadow_recall_question_compact(
+            signal
+        )
+
+        if (
+            len(signal_terms) >= 2
+            and len(signal_compact) >= 4
+            and signal_compact in question_compact
+        ):
+            strong_phrase_hits += 1
+
+        for term in signal_terms:
+            if term in question_compact:
+                matched_terms.add(term)
+
+    df_cap = max(
+        2,
+        min(
+            6,
+            max(1, int(topic_count)) // 12,
+        ),
+    )
+
+    discriminative_terms = {
+        term
+        for term in matched_terms
+        if term_document_frequency.get(
+            term,
+            topic_count,
+        ) <= df_cap
+    }
+
+    distinctive_terms = {
+        term
+        for term in discriminative_terms
+        if (
+            len(term) >= 3
+            or (
+                term.isascii()
+                and len(term) >= 2
+            )
+        )
+    }
+
+    if (
+        len(matched_terms) < 2
+        or not distinctive_terms
+    ):
+        return 0, sorted(
+            matched_terms,
+            key=lambda value: (-len(value), value),
+        )
+
+    score = (
+        len(matched_terms) * 2
+        + len(discriminative_terms) * 4
+        + strong_phrase_hits * 4
+    )
+
+    return score, sorted(
+        matched_terms,
+        key=lambda value: (-len(value), value),
+    )
+
+
+def augment_rule_candidates_for_shadow(
+    question_text: str,
+    rule_result: Any,
+    *,
+    bank: Any | None = None,
+    max_candidates: int = DEFAULT_MAX_CANDIDATES,
+) -> dict[str, Any]:
+    # Broaden candidate recall for semantic shadow only.
+    # The legacy Rule Router result is copied and never mutated in-place.
+    if isinstance(rule_result, dict):
+        shadow_result = dict(rule_result)
+        existing = list(
+            rule_result.get("candidates") or []
+        )
+    else:
+        shadow_result = {}
+        existing = []
+
+    if bank is None:
+        from rubric_registry import (
+            load_model_answer_bank,
+        )
+        bank = load_model_answer_bank()
+
+    candidate_rows: list[dict[str, Any]] = []
+    seen_topic_ids: set[str] = set()
+
+    for candidate in existing:
+        if not isinstance(candidate, dict):
+            continue
+
+        topic_id = _candidate_topic_id(candidate)
+        if not topic_id or topic_id in seen_topic_ids:
+            continue
+
+        seen_topic_ids.add(topic_id)
+        candidate_rows.append(candidate)
+
+        if len(candidate_rows) >= int(max_candidates):
+            break
+
+    discovered: list[
+        tuple[int, str, list[str], dict[str, Any]]
+    ] = []
+
+    topic_entries = list(
+        _iter_topic_entries(bank)
+    )
+
+    topic_signals: dict[str, list[str]] = {}
+    term_document_frequency: dict[str, int] = {}
+
+    for entry in topic_entries:
+        topic_id = str(
+            entry.get("topic_id") or ""
+        ).strip()
+        if not topic_id:
+            continue
+
+        signals = _collect_shadow_routing_signals(
+            entry
+        )
+        topic_signals[topic_id] = signals
+
+        topic_terms: set[str] = set()
+        for signal in signals:
+            topic_terms.update(
+                _shadow_recall_terms(signal)
+            )
+
+        for term in topic_terms:
+            term_document_frequency[term] = (
+                term_document_frequency.get(term, 0)
+                + 1
+            )
+
+    topic_count = max(
+        1,
+        len(topic_signals),
+    )
+
+    for entry in topic_entries:
+        topic_id = str(
+            entry.get("topic_id") or ""
+        ).strip()
+
+        if (
+            not topic_id
+            or topic_id in seen_topic_ids
+        ):
+            continue
+
+        signals = topic_signals.get(
+            topic_id,
+            [],
+        )
+        score, matched_terms = (
+            _shadow_recall_signal_score(
+                question_text,
+                signals,
+                term_document_frequency=(
+                    term_document_frequency
+                ),
+                topic_count=topic_count,
+            )
+        )
+
+        if score < 6:
+            continue
+
+        discovered.append(
+            (
+                score,
+                topic_id,
+                matched_terms,
+                entry,
+            )
+        )
+
+    discovered.sort(
+        key=lambda row: (
+            -row[0],
+            row[1],
+        )
+    )
+
+    if discovered:
+        score_floor = max(
+            6,
+            discovered[0][0]
+            - SHADOW_RECALL_SCORE_DELTA,
+        )
+        discovered = [
+            row
+            for row in discovered
+            if row[0] >= score_floor
+        ]
+
+    augmented_ids: list[str] = []
+
+    for (
+        score,
+        topic_id,
+        matched_terms,
+        entry,
+    ) in discovered:
+        if len(candidate_rows) >= int(max_candidates):
+            break
+
+        if topic_id in seen_topic_ids:
+            continue
+
+        seen_topic_ids.add(topic_id)
+        augmented_ids.append(topic_id)
+
+        candidate_rows.append(
+            {
+                "answer": {
+                    "topic_id": topic_id,
+                    "title": str(
+                        entry.get("title")
+                        or entry.get("display_name")
+                        or entry.get("name")
+                        or topic_id
+                    ),
+                },
+                "score": score,
+                "question_score": score,
+                "fact_score": 0,
+                "answer_score": 0,
+                "match_reasons": [
+                    "shadow recall adapter matched routing "
+                    "terms: "
+                    + repr(matched_terms[:8])
+                ],
+                "shadow_recall_adapter": True,
+            }
+        )
+
+    shadow_result["candidates"] = candidate_rows
+    shadow_result[
+        "shadow_candidate_recall_adapter"
+    ] = {
+        "enabled": True,
+        "augmented_topic_ids": augmented_ids,
+        "candidate_count": len(candidate_rows),
+        "legacy_router_mutated": False,
+        "student_answer_used": False,
+    }
+
+    return shadow_result
+
+
 def build_candidate_semantic_catalog(
     rule_result: Any,
     *,
@@ -506,6 +922,12 @@ def _normalize_semantic_payload(
             and topic_id not in supporting_topic_ids
         ):
             supporting_topic_ids.append(topic_id)
+
+    supporting_topic_ids = [
+        topic_id
+        for topic_id in supporting_topic_ids
+        if topic_id not in primary_topic_ids
+    ]
 
     if mode == "SINGLE_TOPIC":
         if len(primary_topic_ids) != 1:

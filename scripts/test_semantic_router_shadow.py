@@ -323,6 +323,282 @@ class SemanticRouterShadowUnitTest(unittest.TestCase):
         self.assertEqual(result["status"], "fallback")
 
 
+class ShadowCandidateRecallAdapterTest(unittest.TestCase):
+    def test_adapter_augments_only_existing_bank_topic_ids(self):
+        bank = {
+            "topics": [
+                {
+                    "topic_id": "topic_a",
+                    "title": "캐비테이션 플래싱",
+                    "topic_aliases": [
+                        "캐비테이션",
+                        "플래싱",
+                    ],
+                },
+                {
+                    "topic_id": "topic_b",
+                    "title": "무관 Topic",
+                    "topic_aliases": [
+                        "완전히 다른 용어",
+                    ],
+                },
+            ]
+        }
+
+        legacy = {
+            "candidates": [],
+            "routing_status": "unmatched",
+        }
+
+        shadow = srs.augment_rule_candidates_for_shadow(
+            "캐비테이션과 플래싱을 설명하시오.",
+            legacy,
+            bank=bank,
+        )
+
+        ids = [
+            (row.get("answer") or {}).get("topic_id")
+            for row in shadow.get("candidates") or []
+        ]
+
+        self.assertIn("topic_a", ids)
+        self.assertNotIn("topic_b", ids)
+        self.assertEqual(
+            legacy["candidates"],
+            [],
+        )
+        self.assertFalse(
+            shadow[
+                "shadow_candidate_recall_adapter"
+            ]["legacy_router_mutated"]
+        )
+        self.assertFalse(
+            shadow[
+                "shadow_candidate_recall_adapter"
+            ]["student_answer_used"]
+        )
+
+    def test_existing_rule_candidates_remain_first(self):
+        bank = {
+            "topics": [
+                {
+                    "topic_id": "topic_b",
+                    "title": "열전대 적용",
+                    "topic_aliases": [
+                        "열전대",
+                        "온도센서",
+                    ],
+                }
+            ]
+        }
+
+        legacy = {
+            "candidates": [
+                candidate("topic_a", "RTD")
+            ]
+        }
+
+        shadow = srs.augment_rule_candidates_for_shadow(
+            "RTD와 열전대 온도센서를 비교하시오.",
+            legacy,
+            bank=bank,
+        )
+
+        ids = [
+            (row.get("answer") or {}).get("topic_id")
+            for row in shadow.get("candidates") or []
+        ]
+
+        self.assertEqual(ids[0], "topic_a")
+        self.assertIn("topic_b", ids)
+
+    def test_common_generic_terms_do_not_create_candidates(self):
+        bank = {
+            "topics": [
+                {
+                    "topic_id": "topic_a",
+                    "title": "공정 구조 유형",
+                    "topic_aliases": [
+                        "구조",
+                        "유형",
+                        "PID 튜닝",
+                    ],
+                },
+                {
+                    "topic_id": "topic_b",
+                    "title": "설비 구조 유형",
+                    "topic_aliases": [
+                        "구조",
+                        "유형",
+                        "SIS SIL",
+                    ],
+                },
+                {
+                    "topic_id": "topic_c",
+                    "title": "제어 구조 유형",
+                    "topic_aliases": [
+                        "구조",
+                        "유형",
+                        "캐비테이션 플래싱",
+                    ],
+                },
+            ]
+        }
+
+        shadow = srs.augment_rule_candidates_for_shadow(
+            "고전소설의 서사 구조와 인물 유형을 설명하시오.",
+            {"candidates": []},
+            bank=bank,
+        )
+
+        self.assertEqual(
+            shadow.get("candidates"),
+            [],
+        )
+
+    def test_rare_technical_pair_remains_recallable(self):
+        bank = {
+            "topics": [
+                {
+                    "topic_id": "pid_topic",
+                    "title": "PID 제어기 튜닝",
+                    "topic_aliases": [
+                        "PID",
+                        "튜닝",
+                        "PID 튜닝",
+                    ],
+                },
+                {
+                    "topic_id": "other_a",
+                    "title": "공정 구조",
+                    "topic_aliases": [
+                        "구조",
+                        "유형",
+                    ],
+                },
+                {
+                    "topic_id": "other_b",
+                    "title": "설비 구조",
+                    "topic_aliases": [
+                        "구조",
+                        "유형",
+                    ],
+                },
+            ]
+        }
+
+        shadow = srs.augment_rule_candidates_for_shadow(
+            "PID 제어기의 게인 영향과 튜닝 순서를 설명하시오.",
+            {"candidates": []},
+            bank=bank,
+        )
+
+        ids = [
+            (row.get("answer") or {}).get("topic_id")
+            for row in shadow.get("candidates") or []
+        ]
+        self.assertIn("pid_topic", ids)
+
+    def test_dynamic_cutoff_removes_candidates_beyond_delta(self):
+        self.assertEqual(
+            srs.SHADOW_RECALL_SCORE_DELTA,
+            4,
+        )
+
+        bank = {
+            "topics": [
+                {
+                    "topic_id": "topic_high",
+                    "title": "SIS SIL 독립성 검증",
+                    "topic_aliases": [
+                        "SIS",
+                        "SIL",
+                        "독립성",
+                        "검증",
+                    ],
+                },
+                {
+                    "topic_id": "topic_lower",
+                    "title": "SIS SIL 검증",
+                    "topic_aliases": [
+                        "SIS",
+                        "SIL",
+                        "검증",
+                    ],
+                },
+                {
+                    "topic_id": "topic_low",
+                    "title": "SIS 일반",
+                    "topic_aliases": [
+                        "SIS",
+                        "일반",
+                    ],
+                },
+            ]
+        }
+
+        shadow = srs.augment_rule_candidates_for_shadow(
+            "SIS와 SIL의 독립성 및 검증을 설명하시오.",
+            {"candidates": []},
+            bank=bank,
+        )
+
+        ids = [
+            (row.get("answer") or {}).get("topic_id")
+            for row in shadow.get("candidates") or []
+        ]
+
+        self.assertIn("topic_high", ids)
+        self.assertNotIn("topic_lower", ids)
+        self.assertNotIn("topic_low", ids)
+
+    def test_primary_dominates_supporting_in_aggregate_roles(self):
+        normalized = srs._normalize_semantic_payload(
+            {
+                "routing_mode": "MULTI_TOPIC",
+                "demand_mappings": [
+                    {
+                        "demand_id": "D1",
+                        "topic_id": "topic_a",
+                        "role": "PRIMARY",
+                        "confidence": 0.95,
+                    },
+                    {
+                        "demand_id": "D2",
+                        "topic_id": "topic_a",
+                        "role": "SUPPORTING",
+                        "confidence": 0.80,
+                    },
+                    {
+                        "demand_id": "D2",
+                        "topic_id": "topic_b",
+                        "role": "PRIMARY",
+                        "confidence": 0.95,
+                    },
+                ],
+                "uncovered_demand_ids": [],
+                "reason": "",
+            },
+            demands=[
+                {"id": "D1", "text": "A"},
+                {"id": "D2", "text": "B"},
+            ],
+            allowed_topic_ids={
+                "topic_a",
+                "topic_b",
+            },
+        )
+
+        self.assertEqual(
+            set(normalized["primary_topic_ids"]),
+            {"topic_a", "topic_b"},
+        )
+        self.assertEqual(
+            normalized["supporting_topic_ids"],
+            [],
+        )
+
+
 class SemanticCatalogTest(unittest.TestCase):
     def test_catalog_uses_only_rule_candidates(self):
         with tempfile.TemporaryDirectory() as tmp:
