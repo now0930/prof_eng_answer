@@ -4655,6 +4655,12 @@ def _phase2_postprocess_grade(legacy_result):
         resolve_question_contract_cache,
     )
 
+    from multi_topic_evidence_consumer import (
+        attach_multi_topic_evidence_to_subject_rubric,
+        attach_multi_topic_summary_to_question_contract,
+        enrich_multi_topic_model_reference_with_contract,
+    )
+
     question_contract = build_question_contract(
         grading_identity=grading_identity_dict,
         question_type_evaluation=question_type_eval,
@@ -4665,6 +4671,10 @@ def _phase2_postprocess_grade(legacy_result):
             / "subject_rubric_snapshot.json"
         ),
         subject_rubric=subject_rubric,
+    )
+    question_contract = attach_multi_topic_summary_to_question_contract(
+        question_contract,
+        model_answer_ref,
     )
 
     question_contract = (
@@ -4708,6 +4718,10 @@ def _phase2_postprocess_grade(legacy_result):
             question_contract,
         )
     )
+    model_answer_ref = enrich_multi_topic_model_reference_with_contract(
+        model_answer_ref,
+        question_contract,
+    )
 
     subject_rubric_for_gemini = (
         _phase9_subject_rubric_with_question_type_lens(
@@ -4721,6 +4735,10 @@ def _phase2_postprocess_grade(legacy_result):
             subject_rubric_for_gemini,
             model_answer_ref,
         )
+    )
+    subject_rubric_for_gemini = attach_multi_topic_evidence_to_subject_rubric(
+        subject_rubric_for_gemini,
+        model_answer_ref,
     )
 
     gemini_eval = _phase6_run_gemini_semantic_grader(
