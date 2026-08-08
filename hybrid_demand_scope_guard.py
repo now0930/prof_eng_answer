@@ -110,16 +110,78 @@ def _traceable(
     if not claim_tokens:
         return False
 
-    for row in demand_rows:
-        demand_tokens = set(row["tokens"])
-        overlap = claim_tokens.intersection(
-            demand_tokens
+    token_sets = [
+        set(_list(row.get("tokens")))
+        for row in demand_rows
+        if isinstance(row, dict)
+    ]
+
+    for index, row in enumerate(demand_rows):
+        if not isinstance(row, dict):
+            continue
+
+        demand_tokens = set(
+            _list(row.get("tokens"))
+        )
+        intent_tokens = set(
+            _list(row.get("intent_tokens"))
         )
 
-        # One shared generic word is not enough to establish
-        # Question Demand scope. Require at least two tokens
-        # from the same explicit Demand.
-        if len(overlap) >= 2:
+        if not demand_tokens:
+            continue
+
+        # Two-token demands such as "온도 보상" and
+        # "Wheatstone Bridge" are scope-safe only when the
+        # complete phrase is represented.
+        if len(demand_tokens) <= 2:
+            if demand_tokens.issubset(
+                claim_tokens
+            ):
+                return True
+            continue
+
+        # A complete demand intent such as "측정 원리",
+        # "결정 기준", or "폐기 원칙" is independently
+        # strong enough to establish traceability.
+        if (
+            intent_tokens
+            and intent_tokens.issubset(
+                claim_tokens
+            )
+        ):
+            return True
+
+        # Otherwise require BOTH:
+        #   1) one intent token, and
+        #   2) one subject token distinctive to this Demand.
+        #
+        # This prevents generic collisions such as
+        # "교정 + 결정", "점검 + 기준", or an entity name
+        # alone from expanding the explicit question scope.
+        subject_tokens = (
+            demand_tokens - intent_tokens
+        )
+
+        other_tokens = set()
+        for other_index, other_set in enumerate(
+            token_sets
+        ):
+            if other_index == index:
+                continue
+            other_tokens.update(other_set)
+
+        distinctive_subject = (
+            subject_tokens - other_tokens
+        )
+
+        if (
+            distinctive_subject.intersection(
+                claim_tokens
+            )
+            and intent_tokens.intersection(
+                claim_tokens
+            )
+        ):
             return True
 
     return False

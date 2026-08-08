@@ -501,6 +501,162 @@ def main():
         is True
     )
 
+    # STRICT_DEMAND_INTENT_SUBJECT_TRACE_V1
+    strict_rows = _demand_token_rows(
+        _hybrid_evidence(rubric)
+    )
+
+    # In-scope explicit demand semantics.
+    assert _traceable(
+        "스트레인 게이지의 측정 원리를 보강할 것.",
+        strict_rows,
+    )
+    assert _traceable(
+        "로드셀의 측정 원리를 더 구체적으로 설명할 것.",
+        strict_rows,
+    )
+    assert _traceable(
+        "Wheatstone Bridge 평형조건을 설명할 것.",
+        strict_rows,
+    )
+    assert _traceable(
+        "온도 보상 적용 조건을 구분할 것.",
+        strict_rows,
+    )
+    assert _traceable(
+        "보존기간 결정 기준의 근거를 명확히 할 것.",
+        strict_rows,
+    )
+    assert _traceable(
+        "폐기 원칙을 구체화할 것.",
+        strict_rows,
+    )
+
+    # Generic-token and entity-only false positives.
+    assert not _traceable(
+        "로드셀 현장 설치 기준이 부족함.",
+        strict_rows,
+    )
+    assert not _traceable(
+        "스트레인 게이지 설치방향을 보완할 것.",
+        strict_rows,
+    )
+    assert not _traceable(
+        "교정 주기 결정 시 RBM을 적용할 것.",
+        strict_rows,
+    )
+    assert not _traceable(
+        "정기 점검 시 판정 기준을 구체화할 것.",
+        strict_rows,
+    )
+    assert not _traceable(
+        "로드셀의 크리프와 히스테리시스를 설명할 것.",
+        strict_rows,
+    )
+
+    strict_model_ref = {
+        "matched": True,
+        "hybrid_general_grading_context": (
+            rubric[
+                "hybrid_general_grading_evidence"
+            ]
+        ),
+        "primary_reference": {
+            "id": "STRICT-T1",
+            "topic_id": TOPIC,
+            "title": "strict synthetic",
+            "question_type": "TEST",
+            "expected_structure": [
+                "스트레인 게이지의 측정 원리를 설명한다.",
+                "로드셀의 크리프와 히스테리시스를 설명한다.",
+                "온도 보상 방법을 설명한다.",
+            ],
+            "field_connection_points": [
+                "보존기간 결정 기준을 명확히 한다.",
+                "로드셀 현장 설치 기준을 제시한다.",
+            ],
+            "low_score_patterns": [
+                "Wheatstone Bridge 평형조건을 반대로 설명한다.",
+                (
+                    "편심하중과 과부하는 스트레인 게이지 "
+                    "출력오차에 영향을 주지 않는다고 설명한다."
+                ),
+            ],
+        },
+    }
+
+    strict_projected, strict_projection_diag = (
+        project_hybrid_model_answer_feedback(
+            strict_model_ref
+        )
+    )
+    assert strict_projection_diag["active"] is True
+
+    strict_feedback_text = "\n".join(
+        [
+            *strict_projected.get(
+                "expected_structure",
+                [],
+            ),
+            *strict_projected.get(
+                "field_connection_points",
+                [],
+            ),
+            *strict_projected.get(
+                "low_score_patterns",
+                [],
+            ),
+        ]
+    )
+
+    assert "스트레인 게이지의 측정 원리" in strict_feedback_text
+    assert "온도 보상 방법" in strict_feedback_text
+    assert "보존기간 결정 기준" in strict_feedback_text
+    assert "Wheatstone Bridge" in strict_feedback_text
+
+    for forbidden in (
+        "크리프",
+        "히스테리시스",
+        "편심하중",
+        "과부하",
+        "현장 설치 기준",
+    ):
+        assert forbidden not in strict_feedback_text
+
+    strict_originality = {
+        "ok": True,
+        "raw_text": "raw originality preserved",
+        "parsed": {
+            "improvement_advice": [
+                "온도 보상 적용 조건을 명확히 구분하십시오.",
+                "보존기간 결정 기준의 근거를 구체화하십시오.",
+                "교정 주기 결정 시 RBM을 적용하십시오.",
+                "정기 점검 시 판정 기준을 구체화하십시오.",
+            ],
+        },
+    }
+
+    strict_originality_out = (
+        sanitize_hybrid_originality_evaluation(
+            strict_originality,
+            rubric,
+        )
+    )
+    strict_originality_advice = (
+        strict_originality_out[
+            "parsed"
+        ]["improvement_advice"]
+    )
+
+    assert strict_originality_advice == [
+        "온도 보상 적용 조건을 명확히 구분하십시오.",
+        "보존기간 결정 기준의 근거를 구체화하십시오.",
+    ]
+
+    print("STRICT_DEMAND_INTENT_SUBJECT_TRACE=PASS")
+    print("CALIBRATION_INTERVAL_FALSE_POSITIVE_REJECTED=PASS")
+    print("MODEL_LOW_SCORE_PATTERN_SCOPE_CLEAN=PASS")
+    print("ORIGINALITY_GENERIC_ADVICE_SCOPE_CLEAN=PASS")
     print("SCOPE_NEUTRAL_DOWNWARD_ONLY_POLICY=PASS")
     print("UPWARD_SEMANTIC_SCORE_PRESERVED=PASS")
     print("HYBRID_MODEL_FEEDBACK_PROJECTION=PASS")
