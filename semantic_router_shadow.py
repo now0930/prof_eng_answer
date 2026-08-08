@@ -308,20 +308,39 @@ Important:
 - If candidate evidence is insufficient, choose GENERAL rather than
   forcing the closest Topic.
 - Return JSON only.
-- Every non-empty topic_id must be one of the supplied candidate ids.
+- Every non-empty topic_id must be copied EXACTLY from the supplied
+  candidate topic_id list.
+- routing_mode and topic_id are different fields with different types.
+- NEVER put SINGLE_TOPIC, MULTI_TOPIC, GENERAL, or AMBIGUOUS in topic_id.
+- NEVER put PRIMARY, SUPPORTING, or NONE in topic_id.
+- For MULTI_TOPIC, use separate demand_mappings whose topic_id values are
+  exact candidate topic ids. MULTI_TOPIC itself belongs only in routing_mode.
+- If no candidate owns a demand, list that demand id in
+  uncovered_demand_ids instead of inventing a topic_id.
+
+Field contract:
+- routing_mode enum = SINGLE_TOPIC | MULTI_TOPIC | GENERAL | AMBIGUOUS
+- topic_id enum = one of the exact candidate ids shown above, or empty only
+  when role is NONE
+- role enum = PRIMARY | SUPPORTING | NONE
+- confidence = finite number from 0.0 through 1.0
+
+Forbidden topic_id values:
+["SINGLE_TOPIC", "MULTI_TOPIC", "GENERAL", "AMBIGUOUS",
+ "PRIMARY", "SUPPORTING", "NONE"]
 
 Required JSON:
 {{
-  "routing_mode": "SINGLE_TOPIC|MULTI_TOPIC|GENERAL|AMBIGUOUS",
+  "routing_mode": "MULTI_TOPIC",
   "demand_mappings": [
     {{
       "demand_id": "D1",
-      "topic_id": "candidate_topic_id",
-      "role": "PRIMARY|SUPPORTING|NONE",
-      "confidence": 0.0
+      "topic_id": "<COPY_EXACT_CANDIDATE_TOPIC_ID>",
+      "role": "PRIMARY",
+      "confidence": 0.95
     }}
   ],
-  "uncovered_demand_ids": ["D3"],
+  "uncovered_demand_ids": [],
   "reason": "short reason"
 }}
 

@@ -42,6 +42,77 @@ def candidate(topic_id, title, score=12):
     }
 
 
+class SemanticRouterShadowPromptContractTest(unittest.TestCase):
+    def test_prompt_separates_routing_mode_from_topic_id(self):
+        topic_a = "topic_a"
+        topic_b = "topic_b"
+        prompt = srs.build_semantic_router_prompt(
+            "A와 B를 비교하시오.",
+            demand_result("A와 B 비교"),
+            [
+                {
+                    "topic_id": topic_a,
+                    "title": "A",
+                    "semantic_excerpt": "A scope",
+                },
+                {
+                    "topic_id": topic_b,
+                    "title": "B",
+                    "semantic_excerpt": "B scope",
+                },
+            ],
+        )
+
+        self.assertIn(
+            "routing_mode and topic_id are different fields",
+            prompt,
+        )
+        self.assertIn(
+            "NEVER put SINGLE_TOPIC, MULTI_TOPIC, GENERAL, or AMBIGUOUS in topic_id",
+            prompt,
+        )
+        self.assertIn(
+            "<COPY_EXACT_CANDIDATE_TOPIC_ID>",
+            prompt,
+        )
+        self.assertIn(topic_a, prompt)
+        self.assertIn(topic_b, prompt)
+
+    def test_mode_token_used_as_topic_id_is_rejected(self):
+        result = srs.semantic_route_shadow(
+            "A와 B를 비교하시오.",
+            demand_result("A와 B 비교"),
+            {
+                "candidates": [
+                    candidate("topic_a", "A"),
+                    candidate("topic_b", "B"),
+                ]
+            },
+            llm_call=lambda _prompt: {
+                "routing_mode": "MULTI_TOPIC",
+                "demand_mappings": [
+                    {
+                        "demand_id": "D1",
+                        "topic_id": "MULTI_TOPIC",
+                        "role": "PRIMARY",
+                        "confidence": 0.95,
+                    }
+                ],
+                "uncovered_demand_ids": [],
+                "reason": "malformed",
+            },
+            enabled=True,
+            topic_sheet_dir=Path(tempfile.gettempdir()),
+        )
+
+        self.assertFalse(result["ok"])
+        self.assertEqual(result["status"], "fallback")
+        self.assertIn(
+            "outside Rule candidates",
+            result["error"],
+        )
+
+
 class SemanticRouterShadowUnitTest(unittest.TestCase):
     def test_disabled_by_default_has_zero_llm_dependency(self):
         llm = mock.Mock()
