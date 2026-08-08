@@ -689,3 +689,7 @@ git diff --check -- README.md docs
 9. Question Type을 답안 내용으로 바꾸지 않습니다.
 10. 저장 객체와 Telegram 출력 객체가 다르다고 설명하지 않습니다.
 11. 문서와 runtime이 충돌하면 현재 코드, Rubric source와 회귀 결과를 우선 확인합니다.
+
+## 설계·운영 문서
+
+- [Topic Router v2 설계·운영 문서](docs/topic_router_v2.md) — Question Demand, Semantic Router, SINGLE/MULTI/GENERAL/AMBIGUOUS 모드, Hybrid General, demand-scoped grading 및 운영 feature gate를 정리합니다.
