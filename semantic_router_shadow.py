@@ -1088,10 +1088,255 @@ SEMANTIC_ROUTER_RESPONSE_SCHEMA: dict[str, Any] = {
 }
 
 
+def _resolve_semantic_router_gemini_api_key():
+    # Reuse the existing Telegram Gemini credential contract.
+    return str(
+        os.getenv("GEMINI_API_KEY")
+        or os.getenv("GOOGLE_API_KEY")
+        or os.getenv("GOOGLE_GENERATIVE_AI_API_KEY")
+        or ""
+    ).strip()
+
+
+def _semantic_router_should_use_gemini():
+    # Production auto-selects Gemini when the existing credential is present.
+    provider = str(
+        os.getenv("SEMANTIC_ROUTER_PROVIDER", "auto") or "auto"
+    ).strip().lower()
+
+    if provider == "gemini":
+        return True
+    if provider == "ollama":
+        return False
+    if provider != "auto":
+        raise ValueError(
+            "SEMANTIC_ROUTER_PROVIDER must be auto, gemini, or ollama"
+        )
+
+    return bool(_resolve_semantic_router_gemini_api_key())
+
+
+def _extract_semantic_router_json_object(raw_text):
+    # Parser tolerance only; semantic validation remains in the strict normalizer.
+    text = str(raw_text or "").strip()
+    if not text:
+        raise ValueError("semantic router Gemini response content is empty")
+
+    try:
+        value = json.loads(text)
+    except json.JSONDecodeError:
+        start = text.find("{")
+        end = text.rfind("}")
+        if start < 0 or end < start:
+            raise
+        value = json.loads(text[start : end + 1])
+
+    if not isinstance(value, dict):
+        raise ValueError(
+            "semantic router Gemini content must be JSON object"
+        )
+    return value
+
+
+def _call_semantic_router_gemini_json(prompt):
+    # Same credential, model, endpoint, and generation contract as Telegram.
+    import urllib.error
+    import urllib.request
+
+    api_key = _resolve_semantic_router_gemini_api_key()
+    model = str(
+        os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+        or "gemini-2.5-flash"
+    ).strip()
+    timeout = float(
+        os.getenv("SEMANTIC_ROUTER_GEMINI_TIMEOUT", "180") or "180"
+    )
+
+    if not api_key:
+        raise ValueError(
+            "semantic router Gemini credential is missing"
+        )
+
+    url = (
+        "https://generativelanguage.googleapis.com/v1beta/models/"
+        + model
+        + ":generateContent"
+    )
+
+    payload = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [{"text": str(prompt or "")}],
+            }
+        ],
+        "generationConfig": {
+            "temperature": 0.0,
+            "topP": 1.0,
+            "candidateCount": 1,
+            "maxOutputTokens": 4096,
+        },
+    }
+
+    request = urllib.request.Request(
+        url,
+        data=json.dumps(
+            payload,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        ).encode("utf-8"),
+        headers={
+            "Content-Type": "application/json",
+            "x-goog-api-key": api_key,
+        },
+        method="POST",
+    )
+
+    try:
+        with urllib.request.urlopen(
+            request,
+            timeout=timeout,
+        ) as response:
+            envelope = json.loads(
+                response.read().decode(
+                    "utf-8",
+                    errors="replace",
+                )
+            )
+    except urllib.error.HTTPError as exc:
+        body = ""
+        try:
+            body = exc.read().decode(
+                "utf-8",
+                errors="replace",
+            )
+        except Exception:
+            pass
+        raise RuntimeError(
+            "semantic router Gemini HTTPError "
+            + str(exc.code)
+            + ": "
+            + body[:1000]
+        ) from exc
+
+    if not isinstance(envelope, dict):
+        raise ValueError(
+            "semantic router Gemini response envelope must be object"
+        )
+
+    candidates = envelope.get("candidates") or []
+    if not candidates:
+        raise ValueError(
+            "semantic router Gemini response has no candidates"
+        )
+
+    first = candidates[0]
+    if not isinstance(first, dict):
+        raise ValueError(
+            "semantic router Gemini candidate must be object"
+        )
+
+    content = first.get("content") or {}
+    parts = (
+        content.get("parts") or []
+        if isinstance(content, dict)
+        else []
+    )
+
+    raw_text = "".join(
+        str(part.get("text") or "")
+        for part in parts
+        if isinstance(part, dict)
+    )
+
+    return _extract_semantic_router_json_object(raw_text)
+
+
+def _append_semantic_router_hard_contract(
+    prompt,
+    question_text,
+    question_demand_result,
+    candidate_catalog,
+):
+    demand_rows = (
+        question_demand_result.get("demands") or []
+        if isinstance(question_demand_result, dict)
+        else []
+    )
+    demand_ids = [
+        str(row.get("id") or "").strip()
+        for row in demand_rows
+        if isinstance(row, dict)
+        and str(row.get("id") or "").strip()
+    ]
+    candidate_ids = [
+        str(row.get("topic_id") or "").strip()
+        for row in (candidate_catalog or [])
+        if isinstance(row, dict)
+        and str(row.get("topic_id") or "").strip()
+    ]
+
+    lines = [
+        "",
+        "",
+        "STRICT ROUTER CONTRACT:",
+        "",
+        "This is NOT an exam-answering task.",
+        "Do NOT answer, solve, summarize, or explain the examination question.",
+        "Your only task is Topic Router v2 semantic adjudication.",
+        "",
+        "Question:",
+        str(question_text or ""),
+        "",
+        "You MUST evaluate ALL supplied demands:",
+        json.dumps(demand_rows, ensure_ascii=False, sort_keys=True),
+        "",
+        "Allowed demand_id values ONLY:",
+        json.dumps(demand_ids, ensure_ascii=False),
+        "",
+        "Allowed candidate topic_id values ONLY:",
+        json.dumps(candidate_ids, ensure_ascii=False),
+        "",
+        "Rules:",
+        "1. Never invent a demand_id.",
+        "2. Never invent a topic_id.",
+        "3. Consider every supplied demand separately.",
+        "4. A Topic is PRIMARY when it directly owns the semantic knowledge needed to answer that demand.",
+        "5. A Topic is SUPPORTING only when useful but not an owner.",
+        "6. Use NONE only when no supplied Topic covers that demand.",
+        "7. If two or more distinct Topics are PRIMARY anywhere in the mappings, routing_mode MUST be MULTI_TOPIC.",
+        "8. If exactly one distinct Topic is PRIMARY, routing_mode MUST be SINGLE_TOPIC.",
+        "9. Do not use the student's answer.",
+        "10. Do not score anything.",
+        "11. Do not collapse distinct candidate Topics into one generic Topic merely because they belong to the same broad technical family.",
+        "",
+        "Return exactly one JSON object and no markdown/prose outside it.",
+        "",
+        "Required top-level keys exactly:",
+        "routing_mode, demand_mappings, uncovered_demand_ids, reason",
+        "",
+        "Every demand_mappings item must contain exactly:",
+        "demand_id, topic_id, role, confidence",
+        "",
+        "routing_mode must be one of:",
+        "SINGLE_TOPIC, MULTI_TOPIC, GENERAL, AMBIGUOUS",
+        "",
+        "role must be one of:",
+        "PRIMARY, SUPPORTING, NONE",
+        "",
+        "confidence must be a number from 0.0 through 1.0.",
+    ]
+
+    return str(prompt or "") + "\n".join(lines)
+
+
 def _call_semantic_router_json(
     prompt: str,
 ) -> dict[str, Any]:
     # Dedicated structured-JSON transport for Topic Router v2.
+    if _semantic_router_should_use_gemini():
+        return _call_semantic_router_gemini_json(prompt)
+
     payload = {
         "model": SEMANTIC_ROUTER_MODEL,
         "stream": False,
@@ -1269,6 +1514,12 @@ def semantic_route_shadow(
         )
 
     prompt = build_semantic_router_prompt(
+        question,
+        question_demand_result,
+        catalog,
+    )
+    prompt = _append_semantic_router_hard_contract(
+        prompt,
         question,
         question_demand_result,
         catalog,
