@@ -122,7 +122,7 @@ class CoverageFeedbackAggregatorTest(unittest.TestCase):
                 "OBSERVE",
             )
 
-    def test_duplicate_event_fingerprint_dedupes(self):
+    def test_same_event_fingerprint_across_sessions_counts_recurrence(self):
         with tempfile.TemporaryDirectory() as tmp:
             root = Path(tmp)
             write_event(
@@ -147,13 +147,18 @@ class CoverageFeedbackAggregatorTest(unittest.TestCase):
 
             self.assertEqual(
                 result["valid_event_count"],
-                1,
+                2,
             )
             self.assertEqual(
                 result["gaps"][0][
                     "occurrence_count"
                 ],
-                1,
+                2,
+            )
+            self.assertTrue(
+                result["gaps"][0][
+                    "human_review_candidate"
+                ]
             )
 
     def test_invalid_scoring_event_is_ignored(self):

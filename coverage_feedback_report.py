@@ -111,6 +111,27 @@ def build_coverage_review_report(
         ),
         "human_review_candidate_count": review_count,
         "candidates": candidates,
+        "coverage_grouping": {
+            "strategy": (
+                aggregate.get("policy", {}).get(
+                    "gap_grouping_strategy",
+                    "normalized_exact_text_sha256",
+                )
+                if isinstance(aggregate.get("policy"), dict)
+                else "normalized_exact_text_sha256"
+            ),
+            "cross_session_recurrence_unit": (
+                aggregate.get("policy", {}).get(
+                    "cross_session_recurrence_unit",
+                    "distinct_session",
+                )
+                if isinstance(aggregate.get("policy"), dict)
+                else "distinct_session"
+            ),
+            "semantic_clustering_performed": False,
+            "semantic_equivalence_inferred": False,
+            "paraphrases_may_remain_separate": True,
+        },
         "policy": {
             "report_only": True,
             "current_question_effect": "none",
@@ -156,7 +177,6 @@ def render_coverage_review_markdown(
                 "",
             ]
         )
-        return "\n".join(lines)
 
     for index, row in enumerate(candidates, 1):
         status = _clean_text(
@@ -223,6 +243,12 @@ def render_coverage_review_markdown(
                 "This report is advisory only. "
                 "It does not change routing, scoring, "
                 "or Topic Packs automatically."
+            ),
+            (
+                "Coverage recurrence counts distinct sessions and uses "
+                "normalized exact-text fingerprints only. Semantically "
+                "equivalent paraphrases may remain separate candidates; "
+                "no semantic clustering or automatic merging is performed."
             ),
             "",
         ]

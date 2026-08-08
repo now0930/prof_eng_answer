@@ -83,7 +83,6 @@ def aggregate_coverage_feedback(
     threshold = max(2, int(human_review_threshold))
 
     groups: Dict[str, Dict[str, Any]] = {}
-    seen_event_fingerprints = set()
     scanned_sessions = 0
     valid_events = 0
 
@@ -99,10 +98,10 @@ def aggregate_coverage_feedback(
         )
         if not event_fingerprint:
             continue
-        if event_fingerprint in seen_event_fingerprints:
-            # Avoid duplicate copies of an identical event.
-            continue
-        seen_event_fingerprints.add(event_fingerprint)
+
+        # One coverage artifact is read from each session directory.
+        # Equal event fingerprints across different sessions are a
+        # legitimate recurrence signal and must not be globally deduped.
         valid_events += 1
 
         routing_mode = _clean_text(
@@ -231,7 +230,11 @@ def aggregate_coverage_feedback(
             "score_effect": "none",
             "routing_effect": "none",
             "student_answer_used": False,
+            "gap_grouping_strategy": "normalized_exact_text_sha256",
+            "cross_session_recurrence_unit": "distinct_session",
             "semantic_clustering_performed": False,
+            "semantic_equivalence_inferred": False,
+            "paraphrases_may_remain_separate": True,
             "auto_topic_pack_creation": False,
             "human_review_required": True,
             "current_question_effect": "none",
