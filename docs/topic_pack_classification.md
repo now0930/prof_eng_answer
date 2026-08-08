@@ -91,7 +91,7 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 | 48 | `strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error` | `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준 | `IC-2027-W-2-3` 측정 시 오차발생 원인과 대책 | HIGH | Strain gauge/load cell의 변환원리·bridge·보상·오차사슬은 센서·계측기 항목이 중심이다. |
 | 49 | `temperature_measurement_error_heat_transfer` | `IC-2027-W-2-3` 측정 시 오차발생 원인과 대책 | `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준 | HIGH | 전도·대류·복사·담금깊이 등 측정오차 원인과 저감대책이 Topic의 직접 출제의도다. |
 | 50 | `thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization` | `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준 | `IC-2027-W-2-3` 측정 시 오차발생 원인과 대책 | HIGH | NTC/PTC 온도센서의 저항-온도 특성·측정회로·선형화·오차가 중심이다. |
-| 51 | `thermocouple_temperature_sensor_seebeck_reference_junction_compensation` | `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준 | `IC-2027-W-2-3` 측정 시 오차발생 원인과 대책 | MEDIUM | README와 Fact는 Seebeck·기준접점·CJC·보상도선의 열전대 원리를 지지한다. 다만 추출된 Model evidence가 RTD 내용으로 보이는 source anomaly가 있어 별도 점검이 필요하다. |
+| 51 | `thermocouple_temperature_sensor_seebeck_reference_junction_compensation` | `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준 | `IC-2027-W-2-3` 측정 시 오차발생 원인과 대책 | MEDIUM | README·Fact·Model evidence가 Seebeck·기준접점·CJC·보상도선의 열전대 원리를 일관되게 지지한다. 2026-08-08 source repair와 generated semantic/idempotence audit에서 RTD positive ownership contamination 0건을 확인했으며, RTD 관련 문자열은 rejected/low-score 경계 표현으로만 유지한다. |
 | 52 | `ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error` | `IC-2027-W-2-2` 비접촉 방법(초음파, 광 등)을 통한 측정원리 및 알고리즘 | `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준<br>`IC-2027-W-2-3` 측정 시 오차발생 원인과 대책 | HIGH | 초음파 TOF 비접촉 거리·레벨 측정과 온도보상·반사/설치오차가 공식 비접촉 측정 항목에 직접 해당한다. |
 
 ## 5. 공식 세부항목별 ownership index
@@ -206,7 +206,7 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 
 - PRIMARY: `IC-2027-W-2-1` 측정센서(온도, 압력, 습도, 액위, 수위, 속도, 위치 등), 계측기의 작동원리 및 선정기준
 - SECONDARY: `IC-2027-W-2-3`
-- 판단 근거: README와 Fact는 Seebeck·기준접점·CJC·보상도선의 열전대 원리를 지지한다. 다만 추출된 Model evidence가 RTD 내용으로 보이는 source anomaly가 있어 별도 점검이 필요하다.
+- 판단 근거: README·Fact·Model evidence가 Seebeck·기준접점·CJC·보상도선의 열전대 원리를 일관되게 지지한다. 2026-08-08 source repair와 generated semantic/idempotence audit에서 RTD positive ownership contamination 0건을 확인했으며, RTD 관련 문자열은 rejected/low-score 경계 표현으로만 유지한다.
 
 ## 7. PRIMARY owner가 없는 공식 세부항목
 
@@ -225,13 +225,13 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 - `IC-2027-W-4-9` 계측제어설비 설치 및 기술기준
 - `IC-2027-W-5-2` 계측제어 관련 동향
 
-## 8. Source 정합성 점검 후보
+## 8. Source 정합성 점검 결과
 
 - `thermocouple_temperature_sensor_seebeck_reference_junction_compensation`:
-  Stage 2B-1 evidence에서 README와 Fact는 열전대 주제를 지지하지만
-  추출된 Model evidence는 RTD 내용으로 보였다.
-  공식 기준 매핑은 `IC-2027-W-2-1`로 유지하되 source 원문 정합성은
-  classification 작업과 분리하여 별도 점검한다.
+  Stage 2B-1에서 확인된 mixed TC+RTD source anomaly는 2026-08-08 source repair로 해소했다.
+  Fact title/safe expressions, Logic display metadata, Model legacy fields, Topic Importance note를 Thermocouple ownership에 맞게 정리했다.
+  generated 6개 bank에서 RTD positive ownership contamination 0건과 semantic idempotence를 확인했다.
+  `IC-2027-W-2-1` PRIMARY / `IC-2027-W-2-3` SECONDARY 매핑과 기존 MEDIUM mapping confidence는 재분류하지 않는다.
 
 ## 9. 변경 경계
 

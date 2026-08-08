@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-08T02:57:46Z-generated-topic-pack-fact-anchors",
+  "version": "2026-08-08T07:39:27Z-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -123173,7 +123173,7 @@
     {
       "schema_version": "fact_anchor.v1",
       "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "title_ko": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+      "title_ko": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
       "question_type_hint": "PRINCIPLE_INTERPRETATION",
       "anchors": [
         {
@@ -123762,11 +123762,11 @@
         }
       ],
       "safe_expressions": [
-        "Pt100은 0℃에서 공칭저항이 100 Ω인 백금 RTD이다.",
-        "RTD는 외부 여기전류를 사용하여 저항을 측정한다.",
-        "3선식은 동일 리드저항 가정에서 리드선 영향을 1차 보상한다.",
-        "4선식은 force lead와 sense lead를 분리하는 Kelvin 측정이다.",
-        "P=I²R은 RTD의 직접 측정원리가 아니라 자기발열 오차를 설명한다."
+        "열전대는 서로 다른 도체와 접점 온도차에 의해 열기전력을 발생시키며 측정접점의 절대온도를 직접 출력하는 센서가 아니다.",
+        "절대온도 환산에는 기준접점 온도를 측정하고 해당 열전대 종류의 열기전력 특성에 따라 냉접점 보상을 수행해야 한다.",
+        "연장도선과 보상도선은 열전대 종류, 극성, 허용온도와 접속조건을 맞춰 사용하며 일반 동선으로 임의 대체하지 않는다.",
+        "열전대 종류마다 전압-온도 특성이 다르므로 종류별 표준 열기전력표 또는 적용 범위가 정의된 다항식을 사용한다.",
+        "설치·교정·진단에서는 CJC, 극성, 단선, 절연, 노이즈, 보호관과 열전달 조건을 분리하여 확인한다."
       ],
       "revision_notes": [
         "created_from_reviewed_thermocouple_requirements_markdown",
@@ -123775,7 +123775,8 @@
         "focused_on_seebeck_reference_junction_cjc_and_compensating_wire",
         "thermistor_ntc_ptc_kept_as_independent_future_topic",
         "deterministic_checks_disabled",
-        "candidate_extraction_rules_empty"
+        "candidate_extraction_rules_empty",
+        "repaired_accidental_rtd_positive_payload_in_fact_title_and_safe_expressions"
       ],
       "topic_label": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
       "triggers": [
@@ -123924,13 +123925,8 @@
         "역극성",
         "이상을",
         "진단한다",
-        "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
-        "온도센서의",
-        "Pt100",
-        "측정전류",
-        "선식",
-        "배선보상",
         "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
+        "온도센서의",
         "열전대 측정 체인",
         "측정",
         "체인",
@@ -124359,7 +124355,6 @@
         "열전대의 Seebeck 효과, 측정접점과 기준접점, 냉접점 보상 및 보상도선을 설명하시오.",
         "열전대와 RTD를 비교하되 열전대의 Seebeck 효과, 기준접점 보상, 연장도선과 보상도선을 중심으로 설명하시오.",
         "열전대의 Seebeck 효과, 측정접점과 기준접점 보상 원리를 설명하시오.",
-        "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
         "열전대 온도센서의 원리, 기준접점 보상 및 보상도선"
       ],
       "priority": "NORMAL"

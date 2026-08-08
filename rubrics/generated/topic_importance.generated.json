@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-08T02:57:46Z-generated-topic-pack-importance",
+  "version": "2026-08-08T07:39:27Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -1727,7 +1727,7 @@
         "접점 구조, 보호관과 설치조건을 응답속도·절연·노이즈와 연결한다.",
         "교정, 불확도, drift, 단선·극성·CJC 오류 진단을 포함한다."
       ],
-      "note": "RTD를 단순 배선 비교가 아니라 금속 저항의 온도의존성, Pt100 표준특성, 여기전류와 자기발열, 2선식·3선식·4선식 배선보상, transmitter, 설치·교정·진단을 연결하는 센서 원리형 핵심 Topic으로 평가한다. Thermocouple과 Thermistor는 별도 Topic으로 분리한다.",
+      "note": "열전대의 Seebeck 효과, 측정접점과 기준접점, 냉접점 보상, 연장도선·보상도선, 비선형 전압-온도 변환, 설치·교정·진단을 연결하여 설명하는 온도센서 원리형 핵심 Topic으로 평가한다. RTD와 Thermistor의 상세 원리는 별도 Topic으로 분리한다.",
       "revision_notes": [
         "created_from_reviewed_thermocouple_requirements_markdown",
         "separated_from_temperature_sensor_thermocouple_rtd_comparison_topic",
@@ -1736,7 +1736,8 @@
         "thermistor_ntc_ptc_kept_as_independent_future_topic",
         "deterministic_checks_disabled",
         "candidate_extraction_rules_empty",
-        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
+        "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다.",
+        "repaired_accidental_rtd_topic_importance_note"
       ],
       "topic_label": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선"
     },

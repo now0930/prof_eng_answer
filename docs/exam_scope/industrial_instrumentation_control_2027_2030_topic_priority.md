@@ -26,9 +26,9 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 | 구분 | 수량 | 상태 |
 |---|---:|---|
 | 기존 frozen roadmap의 계획 Topic | 17 | **COMPLETE** |
-| 현재 전체 Topic Pack | 69 | **ACTIVE** |
-| 공식 criterion COVERED | 30 | **COVERED** |
-| 공식 criterion PARTIAL | 2 | **REMAINING** |
+| 현재 전체 Topic Pack | 71 | **ACTIVE** |
+| 공식 criterion COVERED | 32 | **COVERED** |
+| 공식 criterion PARTIAL | 0 | **NONE** |
 | 공식 criterion GAP | 1 | **REMAINING** |
 
 기존 TIER 1~3의 17개 Topic은 모두 구현·통합·검증·main 반영을 완료했다.
@@ -174,9 +174,9 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 
 ## 11. 후속 작업 순서
 
-1. `IC-2027-W-5-2` Dynamic Review Lane 운영 규칙 작성.
-2. Thermocouple mixed TC+RTD source repair를 별도 commit으로 수행.
-3. 위 작업 후 공식 Coverage를 다시 read-only 재감사한다.
+1. **COMPLETE** — `IC-2027-W-5-2` Dynamic Review Lane 운영 규칙을 `industrial_instrumentation_control_2027_2030_dynamic_review_lane.md`로 확정했다.
+2. **VALIDATED / COMMIT PENDING** — Thermocouple mixed TC+RTD source repair와 generated semantic/idempotence 검증을 완료했다.
+3. **COMPLETE** — source repair는 coverage backlog가 아니므로 authoritative Coverage `32 / 0 / 1`은 재평가하지 않고 유지했으며, Coverage Matrix의 criterion 상태·PRIMARY/SECONDARY count는 그대로 둔 채 source 정합성 상태 문구만 repair 완료 상태로 동기화했다.
 
 남은 static Topic authoring은 없다.
 `IC-2027-W-5-2`는 최신동향·법령·표준의 지속 갱신 문제이므로 정적 Topic Pack을 생성하지 않고 `DYNAMIC_REVIEW_LANE`으로 관리한다.
@@ -186,6 +186,6 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 - Official Category ≠ Topic Pack ≠ Question Type.
 - 이번 잔여범위는 지식 coverage 문제이므로 Question Type을 추가하지 않는다.
 - `IC-2027-W-5-2`는 static Topic이 아니라 `DYNAMIC_REVIEW_LANE`으로 유지한다.
-- Thermocouple Topic의 mixed TC+RTD content 문제는 coverage backlog가 아니라 별도 source repair다.
+- Thermocouple Topic의 mixed TC+RTD source anomaly는 source repair와 generated semantic/idempotence 검증으로 해소했으며, coverage backlog가 아니므로 official coverage와 ownership은 변경하지 않는다.
 - 이 Roadmap 갱신 단계에서는 Topic source JSON, generated rubric, production Python을 변경하지 않는다.
 - 기존 완료 19 Topic의 source 또는 generated 결과를 재작성하지 않는다.

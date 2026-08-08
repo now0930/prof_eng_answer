@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-08T02:57:46Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-08-08T07:39:27Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -29700,7 +29700,7 @@
     },
     {
       "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-      "display_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+      "display_name": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
       "difficulty": "FIELD_APPLICATION",
       "cap_policy": {},
       "candidate_extraction": {},

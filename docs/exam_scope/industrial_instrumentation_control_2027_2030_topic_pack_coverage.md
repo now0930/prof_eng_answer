@@ -116,12 +116,12 @@ Roadmap 인접문맥은 planning evidence로만 사용하며 실제 Topic source
 - PRIMARY Topic 수가 0이라는 사실만으로 GAP을 의미하지 않는다.
 - 반대로 관련 Topic이 존재해도 공식 criterion의 핵심 범위를 다루지 못하면 PARTIAL이다.
 
-## 8. Source 정합성 별도 이슈
+## 8. Source 정합성 별도 이슈 — RESOLVED
 
-- `thermocouple_temperature_sensor_seebeck_reference_junction_compensation`의
-  model evidence에는 열전대와 RTD 내용이 혼재하는 정합성 이슈가 확인되어 있다.
-- 이 source 정합성 이슈는 `IC-2027-W-2-1`의 COVERED 판정을 뒤집는 coverage blocker가 아니며 별도 source repair 대상으로 유지한다.
-- Topic source repair는 coverage 분류 작업과 분리하여 별도 수행한다.
+- `thermocouple_temperature_sensor_seebeck_reference_junction_compensation`의 mixed TC+RTD source anomaly는 2026-08-08 source repair와 generated semantic/idempotence audit로 해소했다.
+- RTD positive ownership contamination은 0건이며, RTD 관련 문자열은 rejected/low-score 또는 revision metadata의 경계 표현으로만 유지한다.
+- 이 repair는 coverage backlog 해소가 아니라 source 정합성 수리이므로 `IC-2027-W-2-1`의 **COVERED** 판정과 authoritative Coverage `32 / 0 / 1`은 재평가하지 않는다.
+- Coverage Matrix의 criterion 상태·PRIMARY/SECONDARY count는 변경하지 않고, 본 절의 source 상태 설명만 repair 완료 상태로 동기화한다.
 
 ## 9. 확장 후 잔여범위 및 다음 단계
 

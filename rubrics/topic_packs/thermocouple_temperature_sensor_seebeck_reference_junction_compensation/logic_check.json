@@ -1,10 +1,10 @@
 {
   "schema_version": "topic_pack.logic_check.v1",
   "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
-  "title": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+  "title": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
   "deterministic_checks": {
     "enabled": false,
-    "topic_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+    "topic_name": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
     "question_type": "PRINCIPLE_INTERPRETATION",
     "difficulty_profile": "FIELD_APPLICATION",
     "topic_aliases": [],
@@ -15,7 +15,7 @@
     "de_claim_trust": {}
   },
   "llm_profile": {
-    "display_name": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+    "display_name": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
     "difficulty": "FIELD_APPLICATION",
     "cap_policy": {},
     "candidate_extraction": {},
@@ -60,7 +60,8 @@
     "focused_on_seebeck_reference_junction_cjc_and_compensating_wire",
     "thermistor_ntc_ptc_kept_as_independent_future_topic",
     "deterministic_checks_disabled",
-    "candidate_extraction_rules_empty"
+    "candidate_extraction_rules_empty",
+    "repaired_accidental_rtd_display_metadata_in_thermocouple_logic"
   ],
   "topic_label": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선"
 }
