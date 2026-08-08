@@ -4396,6 +4396,14 @@ def _phase6_run_gemini_semantic_grader(
             connection_eval=connection_eval,
         )
 
+        from hybrid_demand_scope_guard import (
+            sanitize_hybrid_semantic_evaluation,
+        )
+        result = sanitize_hybrid_semantic_evaluation(
+            result,
+            subject_rubric,
+        )
+
         try:
             _phase2_json_write(
                 session_dir / "gemini_semantic_evaluation.json",
@@ -4792,6 +4800,19 @@ def _phase2_postprocess_grade(legacy_result):
             scoring_model,
         )
     )
+
+    from hybrid_demand_scope_guard import (
+        restore_blocked_semantic_layer_scores,
+    )
+    (
+        layer_scores,
+        hybrid_demand_scope_guard_eval,
+    ) = restore_blocked_semantic_layer_scores(
+        layer_scores,
+        semantic_guard_baseline,
+        gemini_eval,
+    )
+
     (
         layer_scores,
         semantic_downward_guard_eval,
@@ -4809,7 +4830,8 @@ def _phase2_postprocess_grade(legacy_result):
         volume=volume,
         fact_eval=fact_eval,
         connection_eval=connection_eval,
-        session_dir=session_dir
+        session_dir=session_dir,
+        subject_rubric=subject_rubric_for_gemini,
     )
 
     layer_scores = _phase8_apply_originality_to_layer_scores(
@@ -4915,6 +4937,7 @@ def _phase2_postprocess_grade(legacy_result):
         "interview_followup": interview_followup,
         "gemini_semantic_evaluation": gemini_eval,
         "semantic_downward_guard_evaluation": semantic_downward_guard_eval,
+        "hybrid_demand_scope_guard_evaluation": hybrid_demand_scope_guard_eval,
         "question_type_evaluation": question_type_eval,
         "model_answer_reference": model_answer_ref,
         "originality_evaluation": originality_eval,
@@ -5582,6 +5605,7 @@ def _phase8_run_originality_evaluator(
     fact_eval,
     connection_eval,
     session_dir=None,
+    subject_rubric=None,
 ):
     def persist_evaluation(eval_data):
         if session_dir is None:
@@ -5641,6 +5665,13 @@ def _phase8_run_originality_evaluator(
             "parsed": parsed,
         }
 
+        from hybrid_demand_scope_guard import (
+            sanitize_hybrid_originality_evaluation,
+        )
+        eval_data = sanitize_hybrid_originality_evaluation(
+            eval_data,
+            subject_rubric,
+        )
         persist_evaluation(eval_data)
 
         print(
@@ -5669,6 +5700,13 @@ def _phase8_run_originality_evaluator(
             "parsed": parsed,
         }
 
+        from hybrid_demand_scope_guard import (
+            sanitize_hybrid_originality_evaluation,
+        )
+        eval_data = sanitize_hybrid_originality_evaluation(
+            eval_data,
+            subject_rubric,
+        )
         persist_evaluation(eval_data)
 
         print(
