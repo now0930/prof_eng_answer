@@ -361,11 +361,13 @@ Telegram /grade
 | 구분 | 위치 | 역할 |
 |---|---|---|
 | Topic Pack Source | `rubrics/topic_packs/<topic_id>/` | 사람이 검토하고 직접 관리하는 source of truth |
-| Topic Sheet | `docs/topic_sheets/<topic_id>.md` | source JSON 작성 전 요구사항과 경계를 구조화하는 Markdown |
-| Generated Rubric Bank | `rubrics/generated/*.generated.json` | 52개 Topic Pack source를 runtime bank로 합친 build output |
+| Topic Sheet | `docs/topic_sheets/<topic_id>.md` | source JSON 작성 전 요구사항과 의미 경계를 구조화 |
+| Focused Regression | `scripts/test_<topic>_*.py` | Topic별 핵심 사실·fatal·인접 Topic contamination 회귀 검증 |
+| Generated Rubric Bank | `rubrics/generated/*.generated.json` | Topic Pack source를 runtime bank로 합친 build output |
+| Classification / Coverage / Roadmap | `docs/topic_pack_classification.md`, `docs/exam_scope/` | 공식 criterion ownership, coverage와 추가 우선순위 관리 |
 | Legacy Rubric Bank | `rubrics/*/industrial_instrumentation_control.json` | 기존 통합 bank와 호환·비교 경로 |
 
-현재 generated bank는 6개입니다.
+현재 저장소에는 **71개 Topic Pack**이 있으며 generated runtime bank는 다음 **6개**입니다.
 
 ```text
 fact_anchors.generated.json
@@ -376,46 +378,94 @@ logic_check_profiles.generated.json
 topic_pack_manifest.generated.json
 ```
 
-현재 manifest에는 **52개 Topic Pack**이 등록되어 있습니다. 문서 탐색용으로는 다음 네 영역으로 묶습니다.
+`rubrics/generated/*.generated.json`은 직접 편집하지 않습니다. 사람이 관리하는 source는 `rubrics/topic_packs/<topic_id>/`이며, source authoring과 검증이 끝난 뒤 builder로 generated bank를 재생성합니다.
 
-| 영역 | Topic 수 |
-|---|---:|
-| Software / OT / Industrial AI | 13 |
-| Control Valve / Final Control Element | 16 |
-| Control Theory | 12 |
-| Instrumentation / Sensor | 11 |
-| 합계 | 52 |
-
-이 분류는 문서 탐색용이며 runtime difficulty나 Question Type 분류를 대체하지 않습니다.
-
-Software 범위는 SW-01~SW-13으로 관리합니다. PLC·DCS·SCADA 구조, 제어논리, HMI/Alarm, Software Lifecycle, SIS/SIL Software, 형상·변경관리, 산업통신, 실시간 네트워크, OT Cybersecurity, 프로젝트/FAT/SAT, Historian·MES·IT/OT, Industrial AI, Physical AI를 포함합니다.
-
-새 Topic의 표준 authoring 흐름은 다음과 같습니다.
+Topic Pack 기본 source 구성:
 
 ```text
-요구사항 Markdown과 Topic 경계 확정
-  → Topic Sheet 검토
-  → 기존 schema를 기준으로 source JSON 직접 작성
-  → topic별 focused validation
-  → topic 단위 commit
-  → 인접 Topic ownership / alias / handoff 의미 감사
-  → integration 시 generated bank를 한 번 rebuild
-  → PROMOTE_GENERATED=0 release validation
-  → clean checkout / CI 확인
+rubrics/topic_packs/<topic_id>/
+├── README.md
+├── fact_anchor.json
+├── logic_check.json
+├── model_answer.json
+└── topic_importance.json
 ```
 
-원칙:
+필요한 Topic은 `docs/topic_sheets/<topic_id>.md`와 Topic 전용 focused regression을 함께 추가합니다.
 
-- `rubrics/generated/*.generated.json`을 직접 수정하지 않습니다.
-- LLM이 만든 opaque JSON을 그대로 source로 채택하지 않습니다.
-- source JSON은 기존 schema와 validator를 기준으로 명시적으로 작성하고 사람이 diff를 검토합니다.
-- 병렬 Topic 작업은 source 단계에서 분리하고 generated rebuild는 통합 단계에서 수행합니다.
-- committed regression은 로컬 `data/sessions/...`에 의존하지 않고 `scripts/fixtures/`의 tracked fixture를 사용합니다.
-- container smoke는 LLM 연동, container-only dependency, hostname, mount, 환경변수 또는 실제 deployment/runtime 차이가 있는 변경에만 수행합니다.
+### 9.1 앞으로의 신규 Topic Pack 추가 절차
 
-전체 구조와 현재 52개 Topic inventory는 [`docs/topic_pack_architecture.md`](docs/topic_pack_architecture.md), 작성 기준은 [`docs/rubric_authoring_guide.md`](docs/rubric_authoring_guide.md), 실행 절차는 [`docs/topic_pack_workflow.md`](docs/topic_pack_workflow.md)를 참조합니다.
+```text
+1. Candidate 선정
+   ↓
+2. Read-only 중복·ownership·인접 Topic 경계 감사
+   ↓
+3. 요구사항 / Topic Sheet 확정
+   ↓
+4. fact_anchor / logic_check / model_answer / topic_importance 작성
+   ↓
+5. Topic 전용 focused semantic regression 작성·통과
+   ↓
+6. LLM 의미감사와 source 경계 검토
+   ↓
+7. Classification / Coverage / Roadmap 영향 판정
+   ↓
+8. Generated 6-bank 재생성
+   ↓
+9. Generated 의미감사 + semantic idempotence 감사
+   ↓
+10. focused / source / generated / Router / release 검증
+   ↓
+11. 검증된 파일만 Topic 단위 독립 commit
+   ↓
+12. 별도 push 후 local / tracking / remote SHA 검증
+```
+
+운영 원칙:
+
+- 신규 Topic은 공식 criterion의 `GAP`/`PARTIAL`, 기출 반복성, 현장 중요도와 Roadmap을 근거로 선정합니다.
+- 단순히 키워드가 다르다는 이유로 Topic을 분리하지 않습니다.
+- 기존 Topic과 원리·오류·적용 범위가 실질적으로 겹치면 신규 Topic을 만들지 않습니다.
+- 기존 Topic의 내용 오류·혼입은 **coverage backlog와 source anomaly를 구분**하고, 신규 Topic 생성보다 기존 Topic repair를 우선합니다.
+- `fact_anchor.json`, `logic_check.json`, `model_answer.json`, `topic_importance.json`은 동일한 Topic 의미 경계를 공유해야 합니다.
+- 인접 Topic 내용은 `fatal_wrong_claims`, `rejected_explanations`, `low_score_patterns` 같은 negative boundary로 둘 수 있지만 현재 Topic의 positive ownership으로 사용하지 않습니다.
+- `docs/topic_pack_classification.md`의 PRIMARY/SECONDARY ownership은 실제 의미 범위가 변할 때만 수정합니다.
+- Coverage Matrix는 공식 criterion 상태가 실제로 변할 때만 갱신합니다.
+- 최신동향·법령·표준처럼 정적 Topic Pack으로 고정하기 어려운 범위는 `DYNAMIC_REVIEW_LANE`으로 관리할 수 있습니다.
+- LLM 의미감사는 저장소 스크립트가 LLM을 호출하도록 만들지 않고 별도 review 단계에서 수행합니다.
+- builder의 timestamp 등 의도적으로 변하는 field는 byte equality가 아니라 해당 field를 정규화한 **semantic idempotence**로 확인합니다.
+- production Python, container 전용 hostname, mount, dependency 또는 runtime 경계가 바뀌지 않는 Topic 작업은 host focused validation을 기본으로 하며 불필요한 container 전체 회귀를 반복하지 않습니다.
+- 병렬 Topic 확장은 Topic별 local commit을 유지하고 Lane 전체 검증 후 Lane branch를 한 번만 push합니다.
+- shared classification / coverage / generated 변경은 Lane 결과를 통합한 뒤 별도 integration 단계에서 수행합니다.
+- commit과 push는 분리하고 force push는 사용하지 않습니다.
+- push 후 local HEAD, tracking ref, remote SHA가 동일한지 확인합니다.
+
+기본 validation 흐름:
+
+```text
+py_compile
+  → Topic focused regression
+  → source / generated validator
+  → Router regression
+  → git diff --check
+  → rubric_manager.py validate-all
+  → 필요한 경우에만 container smoke
+```
+
+### 9.2 로컬 운영 스크립트와 Git tracking
+
+`gemini_script/`는 authoring, audit, commit, push를 보조하는 **로컬 일회성 운영 스크립트 공간**입니다.
+
+- production source가 아닙니다.
+- Git tracking 대상이 아니며 `.gitignore`로 제외합니다.
+- Topic Pack source나 generated bank의 source of truth로 사용하지 않습니다.
+- 운영 스크립트가 없어도 committed source와 테스트만으로 저장소 상태를 재검증할 수 있어야 합니다.
+- 재사용 가능한 production 도구가 필요하면 `gemini_script/`가 아니라 `scripts/` 아래에 일반화된 CLI/validator로 작성하고 테스트와 함께 추적합니다.
+
+현재 Topic inventory의 authoritative runtime 목록은 [`rubrics/generated/topic_pack_manifest.generated.json`](rubrics/generated/topic_pack_manifest.generated.json), 공식 criterion ownership은 [`docs/topic_pack_classification.md`](docs/topic_pack_classification.md), 상세 authoring 절차는 [`docs/rubric_authoring_guide.md`](docs/rubric_authoring_guide.md)와 [`docs/topic_pack_workflow.md`](docs/topic_pack_workflow.md)를 기준으로 합니다.
 
 ---
+
 ## 10. 검증
 
 ### 10.1 기본 순서

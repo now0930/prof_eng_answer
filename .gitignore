@@ -80,3 +80,6 @@ compose.yaml
 compose.yml
 !docker-compose.example.yml
 !docker-compose.example.yaml
+
+# Local one-off repository operation scripts
+gemini_script/
