@@ -78,6 +78,41 @@ class SemanticRouterShadowPromptContractTest(unittest.TestCase):
         self.assertIn(topic_a, prompt)
         self.assertIn(topic_b, prompt)
 
+    def test_prompt_requires_mode_primary_role_consistency(self):
+        prompt = srs.build_semantic_router_prompt(
+            "캐비테이션과 플래싱을 설명하시오.",
+            demand_result("캐비테이션과 플래싱"),
+            [
+                {
+                    "topic_id": "cavitation_topic",
+                    "title": "Cavitation",
+                    "semantic_excerpt": "owns cavitation and flashing",
+                },
+                {
+                    "topic_id": "noise_topic",
+                    "title": "Noise",
+                    "semantic_excerpt": "adjacent noise topic",
+                },
+            ],
+        )
+
+        self.assertIn(
+            "Exactly 1 distinct PRIMARY topic => routing_mode MUST be SINGLE_TOPIC",
+            prompt,
+        )
+        self.assertIn(
+            "2 or more distinct PRIMARY topics => routing_mode MUST be MULTI_TOPIC",
+            prompt,
+        )
+        self.assertIn(
+            "SUPPORTING topics NEVER make a route MULTI_TOPIC",
+            prompt,
+        )
+        self.assertIn(
+            "Multiple candidate topics NEVER by themselves make a route MULTI_TOPIC",
+            prompt,
+        )
+
     def test_mode_token_used_as_topic_id_is_rejected(self):
         result = srs.semantic_route_shadow(
             "A와 B를 비교하시오.",

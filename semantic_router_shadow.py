@@ -741,6 +741,19 @@ Field contract:
 - role enum = PRIMARY | SUPPORTING | NONE
 - confidence = finite number from 0.0 through 1.0
 
+Mode/role consistency is mandatory:
+- First decide PRIMARY/SUPPORTING/NONE for each demand mapping.
+- Count DISTINCT topic_id values whose role is PRIMARY.
+- Exactly 1 distinct PRIMARY topic => routing_mode MUST be SINGLE_TOPIC.
+- 2 or more distinct PRIMARY topics => routing_mode MUST be MULTI_TOPIC.
+- SUPPORTING topics NEVER make a route MULTI_TOPIC.
+- Multiple candidate topics NEVER by themselves make a route MULTI_TOPIC.
+- A closely related candidate may be SUPPORTING or NONE while the route
+  remains SINGLE_TOPIC when only one Topic owns the question.
+- Use GENERAL only when no candidate Topic positively owns the demand.
+- Use AMBIGUOUS only when ownership itself cannot be resolved from the
+  supplied evidence; do not use it merely because several candidates exist.
+
 Forbidden topic_id values:
 ["SINGLE_TOPIC", "MULTI_TOPIC", "GENERAL", "AMBIGUOUS",
  "PRIMARY", "SUPPORTING", "NONE"]
