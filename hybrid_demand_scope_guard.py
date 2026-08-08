@@ -482,9 +482,16 @@ def restore_blocked_semantic_layer_scores(
         "marker": HYBRID_DEMAND_SCOPE_GUARD_MARKER,
         "active": False,
         "applied": False,
+        "policy": (
+            "scope_neutral_downward_only_v1"
+        ),
         "adjustments": [],
+        "preserved_upward_layers": [],
     }
-    if not isinstance(rows, list) or not isinstance(baseline_scores, dict):
+
+    if not isinstance(rows, list):
+        return rows, diagnostic
+    if not isinstance(baseline_scores, dict):
         return rows, diagnostic
 
     guard = (
@@ -497,37 +504,197 @@ def restore_blocked_semantic_layer_scores(
 
     blocked = {
         _text(value)
-        for value in _list(guard.get("blocked_layer_ids"))
+        for value in _list(
+            guard.get("blocked_layer_ids")
+        )
         if _text(value)
     }
-    diagnostic["active"] = guard.get("active") is True
+    diagnostic["active"] = (
+        guard.get("active") is True
+    )
 
     for row in rows:
         if not isinstance(row, dict):
             continue
+
         layer_id = _text(row.get("layer_id"))
-        if layer_id not in blocked or layer_id not in baseline_scores:
-            continue
-        try:
-            baseline = float(baseline_scores[layer_id])
-            current = float(row.get("score") or 0.0)
-        except (TypeError, ValueError, OverflowError):
+        if (
+            layer_id not in blocked
+            or layer_id not in baseline_scores
+        ):
             continue
 
-        row["score_before_hybrid_demand_scope_guard"] = current
+        try:
+            baseline = float(
+                baseline_scores[layer_id]
+            )
+            current = float(
+                row.get("score") or 0.0
+            )
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+        ):
+            continue
+
+        # Scope guard is directional. If semantic scoring is
+        # already above the pre-semantic baseline, an out-of-scope
+        # negative claim did not create a downward score effect.
+        # Keep the score and remove only the invalid rationale.
+        if current >= baseline:
+            row[
+                "hybrid_demand_scope_guard_applied"
+            ] = False
+            row[
+                "hybrid_demand_scope_guard_policy"
+            ] = (
+                "preserve_non_downward_semantic_score"
+            )
+            diagnostic[
+                "preserved_upward_layers"
+            ].append(
+                {
+                    "layer_id": layer_id,
+                    "baseline": round(
+                        baseline,
+                        3,
+                    ),
+                    "semantic_score": round(
+                        current,
+                        3,
+                    ),
+                }
+            )
+            continue
+
+        row[
+            "score_before_hybrid_demand_scope_guard"
+        ] = current
         row["score"] = round(baseline, 3)
-        row["hybrid_demand_scope_guard_applied"] = True
+        row[
+            "hybrid_demand_scope_guard_applied"
+        ] = True
+        row[
+            "hybrid_demand_scope_guard_policy"
+        ] = (
+            "block_out_of_scope_downward_effect"
+        )
         row["reason"] = (
-            "Hybrid demand-scope guard: 명시 Question Demand 범위 밖의 "
-            "semantic 감점 근거를 제외하여 사전 semantic 점수로 복원함."
+            "Hybrid demand-scope guard: "
+            "명시 Question Demand 범위 밖의 "
+            "semantic 감점 근거가 점수를 낮춘 경우에만 "
+            "사전 semantic 점수를 하한으로 적용함."
         )
         diagnostic["adjustments"].append(
             {
                 "layer_id": layer_id,
-                "before_guard": current,
-                "restored_score": round(baseline, 3),
+                "before_guard": round(
+                    current,
+                    3,
+                ),
+                "restored_score": round(
+                    baseline,
+                    3,
+                ),
             }
         )
 
-    diagnostic["applied"] = bool(diagnostic["adjustments"])
+    diagnostic["applied"] = bool(
+        diagnostic["adjustments"]
+    )
     return rows, diagnostic
+
+def project_hybrid_model_answer_feedback(
+    model_answer_ref: Any,
+):
+    diagnostic = {
+        "version": HYBRID_DEMAND_SCOPE_GUARD_VERSION,
+        "marker": HYBRID_DEMAND_SCOPE_GUARD_MARKER,
+        "active": False,
+        "removed_feedback_items": [],
+        "preserved_feedback_items": [],
+        "score_effect": "none",
+        "evidence_mutated": False,
+    }
+
+    if not isinstance(model_answer_ref, dict):
+        return {}, diagnostic
+
+    evidence = model_answer_ref.get(
+        "hybrid_general_grading_context"
+    )
+    subject_rubric = {
+        "hybrid_general_grading_evidence": (
+            evidence
+        )
+    }
+    hybrid = _hybrid_evidence(
+        subject_rubric
+    )
+
+    primary = model_answer_ref.get(
+        "primary_reference"
+    )
+    if not isinstance(primary, dict):
+        return {}, diagnostic
+
+    if hybrid is None:
+        return primary, diagnostic
+
+    demand_rows = _demand_token_rows(
+        hybrid
+    )
+    if not demand_rows:
+        return primary, diagnostic
+
+    projected = copy.deepcopy(primary)
+    diagnostic["active"] = True
+
+    for field in (
+        "expected_structure",
+        "field_connection_points",
+        "low_score_patterns",
+    ):
+        value = primary.get(field)
+        if not isinstance(value, list):
+            continue
+
+        kept = []
+
+        for index, item in enumerate(value):
+            if not isinstance(item, str):
+                kept.append(item)
+                continue
+
+            if _traceable(
+                item,
+                demand_rows,
+            ):
+                kept.append(item)
+                diagnostic[
+                    "preserved_feedback_items"
+                ].append(
+                    {
+                        "field": field,
+                        "index": index,
+                        "text": item,
+                    }
+                )
+            else:
+                diagnostic[
+                    "removed_feedback_items"
+                ].append(
+                    {
+                        "field": field,
+                        "index": index,
+                        "text": item,
+                        "reason": (
+                            "not_traceable_to_explicit_demand"
+                        ),
+                    }
+                )
+
+        projected[field] = kept
+
+    return projected, diagnostic

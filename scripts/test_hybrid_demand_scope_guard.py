@@ -10,6 +10,7 @@ from hybrid_demand_scope_guard import (
     sanitize_hybrid_semantic_evaluation,
 )
 from hybrid_demand_scope_guard import _demand_token_rows, _hybrid_evidence, _traceable
+from hybrid_demand_scope_guard import project_hybrid_model_answer_feedback
 
 TOPIC = (
     "strain_gauge_load_cell_"
@@ -337,6 +338,173 @@ def main():
     }
     assert sanitize_hybrid_semantic_evaluation(semantic, non_hybrid) is semantic
 
+    # SCOPE_NEUTRAL_SCORE_AND_MODEL_FEEDBACK_V1
+    upward_layers = [
+        {
+            "layer_id": "C",
+            "score": 3.69,
+            "max": 8.0,
+            "reason": "sanitized",
+        },
+        {
+            "layer_id": "D",
+            "score": 1.71,
+            "max": 6.0,
+            "reason": "sanitized",
+        },
+    ]
+    upward_baseline = {
+        "C": 2.94,
+        "D": 0.96,
+    }
+
+    upward_guarded, upward_diag = (
+        restore_blocked_semantic_layer_scores(
+            upward_layers,
+            upward_baseline,
+            sanitized,
+        )
+    )
+    upward_by_id = {
+        row["layer_id"]: row
+        for row in upward_guarded
+    }
+
+    assert upward_by_id["C"]["score"] == 3.69
+    assert upward_by_id["D"]["score"] == 1.71
+    assert upward_diag["adjustments"] == []
+    assert {
+        row["layer_id"]
+        for row in upward_diag[
+            "preserved_upward_layers"
+        ]
+    } == {"C", "D"}
+
+    model_ref = {
+        "matched": True,
+        "hybrid_general_grading_context": (
+            rubric[
+                "hybrid_general_grading_evidence"
+            ]
+        ),
+        "primary_reference": {
+            "id": "T1",
+            "topic_id": TOPIC,
+            "expected_structure": [
+                (
+                    "스트레인 게이지의 측정 원리와 "
+                    "저항 변화를 설명한다."
+                ),
+                (
+                    "로드셀의 크리프와 히스테리시스 "
+                    "오차를 설명한다."
+                ),
+                (
+                    "온도 보상 방법과 적용 조건을 "
+                    "설명한다."
+                ),
+            ],
+            "field_connection_points": [
+                (
+                    "로드셀 현장 설치에서 편심하중과 "
+                    "과부하 방지 기준을 제시한다."
+                ),
+                (
+                    "교정 기록의 보존기간 결정 기준을 "
+                    "정한다."
+                ),
+            ],
+            "low_score_patterns": [
+                (
+                    "Wheatstone Bridge의 평형조건을 "
+                    "반대로 설명한다."
+                ),
+                (
+                    "로드셀 측하중 대책을 누락한다."
+                ),
+            ],
+        },
+    }
+
+    projected, projection_diag = (
+        project_hybrid_model_answer_feedback(
+            model_ref
+        )
+    )
+
+    assert projection_diag["active"] is True
+    assert len(
+        projected["expected_structure"]
+    ) == 2
+    assert all(
+        "크리프" not in item
+        and "히스테리시스" not in item
+        for item in projected[
+            "expected_structure"
+        ]
+    )
+    assert projected[
+        "field_connection_points"
+    ] == [
+        "교정 기록의 보존기간 결정 기준을 정한다."
+    ]
+    assert projected[
+        "low_score_patterns"
+    ] == [
+        "Wheatstone Bridge의 평형조건을 반대로 설명한다."
+    ]
+
+    # MODEL_FEEDBACK_MERGE_INTEGRATION_V1
+    from grading_agents import (
+        _phase10_merge_model_answer_feedback,
+    )
+
+    merged = _phase10_merge_model_answer_feedback(
+        {
+            "summary": "",
+            "rewrite_advice": [],
+        },
+        model_ref,
+    )
+    merged_advice = merged["rewrite_advice"]
+
+    assert any(
+        "스트레인 게이지" in item
+        for item in merged_advice
+    )
+    assert any(
+        "온도 보상" in item
+        for item in merged_advice
+    )
+    assert any(
+        "보존기간 결정 기준" in item
+        for item in merged_advice
+    )
+    assert all(
+        "크리프" not in item
+        and "히스테리시스" not in item
+        and "편심하중" not in item
+        and "과부하" not in item
+        and "측하중" not in item
+        for item in merged_advice
+    )
+    assert (
+        merged[
+            "model_answer_reference"
+        ]
+        is model_ref
+    )
+    assert (
+        merged[
+            "hybrid_model_answer_feedback_scope_guard"
+        ]["active"]
+        is True
+    )
+
+    print("SCOPE_NEUTRAL_DOWNWARD_ONLY_POLICY=PASS")
+    print("UPWARD_SEMANTIC_SCORE_PRESERVED=PASS")
+    print("HYBRID_MODEL_FEEDBACK_PROJECTION=PASS")
+    print("FULL_MODEL_REFERENCE_PRESERVED=PASS")
     print("HYBRID_SCOPE_GUARD_ACTIVATION=PASS")
     print("RAW_TEXT_IMMUTABLE=PASS")
     print("OUT_OF_SCOPE_SEMANTIC_CLAIMS_REMOVED=PASS")

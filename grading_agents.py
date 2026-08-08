@@ -6926,6 +6926,24 @@ def _phase10_merge_model_answer_feedback(grade, model_answer_ref):
 
     ref = model_answer_ref.get("primary_reference") or {}
 
+    from hybrid_demand_scope_guard import (
+        project_hybrid_model_answer_feedback,
+    )
+    (
+        feedback_ref,
+        model_feedback_scope_guard,
+    ) = project_hybrid_model_answer_feedback(
+        model_answer_ref
+    )
+    if model_feedback_scope_guard.get(
+        "active"
+    ):
+        grade[
+            "hybrid_model_answer_feedback_scope_guard"
+        ] = model_feedback_scope_guard
+    else:
+        feedback_ref = ref
+
     grade["model_answer_id"] = ref.get("id")
     grade["model_answer_topic_id"] = ref.get("topic_id")
     grade["model_answer_question_type"] = ref.get("question_type")
@@ -6941,19 +6959,19 @@ def _phase10_merge_model_answer_feedback(grade, model_answer_ref):
     if not isinstance(advice, list):
         advice = []
 
-    expected = ref.get("expected_structure") or []
+    expected = feedback_ref.get("expected_structure") or []
     if expected:
         tip = "모범 답안 구조 참고: " + " → ".join(str(x) for x in expected)
         if tip not in advice:
             advice.append(tip)
 
-    field_points = ref.get("field_connection_points") or []
+    field_points = feedback_ref.get("field_connection_points") or []
     if field_points:
         tip = "현장 연결 포인트 보완: " + ", ".join(str(x) for x in field_points[:8])
         if tip not in advice:
             advice.append(tip)
 
-    low_patterns = ref.get("low_score_patterns") or []
+    low_patterns = feedback_ref.get("low_score_patterns") or []
     if low_patterns:
         tip = "피해야 할 저득점 패턴: " + " / ".join(str(x) for x in low_patterns[:3])
         if tip not in advice:
