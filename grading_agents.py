@@ -6464,6 +6464,17 @@ def _phase10_run_semantic_router_shadow(
         and session_dir is not None
     ):
         try:
+            try:
+                from coverage_feedback_persistence import (
+                    persist_session_coverage_feedback_event,
+                )
+                persist_session_coverage_feedback_event(
+                    session_dir,
+                    result,
+                    question_demand_result,
+                )
+            except Exception:
+                pass
             _phase2_json_write(
                 session_dir / SEMANTIC_ROUTER_SHADOW_FILE,
                 result,
