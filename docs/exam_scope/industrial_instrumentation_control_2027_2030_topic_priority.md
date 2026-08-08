@@ -8,8 +8,8 @@
 기준 Coverage 문서:
 
 - `docs/exam_scope/industrial_instrumentation_control_2027_2030_topic_pack_coverage.md`
-- 현재 Coverage: `COVERED 30 / PARTIAL 2 / GAP 1`
-- 현재 Topic Pack: `69`
+- 현재 Coverage: `COVERED 32 / PARTIAL 0 / GAP 1`
+- 현재 Topic Pack: `71`
 
 ## 2. Historical evidence 사용 경계
 
@@ -127,13 +127,13 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 
 ## 7. 현재 잔여 criterion
 
-현재 authoritative coverage는 `COVERED 31 / PARTIAL 1 / GAP 1`이다.
-`IC-2027-W-4-2`는 Static Backlog 1 완료로 **COVERED**가 되었으므로 잔여 목록에서 제외한다.
+현재 authoritative coverage는 `COVERED 32 / PARTIAL 0 / GAP 1`이다.
+`IC-2027-W-4-2`는 Static Backlog 1 완료로 **COVERED**가 되었고, `IC-2027-W-5-1`은 Static Backlog 2 완료로 **COVERED**가 되었으므로 잔여 목록에서 제외한다.
+정적 Topic Pack 기준 잔여 backlog는 없다.
 
 | Priority | Criterion | Coverage | 남은 범위 | 처리 방식 |
 |---:|---|:---:|---|---|
-| 1 | `IC-2027-W-5-1` 계측제어 관련 신기술 | **PARTIAL** | 양자컴퓨팅 등 기타 emerging technology의 개념·계측제어 적용·한계·성숙도 평가 | STATIC_TOPIC |
-| 2 | `IC-2027-W-5-2` 계측제어 관련 동향 | **GAP** | 최신동향·법령·표준의 지속 갱신 | DYNAMIC_REVIEW_LANE |
+| 1 | `IC-2027-W-5-2` 계측제어 관련 동향 | **GAP** | 최신동향·법령·표준의 지속 갱신 | DYNAMIC_REVIEW_LANE |
 
 ## 8. STATIC BACKLOG 1 — `IC-2027-W-4-2` — COMPLETE
 
@@ -147,17 +147,21 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 - 완료 검증: 신규 Topic 통합 commit `ee53a07da8d269b98a29cd2c22321d446420dab9`, coverage 승격 commit `fc0176763526fec2e2cfda5625d9cf4f3b16d85f`.
 - 완료조건: **충족**. 기존 방폭 Topic과 ownership을 분리하면서 `IC-2027-W-4-2`를 설명·선정·대책·검증 관점에서 grading 가능하게 닫았다.
 
-## 9. STATIC BACKLOG 2 — `IC-2027-W-5-1` — ACTIVE
+## 9. STATIC BACKLOG 2 — `IC-2027-W-5-1` — COMPLETE
 
-- 상태: **ACTIVE**
-- Coverage: **PARTIAL**
-- 현재 확보: AI/ML, Physical AI, robot, Digital Twin, IIoT, Smart Factory, Edge/Cloud, interoperability, Digital Thread.
-- 잔여범위: 양자컴퓨팅 등 기타 emerging technology의 최소 개념, 계측제어 적용 가능성, 성숙도, 한계, 적용 전제.
-- 신기술은 변화가 빠르므로 특정 제품·기업 중심이 아니라 원리·적용·한계·성숙도 평가 프레임을 중심으로 작성한다.
-- 추천 Topic ID:
+- 상태: **COMPLETE**
+- Coverage: **COVERED**
+- 완료 Topic ID:
   - `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
-- 우선순위: **1**
-- 완료조건: `IC-2027-W-5-1`의 양자컴퓨팅 및 기타 신기술 잔여축을 보완하되 기존 AI/IIoT Topic과 ownership을 분리해야 한다.
+- 기존 직접 owner:
+  - `industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle`
+  - `physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control`
+  - `industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread`
+- 완료 범위: 기존 Topic들이 AI/ML, Physical AI·robot·Digital Twin, IIoT·Smart Factory·Edge/Cloud·interoperability·Digital Thread를 유지하고, 신규 Topic이 quantum computing의 qubit·superposition·measurement/readout·entanglement·interference, gate/annealing 경계, hybrid quantum-classical 구조, optimization/estimation 후보 use case, readiness와 계측제어 적용 한계를 직접 소유한다.
+- 적용성·성숙도 경계: universal speedup을 가정하지 않고 data encoding/readout, noise/decoherence, error mitigation/correction, latency/determinism, classical baseline, pilot verification, TCO/skills/integration, security/governance를 적용 판단의 필수 축으로 둔다. PLC/DCS/SIS hard-real-time 제어 대체와 quantum sensing=quantum computing 오인을 배제한다.
+- Emerging-technology closure: `etc_emerging_technology_framework`를 통해 비열거 신기술도 problem fit, classical baseline, maturity/readiness, hybrid architecture, verification, pilot, TCO와 governance 관점으로 평가한다.
+- 완료 검증: 신규 Topic 통합 commit `15432fbbefa7b0d3c77af062ebb411fb778f11df`, coverage 승격 commit `1408cf1ec2a771be0f93f55d80af316a7b2355ee`.
+- 완료조건: **충족**. 기존 AI/robot/IIoT owner와 ownership을 분리하면서 `IC-2027-W-5-1`의 양자컴퓨팅 및 기타 신기술 잔여축을 grading 가능한 static coverage로 닫았다.
 
 ## 10. DYNAMIC BACKLOG — `IC-2027-W-5-2`
 
@@ -170,13 +174,12 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 
 ## 11. 후속 작업 순서
 
-1. `IC-2027-W-5-1` quantum/emerging-technology Topic authoring.
-2. `IC-2027-W-5-2` Dynamic Review Lane 운영 규칙 작성.
-3. Thermocouple mixed TC+RTD source repair를 별도 commit으로 수행.
-4. 위 작업 후 공식 Coverage를 다시 read-only 재감사한다.
+1. `IC-2027-W-5-2` Dynamic Review Lane 운영 규칙 작성.
+2. Thermocouple mixed TC+RTD source repair를 별도 commit으로 수행.
+3. 위 작업 후 공식 Coverage를 다시 read-only 재감사한다.
 
-남은 static Topic은 독립 authoring → focused validation → 개별 commit 순서로 처리한다.
-`IC-2027-W-5-1` 완료 전에는 해당 criterion을 기계적으로 `COVERED`로 승격하지 않는다.
+남은 static Topic authoring은 없다.
+`IC-2027-W-5-2`는 최신동향·법령·표준의 지속 갱신 문제이므로 정적 Topic Pack을 생성하지 않고 `DYNAMIC_REVIEW_LANE`으로 관리한다.
 
 ## 12. Architecture boundary
 
@@ -185,4 +188,4 @@ Repository에서 실제 회차별 기출 원문을 충분히 확보하지 못했
 - `IC-2027-W-5-2`는 static Topic이 아니라 `DYNAMIC_REVIEW_LANE`으로 유지한다.
 - Thermocouple Topic의 mixed TC+RTD content 문제는 coverage backlog가 아니라 별도 source repair다.
 - 이 Roadmap 갱신 단계에서는 Topic source JSON, generated rubric, production Python을 변경하지 않는다.
-- 기존 완료 18 Topic의 source 또는 generated 결과를 재작성하지 않는다.
+- 기존 완료 19 Topic의 source 또는 generated 결과를 재작성하지 않는다.
