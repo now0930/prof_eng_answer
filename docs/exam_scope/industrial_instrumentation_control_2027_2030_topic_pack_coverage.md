@@ -3,7 +3,7 @@
 ## 1. 목적
 
 이 문서는 산업계측제어기술사 2027~2030 필기 공식 출제기준 33개 세부항목에 대해
-현재 70개 Topic Pack의 실제 의미 범위를 기준으로 coverage 수준을 평가한다.
+현재 71개 Topic Pack의 실제 의미 범위를 기준으로 coverage 수준을 평가한다.
 
 공식 기준과 Topic Pack 분류는 다음 문서를 기준으로 한다.
 
@@ -22,17 +22,18 @@
 
 Stage 3B semantic coverage review SHA-256: `59c670736c94f98d57cd8e0fb2c63537112b46cbdd0cfdf723525bfe344dc27f`
 Stage 8J post-push semantic re-audit: `IC-2027-W-4-2` = **COVERED** (source commit `ee53a07da8d269b98a29cd2c22321d446420dab9`)
+Stage 9J v2 post-push semantic re-audit: `IC-2027-W-5-1` = **COVERED** (source commit `15432fbbefa7b0d3c77af062ebb411fb778f11df`)
 
 ## 3. 전체 현황
 
-확장 전 frozen baseline과 70개 Topic Pack 및 Static Backlog 1 완료 후 semantic 재감사 결과는 다음과 같다.
+확장 전 frozen baseline과 71개 Topic Pack 및 Static Backlog 1·2 완료 후 semantic 재감사 결과는 다음과 같다.
 
 | 시점 | COVERED | PARTIAL | GAP | TOTAL |
 |---|---:|---:|---:|---:|
 | 확장 전 baseline | 16 | 8 | 9 | 33 |
-| 확장 후 현재 | **31** | **1** | **1** | **33** |
+| 확장 후 현재 | **32** | **0** | **1** | **33** |
 
-`IC-2027-W-4-2`는 Static Backlog 1 완료 후 **COVERED**로 승격되었다. 현재 미완전 criterion은 `IC-2027-W-5-1`, `IC-2027-W-5-2` 2개다.
+`IC-2027-W-4-2`와 `IC-2027-W-5-1`은 Static Backlog 1·2 완료 후 각각 **COVERED**로 승격되었다. 현재 미완전 criterion은 `IC-2027-W-5-2` 1개이며 `DYNAMIC_REVIEW_LANE`으로 관리한다.
 Roadmap 인접문맥은 planning evidence로만 사용하며 실제 Topic source 의미가 없으면 coverage로 자동 승격하지 않는다.
 ## 4. 공식 세부항목 Coverage Matrix
 
@@ -69,10 +70,10 @@ Roadmap 인접문맥은 planning evidence로만 사용하며 실제 Topic source
 | `IC-2027-W-4-7` | 제어기기 및 시스템의 사이버 보안 및 대책 | **COVERED** | HIGH | 1 | 0 |
 | `IC-2027-W-4-8` | 제어기기 및 시스템의 수명주기 관리방법 | **COVERED** | HIGH | 1 | 6 |
 | `IC-2027-W-4-9` | 계측제어설비 설치 및 기술기준 | **COVERED** | HIGH | 1 | 1 |
-| `IC-2027-W-5-1` | 계측제어 관련 신기술(로봇, 인공지능, IoT, 스마트팩토리, 양자컴퓨팅 등) | **PARTIAL** | HIGH | 3 | 0 |
+| `IC-2027-W-5-1` | 계측제어 관련 신기술(로봇, 인공지능, IoT, 스마트팩토리, 양자컴퓨팅 등) | **COVERED** | HIGH | 4 | 0 |
 | `IC-2027-W-5-2` | 계측제어 관련 동향 | **GAP** | HIGH | 0 | 0 |
 
-## 5. Coverage 변경 및 PARTIAL 상세
+## 5. Coverage 변경 상세
 
 ### `IC-2027-W-4-2` 가스, 정유, 철도, 발전, 건축 등 위험 환경에서 고려해야 할 제어요소 및 대책
 
@@ -87,12 +88,18 @@ Roadmap 인접문맥은 planning evidence로만 사용하며 실제 Topic source
 
 ### `IC-2027-W-5-1` 계측제어 관련 신기술(로봇, 인공지능, IoT, 스마트팩토리, 양자컴퓨팅 등)
 
-- 판정: **PARTIAL**
-- 근거: 기존 AI/ML·Physical AI·robot·digital twin에 IIoT/Smart Factory Device→Edge→Platform→Enterprise/Cloud, semantic interoperability, Digital Thread가 추가되어 큰 공백은 줄었다. 그러나 공식 예시에 명시된 양자컴퓨팅 및 기타 신기술 축은 여전히 정적 Topic coverage가 없다.
-- 잔여범위: 양자컴퓨팅 등 emerging technology의 최소 개념·계측제어 적용·한계/성숙도 평가 축이 필요하다.
-- 신규 직접 Topic:
+- 판정: **COVERED**
+- 승격 근거: 기존 `industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle`이 산업 AI/ML, anomaly detection, predictive maintenance와 model lifecycle을 직접 소유하고 `physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control`이 Physical AI, robot, sensor fusion, Digital Twin, autonomous manufacturing과 safety-control 적용을 직접 소유한다.
+- IIoT/Smart Factory closure: `industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread`이 Device→Edge→Platform→Enterprise/Cloud 구조, IIoT/Smart Factory, interoperability, semantic context와 Digital Thread를 직접 소유한다.
+- Quantum closure: 신규 `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`이 qubit, superposition, measurement/readout, entanglement, interference, gate model과 annealing의 경계, hybrid quantum-classical 구조, optimization/estimation 후보 use case와 계측제어 적용 가능성을 직접 소유한다.
+- 성숙도·한계 closure: quantum universal speedup을 가정하지 않고 data encoding/readout, noise/decoherence, error mitigation/correction, latency/determinism, classical baseline, pilot verification, TCO/skills/integration, security/governance를 적용 판단의 필수 조건으로 둔다. PLC/DCS/SIS hard-real-time 제어 대체와 quantum sensing=quantum computing 오인을 명시적으로 배제한다.
+- `등`의 신기술 closure: `etc_emerging_technology_framework`를 통해 특정 vendor/product 열거가 아니라 problem fit, classical baseline, maturity/readiness, hybrid architecture, verification, pilot, TCO와 governance의 공통 평가 프레임으로 후속 신기술의 계측제어 적용성을 판단한다.
+- 경계: 최신 동향·법령·기술기준 edition 변화는 `IC-2027-W-5-2`의 `DYNAMIC_REVIEW_LANE`으로 유지하며 본 static coverage에 합산하지 않는다.
+- 직접 Topic:
+  - `industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle`
+  - `physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control`
   - `industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread`
-
+  - `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits`
 ## 6. GAP 상세
 
 ### `IC-2027-W-5-2` 계측제어 관련 동향
@@ -118,12 +125,11 @@ Roadmap 인접문맥은 planning evidence로만 사용하며 실제 Topic source
 
 ## 9. 확장 후 잔여범위 및 다음 단계
 
-70개 Topic Pack 기준 semantic coverage는 `COVERED 31 / PARTIAL 1 / GAP 1`이다.
+71개 Topic Pack 기준 semantic coverage는 `COVERED 32 / PARTIAL 0 / GAP 1`이다.
 
-잔여범위는 다음 2개 criterion으로 한정한다.
+정적 Topic Pack 기준 잔여 `PARTIAL` criterion은 없다.
 
-- `IC-2027-W-5-1` **PARTIAL**: AI/ML·Physical AI·Digital Twin·IIoT/Smart Factory는 확보했으나 양자컴퓨팅 등 기타 emerging technology 축이 남아 있다.
 - `IC-2027-W-5-2` **GAP**: 정적 Topic Pack이 아니라 최신 동향·법령·표준을 주기적으로 갱신하는 `DYNAMIC_REVIEW_LANE`으로 관리한다.
 
-다음 static backlog는 `IC-2027-W-5-1`이며, `IC-2027-W-5-2`는 `DYNAMIC_REVIEW_LANE`으로 유지한다.
+남은 static backlog는 없으며, `IC-2027-W-5-2`는 `DYNAMIC_REVIEW_LANE`으로 유지한다.
 Question Type, Topic Pack source, generated rubric은 이 coverage 문서 갱신 단계에서 변경하지 않는다.
