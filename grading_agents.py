@@ -6359,6 +6359,79 @@ def _phase10_apply_generated_single_topic_overrides(
     return question_type_eval, fact_eval
 
 
+
+def _phase10_run_question_demand_shadow(
+    question_text,
+    session_dir,
+):
+    """Run demand decomposition as a non-authoritative shadow side effect."""
+    try:
+        from question_demand_shadow import (
+            QUESTION_DEMAND_SHADOW_FILE,
+            extract_question_demands,
+        )
+
+        result = extract_question_demands(
+            question_text=question_text,
+        )
+
+        if not isinstance(result, dict):
+            raise TypeError(
+                "extract_question_demands must return dict, "
+                f"got {type(result).__name__}"
+            )
+
+    except Exception as error:
+        result = {
+            "version": "question_demand_shadow_v1_fallback",
+            "shadow": True,
+            "enabled": False,
+            "status": "fallback",
+            "ok": False,
+            "mode": "question_demand_decomposition_only",
+            "demands": [],
+            "demand_count": 0,
+            "error": repr(error),
+            "routing_effect": "none",
+            "score_effect": "none",
+            "student_answer_used": False,
+            "topic_selection_performed": False,
+        }
+        QUESTION_DEMAND_SHADOW_FILE = (
+            "question_demand_shadow.json"
+        )
+
+    # Default-OFF must be behaviorally identical to the legacy phase10:
+    # no LLM call and no extra persistence side effect.
+    if (
+        result.get("status") != "disabled"
+        and session_dir is not None
+    ):
+        try:
+            _phase2_json_write(
+                session_dir / QUESTION_DEMAND_SHADOW_FILE,
+                result,
+            )
+        except Exception as write_error:
+            print(
+                "[agent] question demand shadow persistence "
+                f"failed: {write_error!r}"
+            )
+
+    if result.get("ok"):
+        print(
+            "[agent] question demand shadow completed: "
+            f"{result.get('demand_count', 0)} demands"
+        )
+    elif result.get("status") != "disabled":
+        print(
+            "[agent] question demand shadow fallback: "
+            f"{result.get('error')}"
+        )
+
+    return result
+
+
 def _phase10_run_model_answer_reference(
     input_text,
     answer_text,
@@ -6398,6 +6471,17 @@ def _phase10_run_model_answer_reference(
         question_text = _phase3_extract_question_text(
             input_text
         )
+        # Stage 2 Router v2 shadow: never affects the legacy router result.
+        try:
+            _phase10_run_question_demand_shadow(
+                question_text=question_text,
+                session_dir=session_dir,
+            )
+        except Exception as shadow_error:
+            report(
+                "[agent] question demand shadow isolated failure: "
+                f"{shadow_error!r}"
+            )
 
         bank_path = None
         if isinstance(subject_rubric, dict):
