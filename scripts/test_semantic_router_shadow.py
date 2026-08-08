@@ -788,7 +788,7 @@ class StaticIsolationContractTest(unittest.TestCase):
         self.assertIn("question_text", arg_names)
         self.assertIn("rule_result", arg_names)
 
-    def test_phase10_semantic_call_result_is_not_used_for_legacy_return(self):
+    def test_phase10_semantic_result_is_used_only_by_assisted_gate(self):
         tree = ast.parse(
             (BASE_DIR / "grading_agents.py").read_text(
                 encoding="utf-8"
@@ -807,8 +807,7 @@ class StaticIsolationContractTest(unittest.TestCase):
             if (
                 isinstance(node, ast.Call)
                 and isinstance(node.func, ast.Name)
-                and node.func.id
-                == "_phase10_run_semantic_router_shadow"
+                and node.func.id == "_phase10_run_semantic_router_shadow"
             )
         ]
         self.assertEqual(len(calls), 1)
@@ -819,17 +818,61 @@ class StaticIsolationContractTest(unittest.TestCase):
                 parents[child] = parent
 
         parent = parents.get(calls[0])
-        self.assertIsInstance(parent, ast.Expr)
+        self.assertIsInstance(parent, ast.Assign)
+        self.assertEqual(len(parent.targets), 1)
+        self.assertIsInstance(parent.targets[0], ast.Name)
+        self.assertEqual(
+            parent.targets[0].id,
+            "semantic_router_shadow_result",
+        )
 
         cur = parent
-        guarded = False
+        guarded_by_try = False
         while cur in parents:
             cur = parents[cur]
             if isinstance(cur, ast.Try):
-                guarded = True
+                guarded_by_try = True
                 break
+        self.assertTrue(guarded_by_try)
 
-        self.assertTrue(guarded)
+        builder_calls = [
+            node
+            for node in ast.walk(fn)
+            if (
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Name)
+                and node.func.id
+                == "build_assisted_model_answer_reference"
+            )
+        ]
+        self.assertEqual(len(builder_calls), 1)
+
+        cur = builder_calls[0]
+        guarded_by_assisted_flag = False
+        while cur in parents:
+            cur = parents[cur]
+            if not isinstance(cur, ast.If):
+                continue
+            test = cur.test
+            if (
+                isinstance(test, ast.Call)
+                and isinstance(test.func, ast.Name)
+                and test.func.id == "assisted_routing_enabled"
+            ):
+                guarded_by_assisted_flag = True
+                break
+        self.assertTrue(guarded_by_assisted_flag)
+
+        semantic_keyword = next(
+            kw
+            for kw in builder_calls[0].keywords
+            if kw.arg == "semantic_result"
+        )
+        self.assertIsInstance(semantic_keyword.value, ast.Name)
+        self.assertEqual(
+            semantic_keyword.value.id,
+            "semantic_router_shadow_result",
+        )
 
 
 if __name__ == "__main__":

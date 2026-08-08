@@ -6631,7 +6631,7 @@ def _phase10_run_model_answer_reference(
         # Stage 3 Router v2 semantic adjudication shadow.
         # Legacy Rule Router remains authoritative.
         try:
-            _phase10_run_semantic_router_shadow(
+            semantic_router_shadow_result = _phase10_run_semantic_router_shadow(
                 question_text=question_text,
                 question_demand_result=(
                     question_demand_shadow_result
@@ -6666,6 +6666,29 @@ def _phase10_run_model_answer_reference(
             report(
                 "[agent] phase10 model answer reference "
                 "not matched."
+            )
+
+        from assisted_routing import (
+            assisted_routing_enabled,
+            build_assisted_model_answer_reference,
+        )
+
+        if assisted_routing_enabled():
+            from semantic_router_shadow import (
+                augment_rule_candidates_for_shadow,
+            )
+
+            shadow_candidate_result = (
+                augment_rule_candidates_for_shadow(
+                    question_text=question_text,
+                    rule_result=result,
+                )
+            )
+            return build_assisted_model_answer_reference(
+                legacy_result=result,
+                semantic_result=semantic_router_shadow_result,
+                shadow_candidate_result=shadow_candidate_result,
+                enabled=True,
             )
 
         return result
