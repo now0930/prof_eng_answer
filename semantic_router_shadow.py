@@ -1,4 +1,5 @@
 from __future__ import annotations
+import urllib.request
 
 import json
 import math
@@ -1007,6 +1008,103 @@ def _base_result(
     }
 
 
+
+SEMANTIC_ROUTER_OLLAMA_URL = os.getenv(
+    "OLLAMA_URL",
+    "http://ollama:11434",
+).rstrip("/")
+SEMANTIC_ROUTER_MODEL = os.getenv(
+    "SEMANTIC_ROUTER_MODEL",
+    os.getenv("OLLAMA_MODEL", "gemma4:e4b"),
+)
+SEMANTIC_ROUTER_TIMEOUT = int(
+    os.getenv("SEMANTIC_ROUTER_TIMEOUT", "90")
+)
+
+
+def _call_semantic_router_json(
+    prompt: str,
+) -> dict[str, Any]:
+    # Dedicated structured-JSON transport for Topic Router v2.
+    payload = {
+        "model": SEMANTIC_ROUTER_MODEL,
+        "stream": False,
+        "format": "json",
+        "options": {
+            "temperature": 0.0,
+            "top_p": 1.0,
+            "top_k": 64,
+            "seed": 0,
+        },
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "You are the semantic adjudication transport for "
+                    "Topic Router v2. Return exactly one JSON object "
+                    "matching the user-supplied routing schema. "
+                    "Do not answer the examination question. "
+                    "Do not add markdown or prose outside JSON."
+                ),
+            },
+            {
+                "role": "user",
+                "content": str(prompt or ""),
+            },
+        ],
+    }
+
+    request = urllib.request.Request(
+        SEMANTIC_ROUTER_OLLAMA_URL + "/api/chat",
+        data=json.dumps(
+            payload,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8"),
+        headers={"Content-Type": "application/json"},
+        method="POST",
+    )
+
+    with urllib.request.urlopen(
+        request,
+        timeout=SEMANTIC_ROUTER_TIMEOUT,
+    ) as response:
+        raw = response.read().decode(
+            "utf-8",
+            errors="replace",
+        )
+
+    envelope = json.loads(raw)
+    if not isinstance(envelope, dict):
+        raise ValueError(
+            "semantic router Ollama response envelope must be object"
+        )
+
+    content = (
+        (envelope.get("message") or {}).get("content")
+        or envelope.get("response")
+        or ""
+    )
+
+    if isinstance(content, dict):
+        result = content
+    else:
+        content_text = str(content or "").strip()
+        if not content_text:
+            raise ValueError(
+                "semantic router Ollama response content is empty"
+            )
+        result = json.loads(content_text)
+
+    if not isinstance(result, dict):
+        raise ValueError(
+            "semantic router Ollama content must be JSON object"
+        )
+
+    return result
+
+
 def semantic_route_shadow(
     question_text: str,
     question_demand_result: Any,
@@ -1111,8 +1209,7 @@ def semantic_route_shadow(
     )
 
     if llm_call is None:
-        from logic_llm_verifier import _call_ollama_json
-        llm_call = _call_ollama_json
+        llm_call = _call_semantic_router_json
 
     try:
         payload = llm_call(prompt)
