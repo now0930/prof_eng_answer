@@ -132,7 +132,63 @@ class SemanticRouterDefaultTransportTest(unittest.TestCase):
             "fixture-model",
         )
         self.assertFalse(payload["stream"])
-        self.assertEqual(payload["format"], "json")
+        response_schema = payload["format"]
+        self.assertIsInstance(response_schema, dict)
+        self.assertEqual(response_schema["type"], "object")
+        self.assertFalse(
+            response_schema["additionalProperties"]
+        )
+        self.assertEqual(
+            set(response_schema["required"]),
+            {
+                "routing_mode",
+                "demand_mappings",
+                "uncovered_demand_ids",
+                "reason",
+            },
+        )
+        self.assertEqual(
+            set(
+                response_schema["properties"][
+                    "routing_mode"
+                ]["enum"]
+            ),
+            {
+                "SINGLE_TOPIC",
+                "MULTI_TOPIC",
+                "GENERAL",
+                "AMBIGUOUS",
+            },
+        )
+        mapping_schema = (
+            response_schema["properties"][
+                "demand_mappings"
+            ]["items"]
+        )
+        self.assertFalse(
+            mapping_schema["additionalProperties"]
+        )
+        self.assertEqual(
+            set(mapping_schema["required"]),
+            {
+                "demand_id",
+                "topic_id",
+                "role",
+                "confidence",
+            },
+        )
+        self.assertEqual(
+            set(
+                mapping_schema["properties"][
+                    "role"
+                ]["enum"]
+            ),
+            {
+                "PRIMARY",
+                "SUPPORTING",
+                "NONE",
+            },
+        )
         self.assertEqual(
             payload["options"]["temperature"],
             0.0,

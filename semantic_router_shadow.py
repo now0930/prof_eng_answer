@@ -1022,6 +1022,72 @@ SEMANTIC_ROUTER_TIMEOUT = int(
 )
 
 
+SEMANTIC_ROUTER_RESPONSE_SCHEMA: dict[str, Any] = {
+    "type": "object",
+    "properties": {
+        "routing_mode": {
+            "type": "string",
+            "enum": [
+                "SINGLE_TOPIC",
+                "MULTI_TOPIC",
+                "GENERAL",
+                "AMBIGUOUS",
+            ],
+        },
+        "demand_mappings": {
+            "type": "array",
+            "items": {
+                "type": "object",
+                "properties": {
+                    "demand_id": {
+                        "type": "string",
+                    },
+                    "topic_id": {
+                        "type": "string",
+                    },
+                    "role": {
+                        "type": "string",
+                        "enum": [
+                            "PRIMARY",
+                            "SUPPORTING",
+                            "NONE",
+                        ],
+                    },
+                    "confidence": {
+                        "type": "number",
+                        "minimum": 0.0,
+                        "maximum": 1.0,
+                    },
+                },
+                "required": [
+                    "demand_id",
+                    "topic_id",
+                    "role",
+                    "confidence",
+                ],
+                "additionalProperties": False,
+            },
+        },
+        "uncovered_demand_ids": {
+            "type": "array",
+            "items": {
+                "type": "string",
+            },
+        },
+        "reason": {
+            "type": "string",
+        },
+    },
+    "required": [
+        "routing_mode",
+        "demand_mappings",
+        "uncovered_demand_ids",
+        "reason",
+    ],
+    "additionalProperties": False,
+}
+
+
 def _call_semantic_router_json(
     prompt: str,
 ) -> dict[str, Any]:
@@ -1029,7 +1095,7 @@ def _call_semantic_router_json(
     payload = {
         "model": SEMANTIC_ROUTER_MODEL,
         "stream": False,
-        "format": "json",
+        "format": SEMANTIC_ROUTER_RESPONSE_SCHEMA,
         "options": {
             "temperature": 0.0,
             "top_p": 1.0,
