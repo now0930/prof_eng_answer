@@ -102,17 +102,26 @@ def _demand_token_rows(evidence: dict[str, Any]) -> list[dict[str, Any]]:
     return rows
 
 
-def _traceable(claim_text: Any, demand_rows: list[dict[str, Any]]) -> bool:
+def _traceable(
+    claim_text: Any,
+    demand_rows: list[dict[str, Any]],
+) -> bool:
     claim_tokens = set(_tokens(claim_text))
     if not claim_tokens:
         return False
+
     for row in demand_rows:
         demand_tokens = set(row["tokens"])
-        intent_tokens = set(row["intent_tokens"])
-        if claim_tokens.intersection(intent_tokens):
+        overlap = claim_tokens.intersection(
+            demand_tokens
+        )
+
+        # One shared generic word is not enough to establish
+        # Question Demand scope. Require at least two tokens
+        # from the same explicit Demand.
+        if len(overlap) >= 2:
             return True
-        if len(claim_tokens.intersection(demand_tokens)) >= 2:
-            return True
+
     return False
 
 

@@ -9,6 +9,7 @@ from hybrid_demand_scope_guard import (
     sanitize_hybrid_originality_evaluation,
     sanitize_hybrid_semantic_evaluation,
 )
+from hybrid_demand_scope_guard import _demand_token_rows, _hybrid_evidence, _traceable
 
 TOPIC = (
     "strain_gauge_load_cell_"
@@ -231,6 +232,37 @@ def originality_eval():
 
 def main():
     rubric = hybrid_rubric()
+    # GENERIC_ONE_TOKEN_COLLISION_ASSERTIONS_V1
+    demand_rows = _demand_token_rows(
+        _hybrid_evidence(rubric)
+    )
+
+    assert _traceable(
+        "온도 보상 결과 설명이 부족함.",
+        demand_rows,
+    )
+    assert _traceable(
+        "보존기간 결정 기준의 근거를 구체화할 것.",
+        demand_rows,
+    )
+    assert _traceable(
+        "폐기 원칙의 승인 절차를 구체화할 것.",
+        demand_rows,
+    )
+
+    assert not _traceable(
+        "로드셀 현장 설치 기준이 부족함.",
+        demand_rows,
+    )
+    assert not _traceable(
+        "편심하중과 과부하 방지 설치 기준이 누락됨.",
+        demand_rows,
+    )
+    assert not _traceable(
+        "로드셀 성능 오차 해석이 부족함.",
+        demand_rows,
+    )
+
     semantic = semantic_eval()
     before = copy.deepcopy(semantic)
     sanitized = sanitize_hybrid_semantic_evaluation(semantic, rubric)
