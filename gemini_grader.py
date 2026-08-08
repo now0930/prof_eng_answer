@@ -1392,3 +1392,45 @@ def build_gemini_grading_prompt(*args, **kwargs):
         return prompt
 
     return prompt.rstrip() + "\n\n" + section + "\n"
+
+
+_multi_topic_scope_previous_build_gemini_grading_prompt_v1 = build_gemini_grading_prompt
+
+def _multi_topic_demand_scope_prompt_v1() -> str:
+    return "[MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]\nWhen multi_topic_grading_evidence is present, each Topic's model_answer and\nfact_anchor are knowledge references, not a checklist of every item that the\nstudent must write.\n\nScope rules:\n1. Use semantic demand_mappings to identify the Question Demand(s) owned by each Topic.\n2. For omission, completeness, layer scoring, and improvement advice, require only\n   details that directly support those mapped Demand(s).\n3. Do not penalize, lower a layer score, or recommend adding a Topic anchor,\n   high_score_feature, expected_structure item, common_missing_point, or\n   field_connection_point merely because it exists in Topic evidence when the\n   mapped Demand(s) do not ask for it.\n4. Do not transfer requirements between Topics or unrelated Demands.\n   Example: load-cell eccentric-load or overload installation criteria must not\n   be treated as missing configuration-change procedure content unless the\n   question explicitly asks for those installation risks.\n5. If several Demands map to one Topic, use the union of those mapped Demands\n   as that Topic's grading scope.\n6. Topic evidence may explain or verify an in-scope Demand, but it must not silently expand the question scope.\n7. This scope rule limits omission and completeness expectations only. It\n   does not excuse an explicit factual error that the student actually wrote.\n8. Preserve one-question-one-score. Do not score Topics separately, sum Topic\n   scores, or average Topic scores.\n\nBefore finalizing feedback, verify that every claimed missing point can be\ntraced to an explicit Question Demand, or is necessary to correctly explain\nthat Demand. Otherwise remove that missing-point criticism.\n[/MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]"
+
+
+def _multi_topic_demand_scope_applicable_v1(subject_rubric) -> bool:
+    if not isinstance(subject_rubric, dict):
+        return False
+    evidence = subject_rubric.get("multi_topic_grading_evidence")
+    if not isinstance(evidence, dict):
+        return False
+    return evidence.get("routing_mode") == "MULTI_TOPIC"
+
+
+def build_gemini_grading_prompt(*args, **kwargs):
+    prompt = (
+        _multi_topic_scope_previous_build_gemini_grading_prompt_v1(
+            *args,
+            **kwargs,
+        )
+    )
+    if not isinstance(prompt, str):
+        raise TypeError(
+            "build_gemini_grading_prompt must return str"
+        )
+    subject_rubric = kwargs.get("subject_rubric")
+    if subject_rubric is None and len(args) >= 4:
+        subject_rubric = args[3]
+    if not _multi_topic_demand_scope_applicable_v1(subject_rubric):
+        return prompt
+    marker = "[MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]"
+    if marker in prompt:
+        return prompt
+    return (
+        prompt.rstrip()
+        + "\n\n"
+        + _multi_topic_demand_scope_prompt_v1()
+        + "\n"
+    )
