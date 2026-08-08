@@ -35,9 +35,9 @@
 | 총점 | 25점 |
 | 채점 Layer | 5개 |
 | Active Question Type | 4개 |
-| Topic Pack source | 52개 topic |
+| Topic Sheet | 71개 |
+| Topic Pack source | 71개 topic |
 | Generated Rubric Bank | 6개 |
-| Software Topic Pack | SW-01~SW-13, 13개 |
 | 기본 Rubric Bank mode | `generated` |
 
 Topic Pack 개수는 `rubrics/generated/topic_pack_manifest.generated.json`을 기준으로 확인합니다. Legacy 통합 bank는 호환 목적으로 유지되며, legacy 파일의 Model Answer·Fact Topic 개수를 현재 Topic Pack coverage 개수로 사용하지 않습니다. Runtime bank 선택의 기준은 `rubric_bank_paths.py`와 `RUBRIC_BANK_MODE`입니다.
@@ -354,16 +354,88 @@ Telegram /grade
 
 ---
 
-## 9. Rubric Bank와 Topic Pack
+## 9. Topic Sheet, Topic Pack과 Generated Rubric Bank
 
 현재 runtime 기본값은 Topic Pack 기반 `generated` bank입니다. Legacy bank는 비교·호환 목적으로 유지합니다.
 
+현재 저장소의 Topic 구조는 다음 순서로 관리합니다.
+
+```text
+Topic Sheet
+    ↓
+Topic Pack Source
+    ↓
+Focused Regression / Semantic Review
+    ↓
+Generated Rubric Bank
+    ↓
+Runtime Grading
+```
+
+### 9.1 Topic Sheet와 Topic Pack의 관계
+
+**Topic Sheet**는 사람이 읽고 검토하는 **주제 설계서(authoring/design specification)**입니다.
+
+경로:
+
+```text
+docs/topic_sheets/<topic_id>.md
+```
+
+Topic Sheet에서는 해당 Topic이 무엇을 설명해야 하는지 먼저 정합니다. Topic에 따라 문서 형식에는 차이가 있지만, 주로 다음 내용을 다룹니다.
+
+- Topic identity / metadata
+- 출제 의도와 대표 문제
+- 포함 범위와 제외 범위
+- 핵심 Fact와 고득점 답안 기준
+- 대표 오답과 Fatal Wrong Claims
+- 인접 Topic과의 ownership 경계
+- Routing alias / field point
+- Fact 검증 근거와 semantic review 요구사항
+
+즉, Topic Sheet는 JSON을 만들기 전에 **“이 Topic이 무엇을 소유하고 무엇을 소유하지 않는가”를 먼저 고정하는 문서**입니다.
+
+**Topic Pack**은 Topic Sheet에서 확정한 의미 경계를 채점기가 사용할 수 있도록 구조화한 **machine-readable grading source of truth**입니다.
+
+경로:
+
+```text
+rubrics/topic_packs/<topic_id>/
+├── README.md
+├── fact_anchor.json
+├── logic_check.json
+├── model_answer.json
+└── topic_importance.json
+```
+
+현재 저장소에는 **Topic Sheet 71개와 Topic Pack 71개가 있으며, 동일한 `<topic_id>`로 71개 모두 1:1 대응**합니다. Topic Sheet만 있고 Topic Pack이 없는 항목도 없고, Topic Pack만 있고 Topic Sheet가 없는 항목도 없습니다.
+
+이 관계를 기준으로 신규 Topic은 다음 원칙을 따릅니다.
+
+1. 먼저 `docs/topic_sheets/<topic_id>.md`에서 의미 범위와 ownership을 확정합니다.
+2. 같은 `<topic_id>`의 `rubrics/topic_packs/<topic_id>/`를 작성합니다.
+3. `fact_anchor.json`, `logic_check.json`, `model_answer.json`, `topic_importance.json`은 Topic Sheet에서 확정한 **동일한 의미 경계**를 공유해야 합니다.
+4. Topic 전용 focused regression으로 핵심 Fact, fatal claim, 인접 Topic contamination을 검증합니다.
+5. 검증된 Topic Pack source를 builder로 합쳐 Generated Rubric Bank를 만듭니다.
+
+따라서 관계는 다음과 같습니다.
+
+```text
+Topic Sheet = 사람 기준의 주제 설계서
+Topic Pack  = Topic Sheet를 구조화한 채점 source
+Generated Rubric Bank = 검증된 Topic Pack을 runtime용으로 합친 build output
+```
+
+Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **전체 Topic inventory를 기준으로 관리**합니다. 현재 authoritative Topic inventory는 71개입니다.
+
+### 9.2 저장 위치와 역할
+
 | 구분 | 위치 | 역할 |
 |---|---|---|
-| Topic Pack Source | `rubrics/topic_packs/<topic_id>/` | 사람이 검토하고 직접 관리하는 source of truth |
-| Topic Sheet | `docs/topic_sheets/<topic_id>.md` | source JSON 작성 전 요구사항과 의미 경계를 구조화 |
+| Topic Sheet | `docs/topic_sheets/<topic_id>.md` | Topic 의미 범위, 핵심 Fact, 오개념, ownership, authoring 요구사항을 정의하는 사람 기준 설계서 |
+| Topic Pack Source | `rubrics/topic_packs/<topic_id>/` | Topic Sheet를 구조화한 검증 가능한 grading source of truth |
 | Focused Regression | `scripts/test_<topic>_*.py` | Topic별 핵심 사실·fatal·인접 Topic contamination 회귀 검증 |
-| Generated Rubric Bank | `rubrics/generated/*.generated.json` | Topic Pack source를 runtime bank로 합친 build output |
+| Generated Rubric Bank | `rubrics/generated/*.generated.json` | 검증된 Topic Pack source를 runtime bank로 합친 build output |
 | Classification / Coverage / Roadmap | `docs/topic_pack_classification.md`, `docs/exam_scope/` | 공식 criterion ownership, coverage와 추가 우선순위 관리 |
 | Legacy Rubric Bank | `rubrics/*/industrial_instrumentation_control.json` | 기존 통합 bank와 호환·비교 경로 |
 
@@ -378,31 +450,18 @@ logic_check_profiles.generated.json
 topic_pack_manifest.generated.json
 ```
 
-`rubrics/generated/*.generated.json`은 직접 편집하지 않습니다. 사람이 관리하는 source는 `rubrics/topic_packs/<topic_id>/`이며, source authoring과 검증이 끝난 뒤 builder로 generated bank를 재생성합니다.
+`rubrics/generated/*.generated.json`은 직접 편집하지 않습니다. 사람이 의미를 설계하는 시작점은 Topic Sheet이고, 채점 source of truth는 Topic Pack입니다. Source authoring과 검증이 끝난 뒤 builder로 generated bank를 재생성합니다.
 
-Topic Pack 기본 source 구성:
-
-```text
-rubrics/topic_packs/<topic_id>/
-├── README.md
-├── fact_anchor.json
-├── logic_check.json
-├── model_answer.json
-└── topic_importance.json
-```
-
-필요한 Topic은 `docs/topic_sheets/<topic_id>.md`와 Topic 전용 focused regression을 함께 추가합니다.
-
-### 9.1 앞으로의 신규 Topic Pack 추가 절차
+### 9.3 앞으로의 신규 Topic Pack 추가 절차
 
 ```text
 1. Candidate 선정
    ↓
 2. Read-only 중복·ownership·인접 Topic 경계 감사
    ↓
-3. 요구사항 / Topic Sheet 확정
+3. Topic Sheet 작성·확정
    ↓
-4. fact_anchor / logic_check / model_answer / topic_importance 작성
+4. 동일 topic_id의 Topic Pack source 4종 작성
    ↓
 5. Topic 전용 focused semantic regression 작성·통과
    ↓
@@ -427,6 +486,7 @@ rubrics/topic_packs/<topic_id>/
 - 단순히 키워드가 다르다는 이유로 Topic을 분리하지 않습니다.
 - 기존 Topic과 원리·오류·적용 범위가 실질적으로 겹치면 신규 Topic을 만들지 않습니다.
 - 기존 Topic의 내용 오류·혼입은 **coverage backlog와 source anomaly를 구분**하고, 신규 Topic 생성보다 기존 Topic repair를 우선합니다.
+- Topic Sheet에서 먼저 positive ownership과 negative boundary를 확정한 뒤 Topic Pack source에 반영합니다.
 - `fact_anchor.json`, `logic_check.json`, `model_answer.json`, `topic_importance.json`은 동일한 Topic 의미 경계를 공유해야 합니다.
 - 인접 Topic 내용은 `fatal_wrong_claims`, `rejected_explanations`, `low_score_patterns` 같은 negative boundary로 둘 수 있지만 현재 Topic의 positive ownership으로 사용하지 않습니다.
 - `docs/topic_pack_classification.md`의 PRIMARY/SECONDARY ownership은 실제 의미 범위가 변할 때만 수정합니다.
@@ -452,13 +512,13 @@ py_compile
   → 필요한 경우에만 container smoke
 ```
 
-### 9.2 로컬 운영 스크립트와 Git tracking
+### 9.4 로컬 운영 스크립트와 Git tracking
 
 `gemini_script/`는 authoring, audit, commit, push를 보조하는 **로컬 일회성 운영 스크립트 공간**입니다.
 
 - production source가 아닙니다.
 - Git tracking 대상이 아니며 `.gitignore`로 제외합니다.
-- Topic Pack source나 generated bank의 source of truth로 사용하지 않습니다.
+- Topic Sheet, Topic Pack source 또는 generated bank의 source of truth로 사용하지 않습니다.
 - 운영 스크립트가 없어도 committed source와 테스트만으로 저장소 상태를 재검증할 수 있어야 합니다.
 - 재사용 가능한 production 도구가 필요하면 `gemini_script/`가 아니라 `scripts/` 아래에 일반화된 CLI/validator로 작성하고 테스트와 함께 추적합니다.
 
