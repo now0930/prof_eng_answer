@@ -323,10 +323,24 @@ class Phase10IsolationStaticContractTest(unittest.TestCase):
             for node in ast.walk(fn)
             if isinstance(node, ast.Return)
         ]
+        # Stage 6 may return the parallel model-answer-reference result
+        # after attaching multi_topic_grading_context. The isolation
+        # contract is that Question Demand itself is not returned or handed
+        # to scoring; it is handed only to the Semantic Router.
         self.assertTrue(
             any(
                 isinstance(node.value, ast.Name)
-                and node.value.id == "result"
+                and node.value.id == "model_answer_reference_result"
+                for node in returns
+            )
+        )
+        self.assertFalse(
+            any(
+                isinstance(node.value, ast.Name)
+                and node.value.id in {
+                    "question_demand_shadow_result",
+                    "semantic_router_shadow_result",
+                }
                 for node in returns
             )
         )
