@@ -1354,3 +1354,41 @@ def gemini_semantic_grade(*args, **kwargs):
         result,
         question_text,
     )
+
+# HYBRID_GENERAL_GRADING_PROMPT_V1
+from functools import wraps as _hybrid_general_prompt_wraps
+
+_hybrid_general_prompt_previous_build_gemini_grading_prompt = (
+    build_gemini_grading_prompt
+)
+
+
+@_hybrid_general_prompt_wraps(
+    _hybrid_general_prompt_previous_build_gemini_grading_prompt
+)
+def build_gemini_grading_prompt(*args, **kwargs):
+    prompt = (
+        _hybrid_general_prompt_previous_build_gemini_grading_prompt(
+            *args,
+            **kwargs,
+        )
+    )
+
+    subject_rubric = kwargs.get("subject_rubric")
+    if subject_rubric is None and len(args) >= 4:
+        subject_rubric = args[3]
+
+    from hybrid_general_prompt import (
+        HYBRID_GENERAL_PROMPT_MARKER,
+        build_hybrid_general_prompt_section,
+    )
+
+    section = build_hybrid_general_prompt_section(
+        subject_rubric
+    )
+    if not section:
+        return prompt
+    if HYBRID_GENERAL_PROMPT_MARKER in prompt:
+        return prompt
+
+    return prompt.rstrip() + "\n\n" + section + "\n"
