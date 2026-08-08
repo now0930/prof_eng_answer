@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-07T16:56:26Z-generated-topic-pack-logic-check-profiles",
+  "version": "2026-08-08T02:57:46Z-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -12295,6 +12295,212 @@
         "direct_de_effect": false,
         "require_context_confirmation": true,
         "notes": "Deterministic direct penalty를 적용하지 않는다. LLM은 electronic error mechanism, propagation과 mitigation semantics를 문맥으로 확인한다."
+      }
+    },
+    {
+      "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+      "display_name": "양자컴퓨팅 등 신기술의 원리·계측제어 use case·성숙도·한계·도입 검증을 평가한다.",
+      "difficulty": "DESIGN_EVALUATION",
+      "cap_policy": {},
+      "candidate_extraction": {
+        "max_candidates": 32,
+        "nearby_window": 1,
+        "rules": [],
+        "key_terms": [
+          "quantum computing",
+          "qubit",
+          "superposition",
+          "entanglement",
+          "interference",
+          "measurement",
+          "gate based",
+          "quantum annealing",
+          "hybrid quantum classical",
+          "classical baseline",
+          "data encoding",
+          "sampling",
+          "decoherence",
+          "error correction",
+          "latency determinism",
+          "readiness maturity",
+          "pilot",
+          "TCO"
+        ]
+      },
+      "truth_schema": [
+        "양자컴퓨팅은 qubit의 양자상태와 quantum operation을 이용해 특정 계산문제를 처리하는 계산 패러다임이며 모든 문제를 보편적으로 더 빠르게 푸는 범용 가속기가 아니다.",
+        "Classical bit는 측정 가능한 0 또는 1 상태를 사용하지만 qubit는 복소확률진폭으로 표현되는 양자상태를 가지며 측정 결과는 고전적 outcome으로 얻어진다.",
+        "Superposition은 여러 basis state의 amplitude가 결합된 양자상태 표현이며 계산상 유용성은 이후 gate와 interference가 원하는 outcome의 확률을 증폭하도록 구성될 때 나타난다.",
+        "Quantum measurement는 상태를 고전적 결과로 투영하므로 일반적으로 반복 실행과 sampling을 통해 결과 분포를 추정하며 내부 amplitude 전체를 한 번에 직접 읽을 수 없다.",
+        "Entanglement는 복수 qubit 사이에 고전적 독립변수로 분해하기 어려운 상관구조를 만들 수 있지만 정보의 초광속 전달을 허용하는 수단은 아니다.",
+        "Quantum interference는 계산경로의 amplitude가 강화 또는 상쇄되도록 설계해 원하는 결과의 측정확률을 변화시키는 핵심 메커니즘이다.",
+        "Gate-based quantum computing은 초기화된 qubit에 quantum gate sequence를 적용하고 측정하는 회로모델로서 범용 알고리즘 표현을 지향한다.",
+        "Quantum annealing은 주로 최적화 문제를 energy landscape의 낮은 상태 탐색으로 매핑하는 접근이며 gate-based quantum computing과 동일한 하드웨어·알고리즘 모델이 아니다.",
+        "산업 적용에서는 문제 전처리·데이터관리·최적화 outer loop·검증을 classical system이 담당하고 quantum processor가 일부 subproblem을 처리하는 hybrid quantum-classical 구조가 현실적인 평가 단위가 될 수 있다.",
+        "양자컴퓨팅 도입은 기술 자체가 아니라 계산문제의 구조와 bottleneck을 먼저 정의하고 classical baseline 대비 개선 가능성이 있는 subproblem인지 판별하는 problem-fit 절차에서 시작해야 한다.",
+        "공정·생산·에너지·정비 계획의 조합최적화나 제한조건 최적화는 quantum 또는 quantum-inspired 접근을 검토할 수 있는 후보지만 실제 우위는 problem encoding, scale, hardware, algorithm, classical solver baseline으로 검증해야 한다.",
+        "Parameter estimation·state estimation·inverse problem·uncertainty evaluation과 같은 계산집약적 분석도 연구·실증 후보가 될 수 있으나 plant data 구조와 알고리즘 적합성, 정확도, 계산시간을 classical method와 비교해야 한다.",
+        "현재 산업 계측제어 관점에서 quantum computation의 후보역할은 hard real-time protection loop보다 offline·planning·supervisory optimization과 같은 시간여유가 있는 계산에 우선 배치해 검토하는 것이 합리적이다.",
+        "Classical plant data를 quantum state로 encoding하는 비용과 구조는 전체 이득을 제한할 수 있으므로 input preparation을 계산복잡도와 interface 설계에 포함해야 한다.",
+        "Quantum processor의 결과는 measurement와 sampling을 거쳐 고전적 값으로 해석되므로 필요한 confidence와 shot 수, 후처리 비용을 end-to-end latency와 정확도 평가에 포함해야 한다.",
+        "실제 quantum hardware는 gate·readout error, decoherence 등 noise 영향을 받으므로 circuit depth와 fidelity, 반복성, error mitigation 또는 correction 요구가 적용성에 직접 영향을 준다.",
+        "Error mitigation은 noisy result의 bias를 줄이는 기법군이고 quantum error correction은 logical information을 보호하기 위해 redundancy와 correction을 사용하는 별도 개념이므로 서로 동일시하면 안 된다.",
+        "물리 qubit 수만으로 산업 적용성을 판단할 수 없으며 connectivity, gate/readout quality, usable circuit depth, logical resource overhead와 workload 적합성을 함께 봐야 한다.",
+        "제어 적용성 평가에서는 quantum execution time뿐 아니라 queue, network, state preparation, repeated shots, classical optimization loop를 포함한 end-to-end latency와 jitter·determinism 요구를 비교해야 한다.",
+        "PLC·DCS·SIS는 deterministic I/O, local availability, fail-safe와 lifecycle 검증을 담당하므로 quantum computing Topic은 이 실시간 제어플랫폼의 일반 기능을 재소유하지 않고 계산가속 후보와 integration boundary를 다룬다.",
+        "Quantum sensing은 quantum state의 민감도를 이용하는 측정기술 영역이고 quantum computing은 계산처리 영역이므로 관련 신기술이라는 공통점이 있어도 동일 기술로 취급하지 않는다.",
+        "신기술 성숙도 평가는 demonstrated capability, repeatability, scale, integration, supportability를 기준으로 현재 사용가능성·pilot 가능성·연구단계 가능성을 구분해야 하며 미래 잠재력을 현재 production readiness로 간주하면 안 된다.",
+        "Quantum approach의 가치판단은 동일 문제·동일 품질기준에서 검증된 classical solver 또는 existing control-analysis workflow와 accuracy, runtime, resource, robustness를 비교해야 한다.",
+        "현장 도입 전에는 representative dataset과 problem instance로 PoC/pilot을 수행하고 solution quality, repeatability, latency, failure handling, interface recovery를 acceptance criterion으로 검증해야 한다.",
+        "도입성 평가에는 compute access 비용뿐 아니라 network/interface, classical orchestration, data engineering, specialist skill, verification, support, migration과 legacy coexistence를 포함한 lifecycle TCO를 반영해야 한다.",
+        "신기술을 OT/IT 환경에 연결할 때는 data exposure, external compute dependency, access control, model/algorithm provenance, change control과 auditability를 architecture risk로 평가해야 한다.",
+        "양자컴퓨팅 외 기타 emerging technology도 기술명 나열이 아니라 원리·해결문제·계측제어 use case·성숙도·integration·한계·검증·TCO 프레임으로 평가해야 하며 최신 뉴스·법령의 rolling update는 IC-2027-W-5-2로 분리한다."
+      ],
+      "fatal_conditions": [
+        "[quantum_universal_speedup] 양자컴퓨터는 모든 계산문제를 classical computer보다 빠르게 푼다. | correction: Quantum advantage는 문제·알고리즘·하드웨어·입출력 overhead에 의존하며 보편적 speedup은 보장되지 않는다.",
+        "[qubit_directly_reads_zero_and_one] Qubit은 0과 1을 동시에 저장하므로 측정하면 두 값을 모두 한 번에 읽을 수 있다. | correction: Qubit은 amplitude로 표현되는 quantum state를 가지지만 measurement는 고전적 outcome을 반환한다.",
+        "[measurement_reads_all_amplitudes] 한 번의 quantum measurement로 상태의 모든 amplitude와 모든 후보해를 직접 읽을 수 있다. | correction: Measurement는 제한된 classical outcome을 주며 결과분포 추정을 위해 반복 sampling이 필요할 수 있다.",
+        "[entanglement_faster_than_light] Entanglement를 사용하면 제어명령이나 계측정보를 초광속으로 전달할 수 있다. | correction: Entanglement correlation은 정보의 faster-than-light communication을 허용하지 않는다.",
+        "[annealing_equals_gate] Quantum annealing과 gate-based quantum computing은 하드웨어와 알고리즘 관점에서 완전히 동일하다. | correction: Annealing은 주로 optimization energy mapping 접근이고 gate model은 quantum circuit 기반 계산모델이므로 구분해야 한다.",
+        "[qubit_count_guarantees_value] 물리 qubit 수가 많을수록 산업문제에서 항상 더 좋은 성능이 보장된다. | correction: Qubit count뿐 아니라 connectivity, error/fidelity, usable depth, logical overhead와 workload fit이 함께 중요하다.",
+        "[current_hardware_guarantees_advantage] 현재 사용 가능한 quantum hardware를 적용하면 산업 최적화에서 production advantage가 자동 보장된다. | correction: 실제 advantage는 classical baseline과 workload-specific benchmark, maturity와 integration을 통해 검증해야 한다.",
+        "[quantum_replaces_plc_dcs] Quantum computer는 PLC·DCS·SIS를 직접 대체하여 hard real-time closed-loop control을 수행하면 된다. | correction: Quantum compute는 계산 subproblem 후보이며 deterministic I/O·local availability·fail-safe control은 기존 OT controller 역할과 구분해야 한다.",
+        "[quantum_sensing_equals_computing] Quantum sensing과 quantum computing은 같은 기술이므로 하나의 장치와 원리로 동일하게 설명할 수 있다. | correction: Quantum sensing은 측정기술, quantum computing은 계산처리 기술로 목적과 architecture를 구분해야 한다.",
+        "[mitigation_equals_fault_tolerance] Error mitigation을 사용하면 full quantum error correction과 fault-tolerant operation이 달성된다. | correction: Error mitigation과 quantum error correction은 목적·자원·보장수준이 다른 개념이다.",
+        "[data_loading_free] Classical sensor·historian data는 비용과 제약 없이 즉시 quantum state로 loading할 수 있다. | correction: State preparation과 data encoding은 end-to-end complexity와 latency를 제한할 수 있어 별도 평가해야 한다.",
+        "[single_run_exact_output] Quantum algorithm은 한 번 실행하면 항상 정확한 최적해를 deterministic하게 반환한다. | correction: Measurement와 sampling, algorithm 특성 때문에 반복실행·통계·solution quality 평가가 필요할 수 있다.",
+        "[research_equals_production_ready] 논문이나 laboratory demo가 존재하면 해당 quantum use case는 production-ready로 판단할 수 있다. | correction: Production readiness는 repeatability, scale, integration, supportability, verification과 lifecycle 조건을 별도로 검증해야 한다.",
+        "[vendor_benchmark_proves_roi] Vendor benchmark에서 좋은 결과가 나오면 classical baseline, PoC, TCO 평가 없이 ROI가 입증된다. | correction: 동일조건 classical baseline, representative pilot, lifecycle TCO와 acceptance criteria가 필요하다."
+      ],
+      "safe_conditions": [
+        "Quantum advantage는 problem-specific하며 classical baseline과 비교해야 한다.",
+        "Qubit의 quantum state와 measurement outcome을 구분한다.",
+        "Superposition은 모든 답을 한 번에 읽는 기능이 아니라 amplitude 표현과 interference를 이용하는 계산자원이다.",
+        "Entanglement는 계산상 상관구조를 제공할 수 있지만 faster-than-light communication을 허용하지 않는다.",
+        "Gate-based와 quantum annealing은 목적과 계산모델을 구분한다.",
+        "산업 적용에서는 hybrid quantum-classical architecture를 우선 검토할 수 있다.",
+        "Quantum compute는 PLC/DCS/SIS의 deterministic I/O와 protection role을 자동 대체하지 않는다.",
+        "Data encoding과 state preparation overhead를 end-to-end 성능에 포함한다.",
+        "Measurement sampling과 classical post-processing을 output cost에 포함한다.",
+        "Noise·decoherence·gate/readout error는 실제 hardware 적용성의 제약이다.",
+        "Error mitigation과 quantum error correction을 동일시하지 않는다.",
+        "Hard real-time loop보다 planning·offline·supervisory computation이 우선 후보가 될 수 있다.",
+        "Physical qubit count와 workload value는 동일하지 않다.",
+        "Quantum sensing은 인접 신기술이지만 quantum computing과 같은 기술은 아니다.",
+        "현재 capability, pilot maturity, research potential을 구분한다.",
+        "PoC와 pilot에서는 repeatability·latency·solution quality·failure handling을 acceptance criterion으로 둔다.",
+        "TCO에는 integration, skills, support, legacy coexistence를 포함한다.",
+        "IC-2027-W-5-2의 최신동향·법령·표준 rolling update는 본 정적 Topic에서 분리한다."
+      ],
+      "output_contract": {},
+      "major_checks": [
+        {
+          "id": "etc_major_principles_without_application",
+          "severity": "major",
+          "message": "양자 기본원리는 설명했으나 계측제어 use case와 연결이 부족하다.",
+          "description": "공식 criterion은 신기술 자체보다 계측제어 관련성을 요구한다."
+        },
+        {
+          "id": "etc_major_application_without_problem_fit",
+          "severity": "major",
+          "message": "적용분야를 나열했으나 problem-fit과 classical bottleneck 정의가 부족하다.",
+          "description": "기술명이 아니라 계산문제 구조를 먼저 정의해야 한다."
+        },
+        {
+          "id": "etc_major_no_classical_baseline",
+          "severity": "major",
+          "message": "Quantum 성능을 주장했으나 동일조건 classical baseline 비교가 없다.",
+          "description": "Advantage 평가는 benchmark 없이는 성립하기 어렵다."
+        },
+        {
+          "id": "etc_major_no_io_overhead",
+          "severity": "major",
+          "message": "Quantum kernel만 설명하고 data encoding·measurement sampling overhead가 없다.",
+          "description": "End-to-end 성능은 입출력 overhead를 포함해야 한다."
+        },
+        {
+          "id": "etc_major_no_noise_maturity",
+          "severity": "major",
+          "message": "Noise·decoherence·error 대책과 hardware maturity가 빠졌다.",
+          "description": "현실 적용성의 핵심 제약이다."
+        },
+        {
+          "id": "etc_major_no_realtime_boundary",
+          "severity": "major",
+          "message": "계측제어 적용을 설명했으나 hard real-time latency·determinism 경계가 없다.",
+          "description": "PLC/DCS 제어주기와 quantum compute role을 분리해야 한다."
+        },
+        {
+          "id": "etc_major_no_hybrid_architecture",
+          "severity": "major",
+          "message": "Quantum processor만 제시하고 classical orchestration·integration 구조가 없다.",
+          "description": "현장 적용은 hybrid architecture 관점이 필요하다."
+        },
+        {
+          "id": "etc_major_no_readiness_separation",
+          "severity": "major",
+          "message": "연구 가능성과 production readiness를 구분하지 않았다.",
+          "description": "Maturity·repeatability·supportability를 단계적으로 평가해야 한다."
+        },
+        {
+          "id": "etc_major_no_pilot_acceptance",
+          "severity": "major",
+          "message": "도입을 제안했으나 PoC/pilot acceptance criterion이 없다.",
+          "description": "Representative workload에서 검증 가능한 종료조건이 필요하다."
+        },
+        {
+          "id": "etc_major_no_tco_legacy",
+          "severity": "major",
+          "message": "기술적 장점만 제시하고 TCO·skills·legacy coexistence가 없다.",
+          "description": "회사 적용성 평가에는 비용과 기존설비 연계가 필요하다."
+        },
+        {
+          "id": "etc_major_no_governance",
+          "severity": "major",
+          "message": "External/hybrid compute 연계의 security·governance·auditability가 없다.",
+          "description": "OT/IT 연결구조의 운영위험을 평가해야 한다."
+        },
+        {
+          "id": "etc_major_dynamic_scope_drift",
+          "severity": "major",
+          "message": "신기술 원리·적용성보다 최신 뉴스·법령·표준 목록에 답안이 치우쳤다.",
+          "description": "최신동향 rolling review는 IC-2027-W-5-2의 ownership이다."
+        }
+      ],
+      "feedback_templates": {},
+      "next_practice_points": [
+        "Qubit·superposition·measurement·interference를 한 장의 개념도로 정리한다.",
+        "Gate-based와 annealing을 목적·계산모델·적용후보 관점에서 비교한다.",
+        "Problem fit→classical baseline→hybrid architecture→pilot의 도입 흐름을 정리한다.",
+        "Data encoding→quantum execution→sampling→classical post-processing의 end-to-end latency를 정리한다.",
+        "Noise·decoherence·mitigation·error correction·logical resource의 관계를 정리한다.",
+        "PLC/DCS/SIS hard real-time 역할과 quantum compute의 offline/supervisory 후보 역할을 비교한다.",
+        "Research potential·pilot maturity·production readiness의 판정기준을 표로 정리한다.",
+        "TCO·skills·legacy integration·security/governance를 실제 회사 도입조건으로 정리한다."
+      ],
+      "false_positive_cautions": [
+        "Quantum advantage가 특정 문제에서 가능하다고 조건부로 설명한 문장을 universal speedup 주장으로 오판하지 않는다.",
+        "Superposition을 amplitude 조합으로 설명한 답안에 병렬성 비유가 있더라도 모든 답을 직접 읽는다고 단정하지 않으면 fatal로 보지 않는다.",
+        "Annealing을 optimization candidate로 설명하는 것은 gate-based와 동일시하지 않는 한 정상이다.",
+        "Quantum-inspired classical algorithm을 quantum hardware와 구분해 설명하면 정상이다.",
+        "Hybrid architecture에서 cloud 또는 remote quantum service를 예로 드는 것은 특정 vendor 종속 주장이 아니면 허용한다.",
+        "Offline·planning·supervisory use case를 우선 후보로 제시하는 것은 hard real-time 부적합을 절대명제로 만드는 것이 아니다.",
+        "Quantum sensing을 인접 신기술 사례로 언급하는 것은 quantum computing과 동일시하지 않으면 정상이다.",
+        "Error mitigation과 error correction을 모두 언급하되 보장수준 차이를 설명하면 정상이다.",
+        "Physical qubit count를 하나의 지표로 언급하는 것은 단독 충분조건으로 주장하지 않으면 정상이다.",
+        "Research-stage use case를 장기 후보로 설명하는 것은 production-ready라고 단정하지 않으면 정상이다.",
+        "Vendor benchmark를 참고자료로 언급하는 것은 classical baseline·pilot 검증을 함께 요구하면 정상이다.",
+        "TCO 산정에서 access 비용을 일부 항목으로 언급하는 것은 integration·skill·support를 배제하지 않으면 정상이다.",
+        "AI/ML·Digital Twin·IIoT를 비교대상 또는 기존 owner로 언급하는 것은 세부 내용을 재소유하지 않으면 정상이다.",
+        "IC-2027-W-5-2를 최신동향 관리영역으로 구분하는 것은 본 Topic의 coverage를 축소하는 것이 아니다."
+      ],
+      "enabled": true,
+      "score_policy": {
+        "direct_score_application": false,
+        "direct_d_e_effect": "none",
+        "affected_layers": [
+          "C"
+        ]
       }
     },
     {

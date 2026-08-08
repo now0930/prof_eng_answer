@@ -388,8 +388,9 @@ python3 -B scripts/test_control_system_operations_maintenance_calibration_inspec
 python3 -B scripts/test_instrumentation_project_management_basic_design_cost_schedule_documents_acceptance.py
 python3 -B scripts/test_instrumentation_production_management_planning_quality_cost_resources.py
 python3 -B scripts/test_industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread.py
-# Post-expansion static backlog focused regressions (1)
+# Post-expansion static backlog focused regressions (2)
 python3 -B tests/test_hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards_topic_pack.py
+python3 -B tests/test_emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits_topic_pack.py
 
 python3 -B scripts/test_plan_a_requirement_coverage_regressions.py
 

@@ -85,6 +85,7 @@ DESIGN_TOPICS = {
     "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
     "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
     "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+    "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
 }
 
 ALLOWED_SELECTION_IMPORTANCE = {
@@ -96,7 +97,7 @@ ALLOWED_SELECTION_IMPORTANCE = {
 EXPECTED_DIFFICULTY_COUNTS = {
     "THEORY_CORE": 19,
     "FIELD_APPLICATION": 36,
-    "DESIGN_EVALUATION": 15,
+    "DESIGN_EVALUATION": 16,
 }
 
 
@@ -117,7 +118,7 @@ def main() -> None:
         | DESIGN_TOPICS
     )
 
-    assert len(actual_topics) == 70
+    assert len(actual_topics) == 71
     assert actual_topics == classified_topics
 
     assert not (THEORY_TOPICS & APPLICATION_TOPICS)

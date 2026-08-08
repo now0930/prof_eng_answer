@@ -1,0 +1,29 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+  "difficulty": "DESIGN_EVALUATION",
+  "selection_importance": "HIGH",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "Quantum computing을 universal speedup이 아닌 problem-specific 계산기술로 정의한다.",
+    "Qubit·superposition·measurement·entanglement·interference의 관계를 정확히 설명한다.",
+    "Gate-based와 annealing을 구분한다.",
+    "Hybrid quantum-classical architecture와 기존 OT controller의 ownership을 분리한다.",
+    "Optimization·estimation use case를 classical baseline과 연결한다.",
+    "Data encoding·sampling·noise·decoherence·error 대책을 end-to-end 성능에 포함한다.",
+    "Latency·determinism 요구를 hard real-time 제어와 연결한다.",
+    "Quantum sensing과 quantum computing을 구분한다.",
+    "Research potential·pilot maturity·production readiness를 구분한다.",
+    "PoC/pilot acceptance criterion을 제시한다.",
+    "TCO·skills·legacy coexistence·security/governance를 회사 적용조건으로 포함한다.",
+    "기타 emerging technology를 원리·use case·성숙도·한계·검증 프레임으로 평가한다."
+  ],
+  "note": "공식 criterion에 양자컴퓨팅이 명시되어 있으나 기존 70 Topic에 quantum/emerging-tech 직접 owner가 없으므로 HIGH로 분류한다. AI/ML·robot·Digital Twin·IIoT의 기존 owner와 중복하지 않고 residual static coverage만 소유한다.",
+  "revision_notes": [
+    "IC-2027-W-5-1 Static Backlog 2의 직접 owner로 설계했다.",
+    "Question Type은 기존 IMPLEMENTATION_EVALUATION을 재사용한다.",
+    "Difficulty는 적용 타당성·성숙도·TCO 비교가 핵심이므로 DESIGN_EVALUATION으로 분류한다.",
+    "Coverage 승격은 source 생성만으로 수행하지 않고 후속 validation과 semantic re-audit 뒤 판정한다."
+  ],
+  "topic_label": "양자컴퓨팅·신기술 계측제어 적용성"
+}

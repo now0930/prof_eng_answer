@@ -1,0 +1,388 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
+  "title_ko": "양자컴퓨팅 등 신기술의 계측제어 적용·성숙도·한계 평가",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "양자컴퓨팅의 원리와 계측제어 분야 적용 가능성 및 한계를 설명하시오.",
+      "intent": "기본 양자개념을 산업 적용성·한계와 연결한다.",
+      "required_anchor_ids": [
+        "etc_quantum_computing_definition",
+        "etc_qubit_vs_classical_bit",
+        "etc_superposition_role",
+        "etc_measurement_readout",
+        "etc_hybrid_quantum_classical",
+        "etc_readiness_maturity"
+      ]
+    },
+    {
+      "pattern": "양자컴퓨팅을 산업 제어시스템에 적용할 때 고려할 사항을 설명하시오.",
+      "intent": "문제적합성, architecture, latency, 검증, TCO를 구조화한다.",
+      "required_anchor_ids": [
+        "etc_problem_fit_first",
+        "etc_hybrid_quantum_classical",
+        "etc_latency_determinism",
+        "etc_pilot_verification",
+        "etc_tco_skills_integration"
+      ]
+    },
+    {
+      "pattern": "Gate-based quantum computing과 quantum annealing을 비교하고 계측제어 적용관점을 설명하시오.",
+      "intent": "두 계산모델의 차이와 workload fit을 비교한다.",
+      "required_anchor_ids": [
+        "etc_gate_model",
+        "etc_annealing_boundary",
+        "etc_problem_fit_first",
+        "etc_optimization_candidate"
+      ]
+    },
+    {
+      "pattern": "양자컴퓨팅의 산업 최적화 적용 시 성능검증 방법을 설명하시오.",
+      "intent": "최적화 후보를 classical baseline과 pilot acceptance로 검증한다.",
+      "required_anchor_ids": [
+        "etc_optimization_candidate",
+        "etc_data_encoding_bottleneck",
+        "etc_output_sampling_bottleneck",
+        "etc_classical_baseline_benchmark",
+        "etc_pilot_verification"
+      ]
+    },
+    {
+      "pattern": "양자컴퓨팅이 PLC/DCS 기반 실시간 제어를 대체할 수 있는지 평가하시오.",
+      "intent": "hard real-time requirement와 quantum compute의 역할경계를 평가한다.",
+      "required_anchor_ids": [
+        "etc_offline_supervisory_boundary",
+        "etc_latency_determinism",
+        "etc_plc_dcs_boundary",
+        "etc_hybrid_quantum_classical"
+      ]
+    },
+    {
+      "pattern": "양자컴퓨팅의 noise와 error 대책이 산업 적용성에 미치는 영향을 설명하시오.",
+      "intent": "noise, decoherence, mitigation/correction, scale-quality를 연결한다.",
+      "required_anchor_ids": [
+        "etc_noise_decoherence",
+        "etc_error_mitigation_correction_boundary",
+        "etc_scale_quality_tradeoff",
+        "etc_readiness_maturity"
+      ]
+    },
+    {
+      "pattern": "양자컴퓨팅과 quantum sensing의 차이를 계측제어 관점에서 설명하시오.",
+      "intent": "계산기술과 측정기술 ownership을 분리한다.",
+      "required_anchor_ids": [
+        "etc_quantum_computing_definition",
+        "etc_quantum_sensing_boundary",
+        "etc_emerging_technology_framework"
+      ]
+    },
+    {
+      "pattern": "계측제어 관련 신기술의 도입 타당성 평가 절차를 설명하시오.",
+      "intent": "양자컴퓨팅을 예로 재사용 가능한 신기술 평가프레임을 제시한다.",
+      "required_anchor_ids": [
+        "etc_problem_fit_first",
+        "etc_readiness_maturity",
+        "etc_classical_baseline_benchmark",
+        "etc_pilot_verification",
+        "etc_tco_skills_integration",
+        "etc_emerging_technology_framework"
+      ]
+    },
+    {
+      "pattern": "양자컴퓨팅 도입 시 데이터·통신·보안·운영 측면의 제약을 설명하시오.",
+      "intent": "end-to-end interface와 governance 제약을 설명한다.",
+      "required_anchor_ids": [
+        "etc_data_encoding_bottleneck",
+        "etc_output_sampling_bottleneck",
+        "etc_latency_determinism",
+        "etc_security_governance",
+        "etc_tco_skills_integration"
+      ]
+    },
+    {
+      "pattern": "신기술의 연구 가능성과 production readiness를 구분하고 현장 도입방법을 설명하시오.",
+      "intent": "maturity와 pilot, legacy/TCO를 단계적으로 연결한다.",
+      "required_anchor_ids": [
+        "etc_readiness_maturity",
+        "etc_classical_baseline_benchmark",
+        "etc_pilot_verification",
+        "etc_tco_skills_integration",
+        "etc_emerging_technology_framework"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "1. Quantum Computing 기본원리",
+      "intent": "Qubit, superposition, measurement, entanglement, interference의 역할을 정확히 정의한다.",
+      "anchor_refs": [
+        "etc_quantum_computing_definition",
+        "etc_qubit_vs_classical_bit",
+        "etc_superposition_role",
+        "etc_measurement_readout",
+        "etc_entanglement_role",
+        "etc_interference_role"
+      ]
+    },
+    {
+      "section": "2. 계산모델과 Hybrid Architecture",
+      "intent": "Gate·annealing을 구분하고 classical orchestration과 quantum subproblem을 연결한다.",
+      "anchor_refs": [
+        "etc_gate_model",
+        "etc_annealing_boundary",
+        "etc_hybrid_quantum_classical"
+      ]
+    },
+    {
+      "section": "3. 계측제어 Use Case와 Problem Fit",
+      "intent": "최적화·estimation 후보를 classical baseline 이전의 problem-fit 관점에서 선정한다.",
+      "anchor_refs": [
+        "etc_problem_fit_first",
+        "etc_optimization_candidate",
+        "etc_estimation_candidate",
+        "etc_offline_supervisory_boundary"
+      ]
+    },
+    {
+      "section": "4. Input·Output·Hardware 한계",
+      "intent": "Encoding, sampling, noise, error 대책, scale-quality를 end-to-end 성능과 연결한다.",
+      "anchor_refs": [
+        "etc_data_encoding_bottleneck",
+        "etc_output_sampling_bottleneck",
+        "etc_noise_decoherence",
+        "etc_error_mitigation_correction_boundary",
+        "etc_scale_quality_tradeoff"
+      ]
+    },
+    {
+      "section": "5. 실시간 제어와 Ownership Boundary",
+      "intent": "Latency·determinism을 평가하고 PLC/DCS/SIS 및 quantum sensing과 경계를 분리한다.",
+      "anchor_refs": [
+        "etc_latency_determinism",
+        "etc_plc_dcs_boundary",
+        "etc_quantum_sensing_boundary"
+      ]
+    },
+    {
+      "section": "6. Readiness와 Benchmark",
+      "intent": "Research potential과 production readiness를 구분하고 classical baseline으로 검증한다.",
+      "anchor_refs": [
+        "etc_readiness_maturity",
+        "etc_classical_baseline_benchmark"
+      ]
+    },
+    {
+      "section": "7. Pilot·TCO·Governance",
+      "intent": "PoC/pilot acceptance, lifecycle TCO, skills, legacy integration과 governance를 평가한다.",
+      "anchor_refs": [
+        "etc_pilot_verification",
+        "etc_tco_skills_integration",
+        "etc_security_governance"
+      ]
+    },
+    {
+      "section": "8. 기타 신기술 평가프레임과 Dynamic Boundary",
+      "intent": "기타 emerging technology에도 적용 가능한 평가프레임을 제시하고 IC-2027-W-5-2를 분리한다.",
+      "anchor_refs": [
+        "etc_emerging_technology_framework"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "Qubit·superposition·measurement를 서로 다른 개념으로 설명한다.",
+    "Entanglement와 interference를 계산자원 관점에서 설명하되 물리적 과장을 하지 않는다.",
+    "Gate-based와 annealing을 구분한다.",
+    "Hybrid quantum-classical architecture를 산업 적용 기본구조로 제시한다.",
+    "Problem-fit과 classical baseline을 기술 도입보다 먼저 제시한다.",
+    "최적화·estimation을 candidate use case로 제시하되 advantage를 보장하지 않는다.",
+    "Data encoding과 output sampling overhead를 포함한다.",
+    "Noise·decoherence·error mitigation/correction을 구분한다.",
+    "End-to-end latency와 determinism 요구를 PLC/DCS 역할경계와 연결한다.",
+    "Quantum sensing과 quantum computing을 구분한다.",
+    "Research potential·pilot maturity·production readiness를 구분한다.",
+    "PoC/pilot acceptance criteria를 명시한다.",
+    "Lifecycle TCO·skills·legacy integration을 회사 적용조건으로 반영한다.",
+    "Security·governance·auditability를 integration risk로 다룬다.",
+    "기타 emerging technology에도 원리→use case→maturity→limits→verification 프레임을 적용한다.",
+    "IC-2027-W-5-2 최신동향은 static Topic에서 분리한다."
+  ],
+  "common_missing_points": [
+    "Quantum computing을 모든 계산의 보편적 가속기로 설명한다.",
+    "Qubit과 measurement를 구분하지 않는다.",
+    "Superposition만 언급하고 interference를 설명하지 않는다.",
+    "Gate-based와 annealing을 동일시한다.",
+    "Hybrid architecture 없이 quantum processor가 OT 전체를 대체한다고 설명한다.",
+    "Classical baseline 없이 quantum advantage를 주장한다.",
+    "Data encoding·sampling overhead를 누락한다.",
+    "Noise·decoherence·error correction 부담을 누락한다.",
+    "Hard real-time latency·determinism 요구를 누락한다.",
+    "Quantum sensing과 quantum computing을 동일시한다.",
+    "Research demo를 production-ready로 간주한다.",
+    "Pilot acceptance criterion이 없다.",
+    "TCO·skills·legacy coexistence를 누락한다.",
+    "보안·governance를 누락한다.",
+    "최신 뉴스·법령을 정적 Topic에 고정해 IC-2027-W-5-2와 중복한다."
+  ],
+  "routing_aliases": [
+    "양자컴퓨팅 계측제어 적용",
+    "quantum computing instrumentation control",
+    "양자컴퓨팅 산업제어 적용성",
+    "quantum computing industrial control applications",
+    "양자컴퓨팅 도입 성숙도",
+    "quantum computing readiness maturity",
+    "양자컴퓨팅 적용 한계",
+    "quantum computing control limitations",
+    "hybrid quantum classical industrial optimization",
+    "양자 고전 하이브리드 산업 최적화",
+    "양자 최적화 계측제어",
+    "quantum optimization instrumentation",
+    "양자컴퓨팅 실시간 제어 한계",
+    "quantum computing real time control limits",
+    "양자컴퓨팅 산업 적용 평가",
+    "industrial quantum computing feasibility",
+    "emerging technology readiness instrumentation control",
+    "신기술 계측제어 적용성 평가"
+  ],
+  "routing_field_points": [
+    "qubit versus classical bit",
+    "superposition amplitude and measurement",
+    "entanglement correlation boundary",
+    "quantum interference",
+    "gate based quantum circuit",
+    "quantum annealing distinction",
+    "hybrid quantum classical architecture",
+    "problem fit and computational bottleneck",
+    "classical baseline benchmark",
+    "combinatorial optimization candidate",
+    "parameter state estimation candidate",
+    "offline planning supervisory optimization",
+    "data encoding state preparation",
+    "measurement shots sampling",
+    "noise decoherence fidelity",
+    "error mitigation versus correction",
+    "physical qubit quality tradeoff",
+    "end to end latency jitter determinism",
+    "PLC DCS SIS ownership boundary",
+    "quantum sensing boundary",
+    "readiness maturity pilot production",
+    "PoC pilot acceptance criteria",
+    "TCO skills legacy integration",
+    "security governance auditability",
+    "emerging technology evaluation framework",
+    "IC-2027-W-5-2 dynamic review boundary"
+  ],
+  "revision_notes": [
+    "IC-2027-W-5-1의 quantum/emerging-technology residual scope를 원리→적용→성숙도→한계→도입검증 구조로 작성했다.",
+    "Generic AI/ML·robot·Digital Twin·IIoT/Smart Factory의 세부 설명은 기존 Topic ownership으로 유지한다.",
+    "Quantum sensing은 인접 신기술이지만 quantum computing과 동일시하지 않는다.",
+    "IC-2027-W-5-2 최신동향은 DYNAMIC_REVIEW_LANE으로 분리한다."
+  ],
+  "id": "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits_IMPLEMENTATION_v1",
+  "title": "양자컴퓨팅 등 신기술의 계측제어 적용·성숙도·한계 평가",
+  "question_examples": [
+    "양자컴퓨팅의 원리와 계측제어 분야 적용 가능성 및 한계를 설명하시오.",
+    "양자컴퓨팅을 산업 제어시스템에 적용할 때 고려할 사항을 설명하시오.",
+    "Gate-based quantum computing과 quantum annealing을 비교하고 계측제어 적용관점을 설명하시오.",
+    "양자컴퓨팅의 산업 최적화 적용 시 성능검증 방법을 설명하시오.",
+    "양자컴퓨팅이 PLC/DCS 기반 실시간 제어를 대체할 수 있는지 평가하시오.",
+    "양자컴퓨팅의 noise와 error 대책이 산업 적용성에 미치는 영향을 설명하시오.",
+    "양자컴퓨팅과 quantum sensing의 차이를 계측제어 관점에서 설명하시오.",
+    "계측제어 관련 신기술의 도입 타당성 평가 절차를 설명하시오.",
+    "양자컴퓨팅 도입 시 데이터·통신·보안·운영 측면의 제약을 설명하시오.",
+    "신기술의 연구 가능성과 production readiness를 구분하고 현장 도입방법을 설명하시오."
+  ],
+  "topic_aliases": [
+    "양자컴퓨팅 계측제어 적용",
+    "quantum computing instrumentation control",
+    "양자컴퓨팅 산업제어 적용성",
+    "quantum computing industrial control applications",
+    "양자컴퓨팅 도입 성숙도",
+    "quantum computing readiness maturity",
+    "양자컴퓨팅 적용 한계",
+    "quantum computing control limitations",
+    "hybrid quantum classical industrial optimization",
+    "양자 고전 하이브리드 산업 최적화",
+    "양자 최적화 계측제어",
+    "quantum optimization instrumentation",
+    "양자컴퓨팅 실시간 제어 한계",
+    "quantum computing real time control limits",
+    "양자컴퓨팅 산업 적용 평가",
+    "industrial quantum computing feasibility",
+    "emerging technology readiness instrumentation control",
+    "신기술 계측제어 적용성 평가"
+  ],
+  "expected_structure": [
+    "1. Quantum Computing 기본원리",
+    "2. 계산모델과 Hybrid Architecture",
+    "3. 계측제어 Use Case와 Problem Fit",
+    "4. Input·Output·Hardware 한계",
+    "5. 실시간 제어와 Ownership Boundary",
+    "6. Readiness와 Benchmark",
+    "7. Pilot·TCO·Governance",
+    "8. 기타 신기술 평가프레임과 Dynamic Boundary"
+  ],
+  "high_score_features": [
+    "Qubit·superposition·measurement를 서로 다른 개념으로 설명한다.",
+    "Entanglement와 interference를 계산자원 관점에서 설명하되 물리적 과장을 하지 않는다.",
+    "Gate-based와 annealing을 구분한다.",
+    "Hybrid quantum-classical architecture를 산업 적용 기본구조로 제시한다.",
+    "Problem-fit과 classical baseline을 기술 도입보다 먼저 제시한다.",
+    "최적화·estimation을 candidate use case로 제시하되 advantage를 보장하지 않는다.",
+    "Data encoding과 output sampling overhead를 포함한다.",
+    "Noise·decoherence·error mitigation/correction을 구분한다.",
+    "End-to-end latency와 determinism 요구를 PLC/DCS 역할경계와 연결한다.",
+    "Quantum sensing과 quantum computing을 구분한다.",
+    "Research potential·pilot maturity·production readiness를 구분한다.",
+    "PoC/pilot acceptance criteria를 명시한다.",
+    "Lifecycle TCO·skills·legacy integration을 회사 적용조건으로 반영한다.",
+    "Security·governance·auditability를 integration risk로 다룬다.",
+    "기타 emerging technology에도 원리→use case→maturity→limits→verification 프레임을 적용한다.",
+    "IC-2027-W-5-2 최신동향은 static Topic에서 분리한다."
+  ],
+  "low_score_patterns": [
+    "Quantum computing을 모든 계산의 보편적 가속기로 설명한다.",
+    "Qubit과 measurement를 구분하지 않는다.",
+    "Superposition만 언급하고 interference를 설명하지 않는다.",
+    "Gate-based와 annealing을 동일시한다.",
+    "Hybrid architecture 없이 quantum processor가 OT 전체를 대체한다고 설명한다.",
+    "Classical baseline 없이 quantum advantage를 주장한다.",
+    "Data encoding·sampling overhead를 누락한다.",
+    "Noise·decoherence·error correction 부담을 누락한다.",
+    "Hard real-time latency·determinism 요구를 누락한다.",
+    "Quantum sensing과 quantum computing을 동일시한다.",
+    "Research demo를 production-ready로 간주한다.",
+    "Pilot acceptance criterion이 없다.",
+    "TCO·skills·legacy coexistence를 누락한다.",
+    "보안·governance를 누락한다.",
+    "최신 뉴스·법령을 정적 Topic에 고정해 IC-2027-W-5-2와 중복한다."
+  ],
+  "field_connection_points": [
+    "qubit versus classical bit",
+    "superposition amplitude and measurement",
+    "entanglement correlation boundary",
+    "quantum interference",
+    "gate based quantum circuit",
+    "quantum annealing distinction",
+    "hybrid quantum classical architecture",
+    "problem fit and computational bottleneck",
+    "classical baseline benchmark",
+    "combinatorial optimization candidate",
+    "parameter state estimation candidate",
+    "offline planning supervisory optimization",
+    "data encoding state preparation",
+    "measurement shots sampling",
+    "noise decoherence fidelity",
+    "error mitigation versus correction",
+    "physical qubit quality tradeoff",
+    "end to end latency jitter determinism",
+    "PLC DCS SIS ownership boundary",
+    "quantum sensing boundary",
+    "readiness maturity pilot production",
+    "PoC pilot acceptance criteria",
+    "TCO skills legacy integration",
+    "security governance auditability",
+    "emerging technology evaluation framework",
+    "IC-2027-W-5-2 dynamic review boundary"
+  ]
+}
