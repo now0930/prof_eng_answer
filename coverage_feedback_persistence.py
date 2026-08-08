@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import logging
 from pathlib import Path
 from typing import Any, Dict, Optional
 
@@ -12,6 +13,8 @@ from coverage_feedback_event import (
 COVERAGE_FEEDBACK_EVENT_FILENAME = (
     "coverage_feedback_event.json"
 )
+
+_LOG = logging.getLogger(__name__)
 
 
 def persist_session_coverage_feedback_event(
@@ -50,7 +53,13 @@ def persist_session_coverage_feedback_event(
             encoding="utf-8",
         )
         tmp.replace(target)
-    except Exception:
+    except Exception as exc:
+        # Operational observability only. Never log question/answer text,
+        # session path, routing payload, score, or Topic content here.
+        _LOG.warning(
+            "coverage_feedback_persistence_failed exception_type=%s",
+            type(exc).__name__,
+        )
         return None
 
     return event
