@@ -212,6 +212,11 @@ def attach_multi_topic_summary_to_question_contract(
 
     result = copy.deepcopy(contract)
     result["multi_topic_grading_context_summary"] = summary
+
+    if str(result.get("contract_hash") or "").strip():
+        from question_contract import rehash_question_contract
+
+        return rehash_question_contract(result)
     return result
 
 

@@ -273,6 +273,19 @@ def _with_contract_hash(
     return output
 
 
+def rehash_question_contract(
+    contract: Any,
+) -> dict[str, Any]:
+    """Recompute and validate the Question Contract integrity hash."""
+
+    if not isinstance(contract, dict):
+        raise TypeError("Question contract must be a dict")
+
+    output = _with_contract_hash(contract)
+    validate_question_contract(output)
+    return output
+
+
 def build_question_contract(
     *,
     grading_identity: dict[str, Any],
