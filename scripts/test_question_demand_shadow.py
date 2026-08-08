@@ -240,7 +240,7 @@ class QuestionDemandShadowPersistenceTest(unittest.TestCase):
 
 
 class Phase10IsolationStaticContractTest(unittest.TestCase):
-    def test_shadow_call_is_guarded_and_result_is_not_assigned(self):
+    def test_shadow_call_is_guarded_and_only_handed_to_semantic_shadow(self):
         path = BASE_DIR / "grading_agents.py"
         tree = ast.parse(path.read_text(encoding="utf-8"))
 
@@ -252,37 +252,84 @@ class Phase10IsolationStaticContractTest(unittest.TestCase):
             == "_phase10_run_model_answer_reference"
         )
 
-        shadow_calls = []
-        for node in ast.walk(fn):
-            if (
-                isinstance(node, ast.Call)
-                and isinstance(node.func, ast.Name)
-                and node.func.id
-                == "_phase10_run_question_demand_shadow"
-            ):
-                shadow_calls.append(node)
-
-        self.assertEqual(len(shadow_calls), 1)
-
-        call = shadow_calls[0]
-
         parents = {}
         for parent in ast.walk(fn):
             for child in ast.iter_child_nodes(parent):
                 parents[child] = parent
 
-        parent = parents.get(call)
-        self.assertIsInstance(parent, ast.Expr)
+        shadow_calls = [
+            node
+            for node in ast.walk(fn)
+            if (
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Name)
+                and node.func.id
+                == "_phase10_run_question_demand_shadow"
+            )
+        ]
+        self.assertEqual(len(shadow_calls), 1)
 
-        cur = parent
+        call = shadow_calls[0]
+        assign = parents.get(call)
+        self.assertIsInstance(assign, ast.Assign)
+        self.assertEqual(len(assign.targets), 1)
+        self.assertIsInstance(assign.targets[0], ast.Name)
+        self.assertEqual(
+            assign.targets[0].id,
+            "question_demand_shadow_result",
+        )
+
+        cur = assign
         guarded = False
         while cur in parents:
             cur = parents[cur]
             if isinstance(cur, ast.Try):
                 guarded = True
                 break
-
         self.assertTrue(guarded)
+
+        semantic_calls = [
+            node
+            for node in ast.walk(fn)
+            if (
+                isinstance(node, ast.Call)
+                and isinstance(node.func, ast.Name)
+                and node.func.id
+                == "_phase10_run_semantic_router_shadow"
+            )
+        ]
+        self.assertEqual(len(semantic_calls), 1)
+
+        semantic_call = semantic_calls[0]
+        handoff_values = [
+            kw.value
+            for kw in semantic_call.keywords
+            if kw.arg == "question_demand_result"
+        ]
+        self.assertEqual(len(handoff_values), 1)
+
+        names = [
+            node.id
+            for node in ast.walk(handoff_values[0])
+            if isinstance(node, ast.Name)
+        ]
+        self.assertIn(
+            "question_demand_shadow_result",
+            names,
+        )
+
+        returns = [
+            node
+            for node in ast.walk(fn)
+            if isinstance(node, ast.Return)
+        ]
+        self.assertTrue(
+            any(
+                isinstance(node.value, ast.Name)
+                and node.value.id == "result"
+                for node in returns
+            )
+        )
 
     def test_shadow_module_has_no_answer_text_parameter(self):
         tree = ast.parse(

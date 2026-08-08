@@ -6360,6 +6360,85 @@ def _phase10_apply_generated_single_topic_overrides(
 
 
 
+def _phase10_run_semantic_router_shadow(
+    question_text,
+    question_demand_result,
+    rule_result,
+    session_dir,
+):
+    "Run semantic routing as a non-authoritative shadow side effect."
+    try:
+        from semantic_router_shadow import (
+            SEMANTIC_ROUTER_SHADOW_FILE,
+            semantic_route_shadow,
+        )
+
+        result = semantic_route_shadow(
+            question_text=question_text,
+            question_demand_result=question_demand_result,
+            rule_result=rule_result,
+        )
+
+        if not isinstance(result, dict):
+            raise TypeError(
+                "semantic_route_shadow must return dict, "
+                f"got {type(result).__name__}"
+            )
+
+    except Exception as error:
+        result = {
+            "version": "semantic_router_shadow_v1_fallback",
+            "shadow": True,
+            "enabled": False,
+            "status": "fallback",
+            "ok": False,
+            "routing_mode": None,
+            "candidate_topic_ids": [],
+            "demand_mappings": [],
+            "uncovered_demand_ids": [],
+            "primary_topic_ids": [],
+            "supporting_topic_ids": [],
+            "reason": "",
+            "error": repr(error),
+            "llm_called": False,
+            "routing_effect": "none",
+            "score_effect": "none",
+            "student_answer_used": False,
+            "legacy_router_authoritative": True,
+        }
+        SEMANTIC_ROUTER_SHADOW_FILE = (
+            "semantic_router_shadow.json"
+        )
+
+    if (
+        result.get("status") != "disabled"
+        and session_dir is not None
+    ):
+        try:
+            _phase2_json_write(
+                session_dir / SEMANTIC_ROUTER_SHADOW_FILE,
+                result,
+            )
+        except Exception as write_error:
+            print(
+                "[agent] semantic router shadow persistence "
+                f"failed: {write_error!r}"
+            )
+
+    if result.get("ok"):
+        print(
+            "[agent] semantic router shadow completed: "
+            f"{result.get('routing_mode')}"
+        )
+    elif result.get("status") != "disabled":
+        print(
+            "[agent] semantic router shadow fallback: "
+            f"{result.get('error')}"
+        )
+
+    return result
+
+
 def _phase10_run_question_demand_shadow(
     question_text,
     session_dir,
@@ -6472,10 +6551,13 @@ def _phase10_run_model_answer_reference(
             input_text
         )
         # Stage 2 Router v2 shadow: never affects the legacy router result.
+        question_demand_shadow_result = None
         try:
-            _phase10_run_question_demand_shadow(
-                question_text=question_text,
-                session_dir=session_dir,
+            question_demand_shadow_result = (
+                _phase10_run_question_demand_shadow(
+                    question_text=question_text,
+                    session_dir=session_dir,
+                )
             )
         except Exception as shadow_error:
             report(
@@ -6536,6 +6618,24 @@ def _phase10_run_model_answer_reference(
                 "find_model_answer_reference must return "
                 "dict, "
                 f"got {type(result).__name__}"
+            )
+
+        # Stage 3 Router v2 semantic adjudication shadow.
+        # Legacy Rule Router remains authoritative.
+        try:
+            _phase10_run_semantic_router_shadow(
+                question_text=question_text,
+                question_demand_result=(
+                    question_demand_shadow_result
+                ),
+                rule_result=result,
+                session_dir=session_dir,
+            )
+        except Exception as semantic_shadow_error:
+            report(
+                "[agent] semantic router shadow "
+                "isolated failure: "
+                f"{semantic_shadow_error!r}"
             )
 
         persist_reference(result)
