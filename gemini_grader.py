@@ -1397,16 +1397,28 @@ def build_gemini_grading_prompt(*args, **kwargs):
 _multi_topic_scope_previous_build_gemini_grading_prompt_v1 = build_gemini_grading_prompt
 
 def _multi_topic_demand_scope_prompt_v1() -> str:
-    return "[MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]\nWhen multi_topic_grading_evidence is present, each Topic's model_answer and\nfact_anchor are knowledge references, not a checklist of every item that the\nstudent must write.\n\nScope rules:\n1. Use semantic demand_mappings to identify the Question Demand(s) owned by each Topic.\n2. For omission, completeness, layer scoring, and improvement advice, require only\n   details that directly support those mapped Demand(s).\n3. Do not penalize, lower a layer score, or recommend adding a Topic anchor,\n   high_score_feature, expected_structure item, common_missing_point, or\n   field_connection_point merely because it exists in Topic evidence when the\n   mapped Demand(s) do not ask for it.\n4. Do not transfer requirements between Topics or unrelated Demands.\n   Example: load-cell eccentric-load or overload installation criteria must not\n   be treated as missing configuration-change procedure content unless the\n   question explicitly asks for those installation risks.\n5. If several Demands map to one Topic, use the union of those mapped Demands\n   as that Topic's grading scope.\n6. Topic evidence may explain or verify an in-scope Demand, but it must not silently expand the question scope.\n7. This scope rule limits omission and completeness expectations only. It\n   does not excuse an explicit factual error that the student actually wrote.\n8. Preserve one-question-one-score. Do not score Topics separately, sum Topic\n   scores, or average Topic scores.\n\nBefore finalizing feedback, verify that every claimed missing point can be\ntraced to an explicit Question Demand, or is necessary to correctly explain\nthat Demand. Otherwise remove that missing-point criticism.\n[/MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]"
+    return "[MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]\nWhen Topic Router evidence is MULTI_TOPIC or HYBRID_TOPIC_GENERAL, each\nTopic's model_answer and fact_anchor are knowledge references, not a checklist\nof every item that the student must write. In Hybrid mode, General evidence is\nlimited to uncovered Question Demands and must not cause Topic evidence to\nexpand beyond the Demands owned by that Topic.\n\nScope rules:\n1. Use semantic demand_mappings to identify the Question Demand(s) owned by each Topic.\n2. For omission, completeness, layer scoring, and improvement advice, require only\n   details that directly support those mapped Demand(s).\n3. Do not penalize, lower a layer score, or recommend adding a Topic anchor,\n   high_score_feature, expected_structure item, common_missing_point, or\n   field_connection_point merely because it exists in Topic evidence when the\n   mapped Demand(s) do not ask for it.\n4. Do not transfer requirements between Topics, from Topic evidence into\n   uncovered General Demands, or between unrelated Demands.\n   Example: load-cell eccentric-load, overload, adhesion, wiring, shielding, or\n   grounding criteria must not become missing record-retention or disposal\n   requirements unless the question explicitly asks for those items.\n5. If several Demands map to one Topic, use the union of those mapped Demands\n   as that Topic's grading scope. In Hybrid mode, role=NONE / uncovered Demands\n   are not owned by that Topic even if the routing payload carries a topic_id\n   placeholder for provenance.\n6. Topic evidence may explain or verify an in-scope Demand, but it must not silently expand the question scope.\n7. General Engineering evidence in Hybrid mode applies only to uncovered\n   Question Demands and must not be used to re-score Topic-covered Demands.\n8. This scope rule limits omission and completeness expectations only. It\n   does not excuse an explicit factual error that the student actually wrote.\n9. Preserve one-question-one-score. Do not score Topics separately, sum Topic\n   scores, average Topic scores, or create a separate General score.\n\nBefore finalizing feedback, verify that every claimed missing point can be\ntraced to an explicit Question Demand, or is necessary to correctly explain\nthat Demand. Otherwise remove that missing-point criticism.\n[/MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]"
 
 
 def _multi_topic_demand_scope_applicable_v1(subject_rubric) -> bool:
     if not isinstance(subject_rubric, dict):
         return False
-    evidence = subject_rubric.get("multi_topic_grading_evidence")
-    if not isinstance(evidence, dict):
+
+    multi_topic = subject_rubric.get("multi_topic_grading_evidence")
+    if (
+        isinstance(multi_topic, dict)
+        and multi_topic.get("routing_mode") == "MULTI_TOPIC"
+    ):
+        return True
+
+    hybrid = subject_rubric.get("hybrid_general_grading_evidence")
+    if not isinstance(hybrid, dict):
         return False
-    return evidence.get("routing_mode") == "MULTI_TOPIC"
+
+    return (
+        hybrid.get("coverage_kind") == "HYBRID_TOPIC_GENERAL"
+        and hybrid.get("routing_mode") == "SINGLE_TOPIC"
+    )
 
 
 def build_gemini_grading_prompt(*args, **kwargs):
