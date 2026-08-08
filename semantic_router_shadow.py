@@ -1561,3 +1561,64 @@ def semantic_route_shadow(
         reason=normalized["reason"],
         llm_called=True,
     )
+
+# SEMANTIC_ROUTER_GENERAL_MODE_HARD_CONTRACT_V1
+_semantic_router_previous_append_hard_contract = (
+    _append_semantic_router_hard_contract
+)
+
+
+def _append_semantic_router_hard_contract(
+    prompt,
+    question_text,
+    question_demand_result,
+    candidate_catalog,
+):
+    base_prompt = _semantic_router_previous_append_hard_contract(
+        prompt,
+        question_text,
+        question_demand_result,
+        candidate_catalog,
+    )
+
+    return (
+        str(base_prompt).rstrip()
+        + """
+
+[SEMANTIC_ROUTER_GENERAL_MODE_HARD_CONTRACT_V1]
+
+The following mode-consistency rules are mandatory and override any
+conflicting interpretation:
+
+1. routing_mode == "GENERAL":
+   - primary_topic_ids MUST be [].
+   - supporting_topic_ids MUST be [].
+   - demand_mappings MUST NOT assign any positive Topic role.
+   - every valid question demand id MUST appear in uncovered_demand_ids.
+   - do not retain a Topic merely because it appeared in the candidate catalog.
+
+2. routing_mode == "SINGLE_TOPIC":
+   - primary_topic_ids MUST contain exactly one allowed candidate Topic id.
+   - any supporting_topic_ids and positive Topic demand mappings MUST use only
+     allowed candidate Topic ids.
+   - demands not sufficiently owned by an allowed Topic MUST remain in
+     uncovered_demand_ids.
+
+3. routing_mode == "MULTI_TOPIC":
+   - primary_topic_ids MUST contain only allowed candidate Topic ids.
+   - supporting_topic_ids and positive Topic demand mappings MUST use only
+     allowed candidate Topic ids.
+   - demands not sufficiently owned by an allowed Topic MUST remain in
+     uncovered_demand_ids.
+
+4. routing_mode == "AMBIGUOUS":
+   - do not convert uncertainty into GENERAL merely to avoid choosing a Topic.
+
+5. Never invent Topic ids. Never use the student answer for routing.
+
+Before returning JSON, perform this consistency check:
+- If mode is GENERAL, erase all positive Topic assignments and mark all valid
+  demand ids uncovered.
+- If any positive Topic assignment remains, mode MUST NOT be GENERAL.
+"""
+    )
