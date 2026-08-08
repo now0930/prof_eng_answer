@@ -6673,6 +6673,53 @@ def _phase10_run_model_answer_reference(
             build_assisted_model_answer_reference,
         )
 
+        model_answer_reference_result = result
+        from multi_topic_grading_context import (
+            multi_topic_grading_enabled,
+        )
+
+        if multi_topic_grading_enabled():
+            from pathlib import Path
+            from multi_topic_grading_context import (
+                build_multi_topic_grading_context,
+                load_generated_multi_topic_sources,
+            )
+            from semantic_router_shadow import (
+                augment_rule_candidates_for_shadow,
+            )
+
+            multi_topic_shadow_candidates = (
+                augment_rule_candidates_for_shadow(
+                    question_text=question_text,
+                    rule_result=result,
+                )
+            )
+            multi_topic_generated_sources = (
+                load_generated_multi_topic_sources(
+                    repo_root=Path(__file__).resolve().parent,
+                )
+            )
+            multi_topic_context = (
+                build_multi_topic_grading_context(
+                    semantic_result=(
+                        semantic_router_shadow_result
+                    ),
+                    shadow_candidate_result=(
+                        multi_topic_shadow_candidates
+                    ),
+                    generated_sources=(
+                        multi_topic_generated_sources
+                    ),
+                    enabled=True,
+                )
+            )
+
+            if multi_topic_context.get("applicable") is True:
+                model_answer_reference_result = dict(result)
+                model_answer_reference_result[
+                    "multi_topic_grading_context"
+                ] = multi_topic_context
+
         if assisted_routing_enabled():
             from semantic_router_shadow import (
                 augment_rule_candidates_for_shadow,
@@ -6685,13 +6732,13 @@ def _phase10_run_model_answer_reference(
                 )
             )
             return build_assisted_model_answer_reference(
-                legacy_result=result,
+                legacy_result=model_answer_reference_result,
                 semantic_result=semantic_router_shadow_result,
                 shadow_candidate_result=shadow_candidate_result,
                 enabled=True,
             )
 
-        return result
+        return model_answer_reference_result
 
     except Exception as error:
         fallback = {
