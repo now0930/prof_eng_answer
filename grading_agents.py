@@ -3825,12 +3825,27 @@ def _phase4_apply_rater_weighted_scoring(grade, scoring_model, rater_profile):
 
         new_layer = dict(layer)
         new_layer["score_before_rater_weight"] = layer.get("score")
-        new_layer["score"] = round(weighted_score, 2)
-        new_layer["rater_weighted"] = True
-        new_layer["reason"] = (
-            str(layer.get("reason", ""))
-            + " / 3인 채점자 layer 가중 합성을 적용함."
-        )
+        new_layer["rater_weighted_candidate_score"] = round(weighted_score, 2)
+
+        # QUESTION_TYPE_DE_POLICY: D/E는 upstream authoritative score를 보존한다.
+        # 3-rater 결과는 D/E에 대해 diagnostic-only로 기록한다.
+        if layer_id in {"D", "E"}:
+            new_layer["score"] = round(float(layer.get("score", 0)), 2)
+            new_layer["rater_weighted"] = False
+            new_layer["rater_weighted_diagnostic_only"] = True
+            new_layer["reason"] = (
+                str(layer.get("reason", ""))
+                + " / D/E authoritative score 보존; 3인 rater candidate는 diagnostic-only."
+            )
+        else:
+            new_layer["score"] = round(weighted_score, 2)
+            new_layer["rater_weighted"] = True
+            new_layer["rater_weighted_diagnostic_only"] = False
+            new_layer["reason"] = (
+                str(layer.get("reason", ""))
+                + " / 3인 채점자 layer 가중 합성을 적용함."
+            )
+
         weighted_layers.append(new_layer)
 
     weighted_total = round(sum(float(x.get("score", 0)) for x in weighted_layers), 2)
