@@ -1,0 +1,130 @@
+{
+  "version": "qtype_golden_manifest_v1",
+  "state": "G0_COMMON_CONTRACT",
+  "repository_base": "c8b13cac1a8918d8079f44ac1f5afe6854aea0a6",
+  "functional_baseline": "49ac8e220404d9e9d277b601c21d21930b38d42a",
+  "case_contract_version": "qtype_golden_case_v1",
+  "required_answer_levels": [
+    "LOW",
+    "PASS",
+    "HIGH"
+  ],
+  "question_types": {
+    "PRINCIPLE_INTERPRETATION": {
+      "lane": "A",
+      "short_code": "PI",
+      "case_file": "cases/principle_interpretation.json",
+      "required_case_count": 3
+    },
+    "COMPARE_SELECTION": {
+      "lane": "B",
+      "short_code": "CS",
+      "case_file": "cases/compare_selection.json",
+      "required_case_count": 3
+    },
+    "DIAGNOSIS_ACTION": {
+      "lane": "C",
+      "short_code": "DA",
+      "case_file": "cases/diagnosis_action.json",
+      "required_case_count": 3
+    },
+    "IMPLEMENTATION_EVALUATION": {
+      "lane": "D",
+      "short_code": "IE",
+      "case_file": "cases/implementation_evaluation.json",
+      "required_case_count": 3
+    }
+  },
+  "score_policy": {
+    "layer_max": {
+      "A": 3.0,
+      "B": 6.0,
+      "C": 8.0,
+      "D": 6.0,
+      "E": 2.0
+    },
+    "total_max": 25.0,
+    "level_contract": {
+      "LOW": {
+        "description": "불합격권 대표 답안",
+        "total_min_inclusive": 0.0,
+        "total_max_exclusive": 15.0
+      },
+      "PASS": {
+        "description": "공식 합격선 이상, 고득점 기준 미만 대표 답안",
+        "total_min_inclusive": 15.0,
+        "total_max_exclusive": 20.0
+      },
+      "HIGH": {
+        "description": "고득점 기준 이상 대표 답안",
+        "total_min_inclusive": 20.0,
+        "total_max_inclusive": 25.0
+      }
+    }
+  },
+  "stability_policy": {
+    "deterministic_invariants": [
+      "question_type",
+      "question_demands",
+      "expected_topic_ids",
+      "routing_mode",
+      "evidence_scope",
+      "critical_fact_expectation",
+      "fatal_logic_expectation",
+      "feedback_scope"
+    ],
+    "repeat_total_tolerance_points": 0.5,
+    "exact_llm_prose_match_required": false,
+    "exact_total_score_match_required": false
+  },
+  "parallel_plan": {
+    "common_contract_must_be_merged_before_lanes": true,
+    "lanes": {
+      "A": {
+        "role": "CASE_AUTHORING",
+        "question_type": "PRINCIPLE_INTERPRETATION",
+        "owned_paths": [
+          "calibration/qtype_golden/cases/principle_interpretation.json"
+        ]
+      },
+      "B": {
+        "role": "CASE_AUTHORING",
+        "question_type": "COMPARE_SELECTION",
+        "owned_paths": [
+          "calibration/qtype_golden/cases/compare_selection.json"
+        ]
+      },
+      "C": {
+        "role": "CASE_AUTHORING",
+        "question_type": "DIAGNOSIS_ACTION",
+        "owned_paths": [
+          "calibration/qtype_golden/cases/diagnosis_action.json"
+        ]
+      },
+      "D": {
+        "role": "CASE_AUTHORING",
+        "question_type": "IMPLEMENTATION_EVALUATION",
+        "owned_paths": [
+          "calibration/qtype_golden/cases/implementation_evaluation.json"
+        ]
+      },
+      "E": {
+        "role": "REGRESSION_RUNNER",
+        "question_type": null,
+        "owned_paths": [
+          "scripts/run_qtype_golden_regression.py",
+          "scripts/test_qtype_golden_runner.py"
+        ]
+      }
+    },
+    "integration_only_shared_paths": [
+      "calibration/qtype_golden/README.md",
+      "calibration/qtype_golden/golden_case.schema.json",
+      "calibration/qtype_golden/manifest.json",
+      "scripts/validate_qtype_golden_set.py",
+      "scripts/test_qtype_golden_contract.py",
+      "scripts/validate_release.sh",
+      "docs/TOPIC_ROUTER.md"
+    ]
+  }
+}

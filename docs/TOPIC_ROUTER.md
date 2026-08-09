@@ -762,3 +762,96 @@ Phase10 기존 회귀 4건
 ```
 
 현재부터 본 문서를 Topic Router 및 채점 Architecture 확장의 기준 문서로 사용한다.
+
+---
+
+# Golden Set G0 공통 Contract
+
+상태:
+
+```text
+G0_COMMON_CONTRACT=COMPLETE_PENDING_COMMIT
+PARALLELIZATION=NOT_STARTED
+NEXT=A~E_PARALLEL_LANES_AFTER_G0_PUSH
+```
+
+기준:
+
+```text
+FUNCTIONAL_BASELINE=49ac8e220404d9e9d277b601c21d21930b38d42a
+G0_REPOSITORY_BASE=c8b13cac1a8918d8079f44ac1f5afe6854aea0a6
+```
+
+공통 저장 위치:
+
+```text
+calibration/qtype_golden/
+├── README.md
+├── manifest.json
+├── golden_case.schema.json
+└── cases/
+    ├── principle_interpretation.json
+    ├── compare_selection.json
+    ├── diagnosis_action.json
+    └── implementation_evaluation.json
+```
+
+공통 검증 도구:
+
+```text
+scripts/validate_qtype_golden_set.py
+scripts/test_qtype_golden_contract.py
+```
+
+G0에서는 4개 QType Case 파일을 의도적으로 빈 상태로 커밋한다.
+
+병렬 ownership:
+
+```text
+Lane A = PRINCIPLE_INTERPRETATION Cases
+Lane B = COMPARE_SELECTION Cases
+Lane C = DIAGNOSIS_ACTION Cases
+Lane D = IMPLEMENTATION_EVALUATION Cases
+Lane E = Golden Regression Runner
+```
+
+병렬 시작 조건:
+
+```text
+1. G0 common contract host validation PASS
+2. G0 local commit
+3. G0 main single push
+4. local HEAD = origin/main = G0 commit
+5. G0 commit을 A~E worktree 공통 BASE로 사용
+```
+
+A~E Lane은 `calibration/qtype_golden/manifest.json`의
+`integration_only_shared_paths`에 정의된 shared 파일을 수정하지 않는다.
+
+12 Case 통합 전에는 `scripts/validate_release.sh`에
+`validate_qtype_golden_set.py --require-complete` gate를 등록하지 않는다.
+완성된 12 Case와 Regression Runner 통합 후 integration 단계에서 release gate를 연결한다.
+
+Golden Set 구축 완료 후 운영 Cycle:
+
+```text
+Topic Pack 추가
+→ Focused Validation
+→ Router / Question Type 검증
+→ 4-QType Golden Regression
+→ 필요 시 Golden Case 추가
+→ Release Validation / E2E
+→ Release
+→ TOPIC_ROUTER.md 갱신
+```
+
+현재 우선순위:
+
+```text
+P0 4-QType Architecture 안정화 = COMPLETE
+P1 G0 Golden Common Contract = CURRENT
+P2 A~D Golden Cases + E Regression Runner = NEXT_PARALLEL
+P3 12-Case Integration / Production Golden Acceptance
+P4 Topic Pack 추가 + Golden Set 지속 업데이트
+BACKLOG Phase10 기존 회귀 4건
+```
