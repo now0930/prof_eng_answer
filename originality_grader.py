@@ -64,7 +64,7 @@ def build_originality_prompt(question_text, answer_text, layer_scores=None, volu
 
     if question_scope_contract.get("active") is True:
         scope_contract_section = f"""
-[HYBRID_ORIGINALITY_DEMAND_SCOPE_V1]
+[{question_scope_contract.get('marker') or 'ORIGINALITY_DEMAND_SCOPE_V1'}]
 
 Originality O1~O5는 아래 명시 Question Demand 범위 안에서만 평가한다.
 
