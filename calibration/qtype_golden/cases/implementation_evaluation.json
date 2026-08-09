@@ -2,5 +2,324 @@
   "version": "qtype_golden_collection_v1",
   "question_type": "IMPLEMENTATION_EVALUATION",
   "lane": "D",
-  "cases": []
+  "cases": [
+    {
+      "case_id": "QG-IE-LOW-01",
+      "version": "qtype_golden_case_v1",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "answer_level": "LOW",
+      "topic_id_basis": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "question": "운영 중인 PLC·DCS 제어시스템에 생산 로직 변경을 적용하려고 한다. 기존 설비의 연속운전과 복구 가능성을 고려하여 변경 적용 절차를 설계하고, Release·Backup·Rollback·Regression 검증 방법과 적용 후 운영·유지관리 기준을 설명하시오.",
+      "answer": "변경 전에 PLC 프로그램을 백업하고 작업 후 문제가 없으면 적용한다. 문제가 생기면 이전 프로그램으로 복구하고 설비가 정상 동작하는지 확인한다. 변경 내용은 작업자가 기록한다.",
+      "expected": {
+        "question_demands": [
+          {
+            "id": "D1",
+            "text": "변경 적용 전 영향분석과 승인된 Baseline을 포함한 적용 판단을 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D2",
+            "text": "Release, Backup, Restore 또는 Rollback을 포함한 구현 조건과 절차를 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D3",
+            "text": "Regression 및 현장 인수 기준을 포함한 검증 방법을 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D4",
+            "text": "적용 후 As-built 일치, 기록, 유지관리 및 재적용 통제를 제시한다.",
+            "is_core": true
+          }
+        ],
+        "expected_topic_ids": [
+          "configuration_change_release_backup_rollback_migration_obsolescence_management"
+        ],
+        "routing_mode": "SINGLE_TOPIC",
+        "evidence_scope": "TOPIC_ONLY",
+        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "critical_fact_expectation": "NO_CRITICAL_ERROR",
+        "fatal_logic_expectation": "NO_FATAL",
+        "originality_scope": {
+          "eligible_axes": [
+            "O1",
+            "O2",
+            "O3",
+            "O4",
+            "O5"
+          ],
+          "forbidden_axes": []
+        },
+        "demand_status": {
+          "D1": "partial",
+          "D2": "partial",
+          "D3": "partial",
+          "D4": "partial"
+        },
+        "layer_ranges": {
+          "A": {
+            "min": 1.0,
+            "max": 2.0
+          },
+          "B": {
+            "min": 1.0,
+            "max": 2.5
+          },
+          "C": {
+            "min": 1.0,
+            "max": 3.0
+          },
+          "D": {
+            "min": 0.5,
+            "max": 2.0
+          },
+          "E": {
+            "min": 0.0,
+            "max": 1.0
+          }
+        },
+        "total_range": {
+          "min": 4.5,
+          "max": 10.5
+        },
+        "coverage_range": {
+          "min": 30.0,
+          "max": 55.0
+        },
+        "feedback_scope": {
+          "required_elements": [
+            "승인 Baseline과 영향분석 부족",
+            "Release/Backup/Rollback 절차 구분 부족",
+            "Regression 및 현장 인수 기준 부족",
+            "As-built 일치와 운영 통제 부족"
+          ],
+          "forbidden_elements": [
+            "질문에서 요구하지 않은 비용 요소를 필수 감점으로 강요",
+            "답안에 없는 치명적 사실 오류를 임의로 생성"
+          ]
+        },
+        "required_feedback_characteristics": [
+          "적용·검증·운영 요구의 누락을 구체적으로 지적",
+          "복구 가능성만 언급한 답안의 한계를 설명"
+        ],
+        "forbidden_feedback": [
+          "정답 전체를 장황하게 재작성",
+          "근거 없이 합격권 이상으로 평가"
+        ]
+      }
+    },
+    {
+      "case_id": "QG-IE-PASS-01",
+      "version": "qtype_golden_case_v1",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "answer_level": "PASS",
+      "topic_id_basis": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "question": "운영 중인 PLC·DCS 제어시스템에 생산 로직 변경을 적용하려고 한다. 기존 설비의 연속운전과 복구 가능성을 고려하여 변경 적용 절차를 설계하고, Release·Backup·Rollback·Regression 검증 방법과 적용 후 운영·유지관리 기준을 설명하시오.",
+      "answer": "변경 전에는 대상 PLC·DCS 로직과 연동 HMI, 통신, 알람에 미치는 영향을 검토하고 승인된 Baseline과 현재 설치 형상을 확인한다. 변경본은 식별 가능한 Release package로 관리하고 작업 직전 현장 형상을 Backup한다. 적용 실패에 대비해 이전 승인 형상으로 Rollback할 조건과 절차를 정한다. 변경 후에는 수정 기능뿐 아니라 관련 인터록, 알람, 통신 기능까지 Regression 시험하고 현장에서 정상 운전과 주요 기능을 확인한 뒤 인수한다. 승인된 변경본, 현장 설치 형상, 백업본과 문서를 맞추어 기록한다.",
+      "expected": {
+        "question_demands": [
+          {
+            "id": "D1",
+            "text": "변경 적용 전 영향분석과 승인된 Baseline을 포함한 적용 판단을 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D2",
+            "text": "Release, Backup, Restore 또는 Rollback을 포함한 구현 조건과 절차를 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D3",
+            "text": "Regression 및 현장 인수 기준을 포함한 검증 방법을 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D4",
+            "text": "적용 후 As-built 일치, 기록, 유지관리 및 재적용 통제를 제시한다.",
+            "is_core": true
+          }
+        ],
+        "expected_topic_ids": [
+          "configuration_change_release_backup_rollback_migration_obsolescence_management"
+        ],
+        "routing_mode": "SINGLE_TOPIC",
+        "evidence_scope": "TOPIC_ONLY",
+        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "critical_fact_expectation": "NO_CRITICAL_ERROR",
+        "fatal_logic_expectation": "NO_FATAL",
+        "originality_scope": {
+          "eligible_axes": [
+            "O1",
+            "O2",
+            "O3",
+            "O4",
+            "O5"
+          ],
+          "forbidden_axes": []
+        },
+        "demand_status": {
+          "D1": "present",
+          "D2": "present",
+          "D3": "present",
+          "D4": "partial"
+        },
+        "layer_ranges": {
+          "A": {
+            "min": 2.0,
+            "max": 3.0
+          },
+          "B": {
+            "min": 3.5,
+            "max": 5.0
+          },
+          "C": {
+            "min": 4.5,
+            "max": 6.5
+          },
+          "D": {
+            "min": 3.0,
+            "max": 4.5
+          },
+          "E": {
+            "min": 1.0,
+            "max": 1.5
+          }
+        },
+        "total_range": {
+          "min": 15.0,
+          "max": 19.0
+        },
+        "coverage_range": {
+          "min": 72.0,
+          "max": 88.0
+        },
+        "feedback_scope": {
+          "required_elements": [
+            "Baseline·영향분석·Release·Rollback·Regression 연결을 인정",
+            "적용 후 운영·유지관리와 변경상태 추적을 더 구체화할 필요"
+          ],
+          "forbidden_elements": [
+            "핵심 구현·검증 절차가 없다고 단정",
+            "문제에서 요구하지 않은 비용·경제성을 필수요건으로 강요"
+          ]
+        },
+        "required_feedback_characteristics": [
+          "합격권 수준의 구현·검증 강점을 인정",
+          "운영·유지관리 기준의 구체성 부족을 지적"
+        ],
+        "forbidden_feedback": [
+          "저득점 답안으로 오판",
+          "고득점 기준을 이미 모두 충족했다고 단정"
+        ]
+      }
+    },
+    {
+      "case_id": "QG-IE-HIGH-01",
+      "version": "qtype_golden_case_v1",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "answer_level": "HIGH",
+      "topic_id_basis": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "question": "운영 중인 PLC·DCS 제어시스템에 생산 로직 변경을 적용하려고 한다. 기존 설비의 연속운전과 복구 가능성을 고려하여 변경 적용 절차를 설계하고, Release·Backup·Rollback·Regression 검증 방법과 적용 후 운영·유지관리 기준을 설명하시오.",
+      "answer": "변경은 승인된 Baseline을 기준으로 MOC 절차 안에서 수행한다. 먼저 변경 목적, 대상 CI, 연동 로직·HMI·통신·알람·안전기능에 대한 영향, 작업 중 운전 위험과 완료 기준을 정의하고 승인한다. Release package에는 승인된 프로그램과 설정, 버전 식별정보, 변경내역, 시험결과, 작업절차와 복구 절차를 포함한다. 작업 직전 실제 설치 형상을 Backup하고 복원 가능 여부를 확인하며, 사전에 정한 중단 기준을 만족하면 이전 승인 Baseline으로 Rollback한다. 적용 후에는 변경 기능 시험에 그치지 않고 연동 인터록, 알람, 통신, 운전 시퀀스까지 Regression 범위를 확장하고 실제 현장 조건에서 인수 기준 충족 여부를 확인한다. 인수 후에는 저장소의 승인 형상, 현장 설치 형상, 백업본과 문서를 일치시켜 As-built 상태를 확정하고 버전·승인·배포·설치 상태를 기록한다. 이후 추가 변경도 같은 Baseline과 승인 절차를 기준으로 수행하며, 정기적인 복구시험과 형상 점검으로 Rollback 가능성과 문서 일치를 유지한다.",
+      "expected": {
+        "question_demands": [
+          {
+            "id": "D1",
+            "text": "변경 적용 전 영향분석과 승인된 Baseline을 포함한 적용 판단을 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D2",
+            "text": "Release, Backup, Restore 또는 Rollback을 포함한 구현 조건과 절차를 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D3",
+            "text": "Regression 및 현장 인수 기준을 포함한 검증 방법을 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D4",
+            "text": "적용 후 As-built 일치, 기록, 유지관리 및 재적용 통제를 제시한다.",
+            "is_core": true
+          }
+        ],
+        "expected_topic_ids": [
+          "configuration_change_release_backup_rollback_migration_obsolescence_management"
+        ],
+        "routing_mode": "SINGLE_TOPIC",
+        "evidence_scope": "TOPIC_ONLY",
+        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "critical_fact_expectation": "NO_CRITICAL_ERROR",
+        "fatal_logic_expectation": "NO_FATAL",
+        "originality_scope": {
+          "eligible_axes": [
+            "O1",
+            "O2",
+            "O3",
+            "O4",
+            "O5"
+          ],
+          "forbidden_axes": []
+        },
+        "demand_status": {
+          "D1": "present",
+          "D2": "present",
+          "D3": "present",
+          "D4": "present"
+        },
+        "layer_ranges": {
+          "A": {
+            "min": 2.5,
+            "max": 3.0
+          },
+          "B": {
+            "min": 4.5,
+            "max": 6.0
+          },
+          "C": {
+            "min": 6.0,
+            "max": 8.0
+          },
+          "D": {
+            "min": 4.5,
+            "max": 6.0
+          },
+          "E": {
+            "min": 1.5,
+            "max": 2.0
+          }
+        },
+        "total_range": {
+          "min": 20.0,
+          "max": 25.0
+        },
+        "coverage_range": {
+          "min": 90.0,
+          "max": 100.0
+        },
+        "feedback_scope": {
+          "required_elements": [
+            "Baseline-MOC-Release-Backup-Rollback-Regression-As-built의 폐루프 구성을 인정",
+            "적용 판단과 구현 조건이 검증 및 운영 단계까지 연결된 점을 인정",
+            "변경상태 기록과 재적용 통제를 포함한 점을 인정"
+          ],
+          "forbidden_elements": [
+            "핵심 적용·검증 요구가 누락되었다고 평가",
+            "답안에 없는 사실 오류를 만들어 감점"
+          ]
+        },
+        "required_feedback_characteristics": [
+          "고득점 수준의 적용 판단과 검증 가능성을 명시",
+          "운영 중 복구 가능성과 형상 일치의 연결을 평가"
+        ],
+        "forbidden_feedback": [
+          "일반론적 보완 요구만 반복",
+          "문제에서 요구하지 않은 경제성 검토를 필수 감점 요소로 추가"
+        ]
+      }
+    }
+  ]
 }
