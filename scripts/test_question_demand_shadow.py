@@ -378,5 +378,263 @@ class Phase10IsolationStaticContractTest(unittest.TestCase):
         self.assertNotIn("answer_text", arg_names)
 
 
+
+import json as _qd_cache_json
+from pathlib import Path as _QdCachePath
+import tempfile as _qd_cache_tempfile
+import unittest as _qd_cache_unittest
+from unittest.mock import patch as _qd_cache_patch
+import question_demand_shadow as _qd_cache_qd
+
+
+class QuestionDemandAuthoritativeCacheRegression(
+    _qd_cache_unittest.TestCase
+):
+    def _roots(self):
+        tmp = _qd_cache_tempfile.TemporaryDirectory()
+        root = _QdCachePath(tmp.name)
+        return tmp, root / "canonical", root / "runtime"
+
+    def test_confirmed_canonical_bypasses_llm(self) -> None:
+        tmp, canonical, runtime = self._roots()
+        self.addCleanup(tmp.cleanup)
+        question = "동일 질문"
+        key = _qd_cache_qd.question_demand_cache_key(
+            question,
+            max_demands=12,
+        )
+        entry = {
+            "cache_version": _qd_cache_qd.QUESTION_DEMAND_CACHE_VERSION,
+            "prompt_contract_version": (
+                _qd_cache_qd.QUESTION_DEMAND_PROMPT_CONTRACT_VERSION
+            ),
+            "cache_key": key,
+            "question_sha256": (
+                _qd_cache_qd._question_demand_question_sha256(question)
+            ),
+            "max_demands": 12,
+            "confirmation_status": "confirmed",
+            "source": "unit_test_confirmed",
+            "demands": [
+                {"id": "D1", "text": "원인을 진단한다"},
+                {"id": "D2", "text": "대책을 설명한다"},
+            ],
+        }
+        _qd_cache_qd._write_json_atomic(
+            canonical / f"{key}.json",
+            entry,
+        )
+
+        calls = {"n": 0}
+
+        def llm(_prompt):
+            calls["n"] += 1
+            return {"demands": [{"text": "호출되면 실패"}]}
+
+        with (
+            _qd_cache_patch.object(
+                _qd_cache_qd,
+                "QUESTION_DEMAND_CANONICAL_DIR",
+                canonical,
+            ),
+            _qd_cache_patch.object(
+                _qd_cache_qd,
+                "QUESTION_DEMAND_RUNTIME_CACHE_DIR",
+                runtime,
+            ),
+        ):
+            result = _qd_cache_qd.extract_question_demands(
+                question,
+                llm_call=llm,
+                enabled=True,
+            )
+
+        self.assertEqual(calls["n"], 0)
+        self.assertEqual(result["demand_count"], 2)
+        self.assertEqual(
+            result["cache_source"],
+            "confirmed_canonical",
+        )
+        self.assertEqual(
+            result["confirmation_status"],
+            "confirmed",
+        )
+        self.assertEqual(
+            result["engine"],
+            "question_demand_authoritative_cache",
+        )
+
+    def test_pending_first_success_is_reused(self) -> None:
+        tmp, canonical, runtime = self._roots()
+        self.addCleanup(tmp.cleanup)
+        question = "새로운 질문"
+        calls = {"first": 0, "second": 0}
+
+        def first_llm(_prompt):
+            calls["first"] += 1
+            return {
+                "demands": [
+                    {"text": "첫 요구사항"},
+                    {"text": "둘째 요구사항"},
+                ]
+            }
+
+        def second_llm(_prompt):
+            calls["second"] += 1
+            return {"demands": [{"text": "다른 결과"}]}
+
+        with (
+            _qd_cache_patch.object(
+                _qd_cache_qd,
+                "QUESTION_DEMAND_CANONICAL_DIR",
+                canonical,
+            ),
+            _qd_cache_patch.object(
+                _qd_cache_qd,
+                "QUESTION_DEMAND_RUNTIME_CACHE_DIR",
+                runtime,
+            ),
+        ):
+            first = _qd_cache_qd.extract_question_demands(
+                question,
+                llm_call=first_llm,
+                enabled=True,
+            )
+            second = _qd_cache_qd.extract_question_demands(
+                question,
+                llm_call=second_llm,
+                enabled=True,
+            )
+
+        self.assertEqual(calls["first"], 1)
+        self.assertEqual(calls["second"], 0)
+        self.assertEqual(first["demands"], second["demands"])
+        self.assertEqual(first["confirmation_status"], "pending")
+        self.assertEqual(second["cache_source"], "runtime_cache")
+
+    def test_corrupt_runtime_entry_fails_open_and_replaces(self) -> None:
+        tmp, canonical, runtime = self._roots()
+        self.addCleanup(tmp.cleanup)
+        question = "손상 캐시 질문"
+        key = _qd_cache_qd.question_demand_cache_key(
+            question,
+            max_demands=12,
+        )
+        runtime.mkdir(parents=True, exist_ok=True)
+        (runtime / f"{key}.json").write_text(
+            "{broken",
+            encoding="utf-8",
+        )
+
+        calls = {"n": 0}
+
+        def llm(_prompt):
+            calls["n"] += 1
+            return {"demands": [{"text": "복구 요구사항"}]}
+
+        with (
+            _qd_cache_patch.object(
+                _qd_cache_qd,
+                "QUESTION_DEMAND_CANONICAL_DIR",
+                canonical,
+            ),
+            _qd_cache_patch.object(
+                _qd_cache_qd,
+                "QUESTION_DEMAND_RUNTIME_CACHE_DIR",
+                runtime,
+            ),
+        ):
+            result = _qd_cache_qd.extract_question_demands(
+                question,
+                llm_call=llm,
+                enabled=True,
+            )
+
+        self.assertEqual(calls["n"], 1)
+        self.assertEqual(result["demand_count"], 1)
+        repaired = _qd_cache_json.loads(
+            (runtime / f"{key}.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        self.assertEqual(repaired["confirmation_status"], "pending")
+
+    def test_pending_cache_permission_failure_is_fail_open(
+        self,
+    ) -> None:
+        tmp, canonical, runtime = self._roots()
+        self.addCleanup(tmp.cleanup)
+
+        calls = {"n": 0}
+
+        def llm(_prompt):
+            calls["n"] += 1
+            return {"demands": [{"text": "정상 요구사항"}]}
+
+        with (
+            _qd_cache_patch.object(
+                _qd_cache_qd,
+                "QUESTION_DEMAND_CANONICAL_DIR",
+                canonical,
+            ),
+            _qd_cache_patch.object(
+                _qd_cache_qd,
+                "QUESTION_DEMAND_RUNTIME_CACHE_DIR",
+                runtime,
+            ),
+            _qd_cache_patch.object(
+                _qd_cache_qd,
+                "_write_json_atomic",
+                side_effect=PermissionError(
+                    "simulated cache permission failure"
+                ),
+            ),
+        ):
+            result = _qd_cache_qd.extract_question_demands(
+                "권한 실패 질문",
+                llm_call=llm,
+                enabled=True,
+            )
+
+        self.assertEqual(calls["n"], 1)
+        self.assertEqual(result["status"], "ok")
+        self.assertEqual(result["demand_count"], 1)
+        self.assertEqual(
+            result["cache_source"],
+            "runtime_cache_write_failed",
+        )
+        self.assertEqual(
+            result["confirmation_status"],
+            "pending_unpersisted",
+        )
+        self.assertEqual(
+            result["cache_write_status"],
+            "failed",
+        )
+        self.assertIn(
+            "PermissionError",
+            result["cache_write_error"],
+        )
+
+    def test_cache_key_excludes_answer_and_routing_by_construction(
+        self,
+    ) -> None:
+        annotations = str(
+            _qd_cache_qd.question_demand_cache_key.__annotations__
+        )
+        self.assertNotIn("answer", annotations.lower())
+        self.assertNotIn("routing", annotations.lower())
+        self.assertEqual(
+            _qd_cache_qd.question_demand_cache_key(
+                " Q ",
+                max_demands=12,
+            ),
+            _qd_cache_qd.question_demand_cache_key(
+                "Q",
+                max_demands=12,
+            ),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
