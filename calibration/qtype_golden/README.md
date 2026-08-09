@@ -120,6 +120,8 @@ shared 변경은 Lane 통합 후 integration 단계에서만 수행한다.
 
 12 Case와 Regression Runner는 main local integration까지 완료되었다.
 
-현재 shared contract transition 단계에서는 `scripts/validate_release.sh`를 아직 수정하지 않는다.
+`scripts/validate_release.sh`에는 Golden complete validator, contract test, runner unit test, complete inventory gate가 등록되어 있다.
 
-다음 MASTER 단계에서 `python3 scripts/validate_qtype_golden_set.py --require-complete`를 release validation에 별도 등록하고, 그 뒤 Production Golden acceptance를 수행한다.
+Release validation은 `python3 scripts/validate_qtype_golden_set.py --require-complete`를 포함하므로 4 QType × LOW/PASS/HIGH 12 Case가 완전하지 않으면 실패한다.
+
+다음 MASTER 단계는 Production Golden acceptance이며, 실제 채점 결과로 Case별 score range와 feedback contract를 검증·보정한다.

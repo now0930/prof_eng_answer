@@ -131,7 +131,7 @@
   "integration_state": {
     "case_lanes": "A_B_C_D_COMPLETE",
     "runner_lane": "E_COMPLETE",
-    "release_gate": "DEFERRED_TO_NEXT_MASTER_STEP",
+    "release_gate": "REGISTERED_IN_VALIDATE_RELEASE",
     "production_acceptance": "NOT_YET_RUN"
   }
 }

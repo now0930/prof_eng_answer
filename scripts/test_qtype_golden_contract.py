@@ -47,7 +47,7 @@ class QTypeGoldenCompleteContractTest(unittest.TestCase):
         self.assertEqual(set(manifest["question_types"]), set(QTYPES))
         self.assertEqual(
             manifest["integration_state"]["release_gate"],
-            "DEFERRED_TO_NEXT_MASTER_STEP",
+            "REGISTERED_IN_VALIDATE_RELEASE",
         )
         self.assertEqual(
             manifest["integration_state"]["production_acceptance"],
@@ -75,12 +75,16 @@ class QTypeGoldenCompleteContractTest(unittest.TestCase):
         self.assertEqual(levels["HIGH"]["total_min_inclusive"], 20.0)
         self.assertEqual(levels["HIGH"]["total_max_inclusive"], 25.0)
 
-    def test_release_complete_gate_is_still_deferred(self) -> None:
+    def test_release_complete_gate_is_registered(self) -> None:
         release_text = (REPO / "scripts" / "validate_release.sh").read_text(encoding="utf-8")
-        self.assertNotIn(
+        required_commands = [
             "validate_qtype_golden_set.py --require-complete",
-            release_text,
-        )
+            "test_qtype_golden_contract.py",
+            "test_qtype_golden_runner.py",
+            "run_qtype_golden_regression.py --require-complete",
+        ]
+        for command in required_commands:
+            self.assertIn(command, release_text)
 
 
 if __name__ == "__main__":

@@ -453,6 +453,12 @@ echo "----- host regression: question demand contract -----"
 python3 -B scripts/test_question_demand_contract.py
 python3 -B scripts/test_question_type_de_policy.py
 
+echo "----- host regression: qtype golden complete contract -----"
+python3 -B scripts/validate_qtype_golden_set.py --require-complete
+python3 -B scripts/test_qtype_golden_contract.py
+python3 -B scripts/test_qtype_golden_runner.py
+python3 -B scripts/run_qtype_golden_regression.py --require-complete
+
 echo "----- host regression: review expert calibration record -----"
 python3 -B scripts/test_review_expert_calibration_record.py
 
