@@ -104,32 +104,36 @@ python3 -m py_compile \
 
 echo
 echo "===== router / coverage / Hybrid-Multi release regressions ====="
-python3 "scripts/test_assisted_routing.py"
-python3 "scripts/test_assisted_routing_phase10_integration.py"
-python3 "scripts/test_coverage_feedback_aggregator.py"
-python3 "scripts/test_coverage_feedback_event.py"
-python3 "scripts/test_coverage_feedback_exact_fingerprint_contract.py"
-python3 "scripts/test_coverage_feedback_persistence.py"
-python3 "scripts/test_coverage_feedback_persistence_diagnostics.py"
-python3 "scripts/test_coverage_feedback_report.py"
-python3 "scripts/test_coverage_feedback_retention.py"
-python3 "scripts/test_hybrid_demand_scope_guard.py"
-python3 "scripts/test_hybrid_demand_scope_prompt.py"
-python3 "scripts/test_hybrid_general_demand_text_enrichment.py"
-python3 "scripts/test_hybrid_general_evidence_consumer.py"
-python3 "scripts/test_hybrid_general_grading_context.py"
-python3 "scripts/test_hybrid_general_grading_prompt.py"
-python3 "scripts/test_hybrid_originality_numeric_scope.py"
-python3 "scripts/test_multi_topic_demand_scope_prompt.py"
-python3 "scripts/test_multi_topic_evidence_consumer.py"
-python3 "scripts/test_multi_topic_grading_context.py"
-python3 "scripts/test_multi_topic_grading_phase10_integration.py"
-python3 "scripts/test_multi_topic_question_contract_hash_repair.py"
-python3 "scripts/test_question_demand_shadow.py"
-python3 "scripts/test_semantic_router_default_transport.py"
-python3 "scripts/test_semantic_router_gemini_transport.py"
-python3 "scripts/test_semantic_router_general_mode_contract.py"
-python3 "scripts/test_semantic_router_shadow.py"
+(
+  RELEASE_REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd -P)"
+  export PYTHONPATH="${RELEASE_REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
+  python3 scripts/test_assisted_routing.py
+  python3 scripts/test_assisted_routing_phase10_integration.py
+  python3 scripts/test_coverage_feedback_aggregator.py
+  python3 scripts/test_coverage_feedback_event.py
+  python3 scripts/test_coverage_feedback_exact_fingerprint_contract.py
+  python3 scripts/test_coverage_feedback_persistence.py
+  python3 scripts/test_coverage_feedback_persistence_diagnostics.py
+  python3 scripts/test_coverage_feedback_report.py
+  python3 scripts/test_coverage_feedback_retention.py
+  python3 scripts/test_hybrid_demand_scope_guard.py
+  python3 scripts/test_hybrid_demand_scope_prompt.py
+  python3 scripts/test_hybrid_general_demand_text_enrichment.py
+  python3 scripts/test_hybrid_general_evidence_consumer.py
+  python3 scripts/test_hybrid_general_grading_context.py
+  python3 scripts/test_hybrid_general_grading_prompt.py
+  python3 scripts/test_hybrid_originality_numeric_scope.py
+  python3 scripts/test_multi_topic_demand_scope_prompt.py
+  python3 scripts/test_multi_topic_evidence_consumer.py
+  python3 scripts/test_multi_topic_grading_context.py
+  python3 scripts/test_multi_topic_grading_phase10_integration.py
+  python3 scripts/test_multi_topic_question_contract_hash_repair.py
+  python3 scripts/test_question_demand_shadow.py
+  python3 scripts/test_semantic_router_default_transport.py
+  python3 scripts/test_semantic_router_gemini_transport.py
+  python3 scripts/test_semantic_router_general_mode_contract.py
+  python3 scripts/test_semantic_router_shadow.py
+)
 echo "RELEASE_ROUTER_HYBRID_MULTI_COVERAGE_TESTS=PASS"
 
 echo "===== release test coverage validation ====="
