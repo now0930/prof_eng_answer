@@ -451,6 +451,7 @@ python3 -B scripts/test_question_contract.py
 
 echo "----- host regression: question demand contract -----"
 python3 -B scripts/test_question_demand_contract.py
+python3 -B scripts/test_question_type_de_policy.py
 
 echo "----- host regression: review expert calibration record -----"
 python3 -B scripts/test_review_expert_calibration_record.py

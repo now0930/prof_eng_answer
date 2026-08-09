@@ -7665,9 +7665,14 @@ def _phase10_merge_model_answer_feedback(grade, model_answer_ref):
 def _phase9_question_has_explicit_field_extension(
     input_text,
 ):
-    question_text = _phase3_extract_question_text(
-        input_text
-    )
+    try:
+        question_text = _phase3_extract_question_text(
+            input_text
+        )
+    except Exception:
+        # Preserve the Phase2 recovery contract: a question extraction
+        # failure must not abort post-processing or public feedback.
+        question_text = str(input_text or "")
     normalized_question = str(
         question_text or ""
     ).lower()
