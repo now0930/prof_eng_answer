@@ -305,30 +305,11 @@ def attach_difficulty_strategy_to_grade(
 
     grade["difficulty_strategy"] = strategy
 
-    summary = str(grade.get("summary") or "").strip()
-    strategy_text = _strategy_summary_text(strategy)
-
-    if strategy_text and strategy_text not in summary:
-        if summary:
-            grade["summary"] = summary + " " + strategy_text
-        else:
-            grade["summary"] = strategy_text
-
-    improvement_points = _as_list(
-        grade.get("improvement_points")
-        or grade.get("improvements")
-        or grade.get("보완 방향")
-    )
-
-    if strategy.get("difficulty") == "THEORY_CORE":
-        for p in _theory_core_improvement_points(strategy):
-            improvement_points = _append_unique(improvement_points, p)
-    else:
-        for p in _non_theory_improvement_points(strategy):
-            improvement_points = _append_unique(improvement_points, p)
-
-    if improvement_points:
-        grade["improvement_points"] = improvement_points
+    # Difficulty is a strategy/ceiling axis, not a user-feedback owner.
+    # Preserve upstream Question-Demand feedback exactly. In particular,
+    # do not append difficulty prose to summary or inject improvement_points.
+    # The structured difficulty_strategy above remains available for audit,
+    # selection strategy, and the separate difficulty ceiling evaluator.
 
     warnings = _as_list(grade.get("strategy_warnings"))
 

@@ -5111,6 +5111,7 @@ def _phase2_postprocess_grade(legacy_result):
         connection_eval=connection_eval,
         session_dir=session_dir,
         subject_rubric=subject_rubric_for_gemini,
+        question_type_eval=de_policy_question_type_eval,
     )
 
     layer_scores = _phase8_apply_originality_to_layer_scores(
@@ -5899,6 +5900,318 @@ def _phase8_fallback_originality_evaluation(answer_text):
     }
 
 
+def _phase8_originality_question_type_id(
+    question_type_eval,
+):
+    if not isinstance(question_type_eval, dict):
+        return ""
+
+    primary = question_type_eval.get("primary_type")
+
+    if isinstance(primary, dict):
+        value = primary.get("id") or primary.get("question_type")
+        if value:
+            return str(value).strip().upper()
+
+    for key in (
+        "question_type",
+        "type_id",
+        "id",
+    ):
+        value = question_type_eval.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip().upper()
+
+    return ""
+
+
+def _phase8_build_question_type_originality_scope_contract(
+    question_text,
+    question_type_eval,
+):
+    qid = _phase8_originality_question_type_id(
+        question_type_eval
+    )
+    question = str(question_text or "").strip()
+
+    if (
+        not question
+        or not qid
+        or qid in {"GENERAL", "UNKNOWN"}
+    ):
+        return {}
+
+    allowed_by_type = {
+        "DEFINE": {"O1", "O5"},
+        "DEFINITION": {"O1", "O5"},
+        "PRINCIPLE": {"O1", "O5"},
+        "PRINCIPLE_INTERPRETATION": {"O1", "O5"},
+        "STRUCTURE": {"O1", "O5"},
+        "STRUCTURE_CLASSIFICATION": {"O1", "O5"},
+        "COMPARE": {"O1", "O3", "O4", "O5"},
+        "COMPARE_SELECTION": {"O1", "O3", "O4", "O5"},
+        "PROBLEM_SOLVE": {"O1", "O2", "O3", "O4", "O5"},
+        "CAUSE_ACTION": {"O1", "O2", "O3", "O4", "O5"},
+        "PROCEDURE": {"O1", "O4", "O5"},
+        "CALC_DESIGN": {"O1", "O3", "O4", "O5"},
+        "APPLICATION": {"O1", "O2", "O3", "O4", "O5"},
+        "IMPLEMENTATION_EVALUATION": {
+            "O1", "O2", "O3", "O4", "O5"
+        },
+    }
+
+    allowed = set(
+        allowed_by_type.get(
+            qid,
+            {"O1", "O5"},
+        )
+    )
+
+    lowered = question.casefold()
+
+    if any(
+        token in lowered
+        for token in (
+            "현장",
+            "적용",
+            "설치",
+            "운전",
+            "유지보수",
+            "정비",
+            "비용",
+            "경제성",
+            "기존 설비",
+            "실무",
+        )
+    ):
+        allowed.add("O2")
+
+    if any(
+        token in lowered
+        for token in (
+            "비교",
+            "대안",
+            "trade-off",
+            "tradeoff",
+            "장단점",
+            "선정",
+            "선정기준",
+        )
+    ):
+        allowed.add("O3")
+
+    if any(
+        token in lowered
+        for token in (
+            "우선",
+            "순위",
+            "선정",
+            "의사결정",
+            "절차",
+            "방법",
+        )
+    ):
+        allowed.add("O4")
+
+    return {
+        "version": "question_type_originality_demand_scope_v1",
+        "marker": "QUESTION_TYPE_ORIGINALITY_DEMAND_SCOPE_V1",
+        "active": True,
+        "question_type": qid,
+        "allowed_anchor_ids": sorted(allowed),
+        "demand_mappings": [
+            {
+                "demand_id": "QUESTION_TEXT",
+                "demand_text": question,
+                "role": "explicit_question_demand",
+            }
+        ],
+        "policy": {
+            "explicit_demand_fulfillment_is_baseline": True,
+            "out_of_scope_absence_is_not_originality_defect": True,
+            "out_of_scope_presence_is_not_originality_bonus": True,
+            "bonus_requires_question_demand_relevance": True,
+            "difficulty_axis_must_not_expand_scope": True,
+            "one_question_one_score": True,
+        },
+    }
+
+
+def _phase8_project_question_type_originality_scope(
+    evaluation,
+    question_scope_contract,
+):
+    if (
+        not isinstance(evaluation, dict)
+        or not isinstance(question_scope_contract, dict)
+        or question_scope_contract.get("active") is not True
+        or question_scope_contract.get("marker")
+        != "QUESTION_TYPE_ORIGINALITY_DEMAND_SCOPE_V1"
+    ):
+        return evaluation
+
+    import copy as _copy
+
+    updated = _copy.deepcopy(evaluation)
+    parsed = updated.get("parsed")
+
+    if not isinstance(parsed, dict):
+        return updated
+
+    allowed = {
+        str(item)
+        for item in (
+            question_scope_contract.get("allowed_anchor_ids")
+            or []
+        )
+    }
+
+    anchors = parsed.get("anchors")
+    applicable_levels = []
+    zeroed = []
+
+    if isinstance(anchors, list):
+        for anchor in anchors:
+            if not isinstance(anchor, dict):
+                continue
+
+            anchor_id = str(anchor.get("id") or "")
+
+            try:
+                level = float(anchor.get("level") or 0.0)
+            except (TypeError, ValueError, OverflowError):
+                level = 0.0
+
+            level = max(0.0, min(1.0, level))
+
+            if anchor_id not in allowed:
+                if level > 0.0:
+                    zeroed.append(anchor_id)
+                anchor["level"] = 0.0
+                anchor["evidence"] = []
+                anchor["reason"] = (
+                    "Question-Type demand-scope projection: "
+                    "이 Originality 축은 본 문항의 명시 요구 범위가 "
+                    "아니므로 결손 또는 가점 근거로 사용하지 않음."
+                )
+                continue
+
+            anchor["level"] = round(level, 3)
+            applicable_levels.append(level)
+
+    average = (
+        sum(applicable_levels) / len(applicable_levels)
+        if applicable_levels
+        else 0.0
+    )
+    raw_score = average * 2.0
+
+    parsed["average_level"] = round(average, 3)
+    parsed["anchor_derived_originality_score"] = round(
+        raw_score,
+        3,
+    )
+    parsed["raw_originality_score"] = round(raw_score, 3)
+    parsed["reported_raw_originality_score"] = round(
+        raw_score,
+        3,
+    )
+    parsed["bounded_reported_raw_originality_score"] = round(
+        raw_score,
+        3,
+    )
+
+    for key in (
+        "originality_score_source",
+        "originality_score_consistency_adjustment",
+        "max_allowed_after_gates",
+        "final_originality_score",
+        "applied_caps",
+        "final_bonus_to_D",
+        "final_bonus_to_E",
+        "bonus_policy",
+    ):
+        parsed.pop(key, None)
+
+    advice = parsed.get("improvement_advice")
+
+    if isinstance(advice, list):
+        field_tokens = (
+            "현장",
+            "설치",
+            "유지보수",
+            "정비",
+            "비용",
+            "기존 설비",
+            "RBM",
+            "상태감시",
+        )
+        tradeoff_tokens = (
+            "대안",
+            "trade-off",
+            "tradeoff",
+            "장단점",
+            "비교",
+        )
+        priority_tokens = (
+            "우선순위",
+            "우선 순위",
+            "선정 순위",
+        )
+
+        cleaned = []
+
+        for item in advice:
+            text = str(item or "")
+
+            if (
+                "O2" not in allowed
+                and any(token in text for token in field_tokens)
+            ):
+                continue
+
+            if (
+                "O3" not in allowed
+                and any(token in text for token in tradeoff_tokens)
+            ):
+                continue
+
+            if (
+                "O4" not in allowed
+                and any(token in text for token in priority_tokens)
+            ):
+                continue
+
+            cleaned.append(item)
+
+        parsed["improvement_advice"] = cleaned
+
+    diagnostic = {
+        "version": "question_type_originality_scope_projection_v1",
+        "marker": "QUESTION_TYPE_ORIGINALITY_SCOPE_PROJECTION_V1",
+        "active": True,
+        "question_type": question_scope_contract.get(
+            "question_type"
+        ),
+        "allowed_anchor_ids": sorted(allowed),
+        "zeroed_out_of_scope_anchor_ids": zeroed,
+        "normalization_denominator": len(applicable_levels),
+        "score_effect": (
+            "O1-O5 applicability is limited by Question Type and "
+            "explicit Question Demand; non-applicable axes neither "
+            "penalize nor add bonus."
+        ),
+    }
+
+    parsed["question_type_originality_scope_projection"] = (
+        diagnostic
+    )
+    updated["question_type_originality_scope_projection"] = (
+        diagnostic
+    )
+
+    return updated
+
 def _phase8_run_originality_evaluator(
     input_text,
     answer_text,
@@ -5908,6 +6221,7 @@ def _phase8_run_originality_evaluator(
     connection_eval,
     session_dir=None,
     subject_rubric=None,
+    question_type_eval=None,
 ):
     def persist_evaluation(eval_data):
         if session_dir is None:
@@ -5931,47 +6245,86 @@ def _phase8_run_originality_evaluator(
         sanitize_hybrid_originality_evaluation,
     )
 
-    question_scope_contract = (
+    try:
+        question_text = _phase3_extract_question_text(
+            input_text
+        )
+    except Exception:
+        question_text = str(input_text or "")
+
+    hybrid_scope_contract = (
         build_hybrid_originality_scope_contract(
             subject_rubric
         )
     )
 
-    def project_and_normalize(eval_data):
-        scoped = (
-            project_hybrid_originality_pre_normalization(
-                eval_data,
-                subject_rubric,
+    if (
+        isinstance(hybrid_scope_contract, dict)
+        and hybrid_scope_contract.get("active") is True
+    ):
+        question_scope_contract = hybrid_scope_contract
+        scope_mode = "HYBRID"
+    else:
+        question_scope_contract = (
+            _phase8_build_question_type_originality_scope_contract(
+                question_text,
+                question_type_eval,
             )
         )
+        scope_mode = "QUESTION_TYPE"
+
+    def project_and_normalize(eval_data):
+        if scope_mode == "HYBRID":
+            scoped = (
+                project_hybrid_originality_pre_normalization(
+                    eval_data,
+                    subject_rubric,
+                )
+            )
+
+            if not isinstance(scoped, dict):
+                scoped = eval_data
+
+            parsed = scoped.get("parsed")
+
+            if not isinstance(parsed, dict):
+                parsed = {}
+
+            parsed = (
+                _phase8_normalize_originality_evaluation(
+                    parsed
+                )
+            )
+            scoped["parsed"] = parsed
+
+            return sanitize_hybrid_originality_evaluation(
+                scoped,
+                subject_rubric,
+            )
+
+        scoped = eval_data
 
         if not isinstance(scoped, dict):
-            scoped = eval_data
+            scoped = {}
 
         parsed = scoped.get("parsed")
 
         if not isinstance(parsed, dict):
             parsed = {}
 
-        parsed = (
-            _phase8_normalize_originality_evaluation(
-                parsed
-            )
+        parsed = _phase8_normalize_originality_evaluation(
+            parsed
         )
         scoped["parsed"] = parsed
 
-        return sanitize_hybrid_originality_evaluation(
+        return _phase8_project_question_type_originality_scope(
             scoped,
-            subject_rubric,
+            question_scope_contract,
         )
 
     try:
         from originality_grader import (
             gemini_originality_evaluate,
-        )
-
-        question_text = _phase3_extract_question_text(
-            input_text
         )
 
         result = gemini_originality_evaluate(
@@ -6004,9 +6357,7 @@ def _phase8_run_originality_evaluator(
             "parsed": parsed,
         }
 
-        eval_data = project_and_normalize(
-            eval_data
-        )
+        eval_data = project_and_normalize(eval_data)
         persist_evaluation(eval_data)
 
         print(
@@ -6030,9 +6381,7 @@ def _phase8_run_originality_evaluator(
             "parsed": parsed,
         }
 
-        eval_data = project_and_normalize(
-            eval_data
-        )
+        eval_data = project_and_normalize(eval_data)
         persist_evaluation(eval_data)
 
         print(
@@ -7461,6 +7810,282 @@ def _phase9_reconcile_principle_semantic_d_score(
     return out
 
 
+def _phase9_project_generic_public_feedback_to_question_demand(
+    grade,
+    input_text,
+    question_type_id,
+):
+    # GENERIC_PUBLIC_FEEDBACK_QUESTION_DEMAND_PROJECTION_V1
+    # This projection owns only user-facing feedback strings.
+    # It must not alter scores, difficulty, or internal audit trails.
+    if not isinstance(grade, dict):
+        return grade
+
+    try:
+        question_text = _phase3_extract_question_text(
+            input_text
+        )
+    except Exception:
+        question_text = str(input_text or "")
+
+    question = str(question_text or "").casefold()
+
+    explicit_cost = any(
+        token in question
+        for token in (
+            "비용",
+            "경제성",
+            "경제",
+            "투자비",
+            "운영비",
+            "유지보수",
+            "정비",
+            "기존 설비",
+            "legacy",
+            "life cycle",
+            "lifecycle",
+        )
+    )
+
+    explicit_field = any(
+        token in question
+        for token in (
+            "현장",
+            "설치",
+            "운전",
+            "실무",
+            "적용",
+            "설비",
+            "유지보수",
+            "정비",
+        )
+    )
+
+    explicit_tradeoff = any(
+        token in question
+        for token in (
+            "비교",
+            "선정",
+            "대안",
+            "장단점",
+            "trade-off",
+            "tradeoff",
+        )
+    ) or str(question_type_id or "") in {
+        "COMPARE",
+        "COMPARE_SELECTION",
+    }
+
+    universal_tokens = (
+        "모든 문제 유형에서",
+        "현장 적용·설계 판단·제언 순서로",
+        "현장 적용/설계 판단/제언",
+    )
+
+    cost_tokens = (
+        "비용, 시간, 적용 가능성, 기존 설비 영향",
+        "비용·유지보수·기존 설비",
+        "비용·유지보수 영향",
+        "Cost-Benefit",
+        "비용 대비 성능",
+        "비용 대비 정밀도",
+    )
+
+    field_tokens = (
+        "현장 적용성, 제언, 기술사적 판단 제시",
+        "현장 설치 기준",
+        "실제 현장에서",
+        "현장 문제 해결",
+        "FIELD_APPLICATION 보완:",
+        "FIELD_APPLICATION 고득점 조건:",
+    )
+
+    tradeoff_tokens = (
+        "현장 조건, 대안별 trade-off",
+        "현장 조건, 대안 비교",
+        "대안별 trade-off",
+        "대안 비교",
+    )
+
+    def keep(value):
+        message = str(value or "").strip()
+
+        if not message:
+            return False
+
+        if any(
+            token in message
+            for token in universal_tokens
+        ):
+            return False
+
+        if (
+            not explicit_cost
+            and any(
+                token in message
+                for token in cost_tokens
+            )
+        ):
+            return False
+
+        if (
+            not explicit_field
+            and any(
+                token in message
+                for token in field_tokens
+            )
+        ):
+            return False
+
+        if (
+            not explicit_tradeoff
+            and any(
+                token in message
+                for token in tradeoff_tokens
+            )
+        ):
+            return False
+
+        return True
+
+    for key in (
+        "rewrite_advice",
+        "improvement_points",
+        "next_practice_focus",
+        "weaknesses",
+    ):
+        value = grade.get(key)
+
+        if isinstance(value, list):
+            grade[key] = [
+                item
+                for item in value
+                if keep(item)
+            ]
+
+    grade["public_feedback_question_demand_projection"] = {
+        "version": "generic_public_feedback_question_demand_projection_v1",
+        "question_type": question_type_id or None,
+        "explicit_cost_or_lifecycle_demand": explicit_cost,
+        "explicit_field_demand": explicit_field,
+        "explicit_tradeoff_demand": explicit_tradeoff,
+        "score_axis_changed": False,
+        "difficulty_axis_changed": False,
+    }
+
+    return grade
+
+
+def _phase9_apply_rater_public_feedback_boundary(
+    grade,
+    input_text,
+    question_type_id,
+):
+    # RATER_PUBLIC_FEEDBACK_BOUNDARY_V1
+    # Professor / Professional Engineer / Executive remain internal
+    # scoring/audit perspectives. They are not independent public
+    # Question-Demand owners.
+    if not isinstance(grade, dict):
+        return grade
+
+    rater_results = grade.get("rater_results")
+    internal_rater_ids = []
+
+    if isinstance(rater_results, list):
+        for row in rater_results:
+            if not isinstance(row, dict):
+                continue
+
+            rid = (
+                row.get("rater_id")
+                or row.get("id")
+                or row.get("rater_name")
+                or row.get("name")
+            )
+
+            if rid is not None:
+                value = str(rid).strip()
+
+                if value and value not in internal_rater_ids:
+                    internal_rater_ids.append(value)
+
+    persona_tokens = (
+        "교수 관점",
+        "교수 채점자",
+        "기술사 관점",
+        "기술사 채점자",
+        "임원 관점",
+        "임원 채점자",
+        "professor perspective",
+        "professional engineer perspective",
+        "executive perspective",
+    )
+
+    def is_persona_owned_public_message(value):
+        message = str(value or "").strip().casefold()
+
+        if not message:
+            return False
+
+        return any(
+            token.casefold() in message
+            for token in persona_tokens
+        )
+
+    removed = {}
+
+    for key in (
+        "rewrite_advice",
+        "improvement_points",
+        "next_practice_focus",
+        "weaknesses",
+    ):
+        value = grade.get(key)
+
+        if not isinstance(value, list):
+            continue
+
+        kept = []
+        removed_items = []
+
+        for item in value:
+            if is_persona_owned_public_message(item):
+                removed_items.append(item)
+            else:
+                kept.append(item)
+
+        grade[key] = kept
+
+        if removed_items:
+            removed[key] = len(removed_items)
+
+    # Keep the public rater summary neutral. Detailed perspective strings
+    # remain in rater_results / rater_weighted_evaluation for audit.
+    if isinstance(rater_results, list) and rater_results:
+        grade["rater_summary"] = (
+            "Professor·Professional Engineer·Executive 관점은 "
+            "내부 채점·감사에 사용하며, 사용자 보완 요구는 "
+            "Question Type과 명시 Question Demand 범위만 따릅니다."
+        )
+
+    grade["rater_public_feedback_boundary"] = {
+        "version": "rater_public_feedback_boundary_v1",
+        "question_type": question_type_id or None,
+        "internal_rater_ids": internal_rater_ids,
+        "rater_results_internal_diagnostic_only": True,
+        "rater_weighted_evaluation_internal_diagnostic_only": True,
+        "public_feedback_owner": (
+            "question_type_and_explicit_question_demand"
+        ),
+        "persona_owned_public_messages_removed": removed,
+        "rater_results_preserved": True,
+        "score_axis_changed": False,
+        "difficulty_axis_changed": False,
+    }
+
+    return grade
+
+
 def _phase9_apply_type_aware_de_feedback_policy(
     grade,
     question_type_eval,
@@ -7492,14 +8117,35 @@ def _phase9_apply_type_aware_de_feedback_policy(
         "difficulty_axis_changed": False,
     }
 
-    if qid != "PRINCIPLE_INTERPRETATION":
-        return grade
+    grade = (
+        _phase9_project_generic_public_feedback_to_question_demand(
+            grade=grade,
+            input_text=input_text,
+            question_type_id=qid,
+        )
+    )
+    grade = (
+        _phase9_apply_rater_public_feedback_boundary(
+            grade=grade,
+            input_text=input_text,
+            question_type_id=qid,
+        )
+    )
 
     field_explicit = (
         _phase9_question_has_explicit_field_extension(
             input_text
         )
     )
+
+    if qid != "PRINCIPLE_INTERPRETATION":
+        grade["d_e_question_type_policy"].update({
+            "field_extension_explicitly_requested": (
+                field_explicit
+            ),
+            "unasked_field_extension_is_mandatory": False,
+        })
+        return grade
 
     always_remove = (
         "모든 문제 유형에서",
@@ -7746,9 +8392,10 @@ def _phase14_compact_feedback_output(grade):
     if not isinstance(grade, dict):
         return grade
 
+    # FINAL_FORMATTER_FEEDBACK_BOUNDARY_V1
+    # Phase14 may compact/rename representation, but must not create a
+    # new engineering requirement or reinterpret the feedback policy.
     replace_map = {
-        "대책은 비용, 시간, 적용 가능성, 기존 설비 영향, 운전 리스크까지 연결하세요.":
-            "현장 적용·제언은 비용, 시간, 적용 가능성, 기존 설비 영향, 운전 리스크까지 연결하세요.",
         "problem_link": "requirement_link",
         "Fact 기반 문제 요구 설명": "유형별 Fact 기반 내용 설명"
     }
