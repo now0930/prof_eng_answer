@@ -3291,6 +3291,93 @@ def _phase9_question_type_id(question_type_eval):
     return ""
 
 
+
+def _phase9_resolve_authoritative_de_question_type(
+    question_type_eval,
+    gemini_eval,
+):
+    current = (
+        dict(question_type_eval)
+        if isinstance(question_type_eval, dict)
+        else {}
+    )
+
+    if bool(
+        current.get("question_type_locked")
+        or current.get("locked")
+    ):
+        current["d_e_owner_source"] = (
+            "locked_deterministic_question_type"
+        )
+        return current
+
+    valid_types = {
+        "PRINCIPLE_INTERPRETATION",
+        "DIAGNOSIS_ACTION",
+        "COMPARE_SELECTION",
+        "IMPLEMENTATION_EVALUATION",
+    }
+
+    containers = []
+    if isinstance(gemini_eval, dict):
+        containers.append(gemini_eval)
+        parsed = gemini_eval.get("parsed")
+        if isinstance(parsed, dict):
+            containers.append(parsed)
+
+    semantic_type = ""
+    semantic_source = ""
+
+    for container in containers:
+        coverage = container.get(
+            "question_type_coverage"
+        )
+        if not isinstance(coverage, dict):
+            continue
+
+        candidate = str(
+            coverage.get("question_type") or ""
+        ).strip()
+        coverage_source = str(
+            coverage.get("coverage_source") or ""
+        ).strip()
+
+        if (
+            candidate in valid_types
+            and coverage_source
+            in {
+                "semantic_grader",
+                "semantic_grader_v1",
+            }
+        ):
+            semantic_type = candidate
+            semantic_source = coverage_source
+            break
+
+    if not semantic_type:
+        current["d_e_owner_source"] = (
+            "provisional_deterministic_question_type"
+        )
+        return current
+
+    previous_type = _phase9_question_type_id(
+        current
+    )
+
+    current["question_type"] = semantic_type
+    current["d_e_owner_source"] = (
+        "semantic_question_type_coverage"
+    )
+    current["d_e_owner_semantic_source"] = (
+        semantic_source
+    )
+    current["d_e_owner_previous_question_type"] = (
+        previous_type or None
+    )
+
+    return current
+
+
 def _phase3_evaluate_connections(
     raw_text,
     question_type_eval=None,
@@ -4918,6 +5005,42 @@ def _phase2_postprocess_grade(legacy_result):
         session_dir=session_dir
     )
 
+    authoritative_de_question_type_eval = (
+        _phase9_resolve_authoritative_de_question_type(
+            de_policy_question_type_eval,
+            gemini_eval,
+        )
+    )
+
+    if (
+        _phase9_question_type_id(
+            authoritative_de_question_type_eval
+        )
+        != _phase9_question_type_id(
+            de_policy_question_type_eval
+        )
+    ):
+        de_policy_question_type_eval = (
+            authoritative_de_question_type_eval
+        )
+        connection_eval = _phase3_evaluate_connections(
+            input_text,
+            question_type_eval=(
+                de_policy_question_type_eval
+            ),
+        )
+        layer_scores = (
+            _phase3_apply_connection_to_layer_scores(
+                layer_scores,
+                connection_eval,
+            )
+        )
+    else:
+        de_policy_question_type_eval = (
+            authoritative_de_question_type_eval
+        )
+
+
     semantic_guard_baseline = {
         str(row.get("layer_id")): float(
             row.get("score") or 0.0
@@ -5118,6 +5241,13 @@ def _phase2_postprocess_grade(legacy_result):
     grade = _phase8b_enforce_final_volume_cap(grade)
     grade = _phase11_normalize_requirement_fact_labels(grade)
     grade = _phase14_compact_feedback_output(grade)
+    grade = _phase9_apply_type_aware_de_feedback_policy(
+        grade=grade,
+        question_type_eval=(
+            de_policy_question_type_eval
+        ),
+        input_text=input_text,
+    )
     try:
         from logic_check_evaluator import attach_logic_check_to_grade
 
@@ -5355,6 +5485,15 @@ def _phase2_postprocess_grade(legacy_result):
         )
     except Exception as e:
         print(f"[agent] phase21 final difficulty ceiling skipped: {e}")
+
+
+    grade = _phase9_apply_type_aware_de_feedback_policy(
+        grade=grade,
+        question_type_eval=(
+            de_policy_question_type_eval
+        ),
+        input_text=input_text,
+    )
 
     return grade
 

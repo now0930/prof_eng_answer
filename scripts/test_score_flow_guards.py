@@ -6659,5 +6659,145 @@ class PrincipleInterpretationDEPolicyRegressionTest(unittest.TestCase):
 
 
 
+
+    def test_provisional_router_yields_to_semantic_coverage_for_de_owner(self):
+        import grading_agents as ga
+
+        provisional = {
+            "question_type": "IMPLEMENTATION_EVALUATION",
+            "question_type_locked": False,
+            "status": "provisional",
+        }
+        semantic = {
+            "parsed": {
+                "question_type_coverage": {
+                    "question_type": "PRINCIPLE_INTERPRETATION",
+                    "coverage_source": "semantic_grader",
+                },
+            },
+        }
+
+        resolved = (
+            ga._phase9_resolve_authoritative_de_question_type(
+                provisional,
+                semantic,
+            )
+        )
+
+        self.assertEqual(
+            resolved["question_type"],
+            "PRINCIPLE_INTERPRETATION",
+        )
+        self.assertEqual(
+            resolved["d_e_owner_source"],
+            "semantic_question_type_coverage",
+        )
+        self.assertEqual(
+            resolved["d_e_owner_previous_question_type"],
+            "IMPLEMENTATION_EVALUATION",
+        )
+
+    def test_locked_deterministic_type_remains_de_owner(self):
+        import grading_agents as ga
+
+        locked = {
+            "question_type": "IMPLEMENTATION_EVALUATION",
+            "question_type_locked": True,
+            "status": "confirmed",
+        }
+        semantic = {
+            "question_type_coverage": {
+                "question_type": "PRINCIPLE_INTERPRETATION",
+                "coverage_source": "semantic_grader",
+            },
+        }
+
+        resolved = (
+            ga._phase9_resolve_authoritative_de_question_type(
+                locked,
+                semantic,
+            )
+        )
+
+        self.assertEqual(
+            resolved["question_type"],
+            "IMPLEMENTATION_EVALUATION",
+        )
+        self.assertEqual(
+            resolved["d_e_owner_source"],
+            "locked_deterministic_question_type",
+        )
+
+    def test_de_reprojection_occurs_before_semantic_layer_merge(self):
+        import inspect
+        import grading_agents as ga
+
+        source = inspect.getsource(
+            ga._phase2_postprocess_grade
+        )
+
+        gemini_pos = source.index(
+            "gemini_eval = _phase6_run_gemini_semantic_grader("
+        )
+        owner_pos = source.index(
+            "authoritative_de_question_type_eval = ("
+        )
+        reproject_pos = source.index(
+            "connection_eval = _phase3_evaluate_connections(",
+            owner_pos,
+        )
+        semantic_merge_pos = source.index(
+            "_phase6_apply_gemini_layer_scores(",
+            reproject_pos,
+        )
+
+        self.assertLess(gemini_pos, owner_pos)
+        self.assertLess(owner_pos, reproject_pos)
+        self.assertLess(
+            reproject_pos,
+            semantic_merge_pos,
+        )
+
+    def test_type_aware_feedback_projection_is_final_owner(self):
+        import inspect
+        import grading_agents as ga
+
+        source = inspect.getsource(
+            ga._phase2_postprocess_grade
+        )
+
+        phase14_pos = source.index(
+            "grade = _phase14_compact_feedback_output(grade)"
+        )
+        needle = (
+            "grade = _phase9_apply_type_aware_de_feedback_policy("
+        )
+        positions = []
+        start = 0
+        while True:
+            pos = source.find(needle, start)
+            if pos < 0:
+                break
+            positions.append(pos)
+            start = pos + 1
+
+        self.assertGreaterEqual(
+            len(positions),
+            3,
+        )
+        self.assertTrue(
+            any(
+                pos > phase14_pos
+                for pos in positions
+            )
+        )
+        self.assertGreater(
+            positions[-1],
+            source.rfind(
+                "apply_difficulty_score_ceiling("
+            ),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
