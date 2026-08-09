@@ -89,6 +89,39 @@ def synthetic_eval():
     }
 
 
+def production_like_o2_eval():
+    return {
+        "ok": True,
+        "raw_text": "raw production-like audit",
+        "parsed": {
+            "version": "originality_evaluator_v1",
+            "overall_comment": "production-like",
+            "anchors": [
+                {"id": "O1", "name": "문제 재해석 능력", "level": 0.0, "reason": "없음", "evidence": []},
+                {
+                    "id": "O2",
+                    "name": "현장 조건 반영",
+                    "level": 0.3,
+                    "reason": (
+                        "실제 현장에서 발생할 수 있는 환경적 제약"
+                        "(진동, 습도, 전자기 노이즈 등)이나 운전 조건에 "
+                        "따른 계측기 선정 및 설치 고려사항이 언급되지 않음."
+                    ),
+                    "evidence": [
+                        "온도 보상에서 더미 게이지 사용 등 일반론적 방법만 제시함."
+                    ],
+                },
+                {"id": "O3", "name": "대안 비교와 trade-off", "level": 0.0, "reason": "없음", "evidence": []},
+                {"id": "O4", "name": "적용 우선순위 제시", "level": 0.0, "reason": "없음", "evidence": []},
+                {"id": "O5", "name": "검증 가능성", "level": 0.0, "reason": "없음", "evidence": []},
+            ],
+            "average_level": 0.06,
+            "raw_originality_score": 0.12,
+            "improvement_advice": [],
+        },
+    }
+
+
 def main():
     rubric = hybrid_rubric()
 
@@ -143,12 +176,12 @@ def main():
     ]
     assert "설치 환경" not in anchors["O2"]["reason"]
 
-    assert anchors["O5"]["level"] == 0.3
+    assert anchors["O5"]["level"] == 0.0
     assert "폐기 원칙" in anchors["O5"]["reason"]
     assert "부족" in anchors["O5"]["reason"]
 
-    assert projected["parsed"]["average_level"] == 0.16
-    assert projected["parsed"]["raw_originality_score"] == 0.32
+    assert projected["parsed"]["average_level"] == 0.1
+    assert projected["parsed"]["raw_originality_score"] == 0.2
     assert (
         "reported_raw_originality_score"
         not in projected["parsed"]
@@ -158,10 +191,10 @@ def main():
         projected["parsed"]
     )
 
-    assert normalized["average_level"] == 0.16
-    assert normalized["anchor_derived_originality_score"] == 0.32
-    assert normalized["raw_originality_score"] == 0.32
-    assert normalized["reported_raw_originality_score"] == 0.32
+    assert normalized["average_level"] == 0.1
+    assert normalized["anchor_derived_originality_score"] == 0.2
+    assert normalized["raw_originality_score"] == 0.2
+    assert normalized["reported_raw_originality_score"] == 0.2
 
     projected["parsed"] = normalized
     sanitized = sanitize_hybrid_originality_evaluation(
@@ -182,7 +215,27 @@ def main():
         sanitized[
             "hybrid_originality_scope_projection"
         ]["zeroed_anchor_ids"]
-        == ["O1"]
+        == ["O1", "O5"]
+    )
+
+    production_like = project_hybrid_originality_pre_normalization(
+        production_like_o2_eval(),
+        rubric,
+    )
+    production_anchors = {
+        row["id"]: row
+        for row in production_like["parsed"]["anchors"]
+    }
+    assert production_anchors["O2"]["level"] == 0.0
+    assert "진동" not in production_anchors["O2"]["reason"]
+    assert "설치" not in production_anchors["O2"]["reason"]
+    assert production_like["parsed"]["average_level"] == 0.0
+    assert production_like["parsed"]["raw_originality_score"] == 0.0
+    assert (
+        production_like[
+            "hybrid_originality_scope_projection"
+        ]["positive_support_evidence"]["O2"]
+        == []
     )
 
     ordinary = synthetic_eval()
@@ -213,6 +266,11 @@ def main():
     print("OUT_OF_SCOPE_NEGATIVE_REASON_NEUTRALIZED=PASS")
     print("MIXED_NEGATIVE_REASON_FRAGMENT_SCOPE=PASS")
     print("IN_SCOPE_NEGATIVE_REASON_PRESERVED=PASS")
+    print("IN_SCOPE_BASELINE_REASON_PRESERVED_WHILE_BONUS_ZEROED=PASS")
+    print("EXPLICIT_DEMAND_BASELINE_DOUBLE_CREDIT_BLOCKED=PASS")
+    print("NEGATIVE_OR_GENERAL_EVIDENCE_CANNOT_SUPPORT_BONUS=PASS")
+    print("PRODUCTION_O2_BASELINE_DOUBLE_CREDIT_BLOCKED=PASS")
+    print("PRODUCTION_O2_OUT_OF_SCOPE_REASON_NEUTRALIZED=PASS")
     print("PROJECTED_NUMERIC_SCORE_RECOMPUTED=PASS")
     print("ORIGINALITY_ADVICE_SCOPE_PRESERVED=PASS")
     print("NON_HYBRID_NOOP=PASS")

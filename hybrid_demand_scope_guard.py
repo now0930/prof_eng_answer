@@ -797,13 +797,93 @@ def build_hybrid_originality_scope_contract(
     }
 
 
+def _originality_text_is_negative_or_limiting(
+    value: Any,
+) -> bool:
+    text = _text(value).lower()
+
+    if not text:
+        return False
+
+    markers = (
+        "부족",
+        "미흡",
+        "누락",
+        "없음",
+        "없다",
+        "않음",
+        "않다",
+        "언급되지",
+        "제시되지",
+        "고려되지",
+        "일반론",
+        "단순",
+        "키워드만",
+        "만 제시",
+        "그치",
+    )
+
+    return any(marker in text for marker in markers)
+
+
+def _originality_evidence_supports_positive_bonus(
+    anchor_id: Any,
+    evidence_text: Any,
+    demand_rows: list[dict[str, Any]],
+) -> bool:
+    text = _text(evidence_text)
+
+    if not text or not _traceable(text, demand_rows):
+        return False
+
+    if _originality_text_is_negative_or_limiting(text):
+        return False
+
+    anchor = _text(anchor_id).upper()
+    signals = {
+        "O1": (
+            "재해석", "설계", "운전", "유지보수", "관리",
+            "위험", "제약", "문제 정의",
+        ),
+        "O2": (
+            "조건", "환경", "제약", "적용", "선정",
+            "기존 설비", "운전",
+        ),
+        "O3": (
+            "비교", "대비", "trade", "비용", "리스크",
+            "정밀도", "성능", "장단점", "대안",
+        ),
+        "O4": (
+            "우선", "먼저", "단계", "순서", "필요 시",
+            "적용 후", "검토 후",
+        ),
+        "O5": (
+            "검증", "시험", "확인", "판정", "추적",
+            "as-found", "as-left",
+        ),
+    }
+
+    required = signals.get(anchor)
+    if not required:
+        return True
+
+    lowered = text.lower()
+    return any(signal.lower() in lowered for signal in required)
+
+
 def _originality_reason_has_untraceable_negative_fragment(
     reason: Any,
     demand_rows: list[dict[str, Any]],
 ) -> bool:
     text = _text(reason)
 
-    if not text or not _negative(text):
+    if not text:
+        return False
+
+    if not (
+        _negative(text)
+        or _originality_text_is_negative_or_limiting(text)
+    ):
         return False
 
     import re as _re
@@ -825,7 +905,10 @@ def _originality_reason_has_untraceable_negative_fragment(
     negative_fragments = [
         fragment
         for fragment in fragments
-        if _negative(fragment)
+        if (
+            _negative(fragment)
+            or _originality_text_is_negative_or_limiting(fragment)
+        )
     ]
 
     if not negative_fragments:
@@ -878,6 +961,7 @@ def project_hybrid_originality_pre_normalization(
         "removed_anchor_evidence": [],
         "neutralized_anchor_reasons": [],
         "zeroed_anchor_ids": [],
+        "positive_support_evidence": {},
         "projected_anchor_ids": [],
         "raw_text_preserved": (
             updated.get("raw_text")
@@ -899,6 +983,7 @@ def project_hybrid_originality_pre_normalization(
             anchor_id = _text(anchor.get("id"))
             evidence_rows = anchor.get("evidence")
             kept_evidence = []
+            positive_support_evidence = []
 
             if isinstance(evidence_rows, list):
                 for evidence_index, item in enumerate(
@@ -913,6 +998,14 @@ def project_hybrid_originality_pre_normalization(
                         demand_rows,
                     ):
                         kept_evidence.append(item)
+
+                        if _originality_evidence_supports_positive_bonus(
+                            anchor_id,
+                            item,
+                            demand_rows,
+                        ):
+                            positive_support_evidence.append(item)
+
                         continue
 
                     diagnostic[
@@ -985,22 +1078,41 @@ def project_hybrid_originality_pre_normalization(
                 min(1.0, level),
             )
 
-            if level > 0.0 and not kept_evidence:
+            if level > 0.0 and not positive_support_evidence:
                 diagnostic[
                     "zeroed_anchor_ids"
                 ].append(anchor_id)
                 level = 0.0
                 anchor["level"] = 0.0
-                anchor["reason"] = (
-                    "Hybrid demand-scope projection: "
-                    "가점을 지지하는 명시 Demand 범위 내 "
-                    "답안 근거가 없어 이 anchor 가점을 0으로 함."
+
+                reason_is_scope_safe = (
+                    bool(reason)
+                    and not _originality_reason_has_untraceable_negative_fragment(
+                        reason,
+                        demand_rows,
+                    )
+                    and _traceable(
+                        reason,
+                        demand_rows,
+                    )
                 )
+
+                if not reason_is_scope_safe:
+                    anchor["reason"] = (
+                        "Hybrid demand-scope projection: "
+                        "명시 Demand의 단순 충족 또는 부족 설명만으로는 "
+                        "독립적인 Originality 가점을 지지하지 못하므로 "
+                        "이 anchor 가점을 0으로 함."
+                    )
             else:
                 anchor["level"] = round(
                     level,
                     3,
                 )
+
+            diagnostic[
+                "positive_support_evidence"
+            ][anchor_id] = list(positive_support_evidence)
 
             projected_levels.append(level)
             diagnostic[
