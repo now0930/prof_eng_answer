@@ -6799,5 +6799,255 @@ class PrincipleInterpretationDEPolicyRegressionTest(unittest.TestCase):
         )
 
 
+
+    def test_principle_semantic_d_uses_raw_score_before_fact_cap(self):
+        import grading_agents as ga
+
+        rows = [
+            {
+                "layer_id": "D",
+                "item": "D. 현장 적용·설계 판단·제언",
+                "score": 1.71,
+                "max": 6.0,
+                "gemini_semantic_raw_score": 3.5,
+                "gemini_semantic_score": 1.71,
+                "gemini_adjustment_limited": True,
+                "gemini_raise_cap": 0.75,
+                "gemini_reason": (
+                    "Hybrid demand-scope guard: "
+                    "명시 Question Demand 범위 밖 semantic "
+                    "감점 근거를 제외함."
+                ),
+                "reason": (
+                    "Gemini 의미 평가: Hybrid demand-scope guard: "
+                    "명시 Question Demand 범위 밖 semantic 감점 근거를 "
+                    "제외함. / 기존 휴리스틱 근거: "
+                    "해당 단계의 명확한 서술 근거가 부족함. / "
+                    "Gemini 상향폭을 0.75점으로 제한함."
+                ),
+            },
+            {
+                "layer_id": "E",
+                "score": 1.5,
+                "max": 2.0,
+            },
+        ]
+
+        actual = (
+            ga._phase9_reconcile_principle_semantic_d_score(
+                rows,
+                {
+                    "question_type": "PRINCIPLE_INTERPRETATION",
+                },
+                self.TARGET_QUESTION,
+            )
+        )
+
+        self.assertEqual(actual[0]["score"], 3.5)
+        self.assertEqual(
+            actual[0]["gemini_semantic_score"],
+            3.5,
+        )
+        self.assertFalse(
+            actual[0]["gemini_adjustment_limited"]
+        )
+        self.assertTrue(
+            actual[0]["type_aware_d_reconciliation_applied"]
+        )
+        self.assertEqual(
+            actual[0]["score_before_type_aware_d_reconciliation"],
+            1.71,
+        )
+        self.assertEqual(actual[1]["score"], 1.5)
+
+    def test_principle_d_reconciliation_preserves_fact_dependency_cap(self):
+        import grading_agents as ga
+
+        rows = [
+            {
+                "layer_id": "C",
+                "score": 3.84,
+                "max": 8.0,
+            },
+            {
+                "layer_id": "D",
+                "score": 3.5,
+                "max": 6.0,
+            },
+            {
+                "layer_id": "E",
+                "score": 1.7,
+                "max": 2.0,
+            },
+        ]
+
+        _, _, caps = ga._phase2_apply_caps(
+            rows,
+            {
+                "cap": None,
+                "level": "normal",
+                "reason": "",
+            },
+        )
+
+        by_id = {
+            row["layer_id"]: row
+            for row in rows
+        }
+
+        self.assertEqual(by_id["D"]["score"], 3.0)
+        self.assertEqual(by_id["E"]["score"], 1.0)
+        self.assertEqual(
+            by_id["D"]["score_before_fact_cap"],
+            3.5,
+        )
+        self.assertEqual(
+            by_id["E"]["score_before_fact_cap"],
+            1.7,
+        )
+        self.assertTrue(
+            any(
+                row.get("id")
+                == "fact_score_limits_solution_and_connection"
+                and row.get("d_cap") == 3.0
+                and row.get("e_cap") == 1.0
+                for row in caps
+            )
+        )
+
+    def test_non_principle_or_explicit_field_d_keeps_existing_raise_limit(self):
+        import grading_agents as ga
+
+        source = [
+            {
+                "layer_id": "D",
+                "score": 1.71,
+                "max": 6.0,
+                "gemini_semantic_raw_score": 3.5,
+                "gemini_semantic_score": 1.71,
+                "gemini_adjustment_limited": True,
+                "reason": (
+                    "해당 단계의 명확한 서술 근거가 부족함."
+                ),
+            },
+        ]
+
+        non_principle = (
+            ga._phase9_reconcile_principle_semantic_d_score(
+                source,
+                {
+                    "question_type": "IMPLEMENTATION_EVALUATION",
+                },
+                self.TARGET_QUESTION,
+            )
+        )
+
+        explicit_field = (
+            ga._phase9_reconcile_principle_semantic_d_score(
+                source,
+                {
+                    "question_type": "PRINCIPLE_INTERPRETATION",
+                },
+                (
+                    "온도 보상 원리를 설명하고 비용과 성능을 "
+                    "비교하여 현장 선정 기준을 제시하시오."
+                ),
+            )
+        )
+
+        self.assertEqual(
+            non_principle[0]["score"],
+            1.71,
+        )
+        self.assertEqual(
+            explicit_field[0]["score"],
+            1.71,
+        )
+
+    def test_final_principle_feedback_filters_originality_and_difficulty_field_advice(self):
+        import grading_agents as ga
+
+        grade = {
+            "question_type_evaluation": {},
+            "originality_score": 0.0,
+            "breakdown": [
+                {
+                    "layer_id": "D",
+                    "item": "D. 현장 적용·설계 판단·제언",
+                    "score": 3.0,
+                },
+            ],
+            "rewrite_advice": [
+                (
+                    "단순 원리 설명에서 벗어나, 실제 현장에서 "
+                    "로드셀 설치 시 발생할 수 있는 편심 하중이나 "
+                    "환경 노이즈 문제를 해결하십시오."
+                ),
+                (
+                    "온도 보상 방법 선택 시 비용 대비 정밀도 "
+                    "향상 효과를 비교하여 최적의 솔루션을 "
+                    "제안하십시오."
+                ),
+                "온도 보상 결과의 공학적 의미를 설명하십시오.",
+            ],
+            "improvement_points": [
+                (
+                    "FIELD_APPLICATION 보완: 선정 기준, 현장 조건, "
+                    "문제점, 개선방안, 비용·유지보수 영향을 함께 쓰세요."
+                ),
+                (
+                    "FIELD_APPLICATION 고득점 조건: 단순 개념 설명을 "
+                    "넘어 실제 설비 적용 판단까지 연결하세요."
+                ),
+                "누락 또는 부족한 세부 범주: result_meaning",
+            ],
+            "next_practice_focus": [],
+            "weaknesses": [],
+        }
+
+        actual = ga._phase9_apply_type_aware_de_feedback_policy(
+            grade=grade,
+            question_type_eval={
+                "question_type": "PRINCIPLE_INTERPRETATION",
+            },
+            input_text=self.TARGET_QUESTION,
+        )
+
+        advice = "\n".join(actual["rewrite_advice"])
+        points = "\n".join(
+            actual["improvement_points"]
+        )
+
+        for token in (
+            "편심 하중",
+            "환경 노이즈",
+            "비용 대비 정밀도",
+            "최적의 솔루션",
+        ):
+            self.assertNotIn(token, advice)
+
+        self.assertIn(
+            "온도 보상 결과의 공학적 의미",
+            advice,
+        )
+        self.assertNotIn(
+            "FIELD_APPLICATION 보완:",
+            points,
+        )
+        self.assertNotIn(
+            "FIELD_APPLICATION 고득점 조건:",
+            points,
+        )
+        self.assertIn("result_meaning", points)
+        self.assertEqual(
+            actual["breakdown"][0]["item"],
+            "D. 공학적 판단·조건·검증",
+        )
+        self.assertEqual(
+            actual["breakdown"][0]["legacy_item"],
+            "D. 현장 적용·설계 판단·제언",
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

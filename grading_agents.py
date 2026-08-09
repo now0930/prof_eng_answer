@@ -5057,6 +5057,13 @@ def _phase2_postprocess_grade(legacy_result):
             scoring_model,
         )
     )
+    layer_scores = (
+        _phase9_reconcile_principle_semantic_d_score(
+            layer_scores,
+            de_policy_question_type_eval,
+            input_text,
+        )
+    )
 
     from hybrid_demand_scope_guard import (
         restore_blocked_semantic_layer_scores,
@@ -7290,6 +7297,155 @@ def _phase10_merge_model_answer_feedback(grade, model_answer_ref):
 # ============================================================
 
 
+
+def _phase9_question_has_explicit_field_extension(
+    input_text,
+):
+    question_text = _phase3_extract_question_text(
+        input_text
+    )
+    normalized_question = str(
+        question_text or ""
+    ).lower()
+
+    explicit_field_terms = (
+        "비용",
+        "경제성",
+        "경제",
+        "선정",
+        "비교",
+        "설치",
+        "운전",
+        "유지보수",
+        "현장",
+        "적용 조건",
+        "적용성",
+        "trade-off",
+        "tradeoff",
+        "대안",
+    )
+
+    return any(
+        token.lower() in normalized_question
+        for token in explicit_field_terms
+    )
+
+
+def _phase9_reconcile_principle_semantic_d_score(
+    layer_scores,
+    question_type_eval,
+    input_text,
+):
+    if not isinstance(layer_scores, list):
+        return layer_scores
+
+    if (
+        _phase9_question_type_id(question_type_eval)
+        != "PRINCIPLE_INTERPRETATION"
+    ):
+        return layer_scores
+
+    if _phase9_question_has_explicit_field_extension(
+        input_text
+    ):
+        return layer_scores
+
+    out = []
+
+    for raw_row in layer_scores:
+        if not isinstance(raw_row, dict):
+            out.append(raw_row)
+            continue
+
+        row = dict(raw_row)
+
+        if str(row.get("layer_id") or "") != "D":
+            out.append(row)
+            continue
+
+        if row.get("gemini_adjustment_limited") is not True:
+            out.append(row)
+            continue
+
+        reason = str(row.get("reason") or "")
+        if (
+            "해당 단계의 명확한 서술 근거가 부족함"
+            not in reason
+        ):
+            out.append(row)
+            continue
+
+        try:
+            current = float(row.get("score") or 0.0)
+            raw_semantic = float(
+                row.get("gemini_semantic_raw_score")
+            )
+            maximum = float(row.get("max") or 6.0)
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+        ):
+            out.append(row)
+            continue
+
+        raw_semantic = max(
+            0.0,
+            min(maximum, raw_semantic),
+        )
+
+        if raw_semantic <= current:
+            out.append(row)
+            continue
+
+        row[
+            "score_before_type_aware_d_reconciliation"
+        ] = round(current, 3)
+        row[
+            "legacy_gemini_semantic_limited_score"
+        ] = row.get("gemini_semantic_score")
+        row[
+            "legacy_gemini_adjustment_limited"
+        ] = True
+        row[
+            "type_aware_d_reconciliation_applied"
+        ] = True
+        row[
+            "type_aware_d_reconciliation_policy"
+        ] = (
+            "PRINCIPLE_INTERPRETATION uses the in-scope "
+            "semantic D score without the generic unasked "
+            "field-stage baseline raise limit; downstream "
+            "Fact dependency caps remain authoritative."
+        )
+
+        reconciled = round(raw_semantic, 2)
+        row["score"] = reconciled
+        row["gemini_semantic_score"] = reconciled
+        row["gemini_adjustment_limited"] = False
+
+        gemini_reason = str(
+            row.get("gemini_reason") or ""
+        ).strip()
+
+        prefix = (
+            f"Gemini 의미 평가: {gemini_reason} / "
+            if gemini_reason
+            else ""
+        )
+        row["reason"] = (
+            prefix
+            + "원리·해석형 D: 명시 Question Demand 범위 "
+              "안의 공학적 판단 근거에는 비요구 현장 적용 "
+              "단계의 generic baseline 상향 제한을 적용하지 "
+              "않음. 후속 Fact dependency cap은 유지함."
+        )
+
+        out.append(row)
+
+    return out
+
+
 def _phase9_apply_type_aware_de_feedback_policy(
     grade,
     question_type_eval,
@@ -7324,32 +7480,10 @@ def _phase9_apply_type_aware_de_feedback_policy(
     if qid != "PRINCIPLE_INTERPRETATION":
         return grade
 
-    question_text = _phase3_extract_question_text(
-        input_text
-    )
-    normalized_question = str(
-        question_text or ""
-    ).lower()
-
-    explicit_field_terms = (
-        "비용",
-        "경제성",
-        "경제",
-        "선정",
-        "비교",
-        "설치",
-        "운전",
-        "유지보수",
-        "현장",
-        "적용 조건",
-        "적용성",
-        "trade-off",
-        "tradeoff",
-        "대안",
-    )
-    field_explicit = any(
-        token.lower() in normalized_question
-        for token in explicit_field_terms
+    field_explicit = (
+        _phase9_question_has_explicit_field_extension(
+            input_text
+        )
     )
 
     always_remove = (
@@ -7368,6 +7502,14 @@ def _phase9_apply_type_aware_de_feedback_policy(
         "현장 조건, 대안 비교",
         "설치 시 발생 가능한",
         "현장 설치 기준",
+        "실제 현장에서",
+        "편심 하중",
+        "환경 노이즈",
+        "비용 대비 정밀도",
+        "최적의 솔루션",
+        "현장 문제 해결",
+        "FIELD_APPLICATION 보완:",
+        "FIELD_APPLICATION 고득점 조건:",
     )
 
     def keep_message(value):
@@ -7414,6 +7556,37 @@ def _phase9_apply_type_aware_de_feedback_policy(
         filtered.append(principle_advice)
 
     grade["rewrite_advice"] = filtered
+
+    improvement_points = grade.get(
+        "improvement_points"
+    )
+    if isinstance(improvement_points, list):
+        grade["improvement_points"] = [
+            item
+            for item in improvement_points
+            if keep_message(item)
+        ]
+
+    breakdown = grade.get("breakdown")
+    if isinstance(breakdown, list):
+        for row in breakdown:
+            if (
+                isinstance(row, dict)
+                and str(row.get("layer_id") or "")
+                == "D"
+            ):
+                old_item = str(row.get("item") or "")
+                if (
+                    old_item
+                    == "D. 현장 적용·설계 판단·제언"
+                ):
+                    row.setdefault(
+                        "legacy_item",
+                        old_item,
+                    )
+                    row["item"] = (
+                        "D. 공학적 판단·조건·검증"
+                    )
 
     focus = grade.get("next_practice_focus")
     if isinstance(focus, list):
