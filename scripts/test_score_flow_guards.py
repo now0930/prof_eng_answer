@@ -6386,5 +6386,278 @@ class FinalBindingCapRegressionTest(
             text,
         )
 
+
+
+class PrincipleInterpretationDEPolicyRegressionTest(unittest.TestCase):
+    TARGET_QUESTION = (
+        "스트레인 게이지와 로드셀의 측정 원리, "
+        "Wheatstone Bridge 및 온도 보상 방법을 설명하고, "
+        "계측설비의 교정·점검 기록에 대한 보존기간 결정 "
+        "기준과 폐기 원칙을 제시하시오."
+    )
+
+    TARGET_ANSWER = (
+        "배경: 계측 정확도와 추적성을 확보해야 한다. "
+        "문제 요구: 스트레인 게이지와 로드셀의 원리 및 기록 관리 기준을 설명한다. "
+        "스트레인 게이지는 변형률에 따라 저항이 변하고 ΔR/R = GF×ε 관계를 이용한다. "
+        "로드셀은 탄성체 변형을 Wheatstone Bridge로 검출한다. "
+        "온도 변화는 영점 오차를 만들며 Dummy Gauge와 자기 온도 보상형 게이지로 "
+        "영향을 줄일 수 있다. 기록 보존기간은 법규, 추적성, 설비 수명, 교정주기와 "
+        "고장 이력을 고려해 결정하고 승인 후 폐기한다."
+    )
+
+    def test_principle_connection_drops_unasked_solution_chain_from_e_score(self):
+        import grading_agents as ga
+
+        raw = self.TARGET_QUESTION + "\n" + self.TARGET_ANSWER
+
+        legacy = ga._phase3_evaluate_connections_legacy_v1(raw)
+        projected = ga._phase3_evaluate_connections(
+            raw,
+            question_type_eval={
+                "question_type": "PRINCIPLE_INTERPRETATION",
+            },
+        )
+
+        self.assertEqual(
+            projected["version"],
+            "phase3_connection_v2_question_type_aware",
+        )
+        self.assertEqual(
+            projected["question_type_policy"]["score_scope"],
+            [
+                "background_to_problem",
+                "problem_to_fact",
+            ],
+        )
+        self.assertEqual(
+            projected["question_type_policy"]["diagnostic_only_scope"],
+            [
+                "fact_to_solution",
+                "solution_to_problem",
+            ],
+        )
+
+        checks = {
+            row["id"]: row
+            for row in projected["checks"]
+        }
+
+        active_levels = [
+            float(checks[key]["level"])
+            for key in (
+                "background_to_problem",
+                "problem_to_fact",
+            )
+        ]
+        expected_avg = round(
+            sum(active_levels) / len(active_levels),
+            3,
+        )
+
+        self.assertEqual(
+            projected["average_connection_level"],
+            expected_avg,
+        )
+        self.assertEqual(
+            projected["e_score"],
+            round(2.0 * expected_avg, 2),
+        )
+        self.assertEqual(
+            projected["legacy_e_score"],
+            legacy["e_score"],
+        )
+
+        for key in (
+            "fact_to_solution",
+            "solution_to_problem",
+        ):
+            self.assertEqual(
+                checks[key]["score_effect"],
+                "diagnostic_only",
+            )
+            self.assertIn(
+                "필수 연결 대상에서 제외",
+                checks[key]["reason"],
+            )
+            self.assertTrue(
+                checks[key].get("legacy_reason")
+            )
+
+    def test_non_principle_connection_is_legacy_compatible(self):
+        import grading_agents as ga
+
+        raw = self.TARGET_QUESTION + "\n" + self.TARGET_ANSWER
+        legacy = ga._phase3_evaluate_connections_legacy_v1(raw)
+
+        for qid in (
+            "DIAGNOSIS_ACTION",
+            "COMPARE_SELECTION",
+            "IMPLEMENTATION_EVALUATION",
+        ):
+            with self.subTest(qid=qid):
+                actual = ga._phase3_evaluate_connections(
+                    raw,
+                    question_type_eval={
+                        "question_type": qid,
+                    },
+                )
+                self.assertEqual(actual, legacy)
+
+    def test_question_type_is_resolved_before_connection_scoring(self):
+        import inspect
+        import grading_agents as ga
+
+        source = inspect.getsource(
+            ga._phase2_postprocess_grade
+        )
+
+        qtype_pos = source.index(
+            "question_type_eval = "
+            "_phase9_run_question_type_lens("
+        )
+        connection_pos = source.index(
+            "connection_eval = "
+            "_phase3_evaluate_connections("
+        )
+
+        self.assertLess(qtype_pos, connection_pos)
+        self.assertIn(
+            "de_policy_question_type_eval",
+            source,
+        )
+        self.assertIn(
+            "_phase9_apply_type_aware_de_feedback_policy(",
+            source,
+        )
+
+    def test_principle_feedback_removes_unasked_field_extension(self):
+        import grading_agents as ga
+
+        grade = {
+            "question_type_evaluation": {
+                "question_type": "IMPLEMENTATION_EVALUATION",
+                "common_D_E_rule": (
+                    "모든 문제 유형은 D/E에서 현실 적용성, "
+                    "문제 해결, 제언, 독창성을 공통 평가한다."
+                ),
+            },
+            "originality_score": 0.0,
+            "rewrite_advice": [
+                (
+                    "배경 → 문제 요구 → 유형별 Fact 기반 내용 설명 "
+                    "→ 현장 적용·설계 판단·제언 순서로 답안을 확장하세요."
+                ),
+                (
+                    "현장 적용·제언은 비용, 시간, 적용 가능성, "
+                    "기존 설비 영향, 운전 리스크까지 연결하세요."
+                ),
+                (
+                    "D/E항목 보완: 모든 문제 유형에서 현장 적용성, "
+                    "문제 해결, 제언, 기술사적 판단성을 반드시 연결하세요."
+                ),
+                (
+                    "온도 보상 방법 선택 시 비용 대비 성능"
+                    "(Cost-Benefit) 분석을 포함하십시오."
+                ),
+                "온도 보상 원리와 오차 영향을 명확히 설명하십시오.",
+            ],
+            "next_practice_focus": [
+                "문제 요구 해석·완전성",
+                "현장 적용성, 제언, 기술사적 판단 제시",
+            ],
+            "weaknesses": [
+                (
+                    "독창성/기술사적 판단성 부족: 0/2.0 - "
+                    "현장 조건, 대안 비교, 우선순위, 검증 기준이 부족합니다."
+                ),
+            ],
+        }
+
+        actual = ga._phase9_apply_type_aware_de_feedback_policy(
+            grade=grade,
+            question_type_eval={
+                "question_type": "PRINCIPLE_INTERPRETATION",
+            },
+            input_text=self.TARGET_QUESTION,
+        )
+
+        joined = "\n".join(
+            str(x)
+            for x in actual["rewrite_advice"]
+        )
+
+        self.assertNotIn("모든 문제 유형에서", joined)
+        self.assertNotIn("비용 대비 성능", joined)
+        self.assertNotIn("Cost-Benefit", joined)
+        self.assertNotIn("현장 적용·제언은 비용", joined)
+        self.assertIn("원리·해석형 D/E", joined)
+        self.assertIn(
+            "온도 보상 원리와 오차 영향",
+            joined,
+        )
+
+        self.assertNotIn(
+            "현장 적용성, 제언, 기술사적 판단 제시",
+            actual["next_practice_focus"],
+        )
+        self.assertIn(
+            "원리·수식·변수 의미·결과 해석의 연결",
+            actual["next_practice_focus"],
+        )
+        self.assertEqual(actual["weaknesses"], [])
+        self.assertEqual(
+            actual["question_type_evaluation"]["common_D_E_rule"],
+            (
+                "D/E는 문제 유형과 명시 Question Demand "
+                "범위 안에서 연결성·공학적 판단을 평가한다."
+            ),
+        )
+        self.assertFalse(
+            actual[
+                "d_e_question_type_policy"
+            ][
+                "unasked_field_extension_is_mandatory"
+            ]
+        )
+
+    def test_explicit_cost_comparison_request_is_not_sanitized(self):
+        import grading_agents as ga
+
+        cost_advice = (
+            "비용 대비 성능(Cost-Benefit) 분석을 포함하십시오."
+        )
+        grade = {
+            "question_type_evaluation": {},
+            "rewrite_advice": [cost_advice],
+            "next_practice_focus": [],
+            "weaknesses": [],
+        }
+
+        actual = ga._phase9_apply_type_aware_de_feedback_policy(
+            grade=grade,
+            question_type_eval={
+                "question_type": "PRINCIPLE_INTERPRETATION",
+            },
+            input_text=(
+                "온도 보상 원리를 설명하고 보상 방법별 비용과 "
+                "성능을 비교하여 선정 기준을 제시하시오."
+            ),
+        )
+
+        self.assertIn(
+            cost_advice,
+            actual["rewrite_advice"],
+        )
+        self.assertTrue(
+            actual[
+                "d_e_question_type_policy"
+            ][
+                "field_extension_explicitly_requested"
+            ]
+        )
+
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)

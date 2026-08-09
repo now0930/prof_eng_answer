@@ -3223,7 +3223,7 @@ def _phase3_evaluate_fact_anchors(
     return evaluation
 
 
-def _phase3_evaluate_connections(raw_text):
+def _phase3_evaluate_connections_legacy_v1(raw_text):
     answer_text = _phase3_extract_answer_text(raw_text)
 
     background_terms = ["배경", "최근", "공정", "운전", "필요", "중요"]
@@ -3265,6 +3265,130 @@ def _phase3_evaluate_connections(raw_text):
             {"id": "solution_to_problem", "level": s_to_p, "reason": s_to_p_reason}
         ]
     }
+
+def _phase9_question_type_id(question_type_eval):
+    # Normalize the active v2 Question Type id.
+    if not isinstance(question_type_eval, dict):
+        return ""
+
+    for key in (
+        "question_type",
+        "primary_lens",
+        "id",
+    ):
+        value = question_type_eval.get(key)
+
+        if isinstance(value, dict):
+            value = (
+                value.get("id")
+                or value.get("question_type")
+                or value.get("primary_lens")
+            )
+
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+
+    return ""
+
+
+def _phase3_evaluate_connections(
+    raw_text,
+    question_type_eval=None,
+):
+    # Project legacy connection evidence through the active Question Type.
+    result = _phase3_evaluate_connections_legacy_v1(
+        raw_text
+    )
+
+    qid = _phase9_question_type_id(
+        question_type_eval
+    )
+
+    if qid != "PRINCIPLE_INTERPRETATION":
+        return result
+
+    if not isinstance(result, dict):
+        return result
+
+    checks = result.get("checks")
+
+    if not isinstance(checks, list):
+        return result
+
+    active_ids = {
+        "background_to_problem",
+        "problem_to_fact",
+    }
+    projected_checks = []
+    active_levels = []
+    diagnostic_checks = []
+
+    for raw_check in checks:
+        if not isinstance(raw_check, dict):
+            continue
+
+        check = dict(raw_check)
+        check_id = str(check.get("id") or "")
+        level = check.get("level")
+
+        if check_id in active_ids:
+            check["score_effect"] = "included"
+            try:
+                active_levels.append(float(level))
+            except (TypeError, ValueError):
+                pass
+        else:
+            check["score_effect"] = "diagnostic_only"
+            check["legacy_reason"] = str(
+                check.get("reason") or ""
+            )
+            check["reason"] = (
+                "원리·해석형 E 점수의 필수 연결 "
+                "대상에서 제외됨."
+            )
+            diagnostic_checks.append(dict(check))
+
+        projected_checks.append(check)
+
+    if not active_levels:
+        return result
+
+    average = round(
+        sum(active_levels) / len(active_levels),
+        3,
+    )
+
+    projected = dict(result)
+    projected["version"] = (
+        "phase3_connection_v2_question_type_aware"
+    )
+    projected[
+        "legacy_average_connection_level"
+    ] = result.get("average_connection_level")
+    projected["legacy_e_score"] = result.get("e_score")
+    projected["average_connection_level"] = average
+    projected["e_score"] = round(2.0 * average, 2)
+    projected["checks"] = projected_checks
+    projected["diagnostic_checks"] = diagnostic_checks
+    projected["question_type_policy"] = {
+        "question_type": qid,
+        "score_scope": [
+            "background_to_problem",
+            "problem_to_fact",
+        ],
+        "diagnostic_only_scope": [
+            "fact_to_solution",
+            "solution_to_problem",
+        ],
+        "rule": (
+            "PRINCIPLE_INTERPRETATION E does not "
+            "require an unasked field-solution chain."
+        ),
+    }
+
+    return projected
+
+
 
 
 def _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval):
@@ -4631,18 +4755,28 @@ def _phase2_postprocess_grade(legacy_result):
 
     fact_eval = _phase3_evaluate_fact_anchors(input_text, subject_rubric)
 
-    connection_eval = _phase3_evaluate_connections(input_text)
-    interview_followup = _phase3_make_interview_followup(fact_eval, connection_eval)
-
-    layer_scores = _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval)
-    layer_scores = _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval)
-
     question_type_eval = _phase9_run_question_type_lens(
         input_text=input_text,
         answer_text=answer_text,
         subject_rubric=subject_rubric,
         session_dir=session_dir
     )
+    de_policy_question_type_eval = (
+        dict(question_type_eval)
+        if isinstance(question_type_eval, dict)
+        else {}
+    )
+    connection_eval = _phase3_evaluate_connections(
+        input_text,
+        question_type_eval=(
+            de_policy_question_type_eval
+        ),
+    )
+    interview_followup = _phase3_make_interview_followup(fact_eval, connection_eval)
+
+    layer_scores = _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval)
+    layer_scores = _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval)
+
 
     model_answer_ref = _phase10_run_model_answer_reference(
         input_text=input_text,
@@ -4974,6 +5108,13 @@ def _phase2_postprocess_grade(legacy_result):
     grade = _phase9_merge_question_type_feedback(grade, question_type_eval)
     grade = _phase10_merge_model_answer_feedback(grade, model_answer_ref)
     grade = _phase8_merge_originality_feedback(grade, originality_eval)
+    grade = _phase9_apply_type_aware_de_feedback_policy(
+        grade=grade,
+        question_type_eval=(
+            de_policy_question_type_eval
+        ),
+        input_text=input_text,
+    )
     grade = _phase8b_enforce_final_volume_cap(grade)
     grade = _phase11_normalize_requirement_fact_labels(grade)
     grade = _phase14_compact_feedback_output(grade)
@@ -6332,9 +6473,8 @@ def _phase9_merge_question_type_feedback(
             advice.append(tip)
 
     common_tip = (
-        "D/E항목 보완: 모든 문제 유형에서 "
-        "현장 적용성, 문제 해결, 제언, "
-        "기술사적 판단성을 반드시 연결하세요."
+        "D/E항목: 문제 유형과 명시 Question Demand 범위 안에서 "
+        "연결성, 공학적 판단, 검증 가능성을 보강하세요."
     )
 
     if common_tip not in advice:
@@ -7009,6 +7149,210 @@ def _phase10_merge_model_answer_feedback(grade, model_answer_ref):
 # PHASE11_DISPLAY_LABEL_NORMALIZER
 # 과거 '문제점' 중심 layer 명칭을 최종 표시에서 정규화
 # ============================================================
+
+
+def _phase9_apply_type_aware_de_feedback_policy(
+    grade,
+    question_type_eval,
+    input_text,
+):
+    # Remove universal field-solution requirements from PRINCIPLE feedback.
+    if not isinstance(grade, dict):
+        return grade
+
+    qid = _phase9_question_type_id(
+        question_type_eval
+    )
+
+    neutral_common_rule = (
+        "D/E는 문제 유형과 명시 Question Demand "
+        "범위 안에서 연결성·공학적 판단을 평가한다."
+    )
+
+    qte = grade.get("question_type_evaluation")
+    if isinstance(qte, dict):
+        qte = dict(qte)
+        qte["common_D_E_rule"] = neutral_common_rule
+        grade["question_type_evaluation"] = qte
+
+    grade["d_e_question_type_policy"] = {
+        "version": "de_question_type_policy_v1",
+        "question_type": qid or None,
+        "common_rule": neutral_common_rule,
+        "difficulty_axis_changed": False,
+    }
+
+    if qid != "PRINCIPLE_INTERPRETATION":
+        return grade
+
+    question_text = _phase3_extract_question_text(
+        input_text
+    )
+    normalized_question = str(
+        question_text or ""
+    ).lower()
+
+    explicit_field_terms = (
+        "비용",
+        "경제성",
+        "경제",
+        "선정",
+        "비교",
+        "설치",
+        "운전",
+        "유지보수",
+        "현장",
+        "적용 조건",
+        "적용성",
+        "trade-off",
+        "tradeoff",
+        "대안",
+    )
+    field_explicit = any(
+        token.lower() in normalized_question
+        for token in explicit_field_terms
+    )
+
+    always_remove = (
+        "모든 문제 유형에서",
+        "현장 적용·설계 판단·제언 순서로",
+        "대책은 비용, 시간, 적용 가능성, "
+        "기존 설비 영향, 운전 리스크까지",
+        "현장 적용·제언은 비용, 시간, "
+        "적용 가능성, 기존 설비 영향, "
+        "운전 리스크까지",
+    )
+    conditional_remove = (
+        "Cost-Benefit",
+        "비용 대비 성능",
+        "현장 조건, 대안별 trade-off",
+        "현장 조건, 대안 비교",
+        "설치 시 발생 가능한",
+        "현장 설치 기준",
+    )
+
+    def keep_message(value):
+        message = str(value or "").strip()
+
+        if not message:
+            return False
+
+        if any(
+            token in message
+            for token in always_remove
+        ):
+            return False
+
+        if (
+            not field_explicit
+            and any(
+                token in message
+                for token in conditional_remove
+            )
+        ):
+            return False
+
+        return True
+
+    advice = grade.get("rewrite_advice")
+    if isinstance(advice, list):
+        filtered = [
+            item
+            for item in advice
+            if keep_message(item)
+        ]
+    else:
+        filtered = []
+
+    principle_advice = (
+        "원리·해석형 D/E: 원리→수식·변수 의미"
+        "→결과 해석을 문제 요구와 연결하고, "
+        "설계·현장 판단은 명시 요구 또는 답안의 "
+        "직접 근거가 있을 때만 확장하세요."
+    )
+
+    if principle_advice not in filtered:
+        filtered.append(principle_advice)
+
+    grade["rewrite_advice"] = filtered
+
+    focus = grade.get("next_practice_focus")
+    if isinstance(focus, list):
+        focus = [
+            item
+            for item in focus
+            if str(item or "").strip()
+            != "현장 적용성, 제언, 기술사적 판단 제시"
+        ]
+    else:
+        focus = []
+
+    principle_focus = (
+        "원리·수식·변수 의미·결과 해석의 연결"
+    )
+
+    if principle_focus not in focus:
+        focus.append(principle_focus)
+
+    grade["next_practice_focus"] = focus
+
+    originality_score = grade.get(
+        "originality_score"
+    )
+
+    try:
+        originality_score = float(
+            originality_score
+        )
+    except (TypeError, ValueError):
+        originality_score = None
+
+    weaknesses = grade.get("weaknesses")
+    if isinstance(weaknesses, list):
+        cleaned_weaknesses = []
+
+        for item in weaknesses:
+            item_text = str(item or "")
+            generic_zero_bonus = (
+                originality_score == 0.0
+                and "독창성/기술사적 판단성 부족"
+                in item_text
+                and any(
+                    token in item_text
+                    for token in (
+                        "현장 조건",
+                        "대안 비교",
+                        "우선순위",
+                        "검증 기준",
+                    )
+                )
+                and not field_explicit
+            )
+
+            if generic_zero_bonus:
+                continue
+
+            cleaned_weaknesses.append(item)
+
+        grade["weaknesses"] = cleaned_weaknesses
+
+    grade["d_e_question_type_policy"].update({
+        "field_extension_explicitly_requested": (
+            field_explicit
+        ),
+        "principle_e_required_links": [
+            "background_to_problem",
+            "problem_to_fact",
+        ],
+        "principle_e_diagnostic_only_links": [
+            "fact_to_solution",
+            "solution_to_problem",
+        ],
+        "unasked_field_extension_is_mandatory": False,
+    })
+
+    return grade
+
 
 def _phase11_normalize_requirement_fact_labels(grade):
     if not isinstance(grade, dict):
