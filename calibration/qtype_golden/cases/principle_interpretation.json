@@ -2,5 +2,324 @@
   "version": "qtype_golden_collection_v1",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "lane": "A",
-  "cases": []
+  "cases": [
+    {
+      "case_id": "QG-PI-LOW-01",
+      "version": "qtype_golden_case_v1",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "answer_level": "LOW",
+      "topic_id_basis": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+      "question": "열전대 온도센서의 측정 원리와 기준접점 보상이 필요한 이유를 설명하시오.",
+      "answer": "열전대는 서로 다른 두 도체에서 온도차에 따라 열기전력이 발생하는 제벡 효과를 이용한다. 발생한 열기전력을 측정하여 온도로 환산한다.",
+      "expected": {
+        "question_demands": [
+          {
+            "id": "PI_LOW_D1",
+            "text": "이종 도체와 온도차에 의한 Seebeck 열기전력 발생 원리를 설명한다.",
+            "is_core": true
+          },
+          {
+            "id": "PI_LOW_D2",
+            "text": "열전대가 측정접점과 기준접점의 온도차를 측정하므로 기준접점 보상이 필요함을 설명한다.",
+            "is_core": true
+          },
+          {
+            "id": "PI_LOW_D3",
+            "text": "열기전력 측정에서 기준접점 보상과 선형화를 거쳐 온도로 환산되는 측정 체인을 연결한다.",
+            "is_core": false
+          }
+        ],
+        "demand_status": {
+          "PI_LOW_D1": "present",
+          "PI_LOW_D2": "missing",
+          "PI_LOW_D3": "partial"
+        },
+        "expected_topic_ids": [
+          "thermocouple_temperature_sensor_seebeck_reference_junction_compensation"
+        ],
+        "routing_mode": "SINGLE_TOPIC",
+        "evidence_scope": "TOPIC_ONLY",
+        "layer_ranges": {
+          "A": {
+            "min": 1.5,
+            "max": 2.5
+          },
+          "B": {
+            "min": 1.5,
+            "max": 3.0
+          },
+          "C": {
+            "min": 2.0,
+            "max": 4.0
+          },
+          "D": {
+            "min": 0.5,
+            "max": 1.5
+          },
+          "E": {
+            "min": 0.0,
+            "max": 0.5
+          }
+        },
+        "total_range": {
+          "min": 7.0,
+          "max": 11.0
+        },
+        "coverage_range": {
+          "min": 35.0,
+          "max": 55.0
+        },
+        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "critical_fact_expectation": "NO_CRITICAL_ERROR",
+        "fatal_logic_expectation": "NO_FATAL",
+        "originality_scope": {
+          "eligible_axes": [],
+          "forbidden_axes": [
+            "O1",
+            "O2",
+            "O3",
+            "O4",
+            "O5"
+          ]
+        },
+        "feedback_scope": {
+          "required_elements": [
+            "기준접점 보상 필요성 누락",
+            "측정접점과 기준접점의 온도차 관계"
+          ],
+          "forbidden_elements": [
+            "비교·선정형 답안 요구",
+            "답안에 없는 치명적 사실 오류 단정"
+          ]
+        },
+        "required_feedback_characteristics": [
+          "맞게 설명한 Seebeck 원리는 인정하고 핵심 누락을 구체적으로 지적한다.",
+          "기준접점 보상과 온도 환산 체인을 보완하도록 안내한다."
+        ],
+        "forbidden_feedback": [
+          "열전대가 절대온도를 직접 측정했다고 답안이 주장한 것으로 왜곡하지 않는다.",
+          "COMPARE_SELECTION 유형의 비교표나 선정기준을 필수 보완사항으로 요구하지 않는다."
+        ]
+      }
+    },
+    {
+      "case_id": "QG-PI-PASS-01",
+      "version": "qtype_golden_case_v1",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "answer_level": "PASS",
+      "topic_id_basis": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "question": "RTD Pt100의 온도 측정 원리와 2선식·3선식·4선식 배선보상 원리를 설명하시오.",
+      "answer": "RTD는 금속의 전기저항이 온도에 따라 변하는 성질을 이용하며 Pt100은 0℃에서 100 Ω인 백금 저항체이다. 일정한 측정전류를 흘리고 전압강하를 측정하여 저항을 구한 뒤 온도로 환산한다. 2선식은 리드선 저항이 센서 저항에 더해져 오차가 생긴다. 3선식은 리드선 저항이 서로 같다는 조건에서 브리지 또는 측정회로가 리드선 영향을 상쇄하며, 4선식은 전류선과 전압검출선을 분리하여 전압검출선의 전류를 매우 작게 함으로써 리드선 저항 영향을 최소화한다. 측정전류가 지나치게 크면 자기발열 오차가 증가하므로 정확도와 신호 크기 사이의 절충이 필요하다.",
+      "expected": {
+        "question_demands": [
+          {
+            "id": "PI_PASS_D1",
+            "text": "금속 저항의 온도 의존성과 Pt100 기준을 측정 원리와 연결한다.",
+            "is_core": true
+          },
+          {
+            "id": "PI_PASS_D2",
+            "text": "2선식 리드선 저항 오차와 3선식의 보상 성립조건을 설명한다.",
+            "is_core": true
+          },
+          {
+            "id": "PI_PASS_D3",
+            "text": "4선식에서 전류선과 전압검출선을 분리하여 리드선 저항 영향을 최소화하는 원리를 설명한다.",
+            "is_core": true
+          },
+          {
+            "id": "PI_PASS_D4",
+            "text": "측정전류에 의한 자기발열 등 실제 측정 오차를 원리와 연결한다.",
+            "is_core": false
+          }
+        ],
+        "demand_status": {
+          "PI_PASS_D1": "present",
+          "PI_PASS_D2": "present",
+          "PI_PASS_D3": "present",
+          "PI_PASS_D4": "present"
+        },
+        "expected_topic_ids": [
+          "rtd_temperature_sensor_principle_pt100_wiring_compensation"
+        ],
+        "routing_mode": "SINGLE_TOPIC",
+        "evidence_scope": "TOPIC_ONLY",
+        "layer_ranges": {
+          "A": {
+            "min": 2.0,
+            "max": 3.0
+          },
+          "B": {
+            "min": 3.5,
+            "max": 5.0
+          },
+          "C": {
+            "min": 5.0,
+            "max": 6.5
+          },
+          "D": {
+            "min": 3.0,
+            "max": 4.5
+          },
+          "E": {
+            "min": 0.5,
+            "max": 1.5
+          }
+        },
+        "total_range": {
+          "min": 15.0,
+          "max": 18.5
+        },
+        "coverage_range": {
+          "min": 72.0,
+          "max": 86.0
+        },
+        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "critical_fact_expectation": "NO_CRITICAL_ERROR",
+        "fatal_logic_expectation": "NO_FATAL",
+        "originality_scope": {
+          "eligible_axes": [
+            "O1",
+            "O2"
+          ],
+          "forbidden_axes": [
+            "O3",
+            "O4",
+            "O5"
+          ]
+        },
+        "feedback_scope": {
+          "required_elements": [
+            "RTD 저항-온도 변환 원리의 정확성",
+            "2선식·3선식·4선식 리드선 보상 차이",
+            "측정전류와 자기발열의 trade-off"
+          ],
+          "forbidden_elements": [
+            "열전대 기준접점 보상 요구",
+            "질문과 무관한 센서 선정 비교 요구"
+          ]
+        },
+        "required_feedback_characteristics": [
+          "핵심 원리와 배선보상 인과관계를 충족한 점을 인정한다.",
+          "고득점 보완은 정확도 조건이나 현장 적용의 구체화 중심으로 제한한다."
+        ],
+        "forbidden_feedback": [
+          "3선식이 조건 없이 리드선 저항을 완전히 제거한다고 과장하여 피드백하지 않는다.",
+          "PRINCIPLE_INTERPRETATION 답안에 비교·선정형 결론을 강제하지 않는다."
+        ]
+      }
+    },
+    {
+      "case_id": "QG-PI-HIGH-01",
+      "version": "qtype_golden_case_v1",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "answer_level": "HIGH",
+      "topic_id_basis": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+      "question": "스트레인 게이지와 로드셀의 측정 원리를 게이지율과 휘트스톤 브리지의 동작으로 설명하고, 온도보상 및 주요 오차가 출력에 미치는 영향을 해석하시오.",
+      "answer": "금속 스트레인 게이지는 피측정체의 변형이 게이지에 전달될 때 R=ρL/A의 길이 L, 단면적 A와 비저항 ρ가 변하여 전기저항이 변하는 원리를 이용한다. 변형률은 ε=ΔL/L이고 게이지율은 GF=(ΔR/R)/ε이므로 작은 변형 범위에서는 ΔR/R≈GF·ε로 나타낼 수 있다. 로드셀은 탄성체의 하중을 변형률로 바꾸고, 부착된 게이지의 미소 저항변화를 휘트스톤 브리지의 차동 전압으로 변환한다. 하중에 따라 인장 게이지와 압축 게이지의 저항이 반대 방향으로 변하도록 반브리지 또는 전브리지를 구성하면 감도는 증가하고 공통 온도영향은 상쇄하기 쉽다. 온도 변화는 게이지 저항 자체, 게이지와 피측정체의 열팽창 차이, 배선저항 및 영점에 영향을 줄 수 있으므로 더미 게이지, 자기온도보상 게이지, 대칭 브리지 구성과 적절한 배선으로 보상한다. 실제 계측에서는 접착·설치 상태, 횡감도, 크리프, 히스테리시스, 영점 드리프트와 여자전압 변화도 오차원이 되므로 정격 범위와 교정조건을 함께 관리해야 한다.",
+      "expected": {
+        "question_demands": [
+          {
+            "id": "PI_HIGH_D1",
+            "text": "R=ρL/A에 따른 변형-저항 변환 원리를 설명한다.",
+            "is_core": true
+          },
+          {
+            "id": "PI_HIGH_D2",
+            "text": "변형률과 게이지율 GF=(ΔR/R)/ε의 의미를 설명한다.",
+            "is_core": true
+          },
+          {
+            "id": "PI_HIGH_D3",
+            "text": "로드셀의 탄성체 변형과 휘트스톤 브리지 차동출력의 측정 체인을 연결한다.",
+            "is_core": true
+          },
+          {
+            "id": "PI_HIGH_D4",
+            "text": "브리지 구성에 따른 감도 증가와 공통 온도영향 보상 원리를 설명한다.",
+            "is_core": true
+          },
+          {
+            "id": "PI_HIGH_D5",
+            "text": "온도·설치·크리프·히스테리시스·영점 등 주요 오차를 출력 영향과 보상 방법에 연결한다.",
+            "is_core": false
+          }
+        ],
+        "demand_status": {
+          "PI_HIGH_D1": "present",
+          "PI_HIGH_D2": "present",
+          "PI_HIGH_D3": "present",
+          "PI_HIGH_D4": "present",
+          "PI_HIGH_D5": "present"
+        },
+        "expected_topic_ids": [
+          "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error"
+        ],
+        "routing_mode": "SINGLE_TOPIC",
+        "evidence_scope": "TOPIC_ONLY",
+        "layer_ranges": {
+          "A": {
+            "min": 2.5,
+            "max": 3.0
+          },
+          "B": {
+            "min": 5.0,
+            "max": 6.0
+          },
+          "C": {
+            "min": 6.5,
+            "max": 8.0
+          },
+          "D": {
+            "min": 4.5,
+            "max": 6.0
+          },
+          "E": {
+            "min": 1.0,
+            "max": 2.0
+          }
+        },
+        "total_range": {
+          "min": 20.5,
+          "max": 24.0
+        },
+        "coverage_range": {
+          "min": 90.0,
+          "max": 100.0
+        },
+        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "critical_fact_expectation": "NO_CRITICAL_ERROR",
+        "fatal_logic_expectation": "NO_FATAL",
+        "originality_scope": {
+          "eligible_axes": [
+            "O1",
+            "O2",
+            "O3",
+            "O4",
+            "O5"
+          ],
+          "forbidden_axes": []
+        },
+        "feedback_scope": {
+          "required_elements": [
+            "변형-저항-브리지 출력의 인과 연결",
+            "게이지율 식과 변수 의미의 정확성",
+            "온도보상과 실제 오차 메커니즘의 연결"
+          ],
+          "forbidden_elements": [
+            "핵심 원리 누락으로 오판",
+            "질문에 없는 센서 선정 비교를 필수 요구"
+          ]
+        },
+        "required_feedback_characteristics": [
+          "핵심 식, 측정사슬, 보상과 오차 해석이 연결된 고득점 답안임을 반영한다.",
+          "추가 보완은 과도한 새 요구보다 정밀도와 현장 조건의 구체화 수준으로 제한한다."
+        ],
+        "forbidden_feedback": [
+          "스트레인 게이지를 외부 여자 없이 전압을 발생시키는 자기발전형 센서로 취급하지 않는다.",
+          "정확한 GF 정의를 반대로 되었다고 잘못 지적하지 않는다."
+        ]
+      }
+    }
+  ]
 }
