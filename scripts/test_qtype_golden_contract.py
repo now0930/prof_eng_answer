@@ -16,9 +16,10 @@ QTYPES = {
     "DIAGNOSIS_ACTION": "cases/diagnosis_action.json",
     "IMPLEMENTATION_EVALUATION": "cases/implementation_evaluation.json",
 }
+LEVELS = {"LOW", "PASS", "HIGH"}
 
 
-class QTypeGoldenG0ContractTest(unittest.TestCase):
+class QTypeGoldenCompleteContractTest(unittest.TestCase):
     def run_validator(self, *args: str) -> subprocess.CompletedProcess[str]:
         return subprocess.run(
             [sys.executable, str(VALIDATOR), *args],
@@ -28,33 +29,44 @@ class QTypeGoldenG0ContractTest(unittest.TestCase):
             check=False,
         )
 
-    def test_g0_contract_passes(self) -> None:
-        proc = self.run_validator()
+    def test_complete_contract_validator_passes(self) -> None:
+        proc = self.run_validator("--require-complete")
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         self.assertIn("QTYPE_GOLDEN_CONTRACT=PASS", proc.stdout)
+        self.assertIn("QTYPE_GOLDEN_COMPLETE=PASS", proc.stdout)
 
-    def test_g0_is_intentionally_incomplete(self) -> None:
-        proc = self.run_validator("--require-complete")
-        self.assertNotEqual(proc.returncode, 0)
-        self.assertIn("complete Golden Set requires exactly 3 cases", proc.stderr)
+    def test_non_complete_mode_still_validates_collections(self) -> None:
+        proc = self.run_validator()
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        self.assertIn("QTYPE_GOLDEN_COLLECTION_CONTRACT=PASS", proc.stdout)
 
-    def test_four_qtypes_and_five_lanes(self) -> None:
+    def test_manifest_is_complete_12_case_state(self) -> None:
         manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
+        self.assertEqual(manifest["state"], "COMPLETE_12_CASES")
+        self.assertEqual(manifest["integrated_case_count"], 12)
         self.assertEqual(set(manifest["question_types"]), set(QTYPES))
-        self.assertEqual(set(manifest["parallel_plan"]["lanes"]), {"A", "B", "C", "D", "E"})
-        self.assertEqual(manifest["parallel_plan"]["lanes"]["E"]["role"], "REGRESSION_RUNNER")
+        self.assertEqual(
+            manifest["integration_state"]["release_gate"],
+            "DEFERRED_TO_NEXT_MASTER_STEP",
+        )
+        self.assertEqual(
+            manifest["integration_state"]["production_acceptance"],
+            "NOT_YET_RUN",
+        )
 
-    def test_g0_case_files_are_empty_and_lane_owned(self) -> None:
-        lanes = set()
+    def test_each_qtype_has_exact_low_pass_high(self) -> None:
+        total = 0
         for qtype, rel_path in QTYPES.items():
             payload = json.loads((ROOT / rel_path).read_text(encoding="utf-8"))
             self.assertEqual(payload["question_type"], qtype)
-            self.assertEqual(payload["cases"], [])
-            self.assertNotIn(payload["lane"], lanes)
-            lanes.add(payload["lane"])
-        self.assertEqual(lanes, {"A", "B", "C", "D"})
+            cases = payload["cases"]
+            self.assertEqual(len(cases), 3)
+            self.assertEqual({case["answer_level"] for case in cases}, LEVELS)
+            self.assertEqual(len({case["case_id"] for case in cases}), 3)
+            total += len(cases)
+        self.assertEqual(total, 12)
 
-    def test_level_threshold_contract(self) -> None:
+    def test_level_threshold_contract_is_preserved(self) -> None:
         manifest = json.loads((ROOT / "manifest.json").read_text(encoding="utf-8"))
         levels = manifest["score_policy"]["level_contract"]
         self.assertEqual(levels["LOW"]["total_max_exclusive"], 15.0)
@@ -63,9 +75,12 @@ class QTypeGoldenG0ContractTest(unittest.TestCase):
         self.assertEqual(levels["HIGH"]["total_min_inclusive"], 20.0)
         self.assertEqual(levels["HIGH"]["total_max_inclusive"], 25.0)
 
-    def test_release_complete_gate_is_deferred(self) -> None:
-        text = (REPO / "scripts" / "validate_release.sh").read_text(encoding="utf-8")
-        self.assertNotIn("validate_qtype_golden_set.py --require-complete", text)
+    def test_release_complete_gate_is_still_deferred(self) -> None:
+        release_text = (REPO / "scripts" / "validate_release.sh").read_text(encoding="utf-8")
+        self.assertNotIn(
+            "validate_qtype_golden_set.py --require-complete",
+            release_text,
+        )
 
 
 if __name__ == "__main__":

@@ -1,6 +1,6 @@
 {
   "version": "qtype_golden_manifest_v1",
-  "state": "G0_COMMON_CONTRACT",
+  "state": "COMPLETE_12_CASES",
   "repository_base": "c8b13cac1a8918d8079f44ac1f5afe6854aea0a6",
   "functional_baseline": "49ac8e220404d9e9d277b601c21d21930b38d42a",
   "case_contract_version": "qtype_golden_case_v1",
@@ -126,5 +126,12 @@
       "scripts/validate_release.sh",
       "docs/TOPIC_ROUTER.md"
     ]
+  },
+  "integrated_case_count": 12,
+  "integration_state": {
+    "case_lanes": "A_B_C_D_COMPLETE",
+    "runner_lane": "E_COMPLETE",
+    "release_gate": "DEFERRED_TO_NEXT_MASTER_STEP",
+    "production_acceptance": "NOT_YET_RUN"
   }
 }

@@ -10,9 +10,9 @@ Golden Set은 Topic Pack 전체를 복제하는 문제은행이 아니다. Route
 
 - 기능 안정 기준선: `49ac8e220404d9e9d277b601c21d21930b38d42a`
 - G0 공통 계약 작성 기준: `c8b13cac1a8918d8079f44ac1f5afe6854aea0a6`
-- G0 상태: `COMMON_CONTRACT`
-- 실제 Golden Case 작성: G0 merge/push 이후 A~D 병렬 Lane에서 수행
-- Regression Runner: Lane E에서 수행
+- Golden 상태: `COMPLETE_12_CASES`
+- Golden Case: 4 QType × LOW/PASS/HIGH = 12 Case 통합 완료
+- Regression Runner: Lane E 통합 완료
 
 ## 3. Canonical QType / Lane
 
@@ -83,7 +83,7 @@ Short code:
 
 ## 8. Validation
 
-G0 / 개별 Lane:
+Contract / 개별 QType:
 
 ```bash
 python3 scripts/validate_qtype_golden_set.py
@@ -118,6 +118,8 @@ shared 변경은 Lane 통합 후 integration 단계에서만 수행한다.
 
 ## 10. Release 연결
 
-G0에서는 `scripts/validate_release.sh`에 `--require-complete`를 아직 등록하지 않는다.
+12 Case와 Regression Runner는 main local integration까지 완료되었다.
 
-12 Case와 Runner가 모두 통합된 후 integration 단계에서 complete gate를 release validation에 연결한다.
+현재 shared contract transition 단계에서는 `scripts/validate_release.sh`를 아직 수정하지 않는다.
+
+다음 MASTER 단계에서 `python3 scripts/validate_qtype_golden_set.py --require-complete`를 release validation에 별도 등록하고, 그 뒤 Production Golden acceptance를 수행한다.

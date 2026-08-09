@@ -63,7 +63,7 @@ def validate_range(value: Any, minimum: float, maximum: float, label: str) -> tu
 def validate_manifest() -> None:
     manifest = load_json(MANIFEST_PATH)
     require(manifest.get("version") == "qtype_golden_manifest_v1", "manifest version mismatch")
-    require(manifest.get("state") == "G0_COMMON_CONTRACT", "manifest state mismatch")
+    require(manifest.get("state") == "COMPLETE_12_CASES", "manifest state mismatch")
     require(manifest.get("case_contract_version") == "qtype_golden_case_v1", "case contract mismatch")
     require(manifest.get("required_answer_levels") == list(LEVELS), "answer level mismatch")
     configured = manifest.get("question_types", {})
@@ -245,7 +245,7 @@ def main() -> int:
     print(f"REQUIRE_COMPLETE={'true' if args.require_complete else 'false'}")
     for q in selected:
         print(f"{q}_CASE_COUNT={counts[q]}")
-    print("QTYPE_GOLDEN_COMPLETE=PASS" if args.require_complete else "QTYPE_GOLDEN_G0_OR_ATOMIC_LANE=PASS")
+    print("QTYPE_GOLDEN_COMPLETE=PASS" if args.require_complete else "QTYPE_GOLDEN_COLLECTION_CONTRACT=PASS")
     return 0
 
 
