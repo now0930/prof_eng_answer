@@ -219,5 +219,157 @@
     "EVALUATION": "IMPLEMENTATION_EVALUATION"
   },
   "fallback_type": "PRINCIPLE_INTERPRETATION",
-  "structure_policy": "STRUCTURE는 독립 question_type이 아니다. 구성·구조·기능·종류는 각 대분류의 fact 설명 요소로 흡수한다."
+  "structure_policy": "STRUCTURE는 독립 question_type이 아니다. 구성·구조·기능·종류는 각 대분류의 fact 설명 요소로 흡수한다.",
+  "de_policy": {
+    "policy_version": "de_policy_v1",
+    "precedence_rule": "explicit_question_demand_overrides_question_type_default_lens",
+    "mandatory_rule": "explicit_question_demand_plus_minimum_necessary_support",
+    "optional_rule": "question_type_lens_not_required_by_explicit_demand_is_optional",
+    "no_penalty_rule": "optional_elements_must_not_reduce_D_or_E_when_not_explicitly_requested",
+    "explicit_demand_input": "normalized_semantic_tags_or_policy_element_ids",
+    "types": {
+      "PRINCIPLE_INTERPRETATION": {
+        "d_required": [
+          "conditions_assumptions",
+          "principle_or_model_interpretation",
+          "result_meaning"
+        ],
+        "e_required": [
+          "question_demand_to_core_fact_or_principle",
+          "core_fact_or_principle_to_result_meaning"
+        ],
+        "high_score_optional": [
+          "design_or_selection_judgement",
+          "tuning_or_stability_extension",
+          "field_application_limits"
+        ],
+        "no_penalty_unless_explicit": [
+          "cost_benefit",
+          "maintenance",
+          "operation_conditions",
+          "field_application",
+          "alternative_comparison"
+        ],
+        "explicit_promotions": {}
+      },
+      "DIAGNOSIS_ACTION": {
+        "d_required": [
+          "problem_or_symptom_definition",
+          "cause_mechanism"
+        ],
+        "e_required": [
+          "problem_to_cause"
+        ],
+        "high_score_optional": [
+          "action_priority",
+          "residual_risk",
+          "verification_kpi",
+          "phased_implementation"
+        ],
+        "no_penalty_unless_explicit": [
+          "cost",
+          "legacy_equipment_impact",
+          "operation_maintenance",
+          "priority",
+          "tradeoff",
+          "roi",
+          "countermeasure_when_only_cause_is_requested"
+        ],
+        "explicit_promotions": {
+          "impact_or_risk": {
+            "d": [
+              "impact_or_risk"
+            ],
+            "e": [
+              "cause_to_impact"
+            ]
+          },
+          "action_or_countermeasure": {
+            "d": [
+              "action_fit"
+            ],
+            "e": [
+              "cause_to_action"
+            ],
+            "remove_no_penalty": [
+              "countermeasure_when_only_cause_is_requested"
+            ]
+          }
+        }
+      },
+      "COMPARE_SELECTION": {
+        "d_required": [
+          "common_comparison_axis",
+          "engineering_difference"
+        ],
+        "e_required": [
+          "alternative_a_and_b_to_common_axis",
+          "axis_to_advantage_limit_or_condition"
+        ],
+        "high_score_optional": [
+          "multi_criteria_decision",
+          "lifecycle_cost",
+          "safety_reliability",
+          "maintainability",
+          "weighted_decision_matrix"
+        ],
+        "no_penalty_unless_explicit": [
+          "cost_axis",
+          "safety_axis",
+          "maintainability_axis",
+          "weighted_matrix",
+          "single_final_choice_when_only_comparison_is_requested"
+        ],
+        "explicit_promotions": {
+          "selection": {
+            "d": [
+              "selection_reason"
+            ],
+            "e": [
+              "comparison_to_selection"
+            ],
+            "remove_no_penalty": [
+              "single_final_choice_when_only_comparison_is_requested"
+            ]
+          }
+        }
+      },
+      "IMPLEMENTATION_EVALUATION": {
+        "d_required": [
+          "target_scope",
+          "core_configuration_or_procedure",
+          "validity_or_acceptance_basis"
+        ],
+        "e_required": [
+          "target_to_configuration_or_procedure",
+          "configuration_or_procedure_to_requirement_or_metric"
+        ],
+        "high_score_optional": [
+          "legacy_integration",
+          "economic_feasibility",
+          "operation_risk",
+          "maintenance",
+          "expansion_plan"
+        ],
+        "no_penalty_unless_explicit": [
+          "retrofit_impact",
+          "roi",
+          "maintenance",
+          "expansion_direction",
+          "operation_risk",
+          "arbitrary_kpi_or_acceptance_number"
+        ],
+        "explicit_promotions": {
+          "evaluation_or_verification": {
+            "d": [
+              "evaluation_interpretation"
+            ],
+            "e": [
+              "metric_to_result_or_verification"
+            ]
+          }
+        }
+      }
+    }
+  }
 }

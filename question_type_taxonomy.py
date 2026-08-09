@@ -226,3 +226,87 @@ def detect_question_type_from_text(question_text: str) -> str:
         )
 
     return best
+
+def _clone_question_type_policy_value(value: Any) -> Any:
+    if isinstance(value, dict):
+        return {
+            key: _clone_question_type_policy_value(item)
+            for key, item in value.items()
+        }
+    if isinstance(value, list):
+        return [_clone_question_type_policy_value(item) for item in value]
+    return value
+
+
+def question_type_de_policy(question_type: str | None) -> dict[str, Any]:
+    data = load_question_type_taxonomy()
+    normalized = normalize_question_type(question_type)
+    root = data.get("de_policy", {})
+    policies = root.get("types", {})
+    policy = policies.get(normalized, {})
+    if not isinstance(policy, dict):
+        return {}
+    return _clone_question_type_policy_value(policy)
+
+
+def resolve_question_type_de_policy(
+    question_type: str | None,
+    explicit_demands: list[str] | tuple[str, ...] | set[str] | None = None,
+) -> dict[str, Any]:
+    data = load_question_type_taxonomy()
+    normalized = normalize_question_type(question_type)
+    root = data.get("de_policy", {})
+    policy = question_type_de_policy(normalized)
+
+    explicit = []
+    for item in explicit_demands or []:
+        token = str(item).strip()
+        if token and token not in explicit:
+            explicit.append(token)
+
+    mandatory_d = list(policy.get("d_required", []))
+    mandatory_e = list(policy.get("e_required", []))
+    optional = list(policy.get("high_score_optional", []))
+    no_penalty = list(policy.get("no_penalty_unless_explicit", []))
+    promotions = policy.get("explicit_promotions", {})
+    if not isinstance(promotions, dict):
+        promotions = {}
+
+    def add_unique(target: list[str], values: Any) -> None:
+        if not isinstance(values, list):
+            return
+        for value in values:
+            token = str(value).strip()
+            if token and token not in target:
+                target.append(token)
+
+    for demand in explicit:
+        promotion = promotions.get(demand, {})
+        if isinstance(promotion, dict):
+            add_unique(mandatory_d, promotion.get("d", []))
+            add_unique(mandatory_e, promotion.get("e", []))
+            remove_optional = set(promotion.get("remove_optional", []) or [])
+            remove_no_penalty = set(
+                promotion.get("remove_no_penalty", []) or []
+            )
+            optional = [item for item in optional if item not in remove_optional]
+            no_penalty = [
+                item for item in no_penalty if item not in remove_no_penalty
+            ]
+
+        if demand in optional or demand in no_penalty:
+            if demand not in mandatory_d:
+                mandatory_d.append(demand)
+            optional = [item for item in optional if item != demand]
+            no_penalty = [item for item in no_penalty if item != demand]
+
+    return {
+        "question_type": normalized,
+        "policy_version": root.get("policy_version"),
+        "precedence_rule": root.get("precedence_rule"),
+        "explicit_demands": explicit,
+        "mandatory_d": mandatory_d,
+        "mandatory_e": mandatory_e,
+        "optional": optional,
+        "no_penalty": no_penalty,
+    }
