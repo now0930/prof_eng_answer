@@ -5623,6 +5623,46 @@ def _phase8_run_originality_evaluator(
                 f"{write_error!r}"
             )
 
+    from hybrid_demand_scope_guard import (
+        build_hybrid_originality_scope_contract,
+        project_hybrid_originality_pre_normalization,
+        sanitize_hybrid_originality_evaluation,
+    )
+
+    question_scope_contract = (
+        build_hybrid_originality_scope_contract(
+            subject_rubric
+        )
+    )
+
+    def project_and_normalize(eval_data):
+        scoped = (
+            project_hybrid_originality_pre_normalization(
+                eval_data,
+                subject_rubric,
+            )
+        )
+
+        if not isinstance(scoped, dict):
+            scoped = eval_data
+
+        parsed = scoped.get("parsed")
+
+        if not isinstance(parsed, dict):
+            parsed = {}
+
+        parsed = (
+            _phase8_normalize_originality_evaluation(
+                parsed
+            )
+        )
+        scoped["parsed"] = parsed
+
+        return sanitize_hybrid_originality_evaluation(
+            scoped,
+            subject_rubric,
+        )
+
     try:
         from originality_grader import (
             gemini_originality_evaluate,
@@ -5639,6 +5679,9 @@ def _phase8_run_originality_evaluator(
             volume=volume,
             fact_eval=fact_eval,
             connection_eval=connection_eval,
+            question_scope_contract=(
+                question_scope_contract
+            ),
         )
 
         if result.get("ok") and result.get("parsed"):
@@ -5650,12 +5693,6 @@ def _phase8_run_originality_evaluator(
                 )
             )
 
-        parsed = (
-            _phase8_normalize_originality_evaluation(
-                parsed
-            )
-        )
-
         eval_data = {
             "ok": result.get("ok"),
             "error": result.get("error", ""),
@@ -5665,12 +5702,8 @@ def _phase8_run_originality_evaluator(
             "parsed": parsed,
         }
 
-        from hybrid_demand_scope_guard import (
-            sanitize_hybrid_originality_evaluation,
-        )
-        eval_data = sanitize_hybrid_originality_evaluation(
-            eval_data,
-            subject_rubric,
+        eval_data = project_and_normalize(
+            eval_data
         )
         persist_evaluation(eval_data)
 
@@ -5686,11 +5719,6 @@ def _phase8_run_originality_evaluator(
                 answer_text
             )
         )
-        parsed = (
-            _phase8_normalize_originality_evaluation(
-                parsed
-            )
-        )
 
         eval_data = {
             "ok": False,
@@ -5700,12 +5728,8 @@ def _phase8_run_originality_evaluator(
             "parsed": parsed,
         }
 
-        from hybrid_demand_scope_guard import (
-            sanitize_hybrid_originality_evaluation,
-        )
-        eval_data = sanitize_hybrid_originality_evaluation(
-            eval_data,
-            subject_rubric,
+        eval_data = project_and_normalize(
+            eval_data
         )
         persist_evaluation(eval_data)
 

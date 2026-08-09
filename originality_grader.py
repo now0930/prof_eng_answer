@@ -51,14 +51,39 @@ def _extract_json(text: str) -> dict:
     )
 
 
-def build_originality_prompt(question_text, answer_text, layer_scores=None, volume=None, fact_eval=None, connection_eval=None):
+def build_originality_prompt(question_text, answer_text, layer_scores=None, volume=None, fact_eval=None, connection_eval=None, question_scope_contract=None):
     layer_scores = layer_scores or []
     volume = volume or {}
     fact_eval = fact_eval or {}
     connection_eval = connection_eval or {}
+    question_scope_contract = (
+        question_scope_contract or {}
+    )
+
+    scope_contract_section = ""
+
+    if question_scope_contract.get("active") is True:
+        scope_contract_section = f"""
+[HYBRID_ORIGINALITY_DEMAND_SCOPE_V1]
+
+Originality O1~O5는 아래 명시 Question Demand 범위 안에서만 평가한다.
+
+중요:
+- 명시 Question Demand를 정확히 설명한 사실 자체는 기본 충족이며 Originality 가점이 아니다.
+- 문제에서 요구하지 않은 설치조건, 유체조건, 성능오차, 상태감시, RBM, 추가 진단 등을 쓰지 않았다는 이유로 O1~O5를 낮추지 않는다.
+- Topic/Fact 자료는 지식 참조이며 추가 요구사항 checklist가 아니다.
+- 가점은 명시 Demand와 직접 연결된 추가 판단, 제약조건, 대안 trade-off, 적용 우선순위, 검증 논리를 답안이 실제로 제시했을 때만 인정한다.
+- 범위 밖 요소를 언급한 사실만으로 가점하지 않는다.
+- Question Demand별 PRIMARY/NONE 역할을 바꾸거나 새 Demand를 만들지 않는다.
+
+Question Demand scope:
+{json.dumps(question_scope_contract, ensure_ascii=False, indent=2)}
+""".strip()
 
     return f"""
 너는 산업계측제어기술사 답안을 평가하는 채점위원이다.
+
+{scope_contract_section}
 
 이번 평가는 '독창성'이라는 이름을 사용하지만, 창작적 표현이나 특이한 문장을 평가하지 않는다.
 여기서 독창성은 '기술사적 판단성', 즉 정확한 fact를 바탕으로 문제를 실제 설비 조건으로 재해석하고,
@@ -176,7 +201,7 @@ Connection 평가 참고:
 """.strip()
 
 
-def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, volume=None, fact_eval=None, connection_eval=None):
+def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, volume=None, fact_eval=None, connection_eval=None, question_scope_contract=None):
     api_key = (
         os.getenv("GEMINI_API_KEY")
         or os.getenv("GOOGLE_API_KEY")
@@ -201,6 +226,7 @@ def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, v
         volume=volume,
         fact_eval=fact_eval,
         connection_eval=connection_eval,
+        question_scope_contract=question_scope_contract,
     )
 
     url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"

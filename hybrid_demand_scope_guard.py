@@ -523,7 +523,7 @@ def sanitize_hybrid_originality_evaluation(
             updated.get("raw_text") == evaluation.get("raw_text")
         ),
         "score_effect": (
-            "originality numeric bonus unchanged; feedback-only scope sanitation"
+            "numeric scope handled by pre-normalization O1-O5 projection; feedback sanitation applied here"
         ),
     }
     return updated
@@ -760,3 +760,290 @@ def project_hybrid_model_answer_feedback(
         projected[field] = kept
 
     return projected, diagnostic
+def build_hybrid_originality_scope_contract(
+    subject_rubric: Any,
+) -> dict[str, Any]:
+    evidence = _hybrid_evidence(subject_rubric)
+
+    if evidence is None:
+        return {}
+
+    rows = _demand_token_rows(evidence)
+
+    if not rows:
+        return {}
+
+    return {
+        "version": "hybrid_originality_demand_scope_v1",
+        "marker": "HYBRID_ORIGINALITY_DEMAND_SCOPE_V1",
+        "active": True,
+        "routing_mode": evidence.get("routing_mode"),
+        "coverage_kind": evidence.get("coverage_kind"),
+        "demand_mappings": [
+            {
+                "demand_id": row.get("demand_id"),
+                "demand_text": row.get("demand_text"),
+                "role": row.get("role"),
+            }
+            for row in rows
+        ],
+        "policy": {
+            "explicit_demand_fulfillment_is_baseline": True,
+            "out_of_scope_absence_is_not_originality_defect": True,
+            "bonus_requires_scope_traceable_judgement": True,
+            "topic_evidence_is_not_checklist": True,
+            "one_question_one_score": True,
+        },
+    }
+
+
+def _originality_reason_has_untraceable_negative_fragment(
+    reason: Any,
+    demand_rows: list[dict[str, Any]],
+) -> bool:
+    text = _text(reason)
+
+    if not text or not _negative(text):
+        return False
+
+    import re as _re
+
+    # Split explanatory reasons at punctuation and contrast boundaries.
+    # This catches mixed reasons such as:
+    #   "온도 보상은 설명했으나 설치 환경 고려가 부족함"
+    # where the first clause is in-scope but the negative requirement is not.
+    fragments = [
+        fragment.strip()
+        for fragment in _re.split(
+            r"(?:[.!?;]\s*|,\s*|"
+            r"했으나\s*|하지만\s*|그러나\s*|다만\s*)",
+            text,
+        )
+        if fragment.strip()
+    ]
+
+    negative_fragments = [
+        fragment
+        for fragment in fragments
+        if _negative(fragment)
+    ]
+
+    if not negative_fragments:
+        return not _traceable(
+            text,
+            demand_rows,
+        )
+
+    return any(
+        not _traceable(
+            fragment,
+            demand_rows,
+        )
+        for fragment in negative_fragments
+    )
+
+
+def project_hybrid_originality_pre_normalization(
+    evaluation: Any,
+    subject_rubric: Any,
+) -> Any:
+    evidence = _hybrid_evidence(subject_rubric)
+
+    if (
+        evidence is None
+        or not isinstance(evaluation, dict)
+    ):
+        return evaluation
+
+    parsed = evaluation.get("parsed")
+
+    if not isinstance(parsed, dict):
+        return evaluation
+
+    demand_rows = _demand_token_rows(evidence)
+
+    if not demand_rows:
+        return evaluation
+
+    updated = copy.deepcopy(evaluation)
+    parsed = updated["parsed"]
+    anchors = parsed.get("anchors")
+
+    diagnostic = {
+        "version": HYBRID_DEMAND_SCOPE_GUARD_VERSION,
+        "marker": "HYBRID_ORIGINALITY_PRE_NORMALIZATION_SCOPE_V1",
+        "active": True,
+        "routing_mode": evidence.get("routing_mode"),
+        "coverage_kind": evidence.get("coverage_kind"),
+        "removed_anchor_evidence": [],
+        "neutralized_anchor_reasons": [],
+        "zeroed_anchor_ids": [],
+        "projected_anchor_ids": [],
+        "raw_text_preserved": (
+            updated.get("raw_text")
+            == evaluation.get("raw_text")
+        ),
+        "score_effect": (
+            "O1-O5 projected to explicit Question Demand before "
+            "average/raw originality normalization"
+        ),
+    }
+
+    projected_levels = []
+
+    if isinstance(anchors, list):
+        for index, anchor in enumerate(anchors):
+            if not isinstance(anchor, dict):
+                continue
+
+            anchor_id = _text(anchor.get("id"))
+            evidence_rows = anchor.get("evidence")
+            kept_evidence = []
+
+            if isinstance(evidence_rows, list):
+                for evidence_index, item in enumerate(
+                    evidence_rows
+                ):
+                    if not isinstance(item, str):
+                        kept_evidence.append(item)
+                        continue
+
+                    if _traceable(
+                        item,
+                        demand_rows,
+                    ):
+                        kept_evidence.append(item)
+                        continue
+
+                    diagnostic[
+                        "removed_anchor_evidence"
+                    ].append(
+                        {
+                            "path": (
+                                "parsed.anchors"
+                                f"[{index}].evidence"
+                                f"[{evidence_index}]"
+                            ),
+                            "anchor_id": anchor_id,
+                            "text": item,
+                            "reason": (
+                                "not_traceable_to_explicit_demand"
+                            ),
+                        }
+                    )
+
+                anchor["evidence"] = kept_evidence
+
+            reason = _text(anchor.get("reason"))
+
+            if (
+                reason
+                and _originality_reason_has_untraceable_negative_fragment(
+                    reason,
+                    demand_rows,
+                )
+            ):
+                diagnostic[
+                    "neutralized_anchor_reasons"
+                ].append(
+                    {
+                        "path": (
+                            f"parsed.anchors[{index}].reason"
+                        ),
+                        "anchor_id": anchor_id,
+                        "text": reason,
+                        "reason": (
+                            "out_of_scope_negative_requirement"
+                        ),
+                    }
+                )
+
+                if kept_evidence:
+                    anchor["reason"] = (
+                        "Hybrid demand-scope projection: "
+                        "명시 Question Demand와 직접 연결되는 "
+                        "답안 근거만 Originality 판단에 사용함."
+                    )
+                else:
+                    anchor["reason"] = (
+                        "Hybrid demand-scope projection: "
+                        "명시 Question Demand 범위 밖의 "
+                        "Originality 요구는 점수 근거에서 제외함."
+                    )
+
+            try:
+                level = float(anchor.get("level") or 0.0)
+            except (
+                TypeError,
+                ValueError,
+                OverflowError,
+            ):
+                level = 0.0
+
+            level = max(
+                0.0,
+                min(1.0, level),
+            )
+
+            if level > 0.0 and not kept_evidence:
+                diagnostic[
+                    "zeroed_anchor_ids"
+                ].append(anchor_id)
+                level = 0.0
+                anchor["level"] = 0.0
+                anchor["reason"] = (
+                    "Hybrid demand-scope projection: "
+                    "가점을 지지하는 명시 Demand 범위 내 "
+                    "답안 근거가 없어 이 anchor 가점을 0으로 함."
+                )
+            else:
+                anchor["level"] = round(
+                    level,
+                    3,
+                )
+
+            projected_levels.append(level)
+            diagnostic[
+                "projected_anchor_ids"
+            ].append(anchor_id)
+
+    average = (
+        sum(projected_levels)
+        / len(projected_levels)
+        if projected_levels
+        else 0.0
+    )
+    raw_score = average * 2.0
+
+    for key in (
+        "reported_raw_originality_score",
+        "bounded_reported_raw_originality_score",
+        "anchor_derived_originality_score",
+        "originality_score_source",
+        "originality_score_consistency_adjustment",
+        "max_allowed_after_gates",
+        "final_originality_score",
+        "applied_caps",
+        "final_bonus_to_D",
+        "final_bonus_to_E",
+        "bonus_policy",
+    ):
+        parsed.pop(key, None)
+
+    parsed["average_level"] = round(
+        average,
+        3,
+    )
+    parsed["raw_originality_score"] = round(
+        raw_score,
+        3,
+    )
+    parsed[
+        "hybrid_originality_scope_projection"
+    ] = diagnostic
+
+    updated[
+        "hybrid_originality_scope_projection"
+    ] = diagnostic
+
+    return updated
