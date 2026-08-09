@@ -2,5 +2,323 @@
   "version": "qtype_golden_collection_v1",
   "question_type": "DIAGNOSIS_ACTION",
   "lane": "C",
-  "cases": []
+  "cases": [
+    {
+      "case_id": "QG-DA-LOW-01",
+      "version": "qtype_golden_case_v1",
+      "question_type": "DIAGNOSIS_ACTION",
+      "answer_level": "LOW",
+      "topic_id_basis": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "question": "운전 중 공압식 제어밸브가 닫힘 지령을 받았지만 높은 차압 조건에서 완전 닫힘에 실패하고 동작 중 스템 마찰에 의한 불연속적인 움직임도 관찰되었다. 가능한 원인을 진단하고, 확인 절차와 원인별 대책, 조치 후 검증 및 재발 방지 방법을 설명하시오.",
+      "answer": "밸브가 닫히지 않는 원인은 공기압 부족이나 포지셔너 이상일 수 있다. 공급 공기압과 포지셔너를 확인하고 이상 부품을 교체한다. 마찰이 있으면 패킹도 점검한다.",
+      "expected": {
+        "question_demands": [
+          {
+            "id": "D1",
+            "text": "현상과 가능한 원인을 구분하여 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D2",
+            "text": "원인별 진단 및 확인 절차를 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D3",
+            "text": "진단 결과와 연결된 원인별 대책을 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D4",
+            "text": "조치 후 성능 검증과 재발 방지 방법을 제시한다.",
+            "is_core": true
+          }
+        ],
+        "expected_topic_ids": [
+          "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+        ],
+        "routing_mode": "SINGLE_TOPIC",
+        "evidence_scope": "TOPIC_ONLY",
+        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "critical_fact_expectation": "NO_CRITICAL_ERROR",
+        "fatal_logic_expectation": "NO_FATAL",
+        "originality_scope": {
+          "eligible_axes": [
+            "O1",
+            "O2",
+            "O3",
+            "O4",
+            "O5"
+          ],
+          "forbidden_axes": []
+        },
+        "demand_status": {
+          "D1": "partial",
+          "D2": "partial",
+          "D3": "partial",
+          "D4": "missing"
+        },
+        "layer_ranges": {
+          "A": {
+            "min": 1.0,
+            "max": 2.0
+          },
+          "B": {
+            "min": 1.0,
+            "max": 2.5
+          },
+          "C": {
+            "min": 1.0,
+            "max": 3.0
+          },
+          "D": {
+            "min": 0.0,
+            "max": 2.0
+          },
+          "E": {
+            "min": 0.0,
+            "max": 1.0
+          }
+        },
+        "total_range": {
+          "min": 4.0,
+          "max": 10.0
+        },
+        "coverage_range": {
+          "min": 25.0,
+          "max": 50.0
+        },
+        "feedback_scope": {
+          "required_elements": [
+            "차압에 의한 불평형력과 스템 마찰을 원인 후보로 분리",
+            "각 원인에 대응하는 진단 절차",
+            "조치 후 검증과 재발 방지"
+          ],
+          "forbidden_elements": [
+            "답안에 없는 치명적 사실 오류를 임의로 생성",
+            "원인과 무관한 일반론만 제시"
+          ]
+        },
+        "required_feedback_characteristics": [
+          "누락된 진단 요구사항을 구체적으로 지적",
+          "원인-진단-대책 연결 부족을 설명"
+        ],
+        "forbidden_feedback": [
+          "정답 전체를 장황하게 재작성",
+          "근거 없이 고득점 답안으로 평가"
+        ]
+      }
+    },
+    {
+      "case_id": "QG-DA-PASS-01",
+      "version": "qtype_golden_case_v1",
+      "question_type": "DIAGNOSIS_ACTION",
+      "answer_level": "PASS",
+      "topic_id_basis": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "question": "운전 중 공압식 제어밸브가 닫힘 지령을 받았지만 높은 차압 조건에서 완전 닫힘에 실패하고 동작 중 스템 마찰에 의한 불연속적인 움직임도 관찰되었다. 가능한 원인을 진단하고, 확인 절차와 원인별 대책, 조치 후 검증 및 재발 방지 방법을 설명하시오.",
+      "answer": "우선 현상을 차압에 따른 구동력 부족과 스템 마찰 증가로 나누어 본다. 공급압과 포지셔너 출력, 액추에이터의 실제 스트로크를 확인하고, 차압 조건에서 필요한 구동력이 액추에이터가 제공할 수 있는 힘보다 커지는지 검토한다. 또한 스템의 움직임이 정·역방향에서 불연속적으로 변하는지 확인해 패킹 또는 가이드 계통의 마찰 가능성을 판단한다. 구동력 부족이면 액추에이터 선정과 스프링 조건을 재검토하고, 마찰이 원인이면 패킹 조정 또는 정비 후 재시험한다. 조치 후에는 동일한 차압 조건에서 전 스트로크 동작과 완전 닫힘 여부를 확인한다.",
+      "expected": {
+        "question_demands": [
+          {
+            "id": "D1",
+            "text": "현상과 가능한 원인을 구분하여 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D2",
+            "text": "원인별 진단 및 확인 절차를 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D3",
+            "text": "진단 결과와 연결된 원인별 대책을 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D4",
+            "text": "조치 후 성능 검증과 재발 방지 방법을 제시한다.",
+            "is_core": true
+          }
+        ],
+        "expected_topic_ids": [
+          "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+        ],
+        "routing_mode": "SINGLE_TOPIC",
+        "evidence_scope": "TOPIC_ONLY",
+        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "critical_fact_expectation": "NO_CRITICAL_ERROR",
+        "fatal_logic_expectation": "NO_FATAL",
+        "originality_scope": {
+          "eligible_axes": [
+            "O1",
+            "O2",
+            "O3",
+            "O4",
+            "O5"
+          ],
+          "forbidden_axes": []
+        },
+        "demand_status": {
+          "D1": "present",
+          "D2": "present",
+          "D3": "present",
+          "D4": "partial"
+        },
+        "layer_ranges": {
+          "A": {
+            "min": 2.0,
+            "max": 3.0
+          },
+          "B": {
+            "min": 3.5,
+            "max": 5.0
+          },
+          "C": {
+            "min": 4.5,
+            "max": 6.5
+          },
+          "D": {
+            "min": 3.0,
+            "max": 4.5
+          },
+          "E": {
+            "min": 1.0,
+            "max": 1.5
+          }
+        },
+        "total_range": {
+          "min": 15.0,
+          "max": 19.0
+        },
+        "coverage_range": {
+          "min": 70.0,
+          "max": 88.0
+        },
+        "feedback_scope": {
+          "required_elements": [
+            "원인-진단-대책 연결은 충족되었음을 인정",
+            "재발 방지와 검증 기준을 더 구체화할 필요"
+          ],
+          "forbidden_elements": [
+            "핵심 진단 절차가 없다고 단정",
+            "제시되지 않은 치명적 오류를 추가"
+          ]
+        },
+        "required_feedback_characteristics": [
+          "합격권의 강점과 남은 보완점을 함께 제시",
+          "검증 및 재발 방지의 구체성 부족을 지적"
+        ],
+        "forbidden_feedback": [
+          "낮은 수준 답안으로 오판",
+          "고득점 기준을 이미 모두 충족했다고 단정"
+        ]
+      }
+    },
+    {
+      "case_id": "QG-DA-HIGH-01",
+      "version": "qtype_golden_case_v1",
+      "question_type": "DIAGNOSIS_ACTION",
+      "answer_level": "HIGH",
+      "topic_id_basis": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+      "question": "운전 중 공압식 제어밸브가 닫힘 지령을 받았지만 높은 차압 조건에서 완전 닫힘에 실패하고 동작 중 스템 마찰에 의한 불연속적인 움직임도 관찰되었다. 가능한 원인을 진단하고, 확인 절차와 원인별 대책, 조치 후 검증 및 재발 방지 방법을 설명하시오.",
+      "answer": "진단은 현상 재현, 원인 분리, 대책 적용, 동일 조건 재검증의 순서로 수행한다. 첫째, 닫힘 실패가 차압 증가와 함께 심해지는지 확인하고 밸브 트림에 작용하는 불평형력과 액추에이터의 가용 구동력 여유를 비교한다. 공급압, 포지셔너 출력, 스템 변위도 함께 기록하여 명령은 정상인데 스템이 목표 위치에 도달하지 못하는지 구분한다. 둘째, 정·역 스트로크에서 같은 명령에 대한 스템 응답의 차이와 불연속 움직임을 확인해 패킹, 가이드 또는 스템 계통의 마찰·스틱션을 분리한다. 필요하면 정비 전후 동일 시험으로 마찰 영향의 변화를 비교한다. 셋째, 구동력 여유가 부족하면 실제 최대 차압과 fail-safe 방향을 기준으로 액추에이터 및 스프링 조건을 재검토하고, 마찰이 과도하면 패킹 조정과 기계적 정비를 수행한다. 마지막으로 최대 운전 차압에서 전 스트로크, 완전 닫힘, fail-safe 동작을 재시험하고 결과를 기준값으로 기록한다. 이후 공급압·포지셔너·스템 응답 추세와 마찰 징후를 정기 점검하여 같은 고장의 재발 여부를 관리한다.",
+      "expected": {
+        "question_demands": [
+          {
+            "id": "D1",
+            "text": "현상과 가능한 원인을 구분하여 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D2",
+            "text": "원인별 진단 및 확인 절차를 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D3",
+            "text": "진단 결과와 연결된 원인별 대책을 제시한다.",
+            "is_core": true
+          },
+          {
+            "id": "D4",
+            "text": "조치 후 성능 검증과 재발 방지 방법을 제시한다.",
+            "is_core": true
+          }
+        ],
+        "expected_topic_ids": [
+          "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+        ],
+        "routing_mode": "SINGLE_TOPIC",
+        "evidence_scope": "TOPIC_ONLY",
+        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "critical_fact_expectation": "NO_CRITICAL_ERROR",
+        "fatal_logic_expectation": "NO_FATAL",
+        "originality_scope": {
+          "eligible_axes": [
+            "O1",
+            "O2",
+            "O3",
+            "O4",
+            "O5"
+          ],
+          "forbidden_axes": []
+        },
+        "demand_status": {
+          "D1": "present",
+          "D2": "present",
+          "D3": "present",
+          "D4": "present"
+        },
+        "layer_ranges": {
+          "A": {
+            "min": 2.5,
+            "max": 3.0
+          },
+          "B": {
+            "min": 4.5,
+            "max": 6.0
+          },
+          "C": {
+            "min": 6.0,
+            "max": 8.0
+          },
+          "D": {
+            "min": 4.5,
+            "max": 6.0
+          },
+          "E": {
+            "min": 1.5,
+            "max": 2.0
+          }
+        },
+        "total_range": {
+          "min": 20.0,
+          "max": 25.0
+        },
+        "coverage_range": {
+          "min": 90.0,
+          "max": 100.0
+        },
+        "feedback_scope": {
+          "required_elements": [
+            "현상-원인-진단-대책-검증의 폐루프 구성을 인정",
+            "불평형력과 마찰을 독립 원인으로 분리한 점을 인정",
+            "동일 조건 재시험과 재발 방지를 포함한 점을 인정"
+          ],
+          "forbidden_elements": [
+            "핵심 요구가 누락되었다고 평가",
+            "근거 없는 감점 요소를 추가"
+          ]
+        },
+        "required_feedback_characteristics": [
+          "고득점 수준의 논리 연결성과 검증 폐루프를 명시",
+          "사실 근거와 실행 가능성을 구분하여 평가"
+        ],
+        "forbidden_feedback": [
+          "일반론적 보완 요구만 반복",
+          "답안에 없는 오류를 만들어 감점"
+        ]
+      }
+    }
+  ]
 }
