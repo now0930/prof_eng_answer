@@ -223,7 +223,11 @@
     "Bench set",
     "Fail-Close spring",
     "Fail-Open spring",
-    "시트 하중"
+    "시트 하중",
+    "높은 차압",
+    "완전 닫힘 실패",
+    "밸브 닫힘 실패",
+    "차압에 의한 닫힘 실패"
   ],
   "routing_field_points": [
     "P1과 P2 및 유효면적에 의한 축방향 압력력",

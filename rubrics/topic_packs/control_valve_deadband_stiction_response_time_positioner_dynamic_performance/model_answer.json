@@ -216,7 +216,10 @@
     "valve hunting overshoot",
     "volume booster response",
     "공압 배관과 밸브 응답속도",
-    "final control element variability"
+    "final control element variability",
+    "스템 마찰",
+    "불연속적인 움직임",
+    "스틱션"
   ],
   "routing_field_points": [
     "command 변화에도 valve travel이 정지하는 deadband 구간",

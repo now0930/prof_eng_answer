@@ -1,0 +1,214 @@
+{
+  "version": "QUESTION_DEMAND_ANCHOR_MAPPING_V1",
+  "mapping_id": "control_valve_close_failure_stiction_diagnosis_v1",
+  "selection_contract": {
+    "match_policy": "exact_primary_topic_ids_plus_exact_demand_id_and_text",
+    "question_sha_used": false,
+    "golden_quality_label_used": false,
+    "golden_score_range_used": false,
+    "student_answer_used": false
+  },
+  "primary_topic_ids": [
+    "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+    "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+  ],
+  "demands": [
+    {
+      "demand_id": "D1",
+      "text": "운전 중 공압식 제어밸브가 닫힘 지령을 받았으나 높은 차압 조건에서 완전 닫힘에 실패한 가능한 원인을 진단하고 설명하는 것",
+      "topic_ids": [
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "anchor_ids": [
+        "control_valve_pressure_force_surface_integration",
+        "control_valve_unbalance_force_effective_area_approximation",
+        "control_valve_pressure_tends_to_open_close_direction",
+        "control_valve_flow_direction_trim_geometry_dependency",
+        "control_valve_stem_area_pressure_force",
+        "control_valve_balanced_trim_residual_unbalance",
+        "control_valve_dynamic_flow_force_momentum_side_load",
+        "control_valve_packing_friction",
+        "control_valve_guide_friction_side_load",
+        "control_valve_breakaway_running_friction_hysteresis",
+        "control_valve_friction_opposes_motion_not_actuator",
+        "control_valve_seat_load_shutoff_class",
+        "control_valve_pneumatic_actuator_force_effective_area",
+        "control_valve_spring_preload_rate_travel_force",
+        "control_valve_bench_set_operating_range_difference",
+        "control_valve_actuator_sizing_worst_case_conditions"
+      ]
+    },
+    {
+      "demand_id": "D2",
+      "text": "운전 중 공압식 제어밸브가 닫힘 지령을 받았으나 높은 차압 조건에서 완전 닫힘에 실패한 상황에 대한 확인 절차를 설명하는 것",
+      "topic_ids": [
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "anchor_ids": [
+        "control_valve_moving_assembly_free_body_diagram",
+        "control_valve_pressure_force_surface_integration",
+        "control_valve_unbalance_force_effective_area_approximation",
+        "control_valve_pressure_tends_to_open_close_direction",
+        "control_valve_flow_direction_trim_geometry_dependency",
+        "control_valve_stem_area_pressure_force",
+        "control_valve_packing_friction",
+        "control_valve_guide_friction_side_load",
+        "control_valve_breakaway_running_friction_hysteresis",
+        "control_valve_friction_opposes_motion_not_actuator",
+        "control_valve_seat_load_shutoff_class",
+        "control_valve_pneumatic_actuator_force_effective_area",
+        "control_valve_spring_preload_rate_travel_force",
+        "control_valve_bench_set_operating_range_difference",
+        "control_valve_actuator_sizing_worst_case_conditions",
+        "control_valve_stiction_deadband_diagnostics"
+      ]
+    },
+    {
+      "demand_id": "D3",
+      "text": "운전 중 공압식 제어밸브가 닫힘 지령을 받았으나 높은 차압 조건에서 완전 닫힘에 실패한 원인별 대책을 설명하는 것",
+      "topic_ids": [
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "anchor_ids": [
+        "control_valve_flow_direction_trim_geometry_dependency",
+        "control_valve_balanced_trim_residual_unbalance",
+        "control_valve_balanced_trim_tradeoff_maintenance",
+        "control_valve_packing_friction",
+        "control_valve_guide_friction_side_load",
+        "control_valve_seat_load_shutoff_class",
+        "control_valve_pneumatic_actuator_force_effective_area",
+        "control_valve_spring_preload_rate_travel_force",
+        "control_valve_bench_set_operating_range_difference",
+        "control_valve_actuator_sizing_worst_case_conditions"
+      ]
+    },
+    {
+      "demand_id": "D4",
+      "text": "운전 중 공압식 제어밸브가 닫힘 지령을 받았으나 높은 차압 조건에서 완전 닫힘에 실패한 상황에 대한 조치 후 검증 방법을 설명하는 것",
+      "topic_ids": [
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "anchor_ids": [
+        "control_valve_unbalance_force_effective_area_approximation",
+        "control_valve_seat_load_shutoff_class",
+        "control_valve_pneumatic_actuator_force_effective_area",
+        "control_valve_spring_preload_rate_travel_force",
+        "control_valve_bench_set_operating_range_difference",
+        "control_valve_actuator_sizing_worst_case_conditions",
+        "control_valve_stiction_deadband_diagnostics"
+      ]
+    },
+    {
+      "demand_id": "D5",
+      "text": "운전 중 공압식 제어밸브가 닫힘 지령을 받았으나 높은 차압 조건에서 완전 닫힘에 실패한 상황에 대한 재발 방지 방법을 설명하는 것",
+      "topic_ids": [
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "anchor_ids": [
+        "control_valve_flow_direction_trim_geometry_dependency",
+        "control_valve_balanced_trim_tradeoff_maintenance",
+        "control_valve_packing_friction",
+        "control_valve_guide_friction_side_load",
+        "control_valve_seat_load_shutoff_class",
+        "control_valve_pneumatic_actuator_force_effective_area",
+        "control_valve_spring_preload_rate_travel_force",
+        "control_valve_bench_set_operating_range_difference",
+        "control_valve_actuator_sizing_worst_case_conditions",
+        "control_valve_stiction_deadband_diagnostics"
+      ]
+    },
+    {
+      "demand_id": "D6",
+      "text": "동작 중 스템 마찰에 의한 불연속적인 움직임이 관찰된 가능한 원인을 진단하고 설명하는 것",
+      "topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+      ],
+      "anchor_ids": [
+        "deadband_definition_direction_reversal",
+        "deadband_not_dead_time",
+        "backlash_mechanical_clearance",
+        "hysteresis_direction_dependent_output",
+        "static_friction_starting_force",
+        "stiction_stick_then_jump",
+        "stick_slip_repeated_motion",
+        "stiction_limit_cycle_path",
+        "oscillation_requires_differential_diagnosis"
+      ]
+    },
+    {
+      "demand_id": "D7",
+      "text": "동작 중 스템 마찰에 의한 불연속적인 움직임이 관찰된 상황에 대한 확인 절차를 설명하는 것",
+      "topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+      ],
+      "anchor_ids": [
+        "deadband_definition_direction_reversal",
+        "deadband_not_dead_time",
+        "static_friction_starting_force",
+        "stiction_stick_then_jump",
+        "stick_slip_repeated_motion",
+        "stiction_limit_cycle_path",
+        "oscillation_requires_differential_diagnosis",
+        "small_step_test_control_resolution",
+        "reversal_test_deadband_hysteresis",
+        "step_sensitivity_not_resolution_only",
+        "positioner_closed_loop_position_feedback"
+      ]
+    },
+    {
+      "demand_id": "D8",
+      "text": "동작 중 스템 마찰에 의한 불연속적인 움직임이 관찰된 원인별 대책을 설명하는 것",
+      "topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+      ],
+      "anchor_ids": [
+        "backlash_mechanical_clearance",
+        "static_friction_starting_force",
+        "positioner_closed_loop_position_feedback",
+        "positioner_cannot_remove_mechanical_backlash",
+        "positioner_cannot_replace_actuator_thrust",
+        "positioner_gain_speed_stability_tradeoff",
+        "pneumatic_supply_tubing_spool_capacity",
+        "volume_booster_flow_capacity_feedback_condition",
+        "hunting_multicausal_diagnosis",
+        "oscillation_requires_differential_diagnosis"
+      ]
+    },
+    {
+      "demand_id": "D9",
+      "text": "동작 중 스템 마찰에 의한 불연속적인 움직임이 관찰된 상황에 대한 조치 후 검증 방법을 설명하는 것",
+      "topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+      ],
+      "anchor_ids": [
+        "final_control_element_variability_path",
+        "response_time_dead_dynamic_separation",
+        "opening_closing_response_asymmetry",
+        "small_step_test_control_resolution",
+        "large_step_test_pneumatic_capacity",
+        "reversal_test_deadband_hysteresis",
+        "step_sensitivity_not_resolution_only",
+        "positioner_closed_loop_position_feedback",
+        "improvement_verify_same_test_and_process_result"
+      ]
+    },
+    {
+      "demand_id": "D10",
+      "text": "동작 중 스템 마찰에 의한 불연속적인 움직임이 관찰된 상황에 대한 재발 방지 방법을 설명하는 것",
+      "topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+      ],
+      "anchor_ids": [
+        "final_control_element_variability_path",
+        "oscillation_requires_differential_diagnosis",
+        "positioner_cannot_remove_mechanical_backlash",
+        "positioner_cannot_replace_actuator_thrust",
+        "positioner_gain_speed_stability_tradeoff",
+        "pneumatic_supply_tubing_spool_capacity",
+        "volume_booster_flow_capacity_feedback_condition",
+        "hunting_multicausal_diagnosis",
+        "improvement_verify_same_test_and_process_result"
+      ]
+    }
+  ]
+}

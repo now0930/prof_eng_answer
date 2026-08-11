@@ -35,11 +35,12 @@
           }
         ],
         "expected_topic_ids": [
-          "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+          "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+          "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
         ],
-        "routing_mode": "SINGLE_TOPIC",
-        "evidence_scope": "TOPIC_ONLY",
-        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "routing_mode": "MULTI_TOPIC",
+        "evidence_scope": "MULTI_TOPIC",
+        "fact_cap_behavior": "CAP_EXPECTED",
         "critical_fact_expectation": "NO_CRITICAL_ERROR",
         "fatal_logic_expectation": "NO_FATAL",
         "originality_scope": {
@@ -116,7 +117,7 @@
       "answer_level": "PASS",
       "topic_id_basis": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
       "question": "운전 중 공압식 제어밸브가 닫힘 지령을 받았지만 높은 차압 조건에서 완전 닫힘에 실패하고 동작 중 스템 마찰에 의한 불연속적인 움직임도 관찰되었다. 가능한 원인을 진단하고, 확인 절차와 원인별 대책, 조치 후 검증 및 재발 방지 방법을 설명하시오.",
-      "answer": "우선 현상을 차압에 따른 구동력 부족과 스템 마찰 증가로 나누어 본다. 공급압과 포지셔너 출력, 액추에이터의 실제 스트로크를 확인하고, 차압 조건에서 필요한 구동력이 액추에이터가 제공할 수 있는 힘보다 커지는지 검토한다. 또한 스템의 움직임이 정·역방향에서 불연속적으로 변하는지 확인해 패킹 또는 가이드 계통의 마찰 가능성을 판단한다. 구동력 부족이면 액추에이터 선정과 스프링 조건을 재검토하고, 마찰이 원인이면 패킹 조정 또는 정비 후 재시험한다. 조치 후에는 동일한 차압 조건에서 전 스트로크 동작과 완전 닫힘 여부를 확인한다.",
+      "answer": "1. 진단 가설\n현상은 ① 높은 차압에서 완전 닫힘 실패, ② 스템의 불연속 이동으로 나눈다. 전자는 유체 불평형력에 비해 가용추력이 부족한 경우를, 후자는 패킹·가이드 마찰 증가와 stiction을 우선 가설로 둔다. 동일 시점의 차압, 공급압, 포지셔너 출력, 액추에이터 압력과 스템 위치를 기록하여 두 원인을 분리한다.\n\n2. 차압과 구동력 확인\n가동부에는 액추에이터 힘, 스프링 힘, 유체 불평형력, 패킹·가이드 마찰과 시트 하중이 작용한다. 단순한 unbalanced trim의 차단조건에서는 Fu≈ΔP·Aeff로 근사할 수 있지만 Aeff는 단순 포트면적이 아니라 trim 형상과 압력경계로 정해지는 유효면적이다. 따라서 Pressure-Tends-to-Open/Close 방향을 확인하고 실제 최대 차압에서 제조사 자료의 요구추력과 가용추력을 비교한다. 공압 액추에이터 힘은 기본적으로 Fair=Pa·Aa이고, 스프링은 Fs=Fpreload+kx처럼 스트로크에 따라 달라지므로 bench set만으로 운전 중 추력을 판단하지 않는다. 완전 닫힘에서는 요구 시트 하중도 포함한다.\n\n3. Stiction 확인\n패킹 마찰과 가이드 마찰을 구분한다. Breakaway friction이 running friction보다 크면 포지셔너 출력과 액추에이터 압력이 변해도 스템이 잠시 정지하다 임계힘을 넘을 때 갑자기 움직일 수 있다. 정·역방향 작은 step 시험으로 deadband와 stick-slip을 확인하고, 패킹 과조임·열화, 스템 표면, 가이드 편심·마모와 이물질을 점검한다.\n\n4. 원인별 대책\n가용추력이 부족하면 최대 차압, 시트 하중, 마찰과 설계여유를 기준으로 액추에이터 크기·공급압·스프링 조건을 재검토한다. 마찰이 원인이면 허용 누설조건을 유지하면서 패킹을 조정 또는 교체하고 스템·가이드 정렬과 마모를 정비한다. 포지셔너 튜닝만으로 기계적 stiction을 숨기지 않는다. 요구추력이 과도한 경우 balanced trim을 검토할 수 있으나 seal 마찰과 잔류 불평형력은 남는다는 점을 고려한다.\n\n5. 조치 후 확인\n정비 전과 같은 최대 운전차압에서 전 스트로크, 완전 닫힘, 방향전환 응답과 seat leakage를 다시 확인한다. 결과가 기준 안으로 복귀했는지 비교하고 반복적인 마찰 증가가 확인되면 패킹·가이드 점검주기를 조정한다. 핵심은 원인 가설과 측정값을 연결한 뒤 그 원인에 맞는 조치를 시행하고 동일조건으로 재확인하는 것이다.",
       "expected": {
         "question_demands": [
           {
@@ -141,11 +142,12 @@
           }
         ],
         "expected_topic_ids": [
-          "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+          "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+          "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
         ],
-        "routing_mode": "SINGLE_TOPIC",
-        "evidence_scope": "TOPIC_ONLY",
-        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "routing_mode": "MULTI_TOPIC",
+        "evidence_scope": "MULTI_TOPIC",
+        "fact_cap_behavior": "NOT_APPLICABLE",
         "critical_fact_expectation": "NO_CRITICAL_ERROR",
         "fatal_logic_expectation": "NO_FATAL",
         "originality_scope": {
@@ -221,7 +223,7 @@
       "answer_level": "HIGH",
       "topic_id_basis": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
       "question": "운전 중 공압식 제어밸브가 닫힘 지령을 받았지만 높은 차압 조건에서 완전 닫힘에 실패하고 동작 중 스템 마찰에 의한 불연속적인 움직임도 관찰되었다. 가능한 원인을 진단하고, 확인 절차와 원인별 대책, 조치 후 검증 및 재발 방지 방법을 설명하시오.",
-      "answer": "진단은 현상 재현, 원인 분리, 대책 적용, 동일 조건 재검증의 순서로 수행한다. 첫째, 닫힘 실패가 차압 증가와 함께 심해지는지 확인하고 밸브 트림에 작용하는 불평형력과 액추에이터의 가용 구동력 여유를 비교한다. 공급압, 포지셔너 출력, 스템 변위도 함께 기록하여 명령은 정상인데 스템이 목표 위치에 도달하지 못하는지 구분한다. 둘째, 정·역 스트로크에서 같은 명령에 대한 스템 응답의 차이와 불연속 움직임을 확인해 패킹, 가이드 또는 스템 계통의 마찰·스틱션을 분리한다. 필요하면 정비 전후 동일 시험으로 마찰 영향의 변화를 비교한다. 셋째, 구동력 여유가 부족하면 실제 최대 차압과 fail-safe 방향을 기준으로 액추에이터 및 스프링 조건을 재검토하고, 마찰이 과도하면 패킹 조정과 기계적 정비를 수행한다. 마지막으로 최대 운전 차압에서 전 스트로크, 완전 닫힘, fail-safe 동작을 재시험하고 결과를 기준값으로 기록한다. 이후 공급압·포지셔너·스템 응답 추세와 마찰 징후를 정기 점검하여 같은 고장의 재발 여부를 관리한다.",
+      "answer": "1. 진단 폐루프\n본 고장은 ‘고차압에서 요구추력 증가’와 ‘패킹·가이드의 breakaway friction 증가’를 독립 가설로 두고 현상 재현→힘 평형→마찰 진단→원인별 조치→동일조건 검증 순으로 접근한다. 최대·최소 차압, 유동방향, 공급압, 포지셔너 출력, 액추에이터 압력과 실제 스템 위치를 동시 trend하여 명령계통과 기계·유체 부하를 분리한다.\n\n2. 힘 평형과 닫힘 실패\n가동부 자유물체도와 스템 축을 정하고 압력은 젖은 면에 수직으로 작용한다고 보아 축방향 압력합력을 Fp=∫p·nx·dA로 해석한다. Fu≈ΔP·Aeff는 단순 unbalanced trim의 특정 차단조건에서만 쓰는 근사이며 Aeff는 포트면적이 아니라 스템·balance seal을 포함한 압력경계와 형상으로 정한다. Pressure-Tends-to-Open/Close는 순 압력력이 시트에서 이탈시키는지 시트로 미는지로 판정한다.\n공압 액추에이터 힘은 Fair=Pa·Aa, 스프링은 Fs(x)=Fpreload+kx이다. 닫힘 요구력에는 불평형력, 실제 이동방향 반대의 패킹·가이드 마찰, 접촉 후 차단등급 확보를 위한 seat load를 포함한다. Bench set은 무부하 기준범위이므로 실제 operating range를 대신하지 않는다. 제조사 thrust curve와 최소 공급압으로 최대 차압·최악 스트로크의 margin을 확인한다.\n\n3. Stiction과 동적 힘\n패킹 마찰은 씰 접촉의 조임·압력·온도·윤활 영향을 받고, 가이드 마찰은 편심·스템 휨·마모·이물질과 측면하중의 영향을 받는다. 정·역방향 작은 step에서 압력은 증가하지만 스템이 정지하다 급이동하면 breakaway>running friction에 의한 stiction을 의심한다. 열린 상태에서만 힘이 달라지면 압력분포와 운동량 변화에 의한 동적 유체력도 분리한다.\n\n4. 대책\n추력 부족이면 최대·최소 차압, seat load, friction, spring 위치와 공급압을 조합해 액추에이터를 재선정하고 스프링 예압과 spring rate 변경을 구분한다. 패킹은 허용 누설범위 내 조정·교체, 가이드는 정렬·간극·마모·이물질 정비로 대응한다. Balanced trim은 요구추력을 줄이지만 residual unbalance, seal 마찰·마모, 누설등급과 유체 청정도 trade-off를 함께 평가한다.\n\n5. 검증·재발 방지\n정비 전과 같은 최대 차압에서 전 스트로크, 작은 step, 정·역방향 deadband, 완전 닫힘과 seat leakage를 재시험하고 압력-변위 관계를 비교한다. 공기상실 시 fail-safe 위치도 실제 부하에서 확인한다. 공급압·포지셔너 출력·액추에이터 압력·스템 위치·차압의 정상 signature를 기준선으로 저장하고 stiction 추세를 정기진단에 사용한다. 반복 이상은 패킹·가이드 정비주기, 오염관리, actuator margin과 trim 선정조건에 환류한다.",
       "expected": {
         "question_demands": [
           {
@@ -246,11 +248,12 @@
           }
         ],
         "expected_topic_ids": [
-          "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+          "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+          "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
         ],
-        "routing_mode": "SINGLE_TOPIC",
-        "evidence_scope": "TOPIC_ONLY",
-        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "routing_mode": "MULTI_TOPIC",
+        "evidence_scope": "MULTI_TOPIC",
+        "fact_cap_behavior": "NOT_APPLICABLE",
         "critical_fact_expectation": "NO_CRITICAL_ERROR",
         "fatal_logic_expectation": "NO_FATAL",
         "originality_scope": {

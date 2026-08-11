@@ -129,12 +129,16 @@ echo "===== router / coverage / Hybrid-Multi release regressions ====="
   python3 scripts/test_multi_topic_grading_phase10_integration.py
   python3 scripts/test_multi_topic_question_contract_hash_repair.py
   python3 scripts/test_question_demand_shadow.py
+  python3 scripts/test_question_demand_evidence_shadow.py
   python3 scripts/test_semantic_router_default_transport.py
   python3 scripts/test_semantic_router_gemini_transport.py
   python3 scripts/test_semantic_router_general_mode_contract.py
   python3 scripts/test_semantic_router_shadow.py
 )
 echo "RELEASE_ROUTER_HYBRID_MULTI_COVERAGE_TESTS=PASS"
+
+echo "----- host regression: question-only routing candidates -----"
+PYTHONPATH=. python3 -B scripts/test_question_only_routing_candidates.py
 
 echo "===== release test coverage validation ====="
 python3 scripts/validate_release_test_coverage.py

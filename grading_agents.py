@@ -41,7 +41,6 @@ DEFAULT_RATERS = [
 ]
 
 
-
 def default_common_criteria():
     return [
         {
@@ -455,7 +454,6 @@ def extract_json(text):
             return parsed
 
     return None
-
 
 
 def write_json(path, data):
@@ -943,7 +941,6 @@ def build_grade(analysis, rubric, sid, question_analysis, evidence, raters):
     }
 
 
-
 def flatten_text_values(value, limit=40):
     result = []
 
@@ -1259,6 +1256,17 @@ def ensure_rater_scores(analysis, rubric, raters, raw_text):
 
     return analysis
 
+
+# BEGIN QTYPE_PREPHASE4_CALIBRATION_V3
+def _apply_prephase4_scoring_calibration_contract(prompt: str) -> str:
+    """General question-agnostic calibration before primary grading."""
+    contract = "[SCORING CALIBRATION CONTRACT]\nApply the rubric only to the explicit question demands and applicable scoring policy.\nUse each layer's full 0-to-max range as an evidence scale; do not compress materially\ndifferent answers into the same middle band.\n\nFor each applicable layer:\n- distinguish missing, partial, mostly complete, and complete support;\n- reward technically connected explanation: claim -> reason/mechanism -> consequence,\n  or selection/action -> technical basis;\n- judge correctness and demand coverage, not keyword count or answer length;\n- allow the upper range when the explicit demands are accurately and coherently met;\n- do not reserve high scores for extra unasked field application, cost-benefit,\n  recommendations, or implementation detail;\n- keep missing support visible in its own layer instead of compensating elsewhere.\n\nEvery enabled rater must return numeric scores for every rubric item it owns using\nthe requested rater score schema. Do not omit rater scores.\n[/SCORING CALIBRATION CONTRACT]"
+    base = prompt if isinstance(prompt, str) else str(prompt or "")
+    if "[SCORING CALIBRATION CONTRACT]" in base:
+        return base
+    return base.rstrip() + "\n\n" + contract + "\n"
+# END QTYPE_PREPHASE4_CALIBRATION_V3
+
 def _legacy_run_agent_pipeline(call_ollama_fn, raw_text, rubric, sid, image_count, session_dir, progress_fn=None):
     session_dir = Path(session_dir)
     # Phase 1: load active grading configuration and save snapshots.
@@ -1294,6 +1302,7 @@ def _legacy_run_agent_pipeline(call_ollama_fn, raw_text, rubric, sid, image_coun
     progress("2/4 문제 분석, 3/4 답안 근거 추출, 4/4 채점자별 채점을 수행합니다.")
 
     prompt = build_prompt(raw_text, rubric, sid, image_count, raters, common_criteria)
+    prompt = _apply_prephase4_scoring_calibration_contract(prompt)
 
     (session_dir / "question_analysis_prompt.txt").write_text(prompt, encoding="utf-8")
     (session_dir / "evidence_prompt.txt").write_text(prompt, encoding="utf-8")
@@ -1408,7 +1417,7 @@ def _phase2_score_ratio_by_terms(text, strong_terms, weak_terms=None):
     return min(score, 1.0), strong, weak
 
 
-def _phase2_layer_scores(text, scoring_model):
+def _phase2_layer_scores_legacy_heuristic(text, scoring_model):
     layers = scoring_model.get("layers", [])
     layer_by_id = {x.get("id"): x for x in layers}
 
@@ -1475,6 +1484,36 @@ def _phase2_layer_scores(text, scoring_model):
         })
 
     return result
+
+# BEGIN QTYPE_NUMERIC_NEUTRAL_EVIDENCE_V2
+def _phase2_layer_scores(text, scoring_model):
+    # Answer-independent neutral midpoint prior for A/B/C/D/E.
+    template = _phase2_layer_scores_legacy_heuristic(text, scoring_model)
+    layer_max = {"A": 3.0, "B": 6.0, "C": 8.0, "D": 6.0, "E": 2.0}
+    out = []
+    seen = set()
+    for row in template:
+        if not isinstance(row, dict):
+            out.append(row)
+            continue
+        new_row = dict(row)
+        layer_id = str(
+            new_row.get("layer_id")
+            or new_row.get("layer")
+            or new_row.get("id")
+            or ""
+        ).upper()
+        if layer_id in layer_max:
+            new_row["score"] = layer_max[layer_id] * 0.5
+            seen.add(layer_id)
+        out.append(new_row)
+    if seen != set(layer_max):
+        raise RuntimeError(
+            "neutral layer baseline schema mismatch: "
+            + ",".join(sorted(seen))
+        )
+    return out
+# END QTYPE_NUMERIC_NEUTRAL_EVIDENCE_V2
 
 
 # PLAN_C_TOPIC_AWARE_FACT_CAP_POLICY_V1
@@ -2225,8 +2264,6 @@ def _phase2_make_rater_results(total_score, max_score, raters):
     return results
 
 
-
-
 def _phase2_add_display_aliases(grade):
     """
     bot.py의 기존 format_result가 기대하는 여러 key 이름을 함께 채워준다.
@@ -2331,8 +2368,10 @@ def _phase3_find_terms(text, terms):
     return found
 
 
-
-def _phase3_load_fact_anchor_bank(subject_rubric=None):
+def _phase3_load_fact_anchor_bank(
+    subject_rubric=None,
+    force_generated=False,
+):
     """Load a merged Fact Bank according to RUBRIC_BANK_MODE.
 
     Generated Topic Packs override legacy topics with the same topic_id while
@@ -2413,7 +2452,7 @@ def _phase3_load_fact_anchor_bank(subject_rubric=None):
         .lower()
     )
 
-    if mode != "generated":
+    if mode != "generated" and not force_generated:
         return legacy_bank
 
     generated_bank = read_bank(
@@ -2490,7 +2529,6 @@ def _phase3_anchor_term_matches(text, terms):
     return hits
 
 
-
 def _phase3_priority_value(value):
     """
     Fact Anchor topic priority를 정렬용 숫자로 변환한다.
@@ -2533,15 +2571,164 @@ def _phase3_priority_value(value):
         return 0.0
 
 
+# PHASE3_QUESTION_ONLY_ROUTING_SET_V2
+def _phase3_load_question_only_routing_contract(session_dir):
+    # Consume only the already-computed question-only Topic Router v2 result.
+    # This helper never routes, scores, or inspects the student answer.
+    try:
+        contract_path = Path(session_dir) / "semantic_router_shadow.json"
+        if not contract_path.exists():
+            return None
+
+        payload = json.loads(contract_path.read_text(encoding="utf-8"))
+        if not isinstance(payload, dict):
+            return None
+
+        mode = str(payload.get("routing_mode") or "").strip().upper()
+        if mode not in {"SINGLE_TOPIC", "MULTI_TOPIC"}:
+            return None
+
+        raw_ids = payload.get("primary_topic_ids")
+        if not isinstance(raw_ids, list):
+            return None
+
+        topic_ids = []
+        for value in raw_ids:
+            if not isinstance(value, str):
+                continue
+            topic_id = value.strip()
+            if topic_id and topic_id not in topic_ids:
+                topic_ids.append(topic_id)
+
+        if mode == "SINGLE_TOPIC" and len(topic_ids) != 1:
+            return None
+        if mode == "MULTI_TOPIC" and len(topic_ids) < 2:
+            return None
+
+        return {
+            "routing_mode": mode,
+            "primary_topic_ids": topic_ids,
+            "source": "semantic_router_shadow.json",
+            "routing_effect": "consume_existing_question_only_result",
+        }
+    except Exception:
+        return None
 def _phase3_select_fact_anchors_from_bank(
     question_text,
     answer_text,
     subject_rubric=None,
+    routing_contract=None,
 ):
+    force_generated_bank = (
+        isinstance(routing_contract, dict)
+        and str(
+            routing_contract.get("routing_mode") or ""
+        ).strip().upper() in {"SINGLE_TOPIC", "MULTI_TOPIC"}
+        and isinstance(
+            routing_contract.get("primary_topic_ids"),
+            list,
+        )
+        and bool(routing_contract.get("primary_topic_ids"))
+    )
     bank = _phase3_load_fact_anchor_bank(
-        subject_rubric
+        subject_rubric,
+        force_generated=force_generated_bank,
     )
     topics = bank.get("topics", [])
+    force_routed_topic = False
+    routed_mode = None
+    routed_topic_ids = []
+
+    if isinstance(routing_contract, dict):
+        routed_mode = str(
+            routing_contract.get("routing_mode") or ""
+        ).strip().upper()
+
+        raw_routed_ids = routing_contract.get("primary_topic_ids")
+        if isinstance(raw_routed_ids, list):
+            for value in raw_routed_ids:
+                if not isinstance(value, str):
+                    continue
+                topic_id = value.strip()
+                if topic_id and topic_id not in routed_topic_ids:
+                    routed_topic_ids.append(topic_id)
+
+    if (
+        routed_mode in {"SINGLE_TOPIC", "MULTI_TOPIC"}
+        and routed_topic_ids
+    ):
+        topic_by_id = {
+            str(topic.get("topic_id") or "").strip(): topic
+            for topic in topics
+            if isinstance(topic, dict)
+            and str(topic.get("topic_id") or "").strip()
+        }
+
+        missing_topic_ids = [
+            topic_id
+            for topic_id in routed_topic_ids
+            if topic_id not in topic_by_id
+        ]
+        if missing_topic_ids:
+            return {
+                "topic_id": routed_topic_ids[0],
+                "topic_ids": list(routed_topic_ids),
+                "topic_name": "",
+                "routing_mode": routed_mode,
+                "routing_source": "question_only_routed_topic_set",
+                "status": "routed_topic_missing",
+                "missing_topic_ids": missing_topic_ids,
+                "anchors": [],
+            }
+
+        if routed_mode == "MULTI_TOPIC":
+            merged_anchors = []
+            topic_names = []
+
+            for topic_id in routed_topic_ids:
+                one = _phase3_select_fact_anchors_from_bank(
+                    question_text,
+                    answer_text,
+                    subject_rubric,
+                    routing_contract={
+                        "routing_mode": "SINGLE_TOPIC",
+                        "primary_topic_ids": [topic_id],
+                        "source": "semantic_router_shadow.json",
+                    },
+                )
+                if not isinstance(one, dict):
+                    return {
+                        "topic_id": routed_topic_ids[0],
+                        "topic_ids": list(routed_topic_ids),
+                        "topic_name": "",
+                        "routing_mode": routed_mode,
+                        "routing_source": "question_only_routed_topic_set",
+                        "status": "routed_topic_unresolved",
+                        "missing_topic_ids": [topic_id],
+                        "anchors": [],
+                    }
+
+                one_anchors = one.get("anchors")
+                if not isinstance(one_anchors, list):
+                    one_anchors = []
+                merged_anchors.extend(one_anchors)
+
+                topic_name = str(one.get("topic_name") or "").strip()
+                if topic_name and topic_name not in topic_names:
+                    topic_names.append(topic_name)
+
+            return {
+                "topic_id": routed_topic_ids[0],
+                "topic_ids": list(routed_topic_ids),
+                "topic_name": " + ".join(topic_names),
+                "routing_mode": routed_mode,
+                "routing_source": "question_only_routed_topic_set",
+                "status": "ok",
+                "anchors": merged_anchors,
+            }
+
+        topics = [topic_by_id[routed_topic_ids[0]]]
+        force_routed_topic = True
 
     question = question_text or ""
     answer = answer_text or ""
@@ -2584,11 +2771,7 @@ def _phase3_select_fact_anchors_from_bank(
             )
         )
 
-        if (
-            not question_trigger_hits
-            and not question_alias_hits
-            and not answer_trigger_hits
-        ):
+        if (not force_routed_topic) and (not question_trigger_hits and (not question_alias_hits) and (not answer_trigger_hits)):
             continue
 
         score = 0.0
@@ -2700,7 +2883,6 @@ def _phase3_select_fact_anchors(question_text, answer_text, subject_rubric=None)
     bank_selected = _phase3_select_fact_anchors_from_bank(q, a, subject_rubric)
     if bank_selected:
         return bank_selected["anchors"]
-
 
 
     # Cv_VALVE_FLOW_COEFFICIENT_ANCHORS
@@ -2830,7 +3012,6 @@ def _phase3_select_fact_anchors(question_text, answer_text, subject_rubric=None)
             "support_terms": ["현실", "우선순위", "리스크"]
         }
     ]
-
 
 
 def _phase3_score_one_anchor(answer_text, anchor):
@@ -3012,6 +3193,7 @@ def _phase3_score_one_anchor(answer_text, anchor):
 def _phase3_evaluate_fact_anchors(
     raw_text,
     subject_rubric=None,
+    routing_contract=None,
 ):
     question_text = (
         _phase3_extract_question_text(
@@ -3025,11 +3207,7 @@ def _phase3_evaluate_fact_anchors(
     )
 
     bank_selection = (
-        _phase3_select_fact_anchors_from_bank(
-            question_text,
-            answer_text,
-            subject_rubric,
-        )
+        _phase3_select_fact_anchors_from_bank(question_text, answer_text, subject_rubric, routing_contract=routing_contract)
     )
 
     if (
@@ -3220,6 +3398,44 @@ def _phase3_evaluate_fact_anchors(
                 ),
             }
 
+    if isinstance(routing_contract, dict):
+        routed_mode = str(
+            routing_contract.get("routing_mode") or ""
+        ).strip().upper()
+        routed_ids = [
+            str(value).strip()
+            for value in (
+                routing_contract.get("primary_topic_ids") or []
+            )
+            if isinstance(value, str)
+            and str(value).strip()
+        ]
+        routed_ids = list(dict.fromkeys(routed_ids))
+
+        if (
+            routed_mode in {"SINGLE_TOPIC", "MULTI_TOPIC"}
+            and routed_ids
+        ):
+            evaluation["routing_mode"] = routed_mode
+            evaluation["topic_ids"] = routed_ids
+            evaluation.setdefault("topic_routing", {})
+            if isinstance(evaluation["topic_routing"], dict):
+                evaluation["topic_routing"].update(
+                    {
+                        "question_only_routing_mode": routed_mode,
+                        "question_only_primary_topic_ids": routed_ids,
+                        "routing_contract_source": (
+                            routing_contract.get("source")
+                            or "semantic_router_shadow.json"
+                        ),
+                        "routing_identity_policy": (
+                            "consume_existing_question_only_result"
+                        ),
+                        "fact_bank_authority": (
+                            "generated_on_question_only_routed_path"
+                        ),
+                    }
+                )
     return evaluation
 
 
@@ -3289,7 +3505,6 @@ def _phase9_question_type_id(question_type_eval):
             return value.strip()
 
     return ""
-
 
 
 def _phase9_resolve_authoritative_de_question_type(
@@ -3476,9 +3691,7 @@ def _phase3_evaluate_connections(
     return projected
 
 
-
-
-def _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval):
+def _phase3_apply_fact_anchor_to_layer_scores_legacy_absolute(layer_scores, fact_eval):
     for item in layer_scores:
         if item.get("layer_id") == "C":
             item["score_before_fact_anchor"] = item.get("score")
@@ -3499,8 +3712,57 @@ def _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval):
             ]
     return layer_scores
 
+# BEGIN QTYPE_FACT_C_SEMANTIC_COMPONENT_V1
+def _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval):
+    # C is owned by direct factual components: accuracy + core_concept.
+    out = [
+        dict(row) if isinstance(row, dict) else row
+        for row in layer_scores
+    ]
+    detail = (
+        fact_eval.get("c_score_detail")
+        if isinstance(fact_eval, dict)
+        else None
+    )
+    if not isinstance(detail, dict):
+        return out
 
-def _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval):
+    accuracy = detail.get("accuracy")
+    core_concept = detail.get("core_concept")
+    numeric = (int, float)
+    if (
+        not isinstance(accuracy, numeric)
+        or isinstance(accuracy, bool)
+        or not isinstance(core_concept, numeric)
+        or isinstance(core_concept, bool)
+    ):
+        return out
+
+    c_score = max(
+        0.0,
+        min(8.0, float(accuracy) + float(core_concept)),
+    )
+    found = False
+    for row in out:
+        if not isinstance(row, dict):
+            continue
+        layer_id = str(
+            row.get("layer_id")
+            or row.get("layer")
+            or row.get("id")
+            or ""
+        ).upper()
+        if layer_id == "C":
+            row["score"] = c_score
+            found = True
+            break
+    if not found:
+        raise RuntimeError("layer C missing from factual score vector")
+    return out
+# END QTYPE_FACT_C_SEMANTIC_COMPONENT_V1
+
+
+def _phase3_apply_connection_to_layer_scores_legacy_absolute(layer_scores, connection_eval):
     for item in layer_scores:
         if item.get("layer_id") == "E":
             item["score_before_connection_eval"] = item.get("score")
@@ -3510,6 +3772,15 @@ def _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval):
                 + " / ".join(x.get("reason", "") for x in connection_eval.get("checks", []))
             )
     return layer_scores
+
+# BEGIN QTYPE_CONNECTION_SCORE_NOOP_V1
+def _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval):
+    # Connection remains diagnostic evidence; it no longer owns absolute E.
+    return [
+        dict(row) if isinstance(row, dict) else row
+        for row in layer_scores
+    ]
+# END QTYPE_CONNECTION_SCORE_NOOP_V1
 
 
 def _phase3_make_interview_followup(fact_eval, connection_eval):
@@ -4419,7 +4690,6 @@ def _phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model):
     return out
 
 
-
 # Gemini semantic grader는 기존 deterministic/fact 점수를 보완한다.
 # 점수 하향은 그대로 반영하지만, 상향은 layer별 제한을 둔다.
 _PHASE6_GEMINI_LAYER_RAISE_CAPS = {
@@ -4855,7 +5125,16 @@ def _phase2_postprocess_grade(legacy_result):
 
     layer_scores = _phase2_layer_scores(answer_text, scoring_model)
 
-    fact_eval = _phase3_evaluate_fact_anchors(input_text, subject_rubric)
+    phase3_routing_contract = (
+        _phase3_load_question_only_routing_contract(
+            session_dir
+        )
+    )
+    fact_eval = _phase3_evaluate_fact_anchors(
+        input_text,
+        subject_rubric,
+        routing_contract=phase3_routing_contract,
+    )
 
     question_type_eval = _phase9_run_question_type_lens(
         input_text=input_text,
@@ -4967,6 +5246,22 @@ def _phase2_postprocess_grade(legacy_result):
             question_contract,
         )
     )
+    # QUESTION_DEMAND_EVIDENCE_V1_SHADOW_ONLY
+    try:
+        from question_demand_evidence import (
+            write_question_demand_evidence_shadow,
+        )
+
+        write_question_demand_evidence_shadow(
+            question_text=question_text,
+            fact_evaluation=fact_eval,
+            session_dir=session_dir,
+        )
+    except Exception as qd_evidence_error:
+        print(
+            "[agent] question demand evidence shadow failed: "
+            f"{qd_evidence_error!r}"
+        )
     model_answer_ref = (
         apply_question_contract_to_model_reference(
             model_answer_ref,
@@ -5521,7 +5816,6 @@ def _phase2_postprocess_grade(legacy_result):
     return grade
 
 
-
 def _phase2_is_grade_dict(x):
     return (
         isinstance(x, dict)
@@ -5601,7 +5895,6 @@ def run_agent_pipeline(*args, **kwargs):
         print(f"[agent] phase2 postprocess failed: {e!r}")
         print(traceback.format_exc())
         return legacy_result
-
 
 
 # ============================================================
@@ -6669,8 +6962,6 @@ def _phase8_merge_originality_feedback(grade, originality_eval):
     return grade
 
 
-
-
 # ============================================================
 # PHASE8B_FINAL_CAP_ENFORCER
 # 독창성/3인 가중 합성 이후에도 답안 분량 cap을 최종 강제 적용
@@ -7112,7 +7403,6 @@ def _phase10_apply_generated_single_topic_overrides(
     return question_type_eval, fact_eval
 
 
-
 def _phase10_run_semantic_router_shadow(
     question_text,
     question_demand_result,
@@ -7394,13 +7684,30 @@ def _phase10_run_model_answer_reference(
 
         # Stage 3 Router v2 semantic adjudication shadow.
         # Legacy Rule Router remains authoritative.
+        # Semantic Router candidates are derived from the question
+        # and Question Demand only.  The legacy reference result
+        # remains downstream for grading compatibility, not routing.
+        from semantic_router_shadow import (
+            build_question_demand_aware_rule_candidates,
+        )
+
+        semantic_rule_result = (
+            build_question_demand_aware_rule_candidates(
+                question_text=question_text,
+                question_demand_result=(
+                    question_demand_shadow_result
+                ),
+                bank=bank,
+            )
+        )
+
         try:
             semantic_router_shadow_result = _phase10_run_semantic_router_shadow(
                 question_text=question_text,
                 question_demand_result=(
                     question_demand_shadow_result
                 ),
-                rule_result=result,
+                rule_result=semantic_rule_result,
                 session_dir=session_dir,
             )
         except Exception as semantic_shadow_error:
@@ -7455,7 +7762,7 @@ def _phase10_run_model_answer_reference(
             multi_topic_shadow_candidates = (
                 augment_rule_candidates_for_shadow(
                     question_text=question_text,
-                    rule_result=result,
+                    rule_result=semantic_rule_result,
                 )
             )
             multi_topic_generated_sources = (
@@ -7501,7 +7808,7 @@ def _phase10_run_model_answer_reference(
             hybrid_general_shadow_candidates = (
                 augment_rule_candidates_for_shadow(
                     question_text=question_text,
-                    rule_result=result,
+                    rule_result=semantic_rule_result,
                 )
             )
             hybrid_general_sources = (
@@ -7539,7 +7846,7 @@ def _phase10_run_model_answer_reference(
             shadow_candidate_result = (
                 augment_rule_candidates_for_shadow(
                     question_text=question_text,
-                    rule_result=result,
+                    rule_result=semantic_rule_result,
                 )
             )
             return build_assisted_model_answer_reference(
@@ -7659,7 +7966,6 @@ def _phase10_merge_model_answer_feedback(grade, model_answer_ref):
 # PHASE11_DISPLAY_LABEL_NORMALIZER
 # 과거 '문제점' 중심 layer 명칭을 최종 표시에서 정규화
 # ============================================================
-
 
 
 def _phase9_question_has_explicit_field_extension(
@@ -8384,7 +8690,6 @@ def _phase11_normalize_requirement_fact_labels(grade):
                         row[key] = fix_text(row.get(key))
 
     return grade
-
 
 
 # ============================================================

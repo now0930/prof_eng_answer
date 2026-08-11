@@ -75,7 +75,7 @@
           "min": 35.0,
           "max": 55.0
         },
-        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "fact_cap_behavior": "CAP_EXPECTED",
         "critical_fact_expectation": "NO_CRITICAL_ERROR",
         "fatal_logic_expectation": "NO_FATAL",
         "originality_scope": {
@@ -115,7 +115,7 @@
       "answer_level": "PASS",
       "topic_id_basis": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
       "question": "가스 위험장소 Zone 0·1·2의 의미와 요구 보호수준을 비교하고, Zone 1에 설치할 계측기기를 선정할 때 확인해야 할 기준을 설명하시오.",
-      "answer": "가스 위험장소는 폭발성 가스 분위기의 존재 빈도와 지속시간에 따라 Zone 0, Zone 1, Zone 2로 구분하며 숫자가 작을수록 더 높은 보호수준이 요구된다. 일반적인 EPL 기준으로 Zone 0은 Ga, Zone 1은 Ga 또는 Gb, Zone 2는 Ga·Gb 또는 Gc를 적용할 수 있다. 따라서 Zone 1에서는 최소 Gb 수준을 만족하는 인증 기기를 후보로 삼되, Zone 번호만으로 선정하지 않고 가스 그룹, 온도등급, 인증서의 사용조건과 실제 설치조건, 배선 및 회로 적합성을 함께 확인해야 한다. 본질안전 회로를 적용하는 경우에는 현장기기와 associated apparatus를 하나의 회로로 보고 인증 및 회로 적합성을 확인한 뒤 선정한다.",
+      "answer": "1. 선정의 관점\n가스 위험장소의 방폭기기 선정은 Zone 번호 하나로 끝나지 않는다. 먼저 폭발성 가스 분위기의 존재 빈도와 지속시간으로 Zone을 정하고, 그 결과를 필요한 EPL과 실제 기기의 Ex 표시·가스그룹·온도조건·설치조건으로 연결해야 한다.\n\n2. Zone 0·1·2와 보호수준\nZone 0은 폭발성 가스 분위기가 연속적·장시간 또는 빈번하게 존재할 수 있는 장소, Zone 1은 정상운전 중 주기적 또는 때때로 존재할 수 있는 장소, Zone 2는 정상운전 중에는 일반적으로 존재하지 않고 발생해도 짧은 시간인 장소이다. 일반적인 EPL 대응은 Zone 0에 Ga, Zone 1에 Ga 또는 Gb, Zone 2에 Ga·Gb 또는 Gc이다. 따라서 Zone 1 기기는 최소 Gb 수준을 만족하는 후보에서 검토한다.\n\n3. Zone 1 기기 확인 항목\n기기의 Ex marking에서 EPL만 보지 않고 가스그룹, 온도등급, 주위온도 범위, 인증서 번호와 Special Conditions를 실제 공정조건과 대조한다. 가스그룹은 현장 가스와 인증 그룹의 호환성을 확인하고, 온도등급은 기기의 최대 표면온도가 점화위험을 만들지 않도록 선정한다. 방폭 인증과 IP·부식·진동·침수 등의 환경 적합성은 별도 항목으로 확인한다. Cable gland, 단자, 설치방향처럼 인증서가 제한하는 조건도 시공에 반영한다.\n\n4. 보호방식과 본질안전 회로\nEx d는 내부 폭발압력을 견디고 화염이 외부로 전파되지 않도록 하는 방식이고, Ex e는 아크·스파크와 과도한 온도 발생 가능성을 낮추도록 절연·간격·접속을 강화하는 방식이다. Ex i는 정상상태와 규정된 고장조건에서 전기·열 에너지를 점화에너지 이하로 제한한다. Ex i를 쓰면 현장기기만 인증되었다고 루프 전체가 적합한 것은 아니다. Associated apparatus의 Uo, Io, Po가 현장기기의 Ui, Ii, Pi를 넘지 않도록 Uo≤Ui, Io≤Ii, Po≤Pi를 확인하고, 케이블을 포함한 C·L이 허용 Co·Lo 범위 안인지 확인한다.\n\n5. 결론\nZone 1 선정은 Zone→EPL→Ex 표시→가스·온도·주위환경→인증·설치조건→필요 시 본질안전 회로 적합성 순으로 판단한다. 이 절차를 지켜야 인증된 기기가 실제 설치상태에서도 요구 보호수준을 유지할 수 있다.",
       "expected": {
         "question_demands": [
           {
@@ -180,7 +180,7 @@
           "min": 72.0,
           "max": 86.0
         },
-        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "fact_cap_behavior": "NOT_APPLICABLE",
         "critical_fact_expectation": "NO_CRITICAL_ERROR",
         "fatal_logic_expectation": "NO_FATAL",
         "originality_scope": {
@@ -222,7 +222,7 @@
       "answer_level": "HIGH",
       "topic_id_basis": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
       "question": "계측제어 시스템에서 Fieldbus, Industrial Ethernet, 산업용 무선 통신을 비교하고, 기존 설비와 신규 설비가 혼재한 공장에서 통신방식을 선정하는 기준을 제시하시오.",
-      "answer": "통신방식은 속도 하나로 선정하지 않고 데이터 종류와 방향, 갱신주기, 장치 수, 거리, 설치환경, 가용성, 진단성, 상호운용성, 유지보수성과 수명주기 요구를 먼저 정의해야 한다. Fieldbus는 현장기기 연결과 진단을 통합하는 데 강점이 있고 기존 설치기반과의 호환성이 중요하다. Industrial Ethernet은 높은 대역폭과 제어·상위 시스템 연계를 제공하지만 EtherNet/IP, PROFINET, EtherCAT 등은 같은 Ethernet 물리매체를 사용해도 상위 프로토콜과 프로파일이 달라 직접 상호운용된다고 볼 수 없다. 산업용 무선은 케이블 설치가 어렵거나 이동·회전 설비, 상태감시 등에 유리하지만 전파환경, 지연·갱신주기, 가용성과 보안을 검토해야 한다. 따라서 기존 설비와 신규 설비가 혼재한 공장에서는 physical layer, protocol, profile, information model을 계층별로 확인하고 Gateway 필요성과 데이터 의미의 호환성까지 평가한다. 최종 선정은 기능 적합성뿐 아니라 기존 installed base, 진단도구, 공급자 지원, 교육, 예비품, 라이선스, 확장성 및 총수명주기비용을 함께 비교하여 결정한다.",
+      "answer": "1. 선정 프레임\nFieldbus, Industrial Ethernet, 산업용 무선은 속도 하나로 우열을 정하지 않는다. 데이터 종류·방향·갱신주기, 장치 수, 거리, 가용성, 진단성, 설치환경, 기존 설비와 수명주기 요구를 먼저 정의하고 물리매체→protocol→device profile→information model의 계층으로 비교한다. 같은 Ethernet 매체라도 상위 계층이 다르면 직접 상호운용되는 것은 아니다.\n\n2. 방식별 특성\nFieldbus는 현장기기의 측정값·명령·상태·진단과 장치구성 통합에 강점이 있다. HART는 4–20 mA 위에 디지털 통신을 중첩해 기존 신호를 유지하면서 설정·진단정보를 활용한다. FOUNDATION Fieldbus는 function block과 장치진단을 통합하며, PROFIBUS PA는 PA profile과 DP/PA coupling 조건을 확인한다.\nIndustrial Ethernet은 높은 대역폭과 제어기·상위시스템 통합에 유리하지만 구현별 조건이 다르다. EtherNet/IP는 CIP·EDS, PROFINET은 profile·GSDML, EtherCAT은 master·process data mapping·ESI를 확인한다. OPC UA는 information model 기반 정보통합에 강하지만 모든 field I/O bus나 정량적 실시간 제어를 자동 대체하지 않는다.\n산업용 무선은 포설곤란·이동설비·상태감시에 유리하다. WirelessHART와 ISA100.11a는 device, gateway, manager와 host integration을 확인하고 site survey로 차폐·반사·간섭·공존채널을 검증한다.\n\n3. 물리계층과 상호운용성\nCopper는 EMI, 접지전위차, 피뢰와 거리를 관리해야 하고, fiber는 EMI·접지전위차와 장거리에 유리하지만 광모듈과 connector 관리를 고려한다. Gateway는 frame 변환만 하는 장치가 아니다. Address, data type, unit, scale, quality, timestamp, diagnostics, timeout와 command semantics를 명시적으로 mapping해야 한다. Conformance 인증이 있어도 실제 host-device 조합의 behavior와 engineering integration까지 자동 보장되지는 않으므로 interoperability test가 필요하다.\n\n4. Brownfield 선정\n기존 PLC·DCS·계기·gateway의 firmware, profile, engineering tool, EDS/GSDML/ESI/DD와 license를 조사해 compatibility matrix를 만든다. 신규 기능, installed base 잔존수명, shutdown 허용시간, 예비품, 교육과 공급자 지원을 비교하여 전체 교체와 gateway 기반 단계전환을 판단한다. Commissioning은 physical 확인→address/name→parameter/profile→정상통신→fault·diagnostics→문서화 순으로 수행한다.\n\n5. 결론\n최종안은 기능 적합성, 상호운용성, 설치환경, 가용성, 진단, 공급자 지원, 교육, 예비품, 라이선스, 확장성, shutdown risk와 총수명주기비용을 가중평가한다. Brownfield 통신 선정은 매체 속도가 아니라 계층별 호환성, 전환 가능성과 생애주기를 연결한 다기준 의사결정이어야 한다.",
       "expected": {
         "question_demands": [
           {
@@ -293,7 +293,7 @@
           "min": 90.0,
           "max": 100.0
         },
-        "fact_cap_behavior": "NO_CAP_EXPECTED",
+        "fact_cap_behavior": "NOT_APPLICABLE",
         "critical_fact_expectation": "NO_CRITICAL_ERROR",
         "fatal_logic_expectation": "NO_FATAL",
         "originality_scope": {

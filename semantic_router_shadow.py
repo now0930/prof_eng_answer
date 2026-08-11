@@ -411,6 +411,503 @@ def _shadow_recall_signal_score(
     )
 
 
+
+def _shadow_recall_signal_score_for_demand(
+    question_text: str,
+    signals: list[str],
+    *,
+    term_document_frequency: dict[str, int],
+    topic_count: int,
+) -> tuple[int, list[str], dict[str, Any]]:
+    # Demand-aware recall keeps the global scorer unchanged.
+    # A low-DF exact multi-term phrase can establish specificity
+    # even when Korean component terms are each only two characters.
+    question_compact = _shadow_recall_question_compact(question_text)
+
+    matched_terms: set[str] = set()
+    strong_phrase_hits: list[str] = []
+    discriminative_strong_phrases: list[str] = []
+
+    df_cap = max(
+        2,
+        min(
+            6,
+            max(1, int(topic_count)) // 12,
+        ),
+    )
+
+    for signal in signals:
+        signal_terms = _shadow_recall_terms(signal)
+        signal_compact = _shadow_recall_question_compact(signal)
+
+        exact_strong_phrase = (
+            len(signal_terms) >= 2
+            and len(signal_compact) >= 4
+            and signal_compact in question_compact
+        )
+
+        if exact_strong_phrase:
+            strong_phrase_hits.append(signal)
+
+        for term in signal_terms:
+            if term in question_compact:
+                matched_terms.add(term)
+
+        if exact_strong_phrase:
+            unique_terms = set(signal_terms)
+            if (
+                len(unique_terms) >= 2
+                and all(
+                    term_document_frequency.get(
+                        term,
+                        topic_count,
+                    )
+                    <= df_cap
+                    for term in unique_terms
+                )
+            ):
+                discriminative_strong_phrases.append(signal)
+
+    discriminative_terms = {
+        term
+        for term in matched_terms
+        if term_document_frequency.get(
+            term,
+            topic_count,
+        )
+        <= df_cap
+    }
+    distinctive_terms = {
+        term
+        for term in discriminative_terms
+        if (
+            len(term) >= 3
+            or (
+                term.isascii()
+                and len(term) >= 2
+            )
+        )
+    }
+
+    specificity_ok = bool(
+        distinctive_terms
+        or discriminative_strong_phrases
+    )
+
+    matched_sorted = sorted(
+        matched_terms,
+        key=lambda value: (-len(value), value),
+    )
+
+    metadata = {
+        "df_cap": df_cap,
+        "strong_phrase_hits": strong_phrase_hits,
+        "discriminative_strong_phrases": (
+            discriminative_strong_phrases
+        ),
+        "distinctive_terms": sorted(
+            distinctive_terms,
+            key=lambda value: (-len(value), value),
+        ),
+    }
+
+    if (
+        len(matched_terms) < 2
+        or not specificity_ok
+    ):
+        return 0, matched_sorted, metadata
+
+    score = (
+        len(matched_terms) * 2
+        + len(discriminative_terms) * 4
+        + len(strong_phrase_hits) * 4
+    )
+    return score, matched_sorted, metadata
+
+
+def build_question_demand_aware_rule_candidates(
+    question_text: str,
+    question_demand_result: Any,
+    *,
+    bank: Any | None = None,
+    max_candidates: int = DEFAULT_MAX_CANDIDATES,
+) -> dict[str, Any]:
+    # Routing candidates are question-only by construction.
+    # Student answer, fact_eval, grading scores, and coverage
+    # are intentionally absent from this API and result.
+    if bank is None:
+        from rubric_registry import (
+            load_model_answer_bank,
+        )
+
+        bank = load_model_answer_bank()
+
+    demands: list[dict[str, Any]] = []
+    if isinstance(question_demand_result, dict):
+        raw_demands = (
+            question_demand_result.get("demands")
+            or []
+        )
+        if isinstance(raw_demands, list):
+            demands = [
+                row
+                for row in raw_demands
+                if isinstance(row, dict)
+                and str(row.get("text") or "").strip()
+            ]
+
+    topic_entries = list(_iter_topic_entries(bank))
+    topic_signals: dict[str, list[str]] = {}
+    topic_entry_by_id: dict[str, dict[str, Any]] = {}
+    term_document_frequency: dict[str, int] = {}
+
+    for entry in topic_entries:
+        if not isinstance(entry, dict):
+            continue
+        topic_id = str(
+            entry.get("topic_id") or ""
+        ).strip()
+        if (
+            not topic_id
+            or topic_id in topic_entry_by_id
+        ):
+            continue
+
+        topic_entry_by_id[topic_id] = entry
+        signals = _collect_shadow_routing_signals(
+            entry
+        )
+        topic_signals[topic_id] = signals
+
+        topic_terms: set[str] = set()
+        for signal in signals:
+            topic_terms.update(
+                _shadow_recall_terms(signal)
+            )
+        for term in topic_terms:
+            term_document_frequency[term] = (
+                term_document_frequency.get(term, 0)
+                + 1
+            )
+
+    topic_count = max(1, len(topic_signals))
+
+    # K2_APPEAR_TOTAL:
+    # retain the top two question-only matches for each demand,
+    # then rank Topics by cross-demand appearance count first,
+    # top-K score sum second, and all-positive score sum third.
+    ownership: dict[str, dict[str, Any]] = {}
+    demand_winners: list[dict[str, Any]] = []
+
+    for index, demand in enumerate(demands, 1):
+        demand_id = str(
+            demand.get("demand_id")
+            or demand.get("id")
+            or f"D{index}"
+        ).strip()
+        demand_text = str(
+            demand.get("text") or ""
+        ).strip()
+
+        ranked: list[
+            tuple[
+                int,
+                str,
+                list[str],
+                dict[str, Any],
+            ]
+        ] = []
+
+        for topic_id, signals in topic_signals.items():
+            (
+                score,
+                matched_terms,
+                metadata,
+            ) = _shadow_recall_signal_score_for_demand(
+                demand_text,
+                signals,
+                term_document_frequency=(
+                    term_document_frequency
+                ),
+                topic_count=topic_count,
+            )
+            if score < 6:
+                continue
+            ranked.append(
+                (
+                    score,
+                    topic_id,
+                    matched_terms,
+                    metadata,
+                )
+            )
+
+        ranked.sort(
+            key=lambda row: (
+                -row[0],
+                row[1],
+            )
+        )
+
+        if not ranked:
+            demand_winners.append(
+                {
+                    "demand_id": demand_id,
+                    "topic_id": None,
+                    "score": 0,
+                    "matched_terms": [],
+                }
+            )
+            continue
+
+        for (
+            score,
+            topic_id,
+            _matched_terms,
+            _metadata,
+        ) in ranked:
+            if topic_id not in ownership:
+                ownership[topic_id] = {
+                    "owned_demand_ids": [],
+                    "appear_count": 0,
+                    "topk_score_sum": 0,
+                    "all_score_sum": 0,
+                    "matched_terms": set(),
+                }
+            ownership[topic_id]["all_score_sum"] += int(
+                score
+            )
+
+        for (
+            score,
+            topic_id,
+            matched_terms,
+            _metadata,
+        ) in ranked[:2]:
+            owner = ownership[topic_id]
+            owner["appear_count"] += 1
+            owner["topk_score_sum"] += int(score)
+            owner["owned_demand_ids"].append(
+                demand_id
+            )
+            owner["matched_terms"].update(
+                matched_terms
+            )
+
+        (
+            score,
+            topic_id,
+            matched_terms,
+            metadata,
+        ) = ranked[0]
+
+        demand_winners.append(
+            {
+                "demand_id": demand_id,
+                "topic_id": topic_id,
+                "score": int(score),
+                "matched_terms": matched_terms,
+                "strong_phrase_hits": (
+                    metadata.get(
+                        "strong_phrase_hits"
+                    )
+                    or []
+                ),
+                "discriminative_strong_phrases": (
+                    metadata.get(
+                        "discriminative_strong_phrases"
+                    )
+                    or []
+                ),
+            }
+        )
+
+    ranked_owners = sorted(
+        (
+            (topic_id, owner)
+            for topic_id, owner in ownership.items()
+            if int(owner["appear_count"]) > 0
+        ),
+        key=lambda row: (
+            -int(row[1]["appear_count"]),
+            -int(row[1]["topk_score_sum"]),
+            -int(row[1]["all_score_sum"]),
+            row[0],
+        ),
+    )
+
+    candidate_rows: list[dict[str, Any]] = []
+    candidate_limit = min(
+        2,
+        max(0, int(max_candidates)),
+    )
+
+    for topic_id, owner in ranked_owners[
+        :candidate_limit
+    ]:
+        entry = topic_entry_by_id[topic_id]
+
+        candidate_rows.append(
+            {
+                "answer": {
+                    "topic_id": topic_id,
+                    "id": entry.get("id"),
+                    "title": str(
+                        entry.get("title")
+                        or entry.get("display_name")
+                        or entry.get("title_ko")
+                        or entry.get("name")
+                        or topic_id
+                    ),
+                },
+                "score": int(
+                    owner["topk_score_sum"]
+                ),
+                "question_score": int(
+                    owner["topk_score_sum"]
+                ),
+                "fact_score": 0,
+                "answer_score": 0,
+                "match_reasons": [
+                    (
+                        "question-demand-aware K2 aggregate "
+                        "candidate for demands: "
+                        + ", ".join(
+                            owner[
+                                "owned_demand_ids"
+                            ]
+                        )
+                    )
+                ],
+                "question_demand_aware": True,
+                "owned_demand_ids": list(
+                    owner["owned_demand_ids"]
+                ),
+                "matched_terms": sorted(
+                    owner["matched_terms"],
+                    key=lambda value: (
+                        -len(value),
+                        value,
+                    ),
+                ),
+            }
+        )
+
+    if not candidate_rows:
+        # QD can be disabled or unavailable. Preserve routing
+        # compatibility without reintroducing student-answer or
+        # fact-eval signals:
+        #   1) neutral legacy rule match (question only),
+        #   2) existing question-only shadow recall augmentation,
+        #   3) freeze the resulting candidate catalog as authoritative.
+        from model_answer_router import (
+            find_model_answer_reference,
+        )
+
+        neutral = find_model_answer_reference(
+            question_text=question_text,
+            answer_text="",
+            question_type_eval={},
+            fact_eval={},
+            bank=bank,
+        )
+        if not isinstance(neutral, dict):
+            neutral = {
+                "version": (
+                    "question_only_neutral_rule_fallback"
+                ),
+                "routing_status": "no_match",
+                "matched": False,
+                "candidates": [],
+            }
+
+        neutral = dict(neutral)
+        isolated_rule_candidates: list[dict[str, Any]] = []
+        for candidate in list(
+            neutral.get("candidates") or []
+        ):
+            if not isinstance(candidate, dict):
+                continue
+            isolated = dict(candidate)
+            isolated["fact_score"] = 0
+            isolated["answer_score"] = 0
+            isolated_rule_candidates.append(isolated)
+
+        neutral["candidates"] = isolated_rule_candidates
+        neutral["question_only"] = True
+        neutral["student_answer_used"] = False
+        neutral["fact_eval_used"] = False
+
+        augmented = augment_rule_candidates_for_shadow(
+            question_text=question_text,
+            rule_result=neutral,
+            bank=bank,
+            max_candidates=max_candidates,
+        )
+        augmented = dict(augmented)
+
+        isolated_candidates: list[dict[str, Any]] = []
+        for candidate in list(
+            augmented.get("candidates") or []
+        ):
+            if not isinstance(candidate, dict):
+                continue
+            isolated = dict(candidate)
+            isolated["fact_score"] = 0
+            isolated["answer_score"] = 0
+            isolated_candidates.append(isolated)
+            if len(isolated_candidates) >= int(max_candidates):
+                break
+
+        augmented["candidates"] = isolated_candidates
+        augmented[
+            "question_demand_aware_authoritative"
+        ] = True
+        augmented["question_only"] = True
+        augmented["student_answer_used"] = False
+        augmented["fact_eval_used"] = False
+        augmented[
+            "question_demand_aware_candidate_result"
+        ] = {
+            "enabled": True,
+            "strategy": (
+                "neutral_question_only_rule_plus_augment_fallback"
+            ),
+            "candidate_count": len(
+                isolated_candidates
+            ),
+            "student_answer_used": False,
+            "fact_eval_used": False,
+            "demand_winners": demand_winners,
+        }
+        return augmented
+
+    return {
+        "version": (
+            "question_demand_aware_candidates_v1"
+        ),
+        "routing_status": (
+            "question_demand_aware_candidates"
+        ),
+        "matched": bool(candidate_rows),
+        "candidates": candidate_rows,
+        "question_only": True,
+        "student_answer_used": False,
+        "fact_eval_used": False,
+        "question_demand_aware_authoritative": True,
+        "question_demand_aware_candidate_result": {
+            "enabled": True,
+            "strategy": "per_demand_top2_appear_total",
+            "candidate_count": len(
+                candidate_rows
+            ),
+            "student_answer_used": False,
+            "fact_eval_used": False,
+            "demand_winners": demand_winners,
+        },
+    }
+
+
 def augment_rule_candidates_for_shadow(
     question_text: str,
     rule_result: Any,
@@ -418,6 +915,46 @@ def augment_rule_candidates_for_shadow(
     bank: Any | None = None,
     max_candidates: int = DEFAULT_MAX_CANDIDATES,
 ) -> dict[str, Any]:
+    if (
+        isinstance(rule_result, dict)
+        and rule_result.get(
+            "question_demand_aware_authoritative"
+        )
+        is True
+    ):
+        shadow_result = dict(rule_result)
+        candidate_rows: list[dict[str, Any]] = []
+        seen_topic_ids: set[str] = set()
+
+        for candidate in list(
+            rule_result.get("candidates") or []
+        ):
+            if not isinstance(candidate, dict):
+                continue
+            topic_id = _candidate_topic_id(candidate)
+            if (
+                not topic_id
+                or topic_id in seen_topic_ids
+            ):
+                continue
+            seen_topic_ids.add(topic_id)
+            candidate_rows.append(candidate)
+            if len(candidate_rows) >= int(max_candidates):
+                break
+
+        shadow_result["candidates"] = candidate_rows
+        shadow_result[
+            "shadow_candidate_recall_adapter"
+        ] = {
+            "enabled": True,
+            "augmented_topic_ids": [],
+            "candidate_count": len(candidate_rows),
+            "legacy_router_mutated": False,
+            "student_answer_used": False,
+            "authoritative_question_demand_aware": True,
+        }
+        return shadow_result
+
     # Broaden candidate recall for semantic shadow only.
     # The legacy Rule Router result is copied and never mutated in-place.
     if isinstance(rule_result, dict):
