@@ -5803,7 +5803,6 @@ def _phase2_postprocess_grade(legacy_result):
         )
     )
 
-    _phase2_json_write(session_dir / "grade.json", grade)
     _phase2_json_write(session_dir / "volume_evaluation.json", volume)
     _phase2_json_write(session_dir / "fact_anchor_evaluation.json", fact_eval)
     _phase2_json_write(session_dir / "connection_evaluation.json", connection_eval)
@@ -5920,8 +5919,16 @@ def _phase2_postprocess_grade(legacy_result):
         input_text=input_text,
     )
 
-    grade = _stage7_apply_native_qd_projection_to_grade_output(grade, question_demand_evidence_for_score)
-    _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores)
+    grade = _stage7_apply_native_qd_projection_to_grade_output(
+        grade,
+        question_demand_evidence_for_score,
+    )
+    grade = _stage7_sync_terminal_bc_from_final_layer_scores(
+        grade,
+        layer_scores,
+    )
+    # STAGE8_FINAL_NATIVE_BC_PERSISTENCE_V1
+    _phase2_json_write(session_dir / "grade.json", grade)
     return grade
 
 
@@ -9930,10 +9937,14 @@ def _stage7_apply_native_qd_projection_to_grade_output(
     coverage = projection.get("coverage")
     if isinstance(coverage, (int, float)) and not isinstance(coverage, bool):
         grade["coverage"] = max(0.0, min(100.0, float(coverage)))
+    return grade
 
 def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
     # STAGE7_NATIVE_TERMINAL_BC_SERIALIZATION_SYNC_V1
-    if not isinstance(grade, dict) or not isinstance(layer_scores, dict):
+    if (
+        not isinstance(grade, dict)
+        or not isinstance(layer_scores, (dict, list))
+    ):
         return grade
 
     def numeric_score(value):
@@ -9983,9 +9994,14 @@ def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
         qd_projection = b_row.get("native_question_demand_projection_v1")
     fact_projection = c_row.get("native_fact_projection_v1")
 
+    final_layer_rows = (
+        map_rows(layer_scores)
+        if isinstance(layer_scores, list)
+        else layer_scores
+    )
     updates = {}
-    final_b = numeric_score(layer_scores.get("B"))
-    final_c = numeric_score(layer_scores.get("C"))
+    final_b = numeric_score(final_layer_rows.get("B"))
+    final_c = numeric_score(final_layer_rows.get("C"))
     if isinstance(qd_projection, dict) and final_b is not None:
         updates["B"] = final_b
     if isinstance(fact_projection, dict) and final_c is not None:
@@ -9997,7 +10013,13 @@ def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
         rows[layer]["score"] = score
 
     direct = grade.get("layer_scores")
-    if isinstance(direct, dict):
+    if isinstance(direct, list):
+        direct_rows = map_rows(direct)
+        for layer, score in updates.items():
+            row = direct_rows.get(layer)
+            if isinstance(row, dict):
+                row["score"] = score
+    elif isinstance(direct, dict):
         for layer, score in updates.items():
             current = direct.get(layer)
             if isinstance(current, dict):
@@ -10025,7 +10047,5 @@ def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
             for key in ("total_score", "weighted_total", "final_score", "score", "total"):
                 if numeric_score(weighted.get(key)) is not None:
                     weighted[key] = total
-
-    return grade
 
     return grade

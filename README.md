@@ -14,7 +14,8 @@
 - Gemini semantic grader와 CLOVA fallback
 - Ollama 기반 보조 분석과 점수 조정 지원
 - A/B/C/D/E 25점 계층형 채점
-- 교수·기술사·기업 임원 관점의 3인 채점자 가중 합성
+- A·D·E semantic 평가와 B·C native evidence projection을 결합한 하이브리드 채점
+- 교수·기술사·기업 임원 관점의 3인 평가와 진단 정보
 - 문제문만 사용하는 deterministic Question Type lens
 - Fact Anchor와 Model Answer Bank 기반 평가
 - Logic Check와 topic-specific deterministic checker
@@ -64,6 +65,37 @@ Topic Pack 개수는 `rubrics/generated/topic_pack_manifest.generated.json`을 �
 
 Question Type, Fact Anchor, Model Answer, Logic Check, deterministic checker와 Difficulty Strategy는 A/B/C/D/E 체계를 대체하지 않습니다. 이들은 평가 근거를 제공하고 최종 결과의 정합성을 보완합니다.
 
+### 2.1 하이브리드 점수 소유권
+
+A/B/C/D/E 체계는 유지하지만 최종 점수의 주된 근거는 Layer별로 다릅니다.
+
+| Layer | 최종 점수의 주된 근거 |
+|---|---|
+| A | Gemini semantic 평가: 문제 진입, 구조, 범위 통제 |
+| B | Question Demand별 충족 상태를 0~3으로 평가한 native projection |
+| C | Question Demand에 연결된 Fact Anchor의 정확성·연결 상태를 0~3으로 평가한 native projection |
+| D | Gemini semantic 평가: 적용성, 제약·trade-off, 검증·실행 |
+| E | Gemini semantic 평가: 영역 간 연결성과 면접 방어 가능성 |
+
+상세 Question Demand 행이 있으면 B는 다음과 같이 계산합니다.
+
+```text
+B = 6 × (Question Demand 상태 평균 ÷ 3)
+Coverage = 상태가 2 이상인 Demand 수 ÷ 전체 적용 Demand 수 × 100
+```
+
+Question Demand의 내부 상태는 `0=없음`, `1=언급`, `2=설명·검증`, `3=요구 조건까지 충족`입니다. 상세 행을 사용할 수 없을 때만 summary 기반 공식 `2 × (covered_ratio + verified_ratio + mean_demand_level)`을 호환 경로로 사용합니다.
+
+C는 연결된 Fact Anchor 상태를 사용합니다.
+
+```text
+C = 8 × (Fact Anchor 상태 평균 ÷ 3)
+```
+
+Fact Anchor의 내부 상태는 `0=없음`, `1=언급`, `2=정확`, `3=정확한 Fact를 Question Demand와 연결`입니다. Native projection을 만들 수 없을 때는 `fact_eval.c_score`를 우선하고, 그 값도 없으면 `accuracy + core_concept + problem_link + compactness`를 호환 경로로 사용합니다.
+
+Question Type과 Model Answer는 평가 범위와 기대 구조를 제공합니다. Logic Check와 deterministic checker는 검증된 오류와 cap 근거를 제공합니다. 이들은 25점 Layer 체계를 유지하면서 B·C native projection과 A·D·E semantic 평가의 정합성을 보완합니다.
+
 ---
 
 ## 3. Active Question Type
@@ -97,6 +129,8 @@ Legacy 유형명은 입력 호환을 위해 canonical type으로 매핑될 수 �
 | `missing` | 요구에 실질적으로 답하지 않음 | 조건 충족 시 누락 hard cap 대상 |
 
 `incorrect`는 오답이고 `missing`은 미응답입니다. 직접 답했지만 틀린 내용은 누락으로 바꾸지 않습니다.
+
+공개 판정 상태와 B·C 계산용 내부 상태는 목적이 다릅니다. 공개 상태는 오답과 누락을 구분해 표시하고 hard cap 여부를 판단합니다. 내부 0~3 상태는 충족 수준을 점수로 환산합니다. 특히 `incorrect`는 내부적으로 `missing`으로 바꾸지 않으며, 기술적 정확성 오류는 기본적으로 C layer가 소유합니다.
 
 Telegram 출력도 두 상태를 분리합니다.
 
@@ -149,7 +183,17 @@ Topic-specific checker는 문맥과 부정을 구분해야 합니다. 예를 들
 
 기본값은 `warn`입니다. Coverage 보정은 약한 보조 정책이며, 명시적 요구사항 hard cap이나 C correctness defect와 같은 근거를 중복 감점하지 않습니다.
 
-### 4.5 Logic fatal과 numeric cap 분리
+### 4.5 Phase 8 constraint-only 정책
+
+Phase 8 originality 평가는 semantic 점수에 가산점을 주지 않습니다. A·C·D·E는 Phase 6 semantic 점수와 Phase 8 후보 중 낮은 값만 유지합니다.
+
+```text
+A·C·D·E = min(Phase 6 semantic score, Phase 8 candidate)
+```
+
+B는 Phase 8의 최종 소유 대상이 아닙니다. Phase 8 처리 후 Question Demand native projection이 B를 다시 결정합니다. Connection 평가는 진단 정보로 유지하며 E점수를 직접 덮어쓰지 않습니다.
+
+### 4.6 Logic fatal과 numeric cap 분리
 
 Logic Check는 핵심 이론 오류를 검증합니다.
 
@@ -158,25 +202,25 @@ Logic Check는 핵심 이론 오류를 검증합니다.
 - Recommended ceiling과 실제 적용된 numeric cap을 구분합니다.
 - Telegram의 `cap 적용` 문구는 실제 numeric cap이 적용된 경우에만 출력합니다.
 
-### 4.6 최종 객체와 저장 정합성
+### 4.7 최종 객체와 저장 정합성
 
 최종 결과는 다음 순서를 보장합니다.
 
 ```text
 semantic grading
   → deterministic checker와 evidence bridge
-  → A/B/C/D/E score reconciliation
-  → verified defect와 explicit coverage reconciliation
-  → display alias 정규화
-  → Bot score reconciliation
-  → Bot 최종 coverage persistence
+  → Phase 8 constraint-only 처리
+  → Question Demand 기반 B와 Fact Anchor 기반 C reconciliation
+  → verified defect, hard cap과 difficulty ceiling 적용
+  → display alias와 coverage 정규화
+  → 최종 native B·C serialization sync
   → grade.json 저장
   → 동일 객체를 Telegram formatter에 전달
 ```
 
 `grading_agents.py`와 `bot.py` 양쪽의 최종 persistence guard는 score-bearing field가 변경되지 않았는지 확인합니다. 따라서 `weak`, `오답 2`와 같은 표시 결과와 저장된 `grade.json`이 동일해야 합니다.
 
-### 4.7 세션 격리
+### 4.8 세션 격리
 
 채점 결과는 `data/sessions/<session_id>/`에 저장합니다.
 

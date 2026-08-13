@@ -124,3 +124,78 @@ assert (
 assert _source_s6d2.count("QTYPE_PHASE8_CONSTRAINT_ONLY_V1") == 1
 assert _source_s6d2.count("QTYPE_PHASE6_SEMANTIC_SNAPSHOT_V1") == 1
 print("PHASE8_CONSTRAINT_ONLY_OWNER_CONTRACT_V2_FOCUSED=PASS")
+
+# STAGE8B_NATIVE_OUTPUT_SYNC_INTEGRATION_FOCUSED_V1
+_qd_s8b = {
+    "demands": [
+        {"demand_id": "D1", "demand_text": "원리", "native_state": 3},
+        {"demand_id": "D2", "demand_text": "적용", "native_state": 2},
+    ]
+}
+_grade_s8b = {
+    "breakdown": [
+        {"layer_id": "A", "score": 2.0},
+        {"layer_id": "B", "score": 1.0},
+        {"layer_id": "C", "score": 1.0, "native_fact_projection_v1": {"score": 7.0}},
+        {"layer_id": "D", "score": 4.0},
+        {"layer_id": "E", "score": 1.5},
+    ],
+    "layer_scores": [
+        {"layer_id": "A", "score": 2.0},
+        {"layer_id": "B", "score": 1.0},
+        {"layer_id": "C", "score": 1.0},
+        {"layer_id": "D", "score": 4.0},
+        {"layer_id": "E", "score": 1.5},
+    ],
+    "rater_weighted_evaluation": {
+        "weighted_layers": [
+            {"layer_id": "A", "score": 2.0},
+            {"layer_id": "B", "score": 1.0},
+            {"layer_id": "C", "score": 1.0},
+            {"layer_id": "D", "score": 4.0},
+            {"layer_id": "E", "score": 1.5},
+        ],
+        "total_score": 0.0,
+    },
+    "total_score": 0.0,
+    "score": 0.0,
+}
+_applied_s8b = ga._stage7_apply_native_qd_projection_to_grade_output(_grade_s8b, _qd_s8b)
+assert _applied_s8b is _grade_s8b
+assert abs(_applied_s8b["coverage"] - 100.0) <= 1e-12
+assert abs(_applied_s8b["native_question_demand_projection_v1"]["score"] - 5.0) <= 1e-12
+_final_s8b = [
+    {"layer_id": "A", "score": 2.0},
+    {"layer_id": "B", "score": 5.0, "native_question_demand_projection_v1": {"score": 5.0}},
+    {"layer_id": "C", "score": 7.0, "native_fact_projection_v1": {"score": 7.0}},
+    {"layer_id": "D", "score": 4.0},
+    {"layer_id": "E", "score": 1.5},
+]
+_synced_s8b = ga._stage7_sync_terminal_bc_from_final_layer_scores(_applied_s8b, _final_s8b)
+assert _synced_s8b is _grade_s8b
+assert vector(_synced_s8b["breakdown"])["B"] == 5.0
+assert vector(_synced_s8b["breakdown"])["C"] == 7.0
+assert vector(_synced_s8b["layer_scores"])["B"] == 5.0
+assert vector(_synced_s8b["layer_scores"])["C"] == 7.0
+assert _synced_s8b["total_score"] == 19.5
+assert _synced_s8b["score"] == 19.5
+_source_s8b = Path(ga.__file__).read_text(encoding="utf-8")
+_tree_s8b = ast.parse(_source_s8b)
+_owner_s8b = next(n for n in _tree_s8b.body if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)) and n.name == "_phase2_postprocess_grade")
+_apply_lines_s8b = []
+_sync_lines_s8b = []
+_write_lines_s8b = []
+for _node_s8b in ast.walk(_owner_s8b):
+    if not isinstance(_node_s8b, ast.Call):
+        continue
+    _name_s8b = call_name(_node_s8b)
+    if _name_s8b == "_stage7_apply_native_qd_projection_to_grade_output":
+        _apply_lines_s8b.append(_node_s8b.lineno)
+    elif _name_s8b == "_stage7_sync_terminal_bc_from_final_layer_scores":
+        _sync_lines_s8b.append(_node_s8b.lineno)
+    elif _name_s8b == "_phase2_json_write" and _node_s8b.args and "grade.json" in ast.unparse(_node_s8b.args[0]):
+        _write_lines_s8b.append(_node_s8b.lineno)
+assert len(_apply_lines_s8b) == len(_sync_lines_s8b) == len(_write_lines_s8b) == 1
+assert _apply_lines_s8b[0] < _sync_lines_s8b[0] < _write_lines_s8b[0]
+assert _source_s8b.count("STAGE8_FINAL_NATIVE_BC_PERSISTENCE_V1") == 1
+print("STAGE8B_NATIVE_OUTPUT_SYNC_INTEGRATION_FOCUSED_V1=PASS")
