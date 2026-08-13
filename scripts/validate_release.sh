@@ -130,6 +130,7 @@ echo "===== router / coverage / Hybrid-Multi release regressions ====="
   python3 scripts/test_multi_topic_question_contract_hash_repair.py
   python3 scripts/test_question_demand_shadow.py
   python3 scripts/test_question_demand_evidence_shadow.py
+  python3 scripts/test_question_demand_b_score_connection_v2.py
   python3 scripts/test_semantic_router_default_transport.py
   python3 scripts/test_semantic_router_gemini_transport.py
   python3 scripts/test_semantic_router_general_mode_contract.py
@@ -499,3 +500,17 @@ if [[ "${RUN_GRADING_REPRODUCIBILITY}" == "1" ]]; then
 else
   echo "SKIP: dedicated reproducibility gate is opt-in. Set RUN_GRADING_REPRODUCIBILITY=1 to run exact 10-run P0 validation."
 fi
+# NATIVE_SEMANTIC_EVIDENCE_SCORING_V1_RELEASE_GUARD
+_stage7_repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+grep -Fq 'NATIVE_SEMANTIC_EVIDENCE_SCORING_V1_RUNTIME' \
+  "$_stage7_repo_root/grading_agents.py"
+grep -Fq 'NATIVE_SEMANTIC_OBSERVABILITY_PROJECTION_V2' \
+  "$_stage7_repo_root/grade_output_summarizer.py"
+grep -Fq 'QTYPE_PHASE8_CONSTRAINT_ONLY_V1' \
+  "$_stage7_repo_root/grading_agents.py"
+# STAGE7_PRODUCTION_EVIDENCE_SHAPE_V2_RELEASE_GUARD
+_stage7_v2_repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+grep -Fq 'STAGE7_PRODUCTION_EVIDENCE_SHAPE_V2' \
+  "$_stage7_v2_repo_root/grading_agents.py"
+grep -Fq 'STAGE7_BUILD_PAYLOAD_NATIVE_OBSERVABILITY_V2' \
+  "$_stage7_v2_repo_root/grade_output_summarizer.py"

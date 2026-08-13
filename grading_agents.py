@@ -3714,50 +3714,29 @@ def _phase3_apply_fact_anchor_to_layer_scores_legacy_absolute(layer_scores, fact
 
 # BEGIN QTYPE_FACT_C_SEMANTIC_COMPONENT_V1
 def _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval):
-    # C is owned by direct factual components: accuracy + core_concept.
-    out = [
-        dict(row) if isinstance(row, dict) else row
-        for row in layer_scores
-    ]
-    detail = (
-        fact_eval.get("c_score_detail")
-        if isinstance(fact_eval, dict)
-        else None
-    )
-    if not isinstance(detail, dict):
-        return out
-
-    accuracy = detail.get("accuracy")
-    core_concept = detail.get("core_concept")
-    numeric = (int, float)
-    if (
-        not isinstance(accuracy, numeric)
-        or isinstance(accuracy, bool)
-        or not isinstance(core_concept, numeric)
-        or isinstance(core_concept, bool)
-    ):
-        return out
-
-    c_score = max(
-        0.0,
-        min(8.0, float(accuracy) + float(core_concept)),
-    )
-    found = False
+    # QTYPE_FACT_C_NATIVE_SCORE_V2
+    out=[dict(row) if isinstance(row,dict) else row for row in layer_scores]
+    if not isinstance(fact_eval,dict): return out
+    numeric=(int,float); c_score=fact_eval.get("c_score")
+    if not isinstance(c_score,numeric) or isinstance(c_score,bool):
+        detail=fact_eval.get("c_score_detail")
+        if not isinstance(detail,dict): return out
+        component_names=("accuracy","core_concept","problem_link","compactness")
+        values=[]
+        for name in component_names:
+            value=detail.get(name)
+            if not isinstance(value,numeric) or isinstance(value,bool): return out
+            values.append(float(value))
+        c_score=sum(values)
+    else:
+        c_score=float(c_score)
+    c_score=max(0.0,min(8.0,c_score))
+    found=False
     for row in out:
-        if not isinstance(row, dict):
-            continue
-        layer_id = str(
-            row.get("layer_id")
-            or row.get("layer")
-            or row.get("id")
-            or ""
-        ).upper()
-        if layer_id == "C":
-            row["score"] = c_score
-            found = True
-            break
-    if not found:
-        raise RuntimeError("layer C missing from factual score vector")
+        if not isinstance(row,dict): continue
+        layer_id=str(row.get("layer_id") or row.get("layer") or row.get("id") or "").upper()
+        if layer_id=="C": row["score"]=c_score; found=True; break
+    if not found: raise RuntimeError("layer C missing from factual score vector")
     return out
 # END QTYPE_FACT_C_SEMANTIC_COMPONENT_V1
 
@@ -3774,6 +3753,61 @@ def _phase3_apply_connection_to_layer_scores_legacy_absolute(layer_scores, conne
     return layer_scores
 
 # BEGIN QTYPE_CONNECTION_SCORE_NOOP_V1
+
+def _stage7_legacy_phase3_apply_question_demand_evidence_to_layer_scores(
+    layer_scores,
+    question_demand_evidence,
+):
+    # QUESTION_DEMAND_B_SCORE_CONNECTION_V1
+    # QUESTION_DEMAND_B_COMPLETENESS_NATIVE_V2
+    if not isinstance(question_demand_evidence, dict):
+        raise ValueError("question_demand_evidence must be a dict")
+
+    def _one_numeric(key):
+        summary = question_demand_evidence.get("summary")
+        if isinstance(summary, dict) and key in summary:
+            candidates = [summary[key]]
+        else:
+            candidates = []
+            def _walk(node):
+                if isinstance(node, dict):
+                    for k, value in node.items():
+                        if k == key:
+                            candidates.append(value)
+                        elif isinstance(value, (dict, list)):
+                            _walk(value)
+                elif isinstance(node, list):
+                    for value in node:
+                        if isinstance(value, (dict, list)):
+                            _walk(value)
+            _walk(question_demand_evidence)
+        numeric=[]
+        for value in candidates:
+            if isinstance(value,bool) or not isinstance(value,(int,float)): continue
+            value=float(value)
+            if 0.0 <= value <= 1.0: numeric.append(value)
+        distinct=[]
+        for value in numeric:
+            if not any(abs(value-existing)<=1e-12 for existing in distinct): distinct.append(value)
+        if len(distinct)!=1:
+            raise ValueError(f"question_demand_evidence must expose exactly one distinct {key} within [0,1]")
+        return distinct[0]
+
+    covered_ratio=_one_numeric("covered_ratio")
+    verified_ratio=_one_numeric("verified_ratio")
+    mean_demand_level=_one_numeric("mean_demand_level")
+    native_b_score=2.0*(covered_ratio+verified_ratio+mean_demand_level)
+    out=[]; b_count=0
+    for row in layer_scores:
+        if not isinstance(row,dict): out.append(row); continue
+        item=dict(row)
+        layer_id=str(item.get("layer_id") or item.get("layer") or item.get("id") or "").upper()
+        if layer_id=="B": item["score"]=native_b_score; b_count+=1
+        out.append(item)
+    if b_count!=1: raise ValueError(f"expected exactly one B layer row, got {b_count}")
+    return out
+
+
 def _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval):
     # Connection remains diagnostic evidence; it no longer owns absolute E.
     return [
@@ -4599,7 +4633,7 @@ def _phase6_apply_semantic_downward_guard(
 
     return layer_scores, diagnostic
 
-def _phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model):
+def _stage7_legacy_phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model):
     if not gemini_eval or not gemini_eval.get("ok"):
         return layer_scores
 
@@ -5046,6 +5080,60 @@ def _phase2_resolve_difficulty_topic_id(
     return None
 
 
+
+def _phase8_apply_constraint_only_to_semantic_layers(
+    semantic_layer_scores,
+    phase8_layer_scores,
+):
+    # QTYPE_PHASE8_CONSTRAINT_ONLY_V1
+    semantic_by_layer = {}
+    for row in semantic_layer_scores:
+        if not isinstance(row, dict):
+            continue
+        layer_id = str(
+            row.get("layer_id")
+            or row.get("layer")
+            or row.get("id")
+            or ""
+        ).upper()
+        if layer_id in {"A", "C", "D", "E"}:
+            score = row.get("score")
+            if isinstance(score, (int, float)) and not isinstance(score, bool):
+                semantic_by_layer[layer_id] = float(score)
+
+    out = []
+    seen = set()
+    for row in phase8_layer_scores:
+        if not isinstance(row, dict):
+            out.append(row)
+            continue
+        item = dict(row)
+        layer_id = str(
+            item.get("layer_id")
+            or item.get("layer")
+            or item.get("id")
+            or ""
+        ).upper()
+        if layer_id in {"A", "C", "D", "E"}:
+            seen.add(layer_id)
+            semantic_score = semantic_by_layer.get(layer_id)
+            candidate = item.get("score")
+            if (
+                semantic_score is not None
+                and isinstance(candidate, (int, float))
+                and not isinstance(candidate, bool)
+            ):
+                item["score"] = min(semantic_score, float(candidate))
+        out.append(item)
+
+    missing = set(semantic_by_layer) - seen
+    if missing:
+        raise RuntimeError(
+            "Phase8 layer vector missing semantic layers: "
+            + ",".join(sorted(missing))
+        )
+    return out
+
 def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
     from grading_config import load_active_config, save_active_config_snapshots
@@ -5247,12 +5335,14 @@ def _phase2_postprocess_grade(legacy_result):
         )
     )
     # QUESTION_DEMAND_EVIDENCE_V1_SHADOW_ONLY
+    # QUESTION_DEMAND_B_CAPTURE_DEFAULT_V2: preserve fallback paths without QD evidence
+    question_demand_evidence_for_score = None
     try:
         from question_demand_evidence import (
             write_question_demand_evidence_shadow,
         )
 
-        write_question_demand_evidence_shadow(
+        question_demand_evidence_for_score = write_question_demand_evidence_shadow(
             question_text=question_text,
             fact_evaluation=fact_eval,
             session_dir=session_dir,
@@ -5365,6 +5455,7 @@ def _phase2_postprocess_grade(legacy_result):
             layer_scores,
             gemini_eval,
             scoring_model,
+            question_demand_evidence_for_score,
         )
     )
     layer_scores = (
@@ -5409,11 +5500,27 @@ def _phase2_postprocess_grade(legacy_result):
         question_type_eval=de_policy_question_type_eval,
     )
 
+    # QTYPE_PHASE6_SEMANTIC_SNAPSHOT_V1
+    _phase6_semantic_layer_scores = [
+        dict(_row) if isinstance(_row, dict) else _row
+        for _row in layer_scores
+    ]
     layer_scores = _phase8_apply_originality_to_layer_scores(
         layer_scores=layer_scores,
         originality_eval=originality_eval,
         volume=volume
     )
+    layer_scores = _phase8_apply_constraint_only_to_semantic_layers(
+        _phase6_semantic_layer_scores,
+        layer_scores,
+    )
+    # QUESTION_DEMAND_B_SCORE_CONNECTION_V1 production insertion
+    # QUESTION_DEMAND_B_TERMINAL_OWNER_GUARDED_V3: QD-B owns B only when QD evidence was produced
+    if isinstance(question_demand_evidence_for_score, dict):
+        layer_scores = _phase3_apply_question_demand_evidence_to_layer_scores(
+            layer_scores,
+            question_demand_evidence_for_score,
+        )
 
     topic_cap_topic_id = (
         _phase2_resolve_difficulty_topic_id(
@@ -5813,6 +5920,8 @@ def _phase2_postprocess_grade(legacy_result):
         input_text=input_text,
     )
 
+    grade = _stage7_apply_native_qd_projection_to_grade_output(grade, question_demand_evidence_for_score)
+    _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores)
     return grade
 
 
@@ -9197,3 +9306,726 @@ def _phase2_finalize_verified_coverage_for_persistence(
             }
 
     return output
+# NATIVE_SEMANTIC_EVIDENCE_SCORING_V1_RUNTIME
+def _stage7_native_walk_dicts(value, _seen=None):
+    if _seen is None:
+        _seen = set()
+    oid = id(value)
+    if oid in _seen:
+        return
+    _seen.add(oid)
+
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _stage7_native_walk_dicts(child, _seen)
+    elif isinstance(value, (list, tuple)):
+        for child in value:
+            yield from _stage7_native_walk_dicts(child, _seen)
+
+
+def _stage7_native_text(row, keys):
+    for key in keys:
+        value = row.get(key)
+        if isinstance(value, str) and value.strip():
+            return value.strip()
+    return ""
+
+
+def _stage7_native_bool(row, keys):
+    for key in keys:
+        value = row.get(key)
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            if value == 0:
+                return False
+            if value == 1:
+                return True
+        if isinstance(value, str):
+            normalized = value.strip().lower().replace("-", "_").replace(" ", "_")
+            if normalized in {
+                "yes", "true", "pass", "passed", "present", "covered",
+                "verified", "correct", "connected", "complete", "fulfilled",
+                "satisfied", "충족", "확인", "정확",
+            }:
+                return True
+            if normalized in {
+                "no", "false", "fail", "failed", "absent", "missing",
+                "uncovered", "unverified", "incorrect", "미충족", "누락",
+            }:
+                return False
+    return None
+
+
+def _stage7_native_number(row, keys):
+    for key in keys:
+        value = row.get(key)
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            return float(value)
+        if isinstance(value, str):
+            try:
+                return float(value.strip())
+            except ValueError:
+                pass
+    return None
+
+
+def _stage7_native_status_state(row, kind):
+    status = _stage7_native_text(
+        row,
+        (
+            "native_state",
+            "fulfillment_state",
+            "fact_state",
+            "state",
+            "status",
+            "result",
+            "judgement",
+            "judgment",
+        ),
+    ).lower().replace("-", "_").replace(" ", "_")
+
+    if not status:
+        return None
+
+    if kind == "qd":
+        table = {
+            "absent": 0, "missing": 0, "uncovered": 0, "미충족": 0, "누락": 0,
+            "mentioned": 1, "mention": 1, "present": 1, "언급": 1,
+            "explained": 2, "verified": 2, "partial": 2, "부분충족": 2, "설명": 2,
+            "fulfilled": 3, "satisfied": 3, "complete": 3, "full": 3, "충족": 3,
+        }
+    else:
+        table = {
+            "absent": 0, "missing": 0, "누락": 0,
+            "mentioned": 1, "mention": 1, "present": 1, "언급": 1,
+            "correct": 2, "verified": 2, "accurate": 2, "정확": 2,
+            "connected": 3, "linked": 3, "fulfilled": 3, "연결": 3,
+        }
+    return table.get(status)
+
+
+
+
+def _stage7_native_qd_state(row):
+    # STAGE7_PRODUCTION_EVIDENCE_SHAPE_V2
+    # STAGE7_RUNTIME_ARGUMENT_CONNECTION_V3
+    explicit = _stage7_native_number(
+        row,
+        ("native_state", "fulfillment_state", "demand_state", "state"),
+    )
+    if explicit is not None and 0 <= explicit <= 3 and float(explicit).is_integer():
+        return int(explicit)
+
+    status_state = _stage7_native_status_state(row, "qd")
+    if status_state is not None:
+        return status_state
+
+    fulfilled = _stage7_native_bool(
+        row,
+        (
+            "fulfilled", "satisfied", "complete",
+            "all_conditions_satisfied", "fully_satisfied",
+        ),
+    )
+    verified = _stage7_native_bool(
+        row,
+        (
+            "verified", "explained", "substantive",
+            "semantically_verified", "evidence_verified",
+        ),
+    )
+    covered = _stage7_native_bool(
+        row,
+        ("covered", "present", "mentioned", "matched", "has_evidence"),
+    )
+    linked_count = _stage7_native_number(
+        row, ("linked_anchor_count", "required_anchor_count")
+    )
+    observed_count = _stage7_native_number(
+        row, ("observed_anchor_count", "verified_anchor_count")
+    )
+    level = _stage7_native_number(
+        row,
+        ("demand_level", "level", "level_score", "semantic_level", "attainment"),
+    )
+
+    if fulfilled is True:
+        return 3
+
+    if verified is True:
+        if (
+            linked_count is not None
+            and linked_count > 0
+            and observed_count is not None
+            and observed_count >= linked_count
+        ):
+            return 3
+        return 2
+
+    if covered is True:
+        if level is not None and level > 0:
+            return 2
+        return 1
+
+    if covered is False:
+        return 0
+
+    if level is not None:
+        if level <= 0:
+            return 0
+        return 2
+
+    return None
+
+
+
+
+
+def _stage7_native_fact_state(row):
+    explicit = _stage7_native_number(
+        row, ("native_state", "fact_state", "anchor_state", "state")
+    )
+    if explicit is not None and 0 <= explicit <= 3 and float(explicit).is_integer():
+        return int(explicit)
+
+    status = _stage7_native_text(
+        row,
+        ("fact_state", "state", "status", "result", "judgement", "judgment"),
+    ).lower().replace("-", "_").replace(" ", "_")
+
+    if status in {
+        "connected", "linked", "fulfilled", "relation_verified", "연결",
+    }:
+        return 3
+    if status in {
+        "pass", "passed", "correct", "verified", "accurate", "accepted",
+        "supported", "충족", "정확", "확인",
+    }:
+        return 2
+
+    connected = _stage7_native_bool(
+        row,
+        (
+            "connected",
+            "question_linked",
+            "demand_linked",
+            "causally_connected",
+            "relation_verified",
+        ),
+    )
+    correct = _stage7_native_bool(
+        row, ("correct", "verified", "accurate", "fact_verified", "supported")
+    )
+    present = _stage7_native_bool(
+        row, ("present", "mentioned", "covered", "matched", "has_evidence")
+    )
+
+    core_hits = row.get("core_terms_found")
+    support_hits = row.get("support_terms_found")
+    has_term_hit = (
+        isinstance(core_hits, (list, tuple)) and len(core_hits) > 0
+    ) or (
+        isinstance(support_hits, (list, tuple)) and len(support_hits) > 0
+    )
+
+    score = _stage7_native_number(
+        row,
+        (
+            "fact_level", "level", "level_score", "semantic_level",
+            "attainment", "score",
+        ),
+    )
+
+    if connected is True:
+        return 3
+    if correct is True:
+        return 2
+    if status in {
+        "fail", "failed", "incorrect", "rejected", "missing", "absent",
+        "미충족", "누락",
+    }:
+        return 1 if has_term_hit else 0
+    if present is True or has_term_hit:
+        return 1
+    if present is False:
+        return 0
+    if score is not None:
+        if score <= 0:
+            return 0
+        if score >= 1:
+            return 2
+        return 1
+    return None
+
+
+
+def _stage7_native_qd_rows(value):
+    rows = []
+    seen = set()
+    evidence_keys = {
+        "covered", "verified", "explained", "fulfilled", "satisfied",
+        "complete", "demand_level", "level", "level_score", "semantic_level",
+        "native_state", "fulfillment_state", "demand_state", "matched",
+        "has_evidence", "evidence_verified",
+    }
+    id_keys = {
+        "demand_id", "question_demand_id", "demand_text", "demand",
+        "requirement", "description",
+    }
+
+    for row in _stage7_native_walk_dicts(value):
+        if not (set(row) & evidence_keys):
+            continue
+        if not (set(row) & id_keys):
+            continue
+
+        state = _stage7_native_qd_state(row)
+        if state is None:
+            continue
+
+        demand_id = _stage7_native_text(
+            row, ("demand_id", "question_demand_id", "id")
+        )
+        text = _stage7_native_text(
+            row, ("demand_text", "demand", "requirement", "description", "text")
+        )
+        sig = (demand_id, text)
+        if sig in seen:
+            continue
+        seen.add(sig)
+        rows.append(
+            {
+                "demand_id": demand_id,
+                "text": text,
+                "state": int(state),
+            }
+        )
+    return rows
+
+
+
+
+def _stage7_native_fact_rows(value):
+    rows = []
+    seen = set()
+
+    evidence_index = {}
+    for item in _stage7_native_walk_dicts(value):
+        anchor_id = _stage7_native_text(
+            item, ("anchor_id", "fact_anchor_id", "id")
+        )
+        if not anchor_id:
+            continue
+        if not any(
+            key in item
+            for key in (
+                "judgement", "judgment", "correct", "verified",
+                "core_terms_found", "support_terms_found",
+                "present", "mentioned", "covered", "matched", "score",
+            )
+        ):
+            continue
+        evidence_index.setdefault(anchor_id, []).append(item)
+
+    for demand in _stage7_native_walk_dicts(value):
+        linked = demand.get("linked_anchor_ids")
+        observed = demand.get("observed_anchors")
+        if not isinstance(linked, list):
+            continue
+        if not isinstance(observed, list):
+            observed = []
+
+        demand_state = _stage7_native_qd_state(demand)
+
+        observed_by_id = {}
+        for item in observed:
+            if isinstance(item, str):
+                observed_by_id[item] = None
+            elif isinstance(item, dict):
+                oid = _stage7_native_text(
+                    item, ("anchor_id", "fact_anchor_id", "id")
+                )
+                if oid:
+                    observed_by_id[oid] = item
+
+        for raw_id in linked:
+            anchor_id = str(raw_id or "").strip()
+            if not anchor_id:
+                continue
+            sig = ("linked", anchor_id)
+            if sig in seen:
+                continue
+            seen.add(sig)
+
+            observed_item = observed_by_id.get(anchor_id)
+            candidates = []
+            if isinstance(observed_item, dict):
+                candidates.append(observed_item)
+            candidates.extend(evidence_index.get(anchor_id, []))
+
+            text = ""
+            state = 0
+            if anchor_id in observed_by_id:
+                state = 1
+
+            for candidate in candidates:
+                candidate_text = _stage7_native_text(
+                    candidate,
+                    (
+                        "statement", "anchor_text", "fact",
+                        "description", "text", "name",
+                    ),
+                )
+                if candidate_text and not text:
+                    text = candidate_text
+                candidate_state = _stage7_native_fact_state(candidate)
+                if candidate_state is not None:
+                    state = max(state, int(candidate_state))
+
+            if state >= 2 and demand_state is not None and demand_state >= 2:
+                state = 3
+
+            rows.append(
+                {
+                    "anchor_id": anchor_id,
+                    "text": text or anchor_id,
+                    "state": int(state),
+                }
+            )
+
+    return rows
+
+
+
+
+def _stage7_native_qd_projection(value):
+    rows = _stage7_native_qd_rows(value)
+    if not rows:
+        return None
+
+    mean_state = sum(row["state"] for row in rows) / len(rows)
+    score = 6.0 * (mean_state / 3.0)
+    substantive = sum(1 for row in rows if row["state"] >= 2)
+    coverage = 100.0 * substantive / len(rows)
+
+    return {
+        "score": max(0.0, min(6.0, score)),
+        "coverage": max(0.0, min(100.0, coverage)),
+        "mean_state": mean_state,
+        "states": rows,
+        "applicable_demand_count": len(rows),
+        "substantive_demand_count": substantive,
+    }
+
+
+def _stage7_native_fact_projection(value):
+    rows = _stage7_native_fact_rows(value)
+    if not rows:
+        return None
+
+    mean_state = sum(row["state"] for row in rows) / len(rows)
+    score = 8.0 * (mean_state / 3.0)
+
+    return {
+        "score": max(0.0, min(8.0, score)),
+        "mean_state": mean_state,
+        "states": rows,
+        "applicable_anchor_count": len(rows),
+    }
+
+
+def _stage7_native_layer_id(row):
+    if not isinstance(row, dict):
+        return ""
+    return str(
+        row.get("layer_id")
+        or row.get("layer")
+        or row.get("id")
+        or ""
+    ).upper()
+
+
+def _stage7_native_update_layer(value, layer_id, score=None, metadata=None):
+    if isinstance(value, list):
+        out = []
+        changed = False
+        for row in value:
+            if isinstance(row, dict) and _stage7_native_layer_id(row) == layer_id:
+                item = dict(row)
+                if score is not None:
+                    item["score"] = float(score)
+                if metadata:
+                    item.update(metadata)
+                out.append(item)
+                changed = True
+            else:
+                out.append(row)
+        return out if changed else value
+
+    if isinstance(value, tuple):
+        updated = list(value)
+        for idx, item in enumerate(updated):
+            new_item = _stage7_native_update_layer(
+                item, layer_id, score=score, metadata=metadata
+            )
+            if new_item is not item:
+                updated[idx] = new_item
+                return tuple(updated)
+        return value
+
+    if isinstance(value, dict):
+        if "layer_scores" in value:
+            new_layers = _stage7_native_update_layer(
+                value["layer_scores"],
+                layer_id,
+                score=score,
+                metadata=metadata,
+            )
+            if new_layers is not value["layer_scores"]:
+                out = dict(value)
+                out["layer_scores"] = new_layers
+                return out
+
+        if layer_id in value:
+            out = dict(value)
+            current = out[layer_id]
+            if isinstance(current, dict):
+                item = dict(current)
+                if score is not None:
+                    item["score"] = float(score)
+                if metadata:
+                    item.update(metadata)
+                out[layer_id] = item
+            elif score is not None:
+                out[layer_id] = float(score)
+            return out
+
+    return value
+
+
+def _stage7_native_current_layer_score(value, layer_id):
+    for row in _stage7_native_walk_dicts(value):
+        if _stage7_native_layer_id(row) != layer_id:
+            continue
+        score = row.get("score")
+        if isinstance(score, (int, float)) and not isinstance(score, bool):
+            return float(score)
+    return None
+
+
+def _stage7_native_phase6_dimension_metadata(layer_scores):
+    out = layer_scores
+    specs = {
+        "A": (
+            3.0,
+            ("subject_entry", "answer_structure", "scope_control"),
+            1.0,
+        ),
+        "D": (
+            6.0,
+            ("applicability", "constraints_tradeoffs", "verification_execution"),
+            2.0,
+        ),
+        "E": (
+            2.0,
+            ("cross_layer_connectivity", "defensibility"),
+            1.0,
+        ),
+    }
+
+    for layer_id, (layer_max, dimensions, dim_max) in specs.items():
+        score = _stage7_native_current_layer_score(out, layer_id)
+        if score is None:
+            continue
+        ratio = max(0.0, min(1.0, score / layer_max))
+        states = [
+            {
+                "dimension": name,
+                "attainment": ratio,
+                "score": ratio * dim_max,
+                "max": dim_max,
+                "source": "phase6_semantic_attainment",
+            }
+            for name in dimensions
+        ]
+        out = _stage7_native_update_layer(
+            out,
+            layer_id,
+            metadata={
+                "native_semantic_dimensions_v1": states,
+                "native_semantic_contract_v1": True,
+            },
+        )
+    return out
+
+
+def _phase3_apply_question_demand_evidence_to_layer_scores(*args, **kwargs):
+    result = _stage7_legacy_phase3_apply_question_demand_evidence_to_layer_scores(
+        *args, **kwargs
+    )
+    projection = _stage7_native_qd_projection(
+        {"args": args, "kwargs": kwargs}
+    )
+    if projection is None:
+        return result
+
+    return _stage7_native_update_layer(
+        result,
+        "B",
+        score=projection["score"],
+        metadata={
+            "native_question_demand_projection_v1": projection,
+            "native_semantic_contract_v1": True,
+        },
+    )
+
+
+
+
+def _phase6_apply_gemini_layer_scores(*args, **kwargs):
+    question_demand_evidence = kwargs.pop(
+        "question_demand_evidence_for_score", None
+    )
+    if len(args) >= 4:
+        if question_demand_evidence is None:
+            question_demand_evidence = args[3]
+        legacy_args = args[:3]
+    else:
+        legacy_args = args
+
+    result = _stage7_legacy_phase6_apply_gemini_layer_scores(
+        *legacy_args, **kwargs
+    )
+    result = _stage7_native_phase6_dimension_metadata(result)
+
+    fact_projection = _stage7_native_fact_projection(
+        {
+            "question_demand_evidence": question_demand_evidence,
+            "gemini_eval": legacy_args[1] if len(legacy_args) > 1 else None,
+            "phase6_result": result,
+        }
+    )
+    if fact_projection is not None:
+        result = _stage7_native_update_layer(
+            result,
+            "C",
+            score=fact_projection["score"],
+            metadata={
+                "native_fact_projection_v1": fact_projection,
+                "native_semantic_contract_v1": True,
+                "native_fact_source_v3": "linked_observed_anchor_join",
+            },
+        )
+    return result
+def _stage7_apply_native_qd_projection_to_grade_output(
+    grade,
+    question_demand_evidence,
+):
+    projection = _stage7_native_qd_projection(question_demand_evidence)
+    if not isinstance(grade, dict) or projection is None:
+        return grade
+    grade["native_question_demand_projection_v1"] = projection
+    coverage = projection.get("coverage")
+    if isinstance(coverage, (int, float)) and not isinstance(coverage, bool):
+        grade["coverage"] = max(0.0, min(100.0, float(coverage)))
+
+def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
+    # STAGE7_NATIVE_TERMINAL_BC_SERIALIZATION_SYNC_V1
+    if not isinstance(grade, dict) or not isinstance(layer_scores, dict):
+        return grade
+
+    def numeric_score(value):
+        if isinstance(value, bool):
+            return None
+        if isinstance(value, (int, float)):
+            return float(value)
+        if isinstance(value, dict):
+            for key in ("score", "value", "raw_score"):
+                candidate = value.get(key)
+                if isinstance(candidate, (int, float)) and not isinstance(candidate, bool):
+                    return float(candidate)
+        return None
+
+    def identity(row):
+        if not isinstance(row, dict):
+            return None
+        for key in ("layer_id", "layer", "id", "name"):
+            value = row.get(key)
+            if isinstance(value, str) and value.strip().upper() in {"A", "B", "C", "D", "E"}:
+                return value.strip().upper()
+        return None
+
+    def map_rows(rows):
+        if not isinstance(rows, list):
+            return {}
+        mapped = {}
+        for row in rows:
+            layer = identity(row)
+            if layer is not None:
+                mapped[layer] = row
+        if "B" not in mapped and len(rows) >= 2 and isinstance(rows[1], dict):
+            mapped["B"] = rows[1]
+        if "C" not in mapped and len(rows) >= 3 and isinstance(rows[2], dict):
+            mapped["C"] = rows[2]
+        return mapped
+
+    breakdown = grade.get("breakdown")
+    rows = map_rows(breakdown)
+    b_row = rows.get("B")
+    c_row = rows.get("C")
+    if not isinstance(b_row, dict) or not isinstance(c_row, dict):
+        return grade
+
+    qd_projection = grade.get("native_question_demand_projection_v1")
+    if not isinstance(qd_projection, dict):
+        qd_projection = b_row.get("native_question_demand_projection_v1")
+    fact_projection = c_row.get("native_fact_projection_v1")
+
+    updates = {}
+    final_b = numeric_score(layer_scores.get("B"))
+    final_c = numeric_score(layer_scores.get("C"))
+    if isinstance(qd_projection, dict) and final_b is not None:
+        updates["B"] = final_b
+    if isinstance(fact_projection, dict) and final_c is not None:
+        updates["C"] = final_c
+    if not updates:
+        return grade
+
+    for layer, score in updates.items():
+        rows[layer]["score"] = score
+
+    direct = grade.get("layer_scores")
+    if isinstance(direct, dict):
+        for layer, score in updates.items():
+            current = direct.get(layer)
+            if isinstance(current, dict):
+                current["score"] = score
+            else:
+                direct[layer] = score
+
+    weighted = grade.get("rater_weighted_evaluation")
+    if isinstance(weighted, dict):
+        weighted_rows = map_rows(weighted.get("weighted_layers"))
+        for layer, score in updates.items():
+            row = weighted_rows.get(layer)
+            if isinstance(row, dict):
+                row["score"] = score
+
+    final_rows = map_rows(breakdown)
+    final_scores = [numeric_score(final_rows.get(layer)) for layer in ("A", "B", "C", "D", "E")]
+    if all(score is not None for score in final_scores):
+        total = round(sum(final_scores), 2)
+        grade["total_score"] = total
+        for key in ("score", "final_score", "total"):
+            if numeric_score(grade.get(key)) is not None:
+                grade[key] = total
+        if isinstance(weighted, dict):
+            for key in ("total_score", "weighted_total", "final_score", "score", "total"):
+                if numeric_score(weighted.get(key)) is not None:
+                    weighted[key] = total
+
+    return grade
+
+    return grade

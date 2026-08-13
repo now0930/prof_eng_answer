@@ -228,6 +228,65 @@ def _extract_breakdown(grade: dict[str, Any]) -> list[dict[str, Any]]:
     return result
 
 
+
+def _stage7_legacy_attach_native_feedback_observability(payload):
+    # NATIVE_FEEDBACK_OBSERVABILITY_V1
+    if not isinstance(payload, dict):
+        return payload
+
+    out = dict(payload)
+
+    def _append_unique(target, value):
+        if isinstance(value, str):
+            text = value.strip()
+            if text and text not in target:
+                target.append(text)
+            return
+        if isinstance(value, (list, tuple)):
+            for item in value:
+                _append_unique(target, item)
+
+    feedback_elements = []
+    breakdown = out.get("breakdown")
+    if isinstance(breakdown, list):
+        for row in breakdown:
+            if not isinstance(row, dict):
+                continue
+            _append_unique(feedback_elements, row.get("reason"))
+            _append_unique(feedback_elements, row.get("gemini_reason"))
+            _append_unique(
+                feedback_elements,
+                row.get("layer_evidence_guard_blocked_reasons"),
+            )
+
+    feedback_characteristics = []
+    _append_unique(feedback_characteristics, out.get("comment"))
+
+    connection = out.get("connection_evaluation")
+    if isinstance(connection, dict):
+        checks = connection.get("checks")
+        if isinstance(checks, list):
+            for check in checks:
+                if isinstance(check, dict):
+                    _append_unique(
+                        feedback_characteristics,
+                        check.get("reason"),
+                    )
+
+    caps = out.get("applied_caps")
+    if isinstance(caps, list):
+        for cap in caps:
+            if isinstance(cap, dict):
+                _append_unique(
+                    feedback_characteristics,
+                    cap.get("reason"),
+                )
+
+    out["feedback_elements"] = feedback_elements
+    out["feedback_characteristics"] = feedback_characteristics
+    return out
+
+
 def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
     logic = _extract_logic(grade)
 
@@ -254,53 +313,7 @@ def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
     if ceiling.get("cap_applied"):
         score_range = f"{total}점 cap 적용"
 
-    return {
-        "score": {
-            "total": total,
-            "max": max_score,
-            "score_range": score_range,
-            "confidence": grade.get("confidence") or grade.get("confidence_level") or "medium",
-            "official_pass_score": official,
-            "official_pass_met": _as_float(total) >= _as_float(official, 15),
-            "practical_target_score": practical,
-            "practical_target_met": _as_float(total) >= _as_float(practical, 17.5),
-            "high_score_target": high,
-            "high_score_met": _as_float(total) >= _as_float(high, 20),
-        },
-        "logic_check": logic,
-        "ceiling": {
-            "cap_applied": bool(ceiling.get("cap_applied")),
-            "reason": _txt(
-                ceiling.get("reason")
-                or ceiling.get("fatal_error_reason")
-                or "",
-                320,
-            ),
-        },
-        "volume": {
-            "level": volume.get("level"),
-            "pages": volume.get("estimated_answer_sheet_pages"),
-            "cap": volume.get("cap"),
-            "reason": _txt(volume.get("reason") or "", 260),
-        },
-        "question_type": {
-            "lens": qtype.get("question_type_lens") or qtype.get("lens") or qtype.get("type") or "",
-            "coverage": qtype.get("coverage") or qtype.get("requirement_coverage") or "",
-            "missing": _items(qtype.get("missing_categories") or qtype.get("missing") or [], 3),
-        },
-        "summary": _txt(
-            grade.get("summary")
-            or grade.get("overall_comment")
-            or grade.get("overall_summary")
-            or grade.get("comment")
-            or "",
-            500,
-        ),
-        "strengths": _items(grade.get("strengths"), 4),
-        "weaknesses": _items(grade.get("weaknesses"), 5),
-        "improvements": _items(grade.get("rewrite_advice") or grade.get("advice"), 5),
-        "breakdown": _extract_breakdown(grade),
-    }
+    return _attach_native_feedback_observability({'score': {'total': total, 'max': max_score, 'score_range': score_range, 'confidence': grade.get('confidence') or grade.get('confidence_level') or 'medium', 'official_pass_score': official, 'official_pass_met': _as_float(total) >= _as_float(official, 15), 'practical_target_score': practical, 'practical_target_met': _as_float(total) >= _as_float(practical, 17.5), 'high_score_target': high, 'high_score_met': _as_float(total) >= _as_float(high, 20)}, 'logic_check': logic, 'ceiling': {'cap_applied': bool(ceiling.get('cap_applied')), 'reason': _txt(ceiling.get('reason') or ceiling.get('fatal_error_reason') or '', 320)}, 'volume': {'level': volume.get('level'), 'pages': volume.get('estimated_answer_sheet_pages'), 'cap': volume.get('cap'), 'reason': _txt(volume.get('reason') or '', 260)}, 'question_type': {'lens': qtype.get('question_type_lens') or qtype.get('lens') or qtype.get('type') or '', 'coverage': qtype.get('coverage') or qtype.get('requirement_coverage') or '', 'missing': _items(qtype.get('missing_categories') or qtype.get('missing') or [], 3)}, 'summary': _txt(grade.get('summary') or grade.get('overall_comment') or grade.get('overall_summary') or grade.get('comment') or '', 500), 'strengths': _items(grade.get('strengths'), 4), 'weaknesses': _items(grade.get('weaknesses'), 5), 'improvements': _items(grade.get('rewrite_advice') or grade.get('advice'), 5), 'breakdown': _extract_breakdown(grade)})
 
 
 def _parse_llm_json(raw: str) -> dict[str, Any] | None:
@@ -796,7 +809,7 @@ _verdict_consistency_previous_build_payload = (
 )
 
 
-def _build_payload(grade):
+def _stage7_legacy_build_payload_v2(grade):
     payload = _verdict_consistency_previous_build_payload(
         grade
     )
@@ -855,3 +868,323 @@ def _normalise_summary(llm_obj, payload):
         summary,
         payload,
     )
+# NATIVE_SEMANTIC_OBSERVABILITY_PROJECTION_V2
+def _stage7_find_native_projection(payload, key):
+    if isinstance(payload, dict):
+        if key in payload and isinstance(payload[key], dict):
+            return payload[key]
+        for value in payload.values():
+            found = _stage7_find_native_projection(value, key)
+            if found is not None:
+                return found
+    elif isinstance(payload, (list, tuple)):
+        for value in payload:
+            found = _stage7_find_native_projection(value, key)
+            if found is not None:
+                return found
+    return None
+
+
+def _stage7_append_unique_text(target, value):
+    if not isinstance(value, str):
+        return
+    text = value.strip()
+    if text and text not in target:
+        target.append(text)
+
+
+def _attach_native_feedback_observability(payload):
+    out = _stage7_legacy_attach_native_feedback_observability(payload)
+    if not isinstance(out, dict):
+        return out
+
+    out = dict(out)
+
+    qd = _stage7_find_native_projection(
+        out, "native_question_demand_projection_v1"
+    )
+    fact = _stage7_find_native_projection(
+        out, "native_fact_projection_v1"
+    )
+
+    elements = []
+    characteristics = []
+
+    if isinstance(qd, dict):
+        coverage = qd.get("coverage")
+        if isinstance(coverage, (int, float)) and not isinstance(coverage, bool):
+            out["coverage"] = float(coverage)
+
+        states = qd.get("states")
+        if isinstance(states, list):
+            fulfilled = 0
+            explained = 0
+            weak = 0
+            for row in states:
+                if not isinstance(row, dict):
+                    continue
+                text = row.get("text")
+                state = row.get("state")
+                if isinstance(text, str) and text.strip():
+                    _stage7_append_unique_text(elements, text)
+                if state == 3:
+                    fulfilled += 1
+                elif state == 2:
+                    explained += 1
+                elif state in (0, 1):
+                    weak += 1
+
+            total = fulfilled + explained + weak
+            if total:
+                if weak == 0 and fulfilled == total:
+                    _stage7_append_unique_text(
+                        characteristics,
+                        "문제의 요구사항을 모두 설명하고 조건까지 충족한 답안이다.",
+                    )
+                elif weak == 0:
+                    _stage7_append_unique_text(
+                        characteristics,
+                        "문제의 주요 요구사항은 설명했으며 일부 요구는 조건 충족의 구체화가 필요하다.",
+                    )
+                else:
+                    _stage7_append_unique_text(
+                        characteristics,
+                        "설명이 부족하거나 언급 수준에 머문 문제 요구사항을 구체적으로 보완할 필요가 있다.",
+                    )
+
+    if isinstance(fact, dict):
+        states = fact.get("states")
+        if isinstance(states, list):
+            connected = 0
+            correct = 0
+            weak = 0
+            for row in states:
+                if not isinstance(row, dict):
+                    continue
+                text = row.get("text")
+                state = row.get("state")
+                if isinstance(text, str) and text.strip():
+                    _stage7_append_unique_text(elements, text)
+                if state == 3:
+                    connected += 1
+                elif state == 2:
+                    correct += 1
+                elif state in (0, 1):
+                    weak += 1
+
+            total = connected + correct + weak
+            if total:
+                if weak == 0 and connected == total:
+                    _stage7_append_unique_text(
+                        characteristics,
+                        "핵심 사실을 정확히 설명하고 문제 요구와의 기술적 관계까지 연결한 답안이다.",
+                    )
+                elif weak == 0:
+                    _stage7_append_unique_text(
+                        characteristics,
+                        "핵심 사실은 대체로 정확하며 문제 요구와의 연결을 더 명확히 하면 완성도가 높아진다.",
+                    )
+                else:
+                    _stage7_append_unique_text(
+                        characteristics,
+                        "누락되거나 언급 수준인 핵심 사실을 정확한 기술적 관계로 보완할 필요가 있다.",
+                    )
+
+    for value in out.get("feedback_elements") or []:
+        _stage7_append_unique_text(elements, value)
+    for value in out.get("feedback_characteristics") or []:
+        _stage7_append_unique_text(characteristics, value)
+
+    out["feedback_elements"] = elements
+    out["feedback_characteristics"] = characteristics
+    return out
+# STAGE7_BUILD_PAYLOAD_NATIVE_OBSERVABILITY_V2
+def _stage7_sum_walk_dicts(value, _seen=None):
+    if _seen is None:
+        _seen = set()
+    oid = id(value)
+    if oid in _seen:
+        return
+    _seen.add(oid)
+    if isinstance(value, dict):
+        yield value
+        for child in value.values():
+            yield from _stage7_sum_walk_dicts(child, _seen)
+    elif isinstance(value, (list, tuple)):
+        for child in value:
+            yield from _stage7_sum_walk_dicts(child, _seen)
+
+
+def _stage7_sum_bool(row, keys):
+    for key in keys:
+        value = row.get(key)
+        if isinstance(value, bool):
+            return value
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            if value == 0:
+                return False
+            if value == 1:
+                return True
+        if isinstance(value, str):
+            normalized = value.strip().lower()
+            if normalized in {
+                "yes", "true", "pass", "passed", "covered", "verified",
+                "correct", "fulfilled", "satisfied",
+            }:
+                return True
+            if normalized in {
+                "no", "false", "fail", "failed", "missing", "absent",
+                "uncovered", "unverified", "incorrect",
+            }:
+                return False
+    return None
+
+
+def _stage7_sum_num(row, keys):
+    for key in keys:
+        value = row.get(key)
+        if isinstance(value, (int, float)) and not isinstance(value, bool):
+            return float(value)
+        if isinstance(value, str):
+            try:
+                return float(value.strip())
+            except ValueError:
+                pass
+    return None
+
+
+def _stage7_sum_qd_rows(value):
+    rows = []
+    seen = set()
+    for row in _stage7_sum_walk_dicts(value):
+        demand_id = row.get("demand_id")
+        text = row.get("text") or row.get("demand_text") or row.get("requirement")
+        if not isinstance(demand_id, str) or not isinstance(text, str):
+            continue
+        if not any(
+            key in row
+            for key in (
+                "covered", "verified", "level", "linked_anchor_count",
+                "observed_anchor_count", "observed_anchors",
+            )
+        ):
+            continue
+
+        sig = (demand_id.strip(), text.strip())
+        if sig in seen:
+            continue
+        seen.add(sig)
+
+        verified = _stage7_sum_bool(row, ("verified", "explained"))
+        covered = _stage7_sum_bool(row, ("covered", "present", "matched"))
+        linked = _stage7_sum_num(row, ("linked_anchor_count",))
+        observed = _stage7_sum_num(row, ("observed_anchor_count",))
+        level = _stage7_sum_num(row, ("level", "demand_level", "level_score"))
+
+        if verified is True:
+            if (
+                linked is not None
+                and linked > 0
+                and observed is not None
+                and observed >= linked
+            ):
+                state = 3
+            elif level is not None and level >= 1.0:
+                state = 3
+            else:
+                state = 2
+        elif covered is True:
+            state = 1
+        elif covered is False:
+            state = 0
+        elif level is not None:
+            state = 0 if level <= 0 else (3 if level >= 1 else 2)
+        else:
+            continue
+
+        rows.append(
+            {"demand_id": demand_id.strip(), "text": text.strip(), "state": state}
+        )
+    return rows
+
+
+def _stage7_sum_qd_projection(value):
+    rows = _stage7_sum_qd_rows(value)
+    if not rows:
+        return None
+    substantive = sum(1 for row in rows if row["state"] >= 2)
+    mean_state = sum(row["state"] for row in rows) / len(rows)
+    return {
+        "score": 6.0 * (mean_state / 3.0),
+        "coverage": 100.0 * substantive / len(rows),
+        "mean_state": mean_state,
+        "states": rows,
+        "applicable_demand_count": len(rows),
+        "substantive_demand_count": substantive,
+    }
+
+
+def _stage7_sum_append_unique(target, value):
+    if isinstance(value, str):
+        text = value.strip()
+        if text and text not in target:
+            target.append(text)
+
+
+def _build_payload(grade):
+    payload = _stage7_legacy_build_payload_v2(grade)
+    if not isinstance(payload, dict):
+        return payload
+
+    out = dict(payload)
+    projection = _stage7_find_native_projection(
+        grade,
+        "native_question_demand_projection_v1",
+    )
+    if projection is None:
+        projection = _stage7_sum_qd_projection(grade)
+
+    if isinstance(projection, dict):
+        coverage = projection.get("coverage")
+        if isinstance(coverage, (int, float)) and not isinstance(coverage, bool):
+            out["coverage"] = max(0.0, min(100.0, float(coverage)))
+
+        elements = []
+        for row in projection.get("states") or []:
+            if isinstance(row, dict):
+                _stage7_sum_append_unique(elements, row.get("text"))
+        for value in out.get("feedback_elements") or []:
+            _stage7_sum_append_unique(elements, value)
+
+        characteristics = []
+        states = [
+            row.get("state")
+            for row in (projection.get("states") or [])
+            if isinstance(row, dict) and isinstance(row.get("state"), int)
+        ]
+        if states:
+            weak = sum(1 for state in states if state < 2)
+            fulfilled = sum(1 for state in states if state == 3)
+            if weak == 0 and fulfilled == len(states):
+                _stage7_sum_append_unique(
+                    characteristics,
+                    "문제의 요구사항을 모두 설명하고 요구 조건까지 충족한 답안이다.",
+                )
+            elif weak == 0:
+                _stage7_sum_append_unique(
+                    characteristics,
+                    "문제의 주요 요구사항을 설명했으며 일부 요구 조건의 구체화를 보완할 수 있다.",
+                )
+            else:
+                _stage7_sum_append_unique(
+                    characteristics,
+                    "언급 수준이거나 설명이 부족한 문제 요구사항을 구체적인 기술 관계로 보완할 필요가 있다.",
+                )
+        for value in out.get("feedback_characteristics") or []:
+            _stage7_sum_append_unique(characteristics, value)
+
+        out["feedback_elements"] = elements
+        out["feedback_characteristics"] = characteristics
+        out["native_question_demand_projection_v1"] = projection
+
+    return out
