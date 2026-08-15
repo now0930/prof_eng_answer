@@ -1,0 +1,123 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+  "title": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당",
+    "question_type": "PRINCIPLE_INTERPRETATION",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [
+      "HAZOP LOPA target SIL",
+      "HAZOP to LOPA scenario",
+      "LOPA independent protection layer",
+      "IPL credit criteria",
+      "initiating event frequency conditional modifier",
+      "residual frequency tolerable frequency",
+      "risk reduction factor RRF PFDavg",
+      "target SIL determination",
+      "SIF allocation SRS handoff",
+      "LOPA double counting common cause",
+      "BPCS alarm operator IPL",
+      "LOPA MOC revalidation"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "HAZOP에서 LOPA, 적격 IPL, 목표 SIL과 SIF/SRS 할당으로 이어지는 위험감소 판단을 평가한다.",
+    "difficulty": "THEORY_CORE",
+    "cap_policy": {
+      "enabled": true,
+      "apply_only_to_verified_fatal_correctness_error": true,
+      "keyword_match_alone_is_insufficient": true
+    },
+    "candidate_extraction": {
+      "max_candidates": 32,
+      "nearby_window": 1,
+      "rules": [],
+      "key_terms": [
+        "HAZOP",
+        "LOPA",
+        "initiating event frequency",
+        "conditional modifier",
+        "independent protection layer",
+        "IPL",
+        "PFD",
+        "residual frequency",
+        "tolerable event frequency",
+        "RRF",
+        "PFDavg",
+        "target SIL",
+        "achieved SIL",
+        "SIF allocation",
+        "SRS",
+        "common cause",
+        "double counting",
+        "MOC"
+      ]
+    },
+    "truth_schema": [
+      "HAZOP은 guide word를 이용해 공정 의도에서 벗어난 deviation, 원인, 결과와 기존 safeguard를 체계적으로 식별하지만 그 자체가 목표 SIL을 직접 결정하지는 않는다.",
+      "LOPA는 하나의 initiating event, 하나의 consequence endpoint와 명확한 운전조건을 갖는 scenario 단위로 수행해야 한다.",
+      "LOPA consequence는 해당 scenario에서 credit하려는 보호계층의 효과를 먼저 포함하지 않은 상태로 정의해야 순환논리와 이중계산을 피할 수 있다.",
+      "Initiating event frequency는 원인 사건이 분석조건에서 발생하는 빈도이며 설비 이력, 신뢰성 자료와 적용 경계를 근거로 정한다.",
+      "Enabling condition과 conditional modifier는 실제 노출시간, 점화확률, 재실확률 등 scenario에 필요한 조건부 확률만 근거 있게 적용한다.",
+      "LOPA의 residual scenario frequency는 initiating event frequency에 적용 가능한 조건부 수정인자와 독립보호계층의 PFD를 곱하여 산정한다.",
+      "Tolerable event frequency는 회사 또는 사업장의 승인된 위험수용기준에서 consequence category별로 정하며 분석자가 임의로 선택하지 않는다.",
+      "IPL은 특정 scenario를 예방하거나 결과를 완화하는 독립된 보호수단으로서 기능이 명확하고 성능을 검증할 수 있어야 한다.",
+      "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+      "IPL은 분석한 원인–결과 scenario에 실제로 작동하는 구체적 보호기능이어야 하며 일반적인 좋은 설계나 교육만으로 자동 credit할 수 없다.",
+      "IPL은 요구 시 동작할 충분한 dependability와 시험·정비·기록을 통한 auditability를 갖추어야 하며 주장한 PFD를 수명주기 동안 유지해야 한다.",
+      "동일 Sensor, Logic Solver, Final Element, Utility 또는 동일 작업자 대응에 의존하는 보호기능은 독립성이 입증되지 않으면 서로 다른 IPL로 중복 credit하지 않는다.",
+      "공통 전원·배관·계측탭·환경·정비절차·소프트웨어와 같은 dependency는 IPL 곱셈 전에 식별하고 독립성 또는 공통원인 보정을 검토해야 한다.",
+      "BPCS 기능을 IPL로 credit하려면 initiating cause와의 독립성, 감지–판단–조작 경로, 고장모드와 성능 근거를 확인해야 하며 BPCS가 원인인 경우 같은 기능을 자동 credit할 수 없다.",
+      "Alarm과 operator response를 IPL로 credit하려면 독립된 감지, 명확한 경보, 충분한 진단·조치시간, 훈련된 절차와 성능검증이 필요하다.",
+      "HAZOP recommendation이나 계획된 safeguard는 구현·검증·운영관리 체계가 확인되기 전에는 현재 IPL로 credit하지 않는다.",
+      "기존 non-SIS IPL을 반영한 residual frequency가 허용빈도보다 크면 그 차이를 줄일 추가 위험감소가 필요하다.",
+      "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있으며 1 이하이면 해당 scenario에서 추가 SIF 위험감소 요구가 발생하지 않는다.",
+      "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다.",
+      "Low-demand mode에서 목표 PFDavg를 표준의 SIL 구간에 대응시켜 목표 SIL을 정하며 SIL 1, 2, 3의 PFDavg 범위는 각각 10^-2 이상 10^-1 미만, 10^-3 이상 10^-2 미만, 10^-4 이상 10^-3 미만이다.",
+      "LOPA가 정하는 것은 요구되는 target SIL 또는 RRF이며 실제 achieved SIL은 SIF 설계의 PFDavg 계산, 구조제약, 체계적 능력과 수명주기 검증으로 별도 확인한다.",
+      "SIF 할당 시 Sensor, Logic Solver, Final Element, trip setpoint, safe state, response time와 process safety time의 전체 기능경계를 정의해야 한다.",
+      "LOPA 결과는 원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드를 포함하는 SRS 입력으로 인계되어야 한다.",
+      "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다."
+    ],
+    "fatal_conditions": [
+      "[hazop_directly_assigns_sil] HAZOP 위험등급이나 consequence severity만으로 목표 SIL을 자동 결정한다. | correction: Scenario frequency, tolerable risk와 적격 IPL credit을 포함한 LOPA 또는 승인된 risk assessment가 필요하다.",
+      "[dependent_ipls_multiplied] 동일 Sensor·Logic·Final Element·전원 또는 절차에 의존하는 보호기능의 PFD를 독립 IPL처럼 모두 곱한다. | correction: Dependency와 common cause를 제거하거나 보정하고 독립성이 입증된 layer만 credit한다.",
+      "[proposed_safeguard_credited] 아직 구현·시험되지 않은 HAZOP recommendation을 현재 IPL로 credit한다. | correction: 구현, 성능검증과 수명주기 관리가 확인되기 전에는 현재 risk reduction으로 인정하지 않는다.",
+      "[same_layer_double_counted] 하나의 trip 기능이나 하나의 operator action을 예방 IPL과 완화 IPL로 중복 credit한다. | correction: 동일 기능은 한 번만 credit하고 독립된 기능경계를 입증한다.",
+      "[alarm_without_response_capability] 경보가 존재한다는 이유만으로 operator action의 시간·절차·훈련·접근성을 확인하지 않고 IPL로 인정한다. | correction: 독립 감지, 명확한 경보, 충분한 response time과 검증된 행동절차가 필요하다.",
+      "[bpcs_cause_and_ipl] BPCS 고장이 initiating event인데 같은 BPCS의 공유 기능을 독립 IPL로 자동 인정한다. | correction: Initiating cause와 감지·판단·조작 경로의 독립성을 별도로 입증해야 한다.",
+      "[conditional_modifier_as_extra_ipl] 점화확률·재실확률 같은 conditional modifier를 별도 IPL PFD로 다시 곱한다. | correction: Modifier와 IPL은 역할을 분리하고 동일 효과를 중복 반영하지 않는다.",
+      "[rrf_pfd_relation_reversed] 요구 RRF가 커질수록 허용 PFDavg도 커진다고 설명한다. | correction: Low-demand 근사에서 PFDavg_target은 대체로 1/RRF_required 이하이므로 RRF가 커질수록 더 낮아져야 한다.",
+      "[target_equals_achieved] LOPA에서 목표 SIL을 정하면 설계된 SIF가 그 SIL을 자동 달성한다고 판단한다. | correction: Achieved SIL은 구조, PFDavg, 체계적 능력과 수명주기 검증으로 별도 확인한다.",
+      "[component_sil_only] 인증 Sensor나 Logic Solver 한 개의 SIL 등급만으로 전체 SIF SIL이 결정된다고 설명한다. | correction: Sensor–Logic–Final Element와 지원요소의 전체 안전기능 경계를 평가한다.",
+      "[srs_handoff_omitted] 목표 SIL만 기록하고 trip setpoint, safe state, response time, proof test와 bypass 요구를 SRS에 정의하지 않는다. | correction: 기능 요구와 무결성 요구를 검증 가능한 SRS로 인계한다.",
+      "[moc_not_required] 공정조건, 운전모드, initiating frequency, IPL 또는 시험주기가 바뀌어도 LOPA와 SRS 재검토가 필요 없다고 설명한다. | correction: 변경 영향분석, MOC와 revalidation이 필요하다."
+    ],
+    "safe_conditions": [
+      "HAZOP은 deviation과 safeguard를 식별하고 LOPA는 명확한 scenario의 risk reduction gap을 평가한다고 구분한다.",
+      "Consequence, initiating event와 운전모드를 명시한 뒤 적용 가능한 modifier와 IPL만 계산에 포함한다.",
+      "Conditional modifier는 scenario 조건부 확률로, IPL은 독립 보호기능의 PFD로 구분한다.",
+      "공유자원과 common cause가 있으면 독립 IPL 곱셈을 제한하거나 보정한다.",
+      "BPCS와 alarm/operator credit은 initiating cause와의 독립성 및 충분한 response time을 근거로 판단한다.",
+      "현재 구현·시험·정비되지 않은 recommendation은 현존 IPL로 credit하지 않는다.",
+      "Residual frequency를 tolerable event frequency와 비교해 추가 RRF 필요성을 계산한다.",
+      "Low-demand mode와 수식 가정을 명시하고 PFDavg_target과 SIL band를 연결한다.",
+      "Target SIL은 위험감소 요구이고 achieved SIL은 SIF 설계검증 결과라고 구분한다.",
+      "SIF를 Sensor–Logic Solver–Final Element의 전체 기능으로 정의한다.",
+      "LOPA 결과를 setpoint, safe state, response time, proof test와 bypass를 포함하는 SRS로 인계한다.",
+      "다중 scenario demand와 변경영향을 MOC, periodic review와 revalidation으로 관리한다."
+    ]
+  },
+  "revision_notes": [
+    "deterministic regex disabled to avoid broad false positives",
+    "fatal conditions require contextual LLM verification",
+    "single-topic direct authoring from reviewed fact anchors"
+  ]
+}

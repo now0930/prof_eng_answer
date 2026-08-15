@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "HAZOP과 LOPA의 역할을 구분하고 scenario 경계를 명확히 한다.",
+    "Initiating frequency, conditional modifier와 IPL PFD로 residual frequency를 계산한다.",
+    "IPL 적격조건과 common cause·double counting 방지 논리를 설명한다.",
+    "Tolerable frequency에서 RRF와 PFDavg를 도출하여 목표 SIL에 대응한다.",
+    "Target SIL과 achieved SIL을 구분한다.",
+    "SIF 전체 경계와 SRS handoff를 설명한다.",
+    "다중 scenario, MOC와 revalidation을 수명주기로 연결한다."
+  ],
+  "note": "LOPA 수치는 분석 근거와 독립성 가정에 의존한다. 빈도·PFD·conditional modifier와 회사 위험수용기준은 verify-first로 다룬다.",
+  "revision_notes": [
+    "single-topic direct authoring",
+    "topic source only; generated banks intentionally unchanged",
+    "target SIL assignment separated from achieved SIL verification"
+  ],
+  "topic_label": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당"
+}

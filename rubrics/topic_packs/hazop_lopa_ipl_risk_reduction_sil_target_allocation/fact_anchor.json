@@ -1,0 +1,708 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+  "title_ko": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "id": "hazop_lopa_hazop_role",
+      "anchor_id": "hazop_lopa_hazop_role",
+      "statement": "HAZOP은 guide word를 이용해 공정 의도에서 벗어난 deviation, 원인, 결과와 기존 safeguard를 체계적으로 식별하지만 그 자체가 목표 SIL을 직접 결정하지는 않는다.",
+      "importance": "core",
+      "keywords": [
+        "HAZOP",
+        "guide word",
+        "deviation",
+        "safeguard"
+      ],
+      "core_terms": [
+        "HAZOP",
+        "guide word",
+        "deviation",
+        "safeguard"
+      ],
+      "accepted_explanations": [
+        "HAZOP은 guide word를 이용해 공정 의도에서 벗어난 deviation, 원인, 결과와 기존 safeguard를 체계적으로 식별하지만 그 자체가 목표 SIL을 직접 결정하지는 않는다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "HAZOP은 guide word를 이용해 공정 의도에서 벗어난 deviation, 원인, 결과와 기존 safeguard를 체계적으로 식별하지만 그 자체가 목표 SIL을 직접 결정하지는 않는다.",
+      "description": "HAZOP은 guide word를 이용해 공정 의도에서 벗어난 deviation, 원인, 결과와 기존 safeguard를 체계적으로 식별하지만 그 자체가 목표 SIL을 직접 결정하지는 않는다."
+    },
+    {
+      "id": "hazop_lopa_lopa_scenario_boundary",
+      "anchor_id": "hazop_lopa_lopa_scenario_boundary",
+      "statement": "LOPA는 하나의 initiating event, 하나의 consequence endpoint와 명확한 운전조건을 갖는 scenario 단위로 수행해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "LOPA",
+        "scenario",
+        "initiating event",
+        "consequence"
+      ],
+      "core_terms": [
+        "LOPA",
+        "scenario",
+        "initiating event",
+        "consequence"
+      ],
+      "accepted_explanations": [
+        "LOPA는 하나의 initiating event, 하나의 consequence endpoint와 명확한 운전조건을 갖는 scenario 단위로 수행해야 한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "LOPA는 하나의 initiating event, 하나의 consequence endpoint와 명확한 운전조건을 갖는 scenario 단위로 수행해야 한다.",
+      "description": "LOPA는 하나의 initiating event, 하나의 consequence endpoint와 명확한 운전조건을 갖는 scenario 단위로 수행해야 한다."
+    },
+    {
+      "id": "hazop_lopa_consequence_without_credited_protection",
+      "anchor_id": "hazop_lopa_consequence_without_credited_protection",
+      "statement": "LOPA consequence는 해당 scenario에서 credit하려는 보호계층의 효과를 먼저 포함하지 않은 상태로 정의해야 순환논리와 이중계산을 피할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "consequence",
+        "unmitigated",
+        "protection layer",
+        "double counting"
+      ],
+      "core_terms": [
+        "consequence",
+        "unmitigated",
+        "protection layer",
+        "double counting"
+      ],
+      "accepted_explanations": [
+        "LOPA consequence는 해당 scenario에서 credit하려는 보호계층의 효과를 먼저 포함하지 않은 상태로 정의해야 순환논리와 이중계산을 피할 수 있다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "LOPA consequence는 해당 scenario에서 credit하려는 보호계층의 효과를 먼저 포함하지 않은 상태로 정의해야 순환논리와 이중계산을 피할 수 있다.",
+      "description": "LOPA consequence는 해당 scenario에서 credit하려는 보호계층의 효과를 먼저 포함하지 않은 상태로 정의해야 순환논리와 이중계산을 피할 수 있다."
+    },
+    {
+      "id": "hazop_lopa_initiating_event_frequency",
+      "anchor_id": "hazop_lopa_initiating_event_frequency",
+      "statement": "Initiating event frequency는 원인 사건이 분석조건에서 발생하는 빈도이며 설비 이력, 신뢰성 자료와 적용 경계를 근거로 정한다.",
+      "importance": "core",
+      "keywords": [
+        "initiating event frequency",
+        "frequency",
+        "operating history",
+        "reliability data"
+      ],
+      "core_terms": [
+        "initiating event frequency",
+        "frequency",
+        "operating history",
+        "reliability data"
+      ],
+      "accepted_explanations": [
+        "Initiating event frequency는 원인 사건이 분석조건에서 발생하는 빈도이며 설비 이력, 신뢰성 자료와 적용 경계를 근거로 정한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "Initiating event frequency는 원인 사건이 분석조건에서 발생하는 빈도이며 설비 이력, 신뢰성 자료와 적용 경계를 근거로 정한다.",
+      "description": "Initiating event frequency는 원인 사건이 분석조건에서 발생하는 빈도이며 설비 이력, 신뢰성 자료와 적용 경계를 근거로 정한다."
+    },
+    {
+      "id": "hazop_lopa_enabling_and_conditional_modifiers",
+      "anchor_id": "hazop_lopa_enabling_and_conditional_modifiers",
+      "statement": "Enabling condition과 conditional modifier는 실제 노출시간, 점화확률, 재실확률 등 scenario에 필요한 조건부 확률만 근거 있게 적용한다.",
+      "importance": "core",
+      "keywords": [
+        "enabling condition",
+        "conditional modifier",
+        "occupancy",
+        "ignition probability"
+      ],
+      "core_terms": [
+        "enabling condition",
+        "conditional modifier",
+        "occupancy",
+        "ignition probability"
+      ],
+      "accepted_explanations": [
+        "Enabling condition과 conditional modifier는 실제 노출시간, 점화확률, 재실확률 등 scenario에 필요한 조건부 확률만 근거 있게 적용한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "Enabling condition과 conditional modifier는 실제 노출시간, 점화확률, 재실확률 등 scenario에 필요한 조건부 확률만 근거 있게 적용한다.",
+      "description": "Enabling condition과 conditional modifier는 실제 노출시간, 점화확률, 재실확률 등 scenario에 필요한 조건부 확률만 근거 있게 적용한다."
+    },
+    {
+      "id": "hazop_lopa_lopa_frequency_equation",
+      "anchor_id": "hazop_lopa_lopa_frequency_equation",
+      "statement": "LOPA의 residual scenario frequency는 initiating event frequency에 적용 가능한 조건부 수정인자와 독립보호계층의 PFD를 곱하여 산정한다.",
+      "importance": "core",
+      "keywords": [
+        "residual frequency",
+        "initiating frequency",
+        "conditional modifier",
+        "PFD"
+      ],
+      "core_terms": [
+        "residual frequency",
+        "initiating frequency",
+        "conditional modifier",
+        "PFD"
+      ],
+      "accepted_explanations": [
+        "LOPA의 residual scenario frequency는 initiating event frequency에 적용 가능한 조건부 수정인자와 독립보호계층의 PFD를 곱하여 산정한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "LOPA의 residual scenario frequency는 initiating event frequency에 적용 가능한 조건부 수정인자와 독립보호계층의 PFD를 곱하여 산정한다.",
+      "description": "LOPA의 residual scenario frequency는 initiating event frequency에 적용 가능한 조건부 수정인자와 독립보호계층의 PFD를 곱하여 산정한다."
+    },
+    {
+      "id": "hazop_lopa_tolerable_event_frequency",
+      "anchor_id": "hazop_lopa_tolerable_event_frequency",
+      "statement": "Tolerable event frequency는 회사 또는 사업장의 승인된 위험수용기준에서 consequence category별로 정하며 분석자가 임의로 선택하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "tolerable frequency",
+        "risk criteria",
+        "consequence category",
+        "risk tolerance"
+      ],
+      "core_terms": [
+        "tolerable frequency",
+        "risk criteria",
+        "consequence category",
+        "risk tolerance"
+      ],
+      "accepted_explanations": [
+        "Tolerable event frequency는 회사 또는 사업장의 승인된 위험수용기준에서 consequence category별로 정하며 분석자가 임의로 선택하지 않는다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "Tolerable event frequency는 회사 또는 사업장의 승인된 위험수용기준에서 consequence category별로 정하며 분석자가 임의로 선택하지 않는다.",
+      "description": "Tolerable event frequency는 회사 또는 사업장의 승인된 위험수용기준에서 consequence category별로 정하며 분석자가 임의로 선택하지 않는다."
+    },
+    {
+      "id": "hazop_lopa_ipl_definition",
+      "anchor_id": "hazop_lopa_ipl_definition",
+      "statement": "IPL은 특정 scenario를 예방하거나 결과를 완화하는 독립된 보호수단으로서 기능이 명확하고 성능을 검증할 수 있어야 한다.",
+      "importance": "core",
+      "keywords": [
+        "IPL",
+        "independent protection layer",
+        "prevention",
+        "mitigation"
+      ],
+      "core_terms": [
+        "IPL",
+        "independent protection layer",
+        "prevention",
+        "mitigation"
+      ],
+      "accepted_explanations": [
+        "IPL은 특정 scenario를 예방하거나 결과를 완화하는 독립된 보호수단으로서 기능이 명확하고 성능을 검증할 수 있어야 한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "IPL은 특정 scenario를 예방하거나 결과를 완화하는 독립된 보호수단으로서 기능이 명확하고 성능을 검증할 수 있어야 한다.",
+      "description": "IPL은 특정 scenario를 예방하거나 결과를 완화하는 독립된 보호수단으로서 기능이 명확하고 성능을 검증할 수 있어야 한다."
+    },
+    {
+      "id": "hazop_lopa_ipl_independence",
+      "anchor_id": "hazop_lopa_ipl_independence",
+      "statement": "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "independence",
+        "common cause",
+        "functional independence",
+        "physical separation"
+      ],
+      "core_terms": [
+        "independence",
+        "common cause",
+        "functional independence",
+        "physical separation"
+      ],
+      "accepted_explanations": [
+        "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다.",
+      "description": "IPL credit은 initiating event와 다른 IPL로부터 기능적·물리적·조직적으로 충분히 독립되어 공통원인에 의해 동시에 상실되지 않는다는 근거가 필요하다."
+    },
+    {
+      "id": "hazop_lopa_ipl_specificity",
+      "anchor_id": "hazop_lopa_ipl_specificity",
+      "statement": "IPL은 분석한 원인–결과 scenario에 실제로 작동하는 구체적 보호기능이어야 하며 일반적인 좋은 설계나 교육만으로 자동 credit할 수 없다.",
+      "importance": "core",
+      "keywords": [
+        "specificity",
+        "scenario specific",
+        "safeguard",
+        "credit"
+      ],
+      "core_terms": [
+        "specificity",
+        "scenario specific",
+        "safeguard",
+        "credit"
+      ],
+      "accepted_explanations": [
+        "IPL은 분석한 원인–결과 scenario에 실제로 작동하는 구체적 보호기능이어야 하며 일반적인 좋은 설계나 교육만으로 자동 credit할 수 없다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "IPL은 분석한 원인–결과 scenario에 실제로 작동하는 구체적 보호기능이어야 하며 일반적인 좋은 설계나 교육만으로 자동 credit할 수 없다.",
+      "description": "IPL은 분석한 원인–결과 scenario에 실제로 작동하는 구체적 보호기능이어야 하며 일반적인 좋은 설계나 교육만으로 자동 credit할 수 없다."
+    },
+    {
+      "id": "hazop_lopa_ipl_dependability_auditability",
+      "anchor_id": "hazop_lopa_ipl_dependability_auditability",
+      "statement": "IPL은 요구 시 동작할 충분한 dependability와 시험·정비·기록을 통한 auditability를 갖추어야 하며 주장한 PFD를 수명주기 동안 유지해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "dependability",
+        "auditability",
+        "proof test",
+        "maintenance"
+      ],
+      "core_terms": [
+        "dependability",
+        "auditability",
+        "proof test",
+        "maintenance"
+      ],
+      "accepted_explanations": [
+        "IPL은 요구 시 동작할 충분한 dependability와 시험·정비·기록을 통한 auditability를 갖추어야 하며 주장한 PFD를 수명주기 동안 유지해야 한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "IPL은 요구 시 동작할 충분한 dependability와 시험·정비·기록을 통한 auditability를 갖추어야 하며 주장한 PFD를 수명주기 동안 유지해야 한다.",
+      "description": "IPL은 요구 시 동작할 충분한 dependability와 시험·정비·기록을 통한 auditability를 갖추어야 하며 주장한 PFD를 수명주기 동안 유지해야 한다."
+    },
+    {
+      "id": "hazop_lopa_no_double_counting",
+      "anchor_id": "hazop_lopa_no_double_counting",
+      "statement": "동일 Sensor, Logic Solver, Final Element, Utility 또는 동일 작업자 대응에 의존하는 보호기능은 독립성이 입증되지 않으면 서로 다른 IPL로 중복 credit하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "double counting",
+        "shared sensor",
+        "shared logic solver",
+        "shared final element"
+      ],
+      "core_terms": [
+        "double counting",
+        "shared sensor",
+        "shared logic solver",
+        "shared final element"
+      ],
+      "accepted_explanations": [
+        "동일 Sensor, Logic Solver, Final Element, Utility 또는 동일 작업자 대응에 의존하는 보호기능은 독립성이 입증되지 않으면 서로 다른 IPL로 중복 credit하지 않는다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "동일 Sensor, Logic Solver, Final Element, Utility 또는 동일 작업자 대응에 의존하는 보호기능은 독립성이 입증되지 않으면 서로 다른 IPL로 중복 credit하지 않는다.",
+      "description": "동일 Sensor, Logic Solver, Final Element, Utility 또는 동일 작업자 대응에 의존하는 보호기능은 독립성이 입증되지 않으면 서로 다른 IPL로 중복 credit하지 않는다."
+    },
+    {
+      "id": "hazop_lopa_common_cause_dependency",
+      "anchor_id": "hazop_lopa_common_cause_dependency",
+      "statement": "공통 전원·배관·계측탭·환경·정비절차·소프트웨어와 같은 dependency는 IPL 곱셈 전에 식별하고 독립성 또는 공통원인 보정을 검토해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "common cause",
+        "dependency",
+        "shared utility",
+        "maintenance"
+      ],
+      "core_terms": [
+        "common cause",
+        "dependency",
+        "shared utility",
+        "maintenance"
+      ],
+      "accepted_explanations": [
+        "공통 전원·배관·계측탭·환경·정비절차·소프트웨어와 같은 dependency는 IPL 곱셈 전에 식별하고 독립성 또는 공통원인 보정을 검토해야 한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "공통 전원·배관·계측탭·환경·정비절차·소프트웨어와 같은 dependency는 IPL 곱셈 전에 식별하고 독립성 또는 공통원인 보정을 검토해야 한다.",
+      "description": "공통 전원·배관·계측탭·환경·정비절차·소프트웨어와 같은 dependency는 IPL 곱셈 전에 식별하고 독립성 또는 공통원인 보정을 검토해야 한다."
+    },
+    {
+      "id": "hazop_lopa_bpcs_ipl_credit",
+      "anchor_id": "hazop_lopa_bpcs_ipl_credit",
+      "statement": "BPCS 기능을 IPL로 credit하려면 initiating cause와의 독립성, 감지–판단–조작 경로, 고장모드와 성능 근거를 확인해야 하며 BPCS가 원인인 경우 같은 기능을 자동 credit할 수 없다.",
+      "importance": "core",
+      "keywords": [
+        "BPCS",
+        "IPL credit",
+        "independence",
+        "initiating cause"
+      ],
+      "core_terms": [
+        "BPCS",
+        "IPL credit",
+        "independence",
+        "initiating cause"
+      ],
+      "accepted_explanations": [
+        "BPCS 기능을 IPL로 credit하려면 initiating cause와의 독립성, 감지–판단–조작 경로, 고장모드와 성능 근거를 확인해야 하며 BPCS가 원인인 경우 같은 기능을 자동 credit할 수 없다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "BPCS 기능을 IPL로 credit하려면 initiating cause와의 독립성, 감지–판단–조작 경로, 고장모드와 성능 근거를 확인해야 하며 BPCS가 원인인 경우 같은 기능을 자동 credit할 수 없다.",
+      "description": "BPCS 기능을 IPL로 credit하려면 initiating cause와의 독립성, 감지–판단–조작 경로, 고장모드와 성능 근거를 확인해야 하며 BPCS가 원인인 경우 같은 기능을 자동 credit할 수 없다."
+    },
+    {
+      "id": "hazop_lopa_alarm_operator_ipl",
+      "anchor_id": "hazop_lopa_alarm_operator_ipl",
+      "statement": "Alarm과 operator response를 IPL로 credit하려면 독립된 감지, 명확한 경보, 충분한 진단·조치시간, 훈련된 절차와 성능검증이 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "alarm",
+        "operator response",
+        "response time",
+        "procedure"
+      ],
+      "core_terms": [
+        "alarm",
+        "operator response",
+        "response time",
+        "procedure"
+      ],
+      "accepted_explanations": [
+        "Alarm과 operator response를 IPL로 credit하려면 독립된 감지, 명확한 경보, 충분한 진단·조치시간, 훈련된 절차와 성능검증이 필요하다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "Alarm과 operator response를 IPL로 credit하려면 독립된 감지, 명확한 경보, 충분한 진단·조치시간, 훈련된 절차와 성능검증이 필요하다.",
+      "description": "Alarm과 operator response를 IPL로 credit하려면 독립된 감지, 명확한 경보, 충분한 진단·조치시간, 훈련된 절차와 성능검증이 필요하다."
+    },
+    {
+      "id": "hazop_lopa_proposed_safeguard_not_creditable",
+      "anchor_id": "hazop_lopa_proposed_safeguard_not_creditable",
+      "statement": "HAZOP recommendation이나 계획된 safeguard는 구현·검증·운영관리 체계가 확인되기 전에는 현재 IPL로 credit하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "proposed safeguard",
+        "HAZOP recommendation",
+        "implementation",
+        "verification"
+      ],
+      "core_terms": [
+        "proposed safeguard",
+        "HAZOP recommendation",
+        "implementation",
+        "verification"
+      ],
+      "accepted_explanations": [
+        "HAZOP recommendation이나 계획된 safeguard는 구현·검증·운영관리 체계가 확인되기 전에는 현재 IPL로 credit하지 않는다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "HAZOP recommendation이나 계획된 safeguard는 구현·검증·운영관리 체계가 확인되기 전에는 현재 IPL로 credit하지 않는다.",
+      "description": "HAZOP recommendation이나 계획된 safeguard는 구현·검증·운영관리 체계가 확인되기 전에는 현재 IPL로 credit하지 않는다."
+    },
+    {
+      "id": "hazop_lopa_residual_frequency_after_existing_ipls",
+      "anchor_id": "hazop_lopa_residual_frequency_after_existing_ipls",
+      "statement": "기존 non-SIS IPL을 반영한 residual frequency가 허용빈도보다 크면 그 차이를 줄일 추가 위험감소가 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "residual frequency",
+        "existing IPL",
+        "additional risk reduction",
+        "tolerable frequency"
+      ],
+      "core_terms": [
+        "residual frequency",
+        "existing IPL",
+        "additional risk reduction",
+        "tolerable frequency"
+      ],
+      "accepted_explanations": [
+        "기존 non-SIS IPL을 반영한 residual frequency가 허용빈도보다 크면 그 차이를 줄일 추가 위험감소가 필요하다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "기존 non-SIS IPL을 반영한 residual frequency가 허용빈도보다 크면 그 차이를 줄일 추가 위험감소가 필요하다.",
+      "description": "기존 non-SIS IPL을 반영한 residual frequency가 허용빈도보다 크면 그 차이를 줄일 추가 위험감소가 필요하다."
+    },
+    {
+      "id": "hazop_lopa_required_rrf",
+      "anchor_id": "hazop_lopa_required_rrf",
+      "statement": "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있으며 1 이하이면 해당 scenario에서 추가 SIF 위험감소 요구가 발생하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "RRF required",
+        "risk reduction factor",
+        "residual frequency",
+        "tolerable frequency"
+      ],
+      "core_terms": [
+        "RRF required",
+        "risk reduction factor",
+        "residual frequency",
+        "tolerable frequency"
+      ],
+      "accepted_explanations": [
+        "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있으며 1 이하이면 해당 scenario에서 추가 SIF 위험감소 요구가 발생하지 않는다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있으며 1 이하이면 해당 scenario에서 추가 SIF 위험감소 요구가 발생하지 않는다.",
+      "description": "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있으며 1 이하이면 해당 scenario에서 추가 SIF 위험감소 요구가 발생하지 않는다."
+    },
+    {
+      "id": "hazop_lopa_pfdavg_rrf_relation",
+      "anchor_id": "hazop_lopa_pfdavg_rrf_relation",
+      "statement": "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다.",
+      "importance": "core",
+      "keywords": [
+        "PFDavg",
+        "RRF",
+        "low demand",
+        "target"
+      ],
+      "core_terms": [
+        "PFDavg",
+        "RRF",
+        "low demand",
+        "target"
+      ],
+      "accepted_explanations": [
+        "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다.",
+      "description": "Low-demand SIF의 목표 평균 요구시고장확률은 근사적으로 PFDavg_target ≤ 1/RRF_required 관계를 사용하되 분석 가정과 운전모드를 명시한다."
+    },
+    {
+      "id": "hazop_lopa_sil_band_mapping",
+      "anchor_id": "hazop_lopa_sil_band_mapping",
+      "statement": "Low-demand mode에서 목표 PFDavg를 표준의 SIL 구간에 대응시켜 목표 SIL을 정하며 SIL 1, 2, 3의 PFDavg 범위는 각각 10^-2 이상 10^-1 미만, 10^-3 이상 10^-2 미만, 10^-4 이상 10^-3 미만이다.",
+      "importance": "core",
+      "keywords": [
+        "SIL 1",
+        "SIL 2",
+        "SIL 3",
+        "PFDavg range"
+      ],
+      "core_terms": [
+        "SIL 1",
+        "SIL 2",
+        "SIL 3",
+        "PFDavg range"
+      ],
+      "accepted_explanations": [
+        "Low-demand mode에서 목표 PFDavg를 표준의 SIL 구간에 대응시켜 목표 SIL을 정하며 SIL 1, 2, 3의 PFDavg 범위는 각각 10^-2 이상 10^-1 미만, 10^-3 이상 10^-2 미만, 10^-4 이상 10^-3 미만이다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "Low-demand mode에서 목표 PFDavg를 표준의 SIL 구간에 대응시켜 목표 SIL을 정하며 SIL 1, 2, 3의 PFDavg 범위는 각각 10^-2 이상 10^-1 미만, 10^-3 이상 10^-2 미만, 10^-4 이상 10^-3 미만이다.",
+      "description": "Low-demand mode에서 목표 PFDavg를 표준의 SIL 구간에 대응시켜 목표 SIL을 정하며 SIL 1, 2, 3의 PFDavg 범위는 각각 10^-2 이상 10^-1 미만, 10^-3 이상 10^-2 미만, 10^-4 이상 10^-3 미만이다."
+    },
+    {
+      "id": "hazop_lopa_target_vs_achieved_sil",
+      "anchor_id": "hazop_lopa_target_vs_achieved_sil",
+      "statement": "LOPA가 정하는 것은 요구되는 target SIL 또는 RRF이며 실제 achieved SIL은 SIF 설계의 PFDavg 계산, 구조제약, 체계적 능력과 수명주기 검증으로 별도 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "target SIL",
+        "achieved SIL",
+        "PFDavg verification",
+        "systematic capability"
+      ],
+      "core_terms": [
+        "target SIL",
+        "achieved SIL",
+        "PFDavg verification",
+        "systematic capability"
+      ],
+      "accepted_explanations": [
+        "LOPA가 정하는 것은 요구되는 target SIL 또는 RRF이며 실제 achieved SIL은 SIF 설계의 PFDavg 계산, 구조제약, 체계적 능력과 수명주기 검증으로 별도 확인한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "LOPA가 정하는 것은 요구되는 target SIL 또는 RRF이며 실제 achieved SIL은 SIF 설계의 PFDavg 계산, 구조제약, 체계적 능력과 수명주기 검증으로 별도 확인한다.",
+      "description": "LOPA가 정하는 것은 요구되는 target SIL 또는 RRF이며 실제 achieved SIL은 SIF 설계의 PFDavg 계산, 구조제약, 체계적 능력과 수명주기 검증으로 별도 확인한다."
+    },
+    {
+      "id": "hazop_lopa_sif_allocation_boundary",
+      "anchor_id": "hazop_lopa_sif_allocation_boundary",
+      "statement": "SIF 할당 시 Sensor, Logic Solver, Final Element, trip setpoint, safe state, response time와 process safety time의 전체 기능경계를 정의해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "SIF allocation",
+        "sensor",
+        "logic solver",
+        "final element",
+        "process safety time"
+      ],
+      "core_terms": [
+        "SIF allocation",
+        "sensor",
+        "logic solver",
+        "final element",
+        "process safety time"
+      ],
+      "accepted_explanations": [
+        "SIF 할당 시 Sensor, Logic Solver, Final Element, trip setpoint, safe state, response time와 process safety time의 전체 기능경계를 정의해야 한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "SIF 할당 시 Sensor, Logic Solver, Final Element, trip setpoint, safe state, response time와 process safety time의 전체 기능경계를 정의해야 한다.",
+      "description": "SIF 할당 시 Sensor, Logic Solver, Final Element, trip setpoint, safe state, response time와 process safety time의 전체 기능경계를 정의해야 한다."
+    },
+    {
+      "id": "hazop_lopa_srs_handoff",
+      "anchor_id": "hazop_lopa_srs_handoff",
+      "statement": "LOPA 결과는 원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드를 포함하는 SRS 입력으로 인계되어야 한다.",
+      "importance": "core",
+      "keywords": [
+        "SRS",
+        "trip setpoint",
+        "safe state",
+        "proof test",
+        "bypass"
+      ],
+      "core_terms": [
+        "SRS",
+        "trip setpoint",
+        "safe state",
+        "proof test",
+        "bypass"
+      ],
+      "accepted_explanations": [
+        "LOPA 결과는 원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드를 포함하는 SRS 입력으로 인계되어야 한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "LOPA 결과는 원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드를 포함하는 SRS 입력으로 인계되어야 한다.",
+      "description": "LOPA 결과는 원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드를 포함하는 SRS 입력으로 인계되어야 한다."
+    },
+    {
+      "id": "hazop_lopa_scenario_aggregation_moc",
+      "anchor_id": "hazop_lopa_scenario_aggregation_moc",
+      "statement": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다.",
+      "importance": "core",
+      "keywords": [
+        "multiple scenarios",
+        "demand rate",
+        "MOC",
+        "revalidation"
+      ],
+      "core_terms": [
+        "multiple scenarios",
+        "demand rate",
+        "MOC",
+        "revalidation"
+      ],
+      "accepted_explanations": [
+        "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다.",
+        "수식의 변수·조건·독립성 가정과 현장 수명주기 관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 scenario 경계, IPL 독립성, 빈도 계산과 SRS 인계를 생략한다."
+      ],
+      "grading_notes": "HAZOP에서 LOPA, IPL credit, residual risk, target SIL과 SIF/SRS 할당으로 이어지는 판단의 정확성과 실무 적용성을 평가한다.",
+      "source_basis": "docs/topic_sheets/hazop_lopa_ipl_risk_reduction_sil_target_allocation.md",
+      "claim": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다.",
+      "description": "여러 scenario가 하나의 SIF를 요구하면 각 요구빈도와 기능요구를 함께 검토하고, 공정·운전모드·initiating frequency·IPL·시험주기가 변경되면 MOC와 재검증으로 LOPA와 SRS를 갱신한다."
+    }
+  ]
+}

@@ -1,0 +1,226 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+  "title_ko": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "HAZOP 결과를 LOPA scenario로 전환하고 목표 SIL을 결정하는 절차를 설명하시오.",
+      "intent": "hazop to lopa and target SIL determination",
+      "required_anchor_ids": [
+        "hazop_lopa_hazop_role",
+        "hazop_lopa_lopa_scenario_boundary",
+        "hazop_lopa_initiating_event_frequency",
+        "hazop_lopa_tolerable_event_frequency",
+        "hazop_lopa_required_rrf",
+        "hazop_lopa_sil_band_mapping"
+      ]
+    },
+    {
+      "pattern": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+      "intent": "lopa quantitative sequence",
+      "required_anchor_ids": [
+        "hazop_lopa_initiating_event_frequency",
+        "hazop_lopa_enabling_and_conditional_modifiers",
+        "hazop_lopa_lopa_frequency_equation",
+        "hazop_lopa_residual_frequency_after_existing_ipls",
+        "hazop_lopa_required_rrf",
+        "hazop_lopa_pfdavg_rrf_relation"
+      ]
+    },
+    {
+      "pattern": "독립보호계층 IPL의 인정조건과 이중계산 방지방안을 설명하시오.",
+      "intent": "ipl qualification and double counting prevention",
+      "required_anchor_ids": [
+        "hazop_lopa_ipl_definition",
+        "hazop_lopa_ipl_independence",
+        "hazop_lopa_ipl_specificity",
+        "hazop_lopa_ipl_dependability_auditability",
+        "hazop_lopa_no_double_counting",
+        "hazop_lopa_common_cause_dependency"
+      ]
+    },
+    {
+      "pattern": "BPCS와 Alarm·Operator Action을 IPL로 인정할 때의 조건을 설명하시오.",
+      "intent": "bpcs and operator IPL credit",
+      "required_anchor_ids": [
+        "hazop_lopa_bpcs_ipl_credit",
+        "hazop_lopa_alarm_operator_ipl",
+        "hazop_lopa_common_cause_dependency",
+        "hazop_lopa_no_double_counting"
+      ]
+    },
+    {
+      "pattern": "RRF, PFDavg와 SIL의 관계를 설명하고 목표 SIL과 달성 SIL을 비교하시오.",
+      "intent": "rrf pfdavg sil relationship",
+      "required_anchor_ids": [
+        "hazop_lopa_required_rrf",
+        "hazop_lopa_pfdavg_rrf_relation",
+        "hazop_lopa_sil_band_mapping",
+        "hazop_lopa_target_vs_achieved_sil"
+      ]
+    },
+    {
+      "pattern": "LOPA 결과를 SIF와 SRS에 할당하는 방법을 설명하시오.",
+      "intent": "lopa to sif and srs handoff",
+      "required_anchor_ids": [
+        "hazop_lopa_sif_allocation_boundary",
+        "hazop_lopa_srs_handoff",
+        "hazop_lopa_target_vs_achieved_sil",
+        "hazop_lopa_scenario_aggregation_moc"
+      ]
+    },
+    {
+      "pattern": "LOPA에서 common cause와 dependent protection layer의 처리방법을 설명하시오.",
+      "intent": "dependency and common cause treatment",
+      "required_anchor_ids": [
+        "hazop_lopa_ipl_independence",
+        "hazop_lopa_no_double_counting",
+        "hazop_lopa_common_cause_dependency",
+        "hazop_lopa_bpcs_ipl_credit"
+      ]
+    },
+    {
+      "pattern": "LOPA 결과의 불확실성과 변경관리 및 재검증 방안을 설명하시오.",
+      "intent": "uncertainty management and revalidation",
+      "required_anchor_ids": [
+        "hazop_lopa_initiating_event_frequency",
+        "hazop_lopa_enabling_and_conditional_modifiers",
+        "hazop_lopa_ipl_dependability_auditability",
+        "hazop_lopa_scenario_aggregation_moc"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "HAZOP 결과와 scenario 경계",
+      "intent": "Deviation, cause, consequence와 safeguard를 하나의 LOPA scenario로 정규화한다.",
+      "anchor_refs": [
+        "hazop_lopa_hazop_role",
+        "hazop_lopa_lopa_scenario_boundary",
+        "hazop_lopa_consequence_without_credited_protection"
+      ]
+    },
+    {
+      "section": "기초빈도와 조건부 수정",
+      "intent": "Initiating event frequency와 적용 가능한 enabling/conditional modifier의 근거를 설명한다.",
+      "anchor_refs": [
+        "hazop_lopa_initiating_event_frequency",
+        "hazop_lopa_enabling_and_conditional_modifiers"
+      ]
+    },
+    {
+      "section": "IPL 적격성과 독립성",
+      "intent": "IPL의 specificity, independence, dependability와 auditability를 평가한다.",
+      "anchor_refs": [
+        "hazop_lopa_ipl_definition",
+        "hazop_lopa_ipl_independence",
+        "hazop_lopa_ipl_specificity",
+        "hazop_lopa_ipl_dependability_auditability"
+      ]
+    },
+    {
+      "section": "이중계산과 공통원인 통제",
+      "intent": "공유자원과 dependent layer를 식별하고 중복 credit을 제거한다.",
+      "anchor_refs": [
+        "hazop_lopa_no_double_counting",
+        "hazop_lopa_common_cause_dependency",
+        "hazop_lopa_bpcs_ipl_credit",
+        "hazop_lopa_alarm_operator_ipl",
+        "hazop_lopa_proposed_safeguard_not_creditable"
+      ]
+    },
+    {
+      "section": "Residual risk와 목표 SIL",
+      "intent": "Residual frequency, tolerable frequency, RRF와 PFDavg를 계산하여 목표 SIL을 정한다.",
+      "anchor_refs": [
+        "hazop_lopa_lopa_frequency_equation",
+        "hazop_lopa_tolerable_event_frequency",
+        "hazop_lopa_residual_frequency_after_existing_ipls",
+        "hazop_lopa_required_rrf",
+        "hazop_lopa_pfdavg_rrf_relation",
+        "hazop_lopa_sil_band_mapping"
+      ]
+    },
+    {
+      "section": "목표와 달성의 분리",
+      "intent": "LOPA의 target SIL과 설계 검증으로 확인하는 achieved SIL을 구분한다.",
+      "anchor_refs": [
+        "hazop_lopa_target_vs_achieved_sil"
+      ]
+    },
+    {
+      "section": "SIF 할당과 SRS 인계",
+      "intent": "전체 SIF 경계, 응답시간, safe state와 수명주기 요구를 SRS로 인계한다.",
+      "anchor_refs": [
+        "hazop_lopa_sif_allocation_boundary",
+        "hazop_lopa_srs_handoff"
+      ]
+    },
+    {
+      "section": "다중 scenario와 변경관리",
+      "intent": "공통 SIF의 demand와 변경영향을 통합하여 MOC와 재검증으로 관리한다.",
+      "anchor_refs": [
+        "hazop_lopa_scenario_aggregation_moc"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "HAZOP이 hazard identification이고 LOPA가 scenario별 risk reduction 판단임을 구분한다.",
+    "Initiating event, consequence endpoint와 운전모드를 하나의 scenario 경계로 고정한다.",
+    "Conditional modifier와 IPL의 역할을 분리한다.",
+    "IPL의 independence, specificity, dependability, auditability를 모두 설명한다.",
+    "공유 Sensor·Logic·Final Element·전원·절차에 의한 common cause와 double counting을 제거한다.",
+    "Residual frequency와 tolerable frequency로 RRF_required를 계산한다.",
+    "Low-demand 조건에서 PFDavg와 RRF의 역수 관계 및 SIL 구간을 설명한다.",
+    "Target SIL과 achieved SIL을 분리한다.",
+    "Sensor–Logic Solver–Final Element 전체 SIF 경계와 process safety time을 명시한다.",
+    "LOPA 결과를 SRS의 setpoint, safe state, response time, proof test와 bypass 요구로 인계한다.",
+    "여러 scenario가 같은 SIF를 공유할 때 demand와 기능요구를 함께 검토한다.",
+    "공정·운전·IPL·시험주기 변경을 MOC와 재검증으로 연결한다."
+  ],
+  "common_missing_points": [
+    "HAZOP 위험등급만으로 SIL을 바로 지정함",
+    "Initiating event와 consequence endpoint가 불명확함",
+    "Conditional modifier를 별도 IPL처럼 중복 적용함",
+    "독립성이 없는 보호기능을 PFD 곱셈에 포함함",
+    "BPCS가 initiating cause인데 같은 BPCS 기능을 IPL로 credit함",
+    "Alarm과 operator action의 가용시간·훈련·절차를 확인하지 않음",
+    "RRF와 PFDavg 관계를 반대로 설명함",
+    "Target SIL을 achieved SIL로 간주함",
+    "SIF 경계와 SRS 인계를 생략함",
+    "변경관리와 재검증을 생략함"
+  ],
+  "routing_aliases": [
+    "HAZOP LOPA target SIL",
+    "HAZOP to LOPA scenario",
+    "LOPA independent protection layer",
+    "IPL credit criteria",
+    "initiating event frequency conditional modifier",
+    "residual frequency tolerable frequency",
+    "risk reduction factor RRF PFDavg",
+    "target SIL determination",
+    "SIF allocation SRS handoff",
+    "LOPA double counting common cause",
+    "BPCS alarm operator IPL",
+    "LOPA MOC revalidation"
+  ],
+  "routing_field_points": [
+    "HAZOP deviation를 원인–결과 LOPA scenario로 전환하는 절차",
+    "Initiating event frequency와 conditional modifier의 근거",
+    "IPL의 독립성·특정성·신뢰성·감사가능성",
+    "공유자원과 common cause에 의한 double counting 방지",
+    "Residual frequency와 tolerable event frequency 비교",
+    "RRF_required와 PFDavg_target 관계",
+    "목표 SIL과 달성 SIL의 구분",
+    "Sensor–Logic Solver–Final Element 전체 SIF 할당",
+    "SRS의 trip setpoint, safe state, response time와 proof test 요구",
+    "다중 scenario demand, MOC와 revalidation"
+  ],
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py; final source directly reviewed and authored",
+    "authoring_basis=docs/topic_pack_workflow.md",
+    "adjacent_boundary=sis_sil_safety_software_independence_systematic_failure_verification_validation",
+    "generated_bank_not_modified"
+  ]
+}
