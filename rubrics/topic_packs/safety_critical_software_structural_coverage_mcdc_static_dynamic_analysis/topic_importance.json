@@ -1,0 +1,24 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "MC/DC의 독립 영향과 Test Pair 조건을 정확히 설명한다.",
+    "Statement·Decision·Condition·MC/DC·MCC를 비교한다.",
+    "Unique-cause와 Masking 방식을 구분한다.",
+    "Short-circuit와 Coupled Condition을 반영한다.",
+    "Coverage Gap을 Dead·Deactivated·Defensive Code와 연결한다.",
+    "Object Code, Compiler, Instrumentation과 Tool 증거를 설명한다.",
+    "요구사항 기반 시험과 구조적 커버리지의 관계를 제시한다.",
+    "100% MC/DC의 한계와 산업별 적용경계를 명시한다."
+  ],
+  "note": "MC/DC는 안전필수 소프트웨어의 복합 Decision 시험 충분성을 높이는 구조적 커버리지 기법이지만 모든 산업용 소프트웨어에 일률 적용하거나 전체 SIL 달성의 단독 증거로 사용할 수 없다.",
+  "revision_notes": [
+    "single-topic direct expert authoring",
+    "industry application boundary explicitly constrained",
+    "SW-04 and SW-05 ownership handoff added"
+  ],
+  "topic_label": "안전필수 소프트웨어의 정적·동적 분석, 구조적 커버리지 및 MC/DC 검증"
+}

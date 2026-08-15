@@ -1,0 +1,936 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+  "title_ko": "안전필수 소프트웨어의 정적·동적 분석, 구조적 커버리지 및 MC/DC 검증",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {
+      "id": "mcdc_purpose",
+      "anchor_id": "mcdc_purpose",
+      "statement": "MC/DC는 복합 Boolean Decision에서 각 원자 조건이 다른 조건의 영향과 구분되어 Decision 결과에 독립적으로 영향을 미치는지를 입증하는 구조적 커버리지 기준이다.",
+      "importance": "core",
+      "keywords": [
+        "MC/DC",
+        "structural coverage",
+        "Boolean decision",
+        "independent effect"
+      ],
+      "core_terms": [
+        "MC/DC",
+        "structural coverage",
+        "Boolean decision",
+        "independent effect"
+      ],
+      "accepted_explanations": [
+        "MC/DC는 복합 Boolean Decision에서 각 원자 조건이 다른 조건의 영향과 구분되어 Decision 결과에 독립적으로 영향을 미치는지를 입증하는 구조적 커버리지 기준이다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "MC/DC는 복합 Boolean Decision에서 각 원자 조건이 다른 조건의 영향과 구분되어 Decision 결과에 독립적으로 영향을 미치는지를 입증하는 구조적 커버리지 기준이다.",
+      "description": "MC/DC는 복합 Boolean Decision에서 각 원자 조건이 다른 조건의 영향과 구분되어 Decision 결과에 독립적으로 영향을 미치는지를 입증하는 구조적 커버리지 기준이다."
+    },
+    {
+      "id": "mcdc_structural_vs_requirements_coverage",
+      "anchor_id": "mcdc_structural_vs_requirements_coverage",
+      "statement": "구조적 커버리지는 구현된 코드 구조가 시험되었는지를 측정하고 요구사항 커버리지는 각 요구가 시험과 결과로 검증되었는지를 확인하므로 두 증거는 상호보완적이며 서로 대체하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "structural coverage",
+        "requirements coverage",
+        "traceability",
+        "test evidence"
+      ],
+      "core_terms": [
+        "structural coverage",
+        "requirements coverage",
+        "traceability",
+        "test evidence"
+      ],
+      "accepted_explanations": [
+        "구조적 커버리지는 구현된 코드 구조가 시험되었는지를 측정하고 요구사항 커버리지는 각 요구가 시험과 결과로 검증되었는지를 확인하므로 두 증거는 상호보완적이며 서로 대체하지 않는다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "구조적 커버리지는 구현된 코드 구조가 시험되었는지를 측정하고 요구사항 커버리지는 각 요구가 시험과 결과로 검증되었는지를 확인하므로 두 증거는 상호보완적이며 서로 대체하지 않는다.",
+      "description": "구조적 커버리지는 구현된 코드 구조가 시험되었는지를 측정하고 요구사항 커버리지는 각 요구가 시험과 결과로 검증되었는지를 확인하므로 두 증거는 상호보완적이며 서로 대체하지 않는다."
+    },
+    {
+      "id": "mcdc_statement_coverage",
+      "anchor_id": "mcdc_statement_coverage",
+      "statement": "Statement Coverage는 실행 가능한 각 문장 또는 구문이 최소 한 번 실행되었는지를 평가하지만 Decision 내부 조건의 독립 영향은 보장하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "statement coverage",
+        "executable statement",
+        "execution",
+        "coverage"
+      ],
+      "core_terms": [
+        "statement coverage",
+        "executable statement",
+        "execution",
+        "coverage"
+      ],
+      "accepted_explanations": [
+        "Statement Coverage는 실행 가능한 각 문장 또는 구문이 최소 한 번 실행되었는지를 평가하지만 Decision 내부 조건의 독립 영향은 보장하지 않는다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Statement Coverage는 실행 가능한 각 문장 또는 구문이 최소 한 번 실행되었는지를 평가하지만 Decision 내부 조건의 독립 영향은 보장하지 않는다.",
+      "description": "Statement Coverage는 실행 가능한 각 문장 또는 구문이 최소 한 번 실행되었는지를 평가하지만 Decision 내부 조건의 독립 영향은 보장하지 않는다."
+    },
+    {
+      "id": "mcdc_decision_coverage",
+      "anchor_id": "mcdc_decision_coverage",
+      "statement": "Decision 또는 Branch Coverage는 각 Decision 결과가 True와 False를 모두 취했는지를 확인하지만 개별 조건이 결과를 실제로 좌우했는지는 입증하지 못한다.",
+      "importance": "core",
+      "keywords": [
+        "decision coverage",
+        "branch coverage",
+        "true false",
+        "decision outcome"
+      ],
+      "core_terms": [
+        "decision coverage",
+        "branch coverage",
+        "true false",
+        "decision outcome"
+      ],
+      "accepted_explanations": [
+        "Decision 또는 Branch Coverage는 각 Decision 결과가 True와 False를 모두 취했는지를 확인하지만 개별 조건이 결과를 실제로 좌우했는지는 입증하지 못한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Decision 또는 Branch Coverage는 각 Decision 결과가 True와 False를 모두 취했는지를 확인하지만 개별 조건이 결과를 실제로 좌우했는지는 입증하지 못한다.",
+      "description": "Decision 또는 Branch Coverage는 각 Decision 결과가 True와 False를 모두 취했는지를 확인하지만 개별 조건이 결과를 실제로 좌우했는지는 입증하지 못한다."
+    },
+    {
+      "id": "mcdc_condition_coverage",
+      "anchor_id": "mcdc_condition_coverage",
+      "statement": "Condition Coverage는 각 원자 조건이 True와 False를 모두 취했는지를 확인하지만 그 변화가 Decision 결과를 바꾸었다는 독립 영향 증거는 아니다.",
+      "importance": "core",
+      "keywords": [
+        "condition coverage",
+        "atomic condition",
+        "true false",
+        "independent effect"
+      ],
+      "core_terms": [
+        "condition coverage",
+        "atomic condition",
+        "true false",
+        "independent effect"
+      ],
+      "accepted_explanations": [
+        "Condition Coverage는 각 원자 조건이 True와 False를 모두 취했는지를 확인하지만 그 변화가 Decision 결과를 바꾸었다는 독립 영향 증거는 아니다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Condition Coverage는 각 원자 조건이 True와 False를 모두 취했는지를 확인하지만 그 변화가 Decision 결과를 바꾸었다는 독립 영향 증거는 아니다.",
+      "description": "Condition Coverage는 각 원자 조건이 True와 False를 모두 취했는지를 확인하지만 그 변화가 Decision 결과를 바꾸었다는 독립 영향 증거는 아니다."
+    },
+    {
+      "id": "mcdc_definition",
+      "anchor_id": "mcdc_definition",
+      "statement": "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "MC/DC criteria",
+        "decision outcome",
+        "condition outcome",
+        "test pair"
+      ],
+      "core_terms": [
+        "MC/DC criteria",
+        "decision outcome",
+        "condition outcome",
+        "test pair"
+      ],
+      "accepted_explanations": [
+        "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다.",
+      "description": "MC/DC 충족에는 모든 진입점과 종료점 실행, 각 Decision 결과의 True·False, 각 조건의 True·False와 각 조건이 Decision 결과에 독립적으로 영향을 주는 Test Pair가 필요하다."
+    },
+    {
+      "id": "mcdc_independent_effect_pair",
+      "anchor_id": "mcdc_independent_effect_pair",
+      "statement": "조건 하나의 독립 영향 Test Pair는 대상 조건의 값 변화가 Decision 결과를 변화시키고 나머지 조건은 고정되거나 그 Pair에서 결과에 영향을 줄 수 없도록 마스킹되어야 한다.",
+      "importance": "core",
+      "keywords": [
+        "independent effect",
+        "test pair",
+        "fixed conditions",
+        "masking"
+      ],
+      "core_terms": [
+        "independent effect",
+        "test pair",
+        "fixed conditions",
+        "masking"
+      ],
+      "accepted_explanations": [
+        "조건 하나의 독립 영향 Test Pair는 대상 조건의 값 변화가 Decision 결과를 변화시키고 나머지 조건은 고정되거나 그 Pair에서 결과에 영향을 줄 수 없도록 마스킹되어야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "조건 하나의 독립 영향 Test Pair는 대상 조건의 값 변화가 Decision 결과를 변화시키고 나머지 조건은 고정되거나 그 Pair에서 결과에 영향을 줄 수 없도록 마스킹되어야 한다.",
+      "description": "조건 하나의 독립 영향 Test Pair는 대상 조건의 값 변화가 Decision 결과를 변화시키고 나머지 조건은 고정되거나 그 Pair에서 결과에 영향을 줄 수 없도록 마스킹되어야 한다."
+    },
+    {
+      "id": "mcdc_unique_cause",
+      "anchor_id": "mcdc_unique_cause",
+      "statement": "Unique-cause MC/DC는 대상 조건만 변경하고 다른 모든 조건을 고정한 두 Test Case로 독립 영향을 입증하는 방식이다.",
+      "importance": "core",
+      "keywords": [
+        "unique-cause MC/DC",
+        "single condition change",
+        "fixed conditions",
+        "test case"
+      ],
+      "core_terms": [
+        "unique-cause MC/DC",
+        "single condition change",
+        "fixed conditions",
+        "test case"
+      ],
+      "accepted_explanations": [
+        "Unique-cause MC/DC는 대상 조건만 변경하고 다른 모든 조건을 고정한 두 Test Case로 독립 영향을 입증하는 방식이다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Unique-cause MC/DC는 대상 조건만 변경하고 다른 모든 조건을 고정한 두 Test Case로 독립 영향을 입증하는 방식이다.",
+      "description": "Unique-cause MC/DC는 대상 조건만 변경하고 다른 모든 조건을 고정한 두 Test Case로 독립 영향을 입증하는 방식이다."
+    },
+    {
+      "id": "mcdc_masking",
+      "anchor_id": "mcdc_masking",
+      "statement": "Masking MC/DC는 다른 조건도 값이 달라질 수 있으나 Boolean 마스킹으로 그 조건들이 Decision 결과에 영향을 줄 수 없음을 보인 상태에서 대상 조건의 독립 영향을 입증한다.",
+      "importance": "core",
+      "keywords": [
+        "masking MC/DC",
+        "Boolean masking",
+        "independent effect",
+        "test pair"
+      ],
+      "core_terms": [
+        "masking MC/DC",
+        "Boolean masking",
+        "independent effect",
+        "test pair"
+      ],
+      "accepted_explanations": [
+        "Masking MC/DC는 다른 조건도 값이 달라질 수 있으나 Boolean 마스킹으로 그 조건들이 Decision 결과에 영향을 줄 수 없음을 보인 상태에서 대상 조건의 독립 영향을 입증한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Masking MC/DC는 다른 조건도 값이 달라질 수 있으나 Boolean 마스킹으로 그 조건들이 Decision 결과에 영향을 줄 수 없음을 보인 상태에서 대상 조건의 독립 영향을 입증한다.",
+      "description": "Masking MC/DC는 다른 조건도 값이 달라질 수 있으나 Boolean 마스킹으로 그 조건들이 Decision 결과에 영향을 줄 수 없음을 보인 상태에서 대상 조건의 독립 영향을 입증한다."
+    },
+    {
+      "id": "mcdc_multiple_condition_coverage",
+      "anchor_id": "mcdc_multiple_condition_coverage",
+      "statement": "Multiple Condition Coverage는 가능한 조건 조합을 폭넓게 시험하는 기준이며 조합 수가 지수적으로 증가하므로 MC/DC와 목적·비용을 구분해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "multiple condition coverage",
+        "MCC",
+        "condition combinations",
+        "test cost"
+      ],
+      "core_terms": [
+        "multiple condition coverage",
+        "MCC",
+        "condition combinations",
+        "test cost"
+      ],
+      "accepted_explanations": [
+        "Multiple Condition Coverage는 가능한 조건 조합을 폭넓게 시험하는 기준이며 조합 수가 지수적으로 증가하므로 MC/DC와 목적·비용을 구분해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Multiple Condition Coverage는 가능한 조건 조합을 폭넓게 시험하는 기준이며 조합 수가 지수적으로 증가하므로 MC/DC와 목적·비용을 구분해야 한다.",
+      "description": "Multiple Condition Coverage는 가능한 조건 조합을 폭넓게 시험하는 기준이며 조합 수가 지수적으로 증가하므로 MC/DC와 목적·비용을 구분해야 한다."
+    },
+    {
+      "id": "mcdc_n_plus_one_limit",
+      "anchor_id": "mcdc_n_plus_one_limit",
+      "statement": "독립된 n개 조건의 단순 Decision은 흔히 n+1개 Test Case로 MC/DC를 구성할 수 있지만 결합조건, 단락평가와 논리구조 때문에 항상 n+1개가 보장되는 것은 아니다.",
+      "importance": "core",
+      "keywords": [
+        "n plus one",
+        "minimum test set",
+        "coupled conditions",
+        "short circuit"
+      ],
+      "core_terms": [
+        "n plus one",
+        "minimum test set",
+        "coupled conditions",
+        "short circuit"
+      ],
+      "accepted_explanations": [
+        "독립된 n개 조건의 단순 Decision은 흔히 n+1개 Test Case로 MC/DC를 구성할 수 있지만 결합조건, 단락평가와 논리구조 때문에 항상 n+1개가 보장되는 것은 아니다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "독립된 n개 조건의 단순 Decision은 흔히 n+1개 Test Case로 MC/DC를 구성할 수 있지만 결합조건, 단락평가와 논리구조 때문에 항상 n+1개가 보장되는 것은 아니다.",
+      "description": "독립된 n개 조건의 단순 Decision은 흔히 n+1개 Test Case로 MC/DC를 구성할 수 있지만 결합조건, 단락평가와 논리구조 때문에 항상 n+1개가 보장되는 것은 아니다."
+    },
+    {
+      "id": "mcdc_short_circuit",
+      "anchor_id": "mcdc_short_circuit",
+      "statement": "Short-circuit Evaluation에서는 앞 조건의 결과에 따라 뒤 조건이 실행되지 않을 수 있으므로 실제 평가된 조건과 Instrumentation 결과를 기준으로 Test Pair를 설계해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "short-circuit evaluation",
+        "condition execution",
+        "instrumentation",
+        "test design"
+      ],
+      "core_terms": [
+        "short-circuit evaluation",
+        "condition execution",
+        "instrumentation",
+        "test design"
+      ],
+      "accepted_explanations": [
+        "Short-circuit Evaluation에서는 앞 조건의 결과에 따라 뒤 조건이 실행되지 않을 수 있으므로 실제 평가된 조건과 Instrumentation 결과를 기준으로 Test Pair를 설계해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Short-circuit Evaluation에서는 앞 조건의 결과에 따라 뒤 조건이 실행되지 않을 수 있으므로 실제 평가된 조건과 Instrumentation 결과를 기준으로 Test Pair를 설계해야 한다.",
+      "description": "Short-circuit Evaluation에서는 앞 조건의 결과에 따라 뒤 조건이 실행되지 않을 수 있으므로 실제 평가된 조건과 Instrumentation 결과를 기준으로 Test Pair를 설계해야 한다."
+    },
+    {
+      "id": "mcdc_coupled_conditions",
+      "anchor_id": "mcdc_coupled_conditions",
+      "statement": "동일 변수나 논리적으로 종속된 조건이 한 Decision에 반복되면 조건을 독립적으로 변화시킬 수 없어 Unique-cause MC/DC가 불가능할 수 있으므로 식의 재구성 또는 Masking 근거가 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "coupled conditions",
+        "dependent condition",
+        "unique cause infeasible",
+        "refactoring"
+      ],
+      "core_terms": [
+        "coupled conditions",
+        "dependent condition",
+        "unique cause infeasible",
+        "refactoring"
+      ],
+      "accepted_explanations": [
+        "동일 변수나 논리적으로 종속된 조건이 한 Decision에 반복되면 조건을 독립적으로 변화시킬 수 없어 Unique-cause MC/DC가 불가능할 수 있으므로 식의 재구성 또는 Masking 근거가 필요하다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "동일 변수나 논리적으로 종속된 조건이 한 Decision에 반복되면 조건을 독립적으로 변화시킬 수 없어 Unique-cause MC/DC가 불가능할 수 있으므로 식의 재구성 또는 Masking 근거가 필요하다.",
+      "description": "동일 변수나 논리적으로 종속된 조건이 한 Decision에 반복되면 조건을 독립적으로 변화시킬 수 없어 Unique-cause MC/DC가 불가능할 수 있으므로 식의 재구성 또는 Masking 근거가 필요하다."
+    },
+    {
+      "id": "mcdc_masked_inactive_condition",
+      "anchor_id": "mcdc_masked_inactive_condition",
+      "statement": "OR 식에서 이미 True인 조건이나 AND 식에서 이미 False인 조건은 다른 조건의 영향을 마스킹하므로 독립 영향 Pair 선정 시 각 조건의 활성 상태를 확인해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "masked condition",
+        "active condition",
+        "AND OR",
+        "Boolean logic"
+      ],
+      "core_terms": [
+        "masked condition",
+        "active condition",
+        "AND OR",
+        "Boolean logic"
+      ],
+      "accepted_explanations": [
+        "OR 식에서 이미 True인 조건이나 AND 식에서 이미 False인 조건은 다른 조건의 영향을 마스킹하므로 독립 영향 Pair 선정 시 각 조건의 활성 상태를 확인해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "OR 식에서 이미 True인 조건이나 AND 식에서 이미 False인 조건은 다른 조건의 영향을 마스킹하므로 독립 영향 Pair 선정 시 각 조건의 활성 상태를 확인해야 한다.",
+      "description": "OR 식에서 이미 True인 조건이나 AND 식에서 이미 False인 조건은 다른 조건의 영향을 마스킹하므로 독립 영향 Pair 선정 시 각 조건의 활성 상태를 확인해야 한다."
+    },
+    {
+      "id": "mcdc_requirements_based_testing_first",
+      "anchor_id": "mcdc_requirements_based_testing_first",
+      "statement": "MC/DC는 요구사항 기반 시험을 먼저 수행한 뒤 구현 구조에 남은 미실행 경로를 찾는 보완 증거이며 코드 구조만 보고 시험을 만드는 것으로 요구사항 시험을 대체하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "requirements based testing",
+        "structural coverage analysis",
+        "uncovered path",
+        "supplementary evidence"
+      ],
+      "core_terms": [
+        "requirements based testing",
+        "structural coverage analysis",
+        "uncovered path",
+        "supplementary evidence"
+      ],
+      "accepted_explanations": [
+        "MC/DC는 요구사항 기반 시험을 먼저 수행한 뒤 구현 구조에 남은 미실행 경로를 찾는 보완 증거이며 코드 구조만 보고 시험을 만드는 것으로 요구사항 시험을 대체하지 않는다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "MC/DC는 요구사항 기반 시험을 먼저 수행한 뒤 구현 구조에 남은 미실행 경로를 찾는 보완 증거이며 코드 구조만 보고 시험을 만드는 것으로 요구사항 시험을 대체하지 않는다.",
+      "description": "MC/DC는 요구사항 기반 시험을 먼저 수행한 뒤 구현 구조에 남은 미실행 경로를 찾는 보완 증거이며 코드 구조만 보고 시험을 만드는 것으로 요구사항 시험을 대체하지 않는다."
+    },
+    {
+      "id": "mcdc_coverage_analysis_workflow",
+      "anchor_id": "mcdc_coverage_analysis_workflow",
+      "statement": "구조적 커버리지 분석은 Requirement–Design–Code–Test–Result 추적 후 Coverage Report를 확인하고 미달 항목의 원인을 분석하여 시험 추가, 요구사항 보완, 코드 제거 또는 정당화로 종결한다.",
+      "importance": "core",
+      "keywords": [
+        "coverage analysis",
+        "traceability",
+        "coverage report",
+        "closure"
+      ],
+      "core_terms": [
+        "coverage analysis",
+        "traceability",
+        "coverage report",
+        "closure"
+      ],
+      "accepted_explanations": [
+        "구조적 커버리지 분석은 Requirement–Design–Code–Test–Result 추적 후 Coverage Report를 확인하고 미달 항목의 원인을 분석하여 시험 추가, 요구사항 보완, 코드 제거 또는 정당화로 종결한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "구조적 커버리지 분석은 Requirement–Design–Code–Test–Result 추적 후 Coverage Report를 확인하고 미달 항목의 원인을 분석하여 시험 추가, 요구사항 보완, 코드 제거 또는 정당화로 종결한다.",
+      "description": "구조적 커버리지 분석은 Requirement–Design–Code–Test–Result 추적 후 Coverage Report를 확인하고 미달 항목의 원인을 분석하여 시험 추가, 요구사항 보완, 코드 제거 또는 정당화로 종결한다."
+    },
+    {
+      "id": "mcdc_uncovered_code_disposition",
+      "anchor_id": "mcdc_uncovered_code_disposition",
+      "statement": "미실행 코드가 발견되면 누락 시험, 누락 요구사항, 잘못된 방어코드, Dead Code, Deactivated Code 또는 도구·계측 한계 중 원인을 분류하고 승인된 처분과 재시험 증거를 남겨야 한다.",
+      "importance": "core",
+      "keywords": [
+        "uncovered code",
+        "coverage gap",
+        "root cause",
+        "disposition"
+      ],
+      "core_terms": [
+        "uncovered code",
+        "coverage gap",
+        "root cause",
+        "disposition"
+      ],
+      "accepted_explanations": [
+        "미실행 코드가 발견되면 누락 시험, 누락 요구사항, 잘못된 방어코드, Dead Code, Deactivated Code 또는 도구·계측 한계 중 원인을 분류하고 승인된 처분과 재시험 증거를 남겨야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "미실행 코드가 발견되면 누락 시험, 누락 요구사항, 잘못된 방어코드, Dead Code, Deactivated Code 또는 도구·계측 한계 중 원인을 분류하고 승인된 처분과 재시험 증거를 남겨야 한다.",
+      "description": "미실행 코드가 발견되면 누락 시험, 누락 요구사항, 잘못된 방어코드, Dead Code, Deactivated Code 또는 도구·계측 한계 중 원인을 분류하고 승인된 처분과 재시험 증거를 남겨야 한다."
+    },
+    {
+      "id": "mcdc_dead_code",
+      "anchor_id": "mcdc_dead_code",
+      "statement": "Dead Code는 어떤 정상 구성과 허용 입력에서도 실행될 수 없고 요구 기능도 수행하지 않는 코드이므로 원칙적으로 제거하고 영향분석과 회귀시험을 수행해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "dead code",
+        "unreachable code",
+        "removal",
+        "regression test"
+      ],
+      "core_terms": [
+        "dead code",
+        "unreachable code",
+        "removal",
+        "regression test"
+      ],
+      "accepted_explanations": [
+        "Dead Code는 어떤 정상 구성과 허용 입력에서도 실행될 수 없고 요구 기능도 수행하지 않는 코드이므로 원칙적으로 제거하고 영향분석과 회귀시험을 수행해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Dead Code는 어떤 정상 구성과 허용 입력에서도 실행될 수 없고 요구 기능도 수행하지 않는 코드이므로 원칙적으로 제거하고 영향분석과 회귀시험을 수행해야 한다.",
+      "description": "Dead Code는 어떤 정상 구성과 허용 입력에서도 실행될 수 없고 요구 기능도 수행하지 않는 코드이므로 원칙적으로 제거하고 영향분석과 회귀시험을 수행해야 한다."
+    },
+    {
+      "id": "mcdc_deactivated_code",
+      "anchor_id": "mcdc_deactivated_code",
+      "statement": "Deactivated Code는 특정 구성 또는 운전모드에서 의도적으로 실행되지 않지만 다른 승인 구성에서는 실행될 수 있는 코드이므로 활성 조건, 요구사항, 시험 또는 정당화를 추적해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "deactivated code",
+        "configuration",
+        "operating mode",
+        "justification"
+      ],
+      "core_terms": [
+        "deactivated code",
+        "configuration",
+        "operating mode",
+        "justification"
+      ],
+      "accepted_explanations": [
+        "Deactivated Code는 특정 구성 또는 운전모드에서 의도적으로 실행되지 않지만 다른 승인 구성에서는 실행될 수 있는 코드이므로 활성 조건, 요구사항, 시험 또는 정당화를 추적해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Deactivated Code는 특정 구성 또는 운전모드에서 의도적으로 실행되지 않지만 다른 승인 구성에서는 실행될 수 있는 코드이므로 활성 조건, 요구사항, 시험 또는 정당화를 추적해야 한다.",
+      "description": "Deactivated Code는 특정 구성 또는 운전모드에서 의도적으로 실행되지 않지만 다른 승인 구성에서는 실행될 수 있는 코드이므로 활성 조건, 요구사항, 시험 또는 정당화를 추적해야 한다."
+    },
+    {
+      "id": "mcdc_defensive_code",
+      "anchor_id": "mcdc_defensive_code",
+      "statement": "Defensive Code는 비정상 입력과 내부 오류를 안전하게 처리하기 위한 코드이며 해당 동작을 Derived Requirement로 명세하고 정상·오류 경로 시험과 Safe State 근거를 연결해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "defensive code",
+        "derived requirement",
+        "abnormal input",
+        "safe state"
+      ],
+      "core_terms": [
+        "defensive code",
+        "derived requirement",
+        "abnormal input",
+        "safe state"
+      ],
+      "accepted_explanations": [
+        "Defensive Code는 비정상 입력과 내부 오류를 안전하게 처리하기 위한 코드이며 해당 동작을 Derived Requirement로 명세하고 정상·오류 경로 시험과 Safe State 근거를 연결해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Defensive Code는 비정상 입력과 내부 오류를 안전하게 처리하기 위한 코드이며 해당 동작을 Derived Requirement로 명세하고 정상·오류 경로 시험과 Safe State 근거를 연결해야 한다.",
+      "description": "Defensive Code는 비정상 입력과 내부 오류를 안전하게 처리하기 위한 코드이며 해당 동작을 Derived Requirement로 명세하고 정상·오류 경로 시험과 Safe State 근거를 연결해야 한다."
+    },
+    {
+      "id": "mcdc_source_object_coverage",
+      "anchor_id": "mcdc_source_object_coverage",
+      "statement": "Compiler 최적화, 자동 생성코드 또는 Source와 Object 간 구조 차이가 안전 관련 동작을 추가하거나 제거할 수 있으면 적용 표준과 계획에 따라 Object Code Coverage 또는 등가 분석이 필요할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "object code coverage",
+        "compiler optimization",
+        "generated code",
+        "source object trace"
+      ],
+      "core_terms": [
+        "object code coverage",
+        "compiler optimization",
+        "generated code",
+        "source object trace"
+      ],
+      "accepted_explanations": [
+        "Compiler 최적화, 자동 생성코드 또는 Source와 Object 간 구조 차이가 안전 관련 동작을 추가하거나 제거할 수 있으면 적용 표준과 계획에 따라 Object Code Coverage 또는 등가 분석이 필요할 수 있다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Compiler 최적화, 자동 생성코드 또는 Source와 Object 간 구조 차이가 안전 관련 동작을 추가하거나 제거할 수 있으면 적용 표준과 계획에 따라 Object Code Coverage 또는 등가 분석이 필요할 수 있다.",
+      "description": "Compiler 최적화, 자동 생성코드 또는 Source와 Object 간 구조 차이가 안전 관련 동작을 추가하거나 제거할 수 있으면 적용 표준과 계획에 따라 Object Code Coverage 또는 등가 분석이 필요할 수 있다."
+    },
+    {
+      "id": "mcdc_compiler_optimization",
+      "anchor_id": "mcdc_compiler_optimization",
+      "statement": "Compiler의 Boolean 변환, 조건 병합과 최적화는 Source 수준 Test Pair와 실행 Object 구조의 대응을 바꿀 수 있으므로 Compiler Version·Option과 생성물의 추적성을 통제해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "compiler optimization",
+        "Boolean transformation",
+        "compiler option",
+        "traceability"
+      ],
+      "core_terms": [
+        "compiler optimization",
+        "Boolean transformation",
+        "compiler option",
+        "traceability"
+      ],
+      "accepted_explanations": [
+        "Compiler의 Boolean 변환, 조건 병합과 최적화는 Source 수준 Test Pair와 실행 Object 구조의 대응을 바꿀 수 있으므로 Compiler Version·Option과 생성물의 추적성을 통제해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Compiler의 Boolean 변환, 조건 병합과 최적화는 Source 수준 Test Pair와 실행 Object 구조의 대응을 바꿀 수 있으므로 Compiler Version·Option과 생성물의 추적성을 통제해야 한다.",
+      "description": "Compiler의 Boolean 변환, 조건 병합과 최적화는 Source 수준 Test Pair와 실행 Object 구조의 대응을 바꿀 수 있으므로 Compiler Version·Option과 생성물의 추적성을 통제해야 한다."
+    },
+    {
+      "id": "mcdc_instrumentation_effect",
+      "anchor_id": "mcdc_instrumentation_effect",
+      "statement": "Coverage Instrumentation은 실행시간, 메모리, Task Scheduling과 최적화에 영향을 줄 수 있으므로 Target 환경 대표성, Probe Effect와 결과 재현성을 평가해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "coverage instrumentation",
+        "probe effect",
+        "timing",
+        "target environment"
+      ],
+      "core_terms": [
+        "coverage instrumentation",
+        "probe effect",
+        "timing",
+        "target environment"
+      ],
+      "accepted_explanations": [
+        "Coverage Instrumentation은 실행시간, 메모리, Task Scheduling과 최적화에 영향을 줄 수 있으므로 Target 환경 대표성, Probe Effect와 결과 재현성을 평가해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Coverage Instrumentation은 실행시간, 메모리, Task Scheduling과 최적화에 영향을 줄 수 있으므로 Target 환경 대표성, Probe Effect와 결과 재현성을 평가해야 한다.",
+      "description": "Coverage Instrumentation은 실행시간, 메모리, Task Scheduling과 최적화에 영향을 줄 수 있으므로 Target 환경 대표성, Probe Effect와 결과 재현성을 평가해야 한다."
+    },
+    {
+      "id": "mcdc_coverage_tool_qualification",
+      "anchor_id": "mcdc_coverage_tool_qualification",
+      "statement": "Coverage Tool 오류가 미실행 코드를 실행된 것으로 잘못 보고하고 그 결과를 독립적으로 검출하지 못할 수 있으면 Tool Qualification, 검증 또는 독립 확인 수준을 정해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "coverage tool",
+        "tool qualification",
+        "false coverage",
+        "independent verification"
+      ],
+      "core_terms": [
+        "coverage tool",
+        "tool qualification",
+        "false coverage",
+        "independent verification"
+      ],
+      "accepted_explanations": [
+        "Coverage Tool 오류가 미실행 코드를 실행된 것으로 잘못 보고하고 그 결과를 독립적으로 검출하지 못할 수 있으면 Tool Qualification, 검증 또는 독립 확인 수준을 정해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Coverage Tool 오류가 미실행 코드를 실행된 것으로 잘못 보고하고 그 결과를 독립적으로 검출하지 못할 수 있으면 Tool Qualification, 검증 또는 독립 확인 수준을 정해야 한다.",
+      "description": "Coverage Tool 오류가 미실행 코드를 실행된 것으로 잘못 보고하고 그 결과를 독립적으로 검출하지 못할 수 있으면 Tool Qualification, 검증 또는 독립 확인 수준을 정해야 한다."
+    },
+    {
+      "id": "mcdc_static_analysis_relation",
+      "anchor_id": "mcdc_static_analysis_relation",
+      "statement": "정적분석은 프로그램을 실행하지 않고 Control Flow, Data Flow, 복잡도, Coding Rule과 잠재적 도달불가 코드를 찾으며 MC/DC 실행 증거를 직접 대체하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "static analysis",
+        "control flow",
+        "data flow",
+        "unreachable code"
+      ],
+      "core_terms": [
+        "static analysis",
+        "control flow",
+        "data flow",
+        "unreachable code"
+      ],
+      "accepted_explanations": [
+        "정적분석은 프로그램을 실행하지 않고 Control Flow, Data Flow, 복잡도, Coding Rule과 잠재적 도달불가 코드를 찾으며 MC/DC 실행 증거를 직접 대체하지 않는다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "정적분석은 프로그램을 실행하지 않고 Control Flow, Data Flow, 복잡도, Coding Rule과 잠재적 도달불가 코드를 찾으며 MC/DC 실행 증거를 직접 대체하지 않는다.",
+      "description": "정적분석은 프로그램을 실행하지 않고 Control Flow, Data Flow, 복잡도, Coding Rule과 잠재적 도달불가 코드를 찾으며 MC/DC 실행 증거를 직접 대체하지 않는다."
+    },
+    {
+      "id": "mcdc_dynamic_analysis_relation",
+      "anchor_id": "mcdc_dynamic_analysis_relation",
+      "statement": "동적분석은 실제 실행 중 경로, Timing, Resource와 반응을 관찰하고 Coverage Instrumentation을 통해 MC/DC 증거를 수집할 수 있으나 시험 Oracle과 요구사항 추적이 별도로 필요하다.",
+      "importance": "core",
+      "keywords": [
+        "dynamic analysis",
+        "execution path",
+        "timing",
+        "test oracle"
+      ],
+      "core_terms": [
+        "dynamic analysis",
+        "execution path",
+        "timing",
+        "test oracle"
+      ],
+      "accepted_explanations": [
+        "동적분석은 실제 실행 중 경로, Timing, Resource와 반응을 관찰하고 Coverage Instrumentation을 통해 MC/DC 증거를 수집할 수 있으나 시험 Oracle과 요구사항 추적이 별도로 필요하다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "동적분석은 실제 실행 중 경로, Timing, Resource와 반응을 관찰하고 Coverage Instrumentation을 통해 MC/DC 증거를 수집할 수 있으나 시험 Oracle과 요구사항 추적이 별도로 필요하다.",
+      "description": "동적분석은 실제 실행 중 경로, Timing, Resource와 반응을 관찰하고 Coverage Instrumentation을 통해 MC/DC 증거를 수집할 수 있으나 시험 Oracle과 요구사항 추적이 별도로 필요하다."
+    },
+    {
+      "id": "mcdc_control_data_flow_complement",
+      "anchor_id": "mcdc_control_data_flow_complement",
+      "statement": "MC/DC는 Boolean Decision의 구조를 집중 평가하므로 초기화 누락, Data Coupling, 경계값, Overflow, Timing과 Race Condition은 정적분석·Data Flow·동적시험으로 별도 보완해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "data flow analysis",
+        "boundary value",
+        "overflow",
+        "race condition"
+      ],
+      "core_terms": [
+        "data flow analysis",
+        "boundary value",
+        "overflow",
+        "race condition"
+      ],
+      "accepted_explanations": [
+        "MC/DC는 Boolean Decision의 구조를 집중 평가하므로 초기화 누락, Data Coupling, 경계값, Overflow, Timing과 Race Condition은 정적분석·Data Flow·동적시험으로 별도 보완해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "MC/DC는 Boolean Decision의 구조를 집중 평가하므로 초기화 누락, Data Coupling, 경계값, Overflow, Timing과 Race Condition은 정적분석·Data Flow·동적시험으로 별도 보완해야 한다.",
+      "description": "MC/DC는 Boolean Decision의 구조를 집중 평가하므로 초기화 누락, Data Coupling, 경계값, Overflow, Timing과 Race Condition은 정적분석·Data Flow·동적시험으로 별도 보완해야 한다."
+    },
+    {
+      "id": "mcdc_target_environment",
+      "anchor_id": "mcdc_target_environment",
+      "statement": "Coverage 시험은 가능한 한 Target Processor, Compiler, Runtime과 실제 Scheduling을 대표해야 하며 Host 시험만 사용하면 Hardware·Compiler·Timing 차이를 별도 보완해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "target environment",
+        "target processor",
+        "compiler",
+        "host test"
+      ],
+      "core_terms": [
+        "target environment",
+        "target processor",
+        "compiler",
+        "host test"
+      ],
+      "accepted_explanations": [
+        "Coverage 시험은 가능한 한 Target Processor, Compiler, Runtime과 실제 Scheduling을 대표해야 하며 Host 시험만 사용하면 Hardware·Compiler·Timing 차이를 별도 보완해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Coverage 시험은 가능한 한 Target Processor, Compiler, Runtime과 실제 Scheduling을 대표해야 하며 Host 시험만 사용하면 Hardware·Compiler·Timing 차이를 별도 보완해야 한다.",
+      "description": "Coverage 시험은 가능한 한 Target Processor, Compiler, Runtime과 실제 Scheduling을 대표해야 하며 Host 시험만 사용하면 Hardware·Compiler·Timing 차이를 별도 보완해야 한다."
+    },
+    {
+      "id": "mcdc_regression_change",
+      "anchor_id": "mcdc_regression_change",
+      "statement": "Boolean 식, Compiler, 생성도구, Library 또는 Configuration이 변경되면 영향받는 요구사항과 Decision의 Test Pair 및 Coverage Report를 갱신하고 회귀시험해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "change impact",
+        "regression",
+        "coverage report",
+        "configuration"
+      ],
+      "core_terms": [
+        "change impact",
+        "regression",
+        "coverage report",
+        "configuration"
+      ],
+      "accepted_explanations": [
+        "Boolean 식, Compiler, 생성도구, Library 또는 Configuration이 변경되면 영향받는 요구사항과 Decision의 Test Pair 및 Coverage Report를 갱신하고 회귀시험해야 한다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "Boolean 식, Compiler, 생성도구, Library 또는 Configuration이 변경되면 영향받는 요구사항과 Decision의 Test Pair 및 Coverage Report를 갱신하고 회귀시험해야 한다.",
+      "description": "Boolean 식, Compiler, 생성도구, Library 또는 Configuration이 변경되면 영향받는 요구사항과 Decision의 Test Pair 및 Coverage Report를 갱신하고 회귀시험해야 한다."
+    },
+    {
+      "id": "mcdc_one_hundred_percent_limit",
+      "anchor_id": "mcdc_one_hundred_percent_limit",
+      "statement": "100% MC/DC는 구현된 복합 Decision의 구조가 규정된 수준으로 실행되었음을 보일 뿐 요구사항의 완전성, 알고리즘 타당성, Timing 안전성과 전체 SIL 달성을 단독으로 보장하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "100 percent MC/DC",
+        "requirements completeness",
+        "timing safety",
+        "SIL"
+      ],
+      "core_terms": [
+        "100 percent MC/DC",
+        "requirements completeness",
+        "timing safety",
+        "SIL"
+      ],
+      "accepted_explanations": [
+        "100% MC/DC는 구현된 복합 Decision의 구조가 규정된 수준으로 실행되었음을 보일 뿐 요구사항의 완전성, 알고리즘 타당성, Timing 안전성과 전체 SIL 달성을 단독으로 보장하지 않는다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "100% MC/DC는 구현된 복합 Decision의 구조가 규정된 수준으로 실행되었음을 보일 뿐 요구사항의 완전성, 알고리즘 타당성, Timing 안전성과 전체 SIL 달성을 단독으로 보장하지 않는다.",
+      "description": "100% MC/DC는 구현된 복합 Decision의 구조가 규정된 수준으로 실행되었음을 보일 뿐 요구사항의 완전성, 알고리즘 타당성, Timing 안전성과 전체 SIL 달성을 단독으로 보장하지 않는다."
+    },
+    {
+      "id": "mcdc_industrial_application_boundary",
+      "anchor_id": "mcdc_industrial_application_boundary",
+      "statement": "MC/DC의 적용 여부와 목표 수준은 산업별 기능안전 표준, Systematic Capability, 자체 개발 코드 범위, 언어와 Functional Safety Plan으로 결정하며 모든 일반 PLC·HMI 소프트웨어에 일률 적용하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "industrial safety software",
+        "systematic capability",
+        "functional safety plan",
+        "application boundary"
+      ],
+      "core_terms": [
+        "industrial safety software",
+        "systematic capability",
+        "functional safety plan",
+        "application boundary"
+      ],
+      "accepted_explanations": [
+        "MC/DC의 적용 여부와 목표 수준은 산업별 기능안전 표준, Systematic Capability, 자체 개발 코드 범위, 언어와 Functional Safety Plan으로 결정하며 모든 일반 PLC·HMI 소프트웨어에 일률 적용하지 않는다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "MC/DC의 적용 여부와 목표 수준은 산업별 기능안전 표준, Systematic Capability, 자체 개발 코드 범위, 언어와 Functional Safety Plan으로 결정하며 모든 일반 PLC·HMI 소프트웨어에 일률 적용하지 않는다.",
+      "description": "MC/DC의 적용 여부와 목표 수준은 산업별 기능안전 표준, Systematic Capability, 자체 개발 코드 범위, 언어와 Functional Safety Plan으로 결정하며 모든 일반 PLC·HMI 소프트웨어에 일률 적용하지 않는다."
+    },
+    {
+      "id": "mcdc_safety_plc_boundary",
+      "anchor_id": "mcdc_safety_plc_boundary",
+      "statement": "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다.",
+      "importance": "core",
+      "keywords": [
+        "safety PLC",
+        "function block",
+        "safety manual",
+        "application program"
+      ],
+      "core_terms": [
+        "safety PLC",
+        "function block",
+        "safety manual",
+        "application program"
+      ],
+      "accepted_explanations": [
+        "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다.",
+      "description": "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다."
+    }
+  ]
+}

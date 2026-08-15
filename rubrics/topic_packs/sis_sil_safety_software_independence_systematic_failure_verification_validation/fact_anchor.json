@@ -823,6 +823,38 @@
       "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
       "claim": "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
       "description": "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다."
+    },
+    {
+      "id": "sis_mcdc_structural_coverage_boundary",
+      "anchor_id": "sis_mcdc_structural_coverage_boundary",
+      "statement": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다.",
+      "importance": "core",
+      "keywords": [
+        "SW-05 boundary",
+        "Safety V&V",
+        "MC/DC",
+        "coverage gap",
+        "tool qualification"
+      ],
+      "core_terms": [
+        "SW-05 boundary",
+        "Safety V&V",
+        "MC/DC",
+        "coverage gap",
+        "tool qualification"
+      ],
+      "accepted_explanations": [
+        "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다.",
+        "Safety Lifecycle 적용근거는 SW-05, MC/DC 수행기법과 Coverage 증거 상세는 전용 Topic으로 구분한다.",
+        "SIL 숫자만으로 MC/DC 100%를 보편 의무로 단정하지 않는다."
+      ],
+      "rejected_explanations": [
+        "MC/DC 100%만으로 Systematic Capability와 전체 SIL 달성을 선언한다."
+      ],
+      "grading_notes": "전용 MC/DC Topic과 기존 Software Lifecycle 또는 Safety Lifecycle의 ownership 경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/sis_sil_safety_software_independence_systematic_failure_verification_validation.md",
+      "claim": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다.",
+      "description": "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다."
     }
   ],
   "fatal_wrong_claims": [
@@ -1080,7 +1112,8 @@
     "modern_source_schema=anchors/fatal_wrong_claims/llm_profile/model_anchor_refs",
     "scope_boundary=SW02 general logic; SW04 general SDLC; SW05 functional-safety lifecycle and assurance",
     "generated_bank_promotion=excluded",
-    "standard_clause_numbers_and_numeric_limits=verify_first"
+    "standard_clause_numbers_and_numeric_limits=verify_first",
+    "ownership boundary added for safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
   ],
   "topic_label": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
   "core_facts": [

@@ -447,7 +447,8 @@
         "HMI SCADA alarm management SOE",
         "Sequence state transition trip latch reset",
         "fieldbus ethernet protocol cybersecurity",
-        "공통 Router 구현"
+        "공통 Router 구현",
+        "MC/DC modified condition decision coverage structural coverage unique-cause masking coverage gap dead deactivated code"
       ],
       "minimum_distinct_groups": 2
     },
@@ -605,6 +606,11 @@
       {
         "id": "sw04_evidence_and_auditability",
         "correct_rule": "V&V 결과는 누가, 무엇을, 어떤 버전과 환경에서, 어떤 기준으로 수행했는지 추적 가능한 증적으로 남겨야 한다.",
+        "fatal_if_opposite": false
+      },
+      {
+        "id": "sw04_mcdc_detailed_coverage_boundary",
+        "correct_rule": "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다.",
         "fatal_if_opposite": false
       }
     ],
@@ -949,7 +955,8 @@
     "SW-04 일반 계측제어 SW lifecycle과 V&V truth schema를 정의했다.",
     "직접 반대 주장만 deterministic fatal 후보가 되도록 full-line pattern을 사용했다.",
     "SW-05 Safety lifecycle과 SW-10 프로젝트 인수 경계를 false-positive 기준에 반영했다.",
-    "2026-08-07 LLM 의미 감사 수리: HIL Fatal correction과 SIL·Virtual Commissioning 경계를 일치시켰다."
+    "2026-08-07 LLM 의미 감사 수리: HIL Fatal correction과 SIL·Virtual Commissioning 경계를 일치시켰다.",
+    "MC/DC detailed ownership handed off to safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
   ],
   "topic_label": "SW-04 계측제어 SW 수명주기·V-Model·V&V"
 }

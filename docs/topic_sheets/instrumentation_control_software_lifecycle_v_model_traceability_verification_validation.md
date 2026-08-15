@@ -202,3 +202,11 @@ Review는 역할, 입력자료, 기준, 지적사항과 조치확인을 갖는�
 - SW-05 Safety lifecycle 단독 문항과 SW-10 FAT·SAT 단독 문항은 SW-04 routing positive로 보지 않는다.
 - V-Model, RTM, 시험수준, 분석·회귀, HIL·Fault injection의 semantic group을 각각 확인한다.
 - source JSON 4개와 Markdown, focused test만 Lane A Topic-local commit에 포함한다.
+
+## MC/DC 상세 구조적 커버리지 경계
+
+일반 Static·Dynamic Analysis, V-Model과 시험수명주기는 본 Topic의 소유범위다.
+
+MC/DC의 조건별 독립 영향, Unique-cause·Masking Test Pair, Coverage Gap 종결, Dead·Deactivated Code와 Compiler·Tool 증거의 상세는 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 이관한다.
+
+따라서 MC/DC 단독 문제는 전용 Topic을 Primary로 하고, 본 Topic은 일반 Software Lifecycle과 V&V 맥락을 제공한다.

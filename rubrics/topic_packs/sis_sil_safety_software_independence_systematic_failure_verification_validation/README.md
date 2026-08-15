@@ -35,7 +35,7 @@
 
 - Source schema: modern Topic Pack schema with Anchor references
 
-- Fact Anchor: 30
+- Fact Anchor: 31
 - Fatal misconception: 16
 - Major/Warn condition: 12
 - Routing alias: 14
@@ -60,3 +60,17 @@ SIS·SIL 안전 소프트웨어에서 Safety Lifecycle, 체계적 고장, 독립
 ## Verify-first
 
 표준 Clause 번호, 독립성 수준, Tool Qualification, Proven in Use 최소 증거, Certificate Scope 및 정량 가정은 적용 Edition과 프로젝트 Functional Safety Plan으로 확인한다.
+
+## MC/DC 상세 Topic 경계
+
+SW-05는 SIL, Systematic Failure, Independence, Tool Qualification 원칙과 Safety V&V의 적용근거를 계속 소유한다.
+
+다음 상세영역은 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 이관한다.
+
+- MC/DC 독립 영향과 Test Pair 설계
+- Unique-cause·Masking MC/DC
+- Coverage Gap과 Dead·Deactivated·Defensive Code
+- Source·Object Code, Compiler·Instrumentation
+- Coverage Tool 증거와 100% Coverage의 한계
+
+SIL 숫자만으로 MC/DC 100%를 보편 의무로 단정하지 않는다.

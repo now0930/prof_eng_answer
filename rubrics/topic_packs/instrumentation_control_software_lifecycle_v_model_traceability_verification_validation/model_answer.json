@@ -114,7 +114,8 @@
     "시험명세에 사전조건·입력·예상결과·허용오차·판정기준과 증적을 포함한다.",
     "coverage와 미해결 결함을 exit criteria와 연결한다.",
     "결함·변경·baseline·RTM·재시험·approval의 폐루프를 설명한다.",
-    "대상 버전·환경·수행자·판정기준을 V&V 증적으로 남긴다."
+    "대상 버전·환경·수행자·판정기준을 V&V 증적으로 남긴다.",
+    "일반 정적·동적 분석과 MC/DC 상세 구조적 커버리지의 ownership을 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 구분한다."
   ],
   "common_missing_points": [
     "SW-05 Safety V&V와 SW-10 FAT·SAT 경계",
@@ -132,7 +133,8 @@
     "HIL 폐루프와 timing",
     "Fault injection의 복구 검증",
     "결함 closure와 재시험 증적",
-    "시험환경·버전과 감사가능성"
+    "시험환경·버전과 감사가능성",
+    "MC/DC 독립 영향, Coverage Gap과 Dead·Deactivated Code 상세를 일반 정적·동적 분석과 구분하지 않음"
   ],
   "routing_aliases": [
     "instrumentation control software lifecycle V-Model",
@@ -206,6 +208,7 @@
   "revision_notes": [
     "V-Model과 시험수준의 대응을 답안구조 중심으로 정리했다.",
     "양방향 RTM, 분석·회귀시험과 고급 시험환경을 고득점 포인트로 반영했다.",
-    "SW-05 Safety lifecycle과 SW-10 프로젝트 인수 경계를 명시했다."
+    "SW-05 Safety lifecycle과 SW-10 프로젝트 인수 경계를 명시했다.",
+    "MC/DC detailed ownership handed off to safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
   ]
 }

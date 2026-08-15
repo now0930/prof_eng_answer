@@ -76,3 +76,17 @@ Detailed design / module   ↔ Unit test
 ## 검증 경계
 
 Topic-local 단계에서는 JSON, source schema, Topic quality, focused test, Python compile, whitespace, `git diff --check`와 Lane A ownership만 검증한다. Generated rebuild, 전체 Router 회귀, cross-topic duplicate, validate-all, release validation와 container smoke는 최종 통합 단계로 넘긴다.
+
+## MC/DC 상세 Topic 경계
+
+SW-04는 일반 계측제어 소프트웨어의 Static Analysis, Dynamic Analysis, 시험수준과 Software Lifecycle을 계속 소유한다.
+
+다음 상세영역은 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 이관한다.
+
+- Statement·Decision·Condition·MC/DC·MCC 비교
+- Unique-cause와 Masking MC/DC Test Pair
+- Coverage Gap, Dead·Deactivated·Defensive Code
+- Source·Object Code, Compiler와 Coverage Instrumentation
+- Coverage Tool Qualification과 100% MC/DC의 한계
+
+MC/DC 단독 질문을 SW-04로 라우팅하지 않는다.

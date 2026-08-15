@@ -938,6 +938,36 @@
       "importance": "important",
       "source_basis": "일반 산업 계측제어 소프트웨어 lifecycle, V-Model 및 V&V 원칙",
       "grading_notes": "직접적인 반대 주장은 fatal 후보이며 단순 누락은 문항 요구범위에 따라 major 또는 warn으로 평가한다."
+    },
+    {
+      "id": "sw04_mcdc_detailed_coverage_boundary",
+      "anchor_id": "sw04_mcdc_detailed_coverage_boundary",
+      "statement": "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다.",
+      "keywords": [
+        "SW-04 boundary",
+        "static analysis",
+        "dynamic analysis",
+        "MC/DC",
+        "structural coverage"
+      ],
+      "core_terms": [
+        "SW-04 boundary",
+        "static analysis",
+        "dynamic analysis",
+        "MC/DC",
+        "structural coverage"
+      ],
+      "accepted_explanations": [
+        "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다.",
+        "일반 정적·동적 분석은 SW-04, MC/DC Test Pair와 Coverage Gap 상세는 전용 Topic으로 구분한다.",
+        "Software lifecycle과 구조적 커버리지 심화 소유권을 분리한다."
+      ],
+      "rejected_explanations": [
+        "MC/DC의 독립 영향과 Coverage Gap 전체를 일반 정적분석 설명으로 대체한다."
+      ],
+      "importance": "must",
+      "source_basis": "docs/topic_sheets/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation.md",
+      "grading_notes": "전용 MC/DC Topic과 기존 Software Lifecycle 또는 Safety Lifecycle의 ownership 경계를 평가한다."
     }
   ],
   "fatal_wrong_claims": [
@@ -1206,7 +1236,8 @@
     "SW-04 일반 계측제어 소프트웨어 lifecycle ownership을 정의했다.",
     "SW-05 Safety lifecycle과 SW-10 프로젝트 FAT·SAT·Acceptance 경계를 명시했다.",
     "V-Model, 양방향 RTM, 정적·동적·회귀시험, Simulation·HIL·Fault injection을 연결했다.",
-    "2026-08-07 LLM 의미 감사 수리: HIL과 Software-in-the-loop·Virtual Commissioning 경계를 교정했다."
+    "2026-08-07 LLM 의미 감사 수리: HIL과 Software-in-the-loop·Virtual Commissioning 경계를 교정했다.",
+    "ownership boundary added for safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
   ],
   "topic_label": "SW-04 계측제어 SW 수명주기·V-Model·V&V",
   "core_facts": [

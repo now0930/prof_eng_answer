@@ -1,0 +1,251 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+  "title_ko": "안전필수 소프트웨어의 정적·동적 분석, 구조적 커버리지 및 MC/DC 검증",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+      "intent": "mcdc definition purpose and criteria",
+      "required_anchor_ids": [
+        "mcdc_purpose",
+        "mcdc_definition",
+        "mcdc_independent_effect_pair",
+        "mcdc_one_hundred_percent_limit"
+      ]
+    },
+    {
+      "pattern": "Statement, Decision, Condition 및 MC/DC Coverage를 비교하시오.",
+      "intent": "structural coverage level comparison",
+      "required_anchor_ids": [
+        "mcdc_statement_coverage",
+        "mcdc_decision_coverage",
+        "mcdc_condition_coverage",
+        "mcdc_definition",
+        "mcdc_multiple_condition_coverage"
+      ]
+    },
+    {
+      "pattern": "Unique-cause MC/DC와 Masking MC/DC의 차이 및 적용조건을 설명하시오.",
+      "intent": "unique cause versus masking mcdc",
+      "required_anchor_ids": [
+        "mcdc_unique_cause",
+        "mcdc_masking",
+        "mcdc_coupled_conditions",
+        "mcdc_masked_inactive_condition"
+      ]
+    },
+    {
+      "pattern": "복합 Boolean Decision의 MC/DC Test Pair 설계방법을 설명하시오.",
+      "intent": "mcdc test pair design",
+      "required_anchor_ids": [
+        "mcdc_independent_effect_pair",
+        "mcdc_n_plus_one_limit",
+        "mcdc_short_circuit",
+        "mcdc_coupled_conditions"
+      ]
+    },
+    {
+      "pattern": "요구사항 기반 시험과 구조적 커버리지 분석의 관계를 설명하시오.",
+      "intent": "requirements based testing and structural coverage",
+      "required_anchor_ids": [
+        "mcdc_structural_vs_requirements_coverage",
+        "mcdc_requirements_based_testing_first",
+        "mcdc_coverage_analysis_workflow"
+      ]
+    },
+    {
+      "pattern": "Coverage Gap과 미실행 코드의 분석 및 종결방법을 설명하시오.",
+      "intent": "coverage gap disposition",
+      "required_anchor_ids": [
+        "mcdc_uncovered_code_disposition",
+        "mcdc_dead_code",
+        "mcdc_deactivated_code",
+        "mcdc_defensive_code"
+      ]
+    },
+    {
+      "pattern": "MC/DC 시험에서 Source Code, Object Code와 Compiler 영향을 설명하시오.",
+      "intent": "source object compiler coverage",
+      "required_anchor_ids": [
+        "mcdc_source_object_coverage",
+        "mcdc_compiler_optimization",
+        "mcdc_target_environment"
+      ]
+    },
+    {
+      "pattern": "Coverage Instrumentation과 Tool Qualification의 필요성을 설명하시오.",
+      "intent": "coverage instrumentation and tool evidence",
+      "required_anchor_ids": [
+        "mcdc_instrumentation_effect",
+        "mcdc_coverage_tool_qualification",
+        "mcdc_target_environment"
+      ]
+    },
+    {
+      "pattern": "정적분석, 동적분석과 MC/DC 구조적 커버리지의 관계를 설명하시오.",
+      "intent": "static dynamic and structural coverage relationship",
+      "required_anchor_ids": [
+        "mcdc_static_analysis_relation",
+        "mcdc_dynamic_analysis_relation",
+        "mcdc_control_data_flow_complement"
+      ]
+    },
+    {
+      "pattern": "산업용 안전필수 소프트웨어에 MC/DC를 적용할 때 고려사항을 설명하시오.",
+      "intent": "industrial safety software mcdc application",
+      "required_anchor_ids": [
+        "mcdc_industrial_application_boundary",
+        "mcdc_safety_plc_boundary",
+        "mcdc_regression_change",
+        "mcdc_one_hundred_percent_limit"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "정의와 적용목적",
+      "intent": "MC/DC를 구조적 커버리지와 독립 영향 증거로 정의한다.",
+      "anchor_refs": [
+        "mcdc_purpose",
+        "mcdc_structural_vs_requirements_coverage",
+        "mcdc_industrial_application_boundary"
+      ]
+    },
+    {
+      "section": "Coverage 계층 비교",
+      "intent": "Statement·Decision·Condition·MC/DC·MCC의 검증강도와 한계를 비교한다.",
+      "anchor_refs": [
+        "mcdc_statement_coverage",
+        "mcdc_decision_coverage",
+        "mcdc_condition_coverage",
+        "mcdc_definition",
+        "mcdc_multiple_condition_coverage"
+      ]
+    },
+    {
+      "section": "독립 영향 Test Pair",
+      "intent": "Unique-cause와 Masking 방식으로 각 조건의 독립 영향을 입증한다.",
+      "anchor_refs": [
+        "mcdc_independent_effect_pair",
+        "mcdc_unique_cause",
+        "mcdc_masking",
+        "mcdc_n_plus_one_limit"
+      ]
+    },
+    {
+      "section": "Boolean 실행특성",
+      "intent": "Short-circuit, 결합조건과 마스킹 상태를 Test Pair 설계에 반영한다.",
+      "anchor_refs": [
+        "mcdc_short_circuit",
+        "mcdc_coupled_conditions",
+        "mcdc_masked_inactive_condition"
+      ]
+    },
+    {
+      "section": "Coverage 분석과 Gap 종결",
+      "intent": "요구사항 기반 시험 후 미실행 코드를 분류하고 처분한다.",
+      "anchor_refs": [
+        "mcdc_requirements_based_testing_first",
+        "mcdc_coverage_analysis_workflow",
+        "mcdc_uncovered_code_disposition",
+        "mcdc_dead_code",
+        "mcdc_deactivated_code",
+        "mcdc_defensive_code"
+      ]
+    },
+    {
+      "section": "Source·Object·Tool 증거",
+      "intent": "Compiler, Instrumentation, Target 환경과 Tool Qualification을 설명한다.",
+      "anchor_refs": [
+        "mcdc_source_object_coverage",
+        "mcdc_compiler_optimization",
+        "mcdc_instrumentation_effect",
+        "mcdc_coverage_tool_qualification",
+        "mcdc_target_environment"
+      ]
+    },
+    {
+      "section": "정적·동적 분석과 회귀",
+      "intent": "MC/DC가 다루지 못하는 Data·Timing 오류를 보완하고 변경 시 재검증한다.",
+      "anchor_refs": [
+        "mcdc_static_analysis_relation",
+        "mcdc_dynamic_analysis_relation",
+        "mcdc_control_data_flow_complement",
+        "mcdc_regression_change"
+      ]
+    },
+    {
+      "section": "현장 적용과 한계",
+      "intent": "Safety PLC 인증범위와 100% MC/DC의 한계를 제시한다.",
+      "anchor_refs": [
+        "mcdc_safety_plc_boundary",
+        "mcdc_one_hundred_percent_limit"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "MC/DC를 각 조건의 Decision 결과에 대한 독립 영향 증거로 정의한다.",
+    "Statement·Decision·Condition Coverage와 MC/DC·MCC를 비교한다.",
+    "Unique-cause와 Masking MC/DC의 Test Pair 조건을 구분한다.",
+    "Short-circuit와 Coupled Condition이 Test Pair에 미치는 영향을 설명한다.",
+    "요구사항 기반 시험 후 구조적 커버리지 분석을 수행하는 순서를 제시한다.",
+    "Coverage Gap을 누락시험·누락요구·Dead·Deactivated·Defensive Code로 분류한다.",
+    "Source와 Object Code, Compiler 최적화의 대응을 검토한다.",
+    "Instrumentation의 Probe Effect와 Target 환경 대표성을 설명한다.",
+    "Coverage Tool Qualification 또는 독립확인 근거를 제시한다.",
+    "정적분석·Data Flow·Timing 시험으로 MC/DC의 검출범위 한계를 보완한다.",
+    "100% MC/DC가 요구사항 완전성과 전체 SIL을 보장하지 않음을 명시한다.",
+    "일반 PLC 전체가 아니라 적용 표준·Safety Plan·자체개발 범위로 적용수준을 결정한다."
+  ],
+  "common_missing_points": [
+    "Decision Coverage와 MC/DC를 동일시함",
+    "각 조건의 True·False만으로 독립 영향이 입증된다고 설명함",
+    "Test Pair에서 여러 비마스킹 조건을 동시에 변경함",
+    "Short-circuit로 실행되지 않은 조건을 무시함",
+    "n개 조건이면 항상 n+1개 시험으로 충분하다고 단정함",
+    "요구사항 기반 시험 없이 코드구조만 보고 시험을 설계함",
+    "Coverage Gap의 원인분류와 종결증적을 누락함",
+    "Dead Code와 Deactivated Code를 구분하지 않음",
+    "Defensive Code를 요구사항과 추적하지 않음",
+    "Compiler·Object Code·Instrumentation 영향을 누락함",
+    "Coverage Tool 결과를 검증 없이 절대 신뢰함",
+    "100% MC/DC로 전체 SIL 달성을 선언함"
+  ],
+  "routing_aliases": [
+    "safety critical software MC/DC structural coverage",
+    "modified condition decision coverage independent effect",
+    "unique cause and masking MC/DC test pair",
+    "안전필수 소프트웨어 MC/DC 구조적 커버리지",
+    "수정 조건 결정 커버리지 독립 영향",
+    "Statement Decision Condition MC/DC 비교",
+    "MC/DC coverage gap dead deactivated code",
+    "MC/DC short circuit coupled conditions",
+    "MC/DC source object code compiler coverage",
+    "coverage instrumentation tool qualification safety software",
+    "요구사항 기반 시험 구조적 커버리지 분석",
+    "Safety PLC application program MC/DC 적용"
+  ],
+  "routing_field_points": [
+    "Modified Condition/Decision Coverage",
+    "각 원자 조건의 Decision 결과 독립 영향",
+    "Unique-cause MC/DC와 Masking MC/DC",
+    "Statement·Decision·Condition·MCC 비교",
+    "Short-circuit Evaluation과 Coupled Condition",
+    "Requirements Coverage와 Structural Coverage",
+    "Coverage Gap 분석과 종결",
+    "Dead Code·Deactivated Code·Defensive Code",
+    "Source Code와 Object Code Coverage",
+    "Compiler Optimization과 Coverage Instrumentation",
+    "Coverage Tool Qualification",
+    "Target 환경과 회귀시험",
+    "100% MC/DC의 증거 한계"
+  ],
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py; final source directly reviewed and authored",
+    "ownership_detail=MC/DC structural coverage and coverage evidence",
+    "generic_lifecycle_boundary=instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+    "safety_lifecycle_boundary=sis_sil_safety_software_independence_systematic_failure_verification_validation",
+    "generated_bank_not_modified"
+  ]
+}

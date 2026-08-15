@@ -7,7 +7,14 @@
     "topic_name": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
     "question_type": "PRINCIPLE_INTERPRETATION",
     "difficulty_profile": "THEORY_CORE",
-    "topic_aliases": [],
+    "topic_aliases": [
+      "SIS SIL safety software lifecycle systematic failure independence",
+      "SIS·SIL 안전 소프트웨어 수명주기 체계적 고장 독립성",
+      "safety application program SRS verification validation",
+      "Safety Application Program SRS 검증 확인",
+      "functional safety software tool qualification proven in use",
+      "기능안전 소프트웨어 Tool Qualification Proven in Use"
+    ],
     "fatal_checks": [],
     "major_checks": [],
     "question_type_checks": [],
@@ -2188,6 +2195,9 @@
         "Test Safety Validation",
         "Safety Validation 관계를",
         "Validation 관계를 설명하시오"
+      ],
+      "exclude_if_only": [
+        "MC/DC modified condition decision coverage structural coverage unique-cause masking coverage gap dead deactivated code"
       ]
     },
     "truth_schema": [
@@ -2220,7 +2230,8 @@
       "Functional Safety Audit은 수명주기 활동과 관리체계가 계획대로 수행되는지 확인한다.",
       "Competence는 역할별 교육, 경험, 책임과 평가 근거로 관리한다.",
       "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
-      "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다."
+      "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
+      "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다."
     ],
     "fatal_conditions": [
       {
@@ -2719,7 +2730,9 @@
     "deterministic_checks_disabled=true",
     "candidate_rules_empty=true",
     "single_owner=C; direct D/E effect disabled",
-    "fatal claims require contextual LLM verification"
+    "fatal claims require contextual LLM verification",
+    "MC/DC detailed ownership handed off to safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+    "populated SW-05-specific deterministic topic aliases without MC/DC routing ownership"
   ],
   "topic_label": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인"
 }

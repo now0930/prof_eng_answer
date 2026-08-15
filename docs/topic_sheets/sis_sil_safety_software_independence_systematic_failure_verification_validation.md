@@ -379,3 +379,11 @@ Focused Test는 Generated Bank와 Production Router를 요구하지 않는다.
 - Routing alias count: 14
 - Positive question count: 10
 - Negative boundary count: 8
+
+## MC/DC 상세 구조적 커버리지 경계
+
+본 Topic은 기능안전 요구, Systematic Capability, 독립성, Tool Qualification 원칙과 Safety V&V의 엄격도를 소유한다.
+
+MC/DC의 조건별 독립 영향 Test Pair, Coverage Gap 종결, Dead·Deactivated Code, Source·Object Code와 Instrumentation 증거의 상세는 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 이관한다.
+
+MC/DC 100%는 Safety Lifecycle의 하나의 검증증거이며 전체 SIF의 SIL을 단독으로 보장하지 않는다.
