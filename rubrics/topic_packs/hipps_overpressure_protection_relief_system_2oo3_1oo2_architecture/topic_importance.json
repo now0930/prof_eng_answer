@@ -1,0 +1,24 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+  "difficulty": "THEORY_CORE",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "COMPARE_SELECTION",
+  "high_band_unlock_conditions": [
+    "HIPPS와 Relief System의 예방·완화 기능차이를 설명한다.",
+    "전체 SIF 경계와 Process Safety Time을 제시한다.",
+    "2oo3 sensing의 장점과 common cause·degraded mode를 함께 설명한다.",
+    "직렬 Final Element의 1oo2 적용조건과 예외를 구분한다.",
+    "Target SIL과 Achieved PFDavg를 분리한다.",
+    "Closure Time, Surge와 Leakage를 동적 성능으로 연결한다.",
+    "Code, 잔여 과압원, 환경영향과 Lifecycle Cost로 적용방식을 선정한다.",
+    "SRS, Proof Test, Bypass와 MOC를 수명주기로 연결한다."
+  ],
+  "note": "HIPPS Architecture와 Relief 대체 가능성은 시나리오, Code와 독립성 근거에 의존한다. 개별 인증등급, 고정 Voting 또는 빠른 폐쇄만으로 전체 안전성을 단정하지 않는다.",
+  "revision_notes": [
+    "single-topic fresh direct authoring",
+    "old draft not copied",
+    "target and achieved integrity explicitly separated"
+  ],
+  "topic_label": "HIPPS 과압보호시스템의 구조, Voting Architecture 및 Relief System 비교"
+}

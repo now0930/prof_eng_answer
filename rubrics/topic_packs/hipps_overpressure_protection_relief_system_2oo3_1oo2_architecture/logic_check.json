@@ -1,0 +1,122 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+  "title": "HIPPS 과압보호시스템의 구조, Voting Architecture 및 Relief System 비교",
+  "deterministic_checks": {
+    "enabled": false,
+    "topic_name": "HIPPS 과압보호시스템의 구조, Voting Architecture 및 Relief System 비교",
+    "question_type": "COMPARE_SELECTION",
+    "difficulty_profile": "THEORY_CORE",
+    "topic_aliases": [
+      "HIPPS high integrity pressure protection system",
+      "HIPPS overpressure protection",
+      "HIPPS 2oo3 pressure transmitter voting",
+      "HIPPS 1oo2 shutdown valve",
+      "HIPPS relief valve comparison",
+      "HIPPS versus pressure safety valve",
+      "HIPPS process safety time",
+      "HIPPS trip setpoint pressure transient",
+      "HIPPS PFDavg SIL verification",
+      "HIPPS final element architecture",
+      "HIPPS common cause degraded voting",
+      "HIPPS SRS proof test bypass"
+    ],
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {
+    "display_name": "HIPPS의 과압 예방구조, 2oo3·1oo2 Voting 조건과 Relief System 선정논리를 평가한다.",
+    "difficulty": "THEORY_CORE",
+    "cap_policy": {
+      "enabled": true,
+      "apply_only_to_verified_fatal_correctness_error": true,
+      "keyword_match_alone_is_insufficient": true
+    },
+    "candidate_extraction": {
+      "max_candidates": 32,
+      "nearby_window": 1,
+      "rules": [],
+      "key_terms": [
+        "HIPPS",
+        "overpressure protection",
+        "2oo3",
+        "1oo2",
+        "pressure transmitter voting",
+        "logic solver",
+        "shutdown valve",
+        "process safety time",
+        "trip setpoint",
+        "pressure transient",
+        "PFDavg",
+        "target SIL",
+        "relief system",
+        "common cause",
+        "proof test",
+        "bypass"
+      ]
+    },
+    "truth_schema": [
+      "HIPPS는 고압원에서 저압측 보호대상으로 유입되는 에너지를 신속히 차단하여 과압을 예방하는 고무결성 계장 보호기능이다.",
+      "HIPPS는 압력이 상승한 뒤 유체를 배출하는 Relief Device가 아니라 과압 원인을 차단하는 예방형 SIF이므로 두 보호수단의 기능과 고장모드를 구분해야 한다.",
+      "HIPPS는 고압 공급원과 더 낮은 설계압력의 배관·용기·공정설비 사이에서 과압 시나리오를 독립적으로 차단할 필요가 있을 때 적용을 검토한다.",
+      "HIPPS의 SIF 경계는 Pressure Sensor, Logic Solver, Solenoid 또는 Pilot, Shutdown Valve, 동력원과 진단·시험·Reset·Bypass 기능의 전체 경로를 포함한다.",
+      "HIPPS trip setpoint는 보호대상의 허용압력보다 낮게 정하되 계측오차, deadband, pressure transient와 밸브 완전폐쇄까지의 압력상승 여유를 포함해야 한다.",
+      "HIPPS의 총 응답시간은 감지, voting, logic execution, solenoid 또는 pilot 동작, actuator와 valve closing time을 포함하며 Process Safety Time보다 짧아야 한다.",
+      "2oo3 sensing은 세 압력채널 중 두 채널이 trip 조건에 도달할 때 안전동작을 요구하여 단일 채널 이상에 대한 가용성과 오동작 내성을 균형 있게 확보하는 대표 구조다.",
+      "2oo3 구조도 공통 Process Tap, Root Valve, 전원, 환경, 교정절차와 Logic에 의존하면 Common Cause Failure에 취약하므로 채널 수만으로 높은 무결성을 보장하지 않는다.",
+      "한 Sensor 채널을 Bypass하거나 고장 격리할 때 2oo3가 어떤 degraded voting으로 전환되는지 명시해야 하며 1oo2와 2oo2는 안전성·가용성 특성이 서로 다르다.",
+      "직렬로 설치한 두 Shutdown Valve 중 어느 하나의 폐쇄만으로 요구된 유량차단을 달성할 수 있을 때 Final Element는 기능적으로 1oo2 성공 구조로 평가할 수 있다.",
+      "Double Block, 누설등급 또는 완전 격리 요구가 두 밸브의 동시 폐쇄를 요구한다면 단순한 1oo2 성공 가정을 적용할 수 없고 실제 Safe State 기준으로 구조를 정의해야 한다.",
+      "2oo3 Sensor와 1oo2 Final Element 조합은 대표 예시일 뿐 모든 HIPPS의 고정 구조가 아니며 목표 SIL, Demand Rate, Spurious Trip, 공정위험과 유지보수 전략으로 선정한다.",
+      "HIPPS Logic Solver는 Sensor voting, trip latching, output energization 또는 de-energization, fault handling과 Reset permissive를 SRS에 따라 결정론적으로 수행해야 한다.",
+      "Final Element 성능은 Shutdown Valve 본체뿐 아니라 Actuator, Solenoid 또는 Pilot Valve, 공기·유압 공급, 배관과 Position Feedback의 연속된 동작경로로 검증해야 한다.",
+      "HIPPS 차단밸브는 전원·공압·유압 상실 시 요구 Safe State로 이동하도록 설계하되 저장에너지, Spring Return, Accumulator와 Failure Position의 실제 동작을 확인해야 한다.",
+      "밸브를 빠르게 닫는 것만으로 충분하지 않으며 과도한 Surge 또는 압력파를 유발하지 않으면서 Process Safety Time 안에 요구 차단량에 도달하도록 Closing Profile을 검토해야 한다.",
+      "HIPPS 차단 후 잔류압력과 지속 유입을 제한하려면 Seat Leakage, Shutoff Class, 배관 체적과 downstream depressurization 조건을 함께 확인해야 한다.",
+      "HIPPS의 Achieved PFDavg는 Sensor, Logic Solver와 Final Element의 고장확률, 공통원인, 진단, Proof Test Interval·Coverage와 사람오류를 포함하여 전체 SIF로 계산한다.",
+      "위험분석이 요구하는 Target SIL과 설계·시험으로 입증한 Achieved SIL을 구분하며 개별 인증기기의 SIL 표시만으로 전체 HIPPS의 SIL을 확정하지 않는다.",
+      "HIPPS를 독립보호계층으로 Credit하려면 Initiating Cause를 만드는 BPCS와 Sensor, Logic, Final Element, Utility 및 유지보수 측면의 독립성을 입증해야 한다.",
+      "Relief System은 과압 시 유체를 방출하여 압력을 제한하는 완화형 보호수단이고 HIPPS는 유입을 차단하는 예방형 보호수단이므로 Discharge Capacity와 Isolation Integrity라는 서로 다른 설계축을 가진다.",
+      "HIPPS가 Relief Load를 줄이거나 특정 Relief 설계를 대체할 수 있는지는 적용 Code, 법규, 시나리오별 독립성, 신뢰도, 잔여열원과 Blocked-in Expansion을 포함한 모든 과압원 검토로 결정한다.",
+      "HIPPS와 Relief Device는 상호배타적이지 않으며 결과심각도, 방출경로, 환경영향, 유지보수 역량, False Trip 비용과 전체 Lifecycle Cost를 비교하여 단독 또는 병행 적용을 선정한다.",
+      "HIPPS 운영에서는 Sensor·Logic·Final Element의 Proof Test, Partial Stroke 또는 Functional Test 경계와 Bypass 승인·표시·시간제한·보상조치·복구확인을 관리해야 한다.",
+      "SRS에는 원인, 측정변수, Trip Setpoint, Voting, Safe State, 응답시간, Reset, Alarm, Bypass, 시험주기와 성능기준을 정의하고 변경 시 MOC와 Revalidation으로 갱신해야 한다."
+    ],
+    "fatal_conditions": [
+      "[hipps_equals_relief_valve] HIPPS는 Relief Valve와 동일한 장치이며 둘은 이름만 다르다. | correction: HIPPS는 유입을 차단하는 계장 예방기능이고 Relief Device는 유체를 배출하여 압력을 제한하는 기계적 완화수단이다.",
+      "[two_oo_three_guarantees_sil] Sensor를 2oo3로 구성하면 공통원인과 시험조건에 관계없이 높은 SIL이 자동 보장된다. | correction: Common cause, diagnostics, proof test, logic와 final element를 포함한 전체 SIF를 검증해야 한다.",
+      "[bypass_keeps_same_architecture] 2oo3 Sensor 중 한 채널을 bypass해도 voting과 위험특성은 항상 동일하다. | correction: Degraded mode의 1oo2 또는 2oo2 전환과 안전성·가용성 영향을 명시해야 한다.",
+      "[series_valves_always_one_oo_two] 직렬 Shutdown Valve 두 대는 모든 Safe State 요구에서 자동으로 1oo2다. | correction: 어느 하나의 폐쇄로 요구 유량차단을 달성하는 경우에만 기능적 1oo2이며 double block·leakage 요구는 별도다.",
+      "[component_certificate_proves_hipps] SIL 인증 Sensor나 Valve 한 개가 있으면 전체 HIPPS가 같은 SIL을 달성한다. | correction: Sensor–Logic–Final Element 전체 PFDavg, 구조와 systematic capability를 검증해야 한다.",
+      "[fast_closure_always_safer] HIPPS Valve는 가능한 한 가장 빠르게 닫을수록 항상 안전하다. | correction: Process Safety Time을 만족하면서 surge, pressure wave와 equipment load를 함께 검토해야 한다.",
+      "[fail_close_label_is_sufficient] Valve가 fail close라고 표시되면 실제 응답시간, 저장에너지와 leakage 검증은 필요 없다. | correction: Actuator·solenoid·utility·stroke time·seat leakage의 실제 성능을 시험해야 한다.",
+      "[hipps_replaces_all_relief] HIPPS를 설치하면 모든 과압원에 대한 Relief Device를 자동 제거할 수 있다. | correction: Code, 시나리오, 잔여열원, thermal expansion과 blocked-in condition을 포함해 별도 판단해야 한다.",
+      "[relief_and_hipps_mutually_exclusive] HIPPS와 Relief Device는 함께 사용할 수 없는 상호배타적 보호수단이다. | correction: 시나리오와 독립성에 따라 병행 적용할 수 있다.",
+      "[bpcs_shared_path_is_independent] BPCS와 Sensor·Logic·Valve·전원을 공유해도 HIPPS는 자동으로 독립 IPL이다. | correction: Initiating cause와 다른 보호계층으로부터 기능적·물리적·조직적 독립성을 입증해야 한다.",
+      "[target_equals_achieved] 위험분석에서 Target SIL을 정하면 설계된 HIPPS가 그 SIL을 자동 달성한다. | correction: Achieved SIL은 전체 PFDavg, 구조제약과 수명주기 검증으로 확인한다.",
+      "[proof_test_can_be_omitted] Online diagnostics가 있으면 HIPPS Sensor·Logic·Final Element의 proof test와 bypass 관리가 불필요하다. | correction: 검출되지 않는 위험고장과 운영오류를 다루는 proof test 및 bypass control이 필요하다."
+    ],
+    "safe_conditions": [
+      "HIPPS를 고압원 차단에 의한 예방형 과압보호 SIF로 정의한다.",
+      "Pressure Sensor–Logic Solver–Final Element와 지원기능의 전체 경계를 설명한다.",
+      "Trip setpoint와 transient overshoot margin을 보호대상 허용압력에 연결한다.",
+      "총 응답시간이 Process Safety Time보다 짧아야 함을 설명한다.",
+      "2oo3 sensing의 fault tolerance와 spurious trip trade-off를 함께 설명한다.",
+      "Common tap, power, calibration과 logic의 common cause를 평가한다.",
+      "Sensor bypass 시 degraded voting과 운전제한을 명시한다.",
+      "직렬 두 Shutdown Valve의 1oo2 판단을 실제 Safe State 요구에 조건부로 적용한다.",
+      "Final Element를 Valve·Actuator·Solenoid·Utility와 feedback의 연속 경로로 평가한다.",
+      "Closure Time, surge와 seat leakage를 함께 검토한다.",
+      "Target SIL과 Achieved PFDavg를 분리하고 BPCS 독립성을 검증한다.",
+      "HIPPS와 Relief의 기능차이, Code, 잔여 과압원과 lifecycle cost로 적용방식을 선정한다."
+    ]
+  },
+  "revision_notes": [
+    "deterministic keyword penalties disabled",
+    "fatal conditions require contextual verification",
+    "architecture statements are conditional on the defined safe function"
+  ]
+}

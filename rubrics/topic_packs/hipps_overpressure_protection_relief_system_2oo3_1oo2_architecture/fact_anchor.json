@@ -1,0 +1,733 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+  "title_ko": "HIPPS 과압보호시스템의 구조, Voting Architecture 및 Relief System 비교",
+  "question_type_hint": "COMPARE_SELECTION",
+  "anchors": [
+    {
+      "id": "hipps_definition",
+      "anchor_id": "hipps_definition",
+      "statement": "HIPPS는 고압원에서 저압측 보호대상으로 유입되는 에너지를 신속히 차단하여 과압을 예방하는 고무결성 계장 보호기능이다.",
+      "importance": "core",
+      "keywords": [
+        "HIPPS",
+        "overpressure prevention",
+        "high pressure source",
+        "isolation"
+      ],
+      "core_terms": [
+        "HIPPS",
+        "overpressure prevention",
+        "high pressure source",
+        "isolation"
+      ],
+      "accepted_explanations": [
+        "HIPPS는 고압원에서 저압측 보호대상으로 유입되는 에너지를 신속히 차단하여 과압을 예방하는 고무결성 계장 보호기능이다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS는 고압원에서 저압측 보호대상으로 유입되는 에너지를 신속히 차단하여 과압을 예방하는 고무결성 계장 보호기능이다.",
+      "description": "HIPPS는 고압원에서 저압측 보호대상으로 유입되는 에너지를 신속히 차단하여 과압을 예방하는 고무결성 계장 보호기능이다."
+    },
+    {
+      "id": "hipps_not_relief_device",
+      "anchor_id": "hipps_not_relief_device",
+      "statement": "HIPPS는 압력이 상승한 뒤 유체를 배출하는 Relief Device가 아니라 과압 원인을 차단하는 예방형 SIF이므로 두 보호수단의 기능과 고장모드를 구분해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "HIPPS",
+        "relief device",
+        "preventive protection",
+        "SIF"
+      ],
+      "core_terms": [
+        "HIPPS",
+        "relief device",
+        "preventive protection",
+        "SIF"
+      ],
+      "accepted_explanations": [
+        "HIPPS는 압력이 상승한 뒤 유체를 배출하는 Relief Device가 아니라 과압 원인을 차단하는 예방형 SIF이므로 두 보호수단의 기능과 고장모드를 구분해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS는 압력이 상승한 뒤 유체를 배출하는 Relief Device가 아니라 과압 원인을 차단하는 예방형 SIF이므로 두 보호수단의 기능과 고장모드를 구분해야 한다.",
+      "description": "HIPPS는 압력이 상승한 뒤 유체를 배출하는 Relief Device가 아니라 과압 원인을 차단하는 예방형 SIF이므로 두 보호수단의 기능과 고장모드를 구분해야 한다."
+    },
+    {
+      "id": "hipps_application_boundary",
+      "anchor_id": "hipps_application_boundary",
+      "statement": "HIPPS는 고압 공급원과 더 낮은 설계압력의 배관·용기·공정설비 사이에서 과압 시나리오를 독립적으로 차단할 필요가 있을 때 적용을 검토한다.",
+      "importance": "core",
+      "keywords": [
+        "design pressure",
+        "downstream equipment",
+        "overpressure scenario",
+        "independence"
+      ],
+      "core_terms": [
+        "design pressure",
+        "downstream equipment",
+        "overpressure scenario",
+        "independence"
+      ],
+      "accepted_explanations": [
+        "HIPPS는 고압 공급원과 더 낮은 설계압력의 배관·용기·공정설비 사이에서 과압 시나리오를 독립적으로 차단할 필요가 있을 때 적용을 검토한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS는 고압 공급원과 더 낮은 설계압력의 배관·용기·공정설비 사이에서 과압 시나리오를 독립적으로 차단할 필요가 있을 때 적용을 검토한다.",
+      "description": "HIPPS는 고압 공급원과 더 낮은 설계압력의 배관·용기·공정설비 사이에서 과압 시나리오를 독립적으로 차단할 필요가 있을 때 적용을 검토한다."
+    },
+    {
+      "id": "hipps_sif_end_to_end_boundary",
+      "anchor_id": "hipps_sif_end_to_end_boundary",
+      "statement": "HIPPS의 SIF 경계는 Pressure Sensor, Logic Solver, Solenoid 또는 Pilot, Shutdown Valve, 동력원과 진단·시험·Reset·Bypass 기능의 전체 경로를 포함한다.",
+      "importance": "core",
+      "keywords": [
+        "pressure sensor",
+        "logic solver",
+        "shutdown valve",
+        "SIF boundary"
+      ],
+      "core_terms": [
+        "pressure sensor",
+        "logic solver",
+        "shutdown valve",
+        "SIF boundary"
+      ],
+      "accepted_explanations": [
+        "HIPPS의 SIF 경계는 Pressure Sensor, Logic Solver, Solenoid 또는 Pilot, Shutdown Valve, 동력원과 진단·시험·Reset·Bypass 기능의 전체 경로를 포함한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS의 SIF 경계는 Pressure Sensor, Logic Solver, Solenoid 또는 Pilot, Shutdown Valve, 동력원과 진단·시험·Reset·Bypass 기능의 전체 경로를 포함한다.",
+      "description": "HIPPS의 SIF 경계는 Pressure Sensor, Logic Solver, Solenoid 또는 Pilot, Shutdown Valve, 동력원과 진단·시험·Reset·Bypass 기능의 전체 경로를 포함한다."
+    },
+    {
+      "id": "hipps_trip_setpoint_margin",
+      "anchor_id": "hipps_trip_setpoint_margin",
+      "statement": "HIPPS trip setpoint는 보호대상의 허용압력보다 낮게 정하되 계측오차, deadband, pressure transient와 밸브 완전폐쇄까지의 압력상승 여유를 포함해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "trip setpoint",
+        "allowable pressure",
+        "transient overshoot",
+        "margin"
+      ],
+      "core_terms": [
+        "trip setpoint",
+        "allowable pressure",
+        "transient overshoot",
+        "margin"
+      ],
+      "accepted_explanations": [
+        "HIPPS trip setpoint는 보호대상의 허용압력보다 낮게 정하되 계측오차, deadband, pressure transient와 밸브 완전폐쇄까지의 압력상승 여유를 포함해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS trip setpoint는 보호대상의 허용압력보다 낮게 정하되 계측오차, deadband, pressure transient와 밸브 완전폐쇄까지의 압력상승 여유를 포함해야 한다.",
+      "description": "HIPPS trip setpoint는 보호대상의 허용압력보다 낮게 정하되 계측오차, deadband, pressure transient와 밸브 완전폐쇄까지의 압력상승 여유를 포함해야 한다."
+    },
+    {
+      "id": "hipps_process_safety_time",
+      "anchor_id": "hipps_process_safety_time",
+      "statement": "HIPPS의 총 응답시간은 감지, voting, logic execution, solenoid 또는 pilot 동작, actuator와 valve closing time을 포함하며 Process Safety Time보다 짧아야 한다.",
+      "importance": "core",
+      "keywords": [
+        "process safety time",
+        "response time",
+        "valve closing time",
+        "logic execution"
+      ],
+      "core_terms": [
+        "process safety time",
+        "response time",
+        "valve closing time",
+        "logic execution"
+      ],
+      "accepted_explanations": [
+        "HIPPS의 총 응답시간은 감지, voting, logic execution, solenoid 또는 pilot 동작, actuator와 valve closing time을 포함하며 Process Safety Time보다 짧아야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS의 총 응답시간은 감지, voting, logic execution, solenoid 또는 pilot 동작, actuator와 valve closing time을 포함하며 Process Safety Time보다 짧아야 한다.",
+      "description": "HIPPS의 총 응답시간은 감지, voting, logic execution, solenoid 또는 pilot 동작, actuator와 valve closing time을 포함하며 Process Safety Time보다 짧아야 한다."
+    },
+    {
+      "id": "hipps_two_out_of_three_sensing",
+      "anchor_id": "hipps_two_out_of_three_sensing",
+      "statement": "2oo3 sensing은 세 압력채널 중 두 채널이 trip 조건에 도달할 때 안전동작을 요구하여 단일 채널 이상에 대한 가용성과 오동작 내성을 균형 있게 확보하는 대표 구조다.",
+      "importance": "core",
+      "keywords": [
+        "2oo3",
+        "pressure transmitter",
+        "voting",
+        "spurious trip"
+      ],
+      "core_terms": [
+        "2oo3",
+        "pressure transmitter",
+        "voting",
+        "spurious trip"
+      ],
+      "accepted_explanations": [
+        "2oo3 sensing은 세 압력채널 중 두 채널이 trip 조건에 도달할 때 안전동작을 요구하여 단일 채널 이상에 대한 가용성과 오동작 내성을 균형 있게 확보하는 대표 구조다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "2oo3 sensing은 세 압력채널 중 두 채널이 trip 조건에 도달할 때 안전동작을 요구하여 단일 채널 이상에 대한 가용성과 오동작 내성을 균형 있게 확보하는 대표 구조다.",
+      "description": "2oo3 sensing은 세 압력채널 중 두 채널이 trip 조건에 도달할 때 안전동작을 요구하여 단일 채널 이상에 대한 가용성과 오동작 내성을 균형 있게 확보하는 대표 구조다."
+    },
+    {
+      "id": "hipps_two_out_of_three_limits",
+      "anchor_id": "hipps_two_out_of_three_limits",
+      "statement": "2oo3 구조도 공통 Process Tap, Root Valve, 전원, 환경, 교정절차와 Logic에 의존하면 Common Cause Failure에 취약하므로 채널 수만으로 높은 무결성을 보장하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "2oo3",
+        "common cause failure",
+        "process tap",
+        "shared power"
+      ],
+      "core_terms": [
+        "2oo3",
+        "common cause failure",
+        "process tap",
+        "shared power"
+      ],
+      "accepted_explanations": [
+        "2oo3 구조도 공통 Process Tap, Root Valve, 전원, 환경, 교정절차와 Logic에 의존하면 Common Cause Failure에 취약하므로 채널 수만으로 높은 무결성을 보장하지 않는다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "2oo3 구조도 공통 Process Tap, Root Valve, 전원, 환경, 교정절차와 Logic에 의존하면 Common Cause Failure에 취약하므로 채널 수만으로 높은 무결성을 보장하지 않는다.",
+      "description": "2oo3 구조도 공통 Process Tap, Root Valve, 전원, 환경, 교정절차와 Logic에 의존하면 Common Cause Failure에 취약하므로 채널 수만으로 높은 무결성을 보장하지 않는다."
+    },
+    {
+      "id": "hipps_degraded_voting_mode",
+      "anchor_id": "hipps_degraded_voting_mode",
+      "statement": "한 Sensor 채널을 Bypass하거나 고장 격리할 때 2oo3가 어떤 degraded voting으로 전환되는지 명시해야 하며 1oo2와 2oo2는 안전성·가용성 특성이 서로 다르다.",
+      "importance": "core",
+      "keywords": [
+        "degraded mode",
+        "sensor bypass",
+        "1oo2",
+        "2oo2"
+      ],
+      "core_terms": [
+        "degraded mode",
+        "sensor bypass",
+        "1oo2",
+        "2oo2"
+      ],
+      "accepted_explanations": [
+        "한 Sensor 채널을 Bypass하거나 고장 격리할 때 2oo3가 어떤 degraded voting으로 전환되는지 명시해야 하며 1oo2와 2oo2는 안전성·가용성 특성이 서로 다르다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "한 Sensor 채널을 Bypass하거나 고장 격리할 때 2oo3가 어떤 degraded voting으로 전환되는지 명시해야 하며 1oo2와 2oo2는 안전성·가용성 특성이 서로 다르다.",
+      "description": "한 Sensor 채널을 Bypass하거나 고장 격리할 때 2oo3가 어떤 degraded voting으로 전환되는지 명시해야 하며 1oo2와 2oo2는 안전성·가용성 특성이 서로 다르다."
+    },
+    {
+      "id": "hipps_one_out_of_two_final_elements",
+      "anchor_id": "hipps_one_out_of_two_final_elements",
+      "statement": "직렬로 설치한 두 Shutdown Valve 중 어느 하나의 폐쇄만으로 요구된 유량차단을 달성할 수 있을 때 Final Element는 기능적으로 1oo2 성공 구조로 평가할 수 있다.",
+      "importance": "core",
+      "keywords": [
+        "1oo2",
+        "series shutdown valves",
+        "final element",
+        "flow isolation"
+      ],
+      "core_terms": [
+        "1oo2",
+        "series shutdown valves",
+        "final element",
+        "flow isolation"
+      ],
+      "accepted_explanations": [
+        "직렬로 설치한 두 Shutdown Valve 중 어느 하나의 폐쇄만으로 요구된 유량차단을 달성할 수 있을 때 Final Element는 기능적으로 1oo2 성공 구조로 평가할 수 있다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "직렬로 설치한 두 Shutdown Valve 중 어느 하나의 폐쇄만으로 요구된 유량차단을 달성할 수 있을 때 Final Element는 기능적으로 1oo2 성공 구조로 평가할 수 있다.",
+      "description": "직렬로 설치한 두 Shutdown Valve 중 어느 하나의 폐쇄만으로 요구된 유량차단을 달성할 수 있을 때 Final Element는 기능적으로 1oo2 성공 구조로 평가할 수 있다."
+    },
+    {
+      "id": "hipps_one_out_of_two_condition",
+      "anchor_id": "hipps_one_out_of_two_condition",
+      "statement": "Double Block, 누설등급 또는 완전 격리 요구가 두 밸브의 동시 폐쇄를 요구한다면 단순한 1oo2 성공 가정을 적용할 수 없고 실제 Safe State 기준으로 구조를 정의해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "double block",
+        "leakage class",
+        "safe state",
+        "architecture condition"
+      ],
+      "core_terms": [
+        "double block",
+        "leakage class",
+        "safe state",
+        "architecture condition"
+      ],
+      "accepted_explanations": [
+        "Double Block, 누설등급 또는 완전 격리 요구가 두 밸브의 동시 폐쇄를 요구한다면 단순한 1oo2 성공 가정을 적용할 수 없고 실제 Safe State 기준으로 구조를 정의해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "Double Block, 누설등급 또는 완전 격리 요구가 두 밸브의 동시 폐쇄를 요구한다면 단순한 1oo2 성공 가정을 적용할 수 없고 실제 Safe State 기준으로 구조를 정의해야 한다.",
+      "description": "Double Block, 누설등급 또는 완전 격리 요구가 두 밸브의 동시 폐쇄를 요구한다면 단순한 1oo2 성공 가정을 적용할 수 없고 실제 Safe State 기준으로 구조를 정의해야 한다."
+    },
+    {
+      "id": "hipps_architecture_not_universal",
+      "anchor_id": "hipps_architecture_not_universal",
+      "statement": "2oo3 Sensor와 1oo2 Final Element 조합은 대표 예시일 뿐 모든 HIPPS의 고정 구조가 아니며 목표 SIL, Demand Rate, Spurious Trip, 공정위험과 유지보수 전략으로 선정한다.",
+      "importance": "core",
+      "keywords": [
+        "architecture selection",
+        "target SIL",
+        "demand rate",
+        "spurious trip"
+      ],
+      "core_terms": [
+        "architecture selection",
+        "target SIL",
+        "demand rate",
+        "spurious trip"
+      ],
+      "accepted_explanations": [
+        "2oo3 Sensor와 1oo2 Final Element 조합은 대표 예시일 뿐 모든 HIPPS의 고정 구조가 아니며 목표 SIL, Demand Rate, Spurious Trip, 공정위험과 유지보수 전략으로 선정한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "2oo3 Sensor와 1oo2 Final Element 조합은 대표 예시일 뿐 모든 HIPPS의 고정 구조가 아니며 목표 SIL, Demand Rate, Spurious Trip, 공정위험과 유지보수 전략으로 선정한다.",
+      "description": "2oo3 Sensor와 1oo2 Final Element 조합은 대표 예시일 뿐 모든 HIPPS의 고정 구조가 아니며 목표 SIL, Demand Rate, Spurious Trip, 공정위험과 유지보수 전략으로 선정한다."
+    },
+    {
+      "id": "hipps_logic_solver_role",
+      "anchor_id": "hipps_logic_solver_role",
+      "statement": "HIPPS Logic Solver는 Sensor voting, trip latching, output energization 또는 de-energization, fault handling과 Reset permissive를 SRS에 따라 결정론적으로 수행해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "logic solver",
+        "trip latch",
+        "fault handling",
+        "reset permissive"
+      ],
+      "core_terms": [
+        "logic solver",
+        "trip latch",
+        "fault handling",
+        "reset permissive"
+      ],
+      "accepted_explanations": [
+        "HIPPS Logic Solver는 Sensor voting, trip latching, output energization 또는 de-energization, fault handling과 Reset permissive를 SRS에 따라 결정론적으로 수행해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS Logic Solver는 Sensor voting, trip latching, output energization 또는 de-energization, fault handling과 Reset permissive를 SRS에 따라 결정론적으로 수행해야 한다.",
+      "description": "HIPPS Logic Solver는 Sensor voting, trip latching, output energization 또는 de-energization, fault handling과 Reset permissive를 SRS에 따라 결정론적으로 수행해야 한다."
+    },
+    {
+      "id": "hipps_final_element_chain",
+      "anchor_id": "hipps_final_element_chain",
+      "statement": "Final Element 성능은 Shutdown Valve 본체뿐 아니라 Actuator, Solenoid 또는 Pilot Valve, 공기·유압 공급, 배관과 Position Feedback의 연속된 동작경로로 검증해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "shutdown valve",
+        "actuator",
+        "solenoid valve",
+        "position feedback"
+      ],
+      "core_terms": [
+        "shutdown valve",
+        "actuator",
+        "solenoid valve",
+        "position feedback"
+      ],
+      "accepted_explanations": [
+        "Final Element 성능은 Shutdown Valve 본체뿐 아니라 Actuator, Solenoid 또는 Pilot Valve, 공기·유압 공급, 배관과 Position Feedback의 연속된 동작경로로 검증해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "Final Element 성능은 Shutdown Valve 본체뿐 아니라 Actuator, Solenoid 또는 Pilot Valve, 공기·유압 공급, 배관과 Position Feedback의 연속된 동작경로로 검증해야 한다.",
+      "description": "Final Element 성능은 Shutdown Valve 본체뿐 아니라 Actuator, Solenoid 또는 Pilot Valve, 공기·유압 공급, 배관과 Position Feedback의 연속된 동작경로로 검증해야 한다."
+    },
+    {
+      "id": "hipps_fail_safe_energy",
+      "anchor_id": "hipps_fail_safe_energy",
+      "statement": "HIPPS 차단밸브는 전원·공압·유압 상실 시 요구 Safe State로 이동하도록 설계하되 저장에너지, Spring Return, Accumulator와 Failure Position의 실제 동작을 확인해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "fail safe",
+        "spring return",
+        "accumulator",
+        "failure position"
+      ],
+      "core_terms": [
+        "fail safe",
+        "spring return",
+        "accumulator",
+        "failure position"
+      ],
+      "accepted_explanations": [
+        "HIPPS 차단밸브는 전원·공압·유압 상실 시 요구 Safe State로 이동하도록 설계하되 저장에너지, Spring Return, Accumulator와 Failure Position의 실제 동작을 확인해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS 차단밸브는 전원·공압·유압 상실 시 요구 Safe State로 이동하도록 설계하되 저장에너지, Spring Return, Accumulator와 Failure Position의 실제 동작을 확인해야 한다.",
+      "description": "HIPPS 차단밸브는 전원·공압·유압 상실 시 요구 Safe State로 이동하도록 설계하되 저장에너지, Spring Return, Accumulator와 Failure Position의 실제 동작을 확인해야 한다."
+    },
+    {
+      "id": "hipps_closure_time_and_surge",
+      "anchor_id": "hipps_closure_time_and_surge",
+      "statement": "밸브를 빠르게 닫는 것만으로 충분하지 않으며 과도한 Surge 또는 압력파를 유발하지 않으면서 Process Safety Time 안에 요구 차단량에 도달하도록 Closing Profile을 검토해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "closure time",
+        "surge",
+        "pressure wave",
+        "closing profile"
+      ],
+      "core_terms": [
+        "closure time",
+        "surge",
+        "pressure wave",
+        "closing profile"
+      ],
+      "accepted_explanations": [
+        "밸브를 빠르게 닫는 것만으로 충분하지 않으며 과도한 Surge 또는 압력파를 유발하지 않으면서 Process Safety Time 안에 요구 차단량에 도달하도록 Closing Profile을 검토해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "밸브를 빠르게 닫는 것만으로 충분하지 않으며 과도한 Surge 또는 압력파를 유발하지 않으면서 Process Safety Time 안에 요구 차단량에 도달하도록 Closing Profile을 검토해야 한다.",
+      "description": "밸브를 빠르게 닫는 것만으로 충분하지 않으며 과도한 Surge 또는 압력파를 유발하지 않으면서 Process Safety Time 안에 요구 차단량에 도달하도록 Closing Profile을 검토해야 한다."
+    },
+    {
+      "id": "hipps_tight_shutoff_and_leakage",
+      "anchor_id": "hipps_tight_shutoff_and_leakage",
+      "statement": "HIPPS 차단 후 잔류압력과 지속 유입을 제한하려면 Seat Leakage, Shutoff Class, 배관 체적과 downstream depressurization 조건을 함께 확인해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "seat leakage",
+        "shutoff class",
+        "residual pressure",
+        "depressurization"
+      ],
+      "core_terms": [
+        "seat leakage",
+        "shutoff class",
+        "residual pressure",
+        "depressurization"
+      ],
+      "accepted_explanations": [
+        "HIPPS 차단 후 잔류압력과 지속 유입을 제한하려면 Seat Leakage, Shutoff Class, 배관 체적과 downstream depressurization 조건을 함께 확인해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS 차단 후 잔류압력과 지속 유입을 제한하려면 Seat Leakage, Shutoff Class, 배관 체적과 downstream depressurization 조건을 함께 확인해야 한다.",
+      "description": "HIPPS 차단 후 잔류압력과 지속 유입을 제한하려면 Seat Leakage, Shutoff Class, 배관 체적과 downstream depressurization 조건을 함께 확인해야 한다."
+    },
+    {
+      "id": "hipps_pfdavg_allocation",
+      "anchor_id": "hipps_pfdavg_allocation",
+      "statement": "HIPPS의 Achieved PFDavg는 Sensor, Logic Solver와 Final Element의 고장확률, 공통원인, 진단, Proof Test Interval·Coverage와 사람오류를 포함하여 전체 SIF로 계산한다.",
+      "importance": "core",
+      "keywords": [
+        "PFDavg",
+        "proof test interval",
+        "diagnostic coverage",
+        "human error"
+      ],
+      "core_terms": [
+        "PFDavg",
+        "proof test interval",
+        "diagnostic coverage",
+        "human error"
+      ],
+      "accepted_explanations": [
+        "HIPPS의 Achieved PFDavg는 Sensor, Logic Solver와 Final Element의 고장확률, 공통원인, 진단, Proof Test Interval·Coverage와 사람오류를 포함하여 전체 SIF로 계산한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS의 Achieved PFDavg는 Sensor, Logic Solver와 Final Element의 고장확률, 공통원인, 진단, Proof Test Interval·Coverage와 사람오류를 포함하여 전체 SIF로 계산한다.",
+      "description": "HIPPS의 Achieved PFDavg는 Sensor, Logic Solver와 Final Element의 고장확률, 공통원인, 진단, Proof Test Interval·Coverage와 사람오류를 포함하여 전체 SIF로 계산한다."
+    },
+    {
+      "id": "hipps_target_vs_achieved_sil",
+      "anchor_id": "hipps_target_vs_achieved_sil",
+      "statement": "위험분석이 요구하는 Target SIL과 설계·시험으로 입증한 Achieved SIL을 구분하며 개별 인증기기의 SIL 표시만으로 전체 HIPPS의 SIL을 확정하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "target SIL",
+        "achieved SIL",
+        "certified device",
+        "SIF verification"
+      ],
+      "core_terms": [
+        "target SIL",
+        "achieved SIL",
+        "certified device",
+        "SIF verification"
+      ],
+      "accepted_explanations": [
+        "위험분석이 요구하는 Target SIL과 설계·시험으로 입증한 Achieved SIL을 구분하며 개별 인증기기의 SIL 표시만으로 전체 HIPPS의 SIL을 확정하지 않는다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "위험분석이 요구하는 Target SIL과 설계·시험으로 입증한 Achieved SIL을 구분하며 개별 인증기기의 SIL 표시만으로 전체 HIPPS의 SIL을 확정하지 않는다.",
+      "description": "위험분석이 요구하는 Target SIL과 설계·시험으로 입증한 Achieved SIL을 구분하며 개별 인증기기의 SIL 표시만으로 전체 HIPPS의 SIL을 확정하지 않는다."
+    },
+    {
+      "id": "hipps_independence_from_bpcs",
+      "anchor_id": "hipps_independence_from_bpcs",
+      "statement": "HIPPS를 독립보호계층으로 Credit하려면 Initiating Cause를 만드는 BPCS와 Sensor, Logic, Final Element, Utility 및 유지보수 측면의 독립성을 입증해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "BPCS independence",
+        "independent protection layer",
+        "initiating cause",
+        "utility"
+      ],
+      "core_terms": [
+        "BPCS independence",
+        "independent protection layer",
+        "initiating cause",
+        "utility"
+      ],
+      "accepted_explanations": [
+        "HIPPS를 독립보호계층으로 Credit하려면 Initiating Cause를 만드는 BPCS와 Sensor, Logic, Final Element, Utility 및 유지보수 측면의 독립성을 입증해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS를 독립보호계층으로 Credit하려면 Initiating Cause를 만드는 BPCS와 Sensor, Logic, Final Element, Utility 및 유지보수 측면의 독립성을 입증해야 한다.",
+      "description": "HIPPS를 독립보호계층으로 Credit하려면 Initiating Cause를 만드는 BPCS와 Sensor, Logic, Final Element, Utility 및 유지보수 측면의 독립성을 입증해야 한다."
+    },
+    {
+      "id": "hipps_relief_system_comparison",
+      "anchor_id": "hipps_relief_system_comparison",
+      "statement": "Relief System은 과압 시 유체를 방출하여 압력을 제한하는 완화형 보호수단이고 HIPPS는 유입을 차단하는 예방형 보호수단이므로 Discharge Capacity와 Isolation Integrity라는 서로 다른 설계축을 가진다.",
+      "importance": "core",
+      "keywords": [
+        "relief system",
+        "discharge capacity",
+        "isolation integrity",
+        "mitigation"
+      ],
+      "core_terms": [
+        "relief system",
+        "discharge capacity",
+        "isolation integrity",
+        "mitigation"
+      ],
+      "accepted_explanations": [
+        "Relief System은 과압 시 유체를 방출하여 압력을 제한하는 완화형 보호수단이고 HIPPS는 유입을 차단하는 예방형 보호수단이므로 Discharge Capacity와 Isolation Integrity라는 서로 다른 설계축을 가진다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "Relief System은 과압 시 유체를 방출하여 압력을 제한하는 완화형 보호수단이고 HIPPS는 유입을 차단하는 예방형 보호수단이므로 Discharge Capacity와 Isolation Integrity라는 서로 다른 설계축을 가진다.",
+      "description": "Relief System은 과압 시 유체를 방출하여 압력을 제한하는 완화형 보호수단이고 HIPPS는 유입을 차단하는 예방형 보호수단이므로 Discharge Capacity와 Isolation Integrity라는 서로 다른 설계축을 가진다."
+    },
+    {
+      "id": "hipps_relief_replacement_boundary",
+      "anchor_id": "hipps_relief_replacement_boundary",
+      "statement": "HIPPS가 Relief Load를 줄이거나 특정 Relief 설계를 대체할 수 있는지는 적용 Code, 법규, 시나리오별 독립성, 신뢰도, 잔여열원과 Blocked-in Expansion을 포함한 모든 과압원 검토로 결정한다.",
+      "importance": "core",
+      "keywords": [
+        "relief load reduction",
+        "code compliance",
+        "residual heat source",
+        "blocked-in expansion"
+      ],
+      "core_terms": [
+        "relief load reduction",
+        "code compliance",
+        "residual heat source",
+        "blocked-in expansion"
+      ],
+      "accepted_explanations": [
+        "HIPPS가 Relief Load를 줄이거나 특정 Relief 설계를 대체할 수 있는지는 적용 Code, 법규, 시나리오별 독립성, 신뢰도, 잔여열원과 Blocked-in Expansion을 포함한 모든 과압원 검토로 결정한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS가 Relief Load를 줄이거나 특정 Relief 설계를 대체할 수 있는지는 적용 Code, 법규, 시나리오별 독립성, 신뢰도, 잔여열원과 Blocked-in Expansion을 포함한 모든 과압원 검토로 결정한다.",
+      "description": "HIPPS가 Relief Load를 줄이거나 특정 Relief 설계를 대체할 수 있는지는 적용 Code, 법규, 시나리오별 독립성, 신뢰도, 잔여열원과 Blocked-in Expansion을 포함한 모든 과압원 검토로 결정한다."
+    },
+    {
+      "id": "hipps_coexistence_and_selection",
+      "anchor_id": "hipps_coexistence_and_selection",
+      "statement": "HIPPS와 Relief Device는 상호배타적이지 않으며 결과심각도, 방출경로, 환경영향, 유지보수 역량, False Trip 비용과 전체 Lifecycle Cost를 비교하여 단독 또는 병행 적용을 선정한다.",
+      "importance": "core",
+      "keywords": [
+        "coexistence",
+        "environmental impact",
+        "false trip cost",
+        "lifecycle cost"
+      ],
+      "core_terms": [
+        "coexistence",
+        "environmental impact",
+        "false trip cost",
+        "lifecycle cost"
+      ],
+      "accepted_explanations": [
+        "HIPPS와 Relief Device는 상호배타적이지 않으며 결과심각도, 방출경로, 환경영향, 유지보수 역량, False Trip 비용과 전체 Lifecycle Cost를 비교하여 단독 또는 병행 적용을 선정한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS와 Relief Device는 상호배타적이지 않으며 결과심각도, 방출경로, 환경영향, 유지보수 역량, False Trip 비용과 전체 Lifecycle Cost를 비교하여 단독 또는 병행 적용을 선정한다.",
+      "description": "HIPPS와 Relief Device는 상호배타적이지 않으며 결과심각도, 방출경로, 환경영향, 유지보수 역량, False Trip 비용과 전체 Lifecycle Cost를 비교하여 단독 또는 병행 적용을 선정한다."
+    },
+    {
+      "id": "hipps_proof_test_and_bypass",
+      "anchor_id": "hipps_proof_test_and_bypass",
+      "statement": "HIPPS 운영에서는 Sensor·Logic·Final Element의 Proof Test, Partial Stroke 또는 Functional Test 경계와 Bypass 승인·표시·시간제한·보상조치·복구확인을 관리해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "proof test",
+        "partial stroke test",
+        "bypass management",
+        "compensating measure"
+      ],
+      "core_terms": [
+        "proof test",
+        "partial stroke test",
+        "bypass management",
+        "compensating measure"
+      ],
+      "accepted_explanations": [
+        "HIPPS 운영에서는 Sensor·Logic·Final Element의 Proof Test, Partial Stroke 또는 Functional Test 경계와 Bypass 승인·표시·시간제한·보상조치·복구확인을 관리해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "HIPPS 운영에서는 Sensor·Logic·Final Element의 Proof Test, Partial Stroke 또는 Functional Test 경계와 Bypass 승인·표시·시간제한·보상조치·복구확인을 관리해야 한다.",
+      "description": "HIPPS 운영에서는 Sensor·Logic·Final Element의 Proof Test, Partial Stroke 또는 Functional Test 경계와 Bypass 승인·표시·시간제한·보상조치·복구확인을 관리해야 한다."
+    },
+    {
+      "id": "hipps_srs_moc_revalidation",
+      "anchor_id": "hipps_srs_moc_revalidation",
+      "statement": "SRS에는 원인, 측정변수, Trip Setpoint, Voting, Safe State, 응답시간, Reset, Alarm, Bypass, 시험주기와 성능기준을 정의하고 변경 시 MOC와 Revalidation으로 갱신해야 한다.",
+      "importance": "core",
+      "keywords": [
+        "SRS",
+        "MOC",
+        "revalidation",
+        "performance criteria"
+      ],
+      "core_terms": [
+        "SRS",
+        "MOC",
+        "revalidation",
+        "performance criteria"
+      ],
+      "accepted_explanations": [
+        "SRS에는 원인, 측정변수, Trip Setpoint, Voting, Safe State, 응답시간, Reset, Alarm, Bypass, 시험주기와 성능기준을 정의하고 변경 시 MOC와 Revalidation으로 갱신해야 한다.",
+        "기능경계, 적용조건, Voting 가정과 현장 시험·운영관리까지 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "구성요소와 약어만 나열하거나 응답시간, 독립성, Relief 비교와 SRS 조건을 생략한다."
+      ],
+      "grading_notes": "HIPPS의 과압 예방 메커니즘, 2oo3·1oo2 조건부 해석, Relief System 비교와 전체 SIF 수명주기 증거를 평가한다.",
+      "source_basis": "docs/topic_sheets/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture.md",
+      "claim": "SRS에는 원인, 측정변수, Trip Setpoint, Voting, Safe State, 응답시간, Reset, Alarm, Bypass, 시험주기와 성능기준을 정의하고 변경 시 MOC와 Revalidation으로 갱신해야 한다.",
+      "description": "SRS에는 원인, 측정변수, Trip Setpoint, Voting, Safe State, 응답시간, Reset, Alarm, Bypass, 시험주기와 성능기준을 정의하고 변경 시 MOC와 Revalidation으로 갱신해야 한다."
+    }
+  ]
+}
