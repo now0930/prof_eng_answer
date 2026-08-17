@@ -50,7 +50,7 @@ class TopicPackStructureTests(unittest.TestCase):
 
     def test_anchor_count_and_uniqueness(self) -> None:
         anchors = self.fact["anchors"]
-        self.assertEqual(len(anchors), 31)
+        self.assertEqual(len(anchors), 32)
         ids = [item["id"] for item in anchors]
         self.assertEqual(len(ids), len(set(ids)))
         self.assertEqual(self.fact["core_facts"], [item["statement"] for item in anchors])
@@ -58,8 +58,8 @@ class TopicPackStructureTests(unittest.TestCase):
     def test_fatal_count_and_shape(self) -> None:
         fatals = self.fact["fatal_wrong_claims"]
         self.assertEqual(len(fatals), 16)
-        self.assertEqual(len(self.logic["deterministic_checks"]["fatal_checks"]), 16)
-        self.assertEqual(len(self.logic["llm_profile"]["fatal_conditions"]), 16)
+        self.assertEqual(len(self.logic["deterministic_checks"]["fatal_checks"]), 17)
+        self.assertEqual(len(self.logic["llm_profile"]["fatal_conditions"]), 17)
         for item in fatals:
             self.assertEqual(item["severity"], "fatal")
             self.assertTrue(item["wrong_claim"])
@@ -70,7 +70,7 @@ class TopicPackStructureTests(unittest.TestCase):
         self.assertTrue(profile["enabled"])
         self.assertTrue(profile["cap_policy"]["fatal_requires_explicit_contradiction"])
         self.assertTrue(profile["cap_policy"]["omission_is_not_fatal"])
-        self.assertEqual(len(profile["truth_schema"]), 31)
+        self.assertEqual(len(profile["truth_schema"]), 33)
         self.assertEqual(len(profile["major_checks"]), 8)
         self.assertEqual(len(profile["false_positive_cautions"]), 10)
 

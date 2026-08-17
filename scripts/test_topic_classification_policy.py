@@ -12,6 +12,8 @@ THEORY_TOPICS = {
     "bode_frequency_response_stability_margin_bandwidth",
     "control_valve_authority_rangeability_gain_installed_performance",
     "feedback_system_closed_loop_sensitivity_steady_state_error",
+    "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+    "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
     "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
     "industrial_ai_machine_learning_anomaly_predictive_maintenance_model_lifecycle",
     "lead_lag_compensator_phase_margin_steady_state_error",
@@ -23,6 +25,7 @@ THEORY_TOPICS = {
     "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
     "root_locus_stability_gain_design",
     "routh_hurwitz_stability_criterion_gain_range",
+    "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
     "second_order_lag_response_by_damping_ratio",
     "second_order_system_resonance_frequency_response",
     "sis_sil_safety_software_independence_systematic_failure_verification_validation",
@@ -48,6 +51,7 @@ APPLICATION_TOPICS = {
     "electronics_error_noise_drift_tolerance_aging_power_mitigation",
     "final_control_element_sil_sis_esd_valve_partial_stroke_test",
     "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+    "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
     "humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
     "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
     "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
@@ -66,7 +70,6 @@ APPLICATION_TOPICS = {
     "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
     "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
     "ultrasonic_sensor_time_of_flight_distance_level_temperature_compensation_reflection_error",
-    "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
 }
 
 DESIGN_TOPICS = {
@@ -75,6 +78,7 @@ DESIGN_TOPICS = {
     "control_logic_sequence_interlock_permissive_trip_state_transition_fail_safe",
     "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
     "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+    "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
     "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
     "industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread",
     "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
@@ -85,7 +89,6 @@ DESIGN_TOPICS = {
     "instrumentation_system_design_basis_codes_standards_specification_deviation_management",
     "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
     "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
-    "emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits",
 }
 
 ALLOWED_SELECTION_IMPORTANCE = {
@@ -95,7 +98,7 @@ ALLOWED_SELECTION_IMPORTANCE = {
 }
 
 EXPECTED_DIFFICULTY_COUNTS = {
-    "THEORY_CORE": 19,
+    "THEORY_CORE": 22,
     "FIELD_APPLICATION": 36,
     "DESIGN_EVALUATION": 16,
 }
@@ -118,7 +121,7 @@ def main() -> None:
         | DESIGN_TOPICS
     )
 
-    assert len(actual_topics) == 71
+    assert len(actual_topics) == 74
     assert actual_topics == classified_topics
 
     assert not (THEORY_TOPICS & APPLICATION_TOPICS)

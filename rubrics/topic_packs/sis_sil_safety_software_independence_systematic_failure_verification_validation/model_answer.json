@@ -200,7 +200,9 @@
     "Bypass/Override의 승인·표시·시간 제한·보상조치·복구 확인을 제시한다.",
     "변경 영향분석, Regression, Revalidation과 As-built 갱신을 연결한다.",
     "PFDavg/PFH 적용 모드와 근사식 가정을 명시한다.",
-    "Safety Lifecycle의 검증 엄격도와 MC/DC 상세 수행기법의 ownership을 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 구분한다."
+    "Safety Lifecycle의 검증 엄격도와 MC/DC 상세 수행기법의 ownership을 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 구분한다.",
+    "소프트웨어 시험은 체계적 결함 억제 증거, Random Hardware Integrity는 PFDavg·PFH 등 확률적 하드웨어 근거, HFT는 Architectural Constraints로 구분한다.",
+    "통합시험, HIL 시험환경과 HFT 하드웨어 아키텍처 제약을 서로 다른 목적과 증거축으로 설명한다."
   ],
   "common_missing_points": [
     "SIS·SIF·SIL 관계 없이 약어만 나열함",
@@ -213,7 +215,9 @@
     "Tool/Library/Version 통제 누락",
     "Bypass/Override와 Modification 관리 누락",
     "Audit와 Competence 누락",
-    "MC/DC Coverage를 전체 Safety V&V 또는 SIL 달성의 단독 증거로 설명함"
+    "MC/DC Coverage를 전체 Safety V&V 또는 SIL 달성의 단독 증거로 설명함",
+    "단위·통합·시스템시험을 Random Hardware Integrity 또는 Architectural Constraints/HFT에 일대일 대응함",
+    "PFDavg·PFH 확률척도, timeout·checksum 진단기법, fault injection 검증기법을 같은 범주로 혼합함"
   ],
   "routing_aliases": [
     "SIS safety software lifecycle",
@@ -256,7 +260,8 @@
     "recommended_outline_anchor_refs_cover_all_fact_anchors",
     "broad_single_term_aliases_excluded",
     "MC/DC detailed ownership handed off to safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-    "recommended_outline now references sis_mcdc_structural_coverage_boundary for safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+    "recommended_outline now references sis_mcdc_structural_coverage_boundary for safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+    "software V&V, random hardware integrity, HFT and HIL category boundaries added"
   ],
   "id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
   "title": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",

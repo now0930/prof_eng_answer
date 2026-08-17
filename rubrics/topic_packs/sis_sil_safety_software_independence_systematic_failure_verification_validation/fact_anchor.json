@@ -1081,6 +1081,28 @@
       "message": "관리체계 수행과 인적 역량은 체계적 고장 억제의 핵심 요소다.",
       "description": "Audit와 Competence는 문서행위일 뿐 기능안전 성과와 관계없다.",
       "grading_notes": "관리체계 수행과 인적 역량은 체계적 고장 억제의 핵심 요소다."
+    },
+    {
+      "id": "sw05_fatal_software_test_is_random_hardware_integrity",
+      "severity": "fatal",
+      "wrong_claim": "단위시험·통합시험·시스템시험 같은 소프트웨어 시험단계를 Random Hardware Integrity의 직접 통제수단 또는 SIL 요소로 대응한다.",
+      "correct_rule": "소프트웨어 V&V와 시험은 주로 체계적 결함 억제와 Systematic Capability 증거를 제공한다. Random Hardware Integrity는 고장률, PFDavg·PFH, 진단범위, Proof Test, 수리와 공통원인 같은 확률적 하드웨어 근거로 평가한다.",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "recommended_ceiling": 14.5
+    },
+    {
+      "id": "sw05_fatal_hft_is_integration_test",
+      "severity": "fatal",
+      "wrong_claim": "HFT 또는 Architectural Constraints를 통합시험 기법·시험도구·시험단계의 목적으로 직접 대응한다.",
+      "correct_rule": "HFT와 Architectural Constraints는 안전 관련 하드웨어 아키텍처의 고장허용 구조 및 SIL 제약을 다루는 축이다. 통합시험은 모듈·인터페이스·데이터·타이밍 상호작용을 검증하며 HIL은 시험환경이므로 서로 구분한다.",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "recommended_ceiling": 14.5
     }
   ],
   "safe_expressions": [
@@ -1146,6 +1168,7 @@
     "Functional Safety Audit은 수명주기 활동과 관리체계가 계획대로 수행되는지 확인한다.",
     "Competence는 역할별 교육, 경험, 책임과 평가 근거로 관리한다.",
     "PFDavg는 저요구 모드, PFH는 고요구·연속 모드의 목표 고장척도이며 서로 임의 교환하지 않는다.",
-    "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다."
+    "PFD 근사 계산은 Demand Mode, 진단, Proof Test, Repair, 공통원인과 독립성 가정을 명시한다.",
+    "SW-05는 SIL 안전수명주기와 Safety V&V의 적용근거를 소유하되 MC/DC 독립 영향 Test Pair, Coverage Gap, Dead·Deactivated Code와 Compiler·Coverage Tool 증거의 상세는 전용 MC/DC Topic으로 이관한다."
   ]
 }

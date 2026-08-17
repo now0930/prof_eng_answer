@@ -1,0 +1,93 @@
+{
+  "schema_version": "mcdc_vmodel_sil_overgrading_regression.v1",
+  "regression_id": "MCDC-VMODEL-SIL-OVERGRADING-01",
+  "source_session_id": "20260815_060014_5960502198",
+  "purpose": "Freeze the historical V-Model/SIL/MC-DC overgrading case outside the atomic 12-case Production QType Golden Set.",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "topic_id_basis": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+  "expected_topic_ids": [
+    "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+    "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+    "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+  ],
+  "question": "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+  "answer": "1. 시험 단계와 SIL 요소\n| 단계 | 대상 | 적용 도구 | SIL 요소 |\n| 단위 | 단일 모듈 | xUnit, MISRA | Random Integrity |\n| 통합 | 인터페이스 | Stub, S/W HIL | Architectural Constraints(HFT 0,1,2) |\n| 시스템 | 전체 SIS | HIL Simulator | Systematic Integrity |\n\n2. V-Model\nV-Model은 각 개발 단계에서 시험하므로 결함을 즉시 수정할 수 있고 검증 신뢰성이 높다. 단점은 문서와 시험량이 많다는 점이다.\n\n3. SIL 소프트웨어 검증\nSystematic Integrity는 MISRA C, 정적·동적 분석과 SIL 3/4의 MC/DC 100%로 검증한다. Random Integrity는 PFDavg, timeout, checksum과 fault injection으로 검증한다. Architectural Constraints는 HFT(1oo2, 2oo3)와 HIL로 확인한다.\n\n4. 결론\nV-Model은 SIL을 검증하는 가장 확실한 방법이다. Agentic AI로 문서와 코드 작업을 줄일 수 있으나 sandbox와 전문가 review가 필요하다.",
+  "expected": {
+    "demand_status": {
+      "PI_LOW_02_D1": "partial",
+      "PI_LOW_02_D2": "incorrect",
+      "PI_LOW_02_D3": "incorrect",
+      "PI_LOW_02_D4": "incorrect",
+      "PI_LOW_02_D5": "incorrect",
+      "PI_LOW_02_D6": "partial"
+    },
+    "layer_ranges": {
+      "A": {
+        "min": 2.0,
+        "max": 3.0
+      },
+      "B": {
+        "min": 2.0,
+        "max": 4.0
+      },
+      "C": {
+        "min": 2.0,
+        "max": 4.5
+      },
+      "D": {
+        "min": 1.0,
+        "max": 3.0
+      },
+      "E": {
+        "min": 0.5,
+        "max": 1.5
+      }
+    },
+    "total_range": {
+      "min": 10.5,
+      "max": 14.5
+    },
+    "coverage_range": {
+      "min": 45.0,
+      "max": 72.0
+    },
+    "fact_cap_behavior": "CAP_EXPECTED",
+    "critical_fact_expectation": "CRITICAL_ERROR_EXPECTED",
+    "fatal_logic_expectation": "FATAL_EXPECTED",
+    "required_fatal_ids": [
+      "sw04_fatal_misra_is_unit_test_tool",
+      "sw05_fatal_software_test_is_random_hardware_integrity",
+      "sw05_fatal_hft_is_integration_test",
+      "mcdc_proves_requirements",
+      "sil_four_universal_rule",
+      "sw04_fatal_general_vv_proves_sil"
+    ],
+    "required_feedback_elements": [
+      "MISRA는 단위시험 도구가 아니라 코딩 지침·준수 및 정적분석 근거라는 지적",
+      "소프트웨어 시험과 Random Hardware Integrity의 평가축 구분",
+      "HFT·Architectural Constraints와 통합시험·HIL의 범주 구분",
+      "MC/DC 100%가 SIL을 단독 보장하지 않는다는 적용경계"
+    ],
+    "forbidden_feedback_elements": [
+      "핵심 기술관계가 모두 정확하다는 평가",
+      "요구사항을 100% 정확히 충족했다는 평가",
+      "fatal 오류가 있는데 strong 답안으로 판정",
+      "15점 이상 합격점으로 판정"
+    ],
+    "required_feedback_characteristics": [
+      "표와 구조의 장점은 인정하되 핵심 범주 오류를 C·D 감점과 총점 상한에 연결한다.",
+      "키워드 존재와 기술적 정답을 분리하여 incorrect 요구사항을 명시한다.",
+      "MISRA, Random Hardware Integrity, HFT와 MC/DC 오류를 각각 교정한다."
+    ],
+    "forbidden_feedback": [
+      "MISRA를 단위시험 도구로 인정하지 않는다.",
+      "단위·통합·시스템시험을 Random Integrity·HFT·Systematic Integrity에 일대일 대응하지 않는다.",
+      "모든 SIL 3/4 소프트웨어에 MC/DC 100%가 일률적으로 의무라고 단정하지 않는다.",
+      "V-Model 자체가 SIL 달성을 보장한다고 평가하지 않는다."
+    ],
+    "requirements_full_credit_allowed": false,
+    "strong_verdict_allowed": false,
+    "passing_score_allowed": false,
+    "maximum_total_score": 14.5
+  }
+}

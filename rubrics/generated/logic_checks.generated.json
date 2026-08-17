@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-08T07:39:27Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-17T00:21:09Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -1222,6 +1222,58 @@
       "de_claim_trust": {}
     },
     {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "enabled": false,
+      "topic_name": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "HAZOP LOPA target SIL",
+        "HAZOP to LOPA scenario",
+        "LOPA independent protection layer",
+        "IPL credit criteria",
+        "initiating event frequency conditional modifier",
+        "residual frequency tolerable frequency",
+        "risk reduction factor RRF PFDavg",
+        "target SIL determination",
+        "SIF allocation SRS handoff",
+        "LOPA double counting common cause",
+        "BPCS alarm operator IPL",
+        "LOPA MOC revalidation"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+      "enabled": false,
+      "topic_name": "HIPPS 과압보호시스템의 구조, Voting Architecture 및 Relief System 비교",
+      "question_type": "COMPARE_SELECTION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "HIPPS high integrity pressure protection system",
+        "HIPPS overpressure protection",
+        "HIPPS 2oo3 pressure transmitter voting",
+        "HIPPS 1oo2 shutdown valve",
+        "HIPPS relief valve comparison",
+        "HIPPS versus pressure safety valve",
+        "HIPPS process safety time",
+        "HIPPS trip setpoint pressure transient",
+        "HIPPS PFDavg SIL verification",
+        "HIPPS final element architecture",
+        "HIPPS common cause degraded voting",
+        "HIPPS SRS proof test bypass"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
       "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
       "enabled": false,
       "fatal_checks": [],
@@ -2007,6 +2059,28 @@
             "D"
           ],
           "recommended_ceiling": 15.0
+        },
+        {
+          "id": "sw04_fatal_misra_is_unit_test_tool",
+          "severity": "fatal",
+          "message": "MISRA를 단위시험 도구로 분류한다.",
+          "description": "단순히 단위시험과 MISRA를 함께 언급한 경우가 아니라, 표·화살표·정의에서 MISRA 자체를 단위시험 도구 또는 수행수단으로 직접 대응한 경우만 fatal 후보로 본다.",
+          "wrong_patterns": [
+            "(?im)^\\s*\\|\\s*(?:단위(?:시험)?|unit(?:\\s+test)?)\\s*\\|(?=[^\\n]*\\bMISRA(?:\\s+C)?\\b)[^\\n]*\\|\\s*$",
+            "(?im)^\\s*(?:[-*•]\\s*)?(?:단위(?:시험)?|unit\\s+test)\\s*(?:도구|tool)?\\s*[:：=\\-–>]+\\s*MISRA(?:\\s+C)?\\s*[.!]?\\s*$",
+            "(?im)^\\s*(?:[-*•]\\s*)?MISRA(?:\\s+C)?(?:를|을)?\\s*(?:단위시험|unit\\s+test)(?:\\s*도구)?(?:로|에)\\s*(?:사용|적용)한다\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "| 단위 | 단일 모듈 | xUnit, MISRA |",
+            "단위시험 도구: MISRA",
+            "MISRA를 단위시험 도구로 사용한다."
+          ],
+          "correct_rule": "MISRA는 안전·신뢰성 중심의 코딩 지침과 준수 근거이며 정적분석·코드리뷰와 연결된다. 단위시험은 xUnit 계열 framework, test harness, stub·mock과 실행 결과로 별도 수행한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 14.5
         }
       ],
       "major_checks": [],
@@ -2850,6 +2924,32 @@
       "de_claim_trust": {}
     },
     {
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "enabled": false,
+      "topic_name": "안전필수 소프트웨어의 정적·동적 분석, 구조적 커버리지 및 MC/DC 검증",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "difficulty_profile": "THEORY_CORE",
+      "topic_aliases": [
+        "safety critical software MC/DC structural coverage",
+        "modified condition decision coverage independent effect",
+        "unique cause and masking MC/DC test pair",
+        "안전필수 소프트웨어 MC/DC 구조적 커버리지",
+        "수정 조건 결정 커버리지 독립 영향",
+        "Statement Decision Condition MC/DC 비교",
+        "MC/DC coverage gap dead deactivated code",
+        "MC/DC short circuit coupled conditions",
+        "MC/DC source object code compiler coverage",
+        "coverage instrumentation tool qualification safety software",
+        "요구사항 기반 시험 구조적 커버리지 분석",
+        "Safety PLC application program MC/DC 적용"
+      ],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
       "topic_id": "second_order_lag_response_by_damping_ratio",
       "enabled": true,
       "topic_name": "2차 지연시스템 감쇠비별 응답특성",
@@ -3410,8 +3510,54 @@
       "topic_name": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "difficulty_profile": "THEORY_CORE",
-      "topic_aliases": [],
-      "fatal_checks": [],
+      "topic_aliases": [
+        "SIS SIL safety software lifecycle systematic failure independence",
+        "SIS·SIL 안전 소프트웨어 수명주기 체계적 고장 독립성",
+        "safety application program SRS verification validation",
+        "Safety Application Program SRS 검증 확인",
+        "functional safety software tool qualification proven in use",
+        "기능안전 소프트웨어 Tool Qualification Proven in Use"
+      ],
+      "fatal_checks": [
+        {
+          "id": "sw05_fatal_software_test_is_random_hardware_integrity",
+          "severity": "fatal",
+          "message": "소프트웨어 시험단계를 Random Hardware Integrity에 직접 대응한다.",
+          "description": "명시적 범주 대응 주장만 fatal 후보로 본다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?(?:단위|통합|시스템)(?:시험)?\\s*(?:→|->|:|=)\\s*Random(?:\\s+Hardware)?\\s+Integrity\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "단위시험 → Random Integrity",
+            "시스템시험: Random Hardware Integrity"
+          ],
+          "correct_rule": "소프트웨어 V&V와 시험은 주로 체계적 결함 억제와 Systematic Capability 증거를 제공한다. Random Hardware Integrity는 고장률, PFDavg·PFH, 진단범위, Proof Test, 수리와 공통원인 같은 확률적 하드웨어 근거로 평가한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 14.5
+        },
+        {
+          "id": "sw05_fatal_hft_is_integration_test",
+          "severity": "fatal",
+          "message": "HFT를 통합시험 기법 또는 시험목적으로 직접 대응한다.",
+          "description": "명시적 범주 대응 주장만 fatal 후보로 본다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?(?:통합(?:시험)?|integration\\s+test)\\s*(?:→|->|:|=)\\s*(?:Architectural\\s+Constraints?\\s*)?(?:\\([^)]*\\))?\\s*HFT(?:\\s*[012](?:\\s*,\\s*[012])*)?\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "통합시험 → Architectural Constraints (HFT 0, 1, 2)",
+            "Integration Test: HFT"
+          ],
+          "correct_rule": "HFT와 Architectural Constraints는 안전 관련 하드웨어 아키텍처의 고장허용 구조 및 SIL 제약을 다루는 축이다. 통합시험은 모듈·인터페이스·데이터·타이밍 상호작용을 검증하며 HIL은 시험환경이므로 서로 구분한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 14.5
+        }
+      ],
       "major_checks": [],
       "question_type_checks": [],
       "next_practice_points": [],

@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-08T07:39:27Z-generated-topic-pack-importance",
+  "version": "2026-08-17T00:21:09Z-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -652,6 +652,53 @@
         "기존 방폭·환경 qualification·power grounding·SIS Topic과 ownership을 분리했다."
       ],
       "topic_label": "비폭발 위험환경 Fail-Safe 제어요소 및 대책"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "HAZOP과 LOPA의 역할을 구분하고 scenario 경계를 명확히 한다.",
+        "Initiating frequency, conditional modifier와 IPL PFD로 residual frequency를 계산한다.",
+        "IPL 적격조건과 common cause·double counting 방지 논리를 설명한다.",
+        "Tolerable frequency에서 RRF와 PFDavg를 도출하여 목표 SIL에 대응한다.",
+        "Target SIL과 achieved SIL을 구분한다.",
+        "SIF 전체 경계와 SRS handoff를 설명한다.",
+        "다중 scenario, MOC와 revalidation을 수명주기로 연결한다."
+      ],
+      "note": "LOPA 수치는 분석 근거와 독립성 가정에 의존한다. 빈도·PFD·conditional modifier와 회사 위험수용기준은 verify-first로 다룬다.",
+      "revision_notes": [
+        "single-topic direct authoring",
+        "topic source only; generated banks intentionally unchanged",
+        "target SIL assignment separated from achieved SIL verification"
+      ],
+      "topic_label": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "COMPARE_SELECTION",
+      "high_band_unlock_conditions": [
+        "HIPPS와 Relief System의 예방·완화 기능차이를 설명한다.",
+        "전체 SIF 경계와 Process Safety Time을 제시한다.",
+        "2oo3 sensing의 장점과 common cause·degraded mode를 함께 설명한다.",
+        "직렬 Final Element의 1oo2 적용조건과 예외를 구분한다.",
+        "Target SIL과 Achieved PFDavg를 분리한다.",
+        "Closure Time, Surge와 Leakage를 동적 성능으로 연결한다.",
+        "Code, 잔여 과압원, 환경영향과 Lifecycle Cost로 적용방식을 선정한다.",
+        "SRS, Proof Test, Bypass와 MOC를 수명주기로 연결한다."
+      ],
+      "note": "HIPPS Architecture와 Relief 대체 가능성은 시나리오, Code와 독립성 근거에 의존한다. 개별 인증등급, 고정 Voting 또는 빠른 폐쇄만으로 전체 안전성을 단정하지 않는다.",
+      "revision_notes": [
+        "single-topic fresh direct authoring",
+        "old draft not copied",
+        "target and achieved integrity explicitly separated"
+      ],
+      "topic_label": "HIPPS 과압보호시스템의 구조, Voting Architecture 및 Relief System 비교"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
@@ -1477,6 +1524,30 @@
         "candidate_extraction_rules_empty",
         "센서·계측 응용 Topic 분류 정책에 따라 FIELD_APPLICATION / NORMAL로 설정했다."
       ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "MC/DC의 독립 영향과 Test Pair 조건을 정확히 설명한다.",
+        "Statement·Decision·Condition·MC/DC·MCC를 비교한다.",
+        "Unique-cause와 Masking 방식을 구분한다.",
+        "Short-circuit와 Coupled Condition을 반영한다.",
+        "Coverage Gap을 Dead·Deactivated·Defensive Code와 연결한다.",
+        "Object Code, Compiler, Instrumentation과 Tool 증거를 설명한다.",
+        "요구사항 기반 시험과 구조적 커버리지의 관계를 제시한다.",
+        "100% MC/DC의 한계와 산업별 적용경계를 명시한다."
+      ],
+      "note": "MC/DC는 안전필수 소프트웨어의 복합 Decision 시험 충분성을 높이는 구조적 커버리지 기법이지만 모든 산업용 소프트웨어에 일률 적용하거나 전체 SIL 달성의 단독 증거로 사용할 수 없다.",
+      "revision_notes": [
+        "single-topic direct expert authoring",
+        "industry application boundary explicitly constrained",
+        "SW-04 and SW-05 ownership handoff added"
+      ],
+      "topic_label": "안전필수 소프트웨어의 정적·동적 분석, 구조적 커버리지 및 MC/DC 검증"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

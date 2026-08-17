@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-08T07:39:27Z-generated-topic-pack-manifest",
+  "version": "2026-08-17T00:21:09Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 71,
+  "topic_count": 74,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -268,6 +268,26 @@
     },
     {
       "topic_id": "hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -588,6 +608,16 @@
     },
     {
       "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

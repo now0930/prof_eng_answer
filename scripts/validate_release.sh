@@ -470,6 +470,9 @@ python3 -B scripts/test_review_expert_calibration_record.py
 echo "----- host regression: sis sil safety software topic -----"
 python3 -B scripts/test_sis_sil_safety_software_topic.py
 
+echo "----- host regression: mcdc vmodel sil overgrading regression -----"
+python3 -B scripts/test_mcdc_vmodel_sil_overgrading_regression.py
+
 echo "----- host regression: topic classification policy -----"
 python3 -B scripts/test_topic_classification_policy.py
 

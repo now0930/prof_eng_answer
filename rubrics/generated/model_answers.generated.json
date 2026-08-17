@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-11T14:33:34Z-generated-topic-pack-model-answers",
+  "version": "2026-08-17T00:21:09Z-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -10012,6 +10012,632 @@
     },
     {
       "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "title_ko": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "HAZOP 결과를 LOPA scenario로 전환하고 목표 SIL을 결정하는 절차를 설명하시오.",
+          "intent": "hazop to lopa and target SIL determination",
+          "required_anchor_ids": [
+            "hazop_lopa_hazop_role",
+            "hazop_lopa_lopa_scenario_boundary",
+            "hazop_lopa_initiating_event_frequency",
+            "hazop_lopa_tolerable_event_frequency",
+            "hazop_lopa_required_rrf",
+            "hazop_lopa_sil_band_mapping"
+          ]
+        },
+        {
+          "pattern": "LOPA의 계산 절차와 residual frequency 및 RRF 산정방법을 설명하시오.",
+          "intent": "lopa quantitative sequence",
+          "required_anchor_ids": [
+            "hazop_lopa_initiating_event_frequency",
+            "hazop_lopa_enabling_and_conditional_modifiers",
+            "hazop_lopa_lopa_frequency_equation",
+            "hazop_lopa_residual_frequency_after_existing_ipls",
+            "hazop_lopa_required_rrf",
+            "hazop_lopa_pfdavg_rrf_relation"
+          ]
+        },
+        {
+          "pattern": "독립보호계층 IPL의 인정조건과 이중계산 방지방안을 설명하시오.",
+          "intent": "ipl qualification and double counting prevention",
+          "required_anchor_ids": [
+            "hazop_lopa_ipl_definition",
+            "hazop_lopa_ipl_independence",
+            "hazop_lopa_ipl_specificity",
+            "hazop_lopa_ipl_dependability_auditability",
+            "hazop_lopa_no_double_counting",
+            "hazop_lopa_common_cause_dependency"
+          ]
+        },
+        {
+          "pattern": "BPCS와 Alarm·Operator Action을 IPL로 인정할 때의 조건을 설명하시오.",
+          "intent": "bpcs and operator IPL credit",
+          "required_anchor_ids": [
+            "hazop_lopa_bpcs_ipl_credit",
+            "hazop_lopa_alarm_operator_ipl",
+            "hazop_lopa_common_cause_dependency",
+            "hazop_lopa_no_double_counting"
+          ]
+        },
+        {
+          "pattern": "RRF, PFDavg와 SIL의 관계를 설명하고 목표 SIL과 달성 SIL을 비교하시오.",
+          "intent": "rrf pfdavg sil relationship",
+          "required_anchor_ids": [
+            "hazop_lopa_required_rrf",
+            "hazop_lopa_pfdavg_rrf_relation",
+            "hazop_lopa_sil_band_mapping",
+            "hazop_lopa_target_vs_achieved_sil"
+          ]
+        },
+        {
+          "pattern": "LOPA 결과를 SIF와 SRS에 할당하는 방법을 설명하시오.",
+          "intent": "lopa to sif and srs handoff",
+          "required_anchor_ids": [
+            "hazop_lopa_sif_allocation_boundary",
+            "hazop_lopa_srs_handoff",
+            "hazop_lopa_target_vs_achieved_sil",
+            "hazop_lopa_scenario_aggregation_moc"
+          ]
+        },
+        {
+          "pattern": "LOPA에서 common cause와 dependent protection layer의 처리방법을 설명하시오.",
+          "intent": "dependency and common cause treatment",
+          "required_anchor_ids": [
+            "hazop_lopa_ipl_independence",
+            "hazop_lopa_no_double_counting",
+            "hazop_lopa_common_cause_dependency",
+            "hazop_lopa_bpcs_ipl_credit"
+          ]
+        },
+        {
+          "pattern": "LOPA 결과의 불확실성과 변경관리 및 재검증 방안을 설명하시오.",
+          "intent": "uncertainty management and revalidation",
+          "required_anchor_ids": [
+            "hazop_lopa_initiating_event_frequency",
+            "hazop_lopa_enabling_and_conditional_modifiers",
+            "hazop_lopa_ipl_dependability_auditability",
+            "hazop_lopa_scenario_aggregation_moc"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "HAZOP 결과와 scenario 경계",
+          "intent": "Deviation, cause, consequence와 safeguard를 하나의 LOPA scenario로 정규화한다.",
+          "anchor_refs": [
+            "hazop_lopa_hazop_role",
+            "hazop_lopa_lopa_scenario_boundary",
+            "hazop_lopa_consequence_without_credited_protection"
+          ]
+        },
+        {
+          "section": "기초빈도와 조건부 수정",
+          "intent": "Initiating event frequency와 적용 가능한 enabling/conditional modifier의 근거를 설명한다.",
+          "anchor_refs": [
+            "hazop_lopa_initiating_event_frequency",
+            "hazop_lopa_enabling_and_conditional_modifiers"
+          ]
+        },
+        {
+          "section": "IPL 적격성과 독립성",
+          "intent": "IPL의 specificity, independence, dependability와 auditability를 평가한다.",
+          "anchor_refs": [
+            "hazop_lopa_ipl_definition",
+            "hazop_lopa_ipl_independence",
+            "hazop_lopa_ipl_specificity",
+            "hazop_lopa_ipl_dependability_auditability"
+          ]
+        },
+        {
+          "section": "이중계산과 공통원인 통제",
+          "intent": "공유자원과 dependent layer를 식별하고 중복 credit을 제거한다.",
+          "anchor_refs": [
+            "hazop_lopa_no_double_counting",
+            "hazop_lopa_common_cause_dependency",
+            "hazop_lopa_bpcs_ipl_credit",
+            "hazop_lopa_alarm_operator_ipl",
+            "hazop_lopa_proposed_safeguard_not_creditable"
+          ]
+        },
+        {
+          "section": "Residual risk와 목표 SIL",
+          "intent": "Residual frequency, tolerable frequency, RRF와 PFDavg를 계산하여 목표 SIL을 정한다.",
+          "anchor_refs": [
+            "hazop_lopa_lopa_frequency_equation",
+            "hazop_lopa_tolerable_event_frequency",
+            "hazop_lopa_residual_frequency_after_existing_ipls",
+            "hazop_lopa_required_rrf",
+            "hazop_lopa_pfdavg_rrf_relation",
+            "hazop_lopa_sil_band_mapping"
+          ]
+        },
+        {
+          "section": "목표와 달성의 분리",
+          "intent": "LOPA의 target SIL과 설계 검증으로 확인하는 achieved SIL을 구분한다.",
+          "anchor_refs": [
+            "hazop_lopa_target_vs_achieved_sil"
+          ]
+        },
+        {
+          "section": "SIF 할당과 SRS 인계",
+          "intent": "전체 SIF 경계, 응답시간, safe state와 수명주기 요구를 SRS로 인계한다.",
+          "anchor_refs": [
+            "hazop_lopa_sif_allocation_boundary",
+            "hazop_lopa_srs_handoff"
+          ]
+        },
+        {
+          "section": "다중 scenario와 변경관리",
+          "intent": "공통 SIF의 demand와 변경영향을 통합하여 MOC와 재검증으로 관리한다.",
+          "anchor_refs": [
+            "hazop_lopa_scenario_aggregation_moc"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "HAZOP이 hazard identification이고 LOPA가 scenario별 risk reduction 판단임을 구분한다.",
+        "Initiating event, consequence endpoint와 운전모드를 하나의 scenario 경계로 고정한다.",
+        "Conditional modifier와 IPL의 역할을 분리한다.",
+        "IPL의 independence, specificity, dependability, auditability를 모두 설명한다.",
+        "공유 Sensor·Logic·Final Element·전원·절차에 의한 common cause와 double counting을 제거한다.",
+        "Residual frequency와 tolerable frequency로 RRF_required를 계산한다.",
+        "Low-demand 조건에서 PFDavg와 RRF의 역수 관계 및 SIL 구간을 설명한다.",
+        "Target SIL과 achieved SIL을 분리한다.",
+        "Sensor–Logic Solver–Final Element 전체 SIF 경계와 process safety time을 명시한다.",
+        "LOPA 결과를 SRS의 setpoint, safe state, response time, proof test와 bypass 요구로 인계한다.",
+        "여러 scenario가 같은 SIF를 공유할 때 demand와 기능요구를 함께 검토한다.",
+        "공정·운전·IPL·시험주기 변경을 MOC와 재검증으로 연결한다."
+      ],
+      "common_missing_points": [
+        "HAZOP 위험등급만으로 SIL을 바로 지정함",
+        "Initiating event와 consequence endpoint가 불명확함",
+        "Conditional modifier를 별도 IPL처럼 중복 적용함",
+        "독립성이 없는 보호기능을 PFD 곱셈에 포함함",
+        "BPCS가 initiating cause인데 같은 BPCS 기능을 IPL로 credit함",
+        "Alarm과 operator action의 가용시간·훈련·절차를 확인하지 않음",
+        "RRF와 PFDavg 관계를 반대로 설명함",
+        "Target SIL을 achieved SIL로 간주함",
+        "SIF 경계와 SRS 인계를 생략함",
+        "변경관리와 재검증을 생략함"
+      ],
+      "routing_aliases": [
+        "HAZOP LOPA target SIL",
+        "HAZOP to LOPA scenario",
+        "LOPA independent protection layer",
+        "IPL credit criteria",
+        "initiating event frequency conditional modifier",
+        "residual frequency tolerable frequency",
+        "risk reduction factor RRF PFDavg",
+        "target SIL determination",
+        "SIF allocation SRS handoff",
+        "LOPA double counting common cause",
+        "BPCS alarm operator IPL",
+        "LOPA MOC revalidation"
+      ],
+      "routing_field_points": [
+        "HAZOP deviation를 원인–결과 LOPA scenario로 전환하는 절차",
+        "Initiating event frequency와 conditional modifier의 근거",
+        "IPL의 독립성·특정성·신뢰성·감사가능성",
+        "공유자원과 common cause에 의한 double counting 방지",
+        "Residual frequency와 tolerable event frequency 비교",
+        "RRF_required와 PFDavg_target 관계",
+        "목표 SIL과 달성 SIL의 구분",
+        "Sensor–Logic Solver–Final Element 전체 SIF 할당",
+        "SRS의 trip setpoint, safe state, response time와 proof test 요구",
+        "다중 scenario demand, MOC와 revalidation"
+      ],
+      "revision_notes": [
+        "created_by=scripts/create_topic_pack.py; final source directly reviewed and authored",
+        "authoring_basis=docs/topic_pack_workflow.md",
+        "adjacent_boundary=sis_sil_safety_software_independence_systematic_failure_verification_validation",
+        "generated_bank_not_modified"
+      ],
+      "id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation_COMPARE_v1",
+      "title": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당",
+      "question_examples": [
+        "hazop to lopa and target SIL determination",
+        "lopa quantitative sequence",
+        "ipl qualification and double counting prevention",
+        "bpcs and operator IPL credit",
+        "rrf pfdavg sil relationship",
+        "lopa to sif and srs handoff",
+        "dependency and common cause treatment",
+        "uncertainty management and revalidation"
+      ],
+      "topic_aliases": [
+        "HAZOP LOPA target SIL",
+        "HAZOP to LOPA scenario",
+        "LOPA independent protection layer",
+        "IPL credit criteria",
+        "initiating event frequency conditional modifier",
+        "residual frequency tolerable frequency",
+        "risk reduction factor RRF PFDavg",
+        "target SIL determination",
+        "SIF allocation SRS handoff",
+        "LOPA double counting common cause",
+        "BPCS alarm operator IPL",
+        "LOPA MOC revalidation"
+      ],
+      "expected_structure": [
+        "HAZOP 결과와 scenario 경계",
+        "기초빈도와 조건부 수정",
+        "IPL 적격성과 독립성",
+        "이중계산과 공통원인 통제",
+        "Residual risk와 목표 SIL",
+        "목표와 달성의 분리",
+        "SIF 할당과 SRS 인계",
+        "다중 scenario와 변경관리"
+      ],
+      "model_answer_outline": [
+        "Deviation, cause, consequence와 safeguard를 하나의 LOPA scenario로 정규화한다.",
+        "Initiating event frequency와 적용 가능한 enabling/conditional modifier의 근거를 설명한다.",
+        "IPL의 specificity, independence, dependability와 auditability를 평가한다.",
+        "공유자원과 dependent layer를 식별하고 중복 credit을 제거한다.",
+        "Residual frequency, tolerable frequency, RRF와 PFDavg를 계산하여 목표 SIL을 정한다.",
+        "LOPA의 target SIL과 설계 검증으로 확인하는 achieved SIL을 구분한다.",
+        "전체 SIF 경계, 응답시간, safe state와 수명주기 요구를 SRS로 인계한다.",
+        "공통 SIF의 demand와 변경영향을 통합하여 MOC와 재검증으로 관리한다."
+      ],
+      "high_score_features": [
+        "HAZOP이 hazard identification이고 LOPA가 scenario별 risk reduction 판단임을 구분한다.",
+        "Initiating event, consequence endpoint와 운전모드를 하나의 scenario 경계로 고정한다.",
+        "Conditional modifier와 IPL의 역할을 분리한다.",
+        "IPL의 independence, specificity, dependability, auditability를 모두 설명한다.",
+        "공유 Sensor·Logic·Final Element·전원·절차에 의한 common cause와 double counting을 제거한다.",
+        "Residual frequency와 tolerable frequency로 RRF_required를 계산한다.",
+        "Low-demand 조건에서 PFDavg와 RRF의 역수 관계 및 SIL 구간을 설명한다.",
+        "Target SIL과 achieved SIL을 분리한다.",
+        "Sensor–Logic Solver–Final Element 전체 SIF 경계와 process safety time을 명시한다.",
+        "LOPA 결과를 SRS의 setpoint, safe state, response time, proof test와 bypass 요구로 인계한다.",
+        "여러 scenario가 같은 SIF를 공유할 때 demand와 기능요구를 함께 검토한다.",
+        "공정·운전·IPL·시험주기 변경을 MOC와 재검증으로 연결한다."
+      ],
+      "low_score_patterns": [
+        "HAZOP 위험등급만으로 SIL을 바로 지정함",
+        "Initiating event와 consequence endpoint가 불명확함",
+        "Conditional modifier를 별도 IPL처럼 중복 적용함",
+        "독립성이 없는 보호기능을 PFD 곱셈에 포함함",
+        "BPCS가 initiating cause인데 같은 BPCS 기능을 IPL로 credit함",
+        "Alarm과 operator action의 가용시간·훈련·절차를 확인하지 않음",
+        "RRF와 PFDavg 관계를 반대로 설명함",
+        "Target SIL을 achieved SIL로 간주함",
+        "SIF 경계와 SRS 인계를 생략함",
+        "변경관리와 재검증을 생략함"
+      ],
+      "field_connection_points": [
+        "HAZOP deviation를 원인–결과 LOPA scenario로 전환하는 절차",
+        "Initiating event frequency와 conditional modifier의 근거",
+        "IPL의 독립성·특정성·신뢰성·감사가능성",
+        "공유자원과 common cause에 의한 double counting 방지",
+        "Residual frequency와 tolerable event frequency 비교",
+        "RRF_required와 PFDavg_target 관계",
+        "목표 SIL과 달성 SIL의 구분",
+        "Sensor–Logic Solver–Final Element 전체 SIF 할당",
+        "SRS의 trip setpoint, safe state, response time와 proof test 요구",
+        "다중 scenario demand, MOC와 revalidation"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+      "title_ko": "HIPPS 과압보호시스템의 구조, Voting Architecture 및 Relief System 비교",
+      "question_type": "COMPARE_SELECTION",
+      "expected_question_patterns": [
+        {
+          "pattern": "HIPPS의 정의, 구성과 과압보호 동작원리를 설명하시오.",
+          "intent": "hipps definition structure and protection mechanism",
+          "required_anchor_ids": [
+            "hipps_definition",
+            "hipps_not_relief_device",
+            "hipps_sif_end_to_end_boundary",
+            "hipps_trip_setpoint_margin",
+            "hipps_process_safety_time"
+          ]
+        },
+        {
+          "pattern": "HIPPS의 2oo3 Sensor Voting 구조와 degraded mode를 설명하시오.",
+          "intent": "two out of three sensing and degraded mode",
+          "required_anchor_ids": [
+            "hipps_two_out_of_three_sensing",
+            "hipps_two_out_of_three_limits",
+            "hipps_degraded_voting_mode"
+          ]
+        },
+        {
+          "pattern": "HIPPS Final Element의 1oo2 구조와 적용조건을 설명하시오.",
+          "intent": "one out of two final element architecture",
+          "required_anchor_ids": [
+            "hipps_one_out_of_two_final_elements",
+            "hipps_one_out_of_two_condition",
+            "hipps_final_element_chain",
+            "hipps_fail_safe_energy"
+          ]
+        },
+        {
+          "pattern": "HIPPS의 2oo3·1oo2 Architecture 선정기준을 설명하시오.",
+          "intent": "architecture selection criteria",
+          "required_anchor_ids": [
+            "hipps_architecture_not_universal",
+            "hipps_two_out_of_three_sensing",
+            "hipps_one_out_of_two_final_elements",
+            "hipps_pfdavg_allocation",
+            "hipps_target_vs_achieved_sil"
+          ]
+        },
+        {
+          "pattern": "HIPPS와 Relief System의 기능, 장단점과 적용조건을 비교하시오.",
+          "intent": "hipps versus relief comparison and selection",
+          "required_anchor_ids": [
+            "hipps_not_relief_device",
+            "hipps_relief_system_comparison",
+            "hipps_relief_replacement_boundary",
+            "hipps_coexistence_and_selection"
+          ]
+        },
+        {
+          "pattern": "HIPPS 차단밸브의 응답시간, Surge와 누설 검토사항을 설명하시오.",
+          "intent": "final element dynamic and leakage performance",
+          "required_anchor_ids": [
+            "hipps_process_safety_time",
+            "hipps_closure_time_and_surge",
+            "hipps_tight_shutoff_and_leakage",
+            "hipps_final_element_chain"
+          ]
+        },
+        {
+          "pattern": "HIPPS의 목표 SIL과 PFDavg 검증 및 독립성 확보방안을 설명하시오.",
+          "intent": "sil verification and independence",
+          "required_anchor_ids": [
+            "hipps_pfdavg_allocation",
+            "hipps_target_vs_achieved_sil",
+            "hipps_independence_from_bpcs",
+            "hipps_two_out_of_three_limits"
+          ]
+        },
+        {
+          "pattern": "HIPPS의 SRS, Proof Test, Bypass 및 변경관리 방안을 설명하시오.",
+          "intent": "hipps lifecycle operation and change control",
+          "required_anchor_ids": [
+            "hipps_logic_solver_role",
+            "hipps_proof_test_and_bypass",
+            "hipps_srs_moc_revalidation"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "정의와 적용경계",
+          "intent": "고압원 차단에 의한 예방형 과압보호와 적용대상을 정의한다.",
+          "anchor_refs": [
+            "hipps_definition",
+            "hipps_not_relief_device",
+            "hipps_application_boundary"
+          ]
+        },
+        {
+          "section": "전체 SIF 구조",
+          "intent": "Sensor–Logic Solver–Final Element와 지원기능의 end-to-end 경계를 설명한다.",
+          "anchor_refs": [
+            "hipps_sif_end_to_end_boundary",
+            "hipps_logic_solver_role",
+            "hipps_final_element_chain",
+            "hipps_fail_safe_energy"
+          ]
+        },
+        {
+          "section": "Setpoint와 동특성",
+          "intent": "Trip margin, Process Safety Time, Valve closure와 pressure transient를 연결한다.",
+          "anchor_refs": [
+            "hipps_trip_setpoint_margin",
+            "hipps_process_safety_time",
+            "hipps_closure_time_and_surge",
+            "hipps_tight_shutoff_and_leakage"
+          ]
+        },
+        {
+          "section": "Sensor Voting",
+          "intent": "2oo3의 장점, 공통원인과 degraded mode를 조건부로 해석한다.",
+          "anchor_refs": [
+            "hipps_two_out_of_three_sensing",
+            "hipps_two_out_of_three_limits",
+            "hipps_degraded_voting_mode"
+          ]
+        },
+        {
+          "section": "Final Element Architecture",
+          "intent": "직렬 Shutdown Valve의 1oo2 성공조건과 한계를 구분한다.",
+          "anchor_refs": [
+            "hipps_one_out_of_two_final_elements",
+            "hipps_one_out_of_two_condition",
+            "hipps_architecture_not_universal"
+          ]
+        },
+        {
+          "section": "SIL과 독립성 검증",
+          "intent": "전체 PFDavg, target/achieved SIL과 BPCS 독립성을 검증한다.",
+          "anchor_refs": [
+            "hipps_pfdavg_allocation",
+            "hipps_target_vs_achieved_sil",
+            "hipps_independence_from_bpcs"
+          ]
+        },
+        {
+          "section": "Relief System 비교와 선정",
+          "intent": "예방형 Isolation과 완화형 Discharge의 설계축과 병행 적용조건을 비교한다.",
+          "anchor_refs": [
+            "hipps_relief_system_comparison",
+            "hipps_relief_replacement_boundary",
+            "hipps_coexistence_and_selection"
+          ]
+        },
+        {
+          "section": "운영·시험·변경관리",
+          "intent": "Proof Test, Bypass, SRS, MOC와 Revalidation을 수명주기로 연결한다.",
+          "anchor_refs": [
+            "hipps_proof_test_and_bypass",
+            "hipps_srs_moc_revalidation"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "HIPPS를 고압원 차단에 의한 예방형 SIF로 정의한다.",
+        "Sensor–Logic Solver–Final Element의 전체 기능경계를 제시한다.",
+        "Trip setpoint margin과 Process Safety Time을 pressure transient에 연결한다.",
+        "2oo3 sensing의 장점과 common cause 한계를 함께 설명한다.",
+        "degraded voting에서 1oo2와 2oo2를 구분한다.",
+        "직렬 Shutdown Valve를 1oo2로 보는 기능조건과 예외를 설명한다.",
+        "Final Element를 Valve·Actuator·Solenoid·Utility의 연속 경로로 평가한다.",
+        "Closure Time, Surge와 Seat Leakage를 함께 검토한다.",
+        "Target SIL과 Achieved SIL을 구분하고 전체 PFDavg를 검증한다.",
+        "BPCS와 다른 IPL로부터 HIPPS 독립성을 설명한다.",
+        "HIPPS의 Isolation Integrity와 Relief의 Discharge Capacity를 비교한다.",
+        "Code·잔여 과압원·환경·TCO를 반영해 단독 또는 병행 적용을 선정한다.",
+        "Proof Test, Bypass, SRS와 MOC를 운영수명주기로 연결한다."
+      ],
+      "common_missing_points": [
+        "HIPPS를 Relief Valve의 다른 명칭으로 설명함",
+        "구성요소를 나열하고 전체 SIF 경계를 제시하지 않음",
+        "2oo3이면 공통원인과 무관하게 SIL이 보장된다고 단정함",
+        "Sensor bypass 시 degraded voting을 명시하지 않음",
+        "직렬 두 밸브를 조건 없이 1oo2로 간주함",
+        "개별 인증기기의 SIL로 전체 HIPPS 성능을 대체함",
+        "Process Safety Time과 Closing Time 관계를 누락함",
+        "빠른 폐쇄에 따른 Surge를 누락함",
+        "Seat Leakage와 잔류 유입을 누락함",
+        "HIPPS가 모든 Relief Device를 자동 대체한다고 단정함",
+        "Proof Test, Bypass와 MOC를 누락함"
+      ],
+      "routing_aliases": [
+        "HIPPS high integrity pressure protection system",
+        "HIPPS overpressure protection",
+        "HIPPS 2oo3 pressure transmitter voting",
+        "HIPPS 1oo2 shutdown valve",
+        "HIPPS relief valve comparison",
+        "HIPPS versus pressure safety valve",
+        "HIPPS process safety time",
+        "HIPPS trip setpoint pressure transient",
+        "HIPPS PFDavg SIL verification",
+        "HIPPS final element architecture",
+        "HIPPS common cause degraded voting",
+        "HIPPS SRS proof test bypass"
+      ],
+      "routing_field_points": [
+        "고압원과 저압측 보호대상 사이의 유입차단",
+        "Pressure Sensor–Logic Solver–Shutdown Valve 전체 SIF 경계",
+        "Trip Setpoint margin과 Process Safety Time",
+        "2oo3 sensing과 common cause",
+        "degraded voting의 1oo2·2oo2 차이",
+        "직렬 Shutdown Valve의 조건부 1oo2 성공구조",
+        "Actuator·Solenoid·Utility·Position Feedback 경로",
+        "Closure Time·Surge·Seat Leakage",
+        "Target SIL과 Achieved PFDavg",
+        "BPCS 및 다른 IPL과의 독립성",
+        "HIPPS 예방형 Isolation과 Relief 완화형 Discharge 비교",
+        "Proof Test·Bypass·SRS·MOC·Revalidation"
+      ],
+      "revision_notes": [
+        "created_by=scripts/create_topic_pack.py; final source directly reviewed and authored",
+        "old_draft_usage=metadata_and_gap_reference_only",
+        "adjacent_boundary=final_control_element_sil_sis_esd_valve_partial_stroke_test",
+        "adjacent_boundary=hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+        "generated_bank_not_modified"
+      ],
+      "id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture_COMPARE_v1",
+      "title": "HIPPS 과압보호시스템의 구조, Voting Architecture 및 Relief System 비교",
+      "question_examples": [
+        "hipps definition structure and protection mechanism",
+        "two out of three sensing and degraded mode",
+        "one out of two final element architecture",
+        "architecture selection criteria",
+        "hipps versus relief comparison and selection",
+        "final element dynamic and leakage performance",
+        "sil verification and independence",
+        "hipps lifecycle operation and change control"
+      ],
+      "topic_aliases": [
+        "HIPPS high integrity pressure protection system",
+        "HIPPS overpressure protection",
+        "HIPPS 2oo3 pressure transmitter voting",
+        "HIPPS 1oo2 shutdown valve",
+        "HIPPS relief valve comparison",
+        "HIPPS versus pressure safety valve",
+        "HIPPS process safety time",
+        "HIPPS trip setpoint pressure transient",
+        "HIPPS PFDavg SIL verification",
+        "HIPPS final element architecture",
+        "HIPPS common cause degraded voting",
+        "HIPPS SRS proof test bypass"
+      ],
+      "expected_structure": [
+        "정의와 적용경계",
+        "전체 SIF 구조",
+        "Setpoint와 동특성",
+        "Sensor Voting",
+        "Final Element Architecture",
+        "SIL과 독립성 검증",
+        "Relief System 비교와 선정",
+        "운영·시험·변경관리"
+      ],
+      "model_answer_outline": [
+        "고압원 차단에 의한 예방형 과압보호와 적용대상을 정의한다.",
+        "Sensor–Logic Solver–Final Element와 지원기능의 end-to-end 경계를 설명한다.",
+        "Trip margin, Process Safety Time, Valve closure와 pressure transient를 연결한다.",
+        "2oo3의 장점, 공통원인과 degraded mode를 조건부로 해석한다.",
+        "직렬 Shutdown Valve의 1oo2 성공조건과 한계를 구분한다.",
+        "전체 PFDavg, target/achieved SIL과 BPCS 독립성을 검증한다.",
+        "예방형 Isolation과 완화형 Discharge의 설계축과 병행 적용조건을 비교한다.",
+        "Proof Test, Bypass, SRS, MOC와 Revalidation을 수명주기로 연결한다."
+      ],
+      "high_score_features": [
+        "HIPPS를 고압원 차단에 의한 예방형 SIF로 정의한다.",
+        "Sensor–Logic Solver–Final Element의 전체 기능경계를 제시한다.",
+        "Trip setpoint margin과 Process Safety Time을 pressure transient에 연결한다.",
+        "2oo3 sensing의 장점과 common cause 한계를 함께 설명한다.",
+        "degraded voting에서 1oo2와 2oo2를 구분한다.",
+        "직렬 Shutdown Valve를 1oo2로 보는 기능조건과 예외를 설명한다.",
+        "Final Element를 Valve·Actuator·Solenoid·Utility의 연속 경로로 평가한다.",
+        "Closure Time, Surge와 Seat Leakage를 함께 검토한다.",
+        "Target SIL과 Achieved SIL을 구분하고 전체 PFDavg를 검증한다.",
+        "BPCS와 다른 IPL로부터 HIPPS 독립성을 설명한다.",
+        "HIPPS의 Isolation Integrity와 Relief의 Discharge Capacity를 비교한다.",
+        "Code·잔여 과압원·환경·TCO를 반영해 단독 또는 병행 적용을 선정한다.",
+        "Proof Test, Bypass, SRS와 MOC를 운영수명주기로 연결한다."
+      ],
+      "low_score_patterns": [
+        "HIPPS를 Relief Valve의 다른 명칭으로 설명함",
+        "구성요소를 나열하고 전체 SIF 경계를 제시하지 않음",
+        "2oo3이면 공통원인과 무관하게 SIL이 보장된다고 단정함",
+        "Sensor bypass 시 degraded voting을 명시하지 않음",
+        "직렬 두 밸브를 조건 없이 1oo2로 간주함",
+        "개별 인증기기의 SIL로 전체 HIPPS 성능을 대체함",
+        "Process Safety Time과 Closing Time 관계를 누락함",
+        "빠른 폐쇄에 따른 Surge를 누락함",
+        "Seat Leakage와 잔류 유입을 누락함",
+        "HIPPS가 모든 Relief Device를 자동 대체한다고 단정함",
+        "Proof Test, Bypass와 MOC를 누락함"
+      ],
+      "field_connection_points": [
+        "고압원과 저압측 보호대상 사이의 유입차단",
+        "Pressure Sensor–Logic Solver–Shutdown Valve 전체 SIF 경계",
+        "Trip Setpoint margin과 Process Safety Time",
+        "2oo3 sensing과 common cause",
+        "degraded voting의 1oo2·2oo2 차이",
+        "직렬 Shutdown Valve의 조건부 1oo2 성공구조",
+        "Actuator·Solenoid·Utility·Position Feedback 경로",
+        "Closure Time·Surge·Seat Leakage",
+        "Target SIL과 Achieved PFDavg",
+        "BPCS 및 다른 IPL과의 독립성",
+        "HIPPS 예방형 Isolation과 Relief 완화형 Discharge 비교",
+        "Proof Test·Bypass·SRS·MOC·Revalidation"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
       "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
       "title_ko": "Historian·MES·IT/OT 통합, 산업데이터 품질 및 실시간 처리",
       "question_type": "PRINCIPLE_INTERPRETATION",
@@ -13110,7 +13736,9 @@
         "시험명세에 사전조건·입력·예상결과·허용오차·판정기준과 증적을 포함한다.",
         "coverage와 미해결 결함을 exit criteria와 연결한다.",
         "결함·변경·baseline·RTM·재시험·approval의 폐루프를 설명한다.",
-        "대상 버전·환경·수행자·판정기준을 V&V 증적으로 남긴다."
+        "대상 버전·환경·수행자·판정기준을 V&V 증적으로 남긴다.",
+        "일반 정적·동적 분석과 MC/DC 상세 구조적 커버리지의 ownership을 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 구분한다.",
+        "MISRA는 코딩 지침·준수와 정적분석 근거로 설명하고, xUnit·test harness·stub·mock 기반 단위시험 도구와 구분한다."
       ],
       "common_missing_points": [
         "SW-05 Safety V&V와 SW-10 FAT·SAT 경계",
@@ -13128,7 +13756,9 @@
         "HIL 폐루프와 timing",
         "Fault injection의 복구 검증",
         "결함 closure와 재시험 증적",
-        "시험환경·버전과 감사가능성"
+        "시험환경·버전과 감사가능성",
+        "MC/DC 독립 영향, Coverage Gap과 Dead·Deactivated Code 상세를 일반 정적·동적 분석과 구분하지 않음",
+        "MISRA를 xUnit과 같은 단위시험 도구로 오분류하거나 코딩 규칙 준수와 실행 기반 단위시험을 혼동함"
       ],
       "routing_aliases": [
         "instrumentation control software lifecycle V-Model",
@@ -13202,7 +13832,9 @@
       "revision_notes": [
         "V-Model과 시험수준의 대응을 답안구조 중심으로 정리했다.",
         "양방향 RTM, 분석·회귀시험과 고급 시험환경을 고득점 포인트로 반영했다.",
-        "SW-05 Safety lifecycle과 SW-10 프로젝트 인수 경계를 명시했다."
+        "SW-05 Safety lifecycle과 SW-10 프로젝트 인수 경계를 명시했다.",
+        "MC/DC detailed ownership handed off to safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "MISRA coding-rule/static-analysis evidence separated from unit-test tooling"
       ],
       "id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation_COMPARE_v1",
       "title": "계측제어 소프트웨어 수명주기, V-Model, 추적성, 검증 및 확인",
@@ -13278,7 +13910,9 @@
         "시험명세에 사전조건·입력·예상결과·허용오차·판정기준과 증적을 포함한다.",
         "coverage와 미해결 결함을 exit criteria와 연결한다.",
         "결함·변경·baseline·RTM·재시험·approval의 폐루프를 설명한다.",
-        "대상 버전·환경·수행자·판정기준을 V&V 증적으로 남긴다."
+        "대상 버전·환경·수행자·판정기준을 V&V 증적으로 남긴다.",
+        "일반 정적·동적 분석과 MC/DC 상세 구조적 커버리지의 ownership을 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 구분한다.",
+        "MISRA는 코딩 지침·준수와 정적분석 근거로 설명하고, xUnit·test harness·stub·mock 기반 단위시험 도구와 구분한다."
       ],
       "low_score_patterns": [
         "SW-05 Safety V&V와 SW-10 FAT·SAT 경계",
@@ -13296,7 +13930,9 @@
         "HIL 폐루프와 timing",
         "Fault injection의 복구 검증",
         "결함 closure와 재시험 증적",
-        "시험환경·버전과 감사가능성"
+        "시험환경·버전과 감사가능성",
+        "MC/DC 독립 영향, Coverage Gap과 Dead·Deactivated Code 상세를 일반 정적·동적 분석과 구분하지 않음",
+        "MISRA를 xUnit과 같은 단위시험 도구로 오분류하거나 코딩 규칙 준수와 실행 기반 단위시험을 혼동함"
       ],
       "field_connection_points": [
         "software lifecycle",
@@ -21384,6 +22020,349 @@
     },
     {
       "schema_version": "topic_pack.model_answer.v1",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "title_ko": "안전필수 소프트웨어의 정적·동적 분석, 구조적 커버리지 및 MC/DC 검증",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "expected_question_patterns": [
+        {
+          "pattern": "MC/DC의 개념, 목적과 충족조건을 설명하시오.",
+          "intent": "mcdc definition purpose and criteria",
+          "required_anchor_ids": [
+            "mcdc_purpose",
+            "mcdc_definition",
+            "mcdc_independent_effect_pair",
+            "mcdc_one_hundred_percent_limit"
+          ]
+        },
+        {
+          "pattern": "Statement, Decision, Condition 및 MC/DC Coverage를 비교하시오.",
+          "intent": "structural coverage level comparison",
+          "required_anchor_ids": [
+            "mcdc_statement_coverage",
+            "mcdc_decision_coverage",
+            "mcdc_condition_coverage",
+            "mcdc_definition",
+            "mcdc_multiple_condition_coverage"
+          ]
+        },
+        {
+          "pattern": "Unique-cause MC/DC와 Masking MC/DC의 차이 및 적용조건을 설명하시오.",
+          "intent": "unique cause versus masking mcdc",
+          "required_anchor_ids": [
+            "mcdc_unique_cause",
+            "mcdc_masking",
+            "mcdc_coupled_conditions",
+            "mcdc_masked_inactive_condition"
+          ]
+        },
+        {
+          "pattern": "복합 Boolean Decision의 MC/DC Test Pair 설계방법을 설명하시오.",
+          "intent": "mcdc test pair design",
+          "required_anchor_ids": [
+            "mcdc_independent_effect_pair",
+            "mcdc_n_plus_one_limit",
+            "mcdc_short_circuit",
+            "mcdc_coupled_conditions"
+          ]
+        },
+        {
+          "pattern": "요구사항 기반 시험과 구조적 커버리지 분석의 관계를 설명하시오.",
+          "intent": "requirements based testing and structural coverage",
+          "required_anchor_ids": [
+            "mcdc_structural_vs_requirements_coverage",
+            "mcdc_requirements_based_testing_first",
+            "mcdc_coverage_analysis_workflow"
+          ]
+        },
+        {
+          "pattern": "Coverage Gap과 미실행 코드의 분석 및 종결방법을 설명하시오.",
+          "intent": "coverage gap disposition",
+          "required_anchor_ids": [
+            "mcdc_uncovered_code_disposition",
+            "mcdc_dead_code",
+            "mcdc_deactivated_code",
+            "mcdc_defensive_code"
+          ]
+        },
+        {
+          "pattern": "MC/DC 시험에서 Source Code, Object Code와 Compiler 영향을 설명하시오.",
+          "intent": "source object compiler coverage",
+          "required_anchor_ids": [
+            "mcdc_source_object_coverage",
+            "mcdc_compiler_optimization",
+            "mcdc_target_environment"
+          ]
+        },
+        {
+          "pattern": "Coverage Instrumentation과 Tool Qualification의 필요성을 설명하시오.",
+          "intent": "coverage instrumentation and tool evidence",
+          "required_anchor_ids": [
+            "mcdc_instrumentation_effect",
+            "mcdc_coverage_tool_qualification",
+            "mcdc_target_environment"
+          ]
+        },
+        {
+          "pattern": "정적분석, 동적분석과 MC/DC 구조적 커버리지의 관계를 설명하시오.",
+          "intent": "static dynamic and structural coverage relationship",
+          "required_anchor_ids": [
+            "mcdc_static_analysis_relation",
+            "mcdc_dynamic_analysis_relation",
+            "mcdc_control_data_flow_complement"
+          ]
+        },
+        {
+          "pattern": "산업용 안전필수 소프트웨어에 MC/DC를 적용할 때 고려사항을 설명하시오.",
+          "intent": "industrial safety software mcdc application",
+          "required_anchor_ids": [
+            "mcdc_industrial_application_boundary",
+            "mcdc_safety_plc_boundary",
+            "mcdc_regression_change",
+            "mcdc_one_hundred_percent_limit"
+          ]
+        }
+      ],
+      "recommended_outline": [
+        {
+          "section": "정의와 적용목적",
+          "intent": "MC/DC를 구조적 커버리지와 독립 영향 증거로 정의한다.",
+          "anchor_refs": [
+            "mcdc_purpose",
+            "mcdc_structural_vs_requirements_coverage",
+            "mcdc_industrial_application_boundary"
+          ]
+        },
+        {
+          "section": "Coverage 계층 비교",
+          "intent": "Statement·Decision·Condition·MC/DC·MCC의 검증강도와 한계를 비교한다.",
+          "anchor_refs": [
+            "mcdc_statement_coverage",
+            "mcdc_decision_coverage",
+            "mcdc_condition_coverage",
+            "mcdc_definition",
+            "mcdc_multiple_condition_coverage"
+          ]
+        },
+        {
+          "section": "독립 영향 Test Pair",
+          "intent": "Unique-cause와 Masking 방식으로 각 조건의 독립 영향을 입증한다.",
+          "anchor_refs": [
+            "mcdc_independent_effect_pair",
+            "mcdc_unique_cause",
+            "mcdc_masking",
+            "mcdc_n_plus_one_limit"
+          ]
+        },
+        {
+          "section": "Boolean 실행특성",
+          "intent": "Short-circuit, 결합조건과 마스킹 상태를 Test Pair 설계에 반영한다.",
+          "anchor_refs": [
+            "mcdc_short_circuit",
+            "mcdc_coupled_conditions",
+            "mcdc_masked_inactive_condition"
+          ]
+        },
+        {
+          "section": "Coverage 분석과 Gap 종결",
+          "intent": "요구사항 기반 시험 후 미실행 코드를 분류하고 처분한다.",
+          "anchor_refs": [
+            "mcdc_requirements_based_testing_first",
+            "mcdc_coverage_analysis_workflow",
+            "mcdc_uncovered_code_disposition",
+            "mcdc_dead_code",
+            "mcdc_deactivated_code",
+            "mcdc_defensive_code"
+          ]
+        },
+        {
+          "section": "Source·Object·Tool 증거",
+          "intent": "Compiler, Instrumentation, Target 환경과 Tool Qualification을 설명한다.",
+          "anchor_refs": [
+            "mcdc_source_object_coverage",
+            "mcdc_compiler_optimization",
+            "mcdc_instrumentation_effect",
+            "mcdc_coverage_tool_qualification",
+            "mcdc_target_environment"
+          ]
+        },
+        {
+          "section": "정적·동적 분석과 회귀",
+          "intent": "MC/DC가 다루지 못하는 Data·Timing 오류를 보완하고 변경 시 재검증한다.",
+          "anchor_refs": [
+            "mcdc_static_analysis_relation",
+            "mcdc_dynamic_analysis_relation",
+            "mcdc_control_data_flow_complement",
+            "mcdc_regression_change"
+          ]
+        },
+        {
+          "section": "현장 적용과 한계",
+          "intent": "Safety PLC 인증범위와 100% MC/DC의 한계를 제시한다.",
+          "anchor_refs": [
+            "mcdc_safety_plc_boundary",
+            "mcdc_one_hundred_percent_limit"
+          ]
+        }
+      ],
+      "high_score_points": [
+        "MC/DC를 각 조건의 Decision 결과에 대한 독립 영향 증거로 정의한다.",
+        "Statement·Decision·Condition Coverage와 MC/DC·MCC를 비교한다.",
+        "Unique-cause와 Masking MC/DC의 Test Pair 조건을 구분한다.",
+        "Short-circuit와 Coupled Condition이 Test Pair에 미치는 영향을 설명한다.",
+        "요구사항 기반 시험 후 구조적 커버리지 분석을 수행하는 순서를 제시한다.",
+        "Coverage Gap을 누락시험·누락요구·Dead·Deactivated·Defensive Code로 분류한다.",
+        "Source와 Object Code, Compiler 최적화의 대응을 검토한다.",
+        "Instrumentation의 Probe Effect와 Target 환경 대표성을 설명한다.",
+        "Coverage Tool Qualification 또는 독립확인 근거를 제시한다.",
+        "정적분석·Data Flow·Timing 시험으로 MC/DC의 검출범위 한계를 보완한다.",
+        "100% MC/DC가 요구사항 완전성과 전체 SIL을 보장하지 않음을 명시한다.",
+        "일반 PLC 전체가 아니라 적용 표준·Safety Plan·자체개발 범위로 적용수준을 결정한다."
+      ],
+      "common_missing_points": [
+        "Decision Coverage와 MC/DC를 동일시함",
+        "각 조건의 True·False만으로 독립 영향이 입증된다고 설명함",
+        "Test Pair에서 여러 비마스킹 조건을 동시에 변경함",
+        "Short-circuit로 실행되지 않은 조건을 무시함",
+        "n개 조건이면 항상 n+1개 시험으로 충분하다고 단정함",
+        "요구사항 기반 시험 없이 코드구조만 보고 시험을 설계함",
+        "Coverage Gap의 원인분류와 종결증적을 누락함",
+        "Dead Code와 Deactivated Code를 구분하지 않음",
+        "Defensive Code를 요구사항과 추적하지 않음",
+        "Compiler·Object Code·Instrumentation 영향을 누락함",
+        "Coverage Tool 결과를 검증 없이 절대 신뢰함",
+        "100% MC/DC로 전체 SIL 달성을 선언함"
+      ],
+      "routing_aliases": [
+        "safety critical software MC/DC structural coverage",
+        "modified condition decision coverage independent effect",
+        "unique cause and masking MC/DC test pair",
+        "안전필수 소프트웨어 MC/DC 구조적 커버리지",
+        "수정 조건 결정 커버리지 독립 영향",
+        "Statement Decision Condition MC/DC 비교",
+        "MC/DC coverage gap dead deactivated code",
+        "MC/DC short circuit coupled conditions",
+        "MC/DC source object code compiler coverage",
+        "coverage instrumentation tool qualification safety software",
+        "요구사항 기반 시험 구조적 커버리지 분석",
+        "Safety PLC application program MC/DC 적용"
+      ],
+      "routing_field_points": [
+        "Modified Condition/Decision Coverage",
+        "각 원자 조건의 Decision 결과 독립 영향",
+        "Unique-cause MC/DC와 Masking MC/DC",
+        "Statement·Decision·Condition·MCC 비교",
+        "Short-circuit Evaluation과 Coupled Condition",
+        "Requirements Coverage와 Structural Coverage",
+        "Coverage Gap 분석과 종결",
+        "Dead Code·Deactivated Code·Defensive Code",
+        "Source Code와 Object Code Coverage",
+        "Compiler Optimization과 Coverage Instrumentation",
+        "Coverage Tool Qualification",
+        "Target 환경과 회귀시험",
+        "100% MC/DC의 증거 한계"
+      ],
+      "revision_notes": [
+        "created_by=scripts/create_topic_pack.py; final source directly reviewed and authored",
+        "ownership_detail=MC/DC structural coverage and coverage evidence",
+        "generic_lifecycle_boundary=instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "safety_lifecycle_boundary=sis_sil_safety_software_independence_systematic_failure_verification_validation",
+        "generated_bank_not_modified"
+      ],
+      "id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis_COMPARE_v1",
+      "title": "안전필수 소프트웨어의 정적·동적 분석, 구조적 커버리지 및 MC/DC 검증",
+      "question_examples": [
+        "mcdc definition purpose and criteria",
+        "structural coverage level comparison",
+        "unique cause versus masking mcdc",
+        "mcdc test pair design",
+        "requirements based testing and structural coverage",
+        "coverage gap disposition",
+        "source object compiler coverage",
+        "coverage instrumentation and tool evidence",
+        "static dynamic and structural coverage relationship",
+        "industrial safety software mcdc application"
+      ],
+      "topic_aliases": [
+        "safety critical software MC/DC structural coverage",
+        "modified condition decision coverage independent effect",
+        "unique cause and masking MC/DC test pair",
+        "안전필수 소프트웨어 MC/DC 구조적 커버리지",
+        "수정 조건 결정 커버리지 독립 영향",
+        "Statement Decision Condition MC/DC 비교",
+        "MC/DC coverage gap dead deactivated code",
+        "MC/DC short circuit coupled conditions",
+        "MC/DC source object code compiler coverage",
+        "coverage instrumentation tool qualification safety software",
+        "요구사항 기반 시험 구조적 커버리지 분석",
+        "Safety PLC application program MC/DC 적용"
+      ],
+      "expected_structure": [
+        "정의와 적용목적",
+        "Coverage 계층 비교",
+        "독립 영향 Test Pair",
+        "Boolean 실행특성",
+        "Coverage 분석과 Gap 종결",
+        "Source·Object·Tool 증거",
+        "정적·동적 분석과 회귀",
+        "현장 적용과 한계"
+      ],
+      "model_answer_outline": [
+        "MC/DC를 구조적 커버리지와 독립 영향 증거로 정의한다.",
+        "Statement·Decision·Condition·MC/DC·MCC의 검증강도와 한계를 비교한다.",
+        "Unique-cause와 Masking 방식으로 각 조건의 독립 영향을 입증한다.",
+        "Short-circuit, 결합조건과 마스킹 상태를 Test Pair 설계에 반영한다.",
+        "요구사항 기반 시험 후 미실행 코드를 분류하고 처분한다.",
+        "Compiler, Instrumentation, Target 환경과 Tool Qualification을 설명한다.",
+        "MC/DC가 다루지 못하는 Data·Timing 오류를 보완하고 변경 시 재검증한다.",
+        "Safety PLC 인증범위와 100% MC/DC의 한계를 제시한다."
+      ],
+      "high_score_features": [
+        "MC/DC를 각 조건의 Decision 결과에 대한 독립 영향 증거로 정의한다.",
+        "Statement·Decision·Condition Coverage와 MC/DC·MCC를 비교한다.",
+        "Unique-cause와 Masking MC/DC의 Test Pair 조건을 구분한다.",
+        "Short-circuit와 Coupled Condition이 Test Pair에 미치는 영향을 설명한다.",
+        "요구사항 기반 시험 후 구조적 커버리지 분석을 수행하는 순서를 제시한다.",
+        "Coverage Gap을 누락시험·누락요구·Dead·Deactivated·Defensive Code로 분류한다.",
+        "Source와 Object Code, Compiler 최적화의 대응을 검토한다.",
+        "Instrumentation의 Probe Effect와 Target 환경 대표성을 설명한다.",
+        "Coverage Tool Qualification 또는 독립확인 근거를 제시한다.",
+        "정적분석·Data Flow·Timing 시험으로 MC/DC의 검출범위 한계를 보완한다.",
+        "100% MC/DC가 요구사항 완전성과 전체 SIL을 보장하지 않음을 명시한다.",
+        "일반 PLC 전체가 아니라 적용 표준·Safety Plan·자체개발 범위로 적용수준을 결정한다."
+      ],
+      "low_score_patterns": [
+        "Decision Coverage와 MC/DC를 동일시함",
+        "각 조건의 True·False만으로 독립 영향이 입증된다고 설명함",
+        "Test Pair에서 여러 비마스킹 조건을 동시에 변경함",
+        "Short-circuit로 실행되지 않은 조건을 무시함",
+        "n개 조건이면 항상 n+1개 시험으로 충분하다고 단정함",
+        "요구사항 기반 시험 없이 코드구조만 보고 시험을 설계함",
+        "Coverage Gap의 원인분류와 종결증적을 누락함",
+        "Dead Code와 Deactivated Code를 구분하지 않음",
+        "Defensive Code를 요구사항과 추적하지 않음",
+        "Compiler·Object Code·Instrumentation 영향을 누락함",
+        "Coverage Tool 결과를 검증 없이 절대 신뢰함",
+        "100% MC/DC로 전체 SIL 달성을 선언함"
+      ],
+      "field_connection_points": [
+        "Modified Condition/Decision Coverage",
+        "각 원자 조건의 Decision 결과 독립 영향",
+        "Unique-cause MC/DC와 Masking MC/DC",
+        "Statement·Decision·Condition·MCC 비교",
+        "Short-circuit Evaluation과 Coupled Condition",
+        "Requirements Coverage와 Structural Coverage",
+        "Coverage Gap 분석과 종결",
+        "Dead Code·Deactivated Code·Defensive Code",
+        "Source Code와 Object Code Coverage",
+        "Compiler Optimization과 Coverage Instrumentation",
+        "Coverage Tool Qualification",
+        "Target 환경과 회귀시험",
+        "100% MC/DC의 증거 한계"
+      ],
+      "source_schema_version": "topic_pack.model_answer.v1"
+    },
+    {
+      "schema_version": "topic_pack.model_answer.v1",
       "topic_id": "second_order_lag_response_by_damping_ratio",
       "title_ko": "감쇠비에 따른 2차 지연시스템 응답 특성 비교",
       "question_type": "COMPARE_SELECTION",
@@ -21993,7 +22972,8 @@
             "verification_definition",
             "validation_definition",
             "functional_test_boundary",
-            "proof_test_relation"
+            "proof_test_relation",
+            "sis_mcdc_structural_coverage_boundary"
           ]
         },
         {
@@ -22046,7 +23026,10 @@
         "Tool Qualification과 Library Version/Parameter 통제를 설명한다.",
         "Bypass/Override의 승인·표시·시간 제한·보상조치·복구 확인을 제시한다.",
         "변경 영향분석, Regression, Revalidation과 As-built 갱신을 연결한다.",
-        "PFDavg/PFH 적용 모드와 근사식 가정을 명시한다."
+        "PFDavg/PFH 적용 모드와 근사식 가정을 명시한다.",
+        "Safety Lifecycle의 검증 엄격도와 MC/DC 상세 수행기법의 ownership을 `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`로 구분한다.",
+        "소프트웨어 시험은 체계적 결함 억제 증거, Random Hardware Integrity는 PFDavg·PFH 등 확률적 하드웨어 근거, HFT는 Architectural Constraints로 구분한다.",
+        "통합시험, HIL 시험환경과 HFT 하드웨어 아키텍처 제약을 서로 다른 목적과 증거축으로 설명한다."
       ],
       "common_missing_points": [
         "SIS·SIF·SIL 관계 없이 약어만 나열함",
@@ -22058,7 +23041,10 @@
         "인증 제품 자동충족으로 과장",
         "Tool/Library/Version 통제 누락",
         "Bypass/Override와 Modification 관리 누락",
-        "Audit와 Competence 누락"
+        "Audit와 Competence 누락",
+        "MC/DC Coverage를 전체 Safety V&V 또는 SIL 달성의 단독 증거로 설명함",
+        "단위·통합·시스템시험을 Random Hardware Integrity 또는 Architectural Constraints/HFT에 일대일 대응함",
+        "PFDavg·PFH 확률척도, timeout·checksum 진단기법, fault injection 검증기법을 같은 범주로 혼합함"
       ],
       "routing_aliases": [
         "SIS safety software lifecycle",
@@ -22099,7 +23085,10 @@
         "created_for=SOFTWARE_LLM_LANE_C_SW05",
         "rich_question_patterns_include_required_anchor_ids",
         "recommended_outline_anchor_refs_cover_all_fact_anchors",
-        "broad_single_term_aliases_excluded"
+        "broad_single_term_aliases_excluded",
+        "MC/DC detailed ownership handed off to safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "recommended_outline now references sis_mcdc_structural_coverage_boundary for safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "software V&V, random hardware integrity, HFT and HIL category boundaries added"
       ],
       "id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
       "title": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
