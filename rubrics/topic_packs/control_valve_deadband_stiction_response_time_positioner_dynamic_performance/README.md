@@ -26,12 +26,13 @@
 
 ## 경계
 
-- Actuator thrust, unbalance force와 fail-safe spring sizing은 Topic 1이다.
-- Inherent·Installed와 Linear·Equal Percentage·Quick Opening은 Topic 2이다.
-- I/P converter, split range와 detailed bench calibration은 별도 Positioner Topic이다.
-- Valve signature와 predictive maintenance는 별도 Diagnostics Topic이다.
-- Valve authority, rangeability와 quantitative installed gain은 별도 Topic이다.
-- Cv·Kv와 liquid/gas sizing은 별도 Sizing Topic이다.
+- Actuator thrust, unbalance force와 fail-safe spring sizing: `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`
+- Inherent·installed characteristic: `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`
+- I/P converter, split range와 detailed bench calibration: `control_valve_positioner_ip_converter_booster_accessories_calibration`
+- Valve signature와 predictive maintenance: `smart_positioner_diagnostics_valve_signature_predictive_maintenance`
+- Valve authority, rangeability와 quantitative installed gain: `control_valve_authority_rangeability_gain_installed_performance`
+- Cv·Kv와 liquid/gas sizing: `control_valve_sizing_cv_kv_reynolds_liquid_selection`, `control_valve_gas_sizing_choked_flow_critical_pressure_ratio`
+- Packing·linkage·trim의 물리적 분해점검과 부품 교체는 향후 Valve Maintenance 전문 Topic으로 hand-off할 계획이며, 현재는 active routing 대상으로 사용하지 않는다.
 
 ## Logic Check 정책
 
@@ -46,8 +47,9 @@
 
 - `gemini_script/20260803_topic03_deadband_stiction_response_positioner_requirements.md`
 - `docs/topic_sheets/control_valve_deadband_stiction_response_time_positioner_dynamic_performance.md`
-- Valve Handbook Chapter 2 summary
-- Control-valve dynamic performance and positioner application guidance
+- Control Valve Handbook의 dynamic performance, deadband, friction과 positioner application 설명
+- Control Valve Primer의 valve response, linkage, packing friction과 pneumatic accessory 설명
+- 개선안은 small-step·large-step·reversal test와 process trend로 전후 성능을 검증한다.
 
 ## 작성 상태
 

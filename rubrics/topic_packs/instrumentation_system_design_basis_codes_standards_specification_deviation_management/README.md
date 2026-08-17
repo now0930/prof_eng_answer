@@ -40,6 +40,13 @@
 
 이 Topic은 위 주제를 대체하지 않고, 계측제어 **설계 governing basis와 deviation governance의 연결**만 소유한다.
 
+## Planned valve-standards hand-off
+
+- 이 Topic은 프로젝트 공통 code·standard·specification hierarchy, 적용 판본과 cut-off, document precedence, compliance·deviation, approval, verification 및 as-built traceability를 계속 소유한다.
+- 제어밸브 고유의 pressure-boundary, seat-leakage test, material certification, actuator·accessory approval, marking, certification 및 산업별 approval 세부사항은 향후 Valve Standards·Approvals 전문 Topic으로 분리할 계획이다.
+- 해당 전문 Topic이 실제 source pack으로 추가되기 전에는 이를 active routing alias나 cross-topic ID로 사용하지 않는다.
+- 현재 Topic은 세부 밸브 시험규격을 대신 판정하지 않고, 프로젝트 requirement와 specialist evaluation 결과를 governing basis·deviation workflow에 연결한다.
+
 ## Standards treatment
 
 표준 번호 자체를 암기점수로 사용하지 않는다.

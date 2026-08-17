@@ -31,6 +31,13 @@
 - FAT·SAT·Commissioning·Acceptance는 `control_software_project_engineering_documents_fat_sat_commissioning_acceptance`가 소유한다.
 - 이 Topic은 **운영단계의 O&M program과 governance**를 소유한다.
 
+## Planned valve-maintenance hand-off
+
+- 이 Topic은 전사·공장 단위 O&M governance, asset register, criticality, CMMS/EAM, work order, maintenance strategy, calibration·inspection program, spares, KPI, RCA와 lifecycle improvement를 계속 소유한다.
+- 제어밸브의 분해점검, trim·packing 교체, lapping, actuator·valve 재조립, pressure·leakage·stroke 시험과 수리 후 복원 절차는 향후 Valve Maintenance 전문 Topic으로 분리할 계획이다.
+- 해당 전문 Topic이 실제 source pack으로 추가되기 전에는 이를 active routing alias나 cross-topic ID로 사용하지 않는다.
+- 현재 Topic은 물리적 overhaul 절차 자체가 아니라 작업 필요성, 계획, 이력, 품질기록, 예비품과 KPI 관점의 관리 hand-off만 다룬다.
+
 ## Semantic policy
 
 - `deterministic_checks.enabled=false`

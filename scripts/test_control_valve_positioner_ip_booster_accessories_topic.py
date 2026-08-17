@@ -237,8 +237,36 @@ class GeneratedContractRegressionTests(unittest.TestCase):
         self.assertEqual(len(patterns), 10)
         self.assertEqual(len(outlines), 8)
         anchor_set = set(EXPECTED_ANCHOR_IDS)
-        self.assertTrue(all(set(row["required_anchor_ids"]) <= anchor_set for row in patterns))
-        self.assertEqual(set().union(*(set(row["anchor_refs"]) for row in outlines)), anchor_set)
+        pattern_anchor_set = set().union(
+            *(
+                set(row["required_anchor_ids"])
+                for row in patterns
+            )
+        )
+        outline_anchor_set = set().union(
+            *(
+                set(row["anchor_refs"])
+                for row in outlines
+            )
+        )
+        self.assertTrue(pattern_anchor_set <= anchor_set)
+        self.assertTrue(outline_anchor_set <= anchor_set)
+        sequence_anchor_set = {
+            "bench_set_calibration_boundary",
+            "actuator_action_fail_action_separation",
+            "travel_feedback_linkage_cam_alignment",
+            "positioner_direct_reverse_action",
+            "positioner_zero_span_travel_calibration",
+            "multipoint_upstroke_downstroke_verification",
+            "seat_endpoint_overtravel_mechanical_stop",
+            "command_pressure_travel_loop_test",
+            "loss_signal_air_power_failure_response",
+            "as_found_as_left_traceability",
+            "vendor_action_cam_relay_setting_crosscheck",
+        }
+        self.assertTrue(
+            sequence_anchor_set <= pattern_anchor_set
+        )
         aliases = {str(alias).casefold() for alias in self.model["routing_aliases"]}
         self.assertFalse(BROAD_ALIASES & aliases)
         self.assertEqual(self.gmodel["topic_aliases"], self.model["routing_aliases"])

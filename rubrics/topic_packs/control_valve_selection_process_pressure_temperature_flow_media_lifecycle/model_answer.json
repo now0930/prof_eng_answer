@@ -253,7 +253,7 @@
     },
     {
       "section": "Specialist Result Integration",
-      "intent": "Topic 1~15의 sizing, characteristic, dynamics, damage, leakage, severe-service 및 SIS 결과를 교차검증한다.",
+      "intent": "specialist Topic Packs의 sizing, characteristic, dynamics, damage, leakage, severe-service 및 SIS 결과를 교차검증한다.",
       "anchor_refs": [
         "specialist_calculation_handoff",
         "liquid_gas_sizing_cross_check",
@@ -326,7 +326,7 @@
     "Minimum·normal·maximum·startup·shutdown·upset operating case matrix를 사용한다.",
     "Pressure reference, flow basis, phase, composition과 property source를 명시한다.",
     "Control, shutoff, leakage, fail action, response, safety와 environmental requirement를 정의한다.",
-    "Topic 1~15의 전문 결과를 assumption·margin·limitation과 함께 hand-off한다.",
+    "specialist Topic Packs의 전문 결과를 assumption·margin·limitation과 함께 hand-off한다.",
     "Mandatory gate 후 body·trim·characteristic·material·actuator·accessory를 trade-off한다.",
     "Datasheet·requisition·vendor bid·deviation·guarantee를 configuration control한다.",
     "ITP·FAT·SAT·commissioning과 installed-performance evidence를 제시한다.",
@@ -361,7 +361,7 @@
     "control valve energy downtime obsolescence lifecycle evaluation",
     "control valve field feedback MOC revalidation selection criteria",
     "control valve process data completeness and requirement traceability",
-    "control valve specialist calculation handoff Topic 1 to Topic 15",
+    "control valve specialist calculation handoff `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe` to `final_control_element_sil_sis_esd_valve_partial_stroke_test`",
     "control valve installed performance acceptance and as-built handover",
     "control valve package selection mandatory gate weighted score",
     "control valve material leakage emissions corrosion compatibility selection",
@@ -386,33 +386,33 @@
     "Body·trim·material·seat·packing compatibility 확인",
     "Actuator worst-case load·minimum supply·spring action 확인",
     "Positioner·solenoid·booster·feedback package 확인",
-    "SIS·ESD SRS와 Topic 15 hand-off 확인",
+    "SIS·ESD SRS와 `final_control_element_sil_sis_esd_valve_partial_stroke_test` hand-off 확인",
     "Datasheet·requisition·vendor bid·deviation 확인",
     "ITP·material traceability·FAT·SAT·commissioning 확인",
     "Reliability·maintainability·spares·obsolescence 확인",
     "Energy·maintenance·downtime·lifecycle cost 확인",
     "As-built·field feedback·MOC·revalidation 확인",
-    "Topic 1 hand-off: actuator force, friction, spring sizing and fail-safe mechanics",
-    "Topic 2 hand-off: inherent and installed flow-characteristic theory",
-    "Topic 3 hand-off: deadband, stiction and dynamic-response testing",
-    "Topic 4 hand-off: valve-body and actuator taxonomy",
-    "Topic 5 hand-off: authority, installed gain, rangeability and turndown",
-    "Topic 6 hand-off: liquid Cv, Kv, Reynolds and piping-factor calculation",
-    "Topic 7 hand-off: gas sizing, expansion factor and choked pressure ratio",
-    "Topic 8 hand-off: cavitation, flashing and liquid choking physics",
-    "Topic 9 hand-off: aerodynamic and hydrodynamic noise prediction",
-    "Topic 10 hand-off: balanced and unbalanced trim structure and seal mechanics",
-    "Topic 11 hand-off: positioner, I/P, booster and accessory calibration",
-    "Topic 12 hand-off: valve signature and predictive-diagnostics detail",
-    "Topic 13 hand-off: seat leakage, shutoff class, packing and fugitive emissions",
-    "Topic 14 hand-off: high-low flow, temperature, cryogenic and particle severe service",
-    "Topic 15 hand-off: SIF final-element architecture, PFDavg, PST and proof-test verification"
+    "`control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe` hand-off: actuator force, friction, spring sizing and fail-safe mechanics",
+    "`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening` hand-off: inherent and installed flow-characteristic theory",
+    "`control_valve_deadband_stiction_response_time_positioner_dynamic_performance` hand-off: deadband, stiction and dynamic-response testing",
+    "`control_valve_types_globe_rotary_body_actuator_selection` hand-off: valve-body and actuator taxonomy",
+    "`control_valve_authority_rangeability_gain_installed_performance` hand-off: authority, installed gain, rangeability and turndown",
+    "`control_valve_sizing_cv_kv_reynolds_liquid_selection` hand-off: liquid Cv, Kv, Reynolds and piping-factor calculation",
+    "`control_valve_gas_sizing_choked_flow_critical_pressure_ratio` hand-off: gas sizing, expansion factor and choked pressure ratio",
+    "`control_valve_cavitation_flashing_choked_flow_damage_prevention` hand-off: cavitation, flashing and liquid choking physics",
+    "`control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim` hand-off: aerodynamic and hydrodynamic noise prediction",
+    "`balanced_trim_unbalanced_trim_structure_sealing_applications` hand-off: balanced and unbalanced trim structure and seal mechanics",
+    "`control_valve_positioner_ip_converter_booster_accessories_calibration` hand-off: positioner, I/P, booster and accessory calibration",
+    "`smart_positioner_diagnostics_valve_signature_predictive_maintenance` hand-off: valve signature and predictive-diagnostics detail",
+    "`control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions` hand-off: seat leakage, shutoff class, packing and fugitive emissions",
+    "`control_valve_severe_service_high_low_flow_temperature_cryogenic_particles` hand-off: high-low flow, temperature, cryogenic and particle severe service",
+    "`final_control_element_sil_sis_esd_valve_partial_stroke_test` hand-off: SIF final-element architecture, PFDavg, PST and proof-test verification"
   ],
   "revision_notes": [
     "12개 COMPARE_SELECTION·IMPLEMENTATION_EVALUATION·PROCEDURE Question Pattern을 추가했다.",
     "9개 Outline으로 requirement부터 MOC·revalidation까지 폐루프를 구성했다.",
     "Broad single-word alias를 금지하고 복합 routing phrase를 사용했다.",
-    "Topic 1~15 specialist ownership을 routing_field_points에 각각 명시하여 통합 선정 hand-off 경계를 exact 검증할 수 있도록 했다."
+    "specialist Topic Packs specialist ownership을 routing_field_points에 각각 명시하여 통합 선정 hand-off 경계를 exact 검증할 수 있도록 했다."
   ],
   "id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
   "title": "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차",
@@ -445,7 +445,7 @@
     "control valve energy downtime obsolescence lifecycle evaluation",
     "control valve field feedback MOC revalidation selection criteria",
     "control valve process data completeness and requirement traceability",
-    "control valve specialist calculation handoff Topic 1 to Topic 15",
+    "control valve specialist calculation handoff `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe` to `final_control_element_sil_sis_esd_valve_partial_stroke_test`",
     "control valve installed performance acceptance and as-built handover",
     "control valve package selection mandatory gate weighted score",
     "control valve material leakage emissions corrosion compatibility selection",
@@ -469,7 +469,7 @@
     "Field Feedback Moc Revalidation"
   ],
   "high_score_features": [
-    "Operating-case completeness, Topic 1~15 specialist hand-off, integrated package trade-off, vendor deviation, FAT·SAT·commissioning evidence와 lifecycle feedback을 하나의 traceable selection workflow로 연결한다."
+    "Operating-case completeness, specialist Topic Packs specialist hand-off, integrated package trade-off, vendor deviation, FAT·SAT·commissioning evidence와 lifecycle feedback을 하나의 traceable selection workflow로 연결한다."
   ],
   "low_score_patterns": [
     "Normal flow, Cv, catalog body type 또는 lowest price만 제시하고 pressure·temperature·phase envelope, installed performance, vendor deviation, acceptance와 lifecycle evidence를 생략한다."

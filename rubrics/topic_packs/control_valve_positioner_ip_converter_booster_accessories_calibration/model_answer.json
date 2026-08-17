@@ -69,14 +69,20 @@
       ]
     },
     {
-      "pattern": "Zero·span·linkage·endpoint와 multipoint upstroke·downstroke calibration 절차를 설명하시오.",
-      "intent": "Mechanical alignment, endpoint iteration과 multipoint verification을 설명한다.",
+      "pattern": "Actuator bench set부터 valve-actuator coupling, seat endpoint, positioner linkage·action, zero·span, multipoint upstroke·downstroke, loop test와 fail-action 검증까지 작업순서를 설명하시오.",
+      "intent": "Actuator 단독 bench set과 valve-actuator coupling 이후의 positioner 설치·교정·loop 및 fail-action 검증 순서를 구분한다.",
       "required_anchor_ids": [
+        "bench_set_calibration_boundary",
+        "actuator_action_fail_action_separation",
         "travel_feedback_linkage_cam_alignment",
+        "positioner_direct_reverse_action",
         "positioner_zero_span_travel_calibration",
         "multipoint_upstroke_downstroke_verification",
         "seat_endpoint_overtravel_mechanical_stop",
-        "as_found_as_left_traceability"
+        "command_pressure_travel_loop_test",
+        "loss_signal_air_power_failure_response",
+        "as_found_as_left_traceability",
+        "vendor_action_cam_relay_setting_crosscheck"
       ]
     },
     {
@@ -150,14 +156,19 @@
     },
     {
       "section": "Mechanical feedback and calibration",
-      "intent": "Linkage·cam, zero·span, multipoint와 split-range calibration을 설명한다.",
+      "intent": "Bench set 인수조건부터 valve-actuator coupling, seat endpoint, linkage·action, zero·span, multipoint, loop와 fail-action 검증 순서를 설명한다.",
       "anchor_refs": [
+        "bench_set_calibration_boundary",
+        "actuator_action_fail_action_separation",
         "travel_feedback_linkage_cam_alignment",
+        "positioner_direct_reverse_action",
         "positioner_zero_span_travel_calibration",
         "multipoint_upstroke_downstroke_verification",
-        "split_range_local_mapping",
         "seat_endpoint_overtravel_mechanical_stop",
-        "command_pressure_travel_loop_test"
+        "command_pressure_travel_loop_test",
+        "loss_signal_air_power_failure_response",
+        "as_found_as_left_traceability",
+        "vendor_action_cam_relay_setting_crosscheck"
       ]
     },
     {
@@ -221,7 +232,8 @@
     "Bench set과 positioner calibration을 구분한다.",
     "Loss-of-signal·air·power response와 operating cases를 검토한다.",
     "As-found·as-left와 vendor manual crosscheck를 포함한다.",
-    "Topic 1·3·4·10·12·15·16 경계를 명시한다."
+    "Topic 1·3·4·10·12·15·16 경계를 명시한다.",
+    "Bench set→valve-actuator coupling→seat endpoint→positioner linkage·action→zero·span→multipoint up/down→loop test→fail-action→as-left 순서를 설명한다."
   ],
   "common_missing_points": [
     "Positioner와 I/P converter의 기능을 동일시한다.",
@@ -233,7 +245,8 @@
     "Zero·span endpoint만 확인하고 intermediate·downstroke를 생략한다.",
     "Split-range segment local mapping을 생략한다.",
     "Bench set과 positioner calibration을 동일시한다.",
-    "Loss-of-signal·air·power와 vendor settings를 검증하지 않는다."
+    "Loss-of-signal·air·power와 vendor settings를 검증하지 않는다.",
+    "Bench set과 positioner calibration의 순서를 혼동하거나 valve-actuator coupling·seat endpoint·fail-action·as-left 검증을 생략한다."
   ],
   "routing_aliases": [
     "control valve positioner travel feedback controller",
@@ -260,7 +273,9 @@
     "분할범위 로컬 전류 매핑",
     "볼륨 부스터 파일럿 압력 유량 용량",
     "필터 레귤레이터 록업 급속배기 솔레노이드",
-    "신호 공기 전원 상실 응답"
+    "신호 공기 전원 상실 응답",
+    "actuator bench set valve coupling positioner calibration sequence",
+    "액추에이터 벤치셋 밸브 결합 포지셔너 교정 순서"
   ],
   "routing_field_points": [
     "Loop drawing과 command-current-pressure-travel chain 확인",
@@ -281,7 +296,8 @@
   "revision_notes": [
     "10개 Question Pattern과 8개 Recommended Outline을 추가했다.",
     "Broad positioner·I/P·booster·calibration alias를 금지하고 복합 routing phrase를 사용했다.",
-    "Topic 1·3·4·10·12·15·16 경계를 독립적으로 명시했다."
+    "Topic 1·3·4·10·12·15·16 경계를 독립적으로 명시했다.",
+    "Bench set 인수조건부터 valve-actuator coupling, seat endpoint, positioner calibration, loop·fail-action 및 as-left까지 작업순서를 명시했다."
   ],
   "id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
   "title": "제어밸브 포지셔너·I/P 변환기·부스터·부속기기 및 교정",

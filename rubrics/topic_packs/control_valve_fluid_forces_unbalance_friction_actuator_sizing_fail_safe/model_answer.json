@@ -213,14 +213,14 @@
     "FTC",
     "pressure tends to open",
     "pressure tends to close",
-    "balanced trim",
-    "unbalanced trim",
+    "balanced trim actuator force sizing worst case differential pressure",
+    "unbalanced force effective area actuator sizing",
     "패킹 마찰력",
     "가이드 마찰력",
     "breakaway force",
     "공압 액추에이터 선정",
-    "actuator sizing",
-    "Bench set",
+    "pneumatic actuator sizing worst case pressure friction seat load",
+    "pneumatic actuator bench set versus operating range",
     "Fail-Close spring",
     "Fail-Open spring",
     "시트 하중",
@@ -245,6 +245,7 @@
   ],
   "revision_notes": [
     "Rich Question Pattern과 Recommended Outline을 실제 Anchor 참조로 작성했다.",
-    "템플릿 호환용 legacy root field는 사용하지 않았다."
+    "템플릿 호환용 legacy root field는 사용하지 않았다.",
+    "Broad routing aliases를 force-sizing 의도가 포함된 복합 표현으로 교체하고 Topic 4·10·11 ownership 경계를 명확히 했다."
   ]
 }

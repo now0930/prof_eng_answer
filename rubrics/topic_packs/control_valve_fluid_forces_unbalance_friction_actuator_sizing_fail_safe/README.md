@@ -26,6 +26,14 @@
 - 최악조건 액추에이터 선정
 - 회전식 밸브의 토크 해석 경계
 
+## Ownership boundary
+
+- 본 Topic은 sliding-stem 제어밸브의 유체력, 유효면적, 마찰, 시트 하중, actuator 요구추력, spring force, Bench set과 operating range의 차이를 소유한다.
+- `balanced_trim_unbalanced_trim_structure_sealing_applications`는 balance hole·pressure communication·balance seal·residual force 및 적용조건을 소유한다.
+- `control_valve_positioner_ip_converter_booster_accessories_calibration`는 valve-actuator coupling 이후 positioner linkage·action·zero·span·multipoint calibration 및 loop test를 소유한다.
+- `control_valve_types_globe_rotary_body_actuator_selection`는 valve body와 actuator 종류 및 일반 선정 taxonomy를 소유한다.
+- 회전식 밸브의 상세 actuator sizing은 torque basis와 vendor data를 사용하며 sliding-stem force equation을 그대로 적용하지 않는다.
+
 ## Source inventory
 
 - Fact Anchors: 22

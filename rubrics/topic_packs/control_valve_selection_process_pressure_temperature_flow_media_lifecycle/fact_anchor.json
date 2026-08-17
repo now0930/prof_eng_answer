@@ -7,7 +7,7 @@
     {
       "id": "selection_process_ownership",
       "anchor_id": "selection_process_ownership",
-      "statement": "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, Topic 1~15 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
+      "statement": "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, specialist Topic Packs 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
       "importance": "core",
       "keywords": [
         "selection_process_ownership",
@@ -15,10 +15,10 @@
         "selection process ownership control valve selection",
         "selection process ownership process lifecycle evidence",
         "integrated selection process",
-        "Topic 1~15 hand-off",
+        "specialist Topic Packs hand-off",
         "traceable decision",
         "lifecycle closure",
-        "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, Topic 1~15 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
+        "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, specialist Topic Packs 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle selection process ownership",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 selection process ownership"
       ],
@@ -28,24 +28,24 @@
         "selection process ownership control valve selection",
         "selection process ownership process lifecycle evidence",
         "integrated selection process",
-        "Topic 1~15 hand-off",
+        "specialist Topic Packs hand-off",
         "traceable decision",
         "lifecycle closure",
-        "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, Topic 1~15 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
+        "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, specialist Topic Packs 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle selection process ownership",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 selection process ownership"
       ],
       "accepted_explanations": [
-        "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, Topic 1~15 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
+        "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, specialist Topic Packs 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "selection process ownership를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
-      "claim": "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, Topic 1~15 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "claim": "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, specialist Topic Packs 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
       "description": "selection_process_ownership 계약을 평가한다."
     },
     {
@@ -84,13 +84,13 @@
       "accepted_explanations": [
         "선정 기준은 Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list, equipment data 및 회사·법규 기준의 개정번호와 우선순위를 확인하여 충돌 없이 적용한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "governing document hierarchy를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "선정 기준은 Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list, equipment data 및 회사·법규 기준의 개정번호와 우선순위를 확인하여 충돌 없이 적용한다.",
       "description": "governing_document_hierarchy 계약을 평가한다."
     },
@@ -130,13 +130,13 @@
       "accepted_explanations": [
         "각 선정 입력과 결과는 원 요구 문서, 계산서, datasheet 항목, vendor 응답, 시험 기준 및 최종 승인 근거까지 양방향으로 추적할 수 있어야 한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "process design basis traceability를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "각 선정 입력과 결과는 원 요구 문서, 계산서, datasheet 항목, vendor 응답, 시험 기준 및 최종 승인 근거까지 양방향으로 추적할 수 있어야 한다.",
       "description": "process_design_basis_traceability 계약을 평가한다."
     },
@@ -178,13 +178,13 @@
       "accepted_explanations": [
         "밸브 tag별 service boundary는 upstream·downstream equipment, bypass, isolation, recirculation, control-loop 역할 및 정상·비정상 유로를 포함하여 정의한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "tag service boundary를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "밸브 tag별 service boundary는 upstream·downstream equipment, bypass, isolation, recirculation, control-loop 역할 및 정상·비정상 유로를 포함하여 정의한다.",
       "description": "tag_service_boundary 계약을 평가한다."
     },
@@ -224,13 +224,13 @@
       "accepted_explanations": [
         "Process, piping, instrument, mechanical, safety, operation, maintenance 및 procurement 요구를 동일한 requirement register에서 통합하고 담당자와 승인 상태를 지정한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "stakeholder requirement integration를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Process, piping, instrument, mechanical, safety, operation, maintenance 및 procurement 요구를 동일한 requirement register에서 통합하고 담당자와 승인 상태를 지정한다.",
       "description": "stakeholder_requirement_integration 계약을 평가한다."
     },
@@ -268,13 +268,13 @@
       "accepted_explanations": [
         "요구조건은 mandatory, preferred, optional 및 information으로 분류하여 필수 불충족과 최적화 대상의 우선순위를 구분한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "requirement classification mandatory preferred를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "요구조건은 mandatory, preferred, optional 및 information으로 분류하여 필수 불충족과 최적화 대상의 우선순위를 구분한다.",
       "description": "requirement_classification_mandatory_preferred 계약을 평가한다."
     },
@@ -314,13 +314,13 @@
       "accepted_explanations": [
         "운전조건은 case별로 유량, upstream·downstream pressure, temperature, phase, composition, property source, 지속시간 및 발생빈도를 행렬로 관리한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "operating case matrix를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "운전조건은 case별로 유량, upstream·downstream pressure, temperature, phase, composition, property source, 지속시간 및 발생빈도를 행렬로 관리한다.",
       "description": "operating_case_matrix 계약을 평가한다."
     },
@@ -360,13 +360,13 @@
       "accepted_explanations": [
         "Minimum, normal 및 maximum case는 단일 유량 열이 아니라 각 case의 동시 pressure drop, fluid property, required travel 및 control objective와 함께 평가한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "minimum normal maximum cases를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Minimum, normal 및 maximum case는 단일 유량 열이 아니라 각 case의 동시 pressure drop, fluid property, required travel 및 control objective와 함께 평가한다.",
       "description": "minimum_normal_maximum_cases 계약을 평가한다."
     },
@@ -406,13 +406,13 @@
       "accepted_explanations": [
         "Startup, shutdown, upset, depressuring, recycle, cleaning, flushing 및 standby 전환 조건은 정상 case와 별도로 선정·검증한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "startup shutdown upset cleaning cases를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Startup, shutdown, upset, depressuring, recycle, cleaning, flushing 및 standby 전환 조건은 정상 case와 별도로 선정·검증한다.",
       "description": "startup_shutdown_upset_cleaning_cases 계약을 평가한다."
     },
@@ -452,13 +452,13 @@
       "accepted_explanations": [
         "압력은 absolute 또는 gauge 기준, upstream·downstream 위치, static head 및 line-loss 포함 여부를 명시하여 sizing과 pressure-rating 입력을 혼동하지 않는다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "pressure reference consistency를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "압력은 absolute 또는 gauge 기준, upstream·downstream 위치, static head 및 line-loss 포함 여부를 명시하여 sizing과 pressure-rating 입력을 혼동하지 않는다.",
       "description": "pressure_reference_consistency 계약을 평가한다."
     },
@@ -498,13 +498,13 @@
       "accepted_explanations": [
         "온도 선정 범위는 정상 온도뿐 아니라 startup 열충격, cooldown, heat soak, ambient extreme 및 tracing·insulation 영향을 포함한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "temperature envelope and thermal transient를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "온도 선정 범위는 정상 온도뿐 아니라 startup 열충격, cooldown, heat soak, ambient extreme 및 tracing·insulation 영향을 포함한다.",
       "description": "temperature_envelope_and_thermal_transient 계약을 평가한다."
     },
@@ -544,13 +544,13 @@
       "accepted_explanations": [
         "유량은 mass 또는 volumetric basis, standard 또는 actual condition, measurement uncertainty 및 design contingency를 구분하고 중복 margin을 방지한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "flow basis and uncertainty를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "유량은 mass 또는 volumetric basis, standard 또는 actual condition, measurement uncertainty 및 design contingency를 구분하고 중복 margin을 방지한다.",
       "description": "flow_basis_and_uncertainty 계약을 평가한다."
     },
@@ -592,13 +592,13 @@
       "accepted_explanations": [
         "유체 자료는 liquid·gas·steam·two-phase 구분, composition 범위, density, viscosity, vapor pressure, critical properties, compressibility 및 solids 함량을 case별로 확인한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "fluid phase composition properties를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "유체 자료는 liquid·gas·steam·two-phase 구분, composition 범위, density, viscosity, vapor pressure, critical properties, compressibility 및 solids 함량을 case별로 확인한다.",
       "description": "fluid_phase_composition_properties 계약을 평가한다."
     },
@@ -638,13 +638,13 @@
       "accepted_explanations": [
         "입자 크기·형상·농도, fouling·polymerization 경향, corrosive species, moisture, contaminants 및 cleaning medium은 geometry와 material 선정 입력으로 관리한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "solids fouling corrosion contaminant를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "입자 크기·형상·농도, fouling·polymerization 경향, corrosive species, moisture, contaminants 및 cleaning medium은 geometry와 material 선정 입력으로 관리한다.",
       "description": "solids_fouling_corrosion_contaminant 계약을 평가한다."
     },
@@ -684,20 +684,20 @@
       "accepted_explanations": [
         "선정은 유량 통과만 확인하지 않고 pressure·flow·level·temperature 등 control objective, process gain, dead time, disturbance 및 required response를 반영한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "control objective and loop dynamics를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "선정은 유량 통과만 확인하지 않고 pressure·flow·level·temperature 등 control objective, process gain, dead time, disturbance 및 required response를 반영한다.",
       "description": "control_objective_and_loop_dynamics 계약을 평가한다."
     },
     {
       "id": "rangeability_turndown_travel_distribution",
       "anchor_id": "rangeability_turndown_travel_distribution",
-      "statement": "Required turndown은 Qmax/Qmin만 계산하지 않고 Topic 2·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
+      "statement": "Required turndown은 Qmax/Qmin만 계산하지 않고 `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
       "importance": "core",
       "keywords": [
         "rangeability_turndown_travel_distribution",
@@ -709,7 +709,7 @@
         "authority",
         "gain",
         "travel distribution",
-        "Required turndown은 Qmax/Qmin만 계산하지 않고 Topic 2·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
+        "Required turndown은 Qmax/Qmin만 계산하지 않고 `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle rangeability turndown travel distribution",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 rangeability turndown travel distribution"
       ],
@@ -723,21 +723,21 @@
         "authority",
         "gain",
         "travel distribution",
-        "Required turndown은 Qmax/Qmin만 계산하지 않고 Topic 2·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
+        "Required turndown은 Qmax/Qmin만 계산하지 않고 `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle rangeability turndown travel distribution",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 rangeability turndown travel distribution"
       ],
       "accepted_explanations": [
-        "Required turndown은 Qmax/Qmin만 계산하지 않고 Topic 2·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
+        "Required turndown은 Qmax/Qmin만 계산하지 않고 `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "rangeability turndown travel distribution를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
-      "claim": "Required turndown은 Qmax/Qmin만 계산하지 않고 Topic 2·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "claim": "Required turndown은 Qmax/Qmin만 계산하지 않고 `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
       "description": "rangeability_turndown_travel_distribution 계약을 평가한다."
     },
     {
@@ -776,13 +776,13 @@
       "accepted_explanations": [
         "Shutoff differential pressure, required leakage, isolation objective, flow direction, fail action 및 loss-of-air·power·signal 상태를 하나의 기능 요구로 정의한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "shutoff leakage fail action를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Shutoff differential pressure, required leakage, isolation objective, flow direction, fail action 및 loss-of-air·power·signal 상태를 하나의 기능 요구로 정의한다.",
       "description": "shutoff_leakage_fail_action 계약을 평가한다."
     },
@@ -822,13 +822,13 @@
       "accepted_explanations": [
         "Pressure containment, fire-safe, fugitive emission, hazardous area, noise, SIL·SIF·ESD, environmental release 및 적용 법규 요구를 selection matrix에 포함한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "safety environmental regulatory requirements를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Pressure containment, fire-safe, fugitive emission, hazardous area, noise, SIL·SIF·ESD, environmental release 및 적용 법규 요구를 selection matrix에 포함한다.",
       "description": "safety_environmental_regulatory_requirements 계약을 평가한다."
     },
@@ -868,20 +868,20 @@
       "accepted_explanations": [
         "Stroke·trip·settling response, allowable downtime, required availability, repair-time target 및 bypass 허용조건을 명시하여 actuator와 maintenance 전략에 반영한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "response time and availability requirement를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Stroke·trip·settling response, allowable downtime, required availability, repair-time target 및 bypass 허용조건을 명시하여 actuator와 maintenance 전략에 반영한다.",
       "description": "response_time_and_availability_requirement 계약을 평가한다."
     },
     {
       "id": "specialist_calculation_handoff",
       "anchor_id": "specialist_calculation_handoff",
-      "statement": "Topic 1~15의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
+      "statement": "specialist Topic Packs의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
       "importance": "core",
       "keywords": [
         "specialist_calculation_handoff",
@@ -893,7 +893,7 @@
         "margin",
         "limitation",
         "review status",
-        "Topic 1~15의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
+        "specialist Topic Packs의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle specialist calculation handoff",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 specialist calculation handoff"
       ],
@@ -907,27 +907,27 @@
         "margin",
         "limitation",
         "review status",
-        "Topic 1~15의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
+        "specialist Topic Packs의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle specialist calculation handoff",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 specialist calculation handoff"
       ],
       "accepted_explanations": [
-        "Topic 1~15의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
+        "specialist Topic Packs의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "specialist calculation handoff를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
-      "claim": "Topic 1~15의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "claim": "specialist Topic Packs의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
       "description": "specialist_calculation_handoff 계약을 평가한다."
     },
     {
       "id": "liquid_gas_sizing_cross_check",
       "anchor_id": "liquid_gas_sizing_cross_check",
-      "statement": "Topic 6·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
+      "statement": "`control_valve_sizing_cv_kv_reynolds_liquid_selection`·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
       "importance": "core",
       "keywords": [
         "liquid_gas_sizing_cross_check",
@@ -939,7 +939,7 @@
         "correction factor",
         "choking",
         "vendor sizing",
-        "Topic 6·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
+        "`control_valve_sizing_cv_kv_reynolds_liquid_selection`·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle liquid gas sizing cross check",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 liquid gas sizing cross check"
       ],
@@ -953,27 +953,27 @@
         "correction factor",
         "choking",
         "vendor sizing",
-        "Topic 6·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
+        "`control_valve_sizing_cv_kv_reynolds_liquid_selection`·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle liquid gas sizing cross check",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 liquid gas sizing cross check"
       ],
       "accepted_explanations": [
-        "Topic 6·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
+        "`control_valve_sizing_cv_kv_reynolds_liquid_selection`·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "liquid gas sizing cross check를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
-      "claim": "Topic 6·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "claim": "`control_valve_sizing_cv_kv_reynolds_liquid_selection`·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
       "description": "liquid_gas_sizing_cross_check 계약을 평가한다."
     },
     {
       "id": "authority_installed_characteristic_cross_check",
       "anchor_id": "authority_installed_characteristic_cross_check",
-      "statement": "Topic 2·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
+      "statement": "`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
       "importance": "core",
       "keywords": [
         "authority_installed_characteristic_cross_check",
@@ -985,7 +985,7 @@
         "valve authority",
         "installed gain",
         "system pressure",
-        "Topic 2·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
+        "`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle authority installed characteristic cross check",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 authority installed characteristic cross check"
       ],
@@ -999,27 +999,27 @@
         "valve authority",
         "installed gain",
         "system pressure",
-        "Topic 2·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
+        "`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle authority installed characteristic cross check",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 authority installed characteristic cross check"
       ],
       "accepted_explanations": [
-        "Topic 2·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
+        "`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "authority installed characteristic cross check를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
-      "claim": "Topic 2·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "claim": "`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
       "description": "authority_installed_characteristic_cross_check 계약을 평가한다."
     },
     {
       "id": "cavitation_flashing_noise_velocity_cross_check",
       "anchor_id": "cavitation_flashing_noise_velocity_cross_check",
-      "statement": "Topic 8·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
+      "statement": "`control_valve_cavitation_flashing_choked_flow_damage_prevention`·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
       "importance": "core",
       "keywords": [
         "cavitation_flashing_noise_velocity_cross_check",
@@ -1031,7 +1031,7 @@
         "noise",
         "velocity",
         "vibration",
-        "Topic 8·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
+        "`control_valve_cavitation_flashing_choked_flow_damage_prevention`·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle cavitation flashing noise velocity cross check",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 cavitation flashing noise velocity cross check"
       ],
@@ -1045,27 +1045,27 @@
         "noise",
         "velocity",
         "vibration",
-        "Topic 8·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
+        "`control_valve_cavitation_flashing_choked_flow_damage_prevention`·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle cavitation flashing noise velocity cross check",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 cavitation flashing noise velocity cross check"
       ],
       "accepted_explanations": [
-        "Topic 8·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
+        "`control_valve_cavitation_flashing_choked_flow_damage_prevention`·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "cavitation flashing noise velocity cross check를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
-      "claim": "Topic 8·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "claim": "`control_valve_cavitation_flashing_choked_flow_damage_prevention`·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
       "description": "cavitation_flashing_noise_velocity_cross_check 계약을 평가한다."
     },
     {
       "id": "severe_service_and_material_cross_check",
       "anchor_id": "severe_service_and_material_cross_check",
-      "statement": "Topic 10·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
+      "statement": "`balanced_trim_unbalanced_trim_structure_sealing_applications`·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
       "importance": "core",
       "keywords": [
         "severe_service_and_material_cross_check",
@@ -1078,7 +1078,7 @@
         "particle",
         "erosion",
         "corrosion",
-        "Topic 10·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
+        "`balanced_trim_unbalanced_trim_structure_sealing_applications`·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle severe service and material cross check",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 severe service and material cross check"
       ],
@@ -1093,21 +1093,21 @@
         "particle",
         "erosion",
         "corrosion",
-        "Topic 10·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
+        "`balanced_trim_unbalanced_trim_structure_sealing_applications`·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
         "control_valve_selection_process_pressure_temperature_flow_media_lifecycle severe service and material cross check",
         "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차 severe service and material cross check"
       ],
       "accepted_explanations": [
-        "Topic 10·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
+        "`balanced_trim_unbalanced_trim_structure_sealing_applications`·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "severe service and material cross check를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
-      "claim": "Topic 10·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "claim": "`balanced_trim_unbalanced_trim_structure_sealing_applications`·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
       "description": "severe_service_and_material_cross_check 계약을 평가한다."
     },
     {
@@ -1146,13 +1146,13 @@
       "accepted_explanations": [
         "Topic 15가 적용되는 경우 safe state, final-element boundary, PFDavg·PFH budget, response time, PST·proof-test 및 bypass requirement를 일반 control-valve 선정과 구분하여 통합한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "final element sis esd cross check를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Topic 15가 적용되는 경우 safe state, final-element boundary, PFDavg·PFH budget, response time, PST·proof-test 및 bypass requirement를 일반 control-valve 선정과 구분하여 통합한다.",
       "description": "final_element_sis_esd_cross_check 계약을 평가한다."
     },
@@ -1192,13 +1192,13 @@
       "accepted_explanations": [
         "후보안은 capacity, controllability, damage risk, safety, emissions, maintainability, delivery, cost 및 evidence quality를 공통 척도로 비교하며 필수조건 미충족안은 가중점수로 보상하지 않는다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "selection matrix tradeoff를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "후보안은 capacity, controllability, damage risk, safety, emissions, maintainability, delivery, cost 및 evidence quality를 공통 척도로 비교하며 필수조건 미충족안은 가중점수로 보상하지 않는다.",
       "description": "selection_matrix_tradeoff 계약을 평가한다."
     },
@@ -1236,13 +1236,13 @@
       "accepted_explanations": [
         "Process uncertainty, calculation uncertainty, manufacturer tolerance 및 project contingency를 분리하여 기록하고 동일 위험에 margin을 중복 적용하지 않는다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "uncertainty margin and double margin를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Process uncertainty, calculation uncertainty, manufacturer tolerance 및 project contingency를 분리하여 기록하고 동일 위험에 margin을 중복 적용하지 않는다.",
       "description": "uncertainty_margin_and_double_margin 계약을 평가한다."
     },
@@ -1282,13 +1282,13 @@
       "accepted_explanations": [
         "Globe, angle, ball, butterfly 및 specialty body는 capacity뿐 아니라 pressure recovery, solids passage, erosion path, leakage, piping layout, weight 및 maintenance access로 선정한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "valve body flow path selection를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Globe, angle, ball, butterfly 및 specialty body는 capacity뿐 아니라 pressure recovery, solids passage, erosion path, leakage, piping layout, weight 및 maintenance access로 선정한다.",
       "description": "valve_body_flow_path_selection 계약을 평가한다."
     },
@@ -1328,13 +1328,13 @@
       "accepted_explanations": [
         "Trim type, port geometry, characteristic, flow-to-open·flow-to-close 방향 및 staged pressure reduction은 control objective와 force·damage·stability 결과를 함께 만족해야 한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "trim characteristic and flow direction를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Trim type, port geometry, characteristic, flow-to-open·flow-to-close 방향 및 staged pressure reduction은 control objective와 force·damage·stability 결과를 함께 만족해야 한다.",
       "description": "trim_characteristic_and_flow_direction 계약을 평가한다."
     },
@@ -1374,13 +1374,13 @@
       "accepted_explanations": [
         "Body, bonnet, flange 및 pressure-containing parts의 class와 rating은 design pressure·temperature envelope, material group, corrosion allowance 및 applicable code로 검증한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "pressure temperature rating and class를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Body, bonnet, flange 및 pressure-containing parts의 class와 rating은 design pressure·temperature envelope, material group, corrosion allowance 및 applicable code로 검증한다.",
       "description": "pressure_temperature_rating_and_class 계약을 평가한다."
     },
@@ -1420,13 +1420,13 @@
       "accepted_explanations": [
         "Body·trim·stem·seat·fastener material은 base fluid명만이 아니라 composition, concentration, temperature, velocity, galvanic pair, erosion-corrosion 및 cleaning chemical을 고려한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "material compatibility and corrosion를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Body·trim·stem·seat·fastener material은 base fluid명만이 아니라 composition, concentration, temperature, velocity, galvanic pair, erosion-corrosion 및 cleaning chemical을 고려한다.",
       "description": "material_compatibility_and_corrosion 계약을 평가한다."
     },
@@ -1466,13 +1466,13 @@
       "accepted_explanations": [
         "Seat, packing, gasket 및 bonnet design은 shutoff leakage, external leakage, fugitive emission, fire-safe, temperature cycling 및 maintenance frequency를 함께 만족해야 한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "seat packing gasket emissions를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Seat, packing, gasket 및 bonnet design은 shutoff leakage, external leakage, fugitive emission, fire-safe, temperature cycling 및 maintenance frequency를 함께 만족해야 한다.",
       "description": "seat_packing_gasket_emissions 계약을 평가한다."
     },
@@ -1512,13 +1512,13 @@
       "accepted_explanations": [
         "Actuator는 Topic 1의 worst-case thrust·torque, shutoff load, friction, unbalance, minimum credible supply, spring range 및 required speed를 기준으로 선정한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "actuator thrust torque supply minimum를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Actuator는 Topic 1의 worst-case thrust·torque, shutoff load, friction, unbalance, minimum credible supply, spring range 및 required speed를 기준으로 선정한다.",
       "description": "actuator_thrust_torque_supply_minimum 계약을 평가한다."
     },
@@ -1558,13 +1558,13 @@
       "accepted_explanations": [
         "Fail-open·fail-close·fail-in-place 결정은 hazard basis와 일치해야 하며 spring, accumulator, air reservoir 또는 electrical stored energy의 실제 usable capacity를 검증한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "fail action spring and stored energy를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Fail-open·fail-close·fail-in-place 결정은 hazard basis와 일치해야 하며 spring, accumulator, air reservoir 또는 electrical stored energy의 실제 usable capacity를 검증한다.",
       "description": "fail_action_spring_and_stored_energy 계약을 평가한다."
     },
@@ -1604,13 +1604,13 @@
       "accepted_explanations": [
         "Positioner, I/P, solenoid, volume booster, quick exhaust, filter regulator, limit switch 및 feedback device는 response, capacity, diagnostics, hazardous area 및 failure interaction으로 package 선정한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "positioner solenoid booster accessory package를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Positioner, I/P, solenoid, volume booster, quick exhaust, filter regulator, limit switch 및 feedback device는 response, capacity, diagnostics, hazardous area 및 failure interaction으로 package 선정한다.",
       "description": "positioner_solenoid_booster_accessory_package 계약을 평가한다."
     },
@@ -1652,13 +1652,13 @@
       "accepted_explanations": [
         "선정은 orientation, actuator envelope, support, piping load, vibration, drain·vent, insulation, heat tracing, platform access, removal path 및 lifting 조건까지 포함한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "installation orientation piping load accessibility를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "선정은 orientation, actuator envelope, support, piping load, vibration, drain·vent, insulation, heat tracing, platform access, removal path 및 lifting 조건까지 포함한다.",
       "description": "installation_orientation_piping_load_accessibility 계약을 평가한다."
     },
@@ -1698,13 +1698,13 @@
       "accepted_explanations": [
         "Datasheet는 모든 governing case, units, reference condition, property source, functional requirement, material, accessory, testing 및 documentation 항목을 빈칸 없이 disposition한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "datasheet completeness and units를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Datasheet는 모든 governing case, units, reference condition, property source, functional requirement, material, accessory, testing 및 documentation 항목을 빈칸 없이 disposition한다.",
       "description": "datasheet_completeness_and_units 계약을 평가한다."
     },
@@ -1744,13 +1744,13 @@
       "accepted_explanations": [
         "Requisition은 supply boundary, applicable codes, inspection, test, certification, guaranteed performance, spare parts, documentation, delivery 및 warranty를 명확히 정의한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "requisition scope and guarantees를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Requisition은 supply boundary, applicable codes, inspection, test, certification, guaranteed performance, spare parts, documentation, delivery 및 warranty를 명확히 정의한다.",
       "description": "requisition_scope_and_guarantees 계약을 평가한다."
     },
@@ -1790,13 +1790,13 @@
       "accepted_explanations": [
         "Vendor bid는 동일 datasheet revision과 case basis로 비교하고 sizing, materials, actuator, accessories, testing, documents, delivery 및 lifecycle support 차이를 tabulation한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "vendor bid technical comparison를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Vendor bid는 동일 datasheet revision과 case basis로 비교하고 sizing, materials, actuator, accessories, testing, documents, delivery 및 lifecycle support 차이를 tabulation한다.",
       "description": "vendor_bid_technical_comparison 계약을 평가한다."
     },
@@ -1836,13 +1836,13 @@
       "accepted_explanations": [
         "Vendor deviation과 exception은 요구 ID, 기술 영향, risk, compensating measure, owner, due date 및 승인 상태를 deviation register로 관리한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "deviation exception risk register를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Vendor deviation과 exception은 요구 ID, 기술 영향, risk, compensating measure, owner, due date 및 승인 상태를 deviation register로 관리한다.",
       "description": "deviation_exception_risk_register 계약을 평가한다."
     },
@@ -1882,13 +1882,13 @@
       "accepted_explanations": [
         "Vendor 계산과 selection software 결과는 입력 case, units, proprietary coefficient, correction, warning, trim option 및 guarantee basis를 독립 검토한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "vendor sizing assumption validation를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Vendor 계산과 selection software 결과는 입력 case, units, proprietary coefficient, correction, warning, trim option 및 guarantee basis를 독립 검토한다.",
       "description": "vendor_sizing_assumption_validation 계약을 평가한다."
     },
@@ -1928,13 +1928,13 @@
       "accepted_explanations": [
         "구매 이후 datasheet, drawing, calculation, material list, firmware, accessory model 및 setpoint 변경은 approved configuration과 revision history로 통제한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "document and configuration control를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "구매 이후 datasheet, drawing, calculation, material list, firmware, accessory model 및 setpoint 변경은 approved configuration과 revision history로 통제한다.",
       "description": "document_and_configuration_control 계약을 평가한다."
     },
@@ -1974,13 +1974,13 @@
       "accepted_explanations": [
         "Inspection and Test Plan은 material receipt, machining, assembly, pressure test, leakage, functional test, painting, packing 및 shipment 단계의 witness·hold·review point를 정의한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "inspection test plan and hold points를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Inspection and Test Plan은 material receipt, machining, assembly, pressure test, leakage, functional test, painting, packing 및 shipment 단계의 witness·hold·review point를 정의한다.",
       "description": "inspection_test_plan_and_hold_points 계약을 평가한다."
     },
@@ -2020,13 +2020,13 @@
       "accepted_explanations": [
         "Material certificate, heat number, positive material identification, NDE, weld·hardfacing procedure 및 traceability는 지정 class와 service criticality에 따라 검증한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "material certification nde traceability를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Material certificate, heat number, positive material identification, NDE, weld·hardfacing procedure 및 traceability는 지정 class와 service criticality에 따라 검증한다.",
       "description": "material_certification_nde_traceability 계약을 평가한다."
     },
@@ -2066,13 +2066,13 @@
       "accepted_explanations": [
         "FAT는 pressure boundary, seat leakage, stroke, fail action, position indication, accessory logic, response, calibration 및 document completeness를 사전 합의한 acceptance criterion으로 판정한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "fat functional performance acceptance를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "FAT는 pressure boundary, seat leakage, stroke, fail action, position indication, accessory logic, response, calibration 및 document completeness를 사전 합의한 acceptance criterion으로 판정한다.",
       "description": "fat_functional_performance_acceptance 계약을 평가한다."
     },
@@ -2112,13 +2112,13 @@
       "accepted_explanations": [
         "SAT와 loop check는 실제 wiring·air supply·logic·interlock 조건에서 command, feedback, stroke, response, fail action 및 필요 시 installed leakage를 검증한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "sat loop stroke response leakage를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "SAT와 loop check는 실제 wiring·air supply·logic·interlock 조건에서 command, feedback, stroke, response, fail action 및 필요 시 installed leakage를 검증한다.",
       "description": "sat_loop_stroke_response_leakage 계약을 평가한다."
     },
@@ -2158,13 +2158,13 @@
       "accepted_explanations": [
         "Commissioning은 실제 process condition에서 travel distribution, oscillation, deadband, noise, cavitation, response, leakage 및 control objective 달성 여부를 확인한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "commissioning installed performance verification를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Commissioning은 실제 process condition에서 travel distribution, oscillation, deadband, noise, cavitation, response, leakage 및 control objective 달성 여부를 확인한다.",
       "description": "commissioning_installed_performance_verification 계약을 평가한다."
     },
@@ -2204,13 +2204,13 @@
       "accepted_explanations": [
         "As-built datasheet, drawing, configuration, calibration, test record, spare list, maintenance instruction 및 open item은 운영 조직에 완결된 baseline으로 인계한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "as built baseline and handover를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "As-built datasheet, drawing, configuration, calibration, test record, spare list, maintenance instruction 및 open item은 운영 조직에 완결된 baseline으로 인계한다.",
       "description": "as_built_baseline_and_handover 계약을 평가한다."
     },
@@ -2250,13 +2250,13 @@
       "accepted_explanations": [
         "Reliability와 availability는 failure mode, duty cycle, environment, MTBF·MTTR assumption, online repair 가능성, bypass 및 maintenance access를 근거로 평가한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "reliability availability maintainability를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Reliability와 availability는 failure mode, duty cycle, environment, MTBF·MTTR assumption, online repair 가능성, bypass 및 maintenance access를 근거로 평가한다.",
       "description": "reliability_availability_maintainability 계약을 평가한다."
     },
@@ -2296,13 +2296,13 @@
       "accepted_explanations": [
         "Recommended spares는 criticality, installed population, lead time, interchangeability, storage life, repair capability 및 obsolescence risk를 기준으로 정한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "spare parts interchangeability obsolescence를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Recommended spares는 criticality, installed population, lead time, interchangeability, storage life, repair capability 및 obsolescence risk를 기준으로 정한다.",
       "description": "spare_parts_interchangeability_obsolescence 계약을 평가한다."
     },
@@ -2342,13 +2342,13 @@
       "accepted_explanations": [
         "Lifecycle evaluation은 purchase price뿐 아니라 pressure-loss energy, maintenance labor, consumables, turnaround, failure downtime, production loss, service life 및 disposal cost를 포함한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "lifecycle cost energy downtime를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Lifecycle evaluation은 purchase price뿐 아니라 pressure-loss energy, maintenance labor, consumables, turnaround, failure downtime, production loss, service life 및 disposal cost를 포함한다.",
       "description": "lifecycle_cost_energy_downtime 계약을 평가한다."
     },
@@ -2388,13 +2388,13 @@
       "accepted_explanations": [
         "Demand, trip, control instability, wear, leakage, repair, diagnostic, as-found·as-left 및 vendor notice는 failure database에 반영하고 MOC와 periodic revalidation으로 선정 기준을 갱신한다.",
         "요구조건 → 분석 hand-off → 통합 선정 → 증빙 → 수명주기 feedback의 연결을 평가한다.",
-        "개별 전문 계산은 Topic 1~15가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
+        "개별 전문 계산은 specialist Topic Packs가 소유하며 Topic 16은 결과의 정합성과 의사결정 사용을 소유한다."
       ],
       "rejected_explanations": [
         "field feedback moc revalidation를 단일 정상 case, 단일 계산값, vendor software 결과 또는 고정 rule로 확정하고 governing document, operating envelope, specialist hand-off, deviation, acceptance evidence와 lifecycle feedback을 생략한다."
       ],
       "grading_notes": "요구조건 출처와 operating case, 전문 분석 hand-off, package trade-off, vendor deviation, acceptance evidence 및 lifecycle closure를 논리적으로 연결하는지 평가한다.",
-      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; Topic 1~15 source packs for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
+      "source_basis": "docs/topic_sheets/control_valve_selection_process_pressure_temperature_flow_media_lifecycle.md; approved Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list and project datasheet/requisition; IEC/ISA/ASME/API and company engineering requirements as applicable; vendor sizing sheets, material certificates, ITP, FAT/SAT records and configuration documents subject to project revision control; specialist Topic Packs identified by stable Topic ID for specialist actuator, characteristic, dynamic, sizing, cavitation, noise, trim, accessory, diagnostics, leakage, severe-service and SIS final-element hand-offs; gemini_script/20260806_topic16_control_valve_selection_process_lifecycle_requirements.md.",
       "claim": "Demand, trip, control instability, wear, leakage, repair, diagnostic, as-found·as-left 및 vendor notice는 failure database에 반영하고 MOC와 periodic revalidation으로 선정 기준을 갱신한다.",
       "description": "field_feedback_moc_revalidation 계약을 평가한다."
     }
@@ -2770,7 +2770,7 @@
     "Minimum·normal·maximum·startup·shutdown·upset case를 분리한다.",
     "압력 reference와 유량 basis를 명시한다.",
     "Phase, composition과 fluid property source를 case별로 확인한다.",
-    "Topic 1~15의 전문 결과는 assumption과 limitation을 포함해 hand-off한다.",
+    "specialist Topic Packs의 전문 결과는 assumption과 limitation을 포함해 hand-off한다.",
     "Mandatory requirement 미충족안은 weighted score로 보상하지 않는다.",
     "Uncertainty와 contingency를 분리하고 double margin을 방지한다.",
     "Required Cv와 selected Cv의 margin은 controllability와 함께 평가한다.",
@@ -2791,11 +2791,11 @@
   "revision_notes": [
     "52개 통합 제어밸브 선정 Fact Anchor와 26개 Fatal misconception을 추가했다.",
     "Operating case, specialist hand-off, package trade-off, procurement, acceptance와 lifecycle closure를 연결했다.",
-    "Topic 1~15의 전문 계산 소유권과 Topic 16의 통합 의사결정 소유권을 분리했다."
+    "specialist Topic Packs의 전문 계산 소유권과 Topic 16의 통합 의사결정 소유권을 분리했다."
   ],
   "topic_label": "제어밸브 통합 선정·공정조건·Vendor 평가·검증·수명주기",
   "core_facts": [
-    "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, Topic 1~15 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
+    "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, specialist Topic Packs 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
     "선정 기준은 Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list, equipment data 및 회사·법규 기준의 개정번호와 우선순위를 확인하여 충돌 없이 적용한다.",
     "각 선정 입력과 결과는 원 요구 문서, 계산서, datasheet 항목, vendor 응답, 시험 기준 및 최종 승인 근거까지 양방향으로 추적할 수 있어야 한다.",
     "밸브 tag별 service boundary는 upstream·downstream equipment, bypass, isolation, recirculation, control-loop 역할 및 정상·비정상 유로를 포함하여 정의한다.",
@@ -2810,15 +2810,15 @@
     "유체 자료는 liquid·gas·steam·two-phase 구분, composition 범위, density, viscosity, vapor pressure, critical properties, compressibility 및 solids 함량을 case별로 확인한다.",
     "입자 크기·형상·농도, fouling·polymerization 경향, corrosive species, moisture, contaminants 및 cleaning medium은 geometry와 material 선정 입력으로 관리한다.",
     "선정은 유량 통과만 확인하지 않고 pressure·flow·level·temperature 등 control objective, process gain, dead time, disturbance 및 required response를 반영한다.",
-    "Required turndown은 Qmax/Qmin만 계산하지 않고 Topic 2·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
+    "Required turndown은 Qmax/Qmin만 계산하지 않고 `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
     "Shutoff differential pressure, required leakage, isolation objective, flow direction, fail action 및 loss-of-air·power·signal 상태를 하나의 기능 요구로 정의한다.",
     "Pressure containment, fire-safe, fugitive emission, hazardous area, noise, SIL·SIF·ESD, environmental release 및 적용 법규 요구를 selection matrix에 포함한다.",
     "Stroke·trip·settling response, allowable downtime, required availability, repair-time target 및 bypass 허용조건을 명시하여 actuator와 maintenance 전략에 반영한다.",
-    "Topic 1~15의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
-    "Topic 6·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
-    "Topic 2·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
-    "Topic 8·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
-    "Topic 10·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
+    "specialist Topic Packs의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
+    "`control_valve_sizing_cv_kv_reynolds_liquid_selection`·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
+    "`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
+    "`control_valve_cavitation_flashing_choked_flow_damage_prevention`·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
+    "`balanced_trim_unbalanced_trim_structure_sealing_applications`·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
     "Topic 15가 적용되는 경우 safe state, final-element boundary, PFDavg·PFH budget, response time, PST·proof-test 및 bypass requirement를 일반 control-valve 선정과 구분하여 통합한다.",
     "후보안은 capacity, controllability, damage risk, safety, emissions, maintainability, delivery, cost 및 evidence quality를 공통 척도로 비교하며 필수조건 미충족안은 가중점수로 보상하지 않는다.",
     "Process uncertainty, calculation uncertainty, manufacturer tolerance 및 project contingency를 분리하여 기록하고 동일 위험에 margin을 중복 적용하지 않는다.",

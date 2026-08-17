@@ -42,22 +42,27 @@ Supported tertiary: `IMPLEMENTATION_EVALUATION`
 
 ## 경계
 
-- Actuator thrust·seat-load sizing: Topic 1
-- Packing friction·stiction·dynamic response: Topic 3
-- Cavitation·flashing damage physics: Topic 8
-- Balanced trim·balance-seal mechanics: Topic 10
-- Positioner·I/P calibration: Topic 11
-- Valve signature·predictive diagnostics: Topic 12
-- Severe-service package design: Topic 14
-- SIS·ESD·PST·proof-test credit: Topic 15
-- Full valve-package lifecycle: Topic 16
+- Actuator thrust·seat-load sizing: `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`
+- Packing friction·stiction·dynamic response: `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`
+- Cavitation·flashing damage physics: `control_valve_cavitation_flashing_choked_flow_damage_prevention`
+- Balanced trim·balance-seal mechanics: `balanced_trim_unbalanced_trim_structure_sealing_applications`
+- Positioner·I/P calibration: `control_valve_positioner_ip_converter_booster_accessories_calibration`
+- Valve signature·predictive diagnostics: `smart_positioner_diagnostics_valve_signature_predictive_maintenance`
+- Severe-service package design: `control_valve_severe_service_high_low_flow_temperature_cryogenic_particles`
+- SIS·ESD·PST·proof-test credit: `final_control_element_sil_sis_esd_valve_partial_stroke_test`
+- Full valve-package lifecycle: `control_valve_selection_process_pressure_temperature_flow_media_lifecycle`
+- 본 Topic은 leakage class, test condition, acceptance와 packing·fugitive-emission 성능 판정을 소유한다.
+- Lapping, packing 교체, 분해·재조립과 수리 후 복원 절차는 향후 Valve Maintenance 전문 Topic으로 hand-off할 계획이다.
+- 개별 산업표준의 판본·시험장치·인증·approval 상세는 향후 Valve Standards·Approvals 전문 Topic으로 hand-off할 계획이다.
+- 아직 생성되지 않은 두 전문 Topic은 active routing alias나 cross-topic ID로 사용하지 않는다.
 
 ## Source
 
 - `docs/topic_sheets/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions.md`
 - Control Valve Handbook seat leakage, packing and emissions sections
 - Control Valve Primer seat sealing and field-maintenance sections
-- Topic 1, Topic 3, Topic 8, Topic 10, Topic 11 and Topic 12 source packs
+- `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`, `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`, `control_valve_cavitation_flashing_choked_flow_damage_prevention`, `balanced_trim_unbalanced_trim_structure_sealing_applications`, `control_valve_positioner_ip_converter_booster_accessories_calibration` 및 `smart_positioner_diagnostics_valve_signature_predictive_maintenance` source packs
+- Leakage class는 class 명칭만이 아니라 fluid, pressure, temperature, direction, seat load, test duration과 측정방법을 함께 확인한다.
 - `gemini_script/20260805_topic13_seat_leakage_packing_emissions_requirements.md`
 
 Source JSON authored. Generated-bank build and focused regression are separate stages.

@@ -34,13 +34,15 @@
 - Severe service 상세는 Topic 14이다.
 - 전체 valve package workflow는 Topic 16이다.
 
-## Legacy ownership
+## Historical alias handling
+
+과거 자료에서 다음 명칭이 나타나면 이 Topic으로 라우팅한다.
 
 - `control_valve_body_trim_selection`
 - `control_valve_actuator_types_selection`
 
-위 legacy Topic은 삭제하지 않는다.
-Modern Topic 4가 본체 형식과 actuator 비교·선정의 주 소유권을 가진다.
+현재 Source Topic Pack에는 위 명칭의 별도 Legacy Topic을 유지하지 않는다.
+본 Topic이 제어밸브 본체 형식과 actuator 종류·비교·선정의 주 소유권을 가진다.
 
 ## Logic Check 정책
 

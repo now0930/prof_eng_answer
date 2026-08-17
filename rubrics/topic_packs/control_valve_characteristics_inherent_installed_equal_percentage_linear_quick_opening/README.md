@@ -30,12 +30,21 @@ Linear, Equal Percentage 및 Quick Opening의 곡선과 선정기준을 평가�
 
 ## Boundary
 
-- actuator force, friction와 Fail-Safe spring: Topic 1 참조
-- Valve Authority, Rangeability와 quantitative gain: Topic 3
-- Cv·Kv와 liquid sizing: Topic 4
-- cavitation, flashing와 choked liquid flow: Topic 6
-- Balanced·Unbalanced trim 상세: Topic 8
-- stiction, deadband와 hysteresis 상세: Topic 11
+- Actuator force, friction와 fail-safe spring: `control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe`
+- Valve authority, rangeability와 quantitative installed gain: `control_valve_authority_rangeability_gain_installed_performance`
+- Cv·Kv와 liquid sizing: `control_valve_sizing_cv_kv_reynolds_liquid_selection`
+- Cavitation, flashing와 choked liquid flow: `control_valve_cavitation_flashing_choked_flow_damage_prevention`
+- Balanced·unbalanced trim 상세: `balanced_trim_unbalanced_trim_structure_sealing_applications`
+- Stiction, deadband와 hysteresis 상세: `control_valve_deadband_stiction_response_time_positioner_dynamic_performance`
+- 전체 package 선정과 lifecycle hand-off: `control_valve_selection_process_pressure_temperature_flow_media_lifecycle`
+
+## Source basis and hand-off
+
+- `docs/topic_sheets/control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening.md`
+- Control Valve Handbook의 inherent·installed characteristic 및 system pressure-distribution 설명
+- Control Valve Primer의 linear·equal-percentage·quick-opening 적용 설명
+- Authority·installed gain의 정량 평가는 `control_valve_authority_rangeability_gain_installed_performance` 결과를 인수한다.
+- Catalog characteristic 명칭만으로 선정하지 않고 pump curve, static head, system resistance와 commissioning 결과를 교차검증한다.
 
 ## Source inventory
 

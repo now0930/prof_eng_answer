@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import json
 import math
+import re
 import sys
 import unittest
 from pathlib import Path
@@ -75,6 +76,40 @@ SEMANTIC_CLUSTERS = {'governing': ('Process Design Basis', 'PFD', 'P&ID', 'SRS',
 POSITIVE_ANSWER = 'Process Design Basis, PFD, P&ID, SRS와 requirement traceability를 확정한다.\nMinimum normal maximum startup shutdown upset cleaning operating case를 분리한다.\nPressure reference, temperature envelope, flow basis, phase, composition과\nvapor pressure를 확인한다. Topic 6 liquid sizing, Topic 7 gas sizing,\nTopic 5 valve authority, Topic 8 cavitation flashing, Topic 9 noise와\nTopic 14 severe service 결과를 hand-off한다. Valve body, trim,\nmaterial compatibility, actuator, positioner와 solenoid를 package로 선정한다.\nDatasheet, requisition, vendor bid, deviation과 configuration control을 수행한다.\nInspection Test Plan, FAT, SAT, commissioning과 as-built를 acceptance evidence로\n관리한다. Reliability, availability, maintainability, spare parts,\nlifecycle cost, MOC와 revalidation을 폐루프로 연결한다.'
 SAFE_ANSWER = 'Control valve integrated selection process는 Process Design Basis와\noperating case matrix에서 시작한다. Pressure reference와 flow basis를 명시한다.\nTopic 1 hand-off부터 Topic 15 hand-off까지 assumption, margin과 limitation을\n검토한다. Mandatory gate를 통과한 후보만 weighted score로 비교한다.\nDatasheet, vendor bid와 deviation을 추적한다. FAT SAT commissioning으로\ninstalled performance를 인수한다. Reliability availability maintainability와\nlifecycle cost를 평가하고 field feedback을 MOC revalidation에 반영한다.'
 FORMULA_SOURCE_IDS = ['capacity_utilization', 'capacity_margin', 'installed_range_requirement', 'range_margin', 'valve_authority_handoff', 'hydraulic_energy_loss_power', 'availability', 'expected_downtime_cost', 'discounted_lifecycle_cost', 'weighted_selection_score', 'requirement_coverage', 'deviation_closure_rate']
+
+HANDOFF_TOPIC_IDS = (
+    TOPIC_1,
+    TOPIC_2,
+    TOPIC_3,
+    TOPIC_4,
+    TOPIC_5,
+    TOPIC_6,
+    TOPIC_7,
+    TOPIC_8,
+    TOPIC_9,
+    TOPIC_10,
+    TOPIC_11,
+    TOPIC_12,
+    TOPIC_13,
+    TOPIC_14,
+    TOPIC_15,
+)
+
+
+def handoff_registry_matches(
+    points: list[Any],
+    topic_id: str,
+) -> list[Any]:
+    pattern = re.compile(
+        rf"^\s*`?{re.escape(topic_id)}`?\s+hand-off\b",
+        re.IGNORECASE,
+    )
+    return [
+        point
+        for point in points
+        if pattern.search(str(point))
+    ]
+
 
 
 def load_json(path: Path) -> dict[str, Any]:
@@ -608,24 +643,23 @@ class GeneratedContractRegressionTests(unittest.TestCase):
             generated_points,
             points,
         )
-        for number in range(1, 16):
-            prefix = f"Topic {number} hand-off:"
-            source_matches = [
-                point
-                for point in points
-                if str(point).startswith(prefix)
-            ]
-            generated_matches = [
-                point
-                for point in generated_points
-                if str(point).startswith(prefix)
-            ]
+        for topic_id in HANDOFF_TOPIC_IDS:
             self.assertEqual(
-                len(source_matches),
+                len(
+                    handoff_registry_matches(
+                        points,
+                        topic_id,
+                    )
+                ),
                 1,
             )
             self.assertEqual(
-                len(generated_matches),
+                len(
+                    handoff_registry_matches(
+                        generated_points,
+                        topic_id,
+                    )
+                ),
                 1,
             )
 
@@ -652,7 +686,7 @@ class GeneratedContractRegressionTests(unittest.TestCase):
                 )
 
 
-ANCHOR_MARKER_CASES = {'selection_process_ownership': ('Topic 16', 'Topic 1~15', '수명주기', '선정 의사결정'), 'operating_case_matrix': ('upstream·downstream pressure', 'temperature', 'phase', 'composition', 'property source'), 'pressure_reference_consistency': ('absolute', 'gauge', 'static head', 'line-loss', 'pressure-rating'), 'fluid_phase_composition_properties': ('two-phase', 'density', 'viscosity', 'vapor pressure', 'compressibility'), 'specialist_calculation_handoff': ('Topic 1~15', 'margin', 'limitation', 'reviewer', 'hand-off record'), 'selection_matrix_tradeoff': ('capacity', 'controllability', 'maintainability', 'evidence quality', '가중점수'), 'valve_body_flow_path_selection': ('Globe', 'ball', 'butterfly', 'pressure recovery', 'maintenance access'), 'actuator_thrust_torque_supply_minimum': ('worst-case thrust·torque', 'friction', 'minimum credible supply', 'spring range', 'required speed'), 'datasheet_completeness_and_units': ('governing case', 'units', 'reference condition', 'property source', 'documentation'), 'vendor_bid_technical_comparison': ('datasheet revision', 'case basis', 'actuator', 'delivery', 'lifecycle support'), 'fat_functional_performance_acceptance': ('FAT', 'seat leakage', 'fail action', 'response', 'acceptance criterion'), 'field_feedback_moc_revalidation': ('as-found·as-left', 'vendor notice', 'failure database', 'MOC', 'periodic revalidation')}
+ANCHOR_MARKER_CASES = {'selection_process_ownership': ('Topic 16', 'specialist Topic Packs', '수명주기', '선정 의사결정'), 'operating_case_matrix': ('upstream·downstream pressure', 'temperature', 'phase', 'composition', 'property source'), 'pressure_reference_consistency': ('absolute', 'gauge', 'static head', 'line-loss', 'pressure-rating'), 'fluid_phase_composition_properties': ('two-phase', 'density', 'viscosity', 'vapor pressure', 'compressibility'), 'specialist_calculation_handoff': ('specialist Topic Packs', 'margin', 'limitation', 'reviewer', 'hand-off record'), 'selection_matrix_tradeoff': ('capacity', 'controllability', 'maintainability', 'evidence quality', '가중점수'), 'valve_body_flow_path_selection': ('Globe', 'ball', 'butterfly', 'pressure recovery', 'maintenance access'), 'actuator_thrust_torque_supply_minimum': ('worst-case thrust·torque', 'friction', 'minimum credible supply', 'spring range', 'required speed'), 'datasheet_completeness_and_units': ('governing case', 'units', 'reference condition', 'property source', 'documentation'), 'vendor_bid_technical_comparison': ('datasheet revision', 'case basis', 'actuator', 'delivery', 'lifecycle support'), 'fat_functional_performance_acceptance': ('FAT', 'seat leakage', 'fail action', 'response', 'acceptance criterion'), 'field_feedback_moc_revalidation': ('as-found·as-left', 'vendor notice', 'failure database', 'MOC', 'periodic revalidation')}
 
 
 def _make_anchor_marker_test(
@@ -930,12 +964,13 @@ class SelectionLifecycleSemanticRegressionTests(
         points = self.model[
             "routing_field_points"
         ]
-        for number in range(1, 16):
-            prefix = f"Topic {number} hand-off:"
+        for topic_id in HANDOFF_TOPIC_IDS:
             self.assertEqual(
-                sum(
-                    str(point).startswith(prefix)
-                    for point in points
+                len(
+                    handoff_registry_matches(
+                        points,
+                        topic_id,
+                    )
                 ),
                 1,
             )
