@@ -1,10 +1,10 @@
 {
-  "version": "2026-08-17T05:24:33Z-generated-topic-pack-manifest",
+  "version": "2026-08-17T06:54:40Z-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 74,
+  "topic_count": 75,
   "topics": [
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
@@ -128,6 +128,16 @@
     },
     {
       "topic_id": "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

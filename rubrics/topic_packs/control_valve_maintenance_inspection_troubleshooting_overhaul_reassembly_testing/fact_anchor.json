@@ -1,0 +1,1100 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+  "title_ko": "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+  "question_type_hint": "IMPLEMENTATION_EVALUATION",
+  "anchors": [
+    {
+      "id": "maintenance_scope_boundary",
+      "anchor_id": "maintenance_scope_boundary",
+      "statement": "정비 실행 범위와 인접 Topic hand-off 경계를 먼저 선언한다.",
+      "importance": "core",
+      "keywords": [
+        "maintenance_scope_boundary",
+        "maintenance scope boundary",
+        "control valve maintenance scope boundary",
+        "control valve maintenance maintenance scope boundary",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing maintenance scope boundary",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "정비 실행 범위와 인접 Topic hand-off 경계를 먼저 선언한다.",
+        "boundary",
+        "maintenance ownership boundary",
+        "specialist Topic hand-off"
+      ],
+      "core_terms": [
+        "maintenance_scope_boundary",
+        "maintenance scope boundary",
+        "control valve maintenance scope boundary",
+        "control valve maintenance maintenance scope boundary",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing maintenance scope boundary",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "정비 실행 범위와 인접 Topic hand-off 경계를 먼저 선언한다.",
+        "boundary",
+        "maintenance ownership boundary",
+        "specialist Topic hand-off"
+      ],
+      "accepted_explanations": [
+        "정비 실행 범위와 인접 Topic hand-off 경계를 먼저 선언한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "maintenance scope boundary를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "정비 실행 범위와 인접 Topic hand-off 경계를 먼저 선언한다.",
+      "description": "maintenance_scope_boundary 정비 계약을 평가한다."
+    },
+    {
+      "id": "work_permit_isolation_depressurization",
+      "anchor_id": "work_permit_isolation_depressurization",
+      "statement": "작업허가, 에너지 격리, 감압·배출·세정 후 안전 상태를 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "work_permit_isolation_depressurization",
+        "work permit isolation depressurization",
+        "control valve work permit isolation depressurization",
+        "control valve maintenance work permit isolation depressurization",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing work permit isolation depressurization",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "작업허가, 에너지 격리, 감압·배출·세정 후 안전 상태를 확인한다.",
+        "safety",
+        "work permit",
+        "LOTO",
+        "depressurization",
+        "zero energy"
+      ],
+      "core_terms": [
+        "work_permit_isolation_depressurization",
+        "work permit isolation depressurization",
+        "control valve work permit isolation depressurization",
+        "control valve maintenance work permit isolation depressurization",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing work permit isolation depressurization",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "작업허가, 에너지 격리, 감압·배출·세정 후 안전 상태를 확인한다.",
+        "safety",
+        "work permit",
+        "LOTO",
+        "depressurization",
+        "zero energy"
+      ],
+      "accepted_explanations": [
+        "작업허가, 에너지 격리, 감압·배출·세정 후 안전 상태를 확인한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "work permit isolation depressurization를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "작업허가, 에너지 격리, 감압·배출·세정 후 안전 상태를 확인한다.",
+      "description": "work_permit_isolation_depressurization 정비 계약을 평가한다."
+    },
+    {
+      "id": "as_found_condition_record",
+      "anchor_id": "as_found_condition_record",
+      "statement": "분해 전 설치상태, tag, 방향, signal, supply, travel, 누설, 소음·진동을 as-found로 기록한다.",
+      "importance": "core",
+      "keywords": [
+        "as_found_condition_record",
+        "as found condition record",
+        "control valve as found condition record",
+        "control valve maintenance as found condition record",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing as found condition record",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "분해 전 설치상태, tag, 방향, signal, supply, travel, 누설, 소음·진동을 as-found로 기록한다.",
+        "inspection",
+        "as-found inspection",
+        "condition assessment",
+        "dimensional acceptance"
+      ],
+      "core_terms": [
+        "as_found_condition_record",
+        "as found condition record",
+        "control valve as found condition record",
+        "control valve maintenance as found condition record",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing as found condition record",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "분해 전 설치상태, tag, 방향, signal, supply, travel, 누설, 소음·진동을 as-found로 기록한다.",
+        "inspection",
+        "as-found inspection",
+        "condition assessment",
+        "dimensional acceptance"
+      ],
+      "accepted_explanations": [
+        "분해 전 설치상태, tag, 방향, signal, supply, travel, 누설, 소음·진동을 as-found로 기록한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "as found condition record를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "분해 전 설치상태, tag, 방향, signal, supply, travel, 누설, 소음·진동을 as-found로 기록한다.",
+      "description": "as_found_condition_record 정비 계약을 평가한다."
+    },
+    {
+      "id": "symptom_failure_mode_triage",
+      "anchor_id": "symptom_failure_mode_triage",
+      "statement": "stick-slip, deadband, hunting, internal leakage, external leakage, slow response, fail-action 불량을 증상별로 분류한다.",
+      "importance": "core",
+      "keywords": [
+        "symptom_failure_mode_triage",
+        "symptom failure mode triage",
+        "control valve symptom failure mode triage",
+        "control valve maintenance symptom failure mode triage",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing symptom failure mode triage",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "stick-slip, deadband, hunting, internal leakage, external leakage, slow response, fail-action 불량을 증상별로 분류한다.",
+        "troubleshooting",
+        "symptom diagnosis",
+        "failure mode",
+        "external cause elimination"
+      ],
+      "core_terms": [
+        "symptom_failure_mode_triage",
+        "symptom failure mode triage",
+        "control valve symptom failure mode triage",
+        "control valve maintenance symptom failure mode triage",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing symptom failure mode triage",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "stick-slip, deadband, hunting, internal leakage, external leakage, slow response, fail-action 불량을 증상별로 분류한다.",
+        "troubleshooting",
+        "symptom diagnosis",
+        "failure mode",
+        "external cause elimination"
+      ],
+      "accepted_explanations": [
+        "stick-slip, deadband, hunting, internal leakage, external leakage, slow response, fail-action 불량을 증상별로 분류한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "symptom failure mode triage를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "stick-slip, deadband, hunting, internal leakage, external leakage, slow response, fail-action 불량을 증상별로 분류한다.",
+      "description": "symptom_failure_mode_triage 정비 계약을 평가한다."
+    },
+    {
+      "id": "external_cause_elimination",
+      "anchor_id": "external_cause_elimination",
+      "statement": "공기원, 신호, 배관, positioner, actuator, process disturbance 등 외부 원인을 먼저 배제한다.",
+      "importance": "core",
+      "keywords": [
+        "external_cause_elimination",
+        "external cause elimination",
+        "control valve external cause elimination",
+        "control valve maintenance external cause elimination",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing external cause elimination",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "공기원, 신호, 배관, positioner, actuator, process disturbance 등 외부 원인을 먼저 배제한다.",
+        "troubleshooting",
+        "symptom diagnosis",
+        "failure mode"
+      ],
+      "core_terms": [
+        "external_cause_elimination",
+        "external cause elimination",
+        "control valve external cause elimination",
+        "control valve maintenance external cause elimination",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing external cause elimination",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "공기원, 신호, 배관, positioner, actuator, process disturbance 등 외부 원인을 먼저 배제한다.",
+        "troubleshooting",
+        "symptom diagnosis",
+        "failure mode"
+      ],
+      "accepted_explanations": [
+        "공기원, 신호, 배관, positioner, actuator, process disturbance 등 외부 원인을 먼저 배제한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "external cause elimination를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "공기원, 신호, 배관, positioner, actuator, process disturbance 등 외부 원인을 먼저 배제한다.",
+      "description": "external_cause_elimination 정비 계약을 평가한다."
+    },
+    {
+      "id": "controlled_removal_marking",
+      "anchor_id": "controlled_removal_marking",
+      "statement": "배관 응력과 orientation을 관리하고 stem·plug·seat·actuator coupling 위치를 표시하여 분리한다.",
+      "importance": "core",
+      "keywords": [
+        "controlled_removal_marking",
+        "controlled removal marking",
+        "control valve controlled removal marking",
+        "control valve maintenance controlled removal marking",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing controlled removal marking",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "배관 응력과 orientation을 관리하고 stem·plug·seat·actuator coupling 위치를 표시하여 분리한다.",
+        "disassembly",
+        "controlled disassembly",
+        "marking",
+        "traceability"
+      ],
+      "core_terms": [
+        "controlled_removal_marking",
+        "controlled removal marking",
+        "control valve controlled removal marking",
+        "control valve maintenance controlled removal marking",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing controlled removal marking",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "배관 응력과 orientation을 관리하고 stem·plug·seat·actuator coupling 위치를 표시하여 분리한다.",
+        "disassembly",
+        "controlled disassembly",
+        "marking",
+        "traceability"
+      ],
+      "accepted_explanations": [
+        "배관 응력과 orientation을 관리하고 stem·plug·seat·actuator coupling 위치를 표시하여 분리한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "controlled removal marking를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "배관 응력과 orientation을 관리하고 stem·plug·seat·actuator coupling 위치를 표시하여 분리한다.",
+      "description": "controlled_removal_marking 정비 계약을 평가한다."
+    },
+    {
+      "id": "disassembly_sequence_traceability",
+      "anchor_id": "disassembly_sequence_traceability",
+      "statement": "부품 순서와 방향을 추적 가능하게 유지하며 지정 절차로 분해한다.",
+      "importance": "core",
+      "keywords": [
+        "disassembly_sequence_traceability",
+        "disassembly sequence traceability",
+        "control valve disassembly sequence traceability",
+        "control valve maintenance disassembly sequence traceability",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing disassembly sequence traceability",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "부품 순서와 방향을 추적 가능하게 유지하며 지정 절차로 분해한다.",
+        "disassembly",
+        "controlled disassembly",
+        "marking",
+        "traceability"
+      ],
+      "core_terms": [
+        "disassembly_sequence_traceability",
+        "disassembly sequence traceability",
+        "control valve disassembly sequence traceability",
+        "control valve maintenance disassembly sequence traceability",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing disassembly sequence traceability",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "부품 순서와 방향을 추적 가능하게 유지하며 지정 절차로 분해한다.",
+        "disassembly",
+        "controlled disassembly",
+        "marking",
+        "traceability"
+      ],
+      "accepted_explanations": [
+        "부품 순서와 방향을 추적 가능하게 유지하며 지정 절차로 분해한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "disassembly sequence traceability를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "부품 순서와 방향을 추적 가능하게 유지하며 지정 절차로 분해한다.",
+      "description": "disassembly_sequence_traceability 정비 계약을 평가한다."
+    },
+    {
+      "id": "cleaning_contamination_control",
+      "anchor_id": "cleaning_contamination_control",
+      "statement": "유체 특성에 맞게 세정하고 이물 재유입과 sealing surface 손상을 방지한다.",
+      "importance": "core",
+      "keywords": [
+        "cleaning_contamination_control",
+        "cleaning contamination control",
+        "control valve cleaning contamination control",
+        "control valve maintenance cleaning contamination control",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing cleaning contamination control",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "유체 특성에 맞게 세정하고 이물 재유입과 sealing surface 손상을 방지한다.",
+        "inspection",
+        "as-found inspection",
+        "condition assessment",
+        "dimensional acceptance"
+      ],
+      "core_terms": [
+        "cleaning_contamination_control",
+        "cleaning contamination control",
+        "control valve cleaning contamination control",
+        "control valve maintenance cleaning contamination control",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing cleaning contamination control",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "유체 특성에 맞게 세정하고 이물 재유입과 sealing surface 손상을 방지한다.",
+        "inspection",
+        "as-found inspection",
+        "condition assessment",
+        "dimensional acceptance"
+      ],
+      "accepted_explanations": [
+        "유체 특성에 맞게 세정하고 이물 재유입과 sealing surface 손상을 방지한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "cleaning contamination control를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "유체 특성에 맞게 세정하고 이물 재유입과 sealing surface 손상을 방지한다.",
+      "description": "cleaning_contamination_control 정비 계약을 평가한다."
+    },
+    {
+      "id": "trim_stem_guide_body_inspection",
+      "anchor_id": "trim_stem_guide_body_inspection",
+      "statement": "plug, seat, cage, stem, guide, body의 erosion, corrosion, cavitation, galling, bending, crack을 검사한다.",
+      "importance": "core",
+      "keywords": [
+        "trim_stem_guide_body_inspection",
+        "trim stem guide body inspection",
+        "control valve trim stem guide body inspection",
+        "control valve maintenance trim stem guide body inspection",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing trim stem guide body inspection",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "plug, seat, cage, stem, guide, body의 erosion, corrosion, cavitation, galling, bending, crack을 검사한다.",
+        "inspection",
+        "as-found inspection",
+        "condition assessment",
+        "dimensional acceptance"
+      ],
+      "core_terms": [
+        "trim_stem_guide_body_inspection",
+        "trim stem guide body inspection",
+        "control valve trim stem guide body inspection",
+        "control valve maintenance trim stem guide body inspection",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing trim stem guide body inspection",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "plug, seat, cage, stem, guide, body의 erosion, corrosion, cavitation, galling, bending, crack을 검사한다.",
+        "inspection",
+        "as-found inspection",
+        "condition assessment",
+        "dimensional acceptance"
+      ],
+      "accepted_explanations": [
+        "plug, seat, cage, stem, guide, body의 erosion, corrosion, cavitation, galling, bending, crack을 검사한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "trim stem guide body inspection를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "plug, seat, cage, stem, guide, body의 erosion, corrosion, cavitation, galling, bending, crack을 검사한다.",
+      "description": "trim_stem_guide_body_inspection 정비 계약을 평가한다."
+    },
+    {
+      "id": "dimensional_acceptance_criteria",
+      "anchor_id": "dimensional_acceptance_criteria",
+      "statement": "stem runout, guide clearance, seat contact, surface finish 등 치수·상태를 허용기준과 비교한다.",
+      "importance": "core",
+      "keywords": [
+        "dimensional_acceptance_criteria",
+        "dimensional acceptance criteria",
+        "control valve dimensional acceptance criteria",
+        "control valve maintenance dimensional acceptance criteria",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing dimensional acceptance criteria",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "stem runout, guide clearance, seat contact, surface finish 등 치수·상태를 허용기준과 비교한다.",
+        "inspection",
+        "as-found inspection",
+        "condition assessment",
+        "dimensional acceptance"
+      ],
+      "core_terms": [
+        "dimensional_acceptance_criteria",
+        "dimensional acceptance criteria",
+        "control valve dimensional acceptance criteria",
+        "control valve maintenance dimensional acceptance criteria",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing dimensional acceptance criteria",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "stem runout, guide clearance, seat contact, surface finish 등 치수·상태를 허용기준과 비교한다.",
+        "inspection",
+        "as-found inspection",
+        "condition assessment",
+        "dimensional acceptance"
+      ],
+      "accepted_explanations": [
+        "stem runout, guide clearance, seat contact, surface finish 등 치수·상태를 허용기준과 비교한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "dimensional acceptance criteria를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "stem runout, guide clearance, seat contact, surface finish 등 치수·상태를 허용기준과 비교한다.",
+      "description": "dimensional_acceptance_criteria 정비 계약을 평가한다."
+    },
+    {
+      "id": "repair_replace_lapping_decision",
+      "anchor_id": "repair_replace_lapping_decision",
+      "statement": "손상 원인·잔여수명·수리한계·부품가용성을 근거로 repair, replace, lapping 여부를 결정한다.",
+      "importance": "core",
+      "keywords": [
+        "repair_replace_lapping_decision",
+        "repair replace lapping decision",
+        "control valve repair replace lapping decision",
+        "control valve maintenance repair replace lapping decision",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing repair replace lapping decision",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "손상 원인·잔여수명·수리한계·부품가용성을 근거로 repair, replace, lapping 여부를 결정한다.",
+        "repair",
+        "repair limit"
+      ],
+      "core_terms": [
+        "repair_replace_lapping_decision",
+        "repair replace lapping decision",
+        "control valve repair replace lapping decision",
+        "control valve maintenance repair replace lapping decision",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing repair replace lapping decision",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "손상 원인·잔여수명·수리한계·부품가용성을 근거로 repair, replace, lapping 여부를 결정한다.",
+        "repair",
+        "repair limit"
+      ],
+      "accepted_explanations": [
+        "손상 원인·잔여수명·수리한계·부품가용성을 근거로 repair, replace, lapping 여부를 결정한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "repair replace lapping decision를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "손상 원인·잔여수명·수리한계·부품가용성을 근거로 repair, replace, lapping 여부를 결정한다.",
+      "description": "repair_replace_lapping_decision 정비 계약을 평가한다."
+    },
+    {
+      "id": "packing_gasket_seal_restoration",
+      "anchor_id": "packing_gasket_seal_restoration",
+      "statement": "packing, gasket, seal을 적합한 재질·방향·preload로 복원하고 과도한 마찰을 방지한다.",
+      "importance": "core",
+      "keywords": [
+        "packing_gasket_seal_restoration",
+        "packing gasket seal restoration",
+        "control valve packing gasket seal restoration",
+        "control valve maintenance packing gasket seal restoration",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing packing gasket seal restoration",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "packing, gasket, seal을 적합한 재질·방향·preload로 복원하고 과도한 마찰을 방지한다.",
+        "reassembly",
+        "alignment torque",
+        "seat endpoint",
+        "travel restoration"
+      ],
+      "core_terms": [
+        "packing_gasket_seal_restoration",
+        "packing gasket seal restoration",
+        "control valve packing gasket seal restoration",
+        "control valve maintenance packing gasket seal restoration",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing packing gasket seal restoration",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "packing, gasket, seal을 적합한 재질·방향·preload로 복원하고 과도한 마찰을 방지한다.",
+        "reassembly",
+        "alignment torque",
+        "seat endpoint",
+        "travel restoration"
+      ],
+      "accepted_explanations": [
+        "packing, gasket, seal을 적합한 재질·방향·preload로 복원하고 과도한 마찰을 방지한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "packing gasket seal restoration를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "packing, gasket, seal을 적합한 재질·방향·preload로 복원하고 과도한 마찰을 방지한다.",
+      "description": "packing_gasket_seal_restoration 정비 계약을 평가한다."
+    },
+    {
+      "id": "reassembly_alignment_torque",
+      "anchor_id": "reassembly_alignment_torque",
+      "statement": "stem·plug·seat·cage·actuator 정렬과 체결 순서·torque를 관리한다.",
+      "importance": "core",
+      "keywords": [
+        "reassembly_alignment_torque",
+        "reassembly alignment torque",
+        "control valve reassembly alignment torque",
+        "control valve maintenance reassembly alignment torque",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing reassembly alignment torque",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "stem·plug·seat·cage·actuator 정렬과 체결 순서·torque를 관리한다.",
+        "reassembly",
+        "alignment torque",
+        "seat endpoint",
+        "travel restoration"
+      ],
+      "core_terms": [
+        "reassembly_alignment_torque",
+        "reassembly alignment torque",
+        "control valve reassembly alignment torque",
+        "control valve maintenance reassembly alignment torque",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing reassembly alignment torque",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "stem·plug·seat·cage·actuator 정렬과 체결 순서·torque를 관리한다.",
+        "reassembly",
+        "alignment torque",
+        "seat endpoint",
+        "travel restoration"
+      ],
+      "accepted_explanations": [
+        "stem·plug·seat·cage·actuator 정렬과 체결 순서·torque를 관리한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "reassembly alignment torque를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "stem·plug·seat·cage·actuator 정렬과 체결 순서·torque를 관리한다.",
+      "description": "reassembly_alignment_torque 정비 계약을 평가한다."
+    },
+    {
+      "id": "seat_endpoint_travel_restoration",
+      "anchor_id": "seat_endpoint_travel_restoration",
+      "statement": "seat endpoint, rated travel, mechanical stop, coupling을 복원하고 overtravel을 방지한다.",
+      "importance": "core",
+      "keywords": [
+        "seat_endpoint_travel_restoration",
+        "seat endpoint travel restoration",
+        "control valve seat endpoint travel restoration",
+        "control valve maintenance seat endpoint travel restoration",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing seat endpoint travel restoration",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "seat endpoint, rated travel, mechanical stop, coupling을 복원하고 overtravel을 방지한다.",
+        "reassembly",
+        "alignment torque",
+        "seat endpoint",
+        "travel restoration"
+      ],
+      "core_terms": [
+        "seat_endpoint_travel_restoration",
+        "seat endpoint travel restoration",
+        "control valve seat endpoint travel restoration",
+        "control valve maintenance seat endpoint travel restoration",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing seat endpoint travel restoration",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "seat endpoint, rated travel, mechanical stop, coupling을 복원하고 overtravel을 방지한다.",
+        "reassembly",
+        "alignment torque",
+        "seat endpoint",
+        "travel restoration"
+      ],
+      "accepted_explanations": [
+        "seat endpoint, rated travel, mechanical stop, coupling을 복원하고 overtravel을 방지한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "seat endpoint travel restoration를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "seat endpoint, rated travel, mechanical stop, coupling을 복원하고 overtravel을 방지한다.",
+      "description": "seat_endpoint_travel_restoration 정비 계약을 평가한다."
+    },
+    {
+      "id": "pressure_boundary_test",
+      "anchor_id": "pressure_boundary_test",
+      "statement": "정비 후 shell·pressure boundary 건전성을 지정 압력·유지시간·안전조건으로 시험한다.",
+      "importance": "core",
+      "keywords": [
+        "pressure_boundary_test",
+        "pressure boundary test",
+        "control valve pressure boundary test",
+        "control valve maintenance pressure boundary test",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing pressure boundary test",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "정비 후 shell·pressure boundary 건전성을 지정 압력·유지시간·안전조건으로 시험한다.",
+        "testing",
+        "pressure leakage stroke fail action test",
+        "acceptance criteria"
+      ],
+      "core_terms": [
+        "pressure_boundary_test",
+        "pressure boundary test",
+        "control valve pressure boundary test",
+        "control valve maintenance pressure boundary test",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing pressure boundary test",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "정비 후 shell·pressure boundary 건전성을 지정 압력·유지시간·안전조건으로 시험한다.",
+        "testing",
+        "pressure leakage stroke fail action test",
+        "acceptance criteria"
+      ],
+      "accepted_explanations": [
+        "정비 후 shell·pressure boundary 건전성을 지정 압력·유지시간·안전조건으로 시험한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "pressure boundary test를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "정비 후 shell·pressure boundary 건전성을 지정 압력·유지시간·안전조건으로 시험한다.",
+      "description": "pressure_boundary_test 정비 계약을 평가한다."
+    },
+    {
+      "id": "seat_leakage_test",
+      "anchor_id": "seat_leakage_test",
+      "statement": "요구 차압·유체·방향·측정조건에서 seat leakage를 시험하고 허용기준과 비교한다.",
+      "importance": "core",
+      "keywords": [
+        "seat_leakage_test",
+        "seat leakage test",
+        "control valve seat leakage test",
+        "control valve maintenance seat leakage test",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing seat leakage test",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "요구 차압·유체·방향·측정조건에서 seat leakage를 시험하고 허용기준과 비교한다.",
+        "testing",
+        "pressure leakage stroke fail action test",
+        "acceptance criteria"
+      ],
+      "core_terms": [
+        "seat_leakage_test",
+        "seat leakage test",
+        "control valve seat leakage test",
+        "control valve maintenance seat leakage test",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing seat leakage test",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "요구 차압·유체·방향·측정조건에서 seat leakage를 시험하고 허용기준과 비교한다.",
+        "testing",
+        "pressure leakage stroke fail action test",
+        "acceptance criteria"
+      ],
+      "accepted_explanations": [
+        "요구 차압·유체·방향·측정조건에서 seat leakage를 시험하고 허용기준과 비교한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "seat leakage test를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "요구 차압·유체·방향·측정조건에서 seat leakage를 시험하고 허용기준과 비교한다.",
+      "description": "seat_leakage_test 정비 계약을 평가한다."
+    },
+    {
+      "id": "stroke_friction_hysteresis_test",
+      "anchor_id": "stroke_friction_hysteresis_test",
+      "statement": "전 구간 up/down stroke, friction, hysteresis, deadband, response를 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "stroke_friction_hysteresis_test",
+        "stroke friction hysteresis test",
+        "control valve stroke friction hysteresis test",
+        "control valve maintenance stroke friction hysteresis test",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing stroke friction hysteresis test",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "전 구간 up/down stroke, friction, hysteresis, deadband, response를 확인한다.",
+        "testing",
+        "pressure leakage stroke fail action test",
+        "acceptance criteria"
+      ],
+      "core_terms": [
+        "stroke_friction_hysteresis_test",
+        "stroke friction hysteresis test",
+        "control valve stroke friction hysteresis test",
+        "control valve maintenance stroke friction hysteresis test",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing stroke friction hysteresis test",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "전 구간 up/down stroke, friction, hysteresis, deadband, response를 확인한다.",
+        "testing",
+        "pressure leakage stroke fail action test",
+        "acceptance criteria"
+      ],
+      "accepted_explanations": [
+        "전 구간 up/down stroke, friction, hysteresis, deadband, response를 확인한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "stroke friction hysteresis test를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "전 구간 up/down stroke, friction, hysteresis, deadband, response를 확인한다.",
+      "description": "stroke_friction_hysteresis_test 정비 계약을 평가한다."
+    },
+    {
+      "id": "fail_action_accessory_function_test",
+      "anchor_id": "fail_action_accessory_function_test",
+      "statement": "signal·air·power loss에서 fail position과 solenoid·booster 등 accessory 기능을 확인한다.",
+      "importance": "core",
+      "keywords": [
+        "fail_action_accessory_function_test",
+        "fail action accessory function test",
+        "control valve fail action accessory function test",
+        "control valve maintenance fail action accessory function test",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing fail action accessory function test",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "signal·air·power loss에서 fail position과 solenoid·booster 등 accessory 기능을 확인한다.",
+        "testing",
+        "pressure leakage stroke fail action test",
+        "acceptance criteria"
+      ],
+      "core_terms": [
+        "fail_action_accessory_function_test",
+        "fail action accessory function test",
+        "control valve fail action accessory function test",
+        "control valve maintenance fail action accessory function test",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing fail action accessory function test",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "signal·air·power loss에서 fail position과 solenoid·booster 등 accessory 기능을 확인한다.",
+        "testing",
+        "pressure leakage stroke fail action test",
+        "acceptance criteria"
+      ],
+      "accepted_explanations": [
+        "signal·air·power loss에서 fail position과 solenoid·booster 등 accessory 기능을 확인한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "fail action accessory function test를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "signal·air·power loss에서 fail position과 solenoid·booster 등 accessory 기능을 확인한다.",
+      "description": "fail_action_accessory_function_test 정비 계약을 평가한다."
+    },
+    {
+      "id": "root_cause_evidence_handoff",
+      "anchor_id": "root_cause_evidence_handoff",
+      "statement": "반복고장이나 선정·공정·설계 원인은 증거, limitation, reviewer와 함께 specialist Topic으로 hand-off한다.",
+      "importance": "core",
+      "keywords": [
+        "root_cause_evidence_handoff",
+        "root cause evidence handoff",
+        "control valve root cause evidence handoff",
+        "control valve maintenance root cause evidence handoff",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing root cause evidence handoff",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "반복고장이나 선정·공정·설계 원인은 증거, limitation, reviewer와 함께 specialist Topic으로 hand-off한다.",
+        "handoff",
+        "root cause evidence",
+        "stable Topic ID hand-off"
+      ],
+      "core_terms": [
+        "root_cause_evidence_handoff",
+        "root cause evidence handoff",
+        "control valve root cause evidence handoff",
+        "control valve maintenance root cause evidence handoff",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing root cause evidence handoff",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "반복고장이나 선정·공정·설계 원인은 증거, limitation, reviewer와 함께 specialist Topic으로 hand-off한다.",
+        "handoff",
+        "root cause evidence",
+        "stable Topic ID hand-off"
+      ],
+      "accepted_explanations": [
+        "반복고장이나 선정·공정·설계 원인은 증거, limitation, reviewer와 함께 specialist Topic으로 hand-off한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "root cause evidence handoff를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "반복고장이나 선정·공정·설계 원인은 증거, limitation, reviewer와 함께 specialist Topic으로 hand-off한다.",
+      "description": "root_cause_evidence_handoff 정비 계약을 평가한다."
+    },
+    {
+      "id": "return_to_service_as_left_record",
+      "anchor_id": "return_to_service_as_left_record",
+      "statement": "보호장치 복구, 누설·stroke 최종 확인, as-left 값, 교체부품, 시험결과, 승인자를 기록한다.",
+      "importance": "core",
+      "keywords": [
+        "return_to_service_as_left_record",
+        "return to service as left record",
+        "control valve return to service as left record",
+        "control valve maintenance return to service as left record",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing return to service as left record",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "보호장치 복구, 누설·stroke 최종 확인, as-left 값, 교체부품, 시험결과, 승인자를 기록한다.",
+        "restoration",
+        "return to service",
+        "as-left record"
+      ],
+      "core_terms": [
+        "return_to_service_as_left_record",
+        "return to service as left record",
+        "control valve return to service as left record",
+        "control valve maintenance return to service as left record",
+        "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing return to service as left record",
+        "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+        "보호장치 복구, 누설·stroke 최종 확인, as-left 값, 교체부품, 시험결과, 승인자를 기록한다.",
+        "restoration",
+        "return to service",
+        "as-left record"
+      ],
+      "accepted_explanations": [
+        "보호장치 복구, 누설·stroke 최종 확인, as-left 값, 교체부품, 시험결과, 승인자를 기록한다.",
+        "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다.",
+        "작업조건·손상증거·허용기준·시험결과·as-found·as-left를 추적 가능하게 연결한다."
+      ],
+      "rejected_explanations": [
+        "return to service as left record를 단일 육안판정이나 고정값으로 확정하고 안전격리, 증거, 허용기준, 시험조건과 기록을 생략한다."
+      ],
+      "grading_notes": "안전 선행조건, 증상과 원인, 분해·검사·복원 순서, acceptance criteria와 기록을 논리적으로 연결하는지 평가한다.",
+      "source_basis": "rubrics/topic_packs/control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing/README.md; approved site maintenance procedure, valve and actuator vendor manuals, work permit and LOTO procedure, pressure/leakage/stroke test procedure, as-found/as-left maintenance record and project-controlled acceptance criteria.",
+      "claim": "보호장치 복구, 누설·stroke 최종 확인, as-left 값, 교체부품, 시험결과, 승인자를 기록한다.",
+      "description": "return_to_service_as_left_record 정비 계약을 평가한다."
+    }
+  ],
+  "fatal_wrong_claims": [
+    {
+      "id": "maintenance_without_isolation",
+      "claim": "운전 중인 제어밸브는 공정 차단·감압 없이 바로 분해해도 된다.",
+      "wrong_claim": "운전 중인 제어밸브는 공정 차단·감압 없이 바로 분해해도 된다.",
+      "correction": "작업허가, 에너지 격리, 감압·배출·세정과 zero-energy 확인 후 분해해야 한다.",
+      "correct_rule": "작업허가, 에너지 격리, 감압·배출·세정과 zero-energy 확인 후 분해해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "작업허가, 에너지 격리, 감압·배출·세정과 zero-energy 확인 후 분해해야 한다.",
+      "description": "작업허가, 에너지 격리, 감압·배출·세정과 zero-energy 확인 후 분해해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "as_left_only_sufficient",
+      "claim": "정비 후 as-left 결과만 기록하면 고장 원인과 정비 품질을 입증할 수 있다.",
+      "wrong_claim": "정비 후 as-left 결과만 기록하면 고장 원인과 정비 품질을 입증할 수 있다.",
+      "correction": "분해 전 as-found와 정비 후 as-left를 같은 조건에서 비교하고 교체부품·시험조건을 함께 기록해야 한다.",
+      "correct_rule": "분해 전 as-found와 정비 후 as-left를 같은 조건에서 비교하고 교체부품·시험조건을 함께 기록해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "분해 전 as-found와 정비 후 as-left를 같은 조건에서 비교하고 교체부품·시험조건을 함께 기록해야 한다.",
+      "description": "분해 전 as-found와 정비 후 as-left를 같은 조건에서 비교하고 교체부품·시험조건을 함께 기록해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "packing_tightening_always_solves_leakage",
+      "claim": "외부 누설은 packing gland를 최대한 조이면 항상 해결된다.",
+      "wrong_claim": "외부 누설은 packing gland를 최대한 조이면 항상 해결된다.",
+      "correction": "과도한 packing compression은 stem friction과 actuator demand를 증가시키므로 재질·배열·preload와 마찰을 함께 확인해야 한다.",
+      "correct_rule": "과도한 packing compression은 stem friction과 actuator demand를 증가시키므로 재질·배열·preload와 마찰을 함께 확인해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "과도한 packing compression은 stem friction과 actuator demand를 증가시키므로 재질·배열·preload와 마찰을 함께 확인해야 한다.",
+      "description": "과도한 packing compression은 stem friction과 actuator demand를 증가시키므로 재질·배열·preload와 마찰을 함께 확인해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "lapping_always_restores_seat",
+      "claim": "Seat 누설은 손상 형태와 무관하게 lapping만 하면 항상 복구된다.",
+      "wrong_claim": "Seat 누설은 손상 형태와 무관하게 lapping만 하면 항상 복구된다.",
+      "correction": "erosion, cavitation, crack, distortion, coating loss와 치수 한계를 검사하여 repair·replace·lapping을 구분해야 한다.",
+      "correct_rule": "erosion, cavitation, crack, distortion, coating loss와 치수 한계를 검사하여 repair·replace·lapping을 구분해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "erosion, cavitation, crack, distortion, coating loss와 치수 한계를 검사하여 repair·replace·lapping을 구분해야 한다.",
+      "description": "erosion, cavitation, crack, distortion, coating loss와 치수 한계를 검사하여 repair·replace·lapping을 구분해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "pressure_test_proves_all_leakage",
+      "claim": "Shell pressure test가 통과하면 seat leakage와 packing 누설도 모두 적합하다.",
+      "wrong_claim": "Shell pressure test가 통과하면 seat leakage와 packing 누설도 모두 적합하다.",
+      "correction": "pressure-boundary, seat leakage, external leakage와 functional stroke 시험은 목적과 조건이 다른 별도 acceptance다.",
+      "correct_rule": "pressure-boundary, seat leakage, external leakage와 functional stroke 시험은 목적과 조건이 다른 별도 acceptance다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "pressure-boundary, seat leakage, external leakage와 functional stroke 시험은 목적과 조건이 다른 별도 acceptance다.",
+      "description": "pressure-boundary, seat leakage, external leakage와 functional stroke 시험은 목적과 조건이 다른 별도 acceptance다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "seat_test_proves_external_tightness",
+      "claim": "Seat leakage 시험 결과만으로 packing과 gasket의 외부 누설 건전성을 보증할 수 있다.",
+      "wrong_claim": "Seat leakage 시험 결과만으로 packing과 gasket의 외부 누설 건전성을 보증할 수 있다.",
+      "correction": "internal through-seat leakage와 external atmospheric leakage를 별도 시험·판정해야 한다.",
+      "correct_rule": "internal through-seat leakage와 external atmospheric leakage를 별도 시험·판정해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "internal through-seat leakage와 external atmospheric leakage를 별도 시험·판정해야 한다.",
+      "description": "internal through-seat leakage와 external atmospheric leakage를 별도 시험·판정해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "positioner_calibration_equals_overhaul",
+      "claim": "Positioner zero·span 교정만 완료하면 valve overhaul과 복구시험도 완료된 것이다.",
+      "wrong_claim": "Positioner zero·span 교정만 완료하면 valve overhaul과 복구시험도 완료된 것이다.",
+      "correction": "기계적 분해점검·재조립·seat endpoint·stroke·누설·fail-action 시험과 positioner 교정을 구분해야 한다.",
+      "correct_rule": "기계적 분해점검·재조립·seat endpoint·stroke·누설·fail-action 시험과 positioner 교정을 구분해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "기계적 분해점검·재조립·seat endpoint·stroke·누설·fail-action 시험과 positioner 교정을 구분해야 한다.",
+      "description": "기계적 분해점검·재조립·seat endpoint·stroke·누설·fail-action 시험과 positioner 교정을 구분해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "replace_parts_without_failure_evidence",
+      "claim": "반복고장은 원인 증거 없이 trim과 packing을 일괄 교체하면 해결된다.",
+      "wrong_claim": "반복고장은 원인 증거 없이 trim과 packing을 일괄 교체하면 해결된다.",
+      "correction": "증상, 외부 원인, 손상형태, 치수와 운전이력을 근거로 원인을 분류한 뒤 수리·교체 범위를 결정해야 한다.",
+      "correct_rule": "증상, 외부 원인, 손상형태, 치수와 운전이력을 근거로 원인을 분류한 뒤 수리·교체 범위를 결정해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "증상, 외부 원인, 손상형태, 치수와 운전이력을 근거로 원인을 분류한 뒤 수리·교체 범위를 결정해야 한다.",
+      "description": "증상, 외부 원인, 손상형태, 치수와 운전이력을 근거로 원인을 분류한 뒤 수리·교체 범위를 결정해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "reuse_gasket_packing_unconditionally",
+      "claim": "외관상 손상이 없으면 모든 gasket과 packing을 조건 없이 재사용할 수 있다.",
+      "wrong_claim": "외관상 손상이 없으면 모든 gasket과 packing을 조건 없이 재사용할 수 있다.",
+      "correction": "제조사 절차, 재질, 압축이력, 오염·열화와 one-time-use 요구를 확인하여 교체 여부를 결정해야 한다.",
+      "correct_rule": "제조사 절차, 재질, 압축이력, 오염·열화와 one-time-use 요구를 확인하여 교체 여부를 결정해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "제조사 절차, 재질, 압축이력, 오염·열화와 one-time-use 요구를 확인하여 교체 여부를 결정해야 한다.",
+      "description": "제조사 절차, 재질, 압축이력, 오염·열화와 one-time-use 요구를 확인하여 교체 여부를 결정해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "fail_action_visual_check_only",
+      "claim": "Fail-open·fail-close는 명판과 조립 방향만 확인하면 충분하며 실제 상실시험은 필요 없다.",
+      "wrong_claim": "Fail-open·fail-close는 명판과 조립 방향만 확인하면 충분하며 실제 상실시험은 필요 없다.",
+      "correction": "signal·air·power loss 조건에서 fail position과 solenoid·lock-up·booster 등 accessory response를 실제 검증해야 한다.",
+      "correct_rule": "signal·air·power loss 조건에서 fail position과 solenoid·lock-up·booster 등 accessory response를 실제 검증해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "signal·air·power loss 조건에서 fail position과 solenoid·lock-up·booster 등 accessory response를 실제 검증해야 한다.",
+      "description": "signal·air·power loss 조건에서 fail position과 solenoid·lock-up·booster 등 accessory response를 실제 검증해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "mechanical_stop_used_for_seat_load",
+      "claim": "Mechanical stop을 조여 seat load를 임의로 증가시키면 누설을 해결할 수 있다.",
+      "wrong_claim": "Mechanical stop을 조여 seat load를 임의로 증가시키면 누설을 해결할 수 있다.",
+      "correction": "seat endpoint, actuator travel, bench set와 coupling 기준을 지키고 overtravel·trim damage를 방지해야 한다.",
+      "correct_rule": "seat endpoint, actuator travel, bench set와 coupling 기준을 지키고 overtravel·trim damage를 방지해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "seat endpoint, actuator travel, bench set와 coupling 기준을 지키고 overtravel·trim damage를 방지해야 한다.",
+      "description": "seat endpoint, actuator travel, bench set와 coupling 기준을 지키고 overtravel·trim damage를 방지해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    },
+    {
+      "id": "return_service_without_final_walkdown",
+      "claim": "Bench 시험이 통과하면 현장 복구 확인 없이 즉시 운전 투입할 수 있다.",
+      "wrong_claim": "Bench 시험이 통과하면 현장 복구 확인 없이 즉시 운전 투입할 수 있다.",
+      "correction": "방향·배관·accessory·보호장치·누설·stroke·fail-action과 승인기록을 최종 확인한 뒤 return-to-service해야 한다.",
+      "correct_rule": "방향·배관·accessory·보호장치·누설·stroke·fail-action과 승인기록을 최종 확인한 뒤 return-to-service해야 한다.",
+      "severity": "fatal",
+      "affected_layers": [],
+      "message": "방향·배관·accessory·보호장치·누설·stroke·fail-action과 승인기록을 최종 확인한 뒤 return-to-service해야 한다.",
+      "description": "방향·배관·accessory·보호장치·누설·stroke·fail-action과 승인기록을 최종 확인한 뒤 return-to-service해야 한다.",
+      "grading_notes": "제어밸브 현장정비의 안전격리, as-found 진단, 분해·검사·수리·재조립, acceptance test, as-left 기록과 specialist hand-off를 평가한다."
+    }
+  ],
+  "safe_expressions": [
+    "제어밸브 선정은 Process Design Basis와 operating-case matrix에서 시작한다.",
+    "Minimum·normal·maximum·startup·shutdown·upset case를 분리한다.",
+    "압력 reference와 유량 basis를 명시한다.",
+    "Phase, composition과 fluid property source를 case별로 확인한다.",
+    "specialist Topic Packs의 전문 결과는 assumption과 limitation을 포함해 hand-off한다.",
+    "Mandatory requirement 미충족안은 weighted score로 보상하지 않는다.",
+    "Uncertainty와 contingency를 분리하고 double margin을 방지한다.",
+    "Required Cv와 selected Cv의 margin은 controllability와 함께 평가한다.",
+    "Installed characteristic, authority, gain과 travel distribution을 확인한다.",
+    "Cavitation, flashing, noise, velocity와 severe-service 결과를 package 결정에 반영한다.",
+    "Body, trim, material, actuator와 accessory를 하나의 package로 비교한다.",
+    "Actuator는 minimum credible supply와 worst-case load에서 검증한다.",
+    "Fail action은 hazard basis와 process safe state로 정한다.",
+    "Datasheet와 requisition은 vendor bid 이전에 승인한다.",
+    "Vendor sizing은 입력, units, correction와 warning을 독립 검토한다.",
+    "Deviation은 requirement ID와 risk·approval로 추적한다.",
+    "FAT는 SAT와 commissioning을 대체하지 않는다.",
+    "As-built configuration과 acceptance record를 운영 조직에 인계한다.",
+    "Reliability, maintainability, spares와 obsolescence를 선정에 포함한다.",
+    "Lifecycle cost는 구매가, energy, maintenance와 downtime을 포함한다.",
+    "Field failure와 as-found·as-left를 MOC와 revalidation에 반영한다."
+  ],
+  "revision_notes": [
+    "현장 제어밸브 정비 실행의 안전·진단·분해·검사·수리·재조립·시험·복구 계약을 추가했다.",
+    "일반 O&M governance와 물리적 valve overhaul 실행의 소유권을 분리했다.",
+    "Positioner 상세 교정, leakage class·packing 설계와 sizing·selection은 stable Topic ID hand-off로 제한했다.",
+    "20개 Fact Anchor, 6개 Question Pattern, 8개 Recommended Outline과 16개 routing alias를 적용했다."
+  ],
+  "topic_label": "제어밸브 통합 선정·공정조건·Vendor 평가·검증·수명주기",
+  "core_facts": [
+    "Topic 16은 제어밸브의 개별 물리 계산을 반복하지 않고 공정 요구조건, specialist Topic Packs 전문 분석 결과, 구매·검사·시운전 및 수명주기 자료를 하나의 추적 가능한 선정 의사결정으로 통합한다.",
+    "선정 기준은 Process Design Basis, PFD, P&ID, control narrative, cause-and-effect, SRS, line list, equipment data 및 회사·법규 기준의 개정번호와 우선순위를 확인하여 충돌 없이 적용한다.",
+    "각 선정 입력과 결과는 원 요구 문서, 계산서, datasheet 항목, vendor 응답, 시험 기준 및 최종 승인 근거까지 양방향으로 추적할 수 있어야 한다.",
+    "밸브 tag별 service boundary는 upstream·downstream equipment, bypass, isolation, recirculation, control-loop 역할 및 정상·비정상 유로를 포함하여 정의한다.",
+    "Process, piping, instrument, mechanical, safety, operation, maintenance 및 procurement 요구를 동일한 requirement register에서 통합하고 담당자와 승인 상태를 지정한다.",
+    "요구조건은 mandatory, preferred, optional 및 information으로 분류하여 필수 불충족과 최적화 대상의 우선순위를 구분한다.",
+    "운전조건은 case별로 유량, upstream·downstream pressure, temperature, phase, composition, property source, 지속시간 및 발생빈도를 행렬로 관리한다.",
+    "Minimum, normal 및 maximum case는 단일 유량 열이 아니라 각 case의 동시 pressure drop, fluid property, required travel 및 control objective와 함께 평가한다.",
+    "Startup, shutdown, upset, depressuring, recycle, cleaning, flushing 및 standby 전환 조건은 정상 case와 별도로 선정·검증한다.",
+    "압력은 absolute 또는 gauge 기준, upstream·downstream 위치, static head 및 line-loss 포함 여부를 명시하여 sizing과 pressure-rating 입력을 혼동하지 않는다.",
+    "온도 선정 범위는 정상 온도뿐 아니라 startup 열충격, cooldown, heat soak, ambient extreme 및 tracing·insulation 영향을 포함한다.",
+    "유량은 mass 또는 volumetric basis, standard 또는 actual condition, measurement uncertainty 및 design contingency를 구분하고 중복 margin을 방지한다.",
+    "유체 자료는 liquid·gas·steam·two-phase 구분, composition 범위, density, viscosity, vapor pressure, critical properties, compressibility 및 solids 함량을 case별로 확인한다.",
+    "입자 크기·형상·농도, fouling·polymerization 경향, corrosive species, moisture, contaminants 및 cleaning medium은 geometry와 material 선정 입력으로 관리한다.",
+    "선정은 유량 통과만 확인하지 않고 pressure·flow·level·temperature 등 control objective, process gain, dead time, disturbance 및 required response를 반영한다.",
+    "Required turndown은 Qmax/Qmin만 계산하지 않고 `control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 installed characteristic, authority, gain 및 min·normal·max travel distribution과 함께 검증한다.",
+    "Shutoff differential pressure, required leakage, isolation objective, flow direction, fail action 및 loss-of-air·power·signal 상태를 하나의 기능 요구로 정의한다.",
+    "Pressure containment, fire-safe, fugitive emission, hazardous area, noise, SIL·SIF·ESD, environmental release 및 적용 법규 요구를 selection matrix에 포함한다.",
+    "Stroke·trip·settling response, allowable downtime, required availability, repair-time target 및 bypass 허용조건을 명시하여 actuator와 maintenance 전략에 반영한다.",
+    "specialist Topic Packs의 계산 결과는 입력 조건, 적용 식·표준, 가정, margin, limitation 및 reviewer 상태를 포함한 hand-off record로 인수한다.",
+    "`control_valve_sizing_cv_kv_reynolds_liquid_selection`·7의 liquid 또는 gas sizing 결과는 phase, units, correction factor, choking domain, vendor sizing sheet 및 governing case가 일치하는지 교차검증한다.",
+    "`control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening`·5의 inherent·installed characteristic, valve authority, installed gain 및 rangeability 결과가 실제 system pressure distribution과 일치하는지 확인한다.",
+    "`control_valve_cavitation_flashing_choked_flow_damage_prevention`·9의 cavitation, flashing, liquid·gas choking, aerodynamic·hydrodynamic noise, outlet velocity 및 vibration 결과를 body·trim·piping 결정과 연결한다.",
+    "`balanced_trim_unbalanced_trim_structure_sealing_applications`·13·14의 trim balance, sealing, leakage, packing, temperature, cryogenic, particle, erosion 및 corrosion 결과를 service-specific selection에 반영한다.",
+    "Topic 15가 적용되는 경우 safe state, final-element boundary, PFDavg·PFH budget, response time, PST·proof-test 및 bypass requirement를 일반 control-valve 선정과 구분하여 통합한다.",
+    "후보안은 capacity, controllability, damage risk, safety, emissions, maintainability, delivery, cost 및 evidence quality를 공통 척도로 비교하며 필수조건 미충족안은 가중점수로 보상하지 않는다.",
+    "Process uncertainty, calculation uncertainty, manufacturer tolerance 및 project contingency를 분리하여 기록하고 동일 위험에 margin을 중복 적용하지 않는다.",
+    "Globe, angle, ball, butterfly 및 specialty body는 capacity뿐 아니라 pressure recovery, solids passage, erosion path, leakage, piping layout, weight 및 maintenance access로 선정한다.",
+    "Trim type, port geometry, characteristic, flow-to-open·flow-to-close 방향 및 staged pressure reduction은 control objective와 force·damage·stability 결과를 함께 만족해야 한다.",
+    "Body, bonnet, flange 및 pressure-containing parts의 class와 rating은 design pressure·temperature envelope, material group, corrosion allowance 및 applicable code로 검증한다.",
+    "Body·trim·stem·seat·fastener material은 base fluid명만이 아니라 composition, concentration, temperature, velocity, galvanic pair, erosion-corrosion 및 cleaning chemical을 고려한다.",
+    "Seat, packing, gasket 및 bonnet design은 shutoff leakage, external leakage, fugitive emission, fire-safe, temperature cycling 및 maintenance frequency를 함께 만족해야 한다.",
+    "Actuator는 Topic 1의 worst-case thrust·torque, shutoff load, friction, unbalance, minimum credible supply, spring range 및 required speed를 기준으로 선정한다.",
+    "Fail-open·fail-close·fail-in-place 결정은 hazard basis와 일치해야 하며 spring, accumulator, air reservoir 또는 electrical stored energy의 실제 usable capacity를 검증한다.",
+    "Positioner, I/P, solenoid, volume booster, quick exhaust, filter regulator, limit switch 및 feedback device는 response, capacity, diagnostics, hazardous area 및 failure interaction으로 package 선정한다.",
+    "선정은 orientation, actuator envelope, support, piping load, vibration, drain·vent, insulation, heat tracing, platform access, removal path 및 lifting 조건까지 포함한다.",
+    "Datasheet는 모든 governing case, units, reference condition, property source, functional requirement, material, accessory, testing 및 documentation 항목을 빈칸 없이 disposition한다.",
+    "Requisition은 supply boundary, applicable codes, inspection, test, certification, guaranteed performance, spare parts, documentation, delivery 및 warranty를 명확히 정의한다.",
+    "Vendor bid는 동일 datasheet revision과 case basis로 비교하고 sizing, materials, actuator, accessories, testing, documents, delivery 및 lifecycle support 차이를 tabulation한다.",
+    "Vendor deviation과 exception은 요구 ID, 기술 영향, risk, compensating measure, owner, due date 및 승인 상태를 deviation register로 관리한다.",
+    "Vendor 계산과 selection software 결과는 입력 case, units, proprietary coefficient, correction, warning, trim option 및 guarantee basis를 독립 검토한다.",
+    "구매 이후 datasheet, drawing, calculation, material list, firmware, accessory model 및 setpoint 변경은 approved configuration과 revision history로 통제한다.",
+    "Inspection and Test Plan은 material receipt, machining, assembly, pressure test, leakage, functional test, painting, packing 및 shipment 단계의 witness·hold·review point를 정의한다.",
+    "Material certificate, heat number, positive material identification, NDE, weld·hardfacing procedure 및 traceability는 지정 class와 service criticality에 따라 검증한다.",
+    "FAT는 pressure boundary, seat leakage, stroke, fail action, position indication, accessory logic, response, calibration 및 document completeness를 사전 합의한 acceptance criterion으로 판정한다.",
+    "SAT와 loop check는 실제 wiring·air supply·logic·interlock 조건에서 command, feedback, stroke, response, fail action 및 필요 시 installed leakage를 검증한다.",
+    "Commissioning은 실제 process condition에서 travel distribution, oscillation, deadband, noise, cavitation, response, leakage 및 control objective 달성 여부를 확인한다.",
+    "As-built datasheet, drawing, configuration, calibration, test record, spare list, maintenance instruction 및 open item은 운영 조직에 완결된 baseline으로 인계한다.",
+    "Reliability와 availability는 failure mode, duty cycle, environment, MTBF·MTTR assumption, online repair 가능성, bypass 및 maintenance access를 근거로 평가한다.",
+    "Recommended spares는 criticality, installed population, lead time, interchangeability, storage life, repair capability 및 obsolescence risk를 기준으로 정한다.",
+    "Lifecycle evaluation은 purchase price뿐 아니라 pressure-loss energy, maintenance labor, consumables, turnaround, failure downtime, production loss, service life 및 disposal cost를 포함한다.",
+    "Demand, trip, control instability, wear, leakage, repair, diagnostic, as-found·as-left 및 vendor notice는 failure database에 반영하고 MOC와 periodic revalidation으로 선정 기준을 갱신한다."
+  ]
+}

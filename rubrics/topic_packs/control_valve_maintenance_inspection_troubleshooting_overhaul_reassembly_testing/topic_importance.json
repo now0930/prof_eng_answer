@@ -1,0 +1,24 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "작업허가·격리·감압·배출·세정과 zero-energy 확인을 제시한다.",
+    "As-found 상태와 증상을 정비 전 동일 조건으로 기록한다.",
+    "외부 원인을 배제하고 손상형태·치수·failure mode를 연결한다.",
+    "Repair·replace·lapping과 packing·gasket 복원 판단근거를 제시한다.",
+    "정렬·torque·seat endpoint·rated travel 복원조건을 설명한다.",
+    "Pressure boundary와 seat leakage acceptance를 구분한다.",
+    "Multipoint up/down stroke와 signal·air·power loss 시험을 포함한다.",
+    "As-left·교체부품·시험조건·승인과 stable Topic hand-off를 폐루프로 연결한다."
+  ],
+  "note": "이 Topic은 제어밸브의 현장 정비 실행을 소유한다. O&M governance, positioner 상세교정, leakage class·packing 설계와 sizing·selection은 인접 specialist Topic이 소유하며, 현장정비는 손상증거·복구결과·시험기록과 재검토 필요성을 hand-off한다.",
+  "revision_notes": [
+    "FIELD_APPLICATION과 CORE_MUST_PREPARE로 분류했다.",
+    "IMPLEMENTATION_EVALUATION을 Primary Question Type으로 적용했다.",
+    "PROCESS_SEQUENCE, DIAGNOSIS, TEST_ACCEPTANCE와 BOUNDARY_COMPARISON을 보조 유형으로 적용했다."
+  ],
+  "topic_label": "제어밸브 정비·고장진단·분해점검·재조립·복구시험"
+}

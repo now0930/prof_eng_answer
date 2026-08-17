@@ -1,5 +1,5 @@
 {
-  "version": "2026-08-17T05:24:33Z-generated-topic-pack-logic-checks",
+  "version": "2026-08-17T06:54:40Z-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -894,6 +894,24 @@
       "major_checks": [],
       "question_type_checks": [],
       "next_practice_points": [],
+      "de_claim_trust": {}
+    },
+    {
+      "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+      "enabled": false,
+      "topic_name": "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_aliases": [],
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "as-found와 as-left를 같은 시험조건으로 비교한다.",
+        "외부 원인을 배제한 뒤 내부 부품을 분해점검한다.",
+        "pressure, leakage, stroke와 fail-action acceptance를 분리한다.",
+        "전문판단은 stable Topic ID로 hand-off한다."
+      ],
       "de_claim_trust": {}
     },
     {
