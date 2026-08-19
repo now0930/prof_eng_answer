@@ -167,8 +167,20 @@ class QuestionDemandContractTests(unittest.TestCase):
             '"demand_kind": "DESIGN"',
             prompt,
         )
+        # STAGE18B2_CANONICAL_QTYPE_HOST_CONTRACT_V1
         self.assertIn(
-            "답안 내용으로 primary_lens를 변경하거나 재분류하지 않는다",
+            "사전 요구 snapshot",
+            prompt,
+        )
+        self.assertIn(
+            (
+                "최종 primary_lens는 기존 canonical "
+                "Question Type router 결과만 소유한다."
+            ),
+            prompt,
+        )
+        self.assertIn(
+            "이 snapshot은 이를 덮어쓰지 않는다.",
             prompt,
         )
 

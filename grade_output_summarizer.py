@@ -1244,3 +1244,120 @@ def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
         }
 
     return payload
+
+# STAGE18B3_STRUCTURED_DEFECT_OUTPUT_PRIORITY_V1
+from copy import deepcopy as _stage18b3_deepcopy
+
+_STAGE18B3_PREVIOUS_BUILD_PAYLOAD = _build_payload
+_STAGE18B3_PREVIOUS_RENDER = _render
+
+
+def _stage18b3_find_reconciliation(
+    grade: Any,
+) -> dict[str, Any]:
+    if not isinstance(grade, dict):
+        return {}
+
+    direct = grade.get(
+        "verified_defect_reconciliation"
+    )
+
+    if isinstance(direct, dict):
+        return direct
+
+    parsed = grade.get("parsed")
+
+    if isinstance(parsed, dict):
+        nested = parsed.get(
+            "verified_defect_reconciliation"
+        )
+
+        if isinstance(nested, dict):
+            return nested
+
+    coverage = grade.get(
+        "question_type_coverage"
+    )
+
+    if not isinstance(coverage, dict):
+        coverage = {}
+
+    explicit = coverage.get(
+        "explicit_requirement_coverage"
+    )
+
+    if not isinstance(explicit, dict):
+        explicit = {}
+
+    nested = explicit.get(
+        "verified_defect_reconciliation"
+    )
+
+    return (
+        nested
+        if isinstance(nested, dict)
+        else {}
+    )
+
+
+def _build_payload(
+    grade: dict[str, Any],
+) -> dict[str, Any]:
+    payload = _STAGE18B3_PREVIOUS_BUILD_PAYLOAD(
+        grade
+    )
+
+    if not isinstance(payload, dict):
+        return payload
+
+    reconciliation = (
+        _stage18b3_find_reconciliation(
+            grade
+        )
+    )
+
+    if not reconciliation:
+        return payload
+
+    out = dict(payload)
+    out[
+        "verified_defect_reconciliation"
+    ] = _stage18b3_deepcopy(
+        reconciliation
+    )
+    out[
+        "structured_defect_output_priority"
+    ] = {
+        "marker": (
+            "STAGE18B3_STRUCTURED_DEFECT_OUTPUT_PRIORITY_V1"
+        ),
+        "source": (
+            "existing_verified_defect_reconciliation"
+        ),
+        "output_priority": (
+            "verified_defect_before_generic_feedback"
+        ),
+        "generic_feedback_can_override": False,
+        "new_defect_owner_created": False,
+        "score_effect": "none",
+        "numeric_score_changed": False,
+    }
+    return out
+
+
+def _render(
+    summary: dict[str, Any],
+    payload: dict[str, Any],
+) -> str:
+    from verdict_consistency import (
+        reconcile_verdict_summary,
+    )
+
+    prioritized = reconcile_verdict_summary(
+        summary,
+        payload,
+    )
+    return _STAGE18B3_PREVIOUS_RENDER(
+        prioritized,
+        payload,
+    )

@@ -172,5 +172,190 @@ class FinalDecisionConsistencyTest(
         self.assertEqual(after, before)
 
 
+# STAGE18B2_CANONICAL_QTYPE_AND_SCORE_SOURCE_V2
+class CanonicalQuestionTypeAndScoreSourceV2Test(
+    unittest.TestCase
+):
+    def test_final_attach_reuses_canonical_question_type(
+        self,
+    ) -> None:
+        from question_demand_contract import (
+            attach_question_demand_contract,
+        )
+
+        result = {
+            "question_type_evaluation": {
+                "primary_type": {
+                    "id": (
+                        "PRINCIPLE_INTERPRETATION"
+                    ),
+                },
+            },
+        }
+
+        updated = attach_question_demand_contract(
+            result,
+            "두 방식을 비교하고 선정 기준을 설명하시오.",
+            canonical_primary_lens=result,
+        )
+        contract = updated[
+            "question_demand_contract"
+        ]
+
+        self.assertEqual(
+            contract[
+                "detected_primary_lens"
+            ],
+            "COMPARE_SELECTION",
+        )
+        self.assertEqual(
+            contract["primary_lens"],
+            "PRINCIPLE_INTERPRETATION",
+        )
+        self.assertEqual(
+            contract[
+                "primary_lens_source"
+            ],
+            "canonical_question_type_router",
+        )
+        self.assertTrue(
+            contract[
+                "canonical_primary_lens_applied"
+            ]
+        )
+        self.assertEqual(
+            contract[
+                "final_primary_lens_owner"
+            ],
+            "canonical_question_type_router",
+        )
+
+    def test_pregrade_contract_remains_question_only_fallback(
+        self,
+    ) -> None:
+        from question_demand_contract import (
+            build_question_demand_contract,
+        )
+
+        contract = build_question_demand_contract(
+            "원리와 동작 특성을 설명하시오."
+        )
+
+        self.assertEqual(
+            contract[
+                "primary_lens_source"
+            ],
+            "question_text_pregrade_fallback",
+        )
+        self.assertFalse(
+            contract[
+                "canonical_primary_lens_applied"
+            ]
+        )
+        self.assertEqual(
+            contract[
+                "answer_text_dependency"
+            ],
+            "none",
+        )
+        self.assertTrue(
+            all(
+                item["source"]
+                == "question_text_only"
+                and item[
+                    "answer_text_dependency"
+                ]
+                == "none"
+                for item in contract[
+                    "requirements"
+                ]
+            )
+        )
+
+    def test_complete_abcde_breakdown_is_authoritative(
+        self,
+    ) -> None:
+        from grade_score_reconciler import (
+            authoritative_abcde_breakdown_score,
+            best_uncapped_numeric_score,
+        )
+
+        grade = {
+            "max_score": 25.0,
+            "weighted_total_score": 22.0,
+            "committee_total_score": 21.0,
+            "breakdown": [
+                {
+                    "layer_id": "A",
+                    "score": 2.0,
+                },
+                {
+                    "layer_id": "B",
+                    "score": 3.0,
+                },
+                {
+                    "layer_id": "C",
+                    "score": 4.0,
+                },
+                {
+                    "layer_id": "D",
+                    "score": 4.0,
+                },
+                {
+                    "layer_id": "E",
+                    "score": 1.0,
+                },
+            ],
+        }
+
+        self.assertEqual(
+            authoritative_abcde_breakdown_score(
+                grade
+            ),
+            14.0,
+        )
+        self.assertEqual(
+            best_uncapped_numeric_score(
+                grade
+            ),
+            14.0,
+        )
+
+    def test_incomplete_breakdown_uses_legacy_fallback(
+        self,
+    ) -> None:
+        from grade_score_reconciler import (
+            authoritative_abcde_breakdown_score,
+            best_uncapped_numeric_score,
+        )
+
+        grade = {
+            "max_score": 25.0,
+            "weighted_total_score": 18.0,
+            "breakdown": [
+                {
+                    "layer_id": "A",
+                    "score": 2.0,
+                },
+                {
+                    "layer_id": "B",
+                    "score": 3.0,
+                },
+            ],
+        }
+
+        self.assertIsNone(
+            authoritative_abcde_breakdown_score(
+                grade
+            )
+        )
+        self.assertEqual(
+            best_uncapped_numeric_score(
+                grade
+            ),
+            18.0,
+        )
+
+
 if __name__ == "__main__":
     unittest.main()

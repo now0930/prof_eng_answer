@@ -5315,6 +5315,16 @@ def _phase2_postprocess_grade(legacy_result):
         question_contract,
     )
 
+    # STAGE18B1_FINAL_GRADE_REUSE_LOOKUP_V1
+    _stage18b1_cached_final_grade = (
+        _stage18b1_load_final_grade_cache(
+            grading_identity=grading_identity_dict,
+            question_contract=question_contract,
+        )
+    )
+    if _stage18b1_cached_final_grade is not None:
+        return _stage18b1_cached_final_grade
+
     # Score-affecting stages consume the persisted
     # contract rather than independently deriving
     # question type or routing metadata again.
@@ -10050,6 +10060,295 @@ def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
 
     return grade
 
+
+# ============================================================
+# STAGE18B1_FINAL_GRADE_REUSE_V1
+# Same normalized submission + same stable Question Contract
+# reuses the already-finalized grade. This cache owns no score,
+# demand, defect, verdict, or correction decision.
+# ============================================================
+
+_STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION = (
+    "final_grade_cache_v1"
+)
+_STAGE18B1_FINAL_GRADE_CACHE_DIR = (
+    BASE_DIR / "data" / "final_grade_cache"
+)
+
+
+def _stage18b1_stable_question_contract_hash(
+    question_contract,
+):
+    import copy
+
+    from question_contract import (
+        rehash_question_contract,
+    )
+
+    if not isinstance(question_contract, dict):
+        return ""
+
+    stable_contract = copy.deepcopy(
+        question_contract
+    )
+    stable_contract.pop("cache", None)
+
+    try:
+        stable_contract = (
+            rehash_question_contract(
+                stable_contract
+            )
+        )
+    except Exception:
+        return ""
+
+    return str(
+        stable_contract.get("contract_hash")
+        or ""
+    ).strip()
+
+
+def _stage18b1_final_grade_cache_identity(
+    *,
+    grading_identity,
+    question_contract,
+):
+    if not isinstance(grading_identity, dict):
+        return None
+
+    submission_hash = str(
+        grading_identity.get("submission_hash")
+        or ""
+    ).strip()
+    contract_hash = (
+        _stage18b1_stable_question_contract_hash(
+            question_contract
+        )
+    )
+
+    digest_pattern = re.compile(
+        r"^[0-9a-f]{64}$"
+    )
+
+    if not digest_pattern.fullmatch(
+        submission_hash
+    ):
+        return None
+
+    if not digest_pattern.fullmatch(
+        contract_hash
+    ):
+        return None
+
+    return {
+        "submission_hash": submission_hash,
+        "contract_hash": contract_hash,
+    }
+
+
+def _stage18b1_final_grade_cache_path(
+    identity,
+):
+    if not isinstance(identity, dict):
+        return None
+
+    submission_hash = identity.get(
+        "submission_hash"
+    )
+    contract_hash = identity.get(
+        "contract_hash"
+    )
+
+    if not submission_hash or not contract_hash:
+        return None
+
+    return (
+        _STAGE18B1_FINAL_GRADE_CACHE_DIR
+        / (
+            f"{submission_hash}."
+            f"{contract_hash}.json"
+        )
+    )
+
+
+def _stage18b1_grade_cache_identity(
+    grade,
+):
+    if not isinstance(grade, dict):
+        return None
+
+    grading_identity = grade.get(
+        "grading_identity"
+    )
+    question_contract = grade.get(
+        "question_contract"
+    )
+
+    return (
+        _stage18b1_final_grade_cache_identity(
+            grading_identity=grading_identity,
+            question_contract=question_contract,
+        )
+    )
+
+
+def _stage18b1_load_final_grade_cache(
+    *,
+    grading_identity,
+    question_contract,
+):
+    import copy
+
+    identity = (
+        _stage18b1_final_grade_cache_identity(
+            grading_identity=grading_identity,
+            question_contract=question_contract,
+        )
+    )
+    path = _stage18b1_final_grade_cache_path(
+        identity
+    )
+
+    if path is None or not path.is_file():
+        return None
+
+    try:
+        payload = json.loads(
+            path.read_text(encoding="utf-8")
+        )
+    except Exception:
+        return None
+
+    if not isinstance(payload, dict):
+        return None
+
+    if (
+        payload.get("schema_version")
+        != _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION
+    ):
+        return None
+
+    if (
+        payload.get("submission_hash")
+        != identity["submission_hash"]
+    ):
+        return None
+
+    if (
+        payload.get("contract_hash")
+        != identity["contract_hash"]
+    ):
+        return None
+
+    grade = payload.get("grade")
+
+    if not isinstance(grade, dict):
+        return None
+
+    cached_identity = (
+        _stage18b1_grade_cache_identity(
+            grade
+        )
+    )
+
+    if cached_identity != identity:
+        return None
+
+    return copy.deepcopy(grade)
+
+
+def _stage18b1_write_final_grade_cache(
+    grade,
+):
+    import os
+
+    identity = (
+        _stage18b1_grade_cache_identity(
+            grade
+        )
+    )
+    path = _stage18b1_final_grade_cache_path(
+        identity
+    )
+
+    if path is None:
+        return False
+
+    if not _stage17e5_is_grade_dict(grade):
+        return False
+
+    payload = {
+        "schema_version": (
+            _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION
+        ),
+        "submission_hash": (
+            identity["submission_hash"]
+        ),
+        "contract_hash": (
+            identity["contract_hash"]
+        ),
+        "grade": grade,
+    }
+
+    path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+    temporary = path.with_suffix(
+        path.suffix
+        + f".{os.getpid()}.tmp"
+    )
+
+    try:
+        temporary.write_text(
+            json.dumps(
+                payload,
+                ensure_ascii=False,
+                indent=2,
+                sort_keys=True,
+            ),
+            encoding="utf-8",
+        )
+        temporary.replace(path)
+    finally:
+        if temporary.exists():
+            temporary.unlink()
+
+    return True
+
+
+def _stage18b1_store_final_grade_cache(
+    value,
+):
+    if _stage17e5_is_grade_dict(value):
+        return (
+            _stage18b1_write_final_grade_cache(
+                value
+            )
+        )
+
+    stored = False
+
+    if isinstance(value, dict):
+        for item in value.values():
+            stored = (
+                _stage18b1_store_final_grade_cache(
+                    item
+                )
+                or stored
+            )
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            stored = (
+                _stage18b1_store_final_grade_cache(
+                    item
+                )
+                or stored
+            )
+
+    return stored
+
+
 # STAGE17E5_COMMON_INPUT_AND_DECISION_BOUNDARY_V1
 _STAGE17E5_PREVIOUS_RUN_AGENT_PIPELINE = (
     run_agent_pipeline
@@ -10144,7 +10443,16 @@ def run_agent_pipeline(*args, **kwargs):
         )
     )
 
-    return _stage17e5_finalize_pipeline_result(
-        result,
-        submission_normalization,
+    finalized_result = (
+        _stage17e5_finalize_pipeline_result(
+            result,
+            submission_normalization,
+        )
     )
+
+    # STAGE18B1_FINAL_GRADE_REUSE_STORE_V1
+    _stage18b1_store_final_grade_cache(
+        finalized_result
+    )
+
+    return finalized_result

@@ -289,8 +289,90 @@ def _primary_lens(
     return "PRINCIPLE_INTERPRETATION", scores
 
 
+
+# STAGE18B2_CANONICAL_QTYPE_AND_SCORE_SOURCE_V2
+def _canonical_primary_lens(
+    value: Any,
+) -> str:
+    allowed = _ALLOWED_PRIMARY_LENSES
+    seen: set[int] = set()
+
+    def walk(
+        node: Any,
+        *,
+        allow_id: bool = False,
+    ) -> str:
+        if isinstance(node, str):
+            normalized = node.strip().upper()
+
+            if normalized in allowed:
+                return normalized
+
+            return ""
+
+        if not isinstance(node, dict):
+            return ""
+
+        object_id = id(node)
+
+        if object_id in seen:
+            return ""
+
+        seen.add(object_id)
+
+        direct_keys = [
+            "primary_lens",
+            "question_type",
+            "type_id",
+        ]
+
+        if allow_id:
+            direct_keys.append("id")
+
+        for key in direct_keys:
+            resolved = walk(
+                node.get(key)
+            )
+
+            if resolved:
+                return resolved
+
+        primary_type = node.get(
+            "primary_type"
+        )
+
+        if isinstance(primary_type, dict):
+            resolved = walk(
+                primary_type,
+                allow_id=True,
+            )
+
+            if resolved:
+                return resolved
+
+        for key in (
+            "question_type_evaluation",
+            "question_type_eval",
+            "question_contract",
+            "routing_contract",
+            "parsed",
+        ):
+            resolved = walk(
+                node.get(key)
+            )
+
+            if resolved:
+                return resolved
+
+        return ""
+
+    return walk(value)
+
+
 def build_question_demand_contract(
     question_text: Any,
+    *,
+    canonical_primary_lens: Any = None,
 ) -> dict[str, Any]:
     normalized = normalize_question_text(question_text)
     clauses = _split_clauses(normalized)
@@ -343,8 +425,20 @@ def build_question_demand_contract(
     unique_demand_kinds = list(
         dict.fromkeys(all_demand_kinds)
     )
-    primary_lens, lens_scores = _primary_lens(
+    detected_primary_lens, lens_scores = _primary_lens(
         unique_demand_kinds
+    )
+    canonical_lens = _canonical_primary_lens(
+        canonical_primary_lens
+    )
+    primary_lens = (
+        canonical_lens
+        or detected_primary_lens
+    )
+    primary_lens_source = (
+        "canonical_question_type_router"
+        if canonical_lens
+        else "question_text_pregrade_fallback"
     )
     primary_core = _PRIMARY_CORE_DEMANDS[primary_lens]
 
@@ -376,9 +470,20 @@ def build_question_demand_contract(
         "normalized_question": normalized,
         "question_hash": _question_hash(normalized),
         "primary_lens": primary_lens,
-        "primary_lens_source": "question_text_only",
+        "primary_lens_source": primary_lens_source,
         "primary_lens_locked": True,
         "primary_lens_scores": lens_scores,
+        "detected_primary_lens": (
+            detected_primary_lens
+        ),
+        "canonical_primary_lens_applied": (
+            bool(canonical_lens)
+        ),
+        "final_primary_lens_owner": (
+            "canonical_question_type_router"
+            if canonical_lens
+            else "not_yet_available"
+        ),
         "secondary_demands": secondary_demands,
         "requirements": deduped_requirements,
         "summary": {
@@ -394,13 +499,24 @@ def build_question_demand_contract(
 def attach_question_demand_contract(
     result: Any,
     question_text: Any,
+    *,
+    canonical_primary_lens: Any = None,
 ) -> Any:
     if not isinstance(result, dict):
         return result
 
     updated = copy.deepcopy(result)
+    canonical_lens = (
+        _canonical_primary_lens(
+            canonical_primary_lens
+        )
+        or _canonical_primary_lens(
+            result
+        )
+    )
     contract = build_question_demand_contract(
-        question_text
+        question_text,
+        canonical_primary_lens=canonical_lens,
     )
     updated["question_demand_contract"] = contract
 

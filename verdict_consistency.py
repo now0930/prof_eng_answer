@@ -870,3 +870,411 @@ def enforce_final_decision_consistency(
         "numeric_score_changed": False,
     }
     return updated
+
+# STAGE18B3_STRUCTURED_DEFECT_OUTPUT_PRIORITY_V1
+_STAGE18B3_PREVIOUS_SIGNALS = _signals
+_STAGE18B3_PREVIOUS_STRUCTURED_IMPROVEMENTS = (
+    _structured_improvements
+)
+_STAGE18B3_PREVIOUS_STRUCTURED_KEY_REASONS = (
+    _structured_key_reasons
+)
+_STAGE18B3_PREVIOUS_RECONCILE_VERDICT_SUMMARY = (
+    reconcile_verdict_summary
+)
+_STAGE18B3_PREVIOUS_ENFORCE_FINAL_DECISION = (
+    enforce_final_decision_consistency
+)
+
+
+def _stage18b3_verified_reconciliation(
+    payload: Any,
+) -> dict[str, Any]:
+    root = _dict(payload)
+    direct = root.get(
+        "verified_defect_reconciliation"
+    )
+
+    if isinstance(direct, dict):
+        return direct
+
+    parsed = root.get("parsed")
+
+    if isinstance(parsed, dict):
+        nested = parsed.get(
+            "verified_defect_reconciliation"
+        )
+
+        if isinstance(nested, dict):
+            return nested
+
+    coverage = _contract(
+        payload,
+        "question_type_coverage",
+    )
+    explicit = _dict(
+        coverage.get(
+            "explicit_requirement_coverage"
+        )
+    )
+    nested = explicit.get(
+        "verified_defect_reconciliation"
+    )
+
+    return (
+        nested
+        if isinstance(nested, dict)
+        else {}
+    )
+
+
+def _stage18b3_verified_defect_ids(
+    payload: Any,
+) -> set[str]:
+    reconciliation = (
+        _stage18b3_verified_reconciliation(
+            payload
+        )
+    )
+    result = {
+        _text(value, 180)
+        for value in _list(
+            reconciliation.get(
+                "applied_defect_ids"
+            )
+        )
+        if _text(value, 180)
+    }
+
+    coverage = _contract(
+        payload,
+        "question_type_coverage",
+    )
+    explicit = _dict(
+        coverage.get(
+            "explicit_requirement_coverage"
+        )
+    )
+
+    for row in _list(
+        explicit.get("requirements")
+    ):
+        if not isinstance(row, dict):
+            continue
+
+        for value in _list(
+            row.get("verified_defect_ids")
+        ):
+            defect_id = _text(
+                value,
+                180,
+            )
+
+            if defect_id:
+                result.add(defect_id)
+
+    return result
+
+
+def _stage18b3_defect_id(
+    row: dict[str, Any],
+) -> str:
+    return _text(
+        row.get("defect_id")
+        or row.get("id"),
+        180,
+    )
+
+
+def _stage18b3_priority_metadata(
+    payload: Any,
+    signals: dict[str, Any],
+) -> dict[str, Any]:
+    reconciliation = (
+        _stage18b3_verified_reconciliation(
+            payload
+        )
+    )
+    applied_ids = sorted(
+        _stage18b3_verified_defect_ids(
+            payload
+        )
+    )
+    unresolved_ids = [
+        _text(value, 180)
+        for value in _list(
+            reconciliation.get(
+                "unresolved_defect_ids"
+            )
+        )
+        if _text(value, 180)
+    ]
+
+    return {
+        "marker": (
+            "STAGE18B3_STRUCTURED_DEFECT_OUTPUT_PRIORITY_V1"
+        ),
+        "source": (
+            "existing_verified_defect_reconciliation"
+        ),
+        "output_priority": (
+            "verified_defect_before_generic_feedback"
+        ),
+        "generic_feedback_can_override": False,
+        "new_defect_owner_created": False,
+        "score_effect": "none",
+        "numeric_score_changed": False,
+        "primary_score_owner": (
+            reconciliation.get(
+                "primary_score_owner"
+            )
+            or "C"
+        ),
+        "b_completeness_double_deduction": (
+            reconciliation.get(
+                "b_completeness_double_deduction"
+            )
+            is True
+        ),
+        "applied_defect_ids": applied_ids,
+        "unresolved_defect_ids": (
+            unresolved_ids
+        ),
+        "verified_correctness_count": len(
+            signals.get(
+                "verified_correctness"
+            )
+            or []
+        ),
+        "verified_hard_correctness_count": len(
+            signals.get(
+                "verified_hard_correctness"
+            )
+            or []
+        ),
+    }
+
+
+def _signals(
+    payload: Any,
+) -> dict[str, Any]:
+    signals = _STAGE18B3_PREVIOUS_SIGNALS(
+        payload
+    )
+    verified_ids = (
+        _stage18b3_verified_defect_ids(
+            payload
+        )
+    )
+
+    verified_correctness = [
+        row
+        for row in signals.get(
+            "correctness",
+            [],
+        )
+        if _stage18b3_defect_id(row)
+        in verified_ids
+    ]
+    verified_hard = [
+        row
+        for row in signals.get(
+            "hard_correctness",
+            [],
+        )
+        if _stage18b3_defect_id(row)
+        in verified_ids
+    ]
+
+    signals[
+        "verified_defect_ids"
+    ] = verified_ids
+    signals[
+        "verified_correctness"
+    ] = verified_correctness
+    signals[
+        "verified_hard_correctness"
+    ] = verified_hard
+    return signals
+
+
+def _stage18b3_prioritized_text(
+    verified_rows: list[dict[str, Any]],
+    fallback: list[str],
+    *,
+    label: str,
+    limit: int = 4,
+) -> list[str]:
+    result = []
+    explanations = []
+
+    for row in verified_rows:
+        explanation = _explanation(row)
+
+        if not explanation:
+            continue
+
+        explanations.append(explanation)
+        candidate = (
+            f"{label}: {explanation}"
+            if label
+            else explanation
+        )
+
+        if candidate not in result:
+            result.append(candidate)
+
+        if len(result) >= limit:
+            return result
+
+    for value in fallback:
+        text = _text(value, 320)
+
+        if not text:
+            continue
+
+        if any(
+            explanation in text
+            for explanation in explanations
+        ):
+            continue
+
+        if text not in result:
+            result.append(text)
+
+        if len(result) >= limit:
+            break
+
+    return result
+
+
+def _structured_improvements(
+    payload: Any,
+    signals: dict[str, Any],
+) -> list[str]:
+    fallback = (
+        _STAGE18B3_PREVIOUS_STRUCTURED_IMPROVEMENTS(
+            payload,
+            signals,
+        )
+    )
+    verified = list(
+        signals.get(
+            "verified_hard_correctness"
+        )
+        or []
+    )
+
+    for row in (
+        signals.get(
+            "verified_correctness"
+        )
+        or []
+    ):
+        if row not in verified:
+            verified.append(row)
+
+    if not verified:
+        return fallback
+
+    return _stage18b3_prioritized_text(
+        verified,
+        fallback,
+        label="검증된 기술 오류",
+        limit=4,
+    )
+
+
+def _structured_key_reasons(
+    signals: dict[str, Any],
+) -> list[str]:
+    fallback = (
+        _STAGE18B3_PREVIOUS_STRUCTURED_KEY_REASONS(
+            signals
+        )
+    )
+    verified = list(
+        signals.get(
+            "verified_hard_correctness"
+        )
+        or []
+    )
+
+    for row in (
+        signals.get(
+            "verified_correctness"
+        )
+        or []
+    ):
+        if row not in verified:
+            verified.append(row)
+
+    if not verified:
+        return fallback
+
+    return _stage18b3_prioritized_text(
+        verified,
+        fallback,
+        label="",
+        limit=4,
+    )
+
+
+def reconcile_verdict_summary(
+    summary: Any,
+    payload: Any,
+) -> Any:
+    updated = (
+        _STAGE18B3_PREVIOUS_RECONCILE_VERDICT_SUMMARY(
+            summary,
+            payload,
+        )
+    )
+
+    if not isinstance(updated, dict):
+        return updated
+
+    signals = _signals(payload)
+    verified_ids = signals.get(
+        "verified_defect_ids"
+    ) or set()
+
+    if not verified_ids:
+        return updated
+
+    updated[
+        "structured_defect_output_priority"
+    ] = _stage18b3_priority_metadata(
+        payload,
+        signals,
+    )
+    return updated
+
+
+def enforce_final_decision_consistency(
+    payload: Any,
+) -> Any:
+    updated = (
+        _STAGE18B3_PREVIOUS_ENFORCE_FINAL_DECISION(
+            payload
+        )
+    )
+
+    if not isinstance(updated, dict):
+        return updated
+
+    signals = _signals(updated)
+    verified_ids = signals.get(
+        "verified_defect_ids"
+    ) or set()
+
+    if not verified_ids:
+        return updated
+
+    updated[
+        "structured_defect_output_priority"
+    ] = _stage18b3_priority_metadata(
+        updated,
+        signals,
+    )
+    return updated

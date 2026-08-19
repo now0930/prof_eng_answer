@@ -243,5 +243,214 @@ class GenericFeedbackFinalProjectionTest(unittest.TestCase):
         )
 
 
+# STAGE18B2_CANONICAL_QTYPE_AND_SCORE_SOURCE_V2
+class CanonicalQuestionTypeProductionBoundaryV2Test(
+    unittest.TestCase
+):
+    def test_gemini_final_attach_passes_existing_result_as_canonical_owner(
+        self,
+    ) -> None:
+        import ast
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[1]
+        source = (
+            root / "gemini_grader.py"
+        ).read_text(encoding="utf-8")
+        tree = ast.parse(source)
+
+        calls = []
+
+        for node in ast.walk(tree):
+            if not isinstance(
+                node,
+                ast.Call,
+            ):
+                continue
+
+            target = node.func
+            name = (
+                target.id
+                if isinstance(
+                    target,
+                    ast.Name,
+                )
+                else (
+                    target.attr
+                    if isinstance(
+                        target,
+                        ast.Attribute,
+                    )
+                    else ""
+                )
+            )
+
+            if (
+                name
+                == "attach_question_demand_contract"
+            ):
+                calls.append(node)
+
+        self.assertEqual(
+            len(calls),
+            1,
+        )
+
+        keywords = {
+            keyword.arg: keyword.value
+            for keyword in calls[0].keywords
+            if keyword.arg is not None
+        }
+        self.assertIn(
+            "canonical_primary_lens",
+            keywords,
+        )
+        canonical_value = keywords[
+            "canonical_primary_lens"
+        ]
+        self.assertIsInstance(
+            canonical_value,
+            ast.Name,
+        )
+        self.assertEqual(
+            canonical_value.id,
+            "result",
+        )
+
+    def test_prompt_snapshot_does_not_claim_final_qtype_ownership(
+        self,
+    ) -> None:
+        from pathlib import Path
+
+        root = Path(__file__).resolve().parents[1]
+        source = (
+            root / "gemini_grader.py"
+        ).read_text(encoding="utf-8")
+
+        self.assertIn(
+            "사전 요구 snapshot",
+            source,
+        )
+        self.assertIn(
+            "최종 primary_lens는 기존 canonical "
+            "Question Type router 결과만 소유한다.",
+            source,
+        )
+        self.assertNotIn(
+            "다음 question_demand_contract는 질문 "
+            "문장만으로 생성된 고정 계약이다.",
+            source,
+        )
+
+
+# STAGE18B3_STRUCTURED_DEFECT_OUTPUT_PRIORITY_V1
+class StructuredDefectFinalProjectionPriorityTest(
+    unittest.TestCase
+):
+    def test_existing_reconciled_defect_controls_public_projection(
+        self,
+    ) -> None:
+        from verdict_consistency import (
+            enforce_final_decision_consistency,
+        )
+
+        grade = {
+            "total_score": 18.0,
+            "summary": (
+                "핵심 기술 내용이 정확하고 우수합니다."
+            ),
+            "strengths": [
+                (
+                    "기술적 개념의 정확성이 "
+                    "우수합니다."
+                )
+            ],
+            "rewrite_advice": [
+                (
+                    "비용, 시간, 적용 가능성을 "
+                    "추가 검토하세요."
+                )
+            ],
+            "general_evidence_contract": {
+                "defects": [
+                    {
+                        "defect_id": "DEFECT-1",
+                        "defect_type": (
+                            "correctness_error"
+                        ),
+                        "severity": "major",
+                        "owner_layer": "C",
+                        "explanation": (
+                            "힘 평형식의 부호가 "
+                            "반대로 기술되었습니다."
+                        ),
+                    }
+                ],
+            },
+            "verified_defect_reconciliation": {
+                "marker": (
+                    "VERIFIED_DEFECT_RECONCILIATION_V1"
+                ),
+                "score_effect": "none",
+                "primary_score_owner": "C",
+                "b_completeness_double_deduction": (
+                    False
+                ),
+                "applied_defect_ids": [
+                    "DEFECT-1"
+                ],
+                "unresolved_defect_ids": [],
+            },
+        }
+
+        result = (
+            enforce_final_decision_consistency(
+                deepcopy(grade)
+            )
+        )
+
+        self.assertEqual(
+            result["total_score"],
+            18.0,
+        )
+        self.assertFalse(
+            result["strong_verdict_allowed"]
+        )
+        priority = result[
+            "structured_defect_output_priority"
+        ]
+        self.assertEqual(
+            priority[
+                "applied_defect_ids"
+            ],
+            ["DEFECT-1"],
+        )
+        self.assertEqual(
+            priority[
+                "primary_score_owner"
+            ],
+            "C",
+        )
+        self.assertFalse(
+            priority[
+                "b_completeness_double_deduction"
+            ]
+        )
+        self.assertFalse(
+            priority[
+                "generic_feedback_can_override"
+            ]
+        )
+        self.assertFalse(
+            priority[
+                "numeric_score_changed"
+            ]
+        )
+        self.assertNotIn(
+            "정확성이 우수",
+            str(result.get("summary")),
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=0)

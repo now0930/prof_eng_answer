@@ -219,5 +219,191 @@ class FinalFormatterFeedbackBoundaryTest(unittest.TestCase):
                     self.assertNotIn(token, source)
 
 
+# STAGE18B3_STRUCTURED_DEFECT_OUTPUT_PRIORITY_V1
+class StructuredDefectFinalFormatterPriorityTest(
+    unittest.TestCase
+):
+    @staticmethod
+    def _grade() -> dict:
+        return {
+            "total_score": 18.0,
+            "max_score": 25.0,
+            "official_pass_score": 15.0,
+            "practical_target_score": 17.5,
+            "high_score_target": 20.0,
+            "summary": (
+                "기술적 개념의 정확성이 우수합니다."
+            ),
+            "rewrite_advice": [
+                (
+                    "대책은 비용, 시간, 적용 가능성, "
+                    "기존 설비 영향을 검토하세요."
+                )
+            ],
+            "general_evidence_contract": {
+                "defects": [
+                    {
+                        "defect_id": "DEFECT-1",
+                        "defect_type": (
+                            "correctness_error"
+                        ),
+                        "severity": "major",
+                        "owner_layer": "C",
+                        "explanation": (
+                            "압력과 유량 관계의 부호가 "
+                            "반대로 기술되었습니다."
+                        ),
+                    }
+                ],
+            },
+            "verified_defect_reconciliation": {
+                "marker": (
+                    "VERIFIED_DEFECT_RECONCILIATION_V1"
+                ),
+                "score_effect": "none",
+                "primary_score_owner": "C",
+                "b_completeness_double_deduction": (
+                    False
+                ),
+                "applied_defect_ids": [
+                    "DEFECT-1"
+                ],
+                "unresolved_defect_ids": [],
+            },
+        }
+
+    def test_payload_threads_existing_reconciliation(
+        self,
+    ) -> None:
+        grade = self._grade()
+        payload = _build_payload(
+            deepcopy(grade)
+        )
+
+        self.assertEqual(
+            payload[
+                "verified_defect_reconciliation"
+            ][
+                "applied_defect_ids"
+            ],
+            ["DEFECT-1"],
+        )
+        priority = payload[
+            "structured_defect_output_priority"
+        ]
+        self.assertEqual(
+            priority["source"],
+            (
+                "existing_verified_defect_"
+                "reconciliation"
+            ),
+        )
+        self.assertFalse(
+            priority[
+                "generic_feedback_can_override"
+            ]
+        )
+        self.assertEqual(
+            payload["score"]["total"],
+            18.0,
+        )
+
+    def test_verified_defect_precedes_generic_feedback(
+        self,
+    ) -> None:
+        grade = self._grade()
+        payload = _build_payload(
+            deepcopy(grade)
+        )
+        llm_summary = {
+            "headline": "우수",
+            "overall": (
+                "기술적 개념의 정확성이 우수합니다."
+            ),
+            "key_reasons": [
+                "비용과 적용 가능성을 검토했습니다."
+            ],
+            "improvements": [
+                (
+                    "비용, 시간, 적용 가능성, "
+                    "기존 설비 영향을 검토하세요."
+                )
+            ],
+        }
+        summary = _normalise_summary(
+            llm_summary,
+            payload,
+        )
+
+        self.assertEqual(
+            summary["headline"],
+            "검증된 핵심 기술 오류 보완 필요",
+        )
+        self.assertEqual(
+            summary["key_reasons"][0],
+            (
+                "압력과 유량 관계의 부호가 "
+                "반대로 기술되었습니다."
+            ),
+        )
+        self.assertTrue(
+            summary["improvements"][0].startswith(
+                "검증된 기술 오류:"
+            )
+        )
+        self.assertNotIn(
+            "비용, 시간, 적용 가능성",
+            "\n".join(
+                summary["improvements"]
+            ),
+        )
+        self.assertEqual(
+            summary[
+                "structured_defect_output_priority"
+            ][
+                "verified_correctness_count"
+            ],
+            1,
+        )
+
+    def test_direct_render_rechecks_structured_priority(
+        self,
+    ) -> None:
+        payload = _build_payload(
+            deepcopy(self._grade())
+        )
+        rendered = _render(
+            {
+                "headline": "우수",
+                "overall": (
+                    "기술적 개념의 정확성이 우수합니다."
+                ),
+                "key_reasons": [
+                    "비용 검토가 충분합니다."
+                ],
+                "improvements": [
+                    "비용·유지보수 검토"
+                ],
+            },
+            payload,
+        )
+
+        self.assertIn(
+            "판정: 검증된 핵심 기술 오류 보완 필요",
+            rendered,
+        )
+        self.assertIn(
+            (
+                "압력과 유량 관계의 부호가 "
+                "반대로 기술되었습니다."
+            ),
+            rendered,
+        )
+        self.assertNotIn(
+            "비용·유지보수 검토",
+            rendered,
+        )
+
+
 if __name__ == "__main__":
     unittest.main(verbosity=0)

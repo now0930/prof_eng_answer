@@ -81,6 +81,90 @@ def _average_rater_total(parsed: JsonDict) -> float | None:
     return round(sum(values) / len(values), 2)
 
 
+
+# STAGE18B2_CANONICAL_QTYPE_AND_SCORE_SOURCE_V2
+def authoritative_abcde_breakdown_score(
+    parsed: JsonDict,
+) -> float | None:
+    if not isinstance(parsed, dict):
+        return None
+
+    rows = parsed.get("breakdown")
+
+    if not isinstance(rows, list):
+        return None
+
+    layer_maximums = {
+        "A": 3.0,
+        "B": 6.0,
+        "C": 8.0,
+        "D": 6.0,
+        "E": 2.0,
+    }
+    scores: dict[str, float] = {}
+
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+
+        raw_layer = (
+            row.get("layer_id")
+            or row.get("layer")
+            or row.get("id")
+            or row.get("name")
+            or row.get("item")
+            or ""
+        )
+        layer_text = str(
+            raw_layer
+        ).strip().upper()
+        layer = (
+            layer_text
+            if layer_text in layer_maximums
+            else layer_text[:1]
+        )
+
+        if layer not in layer_maximums:
+            continue
+
+        if layer in scores:
+            return None
+
+        value = _to_float(
+            row.get("score"),
+            None,
+        )
+
+        if value is None:
+            return None
+
+        if (
+            value < 0.0
+            or value
+            > layer_maximums[layer] + 1e-9
+        ):
+            return None
+
+        scores[layer] = float(value)
+
+    if set(scores) != set(layer_maximums):
+        return None
+
+    return round(
+        sum(
+            scores[layer]
+            for layer in (
+                "A",
+                "B",
+                "C",
+                "D",
+                "E",
+            )
+        ),
+        2,
+    )
+
+
 def best_uncapped_numeric_score(parsed: JsonDict) -> float | None:
     """
     Find the best numeric score candidate before cap/ceiling.
@@ -90,6 +174,15 @@ def best_uncapped_numeric_score(parsed: JsonDict) -> float | None:
     """
     if not isinstance(parsed, dict):
         return None
+
+    authoritative_score = (
+        authoritative_abcde_breakdown_score(
+            parsed
+        )
+    )
+
+    if authoritative_score is not None:
+        return authoritative_score
 
     max_score = _to_float(parsed.get("max_score"), 25.0) or 25.0
     candidates: list[float] = []

@@ -1299,21 +1299,23 @@ def build_gemini_grading_prompt(*args, **kwargs):
     guidance = """
 [QUESTION_DEMAND_CONTRACT_V1]
 
-다음 question_demand_contract는 질문 문장만으로 생성된 고정 계약이다.
-답안 내용으로 primary_lens를 변경하거나 재분류하지 않는다.
+다음 question_demand_contract는 질문 문장만으로 생성한 사전 요구 snapshot이다.
+requirements와 secondary_demands는 질문 전용이며 답안 내용으로 추가하지 않는다.
+이 snapshot의 primary_lens는 canonical Question Type이 생성되기 전의 fallback이다.
+최종 primary_lens는 기존 canonical Question Type router 결과만 소유한다.
 
 question_demand_contract:
 {contract_json}
 
 적용 규칙:
-1. primary_lens는 전체 답안의 주 평가 관점이다.
+1. requirements는 문제문의 명시 요구를 고정하며 답안 기반 요구 추가를 허용하지 않는다.
 2. secondary_demands는 primary_lens를 대체하지 않고 추가 요구로 평가한다.
 3. requirements의 각 requirement_id를 question_type_coverage 및
    general_evidence_contract의 requirement_id와 연결한다.
 4. 답안에 특정 유형의 표현이 많더라도 질문에 없는 요구를 새로 만들지 않는다.
 5. 비교 표현이 답안에 있다는 이유만으로 COMPARE_SELECTION으로 바꾸지 않는다.
 6. 설계·계산·검증 요구가 secondary_demands에 있으면 해당 요구를 별도로 평가한다.
-7. primary_lens_locked가 true이므로 답안 기반 lens override는 허용하지 않는다.
+7. final attach에서는 기존 canonical Question Type router 결과로 primary_lens를 다시 고정하며 이 snapshot은 이를 덮어쓰지 않는다.
 8. 이 계약 자체는 Python 점수·상한·하드캡을 직접 변경하지 않는다.
 """.strip().format(
         contract_json=contract_json,
@@ -1350,9 +1352,11 @@ def gemini_semantic_grade(*args, **kwargs):
         kwargs,
     )
 
+    # STAGE18B2_CANONICAL_QTYPE_AND_SCORE_SOURCE_V2
     return attach_question_demand_contract(
         result,
         question_text,
+        canonical_primary_lens=result,
     )
 
 # HYBRID_GENERAL_GRADING_PROMPT_V1
