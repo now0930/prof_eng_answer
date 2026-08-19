@@ -26,6 +26,9 @@
 - Difficulty Strategy와 score ceiling 평가
 - Topic Pack source와 generated Rubric Bank 관리
 - 채점 완료 세션 격리와 동일 초 session ID 충돌 방지
+- 전송 메타데이터와 중첩 `/grade`를 제거하는 보수적 제출문 정규화
+- 원문·정규화문과 정규화 증적의 session 보존
+- Fatal·Major 오류와 합격·고득점·Full Credit 판정의 충돌 방지
 - 최종 `grade.json`과 Telegram 출력의 동일 객체 보장
 - release validation과 focused regression
 
@@ -36,8 +39,8 @@
 | 총점 | 25점 |
 | 채점 Layer | 5개 |
 | Active Question Type | 4개 |
-| Topic Sheet | 71개 |
-| Topic Pack source | 71개 topic |
+| Topic Sheet | 75개 |
+| Topic Pack source | 75개 topic |
 | Generated Rubric Bank | 6개 |
 | 기본 Rubric Bank mode | `generated` |
 
@@ -207,18 +210,32 @@ Logic Check는 핵심 이론 오류를 검증합니다.
 최종 결과는 다음 순서를 보장합니다.
 
 ```text
-semantic grading
+보수적 제출문 정규화
+  → semantic grading
   → deterministic checker와 evidence bridge
   → Phase 8 constraint-only 처리
   → Question Demand 기반 B와 Fact Anchor 기반 C reconciliation
   → verified defect, hard cap과 difficulty ceiling 적용
   → display alias와 coverage 정규화
   → 최종 native B·C serialization sync
+  → final decision consistency
   → grade.json 저장
   → 동일 객체를 Telegram formatter에 전달
 ```
 
 `grading_agents.py`와 `bot.py` 양쪽의 최종 persistence guard는 score-bearing field가 변경되지 않았는지 확인합니다. 따라서 `weak`, `오답 2`와 같은 표시 결과와 저장된 `grade.json`이 동일해야 합니다.
+
+
+제출문 정규화는 기술 내용을 재작성하지 않습니다. Telegram timestamp, speaker prefix, Bot 응답, 중첩 `/grade`, `/cancel`, `끝`과 zero-width 문자를 보수적으로 제거하고 원문과 정규화문을 모두 보존합니다.
+
+`grade_submission_normalizer.py`가 제출문 정규화를 소유하고, `verdict_consistency.py`가 최종 판정 일관성을 소유합니다.
+
+최종 판정 일관성은 숫자 점수를 다시 계산하지 않습니다.
+
+- Fatal 오류는 praise, Full Credit, strong와 합격 판정을 차단합니다.
+- Major 비치명 오류는 Full Credit과 strong를 차단하지만 합격을 일률적으로 차단하지 않습니다.
+- Minor 오류는 기존 판정을 유지합니다.
+- `grade_output_summarizer.py`는 동일 허용 플래그를 사용하여 Telegram 표시를 동기화합니다.
 
 ### 4.8 세션 격리
 
@@ -358,7 +375,10 @@ Fail Safe 구현을 위한 Spring 설계 기준을 제시하시오.
 
 ```text
 data/sessions/<session_id>/
+├── input.raw.txt
 ├── input.txt
+├── input.normalized.txt
+├── submission_normalization.json
 ├── grade.json
 ├── meta.json
 ├── images/
@@ -371,9 +391,9 @@ data/sessions/<session_id>/
 
 ```text
 Telegram /grade
-  → bot.py 입력과 session 준비
+  → bot.py 원문 보존과 보수적 제출문 정규화
   → grading identity와 question-only lens
-  → grading_agents.py
+  → grading_agents.py 공통 정규화 경계
   → LLM provider routing
   → semantic grading과 3인 rater 합성
   → Fact Anchor / Model Answer
@@ -384,6 +404,7 @@ Telegram /grade
   → final score reconciliation
   → verified defect/coverage final persistence
   → Bot second-writer final persistence
+  → final decision consistency
   → grade.json 저장
   → Telegram output formatter
 ```
@@ -395,6 +416,8 @@ Telegram /grade
 3. 한 오류는 하나의 canonical owner를 가집니다.
 4. 저장 객체와 출력 객체는 동일해야 합니다.
 5. 완료된 session은 다음 채점에 재사용하지 않습니다.
+6. 제출문 정규화는 topic-neutral하고 idempotent해야 합니다.
+7. 최종 판정 일관성 보정은 숫자 점수를 변경하지 않습니다.
 
 ---
 
@@ -463,7 +486,7 @@ rubrics/topic_packs/<topic_id>/
 └── topic_importance.json
 ```
 
-현재 저장소에는 **Topic Sheet 71개와 Topic Pack 71개가 있으며, 동일한 `<topic_id>`로 71개 모두 1:1 대응**합니다. Topic Sheet만 있고 Topic Pack이 없는 항목도 없고, Topic Pack만 있고 Topic Sheet가 없는 항목도 없습니다.
+현재 저장소에는 **Topic Sheet 75개와 Topic Pack 75개가 있으며, 동일한 `<topic_id>`로 75개 모두 1:1 대응**합니다. Topic Sheet만 있고 Topic Pack이 없는 항목도 없고, Topic Pack만 있고 Topic Sheet가 없는 항목도 없습니다.
 
 이 관계를 기준으로 신규 Topic은 다음 원칙을 따릅니다.
 
@@ -481,7 +504,7 @@ Topic Pack  = Topic Sheet를 구조화한 채점 source
 Generated Rubric Bank = 검증된 Topic Pack을 runtime용으로 합친 build output
 ```
 
-Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **전체 Topic inventory를 기준으로 관리**합니다. 현재 authoritative Topic inventory는 71개입니다.
+Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **전체 Topic inventory를 기준으로 관리**합니다. 현재 authoritative Topic inventory는 75개입니다.
 
 ### 9.2 저장 위치와 역할
 
@@ -494,7 +517,7 @@ Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **�
 | Classification / Coverage / Roadmap | `docs/topic_pack_classification.md`, `docs/exam_scope/` | 공식 criterion ownership, coverage와 추가 우선순위 관리 |
 | Legacy Rubric Bank | `rubrics/*/industrial_instrumentation_control.json` | 기존 통합 bank와 호환·비교 경로 |
 
-현재 저장소에는 **71개 Topic Pack**이 있으며 generated runtime bank는 다음 **6개**입니다.
+현재 저장소에는 **75개 Topic Pack**이 있으며 generated runtime bank는 다음 **6개**입니다.
 
 ```text
 fact_anchors.generated.json

@@ -41,10 +41,10 @@ Source of truth는 `rubrics/scoring_model/default.json`이다.
 
 ```text
 Telegram /grade
-  → bot.py 입력 정규화와 session 준비
+  → bot.py 원문 보존과 grade_submission_normalizer.py
   → grading_identity.py
   → question-only deterministic Question Type lens
-  → grading_agents.py
+  → grading_agents.py 공통 정규화 경계
   → LLM provider routing
   → semantic grading과 3인 rater 합성
   → Fact Anchor / Model Answer evidence
@@ -55,11 +55,39 @@ Telegram /grade
   → Difficulty Strategy / recommended ceiling
   → final score reconciliation
   → final coverage persistence
+  → verdict_consistency.py
   → grade.json 저장
   → 동일 객체를 Telegram formatter에 전달
 ```
 
 `grading_agents.py`가 최초 최종화한 뒤 `bot.py`에서도 final persistence guard를 수행한다. score-bearing field는 저장 직전에 다시 일관성을 확인한다.
+
+
+### 3.1 제출문 정규화 계약
+
+`grade_submission_normalizer.py`는 채점 입력 앞단의 topic-neutral transport normalization을 소유한다.
+
+정규화 대상:
+
+- Telegram timestamp와 speaker prefix
+- Bot 응답 블록
+- 중첩 `/grade`와 `/cancel`
+- 종료 표식 `끝`
+- zero-width 문자
+- 과도한 앞뒤 공백과 연속 빈 줄
+
+정규화는 기술 문장, 수식, 단위와 주장 내용을 재작성하지 않는다.
+
+`bot.py`는 다음 증적을 session에 보존한다.
+
+```text
+input.raw.txt
+input.txt
+input.normalized.txt
+submission_normalization.json
+```
+
+공통 `grading_agents.py` 경계도 동일 normalizer를 적용한다. 정규화 결과는 idempotent해야 하며 같은 입력을 반복 정규화해도 결과가 변하지 않아야 한다.
 
 ## 4. 3인 layer 평가
 
@@ -206,10 +234,25 @@ Telegram의 `cap 적용` 표현은 실제 numeric cap이 적용된 경우에만 
 
 ```text
 final grade object
+  → final decision consistency
   → grade.json
   → same object
   → Telegram formatter
 ```
+
+### 12.1 최종 판정 일관성 계약
+
+`verdict_consistency.py`는 오류 심각도와 최종 칭찬·Full Credit·strong·합격 표시의 충돌을 제거한다.
+
+| 오류 상태 | Full Credit | strong | 합격 | 숫자 점수 |
+|---|---|---|---|---|
+| Fatal | 차단 | 차단 | 차단 | 유지 |
+| Major 비치명 | 차단 | 차단 | 일률 차단하지 않음 | 유지 |
+| Minor | 기존 판정 유지 | 기존 판정 유지 | 기존 판정 유지 | 유지 |
+
+이 단계는 score reconciliation을 다시 수행하지 않는다. `total_score`와 layer score를 직접 변경하지 않는다.
+
+`grade_output_summarizer.py`는 `passing_score_allowed`와 `strong_verdict_allowed`를 사용해 공식 합격선, 실전 목표선과 고득점 표시를 동기화한다. 따라서 저장 객체와 Telegram 출력은 같은 최종 판정 계약을 사용한다.
 
 완료된 session은 다음 채점에서 재사용하지 않는다. 동일 초 session ID 충돌도 방지한다.
 
@@ -251,8 +294,9 @@ Container smoke는 LLM integration, container-only dependency, hostname, mount, 
 
 | 파일 | 역할 |
 |---|---|
-| `bot.py` | Telegram 입력, session, 최종 persistence와 formatter boundary |
-| `grading_agents.py` | semantic grading orchestration |
+| `bot.py` | Telegram 입력, 원문·정규화문 증적, session, 최종 persistence와 formatter boundary |
+| `grade_submission_normalizer.py` | topic-neutral 제출문 정규화와 정규화 증적 |
+| `grading_agents.py` | semantic grading orchestration과 공통 정규화 경계 |
 | `grading_identity.py` | 문제·제출 정규화와 재현성 identity |
 | `question_type_router.py` | question-only deterministic lens |
 | `question_type_coverage_adapter.py` | coverage 정규화 |
@@ -262,5 +306,6 @@ Container smoke는 LLM integration, container-only dependency, hostname, mount, 
 | `logic_check_evaluator.py` | Logic Check 병합 |
 | `difficulty_score_ceiling.py` | recommended ceiling과 strict 적용 |
 | `grade_score_reconciler.py` | 최종 점수·cap·score range 정합성 |
-| `grade_output_summarizer.py` | Telegram 요약과 deterministic fallback |
+| `verdict_consistency.py` | Fatal·Major·Minor 최종 판정 일관성과 숫자 점수 보존 |
+| `grade_output_summarizer.py` | Telegram 요약, pass·strong 표시 동기화와 deterministic fallback |
 | `rubric_bank_paths.py` | legacy/generated runtime bank 선택 |

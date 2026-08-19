@@ -27,6 +27,8 @@
 | Bot 상태 확인, 재시작, 장애 대응 | [`operation_runbook.md`](operation_runbook.md) | [`docker_compose_usage.md`](docker_compose_usage.md) |
 | Compose service, mount와 network 확인 | [`docker_compose_usage.md`](docker_compose_usage.md) | [`operation_runbook.md`](operation_runbook.md) |
 | A/B/C/D/E와 최종 score flow 이해 | [`grading_architecture.md`](grading_architecture.md) | [`question_type_taxonomy.md`](question_type_taxonomy.md), [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) |
+| 제출문 정규화와 원문·정규화 증적 확인 | [`grading_architecture.md`](grading_architecture.md) | `grade_submission_normalizer.py`, `bot.py` |
+| Fatal·Major 오류의 최종 판정 일관성 확인 | [`grading_architecture.md`](grading_architecture.md) | `verdict_consistency.py`, `grade_output_summarizer.py` |
 | Active Question Type과 deterministic lens 확인 | [`question_type_taxonomy.md`](question_type_taxonomy.md) | [`grading_architecture.md`](grading_architecture.md) |
 | `incorrect`, `missing`과 hard cap 확인 | [`grading_architecture.md`](grading_architecture.md) | [`question_type_taxonomy.md`](question_type_taxonomy.md) |
 | Verified defect와 single-owner 정책 확인 | [`grading_architecture.md`](grading_architecture.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
@@ -56,7 +58,7 @@
 
 | 문서 | 책임 |
 |---|---|
-| [`grading_architecture.md`](grading_architecture.md) | grading pipeline, A/B/C/D/E, score adjustment, cap, verified defect, final persistence |
+| [`grading_architecture.md`](grading_architecture.md) | grading pipeline, 제출문 정규화, A/B/C/D/E, score adjustment, cap, verified defect, 최종 판정 일관성과 persistence |
 | [`question_type_taxonomy.md`](question_type_taxonomy.md) | active type 4종, legacy mapping, question-only lens, coverage 상태와 최종 type/name |
 | [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) | Difficulty Profile, THEORY_CORE, recommended ceiling과 applied cap |
 | [`llm_provider.md`](llm_provider.md) | provider routing, fallback, JSON parsing과 Python 후처리 경계 |
@@ -65,7 +67,7 @@
 
 | 문서 | 책임 |
 |---|---|
-| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, 52개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
+| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, 75개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | Fact Anchor, Model Answer, Topic Importance와 Logic Check source 작성 기준 |
 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | 요구사항 → 직접 source JSON authoring → focused validation → integration rebuild → release/CI 검증 |
 
@@ -89,11 +91,13 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 |---|---|---|
 | 배점 | A/B/C/D/E = 3/6/8/6/2 | `rubrics/scoring_model/default.json` |
 | Active Question Type | 4종 | `rubrics/question_types/default.json`, Question Type modules |
-| Topic Pack | 52개 | `rubrics/generated/topic_pack_manifest.generated.json` |
+| Topic Pack | 75개 | `rubrics/generated/topic_pack_manifest.generated.json` |
 | Generated bank | 6개 | `rubrics/generated/*.generated.json` |
 | Software Topic | SW-01~SW-13, 13개 | `docs/topic_pack_architecture.md`, generated manifest |
 | 기본 Rubric Bank | `generated` | `rubric_bank_paths.py` |
 | Lens 입력 | 문제문만 사용 | `question_type_router.py`, `grading_identity.py` |
+| 제출문 정규화 | topic-neutral·idempotent, 원문·정규화문 증적 보존 | `grade_submission_normalizer.py`, `bot.py`, `grading_agents.py` |
+| 최종 판정 일관성 | Fatal은 Full Credit·strong·합격 차단, Major는 Full Credit·strong 차단, 숫자 점수 유지 | `verdict_consistency.py`, `grade_output_summarizer.py` |
 | Coverage 상태 | `present`, `partial`, `incorrect`, `missing` | `question_type_coverage_adapter.py` |
 | Hard cap | high-confidence 핵심 `missing`에만 적용 | `explicit_requirement_cap.py` |
 | Correctness owner | verified Fact 오류는 기본 C owner | `verified_defect_reconciliation.py`, `layer_evidence_guard.py` |
@@ -111,6 +115,8 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | 정책 | 상세 소유 문서 | 주요 runtime |
 |---|---|---|
 | A/B/C/D/E 배점과 score flow | `grading_architecture.md` | `grading_agents.py`, `grade_score_reconciler.py` |
+| 제출문 정규화와 증적 | `grading_architecture.md` | `grade_submission_normalizer.py`, `bot.py`, `grading_agents.py` |
+| 최종 판정 일관성과 숫자 점수 보존 | `grading_architecture.md` | `verdict_consistency.py`, `grade_output_summarizer.py` |
 | Deterministic grading identity | `grading_architecture.md` | `grading_identity.py` |
 | Question-only type lens | `question_type_taxonomy.md` | `question_type_router.py`, `question_type_taxonomy.py` |
 | `present`, `partial`, `incorrect`, `missing` | `question_type_taxonomy.md` | `question_type_coverage_adapter.py` |
@@ -137,6 +143,8 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | 주제 | 우선 기준 |
 |---|---|
 | Telegram 입력, session과 최종 저장 | `bot.py` |
+| 제출문 정규화 | `grade_submission_normalizer.py`; 증적 저장은 `bot.py` |
+| 최종 판정 일관성 | `verdict_consistency.py`; 표시 동기화는 `grade_output_summarizer.py` |
 | Grading orchestration과 최초 persistence | `grading_agents.py` |
 | 최종 점수, cap과 score range | `grade_score_reconciler.py` |
 | A/B/C/D/E | `rubrics/scoring_model/default.json`과 runtime scoring code |
@@ -185,6 +193,8 @@ Topic Pack source JSON을 만들기 전에 사람이 검토하는 구조화 Mark
 12. Generator prompt와 사람이 검토하는 운영 guide를 구분합니다.
 13. 최종 저장 객체와 Telegram 출력 객체가 다르다고 설명하지 않습니다.
 14. 완료된 채점이 같은 session 디렉터리를 재사용한다고 설명하지 않습니다.
+15. 제출문 정규화가 기술 내용이나 점수를 재작성한다고 설명하지 않습니다.
+16. Fatal·Major 판정 일관성 보정이 숫자 점수를 변경한다고 설명하지 않습니다.
 
 ---
 
