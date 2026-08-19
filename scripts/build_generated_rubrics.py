@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import hashlib
 import json
-from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
@@ -41,8 +41,23 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
     print(f"wrote: {path}")
 
 
-def now_version() -> str:
-    return datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")
+def content_version(
+    packs: list[dict[str, Any]],
+) -> str:
+    """Return a deterministic version for generator and topic-pack inputs."""
+
+    digest = hashlib.sha256()
+    digest.update(Path(__file__).resolve().read_bytes())
+    digest.update(b"\0")
+    digest.update(
+        json.dumps(
+            packs,
+            ensure_ascii=False,
+            sort_keys=True,
+            separators=(",", ":"),
+        ).encode("utf-8")
+    )
+    return f"sha256-{digest.hexdigest()}"
 
 
 def load_topic_pack(pack_dir: Path) -> dict[str, Any]:
@@ -756,7 +771,7 @@ def main() -> int:
     if len(topic_ids) != len(set(topic_ids)):
         fail("duplicate topic_id in topic packs")
 
-    version = now_version()
+    version = content_version(packs)
 
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 

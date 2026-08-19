@@ -40,6 +40,7 @@ APPLICATION_TOPICS = {
     "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
     "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
     "control_valve_gas_sizing_choked_flow_critical_pressure_ratio",
+    "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
     "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
     "control_valve_positioner_ip_converter_booster_accessories_calibration",
     "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
@@ -99,7 +100,7 @@ ALLOWED_SELECTION_IMPORTANCE = {
 
 EXPECTED_DIFFICULTY_COUNTS = {
     "THEORY_CORE": 22,
-    "FIELD_APPLICATION": 36,
+    "FIELD_APPLICATION": 37,
     "DESIGN_EVALUATION": 16,
 }
 
@@ -121,7 +122,7 @@ def main() -> None:
         | DESIGN_TOPICS
     )
 
-    assert len(actual_topics) == 74
+    assert len(actual_topics) == len(classified_topics)
     assert actual_topics == classified_topics
 
     assert not (THEORY_TOPICS & APPLICATION_TOPICS)

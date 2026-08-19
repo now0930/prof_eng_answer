@@ -1,0 +1,440 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/topic_pack_spec.schema.json",
+  "title": "Topic Pack Technical Content Specification",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "topic-spec-v1"
+    },
+    "profile_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9_]*_v[0-9]+$"
+    },
+    "topic_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$",
+      "minLength": 8
+    },
+    "title_ko": {
+      "type": "string",
+      "minLength": 1
+    },
+    "question_type": {
+      "type": "string",
+      "pattern": "^[A-Z][A-Z0-9_]*$"
+    },
+    "difficulty": {
+      "type": "string",
+      "minLength": 1
+    },
+    "selection_importance": {
+      "type": "string",
+      "minLength": 1
+    },
+    "scope_summary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "ownership_statements": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "kind",
+          "statement"
+        ],
+        "properties": {
+          "kind": {
+            "enum": [
+              "OWNED",
+              "EXCLUDED"
+            ]
+          },
+          "statement": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "anchors",
+        "fatal_wrong_claims",
+        "major_checks",
+        "question_patterns",
+        "recommended_outline",
+        "routing_aliases",
+        "high_band_unlock_conditions",
+        "revision_notes"
+      ],
+      "properties": {
+        "anchors": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "fatal_wrong_claims": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "major_checks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "question_patterns": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "recommended_outline": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "routing_aliases": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "high_band_unlock_conditions": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "revision_notes": {
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "anchors": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "title",
+          "content",
+          "keywords",
+          "importance"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "minLength": 2
+          },
+          "title": {
+            "type": "string",
+            "minLength": 1
+          },
+          "content": {
+            "type": "string",
+            "minLength": 1
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          },
+          "importance": {
+            "type": "string",
+            "enum": [
+              "core",
+              "must",
+              "important"
+            ]
+          }
+        }
+      }
+    },
+    "fatal_wrong_claims": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "claim",
+          "correct_rule",
+          "rationale",
+          "keywords"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "minLength": 2
+          },
+          "claim": {
+            "type": "string",
+            "minLength": 1
+          },
+          "correct_rule": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "major_checks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "check",
+          "expected",
+          "rationale",
+          "keywords"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "minLength": 2
+          },
+          "check": {
+            "type": "string",
+            "minLength": 1
+          },
+          "expected": {
+            "type": "string",
+            "minLength": 1
+          },
+          "rationale": {
+            "type": "string",
+            "minLength": 1
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "minLength": 1
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "question_patterns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "id",
+          "pattern",
+          "required_anchor_ids"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9_]*$",
+            "minLength": 2
+          },
+          "pattern": {
+            "type": "string",
+            "minLength": 1
+          },
+          "required_anchor_ids": {
+            "type": "array",
+            "minItems": 1,
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*$",
+              "minLength": 2
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "recommended_outline": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "section",
+          "purpose",
+          "anchor_ids"
+        ],
+        "properties": {
+          "section": {
+            "type": "string",
+            "minLength": 1
+          },
+          "purpose": {
+            "type": "string",
+            "minLength": 1
+          },
+          "anchor_ids": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "pattern": "^[a-z][a-z0-9_]*$",
+              "minLength": 2
+            },
+            "uniqueItems": true
+          }
+        }
+      }
+    },
+    "routing_aliases": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "high_band_unlock_conditions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "revision_notes": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
+    },
+    "handoffs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "topic_id",
+          "trigger",
+          "scope"
+        ],
+        "properties": {
+          "topic_id": {
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$"
+          },
+          "trigger": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "standards_and_sources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "reference",
+          "edition",
+          "relevance"
+        ],
+        "properties": {
+          "reference": {
+            "type": "string",
+            "minLength": 1
+          },
+          "edition": {
+            "type": "string",
+            "minLength": 1
+          },
+          "relevance": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "expected_question_patterns": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "pattern",
+          "intent"
+        ],
+        "properties": {
+          "pattern": {
+            "type": "string",
+            "minLength": 1
+          },
+          "intent": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "high_score_points": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  },
+  "required": [
+    "schema_version",
+    "profile_id",
+    "topic_id",
+    "title_ko",
+    "question_type",
+    "difficulty",
+    "selection_importance",
+    "scope_summary",
+    "ownership_statements",
+    "counts",
+    "anchors",
+    "fatal_wrong_claims",
+    "major_checks",
+    "question_patterns",
+    "recommended_outline",
+    "routing_aliases",
+    "high_band_unlock_conditions",
+    "revision_notes",
+    "handoffs",
+    "expected_question_patterns",
+    "high_score_points"
+  ]
+}

@@ -1,0 +1,1471 @@
+{
+  "$schema": "../../schemas/topic_pack_profile.schema.json",
+  "schema_version": "topic-profile-v1",
+  "profile_id": "implementation_evaluation_v1",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "source_files": [
+    "README.md",
+    "fact_anchor.json",
+    "logic_check.json",
+    "model_answer.json",
+    "topic_importance.json"
+  ],
+  "fixed_values": {
+    "deterministic_checks_enabled": false,
+    "finding_fields": [
+      "candidate_id",
+      "rule_id",
+      "severity",
+      "message",
+      "correct_rule"
+    ]
+  },
+  "content_contract": {
+    "required_spec_fields": [
+      "schema_version",
+      "profile_id",
+      "topic_id",
+      "title_ko",
+      "question_type",
+      "difficulty",
+      "selection_importance",
+      "scope_summary",
+      "ownership_statements",
+      "counts",
+      "anchors",
+      "fatal_wrong_claims",
+      "major_checks",
+      "question_patterns",
+      "recommended_outline",
+      "routing_aliases",
+      "high_band_unlock_conditions",
+      "revision_notes",
+      "handoffs"
+    ],
+    "count_fields": [
+      "anchors",
+      "fatal_wrong_claims",
+      "major_checks",
+      "question_patterns",
+      "recommended_outline",
+      "routing_aliases",
+      "high_band_unlock_conditions",
+      "revision_notes"
+    ]
+  },
+  "canonical_files": {
+    "fact_anchor.json": {
+      "shape_hash": "b5727996e5c09e598caae6710c525c78fc94a0c86ae03d9ecb736534aa64669c",
+      "required_top_level_keys": [
+        "anchors",
+        "core_facts",
+        "fatal_wrong_claims",
+        "question_type_hint",
+        "revision_notes",
+        "safe_expressions",
+        "schema_version",
+        "title_ko",
+        "topic_id",
+        "topic_label"
+      ],
+      "shape_schema": {
+        "type": "object",
+        "properties": {
+          "anchors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "accepted_explanations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "anchor_id": {
+                  "type": "string"
+                },
+                "claim": {
+                  "type": "string"
+                },
+                "core_terms": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "description": {
+                  "type": "string"
+                },
+                "grading_notes": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "importance": {
+                  "type": "string",
+                  "enum": [
+                    "core",
+                    "must",
+                    "important"
+                  ]
+                },
+                "keywords": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "rejected_explanations": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "source_basis": {
+                  "type": "string"
+                },
+                "statement": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "accepted_explanations",
+                "anchor_id",
+                "claim",
+                "core_terms",
+                "description",
+                "grading_notes",
+                "id",
+                "importance",
+                "keywords",
+                "rejected_explanations",
+                "source_basis",
+                "statement"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "core_facts": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fatal_wrong_claims": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "affected_layers": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "claim": {
+                  "type": "string"
+                },
+                "correct_rule": {
+                  "type": "string"
+                },
+                "correction": {
+                  "type": "string"
+                },
+                "description": {
+                  "type": "string"
+                },
+                "grading_notes": {
+                  "type": "string"
+                },
+                "id": {
+                  "type": "string"
+                },
+                "message": {
+                  "type": "string"
+                },
+                "severity": {
+                  "type": "string"
+                },
+                "wrong_claim": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "affected_layers",
+                "claim",
+                "correct_rule",
+                "correction",
+                "description",
+                "grading_notes",
+                "id",
+                "message",
+                "severity",
+                "wrong_claim"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "question_type_hint": {
+            "type": "string"
+          },
+          "revision_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "safe_expressions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "schema_version": {
+            "type": "string"
+          },
+          "title_ko": {
+            "type": "string"
+          },
+          "topic_id": {
+            "type": "string"
+          },
+          "topic_label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "anchors",
+          "core_facts",
+          "fatal_wrong_claims",
+          "question_type_hint",
+          "revision_notes",
+          "safe_expressions",
+          "schema_version",
+          "title_ko",
+          "topic_id",
+          "topic_label"
+        ],
+        "additionalProperties": false
+      },
+      "template": {
+        "schema_version": "topic_pack.fact_anchor.v1",
+        "topic_id": "",
+        "title_ko": "",
+        "question_type_hint": "",
+        "anchors": [
+          {
+            "id": "",
+            "anchor_id": "",
+            "statement": "",
+            "importance": "",
+            "keywords": [
+              ""
+            ],
+            "core_terms": [
+              ""
+            ],
+            "accepted_explanations": [
+              ""
+            ],
+            "rejected_explanations": [
+              ""
+            ],
+            "grading_notes": "",
+            "source_basis": "",
+            "claim": "",
+            "description": ""
+          }
+        ],
+        "core_facts": [
+          ""
+        ],
+        "fatal_wrong_claims": [
+          {
+            "id": "",
+            "claim": "",
+            "wrong_claim": "",
+            "correction": "",
+            "correct_rule": "",
+            "severity": "",
+            "affected_layers": [
+              ""
+            ],
+            "message": "",
+            "description": "",
+            "grading_notes": ""
+          }
+        ],
+        "safe_expressions": [
+          ""
+        ],
+        "revision_notes": [
+          ""
+        ],
+        "topic_label": ""
+      }
+    },
+    "logic_check.json": {
+      "shape_hash": "516f358c910fc42470ad7f135bc09fffcdca87f97b364c19075ac95cec2af216",
+      "required_top_level_keys": [
+        "deterministic_checks",
+        "llm_profile",
+        "revision_notes",
+        "schema_version",
+        "title",
+        "topic_id",
+        "topic_label"
+      ],
+      "shape_schema": {
+        "type": "object",
+        "properties": {
+          "deterministic_checks": {
+            "type": "object",
+            "properties": {
+              "de_claim_trust": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              },
+              "difficulty_profile": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              },
+              "fatal_checks": {
+                "type": "array",
+                "items": {}
+              },
+              "major_checks": {
+                "type": "array",
+                "items": {}
+              },
+              "next_practice_points": {
+                "type": "array",
+                "items": {}
+              },
+              "question_type": {
+                "type": "string"
+              },
+              "question_type_checks": {
+                "type": "array",
+                "items": {}
+              },
+              "topic_aliases": {
+                "type": "array",
+                "items": {}
+              },
+              "topic_name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "de_claim_trust",
+              "difficulty_profile",
+              "enabled",
+              "fatal_checks",
+              "major_checks",
+              "next_practice_points",
+              "question_type",
+              "question_type_checks",
+              "topic_aliases",
+              "topic_name"
+            ],
+            "additionalProperties": false
+          },
+          "llm_profile": {
+            "type": "object",
+            "properties": {
+              "candidate_extraction": {
+                "type": "object",
+                "properties": {
+                  "key_terms": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "max_candidates": {
+                    "type": "integer"
+                  },
+                  "nearby_window": {
+                    "type": "integer"
+                  },
+                  "rules": {
+                    "type": "array",
+                    "items": {}
+                  }
+                },
+                "required": [
+                  "key_terms",
+                  "max_candidates",
+                  "nearby_window",
+                  "rules"
+                ],
+                "additionalProperties": false
+              },
+              "cap_policy": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              },
+              "difficulty": {
+                "type": "string"
+              },
+              "display_name": {
+                "type": "string"
+              },
+              "enabled": {
+                "type": "boolean"
+              },
+              "false_positive_cautions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "fatal_conditions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "feedback_templates": {
+                "type": "object",
+                "properties": {},
+                "required": [],
+                "additionalProperties": false
+              },
+              "major_checks": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "claim": {
+                      "type": "string"
+                    },
+                    "correction": {
+                      "type": "string"
+                    },
+                    "id": {
+                      "type": "string"
+                    },
+                    "severity": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "claim",
+                    "correction",
+                    "id",
+                    "severity"
+                  ],
+                  "additionalProperties": false
+                }
+              },
+              "next_practice_points": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "output_contract": {
+                "type": "object",
+                "properties": {
+                  "finding_fields": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    },
+                    "minItems": 1,
+                    "uniqueItems": true
+                  }
+                },
+                "required": [],
+                "additionalProperties": false
+              },
+              "safe_conditions": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "score_policy": {
+                "type": "object",
+                "properties": {
+                  "affected_layers": {
+                    "type": "array",
+                    "items": {
+                      "type": "string"
+                    }
+                  },
+                  "direct_d_e_effect": {
+                    "type": "string"
+                  },
+                  "direct_score_application": {
+                    "type": "boolean"
+                  }
+                },
+                "required": [
+                  "affected_layers",
+                  "direct_d_e_effect",
+                  "direct_score_application"
+                ],
+                "additionalProperties": false
+              },
+              "truth_schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "required": [
+              "candidate_extraction",
+              "cap_policy",
+              "difficulty",
+              "display_name",
+              "enabled",
+              "false_positive_cautions",
+              "fatal_conditions",
+              "feedback_templates",
+              "major_checks",
+              "next_practice_points",
+              "output_contract",
+              "safe_conditions",
+              "score_policy",
+              "truth_schema"
+            ],
+            "additionalProperties": false
+          },
+          "revision_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "schema_version": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "topic_id": {
+            "type": "string"
+          },
+          "topic_label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "deterministic_checks",
+          "llm_profile",
+          "revision_notes",
+          "schema_version",
+          "title",
+          "topic_id",
+          "topic_label"
+        ],
+        "additionalProperties": false
+      },
+      "template": {
+        "schema_version": "topic_pack.logic_check.v1",
+        "topic_id": "",
+        "title": "",
+        "deterministic_checks": {
+          "enabled": false,
+          "topic_name": "",
+          "question_type": "",
+          "difficulty_profile": "",
+          "topic_aliases": [],
+          "fatal_checks": [],
+          "major_checks": [],
+          "question_type_checks": [],
+          "next_practice_points": [],
+          "de_claim_trust": {}
+        },
+        "llm_profile": {
+          "display_name": "",
+          "difficulty": "",
+          "cap_policy": {},
+          "candidate_extraction": {
+            "max_candidates": 0,
+            "nearby_window": 0,
+            "rules": [],
+            "key_terms": [
+              ""
+            ]
+          },
+          "truth_schema": [
+            ""
+          ],
+          "fatal_conditions": [
+            ""
+          ],
+          "safe_conditions": [
+            ""
+          ],
+          "output_contract": {},
+          "major_checks": [
+            {
+              "id": "",
+              "claim": "",
+              "correction": "",
+              "severity": ""
+            }
+          ],
+          "feedback_templates": {},
+          "next_practice_points": [
+            ""
+          ],
+          "false_positive_cautions": [
+            ""
+          ],
+          "enabled": false,
+          "score_policy": {
+            "direct_score_application": false,
+            "direct_d_e_effect": "",
+            "affected_layers": [
+              ""
+            ]
+          }
+        },
+        "revision_notes": [
+          ""
+        ],
+        "topic_label": ""
+      }
+    },
+    "model_answer.json": {
+      "shape_hash": "98b911857e47ab9322076773d374112ce8b3263857620ea4b0a169d01f94f021",
+      "required_top_level_keys": [
+        "common_missing_points",
+        "expected_question_patterns",
+        "expected_structure",
+        "field_connection_points",
+        "high_score_features",
+        "high_score_points",
+        "id",
+        "low_score_patterns",
+        "question_examples",
+        "question_type",
+        "recommended_outline",
+        "revision_notes",
+        "routing_aliases",
+        "routing_field_points",
+        "schema_version",
+        "title",
+        "title_ko",
+        "topic_aliases",
+        "topic_id"
+      ],
+      "shape_schema": {
+        "type": "object",
+        "properties": {
+          "common_missing_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "expected_question_patterns": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "intent": {
+                  "type": "string"
+                },
+                "pattern": {
+                  "type": "string"
+                },
+                "required_anchor_ids": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              },
+              "required": [
+                "intent",
+                "pattern",
+                "required_anchor_ids"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "expected_structure": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "field_connection_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "high_score_features": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "high_score_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "id": {
+            "type": "string"
+          },
+          "low_score_patterns": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "question_examples": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "question_type": {
+            "type": "string"
+          },
+          "recommended_outline": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "anchor_refs": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "intent": {
+                  "type": "string"
+                },
+                "section": {
+                  "type": "string"
+                }
+              },
+              "required": [
+                "anchor_refs",
+                "intent",
+                "section"
+              ],
+              "additionalProperties": false
+            }
+          },
+          "revision_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "routing_aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "routing_field_points": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "schema_version": {
+            "type": "string"
+          },
+          "title": {
+            "type": "string"
+          },
+          "title_ko": {
+            "type": "string"
+          },
+          "topic_aliases": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "topic_id": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "common_missing_points",
+          "expected_question_patterns",
+          "expected_structure",
+          "field_connection_points",
+          "high_score_features",
+          "high_score_points",
+          "id",
+          "low_score_patterns",
+          "question_examples",
+          "question_type",
+          "recommended_outline",
+          "revision_notes",
+          "routing_aliases",
+          "routing_field_points",
+          "schema_version",
+          "title",
+          "title_ko",
+          "topic_aliases",
+          "topic_id"
+        ],
+        "additionalProperties": false
+      },
+      "template": {
+        "schema_version": "topic_pack.model_answer.v1",
+        "topic_id": "",
+        "title_ko": "",
+        "question_type": "",
+        "expected_question_patterns": [
+          {
+            "pattern": "",
+            "intent": "",
+            "required_anchor_ids": [
+              ""
+            ]
+          }
+        ],
+        "recommended_outline": [
+          {
+            "section": "",
+            "intent": "",
+            "anchor_refs": [
+              ""
+            ]
+          }
+        ],
+        "high_score_points": [
+          ""
+        ],
+        "common_missing_points": [
+          ""
+        ],
+        "routing_aliases": [
+          ""
+        ],
+        "routing_field_points": [
+          ""
+        ],
+        "revision_notes": [
+          ""
+        ],
+        "id": "",
+        "title": "",
+        "question_examples": [
+          ""
+        ],
+        "topic_aliases": [
+          ""
+        ],
+        "expected_structure": [
+          ""
+        ],
+        "high_score_features": [
+          ""
+        ],
+        "low_score_patterns": [
+          ""
+        ],
+        "field_connection_points": [
+          ""
+        ]
+      }
+    },
+    "topic_importance.json": {
+      "shape_hash": "61c8fcb645e92f2f75c935db8108f99ed97e778908a0d850fc3c264606e124e8",
+      "required_top_level_keys": [
+        "difficulty",
+        "high_band_unlock_conditions",
+        "note",
+        "question_type",
+        "revision_notes",
+        "schema_version",
+        "selection_importance",
+        "topic_id",
+        "topic_label"
+      ],
+      "shape_schema": {
+        "type": "object",
+        "properties": {
+          "difficulty": {
+            "type": "string"
+          },
+          "high_band_unlock_conditions": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "note": {
+            "type": "string"
+          },
+          "question_type": {
+            "type": "string"
+          },
+          "revision_notes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "schema_version": {
+            "type": "string"
+          },
+          "selection_importance": {
+            "type": "string"
+          },
+          "topic_id": {
+            "type": "string"
+          },
+          "topic_label": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "difficulty",
+          "high_band_unlock_conditions",
+          "note",
+          "question_type",
+          "revision_notes",
+          "schema_version",
+          "selection_importance",
+          "topic_id",
+          "topic_label"
+        ],
+        "additionalProperties": false
+      },
+      "template": {
+        "schema_version": "topic_pack.topic_importance.v1",
+        "topic_id": "",
+        "difficulty": "",
+        "selection_importance": "",
+        "question_type": "",
+        "high_band_unlock_conditions": [
+          ""
+        ],
+        "note": "",
+        "revision_notes": [
+          ""
+        ],
+        "topic_label": ""
+      }
+    }
+  },
+  "canonical_items": {
+    "anchors": {
+      "target_file": "fact_anchor.json",
+      "target_path": "$.anchors",
+      "item_schema": {
+        "type": "object",
+        "properties": {
+          "accepted_explanations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "anchor_id": {
+            "type": "string"
+          },
+          "claim": {
+            "type": "string"
+          },
+          "core_terms": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "description": {
+            "type": "string"
+          },
+          "grading_notes": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "importance": {
+            "type": "string"
+          },
+          "keywords": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rejected_explanations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "source_basis": {
+            "type": "string"
+          },
+          "statement": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "accepted_explanations",
+          "anchor_id",
+          "claim",
+          "core_terms",
+          "description",
+          "grading_notes",
+          "id",
+          "importance",
+          "keywords",
+          "rejected_explanations",
+          "source_basis",
+          "statement"
+        ],
+        "additionalProperties": false
+      },
+      "item_template": {
+        "id": "",
+        "anchor_id": "",
+        "statement": "",
+        "importance": "",
+        "keywords": [
+          ""
+        ],
+        "core_terms": [
+          ""
+        ],
+        "accepted_explanations": [
+          ""
+        ],
+        "rejected_explanations": [
+          ""
+        ],
+        "grading_notes": "",
+        "source_basis": "",
+        "claim": "",
+        "description": ""
+      }
+    },
+    "fatal_wrong_claims": {
+      "target_file": "fact_anchor.json",
+      "target_path": "$.fatal_wrong_claims",
+      "item_schema": {
+        "type": "object",
+        "properties": {
+          "affected_layers": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "claim": {
+            "type": "string"
+          },
+          "correct_rule": {
+            "type": "string"
+          },
+          "correction": {
+            "type": "string"
+          },
+          "description": {
+            "type": "string"
+          },
+          "grading_notes": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string"
+          },
+          "wrong_claim": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "affected_layers",
+          "claim",
+          "correct_rule",
+          "correction",
+          "description",
+          "grading_notes",
+          "id",
+          "message",
+          "severity",
+          "wrong_claim"
+        ],
+        "additionalProperties": false
+      },
+      "item_template": {
+        "id": "",
+        "claim": "",
+        "wrong_claim": "",
+        "correction": "",
+        "correct_rule": "",
+        "severity": "",
+        "affected_layers": [
+          ""
+        ],
+        "message": "",
+        "description": "",
+        "grading_notes": ""
+      }
+    },
+    "fatal_conditions": {
+      "target_file": "logic_check.json",
+      "target_path": "$.llm_profile.fatal_conditions",
+      "item_schema": {
+        "type": "string"
+      },
+      "item_template": ""
+    },
+    "major_checks": {
+      "target_file": "logic_check.json",
+      "target_path": "$.llm_profile.major_checks",
+      "item_schema": {
+        "type": "object",
+        "properties": {
+          "claim": {
+            "type": "string"
+          },
+          "correction": {
+            "type": "string"
+          },
+          "id": {
+            "type": "string"
+          },
+          "severity": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "claim",
+          "correction",
+          "id",
+          "severity"
+        ],
+        "additionalProperties": false
+      },
+      "item_template": {
+        "id": "",
+        "claim": "",
+        "correction": "",
+        "severity": ""
+      }
+    },
+    "finding_fields": {
+      "target_file": "logic_check.json",
+      "target_path": "$.llm_profile.output_contract.finding_fields",
+      "item_schema": {
+        "type": "string"
+      },
+      "item_template": ""
+    },
+    "question_patterns": {
+      "target_file": "model_answer.json",
+      "target_path": "$.expected_question_patterns",
+      "item_schema": {
+        "type": "object",
+        "properties": {
+          "intent": {
+            "type": "string"
+          },
+          "pattern": {
+            "type": "string"
+          },
+          "required_anchor_ids": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "required": [
+          "intent",
+          "pattern",
+          "required_anchor_ids"
+        ],
+        "additionalProperties": false
+      },
+      "item_template": {
+        "pattern": "",
+        "intent": "",
+        "required_anchor_ids": [
+          ""
+        ]
+      }
+    },
+    "recommended_outline": {
+      "target_file": "model_answer.json",
+      "target_path": "$.recommended_outline",
+      "item_schema": {
+        "type": "object",
+        "properties": {
+          "anchor_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "intent": {
+            "type": "string"
+          },
+          "section": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "anchor_refs",
+          "intent",
+          "section"
+        ],
+        "additionalProperties": false
+      },
+      "item_template": {
+        "section": "",
+        "intent": "",
+        "anchor_refs": [
+          ""
+        ]
+      }
+    },
+    "routing_aliases": {
+      "target_file": "model_answer.json",
+      "target_path": "$.routing_aliases",
+      "item_schema": {
+        "type": "string"
+      },
+      "item_template": ""
+    },
+    "high_band_unlock_conditions": {
+      "target_file": "topic_importance.json",
+      "target_path": "$.high_band_unlock_conditions",
+      "item_schema": {
+        "type": "string"
+      },
+      "item_template": ""
+    },
+    "revision_notes": {
+      "target_file": "topic_importance.json",
+      "target_path": "$.revision_notes",
+      "item_schema": {
+        "type": "string"
+      },
+      "item_template": ""
+    }
+  },
+  "projections": [
+    {
+      "spec_field": "topic_id",
+      "target": "all four JSON top-level topic_id",
+      "projection_mode": "EXACT"
+    },
+    {
+      "spec_field": "title_ko",
+      "target": "all supported title fields and README H1",
+      "projection_mode": "PROFILE"
+    },
+    {
+      "spec_field": "anchors",
+      "target": "fact_anchor.json $.anchors",
+      "projection_mode": "PROFILE_SCHEMA"
+    },
+    {
+      "spec_field": "fatal_wrong_claims",
+      "target": "fact_anchor.json $.fatal_wrong_claims",
+      "projection_mode": "PROFILE_SCHEMA"
+    },
+    {
+      "spec_field": "fatal_wrong_claims",
+      "target": "logic_check.json $.llm_profile.fatal_conditions",
+      "projection_mode": "PROFILE_SCHEMA"
+    },
+    {
+      "spec_field": "major_checks",
+      "target": "logic_check.json $.llm_profile.major_checks",
+      "projection_mode": "PROFILE_SCHEMA"
+    },
+    {
+      "spec_field": "question_patterns",
+      "target": "model_answer.json $.expected_question_patterns",
+      "projection_mode": "PROFILE_SCHEMA"
+    },
+    {
+      "spec_field": "recommended_outline",
+      "target": "model_answer.json $.recommended_outline",
+      "projection_mode": "PROFILE_SCHEMA"
+    },
+    {
+      "spec_field": "routing_aliases",
+      "target": "model_answer.json $.routing_aliases",
+      "projection_mode": "EXACT"
+    },
+    {
+      "spec_field": "high_score_points",
+      "target": "model_answer.json $.high_score_points",
+      "projection_mode": "EXACT"
+    },
+    {
+      "projection_mode": "EXACT",
+      "spec_field": "expected_question_patterns",
+      "target": "model_answer.json $.expected_question_patterns"
+    },
+    {
+      "spec_field": "high_band_unlock_conditions",
+      "target": "topic_importance.json $.high_band_unlock_conditions",
+      "projection_mode": "EXACT"
+    },
+    {
+      "spec_field": "revision_notes",
+      "target": "topic_importance.json $.revision_notes",
+      "projection_mode": "EXACT"
+    },
+    {
+      "spec_field": "handoffs",
+      "target": "README adjacent Topic section",
+      "projection_mode": "RENDERED"
+    },
+    {
+      "spec_field": "handoffs",
+      "target": "model_answer.json approved routing field",
+      "projection_mode": "RENDERED"
+    },
+    {
+      "spec_field": "handoffs",
+      "target": "generic validator expected destination registry",
+      "projection_mode": "VALIDATION_ONLY"
+    },
+    {
+      "spec_field": "finding_fields",
+      "target": "logic_check.json $.llm_profile.output_contract.finding_fields",
+      "projection_mode": "FIXED"
+    },
+    {
+      "spec_field": "question_type",
+      "target": "model_answer.json and topic_importance.json",
+      "projection_mode": "EXACT"
+    }
+  ],
+  "policies": {
+    "item_schema_policy": "Use profile-owned item schemas; never infer structure from donor element zero.",
+    "handoff_policy": "Project typed handoffs only to profile-approved targets.",
+    "legacy_policy": "Existing Topic Packs remain read-only legacy inputs.",
+    "generated_policy": "Build never edits generated banks; release reuses the existing six-bank pipeline.",
+    "test_policy": "Use one generic unittest contract instead of bespoke per-topic test implementations.",
+    "runtime_donor_dependency": false,
+    "new_dependency_allowed": false
+  },
+  "error_codes": [
+    {
+      "error_code": "TP001_SPEC_SCHEMA_INVALID",
+      "gate": "plan",
+      "meaning": "spec JSON does not match canonical schema"
+    },
+    {
+      "error_code": "TP002_PROFILE_NOT_FOUND",
+      "gate": "plan",
+      "meaning": "profile_id does not resolve"
+    },
+    {
+      "error_code": "TP003_TOPIC_ID_COLLISION",
+      "gate": "plan",
+      "meaning": "target topic already exists"
+    },
+    {
+      "error_code": "TP004_COUNT_MISMATCH",
+      "gate": "plan",
+      "meaning": "declared and actual content counts differ"
+    },
+    {
+      "error_code": "TP005_ANCHOR_REFERENCE_INVALID",
+      "gate": "plan",
+      "meaning": "question or outline references unknown anchor"
+    },
+    {
+      "error_code": "TP006_HANDOFF_DESTINATION_INVALID",
+      "gate": "plan",
+      "meaning": "typed handoff destination does not exist"
+    },
+    {
+      "error_code": "TP007_ALIAS_COLLISION",
+      "gate": "plan",
+      "meaning": "alias conflicts with an existing topic"
+    },
+    {
+      "error_code": "TP008_RENDER_SCHEMA_INVALID",
+      "gate": "build",
+      "meaning": "rendered source violates profile schema"
+    },
+    {
+      "error_code": "TP009_FORBIDDEN_RESIDUE",
+      "gate": "build",
+      "meaning": "unapproved donor or topic reference remains"
+    },
+    {
+      "error_code": "TP010_FOCUSED_VALIDATION_FAILED",
+      "gate": "build",
+      "meaning": "generic source validator failed"
+    },
+    {
+      "error_code": "TP011_SCOPE_VIOLATION",
+      "gate": "build",
+      "meaning": "mutation escaped planned paths"
+    },
+    {
+      "error_code": "TP012_ATOMIC_INSTALL_FAILED",
+      "gate": "build",
+      "meaning": "atomic rename or rollback failed"
+    },
+    {
+      "error_code": "TP013_GENERATED_REBUILD_FAILED",
+      "gate": "release",
+      "meaning": "six generated banks were not rebuilt"
+    },
+    {
+      "error_code": "TP014_PROJECTION_MISMATCH",
+      "gate": "release",
+      "meaning": "source and generated target differ"
+    },
+    {
+      "error_code": "TP015_RELEASE_VALIDATION_FAILED",
+      "gate": "release",
+      "meaning": "non-promote release validation failed"
+    },
+    {
+      "error_code": "TP016_LEGACY_MUTATION_FORBIDDEN",
+      "gate": "all",
+      "meaning": "compiler attempted to rewrite legacy topic"
+    }
+  ],
+  "legacy_compatibility": {
+    "existing_topic_count": 75,
+    "migration_in_stage17": false,
+    "legacy_read_only": true,
+    "new_topics_profile_managed": true,
+    "topic_status_in_v1_output": false
+  },
+  "bootstrap_provenance": {
+    "audit_stage": "STAGE17C0_SCHEMA_PROFILE_IMPLEMENTATION_INSERTION_AUDIT_V1",
+    "question_type_topic_count": 14,
+    "runtime_donor_dependency": false
+  }
+}
