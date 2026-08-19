@@ -413,3 +413,126 @@ scripts/validate_release.sh
 대규모 parallel 작업에서는 중간 Topic마다 원격 push를 반복하지 않고 lane/batch 완료 후 push하는 방식을 권장한다.
 
 Push 후 GitHub Actions validation이 해당 commit에서 `success`인지 확인한다.
+
+## 23. Topic Pack 확장 실패 방지 Gate
+
+이 절은 Topic Pack source, generated bank, classification policy와 검증 도구를 함께 변경할 때 적용한다.
+
+상세 경과와 수치는 [`archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md`](archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md)에 기록한다.
+
+### 23.1 작업 전 절차 discovery
+
+변경 전에 다음 문서와 runtime owner를 read-only로 확인한다.
+
+```text
+docs/README.md
+docs/topic_pack_workflow.md
+docs/topic_pack_architecture.md
+docs/rubric_authoring_guide.md
+scripts/rubric_manager.py
+scripts/build_generated_rubrics.py
+scripts/test_topic_pack_contract.py
+scripts/test_topic_classification_policy.py
+scripts/validate_release.sh
+```
+
+기존 절차와 validator 계약을 확인하지 않은 상태에서 schema, reference record 수, generated 구조 또는 classification 총계를 추정하지 않는다.
+
+### 23.2 Source와 generated 경계
+
+- Topic source를 먼저 확정한다.
+- `rubrics/generated/*.generated.json`은 builder로만 갱신한다.
+- generated version은 wall clock이 아니라 canonical source content에서 계산한다.
+- 같은 source로 builder를 두 번 실행했을 때 generated 6개 파일의 hash가 같아야 한다.
+- 기존 Topic record는 byte 또는 semantic 기준으로 유지되고, 의도한 Topic만 추가되어야 한다.
+
+### 23.3 Classification 계약
+
+Classification policy는 다음을 모두 만족해야 한다.
+
+```text
+actual_topic_set == THEORY_CORE ∪ FIELD_APPLICATION ∪ DESIGN_EVALUATION
+세 분류 집합은 서로 겹치지 않음
+각 Topic은 정확히 한 분류에 속함
+분류별 count는 집합에서 계산
+전체 Topic 수를 별도 literal로 중복 고정하지 않음
+```
+
+새 Topic을 추가할 때는 source 추가와 classification 등록을 같은 작업 범위에서 검증한다.
+
+### 23.4 기존 dirty 상태 격리
+
+작업 시작 시 다음을 snapshot한다.
+
+- tracked diff
+- index diff
+- non-ignored untracked
+- ignored untracked
+- 작업에서 제외할 기존 dirty 파일의 hash와 patch
+
+Commit 대상은 명시적 include manifest로 고정한다. 기존 dirty 파일은 exclude manifest에 기록한다. `git add .` 또는 범위가 불명확한 staging을 사용하지 않는다.
+
+감사 과정에서 생성된 ignored script는 repository mutation으로 오판하지 않도록 알려진 audit artifact로 정규화한다.
+
+### 23.5 검증 사다리
+
+권장 순서:
+
+```text
+schema·Python syntax
+→ topic focused tests
+→ classification policy test
+→ generated rebuild
+→ generated 6개 idempotence
+→ 기존 Topic 불변·신규 Topic 단일 추가 의미 감사
+→ target/candidate hash 비교
+→ 모든 commit 대상 trailing whitespace 검사
+→ git diff --check
+→ full release validation
+→ selective staging
+→ git diff --cached --check
+→ staged tree 감사
+→ local commit
+→ pre-push remote lineage 감사
+→ non-force push
+→ post-push audit
+```
+
+`git diff --check`는 untracked 신규 파일을 검사하지 않는다. 따라서 신규 파일은 직접 whitespace 검사하고, staging 후 `git diff --cached --check`를 반드시 실행한다.
+
+### 23.6 실패와 rollback
+
+- Read-only audit 실패는 repository와 index를 변경하지 않는다.
+- Selective staging 실패는 해당 include path만 `git restore --staged`로 복구한다.
+- Commit 후 검증 실패는 이전 HEAD, 검증된 index tree와 보호한 worktree prestate를 복원한다.
+- Push 직전에는 원격 HEAD가 local parent인지 다시 확인한다.
+- Force push는 사용하지 않는다.
+- Push 결과가 불명확하면 원격 HEAD를 다시 조회하여 성공·미수행·불명 상태를 구분한다.
+
+### 23.7 검증 증거 연결
+
+각 단계는 최소한 다음 artifact를 남긴다.
+
+```text
+summary.json
+checks.tsv
+scope 또는 file manifest
+필요한 diff·patch
+긴 test/validation log
+```
+
+다음 단계는 이전 단계의 `RESULT`, `CLASSIFICATION`, check 수, tree/hash와 scope manifest를 재검증한다. 화면 출력만 신뢰하여 다음 단계로 진행하지 않는다.
+
+### 23.8 완료 조건
+
+Topic Pack 확장은 다음 조건을 모두 만족할 때 완료한다.
+
+- source와 generated 계약 통과
+- generated idempotence 통과
+- classification set equality 통과
+- commit 대상 whitespace clean
+- pre-existing dirty 파일 제외 유지
+- staged tree와 commit tree 일치
+- local/remote HEAD 일치
+- ahead/behind `0/0`
+- post-push audit 통과
