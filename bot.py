@@ -12,6 +12,10 @@ from grading_agents import run_agent_pipeline
 from grade_output_summarizer import summarize_grade_for_telegram
 from llm_provider_settings import get_chat_provider, set_chat_provider, reset_chat_provider, provider_label
 from grade_score_reconciler import reconcile_grade_score
+from grade_submission_normalizer import (
+    attach_submission_normalization,
+    normalize_grade_submission,
+)
 
 BASE_DIR = Path("/workspace/prof_eng_answer")
 DATA_DIR = BASE_DIR / "data"
@@ -771,7 +775,41 @@ def grade_answer(chat_id, raw_text, state):
     image_count = len(meta.get("images", []))
     rubric = load_rubric()
 
-    (session_dir / "input.txt").write_text(raw_text, encoding="utf-8")
+    raw_submission = raw_text
+    submission_normalization = normalize_grade_submission(
+        raw_submission
+    )
+    raw_text = submission_normalization[
+        "normalized_text"
+    ]
+    (session_dir / "input.raw.txt").write_text(
+        raw_submission,
+        encoding="utf-8",
+    )
+    (session_dir / "input.txt").write_text(
+        raw_text,
+        encoding="utf-8",
+    )
+    (session_dir / "input.normalized.txt").write_text(
+        raw_text,
+        encoding="utf-8",
+    )
+    normalization_evidence = {
+        key: value
+        for key, value in submission_normalization.items()
+        if key not in {
+            "normalized_text",
+            "answer_text",
+        }
+    }
+    (session_dir / "submission_normalization.json").write_text(
+        json.dumps(
+            normalization_evidence,
+            ensure_ascii=False,
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
 
     raw_result, parsed = run_agent_pipeline(
         call_ollama_fn=call_ollama,
@@ -796,6 +834,16 @@ def grade_answer(chat_id, raw_text, state):
             _finalize_grade_before_bot_persistence(
                 parsed
             )
+        )
+        parsed = attach_submission_normalization(
+            parsed,
+            normalization_evidence,
+        )
+        from verdict_consistency import (
+            enforce_final_decision_consistency,
+        )
+        parsed = enforce_final_decision_consistency(
+            parsed
         )
 
         parsed["backend"] = "ollama"
@@ -937,9 +985,25 @@ def format_result(parsed, sid=None):
 
     # Pass/fail display must be based on the final displayed total score.
     # Upstream flags may still reflect pre-ceiling scores.
-    official_met = float(total) >= float(official)
-    practical_met = float(total) >= float(practical)
-    high_met = float(total) >= float(high)
+    pass_allowed = (
+        parsed.get("passing_score_allowed") is not False
+    )
+    strong_allowed = (
+        parsed.get("strong_verdict_allowed") is not False
+    )
+    official_met = (
+        pass_allowed
+        and float(total) >= float(official)
+    )
+    practical_met = (
+        pass_allowed
+        and float(total) >= float(practical)
+    )
+    high_met = (
+        pass_allowed
+        and strong_allowed
+        and float(total) >= float(high)
+    )
 
     lines = []
     lines.append(f"채점 완료: {total}/{max_score:g}")

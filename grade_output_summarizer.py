@@ -1188,3 +1188,59 @@ def _build_payload(grade):
         out["native_question_demand_projection_v1"] = projection
 
     return out
+
+# STAGE17E5_FINAL_DECISION_DISPLAY_BOUNDARY_V1
+_STAGE17E5_PREVIOUS_BUILD_PAYLOAD = _build_payload
+
+
+def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
+    payload = _STAGE17E5_PREVIOUS_BUILD_PAYLOAD(
+        grade
+    )
+
+    if not isinstance(payload, dict):
+        return payload
+
+    score = payload.get("score")
+    if not isinstance(score, dict):
+        return payload
+
+    pass_allowed = (
+        grade.get("passing_score_allowed")
+        is not False
+    )
+    strong_allowed = (
+        grade.get("strong_verdict_allowed")
+        is not False
+    )
+
+    if not pass_allowed:
+        score["official_pass_met"] = False
+        score["practical_target_met"] = False
+        score["high_score_met"] = False
+    elif not strong_allowed:
+        score["high_score_met"] = False
+
+    consistency = grade.get(
+        "final_decision_consistency"
+    )
+    if isinstance(consistency, dict):
+        payload["final_decision_consistency"] = {
+            "hard_error": bool(
+                consistency.get("hard_error")
+                or consistency.get(
+                    "major_or_fatal_error"
+                )
+            ),
+            "fatal_error": bool(
+                consistency.get("fatal_error")
+            ),
+            "passing_score_allowed": (
+                pass_allowed
+            ),
+            "strong_verdict_allowed": (
+                strong_allowed
+            ),
+        }
+
+    return payload

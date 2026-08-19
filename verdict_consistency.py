@@ -101,7 +101,11 @@ def has_structured_grading_contract(
 
 def _logic_fatal(payload: Any) -> bool:
     root = _dict(payload)
-    logic = _dict(root.get("logic_check"))
+    logic = _dict(
+        root.get("logic_check_evaluation")
+        or root.get("logic_check_result")
+        or root.get("logic_check")
+    )
 
     if logic.get("fatal") is True:
         return True
@@ -581,5 +585,288 @@ def reconcile_verdict_summary(
         "unresolved_requirement_count": len(
             signals["unresolved_requirements"]
         ),
+    }
+    return updated
+
+_CONTRADICTORY_TECHNICAL_PRAISE = (
+    re.compile(
+        r"핵심\s*(?:개념|기술|이론)"
+        r".{0,30}(?:정확|우수|충실)"
+    ),
+    re.compile(
+        r"기술적\s*(?:개념|내용|관계)"
+        r".{0,30}(?:정확|우수)"
+    ),
+    re.compile(
+        r"(?:fact|기술)\s*기반"
+        r".{0,30}(?:정확|우수)",
+        re.IGNORECASE,
+    ),
+)
+_STRONG_VALUES = {
+    "strong",
+    "excellent",
+    "high",
+    "full",
+    "우수",
+    "강함",
+}
+_PUBLIC_TEXT_KEYS = {
+    "summary",
+    "overall_comment",
+    "overall_summary",
+    "comment",
+    "rater_summary",
+    "headline",
+    "verdict",
+    "overall_verdict",
+    "strengths",
+    "weaknesses",
+    "rewrite_advice",
+    "improvement_points",
+    "improvements",
+    "next_practice_focus",
+    "next_practice_points",
+}
+
+
+def _has_contradictory_technical_praise(
+    value: str,
+) -> bool:
+    return any(
+        pattern.search(value)
+        for pattern in (
+            _CONTRADICTORY_TECHNICAL_PRAISE
+        )
+    )
+
+
+def _sanitize_public_feedback_value(
+    value: Any,
+) -> Any:
+    replacement = (
+        "답안 구조의 장점은 있으나 검증된 "
+        "기술 오류를 먼저 수정해야 합니다."
+    )
+
+    if isinstance(value, str):
+        if _has_contradictory_technical_praise(
+            value
+        ):
+            return replacement
+        return value
+
+    if isinstance(value, list):
+        return [
+            _sanitize_public_feedback_value(item)
+            for item in value
+        ]
+
+    if isinstance(value, tuple):
+        return tuple(
+            _sanitize_public_feedback_value(item)
+            for item in value
+        )
+
+    if isinstance(value, dict):
+        return {
+            key: _sanitize_public_feedback_value(item)
+            for key, item in value.items()
+        }
+
+    return value
+
+
+def _sanitize_public_feedback(
+    payload: dict[str, Any],
+) -> None:
+    for key in _PUBLIC_TEXT_KEYS:
+        if key in payload:
+            payload[key] = (
+                _sanitize_public_feedback_value(
+                    payload[key]
+                )
+            )
+
+    breakdown = payload.get("breakdown")
+    if isinstance(breakdown, list):
+        for row in breakdown:
+            if not isinstance(row, dict):
+                continue
+            for key in (
+                "reason",
+                "comment",
+                "summary",
+            ):
+                if key in row:
+                    row[key] = (
+                        _sanitize_public_feedback_value(
+                            row[key]
+                        )
+                    )
+
+
+def _verified_error_levels(
+    signals: dict[str, Any],
+) -> tuple[bool, bool]:
+    hard_correctness = signals[
+        "hard_correctness"
+    ]
+    fatal_correctness = any(
+        _severity(row) == "fatal"
+        or row.get(
+            "invalidates_core_conclusion"
+        )
+        is True
+        for row in hard_correctness
+    )
+    fatal_error = bool(
+        signals["logic_fatal"]
+        or fatal_correctness
+    )
+    major_or_fatal = bool(
+        fatal_error
+        or hard_correctness
+    )
+    return major_or_fatal, fatal_error
+
+
+def _restrict_coverage_full_credit(
+    payload: dict[str, Any],
+) -> None:
+    candidates = []
+
+    for key in (
+        "question_type_coverage",
+        "question_type_coverage_summary",
+    ):
+        value = payload.get(key)
+        if isinstance(value, dict):
+            candidates.append(value)
+
+    parsed = payload.get("parsed")
+    if isinstance(parsed, dict):
+        for key in (
+            "question_type_coverage",
+            "question_type_coverage_summary",
+        ):
+            value = parsed.get(key)
+            if isinstance(value, dict):
+                candidates.append(value)
+
+    for coverage in candidates:
+        for key in (
+            "overall_coverage",
+            "coverage",
+            "verdict",
+            "status",
+        ):
+            value = coverage.get(key)
+            if (
+                isinstance(value, str)
+                and value.strip().casefold()
+                in _STRONG_VALUES
+            ):
+                coverage[key] = "needs_correction"
+
+        coverage["full_credit_allowed"] = False
+        coverage[
+            "verified_hard_error_present"
+        ] = True
+
+
+def enforce_final_decision_consistency(
+    payload: Any,
+) -> Any:
+    # This function discovers no new facts, changes no
+    # question type, and adds no score penalty. It only
+    # reconciles already-verified major/fatal errors with
+    # public verdict, pass flags, and full-credit claims.
+    if not isinstance(payload, dict):
+        return payload
+
+    signals = _signals(payload)
+    major_or_fatal, fatal_error = (
+        _verified_error_levels(signals)
+    )
+
+    if not major_or_fatal:
+        return payload
+
+    updated = copy.deepcopy(payload)
+    _sanitize_public_feedback(updated)
+    _restrict_coverage_full_credit(updated)
+
+    updated["strong_verdict_allowed"] = False
+    updated[
+        "requirements_full_credit_allowed"
+    ] = False
+
+    replacement = (
+        "검증된 핵심 기술 오류 보완 필요"
+        if fatal_error
+        else "검증된 주요 기술 오류 보완 필요"
+    )
+
+    for key in (
+        "verdict",
+        "overall_verdict",
+        "headline",
+        "answer_level",
+        "overall_level",
+    ):
+        value = updated.get(key)
+
+        if not isinstance(value, str):
+            continue
+
+        if (
+            value.strip().casefold()
+            in _STRONG_VALUES
+            or _has_contradictory_technical_praise(
+                value
+            )
+        ):
+            updated[key] = replacement
+
+    if fatal_error:
+        updated["passing_score_allowed"] = False
+
+        for key in (
+            "official_pass_met",
+            "practical_target_met",
+            "high_score_met",
+            "passing",
+            "passed",
+        ):
+            if key in updated:
+                updated[key] = False
+
+    updated[
+        "final_decision_consistency"
+    ] = {
+        "schema_version": (
+            VERDICT_CONSISTENCY_SCHEMA_VERSION
+        ),
+        "marker": VERDICT_CONSISTENCY_MARKER,
+        "mode": (
+            "verified_error_invariants"
+        ),
+        "major_or_fatal_error": True,
+        "fatal_error": fatal_error,
+        "logic_fatal": bool(
+            signals["logic_fatal"]
+        ),
+        "hard_correctness_count": len(
+            signals["hard_correctness"]
+        ),
+        "passing_score_allowed": (
+            False if fatal_error else None
+        ),
+        "strong_verdict_allowed": False,
+        "requirements_full_credit_allowed": (
+            False
+        ),
+        "numeric_score_changed": False,
     }
     return updated

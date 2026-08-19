@@ -10049,3 +10049,102 @@ def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
                     weighted[key] = total
 
     return grade
+
+# STAGE17E5_COMMON_INPUT_AND_DECISION_BOUNDARY_V1
+_STAGE17E5_PREVIOUS_RUN_AGENT_PIPELINE = (
+    run_agent_pipeline
+)
+
+
+def _stage17e5_is_grade_dict(value):
+    if not isinstance(value, dict):
+        return False
+
+    grade_keys = {
+        "total_score",
+        "final_total_score",
+        "breakdown",
+        "layer_scores",
+        "logic_check_evaluation",
+        "general_evidence_contract",
+        "question_type_coverage",
+    }
+    return bool(grade_keys.intersection(value))
+
+
+def _stage17e5_finalize_pipeline_result(
+    value,
+    submission_normalization,
+):
+    from grade_submission_normalizer import (
+        attach_submission_normalization,
+    )
+    from verdict_consistency import (
+        enforce_final_decision_consistency,
+    )
+
+    if _stage17e5_is_grade_dict(value):
+        value = attach_submission_normalization(
+            value,
+            submission_normalization,
+        )
+        return enforce_final_decision_consistency(
+            value
+        )
+
+    if isinstance(value, list):
+        return [
+            _stage17e5_finalize_pipeline_result(
+                item,
+                submission_normalization,
+            )
+            for item in value
+        ]
+
+    if isinstance(value, tuple):
+        return tuple(
+            _stage17e5_finalize_pipeline_result(
+                item,
+                submission_normalization,
+            )
+            for item in value
+        )
+
+    if isinstance(value, dict):
+        return {
+            key: _stage17e5_finalize_pipeline_result(
+                item,
+                submission_normalization,
+            )
+            for key, item in value.items()
+        }
+
+    return value
+
+
+def run_agent_pipeline(*args, **kwargs):
+    from grade_submission_normalizer import (
+        normalize_pipeline_call,
+    )
+
+    (
+        normalized_args,
+        normalized_kwargs,
+        submission_normalization,
+    ) = normalize_pipeline_call(
+        _STAGE17E5_PREVIOUS_RUN_AGENT_PIPELINE,
+        args,
+        kwargs,
+    )
+
+    result = (
+        _STAGE17E5_PREVIOUS_RUN_AGENT_PIPELINE(
+            *normalized_args,
+            **normalized_kwargs,
+        )
+    )
+
+    return _stage17e5_finalize_pipeline_result(
+        result,
+        submission_normalization,
+    )
