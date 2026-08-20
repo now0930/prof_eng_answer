@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Any
+import copy
 import json
 import math
 import re
@@ -870,6 +871,131 @@ def build_question_demand_evidence_shadow(
         },
     }
 
+
+
+_STAGE21_RELATIONSHIP_STRING_FIELDS = (
+    "candidate_id",
+    "rule_id",
+    "severity",
+    "message",
+    "correct_rule",
+    "error_class",
+    "claim_signature",
+)
+_STAGE21_RELATIONSHIP_LIST_FIELDS = (
+    "anchor_refs",
+    "demand_refs",
+)
+
+
+def _stage21_distinct_nonempty_strings(
+    value: Any,
+) -> list[str]:
+    if not isinstance(value, list):
+        return []
+
+    output: list[str] = []
+    for item in value:
+        text = str(item or "").strip()
+        if text and text not in output:
+            output.append(text)
+    return output
+
+
+def project_logic_relationship_conflicts(
+    question_demand_evidence: dict[str, Any],
+    logic_evaluation: dict[str, Any] | None,
+) -> dict[str, Any]:
+    # Project source-owned logic metadata without changing QD scores.
+    if not isinstance(question_demand_evidence, dict):
+        raise TypeError(
+            "question_demand_evidence must be a dict"
+        )
+
+    output = copy.deepcopy(question_demand_evidence)
+    if not isinstance(logic_evaluation, dict):
+        return output
+
+    demands = output.get("demands")
+    if not isinstance(demands, list):
+        return output
+
+    demand_ids = {
+        str(row.get("demand_id") or "").strip()
+        for row in demands
+        if isinstance(row, dict)
+        and str(row.get("demand_id") or "").strip()
+    }
+    if not demand_ids:
+        return output
+
+    findings = logic_evaluation.get("findings")
+    if not isinstance(findings, list):
+        return output
+
+    conflicts: list[dict[str, Any]] = []
+    seen: set[tuple[str, str, tuple[str, ...]]] = set()
+
+    for finding in findings:
+        if not isinstance(finding, dict):
+            continue
+
+        demand_refs = _stage21_distinct_nonempty_strings(
+            finding.get("demand_refs")
+        )
+        matched_refs = [
+            demand_ref
+            for demand_ref in demand_refs
+            if demand_ref in demand_ids
+        ]
+        if not matched_refs:
+            continue
+
+        conflict: dict[str, Any] = {}
+        for field_name in _STAGE21_RELATIONSHIP_STRING_FIELDS:
+            value = finding.get(field_name)
+            if isinstance(value, str) and value.strip():
+                conflict[field_name] = value.strip()
+
+        for field_name in _STAGE21_RELATIONSHIP_LIST_FIELDS:
+            values = _stage21_distinct_nonempty_strings(
+                finding.get(field_name)
+            )
+            if values:
+                conflict[field_name] = values
+
+        conflict["matched_demand_refs"] = matched_refs
+        identity = (
+            str(conflict.get("candidate_id") or ""),
+            str(conflict.get("rule_id") or ""),
+            tuple(matched_refs),
+        )
+        if identity in seen:
+            continue
+        seen.add(identity)
+        conflicts.append(conflict)
+
+    if not conflicts:
+        return output
+
+    output["relationship_conflicts"] = conflicts
+    output["relationship_conflict_summary"] = {
+        "version": (
+            "STAGE21_RELATIONSHIP_CONFLICT_PROJECTION_V1"
+        ),
+        "score_effect": "none",
+        "conflict_count": len(conflicts),
+        "affected_demand_refs": sorted(
+            {
+                demand_ref
+                for conflict in conflicts
+                for demand_ref in conflict[
+                    "matched_demand_refs"
+                ]
+            }
+        ),
+    }
+    return output
 
 def write_question_demand_evidence_shadow(
     *,

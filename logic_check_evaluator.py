@@ -487,6 +487,46 @@ def _append_unique(target: list[str], value: str) -> None:
         target.append(value)
 
 
+_OPTIONAL_FATAL_RULE_METADATA_FIELDS = (
+    "error_class",
+    "claim_signature",
+    "anchor_refs",
+    "demand_refs",
+)
+
+
+def _copy_optional_fatal_rule_metadata(
+    finding: dict[str, Any],
+    source_rule: dict[str, Any],
+) -> dict[str, Any]:
+    # Source-owned metadata is copied only when explicitly present.
+    if not isinstance(finding, dict) or not isinstance(source_rule, dict):
+        return finding
+
+    for field_name in ("error_class", "claim_signature"):
+        value = source_rule.get(field_name)
+        if isinstance(value, str) and value.strip():
+            finding[field_name] = value.strip()
+
+    for field_name in ("anchor_refs", "demand_refs"):
+        raw_values = source_rule.get(field_name)
+        if not isinstance(raw_values, list):
+            continue
+
+        cleaned: list[str] = []
+        for raw_value in raw_values:
+            if not isinstance(raw_value, str):
+                continue
+            value = raw_value.strip()
+            if value and value not in cleaned:
+                cleaned.append(value)
+
+        if cleaned:
+            finding[field_name] = cleaned
+
+    return finding
+
+
 def evaluate_logic_checks(
     answer_text: str,
     grade: dict[str, Any] | None = None,
@@ -733,17 +773,20 @@ def evaluate_logic_checks(
                 ):
                     continue
 
-                findings.append(
-                    {
-                        "id": check.get("id"),
-                        "severity": check.get("severity", "fatal"),
-                        "message": check.get("message"),
-                        "correct_rule": check.get("correct_rule"),
-                        "affected_layers": check.get("affected_layers", []),
-                        "evidence": ctx,
-                        "matched_pattern": pattern,
-                    }
+                finding = {
+                    "id": check.get("id"),
+                    "severity": check.get("severity", "fatal"),
+                    "message": check.get("message"),
+                    "correct_rule": check.get("correct_rule"),
+                    "affected_layers": check.get("affected_layers", []),
+                    "evidence": ctx,
+                    "matched_pattern": pattern,
+                }
+                _copy_optional_fatal_rule_metadata(
+                    finding,
+                    check,
                 )
+                findings.append(finding)
                 _append_unique(deduction_elements, check.get("message", "핵심 이론 오류"))
                 ceiling = check.get("recommended_ceiling")
                 if isinstance(ceiling, (int, float)):
@@ -1907,6 +1950,10 @@ Return JSON only:
         if severity == "fatal":
             finding["recommended_ceiling"] = float(ceiling) if isinstance(ceiling, (int, float)) else 10.0
 
+        _copy_optional_fatal_rule_metadata(
+            finding,
+            source_rule,
+        )
         findings.append(finding)
 
     # Keep this step focused; avoid flooding the user with many LLM findings.
@@ -2385,6 +2432,10 @@ def _evaluate_topic_fatal_checks_with_llm_stage19_contract(
                 "recommended_ceiling"
             ] = float(ceiling)
 
+        _copy_optional_fatal_rule_metadata(
+            finding,
+            check,
+        )
         findings.append(finding)
 
     diagnostics = [

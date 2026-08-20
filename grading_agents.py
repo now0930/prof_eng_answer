@@ -5930,6 +5930,42 @@ def _phase2_postprocess_grade(legacy_result):
                     f"{write_error!r}"
                 )
 
+            # STAGE21_RELATIONSHIP_QUESTION_DEMAND_PROJECTION_V1
+            # Runs after all score-affecting Question Demand consumers.
+            try:
+                from question_demand_evidence import (
+                    project_logic_relationship_conflicts,
+                )
+
+                if isinstance(
+                    question_demand_evidence_for_score,
+                    dict,
+                ):
+                    projected_question_demand_evidence = (
+                        project_logic_relationship_conflicts(
+                            question_demand_evidence_for_score,
+                            logic_eval,
+                        )
+                    )
+                    if (
+                        projected_question_demand_evidence
+                        != question_demand_evidence_for_score
+                    ):
+                        question_demand_evidence_for_score = (
+                            projected_question_demand_evidence
+                        )
+                        _phase2_json_write(
+                            session_dir
+                            / "question_demand_evidence_shadow.json",
+                            question_demand_evidence_for_score,
+                        )
+            except Exception as relationship_projection_error:
+                report(
+                    "[agent] stage21 relationship Question "
+                    "Demand projection failed: "
+                    f"{relationship_projection_error!r}"
+                )
+
     except Exception as e:
         print(f"[agent] phase3b logic check failed: {e!r}")
 
