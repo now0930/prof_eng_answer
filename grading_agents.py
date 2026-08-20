@@ -5134,6 +5134,95 @@ def _phase8_apply_constraint_only_to_semantic_layers(
         )
     return out
 
+
+def _phase2_extract_submission_context_canonical(input_text):
+    # Phase2에서도 canonical submission parser를 재사용한다.
+    # 질문 표지가 없는 답안 전용 입력은 기존 fallback을 유지한다.
+    from grade_submission_normalizer import (
+        normalize_grade_submission,
+    )
+
+    try:
+        context = normalize_grade_submission(input_text)
+    except Exception:
+        context = {}
+
+    if not isinstance(context, dict):
+        context = {}
+
+    question_text = str(
+        context.get("question_text") or ""
+    )
+    answer_text = str(
+        context.get("answer_text") or ""
+    )
+
+    if not question_text.strip():
+        question_text = _phase3_extract_question_text(
+            input_text
+        )
+
+    if not answer_text.strip():
+        answer_text = _phase3_extract_answer_text(
+            input_text
+        )
+
+    return question_text, answer_text
+
+
+def _phase2_extract_submission_context(
+    input_text: str,
+) -> tuple[str, str]:
+    question_text, answer_text = (
+        _phase2_extract_submission_context_canonical(
+            input_text
+        )
+    )
+
+    # Stage19: preserve canonical normalization with legacy fallback inside the helper.
+    legacy_extractor = globals().get(
+        "_phase3_extract_question_text"
+    )
+
+    try:
+        if not callable(legacy_extractor):
+            raise RuntimeError(
+                "_phase3_extract_question_text "
+                "is unavailable"
+            )
+        legacy_question_text = legacy_extractor(
+            input_text
+        )
+    except Exception as question_error:
+        try:
+            print(
+                "[agent] phase20 question extraction "
+                "failed; using input text: "
+                f"{question_error!r}"
+            )
+        except Exception:
+            pass
+        question_text = input_text
+    else:
+        normalized_question_text = str(
+            question_text or ""
+        ).strip()
+        placeholder_questions = {
+            "문제",
+            "문제:",
+            "question",
+            "question:",
+        }
+        if (
+            not normalized_question_text
+            or normalized_question_text.casefold()
+            in placeholder_questions
+        ):
+            question_text = legacy_question_text
+
+    return question_text, answer_text
+
+
 def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
     from grading_config import load_active_config, save_active_config_snapshots
@@ -5172,18 +5261,7 @@ def _phase2_postprocess_grade(legacy_result):
     if input_path.exists():
         input_text = input_path.read_text(encoding="utf-8", errors="ignore")
 
-    answer_text = _phase3_extract_answer_text(input_text)
-    try:
-        question_text = _phase3_extract_question_text(
-            input_text
-        )
-    except Exception as question_error:
-        report(
-            "[agent] phase20 question extraction "
-            "failed; using input text: "
-            f"{question_error!r}"
-        )
-        question_text = input_text
+    question_text, answer_text = _phase2_extract_submission_context(input_text)
 
     from grading_identity import (
         build_grading_identity,

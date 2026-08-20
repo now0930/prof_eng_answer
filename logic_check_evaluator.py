@@ -1068,7 +1068,518 @@ def evaluate_logic_checks(
 
 
 
-def _evaluate_topic_fatal_checks_with_llm(text: str, topic_check: dict[str, Any]) -> list[dict[str, Any]]:
+
+# STAGE19B2_EXISTING_SEMANTIC_RESPONSE_NORMALIZATION_V2
+def _normalize_topic_fatal_semantic_response(
+    value: Any,
+) -> Any:
+    # No new technical judgement is created here.
+    # Only explicit asserted major/fatal checks become findings.
+    if not isinstance(value, dict):
+        return value
+
+    normalized = dict(value)
+
+    for container_key in (
+        "result",
+        "output",
+        "analysis",
+    ):
+        nested = normalized.get(container_key)
+
+        if not isinstance(nested, dict):
+            continue
+
+        if not any(
+            key in nested
+            for key in (
+                "findings",
+                "checks",
+                "verdict",
+                "confidence",
+                "reason",
+            )
+        ):
+            continue
+
+        for key in (
+            "findings",
+            "checks",
+            "verdict",
+            "confidence",
+            "reason",
+        ):
+            if key not in normalized and key in nested:
+                normalized[key] = nested[key]
+
+    if isinstance(normalized.get("findings"), list):
+        return normalized
+
+    checks = normalized.get("checks")
+
+    if not isinstance(checks, list):
+        return normalized
+
+    findings = []
+
+    for row in checks:
+        if not isinstance(row, dict):
+            continue
+
+        if row.get("asserted") is not True:
+            continue
+
+        severity = str(
+            row.get("severity")
+            or row.get("status")
+            or ""
+        ).strip().lower()
+
+        if severity not in {"major", "fatal"}:
+            continue
+
+        rule_id = str(
+            row.get("rule_id")
+            or row.get("id")
+            or ""
+        ).strip()
+
+        if not rule_id:
+            continue
+
+        finding = {
+            "rule_id": rule_id,
+            "severity": severity,
+            "candidate_id": str(
+                row.get("candidate_id") or ""
+            ).strip(),
+            "evidence": str(
+                row.get("evidence") or ""
+            ).strip(),
+            "message": str(
+                row.get("message")
+                or row.get("reason")
+                or ""
+            ).strip(),
+            "correct_rule": str(
+                row.get("correct_rule")
+                or row.get("correction")
+                or ""
+            ).strip(),
+        }
+
+        confidence = row.get(
+            "confidence",
+            normalized.get("confidence"),
+        )
+
+        if confidence is not None:
+            finding["confidence"] = confidence
+
+        findings.append(finding)
+
+    normalized["findings"] = findings
+    normalized["semantic_response_normalization"] = {
+        "marker": (
+            "STAGE19B2_EXISTING_SEMANTIC_"
+            "RESPONSE_NORMALIZATION_V2"
+        ),
+        "source": "existing_checks",
+        "asserted_required": True,
+        "allowed_statuses": ["major", "fatal"],
+        "new_rule_owner_created": False,
+        "score_effect": "none",
+    }
+    return normalized
+
+
+
+# STAGE19D_EXISTING_SEMANTIC_SCHEMA_REPAIR_V1
+
+# STAGE19F_EXISTING_FATAL_RULE_JSON_SCHEMA_V1
+def _topic_fatal_semantic_json_schema(
+    topic_check: dict[str, Any],
+) -> dict[str, Any]:
+    # The enum comes only from the existing Topic Profile rule IDs.
+    fatal_checks = topic_check.get("fatal_checks")
+
+    if not isinstance(fatal_checks, list):
+        fatal_checks = []
+
+    rule_ids = []
+
+    for row in fatal_checks:
+        if not isinstance(row, dict):
+            continue
+
+        rule_id = str(
+            row.get("id")
+            or row.get("rule_id")
+            or ""
+        ).strip()
+
+        if rule_id and rule_id not in rule_ids:
+            rule_ids.append(rule_id)
+
+    rule_id_schema: dict[str, Any] = {
+        "type": "string",
+    }
+
+    if rule_ids:
+        rule_id_schema["enum"] = rule_ids
+
+    check_schema = {
+        "type": "object",
+        "properties": {
+            "rule_id": rule_id_schema,
+            "status": {
+                "type": "string",
+                "enum": [
+                    "pass",
+                    "major",
+                    "fatal",
+                ],
+            },
+            "asserted": {
+                "type": "boolean",
+            },
+            "candidate_id": {
+                "type": "string",
+            },
+            "evidence": {
+                "type": "string",
+            },
+            "reason": {
+                "type": "string",
+            },
+            "correction": {
+                "type": "string",
+            },
+            "confidence": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+            },
+        },
+        "required": [
+            "rule_id",
+            "status",
+            "asserted",
+            "candidate_id",
+            "evidence",
+            "reason",
+            "correction",
+            "confidence",
+        ],
+        "additionalProperties": False,
+    }
+
+    finding_schema = {
+        "type": "object",
+        "properties": {
+            "candidate_id": {
+                "type": "string",
+            },
+            "rule_id": rule_id_schema,
+            "severity": {
+                "type": "string",
+                "enum": [
+                    "major",
+                    "fatal",
+                ],
+            },
+            "message": {
+                "type": "string",
+            },
+            "correct_rule": {
+                "type": "string",
+            },
+            "confidence": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+            },
+        },
+        "required": [
+            "candidate_id",
+            "rule_id",
+            "severity",
+            "message",
+            "correct_rule",
+            "confidence",
+        ],
+        "additionalProperties": False,
+    }
+
+    return {
+        "type": "object",
+        "properties": {
+            "verdict": {
+                "type": "string",
+                "enum": [
+                    "pass",
+                    "warn",
+                    "fatal",
+                ],
+            },
+            "confidence": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+            },
+            "reason": {
+                "type": "string",
+            },
+            "checks": {
+                "type": "array",
+                "items": check_schema,
+            },
+            "findings": {
+                "type": "array",
+                "items": finding_schema,
+            },
+        },
+        "required": [
+            "verdict",
+            "confidence",
+            "reason",
+            "checks",
+            "findings",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _repair_topic_fatal_semantic_schema_once(
+    *,
+    prompt: str,
+    initial_response: Any,
+    topic_check: dict[str, Any],
+) -> Any:
+    # Retry once only when the existing verifier omitted its schema.
+    normalized = (
+        _normalize_topic_fatal_semantic_response(
+            initial_response
+        )
+    )
+
+    if (
+        isinstance(normalized, dict)
+        and isinstance(
+            normalized.get("findings"),
+            list,
+        )
+    ):
+        return normalized
+
+    if not isinstance(normalized, dict):
+        return normalized
+
+    fatal_checks = topic_check.get(
+        "fatal_checks"
+    )
+
+    if not isinstance(fatal_checks, list):
+        return normalized
+
+    existing_rules = []
+
+    for row in fatal_checks:
+        if not isinstance(row, dict):
+            continue
+
+        rule_id = str(
+            row.get("id")
+            or row.get("rule_id")
+            or ""
+        ).strip()
+
+        if not rule_id:
+            continue
+
+        existing_rules.append(
+            {
+                "rule_id": rule_id,
+                "condition": str(
+                    row.get("message")
+                    or row.get("condition")
+                    or ""
+                ).strip(),
+                "correct_rule": str(
+                    row.get("correct_rule")
+                    or ""
+                ).strip(),
+            }
+        )
+
+    if not existing_rules:
+        return normalized
+
+    import json
+    from logic_llm_verifier import (
+        _call_ollama_json,
+    )
+
+    repair_prompt = (
+        "이전 기술 검증 응답은 필수 schema를 누락했다.\n"
+        "새로운 기술 판단이나 새로운 rule id를 만들지 말고, "
+        "아래 기존 rule id만 사용하여 이전 판정을 구조화하라.\n"
+        "각 rule을 checks에 정확히 한 번 포함한다.\n"
+        "답안이 해당 오개념을 직접 주장한 경우에만 "
+        "asserted=true 및 status=major 또는 fatal로 기록한다.\n"
+        "직접 주장하지 않았거나 근거가 불충분하면 "
+        "asserted=false 및 status=pass로 기록한다.\n"
+        "findings에는 asserted=true인 major/fatal만 포함한다.\n"
+        "반드시 JSON 객체만 반환한다.\n\n"
+        "기존 rule 목록:\n"
+        + json.dumps(
+            existing_rules,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+        + "\n\n이전 응답:\n"
+        + json.dumps(
+            normalized,
+            ensure_ascii=False,
+            sort_keys=True,
+        )
+        + "\n\n원래 검증 지시:\n"
+        + str(prompt)
+        + "\n\n필수 출력 필드: "
+        "verdict, confidence, reason, checks, findings"
+    )
+
+    repaired = (
+        _normalize_topic_fatal_semantic_response(
+            _call_ollama_json(
+                repair_prompt,
+                format_schema=(
+                    _topic_fatal_semantic_json_schema(
+                        topic_check
+                    )
+                ),
+            )
+        )
+    )
+
+    if not (
+        isinstance(repaired, dict)
+        and isinstance(
+            repaired.get("findings"),
+            list,
+        )
+    ):
+        return normalized
+
+    repaired[
+        "semantic_schema_repair"
+    ] = {
+        "marker": (
+            "STAGE19D_EXISTING_SEMANTIC_"
+            "SCHEMA_REPAIR_V1"
+        ),
+        "attempt_count": 1,
+        "rule_source": (
+            "existing_topic_fatal_checks"
+        ),
+        "new_rule_owner_created": False,
+        "direct_reason_to_rule_inference": False,
+        "score_effect": "none",
+    }
+    return repaired
+
+
+# STAGE19J_EXISTING_FATAL_PER_RULE_EVALUATION_V1
+def _single_topic_fatal_finding_schema(
+    rule_id: str,
+) -> dict[str, Any]:
+    return {
+        "type": "object",
+        "properties": {
+            "findings": {
+                "type": "array",
+                "maxItems": 1,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "rule_id": {
+                            "type": "string",
+                            "const": rule_id,
+                        },
+                        "severity": {
+                            "type": "string",
+                            "enum": [
+                                "major",
+                                "fatal",
+                            ],
+                        },
+                        "evidence": {
+                            "type": "string",
+                        },
+                        "confidence": {
+                            "type": "number",
+                            "minimum": 0.0,
+                            "maximum": 1.0,
+                        },
+                    },
+                    "required": [
+                        "rule_id",
+                        "severity",
+                        "evidence",
+                        "confidence",
+                    ],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        "required": [
+            "findings",
+        ],
+        "additionalProperties": False,
+    }
+
+
+def _single_topic_fatal_prompt(
+    text: str,
+    check: dict[str, Any],
+) -> str:
+    rule_id = str(
+        check.get("id")
+        or check.get("rule_id")
+        or ""
+    ).strip()
+    condition = str(
+        check.get("message")
+        or check.get("condition")
+        or ""
+    ).strip()
+    correct_rule = str(
+        check.get("correct_rule")
+        or ""
+    ).strip()
+
+    return (
+        "다음 답안이 아래 기존 fatal rule 하나를 "
+        "직접 위반하는지만 판정하라.\n"
+        "새로운 rule id 또는 새로운 기술 기준을 만들지 않는다.\n"
+        "답안에 오개념이 직접 주장된 경우에만 findings에 "
+        "항목 하나를 기록한다.\n"
+        "누락, 애매함, 설명 부족 또는 추론만으로는 "
+        "findings를 만들지 않는다.\n"
+        "evidence는 답안에서 공백을 포함해 직접 복사한 "
+        "짧은 원문이어야 한다.\n"
+        "답안이 잘못된 표현을 부정하거나 정정하는 문맥이면 "
+        "findings를 만들지 않는다.\n"
+        "반드시 제공된 JSON schema만 반환한다.\n\n"
+        f"rule_id: {rule_id}\n"
+        f"오류 조건: {condition}\n"
+        f"정정 기준: {correct_rule}\n\n"
+        "답안:\n"
+        + str(text)
+    )
+
+
+def _evaluate_topic_fatal_checks_with_llm_legacy_contract(text: str, topic_check: dict[str, Any]) -> list[dict[str, Any]]:
     """Use an LLM to semantically verify topic fatal rules.
 
     Regex wrong_patterns are kept as a fast deterministic path, but they are not
@@ -1407,6 +1918,433 @@ Return JSON only:
 
     return major_findings[:3]
 
+
+def _evaluate_topic_fatal_checks_with_llm_stage19_contract(
+    text: str,
+    topic_check: dict[str, Any],
+) -> list[dict[str, Any]]:
+    from logic_llm_verifier import (
+        _call_ollama_json,
+    )
+
+    fatal_checks = topic_check.get(
+        "fatal_checks"
+    )
+
+    if not isinstance(fatal_checks, list):
+        return []
+
+    eligible_checks = [
+        row
+        for row in fatal_checks
+        if isinstance(row, dict)
+        and str(
+            row.get("id")
+            or row.get("rule_id")
+            or ""
+        ).strip()
+    ]
+
+    if not eligible_checks:
+        return []
+
+    findings: list[dict[str, Any]] = []
+    diagnostics: list[dict[str, str]] = []
+
+    normalized_answer = _normalize_text(
+        text
+    ).casefold()
+
+    for check in eligible_checks:
+        rule_id = str(
+            check.get("id")
+            or check.get("rule_id")
+            or ""
+        ).strip()
+        schema = (
+            _single_topic_fatal_finding_schema(
+                rule_id
+            )
+        )
+        prompt = _single_topic_fatal_prompt(
+            text,
+            check,
+        )
+
+        raw_response: Any = None
+        normalized_response: Any = None
+
+        try:
+            raw_response = _call_ollama_json(
+                prompt,
+                format_schema=schema,
+            )
+            normalized_response = (
+                _normalize_topic_fatal_semantic_response(
+                    raw_response
+                )
+            )
+        except Exception as error:
+            diagnostics.append(
+                {
+                    "rule_id": rule_id,
+                    "reason": (
+                        "verifier_call_failed"
+                    ),
+                    "error": repr(error),
+                }
+            )
+            continue
+
+        if not (
+            isinstance(
+                normalized_response,
+                dict,
+            )
+            and isinstance(
+                normalized_response.get(
+                    "findings"
+                ),
+                list,
+            )
+        ):
+            repair_prompt = (
+                "이전 응답은 필수 findings schema를 "
+                "누락했다.\n"
+                "새로운 rule id를 만들지 말고 아래 기존 "
+                "rule 하나만 다시 판정하라.\n"
+                "직접 위반한 답안 원문이 있을 때만 findings "
+                "항목 하나를 반환하고, 아니면 빈 배열을 "
+                "반환한다.\n"
+                "evidence는 답안에서 직접 복사한다.\n\n"
+                + _single_topic_fatal_prompt(
+                    text,
+                    check,
+                )
+            )
+
+            try:
+                raw_response = (
+                    _call_ollama_json(
+                        repair_prompt,
+                        format_schema=schema,
+                    )
+                )
+                normalized_response = (
+                    _normalize_topic_fatal_semantic_response(
+                        raw_response
+                    )
+                )
+            except Exception as error:
+                diagnostics.append(
+                    {
+                        "rule_id": rule_id,
+                        "reason": (
+                            "schema_repair_call_failed"
+                        ),
+                        "error": repr(error),
+                    }
+                )
+                continue
+
+        if not (
+            isinstance(
+                normalized_response,
+                dict,
+            )
+            and isinstance(
+                normalized_response.get(
+                    "findings"
+                ),
+                list,
+            )
+        ):
+            diagnostics.append(
+                {
+                    "rule_id": rule_id,
+                    "reason": (
+                        "findings_field_missing"
+                    ),
+                    "error": (
+                        "single-rule response did not "
+                        "contain findings"
+                    ),
+                }
+            )
+            continue
+
+        raw_findings = normalized_response.get(
+            "findings"
+        )
+
+        for raw_finding in raw_findings[:1]:
+            if not isinstance(
+                raw_finding,
+                dict,
+            ):
+                continue
+
+            returned_rule_id = str(
+                raw_finding.get("rule_id")
+                or raw_finding.get(
+                    "source_rule_id"
+                )
+                or ""
+            ).strip()
+
+            if returned_rule_id != rule_id:
+                diagnostics.append(
+                    {
+                        "rule_id": rule_id,
+                        "reason": (
+                            "unexpected_rule_id"
+                        ),
+                        "error": returned_rule_id,
+                    }
+                )
+                continue
+
+            severity = str(
+                raw_finding.get("severity")
+                or ""
+            ).strip().lower()
+
+            if severity not in {
+                "major",
+                "fatal",
+            }:
+                continue
+
+            confidence_raw = (
+                raw_finding.get("confidence")
+            )
+
+            try:
+                confidence = float(
+                    confidence_raw
+                )
+            except (
+                TypeError,
+                ValueError,
+            ):
+                confidence = 0.0
+
+            if confidence < 0.80:
+                diagnostics.append(
+                    {
+                        "rule_id": rule_id,
+                        "reason": (
+                            "confidence_below_threshold"
+                        ),
+                        "error": str(
+                            confidence_raw
+                        ),
+                    }
+                )
+                continue
+
+            evidence = str(
+                raw_finding.get("evidence")
+                or ""
+            ).strip()
+
+            normalized_evidence = (
+                _normalize_text(
+                    evidence
+                ).casefold()
+            )
+
+            if (
+                not normalized_evidence
+                or normalized_evidence
+                not in normalized_answer
+            ):
+                diagnostics.append(
+                    {
+                        "rule_id": rule_id,
+                        "reason": (
+                            "evidence_not_in_answer"
+                        ),
+                        "error": evidence[:240],
+                    }
+                )
+                continue
+
+            if (
+                _semantic_evidence_is_corrective_context(
+                    text,
+                    evidence,
+                )
+            ):
+                diagnostics.append(
+                    {
+                        "rule_id": rule_id,
+                        "reason": (
+                            "corrective_context_excluded"
+                        ),
+                        "error": evidence[:240],
+                    }
+                )
+                continue
+
+            finding = {
+                "id": (
+                    "llm_semantic_"
+                    + rule_id
+                ),
+                "source_rule_id": rule_id,
+                "severity": severity,
+                "message": str(
+                    check.get("message")
+                    or check.get(
+                        "condition"
+                    )
+                    or "핵심 이론 오류"
+                ).strip(),
+                "correct_rule": str(
+                    check.get("correct_rule")
+                    or ""
+                ).strip(),
+                "affected_layers": (
+                    check.get(
+                        "affected_layers"
+                    )
+                    or ["C"]
+                ),
+                "evidence": evidence,
+                "engine": (
+                    "topic_fatal_semantic_"
+                    "llm_per_rule_v1"
+                ),
+                "confidence": confidence,
+                "semantic_rule_evaluation": {
+                    "mode": "single_rule",
+                    "batch_size": 1,
+                    "schema_kind": (
+                        "findings_only"
+                    ),
+                    "rule_source": (
+                        "existing_topic_fatal_checks"
+                    ),
+                    "new_rule_owner_created": False,
+                },
+            }
+
+            ceiling = check.get(
+                "recommended_ceiling"
+            )
+
+            if isinstance(
+                ceiling,
+                (int, float),
+            ) and not isinstance(
+                ceiling,
+                bool,
+            ):
+                finding[
+                    "recommended_ceiling"
+                ] = float(ceiling)
+
+            findings.append(finding)
+            break
+
+    # Stage19: corrective context is a non-failure exclusion.
+    diagnostics = [
+        diagnostic
+        for diagnostic in diagnostics
+        if str(
+            diagnostic.get("reason") or ""
+        ) != "corrective_context_excluded"
+    ]
+
+    if diagnostics:
+        diagnostic_reasons = {
+            row.get("reason")
+            for row in diagnostics
+            if isinstance(row, dict)
+        }
+        diagnostic_reason = (
+            "findings_field_missing"
+            if diagnostic_reasons
+            == {"findings_field_missing"}
+            else "per_rule_evaluation_partial"
+        )
+
+        findings.append(
+            {
+                "id": (
+                    "topic_fatal_semantic_"
+                    "llm_error"
+                ),
+                "severity": "minor",
+                "message": (
+                    "일부 기존 fatal rule의 "
+                    "single-rule semantic 검증이 "
+                    "fail-open 처리되었습니다."
+                ),
+                "correct_rule": (
+                    "semantic verifier 실패 또는 "
+                    "불충분한 evidence에는 fatal "
+                    "판정을 적용하지 않습니다."
+                ),
+                "affected_layers": ["C"],
+                "engine": (
+                    "topic_fatal_semantic_"
+                    "llm_per_rule_v1"
+                ),
+                "diagnostic": {
+                    "ok": False,
+                    "reason": diagnostic_reason,
+                    "rule_failure_count": len(
+                        diagnostics
+                    ),
+                    "details": diagnostics,
+                },
+            }
+        )
+
+    return findings
+
+
+def _evaluate_topic_fatal_checks_with_llm(
+    text: str,
+    topic_check: dict[str, Any],
+) -> list[dict[str, Any]]:
+    try:
+        import logic_llm_verifier as verifier_module
+    except Exception:
+        return _evaluate_topic_fatal_checks_with_llm_legacy_contract(
+            text,
+            topic_check,
+        )
+
+    stage19_capable = (
+        callable(
+            getattr(
+                verifier_module,
+                "verify_logic_with_llm",
+                None,
+            )
+        )
+        and callable(
+            getattr(
+                verifier_module,
+                "_call_ollama_json",
+                None,
+            )
+        )
+    )
+
+    if stage19_capable:
+        return _evaluate_topic_fatal_checks_with_llm_stage19_contract(
+            text,
+            topic_check,
+        )
+
+    return _evaluate_topic_fatal_checks_with_llm_legacy_contract(
+        text,
+        topic_check,
+    )
 def _logic_normalize_layer_id(value: Any) -> str | None:
     text = str(value or "").strip().upper()
 

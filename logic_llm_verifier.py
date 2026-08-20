@@ -365,7 +365,11 @@ def _extract_json_object(text: str) -> dict[str, Any] | None:
         return None
 
 
-def _call_ollama_json(prompt: str) -> dict[str, Any] | None:
+def _call_ollama_json(
+    prompt: str,
+    *,
+    format_schema: dict[str, Any] | str | None = None,
+) -> dict[str, Any] | None:
     payload = {
         "model": LOGIC_LLM_MODEL,
         "messages": [
@@ -388,6 +392,10 @@ def _call_ollama_json(prompt: str) -> dict[str, Any] | None:
             "top_p": 0.1,
         },
     }
+
+    # STAGE19F_OLLAMA_STRUCTURED_OUTPUT_ENFORCEMENT_V1
+    if format_schema is not None:
+        payload["format"] = format_schema
 
     errors: list[str] = []
 
@@ -415,7 +423,6 @@ def _call_ollama_json(prompt: str) -> dict[str, Any] | None:
             errors.append(f"{base_url}: {exc!r}")
 
     raise RuntimeError("all Ollama endpoints failed: " + " | ".join(errors))
-
 
 def _numbered(items: list[str]) -> str:
     return "\n".join(f"{idx}. {item}" for idx, item in enumerate(items, 1))
