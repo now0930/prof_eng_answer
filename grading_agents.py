@@ -5225,6 +5225,7 @@ def _phase2_extract_submission_context(
 
 def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
+    import time as _phase20_time
     from grading_config import load_active_config, save_active_config_snapshots
 
     def report(message):
@@ -5239,6 +5240,75 @@ def _phase2_postprocess_grade(legacy_result):
         return legacy_result
 
     session_dir = Path(session_dir)
+
+    _phase20_total_started = (
+        _phase20_time.perf_counter()
+    )
+    _phase20_timings = {}
+
+    def _phase20_timed(
+        phase_name,
+        function,
+        *args,
+        **kwargs,
+    ):
+        started = _phase20_time.perf_counter()
+
+        try:
+            return function(*args, **kwargs)
+        finally:
+            _phase20_timings[
+                str(phase_name)
+            ] = round(
+                _phase20_time.perf_counter()
+                - started,
+                3,
+            )
+
+    def _phase20_persist_timing(
+        *,
+        cache_hit,
+    ):
+        _phase20_timings[
+            "total_phase2_seconds"
+        ] = round(
+            _phase20_time.perf_counter()
+            - _phase20_total_started,
+            3,
+        )
+
+        timing_report = {
+            "version": (
+                "stage20_grading_timing_v1"
+            ),
+            "score_affecting": False,
+            "cache_hit": bool(cache_hit),
+            "phases": dict(
+                _phase20_timings
+            ),
+        }
+
+        try:
+            _phase2_json_write(
+                session_dir
+                / "grading_timing_evaluation.json",
+                timing_report,
+            )
+        except Exception as timing_error:
+            report(
+                "[agent] stage20 timing persistence "
+                "failed: "
+                f"{timing_error!r}"
+            )
+
+        report(
+            "[agent] stage20 timing: "
+            f"total={_phase20_timings.get('total_phase2_seconds')}, "
+            f"gemini={_phase20_timings.get('gemini_semantic_grader')}, "
+            f"logic={_phase20_timings.get('logic_check')}"
+        )
+
+        return timing_report
 
     scoring_model = _phase2_json_load(session_dir / "scoring_model_snapshot.json")
     subject_rubric = _phase2_json_load(session_dir / "subject_rubric_snapshot.json")
@@ -5296,22 +5366,37 @@ def _phase2_postprocess_grade(legacy_result):
             session_dir
         )
     )
-    fact_eval = _phase3_evaluate_fact_anchors(
+    fact_eval = _phase20_timed(
+        "fact_anchor",
+        _phase3_evaluate_fact_anchors,
         input_text,
         subject_rubric,
         routing_contract=phase3_routing_contract,
     )
 
+    _phase20_question_type_started = (
+        _phase20_time.perf_counter()
+    )
     question_type_eval = _phase9_run_question_type_lens(
         input_text=input_text,
         answer_text=answer_text,
         subject_rubric=subject_rubric,
         session_dir=session_dir
     )
+    _phase20_timings[
+        "question_type_lens"
+    ] = round(
+        _phase20_time.perf_counter()
+        - _phase20_question_type_started,
+        3,
+    )
     de_policy_question_type_eval = (
         dict(question_type_eval)
         if isinstance(question_type_eval, dict)
         else {}
+    )
+    _phase20_connection_started = (
+        _phase20_time.perf_counter()
     )
     connection_eval = _phase3_evaluate_connections(
         input_text,
@@ -5319,19 +5404,28 @@ def _phase2_postprocess_grade(legacy_result):
             de_policy_question_type_eval
         ),
     )
+    _phase20_timings[
+        "connection_evaluation"
+    ] = round(
+        _phase20_time.perf_counter()
+        - _phase20_connection_started,
+        3,
+    )
     interview_followup = _phase3_make_interview_followup(fact_eval, connection_eval)
 
     layer_scores = _phase3_apply_fact_anchor_to_layer_scores(layer_scores, fact_eval)
     layer_scores = _phase3_apply_connection_to_layer_scores(layer_scores, connection_eval)
 
 
-    model_answer_ref = _phase10_run_model_answer_reference(
+    model_answer_ref = _phase20_timed(
+        "model_answer_reference",
+        _phase10_run_model_answer_reference,
         input_text=input_text,
         answer_text=answer_text,
         question_type_eval=question_type_eval,
         fact_eval=fact_eval,
         subject_rubric=subject_rubric,
-        session_dir=session_dir
+        session_dir=session_dir,
     )
 
     from question_contract import (
@@ -5401,6 +5495,9 @@ def _phase2_postprocess_grade(legacy_result):
         )
     )
     if _stage18b1_cached_final_grade is not None:
+        _phase20_persist_timing(
+            cache_hit=True,
+        )
         return _stage18b1_cached_final_grade
 
     # Score-affecting stages consume the persisted
@@ -5481,6 +5578,9 @@ def _phase2_postprocess_grade(legacy_result):
         )
     )
 
+    _phase20_gemini_started = (
+        _phase20_time.perf_counter()
+    )
     gemini_eval = _phase6_run_gemini_semantic_grader(
         input_text=input_text,
         answer_text=answer_text,
@@ -5491,6 +5591,13 @@ def _phase2_postprocess_grade(legacy_result):
         fact_eval=fact_eval,
         connection_eval=connection_eval,
         session_dir=session_dir
+    )
+    _phase20_timings[
+        "gemini_semantic_grader"
+    ] = round(
+        _phase20_time.perf_counter()
+        - _phase20_gemini_started,
+        3,
     )
 
     authoritative_de_question_type_eval = (
@@ -5576,7 +5683,9 @@ def _phase2_postprocess_grade(legacy_result):
         scoring_model,
     )
 
-    originality_eval = _phase8_run_originality_evaluator(
+    originality_eval = _phase20_timed(
+        "originality_evaluator",
+        _phase8_run_originality_evaluator,
         input_text=input_text,
         answer_text=answer_text,
         layer_scores=layer_scores,
@@ -5783,7 +5892,22 @@ def _phase2_postprocess_grade(legacy_result):
             grade["inferred_topic_id"] = _logic_topic_id
             grade["logic_check_topic_id"] = _logic_topic_id
 
-        grade = attach_logic_check_to_grade(grade, input_text)
+        _phase20_logic_started = (
+            _phase20_time.perf_counter()
+        )
+        try:
+            grade = attach_logic_check_to_grade(
+                grade,
+                input_text,
+            )
+        finally:
+            _phase20_timings[
+                "logic_check"
+            ] = round(
+                _phase20_time.perf_counter()
+                - _phase20_logic_started,
+                3,
+            )
         logic_eval = grade.get("logic_check_evaluation")
 
         if isinstance(logic_eval, dict):
@@ -6016,6 +6140,9 @@ def _phase2_postprocess_grade(legacy_result):
         layer_scores,
     )
     # STAGE8_FINAL_NATIVE_BC_PERSISTENCE_V1
+    _phase20_persist_timing(
+        cache_hit=False,
+    )
     _phase2_json_write(session_dir / "grade.json", grade)
     return grade
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import os
 import re
+import time
 import urllib.request
 from pathlib import Path
 from rubric_bank_paths import resolve_rubric_bank_path
@@ -25,6 +26,21 @@ LOGIC_LLM_MODEL = os.getenv(
     os.getenv("OLLAMA_MODEL", "gemma4:e4b"),
 )
 LOGIC_LLM_TIMEOUT = int(os.getenv("LOGIC_LLM_VERIFIER_TIMEOUT", "90"))
+OLLAMA_ENDPOINT_PROBE_TIMEOUT = float(
+    os.getenv(
+        "LOGIC_LLM_ENDPOINT_PROBE_TIMEOUT",
+        "1.5",
+    )
+)
+OLLAMA_ENDPOINT_RETRY_SECONDS = float(
+    os.getenv(
+        "LOGIC_LLM_ENDPOINT_RETRY_SECONDS",
+        "15",
+    )
+)
+
+_OLLAMA_SELECTED_BASE_URL: str | None = None
+_OLLAMA_LAST_SELECTION_ATTEMPT = 0.0
 
 
 def _ollama_url_candidates() -> list[str]:
@@ -50,6 +66,103 @@ def _ollama_url_candidates() -> list[str]:
             deduped.append(url)
 
     return deduped
+
+
+def _probe_ollama_endpoint(
+    base_url: str,
+) -> bool:
+    request = urllib.request.Request(
+        base_url.rstrip("/") + "/api/tags",
+        method="GET",
+    )
+
+    with urllib.request.urlopen(
+        request,
+        timeout=OLLAMA_ENDPOINT_PROBE_TIMEOUT,
+    ) as response:
+        status = int(
+            getattr(response, "status", 200)
+            or 200
+        )
+        response.read(1)
+
+    return 200 <= status < 300
+
+
+def _select_ollama_base_url() -> str | None:
+    global _OLLAMA_LAST_SELECTION_ATTEMPT
+    global _OLLAMA_SELECTED_BASE_URL
+
+    if _OLLAMA_SELECTED_BASE_URL:
+        return _OLLAMA_SELECTED_BASE_URL
+
+    now = time.monotonic()
+
+    if (
+        _OLLAMA_LAST_SELECTION_ATTEMPT > 0.0
+        and now - _OLLAMA_LAST_SELECTION_ATTEMPT
+        < max(0.0, OLLAMA_ENDPOINT_RETRY_SECONDS)
+    ):
+        return None
+
+    _OLLAMA_LAST_SELECTION_ATTEMPT = now
+
+    for base_url in _ollama_url_candidates():
+        try:
+            if _probe_ollama_endpoint(base_url):
+                _OLLAMA_SELECTED_BASE_URL = base_url
+                return base_url
+        except Exception:
+            continue
+
+    return None
+
+
+def _ordered_ollama_url_candidates() -> list[str]:
+    candidates = _ollama_url_candidates()
+    selected = _select_ollama_base_url()
+
+    if selected and selected in candidates:
+        return [
+            selected,
+            *[
+                candidate
+                for candidate in candidates
+                if candidate != selected
+            ],
+        ]
+
+    return candidates
+
+
+def _remember_ollama_base_url(
+    base_url: str,
+) -> None:
+    global _OLLAMA_SELECTED_BASE_URL
+
+    normalized = str(base_url or "").rstrip("/")
+
+    if normalized:
+        _OLLAMA_SELECTED_BASE_URL = normalized
+
+
+def _forget_ollama_base_url(
+    base_url: str,
+) -> None:
+    global _OLLAMA_SELECTED_BASE_URL
+
+    normalized = str(base_url or "").rstrip("/")
+
+    if _OLLAMA_SELECTED_BASE_URL == normalized:
+        _OLLAMA_SELECTED_BASE_URL = None
+
+
+def _reset_ollama_endpoint_selection_for_tests() -> None:
+    global _OLLAMA_LAST_SELECTION_ATTEMPT
+    global _OLLAMA_SELECTED_BASE_URL
+
+    _OLLAMA_SELECTED_BASE_URL = None
+    _OLLAMA_LAST_SELECTION_ATTEMPT = 0.0
 
 
 def _normalize_text(text: str) -> str:
@@ -399,7 +512,7 @@ def _call_ollama_json(
 
     errors: list[str] = []
 
-    for base_url in _ollama_url_candidates():
+    for base_url in _ordered_ollama_url_candidates():
         req = urllib.request.Request(
             base_url.rstrip("/") + "/api/chat",
             data=json.dumps(payload).encode("utf-8"),
@@ -416,10 +529,16 @@ def _call_ollama_json(
             parsed = _extract_json_object(content)
 
             if parsed is not None:
+                _remember_ollama_base_url(
+                    base_url
+                )
                 return parsed
 
             errors.append(f"{base_url}: JSON parse failed")
         except Exception as exc:
+            _forget_ollama_base_url(
+                base_url
+            )
             errors.append(f"{base_url}: {exc!r}")
 
     raise RuntimeError("all Ollama endpoints failed: " + " | ".join(errors))

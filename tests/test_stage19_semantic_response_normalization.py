@@ -393,7 +393,7 @@ class Stage19OllamaStructuredOutputTests(unittest.TestCase):
 
 
 class Stage19PerRuleEvaluationTests(unittest.TestCase):
-    def test_two_rules_are_evaluated_separately(self):
+    def test_two_rules_are_evaluated_in_one_batch(self):
         topic = {
             "fatal_checks": [
                 {
@@ -432,16 +432,21 @@ class Stage19PerRuleEvaluationTests(unittest.TestCase):
             )
 
         self.assertEqual(findings, [])
-        self.assertEqual(mocked.call_count, 2)
-        self.assertEqual(
+        self.assertEqual(mocked.call_count, 1)
+        self.assertEqual(len(schemas), 1)
+
+        rule_schema = (
             schemas[0]["properties"]["findings"]
-            ["items"]["properties"]["rule_id"]["const"],
-            "rule_a",
+            ["items"]["properties"]["rule_id"]
+        )
+
+        self.assertEqual(
+            rule_schema["enum"],
+            ["rule_a", "rule_b"],
         )
         self.assertEqual(
-            schemas[1]["properties"]["findings"]
-            ["items"]["properties"]["rule_id"]["const"],
-            "rule_b",
+            schemas[0]["properties"]["findings"]["maxItems"],
+            2,
         )
 
     def test_exact_answer_evidence_creates_existing_finding_shape(self):
