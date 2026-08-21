@@ -237,6 +237,22 @@ def _count_required_patterns(text: str, patterns: list[str]) -> tuple[int, list[
 
 
 def _topic_applies(text: str, grade: dict[str, Any], topic_check: dict[str, Any]) -> bool:
+    # STAGE22E20I_ROUTER_OWNED_LOGIC_TOPIC_APPLICABILITY_V1
+    # Explicit router selection is authoritative. Text aliases
+    # remain a fallback only when no logic-check route exists.
+    routed_logic_topic_id = str(
+        grade.get("logic_check_topic_id") or ""
+    ).strip()
+    if routed_logic_topic_id:
+        current_logic_topic_id = str(
+            topic_check.get("topic_id") or ""
+        ).strip()
+        return bool(
+            current_logic_topic_id
+            and current_logic_topic_id
+            == routed_logic_topic_id
+        )
+
     topic_id = topic_check.get("topic_id")
 
     strategy = grade.get("difficulty_strategy") or {}
@@ -406,6 +422,37 @@ def _evaluate_second_order_deterministic_checks(text: str) -> list[dict[str, Any
 
 
 
+def _filter_second_order_legacy_fatal_findings(
+    findings: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    legacy_second_order_fatal_ids = {
+            "critical_damping_wrong_07_threshold",
+            "overdamped_wrong_less_than_one_region",
+            "underdamped_wrong_07_boundary",
+            "damping_region_table_inverted",
+            "angle_relation_sin_cos_mismatch",
+            "step_response_region_inversion",
+            "critical_damping_step_response_inversion",
+            "overdamped_step_response_inversion",
+        }
+    filtered: list[dict[str, Any]] = []
+    for finding in findings:
+            if not isinstance(finding, dict):
+                continue
+
+            fid = str(finding.get("id") or "")
+            severity = finding.get("severity")
+
+            if severity == "fatal" and (
+                fid in legacy_second_order_fatal_ids
+                or fid.startswith("claim_")
+            ):
+                continue
+
+            filtered.append(finding)
+    return filtered
+
+
 def _apply_second_order_claim_evaluator(text: str, findings: list[dict[str, Any]]) -> list[dict[str, Any]]:
     """
     Second-order damping topic uses JSON-profile LLM verification:
@@ -415,33 +462,7 @@ def _apply_second_order_claim_evaluator(text: str, findings: list[dict[str, Any]
     - Legacy hard-coded fatal findings are removed to prevent false caps.
     - Non-fatal major/minor findings remain as supplemental feedback.
     """
-    legacy_second_order_fatal_ids = {
-        "critical_damping_wrong_07_threshold",
-        "overdamped_wrong_less_than_one_region",
-        "underdamped_wrong_07_boundary",
-        "damping_region_table_inverted",
-        "angle_relation_sin_cos_mismatch",
-        "step_response_region_inversion",
-        "critical_damping_step_response_inversion",
-        "overdamped_step_response_inversion",
-    }
-
-    filtered: list[dict[str, Any]] = []
-
-    for finding in findings:
-        if not isinstance(finding, dict):
-            continue
-
-        fid = str(finding.get("id") or "")
-        severity = finding.get("severity")
-
-        if severity == "fatal" and (
-            fid in legacy_second_order_fatal_ids
-            or fid.startswith("claim_")
-        ):
-            continue
-
-        filtered.append(finding)
+    filtered = _filter_second_order_legacy_fatal_findings(findings)
 
     try:
         from logic_llm_verifier import verify_logic_with_llm
@@ -469,6 +490,853 @@ def _apply_second_order_claim_evaluator(text: str, findings: list[dict[str, Any]
     return filtered
 
 
+
+
+
+# STAGE22D_GLOBAL_CANONICAL_AXIS_COMPARISON_V1
+_STAGE22_AXIS_STATUSES = {
+    "ALIGNED",
+    "PARTIAL",
+    "OFF_AXIS",
+    "UNSUPPORTED",
+    "CONTRADICTED",
+    "FATAL_CONTRADICTION",
+}
+_STAGE22_FATAL_CONFIDENCE = 0.80
+
+
+def _stage22_clean_refs(value: Any) -> list[str]:
+    if not isinstance(value, list):
+        return []
+    result: list[str] = []
+    for item in value:
+        if isinstance(item, str):
+            item = item.strip()
+            if item and item not in result:
+                result.append(item)
+    return result
+
+
+def _stage22_confidence(value: Any) -> float:
+    if isinstance(value, bool):
+        return 0.0
+    try:
+        number = float(value)
+    except (TypeError, ValueError, OverflowError):
+        return 0.0
+    if not math.isfinite(number):
+        return 0.0
+    return max(0.0, min(1.0, number))
+
+
+def _stage22_tokens(value: Any) -> set[str]:
+    normalized = _normalize_text(str(value or "")).casefold()
+    return {
+        token
+        for token in re.findall(r"[0-9a-zA-Z가-힣_]{2,}", normalized)
+        if token not in {
+            "한다", "이다", "대한", "위한", "설명", "기준",
+            "단계", "경우", "the", "and", "for", "with",
+            "from", "this", "that",
+        }
+    }
+
+
+def _stage22_axis_id(value: Any, index: int) -> str:
+    raw = str(value or "").strip()
+    if raw:
+        safe = re.sub(
+            r"[^0-9a-zA-Z가-힣_.:-]+",
+            "_",
+            raw,
+        ).strip("_")
+        if safe:
+            return safe[:160]
+    return f"canonical_axis_{index:03d}"
+
+
+def _build_canonical_axis_context(
+    context: dict[str, Any],
+) -> list[dict[str, Any]]:
+    if not isinstance(context, dict):
+        return []
+
+    roots: list[tuple[str, Any]] = []
+    embedded = context.get("_stage22_canonical_context")
+    if isinstance(embedded, dict):
+        roots.extend(
+            (f"stage22_context.{key}", value)
+            for key, value in embedded.items()
+            if value is not None
+        )
+    for key in (
+        "model_answer", "fact_anchor", "logic_check",
+        "topic_importance", "topic_check",
+        "model_answer_reference", "question_demand_evidence",
+        "question_demand_evidence_for_score", "question_analysis",
+    ):
+        value = context.get(key)
+        if value is not None:
+            roots.append((key, value))
+    roots.append(("context", context))
+
+    demands: dict[str, dict[str, Any]] = {}
+
+    def collect_demands(value: Any, path: str) -> None:
+        if isinstance(value, dict):
+            lower = path.casefold()
+            demand_id = str(
+                value.get("demand_id")
+                or (value.get("id") if "demand" in lower else "")
+                or ""
+            ).strip()
+            demand_text = str(
+                value.get("text")
+                or value.get("demand")
+                or value.get("requirement")
+                or value.get("description")
+                or ""
+            ).strip()
+            if demand_id and demand_text:
+                demands[demand_id] = {
+                    "text": demand_text,
+                    "anchor_refs": _stage22_clean_refs(
+                        value.get("anchor_refs")
+                        or value.get("required_anchor_ids")
+                    ),
+                }
+            for key, child in value.items():
+                collect_demands(child, f"{path}.{key}")
+        elif isinstance(value, list):
+            for index, child in enumerate(value):
+                collect_demands(child, f"{path}[{index}]")
+
+    for root_name, root_value in roots:
+        collect_demands(root_value, root_name)
+
+    axes: list[dict[str, Any]] = []
+    seen_claims: set[str] = set()
+    skip_tokens = (
+        "wrong_claim", "wrong_pattern", "rejected_explanation",
+        "fatal_condition", "common_missing",
+    )
+    scalar_keys = (
+        "statement", "content", "correct_rule", "correction",
+        "expected", "truth", "canonical_claim", "intent",
+    )
+    list_keys = (
+        "high_score_points", "accepted_explanations",
+        "truth_schema",
+    )
+
+    def add_axis(claim: Any, node: Any, path: str) -> None:
+        claim_text = str(claim or "").strip()
+        normalized = _normalize_text(claim_text).casefold()
+        if len(normalized) < 12 or normalized in seen_claims:
+            return
+        if any(token in path.casefold() for token in skip_tokens):
+            return
+        node = node if isinstance(node, dict) else {}
+        raw_id = (
+            node.get("axis_id") or node.get("anchor_id")
+            or node.get("id") or node.get("rule_id")
+        )
+        axis_id = _stage22_axis_id(raw_id, len(axes) + 1)
+        anchor_refs = _stage22_clean_refs(
+            node.get("anchor_refs") or node.get("anchor_ids")
+        )
+        if (
+            not anchor_refs
+            and raw_id
+            and ("anchor" in path.casefold() or node.get("anchor_id"))
+        ):
+            anchor_refs = [str(raw_id).strip()]
+        demand_refs = _stage22_clean_refs(node.get("demand_refs"))
+        importance = str(
+            node.get("importance") or node.get("criticality")
+            or node.get("selection_importance") or ""
+        ).strip().casefold()
+        severity = str(node.get("severity") or "").strip().casefold()
+        grading_notes = str(
+            node.get("grading_notes") or ""
+        ).strip().casefold()
+        source_marks_direct_fatal = (
+            importance in {
+                "must", "core", "high", "critical", "required",
+            }
+            and "fatal" in grading_notes
+            and any(
+                marker in grading_notes
+                for marker in (
+                    "direct", "직접", "opposite", "반대",
+                    "contradiction", "충돌",
+                )
+            )
+        )
+        fatal_core = bool(
+            node.get("fatal") is True
+            or node.get("fatal_if_opposite") is True
+            or node.get("fatal_requires_direct_opposite_claim") is True
+            or node.get("fatal_requires_explicit_contradiction") is True
+            or source_marks_direct_fatal
+            or (
+                severity == "fatal"
+                and str(
+                    node.get("correct_rule")
+                    or node.get("correction") or ""
+                ).strip()
+            )
+        )
+        if fatal_core:
+            criticality = "fatal_core"
+        elif importance in {
+            "must", "core", "high", "critical", "required",
+        }:
+            criticality = "core"
+        else:
+            criticality = "supporting"
+        keywords = _stage22_clean_refs(
+            node.get("keywords") or node.get("core_terms")
+        )
+        token_set = _stage22_tokens(claim_text)
+        for keyword in keywords:
+            token_set |= _stage22_tokens(keyword)
+        axes.append(
+            {
+                "axis_id": axis_id,
+                "axis_name": str(
+                    node.get("axis_name") or node.get("title")
+                    or node.get("section") or raw_id or path
+                ).strip(),
+                "canonical_claim": claim_text,
+                "criticality": criticality,
+                "source_fields": [path],
+                "anchor_refs": anchor_refs,
+                "demand_refs": demand_refs,
+                "_tokens": token_set,
+            }
+        )
+        seen_claims.add(normalized)
+
+    def walk(value: Any, path: str, parent_key: str = "") -> None:
+        if any(token in path.casefold() for token in skip_tokens):
+            return
+        if isinstance(value, dict):
+            for key in scalar_keys:
+                candidate = value.get(key)
+                if isinstance(candidate, str):
+                    add_axis(candidate, value, f"{path}.{key}")
+            for key in list_keys:
+                candidates = value.get(key)
+                if isinstance(candidates, list):
+                    for index, candidate in enumerate(candidates):
+                        if isinstance(candidate, str):
+                            add_axis(
+                                candidate,
+                                value,
+                                f"{path}.{key}[{index}]",
+                            )
+            for key, child in value.items():
+                walk(child, f"{path}.{key}", str(key))
+        elif isinstance(value, list):
+            for index, child in enumerate(value):
+                if isinstance(child, str) and parent_key in list_keys:
+                    add_axis(child, {}, f"{path}[{index}]")
+                else:
+                    walk(child, f"{path}[{index}]", parent_key)
+
+    for root_name, root_value in roots:
+        walk(root_value, root_name)
+
+    for axis in axes:
+        if not axis["demand_refs"]:
+            axis_tokens = set(axis.get("_tokens") or set())
+            axis_anchor_refs = set(axis.get("anchor_refs") or [])
+            matched: list[str] = []
+            for demand_id, demand in demands.items():
+                if axis_anchor_refs & set(demand.get("anchor_refs") or []):
+                    matched.append(demand_id)
+                    continue
+                overlap = axis_tokens & _stage22_tokens(demand.get("text"))
+                if len(overlap) >= 2 or any(
+                    len(token) >= 6 for token in overlap
+                ):
+                    matched.append(demand_id)
+            axis["demand_refs"] = matched[:8]
+
+    priority = {"fatal_core": 0, "core": 1, "supporting": 2}
+    axes.sort(
+        key=lambda row: (
+            priority.get(str(row.get("criticality")), 9),
+            0 if row.get("demand_refs") else 1,
+            str(row.get("axis_id")),
+        )
+    )
+    output: list[dict[str, Any]] = []
+    used_ids: set[str] = set()
+    for axis in axes:
+        axis_id = str(axis.get("axis_id") or "").strip()
+        if not axis_id:
+            continue
+        if axis_id in used_ids:
+            axis_id = _stage22_axis_id(
+                f"{axis_id}_{len(output) + 1}",
+                len(output) + 1,
+            )
+            axis["axis_id"] = axis_id
+        used_ids.add(axis_id)
+        axis.pop("_tokens", None)
+        output.append(axis)
+        if len(output) >= 64:
+            break
+    return output
+
+
+# STAGE22E_SOURCE_OWNED_AXIS_PROVENANCE_V1
+
+def _rebind_exclusive_relation_rows_to_source_owner(
+    value: Any,
+    *,
+    canonical_axes: list[dict[str, Any]] | None,
+    answer_text: str | None,
+) -> Any:
+    if isinstance(value, dict):
+        prepared: Any = dict(value)
+        raw_rows = value.get("alignments")
+    elif isinstance(value, list):
+        prepared = list(value)
+        raw_rows = value
+    else:
+        return value
+
+    if not isinstance(raw_rows, list):
+        return prepared
+
+    def normalize_token(item: Any) -> str:
+        return re.sub(
+            r"[^0-9a-z가-힣]+",
+            "",
+            str(item or "").casefold(),
+        )
+
+    def leading_subject(item: Any) -> str:
+        text = str(item or "").strip()
+        if not text:
+            return ""
+        korean = re.match(
+            r"^\s*([0-9A-Za-z가-힣_./()\-]+?)"
+            r"(?:은|는|이|가|을|를)(?=\s|$)",
+            text,
+        )
+        if korean:
+            return korean.group(1)
+        english = re.match(
+            r"^\s*([0-9A-Za-z_./()\- ]{2,80}?)"
+            r"\s+(?:is|are|verifies|validates|checks)\b",
+            text,
+            re.I,
+        )
+        return english.group(1) if english else ""
+
+    def identifier_suffix_alias(item: Any) -> str:
+        tokens = [
+            token
+            for token in re.split(
+                r"[_:.\-/]+",
+                str(item or "").casefold(),
+            )
+            if token
+        ]
+        while tokens and re.fullmatch(r"[a-z]+\d+", tokens[0]):
+            tokens.pop(0)
+        return "_".join(tokens)
+
+    def owner_aliases(axis: dict[str, Any]) -> list[str]:
+        raw: list[str] = []
+        axis_name = str(axis.get("axis_name") or "").strip()
+        if axis_name:
+            raw.append(axis_name)
+            subject = leading_subject(axis_name)
+            if subject:
+                raw.append(subject)
+
+        subject = leading_subject(axis.get("canonical_claim"))
+        if subject:
+            raw.append(subject)
+
+        suffix = identifier_suffix_alias(axis.get("axis_id"))
+        if suffix:
+            raw.append(suffix)
+        for ref in axis.get("anchor_refs") or []:
+            suffix = identifier_suffix_alias(ref)
+            if suffix:
+                raw.append(suffix)
+
+        result: list[str] = []
+        for item in raw:
+            token = normalize_token(item)
+            if token and token not in result:
+                result.append(token)
+        return result
+
+    def source_identity_ready(axis: dict[str, Any]) -> bool:
+        axis_id = str(axis.get("axis_id") or "").strip()
+        anchors = [
+            str(item).strip()
+            for item in axis.get("anchor_refs") or []
+            if str(item).strip()
+        ]
+        demands = [
+            str(item).strip()
+            for item in axis.get("demand_refs") or []
+            if str(item).strip()
+        ]
+        return bool(
+            axis_id
+            and str(
+                axis.get("criticality") or "supporting"
+            ).strip().casefold() == "fatal_core"
+            and len(anchors) == 1
+            and anchors[0] == axis_id
+            and demands
+        )
+
+    active_axes = [
+        dict(axis)
+        for axis in (canonical_axes or [])
+        if isinstance(axis, dict)
+        and str(axis.get("axis_id") or "").strip()
+    ]
+    axis_by_id = {
+        str(axis.get("axis_id") or "").strip(): axis
+        for axis in active_axes
+    }
+    normalized_answer = normalize_token(answer_text or "")
+    exclusive_pattern = re.compile(
+        r"^\s*(.+?)\.exclusively_establishes\.(.+?)\s*$",
+        re.I,
+    )
+    exclusive_markers = (
+        "독점",
+        "전담",
+        "단독",
+        "exclusive",
+        "exclusively",
+        "sole",
+        "only",
+    )
+
+    prepared_rows: list[Any] = []
+    for raw in raw_rows:
+        if not isinstance(raw, dict):
+            prepared_rows.append(raw)
+            continue
+
+        row = dict(raw)
+        signature = str(
+            row.get("claim_signature") or ""
+        ).strip()
+        match = exclusive_pattern.match(signature)
+        status = str(
+            row.get("status") or ""
+        ).strip().upper()
+        error_class = str(
+            row.get("error_class") or ""
+        ).strip().upper()
+        if (
+            status == "CANONICAL_RELATION_CONTRADICTION"
+            and error_class
+            == "CANONICAL_RELATION_CONTRADICTION"
+        ):
+            status = "CONTRADICTED"
+        answer_claim = str(
+            row.get("answer_claim")
+            or row.get("evidence")
+            or ""
+        ).strip()
+        try:
+            confidence = float(row.get("confidence"))
+        except (TypeError, ValueError, OverflowError):
+            confidence = 0.0
+
+        eligible = bool(
+            match
+            and status in {
+                "CONTRADICTED",
+                "FATAL_CONTRADICTION",
+            }
+            and error_class
+            == "CANONICAL_RELATION_CONTRADICTION"
+            and confidence >= 0.80
+        )
+        if eligible:
+            subject_token = normalize_token(match.group(1))
+            target_token = normalize_token(match.group(2))
+            normalized_claim = normalize_token(answer_claim)
+            eligible = bool(
+                subject_token
+                and target_token
+                and normalized_claim
+                and normalized_claim in normalized_answer
+                and subject_token in normalized_claim
+                and any(
+                    marker in answer_claim.casefold()
+                    for marker in exclusive_markers
+                )
+            )
+
+        if eligible:
+            candidates = [
+                axis
+                for axis in active_axes
+                if (
+                    subject_token in owner_aliases(axis)
+                    and source_identity_ready(axis)
+                )
+            ]
+            if len(candidates) == 1:
+                resolved = candidates[0]
+                resolved_axis_id = str(
+                    resolved.get("axis_id") or ""
+                ).strip()
+                selected_axis_id = str(
+                    row.get("axis_id") or ""
+                ).strip()
+                selected_axis = axis_by_id.get(selected_axis_id)
+                selected_conflicts = bool(
+                    selected_axis
+                    and selected_axis_id != resolved_axis_id
+                    and source_identity_ready(selected_axis)
+                )
+                if not selected_conflicts:
+                    row["axis_id"] = resolved_axis_id
+                    row["status"] = "FATAL_CONTRADICTION"
+
+        prepared_rows.append(row)
+
+    if isinstance(prepared, dict):
+        prepared["alignments"] = prepared_rows
+        return prepared
+    return prepared_rows
+
+
+def _normalize_canonical_axis_alignment_response(
+    value: Any,
+    *,
+    canonical_axes: list[dict[str, Any]] | None = None,
+    answer_text: str | None = None,
+) -> dict[str, Any]:
+    value = _rebind_exclusive_relation_rows_to_source_owner(
+        value,
+        canonical_axes=canonical_axes,
+        answer_text=answer_text,
+    )
+    axes = canonical_axes if isinstance(canonical_axes, list) else []
+    axis_map = {
+        str(axis.get("axis_id") or "").strip(): axis
+        for axis in axes
+        if isinstance(axis, dict)
+        and str(axis.get("axis_id") or "").strip()
+    }
+    if isinstance(value, dict):
+        raw_rows = value.get("alignments")
+    elif isinstance(value, list):
+        raw_rows = value
+    else:
+        raw_rows = []
+    if not isinstance(raw_rows, list):
+        raw_rows = []
+
+    aliases = {
+        "MATCH": "ALIGNED",
+        "MATCHED": "ALIGNED",
+        "INCOMPLETE": "PARTIAL",
+        "IRRELEVANT": "OFF_AXIS",
+        "NOT_SUPPORTED": "UNSUPPORTED",
+        "CONTRADICTION": "CONTRADICTED",
+        "FATAL": "FATAL_CONTRADICTION",
+    }
+    rows: list[dict[str, Any]] = []
+    for raw in raw_rows:
+        if not isinstance(raw, dict):
+            continue
+        axis_id = str(raw.get("axis_id") or "").strip()
+        axis = axis_map.get(axis_id, {})
+        axis_known = bool(axis)
+        raw_status = str(raw.get("status") or "").strip().upper()
+        status = aliases.get(raw_status, raw_status)
+        if status not in _STAGE22_AXIS_STATUSES:
+            status = "UNSUPPORTED"
+        if axis_id and not axis_known:
+            status = "UNSUPPORTED"
+        answer_claim = str(
+            raw.get("answer_claim") or raw.get("evidence") or ""
+        ).strip()
+        if axis_known:
+            canonical_claim = str(
+                axis.get("canonical_claim") or ""
+            ).strip()
+            anchor_refs = _stage22_clean_refs(axis.get("anchor_refs"))
+            demand_refs = _stage22_clean_refs(axis.get("demand_refs"))
+            criticality = str(
+                axis.get("criticality") or "supporting"
+            ).strip().casefold()
+        else:
+            canonical_claim = str(
+                raw.get("canonical_claim")
+                or raw.get("correct_rule") or ""
+            ).strip()
+            anchor_refs = _stage22_clean_refs(raw.get("anchor_refs"))
+            demand_refs = _stage22_clean_refs(raw.get("demand_refs"))
+            criticality = str(
+                raw.get("criticality") or "supporting"
+            ).strip().casefold()
+        signature = str(raw.get("claim_signature") or "").strip()
+        if not signature:
+            signature = re.sub(
+                r"[^0-9a-zA-Z가-힣_.:-]+",
+                ".",
+                _normalize_text(
+                    answer_claim or canonical_claim or axis_id
+                ).casefold(),
+            ).strip(".")[:240]
+        if (
+            status in {"CONTRADICTED", "FATAL_CONTRADICTION"}
+            and answer_text is not None
+        ):
+            normalized_answer = _normalize_text(answer_text).casefold()
+            normalized_claim = _normalize_text(answer_claim).casefold()
+            if not normalized_claim or normalized_claim not in normalized_answer:
+                status = "UNSUPPORTED"
+        confidence = _stage22_confidence(raw.get("confidence"))
+        fatal_allowed = (
+            status == "FATAL_CONTRADICTION"
+            and criticality == "fatal_core"
+            and confidence >= _STAGE22_FATAL_CONFIDENCE
+            and bool(anchor_refs)
+            and bool(demand_refs)
+        )
+        if status == "FATAL_CONTRADICTION" and not fatal_allowed:
+            status = "CONTRADICTED"
+        rows.append(
+            {
+                "axis_id": axis_id,
+                "status": status,
+                "answer_claim": answer_claim,
+                "canonical_claim": canonical_claim,
+                "claim_signature": signature,
+                "error_class": str(
+                    raw.get("error_class")
+                    or (
+                        "CANONICAL_RELATION_CONTRADICTION"
+                        if status in {
+                            "CONTRADICTED", "FATAL_CONTRADICTION",
+                        }
+                        else "CANONICAL_AXIS_ALIGNMENT"
+                    )
+                ).strip(),
+                "anchor_refs": anchor_refs,
+                "demand_refs": demand_refs,
+                "criticality": criticality,
+                "confidence": confidence,
+                "reason": str(raw.get("reason") or "").strip(),
+                "fatal": fatal_allowed,
+            }
+        )
+    counts = {
+        status: sum(row["status"] == status for row in rows)
+        for status in sorted(_STAGE22_AXIS_STATUSES)
+    }
+    return {
+        "version": "canonical_axis_alignment_v1",
+        "score_effect": "none",
+        "direct_score_application": False,
+        "alignments": rows,
+        "summary": {
+            "alignment_count": len(rows),
+            "status_counts": counts,
+            "fatal_count": counts.get("FATAL_CONTRADICTION", 0),
+        },
+    }
+
+
+def _canonical_axis_alignment_to_findings(
+    value: Any,
+) -> list[dict[str, Any]]:
+    normalized = (
+        value
+        if (
+            isinstance(value, dict)
+            and value.get("version") == "canonical_axis_alignment_v1"
+            and isinstance(value.get("alignments"), list)
+        )
+        else _normalize_canonical_axis_alignment_response(value)
+    )
+    findings: list[dict[str, Any]] = []
+    seen: set[tuple[str, tuple[str, ...]]] = set()
+    for row in normalized.get("alignments", []):
+        if not isinstance(row, dict):
+            continue
+        status = str(row.get("status") or "").strip().upper()
+        if status not in {"CONTRADICTED", "FATAL_CONTRADICTION"}:
+            continue
+        signature = str(row.get("claim_signature") or "").strip()
+        if not signature:
+            continue
+        anchor_refs = _stage22_clean_refs(row.get("anchor_refs"))
+        demand_refs = _stage22_clean_refs(row.get("demand_refs"))
+        dedup_key = (signature, tuple(demand_refs))
+        if dedup_key in seen:
+            continue
+        seen.add(dedup_key)
+        confidence = _stage22_confidence(row.get("confidence"))
+        criticality = str(
+            row.get("criticality") or "supporting"
+        ).strip().casefold()
+        fatal = (
+            status == "FATAL_CONTRADICTION"
+            and criticality == "fatal_core"
+            and confidence >= _STAGE22_FATAL_CONFIDENCE
+            and bool(anchor_refs)
+            and bool(demand_refs)
+        )
+        severity = "fatal" if fatal else "major"
+        axis_id = str(row.get("axis_id") or "").strip()
+        source_rule_id = "canonical_axis::" + (axis_id or signature)
+        findings.append(
+            {
+                "id": f"canonical_axis_{len(findings) + 1}",
+                "candidate_id": axis_id or signature,
+                "rule_id": source_rule_id,
+                "source_rule_id": source_rule_id,
+                "severity": severity,
+                "message": str(
+                    row.get("reason")
+                    or "답안의 주장이 활성 정답 축과 직접 충돌한다."
+                ).strip(),
+                "correct_rule": str(
+                    row.get("canonical_claim") or ""
+                ).strip(),
+                "affected_layers": ["B", "C"],
+                "evidence": str(
+                    row.get("answer_claim") or ""
+                ).strip(),
+                "engine": "canonical_axis_alignment_v1",
+                "confidence": confidence,
+                "error_class": str(
+                    row.get("error_class")
+                    or "CANONICAL_RELATION_CONTRADICTION"
+                ).strip(),
+                "claim_signature": signature,
+                "anchor_refs": anchor_refs,
+                "demand_refs": demand_refs,
+                "alignment_status": status,
+                "score_effect": "none",
+                "direct_score_application": False,
+            }
+        )
+    return findings
+
+
+def _stage22_extend_batch_schema(
+    schema: dict[str, Any],
+    canonical_axes: list[dict[str, Any]],
+) -> dict[str, Any]:
+    if not isinstance(schema, dict):
+        return schema
+    axis_ids = [
+        str(axis.get("axis_id") or "").strip()
+        for axis in canonical_axes
+        if isinstance(axis, dict)
+        and str(axis.get("axis_id") or "").strip()
+    ]
+    if not axis_ids:
+        return schema
+    extended = dict(schema)
+    properties = dict(extended.get("properties") or {})
+    properties["alignments"] = {
+        "type": "array",
+        "maxItems": min(12, len(axis_ids)),
+        "items": {
+            "type": "object",
+            "properties": {
+                "axis_id": {"type": "string", "enum": axis_ids},
+                "status": {
+                    "type": "string",
+                    "enum": sorted(_STAGE22_AXIS_STATUSES),
+                },
+                "answer_claim": {"type": "string"},
+                "canonical_claim": {"type": "string"},
+                "claim_signature": {"type": "string"},
+                "error_class": {"type": "string"},
+                "anchor_refs": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                },
+                "demand_refs": {
+                    "type": "array",
+                    "items": {"type": "string"},
+                },
+                "criticality": {
+                    "type": "string",
+                    "enum": ["supporting", "core", "fatal_core"],
+                },
+                "confidence": {
+                    "type": "number",
+                    "minimum": 0.0,
+                    "maximum": 1.0,
+                },
+                "reason": {"type": "string"},
+            },
+            "required": [
+                "axis_id", "status", "answer_claim", "canonical_claim",
+                "claim_signature", "error_class", "anchor_refs",
+                "demand_refs", "criticality", "confidence", "reason",
+            ],
+            "additionalProperties": False,
+        },
+    }
+    extended["properties"] = properties
+    return extended
+
+
+def _stage22_extend_batch_prompt(
+    prompt: str,
+    canonical_axes: list[dict[str, Any]],
+) -> str:
+    axes = [
+        {
+            "axis_id": axis.get("axis_id"),
+            "canonical_claim": axis.get("canonical_claim"),
+            "criticality": axis.get("criticality"),
+            "anchor_refs": axis.get("anchor_refs"),
+            "demand_refs": axis.get("demand_refs"),
+        }
+        for axis in canonical_axes[:48]
+        if isinstance(axis, dict)
+    ]
+    if not axes:
+        return prompt
+    return (
+        str(prompt)
+        + "\n\n[GLOBAL_CANONICAL_AXIS_COMPARISON_V1]\n"
+        + "기존 fatal rule 확인과 같은 LLM 호출 안에서 답안 전체의 "
+        + "명시적 주장을 아래 활성 정답 축과 비교하라.\n"
+        + "문구 유사도가 아니라 개념, 관계 방향, 소유 범위와 조건을 비교한다.\n"
+        + "ALIGNED는 같은 의미, PARTIAL은 같은 축의 불완전 설명, "
+        + "OFF_AXIS는 다른 축, UNSUPPORTED는 근거 부족이다.\n"
+        + "CONTRADICTED는 정답 관계와 직접 충돌하는 주장이다.\n"
+        + "FATAL_CONTRADICTION은 fatal_core 축을 답안이 명시적으로 "
+        + "반대로 주장하고 confidence>=0.80이며 anchor_refs와 "
+        + "demand_refs가 모두 있을 때만 사용한다.\n"
+        + "누락, 애매함, 단순 관련성 부족, 다른 유효 축은 오답 또는 "
+        + "fatal로 판정하지 않는다.\n"
+        + "findings는 기존 사전 정의 rule 전용으로 유지한다. 전역 비교는 "
+        + "같은 JSON object의 alignments에만 기록한다.\n"
+        + "정답 축이나 기술 기준을 새로 만들지 않는다.\n"
+        + "canonical axes:\n"
+        + json.dumps(axes, ensure_ascii=False, indent=2)
+    )
 
 def _mode_from_findings(findings: list[dict[str, Any]]) -> str:
     severities = {f.get("severity") for f in findings}
@@ -554,6 +1422,17 @@ def evaluate_logic_checks(
     topic_name = None
     recommended_ceiling: float | None = None
     profile: dict[str, Any] = {}
+    canonical_axis_alignment_evaluation = {
+        "version": "canonical_axis_alignment_v1",
+        "score_effect": "none",
+        "direct_score_application": False,
+        "alignments": [],
+        "summary": {
+            "alignment_count": 0,
+            "status_counts": {},
+            "fatal_count": 0,
+        },
+    }
 
 
     # LOGIC_CHECK_PREFERRED_TOPIC_PATCH
@@ -610,8 +1489,10 @@ def evaluate_logic_checks(
         _topic_logic_checks_for_evaluation = []
         _topic_routing_error = repr(routing_error)
 
+    llm_profile_enabled = False
+
     for topic_check in _topic_logic_checks_for_evaluation:
-        deterministic_enabled = bool(
+        topic_check_enabled = bool(
             topic_check.get("enabled", True)
         )
 
@@ -631,60 +1512,154 @@ def evaluate_logic_checks(
         # In that case, enabled=false means "profile-only", not
         # "disable the entire topic". Do not execute wrong_patterns,
         # deterministic major checks, or question-type pattern checks.
-        if not deterministic_enabled:
-            try:
-                from logic_llm_verifier import (
-                    load_logic_check_profile,
-                    verify_logic_with_llm,
-                )
+        llm_profile_enabled = False
+        try:
+            from logic_llm_verifier import (
+                load_logic_check_profile,
+                verify_logic_with_llm,
+            )
 
-                profile = load_logic_check_profile(
-                    str(topic_id)
+            profile = load_logic_check_profile(
+                str(topic_id)
+            )
+
+            # STAGE22E3_PROFILE_ONLY_CANONICAL_AXIS_RUNTIME_V1
+            llm_profile_enabled = (
+                isinstance(profile, dict)
+                and bool(profile.get("enabled", True))
+            )
+            if llm_profile_enabled:
+                profile_topic_context = dict(topic_check)
+                profile_topic_context[
+                    "_stage22_canonical_context"
+                ] = {
+                    "topic_check": topic_check,
+                    "model_answer_reference": grade.get(
+                        "model_answer_reference"
+                    ),
+                    "question_demand_evidence": (
+                        grade.get(
+                            "question_demand_evidence_for_score"
+                        )
+                        or grade.get(
+                            "question_demand_evidence"
+                        )
+                    ),
+                    "question_analysis": grade.get(
+                        "question_analysis"
+                    ),
+                }
+                canonical_axes = (
+                    _build_canonical_axis_context(
+                        profile_topic_context
+                    )
+                )
+                demand_bound_axes = [
+                    axis
+                    for axis in canonical_axes
+                    if isinstance(axis, dict)
+                    and axis.get("demand_refs")
+                ]
+                canonical_axes = (
+                    demand_bound_axes[:24]
+                    if demand_bound_axes
+                    else canonical_axes[:24]
                 )
 
                 profile_evaluation = (
                     verify_logic_with_llm(
-                        text,
+                        answer_text,
                         str(topic_id),
+                        canonical_axes=canonical_axes,
                     )
                 )
-            except Exception as error:
-                findings.append(
-                    {
-                        "id": (
-                            "llm_profile_verifier_"
-                            "unavailable"
-                        ),
-                        "severity": "minor",
-                        "message": (
-                            "JSON-profile LLM Logic "
-                            "Check를 실행하지 못해 "
-                            "fatal 판정을 건너뛰었습니다: "
-                            f"{error}"
-                        ),
-                        "correct_rule": (
-                            "LLM verifier 실패 시 "
-                            "fatal cap을 적용하지 않습니다."
-                        ),
-                        "affected_layers": ["C"],
-                        "engine": (
-                            "llm_verifier_profile_v1"
-                        ),
-                        "diagnostic": {
-                            "ok": False,
-                            "error": repr(error),
-                        },
-                    }
-                )
+        except Exception as error:
+            findings.append(
+                {
+                    "id": (
+                        "llm_profile_verifier_"
+                        "unavailable"
+                    ),
+                    "severity": "minor",
+                    "message": (
+                        "JSON-profile LLM Logic "
+                        "Check를 실행하지 못해 "
+                        "fatal 판정을 건너뛰었습니다: "
+                        f"{error}"
+                    ),
+                    "correct_rule": (
+                        "LLM verifier 실패 시 "
+                        "fatal cap을 적용하지 않습니다."
+                    ),
+                    "affected_layers": ["C"],
+                    "engine": (
+                        "llm_verifier_profile_v1"
+                    ),
+                    "diagnostic": {
+                        "ok": False,
+                        "error": repr(error),
+                    },
+                }
+            )
 
-                profile = {}
-                profile_evaluation = {}
-            else:
+            profile = {}
+            profile_evaluation = {}
+        else:
+            if llm_profile_enabled:
                 if not isinstance(
                     profile_evaluation,
                     dict,
                 ):
                     profile_evaluation = {}
+
+                # STAGE22E10_PROFILE_ALIGNMENT_ENVELOPE_MERGE_V1
+                profile_alignment_payload = (
+                    profile_evaluation.get(
+                        "canonical_axis_alignment_evaluation"
+                    )
+                    if isinstance(
+                        profile_evaluation.get(
+                            "canonical_axis_alignment_evaluation"
+                        ),
+                        dict,
+                    )
+                    else profile_evaluation
+                )
+                canonical_axis_alignment_evaluation = (
+                    _normalize_canonical_axis_alignment_response(
+                        profile_alignment_payload,
+                        canonical_axes=canonical_axes,
+                        answer_text=text,
+                    )
+                )
+                existing_claim_signatures = {
+                    str(
+                        existing.get("claim_signature")
+                        or ""
+                    ).strip()
+                    for existing in findings
+                    if isinstance(existing, dict)
+                }
+                for axis_finding in (
+                    _canonical_axis_alignment_to_findings(
+                        canonical_axis_alignment_evaluation
+                    )
+                ):
+                    claim_signature = str(
+                        axis_finding.get("claim_signature")
+                        or ""
+                    ).strip()
+                    if (
+                        claim_signature
+                        and claim_signature
+                        in existing_claim_signatures
+                    ):
+                        continue
+                    findings.append(axis_finding)
+                    if claim_signature:
+                        existing_claim_signatures.add(
+                            claim_signature
+                        )
 
                 topic_name = (
                     profile.get("display_name")
@@ -737,6 +1712,7 @@ def evaluate_logic_checks(
                         profile_finding
                     )
 
+        if llm_profile_enabled:
             practice_source = (
                 profile.get(
                     "next_practice_points"
@@ -759,6 +1735,7 @@ def evaluate_logic_checks(
                     point,
                 )
 
+        if not topic_check_enabled:
             break
 
         for check in topic_check.get("fatal_checks", []):
@@ -797,8 +1774,28 @@ def evaluate_logic_checks(
         # wrong_patterns are only a fast deterministic aid. If they do not catch
         # a fatal misconception, ask the LLM verifier to interpret the answer
         # against this topic's fatal rules in context.
-        if not any(f.get("severity") == "fatal" for f in findings):
-            for semantic_finding in _evaluate_topic_fatal_checks_with_llm(text, topic_check):
+        if not llm_profile_enabled and (not any(f.get("severity") == "fatal" for f in findings)):
+            semantic_topic_check = dict(topic_check)
+            semantic_topic_check["_stage22_canonical_context"] = {
+                "topic_check": topic_check,
+                "model_answer_reference": grade.get("model_answer_reference"),
+                "question_demand_evidence": (
+                    grade.get("question_demand_evidence_for_score")
+                    or grade.get("question_demand_evidence")
+                ),
+                "question_analysis": grade.get("question_analysis"),
+            }
+            semantic_findings = _evaluate_topic_fatal_checks_with_llm(
+                text,
+                semantic_topic_check,
+            )
+            returned_alignment = semantic_topic_check.get(
+                "_stage22_axis_alignment_evaluation"
+            )
+            if isinstance(returned_alignment, dict):
+                canonical_axis_alignment_evaluation = returned_alignment
+
+            for semantic_finding in semantic_findings:
                 if any(
                     f.get("id") == semantic_finding.get("id")
                     or f.get("source_rule_id") == semantic_finding.get("source_rule_id")
@@ -889,7 +1886,19 @@ def evaluate_logic_checks(
     # Do not apply it to neighboring topics such as frequency-response/resonance,
     # otherwise damping-ratio profile findings leak into resonance evaluations.
     if topic_id == "second_order_lag_response_by_damping_ratio":
-        findings = _apply_second_order_claim_evaluator(text, findings)
+        if llm_profile_enabled:
+            findings = (
+                _filter_second_order_legacy_fatal_findings(
+                    findings
+                )
+            )
+        else:
+            findings = (
+                _apply_second_order_claim_evaluator(
+                    text,
+                    findings,
+                )
+            )
     # Logic Check는 D/E를 직접 평가하지 않는다.
     # D/E는 de_claim_trust metadata의 target일 뿐 finding affected layer가 아니다.
     for _finding in findings:
@@ -1022,6 +2031,9 @@ def evaluate_logic_checks(
         "mode": mode,
         "fatal_error_detected": fatal_error_detected,
         "findings": findings,
+        "canonical_axis_alignment_evaluation": (
+            canonical_axis_alignment_evaluation
+        ),
         "deduction_elements": deduction_elements,
         "next_practice_points": next_practice_points,
         "score_policy": {
@@ -2114,6 +3126,8 @@ def _evaluate_topic_fatal_checks_with_llm_stage19_contract(
     if not eligible_checks:
         return []
 
+    canonical_axes = _build_canonical_axis_context(topic_check)
+
     rule_map = {
         str(
             check.get("id")
@@ -2124,12 +3138,18 @@ def _evaluate_topic_fatal_checks_with_llm_stage19_contract(
     }
     rule_ids = list(rule_map)
     batch_size = len(rule_ids)
-    schema = _topic_fatal_batch_finding_schema(
-        eligible_checks
+    schema = _stage22_extend_batch_schema(
+        _topic_fatal_batch_finding_schema(
+            eligible_checks
+        ),
+        canonical_axes,
     )
-    prompt = _topic_fatal_batch_prompt(
-        text,
-        eligible_checks,
+    prompt = _stage22_extend_batch_prompt(
+        _topic_fatal_batch_prompt(
+            text,
+            eligible_checks,
+        ),
+        canonical_axes,
     )
 
     diagnostics: list[dict[str, str]] = []
@@ -2437,6 +3457,29 @@ def _evaluate_topic_fatal_checks_with_llm_stage19_contract(
             check,
         )
         findings.append(finding)
+
+    axis_evaluation = _normalize_canonical_axis_alignment_response(
+        normalized_response,
+        canonical_axes=canonical_axes,
+        answer_text=text,
+    )
+    topic_check["_stage22_axis_alignment_evaluation"] = axis_evaluation
+    existing_signatures = {
+        str(finding.get("claim_signature") or "").strip()
+        for finding in findings
+        if isinstance(finding, dict)
+    }
+    for axis_finding in _canonical_axis_alignment_to_findings(
+        axis_evaluation
+    ):
+        signature = str(
+            axis_finding.get("claim_signature") or ""
+        ).strip()
+        if signature and signature in existing_signatures:
+            continue
+        findings.append(axis_finding)
+        if signature:
+            existing_signatures.add(signature)
 
     diagnostics = [
         diagnostic
