@@ -8,6 +8,13 @@ from __future__ import annotations
 
 from typing import Any
 
+from generic_grading_contract import (
+    DemandAssessment,
+    DemandState,
+    demand_matrix_summary,
+    normalize_demand_state,
+)
+
 
 def _walk_find_question_type_coverage(obj: Any) -> dict[str, Any] | None:
     if isinstance(obj, dict):
@@ -42,19 +49,60 @@ def _append_unique(items: list[Any], value: Any) -> None:
         items.append(value)
 
 
+_LEGACY_COVERAGE_STATUS_TO_DEMAND_STATE = {
+    "present": DemandState.CORRECT,
+    "correct": DemandState.CORRECT,
+    "partial": DemandState.PARTIAL,
+    "wrong": DemandState.WRONG,
+    "incorrect": DemandState.WRONG,
+    "contradicted": DemandState.WRONG,
+    "missing": DemandState.MISSING,
+    "absent": DemandState.MISSING,
+}
+
+
+def _coverage_demand_state(value: Any) -> DemandState:
+    normalized = str(value or "").strip().lower()
+    if normalized in _LEGACY_COVERAGE_STATUS_TO_DEMAND_STATE:
+        return _LEGACY_COVERAGE_STATUS_TO_DEMAND_STATE[normalized]
+    return normalize_demand_state(value)
+
+
+
 def _criteria_counts(coverage: dict[str, Any]) -> dict[str, int]:
     rows = _as_list(coverage.get("sub_criteria_coverage"))
-    counts = {"present": 0, "partial": 0, "missing": 0, "total": 0}
+    counts = {
+        "present": 0,
+        "correct": 0,
+        "partial": 0,
+        "wrong": 0,
+        "missing": 0,
+        "total": 0,
+    }
 
     for row in rows:
         if not isinstance(row, dict):
             continue
-        status = str(row.get("status", "")).strip().lower()
-        if status in counts:
-            counts[status] += 1
+
+        state = _coverage_demand_state(
+            row.get("demand_state")
+            or row.get("status")
+        )
+
+        if state is DemandState.CORRECT:
+            counts["present"] += 1
+            counts["correct"] += 1
+        elif state is DemandState.PARTIAL:
+            counts["partial"] += 1
+        elif state is DemandState.WRONG:
+            counts["wrong"] += 1
+        else:
+            counts["missing"] += 1
+
         counts["total"] += 1
 
     return counts
+
 
 
 def _criteria_details(
@@ -62,60 +110,114 @@ def _criteria_details(
 ) -> dict[str, Any]:
     rows = _as_list(coverage.get("sub_criteria_coverage"))
 
-    status_rows: list[dict[str, str]] = []
+    status_rows: list[dict[str, Any]] = []
     present: list[str] = []
     partial: list[str] = []
+    wrong: list[str] = []
     missing: list[str] = []
-
-    weighted_score = 0.0
+    assessments: list[DemandAssessment] = []
 
     for row in rows:
         if not isinstance(row, dict):
             continue
 
-        criterion = str(row.get("criterion") or "").strip()
-        status = str(row.get("status") or "").strip().lower()
+        criterion = str(
+            row.get("criterion")
+            or row.get("demand_id")
+            or ""
+        ).strip()
         evidence = str(row.get("evidence") or "").strip()
 
         if not criterion:
             continue
 
-        if status not in {"present", "partial", "missing"}:
-            status = "missing"
+        state = _coverage_demand_state(
+            row.get("demand_state")
+            or row.get("status")
+        )
+        mentioned_raw = row.get("mentioned")
+        mentioned = (
+            bool(mentioned_raw)
+            if mentioned_raw is not None
+            else state is not DemandState.MISSING
+        )
 
-        status_rows.append({
-            "criterion": criterion,
-            "status": status,
-            "evidence": evidence,
-        })
+        legacy_status = {
+            DemandState.CORRECT: "present",
+            DemandState.PARTIAL: "partial",
+            DemandState.WRONG: "wrong",
+            DemandState.MISSING: "missing",
+        }[state]
 
-        if status == "present":
+        status_rows.append(
+            {
+                "criterion": criterion,
+                "status": legacy_status,
+                "demand_state": state.value,
+                "mentioned": mentioned,
+                "evidence": evidence,
+            }
+        )
+
+        assessments.append(
+            DemandAssessment(
+                demand_id=criterion,
+                status=state,
+                mentioned=mentioned,
+                evidence=evidence,
+                rationale=str(
+                    row.get("rationale")
+                    or row.get("reason")
+                    or ""
+                ).strip(),
+            )
+        )
+
+        if state is DemandState.CORRECT:
             present.append(criterion)
-            weighted_score += 1.0
-        elif status == "partial":
+        elif state is DemandState.PARTIAL:
             partial.append(criterion)
-            weighted_score += 0.5
+        elif state is DemandState.WRONG:
+            wrong.append(criterion)
         else:
             missing.append(criterion)
 
-    total = len(status_rows)
-
-    if total:
-        ratio = round(weighted_score / total, 4)
-        percent = round(ratio * 100, 1)
-    else:
-        ratio = None
-        percent = None
+    matrix = demand_matrix_summary(assessments)
 
     return {
         "status_rows": status_rows,
         "present_criteria": present,
+        "correct_criteria": list(present),
         "partial_criteria": partial,
+        "wrong_criteria": wrong,
         "missing_criteria": missing,
-        "weighted_score": round(weighted_score, 2),
-        "weighted_ratio": ratio,
-        "weighted_percent": percent,
-        "total": total,
+        "present": len(present),
+        "correct": len(present),
+        "partial": len(partial),
+        "wrong": len(wrong),
+        "missing": len(missing),
+        "weighted_score": matrix["correctness_credit"],
+        "weighted_ratio": matrix["correctness_coverage_ratio"],
+        "weighted_percent": matrix[
+            "correctness_coverage_percent"
+        ],
+        "mention_coverage_ratio": matrix[
+            "mention_coverage_ratio"
+        ],
+        "mention_coverage_percent": matrix[
+            "mention_coverage_percent"
+        ],
+        "correctness_coverage_ratio": matrix[
+            "correctness_coverage_ratio"
+        ],
+        "correctness_coverage_percent": matrix[
+            "correctness_coverage_percent"
+        ],
+        "full_correct_coverage": matrix[
+            "full_correct_coverage"
+        ],
+        "state_counts": matrix["state_counts"],
+        "total": matrix["total"],
     }
 
 
@@ -127,8 +229,15 @@ def _missing_criteria_text(coverage: dict[str, Any], limit: int = 5) -> str:
         for row in rows:
             if not isinstance(row, dict):
                 continue
-            status = str(row.get("status", "")).strip().lower()
-            if status in {"missing", "partial"}:
+            state = _coverage_demand_state(
+                row.get("demand_state")
+                or row.get("status")
+            )
+            if state in {
+                DemandState.PARTIAL,
+                DemandState.WRONG,
+                DemandState.MISSING,
+            }:
                 criterion = row.get("criterion")
                 if criterion:
                     missing.append(criterion)
@@ -194,14 +303,33 @@ def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, A
         "overall_coverage": overall or None,
         "sub_criteria_total": counts["total"],
         "sub_criteria_present": counts["present"],
+        "sub_criteria_correct": counts["correct"],
         "sub_criteria_partial": counts["partial"],
+        "sub_criteria_wrong": counts["wrong"],
         "sub_criteria_missing": counts["missing"],
+        "mention_coverage_ratio": details[
+            "mention_coverage_ratio"
+        ],
+        "mention_coverage_percent": details[
+            "mention_coverage_percent"
+        ],
+        "correctness_coverage_ratio": details[
+            "correctness_coverage_ratio"
+        ],
+        "correctness_coverage_percent": details[
+            "correctness_coverage_percent"
+        ],
+        "full_correct_coverage": details[
+            "full_correct_coverage"
+        ],
         "weighted_coverage_score": details["weighted_score"],
         "weighted_coverage_ratio": details["weighted_ratio"],
         "weighted_coverage_percent": details["weighted_percent"],
         "criteria_status_rows": details["status_rows"],
         "present_criteria": details["present_criteria"],
+        "correct_criteria": details["correct_criteria"],
         "partial_criteria": details["partial_criteria"],
+        "wrong_criteria": details["wrong_criteria"],
         "missing_criteria": details["missing_criteria"],
         "missing_sub_criteria_text": missing_text,
         "c_fact_focus_missing_text": c_missing,

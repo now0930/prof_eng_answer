@@ -186,6 +186,9 @@ def detect_question_type(
             "적용 사례",
             "구현 방법",
             "검증 방법",
+            "검증 방안",
+            "검증방안",
+            "방안을 설명",
         ],
     }
 
@@ -477,6 +480,29 @@ def detect_question_type(
             "확인이 필요합니다"
         )
 
+    secondary_types = []
+
+    define_hits = _strong_hits(
+        "DEFINE",
+        question,
+    )
+
+    if (
+        define_hits
+        and str(primary.get("id") or "")
+        != "PRINCIPLE_INTERPRETATION"
+    ):
+        secondary_types.append(
+            {
+                "id": "DEFINITION_EXPLANATION",
+                "source": "deterministic_rule",
+                "matched_rules": [
+                    f"strong_question:{hit}"
+                    for hit in define_hits
+                ],
+            }
+        )
+
     policy = profile.get("policy")
 
     if not isinstance(policy, dict):
@@ -503,6 +529,11 @@ def detect_question_type(
             primary.get("matched_rules")
             or []
         ),
+        "secondary_types": secondary_types,
+        "canonical_owner": (
+            "question_type_router.detect_question_type"
+        ),
+        "authority": "question_only_deterministic",
         "warning": warning,
         "top_score": top_score,
         "second_score": second_score,

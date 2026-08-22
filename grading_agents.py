@@ -10,6 +10,12 @@ from grading_config import load_active_config, save_active_config_snapshots
 
 
 BASE_DIR = Path(__file__).resolve().parent
+
+# STAGE23J_RUNTIME_PROVENANCE_IMPORT_V4
+from runtime_grading_provenance import (
+    attach_runtime_provenance_to_pipeline_result
+    as _stage23j_attach_runtime_provenance,
+)
 RATERS_FILE = BASE_DIR / "rubrics" / "raters" / "default.json"
 
 
@@ -10689,6 +10695,12 @@ def run_agent_pipeline(*args, **kwargs):
             result,
             submission_normalization,
         )
+    )
+
+    # STAGE23J_RUNTIME_PROVENANCE_FINAL_WRAPPER_V4
+    finalized_result = _stage23j_attach_runtime_provenance(
+        finalized_result,
+        _stage17e5_is_grade_dict,
     )
 
     # STAGE18B1_FINAL_GRADE_REUSE_STORE_V1

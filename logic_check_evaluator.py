@@ -8,6 +8,17 @@ from typing import Any
 
 from rubric_bank_paths import resolve_rubric_bank_path
 
+from generic_grading_contract import (
+    AlignmentStatus,
+    ClaimRelationAssessment,
+    ClaimRelationType,
+    EvidenceTrustTier,
+    evidence_credit_weight,
+    normalize_alignment_status,
+    normalize_evidence_trust_tier,
+    normalize_relation_type,
+)
+
 
 ROOT = Path(__file__).resolve().parent
 DEFAULT_BANK = resolve_rubric_bank_path("logic_checks")
@@ -1338,6 +1349,259 @@ def _stage22_extend_batch_prompt(
         + json.dumps(axes, ensure_ascii=False, indent=2)
     )
 
+_GENERIC_ALIGNMENT_ALIASES = {
+    "MATCH": AlignmentStatus.ALIGNED,
+    "MATCHED": AlignmentStatus.ALIGNED,
+    "ALIGNED": AlignmentStatus.ALIGNED,
+    "PRESENT": AlignmentStatus.ALIGNED,
+    "CORRECT": AlignmentStatus.ALIGNED,
+    "PARTIAL": AlignmentStatus.PARTIAL,
+    "INCOMPLETE": AlignmentStatus.PARTIAL,
+    "CONTRADICTED": AlignmentStatus.CONTRADICTED,
+    "CONTRADICTION": AlignmentStatus.CONTRADICTED,
+    "FATAL_CONTRADICTION": AlignmentStatus.CONTRADICTED,
+    "CANONICAL_RELATION_CONTRADICTION": (
+        AlignmentStatus.CONTRADICTED
+    ),
+    "UNSUPPORTED": AlignmentStatus.UNSUPPORTED,
+    "NOT_SUPPORTED": AlignmentStatus.UNSUPPORTED,
+    "OFF_AXIS": AlignmentStatus.NOT_APPLICABLE,
+    "IRRELEVANT": AlignmentStatus.NOT_APPLICABLE,
+    "NOT_APPLICABLE": AlignmentStatus.NOT_APPLICABLE,
+}
+
+
+def _generic_alignment_status(value: Any) -> AlignmentStatus:
+    normalized = str(value or "").strip().upper()
+    if normalized in _GENERIC_ALIGNMENT_ALIASES:
+        return _GENERIC_ALIGNMENT_ALIASES[normalized]
+    return normalize_alignment_status(value)
+
+
+def _generic_relation_type(row: dict[str, Any]) -> ClaimRelationType:
+    explicit = (
+        row.get("relation_type")
+        or row.get("claim_relation_type")
+    )
+    if explicit:
+        return normalize_relation_type(explicit)
+
+    signature = str(
+        row.get("claim_signature")
+        or row.get("error_class")
+        or ""
+    ).strip().upper()
+
+    token_map = (
+        ("DEFINITION", ClaimRelationType.DEFINITION),
+        ("CLASSIFICATION", ClaimRelationType.CLASSIFICATION),
+        ("PURPOSE", ClaimRelationType.PURPOSE),
+        ("MAPPING", ClaimRelationType.MAPPING),
+        ("CAUSE_EFFECT", ClaimRelationType.CAUSE_EFFECT),
+        ("CAUSE", ClaimRelationType.CAUSE_EFFECT),
+        ("CONDITION", ClaimRelationType.CONDITION),
+        ("SEQUENCE", ClaimRelationType.SEQUENCE),
+        ("METRIC_SCOPE", ClaimRelationType.METRIC_SCOPE),
+        ("SCOPE", ClaimRelationType.METRIC_SCOPE),
+        ("COMPONENT", ClaimRelationType.COMPONENT),
+        ("EQUIVALENCE", ClaimRelationType.EQUIVALENCE),
+    )
+    for token, relation_type in token_map:
+        if token in signature:
+            return relation_type
+    return ClaimRelationType.EQUIVALENCE
+
+
+def _generic_evidence_trust_tier(
+    row: dict[str, Any],
+) -> EvidenceTrustTier:
+    explicit = (
+        row.get("evidence_trust_tier")
+        or row.get("trust_tier")
+    )
+    if explicit:
+        return normalize_evidence_trust_tier(explicit)
+
+    engine = str(
+        row.get("engine")
+        or row.get("evidence_source")
+        or ""
+    ).strip().upper()
+    if "DETERMINISTIC" in engine:
+        return EvidenceTrustTier.DETERMINISTIC
+
+    anchor_refs = row.get("anchor_refs")
+    demand_refs = row.get("demand_refs")
+    source_rule = (
+        row.get("source_rule_id")
+        or row.get("rule_id")
+    )
+    if (
+        isinstance(anchor_refs, list)
+        and anchor_refs
+        and isinstance(demand_refs, list)
+        and demand_refs
+    ) or source_rule:
+        return EvidenceTrustTier.VERIFIED_STRUCTURED
+
+    evidence = str(
+        row.get("evidence")
+        or row.get("answer_claim")
+        or ""
+    ).strip()
+    try:
+        confidence = float(row.get("confidence") or 0.0)
+    except (TypeError, ValueError, OverflowError):
+        confidence = 0.0
+
+    if evidence and confidence > 0.0:
+        return EvidenceTrustTier.SEMANTIC_INFERRED
+    return EvidenceTrustTier.UNSUPPORTED
+
+
+def normalize_generic_claim_relations(
+    value: Any,
+) -> dict[str, Any]:
+    if isinstance(value, dict):
+        raw_rows = (
+            value.get("claim_relations")
+            or value.get("relations")
+            or value.get("alignments")
+            or []
+        )
+    elif isinstance(value, list):
+        raw_rows = value
+    else:
+        raw_rows = []
+
+    if not isinstance(raw_rows, list):
+        raw_rows = []
+
+    rows: list[dict[str, Any]] = []
+    for index, raw in enumerate(raw_rows, start=1):
+        if not isinstance(raw, dict):
+            continue
+
+        relation_type = _generic_relation_type(raw)
+        alignment_status = _generic_alignment_status(
+            raw.get("alignment_status")
+            or raw.get("status")
+        )
+        trust_tier = _generic_evidence_trust_tier(raw)
+
+        claim_id = str(
+            raw.get("claim_id")
+            or raw.get("id")
+            or raw.get("axis_id")
+            or raw.get("claim_signature")
+            or raw.get("candidate_id")
+            or f"claim_relation_{index:03d}"
+        ).strip()
+
+        assessment = ClaimRelationAssessment(
+            claim_id=claim_id,
+            relation_type=relation_type,
+            alignment_status=alignment_status,
+            evidence_trust_tier=trust_tier,
+            source_claim=str(
+                raw.get("source_claim")
+                or raw.get("answer_claim")
+                or raw.get("evidence")
+                or ""
+            ).strip(),
+            target_claim=str(
+                raw.get("target_claim")
+                or raw.get("canonical_claim")
+                or raw.get("correct_rule")
+                or ""
+            ).strip(),
+            evidence=str(
+                raw.get("evidence")
+                or raw.get("answer_claim")
+                or ""
+            ).strip(),
+        )
+        normalized = assessment.to_dict()
+        normalized["credit_weight"] = evidence_credit_weight(
+            trust_tier,
+            alignment_status,
+        )
+        normalized["confidence"] = raw.get("confidence")
+        normalized["anchor_refs"] = (
+            list(raw.get("anchor_refs"))
+            if isinstance(raw.get("anchor_refs"), list)
+            else []
+        )
+        normalized["demand_refs"] = (
+            list(raw.get("demand_refs"))
+            if isinstance(raw.get("demand_refs"), list)
+            else []
+        )
+        normalized["source_rule_id"] = str(
+            raw.get("source_rule_id")
+            or raw.get("rule_id")
+            or ""
+        ).strip()
+        rows.append(normalized)
+
+    relation_counts = {
+        item.value: sum(
+            row["relation_type"] == item.value
+            for row in rows
+        )
+        for item in ClaimRelationType
+    }
+    alignment_counts = {
+        item.value: sum(
+            row["alignment_status"] == item.value
+            for row in rows
+        )
+        for item in AlignmentStatus
+    }
+    trust_counts = {
+        item.value: sum(
+            row["evidence_trust_tier"] == item.value
+            for row in rows
+        )
+        for item in EvidenceTrustTier
+    }
+
+    return {
+        "version": "generic_claim_relation_v1",
+        "score_effect": "none",
+        "direct_score_application": False,
+        "claim_relations": rows,
+        "summary": {
+            "relation_count": len(rows),
+            "relation_type_counts": relation_counts,
+            "alignment_status_counts": alignment_counts,
+            "evidence_trust_tier_counts": trust_counts,
+            "aligned_count": alignment_counts[
+                AlignmentStatus.ALIGNED.value
+            ],
+            "partial_count": alignment_counts[
+                AlignmentStatus.PARTIAL.value
+            ],
+            "contradicted_count": alignment_counts[
+                AlignmentStatus.CONTRADICTED.value
+            ],
+            "unsupported_count": alignment_counts[
+                AlignmentStatus.UNSUPPORTED.value
+            ],
+            "not_applicable_count": alignment_counts[
+                AlignmentStatus.NOT_APPLICABLE.value
+            ],
+            "credited_relation_weight": round(
+                sum(
+                    float(row["credit_weight"])
+                    for row in rows
+                ),
+                2,
+            ),
+        },
+    }
+
+
 def _mode_from_findings(findings: list[dict[str, Any]]) -> str:
     severities = {f.get("severity") for f in findings}
     if "fatal" in severities:
@@ -2033,6 +2297,11 @@ def evaluate_logic_checks(
         "findings": findings,
         "canonical_axis_alignment_evaluation": (
             canonical_axis_alignment_evaluation
+        ),
+        "generic_claim_relation_evaluation": (
+            normalize_generic_claim_relations(
+                canonical_axis_alignment_evaluation
+            )
         ),
         "deduction_elements": deduction_elements,
         "next_practice_points": next_practice_points,

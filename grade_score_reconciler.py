@@ -19,7 +19,329 @@ from __future__ import annotations
 import json
 from typing import Any, Callable
 
+from generic_grading_contract import (
+    DERequirementClass,
+    classify_de_requirement,
+    de_penalty_allowed,
+    normalize_de_requirement_class,
+)
+
 JsonDict = dict[str, Any]
+
+
+_GENERIC_DE_DEFAULT_DIMENSIONS = (
+    "cost",
+    "schedule",
+    "maintenance",
+    "interface",
+)
+
+_GENERIC_DE_INPUT_KEYS = (
+    "generic_de_policy_input",
+    "generic_de_requirements",
+    "de_requirements",
+    "field_judgement_requirements",
+)
+
+
+def _generic_de_source_present(
+    parsed: JsonDict,
+) -> bool:
+    if any(key in parsed for key in _GENERIC_DE_INPUT_KEYS):
+        return True
+
+    for container_key in (
+        "question_analysis",
+        "question_demand_evidence",
+        "question_demand_evidence_for_score",
+    ):
+        container = parsed.get(container_key)
+        if not isinstance(container, dict):
+            continue
+        if any(
+            key in container
+            for key in _GENERIC_DE_INPUT_KEYS
+        ):
+            return True
+    return False
+
+
+def _generic_de_requirement_rows(
+    parsed: JsonDict,
+) -> list[JsonDict]:
+    rows: list[JsonDict] = []
+
+    def collect(value: Any) -> None:
+        if isinstance(value, list):
+            for item in value:
+                if isinstance(item, dict):
+                    rows.append(dict(item))
+            return
+
+        if not isinstance(value, dict):
+            return
+
+        nested = (
+            value.get("requirements")
+            or value.get("rows")
+            or value.get("items")
+        )
+        if isinstance(nested, list):
+            collect(nested)
+            return
+
+        if any(
+            key in value
+            for key in (
+                "dimension_id",
+                "requirement_id",
+                "criterion",
+                "explicitly_requested",
+                "requirement_class",
+            )
+        ):
+            rows.append(dict(value))
+
+    for key in _GENERIC_DE_INPUT_KEYS:
+        if key in parsed:
+            collect(parsed.get(key))
+
+    for container_key in (
+        "question_analysis",
+        "question_demand_evidence",
+        "question_demand_evidence_for_score",
+    ):
+        container = parsed.get(container_key)
+        if not isinstance(container, dict):
+            continue
+        for key in _GENERIC_DE_INPUT_KEYS:
+            if key in container:
+                collect(container.get(key))
+
+    return rows
+
+
+def _generic_de_bool(
+    row: JsonDict,
+    *keys: str,
+    default: bool = False,
+) -> bool:
+    for key in keys:
+        if key not in row:
+            continue
+        value = row.get(key)
+        if isinstance(value, bool):
+            return value
+        normalized = str(value or "").strip().lower()
+        if normalized in {
+            "true",
+            "yes",
+            "1",
+            "required",
+        }:
+            return True
+        if normalized in {
+            "false",
+            "no",
+            "0",
+            "optional",
+        }:
+            return False
+    return default
+
+
+def _generic_de_penalty_value(
+    row: JsonDict,
+) -> float:
+    for key in (
+        "applied_penalty",
+        "penalty_points",
+        "deduction_points",
+        "penalty",
+        "deduction",
+    ):
+        value = row.get(key)
+        if isinstance(value, bool):
+            continue
+        try:
+            number = float(value)
+        except (
+            TypeError,
+            ValueError,
+            OverflowError,
+        ):
+            continue
+        if number > 0.0:
+            return round(number, 2)
+    return 0.0
+
+
+def apply_generic_de_policy(
+    parsed: JsonDict,
+) -> JsonDict:
+    if not isinstance(parsed, dict):
+        return parsed
+
+    if not _generic_de_source_present(parsed):
+        return parsed
+
+    rows = _generic_de_requirement_rows(parsed)
+    if not rows:
+        rows = [
+            {
+                "dimension_id": dimension_id,
+                "explicitly_requested": False,
+            }
+            for dimension_id
+            in _GENERIC_DE_DEFAULT_DIMENSIONS
+        ]
+
+    normalized_rows: list[JsonDict] = []
+    suppressed_penalty_total = 0.0
+
+    for index, raw in enumerate(rows, start=1):
+        row = dict(raw)
+
+        dimension_id = str(
+            row.get("dimension_id")
+            or row.get("requirement_id")
+            or row.get("criterion")
+            or row.get("id")
+            or row.get("name")
+            or f"de_requirement_{index:03d}"
+        ).strip()
+
+        explicit_class = row.get(
+            "requirement_class"
+        )
+        if explicit_class is not None:
+            requirement_class = (
+                normalize_de_requirement_class(
+                    explicit_class
+                )
+            )
+            explicitly_requested = (
+                requirement_class
+                is not DERequirementClass.NO_PENALTY
+            )
+        else:
+            explicitly_requested = _generic_de_bool(
+                row,
+                "explicitly_requested",
+                "requested",
+                "required_by_question",
+                "question_required",
+                default=False,
+            )
+            requirement_class = classify_de_requirement(
+                explicitly_requested=explicitly_requested,
+                mandatory_when_requested=_generic_de_bool(
+                    row,
+                    "mandatory_when_requested",
+                    "mandatory",
+                    default=True,
+                ),
+                bonus_only=_generic_de_bool(
+                    row,
+                    "bonus_only",
+                    "optional_bonus",
+                    default=False,
+                ),
+            )
+
+        penalty_allowed = de_penalty_allowed(
+            requirement_class
+        )
+        penalty_value = _generic_de_penalty_value(
+            row
+        )
+        penalty_applied = _generic_de_bool(
+            row,
+            "penalty_applied",
+            "deduction_applied",
+            "applied",
+            default=penalty_value > 0.0,
+        )
+
+        penalty_blocked = bool(
+            penalty_applied
+            and penalty_value > 0.0
+            and not penalty_allowed
+        )
+        if penalty_blocked:
+            suppressed_penalty_total += (
+                penalty_value
+            )
+
+        normalized_rows.append({
+            "dimension_id": dimension_id,
+            "requirement_class": (
+                requirement_class.value
+            ),
+            "explicitly_requested": (
+                explicitly_requested
+            ),
+            "penalty_allowed": penalty_allowed,
+            "bonus_allowed": (
+                requirement_class
+                is DERequirementClass.OPTIONAL_BONUS
+            ),
+            "penalty_applied": (
+                penalty_applied
+                and penalty_allowed
+            ),
+            "applied_penalty": (
+                penalty_value
+                if penalty_applied
+                and penalty_allowed
+                else 0.0
+            ),
+            "original_penalty": penalty_value,
+            "penalty_blocked": penalty_blocked,
+            "source": str(
+                row.get("source")
+                or row.get("evidence_source")
+                or "structured_requirement"
+            ).strip(),
+        })
+
+    counts = {
+        item.value: sum(
+            row["requirement_class"]
+            == item.value
+            for row in normalized_rows
+        )
+        for item in DERequirementClass
+    }
+
+    output = dict(parsed)
+    output["generic_de_policy_evaluation"] = {
+        "version": "generic_de_policy_v1",
+        "score_effect": "policy_guard",
+        "direct_score_application": False,
+        "requirements": normalized_rows,
+        "requirement_class_counts": counts,
+        "penalty_rule": (
+            "Only explicitly requested mandatory "
+            "requirements may reduce D/E score."
+        ),
+        "unrequested_dimension_penalty_allowed": (
+            False
+        ),
+        "optional_bonus_penalty_allowed": False,
+        "suppressed_penalty_total": round(
+            suppressed_penalty_total,
+            2,
+        ),
+        "suppressed_penalty_count": sum(
+            bool(row["penalty_blocked"])
+            for row in normalized_rows
+        ),
+        "default_unrequested_dimensions": list(
+            _GENERIC_DE_DEFAULT_DIMENSIONS
+        ),
+    }
+    return output
 
 
 def _to_float(value: Any, default: float | None = None) -> float | None:
@@ -1022,6 +1344,8 @@ def reconcile_grade_score(
     """
     if not isinstance(parsed, dict):
         return parsed
+
+    parsed = apply_generic_de_policy(parsed)
 
     max_score = _to_float(parsed.get("max_score"), 25.0) or 25.0
     current_score = _to_float(parsed.get("total_score"), None)

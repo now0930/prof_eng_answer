@@ -1278,3 +1278,392 @@ def enforce_final_decision_consistency(
         signals,
     )
     return updated
+
+# STAGE23I_FINAL_SCORE_STATUS_NARRATIVE_CONSISTENCY_V4
+import functools as _stage23i_functools
+
+
+_STAGE23I_POSITIVE_ACCURACY_MARKERS = (
+    "정확한 Fact",
+    "정확한 fact",
+    "Fact가 정확",
+    "fact가 정확",
+    "사실관계가 정확",
+    "오답이 없",
+    "모든 Fact가 정확",
+    "100% 정확",
+    "완전히 정확",
+    "정확성이 매우 높",
+    "핵심 사실이 정확",
+)
+
+_STAGE23I_NARRATIVE_FIELDS = (
+    "summary",
+    "one_line_summary",
+    "overall_comment",
+    "rater_summary",
+    "final_comment",
+    "overall_assessment",
+)
+
+_STAGE23I_CAUTION_TEXT = (
+    "구조화 검증에서 오답 또는 충돌 항목이 확인되어 "
+    "정확성 보완이 필요합니다."
+)
+
+
+def _stage23i_number(value):
+    if isinstance(value, bool):
+        return None
+    try:
+        return float(value)
+    except (TypeError, ValueError, OverflowError):
+        return None
+
+
+def _stage23i_nonempty_list(value):
+    return isinstance(value, list) and bool(value)
+
+
+def _stage23i_collect_accuracy_conflicts(value):
+    sources = []
+
+    def add(source):
+        source = str(source or "").strip()
+        if source and source not in sources:
+            sources.append(source)
+
+    def walk(node, path="$"):
+        if isinstance(node, dict):
+            for key, child in node.items():
+                child_path = f"{path}.{key}"
+                key_lower = str(key).strip().lower()
+
+                if key_lower in {
+                    "wrong_count",
+                    "contradicted_count",
+                    "fatal_count",
+                }:
+                    number = _stage23i_number(child)
+                    if number is not None and number > 0:
+                        add(child_path)
+
+                if key_lower in {
+                    "wrong",
+                    "wrong_criteria",
+                    "contradicted",
+                    "contradictions",
+                } and _stage23i_nonempty_list(child):
+                    add(child_path)
+
+                if key_lower in {
+                    "status",
+                    "alignment_status",
+                }:
+                    status = str(child or "").strip().upper()
+                    if status in {
+                        "WRONG",
+                        "CONTRADICTED",
+                        "FATAL_CONTRADICTION",
+                        "CANONICAL_RELATION_CONTRADICTION",
+                    }:
+                        add(child_path)
+
+                if key_lower == "severity":
+                    severity = str(child or "").strip().lower()
+                    if severity in {"major", "fatal"}:
+                        add(child_path)
+
+                walk(child, child_path)
+            return
+
+        if isinstance(node, list):
+            for index, child in enumerate(node):
+                walk(child, f"{path}[{index}]")
+
+    for root_key in (
+        "question_type_coverage",
+        "question_type_coverage_summary",
+        "question_demand_evidence",
+        "question_demand_evidence_for_score",
+        "logic_check_evaluation",
+        "logic_check_result",
+        "generic_claim_relation_evaluation",
+    ):
+        if root_key in value:
+            walk(value.get(root_key), root_key)
+
+    return sources
+
+
+def _stage23i_positive_accuracy_claim(value):
+    if not isinstance(value, str):
+        return False
+    return any(
+        marker in value
+        for marker in _STAGE23I_POSITIVE_ACCURACY_MARKERS
+    )
+
+
+def _stage23i_rewrite_narratives(output, conflict_sources):
+    rewritten = []
+
+    if not conflict_sources:
+        return rewritten
+
+    for field in _STAGE23I_NARRATIVE_FIELDS:
+        value = output.get(field)
+        if _stage23i_positive_accuracy_claim(value):
+            output[field] = _STAGE23I_CAUTION_TEXT
+            rewritten.append(field)
+
+    strengths = output.get("strengths")
+    if isinstance(strengths, list):
+        prepared = []
+        changed = False
+        for item in strengths:
+            if _stage23i_positive_accuracy_claim(item):
+                prepared.append(_STAGE23I_CAUTION_TEXT)
+                changed = True
+            else:
+                prepared.append(item)
+        if changed:
+            output["strengths"] = prepared
+            rewritten.append("strengths")
+
+    return rewritten
+
+
+def _stage23i_status_from_score(
+    total,
+    official,
+    practical,
+    high,
+):
+    if total >= high:
+        return "HIGH_SCORE"
+    if total >= practical:
+        return "PRACTICAL_TARGET"
+    if total >= official:
+        return "OFFICIAL_PASS"
+    return "BELOW_PASS"
+
+
+def enforce_final_score_status_narrative_consistency(
+    parsed,
+):
+    if not isinstance(parsed, dict):
+        return parsed
+
+    output = dict(parsed)
+
+    total = _stage23i_number(
+        output.get("total_score")
+    )
+    final_total = _stage23i_number(
+        output.get("final_total_score")
+    )
+
+    if total is not None:
+        canonical_total = total
+        score_source = "total_score"
+    elif final_total is not None:
+        canonical_total = final_total
+        score_source = "final_total_score"
+    else:
+        canonical_total = None
+        score_source = "none"
+
+    score_fields_synchronized = []
+    threshold_flags_synchronized = []
+
+    if canonical_total is not None:
+        max_score = _stage23i_number(
+            output.get("max_score")
+        )
+        if max_score is None or max_score <= 0:
+            max_score = 25.0
+
+        canonical_total = round(
+            max(0.0, min(canonical_total, max_score)),
+            2,
+        )
+        if output.get("total_score") != canonical_total:
+            score_fields_synchronized.append(
+                "total_score"
+            )
+        if (
+            output.get("final_total_score")
+            != canonical_total
+        ):
+            score_fields_synchronized.append(
+                "final_total_score"
+            )
+
+        output["total_score"] = canonical_total
+        output["final_total_score"] = canonical_total
+
+        official = _stage23i_number(
+            output.get("official_pass_score")
+        )
+        practical = _stage23i_number(
+            output.get("practical_target_score")
+        )
+        high = _stage23i_number(
+            output.get("high_score_target")
+        )
+
+        if official is None:
+            official = round(max_score * 0.60, 2)
+        if practical is None:
+            practical = round(max_score * 0.70, 2)
+        if high is None:
+            high = round(max_score * 0.80, 2)
+
+        output["official_pass_score"] = official
+        output["practical_target_score"] = practical
+        output["high_score_target"] = high
+
+        expected_flags = {
+            "official_pass_met": canonical_total >= official,
+            "practical_target_met": (
+                canonical_total >= practical
+            ),
+            "average_target_met": (
+                canonical_total >= practical
+            ),
+            "high_score_met": canonical_total >= high,
+        }
+        for key, expected in expected_flags.items():
+            if output.get(key) is not expected:
+                threshold_flags_synchronized.append(key)
+            output[key] = expected
+
+        canonical_status = (
+            _stage23i_status_from_score(
+                canonical_total,
+                official,
+                practical,
+                high,
+            )
+        )
+        output["final_score_status"] = canonical_status
+        output["score_status"] = canonical_status
+    else:
+        canonical_status = str(
+            output.get("final_score_status")
+            or output.get("score_status")
+            or "UNKNOWN"
+        ).strip() or "UNKNOWN"
+
+    conflict_sources = (
+        _stage23i_collect_accuracy_conflicts(output)
+    )
+    rewritten_fields = _stage23i_rewrite_narratives(
+        output,
+        conflict_sources,
+    )
+
+    output["final_consistency_evaluation"] = {
+        "version": "final_score_status_narrative_consistency_v1",
+        "canonical_score": canonical_total,
+        "canonical_status": canonical_status,
+        "score_source": score_source,
+        "score_fields_synchronized": (
+            score_fields_synchronized
+        ),
+        "threshold_flags_synchronized": (
+            threshold_flags_synchronized
+        ),
+        "structured_accuracy_conflict": bool(
+            conflict_sources
+        ),
+        "conflict_sources": conflict_sources,
+        "narrative_fields_checked": list(
+            _STAGE23I_NARRATIVE_FIELDS
+        ) + ["strengths"],
+        "narrative_fields_rewritten": (
+            rewritten_fields
+        ),
+        "positive_accuracy_claim_allowed": not bool(
+            conflict_sources
+        ),
+        "consistent": True,
+        "direct_score_application": False,
+    }
+    return output
+
+
+def enforce_generic_contract_consistency(parsed):
+    """Public Stage23 generic score/status/narrative consistency gate."""
+    return enforce_final_score_status_narrative_consistency(
+        parsed
+    )
+
+
+def _stage23i_should_apply(value):
+    if not isinstance(value, dict):
+        return False
+
+    if any(
+        key in value
+        for key in (
+            "generic_claim_relation_evaluation",
+            "generic_de_policy_evaluation",
+            "final_consistency_evaluation",
+        )
+    ):
+        return True
+
+    total = _stage23i_number(
+        value.get("total_score")
+    )
+    final_total = _stage23i_number(
+        value.get("final_total_score")
+    )
+    if (
+        total is not None
+        and final_total is not None
+        and abs(total - final_total) > 0.001
+    ):
+        return True
+
+    if _stage23i_collect_accuracy_conflicts(value):
+        return True
+
+    coverage = value.get("question_type_coverage")
+    if isinstance(coverage, dict) and any(
+        key in coverage
+        for key in (
+            "wrong_count",
+            "wrong_criteria",
+            "correctness_coverage",
+        )
+    ):
+        return True
+
+    return False
+
+
+_stage23i_existing_enforce_final_decision_consistency = (
+    enforce_final_decision_consistency
+)
+
+
+@_stage23i_functools.wraps(
+    _stage23i_existing_enforce_final_decision_consistency
+)
+def enforce_final_decision_consistency(*args, **kwargs):
+    result = (
+        _stage23i_existing_enforce_final_decision_consistency(
+            *args,
+            **kwargs,
+        )
+    )
+    if _stage23i_should_apply(result):
+        return (
+            enforce_generic_contract_consistency(
+                result
+            )
+        )
+    return result
