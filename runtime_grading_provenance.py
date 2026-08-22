@@ -49,13 +49,7 @@ def _git_head(root: Path) -> str:
 
     try:
         result = subprocess.run(
-            [
-                "git",
-                "-C",
-                str(root),
-                "rev-parse",
-                "HEAD",
-            ],
+            ['git', '-c', f'safe.directory={str(root)}', '-C', str(root), 'rev-parse', 'HEAD'],
             check=True,
             capture_output=True,
             text=True,

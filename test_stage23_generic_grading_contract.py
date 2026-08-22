@@ -265,5 +265,154 @@ class GenericEngineFixtureRedTests(unittest.TestCase):
         self.assertTrue(hasattr(module, "build_runtime_grading_provenance"))
 
 
+# BEGIN STAGE23T ENGINE COMMIT SAFE DIRECTORY REGRESSION
+import ast as _s23t_ast
+import importlib.util as _s23t_importlib
+import os as _s23t_os
+import pathlib as _s23t_pathlib
+import subprocess as _s23t_subprocess
+import sys as _s23t_sys
+import unittest as _s23t_unittest
+from collections.abc import Mapping as _S23TMapping
+from unittest import mock as _s23t_mock
+
+
+class Stage23TEngineCommitSafeDirectoryRegression(_s23t_unittest.TestCase):
+    _FIELDS = {
+        "engine_commit",
+        "engine_process_started_at",
+        "router_version",
+        "evaluator_sha",
+        "verifier_sha",
+        "scoring_policy_version",
+    }
+    _COMMIT_ENV_KEYS = ['ENGINE_COMMIT']
+
+    @classmethod
+    def _module_path(cls):
+        return _s23t_pathlib.Path(__file__).resolve().parent / "runtime_grading_provenance.py"
+
+    @classmethod
+    def _find_payload(cls, value, depth=0):
+        if depth > 8:
+            return None
+        if isinstance(value, _S23TMapping):
+            keys = {str(key) for key in value.keys()}
+            if cls._FIELDS.issubset(keys):
+                return value
+            for child in value.values():
+                found = cls._find_payload(child, depth + 1)
+                if found is not None:
+                    return found
+        if isinstance(value, (list, tuple)):
+            for child in value:
+                found = cls._find_payload(child, depth + 1)
+                if found is not None:
+                    return found
+        return None
+
+    def test_git_commit_resolution_uses_scoped_safe_directory(self):
+        source = self._module_path().read_text(encoding="utf-8")
+        candidates = []
+        for node in _s23t_ast.walk(_s23t_ast.parse(source)):
+            if not isinstance(node, _s23t_ast.Call) or not node.args:
+                continue
+            command = node.args[0]
+            if not isinstance(command, (_s23t_ast.List, _s23t_ast.Tuple)):
+                continue
+            constants = [
+                item.value
+                if isinstance(item, _s23t_ast.Constant)
+                and isinstance(item.value, str)
+                else None
+                for item in command.elts
+            ]
+            if all(token in constants for token in ("git", "-C", "rev-parse", "HEAD")):
+                candidates.append(command)
+        self.assertEqual(len(candidates), 1)
+        command = candidates[0]
+        rendered = [_s23t_ast.unparse(item) for item in command.elts]
+        constants = [
+            item.value
+            if isinstance(item, _s23t_ast.Constant)
+            and isinstance(item.value, str)
+            else None
+            for item in command.elts
+        ]
+        self.assertEqual(constants[0], "git")
+        self.assertEqual(constants[1], "-c")
+        self.assertIn("safe.directory=", rendered[2])
+        self.assertNotIn("safe.directory=*", rendered[2])
+        self.assertEqual(constants[3], "-C")
+        self.assertEqual(
+            _s23t_ast.dump(command.elts[2].values[1].value, include_attributes=False),
+            _s23t_ast.dump(command.elts[4], include_attributes=False),
+        )
+
+    def test_builder_resolves_commit_with_scoped_git_command(self):
+        expected = "f" * 40
+        captured = []
+
+        def fake_run(args, *positional, **keyword):
+            captured.append(list(args))
+            return _s23t_subprocess.CompletedProcess(
+                args=args,
+                returncode=0,
+                stdout=expected + "\n",
+                stderr="",
+            )
+
+        def fake_check_output(args, *positional, **keyword):
+            captured.append(list(args))
+            if keyword.get("text") or keyword.get("universal_newlines") or keyword.get("encoding"):
+                return expected + "\n"
+            return (expected + "\n").encode("utf-8")
+
+        saved = {
+            key: (key in _s23t_os.environ, _s23t_os.environ.get(key))
+            for key in self._COMMIT_ENV_KEYS
+        }
+        try:
+            for key in self._COMMIT_ENV_KEYS:
+                _s23t_os.environ.pop(key, None)
+            module_name = "_stage23t_runtime_provenance_" + self._testMethodName
+            spec = _s23t_importlib.spec_from_file_location(module_name, self._module_path())
+            self.assertIsNotNone(spec)
+            self.assertIsNotNone(spec.loader)
+            module = _s23t_importlib.module_from_spec(spec)
+            with (
+                _s23t_mock.patch.object(_s23t_subprocess, "run", side_effect=fake_run),
+                _s23t_mock.patch.object(
+                    _s23t_subprocess,
+                    "check_output",
+                    side_effect=fake_check_output,
+                ),
+            ):
+                _s23t_sys.modules[module_name] = module
+                spec.loader.exec_module(module)
+                payload = self._find_payload(getattr(module, 'build_runtime_grading_provenance')())
+            self.assertIsNotNone(payload)
+            self.assertEqual(payload["engine_commit"], expected)
+            matching = [
+                command
+                for command in captured
+                if command
+                and command[0] == "git"
+                and "rev-parse" in command
+                and "HEAD" in command
+            ]
+            self.assertEqual(len(matching), 1)
+            command = matching[0]
+            self.assertEqual(command[1], "-c")
+            self.assertTrue(str(command[2]).startswith("safe.directory="))
+            self.assertNotEqual(command[2], "safe.directory=*")
+            self.assertEqual(command[3], "-C")
+        finally:
+            for key, (existed, value) in saved.items():
+                if existed:
+                    _s23t_os.environ[key] = value if value is not None else ""
+                else:
+                    _s23t_os.environ.pop(key, None)
+
 if __name__ == "__main__":
     unittest.main(verbosity=2)
