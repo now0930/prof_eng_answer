@@ -31,6 +31,8 @@
 - Fatal·Major 오류와 합격·고득점·Full Credit 판정의 충돌 방지
 - 최종 `grade.json`과 Telegram 출력의 동일 객체 보장
 - release validation과 focused regression
+- Topic Pack 어휘와 분리된 topic-neutral generic grading contract
+- 최종 채점 결과에 process-stable runtime provenance 6개 필드 첨부
 
 ### 현재 검증 기준
 
@@ -43,6 +45,10 @@
 | Topic Pack source | 75개 topic |
 | Generated Rubric Bank | 6개 |
 | 기본 Rubric Bank mode | `generated` |
+| Generic grading contract | `stage23.generic_grading_contract.v1` |
+| Generic scoring policy | `stage23.generic_scoring_policy.v1` |
+| Runtime provenance | `runtime_grading_provenance_v1` |
+| Runtime provenance scoring policy | `stage23_generic_grading_contract_v1` |
 
 Topic Pack 개수는 `rubrics/generated/topic_pack_manifest.generated.json`을 기준으로 확인합니다. Legacy 통합 bank는 호환 목적으로 유지되며, legacy 파일의 Model Answer·Fact Topic 개수를 현재 Topic Pack coverage 개수로 사용하지 않습니다. Runtime bank 선택의 기준은 `rubric_bank_paths.py`와 `RUBRIC_BANK_MODE`입니다.
 
@@ -216,9 +222,11 @@ Logic Check는 핵심 이론 오류를 검증합니다.
   → Phase 8 constraint-only 처리
   → Question Demand 기반 B와 Fact Anchor 기반 C reconciliation
   → verified defect, hard cap과 difficulty ceiling 적용
+  → generic grading contract 기반 demand·claim·evidence 정규화
   → display alias와 coverage 정규화
   → 최종 native B·C serialization sync
   → final decision consistency
+  → runtime grading provenance 첨부
   → grade.json 저장
   → 동일 객체를 Telegram formatter에 전달
 ```
@@ -245,6 +253,58 @@ Logic Check는 핵심 이론 오류를 검증합니다.
 - 같은 chat에서 연속 채점해도 이전 `grade.json`을 덮어쓰지 않습니다.
 - 동일 초에 session을 여러 개 생성하면 충돌 방지 suffix를 붙입니다.
 - 저장 경로는 Telegram 결과에 함께 표시합니다.
+
+### 4.9 Generic grading contract와 runtime provenance
+
+Generic grading contract는 Topic Pack의 주제 어휘, Fact Anchor와 Model Answer에서 분리된 topic-neutral 계약입니다. 문제 분야와 관계없이 demand 상태, claim 관계, evidence 신뢰도와 D/E 요구사항의 감점 가능 여부를 같은 형식으로 정규화합니다.
+
+현재 schema와 scoring policy는 다음과 같습니다.
+
+| 구분 | 현재 값 |
+|---|---|
+| Generic contract schema | `stage23.generic_grading_contract.v1` |
+| Generic scoring policy | `stage23.generic_scoring_policy.v1` |
+| Runtime provenance schema | `runtime_grading_provenance_v1` |
+| Runtime provenance의 scoring policy | `stage23_generic_grading_contract_v1` |
+
+Demand 평가는 네 상태를 사용합니다.
+
+| 상태 | 의미 | correctness credit |
+|---|---|---:|
+| `CORRECT` | 요구에 정확하게 답함 | 1.0 |
+| `PARTIAL` | 요구에 답했으나 불완전함 | 0.5 |
+| `WRONG` | 요구를 언급했지만 핵심 내용이 틀림 | 0.0 |
+| `MISSING` | 요구에 실질적으로 답하지 않음 | 0.0 |
+
+`WRONG`과 `MISSING`은 correctness credit이 같아도 의미가 다릅니다. Mention coverage와 correctness coverage를 분리하며, 오답을 누락으로 바꾸지 않습니다.
+
+Claim 관계는 `DEFINITION`, `CLASSIFICATION`, `PURPOSE`, `MAPPING`, `CAUSE_EFFECT`, `CONDITION`, `SEQUENCE`, `METRIC_SCOPE`, `COMPONENT`, `EQUIVALENCE`로 구분합니다. Alignment는 `ALIGNED`, `PARTIAL`, `CONTRADICTED`, `UNSUPPORTED`, `NOT_APPLICABLE`로 관리합니다.
+
+Evidence trust tier는 다음과 같습니다.
+
+| Tier | 의미 | 기본 credit 원칙 |
+|---|---|---|
+| `DETERMINISTIC` | 결정론적 checker와 재현 가능한 규칙 | 정렬 상태가 유효하면 full trust |
+| `VERIFIED_STRUCTURED` | 검증된 구조화 evidence | 정렬 상태가 유효하면 full trust |
+| `SEMANTIC_INFERRED` | LLM 또는 semantic 판단으로 추론 | 최대 partial trust |
+| `UNSUPPORTED` | 검증 가능한 근거 없음 | credit 없음 |
+
+D/E 요구사항은 `MANDATORY`, `OPTIONAL_BONUS`, `NO_PENALTY`로 구분합니다. 명시적으로 요구되고 `MANDATORY`로 분류된 항목만 미충족 감점을 허용합니다. 요구되지 않은 적용·제언을 일반적인 필수 감점 근거로 사용하지 않습니다.
+
+최종 grade 객체에는 `runtime_grading_provenance`를 첨부합니다.
+
+| 필드 | 의미 |
+|---|---|
+| `engine_commit` | 실행 코드의 Git commit |
+| `engine_process_started_at` | 해당 Python 프로세스에서 provenance 모듈을 초기화한 UTC 시각 |
+| `router_version` | Question Type Router 파일의 SHA256 식별자 |
+| `evaluator_sha` | Logic Check evaluator 파일 SHA256 |
+| `verifier_sha` | Logic LLM verifier 파일 SHA256 |
+| `scoring_policy_version` | runtime scoring policy 식별자 |
+
+Provenance 값은 한 Python 프로세스 안에서 안정적으로 유지됩니다. 서로 다른 프로세스의 `engine_process_started_at`은 동일하다고 가정하지 않습니다. 배포 프로세스와 read-only probe를 비교할 때는 `engine_commit`, `router_version`, `evaluator_sha`, `verifier_sha`, `scoring_policy_version`을 exact match하고, 각 process timestamp는 별도로 검증합니다.
+
+Bind mount 환경에서 `engine_commit`을 읽을 때는 repository 경로를 명시하고 command-scoped `safe.directory`를 사용합니다. Global 또는 system Git config는 변경하지 않습니다.
 
 ---
 
@@ -370,6 +430,7 @@ Fail Safe 구현을 위한 Spring 설계 기준을 제시하시오.
 - 명시적 요구의 오답·누락 구분
 - 보완 방향
 - 저장된 session 경로
+- `runtime_grading_provenance` 6개 필드와 실행 코드 추적 정보
 
 세션 디렉터리에는 다음 파일이 저장될 수 있습니다.
 
@@ -399,12 +460,14 @@ Telegram /grade
   → Fact Anchor / Model Answer
   → explicit requirement coverage
   → Logic Check와 deterministic checker
+  → generic demand/claim/evidence contract 정규화
   → single-owner evidence guard
   → Difficulty Strategy와 score ceiling
   → final score reconciliation
   → verified defect/coverage final persistence
   → Bot second-writer final persistence
   → final decision consistency
+  → runtime grading provenance 첨부
   → grade.json 저장
   → Telegram output formatter
 ```
@@ -678,7 +741,8 @@ python3 -m unittest -v \
   scripts.test_verified_defect_reconciliation \
   scripts.test_verified_defect_single_owner_guard \
   scripts.test_requirement_coverage \
-  scripts.test_general_grading_runtime_e2e
+  scripts.test_general_grading_runtime_e2e \
+  test_stage23_generic_grading_contract
 ```
 
 주요 검증 대상:
@@ -737,6 +801,9 @@ git diff --check -- README.md docs
 | `logic_check_evaluator.py` | 핵심 이론 오류 평가 병합 |
 | `difficulty_score_ceiling.py` | difficulty ceiling 평가와 strict 적용 |
 | `grade_score_reconciler.py` | 최종 점수·cap·score range 정합성 |
+| `generic_grading_contract.py` | Topic-neutral demand·claim·evidence·D/E requirement 계약 |
+| `runtime_grading_provenance.py` | 최종 grade에 process-stable 실행 provenance 첨부 |
+| `verdict_consistency.py` | 구조화 판정과 최종 서술·합격·고득점 판정 정합성 |
 | `grade_output_summarizer.py` | Telegram 요약과 deterministic fallback |
 | `scripts/rubric_manager.py` | Rubric과 Topic Pack 관리 |
 | `scripts/validate_release.sh` | release 전 통합 검증 |
@@ -756,6 +823,9 @@ git diff --check -- README.md docs
 9. Question Type을 답안 내용으로 바꾸지 않습니다.
 10. 저장 객체와 Telegram 출력 객체가 다르다고 설명하지 않습니다.
 11. 문서와 runtime이 충돌하면 현재 코드, Rubric source와 회귀 결과를 우선 확인합니다.
+12. Topic Pack 어휘와 generic grading contract를 결합하지 않습니다.
+13. 서로 다른 Python 프로세스의 `engine_process_started_at`을 exact match하지 않습니다.
+14. 배포와 probe의 provenance 비교에서는 안정 필드 5개를 exact match하고 process timestamp를 별도로 검증합니다.
 
 ## 설계·운영 문서
 
