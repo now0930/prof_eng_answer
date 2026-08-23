@@ -56,12 +56,25 @@ def attach_question_type_v2_to_grade(
         return grade
 
     legacy_or_existing = existing_question_type or _find_existing_question_type(grade)
+    normalized_question_text = str(question_text or "").strip()
 
-    if legacy_or_existing:
+    # The question-only deterministic router is the canonical owner when
+    # the original question text is available. Existing semantic values
+    # remain only as legacy provenance or a no-question fallback.
+    if normalized_question_text:
+        question_type = detect_question_type_from_text(
+            normalized_question_text
+        )
+        legacy_question_type = (
+            str(legacy_or_existing).strip().upper()
+            if legacy_or_existing
+            else None
+        )
+    elif legacy_or_existing:
         question_type = normalize_question_type(legacy_or_existing)
         legacy_question_type = str(legacy_or_existing).strip().upper()
     else:
-        question_type = detect_question_type_from_text(question_text or "")
+        question_type = detect_question_type_from_text("")
         legacy_question_type = None
 
     profile = get_question_type_profile(question_type)

@@ -1,5 +1,5 @@
 {
-  "version": "sha256-b5e77b4dd281a108961741ed5eaf0a1188d365e21b97918daa6b779fe067ac31-generated-topic-pack-logic-checks",
+  "version": "sha256-5b0d158c3da00100184c9c940dad50ee9b47e3d9ccabb70b25f5798071370085-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
@@ -3569,6 +3569,44 @@
             "Integration Test: HFT"
           ],
           "correct_rule": "HFT와 Architectural Constraints는 안전 관련 하드웨어 아키텍처의 고장허용 구조 및 SIL 제약을 다루는 축이다. 통합시험은 모듈·인터페이스·데이터·타이밍 상호작용을 검증하며 HIL은 시험환경이므로 서로 구분한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 14.5
+        },
+        {
+          "id": "sw05_fatal_sil_expanded_as_safety_instrument_level",
+          "severity": "fatal",
+          "message": "SIL을 Safety Instrument Level 또는 안전계장수준으로 잘못 정의한다.",
+          "description": "SIL 약어의 명시적 오정의만 fatal 후보로 본다.",
+          "wrong_patterns": [
+            "(?i)(?<![A-Za-z0-9_])SIL(?![A-Za-z0-9_])\\s*(?:은|이란|=|:|means?|stands?\\s+for)?\\s*(?:Safety\\s+Instrument\\s+Level|안전\\s*계장\\s*수준)"
+          ],
+          "examples_or_patterns": [
+            "SIL = Safety Instrument Level",
+            "SIL은 안전계장수준이다."
+          ],
+          "correct_rule": "SIL은 Safety Integrity Level이며 Safety Function에 요구되는 이산적 안전무결성 수준이다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 14.5
+        },
+        {
+          "id": "sw05_fatal_software_test_mapped_to_voting_architecture",
+          "severity": "fatal",
+          "message": "단위·통합·시스템시험을 1oo1·1oo2·2oo3 투표구조와 일대일 대응한다.",
+          "description": "소프트웨어 시험단계와 하드웨어 투표구조의 명시적 범주 대응 주장만 fatal 후보로 본다.",
+          "wrong_patterns": [
+            "(?im)^\\s*(?:[-*•]\\s*)?(?:단위|통합|시스템)(?:시험)?\\s*(?:→|->|:|=)\\s*(?:1oo1|1oo2|2oo3)(?:\\s*(?:투표\\s*(?:구조|아키텍처)|voting\\s+architecture))?\\s*[.!]?\\s*$"
+          ],
+          "examples_or_patterns": [
+            "통합시험 → 1oo2",
+            "시스템시험: 2oo3 voting architecture"
+          ],
+          "correct_rule": "1oo1·1oo2·2oo3는 Safety Function의 하드웨어 투표 아키텍처다. 단위·통합·시스템시험과 일대일 대응하지 않는다.",
           "affected_layers": [
             "C",
             "D"

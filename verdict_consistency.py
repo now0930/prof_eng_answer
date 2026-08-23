@@ -1667,3 +1667,25 @@ def enforce_final_decision_consistency(*args, **kwargs):
             )
         )
     return result
+
+# === STAGE25G3G_FATAL_SUMMARY_CONSISTENCY_V1 ===
+# Extend positive-accuracy wording recognized only when an existing
+# structured conflict is present. The existing rewrite owner remains
+# enforce_final_score_status_narrative_consistency().
+_STAGE25G3G_POSITIVE_ACCURACY_MARKERS = (
+    "충실히 다루",
+    "충실히",
+    "구조적으로 잘 서술",
+    "잘 서술",
+    "잘 설명",
+    "대체로 충족",
+    "정확하게 설명",
+)
+_STAGE23I_POSITIVE_ACCURACY_MARKERS = tuple(
+    dict.fromkeys(
+        tuple(
+            _STAGE23I_POSITIVE_ACCURACY_MARKERS
+        )
+        + _STAGE25G3G_POSITIVE_ACCURACY_MARKERS
+    )
+)

@@ -71,7 +71,30 @@ class SW05SourceContractTests(unittest.TestCase):
         fatal = self.fact["fatal_wrong_claims"]
         major = self.logic["llm_profile"]["major_checks"]
         self.assertEqual(len(major), 12)
-        self.assertEqual(self.logic["llm_profile"]["fatal_conditions"], fatal)
+        profile_fatal_conditions = self.logic["llm_profile"]["fatal_conditions"]
+        profile_fatal_dicts = [
+            row
+            for row in profile_fatal_conditions
+            if isinstance(row, dict)
+        ]
+        profile_selector_strings = [
+            row
+            for row in profile_fatal_conditions
+            if isinstance(row, str)
+        ]
+        self.assertEqual(profile_fatal_dicts, fatal)
+        self.assertEqual(len(profile_selector_strings), 2)
+        for finding_id in (
+            "sw05_fatal_sil_expanded_as_safety_instrument_level",
+            "sw05_fatal_software_test_mapped_to_voting_architecture",
+        ):
+            self.assertEqual(
+                sum(
+                    finding_id in row
+                    for row in profile_selector_strings
+                ),
+                1,
+            )
         self.assertTrue(all(row["severity"] == "fatal" and isinstance(row["affected_layers"], list) and row["affected_layers"] and len(row["affected_layers"]) == len(set(row["affected_layers"])) and "C" in row["affected_layers"] for row in fatal))
         self.assertTrue(all(row["severity"] == "major" and row["affected_layers"] == ["C"] for row in major))
 
@@ -85,8 +108,28 @@ class SW05SourceContractTests(unittest.TestCase):
         deterministic = self.logic["deterministic_checks"]
         profile = self.logic["llm_profile"]
         self.assertFalse(deterministic["enabled"])
-        for key in ("fatal_checks","major_checks","question_type_checks"):
-            self.assertEqual(sorted(item['id'] for item in deterministic[key]), ['sw05_fatal_hft_is_integration_test', 'sw05_fatal_software_test_is_random_hardware_integrity'] if key == 'fatal_checks' else [])
+        expected_fatal_ids = [
+            "sw05_fatal_hft_is_integration_test",
+            "sw05_fatal_sil_expanded_as_safety_instrument_level",
+            "sw05_fatal_software_test_is_random_hardware_integrity",
+            "sw05_fatal_software_test_mapped_to_voting_architecture",
+        ]
+        for key in (
+            "fatal_checks",
+            "major_checks",
+            "question_type_checks",
+        ):
+            self.assertEqual(
+                sorted(
+                    item["id"]
+                    for item in deterministic[key]
+                ),
+                (
+                    expected_fatal_ids
+                    if key == "fatal_checks"
+                    else []
+                ),
+            )
         self.assertEqual(profile["candidate_extraction"]["rules"], [])
         self.assertGreaterEqual(len(profile["candidate_extraction"]["key_terms"]), 100)
         self.assertEqual([item for item in profile['truth_schema'] if isinstance(item, str)], [row['statement'] for row in self.fact['anchors']])

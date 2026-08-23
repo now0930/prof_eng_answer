@@ -1087,3 +1087,246 @@ def reconcile_verified_defects_with_coverage(
         )
 
     return output
+
+# === STAGE25G5B_CONTROL_VALVE_COVERAGE_IDENTITY_V1 ===
+_STAGE25G5B_PREVIOUS_RECONCILE_COVERAGE_IDENTITY_V1 = (
+    reconcile_verified_defects_with_coverage
+)
+
+
+def _stage25g5b_sync_parsed_coverage_identity(
+    output: Any,
+) -> Any:
+    if not isinstance(output, dict):
+        return output
+
+    reconciliation = output.get(
+        "verified_defect_reconciliation"
+    )
+    if not isinstance(reconciliation, dict):
+        return output
+    if (
+        reconciliation.get("marker")
+        != "VERIFIED_DEFECT_RECONCILIATION_V1"
+    ):
+        return output
+
+    coverage = output.get(
+        "question_type_coverage"
+    )
+    if not isinstance(coverage, dict):
+        return output
+
+    parsed = output.get("parsed")
+    if not isinstance(parsed, dict):
+        parsed = {}
+        output["parsed"] = parsed
+
+    parsed["question_type_coverage"] = (
+        copy.deepcopy(coverage)
+    )
+    return output
+
+
+def reconcile_verified_defects_with_coverage(
+    grade: Any,
+) -> Any:
+    output = (
+        _STAGE25G5B_PREVIOUS_RECONCILE_COVERAGE_IDENTITY_V1(
+            grade
+        )
+    )
+    if not isinstance(output, dict):
+        return output
+
+    before = _score_snapshot(output)
+    output = (
+        _stage25g5b_sync_parsed_coverage_identity(
+            output
+        )
+    )
+
+    root_coverage = output.get(
+        "question_type_coverage"
+    )
+    parsed = output.get("parsed")
+    parsed_coverage = (
+        parsed.get("question_type_coverage")
+        if isinstance(parsed, dict)
+        else None
+    )
+
+    reconciliation = output.get(
+        "verified_defect_reconciliation"
+    )
+    if (
+        isinstance(reconciliation, dict)
+        and reconciliation.get("marker")
+        == "VERIFIED_DEFECT_RECONCILIATION_V1"
+        and isinstance(root_coverage, dict)
+        and root_coverage != parsed_coverage
+    ):
+        raise RuntimeError(
+            "Verified-defect coverage identity "
+            "resynchronization failed"
+        )
+
+    if before != _score_snapshot(output):
+        raise RuntimeError(
+            "Verified-defect coverage identity sync "
+            "changed numeric score state"
+        )
+
+    return output
+
+# === STAGE25G5E2_RECONCILIATION_IDEMPOTENCE_V2 ===
+_STAGE25G5E2_PREVIOUS_RECONCILE_IDEMPOTENCE_V2 = (
+    reconcile_verified_defects_with_coverage
+)
+
+
+def _stage25g5e2_stable_unique_strings(
+    value: Any,
+) -> Any:
+    if not isinstance(value, list):
+        return value
+
+    result = []
+    seen_strings = set()
+
+    for row in value:
+        if isinstance(row, str):
+            if row in seen_strings:
+                continue
+            seen_strings.add(row)
+        result.append(row)
+
+    return result
+
+
+def _stage25g5e2_normalize_feedback_lists(
+    output: Any,
+) -> Any:
+    if not isinstance(output, dict):
+        return output
+
+    containers = [output]
+    parsed = output.get("parsed")
+    if isinstance(parsed, dict):
+        containers.append(parsed)
+
+    for container in containers:
+        for key in (
+            "improvement_points",
+            "strategy_warnings",
+        ):
+            if key in container:
+                container[key] = (
+                    _stage25g5e2_stable_unique_strings(
+                        container.get(key)
+                    )
+                )
+
+    return output
+
+
+def _stage25g5e2_finalize_feedback_fixed_point(
+    output: Any,
+) -> Any:
+    if not isinstance(output, dict):
+        return output
+
+    reconciliation = output.get(
+        "verified_defect_reconciliation"
+    )
+    if not isinstance(reconciliation, dict):
+        return output
+    if (
+        reconciliation.get("marker")
+        != "VERIFIED_DEFECT_RECONCILIATION_V1"
+    ):
+        return output
+
+    from question_type_coverage_adapter import (
+        attach_question_type_coverage_feedback,
+    )
+
+    output = attach_question_type_coverage_feedback(
+        output
+    )
+
+    coverage = output.get(
+        "question_type_coverage"
+    )
+    if isinstance(coverage, dict):
+        output[
+            "question_type_coverage_summary"
+        ] = _verified_display_summary_v4(
+            coverage,
+            output.get(
+                "question_type_coverage_summary"
+            ),
+        )
+
+    output = _stage25g5e2_normalize_feedback_lists(
+        output
+    )
+    output = (
+        _stage25g5b_sync_parsed_coverage_identity(
+            output
+        )
+    )
+
+    return output
+
+
+def reconcile_verified_defects_with_coverage(
+    grade: Any,
+) -> Any:
+    output = (
+        _STAGE25G5E2_PREVIOUS_RECONCILE_IDEMPOTENCE_V2(
+            grade
+        )
+    )
+    if not isinstance(output, dict):
+        return output
+
+    before = _score_snapshot(output)
+    output = (
+        _stage25g5e2_finalize_feedback_fixed_point(
+            output
+        )
+    )
+
+    reconciliation = output.get(
+        "verified_defect_reconciliation"
+    )
+    root_coverage = output.get(
+        "question_type_coverage"
+    )
+    parsed = output.get("parsed")
+    parsed_coverage = (
+        parsed.get("question_type_coverage")
+        if isinstance(parsed, dict)
+        else None
+    )
+
+    if (
+        isinstance(reconciliation, dict)
+        and reconciliation.get("marker")
+        == "VERIFIED_DEFECT_RECONCILIATION_V1"
+        and isinstance(root_coverage, dict)
+        and root_coverage != parsed_coverage
+    ):
+        raise RuntimeError(
+            "Verified-defect idempotence finalizer "
+            "broke root/parsed coverage identity"
+        )
+
+    if before != _score_snapshot(output):
+        raise RuntimeError(
+            "Verified-defect idempotence finalizer "
+            "changed numeric score state"
+        )
+
+    return output

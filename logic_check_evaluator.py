@@ -1659,6 +1659,864 @@ def _copy_optional_fatal_rule_metadata(
     return finding
 
 
+
+# STAGE25G3_FAIL_CLOSED_SECONDARY_PROFILE_SELECTION_V1
+_SECONDARY_PROFILE_ACTIVATION_SCOPE = (
+    "claim_triggered_secondary_profile_v1"
+)
+
+
+def _logic_answer_segment(value: str) -> str:
+    text = str(value or "").replace("\r\n", "\n").replace("\r", "\n")
+    marker = re.search(
+        r"\[\s*답안\s*\]\s*",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if marker:
+        return text[marker.end():].strip()
+
+    marker = re.search(
+        r"^/grade\b.*$",
+        text,
+        flags=re.IGNORECASE | re.MULTILINE,
+    )
+    if marker:
+        return text[marker.end():].strip()
+
+    return text.strip()
+
+
+def _secondary_profile_group_matches(
+    answer_text: str,
+    groups: Any,
+) -> list[str]:
+    if not isinstance(groups, list):
+        return []
+
+    matched: list[str] = []
+    for index, group in enumerate(groups, start=1):
+        if not isinstance(group, dict):
+            continue
+        group_id = str(group.get("id") or f"group_{index}").strip()
+        patterns = group.get("patterns")
+        if not group_id or not isinstance(patterns, list):
+            continue
+
+        for raw_pattern in patterns:
+            pattern = str(raw_pattern or "").strip()
+            if not pattern:
+                continue
+            try:
+                found = re.search(
+                    pattern,
+                    answer_text,
+                    flags=re.IGNORECASE,
+                )
+            except re.error:
+                found = None
+            if found:
+                matched.append(group_id)
+                break
+
+    return matched
+
+
+def _secondary_profile_rule_match(
+    answer_text: str,
+    rule: Any,
+) -> dict[str, Any]:
+    if (
+        not isinstance(rule, dict)
+        or str(rule.get("activation_scope") or "").strip()
+        != _SECONDARY_PROFILE_ACTIVATION_SCOPE
+    ):
+        return {"matched": False}
+
+    strong = _secondary_profile_group_matches(
+        answer_text,
+        rule.get("strong_pattern_groups"),
+    )
+    relation = _secondary_profile_group_matches(
+        answer_text,
+        rule.get("relation_pattern_groups"),
+    )
+    try:
+        minimum = max(
+            1,
+            int(rule.get("min_strong_groups") or 2),
+        )
+    except (TypeError, ValueError, OverflowError):
+        minimum = 2
+
+    matched = len(strong) >= minimum
+    if (
+        not matched
+        and bool(
+            rule.get(
+                "single_strong_requires_relation_group",
+                True,
+            )
+        )
+        and len(strong) >= 1
+        and len(relation) >= 1
+    ):
+        matched = True
+
+    return {
+        "matched": matched,
+        "rule_id": str(rule.get("id") or "").strip(),
+        "strong_groups": strong,
+        "relation_groups": relation,
+        "strong_count": len(strong),
+        "relation_count": len(relation),
+    }
+
+
+def _select_claim_triggered_secondary_profiles(
+    answer_text: str,
+    primary_topic_id: str | None,
+    topic_checks: Any,
+) -> list[dict[str, Any]]:
+    if not isinstance(topic_checks, list):
+        return []
+
+    allowed = {
+        str(row.get("topic_id") or "").strip()
+        for row in topic_checks
+        if isinstance(row, dict)
+        and str(row.get("topic_id") or "").strip()
+    }
+    if not allowed:
+        return []
+
+    try:
+        from logic_llm_verifier import LOGIC_CHECK_PROFILE_PATH
+
+        profile_bank = _load_json(Path(LOGIC_CHECK_PROFILE_PATH))
+    except Exception:
+        return []
+
+    profiles = profile_bank.get("profiles")
+    if not isinstance(profiles, list):
+        return []
+
+    answer = _logic_answer_segment(answer_text)
+    if not answer:
+        return []
+
+    selected: list[dict[str, Any]] = []
+    for profile in profiles:
+        if not isinstance(profile, dict):
+            continue
+        current_topic_id = str(profile.get("topic_id") or "").strip()
+        if (
+            not current_topic_id
+            or current_topic_id == str(primary_topic_id or "").strip()
+            or current_topic_id not in allowed
+            or not bool(profile.get("enabled", True))
+        ):
+            continue
+
+        extraction = profile.get("secondary_profile_activation")
+        rules = (
+            extraction.get("rules")
+            if isinstance(extraction, dict)
+            else None
+        )
+        if not isinstance(rules, list):
+            continue
+
+        # The activation rule is the authority for secondary diagnostic
+        # execution. The profile's primary score policy is not imported.
+        eligible_rules = [
+            rule
+            for rule in rules
+            if isinstance(rule, dict)
+            and str(
+                rule.get("score_effect_requirement")
+                or ""
+            ).strip()
+            == "diagnostic_only"
+        ]
+        if not eligible_rules:
+            continue
+
+        matches = [
+            _secondary_profile_rule_match(answer, rule)
+            for rule in eligible_rules
+        ]
+        matches = [
+            match
+            for match in matches
+            if match.get("matched")
+        ]
+        if not matches:
+            continue
+
+        matches.sort(
+            key=lambda row: (
+                -int(row.get("strong_count") or 0),
+                -int(row.get("relation_count") or 0),
+                str(row.get("rule_id") or ""),
+            )
+        )
+        selected.append(
+            {
+                "topic_id": current_topic_id,
+                "activation": matches[0],
+                "score_effect": "diagnostic_only",
+            }
+        )
+
+    selected.sort(
+        key=lambda row: (
+            -int(
+                row.get("activation", {}).get("strong_count")
+                or 0
+            ),
+            -int(
+                row.get("activation", {}).get("relation_count")
+                or 0
+            ),
+            str(row.get("topic_id") or ""),
+        )
+    )
+    return selected[:1]
+
+
+def _merge_secondary_logic_evaluations(
+    primary_result: dict[str, Any],
+    secondary_rows: list[dict[str, Any]],
+) -> dict[str, Any]:
+    result = dict(primary_result)
+    primary_topic_id = str(result.get("topic_id") or "").strip()
+    findings = [
+        dict(row)
+        for row in result.get("findings", [])
+        if isinstance(row, dict)
+    ]
+
+    def identity(row: dict[str, Any], fallback: str) -> tuple[str, str]:
+        return (
+            str(row.get("source_topic_id") or fallback or "").strip(),
+            str(
+                row.get("source_rule_id")
+                or row.get("rule_id")
+                or row.get("id")
+                or ""
+            ).strip(),
+        )
+
+    seen = {
+        identity(row, primary_topic_id)
+        for row in findings
+    }
+    deductions = [
+        str(value)
+        for value in result.get("deduction_elements", [])
+        if str(value or "").strip()
+    ]
+    practice = [
+        str(value)
+        for value in result.get("next_practice_points", [])
+        if str(value or "").strip()
+    ]
+    evaluated = [primary_topic_id] if primary_topic_id else []
+    summaries: list[dict[str, Any]] = []
+
+    for item in secondary_rows:
+        topic_id = str(item.get("topic_id") or "").strip()
+        evaluation = item.get("evaluation")
+        if not topic_id or not isinstance(evaluation, dict):
+            continue
+
+        if topic_id not in evaluated:
+            evaluated.append(topic_id)
+
+        merged_ids: list[str] = []
+        for raw in evaluation.get("findings", []):
+            if not isinstance(raw, dict):
+                continue
+            row = dict(raw)
+            row["source_topic_id"] = topic_id
+            row["secondary_profile"] = True
+            key = identity(row, topic_id)
+            if not key[1] or key in seen:
+                continue
+            seen.add(key)
+            findings.append(row)
+            merged_ids.append(key[1])
+
+        for value in evaluation.get("deduction_elements", []):
+            _append_unique(deductions, str(value or ""))
+        for value in evaluation.get("next_practice_points", []):
+            _append_unique(practice, str(value or ""))
+
+        summaries.append(
+            {
+                "topic_id": topic_id,
+                "mode": evaluation.get("mode"),
+                "fatal_error_detected": evaluation.get(
+                    "fatal_error_detected"
+                ),
+                "finding_count": len(
+                    [
+                        row
+                        for row in evaluation.get("findings", [])
+                        if isinstance(row, dict)
+                    ]
+                ),
+                "merged_finding_ids": merged_ids,
+                "activation": item.get("activation"),
+                "score_effect": "diagnostic_only",
+            }
+        )
+
+    result["findings"] = findings
+    result["deduction_elements"] = deductions
+    result["next_practice_points"] = practice
+    result["evaluated_topic_ids"] = evaluated
+    result["secondary_profile_evaluations"] = summaries
+    result["secondary_profile_selection"] = {
+        "version": _SECONDARY_PROFILE_ACTIVATION_SCOPE,
+        "score_effect": "diagnostic_only",
+        "selected_topic_ids": [
+            row["topic_id"]
+            for row in summaries
+        ],
+        "selected_count": len(summaries),
+    }
+    result["mode"] = _mode_from_findings(findings)
+
+    fatal = any(
+        row.get("severity") == "fatal"
+        for row in findings
+        if isinstance(row, dict)
+    )
+    major = any(
+        row.get("severity") == "major"
+        for row in findings
+        if isinstance(row, dict)
+    )
+    minor = any(
+        row.get("severity") in {"minor", "warn", "warning"}
+        for row in findings
+        if isinstance(row, dict)
+    )
+    result["fatal_error_detected"] = fatal
+
+    score_policy = result.get("score_policy")
+    if isinstance(score_policy, dict):
+        score_policy = dict(score_policy)
+        score_policy["secondary_profile_score_effect"] = "diagnostic_only"
+        score_policy[
+            "secondary_profile_direct_score_application"
+        ] = False
+        result["score_policy"] = score_policy
+
+    if fatal:
+        status = "limited"
+        message = (
+            "Primary 또는 진단 전용 secondary Logic Check에서 "
+            "fatal이 감지되어 D/E 주장은 제한적으로 신뢰합니다."
+        )
+    elif major:
+        status = "not_invalidated"
+        message = (
+            "Logic Check major gap이 있어 D/E 주장을 "
+            "충분히 입증된 것으로 보지 않습니다."
+        )
+    elif minor:
+        status = "trusted_with_notes"
+        message = "Logic Check 보완 지점이 남아 있습니다."
+    else:
+        status = "trusted"
+        message = "Logic Check finding이 없습니다."
+
+    result["de_claim_trust_evaluation"] = {
+        "enabled": bool(evaluated),
+        "target_layers": ["D", "E"],
+        "score_effect": "none",
+        "status": status,
+        "message": message,
+        "rule": (
+            "D/E 점수는 A/B/C/D/E scoring model에서만 산정하며 "
+            "Logic Check는 D/E claim trust만 제공합니다."
+        ),
+    }
+    return result
+
+# STAGE25G3E_SINGLE_CALL_FULL_LOGIC_OWNER_V1
+_STAGE25G3E_INTERNAL_COMPACT_SECONDARY_KEY = (
+    "_stage25g3e_compact_secondary_internal_topic_id"
+)
+
+
+# STAGE25G3E2_INTERNAL_TRANSPORT_KEYS_FAIL_SAFE_V1
+def _stage25g3e2_read_internal_transport_value(
+    grade: Any,
+    key: str,
+    default: Any = None,
+    *,
+    normalize_string: bool = False,
+) -> Any:
+    if not isinstance(grade, dict):
+        return default
+
+    try:
+        # Internal transport keys are implementation details. Bypass an
+        # overridden dict-subclass get() so they cannot consume or alter
+        # the public topic-routing failure boundary.
+        value = dict.get(
+            grade,
+            key,
+            default,
+        )
+    except Exception:
+        return default
+
+    if not normalize_string:
+        return value
+
+    try:
+        return str(value or "").strip()
+    except Exception:
+        return default
+
+
+def _stage25g3e_candidate_topic_id(
+    value: Any,
+    *,
+    _depth: int = 0,
+) -> str:
+    if _depth > 8:
+        return ""
+
+    if isinstance(value, dict):
+        for key in (
+            "logic_check_topic_id",
+            "topic_id",
+            "primary_topic_id",
+            "inferred_topic_id",
+        ):
+            candidate = value.get(key)
+            if (
+                isinstance(candidate, str)
+                and candidate.strip()
+            ):
+                return candidate.strip()
+
+        for key in (
+            "topic_check",
+            "profile",
+            "candidate",
+            "answer",
+            "primary_reference",
+        ):
+            if key not in value:
+                continue
+            nested = _stage25g3e_candidate_topic_id(
+                value.get(key),
+                _depth=_depth + 1,
+            )
+            if nested:
+                return nested
+
+        for nested_value in value.values():
+            nested = _stage25g3e_candidate_topic_id(
+                nested_value,
+                _depth=_depth + 1,
+            )
+            if nested:
+                return nested
+
+    elif isinstance(value, (list, tuple)):
+        for item in value:
+            nested = _stage25g3e_candidate_topic_id(
+                item,
+                _depth=_depth + 1,
+            )
+            if nested:
+                return nested
+
+    return ""
+
+
+def _stage25g3e_compact_profile_v2(
+    topic_id: str,
+) -> dict[str, Any] | None:
+    normalized_topic_id = str(
+        topic_id or ""
+    ).strip()
+    if not normalized_topic_id:
+        return None
+
+    try:
+        from logic_llm_verifier import (
+            load_logic_check_profile,
+        )
+
+        profile = load_logic_check_profile(
+            normalized_topic_id
+        )
+    except Exception:
+        return None
+
+    if not isinstance(profile, dict):
+        return None
+
+    compact_config = profile.get(
+        "compact_batch_verification"
+    )
+    if not isinstance(compact_config, dict):
+        return None
+    if compact_config.get("enabled", True) is not True:
+        return None
+    if compact_config.get("version") != 2:
+        return None
+    if compact_config.get("max_llm_calls") != 1:
+        return None
+
+    return profile
+
+
+def _stage25g3e_preselect_compact_secondary(
+    answer_text: str,
+    primary_topic_id: str,
+    topic_logic_checks: Any,
+) -> tuple[list[Any], str]:
+    raw_candidates = (
+        _select_claim_triggered_secondary_profiles(
+            answer_text,
+            str(primary_topic_id or "").strip(),
+            topic_logic_checks,
+        )
+    )
+    if not isinstance(raw_candidates, list):
+        return [], ""
+
+    candidates = list(raw_candidates)
+    for candidate in candidates:
+        candidate_topic_id = (
+            _stage25g3e_candidate_topic_id(
+                candidate
+            )
+        )
+        if (
+            _stage25g3e_compact_profile_v2(
+                candidate_topic_id
+            )
+            is None
+        ):
+            continue
+
+        # One activated compact secondary owns the sole semantic LLM call.
+        return [candidate], candidate_topic_id
+
+    return candidates, ""
+
+
+def _stage25g3e_pass_profile_evaluation() -> dict[str, Any]:
+    return {
+        "verdict": "pass",
+        "confidence": "high",
+        "reason": (
+            "Primary generic semantic verifier skipped because "
+            "an activated compact secondary owns the single LLM call."
+        ),
+        "checks": [],
+        "findings": [],
+        "alignments": [],
+    }
+
+
+# STAGE25G3F_SECONDARY_FATAL_CEILING_MERGE_V1
+def _stage25g3f_merge_secondary_fatal_ceiling(
+    parent_result: dict[str, Any],
+    secondary_evaluation: Any,
+    secondary_topic_id: str,
+) -> dict[str, Any]:
+    if not isinstance(parent_result, dict):
+        return parent_result
+    if not isinstance(secondary_evaluation, dict):
+        return parent_result
+
+    raw_findings = secondary_evaluation.get(
+        "findings"
+    )
+    if not isinstance(raw_findings, list):
+        raw_findings = []
+
+    fatal_findings = [
+        row
+        for row in raw_findings
+        if isinstance(row, dict)
+        and str(
+            row.get("severity") or ""
+        ).strip().lower()
+        == "fatal"
+    ]
+    if not fatal_findings:
+        return parent_result
+
+    candidate_ceilings: list[float] = []
+    fatal_finding_ids: list[str] = []
+
+    for row in fatal_findings:
+        finding_id = str(
+            row.get("id") or ""
+        ).strip()
+        if (
+            finding_id
+            and finding_id
+            not in fatal_finding_ids
+        ):
+            fatal_finding_ids.append(
+                finding_id
+            )
+
+        value = row.get(
+            "recommended_ceiling"
+        )
+        if (
+            isinstance(value, (int, float))
+            and not isinstance(value, bool)
+            and float(value) >= 0.0
+        ):
+            candidate_ceilings.append(
+                float(value)
+            )
+
+    secondary_policy = secondary_evaluation.get(
+        "score_policy"
+    )
+    if not isinstance(secondary_policy, dict):
+        secondary_policy = {}
+
+    secondary_policy_ceiling = (
+        secondary_policy.get(
+            "recommended_ceiling"
+        )
+    )
+    if (
+        secondary_policy.get(
+            "theory_core_fatal_error"
+        )
+        is True
+        and isinstance(
+            secondary_policy_ceiling,
+            (int, float),
+        )
+        and not isinstance(
+            secondary_policy_ceiling,
+            bool,
+        )
+        and float(
+            secondary_policy_ceiling
+        )
+        >= 0.0
+    ):
+        candidate_ceilings.append(
+            float(
+                secondary_policy_ceiling
+            )
+        )
+
+    distinct_ceilings = sorted(
+        set(candidate_ceilings)
+    )
+    if not distinct_ceilings:
+        return parent_result
+
+    secondary_ceiling = min(
+        distinct_ceilings
+    )
+
+    parent_policy = parent_result.get(
+        "score_policy"
+    )
+    if not isinstance(parent_policy, dict):
+        parent_policy = {}
+    else:
+        parent_policy = dict(
+            parent_policy
+        )
+
+    existing_ceiling = parent_policy.get(
+        "recommended_ceiling"
+    )
+    if (
+        isinstance(existing_ceiling, (int, float))
+        and not isinstance(existing_ceiling, bool)
+        and float(existing_ceiling) >= 0.0
+    ):
+        applied_ceiling = min(
+            float(existing_ceiling),
+            secondary_ceiling,
+        )
+    else:
+        applied_ceiling = secondary_ceiling
+
+    preserve_existing_direct_caps = bool(
+        parent_policy.get(
+            "direct_score_application"
+        )
+    ) and str(
+        parent_policy.get(
+            "score_effect"
+        )
+        or ""
+    ).strip() == "B_C_only"
+
+    parent_policy[
+        "theory_core_fatal_error"
+    ] = True
+    parent_policy[
+        "recommended_ceiling"
+    ] = applied_ceiling
+    parent_policy["reason"] = (
+        str(
+            parent_policy.get("reason")
+            or secondary_policy.get("reason")
+            or (
+                "Secondary Logic Check fatal이 "
+                "감지되어 총점 ceiling을 적용합니다."
+            )
+        ).strip()
+    )
+    parent_policy[
+        "direct_d_e_effect"
+    ] = "none"
+
+    if not preserve_existing_direct_caps:
+        parent_policy[
+            "score_effect"
+        ] = "none"
+        parent_policy[
+            "direct_score_application"
+        ] = False
+        parent_policy[
+            "layer_caps"
+        ] = {}
+
+    previous_merge = parent_policy.get(
+        "secondary_fatal_ceiling_merge"
+    )
+    previous_ids: list[str] = []
+    previous_ceilings: list[float] = []
+    previous_count = 0
+
+    if isinstance(previous_merge, dict):
+        raw_previous_ids = previous_merge.get(
+            "fatal_finding_ids"
+        )
+        if isinstance(raw_previous_ids, list):
+            previous_ids = [
+                str(value)
+                for value in raw_previous_ids
+                if str(value).strip()
+            ]
+
+        raw_previous_ceilings = (
+            previous_merge.get(
+                "distinct_candidate_ceilings"
+            )
+        )
+        if isinstance(
+            raw_previous_ceilings,
+            list,
+        ):
+            previous_ceilings = [
+                float(value)
+                for value in raw_previous_ceilings
+                if (
+                    isinstance(
+                        value,
+                        (int, float),
+                    )
+                    and not isinstance(
+                        value,
+                        bool,
+                    )
+                )
+            ]
+
+        raw_count = previous_merge.get(
+            "merge_count"
+        )
+        if (
+            isinstance(raw_count, int)
+            and not isinstance(raw_count, bool)
+            and raw_count >= 0
+        ):
+            previous_count = raw_count
+
+    merged_ids = list(previous_ids)
+    for finding_id in fatal_finding_ids:
+        if finding_id not in merged_ids:
+            merged_ids.append(finding_id)
+
+    merged_candidate_ceilings = sorted(
+        set(
+            previous_ceilings
+            + distinct_ceilings
+        )
+    )
+
+    parent_policy[
+        "secondary_fatal_ceiling_merge"
+    ] = {
+        "version": (
+            "stage25g3f_secondary_fatal_"
+            "ceiling_merge_v1"
+        ),
+        "secondary_topic_id": str(
+            secondary_topic_id or ""
+        ).strip(),
+        "fatal_finding_ids": merged_ids,
+        "fatal_finding_count": len(
+            merged_ids
+        ),
+        "distinct_candidate_ceilings": (
+            merged_candidate_ceilings
+        ),
+        "applied_ceiling": (
+            applied_ceiling
+        ),
+        "applied_once_per_secondary_evaluation": (
+            True
+        ),
+        "merge_count": previous_count + 1,
+        "secondary_score_effect": str(
+            secondary_policy.get(
+                "score_effect"
+            )
+            or ""
+        ).strip(),
+        "secondary_direct_score_application": (
+            bool(
+                secondary_policy.get(
+                    "direct_score_application"
+                )
+            )
+        ),
+        "parent_direct_score_application": (
+            bool(
+                parent_policy.get(
+                    "direct_score_application"
+                )
+            )
+        ),
+        "direct_d_e_effect": "none",
+    }
+
+    parent_result[
+        "score_policy"
+    ] = parent_policy
+    return parent_result
+
+
 def evaluate_logic_checks(
     answer_text: str,
     grade: dict[str, Any] | None = None,
@@ -1755,6 +2613,30 @@ def evaluate_logic_checks(
 
     llm_profile_enabled = False
 
+    _stage25g3e_internal_compact_secondary_topic_id = (
+        _stage25g3e2_read_internal_transport_value(
+            grade,
+            _STAGE25G3E_INTERNAL_COMPACT_SECONDARY_KEY,
+            "",
+            normalize_string=True,
+        )
+    )
+
+    _stage25g3e_preselected_secondary_candidates: list[Any] = []
+    _stage25g3e_compact_secondary_topic_id = (
+        _stage25g3e_internal_compact_secondary_topic_id
+    )
+
+    if not _stage25g3e_internal_compact_secondary_topic_id:
+        (
+            _stage25g3e_preselected_secondary_candidates,
+            _stage25g3e_compact_secondary_topic_id,
+        ) = _stage25g3e_preselect_compact_secondary(
+            answer_text,
+            str(_preferred_logic_topic_id or "").strip(),
+            bank.get("topic_logic_checks", []),
+        )
+
     for topic_check in _topic_logic_checks_for_evaluation:
         topic_check_enabled = bool(
             topic_check.get("enabled", True)
@@ -1830,13 +2712,73 @@ def evaluate_logic_checks(
                     else canonical_axes[:24]
                 )
 
-                profile_evaluation = (
-                    verify_logic_with_llm(
+                if (
+                    _stage25g3e_internal_compact_secondary_topic_id
+                    and str(topic_id or '').strip()
+                    == _stage25g3e_internal_compact_secondary_topic_id
+                ):
+                    semantic_topic_check = dict(topic_check)
+                    semantic_topic_check['llm_profile'] = profile
+                    semantic_topic_check[
+                        '_stage22_canonical_context'
+                    ] = {
+                        'topic_check': topic_check,
+                        'model_answer_reference': grade.get(
+                            'model_answer_reference'
+                        ),
+                        'question_demand_evidence': (
+                            grade.get(
+                                'question_demand_evidence_for_score'
+                            )
+                            or grade.get(
+                                'question_demand_evidence'
+                            )
+                        ),
+                        'question_analysis': grade.get(
+                            'question_analysis'
+                        ),
+                    }
+                    semantic_result = (
+                        _evaluate_topic_fatal_checks_with_llm(
+                            text,
+                            semantic_topic_check,
+                        )
+                    )
+                    returned_alignment = (
+                        semantic_topic_check.get(
+                            '_stage22_axis_alignment_evaluation'
+                        )
+                    )
+                    if isinstance(semantic_result, dict):
+                        profile_evaluation = dict(
+                            semantic_result
+                        )
+                    elif isinstance(semantic_result, list):
+                        profile_evaluation = {
+                            'findings': list(semantic_result),
+                        }
+                    else:
+                        profile_evaluation = {
+                            'findings': [],
+                        }
+                    if isinstance(returned_alignment, dict):
+                        profile_evaluation.setdefault(
+                            'canonical_axis_alignment_evaluation',
+                            returned_alignment,
+                        )
+                    llm_profile_enabled = True
+                elif _stage25g3e_compact_secondary_topic_id:
+                    profile_evaluation = (
+                        _stage25g3e_pass_profile_evaluation()
+                    )
+                else:
+                    profile_evaluation = (
+                        verify_logic_with_llm(
                         answer_text,
                         str(topic_id),
                         canonical_axes=canonical_axes,
                     )
-                )
+                    )
         except Exception as error:
             findings.append(
                 {
@@ -2388,6 +3330,104 @@ def evaluate_logic_checks(
         "rule": "D/E 점수는 A/B/C/D/E scoring model에서만 산정하며 Logic Check는 D/E claim trust만 제공합니다.",
     }
 
+    # STAGE25G3_FAIL_CLOSED_SECONDARY_PROFILE_COMPOSITION_V1
+    if (
+        isinstance(grade, dict)
+        and not bool(
+            _stage25g3e2_read_internal_transport_value(
+        grade,
+        "_logic_check_secondary_replay",
+        False,
+    )
+        )
+    ):
+        if _stage25g3e_internal_compact_secondary_topic_id:
+            candidates = []
+        else:
+            candidates = list(
+                _stage25g3e_preselected_secondary_candidates
+            )
+        secondary_rows: list[dict[str, Any]] = []
+
+        for candidate in candidates:
+            secondary_topic_id = str(
+                candidate.get("topic_id") or ""
+            ).strip()
+            if not secondary_topic_id:
+                continue
+
+            secondary_grade = dict(grade)
+            secondary_grade["_logic_check_secondary_replay"] = True
+            for key in (
+                "logic_check_topic_id",
+                "topic_id",
+                "inferred_topic_id",
+                "primary_topic_id",
+            ):
+                secondary_grade[key] = secondary_topic_id
+
+            _stage25g3e_secondary_topic_id = (
+                _stage25g3e_candidate_topic_id(
+                    secondary_grade
+                )
+            )
+            if (
+                _stage25g3e_compact_secondary_topic_id
+                and _stage25g3e_secondary_topic_id
+                == _stage25g3e_compact_secondary_topic_id
+            ):
+                secondary_grade[
+                    _STAGE25G3E_INTERNAL_COMPACT_SECONDARY_KEY
+                ] = _stage25g3e_compact_secondary_topic_id
+            evaluation = evaluate_logic_checks(
+                answer_text,
+                secondary_grade,
+                path,
+            )
+            result = (
+                _stage25g3f_merge_secondary_fatal_ceiling(
+                    result,
+                    evaluation,
+                    _stage25g3e_secondary_topic_id,
+                )
+            )
+            if (
+                isinstance(evaluation, dict)
+                and evaluation.get("applicable") is True
+            ):
+                secondary_rows.append(
+                    {
+                        "topic_id": secondary_topic_id,
+                        "activation": candidate.get("activation"),
+                        "evaluation": evaluation,
+                    }
+                )
+
+        if secondary_rows:
+            result = _merge_secondary_logic_evaluations(
+                result,
+                secondary_rows,
+            )
+
+    result['single_llm_owner_evaluation'] = {
+        'version': 'stage25g3e_single_call_owner_v7',
+        'compact_secondary_topic_id': (
+            _stage25g3e_compact_secondary_topic_id
+        ),
+        'internal_compact_secondary': bool(
+            _stage25g3e_internal_compact_secondary_topic_id
+        ),
+        'primary_profile_verifier_skipped': bool(
+            _stage25g3e_compact_secondary_topic_id
+            and not _stage25g3e_internal_compact_secondary_topic_id
+        ),
+        'semantic_llm_owner': (
+            'secondary_compact_helper'
+            if _stage25g3e_compact_secondary_topic_id
+            else 'primary_profile_verifier'
+        ),
+        'max_llm_calls': 1,
+    }
     return result
 
 
@@ -3366,6 +4406,646 @@ def _topic_fatal_batch_prompt(
     )
 
 
+
+# STAGE25G3C_COMPACT_ONE_CALL_SECONDARY_V1
+def _stage25g3c_compact_batch_config(
+    local_values: dict[str, Any],
+) -> dict[str, Any] | None:
+    for value in local_values.values():
+        if not isinstance(value, dict):
+            continue
+
+        direct = value.get("compact_batch_verification")
+        if isinstance(direct, dict):
+            return direct
+
+        nested = value.get("llm_profile")
+        if isinstance(nested, dict):
+            direct = nested.get("compact_batch_verification")
+            if isinstance(direct, dict):
+                return direct
+
+    return None
+
+
+def _stage25g3c_extract_compact_evidence(
+    text: str,
+    selectors: list[dict[str, Any]],
+) -> str:
+    normalized_text = str(text or "")
+    chunks: list[str] = []
+
+    for selector in selectors:
+        if not isinstance(selector, dict):
+            continue
+
+        pattern = str(selector.get("pattern") or "").strip()
+        if not pattern:
+            continue
+
+        window = max(
+            0,
+            min(int(selector.get("window") or 300), 1200),
+        )
+        max_matches = max(
+            1,
+            min(int(selector.get("max_matches") or 1), 4),
+        )
+
+        try:
+            matches = list(
+                re.finditer(
+                    pattern,
+                    normalized_text,
+                    flags=re.IGNORECASE | re.DOTALL,
+                )
+            )
+        except re.error:
+            matches = list(
+                re.finditer(
+                    re.escape(pattern),
+                    normalized_text,
+                    flags=re.IGNORECASE,
+                )
+            )
+
+        for match in matches[:max_matches]:
+            start = max(0, match.start() - window)
+            end = min(
+                len(normalized_text),
+                match.end() + window,
+            )
+            chunk = re.sub(
+                r"\s+",
+                " ",
+                normalized_text[start:end],
+            ).strip()
+            if chunk and chunk not in chunks:
+                chunks.append(chunk)
+
+    return "\n\n".join(chunks)[:5000]
+
+
+def _stage25g3c_compact_rule_record(
+    raw: Any,
+) -> dict[str, Any] | None:
+    if isinstance(raw, dict):
+        rule_id = str(
+            raw.get("id")
+            or raw.get("rule_id")
+            or raw.get("check_id")
+            or ""
+        ).strip()
+        if not rule_id:
+            return None
+
+        return {
+            "id": rule_id,
+            "wrong_claim": str(
+                raw.get("wrong_claim")
+                or raw.get("claim")
+                or raw.get("description")
+                or ""
+            ).strip(),
+            "correct_rule": str(
+                raw.get("correct_rule")
+                or raw.get("correction")
+                or raw.get("message")
+                or ""
+            ).strip(),
+            "severity": str(
+                raw.get("severity") or "fatal"
+            ).strip().lower(),
+            "affected_layers": list(
+                raw.get("affected_layers") or ["C"]
+            ),
+            "recommended_ceiling": raw.get(
+                "recommended_ceiling"
+            ),
+        }
+
+    if not isinstance(raw, str):
+        return None
+
+    text = re.sub(r"\s+", " ", raw).strip()
+    match = re.match(
+        r"^\[([^\]]+)\]\s*(.*)$",
+        text,
+    )
+    if not match:
+        return None
+
+    rule_id = match.group(1).strip()
+    body = match.group(2).strip()
+    wrong_claim = body
+    correct_rule = ""
+
+    if "정답은" in body:
+        left, right = body.split("정답은", 1)
+        wrong_claim = left.strip()
+        correct_rule = "정답은 " + right.strip()
+    else:
+        sentence_match = re.match(
+            r"^(.+?[.!?])\s*(.+)$",
+            body,
+        )
+        if sentence_match:
+            wrong_claim = sentence_match.group(1).strip()
+            correct_rule = sentence_match.group(2).strip()
+
+    return {
+        "id": rule_id,
+        "wrong_claim": wrong_claim,
+        "correct_rule": correct_rule,
+        "severity": "fatal",
+        "affected_layers": ["C", "D"],
+        "recommended_ceiling": 14.5,
+    }
+
+
+def _stage25g3c_compact_diagnostic(
+    reason: str,
+    detail: str = "",
+) -> dict[str, Any]:
+    return {
+        "mode": "warn",
+        "fatal_error_detected": False,
+        "findings": [],
+        "diagnostics": [
+            {
+                "id": "stage25g3c_compact_batch_diagnostic",
+                "severity": "warn",
+                "reason": reason,
+                "message": detail.strip() or reason,
+                "affected_layers": [],
+            }
+        ],
+        "compact_batch_verification": {
+            "status": "invalid",
+            "reason": reason,
+            "llm_call_count": 1,
+        },
+    }
+
+
+# STAGE25G3D_COMPACT_STRUCTURED_EVIDENCE_ARBITRATION_V1
+def _stage25g3d_extract_structured_relation(
+    text: str,
+    spec: Any,
+) -> str:
+    if not isinstance(spec, dict):
+        return ""
+
+    pattern = str(
+        spec.get("combined_pattern") or ""
+    ).strip()
+    rendered = str(
+        spec.get("render") or ""
+    ).strip()
+    if not pattern or not rendered:
+        return ""
+
+    try:
+        matched = re.search(
+            pattern,
+            str(text or ""),
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+    except re.error:
+        matched = re.search(
+            re.escape(pattern),
+            str(text or ""),
+            flags=re.IGNORECASE,
+        )
+
+    return rendered if matched else ""
+
+
+def _stage25g3c_compact_batch_secondary_once(
+    text: str,
+    eligible_checks: list[Any],
+    local_values: dict[str, Any],
+) -> dict[str, Any] | None:
+    from logic_llm_verifier import (
+        _call_ollama_json,
+    )
+
+    config = _stage25g3c_compact_batch_config(
+        local_values
+    )
+    if not isinstance(config, dict):
+        return None
+
+    if not bool(config.get("enabled", True)):
+        return None
+
+    if int(config.get("max_llm_calls") or 1) != 1:
+        return _stage25g3c_compact_diagnostic(
+            "compact_batch_invalid_max_llm_calls",
+            "max_llm_calls must be 1",
+        )
+
+    fields = config.get("fields")
+    if not isinstance(fields, list) or not fields:
+        return _stage25g3c_compact_diagnostic(
+            "compact_batch_missing_fields"
+        )
+
+    rule_records: dict[str, dict[str, Any]] = {}
+    for raw in eligible_checks:
+        record = _stage25g3c_compact_rule_record(raw)
+        if record is not None:
+            rule_records[record["id"]] = record
+
+    field_ids: list[str] = []
+    field_evidence: dict[str, str] = {}
+    structured_evidence: dict[str, str] = {}
+
+    for field in fields:
+        if not isinstance(field, dict):
+            return _stage25g3c_compact_diagnostic(
+                "compact_batch_invalid_field"
+            )
+
+        field_id = str(
+            field.get("field_id") or ""
+        ).strip()
+        if (
+            not field_id
+            or field_id in field_ids
+            or re.fullmatch(
+                r"[a-z][a-z0-9_]*",
+                field_id,
+            )
+            is None
+        ):
+            return _stage25g3c_compact_diagnostic(
+                "compact_batch_invalid_field_id",
+                field_id,
+            )
+
+        selectors = field.get("evidence_selectors")
+        if not isinstance(selectors, list):
+            selectors = []
+
+        raw_evidence = (
+            _stage25g3c_extract_compact_evidence(
+                text,
+                selectors,
+            )
+        )
+        structured = (
+            _stage25g3d_extract_structured_relation(
+                text,
+                field.get("structured_relation"),
+            )
+        )
+
+        evidence_parts: list[str] = []
+        if structured:
+            evidence_parts.extend(
+                [
+                    "[STRUCTURED_TABLE_RELATION]",
+                    structured,
+                ]
+            )
+        if raw_evidence:
+            evidence_parts.extend(
+                [
+                    "[RAW_EVIDENCE]",
+                    raw_evidence,
+                ]
+            )
+
+        field_ids.append(field_id)
+        structured_evidence[field_id] = structured
+        field_evidence[field_id] = "\n".join(
+            evidence_parts
+        ).strip()
+
+        if "control_expected" in field:
+            continue
+
+        rule_id = str(
+            field.get("rule_id") or ""
+        ).strip()
+        if not rule_id:
+            return _stage25g3c_compact_diagnostic(
+                "compact_batch_missing_rule_id",
+                field_id,
+            )
+        if rule_id not in rule_records:
+            return _stage25g3c_compact_diagnostic(
+                "compact_batch_rule_not_found",
+                rule_id,
+            )
+
+    schema = {
+        "type": "object",
+        "properties": {
+            field_id: {"type": "boolean"}
+            for field_id in field_ids
+        },
+        "required": list(field_ids),
+        "additionalProperties": False,
+    }
+
+    prompt_lines = [
+        str(
+            config.get("prompt_intro")
+            or (
+                "각 field를 전용 evidence만 보고 "
+                "독립적으로 판정한다."
+            )
+        ).strip(),
+        "",
+        "판정 기준:",
+    ]
+
+    for index, field in enumerate(fields, start=1):
+        field_id = str(field["field_id"])
+        prompt_lines.append(
+            f"{index}. field_id={field_id}"
+        )
+
+        if "control_expected" not in field:
+            rule_id = str(
+                field.get("rule_id") or ""
+            ).strip()
+            record = rule_records[rule_id]
+            prompt_lines.extend(
+                [
+                    f"   rule_id={rule_id}",
+                    (
+                        "   오류 조건="
+                        + str(
+                            record.get("wrong_claim")
+                            or ""
+                        ).strip()
+                    ),
+                    (
+                        "   정답 기준="
+                        + str(
+                            record.get("correct_rule")
+                            or ""
+                        ).strip()
+                    ),
+                ]
+            )
+
+        prompt_lines.append(
+            "   field criterion="
+            + str(
+                field.get("criterion") or ""
+            ).strip()
+        )
+
+        relation_hint = str(
+            field.get("relation_hint") or ""
+        ).strip()
+        if relation_hint:
+            prompt_lines.append(
+                f"   판정 보조={relation_hint}"
+            )
+
+        exclusion_hint = str(
+            field.get("exclusion_hint") or ""
+        ).strip()
+        if exclusion_hint:
+            prompt_lines.append(
+                f"   제외 조건={exclusion_hint}"
+            )
+
+    notes = config.get("global_notes")
+    if isinstance(notes, list) and notes:
+        prompt_lines.extend(["", "중요:"])
+        for note in notes:
+            prompt_lines.append(
+                "- " + str(note).strip()
+            )
+
+    prompt_lines.extend(
+        ["", "Field-specific Evidence:"]
+    )
+    for field_id in field_ids:
+        prompt_lines.extend(
+            [
+                f"[{field_id}]",
+                field_evidence[field_id]
+                or "(matching evidence 없음)",
+                "",
+            ]
+        )
+
+    prompt = "\n".join(prompt_lines).strip()
+
+    try:
+        response = _call_ollama_json(
+            prompt,
+            format_schema=schema,
+        )
+    except Exception as exc:
+        return _stage25g3c_compact_diagnostic(
+            "compact_batch_llm_call_failed",
+            repr(exc),
+        )
+
+    if (
+        not isinstance(response, dict)
+        or set(response) != set(field_ids)
+        or any(
+            not isinstance(response.get(field_id), bool)
+            for field_id in field_ids
+        )
+    ):
+        return _stage25g3c_compact_diagnostic(
+            "compact_batch_invalid_boolean_schema",
+            json.dumps(
+                response,
+                ensure_ascii=False,
+                default=str,
+            )[:1200],
+        )
+
+    for field in fields:
+        if "control_expected" not in field:
+            continue
+
+        field_id = str(field["field_id"])
+        expected = field.get("control_expected")
+        if not isinstance(expected, bool):
+            return _stage25g3c_compact_diagnostic(
+                "compact_batch_invalid_control_contract",
+                field_id,
+            )
+        if response[field_id] is not expected:
+            return _stage25g3c_compact_diagnostic(
+                "compact_batch_control_mismatch",
+                field_id,
+            )
+
+    effective_response = {
+        field_id: response[field_id]
+        for field_id in field_ids
+    }
+    arbitration: list[dict[str, Any]] = []
+
+    for field in fields:
+        if "control_expected" in field:
+            continue
+
+        field_id = str(field["field_id"])
+        raw_value = response[field_id]
+        evidence_present = bool(
+            field_evidence.get(field_id)
+        )
+        structured_spec = field.get(
+            "structured_relation"
+        )
+        authoritative_true = (
+            isinstance(structured_spec, dict)
+            and bool(
+                structured_spec.get(
+                    "authoritative_true"
+                )
+            )
+            and bool(
+                structured_evidence.get(field_id)
+            )
+        )
+
+        if authoritative_true:
+            effective_response[field_id] = True
+            if raw_value is not True:
+                arbitration.append(
+                    {
+                        "field_id": field_id,
+                        "action": (
+                            "structured_relation_"
+                            "false_negative_override"
+                        ),
+                        "raw_value": raw_value,
+                        "effective_value": True,
+                    }
+                )
+            continue
+
+        requires_evidence = bool(
+            field.get(
+                "require_nonempty_evidence_for_true",
+                True,
+            )
+        )
+        if (
+            raw_value is True
+            and requires_evidence
+            and not evidence_present
+        ):
+            effective_response[field_id] = False
+            arbitration.append(
+                {
+                    "field_id": field_id,
+                    "action": (
+                        "true_without_field_evidence_"
+                        "suppressed"
+                    ),
+                    "raw_value": True,
+                    "effective_value": False,
+                }
+            )
+
+    findings: list[dict[str, Any]] = []
+
+    for field in fields:
+        field_id = str(field["field_id"])
+        if "control_expected" in field:
+            continue
+        if effective_response[field_id] is not True:
+            continue
+
+        rule_id = str(
+            field.get("rule_id") or ""
+        ).strip()
+        record = rule_records[rule_id]
+
+        wrong_claim = str(
+            record.get("wrong_claim") or ""
+        ).strip()
+        finding = {
+            "id": rule_id,
+            "severity": str(
+                record.get("severity") or "fatal"
+            ).strip().lower(),
+            "message": (
+                "오류 주장 탐지: " + wrong_claim
+                if wrong_claim
+                else rule_id
+            ),
+            "correct_rule": str(
+                record.get("correct_rule") or ""
+            ).strip(),
+            "affected_layers": list(
+                record.get("affected_layers") or ["C"]
+            ),
+            "evidence": field_evidence.get(
+                field_id,
+                "",
+            ),
+            "source": (
+                "stage25g3d_compact_structured_"
+                "evidence_arbitration"
+            ),
+        }
+
+        ceiling = record.get("recommended_ceiling")
+        if ceiling is not None:
+            finding["recommended_ceiling"] = ceiling
+
+        findings.append(finding)
+
+    fatal_error_detected = any(
+        str(finding.get("severity") or "").lower()
+        == "fatal"
+        for finding in findings
+    )
+
+    return {
+        "mode": _mode_from_findings(findings),
+        "fatal_error_detected": fatal_error_detected,
+        "findings": findings,
+        "diagnostics": [],
+        "compact_batch_verification": {
+            "status": "accepted",
+            "llm_call_count": 1,
+            "raw_field_values": {
+                field_id: response[field_id]
+                for field_id in field_ids
+            },
+            "field_values": {
+                field_id: effective_response[field_id]
+                for field_id in field_ids
+            },
+            "field_evidence_present": {
+                field_id: bool(
+                    field_evidence.get(field_id)
+                )
+                for field_id in field_ids
+            },
+            "structured_true_fields": [
+                field_id
+                for field_id in field_ids
+                if bool(
+                    structured_evidence.get(field_id)
+                )
+            ],
+            "arbitration": arbitration,
+            "diagnostic_only": bool(
+                config.get("diagnostic_only", True)
+            ),
+        },
+    }
+
+
 def _evaluate_topic_fatal_checks_with_llm_stage19_contract(
     text: str,
     topic_check: dict[str, Any],
@@ -3407,6 +5087,16 @@ def _evaluate_topic_fatal_checks_with_llm_stage19_contract(
     }
     rule_ids = list(rule_map)
     batch_size = len(rule_ids)
+    compact_result = (
+        _stage25g3c_compact_batch_secondary_once(
+            text,
+            eligible_checks,
+            locals(),
+        )
+    )
+    if compact_result is not None:
+        return compact_result
+
     schema = _stage22_extend_batch_schema(
         _topic_fatal_batch_finding_schema(
             eligible_checks

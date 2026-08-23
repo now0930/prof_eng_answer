@@ -485,25 +485,136 @@ def _promote_question_type_coverage_to_root_v1(grade: dict[str, Any]) -> dict[st
     if not isinstance(coverage, dict):
         return grade
 
-    grade["question_type_coverage"] = coverage
-
+    root_qtype = grade.get("question_type")
     coverage_qtype = coverage.get("question_type")
-    if coverage_qtype:
-        qtype = normalize_question_type(coverage_qtype)
-        profile = get_question_type_profile(qtype)
+    canonical_source = root_qtype or coverage_qtype
 
-        grade["question_type"] = qtype
-        grade["question_type_v2"] = {
-            "question_type": qtype,
-            "name_ko": coverage.get("name_ko") or profile.get("name_ko"),
-            "sub_criteria": question_type_sub_criteria(qtype),
-            "c_fact_focus": question_type_c_focus(qtype),
-            "d_field_judgement_focus": question_type_d_focus(qtype),
-            "note": (
-                "question_type_v2는 B항목 요구사항 완전성과 C항목 Fact 전개, "
-                "D항목 현장 판단을 보완하는 평가 lens입니다."
+    if not canonical_source:
+        grade["question_type_coverage"] = coverage
+        return grade
+
+    qtype = normalize_question_type(canonical_source)
+    profile = get_question_type_profile(qtype)
+    coverage_normalized = (
+        normalize_question_type(coverage_qtype)
+        if coverage_qtype
+        else None
+    )
+    type_mismatch = bool(
+        root_qtype
+        and coverage_normalized
+        and coverage_normalized != qtype
+    )
+
+    coverage = dict(coverage)
+
+    if type_mismatch:
+        # Coverage built for a stale semantic lens cannot replace the
+        # question-only canonical type. Explicit requirement evidence is
+        # topic-neutral and remains preserved.
+        resolved_name = profile.get("name_ko")
+        coverage["question_type"] = qtype
+        coverage["name_ko"] = resolved_name
+        coverage["overall_coverage"] = "unknown"
+        coverage["coverage_source"] = (
+            "question_only_type_owner_mismatch_guard"
+        )
+        coverage["sub_criteria_coverage"] = []
+        coverage["missing_sub_criteria"] = []
+        coverage["partial_sub_criteria"] = []
+        coverage["c_fact_focus_coverage"] = {
+            "covered": [],
+            "missing": [],
+        }
+        coverage["d_field_judgement_focus_coverage"] = {
+            "covered": [],
+            "missing": [],
+        }
+        coverage["scoring_hint"] = (
+            "semantic question_type coverage가 question-only "
+            "deterministic router와 불일치하여 유형별 coverage를 "
+            "점수 및 충족 판정에서 제외했습니다."
+        )
+        coverage["question_type_owner_reconciliation"] = {
+            "canonical_owner": (
+                "question_only_deterministic_router"
+            ),
+            "canonical_question_type": qtype,
+            "discarded_coverage_question_type": (
+                coverage_normalized
+            ),
+            "type_specific_coverage_invalidated": True,
+            "explicit_requirement_coverage_preserved": (
+                isinstance(
+                    coverage.get(
+                        "explicit_requirement_coverage"
+                    ),
+                    dict,
+                )
             ),
         }
+
+        summary = grade.get(
+            "question_type_coverage_summary"
+        )
+        if not isinstance(summary, dict):
+            summary = {}
+        summary.update(
+            {
+                "question_type": qtype,
+                "name_ko": resolved_name,
+                "overall_coverage": "unknown",
+                "sub_criteria_total": 0,
+                "sub_criteria_present": 0,
+                "sub_criteria_correct": 0,
+                "sub_criteria_partial": 0,
+                "sub_criteria_wrong": 0,
+                "sub_criteria_incorrect": 0,
+                "sub_criteria_missing": 0,
+                "mention_coverage_ratio": None,
+                "mention_coverage_percent": None,
+                "correctness_coverage_ratio": None,
+                "correctness_coverage_percent": None,
+                "full_correct_coverage": False,
+                "weighted_coverage_score": 0.0,
+                "weighted_coverage_ratio": None,
+                "weighted_coverage_percent": None,
+                "criteria_status_rows": [],
+                "present_criteria": [],
+                "correct_criteria": [],
+                "partial_criteria": [],
+                "wrong_criteria": [],
+                "incorrect_criteria": [],
+                "missing_criteria": [],
+            }
+        )
+        grade[
+            "question_type_coverage_summary"
+        ] = summary
+    else:
+        resolved_name = (
+            coverage.get("name_ko")
+            or profile.get("name_ko")
+        )
+        coverage["question_type"] = qtype
+        coverage["name_ko"] = resolved_name
+
+    grade["question_type_coverage"] = coverage
+    grade["question_type"] = qtype
+    grade["question_type_name"] = resolved_name
+
+    # Preserve the locked question_type_v2 serialization contract.
+    grade["question_type_v2"] = {
+        "question_type": qtype,
+        "name_ko": resolved_name,
+        "sub_criteria": question_type_sub_criteria(qtype),
+        "c_fact_focus": question_type_c_focus(qtype),
+        "d_field_judgement_focus": question_type_d_focus(qtype),
+        "note": (
+            "question_type_v2는 B항목 요구사항 완전성과 C항목 Fact 전개, "
+            "D항목 현장 판단을 보완하는 평가 lens입니다."
+        ),
+    }
 
     return grade
 
@@ -629,18 +740,52 @@ def _apply_incorrect_requirement_status_contract_v3(grade):
     qtype_v2 = grade.get("question_type_v2")
 
     if isinstance(qtype_v2, dict):
-        final_type = str(
+        root_type = str(
+            grade.get("question_type") or ""
+        ).strip()
+        qtype_v2_type = str(
             qtype_v2.get("question_type") or ""
         ).strip()
-        final_name = str(
-            qtype_v2.get("name_ko") or ""
-        ).strip()
+        final_type = root_type or qtype_v2_type
+        final_name = ""
 
         if final_type:
-            grade["question_type"] = final_type
+            final_type = normalize_question_type(
+                final_type
+            )
+            profile = get_question_type_profile(
+                final_type
+            )
+            final_name = str(
+                grade.get("question_type_name")
+                or (
+                    qtype_v2.get("name_ko")
+                    if qtype_v2_type == final_type
+                    else None
+                )
+                or profile.get("name_ko")
+                or ""
+            ).strip()
 
-        if final_name:
+            grade["question_type"] = final_type
             grade["question_type_name"] = final_name
+            qtype_v2["question_type"] = final_type
+            qtype_v2["name_ko"] = final_name
+            qtype_v2["sub_criteria"] = (
+                question_type_sub_criteria(
+                    final_type
+                )
+            )
+            qtype_v2["c_fact_focus"] = (
+                question_type_c_focus(
+                    final_type
+                )
+            )
+            qtype_v2[
+                "d_field_judgement_focus"
+            ] = question_type_d_focus(
+                final_type
+            )
 
         coverage_summary = grade.get(
             "question_type_coverage_summary"
@@ -1203,3 +1348,868 @@ def attach_question_type_coverage_feedback(
         result,
         question_text,
     )
+
+# === STAGE25G3G_FATAL_COVERAGE_CONSISTENCY_V1 ===
+# Reclassify only coverage rows that semantically overlap fatal logic
+# findings. This adapter remains non-scoring.
+import re as _stage25g3g_re
+
+_STAGE25G3G_PREVIOUS_ATTACH_QUESTION_TYPE_COVERAGE_FEEDBACK = (
+    attach_question_type_coverage_feedback
+)
+
+_STAGE25G3G_TOKEN_PATTERN = _stage25g3g_re.compile(
+    r"[A-Za-z][A-Za-z0-9]{1,}|[가-힣]{2,}"
+)
+_STAGE25G3G_STOP_TOKENS = {
+    "and",
+    "answer",
+    "claim",
+    "condition",
+    "detected",
+    "error",
+    "fatal",
+    "finding",
+    "logic",
+    "mapped",
+    "mapping",
+    "profile",
+    "rule",
+    "software",
+    "test",
+    "testing",
+    "validation",
+    "verification",
+    "wrong",
+    "검증",
+    "답안",
+    "오류",
+    "조건",
+    "항목",
+}
+
+
+def _stage25g3g_string_values(value: Any) -> list[str]:
+    values: list[str] = []
+
+    def walk(node: Any) -> None:
+        if isinstance(node, str):
+            prepared = node.strip()
+            if prepared:
+                values.append(prepared)
+            return
+        if isinstance(node, dict):
+            for key, child in node.items():
+                key_text = str(key or "").strip()
+                if key_text:
+                    values.append(key_text)
+                walk(child)
+            return
+        if isinstance(node, list):
+            for child in node:
+                walk(child)
+
+    walk(value)
+    return values
+
+
+def _stage25g3g_tokens(value: Any) -> set[str]:
+    tokens: set[str] = set()
+    for raw in _stage25g3g_string_values(value):
+        prepared = _stage25g3g_re.sub(
+            r"[_/.:+\-]+",
+            " ",
+            raw,
+        )
+        for token in _STAGE25G3G_TOKEN_PATTERN.findall(
+            prepared
+        ):
+            normalized = token.casefold()
+            if normalized in _STAGE25G3G_STOP_TOKENS:
+                continue
+            if len(normalized) < 2:
+                continue
+            tokens.add(normalized)
+    return tokens
+
+
+def _stage25g3g_logic_evaluations(
+    grade: dict[str, Any],
+) -> list[dict[str, Any]]:
+    found: list[dict[str, Any]] = []
+    seen: set[int] = set()
+
+    def walk(node: Any) -> None:
+        if isinstance(node, dict):
+            identity = id(node)
+            if identity in seen:
+                return
+            seen.add(identity)
+
+            findings = node.get("findings")
+            if (
+                isinstance(findings, list)
+                and (
+                    "fatal_error_detected" in node
+                    or "score_policy" in node
+                    or "deduction_elements" in node
+                )
+            ):
+                found.append(node)
+
+            for key, child in node.items():
+                if key in {
+                    "logic_check_evaluation",
+                    "logic_check_result",
+                    "secondary_logic_evaluations",
+                    "selected_secondary_evaluations",
+                }:
+                    walk(child)
+                elif isinstance(child, (dict, list)):
+                    walk(child)
+            return
+
+        if isinstance(node, list):
+            for child in node:
+                walk(child)
+
+    for key in (
+        "logic_check_evaluation",
+        "logic_check_result",
+    ):
+        walk(grade.get(key))
+
+    return found
+
+
+def _stage25g3g_fatal_findings(
+    grade: dict[str, Any],
+) -> list[dict[str, Any]]:
+    findings: list[dict[str, Any]] = []
+    seen_ids: set[str] = set()
+
+    for evaluation in _stage25g3g_logic_evaluations(
+        grade
+    ):
+        raw_findings = evaluation.get("findings")
+        if not isinstance(raw_findings, list):
+            continue
+        for row in raw_findings:
+            if not isinstance(row, dict):
+                continue
+            if str(
+                row.get("severity") or ""
+            ).strip().lower() != "fatal":
+                continue
+
+            finding_id = str(
+                row.get("id") or ""
+            ).strip()
+            identity = (
+                finding_id
+                or repr(sorted(row.items()))
+            )
+            if identity in seen_ids:
+                continue
+            seen_ids.add(identity)
+            findings.append(row)
+
+    return findings
+
+
+def _stage25g3g_row_text(
+    row: dict[str, Any],
+) -> str:
+    values = []
+    for key in (
+        "criterion",
+        "demand_id",
+        "evidence",
+        "reason",
+        "rationale",
+        "requirement_text",
+        "description",
+        "label",
+        "name",
+    ):
+        value = row.get(key)
+        if isinstance(value, str) and value.strip():
+            values.append(value.strip())
+    return " ".join(values)
+
+
+# === STAGE25G3G1_FATAL_COVERAGE_PRECISION_V1 ===
+_STAGE25G3G1_GENERIC_RELATION_TOKENS = {
+    "answer",
+    "claim",
+    "condition",
+    "error",
+    "fatal",
+    "finding",
+    "integrity",
+    "integration",
+    "unit",
+    "logic",
+    "mapping",
+    "model",
+    "profile",
+    "rule",
+    "safety",
+    "sil",
+    "software",
+    "stage",
+    "system",
+    "test",
+    "testing",
+    "validation",
+    "verification",
+    "vmodel",
+    "wrong",
+}
+
+
+def _stage25g3g1_normalize_anchor(
+    value: Any,
+) -> str:
+    return " ".join(
+        str(value or "")
+        .replace("_", " ")
+        .replace("-", " ")
+        .replace("/", " ")
+        .split()
+    ).casefold()
+
+
+def _stage25g3g1_finding_direct_anchors(
+    finding: dict[str, Any],
+) -> list[str]:
+    anchors: list[str] = []
+
+    def add(value: Any) -> None:
+        prepared = (
+            _stage25g3g1_normalize_anchor(
+                value
+            )
+        )
+        if not prepared:
+            return
+        if prepared in (
+            _STAGE25G3G1_GENERIC_RELATION_TOKENS
+        ):
+            return
+        if prepared not in anchors:
+            anchors.append(prepared)
+
+    for key in (
+        "coverage_anchor_terms",
+        "anchor_terms",
+        "evidence_terms",
+    ):
+        raw = finding.get(key)
+        if isinstance(raw, list):
+            for value in raw:
+                add(value)
+        elif isinstance(raw, str):
+            add(raw)
+
+    finding_id = str(
+        finding.get("id") or ""
+    ).strip().casefold()
+    if finding_id:
+        relation = finding_id
+        if "_fatal_" in relation:
+            relation = relation.split(
+                "_fatal_",
+                1,
+            )[1]
+
+        relation_sides = []
+        for separator in (
+            "_is_",
+            "_mapped_to_",
+            "_maps_to_",
+            "_as_",
+            "_means_",
+            "_to_",
+        ):
+            if separator in relation:
+                left, right = relation.split(
+                    separator,
+                    1,
+                )
+                relation_sides.extend(
+                    [left, right]
+                )
+                break
+        if not relation_sides:
+            relation_sides.append(relation)
+
+        for side in relation_sides:
+            raw_tokens = [
+                token
+                for token in side.split("_")
+                if token
+                and not token.startswith("sw")
+                and not token.isdigit()
+            ]
+            significant_tokens = [
+                token
+                for token in raw_tokens
+                if token
+                not in (
+                    _STAGE25G3G1_GENERIC_RELATION_TOKENS
+                )
+            ]
+            if not significant_tokens:
+                continue
+
+            if len(raw_tokens) >= 2:
+                # Preserve the complete multi-token technical relation,
+                # even when one component such as "integrity" is generic.
+                # Examples:
+                #   random_hardware_integrity
+                # Reject generic stage relations because they have no
+                # significant token after filtering:
+                #   software_test, integration_test
+                add(" ".join(raw_tokens))
+            elif (
+                len(significant_tokens) == 1
+                and len(significant_tokens[0]) >= 3
+                and significant_tokens[0]
+                not in {
+                    "random",
+                    "hardware",
+                }
+            ):
+                add(significant_tokens[0])
+
+    # Do not scan every string nested in the finding for acronyms.
+    # Shared profile/context text may contain another relation's anchor.
+    # Only explicit anchor fields and the finding-ID relation axis are used.
+    return sorted(
+        anchors,
+        key=lambda value: (
+            -len(value.split()),
+            -len(value),
+            value,
+        ),
+    )
+
+
+def _stage25g3g1_anchor_in_text(
+    anchor: str,
+    row_text: str,
+) -> bool:
+    prepared_anchor = (
+        _stage25g3g1_normalize_anchor(
+            anchor
+        )
+    )
+    prepared_row = (
+        _stage25g3g1_normalize_anchor(
+            row_text
+        )
+    )
+    if not prepared_anchor or not prepared_row:
+        return False
+
+    if prepared_anchor.isascii():
+        pattern = (
+            r"(?<![a-z0-9])"
+            + _stage25g3g_re.escape(
+                prepared_anchor
+            ).replace(
+                r"\ ",
+                r"\s+",
+            )
+            + r"(?![a-z0-9])"
+        )
+        return bool(
+            _stage25g3g_re.search(
+                pattern,
+                prepared_row,
+            )
+        )
+
+    return prepared_anchor in prepared_row
+
+
+def _stage25g3g_row_match(
+    row: dict[str, Any],
+    finding: dict[str, Any],
+    token_frequency: dict[str, int],
+) -> tuple[bool, list[str]]:
+    del token_frequency
+
+    row_text = _stage25g3g_row_text(row)
+    anchors = (
+        _stage25g3g1_finding_direct_anchors(
+            finding
+        )
+    )
+    matched = [
+        anchor
+        for anchor in anchors
+        if _stage25g3g1_anchor_in_text(
+            anchor,
+            row_text,
+        )
+    ]
+    return bool(matched), matched
+
+
+def _stage25g3g1_unique_reclassification_keys(
+    grade: dict[str, Any],
+) -> set[tuple[str, tuple[str, ...]]]:
+    keys: set[
+        tuple[str, tuple[str, ...]]
+    ] = set()
+
+    for container_name, row_key in (
+        (
+            "question_type_coverage",
+            "sub_criteria_coverage",
+        ),
+        (
+            "question_type_coverage_summary",
+            "criteria_status_rows",
+        ),
+    ):
+        container = grade.get(
+            container_name
+        )
+        if not isinstance(container, dict):
+            continue
+        rows = container.get(row_key)
+        if not isinstance(rows, list):
+            continue
+
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            metadata = row.get(
+                "fatal_logic_reclassification"
+            )
+            if not isinstance(metadata, dict):
+                continue
+
+            criterion = str(
+                row.get("criterion")
+                or row.get("demand_id")
+                or row.get(
+                    "requirement_text"
+                )
+                or ""
+            ).strip().casefold()
+            finding_ids = tuple(
+                sorted(
+                    str(value)
+                    for value in (
+                        metadata.get(
+                            "finding_ids"
+                        )
+                        or []
+                    )
+                    if str(value).strip()
+                )
+            )
+            if criterion and finding_ids:
+                keys.add(
+                    (
+                        criterion,
+                        finding_ids,
+                    )
+                )
+
+    return keys
+
+
+def _stage25g3g1_physical_reclassification_count(
+    grade: dict[str, Any],
+) -> int:
+    count = 0
+    for container_name, row_key in (
+        (
+            "question_type_coverage",
+            "sub_criteria_coverage",
+        ),
+        (
+            "question_type_coverage_summary",
+            "criteria_status_rows",
+        ),
+    ):
+        container = grade.get(
+            container_name
+        )
+        if not isinstance(container, dict):
+            continue
+        rows = container.get(row_key)
+        if not isinstance(rows, list):
+            continue
+        count += sum(
+            isinstance(row, dict)
+            and isinstance(
+                row.get(
+                    "fatal_logic_reclassification"
+                ),
+                dict,
+            )
+            for row in rows
+        )
+    return count
+
+
+
+def _stage25g3g_refresh_summary_counts(
+    coverage: dict[str, Any],
+) -> None:
+    rows = coverage.get("criteria_status_rows")
+    if not isinstance(rows, list):
+        return
+
+    counts = {
+        "present": 0,
+        "correct": 0,
+        "partial": 0,
+        "wrong": 0,
+        "missing": 0,
+    }
+    total = 0
+    correctness_credit = 0.0
+    mentioned_count = 0
+
+    for row in rows:
+        if not isinstance(row, dict):
+            continue
+        status = str(
+            row.get("status")
+            or row.get("demand_state")
+            or ""
+        ).strip().lower()
+        if status in {"present", "correct"}:
+            counts["present"] += 1
+            counts["correct"] += 1
+            correctness_credit += 1.0
+            mentioned_count += 1
+        elif status == "partial":
+            counts["partial"] += 1
+            correctness_credit += 0.5
+            mentioned_count += 1
+        elif status in {
+            "wrong",
+            "incorrect",
+            "contradicted",
+        }:
+            counts["wrong"] += 1
+            mentioned_count += 1
+        else:
+            counts["missing"] += 1
+        total += 1
+
+    coverage["sub_criteria_total"] = total
+    coverage["sub_criteria_present"] = (
+        counts["present"]
+    )
+    coverage["sub_criteria_correct"] = (
+        counts["correct"]
+    )
+    coverage["sub_criteria_partial"] = (
+        counts["partial"]
+    )
+    coverage["sub_criteria_wrong"] = (
+        counts["wrong"]
+    )
+    coverage["sub_criteria_missing"] = (
+        counts["missing"]
+    )
+    coverage["state_counts"] = dict(counts)
+
+    if total > 0:
+        correctness_ratio = (
+            correctness_credit / total
+        )
+        mention_ratio = mentioned_count / total
+    else:
+        correctness_ratio = 0.0
+        mention_ratio = 0.0
+
+    coverage["weighted_coverage_score"] = round(
+        correctness_credit,
+        4,
+    )
+    coverage["weighted_coverage_ratio"] = round(
+        correctness_ratio,
+        6,
+    )
+    coverage["weighted_coverage_percent"] = round(
+        correctness_ratio * 100.0,
+        1,
+    )
+    coverage["correctness_coverage_ratio"] = round(
+        correctness_ratio,
+        6,
+    )
+    coverage[
+        "correctness_coverage_percent"
+    ] = round(
+        correctness_ratio * 100.0,
+        1,
+    )
+    coverage["mention_coverage_ratio"] = round(
+        mention_ratio,
+        6,
+    )
+    coverage["mention_coverage_percent"] = round(
+        mention_ratio * 100.0,
+        1,
+    )
+    coverage["full_correct_coverage"] = bool(
+        total > 0
+        and counts["correct"] == total
+    )
+
+
+def _stage25g3g_reconcile_coverage_dict(
+    coverage: dict[str, Any],
+    fatal_findings: list[dict[str, Any]],
+) -> int:
+    row_keys = (
+        "sub_criteria_coverage",
+        "criteria_status_rows",
+        "requirements",
+        "rows",
+    )
+    candidate_rows: list[dict[str, Any]] = []
+    for key in row_keys:
+        rows = coverage.get(key)
+        if not isinstance(rows, list):
+            continue
+        candidate_rows.extend(
+            row
+            for row in rows
+            if isinstance(row, dict)
+        )
+
+    if not candidate_rows or not fatal_findings:
+        return 0
+
+    token_frequency: dict[str, int] = {}
+    for row in candidate_rows:
+        for token in _stage25g3g_tokens(
+            _stage25g3g_row_text(row)
+        ):
+            token_frequency[token] = (
+                token_frequency.get(token, 0)
+                + 1
+            )
+
+    changed = 0
+    for row in candidate_rows:
+        matched_ids: list[str] = []
+        matched_tokens: list[str] = []
+
+        for finding in fatal_findings:
+            matched, tokens = _stage25g3g_row_match(
+                row,
+                finding,
+                token_frequency,
+            )
+            if not matched:
+                continue
+            finding_id = str(
+                finding.get("id") or ""
+            ).strip()
+            if (
+                finding_id
+                and finding_id not in matched_ids
+            ):
+                matched_ids.append(finding_id)
+            for token in tokens:
+                if token not in matched_tokens:
+                    matched_tokens.append(token)
+
+        if not matched_ids:
+            continue
+
+        current_status = str(
+            row.get("status")
+            or row.get("demand_state")
+            or ""
+        ).strip().lower()
+        metadata = row.get(
+            "fatal_logic_reclassification"
+        )
+        if not isinstance(metadata, dict):
+            metadata = {}
+
+        previous_ids = metadata.get("finding_ids")
+        if not isinstance(previous_ids, list):
+            previous_ids = []
+
+        merged_ids = [
+            str(value)
+            for value in previous_ids
+            if str(value).strip()
+        ]
+        for finding_id in matched_ids:
+            if finding_id not in merged_ids:
+                merged_ids.append(finding_id)
+
+        if (
+            current_status != "wrong"
+            or set(previous_ids) != set(merged_ids)
+        ):
+            changed += 1
+
+        row["status"] = "wrong"
+        row["demand_state"] = "WRONG"
+        row["mentioned"] = True
+        row["fatal_logic_reclassification"] = {
+            "version": (
+                "stage25g3g_fatal_coverage_"
+                "consistency_v1"
+            ),
+            "original_status": (
+                metadata.get("original_status")
+                or current_status
+                or "unspecified"
+            ),
+            "finding_ids": merged_ids,
+            "matched_tokens": sorted(
+                set(matched_tokens)
+            ),
+            "score_effect": "none",
+        }
+
+        caution = (
+            "구조화 검증에서 관련 핵심 이론 오답이 "
+            "확인되어 WRONG으로 재분류됨"
+        )
+        evidence = str(
+            row.get("evidence") or ""
+        ).strip()
+        if caution not in evidence:
+            row["evidence"] = (
+                evidence + " " + caution
+            ).strip()
+
+    _stage25g3g_refresh_summary_counts(
+        coverage
+    )
+    return changed
+
+
+def _stage25g3g_reconcile_fatal_coverage(
+    grade: dict[str, Any],
+) -> dict[str, Any]:
+    if not isinstance(grade, dict):
+        return grade
+
+    fatal_findings = _stage25g3g_fatal_findings(
+        grade
+    )
+    if not fatal_findings:
+        return grade
+
+    changed = 0
+    visited: set[int] = set()
+
+    def walk(node: Any) -> None:
+        nonlocal changed
+        if isinstance(node, dict):
+            identity = id(node)
+            if identity in visited:
+                return
+            visited.add(identity)
+
+            if any(
+                isinstance(node.get(key), list)
+                for key in (
+                    "sub_criteria_coverage",
+                    "criteria_status_rows",
+                    "requirements",
+                    "rows",
+                )
+            ):
+                changed += (
+                    _stage25g3g_reconcile_coverage_dict(
+                        node,
+                        fatal_findings,
+                    )
+                )
+
+            for child in node.values():
+                if isinstance(child, (dict, list)):
+                    walk(child)
+            return
+
+        if isinstance(node, list):
+            for child in node:
+                walk(child)
+
+    for key in (
+        "question_type_coverage",
+        "question_type_coverage_summary",
+    ):
+        walk(grade.get(key))
+
+    grade["fatal_coverage_consistency"] = {
+        "version": (
+            "stage25g3g_fatal_coverage_"
+            "consistency_v1"
+        ),
+        "fatal_finding_ids": [
+            str(row.get("id") or "")
+            for row in fatal_findings
+            if str(row.get("id") or "").strip()
+        ],
+        "reclassified_row_count": len(
+            _stage25g3g1_unique_reclassification_keys(
+                grade
+            )
+        ),
+        "reclassified_physical_row_count": (
+            _stage25g3g1_physical_reclassification_count(
+                grade
+            )
+        ),
+        "changed_row_count_this_pass": changed,
+        "match_strategy": (
+            "stage25g3g1_direct_relation_anchor_v1"
+        ),
+        "score_effect": "none",
+    }
+    return grade
+
+
+def attach_question_type_coverage_feedback(
+    *args: Any,
+    **kwargs: Any,
+) -> dict[str, Any]:
+    grade = None
+    if args and isinstance(args[0], dict):
+        grade = args[0]
+    elif isinstance(kwargs.get("grade"), dict):
+        grade = kwargs.get("grade")
+
+    if isinstance(grade, dict):
+        _stage25g3g_reconcile_fatal_coverage(
+            grade
+        )
+
+    result = (
+        _STAGE25G3G_PREVIOUS_ATTACH_QUESTION_TYPE_COVERAGE_FEEDBACK(
+            *args,
+            **kwargs,
+        )
+    )
+    output = (
+        result
+        if isinstance(result, dict)
+        else grade
+    )
+    if isinstance(output, dict):
+        _stage25g3g_reconcile_fatal_coverage(
+            output
+        )
+    return result
