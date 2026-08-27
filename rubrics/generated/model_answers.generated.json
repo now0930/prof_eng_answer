@@ -1,5 +1,5 @@
 {
-  "version": "sha256-f7f8bb50225d7d091c477e0182cd61a9eef245d575059abc2d0993301c629286-generated-topic-pack-model-answers",
+  "version": "sha256-9a538f37b58dedd074897dc9f8407da48296bbe710f929c9c58a1bcb1230b5c4-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -23577,6 +23577,35 @@
             "validation_definition",
             "pfd_pfh_mode_boundary",
             "quantitative_assumptions"
+          ]
+        },
+        {
+          "pattern": "단위시험(Unit Testing)은 소프트웨어 모듈의 결함을 검출하는 활동이다. random hardware failure에 대한 하드웨어 무결성 입증과 동일하지 않다.",
+          "intent": "functional safety software lifecycle and assurance",
+          "required_anchor_ids": [
+            "random_hardware_failure__unit_test_not_random_hardware_integrity",
+            "systematic_failure",
+            "tool_qualification_basis",
+            "library_validation_control"
+          ]
+        },
+        {
+          "pattern": "MISRA는 코딩 표준 준수와 정적분석 관점의 규칙 집합이다. 단위시험 도구로 분류하지 않는다.",
+          "intent": "functional safety software lifecycle and assurance",
+          "required_anchor_ids": [
+            "random_hardware_failure_unit_test_not_random_hardware_integrity__misra_not_unit_test_tool",
+            "systematic_failure",
+            "tool_qualification_basis",
+            "library_validation_control"
+          ]
+        },
+        {
+          "pattern": "V-model은 생명주기 검증 구조를 제공하지만 그 자체만으로 SIL 달성을 보장하지 않는다. 상세 생명주기와 추적성은 instrumentation_control_software_lifecycle_v_model_traceability_verification_validation이 소유한다.",
+          "intent": "functional safety software lifecycle and assurance",
+          "required_anchor_ids": [
+            "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil",
+            "sil_property_of_safety_function",
+            "software_safety_lifecycle"
           ]
         }
       ],

@@ -1,5 +1,5 @@
 {
-  "version": "sha256-f7f8bb50225d7d091c477e0182cd61a9eef245d575059abc2d0993301c629286-generated-topic-pack-importance",
+  "version": "sha256-9a538f37b58dedd074897dc9f8407da48296bbe710f929c9c58a1bcb1230b5c4-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -1649,7 +1649,10 @@
         "독립성·분리·공통원인·다양성의 Trade-off를 설명한다.",
         "인증·Safety Manual·Proven in Use·Tool·Library의 증거 한계를 설명한다.",
         "Modification, Bypass, Override, Audit와 Competence를 운영통제로 연결한다.",
-        "PFDavg/PFH/RRF와 근사식의 적용 가정을 명시한다."
+        "PFDavg/PFH/RRF와 근사식의 적용 가정을 명시한다.",
+        "단위시험은 소프트웨어 모듈의 결함을 검출하는 활동이며 random hardware failure에 대한 하드웨어 무결성 입증과 동일하지 않다.",
+        "MISRA는 코딩 표준 준수와 정적분석 관점의 규칙 집합이며 단위시험 도구로 분류하지 않는다.",
+        "V-model은 생명주기 검증 구조를 제공하지만 그 자체만으로 SIL 달성을 보장하지 않는다. 상세 생명주기와 추적성은 instrumentation_control_software_lifecycle_v_model_traceability_verification_validation이 소유한다."
       ],
       "note": "기능안전의 정량 목표와 체계적 고장 억제는 상호 대체할 수 없다. 표준 Clause, 인증범위와 정량 가정은 verify-first 한다.",
       "revision_notes": [

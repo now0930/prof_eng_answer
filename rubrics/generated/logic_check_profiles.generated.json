@@ -1,5 +1,5 @@
 {
-  "version": "sha256-f7f8bb50225d7d091c477e0182cd61a9eef245d575059abc2d0993301c629286-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-9a538f37b58dedd074897dc9f8407da48296bbe710f929c9c58a1bcb1230b5c4-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -28739,7 +28739,7 @@
         {
           "id": "sw05_fatal_software_test_is_random_hardware_integrity",
           "severity": "fatal",
-          "wrong_claim": "단위시험·통합시험·시스템시험 같은 소프트웨어 시험단계를 Random Hardware Integrity의 직접 통제수단 또는 SIL 요소로 대응한다.",
+          "wrong_claim": "단위시험·통합시험·시스템시험 같은 소프트웨어 시험단계를 Random Hardware Integrity의 직접 통제수단 또는 SIL 요소로 대응한다. MISRA는 코딩 표준 준수와 정적분석 관점의 규칙 집합이며 단위시험 도구로 분류하지 않는다.",
           "correct_rule": "소프트웨어 V&V와 시험은 주로 체계적 결함 억제와 Systematic Capability 증거를 제공한다. Random Hardware Integrity는 고장률, PFDavg·PFH, 진단범위, Proof Test, 수리와 공통원인 같은 확률적 하드웨어 근거로 평가한다.",
           "affected_layers": [
             "C",
