@@ -25,6 +25,7 @@ THEORY_TOPICS = {
     "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",
     "root_locus_stability_gain_design",
     "routh_hurwitz_stability_criterion_gain_range",
+    "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
     "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
     "second_order_lag_response_by_damping_ratio",
     "second_order_system_resonance_frequency_response",
@@ -99,7 +100,7 @@ ALLOWED_SELECTION_IMPORTANCE = {
 }
 
 EXPECTED_DIFFICULTY_COUNTS = {
-    "THEORY_CORE": 22,
+    "THEORY_CORE": 23,
     "FIELD_APPLICATION": 37,
     "DESIGN_EVALUATION": 16,
 }

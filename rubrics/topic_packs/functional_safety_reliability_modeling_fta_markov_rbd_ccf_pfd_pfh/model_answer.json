@@ -1,0 +1,231 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+  "title_ko": "기능안전 신뢰도 모델링: FTA·Markov·RBD·CCF·PFDavg·PFH",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {
+      "pattern": "기능안전 시스템의 RBD, FTA와 Markov Model을 비교하고 적용 방법을 설명하시오.",
+      "intent": "compare reliability modeling methods and selection criteria",
+      "required_anchor_ids": [
+        "fsrm_rbd_success_path",
+        "fsrm_fta_top_event",
+        "fsrm_markov_state_transition",
+        "fsrm_model_purpose_boundary"
+      ]
+    },
+    {
+      "pattern": "SIS의 PFDavg와 PFH를 demand mode에 따라 구분하여 설명하시오.",
+      "intent": "distinguish pfdavg and pfh by demand mode",
+      "required_anchor_ids": [
+        "fsrm_low_demand_pfdavg",
+        "fsrm_high_continuous_demand_pfh",
+        "fsrm_demand_mode_metric_selection",
+        "fsrm_approximation_conditions"
+      ]
+    },
+    {
+      "pattern": "1oo1, 1oo2, 2oo2, 2oo3 구조의 신뢰도 특성과 선정 시 고려사항을 설명하시오.",
+      "intent": "voting architecture reliability and availability tradeoff",
+      "required_anchor_ids": [
+        "fsrm_voting_tradeoff",
+        "fsrm_hft_not_sil_guarantee",
+        "fsrm_ccf_redundancy_impact",
+        "fsrm_beta_factor"
+      ]
+    },
+    {
+      "pattern": "PFDavg 산정 시 CCF, Diagnostic Coverage, Proof Test Interval과 Coverage의 영향을 설명하시오.",
+      "intent": "quantitative effects of ccf diagnostics and proof testing",
+      "required_anchor_ids": [
+        "fsrm_ccf_redundancy_impact",
+        "fsrm_beta_factor",
+        "fsrm_diagnostic_vs_proof_coverage",
+        "fsrm_proof_test_interval_exposure"
+      ]
+    },
+    {
+      "pattern": "Sensor, Logic Solver와 Final Element로 구성된 전체 SIF의 정량 평가 절차를 설명하시오.",
+      "intent": "complete sif quantitative evaluation boundary",
+      "required_anchor_ids": [
+        "fsrm_complete_sif_boundary",
+        "fsrm_component_certificate_limit",
+        "fsrm_model_assumption_documentation"
+      ]
+    },
+    {
+      "pattern": "정량 하드웨어 무결성과 체계적 무결성의 차이 및 상호관계를 설명하시오.",
+      "intent": "hardware quantitative integrity versus systematic integrity",
+      "required_anchor_ids": [
+        "fsrm_hardware_systematic_boundary",
+        "fsrm_component_certificate_limit",
+        "fsrm_hft_not_sil_guarantee"
+      ]
+    },
+    {
+      "pattern": "Proof Test와 Partial Stroke Test의 검출범위와 PFDavg 반영 시 주의사항을 설명하시오.",
+      "intent": "proof test and partial test coverage boundary",
+      "required_anchor_ids": [
+        "fsrm_proof_test_purpose",
+        "fsrm_proof_test_interval_exposure",
+        "fsrm_partial_test_boundary",
+        "fsrm_diagnostic_vs_proof_coverage"
+      ]
+    },
+    {
+      "pattern": "기능안전 신뢰도 계산의 입력자료, 가정, 한계와 검증 방안을 설명하시오.",
+      "intent": "data assumptions uncertainty and validation",
+      "required_anchor_ids": [
+        "fsrm_approximation_conditions",
+        "fsrm_ccf_reduction_measures",
+        "fsrm_model_assumption_documentation"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "section": "정량 신뢰도 평가의 목적과 범위",
+      "intent": "Target SIL과 Achieved SIL을 구분하고 전체 SIF 정량평가의 목적을 정의한다.",
+      "anchor_refs": [
+        "fsrm_complete_sif_boundary",
+        "fsrm_component_certificate_limit",
+        "fsrm_hardware_systematic_boundary"
+      ]
+    },
+    {
+      "section": "RBD·FTA·Markov 비교",
+      "intent": "성공논리, 실패논리와 상태전이 관점의 차이와 모델 선택조건을 비교한다.",
+      "anchor_refs": [
+        "fsrm_rbd_success_path",
+        "fsrm_rbd_series_parallel",
+        "fsrm_fta_top_event",
+        "fsrm_minimal_cut_set",
+        "fsrm_markov_state_transition",
+        "fsrm_markov_complexity",
+        "fsrm_model_purpose_boundary"
+      ]
+    },
+    {
+      "section": "Demand Mode와 성능지표",
+      "intent": "저수요의 PFDavg와 고수요·연속수요의 PFH를 구분한다.",
+      "anchor_refs": [
+        "fsrm_low_demand_pfdavg",
+        "fsrm_high_continuous_demand_pfh",
+        "fsrm_demand_mode_metric_selection",
+        "fsrm_rrf_relationship"
+      ]
+    },
+    {
+      "section": "입력변수와 근사조건",
+      "intent": "λDU, 진단, 시험주기, 수리시간과 계산 가정을 설명한다.",
+      "anchor_refs": [
+        "fsrm_one_oo_one_low_demand_approximation",
+        "fsrm_approximation_conditions",
+        "fsrm_diagnostic_vs_proof_coverage",
+        "fsrm_model_assumption_documentation"
+      ]
+    },
+    {
+      "section": "Voting Architecture와 CCF",
+      "intent": "중복구조의 안전성·가용성 trade-off와 공통원인 영향을 평가한다.",
+      "anchor_refs": [
+        "fsrm_voting_tradeoff",
+        "fsrm_hft_not_sil_guarantee",
+        "fsrm_ccf_redundancy_impact",
+        "fsrm_beta_factor",
+        "fsrm_ccf_reduction_measures"
+      ]
+    },
+    {
+      "section": "Proof Test·Diagnostics·Partial Test",
+      "intent": "잠복 위험고장 검출과 Coverage, Interval의 정량 영향을 연결한다.",
+      "anchor_refs": [
+        "fsrm_diagnostic_vs_proof_coverage",
+        "fsrm_proof_test_purpose",
+        "fsrm_proof_test_interval_exposure",
+        "fsrm_partial_test_boundary"
+      ]
+    },
+    {
+      "section": "전체 SIF 통합평가",
+      "intent": "Sensor–Logic Solver–Final Element와 Utility의 기여도를 통합한다.",
+      "anchor_refs": [
+        "fsrm_complete_sif_boundary",
+        "fsrm_component_certificate_limit",
+        "fsrm_hardware_systematic_boundary"
+      ]
+    },
+    {
+      "section": "가정·불확실성·수명주기 피드백",
+      "intent": "데이터 출처와 근사조건, 시험·운영자료에 의한 모델 갱신을 설명한다.",
+      "anchor_refs": [
+        "fsrm_model_assumption_documentation",
+        "fsrm_approximation_conditions"
+      ]
+    }
+  ],
+  "high_score_points": [
+    "RBD를 성공경로, FTA를 Top Event 원인전개, Markov를 시간 의존 상태전이 모델로 구분한다.",
+    "모델별 가정, 장단점과 적용조건을 비교한다.",
+    "저수요 PFDavg와 고수요·연속수요 PFH를 demand mode에 연결한다.",
+    "단순 PFDavg 근사식의 조건과 적용 한계를 명시한다.",
+    "Voting Architecture의 안전성·가용성·Spurious Trip trade-off를 설명한다.",
+    "CCF와 β-factor가 중복구조의 정량 결과에 미치는 영향을 설명한다.",
+    "Diagnostic Coverage와 Proof Test Coverage를 구분한다.",
+    "Proof Test Interval, Repair Time, Bypass와 Partial Test Coverage를 반영한다.",
+    "Sensor–Logic Solver–Final Element와 Utility의 전체 SIF 경계를 제시한다.",
+    "개별 인증기기와 전체 Achieved SIL을 구분한다.",
+    "정량 하드웨어 무결성과 체계적 무결성을 분리하되 수명주기 관점에서 연결한다.",
+    "고장률 데이터 출처, 운전환경, 가정과 불확실성을 명시한다."
+  ],
+  "common_missing_points": [
+    "RBD, FTA와 Markov를 이름만 나열하고 모델 관점과 가정을 구분하지 않음",
+    "PFDavg와 PFH를 demand mode에 연결하지 않음",
+    "단순 근사식을 모든 Voting 구조에 일반화함",
+    "Voting 구조만으로 SIL이 자동 보장된다고 단정함",
+    "CCF와 독립성 가정을 누락함",
+    "Diagnostic Coverage와 Proof Test Coverage를 동일하게 설명함",
+    "PST만으로 전체 Final Element 또는 전체 SIS를 입증함",
+    "Sensor, Logic Solver 또는 Final Element 한 부분만 계산하고 전체 SIF로 결론냄",
+    "고장률 출처, 시험주기, 수리시간과 Bypass 가정을 누락함",
+    "정량 계산으로 체계적 무결성까지 입증된다고 설명함"
+  ],
+  "routing_aliases": [
+    "기능안전 신뢰도 모델링 RBD FTA Markov",
+    "SIS reliability modeling PFDavg PFH",
+    "RBD FTA Markov 비교",
+    "Fault Tree Minimal Cut Set 기능안전",
+    "Markov state transition SIS reliability",
+    "PFDavg PFH demand mode",
+    "1oo1 1oo2 2oo2 2oo3 reliability",
+    "CCF beta factor voting architecture",
+    "proof test diagnostic coverage PFDavg",
+    "Sensor Logic Solver Final Element PFD",
+    "hardware safety integrity systematic integrity",
+    "functional safety quantitative reliability model"
+  ],
+  "routing_field_points": [
+    "RBD의 직렬·병렬 성공경로",
+    "FTA의 Top Event·AND/OR Gate·Minimal Cut Set",
+    "Markov 상태전이·복구·진단·degraded state",
+    "저수요 PFDavg와 고수요·연속수요 PFH",
+    "λDU·Diagnostic Coverage·Proof Test Coverage",
+    "Proof Test Interval·MTTR·Bypass Time",
+    "1oo1·1oo2·2oo2·2oo3 Voting Architecture",
+    "CCF와 β-factor",
+    "Sensor–Logic Solver–Final Element 전체 SIF",
+    "Target SIL과 Achieved SIL",
+    "고장률 데이터 출처와 근사 가정",
+    "정량 하드웨어와 체계적 무결성 경계"
+  ],
+  "revision_notes": [
+    "authored_from_reviewed_topic_sheet",
+    "ownership=general_functional_safety_quantitative_reliability_modeling",
+    "adjacent_boundary=hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+    "adjacent_boundary=hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+    "adjacent_boundary=final_control_element_sil_sis_esd_valve_partial_stroke_test",
+    "adjacent_boundary=sis_sil_safety_software_independence_systematic_failure_verification_validation",
+    "adjacent_boundary=safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+    "generated_bank_not_modified"
+  ]
+}
