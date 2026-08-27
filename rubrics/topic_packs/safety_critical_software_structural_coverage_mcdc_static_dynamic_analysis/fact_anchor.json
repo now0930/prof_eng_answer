@@ -931,6 +931,36 @@
       "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
       "claim": "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다.",
       "description": "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다."
+    },
+    {
+      "id": "mcdc_lifecycle_vv_boundary",
+      "anchor_id": "mcdc_lifecycle_vv_boundary",
+      "statement": "MC/DC는 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며, 요구사항 추적성·독립성·검증·확인 활동을 대체하지 않는다.",
+      "importance": "core",
+      "keywords": [
+        "MC/DC",
+        "software lifecycle",
+        "verification",
+        "validation",
+        "traceability"
+      ],
+      "core_terms": [
+        "safety PLC",
+        "function block",
+        "safety manual",
+        "application program"
+      ],
+      "accepted_explanations": [
+        "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다.",
+        "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+      ],
+      "rejected_explanations": [
+        "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+      ],
+      "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+      "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+      "claim": "MC/DC는 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며, 요구사항 추적성·독립성·검증·확인 활동을 대체하지 않는다.",
+      "description": "MC/DC는 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며, 요구사항 추적성·독립성·검증·확인 활동을 대체하지 않는다."
     }
   ]
 }

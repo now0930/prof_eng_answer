@@ -100,6 +100,13 @@
         "mcdc_regression_change",
         "mcdc_one_hundred_percent_limit"
       ]
+    },
+    {
+      "pattern": "MC/DC가 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며 다른 수명주기 활동을 대체하지 않는 이유를 설명",
+      "intent": "MC/DC가 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며 다른 수명주기 활동을 대체하지 않는 이유를 설명",
+      "required_anchor_ids": [
+        "mcdc_lifecycle_vv_boundary"
+      ]
     }
   ],
   "recommended_outline": [
@@ -180,7 +187,8 @@
       "intent": "Safety PLC 인증범위와 100% MC/DC의 한계를 제시한다.",
       "anchor_refs": [
         "mcdc_safety_plc_boundary",
-        "mcdc_one_hundred_percent_limit"
+        "mcdc_one_hundred_percent_limit",
+        "mcdc_lifecycle_vv_boundary"
       ]
     }
   ],

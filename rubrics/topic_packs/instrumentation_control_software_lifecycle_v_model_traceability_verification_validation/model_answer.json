@@ -13,7 +13,8 @@
     "Simulation, HIL과 Fault injection의 특징과 적용방안을 비교하시오.",
     "제어 SW 결함관리, 변경영향 분석과 회귀시험의 관계를 설명하시오.",
     "소프트웨어 아키텍처와 상세설계 산출물 및 검토항목을 설명하시오.",
-    "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오."
+    "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오.",
+    "V-model이 검증·확인 활동을 체계화하지만 SIL 달성을 보장하지 않는 이유와 MC/DC의 별도 증거 역할을 설명"
   ],
   "recommended_outline": [
     {
@@ -81,7 +82,8 @@
         "sw04_simulation",
         "sw04_hil",
         "sw04_fault_injection",
-        "sw04_test_environment"
+        "sw04_test_environment",
+        "vmodel_no_sil_guarantee__mcdc_adjacent_boundary"
       ]
     },
     {

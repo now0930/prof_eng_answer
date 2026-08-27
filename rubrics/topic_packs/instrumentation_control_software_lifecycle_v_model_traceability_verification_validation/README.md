@@ -90,3 +90,10 @@ SW-04는 일반 계측제어 소프트웨어의 Static Analysis, Dynamic Analysi
 - Coverage Tool Qualification과 100% MC/DC의 한계
 
 MC/DC 단독 질문을 SW-04로 라우팅하지 않는다.
+
+<!-- guard:D1_VMODEL_DOES_NOT_GUARANTEE_SIL -->
+## V-model·SIL·MC/DC 경계
+
+- V-model은 요구사항 추적성과 검증·확인 활동을 체계화한다.
+- V-model 적용만으로 SIL 달성을 보장하지 않는다.
+- MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다.

@@ -968,6 +968,37 @@
       "importance": "must",
       "source_basis": "docs/topic_sheets/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation.md",
       "grading_notes": "전용 MC/DC Topic과 기존 Software Lifecycle 또는 Safety Lifecycle의 ownership 경계를 평가한다."
+    },
+    {
+      "id": "vmodel_no_sil_guarantee__mcdc_adjacent_boundary",
+      "anchor_id": "vmodel_no_sil_guarantee__mcdc_adjacent_boundary",
+      "statement": "V-model은 요구사항 추적성과 검증·확인 활동을 체계화하지만 그 적용만으로 SIL 달성을 보장하지 않는다. MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다.",
+      "keywords": [
+        "V-model",
+        "SIL",
+        "MC/DC",
+        "traceability",
+        "verification",
+        "validation"
+      ],
+      "core_terms": [
+        "SW-04 boundary",
+        "static analysis",
+        "dynamic analysis",
+        "MC/DC",
+        "structural coverage"
+      ],
+      "accepted_explanations": [
+        "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다.",
+        "일반 정적·동적 분석은 SW-04, MC/DC Test Pair와 Coverage Gap 상세는 전용 Topic으로 구분한다.",
+        "Software lifecycle과 구조적 커버리지 심화 소유권을 분리한다."
+      ],
+      "rejected_explanations": [
+        "MC/DC의 독립 영향과 Coverage Gap 전체를 일반 정적분석 설명으로 대체한다."
+      ],
+      "importance": "must",
+      "source_basis": "docs/topic_sheets/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation.md",
+      "grading_notes": "전용 MC/DC Topic과 기존 Software Lifecycle 또는 Safety Lifecycle의 ownership 경계를 평가한다."
     }
   ],
   "fatal_wrong_claims": [
@@ -1210,6 +1241,21 @@
         "D"
       ],
       "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+    },
+    {
+      "id": "vmodel_alone_guarantees_sil",
+      "severity": "fatal",
+      "claim": "V-model을 적용하면 그 자체로 SIL 달성이 보장된다.",
+      "wrong_claim": "V-model을 적용하면 그 자체로 SIL 달성이 보장된다.",
+      "message": "일반 소프트웨어 V&V를 완료하면 별도 Safety lifecycle 없이 SIS의 SIL 충족이 자동으로 증명된다.",
+      "description": "명시적 반대 주장만 fatal 후보로 본다. SW-04의 일반 V&V와 SW-05의 Safety Integrity, 독립성, 체계적 고장 통제와 Safety V&V를 구분해야 한다.",
+      "correct_rule": "SW-04의 일반 V&V와 SW-05의 Safety Integrity, 독립성, 체계적 고장 통제와 Safety V&V를 구분해야 한다.",
+      "correction": "SW-04의 일반 V&V와 SW-05의 Safety Integrity, 독립성, 체계적 고장 통제와 Safety V&V를 구분해야 한다.",
+      "affected_layers": [
+        "C",
+        "D"
+      ],
+      "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
     }
   ],
   "safe_expressions": [
@@ -1272,6 +1318,7 @@
     "시험환경은 대상 HW·OS·firmware·library·network·scan time·I/O scaling과 tool version을 식별하고 실제 운전환경과의 차이를 평가한다.",
     "수명주기는 단순 일방향 문서흐름이 아니라 review, defect와 change 결과가 선행 산출물과 시험계획에 환류되는 통제된 반복과정이다.",
     "V&V 결과는 누가, 무엇을, 어떤 버전과 환경에서, 어떤 기준으로 수행했는지 추적 가능한 증적으로 남겨야 한다.",
-    "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다."
+    "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다.",
+    "V-model은 요구사항 추적성과 검증·확인 활동을 체계화하지만 그 적용만으로 SIL 달성을 보장하지 않는다. MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다."
   ]
 }

@@ -12,7 +12,8 @@
     "Coverage Gap을 Dead·Deactivated·Defensive Code와 연결한다.",
     "Object Code, Compiler, Instrumentation과 Tool 증거를 설명한다.",
     "요구사항 기반 시험과 구조적 커버리지의 관계를 제시한다.",
-    "100% MC/DC의 한계와 산업별 적용경계를 명시한다."
+    "100% MC/DC의 한계와 산업별 적용경계를 명시한다.",
+    "100% MC/DC가 SIL을 보장하지 않음을 명시하고, MC/DC와 소프트웨어 수명주기 검증·확인의 경계를 설명한다."
   ],
   "note": "MC/DC는 안전필수 소프트웨어의 복합 Decision 시험 충분성을 높이는 구조적 커버리지 기법이지만 모든 산업용 소프트웨어에 일률 적용하거나 전체 SIL 달성의 단독 증거로 사용할 수 없다.",
   "revision_notes": [

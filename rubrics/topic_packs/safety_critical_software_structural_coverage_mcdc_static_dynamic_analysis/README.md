@@ -56,3 +56,10 @@
 ## 관리 원칙
 
 Coverage 결과는 대상 Source·Object, Compiler·Option, Tool Version, Target 환경, Test Case와 Requirement Traceability를 함께 식별하여 형상관리한다.
+
+<!-- guard:M1_100_PERCENT_MCDC_DOES_NOT_GUARANTEE_SIL -->
+## MC/DC·SIL·수명주기 경계
+
+- 100% MC/DC는 구조적 커버리지 목표 달성의 증거이다.
+- 100% MC/DC만으로 SIL 달성을 보장하지 않는다.
+- MC/DC는 요구사항 추적성, 독립성, 검증·확인 등 소프트웨어 수명주기 활동을 대체하지 않는다.

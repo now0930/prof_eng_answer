@@ -50,16 +50,16 @@ class TopicPackStructureTests(unittest.TestCase):
 
     def test_anchor_count_and_uniqueness(self) -> None:
         anchors = self.fact["anchors"]
-        self.assertEqual(len(anchors), 32)
+        self.assertEqual(len(anchors), 33)
         ids = [item["id"] for item in anchors]
         self.assertEqual(len(ids), len(set(ids)))
         self.assertEqual(self.fact["core_facts"], [item["statement"] for item in anchors])
 
     def test_fatal_count_and_shape(self) -> None:
         fatals = self.fact["fatal_wrong_claims"]
-        self.assertEqual(len(fatals), 16)
+        self.assertEqual(len(fatals), 17)
         self.assertEqual(len(self.logic["deterministic_checks"]["fatal_checks"]), 17)
-        self.assertEqual(len(self.logic["llm_profile"]["fatal_conditions"]), 17)
+        self.assertEqual(len(self.logic["llm_profile"]["fatal_conditions"]), 18)
         for item in fatals:
             self.assertEqual(item["severity"], "fatal")
             self.assertTrue(item["wrong_claim"])
@@ -70,7 +70,7 @@ class TopicPackStructureTests(unittest.TestCase):
         self.assertTrue(profile["enabled"])
         self.assertTrue(profile["cap_policy"]["fatal_requires_explicit_contradiction"])
         self.assertTrue(profile["cap_policy"]["omission_is_not_fatal"])
-        self.assertEqual(len(profile["truth_schema"]), 33)
+        self.assertEqual(len(profile["truth_schema"]), 34)
         self.assertEqual(len(profile["major_checks"]), 8)
         self.assertEqual(len(profile["false_positive_cautions"]), 10)
 
@@ -110,7 +110,7 @@ class TopicPackStructureTests(unittest.TestCase):
         self.assertEqual(self.importance["difficulty"], "DESIGN_EVALUATION")
         self.assertEqual(self.importance["selection_importance"], "CORE_MUST_PREPARE")
         self.assertEqual(self.importance["question_type"], "PROCEDURE")
-        self.assertEqual(len(self.importance["high_band_unlock_conditions"]), 8)
+        self.assertEqual(len(self.importance["high_band_unlock_conditions"]), 9)
 
     def test_scope_boundaries_are_explicit(self) -> None:
         text = "\n".join(
@@ -253,7 +253,7 @@ class ContentQualityTests(unittest.TestCase):
 
     def test_question_and_outline_counts(self) -> None:
         model = load_json(MODEL)
-        self.assertEqual(len(model["expected_question_patterns"]), 10)
+        self.assertEqual(len(model["expected_question_patterns"]), 11)
         self.assertEqual(len(model["recommended_outline"]), 8)
 
 

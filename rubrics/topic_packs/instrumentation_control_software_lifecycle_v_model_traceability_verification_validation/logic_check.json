@@ -642,7 +642,8 @@
         "id": "sw04_misra_unit_test_boundary",
         "correct_rule": "MISRA는 안전·신뢰성 중심의 코딩 지침과 준수 근거이며 정적분석·코드리뷰와 연결된다. 단위시험은 xUnit 계열 framework, test harness, stub·mock과 실행 결과로 별도 수행한다.",
         "fatal_if_opposite": true
-      }
+      },
+      "V-model은 요구사항 추적성과 검증·확인 활동을 체계화하지만 그 적용만으로 SIL 달성을 보장하지 않는다. MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다."
     ],
     "fatal_conditions": [
       {
@@ -825,6 +826,17 @@
         "id": "sw04_fatal_misra_is_unit_test_tool",
         "severity": "fatal",
         "wrong_claim": "MISRA 또는 MISRA C를 단위시험 도구로 분류하거나, 단위시험의 수행 도구를 MISRA라고 직접 대응한다.",
+        "correct_rule": "MISRA는 안전·신뢰성 중심의 코딩 지침과 준수 근거이며 정적분석·코드리뷰와 연결된다. 단위시험은 xUnit 계열 framework, test harness, stub·mock과 실행 결과로 별도 수행한다.",
+        "affected_layers": [
+          "C",
+          "D"
+        ],
+        "recommended_ceiling": 14.5
+      },
+      {
+        "id": "vmodel_alone_guarantees_sil",
+        "severity": "fatal",
+        "wrong_claim": "V-model을 적용하면 그 자체로 SIL 달성이 보장된다.",
         "correct_rule": "MISRA는 안전·신뢰성 중심의 코딩 지침과 준수 근거이며 정적분석·코드리뷰와 연결된다. 단위시험은 xUnit 계열 framework, test harness, stub·mock과 실행 결과로 별도 수행한다.",
         "affected_layers": [
           "C",
