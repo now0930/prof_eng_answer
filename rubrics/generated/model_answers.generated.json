@@ -1,5 +1,5 @@
 {
-  "version": "sha256-313547d73726e37089e848089bb0454440e743c4ccf57b85713423ae3eb99087-generated-topic-pack-model-answers",
+  "version": "sha256-f7f8bb50225d7d091c477e0182cd61a9eef245d575059abc2d0993301c629286-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -10879,7 +10879,7 @@
       "revision_notes": [
         "created_by=scripts/create_topic_pack.py; final source directly reviewed and authored",
         "authoring_basis=docs/topic_pack_workflow.md",
-        "adjacent_boundary=sis_sil_safety_software_independence_systematic_failure_verification_validation",
+        "adjacent_boundary=sis_sil_safety_software_independence_systematic_failure_verification_validation 답안에는 수요 모드별 무결성 지표를 구분해야 한다. 저수요 모드는 PFDavg를 사용하고, 고수요 또는 연속 운전 모드는 PFH를 사용한다. PFDavg를 모든 수요 모드의 공통 지표로 서술하지 않는다. SIL은 Safety Integrity Level(안전 무결성 수준)이다. Safety Instrument Level은 잘못된 전개이며, SIS는 별도로 Safety Instrumented System을 뜻한다.",
         "generated_bank_not_modified"
       ],
       "id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation_COMPARE_v1",

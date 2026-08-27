@@ -1,5 +1,5 @@
 {
-  "version": "sha256-313547d73726e37089e848089bb0454440e743c4ccf57b85713423ae3eb99087-generated-topic-pack-importance",
+  "version": "sha256-f7f8bb50225d7d091c477e0182cd61a9eef245d575059abc2d0993301c629286-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -715,9 +715,10 @@
         "Initiating frequency, conditional modifier와 IPL PFD로 residual frequency를 계산한다.",
         "IPL 적격조건과 common cause·double counting 방지 논리를 설명한다.",
         "Tolerable frequency에서 RRF와 PFDavg를 도출하여 목표 SIL에 대응한다.",
-        "Target SIL과 achieved SIL을 구분한다.",
+        "Target SIL과 achieved SIL을 구분한다. SIL을 Safety Integrity Level(안전 무결성 수준)로 정확히 전개하고 Safety Instrument Level이라는 오기를 배제한 경우에 용어 정확성을 인정한다.",
         "SIF 전체 경계와 SRS handoff를 설명한다.",
-        "다중 scenario, MOC와 revalidation을 수명주기로 연결한다."
+        "다중 scenario, MOC와 revalidation을 수명주기로 연결한다.",
+        "저수요의 PFDavg와 고수요·연속 운전의 PFH를 구분하고, PFDavg의 보편 적용을 배제한 설명을 핵심 채점 요소로 반영한다."
       ],
       "note": "LOPA 수치는 분석 근거와 독립성 가정에 의존한다. 빈도·PFD·conditional modifier와 회사 위험수용기준은 verify-first로 다룬다.",
       "revision_notes": [

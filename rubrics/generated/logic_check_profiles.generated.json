@@ -1,5 +1,5 @@
 {
-  "version": "sha256-313547d73726e37089e848089bb0454440e743c4ccf57b85713423ae3eb99087-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-f7f8bb50225d7d091c477e0182cd61a9eef245d575059abc2d0993301c629286-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
