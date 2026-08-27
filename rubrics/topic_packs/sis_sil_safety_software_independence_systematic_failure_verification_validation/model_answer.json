@@ -153,7 +153,8 @@
         "srs_functional_integrity_requirements",
         "application_program_role",
         "software_safety_lifecycle",
-        "bidirectional_traceability"
+        "bidirectional_traceability",
+        "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil"
       ]
     },
     {
@@ -196,7 +197,9 @@
         "safety_manual_constraints",
         "proven_in_use_evidence",
         "tool_qualification_basis",
-        "library_validation_control"
+        "library_validation_control",
+        "random_hardware_failure__unit_test_not_random_hardware_integrity",
+        "random_hardware_failure_unit_test_not_random_hardware_integrity__misra_not_unit_test_tool"
       ]
     },
     {

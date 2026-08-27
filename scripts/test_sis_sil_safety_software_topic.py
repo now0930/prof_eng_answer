@@ -145,7 +145,7 @@ class SW05SourceContractTests(unittest.TestCase):
         anchor_set = {row["id"] for row in self.fact["anchors"]}
         patterns = self.model["expected_question_patterns"]
         outlines = self.model["recommended_outline"]
-        self.assertEqual(len(patterns), 10)
+        self.assertEqual(len(patterns), 13)
         self.assertEqual(len(outlines), 8)
         for row in patterns:
             refs = set(row["required_anchor_ids"])
