@@ -1,5 +1,5 @@
 {
-  "version": "sha256-4ac46e89718f53954b74bcd74ac6b5c215b2f77d91c772ceb2998dbdd4fb2a51-generated-topic-pack-importance",
+  "version": "sha256-de529384fc28ada587d49ac35497922e51960c5d356999c32dbabcf9ef226436-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -944,7 +944,8 @@
         "정적·동적·회귀시험을 실행여부와 변경영향 관점에서 설명한다.",
         "Simulation·HIL·Fault injection의 환경, 한계와 복구검증을 비교한다.",
         "결함·변경·baseline·회귀·승인 증적을 폐루프로 연결한다.",
-        "SW-05 Safety lifecycle과 SW-10 프로젝트 수행 경계를 침범하지 않는다."
+        "SW-05 Safety lifecycle과 SW-10 프로젝트 수행 경계를 침범하지 않는다.",
+        "V-model의 수명주기 증거 체계화와 SIL 달성 보장을 구분하고, MC/DC를 별도 구조적 커버리지 증거로 설명한다."
       ],
       "note": "계측제어 소프트웨어 수명주기와 V&V는 요구사항부터 시험·승인까지 모든 소프트웨어 문제의 공통 기반이다. 단계 나열보다 V-Model 대응, 양방향 추적성, 시험수준별 목적과 변경·결함 환류를 설명해야 고득점이 가능하므로 핵심 준비 Topic으로 분류한다.",
       "revision_notes": [
@@ -1591,7 +1592,8 @@
         "Coverage Gap을 Dead·Deactivated·Defensive Code와 연결한다.",
         "Object Code, Compiler, Instrumentation과 Tool 증거를 설명한다.",
         "요구사항 기반 시험과 구조적 커버리지의 관계를 제시한다.",
-        "100% MC/DC의 한계와 산업별 적용경계를 명시한다."
+        "100% MC/DC의 한계와 산업별 적용경계를 명시한다.",
+        "100% MC/DC가 SIL을 보장하지 않음을 명시하고, MC/DC와 소프트웨어 수명주기 검증·확인의 경계를 설명한다."
       ],
       "note": "MC/DC는 안전필수 소프트웨어의 복합 Decision 시험 충분성을 높이는 구조적 커버리지 기법이지만 모든 산업용 소프트웨어에 일률 적용하거나 전체 SIL 달성의 단독 증거로 사용할 수 없다.",
       "revision_notes": [

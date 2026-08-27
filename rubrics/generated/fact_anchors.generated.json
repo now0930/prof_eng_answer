@@ -1,5 +1,5 @@
 {
-  "version": "sha256-4ac46e89718f53954b74bcd74ac6b5c215b2f77d91c772ceb2998dbdd4fb2a51-generated-topic-pack-fact-anchors",
+  "version": "sha256-de529384fc28ada587d49ac35497922e51960c5d356999c32dbabcf9ef226436-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -80219,6 +80219,40 @@
           "name": "sw04_mcdc_detailed_coverage_boundary",
           "expected": "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다.",
           "support_terms": []
+        },
+        {
+          "id": "vmodel_no_sil_guarantee__mcdc_adjacent_boundary",
+          "anchor_id": "vmodel_no_sil_guarantee__mcdc_adjacent_boundary",
+          "statement": "V-model은 요구사항 추적성과 검증·확인 활동을 체계화하지만 그 적용만으로 SIL 달성을 보장하지 않는다. MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다.",
+          "keywords": [
+            "V-model",
+            "SIL",
+            "MC/DC",
+            "traceability",
+            "verification",
+            "validation"
+          ],
+          "core_terms": [
+            "SW-04 boundary",
+            "static analysis",
+            "dynamic analysis",
+            "MC/DC",
+            "structural coverage"
+          ],
+          "accepted_explanations": [
+            "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다.",
+            "일반 정적·동적 분석은 SW-04, MC/DC Test Pair와 Coverage Gap 상세는 전용 Topic으로 구분한다.",
+            "Software lifecycle과 구조적 커버리지 심화 소유권을 분리한다."
+          ],
+          "rejected_explanations": [
+            "MC/DC의 독립 영향과 Coverage Gap 전체를 일반 정적분석 설명으로 대체한다."
+          ],
+          "importance": "must",
+          "source_basis": "docs/topic_sheets/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation.md",
+          "grading_notes": "전용 MC/DC Topic과 기존 Software Lifecycle 또는 Safety Lifecycle의 ownership 경계를 평가한다.",
+          "name": "vmodel_no_sil_guarantee__mcdc_adjacent_boundary",
+          "expected": "V-model은 요구사항 추적성과 검증·확인 활동을 체계화하지만 그 적용만으로 SIL 달성을 보장하지 않는다. MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다.",
+          "support_terms": []
         }
       ],
       "fatal_wrong_claims": [
@@ -80461,6 +80495,21 @@
             "D"
           ],
           "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
+        },
+        {
+          "id": "vmodel_alone_guarantees_sil",
+          "severity": "fatal",
+          "claim": "V-model을 적용하면 그 자체로 SIL 달성이 보장된다.",
+          "wrong_claim": "V-model을 적용하면 그 자체로 SIL 달성이 보장된다.",
+          "message": "일반 소프트웨어 V&V를 완료하면 별도 Safety lifecycle 없이 SIS의 SIL 충족이 자동으로 증명된다.",
+          "description": "명시적 반대 주장만 fatal 후보로 본다. SW-04의 일반 V&V와 SW-05의 Safety Integrity, 독립성, 체계적 고장 통제와 Safety V&V를 구분해야 한다.",
+          "correct_rule": "SW-04의 일반 V&V와 SW-05의 Safety Integrity, 독립성, 체계적 고장 통제와 Safety V&V를 구분해야 한다.",
+          "correction": "SW-04의 일반 V&V와 SW-05의 Safety Integrity, 독립성, 체계적 고장 통제와 Safety V&V를 구분해야 한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "grading_notes": "답안이 해당 오답을 직접 단정한 경우에만 적용하며 단순 누락이나 인용 뒤 정정은 fatal로 보지 않는다."
         }
       ],
       "safe_expressions": [
@@ -80523,7 +80572,8 @@
         "시험환경은 대상 HW·OS·firmware·library·network·scan time·I/O scaling과 tool version을 식별하고 실제 운전환경과의 차이를 평가한다.",
         "수명주기는 단순 일방향 문서흐름이 아니라 review, defect와 change 결과가 선행 산출물과 시험계획에 환류되는 통제된 반복과정이다.",
         "V&V 결과는 누가, 무엇을, 어떤 버전과 환경에서, 어떤 기준으로 수행했는지 추적 가능한 증적으로 남겨야 한다.",
-        "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다."
+        "SW-04는 일반 정적·동적 분석과 시험수명주기를 소유하되 Statement·Decision·Condition·MC/DC의 상세 구조적 커버리지 설계, Coverage Gap과 Code 처분은 전용 MC/DC Topic으로 이관한다.",
+        "V-model은 요구사항 추적성과 검증·확인 활동을 체계화하지만 그 적용만으로 SIL 달성을 보장하지 않는다. MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다."
       ],
       "triggers": [
         "instrumentation control software lifecycle V-Model",
@@ -81165,7 +81215,18 @@
         "Code",
         "처분은",
         "전용",
-        "Topic"
+        "Topic",
+        "V-model",
+        "V-model은 요구사항 추적성과 검증·확인 활동을 체계화하지만 그 적용만으로 SIL 달성을 보장하지 않는다. MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다.",
+        "추적성과",
+        "활동을",
+        "체계화하지만",
+        "적용만으로",
+        "달성을",
+        "별도의",
+        "증거이며",
+        "이나",
+        "대체하지"
       ],
       "aliases": [
         "instrumentation control software lifecycle V-Model",
@@ -119103,6 +119164,39 @@
           "name": "mcdc_safety_plc_boundary",
           "expected": "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다.",
           "support_terms": []
+        },
+        {
+          "id": "mcdc_lifecycle_vv_boundary",
+          "anchor_id": "mcdc_lifecycle_vv_boundary",
+          "statement": "MC/DC는 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며, 요구사항 추적성·독립성·검증·확인 활동을 대체하지 않는다.",
+          "importance": "core",
+          "keywords": [
+            "MC/DC",
+            "software lifecycle",
+            "verification",
+            "validation",
+            "traceability"
+          ],
+          "core_terms": [
+            "safety PLC",
+            "function block",
+            "safety manual",
+            "application program"
+          ],
+          "accepted_explanations": [
+            "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다.",
+            "정의, Test Pair, 적용조건, Coverage Gap 처리와 한계를 인과적으로 연결한다."
+          ],
+          "rejected_explanations": [
+            "Coverage 명칭만 나열하거나 100% 수치만으로 요구사항 정확성과 전체 SIL 달성을 단정한다."
+          ],
+          "grading_notes": "구조적 커버리지 계층, MC/DC 독립 영향, 실행환경·도구 증거와 산업 기능안전 적용경계를 평가한다.",
+          "source_basis": "docs/topic_sheets/safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis.md",
+          "claim": "MC/DC는 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며, 요구사항 추적성·독립성·검증·확인 활동을 대체하지 않는다.",
+          "description": "MC/DC는 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며, 요구사항 추적성·독립성·검증·확인 활동을 대체하지 않는다.",
+          "name": "mcdc_lifecycle_vv_boundary",
+          "expected": "MC/DC는 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며, 요구사항 추적성·독립성·검증·확인 활동을 대체하지 않는다.",
+          "support_terms": []
         }
       ],
       "triggers": [
@@ -119277,11 +119371,21 @@
         "고려사항을",
         "industrial safety software mcdc application",
         "industrial",
+        "MC/DC가 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며 다른 수명주기 활동을 대체하지 않는 이유를 설명",
+        "수명주기",
+        "검증",
+        "확인에서",
+        "사용하는",
+        "증거이며",
+        "다른",
+        "활동을",
+        "대체하지",
+        "않는",
+        "이유를",
         "안전필수 소프트웨어의 정적·동적 분석, 구조적 커버리지 및 MC/DC 검증",
         "소프트웨어의",
         "정적",
         "동적",
-        "검증",
         "MC/DC",
         "structural coverage",
         "Boolean decision",
@@ -119289,7 +119393,6 @@
         "MC/DC는 복합 Boolean Decision에서 각 원자 조건이 다른 조건의 영향과 구분되어 Decision 결과에 독립적으로 영향을 미치는지를 입증하는 구조적 커버리지 기준이다.",
         "에서",
         "조건이",
-        "다른",
         "영향과",
         "구분되어",
         "결과에",
@@ -119314,7 +119417,6 @@
         "증거는",
         "상호보완적이며",
         "서로",
-        "대체하지",
         "않는다",
         "statement coverage",
         "statement",
@@ -119522,7 +119624,6 @@
         "경로를",
         "찾는",
         "보완",
-        "증거이며",
         "구조만",
         "보고",
         "만드는",
@@ -119582,7 +119683,6 @@
         "요구",
         "기능도",
         "수행하지",
-        "않는",
         "코드이므로",
         "원칙적으로",
         "제거하고",
@@ -119863,7 +119963,13 @@
         "여부는",
         "인증범위와",
         "Manual",
-        "따른다"
+        "따른다",
+        "software lifecycle",
+        "lifecycle",
+        "validation",
+        "MC/DC는 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며, 요구사항 추적성·독립성·검증·확인 활동을 대체하지 않는다.",
+        "추적성",
+        "독립성"
       ],
       "aliases": [
         "safety critical software MC/DC structural coverage",
@@ -119898,6 +120004,7 @@
         "static dynamic and structural coverage relationship",
         "산업용 안전필수 소프트웨어에 MC/DC를 적용할 때 고려사항을 설명하시오.",
         "industrial safety software mcdc application",
+        "MC/DC가 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며 다른 수명주기 활동을 대체하지 않는 이유를 설명",
         "안전필수 소프트웨어의 정적·동적 분석, 구조적 커버리지 및 MC/DC 검증"
       ],
       "priority": "CORE_MUST_PREPARE"

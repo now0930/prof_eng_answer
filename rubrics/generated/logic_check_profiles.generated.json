@@ -1,5 +1,5 @@
 {
-  "version": "sha256-4ac46e89718f53954b74bcd74ac6b5c215b2f77d91c772ceb2998dbdd4fb2a51-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-de529384fc28ada587d49ac35497922e51960c5d356999c32dbabcf9ef226436-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -19764,7 +19764,8 @@
           "id": "sw04_misra_unit_test_boundary",
           "correct_rule": "MISRA는 안전·신뢰성 중심의 코딩 지침과 준수 근거이며 정적분석·코드리뷰와 연결된다. 단위시험은 xUnit 계열 framework, test harness, stub·mock과 실행 결과로 별도 수행한다.",
           "fatal_if_opposite": true
-        }
+        },
+        "V-model은 요구사항 추적성과 검증·확인 활동을 체계화하지만 그 적용만으로 SIL 달성을 보장하지 않는다. MC/DC는 별도의 구조적 커버리지 증거이며 V-model이나 SIL 달성을 대체하지 않는다."
       ],
       "fatal_conditions": [
         {
@@ -19947,6 +19948,17 @@
           "id": "sw04_fatal_misra_is_unit_test_tool",
           "severity": "fatal",
           "wrong_claim": "MISRA 또는 MISRA C를 단위시험 도구로 분류하거나, 단위시험의 수행 도구를 MISRA라고 직접 대응한다.",
+          "correct_rule": "MISRA는 안전·신뢰성 중심의 코딩 지침과 준수 근거이며 정적분석·코드리뷰와 연결된다. 단위시험은 xUnit 계열 framework, test harness, stub·mock과 실행 결과로 별도 수행한다.",
+          "affected_layers": [
+            "C",
+            "D"
+          ],
+          "recommended_ceiling": 14.5
+        },
+        {
+          "id": "vmodel_alone_guarantees_sil",
+          "severity": "fatal",
+          "wrong_claim": "V-model을 적용하면 그 자체로 SIL 달성이 보장된다.",
           "correct_rule": "MISRA는 안전·신뢰성 중심의 코딩 지침과 준수 근거이며 정적분석·코드리뷰와 연결된다. 단위시험은 xUnit 계열 framework, test harness, stub·mock과 실행 결과로 별도 수행한다.",
           "affected_layers": [
             "C",
@@ -25978,7 +25990,8 @@
         "Boolean 식, Compiler, 생성도구, Library 또는 Configuration이 변경되면 영향받는 요구사항과 Decision의 Test Pair 및 Coverage Report를 갱신하고 회귀시험해야 한다.",
         "100% MC/DC는 구현된 복합 Decision의 구조가 규정된 수준으로 실행되었음을 보일 뿐 요구사항의 완전성, 알고리즘 타당성, Timing 안전성과 전체 SIL 달성을 단독으로 보장하지 않는다.",
         "MC/DC의 적용 여부와 목표 수준은 산업별 기능안전 표준, Systematic Capability, 자체 개발 코드 범위, 언어와 Functional Safety Plan으로 결정하며 모든 일반 PLC·HMI 소프트웨어에 일률 적용하지 않는다.",
-        "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다."
+        "인증된 Safety PLC의 내부 Firmware와 검증된 Function Block을 사용하더라도 Application Program의 SRS 추적과 입력조합 시험은 필요하며 내부 코드 MC/DC 재수행 여부는 인증범위와 Safety Manual에 따른다.",
+        "MC/DC는 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며, 요구사항 추적성·독립성·검증·확인 활동을 대체하지 않는다."
       ],
       "fatal_conditions": [
         "[mcdc_equals_statement] Statement Coverage 100%이면 MC/DC도 자동으로 100%다. | correction: 문장 실행은 개별 조건의 Decision 결과 독립 영향을 입증하지 않는다.",

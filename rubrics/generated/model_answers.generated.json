@@ -1,5 +1,5 @@
 {
-  "version": "sha256-4ac46e89718f53954b74bcd74ac6b5c215b2f77d91c772ceb2998dbdd4fb2a51-generated-topic-pack-model-answers",
+  "version": "sha256-de529384fc28ada587d49ac35497922e51960c5d356999c32dbabcf9ef226436-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -14282,7 +14282,8 @@
         "Simulation, HIL과 Fault injection의 특징과 적용방안을 비교하시오.",
         "제어 SW 결함관리, 변경영향 분석과 회귀시험의 관계를 설명하시오.",
         "소프트웨어 아키텍처와 상세설계 산출물 및 검토항목을 설명하시오.",
-        "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오."
+        "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오.",
+        "V-model이 검증·확인 활동을 체계화하지만 SIL 달성을 보장하지 않는 이유와 MC/DC의 별도 증거 역할을 설명"
       ],
       "recommended_outline": [
         {
@@ -14350,7 +14351,8 @@
             "sw04_simulation",
             "sw04_hil",
             "sw04_fault_injection",
-            "sw04_test_environment"
+            "sw04_test_environment",
+            "vmodel_no_sil_guarantee__mcdc_adjacent_boundary"
           ]
         },
         {
@@ -14495,7 +14497,8 @@
         "Simulation, HIL과 Fault injection의 특징과 적용방안을 비교하시오.",
         "제어 SW 결함관리, 변경영향 분석과 회귀시험의 관계를 설명하시오.",
         "소프트웨어 아키텍처와 상세설계 산출물 및 검토항목을 설명하시오.",
-        "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오."
+        "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오.",
+        "V-model이 검증·확인 활동을 체계화하지만 SIL 달성을 보장하지 않는 이유와 MC/DC의 별도 증거 역할을 설명"
       ],
       "topic_aliases": [
         "instrumentation control software lifecycle V-Model",
@@ -22767,6 +22770,13 @@
             "mcdc_regression_change",
             "mcdc_one_hundred_percent_limit"
           ]
+        },
+        {
+          "pattern": "MC/DC가 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며 다른 수명주기 활동을 대체하지 않는 이유를 설명",
+          "intent": "MC/DC가 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며 다른 수명주기 활동을 대체하지 않는 이유를 설명",
+          "required_anchor_ids": [
+            "mcdc_lifecycle_vv_boundary"
+          ]
         }
       ],
       "recommended_outline": [
@@ -22847,7 +22857,8 @@
           "intent": "Safety PLC 인증범위와 100% MC/DC의 한계를 제시한다.",
           "anchor_refs": [
             "mcdc_safety_plc_boundary",
-            "mcdc_one_hundred_percent_limit"
+            "mcdc_one_hundred_percent_limit",
+            "mcdc_lifecycle_vv_boundary"
           ]
         }
       ],
@@ -22927,7 +22938,8 @@
         "source object compiler coverage",
         "coverage instrumentation and tool evidence",
         "static dynamic and structural coverage relationship",
-        "industrial safety software mcdc application"
+        "industrial safety software mcdc application",
+        "MC/DC가 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며 다른 수명주기 활동을 대체하지 않는 이유를 설명"
       ],
       "topic_aliases": [
         "safety critical software MC/DC structural coverage",
