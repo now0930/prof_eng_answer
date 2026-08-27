@@ -1,5 +1,5 @@
 {
-  "version": "sha256-5b0d158c3da00100184c9c940dad50ee9b47e3d9ccabb70b25f5798071370085-generated-topic-pack-importance",
+  "version": "sha256-313547d73726e37089e848089bb0454440e743c4ccf57b85713423ae3eb99087-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -622,6 +622,33 @@
         "IMPLEMENTATION_EVALUATION을 Primary Question Type으로 적용했다."
       ],
       "topic_label": "최종제어요소·SIS·ESD·PST·Proof Test"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "difficulty": "THEORY_CORE",
+      "selection_importance": "HIGH",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "RBD·FTA·Markov의 표현 관점과 적용조건을 정확히 구분한다.",
+        "Demand mode별 PFDavg와 PFH를 구분한다.",
+        "단순 근사식의 가정과 적용 한계를 명시한다.",
+        "Voting Architecture와 CCF의 정량 영향을 연결한다.",
+        "Diagnostic Coverage와 Proof Test Coverage를 구분한다.",
+        "Proof Test Interval·Repair·Bypass·Partial Test를 정량 모델에 반영한다.",
+        "Sensor–Logic Solver–Final Element의 전체 SIF 경계를 제시한다.",
+        "정량 하드웨어 무결성과 체계적 무결성을 구분한다.",
+        "고장률 데이터 출처, 불확실성과 검증 방법을 설명한다.",
+        "P0 fatal logic error가 없다."
+      ],
+      "note": "일반 정량 신뢰도 모델링을 소유한다. 위험분석과 Target SIL 할당, HIPPS·Final Element 상세, 소프트웨어 V&V와 MC/DC는 인접 Topic의 primary ownership으로 유지한다.",
+      "revision_notes": [
+        "approved_by_stage27n_semantic_ownership_review",
+        "classification=THEORY_CORE",
+        "selection_importance=HIGH",
+        "generated_bank_not_modified"
+      ],
+      "topic_label": "기능안전 신뢰도 모델링: FTA·Markov·RBD·CCF·PFDavg·PFH"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
