@@ -324,6 +324,10 @@ python3 scripts/test_final_control_element_sil_sis_esd_pst_topic.py
 echo
 echo "===== control valve integrated selection process and lifecycle topic regression ====="
 python3 scripts/test_control_valve_selection_process_lifecycle_topic.py
+
+echo
+echo "===== control valve maintenance inspection overhaul testing topic regression ====="
+python3 -B scripts/test_control_valve_maintenance_inspection_overhaul_testing_topic.py
 echo
 RELEASE_REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export PYTHONPATH="${RELEASE_REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
@@ -475,6 +479,11 @@ python3 -B scripts/test_mcdc_vmodel_sil_overgrading_regression.py
 
 echo "----- host regression: topic classification policy -----"
 python3 -B scripts/test_topic_classification_policy.py
+
+echo "----- host regression: topic pack contract and tool -----"
+python3 -B -m unittest \
+  scripts.test_topic_pack_contract \
+  scripts.test_topic_pack_tool
 
 echo "----- host regression: topic pack validator multischema -----"
 python3 -B scripts/test_topic_pack_validator_multischema.py
