@@ -500,7 +500,7 @@
     {
       "id": "hazop_lopa_required_rrf",
       "anchor_id": "hazop_lopa_required_rrf",
-      "statement": "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있으며 1 이하이면 해당 scenario에서 추가 SIF 위험감소 요구가 발생하지 않는다.",
+      "statement": "요구 위험감소계수 RRF_required는 기존 IPL 적용 후 residual frequency를 tolerable event frequency로 나눈 값으로 정의할 수 있으며 1 이하이면 해당 scenario에서 추가 SIF 위험감소 요구가 발생하지 않는다. Demand-mode rule: PFDavg (average probability of failure on demand) is the integrity metric for low-demand mode, whereas PFH (probability of dangerous failure per hour) is used for high-demand or continuous mode. PFDavg is not a universal metric for all demand modes. Terminology rule: SIL means Safety Integrity Level (안전 무결성 수준). Safety Instrument Level is an incorrect expansion; SIS remains Safety Instrumented System.",
       "importance": "core",
       "keywords": [
         "RRF required",

@@ -117,7 +117,7 @@
   },
   "revision_notes": [
     "deterministic regex disabled to avoid broad false positives",
-    "fatal conditions require contextual LLM verification",
+    "fatal conditions require contextual LLM verification PFDavg를 모든 수요 모드의 유일한 지표로 단정하거나 고수요·연속 운전에서 PFH를 배제하면 치명 오류(fatal)로 판정한다. SIL을 Safety Instrument Level로 전개하면 치명 오류(fatal)로 판정한다. 정답은 Safety Integrity Level(안전 무결성 수준)이다.",
     "single-topic direct authoring from reviewed fact anchors"
   ]
 }

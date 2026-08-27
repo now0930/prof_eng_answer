@@ -57,3 +57,18 @@ HAZOP에서 식별한 원인–결과를 LOPA scenario로 정규화하고, 적�
 - Source JSON: 직접 작성
 - Generated bank: 변경하지 않음
 - Commit/Push: 수행하지 않음
+
+## Scope and adjacent Topic ownership
+
+- This Topic Pack owns HAZOP deviation analysis, LOPA initiating-event and
+  IPL crediting, IPL independence and no-double-counting checks, risk-gap
+  context, and target SIL allocation.
+- Demand-mode selection is explicit: low-demand uses PFDavg, while
+  high-demand or continuous mode uses PFH. Detailed FTA, Markov, RBD, CCF,
+  proof-test, voting, diagnostic-coverage, PFDavg, and PFH derivations belong
+  to `functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh`.
+- Partial-stroke-test procedures and detailed final-element diagnostics remain
+  in the HIPPS or final-element Topic Packs; PST is only an adjacent example
+  here.
+- SIL means Safety Integrity Level (안전 무결성 수준). Safety Instrument Level
+  is incorrect; SIS separately means Safety Instrumented System.
