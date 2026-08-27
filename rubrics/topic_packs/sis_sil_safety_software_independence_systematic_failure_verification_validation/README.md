@@ -74,3 +74,17 @@ SW-05는 SIL, Systematic Failure, Independence, Tool Qualification 원칙과 Saf
 - Coverage Tool 증거와 100% Coverage의 한계
 
 SIL 숫자만으로 MC/DC 100%를 보편 의무로 단정하지 않는다.
+
+## Scope and adjacent Topic ownership
+
+- Topic B owns systematic-failure interpretation, verification independence,
+  and the distinction between Verification and Validation.
+- Unit Testing is a software-module defect-detection activity. It is not
+  evidence of random hardware failure integrity.
+- MISRA is a coding-standard and static-analysis rule set. It is not a
+  unit-test tool.
+- V-model use alone does not guarantee SIL achievement. Detailed lifecycle,
+  traceability, and V-model mapping belong to
+  `instrumentation_control_software_lifecycle_v_model_traceability_verification_validation`.
+- Detailed structural coverage and MC/DC treatment remain canonical in
+  `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis`.
