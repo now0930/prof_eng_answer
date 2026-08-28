@@ -256,6 +256,91 @@ final grade object
 
 완료된 session은 다음 채점에서 재사용하지 않는다. 동일 초 session ID 충돌도 방지한다.
 
+#### 공통 판정 경계와 실행 계약
+
+이 절은 기술사 채점기의 공통 판정 경계를 정의하는 정본이다. 개별 Topic Pack과
+문제 유형은 이 경계를 완화하거나 우회할 수 없다. 세부 작성·검증 절차는 연결된
+실행 문서를 따르며, 동일한 계약 본문을 여러 문서에 복제하지 않는다.
+
+##### 문제 요구 축과 답안 축
+
+- 문제의 명시 요구와 요구 간 관계를 먼저 구조화한다.
+- 답안이 모범답안과 다른 축을 선택해도 문제와 관련되고 내부적으로 일관되면
+  구조·요구 해석·연결성의 제한된 점수를 인정한다.
+- 축 일관성은 Fact 정확성이나 요구사항 100% 충족을 자동으로 의미하지 않는다.
+
+##### Fact 증거 게이트
+
+기술 Fact는 원자적 주장 단위로 판정한다.
+
+- `SUPPORTED`: 검증 근거가 있으므로 Fact 가산 가능
+- `UNSUPPORTED`: Fact 가산 금지, 자동 감점 금지
+- `CONTRADICTED`: Fact 가산 금지, 오류 정책에 따라 감점 또는 상한 적용
+- `NOT_APPLICABLE`: Fact 점수 대상 아님
+
+Fact Anchor보다 강한 결론은 지원된 것으로 보지 않는다. “도움이 된다”를
+“달성한다”로, “감소시킨다”를 “제거한다”로, “일부 검출한다”를 “전체
+검증한다”로 확대하지 않는다.
+
+##### 점수 항목 간 전파 제한
+
+- 구조가 좋다는 이유로 Fact 정확성을 가산하지 않는다.
+- 관련 용어를 언급했다는 이유로 verified coverage를 부여하지 않는다.
+- 축이 일관된다는 이유로 요구사항을 100% 충족했다고 판정하지 않는다.
+- 미검증 기술 주장을 기술사 판단이나 현장성 점수로 우회 가산하지 않는다.
+- 연결성은 평가할 수 있으나 잘못된 핵심 전제를 중심으로 한 연결에는 높은
+  점수를 주지 않는다.
+
+##### 기술사 판단과 판정 정합성
+
+- 기술사 판단은 검증된 전제, 조건, 대안, trade-off, 검증 방법과 수용 기준을
+  근거로 평가한다.
+- `strong` 판정은 핵심 요구별 검증된 Fact, 충분한 verified coverage, 핵심
+  충돌 부재, 관련되고 일관된 답안 축을 모두 요구한다.
+- 최종 점수, 등급, coverage, 총평과 보완 방향은 동일한 근거를 사용한다.
+- 보완 방향은 문제 요구에서 가장 큰 미충족, 오류, 검증 공백 순으로 제시한다.
+
+##### 일반화 우선 회귀 정책
+
+- 개별 답안의 모든 틀린 문장을 규칙으로 추가하지 않는다.
+- 공통 scoring gate, coverage gate, verdict gate의 실패를 먼저 확인한다.
+- Topic 전용 규칙은 도메인 불변식 또는 반복 가능한 오개념일 때만 추가한다.
+- 한 사례의 수정은 다른 Topic과 문제 유형에서도 같은 경계를 유지하는지
+  회귀 검증한다.
+
+##### Topic Pack과 generated 경계
+
+- Source Topic Pack이 정본이다.
+- 기존 Topic과 인접 Topic의 소유권·경계를 먼저 확인한다.
+- generated 파일은 build 결과이며 직접 수정하지 않는다.
+- Fact, fatal, model, importance와 README의 projection 관계를 유지한다.
+
+##### 변경·검증·문서화 게이트
+
+채점 계약 변경은 read-only inventory, owner 확정, 최소 수정, focused test,
+`git diff --check`, clean-snapshot release validation, commit·push 분리,
+post-push remote audit 순서를 따른다.
+
+채점 철학, 점수 경계, 공통 gate, question type, Topic Pack schema,
+generated projection 또는 release 절차가 바뀌면 코드·테스트와 함께 이 정본과
+관련 실행 문서를 갱신한다.
+
+##### 기계 판독 계약
+
+- `QUESTION_AXIS_FIRST`
+- `ANSWER_AXIS_ALLOWED`
+- `AXIS_CONSISTENCY_EARNS_LIMITED_CREDIT`
+- `AXIS_CREDIT_DOES_NOT_IMPLY_FACT_CREDIT`
+- `MENTION_IS_NOT_VERIFIED_COVERAGE`
+- `NO_SUPPORT_NO_POSITIVE_FACT_CREDIT`
+- `UNSUPPORTED_IS_NOT_AUTOMATICALLY_WRONG`
+- `CONTRADICTION_ONLY_TRIGGERS_ERROR_PENALTY`
+- `ENGINEERING_CREDIT_REQUIRES_TRUSTED_PREMISES`
+- `STRONG_REQUIRES_FACT_SUPPORT_AND_AXIS_COHERENCE`
+- `GENERALIZED_FIX_BEFORE_CASE_SPECIFIC_RULE`
+- `SOURCE_FIRST_GENERATED_BY_BUILD_ONLY`
+- `DOCUMENTATION_CHANGES_WITH_CONTRACT`
+
 ## 13. Topic Pack과 runtime bank
 
 Topic Pack source:

@@ -18,6 +18,9 @@ rubrics/topic_packs/<topic_id>/
 
 ---
 
+> **채점 일관성 정본:** 문제 요구 축, 답안 축, Fact 증거 게이트, 점수 항목 간 전파 제한과 판정 정합성은 [`grading_architecture.md`](grading_architecture.md)의 ‘채점 일관성’ 절을 따른다. 이 문서는 해당 계약을 중복 정의하지 않고 실행 절차만 설명한다.
+
+
 ## 1. 작성 원칙
 
 Rubric은 가능한 JSON source로 관리하고, Python 코드는 routing, parsing, validation, score postprocess에 집중한다.

@@ -346,5 +346,135 @@ class VerdictRecommendationConsistencyTests(
         )
 
 
+def _check_grading_consistency_documentation() -> None:
+    # Validate the canonical project-wide grading-consistency documentation.
+    import re as _grading_consistency_re
+    from pathlib import Path as _GradingConsistencyPath
+
+    _root = _GradingConsistencyPath(__file__).resolve().parents[1]
+    _canonical_path = _root / "docs" / "grading_architecture.md"
+    _linked_docs = (
+        _root / "docs" / "topic_pack_workflow.md",
+        _root / "docs" / "rubric_authoring_guide.md",
+    )
+    _readme_path = _root / "README.md"
+    _markers = ('QUESTION_AXIS_FIRST',
+ 'ANSWER_AXIS_ALLOWED',
+ 'AXIS_CONSISTENCY_EARNS_LIMITED_CREDIT',
+ 'AXIS_CREDIT_DOES_NOT_IMPLY_FACT_CREDIT',
+ 'MENTION_IS_NOT_VERIFIED_COVERAGE',
+ 'NO_SUPPORT_NO_POSITIVE_FACT_CREDIT',
+ 'UNSUPPORTED_IS_NOT_AUTOMATICALLY_WRONG',
+ 'CONTRADICTION_ONLY_TRIGGERS_ERROR_PENALTY',
+ 'ENGINEERING_CREDIT_REQUIRES_TRUSTED_PREMISES',
+ 'STRONG_REQUIRES_FACT_SUPPORT_AND_AXIS_COHERENCE',
+ 'GENERALIZED_FIX_BEFORE_CASE_SPECIFIC_RULE',
+ 'SOURCE_FIRST_GENERATED_BY_BUILD_ONLY',
+ 'DOCUMENTATION_CHANGES_WITH_CONTRACT')
+    _required_phrases = ('답안이 모범답안과 다른 축을 선택해도',
+ '`UNSUPPORTED`: Fact 가산 금지, 자동 감점 금지',
+ '축 일관성은 Fact 정확성이나 요구사항 100% 충족을 자동으로 의미하지 않는다',
+ '미검증 기술 주장을 기술사 판단이나 현장성 점수로 우회 가산하지 않는다',
+ '`strong` 판정은 핵심 요구별 검증된 Fact',
+ '개별 답안의 모든 틀린 문장을 규칙으로 추가하지 않는다',
+ 'generated 파일은 build 결과이며 직접 수정하지 않는다')
+    _prohibited_topic_specific_paths = (
+        _root
+        / "docs"
+        / "topic_sheets"
+        / (
+            "sis_sil_safety_software_independence_"
+            "systematic_failure_verification_validation.md"
+        ),
+        _root
+        / "scripts"
+        / "test_control_valve_authority_rangeability_gain_topic.py",
+    )
+
+    def _read_required_document(path: _GradingConsistencyPath) -> str:
+        if not path.is_file():
+            raise AssertionError(
+                f"missing required file: {path.relative_to(_root)}"
+            )
+        return path.read_text(encoding="utf-8")
+
+    _canonical = _read_required_document(_canonical_path)
+
+    for _marker in _markers:
+        _count = _canonical.count(_marker)
+        if _count != 1:
+            raise AssertionError(
+                f"canonical marker count mismatch: {_marker}={_count}"
+            )
+
+    for _phrase in _required_phrases:
+        if _phrase not in _canonical:
+            raise AssertionError(f"missing canonical phrase: {_phrase}")
+
+    if "## 12.1 최종 판정 일관성 계약" not in _canonical:
+        raise AssertionError(
+            "existing 12.1 최종 판정 일관성 계약 section was not preserved"
+        )
+
+    _nested_heading = _grading_consistency_re.search(
+        r"^#{3,6}\s+공통 판정 경계와 실행 계약\s*$",
+        _canonical,
+        _grading_consistency_re.MULTILINE,
+    )
+    if not _nested_heading:
+        raise AssertionError(
+            "nested consistency augmentation heading missing"
+        )
+
+    _linked_marker_total = 0
+    for _path in _linked_docs:
+        _text = _read_required_document(_path)
+        if "grading_architecture.md" not in _text:
+            raise AssertionError(
+                f"canonical link missing: {_path.relative_to(_root)}"
+            )
+        if "채점 일관성 정본" not in _text:
+            raise AssertionError(
+                f"normative link note missing: {_path.relative_to(_root)}"
+            )
+        _linked_marker_total += sum(
+            _text.count(_marker) for _marker in _markers
+        )
+
+    if _linked_marker_total != 0:
+        raise AssertionError(
+            "linked execution guides duplicate machine-readable "
+            "contract markers"
+        )
+
+    _readme = _read_required_document(_readme_path)
+    if "grading_architecture.md" not in _readme:
+        raise AssertionError("README canonical reference missing")
+
+    _topic_sheet = _read_required_document(
+        _prohibited_topic_specific_paths[0]
+    )
+    if "채점 일관성 정본" in _topic_sheet:
+        raise AssertionError(
+            "Topic-specific sheet received project-wide link"
+        )
+
+    _control_valve_test = _read_required_document(
+        _prohibited_topic_specific_paths[1]
+    )
+    if "NO_SUPPORT_NO_POSITIVE_FACT_CREDIT" in _control_valve_test:
+        raise AssertionError(
+            "Topic-specific control-valve test owns project-wide contract"
+        )
+
+    print("CANONICAL_MARKERS=13_OF_13_PASS")
+    print("CANONICAL_REQUIRED_PHRASES=7_OF_7_PASS")
+    print("LINKED_DOCUMENTS=2_OF_2_PASS")
+    print("README_REFERENCE=PASS")
+    print("TOPIC_SPECIFIC_LINK_EXCLUSION=PASS")
+    print("TOPIC_SPECIFIC_TEST_OWNER_EXCLUSION=PASS")
+
+
 if __name__ == "__main__":
+    _check_grading_consistency_documentation()
     unittest.main()

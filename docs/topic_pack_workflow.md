@@ -4,6 +4,9 @@
 
 Topic Pack 구조와 현재 inventory는 `topic_pack_architecture.md`, JSON 내용 기준은 `rubric_authoring_guide.md`를 함께 본다.
 
+> **채점 일관성 정본:** 문제 요구 축, 답안 축, Fact 증거 게이트, 점수 항목 간 전파 제한과 판정 정합성은 [`grading_architecture.md`](grading_architecture.md)의 ‘채점 일관성’ 절을 따른다. 이 문서는 해당 계약을 중복 정의하지 않고 실행 절차만 설명한다.
+
+
 ## 1. 핵심 원칙
 
 ```text
