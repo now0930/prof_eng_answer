@@ -9,6 +9,66 @@ from pathlib import Path
 from grading_config import load_active_config, save_active_config_snapshots
 
 
+def _call_difficulty_strategy_to_grade_compat(
+    adapter: object,
+    grade: dict[str, object],
+    *,
+    question_text: str,
+    question_contract: dict[str, object] | None,
+) -> dict[str, object]:
+    # Inspect the callable that will actually receive the keyword arguments.
+    import inspect
+
+    kwargs: dict[str, object] = {
+        "question_text": question_text,
+    }
+
+    signature_target = adapter
+
+    side_effect = getattr(
+        adapter,
+        "side_effect",
+        None,
+    )
+    if callable(side_effect):
+        signature_target = side_effect
+    else:
+        mock_wraps = getattr(
+            adapter,
+            "_mock_wraps",
+            None,
+        )
+        if callable(mock_wraps):
+            signature_target = mock_wraps
+
+    try:
+        signature = inspect.signature(
+            signature_target
+        )
+    except (TypeError, ValueError):
+        signature = None
+
+    if signature is not None:
+        parameters = signature.parameters
+        accepts_contract = (
+            "question_contract" in parameters
+            or any(
+                parameter.kind
+                is inspect.Parameter.VAR_KEYWORD
+                for parameter in parameters.values()
+            )
+        )
+        if accepts_contract:
+            kwargs["question_contract"] = (
+                question_contract
+            )
+
+    return adapter(
+        grade,
+        **kwargs,
+    )
+
+
 BASE_DIR = Path(__file__).resolve().parent
 
 # STAGE23J_RUNTIME_PROVENANCE_IMPORT_V4
@@ -6108,9 +6168,13 @@ def _phase2_postprocess_grade(legacy_result):
             grade.setdefault("topic_id", _difficulty_topic_id)
             grade.setdefault("inferred_topic_id", _difficulty_topic_id)
 
-        grade = attach_difficulty_strategy_to_grade(
+        grade = _call_difficulty_strategy_to_grade_compat(
+            attach_difficulty_strategy_to_grade,
             grade,
-            question_text=_question_for_difficulty_final
+            question_text=_question_for_difficulty_final,
+            question_contract=locals().get(
+                "question_contract"
+            ),
         )
         _ds = grade.get("difficulty_strategy", {})
         print(

@@ -16,20 +16,52 @@ from generic_grading_contract import (
 )
 
 
-def _walk_find_question_type_coverage(obj: Any) -> dict[str, Any] | None:
+
+_REFERENCE_ONLY_COVERAGE_KEYS = frozenset(
+    {
+        "legacy_grade_reference",
+        "model_answer_reference",
+        "reference_grade",
+        "reference_answer",
+        "reference_result",
+        "golden_reference",
+    }
+)
+
+
+def _walk_find_question_type_coverage(
+    obj: Any,
+) -> dict[str, Any] | None:
+    # Find active coverage while excluding reference-only branches.
     if isinstance(obj, dict):
-        coverage = obj.get("question_type_coverage")
+        coverage = obj.get(
+            "question_type_coverage"
+        )
         if isinstance(coverage, dict):
             return coverage
 
-        for value in obj.values():
-            found = _walk_find_question_type_coverage(value)
+        for key, value in obj.items():
+            if (
+                str(key)
+                in _REFERENCE_ONLY_COVERAGE_KEYS
+            ):
+                continue
+
+            found = (
+                _walk_find_question_type_coverage(
+                    value
+                )
+            )
             if found:
                 return found
 
     elif isinstance(obj, list):
         for item in obj:
-            found = _walk_find_question_type_coverage(item)
+            found = (
+                _walk_find_question_type_coverage(
+                    item
+                )
+            )
             if found:
                 return found
 
@@ -603,18 +635,49 @@ def _promote_question_type_coverage_to_root_v1(grade: dict[str, Any]) -> dict[st
     grade["question_type"] = qtype
     grade["question_type_name"] = resolved_name
 
-    # Preserve the locked question_type_v2 serialization contract.
-    grade["question_type_v2"] = {
-        "question_type": qtype,
-        "name_ko": resolved_name,
-        "sub_criteria": question_type_sub_criteria(qtype),
-        "c_fact_focus": question_type_c_focus(qtype),
-        "d_field_judgement_focus": question_type_d_focus(qtype),
-        "note": (
-            "question_type_v2는 B항목 요구사항 완전성과 C항목 Fact 전개, "
-            "D항목 현장 판단을 보완하는 평가 lens입니다."
-        ),
-    }
+    # Preserve provenance metadata attached by the canonical output
+    # adapter. Promotion owns normalized profile fields only.
+    existing_qtype_v2 = grade.get(
+        "question_type_v2"
+    )
+    if not isinstance(
+        existing_qtype_v2,
+        dict,
+    ):
+        existing_qtype_v2 = {}
+
+    serialized_qtype_v2 = dict(
+        existing_qtype_v2
+    )
+    serialized_qtype_v2.update(
+        {
+            "question_type": qtype,
+            "name_ko": resolved_name,
+            "sub_criteria": (
+                question_type_sub_criteria(
+                    qtype
+                )
+            ),
+            "c_fact_focus": (
+                question_type_c_focus(
+                    qtype
+                )
+            ),
+            "d_field_judgement_focus": (
+                question_type_d_focus(
+                    qtype
+                )
+            ),
+            "note": (
+                "question_type_v2는 B항목 요구사항 완전성과 "
+                "C항목 Fact 전개, D항목 현장 판단을 보완하는 "
+                "평가 lens입니다."
+            ),
+        }
+    )
+    grade["question_type_v2"] = (
+        serialized_qtype_v2
+    )
 
     return grade
 

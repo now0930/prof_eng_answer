@@ -43,22 +43,52 @@ def _to_float(value: Any, default: float | None = None) -> float | None:
         return default
 
 
+
+_REFERENCE_ONLY_COVERAGE_KEYS = frozenset(
+    {
+        "legacy_grade_reference",
+        "model_answer_reference",
+        "reference_grade",
+        "reference_answer",
+        "reference_result",
+        "golden_reference",
+    }
+)
+
+
 def _walk_find_question_type_coverage(
     obj: Any,
 ) -> dict[str, Any] | None:
+    # Find active coverage while excluding reference-only branches.
     if isinstance(obj, dict):
-        coverage = obj.get("question_type_coverage")
+        coverage = obj.get(
+            "question_type_coverage"
+        )
         if isinstance(coverage, dict):
             return coverage
 
-        for value in obj.values():
-            found = _walk_find_question_type_coverage(value)
+        for key, value in obj.items():
+            if (
+                str(key)
+                in _REFERENCE_ONLY_COVERAGE_KEYS
+            ):
+                continue
+
+            found = (
+                _walk_find_question_type_coverage(
+                    value
+                )
+            )
             if found:
                 return found
 
     elif isinstance(obj, list):
         for item in obj:
-            found = _walk_find_question_type_coverage(item)
+            found = (
+                _walk_find_question_type_coverage(
+                    item
+                )
+            )
             if found:
                 return found
 

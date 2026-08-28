@@ -261,9 +261,14 @@ from explicit_requirement_cap import apply_explicit_requirement_hard_cap
 
 def attach_difficulty_strategy_to_grade(
     grade: Dict[str, Any],
-    question_text: Optional[str] = None
+    question_text: Optional[str] = None,
+    question_contract: Optional[Dict[str, Any]] = None,
 ) -> Dict[str, Any]:
-    grade = attach_question_type_v2_to_grade(grade, question_text=question_text)
+    grade = attach_question_type_v2_to_grade(
+        grade,
+        question_text=question_text,
+        question_contract=question_contract,
+    )
     grade = ensure_grade_question_type_coverage(grade, question_text=question_text)
     grade = attach_question_type_coverage_feedback(grade)
     grade = apply_explicit_requirement_hard_cap(grade)

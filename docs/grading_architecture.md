@@ -112,6 +112,15 @@ Active Question Type은 4종이다.
 
 Semantic grader는 coverage evidence를 제공할 수 있지만 type 소유권은 deterministic router와 canonical taxonomy에 있다.
 
+### 5.1 Question Type provenance 계약
+
+- `question_contract.json`의 `question_type.id`가 session의 canonical Question Type이다.
+- 후단 adapter는 Question Contract가 전달되면 문제문을 다시 분류하지 않는다.
+- Question Contract가 없는 호환 경로만 `question_type_router.detect_question_type`을 사용한다.
+- `question_type`, `question_type_v2`, root `question_type_coverage`, coverage score adjustment는 같은 canonical type을 사용한다.
+- `legacy_grade_reference`, `model_answer_reference` 등 reference-only branch의 type과 coverage는 최종 판정·점수·출력의 source가 될 수 없다.
+- semantic coverage type이 canonical type과 다르면 유형별 coverage를 무효화하되, 문제문에서 직접 추출한 explicit requirement evidence는 보존한다.
+
 ## 6. Coverage 상태
 
 명시적 요구와 Question Type coverage는 다음 네 상태를 사용한다.
