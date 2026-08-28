@@ -38,6 +38,7 @@
 | Topic Pack 구조·현재 inventory 확인 | [`topic_pack_architecture.md`](topic_pack_architecture.md) | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
 | 새 topic 추가 또는 기존 topic 보강 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
 | Logic Check 운영 기준 확인 | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
+| 장기 채점 품질 로드맵과 진행 상태 확인 | [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) | [`grading_architecture.md`](grading_architecture.md), [`operation_runbook.md`](operation_runbook.md) |
 | Logic Check Profile 초안 확인 | [`logic_check_profile_generator_prompt.md`](logic_check_profile_generator_prompt.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
 | Rule-based Logic Check JSON 초안 확인 | [`logic_check_json_generator_prompt.md`](logic_check_json_generator_prompt.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
 | Topic Sheet 검토 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | `topic_sheets/<topic_id>.md` |
@@ -103,6 +104,21 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 | Correctness owner | verified Fact 오류는 기본 C owner | `verified_defect_reconciliation.py`, `layer_evidence_guard.py` |
 | 최종 저장 | score reconciliation 후 coverage finalizer를 적용한 객체 저장 | `grading_agents.py`, `bot.py` |
 | Session | 완료 세션 격리, 동일 초 ID 충돌 방지 | `bot.py` |
+| Runtime provenance | process-stable 6개 필드; image/container deployment proof는 별도 | `runtime_grading_provenance.py`, [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) |
+
+### Runtime provenance와 deployment proof 경계
+
+`runtime_grading_provenance_v1`은 grade/session에 process-stable 실행 증적을 첨부합니다. 현재 기록 범위는 engine commit, process 시작 시각, router version, evaluator/verifier SHA와 scoring policy version입니다.
+
+다음 항목은 runtime provenance만으로 증명되지 않습니다.
+
+- Docker image ID와 digest
+- container ID와 container start time
+- 이전 PID/container 종료와 신규 process 생성
+- host와 container 핵심 module SHA256 parity
+- container production replay와 Telegram endpoint smoke
+
+구현 상태와 남은 deployment gate는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다. Issue #1은 진행 상태와 증거를 관리하며, 세부 정책과 반복 절차는 `grading_architecture.md`, `operation_runbook.md`와 향후 품질 로드맵 문서가 source of truth를 담당합니다.
 
 Question Type을 semantic grader의 자유 선택 결과로 설명하지 않습니다. 현재 lens는 문제문 기반 deterministic routing과 confidence gate가 기준입니다.
 
