@@ -552,3 +552,85 @@ def detect_question_type(
             ),
         ),
     }
+
+# STAGE35E2_TOPIC_PACK_CANONICAL_QUESTION_TYPE_V1
+from copy import deepcopy as _stage35e2_deepcopy
+from functools import wraps as _stage35e2_wraps
+import inspect as _stage35e2_inspect
+
+_stage35e2_previous_detect_question_type = detect_question_type
+
+
+@_stage35e2_wraps(_stage35e2_previous_detect_question_type)
+def detect_question_type(*args, **kwargs):
+    from question_demand_contract import (
+        build_question_demand_contract,
+        extract_explicit_question_scope,
+    )
+
+    call_args = args
+    call_kwargs = dict(kwargs)
+    scoped_question = ""
+    try:
+        signature = _stage35e2_inspect.signature(
+            _stage35e2_previous_detect_question_type
+        )
+        bound = signature.bind_partial(*args, **kwargs)
+        question_key = next(
+            (
+                key
+                for key in ("question_text", "question", "problem_text")
+                if key in bound.arguments
+            ),
+            None,
+        )
+        if question_key is not None:
+            scoped_question = extract_explicit_question_scope(
+                bound.arguments[question_key]
+            )
+            bound.arguments[question_key] = scoped_question
+            call_args = bound.args
+            call_kwargs = bound.kwargs
+    except (TypeError, ValueError):
+        if args:
+            scoped_question = extract_explicit_question_scope(args[0])
+            call_args = (scoped_question, *args[1:])
+
+    result = _stage35e2_previous_detect_question_type(
+        *call_args,
+        **call_kwargs,
+    )
+    if not isinstance(result, dict):
+        return result
+
+    contract = build_question_demand_contract(scoped_question)
+    if not contract.get("topic_pack_demand_axes_applied"):
+        return result
+    canonical = str(contract.get("primary_lens") or "").strip().upper()
+    if not canonical:
+        return result
+
+    updated = _stage35e2_deepcopy(result)
+    candidates = updated.get("candidates")
+    canonical_candidate = None
+    if isinstance(candidates, list):
+        canonical_candidate = next(
+            (
+                _stage35e2_deepcopy(row)
+                for row in candidates
+                if isinstance(row, dict)
+                and str(row.get("id") or "").strip().upper() == canonical
+            ),
+            None,
+        )
+    if not isinstance(canonical_candidate, dict):
+        canonical_candidate = {"id": canonical}
+    updated["question_type"] = canonical
+    updated["primary_type"] = canonical_candidate
+    updated["question_type_locked"] = True
+    updated["source"] = "topic_pack_question_demand_axes"
+    updated["canonical_owner"] = "topic_pack_question_demand_axes"
+    updated["authority"] = "question_only_deterministic"
+    updated["topic_pack_canonical_lens_applied"] = True
+    updated["question_scope_source"] = "explicit_problem_statement"
+    return updated

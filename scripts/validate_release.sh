@@ -500,6 +500,8 @@ echo "----- host regression: question demand contract -----"
 python3 -B scripts/test_question_demand_contract.py
 # STAGE35D_TOPIC_DEMAND_BRIDGE_REGRESSION_V1
 python3 -B tests/test_stage35d_topic_pack_demand_bridge.py
+# STAGE35E2_PROVIDER_PROJECTION_LENS_REGRESSION_V1
+python3 -B tests/test_stage35e2_provider_eight_axis_canonical_lens.py
 python3 -B scripts/test_question_type_de_policy.py
 
 echo "----- host regression: qtype golden complete contract -----"

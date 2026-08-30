@@ -206,6 +206,32 @@ _COMPILED_PATTERNS = {
 }
 
 
+
+# STAGE35E2_EXPLICIT_QUESTION_SCOPE_AND_CANONICAL_LENS_V1
+def extract_explicit_question_scope(value: Any) -> str:
+    """Return an explicit problem statement without answer-body contamination."""
+    text = "" if value is None else str(value)
+    text = unicodedata.normalize("NFKC", text).replace("\ufe0f", "")
+    text = re.sub(r"^\s*/grade\b", "", text, flags=re.IGNORECASE).strip()
+
+    separator = re.search(r"={20,}", text)
+    if separator:
+        prefix = text[: separator.start()].strip()
+        problem = re.search(r"(?:^|\n)\s*문제\s*:\s*(.+)", prefix, re.DOTALL)
+        return (problem.group(1) if problem else prefix).strip()
+
+    if "문제 정의" in text or "[화학 플랜트]" in text:
+        body_marker = re.search(
+            r"(?:^|\n)\s*(?:[🔹▶▷■□●○◆◇※★☆]\s*)?"
+            r"1\s*[.)]\s*배경(?:\s*\([^\n]*\))?",
+            text,
+            flags=re.IGNORECASE,
+        )
+        if body_marker:
+            return text[: body_marker.start()].strip()
+
+    return text.strip()
+
 def normalize_question_text(value: Any) -> str:
     text = "" if value is None else str(value)
     text = unicodedata.normalize("NFKC", text)
@@ -477,6 +503,9 @@ def _topic_pack_demand_requirements(
             "schema_version": payload.get("schema_version"),
             "topic_id": topic_id,
             "source_file": payload.get("_source_file"),
+            "canonical_primary_lens": _canonical_primary_lens(
+                payload.get("canonical_primary_lens")
+            ),
             "matched_activation_terms": sorted(set(matched_terms)),
             "requirement_count": len(rows),
         }
@@ -492,7 +521,9 @@ def build_question_demand_contract(
     *,
     canonical_primary_lens: Any = None,
 ) -> dict[str, Any]:
-    normalized = normalize_question_text(question_text)
+    normalized = normalize_question_text(
+        extract_explicit_question_scope(question_text)
+    )
     topic_pack_requirements, topic_pack_metadata = (
         _topic_pack_demand_requirements(normalized)
     )
@@ -557,17 +588,24 @@ def build_question_demand_contract(
     detected_primary_lens, lens_scores = _primary_lens(
         unique_demand_kinds
     )
-    canonical_lens = _canonical_primary_lens(
-        canonical_primary_lens
+    topic_pack_canonical_lens = _canonical_primary_lens(
+        topic_pack_metadata.get("canonical_primary_lens")
+        if isinstance(topic_pack_metadata, dict)
+        else None
     )
-    primary_lens = (
-        canonical_lens
-        or detected_primary_lens
+    canonical_lens = (
+        topic_pack_canonical_lens
+        or _canonical_primary_lens(canonical_primary_lens)
     )
+    primary_lens = canonical_lens or detected_primary_lens
     primary_lens_source = (
-        "canonical_question_type_router"
-        if canonical_lens
-        else "question_text_pregrade_fallback"
+        "topic_pack_canonical_primary_lens"
+        if topic_pack_canonical_lens
+        else (
+            "canonical_question_type_router"
+            if canonical_lens
+            else "question_text_pregrade_fallback"
+        )
     )
     primary_core = _PRIMARY_CORE_DEMANDS[primary_lens]
 
@@ -619,9 +657,13 @@ def build_question_demand_contract(
             bool(canonical_lens)
         ),
         "final_primary_lens_owner": (
-            "canonical_question_type_router"
-            if canonical_lens
-            else "not_yet_available"
+            "topic_pack_question_demand_axes"
+            if topic_pack_canonical_lens
+            else (
+                "canonical_question_type_router"
+                if canonical_lens
+                else "not_yet_available"
+            )
         ),
         "secondary_demands": secondary_demands,
         "requirements": deduped_requirements,
@@ -674,19 +716,16 @@ def extract_question_text_from_call(
     args: tuple[Any, ...],
     kwargs: dict[str, Any],
 ) -> str:
+    value: Any = None
     try:
         signature = inspect.signature(function)
         bound = signature.bind_partial(*args, **kwargs)
         value = bound.arguments.get("question_text")
-        if value is not None:
-            return str(value)
     except (TypeError, ValueError):
-        pass
+        value = None
 
-    if "question_text" in kwargs:
-        return str(kwargs["question_text"])
-
-    if args:
-        return str(args[0])
-
-    return ""
+    if value is None and "question_text" in kwargs:
+        value = kwargs["question_text"]
+    if value is None and args:
+        value = args[0]
+    return extract_explicit_question_scope(value)

@@ -1317,9 +1317,27 @@ question_demand_contract:
 6. 설계·계산·검증 요구가 secondary_demands에 있으면 해당 요구를 별도로 평가한다.
 7. final attach에서는 기존 canonical Question Type router 결과로 primary_lens를 다시 고정하며 이 snapshot은 이를 덮어쓰지 않는다.
 8. 이 계약 자체는 Python 점수·상한·하드캡을 직접 변경하지 않는다.
+9. explicit_requirement_coverage.requirements는 contract requirements와 정확히 같은 개수·순서·requirement_id를 사용한다.
+10. 두 개 이상의 requirement를 하나의 행으로 합치거나 requirement_id를 생략하지 않는다.
+11. 각 행은 requirement_id, requirement, status, evidence, is_core를 포함한다.
+12. status는 present, partial, wrong, missing 중 하나이며 근거가 없으면 missing으로 판정한다.
 """.strip().format(
         contract_json=contract_json,
     )
+
+    retry_contract = _stage35e2_projection_retry_contract.get()
+    if isinstance(retry_contract, dict):
+        retry_ids = _question_demand_json.dumps(
+            _stage35e2_contract_requirement_ids(retry_contract),
+            ensure_ascii=False,
+        )
+        guidance += (
+            "\n\n[EXACT_EXPLICIT_REQUIREMENT_REPAIR_V1]\n"
+            "이전 provider projection은 개수 또는 requirement_id가 계약과 불일치하여 폐기됐다.\n"
+            f"이번 응답은 다음 ID를 정확히 같은 순서로 한 번씩만 반환한다: {retry_ids}\n"
+            "행 병합, ID 생략, 자유문장 requirement 대체를 금지한다.\n"
+            "[/EXACT_EXPLICIT_REQUIREMENT_REPAIR_V1]"
+        )
 
     if "[QUESTION_DEMAND_CONTRACT_V1]" in prompt:
         return prompt
@@ -1332,17 +1350,90 @@ _question_demand_previous_gemini_semantic_grade = (
 )
 
 
+# STAGE35E2_EXACT_PROVIDER_PROJECTION_RETRY_V1
+from contextvars import ContextVar as _stage35e2_ContextVar
+
+_stage35e2_projection_retry_contract = _stage35e2_ContextVar(
+    "stage35e2_projection_retry_contract",
+    default=None,
+)
+
+
+def _stage35e2_contract_requirement_ids(contract):
+    rows = contract.get("requirements") if isinstance(contract, dict) else None
+    if not isinstance(rows, list):
+        return []
+    return [
+        str(row.get("requirement_id") or "").strip()
+        for row in rows
+        if isinstance(row, dict)
+    ]
+
+
+def _stage35e2_explicit_requirement_lists(value):
+    found = []
+    seen = set()
+
+    def walk(node):
+        if isinstance(node, dict):
+            explicit = node.get("explicit_requirement_coverage")
+            if isinstance(explicit, dict):
+                rows = explicit.get("requirements")
+                if isinstance(rows, list) and id(rows) not in seen:
+                    seen.add(id(rows))
+                    found.append(rows)
+            for child in node.values():
+                walk(child)
+        elif isinstance(node, list):
+            for child in node:
+                walk(child)
+
+    walk(value)
+    return found
+
+
+def _stage35e2_projection_matches_contract(result, contract):
+    expected = _stage35e2_contract_requirement_ids(contract)
+    if not expected:
+        return True
+    if len(expected) != len(set(expected)) or any(not item for item in expected):
+        return False
+    for rows in _stage35e2_explicit_requirement_lists(result):
+        actual = [
+            str(row.get("requirement_id") or "").strip()
+            for row in rows
+            if isinstance(row, dict)
+        ]
+        if actual == expected and len(rows) == len(expected):
+            return True
+    return False
+
+
+def _stage35e2_attach_projection_validation(result, contract, attempts):
+    if not isinstance(result, dict):
+        return result
+    result["explicit_requirement_projection_validation"] = {
+        "schema_version": "stage35e2_exact_projection_v1",
+        "valid": True,
+        "expected_requirement_ids": _stage35e2_contract_requirement_ids(contract),
+        "provider_attempts": attempts,
+        "repair_retry_used": attempts > 1,
+    }
+    parsed = result.get("parsed")
+    if isinstance(parsed, dict):
+        parsed["explicit_requirement_projection_validation"] = dict(
+            result["explicit_requirement_projection_validation"]
+        )
+    return result
+
+
 @_question_demand_wraps(
     _question_demand_previous_gemini_semantic_grade
 )
 def gemini_semantic_grade(*args, **kwargs):
-    result = _question_demand_previous_gemini_semantic_grade(
-        *args,
-        **kwargs,
-    )
-
     from question_demand_contract import (
         attach_question_demand_contract,
+        build_question_demand_contract,
         extract_question_text_from_call,
     )
 
@@ -1351,13 +1442,48 @@ def gemini_semantic_grade(*args, **kwargs):
         args,
         kwargs,
     )
+    contract = build_question_demand_contract(question_text)
+    enforce_exact = bool(contract.get("topic_pack_demand_axes_applied"))
 
-    # STAGE18B2_CANONICAL_QTYPE_AND_SCORE_SOURCE_V2
-    return attach_question_demand_contract(
+    result = _question_demand_previous_gemini_semantic_grade(
+        *args,
+        **kwargs,
+    )
+    attempts = 1
+    if enforce_exact and not _stage35e2_projection_matches_contract(
+        result,
+        contract,
+    ):
+        token = _stage35e2_projection_retry_contract.set(contract)
+        try:
+            result = _question_demand_previous_gemini_semantic_grade(
+                *args,
+                **kwargs,
+            )
+            attempts = 2
+        finally:
+            _stage35e2_projection_retry_contract.reset(token)
+
+    if enforce_exact and not _stage35e2_projection_matches_contract(
+        result,
+        contract,
+    ):
+        raise RuntimeError(
+            "provider_explicit_requirement_projection_mismatch_after_retry"
+        )
+
+    attached = attach_question_demand_contract(
         result,
         question_text,
-        canonical_primary_lens=result,
+        canonical_primary_lens=contract.get("primary_lens"),
     )
+    if enforce_exact:
+        attached = _stage35e2_attach_projection_validation(
+            attached,
+            contract,
+            attempts,
+        )
+    return attached
 
 # HYBRID_GENERAL_GRADING_PROMPT_V1
 from functools import wraps as _hybrid_general_prompt_wraps

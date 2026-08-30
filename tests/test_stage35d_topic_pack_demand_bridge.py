@@ -52,7 +52,8 @@ def test_attach_keeps_canonical_lens_and_eight_axes() -> None:
         canonical_primary_lens="PRINCIPLE_INTERPRETATION",
     )
     contract = attached["question_demand_contract"]
-    assert contract["primary_lens"] == "PRINCIPLE_INTERPRETATION"
+    assert contract["primary_lens"] == "IMPLEMENTATION_EVALUATION"
+    assert contract["final_primary_lens_owner"] == "topic_pack_question_demand_axes"
     assert len(contract["requirements"]) == 8
     assert attached["parsed"]["question_demand_contract"] == contract
 
