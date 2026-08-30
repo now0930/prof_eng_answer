@@ -1,5 +1,5 @@
 {
-  "version": "sha256-c2d52d8ca1c1ea0de1f86d3a0b9d38502e41408e17869610ee79131afca2844c-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-6b149748db8891ae6191197f405bc9f1543bd0d0bb2260fc7bc8765315a2f32d-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -14743,7 +14743,12 @@
                 "window": 240,
                 "max_matches": 3
               }
-            ]
+            ],
+            "structured_relation": {
+              "combined_pattern": "(?is)(?:^|[.!?。]|\\b(?:[a-zA-Z]|\\d+)\\))\\s*(?![^.!?。]{0,180}(?:오류|잘못|틀린|금지|반례|예시))(?:(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)\\s*(?:비율|값)?\\s*(?:이|가)?\\s*\\bPFD(?:avg)?\\b\\s*(?:비율|값)?\\s*보다\\s*(?:작|크)(?:도록|아야|게)[^.!?。]{0,100}(?:설계|선정|유지|제어)|\\bPFD(?:avg)?\\b\\s*(?:비율|값)?\\s*(?:이|가)?\\s*(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)\\s*(?:비율|값)?\\s*보다\\s*(?:작|크)(?:도록|아야|게)[^.!?。]{0,100}(?:설계|선정|유지|제어))(?!\\s*(?:하면|해서는)?\\s*(?:안|않|불가|오류|잘못))",
+              "render": "λ/lambda_SIS 고장률을 PFD/PFDavg보다 작거나 크게 되도록 설계하는 직접 대소 비교 주장",
+              "authoritative_true": true
+            }
           },
           {
             "field_id": "correct_lambda_pfd_dimension_separation_control",

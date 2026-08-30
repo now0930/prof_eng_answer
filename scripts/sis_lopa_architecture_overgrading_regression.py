@@ -133,6 +133,34 @@ def main() -> None:
         for pattern in selector_patterns
     ) >= 1
 
+    # STAGE34G_FSRM_STRUCTURED_FALSE_NEGATIVE_OVERRIDE_CONTRACT
+    structured_relation = fatal_compact_field["structured_relation"]
+    assert structured_relation["authoritative_true"] is True
+    structured_pattern = structured_relation["combined_pattern"]
+    re.compile(structured_pattern)
+    assert re.search(structured_pattern, fixture["answer"]) is not None
+    assert re.search(
+        structured_pattern,
+        (
+            "저수요 모드에서 PFDavg는 λDU×TI/2로 근사하며 "
+            "고장률과 무차원 PFD를 직접 대소 비교하지 않는다."
+        ),
+    ) is None
+    assert re.search(
+        structured_pattern,
+        (
+            "잘못된 예시: lambda_SIS 비율이 PFD 비율보다 "
+            "작도록 시스템을 설계."
+        ),
+    ) is None
+    assert re.search(
+        structured_pattern,
+        (
+            "lambda_SIS 비율이 PFD 비율보다 작도록 시스템을 "
+            "설계하면 안 된다."
+        ),
+    ) is None
+
     control_field = compact_fields[1]
     assert control_field["field_id"] == "correct_lambda_pfd_dimension_separation_control"
     assert control_field["control_expected"] is False
@@ -337,6 +365,94 @@ def main() -> None:
         for topic_ids in negative_selected.values()
     )
 
+    # STAGE34G_FSRM_STRUCTURED_FALSE_NEGATIVE_OVERRIDE_REPLAY
+    false_negative_provider_calls = []
+
+    def fake_false_negative_call(*args, **kwargs):
+        prompt = str(
+            args[0]
+            if args
+            else kwargs.get("prompt") or ""
+        )
+        schema = kwargs.get("format_schema")
+        if not isinstance(schema, dict):
+            for value in args[1:]:
+                if (
+                    isinstance(value, dict)
+                    and isinstance(value.get("properties"), dict)
+                ):
+                    schema = value
+                    break
+        assert isinstance(schema, dict)
+        properties = schema.get("properties")
+        assert isinstance(properties, dict)
+        property_ids = list(properties)
+        false_negative_provider_calls.append(
+            {
+                "prompt": prompt,
+                "property_ids": property_ids,
+            }
+        )
+        return {
+            field_id: False
+            for field_id in property_ids
+        }
+
+    original_call = logic_llm_verifier._call_ollama_json
+    original_profile_path = logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH
+    logic_llm_verifier._call_ollama_json = fake_false_negative_call
+    logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH = generated_profile_path
+    try:
+        structured_override_replay = (
+            logic_check_evaluator.evaluate_logic_checks(
+                answer_text=fixture["answer"],
+                grade={"logic_check_topic_id": HAZOP},
+                bank_path=(
+                    REPO
+                    / "rubrics"
+                    / "generated"
+                    / "logic_checks.generated.json"
+                ),
+            )
+        )
+    finally:
+        logic_llm_verifier._call_ollama_json = original_call
+        logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH = original_profile_path
+
+    assert len(false_negative_provider_calls) == 1
+    false_call = false_negative_provider_calls[0]
+    assert false_call["property_ids"] == generated_field_ids
+    assert isinstance(structured_override_replay, dict)
+    assert structured_override_replay.get("fatal_error_detected") is True
+    assert structured_override_replay.get("mode") == "fatal"
+
+    structured_findings = [
+        row
+        for row in structured_override_replay.get("findings", [])
+        if isinstance(row, dict)
+        and str(row.get("severity") or "").lower() == "fatal"
+        and row.get("id") == FATAL_ID
+    ]
+    assert len(structured_findings) == 1
+    assert (
+        structured_findings[0].get("source")
+        == "stage25g3d_compact_structured_evidence_arbitration"
+    )
+    assert structured_findings[0].get("source_topic_id") == FSRM
+    assert structured_findings[0].get("evidence")
+
+    structured_secondary_rows = (
+        structured_override_replay.get(
+            "secondary_profile_evaluations"
+        )
+        or []
+    )
+    assert len(structured_secondary_rows) == 1
+    assert structured_secondary_rows[0].get("topic_id") == FSRM
+    assert FATAL_ID in structured_secondary_rows[0].get(
+        "merged_finding_ids", []
+    )
+
     topics = fixture["expected_topics"]
     assert topics["primary"] == HAZOP
     assert topics["adjacent"] == [FSRM]
@@ -374,6 +490,7 @@ def main() -> None:
     print("FSRM_COMPACT_PROFILE_RULE_BRIDGE=PASS")
     print("FSRM_COMPACT_FIELD_CONTRACT=PASS")
     print("FULL_EVALUATOR_COMPACT_REPLAY=PASS")
+    print("FSRM_STRUCTURED_FALSE_NEGATIVE_OVERRIDE=PASS")
     print("FULL_EVALUATOR_LLM_CALL_COUNT=1")
     print("FULL_EVALUATOR_SCHEMA_PROPERTY_COUNT=2")
     print("COMPACT_SECONDARY_TOPIC=" + FSRM)

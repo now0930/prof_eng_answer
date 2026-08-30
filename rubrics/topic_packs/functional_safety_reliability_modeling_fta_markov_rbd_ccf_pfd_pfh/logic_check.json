@@ -227,7 +227,12 @@
               "window": 240,
               "max_matches": 3
             }
-          ]
+          ],
+          "structured_relation": {
+            "combined_pattern": "(?is)(?:^|[.!?。]|\\b(?:[a-zA-Z]|\\d+)\\))\\s*(?![^.!?。]{0,180}(?:오류|잘못|틀린|금지|반례|예시))(?:(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)\\s*(?:비율|값)?\\s*(?:이|가)?\\s*\\bPFD(?:avg)?\\b\\s*(?:비율|값)?\\s*보다\\s*(?:작|크)(?:도록|아야|게)[^.!?。]{0,100}(?:설계|선정|유지|제어)|\\bPFD(?:avg)?\\b\\s*(?:비율|값)?\\s*(?:이|가)?\\s*(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)\\s*(?:비율|값)?\\s*보다\\s*(?:작|크)(?:도록|아야|게)[^.!?。]{0,100}(?:설계|선정|유지|제어))(?!\\s*(?:하면|해서는)?\\s*(?:안|않|불가|오류|잘못))",
+            "render": "λ/lambda_SIS 고장률을 PFD/PFDavg보다 작거나 크게 되도록 설계하는 직접 대소 비교 주장",
+            "authoritative_true": true
+          }
         },
         {
           "field_id": "correct_lambda_pfd_dimension_separation_control",
@@ -258,6 +263,7 @@
     "generated_bank_not_modified",
     "stage32c=failure-rate versus dimensionless PFDavg direct-comparison fatal boundary added",
     "stage33c_v2=specific claim-triggered compact secondary FSRM verification for lambda-versus-PFD dimensional fatal",
-    "stage34c_v4=replace unrelated SW05 compact fields and bridge profile fatal strings into rule records for FSRM lambda-PFD fatal and dimension-separation control fields"
+    "stage34c_v4=replace unrelated SW05 compact fields and bridge profile fatal strings into rule records for FSRM lambda-PFD fatal and dimension-separation control fields",
+    "stage34g=activate existing structured_relation authoritative_true arbitration for direct lambda-PFD design inequality false negatives"
   ]
 }
