@@ -5058,7 +5058,45 @@ def _evaluate_topic_fatal_checks_with_llm_stage19_contract(
         "fatal_checks"
     )
 
-    if not isinstance(fatal_checks, list):
+    # STAGE34C_V4_PROFILE_FATAL_RULE_RECORD_BRIDGE_V1
+    # Internal compact secondary replay attaches the active profile under
+    # llm_profile. Profile fatal_conditions are source-owned strings, while
+    # the stage19 evaluator accepts only dict rule records. Convert them with
+    # the existing compact rule parser before eligible_checks filtering.
+    if not isinstance(fatal_checks, list) or not fatal_checks:
+        attached_profile = topic_check.get(
+            "llm_profile"
+        )
+        profile_fatal_checks = (
+            attached_profile.get(
+                "fatal_conditions"
+            )
+            if isinstance(
+                attached_profile,
+                dict,
+            )
+            else None
+        )
+        if isinstance(
+            profile_fatal_checks,
+            list,
+        ):
+            bridged_fatal_checks = []
+            for raw_profile_rule in (
+                profile_fatal_checks
+            ):
+                rule_record = (
+                    _stage25g3c_compact_rule_record(
+                        raw_profile_rule
+                    )
+                )
+                if rule_record is not None:
+                    bridged_fatal_checks.append(
+                        rule_record
+                    )
+            fatal_checks = bridged_fatal_checks
+
+    if not isinstance(fatal_checks, list) or not fatal_checks:
         return []
 
     eligible_checks = [

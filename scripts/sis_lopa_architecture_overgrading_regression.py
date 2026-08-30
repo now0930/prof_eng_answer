@@ -103,6 +103,45 @@ def main() -> None:
     assert compact["version"] == 2
     assert compact["max_llm_calls"] == 1
 
+
+    # STAGE34C_V4_FSRM_COMPACT_CONTRACT
+    compact_fields = compact["fields"]
+    assert len(compact_fields) == 2
+    compact_field_ids = [
+        row["field_id"]
+        for row in compact_fields
+        if isinstance(row, dict)
+    ]
+    assert compact_field_ids == [
+        FATAL_ID,
+        "correct_lambda_pfd_dimension_separation_control",
+    ]
+    fatal_compact_field = compact_fields[0]
+    assert fatal_compact_field["rule_id"] == FATAL_ID
+    assert fatal_compact_field[
+        "require_nonempty_evidence_for_true"
+    ] is True
+    selector_patterns = [
+        selector["pattern"]
+        for selector in fatal_compact_field["evidence_selectors"]
+        if isinstance(selector, dict)
+        and isinstance(selector.get("pattern"), str)
+    ]
+    assert len(selector_patterns) == 2
+    assert sum(
+        re.search(pattern, fixture["answer"]) is not None
+        for pattern in selector_patterns
+    ) >= 1
+
+    control_field = compact_fields[1]
+    assert control_field["field_id"] == "correct_lambda_pfd_dimension_separation_control"
+    assert control_field["control_expected"] is False
+    assert not any(
+        str(row.get("rule_id") or "").startswith("sw05_")
+        for row in compact_fields
+        if isinstance(row, dict)
+    )
+
     activation_rules = activation["rules"]
     assert len(activation_rules) == 1
     secondary_rule = activation_rules[0]
@@ -113,6 +152,7 @@ def main() -> None:
     )
     assert secondary_rule["score_effect_requirement"] == "diagnostic_only"
 
+    import logic_check_evaluator
     from logic_check_evaluator import (
         _secondary_profile_rule_match,
         _select_claim_triggered_secondary_profiles,
@@ -177,6 +217,121 @@ def main() -> None:
     assert [row["topic_id"] for row in selected] == [FSRM]
     assert [row["topic_id"] for row in compact_candidates] == [FSRM]
     assert compact_topic_id == FSRM
+
+    # STAGE34C_V4_FULL_EVALUATOR_REPLAY
+    generated_profile_bank = load_json(generated_profile_path)
+    generated_fsrm_profiles = [
+        row
+        for row in generated_profile_bank["profiles"]
+        if isinstance(row, dict)
+        and row.get("topic_id") == FSRM
+    ]
+    assert len(generated_fsrm_profiles) == 1
+    generated_fsrm_profile = generated_fsrm_profiles[0]
+    generated_compact_fields = generated_fsrm_profile[
+        "compact_batch_verification"
+    ]["fields"]
+    generated_field_ids = [
+        row["field_id"]
+        for row in generated_compact_fields
+        if isinstance(row, dict)
+        and isinstance(row.get("field_id"), str)
+    ]
+    assert generated_field_ids == [
+        FATAL_ID,
+        "correct_lambda_pfd_dimension_separation_control",
+    ]
+
+    provider_calls = []
+
+    def fake_compact_call(*args, **kwargs):
+        prompt = str(
+            args[0]
+            if args
+            else kwargs.get("prompt") or ""
+        )
+        schema = kwargs.get("format_schema")
+        if not isinstance(schema, dict):
+            for value in args[1:]:
+                if (
+                    isinstance(value, dict)
+                    and isinstance(value.get("properties"), dict)
+                ):
+                    schema = value
+                    break
+        assert isinstance(schema, dict)
+        properties = schema.get("properties")
+        assert isinstance(properties, dict)
+        property_ids = list(properties)
+        provider_calls.append(
+            {
+                "prompt": prompt,
+                "property_ids": property_ids,
+            }
+        )
+        return {
+            field_id: field_id == FATAL_ID
+            for field_id in property_ids
+        }
+
+    original_call = logic_llm_verifier._call_ollama_json
+    original_profile_path = logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH
+    logic_llm_verifier._call_ollama_json = fake_compact_call
+    logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH = generated_profile_path
+    try:
+        full_replay = logic_check_evaluator.evaluate_logic_checks(
+            answer_text=fixture["answer"],
+            grade={"logic_check_topic_id": HAZOP},
+            bank_path=(
+                REPO
+                / "rubrics"
+                / "generated"
+                / "logic_checks.generated.json"
+            ),
+        )
+    finally:
+        logic_llm_verifier._call_ollama_json = original_call
+        logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH = original_profile_path
+
+    assert len(provider_calls) == 1
+    call = provider_calls[0]
+    assert call["property_ids"] == generated_field_ids
+    assert FATAL_ID in call["prompt"]
+    assert "correct_lambda_pfd_dimension_separation_control" in call["prompt"]
+    assert isinstance(full_replay, dict)
+    assert full_replay.get("fatal_error_detected") is True
+    assert full_replay.get("mode") == "fatal"
+    assert FSRM in full_replay.get("evaluated_topic_ids", [])
+
+    selection = full_replay.get("secondary_profile_selection")
+    assert isinstance(selection, dict)
+    assert selection.get("selected_topic_ids") == [FSRM]
+
+    replay_findings = full_replay.get("findings") or []
+    fatal_replay_findings = [
+        row
+        for row in replay_findings
+        if isinstance(row, dict)
+        and str(row.get("severity") or "").lower() == "fatal"
+        and FATAL_ID
+        in {
+            str(row.get("id") or ""),
+            str(row.get("rule_id") or ""),
+            str(row.get("source_rule_id") or ""),
+        }
+    ]
+    assert len(fatal_replay_findings) == 1
+    assert fatal_replay_findings[0].get("evidence")
+    assert fatal_replay_findings[0].get("source_topic_id") == FSRM
+
+    secondary_rows = full_replay.get(
+        "secondary_profile_evaluations"
+    ) or []
+    assert len(secondary_rows) == 1
+    assert secondary_rows[0].get("topic_id") == FSRM
+    assert FATAL_ID in secondary_rows[0].get(
+        "merged_finding_ids", []
+    )
     assert all(
         FSRM not in topic_ids
         for topic_ids in negative_selected.values()
@@ -216,6 +371,11 @@ def main() -> None:
     print("SECONDARY_PROFILE_ACTIVATION=PASS")
     print("SECONDARY_PROFILE_SELECTION=PASS")
     print("SECONDARY_PROFILE_FSRM_NEGATIVE_GUARD=PASS")
+    print("FSRM_COMPACT_PROFILE_RULE_BRIDGE=PASS")
+    print("FSRM_COMPACT_FIELD_CONTRACT=PASS")
+    print("FULL_EVALUATOR_COMPACT_REPLAY=PASS")
+    print("FULL_EVALUATOR_LLM_CALL_COUNT=1")
+    print("FULL_EVALUATOR_SCHEMA_PROPERTY_COUNT=2")
     print("COMPACT_SECONDARY_TOPIC=" + FSRM)
     print("DEMAND_STATUS=present:1,partial:4,incorrect:2,missing:1")
     print("TOTAL_MAX=13.0")

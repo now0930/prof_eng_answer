@@ -1,5 +1,5 @@
 {
-  "version": "sha256-886703091dae166178fbe08cea924716ad7c75b3e70da1b0bf70563c48f764a2-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-c2d52d8ca1c1ea0de1f86d3a0b9d38502e41408e17869610ee79131afca2844c-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -14716,91 +14716,49 @@
         "max_llm_calls": 1,
         "invalid_output_mode": "warn",
         "diagnostic_only": true,
-        "prompt_intro": "각 boolean field를 서로 독립적으로 판정한다. 각 field의 전용 evidence와 rule context만 사용한다. 반드시 지정된 boolean field만 반환한다.",
+        "prompt_intro": "고장률 λ와 PFD/PFDavg의 관계를 각 boolean field별로 독립 판정한다. 각 field의 전용 evidence와 기존 fatal rule만 사용하고 지정된 boolean field만 반환한다.",
         "global_notes": [
           "한 field의 evidence를 다른 field의 근거로 전이하거나 연쇄 추론하지 않는다.",
-          "STRUCTURED_TABLE_RELATION은 OCR 표의 열 순서를 결정적으로 재구성한 직접 대응 근거다.",
           "field evidence가 없으면 해당 field는 false다.",
-          "HFT 설명에 1oo2·2oo3이 등장한다는 이유만으로 시험수준과 투표구조의 직접 대응으로 판정하지 않는다.",
+          "시간당 고장률 λ는 1/time 차원이고 PFD/PFDavg는 무차원이다.",
+          "직접 비교 오류를 부정하거나 올바르게 정정한 문맥은 fatal field를 false로 판정한다.",
           "evidence 밖의 내용을 추론하지 않는다."
         ],
         "fields": [
           {
-            "field_id": "voting_mapping_wrong",
-            "rule_id": "sw05_fatal_software_test_mapped_to_voting_architecture",
-            "criterion": "단위·통합·시스템시험 중 하나가 같은 문장·표 셀에서 1oo1·1oo2·2oo3 투표구조와 직접 대응된 경우만 true.",
-            "relation_hint": "시험단계와 투표구조 사이의 명시적 화살표·등호·콜론 또는 같은 표 셀 대응이 필요하다.",
-            "exclusion_hint": "별도 HFT 설명에 1oo2·2oo3이 등장하는 것만으로는 false.",
+            "field_id": "failure_rate_compared_directly_to_pfd",
+            "rule_id": "failure_rate_compared_directly_to_pfd",
+            "criterion": "답안이 시간당 고장률 λ/lambda_SIS를 무차원 PFD/PFDavg와 같은 비율로 직접 대소 비교하거나 λ_SIS가 PFD보다 작으면 SIL을 만족한다고 주장하면 true.",
+            "relation_hint": "같은 evidence 안에 λ/lambda_SIS 또는 고장률, PFD/PFDavg, 대소 비교 관계가 모두 있어야 한다.",
+            "exclusion_hint": "λ와 PFDavg의 차원이 달라 직접 비교할 수 없다고 명시하거나 λDU와 Proof Test Interval 등의 가정을 통해 PFDavg를 계산해야 한다고 설명하면 false.",
             "require_nonempty_evidence_for_true": true,
             "evidence_selectors": [
               {
-                "pattern": "(?im)^\\s*(?:[-*•]\\s*)?(?:단위|통합|시스템)(?:\\s*시험)?\\s*(?:→|->|=>|:|=)\\s*(?:1oo1|1oo2|2oo3)(?:\\s*(?:투표\\s*(?:구조|아키텍처)|voting\\s+(?:structure|architecture)))?\\s*[.!]?\\s*$|^\\s*(?:[-*•]\\s*)?(?:1oo1|1oo2|2oo3)(?:\\s*(?:투표\\s*(?:구조|아키텍처)|voting\\s+(?:structure|architecture)))?\\s*(?:→|->|=>|:|=)\\s*(?:단위|통합|시스템)(?:\\s*시험)?\\s*[.!]?\\s*$",
-                "window": 100,
+                "pattern": "(?is)(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)[\\s\\S]{0,420}\\bPFD(?:avg)?\\b[\\s\\S]{0,220}(?:보다\\s*(?:작|크)|(?:작|크)\\s*도록|이하|미만|초과|같은\\s*비율|직접\\s*비교)",
+                "window": 240,
+                "max_matches": 3
+              },
+              {
+                "pattern": "(?is)\\bPFD(?:avg)?\\b[\\s\\S]{0,420}(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)[\\s\\S]{0,220}(?:보다\\s*(?:작|크)|(?:작|크)\\s*도록|이하|미만|초과|같은\\s*비율|직접\\s*비교)",
+                "window": 240,
                 "max_matches": 3
               }
             ]
           },
           {
-            "field_id": "hft_mapping_wrong",
-            "rule_id": "sw05_fatal_hft_is_integration_test",
-            "criterion": "시험수준 표에서 통합시험 열을 HFT 또는 Architectural Constraints에 직접 대응하면 true.",
-            "relation_hint": "OCR 표의 열 순서가 단위·통합·시스템시험이고 SIL 대응 요소 행이 Random·HFT·Systematic 순서이면 통합시험→HFT 직접 대응이다.",
-            "require_nonempty_evidence_for_true": true,
-            "structured_relation": {
-              "combined_pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
-              "render": "OCR 표 열 대응: 통합시험 → Architectural Constraints (HFT)",
-              "authoritative_true": true
-            },
-            "evidence_selectors": [
-              {
-                "pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
-                "window": 80,
-                "max_matches": 1
-              }
-            ]
-          },
-          {
-            "field_id": "random_integrity_mapping_wrong",
-            "rule_id": "sw05_fatal_software_test_is_random_hardware_integrity",
-            "criterion": "시험수준 표에서 단위시험 열을 Random Hardware Integrity에 직접 대응하면 true.",
-            "relation_hint": "OCR 표의 열 순서가 단위·통합·시스템시험이고 SIL 대응 요소 행이 Random·HFT·Systematic 순서이면 단위시험→Random Integrity 직접 대응이다.",
-            "require_nonempty_evidence_for_true": true,
-            "structured_relation": {
-              "combined_pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
-              "render": "OCR 표 열 대응: 단위시험 → Random Hardware Integrity",
-              "authoritative_true": true
-            },
-            "evidence_selectors": [
-              {
-                "pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
-                "window": 80,
-                "max_matches": 1
-              }
-            ]
-          },
-          {
-            "field_id": "sil_expansion_wrong",
-            "rule_id": "sw05_fatal_sil_expanded_as_safety_instrument_level",
-            "criterion": "SIL의 영문 원어를 Safety Instrument Level로 명시한 경우만 true.",
-            "relation_hint": "Safety Integrity Level은 정답이므로 false.",
-            "require_nonempty_evidence_for_true": true,
-            "evidence_selectors": [
-              {
-                "pattern": "(?i)Safety\\s*Instrument\\s*Level",
-                "window": 220,
-                "max_matches": 2
-              }
-            ]
-          },
-          {
-            "field_id": "correct_sil_control_wrong",
+            "field_id": "correct_lambda_pfd_dimension_separation_control",
             "control_expected": false,
-            "criterion": "정상 표현 Safety Integrity Level을 오정의로 판단하면 true.",
-            "relation_hint": "Safety Integrity Level은 정답 표현이므로 반드시 false.",
+            "criterion": "답안이 λ 또는 고장률과 PFD/PFDavg의 차원이 달라 직접 비교할 수 없다고 올바르게 설명했는데도 이를 오류로 판단하면 true.",
+            "relation_hint": "차원 분리와 PFDavg 변환 조건을 명시한 정정 표현은 정상이므로 반드시 false.",
             "evidence_selectors": [
               {
-                "pattern": "(?i)Safety\\s*Integrity\\s*Level",
-                "window": 220,
+                "pattern": "(?is)(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)[\\s\\S]{0,420}\\bPFD(?:avg)?\\b[\\s\\S]{0,260}(?:차원(?:이|은)?\\s*(?:다르|상이)|직접\\s*(?:대소\\s*)?비교(?:할\\s*수)?\\s*(?:없|않))",
+                "window": 240,
+                "max_matches": 2
+              },
+              {
+                "pattern": "(?is)\\bPFD(?:avg)?\\b[\\s\\S]{0,420}(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)[\\s\\S]{0,260}(?:차원(?:이|은)?\\s*(?:다르|상이)|직접\\s*(?:대소\\s*)?비교(?:할\\s*수)?\\s*(?:없|않))",
+                "window": 240,
                 "max_matches": 2
               }
             ]
