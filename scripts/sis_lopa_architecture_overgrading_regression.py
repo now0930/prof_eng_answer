@@ -97,6 +97,91 @@ def main() -> None:
     assert "lambda_SIS" in fatal_text
     assert "차원이 다르므로 직접 비교할 수 없다" in fatal_text
 
+    activation = fsrm_logic["llm_profile"]["secondary_profile_activation"]
+    compact = fsrm_logic["llm_profile"]["compact_batch_verification"]
+    assert compact["enabled"] is True
+    assert compact["version"] == 2
+    assert compact["max_llm_calls"] == 1
+
+    activation_rules = activation["rules"]
+    assert len(activation_rules) == 1
+    secondary_rule = activation_rules[0]
+    assert secondary_rule["id"] == "fsrm_lambda_pfd_dimension_secondary_activation_v2"
+    assert (
+        secondary_rule["activation_scope"]
+        == "claim_triggered_secondary_profile_v1"
+    )
+    assert secondary_rule["score_effect_requirement"] == "diagnostic_only"
+
+    from logic_check_evaluator import (
+        _secondary_profile_rule_match,
+        _select_claim_triggered_secondary_profiles,
+        _stage25g3e_preselect_compact_secondary,
+    )
+    import logic_llm_verifier
+
+    activation_match = _secondary_profile_rule_match(
+        fixture["answer"],
+        secondary_rule,
+    )
+    assert activation_match["matched"] is True
+    assert activation_match["strong_count"] >= 2
+
+    generated_logic_bank = load_json(
+        REPO / "rubrics" / "generated" / "logic_checks.generated.json"
+    )
+    generated_profile_path = (
+        REPO
+        / "rubrics"
+        / "generated"
+        / "logic_check_profiles.generated.json"
+    )
+    original_profile_path = logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH
+    logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH = generated_profile_path
+    try:
+        selected = _select_claim_triggered_secondary_profiles(
+            fixture["answer"],
+            HAZOP,
+            generated_logic_bank["topic_logic_checks"],
+        )
+        compact_candidates, compact_topic_id = (
+            _stage25g3e_preselect_compact_secondary(
+                fixture["answer"],
+                HAZOP,
+                generated_logic_bank["topic_logic_checks"],
+            )
+        )
+        negative_selected = {}
+        for negative_name, negative_answer in {
+            "hazop_only": "HAZOP 노드와 IPL 독립성만 검토한다.",
+            "correct_pfd_relation": (
+                "저수요 모드에서 PFDavg는 λDU×TI/2로 근사하며 "
+                "고장률과 무차원 PFD를 직접 대소 비교하지 않는다."
+            ),
+            "rate_sum_only": (
+                "센서, 로직솔버, 최종요소의 위험 고장률을 합산한다."
+            ),
+            "pfd_only": "PFDavg 목표로 SIL 달성 여부를 검증한다.",
+        }.items():
+            negative_selected[negative_name] = [
+                row["topic_id"]
+                for row in _select_claim_triggered_secondary_profiles(
+                    negative_answer,
+                    HAZOP,
+                    generated_logic_bank["topic_logic_checks"],
+                )
+            ]
+    finally:
+        logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH = original_profile_path
+
+    assert [row["topic_id"] for row in selected] == [FSRM]
+    assert [row["topic_id"] for row in compact_candidates] == [FSRM]
+    assert compact_topic_id == FSRM
+    assert all(
+        FSRM not in topic_ids
+        for topic_ids in negative_selected.values()
+    )
+
     topics = fixture["expected_topics"]
     assert topics["primary"] == HAZOP
     assert topics["adjacent"] == [FSRM]
@@ -128,6 +213,10 @@ def main() -> None:
     print(f"PRIMARY_TOPIC={HAZOP}")
     print(f"ADJACENT_TOPIC={FSRM}")
     print(f"FATAL_ID={FATAL_ID}")
+    print("SECONDARY_PROFILE_ACTIVATION=PASS")
+    print("SECONDARY_PROFILE_SELECTION=PASS")
+    print("SECONDARY_PROFILE_FSRM_NEGATIVE_GUARD=PASS")
+    print("COMPACT_SECONDARY_TOPIC=" + FSRM)
     print("DEMAND_STATUS=present:1,partial:4,incorrect:2,missing:1")
     print("TOTAL_MAX=13.0")
 

@@ -1,5 +1,5 @@
 {
-  "version": "sha256-020129fe946a57be1f0350ae1ce7d3224def5695de3092dccca17b6520b98235-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-886703091dae166178fbe08cea924716ad7c75b3e70da1b0bf70563c48f764a2-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -14646,7 +14646,167 @@
         "고장률 출처, 운전환경, 수리시간, Bypass와 모델 불확실성을 명시한다.",
         "부정형 정답이나 비교문은 주변 문맥과 결론을 확인한 뒤 평가한다.",
         "고장률 λ와 PFDavg의 차원을 구분하고, 저수요 근사식의 시험주기·진단·수리·독립성 조건을 명시하여 PFDavg를 계산한다."
-      ]
+      ],
+      "secondary_profile_activation": {
+        "selection_mode": "claim_triggered",
+        "diagnostic_only": true,
+        "version": "claim_triggered_secondary_profile_v1",
+        "rules": [
+          {
+            "id": "fsrm_lambda_pfd_dimension_secondary_activation_v2",
+            "activation_scope": "claim_triggered_secondary_profile_v1",
+            "score_effect_requirement": "diagnostic_only",
+            "description": "고장률 λ/lambda_SIS를 센서·로직·최종요소 고장률 합으로 표현하고 이를 PFD/PFDavg와 직접 대소 비교하는 주장일 때 FSRM profile을 진단 전용 secondary로 활성화한다.",
+            "min_strong_groups": 4,
+            "single_strong_requires_relation_group": true,
+            "strong_pattern_groups": [
+              {
+                "id": "failure_rate_symbol",
+                "patterns": [
+                  "(?i)(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)"
+                ]
+              },
+              {
+                "id": "pfd_metric",
+                "patterns": [
+                  "(?i)\\bPFD(?:avg)?\\b"
+                ]
+              },
+              {
+                "id": "sis_component_rate_sum",
+                "patterns": [
+                  "(?i)(?:lambda(?:_?sis)?|λ(?:_?sis)?)\\s*=\\s*(?:lambda|λ)[\\s\\S]{0,120}(?:센서|sensor)[\\s\\S]{0,120}(?:로직|logic)[\\s\\S]{0,120}(?:FCE|final\\s*element)",
+                  "(?i)(?:센서|sensor)[\\s\\S]{0,120}(?:로직|logic)[\\s\\S]{0,120}(?:FCE|final\\s*element)[\\s\\S]{0,160}(?:합|sum|더)"
+                ]
+              },
+              {
+                "id": "rate_unit_context",
+                "patterns": [
+                  "(?i)(?:시간당|/h|h\\^-?1|failure\\s*rate|고장\\s*rate|고장률)"
+                ]
+              },
+              {
+                "id": "direct_ordering_claim",
+                "patterns": [
+                  "(?i)(?:보다\\s*(?:작|크)|(?:작|크)\\s*도록|이하|미만|초과|같은\\s*비율|직접\\s*비교)"
+                ]
+              },
+              {
+                "id": "lambda_pfd_local_window",
+                "patterns": [
+                  "(?i)(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)[\\s\\S]{0,260}\\bPFD(?:avg)?\\b",
+                  "(?i)\\bPFD(?:avg)?\\b[\\s\\S]{0,260}(?:lambda(?:_?sis)?|λ(?:_?sis)?|고장률)"
+                ]
+              }
+            ],
+            "relation_pattern_groups": [
+              {
+                "id": "dimension_comparison_relation",
+                "patterns": [
+                  "(?i)(?:보다\\s*(?:작|크)|(?:작|크)\\s*도록|이하|미만|초과|같은\\s*비율|직접\\s*비교)"
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      "compact_batch_verification": {
+        "version": 2,
+        "enabled": true,
+        "max_llm_calls": 1,
+        "invalid_output_mode": "warn",
+        "diagnostic_only": true,
+        "prompt_intro": "각 boolean field를 서로 독립적으로 판정한다. 각 field의 전용 evidence와 rule context만 사용한다. 반드시 지정된 boolean field만 반환한다.",
+        "global_notes": [
+          "한 field의 evidence를 다른 field의 근거로 전이하거나 연쇄 추론하지 않는다.",
+          "STRUCTURED_TABLE_RELATION은 OCR 표의 열 순서를 결정적으로 재구성한 직접 대응 근거다.",
+          "field evidence가 없으면 해당 field는 false다.",
+          "HFT 설명에 1oo2·2oo3이 등장한다는 이유만으로 시험수준과 투표구조의 직접 대응으로 판정하지 않는다.",
+          "evidence 밖의 내용을 추론하지 않는다."
+        ],
+        "fields": [
+          {
+            "field_id": "voting_mapping_wrong",
+            "rule_id": "sw05_fatal_software_test_mapped_to_voting_architecture",
+            "criterion": "단위·통합·시스템시험 중 하나가 같은 문장·표 셀에서 1oo1·1oo2·2oo3 투표구조와 직접 대응된 경우만 true.",
+            "relation_hint": "시험단계와 투표구조 사이의 명시적 화살표·등호·콜론 또는 같은 표 셀 대응이 필요하다.",
+            "exclusion_hint": "별도 HFT 설명에 1oo2·2oo3이 등장하는 것만으로는 false.",
+            "require_nonempty_evidence_for_true": true,
+            "evidence_selectors": [
+              {
+                "pattern": "(?im)^\\s*(?:[-*•]\\s*)?(?:단위|통합|시스템)(?:\\s*시험)?\\s*(?:→|->|=>|:|=)\\s*(?:1oo1|1oo2|2oo3)(?:\\s*(?:투표\\s*(?:구조|아키텍처)|voting\\s+(?:structure|architecture)))?\\s*[.!]?\\s*$|^\\s*(?:[-*•]\\s*)?(?:1oo1|1oo2|2oo3)(?:\\s*(?:투표\\s*(?:구조|아키텍처)|voting\\s+(?:structure|architecture)))?\\s*(?:→|->|=>|:|=)\\s*(?:단위|통합|시스템)(?:\\s*시험)?\\s*[.!]?\\s*$",
+                "window": 100,
+                "max_matches": 3
+              }
+            ]
+          },
+          {
+            "field_id": "hft_mapping_wrong",
+            "rule_id": "sw05_fatal_hft_is_integration_test",
+            "criterion": "시험수준 표에서 통합시험 열을 HFT 또는 Architectural Constraints에 직접 대응하면 true.",
+            "relation_hint": "OCR 표의 열 순서가 단위·통합·시스템시험이고 SIL 대응 요소 행이 Random·HFT·Systematic 순서이면 통합시험→HFT 직접 대응이다.",
+            "require_nonempty_evidence_for_true": true,
+            "structured_relation": {
+              "combined_pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
+              "render": "OCR 표 열 대응: 통합시험 → Architectural Constraints (HFT)",
+              "authoritative_true": true
+            },
+            "evidence_selectors": [
+              {
+                "pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
+                "window": 80,
+                "max_matches": 1
+              }
+            ]
+          },
+          {
+            "field_id": "random_integrity_mapping_wrong",
+            "rule_id": "sw05_fatal_software_test_is_random_hardware_integrity",
+            "criterion": "시험수준 표에서 단위시험 열을 Random Hardware Integrity에 직접 대응하면 true.",
+            "relation_hint": "OCR 표의 열 순서가 단위·통합·시스템시험이고 SIL 대응 요소 행이 Random·HFT·Systematic 순서이면 단위시험→Random Integrity 직접 대응이다.",
+            "require_nonempty_evidence_for_true": true,
+            "structured_relation": {
+              "combined_pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
+              "render": "OCR 표 열 대응: 단위시험 → Random Hardware Integrity",
+              "authoritative_true": true
+            },
+            "evidence_selectors": [
+              {
+                "pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
+                "window": 80,
+                "max_matches": 1
+              }
+            ]
+          },
+          {
+            "field_id": "sil_expansion_wrong",
+            "rule_id": "sw05_fatal_sil_expanded_as_safety_instrument_level",
+            "criterion": "SIL의 영문 원어를 Safety Instrument Level로 명시한 경우만 true.",
+            "relation_hint": "Safety Integrity Level은 정답이므로 false.",
+            "require_nonempty_evidence_for_true": true,
+            "evidence_selectors": [
+              {
+                "pattern": "(?i)Safety\\s*Instrument\\s*Level",
+                "window": 220,
+                "max_matches": 2
+              }
+            ]
+          },
+          {
+            "field_id": "correct_sil_control_wrong",
+            "control_expected": false,
+            "criterion": "정상 표현 Safety Integrity Level을 오정의로 판단하면 true.",
+            "relation_hint": "Safety Integrity Level은 정답 표현이므로 반드시 false.",
+            "evidence_selectors": [
+              {
+                "pattern": "(?i)Safety\\s*Integrity\\s*Level",
+                "window": 220,
+                "max_matches": 2
+              }
+            ]
+          }
+        ]
+      }
     },
     {
       "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
