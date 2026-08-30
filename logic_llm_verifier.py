@@ -26,6 +26,8 @@ LOGIC_LLM_MODEL = os.getenv(
     os.getenv("OLLAMA_MODEL", "gemma4:e4b"),
 )
 LOGIC_LLM_TIMEOUT = int(os.getenv("LOGIC_LLM_VERIFIER_TIMEOUT", "90"))
+# STAGE22E21S14_ENV_BACKED_NUM_CTX_V1
+LOGIC_LLM_NUM_CTX = int(os.getenv('LOGIC_LLM_VERIFIER_NUM_CTX', '8192'))
 OLLAMA_ENDPOINT_PROBE_TIMEOUT = float(
     os.getenv(
         "LOGIC_LLM_ENDPOINT_PROBE_TIMEOUT",
@@ -453,6 +455,48 @@ def extract_second_order_evidence_candidates(
     return extract_logic_evidence_candidates(answer_text, profile)
 
 
+
+def _repair_single_missing_top_level_object_brace(text: str) -> dict[str, Any] | None:
+    # Repair only one missing top-level JSON object closing brace.
+    # This fallback is fail-closed and inserts no other token.
+    if not text:
+        return None
+
+    stack: list[str] = []
+    in_string = False
+    escape = False
+    matching_open = {"}": "{", "]": "["}
+
+    for character in text:
+        if in_string:
+            if escape:
+                escape = False
+            elif character == "\\":
+                escape = True
+            elif character == '"':
+                in_string = False
+            continue
+
+        if character == '"':
+            in_string = True
+        elif character in ("{", "["):
+            stack.append(character)
+        elif character in ("}", "]"):
+            expected = matching_open[character]
+            if not stack or stack[-1] != expected:
+                return None
+            stack.pop()
+
+    if in_string or escape or stack != ["{"]:
+        return None
+
+    try:
+        parsed = json.loads(text + "}")
+    except Exception:
+        return None
+    return parsed if isinstance(parsed, dict) else None
+
+
 def _extract_json_object(text: str) -> dict[str, Any] | None:
     if not text:
         return None
@@ -470,12 +514,12 @@ def _extract_json_object(text: str) -> dict[str, Any] | None:
     end = cleaned.rfind("}")
 
     if start == -1 or end == -1 or end <= start:
-        return None
+        return _repair_single_missing_top_level_object_brace(cleaned)
 
     try:
         return json.loads(cleaned[start : end + 1])
     except Exception:
-        return None
+        return _repair_single_missing_top_level_object_brace(cleaned)
 
 
 def _call_ollama_json(
@@ -500,10 +544,7 @@ def _call_ollama_json(
             },
         ],
         "stream": False,
-        "options": {
-            "temperature": 0,
-            "top_p": 0.1,
-        },
+        "options": {'temperature': 0, 'top_p': 0.1, 'num_ctx': LOGIC_LLM_NUM_CTX},
     }
 
     # STAGE19F_OLLAMA_STRUCTURED_OUTPUT_ENFORCEMENT_V1
@@ -547,16 +588,128 @@ def _numbered(items: list[str]) -> str:
     return "\n".join(f"{idx}. {item}" for idx, item in enumerate(items, 1))
 
 
+# STAGE22E3_PROFILE_CANONICAL_AXIS_BRIDGE_V1
+# STAGE22E21S36_GLOBAL_FALLBACK_PROMPT_CLAIMS_ARRAY_V1
+def _compact_prompt_candidates(
+    candidates: list[dict[str, Any]],
+) -> list[dict[str, Any]]:
+    compact_candidates: list[dict[str, Any]] = []
+
+    for candidate in candidates:
+        compact_candidate: dict[str, Any] = {
+            "id": candidate.get("id"),
+            "kind": candidate.get("kind"),
+        }
+        text = str(candidate.get("text") or "")
+
+        if compact_candidate["kind"] == "global_answer_context":
+            compact_candidate["claims"] = _lines(text)
+        else:
+            compact_candidate["text"] = text
+
+        compact_candidates.append(compact_candidate)
+
+    return compact_candidates
+
+
 def _build_logic_prompt(
     profile: dict[str, Any],
     candidates: list[dict[str, str]],
+    canonical_axes: list[dict[str, Any]] | None = None,
 ) -> str:
     display_name = profile.get("display_name") or profile.get("topic_id")
     truth_schema = profile.get("truth_schema") or []
     fatal_conditions = profile.get("fatal_conditions") or []
     safe_conditions = profile.get("safe_conditions") or []
+    # STAGE22E21R_COMPACT_CANONICAL_PROMPT_V1
+    # Stage22 uses canonical axes as the problem-relevant truth source.
+    # Keep the legacy prompt path unchanged when no canonical axes exist.
+    if canonical_axes:
+        compact_axes = [
+            {
+                key: value
+                for key, value in axis.items()
+                if value not in (None, "", [], {})
+            }
+            for axis in canonical_axes
+            if isinstance(axis, dict)
+            and str(axis.get("axis_id") or "").strip()
+            and str(axis.get("canonical_claim") or "").strip()
+        ]
+        compact_candidates = _compact_prompt_candidates(candidates)
+        fatal_payload = json.dumps(
+            fatal_conditions,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+        safe_payload = json.dumps(
+            safe_conditions,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+        candidate_payload = json.dumps(
+            compact_candidates,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
+        axis_payload = json.dumps(
+            compact_axes,
+            ensure_ascii=False,
+            separators=(",", ":"),
+        )
 
-    return f"""
+        return (
+            "GLOBAL_CANONICAL_AXIS_COMPARISON_V1\n"
+            f"topic={display_name}\n"
+            "임무:\n"
+            "- candidate evidence에 실제로 적힌 주장만 판단한다.\n"
+            "- active canonical axes와 의미/관계를 비교한다.\n"
+            "- 표현 차이만으로 오답 처리하지 않는다.\n"
+            "- 단순 누락·애매함·설명 부족은 fatal이 아니다.\n"
+            "- source-owned fatal_core/fatal_if_opposite와 명시적으로 반대되고 "
+            "confidence>=0.80이며 anchor_refs와 demand_refs 근거가 있을 때만 "
+            "FATAL_CONTRADICTION을 사용한다.\n"
+            "- LLM이 criticality, canonical claim, anchor_refs, demand_refs를 "
+            "새로 만들면 안 된다.\n"
+            f"fatal_conditions={fatal_payload}\n"
+            f"safe_conditions={safe_payload}\n"
+            f"candidate evidence={candidate_payload}\n"
+            # STAGE22E21R7_CANONICAL_AXES_SUFFIX_CONTRACT_V1
+            # STAGE22E21S18_EXPLICIT_REQUIRED_OUTPUT_FIELDS_V1
+            "STAGE22_COMPACT_OUTPUT_CONTRACT_V1\n"
+            "supplied JSON Schema와 일치하는 JSON object만 반환한다.\n"
+            "top-level 필수 key: "
+            "verdict,confidence,reason,checks,findings,alignments.\n"
+            "alignment 필수 key: "
+            "axis_id,answer_claim,canonical_claim,claim_signature,status,"
+            "criticality,confidence,reason,error_class,anchor_refs,demand_refs.\n"
+            "필수 key는 생략하지 않는다. confidence는 0~1 finite number이고 "
+            "reason,claim_signature,error_class는 문자열이다.\n"
+            "checks,findings,alignments,anchor_refs,demand_refs는 JSON array다.\n"
+            "answer/reasoning wrapper를 쓰지 않는다.\n"
+            "status는 ALIGNED|PARTIAL|OFF_AXIS|UNSUPPORTED|CONTRADICTED|"
+            "FATAL_CONTRADICTION 중 하나다.\n"
+            "각 원자 주장마다 별도 alignment; "
+            "직접 소유하는 가장 구체적 axis에 1:1; "
+            "포괄 axis 병합 금지.\n"
+            "axis_id는 아래 값; answer_claim은 해당 주장; "
+            "source-owned 필드는 source 복사.\n"
+            "checks에는 fatal 조건 평가를, findings에는 실제 major/fatal 오류만 "
+            "기록한다.\n"
+            # STAGE22E21S24_GENERIC_EXCLUSIVE_ROLE_CONTRADICTION_V1
+            # STAGE22E21S27_EXPLICIT_GENERIC_RULE_FIELD_BINDINGS_V1
+            # STAGE22E21S30_DIRECT_OWNER_NO_COLLAPSE_AXIS_SELECTION_V1
+            "타 축 독점·전담·단독: "
+            "error_class=CANONICAL_RELATION_CONTRADICTION; "
+            "claim_signature=<subject>.exclusively_establishes.<target>.\n"
+            "source fatal+confidence>=0.80만 "
+            "status=FATAL_CONTRADICTION.\n"
+            "JSON 외 설명·markdown을 출력하지 않는다.\n"
+            "canonical axes:\n"
+            f"{axis_payload}"
+        )
+
+    prompt = f"""
 다음은 산업계측제어기술사 답안 중 '{display_name}' 문항의 Logic Check 후보 evidence이다.
 
 너의 임무:
@@ -579,28 +732,9 @@ fatal 판정 조건:
   "verdict": "pass" | "warn" | "fatal",
   "confidence": 0.0,
   "reason": "간단한 한국어 사유",
-  "checks": [
-    {{
-      "rule_id": "fatal condition rule id",
-      "status": "pass" | "major" | "fatal",
-      "asserted": false,
-      "candidate_id": "C1 또는 빈 문자열",
-      "evidence": "답안의 실제 근거 또는 빈 문자열",
-      "reason": "항목별 판정 이유",
-      "correction": "정정 기준",
-      "confidence": 0.0
-    }}
-  ],
-  "findings": [
-    {{
-      "candidate_id": "C1",
-      "rule_id": "fatal condition rule id",
-      "severity": "fatal" | "major" | "minor",
-      "message": "한국어 오류 설명",
-      "correct_rule": "정답 기준",
-      "confidence": 0.0
-    }}
-  ]
+  "checks": [],
+  "findings": [],
+  "alignments": []
 }}
 
 중요:
@@ -609,13 +743,254 @@ fatal 판정 조건:
 - findings에는 실제 major 또는 fatal 항목만 포함한다.
 - fatal finding은 candidate_id가 반드시 있어야 한다.
 - candidate_id는 아래 후보 목록의 id 중 하나만 사용한다.
-- kind가 structured_damping_region_table인 후보는 "A => B" 형태의 수험생 주장 요약이다. 이 매핑이 정답 스키마와 직접 충돌하면 우선 검토하라.
 - evidence가 정답 구분과 실무 튜닝점 구분을 모두 포함하면 fatal로 잡지 않는다.
 - 확실하지 않으면 warn으로 둔다.
 
 후보 evidence:
 {json.dumps(candidates, ensure_ascii=False, indent=2)}
 """.strip()
+
+    active_axes = [
+        {
+            "axis_id": str(axis.get("axis_id") or "").strip(),
+            "canonical_claim": str(
+                axis.get("canonical_claim") or ""
+            ).strip(),
+            "criticality": str(
+                axis.get("criticality") or "supporting"
+            ).strip(),
+            "anchor_refs": axis.get("anchor_refs") or [],
+            "demand_refs": axis.get("demand_refs") or [],
+        }
+        for axis in (canonical_axes or [])
+        if isinstance(axis, dict)
+        and str(axis.get("axis_id") or "").strip()
+        and str(axis.get("canonical_claim") or "").strip()
+    ]
+
+    if not active_axes:
+        return prompt
+
+    return (
+        prompt
+        + "\n\n[GLOBAL_CANONICAL_AXIS_COMPARISON_V1]\n"
+        + "같은 LLM 호출 안에서 답안 전체의 명시적 주장을 "
+        + "활성 정답 축과 비교하라.\n"
+        + "문구 유사도가 아니라 개념, 관계 방향, 소유 범위, "
+        + "조건 및 배타적 표현의 의미를 비교한다.\n"
+        + "ALIGNED는 같은 의미, PARTIAL은 같은 축의 불완전 설명, "
+        + "OFF_AXIS는 다른 축, UNSUPPORTED는 근거 부족이다.\n"
+        + "CONTRADICTED는 정답 관계와 직접 충돌하는 주장이다.\n"
+        + "FATAL_CONTRADICTION은 제공된 source criticality가 "
+        + "fatal_core이고 답안이 그 관계를 명시적으로 반대로 "
+        + "주장하며 confidence>=0.80인 경우에만 사용한다.\n"
+        + "누락, 애매함, 단순 관련성 부족과 다른 유효 축은 "
+        + "오답 또는 fatal로 판정하지 않는다.\n"
+        + "axis_id, canonical_claim, criticality, anchor_refs와 "
+        + "demand_refs는 아래 source 값만 복사한다.\n"
+        + "답안에 실제로 확인되는 핵심 주장만 최대 12개를 "
+        + "alignments에 기록한다.\n"
+        + "canonical axes:\n"
+        + json.dumps(
+            active_axes,
+            ensure_ascii=False,
+            indent=2,
+        )
+    )
+
+
+def _stage22_profile_response_schema(
+    profile: dict[str, Any],
+    candidates: list[dict[str, str]],
+    canonical_axes: list[dict[str, Any]],
+) -> dict[str, Any]:
+    candidate_ids = [
+        str(row.get("id") or "").strip()
+        for row in candidates
+        if isinstance(row, dict)
+        and str(row.get("id") or "").strip()
+    ]
+    axis_ids = [
+        str(row.get("axis_id") or "").strip()
+        for row in canonical_axes
+        if isinstance(row, dict)
+        and str(row.get("axis_id") or "").strip()
+    ]
+
+    raw_fatal_conditions = profile.get("fatal_conditions") or []
+    rule_ids: list[str] = []
+    for index, row in enumerate(raw_fatal_conditions, start=1):
+        if isinstance(row, dict):
+            rule_id = str(
+                row.get("id") or row.get("rule_id") or ""
+            ).strip()
+        else:
+            rule_id = ""
+        if not rule_id:
+            rule_id = f"profile_rule_{index:03d}"
+        if rule_id not in rule_ids:
+            rule_ids.append(rule_id)
+
+    rule_id_schema: dict[str, Any] = {"type": "string"}
+    if rule_ids:
+        rule_id_schema["enum"] = rule_ids
+
+    candidate_schema: dict[str, Any] = {"type": "string"}
+    if candidate_ids:
+        candidate_schema["enum"] = ["", *candidate_ids]
+
+    return {
+        "type": "object",
+        "properties": {
+            "verdict": {
+                "type": "string",
+                "enum": ["pass", "warn", "fatal"],
+            },
+            "confidence": {
+                "type": "number",
+                "minimum": 0.0,
+                "maximum": 1.0,
+            },
+            "reason": {"type": "string"},
+            "checks": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "rule_id": rule_id_schema,
+                        "status": {
+                            "type": "string",
+                            "enum": ["pass", "major", "fatal"],
+                        },
+                        "asserted": {"type": "boolean"},
+                        "candidate_id": candidate_schema,
+                        "evidence": {"type": "string"},
+                        "reason": {"type": "string"},
+                        "correction": {"type": "string"},
+                        "confidence": {
+                            "type": "number",
+                            "minimum": 0.0,
+                            "maximum": 1.0,
+                        },
+                    },
+                    "required": [
+                        "rule_id",
+                        "status",
+                        "asserted",
+                        "candidate_id",
+                        "evidence",
+                        "reason",
+                        "correction",
+                        "confidence",
+                    ],
+                    "additionalProperties": False,
+                },
+            },
+            "findings": {
+                "type": "array",
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "candidate_id": candidate_schema,
+                        "rule_id": rule_id_schema,
+                        "severity": {
+                            "type": "string",
+                            "enum": ["fatal", "major", "minor"],
+                        },
+                        "message": {"type": "string"},
+                        "correct_rule": {"type": "string"},
+                        "confidence": {
+                            "type": "number",
+                            "minimum": 0.0,
+                            "maximum": 1.0,
+                        },
+                    },
+                    "required": [
+                        "candidate_id",
+                        "rule_id",
+                        "severity",
+                        "message",
+                        "correct_rule",
+                        "confidence",
+                    ],
+                    "additionalProperties": False,
+                },
+            },
+            "alignments": {
+                "type": "array",
+                "maxItems": 12,
+                "items": {
+                    "type": "object",
+                    "properties": {
+                        "axis_id": {
+                            "type": "string",
+                            "enum": axis_ids,
+                        },
+                        "status": {
+                            "type": "string",
+                            "enum": [
+                                "ALIGNED",
+                                "PARTIAL",
+                                "OFF_AXIS",
+                                "UNSUPPORTED",
+                                "CONTRADICTED",
+                                "FATAL_CONTRADICTION",
+                            ],
+                        },
+                        "answer_claim": {"type": "string"},
+                        "canonical_claim": {"type": "string"},
+                        "claim_signature": {"type": "string"},
+                        "error_class": {"type": "string"},
+                        "anchor_refs": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                        "demand_refs": {
+                            "type": "array",
+                            "items": {"type": "string"},
+                        },
+                        "criticality": {
+                            "type": "string",
+                            "enum": [
+                                "supporting",
+                                "core",
+                                "fatal_core",
+                            ],
+                        },
+                        "confidence": {
+                            "type": "number",
+                            "minimum": 0.0,
+                            "maximum": 1.0,
+                        },
+                        "reason": {"type": "string"},
+                    },
+                    "required": [
+                        "axis_id",
+                        "status",
+                        "answer_claim",
+                        "canonical_claim",
+                        "claim_signature",
+                        "error_class",
+                        "anchor_refs",
+                        "demand_refs",
+                        "criticality",
+                        "confidence",
+                        "reason",
+                    ],
+                    "additionalProperties": False,
+                },
+            },
+        },
+        "required": [
+            "verdict",
+            "confidence",
+            "reason",
+            "checks",
+            "findings",
+            "alignments",
+        ],
+        "additionalProperties": False,
+    }
 
 
 
@@ -646,13 +1021,37 @@ def _canonical_logic_finding_key(finding: dict[str, Any]) -> tuple[str, str]:
     return (severity, message)
 
 
-def verify_logic_with_llm(answer_text: str, topic_id: str) -> dict[str, Any]:
+def verify_logic_with_llm(
+    answer_text: str,
+    topic_id: str,
+    canonical_axes: list[dict[str, Any]] | None = None,
+) -> dict[str, Any]:
     profile = load_logic_check_profile(topic_id)
     cap_policy = profile.get("cap_policy") or {}
     fatal_threshold = float(cap_policy.get("fatal_confidence_threshold") or 0.75)
     fatal_ceiling = float(cap_policy.get("fatal_recommended_ceiling") or 10.0)
 
+    active_axes = [
+        dict(axis)
+        for axis in (canonical_axes or [])
+        if isinstance(axis, dict)
+        and str(axis.get("axis_id") or "").strip()
+        and str(axis.get("canonical_claim") or "").strip()
+    ][:24]
+
     candidates = extract_logic_evidence_candidates(answer_text, profile)
+
+    # STAGE22E7_GLOBAL_AXIS_EMPTY_CANDIDATE_FALLBACK_V1
+    if not candidates and active_axes:
+        global_answer = _normalize_text(answer_text)
+        if global_answer:
+            candidates = [
+                {
+                    "id": "C1",
+                    "kind": "global_answer_context",
+                    "text": answer_text[:4000],
+                }
+            ]
 
     if not candidates:
         return {
@@ -669,10 +1068,31 @@ def verify_logic_with_llm(answer_text: str, topic_id: str) -> dict[str, Any]:
             "reason": "검증할 핵심 후보 evidence가 없습니다.",
         }
 
-    prompt = _build_logic_prompt(profile, candidates)
+    prompt = _build_logic_prompt(
+        profile,
+        candidates,
+        canonical_axes=active_axes,
+    )
+    response_schema = (
+        _stage22_profile_response_schema(
+            profile,
+            candidates,
+            active_axes,
+        )
+        if active_axes
+        else None
+    )
+    call_kwargs = (
+        {"format_schema": response_schema}
+        if response_schema is not None
+        else {}
+    )
 
     try:
-        verdict = _call_ollama_json(prompt)
+        verdict = _call_ollama_json(
+            prompt,
+            **call_kwargs,
+        )
     except Exception as exc:
         return {
             "applicable": True,
@@ -698,6 +1118,46 @@ def verify_logic_with_llm(answer_text: str, topic_id: str) -> dict[str, Any]:
 
     if not isinstance(verdict, dict):
         verdict = {}
+
+    raw_alignments = verdict.get("alignments")
+    if not isinstance(raw_alignments, list):
+        raw_alignments = []
+
+    # STAGE22E10_PROFILE_ALIGNMENT_RETURN_ENVELOPE_V1
+    alignment_rows = [
+        row
+        for row in raw_alignments
+        if isinstance(row, dict)
+    ]
+    alignment_status_counts = {
+        status: sum(
+            str(row.get("status") or "").strip().upper()
+            == status
+            for row in alignment_rows
+        )
+        for status in (
+            "ALIGNED",
+            "PARTIAL",
+            "OFF_AXIS",
+            "UNSUPPORTED",
+            "CONTRADICTED",
+            "FATAL_CONTRADICTION",
+        )
+    }
+    canonical_axis_alignment_evaluation = {
+        "version": "canonical_axis_alignment_transport_v1",
+        "score_effect": "none",
+        "direct_score_application": False,
+        "alignments": alignment_rows,
+        "summary": {
+            "alignment_count": len(alignment_rows),
+            "status_counts": alignment_status_counts,
+            "fatal_count": alignment_status_counts.get(
+                "FATAL_CONTRADICTION",
+                0,
+            ),
+        },
+    }
 
     candidate_map = {c["id"]: c for c in candidates}
 
@@ -861,6 +1321,10 @@ def verify_logic_with_llm(answer_text: str, topic_id: str) -> dict[str, Any]:
         "confidence": confidence,
         "reason": verdict.get("reason", ""),
         "findings": normalized_findings,
+        "alignments": raw_alignments,
+        "canonical_axis_alignment_evaluation": (
+            canonical_axis_alignment_evaluation
+        ),
         "candidates": candidates,
         "fatal_error_detected": fatal,
         "recommended_ceiling": fatal_ceiling if fatal else None,

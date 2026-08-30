@@ -6,6 +6,9 @@ demands from the question text only. Answer text is never accepted.
 
 from __future__ import annotations
 
+from functools import lru_cache
+from pathlib import Path
+
 import copy
 import hashlib
 import inspect
@@ -369,12 +372,130 @@ def _canonical_primary_lens(
     return walk(value)
 
 
+
+# STAGE35D_TOPIC_PACK_QUESTION_DEMAND_AXES_V1
+_TOPIC_PACK_DEMAND_AXES_FILENAME = "question_demand_axes.json"
+
+
+def _question_contains_activation_term(
+    normalized_question: str,
+    term: Any,
+) -> bool:
+    needle = normalize_question_text(term).casefold()
+    haystack = normalized_question.casefold()
+    if not needle:
+        return False
+    if re.fullmatch(r"[a-z0-9]{1,4}", needle):
+        return bool(
+            re.search(
+                rf"(?<![a-z0-9]){re.escape(needle)}(?![a-z0-9])",
+                haystack,
+            )
+        )
+    return needle in haystack
+
+
+@lru_cache(maxsize=1)
+def _load_topic_pack_demand_axis_contracts() -> tuple[dict[str, Any], ...]:
+    topic_root = Path(__file__).resolve().parent / "rubrics" / "topic_packs"
+    contracts: list[dict[str, Any]] = []
+    if not topic_root.is_dir():
+        return ()
+    for path in sorted(topic_root.glob(f"*/{_TOPIC_PACK_DEMAND_AXES_FILENAME}")):
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError, TypeError):
+            continue
+        if not isinstance(payload, dict):
+            continue
+        payload = copy.deepcopy(payload)
+        payload["_source_file"] = path.relative_to(Path(__file__).resolve().parent).as_posix()
+        contracts.append(payload)
+    return tuple(contracts)
+
+
+def _topic_pack_demand_requirements(
+    normalized_question: str,
+) -> tuple[list[dict[str, Any]], dict[str, Any]]:
+    candidates: list[tuple[int, str, list[dict[str, Any]], dict[str, Any]]] = []
+    for payload in _load_topic_pack_demand_axis_contracts():
+        activation = payload.get("activation")
+        groups = activation.get("all_term_groups") if isinstance(activation, dict) else None
+        if not isinstance(groups, list) or not groups:
+            continue
+        matched_terms: list[str] = []
+        matched = True
+        for group in groups:
+            if not isinstance(group, list) or not group:
+                matched = False
+                break
+            group_hits = [
+                str(term)
+                for term in group
+                if _question_contains_activation_term(normalized_question, term)
+            ]
+            if not group_hits:
+                matched = False
+                break
+            matched_terms.extend(group_hits)
+        if not matched:
+            continue
+        raw_requirements = payload.get("requirements")
+        if not isinstance(raw_requirements, list) or not raw_requirements:
+            continue
+        rows: list[dict[str, Any]] = []
+        seen_ids: set[str] = set()
+        for index, raw in enumerate(raw_requirements):
+            if not isinstance(raw, dict):
+                continue
+            requirement_id = str(raw.get("requirement_id") or "").strip()
+            demand_kind = str(raw.get("demand_kind") or "").strip()
+            requirement_text = str(raw.get("requirement_text") or "").strip()
+            if not requirement_id or not demand_kind or not requirement_text:
+                continue
+            if requirement_id in seen_ids:
+                continue
+            seen_ids.add(requirement_id)
+            row = copy.deepcopy(raw)
+            row.update({
+                "requirement_id": requirement_id,
+                "clause_index": index + 1,
+                "demand_kind": demand_kind,
+                "demand_label": str(raw.get("demand_label") or demand_kind).strip(),
+                "requirement_text": requirement_text,
+                "source": "topic_pack_question_demand_axes",
+                "topic_id": str(payload.get("topic_id") or "").strip(),
+                "source_file": payload.get("_source_file"),
+                "source_json_pointer": f"$/requirements/{index}",
+                "answer_text_dependency": "none",
+            })
+            rows.append(row)
+        if not rows:
+            continue
+        topic_id = str(payload.get("topic_id") or "").strip()
+        metadata = {
+            "schema_version": payload.get("schema_version"),
+            "topic_id": topic_id,
+            "source_file": payload.get("_source_file"),
+            "matched_activation_terms": sorted(set(matched_terms)),
+            "requirement_count": len(rows),
+        }
+        candidates.append((len(matched_terms), topic_id, rows, metadata))
+    if not candidates:
+        return [], {}
+    candidates.sort(key=lambda item: (-item[0], item[1]))
+    _score, _topic_id, rows, metadata = candidates[0]
+    return rows, metadata
+
 def build_question_demand_contract(
     question_text: Any,
     *,
     canonical_primary_lens: Any = None,
 ) -> dict[str, Any]:
     normalized = normalize_question_text(question_text)
+    topic_pack_requirements, topic_pack_metadata = (
+        _topic_pack_demand_requirements(normalized)
+    )
     clauses = _split_clauses(normalized)
     requirements = []
     all_demand_kinds = []
@@ -406,6 +527,14 @@ def build_question_demand_contract(
                 }
             )
             all_demand_kinds.append(demand_kind)
+
+    generic_requirements = copy.deepcopy(requirements)
+    if topic_pack_requirements:
+        requirements = copy.deepcopy(topic_pack_requirements)
+        all_demand_kinds = [
+            row["demand_kind"]
+            for row in requirements
+        ]
 
     deduped_requirements = []
     seen_requirements = set()
@@ -456,7 +585,14 @@ def build_question_demand_contract(
         secondary_demands.append(
             {
                 "demand_kind": demand_kind,
-                "demand_label": _DEMAND_LABELS[demand_kind],
+                "demand_label": next(
+                    (
+                        str(row.get("demand_label") or "").strip()
+                        for row in deduped_requirements
+                        if row.get("demand_kind") == demand_kind
+                    ),
+                    _DEMAND_LABELS.get(demand_kind, demand_kind),
+                ),
                 "requirement_ids": requirement_ids,
             }
         )
@@ -467,6 +603,9 @@ def build_question_demand_contract(
         "mode": "question_only_deterministic",
         "score_effect": "semantic_guidance_only",
         "answer_text_dependency": "none",
+        "topic_pack_demand_axes_applied": bool(topic_pack_requirements),
+        "topic_pack_demand_axes": topic_pack_metadata,
+        "generic_requirements": generic_requirements,
         "normalized_question": normalized,
         "question_hash": _question_hash(normalized),
         "primary_lens": primary_lens,

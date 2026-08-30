@@ -1,0 +1,114 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "반응기",
+        "reactor"
+      ],
+      [
+        "과압력",
+        "overpressure",
+        "압력 위험"
+      ],
+      [
+        "sil",
+        "safety integrity level",
+        "안전무결성수준"
+      ],
+      [
+        "sis",
+        "sif",
+        "안전계장시스템",
+        "안전계장기능"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "scenario_definition_and_cause",
+      "demand_kind": "ANALYZE_INTERPRET",
+      "demand_label": "시나리오·원인 정의",
+      "requirement_text": "반응기 과압력의 원인, 개시사건, 결과와 LOPA 시나리오 경계를 정의한다.",
+      "source_json_pointers": [
+        "$/expected_question_patterns/8",
+        "$/recommended_outline/0"
+      ]
+    },
+    {
+      "requirement_id": "existing_ipl_qualification",
+      "demand_kind": "EVALUATE_JUDGE",
+      "demand_label": "기존 IPL 적격성",
+      "requirement_text": "기존 BPCS·경보·운전자조치·PSV의 IPL 적격성, 독립성과 중복 credit 여부를 평가한다.",
+      "source_json_pointers": [
+        "$/expected_question_patterns/2",
+        "$/recommended_outline/2",
+        "$/recommended_outline/3"
+      ]
+    },
+    {
+      "requirement_id": "required_rrf_and_target_sil",
+      "demand_kind": "CALCULATE_DERIVE",
+      "demand_label": "요구 RRF·목표 SIL",
+      "requirement_text": "잔여빈도와 허용빈도로 요구 RRF를 계산하고 목표 SIL 구간을 결정한다.",
+      "source_json_pointers": [
+        "$/expected_question_patterns/0",
+        "$/recommended_outline/4"
+      ]
+    },
+    {
+      "requirement_id": "demand_mode_and_sil_metric",
+      "demand_kind": "ANALYZE_INTERPRET",
+      "demand_label": "요구 모드·SIL 지표",
+      "requirement_text": "저수요·고수요·연속모드를 구분하고 PFDavg 또는 PFH 중 올바른 SIL 지표를 적용한다.",
+      "source_json_pointers": [
+        "$/expected_question_patterns/4",
+        "$/high_score_points/6"
+      ]
+    },
+    {
+      "requirement_id": "complete_sif_architecture",
+      "demand_kind": "DESIGN_PROPOSE",
+      "demand_label": "완전한 SIF 아키텍처",
+      "requirement_text": "Sensor–Logic Solver–Final Element 전체 SIF 경계, trip setpoint, safe state와 response time을 설계한다.",
+      "source_json_pointers": [
+        "$/expected_question_patterns/8",
+        "$/recommended_outline/6"
+      ]
+    },
+    {
+      "requirement_id": "quantitative_verification_dimension",
+      "demand_kind": "CALCULATE_DERIVE",
+      "demand_label": "정량 검증·차원 일관성",
+      "requirement_text": "λDU, proof-test interval, 진단·수리와 구조 가정으로 PFDavg/PFH를 계산하고 목표값과 차원 일관성 있게 비교한다.",
+      "source_json_pointers": [
+        "$/expected_question_patterns/4",
+        "$/common_missing_points/6"
+      ]
+    },
+    {
+      "requirement_id": "independence_ccf_hft_tradeoff",
+      "demand_kind": "EVALUATE_JUDGE",
+      "demand_label": "독립성·CCF·HFT 절충",
+      "requirement_text": "독립성, 공통원인고장 CCF, HFT, 진단범위와 구조 선택의 절충을 검토한다.",
+      "source_json_pointers": [
+        "$/expected_question_patterns/6",
+        "$/recommended_outline/3"
+      ]
+    },
+    {
+      "requirement_id": "proof_test_and_lifecycle",
+      "demand_kind": "DESIGN_PROPOSE",
+      "demand_label": "Proof test·수명주기",
+      "requirement_text": "proof-test interval, bypass, 유지보수, SRS, MOC와 재검증 등 기능안전 수명주기를 정의한다.",
+      "source_json_pointers": [
+        "$/expected_question_patterns/7",
+        "$/recommended_outline/7"
+      ]
+    }
+  ]
+}

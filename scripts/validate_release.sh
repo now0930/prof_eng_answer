@@ -3,6 +3,9 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+# STAGE17E2B_TOPIC_PACK_TEST_MANIFEST_V1
+python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool
+
 PROMOTE_GENERATED="${PROMOTE_GENERATED:-1}"
 RUN_SMOKE_TOPIC_PACKS="${RUN_SMOKE_TOPIC_PACKS:-0}"
 RUN_GRADING_REPRODUCIBILITY="${RUN_GRADING_REPRODUCIBILITY:-0}"
@@ -128,8 +131,47 @@ echo "===== router / coverage / Hybrid-Multi release regressions ====="
   python3 scripts/test_multi_topic_grading_context.py
   python3 scripts/test_multi_topic_grading_phase10_integration.py
   python3 scripts/test_multi_topic_question_contract_hash_repair.py
-  python3 scripts/test_question_demand_shadow.py
-  python3 scripts/test_question_demand_evidence_shadow.py
+  # STAGE17E3_QUESTION_DEMAND_CACHE_CLEANUP_V2_BEGIN
+  stage17_qd_cache_dir="data/question_contract_cache/question_demand"
+  stage17_qd_cache_guard="$(mktemp -d)"
+  stage17_qd_cache_before="$stage17_qd_cache_guard/before.txt"
+  stage17_qd_cache_after="$stage17_qd_cache_guard/after.txt"
+  stage17_qd_cache_new="$stage17_qd_cache_guard/new.txt"
+  stage17_qd_cache_backup="$stage17_qd_cache_guard/backup"
+  mkdir -p "$stage17_qd_cache_backup"
+  if [[ -d "$stage17_qd_cache_dir" ]]; then
+    find "$stage17_qd_cache_dir" -maxdepth 1 -type f -name "*.json" -printf "%f\n" | LC_ALL=C sort >"$stage17_qd_cache_before"
+    while IFS= read -r stage17_qd_cache_name; do
+      [[ -n "$stage17_qd_cache_name" ]] || continue
+      cp -p -- "$stage17_qd_cache_dir/$stage17_qd_cache_name" "$stage17_qd_cache_backup/$stage17_qd_cache_name"
+    done <"$stage17_qd_cache_before"
+  else
+    : >"$stage17_qd_cache_before"
+  fi
+  stage17_qd_shadow_rc=0
+  python3 scripts/test_question_demand_shadow.py || stage17_qd_shadow_rc=$?
+  if [[ "$stage17_qd_shadow_rc" -eq 0 ]]; then
+    python3 scripts/test_question_demand_evidence_shadow.py || stage17_qd_shadow_rc=$?
+  fi
+  if [[ -d "$stage17_qd_cache_dir" ]]; then
+    find "$stage17_qd_cache_dir" -maxdepth 1 -type f -name "*.json" -printf "%f\n" | LC_ALL=C sort >"$stage17_qd_cache_after"
+  else
+    : >"$stage17_qd_cache_after"
+  fi
+  comm -13 "$stage17_qd_cache_before" "$stage17_qd_cache_after" >"$stage17_qd_cache_new"
+  while IFS= read -r stage17_qd_cache_name; do
+    [[ -n "$stage17_qd_cache_name" ]] || continue
+    rm -f -- "$stage17_qd_cache_dir/$stage17_qd_cache_name"
+  done <"$stage17_qd_cache_new"
+  while IFS= read -r stage17_qd_cache_name; do
+    [[ -n "$stage17_qd_cache_name" ]] || continue
+    cp -p -- "$stage17_qd_cache_backup/$stage17_qd_cache_name" "$stage17_qd_cache_dir/$stage17_qd_cache_name"
+  done <"$stage17_qd_cache_before"
+  rm -rf -- "$stage17_qd_cache_guard"
+  if [[ "$stage17_qd_shadow_rc" -ne 0 ]]; then
+    exit "$stage17_qd_shadow_rc"
+  fi
+  # STAGE17E3_QUESTION_DEMAND_CACHE_CLEANUP_V2_END
   python3 scripts/test_question_demand_b_score_connection_v2.py
   python3 scripts/test_semantic_router_default_transport.py
   python3 scripts/test_semantic_router_gemini_transport.py
@@ -324,10 +366,6 @@ python3 scripts/test_final_control_element_sil_sis_esd_pst_topic.py
 echo
 echo "===== control valve integrated selection process and lifecycle topic regression ====="
 python3 scripts/test_control_valve_selection_process_lifecycle_topic.py
-
-echo
-echo "===== control valve maintenance inspection overhaul testing topic regression ====="
-python3 -B scripts/test_control_valve_maintenance_inspection_overhaul_testing_topic.py
 echo
 RELEASE_REPO_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 export PYTHONPATH="${RELEASE_REPO_ROOT}${PYTHONPATH:+:${PYTHONPATH}}"
@@ -460,6 +498,8 @@ python3 -B scripts/test_question_contract.py
 
 echo "----- host regression: question demand contract -----"
 python3 -B scripts/test_question_demand_contract.py
+# STAGE35D_TOPIC_DEMAND_BRIDGE_REGRESSION_V1
+python3 -B tests/test_stage35d_topic_pack_demand_bridge.py
 python3 -B scripts/test_question_type_de_policy.py
 
 echo "----- host regression: qtype golden complete contract -----"
@@ -479,11 +519,6 @@ python3 -B scripts/test_mcdc_vmodel_sil_overgrading_regression.py
 
 echo "----- host regression: topic classification policy -----"
 python3 -B scripts/test_topic_classification_policy.py
-
-echo "----- host regression: topic pack contract and tool -----"
-python3 -B -m unittest \
-  scripts.test_topic_pack_contract \
-  scripts.test_topic_pack_tool
 
 echo "----- host regression: topic pack validator multischema -----"
 python3 -B scripts/test_topic_pack_validator_multischema.py

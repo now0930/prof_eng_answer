@@ -14,6 +14,7 @@ Fallback coverage is marked as unknown and must not be used for score adjustment
 
 from __future__ import annotations
 
+import copy
 from typing import Any
 
 from question_type_taxonomy import normalize_question_type
@@ -181,6 +182,65 @@ def _canonicalize_semantic_question_type(
     return normalized
 
 
+
+def _valid_explicit_requirement_coverage(
+    value: Any,
+) -> bool:
+    if not isinstance(value, dict):
+        return False
+
+    requirements = value.get("requirements")
+    return isinstance(requirements, list)
+
+
+def _attach_explicit_requirement_coverage(
+    coverage: dict[str, Any],
+    *containers: Any,
+) -> dict[str, Any]:
+    # Providers may serialize explicit_requirement_coverage as a
+    # sibling of question_type_coverage. Promotion keeps the source-owned
+    # demand contract available to downstream merge and persistence code.
+    # A valid nested value remains authoritative. Invalid or absent sibling
+    # values are never fabricated.
+
+    existing = coverage.get(
+        "explicit_requirement_coverage"
+    )
+    existing_valid = (
+        _valid_explicit_requirement_coverage(existing)
+    )
+    existing_requirements = (
+        existing.get("requirements")
+        if existing_valid
+        else None
+    )
+
+    # Source-owned non-empty nested demands remain authoritative.
+    # A generated empty fallback placeholder must not suppress a
+    # non-empty provider sibling contract.
+    if existing_valid and existing_requirements:
+        return coverage
+
+    for container in containers:
+        if not isinstance(container, dict):
+            continue
+
+        candidate = container.get(
+            "explicit_requirement_coverage"
+        )
+        if not _valid_explicit_requirement_coverage(
+            candidate
+        ):
+            continue
+
+        merged = dict(coverage)
+        merged["explicit_requirement_coverage"] = (
+            copy.deepcopy(candidate)
+        )
+        return merged
+
+    return coverage
+
 def ensure_question_type_coverage(
     result: dict[str, Any],
     question_text: str | None = None,
@@ -210,6 +270,13 @@ def ensure_question_type_coverage(
                     existing_question_type,
                 )
             )
+            coverage = (
+                _attach_explicit_requirement_coverage(
+                    coverage,
+                    parsed,
+                    result,
+                )
+            )
 
             parsed["question_type_coverage"] = coverage
             parsed["question_type"] = coverage[
@@ -230,6 +297,11 @@ def ensure_question_type_coverage(
             ),
         )
 
+        fallback = _attach_explicit_requirement_coverage(
+            fallback,
+            parsed,
+            result,
+        )
         parsed["question_type_coverage"] = fallback
         parsed["question_type"] = fallback[
             "question_type"
@@ -252,6 +324,10 @@ def ensure_question_type_coverage(
             question_text,
             existing_question_type,
         )
+        coverage = _attach_explicit_requirement_coverage(
+            coverage,
+            result,
+        )
 
         result["question_type_coverage"] = coverage
         result["question_type"] = coverage[
@@ -267,6 +343,10 @@ def ensure_question_type_coverage(
         ),
     )
 
+    fallback = _attach_explicit_requirement_coverage(
+        fallback,
+        result,
+    )
     result["question_type_coverage"] = fallback
     result["question_type"] = fallback[
         "question_type"

@@ -101,8 +101,20 @@ def _coverage_demand_state(value: Any) -> DemandState:
 
 
 
+
+# STAGE35D_ACTIVE_EXPLICIT_REQUIREMENTS_V1
+def _active_criteria_rows(
+    coverage: dict[str, Any],
+) -> list[Any]:
+    explicit = coverage.get("explicit_requirement_coverage")
+    if isinstance(explicit, dict):
+        requirements = explicit.get("requirements")
+        if isinstance(requirements, list) and requirements:
+            return requirements
+    return _as_list(coverage.get("sub_criteria_coverage"))
+
 def _criteria_counts(coverage: dict[str, Any]) -> dict[str, int]:
-    rows = _as_list(coverage.get("sub_criteria_coverage"))
+    rows = _active_criteria_rows(coverage)
     counts = {
         "present": 0,
         "correct": 0,
@@ -119,6 +131,8 @@ def _criteria_counts(coverage: dict[str, Any]) -> dict[str, int]:
         state = _coverage_demand_state(
             row.get("demand_state")
             or row.get("status")
+            or row.get("state")
+            or row.get("coverage_state")
         )
 
         if state is DemandState.CORRECT:
@@ -140,7 +154,7 @@ def _criteria_counts(coverage: dict[str, Any]) -> dict[str, int]:
 def _criteria_details(
     coverage: dict[str, Any],
 ) -> dict[str, Any]:
-    rows = _as_list(coverage.get("sub_criteria_coverage"))
+    rows = _active_criteria_rows(coverage)
 
     status_rows: list[dict[str, Any]] = []
     present: list[str] = []
@@ -156,6 +170,8 @@ def _criteria_details(
         criterion = str(
             row.get("criterion")
             or row.get("demand_id")
+            or row.get("requirement_id")
+            or row.get("requirement_text")
             or ""
         ).strip()
         evidence = str(row.get("evidence") or "").strip()
@@ -166,6 +182,8 @@ def _criteria_details(
         state = _coverage_demand_state(
             row.get("demand_state")
             or row.get("status")
+            or row.get("state")
+            or row.get("coverage_state")
         )
         mentioned_raw = row.get("mentioned")
         mentioned = (
