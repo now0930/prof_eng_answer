@@ -1,0 +1,69 @@
+{
+  "schema_version": "sis_lopa_architecture_overgrading_regression.v1",
+  "regression_id": "SIS-LOPA-ARCHITECTURE-OVERGRADING-01",
+  "source_case_reference": "telegram_case_2026-08-29_reactor_overpressure_sil_sis_architecture",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "question": "화학 플랜트 반응기 압력 위험 존재, 기존 보호장치로 불충분 SIS 도입 검토 1) 반응기 과압력 시나리오의 SIL 결정과정 2) 이를 만족하기 위한 SIS 아키텍처 설명",
+  "answer": "1. 배경\n  1) 플랜트 등 사고 발생 시 인명피해가 예상되는 장소에는 SIS 적용이 필수.\n  2) 그러나 SIS 적용에는 비용이 들어가므로 적정 수준에 맞춘 SIL 구축 필요.\n  3) 적정 수준의 SIS를 구축하기 위해서는 사회적으로 합의된 사고 발생 확률에\n     준하여 이를 논리적으로 계산하는 방식 필요.\n2. 본문\n  1) 반응기 과압력 시나리오에 요구 SIL 결정 과정\n     a) Rmax: 사고가 발생하는 비율 [/yr]\n     b) Fr.max: 전파 확률을 고려한 최대 피해 비율 [/yr]\n     c) Pi: Rmax가 Fr.max로 전달되는 확률\n     d) Rmax = Fr.max * Pi\n        Fr.max = Rmax / Pi\n        이를 통해 Fr.max를 설정 가능\n     e) FD: 요청 빈도 [/yr]\n     f) PFD: 요청 시 실패 확률 [-]\n     g) FD * PFD <= Fr.max\n        PFD <= Fr.max / FD\n     h) 여기서 계산된 값으로 SIL을 선정\n  2) SIL table\n  +-------+-------------------+-------------------+\n  | Level | 고빈도            | 저빈도            |\n  +-------+-------------------+-------------------+\n  | 1     | 10^-6 < P < 10^-5 | 10^-2 < P < 10^-1 |\n  | 2     | 10^-7 < P < 10^-6 | 10^-3 < P < 10^-2 |\n  | 3     | 10^-8 < P < 10^-7 | 10^-4 < P < 10^-3 |\n  | 4     | 10^-9 < P < 10^-8 | 10^-5 < P < 10^-4 |\n  +-------+-------------------+-------------------+\n  3) SIS 아키텍처 설계\n     a) 전체 실패 확률은 센서, 로직, FCE 3개의 실패 확률의 합으로 구성.\n        (시간당 실패 rate)\n     b) lambda_SIS = lambda_센서 + lambda_로직 + lambda_FCE\n     c) lambda_SIS 비율이 PFD 비율보다 작도록 시스템을 설계.\n     d) HFT 0, HFT 1, HFT 2 등 하드웨어 선정.\n     e) RBD를 사용하여 직렬, 병렬 구조로 안정성 높임.\n     f) CCF를 고려하여 제품 한 개가 시스템 실패를 결정하지 않도록 설계.\n  4) Revealed 위험, Unrevealed 위험\n     a) 시스템의 downtime을 unrevealed 고장이 결정.\n     b) Unavailability ~ (TI / 2 + MRT + ...) * lambda_DU\n     c) 검사 주기 TI가 나머지 수를 압도.\n     d) 검사 주기를 어떻게 선정하느냐가 시스템의 불가용성을 결정.\n3. 결론\n  1) SIS를 적용하여 Total risk를 감소, Individual risk 감소 필요.\n  2) ALARP 원칙에 따라 수행\n     a) SIS는 자본 투자가 증가될 수 있음.\n     b) SIL 4를 적용 시 설계부터 다시 수행, 기존 시스템에서는 불가능.\n     c) 사회적으로 위험을 어느 정도 수준에서 감수할 수 있는지 판단.\n     d) 이에 적합한 수준 투자 필요.\n  3) SIS를 한 번 구축해도 정기적 검사 필수\n     a) 이미 기술한 바와 같이 검사 주기가 시스템의 불가용성을 결정.\n  4) 이후 주기적 관리를 서술하는 문서화도 필요.\n  5) 사용하는 사람, 시스템의 역량에 달려 있음 (SIS 선정, 유지).",
+  "transport_shape": {
+    "description": "problem text and answer begin on the same physical line, separated by a long equals-sign divider",
+    "separator_min_length": 20
+  },
+  "expected_topics": {
+    "primary": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+    "adjacent": [
+      "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
+    ],
+    "forbidden": [
+      "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection"
+    ]
+  },
+  "expected": {
+    "volume": {
+      "ascii_equivalent_count": 1755,
+      "page_equivalent": 2.92,
+      "level": "three_page_text",
+      "cap": null,
+      "volume_cap_allowed": false
+    },
+    "demand_status": {
+      "scenario_definition_and_cause": "partial",
+      "existing_ipl_qualification": "missing",
+      "required_rrf_and_target_sil": "partial",
+      "demand_mode_and_sil_metric": "incorrect",
+      "complete_sif_architecture": "partial",
+      "quantitative_verification_dimension": "incorrect",
+      "independence_ccf_hft_tradeoff": "partial",
+      "proof_test_and_lifecycle": "present"
+    },
+    "required_fatal_ids": [
+      "failure_rate_compared_directly_to_pfd"
+    ],
+    "requirements_full_credit_allowed": false,
+    "strong_verdict_allowed": false,
+    "passing_score_allowed": false,
+    "total_range": {
+      "min": 9.5,
+      "max": 13.0
+    },
+    "maximum_total_score": 13.0,
+    "coverage_range": {
+      "min": 45.0,
+      "max": 75.0
+    },
+    "required_feedback_elements": [
+      "반응기 과압력 initiating event와 consequence endpoint, 기존 IPL 평가 누락 지적",
+      "λ 고장률과 무차원 PFDavg를 직접 비교할 수 없다는 차원 오류 교정",
+      "HFT·RBD 나열이 아니라 Sensor–Logic Solver–Final Element, trip setpoint, safe state와 response time을 요구",
+      "Target SIL과 Achieved SIL 및 Proof Test 기반 검증을 구분"
+    ],
+    "forbidden_feedback_elements": [
+      "요구사항을 100% 충족했다는 평가",
+      "확률 변수 관계식이 모두 정확하다는 평가",
+      "핵심 기술관계를 정확히 기술했다는 평가",
+      "0.5쪽 미만 또는 9.0점 분량 상한",
+      "hazardous-area explosion-protection Topic을 정답 근거로 사용",
+      "15점 이상 합격점 판정"
+    ]
+  }
+}

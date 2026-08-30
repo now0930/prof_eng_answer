@@ -1,5 +1,5 @@
 {
-  "version": "sha256-de529384fc28ada587d49ac35497922e51960c5d356999c32dbabcf9ef226436-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-020129fe946a57be1f0350ae1ce7d3224def5695de3092dccca17b6520b98235-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -14582,7 +14582,13 @@
           "Sensor",
           "Logic Solver",
           "Final Element",
-          "systematic integrity"
+          "systematic integrity",
+          "고장률",
+          "failure rate",
+          "lambda",
+          "lambda_SIS",
+          "λDU",
+          "차원"
         ]
       },
       "truth_schema": [
@@ -14611,7 +14617,8 @@
         "전체 SIF의 정량 평가는 Sensor, Logic Solver, Final Element와 필요한 Utility·Interface의 기여를 포함한다.",
         "개별 구성요소 인증은 전체 SIF의 Achieved SIL을 자동 결정하지 않는다.",
         "정량 하드웨어 무결성 계산은 체계적 무결성, 소프트웨어 V&V, 형상관리와 독립성 증거를 대체하지 않는다.",
-        "계산 결과에는 고장률 출처, 운전환경, 시험주기, 수리시간, 진단, CCF, Bypass와 모델 근사조건을 함께 제시해야 한다."
+        "계산 결과에는 고장률 출처, 운전환경, 시험주기, 수리시간, 진단, CCF, Bypass와 모델 근사조건을 함께 제시해야 한다.",
+        "시간당 고장률 λ는 1/time 차원의 물리량이고 PFDavg는 무차원 평균 요구시 실패확률이므로 직접 대소 비교할 수 없으며, 저수요 근사에서는 demand mode와 Proof Test Interval 등의 가정을 통해 PFDavg로 변환해야 한다."
       ],
       "fatal_conditions": [
         "[pfdavg_all_demand_modes] PFDavg는 저수요·고수요·연속수요에 구분 없이 같은 방식으로 적용한다. | correction: SIF의 demand mode에 따라 저수요 PFDavg와 고수요·연속수요 PFH를 구분한다.",
@@ -14622,7 +14629,8 @@
         "[pst_proves_total_sis] PST만 통과하면 전체 Final Element와 전체 SIS의 PFDavg가 입증된다. | correction: PST Coverage 밖의 고장과 Sensor·Logic·전체 Final Element 경계를 포함해야 한다.",
         "[fta_rbd_markov_identical] FTA, RBD와 Markov Model은 목적과 가정이 동일한 같은 기법이다. | correction: 성공논리, 실패논리, 시간 의존 상태전이라는 모델 관점이 다르다.",
         "[component_certificate_proves_sif] SIL 인증기기 하나가 전체 SIF의 SIL을 결정한다. | correction: 전체 기능경계, 구조, 정량결과와 체계적 증거를 평가한다.",
-        "[quantitative_hardware_proves_systematic_integrity] PFDavg 또는 PFH 계산만으로 소프트웨어와 체계적 무결성까지 입증된다. | correction: 정량 하드웨어 무결성과 체계적 무결성은 별도이며 상호 보완적이다."
+        "[quantitative_hardware_proves_systematic_integrity] PFDavg 또는 PFH 계산만으로 소프트웨어와 체계적 무결성까지 입증된다. | correction: 정량 하드웨어 무결성과 체계적 무결성은 별도이며 상호 보완적이다.",
+        "[failure_rate_compared_directly_to_pfd] 시간당 고장률 λ 또는 lambda_SIS를 무차원 PFD/PFDavg와 같은 비율로 직접 비교하거나 λ_SIS가 PFD보다 작으면 SIL을 만족한다고 설명한다. | correction: λ와 PFDavg는 차원이 다르므로 직접 비교할 수 없다. 저수요 조건에서는 λDU, Proof Test Interval, 진단·수리와 구조 가정을 사용해 PFDavg를 계산하고 목표 PFDavg와 비교한다."
       ],
       "safe_conditions": [
         "RBD를 성공경로, FTA를 Top Event 원인전개, Markov를 시간 의존 상태전이 모델로 구분한다.",
@@ -14636,7 +14644,8 @@
         "개별 인증기기와 전체 Achieved SIL을 구분한다.",
         "정량 하드웨어 무결성과 체계적 무결성을 구분한다.",
         "고장률 출처, 운전환경, 수리시간, Bypass와 모델 불확실성을 명시한다.",
-        "부정형 정답이나 비교문은 주변 문맥과 결론을 확인한 뒤 평가한다."
+        "부정형 정답이나 비교문은 주변 문맥과 결론을 확인한 뒤 평가한다.",
+        "고장률 λ와 PFDavg의 차원을 구분하고, 저수요 근사식의 시험주기·진단·수리·독립성 조건을 명시하여 PFDavg를 계산한다."
       ]
     },
     {

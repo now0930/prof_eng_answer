@@ -1,5 +1,5 @@
 {
-  "version": "sha256-de529384fc28ada587d49ac35497922e51960c5d356999c32dbabcf9ef226436-generated-topic-pack-model-answers",
+  "version": "sha256-020129fe946a57be1f0350ae1ce7d3224def5695de3092dccca17b6520b98235-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -10748,6 +10748,21 @@
             "hazop_lopa_ipl_dependability_auditability",
             "hazop_lopa_scenario_aggregation_moc"
           ]
+        },
+        {
+          "pattern": "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
+          "intent": "reactor overpressure target SIL determination and SIS architecture handoff",
+          "required_anchor_ids": [
+            "hazop_lopa_lopa_scenario_boundary",
+            "hazop_lopa_initiating_event_frequency",
+            "hazop_lopa_ipl_definition",
+            "hazop_lopa_residual_frequency_after_existing_ipls",
+            "hazop_lopa_required_rrf",
+            "hazop_lopa_pfdavg_rrf_relation",
+            "hazop_lopa_sil_band_mapping",
+            "hazop_lopa_sif_allocation_boundary",
+            "hazop_lopa_srs_handoff"
+          ]
         }
       ],
       "recommended_outline": [
@@ -10836,7 +10851,8 @@
         "Sensor–Logic Solver–Final Element 전체 SIF 경계와 process safety time을 명시한다.",
         "LOPA 결과를 SRS의 setpoint, safe state, response time, proof test와 bypass 요구로 인계한다.",
         "여러 scenario가 같은 SIF를 공유할 때 demand와 기능요구를 함께 검토한다.",
-        "공정·운전·IPL·시험주기 변경을 MOC와 재검증으로 연결한다."
+        "공정·운전·IPL·시험주기 변경을 MOC와 재검증으로 연결한다.",
+        "반응기 과압력 원인, 기존 IPL, residual risk와 목표 RRF를 구체적인 SIF 아키텍처 및 SRS 요구로 연결한다."
       ],
       "common_missing_points": [
         "HAZOP 위험등급만으로 SIL을 바로 지정함",
@@ -10848,7 +10864,9 @@
         "RRF와 PFDavg 관계를 반대로 설명함",
         "Target SIL을 achieved SIL로 간주함",
         "SIF 경계와 SRS 인계를 생략함",
-        "변경관리와 재검증을 생략함"
+        "변경관리와 재검증을 생략함",
+        "반응기 과압력 원인과 기존 BPCS·경보·PSV 등 IPL을 scenario별로 평가하지 않음",
+        "HFT·RBD·CCF를 나열하지만 Sensor–Logic Solver–Final Element, trip setpoint, safe state와 response time을 정의하지 않음"
       ],
       "routing_aliases": [
         "HAZOP LOPA target SIL",
@@ -10862,7 +10880,13 @@
         "SIF allocation SRS handoff",
         "LOPA double counting common cause",
         "BPCS alarm operator IPL",
-        "LOPA MOC revalidation"
+        "LOPA MOC revalidation",
+        "반응기 과압력 시나리오 SIL 결정 과정",
+        "과압력 시나리오 목표 SIL 결정",
+        "기존 보호장치 불충분 SIS 도입",
+        "SIL 결정과 SIS 아키텍처",
+        "화학 플랜트 과압력 LOPA SIS",
+        "reactor overpressure target SIL SIS architecture"
       ],
       "routing_field_points": [
         "HAZOP deviation를 원인–결과 LOPA scenario로 전환하는 절차",
@@ -10874,13 +10898,16 @@
         "목표 SIL과 달성 SIL의 구분",
         "Sensor–Logic Solver–Final Element 전체 SIF 할당",
         "SRS의 trip setpoint, safe state, response time와 proof test 요구",
-        "다중 scenario demand, MOC와 revalidation"
+        "다중 scenario demand, MOC와 revalidation",
+        "반응기 과압력 원인–결과 scenario와 기존 보호계층 평가",
+        "목표 SIL 결정과 이를 만족하는 Sensor–Logic Solver–Final Element 아키텍처 인계"
       ],
       "revision_notes": [
         "created_by=scripts/create_topic_pack.py; final source directly reviewed and authored",
         "authoring_basis=docs/topic_pack_workflow.md",
         "adjacent_boundary=sis_sil_safety_software_independence_systematic_failure_verification_validation 답안에는 수요 모드별 무결성 지표를 구분해야 한다. 저수요 모드는 PFDavg를 사용하고, 고수요 또는 연속 운전 모드는 PFH를 사용한다. PFDavg를 모든 수요 모드의 공통 지표로 서술하지 않는다. SIL은 Safety Integrity Level(안전 무결성 수준)이다. Safety Instrument Level은 잘못된 전개이며, SIS는 별도로 Safety Instrumented System을 뜻한다.",
-        "generated_bank_not_modified"
+        "generated_bank_not_modified",
+        "stage32c=reactor-overpressure target-SIL plus SIS-architecture compound routing strengthened"
       ],
       "id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation_COMPARE_v1",
       "title": "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당",
@@ -10892,7 +10919,8 @@
         "rrf pfdavg sil relationship",
         "lopa to sif and srs handoff",
         "dependency and common cause treatment",
-        "uncertainty management and revalidation"
+        "uncertainty management and revalidation",
+        "reactor overpressure target SIL determination and SIS architecture handoff"
       ],
       "topic_aliases": [
         "HAZOP LOPA target SIL",
@@ -10906,7 +10934,13 @@
         "SIF allocation SRS handoff",
         "LOPA double counting common cause",
         "BPCS alarm operator IPL",
-        "LOPA MOC revalidation"
+        "LOPA MOC revalidation",
+        "반응기 과압력 시나리오 SIL 결정 과정",
+        "과압력 시나리오 목표 SIL 결정",
+        "기존 보호장치 불충분 SIS 도입",
+        "SIL 결정과 SIS 아키텍처",
+        "화학 플랜트 과압력 LOPA SIS",
+        "reactor overpressure target SIL SIS architecture"
       ],
       "expected_structure": [
         "HAZOP 결과와 scenario 경계",
@@ -10940,7 +10974,8 @@
         "Sensor–Logic Solver–Final Element 전체 SIF 경계와 process safety time을 명시한다.",
         "LOPA 결과를 SRS의 setpoint, safe state, response time, proof test와 bypass 요구로 인계한다.",
         "여러 scenario가 같은 SIF를 공유할 때 demand와 기능요구를 함께 검토한다.",
-        "공정·운전·IPL·시험주기 변경을 MOC와 재검증으로 연결한다."
+        "공정·운전·IPL·시험주기 변경을 MOC와 재검증으로 연결한다.",
+        "반응기 과압력 원인, 기존 IPL, residual risk와 목표 RRF를 구체적인 SIF 아키텍처 및 SRS 요구로 연결한다."
       ],
       "low_score_patterns": [
         "HAZOP 위험등급만으로 SIL을 바로 지정함",
@@ -10952,7 +10987,9 @@
         "RRF와 PFDavg 관계를 반대로 설명함",
         "Target SIL을 achieved SIL로 간주함",
         "SIF 경계와 SRS 인계를 생략함",
-        "변경관리와 재검증을 생략함"
+        "변경관리와 재검증을 생략함",
+        "반응기 과압력 원인과 기존 BPCS·경보·PSV 등 IPL을 scenario별로 평가하지 않음",
+        "HFT·RBD·CCF를 나열하지만 Sensor–Logic Solver–Final Element, trip setpoint, safe state와 response time을 정의하지 않음"
       ],
       "field_connection_points": [
         "HAZOP deviation를 원인–결과 LOPA scenario로 전환하는 절차",
@@ -10964,7 +11001,9 @@
         "목표 SIL과 달성 SIL의 구분",
         "Sensor–Logic Solver–Final Element 전체 SIF 할당",
         "SRS의 trip setpoint, safe state, response time와 proof test 요구",
-        "다중 scenario demand, MOC와 revalidation"
+        "다중 scenario demand, MOC와 revalidation",
+        "반응기 과압력 원인–결과 scenario와 기존 보호계층 평가",
+        "목표 SIL 결정과 이를 만족하는 Sensor–Logic Solver–Final Element 아키텍처 인계"
       ],
       "source_schema_version": "topic_pack.model_answer.v1"
     },

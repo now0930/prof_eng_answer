@@ -8,6 +8,8 @@ import re
 from pathlib import Path
 from typing import Any
 
+from sis_lopa_architecture_overgrading_regression import main as run_sis_lopa_architecture_overgrading_regression
+
 REPO = Path(__file__).resolve().parents[1]
 
 TARGET = "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
@@ -149,6 +151,8 @@ def main() -> None:
     assert "strong" in forbidden
     assert "15점 이상" in forbidden
     assert "100%" in forbidden
+
+    run_sis_lopa_architecture_overgrading_regression()
 
     print("MCDC_VMODEL_SIL_OVERGRADING_REGRESSION=PASS")
     print("PRODUCTION_PI_CASES=3")

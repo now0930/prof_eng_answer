@@ -41,6 +41,25 @@ class AsciiEquivalentRegressionTests(unittest.TestCase):
         )
         self.assertEqual(normalized, "1. 답안")
 
+
+    def test_problem_and_answer_same_line_after_separator_is_preserved(
+        self,
+    ) -> None:
+        answer = "1. 배경\n" + ("a" * 1500)
+        text = (
+            "/grade\n"
+            "문제: 반응기 과압력 SIL 결정과 SIS 아키텍처 설명"
+            + ("=" * 80)
+            + answer
+            + "\n끝."
+        )
+        normalized = normalize_volume_text(text)
+        self.assertEqual(normalized, answer)
+
+        result = estimate_ascii_answer_volume(text)
+        self.assertEqual(result["level"], "three_page_text")
+        self.assertIsNone(result["cap"])
+
     def test_line_breaks_do_not_change_volume(self) -> None:
         continuous = "a" * 1200
         split = "\n".join(["a" * 100] * 12)
@@ -245,9 +264,9 @@ if __name__ == "__main__":
         "ASCII_VOLUME_TEST_INVENTORY "
         f"classes=3 tests={count}"
     )
-    if count != 19:
+    if count != 20:
         raise RuntimeError(
-            f"Expected 19 tests, discovered {count}"
+            f"Expected 20 tests, discovered {count}"
         )
     result = unittest.TextTestRunner(
         verbosity=2

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import re
 from typing import Any
 
 ASCII_UNITS_PER_PAGE = 600
@@ -10,6 +11,49 @@ ASCII_TWO_TO_THREE_PAGE_BOUNDARY = 1500
 ASCII_THREE_TO_FOUR_PAGE_BOUNDARY = 2100
 
 VOLUME_METHOD = "ascii_equivalent_only_v1"
+
+
+_PROBLEM_PREFIXES = ("[문제]", "문제:", "문제 :")
+_INLINE_ANSWER_MARKERS = ("[답안]", "답안:", "답안 :")
+_INLINE_SECTION_SEPARATOR_RE = re.compile(r"={20,}")
+
+
+def _inline_answer_remainder_from_problem_line(
+    line: str,
+) -> str | None:
+    'Return only an explicit inline answer remainder on a problem line.'
+    prefix = next(
+        (
+            candidate
+            for candidate in _PROBLEM_PREFIXES
+            if line.startswith(candidate)
+        ),
+        None,
+    )
+    if prefix is None:
+        return None
+
+    body = line[len(prefix):].strip()
+    candidates: list[tuple[int, str]] = []
+
+    for marker in _INLINE_ANSWER_MARKERS:
+        index = body.find(marker)
+        if index >= 0:
+            candidates.append(
+                (index, body[index + len(marker):].strip())
+            )
+
+    separator = _INLINE_SECTION_SEPARATOR_RE.search(body)
+    if separator is not None:
+        candidates.append(
+            (separator.start(), body[separator.end():].strip())
+        )
+
+    if not candidates:
+        return ""
+
+    _, remainder = min(candidates, key=lambda item: item[0])
+    return remainder
 
 
 def normalize_volume_text(text: str | None) -> str:
@@ -29,11 +73,12 @@ def normalize_volume_text(text: str | None) -> str:
         if folded in {"끝", "끝.", "end", "end."}:
             continue
 
-        if (
-            line.startswith("[문제]")
-            or line.startswith("문제:")
-            or line.startswith("문제 :")
-        ):
+        inline_answer = _inline_answer_remainder_from_problem_line(
+            line
+        )
+        if inline_answer is not None:
+            if inline_answer:
+                kept.append(inline_answer)
             continue
 
         if line.startswith("[답안]"):
