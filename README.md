@@ -8,6 +8,8 @@
 
 > 장기 채점 품질 로드맵과 현재 진행 상태는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다. 이슈는 구현 상태와 검증 증거를 관리하고, 고정 정책과 반복 운영 절차는 `docs/` 문서가 소유합니다.
 
+> 최신 구현 상태(2026-08-30): `main`의 `d277bb8d78a0cb546ea622da1f105b9444007304`에서 Stage35D Topic Pack 8축 bridge와 Stage35E2 provider exact projection·canonical lens 고정을 완료했습니다. Focused regression 6/6과 full release validation은 통과했고, 두 fresh live session에서 `IMPLEMENTATION_EVALUATION` lens와 λ/PFD 차원 오류 fatal 보존을 확인했습니다. 다만 최종 Telegram 요구사항 요약이 `전체 판정: unknown`으로 축약되는 경계는 Stage35E3 대상이며, 현재 실행·commit·push를 보류하고 있습니다.
+
 ---
 
 ## 1. 주요 기능
@@ -19,6 +21,9 @@
 - A·D·E semantic 평가와 B·C native evidence projection을 결합한 하이브리드 채점
 - 교수·기술사·기업 임원 관점의 3인 평가와 진단 정보
 - 문제문만 사용하는 deterministic Question Type lens
+- Topic Pack이 소유하는 canonical primary lens와 답안 비의존형 routing
+- Topic Pack의 구조화된 Question Demand를 exact ID·순서·cardinality로 provider 출력에 투영
+- provider projection 불일치 시 1회 strict retry 후 fail-closed
 - Fact Anchor와 Model Answer Bank 기반 평가
 - Logic Check와 topic-specific deterministic checker
 - 명시적 요구사항의 `present`, `partial`, `incorrect`, `missing` 분리
@@ -44,8 +49,8 @@
 | 총점 | 25점 |
 | 채점 Layer | 5개 |
 | Active Question Type | 4개 |
-| Topic Sheet | 75개 |
-| Topic Pack source | 75개 topic |
+| Topic Sheet | 76개 |
+| Topic Pack source | 76개 topic |
 | Generated Rubric Bank | 6개 |
 | 기본 Rubric Bank mode | `generated` |
 | Generic grading contract | `stage23.generic_grading_contract.v1` |
@@ -126,6 +131,8 @@ Question Type과 Model Answer는 평가 범위와 기대 구조를 제공합니�
 Question Type lens는 **문제문만** 사용해 결정합니다. 답안 내용, 답안 길이, 이모지와 표현 차이는 lens를 변경하지 않습니다. Rule-based 결과를 우선하고 신뢰도 조건을 만족할 때 최종 type을 고정합니다.
 
 Legacy 유형명은 입력 호환을 위해 canonical type으로 매핑될 수 있지만, 최종 root, 한국어 이름과 Telegram 출력은 active type 기준으로 동기화합니다.
+
+문제문이 Topic Pack의 `question_demand_axes.json` activation 조건과 일치하면 해당 파일의 `canonical_primary_lens`가 canonical owner가 됩니다. 이 계약은 답안 본문을 사용하지 않으며, provider가 반환한 explicit requirement가 Topic Pack의 요구축 ID·순서·개수와 정확히 일치하는지 검증합니다.
 
 ---
 
@@ -311,6 +318,25 @@ Provenance 값은 한 Python 프로세스 안에서 안정적으로 유지됩니
 
 Bind mount 환경에서 `engine_commit`을 읽을 때는 repository 경로를 명시하고 command-scoped `safe.directory`를 사용합니다. Global 또는 system Git config는 변경하지 않습니다.
 
+### 4.10 Topic Pack exact Question Demand projection
+
+`hazop_lopa_ipl_risk_reduction_sil_target_allocation` Topic Pack은 반응기 과압력 SIS 문제에 대해 다음 8개 요구축을 소유합니다.
+
+1. 시나리오·원인 정의
+2. 기존 IPL 적격성
+3. 요구 RRF·목표 SIL
+4. 요구 모드·SIL 지표
+5. 완전한 SIF 아키텍처
+6. 정량 검증·차원 일관성
+7. 독립성·CCF·HFT 절충
+8. Proof test·수명주기
+
+계약의 canonical lens는 `IMPLEMENTATION_EVALUATION`입니다. Provider projection은 8개 requirement ID의 exact cardinality, ID set과 순서를 모두 만족해야 합니다. 첫 응답이 계약과 다르면 strict contract로 한 번만 재시도하고, 재시도도 불일치하면 불완전한 coverage를 채점 결과로 통과시키지 않고 fail-closed 처리합니다.
+
+Stage35E2 기준 focused regression 6/6과 full release validation은 통과했습니다. Fresh live session `20260830_081215_5960502198`과 `20260830_081351_5960502198`에서도 동일 lens와 fatal 판정 보존을 확인했습니다.
+
+현재 알려진 제한은 canonical lens reconciliation 뒤 최종 Telegram `question_type_coverage_summary`가 `unknown`으로 축약되어 8축 상태 집계가 표시되지 않는 점입니다. 내부 exact projection을 임의의 type-specific sub-criteria로 대체하지 않으며, explicit 8축 summary만 보존하는 Stage35E3 작업은 [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 보류 상태로 추적합니다.
+
 ---
 
 ## 5. 빠른 실행
@@ -463,6 +489,8 @@ Telegram /grade
   → LLM provider routing
   → semantic grading과 3인 rater 합성
   → Fact Anchor / Model Answer
+  → Topic Pack question_demand_axes bridge
+  → provider exact requirement projection 검증·1회 strict retry
   → explicit requirement coverage
   → Logic Check와 deterministic checker
   → generic demand/claim/evidence contract 정규화
@@ -554,7 +582,7 @@ rubrics/topic_packs/<topic_id>/
 └── topic_importance.json
 ```
 
-현재 저장소에는 **Topic Sheet 75개와 Topic Pack 75개가 있으며, 동일한 `<topic_id>`로 75개 모두 1:1 대응**합니다. Topic Sheet만 있고 Topic Pack이 없는 항목도 없고, Topic Pack만 있고 Topic Sheet가 없는 항목도 없습니다.
+현재 저장소에는 **Topic Sheet 76개와 Topic Pack 76개가 있으며, 동일한 `<topic_id>`로 76개 모두 1:1 대응**합니다. Topic Sheet만 있고 Topic Pack이 없는 항목도 없고, Topic Pack만 있고 Topic Sheet가 없는 항목도 없습니다.
 
 이 관계를 기준으로 신규 Topic은 다음 원칙을 따릅니다.
 
@@ -572,7 +600,7 @@ Topic Pack  = Topic Sheet를 구조화한 채점 source
 Generated Rubric Bank = 검증된 Topic Pack을 runtime용으로 합친 build output
 ```
 
-Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **전체 Topic inventory를 기준으로 관리**합니다. 현재 authoritative Topic inventory는 75개입니다.
+Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **전체 Topic inventory를 기준으로 관리**합니다. 현재 authoritative Topic inventory는 76개입니다.
 
 ### 9.2 저장 위치와 역할
 
@@ -585,7 +613,7 @@ Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **�
 | Classification / Coverage / Roadmap | `docs/topic_pack_classification.md`, `docs/exam_scope/` | 공식 criterion ownership, coverage와 추가 우선순위 관리 |
 | Legacy Rubric Bank | `rubrics/*/industrial_instrumentation_control.json` | 기존 통합 bank와 호환·비교 경로 |
 
-현재 저장소에는 **75개 Topic Pack**이 있으며 generated runtime bank는 다음 **6개**입니다.
+현재 저장소에는 **76개 Topic Pack**이 있으며 generated runtime bank는 다음 **6개**입니다.
 
 ```text
 fact_anchors.generated.json
@@ -748,6 +776,8 @@ python3 -m unittest -v \
   scripts.test_requirement_coverage \
   scripts.test_general_grading_runtime_e2e \
   test_stage23_generic_grading_contract
+
+python3 tests/test_stage35e2_provider_eight_axis_canonical_lens.py
 ```
 
 주요 검증 대상:
@@ -760,6 +790,9 @@ python3 -m unittest -v \
 - 최종 `grade.json`과 Telegram 출력 동기화
 - session 격리와 동일 초 ID 충돌 방지
 - score-bearing field 불변
+- Topic Pack 8축 contract와 provider exact projection
+- 동일 문제의 답안 비의존형 canonical lens
+- projection 불일치 1회 retry와 fail-closed
 
 ### 10.4 문서만 수정했을 때
 
@@ -795,8 +828,9 @@ git diff --check -- README.md docs
 | `bot.py` | Telegram 입력, session 격리, 최종 저장과 출력 객체 관리 |
 | `grading_agents.py` | semantic grading orchestration과 최종 persistence |
 | `grading_identity.py` | 문제·제출 정규화와 재현성 identity |
-| `question_type_router.py` | 문제문 기반 deterministic lens |
-| `question_type_coverage_adapter.py` | coverage 정규화와 상태 집계 |
+| `question_type_router.py` | 문제문 및 Topic Pack canonical contract 기반 deterministic lens |
+| `question_type_coverage_adapter.py` | coverage 정규화·상태 집계와 canonical lens reconciliation |
+| `question_demand_contract.py` | 문제문 추출, Topic Pack 8축 bridge와 canonical lens contract |
 | `explicit_requirement_cap.py` | 명시적 핵심 요구의 실제 누락 hard cap |
 | `question_type_coverage_score_adjuster.py` | coverage 보정 후보와 strict 적용 |
 | `control_valve_formula_checker.py` | 제어밸브 topic-specific deterministic checker |
