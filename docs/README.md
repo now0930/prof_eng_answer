@@ -4,6 +4,8 @@
 
 프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
 
+> 최신 상태(2026-08-30): Stage35D Topic Pack 8축 bridge와 Stage35E2 exact provider projection·canonical lens 고정은 `d277bb8d78a0cb546ea622da1f105b9444007304`에서 완료되었습니다. 두 fresh live session에서 `IMPLEMENTATION_EVALUATION` lens와 λ/PFD fatal 보존을 확인했지만, Telegram 공개 coverage summary가 `unknown`으로 축약되는 Stage35E3 경계는 현재 보류 상태입니다. 진행 증거와 완료 조건은 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다.
+
 ---
 
 ## 1. 문서 경계
@@ -29,7 +31,8 @@
 | A/B/C/D/E와 최종 score flow 이해 | [`grading_architecture.md`](grading_architecture.md) | [`question_type_taxonomy.md`](question_type_taxonomy.md), [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) |
 | 제출문 정규화와 원문·정규화 증적 확인 | [`grading_architecture.md`](grading_architecture.md) | `grade_submission_normalizer.py`, `bot.py` |
 | Fatal·Major 오류의 최종 판정 일관성 확인 | [`grading_architecture.md`](grading_architecture.md) | `verdict_consistency.py`, `grade_output_summarizer.py` |
-| Active Question Type과 deterministic lens 확인 | [`question_type_taxonomy.md`](question_type_taxonomy.md) | [`grading_architecture.md`](grading_architecture.md) |
+| Active Question Type과 deterministic lens 확인 | [`question_type_taxonomy.md`](question_type_taxonomy.md) | [`grading_architecture.md`](grading_architecture.md), [`루트 README §4.10`](../README.md#410-topic-pack-exact-question-demand-projection) |
+| Topic Pack 8축 Question Demand·canonical lens·provider projection 확인 | [`루트 README §4.10`](../README.md#410-topic-pack-exact-question-demand-projection) | [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1), `question_demand_contract.py`, `gemini_grader.py` |
 | `incorrect`, `missing`과 hard cap 확인 | [`grading_architecture.md`](grading_architecture.md) | [`question_type_taxonomy.md`](question_type_taxonomy.md) |
 | Verified defect와 single-owner 정책 확인 | [`grading_architecture.md`](grading_architecture.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
 | Difficulty Profile과 ceiling 확인 | [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) | [`grading_architecture.md`](grading_architecture.md) |
@@ -68,7 +71,7 @@
 
 | 문서 | 책임 |
 |---|---|
-| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, 75개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
+| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, manifest 기준 76개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | Fact Anchor, Model Answer, Topic Importance와 Logic Check source 작성 기준 |
 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | 요구사항 → 직접 source JSON authoring → focused validation → integration rebuild → release/CI 검증 |
 
@@ -92,11 +95,13 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 |---|---|---|
 | 배점 | A/B/C/D/E = 3/6/8/6/2 | `rubrics/scoring_model/default.json` |
 | Active Question Type | 4종 | `rubrics/question_types/default.json`, Question Type modules |
-| Topic Pack | 75개 | `rubrics/generated/topic_pack_manifest.generated.json` |
+| Topic Pack | 76개 | `rubrics/generated/topic_pack_manifest.generated.json` |
 | Generated bank | 6개 | `rubrics/generated/*.generated.json` |
 | Software Topic | SW-01~SW-13, 13개 | `docs/topic_pack_architecture.md`, generated manifest |
 | 기본 Rubric Bank | `generated` | `rubric_bank_paths.py` |
-| Lens 입력 | 문제문만 사용 | `question_type_router.py`, `grading_identity.py` |
+| Lens 입력 | 문제문만 사용; 일치하는 Topic Pack canonical lens가 owner | `question_type_router.py`, `question_demand_contract.py`, `rubrics/topic_packs/<topic_id>/question_demand_axes.json` |
+| Explicit Question Demand projection | Topic Pack 요구축의 exact ID·순서·cardinality 검증 | `question_demand_contract.py`, `gemini_grader.py` |
+| Projection mismatch | strict contract로 1회 retry 후에도 불일치하면 fail-closed | `gemini_grader.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
 | 제출문 정규화 | topic-neutral·idempotent, 원문·정규화문 증적 보존 | `grade_submission_normalizer.py`, `bot.py`, `grading_agents.py` |
 | 최종 판정 일관성 | Fatal은 Full Credit·strong·합격 차단, Major는 Full Credit·strong 차단, 숫자 점수 유지 | `verdict_consistency.py`, `grade_output_summarizer.py` |
 | Coverage 상태 | `present`, `partial`, `incorrect`, `missing` | `question_type_coverage_adapter.py` |
@@ -120,7 +125,11 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 
 구현 상태와 남은 deployment gate는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다. Issue #1은 진행 상태와 증거를 관리하며, 세부 정책과 반복 절차는 `grading_architecture.md`, `operation_runbook.md`와 향후 품질 로드맵 문서가 source of truth를 담당합니다.
 
-Question Type을 semantic grader의 자유 선택 결과로 설명하지 않습니다. 현재 lens는 문제문 기반 deterministic routing과 confidence gate가 기준입니다.
+Question Type을 semantic grader의 자유 선택 결과로 설명하지 않습니다. 현재 lens는 문제문 기반 deterministic routing과 confidence gate가 기준입니다. 일치하는 Topic Pack이 `question_demand_axes.json`에서 `canonical_primary_lens`를 제공하면 해당 contract가 canonical owner가 되며 답안 본문은 lens 결정에 사용하지 않습니다.
+
+Stage35E2는 provider의 explicit requirement projection이 Topic Pack 요구축과 정확히 일치할 때만 결과를 수용합니다. 첫 응답이 불일치하면 strict contract로 한 번 재시도하고, 두 번째 응답도 불일치하면 undersplit 또는 freeform coverage를 통과시키지 않고 fail-closed 처리합니다.
+
+현재 Stage35E3 이전의 알려진 경계는 canonical lens reconciliation 뒤 type-specific sub-criteria를 무효화할 때 최종 `question_type_coverage_summary`까지 0건/`unknown`으로 축약될 수 있다는 점입니다. 내부 explicit 8축 contract와 provider projection을 임의의 세부기준으로 바꾸지 않으며, 공개 summary 복원 작업은 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)의 보류 항목으로 관리합니다.
 
 Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorrect`가 됩니다. 이 동기화는 기본적으로 score-neutral이며, 동일 오류를 B와 C 또는 D/E에 중복 귀속하지 않습니다.
 
@@ -134,7 +143,9 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | 제출문 정규화와 증적 | `grading_architecture.md` | `grade_submission_normalizer.py`, `bot.py`, `grading_agents.py` |
 | 최종 판정 일관성과 숫자 점수 보존 | `grading_architecture.md` | `verdict_consistency.py`, `grade_output_summarizer.py` |
 | Deterministic grading identity | `grading_architecture.md` | `grading_identity.py` |
-| Question-only type lens | `question_type_taxonomy.md` | `question_type_router.py`, `question_type_taxonomy.py` |
+| Question-only type lens | `question_type_taxonomy.md`, 루트 `README.md` §4.10 | `question_type_router.py`, `question_type_taxonomy.py`, `question_demand_contract.py` |
+| Topic Pack explicit demand·canonical lens contract | 루트 `README.md` §4.10 | `rubrics/topic_packs/<topic_id>/question_demand_axes.json`, `question_demand_contract.py` |
+| Provider exact projection·retry·fail-closed | 루트 `README.md` §4.10 | `gemini_grader.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
 | `present`, `partial`, `incorrect`, `missing` | `question_type_taxonomy.md` | `question_type_coverage_adapter.py` |
 | 명시적 핵심 요구 누락 hard cap | `grading_architecture.md` | `explicit_requirement_cap.py` |
 | Coverage `warn`, `strict`, `off` | `grading_architecture.md` | `question_type_coverage_score_adjuster.py` |
@@ -164,7 +175,9 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | Grading orchestration과 최초 persistence | `grading_agents.py` |
 | 최종 점수, cap과 score range | `grade_score_reconciler.py` |
 | A/B/C/D/E | `rubrics/scoring_model/default.json`과 runtime scoring code |
-| Question Type | `rubrics/question_types/default.json`, `question_type_router.py` |
+| Question Type | `rubrics/question_types/default.json`, `question_type_router.py`; 활성화된 Topic Pack canonical owner는 `question_demand_axes.json` |
+| Explicit Question Demand contract | `rubrics/topic_packs/<topic_id>/question_demand_axes.json`, `question_demand_contract.py` |
+| Provider projection validation | `gemini_grader.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
 | Explicit coverage | `question_type_coverage_adapter.py` |
 | 명시적 요구 hard cap | `explicit_requirement_cap.py` |
 | Verified defect mapping | `verified_defect_reconciliation.py` |
@@ -211,6 +224,8 @@ Topic Pack source JSON을 만들기 전에 사람이 검토하는 구조화 Mark
 14. 완료된 채점이 같은 session 디렉터리를 재사용한다고 설명하지 않습니다.
 15. 제출문 정규화가 기술 내용이나 점수를 재작성한다고 설명하지 않습니다.
 16. Fatal·Major 판정 일관성 보정이 숫자 점수를 변경한다고 설명하지 않습니다.
+17. Topic Pack explicit demand와 Question Type의 일반 세부기준을 같은 schema 또는 같은 owner로 설명하지 않습니다.
+18. Stage35E3 완료 전에는 내부 8축 projection이 Telegram 공개 summary에 모두 표시된다고 설명하지 않습니다.
 
 ---
 
@@ -220,6 +235,7 @@ Topic Pack source JSON을 만들기 전에 사람이 검토하는 구조화 Mark
 
 ```bash
 git diff --check -- README.md docs
+python3 tests/test_stage35e2_provider_eight_axis_canonical_lens.py
 ```
 
 추가로 확인할 항목:
@@ -231,6 +247,8 @@ git diff --check -- README.md docs
 - Topic Pack manifest의 `topic_count`, generated bank 6개와 Software SW-01~SW-13 존재 여부
 - 현재 runtime owner 파일
 - 오래된 semantic lens와 session 재사용 설명 제거
+- Topic Pack exact demand ID·순서·cardinality와 canonical lens 계약
+- Stage35E3 보류 중인 public summary 경계를 완료된 기능처럼 서술하지 않았는지
 
 문서가 runtime 정책을 설명한다면 관련 focused regression 결과와 비교합니다. 코드나 JSON을 함께 변경하지 않았다면 불필요한 container smoke를 반복하지 않습니다.
 
