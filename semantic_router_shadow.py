@@ -417,6 +417,7 @@ def _shadow_recall_signal_score_for_demand(
     signals: list[str],
     *,
     term_document_frequency: dict[str, int],
+    signal_document_frequency: dict[str, int],
     topic_count: int,
 ) -> tuple[int, list[str], dict[str, Any]]:
     # Demand-aware recall keeps the global scorer unchanged.
@@ -454,17 +455,13 @@ def _shadow_recall_signal_score_for_demand(
                 matched_terms.add(term)
 
         if exact_strong_phrase:
-            unique_terms = set(signal_terms)
             if (
-                len(unique_terms) >= 2
-                and all(
-                    term_document_frequency.get(
-                        term,
-                        topic_count,
-                    )
-                    <= df_cap
-                    for term in unique_terms
+                len(signal_terms) >= 2
+                and signal_document_frequency.get(
+                    signal_compact,
+                    topic_count,
                 )
+                <= df_cap
             ):
                 discriminative_strong_phrases.append(signal)
 
@@ -560,6 +557,7 @@ def build_question_demand_aware_rule_candidates(
     topic_signals: dict[str, list[str]] = {}
     topic_entry_by_id: dict[str, dict[str, Any]] = {}
     term_document_frequency: dict[str, int] = {}
+    signal_document_frequency: dict[str, int] = {}
 
     for entry in topic_entries:
         if not isinstance(entry, dict):
@@ -580,13 +578,33 @@ def build_question_demand_aware_rule_candidates(
         topic_signals[topic_id] = signals
 
         topic_terms: set[str] = set()
+        topic_compact_signals: set[str] = set()
         for signal in signals:
             topic_terms.update(
                 _shadow_recall_terms(signal)
             )
+            compact_signal = (
+                _shadow_recall_question_compact(
+                    signal
+                )
+            )
+            if compact_signal:
+                topic_compact_signals.add(
+                    compact_signal
+                )
         for term in topic_terms:
             term_document_frequency[term] = (
                 term_document_frequency.get(term, 0)
+                + 1
+            )
+        for compact_signal in topic_compact_signals:
+            signal_document_frequency[
+                compact_signal
+            ] = (
+                signal_document_frequency.get(
+                    compact_signal,
+                    0,
+                )
                 + 1
             )
 
@@ -628,6 +646,9 @@ def build_question_demand_aware_rule_candidates(
                 signals,
                 term_document_frequency=(
                     term_document_frequency
+                ),
+                signal_document_frequency=(
+                    signal_document_frequency
                 ),
                 topic_count=topic_count,
             )

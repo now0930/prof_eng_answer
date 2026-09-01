@@ -1,5 +1,5 @@
 {
-  "version": "sha256-6b149748db8891ae6191197f405bc9f1543bd0d0bb2260fc7bc8765315a2f32d-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-57f8ae4a82db43e84c644b6eb85e61496f860796cf02c341a6eab41e40a5a080-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -26426,6 +26426,133 @@
         "fatal_error_cap": 12.5,
         "major_error_cap": 17.5,
         "mode": "warn"
+      }
+    },
+    {
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "display_name": "위험 시나리오에서 목표 SIL을 결정하고 설계·운전 수명주기로 인계하는 판단을 평가한다.",
+      "difficulty": "FIELD_APPLICATION",
+      "cap_policy": {
+        "enabled": true,
+        "apply_only_to_verified_fatal_correctness_error": true,
+        "keyword_match_alone_is_insufficient": true
+      },
+      "candidate_extraction": {
+        "max_candidates": 24,
+        "nearby_window": 2,
+        "rules": [],
+        "key_terms": [
+          "SIL 결정 방법",
+          "target SIL",
+          "tolerable risk",
+          "residual frequency",
+          "RRF_required",
+          "PFDavg_target",
+          "F_tolerable",
+          "F_residual",
+          "low demand high demand",
+          "PFDavg PFH",
+          "PST MTTR",
+          "proof test interval",
+          "SRS MOC revalidation"
+        ]
+      },
+      "truth_schema": [
+        "SIL은 위험 시나리오별 개별 SIF에 요구되는 안전무결성 수준이며 SIS 전체나 부품 인증등급과 동일하지 않다.",
+        "목표 SIL은 명확한 initiating event, consequence, 운전조건과 safe state를 가진 시나리오별로 결정한다.",
+        "기존 보호수단은 specificity, independence, dependability와 auditability가 입증될 때만 IPL로 credit한다.",
+        "SIF 전 잔여 사건빈도는 initiating event frequency에 조건부 수정인자와 적격 IPL의 PFD를 곱해 구한다.",
+        "RRF_required = F_residual/F_tolerable이며 저요구 모드에서 PFDavg_target <= 1/RRF_required = F_tolerable/F_residual이다.",
+        "Demand mode는 고장 검출시점이 아니라 안전기능 요구빈도와 연속작동 여부로 구분한다.",
+        "Target SIL과 achieved SIL을 구분하고 후자는 전체 SIF의 PFDavg 또는 PFH와 정성 제약으로 검증한다.",
+        "PST는 일부 검출 가능한 고장에만 credit하며 full proof test를 자동 대체하거나 MTTR을 본질적으로 줄이지 않는다.",
+        "Proof-test interval은 실제 SIF 계산과 운전자료로 정하며 인증서 가정을 현장 최소주기로 간주하지 않는다.",
+        "운전자료, bypass, 변경사항과 AI·보안 변경을 MOC, 독립 V&V와 재검증으로 연결한다."
+      ],
+      "fatal_conditions": [
+        "{\"anchor_refs\": [\"required_rrf_relation\", \"target_pfd_relation\"], \"claim\": \"목표 PFDavg는 허용 사건빈도와 기초 또는 잔여 사건빈도를 곱하여 구한다.\", \"claim_signature\": \"target_pfd_equals_frequency_product\", \"correct_rule\": \"저요구 모드의 PFDavg_target은 F_tolerable/F_residual 또는 1/RRF_required이며 무차원이다.\", \"demand_refs\": [\"required_rrf_and_target_sil\", \"quantitative_verification_dimension\"], \"error_class\": \"DIMENSION_AND_RELATION_DIRECTION\", \"id\": \"fatal_target_pfd_frequency_product\", \"keywords\": [\"PFDavg\", \"허용빈도\", \"고장빈도\", \"곱\"], \"rationale\": \"빈도 두 개의 곱은 1/time^2 차원이 되어 PFD와 일치하지 않고 위험감소 관계의 방향도 반대로 만든다.\"}",
+        "{\"anchor_refs\": [\"demand_mode_metric_selection\"], \"claim\": \"High demand와 low demand는 고장을 즉시 발견할 수 있는지 또는 점검 때까지 모르는지로 구분한다.\", \"claim_signature\": \"demand_mode_equals_fault_detection_timing\", \"correct_rule\": \"Demand mode는 안전기능 요구빈도와 연속운전 여부로 구분하며 검출 여부는 diagnostic coverage와 dangerous detected/undetected 분류 문제다.\", \"demand_refs\": [\"demand_mode_metric_selection\"], \"error_class\": \"CONCEPT_ROLE_CONFUSION\", \"id\": \"fatal_demand_mode_by_fault_detection\", \"keywords\": [\"high demand\", \"low demand\", \"고장 즉시\", \"점검 주기\"], \"rationale\": \"Demand mode와 diagnostic detectability를 혼동하면 PFDavg와 PFH를 잘못 선택한다.\"}",
+        "{\"anchor_refs\": [\"sis_sif_sil_scope\", \"achieved_sil_verification\"], \"claim\": \"인증 부품 또는 SIS 전체에 표시된 SIL 등급만으로 개별 안전기능의 목표와 달성을 증명한다.\", \"claim_signature\": \"component_certificate_proves_sif_sil\", \"correct_rule\": \"목표 SIL은 위험 시나리오별 SIF에 할당하고 전체 SIF의 정량·정성 제약과 lifecycle evidence로 달성을 검증한다.\", \"demand_refs\": [\"system_scope_and_sil_role\", \"quantitative_verification_dimension\"], \"error_class\": \"SYSTEM_BOUNDARY_ERROR\", \"id\": \"fatal_sil_as_component_or_sis_label\", \"keywords\": [\"SIL 인증\", \"부품 SIL\", \"SIS SIL\", \"SIF\"], \"rationale\": \"Component capability와 SIF achieved SIL을 동일시하면 subsystem 기여와 systematic requirement를 누락한다.\"}",
+        "{\"anchor_refs\": [\"proof_test_pst_role\", \"achieved_sil_verification\"], \"claim\": \"PST를 적용하면 full proof test를 대체하고 MTTR이 자동으로 줄어든다.\", \"claim_signature\": \"pst_replaces_full_test_and_reduces_mttr\", \"correct_rule\": \"PST는 검출 가능한 부분 고장집합에만 credit을 주며 full proof test와 실제 repair logistics는 별도로 유지한다.\", \"demand_refs\": [\"proof_test_diagnostics_reliability\"], \"error_class\": \"TEST_COVERAGE_ROLE_CONFUSION\", \"id\": \"fatal_pst_replaces_full_test_or_reduces_mttr\", \"keywords\": [\"PST\", \"full proof test\", \"MTTR\", \"자동 축소\"], \"rationale\": \"PST coverage와 repair time을 혼동하면 PFDavg를 과소평가한다.\"}",
+        "{\"anchor_refs\": [\"achieved_sil_verification\", \"operations_moc_revalidation\"], \"claim\": \"인증서의 시험주기보다 짧게 시험할 이유가 없으며 그 주기가 현장 적용의 최소주기다.\", \"claim_signature\": \"certificate_interval_is_minimum_test_interval\", \"correct_rule\": \"현장 proof-test interval은 실제 SIF 계산, failure data, coverage, 운전제약과 규정에 따라 정하고 인증서 가정은 적용조건으로 검토한다.\", \"demand_refs\": [\"proof_test_diagnostics_reliability\", \"operations_moc_security_ai_lifecycle\"], \"error_class\": \"CERTIFICATE_ASSUMPTION_MISUSE\", \"id\": \"fatal_certificate_interval_as_operating_minimum\", \"keywords\": [\"인증 주기\", \"시험주기\", \"짧게\", \"proof test interval\"], \"rationale\": \"인증 가정을 현장 최적주기로 오인하면 목표 PFDavg와 실제 성능의 불일치를 숨긴다.\"}"
+      ],
+      "safe_conditions": [
+        "허용빈도와 잔여빈도의 비로 PFDavg target을 제시한다.",
+        "Demand mode와 diagnostic detectability를 별도 개념으로 설명한다.",
+        "PST의 제한된 coverage와 full proof test의 잔여 고장 검출을 구분한다.",
+        "인증서의 시험주기는 적용 가정이며 실제 SIF 계산과 운전자료가 시험주기를 결정한다고 설명한다.",
+        "오답 예시를 명시적으로 부정하고 올바른 관계를 제시한 문장은 fatal finding으로 판정하지 않는다."
+      ],
+      "output_contract": {
+        "finding_fields": [
+          "candidate_id",
+          "rule_id",
+          "severity",
+          "message",
+          "correct_rule"
+        ]
+      },
+      "major_checks": [
+        {
+          "claim": "SIL 결정 방법을 나열하지만 데이터와 불확실성에 따른 선정 근거가 없다.",
+          "correction": "Risk graph·LOPA·QRA의 적용수준과 입력자료 조건을 비교한다.",
+          "id": "major_method_without_selection_basis",
+          "severity": "major"
+        },
+        {
+          "claim": "기존 보호계층의 독립성, 공통원인 또는 이중계산 검토가 없다.",
+          "correction": "IPL 적격성과 공유 자원 의존성을 확인한다.",
+          "id": "major_ipl_independence_missing",
+          "severity": "major"
+        },
+        {
+          "claim": "Target SIL과 achieved SIL을 같은 것으로 취급한다.",
+          "correction": "위험분석의 목표 할당과 설계 정량검증을 분리한다.",
+          "id": "major_target_achieved_not_separated",
+          "severity": "major"
+        },
+        {
+          "claim": "PFDavg 또는 PFH 값만 제시하고 failure rate·architecture·coverage·interval·CCF·repair 가정을 누락한다.",
+          "correction": "계산 입력과 데이터 출처 및 민감도를 제시한다.",
+          "id": "major_quantitative_assumptions_missing",
+          "severity": "major"
+        },
+        {
+          "claim": "설치시점 검증만 설명하고 운전기록과 MOC 재검증을 누락한다.",
+          "correction": "As-found, bypass, demand, test 수행률과 변경사항을 periodic review에 연결한다.",
+          "id": "major_lifecycle_records_missing",
+          "severity": "major"
+        },
+        {
+          "claim": "AI와 OT 보안을 전망으로만 언급하고 기능안전 통제와 연결하지 않는다.",
+          "correction": "승인경계, traceability, 독립 V&V와 rollback evidence를 유지한다.",
+          "id": "major_ai_security_governance_missing",
+          "severity": "major"
+        }
+      ],
+      "feedback_templates": {
+        "fatal": "핵심 SIL 결정 관계 또는 개념이 틀렸으므로 현장 적용 항목과 별개로 Fact 정확성을 먼저 교정해야 합니다.",
+        "major": "결정 방법의 검증가능성과 lifecycle 인계를 구체화해야 합니다."
+      },
+      "next_practice_points": [
+        "F_residual→RRF_required→PFDavg_target→SIL band 흐름을 단위와 함께 연습한다.",
+        "Demand mode와 diagnostics, PST와 full proof test의 역할을 비교한다.",
+        "SRS·운전기록·MOC·AI·보안 변경을 재검증 evidence로 연결한다."
+      ],
+      "false_positive_cautions": [
+        "오답 관계를 예시로 든 뒤 명시적으로 부정하고 올바른 식을 제시한 경우 fatal로 판정하지 않는다.",
+        "PST가 특정 failure subset의 PFD 기여를 줄인다는 올바른 설명을 MTTR 자동 단축 주장으로 오인하지 않는다.",
+        "Risk graph 또는 LOPA 한 방법만 문제에서 직접 요구한 경우 다른 방법의 누락을 오류로 보지 않는다."
+      ],
+      "enabled": false,
+      "score_policy": {
+        "direct_score_application": false,
+        "direct_d_e_effect": "verified fatal correctness findings may constrain C and dependent D/E claims",
+        "affected_layers": [
+          "C",
+          "D",
+          "E"
+        ]
       }
     },
     {

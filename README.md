@@ -49,8 +49,8 @@
 | 총점 | 25점 |
 | 채점 Layer | 5개 |
 | Active Question Type | 4개 |
-| Topic Sheet | 76개 |
-| Topic Pack source | 76개 topic |
+| Topic Sheet | 77개 |
+| Topic Pack source | 77개 topic |
 | Generated Rubric Bank | 6개 |
 | 기본 Rubric Bank mode | `generated` |
 | Generic grading contract | `stage23.generic_grading_contract.v1` |
@@ -582,7 +582,7 @@ rubrics/topic_packs/<topic_id>/
 └── topic_importance.json
 ```
 
-현재 저장소에는 **Topic Sheet 76개와 Topic Pack 76개가 있으며, 동일한 `<topic_id>`로 76개 모두 1:1 대응**합니다. Topic Sheet만 있고 Topic Pack이 없는 항목도 없고, Topic Pack만 있고 Topic Sheet가 없는 항목도 없습니다.
+현재 저장소에는 **Topic Sheet 77개와 Topic Pack 77개가 있으며, 동일한 `<topic_id>`로 77개 모두 1:1 대응**합니다. Topic Sheet만 있고 Topic Pack이 없는 항목도 없고, Topic Pack만 있고 Topic Sheet가 없는 항목도 없습니다.
 
 이 관계를 기준으로 신규 Topic은 다음 원칙을 따릅니다.
 
@@ -600,7 +600,7 @@ Topic Pack  = Topic Sheet를 구조화한 채점 source
 Generated Rubric Bank = 검증된 Topic Pack을 runtime용으로 합친 build output
 ```
 
-Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **전체 Topic inventory를 기준으로 관리**합니다. 현재 authoritative Topic inventory는 76개입니다.
+Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **전체 Topic inventory를 기준으로 관리**합니다. 현재 authoritative Topic inventory는 77개입니다.
 
 ### 9.2 저장 위치와 역할
 
@@ -613,7 +613,7 @@ Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **�
 | Classification / Coverage / Roadmap | `docs/topic_pack_classification.md`, `docs/exam_scope/` | 공식 criterion ownership, coverage와 추가 우선순위 관리 |
 | Legacy Rubric Bank | `rubrics/*/industrial_instrumentation_control.json` | 기존 통합 bank와 호환·비교 경로 |
 
-현재 저장소에는 **76개 Topic Pack**이 있으며 generated runtime bank는 다음 **6개**입니다.
+현재 저장소에는 **77개 Topic Pack**이 있으며 generated runtime bank는 다음 **6개**입니다.
 
 ```text
 fact_anchors.generated.json

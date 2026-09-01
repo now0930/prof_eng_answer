@@ -1,0 +1,132 @@
+{
+  "schema_version": "grading_integrity_drift_baseline.v1",
+  "baseline_id": "issue1_cross_topic_integrity_v1",
+  "purpose": "Detect semantic drift from question routing through deterministic fact checks to final Telegram projection, while guarding neighboring safety topics from SIL-target rule leakage.",
+  "required_regression_sources": [
+    {
+      "path": "calibration/sil_target_operations_overgrading_regression.json",
+      "regression_id": "SIL-TARGET-OPERATIONS-OVERGRADING-01"
+    },
+    {
+      "path": "calibration/sis_lopa_architecture_overgrading_regression.json",
+      "regression_id": "SIS-LOPA-ARCHITECTURE-OVERGRADING-01"
+    },
+    {
+      "path": "calibration/mcdc_vmodel_sil_overgrading_regression.json",
+      "regression_id": "MCDC-VMODEL-SIL-OVERGRADING-01"
+    }
+  ],
+  "routing_cases": [
+    {
+      "id": "issue1_sil_target_operations",
+      "source": "calibration/sil_target_operations_overgrading_regression.json",
+      "question_field": "question",
+      "expected_primary_lens": "IMPLEMENTATION_EVALUATION",
+      "expected_topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "expected_requirement_ids": [
+        "system_scope_and_sil_role",
+        "risk_scenario_and_tolerable_target",
+        "existing_ipl_and_independence",
+        "required_rrf_and_target_sil",
+        "demand_mode_metric_selection",
+        "quantitative_verification_dimension",
+        "proof_test_diagnostics_reliability",
+        "operations_moc_security_ai_lifecycle"
+      ]
+    },
+    {
+      "id": "reactor_lopa_architecture_neighbor",
+      "source": "calibration/sis_lopa_architecture_overgrading_regression.json",
+      "question_field": "question",
+      "expected_primary_lens": "IMPLEMENTATION_EVALUATION",
+      "expected_topic_id": "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "expected_requirement_ids": [
+        "scenario_definition_and_cause",
+        "existing_ipl_qualification",
+        "required_rrf_and_target_sil",
+        "demand_mode_and_sil_metric",
+        "complete_sif_architecture",
+        "quantitative_verification_dimension",
+        "independence_ccf_hft_tradeoff",
+        "proof_test_and_lifecycle"
+      ]
+    },
+    {
+      "id": "pst_final_element_neighbor",
+      "question": "SIS 최종제어요소인 ESD 밸브의 Partial Stroke Test 적용 방법과 한계를 설명하시오.",
+      "expected_primary_lens": "IMPLEMENTATION_EVALUATION",
+      "expected_topic_id": null,
+      "forbidden_topic_ids": [
+        "sil_target_determination_risk_reduction_and_lifecycle"
+      ]
+    },
+    {
+      "id": "mcdc_software_neighbor",
+      "question": "안전필수 소프트웨어의 V-Model과 MC/DC의 원리를 설명하시오.",
+      "expected_primary_lens": "PRINCIPLE_INTERPRETATION",
+      "expected_topic_id": null,
+      "forbidden_topic_ids": [
+        "sil_target_determination_risk_reduction_and_lifecycle"
+      ]
+    }
+  ],
+  "relation_cases": [
+    {
+      "id": "issue1_original_relation_fatal",
+      "source": "calibration/sil_target_operations_overgrading_regression.json",
+      "answer_field": "original_answer",
+      "expected_status": "fatal",
+      "expected_fatal_rule_ids": [
+        "fatal_target_pfd_frequency_product"
+      ]
+    },
+    {
+      "id": "issue1_corrected_relation_valid",
+      "source": "calibration/sil_target_operations_overgrading_regression.json",
+      "answer_field": "corrected_answer",
+      "expected_status": "valid",
+      "expected_fatal_rule_ids": [],
+      "required_recognized_relation_ids": [
+        "target_pfd_tolerable_over_residual"
+      ]
+    }
+  ],
+  "output_case": {
+    "source_session_id": "20260831_131321_5960502198",
+    "expected": {
+      "confidence": "medium",
+      "passing_score_allowed": false,
+      "strong_verdict_allowed": false,
+      "requirements_full_credit_allowed": false,
+      "mention_coverage_percent": 87.5,
+      "correctness_coverage_percent": 25.0,
+      "fatal_rule_ids": [
+        "fatal_target_pfd_frequency_product"
+      ]
+    },
+    "required_telegram_fragments": [
+      "신뢰도: medium",
+      "전체 판정: weak",
+      "요구사항 언급률: 87.5%",
+      "요구사항 정확 충족률: 25.0%"
+    ],
+    "forbidden_telegram_fragments": [
+      "요구사항 충족률: 100%",
+      "전체 판정: strong",
+      "핵심 관계식과 PFH/PFD 설명이 정확"
+    ]
+  },
+  "cross_topic_minimums": {
+    "minimum_domains": 7,
+    "required_domains": [
+      "VALVE",
+      "SENSOR",
+      "PID",
+      "SAFETY",
+      "COMMUNICATION",
+      "NOISE",
+      "CONTROL_THEORY"
+    ]
+  },
+  "expected_semantic_sha256": "afab409840e5b405daa73c58c88c9c10fc3ebd9c474cf05fa2d2bce08cb3c143"
+}

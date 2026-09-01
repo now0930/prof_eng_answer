@@ -1605,6 +1605,7 @@ def _stage25g3g_row_text(
     for key in (
         "criterion",
         "demand_id",
+        "requirement_id",
         "evidence",
         "reason",
         "rationale",
@@ -1821,6 +1822,26 @@ def _stage25g3g_row_match(
     token_frequency: dict[str, int],
 ) -> tuple[bool, list[str]]:
     del token_frequency
+
+    row_reference = str(
+        row.get("requirement_id")
+        or row.get("demand_id")
+        or ""
+    ).strip()
+    demand_refs = {
+        str(value or "").strip()
+        for value in (
+            finding.get("demand_refs")
+            if isinstance(
+                finding.get("demand_refs"),
+                list,
+            )
+            else []
+        )
+        if str(value or "").strip()
+    }
+    if row_reference and row_reference in demand_refs:
+        return True, [f"demand_ref:{row_reference}"]
 
     row_text = _stage25g3g_row_text(row)
     anchors = (
@@ -2050,6 +2071,69 @@ def _stage25g3g_refresh_summary_counts(
     )
 
 
+def _stage25g3g_refresh_active_coverage_contract(
+    coverage: dict[str, Any],
+) -> None:
+    details = _criteria_details(coverage)
+    total = int(details.get("total") or 0)
+    if total <= 0:
+        return
+
+    wrong = int(details.get("wrong") or 0)
+    missing = int(details.get("missing") or 0)
+    partial = int(details.get("partial") or 0)
+    full_correct = bool(
+        details.get("full_correct_coverage")
+    )
+
+    coverage["mention_coverage_ratio"] = (
+        details["mention_coverage_ratio"]
+    )
+    coverage["mention_coverage_percent"] = (
+        details["mention_coverage_percent"]
+    )
+    coverage["correctness_coverage_ratio"] = (
+        details["correctness_coverage_ratio"]
+    )
+    coverage["correctness_coverage_percent"] = (
+        details["correctness_coverage_percent"]
+    )
+    coverage["full_correct_coverage"] = full_correct
+    coverage["full_credit_allowed"] = full_correct
+    coverage["coverage_status_semantics"] = {
+        "version": "mention_correctness_separation_v1",
+        "mention_is_correctness": False,
+        "present_requires_correctness": True,
+        "wrong_can_be_mentioned": True,
+    }
+
+    current = str(
+        coverage.get("overall_coverage") or "strong"
+    ).strip().lower()
+    ranks = {
+        "poor": 0,
+        "weak": 1,
+        "adequate": 2,
+        "strong": 3,
+    }
+    maximum = (
+        "weak"
+        if wrong or missing
+        else (
+            "adequate"
+            if partial
+            else "strong"
+        )
+    )
+    current_rank = ranks.get(current, ranks[maximum])
+    maximum_rank = ranks[maximum]
+    coverage["overall_coverage"] = next(
+        name
+        for name, rank in ranks.items()
+        if rank == min(current_rank, maximum_rank)
+    )
+
+
 def _stage25g3g_reconcile_coverage_dict(
     coverage: dict[str, Any],
     fatal_findings: list[dict[str, Any]],
@@ -2233,6 +2317,16 @@ def _stage25g3g_reconcile_fatal_coverage(
         "question_type_coverage_summary",
     ):
         walk(grade.get(key))
+
+    for key in (
+        "question_type_coverage",
+        "question_type_coverage_summary",
+    ):
+        coverage = grade.get(key)
+        if isinstance(coverage, dict):
+            _stage25g3g_refresh_active_coverage_contract(
+                coverage
+            )
 
     grade["fatal_coverage_consistency"] = {
         "version": (

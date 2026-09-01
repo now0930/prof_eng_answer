@@ -22,6 +22,7 @@ def fatal_grade() -> dict:
         "official_pass_score": 15.0,
         "practical_target_score": 17.5,
         "high_score_target": 20.0,
+        "confidence": "high",
         "summary": (
             "핵심 개념 설명은 정확하고 "
             "우수합니다."
@@ -79,6 +80,14 @@ class FinalDecisionConsistencyTest(
             result[
                 "requirements_full_credit_allowed"
             ]
+        )
+        self.assertEqual(
+            result["confidence_ceiling"],
+            "medium",
+        )
+        self.assertEqual(
+            result["confidence"],
+            "medium",
         )
         self.assertEqual(
             result["question_type_coverage"][

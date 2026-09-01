@@ -1,0 +1,71 @@
+{
+  "schema_version": "sil_target_operations_overgrading_regression.v1",
+  "regression_id": "SIL-TARGET-OPERATIONS-OVERGRADING-01",
+  "source_session_id": "20260831_131321_5960502198",
+  "purpose": "Freeze the general SIL-target determination and plant-operations case where dimensional, demand-mode and PST/MTTR errors were reported as accurate with 100 percent strong coverage.",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "question": "SIL 결정 방법을 설명하고, 이를 실제 플랜트 운영 및 최신 산업 이슈와 연계하여 설명하시오.",
+  "original_answer": "1. 배경\nSIS는 사고 파급효과를 최소화하기 위한 위험관리 수단이며 SIL은 SIS를 달성하기 위한 방법론 또는 지표이다. SIS는 여러 SIF로 구성되며 각 SIF의 요구사항이 SIL이 된다.\n\n2. SIL 결정 방법\nR_max는 사회적으로 합의된 최대 위험 수준 [/year], F_H,max는 최대 허용 고장 빈도 [/year], P_i는 사고 전파계수이다. R_max >= F_H,max × product(P_i)로 허용빈도를 정한다. 설비 고장 빈도 F_D를 고려하여 PFD_avg <= F_H,max × F_D로 요구 수준을 정한다. PFH는 High Demand로 고장 즉시 고장을 확인할 수 있고, PFD는 Low Demand로 고장 후 점검 주기까지 고장 여부를 알 수 없다.\n\n3. 실제 플랜트 운영\nSIL 1, 2는 추가 SIS Layer 증설로 대응하고 SIL 3, 4는 시스템을 완전히 새로 설계해야 할 수 있다. 인증 시 정한 점검 주기를 지켜야 하며 인증 수준보다 짧게 점검할 이유는 없다. PST 등 자동화된 점검 프로그램으로 MTTR을 축소한다. 단종 및 변경 부품의 버전과 인증 상태를 형상관리한다.\n\n4. 최신 이슈와 결론\nAI가 작성한 코드는 verification과 traceability를 확보하고 운영 프로그램과 데이터 프로그램을 분리한다. IT/OT 경계 약화에 대응하여 무결성, 인증과 권한을 강화하며 필요한 경우 하드웨어를 재설계한다. ALARP 원칙, 정기 검증과 MOC를 지속한다.",
+  "corrected_answer": "1. 배경\n위험 시나리오별 허용빈도와 기존 독립보호계층을 평가하고, 잔여위험을 허용수준까지 낮추기 위해 필요한 위험감소계수 RRF를 각 SIF의 목표 SIL로 할당한다. SIL은 SIS 전체의 단일 인증표가 아니라 SIF별 요구 안전무결성 수준이다.\n\n2. SIL 결정 방법\n개시사건 빈도 F_D [/year], 조건부 수정계수 product(P_i) [-], 허용 위험사건 빈도 F_target [/year]를 사용하면 SIF 실패를 포함한 위험사건 빈도는 F_H = F_D × product(P_i) × PFD_avg이다. 따라서 저수요 모드의 요구치는 PFD_avg <= F_target / (F_D × product(P_i))이며 RRF = 1/PFD_avg로 목표 SIL 구간을 정한다. 고수요 또는 연속모드에서는 시간당 위험고장빈도 PFH를 적용한다. Low/High Demand는 고장 검출시점이 아니라 요구빈도와 운전모드의 구분이다.\n\n3. 실제 플랜트 운영\nAchieved SIL은 센서-로직솔버-최종요소 전체 경계의 PFD_avg 또는 PFH, HFT, CCF, 진단범위와 체계적 고장대책으로 검증한다. Proof-test interval은 제품 인증주기가 아니라 실제 SIF 계산, proof-test coverage와 운전 고장자료로 정한다. PST는 일부 잠재 위험고장을 조기에 검출하여 proof-test coverage와 평균 미검출시간을 개선하지만 수리시간 MTTR을 자동으로 줄이지 않으며 full-stroke proof test를 대체하지 않는다. 변경 부품은 MOC, 영향평가와 재검증을 거친다.\n\n4. 최신 이슈와 결론\nAI 생성 코드는 IEC 61508/61511 수명주기 안에서 요구사항 추적성, 독립 검증과 승인경계를 적용한다. OT 보안은 IEC 62443 기반 위험평가, zone/conduit, 최소권한, 무결성, 변경 및 취약점 관리로 기능안전과의 상호영향을 검증한다. 비용은 허용위험을 위반하는 근거가 아니라 ALARP 대안 비교와 단계별 개선 우선순위에 반영한다.",
+  "expected_topics": {
+    "primary": "sil_target_determination_risk_reduction_and_lifecycle",
+    "supporting": [
+      "hazop_lopa_ipl_risk_reduction_sil_target_allocation",
+      "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+      "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response"
+    ],
+    "forbidden_primary": [
+      "final_control_element_sil_sis_esd_valve_partial_stroke_test"
+    ]
+  },
+  "expected": {
+    "original": {
+      "demand_status": {
+        "system_scope_and_sil_role": "partial",
+        "risk_scenario_and_tolerable_target": "partial",
+        "existing_ipl_and_independence": "missing",
+        "required_rrf_and_target_sil": "incorrect",
+        "demand_mode_metric_selection": "incorrect",
+        "quantitative_verification_dimension": "incorrect",
+        "proof_test_diagnostics_reliability": "partial",
+        "operations_moc_security_ai_lifecycle": "partial"
+      },
+      "required_finding_ids": [
+        "target_pfd_frequency_multiplication_dimension_error",
+        "demand_mode_confused_with_fault_detection",
+        "pst_claimed_to_reduce_mttr",
+        "certificate_interval_treated_as_minimum_test_interval"
+      ],
+      "requirements_full_credit_allowed": false,
+      "strong_verdict_allowed": false,
+      "passing_score_allowed": false,
+      "maximum_total_score": 14.5,
+      "confidence_ceiling": "medium",
+      "manual_review_required_when_question_boundary_unknown": true,
+      "required_feedback_elements": [
+        "PFDavg는 무차원이고 F_target과 F_D는 빈도이므로 목표 PFD 식의 곱셈을 나눗셈으로 교정",
+        "Low/High Demand와 고장 검출시점의 개념을 분리",
+        "PST는 MTTR을 자동으로 줄이지 않으며 검출범위와 평균 미검출시간을 개선한다는 한계 설명",
+        "제품 인증 가정과 실제 SIF proof-test interval을 구분"
+      ],
+      "forbidden_feedback_elements": [
+        "요구사항 충족률 100%",
+        "전체 판정 strong",
+        "핵심 관계식과 PFH/PFD 설명이 정확하다는 평가",
+        "치명적인 기술 오류나 누락이 없다는 평가",
+        "주요 보완점이 D/E 구체성뿐이라는 평가"
+      ]
+    },
+    "corrected": {
+      "forbidden_finding_ids": [
+        "target_pfd_frequency_multiplication_dimension_error",
+        "demand_mode_confused_with_fault_detection",
+        "pst_claimed_to_reduce_mttr",
+        "certificate_interval_treated_as_minimum_test_interval"
+      ],
+      "minimum_score_delta_over_original": 2.0,
+      "must_rank_above_original": true
+    }
+  }
+}

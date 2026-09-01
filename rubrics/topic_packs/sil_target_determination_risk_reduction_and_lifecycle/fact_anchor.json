@@ -1,0 +1,651 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+  "title_ko": "목표 SIL 결정·요구 위험감소·플랜트 안전수명주기",
+  "question_type_hint": "IMPLEMENTATION_EVALUATION",
+  "anchors": [
+    {
+      "accepted_explanations": [
+        "SIS는 하나 이상의 SIF로 구성되고 SIL은 특정 위험 시나리오를 담당하는 개별 SIF에 요구되는 안전무결성 수준이다. SIL을 SIS 전체나 인증 부품 하나의 절대 안전등급으로 취급하지 않는다."
+      ],
+      "anchor_id": "sis_sif_sil_scope",
+      "claim": "SIS는 하나 이상의 SIF로 구성되고 SIL은 특정 위험 시나리오를 담당하는 개별 SIF에 요구되는 안전무결성 수준이다. SIL을 SIS 전체나 인증 부품 하나의 절대 안전등급으로 취급하지 않는다.",
+      "core_terms": [
+        "SIS",
+        "SIF",
+        "SIL",
+        "안전무결성",
+        "기능 경계"
+      ],
+      "description": "SIS는 하나 이상의 SIF로 구성되고 SIL은 특정 위험 시나리오를 담당하는 개별 SIF에 요구되는 안전무결성 수준이다. SIL을 SIS 전체나 인증 부품 하나의 절대 안전등급으로 취급하지 않는다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "sis_sif_sil_scope",
+      "importance": "must",
+      "keywords": [
+        "SIS",
+        "SIF",
+        "SIL",
+        "안전무결성",
+        "기능 경계"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "SIS는 하나 이상의 SIF로 구성되고 SIL은 특정 위험 시나리오를 담당하는 개별 SIF에 요구되는 안전무결성 수준이다. SIL을 SIS 전체나 인증 부품 하나의 절대 안전등급으로 취급하지 않는다."
+    },
+    {
+      "accepted_explanations": [
+        "목표 SIL은 initiating event, 운전조건, consequence endpoint와 필요한 safe state가 명확한 위험 시나리오별로 결정한다. 서로 다른 원인이나 결과를 한 빈도로 뭉치지 않는다."
+      ],
+      "anchor_id": "hazard_scenario_boundary",
+      "claim": "목표 SIL은 initiating event, 운전조건, consequence endpoint와 필요한 safe state가 명확한 위험 시나리오별로 결정한다. 서로 다른 원인이나 결과를 한 빈도로 뭉치지 않는다.",
+      "core_terms": [
+        "위험 시나리오",
+        "initiating event",
+        "consequence",
+        "safe state",
+        "운전조건"
+      ],
+      "description": "목표 SIL은 initiating event, 운전조건, consequence endpoint와 필요한 safe state가 명확한 위험 시나리오별로 결정한다. 서로 다른 원인이나 결과를 한 빈도로 뭉치지 않는다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "hazard_scenario_boundary",
+      "importance": "must",
+      "keywords": [
+        "위험 시나리오",
+        "initiating event",
+        "consequence",
+        "safe state",
+        "운전조건"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "목표 SIL은 initiating event, 운전조건, consequence endpoint와 필요한 safe state가 명확한 위험 시나리오별로 결정한다. 서로 다른 원인이나 결과를 한 빈도로 뭉치지 않는다."
+    },
+    {
+      "accepted_explanations": [
+        "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다."
+      ],
+      "anchor_id": "tolerable_risk_alarp",
+      "claim": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다.",
+      "core_terms": [
+        "허용위험",
+        "tolerable risk",
+        "ALARP",
+        "사건빈도",
+        "위험수용기준"
+      ],
+      "description": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "tolerable_risk_alarp",
+      "importance": "must",
+      "keywords": [
+        "허용위험",
+        "tolerable risk",
+        "ALARP",
+        "사건빈도",
+        "위험수용기준"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "허용 가능한 사건빈도 또는 위험 기준은 조직이 승인한 개인·사회적 위험 기준과 consequence category에서 정하며 ALARP 판단은 추가 저감의 실행가능성과 비용 대비 편익을 기록해 보완한다."
+    },
+    {
+      "accepted_explanations": [
+        "Risk graph는 정성 또는 반정량 screening, calibrated risk graph와 safety layer matrix는 조직 자료로 보정된 일관된 분류, LOPA는 시나리오별 반정량 빈도 계산, QRA는 복잡한 상호작용과 사회적 위험의 정량평가에 적용한다. 방법의 정밀도와 입력자료 수준을 맞춘다."
+      ],
+      "anchor_id": "method_selection",
+      "claim": "Risk graph는 정성 또는 반정량 screening, calibrated risk graph와 safety layer matrix는 조직 자료로 보정된 일관된 분류, LOPA는 시나리오별 반정량 빈도 계산, QRA는 복잡한 상호작용과 사회적 위험의 정량평가에 적용한다. 방법의 정밀도와 입력자료 수준을 맞춘다.",
+      "core_terms": [
+        "risk graph",
+        "calibrated risk graph",
+        "safety layer matrix",
+        "LOPA",
+        "QRA"
+      ],
+      "description": "Risk graph는 정성 또는 반정량 screening, calibrated risk graph와 safety layer matrix는 조직 자료로 보정된 일관된 분류, LOPA는 시나리오별 반정량 빈도 계산, QRA는 복잡한 상호작용과 사회적 위험의 정량평가에 적용한다. 방법의 정밀도와 입력자료 수준을 맞춘다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "method_selection",
+      "importance": "core",
+      "keywords": [
+        "risk graph",
+        "calibrated risk graph",
+        "safety layer matrix",
+        "LOPA",
+        "QRA"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "Risk graph는 정성 또는 반정량 screening, calibrated risk graph와 safety layer matrix는 조직 자료로 보정된 일관된 분류, LOPA는 시나리오별 반정량 빈도 계산, QRA는 복잡한 상호작용과 사회적 위험의 정량평가에 적용한다. 방법의 정밀도와 입력자료 수준을 맞춘다."
+    },
+    {
+      "accepted_explanations": [
+        "보호계층 적용 전 시나리오 빈도는 initiating event frequency에 실제 노출시간, 점화확률, 재실확률 등 해당 시나리오에 필요한 enabling condition과 conditional modifier를 곱해 산정한다."
+      ],
+      "anchor_id": "initiating_frequency_modifiers",
+      "claim": "보호계층 적용 전 시나리오 빈도는 initiating event frequency에 실제 노출시간, 점화확률, 재실확률 등 해당 시나리오에 필요한 enabling condition과 conditional modifier를 곱해 산정한다.",
+      "core_terms": [
+        "initiating event frequency",
+        "enabling condition",
+        "conditional modifier",
+        "노출시간",
+        "조건부 확률"
+      ],
+      "description": "보호계층 적용 전 시나리오 빈도는 initiating event frequency에 실제 노출시간, 점화확률, 재실확률 등 해당 시나리오에 필요한 enabling condition과 conditional modifier를 곱해 산정한다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "initiating_frequency_modifiers",
+      "importance": "core",
+      "keywords": [
+        "initiating event frequency",
+        "enabling condition",
+        "conditional modifier",
+        "노출시간",
+        "조건부 확률"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "보호계층 적용 전 시나리오 빈도는 initiating event frequency에 실제 노출시간, 점화확률, 재실확률 등 해당 시나리오에 필요한 enabling condition과 conditional modifier를 곱해 산정한다."
+    },
+    {
+      "accepted_explanations": [
+        "기존 보호수단은 specificity, independence, dependability와 auditability를 만족할 때만 IPL credit을 부여하며 BPCS·alarm·operator action·SIS가 센서, 전원, 로직 또는 인력을 공유하면 종속성과 공통원인을 반영한다."
+      ],
+      "anchor_id": "existing_ipl_independence",
+      "claim": "기존 보호수단은 specificity, independence, dependability와 auditability를 만족할 때만 IPL credit을 부여하며 BPCS·alarm·operator action·SIS가 센서, 전원, 로직 또는 인력을 공유하면 종속성과 공통원인을 반영한다.",
+      "core_terms": [
+        "IPL",
+        "independence",
+        "dependability",
+        "auditability",
+        "공통원인"
+      ],
+      "description": "기존 보호수단은 specificity, independence, dependability와 auditability를 만족할 때만 IPL credit을 부여하며 BPCS·alarm·operator action·SIS가 센서, 전원, 로직 또는 인력을 공유하면 종속성과 공통원인을 반영한다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "existing_ipl_independence",
+      "importance": "must",
+      "keywords": [
+        "IPL",
+        "independence",
+        "dependability",
+        "auditability",
+        "공통원인"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "기존 보호수단은 specificity, independence, dependability와 auditability를 만족할 때만 IPL credit을 부여하며 BPCS·alarm·operator action·SIS가 센서, 전원, 로직 또는 인력을 공유하면 종속성과 공통원인을 반영한다."
+    },
+    {
+      "accepted_explanations": [
+        "SIF 적용 전 잔여 사건빈도 F_residual은 initiating event frequency와 조건부 수정인자 및 인정 가능한 기존 IPL의 PFD를 곱하여 구한다. 보호수단의 효과를 consequence와 PFD 양쪽에 중복 반영하지 않는다."
+      ],
+      "anchor_id": "residual_frequency_before_sif",
+      "claim": "SIF 적용 전 잔여 사건빈도 F_residual은 initiating event frequency와 조건부 수정인자 및 인정 가능한 기존 IPL의 PFD를 곱하여 구한다. 보호수단의 효과를 consequence와 PFD 양쪽에 중복 반영하지 않는다.",
+      "core_terms": [
+        "residual frequency",
+        "F_residual",
+        "initiating frequency",
+        "IPL PFD",
+        "이중계산"
+      ],
+      "description": "SIF 적용 전 잔여 사건빈도 F_residual은 initiating event frequency와 조건부 수정인자 및 인정 가능한 기존 IPL의 PFD를 곱하여 구한다. 보호수단의 효과를 consequence와 PFD 양쪽에 중복 반영하지 않는다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "residual_frequency_before_sif",
+      "importance": "must",
+      "keywords": [
+        "residual frequency",
+        "F_residual",
+        "initiating frequency",
+        "IPL PFD",
+        "이중계산"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "SIF 적용 전 잔여 사건빈도 F_residual은 initiating event frequency와 조건부 수정인자 및 인정 가능한 기존 IPL의 PFD를 곱하여 구한다. 보호수단의 효과를 consequence와 PFD 양쪽에 중복 반영하지 않는다."
+    },
+    {
+      "accepted_explanations": [
+        "잔여 사건빈도 F_residual이 허용 사건빈도 F_tolerable보다 크면 SIF가 제공해야 할 최소 위험감소율은 RRF_required = F_residual / F_tolerable이다."
+      ],
+      "anchor_id": "required_rrf_relation",
+      "claim": "잔여 사건빈도 F_residual이 허용 사건빈도 F_tolerable보다 크면 SIF가 제공해야 할 최소 위험감소율은 RRF_required = F_residual / F_tolerable이다.",
+      "core_terms": [
+        "RRF_required",
+        "required risk reduction factor",
+        "F_residual",
+        "F_tolerable",
+        "위험감소율"
+      ],
+      "description": "잔여 사건빈도 F_residual이 허용 사건빈도 F_tolerable보다 크면 SIF가 제공해야 할 최소 위험감소율은 RRF_required = F_residual / F_tolerable이다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "required_rrf_relation",
+      "importance": "must",
+      "keywords": [
+        "RRF_required",
+        "required risk reduction factor",
+        "F_residual",
+        "F_tolerable",
+        "위험감소율"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "잔여 사건빈도 F_residual이 허용 사건빈도 F_tolerable보다 크면 SIF가 제공해야 할 최소 위험감소율은 RRF_required = F_residual / F_tolerable이다."
+    },
+    {
+      "accepted_explanations": [
+        "저요구 모드에서 목표 평균 요구고장확률은 PFDavg_target <= 1 / RRF_required = F_tolerable / F_residual로 정한다. 빈도끼리의 비이므로 무차원이며 허용빈도와 기초빈도를 곱하지 않는다."
+      ],
+      "anchor_id": "target_pfd_relation",
+      "claim": "저요구 모드에서 목표 평균 요구고장확률은 PFDavg_target <= 1 / RRF_required = F_tolerable / F_residual로 정한다. 빈도끼리의 비이므로 무차원이며 허용빈도와 기초빈도를 곱하지 않는다.",
+      "core_terms": [
+        "PFDavg_target",
+        "1/RRF",
+        "F_tolerable/F_residual",
+        "무차원",
+        "저요구 모드"
+      ],
+      "description": "저요구 모드에서 목표 평균 요구고장확률은 PFDavg_target <= 1 / RRF_required = F_tolerable / F_residual로 정한다. 빈도끼리의 비이므로 무차원이며 허용빈도와 기초빈도를 곱하지 않는다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "target_pfd_relation",
+      "importance": "must",
+      "keywords": [
+        "PFDavg_target",
+        "1/RRF",
+        "F_tolerable/F_residual",
+        "무차원",
+        "저요구 모드"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "저요구 모드에서 목표 평균 요구고장확률은 PFDavg_target <= 1 / RRF_required = F_tolerable / F_residual로 정한다. 빈도끼리의 비이므로 무차원이며 허용빈도와 기초빈도를 곱하지 않는다."
+    },
+    {
+      "accepted_explanations": [
+        "요구 RRF 또는 목표 PFDavg·PFH를 적용 표준의 SIL band에 매핑하되 경계값, 운전 mode와 조직의 보수적 rounding 규칙을 기록한다. 목표 SIL과 실제 설계가 달성한 SIL을 구분한다."
+      ],
+      "anchor_id": "sil_band_mapping",
+      "claim": "요구 RRF 또는 목표 PFDavg·PFH를 적용 표준의 SIL band에 매핑하되 경계값, 운전 mode와 조직의 보수적 rounding 규칙을 기록한다. 목표 SIL과 실제 설계가 달성한 SIL을 구분한다.",
+      "core_terms": [
+        "SIL band",
+        "RRF",
+        "PFDavg",
+        "PFH",
+        "target SIL",
+        "achieved SIL"
+      ],
+      "description": "요구 RRF 또는 목표 PFDavg·PFH를 적용 표준의 SIL band에 매핑하되 경계값, 운전 mode와 조직의 보수적 rounding 규칙을 기록한다. 목표 SIL과 실제 설계가 달성한 SIL을 구분한다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "sil_band_mapping",
+      "importance": "must",
+      "keywords": [
+        "SIL band",
+        "RRF",
+        "PFDavg",
+        "PFH",
+        "target SIL",
+        "achieved SIL"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "요구 RRF 또는 목표 PFDavg·PFH를 적용 표준의 SIL band에 매핑하되 경계값, 운전 mode와 조직의 보수적 rounding 규칙을 기록한다. 목표 SIL과 실제 설계가 달성한 SIL을 구분한다."
+    },
+    {
+      "accepted_explanations": [
+        "Low-demand와 high-demand 또는 continuous mode는 위험고장 발견 시점이 아니라 안전기능의 요구빈도와 기능이 연속적으로 작동하는지에 따라 구분한다. 저요구에는 PFDavg, 고요구·연속에는 PFH를 사용한다."
+      ],
+      "anchor_id": "demand_mode_metric_selection",
+      "claim": "Low-demand와 high-demand 또는 continuous mode는 위험고장 발견 시점이 아니라 안전기능의 요구빈도와 기능이 연속적으로 작동하는지에 따라 구분한다. 저요구에는 PFDavg, 고요구·연속에는 PFH를 사용한다.",
+      "core_terms": [
+        "low demand",
+        "high demand",
+        "continuous mode",
+        "PFDavg",
+        "PFH",
+        "요구빈도"
+      ],
+      "description": "Low-demand와 high-demand 또는 continuous mode는 위험고장 발견 시점이 아니라 안전기능의 요구빈도와 기능이 연속적으로 작동하는지에 따라 구분한다. 저요구에는 PFDavg, 고요구·연속에는 PFH를 사용한다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "demand_mode_metric_selection",
+      "importance": "must",
+      "keywords": [
+        "low demand",
+        "high demand",
+        "continuous mode",
+        "PFDavg",
+        "PFH",
+        "요구빈도"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "Low-demand와 high-demand 또는 continuous mode는 위험고장 발견 시점이 아니라 안전기능의 요구빈도와 기능이 연속적으로 작동하는지에 따라 구분한다. 저요구에는 PFDavg, 고요구·연속에는 PFH를 사용한다."
+    },
+    {
+      "accepted_explanations": [
+        "설계 검증은 센서·logic solver·final element의 위험고장률, architecture, diagnostic coverage, proof-test interval과 coverage, repair time, common cause와 mission time을 적용해 전체 SIF의 PFDavg 또는 PFH를 계산한다."
+      ],
+      "anchor_id": "achieved_sil_verification",
+      "claim": "설계 검증은 센서·logic solver·final element의 위험고장률, architecture, diagnostic coverage, proof-test interval과 coverage, repair time, common cause와 mission time을 적용해 전체 SIF의 PFDavg 또는 PFH를 계산한다.",
+      "core_terms": [
+        "달성 SIL",
+        "failure rate",
+        "architecture",
+        "diagnostic coverage",
+        "proof-test interval",
+        "common cause"
+      ],
+      "description": "설계 검증은 센서·logic solver·final element의 위험고장률, architecture, diagnostic coverage, proof-test interval과 coverage, repair time, common cause와 mission time을 적용해 전체 SIF의 PFDavg 또는 PFH를 계산한다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "achieved_sil_verification",
+      "importance": "must",
+      "keywords": [
+        "달성 SIL",
+        "failure rate",
+        "architecture",
+        "diagnostic coverage",
+        "proof-test interval",
+        "common cause"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "설계 검증은 센서·logic solver·final element의 위험고장률, architecture, diagnostic coverage, proof-test interval과 coverage, repair time, common cause와 mission time을 적용해 전체 SIF의 PFDavg 또는 PFH를 계산한다."
+    },
+    {
+      "accepted_explanations": [
+        "Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진 coverage와 acceptance criteria로 검출·복구한다. PST는 검출 가능한 일부 밸브 고장만 줄일 수 있으므로 full proof test를 자동 대체하거나 MTTR을 본질적으로 단축하지 않는다."
+      ],
+      "anchor_id": "proof_test_pst_role",
+      "claim": "Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진 coverage와 acceptance criteria로 검출·복구한다. PST는 검출 가능한 일부 밸브 고장만 줄일 수 있으므로 full proof test를 자동 대체하거나 MTTR을 본질적으로 단축하지 않는다.",
+      "core_terms": [
+        "proof test",
+        "PST",
+        "partial stroke test",
+        "proof-test coverage",
+        "MTTR",
+        "full stroke"
+      ],
+      "description": "Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진 coverage와 acceptance criteria로 검출·복구한다. PST는 검출 가능한 일부 밸브 고장만 줄일 수 있으므로 full proof test를 자동 대체하거나 MTTR을 본질적으로 단축하지 않는다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "proof_test_pst_role",
+      "importance": "must",
+      "keywords": [
+        "proof test",
+        "PST",
+        "partial stroke test",
+        "proof-test coverage",
+        "MTTR",
+        "full stroke"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진 coverage와 acceptance criteria로 검출·복구한다. PST는 검출 가능한 일부 밸브 고장만 줄일 수 있으므로 full proof test를 자동 대체하거나 MTTR을 본질적으로 단축하지 않는다."
+    },
+    {
+      "accepted_explanations": [
+        "결정 결과를 SIF 경계, safe state, trip setpoint, response time, target SIL, demand mode, test interval·coverage, bypass와 복구 요구사항을 포함한 SRS로 인계하고 설계·검증·운전·폐기 단계까지 추적한다."
+      ],
+      "anchor_id": "srs_lifecycle_handoff",
+      "claim": "결정 결과를 SIF 경계, safe state, trip setpoint, response time, target SIL, demand mode, test interval·coverage, bypass와 복구 요구사항을 포함한 SRS로 인계하고 설계·검증·운전·폐기 단계까지 추적한다.",
+      "core_terms": [
+        "SRS",
+        "safety lifecycle",
+        "safe state",
+        "response time",
+        "bypass",
+        "traceability"
+      ],
+      "description": "결정 결과를 SIF 경계, safe state, trip setpoint, response time, target SIL, demand mode, test interval·coverage, bypass와 복구 요구사항을 포함한 SRS로 인계하고 설계·검증·운전·폐기 단계까지 추적한다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "srs_lifecycle_handoff",
+      "importance": "core",
+      "keywords": [
+        "SRS",
+        "safety lifecycle",
+        "safe state",
+        "response time",
+        "bypass",
+        "traceability"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "결정 결과를 SIF 경계, safe state, trip setpoint, response time, target SIL, demand mode, test interval·coverage, bypass와 복구 요구사항을 포함한 SRS로 인계하고 설계·검증·운전·폐기 단계까지 추적한다."
+    },
+    {
+      "accepted_explanations": [
+        "운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC를 거쳐 LOPA와 SIL verification을 재검증한다."
+      ],
+      "anchor_id": "operations_moc_revalidation",
+      "claim": "운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC를 거쳐 LOPA와 SIL verification을 재검증한다.",
+      "core_terms": [
+        "MOC",
+        "revalidation",
+        "as-found",
+        "bypass",
+        "proof-test compliance",
+        "configuration management"
+      ],
+      "description": "운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC를 거쳐 LOPA와 SIL verification을 재검증한다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "operations_moc_revalidation",
+      "importance": "core",
+      "keywords": [
+        "MOC",
+        "revalidation",
+        "as-found",
+        "bypass",
+        "proof-test compliance",
+        "configuration management"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "운전 중에는 proof-test 수행률, as-found failure, bypass 시간, demand와 spurious trip, 부품 변경과 설정 변경을 기록한다. 공정·위험·시험주기·부품·software 변경은 MOC를 거쳐 LOPA와 SIL verification을 재검증한다."
+    },
+    {
+      "accepted_explanations": [
+        "OT 보안과 AI 도구는 기능안전 lifecycle을 대체하지 않는다. 안전 관련 변경은 권한분리, 무결성, 독립 V&V, traceability와 승인된 배포경계를 유지하고 보안위협이 SIF availability·independence·systematic capability에 미치는 영향을 평가한다."
+      ],
+      "anchor_id": "cyber_ai_safety_boundary",
+      "claim": "OT 보안과 AI 도구는 기능안전 lifecycle을 대체하지 않는다. 안전 관련 변경은 권한분리, 무결성, 독립 V&V, traceability와 승인된 배포경계를 유지하고 보안위협이 SIF availability·independence·systematic capability에 미치는 영향을 평가한다.",
+      "core_terms": [
+        "OT cybersecurity",
+        "AI",
+        "independent V&V",
+        "traceability",
+        "integrity",
+        "권한분리"
+      ],
+      "description": "OT 보안과 AI 도구는 기능안전 lifecycle을 대체하지 않는다. 안전 관련 변경은 권한분리, 무결성, 독립 V&V, traceability와 승인된 배포경계를 유지하고 보안위협이 SIF availability·independence·systematic capability에 미치는 영향을 평가한다.",
+      "grading_notes": "문제의 명시 요구 범위 안에서 관계식·역할·적용조건의 정확성을 평가한다.",
+      "id": "cyber_ai_safety_boundary",
+      "importance": "important",
+      "keywords": [
+        "OT cybersecurity",
+        "AI",
+        "independent V&V",
+        "traceability",
+        "integrity",
+        "권한분리"
+      ],
+      "rejected_explanations": [
+        "용어만 나열하거나 변수의 역할·단위·적용조건을 바꾸어 설명한다."
+      ],
+      "source_basis": "docs/topic_sheets/sil_target_determination_risk_reduction_and_lifecycle.md",
+      "statement": "OT 보안과 AI 도구는 기능안전 lifecycle을 대체하지 않는다. 안전 관련 변경은 권한분리, 무결성, 독립 V&V, traceability와 승인된 배포경계를 유지하고 보안위협이 SIF availability·independence·systematic capability에 미치는 영향을 평가한다."
+    }
+  ],
+  "core_facts": [
+    "목표 SIL은 위험 시나리오별 SIF의 요구 위험감소 수준이다.",
+    "RRF_required = F_residual/F_tolerable이다.",
+    "저요구 모드에서 PFDavg_target <= 1/RRF_required = F_tolerable/F_residual이다.",
+    "Demand mode는 요구빈도와 연속운전 여부로 구분한다.",
+    "Target SIL과 achieved SIL은 위험분석과 설계검증의 서로 다른 결과다.",
+    "PST coverage, full proof-test coverage와 MTTR은 서로 다른 변수다.",
+    "운전자료와 변경사항은 MOC와 SIL 재검증으로 환류한다."
+  ],
+  "fatal_wrong_claims": [
+    {
+      "affected_layers": [
+        "C",
+        "D",
+        "E"
+      ],
+      "claim": "목표 PFDavg는 허용 사건빈도와 기초 또는 잔여 사건빈도를 곱하여 구한다.",
+      "correct_rule": "저요구 모드의 PFDavg_target은 F_tolerable/F_residual 또는 1/RRF_required이며 무차원이다.",
+      "correction": "저요구 모드의 PFDavg_target은 F_tolerable/F_residual 또는 1/RRF_required이며 무차원이다.",
+      "description": "목표 PFDavg는 허용 사건빈도와 기초 또는 잔여 사건빈도를 곱하여 구한다.",
+      "grading_notes": "문맥상 실제 오답 주장인지 검증하며 단순 키워드 일치만으로 fatal 판정하지 않는다.",
+      "id": "fatal_target_pfd_frequency_product",
+      "message": "목표 PFDavg는 허용 사건빈도와 기초 또는 잔여 사건빈도를 곱하여 구한다.",
+      "severity": "fatal",
+      "wrong_claim": "목표 PFDavg는 허용 사건빈도와 기초 또는 잔여 사건빈도를 곱하여 구한다.",
+      "error_class": "DIMENSION_AND_RELATION_DIRECTION",
+      "claim_signature": "target_pfd_equals_frequency_product",
+      "anchor_refs": [
+        "required_rrf_relation",
+        "target_pfd_relation"
+      ],
+      "demand_refs": [
+        "required_rrf_and_target_sil",
+        "quantitative_verification_dimension"
+      ]
+    },
+    {
+      "affected_layers": [
+        "C",
+        "D",
+        "E"
+      ],
+      "claim": "High demand와 low demand는 고장을 즉시 발견할 수 있는지 또는 점검 때까지 모르는지로 구분한다.",
+      "correct_rule": "Demand mode는 안전기능 요구빈도와 연속운전 여부로 구분하며 검출 여부는 diagnostic coverage와 dangerous detected/undetected 분류 문제다.",
+      "correction": "Demand mode는 안전기능 요구빈도와 연속운전 여부로 구분하며 검출 여부는 diagnostic coverage와 dangerous detected/undetected 분류 문제다.",
+      "description": "High demand와 low demand는 고장을 즉시 발견할 수 있는지 또는 점검 때까지 모르는지로 구분한다.",
+      "grading_notes": "문맥상 실제 오답 주장인지 검증하며 단순 키워드 일치만으로 fatal 판정하지 않는다.",
+      "id": "fatal_demand_mode_by_fault_detection",
+      "message": "High demand와 low demand는 고장을 즉시 발견할 수 있는지 또는 점검 때까지 모르는지로 구분한다.",
+      "severity": "fatal",
+      "wrong_claim": "High demand와 low demand는 고장을 즉시 발견할 수 있는지 또는 점검 때까지 모르는지로 구분한다.",
+      "error_class": "CONCEPT_ROLE_CONFUSION",
+      "claim_signature": "demand_mode_equals_fault_detection_timing",
+      "anchor_refs": [
+        "demand_mode_metric_selection"
+      ],
+      "demand_refs": [
+        "demand_mode_metric_selection"
+      ]
+    },
+    {
+      "affected_layers": [
+        "C",
+        "D",
+        "E"
+      ],
+      "claim": "인증 부품 또는 SIS 전체에 표시된 SIL 등급만으로 개별 안전기능의 목표와 달성을 증명한다.",
+      "correct_rule": "목표 SIL은 위험 시나리오별 SIF에 할당하고 전체 SIF의 정량·정성 제약과 lifecycle evidence로 달성을 검증한다.",
+      "correction": "목표 SIL은 위험 시나리오별 SIF에 할당하고 전체 SIF의 정량·정성 제약과 lifecycle evidence로 달성을 검증한다.",
+      "description": "인증 부품 또는 SIS 전체에 표시된 SIL 등급만으로 개별 안전기능의 목표와 달성을 증명한다.",
+      "grading_notes": "문맥상 실제 오답 주장인지 검증하며 단순 키워드 일치만으로 fatal 판정하지 않는다.",
+      "id": "fatal_sil_as_component_or_sis_label",
+      "message": "인증 부품 또는 SIS 전체에 표시된 SIL 등급만으로 개별 안전기능의 목표와 달성을 증명한다.",
+      "severity": "fatal",
+      "wrong_claim": "인증 부품 또는 SIS 전체에 표시된 SIL 등급만으로 개별 안전기능의 목표와 달성을 증명한다.",
+      "error_class": "SYSTEM_BOUNDARY_ERROR",
+      "claim_signature": "component_certificate_proves_sif_sil",
+      "anchor_refs": [
+        "sis_sif_sil_scope",
+        "achieved_sil_verification"
+      ],
+      "demand_refs": [
+        "system_scope_and_sil_role",
+        "quantitative_verification_dimension"
+      ]
+    },
+    {
+      "affected_layers": [
+        "C",
+        "D",
+        "E"
+      ],
+      "claim": "PST를 적용하면 full proof test를 대체하고 MTTR이 자동으로 줄어든다.",
+      "correct_rule": "PST는 검출 가능한 부분 고장집합에만 credit을 주며 full proof test와 실제 repair logistics는 별도로 유지한다.",
+      "correction": "PST는 검출 가능한 부분 고장집합에만 credit을 주며 full proof test와 실제 repair logistics는 별도로 유지한다.",
+      "description": "PST를 적용하면 full proof test를 대체하고 MTTR이 자동으로 줄어든다.",
+      "grading_notes": "문맥상 실제 오답 주장인지 검증하며 단순 키워드 일치만으로 fatal 판정하지 않는다.",
+      "id": "fatal_pst_replaces_full_test_or_reduces_mttr",
+      "message": "PST를 적용하면 full proof test를 대체하고 MTTR이 자동으로 줄어든다.",
+      "severity": "fatal",
+      "wrong_claim": "PST를 적용하면 full proof test를 대체하고 MTTR이 자동으로 줄어든다.",
+      "error_class": "TEST_COVERAGE_ROLE_CONFUSION",
+      "claim_signature": "pst_replaces_full_test_and_reduces_mttr",
+      "anchor_refs": [
+        "proof_test_pst_role",
+        "achieved_sil_verification"
+      ],
+      "demand_refs": [
+        "proof_test_diagnostics_reliability"
+      ]
+    },
+    {
+      "affected_layers": [
+        "C",
+        "D",
+        "E"
+      ],
+      "claim": "인증서의 시험주기보다 짧게 시험할 이유가 없으며 그 주기가 현장 적용의 최소주기다.",
+      "correct_rule": "현장 proof-test interval은 실제 SIF 계산, failure data, coverage, 운전제약과 규정에 따라 정하고 인증서 가정은 적용조건으로 검토한다.",
+      "correction": "현장 proof-test interval은 실제 SIF 계산, failure data, coverage, 운전제약과 규정에 따라 정하고 인증서 가정은 적용조건으로 검토한다.",
+      "description": "인증서의 시험주기보다 짧게 시험할 이유가 없으며 그 주기가 현장 적용의 최소주기다.",
+      "grading_notes": "문맥상 실제 오답 주장인지 검증하며 단순 키워드 일치만으로 fatal 판정하지 않는다.",
+      "id": "fatal_certificate_interval_as_operating_minimum",
+      "message": "인증서의 시험주기보다 짧게 시험할 이유가 없으며 그 주기가 현장 적용의 최소주기다.",
+      "severity": "fatal",
+      "wrong_claim": "인증서의 시험주기보다 짧게 시험할 이유가 없으며 그 주기가 현장 적용의 최소주기다.",
+      "error_class": "CERTIFICATE_ASSUMPTION_MISUSE",
+      "claim_signature": "certificate_interval_is_minimum_test_interval",
+      "anchor_refs": [
+        "achieved_sil_verification",
+        "operations_moc_revalidation"
+      ],
+      "demand_refs": [
+        "proof_test_diagnostics_reliability",
+        "operations_moc_security_ai_lifecycle"
+      ]
+    }
+  ],
+  "safe_expressions": [
+    "목표 SIL은 위험 시나리오별 SIF에 할당하고 achieved SIL은 전체 SIF의 PFDavg 또는 PFH와 정성 제약으로 별도 검증한다.",
+    "저요구 모드의 PFDavg_target은 F_tolerable/F_residual 또는 1/RRF_required 관계로 설명한다.",
+    "Demand mode는 요구빈도와 연속운전 여부로 구분하고 diagnostics의 검출가능성과 분리한다.",
+    "PST는 검출 가능한 부분 고장에만 credit을 주고 full proof test 및 실제 repair time을 별도로 관리한다."
+  ],
+  "revision_notes": [
+    "Issue #1 SIL 결정 과대채점 회귀의 범용 Fact 근거로 신설했다.",
+    "수식 차원, demand mode와 lifecycle 역할의 핵심 정답을 분리했다."
+  ],
+  "topic_label": "목표 SIL 결정·위험감소·안전수명주기"
+}

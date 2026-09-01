@@ -1,5 +1,5 @@
 {
-  "version": "sha256-6b149748db8891ae6191197f405bc9f1543bd0d0bb2260fc7bc8765315a2f32d-generated-topic-pack-importance",
+  "version": "sha256-57f8ae4a82db43e84c644b6eb85e61496f860796cf02c341a6eab41e40a5a080-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -1636,6 +1636,29 @@
         "fatal logic error가 없다."
       ],
       "note": "2차 시스템의 공진주파수와 주파수응답은 제어이론 핵심 변별 주제이며, 단순 공식 암기를 넘어 시간응답-주파수응답의 개념적 차이와 현장 설계(진동, 노이즈, 대역폭) 간의 연결 능력이 고득점의 핵심이다."
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "high_band_unlock_conditions": [
+        "SIS·SIF·SIL 경계와 target SIL·achieved SIL을 구분한다.",
+        "위험 시나리오와 조직의 허용위험 기준을 명시한다.",
+        "SIL 결정 방법을 입력자료와 불확실성 수준에 맞게 선정한다.",
+        "기존 IPL의 독립성·공통원인·이중계산을 검토한다.",
+        "F_residual/F_tolerable과 그 역수인 PFDavg_target 관계를 차원에 맞게 제시한다.",
+        "Demand mode를 요구빈도로 구분하고 PFDavg와 PFH를 선택한다.",
+        "Proof test·PST·diagnostics의 coverage와 repair 역할을 구분한다.",
+        "SRS·운전기록·MOC·보안·AI 변경을 재검증과 traceability에 연결한다."
+      ],
+      "note": "목표 SIL 결정의 위험분석, 요구 RRF, 성능지표 선택과 플랜트 수명주기 인계를 함께 평가하는 범용 핵심 Topic이다.",
+      "revision_notes": [
+        "Issue #1 SIL 결정 사례의 과대채점 회귀를 방지하기 위한 범용 목표 SIL Topic으로 신설했다.",
+        "LOPA 상세, 신뢰도 모델링, final element와 안전 software의 인접 Topic ownership을 명시했다."
+      ],
+      "topic_label": "목표 SIL 결정·위험감소·안전수명주기"
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

@@ -98,9 +98,10 @@ class GradeOutputFormatterRegressionTest(unittest.TestCase):
             text,
         )
         self.assertIn(
-            "판정: THEORY_CORE 핵심 이론 오류",
+            "판정: 검증된 핵심 기술 오류 보완 필요",
             text,
         )
+        self.assertIn("신뢰도: medium", text)
         self.assertIn(
             (
                 "추가적인 수치 cap은 "
@@ -187,16 +188,15 @@ class AppliedNumericCapOutputRegressionTest(
         )
         self.assertIn(
             (
-                "판정: THEORY_CORE "
-                "핵심 이론 오류 cap 적용"
+                "판정: 검증된 핵심 기술 오류 — "
+                "점수 상한 적용"
             ),
             text,
         )
         self.assertIn(
-            "최종 cap이 적용되었습니다.",
+            "최종 점수 상한이 적용되었습니다.",
             text,
         )
 
 if __name__ == "__main__":
     unittest.main()
-

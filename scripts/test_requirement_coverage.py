@@ -119,7 +119,8 @@ class RequirementCoverageRegressionTest(unittest.TestCase):
         text = bot._format_question_type_coverage_display(result)
 
         self.assertIn("[요구사항 충족도]", text)
-        self.assertIn("요구사항 충족률: 62.5%", text)
+        self.assertIn("요구사항 언급률: 75.0%", text)
+        self.assertIn("요구사항 정확 충족률: 62.5%", text)
         self.assertIn("가중 2.5/4", text)
         self.assertIn("충족 2 · 부분 1 · 오답 0 · 누락 1", text)
         self.assertIn("부분 충족: 적용 조건", text)

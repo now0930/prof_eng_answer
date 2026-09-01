@@ -1,0 +1,107 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "SIL 결정 방법",
+        "목표 SIL 결정",
+        "SIL target determination",
+        "요구 SIL 결정"
+      ],
+      [
+        "플랜트 운영",
+        "실제 플랜트",
+        "안전수명주기",
+        "최신 산업 이슈",
+        "산업 이슈"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "system_scope_and_sil_role",
+      "demand_kind": "DEFINE_EXPLAIN",
+      "demand_label": "SIS·SIF·SIL 범위와 역할",
+      "requirement_text": "SIS, SIF와 SIL의 관계를 구분하고 목표 SIL이 위험 시나리오별 개별 SIF에 할당되는 요구 안전무결성 수준임을 설명한다.",
+      "source_json_pointers": [
+        "$/recommended_outline/0",
+        "$/high_score_points/0"
+      ]
+    },
+    {
+      "requirement_id": "risk_scenario_and_tolerable_target",
+      "demand_kind": "ANALYZE_INTERPRET",
+      "demand_label": "위험 시나리오·허용위험",
+      "requirement_text": "위험 시나리오 경계와 safe state를 정의하고 허용 사건빈도 또는 위험수용기준 및 적용 가능한 SIL 결정 방법을 정한다.",
+      "source_json_pointers": [
+        "$/recommended_outline/0",
+        "$/recommended_outline/1"
+      ]
+    },
+    {
+      "requirement_id": "existing_ipl_and_independence",
+      "demand_kind": "EVALUATE_JUDGE",
+      "demand_label": "기존 IPL·독립성",
+      "requirement_text": "기존 보호계층의 적격성, 독립성, 공통원인과 중복 credit을 검토하여 SIF 적용 전 잔여 사건빈도를 산정한다.",
+      "source_json_pointers": [
+        "$/recommended_outline/2",
+        "$/high_score_points/0"
+      ]
+    },
+    {
+      "requirement_id": "required_rrf_and_target_sil",
+      "demand_kind": "CALCULATE_DERIVE",
+      "demand_label": "요구 RRF·목표 SIL",
+      "requirement_text": "잔여 사건빈도와 허용 사건빈도의 비로 요구 RRF와 목표 PFDavg를 산정하고 목표 SIL 구간에 매핑한다.",
+      "source_json_pointers": [
+        "$/recommended_outline/3",
+        "$/high_score_points/1"
+      ]
+    },
+    {
+      "requirement_id": "demand_mode_metric_selection",
+      "demand_kind": "ANALYZE_INTERPRET",
+      "demand_label": "Demand mode·성능지표",
+      "requirement_text": "안전기능의 요구빈도와 연속운전 여부에 따라 low, high 또는 continuous mode를 구분하고 PFDavg 또는 PFH를 선택한다.",
+      "source_json_pointers": [
+        "$/recommended_outline/4",
+        "$/high_score_points/3"
+      ]
+    },
+    {
+      "requirement_id": "quantitative_verification_dimension",
+      "demand_kind": "EVALUATE_VERIFY",
+      "demand_label": "달성 SIL·정량검증",
+      "requirement_text": "센서, 로직솔버와 최종요소 전체 SIF의 PFDavg 또는 PFH 및 정성 제약을 계산 가정과 차원에 맞게 검증하고 target SIL과 achieved SIL을 구분한다.",
+      "source_json_pointers": [
+        "$/recommended_outline/4",
+        "$/high_score_points/3"
+      ]
+    },
+    {
+      "requirement_id": "proof_test_diagnostics_reliability",
+      "demand_kind": "IMPLEMENT",
+      "demand_label": "Proof test·진단·신뢰도",
+      "requirement_text": "proof-test interval과 coverage, diagnostics, PST, full proof test, repair 및 CCF의 역할과 운전상 제약을 구분한다.",
+      "source_json_pointers": [
+        "$/recommended_outline/5",
+        "$/high_score_points/4"
+      ]
+    },
+    {
+      "requirement_id": "operations_moc_security_ai_lifecycle",
+      "demand_kind": "IMPLEMENTATION_EVALUATION",
+      "demand_label": "운전·MOC·보안·AI 수명주기",
+      "requirement_text": "SRS, 운전자료, bypass, 형상변경과 MOC를 재검증에 연결하고 OT 보안 및 AI 변경을 무결성, 독립 V&V와 추적성 경계 안에서 관리한다.",
+      "source_json_pointers": [
+        "$/recommended_outline/6",
+        "$/recommended_outline/7"
+      ]
+    }
+  ],
+  "canonical_primary_lens": "IMPLEMENTATION_EVALUATION"
+}

@@ -163,10 +163,122 @@ def _remove_commands_and_end_markers(
     return compact
 
 
-def _extract_question_and_answer(
+QUESTION_ANSWER_BOUNDARY_VERSION = (
+    "question_answer_boundary_v1"
+)
+
+
+def _boundary_result(
+    *,
+    question_text: str,
+    answer_text: str,
+    status: str,
+    confidence: str,
+) -> dict[str, Any]:
+    question = question_text.strip()
+    answer = answer_text.strip()
+    separated = bool(
+        question
+        and answer
+        and question != answer
+    )
+    manual_review_required = not separated
+
+    return {
+        "question_text": question,
+        "answer_text": answer,
+        "question_answer_boundary": {
+            "version": QUESTION_ANSWER_BOUNDARY_VERSION,
+            "status": status,
+            "confidence": confidence,
+            "question_answer_separated": separated,
+            "question_equals_answer": bool(
+                question
+                and answer
+                and question == answer
+            ),
+            "manual_review_required": (
+                manual_review_required
+            ),
+            "confidence_ceiling": (
+                "medium"
+                if manual_review_required
+                else "high"
+            ),
+        },
+    }
+
+
+def _strip_question_marker(value: str) -> str:
+    return re.sub(
+        r"^\s*(?:\[문제\]|문제\s*:)\s*",
+        "",
+        str(value or ""),
+        count=1,
+        flags=re.IGNORECASE,
+    ).strip()
+
+
+def _extract_submission_envelope(
     normalized_text: str,
-) -> tuple[str, str]:
+) -> dict[str, Any]:
     lines = normalized_text.splitlines()
+
+    divider = re.search(
+        r"={20,}",
+        normalized_text,
+    )
+    if divider:
+        return _boundary_result(
+            question_text=_strip_question_marker(
+                normalized_text[: divider.start()]
+            ),
+            answer_text=(
+                normalized_text[divider.end() :]
+            ),
+            status="long_divider",
+            confidence="high",
+        )
+
+    problem_definition_index = None
+    for index, line in enumerate(lines):
+        if re.match(
+            r"^\s*(?:📌\s*)?문제\s*정의\s*:?\s*$",
+            line,
+            flags=re.IGNORECASE,
+        ):
+            problem_definition_index = index
+            break
+
+    if problem_definition_index is not None:
+        body_start = None
+        for index in range(
+            problem_definition_index + 1,
+            len(lines),
+        ):
+            if re.match(
+                r"^\s*(?:[🔹▶▷■□●○◆◇※★☆]\s*)?"
+                r"1\s*[.)]\s*(?:배경|개요|서론)\b",
+                lines[index],
+                flags=re.IGNORECASE,
+            ):
+                body_start = index
+                break
+
+        if body_start is not None:
+            return _boundary_result(
+                question_text="\n".join(
+                    lines[:body_start]
+                ),
+                answer_text="\n".join(
+                    lines[body_start:]
+                ),
+                status=(
+                    "problem_definition_body_marker"
+                ),
+                confidence="high",
+            )
+
     question_start = None
 
     for index, line in enumerate(lines):
@@ -178,14 +290,74 @@ def _extract_question_and_answer(
             break
 
     if question_start is None:
-        return "", normalized_text
+        return _boundary_result(
+            question_text="",
+            answer_text=normalized_text,
+            status="unknown_answer_only",
+            confidence="low",
+        )
 
-    question_line = lines[question_start].strip()
+    answer_marker = None
+    for index in range(
+        question_start + 1,
+        len(lines),
+    ):
+        if re.match(
+            r"^\s*(?:\[답안\]|답안\s*:)",
+            lines[index],
+            flags=re.IGNORECASE,
+        ):
+            answer_marker = index
+            break
+
+    if answer_marker is not None:
+        answer_line = lines[answer_marker]
+        inline_answer = re.sub(
+            r"^\s*(?:\[답안\]|답안\s*:)\s*",
+            "",
+            answer_line,
+            count=1,
+            flags=re.IGNORECASE,
+        )
+        answer_parts = []
+        if inline_answer:
+            answer_parts.append(inline_answer)
+        answer_parts.extend(
+            lines[answer_marker + 1 :]
+        )
+        return _boundary_result(
+            question_text=_strip_question_marker(
+                "\n".join(
+                    lines[question_start:answer_marker]
+                )
+            ),
+            answer_text="\n".join(answer_parts),
+            status="explicit_question_answer_markers",
+            confidence="high",
+        )
+
+    question_line = _strip_question_marker(
+        lines[question_start]
+    )
     answer_lines = lines[question_start + 1 :]
 
+    return _boundary_result(
+        question_text=question_line,
+        answer_text="\n".join(answer_lines),
+        status="explicit_question_line",
+        confidence="high",
+    )
+
+
+def _extract_question_and_answer(
+    normalized_text: str,
+) -> tuple[str, str]:
+    envelope = _extract_submission_envelope(
+        normalized_text
+    )
     return (
-        question_line,
-        "\n".join(answer_lines).strip(),
+        str(envelope.get("question_text") or ""),
+        str(envelope.get("answer_text") or ""),
     )
 
 
@@ -215,10 +387,14 @@ def normalize_grade_submission(
     )
 
     normalized_text = "\n".join(lines).strip()
-    question_text, answer_text = (
-        _extract_question_and_answer(
-            normalized_text
-        )
+    envelope = _extract_submission_envelope(
+        normalized_text
+    )
+    question_text = str(
+        envelope.get("question_text") or ""
+    )
+    answer_text = str(
+        envelope.get("answer_text") or ""
     )
     unique_events = list(dict.fromkeys(events))
 
@@ -238,6 +414,12 @@ def normalize_grade_submission(
         "normalized_length": len(normalized_text),
         "question_text": question_text,
         "answer_text": answer_text,
+        "question_answer_boundary": copy.deepcopy(
+            envelope.get(
+                "question_answer_boundary"
+            )
+            or {}
+        ),
         "normalized_text": normalized_text,
     }
 
@@ -366,4 +548,71 @@ def attach_submission_normalization(
     updated["submission_normalization"] = (
         copy.deepcopy(evidence)
     )
+
+    boundary = evidence.get(
+        "question_answer_boundary"
+    )
+    if not isinstance(boundary, dict):
+        boundary = {
+            "version": QUESTION_ANSWER_BOUNDARY_VERSION,
+            "status": "missing_boundary_evidence",
+            "confidence": "low",
+            "question_answer_separated": False,
+            "question_equals_answer": False,
+            "manual_review_required": True,
+            "confidence_ceiling": "medium",
+        }
+
+    manual_review_required = bool(
+        boundary.get("manual_review_required")
+    )
+    updated["grading_boundary_evaluation"] = (
+        copy.deepcopy(boundary)
+    )
+
+    if not manual_review_required:
+        return updated
+
+    confidence_rank = {
+        "low": 0,
+        "medium": 1,
+        "high": 2,
+    }
+    ceiling = str(
+        boundary.get("confidence_ceiling")
+        or "medium"
+    ).strip().lower()
+    if ceiling not in confidence_rank:
+        ceiling = "medium"
+
+    for key in (
+        "confidence",
+        "grade_confidence",
+        "confidence_level",
+    ):
+        value = str(
+            updated.get(key) or "medium"
+        ).strip().lower()
+        if confidence_rank.get(value, 1) > confidence_rank[ceiling]:
+            updated[key] = ceiling
+
+    updated["manual_review_required"] = True
+    updated["strong_verdict_allowed"] = False
+    updated["requirements_full_credit_allowed"] = False
+    updated["question_type_locked"] = False
+    updated["question_type_status"] = "provisional"
+
+    warning = (
+        "⚠ 문제문과 답안의 경계를 확정하지 못해 "
+        "수동 검토가 필요합니다."
+    )
+    updated["question_boundary_warning"] = warning
+    existing_warning = str(
+        updated.get("question_type_warning") or ""
+    ).strip()
+    if warning not in existing_warning:
+        updated["question_type_warning"] = (
+            (existing_warning + " " + warning).strip()
+        )
+
     return updated

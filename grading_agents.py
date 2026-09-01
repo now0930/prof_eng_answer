@@ -5203,7 +5203,8 @@ def _phase8_apply_constraint_only_to_semantic_layers(
 
 def _phase2_extract_submission_context_canonical(input_text):
     # Phase2에서도 canonical submission parser를 재사용한다.
-    # 질문 표지가 없는 답안 전용 입력은 기존 fallback을 유지한다.
+    # 경계를 확정하지 못한 입력은 질문을 비워 둔다. 전체 입력을
+    # 질문으로 복제하는 legacy fallback은 Fact/요구사항 오염을 만든다.
     from grade_submission_normalizer import (
         normalize_grade_submission,
     )
@@ -5211,7 +5212,7 @@ def _phase2_extract_submission_context_canonical(input_text):
     try:
         context = normalize_grade_submission(input_text)
     except Exception:
-        context = {}
+        return "", str(input_text or "")
 
     if not isinstance(context, dict):
         context = {}
@@ -5223,70 +5224,28 @@ def _phase2_extract_submission_context_canonical(input_text):
         context.get("answer_text") or ""
     )
 
-    if not question_text.strip():
-        question_text = _phase3_extract_question_text(
-            input_text
-        )
-
-    if not answer_text.strip():
-        answer_text = _phase3_extract_answer_text(
-            input_text
-        )
-
     return question_text, answer_text
 
 
 def _phase2_extract_submission_context(
     input_text: str,
 ) -> tuple[str, str]:
-    question_text, answer_text = (
-        _phase2_extract_submission_context_canonical(
-            input_text
-        )
+    return _phase2_extract_submission_context_canonical(
+        input_text
     )
 
-    # Stage19: preserve canonical normalization with legacy fallback inside the helper.
-    legacy_extractor = globals().get(
-        "_phase3_extract_question_text"
-    )
 
-    try:
-        if not callable(legacy_extractor):
-            raise RuntimeError(
-                "_phase3_extract_question_text "
-                "is unavailable"
-            )
-        legacy_question_text = legacy_extractor(
-            input_text
-        )
-    except Exception as question_error:
-        try:
-            print(
-                "[agent] phase20 question extraction "
-                "failed; using input text: "
-                f"{question_error!r}"
-            )
-        except Exception:
-            pass
-        question_text = input_text
-    else:
-        normalized_question_text = str(
-            question_text or ""
-        ).strip()
-        placeholder_questions = {
-            "문제",
-            "문제:",
-            "question",
-            "question:",
-        }
-        if (
-            not normalized_question_text
-            or normalized_question_text.casefold()
-            in placeholder_questions
-        ):
-            question_text = legacy_question_text
+def _phase2_build_canonical_submission_text(
+    question_text: str,
+    answer_text: str,
+) -> str:
+    question = str(question_text or "").strip()
+    answer = str(answer_text or "").strip()
 
-    return question_text, answer_text
+    if question:
+        return f"문제: {question}\n답안:\n{answer}".strip()
+
+    return f"답안:\n{answer}".strip()
 
 
 def _phase2_postprocess_grade(legacy_result):
@@ -5398,6 +5357,12 @@ def _phase2_postprocess_grade(legacy_result):
         input_text = input_path.read_text(encoding="utf-8", errors="ignore")
 
     question_text, answer_text = _phase2_extract_submission_context(input_text)
+    canonical_input_text = (
+        _phase2_build_canonical_submission_text(
+            question_text,
+            answer_text,
+        )
+    )
 
     from grading_identity import (
         build_grading_identity,
@@ -5435,7 +5400,7 @@ def _phase2_postprocess_grade(legacy_result):
     fact_eval = _phase20_timed(
         "fact_anchor",
         _phase3_evaluate_fact_anchors,
-        input_text,
+        canonical_input_text,
         subject_rubric,
         routing_contract=phase3_routing_contract,
     )
@@ -5444,7 +5409,7 @@ def _phase2_postprocess_grade(legacy_result):
         _phase20_time.perf_counter()
     )
     question_type_eval = _phase9_run_question_type_lens(
-        input_text=input_text,
+        input_text=canonical_input_text,
         answer_text=answer_text,
         subject_rubric=subject_rubric,
         session_dir=session_dir
@@ -5465,7 +5430,7 @@ def _phase2_postprocess_grade(legacy_result):
         _phase20_time.perf_counter()
     )
     connection_eval = _phase3_evaluate_connections(
-        input_text,
+        canonical_input_text,
         question_type_eval=(
             de_policy_question_type_eval
         ),
@@ -5486,7 +5451,7 @@ def _phase2_postprocess_grade(legacy_result):
     model_answer_ref = _phase20_timed(
         "model_answer_reference",
         _phase10_run_model_answer_reference,
-        input_text=input_text,
+        input_text=canonical_input_text,
         answer_text=answer_text,
         question_type_eval=question_type_eval,
         fact_eval=fact_eval,
@@ -5648,7 +5613,7 @@ def _phase2_postprocess_grade(legacy_result):
         _phase20_time.perf_counter()
     )
     gemini_eval = _phase6_run_gemini_semantic_grader(
-        input_text=input_text,
+        input_text=canonical_input_text,
         answer_text=answer_text,
         scoring_model=scoring_model,
         subject_rubric=subject_rubric_for_gemini,
@@ -5685,7 +5650,7 @@ def _phase2_postprocess_grade(legacy_result):
             authoritative_de_question_type_eval
         )
         connection_eval = _phase3_evaluate_connections(
-            input_text,
+            canonical_input_text,
             question_type_eval=(
                 de_policy_question_type_eval
             ),
@@ -5723,7 +5688,7 @@ def _phase2_postprocess_grade(legacy_result):
         _phase9_reconcile_principle_semantic_d_score(
             layer_scores,
             de_policy_question_type_eval,
-            input_text,
+            canonical_input_text,
         )
     )
 
@@ -5752,7 +5717,7 @@ def _phase2_postprocess_grade(legacy_result):
     originality_eval = _phase20_timed(
         "originality_evaluator",
         _phase8_run_originality_evaluator,
-        input_text=input_text,
+        input_text=canonical_input_text,
         answer_text=answer_text,
         layer_scores=layer_scores,
         volume=volume,
@@ -5924,7 +5889,7 @@ def _phase2_postprocess_grade(legacy_result):
         question_type_eval=(
             de_policy_question_type_eval
         ),
-        input_text=input_text,
+        input_text=canonical_input_text,
     )
     grade = _phase8b_enforce_final_volume_cap(grade)
     grade = _phase11_normalize_requirement_fact_labels(grade)
@@ -5934,7 +5899,7 @@ def _phase2_postprocess_grade(legacy_result):
         question_type_eval=(
             de_policy_question_type_eval
         ),
-        input_text=input_text,
+        input_text=canonical_input_text,
     )
     try:
         from logic_check_evaluator import attach_logic_check_to_grade
@@ -5964,7 +5929,7 @@ def _phase2_postprocess_grade(legacy_result):
         try:
             grade = attach_logic_check_to_grade(
                 grade,
-                input_text,
+                canonical_input_text,
             )
         finally:
             _phase20_timings[
@@ -6234,7 +6199,7 @@ def _phase2_postprocess_grade(legacy_result):
         question_type_eval=(
             de_policy_question_type_eval
         ),
-        input_text=input_text,
+        input_text=canonical_input_text,
     )
 
     grade = _stage7_apply_native_qd_projection_to_grade_output(

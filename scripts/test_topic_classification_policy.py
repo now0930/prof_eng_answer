@@ -65,6 +65,7 @@ APPLICATION_TOPICS = {
     "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
     "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
     "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+    "sil_target_determination_risk_reduction_and_lifecycle",
     "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
     "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
     "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
@@ -101,7 +102,7 @@ ALLOWED_SELECTION_IMPORTANCE = {
 
 EXPECTED_DIFFICULTY_COUNTS = {
     "THEORY_CORE": 23,
-    "FIELD_APPLICATION": 37,
+    "FIELD_APPLICATION": 38,
     "DESIGN_EVALUATION": 16,
 }
 

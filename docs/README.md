@@ -42,6 +42,7 @@
 | 새 topic 추가 또는 기존 topic 보강 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
 | Logic Check 운영 기준 확인 | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
 | 장기 채점 품질 로드맵과 진행 상태 확인 | [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) | [`grading_architecture.md`](grading_architecture.md), [`operation_runbook.md`](operation_runbook.md) |
+| 교차 주제 보정 corpus와 의미 drift 대응 | [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md) | [`operation_runbook.md`](operation_runbook.md), `calibration/grading_integrity_drift_baseline.json` |
 | Logic Check Profile 초안 확인 | [`logic_check_profile_generator_prompt.md`](logic_check_profile_generator_prompt.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
 | Rule-based Logic Check JSON 초안 확인 | [`logic_check_json_generator_prompt.md`](logic_check_json_generator_prompt.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
 | Topic Sheet 검토 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | `topic_sheets/<topic_id>.md` |
@@ -66,12 +67,13 @@
 | [`question_type_taxonomy.md`](question_type_taxonomy.md) | active type 4종, legacy mapping, question-only lens, coverage 상태와 최종 type/name |
 | [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) | Difficulty Profile, THEORY_CORE, recommended ceiling과 applied cap |
 | [`llm_provider.md`](llm_provider.md) | provider routing, fallback, JSON parsing과 Python 후처리 경계 |
+| [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md) | 과대채점 회귀 corpus, 의미 fingerprint, 이웃 주제 음성 사례와 기준선 변경 절차 |
 
 ### Rubric와 Topic Pack
 
 | 문서 | 책임 |
 |---|---|
-| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, manifest 기준 76개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
+| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, manifest 기준 77개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | Fact Anchor, Model Answer, Topic Importance와 Logic Check source 작성 기준 |
 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | 요구사항 → 직접 source JSON authoring → focused validation → integration rebuild → release/CI 검증 |
 
@@ -95,7 +97,7 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 |---|---|---|
 | 배점 | A/B/C/D/E = 3/6/8/6/2 | `rubrics/scoring_model/default.json` |
 | Active Question Type | 4종 | `rubrics/question_types/default.json`, Question Type modules |
-| Topic Pack | 76개 | `rubrics/generated/topic_pack_manifest.generated.json` |
+| Topic Pack | 77개 | `rubrics/generated/topic_pack_manifest.generated.json` |
 | Generated bank | 6개 | `rubrics/generated/*.generated.json` |
 | Software Topic | SW-01~SW-13, 13개 | `docs/topic_pack_architecture.md`, generated manifest |
 | 기본 Rubric Bank | `generated` | `rubric_bank_paths.py` |
@@ -157,6 +159,7 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | 실제 numeric cap과 `cap 적용` 출력 | `grading_architecture.md` | `grade_score_reconciler.py`, `grade_output_summarizer.py` |
 | 최종 coverage persistence | `grading_architecture.md` | `grading_agents.py`, `bot.py` |
 | 완료 세션 격리와 ID 충돌 방지 | `operation_runbook.md` | `bot.py` |
+| 교차 주제 채점 의미 drift | `grading_integrity_drift_runbook.md` | `scripts/check_grading_integrity_drift.py`, `scripts/replay_sil_issue1_session.py` |
 | Topic Pack 구조·inventory | `topic_pack_architecture.md` | `rubric_bank_paths.py`, generated manifest |
 | Rubric source와 generated bank | `rubric_authoring_guide.md` | `rubric_bank_paths.py`, `rubric_registry.py` |
 | Topic Pack 생성·검증·integration rebuild | `topic_pack_workflow.md` | `scripts/rubric_manager.py`, release validation |

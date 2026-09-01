@@ -43,6 +43,7 @@ def valid_result():
             "requirement_id": requirement_id,
             "requirement": requirement_id,
             "status": "present",
+            "mentioned": True,
             "evidence": "fixture",
             "is_core": True,
         }

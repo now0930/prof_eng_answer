@@ -1319,8 +1319,11 @@ question_demand_contract:
 8. 이 계약 자체는 Python 점수·상한·하드캡을 직접 변경하지 않는다.
 9. explicit_requirement_coverage.requirements는 contract requirements와 정확히 같은 개수·순서·requirement_id를 사용한다.
 10. 두 개 이상의 requirement를 하나의 행으로 합치거나 requirement_id를 생략하지 않는다.
-11. 각 행은 requirement_id, requirement, status, evidence, is_core를 포함한다.
-12. status는 present, partial, wrong, missing 중 하나이며 근거가 없으면 missing으로 판정한다.
+11. 각 행은 requirement_id, requirement, status, mentioned, evidence, is_core를 포함한다.
+12. mentioned는 답안이 해당 요구를 실제로 다뤘는지만 나타낸다. 언급했지만 틀린 경우에도 true이다.
+13. status는 present, partial, wrong, missing 중 하나이며, present는 단순 언급이 아니라 요구를 정확하고 충분히 충족한 경우에만 사용한다.
+14. 언급했지만 핵심 관계·정의·조건이 틀리면 mentioned=true, status=wrong으로 판정한다. 근거가 없으면 mentioned=false, status=missing으로 판정한다.
+15. mention coverage와 correctness coverage를 혼동하지 말고, wrong·partial·missing이 하나라도 있으면 완전 충족 또는 100% 정확 충족으로 판정하지 않는다.
 """.strip().format(
         contract_json=contract_json,
     )
@@ -1404,7 +1407,31 @@ def _stage35e2_projection_matches_contract(result, contract):
             for row in rows
             if isinstance(row, dict)
         ]
-        if actual == expected and len(rows) == len(expected):
+        valid_state_rows = all(
+            isinstance(row, dict)
+            and str(row.get("status") or "").strip().lower()
+            in {
+                "present",
+                "partial",
+                "wrong",
+                "incorrect",
+                "missing",
+            }
+            and isinstance(row.get("mentioned"), bool)
+            and (
+                row["mentioned"]
+                is (
+                    str(row.get("status") or "").strip().lower()
+                    != "missing"
+                )
+            )
+            for row in rows
+        )
+        if (
+            actual == expected
+            and len(rows) == len(expected)
+            and valid_state_rows
+        ):
             return True
     return False
 

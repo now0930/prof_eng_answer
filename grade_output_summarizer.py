@@ -520,12 +520,12 @@ def _normalise_summary(llm_obj: dict[str, Any] | None, payload: dict[str, Any]) 
         )
 
         if cap_applied:
-            headline = "THEORY_CORE 핵심 이론 오류 cap 적용"
-            overall = "핵심 이론 오류가 확인되어 최종 cap이 적용되었습니다."
+            headline = "검증된 핵심 기술 오류 — 점수 상한 적용"
+            overall = "검증된 핵심 기술 오류가 확인되어 최종 점수 상한이 적용되었습니다."
         else:
-            headline = "THEORY_CORE 핵심 이론 오류"
+            headline = "검증된 핵심 기술 오류 보완 필요"
             overall = (
-                "핵심 이론 오류가 확인되었습니다. "
+                "검증된 핵심 기술 오류가 확인되었습니다. "
                 "현재 점수가 권장 ceiling보다 낮아 "
                 "추가적인 수치 cap은 적용되지 않았습니다."
             )
@@ -652,18 +652,18 @@ def _render(summary: dict[str, Any], payload: dict[str, Any]) -> str:
 
         if cap_applied:
             summary["headline"] = (
-                "THEORY_CORE 핵심 이론 오류 cap 적용"
+                "검증된 핵심 기술 오류 — 점수 상한 적용"
             )
             summary["overall"] = (
-                "핵심 이론 오류가 확인되어 "
-                "최종 cap이 적용되었습니다."
+                "검증된 핵심 기술 오류가 확인되어 "
+                "최종 점수 상한이 적용되었습니다."
             )
         else:
             summary["headline"] = (
-                "THEORY_CORE 핵심 이론 오류"
+                "검증된 핵심 기술 오류 보완 필요"
             )
             summary["overall"] = (
-                "핵심 이론 오류가 확인되었습니다. "
+                "검증된 핵심 기술 오류가 확인되었습니다. "
                 "현재 점수가 권장 ceiling보다 낮아 "
                 "추가적인 수치 cap은 적용되지 않았습니다."
             )
@@ -1303,6 +1303,13 @@ def _stage18b3_find_reconciliation(
 def _build_payload(
     grade: dict[str, Any],
 ) -> dict[str, Any]:
+    from verdict_consistency import (
+        enforce_final_decision_consistency,
+    )
+
+    grade = enforce_final_decision_consistency(
+        grade
+    )
     payload = _STAGE18B3_PREVIOUS_BUILD_PAYLOAD(
         grade
     )

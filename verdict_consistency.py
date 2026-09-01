@@ -126,6 +126,20 @@ def _logic_fatal(payload: Any) -> bool:
     return False
 
 
+def _logic_findings(payload: Any) -> list[dict[str, Any]]:
+    root = _dict(payload)
+    logic = _dict(
+        root.get("logic_check_evaluation")
+        or root.get("logic_check_result")
+        or root.get("logic_check")
+    )
+    return [
+        row
+        for row in _list(logic.get("findings"))
+        if isinstance(row, dict)
+    ]
+
+
 def _defects(payload: Any) -> list[dict[str, Any]]:
     contract = _contract(
         payload,
@@ -533,6 +547,43 @@ def reconcile_verdict_summary(
     )
 
     if signals["logic_fatal"]:
+        findings = _logic_findings(payload)
+        reasons = _dedupe_text(
+            [
+                _text(
+                    row.get("message")
+                    or row.get("evidence"),
+                    320,
+                )
+                for row in findings
+                if _text(
+                    row.get("message")
+                    or row.get("evidence"),
+                    320,
+                )
+            ],
+            limit=4,
+        )
+        corrections = _dedupe_text(
+            [
+                _text(row.get("correct_rule"), 360)
+                for row in findings
+                if _text(row.get("correct_rule"), 360)
+            ],
+            limit=4,
+        )
+        updated["headline"] = (
+            "검증된 핵심 기술 오류 보완 필요"
+        )
+        updated["overall"] = (
+            "검증된 핵심 기술 오류가 확인되었습니다. "
+            "현장 적용이나 답안 구조의 장점과 별개로 "
+            "해당 오류를 먼저 교정해야 합니다."
+        )
+        if reasons:
+            updated["key_reasons"] = reasons
+        if corrections:
+            updated["improvements"] = corrections
         updated["verdict_consistency"] = {
             "schema_version": VERDICT_CONSISTENCY_SCHEMA_VERSION,
             "marker": VERDICT_CONSISTENCY_MARKER,
@@ -774,6 +825,21 @@ def _restrict_coverage_full_credit(
             "verified_hard_error_present"
         ] = True
 
+        for key in (
+            "correctness_coverage_percent",
+            "weighted_coverage_percent",
+        ):
+            value = coverage.get(key)
+            try:
+                numeric = float(value)
+            except (TypeError, ValueError):
+                continue
+            if numeric >= 100.0:
+                coverage[key] = None
+                coverage[
+                    "verified_percentage_invalidated"
+                ] = True
+
 
 def enforce_final_decision_consistency(
     payload: Any,
@@ -831,6 +897,43 @@ def enforce_final_decision_consistency(
 
     if fatal_error:
         updated["passing_score_allowed"] = False
+        updated["confidence_ceiling"] = "medium"
+
+        confidence_rank = {
+            "low": 0,
+            "medium": 1,
+            "high": 2,
+        }
+        for key in (
+            "confidence",
+            "grade_confidence",
+            "confidence_level",
+        ):
+            value = updated.get(key)
+            normalized = _text(value, 40).lower()
+            if normalized not in confidence_rank:
+                continue
+            if confidence_rank[normalized] > confidence_rank["medium"]:
+                updated[key] = "medium"
+
+        fatal_summary = (
+            "검증된 핵심 기술 오류가 확인되었습니다. "
+            "현장 적용과 답안 구조의 장점과 별개로 "
+            "해당 오류를 먼저 교정해야 합니다."
+        )
+        for key in (
+            "summary",
+            "overall_comment",
+            "overall_summary",
+            "comment",
+            "rater_summary",
+        ):
+            if isinstance(updated.get(key), str):
+                updated[key] = fatal_summary
+
+        updated["verdict"] = (
+            "검증된 핵심 기술 오류 보완 필요"
+        )
 
         for key in (
             "official_pass_met",

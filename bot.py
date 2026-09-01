@@ -940,6 +940,14 @@ def format_result(parsed, sid=None):
     if not isinstance(parsed, dict):
         return "채점 결과 형식이 올바르지 않습니다."
 
+    from verdict_consistency import (
+        enforce_final_decision_consistency,
+    )
+
+    parsed = enforce_final_decision_consistency(
+        parsed
+    )
+
     compact_output = summarize_grade_for_telegram(parsed, call_ollama_fn=call_ollama)
     if compact_output:
         return compact_output
@@ -1061,6 +1069,13 @@ def format_result(parsed, sid=None):
             r_official_met = r.get("official_pass_met", float(r_total) >= float(r_official))
             r_practical_met = r.get("practical_target_met", float(r_total) >= float(r_practical))
             r_high_met = r.get("high_score_met", float(r_total) >= float(r_high))
+
+            if not pass_allowed:
+                r_official_met = False
+                r_practical_met = False
+                r_high_met = False
+            elif not strong_allowed:
+                r_high_met = False
 
             perspective = pick(
                 r.get("perspective"),
@@ -1203,6 +1218,14 @@ def _format_question_type_coverage_display(grade):
     if not isinstance(grade, dict):
         return ""
 
+    from verdict_consistency import (
+        enforce_final_decision_consistency,
+    )
+
+    grade = enforce_final_decision_consistency(
+        grade
+    )
+
     qtype_v2 = grade.get("question_type_v2")
     coverage_summary = grade.get("question_type_coverage_summary")
     adjustment = grade.get("question_type_coverage_score_adjustment")
@@ -1235,14 +1258,31 @@ def _format_question_type_coverage_display(grade):
     total_count = coverage_summary.get("sub_criteria_total", 0)
     present_count = coverage_summary.get("sub_criteria_present", 0)
     partial_count = coverage_summary.get("sub_criteria_partial", 0)
-    incorrect_count = coverage_summary.get("sub_criteria_incorrect", 0)
+    incorrect_count = coverage_summary.get(
+        "sub_criteria_wrong",
+        coverage_summary.get(
+            "sub_criteria_incorrect",
+            0,
+        ),
+    )
     missing_count = coverage_summary.get("sub_criteria_missing", 0)
 
     weighted_score = coverage_summary.get("weighted_coverage_score")
     weighted_percent = coverage_summary.get("weighted_coverage_percent")
+    correctness_percent = coverage_summary.get(
+        "correctness_coverage_percent",
+        weighted_percent,
+    )
+    mention_percent = coverage_summary.get(
+        "mention_coverage_percent"
+    )
 
     partial_criteria = coverage_summary.get("partial_criteria") or []
-    incorrect_criteria = coverage_summary.get("incorrect_criteria") or []
+    incorrect_criteria = (
+        coverage_summary.get("wrong_criteria")
+        or coverage_summary.get("incorrect_criteria")
+        or []
+    )
     missing_criteria = coverage_summary.get("missing_criteria") or []
 
     lines = []
@@ -1264,9 +1304,25 @@ def _format_question_type_coverage_display(grade):
             percent_text = "-"
             score_text = "-"
 
+        if mention_percent is not None:
+            try:
+                lines.append(
+                    "요구사항 언급률: "
+                    f"{float(mention_percent):.1f}%"
+                )
+            except (TypeError, ValueError):
+                lines.append("요구사항 언급률: -")
+
+        try:
+            correctness_text = (
+                f"{float(correctness_percent):.1f}%"
+            )
+        except (TypeError, ValueError):
+            correctness_text = percent_text
+
         lines.append(
-            "요구사항 충족률: "
-            f"{percent_text} (가중 {score_text})"
+            "요구사항 정확 충족률: "
+            f"{correctness_text} (가중 {score_text})"
         )
         lines.append(
             "상태: "

@@ -3278,7 +3278,7 @@ class Phase2PostprocessDiagnosticsRegressionTest(
             output.getvalue(),
         )
 
-    def test_phase2_question_extraction_failure_uses_input_text(
+    def test_phase2_question_extraction_failure_uses_canonical_question(
         self,
     ) -> None:
         import io
@@ -3388,16 +3388,13 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         self.assertIsInstance(result, dict)
         self.assertEqual(
             difficulty_questions,
-            [input_text],
+            ["제어밸브 액추에이터를 비교하시오."],
         )
-        self.assertIn(
-            (
-                "phase20 question extraction failed; "
-                "using input text"
-            ),
+        self.assertNotIn(
+            "phase20 question extraction failed",
             output.getvalue(),
         )
-        self.assertIn(
+        self.assertNotIn(
             "simulated question extraction failure",
             output.getvalue(),
         )

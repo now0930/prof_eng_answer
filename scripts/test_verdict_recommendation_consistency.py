@@ -223,7 +223,7 @@ class VerdictRecommendationConsistencyTests(
             improvements,
         )
 
-    def test_verified_logic_fatal_is_preserved(self):
+    def test_verified_logic_fatal_overrides_generic_wording(self):
         original = {
             "headline": "THEORY_CORE 핵심 이론 오류",
             "overall": "핵심 이론 오류가 확인되었습니다.",
@@ -236,11 +236,11 @@ class VerdictRecommendationConsistencyTests(
 
         self.assertEqual(
             result["headline"],
-            original["headline"],
+            "검증된 핵심 기술 오류 보완 필요",
         )
-        self.assertEqual(
+        self.assertIn(
+            "검증된 핵심 기술 오류",
             result["overall"],
-            original["overall"],
         )
         self.assertEqual(
             result["verdict_consistency"]["mode"],

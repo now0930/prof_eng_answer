@@ -281,7 +281,7 @@
       "demand_requirements": [],
       "logic_fatal": true,
       "initial_headline": "THEORY_CORE 핵심 이론 오류",
-      "expected_headline": "THEORY_CORE 핵심 이론 오류",
+      "expected_headline": "검증된 핵심 기술 오류 보완 필요",
       "required_improvement_fragments": [],
       "forbidden_fragments": []
     }

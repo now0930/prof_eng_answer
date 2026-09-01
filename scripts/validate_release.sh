@@ -93,6 +93,8 @@ python3 -m py_compile \
   scripts/validate_topic_pack_release.py \
   scripts/validate_release_test_coverage.py \
   scripts/validate_model_answer_relationships.py \
+  scripts/check_grading_integrity_drift.py \
+  scripts/replay_sil_issue1_session.py \
   scripts/rubric_audit/report_priority_minor_relationships.py \
   scripts/rubric_audit/audit_fact_anchor_quality.py \
   scripts/rubric_audit/build_rubric_work_pack.py \
@@ -197,6 +199,10 @@ python3 scripts/test_thermocouple_source_semantic_integrity.py
 echo
 echo "===== formatter regression tests ====="
 python3 -m unittest scripts.test_grade_output_formatter
+
+echo
+echo "===== Issue #1 SIL runtime replay regression ====="
+python3 tests/test_sil_runtime_replay.py
 
 echo
 echo "===== logic_check evaluator regression tests ====="
@@ -392,6 +398,10 @@ python3 -B scripts/test_control_valve_type_logic_regressions.py
 echo "----- host regression: cross topic calibration corpus -----"
 python3 -B scripts/test_cross_topic_calibration_corpus.py
 
+echo "----- host regression: grading integrity semantic drift -----"
+python3 -B scripts/check_grading_integrity_drift.py
+python3 -B tests/test_grading_integrity_drift.py
+
 echo "----- host regression: deterministic llm sampling -----"
 python3 -B scripts/test_deterministic_llm_sampling.py
 
@@ -502,6 +512,12 @@ python3 -B scripts/test_question_demand_contract.py
 python3 -B tests/test_stage35d_topic_pack_demand_bridge.py
 # STAGE35E2_PROVIDER_PROJECTION_LENS_REGRESSION_V1
 python3 -B tests/test_stage35e2_provider_eight_axis_canonical_lens.py
+python3 -B tests/test_sil_target_operations_regression_contract.py
+python3 -B tests/test_submission_boundary_fail_closed.py
+python3 -B tests/test_sil_target_topic_pack_routing.py
+python3 -B tests/test_sil_relation_integrity.py
+python3 -B tests/test_sil_requirement_coverage.py
+python3 -B tests/test_sil_output_consistency.py
 python3 -B scripts/test_question_type_de_policy.py
 
 echo "----- host regression: qtype golden complete contract -----"

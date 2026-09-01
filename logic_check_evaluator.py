@@ -2555,6 +2555,14 @@ def evaluate_logic_checks(
             "fatal_count": 0,
         },
     }
+    sil_relation_integrity_evaluation = {
+        "version": "sil_relation_integrity_v1",
+        "marker": "SIL_RELATION_INTEGRITY_V1",
+        "applicable": False,
+        "status": "not_applicable",
+        "fatal_error_detected": False,
+        "findings": [],
+    }
 
 
     # LOGIC_CHECK_PREFERRED_TOPIC_PATCH
@@ -2941,6 +2949,61 @@ def evaluate_logic_checks(
                     point,
                 )
 
+        if (
+            str(topic_id or "").strip()
+            == "sil_target_determination_risk_reduction_and_lifecycle"
+        ):
+            from sil_relation_integrity import (
+                evaluate_sil_relation_integrity,
+            )
+
+            sil_relation_integrity_evaluation = (
+                evaluate_sil_relation_integrity(
+                    answer_text
+                )
+            )
+            for relation_finding in (
+                sil_relation_integrity_evaluation.get(
+                    "findings"
+                )
+                or []
+            ):
+                if not isinstance(
+                    relation_finding,
+                    dict,
+                ):
+                    continue
+                relation_finding = dict(
+                    relation_finding
+                )
+                rule_id = str(
+                    relation_finding.get("rule_id")
+                    or relation_finding.get(
+                        "source_rule_id"
+                    )
+                    or ""
+                ).strip()
+                if any(
+                    isinstance(existing, dict)
+                    and rule_id
+                    and rule_id
+                    in {
+                        str(
+                            existing.get("rule_id")
+                            or ""
+                        ).strip(),
+                        str(
+                            existing.get(
+                                "source_rule_id"
+                            )
+                            or ""
+                        ).strip(),
+                    }
+                    for existing in findings
+                ):
+                    continue
+                findings.append(relation_finding)
+
         if not topic_check_enabled:
             break
 
@@ -3237,6 +3300,9 @@ def evaluate_logic_checks(
         "mode": mode,
         "fatal_error_detected": fatal_error_detected,
         "findings": findings,
+        "sil_relation_integrity_evaluation": (
+            sil_relation_integrity_evaluation
+        ),
         "canonical_axis_alignment_evaluation": (
             canonical_axis_alignment_evaluation
         ),

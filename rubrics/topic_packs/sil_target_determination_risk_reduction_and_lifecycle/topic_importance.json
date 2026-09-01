@@ -1,0 +1,23 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "SIS·SIF·SIL 경계와 target SIL·achieved SIL을 구분한다.",
+    "위험 시나리오와 조직의 허용위험 기준을 명시한다.",
+    "SIL 결정 방법을 입력자료와 불확실성 수준에 맞게 선정한다.",
+    "기존 IPL의 독립성·공통원인·이중계산을 검토한다.",
+    "F_residual/F_tolerable과 그 역수인 PFDavg_target 관계를 차원에 맞게 제시한다.",
+    "Demand mode를 요구빈도로 구분하고 PFDavg와 PFH를 선택한다.",
+    "Proof test·PST·diagnostics의 coverage와 repair 역할을 구분한다.",
+    "SRS·운전기록·MOC·보안·AI 변경을 재검증과 traceability에 연결한다."
+  ],
+  "note": "목표 SIL 결정의 위험분석, 요구 RRF, 성능지표 선택과 플랜트 수명주기 인계를 함께 평가하는 범용 핵심 Topic이다.",
+  "revision_notes": [
+    "Issue #1 SIL 결정 사례의 과대채점 회귀를 방지하기 위한 범용 목표 SIL Topic으로 신설했다.",
+    "LOPA 상세, 신뢰도 모델링, final element와 안전 software의 인접 Topic ownership을 명시했다."
+  ],
+  "topic_label": "목표 SIL 결정·위험감소·안전수명주기"
+}

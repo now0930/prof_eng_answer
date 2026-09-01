@@ -1,0 +1,200 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+  "title_ko": "목표 SIL 결정·요구 위험감소·플랜트 안전수명주기",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "expected_question_patterns": [
+    {
+      "intent": "목표 SIL 결정의 전체 위험감소 흐름과 운전·시험·변경관리·AI·보안 연계를 평가한다.",
+      "pattern": "SIL 결정 방법을 설명하고 이를 실제 플랜트 운영 및 최신 산업 이슈와 연계하여 설명하시오.",
+      "required_anchor_ids": [
+        "sis_sif_sil_scope",
+        "method_selection",
+        "required_rrf_relation",
+        "target_pfd_relation",
+        "demand_mode_metric_selection",
+        "achieved_sil_verification",
+        "operations_moc_revalidation",
+        "cyber_ai_safety_boundary"
+      ]
+    },
+    {
+      "intent": "시나리오 잔여빈도와 허용빈도로 요구 RRF와 목표 SIL을 산정하는 능력을 평가한다.",
+      "pattern": "허용위험과 기존 보호계층을 고려하여 요구 위험감소율과 목표 SIL을 결정하는 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "hazard_scenario_boundary",
+        "tolerable_risk_alarp",
+        "existing_ipl_independence",
+        "residual_frequency_before_sif",
+        "required_rrf_relation",
+        "sil_band_mapping"
+      ]
+    },
+    {
+      "intent": "SIL 결정 방법의 데이터 수준, 불확실성과 적용범위를 비교한다.",
+      "pattern": "Risk graph, LOPA 및 QRA에 의한 SIL 결정 방법을 비교하시오.",
+      "required_anchor_ids": [
+        "method_selection",
+        "hazard_scenario_boundary",
+        "tolerable_risk_alarp",
+        "existing_ipl_independence"
+      ]
+    },
+    {
+      "intent": "Demand mode, 목표 성능지표와 achieved SIL 정량검증을 평가한다.",
+      "pattern": "Demand mode에 따른 PFDavg와 PFH의 선택 및 목표 SIL 검증방법을 설명하시오.",
+      "required_anchor_ids": [
+        "demand_mode_metric_selection",
+        "target_pfd_relation",
+        "sil_band_mapping",
+        "achieved_sil_verification"
+      ]
+    }
+  ],
+  "recommended_outline": [
+    {
+      "anchor_refs": [
+        "sis_sif_sil_scope",
+        "hazard_scenario_boundary"
+      ],
+      "intent": "SIS·SIF·SIL의 역할과 위험 시나리오별 safe state를 확정한다.",
+      "section": "Context와 SIF 범위"
+    },
+    {
+      "anchor_refs": [
+        "tolerable_risk_alarp",
+        "method_selection"
+      ],
+      "intent": "위험수용기준과 데이터 수준에 맞는 SIL 결정 방법을 선정한다.",
+      "section": "허용위험과 결정 방법"
+    },
+    {
+      "anchor_refs": [
+        "initiating_frequency_modifiers",
+        "existing_ipl_independence",
+        "residual_frequency_before_sif"
+      ],
+      "intent": "기초빈도와 적격한 기존 IPL만 반영하여 SIF 전 잔여빈도를 구한다.",
+      "section": "기초빈도와 기존 IPL"
+    },
+    {
+      "anchor_refs": [
+        "required_rrf_relation",
+        "target_pfd_relation",
+        "sil_band_mapping"
+      ],
+      "intent": "빈도의 비로 요구 RRF와 목표 PFDavg를 구하고 SIL band에 매핑한다.",
+      "section": "요구 RRF와 목표 SIL"
+    },
+    {
+      "anchor_refs": [
+        "demand_mode_metric_selection",
+        "achieved_sil_verification"
+      ],
+      "intent": "요구빈도로 mode와 지표를 선택하고 전체 SIF의 achieved SIL을 검증한다.",
+      "section": "Demand mode와 정량검증"
+    },
+    {
+      "anchor_refs": [
+        "proof_test_pst_role"
+      ],
+      "intent": "Diagnostics·PST·full proof test의 coverage와 repair 역할을 구분한다.",
+      "section": "Diagnostics와 proof test"
+    },
+    {
+      "anchor_refs": [
+        "srs_lifecycle_handoff",
+        "operations_moc_revalidation"
+      ],
+      "intent": "SRS, 운전기록, bypass와 변경사항을 SIL 재검증에 연결한다.",
+      "section": "운전·MOC와 재검증"
+    },
+    {
+      "anchor_refs": [
+        "cyber_ai_safety_boundary"
+      ],
+      "intent": "보안·AI 변경을 기능안전의 무결성·독립검증·추적성 경계 안에서 관리한다.",
+      "section": "보안·AI 최신 이슈"
+    }
+  ],
+  "high_score_points": [
+    "시나리오 경계와 허용위험에서 기존 IPL 적용 후 잔여위험을 산정한다.",
+    "RRF_required = F_residual/F_tolerable과 PFDavg_target <= 1/RRF_required를 차원에 맞게 설명한다.",
+    "Risk graph·LOPA·QRA의 적용수준과 불확실성을 구분한다.",
+    "Demand mode에 따라 PFDavg 또는 PFH를 선택하고 target과 achieved SIL을 구분한다.",
+    "Proof test·PST·diagnostics·repair·CCF 가정을 정량검증과 연결한다.",
+    "SRS, 운전기록, MOC와 OT 보안·AI 변경을 독립 V&V와 재검증으로 연결한다."
+  ],
+  "common_missing_points": [
+    "SIL을 개별 SIF의 위험감소 요구가 아니라 SIS 또는 인증 부품의 등급으로만 설명한다.",
+    "허용위험과 기존 IPL을 반영한 잔여 사건빈도 없이 SIL band부터 선택한다.",
+    "RRF와 PFDavg 관계의 방향 또는 단위를 확인하지 않는다.",
+    "Demand mode를 요구빈도가 아닌 고장 검출시점으로 구분한다.",
+    "Target SIL과 achieved SIL 및 정량검증 가정을 구분하지 않는다.",
+    "PST가 full proof test를 대체하거나 MTTR을 자동 단축한다고 설명한다.",
+    "운전기록·MOC·재검증 없이 설치시점 인증만 제시한다.",
+    "AI·보안을 기능안전 V&V와 추적성에 연결하지 않고 전망만 나열한다."
+  ],
+  "routing_aliases": [
+    "SIL 결정 방법",
+    "목표 SIL 결정",
+    "SIL target determination",
+    "SIL 결정과 플랜트 운영",
+    "SIL 결정과 최신 산업 이슈",
+    "SIL 결정 방법 및 실제 플랜트 운영",
+    "요구 위험감소율과 목표 SIL",
+    "Risk graph LOPA SIL 결정",
+    "목표 SIL과 달성 SIL 검증",
+    "SIL 결정 안전수명주기"
+  ],
+  "routing_field_points": [
+    "위험 시나리오→허용위험→기존 IPL→잔여빈도→요구 RRF→목표 SIL",
+    "Demand mode→PFDavg 또는 PFH→achieved SIL 정량검증",
+    "SRS→proof test→운전기록→MOC→재검증",
+    "OT 보안·AI 변경→무결성→독립 V&V→traceability",
+    "Risk graph·LOPA·QRA 선정→입력자료 수준→불확실성 검토"
+  ],
+  "revision_notes": [
+    "Issue #1의 일반 SIL 결정·플랜트 운영 문제를 독립적으로 소유한다.",
+    "LOPA 상세, 신뢰도 모델과 final element 시험은 인접 Topic으로 인계한다."
+  ],
+  "id": "sil_target_determination_risk_reduction_and_lifecycle_IMPLEMENTATION_EVALUATION_v1",
+  "title": "목표 SIL 결정·요구 위험감소·플랜트 안전수명주기",
+  "question_examples": [
+    "SIL 결정 방법을 설명하고 이를 실제 플랜트 운영 및 최신 산업 이슈와 연계하여 설명하시오.",
+    "허용위험과 기존 보호계층을 고려하여 요구 위험감소율과 목표 SIL을 결정하는 방법을 설명하시오.",
+    "Risk graph, LOPA 및 QRA에 의한 SIL 결정 방법을 비교하시오.",
+    "Demand mode에 따른 PFDavg와 PFH의 선택 및 목표 SIL 검증방법을 설명하시오."
+  ],
+  "topic_aliases": [
+    "SIL 결정 방법",
+    "목표 SIL 결정",
+    "SIL target determination",
+    "요구 위험감소율과 목표 SIL"
+  ],
+  "expected_structure": [
+    "Context와 SIF 범위",
+    "허용위험과 결정 방법",
+    "기초빈도와 기존 IPL",
+    "요구 RRF와 목표 SIL",
+    "Demand mode와 정량검증",
+    "Diagnostics와 proof test",
+    "운전·MOC와 재검증",
+    "보안·AI 최신 이슈"
+  ],
+  "high_score_features": [
+    "위험분석에서 목표 SIL을 정하고 설계계산에서 achieved SIL을 검증하는 두 활동을 구분한다.",
+    "RRF_required와 PFDavg_target 관계를 차원과 부등호 방향까지 정확히 제시한다.",
+    "운전·시험·변경·보안·AI 이슈를 SRS와 재검증 evidence로 연결한다."
+  ],
+  "low_score_patterns": [
+    "SIL·SIS·SIF 및 PFDavg·PFH 용어만 나열하고 위험감소 계산 흐름을 제시하지 않는다.",
+    "잘못된 수식이나 demand mode 정의를 사용하면서 현장 적용 항목으로 이를 상쇄한다.",
+    "인증서 또는 AI·보안 전망만 제시하고 검증 가능한 lifecycle 통제를 설명하지 않는다."
+  ],
+  "field_connection_points": [
+    "Proof-test interval과 coverage는 인증 문구가 아니라 실제 SIF PFDavg 계산 및 운전제약으로 정한다.",
+    "As-found failure, bypass, demand와 spurious trip 자료를 periodic review와 MOC 재검증에 사용한다.",
+    "AI 생성 코드와 OT 보안 변경은 승인된 배포경계, 독립 V&V, rollback과 traceability를 유지한다."
+  ]
+}

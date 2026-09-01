@@ -349,3 +349,25 @@ headSha == local HEAD
 ```
 
 GitHub runner의 action runtime deprecation warning은 job failure와 구분한다. 실제 `conclusion`과 failed step을 기준으로 판단한다.
+
+## 17. 채점 의미 drift 점검
+
+Issue #1 계열 변경이나 배포 전에는 Topic·기술관계·최종 출력의 의미 기준선을 확인한다.
+
+```bash
+cd ~/hermes/workspace/prof_eng_answer
+
+python3 -B scripts/check_grading_integrity_drift.py \
+  --report /tmp/grading_integrity_drift_report.json
+python3 -B tests/test_sil_runtime_replay.py
+```
+
+정상 기준:
+
+- `status`가 `PASS`
+- `semantic_sha256`가 committed baseline과 일치
+- SIL 원본은 fatal, 교정본은 valid
+- HAZOP/LOPA·PST·MC/DC 이웃 문항에 Issue #1 Topic이 누출되지 않음
+- Telegram 투영에서 `strong`, `100%`, 잘못된 정확성 칭찬이 없음
+
+실패 해석과 기준선 변경 절차는 [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md)를 따른다.
