@@ -54,8 +54,8 @@ def test_vmodel_has_one_ledger_row_per_atomic_requirement() -> None:
     assert [row["requirement_index"] for row in ledger["rows"]] == [1, 2, 3, 4]
     assert ledger["summary"]["status_counts"] == {
         "unknown": 0,
-        "correct": 0,
-        "partial": 3,
+        "correct": 2,
+        "partial": 1,
         "missing": 1,
         "incorrect": 0,
     }

@@ -1,0 +1,75 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "fieldbus"
+      ],
+      [
+        "industrial ethernet",
+        "산업용 이더넷"
+      ],
+      [
+        "산업용 무선",
+        "wireless"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "CS_HIGH_D1",
+      "demand_kind": "COMPARE",
+      "demand_label": "Fieldbus, Industrial Ethernet, 산업용 무선을 기능·환경·성능 관점에서 비교한다.",
+      "requirement_text": "Fieldbus, Industrial Ethernet, 산업용 무선을 기능·환경·성능 관점에서 비교한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-HIGH-01/0"
+      ]
+    },
+    {
+      "requirement_id": "CS_HIGH_D2",
+      "demand_kind": "COMPARE",
+      "demand_label": "같은 Ethernet 물리매체와 protocol/profile/information model의 상호운용성을 구분한다.",
+      "requirement_text": "같은 Ethernet 물리매체와 protocol/profile/information model의 상호운용성을 구분한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-HIGH-01/1"
+      ]
+    },
+    {
+      "requirement_id": "CS_HIGH_D3",
+      "demand_kind": "COMPARE",
+      "demand_label": "데이터, 거리, 환경, 가용성, 진단과 수명주기 요구를 선정 입력조건으로 정의한다.",
+      "requirement_text": "데이터, 거리, 환경, 가용성, 진단과 수명주기 요구를 선정 입력조건으로 정의한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-HIGH-01/2"
+      ]
+    },
+    {
+      "requirement_id": "CS_HIGH_D4",
+      "demand_kind": "COMPARE",
+      "demand_label": "기존 installed base와 신규 설비 사이 Gateway 및 engineering compatibility를 평가한다.",
+      "requirement_text": "기존 installed base와 신규 설비 사이 Gateway 및 engineering compatibility를 평가한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-HIGH-01/3"
+      ]
+    },
+    {
+      "requirement_id": "CS_HIGH_D5",
+      "demand_kind": "COMPARE",
+      "demand_label": "공급자 지원, 교육, 예비품, 라이선스, 확장성과 총수명주기비용을 다기준 선정에 반영한다.",
+      "requirement_text": "공급자 지원, 교육, 예비품, 라이선스, 확장성과 총수명주기비용을 다기준 선정에 반영한다.",
+      "is_core": false,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-HIGH-01/4"
+      ]
+    }
+  ],
+  "canonical_primary_lens": "COMPARE_SELECTION"
+}

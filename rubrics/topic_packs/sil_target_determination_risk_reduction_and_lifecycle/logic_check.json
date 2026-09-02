@@ -47,6 +47,41 @@
         "SRS MOC revalidation"
       ]
     },
+    "authoritative_structured_rules": [
+      {
+        "rule_id": "fatal_demand_mode_by_fault_detection",
+        "pattern": "(?!PFH.{0,500}(?:아니|않|혼동|잘못))PFH.{0,80}(?:High\\s*Demand|고수요).{0,100}고장\\s*즉시.{0,180}PFD.{0,80}(?:Low\\s*Demand|저수요).{0,140}(?:점검\\s*주기|점검할\\s*때).{0,80}(?:알\\s*수\\s*없|모른)",
+        "render": "Demand mode를 고장 검출시점으로 구분함",
+        "message": "High/low demand를 고장 검출시점으로 구분하여 SIL 지표 선택 개념을 혼동했습니다.",
+        "correct_rule": "Demand mode는 안전기능 요구빈도와 연속운전 여부로 구분하며, 검출 여부는 diagnostics 문제입니다.",
+        "affected_layers": ["C", "D"],
+        "recommended_ceiling": 14.5,
+        "anchor_refs": ["demand_mode_metric_selection"],
+        "demand_refs": ["demand_mode_metric_selection"]
+      },
+      {
+        "rule_id": "fatal_pst_replaces_full_test_or_reduces_mttr",
+        "pattern": "(?!PST.{0,200}(?:아니|않|별도|오인|혼동))PST.{0,120}MTTR.{0,30}(?:축소|감소|단축)",
+        "render": "PST로 MTTR을 축소함",
+        "message": "PST의 부분 고장 검출효과를 수리시간 자동 단축으로 혼동했습니다.",
+        "correct_rule": "PST는 검출 가능한 일부 고장에만 credit하며 full proof test와 실제 수리시간은 별도로 관리합니다.",
+        "affected_layers": ["C", "D"],
+        "recommended_ceiling": 14.5,
+        "anchor_refs": ["proof_test_pst_role", "achieved_sil_verification"],
+        "demand_refs": ["proof_test_diagnostics_reliability"]
+      },
+      {
+        "rule_id": "fatal_certificate_interval_as_operating_minimum",
+        "pattern": "인증.{0,80}(?:주기|수준).{0,80}보다\\s*짧게.{0,60}이유(?:는|가)?\\s*없",
+        "render": "인증 수준보다 짧게 점검할 이유가 없음",
+        "message": "인증서의 시험주기 가정을 현장 운전의 최소 시험주기로 오인했습니다.",
+        "correct_rule": "현장 proof-test interval은 실제 SIF 계산, 고장자료, coverage와 운전조건으로 정합니다.",
+        "affected_layers": ["C", "D", "E"],
+        "recommended_ceiling": 14.5,
+        "anchor_refs": ["achieved_sil_verification", "operations_moc_revalidation"],
+        "demand_refs": ["proof_test_diagnostics_reliability", "operations_moc_security_ai_lifecycle"]
+      }
+    ],
     "truth_schema": [
       "SIL은 위험 시나리오별 개별 SIF에 요구되는 안전무결성 수준이며 SIS 전체나 부품 인증등급과 동일하지 않다.",
       "목표 SIL은 명확한 initiating event, consequence, 운전조건과 safe state를 가진 시나리오별로 결정한다.",

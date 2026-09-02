@@ -1,0 +1,76 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "스트레인 게이지",
+        "strain gauge"
+      ],
+      [
+        "로드셀",
+        "load cell"
+      ],
+      [
+        "휘트스톤",
+        "wheatstone"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "PI_HIGH_D1",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "R=ρL/A에 따른 변형-저항 변환 원리를 설명한다.",
+      "requirement_text": "R=ρL/A에 따른 변형-저항 변환 원리를 설명한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-HIGH-01/0"
+      ]
+    },
+    {
+      "requirement_id": "PI_HIGH_D2",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "변형률과 게이지율 GF=(ΔR/R)/ε의 의미를 설명한다.",
+      "requirement_text": "변형률과 게이지율 GF=(ΔR/R)/ε의 의미를 설명한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-HIGH-01/1"
+      ]
+    },
+    {
+      "requirement_id": "PI_HIGH_D3",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "로드셀의 탄성체 변형과 휘트스톤 브리지 차동출력의 측정 체인을 연결한다.",
+      "requirement_text": "로드셀의 탄성체 변형과 휘트스톤 브리지 차동출력의 측정 체인을 연결한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-HIGH-01/2"
+      ]
+    },
+    {
+      "requirement_id": "PI_HIGH_D4",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "브리지 구성에 따른 감도 증가와 공통 온도영향 보상 원리를 설명한다.",
+      "requirement_text": "브리지 구성에 따른 감도 증가와 공통 온도영향 보상 원리를 설명한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-HIGH-01/3"
+      ]
+    },
+    {
+      "requirement_id": "PI_HIGH_D5",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "온도·설치·크리프·히스테리시스·영점 등 주요 오차를 출력 영향과 보상 방법에 연결한다.",
+      "requirement_text": "온도·설치·크리프·히스테리시스·영점 등 주요 오차를 출력 영향과 보상 방법에 연결한다.",
+      "is_core": false,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-HIGH-01/4"
+      ]
+    }
+  ],
+  "canonical_primary_lens": "PRINCIPLE_INTERPRETATION"
+}

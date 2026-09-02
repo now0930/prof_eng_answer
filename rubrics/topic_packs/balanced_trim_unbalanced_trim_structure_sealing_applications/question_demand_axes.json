@@ -1,0 +1,60 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "balanced trim"
+      ],
+      [
+        "unbalanced trim"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "CS_LOW_D1",
+      "demand_kind": "COMPARE",
+      "demand_label": "Balanced와 Unbalanced trim의 구조 및 pressure path 차이를 비교한다.",
+      "requirement_text": "Balanced와 Unbalanced trim의 구조 및 pressure path 차이를 비교한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-LOW-01/0"
+      ]
+    },
+    {
+      "requirement_id": "CS_LOW_D2",
+      "demand_kind": "COMPARE",
+      "demand_label": "유효면적과 차압이 net force 또는 residual force에 미치는 차이를 비교한다.",
+      "requirement_text": "유효면적과 차압이 net force 또는 residual force에 미치는 차이를 비교한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-LOW-01/1"
+      ]
+    },
+    {
+      "requirement_id": "CS_LOW_D3",
+      "demand_kind": "COMPARE",
+      "demand_label": "Balanced seal의 마찰·누설·service limitation과 Unbalanced 구조의 장단점을 함께 비교한다.",
+      "requirement_text": "Balanced seal의 마찰·누설·service limitation과 Unbalanced 구조의 장단점을 함께 비교한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-LOW-01/2"
+      ]
+    },
+    {
+      "requirement_id": "CS_LOW_D4",
+      "demand_kind": "COMPARE",
+      "demand_label": "차압, shutoff, actuator force, sealing 및 service 조건을 근거로 선정 판단을 제시한다.",
+      "requirement_text": "차압, shutoff, actuator force, sealing 및 service 조건을 근거로 선정 판단을 제시한다.",
+      "is_core": false,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-LOW-01/3"
+      ]
+    }
+  ],
+  "canonical_primary_lens": "COMPARE_SELECTION"
+}

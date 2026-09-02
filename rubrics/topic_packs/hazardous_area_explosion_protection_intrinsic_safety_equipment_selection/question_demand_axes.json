@@ -1,0 +1,61 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "zone 0"
+      ],
+      [
+        "위험장소",
+        "hazardous area"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "CS_PASS_D1",
+      "demand_kind": "COMPARE",
+      "demand_label": "Zone 0·1·2를 폭발성 가스 분위기의 존재 가능성과 지속시간 관점에서 비교한다.",
+      "requirement_text": "Zone 0·1·2를 폭발성 가스 분위기의 존재 가능성과 지속시간 관점에서 비교한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-PASS-01/0"
+      ]
+    },
+    {
+      "requirement_id": "CS_PASS_D2",
+      "demand_kind": "COMPARE",
+      "demand_label": "Zone별 요구 EPL 수준을 비교하여 Zone 1의 후보 보호수준을 제시한다.",
+      "requirement_text": "Zone별 요구 EPL 수준을 비교하여 Zone 1의 후보 보호수준을 제시한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-PASS-01/1"
+      ]
+    },
+    {
+      "requirement_id": "CS_PASS_D3",
+      "demand_kind": "COMPARE",
+      "demand_label": "Zone 외에 가스 그룹, 온도등급, 인증조건, 설치조건과 회로 적합성을 선정기준으로 연결한다.",
+      "requirement_text": "Zone 외에 가스 그룹, 온도등급, 인증조건, 설치조건과 회로 적합성을 선정기준으로 연결한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-PASS-01/2"
+      ]
+    },
+    {
+      "requirement_id": "CS_PASS_D4",
+      "demand_kind": "COMPARE",
+      "demand_label": "본질안전 적용 시 현장기기와 associated apparatus의 회로 적합성 검토 필요성을 설명한다.",
+      "requirement_text": "본질안전 적용 시 현장기기와 associated apparatus의 회로 적합성 검토 필요성을 설명한다.",
+      "is_core": false,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/compare_selection.json#/QG-CS-PASS-01/3"
+      ]
+    }
+  ],
+  "canonical_primary_lens": "COMPARE_SELECTION"
+}

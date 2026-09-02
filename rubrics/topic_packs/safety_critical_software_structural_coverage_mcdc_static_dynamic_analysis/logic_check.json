@@ -62,6 +62,17 @@
         "requirements based testing"
       ]
     },
+    "authoritative_structured_rules": [
+      {
+        "rule_id": "sil_four_universal_rule",
+        "pattern": "SIL\\s*(?:3\\s*/\\s*4|4).{0,100}MC/DC\\s*100%(?![^\\n.!?]{0,140}(?:적용\\s*표준|개발\\s*범위|조건|일률|아니|않|따라))",
+        "render": "SIL 3/4의 MC/DC 100%",
+        "message": "산업표준과 개발범위의 조건 없이 SIL 등급만으로 MC/DC 100%를 보편 요구했습니다.",
+        "correct_rule": "MC/DC 적용수준은 산업별 표준, Systematic Capability, 자체개발 코드 범위와 Safety Plan으로 결정합니다.",
+        "affected_layers": ["C", "D"],
+        "recommended_ceiling": 14.5
+      }
+    ],
     "truth_schema": [
       "MC/DC는 복합 Boolean Decision에서 각 원자 조건이 다른 조건의 영향과 구분되어 Decision 결과에 독립적으로 영향을 미치는지를 입증하는 구조적 커버리지 기준이다.",
       "구조적 커버리지는 구현된 코드 구조가 시험되었는지를 측정하고 요구사항 커버리지는 각 요구가 시험과 결과로 검증되었는지를 확인하므로 두 증거는 상호보완적이며 서로 대체하지 않는다.",

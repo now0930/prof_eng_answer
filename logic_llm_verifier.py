@@ -1156,7 +1156,7 @@ def _authoritative_structured_findings(
         ceiling = rule.get("recommended_ceiling")
         if not isinstance(ceiling, (int, float)) or isinstance(ceiling, bool):
             ceiling = default_ceiling
-        findings.append({
+        finding = {
             "id": f"structured_{rule_id}",
             "rule_id": rule_id,
             "source_rule_id": rule_id,
@@ -1168,7 +1168,16 @@ def _authoritative_structured_findings(
             "engine": "authoritative_structured_relation_v1",
             "confidence": 1.0,
             "recommended_ceiling": float(ceiling),
-        })
+        }
+        for reference_key in ("anchor_refs", "demand_refs"):
+            references = rule.get(reference_key)
+            if isinstance(references, list):
+                finding[reference_key] = [
+                    str(value).strip()
+                    for value in references
+                    if str(value).strip()
+                ]
+        findings.append(finding)
     return findings
 
 

@@ -1,0 +1,70 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "plc",
+        "dcs"
+      ],
+      [
+        "release"
+      ],
+      [
+        "backup"
+      ],
+      [
+        "rollback"
+      ],
+      [
+        "regression"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "D1",
+      "demand_kind": "IMPLEMENT",
+      "demand_label": "변경 적용 전 영향분석과 승인된 Baseline을 포함한 적용 판단을 제시한다.",
+      "requirement_text": "변경 적용 전 영향분석과 승인된 Baseline을 포함한 적용 판단을 제시한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/implementation_evaluation.json#/QG-IE-LOW-01/0"
+      ]
+    },
+    {
+      "requirement_id": "D2",
+      "demand_kind": "IMPLEMENT",
+      "demand_label": "Release, Backup, Restore 또는 Rollback을 포함한 구현 조건과 절차를 제시한다.",
+      "requirement_text": "Release, Backup, Restore 또는 Rollback을 포함한 구현 조건과 절차를 제시한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/implementation_evaluation.json#/QG-IE-LOW-01/1"
+      ]
+    },
+    {
+      "requirement_id": "D3",
+      "demand_kind": "IMPLEMENT",
+      "demand_label": "Regression 및 현장 인수 기준을 포함한 검증 방법을 제시한다.",
+      "requirement_text": "Regression 및 현장 인수 기준을 포함한 검증 방법을 제시한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/implementation_evaluation.json#/QG-IE-LOW-01/2"
+      ]
+    },
+    {
+      "requirement_id": "D4",
+      "demand_kind": "IMPLEMENT",
+      "demand_label": "적용 후 As-built 일치, 기록, 유지관리 및 재적용 통제를 제시한다.",
+      "requirement_text": "적용 후 As-built 일치, 기록, 유지관리 및 재적용 통제를 제시한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/implementation_evaluation.json#/QG-IE-LOW-01/3"
+      ]
+    }
+  ],
+  "canonical_primary_lens": "IMPLEMENTATION_EVALUATION"
+}

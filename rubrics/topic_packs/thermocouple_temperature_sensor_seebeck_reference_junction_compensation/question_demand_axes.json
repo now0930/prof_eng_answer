@@ -1,0 +1,52 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "열전대",
+        "thermocouple"
+      ],
+      [
+        "기준접점",
+        "reference junction"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "PI_LOW_D1",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "이종 도체와 온도차에 의한 Seebeck 열기전력 발생 원리를 설명한다.",
+      "requirement_text": "이종 도체와 온도차에 의한 Seebeck 열기전력 발생 원리를 설명한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-LOW-01/0"
+      ]
+    },
+    {
+      "requirement_id": "PI_LOW_D2",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "열전대가 측정접점과 기준접점의 온도차를 측정하므로 기준접점 보상이 필요함을 설명한다.",
+      "requirement_text": "열전대가 측정접점과 기준접점의 온도차를 측정하므로 기준접점 보상이 필요함을 설명한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-LOW-01/1"
+      ]
+    },
+    {
+      "requirement_id": "PI_LOW_D3",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "열기전력 측정에서 기준접점 보상과 선형화를 거쳐 온도로 환산되는 측정 체인을 연결한다.",
+      "requirement_text": "열기전력 측정에서 기준접점 보상과 선형화를 거쳐 온도로 환산되는 측정 체인을 연결한다.",
+      "is_core": false,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-LOW-01/2"
+      ]
+    }
+  ],
+  "canonical_primary_lens": "PRINCIPLE_INTERPRETATION"
+}

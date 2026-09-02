@@ -1,0 +1,63 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "rtd",
+        "pt100"
+      ],
+      [
+        "2선식",
+        "3선식",
+        "4선식"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "PI_PASS_D1",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "금속 저항의 온도 의존성과 Pt100 기준을 측정 원리와 연결한다.",
+      "requirement_text": "금속 저항의 온도 의존성과 Pt100 기준을 측정 원리와 연결한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-PASS-01/0"
+      ]
+    },
+    {
+      "requirement_id": "PI_PASS_D2",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "2선식 리드선 저항 오차와 3선식의 보상 성립조건을 설명한다.",
+      "requirement_text": "2선식 리드선 저항 오차와 3선식의 보상 성립조건을 설명한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-PASS-01/1"
+      ]
+    },
+    {
+      "requirement_id": "PI_PASS_D3",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "4선식에서 전류선과 전압검출선을 분리하여 리드선 저항 영향을 최소화하는 원리를 설명한다.",
+      "requirement_text": "4선식에서 전류선과 전압검출선을 분리하여 리드선 저항 영향을 최소화하는 원리를 설명한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-PASS-01/2"
+      ]
+    },
+    {
+      "requirement_id": "PI_PASS_D4",
+      "demand_kind": "PRINCIPLE_INTERPRET",
+      "demand_label": "측정전류에 의한 자기발열 등 실제 측정 오차를 원리와 연결한다.",
+      "requirement_text": "측정전류에 의한 자기발열 등 실제 측정 오차를 원리와 연결한다.",
+      "is_core": false,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/principle_interpretation.json#/QG-PI-PASS-01/3"
+      ]
+    }
+  ],
+  "canonical_primary_lens": "PRINCIPLE_INTERPRETATION"
+}

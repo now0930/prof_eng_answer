@@ -18,8 +18,10 @@ EVALUATION_LEDGER_SCHEMA_VERSION = "1.0"
 EVALUATION_LEDGER_MARKER = "CANONICAL_EVALUATION_LEDGER_V1"
 
 _STATUSES = {
-    # Presence proves mention/coverage only; it is not correctness evidence.
-    "present": "partial",
+    # The semantic grader uses ``present`` only after checking the requirement
+    # against answer evidence.  Verified defects remain the canonical
+    # correctness owner and override this projection below.
+    "present": "correct",
     "correct": "correct",
     "partial": "partial",
     "incorrect": "incorrect",

@@ -1,0 +1,66 @@
+{
+  "schema_version": "topic_pack_question_demand_axes_v1",
+  "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+  "mode": "question_only_deterministic",
+  "score_effect": "semantic_guidance_only",
+  "answer_text_dependency": "none",
+  "activation": {
+    "all_term_groups": [
+      [
+        "제어밸브",
+        "control valve"
+      ],
+      [
+        "완전 닫힘",
+        "close failure"
+      ],
+      [
+        "스템 마찰",
+        "stiction"
+      ]
+    ]
+  },
+  "requirements": [
+    {
+      "requirement_id": "D1",
+      "demand_kind": "DIAGNOSE_CAUSE",
+      "demand_label": "현상과 가능한 원인을 구분하여 제시한다.",
+      "requirement_text": "현상과 가능한 원인을 구분하여 제시한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/diagnosis_action.json#/QG-DA-LOW-01/0"
+      ]
+    },
+    {
+      "requirement_id": "D2",
+      "demand_kind": "DIAGNOSE_CAUSE",
+      "demand_label": "원인별 진단 및 확인 절차를 제시한다.",
+      "requirement_text": "원인별 진단 및 확인 절차를 제시한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/diagnosis_action.json#/QG-DA-LOW-01/1"
+      ]
+    },
+    {
+      "requirement_id": "D3",
+      "demand_kind": "DIAGNOSE_CAUSE",
+      "demand_label": "진단 결과와 연결된 원인별 대책을 제시한다.",
+      "requirement_text": "진단 결과와 연결된 원인별 대책을 제시한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/diagnosis_action.json#/QG-DA-LOW-01/2"
+      ]
+    },
+    {
+      "requirement_id": "D4",
+      "demand_kind": "DIAGNOSE_CAUSE",
+      "demand_label": "조치 후 성능 검증과 재발 방지 방법을 제시한다.",
+      "requirement_text": "조치 후 성능 검증과 재발 방지 방법을 제시한다.",
+      "is_core": true,
+      "source_json_pointers": [
+        "calibration/qtype_golden/cases/diagnosis_action.json#/QG-DA-LOW-01/3"
+      ]
+    }
+  ],
+  "canonical_primary_lens": "DIAGNOSIS_ACTION"
+}
