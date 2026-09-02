@@ -1,5 +1,5 @@
 {
-  "version": "sha256-57f8ae4a82db43e84c644b6eb85e61496f860796cf02c341a6eab41e40a5a080-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-305f9a11d7bb659093df76bf592fd5e8b2956e5f37325f3e9b17e82aee8bee40-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -29432,7 +29432,7 @@
             "relation_hint": "OCR 표의 열 순서가 단위·통합·시스템시험이고 SIL 대응 요소 행이 Random·HFT·Systematic 순서이면 통합시험→HFT 직접 대응이다.",
             "require_nonempty_evidence_for_true": true,
             "structured_relation": {
-              "combined_pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
+              "combined_pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity|^\\s*\\|\\s*(?:통합(?:\\s*시험)?|integration\\s+test)\\s*\\|[^\\n]*\\|\\s*(?:Architectural\\s+Constraints?\\s*)?(?:\\([^)]*)?HFT[^\\n]*\\|\\s*$",
               "render": "OCR 표 열 대응: 통합시험 → Architectural Constraints (HFT)",
               "authoritative_true": true
             },
@@ -29451,7 +29451,7 @@
             "relation_hint": "OCR 표의 열 순서가 단위·통합·시스템시험이고 SIL 대응 요소 행이 Random·HFT·Systematic 순서이면 단위시험→Random Integrity 직접 대응이다.",
             "require_nonempty_evidence_for_true": true,
             "structured_relation": {
-              "combined_pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity",
+              "combined_pattern": "(?is)비교\\s*항목.{0,2200}단위\\s*시험.{0,500}통합\\s*시험.{0,500}시스템\\s*시험.{0,2200}SIL\\s*대응\\s*요소.{0,500}Random(?:\\s+Hardware)?\\s+Integrity.{0,800}(?:Arch(?:itectural)?\\.?\\s*Constraints?|Architectural\\s+Constraints?)(?:\\s*\\([^)]*HFT[^)]*\\))?.{0,800}Systematic\\s*Integrity|^\\s*\\|\\s*(?:단위(?:\\s*시험)?|unit(?:\\s+test)?)\\s*\\|[^\\n]*\\|\\s*Random(?:\\s+Hardware)?\\s+Integrity\\s*\\|\\s*$",
               "render": "OCR 표 열 대응: 단위시험 → Random Hardware Integrity",
               "authoritative_true": true
             },

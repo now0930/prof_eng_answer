@@ -299,16 +299,38 @@ def _question_demand_cache_path(
 def _load_canonical_demands(
     repo_dir: Path,
     question_text: str,
-) -> tuple[Path, list[dict[str, Any]]]:
+) -> tuple[str, list[dict[str, Any]]]:
     path = _question_demand_cache_path(repo_dir, question_text)
 
-    if not path.exists():
+    if path.exists():
+        payload = json.loads(path.read_text(encoding="utf-8"))
+        return str(path), _extract_demands(payload)
+
+    # A manually confirmed cache remains authoritative when present. For new
+    # questions, use the same question-only deterministic contract already
+    # consumed by the canonical evaluation ledger instead of dropping every
+    # demand from evidence generation.
+    from question_demand_contract import build_question_demand_contract
+
+    contract = build_question_demand_contract(question_text)
+    requirements = contract.get("requirements")
+    if not isinstance(requirements, list) or not requirements:
         raise FileNotFoundError(
             f"canonical Question Demand missing: {path}"
         )
-
-    payload = json.loads(path.read_text(encoding="utf-8"))
-    return path, _extract_demands(payload)
+    demands = []
+    for index, row in enumerate(requirements):
+        if not isinstance(row, dict):
+            continue
+        demand_id = str(row.get("requirement_id") or "").strip()
+        text = str(row.get("requirement_text") or "").strip()
+        if not demand_id:
+            demand_id = f"D{index + 1}"
+        if text:
+            demands.append({"demand_id": demand_id, "text": text})
+    if not demands:
+        raise ValueError("runtime Question Demand contract has no demands")
+    return "runtime:question_demand_contract", demands
 
 
 def _load_routing(session_dir: Path) -> dict[str, Any]:
@@ -326,7 +348,7 @@ def _load_routing(session_dir: Path) -> dict[str, Any]:
 
     mode = str(payload.get("routing_mode") or "").strip().upper()
 
-    if mode not in {"SINGLE_TOPIC", "MULTI_TOPIC"}:
+    if mode not in {"SINGLE_TOPIC", "MULTI_TOPIC", "GENERAL"}:
         raise ValueError(f"unsupported shadow routing mode: {mode}")
 
     topic_ids: list[str] = []
@@ -342,6 +364,9 @@ def _load_routing(session_dir: Path) -> dict[str, Any]:
 
     if mode == "MULTI_TOPIC" and len(topic_ids) < 2:
         raise ValueError("MULTI_TOPIC must contain >=2 primary topics")
+
+    if mode == "GENERAL" and topic_ids:
+        raise ValueError("GENERAL must not contain primary topics")
 
     demand_map: dict[str, list[str]] = {}
     mappings = payload.get("demand_mappings")
@@ -567,6 +592,42 @@ def _result_has_evidence(row: Any) -> bool:
     return False
 
 
+_LEXICAL_DEMAND_STOPWORDS = {
+    "그리고", "또는", "대한", "따라", "통해", "한다", "정의한다",
+    "설명한다", "평가한다", "검토한다", "설계한다", "결정한다",
+    "적용한다", "구분한다", "비교한다", "계산한다", "산정한다",
+    "요구", "기존", "전체", "관계", "목표", "방법", "역할",
+}
+
+
+def _lexical_demand_mention(demand_text: str, answer_text: str) -> dict[str, Any]:
+    answer = re.sub(r"\s+", " ", str(answer_text or "")).casefold()
+    raw_tokens = re.findall(
+        r"[A-Za-z][A-Za-z0-9_-]*|[가-힣]{2,}",
+        str(demand_text or ""),
+    )
+    tokens: list[str] = []
+    for raw in raw_tokens:
+        token = raw.casefold()
+        if re.fullmatch(r"[가-힣]+", token):
+            token = re.sub(
+                r"(?:에서는|으로는|에게는|부터|까지|에서|으로|에게|보다|의|을|를|은|는|이|가|와|과|도|만)$",
+                "",
+                token,
+            )
+        if len(token) < 2 or token in _LEXICAL_DEMAND_STOPWORDS:
+            continue
+        if token not in tokens:
+            tokens.append(token)
+    matched = [token for token in tokens if token in answer]
+    return {
+        "method": "runtime_demand_text_exact_token_overlap_v1",
+        "matched_tokens": matched,
+        "matched_token_count": len(matched),
+        "covered": len(matched) >= 2,
+    }
+
+
 def _build_fact_result_index(
     fact_evaluation: dict[str, Any],
 ) -> dict[str, dict[str, Any]]:
@@ -598,6 +659,7 @@ def build_question_demand_evidence_shadow(
     fact_evaluation: dict[str, Any],
     session_dir: str | Path,
     repo_dir: str | Path | None = None,
+    answer_text: str = "",
 ) -> dict[str, Any]:
     repo = (
         Path(repo_dir)
@@ -610,6 +672,7 @@ def build_question_demand_evidence_shadow(
         repo,
         question_text,
     )
+    runtime_contract = str(canonical_path).startswith("runtime:")
     routing = _load_routing(session)
 
     topic_assets = {
@@ -796,6 +859,19 @@ def build_question_demand_evidence_shadow(
             level > 0.0
             for level in levels
         )
+        lexical_fallback = (
+            _lexical_demand_mention(demand["text"], answer_text)
+            if runtime_contract and answer_text.strip()
+            else {
+                "method": "disabled",
+                "matched_tokens": [],
+                "matched_token_count": 0,
+                "covered": False,
+            }
+        )
+        if not covered and lexical_fallback["covered"]:
+            covered = True
+            demand_level = max(demand_level, 0.35)
 
         verified = any(
             row["level"] > 0.0
@@ -817,6 +893,7 @@ def build_question_demand_evidence_shadow(
                 "verified": verified,
                 "level": round(demand_level, 6),
                 "observed_anchors": observed,
+                "lexical_fallback": lexical_fallback,
             }
         )
 
@@ -841,6 +918,7 @@ def build_question_demand_evidence_shadow(
         "status": "shadow_only",
         "score_effect": "none",
         "question_demand_source": str(canonical_path),
+        "score_eligible": not str(canonical_path).startswith("runtime:"),
         "routing_source": str(routing["path"]),
         "routing_mode": routing["routing_mode"],
         "primary_topic_ids": routing["primary_topic_ids"],
@@ -1003,12 +1081,14 @@ def write_question_demand_evidence_shadow(
     fact_evaluation: dict[str, Any],
     session_dir: str | Path,
     repo_dir: str | Path | None = None,
+    answer_text: str = "",
 ) -> dict[str, Any]:
     payload = build_question_demand_evidence_shadow(
         question_text=question_text,
         fact_evaluation=fact_evaluation,
         session_dir=session_dir,
         repo_dir=repo_dir,
+        answer_text=answer_text,
     )
 
     path = Path(session_dir) / QUESTION_DEMAND_EVIDENCE_FILENAME

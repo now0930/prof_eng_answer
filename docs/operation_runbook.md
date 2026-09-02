@@ -371,3 +371,20 @@ python3 -B tests/test_sil_runtime_replay.py
 - Telegram 투영에서 `strong`, `100%`, 잘못된 정확성 칭찬이 없음
 
 실패 해석과 기준선 변경 절차는 [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md)를 따른다.
+
+## 18. 전문가 정확도 배포 gate
+
+코드 release validation과 별도로 전문가 검토 Golden Set 기반 정확도 gate를 확인한다.
+
+```bash
+python3 scripts/measure_expert_accuracy.py \
+  --predictions calibration/expert_accuracy_predictions.jsonl \
+  --require-cases \
+  --output reports/expert_accuracy_report.json
+
+python3 scripts/check_accuracy_release_gate.py \
+  --report reports/expert_accuracy_report.json \
+  --require-ready
+```
+
+`READY`일 때만 정확도 정책 변경을 운영 배포한다. `draft` label은 배포 판정에서 제외한다.

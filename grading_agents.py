@@ -5560,6 +5560,7 @@ def _phase2_postprocess_grade(legacy_result):
 
         question_demand_evidence_for_score = write_question_demand_evidence_shadow(
             question_text=question_text,
+            answer_text=answer_text,
             fact_evaluation=fact_eval,
             session_dir=session_dir,
         )
@@ -5568,6 +5569,12 @@ def _phase2_postprocess_grade(legacy_result):
             "[agent] question demand evidence shadow failed: "
             f"{qd_evidence_error!r}"
         )
+    question_demand_evidence_for_scoring = (
+        question_demand_evidence_for_score
+        if isinstance(question_demand_evidence_for_score, dict)
+        and question_demand_evidence_for_score.get("score_eligible", True)
+        else None
+    )
     model_answer_ref = (
         apply_question_contract_to_model_reference(
             model_answer_ref,
@@ -5681,7 +5688,7 @@ def _phase2_postprocess_grade(legacy_result):
             layer_scores,
             gemini_eval,
             scoring_model,
-            question_demand_evidence_for_score,
+            question_demand_evidence_for_scoring,
         )
     )
     layer_scores = (
@@ -5744,10 +5751,10 @@ def _phase2_postprocess_grade(legacy_result):
     )
     # QUESTION_DEMAND_B_SCORE_CONNECTION_V1 production insertion
     # QUESTION_DEMAND_B_TERMINAL_OWNER_GUARDED_V3: QD-B owns B only when QD evidence was produced
-    if isinstance(question_demand_evidence_for_score, dict):
+    if isinstance(question_demand_evidence_for_scoring, dict):
         layer_scores = _phase3_apply_question_demand_evidence_to_layer_scores(
             layer_scores,
-            question_demand_evidence_for_score,
+            question_demand_evidence_for_scoring,
         )
 
     topic_cap_topic_id = (
@@ -10651,6 +10658,12 @@ def _stage17e5_finalize_pipeline_result(
     value,
     submission_normalization,
 ):
+    from evidence_calibration import (
+        apply_evidence_based_calibration,
+    )
+    from evaluation_ledger import (
+        attach_canonical_evaluation_ledger,
+    )
     from grade_submission_normalizer import (
         attach_submission_normalization,
     )
@@ -10663,7 +10676,17 @@ def _stage17e5_finalize_pipeline_result(
             value,
             submission_normalization,
         )
-        return enforce_final_decision_consistency(
+        # CANONICAL_EVALUATION_LEDGER_V1
+        value = attach_canonical_evaluation_ledger(
+            value,
+            question_text=str(
+                submission_normalization.get("question_text") or ""
+            ),
+        )
+        value = enforce_final_decision_consistency(
+            value
+        )
+        return apply_evidence_based_calibration(
             value
         )
 

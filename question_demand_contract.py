@@ -19,6 +19,7 @@ from typing import Any, Callable
 
 QUESTION_DEMAND_CONTRACT_SCHEMA_VERSION = "1.0"
 QUESTION_DEMAND_CONTRACT_MARKER = "QUESTION_DEMAND_CONTRACT_V1"
+ATOMIC_QUESTION_DEMAND_VERSION = "atomic_question_demand_v3"
 
 _ALLOWED_PRIMARY_LENSES = {
     "COMPARE_SELECTION",
@@ -294,6 +295,340 @@ def _detect_demands(clause: str) -> list[str]:
     return matches
 
 
+_ACTION_STEM_TO_DEMAND = {
+    "정의": "DEFINE_EXPLAIN",
+    "설명": "DEFINE_EXPLAIN",
+    "기술": "DEFINE_EXPLAIN",
+    "해석": "PRINCIPLE_INTERPRET",
+    "비교": "COMPARE",
+    "선정": "SELECT",
+    "선택": "SELECT",
+    "분석": "DIAGNOSE_CAUSE",
+    "진단": "DIAGNOSE_CAUSE",
+    "제시": "",
+    "개선": "ACTION_IMPROVE",
+    "산정": "CALCULATE",
+    "계산": "CALCULATE",
+    "도출": "CALCULATE",
+    "설계": "DESIGN",
+    "적용": "IMPLEMENT",
+    "구현": "IMPLEMENT",
+    "평가": "EVALUATE_VERIFY",
+    "검증": "EVALUATE_VERIFY",
+    "확인": "EVALUATE_VERIFY",
+}
+
+_ACTION_VERB_PATTERN = re.compile(
+    r"(?P<stem>정의|설명|기술|해석|비교|선정|선택|분석|진단|제시|"
+    r"개선|산정|계산|도출|설계|적용|구현|평가|검증|확인)"
+    r"(?P<ending>하시오|하라|하세요|한다|하고|하여|하며|해라|한다면)",
+    re.IGNORECASE,
+)
+
+_SHARED_OUTPUT_PATTERN = re.compile(
+    r"^(?P<body>.+?)(?:의)?\s*"
+    r"(?P<output>정의|개념|특성|종류|장단점|차이)$",
+    re.IGNORECASE,
+)
+
+
+def _explicit_problem_lines(question_text: Any) -> list[str]:
+    scope = extract_explicit_question_scope(question_text)
+    normalized_lines = [
+        normalize_question_text(line)
+        for line in str(scope).splitlines()
+        if normalize_question_text(line)
+    ]
+    marker_index = next(
+        (
+            index
+            for index, line in enumerate(normalized_lines)
+            if "문제 정의" in line
+        ),
+        None,
+    )
+    if marker_index is None:
+        return []
+    return normalized_lines[marker_index + 1 :]
+
+
+def _clean_atomic_segment(value: str) -> str:
+    text = normalize_question_text(value)
+    text = re.sub(r"^(?:그리고|또한|및)\s+", "", text)
+    text = re.sub(r"(?:하고|하여|하며)\s*$", "", text)
+    return text.strip(" ,.;")
+
+
+def _shared_output_rows(line: str) -> list[dict[str, str]]:
+    matched = _SHARED_OUTPUT_PATTERN.match(line)
+    if not matched:
+        return []
+    body = matched.group("body").strip()
+    output = matched.group("output").strip()
+    if "," not in body:
+        return []
+    parts = [part.strip() for part in body.split(",") if part.strip()]
+    if len(parts) < 2:
+        return []
+    tail = parts.pop()
+    tail_parts = re.split(r"\s+(?:및|그리고)\s+", tail)
+    parts.extend(part.strip() for part in tail_parts if part.strip())
+    if len(parts) < 2:
+        return []
+
+    context = ""
+    first_object = parts[0]
+    context_match = re.match(r"^(?P<context>.+의)\s*(?P<object>[^의]+)$", parts[0])
+    if context_match:
+        context = context_match.group("context").strip()
+        first_object = context_match.group("object").strip()
+
+    rows = []
+    for index, object_text in enumerate([first_object, *parts[1:]]):
+        requirement_text = " ".join(
+            item
+            for item in (
+                context if index == 0 else "",
+                object_text,
+                output,
+            )
+            if item
+        )
+        rows.append({
+            "source_span": line,
+            "object_text": object_text,
+            "action": "DEFINE_EXPLAIN",
+            "requirement_text": requirement_text,
+        })
+    return rows
+
+
+def _action_segment_rows(text: str) -> list[dict[str, str]]:
+    matches = list(_ACTION_VERB_PATTERN.finditer(text))
+    if not matches:
+        return []
+    rows = []
+    start = 0
+    for matched in matches:
+        segment = _clean_atomic_segment(text[start : matched.end()])
+        start = matched.end()
+        if not segment:
+            continue
+        stem = matched.group("stem")
+        object_text = re.sub(
+            rf"\s*{re.escape(stem)}"
+            r"(?:하시오|하라|하세요|한다|하고|하여|하며|해라|한다면)?\s*$",
+            "",
+            segment,
+            flags=re.IGNORECASE,
+        ).strip()
+        object_text = re.sub(
+            r"(?<=[가-힣A-Za-z0-9/])(?:을|를)\s*$",
+            "",
+            object_text,
+        ).strip()
+        rows.append({
+            "source_span": segment,
+            "object_text": object_text,
+            "action": _ACTION_STEM_TO_DEMAND[stem],
+            "verb_stem": stem,
+            "fallback_action": "ACTION_IMPROVE",
+            "requirement_text": segment,
+        })
+    remainder = _clean_atomic_segment(text[start:])
+    if remainder and rows:
+        rows[-1]["source_span"] = _clean_atomic_segment(
+            rows[-1]["source_span"] + " " + remainder
+        )
+        rows[-1]["requirement_text"] = rows[-1]["source_span"]
+    return rows
+
+
+_COORDINATED_SUFFIXES = (
+    "시험",
+    "분석",
+    "검증",
+    "평가",
+    "설계",
+    "기준",
+    "절차",
+    "방안",
+    "방법",
+    "특성",
+    "정의",
+)
+
+
+def _inherit_coordinated_suffix(parts: list[str]) -> list[str]:
+    if len(parts) < 2:
+        return parts
+    suffix = next(
+        (
+            candidate
+            for candidate in _COORDINATED_SUFFIXES
+            if parts[-1].endswith(candidate)
+        ),
+        "",
+    )
+    if not suffix:
+        return parts
+    return [
+        part
+        if part.endswith(suffix)
+        else f"{part} {suffix}".strip()
+        for part in parts
+    ]
+
+
+def _coordinated_object_rows(row: dict[str, str]) -> list[dict[str, str]]:
+    if row.get("verb_stem") not in {"설명", "기술", "제시"}:
+        return [row]
+    object_text = _clean_atomic_segment(row.get("object_text", ""))
+    if not re.search(r"[·,]|(?:과|와)\s+|\s+(?:및|그리고)\s+", object_text):
+        return [row]
+
+    major_parts = [
+        part.strip()
+        for part in re.split(
+            r"\s*,\s*|\s+(?:및|그리고)\s+|(?<=\S)(?:과|와)\s+",
+            object_text,
+        )
+        if part.strip()
+    ]
+    parts: list[str] = []
+    for major in major_parts:
+        dotted = [part.strip() for part in major.split("·") if part.strip()]
+        parts.extend(_inherit_coordinated_suffix(dotted))
+    if len(parts) < 2:
+        return [row]
+
+    action_text = row.get("verb_stem") or "설명"
+    shared_action = _resolve_atomic_demand_kind(
+        row,
+        _detect_demands(object_text),
+    )
+    expanded = []
+    for part in parts:
+        item = dict(row)
+        item["action"] = shared_action
+        item["object_text"] = part
+        item["source_span"] = f"{part} {action_text}"
+        item["requirement_text"] = item["source_span"]
+        expanded.append(item)
+    return expanded
+
+
+def _resolve_atomic_demand_kind(
+    row: dict[str, str],
+    detected: list[str],
+) -> str:
+    verb_stem = row.get("verb_stem", "")
+    explicit = row.get("action", "")
+    specific_priority = (
+        "EVALUATE_VERIFY",
+        "COMPARE",
+        "SELECT",
+        "DIAGNOSE_CAUSE",
+        "ACTION_IMPROVE",
+        "PROCEDURE",
+        "CALCULATE",
+        "DESIGN",
+        "IMPLEMENT",
+        "PRINCIPLE_INTERPRET",
+    )
+    if verb_stem == "제시" and explicit:
+        return explicit
+    if verb_stem in {"설명", "기술", "제시"}:
+        for candidate in specific_priority:
+            if candidate in detected:
+                return candidate
+    if explicit:
+        return explicit
+    if detected:
+        return detected[-1]
+    return row.get("fallback_action") or "DEFINE_EXPLAIN"
+
+
+def _atomic_question_requirements(question_text: Any) -> list[dict[str, Any]]:
+    normalized = normalize_question_text(
+        extract_explicit_question_scope(question_text)
+    )
+    problem_lines = _explicit_problem_lines(question_text)
+    raw_rows: list[dict[str, str]] = []
+
+    if problem_lines:
+        for line in problem_lines:
+            expanded = _shared_output_rows(line)
+            if expanded:
+                raw_rows.extend(expanded)
+                continue
+            action_rows = _action_segment_rows(line)
+            if action_rows:
+                raw_rows.extend(action_rows)
+                continue
+            kinds = _detect_demands(line) or ["DEFINE_EXPLAIN"]
+            raw_rows.append({
+                "source_span": line,
+                "object_text": line,
+                "action": kinds[-1],
+                "requirement_text": line,
+            })
+    else:
+        raw_rows = _action_segment_rows(normalized)
+        if not raw_rows:
+            for clause in _split_clauses(normalized):
+                kinds = _detect_demands(clause) or ["DEFINE_EXPLAIN"]
+                raw_rows.append({
+                    "source_span": clause,
+                    "object_text": clause,
+                    "action": kinds[-1],
+                    "requirement_text": clause,
+                })
+
+    expanded_rows: list[dict[str, str]] = []
+    for row in raw_rows:
+        expanded_rows.extend(_coordinated_object_rows(row))
+    raw_rows = expanded_rows
+
+    requirements = []
+    seen: set[tuple[str, str]] = set()
+    for atomic_index, row in enumerate(raw_rows, start=1):
+        source_span = _clean_atomic_segment(row["source_span"])
+        requirement_text = _clean_atomic_segment(row["requirement_text"])
+        detected = _detect_demands(requirement_text)
+        action = _resolve_atomic_demand_kind(row, detected)
+        if not row.get("verb_stem"):
+            demand_kinds = [action]
+        else:
+            demand_kinds = list(dict.fromkeys([*detected, action]))
+        demand_kind = action if action in demand_kinds else demand_kinds[-1]
+        identity = (demand_kind, requirement_text)
+        if not requirement_text or identity in seen:
+            continue
+        seen.add(identity)
+        payload = {
+            "atomic_index": atomic_index,
+            "source_span": source_span,
+            "demand_kind": demand_kind,
+            "requirement_text": requirement_text,
+        }
+        requirements.append({
+            "requirement_id": _stable_id("requirement", payload),
+            "clause_index": atomic_index,
+            "atomic_index": atomic_index,
+            "demand_kind": demand_kind,
+            "demand_kinds": demand_kinds,
+            "demand_label": _DEMAND_LABELS[demand_kind],
+            "requirement_text": requirement_text,
+            "source_span": source_span,
+            "object_text": _clean_atomic_segment(row["object_text"]),
+            "source": "question_text_only",
+            "extraction_version": ATOMIC_QUESTION_DEMAND_VERSION,
+            "answer_text_dependency": "none",
+        })
+    return requirements
+
+
 def _primary_lens(
     demand_kinds: list[str],
 ) -> tuple[str, dict[str, int]]:
@@ -528,8 +863,7 @@ def build_question_demand_contract(
         _topic_pack_demand_requirements(normalized)
     )
     clauses = _split_clauses(normalized)
-    requirements = []
-    all_demand_kinds = []
+    legacy_requirements = []
 
     for clause_index, clause in enumerate(clauses, start=1):
         demand_kinds = _detect_demands(clause)
@@ -543,7 +877,7 @@ def build_question_demand_contract(
                 "demand_kind": demand_kind,
                 "requirement_text": clause,
             }
-            requirements.append(
+            legacy_requirements.append(
                 {
                     "requirement_id": _stable_id(
                         "requirement",
@@ -557,8 +891,13 @@ def build_question_demand_contract(
                     "answer_text_dependency": "none",
                 }
             )
-            all_demand_kinds.append(demand_kind)
 
+    requirements = _atomic_question_requirements(question_text)
+    all_demand_kinds = [
+        demand_kind
+        for row in requirements
+        for demand_kind in row.get("demand_kinds", [row["demand_kind"]])
+    ]
     generic_requirements = copy.deepcopy(requirements)
     if topic_pack_requirements:
         requirements = copy.deepcopy(topic_pack_requirements)
@@ -610,15 +949,25 @@ def build_question_demand_contract(
     primary_core = _PRIMARY_CORE_DEMANDS[primary_lens]
 
     secondary_demands = []
+    primary_requirement_kinds = list(
+        dict.fromkeys(
+            row["demand_kind"]
+            for row in deduped_requirements
+        )
+    )
 
-    for demand_kind in unique_demand_kinds:
+    for demand_kind in primary_requirement_kinds:
         if demand_kind in primary_core:
             continue
 
         requirement_ids = [
             requirement["requirement_id"]
             for requirement in deduped_requirements
-            if requirement["demand_kind"] == demand_kind
+            if demand_kind
+            in requirement.get(
+                "demand_kinds",
+                [requirement["demand_kind"]],
+            )
         ]
         secondary_demands.append(
             {
@@ -643,7 +992,10 @@ def build_question_demand_contract(
         "answer_text_dependency": "none",
         "topic_pack_demand_axes_applied": bool(topic_pack_requirements),
         "topic_pack_demand_axes": topic_pack_metadata,
+        "atomic_question_demands_applied": True,
+        "atomic_question_demand_version": ATOMIC_QUESTION_DEMAND_VERSION,
         "generic_requirements": generic_requirements,
+        "legacy_generic_requirements": legacy_requirements,
         "normalized_question": normalized,
         "question_hash": _question_hash(normalized),
         "primary_lens": primary_lens,

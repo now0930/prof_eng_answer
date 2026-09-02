@@ -111,6 +111,115 @@ def test_projection_validator_rejects_two_freeform_rows():
     )
 
 
+def test_projection_state_normalizer_repairs_schema_only_fields():
+    contract = build_question_demand_contract(SUBMISSION_A)
+    result = valid_result()
+    rows = result["parsed"]["question_type_coverage"][
+        "explicit_requirement_coverage"
+    ]["requirements"]
+    rows[0].pop("mentioned")
+    rows[1]["status"] = "incorrect"
+    rows[1]["mentioned"] = False
+    assert not gemini_grader._stage35e2_projection_matches_contract(
+        result, contract
+    )
+    normalized = gemini_grader._stage35e2_normalize_projection_state_fields(
+        result
+    )
+    assert gemini_grader._stage35e2_projection_matches_contract(
+        normalized, contract
+    )
+    normalized_rows = normalized["parsed"]["question_type_coverage"][
+        "explicit_requirement_coverage"
+    ]["requirements"]
+    assert normalized_rows[0]["mentioned"] is True
+    assert normalized_rows[1]["status"] == "wrong"
+    assert normalized_rows[1]["mentioned"] is True
+
+
+def test_projection_normalizer_restores_id_from_exact_contract_text_only():
+    contract = build_question_demand_contract(SUBMISSION_A)
+    result = valid_result()
+    rows = result["parsed"]["question_type_coverage"][
+        "explicit_requirement_coverage"
+    ]["requirements"]
+    for row, requirement in zip(rows, contract["requirements"]):
+        row.pop("requirement_id")
+        row["requirement"] = requirement["requirement_text"]
+    normalized = gemini_grader._stage35e2_normalize_projection_state_fields(
+        result,
+        contract,
+    )
+    assert gemini_grader._stage35e2_projection_matches_contract(
+        normalized, contract
+    )
+    rows[0]["requirement"] += " 임의 변경"
+    unsafe = gemini_grader._stage35e2_normalize_projection_state_fields(
+        result,
+        contract,
+    )
+    unsafe_ids = unsafe["parsed"]["question_type_coverage"][
+        "explicit_requirement_coverage"
+    ]["requirements"]
+    assert not unsafe_ids[0].get("requirement_id")
+
+    id_in_requirement = valid_result()
+    id_rows = id_in_requirement["parsed"]["question_type_coverage"][
+        "explicit_requirement_coverage"
+    ]["requirements"]
+    for row in id_rows:
+        row.pop("requirement_id")
+    id_normalized = gemini_grader._stage35e2_normalize_projection_state_fields(
+        id_in_requirement,
+        contract,
+    )
+    assert gemini_grader._stage35e2_projection_matches_contract(
+        id_normalized,
+        contract,
+    )
+
+    with_generic_duplicates = valid_result()
+    duplicate_rows = with_generic_duplicates["parsed"][
+        "question_type_coverage"
+    ]["explicit_requirement_coverage"]["requirements"]
+    duplicate_rows[:0] = [
+        {
+            "requirement": "SIL 결정과정",
+            "status": "partial",
+            "mentioned": True,
+        },
+        {
+            "requirement": "SIS 아키텍처",
+            "status": "partial",
+            "mentioned": True,
+        },
+    ]
+    deduped = gemini_grader._stage35e2_normalize_projection_state_fields(
+        with_generic_duplicates,
+        contract,
+    )
+    assert gemini_grader._stage35e2_projection_matches_contract(
+        deduped,
+        contract,
+    )
+
+    label_result = valid_result()
+    label_rows = label_result["parsed"]["question_type_coverage"][
+        "explicit_requirement_coverage"
+    ]["requirements"]
+    for row, requirement in zip(label_rows, contract["requirements"]):
+        row.pop("requirement_id")
+        row["requirement"] = requirement["demand_label"]
+    label_normalized = gemini_grader._stage35e2_normalize_projection_state_fields(
+        label_result,
+        contract,
+    )
+    assert gemini_grader._stage35e2_projection_matches_contract(
+        label_normalized,
+        contract,
+    )
+
+
 def test_semantic_wrapper_retries_once_and_accepts_exact_projection():
     original = gemini_grader._question_demand_previous_gemini_semantic_grade
     calls = []
@@ -141,14 +250,18 @@ def test_semantic_wrapper_fails_closed_after_invalid_retry():
 
     gemini_grader._question_demand_previous_gemini_semantic_grade = fake
     try:
-        try:
-            gemini_grader.gemini_semantic_grade(SUBMISSION_A)
-        except RuntimeError as exc:
-            assert "projection_mismatch_after_retry" in str(exc)
-        else:
-            raise AssertionError("invalid retry must fail closed")
+        result = gemini_grader.gemini_semantic_grade(SUBMISSION_A)
     finally:
         gemini_grader._question_demand_previous_gemini_semantic_grade = original
+    validation = result["explicit_requirement_projection_validation"]
+    assert validation["valid"] is False
+    assert validation["fail_closed"] is True
+    assert validation["provider_attempts"] == 2
+    rows = result["parsed"]["question_type_coverage"][
+        "explicit_requirement_coverage"
+    ]["requirements"]
+    assert rows == []
+    assert result["question_demand_contract"]["requirements"]
 
 
 def main():
@@ -157,7 +270,7 @@ def main():
         for name, value in globals().items()
         if name.startswith("test_") and callable(value)
     )
-    assert len(tests) == 6
+    assert len(tests) == 8
     for name, test in tests:
         test()
         print(f"PASS {name}")

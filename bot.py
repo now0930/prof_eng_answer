@@ -1228,6 +1228,9 @@ def _format_question_type_coverage_display(grade):
 
     qtype_v2 = grade.get("question_type_v2")
     coverage_summary = grade.get("question_type_coverage_summary")
+    evaluation_ledger = grade.get(
+        "canonical_evaluation_ledger"
+    )
     adjustment = grade.get("question_type_coverage_score_adjustment")
     explicit_cap = grade.get("explicit_requirement_cap_evaluation")
 
@@ -1236,6 +1239,9 @@ def _format_question_type_coverage_display(grade):
 
     if not isinstance(coverage_summary, dict):
         coverage_summary = {}
+
+    if not isinstance(evaluation_ledger, dict):
+        evaluation_ledger = {}
 
     if not isinstance(adjustment, dict):
         adjustment = {}
@@ -1266,6 +1272,7 @@ def _format_question_type_coverage_display(grade):
         ),
     )
     missing_count = coverage_summary.get("sub_criteria_missing", 0)
+    unknown_count = 0
 
     weighted_score = coverage_summary.get("weighted_coverage_score")
     weighted_percent = coverage_summary.get("weighted_coverage_percent")
@@ -1285,6 +1292,54 @@ def _format_question_type_coverage_display(grade):
     )
     missing_criteria = coverage_summary.get("missing_criteria") or []
 
+    if evaluation_ledger.get("marker") == (
+        "CANONICAL_EVALUATION_LEDGER_V1"
+    ):
+        ledger_summary = evaluation_ledger.get("summary")
+        ledger_rows = evaluation_ledger.get("rows")
+        if isinstance(ledger_summary, dict) and isinstance(ledger_rows, list):
+            ledger_counts = ledger_summary.get("status_counts")
+            if isinstance(ledger_counts, dict):
+                total_count = ledger_summary.get("total", 0)
+                present_count = ledger_counts.get("correct", 0)
+                partial_count = ledger_counts.get("partial", 0)
+                incorrect_count = ledger_counts.get("incorrect", 0)
+                missing_count = ledger_counts.get("missing", 0)
+                unknown_count = ledger_counts.get("unknown", 0)
+                if not ledger_summary.get("complete_assessment"):
+                    overall = "unknown"
+                elif (incorrect_count + missing_count) >= 2:
+                    overall = "weak"
+                elif (
+                    incorrect_count
+                    or missing_count
+                    or partial_count
+                ) and str(overall or "").lower() == "strong":
+                    overall = "adequate"
+                correctness_percent = ledger_summary.get(
+                    "exact_requirement_fulfillment_percent"
+                )
+                weighted_percent = correctness_percent
+                weighted_score = present_count
+                partial_criteria = [
+                    row.get("requirement_text")
+                    for row in ledger_rows
+                    if isinstance(row, dict)
+                    and row.get("status") == "partial"
+                ]
+                incorrect_criteria = [
+                    row.get("requirement_text")
+                    for row in ledger_rows
+                    if isinstance(row, dict)
+                    and row.get("status") == "incorrect"
+                ]
+                missing_criteria = [
+                    row.get("requirement_text")
+                    for row in ledger_rows
+                    if isinstance(row, dict)
+                    and row.get("status") == "missing"
+                ]
+
     lines = []
 
     if question_type or name_ko:
@@ -1298,6 +1353,8 @@ def _format_question_type_coverage_display(grade):
 
     if total_count:
         try:
+            if weighted_percent is None:
+                raise ValueError("unassessed coverage")
             percent_text = f"{float(weighted_percent):.1f}%"
             score_text = f"{float(weighted_score):g}/{int(total_count)}"
         except (TypeError, ValueError):
@@ -1314,6 +1371,8 @@ def _format_question_type_coverage_display(grade):
                 lines.append("요구사항 언급률: -")
 
         try:
+            if correctness_percent is None:
+                raise ValueError("unassessed correctness")
             correctness_text = (
                 f"{float(correctness_percent):.1f}%"
             )
@@ -1329,7 +1388,8 @@ def _format_question_type_coverage_display(grade):
             f"충족 {present_count} · "
             f"부분 {partial_count} · "
             f"오답 {incorrect_count} · "
-            f"누락 {missing_count}"
+            f"누락 {missing_count} · "
+            f"미평가 {unknown_count}"
         )
 
     partial_text = _qtype_short_join(partial_criteria, limit=4)

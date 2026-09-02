@@ -1,0 +1,24 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "evidence_based_calibration_v1.schema.json",
+  "title": "Evidence Based Calibration V1",
+  "type": "object",
+  "required": [
+    "version",
+    "marker",
+    "score_effect",
+    "confidence_ceiling",
+    "strong_verdict_allowed",
+    "ledger_signals"
+  ],
+  "properties": {
+    "version": {"const": "evidence_calibration_v1"},
+    "marker": {"const": "EVIDENCE_BASED_CALIBRATION_V1"},
+    "score_effect": {"const": "none"},
+    "confidence_ceiling": {"enum": ["low", "medium", "high"]},
+    "strong_verdict_allowed": {"type": "boolean"},
+    "confidence_reasons": {"type": "array", "items": {"type": "string"}},
+    "ledger_signals": {"type": "object"}
+  },
+  "additionalProperties": true
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "expert_accuracy_release_policy_v1.schema.json",
+  "title": "Expert Accuracy Release Policy V1",
+  "type": "object",
+  "required": [
+    "version",
+    "minimum_reviewed_cases",
+    "minimum_distinct_topics",
+    "required_question_types",
+    "minimum_cases_per_question_type",
+    "minimum_major_finding_labels",
+    "minimum_demand_extraction_f1",
+    "minimum_demand_state_accuracy",
+    "minimum_major_finding_precision",
+    "minimum_major_finding_recall",
+    "maximum_score_range_mae",
+    "maximum_false_pass_count",
+    "maximum_false_strong_count",
+    "maximum_confidence_ceiling_violation_count"
+  ],
+  "properties": {
+    "version": {"const": "expert_accuracy_release_policy_v1"},
+    "minimum_reviewed_cases": {"type": "integer", "minimum": 1},
+    "minimum_distinct_topics": {"type": "integer", "minimum": 1},
+    "required_question_types": {"type": "array", "minItems": 4, "uniqueItems": true},
+    "minimum_cases_per_question_type": {"type": "integer", "minimum": 1},
+    "minimum_major_finding_labels": {"type": "integer", "minimum": 1},
+    "minimum_demand_extraction_f1": {"type": "number", "minimum": 0, "maximum": 1},
+    "minimum_demand_state_accuracy": {"type": "number", "minimum": 0, "maximum": 1},
+    "minimum_major_finding_precision": {"type": "number", "minimum": 0, "maximum": 1},
+    "minimum_major_finding_recall": {"type": "number", "minimum": 0, "maximum": 1},
+    "maximum_score_range_mae": {"type": "number", "minimum": 0},
+    "maximum_false_pass_count": {"type": "integer", "minimum": 0},
+    "maximum_false_strong_count": {"type": "integer", "minimum": 0},
+    "maximum_confidence_ceiling_violation_count": {"type": "integer", "minimum": 0}
+  },
+  "additionalProperties": false
+}

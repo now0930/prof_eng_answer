@@ -3,7 +3,7 @@
   "regression_id": "MCDC-VMODEL-SIL-OVERGRADING-01",
   "source_session_id": "20260815_060014_5960502198",
   "purpose": "Freeze the historical V-Model/SIL/MC-DC overgrading case outside the atomic 12-case Production QType Golden Set.",
-  "question_type": "PRINCIPLE_INTERPRETATION",
+  "question_type": "IMPLEMENTATION_EVALUATION",
   "topic_id_basis": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
   "expected_topic_ids": [
     "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
@@ -14,12 +14,14 @@
   "answer": "1. 시험 단계와 SIL 요소\n| 단계 | 대상 | 적용 도구 | SIL 요소 |\n| 단위 | 단일 모듈 | xUnit, MISRA | Random Integrity |\n| 통합 | 인터페이스 | Stub, S/W HIL | Architectural Constraints(HFT 0,1,2) |\n| 시스템 | 전체 SIS | HIL Simulator | Systematic Integrity |\n\n2. V-Model\nV-Model은 각 개발 단계에서 시험하므로 결함을 즉시 수정할 수 있고 검증 신뢰성이 높다. 단점은 문서와 시험량이 많다는 점이다.\n\n3. SIL 소프트웨어 검증\nSystematic Integrity는 MISRA C, 정적·동적 분석과 SIL 3/4의 MC/DC 100%로 검증한다. Random Integrity는 PFDavg, timeout, checksum과 fault injection으로 검증한다. Architectural Constraints는 HFT(1oo2, 2oo3)와 HIL로 확인한다.\n\n4. 결론\nV-Model은 SIL을 검증하는 가장 확실한 방법이다. Agentic AI로 문서와 코드 작업을 줄일 수 있으나 sandbox와 전문가 review가 필요하다.",
   "expected": {
     "demand_status": {
-      "PI_LOW_02_D1": "partial",
-      "PI_LOW_02_D2": "incorrect",
-      "PI_LOW_02_D3": "incorrect",
-      "PI_LOW_02_D4": "incorrect",
-      "PI_LOW_02_D5": "incorrect",
-      "PI_LOW_02_D6": "partial"
+      "requirement_97637d466c64": "partial",
+      "requirement_865945aea80e": "incorrect",
+      "requirement_e3f0fc834975": "incorrect",
+      "requirement_4f9becba0a03": "partial",
+      "requirement_c34b039a9f24": "partial",
+      "requirement_562ee2080922": "partial",
+      "requirement_461938514cd3": "incorrect",
+      "requirement_e7768e02db0c": "incorrect"
     },
     "layer_ranges": {
       "A": {
@@ -58,9 +60,7 @@
       "sw04_fatal_misra_is_unit_test_tool",
       "sw05_fatal_software_test_is_random_hardware_integrity",
       "sw05_fatal_hft_is_integration_test",
-      "mcdc_proves_requirements",
-      "sil_four_universal_rule",
-      "sw04_fatal_general_vv_proves_sil"
+      "sil_four_universal_rule"
     ],
     "required_feedback_elements": [
       "MISRA는 단위시험 도구가 아니라 코딩 지침·준수 및 정적분석 근거라는 지적",

@@ -1,0 +1,62 @@
+{
+  "schema_version": "expert_accuracy_report_v1",
+  "status": "OK",
+  "include_draft": false,
+  "gold_case_count": 3,
+  "eligible_case_count": 3,
+  "evaluated_case_count": 3,
+  "demand_extraction": {
+    "true_positive": 0,
+    "gold": 24,
+    "predicted": 0,
+    "precision": 0.0,
+    "recall": 0.0,
+    "f1": 0.0
+  },
+  "demand_state_accuracy": null,
+  "matched_demand_state_count": 0,
+  "major_finding_detection": {
+    "true_positive": 2,
+    "gold": 9,
+    "predicted": 2,
+    "precision": 1.0,
+    "recall": 0.2222,
+    "f1": 0.3636
+  },
+  "score_range_mae": 0.23,
+  "false_pass_count": 1,
+  "false_strong_count": 1,
+  "confidence_ceiling_violation_count": 1,
+  "cases": [
+    {
+      "case_id": "sil_target_operations_issue1",
+      "review_status": "reviewed",
+      "score": 11.97,
+      "score_range": {
+        "min": 10.0,
+        "max": 14.5
+      },
+      "score_range_distance": 0.0
+    },
+    {
+      "case_id": "sis_lopa_architecture_issue1",
+      "review_status": "reviewed",
+      "score": 9.51,
+      "score_range": {
+        "min": 9.5,
+        "max": 13.0
+      },
+      "score_range_distance": 0.0
+    },
+    {
+      "case_id": "mcdc_vmodel_sil_issue1",
+      "review_status": "reviewed",
+      "score": 15.19,
+      "score_range": {
+        "min": 10.5,
+        "max": 14.5
+      },
+      "score_range_distance": 0.69
+    }
+  ]
+}

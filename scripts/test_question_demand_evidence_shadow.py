@@ -123,6 +123,54 @@ class QuestionDemandEvidenceShadowTests(unittest.TestCase):
                 {},
             )
 
+    def test_general_route_is_valid_and_has_no_topic_links(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            session = Path(tmp)
+            (session / "semantic_router_shadow.json").write_text(
+                json.dumps({
+                    "routing_mode": "GENERAL",
+                    "primary_topic_ids": [],
+                    "demand_mappings": [],
+                }),
+                encoding="utf-8",
+            )
+            routing = qde._load_routing(session)
+            self.assertEqual(routing["routing_mode"], "GENERAL")
+            self.assertEqual(routing["primary_topic_ids"], [])
+            self.assertEqual(routing["demand_topic_map"], {})
+
+    def test_missing_manual_cache_uses_runtime_question_contract(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source, demands = qde._load_canonical_demands(
+                Path(tmp),
+                "V-Model과 단위·통합·시스템 시험을 설명하시오.",
+            )
+        self.assertEqual(source, "runtime:question_demand_contract")
+        self.assertEqual(len(demands), 4)
+        self.assertTrue(all(row["demand_id"] for row in demands))
+
+    def test_runtime_contract_evidence_is_diagnostic_only(self):
+        source = Path(qde.__file__).read_text(encoding="utf-8")
+        self.assertIn(
+            '"score_eligible": not str(canonical_path).startswith("runtime:")',
+            source,
+        )
+
+    def test_runtime_lexical_fallback_requires_two_exact_tokens(self):
+        scenario = qde._lexical_demand_mention(
+            "반응기 과압력의 원인과 시나리오 경계를 정의한다.",
+            "반응기 과압력 시나리오의 SIL 결정 과정을 설명한다.",
+        )
+        self.assertTrue(scenario["covered"])
+        self.assertGreaterEqual(scenario["matched_token_count"], 2)
+
+        generic = qde._lexical_demand_mention(
+            "잔여빈도와 허용빈도로 요구 RRF와 목표 SIL을 결정한다.",
+            "SIL을 언급한다.",
+        )
+        self.assertFalse(generic["covered"])
+        self.assertEqual(generic["matched_tokens"], ["sil"])
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -1355,6 +1355,7 @@ _question_demand_previous_gemini_semantic_grade = (
 
 # STAGE35E2_EXACT_PROVIDER_PROJECTION_RETRY_V1
 from contextvars import ContextVar as _stage35e2_ContextVar
+import copy as _stage35e2_copy
 
 _stage35e2_projection_retry_contract = _stage35e2_ContextVar(
     "stage35e2_projection_retry_contract",
@@ -1436,6 +1437,88 @@ def _stage35e2_projection_matches_contract(result, contract):
     return False
 
 
+def _stage35e2_normalize_projection_state_fields(result, contract=None):
+    """Repair schema-only fields; restore IDs only on exact contract text."""
+    if not isinstance(result, dict):
+        return result
+    normalized = _stage35e2_copy.deepcopy(result)
+    aliases = {
+        "incorrect": "wrong",
+        "absent": "missing",
+        "correct": "present",
+        "fulfilled": "present",
+        "shallow": "partial",
+    }
+    text_to_id = {}
+    label_to_id = {}
+    expected_ids = set()
+    if isinstance(contract, dict):
+        for item in contract.get("requirements") or []:
+            if not isinstance(item, dict):
+                continue
+            requirement_id = str(item.get("requirement_id") or "").strip()
+            requirement_text = re.sub(
+                r"\s+", " ", str(item.get("requirement_text") or "")
+            ).strip().casefold()
+            if requirement_id and requirement_text:
+                text_to_id.setdefault(requirement_text, []).append(requirement_id)
+                expected_ids.add(requirement_id)
+                demand_label = re.sub(
+                    r"\s+", " ", str(item.get("demand_label") or "")
+                ).strip().casefold()
+                if demand_label:
+                    label_to_id.setdefault(demand_label, []).append(requirement_id)
+    for rows in _stage35e2_explicit_requirement_lists(normalized):
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            status = str(row.get("status") or "").strip().lower()
+            status = aliases.get(status, status)
+            if status not in {"present", "partial", "wrong", "missing"}:
+                continue
+            row["status"] = status
+            row["mentioned"] = status != "missing"
+            if not str(row.get("requirement_id") or "").strip():
+                row_text = re.sub(
+                    r"\s+",
+                    " ",
+                    str(
+                        row.get("requirement")
+                        or row.get("requirement_text")
+                        or ""
+                    ),
+                ).strip().casefold()
+                matched_ids = text_to_id.get(row_text) or []
+                if not matched_ids:
+                    matched_ids = label_to_id.get(row_text) or []
+                if len(matched_ids) == 1:
+                    row["requirement_id"] = matched_ids[0]
+                else:
+                    raw_requirement = str(
+                        row.get("requirement")
+                        or row.get("requirement_text")
+                        or ""
+                    ).strip()
+                    if raw_requirement in expected_ids:
+                        row["requirement_id"] = raw_requirement
+        if expected_ids:
+            canonical_rows = [
+                row
+                for row in rows
+                if isinstance(row, dict)
+                and str(row.get("requirement_id") or "").strip()
+                in expected_ids
+            ]
+            canonical_ids = [
+                str(row.get("requirement_id") or "").strip()
+                for row in canonical_rows
+            ]
+            expected_order = _stage35e2_contract_requirement_ids(contract)
+            if canonical_ids == expected_order:
+                rows[:] = canonical_rows
+    return normalized
+
+
 def _stage35e2_attach_projection_validation(result, contract, attempts):
     if not isinstance(result, dict):
         return result
@@ -1452,6 +1535,72 @@ def _stage35e2_attach_projection_validation(result, contract, attempts):
             result["explicit_requirement_projection_validation"]
         )
     return result
+
+
+def _stage35e2_projection_diagnostic(result, contract):
+    expected = _stage35e2_contract_requirement_ids(contract)
+    lists = _stage35e2_explicit_requirement_lists(result)
+    return {
+        "expected_count": len(expected),
+        "projection_count": len(lists),
+        "rows": [
+            {
+                "row_count": len(rows),
+                "requirement_ids": [
+                    str(row.get("requirement_id") or "").strip()
+                    if isinstance(row, dict)
+                    else ""
+                    for row in rows
+                ],
+                "requirements": [
+                    str(
+                        row.get("requirement")
+                        or row.get("requirement_text")
+                        or ""
+                    ).strip()[:120]
+                    if isinstance(row, dict)
+                    else ""
+                    for row in rows
+                ],
+            }
+            for rows in lists[:3]
+        ],
+    }
+
+
+def _stage35e2_fail_closed_projection(result, contract, attempts):
+    if not isinstance(result, dict):
+        return result
+    output = _stage35e2_copy.deepcopy(result)
+
+    def clear(node):
+        if isinstance(node, dict):
+            explicit = node.get("explicit_requirement_coverage")
+            if isinstance(explicit, dict):
+                explicit["requirements"] = []
+                explicit["projection_status"] = "invalid_fail_closed"
+            for child in node.values():
+                clear(child)
+        elif isinstance(node, list):
+            for child in node:
+                clear(child)
+
+    clear(output)
+    validation = {
+        "schema_version": "stage35e2_exact_projection_v1",
+        "valid": False,
+        "fail_closed": True,
+        "reason": "provider_projection_mismatch_after_retry",
+        "expected_requirement_ids": _stage35e2_contract_requirement_ids(contract),
+        "provider_attempts": attempts,
+        "repair_retry_used": attempts > 1,
+        "diagnostic": _stage35e2_projection_diagnostic(result, contract),
+    }
+    output["explicit_requirement_projection_validation"] = validation
+    parsed = output.get("parsed")
+    if isinstance(parsed, dict):
+        parsed["explicit_requirement_projection_validation"] = dict(validation)
+    return output
 
 
 @_question_demand_wraps(
@@ -1476,6 +1625,7 @@ def gemini_semantic_grade(*args, **kwargs):
         *args,
         **kwargs,
     )
+    result = _stage35e2_normalize_projection_state_fields(result, contract)
     attempts = 1
     if enforce_exact and not _stage35e2_projection_matches_contract(
         result,
@@ -1487,6 +1637,7 @@ def gemini_semantic_grade(*args, **kwargs):
                 *args,
                 **kwargs,
             )
+            result = _stage35e2_normalize_projection_state_fields(result, contract)
             attempts = 2
         finally:
             _stage35e2_projection_retry_contract.reset(token)
@@ -1495,8 +1646,15 @@ def gemini_semantic_grade(*args, **kwargs):
         result,
         contract,
     ):
-        raise RuntimeError(
-            "provider_explicit_requirement_projection_mismatch_after_retry"
+        result = _stage35e2_fail_closed_projection(
+            result,
+            contract,
+            attempts,
+        )
+        return attach_question_demand_contract(
+            result,
+            question_text,
+            canonical_primary_lens=contract.get("primary_lens"),
         )
 
     attached = attach_question_demand_contract(

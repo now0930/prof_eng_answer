@@ -51,11 +51,13 @@ Telegram /grade
   → explicit requirement coverage
   → Logic Check / deterministic checker
   → verified defect reconciliation
+  → canonical evaluation ledger
   → single-owner layer evidence guard
   → Difficulty Strategy / recommended ceiling
   → final score reconciliation
   → final coverage persistence
   → verdict_consistency.py
+  → evidence-based confidence / strong calibration
   → grade.json 저장
   → 동일 객체를 Telegram formatter에 전달
 ```
@@ -207,6 +209,31 @@ Coverage 표시 동기화 자체는 점수를 직접 변경하지 않는다.
 예를 들어 C에서 검증된 Fact 오류가 이미 score owner를 갖는다면, 동일 사실을 B completeness와 D/E에서 다시 직접 감점하지 않는다.
 
 D/E 제한은 별도의 field judgement 또는 connection evidence가 있을 때만 독립적으로 적용한다.
+
+### 10.1 Canonical evaluation ledger
+
+`evaluation_ledger.py`는 문제문의 원자 요구사항마다 정확히 한 행을 만들고 semantic
+coverage와 검증된 defect를 그 행에 병합한다. 상태의 최종 source of truth는
+`canonical_evaluation_ledger`이며, 미평가 요구는 `unknown`으로 보존한다.
+
+- 질문 요구 소유자: `question_demand_contract`
+- 요구 상태 소유자: `canonical_evaluation_ledger`
+- 완전성 점수 소유자: B
+- 정확성 점수 소유자: C
+- 숫자 점수 소유자: A/B/C/D/E layer
+
+원장은 점수를 직접 변경하지 않는다. 모든 요구가 평가되지 않았으면 정확 충족률을
+산출하지 않으며, 매칭되지 않은 coverage와 defect는 별도 감사 항목으로 보존한다.
+
+### 10.2 Evidence-based calibration
+
+`evidence_calibration.py`는 최종 원장과 이미 검증된 근거만 사용하여 confidence와
+`strong` 허용 여부를 보정한다. 숫자 점수는 변경하지 않는다.
+
+- 미평가 요구 또는 미해결 defect: confidence 최대 `low`
+- exact projection 검증 없는 semantic evidence: 최대 `medium`
+- 검증된 fatal: 최대 `medium`, `strong` 차단
+- 모든 원자 요구가 `correct`이고 hard defect가 없을 때만 `strong` 허용
 
 ## 11. Logic fatal과 Difficulty ceiling
 

@@ -836,6 +836,9 @@ git diff --check -- README.md docs
 | `control_valve_formula_checker.py` | 제어밸브 topic-specific deterministic checker |
 | `control_valve_correctness_bridge.py` | checker finding을 evidence contract로 연결 |
 | `verified_defect_reconciliation.py` | verified defect와 explicit coverage 동기화 |
+| `evaluation_ledger.py` | 원자 요구별 coverage·검증 오류의 단일 정규 상태 원장 |
+| `evidence_calibration.py` | 원장 근거 기반 confidence·strong 최종 상한 |
+| `accuracy_release_gate.py` | 전문가 교차 주제 정확도 기반 운영 배포 READY/HOLD 판정 |
 | `layer_evidence_guard.py` | layer별 evidence와 single-owner 제한 |
 | `logic_check_evaluator.py` | 핵심 이론 오류 평가 병합 |
 | `difficulty_score_ceiling.py` | difficulty ceiling 평가와 strict 적용 |

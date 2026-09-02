@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "canonical_evaluation_ledger_v1.schema.json",
+  "title": "Canonical Evaluation Ledger V1",
+  "type": "object",
+  "required": ["schema_version", "marker", "status", "score_effect", "rows"],
+  "properties": {
+    "schema_version": {"const": "1.0"},
+    "marker": {"const": "CANONICAL_EVALUATION_LEDGER_V1"},
+    "status": {"enum": ["complete", "incomplete", "unavailable"]},
+    "score_effect": {"const": "none"},
+    "rows": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement_id", "requirement_index", "status", "status_owner", "score_ownership", "conflict", "evidence"],
+        "properties": {
+          "requirement_id": {"type": "string", "minLength": 1},
+          "requirement_index": {"type": "integer", "minimum": 1},
+          "status": {"enum": ["correct", "partial", "incorrect", "missing", "unknown"]},
+          "status_owner": {"enum": ["verified_defect", "semantic_coverage", "unassessed"]},
+          "conflict": {"type": "boolean"},
+          "evidence": {"type": "array"}
+        },
+        "additionalProperties": true
+      }
+    },
+    "summary": {"type": "object"}
+  },
+  "additionalProperties": true
+}

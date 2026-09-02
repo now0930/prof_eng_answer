@@ -94,7 +94,18 @@ python3 -m py_compile \
   scripts/validate_release_test_coverage.py \
   scripts/validate_model_answer_relationships.py \
   scripts/check_grading_integrity_drift.py \
+  scripts/measure_expert_accuracy.py \
+  scripts/check_accuracy_release_gate.py \
+  expert_accuracy_benchmark.py \
+  accuracy_release_gate.py \
+  evaluation_ledger.py \
+  evidence_calibration.py \
   scripts/replay_sil_issue1_session.py \
+  tests/test_atomic_question_demand_contract_v2.py \
+  tests/test_canonical_evaluation_ledger.py \
+  tests/test_evidence_based_calibration.py \
+  tests/test_accuracy_release_gate.py \
+  tests/test_cross_topic_accuracy_contract.py \
   scripts/rubric_audit/report_priority_minor_relationships.py \
   scripts/rubric_audit/audit_fact_anchor_quality.py \
   scripts/rubric_audit/build_rubric_work_pack.py \
@@ -401,6 +412,13 @@ python3 -B scripts/test_cross_topic_calibration_corpus.py
 echo "----- host regression: grading integrity semantic drift -----"
 python3 -B scripts/check_grading_integrity_drift.py
 python3 -B tests/test_grading_integrity_drift.py
+python3 -B tests/test_expert_accuracy_benchmark.py
+python3 -B tests/test_atomic_question_demand_contract_v2.py
+python3 -B tests/test_canonical_evaluation_ledger.py
+python3 -B tests/test_evidence_based_calibration.py
+python3 -B tests/test_accuracy_release_gate.py
+python3 -B tests/test_cross_topic_accuracy_contract.py
+python3 -B tests/test_multi_topic_logic_batch.py
 
 echo "----- host regression: deterministic llm sampling -----"
 python3 -B scripts/test_deterministic_llm_sampling.py

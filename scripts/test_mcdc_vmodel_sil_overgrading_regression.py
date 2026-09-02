@@ -117,10 +117,27 @@ def main() -> None:
     )
     assert fixture["regression_id"] == "MCDC-VMODEL-SIL-OVERGRADING-01"
     assert fixture["source_session_id"] == "20260815_060014_5960502198"
-    assert fixture["question_type"] == "PRINCIPLE_INTERPRETATION"
+    assert fixture["question_type"] == "IMPLEMENTATION_EVALUATION"
     assert fixture["expected_topic_ids"] == [SW04, SW05, TARGET]
 
     expected = fixture["expected"]
+
+    from logic_check_evaluator import _find_wrong_pattern
+    logic_bank = load_json(
+        REPO / "rubrics" / "generated" / "logic_checks.generated.json"
+    )
+    sw04_profile = next(
+        row for row in logic_bank["topic_logic_checks"]
+        if row["topic_id"] == SW04
+    )
+    sw04_rule = next(
+        row for row in sw04_profile["fatal_checks"]
+        if row["id"] == SW04_FATAL
+    )
+    assert any(
+        _find_wrong_pattern(fixture["answer"], pattern)[0]
+        for pattern in sw04_rule["wrong_patterns"]
+    )
     assert expected["fatal_logic_expectation"] == "FATAL_EXPECTED"
     assert expected["fact_cap_behavior"] == "CAP_EXPECTED"
     assert expected["critical_fact_expectation"] == (
@@ -134,7 +151,7 @@ def main() -> None:
 
     statuses = expected["demand_status"]
     assert sum(value == "incorrect" for value in statuses.values()) == 4
-    assert sum(value == "partial" for value in statuses.values()) == 2
+    assert sum(value == "partial" for value in statuses.values()) == 4
     assert "present" not in statuses.values()
 
     required_ids = set(expected["required_fatal_ids"])
@@ -142,9 +159,7 @@ def main() -> None:
         SW04_FATAL,
         SW05_RANDOM_FATAL,
         SW05_HFT_FATAL,
-        "mcdc_proves_requirements",
         "sil_four_universal_rule",
-        "sw04_fatal_general_vv_proves_sil",
     } <= required_ids
 
     forbidden = "\n".join(expected["forbidden_feedback_elements"])
@@ -157,10 +172,10 @@ def main() -> None:
     print("MCDC_VMODEL_SIL_OVERGRADING_REGRESSION=PASS")
     print("PRODUCTION_PI_CASES=3")
     print("FIXTURE=MCDC-VMODEL-SIL-OVERGRADING-01")
-    print("FATAL_IDS=6")
+    print("FATAL_IDS=4")
     print("TOTAL_MAX=14.5")
     print("INCORRECT_DEMANDS=4")
-    print("PARTIAL_DEMANDS=2")
+    print("PARTIAL_DEMANDS=4")
 
 
 if __name__ == "__main__":

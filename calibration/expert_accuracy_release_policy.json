@@ -1,0 +1,21 @@
+{
+  "version": "expert_accuracy_release_policy_v1",
+  "minimum_reviewed_cases": 30,
+  "minimum_distinct_topics": 10,
+  "required_question_types": [
+    "PRINCIPLE_INTERPRETATION",
+    "DIAGNOSIS_ACTION",
+    "COMPARE_SELECTION",
+    "IMPLEMENTATION_EVALUATION"
+  ],
+  "minimum_cases_per_question_type": 3,
+  "minimum_major_finding_labels": 8,
+  "minimum_demand_extraction_f1": 0.9,
+  "minimum_demand_state_accuracy": 0.85,
+  "minimum_major_finding_precision": 0.9,
+  "minimum_major_finding_recall": 0.85,
+  "maximum_score_range_mae": 1.0,
+  "maximum_false_pass_count": 0,
+  "maximum_false_strong_count": 0,
+  "maximum_confidence_ceiling_violation_count": 0
+}

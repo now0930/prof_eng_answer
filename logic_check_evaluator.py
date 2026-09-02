@@ -2217,6 +2217,39 @@ def _stage25g3e_preselect_compact_secondary(
     return candidates, ""
 
 
+def _stage25g3e_multi_topic_batch_ids(
+    grade: dict[str, Any],
+    answer_text: str,
+    primary_topic_id: str,
+    topic_logic_checks: Any,
+) -> list[str]:
+    try:
+        contract = grade.get("question_contract") if isinstance(grade, dict) else None
+    except Exception:
+        return []
+    summary = (
+        contract.get("multi_topic_grading_context_summary")
+        if isinstance(contract, dict)
+        else None
+    )
+    if not isinstance(summary, dict) or summary.get("routing_mode") != "MULTI_TOPIC":
+        return []
+    topic_ids = [
+        str(value).strip()
+        for value in summary.get("primary_topic_ids") or []
+        if str(value or "").strip()
+    ]
+    for candidate in _select_claim_triggered_secondary_profiles(
+        answer_text,
+        str(primary_topic_id or "").strip(),
+        topic_logic_checks,
+    ):
+        topic_id = _stage25g3e_candidate_topic_id(candidate)
+        if topic_id and topic_id not in topic_ids:
+            topic_ids.append(topic_id)
+    return list(dict.fromkeys(topic_ids)) if len(set(topic_ids)) >= 2 else []
+
+
 def _stage25g3e_pass_profile_evaluation() -> dict[str, Any]:
     return {
         "verdict": "pass",
@@ -2634,8 +2667,16 @@ def evaluate_logic_checks(
     _stage25g3e_compact_secondary_topic_id = (
         _stage25g3e_internal_compact_secondary_topic_id
     )
+    _stage25g3e_multi_topic_ids = _stage25g3e_multi_topic_batch_ids(
+        grade,
+        answer_text,
+        str(_preferred_logic_topic_id or "").strip(),
+        bank.get("topic_logic_checks", []),
+    )
 
-    if not _stage25g3e_internal_compact_secondary_topic_id:
+    if _stage25g3e_multi_topic_ids:
+        _stage25g3e_compact_secondary_topic_id = ""
+    elif not _stage25g3e_internal_compact_secondary_topic_id:
         (
             _stage25g3e_preselected_secondary_candidates,
             _stage25g3e_compact_secondary_topic_id,
@@ -2720,7 +2761,17 @@ def evaluate_logic_checks(
                     else canonical_axes[:24]
                 )
 
-                if (
+                if _stage25g3e_multi_topic_ids:
+                    from logic_llm_verifier import (
+                        verify_logic_topics_with_llm,
+                    )
+
+                    profile_evaluation = verify_logic_topics_with_llm(
+                        answer_text,
+                        _stage25g3e_multi_topic_ids,
+                    )
+                    llm_profile_enabled = True
+                elif (
                     _stage25g3e_internal_compact_secondary_topic_id
                     and str(topic_id or '').strip()
                     == _stage25g3e_internal_compact_secondary_topic_id
@@ -3009,7 +3060,12 @@ def evaluate_logic_checks(
 
         for check in topic_check.get("fatal_checks", []):
             for pattern in check.get("wrong_patterns", []):
-                matched, ctx = _find_wrong_pattern(text, pattern)
+                # Multiline/table rules depend on row boundaries.  Try the
+                # immutable answer first; use normalized text only as a
+                # compatibility fallback for symbol normalization.
+                matched, ctx = _find_wrong_pattern(answer_text, pattern)
+                if not matched:
+                    matched, ctx = _find_wrong_pattern(text, pattern)
                 if not matched:
                     continue
 
@@ -3488,10 +3544,15 @@ def evaluate_logic_checks(
             and not _stage25g3e_internal_compact_secondary_topic_id
         ),
         'semantic_llm_owner': (
-            'secondary_compact_helper'
-            if _stage25g3e_compact_secondary_topic_id
-            else 'primary_profile_verifier'
+            'multi_topic_batch'
+            if _stage25g3e_multi_topic_ids
+            else (
+                'secondary_compact_helper'
+                if _stage25g3e_compact_secondary_topic_id
+                else 'primary_profile_verifier'
+            )
         ),
+        'multi_topic_ids': _stage25g3e_multi_topic_ids,
         'max_llm_calls': 1,
     }
     return result

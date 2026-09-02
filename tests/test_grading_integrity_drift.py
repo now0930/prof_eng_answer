@@ -13,7 +13,7 @@ if str(REPO) not in sys.path:
 from scripts.check_grading_integrity_drift import DEFAULT_BASELINE, check
 
 
-EXPECTED_DIGEST = "afab409840e5b405daa73c58c88c9c10fc3ebd9c474cf05fa2d2bce08cb3c143"
+EXPECTED_DIGEST = "983bee21bf54d30ca51b53f128d0bcc51768aa7ed4fec7dcd80cf6e9da4b913e"
 
 
 def test_committed_integrity_baseline_has_no_drift() -> None:

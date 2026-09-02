@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "expert_accuracy_case_v1.schema.json",
+  "title": "Expert Accuracy Golden Case",
+  "type": "object",
+  "additionalProperties": true,
+  "required": ["version", "case_id", "review_status", "labels"],
+  "properties": {
+    "version": {"const": "expert_accuracy_case_v1"},
+    "case_id": {"type": "string", "minLength": 1},
+    "review_status": {
+      "enum": ["draft", "reviewed", "adjudicated", "excluded"]
+    },
+    "review": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["reviewer", "method", "reviewed_at", "evidence_path"],
+      "properties": {
+        "reviewer": {"type": "string", "minLength": 1},
+        "method": {"enum": ["expert_review", "user_approval", "adjudication"]},
+        "reviewed_at": {"type": "string", "format": "date-time"},
+        "evidence_path": {"type": "string", "minLength": 1}
+      }
+    },
+    "labels": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["demands", "findings", "score_range", "flags"],
+      "properties": {
+        "demands": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["demand_id", "requirement", "core", "status"],
+            "properties": {
+              "demand_id": {"type": "string", "minLength": 1},
+              "requirement": {"type": "string"},
+              "core": {"type": "boolean"},
+              "status": {"enum": ["CORRECT", "PARTIAL", "WRONG", "MISSING"]}
+            }
+          }
+        },
+        "findings": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["finding_id", "severity"],
+            "properties": {
+              "finding_id": {"type": "string", "minLength": 1},
+              "severity": {"enum": ["minor", "major", "fatal"]}
+            }
+          }
+        },
+        "score_range": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["min", "max"],
+          "properties": {
+            "min": {"type": "number", "minimum": 0, "maximum": 25},
+            "max": {"type": "number", "minimum": 0, "maximum": 25}
+          }
+        },
+        "flags": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["passing_score_allowed", "strong_verdict_allowed", "confidence_ceiling"],
+          "properties": {
+            "passing_score_allowed": {"type": "boolean"},
+            "strong_verdict_allowed": {"type": "boolean"},
+            "confidence_ceiling": {"enum": ["low", "medium", "high"]}
+          }
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "review_status": {"enum": ["reviewed", "adjudicated"]}
+        }
+      },
+      "then": {"required": ["review"]}
+    }
+  ]
+}

@@ -326,6 +326,60 @@ def extract_logic_evidence_candidates(
             }
         )
 
+    # Preserve table semantics before nearby-line extraction flattens them.
+    # This is topic-neutral: headers are bound to each row's cells and the
+    # verifier still decides whether the resulting relationship is correct.
+    normalized_key_terms = [
+        _normalize_text(str(term)).casefold()
+        for term in key_terms
+        if _normalize_text(str(term))
+    ]
+
+    def table_cells(line: str) -> list[str]:
+        stripped = str(line or "").strip()
+        if stripped.count("|") < 2:
+            return []
+        return [cell.strip() for cell in stripped.strip("|").split("|")]
+
+    raw_lines = str(answer_text or "").splitlines()
+    table_header_hints = (
+        "구분", "항목", "단계", "대상", "도구", "방법", "요소",
+        "기준", "특성", "내용", "조건", "결과",
+    )
+    for index in range(len(raw_lines) - 2):
+        headers = table_cells(raw_lines[index])
+        following = table_cells(raw_lines[index + 1])
+        if not headers or len(following) != len(headers):
+            continue
+        has_separator = all(
+            re.fullmatch(r":?-{3,}:?", cell.replace(" ", ""))
+            for cell in following
+        )
+        if not has_separator:
+            normalized_headers = [_normalize_text(cell).casefold() for cell in headers]
+            if not any(
+                hint.casefold() in header
+                for header in normalized_headers
+                for hint in table_header_hints
+            ):
+                continue
+        data_start = index + 2 if has_separator else index + 1
+        for row_line in raw_lines[data_start:]:
+            cells = table_cells(row_line)
+            if len(cells) != len(headers):
+                break
+            rendered = " | ".join(
+                f"{header}={cell}"
+                for header, cell in zip(headers, cells)
+                if header and cell
+            )
+            normalized_rendered = _normalize_text(rendered).casefold()
+            if normalized_key_terms and not any(
+                term in normalized_rendered for term in normalized_key_terms
+            ):
+                continue
+            add("structured_table_relation", rendered)
+
     for rule in rules:
         if not isinstance(rule, dict):
             continue
@@ -825,7 +879,8 @@ def _stage22_profile_response_schema(
                 row.get("id") or row.get("rule_id") or ""
             ).strip()
         else:
-            rule_id = ""
+            match = re.match(r"\s*\[([^\]]+)\]", str(row or ""))
+            rule_id = match.group(1).strip() if match else ""
         if not rule_id:
             rule_id = f"profile_rule_{index:03d}"
         if rule_id not in rule_ids:
@@ -1021,12 +1076,201 @@ def _canonical_logic_finding_key(finding: dict[str, Any]) -> tuple[str, str]:
     return (severity, message)
 
 
+def _fatal_condition_rule_ids(profile: dict[str, Any]) -> set[str]:
+    rule_ids: set[str] = set()
+    for row in profile.get("fatal_conditions") or []:
+        if isinstance(row, dict):
+            rule_id = str(row.get("id") or row.get("rule_id") or "").strip()
+        else:
+            match = re.match(r"\s*\[([^\]]+)\]", str(row or ""))
+            rule_id = match.group(1).strip() if match else ""
+        if rule_id:
+            rule_ids.add(rule_id)
+    return rule_ids
+
+
+def _authoritative_structured_rules(
+    profile: dict[str, Any],
+) -> list[dict[str, Any]]:
+    explicit = profile.get("authoritative_structured_rules")
+    if isinstance(explicit, list):
+        return [dict(row) for row in explicit if isinstance(row, dict)]
+
+    fatal_by_id = {
+        str(row.get("id") or row.get("rule_id") or "").strip(): row
+        for row in (profile.get("fatal_conditions") or [])
+        if isinstance(row, dict)
+    }
+    rules: list[dict[str, Any]] = []
+    compact = profile.get("compact_batch_verification") or {}
+    for field in compact.get("fields") or []:
+        if not isinstance(field, dict):
+            continue
+        relation = field.get("structured_relation") or {}
+        if not isinstance(relation, dict) or not relation.get("authoritative_true"):
+            continue
+        rule_id = str(field.get("rule_id") or "").strip()
+        pattern = str(relation.get("combined_pattern") or "").strip()
+        source = fatal_by_id.get(rule_id)
+        if not rule_id or not pattern or not isinstance(source, dict):
+            continue
+        rules.append({
+            "rule_id": rule_id,
+            "pattern": pattern,
+            "render": str(relation.get("render") or "").strip(),
+            "message": str(
+                source.get("wrong_claim")
+                or source.get("claim")
+                or source.get("message")
+                or rule_id
+            ).strip(),
+            "correct_rule": str(
+                source.get("correct_rule")
+                or source.get("correction")
+                or ""
+            ).strip(),
+            "affected_layers": source.get("affected_layers") or ["C"],
+            "recommended_ceiling": source.get("recommended_ceiling"),
+        })
+    return rules
+
+
+def _authoritative_structured_findings(
+    answer_text: str,
+    profile: dict[str, Any],
+    default_ceiling: float,
+) -> list[dict[str, Any]]:
+    findings: list[dict[str, Any]] = []
+    for rule in _authoritative_structured_rules(profile):
+        try:
+            matched = re.search(
+                str(rule.get("pattern") or ""),
+                str(answer_text or ""),
+                flags=re.IGNORECASE | re.MULTILINE | re.DOTALL,
+            )
+        except re.error:
+            continue
+        if matched is None:
+            continue
+        rule_id = str(rule.get("rule_id") or "").strip()
+        ceiling = rule.get("recommended_ceiling")
+        if not isinstance(ceiling, (int, float)) or isinstance(ceiling, bool):
+            ceiling = default_ceiling
+        findings.append({
+            "id": f"structured_{rule_id}",
+            "rule_id": rule_id,
+            "source_rule_id": rule_id,
+            "severity": "fatal",
+            "message": str(rule.get("message") or rule_id),
+            "correct_rule": str(rule.get("correct_rule") or ""),
+            "affected_layers": list(rule.get("affected_layers") or ["C"]),
+            "evidence": str(rule.get("render") or matched.group(0)).strip(),
+            "engine": "authoritative_structured_relation_v1",
+            "confidence": 1.0,
+            "recommended_ceiling": float(ceiling),
+        })
+    return findings
+
+
+def _combined_logic_profile(
+    topic_ids: list[str],
+    answer_text: str,
+) -> dict[str, Any]:
+    profiles = [load_logic_check_profile(topic_id) for topic_id in topic_ids]
+    answer = _normalize_text(answer_text).casefold()
+
+    def unique(values: list[Any]) -> list[Any]:
+        output: list[Any] = []
+        seen: set[str] = set()
+        for value in values:
+            key = json.dumps(value, ensure_ascii=False, sort_keys=True)
+            if key not in seen:
+                seen.add(key)
+                output.append(value)
+        return output
+
+    def relevance(value: Any) -> int:
+        tokens = set(re.findall(r"[A-Za-z가-힣0-9/]+", str(value).casefold()))
+        return sum(len(token) for token in tokens if len(token) >= 3 and token in answer)
+
+    def relevant_rows(profile: dict[str, Any], key: str, limit: int) -> list[Any]:
+        ranked = sorted(
+            enumerate(profile.get(key) or []),
+            key=lambda item: (-relevance(item[1]), item[0]),
+        )
+        positive = [row for _index, row in ranked if relevance(row) > 0]
+        return positive[:limit]
+
+    fatal_conditions = unique([
+        row for profile in profiles
+        for row in relevant_rows(profile, "fatal_conditions", 8)
+    ])
+    truth_schema = unique([
+        row for profile in profiles
+        for row in relevant_rows(profile, "truth_schema", 6)
+    ])
+    safe_conditions = unique([
+        row for profile in profiles
+        for row in relevant_rows(profile, "safe_conditions", 4)
+    ])
+    key_terms = unique([
+        row
+        for profile in profiles
+        for row in ((profile.get("candidate_extraction") or {}).get("key_terms") or [])
+        if _normalize_text(str(row)).casefold() in answer
+    ])
+    ceilings = [
+        float(value)
+        for profile in profiles
+        for value in [(profile.get("cap_policy") or {}).get("fatal_recommended_ceiling")]
+        if isinstance(value, (int, float)) and not isinstance(value, bool)
+    ]
+    thresholds = [
+        float(value)
+        for profile in profiles
+        for value in [(profile.get("cap_policy") or {}).get("fatal_confidence_threshold")]
+        if isinstance(value, (int, float)) and not isinstance(value, bool)
+    ]
+    authoritative_structured_rules = unique([
+        row
+        for profile in profiles
+        for row in _authoritative_structured_rules(profile)
+    ])
+    return {
+        "topic_id": "multi_topic_logic_batch",
+        "display_name": " + ".join(topic_ids),
+        "enabled": True,
+        "cap_policy": {
+            "enabled": True,
+            "fatal_confidence_threshold": max(thresholds) if thresholds else 0.8,
+            "fatal_recommended_ceiling": min(ceilings) if ceilings else 10.0,
+        },
+        "candidate_extraction": {
+            "max_candidates": 20,
+            "nearby_window": 1,
+            "rules": [],
+            "key_terms": key_terms,
+        },
+        "truth_schema": truth_schema,
+        "fatal_conditions": fatal_conditions,
+        "safe_conditions": safe_conditions,
+        "authoritative_structured_rules": authoritative_structured_rules,
+    }
+
+
 def verify_logic_with_llm(
     answer_text: str,
     topic_id: str,
     canonical_axes: list[dict[str, Any]] | None = None,
+    *,
+    _profile_override: dict[str, Any] | None = None,
+    _force_schema: bool = False,
 ) -> dict[str, Any]:
-    profile = load_logic_check_profile(topic_id)
+    profile = (
+        dict(_profile_override)
+        if isinstance(_profile_override, dict)
+        else load_logic_check_profile(topic_id)
+    )
     cap_policy = profile.get("cap_policy") or {}
     fatal_threshold = float(cap_policy.get("fatal_confidence_threshold") or 0.75)
     fatal_ceiling = float(cap_policy.get("fatal_recommended_ceiling") or 10.0)
@@ -1079,7 +1323,7 @@ def verify_logic_with_llm(
             candidates,
             active_axes,
         )
-        if active_axes
+        if active_axes or _force_schema
         else None
     )
     call_kwargs = (
@@ -1247,6 +1491,7 @@ def verify_logic_with_llm(
         }
 
     normalized_findings: list[dict[str, Any]] = []
+    allowed_rule_ids = _fatal_condition_rule_ids(profile)
 
     for item in verdict.get("findings") or []:
         if not isinstance(item, dict):
@@ -1279,11 +1524,26 @@ def verify_logic_with_llm(
             "evidence": candidate_map[cid]["text"],
             "engine": "llm_verifier_profile_v1",
         }
+        rule_id = str(item.get("rule_id") or "").strip()
+        if rule_id in allowed_rule_ids:
+            finding["rule_id"] = rule_id
+            finding["source_rule_id"] = rule_id
 
         if severity == "fatal":
             finding["recommended_ceiling"] = fatal_ceiling
 
         normalized_findings.append(finding)
+
+    # Profile-owned, structurally reconstructed relations are deterministic
+    # evidence. They do not depend on the semantic model noticing the same
+    # table mapping, but remain limited to explicit authoritative_true rules.
+    normalized_findings.extend(
+        _authoritative_structured_findings(
+            answer_text,
+            profile,
+            fatal_ceiling,
+        )
+    )
 
     # De-duplicate LLM verifier findings.
     # The LLM may return the same contradiction for multiple nearby candidates.
@@ -1330,6 +1590,30 @@ def verify_logic_with_llm(
         "recommended_ceiling": fatal_ceiling if fatal else None,
         "mode": mode,
     }
+
+
+def verify_logic_topics_with_llm(
+    answer_text: str,
+    topic_ids: list[str],
+) -> dict[str, Any]:
+    unique_topic_ids = list(dict.fromkeys(
+        str(topic_id or "").strip()
+        for topic_id in topic_ids
+        if str(topic_id or "").strip()
+    ))
+    if len(unique_topic_ids) < 2:
+        raise ValueError("multi-topic logic batch requires at least two topics")
+    profile = _combined_logic_profile(unique_topic_ids, answer_text)
+    result = verify_logic_with_llm(
+        answer_text,
+        "multi_topic_logic_batch",
+        _profile_override=profile,
+        _force_schema=True,
+    )
+    result["topic_ids"] = unique_topic_ids
+    result["engine"] = "multi_topic_logic_batch_v1"
+    result["llm_call_count"] = 1
+    return result
 
 
 def verify_second_order_logic_with_llm(answer_text: str) -> dict[str, Any]:
