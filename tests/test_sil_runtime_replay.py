@@ -46,6 +46,7 @@ def test_issue1_session_replay_persists_consistent_boundaries() -> None:
             (output_dir / "grade.json").read_text(encoding="utf-8")
         )
         assert grade["confidence"] == "medium"
+        assert grade["total_score"] <= 14.5
         assert grade["passing_score_allowed"] is False
         assert grade["strong_verdict_allowed"] is False
         assert grade["requirements_full_credit_allowed"] is False

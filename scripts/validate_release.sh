@@ -101,6 +101,7 @@ python3 -m py_compile \
   evaluation_ledger.py \
   evidence_calibration.py \
   verified_evidence_score_calibration.py \
+  verified_correctness_score_cap.py \
   high_score_eligibility.py \
   persisted_grade_replay.py \
   scripts/replay_persisted_grade.py \
@@ -108,6 +109,7 @@ python3 -m py_compile \
   tests/test_atomic_question_demand_contract_v2.py \
   tests/test_canonical_evaluation_ledger.py \
   tests/test_evidence_based_calibration.py \
+  tests/test_verified_correctness_score_cap.py \
   tests/test_authoritative_structured_safety_rules.py \
   tests/test_qtype_topic_pack_demand_axes.py \
   tests/test_verified_evidence_score_calibration.py \
@@ -426,6 +428,7 @@ python3 -B tests/test_expert_accuracy_benchmark.py
 python3 -B tests/test_atomic_question_demand_contract_v2.py
 python3 -B tests/test_canonical_evaluation_ledger.py
 python3 -B tests/test_evidence_based_calibration.py
+python3 -B tests/test_verified_correctness_score_cap.py
 python3 -B tests/test_high_score_eligibility.py
 python3 -B tests/test_authoritative_structured_safety_rules.py
 python3 -B tests/test_qtype_topic_pack_demand_axes.py

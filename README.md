@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 로드맵과 현재 진행 상태는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다. 이슈는 구현 상태와 검증 증거를 관리하고, 고정 정책과 반복 운영 절차는 `docs/` 문서가 소유합니다.
 
-> 최신 개발 상태(2026-09-03): 답안 분량 기반 점수 상승과 장문 semantic 신호에 의한 atomic requirement `correct` 승격을 제거했습니다. `base_score=A+B+C+D+E`, `final_score=min(base_score, verified hard caps)`를 적용하며 20점 이상은 개별 core evidence와 D의 현장조건→판단→검증 근거가 있을 때만 허용합니다. 기존 prediction 30건을 새 상태 의미로 재측정한 [정확도 report](reports/expert_accuracy_seed_current.json)는 요구 상태 정확도 55.86%로 [release gate](docs/accuracy_release_gate.md) `HOLD`입니다. 실제 provider 재채점 후에만 배포를 재승인합니다.
+> 최신 개발 상태(2026-09-03): 답안 분량 기반 점수 상승과 장문 semantic 신호에 의한 atomic requirement `correct` 승격을 제거했습니다. `base_score=A+B+C+D+E`, `final_score=min(base_score, verified hard caps)`를 적용하며, 결정론적 logic fatal은 총점 14.5점, 검증된 핵심 major correctness defect는 17.4점으로 제한합니다. 20점 이상은 개별 core evidence와 D의 현장조건→판단→검증 근거가 있을 때만 허용합니다. 기존 prediction 30건을 새 상태 의미로 재측정한 [정확도 report](reports/expert_accuracy_seed_current.json)는 요구 상태 정확도 55.86%로 [release gate](docs/accuracy_release_gate.md) `HOLD`입니다. 실제 provider 재채점 후에만 배포를 재승인합니다.
 
 ---
 
@@ -218,12 +218,14 @@ A·C·D·E = min(Phase 6 semantic score, Phase 8 candidate)
 
 B는 Phase 8의 최종 소유 대상이 아닙니다. Phase 8 처리 후 Question Demand native projection이 B를 다시 결정합니다. Connection 평가는 진단 정보로 유지하며 E점수를 직접 덮어쓰지 않습니다.
 
-### 4.6 Logic fatal과 numeric cap 분리
+### 4.6 검증된 correctness 오류와 numeric cap
 
 Logic Check는 핵심 이론 오류를 검증합니다.
 
-- Logic fatal은 D/E claim trust를 제한할 수 있습니다.
-- Logic fatal 자체를 D/E 점수의 별도 직접 감점으로 중복 계산하지 않습니다.
+- 결정론적 Logic fatal은 총점 14.5점 hard cap을 적용합니다.
+- 구조화 evidence로 core requirement에 연결된 major correctness defect는 총점 17.4점 hard cap을 적용합니다.
+- LLM 단독 주장, 스타일 지적, non-core major는 numeric cap 근거가 아닙니다.
+- 해당 cap은 A/B/C/D/E의 오류 소유권과 별개인 최종 안전장치이며, 동일 오류를 layer별로 중복 감점하지 않습니다.
 - Recommended ceiling과 실제 적용된 numeric cap을 구분합니다.
 - Telegram의 `cap 적용` 문구는 실제 numeric cap이 적용된 경우에만 출력합니다.
 
@@ -254,7 +256,7 @@ Logic Check는 핵심 이론 오류를 검증합니다.
 
 `grade_submission_normalizer.py`가 제출문 정규화를 소유하고, `verdict_consistency.py`가 최종 판정 일관성을 소유합니다.
 
-최종 판정 일관성은 숫자 점수를 다시 계산하지 않습니다.
+최종 판정 일관성은 점수를 올리거나 재계산하지 않습니다. 다만 verified correctness cap은 별도 최종 경계에서 숫자를 단방향으로만 낮춥니다.
 
 - Fatal 오류는 praise, Full Credit, strong와 합격 판정을 차단합니다.
 - Major 비치명 오류는 Full Credit과 strong를 차단하지만 합격을 일률적으로 차단하지 않습니다.
@@ -517,7 +519,7 @@ Telegram /grade
 4. 저장 객체와 출력 객체는 동일해야 합니다.
 5. 완료된 session은 다음 채점에 재사용하지 않습니다.
 6. 제출문 정규화는 topic-neutral하고 idempotent해야 합니다.
-7. 최종 판정 일관성 보정은 숫자 점수를 변경하지 않습니다.
+7. 최종 판정 일관성은 점수를 올리지 않으며, 검증된 correctness cap만 단방향 하향 적용합니다.
 
 ---
 
@@ -842,6 +844,7 @@ git diff --check -- README.md docs
 | `verified_defect_reconciliation.py` | verified defect와 explicit coverage 동기화 |
 | `evaluation_ledger.py` | 원자 요구별 coverage·검증 오류의 단일 정규 상태 원장 |
 | `evidence_calibration.py` | 원장 근거 기반 confidence·strong 최종 상한 |
+| `verified_correctness_score_cap.py` | topic-neutral verified fatal·core major 총점 hard cap |
 | `accuracy_release_gate.py` | 전문가 교차 주제 정확도 기반 운영 배포 READY/HOLD 판정 |
 | `layer_evidence_guard.py` | layer별 evidence와 single-owner 제한 |
 | `logic_check_evaluator.py` | 핵심 이론 오류 평가 병합 |

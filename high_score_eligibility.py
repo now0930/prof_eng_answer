@@ -67,6 +67,7 @@ def _hard_defect_present(grade: dict[str, Any]) -> bool:
     ):
         container = grade.get(container_key)
         rows = container.get(row_key) if isinstance(container, dict) else []
+        rows = rows if isinstance(rows, list) else []
         if any(
             isinstance(row, dict)
             and str(row.get("severity") or "").casefold() in {"major", "fatal"}
@@ -74,7 +75,7 @@ def _hard_defect_present(grade: dict[str, Any]) -> bool:
                 container_key == "logic_check_evaluation"
                 or str(row.get("defect_type") or "").casefold() == "correctness_error"
             )
-            for row in rows if isinstance(rows, list)
+            for row in rows
         ):
             return True
     return False
@@ -119,6 +120,7 @@ def evaluate_high_score_eligibility(grade: Any) -> dict[str, Any]:
         return {"eligible": False, "reasons": ["grade_not_mapping"]}
     ledger = grade.get("canonical_evaluation_ledger")
     rows = ledger.get("rows") if isinstance(ledger, dict) else []
+    rows = rows if isinstance(rows, list) else []
     core_rows = [row for row in rows if isinstance(row, dict) and row.get("is_core", True)]
     projection = grade.get("explicit_requirement_projection_validation")
     projection_valid = isinstance(projection, dict) and projection.get("valid") is True

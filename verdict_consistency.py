@@ -1398,6 +1398,10 @@ _STAGE23I_POSITIVE_ACCURACY_MARKERS = (
     "완전히 정확",
     "정확성이 매우 높",
     "핵심 사실이 정확",
+    "요구사항에 정확히 응답",
+    "요구한 모든 핵심 항목에 직접 답",
+    "정확한 설명이 우수",
+    "핵심 개념 인지와 정확",
 )
 
 _STAGE23I_NARRATIVE_FIELDS = (
@@ -1495,6 +1499,19 @@ def _stage23i_collect_accuracy_conflicts(value):
     ):
         if root_key in value:
             walk(value.get(root_key), root_key)
+
+    # A canonical ledger with unresolved atomic requirements cannot support a
+    # public claim that the answer as a whole is factually accurate.  This is
+    # intentionally independent of topic, model, and scoring rubric.
+    ledger = value.get("canonical_evaluation_ledger")
+    if isinstance(ledger, dict):
+        summary = ledger.get("summary")
+        counts = summary.get("status_counts") if isinstance(summary, dict) else {}
+        if isinstance(counts, dict) and any(
+            (_stage23i_number(counts.get(status)) or 0) > 0
+            for status in ("partial", "incorrect", "missing", "unknown")
+        ):
+            add("canonical_evaluation_ledger.summary.status_counts")
 
     return sources
 

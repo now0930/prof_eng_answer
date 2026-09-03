@@ -10391,10 +10391,10 @@ def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
 # ============================================================
 
 _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION = (
-    "final_grade_cache_v2"
+    "final_grade_cache_v3"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION = (
-    "evidence_required_score_policy_v2"
+    "verified_correctness_cap_score_policy_v3"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_DIR = (
     BASE_DIR / "data" / "final_grade_cache"
@@ -10732,6 +10732,9 @@ def _stage17e5_finalize_pipeline_result(
     from high_score_eligibility import (
         apply_high_score_eligibility_cap,
     )
+    from verified_correctness_score_cap import (
+        apply_verified_correctness_score_cap,
+    )
 
     if _stage17e5_is_grade_dict(value):
         value = attach_submission_normalization(
@@ -10745,9 +10748,10 @@ def _stage17e5_finalize_pipeline_result(
                 submission_normalization.get("question_text") or ""
             ),
         )
-        # Compatibility diagnostics are deliberately score-neutral. The only
-        # score action at this final boundary is the one-way high-score cap.
+        # Compatibility diagnostics are deliberately score-neutral. Numeric
+        # actions at this final boundary are one-way, evidence-owned caps.
         value = apply_verified_evidence_score_calibration(value)
+        value = apply_verified_correctness_score_cap(value)
         value = apply_high_score_eligibility_cap(value)
         value = enforce_final_decision_consistency(
             value
