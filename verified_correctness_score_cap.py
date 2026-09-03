@@ -11,8 +11,8 @@ import copy
 from typing import Any
 
 
-VERIFIED_CORRECTNESS_SCORE_CAP_VERSION = "verified_correctness_score_cap_v1"
-VERIFIED_CORRECTNESS_SCORE_CAP_MARKER = "VERIFIED_CORRECTNESS_SCORE_CAP_V1"
+VERIFIED_CORRECTNESS_SCORE_CAP_VERSION = "verified_correctness_score_cap_v2"
+VERIFIED_CORRECTNESS_SCORE_CAP_MARKER = "VERIFIED_CORRECTNESS_SCORE_CAP_V2"
 FATAL_TOTAL_CAP = 14.5
 MAJOR_CORE_TOTAL_CAP = 17.4
 _SCORE_FIELDS = (
@@ -209,6 +209,13 @@ def apply_verified_correctness_score_cap(payload: Any) -> Any:
         output.get("total_score", output.get("final_total_score"))
     )
     cap = decision["cap"]
+    previous_cap = _number(previous.get("cap"))
+    previously_applied = bool(
+        cap is not None
+        and previous.get("score_effect") == "hard_cap"
+        and previous_cap == cap
+        and previous.get("source_ids") == decision["source_ids"]
+    )
     changed_fields: list[str] = []
     if current is not None and cap is not None and current > cap:
         for field in _SCORE_FIELDS:
@@ -225,22 +232,32 @@ def apply_verified_correctness_score_cap(payload: Any) -> Any:
             and row.get("type") == "verified_correctness_score_cap"
         )
     ] if isinstance(applied_caps, list) else []
-    if cap is not None:
+    cap_applied = bool(changed_fields) or previously_applied
+    if cap_applied:
         caps.append({
             "type": "verified_correctness_score_cap",
             "cap": cap,
             "reason_codes": decision["reason_codes"],
             "source_ids": decision["source_ids"],
+            "score_effect": "hard_cap",
         })
+        output["applied_caps"] = caps
+    elif isinstance(applied_caps, list):
+        # `applied_caps` is public evidence of an actual numeric reduction,
+        # not a list of merely applicable policies.
         output["applied_caps"] = caps
 
     decision.update({
-        "score_effect": "hard_cap" if changed_fields else "none",
-        "original_total_score": current,
+        "score_effect": "hard_cap" if cap_applied else "none",
+        "original_total_score": (
+            previous.get("original_total_score")
+            if previously_applied else current
+        ),
         "applied_total_score": (
             min(current, cap) if current is not None and cap is not None else current
         ),
         "changed_fields": changed_fields,
+        "preserved_prior_application": previously_applied,
     })
     output["verified_correctness_score_cap"] = decision
     return output

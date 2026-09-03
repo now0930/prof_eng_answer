@@ -10391,10 +10391,10 @@ def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
 # ============================================================
 
 _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION = (
-    "final_grade_cache_v3"
+    "final_grade_cache_v4"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION = (
-    "verified_correctness_cap_score_policy_v3"
+    "verified_correctness_cap_output_policy_v4"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_DIR = (
     BASE_DIR / "data" / "final_grade_cache"

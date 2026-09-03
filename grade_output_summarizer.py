@@ -1252,6 +1252,116 @@ _STAGE18B3_PREVIOUS_BUILD_PAYLOAD = _build_payload
 _STAGE18B3_PREVIOUS_RENDER = _render
 
 
+def _stage18b4_grade_contract(grade, key):
+    if not isinstance(grade, dict):
+        return {}
+    direct = grade.get(key)
+    if isinstance(direct, dict):
+        return direct
+    parsed = grade.get("parsed")
+    if isinstance(parsed, dict) and isinstance(parsed.get(key), dict):
+        return parsed[key]
+    return {}
+
+
+def _stage18b4_actual_numeric_cap(grade):
+    """Project only *applied* one-way caps into public formatter state."""
+    sources = []
+    caps = []
+
+    def add(source, cap=None, reason=""):
+        if source not in sources:
+            sources.append(source)
+        try:
+            numeric_cap = float(cap)
+        except (TypeError, ValueError, OverflowError):
+            numeric_cap = None
+        if numeric_cap is not None:
+            caps.append(numeric_cap)
+        return str(reason or "").strip()
+
+    reasons = []
+    verified = _stage18b4_grade_contract(
+        grade, "verified_correctness_score_cap"
+    )
+    if verified.get("score_effect") == "hard_cap":
+        reasons.append(add(
+            "verified_correctness_score_cap",
+            verified.get("cap"),
+            "검증된 correctness 오류에 따른 총점 상한",
+        ))
+
+    difficulty = _stage18b4_grade_contract(
+        grade, "difficulty_ceiling_evaluation"
+    )
+    if difficulty.get("cap_applied") is True:
+        reasons.append(add(
+            "difficulty_ceiling",
+            difficulty.get("capped_score") or difficulty.get("recommended_cap"),
+            difficulty.get("reason") or difficulty.get("fatal_error_reason"),
+        ))
+
+    explicit = _stage18b4_grade_contract(
+        grade, "explicit_requirement_cap_evaluation"
+    )
+    if explicit.get("applied") is True:
+        reasons.append(add(
+            "explicit_requirement_missing_cap",
+            explicit.get("total_cap"),
+            explicit.get("reason"),
+        ))
+
+    high_score = _stage18b4_grade_contract(
+        grade, "high_score_eligibility"
+    )
+    if high_score.get("cap_applied") is True:
+        reasons.append(add(
+            "high_score_evidence_eligibility",
+            high_score.get("cap"),
+            "고득점 evidence 적격성 미충족에 따른 상한",
+        ))
+
+    applied_caps = grade.get("applied_caps") if isinstance(grade, dict) else []
+    for row in applied_caps if isinstance(applied_caps, list) else []:
+        if not isinstance(row, dict) or row.get("score_effect") != "hard_cap":
+            continue
+        reasons.append(add(
+            str(row.get("type") or "applied_numeric_cap"),
+            row.get("cap") or row.get("total_cap"),
+            row.get("reason") or ", ".join(
+                str(item) for item in row.get("reason_codes", [])
+            ),
+        ))
+
+    reasons = [reason for reason in reasons if reason]
+    return {
+        "cap_applied": bool(sources),
+        "cap": min(caps) if caps else None,
+        "sources": sources,
+        "reason": reasons[0] if reasons else "",
+    }
+
+
+def _stage18b4_attach_actual_numeric_cap(payload, grade):
+    if not isinstance(payload, dict):
+        return payload
+    cap = _stage18b4_actual_numeric_cap(grade)
+    if not cap["cap_applied"]:
+        return payload
+    out = dict(payload)
+    score = out.get("score")
+    if isinstance(score, dict):
+        score = dict(score)
+        score["score_range"] = f"{score.get('total')}점 cap 적용"
+        out["score"] = score
+    ceiling = out.get("ceiling")
+    ceiling = dict(ceiling) if isinstance(ceiling, dict) else {}
+    ceiling.update(cap)
+    out["ceiling"] = ceiling
+    out["applied_numeric_cap"] = cap
+    return out
+
+
 def _stage18b3_find_reconciliation(
     grade: Any,
 ) -> dict[str, Any]:
@@ -1316,6 +1426,11 @@ def _build_payload(
 
     if not isinstance(payload, dict):
         return payload
+
+    payload = _stage18b4_attach_actual_numeric_cap(
+        payload,
+        grade,
+    )
 
     reconciliation = (
         _stage18b3_find_reconciliation(

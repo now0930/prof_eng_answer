@@ -95,6 +95,35 @@ def test_unverified_or_noncorrectness_hints_never_trigger_cap() -> None:
     assert result["verified_correctness_score_cap"]["policy_applicable"] is False
 
 
+def test_applicable_but_already_low_score_is_not_reported_as_applied_cap() -> None:
+    grade = _grade(total=13.0)
+    grade["logic_check_evaluation"] = {
+        "findings": [{"rule_id": "fatal-rule", "severity": "fatal"}],
+    }
+    result = apply_verified_correctness_score_cap(grade)
+    assert result["total_score"] == 13.0
+    assert result["verified_correctness_score_cap"]["score_effect"] == "none"
+    assert result.get("applied_caps") in (None, [])
+
+
+def test_legacy_applied_cap_history_is_preserved_across_policy_upgrade() -> None:
+    grade = _grade(total=14.5)
+    grade["logic_check_evaluation"] = {
+        "findings": [{"rule_id": "fatal-rule", "severity": "fatal"}],
+    }
+    grade["verified_correctness_score_cap"] = {
+        "version": "verified_correctness_score_cap_v1",
+        "cap": 14.5,
+        "source_ids": ["logic_check_evaluation.findings:fatal-rule"],
+        "score_effect": "hard_cap",
+        "original_total_score": 18.2,
+    }
+    result = apply_verified_correctness_score_cap(grade)
+    assert result["verified_correctness_score_cap"]["score_effect"] == "hard_cap"
+    assert result["verified_correctness_score_cap"]["preserved_prior_application"] is True
+    assert result["applied_caps"][0]["type"] == "verified_correctness_score_cap"
+
+
 def test_final_boundary_synchronizes_thresholds_after_fatal_cap() -> None:
     grade = _grade()
     grade["logic_check_evaluation"] = {
@@ -120,6 +149,22 @@ def test_unresolved_ledger_rewrites_global_accuracy_praise() -> None:
     })
     assert "정확히 응답" not in result["summary"]
     assert result["final_consistency_evaluation"]["conflict_sources"]
+
+
+def test_formatter_reports_an_applied_verified_cap() -> None:
+    from grade_output_summarizer import _build_payload, _normalise_summary, _render
+
+    grade = _grade()
+    grade["logic_check_evaluation"] = {
+        "findings": [{"rule_id": "fatal-rule", "severity": "fatal"}],
+        "fatal_error_detected": True,
+    }
+    grade = apply_verified_correctness_score_cap(grade)
+    payload = _build_payload(grade)
+    rendered = _render(_normalise_summary(None, payload), payload)
+    assert "예상 점수대: 14.5점 cap 적용" in rendered
+    assert "점수 상한이 적용되었습니다." in rendered
+    assert "추가적인 수치 cap은 적용되지 않았습니다." not in rendered
 
 
 def main() -> None:
