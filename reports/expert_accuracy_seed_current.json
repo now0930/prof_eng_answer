@@ -1,5 +1,5 @@
 {
-  "schema_version": "expert_accuracy_report_v1",
+  "schema_version": "expert_accuracy_report_v2",
   "status": "OK",
   "include_draft": false,
   "gold_case_count": 30,
@@ -13,7 +13,7 @@
     "recall": 1.0,
     "f1": 1.0
   },
-  "demand_state_accuracy": 0.8559,
+  "demand_state_accuracy": 0.5586,
   "matched_demand_state_count": 111,
   "major_finding_detection": {
     "true_positive": 9,
@@ -23,10 +23,27 @@
     "recall": 1.0,
     "f1": 1.0
   },
-  "score_range_mae": 0.8723,
+  "mean_out_of_range_distance": 0.8723,
+  "actual_total_mae": null,
+  "mean_signed_total_error": null,
+  "layer_mae": {
+    "A": null,
+    "B": null,
+    "C": null,
+    "D": null,
+    "E": null
+  },
   "false_pass_count": 0,
   "false_strong_count": 0,
+  "false_high_score_count": 0,
   "confidence_ceiling_violation_count": 0,
+  "pairwise_ordering_accuracy": null,
+  "pairwise_ordering_pair_count": 0,
+  "padding_sensitivity": {
+    "group_count": 0,
+    "mean_score_spread": null,
+    "max_score_spread": null
+  },
   "cases": [
     {
       "case_id": "sil_target_operations_issue1",
@@ -36,7 +53,8 @@
         "min": 10.0,
         "max": 14.5
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "sis_lopa_architecture_issue1",
@@ -46,7 +64,8 @@
         "min": 9.5,
         "max": 13.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "mcdc_vmodel_sil_issue1",
@@ -56,7 +75,8 @@
         "min": 10.5,
         "max": 14.5
       },
-      "score_range_distance": 0.23
+      "out_of_range_distance": 0.23,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-cs-low-01",
@@ -66,7 +86,8 @@
         "min": 7.0,
         "max": 11.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-cs-pass-01",
@@ -76,7 +97,8 @@
         "min": 15.0,
         "max": 18.5
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-cs-high-01",
@@ -86,7 +108,8 @@
         "min": 20.5,
         "max": 24.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-da-low-01",
@@ -96,7 +119,8 @@
         "min": 4.0,
         "max": 10.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-da-pass-01",
@@ -106,7 +130,8 @@
         "min": 15.0,
         "max": 19.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-da-high-01",
@@ -116,7 +141,8 @@
         "min": 20.0,
         "max": 25.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-ie-low-01",
@@ -126,7 +152,8 @@
         "min": 4.5,
         "max": 10.5
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-ie-pass-01",
@@ -136,7 +163,8 @@
         "min": 15.0,
         "max": 19.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-ie-high-01",
@@ -146,7 +174,8 @@
         "min": 20.0,
         "max": 25.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-pi-low-01",
@@ -156,7 +185,8 @@
         "min": 7.0,
         "max": 11.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-pi-pass-01",
@@ -166,7 +196,8 @@
         "min": 15.0,
         "max": 18.5
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "qtype_qg-pi-high-01",
@@ -176,7 +207,8 @@
         "min": 20.5,
         "max": 24.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_01_piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
@@ -186,7 +218,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_02_radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
@@ -196,7 +229,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_03_control_valve_authority_rangeability_gain_installed_performance",
@@ -206,7 +240,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 3.9
+      "out_of_range_distance": 3.9,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_04_control_valve_types_globe_rotary_body_actuator_selection",
@@ -216,7 +251,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 3.75
+      "out_of_range_distance": 3.75,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_05_humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
@@ -226,7 +262,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.71
+      "out_of_range_distance": 0.71,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_06_industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
@@ -236,7 +273,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_07_smart_positioner_diagnostics_valve_signature_predictive_maintenance",
@@ -246,7 +284,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 3.4
+      "out_of_range_distance": 3.4,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc",
@@ -256,7 +295,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 3.73
+      "out_of_range_distance": 3.73,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_09_electronics_error_noise_drift_tolerance_aging_power_mitigation",
@@ -266,7 +306,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.77
+      "out_of_range_distance": 0.77,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_10_ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
@@ -276,7 +317,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_11_configuration_change_release_backup_rollback_migration_obsolescence_management",
@@ -286,7 +328,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.26
+      "out_of_range_distance": 0.26,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_12_control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
@@ -296,7 +339,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.88
+      "out_of_range_distance": 0.88,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_13_hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
@@ -306,7 +350,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.0
+      "out_of_range_distance": 0.0,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_14_control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
@@ -316,7 +361,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 3.85
+      "out_of_range_distance": 3.85,
+      "signed_total_error": null
     },
     {
       "case_id": "model_reference_15_final_control_element_sil_sis_esd_valve_partial_stroke_test",
@@ -326,7 +372,8 @@
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 4.69
+      "out_of_range_distance": 4.69,
+      "signed_total_error": null
     }
   ]
 }

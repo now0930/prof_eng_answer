@@ -18,10 +18,9 @@ EVALUATION_LEDGER_SCHEMA_VERSION = "1.0"
 EVALUATION_LEDGER_MARKER = "CANONICAL_EVALUATION_LEDGER_V1"
 
 _STATUSES = {
-    # The semantic grader uses ``present`` only after checking the requirement
-    # against answer evidence.  Verified defects remain the canonical
-    # correctness owner and override this projection below.
-    "present": "correct",
+    # ``present`` means the demand was addressed. It is not a correctness
+    # verdict and therefore cannot be promoted to ``correct`` here.
+    "present": "partial",
     "correct": "correct",
     "partial": "partial",
     "incorrect": "incorrect",
@@ -421,79 +420,59 @@ def _reconcile_high_confidence_long_form_states(
     rows: list[dict[str, Any]],
     defects: list[dict[str, Any]],
 ) -> dict[str, Any]:
-    volume = _nested(grade, "volume_evaluation")
-    count = volume.get("ascii_equivalent_count")
-    ratio = _semantic_score_ratio(grade)
-    statuses = {str(row.get("status") or "") for row in rows}
-    correct_count = sum(row.get("status") == "correct" for row in rows)
-    uncertain_count = sum(row.get("status") in {"partial", "unknown"} for row in rows)
-    strong_long_form = bool(
-        isinstance(count, (int, float))
-        and not isinstance(count, bool)
-        and float(count) >= 1500.0
-        and ratio is not None
-        and ratio >= 0.78
-    )
-    supported_single_gap = bool(
-        isinstance(count, (int, float))
-        and not isinstance(count, bool)
-        and float(count) >= 900.0
-        and ratio is not None
-        and ratio >= 0.65
-        and correct_count > 0
-        and uncertain_count == 1
-    )
-    eligible = bool(
-        (strong_long_form or supported_single_gap)
-        and rows
-        and not defects
-        and not statuses.intersection({"missing", "incorrect"})
-        and statuses.issubset({"correct", "partial", "unknown"})
-        and statuses.intersection({"partial", "unknown"})
-    )
-    upgraded: list[str] = []
-    if eligible:
-        for row in rows:
-            if row.get("status") not in {"partial", "unknown"}:
-                continue
-            row["status"] = "correct"
-            row["mentioned"] = True
-            row["status_owner"] = "high_confidence_semantic_long_form"
-            upgraded.append(str(row.get("requirement_id") or ""))
+    # Whole-answer length and aggregate semantic scores are not evidence for a
+    # particular atomic requirement. Retain the old marker for auditability,
+    # but never mutate requirement state.
+    _ = grade, rows, defects
     return {
         "marker": "HIGH_CONFIDENCE_SEMANTIC_LONG_FORM_RECONCILIATION_V1",
-        "applied": bool(upgraded),
+        "applied": False,
         "score_effect": "none",
-        "minimum_ascii_equivalent_count": 1500,
-        "minimum_semantic_score_ratio": 0.78,
-        "supported_single_gap_policy": {
-            "minimum_ascii_equivalent_count": 900,
-            "minimum_semantic_score_ratio": 0.65,
-            "requires_existing_correct": True,
-            "maximum_uncertain_requirements": 1,
-        },
-        "observed_semantic_score_ratio": (
-            round(ratio, 4) if ratio is not None else None
-        ),
-        "upgraded_requirement_ids": upgraded,
+        "reason": "whole_answer_signals_cannot_upgrade_atomic_requirement_state",
+        "upgraded_requirement_ids": [],
     }
 
 
-def _evidence_from_coverage(row: dict[str, Any]) -> dict[str, Any]:
+def _evidence_from_coverage(
+    row: dict[str, Any],
+    *,
+    canonical_requirement_id: str,
+) -> dict[str, Any]:
     verified_ids = sorted({
         str(value).strip()
         for value in row.get("verified_defect_ids", [])
         if str(value).strip()
     }) if isinstance(row.get("verified_defect_ids"), list) else []
-    status = "incorrect" if verified_ids else _status(row.get("status"))
+    raw_status = str(row.get("status") or "").strip().casefold()
+    evidence_text = str(row.get("evidence") or "").strip()
+    provided_requirement_id = str(row.get("requirement_id") or "").strip()
+    exact_requirement_id = bool(
+        provided_requirement_id
+        and provided_requirement_id == canonical_requirement_id
+    )
+    if verified_ids:
+        status = "incorrect"
+    elif raw_status == "correct" and (evidence_text or exact_requirement_id):
+        status = "correct"
+    elif raw_status == "partial":
+        status = "partial"
+    elif raw_status in {"present", "correct"} and evidence_text:
+        status = "partial"
+    elif raw_status in {"missing", "absent"}:
+        status = "missing"
+    else:
+        status = "unknown"
     source_kind = "verified_defect_reconciliation" if verified_ids else "semantic_coverage"
     trust_tier = "verified_structured" if verified_ids else "semantic_inferred"
     payload = {
         "source_kind": source_kind,
-        "source_id": verified_ids or str(row.get("requirement_id") or "").strip(),
+        "source_id": verified_ids or canonical_requirement_id,
         "trust_tier": trust_tier,
         "status": status,
-        "evidence": str(row.get("evidence") or "").strip(),
+        "evidence": evidence_text,
+        "provided_requirement_id": provided_requirement_id,
+        "canonical_requirement_id": canonical_requirement_id,
+        "exact_requirement_id": exact_requirement_id,
     }
     payload["evidence_id"] = _stable_id("evidence", payload)
     return payload
@@ -545,6 +524,16 @@ def build_canonical_evaluation_ledger(grade: Any) -> dict[str, Any]:
         }
 
     coverage_rows = _coverage_rows(grade)
+    canonical_ids = [
+        str(row.get("requirement_id") or "").strip()
+        for row in requirements if isinstance(row, dict)
+    ]
+    provider_ids = [
+        str(row.get("requirement_id") or "").strip()
+        for row in coverage_rows if str(row.get("requirement_id") or "").strip()
+    ]
+    coverage_mapping_valid = not provider_ids or provider_ids == canonical_ids
+    active_coverage_rows = coverage_rows if coverage_mapping_valid else []
     defects = _infer_defect_requirement_links(
         _verified_defects(grade),
         requirements,
@@ -563,10 +552,13 @@ def build_canonical_evaluation_ledger(grade: Any) -> dict[str, Any]:
                 "text": requirement.get("requirement_text"),
             })
         evidence: list[dict[str, Any]] = []
-        coverage_index = _coverage_match(requirement, coverage_rows, consumed)
+        coverage_index = _coverage_match(requirement, active_coverage_rows, consumed)
         if coverage_index is not None:
             consumed.add(coverage_index)
-            evidence.append(_evidence_from_coverage(coverage_rows[coverage_index]))
+            evidence.append(_evidence_from_coverage(
+                active_coverage_rows[coverage_index],
+                canonical_requirement_id=requirement_id,
+            ))
         evidence.extend(
             _defect_evidence(defect)
             for defect in defects_by_requirement.get(requirement_id, [])
@@ -574,14 +566,30 @@ def build_canonical_evaluation_ledger(grade: Any) -> dict[str, Any]:
         statuses = [item["status"] for item in evidence if item["status"] != "unknown"]
         resolved = max(statuses, key=lambda value: _STATUS_ORDER[value]) if statuses else "unknown"
         unique_statuses = sorted(set(statuses), key=lambda value: _STATUS_ORDER[value])
+        correctness_status = resolved
+        addressing_status = (
+            "missing" if correctness_status == "missing"
+            else "substantive" if any(item.get("evidence") for item in evidence)
+            else "mentioned" if evidence
+            else "missing"
+        )
+        evidence_quality = (
+            "deterministic" if any(item["trust_tier"] == "verified_structured" for item in evidence)
+            else "semantic_inferred" if any(item.get("evidence") for item in evidence)
+            else "none"
+        )
         rows.append({
             "requirement_id": requirement_id,
             "requirement_index": index,
             "requirement_text": str(requirement.get("requirement_text") or "").strip(),
             "demand_kind": str(requirement.get("demand_kind") or "").strip(),
             "is_core": bool(requirement.get("is_core", True)),
-            "status": resolved,
-            "mentioned": resolved not in {"missing", "unknown"},
+            "status": correctness_status,
+            "addressing_status": addressing_status,
+            "correctness_status": correctness_status,
+            "evidence_quality": evidence_quality,
+            "depth_level": addressing_status,
+            "mentioned": addressing_status in {"mentioned", "substantive"},
             "status_owner": (
                 "verified_defect" if any(item["trust_tier"] == "verified_structured" for item in evidence)
                 else ("semantic_coverage" if evidence else "unassessed")
@@ -610,7 +618,7 @@ def build_canonical_evaluation_ledger(grade: Any) -> dict[str, Any]:
     unmatched_coverage = [
         copy.deepcopy(row)
         for index, row in enumerate(coverage_rows)
-        if index not in consumed
+        if not coverage_mapping_valid or index not in consumed
     ]
     referenced_defect_ids: set[str] = set()
     for row in rows:
@@ -658,8 +666,15 @@ def build_canonical_evaluation_ledger(grade: Any) -> dict[str, Any]:
             "conflict_count": sum(1 for row in rows if row["conflict"]),
             "unmatched_coverage_count": len(unmatched_coverage),
             "unresolved_verified_defect_count": len(unresolved_defects),
+            "coverage_mapping_valid": coverage_mapping_valid,
         },
         "unmatched_coverage": unmatched_coverage,
+        "coverage_mapping_validation": {
+            "valid": coverage_mapping_valid,
+            "canonical_requirement_ids": canonical_ids,
+            "provider_requirement_ids": provider_ids,
+            "mode": "fail_closed" if not coverage_mapping_valid else "exact_or_unique_text",
+        },
         "unresolved_verified_defects": unresolved_defects,
         "state_reconciliation": state_reconciliation,
         "ownership_policy": {

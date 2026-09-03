@@ -54,8 +54,8 @@ def test_vmodel_has_one_ledger_row_per_atomic_requirement() -> None:
     assert [row["requirement_index"] for row in ledger["rows"]] == [1, 2, 3, 4]
     assert ledger["summary"]["status_counts"] == {
         "unknown": 0,
-        "correct": 2,
-        "partial": 1,
+        "correct": 0,
+        "partial": 3,
         "missing": 1,
         "incorrect": 0,
     }
@@ -92,9 +92,37 @@ def test_unassessed_requirement_never_becomes_false_100_percent() -> None:
     rows.pop()
     ledger = build_canonical_evaluation_ledger(grade)
     assert ledger["status"] == "incomplete"
-    assert ledger["summary"]["status_counts"]["unknown"] == 1
+    assert ledger["summary"]["status_counts"]["unknown"] == 4
     assert ledger["summary"]["exact_requirement_fulfillment_ratio"] is None
     assert ledger["summary"]["exact_requirement_fulfillment_percent"] is None
+
+
+def test_evidence_free_unknown_never_becomes_correct_from_length_or_semantic_score() -> None:
+    grade = _grade()
+    rows = grade["question_type_coverage"]["explicit_requirement_coverage"]["requirements"]
+    rows[1]["status"] = "unknown"
+    rows[1]["evidence"] = ""
+    grade["volume_evaluation"] = {"ascii_equivalent_count": 5000}
+    grade["gemini_semantic_evaluation"] = {"parsed": {"layers": [
+        {"score": 3.0, "max": 3.0}, {"score": 6.0, "max": 6.0},
+        {"score": 8.0, "max": 8.0}, {"score": 6.0, "max": 6.0},
+        {"score": 2.0, "max": 2.0},
+    ]}}
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert ledger["rows"][1]["status"] == "unknown"
+    assert ledger["rows"][1]["correctness_status"] == "unknown"
+    assert ledger["rows"][1]["evidence_quality"] == "none"
+    assert ledger["state_reconciliation"]["applied"] is False
+
+
+def test_mismatched_provider_requirement_ids_fail_closed() -> None:
+    grade = _grade()
+    rows = grade["question_type_coverage"]["explicit_requirement_coverage"]["requirements"]
+    rows[0]["requirement_id"] = "invented"
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert ledger["coverage_mapping_validation"]["valid"] is False
+    assert {row["status"] for row in ledger["rows"]} == {"unknown"}
+    assert ledger["summary"]["coverage_mapping_valid"] is False
 
 
 def test_native_question_demand_projection_fills_empty_semantic_coverage() -> None:
@@ -210,10 +238,13 @@ def test_coverage_uniquely_matches_contract_object_text() -> None:
         }},
     }
     ledger = build_canonical_evaluation_ledger(grade)
-    assert [row["status"] for row in ledger["rows"]] == ["correct", "correct"]
+    # Text-only provider rows establish a unique addressing match, but cannot
+    # establish technical correctness without an evidence span.
+    assert [row["status"] for row in ledger["rows"]] == ["unknown", "unknown"]
+    assert [row["addressing_status"] for row in ledger["rows"]] == ["mentioned", "mentioned"]
 
 
-def test_high_confidence_long_form_reconciles_partial_provider_states() -> None:
+def test_high_confidence_long_form_never_reconciles_partial_provider_states() -> None:
     grade = _grade()
     requirements = grade["question_demand_contract"]["requirements"]
     grade["question_type_coverage"]["explicit_requirement_coverage"]["requirements"] = [
@@ -235,8 +266,8 @@ def test_high_confidence_long_form_reconciles_partial_provider_states() -> None:
         ]},
     }
     ledger = build_canonical_evaluation_ledger(grade)
-    assert {row["status"] for row in ledger["rows"]} == {"correct"}
-    assert ledger["state_reconciliation"]["applied"] is True
+    assert {row["status"] for row in ledger["rows"]} == {"partial"}
+    assert ledger["state_reconciliation"]["applied"] is False
 
 
 def test_long_form_reconciliation_never_overrides_verified_defect() -> None:
@@ -255,7 +286,7 @@ def test_long_form_reconciliation_never_overrides_verified_defect() -> None:
     assert ledger["state_reconciliation"]["applied"] is False
 
 
-def test_supported_single_gap_reconciles_only_remaining_partial() -> None:
+def test_supported_single_gap_never_reconciles_remaining_partial() -> None:
     grade = _grade()
     coverage = grade["question_type_coverage"]["explicit_requirement_coverage"]["requirements"]
     for row in coverage:
@@ -272,10 +303,8 @@ def test_supported_single_gap_reconciles_only_remaining_partial() -> None:
         ]},
     }
     ledger = build_canonical_evaluation_ledger(grade)
-    assert {row["status"] for row in ledger["rows"]} == {"correct"}
-    assert ledger["state_reconciliation"]["upgraded_requirement_ids"] == [
-        grade["question_demand_contract"]["requirements"][-1]["requirement_id"]
-    ]
+    assert ledger["rows"][-1]["status"] == "partial"
+    assert ledger["state_reconciliation"]["upgraded_requirement_ids"] == []
 
 
 def test_unreferenced_defect_links_by_unique_exact_demand_phrase() -> None:
@@ -348,8 +377,11 @@ def test_unmatched_coverage_is_auditable_not_silently_counted() -> None:
         "status": "present",
     })
     ledger = build_canonical_evaluation_ledger(grade)
-    assert ledger["summary"]["unmatched_coverage_count"] == 1
-    assert ledger["unmatched_coverage"][0]["requirement_id"] == "invented-axis"
+    assert ledger["summary"]["unmatched_coverage_count"] == 5
+    assert any(
+        row["requirement_id"] == "invented-axis"
+        for row in ledger["unmatched_coverage"]
+    )
 
 
 def test_attachment_is_idempotent_and_score_neutral() -> None:
@@ -386,7 +418,7 @@ def test_public_display_uses_ledger_and_blocks_false_strong_100() -> None:
     text = bot._format_question_type_coverage_display(grade)
     assert "전체 판정: unknown" in text
     assert "요구사항 정확 충족률: -" in text
-    assert "미평가 1" in text
+    assert "미평가 4" in text
     assert "100.0%" not in text
 
 

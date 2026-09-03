@@ -69,7 +69,7 @@ def test_perfect_prediction_has_perfect_metrics() -> None:
     assert report["demand_extraction"]["f1"] == 1.0
     assert report["demand_state_accuracy"] == 1.0
     assert report["major_finding_detection"]["f1"] == 1.0
-    assert report["score_range_mae"] == 0.0
+    assert report["mean_out_of_range_distance"] == 0.0
     assert report["false_pass_count"] == 0
     assert report["false_strong_count"] == 0
     assert report["confidence_ceiling_violation_count"] == 0
@@ -95,10 +95,30 @@ def test_false_positive_and_score_distance_are_reported() -> None:
     assert report["demand_extraction"]["recall"] == 0.5
     assert report["demand_state_accuracy"] == 0.0
     assert report["major_finding_detection"]["f1"] == 0.0
-    assert report["score_range_mae"] == 3.0
+    assert report["mean_out_of_range_distance"] == 3.0
     assert report["false_pass_count"] == 1
     assert report["false_strong_count"] == 1
     assert report["confidence_ceiling_violation_count"] == 1
+
+
+def test_exact_total_metrics_and_padding_groups_are_reported_separately() -> None:
+    low_gold = _gold()
+    high_gold = _gold()
+    low_gold["case_id"] = "low"
+    high_gold["case_id"] = "high"
+    low_gold["labels"]["expert_total_score"] = 10.0
+    high_gold["labels"]["expert_total_score"] = 20.0
+    low_gold["padding_group"] = "same-answer-padding"
+    high_gold["padding_group"] = "same-answer-padding"
+    low_prediction = _prediction()
+    high_prediction = _prediction()
+    low_prediction.update({"case_id": "low", "total_score": 12.0})
+    high_prediction.update({"case_id": "high", "total_score": 18.0})
+    report = measure_accuracy([low_gold, high_gold], [low_prediction, high_prediction])
+    assert report["actual_total_mae"] == 2.0
+    assert report["mean_signed_total_error"] == 0.0
+    assert report["pairwise_ordering_accuracy"] == 1.0
+    assert report["padding_sensitivity"]["max_score_spread"] == 6.0
 
 
 def test_grade_adapter_preserves_claimed_present_as_prediction() -> None:
@@ -121,7 +141,7 @@ def test_grade_adapter_preserves_claimed_present_as_prediction() -> None:
     }
     prediction = prediction_from_grade("case-1", grade)
     assert prediction["demands"] == [
-        {"demand_id": "D1", "requirement": "", "status": "CORRECT"},
+        {"demand_id": "D1", "requirement": "", "status": "PARTIAL"},
         {"demand_id": "D2", "requirement": "", "status": "WRONG"},
     ]
     assert prediction["findings"] == [{"finding_id": "F1", "severity": "fatal"}]

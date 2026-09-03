@@ -30,9 +30,10 @@ def _policy() -> dict:
         "minimum_demand_state_accuracy": 0.85,
         "minimum_major_finding_precision": 0.9,
         "minimum_major_finding_recall": 0.85,
-        "maximum_score_range_mae": 1.0,
+        "maximum_mean_out_of_range_distance": 1.0,
         "maximum_false_pass_count": 0,
         "maximum_false_strong_count": 0,
+        "maximum_false_high_score_count": 0,
         "maximum_confidence_ceiling_violation_count": 0,
     }
 
@@ -74,9 +75,10 @@ def _report() -> dict:
         "demand_extraction": {"f1": 0.95},
         "demand_state_accuracy": 0.9,
         "major_finding_detection": {"precision": 0.95, "recall": 0.9},
-        "score_range_mae": 0.5,
+        "mean_out_of_range_distance": 0.5,
         "false_pass_count": 0,
         "false_strong_count": 0,
+        "false_high_score_count": 0,
         "confidence_ceiling_violation_count": 0,
     }
 
@@ -118,9 +120,10 @@ def test_complete_dataset_without_predictions_is_explicitly_hold() -> None:
             "demand_extraction": {"f1": None},
             "demand_state_accuracy": None,
             "major_finding_detection": {"precision": None, "recall": None},
-            "score_range_mae": None,
+            "mean_out_of_range_distance": None,
             "false_pass_count": 0,
             "false_strong_count": 0,
+            "false_high_score_count": 0,
             "confidence_ceiling_violation_count": 0,
         },
         gold,

@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 로드맵과 현재 진행 상태는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다. 이슈는 구현 상태와 검증 증거를 관리하고, 고정 정책과 반복 운영 절차는 `docs/` 문서가 소유합니다.
 
-> 최신 구현 상태(2026-09-03): `main`의 `1fff78caeb3351747e6e553a6a913e564ee1b047`에서 Topic Pack 요구축·canonical ledger·결정론적 fatal relation·장문 답안 evidence calibration을 최종 경로에 반영했습니다. 전문가 검토 30건 기반 [정확도 report](reports/expert_accuracy_seed_current.json)는 요구 추출 F1 1.0000, 요구 상태 정확도 85.59%, major/fatal 정밀도·재현율 100%, 점수 허용구간 MAE 0.8723이며 [release gate](docs/accuracy_release_gate.md)는 `READY`입니다. 전체 release validation, 실제 Gemini 재채점 결과의 final persistence 재처리, 운영 Docker 실채점(SIL fatal 4건 및 장문 답안 보정), `main` push와 운영 작업트리 반영을 완료했습니다.
+> 최신 개발 상태(2026-09-03): 답안 분량 기반 점수 상승과 장문 semantic 신호에 의한 atomic requirement `correct` 승격을 제거했습니다. `base_score=A+B+C+D+E`, `final_score=min(base_score, verified hard caps)`를 적용하며 20점 이상은 개별 core evidence와 D의 현장조건→판단→검증 근거가 있을 때만 허용합니다. 기존 prediction 30건을 새 상태 의미로 재측정한 [정확도 report](reports/expert_accuracy_seed_current.json)는 요구 상태 정확도 55.86%로 [release gate](docs/accuracy_release_gate.md) `HOLD`입니다. 실제 provider 재채점 후에만 배포를 재승인합니다.
 
 ---
 
@@ -57,10 +57,10 @@
 | Generic scoring policy | `stage23.generic_scoring_policy.v1` |
 | Runtime provenance | `runtime_grading_provenance_v1` |
 | Runtime provenance scoring policy | `stage23_generic_grading_contract_v1` |
-| 전문가 정확도 Gate | `READY` (30 reviewed cases / 25 topics) |
-| 요구 추출 F1 / 상태 정확도 | 1.0000 / 85.59% |
+| 전문가 정확도 Gate | `HOLD` (30 reviewed cases / 25 topics) |
+| 요구 추출 F1 / 상태 정확도 | 1.0000 / 55.86% |
 | Major·Fatal 정밀도 / 재현율 | 100% / 100% |
-| 점수 허용구간 MAE | 0.8723 |
+| 평균 허용구간 외 거리 | 0.8723 |
 
 `runtime_grading_provenance_v1`은 실행 process 수준의 commit, 시작 시각, router/evaluator/verifier SHA와 scoring policy를 기록합니다. Docker image digest, container ID·시작 시각, PID 교체와 host/container module parity는 별도의 deployment proof이며 [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)의 P0 항목으로 관리합니다.
 

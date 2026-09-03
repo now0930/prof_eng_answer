@@ -14,9 +14,10 @@
     "minimum_demand_state_accuracy",
     "minimum_major_finding_precision",
     "minimum_major_finding_recall",
-    "maximum_score_range_mae",
+    "maximum_mean_out_of_range_distance",
     "maximum_false_pass_count",
     "maximum_false_strong_count",
+    "maximum_false_high_score_count",
     "maximum_confidence_ceiling_violation_count"
   ],
   "properties": {
@@ -30,9 +31,10 @@
     "minimum_demand_state_accuracy": {"type": "number", "minimum": 0, "maximum": 1},
     "minimum_major_finding_precision": {"type": "number", "minimum": 0, "maximum": 1},
     "minimum_major_finding_recall": {"type": "number", "minimum": 0, "maximum": 1},
-    "maximum_score_range_mae": {"type": "number", "minimum": 0},
+    "maximum_mean_out_of_range_distance": {"type": "number", "minimum": 0},
     "maximum_false_pass_count": {"type": "integer", "minimum": 0},
     "maximum_false_strong_count": {"type": "integer", "minimum": 0},
+    "maximum_false_high_score_count": {"type": "integer", "minimum": 0},
     "maximum_confidence_ceiling_violation_count": {"type": "integer", "minimum": 0}
   },
   "additionalProperties": false

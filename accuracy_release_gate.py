@@ -27,6 +27,7 @@ def validate_release_policy(value: Any) -> dict[str, Any]:
         "minimum_major_finding_labels",
         "maximum_false_pass_count",
         "maximum_false_strong_count",
+        "maximum_false_high_score_count",
         "maximum_confidence_ceiling_violation_count",
     )
     for key in integer_fields:
@@ -45,9 +46,9 @@ def validate_release_policy(value: Any) -> dict[str, Any]:
         value = policy.get(key)
         if isinstance(value, bool) or not isinstance(value, (int, float)) or not 0 <= value <= 1:
             raise AccuracyReleaseGateError(f"{key} must be within [0, 1]")
-    mae = policy.get("maximum_score_range_mae")
+    mae = policy.get("maximum_mean_out_of_range_distance")
     if isinstance(mae, bool) or not isinstance(mae, (int, float)) or mae < 0:
-        raise AccuracyReleaseGateError("maximum_score_range_mae must be non-negative")
+        raise AccuracyReleaseGateError("maximum_mean_out_of_range_distance must be non-negative")
     return policy
 
 
@@ -125,9 +126,18 @@ def evaluate_accuracy_release_gate(
         _metric(report, "major_finding_detection", "recall"),
         policy["minimum_major_finding_recall"],
     )
-    maximum("SCORE_RANGE_MAE", report.get("score_range_mae"), policy["maximum_score_range_mae"])
+    maximum(
+        "MEAN_OUT_OF_RANGE_DISTANCE",
+        report.get("mean_out_of_range_distance"),
+        policy["maximum_mean_out_of_range_distance"],
+    )
     maximum("FALSE_PASS_COUNT", report.get("false_pass_count"), policy["maximum_false_pass_count"])
     maximum("FALSE_STRONG_COUNT", report.get("false_strong_count"), policy["maximum_false_strong_count"])
+    maximum(
+        "FALSE_HIGH_SCORE_COUNT",
+        report.get("false_high_score_count"),
+        policy["maximum_false_high_score_count"],
+    )
     maximum(
         "CONFIDENCE_CEILING_VIOLATION_COUNT",
         report.get("confidence_ceiling_violation_count"),

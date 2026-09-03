@@ -54,7 +54,8 @@ def _finite(value: Any, field: str) -> float:
 def normalize_demand_state(value: Any, *, allow_unknown: bool = False) -> str:
     state = _text(value).upper()
     aliases = {
-        "PRESENT": "CORRECT",
+        # Presence establishes addressing, not technical correctness.
+        "PRESENT": "PARTIAL",
         "INCORRECT": "WRONG",
         "ABSENT": "MISSING",
     }
@@ -150,6 +151,22 @@ def validate_gold_case(value: Any) -> dict[str, Any]:
     if minimum < 0 or maximum > 25 or minimum > maximum:
         raise AccuracyBenchmarkError("invalid score range")
 
+    expert_total_score = labels.get("expert_total_score")
+    if expert_total_score is not None:
+        expert_total_score = _finite(expert_total_score, "expert_total_score")
+        if not 0 <= expert_total_score <= 25:
+            raise AccuracyBenchmarkError("invalid expert_total_score")
+
+    expert_layer_scores = labels.get("layer_scores")
+    if expert_layer_scores is not None:
+        if not isinstance(expert_layer_scores, dict):
+            raise AccuracyBenchmarkError("labels.layer_scores must be an object")
+        expert_layer_scores = {
+            str(layer).upper(): _finite(score, f"layer_scores.{layer}")
+            for layer, score in expert_layer_scores.items()
+            if str(layer).upper() in {"A", "B", "C", "D", "E"}
+        }
+
     flags = labels.get("flags")
     if not isinstance(flags, dict):
         raise AccuracyBenchmarkError("labels.flags must be an object")
@@ -160,10 +177,13 @@ def validate_gold_case(value: Any) -> dict[str, Any]:
     case.update({
         "case_id": case_id,
         "review_status": review_status,
+        "padding_group": _text(case.get("padding_group")),
         "labels": {
             "demands": demands,
             "findings": findings,
             "score_range": {"min": minimum, "max": maximum},
+            "expert_total_score": expert_total_score,
+            "layer_scores": expert_layer_scores,
             "flags": {
                 "passing_score_allowed": bool(flags.get("passing_score_allowed")),
                 "strong_verdict_allowed": bool(flags.get("strong_verdict_allowed")),
@@ -291,6 +311,14 @@ def prediction_from_grade(case_id: str, grade: Any) -> dict[str, Any]:
         "passing_score_allowed": bool(passing),
         "strong_verdict_allowed": bool(strong),
         "confidence": _text(grade.get("confidence")).lower() or "low",
+        "layer_scores": {
+            str(row.get("layer_id") or row.get("layer") or "").upper(): float(row["score"])
+            for row in (grade.get("breakdown") or grade.get("layer_scores") or [])
+            if isinstance(row, dict)
+            and str(row.get("layer_id") or row.get("layer") or "").upper() in {"A", "B", "C", "D", "E"}
+            and isinstance(row.get("score"), (int, float))
+            and not isinstance(row.get("score"), bool)
+        },
     }
 
 
@@ -336,6 +364,11 @@ def validate_prediction(value: Any) -> dict[str, Any]:
         "passing_score_allowed": bool(value.get("passing_score_allowed")),
         "strong_verdict_allowed": bool(value.get("strong_verdict_allowed")),
         "confidence": confidence,
+        "layer_scores": {
+            str(layer).upper(): _finite(score, f"layer_scores.{layer}")
+            for layer, score in (value.get("layer_scores") or {}).items()
+            if str(layer).upper() in {"A", "B", "C", "D", "E"}
+        } if isinstance(value.get("layer_scores"), dict) else {},
     }
 
 
@@ -503,9 +536,15 @@ def measure_accuracy(
     matched_states = 0
     correct_states = 0
     score_distances: list[float] = []
+    actual_total_errors: list[float] = []
+    signed_total_errors: list[float] = []
+    layer_errors: dict[str, list[float]] = {layer: [] for layer in "ABCDE"}
+    exact_total_pairs: list[tuple[float, float]] = []
+    padding_groups: dict[str, list[float]] = {}
     false_pass = 0
     false_strong = 0
     confidence_violations = 0
+    false_high_score = 0
     case_rows = []
 
     for case in evaluated:
@@ -541,6 +580,18 @@ def measure_accuracy(
         score = prediction["total_score"]
         distance = max(bounds["min"] - score, 0.0, score - bounds["max"])
         score_distances.append(distance)
+        expert_total = labels.get("expert_total_score")
+        if isinstance(expert_total, (int, float)):
+            signed_error = score - float(expert_total)
+            signed_total_errors.append(signed_error)
+            actual_total_errors.append(abs(signed_error))
+            exact_total_pairs.append((float(expert_total), score))
+        expert_layers = labels.get("layer_scores")
+        predicted_layers = prediction.get("layer_scores")
+        if isinstance(expert_layers, dict) and isinstance(predicted_layers, dict):
+            for layer in "ABCDE":
+                if layer in expert_layers and layer in predicted_layers:
+                    layer_errors[layer].append(abs(float(predicted_layers[layer]) - float(expert_layers[layer])))
         flags = labels["flags"]
         false_pass += int(prediction["passing_score_allowed"] and not flags["passing_score_allowed"])
         false_strong += int(prediction["strong_verdict_allowed"] and not flags["strong_verdict_allowed"])
@@ -548,12 +599,18 @@ def measure_accuracy(
             CONFIDENCE_RANK[prediction["confidence"]]
             > CONFIDENCE_RANK[flags["confidence_ceiling"]]
         )
+        false_high_score += int(score >= 20.0 and bounds["max"] < 20.0)
+        padding_group = str(case.get("padding_group") or "").strip()
+        if padding_group:
+            padding_groups.setdefault(padding_group, []).append(score)
         case_rows.append({
             "case_id": case_id,
             "review_status": case["review_status"],
             "score": score,
             "score_range": bounds,
-            "score_range_distance": round(distance, 4),
+            "out_of_range_distance": round(distance, 4),
+            "signed_total_error": round(score - float(expert_total), 4)
+            if isinstance(expert_total, (int, float)) else None,
         })
 
     status = "OK"
@@ -562,8 +619,23 @@ def measure_accuracy(
     elif not evaluated:
         status = "NO_MATCHED_PREDICTIONS"
 
+    pairwise_total = 0
+    pairwise_correct = 0
+    for left_index, (left_gold, left_predicted) in enumerate(exact_total_pairs):
+        for right_gold, right_predicted in exact_total_pairs[left_index + 1:]:
+            if left_gold == right_gold:
+                continue
+            pairwise_total += 1
+            if (left_gold > right_gold) == (left_predicted > right_predicted):
+                pairwise_correct += 1
+    padding_spreads = [
+        max(scores) - min(scores)
+        for scores in padding_groups.values()
+        if len(scores) >= 2
+    ]
+
     return {
-        "schema_version": "expert_accuracy_report_v1",
+        "schema_version": "expert_accuracy_report_v2",
         "status": status,
         "include_draft": bool(include_draft),
         "gold_case_count": len(gold),
@@ -579,12 +651,37 @@ def measure_accuracy(
         ),
         "matched_demand_state_count": matched_states,
         "major_finding_detection": _prf(gold_finding_ids, predicted_finding_ids),
-        "score_range_mae": (
+        "mean_out_of_range_distance": (
             round(sum(score_distances) / len(score_distances), 4)
             if score_distances else None
         ),
+        "actual_total_mae": (
+            round(sum(actual_total_errors) / len(actual_total_errors), 4)
+            if actual_total_errors else None
+        ),
+        "mean_signed_total_error": (
+            round(sum(signed_total_errors) / len(signed_total_errors), 4)
+            if signed_total_errors else None
+        ),
+        "layer_mae": {
+            layer: round(sum(errors) / len(errors), 4) if errors else None
+            for layer, errors in layer_errors.items()
+        },
         "false_pass_count": false_pass,
         "false_strong_count": false_strong,
+        "false_high_score_count": false_high_score,
         "confidence_ceiling_violation_count": confidence_violations,
+        "pairwise_ordering_accuracy": (
+            round(pairwise_correct / pairwise_total, 4)
+            if pairwise_total else None
+        ),
+        "pairwise_ordering_pair_count": pairwise_total,
+        "padding_sensitivity": {
+            "group_count": len(padding_spreads),
+            "mean_score_spread": round(sum(padding_spreads) / len(padding_spreads), 4)
+            if padding_spreads else None,
+            "max_score_spread": round(max(padding_spreads), 4)
+            if padding_spreads else None,
+        },
         "cases": case_rows,
     }

@@ -9568,11 +9568,15 @@ def _phase2_final_score_snapshot_v1(
             "score",
             "total_score",
             "final_total_score",
+            "final_score",
+            "total",
+            "adjusted_total_score",
             "uncapped_total_score",
             "score_range",
             "layer_scores",
             "breakdown",
             "applied_caps",
+            "rater_weighted_evaluation",
         )
     }
 
@@ -9615,15 +9619,12 @@ def _phase2_finalize_verified_coverage_for_persistence(
         output
     )
 
-    # Re-assert the evidence-owned calibrated score after every legacy score
-    # reconciliation step.  The calibration is idempotent and remains neutral
-    # when its verified eligibility conditions are not met.
-    from verified_evidence_score_calibration import (
-        apply_verified_evidence_score_calibration,
-    )
-    output = apply_verified_evidence_score_calibration(
-        output
-    )
+    # Persistence may attach evidence and display aliases but must never become
+    # a second score writer. Numeric state is checked again below.
+    if before != _phase2_final_score_snapshot_v1(output):
+        raise RuntimeError(
+            "Final verified coverage persistence changed numeric score state"
+        )
 
     if isinstance(output, dict):
         reconciliation = output.get(
@@ -10390,7 +10391,10 @@ def _stage7_sync_terminal_bc_from_final_layer_scores(grade, layer_scores):
 # ============================================================
 
 _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION = (
-    "final_grade_cache_v1"
+    "final_grade_cache_v2"
+)
+_STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION = (
+    "evidence_required_score_policy_v2"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_DIR = (
     BASE_DIR / "data" / "final_grade_cache"
@@ -10464,6 +10468,9 @@ def _stage18b1_final_grade_cache_identity(
     return {
         "submission_hash": submission_hash,
         "contract_hash": contract_hash,
+        "scoring_policy_version": (
+            _STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION
+        ),
     }
 
 
@@ -10487,7 +10494,8 @@ def _stage18b1_final_grade_cache_path(
         _STAGE18B1_FINAL_GRADE_CACHE_DIR
         / (
             f"{submission_hash}."
-            f"{contract_hash}.json"
+            f"{contract_hash}."
+            f"{identity['scoring_policy_version']}.json"
         )
     )
 
@@ -10561,6 +10569,12 @@ def _stage18b1_load_final_grade_cache(
     ):
         return None
 
+    if (
+        payload.get("scoring_policy_version")
+        != identity["scoring_policy_version"]
+    ):
+        return None
+
     grade = payload.get("grade")
 
     if not isinstance(grade, dict):
@@ -10607,6 +10621,9 @@ def _stage18b1_write_final_grade_cache(
         ),
         "contract_hash": (
             identity["contract_hash"]
+        ),
+        "scoring_policy_version": (
+            identity["scoring_policy_version"]
         ),
         "grade": grade,
     }
@@ -10707,9 +10724,13 @@ def _stage17e5_finalize_pipeline_result(
     )
     from verdict_consistency import (
         enforce_final_decision_consistency,
+        enforce_final_score_status_narrative_consistency,
     )
     from verified_evidence_score_calibration import (
         apply_verified_evidence_score_calibration,
+    )
+    from high_score_eligibility import (
+        apply_high_score_eligibility_cap,
     )
 
     if _stage17e5_is_grade_dict(value):
@@ -10724,13 +10745,17 @@ def _stage17e5_finalize_pipeline_result(
                 submission_normalization.get("question_text") or ""
             ),
         )
+        # Compatibility diagnostics are deliberately score-neutral. The only
+        # score action at this final boundary is the one-way high-score cap.
         value = apply_verified_evidence_score_calibration(value)
+        value = apply_high_score_eligibility_cap(value)
         value = enforce_final_decision_consistency(
             value
         )
-        return apply_evidence_based_calibration(
-            value
-        )
+        value = apply_evidence_based_calibration(value)
+        # Synchronize public threshold flags from the one final score after
+        # all caps. This stage never calculates or raises a score.
+        return enforce_final_score_status_narrative_consistency(value)
 
     if isinstance(value, list):
         return [

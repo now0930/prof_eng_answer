@@ -35,7 +35,10 @@ python3 scripts/check_accuracy_release_gate.py \
 
 `--require-ready`는 기준 미달 시 exit code 2를 반환한다. 2026-09-03 기준 현재
 30건은 모두 `reviewed`이며 25개 Topic, 4개 Question Type 분포 기준을 충족한다.
-최신 report(`reports/expert_accuracy_seed_current.json`)는 요구 추출 F1 1.0000,
-요구 상태 정확도 0.8559, major/fatal 정밀도·재현율 1.0000, 점수 허용구간 MAE
-0.8723, false pass/strong/confidence-ceiling 위반 0건으로 정책을 모두 통과하여
-운영 정확도 배포 판정은 `READY`이다.
+다만 `present`를 `correct`로 취급하던 이전 prediction을 evidence-required 상태
+정책으로 다시 측정하면 요구 상태 정확도는 0.5586이므로 최신
+report(`reports/expert_accuracy_seed_current.json`)의 운영 배포 판정은 `HOLD`이다.
+새 policy는 기존 `score_range_mae`라는 오해 소지가 있는 이름 대신
+`mean_out_of_range_distance`를 보고하며, expert total label이 있을 때만 actual
+total MAE·signed error·A/B/C/D/E layer MAE·pairwise ordering을 계산한다. padding
+변형 group이 제공되면 padding sensitivity도 별도로 보고한다.

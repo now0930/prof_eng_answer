@@ -273,6 +273,25 @@ class FinalGradeReuseTest(
                     1,
                 )
 
+    def test_final_grade_cache_identity_includes_scoring_policy_version(
+        self,
+    ) -> None:
+        import grading_agents
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            identity, contract = self._identity_and_contract(root)
+            cache_identity = grading_agents._stage18b1_final_grade_cache_identity(
+                grading_identity=identity,
+                question_contract=contract,
+            )
+            self.assertEqual(
+                cache_identity["scoring_policy_version"],
+                grading_agents._STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION,
+            )
+            path = grading_agents._stage18b1_final_grade_cache_path(cache_identity)
+            self.assertIn(cache_identity["scoring_policy_version"], path.name)
+
     def test_production_path_cache_boundaries(
         self,
     ) -> None:

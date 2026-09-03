@@ -14,8 +14,9 @@
   "minimum_demand_state_accuracy": 0.85,
   "minimum_major_finding_precision": 0.9,
   "minimum_major_finding_recall": 0.85,
-  "maximum_score_range_mae": 1.0,
+  "maximum_mean_out_of_range_distance": 1.0,
   "maximum_false_pass_count": 0,
   "maximum_false_strong_count": 0,
+  "maximum_false_high_score_count": 0,
   "maximum_confidence_ceiling_violation_count": 0
 }

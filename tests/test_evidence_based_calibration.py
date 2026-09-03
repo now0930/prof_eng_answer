@@ -64,14 +64,14 @@ def test_exact_projection_and_all_correct_can_keep_high_and_strong() -> None:
     assert result["evidence_based_calibration"]["strong_verdict_allowed"] is True
 
 
-def test_semantically_verified_presence_projects_to_correct() -> None:
+def test_semantic_presence_is_not_promoted_to_correct() -> None:
     result = apply_evidence_based_calibration(
         _grade(("present", "present"), projection=True)
     )
     assert result["canonical_evaluation_ledger"]["summary"][
         "status_counts"
-    ]["correct"] == 2
-    assert result["strong_verdict_allowed"] is True
+    ]["unknown"] == 2
+    assert result["strong_verdict_allowed"] is False
 
 
 def test_partial_requirement_blocks_strong_without_changing_score() -> None:
