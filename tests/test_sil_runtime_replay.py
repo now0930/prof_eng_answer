@@ -10,7 +10,11 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from scripts.replay_sil_issue1_session import EXPECTED_AXES, run
+from scripts.replay_sil_issue1_session import (
+    EXPECTED_AXES,
+    EXPECTED_FATAL_RULES,
+    run,
+)
 
 
 EXPECTED_ARTIFACTS = {
@@ -36,9 +40,7 @@ def test_issue1_session_replay_persists_consistent_boundaries() -> None:
         )
         assert persisted_manifest == manifest
         assert manifest["core"]["requirement_ids"] == EXPECTED_AXES
-        assert manifest["core"]["fatal_rule_ids"] == [
-            "fatal_target_pfd_frequency_product"
-        ]
+        assert manifest["core"]["fatal_rule_ids"] == EXPECTED_FATAL_RULES
 
         grade = json.loads(
             (output_dir / "grade.json").read_text(encoding="utf-8")
@@ -50,7 +52,7 @@ def test_issue1_session_replay_persists_consistent_boundaries() -> None:
 
         telegram = (output_dir / "telegram.txt").read_text(encoding="utf-8")
         assert "요구사항 언급률: 87.5%" in telegram
-        assert "요구사항 정확 충족률: 25.0%" in telegram
+        assert "요구사항 정확 충족률: 12.5%" in telegram
         assert "전체 판정: strong" not in telegram
         assert "요구사항 충족률: 100%" not in telegram
 

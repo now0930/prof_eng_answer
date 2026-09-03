@@ -149,6 +149,9 @@ def test_logic_check_integration_detects_original_and_accepts_corrected() -> Non
     assert original["mode"] == "fatal"
     assert original["score_policy"]["recommended_ceiling"] == 14.5
     assert rule_ids(original) == {
+        "fatal_demand_mode_by_fault_detection",
+        "fatal_pst_replaces_full_test_or_reduces_mttr",
+        "fatal_certificate_interval_as_operating_minimum",
         "fatal_target_pfd_frequency_product"
     }
     assert original["sil_relation_integrity_evaluation"]["marker"] == (

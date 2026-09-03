@@ -158,6 +158,126 @@ def test_deterministic_logic_finding_projects_to_referenced_demands() -> None:
     assert rows[requirement_id]["status_owner"] == "verified_defect"
 
 
+def test_deterministic_finding_resolves_unique_demand_terms() -> None:
+    contract = {
+        "contract_marker": "test",
+        "requirements": [
+            {"requirement_id": "mcdc", "requirement_text": "MC/DC 정의"},
+            {"requirement_id": "verification", "requirement_text": "검증방안 제시"},
+        ],
+    }
+    grade = {
+        "question_demand_contract": contract,
+        "question_type_coverage": {"explicit_requirement_coverage": {
+            "requirements": [
+                {"requirement_id": "mcdc", "status": "present"},
+                {"requirement_id": "verification", "status": "present"},
+            ],
+        }},
+        "logic_check_evaluation": {"findings": [{
+            "rule_id": "fatal_mcdc_universal",
+            "severity": "fatal",
+            "demand_ref_terms": ["MC/DC", "검증방안"],
+            "message": "보편 요구 오류",
+        }]},
+    }
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert {row["status"] for row in ledger["rows"]} == {"incorrect"}
+
+
+def test_coverage_uniquely_matches_contract_object_text() -> None:
+    grade = {
+        "question_demand_contract": {
+            "contract_marker": "test",
+            "requirements": [
+                {
+                    "requirement_id": "principle",
+                    "requirement_text": "압전식 센서의 측정원리 설명",
+                    "object_text": "압전식 센서의 측정원리",
+                },
+                {
+                    "requirement_id": "features",
+                    "requirement_text": "특징 설명",
+                    "object_text": "특징",
+                },
+            ],
+        },
+        "question_type_coverage": {"explicit_requirement_coverage": {
+            "requirements": [
+                {"requirement": "압전식 센서의 측정원리", "status": "present"},
+                {"requirement": "압전식 센서의 특징", "status": "present"},
+            ],
+        }},
+    }
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert [row["status"] for row in ledger["rows"]] == ["correct", "correct"]
+
+
+def test_high_confidence_long_form_reconciles_partial_provider_states() -> None:
+    grade = _grade()
+    requirements = grade["question_demand_contract"]["requirements"]
+    grade["question_type_coverage"]["explicit_requirement_coverage"]["requirements"] = [
+        {
+            "requirement_id": row["requirement_id"],
+            "requirement": row["requirement_text"],
+            "status": "partial",
+        }
+        for row in requirements
+    ]
+    grade["volume_evaluation"] = {"ascii_equivalent_count": 1700}
+    grade["gemini_semantic_evaluation"] = {
+        "parsed": {"layers": [
+            {"score": 2.8, "max": 3.0},
+            {"score": 5.5, "max": 6.0},
+            {"score": 7.2, "max": 8.0},
+            {"score": 5.2, "max": 6.0},
+            {"score": 1.8, "max": 2.0},
+        ]},
+    }
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert {row["status"] for row in ledger["rows"]} == {"correct"}
+    assert ledger["state_reconciliation"]["applied"] is True
+
+
+def test_long_form_reconciliation_never_overrides_verified_defect() -> None:
+    grade = _grade()
+    grade["volume_evaluation"] = {"ascii_equivalent_count": 2000}
+    grade["gemini_semantic_evaluation"] = {
+        "parsed": {"score": 3.0, "max": 3.0},
+    }
+    grade["logic_check_evaluation"] = {"findings": [{
+        "rule_id": "fatal_test",
+        "severity": "fatal",
+        "demand_refs": [grade["question_demand_contract"]["requirements"][0]["requirement_id"]],
+    }]}
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert ledger["rows"][0]["status"] == "incorrect"
+    assert ledger["state_reconciliation"]["applied"] is False
+
+
+def test_supported_single_gap_reconciles_only_remaining_partial() -> None:
+    grade = _grade()
+    coverage = grade["question_type_coverage"]["explicit_requirement_coverage"]["requirements"]
+    for row in coverage:
+        row["status"] = "present"
+    coverage[-1]["status"] = "partial"
+    grade["volume_evaluation"] = {"ascii_equivalent_count": 950}
+    grade["gemini_semantic_evaluation"] = {
+        "parsed": {"layers": [
+            {"score": 2.0, "max": 3.0},
+            {"score": 4.0, "max": 6.0},
+            {"score": 5.2, "max": 8.0},
+            {"score": 3.9, "max": 6.0},
+            {"score": 1.3, "max": 2.0},
+        ]},
+    }
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert {row["status"] for row in ledger["rows"]} == {"correct"}
+    assert ledger["state_reconciliation"]["upgraded_requirement_ids"] == [
+        grade["question_demand_contract"]["requirements"][-1]["requirement_id"]
+    ]
+
+
 def test_unreferenced_defect_links_by_unique_exact_demand_phrase() -> None:
     grade = _grade()
     requirements = grade["question_demand_contract"]["requirements"]

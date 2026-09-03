@@ -2977,6 +2977,52 @@ def evaluate_logic_checks(
                         profile_finding
                     )
 
+            # Profile-owned deterministic rules must not disappear merely
+            # because compact multi-topic routing already consumed the single
+            # LLM call.  Merge them independently of the LLM branch.
+            if isinstance(profile, dict):
+                try:
+                    from logic_llm_verifier import (
+                        _authoritative_structured_findings,
+                    )
+                    cap_policy = profile.get("cap_policy")
+                    default_ceiling = (
+                        cap_policy.get("fatal_recommended_ceiling")
+                        if isinstance(cap_policy, dict)
+                        else None
+                    )
+                    if not isinstance(default_ceiling, (int, float)):
+                        default_ceiling = 10.0
+                    deterministic_findings = (
+                        _authoritative_structured_findings(
+                            answer_text,
+                            profile,
+                            float(default_ceiling),
+                        )
+                    )
+                except Exception:
+                    deterministic_findings = []
+                for deterministic_finding in deterministic_findings:
+                    identity = str(
+                        deterministic_finding.get("source_rule_id")
+                        or deterministic_finding.get("rule_id")
+                        or deterministic_finding.get("id")
+                        or ""
+                    )
+                    if any(
+                        isinstance(existing, dict)
+                        and identity
+                        and identity == str(
+                            existing.get("source_rule_id")
+                            or existing.get("rule_id")
+                            or existing.get("id")
+                            or ""
+                        )
+                        for existing in findings
+                    ):
+                        continue
+                    findings.append(deterministic_finding)
+
         if llm_profile_enabled:
             practice_source = (
                 profile.get(

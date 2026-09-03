@@ -1169,7 +1169,7 @@ def _authoritative_structured_findings(
             "confidence": 1.0,
             "recommended_ceiling": float(ceiling),
         }
-        for reference_key in ("anchor_refs", "demand_refs"):
+        for reference_key in ("anchor_refs", "demand_refs", "demand_ref_terms"):
             references = rule.get(reference_key)
             if isinstance(references, list):
                 finding[reference_key] = [

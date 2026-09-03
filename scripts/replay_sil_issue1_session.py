@@ -50,6 +50,12 @@ EXPECTED_AXES = [
     "proof_test_diagnostics_reliability",
     "operations_moc_security_ai_lifecycle",
 ]
+EXPECTED_FATAL_RULES = [
+    "fatal_demand_mode_by_fault_detection",
+    "fatal_pst_replaces_full_test_or_reduces_mttr",
+    "fatal_certificate_interval_as_operating_minimum",
+    "fatal_target_pfd_frequency_product",
+]
 FORBIDDEN_OUTPUT = (
     "요구사항 충족률 100%",
     "전체 판정: strong",
@@ -245,7 +251,7 @@ def assert_replay(
     if {
         row.get("rule_id")
         for row in logic.get("findings", [])
-    } != {"fatal_target_pfd_frequency_product"}:
+    } != set(EXPECTED_FATAL_RULES):
         raise AssertionError("unexpected SIL fatal rule set")
     if grade.get("confidence") != "medium":
         raise AssertionError("fatal confidence ceiling was not applied")
@@ -259,14 +265,14 @@ def assert_replay(
     coverage = grade["question_type_coverage_summary"]
     if coverage.get("mention_coverage_percent") != 87.5:
         raise AssertionError("mention coverage mismatch")
-    if coverage.get("correctness_coverage_percent") != 25.0:
+    if coverage.get("correctness_coverage_percent") != 12.5:
         raise AssertionError("correctness coverage mismatch")
     required_output = (
         "신뢰도: medium",
         "검증된 핵심 기술 오류가 확인되었습니다.",
         "요구사항 언급률: 87.5%",
-        "요구사항 정확 충족률: 25.0%",
-        "오답 3",
+        "요구사항 정확 충족률: 12.5%",
+        "오답 5",
     )
     for phrase in required_output:
         if phrase not in telegram:

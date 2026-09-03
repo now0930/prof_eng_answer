@@ -1,5 +1,5 @@
 {
-  "version": "sha256-bcafcc725e94dd3131961de31a79d8e430b3b44477db7c3b6c1ca25ea07b99be-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-5847d4452f5d74f00cbb7b863a60d60d266288da7a797289bb2504fec964f1c4-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -26097,6 +26097,10 @@
           "render": "SIL 3/4의 MC/DC 100%",
           "message": "산업표준과 개발범위의 조건 없이 SIL 등급만으로 MC/DC 100%를 보편 요구했습니다.",
           "correct_rule": "MC/DC 적용수준은 산업별 표준, Systematic Capability, 자체개발 코드 범위와 Safety Plan으로 결정합니다.",
+          "demand_ref_terms": [
+            "MC/DC",
+            "검증방안"
+          ],
           "affected_layers": [
             "C",
             "D"

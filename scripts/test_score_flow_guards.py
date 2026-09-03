@@ -62,6 +62,20 @@ class ScoreFlowGuardTest(unittest.TestCase):
         self.assertEqual(result["effective_score"], 3.5)
         self.assertFalse(result["raise_limited"])
 
+    def test_exact_projection_authorizes_full_semantic_raise(self) -> None:
+        result = _phase6_limit_gemini_score(
+            layer_id="C",
+            base_score=3.0,
+            gemini_score=7.25,
+            max_score=8.0,
+            allow_full_raise=True,
+        )
+
+        self.assertEqual(result["effective_score"], 7.25)
+        self.assertEqual(result["raise_cap"], 8.0)
+        self.assertFalse(result["raise_limited"])
+        self.assertTrue(result["full_raise_authorized"])
+
     def test_coverage_adjusted_score_is_applied(
         self,
     ) -> None:

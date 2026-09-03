@@ -6,24 +6,24 @@
   "eligible_case_count": 30,
   "evaluated_case_count": 30,
   "demand_extraction": {
-    "true_positive": 81,
+    "true_positive": 111,
     "gold": 111,
-    "predicted": 115,
-    "precision": 0.7043,
-    "recall": 0.7297,
-    "f1": 0.7168
-  },
-  "demand_state_accuracy": 0.2716,
-  "matched_demand_state_count": 81,
-  "major_finding_detection": {
-    "true_positive": 5,
-    "gold": 9,
-    "predicted": 5,
+    "predicted": 111,
     "precision": 1.0,
-    "recall": 0.5556,
-    "f1": 0.7143
+    "recall": 1.0,
+    "f1": 1.0
   },
-  "score_range_mae": 2.0503,
+  "demand_state_accuracy": 0.8559,
+  "matched_demand_state_count": 111,
+  "major_finding_detection": {
+    "true_positive": 9,
+    "gold": 9,
+    "predicted": 9,
+    "precision": 1.0,
+    "recall": 1.0,
+    "f1": 1.0
+  },
+  "score_range_mae": 0.8723,
   "false_pass_count": 0,
   "false_strong_count": 0,
   "confidence_ceiling_violation_count": 0,
@@ -31,7 +31,7 @@
     {
       "case_id": "sil_target_operations_issue1",
       "review_status": "reviewed",
-      "score": 13.59,
+      "score": 14.39,
       "score_range": {
         "min": 10.0,
         "max": 14.5
@@ -61,7 +61,7 @@
     {
       "case_id": "qtype_qg-cs-low-01",
       "review_status": "reviewed",
-      "score": 7.32,
+      "score": 7.67,
       "score_range": {
         "min": 7.0,
         "max": 11.0
@@ -71,7 +71,7 @@
     {
       "case_id": "qtype_qg-cs-pass-01",
       "review_status": "reviewed",
-      "score": 15.79,
+      "score": 17.36,
       "score_range": {
         "min": 15.0,
         "max": 18.5
@@ -81,47 +81,47 @@
     {
       "case_id": "qtype_qg-cs-high-01",
       "review_status": "reviewed",
-      "score": 14.6,
+      "score": 21.81,
       "score_range": {
         "min": 20.5,
         "max": 24.0
       },
-      "score_range_distance": 5.9
+      "score_range_distance": 0.0
     },
     {
       "case_id": "qtype_qg-da-low-01",
       "review_status": "reviewed",
-      "score": 3.24,
+      "score": 5.19,
       "score_range": {
         "min": 4.0,
         "max": 10.0
       },
-      "score_range_distance": 0.76
+      "score_range_distance": 0.0
     },
     {
       "case_id": "qtype_qg-da-pass-01",
       "review_status": "reviewed",
-      "score": 10.19,
+      "score": 18.56,
       "score_range": {
         "min": 15.0,
         "max": 19.0
       },
-      "score_range_distance": 4.81
+      "score_range_distance": 0.0
     },
     {
       "case_id": "qtype_qg-da-high-01",
       "review_status": "reviewed",
-      "score": 10.39,
+      "score": 20.83,
       "score_range": {
         "min": 20.0,
         "max": 25.0
       },
-      "score_range_distance": 9.61
+      "score_range_distance": 0.0
     },
     {
       "case_id": "qtype_qg-ie-low-01",
       "review_status": "reviewed",
-      "score": 5.16,
+      "score": 7.14,
       "score_range": {
         "min": 4.5,
         "max": 10.5
@@ -131,27 +131,27 @@
     {
       "case_id": "qtype_qg-ie-pass-01",
       "review_status": "reviewed",
-      "score": 10.66,
+      "score": 17.43,
       "score_range": {
         "min": 15.0,
         "max": 19.0
       },
-      "score_range_distance": 4.34
+      "score_range_distance": 0.0
     },
     {
       "case_id": "qtype_qg-ie-high-01",
       "review_status": "reviewed",
-      "score": 14.57,
+      "score": 21.79,
       "score_range": {
         "min": 20.0,
         "max": 25.0
       },
-      "score_range_distance": 5.43
+      "score_range_distance": 0.0
     },
     {
       "case_id": "qtype_qg-pi-low-01",
       "review_status": "reviewed",
-      "score": 7.47,
+      "score": 8.86,
       "score_range": {
         "min": 7.0,
         "max": 11.0
@@ -161,7 +161,7 @@
     {
       "case_id": "qtype_qg-pi-pass-01",
       "review_status": "reviewed",
-      "score": 15.71,
+      "score": 17.66,
       "score_range": {
         "min": 15.0,
         "max": 18.5
@@ -171,27 +171,27 @@
     {
       "case_id": "qtype_qg-pi-high-01",
       "review_status": "reviewed",
-      "score": 15.83,
+      "score": 21.95,
       "score_range": {
         "min": 20.5,
         "max": 24.0
       },
-      "score_range_distance": 4.67
+      "score_range_distance": 0.0
     },
     {
       "case_id": "model_reference_01_piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
       "review_status": "reviewed",
-      "score": 13.97,
+      "score": 14.97,
       "score_range": {
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.03
+      "score_range_distance": 0.0
     },
     {
       "case_id": "model_reference_02_radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
       "review_status": "reviewed",
-      "score": 15.96,
+      "score": 22.0,
       "score_range": {
         "min": 14.0,
         "max": 24.0
@@ -231,12 +231,12 @@
     {
       "case_id": "model_reference_06_industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
       "review_status": "reviewed",
-      "score": 13.96,
+      "score": 17.25,
       "score_range": {
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.04
+      "score_range_distance": 0.0
     },
     {
       "case_id": "model_reference_07_smart_positioner_diagnostics_valve_signature_predictive_maintenance",
@@ -271,12 +271,12 @@
     {
       "case_id": "model_reference_10_ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
       "review_status": "reviewed",
-      "score": 13.55,
+      "score": 22.0,
       "score_range": {
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 0.45
+      "score_range_distance": 0.0
     },
     {
       "case_id": "model_reference_11_configuration_change_release_backup_rollback_migration_obsolescence_management",
@@ -311,12 +311,12 @@
     {
       "case_id": "model_reference_14_control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
       "review_status": "reviewed",
-      "score": 10.85,
+      "score": 10.15,
       "score_range": {
         "min": 14.0,
         "max": 24.0
       },
-      "score_range_distance": 3.15
+      "score_range_distance": 3.85
     },
     {
       "case_id": "model_reference_15_final_control_element_sil_sis_esd_valve_partial_stroke_test",

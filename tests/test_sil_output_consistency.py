@@ -111,7 +111,7 @@ def test_final_json_caps_confidence_and_removes_false_praise() -> None:
     assert "정확합니다" not in result["summary"]
     coverage = result["question_type_coverage_summary"]
     assert coverage["overall_coverage"] == "weak"
-    assert coverage["correctness_coverage_percent"] == 25.0
+    assert coverage["correctness_coverage_percent"] == 12.5
     assert coverage["full_credit_allowed"] is False
 
 
@@ -134,7 +134,7 @@ def test_compact_telegram_overrides_llm_strong_claims() -> None:
     assert text is not None
     assert "신뢰도: medium" in text
     assert "판정: 검증된 핵심 기술 오류 보완 필요" in text
-    assert "목표 PFDavg" in text
+    assert "High/low demand" in text
     assert "전체 판정 strong" not in text
     assert "100% 충족" not in text
     assert "관계식이 정확하고 우수" not in text
@@ -152,8 +152,8 @@ def test_deterministic_telegram_shows_separate_coverage_metrics() -> None:
     assert "실전 목표선: 17.5점 (미달)" in text
     assert "고득점 기준: 20점 (미달)" in text
     assert "요구사항 언급률: 87.5%" in text
-    assert "요구사항 정확 충족률: 25.0%" in text
-    assert "오답 3" in text
+    assert "요구사항 정확 충족률: 12.5%" in text
+    assert "오답 5" in text
     assert "전체 판정: weak" in text
     assert "요구사항 충족률: 100%" not in text
     assert "전체 판정: strong" not in text

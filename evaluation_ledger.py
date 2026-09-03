@@ -249,6 +249,11 @@ def _verified_defects(grade: dict[str, Any]) -> list[dict[str, Any]]:
         and str(row.get("owner_layer") or "C").upper() == "C"
     ]
     logic = _nested(grade, "logic_check_evaluation")
+    demand_contract = _nested(grade, "question_demand_contract")
+    requirements = [
+        row for row in (demand_contract.get("requirements") or [])
+        if isinstance(row, dict)
+    ]
     findings = logic.get("findings")
     for finding in findings if isinstance(findings, list) else []:
         if not isinstance(finding, dict):
@@ -264,9 +269,33 @@ def _verified_defects(grade: dict[str, Any]) -> list[dict[str, Any]]:
             or ""
         ).strip()
         demand_refs = finding.get("demand_refs")
+        resolved_refs = [
+            str(value).strip() for value in demand_refs
+            if str(value).strip()
+        ] if isinstance(demand_refs, list) else []
+        for raw_term in (
+            finding.get("demand_ref_terms")
+            if isinstance(finding.get("demand_ref_terms"), list)
+            else []
+        ):
+            term = _compact_link_text(raw_term)
+            if not term:
+                continue
+            matches = [
+                str(requirement.get("requirement_id") or "").strip()
+                for requirement in requirements
+                if str(requirement.get("requirement_id") or "").strip()
+                and term in _compact_link_text(
+                    " ".join(str(requirement.get(key) or "") for key in (
+                        "object_text", "requirement_text",
+                    ))
+                )
+            ]
+            if len(matches) == 1 and matches[0] not in resolved_refs:
+                resolved_refs.append(matches[0])
         requirement_ids = (
-            demand_refs
-            if isinstance(demand_refs, list) and demand_refs
+            resolved_refs
+            if resolved_refs
             else [""]
         )
         for requirement_id in requirement_ids:
@@ -328,7 +357,126 @@ def _coverage_match(
         ]
         if len(exact_text) == 1:
             return exact_text[0]
+
+    # Provider coverage often omits the action suffix ("설명", "제시") or
+    # qualifies a short object (for example "특징").  Accept only a unique
+    # object/containment match so this fallback cannot guess ambiguously.
+    object_text = _compact_link_text(requirement.get("object_text"))
+    if object_text:
+        candidates = []
+        for index, row in enumerate(rows):
+            if index in consumed:
+                continue
+            row_text = _compact_link_text(
+                row.get("requirement_text")
+                or row.get("requirement")
+                or row.get("criterion")
+            )
+            if row_text and (object_text == row_text or object_text in row_text):
+                candidates.append(index)
+        if len(candidates) == 1:
+            return candidates[0]
     return None
+
+
+def _semantic_score_ratio(grade: dict[str, Any]) -> float | None:
+    evaluation = _nested(grade, "gemini_semantic_evaluation")
+    parsed = evaluation.get("parsed")
+    if not isinstance(parsed, dict):
+        return None
+    layers = parsed.get("layers")
+    if isinstance(layers, list) and layers:
+        score = 0.0
+        maximum = 0.0
+        for row in layers:
+            if not isinstance(row, dict):
+                continue
+            row_score = row.get("score")
+            row_max = row.get("max")
+            if (
+                isinstance(row_score, (int, float))
+                and not isinstance(row_score, bool)
+                and isinstance(row_max, (int, float))
+                and not isinstance(row_max, bool)
+                and row_max > 0
+            ):
+                score += float(row_score)
+                maximum += float(row_max)
+        return score / maximum if maximum > 0 else None
+    score = parsed.get("score")
+    maximum = parsed.get("max")
+    if (
+        isinstance(score, (int, float))
+        and not isinstance(score, bool)
+        and isinstance(maximum, (int, float))
+        and not isinstance(maximum, bool)
+        and maximum > 0
+    ):
+        return float(score) / float(maximum)
+    return None
+
+
+def _reconcile_high_confidence_long_form_states(
+    grade: dict[str, Any],
+    rows: list[dict[str, Any]],
+    defects: list[dict[str, Any]],
+) -> dict[str, Any]:
+    volume = _nested(grade, "volume_evaluation")
+    count = volume.get("ascii_equivalent_count")
+    ratio = _semantic_score_ratio(grade)
+    statuses = {str(row.get("status") or "") for row in rows}
+    correct_count = sum(row.get("status") == "correct" for row in rows)
+    uncertain_count = sum(row.get("status") in {"partial", "unknown"} for row in rows)
+    strong_long_form = bool(
+        isinstance(count, (int, float))
+        and not isinstance(count, bool)
+        and float(count) >= 1500.0
+        and ratio is not None
+        and ratio >= 0.78
+    )
+    supported_single_gap = bool(
+        isinstance(count, (int, float))
+        and not isinstance(count, bool)
+        and float(count) >= 900.0
+        and ratio is not None
+        and ratio >= 0.65
+        and correct_count > 0
+        and uncertain_count == 1
+    )
+    eligible = bool(
+        (strong_long_form or supported_single_gap)
+        and rows
+        and not defects
+        and not statuses.intersection({"missing", "incorrect"})
+        and statuses.issubset({"correct", "partial", "unknown"})
+        and statuses.intersection({"partial", "unknown"})
+    )
+    upgraded: list[str] = []
+    if eligible:
+        for row in rows:
+            if row.get("status") not in {"partial", "unknown"}:
+                continue
+            row["status"] = "correct"
+            row["mentioned"] = True
+            row["status_owner"] = "high_confidence_semantic_long_form"
+            upgraded.append(str(row.get("requirement_id") or ""))
+    return {
+        "marker": "HIGH_CONFIDENCE_SEMANTIC_LONG_FORM_RECONCILIATION_V1",
+        "applied": bool(upgraded),
+        "score_effect": "none",
+        "minimum_ascii_equivalent_count": 1500,
+        "minimum_semantic_score_ratio": 0.78,
+        "supported_single_gap_policy": {
+            "minimum_ascii_equivalent_count": 900,
+            "minimum_semantic_score_ratio": 0.65,
+            "requires_existing_correct": True,
+            "maximum_uncertain_requirements": 1,
+        },
+        "observed_semantic_score_ratio": (
+            round(ratio, 4) if ratio is not None else None
+        ),
+        "upgraded_requirement_ids": upgraded,
+    }
 
 
 def _evidence_from_coverage(row: dict[str, Any]) -> dict[str, Any]:
@@ -448,6 +596,12 @@ def build_canonical_evaluation_ledger(grade: Any) -> dict[str, Any]:
             "evidence": evidence,
         })
 
+    state_reconciliation = _reconcile_high_confidence_long_form_states(
+        grade,
+        rows,
+        defects,
+    )
+
     counts = {name: 0 for name in _STATUS_ORDER}
     for row in rows:
         counts[row["status"]] += 1
@@ -507,6 +661,7 @@ def build_canonical_evaluation_ledger(grade: Any) -> dict[str, Any]:
         },
         "unmatched_coverage": unmatched_coverage,
         "unresolved_verified_defects": unresolved_defects,
+        "state_reconciliation": state_reconciliation,
         "ownership_policy": {
             "question_demands": "question_demand_contract",
             "demand_status": "canonical_evaluation_ledger",

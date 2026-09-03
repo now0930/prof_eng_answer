@@ -4706,6 +4706,16 @@ def _stage7_legacy_phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, s
     parsed = gemini_eval.get("parsed") or {}
     gemini_layers = parsed.get("layers") or []
     max_by_layer = _phase6_get_layer_max(scoring_model)
+    projection_validation = (
+        gemini_eval.get("explicit_requirement_projection_validation")
+        or parsed.get("explicit_requirement_projection_validation")
+        or {}
+    )
+    exact_projection_valid = bool(
+        isinstance(projection_validation, dict)
+        and projection_validation.get("valid") is True
+        and projection_validation.get("fail_closed") is not True
+    )
 
     gemini_by_id = {
         str(x.get("layer_id")): x
@@ -4756,6 +4766,7 @@ def _stage7_legacy_phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, s
                 base_score=layer.get("score", 0),
                 gemini_score=g_score,
                 max_score=max_score,
+                allow_full_raise=exact_projection_valid,
             )
             effective_score = score_guard["effective_score"]
 
@@ -4768,6 +4779,9 @@ def _stage7_legacy_phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, s
             new_layer["gemini_raise_cap"] = score_guard["raise_cap"]
             new_layer["gemini_adjustment_limited"] = (
                 score_guard["raise_limited"]
+            )
+            new_layer["gemini_full_raise_authorized"] = (
+                score_guard["full_raise_authorized"]
             )
             new_layer["gemini_reason"] = g.get("reason", "")
             new_layer["gemini_evidence"] = g.get("evidence", [])
@@ -4806,6 +4820,8 @@ def _phase6_limit_gemini_score(
     base_score,
     gemini_score,
     max_score,
+    *,
+    allow_full_raise=False,
 ):
     normalization_fallbacks: list[str] = []
 
@@ -4863,14 +4879,19 @@ def _phase6_limit_gemini_score(
         min(maximum, raw_gemini),
     )
 
-    raise_cap = max(
-        0.0,
-        float(
-            _PHASE6_GEMINI_LAYER_RAISE_CAPS.get(
-                str(layer_id),
-                0.50,
-            )
-        ),
+    full_raise_authorized = allow_full_raise is True
+    raise_cap = (
+        maximum
+        if full_raise_authorized
+        else max(
+            0.0,
+            float(
+                _PHASE6_GEMINI_LAYER_RAISE_CAPS.get(
+                    str(layer_id),
+                    0.50,
+                )
+            ),
+        )
     )
 
     if raw_gemini <= base:
@@ -4898,6 +4919,7 @@ def _phase6_limit_gemini_score(
             2,
         ),
         "raise_limited": limited,
+        "full_raise_authorized": full_raise_authorized,
         "normalization_fallbacks": (
             normalization_fallbacks
         ),
@@ -9577,15 +9599,31 @@ def _phase2_finalize_verified_coverage_for_persistence(
         )
     )
 
-    after = _phase2_final_score_snapshot_v1(
+    after_reconciliation = _phase2_final_score_snapshot_v1(
         output
     )
-
-    if before != after:
+    if before != after_reconciliation:
         raise RuntimeError(
             "Final verified coverage persistence "
             "changed numeric score state"
         )
+
+    from evaluation_ledger import (
+        attach_canonical_evaluation_ledger,
+    )
+    output = attach_canonical_evaluation_ledger(
+        output
+    )
+
+    # Re-assert the evidence-owned calibrated score after every legacy score
+    # reconciliation step.  The calibration is idempotent and remains neutral
+    # when its verified eligibility conditions are not met.
+    from verified_evidence_score_calibration import (
+        apply_verified_evidence_score_calibration,
+    )
+    output = apply_verified_evidence_score_calibration(
+        output
+    )
 
     if isinstance(output, dict):
         reconciliation = output.get(
@@ -10670,6 +10708,9 @@ def _stage17e5_finalize_pipeline_result(
     from verdict_consistency import (
         enforce_final_decision_consistency,
     )
+    from verified_evidence_score_calibration import (
+        apply_verified_evidence_score_calibration,
+    )
 
     if _stage17e5_is_grade_dict(value):
         value = attach_submission_normalization(
@@ -10683,6 +10724,7 @@ def _stage17e5_finalize_pipeline_result(
                 submission_normalization.get("question_text") or ""
             ),
         )
+        value = apply_verified_evidence_score_calibration(value)
         value = enforce_final_decision_consistency(
             value
         )

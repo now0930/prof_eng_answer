@@ -100,12 +100,14 @@ python3 -m py_compile \
   accuracy_release_gate.py \
   evaluation_ledger.py \
   evidence_calibration.py \
+  verified_evidence_score_calibration.py \
   scripts/replay_sil_issue1_session.py \
   tests/test_atomic_question_demand_contract_v2.py \
   tests/test_canonical_evaluation_ledger.py \
   tests/test_evidence_based_calibration.py \
   tests/test_authoritative_structured_safety_rules.py \
   tests/test_qtype_topic_pack_demand_axes.py \
+  tests/test_verified_evidence_score_calibration.py \
   tests/test_accuracy_release_gate.py \
   tests/test_cross_topic_accuracy_contract.py \
   scripts/rubric_audit/report_priority_minor_relationships.py \
@@ -420,6 +422,7 @@ python3 -B tests/test_canonical_evaluation_ledger.py
 python3 -B tests/test_evidence_based_calibration.py
 python3 -B tests/test_authoritative_structured_safety_rules.py
 python3 -B tests/test_qtype_topic_pack_demand_axes.py
+python3 -B tests/test_verified_evidence_score_calibration.py
 python3 -B tests/test_accuracy_release_gate.py
 python3 -B tests/test_cross_topic_accuracy_contract.py
 python3 -B tests/test_multi_topic_logic_batch.py

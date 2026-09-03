@@ -99,8 +99,11 @@
       "strong_verdict_allowed": false,
       "requirements_full_credit_allowed": false,
       "mention_coverage_percent": 87.5,
-      "correctness_coverage_percent": 25.0,
+      "correctness_coverage_percent": 12.5,
       "fatal_rule_ids": [
+        "fatal_demand_mode_by_fault_detection",
+        "fatal_pst_replaces_full_test_or_reduces_mttr",
+        "fatal_certificate_interval_as_operating_minimum",
         "fatal_target_pfd_frequency_product"
       ]
     },
@@ -108,7 +111,7 @@
       "신뢰도: medium",
       "전체 판정: weak",
       "요구사항 언급률: 87.5%",
-      "요구사항 정확 충족률: 25.0%"
+      "요구사항 정확 충족률: 12.5%"
     ],
     "forbidden_telegram_fragments": [
       "요구사항 충족률: 100%",
@@ -128,5 +131,5 @@
       "CONTROL_THEORY"
     ]
   },
-  "expected_semantic_sha256": "983bee21bf54d30ca51b53f128d0bcc51768aa7ed4fec7dcd80cf6e9da4b913e"
+  "expected_semantic_sha256": "fa6a753795a9e8c53927a3dabc6f4fa8570954589c3326e3b962a6c8b1036128"
 }

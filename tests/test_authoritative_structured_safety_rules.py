@@ -54,7 +54,10 @@ def test_sil_corrected_claims_do_not_trigger_structured_rules() -> None:
 
 def test_unqualified_sil_mcdc_universal_rule_is_detected() -> None:
     answer = "Systematic Integrity는 SIL 3/4의 MC/DC 100%로 검증한다."
-    assert _rule_ids(answer, MCDC_TOPIC) == {"sil_four_universal_rule"}
+    profile = load_logic_check_profile(MCDC_TOPIC)
+    findings = _authoritative_structured_findings(answer, profile, 10.0)
+    assert {str(row["rule_id"]) for row in findings} == {"sil_four_universal_rule"}
+    assert findings[0]["demand_ref_terms"] == ["MC/DC", "검증방안"]
 
 
 def test_qualified_mcdc_requirement_does_not_trigger_universal_rule() -> None:

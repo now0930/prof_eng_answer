@@ -180,7 +180,10 @@ def test_fatal_formula_overrides_false_present_by_exact_demand_ref() -> None:
 
     for requirement_id in (
         "required_rrf_and_target_sil",
+        "demand_mode_metric_selection",
         "quantitative_verification_dimension",
+        "proof_test_diagnostics_reliability",
+        "operations_moc_security_ai_lifecycle",
     ):
         row = by_id[requirement_id]
         assert row["status"] == "wrong"
@@ -194,7 +197,7 @@ def test_fatal_formula_overrides_false_present_by_exact_demand_ref() -> None:
 
     summary = result["question_type_coverage_summary"]
     assert summary["mention_coverage_percent"] == 100.0
-    assert summary["correctness_coverage_percent"] == 75.0
+    assert summary["correctness_coverage_percent"] == 37.5
     assert summary["full_correct_coverage"] is False
     assert coverage["overall_coverage"] == "weak"
     assert coverage["full_credit_allowed"] is False
