@@ -7,9 +7,9 @@ import gemini_grader
 def build_without_network(subject_rubric):
     previous = (
         gemini_grader
-        ._multi_topic_scope_previous_build_gemini_grading_prompt_v1
+        ._build_hybrid_general_prompt
     )
-    gemini_grader._multi_topic_scope_previous_build_gemini_grading_prompt_v1 = (
+    gemini_grader._build_hybrid_general_prompt = (
         lambda *args, **kwargs: "BASE_PROMPT"
     )
     try:
@@ -17,7 +17,7 @@ def build_without_network(subject_rubric):
             subject_rubric=subject_rubric
         )
     finally:
-        gemini_grader._multi_topic_scope_previous_build_gemini_grading_prompt_v1 = (
+        gemini_grader._build_hybrid_general_prompt = (
             previous
         )
 

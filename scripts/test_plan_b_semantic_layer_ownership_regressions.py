@@ -46,12 +46,12 @@ def _parsed(technical_error_risk=False, gate=None):
 
 class PlanBGeneralLayerOwnershipTest(unittest.TestCase):
     def test_semantic_prompt_contract_is_general(self):
-        original = gemini_grader._PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1
+        original = gemini_grader._build_explicit_requirement_prompt
         try:
-            gemini_grader._PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1 = lambda *args, **kwargs: "BASE"
-            prompt = gemini_grader.build_gemini_grading_prompt(question_text="PID 튜닝 절차를 설명하시오.", answer_text="답안")
+            gemini_grader._build_explicit_requirement_prompt = lambda *args, **kwargs: "BASE"
+            prompt = gemini_grader._build_layer_ownership_prompt(question_text="PID 튜닝 절차를 설명하시오.", answer_text="답안")
         finally:
-            gemini_grader._PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1 = original
+            gemini_grader._build_explicit_requirement_prompt = original
         self.assertIn("[PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]", prompt)
         self.assertIn("B는 문제문이 명시적으로 요구한 항목", prompt)
         self.assertIn("C는 기술 Fact, 공식, 부호와 방향", prompt)

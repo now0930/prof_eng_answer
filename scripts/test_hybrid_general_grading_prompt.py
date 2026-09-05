@@ -90,7 +90,7 @@ class HybridGeneralPromptTest(unittest.TestCase):
     def test_wrapper_appends_once(self):
         with patch.object(
             gemini_grader,
-            "_hybrid_general_prompt_previous_build_gemini_grading_prompt",
+            "_build_question_demand_prompt",
             return_value="BASE",
         ):
             result = gemini_grader.build_gemini_grading_prompt(
@@ -106,7 +106,7 @@ class HybridGeneralPromptTest(unittest.TestCase):
     def test_wrapper_no_evidence_preserves_base(self):
         with patch.object(
             gemini_grader,
-            "_hybrid_general_prompt_previous_build_gemini_grading_prompt",
+            "_build_question_demand_prompt",
             return_value="BASE",
         ):
             result = gemini_grader.build_gemini_grading_prompt(
@@ -119,7 +119,7 @@ class HybridGeneralPromptTest(unittest.TestCase):
         base = "BASE\n" + HYBRID_GENERAL_PROMPT_MARKER
         with patch.object(
             gemini_grader,
-            "_hybrid_general_prompt_previous_build_gemini_grading_prompt",
+            "_build_question_demand_prompt",
             return_value=base,
         ):
             result = gemini_grader.build_gemini_grading_prompt(

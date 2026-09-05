@@ -390,7 +390,7 @@ class FinalGradeReuseTest(
                 name for name, _ in calls
             }
             if {
-                "_STAGE17E5_PREVIOUS_RUN_AGENT_PIPELINE",
+                "_run_agent_pipeline_core",
                 "_stage17e5_finalize_pipeline_result",
                 "_stage18b1_store_final_grade_cache",
             }.issubset(names):

@@ -330,7 +330,7 @@ def _match_score(
     return score
 
 
-def _select_requirement_index(
+def _select_requirement_index_by_score(
     rows: list[Any],
     defect: dict[str, Any],
     requirement_map: dict[
@@ -459,7 +459,7 @@ def _downgrade_overall(
     return "adequate"
 
 
-def reconcile_verified_defects_with_coverage(
+def _reconcile_verified_defects_base(
     grade: Any,
 ) -> Any:
     if not isinstance(grade, dict):
@@ -685,11 +685,6 @@ def reconcile_verified_defects_with_coverage(
 
 
 # === VERIFIED_DEFECT_EMPTY_REQUIREMENT_FALLBACK_V2 ===
-_VERIFIED_DEFECT_PREVIOUS_SELECT_REQUIREMENT_V2 = (
-    _select_requirement_index
-)
-
-
 def _verified_requirement_text_v2(
     row: Any,
 ) -> str:
@@ -843,7 +838,7 @@ def _select_requirement_index(
                     return selected
 
     return (
-        _VERIFIED_DEFECT_PREVIOUS_SELECT_REQUIREMENT_V2(
+        _select_requirement_index_by_score(
             rows,
             defect,
             requirement_map,
@@ -852,11 +847,6 @@ def _select_requirement_index(
 
 
 # === VERIFIED_DEFECT_DISPLAY_SUMMARY_SYNC_V4 ===
-_VERIFIED_DEFECT_PREVIOUS_RECONCILE_DISPLAY_V4 = (
-    reconcile_verified_defects_with_coverage
-)
-
-
 def _verified_display_rows_v4(
     coverage: Any,
 ) -> list[dict[str, Any]]:
@@ -1031,11 +1021,11 @@ def _verified_display_summary_v4(
     return summary
 
 
-def reconcile_verified_defects_with_coverage(
+def _reconcile_verified_defects_with_display_summary(
     grade: Any,
 ) -> Any:
     output = (
-        _VERIFIED_DEFECT_PREVIOUS_RECONCILE_DISPLAY_V4(
+        _reconcile_verified_defects_base(
             grade
         )
     )
@@ -1089,11 +1079,6 @@ def reconcile_verified_defects_with_coverage(
     return output
 
 # === STAGE25G5B_CONTROL_VALVE_COVERAGE_IDENTITY_V1 ===
-_STAGE25G5B_PREVIOUS_RECONCILE_COVERAGE_IDENTITY_V1 = (
-    reconcile_verified_defects_with_coverage
-)
-
-
 def _stage25g5b_sync_parsed_coverage_identity(
     output: Any,
 ) -> Any:
@@ -1128,11 +1113,11 @@ def _stage25g5b_sync_parsed_coverage_identity(
     return output
 
 
-def reconcile_verified_defects_with_coverage(
+def _reconcile_verified_defects_with_coverage_identity(
     grade: Any,
 ) -> Any:
     output = (
-        _STAGE25G5B_PREVIOUS_RECONCILE_COVERAGE_IDENTITY_V1(
+        _reconcile_verified_defects_with_display_summary(
             grade
         )
     )
@@ -1180,11 +1165,6 @@ def reconcile_verified_defects_with_coverage(
     return output
 
 # === STAGE25G5E2_RECONCILIATION_IDEMPOTENCE_V2 ===
-_STAGE25G5E2_PREVIOUS_RECONCILE_IDEMPOTENCE_V2 = (
-    reconcile_verified_defects_with_coverage
-)
-
-
 def _stage25g5e2_stable_unique_strings(
     value: Any,
 ) -> Any:
@@ -1284,7 +1264,7 @@ def reconcile_verified_defects_with_coverage(
     grade: Any,
 ) -> Any:
     output = (
-        _STAGE25G5E2_PREVIOUS_RECONCILE_IDEMPOTENCE_V2(
+        _reconcile_verified_defects_with_coverage_identity(
             grade
         )
     )

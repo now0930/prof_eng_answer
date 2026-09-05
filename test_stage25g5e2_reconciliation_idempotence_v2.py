@@ -113,22 +113,22 @@ def test_stage25g5e2_nonlist_and_nondict_passthrough():
     )
 
 
-def test_stage25g5e2_wrapper_reaches_fixed_point_once():
+def test_stage25g5e2_finalizer_reaches_fixed_point_once():
     warning = (
         "question_type 세부 요구 충족도가 낮습니다"
         "(원리·해석형). 단답식 키워드보다 C항목 "
         "Fact 설명과 D항목 현장 판단을 보강해야 합니다."
     )
 
-    original_previous = (
+    original_previous_step = (
         owner
-        ._STAGE25G5E2_PREVIOUS_RECONCILE_IDEMPOTENCE_V2
+        ._reconcile_verified_defects_with_coverage_identity
     )
     original_attach = (
         adapter.attach_question_type_coverage_feedback
     )
 
-    def fake_previous(grade):
+    def fake_previous_step(grade):
         return copy.deepcopy(grade)
 
     def fake_attach(grade):
@@ -152,8 +152,8 @@ def test_stage25g5e2_wrapper_reaches_fixed_point_once():
         }
         return output
 
-    owner._STAGE25G5E2_PREVIOUS_RECONCILE_IDEMPOTENCE_V2 = (
-        fake_previous
+    owner._reconcile_verified_defects_with_coverage_identity = (
+        fake_previous_step
     )
     adapter.attach_question_type_coverage_feedback = (
         fake_attach
@@ -174,8 +174,8 @@ def test_stage25g5e2_wrapper_reaches_fixed_point_once():
             )
         )
     finally:
-        owner._STAGE25G5E2_PREVIOUS_RECONCILE_IDEMPOTENCE_V2 = (
-            original_previous
+        owner._reconcile_verified_defects_with_coverage_identity = (
+            original_previous_step
         )
         adapter.attach_question_type_coverage_feedback = (
             original_attach

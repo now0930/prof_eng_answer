@@ -320,7 +320,9 @@ def _focus_missing_text(focus: dict[str, Any], limit: int = 4) -> str:
     return ", ".join(shown) + suffix
 
 
-def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, Any]:
+def _attach_base_question_type_coverage_feedback(
+    grade: dict[str, Any],
+) -> dict[str, Any]:
     """Attach readable C/D feedback from question_type_coverage.
 
     This function is intentionally non-scoring.
@@ -454,7 +456,7 @@ def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, A
 
     return grade
 
-def ensure_grade_question_type_coverage(
+def _ensure_base_question_type_coverage(
     grade: dict[str, Any],
     question_text: str | None = None,
 ) -> dict[str, Any]:
@@ -700,25 +702,22 @@ def _promote_question_type_coverage_to_root_v1(grade: dict[str, Any]) -> dict[st
     return grade
 
 
-_ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_PROMOTE_ROOT_V1 = attach_question_type_coverage_feedback
-
-def attach_question_type_coverage_feedback(grade: dict[str, Any]) -> dict[str, Any]:
-    grade = _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_PROMOTE_ROOT_V1(grade)
+def _attach_promoted_question_type_coverage_feedback(
+    grade: dict[str, Any],
+) -> dict[str, Any]:
+    grade = _attach_base_question_type_coverage_feedback(grade)
     return _promote_question_type_coverage_to_root_v1(grade)
 
 
-if "ensure_grade_question_type_coverage" in globals():
-    _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PROMOTE_ROOT_V1 = ensure_grade_question_type_coverage
-
-    def ensure_grade_question_type_coverage(
-        grade: dict[str, Any],
-        question_text: str | None = None,
-    ) -> dict[str, Any]:
-        grade = _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PROMOTE_ROOT_V1(
-            grade,
-            question_text=question_text,
-        )
-        return _promote_question_type_coverage_to_root_v1(grade)
+def _ensure_promoted_question_type_coverage(
+    grade: dict[str, Any],
+    question_text: str | None = None,
+) -> dict[str, Any]:
+    grade = _ensure_base_question_type_coverage(
+        grade,
+        question_text=question_text,
+    )
+    return _promote_question_type_coverage_to_root_v1(grade)
 
 # === qtype legacy GENERAL cleanup wrapper v2 EOF ===
 # Remove old GENERAL(일반 설명형) phrases after question_type_v2 is resolved.
@@ -786,32 +785,20 @@ def _cleanup_legacy_general_text_v2(grade):
     return grade
 
 
-if "_QTYPE_CLEAN_GENERAL_V2_INSTALLED" not in globals():
-    _QTYPE_CLEAN_GENERAL_V2_INSTALLED = True
+def _attach_cleaned_question_type_coverage_feedback(grade):
+    grade = _attach_promoted_question_type_coverage_feedback(grade)
+    return _cleanup_legacy_general_text_v2(grade)
 
-    _ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_CLEAN_GENERAL_V2 = attach_question_type_coverage_feedback
 
-    def attach_question_type_coverage_feedback(
+def _ensure_cleaned_question_type_coverage(
+    grade,
+    question_text=None,
+):
+    grade = _ensure_promoted_question_type_coverage(
         grade,
-        _orig=_ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_CLEAN_GENERAL_V2,
-    ):
-        grade = _orig(grade)
-        return _cleanup_legacy_general_text_v2(grade)
-
-
-    if "ensure_grade_question_type_coverage" in globals():
-        _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_CLEAN_GENERAL_V2 = ensure_grade_question_type_coverage
-
-        def ensure_grade_question_type_coverage(
-            grade,
-            question_text=None,
-            _orig=_ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_CLEAN_GENERAL_V2,
-        ):
-            grade = _orig(
-                grade,
-                question_text=question_text,
-            )
-            return _cleanup_legacy_general_text_v2(grade)
+        question_text=question_text,
+    )
+    return _cleanup_legacy_general_text_v2(grade)
 
 # INCORRECT_REQUIREMENT_STATUS_CONTRACT_V3
 def _apply_incorrect_requirement_status_contract_v3(grade):
@@ -1097,17 +1084,12 @@ def _apply_incorrect_requirement_status_contract_v3(grade):
     return grade
 
 
-_ORIGINAL_ATTACH_QTYPE_COVERAGE_INCORRECT_V3 = (
-    attach_question_type_coverage_feedback
-)
-
-
-def attach_question_type_coverage_feedback(
+def _attach_normalized_question_type_coverage_feedback(
     *args,
     **kwargs,
 ):
     result = (
-        _ORIGINAL_ATTACH_QTYPE_COVERAGE_INCORRECT_V3(
+        _attach_cleaned_question_type_coverage_feedback(
             *args,
             **kwargs,
         )
@@ -1120,17 +1102,12 @@ def attach_question_type_coverage_feedback(
     )
 
 
-_ORIGINAL_ENSURE_QTYPE_COVERAGE_INCORRECT_V3 = (
-    ensure_grade_question_type_coverage
-)
-
-
-def ensure_grade_question_type_coverage(
+def _ensure_normalized_question_type_coverage(
     *args,
     **kwargs,
 ):
     result = (
-        _ORIGINAL_ENSURE_QTYPE_COVERAGE_INCORRECT_V3(
+        _ensure_cleaned_question_type_coverage(
             *args,
             **kwargs,
         )
@@ -1367,17 +1344,12 @@ def _plan_a_repair_design_criteria_coverage_v1(
     return grade
 
 
-_ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PLAN_A_V1 = (
-    ensure_grade_question_type_coverage
-)
-
-
 def ensure_grade_question_type_coverage(
     *args,
     **kwargs,
 ):
     result = (
-        _ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PLAN_A_V1(
+        _ensure_normalized_question_type_coverage(
             *args,
             **kwargs,
         )
@@ -1394,13 +1366,8 @@ def ensure_grade_question_type_coverage(
     )
 
 
-_ORIGINAL_ATTACH_QTYPE_COVERAGE_PLAN_A_V1 = (
-    attach_question_type_coverage_feedback
-)
-
-
 # PLAN_A_ATTACH_QUESTION_TEXT_COMPATIBILITY_V1
-def attach_question_type_coverage_feedback(
+def _attach_question_aware_coverage_feedback(
     *args,
     **kwargs,
 ):
@@ -1411,7 +1378,7 @@ def attach_question_type_coverage_feedback(
     )
 
     result = (
-        _ORIGINAL_ATTACH_QTYPE_COVERAGE_PLAN_A_V1(
+        _attach_normalized_question_type_coverage_feedback(
             *args,
             **forwarded_kwargs,
         )
@@ -1434,10 +1401,6 @@ def attach_question_type_coverage_feedback(
 # Reclassify only coverage rows that semantically overlap fatal logic
 # findings. This adapter remains non-scoring.
 import re as _stage25g3g_re
-
-_STAGE25G3G_PREVIOUS_ATTACH_QUESTION_TYPE_COVERAGE_FEEDBACK = (
-    attach_question_type_coverage_feedback
-)
 
 _STAGE25G3G_TOKEN_PATTERN = _stage25g3g_re.compile(
     r"[A-Za-z][A-Za-z0-9]{1,}|[가-힣]{2,}"
@@ -2373,7 +2336,7 @@ def attach_question_type_coverage_feedback(
         )
 
     result = (
-        _STAGE25G3G_PREVIOUS_ATTACH_QUESTION_TYPE_COVERAGE_FEEDBACK(
+        _attach_question_aware_coverage_feedback(
             *args,
             **kwargs,
         )

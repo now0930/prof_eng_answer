@@ -647,18 +647,21 @@ class ExplicitRequirementCapEnforcementRegressionTest(
 class QuestionTypeCleanupBootstrapRegressionTest(
     unittest.TestCase
 ):
-    def test_qtype_cleanup_wrapper_is_installed(self) -> None:
-        self.assertIs(
-            qtype_coverage_adapter
-            ._QTYPE_CLEAN_GENERAL_V2_INSTALLED,
-            True,
-        )
-        self.assertTrue(
-            callable(
-                qtype_coverage_adapter
-                ._cleanup_legacy_general_text_v2
+    def test_qtype_cleanup_pipeline_step_is_installed(self) -> None:
+        for name in (
+            "_cleanup_legacy_general_text_v2",
+            "_attach_cleaned_question_type_coverage_feedback",
+            "_ensure_cleaned_question_type_coverage",
+        ):
+            self.assertTrue(
+                callable(
+                    getattr(
+                        qtype_coverage_adapter,
+                        name,
+                        None,
+                    )
+                )
             )
-        )
 
     def test_qtype_cleanup_removes_legacy_general_sentence(
         self,
@@ -752,13 +755,13 @@ class QuestionTypeCleanupBootstrapRegressionTest(
 class QuestionTypeRootPromotionBootstrapRegressionTest(
     unittest.TestCase
 ):
-    def test_qtype_root_promotion_wrapper_chain_is_installed(
+    def test_qtype_coverage_pipeline_steps_are_installed(
         self,
     ) -> None:
         required_callables = (
             "_promote_question_type_coverage_to_root_v1",
-            "_ORIGINAL_ATTACH_QTYPE_COVERAGE_FEEDBACK_PROMOTE_ROOT_V1",
-            "_ORIGINAL_ENSURE_GRADE_QTYPE_COVERAGE_PROMOTE_ROOT_V1",
+            "_attach_promoted_question_type_coverage_feedback",
+            "_ensure_promoted_question_type_coverage",
             "attach_question_type_coverage_feedback",
             "ensure_grade_question_type_coverage",
         )
@@ -2043,7 +2046,7 @@ class LogicLlmVerifierFallbackRegressionTest(
 class GeminiMandatoryPromptBootstrapRegressionTest(
     unittest.TestCase
 ):
-    def test_gemini_mandatory_prompt_wrappers_are_installed(
+    def test_gemini_mandatory_prompt_steps_are_explicit(
         self,
     ) -> None:
         import gemini_grader
@@ -2053,8 +2056,7 @@ class GeminiMandatoryPromptBootstrapRegressionTest(
                 getattr(
                     gemini_grader,
                     (
-                        "_ORIGINAL_BUILD_GEMINI_GRADING_"
-                        "PROMPT_QTYPE_V4_EOF"
+                        "_build_question_type_contract_prompt"
                     ),
                     None,
                 )
@@ -2065,8 +2067,7 @@ class GeminiMandatoryPromptBootstrapRegressionTest(
                 getattr(
                     gemini_grader,
                     (
-                        "_ORIGINAL_BUILD_GEMINI_PROMPT_"
-                        "EXPLICIT_REQ_V1"
+                        "_build_explicit_requirement_prompt"
                     ),
                     None,
                 )

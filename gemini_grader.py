@@ -88,7 +88,7 @@ def _compact(obj, max_chars=16000):
     return s
 
 
-def build_gemini_grading_prompt(
+def _build_base_prompt(
     question_text,
     answer_text,
     scoring_model,
@@ -218,7 +218,7 @@ def build_gemini_grading_prompt(
 """
 
 
-def gemini_semantic_grade(
+def _request_gemini_grade(
     question_text,
     answer_text,
     scoring_model,
@@ -336,10 +336,7 @@ def gemini_semantic_grade(
 # question_type은 C항목의 Fact 설명 방식 렌즈로만 사용한다.
 # ============================================================
 
-_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT = build_gemini_grading_prompt
-
-
-def build_gemini_grading_prompt(
+def _build_question_type_lens_prompt(
     question_text,
     answer_text,
     scoring_model,
@@ -349,7 +346,7 @@ def build_gemini_grading_prompt(
     fact_eval,
     connection_eval
 ):
-    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT(
+    base_prompt = _build_base_prompt(
         question_text,
         answer_text,
         scoring_model,
@@ -414,10 +411,7 @@ C항목에서 확인할 필수 요소:
 # 모범 답안은 정답 매칭용이 아니라 구조·깊이·현장 적용성 기준으로만 사용
 # ============================================================
 
-_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE10 = build_gemini_grading_prompt
-
-
-def build_gemini_grading_prompt(
+def _build_model_answer_prompt(
     question_text,
     answer_text,
     scoring_model,
@@ -427,7 +421,7 @@ def build_gemini_grading_prompt(
     fact_eval,
     connection_eval
 ):
-    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE10(
+    base_prompt = _build_question_type_lens_prompt(
         question_text,
         answer_text,
         scoring_model,
@@ -504,10 +498,7 @@ def build_gemini_grading_prompt(
 # C = 유형별 Fact 기반 내용 설명
 # ============================================================
 
-_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE11 = build_gemini_grading_prompt
-
-
-def build_gemini_grading_prompt(
+def _build_bc_semantics_prompt(
     question_text,
     answer_text,
     scoring_model,
@@ -517,7 +508,7 @@ def build_gemini_grading_prompt(
     fact_eval,
     connection_eval
 ):
-    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE11(
+    base_prompt = _build_model_answer_prompt(
         question_text,
         answer_text,
         scoring_model,
@@ -572,10 +563,7 @@ C. 유형별 Fact 기반 내용 설명 평가 기준:
 # D항목을 '대책' 중심이 아니라 현장 적용·설계 판단·제언으로 표현
 # ============================================================
 
-_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE12 = build_gemini_grading_prompt
-
-
-def build_gemini_grading_prompt(
+def _build_field_application_prompt(
     question_text,
     answer_text,
     scoring_model,
@@ -585,7 +573,7 @@ def build_gemini_grading_prompt(
     fact_eval,
     connection_eval
 ):
-    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_PHASE12(
+    base_prompt = _build_bc_semantics_prompt(
         question_text,
         answer_text,
         scoring_model,
@@ -625,12 +613,7 @@ def build_gemini_grading_prompt(
 # ============================================================
 
 # P0_C_DETERMINISTIC_SAMPLING_WRAPPER
-_ORIGINAL_GEMINI_SEMANTIC_GRADE_SAMPLING_V1 = (
-    gemini_semantic_grade
-)
-
-
-def gemini_semantic_grade(
+def _grade_with_sampling_metadata(
     question_text,
     answer_text,
     scoring_model,
@@ -653,7 +636,7 @@ def gemini_semantic_grade(
     )
 
     result = (
-        _ORIGINAL_GEMINI_SEMANTIC_GRADE_SAMPLING_V1(
+        _request_gemini_grade(
             question_text=question_text,
             answer_text=answer_text,
             scoring_model=scoring_model,
@@ -709,9 +692,6 @@ def gemini_semantic_grade(
 # 점수 계산 로직은 바꾸지 않고 Gemini 호출 안정성만 높인다.
 # ============================================================
 
-_ORIGINAL_GEMINI_SEMANTIC_GRADE_PHASE18 = gemini_semantic_grade
-
-
 def _phase18_is_retryable_gemini_error(err_text):
     text = str(err_text or "").lower()
     retryable_markers = [
@@ -732,7 +712,7 @@ def _phase18_is_retryable_gemini_error(err_text):
     return any(m in text for m in retryable_markers)
 
 
-def gemini_semantic_grade(*args, **kwargs):
+def _grade_with_retry(*args, **kwargs):
     import json
     import time
 
@@ -747,7 +727,7 @@ def gemini_semantic_grade(*args, **kwargs):
             time.sleep(delay)
 
         try:
-            result = _ORIGINAL_GEMINI_SEMANTIC_GRADE_PHASE18(*args, **kwargs)
+            result = _grade_with_sampling_metadata(*args, **kwargs)
             last_result = result
 
             # dict가 아니면 기존 동작 유지
@@ -806,12 +786,10 @@ def gemini_semantic_grade(*args, **kwargs):
 
 
 # === qtype semantic result postprocess wrapper v2 ===
-_ORIGINAL_GEMINI_SEMANTIC_GRADE_QTYPE_V2 = gemini_semantic_grade
-
-def gemini_semantic_grade(*args, **kwargs):
+def _grade_with_question_type_postprocess(*args, **kwargs):
     from semantic_question_type_postprocess import ensure_question_type_coverage
 
-    result = _ORIGINAL_GEMINI_SEMANTIC_GRADE_QTYPE_V2(*args, **kwargs)
+    result = _grade_with_retry(*args, **kwargs)
 
     question_text = (
         kwargs.get("question_text")
@@ -838,10 +816,8 @@ from semantic_question_type_prompt import (
     build_question_type_semantic_guidance,
 )
 
-_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_QTYPE_V4_EOF = build_gemini_grading_prompt
-
-def build_gemini_grading_prompt(question_text, answer_text, *args, **kwargs):
-    base_prompt = _ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_QTYPE_V4_EOF(
+def _build_question_type_contract_prompt(question_text, answer_text, *args, **kwargs):
+    base_prompt = _build_field_application_prompt(
         question_text,
         answer_text,
         *args,
@@ -955,12 +931,8 @@ overall_coverage에는 unknown, fallback, not_evaluated를 쓰지 마라.
 
 
 # === explicit question requirement final prompt wrapper v1 ===
-_ORIGINAL_BUILD_GEMINI_PROMPT_EXPLICIT_REQ_V1 = (
-    build_gemini_grading_prompt
-)
-
-def build_gemini_grading_prompt(*args, **kwargs):
-    base = _ORIGINAL_BUILD_GEMINI_PROMPT_EXPLICIT_REQ_V1(
+def _build_explicit_requirement_prompt(*args, **kwargs):
+    base = _build_question_type_contract_prompt(
         *args,
         **kwargs,
     )
@@ -1004,9 +976,6 @@ missing으로 평가하라.
 
     return base + "\n\n" + explicit_contract
 # === PLAN_B_GENERAL_LAYER_OWNERSHIP_PROMPT_V1 ===
-_PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1 = build_gemini_grading_prompt
-
-
 def _plan_b_general_layer_ownership_prompt_v1():
     return """
 [PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]
@@ -1132,12 +1101,10 @@ _PLAN_C_SEMANTIC_SCORING_CALIBRATION_V2 = "\n".join(
 )
 
 
-def build_gemini_grading_prompt(*args, **kwargs):
-    base_prompt = (
-        _PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1(
-            *args,
-            **kwargs,
-        )
+def _build_layer_ownership_prompt(*args, **kwargs):
+    base_prompt = _build_explicit_requirement_prompt(
+        *args,
+        **kwargs,
     )
 
     contracts = (
@@ -1166,8 +1133,6 @@ def build_gemini_grading_prompt(*args, **kwargs):
     return base_prompt
 
 # GENERAL_EVIDENCE_CONTRACT_PROMPT_V1
-from functools import wraps as _general_evidence_wraps
-
 _GENERAL_EVIDENCE_CONTRACT_PROMPT_V1 = """
 [GENERAL_EVIDENCE_CONTRACT_V1]
 
@@ -1214,16 +1179,8 @@ defect_type은 다음 네 값만 사용한다.
 12. 출력은 반드시 valid JSON이어야 한다.
 """.strip()
 
-_general_evidence_contract_previous_build_gemini_grading_prompt = (
-    build_gemini_grading_prompt
-)
-
-
-@_general_evidence_wraps(
-    _general_evidence_contract_previous_build_gemini_grading_prompt
-)
-def build_gemini_grading_prompt(*args, **kwargs):
-    prompt = _general_evidence_contract_previous_build_gemini_grading_prompt(
+def _build_general_evidence_prompt(*args, **kwargs):
+    prompt = _build_layer_ownership_prompt(
         *args,
         **kwargs,
     )
@@ -1239,16 +1196,8 @@ def build_gemini_grading_prompt(*args, **kwargs):
     )
 
 
-_general_evidence_contract_previous_gemini_semantic_grade = (
-    gemini_semantic_grade
-)
-
-
-@_general_evidence_wraps(
-    _general_evidence_contract_previous_gemini_semantic_grade
-)
-def gemini_semantic_grade(*args, **kwargs):
-    result = _general_evidence_contract_previous_gemini_semantic_grade(
+def _grade_with_general_evidence(*args, **kwargs):
+    result = _grade_with_question_type_postprocess(
         *args,
         **kwargs,
     )
@@ -1261,18 +1210,10 @@ def gemini_semantic_grade(*args, **kwargs):
 
 # QUESTION_DEMAND_CONTRACT_PROMPT_V1
 import json as _question_demand_json
-from functools import wraps as _question_demand_wraps
-
-_question_demand_previous_build_gemini_grading_prompt = (
-    build_gemini_grading_prompt
-)
 
 
-@_question_demand_wraps(
-    _question_demand_previous_build_gemini_grading_prompt
-)
-def build_gemini_grading_prompt(*args, **kwargs):
-    prompt = _question_demand_previous_build_gemini_grading_prompt(
+def _build_question_demand_prompt(*args, **kwargs):
+    prompt = _build_general_evidence_prompt(
         *args,
         **kwargs,
     )
@@ -1283,7 +1224,7 @@ def build_gemini_grading_prompt(*args, **kwargs):
     )
 
     question_text = extract_question_text_from_call(
-        _question_demand_previous_build_gemini_grading_prompt,
+        _build_general_evidence_prompt,
         args,
         kwargs,
     )
@@ -1346,11 +1287,6 @@ question_demand_contract:
         return prompt
 
     return prompt.rstrip() + "\n\n" + guidance + "\n"
-
-
-_question_demand_previous_gemini_semantic_grade = (
-    gemini_semantic_grade
-)
 
 
 # STAGE35E2_EXACT_PROVIDER_PROJECTION_RETRY_V1
@@ -1603,9 +1539,6 @@ def _stage35e2_fail_closed_projection(result, contract, attempts):
     return output
 
 
-@_question_demand_wraps(
-    _question_demand_previous_gemini_semantic_grade
-)
 def gemini_semantic_grade(*args, **kwargs):
     from question_demand_contract import (
         attach_question_demand_contract,
@@ -1614,14 +1547,14 @@ def gemini_semantic_grade(*args, **kwargs):
     )
 
     question_text = extract_question_text_from_call(
-        _question_demand_previous_gemini_semantic_grade,
+        _grade_with_general_evidence,
         args,
         kwargs,
     )
     contract = build_question_demand_contract(question_text)
     enforce_exact = bool(contract.get("topic_pack_demand_axes_applied"))
 
-    result = _question_demand_previous_gemini_semantic_grade(
+    result = _grade_with_general_evidence(
         *args,
         **kwargs,
     )
@@ -1633,7 +1566,7 @@ def gemini_semantic_grade(*args, **kwargs):
     ):
         token = _stage35e2_projection_retry_contract.set(contract)
         try:
-            result = _question_demand_previous_gemini_semantic_grade(
+            result = _grade_with_general_evidence(
                 *args,
                 **kwargs,
             )
@@ -1671,22 +1604,10 @@ def gemini_semantic_grade(*args, **kwargs):
     return attached
 
 # HYBRID_GENERAL_GRADING_PROMPT_V1
-from functools import wraps as _hybrid_general_prompt_wraps
-
-_hybrid_general_prompt_previous_build_gemini_grading_prompt = (
-    build_gemini_grading_prompt
-)
-
-
-@_hybrid_general_prompt_wraps(
-    _hybrid_general_prompt_previous_build_gemini_grading_prompt
-)
-def build_gemini_grading_prompt(*args, **kwargs):
-    prompt = (
-        _hybrid_general_prompt_previous_build_gemini_grading_prompt(
-            *args,
-            **kwargs,
-        )
+def _build_hybrid_general_prompt(*args, **kwargs):
+    prompt = _build_question_demand_prompt(
+        *args,
+        **kwargs,
     )
 
     subject_rubric = kwargs.get("subject_rubric")
@@ -1708,8 +1629,6 @@ def build_gemini_grading_prompt(*args, **kwargs):
 
     return prompt.rstrip() + "\n\n" + section + "\n"
 
-
-_multi_topic_scope_previous_build_gemini_grading_prompt_v1 = build_gemini_grading_prompt
 
 def _multi_topic_demand_scope_prompt_v1() -> str:
     return "[MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]\nWhen Topic Router evidence is MULTI_TOPIC or HYBRID_TOPIC_GENERAL, each\nTopic's model_answer and fact_anchor are knowledge references, not a checklist\nof every item that the student must write. In Hybrid mode, General evidence is\nlimited to uncovered Question Demands and must not cause Topic evidence to\nexpand beyond the Demands owned by that Topic.\n\nScope rules:\n1. Use semantic demand_mappings to identify the Question Demand(s) owned by each Topic.\n2. For omission, completeness, layer scoring, and improvement advice, require only\n   details that directly support those mapped Demand(s).\n3. Do not penalize, lower a layer score, or recommend adding a Topic anchor,\n   high_score_feature, expected_structure item, common_missing_point, or\n   field_connection_point merely because it exists in Topic evidence when the\n   mapped Demand(s) do not ask for it.\n4. Do not transfer requirements between Topics, from Topic evidence into\n   uncovered General Demands, or between unrelated Demands.\n   Example: load-cell eccentric-load, overload, adhesion, wiring, shielding, or\n   grounding criteria must not become missing record-retention or disposal\n   requirements unless the question explicitly asks for those items.\n5. If several Demands map to one Topic, use the union of those mapped Demands\n   as that Topic's grading scope. In Hybrid mode, role=NONE / uncovered Demands\n   are not owned by that Topic even if the routing payload carries a topic_id\n   placeholder for provenance.\n6. Topic evidence may explain or verify an in-scope Demand, but it must not silently expand the question scope.\n7. General Engineering evidence in Hybrid mode applies only to uncovered\n   Question Demands and must not be used to re-score Topic-covered Demands.\n8. This scope rule limits omission and completeness expectations only. It\n   does not excuse an explicit factual error that the student actually wrote.\n9. Preserve one-question-one-score. Do not score Topics separately, sum Topic\n   scores, average Topic scores, or create a separate General score.\n\nBefore finalizing feedback, verify that every claimed missing point can be\ntraced to an explicit Question Demand, or is necessary to correctly explain\nthat Demand. Otherwise remove that missing-point criticism.\n[/MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]"
@@ -1737,11 +1656,10 @@ def _multi_topic_demand_scope_applicable_v1(subject_rubric) -> bool:
 
 
 def build_gemini_grading_prompt(*args, **kwargs):
-    prompt = (
-        _multi_topic_scope_previous_build_gemini_grading_prompt_v1(
-            *args,
-            **kwargs,
-        )
+    """Build the complete Gemini prompt through an explicit composition chain."""
+    prompt = _build_hybrid_general_prompt(
+        *args,
+        **kwargs,
     )
     if not isinstance(prompt, str):
         raise TypeError(

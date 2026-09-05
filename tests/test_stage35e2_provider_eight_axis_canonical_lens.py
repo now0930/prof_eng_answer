@@ -221,18 +221,18 @@ def test_projection_normalizer_restores_id_from_exact_contract_text_only():
 
 
 def test_semantic_wrapper_retries_once_and_accepts_exact_projection():
-    original = gemini_grader._question_demand_previous_gemini_semantic_grade
+    original = gemini_grader._grade_with_general_evidence
     calls = []
 
     def fake(question_text, *args, **kwargs):
         calls.append(gemini_grader._stage35e2_projection_retry_contract.get())
         return invalid_result() if len(calls) == 1 else valid_result()
 
-    gemini_grader._question_demand_previous_gemini_semantic_grade = fake
+    gemini_grader._grade_with_general_evidence = fake
     try:
         result = gemini_grader.gemini_semantic_grade(SUBMISSION_A)
     finally:
-        gemini_grader._question_demand_previous_gemini_semantic_grade = original
+        gemini_grader._grade_with_general_evidence = original
     assert len(calls) == 2
     assert calls[0] is None
     assert isinstance(calls[1], dict)
@@ -243,16 +243,16 @@ def test_semantic_wrapper_retries_once_and_accepts_exact_projection():
 
 
 def test_semantic_wrapper_fails_closed_after_invalid_retry():
-    original = gemini_grader._question_demand_previous_gemini_semantic_grade
+    original = gemini_grader._grade_with_general_evidence
 
     def fake(question_text, *args, **kwargs):
         return invalid_result()
 
-    gemini_grader._question_demand_previous_gemini_semantic_grade = fake
+    gemini_grader._grade_with_general_evidence = fake
     try:
         result = gemini_grader.gemini_semantic_grade(SUBMISSION_A)
     finally:
-        gemini_grader._question_demand_previous_gemini_semantic_grade = original
+        gemini_grader._grade_with_general_evidence = original
     validation = result["explicit_requirement_projection_validation"]
     assert validation["valid"] is False
     assert validation["fail_closed"] is True

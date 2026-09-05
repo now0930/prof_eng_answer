@@ -3951,7 +3951,7 @@ def _phase4_rater_multiplier(rater_id, layer_id, grade):
     return mult
 
 
-def _phase4_rater_layer_comment(rater_id, layer_id):
+def _phase4_base_rater_layer_comment(rater_id, layer_id):
     comments = {
         "professor": {
             "A": "문제 진입과 개념 정의의 적절성을 봄.",
@@ -4534,7 +4534,7 @@ def _phase6_semantic_guard_evidence(
     }
 
 
-def _phase6_apply_semantic_downward_guard(
+def _phase6_apply_coverage_semantic_downward_guard(
     layer_scores,
     baseline_scores,
     gemini_eval,
@@ -6259,7 +6259,7 @@ def _phase2_is_grade_dict(x):
     )
 
 
-def run_agent_pipeline(*args, **kwargs):
+def _run_agent_pipeline_core(*args, **kwargs):
     """
     Phase2 wrapper.
 
@@ -7114,103 +7114,6 @@ def _phase8_run_originality_evaluator(
         )
 
         return eval_data
-
-
-def _phase8_apply_originality_to_layer_scores(layer_scores, originality_eval, volume):
-    parsed = (originality_eval or {}).get("parsed") or {}
-
-    parsed = _phase8_normalize_originality_evaluation(parsed)
-
-    raw_score = _phase8_clamp(
-        parsed.get("raw_originality_score"),
-        0.0,
-        2.0,
-    )
-
-    c_score = _phase8_layer_score(layer_scores, "C", 0.0)
-    d_score = _phase8_layer_score(layer_scores, "D", 0.0)
-
-    applied_caps = []
-    max_allowed = 2.0
-
-    if c_score < 4.0:
-        max_allowed = min(max_allowed, 0.5)
-        applied_caps.append({
-            "type": "fact_gate",
-            "cap": 0.5,
-            "reason": "C Fact 기반 설명이 4/8 미만이므로 독창성 가점을 제한함."
-        })
-
-    if d_score < 2.0:
-        max_allowed = min(max_allowed, 0.8)
-        applied_caps.append({
-            "type": "countermeasure_gate",
-            "cap": 0.8,
-            "reason": "D 현장 적용·제언 점수가 2/6 미만이므로 독창성 가점을 제한함."
-        })
-
-    level = ""
-    if isinstance(volume, dict):
-        level = str(volume.get("level") or "")
-
-    if level == "text_only_short_answer":
-        max_allowed = min(max_allowed, 0.7)
-        applied_caps.append({
-            "type": "short_answer_gate",
-            "cap": 0.7,
-            "reason": "짧은 텍스트 답안은 독창성 판단 근거가 제한적이므로 가점을 제한함."
-        })
-
-    if parsed.get("technical_error_risk") is True:
-        max_allowed = min(max_allowed, 0.0)
-        applied_caps.append({
-            "type": "technical_error_gate",
-            "cap": 0.0,
-            "reason": parsed.get("technical_error_reason") or "명백한 기술 오류 위험이 있어 독창성 가점을 인정하지 않음."
-        })
-
-    final_score = min(raw_score, max_allowed)
-
-    target_d_bonus = round(final_score * 0.6, 3)
-    target_e_bonus = round(final_score * 0.4, 3)
-
-    d_row = _phase8_find_layer(layer_scores, "D")
-    e_row = _phase8_find_layer(layer_scores, "E")
-
-    actual_d_bonus = 0.0
-    actual_e_bonus = 0.0
-
-    if d_row is not None and target_d_bonus > 0:
-        before = float(d_row.get("score", 0.0))
-        maxv = _phase8_layer_max(d_row, 6.0)
-        after = min(maxv, before + target_d_bonus)
-        actual_d_bonus = round(after - before, 3)
-        d_row["score"] = round(after, 3)
-        _phase8_add_reason(
-            d_row,
-            f"독창성/기술사적 판단성 보정 +{actual_d_bonus:.2f}: {parsed.get('overall_comment', '')}"
-        )
-
-    if e_row is not None and target_e_bonus > 0:
-        before = float(e_row.get("score", 0.0))
-        maxv = _phase8_layer_max(e_row, 2.0)
-        after = min(maxv, before + target_e_bonus)
-        actual_e_bonus = round(after - before, 3)
-        e_row["score"] = round(after, 3)
-        _phase8_add_reason(
-            e_row,
-            f"독창성/기술사적 판단성 보정 +{actual_e_bonus:.2f}: {parsed.get('overall_comment', '')}"
-        )
-
-    parsed["raw_originality_score"] = round(raw_score, 3)
-    parsed["max_allowed_after_gates"] = round(max_allowed, 3)
-    parsed["final_originality_score"] = round(final_score, 3)
-    parsed["applied_caps"] = applied_caps
-    parsed["final_bonus_to_D"] = actual_d_bonus
-    parsed["final_bonus_to_E"] = actual_e_bonus
-    parsed["bonus_policy"] = "독창성은 별도 가산 총점이 아니라 D/E layer 안에서만 보정하며, 총점 25점을 초과하지 않는다."
-
-    return layer_scores
 
 
 def _phase8_merge_originality_feedback(grade, originality_eval):
@@ -9350,9 +9253,6 @@ def _phase17_final_phrase_cleanup(grade):
 
     return walk(grade)
 # === PLAN_B_GENERAL_LAYER_OWNERSHIP_RUNTIME_V1 ===
-_PLAN_B_ORIGINAL_PHASE4_RATER_LAYER_COMMENT_V1 = _phase4_rater_layer_comment
-
-
 def _phase4_rater_layer_comment(rater_id, layer_id):
     comments = {
         "professor": {
@@ -9379,7 +9279,7 @@ def _phase4_rater_layer_comment(rater_id, layer_id):
     }
     return comments.get(rater_id, {}).get(
         layer_id,
-        _PLAN_B_ORIGINAL_PHASE4_RATER_LAYER_COMMENT_V1(rater_id, layer_id),
+        _phase4_base_rater_layer_comment(rater_id, layer_id),
     )
 
 
@@ -9514,11 +9414,6 @@ def _phase8_apply_originality_to_layer_scores(layer_scores, originality_eval, vo
     return layer_scores
 
 # LAYER_SPECIFIC_EVIDENCE_GUARD_INTEGRATION_V1
-_layer_evidence_previous_apply_semantic_downward_guard = (
-    _phase6_apply_semantic_downward_guard
-)
-
-
 def _phase6_apply_semantic_downward_guard(
     layer_scores,
     baseline_scores,
@@ -9534,7 +9429,7 @@ def _phase6_apply_semantic_downward_guard(
         gemini_eval
     ):
         return (
-            _layer_evidence_previous_apply_semantic_downward_guard(
+            _phase6_apply_coverage_semantic_downward_guard(
                 layer_scores,
                 baseline_scores,
                 gemini_eval,
@@ -10688,11 +10583,6 @@ def _stage18b1_store_final_grade_cache(
 
 
 # STAGE17E5_COMMON_INPUT_AND_DECISION_BOUNDARY_V1
-_STAGE17E5_PREVIOUS_RUN_AGENT_PIPELINE = (
-    run_agent_pipeline
-)
-
-
 def _stage17e5_is_grade_dict(value):
     if not isinstance(value, dict):
         return False
@@ -10801,13 +10691,13 @@ def run_agent_pipeline(*args, **kwargs):
         normalized_kwargs,
         submission_normalization,
     ) = normalize_pipeline_call(
-        _STAGE17E5_PREVIOUS_RUN_AGENT_PIPELINE,
+        _run_agent_pipeline_core,
         args,
         kwargs,
     )
 
     result = (
-        _STAGE17E5_PREVIOUS_RUN_AGENT_PIPELINE(
+        _run_agent_pipeline_core(
             *normalized_args,
             **normalized_kwargs,
         )

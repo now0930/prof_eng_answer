@@ -10,7 +10,7 @@ class MultiTopicDemandScopePromptTest(unittest.TestCase):
     def _build(self, subject_rubric=None, base="BASE_PROMPT"):
         with patch.object(
             gemini_grader,
-            "_multi_topic_scope_previous_build_gemini_grading_prompt_v1",
+            "_build_hybrid_general_prompt",
             lambda *args, **kwargs: base,
         ):
             return gemini_grader.build_gemini_grading_prompt(

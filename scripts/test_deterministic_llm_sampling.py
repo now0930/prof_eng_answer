@@ -161,7 +161,7 @@ class DeterministicSamplingTests(
 
         base_call = (
             gemini_grader
-            ._ORIGINAL_GEMINI_SEMANTIC_GRADE_PHASE18
+            ._grade_with_sampling_metadata
         )
 
         with mock.patch.dict(

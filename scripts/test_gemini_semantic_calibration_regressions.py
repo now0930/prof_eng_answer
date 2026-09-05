@@ -105,22 +105,22 @@ class GeminiPromptCalibrationRegressionTest(
     def test_prompt_contains_layer_specific_calibration(self):
         original = (
             gemini_grader
-            ._PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1
+            ._build_explicit_requirement_prompt
         )
 
         try:
-            gemini_grader._PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1 = (
+            gemini_grader._build_explicit_requirement_prompt = (
                 lambda *args, **kwargs: "BASE"
             )
             prompt = (
                 gemini_grader
-                .build_gemini_grading_prompt(
+                ._build_layer_ownership_prompt(
                     question_text="원리를 설명하시오.",
                     answer_text="답안",
                 )
             )
         finally:
-            gemini_grader._PLAN_B_ORIGINAL_BUILD_GEMINI_GRADING_PROMPT_V1 = (
+            gemini_grader._build_explicit_requirement_prompt = (
                 original
             )
 
