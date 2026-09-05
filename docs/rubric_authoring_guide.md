@@ -496,8 +496,9 @@ Topic source를 commit하거나 integration promote하기 전에 확인한다.
 ```bash
 python3 scripts/rubric_manager.py validate-all
 python3 scripts/rubric_manager.py validate-topic-pack-quality
-python3 scripts/rubric_manager.py validate-topic-pack-release
-python3 scripts/rubric_manager.py validate-topic-pack-release --promote-generated
+python3 scripts/rubric_manager.py validate-topic-pack-release --topic-id <topic_id>
+python3 scripts/rubric_manager.py validate-topic-pack-release --topic-id <topic_id> --promote-generated
+python3 scripts/rubric_manager.py validate-topic-pack-release --all
 python3 scripts/rubric_manager.py smoke-topic-pack --topic-id <topic_id>
 git diff --check
 ```

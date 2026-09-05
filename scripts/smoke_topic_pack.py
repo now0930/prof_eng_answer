@@ -93,18 +93,49 @@ def _first_non_empty(values: list[Any], default: str = "") -> str:
 
 def _list_strings(value: Any) -> list[str]:
     if isinstance(value, list):
-        return [str(x).strip() for x in value if str(x).strip()]
+        return [x.strip() for x in value if isinstance(x, str) and x.strip()]
     return []
+
+
+def _list_object_text(
+    value: Any,
+    keys: tuple[str, ...],
+) -> list[str]:
+    result: list[str] = []
+    if not isinstance(value, list):
+        return result
+    for item in value:
+        if isinstance(item, str) and item.strip():
+            result.append(item.strip())
+            continue
+        if not isinstance(item, dict):
+            continue
+        for key in keys:
+            text = item.get(key)
+            if isinstance(text, str) and text.strip():
+                result.append(text.strip())
+                break
+    return result
 
 
 def _outline_items(model_answer: dict[str, Any]) -> list[str]:
     outline = model_answer.get("model_answer_outline")
     if isinstance(outline, list):
-        items = _list_strings(outline)
+        items = _list_object_text(
+            outline,
+            ("intent", "section", "content", "title"),
+        )
         if items:
             return items
 
     recommended = model_answer.get("recommended_outline")
+    if isinstance(recommended, list):
+        items = _list_object_text(
+            recommended,
+            ("intent", "section", "content", "title"),
+        )
+        if items:
+            return items
     if isinstance(recommended, dict):
         intents = _list_strings(recommended.get("intents"))
         if intents:
@@ -130,7 +161,10 @@ def _question_from_model_answer(model_answer: dict[str, Any]) -> str:
     if examples:
         return examples[0]
 
-    expected_patterns = _list_strings(model_answer.get("expected_question_patterns"))
+    expected_patterns = _list_object_text(
+        model_answer.get("expected_question_patterns"),
+        ("pattern", "question", "text"),
+    )
     if expected_patterns:
         return expected_patterns[0]
 

@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 # STAGE17E2B_TOPIC_PACK_TEST_MANIFEST_V1
-python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool
+python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow
 
 PROMOTE_GENERATED="${PROMOTE_GENERATED:-1}"
 RUN_SMOKE_TOPIC_PACKS="${RUN_SMOKE_TOPIC_PACKS:-0}"
@@ -263,11 +263,13 @@ echo
 if [[ "${PROMOTE_GENERATED}" == "1" ]]; then
   echo "===== topic pack release validation: promote generated ====="
   python3 scripts/rubric_manager.py validate-topic-pack-release \
+    --all \
     --promote-generated \
     --skip-smoke
 else
   echo "===== topic pack release validation: no promote ====="
   python3 scripts/rubric_manager.py validate-topic-pack-release \
+    --all \
     --skip-smoke
 fi
 

@@ -15,6 +15,7 @@ Environment fallback order:
     GOOGLE_GENERATIVE_AI_API_KEY
 
   MODEL:
+    TOPIC_PACK_GENERATION_GEMINI_MODEL
     TOPIC_REVIEW_GEMINI_MODEL
     GEMINI_MODEL
     gemini-2.5-flash
@@ -85,6 +86,7 @@ def get_topic_review_llm_settings(
 ) -> TopicReviewLLMSettings:
     resolved_model = (
         model
+        or os.getenv("TOPIC_PACK_GENERATION_GEMINI_MODEL")
         or os.getenv("TOPIC_REVIEW_GEMINI_MODEL")
         or os.getenv("GEMINI_MODEL")
         or "gemini-2.5-flash"

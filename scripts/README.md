@@ -51,7 +51,7 @@ Rubric content와 Topic Pack을 관리하는 통합 CLI이다.
 ```bash
 python3 scripts/rubric_manager.py validate-all
 python3 scripts/rubric_manager.py validate-generated-pipeline
-python3 scripts/rubric_manager.py validate-topic-pack-release --promote-generated
+python3 scripts/rubric_manager.py validate-topic-pack-release --all --promote-generated
 python3 scripts/rubric_manager.py topic-pack-status --all --include-frozen
 ```
 
@@ -102,7 +102,7 @@ python3 scripts/generate_topic_sheet_from_readme.py \
 - Topic Sheet를 읽는다.
 - 기존 `fact_anchor.json`, `logic_check.json`, `model_answer.json`, `topic_importance.json`을 schema-lock template으로 사용한다.
 - LLM이 schema를 바꾸지 못하도록 prompt와 post-process merge를 적용한다.
-- `logic_check.json`에는 필수 fatal rule을 누락하지 않도록 보강한다.
+- Topic 고유 migration rule은 해당 topic_id에만 제한한다.
 - generated runtime file을 직접 만들지 않는다.
 
 입력:
@@ -114,14 +114,14 @@ docs/topic_sheets/<topic_id>.md
 출력:
 
 ```text
-rubrics/topic_packs/<topic_id>/fact_anchor.candidate.json
-rubrics/topic_packs/<topic_id>/logic_check.candidate.json
-rubrics/topic_packs/<topic_id>/model_answer.candidate.json
-rubrics/topic_packs/<topic_id>/topic_importance.candidate.json
+rubrics/topic_packs/<topic_id>/fact_anchor.json
+rubrics/topic_packs/<topic_id>/logic_check.json
+rubrics/topic_packs/<topic_id>/model_answer.json
+rubrics/topic_packs/<topic_id>/topic_importance.json
 reports/topic_pack_generation_<topic_id>_<timestamp>_*.json
 ```
 
-`--overwrite`를 쓰면 `.candidate.json` 대신 source JSON을 직접 갱신한다.
+신규 scaffold는 기본 source JSON으로 승격한다. 기존 검토본은 보호되며 `--overwrite`를 명시해야 교체할 수 있다. `.candidate.json`만 필요하면 `--candidate-only`를 사용한다.
 
 대표 명령:
 
@@ -142,7 +142,7 @@ python3 scripts/generate_topic_pack_from_sheet.py \
 
 ```bash
 python3 scripts/rubric_manager.py validate-generated-pipeline
-python3 scripts/rubric_manager.py validate-topic-pack-release --promote-generated
+python3 scripts/rubric_manager.py validate-topic-pack-release --all --promote-generated
 ```
 
 ---
@@ -285,7 +285,7 @@ Model Answer Bank의 특정 모범 답안을 사람이 확인하기 위한 조�
 python3 scripts/validate_rubric_bank_format.py
 python3 scripts/validate_rubric_bank_content.py
 python3 scripts/rubric_manager.py validate-all
-python3 scripts/rubric_manager.py validate-topic-pack-release
+python3 scripts/rubric_manager.py validate-topic-pack-release --all
 ```
 
 ---
@@ -364,11 +364,12 @@ vim docs/topic_sheets/<topic_id>.md
 # Topic Sheet → JSON candidate 생성
 python3 scripts/generate_topic_pack_from_sheet.py \
   --topic-id <topic_id> \
-  --sheet docs/topic_sheets/<topic_id>.md \
-  --model gemini-2.5-flash
+  --sheet docs/topic_sheets/<topic_id>.md
 
 # release 검증 및 generated promote
-python3 scripts/rubric_manager.py validate-topic-pack-release --promote-generated
+python3 scripts/rubric_manager.py validate-topic-pack-release \
+  --topic-id <topic_id> \
+  --promote-generated
 
 # smoke
 python3 scripts/rubric_manager.py smoke-topic-pack --topic-id <topic_id>
@@ -378,8 +379,13 @@ python3 scripts/rubric_manager.py smoke-topic-pack --topic-id <topic_id>
 
 - README에서 JSON으로 직행하지 않는다.
 - Topic Sheet는 사람이 검토한다.
+- 신규 scaffold는 생성 성공 후 canonical source로 자동 승격된다.
+- 기존 검토본은 기본적으로 보호되며, 초안만 저장하려면 `--candidate-only`를 쓴다.
+- 4개 JSON 생성은 두 묶음으로 병렬 실행되고 마지막 일관성 검토만 순차 실행된다.
 - generated bank는 직접 수정하지 않는다.
-- source JSON 수정 후 `validate-topic-pack-release --promote-generated`로 generated를 갱신한다.
+- 단일 source 수정 후 `validate-topic-pack-release --topic-id <topic_id> --promote-generated`로 갱신한다.
+- 전체 77개 검증은 통합 시점에만 `validate-topic-pack-release --all`로 실행한다.
+- live LLM smoke는 기본 검증에서 분리되며 필요할 때 `--smoke`를 명시한다.
 
 ---
 
@@ -512,7 +518,7 @@ git ls-files 'scripts/*.py' | sort
 
 - `rubric_manager.py`는 통합 CLI이다.
 - `generate_topic_sheet_from_readme.py`는 README를 Topic Sheet 후보로 바꾸는 authoring CLI이다.
-- `generate_topic_pack_from_sheet.py`는 Topic Sheet를 schema-locked JSON candidate로 바꾸는 authoring CLI이다.
+- `generate_topic_pack_from_sheet.py`는 Topic Sheet를 schema-locked source 또는 명시적 candidate로 바꾸는 authoring CLI이다.
 - `build_generated_rubrics.py`, `validate_generated_rubrics.py`는 generated bank pipeline entrypoint이다.
 - `validate_*.py`는 독립 실행 가능한 검증 entrypoint이다.
 - `check_*.py`는 특정 회귀 또는 참조 무결성 확인 도구이다.

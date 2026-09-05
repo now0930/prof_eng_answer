@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import ast
 import json
 import re
 import unittest
@@ -13,7 +12,6 @@ ROOT = Path(__file__).resolve().parents[1]
 TOPIC_ID = "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range"
 TOPIC_DIR = ROOT / "rubrics" / "topic_packs" / TOPIC_ID
 TOPIC_SHEET = ROOT / "docs" / "topic_sheets" / f"{TOPIC_ID}.md"
-CLASSIFICATION_POLICY = ROOT / "scripts" / "test_topic_classification_policy.py"
 
 RELATED_TOPIC_IDS = {
     "feedback_system_closed_loop_sensitivity_steady_state_error",
@@ -80,24 +78,6 @@ def load_json(name: str) -> dict:
 def normalize_alias(value: str) -> str:
     text = value.casefold().replace("_", " ").replace("-", " ")
     return re.sub(r"\s+", " ", text).strip()
-
-
-def assigned_string_set(path: Path, name: str) -> set[str]:
-    tree = ast.parse(path.read_text(encoding="utf-8"))
-    for node in tree.body:
-        if not isinstance(node, ast.Assign):
-            continue
-        if not any(isinstance(t, ast.Name) and t.id == name for t in node.targets):
-            continue
-        if not isinstance(node.value, ast.Set):
-            raise AssertionError(f"{name} is not a set literal")
-        values = set()
-        for elt in node.value.elts:
-            if not isinstance(elt, ast.Constant) or not isinstance(elt.value, str):
-                raise AssertionError(f"{name} contains a non-string literal")
-            values.add(elt.value)
-        return values
-    raise AssertionError(f"{name} assignment not found")
 
 
 class ProcessControlLoopArchitectureTopicTest(unittest.TestCase):
@@ -328,14 +308,10 @@ class ProcessControlLoopArchitectureTopicTest(unittest.TestCase):
             self.assertIn(token, field)
 
     def test_topic_is_registered_as_theory_core_policy(self) -> None:
-        theory = assigned_string_set(CLASSIFICATION_POLICY, "THEORY_TOPICS")
-        application = assigned_string_set(
-            CLASSIFICATION_POLICY,
-            "APPLICATION_TOPICS",
+        self.assertEqual(
+            self.importance.get("difficulty"),
+            "THEORY_CORE",
         )
-
-        self.assertIn(TOPIC_ID, theory)
-        self.assertNotIn(TOPIC_ID, application)
 
 
 if __name__ == "__main__":

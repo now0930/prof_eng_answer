@@ -170,6 +170,18 @@ JSON은 다음 원칙을 지킨다.
 
 Generator script가 존재하더라도 표준 source authoring을 대체하지 않는다. 사용한다면 초안 또는 schema 참고용으로만 사용하고 최종 JSON diff를 직접 검토한다.
 
+### 7.1 Topic Sheet 기반 보조 생성
+
+신규 scaffold는 다음 명령으로 작성할 수 있다.
+
+```bash
+python3 scripts/rubric_manager.py generate-topic-pack-from-sheet \
+  --topic-id <topic_id> \
+  --sheet docs/topic_sheets/<topic_id>.md
+```
+
+생성기는 Topic Sheet만 기술 내용의 근거로 사용한다. 4개 JSON 호출은 두 묶음으로 병렬화하고 일관성 검토를 마지막에 수행한다. 신규 scaffold만 기본 canonical source로 승격하며, 기존 검토본은 `--overwrite` 없이는 교체하지 않는다. 기존 source를 보존한 초안이 필요하면 `--candidate-only`를 사용한다. 생성 또는 검증 실패 시 canonical source는 작업 전 상태로 복구된다.
+
 ## 8. Fact Anchor
 
 Fact Anchor는 “정답 요소가 있는가”를 본다.
@@ -278,6 +290,16 @@ python3 -m py_compile <변경 관련 Python이 있을 때>
 
 Topic source만 변경했고 runtime Python이 바뀌지 않았다면 container 전체 회귀를 반복하지 않는다.
 
+단일 Topic의 빠른 release 검증과 generated promote는 다음 명령을 사용한다.
+
+```bash
+python3 scripts/rubric_manager.py validate-topic-pack-release \
+  --topic-id <topic_id> \
+  --promote-generated
+```
+
+`--topic-id`를 생략하면 Git에서 변경된 Topic을 자동 선택한다. 변경 Topic이 없으면 모호한 전체 검증을 실행하지 않고 실패한다. 모든 Topic을 검사할 때만 `--all`을 사용한다. live LLM smoke는 외부 모델과 container 환경이 필요하므로 기본 검증에서 제외하며 필요할 때 `--smoke`를 명시한다.
+
 ## 14. 의미 감사
 
 자동 validator 통과만으로 완료하지 않는다.
@@ -340,7 +362,13 @@ RUN_GRADING_REPRODUCIBILITY=0 \
 scripts/validate_release.sh
 ```
 
-또는 현재 `rubric_manager.py`의 release/promote 명령을 사용한다.
+또는 통합 시점에 다음 전체 release/promote 명령을 사용한다.
+
+```bash
+python3 scripts/rubric_manager.py validate-topic-pack-release \
+  --all \
+  --promote-generated
+```
 
 생성 대상은 6개다.
 

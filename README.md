@@ -662,6 +662,8 @@ topic_pack_manifest.generated.json
 12. 별도 push 후 local / tracking / remote SHA 검증
 ```
 
+단일 신규 Topic은 `validate-topic-pack-release --topic-id <topic_id> --promote-generated`로 검증합니다. 인자 없는 실행은 Git에서 변경된 Topic만 선택하며, 전체 inventory 검증은 통합 시점에 `--all`로 명시합니다. 외부 모델을 호출하는 smoke는 기본 경로에서 제외하고 필요할 때 `--smoke`로 실행합니다.
+
 운영 원칙:
 
 - 신규 Topic은 공식 criterion의 `GAP`/`PARTIAL`, 기출 반복성, 현장 중요도와 Roadmap을 근거로 선정합니다.

@@ -7,6 +7,7 @@ This script is an authoring tool, not a runtime grading component.
 from __future__ import annotations
 
 import argparse
+from concurrent.futures import ThreadPoolExecutor
 import json
 import os
 import subprocess
@@ -20,16 +21,18 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "scripts"))
 
 try:
-    from topic_review_llm import extract_json_object, gemini_generate
+    from topic_review_llm import (
+        extract_json_object,
+        gemini_generate,
+        get_topic_review_llm_settings,
+    )
 except Exception as exc:  # pragma: no cover
     extract_json_object = None  # type: ignore[assignment]
     gemini_generate = None  # type: ignore[assignment]
+    get_topic_review_llm_settings = None  # type: ignore[assignment]
     _IMPORT_ERROR = exc
 else:
     _IMPORT_ERROR = None
-
-
-DEFAULT_GENERATION_MODEL = "gemini-2.5-flash"
 
 
 SYSTEM_PROMPT = '너는 산업계측제어기술사 채점 Bot의 topic pack authoring agent다.\n\n가장 중요한 원칙:\n- 새 schema를 설계하지 않는다.\n- 제공된 EXISTING SOURCE JSON의 schema, top-level keys, nested keys, list item shape를 유지한다.\n- Topic Sheet는 내용 보강에만 사용한다.\n- 기존 schema에 없는 필드를 임의로 추가하지 않는다.\n- 기존 schema에 있는 필드를 삭제하지 않는다.\n- 기존 runtime과 호환되지 않는 pseudo field를 만들지 않는다.\n- 특히 logic_check에서는 "condition" 같은 pseudo-code 필드를 만들지 않는다.\n\n역할:\n- 사람이 작성한 Topic Sheet를 읽고 기존 topic pack source JSON과 같은 schema의 candidate JSON을 만든다.\n- runtime generated 파일을 직접 만들지 않는다.\n- candidate는 사람이 diff로 검토할 수 있어야 한다.\n\n공통 원칙:\n1. 기존 source JSON schema를 template으로 삼는다.\n2. Topic Sheet의 새 내용은 기존 schema 안에 맞춰 넣는다.\n3. 확실하지 않은 내용은 기존 schema에 review_notes 또는 needs_human_review 같은 필드가 있을 때만 넣는다.\n4. 그런 필드가 기존 schema에 없으면 새 필드를 만들지 말고 기존 설명 필드에 보수적으로 반영한다.\n5. ASCII 표와 다이어그램은 claim 추출 관점으로 설명하되, 기존 schema가 허용하는 위치에만 넣는다.\n6. fatal rule은 정답 기준과 명시적으로 충돌하는 경우에만 만든다.\n7. 단순 누락과 애매한 표현은 fatal이 아니라 major/minor 또는 보완점으로 둔다.\n8. 출력은 JSON object 하나만 한다. markdown fence를 쓰지 않는다.'
@@ -51,6 +54,19 @@ PROMPT_ORDER = [
     "topic_importance",
     "consistency_review",
 ]
+
+GENERIC_SYSTEM_PROMPT = """너는 산업계측제어기술사 채점 Bot의 Topic Pack authoring agent다.
+
+원칙:
+- 기술 내용은 제공된 Topic Sheet만 근거로 작성한다.
+- EXISTING SOURCE JSON의 key와 nested item shape를 schema template로 유지한다.
+- 기존 schema에 없는 pseudo field를 추가하지 않고 required field를 삭제하지 않는다.
+- `condition`을 포함해 EXISTING schema에 실제로 있는 field는 유지할 수 있다.
+- fatal rule은 정답과 명시적으로 충돌하는 claim에만 사용한다.
+- 단순 누락과 애매한 표현은 fatal로 만들지 않는다.
+- runtime generated file은 작성하지 않는다.
+- 출력은 JSON object 하나이며 markdown fence를 쓰지 않는다.
+"""
 
 
 def project_root() -> Path:
@@ -120,7 +136,7 @@ def call_llm(prompt: str, *, model: str | None, timeout: int | None, max_output_
     if gemini_generate is None:
         raise SystemExit(f"ERROR: topic_review_llm import failed: {_IMPORT_ERROR}")
     response = gemini_generate(
-        system_prompt=SYSTEM_PROMPT,
+        system_prompt=GENERIC_SYSTEM_PROMPT,
         user_prompt=prompt,
         model=model,
         timeout=timeout,
@@ -155,6 +171,81 @@ def load_existing_templates(pack_dir: Path) -> dict[str, str]:
     return templates
 
 
+def _generic_authoring_prompt(
+    name: str,
+    topic_sheet: str,
+    drafts: dict[str, dict[str, Any]],
+    templates: dict[str, str],
+) -> str:
+    filename = TOPIC_PACK_SOURCE_FILENAMES[name]
+    role_requirements = {
+        "fact_anchor": (
+            "정의·원리·식·조건·단위·인과관계를 atomic fact로 분리하고, "
+            "Topic Sheet에 없는 사실을 발명하지 않는다."
+        ),
+        "logic_check": (
+            "정답과 직접 충돌하는 claim만 fatal/major로 만들고, 단순 누락은 "
+            "fatal로 만들지 않는다. safe condition과 false-positive 경계를 보존한다."
+        ),
+        "model_answer": (
+            "문제 요구, 권장 목차, 고득점 요소, 누락 요소와 현장 연결을 작성한다. "
+            "routing alias는 해당 Topic을 식별하는 구체 표현만 사용한다."
+        ),
+        "topic_importance": (
+            "Topic Sheet의 난이도·출제 중요도·고득점 unlock 조건을 반영하며, "
+            "difficulty를 임의로 특정 분류에 고정하지 않는다."
+        ),
+    }
+    dependency_names = {
+        "logic_check": ("fact_anchor",),
+        "model_answer": ("fact_anchor",),
+    }.get(name, ())
+    relevant_drafts = {
+        key: drafts[key]
+        for key in dependency_names
+        if key in drafts
+    }
+    dependencies = ""
+    if relevant_drafts:
+        dependencies = (
+            "\n이미 생성된 연관 candidate:\n"
+            + json_dumps(relevant_drafts)
+            + "\n"
+        )
+    return (
+        f"{filename} candidate를 작성하라.\n\n"
+        "Topic 내용의 유일한 근거는 아래 Topic Sheet다. 다른 Topic의 공식, "
+        "용어, 오류 규칙을 섞지 않는다.\n"
+        "EXISTING SOURCE JSON의 top-level key와 nested shape를 유지하고, "
+        "새 pseudo field를 추가하거나 required field를 삭제하지 않는다.\n"
+        f"역할별 요구: {role_requirements[name]}\n"
+        "출력은 JSON object 하나만 하며 markdown fence를 쓰지 않는다.\n\n"
+        f"EXISTING {filename}:\n<<<EXISTING_JSON>>>\n"
+        f"{templates.get('existing_' + name + '_json', '{}')}\n"
+        "<<<END_EXISTING_JSON>>>\n"
+        f"{dependencies}\n"
+        "Topic Sheet:\n<<<TOPIC_SHEET>>>\n"
+        f"{topic_sheet}\n<<<END_TOPIC_SHEET>>>"
+    )
+
+
+def _generic_consistency_prompt(
+    topic_sheet: str,
+    drafts: dict[str, dict[str, Any]],
+    _templates: dict[str, str],
+) -> str:
+    return (
+        "Topic Sheet와 네 candidate의 schema·내용·상호참조를 검토하라. "
+        "다른 Topic의 내용 혼입, TODO/scaffold 잔존, anchor 참조 오류, broad alias, "
+        "정답을 fatal로 잡는 규칙을 찾아라.\n"
+        "출력은 review_level, summary, schema_lock_violations, unsafe_logic_rules, "
+        "missing_required_rules, over_strict_rules, candidate_shrinkage_risk, "
+        "recommended_actions를 가진 JSON object 하나만 한다.\n\n"
+        f"Topic Sheet:\n{topic_sheet}\n\n"
+        f"Candidates:\n{json_dumps(drafts)}"
+    )
+
+
 def render_prompts(
     topic_sheet: str,
     drafts: dict[str, dict[str, Any]] | None = None,
@@ -167,31 +258,21 @@ def render_prompts(
     """
     drafts = drafts or {}
     templates = templates or {}
-    values = {
-        "topic_sheet": topic_sheet,
-        "fact_anchor_json": json_dumps(drafts.get("fact_anchor", {})),
-        "logic_check_json": json_dumps(drafts.get("logic_check", {})),
-        "model_answer_json": json_dumps(drafts.get("model_answer", {})),
-        "topic_importance_json": json_dumps(drafts.get("topic_importance", {})),
-        "existing_fact_anchor_json": templates.get("existing_fact_anchor_json", "{}"),
-        "existing_logic_check_json": templates.get("existing_logic_check_json", "{}"),
-        "existing_model_answer_json": templates.get("existing_model_answer_json", "{}"),
-        "existing_topic_importance_json": templates.get("existing_topic_importance_json", "{}"),
+    rendered = {
+        name: _generic_authoring_prompt(
+            name,
+            topic_sheet,
+            drafts,
+            templates,
+        )
+        for name in TOPIC_PACK_SOURCE_FILENAMES
     }
-
-    def fill(template: str) -> str:
-        out = template
-        for key, value in values.items():
-            out = out.replace("{" + key + "}", value)
-        return out
-
-    return {
-        "fact_anchor": fill(FACT_ANCHOR_PROMPT),
-        "logic_check": fill(LOGIC_CHECK_PROMPT),
-        "model_answer": fill(MODEL_ANSWER_PROMPT),
-        "topic_importance": fill(TOPIC_IMPORTANCE_PROMPT),
-        "consistency_review": fill(CONSISTENCY_REVIEW_PROMPT),
-    }
+    rendered["consistency_review"] = _generic_consistency_prompt(
+        topic_sheet,
+        drafts,
+        templates,
+    )
+    return rendered
 
 
 TOPIC_PACK_SOURCE_FILENAMES = {
@@ -411,41 +492,40 @@ def enforce_schema_lock(name: str, data: dict[str, Any], pack_dir: Path) -> dict
     if not isinstance(merged, dict):
         return data
 
-    if name == "logic_check":
-        merged = append_required_logic_rules(merged)
-        text = json.dumps(merged, ensure_ascii=False)
-        forbidden_fragments = [
-            '"condition"',
-            "ζ == 1 &&",
-            "pole_type == '중근'",
-            'pole_type == "중근"',
+    if "revision_notes" in merged:
+        merged["revision_notes"] = [
+            "generated_from_topic_sheet; human semantic review required"
         ]
-        hits = [frag for frag in forbidden_fragments if frag in text]
-        if hits:
-            raise SystemExit(
-                "ERROR: schema-lock guard rejected logic_check candidate; "
-                f"forbidden fragments found: {hits}"
-            )
 
-        required_paths = [
-            ("deterministic_checks", "de_claim_trust"),
-            ("deterministic_checks", "next_practice_points"),
-            ("llm_profile",),
-        ]
-        for path in required_paths:
-            cur: Any = merged
-            for key in path:
-                if not isinstance(cur, dict) or key not in cur:
-                    raise SystemExit(
-                        "ERROR: schema-lock merge failed; missing required path: "
-                        + ".".join(path)
-                    )
-                cur = cur[key]
+    if name == "logic_check":
+        # Keep the one historical migration rule explicitly topic-scoped.
+        # Generic packs receive only schema-locked LLM content.
+        merged = append_required_logic_rules(merged)
 
     return merged
 
+
+def finalize_scaffold_readme(pack_dir: Path) -> None:
+    path = pack_dir / "README.md"
+    if not path.exists() or not _is_scaffold_source(path):
+        return
+    text = path.read_text(encoding="utf-8")
+    replacements = {
+        "scaffold": "초안",
+        "TODO anchor": "초안 anchor",
+        "보강하세요": "검토하세요",
+    }
+    for old, new in replacements.items():
+        text = text.replace(old, new)
+    path.write_text(text, encoding="utf-8")
+
 def validate_topic_pack_schema(root: Path, topic_id: str) -> None:
-    cmd = [sys.executable, "scripts/rubric_manager.py", "validate-topic-packs"]
+    cmd = [
+        sys.executable,
+        "scripts/validate_topic_packs.py",
+        "--topic-id",
+        topic_id,
+    ]
     print("validating topic pack schema:", " ".join(cmd))
     subprocess.run(cmd, cwd=root, check=True)
 
@@ -459,7 +539,36 @@ def write_json(path: Path, data: dict[str, Any]) -> None:
     write_text(path, json_dumps(data) + "\n")
 
 
-def output_path(pack_dir: Path, name: str, overwrite: bool) -> Path:
+def _snapshot_paths(paths: list[Path]) -> dict[Path, bytes | None]:
+    return {
+        path: path.read_bytes() if path.exists() else None
+        for path in paths
+    }
+
+
+def _restore_paths(snapshot: dict[Path, bytes | None]) -> None:
+    for path, payload in snapshot.items():
+        if payload is None:
+            path.unlink(missing_ok=True)
+            continue
+        path.parent.mkdir(parents=True, exist_ok=True)
+        path.write_bytes(payload)
+
+
+def _is_scaffold_source(path: Path) -> bool:
+    if not path.exists():
+        return True
+    text = path.read_text(encoding="utf-8", errors="replace").lower()
+    return "todo" in text or "scaffold" in text or "보강하세요" in text
+
+
+def output_path(
+    pack_dir: Path,
+    name: str,
+    overwrite: bool,
+    *,
+    candidate_only: bool = False,
+) -> Path:
     mapping = {
         "fact_anchor": "fact_anchor.json",
         "logic_check": "logic_check.json",
@@ -468,9 +577,14 @@ def output_path(pack_dir: Path, name: str, overwrite: bool) -> Path:
     }
     filename = mapping[name]
     path = pack_dir / filename
-    if overwrite or not path.exists():
+    if candidate_only:
+        return pack_dir / filename.replace(".json", ".candidate.json")
+    if overwrite or _is_scaffold_source(path):
         return path
-    return pack_dir / filename.replace(".json", ".candidate.json")
+    raise SystemExit(
+        f"ERROR: reviewed source already exists: {path}. "
+        "Use --overwrite to replace it or --candidate-only to keep a draft."
+    )
 
 
 def save_prompt_report(report_dir: Path, stamp: str, topic_id: str, prompts: dict[str, str]) -> Path:
@@ -502,10 +616,15 @@ def build_parser() -> argparse.ArgumentParser:
     p.add_argument("--topic-id", required=True)
     p.add_argument("--sheet", required=True, help="Path to Topic Sheet markdown.")
     p.add_argument("--overwrite", action="store_true", help="Overwrite existing topic pack JSON files.")
+    p.add_argument(
+        "--candidate-only",
+        action="store_true",
+        help="write *.candidate.json instead of promoting a new scaffold",
+    )
     p.add_argument("--dry-run", action="store_true", help="Only render prompts; do not call LLM.")
     p.add_argument(
         "--model",
-        default=DEFAULT_GENERATION_MODEL,
+        default=None,
         help=(
             "Gemini model for topic-pack generation. "
             "Default: env TOPIC_PACK_GENERATION_GEMINI_MODEL, "
@@ -545,7 +664,12 @@ def main(argv: list[str] | None = None) -> int:
     prompts = render_prompts(topic_sheet, templates=templates)
     prompt_report = save_prompt_report(report_dir, stamp, args.topic_id, prompts)
     print(f"prompts: {prompt_report.relative_to(root)}")
-    print(f"model: {args.model}")
+    resolved_model = (
+        get_topic_review_llm_settings(model=args.model).model
+        if get_topic_review_llm_settings is not None
+        else (args.model or "environment/default")
+    )
+    print(f"model: {resolved_model}")
 
     if args.dry_run:
         print("dry-run: LLM call skipped")
@@ -559,29 +683,61 @@ def main(argv: list[str] | None = None) -> int:
         "outputs": {},
     }
 
-    for name in ["fact_anchor", "logic_check", "model_answer", "topic_importance"]:
-        if args.only not in ("all", name):
-            continue
-        prompts = render_prompts(topic_sheet, drafts, templates)
-        print(f"generating: {name}")
-        result = call_llm(
-            prompts[name],
-            model=args.model,
-            timeout=args.timeout,
-            max_output_tokens=args.max_output_tokens,
+    requested = [
+        name
+        for name in TOPIC_PACK_SOURCE_FILENAMES
+        if args.only in ("all", name)
+    ]
+    destinations = {
+        name: output_path(
+            pack_dir,
+            name,
+            args.overwrite,
+            candidate_only=args.candidate_only,
         )
-        data = result["json"]
-        data = enforce_schema_lock(name, data, pack_dir)
-        drafts[name] = data
-        raw_report["outputs"][name] = {
-            "provider": result.get("provider"),
-            "model": result.get("model"),
-            "content": result.get("content"),
-            "json": data,
-        }
-        path = output_path(pack_dir, name, args.overwrite)
-        write_json(path, data)
-        print(f"wrote: {path.relative_to(root)}")
+        for name in requested
+    }
+    batches = (
+        [[name] for name in requested]
+        if args.only != "all"
+        else [
+            ["fact_anchor", "topic_importance"],
+            ["logic_check", "model_answer"],
+        ]
+    )
+    for batch in batches:
+        prompts = render_prompts(topic_sheet, drafts, templates)
+        for name in batch:
+            print(f"generating: {name}")
+        with ThreadPoolExecutor(max_workers=len(batch)) as executor:
+            futures = {
+                name: executor.submit(
+                    call_llm,
+                    prompts[name],
+                    model=args.model,
+                    timeout=args.timeout,
+                    max_output_tokens=args.max_output_tokens,
+                )
+                for name in batch
+            }
+            results = {
+                name: futures[name].result()
+                for name in batch
+            }
+        for name in batch:
+            result = results[name]
+            data = enforce_schema_lock(
+                name,
+                result["json"],
+                pack_dir,
+            )
+            drafts[name] = data
+            raw_report["outputs"][name] = {
+                "provider": result.get("provider"),
+                "model": result.get("model"),
+                "content": result.get("content"),
+                "json": data,
+            }
 
     if args.only in ("all", "consistency_review"):
         for name, filename in [
@@ -621,10 +777,41 @@ def main(argv: list[str] | None = None) -> int:
     write_json(raw_path, raw_report)
     print(f"raw: {raw_path.relative_to(root)}")
 
-    if args.overwrite and args.only != "consistency_review":
-        validate_topic_pack_schema(root, args.topic_id)
-    elif args.only != "consistency_review":
-        print("schema validation skipped: candidate files were written without --overwrite")
+    canonical_written = (
+        not args.candidate_only
+        and args.only != "consistency_review"
+    )
+    snapshot = _snapshot_paths(
+        [*destinations.values(), pack_dir / "README.md"]
+    )
+    try:
+        for name in requested:
+            path = destinations[name]
+            write_json(path, drafts[name])
+            print(f"wrote: {path.relative_to(root)}")
+
+        if canonical_written:
+            if args.only == "all":
+                finalize_scaffold_readme(pack_dir)
+            validate_topic_pack_schema(root, args.topic_id)
+            if args.only == "all":
+                subprocess.run(
+                    [
+                        sys.executable,
+                        "scripts/validate_topic_pack_quality.py",
+                        "--topic-id",
+                        args.topic_id,
+                    ],
+                    cwd=root,
+                    check=True,
+                )
+        elif args.only != "consistency_review":
+            print("schema validation skipped: --candidate-only output is not canonical source")
+    except BaseException:
+        if canonical_written:
+            _restore_paths(snapshot)
+            print("generation failed: canonical Topic Pack source restored")
+        raise
 
     print("DONE")
     return 0

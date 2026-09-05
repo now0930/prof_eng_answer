@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
+import argparse
 import json
 from pathlib import Path
 from typing import Any
@@ -503,13 +504,43 @@ def validate_pack(pack_dir: Path, global_anchor_ids: set[str]) -> None:
     validate_logic_check(pack_dir, topic_id)
 
 
-def main() -> int:
+def build_parser() -> argparse.ArgumentParser:
+    parser = argparse.ArgumentParser(
+        description="Validate Topic Pack source contracts."
+    )
+    parser.add_argument(
+        "--topic-id",
+        default=None,
+        help="validate one Topic Pack while preserving global anchor uniqueness",
+    )
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    args = build_parser().parse_args(argv)
     if not PACK_ROOT.exists():
         print("VALID: no topic_packs directory")
         return 0
 
     pack_dirs = sorted(p for p in PACK_ROOT.iterdir() if p.is_dir())
     global_anchor_ids: set[str] = set()
+
+    if args.topic_id:
+        target = PACK_ROOT / args.topic_id
+        if not target.is_dir():
+            fail(f"topic pack not found: {target}")
+        for pack_dir in pack_dirs:
+            if pack_dir != target:
+                validate_fact_anchor(
+                    pack_dir,
+                    pack_dir.name,
+                    global_anchor_ids,
+                )
+        validate_pack(target, global_anchor_ids)
+        print("VALID: topic pack")
+        print(f"topic: {args.topic_id}")
+        print(f"global anchors checked: {len(global_anchor_ids)}")
+        return 0
 
     for pack_dir in pack_dirs:
         validate_pack(pack_dir, global_anchor_ids)

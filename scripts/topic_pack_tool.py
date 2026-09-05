@@ -1407,7 +1407,9 @@ def build_topic(
 
 
 
-RELEASE_ENTRYPOINT = REPO_ROOT / "scripts" / "validate_release.sh"
+RELEASE_ENTRYPOINT = (
+    REPO_ROOT / "scripts" / "validate_topic_pack_release.py"
+)
 RELEASE_OUTPUT_ROOTS = ("calibration", "docs", "reports", "rubrics")
 TOPIC_ID_PATTERN = re.compile(r"^[a-z0-9]+(?:_[a-z0-9]+)*$")
 
@@ -1521,6 +1523,23 @@ def _release_failure_code(output: str) -> str:
     return "TP015_RELEASE_VALIDATION_FAILED"
 
 
+def _release_argv(entrypoint: Path, topic_id: str) -> list[str]:
+    if entrypoint.suffix == ".py":
+        return [
+            sys.executable,
+            entrypoint.as_posix(),
+            "--topic-id",
+            topic_id,
+            "--promote-generated",
+        ]
+    return [
+        "bash",
+        entrypoint.as_posix(),
+        "--topic-id",
+        topic_id,
+    ]
+
+
 def _remove_path(path: Path) -> None:
     if path.is_symlink() or path.is_file():
         path.unlink(missing_ok=True)
@@ -1631,7 +1650,7 @@ def release_topic(
     entrypoint = (
         release_entrypoint
         if release_entrypoint is not None
-        else repo_root / "scripts" / "validate_release.sh"
+        else repo_root / "scripts" / "validate_topic_pack_release.py"
     )
 
     issues: list[ContractIssue] = []
@@ -1776,12 +1795,7 @@ def release_topic(
             runtime_donor_dependency=False,
         )
 
-    argv = [
-        "bash",
-        entrypoint.as_posix(),
-        "--topic-id",
-        topic_id,
-    ]
+    argv = _release_argv(entrypoint, topic_id)
     environment = os.environ.copy()
     environment["PYTHONDONTWRITEBYTECODE"] = "1"
 

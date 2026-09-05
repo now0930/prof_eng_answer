@@ -17,13 +17,65 @@ SMOKE_SESSION_PREFIX = "synthetic_topic_pack_smoke_"
 SMOKE_REPORT = Path("reports/rubric_bank_mode_smoke_compare.json")
 
 
-def _topic_ids(root: Path, selected: list[str] | None, *, changed_only: bool, include_frozen: bool) -> list[str]:
-    topic_ids = selected or iter_topic_ids(root)
+def _git_changed_topic_ids(root: Path) -> list[str]:
+    proc = subprocess.run(
+        [
+            "git",
+            "status",
+            "--porcelain",
+            "--untracked-files=all",
+            "--",
+            "rubrics/topic_packs",
+        ],
+        cwd=root,
+        text=True,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        check=False,
+    )
+    if proc.returncode != 0:
+        raise SystemExit(
+            "ERROR: cannot discover changed Topic Packs: "
+            + proc.stderr.strip()
+        )
+    prefix = "rubrics/topic_packs/"
+    changed: set[str] = set()
+    for raw in proc.stdout.splitlines():
+        path_text = raw[3:].strip() if len(raw) >= 4 else ""
+        for candidate in path_text.split(" -> "):
+            if candidate.startswith(prefix):
+                relative = candidate[len(prefix):]
+                topic_id = relative.split("/", 1)[0]
+                if topic_id:
+                    changed.add(topic_id)
+    return sorted(changed)
+
+
+def _topic_ids(
+    root: Path,
+    selected: list[str] | None,
+    *,
+    all_topics: bool = False,
+    changed_only: bool = False,
+    include_frozen: bool = False,
+) -> list[str]:
+    if selected and all_topics:
+        raise SystemExit("ERROR: use either --topic-id or --all")
+    if selected:
+        topic_ids = selected
+    elif all_topics:
+        topic_ids = iter_topic_ids(root)
+    else:
+        topic_ids = _git_changed_topic_ids(root)
+        if not topic_ids:
+            raise SystemExit(
+                "ERROR: no changed Topic Pack found; use --topic-id or --all"
+            )
     missing = [tid for tid in topic_ids if not topic_pack_dir(root, tid).is_dir()]
     if missing:
         raise SystemExit(f"ERROR: topic pack not found: {missing}")
 
-    if not changed_only:
+    if not changed_only or not selected:
         return topic_ids
 
     result: list[str] = []
@@ -149,9 +201,11 @@ def _mark_validated(root: Path, topics: list[str]) -> None:
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Run release validation for topic packs.")
     p.add_argument("--topic-id", action="append", default=None)
-    p.add_argument("--changed-only", action="store_true", help="smoke only changed topic packs")
+    p.add_argument("--all", action="store_true", help="validate every Topic Pack")
+    p.add_argument("--changed-only", action="store_true", help="legacy status filter for explicitly selected topics")
     p.add_argument("--include-frozen", action="store_true")
-    p.add_argument("--skip-smoke", action="store_true")
+    p.add_argument("--smoke", action="store_true", help="run live LLM smoke for selected topics")
+    p.add_argument("--skip-smoke", action="store_true", help=argparse.SUPPRESS)
     p.add_argument("--keep-artifacts", action="store_true")
     p.add_argument("--promote-generated", action="store_true", help="leave rubrics/generated changes in the worktree")
     p.add_argument("--sync-status", action="store_true", help="mark validated topic hashes after successful validation")
@@ -165,7 +219,13 @@ def build_parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     root = project_root()
-    topics = _topic_ids(root, args.topic_id, changed_only=args.changed_only, include_frozen=args.include_frozen)
+    topics = _topic_ids(
+        root,
+        args.topic_id,
+        all_topics=args.all,
+        changed_only=args.changed_only,
+        include_frozen=args.include_frozen,
+    )
 
     print("TOPIC PACK RELEASE VALIDATION")
     print("root:", root)
@@ -175,21 +235,50 @@ def main(argv: list[str] | None = None) -> int:
 
     generated_snapshot = _snapshot_generated(root)
 
+    succeeded = False
     try:
         _run(root, [sys.executable, "-m", "py_compile", *_compile_targets(root)])
+        if args.all:
+            _run(
+                root,
+                [sys.executable, "scripts/validate_topic_packs.py"],
+            )
+            quality_commands = [
+                [sys.executable, "scripts/validate_topic_pack_quality.py"]
+            ]
+        else:
+            quality_commands = []
+            for topic_id in topics:
+                _run(
+                    root,
+                    [
+                        sys.executable,
+                        "scripts/validate_topic_packs.py",
+                        "--topic-id",
+                        topic_id,
+                    ],
+                )
+                quality_commands.append(
+                    [
+                        sys.executable,
+                        "scripts/validate_topic_pack_quality.py",
+                        "--topic-id",
+                        topic_id,
+                    ]
+                )
+
+        for quality_cmd in quality_commands:
+            if args.strict_generic_aliases:
+                quality_cmd.append("--strict-generic-aliases")
+            if args.require_logic_check:
+                quality_cmd.append("--require-logic-check")
+            _run(root, quality_cmd)
+
         _run(root, [sys.executable, "scripts/rubric_manager.py", "validate-generated-pipeline"])
 
-        quality_cmd = [sys.executable, "scripts/rubric_manager.py", "validate-topic-pack-quality"]
-        for topic_id in args.topic_id or []:
-            quality_cmd.extend(["--topic-id", topic_id])
-        if args.strict_generic_aliases:
-            quality_cmd.append("--strict-generic-aliases")
-        if args.require_logic_check:
-            quality_cmd.append("--require-logic-check")
-        _run(root, quality_cmd)
-
         smoke_results: list[tuple[str, int]] = []
-        if not args.skip_smoke:
+        run_smoke = args.smoke and not args.skip_smoke
+        if run_smoke:
             for topic_id in topics:
                 rc = _run(root, _smoke_cmd(args, topic_id), allow_failure=True)
                 smoke_results.append((topic_id, rc))
@@ -212,7 +301,7 @@ def main(argv: list[str] | None = None) -> int:
         print("TOPIC PACK RELEASE SUMMARY")
         print("generated_pipeline: PASS")
         print("quality: PASS")
-        if args.skip_smoke:
+        if not run_smoke:
             print("smoke: SKIPPED")
         else:
             print("smoke: PASS")
@@ -222,15 +311,19 @@ def main(argv: list[str] | None = None) -> int:
             print("cleanup:", cleanup)
         print()
         print("TOPIC PACK RELEASE VALIDATION PASS")
+        succeeded = True
         return 0
 
     finally:
-        if args.promote_generated:
+        if args.promote_generated and succeeded:
             print()
             print("generated output: promoted in worktree")
         else:
             print()
-            print("generated output: restoring pre-validation snapshot")
+            if args.promote_generated:
+                print("generated output: validation failed; restoring snapshot")
+            else:
+                print("generated output: restoring pre-validation snapshot")
             _restore_generated(root, generated_snapshot)
 
 
