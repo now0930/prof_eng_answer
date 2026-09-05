@@ -359,6 +359,25 @@ def _coverage_match(
         if len(exact_text) == 1:
             return exact_text[0]
 
+    # Generic semantic providers may omit generated requirement IDs and the
+    # trailing action word (for example, "설명").  A normalized demand phrase
+    # is still a canonical identity only when it selects exactly one row.
+    phrase = _demand_link_phrase(requirement)
+    if phrase:
+        phrase_matches = [
+            index for index, row in enumerate(rows)
+            if index not in consumed
+            and _demand_link_phrase({
+                "requirement_text": (
+                    row.get("requirement_text")
+                    or row.get("requirement")
+                    or row.get("criterion")
+                )
+            }) == phrase
+        ]
+        if len(phrase_matches) == 1:
+            return phrase_matches[0]
+
     # Provider coverage often omits the action suffix ("설명", "제시") or
     # qualifies a short object (for example "특징").  Accept only a unique
     # object/containment match so this fallback cannot guess ambiguously.
@@ -439,6 +458,7 @@ def _evidence_from_coverage(
     row: dict[str, Any],
     *,
     canonical_requirement_id: str,
+    canonical_identity_verified: bool = False,
 ) -> dict[str, Any]:
     verified_ids = sorted({
         str(value).strip()
@@ -451,7 +471,7 @@ def _evidence_from_coverage(
     exact_requirement_id = bool(
         provided_requirement_id
         and provided_requirement_id == canonical_requirement_id
-    )
+    ) or canonical_identity_verified
     if verified_ids:
         status = "incorrect"
     elif raw_status == "correct" and (evidence_text or exact_requirement_id):
@@ -559,9 +579,29 @@ def build_canonical_evaluation_ledger(grade: Any) -> dict[str, Any]:
         coverage_index = _coverage_match(requirement, active_coverage_rows, consumed)
         if coverage_index is not None:
             consumed.add(coverage_index)
+            coverage_row = active_coverage_rows[coverage_index]
+            provided_requirement_id = str(
+                coverage_row.get("requirement_id") or ""
+            ).strip()
+            canonical_identity_verified = bool(
+                provided_requirement_id == requirement_id
+                or (
+                    not provided_requirement_id
+                    and _demand_link_phrase(requirement)
+                    and _demand_link_phrase(requirement)
+                    == _demand_link_phrase({
+                        "requirement_text": (
+                            coverage_row.get("requirement_text")
+                            or coverage_row.get("requirement")
+                            or coverage_row.get("criterion")
+                        )
+                    })
+                )
+            )
             evidence.append(_evidence_from_coverage(
-                active_coverage_rows[coverage_index],
+                coverage_row,
                 canonical_requirement_id=requirement_id,
+                canonical_identity_verified=canonical_identity_verified,
             ))
         evidence.extend(
             _defect_evidence(defect)

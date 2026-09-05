@@ -4699,6 +4699,98 @@ def _phase6_apply_coverage_semantic_downward_guard(
 
     return layer_scores, diagnostic
 
+def _stage7_semantic_exact_projection_validation(gemini_eval):
+    """Validate a generic semantic projection against canonical demands.
+
+    Topic Packs already attach an authoritative validation object.  Generic
+    questions may legitimately omit generated IDs, so accept only a complete,
+    ordered, one-to-one match of canonical demand phrases.  Never repair or
+    override an explicit failed validation here.
+    """
+    explicit = (
+        gemini_eval.get("explicit_requirement_projection_validation")
+        if isinstance(gemini_eval, dict)
+        else None
+    )
+    parsed = (
+        gemini_eval.get("parsed")
+        if isinstance(gemini_eval, dict)
+        else None
+    )
+    if not isinstance(explicit, dict) and isinstance(parsed, dict):
+        explicit = parsed.get("explicit_requirement_projection_validation")
+    if isinstance(explicit, dict):
+        return explicit
+
+    contract = parsed.get("question_demand_contract") if isinstance(parsed, dict) else None
+    coverage = parsed.get("question_type_coverage") if isinstance(parsed, dict) else None
+    requirements = contract.get("requirements") if isinstance(contract, dict) else None
+    explicit_coverage = (
+        coverage.get("explicit_requirement_coverage")
+        if isinstance(coverage, dict)
+        else None
+    )
+    rows = (
+        explicit_coverage.get("requirements")
+        if isinstance(explicit_coverage, dict)
+        else None
+    )
+
+    from evaluation_ledger import _demand_link_phrase
+
+    typed_requirements = bool(
+        isinstance(requirements, list)
+        and all(isinstance(row, dict) for row in requirements)
+    )
+    canonical_ids = [
+        str(row.get("requirement_id") or "").strip()
+        for row in requirements
+    ] if typed_requirements else []
+    valid_shape = bool(
+        canonical_ids
+        and all(canonical_ids)
+        and len(canonical_ids) == len(set(canonical_ids))
+        and isinstance(rows, list)
+        and len(rows) == len(requirements)
+        and all(isinstance(row, dict) for row in rows)
+    )
+    matched_by = []
+    if valid_shape:
+        for requirement, row in zip(requirements, rows):
+            canonical_id = str(requirement.get("requirement_id") or "").strip()
+            provider_id = str(row.get("requirement_id") or "").strip()
+            if provider_id:
+                matched = provider_id == canonical_id
+                method = "requirement_id"
+            else:
+                canonical_phrase = _demand_link_phrase(requirement)
+                provider_phrase = _demand_link_phrase({
+                    "requirement_text": (
+                        row.get("requirement_text")
+                        or row.get("requirement")
+                        or row.get("criterion")
+                    )
+                })
+                matched = bool(canonical_phrase and canonical_phrase == provider_phrase)
+                method = "canonical_phrase"
+            if not matched:
+                valid_shape = False
+                break
+            matched_by.append(method)
+
+    return {
+        "schema_version": "stage7_generic_exact_projection_v1",
+        "valid": valid_shape,
+        "fail_closed": not valid_shape,
+        "expected_requirement_ids": canonical_ids,
+        "matched_by": matched_by,
+        "reason": (
+            "ordered_one_to_one_canonical_identity"
+            if valid_shape else "generic_projection_identity_mismatch"
+        ),
+    }
+
+
 def _stage7_legacy_phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, scoring_model):
     if not gemini_eval or not gemini_eval.get("ok"):
         return layer_scores
@@ -4706,10 +4798,8 @@ def _stage7_legacy_phase6_apply_gemini_layer_scores(layer_scores, gemini_eval, s
     parsed = gemini_eval.get("parsed") or {}
     gemini_layers = parsed.get("layers") or []
     max_by_layer = _phase6_get_layer_max(scoring_model)
-    projection_validation = (
-        gemini_eval.get("explicit_requirement_projection_validation")
-        or parsed.get("explicit_requirement_projection_validation")
-        or {}
+    projection_validation = _stage7_semantic_exact_projection_validation(
+        gemini_eval
     )
     exact_projection_valid = bool(
         isinstance(projection_validation, dict)
@@ -10364,7 +10454,7 @@ _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION = (
     "final_grade_cache_v4"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION = (
-    "verified_correctness_cap_output_policy_v6"
+    "verified_correctness_cap_output_policy_v7"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_DIR = (
     BASE_DIR / "data" / "final_grade_cache"

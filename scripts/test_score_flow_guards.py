@@ -14,6 +14,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from grading_agents import _phase6_limit_gemini_score
+from grading_agents import _stage7_semantic_exact_projection_validation
 from grade_score_reconciler import _apply_numeric_flags
 from difficulty_score_ceiling import (
     _prefer_question_type_adjusted_score,
@@ -28,6 +29,60 @@ from grading_agents import (
 
 
 class ScoreFlowGuardTest(unittest.TestCase):
+    def _generic_projection(self):
+        return {
+            "ok": True,
+            "parsed": {
+                "question_demand_contract": {"requirements": [
+                    {
+                        "requirement_id": "r1",
+                        "requirement_text": "Valve Authority의 정의 설명",
+                        "object_text": "Valve Authority의 정의",
+                    },
+                    {
+                        "requirement_id": "r2",
+                        "requirement_text": "계산 경계 설명",
+                        "object_text": "계산 경계",
+                    },
+                ]},
+                "question_type_coverage": {
+                    "explicit_requirement_coverage": {"requirements": [
+                        {"requirement": "Valve Authority의 정의", "status": "present"},
+                        {"requirement": "계산 경계", "status": "present"},
+                    ]}
+                },
+            },
+        }
+
+    def test_generic_exact_text_projection_authorizes_semantic_scores(self) -> None:
+        validation = _stage7_semantic_exact_projection_validation(
+            self._generic_projection()
+        )
+        self.assertTrue(validation["valid"])
+        self.assertEqual(validation["matched_by"], [
+            "canonical_phrase", "canonical_phrase",
+        ])
+
+    def test_generic_projection_mismatch_fails_closed(self) -> None:
+        evaluation = self._generic_projection()
+        evaluation["parsed"]["question_type_coverage"][
+            "explicit_requirement_coverage"
+        ]["requirements"][1]["requirement"] = "다른 요구사항"
+        validation = _stage7_semantic_exact_projection_validation(evaluation)
+        self.assertFalse(validation["valid"])
+        self.assertTrue(validation["fail_closed"])
+
+    def test_explicit_projection_failure_cannot_be_inferred_away(self) -> None:
+        evaluation = self._generic_projection()
+        evaluation["explicit_requirement_projection_validation"] = {
+            "valid": False,
+            "fail_closed": True,
+        }
+        self.assertEqual(
+            _stage7_semantic_exact_projection_validation(evaluation),
+            {"valid": False, "fail_closed": True},
+        )
+
     def test_gemini_d_layer_raise_is_capped(self) -> None:
         result = _phase6_limit_gemini_score(
             layer_id="D",

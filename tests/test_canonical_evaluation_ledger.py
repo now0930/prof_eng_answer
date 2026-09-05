@@ -22,8 +22,6 @@ VMODEL_QUESTION = """🚨 [제어 소프트웨어] 개발 수명 주기(V-Model)
 📌 문제 정의
 제어 소프트웨어 개발 수명 주기(V-Model)의 단위 시험, 통합 시험, 시스템 시험의 정의
 안전 무결성 기준(SIL) 달성을 위한 소프트웨어 검증 방안"""
-
-
 def _grade() -> dict:
     contract = build_question_demand_contract(VMODEL_QUESTION)
     requirements = contract["requirements"]
@@ -256,6 +254,46 @@ def test_coverage_uniquely_matches_contract_object_text() -> None:
     # establish technical correctness without an evidence span.
     assert [row["status"] for row in ledger["rows"]] == ["unknown", "unknown"]
     assert [row["addressing_status"] for row in ledger["rows"]] == ["mentioned", "mentioned"]
+
+
+def test_unique_canonical_text_and_evidence_preserve_present_as_correct() -> None:
+    grade = {
+        "question_demand_contract": {
+            "contract_marker": "test",
+            "requirements": [
+                {
+                    "requirement_id": "definition",
+                    "requirement_text": "Valve Authority의 정의 설명",
+                    "object_text": "Valve Authority의 정의",
+                },
+                {
+                    "requirement_id": "boundary",
+                    "requirement_text": "계산 경계 설명",
+                    "object_text": "계산 경계",
+                },
+            ],
+        },
+        "question_type_coverage": {"explicit_requirement_coverage": {
+            "requirements": [
+                {
+                    "requirement": "Valve Authority의 정의",
+                    "status": "present",
+                    "evidence": "답안의 직접 근거 1",
+                },
+                {
+                    "requirement": "계산 경계",
+                    "status": "present",
+                    "evidence": "답안의 직접 근거 2",
+                },
+            ],
+        }},
+    }
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert {row["status"] for row in ledger["rows"]} == {"correct"}
+    assert all(
+        row["evidence"][0]["exact_requirement_id"] is True
+        for row in ledger["rows"]
+    )
 
 
 def test_high_confidence_long_form_never_reconciles_partial_provider_states() -> None:
