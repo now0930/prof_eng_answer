@@ -54,11 +54,25 @@ def test_vmodel_has_one_ledger_row_per_atomic_requirement() -> None:
     assert [row["requirement_index"] for row in ledger["rows"]] == [1, 2, 3, 4]
     assert ledger["summary"]["status_counts"] == {
         "unknown": 0,
-        "correct": 0,
-        "partial": 3,
+        "correct": 2,
+        "partial": 1,
         "missing": 1,
         "incorrect": 0,
     }
+
+
+def test_present_requires_exact_requirement_id_and_evidence_for_correctness() -> None:
+    grade = _grade()
+    rows = grade["question_type_coverage"]["explicit_requirement_coverage"]["requirements"]
+    rows[0]["evidence"] = ""
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert ledger["rows"][0]["status"] == "unknown"
+
+    rows[0]["evidence"] = "핵심 의미를 정확히 설명함"
+    rows[0]["requirement_id"] = "invented"
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert ledger["coverage_mapping_validation"]["valid"] is False
+    assert ledger["rows"][0]["status"] == "unknown"
 
 
 def test_verified_defect_is_canonical_correctness_owner() -> None:

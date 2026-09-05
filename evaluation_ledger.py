@@ -18,9 +18,11 @@ EVALUATION_LEDGER_SCHEMA_VERSION = "1.0"
 EVALUATION_LEDGER_MARKER = "CANONICAL_EVALUATION_LEDGER_V1"
 
 _STATUSES = {
-    # ``present`` means the demand was addressed. It is not a correctness
-    # verdict and therefore cannot be promoted to ``correct`` here.
-    "present": "partial",
+    # Provider coverage contracts define ``present`` as directly addressed,
+    # technically correct, and sufficiently complete.  The ledger still
+    # requires exact requirement identity plus evidence before preserving it
+    # as ``correct`` (see ``_evidence_from_coverage``).
+    "present": "correct",
     "correct": "correct",
     "partial": "partial",
     "incorrect": "incorrect",
@@ -453,6 +455,8 @@ def _evidence_from_coverage(
     if verified_ids:
         status = "incorrect"
     elif raw_status == "correct" and (evidence_text or exact_requirement_id):
+        status = "correct"
+    elif raw_status == "present" and exact_requirement_id and evidence_text:
         status = "correct"
     elif raw_status == "partial":
         status = "partial"
