@@ -10289,7 +10289,7 @@ _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION = (
     "final_grade_cache_v4"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION = (
-    "verified_correctness_cap_output_policy_v4"
+    "verified_correctness_cap_output_policy_v5"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_DIR = (
     BASE_DIR / "data" / "final_grade_cache"
@@ -10422,6 +10422,12 @@ def _stage18b1_load_final_grade_cache(
     question_contract,
 ):
     import copy
+    import os
+
+    if os.getenv("FINAL_GRADE_CACHE_ENABLED", "1").strip().lower() in {
+        "0", "false", "no", "off",
+    }:
+        return None
 
     identity = (
         _stage18b1_final_grade_cache_identity(
@@ -10491,6 +10497,11 @@ def _stage18b1_write_final_grade_cache(
     grade,
 ):
     import os
+
+    if os.getenv("FINAL_GRADE_CACHE_ENABLED", "1").strip().lower() in {
+        "0", "false", "no", "off",
+    }:
+        return False
 
     identity = (
         _stage18b1_grade_cache_identity(

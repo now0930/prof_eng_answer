@@ -292,6 +292,35 @@ class FinalGradeReuseTest(
             path = grading_agents._stage18b1_final_grade_cache_path(cache_identity)
             self.assertIn(cache_identity["scoring_policy_version"], path.name)
 
+    def test_final_grade_cache_can_be_disabled_for_release_regrading(self) -> None:
+        import grading_agents
+
+        with tempfile.TemporaryDirectory() as tmp:
+            root = Path(tmp)
+            identity, contract = self._identity_and_contract(root)
+            grade = {
+                "total_score": 14.0,
+                "grading_identity": identity,
+                "question_contract": contract,
+            }
+            with mock.patch.object(
+                grading_agents,
+                "_STAGE18B1_FINAL_GRADE_CACHE_DIR",
+                root / "final_grade_cache",
+            ), mock.patch.dict(
+                "os.environ",
+                {"FINAL_GRADE_CACHE_ENABLED": "0"},
+            ):
+                self.assertFalse(
+                    grading_agents._stage18b1_store_final_grade_cache(grade)
+                )
+                self.assertIsNone(
+                    grading_agents._stage18b1_load_final_grade_cache(
+                        grading_identity=identity,
+                        question_contract=contract,
+                    )
+                )
+
     def test_production_path_cache_boundaries(
         self,
     ) -> None:

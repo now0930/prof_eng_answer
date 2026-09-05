@@ -216,6 +216,14 @@ def _deterministic_validation_env() -> dict[str, str]:
     return env
 
 
+def _uncached_provider_env() -> dict[str, str]:
+    """Use live provider settings while forbidding stale finalized grades."""
+    env = dict(os.environ)
+    env["FINAL_GRADE_CACHE_ENABLED"] = "0"
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    return env
+
+
 def _record_stage(
     manifest: dict[str, Any],
     section: str,
@@ -280,7 +288,7 @@ def qualify(args: argparse.Namespace) -> Path:
             "--golden", str(args.golden),
             "--output-dir", str(prediction_dir),
             "--workers", str(args.workers),
-        ))
+        ), env=_uncached_provider_env())
         _record_stage(manifest, "qualification", "provider_prediction_regeneration", result)
         predictions = prediction_dir / "predictions.jsonl"
         count = sum(1 for line in predictions.read_text(encoding="utf-8").splitlines() if line.strip())

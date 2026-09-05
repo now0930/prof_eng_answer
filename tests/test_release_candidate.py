@@ -96,6 +96,13 @@ class ReleaseCandidateTest(unittest.TestCase):
         self.assertEqual(sanitized["RUN_SMOKE_TOPIC_PACKS"], "0")
         self.assertEqual(sanitized["RUN_GRADING_REPRODUCIBILITY"], "0")
 
+    def test_provider_regeneration_disables_final_grade_cache(self):
+        with patch.dict("os.environ", {"CLOVA_API_KEY": "live-secret"}, clear=True):
+            provider_env = release._uncached_provider_env()
+        self.assertEqual(provider_env["CLOVA_API_KEY"], "live-secret")
+        self.assertEqual(provider_env["FINAL_GRADE_CACHE_ENABLED"], "0")
+        self.assertEqual(provider_env["PYTHONDONTWRITEBYTECODE"], "1")
+
     def test_deploy_records_fingerprint_parity_and_close_eligibility(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)
