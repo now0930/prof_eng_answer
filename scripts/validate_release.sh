@@ -346,7 +346,9 @@ python3 scripts/test_topic_importance_scope_validation.py
 
 echo
 echo "===== whitespace check ====="
-git diff --check
+# The production checkout is bind-mounted into a non-root container, so Git's
+# ownership guard must be scoped to this read-only validation command.
+git -c safe.directory="$(pwd)" diff --check
 
 echo
 echo "VALIDATION OK"
