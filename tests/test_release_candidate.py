@@ -85,10 +85,12 @@ class ReleaseCandidateTest(unittest.TestCase):
 
     def test_validation_environment_removes_live_provider_inputs(self):
         values = {key: "secret-or-runtime-value" for key in release.VALIDATION_ENV_KEYS}
+        values["ASSISTED_ROUTING_ENABLED"] = "1"
         with patch.dict("os.environ", values, clear=False):
             sanitized = release._deterministic_validation_env()
         for key in release.VALIDATION_ENV_KEYS:
             self.assertNotIn(key, sanitized)
+        self.assertNotIn("ASSISTED_ROUTING_ENABLED", sanitized)
         self.assertEqual(sanitized["PYTHONDONTWRITEBYTECODE"], "1")
 
     def test_deploy_records_fingerprint_parity_and_close_eligibility(self):

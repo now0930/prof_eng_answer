@@ -194,9 +194,19 @@ def _provider_preflight() -> dict[str, Any]:
 
 def _deterministic_validation_env() -> dict[str, str]:
     """Return a CI-like environment without live provider routing inputs."""
-    env = dict(os.environ)
-    for key in VALIDATION_ENV_KEYS:
-        env.pop(key, None)
+    passthrough = (
+        "PATH",
+        "HOME",
+        "LANG",
+        "LANGUAGE",
+        "LC_ALL",
+        "TZ",
+        "TMPDIR",
+        "TERM",
+        "USER",
+        "CI",
+    )
+    env = {key: os.environ[key] for key in passthrough if key in os.environ}
     env["PYTHONDONTWRITEBYTECODE"] = "1"
     return env
 
