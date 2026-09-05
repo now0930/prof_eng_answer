@@ -394,6 +394,8 @@ python3 scripts/check_accuracy_release_gate.py \
 저장소가 clean 상태이고 현재 provider credential과 `OLLAMA_URL`의 보조 model이
 준비된 환경에서 후보를 생성한다. Orchestrator는 이를 먼저 사전점검하고 실패하면
 나머지 검증과 provider 호출을 시작하지 않는다.
+코드 release validation은 운영 credential·provider routing 변수를 제거한 CI 동등
+환경에서 실행하고, 이후 30건 재채점에는 원래 운영 provider 환경을 사용한다.
 
 ```bash
 cd ~/hermes/workspace/prof_eng_answer

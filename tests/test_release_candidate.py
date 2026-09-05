@@ -79,6 +79,14 @@ class ReleaseCandidateTest(unittest.TestCase):
                 release._provider_preflight()
         urlopen.assert_not_called()
 
+    def test_validation_environment_removes_live_provider_inputs(self):
+        values = {key: "secret-or-runtime-value" for key in release.VALIDATION_ENV_KEYS}
+        with patch.dict("os.environ", values, clear=False):
+            sanitized = release._deterministic_validation_env()
+        for key in release.VALIDATION_ENV_KEYS:
+            self.assertNotIn(key, sanitized)
+        self.assertEqual(sanitized["PYTHONDONTWRITEBYTECODE"], "1")
+
     def test_deploy_records_fingerprint_parity_and_close_eligibility(self):
         with tempfile.TemporaryDirectory() as temporary:
             root = Path(temporary)

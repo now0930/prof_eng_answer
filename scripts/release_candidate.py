@@ -31,6 +31,23 @@ PARITY_FILES = (
     "grade_score_reconciler.py",
     "verified_defect_reconciliation.py",
 )
+VALIDATION_ENV_KEYS = (
+    "GEMINI_API_KEY",
+    "GOOGLE_API_KEY",
+    "GOOGLE_GENERATIVE_AI_API_KEY",
+    "GEMINI_MODEL",
+    "CLOVA_API_KEY",
+    "CLOVA_APIGW_API_KEY",
+    "CLOVA_MODEL",
+    "CLOVA_HOST",
+    "CLOVA_ENDPOINT",
+    "LLM_PROVIDER",
+    "LLM_PROVIDER_SETTINGS_FILE",
+    "OLLAMA_URL",
+    "OLLAMA_MODEL",
+    "QUESTION_DEMAND_SHADOW_ENABLED",
+    "SEMANTIC_ROUTER_SHADOW_ENABLED",
+)
 
 
 class ReleaseFailure(RuntimeError):
@@ -175,6 +192,15 @@ def _provider_preflight() -> dict[str, Any]:
     return context
 
 
+def _deterministic_validation_env() -> dict[str, str]:
+    """Return a CI-like environment without live provider routing inputs."""
+    env = dict(os.environ)
+    for key in VALIDATION_ENV_KEYS:
+        env.pop(key, None)
+    env["PYTHONDONTWRITEBYTECODE"] = "1"
+    return env
+
+
 def _record_stage(
     manifest: dict[str, Any],
     section: str,
@@ -225,7 +251,10 @@ def qualify(args: argparse.Namespace) -> Path:
         _atomic_json(manifest_path, manifest)
 
         if not args.skip_release_validation:
-            result = _run(("bash", "scripts/validate_release.sh"))
+            result = _run(
+                ("bash", "scripts/validate_release.sh"),
+                env=_deterministic_validation_env(),
+            )
             _record_stage(manifest, "qualification", "full_release", result)
             _atomic_json(manifest_path, manifest)
 
