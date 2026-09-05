@@ -54,6 +54,7 @@ reports/*_remaining_*.csv
 reports/*_remaining_*.md
 reports/*_backup_*.tsv
 reports/rubric_audit_summary.md
+reports/release_candidates/
 
 # Rubric/topic-pack temporary repair files
 *.backup.*

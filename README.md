@@ -41,6 +41,7 @@
 - Topic Pack 어휘와 분리된 topic-neutral generic grading contract
 - 최종 채점 결과에 process-stable runtime provenance 6개 필드 첨부
 - runtime provenance와 Docker image·container·host parity 기반 deployment proof의 경계 명시
+- Topic Pack → 현재 provider 30건 → Accuracy Gate → 배포 증거를 순서화하는 fail-closed Release Orchestrator
 
 ### 현재 검증 기준
 
@@ -63,6 +64,11 @@
 | 평균 허용구간 외 거리 | 0.8723 |
 
 `runtime_grading_provenance_v1`은 실행 process 수준의 commit, 시작 시각, router/evaluator/verifier SHA와 scoring policy를 기록합니다. Docker image digest, container ID·시작 시각, PID 교체와 host/container module parity는 별도의 deployment proof이며 [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)의 P0 항목으로 관리합니다.
+
+운영 후보는 `python3 scripts/release_candidate.py qualify --workers 2`로 생성합니다.
+이 명령은 Topic Pack·코드 검증 후 현재 provider로 30건 이상을 재채점하며 Accuracy
+Gate가 `HOLD`이면 배포를 중단합니다. `READY` manifest의 Docker 검증 절차는
+[`docs/operation_runbook.md`](docs/operation_runbook.md#19-통합-release-candidate-실행)를 따릅니다.
 
 Topic Pack 개수는 `rubrics/generated/topic_pack_manifest.generated.json`을 기준으로 확인합니다. Legacy 통합 bank는 호환 목적으로 유지되며, legacy 파일의 Model Answer·Fact Topic 개수를 현재 Topic Pack coverage 개수로 사용하지 않습니다. Runtime bank 선택의 기준은 `rubric_bank_paths.py`와 `RUBRIC_BANK_MODE`입니다.
 

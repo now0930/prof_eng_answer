@@ -388,3 +388,40 @@ python3 scripts/check_accuracy_release_gate.py \
 ```
 
 `READY`일 때만 정확도 정책 변경을 운영 배포한다. `draft` label은 배포 판정에서 제외한다.
+
+## 19. 통합 Release Candidate 실행
+
+저장소가 clean 상태이고 현재 provider credential이 설정된 환경에서 후보를 생성한다.
+
+```bash
+cd ~/hermes/workspace/prof_eng_answer
+
+python3 scripts/release_candidate.py qualify --workers 2
+```
+
+출력된 manifest가 `qualification.status=READY`일 때만 배포할 수 있다. `HOLD`이면
+manifest에 실패 단계와 사유가 남고 Docker 명령은 실행되지 않는다.
+
+실제 endpoint smoke는 운영 환경마다 Telegram chat과 감시 방식이 다르므로 executable
+script로 명시한다. 이 script는 실제 endpoint를 확인하고 성공 시 0, 실패 시 0이 아닌
+exit code를 반환해야 한다.
+
+```bash
+python3 scripts/release_candidate.py deploy \
+  --manifest reports/release_candidates/<UTC>_<commit>/manifest.json \
+  --compose-file docker-compose.yaml \
+  --service prof-eng-answer-bot \
+  --endpoint-smoke-script /absolute/path/to/telegram_endpoint_smoke.sh
+```
+
+`deploy`는 다음을 자동 확인하고 같은 manifest에 저장한다.
+
+1. manifest commit과 현재 HEAD 일치 및 clean worktree
+2. Compose `build`가 있으면 image build, 없으면 bind-mount recreate
+3. container ID 교체, 시작 시각, image ID와 runtime `engine_commit`
+4. 핵심 채점 module의 host/container SHA256 parity
+5. container 내부 SIL production replay
+6. 운영자가 지정한 endpoint smoke
+
+모든 항목이 통과해야 `deployment.status=PASS`와
+`issue_close_eligible=true`가 기록된다. 이 값은 Issue 자동 종료 명령이 아니다.

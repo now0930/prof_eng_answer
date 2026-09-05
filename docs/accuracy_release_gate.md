@@ -33,6 +33,18 @@ python3 scripts/check_accuracy_release_gate.py \
   --require-ready
 ```
 
+운영 후보 전체 절차에서는 위 명령을 개별 실행하는 대신 다음 Orchestrator를 사용한다.
+이 명령은 기존 prediction을 재사용하지 않고 현재 provider로 reviewed case를 다시
+채점하며, `READY`가 아니면 exit code 2로 배포를 차단한다.
+
+```bash
+python3 scripts/release_candidate.py qualify --workers 2
+```
+
+결과와 provider 설정 fingerprint는
+`reports/release_candidates/<UTC>_<commit>/manifest.json`에 기록된다. provider API
+호출이 있으므로 credential과 비용·rate limit을 확인한 운영 환경에서 실행한다.
+
 `--require-ready`는 기준 미달 시 exit code 2를 반환한다. 2026-09-03 기준 현재
 30건은 모두 `reviewed`이며 25개 Topic, 4개 Question Type 분포 기준을 충족한다.
 다만 `present`를 `correct`로 취급하던 이전 prediction을 evidence-required 상태

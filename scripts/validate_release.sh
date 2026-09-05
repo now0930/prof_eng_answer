@@ -107,6 +107,7 @@ python3 -m py_compile \
   persisted_grade_replay.py \
   scripts/replay_persisted_grade.py \
   scripts/replay_sil_issue1_session.py \
+  scripts/release_candidate.py \
   tests/test_atomic_question_demand_contract_v2.py \
   tests/test_canonical_evaluation_ledger.py \
   tests/test_evidence_based_calibration.py \
@@ -120,6 +121,7 @@ python3 -m py_compile \
   tests/test_score_padding_invariance.py \
   tests/test_accuracy_release_gate.py \
   tests/test_cross_topic_accuracy_contract.py \
+  tests/test_release_candidate.py \
   scripts/rubric_audit/report_priority_minor_relationships.py \
   scripts/rubric_audit/audit_fact_anchor_quality.py \
   scripts/rubric_audit/build_rubric_work_pack.py \
@@ -228,6 +230,10 @@ python3 -m unittest scripts.test_grade_output_formatter
 echo
 echo "===== Issue #1 SIL runtime replay regression ====="
 python3 tests/test_sil_runtime_replay.py
+
+echo
+echo "===== release candidate fail-closed orchestration regression ====="
+python3 -m unittest tests.test_release_candidate
 
 echo
 echo "===== logic_check evaluator regression tests ====="

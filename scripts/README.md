@@ -34,6 +34,23 @@
 
 ## 2. Root Scripts
 
+### `release_candidate.py`
+
+Topic Pack, 전체 release, 전문가 정확도와 배포 Gate의 소유권을 유지하면서 실행
+순서와 증거 manifest를 통합하는 fail-closed Orchestrator이다.
+
+```bash
+python3 scripts/release_candidate.py qualify --workers 2
+
+python3 scripts/release_candidate.py deploy \
+  --manifest reports/release_candidates/<UTC>_<commit>/manifest.json \
+  --compose-file docker-compose.yaml \
+  --endpoint-smoke-script /absolute/path/to/endpoint-smoke.sh
+```
+
+`qualify`가 `READY`가 아니면 `deploy`는 Docker 명령을 실행하지 않는다. 배포는 clean
+worktree와 동일 commit을 요구하며 endpoint smoke를 추측하거나 생략하지 않는다.
+
 ### `rubric_manager.py`
 
 Rubric content와 Topic Pack을 관리하는 통합 CLI이다.

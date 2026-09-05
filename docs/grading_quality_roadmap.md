@@ -64,6 +64,12 @@
 
 ## 6. Release와 배포
 
+세 Gate는 소유권을 합치지 않고 `scripts/release_candidate.py`가 순서만 조정한다.
+`qualify`는 Topic Pack 전체 검증과 코드 release validation 이후 현재 provider로
+30건 이상을 새로 채점하고 Accuracy Gate가 `READY`인지 확인한다. `deploy`는 같은
+commit의 READY manifest만 받아 rebuild 또는 recreate와 배포 증거를 수집한다.
+Accuracy Gate가 `HOLD`이면 Docker 명령은 실행되지 않는다.
+
 ### 매 release
 
 1. 변경 범위의 focused regression
@@ -82,6 +88,8 @@
 6. 결과 artifact 저장
 
 fingerprint, parity, replay 또는 endpoint 증거가 빠지면 배포 완료로 기록하지 않는다.
+manifest의 `issue_close_eligible=true`는 기술 Gate가 모두 통과했다는 뜻이며 Issue를
+자동으로 닫지는 않는다.
 
 ## 7. 문서와 Issue 관리
 
