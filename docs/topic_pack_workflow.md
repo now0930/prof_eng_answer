@@ -12,35 +12,27 @@ Topic Pack 구조와 현재 inventory는 `topic_pack_architecture.md`, JSON 내�
 ```text
 요구사항과 Topic 경계를 먼저 확정한다.
 Topic Sheet는 사람이 검토한다.
-source JSON은 기존 schema를 기준으로 직접 작성한다.
+source JSON은 직접 작성하거나 검토 가능한 보조 생성 경로로 만든다.
 generated bank는 직접 수정하지 않는다.
 Topic source와 integration rebuild를 분리한다.
 한 Topic의 변경은 한 Topic 단위로 검증·commit한다.
 ```
 
-LLM을 사용할 수 있지만, opaque JSON generation 결과를 그대로 source of truth로 채택하지 않는다. 기존 schema와 validator를 기준으로 명시적으로 작성한 JSON diff를 사람이 검토한다.
+LLM 결과는 Topic Sheet 밖의 기술 사실을 추가하는 근거가 아니다. 보조 생성 결과가 신규 scaffold의 canonical 경로에 놓이더라도 사람의 의미 검토와 validator 통과 전에는 승인된 source가 아니다.
 
 ## 2. 전체 흐름
 
 ```text
-1. 문제 범위와 요구사항 Markdown 확정
-2. 기존 Topic 검색과 ownership 경계 확인
-3. topic_id 확정
-4. Topic Pack skeleton / README 준비
-5. Topic Sheet 작성·검토
-6. 인접 Topic schema 확인
-7. fact_anchor.json 직접 작성
-8. model_answer.json 직접 작성
-9. topic_importance.json 직접 작성
-10. logic_check.json 직접 작성
-11. topic focused validation
-12. 의미 감사와 boundary 검토
-13. Topic 단위 local commit
-14. batch/lane 완료 후 integration
-15. generated bank 6개 rebuild
-16. release validation
-17. clean checkout / GitHub Actions 확인
-18. push
+1. Candidate와 기존 Topic 중복 확인
+2. Topic Sheet에서 ownership·Fact·negative boundary 확정
+3. 동일 topic_id scaffold 생성
+4. source JSON 직접 작성 또는 Topic Sheet 기반 보조 생성
+5. README와 source JSON을 사람이 의미 검토
+6. 변경 Topic focused validation과 generated promote
+7. 변경 위험에 따라 routing/live smoke와 Golden case 보강
+8. 통합 시점에 전체 inventory validation
+9. commit·push 후 local/tracking/remote SHA와 CI 확인
+10. runtime 영향이 있으면 별도 deployment Gate 수행
 ```
 
 ## 3. 파일 구조
@@ -51,7 +43,9 @@ rubrics/topic_packs/<topic_id>/
 ├── fact_anchor.json
 ├── logic_check.json
 ├── model_answer.json
-└── topic_importance.json
+├── topic_importance.json
+├── question_demand_axes.json  # 선택: canonical explicit-demand contract
+└── topic_status.json          # 선택: 상태 metadata
 ```
 
 Topic Sheet:
@@ -144,9 +138,9 @@ Topic Sheet는 JSON authoring 전 구조화 input이다.
 13. Cross-topic handoff
 14. Human review checklist
 
-## 7. JSON 직접 authoring
+## 7. Source JSON authoring
 
-현재 표준 경로는 Topic Sheet를 확정한 뒤 source JSON을 직접 작성하는 방식이다.
+Topic Sheet를 확정한 뒤 직접 작성 또는 보조 생성 중 하나를 선택한다. 두 경로 모두 같은 schema, 사람의 diff 검토와 focused validation을 적용한다.
 
 기존 Topic Pack 중 schema가 가장 가까운 파일을 template로 사용한다.
 
@@ -168,7 +162,7 @@ JSON은 다음 원칙을 지킨다.
 - broad alias 최소화
 - expected question과 Topic ownership 일치
 
-Generator script가 존재하더라도 표준 source authoring을 대체하지 않는다. 사용한다면 초안 또는 schema 참고용으로만 사용하고 최종 JSON diff를 직접 검토한다.
+Generator는 authoring 시간을 줄이는 도구이며 승인 주체가 아니다. 기존 검토본을 보호하고, 생성 결과의 기술 사실·경계·교차 참조를 사람이 검토한다.
 
 ### 7.1 Topic Sheet 기반 보조 생성
 
@@ -445,125 +439,58 @@ scripts/validate_release.sh
 
 Push 후 GitHub Actions validation이 해당 commit에서 `success`인지 확인한다.
 
-## 23. Topic Pack 확장 실패 방지 Gate
+## 23. Topic Pack 확장 Gate (`ab94b69` 이후)
 
-이 절은 Topic Pack source, generated bank, classification policy와 검증 도구를 함께 변경할 때 적용한다.
+### 23.1 Source와 분류 정본
 
-상세 경과와 수치는 [`archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md`](archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md)에 기록한다.
+- 기술 내용은 사람이 검토한 Topic Sheet와 Topic Pack source가 소유한다.
+- 기본 source는 README와 4개 JSON이며 `question_demand_axes.json`, `topic_status.json`은 필요할 때만 추가한다.
+- generated 6개 파일은 builder output이므로 직접 수정하지 않는다.
+- 난이도 분류는 각 `topic_importance.json`에서 계산한다. Topic ID 목록이나 총계를 Python literal로 중복 등록하지 않는다.
 
-### 23.1 작업 전 절차 discovery
+### 23.2 빠른 기본 경로
 
-변경 전에 다음 문서와 runtime owner를 read-only로 확인한다.
+```bash
+# 명시한 Topic만 검증·promote
+python3 scripts/rubric_manager.py validate-topic-pack-release \
+  --topic-id <topic_id> --promote-generated
 
-```text
-docs/README.md
-docs/topic_pack_workflow.md
-docs/topic_pack_architecture.md
-docs/rubric_authoring_guide.md
-scripts/rubric_manager.py
-scripts/build_generated_rubrics.py
-scripts/test_topic_pack_contract.py
-scripts/test_topic_classification_policy.py
-scripts/validate_release.sh
+# topic-id를 생략하면 Git에서 변경된 Topic을 자동 선택
+python3 scripts/rubric_manager.py validate-topic-pack-release \
+  --promote-generated
+
+# 통합 시점에만 전체 inventory 검증
+python3 scripts/rubric_manager.py validate-topic-pack-release --all
 ```
 
-기존 절차와 validator 계약을 확인하지 않은 상태에서 schema, reference record 수, generated 구조 또는 classification 총계를 추정하지 않는다.
+외부 provider가 필요한 smoke는 기본 검증에서 제외하며, 실제 routing/provider 동작을 확인해야 할 때만 `--smoke`를 명시한다.
 
-### 23.2 Source와 generated 경계
+### 23.3 보조 생성 안전장치
 
-- Topic source를 먼저 확정한다.
-- `rubrics/generated/*.generated.json`은 builder로만 갱신한다.
-- generated version은 wall clock이 아니라 canonical source content에서 계산한다.
-- 같은 source로 builder를 두 번 실행했을 때 generated 6개 파일의 hash가 같아야 한다.
-- 기존 Topic record는 byte 또는 semantic 기준으로 유지되고, 의도한 Topic만 추가되어야 한다.
+- 4개 JSON 생성은 두 병렬 묶음과 마지막 일관성 검토로 수행한다.
+- 신규 scaffold만 기본 canonical 경로에 승격한다.
+- 기존 검토본은 `--overwrite` 없이는 바꾸지 않는다.
+- canonical을 보존한 후보만 필요하면 `--candidate-only`를 사용한다.
+- 생성 또는 검증 실패 시 canonical과 generated 상태를 작업 전으로 복구한다.
 
-### 23.3 Classification 계약
+### 23.4 위험 기반 회귀
 
-Classification policy는 다음을 모두 만족해야 한다.
+모든 신규 Topic에 고정 개수의 Golden case를 강제하지 않는다. 다음 변경에는 정답·오답·경계 사례를 추가한다.
 
-```text
-actual_topic_set == THEORY_CORE ∪ FIELD_APPLICATION ∪ DESIGN_EVALUATION
-세 분류 집합은 서로 겹치지 않음
-각 Topic은 정확히 한 분류에 속함
-분류별 count는 집합에서 계산
-전체 Topic 수를 별도 literal로 중복 고정하지 않음
-```
+- scoring, fatal/major 또는 coverage 의미를 바꾸는 경우
+- 안전 핵심 수식·단위·조건을 새로 소유하는 경우
+- 기존 Topic과 routing 경계가 겹치는 경우
+- 실제 과대·과소 채점 회귀를 수정하는 경우
 
-새 Topic을 추가할 때는 source 추가와 classification 등록을 같은 작업 범위에서 검증한다.
+별칭, 설명 문서처럼 채점 의미를 바꾸지 않는 변경은 focused validator로 충분하다.
 
-### 23.4 기존 dirty 상태 격리
+### 23.5 완료 조건
 
-작업 시작 시 다음을 snapshot한다.
+- 변경 Topic focused validation 통과
+- generated rebuild와 idempotence 통과
+- 의도하지 않은 기존 Topic 변경 없음
+- `git diff --check` 및 통합 전 `--all` 통과
+- runtime 영향이 있으면 정확도·배포 Gate를 별도 통과
+- local HEAD, tracking ref와 remote SHA 일치
 
-- tracked diff
-- index diff
-- non-ignored untracked
-- ignored untracked
-- 작업에서 제외할 기존 dirty 파일의 hash와 patch
-
-Commit 대상은 명시적 include manifest로 고정한다. 기존 dirty 파일은 exclude manifest에 기록한다. `git add .` 또는 범위가 불명확한 staging을 사용하지 않는다.
-
-감사 과정에서 생성된 ignored script는 repository mutation으로 오판하지 않도록 알려진 audit artifact로 정규화한다.
-
-### 23.5 검증 사다리
-
-권장 순서:
-
-```text
-schema·Python syntax
-→ topic focused tests
-→ classification policy test
-→ generated rebuild
-→ generated 6개 idempotence
-→ 기존 Topic 불변·신규 Topic 단일 추가 의미 감사
-→ target/candidate hash 비교
-→ 모든 commit 대상 trailing whitespace 검사
-→ git diff --check
-→ full release validation
-→ selective staging
-→ git diff --cached --check
-→ staged tree 감사
-→ local commit
-→ pre-push remote lineage 감사
-→ non-force push
-→ post-push audit
-```
-
-`git diff --check`는 untracked 신규 파일을 검사하지 않는다. 따라서 신규 파일은 직접 whitespace 검사하고, staging 후 `git diff --cached --check`를 반드시 실행한다.
-
-### 23.6 실패와 rollback
-
-- Read-only audit 실패는 repository와 index를 변경하지 않는다.
-- Selective staging 실패는 해당 include path만 `git restore --staged`로 복구한다.
-- Commit 후 검증 실패는 이전 HEAD, 검증된 index tree와 보호한 worktree prestate를 복원한다.
-- Push 직전에는 원격 HEAD가 local parent인지 다시 확인한다.
-- Force push는 사용하지 않는다.
-- Push 결과가 불명확하면 원격 HEAD를 다시 조회하여 성공·미수행·불명 상태를 구분한다.
-
-### 23.7 검증 증거 연결
-
-각 단계는 최소한 다음 artifact를 남긴다.
-
-```text
-summary.json
-checks.tsv
-scope 또는 file manifest
-필요한 diff·patch
-긴 test/validation log
-```
-
-다음 단계는 이전 단계의 `RESULT`, `CLASSIFICATION`, check 수, tree/hash와 scope manifest를 재검증한다. 화면 출력만 신뢰하여 다음 단계로 진행하지 않는다.
-
-### 23.8 완료 조건
-
-Topic Pack 확장은 다음 조건을 모두 만족할 때 완료한다.
-
-- source와 generated 계약 통과
-- generated idempotence 통과
-- classification set equality 통과
-- commit 대상 whitespace clean
-- pre-existing dirty 파일 제외 유지
-- staged tree와 commit tree 일치
-- local/remote HEAD 일치
-- ahead/behind `0/0`
-- post-push audit 통과
+과거 대규모 확장의 상세 postmortem은 [`archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md`](archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md)에만 보존한다.

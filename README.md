@@ -6,9 +6,9 @@
 
 > 이 문서는 프로젝트 소개, 빠른 실행, 현재 채점 계약과 검증 방법을 설명합니다. 상세 설계와 운영 기준은 [`docs/README.md`](docs/README.md)에서 찾을 수 있습니다.
 
-> 장기 채점 품질 로드맵과 현재 진행 상태는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다. 이슈는 구현 상태와 검증 증거를 관리하고, 고정 정책과 반복 운영 절차는 `docs/` 문서가 소유합니다.
+> 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-03): 답안 분량 기반 점수 상승과 장문 semantic 신호에 의한 atomic requirement `correct` 승격을 제거했습니다. `base_score=A+B+C+D+E`, `final_score=min(base_score, verified hard caps)`를 적용하며, 결정론적 logic fatal은 총점 14.5점, 검증된 핵심 major correctness defect는 17.4점으로 제한합니다. 20점 이상은 개별 core evidence와 D의 현장조건→판단→검증 근거가 있을 때만 허용합니다. 기존 prediction 30건을 새 상태 의미로 재측정한 [정확도 report](reports/expert_accuracy_seed_current.json)는 요구 상태 정확도 55.86%로 [release gate](docs/accuracy_release_gate.md) `HOLD`입니다. 실제 provider 재채점 후에만 배포를 재승인합니다.
+> 최신 개발 상태(2026-09-05): 채점 정책은 답안 분량 기반 상승과 근거 없는 `correct` 승격을 금지하며, 현재 [정확도 Gate](docs/accuracy_release_gate.md)는 요구 상태 정확도 55.86%로 `HOLD`입니다. Topic Pack workflow는 `ab94b69`에서 Topic 중립 생성, 병렬 authoring, 변경 Topic 중심 검증, 실패 rollback과 동적 classification을 적용했습니다. 코드 회귀 PASS는 정확도 `READY`나 운영 배포 완료를 뜻하지 않습니다.
 
 ---
 
@@ -341,9 +341,7 @@ Bind mount 환경에서 `engine_commit`을 읽을 때는 repository 경로를 �
 
 계약의 canonical lens는 `IMPLEMENTATION_EVALUATION`입니다. Provider projection은 8개 requirement ID의 exact cardinality, ID set과 순서를 모두 만족해야 합니다. 첫 응답이 계약과 다르면 strict contract로 한 번만 재시도하고, 재시도도 불일치하면 불완전한 coverage를 채점 결과로 통과시키지 않고 fail-closed 처리합니다.
 
-Stage35E2 기준 focused regression 6/6과 full release validation은 통과했습니다. Fresh live session `20260830_081215_5960502198`과 `20260830_081351_5960502198`에서도 동일 lens와 fatal 판정 보존을 확인했습니다.
-
-현재 알려진 제한은 canonical lens reconciliation 뒤 최종 Telegram `question_type_coverage_summary`가 `unknown`으로 축약되어 8축 상태 집계가 표시되지 않는 점입니다. 내부 exact projection을 임의의 type-specific sub-criteria로 대체하지 않으며, explicit 8축 summary만 보존하는 Stage35E3 작업은 [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 보류 상태로 추적합니다.
+초기 Stage35E2 회귀와 live session에서 canonical lens와 fatal 판정 보존을 확인했고, 이후 canonical evaluation ledger와 final coverage persistence를 연결했습니다. 현재 회귀는 8개 explicit 요구축의 상태·언급률·정확 충족률·오답/누락 집계가 최종 structured grade와 Telegram 출력에 유지되는지 검증합니다. 미평가 요구의 `unknown`은 허용하지만, 확정된 8축 전체가 과거처럼 빈 summary로 소실되는 상태는 현재 제한이 아닙니다.
 
 ---
 
@@ -637,32 +635,46 @@ topic_pack_manifest.generated.json
 ### 9.3 앞으로의 신규 Topic Pack 추가 절차
 
 ```text
-1. Candidate 선정
+1. Candidate 선정과 기존 Topic 중복 확인
    ↓
-2. Read-only 중복·ownership·인접 Topic 경계 감사
+2. Topic Sheet에서 ownership·핵심 Fact·negative boundary 확정
    ↓
-3. Topic Sheet 작성·확정
+3. create-topic-pack으로 동일 topic_id scaffold 생성
    ↓
-4. 동일 topic_id의 Topic Pack source 4종 작성
+4. 직접 작성하거나 Topic Sheet 기반 보조 생성
    ↓
-5. Topic 전용 focused semantic regression 작성·통과
+5. 생성된 4개 JSON과 README를 사람이 의미 검토
    ↓
-6. LLM 의미감사와 source 경계 검토
+6. 단일 Topic release validation과 generated promote
    ↓
-7. Classification / Coverage / Roadmap 영향 판정
+7. 필요할 때 routing/live smoke와 위험 기반 Golden case 추가
    ↓
-8. Generated 6-bank 재생성
+8. 통합 시점에 전체 inventory release validation
    ↓
-9. Generated 의미감사 + semantic idempotence 감사
+9. commit·push 후 local/tracking/remote SHA와 CI 확인
    ↓
-10. focused / source / generated / Router / release 검증
-   ↓
-11. 검증된 파일만 Topic 단위 독립 commit
-   ↓
-12. 별도 push 후 local / tracking / remote SHA 검증
+10. runtime 영향이 있으면 별도 배포 Gate 수행
 ```
 
-단일 신규 Topic은 `validate-topic-pack-release --topic-id <topic_id> --promote-generated`로 검증합니다. 인자 없는 실행은 Git에서 변경된 Topic만 선택하며, 전체 inventory 검증은 통합 시점에 `--all`로 명시합니다. 외부 모델을 호출하는 smoke는 기본 경로에서 제외하고 필요할 때 `--smoke`로 실행합니다.
+대표 명령:
+
+```bash
+python3 scripts/rubric_manager.py create-topic-pack \
+  --topic-id <topic_id> \
+  --title "<한글 제목>" \
+  --question-type <QUESTION_TYPE> \
+  --difficulty <DIFFICULTY>
+
+python3 scripts/rubric_manager.py generate-topic-pack-from-sheet \
+  --topic-id <topic_id> \
+  --sheet docs/topic_sheets/<topic_id>.md
+
+python3 scripts/rubric_manager.py validate-topic-pack-release \
+  --topic-id <topic_id> \
+  --promote-generated
+```
+
+신규 scaffold는 보조 생성 성공 후 canonical source로 승격되지만 승인된 source가 되는 것은 사람의 diff 검토와 validator 통과 이후입니다. 기존 검토본은 기본적으로 보호되며 초안만 만들 때는 `--candidate-only`, 의도적으로 교체할 때만 `--overwrite`를 사용합니다. 인자 없는 release는 Git에서 변경된 Topic을 자동 선택하고, 전체 inventory는 통합 시점에만 `--all`로 검증합니다. 외부 모델이 필요한 smoke는 기본 검증에서 분리하며 필요할 때만 `--smoke`를 명시합니다.
 
 운영 원칙:
 
@@ -673,14 +685,15 @@ topic_pack_manifest.generated.json
 - Topic Sheet에서 먼저 positive ownership과 negative boundary를 확정한 뒤 Topic Pack source에 반영합니다.
 - `fact_anchor.json`, `logic_check.json`, `model_answer.json`, `topic_importance.json`은 동일한 Topic 의미 경계를 공유해야 합니다.
 - 인접 Topic 내용은 `fatal_wrong_claims`, `rejected_explanations`, `low_score_patterns` 같은 negative boundary로 둘 수 있지만 현재 Topic의 positive ownership으로 사용하지 않습니다.
-- `docs/topic_pack_classification.md`의 PRIMARY/SECONDARY ownership은 실제 의미 범위가 변할 때만 수정합니다.
+- Topic 난이도 분류의 정본은 각 `topic_importance.json`입니다. Topic ID 목록과 총계를 별도 Python literal로 중복 등록하지 않습니다.
+- `docs/topic_pack_classification.md`의 PRIMARY/SECONDARY ownership은 공식 출제범위의 의미 관계가 변할 때만 수정합니다.
 - Coverage Matrix는 공식 criterion 상태가 실제로 변할 때만 갱신합니다.
 - 최신동향·법령·표준처럼 정적 Topic Pack으로 고정하기 어려운 범위는 `DYNAMIC_REVIEW_LANE`으로 관리할 수 있습니다.
-- LLM 의미감사는 저장소 스크립트가 LLM을 호출하도록 만들지 않고 별도 review 단계에서 수행합니다.
+- 보조 생성기는 Topic Sheet만 기술 내용의 근거로 사용하며 다른 Topic의 공식·오류 규칙을 주입하지 않습니다.
 - builder의 timestamp 등 의도적으로 변하는 field는 byte equality가 아니라 해당 field를 정규화한 **semantic idempotence**로 확인합니다.
 - production Python, container 전용 hostname, mount, dependency 또는 runtime 경계가 바뀌지 않는 Topic 작업은 host focused validation을 기본으로 하며 불필요한 container 전체 회귀를 반복하지 않습니다.
 - 병렬 Topic 확장은 Topic별 local commit을 유지하고 Lane 전체 검증 후 Lane branch를 한 번만 push합니다.
-- shared classification / coverage / generated 변경은 Lane 결과를 통합한 뒤 별도 integration 단계에서 수행합니다.
+- shared coverage와 generated 변경은 Lane 결과를 통합한 뒤 별도 integration 단계에서 수행합니다.
 - commit과 push는 분리하고 force push는 사용하지 않습니다.
 - push 후 local HEAD, tracking ref, remote SHA가 동일한지 확인합니다.
 
@@ -827,6 +840,8 @@ git diff --check -- README.md docs
 | LLM provider | [`docs/llm_provider.md`](docs/llm_provider.md) |
 | Rubric 작성 | [`docs/rubric_authoring_guide.md`](docs/rubric_authoring_guide.md) |
 | Topic Pack workflow | [`docs/topic_pack_workflow.md`](docs/topic_pack_workflow.md) |
+| 채점 품질·Golden Set·배포 관리 | [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md) |
+| 정확도 release gate | [`docs/accuracy_release_gate.md`](docs/accuracy_release_gate.md) |
 | Logic Check 운영 | [`docs/logic_check_profiles_readme.md`](docs/logic_check_profiles_readme.md) |
 
 ---

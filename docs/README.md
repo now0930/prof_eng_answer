@@ -4,7 +4,7 @@
 
 프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
 
-> 최신 상태(2026-08-30): Stage35D Topic Pack 8축 bridge와 Stage35E2 exact provider projection·canonical lens 고정은 `d277bb8d78a0cb546ea622da1f105b9444007304`에서 완료되었습니다. 두 fresh live session에서 `IMPLEMENTATION_EVALUATION` lens와 λ/PFD fatal 보존을 확인했지만, Telegram 공개 coverage summary가 `unknown`으로 축약되는 Stage35E3 경계는 현재 보류 상태입니다. 진행 증거와 완료 조건은 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다.
+> 최신 상태(2026-09-05): canonical demand ledger와 최종 coverage summary 보존은 구현되어 지속 회귀 중입니다. Topic Pack authoring·검증은 `ab94b69` 기준으로 변경 Topic 중심의 빠른 경로와 실패 rollback을 사용합니다. 전문가 정확도 Gate는 요구 상태 정확도 55.86%로 `HOLD`이며, 실제 provider 재채점 전에는 운영 배포를 재승인하지 않습니다. 고정 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
 ---
 
@@ -41,7 +41,8 @@
 | Topic Pack 구조·현재 inventory 확인 | [`topic_pack_architecture.md`](topic_pack_architecture.md) | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
 | 새 topic 추가 또는 기존 topic 보강 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
 | Logic Check 운영 기준 확인 | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) |
-| 장기 채점 품질 로드맵과 진행 상태 확인 | [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) | [`grading_architecture.md`](grading_architecture.md), [`operation_runbook.md`](operation_runbook.md) |
+| 현재 구현·배포 상태와 실행 증거 확인 | [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) | [`grading_quality_roadmap.md`](grading_quality_roadmap.md), [`operation_runbook.md`](operation_runbook.md) |
+| 채점 품질·Golden Set·release/deployment 관리 정책 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md) | [`accuracy_release_gate.md`](accuracy_release_gate.md), [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) |
 | 교차 주제 보정 corpus와 의미 drift 대응 | [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md) | [`operation_runbook.md`](operation_runbook.md), `calibration/grading_integrity_drift_baseline.json` |
 | Logic Check Profile 초안 확인 | [`logic_check_profile_generator_prompt.md`](logic_check_profile_generator_prompt.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
 | Rule-based Logic Check JSON 초안 확인 | [`logic_check_json_generator_prompt.md`](logic_check_json_generator_prompt.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
@@ -68,6 +69,8 @@
 | [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) | Difficulty Profile, THEORY_CORE, recommended ceiling과 applied cap |
 | [`llm_provider.md`](llm_provider.md) | provider routing, fallback, JSON parsing과 Python 후처리 경계 |
 | [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md) | 과대채점 회귀 corpus, 의미 fingerprint, 이웃 주제 음성 사례와 기준선 변경 절차 |
+| [`grading_quality_roadmap.md`](grading_quality_roadmap.md) | 정확도 Gate, Golden Set, Topic Pack과 release/deployment의 장기 관리 정책 |
+| [`accuracy_release_gate.md`](accuracy_release_gate.md) | 전문가 검토 dataset의 운영 배포 기준과 실행법 |
 
 ### Rubric와 Topic Pack
 
@@ -75,7 +78,7 @@
 |---|---|
 | [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, manifest 기준 77개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | Fact Anchor, Model Answer, Topic Importance와 Logic Check source 작성 기준 |
-| [`topic_pack_workflow.md`](topic_pack_workflow.md) | 요구사항 → 직접 source JSON authoring → focused validation → integration rebuild → release/CI 검증 |
+| [`topic_pack_workflow.md`](topic_pack_workflow.md) | Topic Sheet → 직접/보조 source authoring → 대상 검증 → integration rebuild → release/CI 검증 |
 
 ### Logic Check
 
@@ -111,6 +114,7 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 | Correctness owner | verified Fact 오류는 기본 C owner | `verified_defect_reconciliation.py`, `layer_evidence_guard.py` |
 | 최종 저장 | score reconciliation 후 coverage finalizer를 적용한 객체 저장 | `grading_agents.py`, `bot.py` |
 | Session | 완료 세션 격리, 동일 초 ID 충돌 방지 | `bot.py` |
+| 전문가 정확도 Gate | `HOLD`: 요구 상태 정확도 55.86% | `reports/expert_accuracy_seed_current.json`, [`accuracy_release_gate.md`](accuracy_release_gate.md) |
 | Runtime provenance | process-stable 6개 필드; image/container deployment proof는 별도 | `runtime_grading_provenance.py`, [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) |
 
 ### Runtime provenance와 deployment proof 경계
@@ -125,13 +129,13 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 - host와 container 핵심 module SHA256 parity
 - container production replay와 Telegram endpoint smoke
 
-구현 상태와 남은 deployment gate는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다. Issue #1은 진행 상태와 증거를 관리하며, 세부 정책과 반복 절차는 `grading_architecture.md`, `operation_runbook.md`와 향후 품질 로드맵 문서가 source of truth를 담당합니다.
+구현 상태와 남은 deployment gate는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 추적합니다. Issue #1은 진행 상태와 증거를 관리하며, 세부 정책과 반복 절차는 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), `grading_architecture.md`와 `operation_runbook.md`가 소유합니다.
 
 Question Type을 semantic grader의 자유 선택 결과로 설명하지 않습니다. 현재 lens는 문제문 기반 deterministic routing과 confidence gate가 기준입니다. 일치하는 Topic Pack이 `question_demand_axes.json`에서 `canonical_primary_lens`를 제공하면 해당 contract가 canonical owner가 되며 답안 본문은 lens 결정에 사용하지 않습니다.
 
 Stage35E2는 provider의 explicit requirement projection이 Topic Pack 요구축과 정확히 일치할 때만 결과를 수용합니다. 첫 응답이 불일치하면 strict contract로 한 번 재시도하고, 두 번째 응답도 불일치하면 undersplit 또는 freeform coverage를 통과시키지 않고 fail-closed 처리합니다.
 
-현재 Stage35E3 이전의 알려진 경계는 canonical lens reconciliation 뒤 type-specific sub-criteria를 무효화할 때 최종 `question_type_coverage_summary`까지 0건/`unknown`으로 축약될 수 있다는 점입니다. 내부 explicit 8축 contract와 provider projection을 임의의 세부기준으로 바꾸지 않으며, 공개 summary 복원 작업은 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)의 보류 항목으로 관리합니다.
+Canonical lens reconciliation 뒤 type-specific sub-criteria를 무효화하더라도 문제문에서 확정한 explicit 요구축은 canonical evaluation ledger에 보존됩니다. 현재 회귀는 8축 상태·언급률·정확 충족률·오답/누락 집계가 최종 structured grade와 Telegram summary에 유지되는지 검증합니다. 미평가 개별 요구는 `unknown`으로 남을 수 있지만, 확정된 요구축 전체가 빈 summary로 소실되어서는 안 됩니다.
 
 Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorrect`가 됩니다. 이 동기화는 기본적으로 score-neutral이며, 동일 오류를 B와 C 또는 D/E에 중복 귀속하지 않습니다.
 
@@ -162,7 +166,8 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | 교차 주제 채점 의미 drift | `grading_integrity_drift_runbook.md` | `scripts/check_grading_integrity_drift.py`, `scripts/replay_sil_issue1_session.py` |
 | Topic Pack 구조·inventory | `topic_pack_architecture.md` | `rubric_bank_paths.py`, generated manifest |
 | Rubric source와 generated bank | `rubric_authoring_guide.md` | `rubric_bank_paths.py`, `rubric_registry.py` |
-| Topic Pack 생성·검증·integration rebuild | `topic_pack_workflow.md` | `scripts/rubric_manager.py`, release validation |
+| Topic Pack 생성·검증·integration rebuild | `topic_pack_workflow.md` | `scripts/generate_topic_pack_from_sheet.py`, `scripts/validate_topic_pack_release.py` |
+| 채점 품질·Golden Set·배포 Gate | `grading_quality_roadmap.md` | `accuracy_release_gate.py`, release/deployment validation |
 
 이 인덱스에는 세부 알고리즘을 복제하지 않습니다. 새 정책을 추가할 때는 상세 문서와 runtime owner를 함께 등록합니다.
 
@@ -228,7 +233,7 @@ Topic Pack source JSON을 만들기 전에 사람이 검토하는 구조화 Mark
 15. 제출문 정규화가 기술 내용이나 점수를 재작성한다고 설명하지 않습니다.
 16. Fatal·Major 판정 일관성 보정이 숫자 점수를 변경한다고 설명하지 않습니다.
 17. Topic Pack explicit demand와 Question Type의 일반 세부기준을 같은 schema 또는 같은 owner로 설명하지 않습니다.
-18. Stage35E3 완료 전에는 내부 8축 projection이 Telegram 공개 summary에 모두 표시된다고 설명하지 않습니다.
+18. 코드 회귀 PASS, 정확도 Gate `READY`와 deployment proof 완료를 같은 상태로 설명하지 않습니다.
 
 ---
 
@@ -238,7 +243,8 @@ Topic Pack source JSON을 만들기 전에 사람이 검토하는 구조화 Mark
 
 ```bash
 git diff --check -- README.md docs
-python3 tests/test_stage35e2_provider_eight_axis_canonical_lens.py
+python3 tests/test_sil_requirement_coverage.py
+python3 tests/test_sil_output_consistency.py
 ```
 
 추가로 확인할 항목:
@@ -251,7 +257,8 @@ python3 tests/test_stage35e2_provider_eight_axis_canonical_lens.py
 - 현재 runtime owner 파일
 - 오래된 semantic lens와 session 재사용 설명 제거
 - Topic Pack exact demand ID·순서·cardinality와 canonical lens 계약
-- Stage35E3 보류 중인 public summary 경계를 완료된 기능처럼 서술하지 않았는지
+- 정확도 Gate의 수치가 현재 report와 일치하는지
+- Topic Pack 절차가 변경 Topic/`--topic-id`, `--all`, `--smoke` 경계를 구분하는지
 
 문서가 runtime 정책을 설명한다면 관련 focused regression 결과와 비교합니다. 코드나 JSON을 함께 변경하지 않았다면 불필요한 container smoke를 반복하지 않습니다.
 

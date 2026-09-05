@@ -11,7 +11,8 @@ rubrics/topic_packs/<topic_id>/
   logic_check.json
   model_answer.json
   topic_importance.json
-  topic_status.json
+  question_demand_axes.json  # 선택
+  topic_status.json          # 선택
 ```
 
 `rubrics/generated/*.generated.json`은 runtime에서 읽기 쉽게 합친 build output이다. 직접 수정하지 않는다.
@@ -40,23 +41,21 @@ Rubric은 가능한 JSON source로 관리하고, Python 코드는 routing, parsi
 
 ## 2. Topic Pack 작성 순서
 
-현재 표준 authoring은 요구사항과 Topic Sheet를 먼저 확정한 뒤 **기존 schema를 기준으로 source JSON을 직접 작성**하는 방식이다.
+현재 표준 authoring은 요구사항과 Topic Sheet를 먼저 확정한 뒤 기존 schema에 맞춰 source JSON을 직접 작성하거나 보조 생성하는 방식이다.
 
 ```text
 요구사항 Markdown / Topic boundary
   → Topic Pack README
   → Topic Sheet
   → 인접 Topic schema 확인
-  → fact_anchor.json 직접 작성
-  → model_answer.json 직접 작성
-  → topic_importance.json 직접 작성
-  → logic_check.json 직접 작성
+  → 4개 source JSON 직접 작성 또는 보조 생성
+  → 사람이 기술 사실·경계·교차 참조 diff 검토
   → focused validation
   → Topic 단위 commit
   → integration 단계 generated rebuild
 ```
 
-`generate_topic_sheet_from_readme.py`, `generate_topic_pack_from_sheet.py` 같은 helper가 존재하더라도 최종 source of truth를 자동 생성기에 위임하지 않는다. 사용한다면 초안·schema 참고용으로 한정하고, 최종 JSON은 기존 schema와 validator를 기준으로 사람이 diff를 검토한다.
+`generate_topic_sheet_from_readme.py`, `generate_topic_pack_from_sheet.py`는 authoring 보조 도구다. 신규 scaffold의 canonical 경로에 결과가 생성되어도 사람의 의미 검토와 validator 통과 전에는 승인된 source가 아니다. 기존 검토본은 `--overwrite` 없이는 교체하지 않는다.
 
 Topic Pack 구조와 current inventory는 `topic_pack_architecture.md`, 전체 실행 순서는 `topic_pack_workflow.md`를 우선한다.
 ## 3. Model Answer 작성 기준
