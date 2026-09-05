@@ -69,7 +69,10 @@ def _run(
 
 
 def _git(*args: str, check: bool = True) -> str:
-    return _run(("git", *args), check=check).stdout.strip()
+    return _run(
+        ("git", "-c", f"safe.directory={ROOT}", *args),
+        check=check,
+    ).stdout.strip()
 
 
 def _atomic_json(path: Path, value: dict[str, Any]) -> None:
