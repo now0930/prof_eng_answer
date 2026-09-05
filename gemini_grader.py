@@ -1595,7 +1595,10 @@ def gemini_semantic_grade(*args, **kwargs):
         question_text,
         canonical_primary_lens=contract.get("primary_lens"),
     )
-    if enforce_exact:
+    if (
+        _stage35e2_contract_requirement_ids(contract)
+        and _stage35e2_projection_matches_contract(attached, contract)
+    ):
         attached = _stage35e2_attach_projection_validation(
             attached,
             contract,

@@ -563,6 +563,7 @@ python3 -B scripts/test_question_demand_contract.py
 python3 -B tests/test_stage35d_topic_pack_demand_bridge.py
 # STAGE35E2_PROVIDER_PROJECTION_LENS_REGRESSION_V1
 python3 -B tests/test_stage35e2_provider_eight_axis_canonical_lens.py
+python3 -B tests/test_native_projection_scope_guard.py
 python3 -B tests/test_sil_target_operations_regression_contract.py
 python3 -B tests/test_submission_boundary_fail_closed.py
 python3 -B tests/test_sil_target_topic_pack_routing.py

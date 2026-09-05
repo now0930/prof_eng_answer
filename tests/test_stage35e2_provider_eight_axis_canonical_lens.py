@@ -261,6 +261,41 @@ def test_semantic_wrapper_fails_closed_after_invalid_retry():
         "explicit_requirement_coverage"
     ]["requirements"]
     assert rows == []
+
+
+def test_generic_exact_projection_is_validated_without_topic_pack_retry():
+    question = "Valve Authority의 정의와 계산 경계 및 제어 성능 영향을 설명하시오."
+    contract = build_question_demand_contract(question)
+    assert contract.get("topic_pack_demand_axes_applied") is not True
+    rows = [
+        {
+            "requirement_id": row["requirement_id"],
+            "requirement": row["requirement_text"],
+            "status": "present",
+            "mentioned": True,
+            "evidence": "직접 근거",
+            "is_core": row.get("is_core", True),
+        }
+        for row in contract["requirements"]
+    ]
+    original = gemini_grader._grade_with_general_evidence
+    calls = []
+
+    def fake(question_text, *args, **kwargs):
+        calls.append(question_text)
+        return {"parsed": {"question_type_coverage": {
+            "explicit_requirement_coverage": {"requirements": rows},
+        }}}
+
+    gemini_grader._grade_with_general_evidence = fake
+    try:
+        result = gemini_grader.gemini_semantic_grade(question)
+    finally:
+        gemini_grader._grade_with_general_evidence = original
+    assert len(calls) == 1
+    validation = result["explicit_requirement_projection_validation"]
+    assert validation["valid"] is True
+    assert validation["provider_attempts"] == 1
     assert result["question_demand_contract"]["requirements"]
 
 
@@ -270,7 +305,7 @@ def main():
         for name, value in globals().items()
         if name.startswith("test_") and callable(value)
     )
-    assert len(tests) == 8
+    assert len(tests) == 9
     for name, test in tests:
         test()
         print(f"PASS {name}")

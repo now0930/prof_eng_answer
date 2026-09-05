@@ -5777,6 +5777,7 @@ def _phase2_postprocess_grade(legacy_result):
         layer_scores = _phase3_apply_question_demand_evidence_to_layer_scores(
             layer_scores,
             question_demand_evidence_for_scoring,
+            semantic_evaluation=gemini_eval,
         )
 
     topic_cap_topic_id = (
@@ -9839,6 +9840,60 @@ def _stage7_native_qd_rows(value):
     return rows
 
 
+def _stage7_native_projection_scope_validation(
+    question_demand_evidence,
+    semantic_evaluation,
+):
+    """Require the native evidence denominator to match canonical demands."""
+    native_rows = (
+        question_demand_evidence.get("demands")
+        if isinstance(question_demand_evidence, dict)
+        else None
+    )
+    native_ids = [
+        str(row.get("demand_id") or "").strip()
+        for row in (native_rows if isinstance(native_rows, list) else [])
+        if isinstance(row, dict)
+    ]
+    parsed = (
+        semantic_evaluation.get("parsed")
+        if isinstance(semantic_evaluation, dict)
+        else None
+    )
+    contract = (
+        parsed.get("question_demand_contract")
+        if isinstance(parsed, dict)
+        else None
+    )
+    canonical_rows = (
+        contract.get("requirements")
+        if isinstance(contract, dict)
+        else None
+    )
+    canonical_ids = [
+        str(row.get("requirement_id") or "").strip()
+        for row in (canonical_rows if isinstance(canonical_rows, list) else [])
+        if isinstance(row, dict)
+    ]
+    valid = bool(
+        native_ids
+        and canonical_ids
+        and native_ids == canonical_ids
+        and len(native_ids) == len(set(native_ids))
+    )
+    return {
+        "marker": "NATIVE_PROJECTION_CANONICAL_SCOPE_GUARD_V1",
+        "valid": valid,
+        "native_demand_ids": native_ids,
+        "canonical_requirement_ids": canonical_ids,
+        "score_effect": "enabled" if valid else "diagnostic_only",
+        "reason": (
+            "exact_canonical_demand_identity"
+            if valid else "native_denominator_outside_canonical_scope"
+        ),
+    }
+
+
 
 
 def _stage7_native_fact_rows(value):
@@ -10096,6 +10151,21 @@ def _stage7_native_phase6_dimension_metadata(layer_scores):
 
 
 def _phase3_apply_question_demand_evidence_to_layer_scores(*args, **kwargs):
+    semantic_evaluation = kwargs.pop("semantic_evaluation", None)
+    question_demand_evidence = args[1] if len(args) >= 2 else kwargs.get(
+        "question_demand_evidence"
+    )
+    scope_validation = _stage7_native_projection_scope_validation(
+        question_demand_evidence,
+        semantic_evaluation,
+    )
+    if isinstance(semantic_evaluation, dict) and not scope_validation["valid"]:
+        layer_scores = args[0] if args else kwargs.get("layer_scores")
+        return _stage7_native_update_layer(
+            layer_scores,
+            "B",
+            metadata={"native_projection_scope_validation": scope_validation},
+        )
     result = _stage7_legacy_phase3_apply_question_demand_evidence_to_layer_scores(
         *args, **kwargs
     )
@@ -10142,14 +10212,19 @@ def _phase6_apply_gemini_layer_scores(*args, **kwargs):
         }
     )
     if fact_projection is not None:
+        scope_validation = _stage7_native_projection_scope_validation(
+            question_demand_evidence,
+            legacy_args[1] if len(legacy_args) > 1 else None,
+        )
         result = _stage7_native_update_layer(
             result,
             "C",
-            score=fact_projection["score"],
+            score=(fact_projection["score"] if scope_validation["valid"] else None),
             metadata={
                 "native_fact_projection_v1": fact_projection,
                 "native_semantic_contract_v1": True,
                 "native_fact_source_v3": "linked_observed_anchor_join",
+                "native_projection_scope_validation": scope_validation,
             },
         )
     return result
@@ -10289,7 +10364,7 @@ _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION = (
     "final_grade_cache_v4"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION = (
-    "verified_correctness_cap_output_policy_v5"
+    "verified_correctness_cap_output_policy_v6"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_DIR = (
     BASE_DIR / "data" / "final_grade_cache"
