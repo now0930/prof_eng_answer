@@ -17,6 +17,9 @@ import shlex
 import subprocess
 import sys
 from typing import Any, Sequence
+import urllib.error
+import urllib.parse
+import urllib.request
 
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -118,6 +121,57 @@ def _provider_context() -> dict[str, Any]:
     }
 
 
+def _safe_endpoint(raw_url: str) -> str:
+    parsed = urllib.parse.urlsplit(raw_url)
+    host = parsed.hostname or ""
+    if parsed.port:
+        host = f"{host}:{parsed.port}"
+    return urllib.parse.urlunsplit((parsed.scheme, host, parsed.path, "", ""))
+
+
+def _provider_preflight() -> dict[str, Any]:
+    """Verify required local model reachability and provider credentials."""
+    context = _provider_context()
+    provider = str(context["effective_no_chat_provider"]).strip().lower()
+    gemini_ready = bool(
+        os.getenv("GEMINI_API_KEY")
+        or os.getenv("GOOGLE_API_KEY")
+        or os.getenv("GOOGLE_GENERATIVE_AI_API_KEY")
+    )
+    clova_ready = bool(os.getenv("CLOVA_API_KEY"))
+    if provider == "gemini" and not gemini_ready:
+        raise ReleaseFailure("Gemini is selected but its API credential is missing")
+    if provider == "clova" and not clova_ready:
+        raise ReleaseFailure("CLOVA is selected but CLOVA_API_KEY is missing")
+    if provider == "auto" and not (gemini_ready or clova_ready):
+        raise ReleaseFailure("auto provider has no Gemini or CLOVA API credential")
+    if provider not in {"auto", "gemini", "clova"}:
+        raise ReleaseFailure(f"invalid effective provider: {provider}")
+
+    ollama_url = os.getenv("OLLAMA_URL", "http://ollama:11434").rstrip("/")
+    tags_url = f"{ollama_url}/api/tags"
+    try:
+        with urllib.request.urlopen(tags_url, timeout=5) as response:
+            payload = json.loads(response.read().decode("utf-8"))
+    except (OSError, urllib.error.URLError, json.JSONDecodeError) as exc:
+        raise ReleaseFailure(f"Ollama preflight failed: {_safe_endpoint(ollama_url)}") from exc
+    model = str(context["ollama_model"])
+    available = {
+        str(item.get("name") or item.get("model") or "")
+        for item in payload.get("models", [])
+        if isinstance(item, dict)
+    }
+    if model not in available:
+        raise ReleaseFailure(f"Ollama model is unavailable: {model}")
+    context.update({
+        "gemini_credential_present": gemini_ready,
+        "clova_credential_present": clova_ready,
+        "ollama_endpoint": _safe_endpoint(ollama_url),
+        "ollama_model_available": True,
+    })
+    return context
+
+
 def _record_stage(
     manifest: dict[str, Any],
     section: str,
@@ -154,6 +208,14 @@ def qualify(args: argparse.Namespace) -> Path:
     _atomic_json(manifest_path, manifest)
 
     try:
+        manifest["qualification"]["provider_context"] = _provider_preflight()
+        manifest["qualification"]["stages"].append({
+            "name": "provider_preflight",
+            "returncode": 0,
+            "completed_at": _utc_now(),
+        })
+        _atomic_json(manifest_path, manifest)
+
         command = (sys.executable, "scripts/rubric_manager.py", "validate-topic-pack-release", "--all")
         result = _run(command)
         _record_stage(manifest, "qualification", "topic_pack_all", result)

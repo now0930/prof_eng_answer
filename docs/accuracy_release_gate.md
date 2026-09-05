@@ -35,7 +35,9 @@ python3 scripts/check_accuracy_release_gate.py \
 
 운영 후보 전체 절차에서는 위 명령을 개별 실행하는 대신 다음 Orchestrator를 사용한다.
 이 명령은 기존 prediction을 재사용하지 않고 현재 provider로 reviewed case를 다시
-채점하며, `READY`가 아니면 exit code 2로 배포를 차단한다.
+채점하며, `READY`가 아니면 exit code 2로 배포를 차단한다. 실행 전에 선택 provider의
+credential, Ollama endpoint와 지정 model을 사전점검하므로 준비되지 않은 환경에서는
+전체 release와 30건 채점을 시작하지 않는다.
 
 ```bash
 python3 scripts/release_candidate.py qualify --workers 2

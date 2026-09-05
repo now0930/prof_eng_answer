@@ -59,6 +59,8 @@ class ReleaseCandidateTest(unittest.TestCase):
                 return "a" * 40 if argv == ("rev-parse", "HEAD") else ""
 
             with patch.object(release, "_git", side_effect=fake_git), patch.object(
+                release, "_provider_preflight", return_value={"effective_no_chat_provider": "gemini"}
+            ), patch.object(
                 release, "_run", side_effect=fake_run
             ):
                 with self.assertRaisesRegex(release.ReleaseFailure, "HOLD"):
@@ -68,6 +70,14 @@ class ReleaseCandidateTest(unittest.TestCase):
             self.assertEqual(data["deployment"]["status"], "NOT_RUN")
             self.assertFalse(data["issue_close_eligible"])
             self.assertEqual(data["qualification"]["prediction_count"], 30)
+
+    def test_provider_preflight_rejects_missing_credentials_before_ollama(self):
+        with patch.dict("os.environ", {"LLM_PROVIDER": "auto"}, clear=True), patch(
+            "urllib.request.urlopen"
+        ) as urlopen:
+            with self.assertRaisesRegex(release.ReleaseFailure, "no Gemini or CLOVA"):
+                release._provider_preflight()
+        urlopen.assert_not_called()
 
     def test_deploy_records_fingerprint_parity_and_close_eligibility(self):
         with tempfile.TemporaryDirectory() as temporary:

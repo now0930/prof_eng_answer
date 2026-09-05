@@ -97,6 +97,7 @@ python3 -m py_compile \
   scripts/check_grading_integrity_drift.py \
   scripts/measure_expert_accuracy.py \
   scripts/check_accuracy_release_gate.py \
+  scripts/regrade_expert_accuracy_seed.py \
   expert_accuracy_benchmark.py \
   accuracy_release_gate.py \
   evaluation_ledger.py \

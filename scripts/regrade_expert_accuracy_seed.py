@@ -155,11 +155,19 @@ def main() -> None:
             case_id, prediction = run_case(case)
             prediction_map[case_id] = prediction
     else:
-        with ThreadPoolExecutor(max_workers=args.workers) as executor:
-            futures = {executor.submit(run_case, case): case for case in cases}
+        executor = ThreadPoolExecutor(max_workers=args.workers)
+        futures = {executor.submit(run_case, case): case for case in cases}
+        try:
             for future in as_completed(futures):
                 case_id, prediction = future.result()
                 prediction_map[case_id] = prediction
+        except BaseException:
+            for future in futures:
+                future.cancel()
+            executor.shutdown(wait=True, cancel_futures=True)
+            raise
+        else:
+            executor.shutdown(wait=True)
     predictions = [prediction_map[case["case_id"]] for case in cases]
 
     prediction_path = output_dir / "predictions.jsonl"
