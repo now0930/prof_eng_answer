@@ -4,6 +4,7 @@ from __future__ import annotations
 import json
 import os
 import re
+from copy import deepcopy
 from pathlib import Path
 from typing import Any, Callable
 
@@ -14,76 +15,6 @@ DEFAULT_PROMPT_PATH = BASE_DIR / "rubrics" / "output_prompts" / "compact_grade_s
 
 
 
-def _logic_check_corrective_points_from_locals(local_vars, limit=3):
-    """Find logic_check_evaluation from the current formatter scope and build correction points."""
-    def find_grade_like(obj, depth=0):
-        if depth > 4:
-            return None
-
-        if isinstance(obj, dict):
-            logic_eval = obj.get("logic_check_evaluation")
-            if isinstance(logic_eval, dict):
-                return obj
-
-            # Sometimes the logic evaluation itself is passed around directly.
-            if isinstance(obj.get("findings"), list) and (
-                obj.get("mode") is not None or obj.get("fatal_error_detected") is not None
-            ):
-                return {"logic_check_evaluation": obj}
-
-            for key in [
-                "grade",
-                "result",
-                "grade_data",
-                "grade_result",
-                "data",
-                "summary",
-                "payload",
-                "formatted",
-            ]:
-                found = find_grade_like(obj.get(key), depth + 1)
-                if found:
-                    return found
-
-            for value in obj.values():
-                found = find_grade_like(value, depth + 1)
-                if found:
-                    return found
-
-        elif isinstance(obj, (list, tuple)):
-            for value in obj:
-                found = find_grade_like(value, depth + 1)
-                if found:
-                    return found
-
-        return None
-
-    if not isinstance(local_vars, dict):
-        return _logic_check_corrective_points({}, limit=limit)
-
-    # Prefer explicit local variable names first.
-    for name in [
-        "grade",
-        "result",
-        "grade_data",
-        "grade_result",
-        "data",
-        "summary",
-        "payload",
-    ]:
-        found = find_grade_like(local_vars.get(name))
-        if found:
-            return _logic_check_corrective_points(found, limit=limit)
-
-    # Fallback: scan every local object.
-    for value in local_vars.values():
-        found = find_grade_like(value)
-        if found:
-            return _logic_check_corrective_points(found, limit=limit)
-
-    return _logic_check_corrective_points({}, limit=limit)
-
-
 def _logic_check_corrective_points(grade, limit=3):
     """Build correction points from logic_check_evaluation findings.
 
@@ -92,7 +23,11 @@ def _logic_check_corrective_points(grade, limit=3):
     """
     logic_eval = {}
     if isinstance(grade, dict):
-        logic_eval = grade.get("logic_check_evaluation") or {}
+        logic_eval = (
+            grade.get("logic_check_evaluation")
+            or grade.get("logic_check")
+            or {}
+        )
 
     points = []
 
@@ -229,7 +164,7 @@ def _extract_breakdown(grade: dict[str, Any]) -> list[dict[str, Any]]:
 
 
 
-def _stage7_legacy_attach_native_feedback_observability(payload):
+def _attach_feedback_observability_base(payload):
     # NATIVE_FEEDBACK_OBSERVABILITY_V1
     if not isinstance(payload, dict):
         return payload
@@ -287,7 +222,7 @@ def _stage7_legacy_attach_native_feedback_observability(payload):
     return out
 
 
-def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
+def _build_base_payload(grade: dict[str, Any]) -> dict[str, Any]:
     logic = _extract_logic(grade)
 
     total = grade.get("total_score", grade.get("score", 0))
@@ -500,7 +435,7 @@ def _plan_c_sanitize_unverified_core_error(
 
     return value
 
-def _normalise_summary(llm_obj: dict[str, Any] | None, payload: dict[str, Any]) -> dict[str, Any]:
+def _normalise_base_summary(llm_obj: dict[str, Any] | None, payload: dict[str, Any]) -> dict[str, Any]:
     llm_obj = llm_obj if isinstance(llm_obj, dict) else {}
     llm_obj = (
         _plan_c_sanitize_unverified_core_error(
@@ -538,7 +473,7 @@ def _normalise_summary(llm_obj: dict[str, Any] | None, payload: dict[str, Any]) 
                 "C항목: 핵심 이론 정의 오류로 내용 점수가 제한됩니다.",
                 "D/E항목: 현장 적용 설명은 일부 장점이나 fatal 오류를 보완하지 못합니다.",
             ],
-            "improvements": _logic_check_corrective_points_from_locals(locals()),
+            "improvements": _logic_check_corrective_points(payload),
         }
 
     section_basis = _items(
@@ -623,7 +558,7 @@ def _build_prompt(payload: dict[str, Any]) -> str:
     return "\n\n".join(x for x in prompt_parts if x)
 
 
-def _render(summary: dict[str, Any], payload: dict[str, Any]) -> str:
+def _render_base(summary: dict[str, Any], payload: dict[str, Any]) -> str:
     score = payload["score"]
     summary = (
         _plan_c_sanitize_unverified_core_error(
@@ -801,16 +736,8 @@ def summarize_grade_for_telegram(
         payload,
     )
 
-# STRUCTURED_VERDICT_CONSISTENCY_INTEGRATION_V1
-from copy import deepcopy as _verdict_consistency_deepcopy
-
-_verdict_consistency_previous_build_payload = (
-    _build_payload
-)
-
-
-def _stage7_legacy_build_payload_v2(grade):
-    payload = _verdict_consistency_previous_build_payload(
+def _build_structured_payload(grade):
+    payload = _build_base_payload(
         grade
     )
 
@@ -839,7 +766,7 @@ def _stage7_legacy_build_payload_v2(grade):
 
         if value is not None:
             payload[key] = (
-                _verdict_consistency_deepcopy(
+                deepcopy(
                     value
                 )
             )
@@ -847,17 +774,10 @@ def _stage7_legacy_build_payload_v2(grade):
     return payload
 
 
-_verdict_consistency_previous_normalise_summary = (
-    _normalise_summary
-)
-
-
 def _normalise_summary(llm_obj, payload):
-    summary = (
-        _verdict_consistency_previous_normalise_summary(
-            llm_obj,
-            payload,
-        )
+    summary = _normalise_base_summary(
+        llm_obj,
+        payload,
     )
 
     from verdict_consistency import (
@@ -869,23 +789,23 @@ def _normalise_summary(llm_obj, payload):
         payload,
     )
 # NATIVE_SEMANTIC_OBSERVABILITY_PROJECTION_V2
-def _stage7_find_native_projection(payload, key):
+def _find_native_projection(payload, key):
     if isinstance(payload, dict):
         if key in payload and isinstance(payload[key], dict):
             return payload[key]
         for value in payload.values():
-            found = _stage7_find_native_projection(value, key)
+            found = _find_native_projection(value, key)
             if found is not None:
                 return found
     elif isinstance(payload, (list, tuple)):
         for value in payload:
-            found = _stage7_find_native_projection(value, key)
+            found = _find_native_projection(value, key)
             if found is not None:
                 return found
     return None
 
 
-def _stage7_append_unique_text(target, value):
+def _append_unique_text(target, value):
     if not isinstance(value, str):
         return
     text = value.strip()
@@ -894,16 +814,16 @@ def _stage7_append_unique_text(target, value):
 
 
 def _attach_native_feedback_observability(payload):
-    out = _stage7_legacy_attach_native_feedback_observability(payload)
+    out = _attach_feedback_observability_base(payload)
     if not isinstance(out, dict):
         return out
 
     out = dict(out)
 
-    qd = _stage7_find_native_projection(
+    qd = _find_native_projection(
         out, "native_question_demand_projection_v1"
     )
-    fact = _stage7_find_native_projection(
+    fact = _find_native_projection(
         out, "native_fact_projection_v1"
     )
 
@@ -926,7 +846,7 @@ def _attach_native_feedback_observability(payload):
                 text = row.get("text")
                 state = row.get("state")
                 if isinstance(text, str) and text.strip():
-                    _stage7_append_unique_text(elements, text)
+                    _append_unique_text(elements, text)
                 if state == 3:
                     fulfilled += 1
                 elif state == 2:
@@ -937,17 +857,17 @@ def _attach_native_feedback_observability(payload):
             total = fulfilled + explained + weak
             if total:
                 if weak == 0 and fulfilled == total:
-                    _stage7_append_unique_text(
+                    _append_unique_text(
                         characteristics,
                         "문제의 요구사항을 모두 설명하고 조건까지 충족한 답안이다.",
                     )
                 elif weak == 0:
-                    _stage7_append_unique_text(
+                    _append_unique_text(
                         characteristics,
                         "문제의 주요 요구사항은 설명했으며 일부 요구는 조건 충족의 구체화가 필요하다.",
                     )
                 else:
-                    _stage7_append_unique_text(
+                    _append_unique_text(
                         characteristics,
                         "설명이 부족하거나 언급 수준에 머문 문제 요구사항을 구체적으로 보완할 필요가 있다.",
                     )
@@ -964,7 +884,7 @@ def _attach_native_feedback_observability(payload):
                 text = row.get("text")
                 state = row.get("state")
                 if isinstance(text, str) and text.strip():
-                    _stage7_append_unique_text(elements, text)
+                    _append_unique_text(elements, text)
                 if state == 3:
                     connected += 1
                 elif state == 2:
@@ -975,31 +895,31 @@ def _attach_native_feedback_observability(payload):
             total = connected + correct + weak
             if total:
                 if weak == 0 and connected == total:
-                    _stage7_append_unique_text(
+                    _append_unique_text(
                         characteristics,
                         "핵심 사실을 정확히 설명하고 문제 요구와의 기술적 관계까지 연결한 답안이다.",
                     )
                 elif weak == 0:
-                    _stage7_append_unique_text(
+                    _append_unique_text(
                         characteristics,
                         "핵심 사실은 대체로 정확하며 문제 요구와의 연결을 더 명확히 하면 완성도가 높아진다.",
                     )
                 else:
-                    _stage7_append_unique_text(
+                    _append_unique_text(
                         characteristics,
                         "누락되거나 언급 수준인 핵심 사실을 정확한 기술적 관계로 보완할 필요가 있다.",
                     )
 
     for value in out.get("feedback_elements") or []:
-        _stage7_append_unique_text(elements, value)
+        _append_unique_text(elements, value)
     for value in out.get("feedback_characteristics") or []:
-        _stage7_append_unique_text(characteristics, value)
+        _append_unique_text(characteristics, value)
 
     out["feedback_elements"] = elements
     out["feedback_characteristics"] = characteristics
     return out
 # STAGE7_BUILD_PAYLOAD_NATIVE_OBSERVABILITY_V2
-def _stage7_sum_walk_dicts(value, _seen=None):
+def _walk_dicts(value, _seen=None):
     if _seen is None:
         _seen = set()
     oid = id(value)
@@ -1009,13 +929,13 @@ def _stage7_sum_walk_dicts(value, _seen=None):
     if isinstance(value, dict):
         yield value
         for child in value.values():
-            yield from _stage7_sum_walk_dicts(child, _seen)
+            yield from _walk_dicts(child, _seen)
     elif isinstance(value, (list, tuple)):
         for child in value:
-            yield from _stage7_sum_walk_dicts(child, _seen)
+            yield from _walk_dicts(child, _seen)
 
 
-def _stage7_sum_bool(row, keys):
+def _first_bool(row, keys):
     for key in keys:
         value = row.get(key)
         if isinstance(value, bool):
@@ -1040,7 +960,7 @@ def _stage7_sum_bool(row, keys):
     return None
 
 
-def _stage7_sum_num(row, keys):
+def _first_number(row, keys):
     for key in keys:
         value = row.get(key)
         if isinstance(value, (int, float)) and not isinstance(value, bool):
@@ -1053,10 +973,10 @@ def _stage7_sum_num(row, keys):
     return None
 
 
-def _stage7_sum_qd_rows(value):
+def _question_demand_rows(value):
     rows = []
     seen = set()
-    for row in _stage7_sum_walk_dicts(value):
+    for row in _walk_dicts(value):
         demand_id = row.get("demand_id")
         text = row.get("text") or row.get("demand_text") or row.get("requirement")
         if not isinstance(demand_id, str) or not isinstance(text, str):
@@ -1075,11 +995,11 @@ def _stage7_sum_qd_rows(value):
             continue
         seen.add(sig)
 
-        verified = _stage7_sum_bool(row, ("verified", "explained"))
-        covered = _stage7_sum_bool(row, ("covered", "present", "matched"))
-        linked = _stage7_sum_num(row, ("linked_anchor_count",))
-        observed = _stage7_sum_num(row, ("observed_anchor_count",))
-        level = _stage7_sum_num(row, ("level", "demand_level", "level_score"))
+        verified = _first_bool(row, ("verified", "explained"))
+        covered = _first_bool(row, ("covered", "present", "matched"))
+        linked = _first_number(row, ("linked_anchor_count",))
+        observed = _first_number(row, ("observed_anchor_count",))
+        level = _first_number(row, ("level", "demand_level", "level_score"))
 
         if verified is True:
             if (
@@ -1108,8 +1028,8 @@ def _stage7_sum_qd_rows(value):
     return rows
 
 
-def _stage7_sum_qd_projection(value):
-    rows = _stage7_sum_qd_rows(value)
+def _derive_question_demand_projection(value):
+    rows = _question_demand_rows(value)
     if not rows:
         return None
     substantive = sum(1 for row in rows if row["state"] >= 2)
@@ -1124,25 +1044,18 @@ def _stage7_sum_qd_projection(value):
     }
 
 
-def _stage7_sum_append_unique(target, value):
-    if isinstance(value, str):
-        text = value.strip()
-        if text and text not in target:
-            target.append(text)
-
-
-def _build_payload(grade):
-    payload = _stage7_legacy_build_payload_v2(grade)
+def _build_native_payload(grade):
+    payload = _build_structured_payload(grade)
     if not isinstance(payload, dict):
         return payload
 
     out = dict(payload)
-    projection = _stage7_find_native_projection(
+    projection = _find_native_projection(
         grade,
         "native_question_demand_projection_v1",
     )
     if projection is None:
-        projection = _stage7_sum_qd_projection(grade)
+        projection = _derive_question_demand_projection(grade)
 
     if isinstance(projection, dict):
         coverage = projection.get("coverage")
@@ -1152,9 +1065,9 @@ def _build_payload(grade):
         elements = []
         for row in projection.get("states") or []:
             if isinstance(row, dict):
-                _stage7_sum_append_unique(elements, row.get("text"))
+                _append_unique_text(elements, row.get("text"))
         for value in out.get("feedback_elements") or []:
-            _stage7_sum_append_unique(elements, value)
+            _append_unique_text(elements, value)
 
         characteristics = []
         states = [
@@ -1166,22 +1079,22 @@ def _build_payload(grade):
             weak = sum(1 for state in states if state < 2)
             fulfilled = sum(1 for state in states if state == 3)
             if weak == 0 and fulfilled == len(states):
-                _stage7_sum_append_unique(
+                _append_unique_text(
                     characteristics,
                     "문제의 요구사항을 모두 설명하고 요구 조건까지 충족한 답안이다.",
                 )
             elif weak == 0:
-                _stage7_sum_append_unique(
+                _append_unique_text(
                     characteristics,
                     "문제의 주요 요구사항을 설명했으며 일부 요구 조건의 구체화를 보완할 수 있다.",
                 )
             else:
-                _stage7_sum_append_unique(
+                _append_unique_text(
                     characteristics,
                     "언급 수준이거나 설명이 부족한 문제 요구사항을 구체적인 기술 관계로 보완할 필요가 있다.",
                 )
         for value in out.get("feedback_characteristics") or []:
-            _stage7_sum_append_unique(characteristics, value)
+            _append_unique_text(characteristics, value)
 
         out["feedback_elements"] = elements
         out["feedback_characteristics"] = characteristics
@@ -1189,12 +1102,8 @@ def _build_payload(grade):
 
     return out
 
-# STAGE17E5_FINAL_DECISION_DISPLAY_BOUNDARY_V1
-_STAGE17E5_PREVIOUS_BUILD_PAYLOAD = _build_payload
-
-
-def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
-    payload = _STAGE17E5_PREVIOUS_BUILD_PAYLOAD(
+def _build_decision_payload(grade: dict[str, Any]) -> dict[str, Any]:
+    payload = _build_native_payload(
         grade
     )
 
@@ -1245,14 +1154,10 @@ def _build_payload(grade: dict[str, Any]) -> dict[str, Any]:
 
     return payload
 
-# STAGE18B3_STRUCTURED_DEFECT_OUTPUT_PRIORITY_V1
-from copy import deepcopy as _stage18b3_deepcopy
-
-_STAGE18B3_PREVIOUS_BUILD_PAYLOAD = _build_payload
-_STAGE18B3_PREVIOUS_RENDER = _render
+# Structured defect and applied-cap projection helpers.
 
 
-def _stage18b4_grade_contract(grade, key):
+def _grade_contract(grade, key):
     if not isinstance(grade, dict):
         return {}
     direct = grade.get(key)
@@ -1264,7 +1169,7 @@ def _stage18b4_grade_contract(grade, key):
     return {}
 
 
-def _stage18b4_actual_numeric_cap(grade):
+def _actual_numeric_cap(grade):
     """Project only *applied* one-way caps into public formatter state."""
     sources = []
     caps = []
@@ -1281,7 +1186,7 @@ def _stage18b4_actual_numeric_cap(grade):
         return str(reason or "").strip()
 
     reasons = []
-    verified = _stage18b4_grade_contract(
+    verified = _grade_contract(
         grade, "verified_correctness_score_cap"
     )
     if verified.get("score_effect") == "hard_cap":
@@ -1291,7 +1196,7 @@ def _stage18b4_actual_numeric_cap(grade):
             "검증된 correctness 오류에 따른 총점 상한",
         ))
 
-    difficulty = _stage18b4_grade_contract(
+    difficulty = _grade_contract(
         grade, "difficulty_ceiling_evaluation"
     )
     if difficulty.get("cap_applied") is True:
@@ -1301,7 +1206,7 @@ def _stage18b4_actual_numeric_cap(grade):
             difficulty.get("reason") or difficulty.get("fatal_error_reason"),
         ))
 
-    explicit = _stage18b4_grade_contract(
+    explicit = _grade_contract(
         grade, "explicit_requirement_cap_evaluation"
     )
     if explicit.get("applied") is True:
@@ -1311,7 +1216,7 @@ def _stage18b4_actual_numeric_cap(grade):
             explicit.get("reason"),
         ))
 
-    high_score = _stage18b4_grade_contract(
+    high_score = _grade_contract(
         grade, "high_score_eligibility"
     )
     if high_score.get("cap_applied") is True:
@@ -1342,10 +1247,10 @@ def _stage18b4_actual_numeric_cap(grade):
     }
 
 
-def _stage18b4_attach_actual_numeric_cap(payload, grade):
+def _attach_actual_numeric_cap(payload, grade):
     if not isinstance(payload, dict):
         return payload
-    cap = _stage18b4_actual_numeric_cap(grade)
+    cap = _actual_numeric_cap(grade)
     if not cap["cap_applied"]:
         return payload
     out = dict(payload)
@@ -1362,7 +1267,7 @@ def _stage18b4_attach_actual_numeric_cap(payload, grade):
     return out
 
 
-def _stage18b3_find_reconciliation(
+def _find_verified_defect_reconciliation(
     grade: Any,
 ) -> dict[str, Any]:
     if not isinstance(grade, dict):
@@ -1420,20 +1325,20 @@ def _build_payload(
     grade = enforce_final_decision_consistency(
         grade
     )
-    payload = _STAGE18B3_PREVIOUS_BUILD_PAYLOAD(
+    payload = _build_decision_payload(
         grade
     )
 
     if not isinstance(payload, dict):
         return payload
 
-    payload = _stage18b4_attach_actual_numeric_cap(
+    payload = _attach_actual_numeric_cap(
         payload,
         grade,
     )
 
     reconciliation = (
-        _stage18b3_find_reconciliation(
+        _find_verified_defect_reconciliation(
             grade
         )
     )
@@ -1444,7 +1349,7 @@ def _build_payload(
     out = dict(payload)
     out[
         "verified_defect_reconciliation"
-    ] = _stage18b3_deepcopy(
+    ] = deepcopy(
         reconciliation
     )
     out[
@@ -1479,7 +1384,7 @@ def _render(
         summary,
         payload,
     )
-    return _STAGE18B3_PREVIOUS_RENDER(
+    return _render_base(
         prioritized,
         payload,
     )

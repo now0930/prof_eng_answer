@@ -233,7 +233,7 @@ def _explanation(row: dict[str, Any]) -> str:
     )
 
 
-def _signals(payload: Any) -> dict[str, Any]:
+def _collect_base_signals(payload: Any) -> dict[str, Any]:
     defects = _defects(payload)
     correctness = []
     hard_correctness = []
@@ -394,7 +394,7 @@ def _requirement_improvements(
     return result
 
 
-def _structured_improvements(
+def _base_structured_improvements(
     payload: Any,
     signals: dict[str, Any],
 ) -> list[str]:
@@ -441,7 +441,7 @@ def _structured_improvements(
     return _dedupe_text(values, limit=4)
 
 
-def _structured_key_reasons(
+def _base_structured_key_reasons(
     signals: dict[str, Any],
 ) -> list[str]:
     values = []
@@ -525,7 +525,7 @@ def _deterministic_verdict(
     return "", ""
 
 
-def reconcile_verdict_summary(
+def _reconcile_base_summary(
     summary: Any,
     payload: Any,
 ) -> Any:
@@ -535,7 +535,7 @@ def reconcile_verdict_summary(
     if not has_structured_grading_contract(payload):
         return summary
 
-    signals = _signals(payload)
+    signals = _collect_signals(payload)
     allow_hard_error = bool(
         signals["logic_fatal"]
         or signals["hard_correctness"]
@@ -841,7 +841,7 @@ def _restrict_coverage_full_credit(
                 ] = True
 
 
-def enforce_final_decision_consistency(
+def _enforce_base_final_decision(
     payload: Any,
 ) -> Any:
     # This function discovers no new facts, changes no
@@ -851,7 +851,7 @@ def enforce_final_decision_consistency(
     if not isinstance(payload, dict):
         return payload
 
-    signals = _signals(payload)
+    signals = _collect_signals(payload)
     major_or_fatal, fatal_error = (
         _verified_error_levels(signals)
     )
@@ -974,23 +974,8 @@ def enforce_final_decision_consistency(
     }
     return updated
 
-# STAGE18B3_STRUCTURED_DEFECT_OUTPUT_PRIORITY_V1
-_STAGE18B3_PREVIOUS_SIGNALS = _signals
-_STAGE18B3_PREVIOUS_STRUCTURED_IMPROVEMENTS = (
-    _structured_improvements
-)
-_STAGE18B3_PREVIOUS_STRUCTURED_KEY_REASONS = (
-    _structured_key_reasons
-)
-_STAGE18B3_PREVIOUS_RECONCILE_VERDICT_SUMMARY = (
-    reconcile_verdict_summary
-)
-_STAGE18B3_PREVIOUS_ENFORCE_FINAL_DECISION = (
-    enforce_final_decision_consistency
-)
-
-
-def _stage18b3_verified_reconciliation(
+# Structured defect priority helpers.
+def _verified_reconciliation(
     payload: Any,
 ) -> dict[str, Any]:
     root = _dict(payload)
@@ -1031,11 +1016,11 @@ def _stage18b3_verified_reconciliation(
     )
 
 
-def _stage18b3_verified_defect_ids(
+def _verified_defect_ids(
     payload: Any,
 ) -> set[str]:
     reconciliation = (
-        _stage18b3_verified_reconciliation(
+        _verified_reconciliation(
             payload
         )
     )
@@ -1079,7 +1064,7 @@ def _stage18b3_verified_defect_ids(
     return result
 
 
-def _stage18b3_defect_id(
+def _defect_id(
     row: dict[str, Any],
 ) -> str:
     return _text(
@@ -1089,17 +1074,17 @@ def _stage18b3_defect_id(
     )
 
 
-def _stage18b3_priority_metadata(
+def _structured_priority_metadata(
     payload: Any,
     signals: dict[str, Any],
 ) -> dict[str, Any]:
     reconciliation = (
-        _stage18b3_verified_reconciliation(
+        _verified_reconciliation(
             payload
         )
     )
     applied_ids = sorted(
-        _stage18b3_verified_defect_ids(
+        _verified_defect_ids(
             payload
         )
     )
@@ -1158,14 +1143,14 @@ def _stage18b3_priority_metadata(
     }
 
 
-def _signals(
+def _collect_signals(
     payload: Any,
 ) -> dict[str, Any]:
-    signals = _STAGE18B3_PREVIOUS_SIGNALS(
+    signals = _collect_base_signals(
         payload
     )
     verified_ids = (
-        _stage18b3_verified_defect_ids(
+        _verified_defect_ids(
             payload
         )
     )
@@ -1176,7 +1161,7 @@ def _signals(
             "correctness",
             [],
         )
-        if _stage18b3_defect_id(row)
+        if _defect_id(row)
         in verified_ids
     ]
     verified_hard = [
@@ -1185,7 +1170,7 @@ def _signals(
             "hard_correctness",
             [],
         )
-        if _stage18b3_defect_id(row)
+        if _defect_id(row)
         in verified_ids
     ]
 
@@ -1201,7 +1186,7 @@ def _signals(
     return signals
 
 
-def _stage18b3_prioritized_text(
+def _prioritized_text(
     verified_rows: list[dict[str, Any]],
     fallback: list[str],
     *,
@@ -1256,7 +1241,7 @@ def _structured_improvements(
     signals: dict[str, Any],
 ) -> list[str]:
     fallback = (
-        _STAGE18B3_PREVIOUS_STRUCTURED_IMPROVEMENTS(
+        _base_structured_improvements(
             payload,
             signals,
         )
@@ -1280,7 +1265,7 @@ def _structured_improvements(
     if not verified:
         return fallback
 
-    return _stage18b3_prioritized_text(
+    return _prioritized_text(
         verified,
         fallback,
         label="검증된 기술 오류",
@@ -1292,7 +1277,7 @@ def _structured_key_reasons(
     signals: dict[str, Any],
 ) -> list[str]:
     fallback = (
-        _STAGE18B3_PREVIOUS_STRUCTURED_KEY_REASONS(
+        _base_structured_key_reasons(
             signals
         )
     )
@@ -1315,7 +1300,7 @@ def _structured_key_reasons(
     if not verified:
         return fallback
 
-    return _stage18b3_prioritized_text(
+    return _prioritized_text(
         verified,
         fallback,
         label="",
@@ -1328,7 +1313,7 @@ def reconcile_verdict_summary(
     payload: Any,
 ) -> Any:
     updated = (
-        _STAGE18B3_PREVIOUS_RECONCILE_VERDICT_SUMMARY(
+        _reconcile_base_summary(
             summary,
             payload,
         )
@@ -1337,7 +1322,7 @@ def reconcile_verdict_summary(
     if not isinstance(updated, dict):
         return updated
 
-    signals = _signals(payload)
+    signals = _collect_signals(payload)
     verified_ids = signals.get(
         "verified_defect_ids"
     ) or set()
@@ -1347,18 +1332,18 @@ def reconcile_verdict_summary(
 
     updated[
         "structured_defect_output_priority"
-    ] = _stage18b3_priority_metadata(
+    ] = _structured_priority_metadata(
         payload,
         signals,
     )
     return updated
 
 
-def enforce_final_decision_consistency(
+def _enforce_structured_final_decision(
     payload: Any,
 ) -> Any:
     updated = (
-        _STAGE18B3_PREVIOUS_ENFORCE_FINAL_DECISION(
+        _enforce_base_final_decision(
             payload
         )
     )
@@ -1366,7 +1351,7 @@ def enforce_final_decision_consistency(
     if not isinstance(updated, dict):
         return updated
 
-    signals = _signals(updated)
+    signals = _collect_signals(updated)
     verified_ids = signals.get(
         "verified_defect_ids"
     ) or set()
@@ -1376,17 +1361,16 @@ def enforce_final_decision_consistency(
 
     updated[
         "structured_defect_output_priority"
-    ] = _stage18b3_priority_metadata(
+    ] = _structured_priority_metadata(
         updated,
         signals,
     )
     return updated
 
-# STAGE23I_FINAL_SCORE_STATUS_NARRATIVE_CONSISTENCY_V4
-import functools as _stage23i_functools
+# Final score, status, and narrative consistency.
 
 
-_STAGE23I_POSITIVE_ACCURACY_MARKERS = (
+_POSITIVE_ACCURACY_MARKERS = (
     "정확한 Fact",
     "정확한 fact",
     "Fact가 정확",
@@ -1402,9 +1386,16 @@ _STAGE23I_POSITIVE_ACCURACY_MARKERS = (
     "요구한 모든 핵심 항목에 직접 답",
     "정확한 설명이 우수",
     "핵심 개념 인지와 정확",
+    "충실히 다루",
+    "충실히",
+    "구조적으로 잘 서술",
+    "잘 서술",
+    "잘 설명",
+    "대체로 충족",
+    "정확하게 설명",
 )
 
-_STAGE23I_NARRATIVE_FIELDS = (
+_NARRATIVE_FIELDS = (
     "summary",
     "one_line_summary",
     "overall_comment",
@@ -1413,13 +1404,13 @@ _STAGE23I_NARRATIVE_FIELDS = (
     "overall_assessment",
 )
 
-_STAGE23I_CAUTION_TEXT = (
+_ACCURACY_CAUTION_TEXT = (
     "구조화 검증에서 오답 또는 충돌 항목이 확인되어 "
     "정확성 보완이 필요합니다."
 )
 
 
-def _stage23i_number(value):
+def _number(value):
     if isinstance(value, bool):
         return None
     try:
@@ -1428,11 +1419,11 @@ def _stage23i_number(value):
         return None
 
 
-def _stage23i_nonempty_list(value):
+def _nonempty_list(value):
     return isinstance(value, list) and bool(value)
 
 
-def _stage23i_collect_accuracy_conflicts(value):
+def _collect_accuracy_conflicts(value):
     sources = []
 
     def add(source):
@@ -1451,7 +1442,7 @@ def _stage23i_collect_accuracy_conflicts(value):
                     "contradicted_count",
                     "fatal_count",
                 }:
-                    number = _stage23i_number(child)
+                    number = _number(child)
                     if number is not None and number > 0:
                         add(child_path)
 
@@ -1460,7 +1451,7 @@ def _stage23i_collect_accuracy_conflicts(value):
                     "wrong_criteria",
                     "contradicted",
                     "contradictions",
-                } and _stage23i_nonempty_list(child):
+                } and _nonempty_list(child):
                     add(child_path)
 
                 if key_lower in {
@@ -1508,7 +1499,7 @@ def _stage23i_collect_accuracy_conflicts(value):
         summary = ledger.get("summary")
         counts = summary.get("status_counts") if isinstance(summary, dict) else {}
         if isinstance(counts, dict) and any(
-            (_stage23i_number(counts.get(status)) or 0) > 0
+            (_number(counts.get(status)) or 0) > 0
             for status in ("partial", "incorrect", "missing", "unknown")
         ):
             add("canonical_evaluation_ledger.summary.status_counts")
@@ -1516,25 +1507,25 @@ def _stage23i_collect_accuracy_conflicts(value):
     return sources
 
 
-def _stage23i_positive_accuracy_claim(value):
+def _positive_accuracy_claim(value):
     if not isinstance(value, str):
         return False
     return any(
         marker in value
-        for marker in _STAGE23I_POSITIVE_ACCURACY_MARKERS
+        for marker in _POSITIVE_ACCURACY_MARKERS
     )
 
 
-def _stage23i_rewrite_narratives(output, conflict_sources):
+def _rewrite_conflicting_narratives(output, conflict_sources):
     rewritten = []
 
     if not conflict_sources:
         return rewritten
 
-    for field in _STAGE23I_NARRATIVE_FIELDS:
+    for field in _NARRATIVE_FIELDS:
         value = output.get(field)
-        if _stage23i_positive_accuracy_claim(value):
-            output[field] = _STAGE23I_CAUTION_TEXT
+        if _positive_accuracy_claim(value):
+            output[field] = _ACCURACY_CAUTION_TEXT
             rewritten.append(field)
 
     strengths = output.get("strengths")
@@ -1542,8 +1533,8 @@ def _stage23i_rewrite_narratives(output, conflict_sources):
         prepared = []
         changed = False
         for item in strengths:
-            if _stage23i_positive_accuracy_claim(item):
-                prepared.append(_STAGE23I_CAUTION_TEXT)
+            if _positive_accuracy_claim(item):
+                prepared.append(_ACCURACY_CAUTION_TEXT)
                 changed = True
             else:
                 prepared.append(item)
@@ -1554,7 +1545,7 @@ def _stage23i_rewrite_narratives(output, conflict_sources):
     return rewritten
 
 
-def _stage23i_status_from_score(
+def _status_from_score(
     total,
     official,
     practical,
@@ -1577,10 +1568,10 @@ def enforce_final_score_status_narrative_consistency(
 
     output = dict(parsed)
 
-    total = _stage23i_number(
+    total = _number(
         output.get("total_score")
     )
-    final_total = _stage23i_number(
+    final_total = _number(
         output.get("final_total_score")
     )
 
@@ -1598,7 +1589,7 @@ def enforce_final_score_status_narrative_consistency(
     threshold_flags_synchronized = []
 
     if canonical_total is not None:
-        max_score = _stage23i_number(
+        max_score = _number(
             output.get("max_score")
         )
         if max_score is None or max_score <= 0:
@@ -1623,13 +1614,13 @@ def enforce_final_score_status_narrative_consistency(
         output["total_score"] = canonical_total
         output["final_total_score"] = canonical_total
 
-        official = _stage23i_number(
+        official = _number(
             output.get("official_pass_score")
         )
-        practical = _stage23i_number(
+        practical = _number(
             output.get("practical_target_score")
         )
-        high = _stage23i_number(
+        high = _number(
             output.get("high_score_target")
         )
 
@@ -1660,7 +1651,7 @@ def enforce_final_score_status_narrative_consistency(
             output[key] = expected
 
         canonical_status = (
-            _stage23i_status_from_score(
+            _status_from_score(
                 canonical_total,
                 official,
                 practical,
@@ -1677,9 +1668,9 @@ def enforce_final_score_status_narrative_consistency(
         ).strip() or "UNKNOWN"
 
     conflict_sources = (
-        _stage23i_collect_accuracy_conflicts(output)
+        _collect_accuracy_conflicts(output)
     )
-    rewritten_fields = _stage23i_rewrite_narratives(
+    rewritten_fields = _rewrite_conflicting_narratives(
         output,
         conflict_sources,
     )
@@ -1700,7 +1691,7 @@ def enforce_final_score_status_narrative_consistency(
         ),
         "conflict_sources": conflict_sources,
         "narrative_fields_checked": list(
-            _STAGE23I_NARRATIVE_FIELDS
+            _NARRATIVE_FIELDS
         ) + ["strengths"],
         "narrative_fields_rewritten": (
             rewritten_fields
@@ -1721,7 +1712,7 @@ def enforce_generic_contract_consistency(parsed):
     )
 
 
-def _stage23i_should_apply(value):
+def _should_apply_score_consistency(value):
     if not isinstance(value, dict):
         return False
 
@@ -1735,10 +1726,10 @@ def _stage23i_should_apply(value):
     ):
         return True
 
-    total = _stage23i_number(
+    total = _number(
         value.get("total_score")
     )
-    final_total = _stage23i_number(
+    final_total = _number(
         value.get("final_total_score")
     )
     if (
@@ -1748,7 +1739,7 @@ def _stage23i_should_apply(value):
     ):
         return True
 
-    if _stage23i_collect_accuracy_conflicts(value):
+    if _collect_accuracy_conflicts(value):
         return True
 
     coverage = value.get("question_type_coverage")
@@ -1765,47 +1756,9 @@ def _stage23i_should_apply(value):
     return False
 
 
-_stage23i_existing_enforce_final_decision_consistency = (
-    enforce_final_decision_consistency
-)
-
-
-@_stage23i_functools.wraps(
-    _stage23i_existing_enforce_final_decision_consistency
-)
-def enforce_final_decision_consistency(*args, **kwargs):
-    result = (
-        _stage23i_existing_enforce_final_decision_consistency(
-            *args,
-            **kwargs,
-        )
-    )
-    if _stage23i_should_apply(result):
-        return (
-            enforce_generic_contract_consistency(
-                result
-            )
-        )
+def enforce_final_decision_consistency(payload: Any) -> Any:
+    """Apply the complete public verdict-consistency pipeline once."""
+    result = _enforce_structured_final_decision(payload)
+    if _should_apply_score_consistency(result):
+        return enforce_generic_contract_consistency(result)
     return result
-
-# === STAGE25G3G_FATAL_SUMMARY_CONSISTENCY_V1 ===
-# Extend positive-accuracy wording recognized only when an existing
-# structured conflict is present. The existing rewrite owner remains
-# enforce_final_score_status_narrative_consistency().
-_STAGE25G3G_POSITIVE_ACCURACY_MARKERS = (
-    "충실히 다루",
-    "충실히",
-    "구조적으로 잘 서술",
-    "잘 서술",
-    "잘 설명",
-    "대체로 충족",
-    "정확하게 설명",
-)
-_STAGE23I_POSITIVE_ACCURACY_MARKERS = tuple(
-    dict.fromkeys(
-        tuple(
-            _STAGE23I_POSITIVE_ACCURACY_MARKERS
-        )
-        + _STAGE25G3G_POSITIVE_ACCURACY_MARKERS
-    )
-)

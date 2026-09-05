@@ -109,6 +109,7 @@ python3 -m py_compile \
   tests/test_atomic_question_demand_contract_v2.py \
   tests/test_canonical_evaluation_ledger.py \
   tests/test_evidence_based_calibration.py \
+  tests/test_finalization_module_structure.py \
   tests/test_verified_correctness_score_cap.py \
   tests/test_authoritative_structured_safety_rules.py \
   tests/test_qtype_topic_pack_demand_axes.py \
@@ -428,6 +429,7 @@ python3 -B tests/test_expert_accuracy_benchmark.py
 python3 -B tests/test_atomic_question_demand_contract_v2.py
 python3 -B tests/test_canonical_evaluation_ledger.py
 python3 -B tests/test_evidence_based_calibration.py
+python3 -B tests/test_finalization_module_structure.py
 python3 -B tests/test_verified_correctness_score_cap.py
 python3 -B tests/test_high_score_eligibility.py
 python3 -B tests/test_authoritative_structured_safety_rules.py

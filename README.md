@@ -233,6 +233,8 @@ Logic Check는 핵심 이론 오류를 검증합니다.
 
 최종 결과는 다음 순서를 보장합니다.
 
+최종 출력 경로는 함수 재정의나 `previous implementation` wrapper를 사용하지 않습니다. `grade_output_summarizer.py`는 base → structured contract → native evidence → decision/cap projection을 이름 있는 내부 함수로 합성하고, `verdict_consistency.py`는 structured verdict → score/status consistency를 하나의 공개 진입점에서 실행합니다. `tests/test_finalization_module_structure.py`가 top-level 함수 중복 정의의 재유입을 차단합니다.
+
 ```text
 보수적 제출문 정규화
   → semantic grading
