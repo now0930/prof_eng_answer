@@ -11,6 +11,7 @@ if str(SCRIPT_DIR) not in sys.path:
     sys.path.insert(0, str(SCRIPT_DIR))
 
 from topic_pack_status import iter_topic_ids, load_status, project_root, topic_pack_dir, update_status, write_status  # noqa: E402
+from topic_pack_workflow_controller import managed_approval_errors  # noqa: E402
 
 
 SMOKE_SESSION_PREFIX = "synthetic_topic_pack_smoke_"
@@ -108,6 +109,7 @@ def _compile_targets(root: Path) -> list[str]:
         "scripts/validate_topic_pack_quality.py",
         "scripts/validate_topic_pack_release.py",
         "scripts/topic_pack_status.py",
+        "scripts/topic_pack_workflow_controller.py",
         "scripts/review_topic_pack.py",
         "scripts/review_topic_pack_all.py",
         "scripts/topic_review_llm.py",
@@ -198,6 +200,18 @@ def _mark_validated(root: Path, topics: list[str]) -> None:
         print("updated validated status:", pack_dir / "topic_status.json")
 
 
+def _require_managed_approval(root: Path, topics: list[str]) -> None:
+    failures: list[str] = []
+    for topic_id in topics:
+        for error in managed_approval_errors(root, topic_id):
+            failures.append(f"{topic_id}: {error}")
+    if failures:
+        raise SystemExit(
+            "ERROR: workflow-managed Topic Pack promotion requires current "
+            "human approval:\n - " + "\n - ".join(failures)
+        )
+
+
 def build_parser() -> argparse.ArgumentParser:
     p = argparse.ArgumentParser(description="Run release validation for topic packs.")
     p.add_argument("--topic-id", action="append", default=None)
@@ -226,6 +240,8 @@ def main(argv: list[str] | None = None) -> int:
         changed_only=args.changed_only,
         include_frozen=args.include_frozen,
     )
+    if args.promote_generated or args.all:
+        _require_managed_approval(root, topics)
 
     print("TOPIC PACK RELEASE VALIDATION")
     print("root:", root)

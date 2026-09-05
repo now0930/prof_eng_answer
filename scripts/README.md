@@ -157,13 +157,17 @@ generated bank의 형식과 기본 참조 무결성을 검증한다.
 
 ### `create_topic_pack.py`
 
-새 topic pack source 디렉터리를 생성하는 도구이다.
+새 topic pack source 디렉터리를 만드는 내부 scaffold primitive이다.
 
-일반적으로 직접 실행하기보다 `rubric_manager.py`를 통해 실행한다.
+신규 Topic은 이 명령을 직접 호출하지 않고 managed workflow를 사용한다.
 
 ```bash
-python3 scripts/rubric_manager.py create-topic-pack --topic-id <topic_id>
+python3 scripts/rubric_manager.py add-topic \
+  --topic-id <topic_id> --title "<제목>" \
+  --sheet docs/topic_sheets/<topic_id>.md
 ```
+
+`topic_pack_workflow_controller.py`가 scaffold, draft 상태, 사람 승인 hash, 검증, promote와 rollback 순서를 소유한다.
 
 ---
 
@@ -335,57 +339,47 @@ RUBRIC_BANK_MODE=legacy python3 scripts/check_rubric_bank_paths.py
 새 topic을 추가할 때는 아래 순서를 따른다.
 
 ```text
-README.md
-  → Topic Sheet 후보
-  → 사람이 Topic Sheet 검토
-  → schema-locked JSON candidate
-  → generated bank promote
-  → smoke / Telegram 재채점 확인
+Topic Sheet와 ownership 확정
+  → add-topic이 managed draft 생성
+  → 직접 작성 또는 schema-locked 보조 생성
+  → 사람의 source 검토
+  → approve-topic이 reviewer/hash/검증/promote 기록
+  → 전체 integration validation
 ```
 
 명령 예시:
 
 ```bash
-# topic pack source 생성
-python3 scripts/rubric_manager.py create-topic-pack --topic-id <topic_id>
-
-# README 작성
-vim rubrics/topic_packs/<topic_id>/README.md
-
-# README → Topic Sheet 후보 생성
-python3 scripts/generate_topic_sheet_from_readme.py \
+# managed draft와 보조 생성
+python3 scripts/rubric_manager.py add-topic \
   --topic-id <topic_id> \
-  --model gemini-2.5-flash \
-  --overwrite
+  --title "<한글 제목>" \
+  --sheet docs/topic_sheets/<topic_id>.md \
+  --question-type <QUESTION_TYPE> \
+  --difficulty <DIFFICULTY> \
+  --generate
 
-# 사람이 Topic Sheet 검토
-vim docs/topic_sheets/<topic_id>.md
-
-# Topic Sheet → JSON candidate 생성
-python3 scripts/generate_topic_pack_from_sheet.py \
+# 사람 검토 후 승인, 검증 및 generated promote
+python3 scripts/rubric_manager.py approve-topic \
   --topic-id <topic_id> \
-  --sheet docs/topic_sheets/<topic_id>.md
+  --reviewer <reviewer_id>
 
-# release 검증 및 generated promote
-python3 scripts/rubric_manager.py validate-topic-pack-release \
-  --topic-id <topic_id> \
-  --promote-generated
-
-# smoke
-python3 scripts/rubric_manager.py smoke-topic-pack --topic-id <topic_id>
+# integration
+python3 scripts/rubric_manager.py validate-topic-pack-release --all
 ```
 
 주의:
 
-- README에서 JSON으로 직행하지 않는다.
 - Topic Sheet는 사람이 검토한다.
-- 신규 scaffold는 생성 성공 후 canonical source로 자동 승격된다.
+- Markdown은 실행 입력이 아니며 controller와 validator가 순서를 강제한다.
+- `--generate`를 생략하면 managed scaffold 이후 JSON을 직접 작성한다.
+- 신규 scaffold는 `draft / human_review_required`로 시작한다.
 - 기존 검토본은 기본적으로 보호되며, 초안만 저장하려면 `--candidate-only`를 쓴다.
 - 4개 JSON 생성은 두 묶음으로 병렬 실행되고 마지막 일관성 검토만 순차 실행된다.
 - generated bank는 직접 수정하지 않는다.
-- 단일 source 수정 후 `validate-topic-pack-release --topic-id <topic_id> --promote-generated`로 갱신한다.
+- `approve-topic`이 reviewer와 source hash를 기록하며 이후 source 변경은 승인을 무효화한다.
 - 전체 77개 검증은 통합 시점에만 `validate-topic-pack-release --all`로 실행한다.
-- live LLM smoke는 기본 검증에서 분리되며 필요할 때 `--smoke`를 명시한다.
+- live LLM smoke는 기본 검증에서 분리되며 필요할 때 승인 명령에 `--smoke`를 명시한다.
 
 ---
 

@@ -166,7 +166,7 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | 교차 주제 채점 의미 drift | `grading_integrity_drift_runbook.md` | `scripts/check_grading_integrity_drift.py`, `scripts/replay_sil_issue1_session.py` |
 | Topic Pack 구조·inventory | `topic_pack_architecture.md` | `rubric_bank_paths.py`, generated manifest |
 | Rubric source와 generated bank | `rubric_authoring_guide.md` | `rubric_bank_paths.py`, `rubric_registry.py` |
-| Topic Pack 생성·검증·integration rebuild | `topic_pack_workflow.md` | `scripts/generate_topic_pack_from_sheet.py`, `scripts/validate_topic_pack_release.py` |
+| Topic Pack 생성·사람 승인·검증·integration rebuild | `topic_pack_workflow.md` | `scripts/topic_pack_workflow_controller.py`, `scripts/validate_topic_pack_release.py` |
 | 채점 품질·Golden Set·배포 Gate | `grading_quality_roadmap.md` | `accuracy_release_gate.py`, release/deployment validation |
 
 이 인덱스에는 세부 알고리즘을 복제하지 않습니다. 새 정책을 추가할 때는 상세 문서와 runtime owner를 함께 등록합니다.

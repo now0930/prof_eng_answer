@@ -53,11 +53,13 @@
 관리 원칙:
 
 - 기술 내용은 Topic Sheet와 검토된 source JSON이 소유한다.
+- 신규 Topic은 `add-topic`으로 시작하고 `approve-topic`으로 사람 검토와 source hash를 기록한다.
 - 생성기는 다른 Topic의 공식·규칙을 주입하지 않는다.
 - 분류는 각 `topic_importance.json`의 `difficulty`가 정본이며 별도 Topic 목록이나 고정 총계를 중복 관리하지 않는다.
 - 기본 release는 변경 Topic 또는 `--topic-id`만 검증한다. 전체 inventory는 통합 시점에 `--all`로 실행한다.
 - live LLM smoke는 외부 환경이 필요한 별도 Gate이며 기본 source 검증에 포함하지 않는다.
 - 생성 또는 release 실패 시 canonical source와 generated bank를 작업 전 상태로 복구한다.
+- 승인 이후 source가 바뀐 관리 대상 Topic은 promote와 전체 integration을 차단한다.
 - generated bank는 직접 수정하지 않는다.
 
 ## 6. Release와 배포

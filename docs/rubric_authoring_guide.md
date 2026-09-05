@@ -58,6 +58,20 @@ Rubric은 가능한 JSON source로 관리하고, Python 코드는 routing, parsi
 `generate_topic_sheet_from_readme.py`, `generate_topic_pack_from_sheet.py`는 authoring 보조 도구다. 신규 scaffold의 canonical 경로에 결과가 생성되어도 사람의 의미 검토와 validator 통과 전에는 승인된 source가 아니다. 기존 검토본은 `--overwrite` 없이는 교체하지 않는다.
 
 Topic Pack 구조와 current inventory는 `topic_pack_architecture.md`, 전체 실행 순서는 `topic_pack_workflow.md`를 우선한다.
+
+신규 Topic은 다음 실행 계약을 사용한다.
+
+```bash
+python3 scripts/rubric_manager.py add-topic \
+  --topic-id <topic_id> --title "<제목>" \
+  --sheet docs/topic_sheets/<topic_id>.md --generate
+
+python3 scripts/rubric_manager.py approve-topic \
+  --topic-id <topic_id> --reviewer <reviewer_id>
+```
+
+`topic_status.json`의 승인 hash와 현재 canonical source hash가 다르면 generated promote와 전체 integration은 실패한다. Markdown을 실행 규칙으로 파싱하지 않으며 controller와 validator가 이 순서를 강제한다.
+
 ## 3. Model Answer 작성 기준
 
 Model Answer는 모범 답안 문장을 외우게 하는 파일이 아니다. 답안 구조, 전개 깊이, 고득점 특징, 현장 적용 방향을 정의한다.
@@ -496,7 +510,7 @@ Topic source를 commit하거나 integration promote하기 전에 확인한다.
 python3 scripts/rubric_manager.py validate-all
 python3 scripts/rubric_manager.py validate-topic-pack-quality
 python3 scripts/rubric_manager.py validate-topic-pack-release --topic-id <topic_id>
-python3 scripts/rubric_manager.py validate-topic-pack-release --topic-id <topic_id> --promote-generated
+python3 scripts/rubric_manager.py approve-topic --topic-id <topic_id> --reviewer <reviewer_id>
 python3 scripts/rubric_manager.py validate-topic-pack-release --all
 python3 scripts/rubric_manager.py smoke-topic-pack --topic-id <topic_id>
 git diff --check

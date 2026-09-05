@@ -639,13 +639,13 @@ topic_pack_manifest.generated.json
    ↓
 2. Topic Sheet에서 ownership·핵심 Fact·negative boundary 확정
    ↓
-3. create-topic-pack으로 동일 topic_id scaffold 생성
+3. add-topic으로 관리되는 scaffold와 draft 상태 생성
    ↓
 4. 직접 작성하거나 Topic Sheet 기반 보조 생성
    ↓
 5. 생성된 4개 JSON과 README를 사람이 의미 검토
    ↓
-6. 단일 Topic release validation과 generated promote
+6. approve-topic으로 사람 검토·해시·검증·generated promote 기록
    ↓
 7. 필요할 때 routing/live smoke와 위험 기반 Golden case 추가
    ↓
@@ -659,22 +659,23 @@ topic_pack_manifest.generated.json
 대표 명령:
 
 ```bash
-python3 scripts/rubric_manager.py create-topic-pack \
+python3 scripts/rubric_manager.py add-topic \
   --topic-id <topic_id> \
   --title "<한글 제목>" \
+  --sheet docs/topic_sheets/<topic_id>.md \
   --question-type <QUESTION_TYPE> \
-  --difficulty <DIFFICULTY>
+  --difficulty <DIFFICULTY> \
+  --generate
 
-python3 scripts/rubric_manager.py generate-topic-pack-from-sheet \
+python3 scripts/rubric_manager.py approve-topic \
   --topic-id <topic_id> \
-  --sheet docs/topic_sheets/<topic_id>.md
+  --reviewer <reviewer_id>
 
 python3 scripts/rubric_manager.py validate-topic-pack-release \
-  --topic-id <topic_id> \
-  --promote-generated
+  --all
 ```
 
-신규 scaffold는 보조 생성 성공 후 canonical source로 승격되지만 승인된 source가 되는 것은 사람의 diff 검토와 validator 통과 이후입니다. 기존 검토본은 기본적으로 보호되며 초안만 만들 때는 `--candidate-only`, 의도적으로 교체할 때만 `--overwrite`를 사용합니다. 인자 없는 release는 Git에서 변경된 Topic을 자동 선택하고, 전체 inventory는 통합 시점에만 `--all`로 검증합니다. 외부 모델이 필요한 smoke는 기본 검증에서 분리하며 필요할 때만 `--smoke`를 명시합니다.
+Markdown 절차를 runtime이 파싱하지 않습니다. `add-topic`과 `approve-topic`이 실행 순서, 사람 검토 상태, source hash와 실패 rollback을 강제합니다. `--generate`를 생략하면 JSON은 직접 작성하며, 승인 후 source가 바뀌면 해시가 달라져 다음 promote와 통합 Gate가 실패합니다. 기존 검토본은 기본적으로 보호되고, 외부 모델 smoke는 승인 시 필요한 경우에만 `--smoke`를 명시합니다.
 
 운영 원칙:
 

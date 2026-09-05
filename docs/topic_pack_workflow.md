@@ -6,6 +6,8 @@ Topic Pack 구조와 현재 inventory는 `topic_pack_architecture.md`, JSON 내�
 
 > **채점 일관성 정본:** 문제 요구 축, 답안 축, Fact 증거 게이트, 점수 항목 간 전파 제한과 판정 정합성은 [`grading_architecture.md`](grading_architecture.md)의 ‘채점 일관성’ 절을 따른다. 이 문서는 해당 계약을 중복 정의하지 않고 실행 절차만 설명한다.
 
+> **실행 계약:** 프로그램은 이 Markdown을 파싱하지 않는다. 신규 Topic의 순서·승인·해시·rollback은 `scripts/topic_pack_workflow_controller.py`, `validate_topic_pack_release.py`와 `rubric_manager.py add-topic/approve-topic`이 강제한다. 코딩 에이전트는 루트 `AGENTS.md`에 따라 작업 전 이 문서를 읽는다.
+
 
 ## 1. 핵심 원칙
 
@@ -25,10 +27,10 @@ LLM 결과는 Topic Sheet 밖의 기술 사실을 추가하는 근거가 아니�
 ```text
 1. Candidate와 기존 Topic 중복 확인
 2. Topic Sheet에서 ownership·Fact·negative boundary 확정
-3. 동일 topic_id scaffold 생성
+3. add-topic으로 동일 topic_id의 관리되는 scaffold 생성
 4. source JSON 직접 작성 또는 Topic Sheet 기반 보조 생성
 5. README와 source JSON을 사람이 의미 검토
-6. 변경 Topic focused validation과 generated promote
+6. approve-topic으로 사람 검토·source hash·focused validation·promote 기록
 7. 변경 위험에 따라 routing/live smoke와 Golden case 보강
 8. 통합 시점에 전체 inventory validation
 9. commit·push 후 local/tracking/remote SHA와 CI 확인
@@ -53,6 +55,8 @@ Topic Sheet:
 ```text
 docs/topic_sheets/<topic_id>.md
 ```
+
+`add-topic`으로 만든 Pack의 `topic_status.json`은 `draft / human_review_required`에서 시작한다. `approve-topic`은 reviewer, 승인 시점과 canonical source hash를 기록한다. 이후 README 또는 source JSON이 바뀌면 승인이 자동 무효화되어 promote와 전체 integration이 실패한다. 기존 77개 legacy Pack에는 이 계약을 소급 강제하지 않는다.
 
 Generated bank:
 
@@ -166,15 +170,29 @@ Generator는 authoring 시간을 줄이는 도구이며 승인 주체가 아니�
 
 ### 7.1 Topic Sheet 기반 보조 생성
 
-신규 scaffold는 다음 명령으로 작성할 수 있다.
+신규 Topic의 표준 시작 명령은 다음과 같다. `--generate`를 생략하면 관리되는 scaffold만 만들고 JSON은 직접 작성한다.
 
 ```bash
-python3 scripts/rubric_manager.py generate-topic-pack-from-sheet \
+python3 scripts/rubric_manager.py add-topic \
   --topic-id <topic_id> \
-  --sheet docs/topic_sheets/<topic_id>.md
+  --title "<한글 제목>" \
+  --sheet docs/topic_sheets/<topic_id>.md \
+  --question-type <QUESTION_TYPE> \
+  --difficulty <DIFFICULTY> \
+  --generate
 ```
 
 생성기는 Topic Sheet만 기술 내용의 근거로 사용한다. 4개 JSON 호출은 두 묶음으로 병렬화하고 일관성 검토를 마지막에 수행한다. 신규 scaffold만 기본 canonical source로 승격하며, 기존 검토본은 `--overwrite` 없이는 교체하지 않는다. 기존 source를 보존한 초안이 필요하면 `--candidate-only`를 사용한다. 생성 또는 검증 실패 시 canonical source는 작업 전 상태로 복구된다.
+
+사람이 README와 4개 JSON의 기술 사실·ownership·fatal/false-positive 경계를 검토한 뒤 다음 명령으로 승인한다.
+
+```bash
+python3 scripts/rubric_manager.py approve-topic \
+  --topic-id <topic_id> \
+  --reviewer <reviewer_id>
+```
+
+승인 명령은 draft 검증, 사람 승인 metadata와 source hash 기록, 재검증과 generated promote를 한 transaction으로 수행한다. promote가 실패하면 승인 상태와 generated output을 복구한다. 실제 provider routing 확인이 필요한 경우에만 `--smoke`를 추가한다.
 
 ## 8. Fact Anchor
 
@@ -451,19 +469,20 @@ Push 후 GitHub Actions validation이 해당 commit에서 `success`인지 확인
 ### 23.2 빠른 기본 경로
 
 ```bash
-# 명시한 Topic만 검증·promote
-python3 scripts/rubric_manager.py validate-topic-pack-release \
-  --topic-id <topic_id> --promote-generated
+# 신규 Topic 시작: 관리되는 draft 생성과 선택적 보조 authoring
+python3 scripts/rubric_manager.py add-topic \
+  --topic-id <topic_id> --title "<제목>" \
+  --sheet docs/topic_sheets/<topic_id>.md --generate
 
-# topic-id를 생략하면 Git에서 변경된 Topic을 자동 선택
-python3 scripts/rubric_manager.py validate-topic-pack-release \
-  --promote-generated
+# 사람 검토 후 승인·검증·promote
+python3 scripts/rubric_manager.py approve-topic \
+  --topic-id <topic_id> --reviewer <reviewer_id>
 
 # 통합 시점에만 전체 inventory 검증
 python3 scripts/rubric_manager.py validate-topic-pack-release --all
 ```
 
-외부 provider가 필요한 smoke는 기본 검증에서 제외하며, 실제 routing/provider 동작을 확인해야 할 때만 `--smoke`를 명시한다.
+새 workflow로 관리되는 Topic은 승인 상태와 현재 source hash가 일치하지 않으면 generated promote와 `--all` 통합 검증을 통과할 수 없다. 외부 provider가 필요한 smoke는 기본 검증에서 제외하며 실제 routing/provider 동작을 확인해야 할 때만 승인 명령에 `--smoke`를 명시한다.
 
 ### 23.3 보조 생성 안전장치
 
@@ -472,6 +491,7 @@ python3 scripts/rubric_manager.py validate-topic-pack-release --all
 - 기존 검토본은 `--overwrite` 없이는 바꾸지 않는다.
 - canonical을 보존한 후보만 필요하면 `--candidate-only`를 사용한다.
 - 생성 또는 검증 실패 시 canonical과 generated 상태를 작업 전으로 복구한다.
+- 사람 승인 이후 canonical source가 바뀌면 content hash mismatch로 승인을 무효화한다.
 
 ### 23.4 위험 기반 회귀
 

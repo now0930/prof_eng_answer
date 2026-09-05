@@ -10,6 +10,7 @@ from typing import Any
 
 
 PACK_FILES = ["README.md", "fact_anchor.json", "model_answer.json", "topic_importance.json", "logic_check.json"]
+OPTIONAL_PACK_FILES = ["question_demand_axes.json"]
 STATUS_FILE = "topic_status.json"
 VALID_STATUSES = {"draft", "reviewed", "approved", "frozen"}
 
@@ -37,7 +38,12 @@ def now_stamp() -> str:
 
 def content_hash(pack_dir: Path) -> str:
     h = hashlib.sha256()
-    for filename in PACK_FILES:
+    filenames = PACK_FILES + [
+        filename
+        for filename in OPTIONAL_PACK_FILES
+        if (pack_dir / filename).exists()
+    ]
+    for filename in filenames:
         path = pack_dir / filename
         h.update(filename.encode("utf-8"))
         h.update(b"\0")

@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 # STAGE17E2B_TOPIC_PACK_TEST_MANIFEST_V1
-python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow
+python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow scripts.test_topic_pack_workflow_controller
 
 PROMOTE_GENERATED="${PROMOTE_GENERATED:-1}"
 RUN_SMOKE_TOPIC_PACKS="${RUN_SMOKE_TOPIC_PACKS:-0}"
@@ -90,6 +90,7 @@ python3 -m py_compile \
   rubric_registry.py \
   rubric_bank_paths.py \
   scripts/rubric_manager.py \
+  scripts/topic_pack_workflow_controller.py \
   scripts/validate_topic_pack_release.py \
   scripts/validate_release_test_coverage.py \
   scripts/validate_model_answer_relationships.py \
