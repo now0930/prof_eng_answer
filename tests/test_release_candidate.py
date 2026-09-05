@@ -92,6 +92,9 @@ class ReleaseCandidateTest(unittest.TestCase):
             self.assertNotIn(key, sanitized)
         self.assertNotIn("ASSISTED_ROUTING_ENABLED", sanitized)
         self.assertEqual(sanitized["PYTHONDONTWRITEBYTECODE"], "1")
+        self.assertEqual(sanitized["PROMOTE_GENERATED"], "0")
+        self.assertEqual(sanitized["RUN_SMOKE_TOPIC_PACKS"], "0")
+        self.assertEqual(sanitized["RUN_GRADING_REPRODUCIBILITY"], "0")
 
     def test_deploy_records_fingerprint_parity_and_close_eligibility(self):
         with tempfile.TemporaryDirectory() as temporary:

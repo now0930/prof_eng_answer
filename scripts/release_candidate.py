@@ -208,6 +208,11 @@ def _deterministic_validation_env() -> dict[str, str]:
     )
     env = {key: os.environ[key] for key in passthrough if key in os.environ}
     env["PYTHONDONTWRITEBYTECODE"] = "1"
+    # Match the GitHub Actions release gate. Qualification must validate the
+    # committed generated artifacts, never rewrite/promote them in-place.
+    env["PROMOTE_GENERATED"] = "0"
+    env["RUN_SMOKE_TOPIC_PACKS"] = "0"
+    env["RUN_GRADING_REPRODUCIBILITY"] = "0"
     return env
 
 
