@@ -141,7 +141,7 @@ def test_grade_adapter_preserves_claimed_present_as_prediction() -> None:
     }
     prediction = prediction_from_grade("case-1", grade)
     assert prediction["demands"] == [
-        {"demand_id": "D1", "requirement": "", "status": "PARTIAL"},
+        {"demand_id": "D1", "requirement": "", "status": "CORRECT"},
         {"demand_id": "D2", "requirement": "", "status": "WRONG"},
     ]
     assert prediction["findings"] == [{"finding_id": "F1", "severity": "fatal"}]

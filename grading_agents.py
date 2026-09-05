@@ -10454,7 +10454,7 @@ _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION = (
     "final_grade_cache_v4"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION = (
-    "verified_correctness_cap_output_policy_v7"
+    "verified_correctness_cap_output_policy_v8"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_DIR = (
     BASE_DIR / "data" / "final_grade_cache"
@@ -10759,6 +10759,34 @@ def _stage18b1_store_final_grade_cache(
 
 
 # STAGE17E5_COMMON_INPUT_AND_DECISION_BOUNDARY_V1
+def finalize_grade_after_score_reconciliation(value):
+    """Reassert one-way evidence caps after any numeric reconciliation.
+
+    The adjudicator may legitimately relax a difficulty/volume ceiling, but
+    it must never erase later verified-correctness or high-score evidence
+    caps.  Both the Telegram path and release benchmark use this boundary.
+    """
+    if not _stage17e5_is_grade_dict(value):
+        return value
+
+    from evidence_calibration import apply_evidence_based_calibration
+    from high_score_eligibility import apply_high_score_eligibility_cap
+    from verified_correctness_score_cap import apply_verified_correctness_score_cap
+    from verified_evidence_score_calibration import apply_verified_evidence_score_calibration
+    from verdict_consistency import (
+        enforce_final_decision_consistency,
+        enforce_final_score_status_narrative_consistency,
+    )
+
+    output = _phase2_finalize_verified_coverage_for_persistence(value)
+    output = apply_verified_evidence_score_calibration(output)
+    output = apply_verified_correctness_score_cap(output)
+    output = apply_high_score_eligibility_cap(output)
+    output = enforce_final_decision_consistency(output)
+    output = apply_evidence_based_calibration(output)
+    return enforce_final_score_status_narrative_consistency(output)
+
+
 def _stage17e5_is_grade_dict(value):
     if not isinstance(value, dict):
         return False

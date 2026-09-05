@@ -28,7 +28,7 @@ from grade_submission_normalizer import (
     normalize_grade_submission,
 )
 from grading_agents import (
-    _phase2_finalize_verified_coverage_for_persistence,
+    finalize_grade_after_score_reconciliation,
     run_agent_pipeline,
 )
 from verdict_consistency import enforce_final_decision_consistency
@@ -99,7 +99,7 @@ def _grade(case: dict, output_dir: Path, image_count: int) -> dict:
         raw_text=raw_text,
         call_llm_fn=call_ollama_score_adjudicator,
     )
-    parsed = _phase2_finalize_verified_coverage_for_persistence(parsed)
+    parsed = finalize_grade_after_score_reconciliation(parsed)
     parsed = attach_submission_normalization(
         parsed,
         {key: value for key, value in normalization.items()

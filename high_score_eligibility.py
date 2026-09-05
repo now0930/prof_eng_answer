@@ -176,12 +176,14 @@ def apply_high_score_eligibility_cap(payload: Any) -> Any:
                 output[key] = cap
         caps = output.get("applied_caps")
         caps = list(caps) if isinstance(caps, list) else []
-        caps.append({
+        cap_record = {
             "type": "high_score_evidence_eligibility",
             "cap": cap,
             "reason_codes": decision["reasons"],
             "score_effect": "hard_cap",
-        })
+        }
+        if cap_record not in caps:
+            caps.append(cap_record)
         output["applied_caps"] = caps
     decision["cap_applied"] = cap_applied
     decision["cap"] = (

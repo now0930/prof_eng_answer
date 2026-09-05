@@ -104,7 +104,7 @@ def test_unassessed_requirement_never_becomes_false_100_percent() -> None:
     rows.pop()
     ledger = build_canonical_evaluation_ledger(grade)
     assert ledger["status"] == "incomplete"
-    assert ledger["summary"]["status_counts"]["unknown"] == 4
+    assert ledger["summary"]["status_counts"]["unknown"] == 1
     assert ledger["summary"]["exact_requirement_fulfillment_ratio"] is None
     assert ledger["summary"]["exact_requirement_fulfillment_percent"] is None
 
@@ -296,6 +296,15 @@ def test_unique_canonical_text_and_evidence_preserve_present_as_correct() -> Non
     )
 
 
+def test_mixed_explicit_and_text_identities_map_without_discarding_all_rows() -> None:
+    grade = _grade()
+    coverage = grade["question_type_coverage"]["explicit_requirement_coverage"]
+    coverage["requirements"][-1].pop("requirement_id")
+    ledger = build_canonical_evaluation_ledger(grade)
+    assert ledger["summary"]["coverage_mapping_valid"] is True
+    assert ledger["summary"]["unmatched_coverage_count"] == 0
+
+
 def test_high_confidence_long_form_never_reconciles_partial_provider_states() -> None:
     grade = _grade()
     requirements = grade["question_demand_contract"]["requirements"]
@@ -470,7 +479,7 @@ def test_public_display_uses_ledger_and_blocks_false_strong_100() -> None:
     text = bot._format_question_type_coverage_display(grade)
     assert "전체 판정: unknown" in text
     assert "요구사항 정확 충족률: -" in text
-    assert "미평가 4" in text
+    assert "미평가 1" in text
     assert "100.0%" not in text
 
 

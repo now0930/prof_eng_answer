@@ -734,15 +734,9 @@ def _finalize_grade_before_bot_persistence(
     if not isinstance(parsed, dict):
         return parsed
 
-    from grading_agents import (
-        _phase2_finalize_verified_coverage_for_persistence,
-    )
+    from grading_agents import finalize_grade_after_score_reconciliation
 
-    output = (
-        _phase2_finalize_verified_coverage_for_persistence(
-            parsed
-        )
-    )
+    output = finalize_grade_after_score_reconciliation(parsed)
 
     if isinstance(output, dict):
         reconciliation = output.get(

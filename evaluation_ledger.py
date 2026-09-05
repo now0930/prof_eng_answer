@@ -59,7 +59,8 @@ _DEMAND_LINK_STOPWORDS = {
     "the", "and", "for", "with", "from", "into",
 }
 _DEMAND_ACTION_SUFFIXES = (
-    "설명", "제시", "정의", "적용", "검토", "평가", "방안",
+    "설명하시오", "제시하시오", "비교하시오", "해석하시오",
+    "설명", "제시", "비교", "정의", "적용", "검토", "평가", "방안",
 )
 
 
@@ -556,7 +557,19 @@ def build_canonical_evaluation_ledger(grade: Any) -> dict[str, Any]:
         str(row.get("requirement_id") or "").strip()
         for row in coverage_rows if str(row.get("requirement_id") or "").strip()
     ]
-    coverage_mapping_valid = not provider_ids or provider_ids == canonical_ids
+    provider_positions = [
+        canonical_ids.index(requirement_id)
+        for requirement_id in provider_ids
+        if requirement_id in canonical_ids
+    ]
+    coverage_mapping_valid = bool(
+        not provider_ids
+        or (
+            len(provider_positions) == len(provider_ids)
+            and len(provider_ids) == len(set(provider_ids))
+            and provider_positions == sorted(provider_positions)
+        )
+    )
     active_coverage_rows = coverage_rows if coverage_mapping_valid else []
     defects = _infer_defect_requirement_links(
         _verified_defects(grade),

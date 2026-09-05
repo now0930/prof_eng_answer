@@ -242,7 +242,7 @@ def test_semantic_wrapper_retries_once_and_accepts_exact_projection():
     assert result["question_demand_contract"]["primary_lens"] == "IMPLEMENTATION_EVALUATION"
 
 
-def test_semantic_wrapper_fails_closed_after_invalid_retry():
+def test_semantic_wrapper_fails_closed_after_bounded_invalid_retries():
     original = gemini_grader._grade_with_general_evidence
 
     def fake(question_text, *args, **kwargs):
@@ -256,7 +256,7 @@ def test_semantic_wrapper_fails_closed_after_invalid_retry():
     validation = result["explicit_requirement_projection_validation"]
     assert validation["valid"] is False
     assert validation["fail_closed"] is True
-    assert validation["provider_attempts"] == 2
+    assert validation["provider_attempts"] == 3
     rows = result["parsed"]["question_type_coverage"][
         "explicit_requirement_coverage"
     ]["requirements"]

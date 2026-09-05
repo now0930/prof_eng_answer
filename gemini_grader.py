@@ -1560,9 +1560,10 @@ def gemini_semantic_grade(*args, **kwargs):
     )
     result = _stage35e2_normalize_projection_state_fields(result, contract)
     attempts = 1
-    if enforce_exact and not _stage35e2_projection_matches_contract(
-        result,
-        contract,
+    while (
+        enforce_exact
+        and attempts < 3
+        and not _stage35e2_projection_matches_contract(result, contract)
     ):
         token = _stage35e2_projection_retry_contract.set(contract)
         try:
@@ -1571,7 +1572,7 @@ def gemini_semantic_grade(*args, **kwargs):
                 **kwargs,
             )
             result = _stage35e2_normalize_projection_state_fields(result, contract)
-            attempts = 2
+            attempts += 1
         finally:
             _stage35e2_projection_retry_contract.reset(token)
 

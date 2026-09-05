@@ -54,8 +54,10 @@ def _finite(value: Any, field: str) -> float:
 def normalize_demand_state(value: Any, *, allow_unknown: bool = False) -> str:
     state = _text(value).upper()
     aliases = {
-        # Presence establishes addressing, not technical correctness.
-        "PRESENT": "PARTIAL",
+        # The reviewed provider contract defines PRESENT as directly
+        # addressed, technically correct, and sufficiently complete.  A mere
+        # mention must be labelled PARTIAL explicitly.
+        "PRESENT": "CORRECT",
         "INCORRECT": "WRONG",
         "ABSENT": "MISSING",
     }

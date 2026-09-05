@@ -9,6 +9,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from high_score_eligibility import apply_high_score_eligibility_cap
+from grading_agents import finalize_grade_after_score_reconciliation
 
 
 def _grade(*, total: float, complete: bool, field_evidence: bool) -> dict:
@@ -69,6 +70,14 @@ def test_cap_never_leaves_final_score_above_abcd_e_base_score() -> None:
     result = apply_high_score_eligibility_cap(result)
     assert result["total_score"] == 11.0
     assert result["total_score"] <= sum(row["score"] for row in result["breakdown"])
+
+
+def test_post_reconciliation_boundary_reasserts_high_score_cap() -> None:
+    grade = _grade(total=22.0, complete=False, field_evidence=False)
+    result = finalize_grade_after_score_reconciliation(grade)
+    assert result["total_score"] == 19.99
+    assert result["final_total_score"] == 19.99
+    assert result["high_score_eligibility"]["cap_applied"] is True
 
 
 if __name__ == "__main__":
