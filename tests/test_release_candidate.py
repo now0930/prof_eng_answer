@@ -72,7 +72,11 @@ class ReleaseCandidateTest(unittest.TestCase):
             self.assertEqual(data["qualification"]["prediction_count"], 30)
 
     def test_provider_preflight_rejects_missing_credentials_before_ollama(self):
-        with patch.dict("os.environ", {"LLM_PROVIDER": "auto"}, clear=True), patch(
+        isolated_env = {
+            "LLM_PROVIDER": "auto",
+            "LLM_PROVIDER_SETTINGS_FILE": "/tmp/release-candidate-missing-settings.json",
+        }
+        with patch.dict("os.environ", isolated_env, clear=True), patch(
             "urllib.request.urlopen"
         ) as urlopen:
             with self.assertRaisesRegex(release.ReleaseFailure, "no Gemini or CLOVA"):
