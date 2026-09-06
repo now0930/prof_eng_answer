@@ -1,0 +1,61 @@
+{
+  "version": "fatal_taxonomy_v1",
+  "entries": [
+    {
+      "fatal_id": "fatal_target_pfd_frequency_product",
+      "invariant_code": "INVALID_TARGET_PROBABILITY_FREQUENCY_PRODUCT",
+      "error_class": "quantity_expression_dimension",
+      "ontology_owner": "quantity_expression",
+      "topic_owner": "sil_target_determination_risk_reduction_and_lifecycle"
+    },
+    {
+      "fatal_id": "fatal_demand_mode_by_fault_detection",
+      "invariant_code": "DEMAND_MODE_DIAGNOSTIC_ROLE_CONFUSION",
+      "error_class": "concept_role_confusion",
+      "ontology_owner": "functional_safety_roles",
+      "topic_owner": "sil_target_determination_risk_reduction_and_lifecycle"
+    },
+    {
+      "fatal_id": "fatal_pst_replaces_full_test_or_reduces_mttr",
+      "invariant_code": "PARTIAL_TEST_ROLE_OVERCLAIM",
+      "error_class": "activity_role_confusion",
+      "ontology_owner": "assurance_activity_roles",
+      "topic_owner": "sil_target_determination_risk_reduction_and_lifecycle"
+    },
+    {
+      "fatal_id": "fatal_certificate_interval_as_operating_minimum",
+      "invariant_code": "CERTIFICATE_ASSUMPTION_AS_OPERATING_MINIMUM",
+      "error_class": "assurance_constraint_misuse",
+      "ontology_owner": "assurance_activity_roles",
+      "topic_owner": "sil_target_determination_risk_reduction_and_lifecycle"
+    },
+    {
+      "fatal_id": "sw04_fatal_misra_is_unit_test_tool",
+      "invariant_code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL",
+      "error_class": "artifact_tool_classification",
+      "ontology_owner": "software_verification_roles",
+      "topic_owner": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
+    },
+    {
+      "fatal_id": "sw05_fatal_software_test_is_random_hardware_integrity",
+      "invariant_code": "SOFTWARE_TEST_AS_RANDOM_HARDWARE_INTEGRITY",
+      "error_class": "integrity_domain_confusion",
+      "ontology_owner": "software_verification_roles",
+      "topic_owner": "sis_sil_safety_software_independence_systematic_failure_verification_validation"
+    },
+    {
+      "fatal_id": "sw05_fatal_hft_is_integration_test",
+      "invariant_code": "HARDWARE_ARCHITECTURE_AS_INTEGRATION_TEST",
+      "error_class": "architecture_test_role_confusion",
+      "ontology_owner": "software_verification_roles",
+      "topic_owner": "sis_sil_safety_software_independence_systematic_failure_verification_validation"
+    },
+    {
+      "fatal_id": "sil_four_universal_rule",
+      "invariant_code": "UNQUALIFIED_UNIVERSAL_SIL4_MCDC_RULE",
+      "error_class": "normative_applicability_overclaim",
+      "ontology_owner": "normative_applicability",
+      "topic_owner": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+    }
+  ]
+}
