@@ -44,6 +44,7 @@ rubrics/topic_packs/<topic_id>/
 ├── README.md
 ├── fact_anchor.json
 ├── logic_check.json
+│   └── machine_contract       # 선택: 결정론적 fact/requirement/invariant binding
 ├── model_answer.json
 ├── topic_importance.json
 ├── question_demand_axes.json  # 선택: canonical explicit-demand contract
@@ -168,7 +169,13 @@ JSON은 다음 원칙을 지킨다.
 
 Generator는 authoring 시간을 줄이는 도구이며 승인 주체가 아니다. 기존 검토본을 보호하고, 생성 결과의 기술 사실·경계·교차 참조를 사람이 검토한다.
 
-### 7.1 Topic Sheet 기반 보조 생성
+### 7.1 선택적 machine contract
+
+결정론 판정이 필요한 Topic은 기존 사람이 읽는 필드를 유지한 채 `logic_check.json`에 additive `machine_contract`를 둘 수 있다. Topic별 contract에는 이 문제에서 요구하는 canonical 관계, requirement별 최소 충족 수와 전역 invariant를 기존 fatal rule ID에 연결하는 binding만 둔다. PFD의 무차원성처럼 여러 Topic에 공통인 사실은 반복하지 않고 `grading_ontology/`가 소유한다.
+
+`scripts/validate_topic_packs.py`가 선택적 contract의 owner topic, fact reference, requirement reference와 fatal rule reference를 검사한다. contract 추가 후에는 정상 표현과 관계·극성·차원을 바꾼 mutation을 함께 회귀 fixture로 추가한다. 특정 답안 문장 전체를 조건으로 쓰거나 LLM 출력의 score/verdict를 contract 입력으로 사용하지 않는다.
+
+### 7.2 Topic Sheet 기반 보조 생성
 
 신규 Topic의 표준 시작 명령은 다음과 같다. `--generate`를 생략하면 관리되는 scaffold만 만들고 JSON은 직접 작성한다.
 

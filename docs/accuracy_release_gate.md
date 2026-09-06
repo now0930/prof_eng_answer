@@ -74,3 +74,14 @@ false pass/strong/high-score 0건이다. 요구 상태 정확도 기준에 미�
 `mean_out_of_range_distance`를 보고하며, expert total label이 있을 때만 actual
 total MAE·signed error·A/B/C/D/E layer MAE·pairwise ordering을 계산한다. padding
 변형 group이 제공되면 padding sensitivity도 별도로 보고한다.
+
+## 결정론적 권한 제거 Gate
+
+Provider Accuracy·Stability Gate와 LLM verdict authority 제거 Gate는 별도다. 전자는 현재 provider 기반 운영 후보의 정확도를 검증하고, 후자는 외부 provider 없이 correctness verdict를 소유할 준비가 됐는지 검증한다.
+
+```bash
+python3 scripts/run_deterministic_replay_audit.py
+python3 scripts/check_deterministic_authority_gate.py
+```
+
+정본은 `calibration/deterministic_authority_policy.json`이다. 현재 Gemini-off known-fatal recall은 11.11%(1/9)로 `HOLD`이며, 이 상태에서는 `DETERMINISTIC_GRADING_PRIMARY=true`를 설정해도 권한 전환을 허용하지 않는다.

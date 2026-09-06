@@ -12,6 +12,7 @@
 | 요구상태 안정성 Gate | 구현 완료, 새 후보 반복 실행 미검증 | `demand_state_stability.py`, `calibration/demand_state_stability_policy.json` |
 | Topic Pack authoring·검증 | `ab94b69`에서 범용·대상 기반 흐름 적용 | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
 | Runtime provenance | process 수준 구현, image/container 증명 미완료 | [`operation_runbook.md`](operation_runbook.md), Issue #1 |
+| 결정론적 채점 전환 | Stage35A~35H 기반 완료, 권한 전환 `HOLD`(known-fatal 1/9) | [`deterministic_grading_transition.md`](deterministic_grading_transition.md) |
 
 코드 회귀 PASS와 운영 정확도 `READY`, 배포 증명 완료는 서로 다른 판정이다. 하나의 판정으로 다른 판정을 대체하지 않는다.
 
@@ -103,5 +104,11 @@ manifest의 `issue_close_eligible=true`는 기술 Gate가 모두 통과했다는
 - [`accuracy_release_gate.md`](accuracy_release_gate.md): 정확도 Gate 수치와 실행법
 - Issue #1: 최신 HEAD, Gate 결과, 배포 증거와 남은 blocker
 - `docs/archive/`: 종료된 Stage와 과거 판단 기록
+
+## 8. 결정론적 판정권 전환
+
+외부 LLM 제거는 provider 교체가 아니라 판정 소유권 이전이다. canonical evidence, 전역 ontology, Topic Pack machine contract, deterministic evaluator, fatal 전파, 점수와 verdict consistency 순으로 이전한다. LLM은 미해결 자연어의 evidence 추출만 보조할 수 있다.
+
+현재 quantity/dimension pilot과 FSRM machine contract, 운영 shadow 및 권한 제거 Gate는 구현됐다. 그러나 Gemini-off 30건 replay의 known-fatal recall이 1/9이므로 production verdict authority는 이전하지 않는다. 남은 8개 fatal을 개별 문장이 아닌 오류 유형별 invariant owner로 확장한 뒤 [`deterministic_grading_transition.md`](deterministic_grading_transition.md)의 Gate를 다시 실행한다.
 
 Issue 본문은 현재 상태만 유지한다. 긴 실행 로그는 comment 또는 repository artifact에 남기고, 완료된 과거 Stage를 현재 blocker처럼 유지하지 않는다.

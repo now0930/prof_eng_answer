@@ -4,7 +4,7 @@
 
 프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
 
-> 최신 상태(2026-09-06): 최근 완료된 30건 실행(`ac79b20`)은 요구 상태 정확도 80.18%로 `HOLD`입니다. canonical demand ledger에 원문 인용 검증을 추가했고 Release Orchestrator는 Accuracy Gate 뒤 반복 실행 Stability Gate도 요구합니다. 새 commit의 실제 provider 재검증 전에는 운영 배포를 재승인하지 않습니다. 고정 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
+> 최신 상태(2026-09-06): 결정론적 전환 기반은 Stage35A~35H까지 구현됐지만 Gemini-off known-fatal recall이 11.11%(1/9)이므로 권한 제거 Gate는 `HOLD`입니다. 운영은 legacy primary + score-neutral deterministic shadow이며 무리한 primary 전환은 코드가 거부합니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
 ---
 
@@ -70,6 +70,7 @@
 | [`llm_provider.md`](llm_provider.md) | provider routing, fallback, JSON parsing과 Python 후처리 경계 |
 | [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md) | 과대채점 회귀 corpus, 의미 fingerprint, 이웃 주제 음성 사례와 기준선 변경 절차 |
 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md) | 정확도 Gate, Golden Set, Topic Pack과 release/deployment의 장기 관리 정책 |
+| [`deterministic_grading_transition.md`](deterministic_grading_transition.md) | LLM 판정권 제거 단계, canonical evidence·ontology·machine contract와 권한 Gate |
 | [`accuracy_release_gate.md`](accuracy_release_gate.md) | 전문가 검토 dataset의 운영 배포 기준과 실행법 |
 
 ### Rubric와 Topic Pack

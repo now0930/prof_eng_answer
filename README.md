@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-06): 최근 완료된 30건 실행(`ac79b20`)의 요구 상태 정확도는 80.18%로 Accuracy Gate가 아직 `HOLD`입니다. 현재 변경은 답안 원문 인용 검증과 반복 실행 Stability Gate를 추가했으며, 새 commit의 2회 uncached 30건 검증 전에는 운영 배포를 승인하지 않습니다. 코드 회귀 PASS는 정확도 `READY`나 운영 배포 완료를 뜻하지 않습니다.
+> 최신 개발 상태(2026-09-06): 결정론적 채점 전환 Stage35A~35H의 기반과 fail-closed 권한 Gate를 구현했습니다. Gemini-off 30건 replay의 known-fatal recall은 11.11%(1/9)라 권한 제거는 `HOLD`이며, 현재 운영은 legacy primary + deterministic shadow입니다. 코드 회귀 PASS는 결정론 primary 전환, 정확도 `READY` 또는 운영 배포 완료를 뜻하지 않습니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 
@@ -44,6 +44,8 @@
 - 최종 채점 결과에 process-stable runtime provenance 6개 필드 첨부
 - runtime provenance와 Docker image·container·host parity 기반 deployment proof의 경계 명시
 - Topic Pack → 현재 provider 30건 → Accuracy Gate → 배포 증거를 순서화하는 fail-closed Release Orchestrator
+- provider-neutral canonical evidence, 전역 공학 ontology와 Topic Pack machine contract 기반 결정론적 채점 전환
+- 외부 모델 호출 없이 실행되는 score-neutral deterministic production shadow와 권한 제거 Gate
 
 ### 현재 검증 기준
 
