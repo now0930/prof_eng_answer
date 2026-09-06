@@ -9,6 +9,7 @@ from typing import Any, Mapping
 
 from local_semantic_resolver import resolve_with_optional_local_semantics
 from engineering_invariant_evaluator import evaluate_engineering_invariants
+from deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
 from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
@@ -143,7 +144,18 @@ def build_deterministic_grading_shadow(
                 "requirement_refs": list(binding["requirement_refs"]),
                 "recommended_ceiling": binding["recommended_ceiling"],
             })
-    requirements = _requirement_results(contract, claims, violated_requirements)
+    requirement_evaluation = evaluate_deterministic_requirements(
+        claims=claims,
+        invariant_codes=[
+            row["code"] for row in dimension["violations"] + engineering["violations"]
+        ],
+        topic_ids=[topic_id] if topic_id else None,
+    )
+    if requirement_evaluation["requirements"]:
+        requirements = requirement_evaluation["requirements"]
+        findings = requirement_evaluation["findings"] or findings
+    else:
+        requirements = _requirement_results(contract, claims, violated_requirements)
     return {
         "version": VERSION,
         "marker": MARKER,
@@ -164,6 +176,12 @@ def build_deterministic_grading_shadow(
             row["classification"] in {"fatal", "core_error"}
             for row in findings
         ),
+        "requirement_full_credit_allowed": requirement_evaluation[
+            "requirement_full_credit_allowed"
+        ],
+        "perfect_theory_comment_allowed": requirement_evaluation[
+            "perfect_theory_comment_allowed"
+        ],
     }
 
 
