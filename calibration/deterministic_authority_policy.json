@@ -1,0 +1,11 @@
+{
+  "version": "deterministic_authority_policy_v1",
+  "minimum_known_fatal_recall": 1.0,
+  "maximum_fatal_false_positive_count": 0,
+  "minimum_deterministic_repeatability": 1.0,
+  "maximum_unexplained_verdict_diff_count": 0,
+  "require_known_overgrading_regression_pass": true,
+  "require_normal_answer_regression_pass": true,
+  "require_score_verdict_consistency_pass": true,
+  "require_external_llm_not_required": true
+}
