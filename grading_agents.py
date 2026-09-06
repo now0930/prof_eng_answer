@@ -10914,6 +10914,16 @@ def run_agent_pipeline(*args, **kwargs):
         )
     )
 
+    # STAGE35G_DETERMINISTIC_PRIMARY_SHADOW_V1
+    # Diagnostic only: no production score/verdict mutation or provider call.
+    from deterministic_grading_shadow import attach_deterministic_grading_shadow
+    finalized_result = attach_deterministic_grading_shadow(
+        finalized_result,
+        question_text=str(submission_normalization.get("question_text") or ""),
+        answer_text=str(submission_normalization.get("answer_text") or ""),
+        is_grade_dict=_stage17e5_is_grade_dict,
+    )
+
     # STAGE23J_RUNTIME_PROVENANCE_FINAL_WRAPPER_V4
     finalized_result = _stage23j_attach_runtime_provenance(
         finalized_result,
