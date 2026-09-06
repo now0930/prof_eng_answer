@@ -23,6 +23,8 @@ def _replay(**overrides):
         "deterministic_score_coverage": 1.0,
         "deterministic_score_in_range_rate": 1.0,
         "deterministic_score_mean_out_of_range_distance": 0.0,
+        "deterministic_topic_routing_recall": 1.0,
+        "deterministic_topic_routing_false_positive_count": 0,
         "unexplained_verdict_diff_count": 0,
         "external_llm_required_for_verdict": False,
     }

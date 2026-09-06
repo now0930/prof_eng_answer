@@ -84,4 +84,4 @@ python3 scripts/run_deterministic_replay_audit.py
 python3 scripts/check_deterministic_authority_gate.py
 ```
 
-정본은 `calibration/deterministic_authority_policy.json`이다. 현재 Gemini-off known-fatal recall은 100%(9/9), false positive는 0, score coverage는 100%(30/30)이고 2회 replay는 `STABLE`이다. 그러나 점수 허용구간 적중률 43.33%는 기준 85%에 미달하고 평균 범위 이탈 1.432667점은 최대 1.0점을 초과하며 known-overgrading 위반도 1건 남아 `HOLD`다. 이 상태에서는 `DETERMINISTIC_GRADING_PRIMARY=true`를 설정해도 권한 전환을 허용하지 않는다.
+정본은 `calibration/deterministic_authority_policy.json`이다. Stage38 Gemini-off 30건은 질문-only Topic routing recall 100%, known-fatal recall 100%(9/9), false positive 0, score coverage 100%(30/30), 점수 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건이고 2회 replay는 `STABLE`이다. 따라서 offline Authority Gate는 `READY`다. 다만 production primary engine 연결과 rollback 검증은 별도 Gate이며 현재 entrypoint는 준비된 report가 있더라도 조기 활성화를 거부한다.

@@ -33,19 +33,23 @@ class DeterministicReplayAuditTests(unittest.TestCase):
     def test_all_known_fatal_invariants_are_now_owned(self):
         self.assertEqual(self.report["known_fatal_recall"], 1.0)
         self.assertEqual(self.report["fatal_false_positive_count"], 0)
-        self.assertEqual(self.report["known_overgrading_violation_count"], 1)
-        self.assertFalse(self.report["known_overgrading_regression_pass"])
+        self.assertEqual(self.report["known_overgrading_violation_count"], 0)
+        self.assertTrue(self.report["known_overgrading_regression_pass"])
         self.assertEqual(self.report["unexplained_verdict_diff_count"], 0)
         self.assertTrue(self.report["fatal_invariants_ready"])
 
-    def test_authority_requires_score_accuracy_not_only_coverage(self):
+    def test_offline_authority_evidence_is_complete(self):
         self.assertEqual(self.report["deterministic_score_coverage"], 1.0)
-        self.assertLess(self.report["deterministic_score_in_range_rate"], 0.85)
-        self.assertGreater(
+        self.assertGreaterEqual(self.report["deterministic_score_in_range_rate"], 0.85)
+        self.assertLessEqual(
             self.report["deterministic_score_mean_out_of_range_distance"], 1.0
         )
-        self.assertEqual(self.report["decision"], "HOLD")
-        self.assertTrue(self.report["external_llm_required_for_verdict"])
+        self.assertEqual(self.report["deterministic_topic_routing_recall"], 1.0)
+        self.assertEqual(
+            self.report["deterministic_topic_routing_false_positive_count"], 0
+        )
+        self.assertEqual(self.report["decision"], "READY")
+        self.assertFalse(self.report["external_llm_required_for_verdict"])
 
     def test_runtime_has_no_llm_imports(self):
         source = (REPO / "deterministic_replay_audit.py").read_text(encoding="utf-8")

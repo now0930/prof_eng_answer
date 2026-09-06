@@ -169,7 +169,9 @@ def build_deterministic_grading_shadow(
         findings = requirement_evaluation["findings"] or findings
     else:
         requirements = _requirement_results(contract, claims, violated_requirements)
-    deterministic_score = calculate_deterministic_score(requirement_evaluation)
+    deterministic_score = calculate_deterministic_score(
+        requirement_evaluation, answer_text=answer_text,
+    )
     return {
         "version": VERSION,
         "marker": MARKER,

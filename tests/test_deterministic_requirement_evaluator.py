@@ -49,6 +49,23 @@ class DeterministicRequirementEvaluatorTests(unittest.TestCase):
         row = next(row for row in result["requirements"] if row["requirement_id"] == "target_pfd_relation")
         self.assertEqual(row["status"], "SATISFIED")
 
+    def test_global_invariant_owner_survives_neighbor_primary_routing(self):
+        result = evaluate_deterministic_requirements(
+            claims=[],
+            invariant_codes=["DIMENSIONALLY_INVALID_COMPARISON"],
+            topic_ids=["hazop_lopa_ipl_risk_reduction_sil_target_allocation"],
+        )
+
+        finding = next(
+            row for row in result["findings"]
+            if row["invariant_code"] == "DIMENSIONALLY_INVALID_COMPARISON"
+        )
+        self.assertEqual(
+            finding["owner_topic_id"],
+            "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+        )
+        self.assertTrue(result["fatal_or_core_error"])
+
 
 if __name__ == "__main__":
     unittest.main()

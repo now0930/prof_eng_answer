@@ -111,6 +111,8 @@ python3 -m py_compile \
   engineering_invariant_evaluator.py \
   deterministic_requirement_evaluator.py \
   deterministic_score_engine.py \
+  deterministic_score_evidence.py \
+  deterministic_topic_router.py \
   fact_anchor_evidence_adapter.py \
   scripts/check_deterministic_authority_gate.py \
   scripts/run_deterministic_stability_gate.py \
@@ -608,6 +610,8 @@ python3 -B tests/test_sil_engineering_invariants.py
 python3 -B tests/test_software_engineering_invariants.py
 python3 -B tests/test_deterministic_requirement_evaluator.py
 python3 -B tests/test_deterministic_score_engine.py
+python3 -B tests/test_deterministic_score_evidence.py
+python3 -B tests/test_deterministic_topic_router.py
 python3 -B tests/test_deterministic_stability_gate.py
 python3 -B tests/test_fact_anchor_evidence_adapter.py
 python3 -B tests/test_demand_state_contract.py

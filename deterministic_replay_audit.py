@@ -10,6 +10,7 @@ from expert_accuracy_benchmark import load_jsonl, validate_gold_case
 from engineering_invariant_evaluator import evaluate_engineering_invariants
 from deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from deterministic_score_engine import calculate_deterministic_score
+from deterministic_topic_router import route_question_topics
 from fact_anchor_evidence_adapter import (
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
@@ -75,6 +76,9 @@ def run_deterministic_replay_audit(
     score_distances: list[float] = []
     score_in_range_count = 0
     overgrading_violations: list[dict[str, Any]] = []
+    routing_true_positive = 0
+    routing_expected_count = 0
+    routing_false_positive = 0
     unexplained: list[dict[str, Any]] = []
 
     def analyze(question: str, answer: str) -> dict[str, Any]:
@@ -88,6 +92,12 @@ def run_deterministic_replay_audit(
 
     for case in cases:
         question, answer = _fixture(root, case)
+        routed = route_question_topics(question)
+        expected_topics = set(case.get("topic_ids", []))
+        routed_topics = set(routed["topic_ids"])
+        routing_true_positive += len(expected_topics & routed_topics)
+        routing_expected_count += len(expected_topics)
+        routing_false_positive += len(routed_topics - expected_topics)
         first = analyze(question, answer)
         second = analyze(question, answer)
         repeatable = first == second
@@ -111,31 +121,31 @@ def run_deterministic_replay_audit(
         requirement_evaluation = evaluate_deterministic_requirements(
             claims=first["claims"],
             invariant_codes=invariant_codes,
-            topic_ids=case.get("topic_ids", []),
+            topic_ids=routed["topic_ids"],
         )
         requirement_evaluation = augment_requirement_evaluation(
             requirement_evaluation,
             evaluate_fact_anchor_requirements(
                 answer_text=answer,
-                topic_ids=case.get("topic_ids", []),
+                topic_ids=routed["topic_ids"],
                 question_text=question,
             ),
         )
-        score = calculate_deterministic_score(requirement_evaluation)
+        score = calculate_deterministic_score(requirement_evaluation, answer_text=answer)
         repeated_requirements = evaluate_deterministic_requirements(
             claims=second["claims"],
             invariant_codes={row["code"] for row in second["violations"]},
-            topic_ids=case.get("topic_ids", []),
+            topic_ids=routed["topic_ids"],
         )
         repeated_requirements = augment_requirement_evaluation(
             repeated_requirements,
             evaluate_fact_anchor_requirements(
                 answer_text=answer,
-                topic_ids=case.get("topic_ids", []),
+                topic_ids=routed["topic_ids"],
                 question_text=question,
             ),
         )
-        repeated_score = calculate_deterministic_score(repeated_requirements)
+        repeated_score = calculate_deterministic_score(repeated_requirements, answer_text=answer)
         if score != repeated_score:
             score_consistency_failures += 1
         if score["decision"] == "SCORED":
@@ -174,6 +184,8 @@ def run_deterministic_replay_audit(
             "deterministic_score_decision": score["decision"],
             "deterministic_score": score["total_score"],
             "gold_score_range": case.get("labels", {}).get("score_range"),
+            "deterministic_routed_topic_ids": routed["topic_ids"],
+            "gold_topic_ids": sorted(expected_topics),
         })
 
     recall = true_positive / known_fatal_count if known_fatal_count else 1.0
@@ -191,14 +203,22 @@ def run_deterministic_replay_audit(
     score_in_range_rate = (
         score_in_range_count / len(score_distances) if score_distances else 0.0
     )
-    ready = bool(
-        fatal_invariants_ready
-        and score_coverage == 1.0
+    routing_recall = (
+        routing_true_positive / routing_expected_count if routing_expected_count else 0.0
+    )
+    score_accuracy_ready = bool(
+        score_coverage == 1.0
         and score_consistent
         and not overgrading_violations
         and mean_score_distance is not None
         and mean_score_distance <= 1.0
         and score_in_range_rate >= 0.85
+    )
+    ready = bool(
+        fatal_invariants_ready
+        and score_accuracy_ready
+        and routing_recall == 1.0
+        and routing_false_positive == 0
     )
     return {
         "version": VERSION,
@@ -223,6 +243,9 @@ def run_deterministic_replay_audit(
             round(mean_score_distance, 6) if mean_score_distance is not None else None
         ),
         "deterministic_score_in_range_rate": round(score_in_range_rate, 6),
+        "deterministic_score_accuracy_ready": score_accuracy_ready,
+        "deterministic_topic_routing_recall": round(routing_recall, 6),
+        "deterministic_topic_routing_false_positive_count": routing_false_positive,
         "known_overgrading_regression_pass": not overgrading_violations,
         "known_overgrading_violation_count": len(overgrading_violations),
         "known_overgrading_violations": overgrading_violations,

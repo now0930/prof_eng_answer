@@ -54,13 +54,17 @@ def evaluate_deterministic_requirements(
         str(row).strip() for row in (topic_ids or []) if str(row).strip()
     }
     selected_contracts = load_machine_contracts(requested_topics)
-    if not requested_topics and codes:
-        # An invariant code is globally unique and may safely resolve its owner
-        # even when legacy routing exposed only the neighboring primary topic.
-        selected_contracts = [
+    if codes:
+        # An invariant code is globally unique and its owner must remain active
+        # when routing exposes a neighboring primary Topic.
+        owners = [
             contract for contract in load_machine_contracts()
             if any(row["invariant_code"] in codes for row in contract["invariant_bindings"])
         ]
+        selected_owner_ids = {row["owner_topic_id"] for row in selected_contracts}
+        selected_contracts.extend(
+            row for row in owners if row["owner_topic_id"] not in selected_owner_ids
+        )
     claim_keys = {_key(row) for row in claims}
     results: list[dict[str, Any]] = []
     findings: list[dict[str, Any]] = []

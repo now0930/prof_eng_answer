@@ -2,7 +2,7 @@
 
 ## 1. 목표와 기준선
 
-목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage37 구현으로 Gemini-off Golden 30건의 known-fatal 검출은 9/9(`100%`), score coverage는 30/30(`100%`)가 됐다. 다만 허용구간 적중률은 43.33%, 평균 범위 이탈은 1.432667점이고 known-overgrading 위반이 1건이므로 production authority는 이전하지 않는다.
+목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage38 offline full-chain은 Topic routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건으로 Authority Gate `READY`다. production authority는 entrypoint 연결·rollback·운영 증거 전까지 이전하지 않는다.
 
 완료 목표:
 
@@ -201,4 +201,9 @@ python3 scripts/check_deterministic_authority_gate.py
 | Stage37D | 완료·정확도 HOLD | score coverage 30/30, 적중률 43.33%, 평균 이탈 1.432667 |
 | Stage37E | 완료·전환 HOLD | 권한 Gate 재평가 및 premature cutover 차단 |
 
-다음 착수점은 Stage38의 공통 점수축 calibration이다. Golden case ID, fixture 문장 또는 목표 점수 구간을 runtime rule로 사용하지 않는다. A(구조), B(질문 요구 완전성), C(fact correctness), D(현장 판단), E(연결성)를 독립 evidence로 산출하고 mutation·normal-answer 회귀로 과대평가와 과소평가를 함께 검증한다.
+| Stage38A | 완료 | 질문-only deterministic Topic router와 multi-topic alias evidence |
+| Stage38B | 완료 | A/B/C/D/E provider-free score evidence |
+| Stage38C | 완료 | full-chain Golden 30건 Accuracy·overgrading Gate `READY` |
+| Stage38D | 완료 | 2회 exact replay `STABLE`, external provider call 0 |
+
+다음 착수점은 Stage39 production authority 연결이다. `DETERMINISTIC_GRADING_PRIMARY=true`일 때 READY artifact와 코드 fingerprint를 확인하고 legacy LLM core를 호출하지 않는 별도 entrypoint를 연결한다. public grade schema, persistence, Telegram summary, rollback switch, image/container parity와 endpoint smoke가 모두 통과한 뒤에만 운영 기본값을 변경한다.

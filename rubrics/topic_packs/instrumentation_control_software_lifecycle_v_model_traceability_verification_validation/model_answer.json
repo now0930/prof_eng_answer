@@ -209,6 +209,10 @@
     "review and approval",
     "exit criteria"
   ],
+  "deterministic_routing_aliases": [
+    "V-Model",
+    "단위·통합·시스템시험"
+  ],
   "revision_notes": [
     "V-Model과 시험수준의 대응을 답안구조 중심으로 정리했다.",
     "양방향 RTM, 분석·회귀시험과 고급 시험환경을 고득점 포인트로 반영했다.",

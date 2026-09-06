@@ -44,6 +44,21 @@ class DeterministicScoreEngineTests(unittest.TestCase):
         self.assertFalse(result["official_pass_met"])
         self.assertFalse(result["high_score_met"])
 
+    def test_answer_evidence_produces_a_to_e_breakdown_and_volume_cap(self):
+        evaluation = {
+            "requirements": [{"status": "SATISFIED"}] * 4,
+            "findings": [], "fatal_or_core_error": False,
+        }
+        result = calculate_deterministic_score(
+            evaluation, answer_text="1. 원리\n- 현장 조건을 확인한다.\n2. 결론",
+        )
+        self.assertEqual(set(result["score_breakdown"]), {
+            "A_structure", "B_requirement_completeness", "C_fact_correctness",
+            "D_engineering_judgment", "E_linkage",
+        })
+        self.assertLessEqual(result["total_score"], 19.0)
+        self.assertFalse(result["high_score_met"])
+
 
 if __name__ == "__main__":
     unittest.main()

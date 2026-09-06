@@ -66,13 +66,13 @@ class DeterministicGradingShadowTests(unittest.TestCase):
         self.assertEqual(attached["verdict"], original["verdict"])
         self.assertEqual(attached["deterministic_grading_shadow"]["score_effect"], "none")
 
-    def test_unrelated_topic_keeps_generic_invariant_without_fatal_binding(self):
+    def test_global_invariant_owner_survives_unrelated_primary_route(self):
         result = build_deterministic_grading_shadow(
             grade={"total_score": 10, "topic_id": "unrelated"},
             question_text="비교를 설명하시오.", answer_text="lambda < PFD",
         )
-        self.assertEqual(result["findings"][0]["classification"], "technical_error")
-        self.assertFalse(result["fatal_or_core_error"])
+        self.assertEqual(result["findings"][0]["classification"], "fatal")
+        self.assertTrue(result["fatal_or_core_error"])
 
 
 if __name__ == "__main__":

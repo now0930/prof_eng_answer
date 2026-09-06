@@ -267,6 +267,10 @@
     "validated library function block",
     "safety bypass override modification audit competence"
   ],
+  "deterministic_routing_aliases": [
+    "안전필수 소프트웨어",
+    "SIL 관점 소프트웨어 검증"
+  ],
   "routing_field_points": [
     "SIS가 하나 이상의 SIF를 구현하며 SIL은 SIF 요구 무결성 수준이라는 관계",
     "SRS의 기능 요구와 무결성 요구",

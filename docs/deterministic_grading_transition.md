@@ -15,8 +15,9 @@
 | 35G | 완료 | 운영 점수에 영향 없는 deterministic shadow |
 | 35H | Gate 구현 완료, 권한 전환 보류 | LLM verdict authority 제거 fail-closed Gate |
 | 37 | coverage 확장 완료, 정확도 `HOLD` | 질문별 anchor scope + provider-free Fact Anchor evidence |
+| 38 | offline Gate `READY` | 질문-only routing + A/B/C/D/E score evidence + full-chain replay |
 
-Stage37 기준 30건의 known fatal 9개를 모두 검출해 recall은 `1.0`이며 false positive는 0, 두 번의 전체 replay는 exact match로 `STABLE`이다. 질문별 명시 `required_anchor_ids`를 우선하고 명시 mapping이 없거나 유사도가 낮으면 전체 anchor로 fail-open하는 Fact Anchor adapter를 연결해 score coverage는 30/30이 됐다. 그러나 허용구간 적중률은 `0.433333`, 평균 범위 이탈은 `1.432667`이고 known-overgrading 위반 1건이 남아 권한 Gate는 `HOLD`다. 따라서 현재 운영 상태는 다음과 같다.
+Stage38 기준 질문-only Topic routing recall `1.0`, routing false positive 0, known fatal recall `1.0`(9/9), score coverage `1.0`, 허용구간 적중률 `0.866667`, 평균 범위 이탈 `0.045`, known-overgrading 0, 두 번의 전체 replay exact match를 달성해 offline Authority Gate는 `READY`다. 점수는 A 구조, B 요구 완전성, C fact correctness, D 공학 판단, E 연결성의 provider-free evidence를 분리하고, 3쪽 미만 evidence는 high-score eligibility만 제한한다. 하지만 production entrypoint는 아직 legacy core를 호출하므로 현재 운영 상태는 다음과 같다.
 
 ```text
 DETERMINISTIC_GRADING_PRIMARY=FALSE
@@ -65,7 +66,7 @@ python3 scripts/check_deterministic_authority_gate.py
 - 평균 score 허용구간 이탈 1.0점 이하
 - external LLM required for verdict 0
 
-평균 점수 유사성은 correctness Gate를 대신할 수 없다. known fatal owner 이전과 score coverage 확장은 완료됐다. 다음 구현 순서는 답안 길이나 Golden case ID에 맞춘 보정이 아니라 A/B/C/D/E 공통 축을 결정론적 evidence로 분리하는 것이다. 구조, 질문 요구 완전성, fact correctness, 현장 판단, 연결성을 각각 검증 가능하게 산출하고 fatal·core error의 단일-owner ceiling을 마지막에 적용한다.
+평균 점수 유사성은 correctness Gate를 대신할 수 없다. Stage38은 Golden case ID나 목표 score range를 runtime rule에 사용하지 않으며 질문, Topic Pack, ontology와 가시적 답안 evidence만 사용한다. 다음 구현 순서는 production entrypoint에서 READY artifact와 코드 fingerprint를 검증한 뒤 legacy LLM core를 우회하고 deterministic result schema·persistence·Telegram summary·rollback을 검증하는 것이다.
 
 세부 실행 순서와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)를 따른다.
 

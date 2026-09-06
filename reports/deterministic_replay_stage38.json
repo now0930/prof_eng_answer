@@ -1,0 +1,647 @@
+{
+  "version": "deterministic_replay_audit_v1",
+  "marker": "DETERMINISTIC_REPLAY_AUDIT_V1",
+  "provider_calls": 0,
+  "case_count": 30,
+  "known_fatal_count": 9,
+  "known_fatal_true_positive": 9,
+  "known_fatal_recall": 1.0,
+  "fatal_false_positive_count": 0,
+  "fatal_invariants_ready": true,
+  "deterministic_repeatability": 1.0,
+  "unexplained_verdict_diff_count": 0,
+  "deterministic_scored_case_count": 30,
+  "deterministic_score_coverage": 1.0,
+  "score_verdict_consistency_pass": true,
+  "deterministic_score_mean_out_of_range_distance": 0.045,
+  "deterministic_score_in_range_rate": 0.866667,
+  "deterministic_score_accuracy_ready": true,
+  "deterministic_topic_routing_recall": 1.0,
+  "deterministic_topic_routing_false_positive_count": 0,
+  "known_overgrading_regression_pass": true,
+  "known_overgrading_violation_count": 0,
+  "known_overgrading_violations": [],
+  "normal_answer_regression_pass": true,
+  "external_llm_required_for_verdict": false,
+  "llm_verdict_authority_removal_ready": true,
+  "decision": "READY",
+  "unexplained_differences": [],
+  "cases": [
+    {
+      "case_id": "sil_target_operations_issue1",
+      "gold_fatal_ids": [
+        "fatal_certificate_interval_as_operating_minimum",
+        "fatal_demand_mode_by_fault_detection",
+        "fatal_pst_replaces_full_test_or_reduces_mttr",
+        "fatal_target_pfd_frequency_product"
+      ],
+      "detected_fatal_ids": [
+        "fatal_certificate_interval_as_operating_minimum",
+        "fatal_demand_mode_by_fault_detection",
+        "fatal_pst_replaces_full_test_or_reduces_mttr",
+        "fatal_target_pfd_frequency_product"
+      ],
+      "deterministic_violation_codes": [
+        "CERTIFICATE_ASSUMPTION_AS_OPERATING_MINIMUM",
+        "DEMAND_MODE_DIAGNOSTIC_ROLE_CONFUSION",
+        "INVALID_TARGET_PROBABILITY_FREQUENCY_PRODUCT",
+        "PARTIAL_TEST_ROLE_OVERCLAIM"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 13.0,
+      "gold_score_range": {
+        "min": 10.0,
+        "max": 14.5
+      },
+      "deterministic_routed_topic_ids": [
+        "sil_target_determination_risk_reduction_and_lifecycle"
+      ],
+      "gold_topic_ids": [
+        "sil_target_determination_risk_reduction_and_lifecycle"
+      ]
+    },
+    {
+      "case_id": "sis_lopa_architecture_issue1",
+      "gold_fatal_ids": [
+        "failure_rate_compared_directly_to_pfd"
+      ],
+      "detected_fatal_ids": [
+        "failure_rate_compared_directly_to_pfd"
+      ],
+      "deterministic_violation_codes": [
+        "DIMENSIONALLY_INVALID_COMPARISON"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 13.0,
+      "gold_score_range": {
+        "min": 9.5,
+        "max": 13.0
+      },
+      "deterministic_routed_topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ],
+      "gold_topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ]
+    },
+    {
+      "case_id": "mcdc_vmodel_sil_issue1",
+      "gold_fatal_ids": [
+        "sil_four_universal_rule",
+        "sw04_fatal_misra_is_unit_test_tool",
+        "sw05_fatal_hft_is_integration_test",
+        "sw05_fatal_software_test_is_random_hardware_integrity"
+      ],
+      "detected_fatal_ids": [
+        "sil_four_universal_rule",
+        "sw04_fatal_misra_is_unit_test_tool",
+        "sw05_fatal_hft_is_integration_test",
+        "sw05_fatal_software_test_is_random_hardware_integrity"
+      ],
+      "deterministic_violation_codes": [
+        "CODING_GUIDELINE_AS_UNIT_TEST_TOOL",
+        "HARDWARE_ARCHITECTURE_AS_INTEGRATION_TEST",
+        "SOFTWARE_TEST_AS_RANDOM_HARDWARE_INTEGRITY",
+        "UNQUALIFIED_UNIVERSAL_SIL4_MCDC_RULE"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 11.42,
+      "gold_score_range": {
+        "min": 10.5,
+        "max": 14.5
+      },
+      "deterministic_routed_topic_ids": [
+        "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "sis_sil_safety_software_independence_systematic_failure_verification_validation"
+      ],
+      "gold_topic_ids": [
+        "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "sis_sil_safety_software_independence_systematic_failure_verification_validation"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-cs-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 7.47,
+      "gold_score_range": {
+        "min": 7.0,
+        "max": 11.0
+      },
+      "deterministic_routed_topic_ids": [
+        "balanced_trim_unbalanced_trim_structure_sealing_applications"
+      ],
+      "gold_topic_ids": [
+        "balanced_trim_unbalanced_trim_structure_sealing_applications"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-cs-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 18.5
+      },
+      "deterministic_routed_topic_ids": [
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection"
+      ],
+      "gold_topic_ids": [
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-cs-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 22.56,
+      "gold_score_range": {
+        "min": 20.5,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+      ],
+      "gold_topic_ids": [
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-da-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 7.68,
+      "gold_score_range": {
+        "min": 4.0,
+        "max": 10.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "gold_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-da-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 19.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "gold_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-da-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 20.56,
+      "gold_score_range": {
+        "min": 20.0,
+        "max": 25.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "gold_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-ie-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 6.72,
+      "gold_score_range": {
+        "min": 4.5,
+        "max": 10.5
+      },
+      "deterministic_routed_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ],
+      "gold_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-ie-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 19.0
+      },
+      "deterministic_routed_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ],
+      "gold_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-ie-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 20.97,
+      "gold_score_range": {
+        "min": 20.0,
+        "max": 25.0
+      },
+      "deterministic_routed_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ],
+      "gold_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-pi-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 8.84,
+      "gold_score_range": {
+        "min": 7.0,
+        "max": 11.0
+      },
+      "deterministic_routed_topic_ids": [
+        "thermocouple_temperature_sensor_seebeck_reference_junction_compensation"
+      ],
+      "gold_topic_ids": [
+        "thermocouple_temperature_sensor_seebeck_reference_junction_compensation"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-pi-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 18.5
+      },
+      "deterministic_routed_topic_ids": [
+        "rtd_temperature_sensor_principle_pt100_wiring_compensation"
+      ],
+      "gold_topic_ids": [
+        "rtd_temperature_sensor_principle_pt100_wiring_compensation"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-pi-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 24.25,
+      "gold_score_range": {
+        "min": 20.5,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error"
+      ],
+      "gold_topic_ids": [
+        "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error"
+      ]
+    },
+    {
+      "case_id": "model_reference_01_piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration"
+      ],
+      "gold_topic_ids": [
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration"
+      ]
+    },
+    {
+      "case_id": "model_reference_02_radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 24.1,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error"
+      ],
+      "gold_topic_ids": [
+        "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error"
+      ]
+    },
+    {
+      "case_id": "model_reference_03_control_valve_authority_rangeability_gain_installed_performance",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_authority_rangeability_gain_installed_performance"
+      ],
+      "gold_topic_ids": [
+        "control_valve_authority_rangeability_gain_installed_performance"
+      ]
+    },
+    {
+      "case_id": "model_reference_04_control_valve_types_globe_rotary_body_actuator_selection",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_types_globe_rotary_body_actuator_selection"
+      ],
+      "gold_topic_ids": [
+        "control_valve_types_globe_rotary_body_actuator_selection"
+      ]
+    },
+    {
+      "case_id": "model_reference_05_humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "humidity_measurement_capacitive_resistive_dew_point_selection_compensation"
+      ],
+      "gold_topic_ids": [
+        "humidity_measurement_capacitive_resistive_dew_point_selection_compensation"
+      ]
+    },
+    {
+      "case_id": "model_reference_06_industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+      ],
+      "gold_topic_ids": [
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+      ]
+    },
+    {
+      "case_id": "model_reference_07_smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "smart_positioner_diagnostics_valve_signature_predictive_maintenance"
+      ],
+      "gold_topic_ids": [
+        "smart_positioner_diagnostics_valve_signature_predictive_maintenance"
+      ]
+    },
+    {
+      "case_id": "model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+      ],
+      "gold_topic_ids": [
+        "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+      ]
+    },
+    {
+      "case_id": "model_reference_09_electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "electronics_error_noise_drift_tolerance_aging_power_mitigation"
+      ],
+      "gold_topic_ids": [
+        "electronics_error_noise_drift_tolerance_aging_power_mitigation"
+      ]
+    },
+    {
+      "case_id": "model_reference_10_ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 23.81,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response"
+      ],
+      "gold_topic_ids": [
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response"
+      ]
+    },
+    {
+      "case_id": "model_reference_11_configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ],
+      "gold_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ]
+    },
+    {
+      "case_id": "model_reference_12_control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_hardware_lifecycle_panel_architecture_component_selection_production_verification"
+      ],
+      "gold_topic_ids": [
+        "control_hardware_lifecycle_panel_architecture_component_selection_production_verification"
+      ]
+    },
+    {
+      "case_id": "model_reference_13_hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection"
+      ],
+      "gold_topic_ids": [
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection"
+      ]
+    },
+    {
+      "case_id": "model_reference_14_control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+      ],
+      "gold_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+      ]
+    },
+    {
+      "case_id": "model_reference_15_final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 19.0,
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test"
+      ],
+      "gold_topic_ids": [
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test"
+      ]
+    }
+  ]
+}
