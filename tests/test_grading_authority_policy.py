@@ -20,6 +20,7 @@ def _replay(**overrides):
         "known_fatal_recall": 1.0,
         "fatal_false_positive_count": 0,
         "deterministic_repeatability": 1.0,
+        "deterministic_score_coverage": 1.0,
         "unexplained_verdict_diff_count": 0,
         "external_llm_required_for_verdict": False,
     }

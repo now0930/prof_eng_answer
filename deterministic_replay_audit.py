@@ -8,6 +8,8 @@ from typing import Any
 
 from expert_accuracy_benchmark import load_jsonl, validate_gold_case
 from engineering_invariant_evaluator import evaluate_engineering_invariants
+from deterministic_requirement_evaluator import evaluate_deterministic_requirements
+from deterministic_score_engine import calculate_deterministic_score
 from quantity_dimension_evaluator import analyze_quantity_dimensions
 from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
@@ -64,6 +66,8 @@ def run_deterministic_replay_audit(
     true_positive = 0
     false_positive = 0
     repeatability_failures = 0
+    scored_case_count = 0
+    score_consistency_failures = 0
     unexplained: list[dict[str, Any]] = []
 
     def analyze(question: str, answer: str) -> dict[str, Any]:
@@ -71,6 +75,7 @@ def run_deterministic_replay_audit(
         engineering = evaluate_engineering_invariants(answer)
         return {
             "violations": quantity["violations"] + engineering["violations"],
+            "claims": quantity["canonical_evidence"]["claims"],
             "provider_calls": engineering["provider_calls"],
         }
 
@@ -95,6 +100,23 @@ def run_deterministic_replay_audit(
         known_fatal_count += len(gold_ids)
         true_positive += len(gold_ids & detected_ids)
         false_positive += len(detected_ids - gold_ids)
+        invariant_codes = {row["code"] for row in first["violations"]}
+        requirement_evaluation = evaluate_deterministic_requirements(
+            claims=first["claims"],
+            invariant_codes=invariant_codes,
+            topic_ids=case.get("topic_ids", []),
+        )
+        score = calculate_deterministic_score(requirement_evaluation)
+        repeated_requirements = evaluate_deterministic_requirements(
+            claims=second["claims"],
+            invariant_codes={row["code"] for row in second["violations"]},
+            topic_ids=case.get("topic_ids", []),
+        )
+        repeated_score = calculate_deterministic_score(repeated_requirements)
+        if score != repeated_score:
+            score_consistency_failures += 1
+        if score["decision"] == "SCORED":
+            scored_case_count += 1
         for finding_id in sorted(gold_ids - detected_ids):
             unexplained.append({
                 "case_id": case["case_id"],
@@ -109,14 +131,23 @@ def run_deterministic_replay_audit(
                 violation["code"] for violation in first["violations"]
             }),
             "repeatable": repeatable,
+            "deterministic_score_decision": score["decision"],
+            "deterministic_score": score["total_score"],
         })
 
     recall = true_positive / known_fatal_count if known_fatal_count else 1.0
-    ready = bool(
+    fatal_invariants_ready = bool(
         recall == 1.0
         and false_positive == 0
         and repeatability_failures == 0
         and not unexplained
+    )
+    score_coverage = scored_case_count / len(cases) if cases else 0.0
+    score_consistent = score_consistency_failures == 0
+    ready = bool(
+        fatal_invariants_ready
+        and score_coverage == 1.0
+        and score_consistent
     )
     return {
         "version": VERSION,
@@ -127,12 +158,18 @@ def run_deterministic_replay_audit(
         "known_fatal_true_positive": true_positive,
         "known_fatal_recall": round(recall, 6),
         "fatal_false_positive_count": false_positive,
+        "fatal_invariants_ready": fatal_invariants_ready,
         "deterministic_repeatability": (
             1.0 if not repeatability_failures else round(
                 (len(cases) - repeatability_failures) / len(cases), 6
             )
         ),
         "unexplained_verdict_diff_count": len(unexplained),
+        "deterministic_scored_case_count": scored_case_count,
+        "deterministic_score_coverage": round(score_coverage, 6),
+        "score_verdict_consistency_pass": score_consistent,
+        "known_overgrading_regression_pass": bool(recall == 1.0),
+        "normal_answer_regression_pass": bool(false_positive == 0),
         "external_llm_required_for_verdict": not ready,
         "llm_verdict_authority_removal_ready": ready,
         "decision": "READY" if ready else "HOLD",

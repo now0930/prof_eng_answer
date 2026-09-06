@@ -26,9 +26,9 @@ def main() -> int:
     )
     report = evaluate_authority_removal_gate(
         replay,
-        known_overgrading_regression_pass=False,
-        normal_answer_regression_pass=(replay["fatal_false_positive_count"] == 0),
-        score_verdict_consistency_pass=False,
+        known_overgrading_regression_pass=replay["known_overgrading_regression_pass"],
+        normal_answer_regression_pass=replay["normal_answer_regression_pass"],
+        score_verdict_consistency_pass=replay["score_verdict_consistency_pass"],
     )
     rendered = json.dumps(report, ensure_ascii=False, indent=2) + "\n"
     if args.output:

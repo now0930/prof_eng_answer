@@ -62,6 +62,11 @@ def evaluate_authority_removal_gate(
         replay_report.get("deterministic_repeatability"),
         selected["minimum_deterministic_repeatability"],
     )
+    minimum(
+        "DETERMINISTIC_SCORE_COVERAGE",
+        replay_report.get("deterministic_score_coverage"),
+        selected["minimum_deterministic_score_coverage"],
+    )
     maximum(
         "UNEXPLAINED_VERDICT_DIFF_COUNT",
         replay_report.get("unexplained_verdict_diff_count"),
@@ -74,10 +79,13 @@ def evaluate_authority_removal_gate(
     if selected["require_score_verdict_consistency_pass"]:
         required_true("SCORE_VERDICT_CONSISTENCY", score_verdict_consistency_pass)
     if selected["require_external_llm_not_required"]:
-        required_true(
-            "EXTERNAL_LLM_REQUIRED_FOR_VERDICT",
-            replay_report.get("external_llm_required_for_verdict") is False,
-        )
+        actual_external = replay_report.get("external_llm_required_for_verdict")
+        if actual_external is not False:
+            blockers.append({
+                "code": "EXTERNAL_LLM_REQUIRED_FOR_VERDICT",
+                "actual": actual_external,
+                "required": False,
+            })
     ready = not blockers
     return {
         "version": VERSION,

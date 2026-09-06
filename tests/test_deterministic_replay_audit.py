@@ -34,8 +34,12 @@ class DeterministicReplayAuditTests(unittest.TestCase):
         self.assertEqual(self.report["known_fatal_recall"], 1.0)
         self.assertEqual(self.report["fatal_false_positive_count"], 0)
         self.assertEqual(self.report["unexplained_verdict_diff_count"], 0)
-        self.assertEqual(self.report["decision"], "READY")
-        self.assertFalse(self.report["external_llm_required_for_verdict"])
+        self.assertTrue(self.report["fatal_invariants_ready"])
+
+    def test_authority_remains_hold_until_score_coverage_is_complete(self):
+        self.assertLess(self.report["deterministic_score_coverage"], 1.0)
+        self.assertEqual(self.report["decision"], "HOLD")
+        self.assertTrue(self.report["external_llm_required_for_verdict"])
 
     def test_runtime_has_no_llm_imports(self):
         source = (REPO / "deterministic_replay_audit.py").read_text(encoding="utf-8")
