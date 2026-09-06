@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from topic_machine_contract import validate_topic_machine_contract
+from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
 PACK_ROOT = ROOT / "rubrics" / "topic_packs"
 
@@ -502,11 +502,7 @@ def validate_logic_check(pack_dir: Path, topic_id: str) -> None:
 
     machine_contract = data.get("machine_contract")
     if machine_contract is not None:
-        fatal_ids = {
-            str(row).split("]", 1)[0].lstrip("[").strip()
-            for row in (llm_profile.get("fatal_conditions") or [])
-            if str(row).lstrip().startswith("[")
-        }
+        fatal_ids = extract_fatal_rule_ids(llm_profile.get("fatal_conditions"))
         try:
             validate_topic_machine_contract(
                 machine_contract,

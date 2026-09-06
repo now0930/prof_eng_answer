@@ -30,11 +30,12 @@ class DeterministicReplayAuditTests(unittest.TestCase):
         )
         self.assertIn("failure_rate_compared_directly_to_pfd", row["detected_fatal_ids"])
 
-    def test_audit_fails_closed_on_unimplemented_invariants(self):
-        self.assertLess(self.report["known_fatal_recall"], 1.0)
-        self.assertGreater(self.report["unexplained_verdict_diff_count"], 0)
-        self.assertEqual(self.report["decision"], "HOLD")
-        self.assertTrue(self.report["external_llm_required_for_verdict"])
+    def test_all_known_fatal_invariants_are_now_owned(self):
+        self.assertEqual(self.report["known_fatal_recall"], 1.0)
+        self.assertEqual(self.report["fatal_false_positive_count"], 0)
+        self.assertEqual(self.report["unexplained_verdict_diff_count"], 0)
+        self.assertEqual(self.report["decision"], "READY")
+        self.assertFalse(self.report["external_llm_required_for_verdict"])
 
     def test_runtime_has_no_llm_imports(self):
         source = (REPO / "deterministic_replay_audit.py").read_text(encoding="utf-8")

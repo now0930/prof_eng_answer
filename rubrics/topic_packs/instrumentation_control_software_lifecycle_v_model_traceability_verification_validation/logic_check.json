@@ -1005,6 +1005,21 @@
       "cite_answer_evidence": true
     }
   },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {"fact_id": "misra_is_coding_guideline", "subject": "coding_guideline", "predicate": "distinct_from", "object": "unit_test", "polarity": "positive"}
+    ],
+    "requirement_rules": [
+      {"requirement_id": "unit_test_method_and_tools", "required_fact_ids": ["misra_is_coding_guideline"], "minimum_match_count": 1}
+    ],
+    "invariant_bindings": [
+      {"invariant_code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL", "rule_id": "sw04_fatal_misra_is_unit_test_tool", "classification": "fatal", "requirement_refs": ["unit_test_method_and_tools"], "recommended_ceiling": 14.5}
+    ]
+  },
   "revision_notes": [
     "SW-04 일반 계측제어 SW lifecycle과 V&V truth schema를 정의했다.",
     "직접 반대 주장만 deterministic fatal 후보가 되도록 full-line pattern을 사용했다.",

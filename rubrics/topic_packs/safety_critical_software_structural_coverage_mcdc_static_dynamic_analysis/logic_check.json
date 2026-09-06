@@ -146,6 +146,21 @@
       "Safety PLC 인증범위와 Application Program 시험책임을 구분한다."
     ]
   },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {"fact_id": "mcdc_requirement_depends_on_applicability", "subject": "mcdc", "predicate": "qualified_by", "object": "applicability_qualifier", "polarity": "positive"}
+    ],
+    "requirement_rules": [
+      {"requirement_id": "mcdc_normative_applicability", "required_fact_ids": ["mcdc_requirement_depends_on_applicability"], "minimum_match_count": 1}
+    ],
+    "invariant_bindings": [
+      {"invariant_code": "UNQUALIFIED_UNIVERSAL_SIL4_MCDC_RULE", "rule_id": "sil_four_universal_rule", "classification": "fatal", "requirement_refs": ["mcdc_normative_applicability"], "recommended_ceiling": 14.5}
+    ]
+  },
   "revision_notes": [
     "deterministic keyword penalties disabled",
     "fatal conditions require explicit contextual contradiction",

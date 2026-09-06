@@ -8,13 +8,19 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from topic_machine_contract import validate_topic_machine_contract
+from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
 
 TOPIC_ID = "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
 
 
 class FsrmMachineContractTests(unittest.TestCase):
+    def test_fatal_id_extraction_supports_dict_and_bracket_shapes(self):
+        self.assertEqual(
+            extract_fatal_rule_ids([{"id": "fatal_dict"}, "[fatal_string] text"]),
+            {"fatal_dict", "fatal_string"},
+        )
+
     @classmethod
     def setUpClass(cls):
         cls.logic = json.loads(

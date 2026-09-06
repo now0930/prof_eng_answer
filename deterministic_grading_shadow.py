@@ -10,7 +10,7 @@ from typing import Any, Mapping
 from local_semantic_resolver import resolve_with_optional_local_semantics
 from engineering_invariant_evaluator import evaluate_engineering_invariants
 from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
-from topic_machine_contract import validate_topic_machine_contract
+from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
 
 VERSION = "deterministic_grading_shadow_v1"
@@ -36,11 +36,9 @@ def _machine_contract(topic_id: str) -> dict[str, Any] | None:
     contract = payload.get("machine_contract")
     if not isinstance(contract, dict):
         return None
-    known_rule_ids = {
-        str(row).split("]", 1)[0].lstrip("[").strip()
-        for row in payload.get("llm_profile", {}).get("fatal_conditions", [])
-        if str(row).lstrip().startswith("[")
-    }
+    known_rule_ids = extract_fatal_rule_ids(
+        payload.get("llm_profile", {}).get("fatal_conditions", [])
+    )
     return validate_topic_machine_contract(
         contract,
         topic_id=topic_id,

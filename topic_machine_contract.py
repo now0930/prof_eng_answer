@@ -16,6 +16,26 @@ class TopicMachineContractError(ValueError):
     pass
 
 
+def extract_fatal_rule_ids(rows: Any) -> set[str]:
+    """Normalize supported human-readable fatal condition shapes."""
+    result: set[str] = set()
+    if not isinstance(rows, list):
+        return result
+    for row in rows:
+        candidate = ""
+        if isinstance(row, dict):
+            candidate = str(
+                row.get("id") or row.get("rule_id") or row.get("candidate_id") or ""
+            ).strip()
+        else:
+            text = str(row).lstrip()
+            if text.startswith("[") and "]" in text:
+                candidate = text.split("]", 1)[0].lstrip("[").strip()
+        if candidate and _ID.fullmatch(candidate):
+            result.add(candidate)
+    return result
+
+
 def _identifier(value: Any, field: str) -> str:
     result = str(value or "").strip()
     if not _ID.fullmatch(result):

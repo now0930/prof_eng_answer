@@ -10,12 +10,22 @@
     {"id": "full_proof_test", "aliases": ["full proof test", "전체 proof test", "완전 기능시험"]},
     {"id": "repair_time", "aliases": ["MTTR", "평균 수리시간", "repair time"]},
     {"id": "certificate_assumption", "aliases": ["인증 시", "인증 수준", "인증서", "certificate"]},
-    {"id": "operating_test_interval", "aliases": ["점검 주기", "시험주기", "proof test interval", "test interval"]}
+    {"id": "operating_test_interval", "aliases": ["점검 주기", "시험주기", "proof test interval", "test interval"]},
+    {"id": "coding_guideline", "aliases": ["MISRA", "MISRA C", "코딩 지침", "coding guideline"]},
+    {"id": "unit_test", "aliases": ["단위시험", "단위 시험", "unit test", "| 단위 |"]},
+    {"id": "software_test", "aliases": ["단위시험", "단위 시험", "통합시험", "통합 시험", "시스템시험", "시스템 시험", "software test", "| 단위 |", "| 통합 |", "| 시스템 |"]},
+    {"id": "random_hardware_integrity", "aliases": ["Random Integrity", "Random Hardware Integrity", "무작위 하드웨어 무결성"]},
+    {"id": "integration_test", "aliases": ["통합시험", "통합 시험", "integration test", "| 통합 |"]},
+    {"id": "hardware_fault_tolerance", "aliases": ["HFT", "hardware fault tolerance", "Architectural Constraints", "아키텍처 제약"]},
+    {"id": "sil4_scope", "aliases": ["SIL 4", "SIL4", "SIL 3/4", "SIL3/4"]},
+    {"id": "mcdc", "aliases": ["MC/DC", "MCDC", "modified condition decision coverage"]},
+    {"id": "applicability_qualifier", "aliases": ["적용 표준에 따라", "적용 표준과", "Safety Plan으로", "Safety Plan에 따라", "요구수준에 따라", "표준에서 요구하는 경우", "where required by the standard"]}
   ],
   "cue_groups": {
     "multiplication": ["×", "*", "곱", "multiply", "product"],
     "reduction": ["축소", "감소", "줄인다", "reduce", "shorten"],
     "replacement": ["대체", "생략", "replace", "omit"],
-    "minimum_or_no_shorter": ["짧게 점검할 이유는 없다", "짧게 할 이유는 없음", "최소주기", "minimum interval", "no reason to test more often"]
+    "minimum_or_no_shorter": ["짧게 점검할 이유는 없다", "짧게 할 이유는 없음", "최소주기", "minimum interval", "no reason to test more often"],
+    "full_coverage_mandate": ["100%", "절대 의무", "반드시", "무조건", "always", "mandatory"]
   }
 }

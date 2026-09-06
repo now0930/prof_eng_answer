@@ -601,6 +601,7 @@ python3 -B tests/test_deterministic_grading_shadow.py
 python3 -B tests/test_grading_authority_policy.py
 python3 -B tests/test_fatal_taxonomy.py
 python3 -B tests/test_sil_engineering_invariants.py
+python3 -B tests/test_software_engineering_invariants.py
 python3 -B tests/test_demand_state_contract.py
 python3 -B tests/test_demand_evidence_resolution.py
 python3 -B tests/test_demand_state_stability.py

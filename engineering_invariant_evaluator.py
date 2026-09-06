@@ -13,10 +13,11 @@ VERSION = "engineering_invariant_evaluator_v1"
 MARKER = "ENGINEERING_INVARIANT_EVALUATION_V1"
 ROOT = Path(__file__).resolve().parent
 ONTOLOGY = ROOT / "grading_ontology"
-_UNIT = re.compile(r"[^\n.!?。]+(?:[.!?。]|$)")
+_UNIT = re.compile(r"[^\n.!?。]+(?:\n|[.!?。]|$)")
 _CORRECTION = re.compile(
     r"(?:잘못된\s*(?:예|주장)|오류\s*(?:예|주장)|혼동(?:하면|해서는)\s*안|"
     r"대체하지\s*않|자동으로\s*(?:줄어들|감소하)지\s*않|"
+    r"분류하지\s*않|서로\s*구분|다른\s*분류축|별도로?\s*(?:평가|검증|수행)|"
     r"incorrect\s+example|must\s+not|does\s+not\s+replace)",
     re.IGNORECASE,
 )
@@ -45,8 +46,10 @@ def load_engineering_ontology() -> dict[str, Any]:
     cues = concepts_payload["cue_groups"]
     for rule in invariants_payload["rules"]:
         required = list(rule.get("all_concepts", []))
+        required.extend(rule.get("none_concepts", []))
         for alternative in rule.get("alternatives", []):
             required.extend(alternative.get("all_concepts", []))
+            required.extend(alternative.get("none_concepts", []))
         if not set(required) <= set(concepts):
             raise ValueError(f"unknown concept in {rule['code']}")
         cue_refs = list(rule.get("any_cue_groups", []))
@@ -84,6 +87,7 @@ def _matches_clause(
 ) -> bool:
     return (
         set(clause.get("all_concepts", [])) <= present
+        and not (set(clause.get("none_concepts", [])) & present)
         and _has_any_cue(text, clause.get("any_cue_groups", []), cues)
     )
 

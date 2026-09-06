@@ -9,7 +9,7 @@ from typing import Any
 from expert_accuracy_benchmark import load_jsonl, validate_gold_case
 from engineering_invariant_evaluator import evaluate_engineering_invariants
 from quantity_dimension_evaluator import analyze_quantity_dimensions
-from topic_machine_contract import validate_topic_machine_contract
+from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
 
 VERSION = "deterministic_replay_audit_v1"
@@ -39,11 +39,9 @@ def _invariant_bindings(root: Path) -> dict[str, list[dict[str, Any]]]:
         contract = payload.get("machine_contract")
         if not isinstance(contract, dict):
             continue
-        fatal_ids = {
-            str(row).split("]", 1)[0].lstrip("[").strip()
-            for row in payload.get("llm_profile", {}).get("fatal_conditions", [])
-            if str(row).lstrip().startswith("[")
-        }
+        fatal_ids = extract_fatal_rule_ids(
+            payload.get("llm_profile", {}).get("fatal_conditions", [])
+        )
         validated = validate_topic_machine_contract(
             contract,
             topic_id=path.parent.name,

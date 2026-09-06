@@ -3035,6 +3035,24 @@
       ]
     }
   },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {"fact_id": "software_test_controls_systematic_faults", "subject": "software_test", "predicate": "controls", "object": "systematic_fault", "polarity": "positive"},
+      {"fact_id": "hft_is_hardware_architecture_constraint", "subject": "hardware_fault_tolerance", "predicate": "distinct_from", "object": "integration_test", "polarity": "positive"}
+    ],
+    "requirement_rules": [
+      {"requirement_id": "systematic_random_integrity_boundary", "required_fact_ids": ["software_test_controls_systematic_faults"], "minimum_match_count": 1},
+      {"requirement_id": "hardware_architecture_test_boundary", "required_fact_ids": ["hft_is_hardware_architecture_constraint"], "minimum_match_count": 1}
+    ],
+    "invariant_bindings": [
+      {"invariant_code": "SOFTWARE_TEST_AS_RANDOM_HARDWARE_INTEGRITY", "rule_id": "sw05_fatal_software_test_is_random_hardware_integrity", "classification": "fatal", "requirement_refs": ["systematic_random_integrity_boundary"], "recommended_ceiling": 14.5},
+      {"invariant_code": "HARDWARE_ARCHITECTURE_AS_INTEGRATION_TEST", "rule_id": "sw05_fatal_hft_is_integration_test", "classification": "fatal", "requirement_refs": ["hardware_architecture_test_boundary"], "recommended_ceiling": 14.5}
+    ]
+  },
   "revision_notes": [
     "created_for=SOFTWARE_LLM_LANE_C_SW05",
     "deterministic_checks_disabled=true",

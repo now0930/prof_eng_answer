@@ -24,6 +24,27 @@
       "code": "CERTIFICATE_ASSUMPTION_AS_OPERATING_MINIMUM",
       "all_concepts": ["certificate_assumption", "operating_test_interval"],
       "any_cue_groups": ["minimum_or_no_shorter"]
+    },
+    {
+      "code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL",
+      "all_concepts": ["coding_guideline", "unit_test"],
+      "any_cue_groups": []
+    },
+    {
+      "code": "SOFTWARE_TEST_AS_RANDOM_HARDWARE_INTEGRITY",
+      "all_concepts": ["software_test", "random_hardware_integrity"],
+      "any_cue_groups": []
+    },
+    {
+      "code": "HARDWARE_ARCHITECTURE_AS_INTEGRATION_TEST",
+      "all_concepts": ["integration_test", "hardware_fault_tolerance"],
+      "any_cue_groups": []
+    },
+    {
+      "code": "UNQUALIFIED_UNIVERSAL_SIL4_MCDC_RULE",
+      "all_concepts": ["sil4_scope", "mcdc"],
+      "none_concepts": ["applicability_qualifier"],
+      "any_cue_groups": ["full_coverage_mandate"]
     }
   ]
 }
