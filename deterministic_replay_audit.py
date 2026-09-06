@@ -7,6 +7,7 @@ from pathlib import Path
 from typing import Any
 
 from expert_accuracy_benchmark import load_jsonl, validate_gold_case
+from engineering_invariant_evaluator import evaluate_engineering_invariants
 from quantity_dimension_evaluator import analyze_quantity_dimensions
 from topic_machine_contract import validate_topic_machine_contract
 
@@ -67,10 +68,18 @@ def run_deterministic_replay_audit(
     repeatability_failures = 0
     unexplained: list[dict[str, Any]] = []
 
+    def analyze(question: str, answer: str) -> dict[str, Any]:
+        quantity = analyze_quantity_dimensions(answer, question_text=question)
+        engineering = evaluate_engineering_invariants(answer)
+        return {
+            "violations": quantity["violations"] + engineering["violations"],
+            "provider_calls": engineering["provider_calls"],
+        }
+
     for case in cases:
         question, answer = _fixture(root, case)
-        first = analyze_quantity_dimensions(answer, question_text=question)
-        second = analyze_quantity_dimensions(answer, question_text=question)
+        first = analyze(question, answer)
+        second = analyze(question, answer)
         repeatable = first == second
         if not repeatable:
             repeatability_failures += 1
@@ -98,7 +107,7 @@ def run_deterministic_replay_audit(
             "case_id": case["case_id"],
             "gold_fatal_ids": sorted(gold_ids),
             "detected_fatal_ids": sorted(detected_ids),
-            "dimension_violation_codes": sorted({
+            "deterministic_violation_codes": sorted({
                 violation["code"] for violation in first["violations"]
             }),
             "repeatable": repeatable,

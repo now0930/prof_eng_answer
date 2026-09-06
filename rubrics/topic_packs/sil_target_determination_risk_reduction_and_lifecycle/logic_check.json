@@ -180,6 +180,30 @@
       ]
     }
   },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {"fact_id": "target_pfd_uses_frequency_ratio", "subject": "target_probability", "predicate": "derived_by_ratio", "object": "event_frequencies", "polarity": "positive"},
+      {"fact_id": "demand_mode_uses_demand_frequency", "subject": "demand_mode", "predicate": "classified_by", "object": "demand_frequency", "polarity": "positive"},
+      {"fact_id": "pst_supplements_full_test", "subject": "partial_stroke_test", "predicate": "supplements", "object": "full_proof_test", "polarity": "positive"},
+      {"fact_id": "field_interval_uses_sif_calculation", "subject": "operating_test_interval", "predicate": "derived_from", "object": "sif_calculation", "polarity": "positive"}
+    ],
+    "requirement_rules": [
+      {"requirement_id": "target_pfd_relation", "required_fact_ids": ["target_pfd_uses_frequency_ratio"], "minimum_match_count": 1},
+      {"requirement_id": "demand_mode_metric_selection", "required_fact_ids": ["demand_mode_uses_demand_frequency"], "minimum_match_count": 1},
+      {"requirement_id": "proof_test_diagnostics_reliability", "required_fact_ids": ["pst_supplements_full_test"], "minimum_match_count": 1},
+      {"requirement_id": "operations_moc_security_ai_lifecycle", "required_fact_ids": ["field_interval_uses_sif_calculation"], "minimum_match_count": 1}
+    ],
+    "invariant_bindings": [
+      {"invariant_code": "INVALID_TARGET_PROBABILITY_FREQUENCY_PRODUCT", "rule_id": "fatal_target_pfd_frequency_product", "classification": "fatal", "requirement_refs": ["target_pfd_relation"], "recommended_ceiling": 13.0},
+      {"invariant_code": "DEMAND_MODE_DIAGNOSTIC_ROLE_CONFUSION", "rule_id": "fatal_demand_mode_by_fault_detection", "classification": "fatal", "requirement_refs": ["demand_mode_metric_selection"], "recommended_ceiling": 13.0},
+      {"invariant_code": "PARTIAL_TEST_ROLE_OVERCLAIM", "rule_id": "fatal_pst_replaces_full_test_or_reduces_mttr", "classification": "fatal", "requirement_refs": ["proof_test_diagnostics_reliability"], "recommended_ceiling": 13.0},
+      {"invariant_code": "CERTIFICATE_ASSUMPTION_AS_OPERATING_MINIMUM", "rule_id": "fatal_certificate_interval_as_operating_minimum", "classification": "fatal", "requirement_refs": ["operations_moc_security_ai_lifecycle"], "recommended_ceiling": 13.0}
+    ]
+  },
   "revision_notes": [
     "Deterministic regex는 P0-D 관계식 검증 단계 전까지 비활성화한다.",
     "Fatal finding은 keyword hit가 아니라 문맥상 실제 오답 주장으로 검증한다."

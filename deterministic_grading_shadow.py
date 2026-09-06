@@ -8,6 +8,7 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from local_semantic_resolver import resolve_with_optional_local_semantics
+from engineering_invariant_evaluator import evaluate_engineering_invariants
 from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
 from topic_machine_contract import validate_topic_machine_contract
 
@@ -117,10 +118,11 @@ def build_deterministic_grading_shadow(
         for claim in document.get("claims", [])
     ]
     dimension = evaluate_quantity_dimension_consistency({"claims": claims})
+    engineering = evaluate_engineering_invariants(answer_text)
     contract = _machine_contract(topic_id)
     findings: list[dict[str, Any]] = []
     violated_requirements: set[str] = set()
-    for violation in dimension["violations"]:
+    for violation in dimension["violations"] + engineering["violations"]:
         bindings = (
             [row for row in contract["invariant_bindings"]
              if row["invariant_code"] == violation["code"]]

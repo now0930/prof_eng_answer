@@ -20,7 +20,8 @@ class FatalTaxonomyTests(unittest.TestCase):
         )
         unexplained = {row["finding_id"] for row in report["unexplained_differences"]}
         taxonomy = load_fatal_taxonomy()
-        self.assertEqual(unexplained, set(taxonomy))
+        self.assertLessEqual(unexplained, set(taxonomy))
+        self.assertEqual(len(taxonomy), 8)
         self.assertEqual(len({row["invariant_code"] for row in taxonomy.values()}), 8)
 
     def test_taxonomy_does_not_embed_fixture_text(self):

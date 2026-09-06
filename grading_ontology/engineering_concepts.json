@@ -1,0 +1,21 @@
+{
+  "version": "engineering_concepts_v1",
+  "concepts": [
+    {"id": "target_probability", "aliases": ["PFDavg", "PFD_avg", "PFD target", "목표 PFD"]},
+    {"id": "tolerable_event_frequency", "aliases": ["F_H,max", "FH,max", "F_tolerable", "허용 고장 빈도", "허용 사건빈도", "최대 허용 고장 빈도"]},
+    {"id": "initiating_event_frequency", "aliases": ["F_D", "F_residual", "F_unmitigated", "설비 고장 빈도", "기초 사건빈도", "잔여 사건빈도"]},
+    {"id": "demand_mode", "aliases": ["high demand", "low demand", "고수요 모드", "저수요 모드", "요구 모드", "demand mode"]},
+    {"id": "fault_detectability", "aliases": ["고장 즉시", "고장 확인", "고장 여부", "점검 주기까지", "fault detection", "detectability"]},
+    {"id": "partial_stroke_test", "aliases": ["PST", "partial stroke test", "부분행정시험", "부분 스트로크 시험"]},
+    {"id": "full_proof_test", "aliases": ["full proof test", "전체 proof test", "완전 기능시험"]},
+    {"id": "repair_time", "aliases": ["MTTR", "평균 수리시간", "repair time"]},
+    {"id": "certificate_assumption", "aliases": ["인증 시", "인증 수준", "인증서", "certificate"]},
+    {"id": "operating_test_interval", "aliases": ["점검 주기", "시험주기", "proof test interval", "test interval"]}
+  ],
+  "cue_groups": {
+    "multiplication": ["×", "*", "곱", "multiply", "product"],
+    "reduction": ["축소", "감소", "줄인다", "reduce", "shorten"],
+    "replacement": ["대체", "생략", "replace", "omit"],
+    "minimum_or_no_shorter": ["짧게 점검할 이유는 없다", "짧게 할 이유는 없음", "최소주기", "minimum interval", "no reason to test more often"]
+  }
+}

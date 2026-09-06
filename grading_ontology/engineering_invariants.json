@@ -1,0 +1,29 @@
+{
+  "version": "engineering_invariants_v1",
+  "rules": [
+    {
+      "code": "INVALID_TARGET_PROBABILITY_FREQUENCY_PRODUCT",
+      "all_concepts": ["target_probability", "tolerable_event_frequency", "initiating_event_frequency"],
+      "any_cue_groups": ["multiplication"]
+    },
+    {
+      "code": "DEMAND_MODE_DIAGNOSTIC_ROLE_CONFUSION",
+      "all_concepts": ["demand_mode", "fault_detectability"],
+      "any_cue_groups": []
+    },
+    {
+      "code": "PARTIAL_TEST_ROLE_OVERCLAIM",
+      "all_concepts": ["partial_stroke_test"],
+      "alternatives": [
+        {"all_concepts": ["repair_time"], "any_cue_groups": ["reduction"]},
+        {"all_concepts": ["full_proof_test"], "any_cue_groups": ["replacement"]}
+      ],
+      "any_cue_groups": []
+    },
+    {
+      "code": "CERTIFICATE_ASSUMPTION_AS_OPERATING_MINIMUM",
+      "all_concepts": ["certificate_assumption", "operating_test_interval"],
+      "any_cue_groups": ["minimum_or_no_shorter"]
+    }
+  ]
+}

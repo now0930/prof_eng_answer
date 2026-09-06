@@ -108,6 +108,7 @@ python3 -m py_compile \
   deterministic_grading_shadow.py \
   grading_authority_policy.py \
   fatal_taxonomy.py \
+  engineering_invariant_evaluator.py \
   scripts/check_deterministic_authority_gate.py \
   evaluation_ledger.py \
   evidence_calibration.py \
@@ -599,6 +600,7 @@ python3 -B tests/test_local_semantic_resolver.py
 python3 -B tests/test_deterministic_grading_shadow.py
 python3 -B tests/test_grading_authority_policy.py
 python3 -B tests/test_fatal_taxonomy.py
+python3 -B tests/test_sil_engineering_invariants.py
 python3 -B tests/test_demand_state_contract.py
 python3 -B tests/test_demand_evidence_resolution.py
 python3 -B tests/test_demand_state_stability.py
