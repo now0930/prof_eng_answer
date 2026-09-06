@@ -65,7 +65,33 @@ def _fixture_input(case: dict) -> str:
     return f"문제: {question}\n답안:\n{answer}"
 
 
-def _grade(case: dict, output_dir: Path, image_count: int) -> dict:
+def _require_semantic_success(grade: dict, case_id: str) -> None:
+    evaluation = grade.get("gemini_semantic_evaluation")
+    parsed = evaluation.get("parsed") if isinstance(evaluation, dict) else None
+    if (
+        not isinstance(evaluation, dict)
+        or evaluation.get("ok") is False
+        or not isinstance(parsed, dict)
+    ):
+        provider = (
+            str(evaluation.get("llm_provider") or "unknown")
+            if isinstance(evaluation, dict) else "unknown"
+        )
+        error = (
+            str(evaluation.get("error") or "semantic result missing")[:300]
+            if isinstance(evaluation, dict) else "semantic evaluation missing"
+        )
+        raise RuntimeError(
+            f"semantic provider failure: case={case_id}, provider={provider}, error={error}"
+        )
+
+
+def _grade(
+    case: dict,
+    output_dir: Path,
+    image_count: int,
+    require_semantic_success: bool = False,
+) -> dict:
     case_id = case["case_id"]
     session_dir = (
         ROOT / "data" / "sessions"
@@ -94,6 +120,8 @@ def _grade(case: dict, output_dir: Path, image_count: int) -> dict:
     )
     if not isinstance(parsed, dict):
         raise RuntimeError(f"grade parse failed: {case_id}: {raw_result!r}")
+    if require_semantic_success:
+        _require_semantic_success(parsed, case_id)
     parsed = reconcile_grade_score(
         parsed=parsed,
         raw_text=raw_text,
@@ -123,6 +151,11 @@ def main() -> None:
     parser.add_argument("--image-count", type=int, default=3)
     parser.add_argument("--workers", type=int, default=1)
     parser.add_argument("--resume", action="store_true")
+    parser.add_argument(
+        "--require-semantic-success",
+        action="store_true",
+        help="fail instead of turning provider errors into benchmark predictions",
+    )
     args = parser.parse_args()
 
     cases = load_jsonl(args.golden.resolve(), validate_gold_case)
@@ -144,7 +177,12 @@ def main() -> None:
             grade = json.loads(retained_grade.read_text(encoding="utf-8"))
             marker = "REUSED"
         else:
-            grade = _grade(case, output_dir, args.image_count)
+            grade = _grade(
+                case,
+                output_dir,
+                args.image_count,
+                require_semantic_success=args.require_semantic_success,
+            )
             marker = "REGRADED"
         print(f"{marker}={case_id}", flush=True)
         return case_id, prediction_from_grade(case_id, grade)

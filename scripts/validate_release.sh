@@ -586,6 +586,7 @@ python3 -B tests/test_demand_state_contract.py
 python3 -B tests/test_demand_evidence_resolution.py
 python3 -B tests/test_demand_state_stability.py
 python3 -B tests/test_demand_state_stability_gate.py
+python3 -B tests/test_regrade_semantic_success.py
 
 echo "----- host regression: sis sil safety software topic -----"
 python3 -B scripts/test_sis_sil_safety_software_topic.py

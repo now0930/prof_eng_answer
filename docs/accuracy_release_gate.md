@@ -52,6 +52,8 @@ python3 scripts/check_accuracy_release_gate.py \
 어느 하나라도 `READY/STABLE`이 아니면 exit code 2로 배포를 차단한다. 실행 전에 선택 provider의
 credential, Ollama endpoint와 지정 model을 사전점검하므로 준비되지 않은 환경에서는
 전체 release와 30건 채점을 시작하지 않는다.
+재채점 중 provider 오류·quota 초과·비정상 JSON이 한 건이라도 발생하면 해당 결과를
+저점수 prediction으로 간주하지 않고 qualification 자체를 `HOLD`로 종료한다.
 
 ```bash
 python3 scripts/release_candidate.py qualify --workers 2

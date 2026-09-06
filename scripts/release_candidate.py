@@ -288,6 +288,7 @@ def qualify(args: argparse.Namespace) -> Path:
             "--golden", str(args.golden),
             "--output-dir", str(prediction_dir),
             "--workers", str(args.workers),
+            "--require-semantic-success",
         ), env=_uncached_provider_env())
         _record_stage(manifest, "qualification", "provider_prediction_regeneration", result)
         predictions = prediction_dir / "predictions.jsonl"
@@ -336,6 +337,7 @@ def qualify(args: argparse.Namespace) -> Path:
                 "--golden", str(args.golden),
                 "--output-dir", str(repeat_dir),
                 "--workers", str(args.workers),
+                "--require-semantic-success",
             ), env=_uncached_provider_env())
             _record_stage(
                 manifest, "qualification", f"provider_prediction_repeat_{run_index:02d}", result
