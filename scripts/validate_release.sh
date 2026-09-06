@@ -101,6 +101,7 @@ python3 -m py_compile \
   expert_accuracy_benchmark.py \
   accuracy_release_gate.py \
   canonical_grading_evidence.py \
+  quantity_dimension_evaluator.py \
   evaluation_ledger.py \
   evidence_calibration.py \
   verified_evidence_score_calibration.py \
@@ -584,6 +585,7 @@ python3 -B scripts/test_review_expert_calibration_record.py
 
 echo "----- host regression: demand state contract and stability -----"
 python3 -B tests/test_canonical_grading_evidence.py
+python3 -B tests/test_quantity_dimension_evaluator.py
 python3 -B tests/test_demand_state_contract.py
 python3 -B tests/test_demand_evidence_resolution.py
 python3 -B tests/test_demand_state_stability.py

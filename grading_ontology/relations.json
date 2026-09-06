@@ -1,0 +1,12 @@
+{
+  "schema_version": "grading_ontology.relations.v1",
+  "relations": [
+    {"id": "less_than", "requires_same_dimension": true},
+    {"id": "less_than_or_equal", "requires_same_dimension": true},
+    {"id": "greater_than", "requires_same_dimension": true},
+    {"id": "greater_than_or_equal", "requires_same_dimension": true},
+    {"id": "directly_compared_with", "requires_same_dimension": true},
+    {"id": "equivalent_to", "requires_same_dimension": true},
+    {"id": "has_dimension", "requires_same_dimension": false}
+  ]
+}

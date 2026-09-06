@@ -1,0 +1,56 @@
+{
+  "schema_version": "grading_ontology.quantities.v1",
+  "quantities": [
+    {
+      "id": "failure_rate",
+      "quantity_type": "rate",
+      "dimension": "inverse_time",
+      "aliases": [
+        "lambda_sis",
+        "lambda sis",
+        "lambda_du",
+        "lambda du",
+        "lambda",
+        "λ_sis",
+        "λsis",
+        "λ_du",
+        "λdu",
+        "λ",
+        "failure rate",
+        "고장률"
+      ]
+    },
+    {
+      "id": "pfh",
+      "quantity_type": "rate",
+      "dimension": "inverse_time",
+      "aliases": [
+        "pfh",
+        "시간당 위험고장 빈도",
+        "시간당 위험 고장 빈도"
+      ]
+    },
+    {
+      "id": "pfdavg",
+      "quantity_type": "probability",
+      "dimension": "dimensionless",
+      "aliases": [
+        "pfdavg",
+        "pfd avg",
+        "pfd_average",
+        "평균 요구시 실패확률",
+        "평균 요구 시 실패 확률"
+      ]
+    },
+    {
+      "id": "pfd",
+      "quantity_type": "probability",
+      "dimension": "dimensionless",
+      "aliases": [
+        "pfd",
+        "요구시 실패확률",
+        "요구 시 실패 확률"
+      ]
+    }
+  ]
+}

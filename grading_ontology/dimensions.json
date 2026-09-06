@@ -1,0 +1,15 @@
+{
+  "schema_version": "grading_ontology.dimensions.v1",
+  "dimensions": [
+    {
+      "id": "dimensionless",
+      "exponents": {}
+    },
+    {
+      "id": "inverse_time",
+      "exponents": {
+        "time": -1
+      }
+    }
+  ]
+}
