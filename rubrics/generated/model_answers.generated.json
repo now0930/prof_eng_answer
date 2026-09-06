@@ -1,5 +1,5 @@
 {
-  "version": "sha256-bd0d3f0bfd2179f87998fd3bfa39edb37e9950467f6c8249803722f5b0fcfdf2-generated-topic-pack-model-answers",
+  "version": "sha256-6858adbf069b1c4c073a3493478ef43c6509aebe599330d72948a91b33abddfe-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -14517,6 +14517,10 @@
         "review and approval",
         "exit criteria"
       ],
+      "deterministic_routing_aliases": [
+        "V-Model",
+        "단위·통합·시스템시험"
+      ],
       "revision_notes": [
         "V-Model과 시험수준의 대응을 답안구조 중심으로 정리했다.",
         "양방향 RTM, 분석·회귀시험과 고급 시험환경을 고득점 포인트로 반영했다.",
@@ -24010,6 +24014,10 @@
         "tool qualification safety software",
         "validated library function block",
         "safety bypass override modification audit competence"
+      ],
+      "deterministic_routing_aliases": [
+        "안전필수 소프트웨어",
+        "SIL 관점 소프트웨어 검증"
       ],
       "routing_field_points": [
         "SIS가 하나 이상의 SIF를 구현하며 SIL은 SIF 요구 무결성 수준이라는 관계",
