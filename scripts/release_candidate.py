@@ -324,11 +324,72 @@ def qualify(args: argparse.Namespace) -> Path:
         if result.returncode:
             raise ReleaseFailure("accuracy Gate is HOLD; deployment is blocked")
 
+        stability_runs = int(getattr(args, "stability_runs", 2))
+        if stability_runs < 2:
+            raise ReleaseFailure("stability_runs must be at least 2")
+        prediction_paths = [predictions]
+        for run_index in range(2, stability_runs + 1):
+            repeat_dir = artifact_dir / f"provider_predictions_run_{run_index:02d}"
+            result = _run((
+                sys.executable,
+                "scripts/regrade_expert_accuracy_seed.py",
+                "--golden", str(args.golden),
+                "--output-dir", str(repeat_dir),
+                "--workers", str(args.workers),
+            ), env=_uncached_provider_env())
+            _record_stage(
+                manifest, "qualification", f"provider_prediction_repeat_{run_index:02d}", result
+            )
+            repeat_predictions = repeat_dir / "predictions.jsonl"
+            repeat_count = sum(
+                1 for line in repeat_predictions.read_text(encoding="utf-8").splitlines()
+                if line.strip()
+            )
+            if repeat_count < args.minimum_predictions:
+                raise ReleaseFailure(
+                    f"stability run {run_index} generated {repeat_count} predictions; "
+                    f"require {args.minimum_predictions}"
+                )
+            prediction_paths.append(repeat_predictions)
+            _atomic_json(manifest_path, manifest)
+
+        stability_report = artifact_dir / "demand_state_stability_report.json"
+        stability_markdown = artifact_dir / "demand_state_stability_report.md"
+        command = [
+            sys.executable,
+            "scripts/analyze_demand_state_stability.py",
+            "--golden", str(args.golden),
+        ]
+        for path in prediction_paths:
+            command.extend(("--predictions", str(path)))
+        command.extend((
+            "--output-json", str(stability_report),
+            "--output-md", str(stability_markdown),
+        ))
+        result = _run(command)
+        _record_stage(manifest, "qualification", "demand_state_stability_measurement", result)
+
+        stability_gate = artifact_dir / "demand_state_stability_gate.json"
+        result = _run((
+            sys.executable,
+            "scripts/check_demand_state_stability_gate.py",
+            "--report", str(stability_report),
+            "--policy", str(args.stability_policy),
+            "--require-stable",
+        ), check=False)
+        stability_gate.write_text(result.stdout, encoding="utf-8")
+        _record_stage(manifest, "qualification", "demand_state_stability_gate", result)
+        if result.returncode:
+            raise ReleaseFailure("demand-state stability Gate is HOLD; deployment is blocked")
+
         manifest["qualification"].update({
             "status": "READY",
             "completed_at": _utc_now(),
             "accuracy_report": str(report_path),
             "accuracy_gate": str(gate_path),
+            "stability_run_count": stability_runs,
+            "demand_state_stability_report": str(stability_report),
+            "demand_state_stability_gate": str(stability_gate),
         })
         _atomic_json(manifest_path, manifest)
         print(f"QUALIFICATION=READY\nMANIFEST={manifest_path}")
@@ -476,6 +537,12 @@ def build_parser() -> argparse.ArgumentParser:
     qualify_parser.add_argument("--policy", type=Path, default=ROOT / "calibration" / "expert_accuracy_release_policy.json")
     qualify_parser.add_argument("--workers", type=int, choices=range(1, 5), default=1)
     qualify_parser.add_argument("--minimum-predictions", type=int, default=30)
+    qualify_parser.add_argument("--stability-runs", type=int, default=2)
+    qualify_parser.add_argument(
+        "--stability-policy",
+        type=Path,
+        default=ROOT / "calibration" / "demand_state_stability_policy.json",
+    )
     qualify_parser.add_argument("--skip-release-validation", action="store_true")
     qualify_parser.add_argument("--allow-dirty", action="store_true", help="development only; never use for deployment evidence")
 

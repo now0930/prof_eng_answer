@@ -13,30 +13,15 @@ import json
 import re
 from typing import Any
 
+from demand_state_contract import STATE_PRECEDENCE, normalize_internal_state
+
 
 EVALUATION_LEDGER_SCHEMA_VERSION = "1.0"
 EVALUATION_LEDGER_MARKER = "CANONICAL_EVALUATION_LEDGER_V1"
 
-_STATUSES = {
-    # Provider coverage contracts define ``present`` as directly addressed,
-    # technically correct, and sufficiently complete.  The ledger still
-    # requires exact requirement identity plus evidence before preserving it
-    # as ``correct`` (see ``_evidence_from_coverage``).
-    "present": "correct",
-    "correct": "correct",
-    "partial": "partial",
-    "incorrect": "incorrect",
-    "wrong": "incorrect",
-    "contradicted": "incorrect",
-    "missing": "missing",
-    "absent": "missing",
-}
 _STATUS_ORDER = {
-    "unknown": 0,
-    "correct": 1,
-    "partial": 2,
-    "missing": 3,
-    "incorrect": 4,
+    state.lower().replace("wrong", "incorrect"): rank
+    for state, rank in STATE_PRECEDENCE.items()
 }
 _SCORE_FIELDS = (
     "score",
@@ -193,7 +178,7 @@ def _infer_defect_requirement_links(
 
 
 def _status(value: Any) -> str:
-    return _STATUSES.get(str(value or "").strip().casefold(), "unknown")
+    return normalize_internal_state(value)
 
 
 def _stable_id(prefix: str, value: Any) -> str:
@@ -466,8 +451,13 @@ def _evidence_from_coverage(
         for value in row.get("verified_defect_ids", [])
         if str(value).strip()
     }) if isinstance(row.get("verified_defect_ids"), list) else []
-    raw_status = str(row.get("status") or "").strip().casefold()
-    evidence_text = str(row.get("evidence") or "").strip()
+    has_resolved_status = bool(str(row.get("resolved_status") or "").strip())
+    raw_status = str(
+        row.get("resolved_status") or row.get("status") or ""
+    ).strip().casefold()
+    evidence_text = str(
+        row.get("evidence_quote") or row.get("evidence") or ""
+    ).strip()
     provided_requirement_id = str(row.get("requirement_id") or "").strip()
     exact_requirement_id = bool(
         provided_requirement_id
@@ -475,7 +465,11 @@ def _evidence_from_coverage(
     ) or canonical_identity_verified
     if verified_ids:
         status = "incorrect"
-    elif raw_status == "correct" and (evidence_text or exact_requirement_id):
+    elif (
+        raw_status == "correct"
+        and exact_requirement_id
+        and (evidence_text or not has_resolved_status)
+    ):
         status = "correct"
     elif raw_status == "present" and exact_requirement_id and evidence_text:
         status = "correct"
@@ -498,6 +492,8 @@ def _evidence_from_coverage(
         "provided_requirement_id": provided_requirement_id,
         "canonical_requirement_id": canonical_requirement_id,
         "exact_requirement_id": exact_requirement_id,
+        "deterministic_evidence": copy.deepcopy(row.get("deterministic_evidence")),
+        "provider_status": str(row.get("provider_status") or "").strip(),
     }
     payload["evidence_id"] = _stable_id("evidence", payload)
     return payload

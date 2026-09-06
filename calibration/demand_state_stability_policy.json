@@ -1,0 +1,9 @@
+{
+  "version": "demand_state_stability_policy_v1",
+  "minimum_runs": 2,
+  "minimum_all_run_state_agreement": 0.9,
+  "minimum_pairwise_state_agreement": 0.9,
+  "maximum_material_transition_rate": 0.03,
+  "maximum_case_score_spread": 4.0,
+  "maximum_missing_cases_per_run": 0
+}

@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-05): 채점 정책은 답안 분량 기반 상승과 근거 없는 `correct` 승격을 금지하며, 현재 [정확도 Gate](docs/accuracy_release_gate.md)는 요구 상태 정확도 55.86%로 `HOLD`입니다. Topic Pack workflow는 `ab94b69`에서 Topic 중립 생성, 병렬 authoring, 변경 Topic 중심 검증, 실패 rollback과 동적 classification을 적용했습니다. 코드 회귀 PASS는 정확도 `READY`나 운영 배포 완료를 뜻하지 않습니다.
+> 최신 개발 상태(2026-09-06): 최근 완료된 30건 실행(`ac79b20`)의 요구 상태 정확도는 80.18%로 Accuracy Gate가 아직 `HOLD`입니다. 현재 변경은 답안 원문 인용 검증과 반복 실행 Stability Gate를 추가했으며, 새 commit의 2회 uncached 30건 검증 전에는 운영 배포를 승인하지 않습니다. 코드 회귀 PASS는 정확도 `READY`나 운영 배포 완료를 뜻하지 않습니다.
 
 ---
 
@@ -24,6 +24,8 @@
 - Topic Pack이 소유하는 canonical primary lens와 답안 비의존형 routing
 - Topic Pack의 구조화된 Question Demand를 exact ID·순서·cardinality로 provider 출력에 투영
 - provider projection 불일치 시 1회 strict retry 후 fail-closed
+- provider 요구상태를 제안으로 취급하고 canonical ID·답안 원문 인용으로 `correct`를 검증
+- 두 번 이상의 uncached prediction 상태 일치율·전이율·점수 편차 Stability Gate
 - Fact Anchor와 Model Answer Bank 기반 평가
 - Logic Check와 topic-specific deterministic checker
 - 명시적 요구사항의 `present`, `partial`, `incorrect`, `missing` 분리
@@ -59,15 +61,16 @@
 | Runtime provenance | `runtime_grading_provenance_v1` |
 | Runtime provenance scoring policy | `stage23_generic_grading_contract_v1` |
 | 전문가 정확도 Gate | `HOLD` (30 reviewed cases / 25 topics) |
-| 요구 추출 F1 / 상태 정확도 | 1.0000 / 55.86% |
+| 요구 추출 F1 / 상태 정확도 | 1.0000 / 80.18% (`ac79b20`, 최신 완료 실행) |
 | Major·Fatal 정밀도 / 재현율 | 100% / 100% |
-| 평균 허용구간 외 거리 | 0.8723 |
+| 평균 허용구간 외 거리 | 0.4857 |
 
 `runtime_grading_provenance_v1`은 실행 process 수준의 commit, 시작 시각, router/evaluator/verifier SHA와 scoring policy를 기록합니다. Docker image digest, container ID·시작 시각, PID 교체와 host/container module parity는 별도의 deployment proof이며 [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)의 P0 항목으로 관리합니다.
 
 운영 후보는 `python3 scripts/release_candidate.py qualify --workers 2`로 생성합니다.
-이 명령은 Topic Pack·코드 검증 후 현재 provider로 30건 이상을 재채점하며 Accuracy
-Gate가 `HOLD`이면 배포를 중단합니다. `READY` manifest의 Docker 검증 절차는
+이 명령은 Topic Pack·코드 검증 후 현재 provider로 30건 이상을 재채점합니다. Accuracy
+Gate가 통과하면 동일 후보를 한 번 더 uncached 채점하여 Stability Gate까지 검사하며,
+둘 중 하나라도 `HOLD`이면 배포를 중단합니다. `READY` manifest의 Docker 검증 절차는
 [`docs/operation_runbook.md`](docs/operation_runbook.md#19-통합-release-candidate-실행)를 따릅니다.
 
 Topic Pack 개수는 `rubrics/generated/topic_pack_manifest.generated.json`을 기준으로 확인합니다. Legacy 통합 bank는 호환 목적으로 유지되며, legacy 파일의 Model Answer·Fact Topic 개수를 현재 Topic Pack coverage 개수로 사용하지 않습니다. Runtime bank 선택의 기준은 `rubric_bank_paths.py`와 `RUBRIC_BANK_MODE`입니다.

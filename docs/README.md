@@ -4,7 +4,7 @@
 
 프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
 
-> 최신 상태(2026-09-05): canonical demand ledger와 최종 coverage summary 보존은 구현되어 지속 회귀 중입니다. Topic Pack authoring·검증은 `ab94b69` 기준으로 변경 Topic 중심의 빠른 경로와 실패 rollback을 사용합니다. 전문가 정확도 Gate는 요구 상태 정확도 55.86%로 `HOLD`이며, 실제 provider 재채점 전에는 운영 배포를 재승인하지 않습니다. 고정 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
+> 최신 상태(2026-09-06): 최근 완료된 30건 실행(`ac79b20`)은 요구 상태 정확도 80.18%로 `HOLD`입니다. canonical demand ledger에 원문 인용 검증을 추가했고 Release Orchestrator는 Accuracy Gate 뒤 반복 실행 Stability Gate도 요구합니다. 새 commit의 실제 provider 재검증 전에는 운영 배포를 재승인하지 않습니다. 고정 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 현재 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
 ---
 
@@ -107,6 +107,7 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 | Lens 입력 | 문제문만 사용; 일치하는 Topic Pack canonical lens가 owner | `question_type_router.py`, `question_demand_contract.py`, `rubrics/topic_packs/<topic_id>/question_demand_axes.json` |
 | Explicit Question Demand projection | Topic Pack 요구축의 exact ID·순서·cardinality 검증 | `question_demand_contract.py`, `gemini_grader.py` |
 | Projection mismatch | strict contract로 1회 retry 후에도 불일치하면 fail-closed | `gemini_grader.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
+| Demand-state authority | provider는 제안만 하며 canonical ID·답안 원문 인용·verified defect로 최종 합성 | `demand_evidence_resolution.py`, `evaluation_ledger.py` |
 | 제출문 정규화 | topic-neutral·idempotent, 원문·정규화문 증적 보존 | `grade_submission_normalizer.py`, `bot.py`, `grading_agents.py` |
 | 최종 판정 일관성 | Fatal은 Full Credit·strong·합격 차단, Major는 Full Credit·strong 차단, 숫자 점수 유지 | `verdict_consistency.py`, `grade_output_summarizer.py` |
 | Coverage 상태 | `present`, `partial`, `incorrect`, `missing` | `question_type_coverage_adapter.py` |
@@ -114,7 +115,8 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 | Correctness owner | verified Fact 오류는 기본 C owner | `verified_defect_reconciliation.py`, `layer_evidence_guard.py` |
 | 최종 저장 | score reconciliation 후 coverage finalizer를 적용한 객체 저장 | `grading_agents.py`, `bot.py` |
 | Session | 완료 세션 격리, 동일 초 ID 충돌 방지 | `bot.py` |
-| 전문가 정확도 Gate | `HOLD`: 요구 상태 정확도 55.86% | `reports/expert_accuracy_seed_current.json`, [`accuracy_release_gate.md`](accuracy_release_gate.md) |
+| 전문가 정확도 Gate | `HOLD`: 요구 상태 정확도 80.18% (`ac79b20`) | release candidate artifact, [`accuracy_release_gate.md`](accuracy_release_gate.md) |
+| 반복 안정성 Gate | 2회 이상 uncached 실행의 상태 일치율·중대 전이율·점수 편차 | `demand_state_stability.py`, `calibration/demand_state_stability_policy.json` |
 | Runtime provenance | process-stable 6개 필드; image/container deployment proof는 별도 | `runtime_grading_provenance.py`, [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) |
 
 ### Runtime provenance와 deployment proof 경계
@@ -234,6 +236,7 @@ Topic Pack source JSON을 만들기 전에 사람이 검토하는 구조화 Mark
 16. Fatal·Major 판정 일관성 보정이 숫자 점수를 변경한다고 설명하지 않습니다.
 17. Topic Pack explicit demand와 Question Type의 일반 세부기준을 같은 schema 또는 같은 owner로 설명하지 않습니다.
 18. 코드 회귀 PASS, 정확도 Gate `READY`와 deployment proof 완료를 같은 상태로 설명하지 않습니다.
+19. 단일 실행 Accuracy Gate와 반복 실행 Stability Gate를 같은 판정으로 설명하지 않습니다.
 
 ---
 

@@ -8,7 +8,8 @@
 |---|---|---|
 | 채점 구조·점수 소유권 | 구현 완료, 지속 회귀 | [`grading_architecture.md`](grading_architecture.md) |
 | Canonical demand ledger와 공개 coverage summary | 구현 완료, 지속 회귀 | `evaluation_ledger.py`, SIL output/coverage tests |
-| 전문가 정확도 Gate | `HOLD`: 요구 상태 정확도 55.86% | [`accuracy_release_gate.md`](accuracy_release_gate.md), `reports/expert_accuracy_seed_current.json` |
+| 전문가 정확도 Gate | `HOLD`: 최근 완료 실행(`ac79b20`) 요구 상태 정확도 80.18% | [`accuracy_release_gate.md`](accuracy_release_gate.md), release candidate artifact |
+| 요구상태 안정성 Gate | 구현 완료, 새 후보 반복 실행 미검증 | `demand_state_stability.py`, `calibration/demand_state_stability_policy.json` |
 | Topic Pack authoring·검증 | `ab94b69`에서 범용·대상 기반 흐름 적용 | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
 | Runtime provenance | process 수준 구현, image/container 증명 미완료 | [`operation_runbook.md`](operation_runbook.md), Issue #1 |
 
@@ -66,9 +67,11 @@
 
 세 Gate는 소유권을 합치지 않고 `scripts/release_candidate.py`가 순서만 조정한다.
 `qualify`는 Topic Pack 전체 검증과 코드 release validation 이후 현재 provider로
-30건 이상을 새로 채점하고 Accuracy Gate가 `READY`인지 확인한다. `deploy`는 같은
+30건 이상을 새로 채점하고 Accuracy Gate가 `READY`인지 확인한다. 통과하면 같은
+후보를 다시 uncached 채점해 요구상태 일치율·중대 전이율·점수 편차 Stability Gate를
+검사한다. `deploy`는 같은
 commit의 READY manifest만 받아 rebuild 또는 recreate와 배포 증거를 수집한다.
-Accuracy Gate가 `HOLD`이면 Docker 명령은 실행되지 않는다.
+Accuracy 또는 Stability Gate가 `HOLD`이면 Docker 명령은 실행되지 않는다.
 
 ### 매 release
 

@@ -20,6 +20,19 @@
 
 정본은 `calibration/expert_accuracy_release_policy.json`이다.
 
+## 반복 안정성 기준
+
+단일 실행 정확도만으로 운영 후보를 승인하지 않는다. Accuracy Gate가 통과하면 동일
+commit과 provider 설정으로 uncached 30건을 한 번 더 생성하여 다음을 확인한다.
+
+- 전체·pairwise 요구상태 일치율 ≥ 0.90
+- 중대 상태 전이율 ≤ 0.03
+- 사례별 총점 최대 편차 ≤ 4.0점
+- 실행별 누락 case = 0
+
+정본은 `calibration/demand_state_stability_policy.json`이다. 누락된 요구 예측은 비교에서
+제외하지 않고 `UNKNOWN`으로 계산한다.
+
 ## 실행
 
 ```bash
@@ -35,7 +48,8 @@ python3 scripts/check_accuracy_release_gate.py \
 
 운영 후보 전체 절차에서는 위 명령을 개별 실행하는 대신 다음 Orchestrator를 사용한다.
 이 명령은 기존 prediction을 재사용하지 않고 현재 provider로 reviewed case를 다시
-채점하며, `READY`가 아니면 exit code 2로 배포를 차단한다. 실행 전에 선택 provider의
+채점하고 Accuracy 통과 후 두 번째 uncached 실행으로 Stability Gate를 검사한다.
+어느 하나라도 `READY/STABLE`이 아니면 exit code 2로 배포를 차단한다. 실행 전에 선택 provider의
 credential, Ollama endpoint와 지정 model을 사전점검하므로 준비되지 않은 환경에서는
 전체 release와 30건 채점을 시작하지 않는다.
 
@@ -49,9 +63,11 @@ python3 scripts/release_candidate.py qualify --workers 2
 
 `--require-ready`는 기준 미달 시 exit code 2를 반환한다. 2026-09-03 기준 현재
 30건은 모두 `reviewed`이며 25개 Topic, 4개 Question Type 분포 기준을 충족한다.
-다만 `present`를 `correct`로 취급하던 이전 prediction을 evidence-required 상태
-정책으로 다시 측정하면 요구 상태 정확도는 0.5586이므로 최신
-report(`reports/expert_accuracy_seed_current.json`)의 운영 배포 판정은 `HOLD`이다.
+최근 완료된 후보 `ac79b20`의 30건 결과는 요구 추출 F1 1.0, 요구 상태 정확도
+0.8018, major/fatal precision·recall 1.0, 평균 허용구간 외 거리 0.4857,
+false pass/strong/high-score 0건이다. 요구 상태 정확도 기준에 미달하므로 운영 배포
+판정은 여전히 `HOLD`이다. 현재 evidence-resolution 변경은 새 commit의 반복 실행으로
+다시 검증해야 하며 이 과거 수치를 배포 근거로 재사용하지 않는다.
 새 policy는 기존 `score_range_mae`라는 오해 소지가 있는 이름 대신
 `mean_out_of_range_distance`를 보고하며, expert total label이 있을 때만 actual
 total MAE·signed error·A/B/C/D/E layer MAE·pairwise ordering을 계산한다. padding

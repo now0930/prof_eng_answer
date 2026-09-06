@@ -581,6 +581,12 @@ python3 -B scripts/run_qtype_golden_regression.py --require-complete
 echo "----- host regression: review expert calibration record -----"
 python3 -B scripts/test_review_expert_calibration_record.py
 
+echo "----- host regression: demand state contract and stability -----"
+python3 -B tests/test_demand_state_contract.py
+python3 -B tests/test_demand_evidence_resolution.py
+python3 -B tests/test_demand_state_stability.py
+python3 -B tests/test_demand_state_stability_gate.py
+
 echo "----- host regression: sis sil safety software topic -----"
 python3 -B scripts/test_sis_sil_safety_software_topic.py
 

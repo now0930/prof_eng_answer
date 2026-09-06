@@ -15,13 +15,19 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable
 
+from demand_state_contract import (
+    CANONICAL_STATES,
+    PREDICTION_STATES,
+    normalize_state,
+)
+
 
 GOLD_VERSION = "expert_accuracy_case_v1"
 PREDICTION_VERSION = "expert_accuracy_prediction_v1"
 FINAL_REVIEW_STATUSES = {"reviewed", "adjudicated"}
 REVIEW_STATUSES = FINAL_REVIEW_STATUSES | {"draft", "excluded"}
-DEMAND_STATES = {"CORRECT", "PARTIAL", "WRONG", "MISSING"}
-PREDICTION_DEMAND_STATES = DEMAND_STATES | {"UNKNOWN"}
+DEMAND_STATES = set(CANONICAL_STATES)
+PREDICTION_DEMAND_STATES = set(PREDICTION_STATES)
 FINDING_SEVERITIES = {"minor", "major", "fatal"}
 CONFIDENCE_RANK = {"low": 0, "medium": 1, "high": 2}
 _DEMAND_MATCH_STOPWORDS = {
@@ -52,20 +58,10 @@ def _finite(value: Any, field: str) -> float:
 
 
 def normalize_demand_state(value: Any, *, allow_unknown: bool = False) -> str:
-    state = _text(value).upper()
-    aliases = {
-        # The reviewed provider contract defines PRESENT as directly
-        # addressed, technically correct, and sufficiently complete.  A mere
-        # mention must be labelled PARTIAL explicitly.
-        "PRESENT": "CORRECT",
-        "INCORRECT": "WRONG",
-        "ABSENT": "MISSING",
-    }
-    state = aliases.get(state, state)
-    allowed = PREDICTION_DEMAND_STATES if allow_unknown else DEMAND_STATES
-    if state not in allowed:
-        raise AccuracyBenchmarkError(f"unsupported demand state: {value!r}")
-    return state
+    try:
+        return normalize_state(value, allow_unknown=allow_unknown)
+    except ValueError as error:
+        raise AccuracyBenchmarkError(str(error)) from error
 
 
 def validate_gold_case(value: Any) -> dict[str, Any]:
