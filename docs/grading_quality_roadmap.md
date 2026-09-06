@@ -111,4 +111,6 @@ manifest의 `issue_close_eligible=true`는 기술 Gate가 모두 통과했다는
 
 현재 quantity/dimension pilot과 FSRM machine contract, 운영 shadow 및 권한 제거 Gate는 구현됐다. 그러나 Gemini-off 30건 replay의 known-fatal recall이 1/9이므로 production verdict authority는 이전하지 않는다. 남은 8개 fatal을 개별 문장이 아닌 오류 유형별 invariant owner로 확장한 뒤 [`deterministic_grading_transition.md`](deterministic_grading_transition.md)의 Gate를 다시 실행한다.
 
+구현 순서, mutation 범위와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)가 소유한다.
+
 Issue 본문은 현재 상태만 유지한다. 긴 실행 로그는 comment 또는 repository artifact에 남기고, 완료된 과거 Stage를 현재 blocker처럼 유지하지 않는다.

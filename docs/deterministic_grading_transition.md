@@ -63,6 +63,8 @@ python3 scripts/check_deterministic_authority_gate.py
 
 평균 점수 유사성은 이 Gate를 대신할 수 없다. 다음 구현 순서는 Golden Set에서 아직 owner가 없는 8개 fatal을 오류 유형별 ontology/contract로 승격하고, 각 유형의 정상·오답 mutation을 함께 추가하는 것이다.
 
+세부 실행 순서와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)를 따른다.
+
 ## 금지 사항
 
 - 특정 답안 전체 문자열 또는 session ID hardcoding

@@ -71,6 +71,7 @@
 | [`grading_integrity_drift_runbook.md`](grading_integrity_drift_runbook.md) | 과대채점 회귀 corpus, 의미 fingerprint, 이웃 주제 음성 사례와 기준선 변경 절차 |
 | [`grading_quality_roadmap.md`](grading_quality_roadmap.md) | 정확도 Gate, Golden Set, Topic Pack과 release/deployment의 장기 관리 정책 |
 | [`deterministic_grading_transition.md`](deterministic_grading_transition.md) | LLM 판정권 제거 단계, canonical evidence·ontology·machine contract와 권한 Gate |
+| [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md) | 미검출 fatal 8건부터 requirement·score·authority 이전까지의 실행 계획 |
 | [`accuracy_release_gate.md`](accuracy_release_gate.md) | 전문가 검토 dataset의 운영 배포 기준과 실행법 |
 
 ### Rubric와 Topic Pack
