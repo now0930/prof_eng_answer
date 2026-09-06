@@ -220,6 +220,32 @@ def test_projection_normalizer_restores_id_from_exact_contract_text_only():
     )
 
 
+def test_projection_normalizer_repairs_one_id_when_all_other_positions_anchor_it():
+    contract = build_question_demand_contract(SUBMISSION_A)
+    result = valid_result()
+    rows = result["parsed"]["question_type_coverage"][
+        "explicit_requirement_coverage"
+    ]["requirements"]
+    rows[0].pop("requirement_id")
+    rows[0]["requirement"] = rows[0]["requirement"].replace(
+        "결과와", "결과 및"
+    )
+    normalized = gemini_grader._stage35e2_normalize_projection_state_fields(
+        result,
+        contract,
+    )
+    normalized_rows = normalized["parsed"]["question_type_coverage"][
+        "explicit_requirement_coverage"
+    ]["requirements"]
+    assert normalized_rows[0]["requirement_id"] == contract["requirements"][0][
+        "requirement_id"
+    ]
+    assert gemini_grader._stage35e2_projection_matches_contract(
+        normalized,
+        contract,
+    )
+
+
 def test_semantic_wrapper_retries_once_and_accepts_exact_projection():
     original = gemini_grader._grade_with_general_evidence
     calls = []
@@ -305,7 +331,7 @@ def main():
         for name, value in globals().items()
         if name.startswith("test_") and callable(value)
     )
-    assert len(tests) == 9
+    assert len(tests) == 10
     for name, test in tests:
         test()
         print(f"PASS {name}")

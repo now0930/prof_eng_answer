@@ -1373,6 +1373,22 @@ def _stage35e2_projection_matches_contract(result, contract):
     return False
 
 
+def _stage35e2_identity_tokens(value):
+    tokens = set()
+    for raw in re.findall(
+        r"[0-9a-zA-Z가-힣]+",
+        str(value or "").casefold(),
+    ):
+        token = re.sub(
+            r"(?:으로|에서|의|을|를|이|가|은|는|에|로|과|와)$",
+            "",
+            raw,
+        )
+        if token and token not in {"및"}:
+            tokens.add(token)
+    return tokens
+
+
 def _stage35e2_normalize_projection_state_fields(result, contract=None):
     """Repair schema-only fields; restore IDs only on exact contract text."""
     if not isinstance(result, dict):
@@ -1438,6 +1454,42 @@ def _stage35e2_normalize_projection_state_fields(result, contract=None):
                     if raw_requirement in expected_ids:
                         row["requirement_id"] = raw_requirement
         if expected_ids:
+            expected_order = _stage35e2_contract_requirement_ids(contract)
+            if len(rows) == len(expected_order):
+                missing_indexes = [
+                    index for index, row in enumerate(rows)
+                    if isinstance(row, dict)
+                    and not str(row.get("requirement_id") or "").strip()
+                ]
+                # Bounded schema repair: one omitted ID is recoverable only
+                # when every other row already proves the canonical position.
+                if len(missing_indexes) == 1 and all(
+                    index in missing_indexes
+                    or (
+                        isinstance(row, dict)
+                        and str(row.get("requirement_id") or "").strip()
+                        == expected_order[index]
+                    )
+                    for index, row in enumerate(rows)
+                ):
+                    missing_index = missing_indexes[0]
+                    missing_row = rows[missing_index]
+                    missing_text = str(
+                        missing_row.get("requirement")
+                        or missing_row.get("requirement_text")
+                        or ""
+                    ).strip()
+                    canonical_text = str(
+                        contract["requirements"][missing_index].get(
+                            "requirement_text"
+                        ) or ""
+                    ).strip()
+                    if (
+                        missing_text
+                        and _stage35e2_identity_tokens(missing_text)
+                        == _stage35e2_identity_tokens(canonical_text)
+                    ):
+                        missing_row["requirement_id"] = expected_order[missing_index]
             canonical_rows = [
                 row
                 for row in rows
@@ -1449,7 +1501,6 @@ def _stage35e2_normalize_projection_state_fields(result, contract=None):
                 str(row.get("requirement_id") or "").strip()
                 for row in canonical_rows
             ]
-            expected_order = _stage35e2_contract_requirement_ids(contract)
             if canonical_ids == expected_order:
                 rows[:] = canonical_rows
     return normalized

@@ -10454,7 +10454,7 @@ _STAGE18B1_FINAL_GRADE_CACHE_SCHEMA_VERSION = (
     "final_grade_cache_v4"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_SCORING_POLICY_VERSION = (
-    "verified_correctness_cap_output_policy_v8"
+    "verified_correctness_cap_output_policy_v9"
 )
 _STAGE18B1_FINAL_GRADE_CACHE_DIR = (
     BASE_DIR / "data" / "final_grade_cache"
