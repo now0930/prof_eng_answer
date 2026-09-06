@@ -14,8 +14,9 @@
 | 35F | 완료 | 미해결 문장 전용 evidence-only local resolver 경계 |
 | 35G | 완료 | 운영 점수에 영향 없는 deterministic shadow |
 | 35H | Gate 구현 완료, 권한 전환 보류 | LLM verdict authority 제거 fail-closed Gate |
+| 37 | coverage 확장 완료, 정확도 `HOLD` | 질문별 anchor scope + provider-free Fact Anchor evidence |
 
-Stage36 기준 30건의 known fatal 9개를 모두 검출해 recall은 `1.0`이며 false positive는 0, 두 번의 전체 replay는 exact match로 `STABLE`이다. 다만 완전한 machine contract와 evidence를 바탕으로 점수까지 산출할 수 있는 case는 2/30(`0.066667`)뿐이다. 따라서 현재 운영 상태는 다음과 같다.
+Stage37 기준 30건의 known fatal 9개를 모두 검출해 recall은 `1.0`이며 false positive는 0, 두 번의 전체 replay는 exact match로 `STABLE`이다. 질문별 명시 `required_anchor_ids`를 우선하고 명시 mapping이 없거나 유사도가 낮으면 전체 anchor로 fail-open하는 Fact Anchor adapter를 연결해 score coverage는 30/30이 됐다. 그러나 허용구간 적중률은 `0.433333`, 평균 범위 이탈은 `1.432667`이고 known-overgrading 위반 1건이 남아 권한 Gate는 `HOLD`다. 따라서 현재 운영 상태는 다음과 같다.
 
 ```text
 DETERMINISTIC_GRADING_PRIMARY=FALSE
@@ -59,9 +60,12 @@ python3 scripts/check_deterministic_authority_gate.py
 - deterministic repeatability 100%
 - score/verdict consistency PASS
 - unexplained verdict difference 0
+- deterministic score coverage 100%
+- score 허용구간 적중률 85% 이상
+- 평균 score 허용구간 이탈 1.0점 이하
 - external LLM required for verdict 0
 
-평균 점수 유사성은 이 Gate를 대신할 수 없다. known fatal owner 이전은 완료됐으며 다음 구현 순서는 Golden 30건의 나머지 28건에 대해 문제별 machine contract와 deterministic evidence extraction을 검토·확장하는 것이다. contract가 없거나 evidence 해석이 불완전하면 score engine은 `ABSTAIN`해야 한다.
+평균 점수 유사성은 correctness Gate를 대신할 수 없다. known fatal owner 이전과 score coverage 확장은 완료됐다. 다음 구현 순서는 답안 길이나 Golden case ID에 맞춘 보정이 아니라 A/B/C/D/E 공통 축을 결정론적 evidence로 분리하는 것이다. 구조, 질문 요구 완전성, fact correctness, 현장 판단, 연결성을 각각 검증 가능하게 산출하고 fatal·core error의 단일-owner ceiling을 마지막에 적용한다.
 
 세부 실행 순서와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)를 따른다.
 

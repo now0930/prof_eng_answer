@@ -2,7 +2,7 @@
 
 ## 1. 목표와 기준선
 
-목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage36 구현으로 Gemini-off Golden 30건의 known-fatal 검출은 9/9(`100%`)가 됐지만 deterministic score coverage는 2/30(`6.67%`)이므로 production authority는 이전하지 않는다.
+목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage37 구현으로 Gemini-off Golden 30건의 known-fatal 검출은 9/9(`100%`), score coverage는 30/30(`100%`)가 됐다. 다만 허용구간 적중률은 43.33%, 평균 범위 이탈은 1.432667점이고 known-overgrading 위반이 1건이므로 production authority는 이전하지 않는다.
 
 완료 목표:
 
@@ -195,4 +195,10 @@ python3 scripts/check_deterministic_authority_gate.py
 | Stage36E | 완료 | deterministic score/verdict와 coverage 부족 `ABSTAIN` |
 | Stage36F | Gate 완료·전환 HOLD | 2회 replay `STABLE`, score coverage 6.67% |
 
-다음 착수점은 Stage37의 deterministic score coverage 확장이다. Golden 30건의 미점수 28건을 Topic owner별로 묶고, 기존 Topic Pack을 일괄 변환하지 않은 채 검토 가능한 machine contract·evidence extractor 단위로 확장한다.
+| Stage37A | 완료 | 미점수 28건과 Topic owner inventory |
+| Stage37B | 완료 | 질문별 명시 contract 우선 Fact Anchor evidence adapter |
+| Stage37C | 완료 | provider-free 개념 토큰 evidence와 weak-match 전체-anchor fallback |
+| Stage37D | 완료·정확도 HOLD | score coverage 30/30, 적중률 43.33%, 평균 이탈 1.432667 |
+| Stage37E | 완료·전환 HOLD | 권한 Gate 재평가 및 premature cutover 차단 |
+
+다음 착수점은 Stage38의 공통 점수축 calibration이다. Golden case ID, fixture 문장 또는 목표 점수 구간을 runtime rule로 사용하지 않는다. A(구조), B(질문 요구 완전성), C(fact correctness), D(현장 판단), E(연결성)를 독립 evidence로 산출하고 mutation·normal-answer 회귀로 과대평가와 과소평가를 함께 검증한다.

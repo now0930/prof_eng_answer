@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-07): Stage36에서 Gemini-off 30건 known-fatal recall 100%(9/9), false positive 0, 2회 exact replay `STABLE`을 달성했습니다. 그러나 결정론 점수 coverage는 6.67%(2/30)이므로 권한 제거는 계속 `HOLD`이며 운영은 legacy primary + deterministic shadow입니다. 코드 회귀·fatal Gate PASS는 결정론 primary 전환, provider Accuracy `READY` 또는 운영 배포 완료를 뜻하지 않습니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-07): Stage37에서 질문별 명시 anchor contract와 Fact Anchor evidence adapter를 연결하여 Gemini-off 결정론 점수 coverage를 30/30으로 확장했습니다. known-fatal recall 100%(9/9), false positive 0, 2회 exact replay `STABLE`은 유지됩니다. 다만 점수 허용구간 적중률 43.33%, 평균 범위 이탈 1.432667점, known-overgrading 위반 1건으로 Accuracy 기준에 미달하므로 권한 제거는 계속 `HOLD`이며 운영은 legacy primary + deterministic shadow입니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 

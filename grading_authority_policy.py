@@ -67,6 +67,16 @@ def evaluate_authority_removal_gate(
         replay_report.get("deterministic_score_coverage"),
         selected["minimum_deterministic_score_coverage"],
     )
+    minimum(
+        "DETERMINISTIC_SCORE_IN_RANGE_RATE",
+        replay_report.get("deterministic_score_in_range_rate"),
+        selected["minimum_deterministic_score_in_range_rate"],
+    )
+    maximum(
+        "DETERMINISTIC_SCORE_MEAN_OUT_OF_RANGE_DISTANCE",
+        replay_report.get("deterministic_score_mean_out_of_range_distance"),
+        selected["maximum_deterministic_score_mean_out_of_range_distance"],
+    )
     maximum(
         "UNEXPLAINED_VERDICT_DIFF_COUNT",
         replay_report.get("unexplained_verdict_diff_count"),

@@ -10,6 +10,10 @@ from expert_accuracy_benchmark import load_jsonl, validate_gold_case
 from engineering_invariant_evaluator import evaluate_engineering_invariants
 from deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from deterministic_score_engine import calculate_deterministic_score
+from fact_anchor_evidence_adapter import (
+    augment_requirement_evaluation,
+    evaluate_fact_anchor_requirements,
+)
 from quantity_dimension_evaluator import analyze_quantity_dimensions
 from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
@@ -68,6 +72,9 @@ def run_deterministic_replay_audit(
     repeatability_failures = 0
     scored_case_count = 0
     score_consistency_failures = 0
+    score_distances: list[float] = []
+    score_in_range_count = 0
+    overgrading_violations: list[dict[str, Any]] = []
     unexplained: list[dict[str, Any]] = []
 
     def analyze(question: str, answer: str) -> dict[str, Any]:
@@ -106,17 +113,50 @@ def run_deterministic_replay_audit(
             invariant_codes=invariant_codes,
             topic_ids=case.get("topic_ids", []),
         )
+        requirement_evaluation = augment_requirement_evaluation(
+            requirement_evaluation,
+            evaluate_fact_anchor_requirements(
+                answer_text=answer,
+                topic_ids=case.get("topic_ids", []),
+                question_text=question,
+            ),
+        )
         score = calculate_deterministic_score(requirement_evaluation)
         repeated_requirements = evaluate_deterministic_requirements(
             claims=second["claims"],
             invariant_codes={row["code"] for row in second["violations"]},
             topic_ids=case.get("topic_ids", []),
         )
+        repeated_requirements = augment_requirement_evaluation(
+            repeated_requirements,
+            evaluate_fact_anchor_requirements(
+                answer_text=answer,
+                topic_ids=case.get("topic_ids", []),
+                question_text=question,
+            ),
+        )
         repeated_score = calculate_deterministic_score(repeated_requirements)
         if score != repeated_score:
             score_consistency_failures += 1
         if score["decision"] == "SCORED":
             scored_case_count += 1
+            score_range = case.get("labels", {}).get("score_range", {})
+            minimum = float(score_range.get("min", 0.0))
+            maximum = float(score_range.get("max", 25.0))
+            value = float(score["total_score"])
+            distance = minimum - value if value < minimum else value - maximum if value > maximum else 0.0
+            score_distances.append(distance)
+            if distance == 0.0:
+                score_in_range_count += 1
+            flags = case.get("labels", {}).get("flags", {})
+            if flags.get("passing_score_allowed") is False and score.get("official_pass_met"):
+                overgrading_violations.append({
+                    "case_id": case["case_id"], "code": "FALSE_PASS",
+                })
+            if flags.get("strong_verdict_allowed") is False and score.get("high_score_met"):
+                overgrading_violations.append({
+                    "case_id": case["case_id"], "code": "FALSE_HIGH_SCORE",
+                })
         for finding_id in sorted(gold_ids - detected_ids):
             unexplained.append({
                 "case_id": case["case_id"],
@@ -133,6 +173,7 @@ def run_deterministic_replay_audit(
             "repeatable": repeatable,
             "deterministic_score_decision": score["decision"],
             "deterministic_score": score["total_score"],
+            "gold_score_range": case.get("labels", {}).get("score_range"),
         })
 
     recall = true_positive / known_fatal_count if known_fatal_count else 1.0
@@ -144,10 +185,20 @@ def run_deterministic_replay_audit(
     )
     score_coverage = scored_case_count / len(cases) if cases else 0.0
     score_consistent = score_consistency_failures == 0
+    mean_score_distance = (
+        sum(score_distances) / len(score_distances) if score_distances else None
+    )
+    score_in_range_rate = (
+        score_in_range_count / len(score_distances) if score_distances else 0.0
+    )
     ready = bool(
         fatal_invariants_ready
         and score_coverage == 1.0
         and score_consistent
+        and not overgrading_violations
+        and mean_score_distance is not None
+        and mean_score_distance <= 1.0
+        and score_in_range_rate >= 0.85
     )
     return {
         "version": VERSION,
@@ -168,7 +219,13 @@ def run_deterministic_replay_audit(
         "deterministic_scored_case_count": scored_case_count,
         "deterministic_score_coverage": round(score_coverage, 6),
         "score_verdict_consistency_pass": score_consistent,
-        "known_overgrading_regression_pass": bool(recall == 1.0),
+        "deterministic_score_mean_out_of_range_distance": (
+            round(mean_score_distance, 6) if mean_score_distance is not None else None
+        ),
+        "deterministic_score_in_range_rate": round(score_in_range_rate, 6),
+        "known_overgrading_regression_pass": not overgrading_violations,
+        "known_overgrading_violation_count": len(overgrading_violations),
+        "known_overgrading_violations": overgrading_violations,
         "normal_answer_regression_pass": bool(false_positive == 0),
         "external_llm_required_for_verdict": not ready,
         "llm_verdict_authority_removal_ready": ready,

@@ -11,6 +11,10 @@ from local_semantic_resolver import resolve_with_optional_local_semantics
 from engineering_invariant_evaluator import evaluate_engineering_invariants
 from deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from deterministic_score_engine import calculate_deterministic_score
+from fact_anchor_evidence_adapter import (
+    augment_requirement_evaluation,
+    evaluate_fact_anchor_requirements,
+)
 from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
 from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
@@ -151,6 +155,14 @@ def build_deterministic_grading_shadow(
             row["code"] for row in dimension["violations"] + engineering["violations"]
         ],
         topic_ids=[topic_id] if topic_id else None,
+    )
+    requirement_evaluation = augment_requirement_evaluation(
+        requirement_evaluation,
+        evaluate_fact_anchor_requirements(
+            answer_text=answer_text,
+            topic_ids=[topic_id] if topic_id else [],
+            question_text=question_text,
+        ),
     )
     if requirement_evaluation["requirements"]:
         requirements = requirement_evaluation["requirements"]

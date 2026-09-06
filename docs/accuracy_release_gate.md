@@ -84,4 +84,4 @@ python3 scripts/run_deterministic_replay_audit.py
 python3 scripts/check_deterministic_authority_gate.py
 ```
 
-정본은 `calibration/deterministic_authority_policy.json`이다. 현재 Gemini-off known-fatal recall은 100%(9/9), false positive는 0이고 2회 replay는 `STABLE`이다. 그러나 deterministic score coverage가 6.67%(2/30)로 기준 100%에 미달해 `HOLD`이며, 이 상태에서는 `DETERMINISTIC_GRADING_PRIMARY=true`를 설정해도 권한 전환을 허용하지 않는다.
+정본은 `calibration/deterministic_authority_policy.json`이다. 현재 Gemini-off known-fatal recall은 100%(9/9), false positive는 0, score coverage는 100%(30/30)이고 2회 replay는 `STABLE`이다. 그러나 점수 허용구간 적중률 43.33%는 기준 85%에 미달하고 평균 범위 이탈 1.432667점은 최대 1.0점을 초과하며 known-overgrading 위반도 1건 남아 `HOLD`다. 이 상태에서는 `DETERMINISTIC_GRADING_PRIMARY=true`를 설정해도 권한 전환을 허용하지 않는다.
