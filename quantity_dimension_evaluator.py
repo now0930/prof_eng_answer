@@ -228,6 +228,35 @@ def extract_quantity_relation_evidence(
     )
 
 
+def find_unresolved_quantity_spans(
+    answer_text: str,
+    evidence: dict[str, Any],
+) -> list[dict[str, Any]]:
+    """Return quantity-bearing sentences with no deterministic claim."""
+
+    ontology = load_quantity_dimension_ontology()
+    resolved_spans = {
+        (row["source_span"]["start"], row["source_span"]["end"])
+        for row in evidence.get("claims", [])
+        if isinstance(row, dict) and isinstance(row.get("source_span"), dict)
+    }
+    output: list[dict[str, Any]] = []
+    for match in _SENTENCE.finditer(answer_text):
+        span = (match.start(), match.end())
+        if span in resolved_spans:
+            continue
+        mentions = _mentions(match.group(0), ontology)
+        if not mentions:
+            continue
+        output.append({
+            "start": match.start(),
+            "end": match.end(),
+            "source_text": match.group(0),
+            "concept_candidates": sorted({row["quantity_id"] for row in mentions}),
+        })
+    return output
+
+
 def evaluate_quantity_dimension_consistency(
     evidence: dict[str, Any],
 ) -> dict[str, Any]:

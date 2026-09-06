@@ -104,6 +104,7 @@ python3 -m py_compile \
   quantity_dimension_evaluator.py \
   topic_machine_contract.py \
   deterministic_replay_audit.py \
+  local_semantic_resolver.py \
   evaluation_ledger.py \
   evidence_calibration.py \
   verified_evidence_score_calibration.py \
@@ -590,6 +591,7 @@ python3 -B tests/test_canonical_grading_evidence.py
 python3 -B tests/test_quantity_dimension_evaluator.py
 python3 -B tests/test_fsrm_machine_contract.py
 python3 -B tests/test_deterministic_replay_audit.py
+python3 -B tests/test_local_semantic_resolver.py
 python3 -B tests/test_demand_state_contract.py
 python3 -B tests/test_demand_evidence_resolution.py
 python3 -B tests/test_demand_state_stability.py
