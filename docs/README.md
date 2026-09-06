@@ -4,7 +4,7 @@
 
 프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
 
-> 최신 상태(2026-09-06): 결정론적 전환 기반은 Stage35A~35H까지 구현됐지만 Gemini-off known-fatal recall이 11.11%(1/9)이므로 권한 제거 Gate는 `HOLD`입니다. 운영은 legacy primary + score-neutral deterministic shadow이며 무리한 primary 전환은 코드가 거부합니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
+> 최신 상태(2026-09-07): Stage36에서 Gemini-off known-fatal recall 100%(9/9), false positive 0과 2회 exact replay `STABLE`을 달성했습니다. 결정론 점수 coverage는 6.67%(2/30)이므로 authority Gate는 `HOLD`이며 운영은 legacy primary + score-neutral deterministic shadow입니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
 ---
 

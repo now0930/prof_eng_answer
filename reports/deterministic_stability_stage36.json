@@ -1,0 +1,10 @@
+{
+  "version": "deterministic_stability_gate_v1",
+  "marker": "DETERMINISTIC_STABILITY_GATE_V1",
+  "provider_calls": 0,
+  "run_count": 2,
+  "exact_match": true,
+  "decision": "STABLE",
+  "authority_decision": "HOLD",
+  "deterministic_score_coverage": 0.066667
+}

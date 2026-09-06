@@ -2,7 +2,7 @@
 
 ## 1. 목표와 기준선
 
-목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. 현재 Stage35 기반은 완료됐지만 Gemini-off Golden 30건의 known-fatal 검출은 1/9(`11.11%`)이므로 production authority는 이전하지 않는다.
+목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage36 구현으로 Gemini-off Golden 30건의 known-fatal 검출은 9/9(`100%`)가 됐지만 deterministic score coverage는 2/30(`6.67%`)이므로 production authority는 이전하지 않는다.
 
 완료 목표:
 
@@ -188,11 +188,11 @@ python3 scripts/check_deterministic_authority_gate.py
 | 단계 | 상태 | 완료 조건 |
 |---|---|---|
 | Stage35 기반 | 완료 | evidence·ontology pilot·shadow·authority Gate |
-| Stage36A | 대기 | fatal 8건 taxonomy/owner 확정 |
-| Stage36B | 대기 | SIL 4/4 + false positive 0 |
-| Stage36C | 대기 | SW 4/4 + false positive 0 |
-| Stage36D | 대기 | deterministic requirement states |
-| Stage36E | 대기 | deterministic score/verdict |
-| Stage36F | 대기 | Authority READY·운영 증거 |
+| Stage36A | 완료 | fatal 8건 taxonomy/owner 확정 |
+| Stage36B | 완료 | SIL 4/4 + false positive 0 |
+| Stage36C | 완료 | SW 4/4, 전체 fatal 9/9 + false positive 0 |
+| Stage36D | 완료 | invariant→`WRONG`, 불완전 해석→`UNKNOWN` |
+| Stage36E | 완료 | deterministic score/verdict와 coverage 부족 `ABSTAIN` |
+| Stage36F | Gate 완료·전환 HOLD | 2회 replay `STABLE`, score coverage 6.67% |
 
-다음 착수점은 Stage36A이며, 첫 구현 대상은 Stage36B-1의 일반 수식 차원 전파다.
+다음 착수점은 Stage37의 deterministic score coverage 확장이다. Golden 30건의 미점수 28건을 Topic owner별로 묶고, 기존 Topic Pack을 일괄 변환하지 않은 채 검토 가능한 machine contract·evidence extractor 단위로 확장한다.

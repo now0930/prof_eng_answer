@@ -1,0 +1,330 @@
+{
+  "version": "deterministic_replay_audit_v1",
+  "marker": "DETERMINISTIC_REPLAY_AUDIT_V1",
+  "provider_calls": 0,
+  "case_count": 30,
+  "known_fatal_count": 9,
+  "known_fatal_true_positive": 9,
+  "known_fatal_recall": 1.0,
+  "fatal_false_positive_count": 0,
+  "fatal_invariants_ready": true,
+  "deterministic_repeatability": 1.0,
+  "unexplained_verdict_diff_count": 0,
+  "deterministic_scored_case_count": 2,
+  "deterministic_score_coverage": 0.066667,
+  "score_verdict_consistency_pass": true,
+  "known_overgrading_regression_pass": true,
+  "normal_answer_regression_pass": true,
+  "external_llm_required_for_verdict": true,
+  "llm_verdict_authority_removal_ready": false,
+  "decision": "HOLD",
+  "unexplained_differences": [],
+  "cases": [
+    {
+      "case_id": "sil_target_operations_issue1",
+      "gold_fatal_ids": [
+        "fatal_certificate_interval_as_operating_minimum",
+        "fatal_demand_mode_by_fault_detection",
+        "fatal_pst_replaces_full_test_or_reduces_mttr",
+        "fatal_target_pfd_frequency_product"
+      ],
+      "detected_fatal_ids": [
+        "fatal_certificate_interval_as_operating_minimum",
+        "fatal_demand_mode_by_fault_detection",
+        "fatal_pst_replaces_full_test_or_reduces_mttr",
+        "fatal_target_pfd_frequency_product"
+      ],
+      "deterministic_violation_codes": [
+        "CERTIFICATE_ASSUMPTION_AS_OPERATING_MINIMUM",
+        "DEMAND_MODE_DIAGNOSTIC_ROLE_CONFUSION",
+        "INVALID_TARGET_PROBABILITY_FREQUENCY_PRODUCT",
+        "PARTIAL_TEST_ROLE_OVERCLAIM"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 0.0
+    },
+    {
+      "case_id": "sis_lopa_architecture_issue1",
+      "gold_fatal_ids": [
+        "failure_rate_compared_directly_to_pfd"
+      ],
+      "detected_fatal_ids": [
+        "failure_rate_compared_directly_to_pfd"
+      ],
+      "deterministic_violation_codes": [
+        "DIMENSIONALLY_INVALID_COMPARISON"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "mcdc_vmodel_sil_issue1",
+      "gold_fatal_ids": [
+        "sil_four_universal_rule",
+        "sw04_fatal_misra_is_unit_test_tool",
+        "sw05_fatal_hft_is_integration_test",
+        "sw05_fatal_software_test_is_random_hardware_integrity"
+      ],
+      "detected_fatal_ids": [
+        "sil_four_universal_rule",
+        "sw04_fatal_misra_is_unit_test_tool",
+        "sw05_fatal_hft_is_integration_test",
+        "sw05_fatal_software_test_is_random_hardware_integrity"
+      ],
+      "deterministic_violation_codes": [
+        "CODING_GUIDELINE_AS_UNIT_TEST_TOOL",
+        "HARDWARE_ARCHITECTURE_AS_INTEGRATION_TEST",
+        "SOFTWARE_TEST_AS_RANDOM_HARDWARE_INTEGRITY",
+        "UNQUALIFIED_UNIVERSAL_SIL4_MCDC_RULE"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 0.0
+    },
+    {
+      "case_id": "qtype_qg-cs-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-cs-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-cs-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-da-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-da-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-da-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-ie-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-ie-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-ie-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-pi-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-pi-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "qtype_qg-pi-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_01_piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_02_radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_03_control_valve_authority_rangeability_gain_installed_performance",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_04_control_valve_types_globe_rotary_body_actuator_selection",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_05_humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_06_industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_07_smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_09_electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_10_ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_11_configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_12_control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_13_hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_14_control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    },
+    {
+      "case_id": "model_reference_15_final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "ABSTAIN",
+      "deterministic_score": null
+    }
+  ]
+}

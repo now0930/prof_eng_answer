@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-06): 결정론적 채점 전환 Stage35A~35H의 기반과 fail-closed 권한 Gate를 구현했습니다. Gemini-off 30건 replay의 known-fatal recall은 11.11%(1/9)라 권한 제거는 `HOLD`이며, 현재 운영은 legacy primary + deterministic shadow입니다. 코드 회귀 PASS는 결정론 primary 전환, 정확도 `READY` 또는 운영 배포 완료를 뜻하지 않습니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-07): Stage36에서 Gemini-off 30건 known-fatal recall 100%(9/9), false positive 0, 2회 exact replay `STABLE`을 달성했습니다. 그러나 결정론 점수 coverage는 6.67%(2/30)이므로 권한 제거는 계속 `HOLD`이며 운영은 legacy primary + deterministic shadow입니다. 코드 회귀·fatal Gate PASS는 결정론 primary 전환, provider Accuracy `READY` 또는 운영 배포 완료를 뜻하지 않습니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 

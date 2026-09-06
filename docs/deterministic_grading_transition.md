@@ -15,7 +15,7 @@
 | 35G | 완료 | 운영 점수에 영향 없는 deterministic shadow |
 | 35H | Gate 구현 완료, 권한 전환 보류 | LLM verdict authority 제거 fail-closed Gate |
 
-35E 기준 30건의 known fatal 9개 중 1개를 검출해 recall은 `0.111111`이며 false positive는 0, 반복 재현성은 1.0이다. 따라서 현재 운영 상태는 다음과 같다.
+Stage36 기준 30건의 known fatal 9개를 모두 검출해 recall은 `1.0`이며 false positive는 0, 두 번의 전체 replay는 exact match로 `STABLE`이다. 다만 완전한 machine contract와 evidence를 바탕으로 점수까지 산출할 수 있는 case는 2/30(`0.066667`)뿐이다. 따라서 현재 운영 상태는 다음과 같다.
 
 ```text
 DETERMINISTIC_GRADING_PRIMARY=FALSE
@@ -61,7 +61,7 @@ python3 scripts/check_deterministic_authority_gate.py
 - unexplained verdict difference 0
 - external LLM required for verdict 0
 
-평균 점수 유사성은 이 Gate를 대신할 수 없다. 다음 구현 순서는 Golden Set에서 아직 owner가 없는 8개 fatal을 오류 유형별 ontology/contract로 승격하고, 각 유형의 정상·오답 mutation을 함께 추가하는 것이다.
+평균 점수 유사성은 이 Gate를 대신할 수 없다. known fatal owner 이전은 완료됐으며 다음 구현 순서는 Golden 30건의 나머지 28건에 대해 문제별 machine contract와 deterministic evidence extraction을 검토·확장하는 것이다. contract가 없거나 evidence 해석이 불완전하면 score engine은 `ABSTAIN`해야 한다.
 
 세부 실행 순서와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)를 따른다.
 
