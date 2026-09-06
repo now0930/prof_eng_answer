@@ -10889,6 +10889,14 @@ def run_agent_pipeline(*args, **kwargs):
     from grade_submission_normalizer import (
         normalize_pipeline_call,
     )
+    from grading_authority_policy import (
+        enforce_requested_authority_mode,
+    )
+
+    # STAGE35H_FAIL_CLOSED_AUTHORITY_ENTRYPOINT_V1
+    # Until the deterministic primary score engine and its READY report are
+    # connected, an environment-only authority switch is rejected.
+    enforce_requested_authority_mode()
 
     (
         normalized_args,
@@ -10916,13 +10924,18 @@ def run_agent_pipeline(*args, **kwargs):
 
     # STAGE35G_DETERMINISTIC_PRIMARY_SHADOW_V1
     # Diagnostic only: no production score/verdict mutation or provider call.
-    from deterministic_grading_shadow import attach_deterministic_grading_shadow
-    finalized_result = attach_deterministic_grading_shadow(
-        finalized_result,
-        question_text=str(submission_normalization.get("question_text") or ""),
-        answer_text=str(submission_normalization.get("answer_text") or ""),
-        is_grade_dict=_stage17e5_is_grade_dict,
-    )
+    try:
+        from deterministic_grading_shadow import attach_deterministic_grading_shadow
+        finalized_result = attach_deterministic_grading_shadow(
+            finalized_result,
+            question_text=str(submission_normalization.get("question_text") or ""),
+            answer_text=str(submission_normalization.get("answer_text") or ""),
+            is_grade_dict=_stage17e5_is_grade_dict,
+        )
+    except Exception as shadow_error:
+        # A score-neutral observer must never make the legacy production grade
+        # unavailable. The authority switch above remains fail-closed.
+        print(f"[agent] deterministic grading shadow failed: {shadow_error!r}")
 
     # STAGE23J_RUNTIME_PROVENANCE_FINAL_WRAPPER_V4
     finalized_result = _stage23j_attach_runtime_provenance(

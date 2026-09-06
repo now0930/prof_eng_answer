@@ -28,6 +28,11 @@ def _replay(**overrides):
 
 
 class GradingAuthorityPolicyTests(unittest.TestCase):
+    def test_production_entrypoint_enforces_authority_policy(self):
+        source = (REPO / "grading_agents.py").read_text(encoding="utf-8")
+        self.assertIn("STAGE35H_FAIL_CLOSED_AUTHORITY_ENTRYPOINT_V1", source)
+        self.assertIn("enforce_requested_authority_mode()", source)
+
     def test_all_required_evidence_is_ready(self):
         result = evaluate_authority_removal_gate(
             _replay(), known_overgrading_regression_pass=True,
