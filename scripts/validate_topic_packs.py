@@ -3,10 +3,16 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
 ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+
+from topic_machine_contract import validate_topic_machine_contract
+
 PACK_ROOT = ROOT / "rubrics" / "topic_packs"
 
 ALLOWED_SEVERITY = {"fatal", "major", "minor", "warn", "info"}
@@ -493,6 +499,22 @@ def validate_logic_check(pack_dir: Path, topic_id: str) -> None:
             llm_profile.get("cap_policy"),
             f"{path}: llm_profile.cap_policy",
         )
+
+    machine_contract = data.get("machine_contract")
+    if machine_contract is not None:
+        fatal_ids = {
+            str(row).split("]", 1)[0].lstrip("[").strip()
+            for row in (llm_profile.get("fatal_conditions") or [])
+            if str(row).lstrip().startswith("[")
+        }
+        try:
+            validate_topic_machine_contract(
+                machine_contract,
+                topic_id=topic_id,
+                known_rule_ids=fatal_ids,
+            )
+        except ValueError as error:
+            fail(f"{path}: invalid machine_contract: {error}")
 
 
 def validate_pack(pack_dir: Path, global_anchor_ids: set[str]) -> None:

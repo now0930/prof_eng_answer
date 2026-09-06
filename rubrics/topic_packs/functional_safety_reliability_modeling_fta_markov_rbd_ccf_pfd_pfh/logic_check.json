@@ -27,6 +27,72 @@
     "next_practice_points": [],
     "de_claim_trust": {}
   },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {
+        "fact_id": "pfdavg_applies_to_low_demand",
+        "subject": "pfdavg",
+        "predicate": "applies_to",
+        "object": "low_demand",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "pfh_applies_to_high_demand",
+        "subject": "pfh",
+        "predicate": "applies_to",
+        "object": "high_demand",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "pfh_applies_to_continuous_demand",
+        "subject": "pfh",
+        "predicate": "applies_to",
+        "object": "continuous_demand",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "pfdavg_not_failure_rate",
+        "subject": "pfdavg",
+        "predicate": "equivalent_to",
+        "object": "failure_rate",
+        "polarity": "negative"
+      }
+    ],
+    "requirement_rules": [
+      {
+        "requirement_id": "demand_mode_metric_selection",
+        "required_fact_ids": [
+          "pfdavg_applies_to_low_demand",
+          "pfh_applies_to_high_demand",
+          "pfh_applies_to_continuous_demand"
+        ],
+        "minimum_match_count": 2
+      },
+      {
+        "requirement_id": "quantitative_verification_dimension",
+        "required_fact_ids": [
+          "pfdavg_not_failure_rate"
+        ],
+        "minimum_match_count": 1
+      }
+    ],
+    "invariant_bindings": [
+      {
+        "invariant_code": "DIMENSIONALLY_INVALID_COMPARISON",
+        "rule_id": "failure_rate_compared_directly_to_pfd",
+        "classification": "fatal",
+        "requirement_refs": [
+          "demand_mode_metric_selection",
+          "quantitative_verification_dimension"
+        ],
+        "recommended_ceiling": 13.0
+      }
+    ]
+  },
   "llm_profile": {
     "display_name": "RBD·FTA·Markov의 모델 경계와 PFDavg·PFH·CCF·Proof Test의 정량 논리를 평가한다.",
     "difficulty": "THEORY_CORE",
@@ -264,6 +330,7 @@
     "stage32c=failure-rate versus dimensionless PFDavg direct-comparison fatal boundary added",
     "stage33c_v2=specific claim-triggered compact secondary FSRM verification for lambda-versus-PFD dimensional fatal",
     "stage34c_v4=replace unrelated SW05 compact fields and bridge profile fatal strings into rule records for FSRM lambda-PFD fatal and dimension-separation control fields",
-    "stage34g=activate existing structured_relation authoritative_true arbitration for direct lambda-PFD design inequality false negatives"
+    "stage34g=activate existing structured_relation authoritative_true arbitration for direct lambda-PFD design inequality false negatives",
+    "stage35d=add optional deterministic machine contract without duplicating global quantity dimensions"
   ]
 }
