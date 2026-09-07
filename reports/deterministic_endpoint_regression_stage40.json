@@ -1,0 +1,39 @@
+{
+  "marker": "DETERMINISTIC_ENDPOINT_REGRESSION_V1",
+  "decision": "PASS",
+  "source": "production_telegram_sessions",
+  "sessions": [
+    {
+      "session_id": "20260907_034706_5960502198",
+      "deterministic_primary_confirmed": true,
+      "observed_score": 13.0,
+      "candidate_score": 13.0,
+      "fatal_error_detected": true,
+      "candidate_verdict": "NEEDS_CORRECTION"
+    },
+    {
+      "session_id": "20260907_034743_5960502198",
+      "deterministic_primary_confirmed": true,
+      "observed_score": 16.29,
+      "observed_verdict": "PASS",
+      "candidate_score": 14.5,
+      "candidate_verdict": "FAIL",
+      "satisfied_requirement_ratio": 0.114286,
+      "pass_evidence_eligible": false
+    }
+  ],
+  "fixes": [
+    "specific question aliases take ownership of fallback routing while retaining relevant secondary topics",
+    "PARTIAL mentions alone cannot reach a passing score without minimum SATISFIED evidence",
+    "deterministic raw and final summary/verdict remain consistent",
+    "Telegram start message reports the actual deterministic engine and zero LLM authority"
+  ],
+  "authority_gate": {
+    "decision": "READY",
+    "known_fatal_recall": 1.0,
+    "deterministic_score_in_range_rate": 0.866667,
+    "deterministic_score_mean_out_of_range_distance": 0.045,
+    "deterministic_topic_routing_recall": 1.0,
+    "known_overgrading_violation_count": 0
+  }
+}

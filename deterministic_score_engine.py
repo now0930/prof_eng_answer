@@ -11,6 +11,8 @@ from deterministic_score_evidence import evaluate_score_evidence
 VERSION = "deterministic_score_engine_v1"
 MARKER = "DETERMINISTIC_SCORE_ENGINE_V1"
 _CREDIT = {"SATISFIED": 1.0, "PARTIAL": 0.5, "WRONG": 0.0, "MISSING": 0.0}
+MINIMUM_SATISFIED_RATIO_FOR_PASS = 0.15
+PASS_EVIDENCE_CEILING_RATIO = 0.58
 
 
 def calculate_deterministic_score(
@@ -45,6 +47,9 @@ def calculate_deterministic_score(
     requirement_ratio = sum(
         _CREDIT[row["status"]] for row in requirements
     ) / len(requirements)
+    satisfied_ratio = sum(
+        row["status"] == "SATISFIED" for row in requirements
+    ) / len(requirements)
     score_evidence = evaluate_score_evidence(answer_text) if answer_text is not None else None
     if score_evidence is None:
         raw_score = float(max_score) * requirement_ratio
@@ -66,6 +71,10 @@ def calculate_deterministic_score(
         and isinstance(row.get("recommended_ceiling"), (int, float))
     ]
     all_ceilings = list(ceilings)
+    minimum_satisfied_ratio_for_pass = MINIMUM_SATISFIED_RATIO_FOR_PASS
+    pass_evidence_eligible = satisfied_ratio >= minimum_satisfied_ratio_for_pass
+    if not pass_evidence_eligible:
+        all_ceilings.append(float(max_score) * PASS_EVIDENCE_CEILING_RATIO)
     if (
         score_evidence is not None
         and not score_evidence["high_score_eligibility"]["eligible"]
@@ -94,6 +103,9 @@ def calculate_deterministic_score(
         "applied_ceiling": min(all_ceilings) if all_ceilings else None,
         "score_breakdown": breakdown,
         "score_evidence": score_evidence,
+        "satisfied_requirement_ratio": round(satisfied_ratio, 6),
+        "minimum_satisfied_ratio_for_pass": minimum_satisfied_ratio_for_pass,
+        "pass_evidence_eligible": pass_evidence_eligible,
         "verdict": verdict,
         "external_llm_required_for_verdict": False,
         "official_pass_met": bool(not fatal and total >= max_score * 0.6),

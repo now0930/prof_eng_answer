@@ -94,6 +94,23 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         ):
             rendered = bot.format_result(grade)
         self.assertIn("채점 완료:", rendered)
+        self.assertIn("[결정론적 요구 판정]", rendered)
+        self.assertEqual(grade["verdict"], grade["deterministic_score"]["verdict"])
+
+    def test_partial_mentions_alone_cannot_reach_passing_score(self):
+        grade = grade_deterministically(
+            question_text=(
+                "제어 소프트웨어 개발 수명 주기(V-Model)의 단위 시험, 통합 시험, "
+                "시스템 시험과 SIL 달성을 위한 검증 방안을 설명하시오."
+            ),
+            answer_text=(
+                "V-Model과 검증, 시험, 시스템, 요구사항, 인터페이스, 모델, "
+                "복잡도, 변경관리의 필요성을 언급한다."
+            ),
+        )
+        score = grade["deterministic_score"]
+        self.assertFalse(score["pass_evidence_eligible"])
+        self.assertLess(grade["total_score"], 15.0)
 
 
 if __name__ == "__main__":

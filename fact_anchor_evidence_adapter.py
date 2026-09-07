@@ -54,6 +54,17 @@ def _tokens(value: str) -> set[str]:
     }
 
 
+def _term_present(term: str, normalized_answer: str) -> bool:
+    """Match an authored concept term, tolerating OCR/spacing variation."""
+    if term in normalized_answer:
+        return True
+    compact_term = re.sub(r"[\s·_-]+", "", term)
+    if len(compact_term) < 4:
+        return False
+    compact_answer = re.sub(r"[\s·_-]+", "", normalized_answer)
+    return compact_term in compact_answer
+
+
 def _question_similarity(left: str, right: str) -> float:
     """Return deterministic lexical similarity; this selects scope, not correctness."""
     left_normalized = _normalize(left)
@@ -144,13 +155,16 @@ def evaluate_fact_anchor_requirements(
             if required_ids is not None and anchor_id not in required_ids:
                 continue
             terms = _terms(anchor)
-            matched = [term for term in terms if term in normalized_answer]
+            matched = [term for term in terms if _term_present(term, normalized_answer)]
             threshold = max(2, math.ceil(len(terms) * 0.6)) if terms else 1
             anchor_tokens = _anchor_tokens(anchor)
-            matched_tokens = [token for token in anchor_tokens if token in normalized_answer]
+            matched_tokens = [
+                token for token in anchor_tokens if token in normalized_answer
+            ]
             token_coverage = (
                 len(matched_tokens) / len(anchor_tokens) if anchor_tokens else 0.0
             )
+            identity_term_matched = bool(terms and terms[0] in matched)
             if (
                 len(matched) >= threshold
                 or (len(matched_tokens) >= 3 and token_coverage >= 0.3)
@@ -172,6 +186,7 @@ def evaluate_fact_anchor_requirements(
                 "concept_token_coverage": round(token_coverage, 6),
                 "required_term_count": len(terms),
                 "match_threshold": threshold,
+                "identity_term_matched": identity_term_matched,
                 "source_span": span,
                 "evidence_text": (
                     answer_text[span["start"]:span["end"]] if span is not None else ""

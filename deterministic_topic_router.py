@@ -57,10 +57,30 @@ def route_question_topics(question_text: str) -> dict[str, Any]:
     candidates = _pack_candidates(question_text)
     primary = str((legacy.get("primary_reference") or {}).get("topic_id") or "")
     source = "question_model_answer_router"
+    fallback_primary = ""
     if not primary and candidates and candidates[0]["score"] >= 0.1:
         primary = candidates[0]["topic_id"]
+        fallback_primary = primary
         source = "question_pack_similarity_fallback"
+    if source == "question_pack_similarity_fallback":
+        specific_alias_candidates = [
+            row for row in candidates
+            if max((len(normalize_text(alias)) for alias in row["alias_hits"]), default=0) >= 4
+        ]
+        if specific_alias_candidates:
+            selected = max(
+                specific_alias_candidates,
+                key=lambda row: (
+                    max(len(normalize_text(alias)) for alias in row["alias_hits"]),
+                    row["score"],
+                    row["topic_id"],
+                ),
+            )
+            primary = selected["topic_id"]
+            source = "specific_question_alias"
     topic_ids = [primary] if primary else []
+    if fallback_primary and fallback_primary not in topic_ids:
+        topic_ids.append(fallback_primary)
     for row in candidates:
         if row["alias_hits"] and row["topic_id"] not in topic_ids:
             topic_ids.append(row["topic_id"])

@@ -15,6 +15,7 @@ from fact_anchor_evidence_adapter import (
 
 
 TOPIC = "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration"
+SW04 = "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"
 
 
 class FactAnchorEvidenceAdapterTests(unittest.TestCase):
@@ -67,7 +68,6 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
             answer_text="Final Element는 SIF의 출력으로 valve, actuator, solenoid로 구성된다.",
             topic_ids=["final_control_element_sil_sis_esd_valve_partial_stroke_test"],
         )
-
         self.assertEqual(
             result["question_contract_selections"][0]["mode"],
             "explicit_question_contract",
@@ -85,6 +85,18 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
                 "trip_signal_and_output_chain",
             },
         )
+
+    def test_spacing_variant_matches_authored_identity_term(self):
+        result = evaluate_fact_anchor_requirements(
+            answer_text="단위 시험은 모듈의 요구사항을 검증한다.",
+            topic_ids=[SW04],
+        )
+        row = next(
+            item for item in result["requirements"]
+            if item["requirement_id"] == "sw04_unit_test"
+        )
+        self.assertTrue(row["identity_term_matched"])
+        self.assertEqual(row["status"], "PARTIAL")
 
 
 if __name__ == "__main__":

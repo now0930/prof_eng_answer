@@ -833,12 +833,13 @@ def grade_answer(chat_id, raw_text, state):
             parsed,
             normalization_evidence,
         )
-        from verdict_consistency import (
-            enforce_final_decision_consistency,
-        )
-        parsed = enforce_final_decision_consistency(
-            parsed
-        )
+        if parsed.get("marker") != "DETERMINISTIC_GRADING_PRIMARY_V1":
+            from verdict_consistency import (
+                enforce_final_decision_consistency,
+            )
+            parsed = enforce_final_decision_consistency(
+                parsed
+            )
 
         if parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1":
             parsed["backend"] = "deterministic"
@@ -943,13 +944,17 @@ def format_result(parsed, sid=None):
     if not isinstance(parsed, dict):
         return "채점 결과 형식이 올바르지 않습니다."
 
-    from verdict_consistency import (
-        enforce_final_decision_consistency,
+    deterministic_grade = (
+        parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1"
     )
+    if not deterministic_grade:
+        from verdict_consistency import (
+            enforce_final_decision_consistency,
+        )
 
-    parsed = enforce_final_decision_consistency(
-        parsed
-    )
+        parsed = enforce_final_decision_consistency(
+            parsed
+        )
 
     summary_callable = (
         None
@@ -1031,6 +1036,17 @@ def format_result(parsed, sid=None):
     lines.append(f"공식 합격선: {official:g}점 ({yn(official_met)})")
     lines.append(f"실전 목표선: {practical:g}점 ({yn(practical_met)})")
     lines.append(f"고득점 기준: {high:g}점 ({yn(high_met)})")
+    if deterministic_grade:
+        verdict_labels = {
+            "NEEDS_CORRECTION": "핵심 기술 오류 보완 필요",
+            "HIGH_SCORE": "고득점권",
+            "PRACTICAL_TARGET": "실전 목표 달성",
+            "PASS": "합격권",
+            "FAIL": "불합격권",
+        }
+        lines.append(
+            f"판정: {verdict_labels.get(str(parsed.get('verdict')), parsed.get('verdict'))}"
+        )
     lines.append("")
 
     rater_summary = parsed.get("rater_summary")
@@ -1058,6 +1074,25 @@ def format_result(parsed, sid=None):
 
     lines.append(f"총평: {summary}")
     lines.append("")
+
+    if deterministic_grade:
+        requirement_summary = parsed.get("requirement_summary") or {}
+        lines.append("[결정론적 요구 판정]")
+        lines.append(
+            "- "
+            + " · ".join(
+                f"{key} {requirement_summary.get(key, 0)}"
+                for key in ("SATISFIED", "PARTIAL", "WRONG", "MISSING")
+            )
+        )
+        findings = (
+            parsed.get("logic_check_evaluation", {}).get("findings") or []
+        )
+        for finding in findings:
+            message = str(finding.get("message") or "").strip()
+            if message:
+                lines.append(f"- [{finding.get('severity', 'error')}] {message}")
+        lines.append("")
 
     rater_results = parsed.get("rater_results") or parsed.get("raters") or []
     if rater_results:
@@ -1632,12 +1667,22 @@ def _finalize_pending_grade(chat_id, state):
         send_message(chat_id, "채점할 답안 내용이 없습니다. /grade 로 다시 시작하세요.")
         return
 
-    send_message(
-        chat_id,
-        "채점을 시작합니다.\n"
-        "채점 엔진: Gemini semantic grader + Python scoring rules\n"
-        f"보조 모델: {OLLAMA_MODEL}",
-    )
+    deterministic_requested = str(
+        os.getenv("DETERMINISTIC_GRADING_PRIMARY") or ""
+    ).strip().lower() in {"1", "true", "yes", "on"}
+    if deterministic_requested:
+        engine_message = (
+            "채점을 시작합니다.\n"
+            "채점 엔진: Deterministic Topic Pack + Engineering Ontology\n"
+            "외부 LLM 판정권: 없음"
+        )
+    else:
+        engine_message = (
+            "채점을 시작합니다.\n"
+            "채점 엔진: Gemini semantic grader + Python scoring rules\n"
+            f"보조 모델: {OLLAMA_MODEL}"
+        )
+    send_message(chat_id, engine_message)
 
     prepared_sid = _ensure_fresh_grade_session(
         chat_id,

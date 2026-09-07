@@ -65,10 +65,19 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         for row in requirements.get("findings", [])
     ]
     total = score["total_score"]
-    summary = (
-        f"외부 LLM 없이 Topic Pack과 공학 ontology의 결정론적 evidence로 "
-        f"{total}/25.0점을 산정했습니다."
+    score_range = (
+        f"{max(0.0, total - 0.5):.1f}~{min(25.0, total + 0.5):.1f}"
     )
+    if requirements["fatal_or_core_error"]:
+        summary = (
+            "검증된 핵심 기술 오류가 확인되었습니다. 현장 적용과 답안 구조의 "
+            "장점과 별개로 해당 오류를 먼저 교정해야 합니다."
+        )
+    else:
+        summary = (
+            f"외부 LLM 없이 Topic Pack과 공학 ontology의 결정론적 evidence로 "
+            f"{total}/25.0점을 산정했습니다."
+        )
     return {
         "version": VERSION,
         "marker": MARKER,
@@ -89,11 +98,16 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         "deterministic_score": score,
         "total_score": total,
         "max_score": 25.0,
+        "score_range": score_range,
         "breakdown": breakdown,
         "verdict": score["verdict"],
         "official_pass_met": score["official_pass_met"],
         "high_score_met": score["high_score_met"],
-        "confidence": "high",
+        "confidence": (
+            "high"
+            if requirements["fatal_or_core_error"] or score["pass_evidence_eligible"]
+            else "medium"
+        ),
         "summary": summary,
         "overall_comment": summary,
     }
