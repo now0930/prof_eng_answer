@@ -208,6 +208,6 @@ python3 scripts/check_deterministic_authority_gate.py
 | Stage39A | 완료 | production entrypoint의 feature flag와 현재-code READY 재검증 |
 | Stage39B | 완료 | legacy grader·score adjudicator·finalizer·LLM 요약 우회 |
 | Stage39C | 완료 | provider-neutral grade persistence와 rollback 기본값 |
-| Stage39D | 대기 | container parity·production replay·endpoint/rollback smoke |
+| Stage39D | 부분 완료 | container parity·production replay·rollback PASS, 실제 endpoint 대기 |
 
-다음 착수점은 Stage39D 운영 증거다. 대상 commit으로 image를 rebuild/recreate하고 `DETERMINISTIC_GRADING_PRIMARY=true`인 container에서 fingerprint·parity, production replay, endpoint smoke를 저장한다. 이후 flag를 `false`로 되돌리는 rollback smoke까지 통과한 뒤 운영 기본값 변경 여부를 확정한다.
+다음 착수점은 Stage39D의 마지막 실제 endpoint 증거다. commit `8f68591` bind-mount container의 fingerprint·parity, deterministic production replay와 flag `false` rollback은 통과했다. Telegram endpoint에서 동일 fixture를 채점한 뒤 persisted grade의 marker·fatal·score·verdict와 출력의 의미가 일치하는지 저장해야 한다. 운영 기본값 변경은 이 확인 뒤에 확정한다.

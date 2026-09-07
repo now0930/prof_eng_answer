@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-07): Stage38 Gemini-off 30건 전체 체인은 질문-only Topic routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건, 2회 exact replay `STABLE`로 offline Authority Gate `READY`를 달성했습니다. Stage39에서는 이 엔진을 production entrypoint에 feature flag로 연결하여 READY Gate 재계산 후 legacy LLM 채점·점수 조정·요약 호출을 우회합니다. 저장소 기본값은 rollback 가능한 `false`이며, container parity와 endpoint smoke 전에는 운영 기본값을 전환하지 않습니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-07): Stage38 Gemini-off 30건 전체 체인은 질문-only Topic routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건, 2회 exact replay `STABLE`로 offline Authority Gate `READY`를 달성했습니다. Stage39에서는 이 엔진을 production entrypoint에 feature flag로 연결하여 READY Gate 재계산 후 legacy LLM 채점·점수 조정·요약 호출을 우회합니다. commit `8f68591` 운영 container의 fingerprint/parity, provider-zero replay와 rollback smoke도 PASS했습니다. 저장소 기본값은 `false`이며 실제 Telegram endpoint와 persisted grade의 의미 일치 확인 전에는 운영 기본값을 전환하지 않습니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 

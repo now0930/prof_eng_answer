@@ -109,7 +109,7 @@ manifest의 `issue_close_eligible=true`는 기술 Gate가 모두 통과했다는
 
 외부 LLM 제거는 provider 교체가 아니라 판정 소유권 이전이다. canonical evidence, 전역 ontology, Topic Pack machine contract, deterministic evaluator, fatal 전파, 점수와 verdict consistency 순으로 이전한다. LLM은 미해결 자연어의 evidence 추출만 보조할 수 있다.
 
-현재 quantity/dimension과 engineering relation ontology, Topic Pack machine contract, 질문-only deterministic router, Fact Anchor evidence, A/B/C/D/E score evidence와 권한 제거 Gate가 구현됐다. Stage38 Gemini-off 30건은 Topic routing recall 100%, fatal 9/9, score coverage 100%, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건으로 offline Gate `READY`다. Stage39에서는 이 engine을 production entrypoint에 feature flag + 현재-code READY 재검증 방식으로 연결했고 legacy LLM grader·score adjudicator·LLM 요약을 실제로 우회한다. 남은 경계는 container fingerprint/parity, production replay, endpoint smoke와 rollback 증거이며 그 전에는 운영 기본값을 이전하지 않는다.
+현재 quantity/dimension과 engineering relation ontology, Topic Pack machine contract, 질문-only deterministic router, Fact Anchor evidence, A/B/C/D/E score evidence와 권한 제거 Gate가 구현됐다. Stage38 Gemini-off 30건은 Topic routing recall 100%, fatal 9/9, score coverage 100%, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건으로 offline Gate `READY`다. Stage39에서는 이 engine을 production entrypoint에 feature flag + 현재-code READY 재검증 방식으로 연결했고 legacy LLM grader·score adjudicator·LLM 요약을 실제로 우회한다. commit `8f68591` 운영 container의 fingerprint/parity, production replay와 rollback smoke도 PASS했다. 남은 경계는 실제 Telegram endpoint와 persisted grade의 의미 일치 증거이며 그 전에는 운영 기본값을 이전하지 않는다.
 
 구현 순서, mutation 범위와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)가 소유한다.
 

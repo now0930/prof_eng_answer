@@ -1,0 +1,32 @@
+{
+  "marker": "DETERMINISTIC_PRIMARY_CONTAINER_SMOKE_V1",
+  "decision": "PASS",
+  "commit": "8f68591b4a66e835d3396a61d29939dd7e593b1a",
+  "container_id": "9c89eb3c86c7c524fe8daef4e5823af22fe246607fcd96007676d3984140fc83",
+  "image_id": "sha256:cd5d617d794b86ac7ac6ea084359aab53797b87ececcc19db4de210ec1e49cdc",
+  "started_at": "2026-09-07T02:53:00.702883541Z",
+  "container_running": true,
+  "module_parity": {
+    "grading_agents.py": "9eb8452d39a43f827dbe7ea427a4b78495a3b431117a7bc74330798e3daf2d76",
+    "deterministic_primary_grader.py": "5fc7b8f653f206b2f0783d0576cfd0cd0e46e249567a94e2cbc3ec34248a95f1",
+    "grading_authority_policy.py": "5e258cc66e6c8763c5613b80374b1f5a25cc2480a5ff4036447fb792fe966a81"
+  },
+  "production_entrypoint_smoke": {
+    "decision": "PASS",
+    "provider_call_count": 0,
+    "llm_verdict_authority": 0,
+    "external_llm_required_for_verdict": false,
+    "fatal_error_detected": true,
+    "official_pass_met": false,
+    "persistence_created": true
+  },
+  "rollback_smoke": {
+    "decision": "PASS",
+    "default_flag": false,
+    "mode": "legacy_primary_with_deterministic_shadow"
+  },
+  "endpoint_smoke": {
+    "decision": "PENDING",
+    "reason": "No Telegram request was emitted during automated deployment verification."
+  }
+}
