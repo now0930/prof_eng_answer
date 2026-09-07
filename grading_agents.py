@@ -10769,6 +10769,9 @@ def finalize_grade_after_score_reconciliation(value):
     if not _stage17e5_is_grade_dict(value):
         return value
 
+    if value.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1":
+        return value
+
     from evidence_calibration import apply_evidence_based_calibration
     from high_score_eligibility import apply_high_score_eligibility_cap
     from verified_correctness_score_cap import apply_verified_correctness_score_cap
@@ -10893,11 +10896,6 @@ def run_agent_pipeline(*args, **kwargs):
         enforce_requested_authority_mode,
     )
 
-    # STAGE35H_FAIL_CLOSED_AUTHORITY_ENTRYPOINT_V1
-    # Until the deterministic primary score engine and its READY report are
-    # connected, an environment-only authority switch is rejected.
-    enforce_requested_authority_mode()
-
     (
         normalized_args,
         normalized_kwargs,
@@ -10907,6 +10905,38 @@ def run_agent_pipeline(*args, **kwargs):
         args,
         kwargs,
     )
+
+    # STAGE35H_FAIL_CLOSED_AUTHORITY_ENTRYPOINT_V1
+    # STAGE39_DETERMINISTIC_PRIMARY_ENTRYPOINT_V1
+    authority_mode = enforce_requested_authority_mode()
+    if authority_mode["DETERMINISTIC_GRADING_PRIMARY"]:
+        from deterministic_primary_grader import (
+            grade_deterministically,
+            persist_deterministic_grade,
+        )
+        from grade_submission_normalizer import normalize_grade_submission
+        normalized_text = str(normalized_kwargs.get("raw_text") or "")
+        if not normalized_text and len(normalized_args) > 1:
+            normalized_text = str(normalized_args[1] or "")
+        primary_submission = normalize_grade_submission(normalized_text)
+        grade = grade_deterministically(
+            question_text=str(primary_submission.get("question_text") or ""),
+            answer_text=str(primary_submission.get("answer_text") or ""),
+        )
+        session_dir = normalized_kwargs.get("session_dir")
+        if session_dir is None and len(normalized_args) > 5:
+            session_dir = normalized_args[5]
+        raw_result = persist_deterministic_grade(session_dir, grade)
+        from grade_submission_normalizer import attach_submission_normalization
+        finalized_result = (
+            raw_result,
+            attach_submission_normalization(grade, submission_normalization),
+        )
+        finalized_result = _stage23j_attach_runtime_provenance(
+            finalized_result, _stage17e5_is_grade_dict,
+        )
+        _stage18b1_store_final_grade_cache(finalized_result)
+        return finalized_result
 
     result = (
         _run_agent_pipeline_core(

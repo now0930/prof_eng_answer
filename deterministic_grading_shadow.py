@@ -155,6 +155,7 @@ def build_deterministic_grading_shadow(
             row["code"] for row in dimension["violations"] + engineering["violations"]
         ],
         topic_ids=[topic_id] if topic_id else None,
+        extraction_complete=True,
     )
     requirement_evaluation = augment_requirement_evaluation(
         requirement_evaluation,

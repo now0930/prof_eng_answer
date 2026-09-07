@@ -205,5 +205,9 @@ python3 scripts/check_deterministic_authority_gate.py
 | Stage38B | 완료 | A/B/C/D/E provider-free score evidence |
 | Stage38C | 완료 | full-chain Golden 30건 Accuracy·overgrading Gate `READY` |
 | Stage38D | 완료 | 2회 exact replay `STABLE`, external provider call 0 |
+| Stage39A | 완료 | production entrypoint의 feature flag와 현재-code READY 재검증 |
+| Stage39B | 완료 | legacy grader·score adjudicator·finalizer·LLM 요약 우회 |
+| Stage39C | 완료 | provider-neutral grade persistence와 rollback 기본값 |
+| Stage39D | 대기 | container parity·production replay·endpoint/rollback smoke |
 
-다음 착수점은 Stage39 production authority 연결이다. `DETERMINISTIC_GRADING_PRIMARY=true`일 때 READY artifact와 코드 fingerprint를 확인하고 legacy LLM core를 호출하지 않는 별도 entrypoint를 연결한다. public grade schema, persistence, Telegram summary, rollback switch, image/container parity와 endpoint smoke가 모두 통과한 뒤에만 운영 기본값을 변경한다.
+다음 착수점은 Stage39D 운영 증거다. 대상 commit으로 image를 rebuild/recreate하고 `DETERMINISTIC_GRADING_PRIMARY=true`인 container에서 fingerprint·parity, production replay, endpoint smoke를 저장한다. 이후 flag를 `false`로 되돌리는 rollback smoke까지 통과한 뒤 운영 기본값 변경 여부를 확정한다.

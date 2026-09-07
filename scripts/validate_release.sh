@@ -113,6 +113,7 @@ python3 -m py_compile \
   deterministic_score_engine.py \
   deterministic_score_evidence.py \
   deterministic_topic_router.py \
+  deterministic_primary_grader.py \
   fact_anchor_evidence_adapter.py \
   scripts/check_deterministic_authority_gate.py \
   scripts/run_deterministic_stability_gate.py \
@@ -612,6 +613,8 @@ python3 -B tests/test_deterministic_requirement_evaluator.py
 python3 -B tests/test_deterministic_score_engine.py
 python3 -B tests/test_deterministic_score_evidence.py
 python3 -B tests/test_deterministic_topic_router.py
+python3 -B tests/test_deterministic_primary_grader.py
+python3 -B scripts/run_deterministic_primary_smoke.py
 python3 -B tests/test_deterministic_stability_gate.py
 python3 -B tests/test_fact_anchor_evidence_adapter.py
 python3 -B tests/test_demand_state_contract.py

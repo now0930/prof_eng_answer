@@ -122,6 +122,7 @@ def run_deterministic_replay_audit(
             claims=first["claims"],
             invariant_codes=invariant_codes,
             topic_ids=routed["topic_ids"],
+            extraction_complete=True,
         )
         requirement_evaluation = augment_requirement_evaluation(
             requirement_evaluation,
@@ -136,6 +137,7 @@ def run_deterministic_replay_audit(
             claims=second["claims"],
             invariant_codes={row["code"] for row in second["violations"]},
             topic_ids=routed["topic_ids"],
+            extraction_complete=True,
         )
         repeated_requirements = augment_requirement_evaluation(
             repeated_requirements,

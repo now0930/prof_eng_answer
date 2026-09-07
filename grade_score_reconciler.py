@@ -182,6 +182,9 @@ def apply_generic_de_policy(
     if not isinstance(parsed, dict):
         return parsed
 
+    if parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1":
+        return parsed
+
     if not _generic_de_source_present(parsed):
         return parsed
 

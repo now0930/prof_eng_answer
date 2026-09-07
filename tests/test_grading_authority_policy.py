@@ -72,12 +72,13 @@ class GradingAuthorityPolicyTests(unittest.TestCase):
                 gate_report={"ready": False},
             )
 
-    def test_even_ready_gate_cannot_enable_unconnected_primary_engine(self):
-        with self.assertRaisesRegex(GradingAuthorityError, "not connected"):
-            enforce_requested_authority_mode(
-                environ={"DETERMINISTIC_GRADING_PRIMARY": "true"},
-                gate_report={"ready": True},
-            )
+    def test_ready_gate_enables_connected_primary_engine(self):
+        result = enforce_requested_authority_mode(
+            environ={"DETERMINISTIC_GRADING_PRIMARY": "true"},
+            gate_report={"ready": True},
+        )
+        self.assertTrue(result["DETERMINISTIC_GRADING_PRIMARY"])
+        self.assertEqual(result["LLM_VERDICT_AUTHORITY"], 0)
 
 
 if __name__ == "__main__":

@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 import os
+from functools import lru_cache
 from pathlib import Path
 from typing import Any, Mapping
 
@@ -139,10 +140,32 @@ def enforce_requested_authority_mode(
             "LLM_VERDICT_AUTHORITY": 1,
             "EXTERNAL_LLM_REQUIRED_FOR_VERDICT": 1,
         }
+    if gate_report is None:
+        gate_report = evaluate_current_authority_gate()
     if not isinstance(gate_report, Mapping) or gate_report.get("ready") is not True:
         raise GradingAuthorityError(
             "deterministic primary activation rejected: authority gate is not READY"
         )
-    raise GradingAuthorityError(
-        "deterministic primary activation rejected: primary score engine is not connected"
+    return {
+        "mode": "deterministic_primary",
+        "DETERMINISTIC_GRADING_PRIMARY": True,
+        "LLM_VERDICT_AUTHORITY": 0,
+        "EXTERNAL_LLM_REQUIRED_FOR_VERDICT": 0,
+    }
+
+
+@lru_cache(maxsize=1)
+def evaluate_current_authority_gate() -> dict[str, Any]:
+    """Recompute the offline Gate from the running code before activation."""
+    from deterministic_replay_audit import run_deterministic_replay_audit
+
+    replay = run_deterministic_replay_audit(
+        root=ROOT,
+        golden_path=ROOT / "calibration" / "expert_accuracy_golden.jsonl",
+    )
+    return evaluate_authority_removal_gate(
+        replay,
+        known_overgrading_regression_pass=replay["known_overgrading_regression_pass"],
+        normal_answer_regression_pass=replay["normal_answer_regression_pass"],
+        score_verdict_consistency_pass=replay["score_verdict_consistency_pass"],
     )

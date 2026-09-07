@@ -1,0 +1,12 @@
+{
+  "marker": "DETERMINISTIC_PRIMARY_PRODUCTION_SMOKE_V1",
+  "decision": "PASS",
+  "production_entrypoint": "grading_agents.run_agent_pipeline",
+  "provider_call_count": 0,
+  "grade_marker": "DETERMINISTIC_GRADING_PRIMARY_V1",
+  "llm_verdict_authority": 0,
+  "external_llm_required_for_verdict": false,
+  "fatal_error_detected": true,
+  "official_pass_met": false,
+  "persistence_created": true
+}

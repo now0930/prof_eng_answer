@@ -840,8 +840,12 @@ def grade_answer(chat_id, raw_text, state):
             parsed
         )
 
-        parsed["backend"] = "ollama"
-        parsed["model"] = OLLAMA_MODEL
+        if parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1":
+            parsed["backend"] = "deterministic"
+            parsed["model"] = None
+        else:
+            parsed["backend"] = "ollama"
+            parsed["model"] = OLLAMA_MODEL
 
         (session_dir / "grade.json").write_text(
             json.dumps(parsed, ensure_ascii=False, indent=2),
@@ -850,7 +854,12 @@ def grade_answer(chat_id, raw_text, state):
 
     meta["status"] = "graded"
     meta["graded_at"] = datetime.now().isoformat(timespec="seconds")
-    meta["model"] = OLLAMA_MODEL
+    meta["model"] = (
+        None
+        if isinstance(parsed, dict)
+        and parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1"
+        else OLLAMA_MODEL
+    )
     meta["agent_pipeline"] = "2026-06-27-agent-v1"
     save_meta(sid, meta)
 
@@ -942,7 +951,15 @@ def format_result(parsed, sid=None):
         parsed
     )
 
-    compact_output = summarize_grade_for_telegram(parsed, call_ollama_fn=call_ollama)
+    summary_callable = (
+        None
+        if parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1"
+        else call_ollama
+    )
+    compact_output = summarize_grade_for_telegram(
+        parsed,
+        call_ollama_fn=summary_callable,
+    )
     if compact_output:
         return compact_output
 

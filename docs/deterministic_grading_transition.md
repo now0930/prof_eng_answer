@@ -16,8 +16,13 @@
 | 35H | Gate 구현 완료, 권한 전환 보류 | LLM verdict authority 제거 fail-closed Gate |
 | 37 | coverage 확장 완료, 정확도 `HOLD` | 질문별 anchor scope + provider-free Fact Anchor evidence |
 | 38 | offline Gate `READY` | 질문-only routing + A/B/C/D/E score evidence + full-chain replay |
+| 39 | production 경로 연결 완료, 배포 증거 대기 | READY 재계산 + feature flag + LLM 전 경로 우회 |
 
-Stage38 기준 질문-only Topic routing recall `1.0`, routing false positive 0, known fatal recall `1.0`(9/9), score coverage `1.0`, 허용구간 적중률 `0.866667`, 평균 범위 이탈 `0.045`, known-overgrading 0, 두 번의 전체 replay exact match를 달성해 offline Authority Gate는 `READY`다. 점수는 A 구조, B 요구 완전성, C fact correctness, D 공학 판단, E 연결성의 provider-free evidence를 분리하고, 3쪽 미만 evidence는 high-score eligibility만 제한한다. 하지만 production entrypoint는 아직 legacy core를 호출하므로 현재 운영 상태는 다음과 같다.
+Stage38 기준 질문-only Topic routing recall `1.0`, routing false positive 0, known fatal recall `1.0`(9/9), score coverage `1.0`, 허용구간 적중률 `0.866667`, 평균 범위 이탈 `0.045`, known-overgrading 0, 두 번의 전체 replay exact match를 달성해 offline Authority Gate는 `READY`다. 점수는 A 구조, B 요구 완전성, C fact correctness, D 공학 판단, E 연결성의 provider-free evidence를 분리하고, 3쪽 미만 evidence는 high-score eligibility만 제한한다.
+
+Stage39 production entrypoint도 연결됐다. `DETERMINISTIC_GRADING_PRIMARY=true`이면 실행 중인 코드로 30건 Authority Gate를 다시 계산하고, READY일 때만 deterministic primary를 선택한다. 이 경로에서는 legacy LLM grader, score adjudicator, legacy finalizer와 LLM Telegram summarizer를 호출하지 않는다. 결과는 `deterministic_grade.json`, `grade_raw.txt`, 최종 `grade.json`에 provider-neutral schema로 저장된다. 저장소 기본값과 아직 전환하지 않은 운영값은 다음과 같다.
+
+Host production-entrypoint smoke 증거는 `reports/deterministic_primary_smoke_stage39.json`에 저장한다. 이 검증은 실제 `grading_agents.run_agent_pipeline`을 호출하면서 provider callable을 금지하고 provider call 0, fatal 검출, false pass 방지와 persistence를 확인한다.
 
 ```text
 DETERMINISTIC_GRADING_PRIMARY=FALSE
@@ -25,7 +30,7 @@ LLM_VERDICT_AUTHORITY=1
 EXTERNAL_LLM_REQUIRED_FOR_VERDICT=1
 ```
 
-목표값을 환경변수로 강제해도 Gate가 `READY`가 아니거나 primary score engine이 연결되지 않았으면 실행을 거부한다.
+운영 전환 시에는 `DETERMINISTIC_GRADING_PRIMARY=TRUE`로 설정한다. Gate가 `READY`가 아니면 fail-closed로 실행을 거부하며 legacy 결과로 조용히 fallback하지 않는다. `FALSE`로 되돌리면 즉시 legacy primary + deterministic shadow 경로로 rollback된다.
 
 ## 데이터 흐름과 소유권
 
@@ -66,7 +71,7 @@ python3 scripts/check_deterministic_authority_gate.py
 - 평균 score 허용구간 이탈 1.0점 이하
 - external LLM required for verdict 0
 
-평균 점수 유사성은 correctness Gate를 대신할 수 없다. Stage38은 Golden case ID나 목표 score range를 runtime rule에 사용하지 않으며 질문, Topic Pack, ontology와 가시적 답안 evidence만 사용한다. 다음 구현 순서는 production entrypoint에서 READY artifact와 코드 fingerprint를 검증한 뒤 legacy LLM core를 우회하고 deterministic result schema·persistence·Telegram summary·rollback을 검증하는 것이다.
+평균 점수 유사성은 correctness Gate를 대신할 수 없다. Stage38/39는 Golden case ID나 목표 score range를 runtime rule에 사용하지 않으며 질문, Topic Pack, ontology와 가시적 답안 evidence만 사용한다. 남은 운영 작업은 대상 commit image rebuild/recreate, container fingerprint·parity 확인, production replay와 endpoint smoke 저장, rollback smoke이다.
 
 세부 실행 순서와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)를 따른다.
 
