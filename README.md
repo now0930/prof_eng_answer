@@ -366,13 +366,14 @@ git pull --ff-only origin main
 bash scripts/update_and_run_deterministic_primary.sh
 ```
 
-이 스크립트는 tracked 변경이 있으면 중단하고, fast-forward pull, Authority Gate, `DETERMINISTIC_GRADING_PRIMARY=true`, Compose recreate, container provider-zero smoke와 런타임 권한 확인을 순서대로 수행합니다. `.env`가 없으면 실행 중인 기존 container에서 필요한 애플리케이션 변수만 값 노출 없이 복구하고 mode `0600`을 적용합니다. 기존 `.env`가 있으면 UTC timestamp backup을 먼저 만듭니다.
+이 스크립트는 소스는 `/home/now0930/hermes/workspace/prof_eng_answer`, Compose와 `.env`는 `/home/now0930/hermes`를 기준으로 처리합니다. tracked 변경이 있으면 중단하고, fast-forward pull, Authority Gate, `DETERMINISTIC_GRADING_PRIMARY=true`, Compose recreate, container provider-zero smoke와 런타임 권한 확인을 순서대로 수행합니다. `.env`가 없으면 실행 중인 기존 container에서 필요한 애플리케이션 변수만 값 노출 없이 복구하고 mode `0600`을 적용합니다. 기존 `.env`가 있으면 UTC timestamp backup을 먼저 만듭니다.
 
 일반 코드만 반영하고 기존 실행 모드를 유지하려면:
 
 ```bash
 cd /home/now0930/hermes/workspace/prof_eng_answer
 git pull --ff-only origin main
+cd /home/now0930/hermes
 docker restart prof_eng_answer_bot
 docker logs --tail=100 -f prof_eng_answer_bot
 ```

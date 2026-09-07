@@ -2,8 +2,10 @@
 set -Eeuo pipefail
 
 REPO_DIR="${PROF_ENG_REPO_DIR:-/home/now0930/hermes/workspace/prof_eng_answer}"
+COMPOSE_DIR="${PROF_ENG_COMPOSE_DIR:-/home/now0930/hermes}"
 SERVICE="${PROF_ENG_COMPOSE_SERVICE:-prof-eng-answer-bot}"
 CONTAINER="${PROF_ENG_CONTAINER_NAME:-prof_eng_answer_bot}"
+ENV_FILE="$COMPOSE_DIR/.env"
 
 cd "$REPO_DIR"
 
@@ -14,16 +16,17 @@ fi
 
 git pull --ff-only origin main
 
-# docker-compose.yaml requires ./.env. If it was lost, recover only the
+# The root Compose project requires /home/now0930/hermes/.env. If it was lost,
+# recover only the
 # application settings from the currently running container without printing
 # their values. The resulting secret file is mode 0600.
-if [[ ! -f .env ]]; then
+if [[ ! -f "$ENV_FILE" ]]; then
   if ! docker inspect "$CONTAINER" >/dev/null 2>&1; then
     echo "ERROR: .env is missing and no existing container can recover it." >&2
     exit 2
   fi
   umask 077
-  python3 - .env "$CONTAINER" <<'PY'
+  python3 - "$ENV_FILE" "$CONTAINER" <<'PY'
 import json
 import os
 import subprocess
@@ -74,8 +77,8 @@ temporary.replace(target)
 PY
   echo "Recovered .env from existing container (values not printed)."
 else
-  cp -p .env ".env.backup.$(date -u +%Y%m%dT%H%M%SZ)"
-  python3 - .env <<'PY'
+  cp -p "$ENV_FILE" "$ENV_FILE.backup.$(date -u +%Y%m%dT%H%M%SZ)"
+  python3 - "$ENV_FILE" <<'PY'
 import os
 import sys
 from pathlib import Path
@@ -102,7 +105,7 @@ temporary.replace(target)
 PY
 fi
 
-python3 - .env <<'PY'
+python3 - "$ENV_FILE" <<'PY'
 import sys
 from pathlib import Path
 
@@ -118,8 +121,10 @@ if values.get("DETERMINISTIC_GRADING_PRIMARY", "").lower() != "true":
     raise SystemExit("ERROR: deterministic-primary flag was not written")
 PY
 
+python3 -B "$REPO_DIR/scripts/check_deterministic_authority_gate.py" --require-ready
+
+cd "$COMPOSE_DIR"
 docker compose config --quiet
-python3 -B scripts/check_deterministic_authority_gate.py --require-ready
 docker compose up -d --force-recreate "$SERVICE"
 
 docker compose exec -T "$SERVICE" python3 -B \
@@ -135,7 +140,7 @@ assert mode["EXTERNAL_LLM_REQUIRED_FOR_VERDICT"] == 0
 print("RUNTIME_AUTHORITY=DETERMINISTIC_PRIMARY")
 PY
 
-HOST_COMMIT="$(git rev-parse HEAD)"
+HOST_COMMIT="$(git -C "$REPO_DIR" rev-parse HEAD)"
 CONTAINER_STARTED="$(docker inspect "$CONTAINER" --format '{{.State.StartedAt}}')"
 CONTAINER_RUNNING="$(docker inspect "$CONTAINER" --format '{{.State.Running}}')"
 
