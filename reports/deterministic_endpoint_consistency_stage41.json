@@ -1,6 +1,7 @@
 {
   "marker": "DETERMINISTIC_ENDPOINT_CONSISTENCY_REGRESSION_V1",
   "decision": "PASS",
+  "deployment_commit": "1e343fc9ea4f7159f5a6fba19eadeb6f86f83c31",
   "source_session_id": "20260907_040239_5960502198",
   "observed": {
     "deterministic_grade_total": 14.5,
@@ -18,5 +19,26 @@
     "expected_verdict": "FAIL",
     "expected_official_pass_met": false
   },
-  "fix": "reconcile_grade_score returns immediately for DETERMINISTIC_GRADING_PRIMARY_V1 before uncapped-score inspection or LLM adjudication"
+  "fix": "reconcile_grade_score returns immediately for DETERMINISTIC_GRADING_PRIMARY_V1 before uncapped-score inspection or LLM adjudication",
+  "post_deployment_endpoint_verification": {
+    "decision": "PASS",
+    "sessions": [
+      {
+        "session_id": "20260907_041003_5960502198",
+        "total_score": 13.0,
+        "verdict": "NEEDS_CORRECTION",
+        "official_pass_met": false,
+        "raw_final_core_exact_match": true
+      },
+      {
+        "session_id": "20260907_041028_5960502198",
+        "total_score": 14.5,
+        "verdict": "FAIL",
+        "official_pass_met": false,
+        "raw_final_core_exact_match": true
+      }
+    ],
+    "container_running": true,
+    "runtime_authority": "DETERMINISTIC_PRIMARY"
+  }
 }

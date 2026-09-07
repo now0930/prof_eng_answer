@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-07): Stage38 Gemini-off 30건 전체 체인은 질문-only Topic routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건, 2회 exact replay `STABLE`로 offline Authority Gate `READY`를 달성했습니다. Stage39에서는 production entrypoint와 provider-zero container replay를 연결했습니다. Stage40~41 실제 Telegram 회귀에서는 엔진 안내 불일치, `PARTIAL` 언급만으로 합격한 사례와 legacy score adjudicator가 deterministic ceiling을 다시 올린 경로를 확인했습니다. 구체 alias routing·최소 `SATISFIED` 합격 증거·deterministic reconciler 조기 반환으로 판정권과 최종 출력 일관성을 보강했습니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-07): Stage38 Gemini-off 30건 전체 체인은 question-only routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건, 2회 exact replay `STABLE`로 Authority Gate `READY`를 달성했습니다. Stage39~41에서 production entrypoint, provider-zero container replay, 실제 Telegram 두 세션과 persisted raw/final score·verdict·pass flag exact match까지 완료했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 
