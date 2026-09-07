@@ -520,4 +520,28 @@ python3 scripts/rubric_manager.py validate-topic-pack-release --all
 - runtime 영향이 있으면 정확도·배포 Gate를 별도 통과
 - local HEAD, tracking ref와 remote SHA 일치
 
+## 24. 기존 Topic Pack 선택 보강
+
+결정론적 primary 전환 이후에도 Topic Pack은 정확도 정본이다. 다만 전체
+inventory를 일괄 재작성하지 않고 실제 오판정이나 Question Demand 범위 오류가
+재현된 Topic만 선택해 보강한다.
+
+```text
+1. 운영 사례를 익명화 fixture로 고정
+2. 오류 owner를 ontology / routing-scope / Topic contract / score / formatter로 분류
+3. 문제문이 직접 요구한 anchor만 required_anchor_ids로 정의
+4. 정답·부분답·오답·정정·부정 문맥 mutation을 함께 추가
+5. 수정 Topic focused validation과 validate-topic-pack-release --all 수행
+6. 채점 의미가 바뀌면 30건 Authority·2회 Stability Gate 수행
+7. runtime 영향이 있을 때만 container·endpoint 증거 수집
+```
+
+공통 단위·차원·quantity type·일반 관계 불변조건은 `grading_ontology/`를 수정한다.
+특정 문제의 필수 Fact, 허용 관계, negative boundary와 `required_anchor_ids`는 해당
+Topic Pack이 소유한다. 신규 Topic 생성은 기존 Topic으로 문제 요구범위를 표현할 수
+없고 ownership이 독립적일 때만 선택한다.
+
+수정 목표는 특정 점수가 아니라 문제 요구범위와 상태 경계의 정확도다. 점수를
+맞추기 위한 anchor 삭제, threshold 완화, fatal rule 제거는 금지한다.
+
 과거 대규모 확장의 상세 postmortem은 [`archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md`](archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md)에만 보존한다.

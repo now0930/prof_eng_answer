@@ -1,6 +1,6 @@
 # Grading Quality Roadmap
 
-이 문서는 채점 정확도, 회귀 검증, Topic Pack 확장과 운영 배포의 장기 관리 정책을 정의한다. [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)은 현재 상태와 실행 증거만 추적하고, 반복 가능한 정책은 이 문서를 정본으로 사용한다.
+이 문서는 채점 정확도, 회귀 검증, Topic Pack 확장과 운영 배포의 장기 관리 정책을 정의한다. [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)은 결정론적 전환의 종료 증거를 보존한다. 이후 회귀는 별도 Issue로 추적하고, 반복 가능한 정책은 이 문서를 정본으로 사용한다.
 
 ## 1. 현재 기준선
 
@@ -8,11 +8,11 @@
 |---|---|---|
 | 채점 구조·점수 소유권 | 구현 완료, 지속 회귀 | [`grading_architecture.md`](grading_architecture.md) |
 | Canonical demand ledger와 공개 coverage summary | 구현 완료, 지속 회귀 | `evaluation_ledger.py`, SIL output/coverage tests |
-| 전문가 정확도 Gate | `HOLD`: 최근 완료 실행(`ac79b20`) 요구 상태 정확도 80.18% | [`accuracy_release_gate.md`](accuracy_release_gate.md), release candidate artifact |
-| 요구상태 안정성 Gate | 구현 완료, 새 후보 반복 실행 미검증 | `demand_state_stability.py`, `calibration/demand_state_stability_policy.json` |
+| 전문가 정확도 Gate | Deterministic 30건 `READY`: score in-range 86.67%, known-overgrading 0 | [`accuracy_release_gate.md`](accuracy_release_gate.md), deterministic replay artifact |
+| 요구상태 안정성 Gate | 30건 2회 exact replay `STABLE`, provider call 0 | `reports/deterministic_stability_stage38.json` |
 | Topic Pack authoring·검증 | `ab94b69`에서 범용·대상 기반 흐름 적용 | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
-| Runtime provenance | process 수준 구현, image/container 증명 미완료 | [`operation_runbook.md`](operation_runbook.md), Issue #1 |
-| 결정론적 채점 전환 | offline Gate `READY`: routing 100%·fatal 9/9·score 30/30·2회 STABLE, production 연결 대기 | [`deterministic_grading_transition.md`](deterministic_grading_transition.md) |
+| Runtime provenance | container parity·production replay·Telegram raw/final exact match 완료 | [`operation_runbook.md`](operation_runbook.md), `reports/deterministic_endpoint_consistency_stage41.json` |
+| 결정론적 채점 전환 | 운영 완료: routing 100%·fatal 9/9·score 30/30·LLM verdict authority 0 | [`deterministic_grading_transition.md`](deterministic_grading_transition.md) |
 
 코드 회귀 PASS와 운영 정확도 `READY`, 배포 증명 완료는 서로 다른 판정이다. 하나의 판정으로 다른 판정을 대체하지 않는다.
 
@@ -63,16 +63,23 @@
 - 생성 또는 release 실패 시 canonical source와 generated bank를 작업 전 상태로 복구한다.
 - 승인 이후 source가 바뀐 관리 대상 Topic은 promote와 전체 integration을 차단한다.
 - generated bank는 직접 수정하지 않는다.
+- 77개 Topic을 일괄 migration하거나 동일한 machine contract를 복제하지 않는다.
+- 실제 오판정이 재현되거나 명시 Question Demand scope가 필요한 Topic만 선택 수정한다.
+- 관련 없는 anchor가 평가되는 경우 신규 Topic보다 기존 Topic의 `required_anchor_ids`와 routing boundary를 먼저 보강한다.
+- 공통 단위·차원·quantity type·관계 불변조건은 Topic Pack에 반복하지 않고 `grading_ontology/`가 소유한다.
 
 ## 6. Release와 배포
 
-세 Gate는 소유권을 합치지 않고 `scripts/release_candidate.py`가 순서만 조정한다.
-`qualify`는 Topic Pack 전체 검증과 코드 release validation 이후 현재 provider로
-30건 이상을 새로 채점하고 Accuracy Gate가 `READY`인지 확인한다. 통과하면 같은
-후보를 다시 uncached 채점해 요구상태 일치율·중대 전이율·점수 편차 Stability Gate를
-검사한다. `deploy`는 같은
-commit의 READY manifest만 받아 rebuild 또는 recreate와 배포 증거를 수집한다.
-Accuracy 또는 Stability Gate가 `HOLD`이면 Docker 명령은 실행되지 않는다.
+결정론적 primary 변경은 Topic·routing·fatal·score regression과 Authority Gate,
+2회 exact Stability Gate를 통과해야 한다. `deploy`는 같은 commit의
+`READY` artifact만 받아 rebuild 또는 recreate와 container parity, provider-zero replay,
+endpoint exact-match 증거를 수집한다. 어느 Gate든 `HOLD`면 Docker 명령을
+실행하지 않는다.
+
+`scripts/release_candidate.py` 기반 provider qualification은 legacy 비교나 optional
+semantic resolver의 evidence 추출을 변경할 때만 별도 lane으로 수행한다. 이 Gate는
+provider 품질을 증명할 수는 있지만 requirement status·fatal·score·verdict 판정권을
+provider에게 부여하지 않는다.
 
 ### 매 release
 
@@ -102,7 +109,8 @@ manifest의 `issue_close_eligible=true`는 기술 Gate가 모두 통과했다는
 - [`topic_pack_workflow.md`](topic_pack_workflow.md): Topic 추가·수정 실행 절차
 - [`operation_runbook.md`](operation_runbook.md): 운영·배포 명령
 - [`accuracy_release_gate.md`](accuracy_release_gate.md): 정확도 Gate 수치와 실행법
-- Issue #1: 최신 HEAD, Gate 결과, 배포 증거와 남은 blocker
+- Issue #1: 결정론적 전환 완료 증거를 보존한 종료 이력
+- 신규 regression: 별도 Issue에서 fixture·owner·Gate·배포 증거를 추적하고 Issue #1을 참조
 - `docs/archive/`: 종료된 Stage와 과거 판단 기록
 
 ## 8. 결정론적 판정권 전환
@@ -114,3 +122,48 @@ manifest의 `issue_close_eligible=true`는 기술 Gate가 모두 통과했다는
 구현 순서, mutation 범위와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)가 소유한다.
 
 Issue 본문은 현재 상태만 유지한다. 긴 실행 로그는 comment 또는 repository artifact에 남기고, 완료된 과거 Stage를 현재 blocker처럼 유지하지 않는다.
+
+## 9. 전환 완료 후 개발 방향
+
+### P0 — Question scope 정밀화
+
+- 운영 빈도가 높은 질문부터 Topic Pack `expected_question_patterns`에 사람이 검토한 `required_anchor_ids`를 추가한다.
+- unrelated anchor count, 요구항목 수, primary/secondary Topic 선택 근거를 regression artifact에 저장한다.
+- V-Model처럼 인접 Topic까지 합쳐 과도한 요구항목이 생성되는 사례를 첫 대상으로 삼는다.
+- 특정 답안 점수를 목표로 scope를 줄이지 않고 문제문이 명시한 요구만 소유하게 한다.
+
+### P0 — 상태 판정 품질
+
+- 단일 일반 단어가 여러 anchor의 `PARTIAL` 근거로 중복 사용되는 비율을 측정한다.
+- `SATISFIED`는 핵심 개념과 관계 evidence, `PARTIAL`은 식별 가능한 개념 언급, `MISSING`은 근거 없음으로 분리한다.
+- 최소 `SATISFIED` 합격 증거와 fatal ceiling은 유지하며 threshold 완화로 Golden Gate를 맞추지 않는다.
+
+### P1 — 77 Topic 위험 기반 Golden 확대
+
+- 모든 Topic에 동일 개수의 사례를 강제하지 않는다.
+- 안전·계산·법규·빈출 Topic부터 정답, 부분답, 핵심오답, 부정·인용·정정 문맥 mutation을 추가한다.
+- 목표는 Topic inventory coverage, fatal false-negative 0, false pass 0, 동일 입력 repeatability 100%다.
+
+### P1 — Ontology와 Topic contract 분리 강화
+
+- 공통 quantity, dimension, demand mode와 일반 관계 규칙은 global ontology에 둔다.
+- 문제별 필수 설명, 허용 관계, negative boundary와 중요도만 Topic Pack이 소유한다.
+- 동일 공학 사실의 Topic 간 복제·불일치 검출 validator를 추가한다.
+
+### P2 — Optional local semantic resolver
+
+- deterministic parser가 `UNKNOWN` 또는 `ABSTAIN`한 span에만 local resolver를 shadow로 적용한다.
+- resolver 출력은 canonical evidence schema만 허용하고 status·fatal·score·verdict 필드를 계속 거부한다.
+- resolver 장애 시에도 이미 결정 가능한 채점은 유지하며 외부 LLM을 production verdict 경로에 재도입하지 않는다.
+
+### 지속 운영
+
+1. 실제 이상 사례 수집
+2. 익명화 fixture와 owner 분류
+3. focused mutation regression
+4. 30건 Authority·2회 Stability Gate
+5. container parity·provider-zero replay
+6. Telegram raw/final exact match
+7. commit·CI·운영 evidence를 신규 Issue에 기록
+
+Topic Pack 변경의 완료 기준은 "파일이 생성됨"이 아니라 문제 요구범위가 정확하고 정답·부분답·오답 경계를 재현 가능하게 보호하는 것이다.

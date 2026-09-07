@@ -711,6 +711,18 @@ Markdown 절차를 runtime이 파싱하지 않습니다. `add-topic`과 `approve
 - commit과 push는 분리하고 force push는 사용하지 않습니다.
 - push 후 local HEAD, tracking ref, remote SHA가 동일한지 확인합니다.
 
+#### 기존 Topic Pack 유지보수 원칙
+
+결정론적 채점 전환이 완료됐다고 Topic Pack을 동결하지 않으며, 77개 전체를 일괄 재작성하지도 않습니다. 실제 채점 회귀가 확인된 Topic만 다음 순서로 선택 보강합니다.
+
+1. 실제 session을 개인정보와 session ID에 의존하지 않는 재현 fixture로 축약합니다.
+2. 오류 owner를 전역 ontology, question routing/scope, Topic Pack Fact·Logic contract, score policy 또는 formatter 중 하나로 분류합니다.
+3. 보편적인 단위·차원·관계 오류는 `grading_ontology/`, 문제별 필수 개념·negative boundary·`required_anchor_ids`는 해당 Topic Pack에 둡니다.
+4. 관련 없는 anchor가 평가되면 신규 Topic 생성보다 기존 Topic의 exact question contract와 routing boundary 수정을 우선합니다.
+5. 정답·부분답·오답·정정 문맥을 함께 회귀검증하고, 전체 Authority Gate가 `READY`인 경우에만 배포합니다.
+
+현재 첫 유지보수 우선순위는 자주 출제되는 질문의 exact question contract 확대입니다. 예를 들어 V-Model 질문처럼 다수의 인접 anchor가 한꺼번에 평가되는 경우, 사람이 검토한 `required_anchor_ids`로 실제 문제 요구범위를 제한합니다. 단순히 점수를 맞추기 위한 anchor 삭제나 threshold 완화는 금지합니다.
+
 기본 validation 흐름:
 
 ```text
@@ -732,7 +744,7 @@ Topic Pack은 문제은행이 아니므로 실제 시험문제가 항상 Topic �
 - `GENERAL`: 문제는 명확하지만 현재 Topic evidence가 충분하지 않음
 - `AMBIGUOUS`: 문제 자체가 모호하여 Topic을 안정적으로 결정하기 어려움
 
-구현 원칙은 **Rule → LLM → Rule** 구조입니다.
+구현 원칙은 **Deterministic parser → unresolved evidence에만 optional semantic resolver → Deterministic verdict** 구조입니다. Resolver는 canonical evidence만 제안하며 Topic, requirement status, fatal, 점수 또는 최종 verdict의 소유권을 갖지 않습니다.
 
 ```text
 Rule: candidate generation / guard
