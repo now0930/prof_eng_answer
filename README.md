@@ -361,18 +361,19 @@ Bind mount 환경에서 `engine_commit`을 읽을 때는 repository 경로를 �
 ### 5.1 운영 중인 Hermes Compose
 
 ```bash
-cd ~/hermes
-
-docker compose up -d prof-eng-answer-bot
-docker logs --tail=100 -f prof_eng_answer_bot
+cd /home/now0930/hermes/workspace/prof_eng_answer
+git pull --ff-only origin main
+bash scripts/update_and_run_deterministic_primary.sh
 ```
 
-코드 반영 후 재시작:
+이 스크립트는 tracked 변경이 있으면 중단하고, fast-forward pull, Authority Gate, `DETERMINISTIC_GRADING_PRIMARY=true`, Compose recreate, container provider-zero smoke와 런타임 권한 확인을 순서대로 수행합니다. `.env`가 없으면 실행 중인 기존 container에서 필요한 애플리케이션 변수만 값 노출 없이 복구하고 mode `0600`을 적용합니다. 기존 `.env`가 있으면 UTC timestamp backup을 먼저 만듭니다.
+
+일반 코드만 반영하고 기존 실행 모드를 유지하려면:
 
 ```bash
-cd ~/hermes
-
-docker compose restart prof-eng-answer-bot
+cd /home/now0930/hermes/workspace/prof_eng_answer
+git pull --ff-only origin main
+docker restart prof_eng_answer_bot
 docker logs --tail=100 -f prof_eng_answer_bot
 ```
 
