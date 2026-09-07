@@ -18,6 +18,7 @@
 | 38 | offline Gate `READY` | 질문-only routing + A/B/C/D/E score evidence + full-chain replay |
 | 39 | production 경로 연결 완료, 배포 증거 대기 | READY 재계산 + feature flag + LLM 전 경로 우회 |
 | 40 | endpoint 회귀 보강 완료 | 실제 엔진 표시 + alias owner + 최소 SATISFIED 합격 증거 + persistence 일치 |
+| 41 | score authority 누출 차단 | legacy reconciler의 deterministic ceiling 해제·LLM 호출 경로 조기 차단 |
 
 Stage38 기준 질문-only Topic routing recall `1.0`, routing false positive 0, known fatal recall `1.0`(9/9), score coverage `1.0`, 허용구간 적중률 `0.866667`, 평균 범위 이탈 `0.045`, known-overgrading 0, 두 번의 전체 replay exact match를 달성해 offline Authority Gate는 `READY`다. 점수는 A 구조, B 요구 완전성, C fact correctness, D 공학 판단, E 연결성의 provider-free evidence를 분리하고, 3쪽 미만 evidence는 high-score eligibility만 제한한다.
 
@@ -72,7 +73,7 @@ python3 scripts/check_deterministic_authority_gate.py
 - 평균 score 허용구간 이탈 1.0점 이하
 - external LLM required for verdict 0
 
-평균 점수 유사성은 correctness Gate를 대신할 수 없다. Stage38~40은 Golden case ID나 목표 score range를 runtime rule에 사용하지 않으며 질문, Topic Pack, ontology와 가시적 답안 evidence만 사용한다. commit `8f68591` container의 fingerprint·parity와 provider-zero replay는 `reports/deterministic_primary_container_smoke_stage39.json`, 실제 Telegram 두 세션의 발견·후보 재채점은 `reports/deterministic_endpoint_regression_stage40.json`에 저장한다. Stage40 후보는 SIL fatal 13.0을 유지하고 V-Model 답안의 부분언급 과대평가를 16.29 PASS에서 14.5 FAIL로 교정했다.
+평균 점수 유사성은 correctness Gate를 대신할 수 없다. Stage38 이후 runtime rule은 Golden case ID나 목표 score range를 사용하지 않으며 질문, Topic Pack, ontology와 가시적 답안 evidence만 사용한다. container 증거는 `reports/deterministic_primary_container_smoke_stage39.json`, 실제 Telegram 재채점은 `reports/deterministic_endpoint_regression_stage40.json`과 `reports/deterministic_endpoint_consistency_stage41.json`에 저장한다. Stage41은 legacy reconciler가 deterministic 14.5 ceiling을 15.6으로 올린 권한 누출을 LLM 호출 이전에 차단하며, final score·verdict·pass flag를 deterministic owner와 동일하게 유지한다.
 
 세부 실행 순서와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)를 따른다.
 

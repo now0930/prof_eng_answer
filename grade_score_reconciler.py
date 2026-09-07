@@ -1348,6 +1348,12 @@ def reconcile_grade_score(
     if not isinstance(parsed, dict):
         return parsed
 
+    # Deterministic primary owns both the capped score and final verdict.
+    # Do not even inspect an uncapped candidate: doing so can invoke the
+    # legacy LLM adjudicator and raise a deterministic ceiling.
+    if parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1":
+        return parsed
+
     parsed = apply_generic_de_policy(parsed)
 
     max_score = _to_float(parsed.get("max_score"), 25.0) or 25.0

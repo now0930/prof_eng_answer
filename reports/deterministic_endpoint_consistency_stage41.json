@@ -1,0 +1,22 @@
+{
+  "marker": "DETERMINISTIC_ENDPOINT_CONSISTENCY_REGRESSION_V1",
+  "decision": "PASS",
+  "source_session_id": "20260907_040239_5960502198",
+  "observed": {
+    "deterministic_grade_total": 14.5,
+    "final_grade_total": 15.6,
+    "final_verdict": "FAIL",
+    "final_official_pass_met": true,
+    "llm_cap_adjudication_raised_score": true
+  },
+  "protected_invariant": {
+    "legacy_llm_adjudicator_called": false,
+    "deterministic_total_equals_final_total": true,
+    "deterministic_verdict_equals_final_verdict": true,
+    "deterministic_pass_flag_equals_final_pass_flag": true,
+    "expected_total": 14.5,
+    "expected_verdict": "FAIL",
+    "expected_official_pass_met": false
+  },
+  "fix": "reconcile_grade_score returns immediately for DETERMINISTIC_GRADING_PRIMARY_V1 before uncapped-score inspection or LLM adjudication"
+}

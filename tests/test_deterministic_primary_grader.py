@@ -60,10 +60,17 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
     def test_reconciler_cannot_call_llm_or_change_deterministic_grade(self):
         from grade_score_reconciler import reconcile_grade_score
 
-        grade = grade_deterministically(
-            question_text="열전대 온도센서의 측정 원리를 설명하시오.",
-            answer_text="열전대는 제벡 효과에 따른 열기전력을 측정한다.",
-        )
+        grade = {
+            "marker": "DETERMINISTIC_GRADING_PRIMARY_V1",
+            "total_score": 14.5,
+            "max_score": 25.0,
+            "verdict": "FAIL",
+            "deterministic_score": {
+                "total_score": 14.5,
+                "raw_score": 16.37,
+                "applied_ceiling": 14.5,
+            },
+        }
         result = reconcile_grade_score(
             parsed=grade,
             raw_text="unused",
