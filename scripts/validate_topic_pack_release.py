@@ -195,6 +195,9 @@ def _mark_validated(root: Path, topics: list[str]) -> None:
     for topic_id in topics:
         pack_dir = topic_pack_dir(root, topic_id)
         status = load_status(pack_dir, topic_id)
+        if status.get("status") == "legacy":
+            print("legacy validation completed without approval metadata:", topic_id)
+            continue
         status = update_status(status, sync_hash=True, mark_validated=True)
         write_status(pack_dir, status)
         print("updated validated status:", pack_dir / "topic_status.json")

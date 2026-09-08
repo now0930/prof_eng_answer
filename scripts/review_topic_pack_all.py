@@ -93,6 +93,9 @@ def main(argv: list[str] | None = None) -> int:
         if not args.no_sync_status:
             pack_dir = topic_pack_dir(root, topic_id)
             status = load_status(pack_dir, topic_id)
+            if status.get("status") == "legacy":
+                print("legacy review result retained without approval metadata:", topic_id)
+                continue
             status = update_status(status, set_status="reviewed", sync_hash=True, mark_reviewed=True, review_model=model_name, review_report=latest_review_report(root, topic_id))
             write_status(pack_dir, status)
             print("updated status:", pack_dir / "topic_status.json")

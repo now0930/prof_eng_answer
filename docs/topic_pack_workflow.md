@@ -59,6 +59,13 @@ docs/topic_sheets/<topic_id>.md
 
 `add-topic`으로 만든 Pack의 `topic_status.json`은 `draft / human_review_required`에서 시작한다. `approve-topic`은 reviewer, 승인 시점과 canonical source hash를 기록한다. 이후 README 또는 source JSON이 바뀌면 승인이 자동 무효화되어 promote와 전체 integration이 실패한다. 기존 77개 legacy Pack에는 이 계약을 소급 강제하지 않는다.
 
+Legacy Pack에는 `topic_status.json`을 두지 않는다. 상태 조회 시 프로그램이
+`legacy / legacy_unmanaged`를 계산해 표시하며, 이는 승인 또는 미검토 판정이 아니라
+현재 managed workflow 이전에 만들어진 Pack이라는 뜻이다. 과거 `topic_status.v1`,
+`frozen/not_reviewed` 같은 파일을 유지하거나 현재 승인으로 변환하지 않는다. 사람이
+현재 source를 검토한 사실이 있을 때만 별도 명시적 migration과 reviewer 기록을 거쳐
+managed contract로 전환한다.
+
 Generated bank:
 
 ```text

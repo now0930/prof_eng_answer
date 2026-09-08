@@ -225,6 +225,20 @@ class TopicPackWorkflowControllerTest(unittest.TestCase):
                 [],
             )
 
+    def test_legacy_topic_without_status_has_non_approval_metadata(self) -> None:
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary)
+            pack = root / "rubrics" / "topic_packs" / "legacy_topic"
+            _write_sources(pack, "legacy_topic")
+            status = workflow.load_status(pack, "legacy_topic")
+            self.assertEqual(status["status"], "legacy")
+            self.assertEqual(status["review_state"], "legacy_unmanaged")
+            self.assertFalse(status["_changed"])
+            self.assertEqual(status["content_hash"], status["_current_hash"])
+            self.assertNotIn("workflow_contract", status)
+            with self.assertRaises(SystemExit):
+                workflow.write_status(pack, status)
+
 
 if __name__ == "__main__":
     unittest.main(verbosity=2)

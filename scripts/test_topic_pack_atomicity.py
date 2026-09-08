@@ -33,6 +33,7 @@ def make_pack(
     divergent_aliases: bool = False,
     divergent_truth: bool = False,
     core_facts: list[str] | None = None,
+    unmanaged_status: bool = False,
 ) -> None:
     pack = root / topic_id
     pack.mkdir(parents=True)
@@ -91,6 +92,11 @@ def make_pack(
         {"topic_id": topic_id, "llm_profile": {"truth_schema": truth}},
     )
     write_json(pack / "topic_importance.json", {"topic_id": topic_id})
+    if unmanaged_status:
+        write_json(
+            pack / "topic_status.json",
+            {"schema_version": "topic_status.v1", "status": "draft"},
+        )
 
 
 class TopicPackAtomicityAuditTests(unittest.TestCase):
@@ -129,6 +135,17 @@ class TopicPackAtomicityAuditTests(unittest.TestCase):
             make_pack(root, "string_topic", string_pattern=True)
             issues, _ = self.audit(root)
             self.assertIn("UNSCOPED_QUESTION_PATTERN", {issue.code for issue in issues})
+
+    def test_unmanaged_status_metadata_is_error(self) -> None:
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp) / "packs"
+            root.mkdir()
+            make_pack(root, "stale_status_topic", unmanaged_status=True)
+            issues, _ = self.audit(root)
+            self.assertIn(
+                "UNMANAGED_TOPIC_STATUS_METADATA",
+                {issue.code for issue in issues},
+            )
 
     def test_modern_legacy_mirror_divergence_is_error(self) -> None:
         with tempfile.TemporaryDirectory() as temp:

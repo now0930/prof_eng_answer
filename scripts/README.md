@@ -229,6 +229,11 @@ Topic Pack별 상태, hash, frozen/changed 여부를 확인한다.
 python3 scripts/rubric_manager.py topic-pack-status --all --include-frozen
 ```
 
+현재 workflow 이전에 만들어진 Pack은 status 파일 없이
+`legacy / legacy_unmanaged`로 계산 표시한다. 이 표시는 승인이나 미검토 주장이 아니다.
+`topic_status.json`은 `add-topic`으로 시작해 `approve-topic`으로 사람이 승인한 managed
+Pack에만 기록하며, 일반 status 명령은 legacy Pack에 승인성 metadata를 쓰지 않는다.
+
 ---
 
 ### `topic_review_llm.py`

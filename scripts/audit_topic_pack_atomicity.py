@@ -179,6 +179,15 @@ def audit_topic_pack_inventory(
         model = documents["model_answer.json"]
         logic = documents["logic_check.json"]
 
+        status_path = pack_root / topic_id / "topic_status.json"
+        if status_path.is_file() and topic_id in selected:
+            status = _load_json(status_path)
+            if status.get("workflow_contract") != "topic_pack_workflow.v1":
+                issues.append(AuditIssue(
+                    "ERROR", "UNMANAGED_TOPIC_STATUS_METADATA", topic_id,
+                    "topic_status.json exists without the managed workflow contract",
+                ))
+
         model_id = str(model.get("id") or "").strip()
         if model_id:
             model_ids[model_id].append(topic_id)

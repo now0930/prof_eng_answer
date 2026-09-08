@@ -17,6 +17,7 @@ python3 scripts/audit_topic_pack_atomicity.py \
 다음은 release 차단 오류다.
 
 - Topic owner와 다른 model ID 또는 중복 model ID
+- current workflow 계약이 없는 stale `topic_status.json`
 - `required_anchor_ids`가 없는 문자열 질문 계약
 - modern/legacy 질문·alias mirror의 명백한 의미 불일치
 - Fact Anchor와 Logic truth schema의 명백한 의미 불일치
@@ -46,6 +47,8 @@ python3 scripts/audit_topic_pack_atomicity.py \
   - disconnected question families 24
   - large anchor inventory 10
   - cross-topic alias collision 4
+- 상태 metadata: managed `approved/reviewed` 1개, 계산형 `legacy/legacy_unmanaged`
+  77개, stale legacy status 파일 0개
 
 상세 기계 판정은
 [`reports/topic_pack_atomicity_audit_20260909.json`](../reports/topic_pack_atomicity_audit_20260909.json)에
@@ -108,5 +111,8 @@ final verdict
 - 질문 패턴은 항상 객체형 `pattern + required_anchor_ids`로 작성한다.
 - Fact Anchor가 정본이며 Logic truth schema와 legacy mirror는 정본에서 투영한다.
 - generated bank는 직접 수정하지 않는다.
+- legacy Pack에는 status 파일을 만들지 않는다. 조회 시 계산되는
+  `legacy/legacy_unmanaged`는 승인 또는 미검토 판정이 아니다.
+- `topic_status.json`은 `add-topic → approve-topic`의 managed workflow만 기록한다.
 - 경고 수 증가는 PR에서 원인과 유지/분리 결정을 기록한다.
 - 실제 오판정이 없는 P1 후보는 묶음 분리하지 않는다.

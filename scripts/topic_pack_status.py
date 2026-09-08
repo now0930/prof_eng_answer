@@ -13,6 +13,9 @@ PACK_FILES = ["README.md", "fact_anchor.json", "model_answer.json", "topic_impor
 OPTIONAL_PACK_FILES = ["question_demand_axes.json"]
 STATUS_FILE = "topic_status.json"
 VALID_STATUSES = {"draft", "reviewed", "approved", "frozen"}
+LEGACY_STATUS = "legacy"
+LEGACY_REVIEW_STATE = "legacy_unmanaged"
+MANAGED_WORKFLOW_CONTRACT = "topic_pack_workflow.v1"
 
 
 def project_root() -> Path:
@@ -70,11 +73,32 @@ def default_status(topic_id: str, current_hash: str) -> dict[str, Any]:
     }
 
 
+def legacy_status(topic_id: str, current_hash: str) -> dict[str, Any]:
+    """Describe a pre-workflow pack without making an approval claim."""
+    return {
+        "topic_id": topic_id,
+        "status": LEGACY_STATUS,
+        "review_state": LEGACY_REVIEW_STATE,
+        "content_hash": current_hash,
+        "last_validated_at": "",
+        "last_reviewed_at": "",
+        "last_review_model": "",
+        "last_review_report": "",
+        "approved_at": "",
+        "frozen_at": "",
+        "notes": [
+            "Legacy Topic Pack; current managed approval metadata is not claimed."
+        ],
+        "_current_hash": current_hash,
+        "_changed": False,
+    }
+
+
 def load_status(pack_dir: Path, topic_id: str) -> dict[str, Any]:
     current_hash = content_hash(pack_dir)
     path = pack_dir / STATUS_FILE
     if not path.exists():
-        return default_status(topic_id, current_hash)
+        return legacy_status(topic_id, current_hash)
 
     try:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -99,6 +123,11 @@ def public_status(data: dict[str, Any]) -> dict[str, Any]:
 
 
 def write_status(pack_dir: Path, data: dict[str, Any]) -> None:
+    if data.get("workflow_contract") != MANAGED_WORKFLOW_CONTRACT:
+        raise SystemExit(
+            "ERROR: refusing to persist approval-like metadata for a legacy Topic Pack; "
+            "migrate it explicitly through the managed workflow"
+        )
     (pack_dir / STATUS_FILE).write_text(json.dumps(public_status(data), ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
