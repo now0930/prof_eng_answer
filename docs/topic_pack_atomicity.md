@@ -42,10 +42,10 @@ python3 scripts/audit_topic_pack_atomicity.py \
   - 제어밸브 정비 Pack의 positioner·selection mirror
   - Nyquist Pack의 Routh mirror
   - 압전센서 Logic truth schema의 strain-gauge mirror
-- 남은 경고: 40
+- 남은 경고: 38
   - disconnected question families 24
   - large anchor inventory 10
-  - cross-topic alias collision 6
+  - cross-topic alias collision 4
 
 상세 기계 판정은
 [`reports/topic_pack_atomicity_audit_20260909.json`](../reports/topic_pack_atomicity_audit_20260909.json)에
@@ -64,6 +64,27 @@ python3 scripts/audit_topic_pack_atomicity.py \
 
 경고만 있고 3~5의 회귀 증거가 없으면 현재 owner를 유지한다. 기술적으로 관련된
 하위 질문이 서로 다른 anchor를 쓰는 것은 곧바로 다중 Topic이라는 뜻이 아니다.
+
+### P1 처리 기록
+
+#### Nyquist ↔ Routh (2026-09-09)
+
+- 원인: Nyquist alias에 `라우스 후르비츠`가 섞였고, 두 Topic이 방법을 특정하지 않는
+  `특성방정식 안정도`, `우반평면 극점`, `이득 안정 범위`, `제어기 이득 범위`를
+  동시에 routing alias로 소유했다.
+- 조치: 두 owner의 alias를 방법 고유 용어로 분리했다. 공통 공학 개념만 있는 질문은
+  단일 owner로 강제하지 않는다.
+- 판정 계약: Nyquist/Routh 명시 질문은 해당 owner, 양쪽 비교 문제는 `ambiguous`,
+  방법 미지정 공통 개념 질문은 `unmatched`다. 답안의 인접 Topic 용어는 질문 owner를
+  뒤집지 못한다.
+- 구조 보완: router가 legacy `question_examples`뿐 아니라 객체형
+  `expected_question_patterns[].pattern`도 동일한 질문 증거로 사용한다.
+- 회귀: `scripts/fixtures/nyquist_routh_routing_boundary_cases.json`의 정상·경계·오염
+  7건을 source와 generated bank 양쪽에 실행한다.
+- 전체 영향: 30건 deterministic replay `READY`, Topic routing recall 100%, false
+  positive 0, 2회 Stability Gate `STABLE`을 확인했다.
+- 결과: 해당 alias collision 경고 2건 제거, 전체 경고 `40 → 38`. Routh의 세 질문
+  family 경고는 독립 Topic 분리 증거가 아니므로 유지한다.
 
 ## 변경 전후 회귀 계약
 

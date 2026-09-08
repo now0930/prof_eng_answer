@@ -24,6 +24,46 @@ P0_TOPICS = {
     "nyquist_stability_criterion_gain_phase_margin",
     "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
 }
+ROUTING_BOUNDARY_ALIASES: dict[str, list[str]] = {
+    "nyquist_stability_criterion_gain_phase_margin": [
+        "Nyquist",
+        "Nyquist plot",
+        "Nyquist stability criterion",
+        "Nyquist 안정도 판별",
+        "Nyquist 궤적",
+        "순선회",
+        "critical point -1",
+        "argument principle",
+        "수정 Nyquist contour",
+        "contour indentation",
+        "이득·위상여유",
+    ],
+    "routh_hurwitz_stability_criterion_gain_range": [
+        "Routh-Hurwitz",
+        "Routh Hurwitz",
+        "Routh criterion",
+        "Routh stability criterion",
+        "Routh array",
+        "Routh table",
+        "라우스 후르비츠",
+        "루스 후르비츠",
+        "라우스 안정도 판별",
+        "루스 안정도 판별",
+        "라우스 배열",
+        "루스 배열",
+        "부호 변화",
+        "보조다항식",
+        "epsilon method",
+        "상대안정도",
+    ],
+}
+ROUTING_BOUNDARY_REMOVED_TERMS = {
+    "라우스 후르비츠",
+    "특성방정식 안정도",
+    "우반평면 극점",
+    "이득 안정 범위",
+    "제어기 이득 범위",
+}
 TOKEN_RE = re.compile(r"[0-9a-z가-힣]+")
 STOP = {
     "the", "and", "또는", "및", "의", "를", "을", "이", "가", "에서", "으로",
@@ -409,6 +449,33 @@ def _sync_legacy_model_mirrors(topic_id: str, model: dict[str, Any]) -> None:
         model["field_connection_points"] = model.get("routing_field_points", [])
 
 
+def _repair_routing_boundary(
+    topic_id: str,
+    model: dict[str, Any],
+    logic: dict[str, Any],
+) -> None:
+    aliases = ROUTING_BOUNDARY_ALIASES.get(topic_id)
+    if aliases is None:
+        return
+
+    model["routing_aliases"] = list(aliases)
+    if "topic_aliases" in model:
+        model["topic_aliases"] = list(aliases)
+
+    deterministic = logic.get("deterministic_checks")
+    if isinstance(deterministic, dict):
+        deterministic["topic_aliases"] = list(aliases)
+
+    profile = logic.get("llm_profile")
+    extraction = profile.get("candidate_extraction") if isinstance(profile, dict) else None
+    if isinstance(extraction, dict) and isinstance(extraction.get("key_terms"), list):
+        retained_terms = [
+            term for term in extraction["key_terms"]
+            if str(term).strip() not in ROUTING_BOUNDARY_REMOVED_TERMS
+        ]
+        extraction["key_terms"] = list(dict.fromkeys([*aliases, *retained_terms]))
+
+
 def migrate(*, write: bool) -> dict[str, Any]:
     assignments: list[dict[str, Any]] = []
     changed_files: list[str] = []
@@ -425,6 +492,8 @@ def migrate(*, write: bool) -> dict[str, Any]:
 
         if pack_dir.name in P0_TOPICS:
             _repair_p0(pack_dir.name, fact, model, logic)
+
+        _repair_routing_boundary(pack_dir.name, model, logic)
 
         anchors = [row for row in fact.get("anchors", []) if isinstance(row, dict)]
         patterns = model.get("expected_question_patterns")

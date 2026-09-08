@@ -4,7 +4,7 @@
     "topic_count": 78,
     "selected_topic_count": 78,
     "error_count": 0,
-    "warning_count": 40,
+    "warning_count": 38,
     "decision": "PASS"
   },
   "issues": [
@@ -142,12 +142,6 @@
     },
     {
       "severity": "WARN",
-      "code": "CROSS_TOPIC_ALIAS_COLLISION",
-      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
-      "message": "5 normalized aliases overlap with routh_hurwitz_stability_criterion_gain_range"
-    },
-    {
-      "severity": "WARN",
       "code": "DISCONNECTED_QUESTION_FAMILIES",
       "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
       "message": "9 anchor-disconnected question families: 1, 1, 1, 1, 1, 1, 1, 1, 2"
@@ -193,12 +187,6 @@
       "code": "CROSS_TOPIC_ALIAS_COLLISION",
       "topic_id": "root_locus_stability_gain_design",
       "message": "2 normalized aliases overlap with lead_lag_compensator_phase_margin_steady_state_error"
-    },
-    {
-      "severity": "WARN",
-      "code": "CROSS_TOPIC_ALIAS_COLLISION",
-      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
-      "message": "5 normalized aliases overlap with nyquist_stability_criterion_gain_phase_margin"
     },
     {
       "severity": "WARN",

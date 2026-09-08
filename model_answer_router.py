@@ -52,6 +52,24 @@ def _merge_unique_terms(*groups: Any) -> list[str]:
     return merged
 
 
+def _question_pattern_terms(value: Any) -> list[str]:
+    """Project modern scoped question contracts to routing-only text terms."""
+    if not isinstance(value, list):
+        return []
+
+    terms: list[str] = []
+    for item in value:
+        if isinstance(item, str):
+            term = item.strip()
+        elif isinstance(item, dict):
+            term = str(item.get("pattern") or "").strip()
+        else:
+            term = ""
+        if term:
+            terms.append(term)
+    return terms
+
+
 def _compact_reference(
     answer: Dict[str, Any] | None,
 ) -> Dict[str, Any] | None:
@@ -63,7 +81,10 @@ def _compact_reference(
         "topic_id": answer.get("topic_id"),
         "question_type": answer.get("question_type"),
         "title": answer.get("title"),
-        "question_examples": answer.get("question_examples", []),
+        "question_examples": _merge_unique_terms(
+            answer.get("question_examples"),
+            _question_pattern_terms(answer.get("expected_question_patterns")),
+        ),
         "topic_aliases": _merge_unique_terms(
             answer.get("topic_aliases"),
             answer.get("aliases"),
@@ -157,7 +178,10 @@ def find_model_answer_reference(
         # 질문과 답안을 절대 합치지 않는다.
         question_example_hits = text_hits(
             question,
-            item.get("question_examples", []),
+            _merge_unique_terms(
+                item.get("question_examples"),
+                _question_pattern_terms(item.get("expected_question_patterns")),
+            ),
         )
         question_alias_hits = text_hits(
             question,

@@ -1,0 +1,51 @@
+{
+  "version": "nyquist_routh_routing_boundary_v1",
+  "question_type": "CALC_DESIGN",
+  "cases": [
+    {
+      "id": "nyquist_exact_question",
+      "question": "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+      "expected_status": "matched",
+      "expected_topic_id": "nyquist_stability_criterion_gain_phase_margin"
+    },
+    {
+      "id": "nyquist_owner_terms",
+      "question": "개루프 전달함수의 Nyquist 궤적과 -1점 순선회로 폐루프 안정도를 판별하시오.",
+      "expected_status": "matched",
+      "expected_topic_id": "nyquist_stability_criterion_gain_phase_margin"
+    },
+    {
+      "id": "routh_exact_question",
+      "question": "Routh-Hurwitz 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+      "expected_status": "matched",
+      "expected_topic_id": "routh_hurwitz_stability_criterion_gain_range"
+    },
+    {
+      "id": "routh_korean_owner_terms",
+      "question": "라우스 후르비츠 배열의 첫 열 부호 변화로 우반평면 극점 수를 구하시오.",
+      "expected_status": "matched",
+      "expected_topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "forbidden_candidate_topic_id": "nyquist_stability_criterion_gain_phase_margin"
+    },
+    {
+      "id": "method_unspecified_shared_concepts",
+      "question": "폐루프 특성방정식에서 우반평면 극점과 제어기 이득 안정 범위를 설명하시오.",
+      "expected_status": "unmatched",
+      "expected_topic_id": null
+    },
+    {
+      "id": "explicit_comparison_is_ambiguous_for_single_owner_router",
+      "question": "Routh-Hurwitz 판별법과 Nyquist 판별법을 비교하고 적용 조건을 설명하시오.",
+      "expected_status": "ambiguous",
+      "expected_topic_id": null,
+      "expected_margin": 0.0
+    },
+    {
+      "id": "answer_terms_cannot_override_routh_question",
+      "question": "Routh-Hurwitz 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+      "answer": "Nyquist plot과 -1점 순선회를 잘못 중심으로 설명하였다.",
+      "expected_status": "matched",
+      "expected_topic_id": "routh_hurwitz_stability_criterion_gain_range"
+    }
+  ]
+}
