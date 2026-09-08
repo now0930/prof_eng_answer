@@ -1,11 +1,20 @@
 {
-  "version": "sha256-6858adbf069b1c4c073a3493478ef43c6509aebe599330d72948a91b33abddfe-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-c07c74a8723c9e11c1049c4ba2057e1df3f5ea93975f01a08479f74031fc9851-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs/*/logic_check.json:llm_profile",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "profiles": [
+    {
+      "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+      "enabled": false,
+      "focus": [
+        "current-loop principle and live-zero evidence",
+        "source/sink compatibility and compliance voltage",
+        "measurement, injection and end-to-end verification"
+      ]
+    },
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
       "display_name": "Balanced·unbalanced trim의 pressure boundary, effective area, residual force, balance seal과 service selection을 평가한다.",

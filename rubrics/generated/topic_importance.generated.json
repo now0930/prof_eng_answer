@@ -1,10 +1,28 @@
 {
-  "version": "sha256-6858adbf069b1c4c073a3493478ef43c6509aebe599330d72948a91b33abddfe-generated-topic-pack-importance",
+  "version": "sha256-c07c74a8723c9e11c1049c4ba2057e1df3f5ea93975f01a08479f74031fc9851-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "topics": [
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "DIAGNOSIS_ACTION",
+      "high_band_unlock_conditions": [
+        "전류루프 원리와 live zero를 load budget 조건과 함께 설명한다.",
+        "2선식·4선식과 source/sink의 전원 공급 주체를 구분한다.",
+        "송신부·수신 카드·외부 전원의 호환성을 확인한다.",
+        "측정과 전류 주입으로 transmitter, cable, input과 scaling 구간을 분리한다.",
+        "복구 후 low·mid·high 점과 alarm 방향을 end-to-end로 재검증한다."
+      ],
+      "note": "범용 계장 신호의 원리·결선·진단을 연결하는 핵심 현장 적용 Topic이다.",
+      "revision_notes": [
+        "Chapter 13 source and ownership audit completed."
+      ]
+    },
     {
       "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",

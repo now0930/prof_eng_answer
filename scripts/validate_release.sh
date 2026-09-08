@@ -497,6 +497,9 @@ python3 -B scripts/test_generate_expert_calibration_report.py
 echo "----- host regression: generic formula integrity -----"
 python3 -B scripts/test_generic_formula_integrity.py
 
+echo "----- host regression: analog current loop 4-20 mA two-wire active passive troubleshooting -----"
+python3 -B scripts/test_analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting.py
+
 echo "----- host regression: historian mes it ot cross lane ownership repair -----"
 python3 -B scripts/test_historian_mes_it_ot_cross_lane_ownership_repair.py
 

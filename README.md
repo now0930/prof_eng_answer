@@ -54,26 +54,22 @@
 | 총점 | 25점 |
 | 채점 Layer | 5개 |
 | Active Question Type | 4개 |
-| Topic Sheet | 77개 |
-| Topic Pack source | 77개 topic |
+| Topic Sheet | 78개 |
+| Topic Pack source | 78개 topic |
 | Generated Rubric Bank | 6개 |
 | 기본 Rubric Bank mode | `generated` |
 | Generic grading contract | `stage23.generic_grading_contract.v1` |
 | Generic scoring policy | `stage23.generic_scoring_policy.v1` |
 | Runtime provenance | `runtime_grading_provenance_v1` |
 | Runtime provenance scoring policy | `stage23_generic_grading_contract_v1` |
-| 전문가 정확도 Gate | `HOLD` (30 reviewed cases / 25 topics) |
-| 요구 추출 F1 / 상태 정확도 | 1.0000 / 80.18% (`ac79b20`, 최신 완료 실행) |
-| Major·Fatal 정밀도 / 재현율 | 100% / 100% |
-| 평균 허용구간 외 거리 | 0.4857 |
+| 결정론적 Authority Gate | `READY` (Gemini-off 30건) |
+| Topic routing recall / score coverage | 100% / 100% |
+| Known Fatal 재현율 / false positive | 100% (9/9) / 0건 |
+| 점수 허용구간 적중률 / 평균 이탈 | 86.67% / 0.045점 |
 
-`runtime_grading_provenance_v1`은 실행 process 수준의 commit, 시작 시각, router/evaluator/verifier SHA와 scoring policy를 기록합니다. Docker image digest, container ID·시작 시각, PID 교체와 host/container module parity는 별도의 deployment proof이며 [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)의 P0 항목으로 관리합니다.
+`runtime_grading_provenance_v1`은 실행 process 수준의 commit, 시작 시각, router/evaluator/verifier SHA와 scoring policy를 기록합니다. Stage39~41에서 Docker image·container parity, provider-zero production replay와 Telegram endpoint의 persisted raw/final exact match까지 검증했습니다. 운영 채점의 requirement·fatal·score·verdict authority는 deterministic primary가 소유하며 외부 LLM 호출은 필수가 아닙니다.
 
-운영 후보는 `python3 scripts/release_candidate.py qualify --workers 2`로 생성합니다.
-이 명령은 Topic Pack·코드 검증 후 현재 provider로 30건 이상을 재채점합니다. Accuracy
-Gate가 통과하면 동일 후보를 한 번 더 uncached 채점하여 Stability Gate까지 검사하며,
-둘 중 하나라도 `HOLD`이면 배포를 중단합니다. `READY` manifest의 Docker 검증 절차는
-[`docs/operation_runbook.md`](docs/operation_runbook.md#19-통합-release-candidate-실행)를 따릅니다.
+결정론적 운영 후보는 Authority Gate와 동일 입력 2회 Stability Gate를 먼저 통과해야 합니다. 이후 같은 commit을 rebuild/recreate하고 container fingerprint·parity·production replay·endpoint smoke 증거를 저장합니다. 어느 Gate든 `HOLD` 또는 `FAIL`이면 배포를 중단합니다. 상세 절차는 [`docs/operation_runbook.md`](docs/operation_runbook.md)와 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md)를 따릅니다. `scripts/release_candidate.py` 기반 provider qualification은 legacy 비교 또는 optional semantic resolver 검증에만 사용하며 최종 판정권을 갖지 않습니다.
 
 Topic Pack 개수는 `rubrics/generated/topic_pack_manifest.generated.json`을 기준으로 확인합니다. Legacy 통합 bank는 호환 목적으로 유지되며, legacy 파일의 Model Answer·Fact Topic 개수를 현재 Topic Pack coverage 개수로 사용하지 않습니다. Runtime bank 선택의 기준은 `rubric_bank_paths.py`와 `RUBRIC_BANK_MODE`입니다.
 
@@ -601,7 +597,7 @@ rubrics/topic_packs/<topic_id>/
 └── topic_importance.json
 ```
 
-현재 저장소에는 **Topic Sheet 77개와 Topic Pack 77개가 있으며, 동일한 `<topic_id>`로 77개 모두 1:1 대응**합니다. Topic Sheet만 있고 Topic Pack이 없는 항목도 없고, Topic Pack만 있고 Topic Sheet가 없는 항목도 없습니다.
+현재 저장소에는 **Topic Sheet 78개와 Topic Pack 78개가 있으며, 동일한 `<topic_id>`로 모두 1:1 대응**합니다. Topic Sheet만 있고 Topic Pack이 없는 항목도 없고, Topic Pack만 있고 Topic Sheet가 없는 항목도 없습니다.
 
 이 관계를 기준으로 신규 Topic은 다음 원칙을 따릅니다.
 
@@ -619,7 +615,7 @@ Topic Pack  = Topic Sheet를 구조화한 채점 source
 Generated Rubric Bank = 검증된 Topic Pack을 runtime용으로 합친 build output
 ```
 
-Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **전체 Topic inventory를 기준으로 관리**합니다. 현재 authoritative Topic inventory는 77개입니다.
+Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **전체 Topic inventory를 기준으로 관리**합니다. 현재 authoritative Topic inventory는 generated manifest 기준 78개입니다.
 
 ### 9.2 저장 위치와 역할
 
@@ -632,7 +628,7 @@ Topic Sheet와 Topic Pack의 개수는 특정 분야별 별도 집계보다 **�
 | Classification / Coverage / Roadmap | `docs/topic_pack_classification.md`, `docs/exam_scope/` | 공식 criterion ownership, coverage와 추가 우선순위 관리 |
 | Legacy Rubric Bank | `rubrics/*/industrial_instrumentation_control.json` | 기존 통합 bank와 호환·비교 경로 |
 
-현재 저장소에는 **77개 Topic Pack**이 있으며 generated runtime bank는 다음 **6개**입니다.
+현재 저장소에는 **78개 Topic Pack**이 있으며 generated runtime bank는 다음 **6개**입니다.
 
 ```text
 fact_anchors.generated.json
@@ -713,7 +709,7 @@ Markdown 절차를 runtime이 파싱하지 않습니다. `add-topic`과 `approve
 
 #### 기존 Topic Pack 유지보수 원칙
 
-결정론적 채점 전환이 완료됐다고 Topic Pack을 동결하지 않으며, 77개 전체를 일괄 재작성하지도 않습니다. 실제 채점 회귀가 확인된 Topic만 다음 순서로 선택 보강합니다.
+결정론적 채점 전환이 완료됐다고 Topic Pack을 동결하지 않으며, 전체 inventory를 일괄 재작성하지도 않습니다. 실제 채점 회귀가 확인된 Topic만 다음 순서로 선택 보강합니다.
 
 1. 실제 session을 개인정보와 session ID에 의존하지 않는 재현 fixture로 축약합니다.
 2. 오류 owner를 전역 ontology, question routing/scope, Topic Pack Fact·Logic contract, score policy 또는 formatter 중 하나로 분류합니다.

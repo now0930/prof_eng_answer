@@ -26,3 +26,9 @@ Bare `PID`를 routing alias로 사용하지 않는다. PID controller의 P/I/D �
 ## 검증 원칙
 
 Project-specific symbol과 numbering convention은 project legend를 직접 기준으로 한다. Generated bank와 release registration은 source/focused validation 이후 별도 단계에서 처리한다.
+
+## 추가 학습 근거
+
+- [Lessons In Industrial Instrumentation, Chapter 7](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-7/)
+- PFD→P&ID→Loop Diagram은 범위가 좁아지고 연결 상세도가 높아지는 축으로, Functional Diagram은 제어전략을 보는 별도 축으로 해석한다.
+- 트러블슈팅은 고정된 도면 순서보다 증상 owner에 따라 PFD·P&ID·Loop·Functional Diagram을 선택한다.

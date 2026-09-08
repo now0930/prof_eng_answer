@@ -196,7 +196,7 @@ class TestPidPipingInstrumentationDiagramTopic(unittest.TestCase):
         anchor_ids = set(self.anchor_by_id)
         patterns = self.model["expected_question_patterns"]
         outline = self.model["recommended_outline"]
-        self.assertEqual(len(patterns), 10)
+        self.assertEqual(len(patterns), 11)
         self.assertEqual(len(outline), 8)
         for row in patterns:
             self.assertTrue(set(row["required_anchor_ids"]) <= anchor_ids)

@@ -1,0 +1,34 @@
+{
+  "schema_version": "topic_pack.logic_check.v1",
+  "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+  "title": "4–20 mA 아날로그 전류루프·2선식·4선식·Source/Sink·진단",
+  "deterministic_checks": {
+    "enabled": false,
+    "difficulty_profile": "FIELD_APPLICATION",
+    "topic_name": "4–20 mA 아날로그 전류루프·2선식·4선식·Source/Sink·진단",
+    "topic_aliases": ["4-20 mA current loop", "2-wire transmitter", "source sink analog input", "loop calibrator"],
+    "question_type": "DIAGNOSIS_ACTION",
+    "fatal_checks": [],
+    "major_checks": [],
+    "question_type_checks": [],
+    "next_practice_points": [
+      "live zero와 loop voltage/load budget을 함께 설명한다.",
+      "2선식·4선식과 source/sink 호환성을 구분한다.",
+      "calibrator 모드와 회로 전원을 확인하여 구간을 분리한다."
+    ],
+    "de_claim_trust": {}
+  },
+  "llm_profile": {"enabled": false, "focus": ["current-loop principle and live-zero evidence", "source/sink compatibility and compliance voltage", "measurement, injection and end-to-end verification"]},
+  "misconception_contract": [
+    {"id": "acl_wire_resistance_irrelevant", "wrong_claim": "선로저항과 부하에 관계없이 4–20 mA가 항상 정확하다.", "correct_rule": "루프는 공급전압이 기기와 모든 부하의 전압강하를 감당하는 compliance budget을 만족해야 한다.", "severity": "major"},
+    {"id": "acl_zero_ma_normal_only", "wrong_claim": "0 mA는 항상 정상인 0% 공정값이다.", "correct_rule": "4 mA live zero 루프에서 0 mA 근방은 단선·전원상실 등 고장을 우선 확인한다.", "severity": "major"},
+    {"id": "acl_all_four_wire_source", "wrong_claim": "모든 4선식 transmitter는 신호 루프 전원을 자체 공급한다.", "correct_rule": "4선식도 active/source와 passive/sink 출력이 있으므로 매뉴얼과 결선도를 확인한다.", "severity": "major"},
+    {"id": "acl_powered_sources_direct", "wrong_claim": "source 출력과 powered input은 전원 조건 확인 없이 직결해도 된다.", "correct_rule": "양쪽이 루프 전원을 공급하는지 확인하고 source/sink·극성·정격을 맞춘다.", "severity": "major"}
+  ],
+  "false_positive_cautions": [
+    "4–20 mA의 원거리 장점을 설명해도 compliance 조건을 부정하지 않으면 오답으로 판정하지 않는다.",
+    "250 ohm을 대표 수신저항 예로 제시하는 것은 허용하되 모든 루프의 의무값으로 단정할 때만 문제로 본다.",
+    "NAMUR NE 43 경계는 적용 표준·제품·프로젝트 조건을 함께 제시하면 표현 차이를 허용한다."
+  ],
+  "revision_notes": ["Misconceptions are recorded for future generalized deterministic rules; direct checks remain disabled."]
+}

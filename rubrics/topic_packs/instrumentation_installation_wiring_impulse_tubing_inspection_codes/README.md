@@ -92,5 +92,6 @@ Historical frequency는 근거가 없으므로 사용하지 않는다.
 - `docs/topic_sheets/instrumentation_installation_wiring_impulse_tubing_inspection_codes.md`
 - Repository exam-scope criterion `IC-2027-W-4-9`
 - Instrumentation field installation, wiring, impulse tubing, inspection and technical-code compliance fundamentals
+- [Lessons In Industrial Instrumentation, Chapter 8](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-8/): Cable·Conduit·Tray·Wire Duct·Wire Loom의 보호·정리 소유범위 참조
 
 Source JSON authored by ChatGPT. Generated rebuild, classification/release registration, focused regression and commit are later steps.

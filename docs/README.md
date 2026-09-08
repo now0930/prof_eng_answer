@@ -4,7 +4,7 @@
 
 프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
 
-> 최신 상태(2026-09-07): Stage36에서 Gemini-off known-fatal recall 100%(9/9), false positive 0과 2회 exact replay `STABLE`을 달성했습니다. 결정론 점수 coverage는 6.67%(2/30)이므로 authority Gate는 `HOLD`이며 운영은 legacy primary + score-neutral deterministic shadow입니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
+> 최신 상태(2026-09-08): Gemini-off 30건에서 topic routing recall 100%, known-fatal recall 100%(9/9), score coverage 100%, 점수 허용구간 적중률 86.67%로 Authority Gate `READY`를 달성했습니다. 2회 exact replay는 `STABLE`이며 Stage39~41의 container parity·provider-zero production replay·Telegram endpoint exact-match까지 완료되어 운영은 deterministic primary입니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
 ---
 
@@ -78,7 +78,7 @@
 
 | 문서 | 책임 |
 |---|---|
-| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, manifest 기준 77개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
+| [`topic_pack_architecture.md`](topic_pack_architecture.md) | Topic Pack source/generated 구조, manifest 기준 78개 inventory, Software SW-01~SW-13 범위와 runtime bank 경계 |
 | [`rubric_authoring_guide.md`](rubric_authoring_guide.md) | Fact Anchor, Model Answer, Topic Importance와 Logic Check source 작성 기준 |
 | [`topic_pack_workflow.md`](topic_pack_workflow.md) | Topic Sheet → 직접/보조 source authoring → 대상 검증 → integration rebuild → release/CI 검증 |
 
@@ -102,7 +102,7 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 |---|---|---|
 | 배점 | A/B/C/D/E = 3/6/8/6/2 | `rubrics/scoring_model/default.json` |
 | Active Question Type | 4종 | `rubrics/question_types/default.json`, Question Type modules |
-| Topic Pack | 77개 | `rubrics/generated/topic_pack_manifest.generated.json` |
+| Topic Pack | 78개 | `rubrics/generated/topic_pack_manifest.generated.json` |
 | Generated bank | 6개 | `rubrics/generated/*.generated.json` |
 | Software Topic | SW-01~SW-13, 13개 | `docs/topic_pack_architecture.md`, generated manifest |
 | 기본 Rubric Bank | `generated` | `rubric_bank_paths.py` |
@@ -117,8 +117,8 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 | Correctness owner | verified Fact 오류는 기본 C owner | `verified_defect_reconciliation.py`, `layer_evidence_guard.py` |
 | 최종 저장 | score reconciliation 후 coverage finalizer를 적용한 객체 저장 | `grading_agents.py`, `bot.py` |
 | Session | 완료 세션 격리, 동일 초 ID 충돌 방지 | `bot.py` |
-| 전문가 정확도 Gate | `HOLD`: 요구 상태 정확도 80.18% (`ac79b20`) | release candidate artifact, [`accuracy_release_gate.md`](accuracy_release_gate.md) |
-| 반복 안정성 Gate | 2회 이상 uncached 실행의 상태 일치율·중대 전이율·점수 편차 | `demand_state_stability.py`, `calibration/demand_state_stability_policy.json` |
+| 결정론적 Authority Gate | `READY`: Gemini-off 30건, score coverage 100%, known-fatal recall 100% | authority artifact, [`grading_quality_roadmap.md`](grading_quality_roadmap.md) |
+| 반복 안정성 Gate | 동일 입력 2회 exact replay `STABLE`, provider call 0 | deterministic stability artifact, [`grading_quality_roadmap.md`](grading_quality_roadmap.md) |
 | Runtime provenance | process-stable 6개 필드; image/container deployment proof는 별도 | `runtime_grading_provenance.py`, [Issue #1](https://github.com/now0930/prof_eng_answer/issues/1) |
 
 ### Runtime provenance와 deployment proof 경계

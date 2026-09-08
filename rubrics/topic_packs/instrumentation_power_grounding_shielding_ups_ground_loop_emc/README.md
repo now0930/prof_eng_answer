@@ -78,6 +78,8 @@ Historical frequency는 근거가 없으므로 사용하지 않는다.
 
 ## Source
 
+- [Lessons In Industrial Instrumentation, Chapter 8](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-8/): capacitive/inductive coupling, shield·twisted pair와 조건부 termination 참조
+
 - `docs/topic_sheets/instrumentation_power_grounding_shielding_ups_ground_loop_emc.md`
 - Repository exam-scope criterion `IC-2027-W-2-6`
 - Instrumentation power, grounding, bonding, shielding, ground-loop, UPS and EMC engineering fundamentals

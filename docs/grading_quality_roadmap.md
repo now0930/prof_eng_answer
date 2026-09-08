@@ -63,7 +63,7 @@
 - 생성 또는 release 실패 시 canonical source와 generated bank를 작업 전 상태로 복구한다.
 - 승인 이후 source가 바뀐 관리 대상 Topic은 promote와 전체 integration을 차단한다.
 - generated bank는 직접 수정하지 않는다.
-- 77개 Topic을 일괄 migration하거나 동일한 machine contract를 복제하지 않는다.
+- 전체 Topic inventory를 일괄 migration하거나 동일한 machine contract를 복제하지 않는다.
 - 실제 오판정이 재현되거나 명시 Question Demand scope가 필요한 Topic만 선택 수정한다.
 - 관련 없는 anchor가 평가되는 경우 신규 Topic보다 기존 Topic의 `required_anchor_ids`와 routing boundary를 먼저 보강한다.
 - 공통 단위·차원·quantity type·관계 불변조건은 Topic Pack에 반복하지 않고 `grading_ontology/`가 소유한다.
@@ -138,7 +138,7 @@ Issue 본문은 현재 상태만 유지한다. 긴 실행 로그는 comment 또�
 - `SATISFIED`는 핵심 개념과 관계 evidence, `PARTIAL`은 식별 가능한 개념 언급, `MISSING`은 근거 없음으로 분리한다.
 - 최소 `SATISFIED` 합격 증거와 fatal ceiling은 유지하며 threshold 완화로 Golden Gate를 맞추지 않는다.
 
-### P1 — 77 Topic 위험 기반 Golden 확대
+### P1 — 전체 Topic 위험 기반 Golden 확대
 
 - 모든 Topic에 동일 개수의 사례를 강제하지 않는다.
 - 안전·계산·법규·빈출 Topic부터 정답, 부분답, 핵심오답, 부정·인용·정정 문맥 mutation을 추가한다.

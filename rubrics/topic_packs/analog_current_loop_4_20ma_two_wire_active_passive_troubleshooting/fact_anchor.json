@@ -1,0 +1,94 @@
+{
+  "schema_version": "fact_anchor.v1",
+  "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+  "title": "4–20 mA 아날로그 전류루프·2선식·4선식·Source/Sink·진단",
+  "anchors": [
+    {
+      "anchor_id": "acl_current_loop_principle",
+      "statement": "4–20 mA 루프는 직렬 경로의 동일 전류를 측정변수에 대응시켜 원거리로 전송하는 아날로그 신호 방식이다.",
+      "expected": "전류루프의 직렬 전류와 측정변수 대응 원리를 설명한다.",
+      "keywords": ["4-20 mA", "current loop", "전류 루프", "직렬 전류"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "acl_live_zero_fault_discrimination",
+      "statement": "4 mA live zero는 정상 0% 공정값과 0 mA 근방의 단선·전원 상실을 구분하고 2선식 기기의 동작 전력을 제공한다.",
+      "expected": "live zero의 고장 식별과 loop-powered 기능을 연결한다.",
+      "keywords": ["live zero", "4 mA", "0 mA", "단선", "loop powered"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "acl_two_wire_loop_powered",
+      "statement": "2선식 transmitter는 전원과 신호가 한 쌍을 공유하며 외부 loop supply에서 공급된 전류로 기기를 구동하고 측정값을 전송한다.",
+      "expected": "2선식의 전원·신호 공유와 외부 루프 전원 필요성을 설명한다.",
+      "keywords": ["2-wire", "2선식", "loop powered", "loop supply"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "acl_active_source_output",
+      "statement": "Active 또는 sourcing 출력은 transmitter가 신호 루프에 전원과 전류를 공급하는 형식으로, passive input 또는 적합한 부하와 결선한다.",
+      "expected": "active/source의 전원 공급 주체와 적합한 수신부를 설명한다.",
+      "keywords": ["active output", "sourcing", "source", "전원 공급"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "acl_passive_sink_output",
+      "statement": "Passive 또는 sinking 출력은 신호 루프의 외부 전원을 받아 전류를 조절하는 형식으로, powered input 또는 별도 loop supply와 결선한다.",
+      "expected": "passive/sink의 외부 전원 필요성과 수신부 호환성을 설명한다.",
+      "keywords": ["passive output", "sinking", "sink", "powered input"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "acl_source_sink_compatibility",
+      "statement": "송신부와 수신 카드의 source/sink 형식과 극성을 확인하지 않고 powered source를 직결하면 전원 충돌·오동작·손상이 발생할 수 있다.",
+      "expected": "source-source 충돌을 피하기 위해 카드 매뉴얼과 loop diagram을 확인한다.",
+      "keywords": ["source sink compatibility", "power conflict", "전원 충돌", "극성"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "acl_compliance_voltage_load_budget",
+      "statement": "루프는 공급전압이 transmitter의 최소 동작전압과 cable·barrier·indicator·input resistance의 최대 전압강하를 감당하는 compliance/load budget을 만족해야 한다.",
+      "expected": "선로저항이 전류루프에 무관하다고 절대화하지 않고 전압 여유를 계산한다.",
+      "keywords": ["compliance voltage", "load budget", "loop resistance", "전압 강하"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "acl_resistor_voltage_measurement",
+      "statement": "수신저항 양단 전압을 안전하게 측정하면 I=V/R로 루프 전류를 확인할 수 있지만 저항값과 카드 구조를 먼저 확인해야 한다.",
+      "expected": "알려진 저항값에서 전압 측정으로 전류를 역산하며 250 ohm을 절대화하지 않는다.",
+      "keywords": ["I=V/R", "250 ohm", "수신 저항", "전압 측정"],
+      "required": false,
+      "weight": 0.8
+    },
+    {
+      "anchor_id": "acl_calibrator_isolation_workflow",
+      "statement": "Loop calibrator로 measure·source·2-wire simulate mode와 회로 전원 상태를 맞춰 사용하고, 수신부에 4·12·20 mA를 주입해 cable/input/scaling과 transmitter 구간을 분리한다.",
+      "expected": "캘리브레이터 모드와 전원 중복을 확인하고 지시값을 단계별로 비교한다.",
+      "keywords": ["loop calibrator", "source", "simulate", "4 12 20 mA", "구간 분리"],
+      "required": true,
+      "weight": 1.0
+    },
+    {
+      "anchor_id": "acl_closed_loop_verification",
+      "statement": "복구 후에는 4·12·20 mA 주입값과 0·50·100% 표시, engineering-unit scaling, alarm·trip 방향을 끝단까지 재검증하고 복구 상태를 기록한다.",
+      "expected": "단일 전류값이 아닌 low·mid·high 점과 신호 방향을 end-to-end로 확인한다.",
+      "keywords": ["4 12 20 mA", "0 50 100%", "scaling", "end to end", "재검증"],
+      "required": false,
+      "weight": 0.8
+    }
+  ],
+  "source_basis": [
+    "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-13/",
+    "IEC 60381-1 process control analogue dc current signals",
+    "NAMUR NE 43 failure information conventions when adopted",
+    "project loop drawings, I/O card and transmitter manuals"
+  ],
+  "revision_notes": ["Initial source authored from Chapter 13 with compliance-voltage and calibrator-mode safety boundaries."]
+}

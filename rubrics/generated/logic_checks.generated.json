@@ -1,11 +1,33 @@
 {
-  "version": "sha256-6858adbf069b1c4c073a3493478ef43c6509aebe599330d72948a91b33abddfe-generated-topic-pack-logic-checks",
+  "version": "sha256-c07c74a8723c9e11c1049c4ba2057e1df3f5ea93975f01a08479f74031fc9851-generated-topic-pack-logic-checks",
   "description": "Generated deterministic logic check bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_checks.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs/*/logic_check.json:deterministic_checks",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
   "topic_logic_checks": [
+    {
+      "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+      "enabled": false,
+      "difficulty_profile": "FIELD_APPLICATION",
+      "topic_name": "4–20 mA 아날로그 전류루프·2선식·4선식·Source/Sink·진단",
+      "topic_aliases": [
+        "4-20 mA current loop",
+        "2-wire transmitter",
+        "source sink analog input",
+        "loop calibrator"
+      ],
+      "question_type": "DIAGNOSIS_ACTION",
+      "fatal_checks": [],
+      "major_checks": [],
+      "question_type_checks": [],
+      "next_practice_points": [
+        "live zero와 loop voltage/load budget을 함께 설명한다.",
+        "2선식·4선식과 source/sink 호환성을 구분한다.",
+        "calibrator 모드와 회로 전원을 확인하여 구간을 분리한다."
+      ],
+      "de_claim_trust": {}
+    },
     {
       "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
       "enabled": false,

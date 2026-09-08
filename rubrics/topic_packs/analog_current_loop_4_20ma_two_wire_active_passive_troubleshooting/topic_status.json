@@ -1,0 +1,27 @@
+{
+  "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:66815789659d5ec279fee707fc8eaa19f4e58a36255a23fa915d9a33accf6ae2",
+  "last_validated_at": "2026-09-07T14:00:49",
+  "last_reviewed_at": "2026-09-07T14:00:49",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-09-07T14:00:49",
+  "frozen_at": "",
+  "notes": [
+    "2026-09-07T13:49:13: managed Topic Pack workflow started",
+    "2026-09-07T14:00:49: human approval by now0930"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "now0930",
+  "review_method": "human",
+  "source_sheet": "docs/topic_sheets/analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting.md",
+  "source_sheet_hash": "sha256:75a195083aaf8fd581d893f95ca4d69e002f82c237e8497ffcc17f98b91a57f3",
+  "approved_source_hash": "sha256:66815789659d5ec279fee707fc8eaa19f4e58a36255a23fa915d9a33accf6ae2",
+  "created_at": "2026-09-07T13:49:13",
+  "generated_from_sheet": false,
+  "next_action": "Run integration validation before merge.",
+  "reviewed_sheet_hash": "sha256:75a195083aaf8fd581d893f95ca4d69e002f82c237e8497ffcc17f98b91a57f3"
+}

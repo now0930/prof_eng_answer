@@ -385,3 +385,8 @@ Compound alias에서 protocol, fieldbus, interoperability, device profile, gatew
 - Certification과 실제 multi-vendor interoperability를 구분한다.
 - 표준 protocol 사용과 vendor tool·profile·license 의존성을 동시에 평가한다.
 - 외부 LLM 검증은 실행 스크립트에서 수행하지 않는다.
+
+## 추가 학습 근거
+
+- [Lessons In Industrial Instrumentation, Chapter 8](https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-8/)
+- 빠른 edge와 긴 선로는 전파지연·특성 임피던스·종단으로 반사를 관리하고, 광섬유는 EMI·전기적 절연 장점과 connector·굴곡·손실·시험 제약을 함께 평가한다.

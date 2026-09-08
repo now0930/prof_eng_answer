@@ -5,6 +5,17 @@
   "question_type": "IMPLEMENTATION_EVALUATION",
   "expected_question_patterns": [
     {
+      "pattern": "PFD, P&ID, Loop Diagram과 Functional Diagram의 역할을 비교하고 계측 문제 진단에 적용하시오.",
+      "intent": "문서별 소유 범위를 구분하고 공정·기능·신호경로·제어논리 증상에 맞는 문서를 선택한다.",
+      "required_anchor_ids": [
+        "pfd_pid_difference",
+        "pid_definition_scope",
+        "pid_loop_diagram_relation",
+        "pid_logic_diagram_relation",
+        "pid_control_narrative_relation"
+      ]
+    },
+    {
       "pattern": "P&ID의 목적, 구성요소와 PFD와의 차이를 설명하시오.",
       "intent": "P&ID의 역할과 문서계층을 설명한다.",
       "required_anchor_ids": [

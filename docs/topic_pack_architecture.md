@@ -10,7 +10,7 @@
 
 | 항목 | 현재 상태 |
 |---|---:|
-| Topic Pack | 52 |
+| Topic Pack | 78 |
 | Generated bank | 6 |
 | Software Topic | 13 |
 | 기본 Rubric Bank mode | `generated` |
@@ -94,15 +94,7 @@ Legacy bank는 비교·호환 목적으로 남아 있지만, 현재 Topic covera
 
 ## 5. 문서 탐색용 영역 분류
 
-아래 분류는 문서 탐색용이다. Runtime difficulty 또는 Question Type 분류가 아니다.
-
-| 영역 | Topic 수 |
-|---|---:|
-| Software / OT / Industrial AI | 13 |
-| Control Valve / Final Control Element | 16 |
-| Control Theory | 12 |
-| Instrumentation / Sensor | 11 |
-| 합계 | 52 |
+Topic은 Software/OT/Industrial AI, Control Valve/Final Control Element, Control Theory, Instrumentation/Sensor 등 여러 영역에 걸칠 수 있다. 이 분류는 문서 탐색용이며 Runtime difficulty 또는 Question Type ownership이 아니다. 영역별 고정 합계는 Topic 추가 시 쉽게 낡고 중복 Topic을 만들 수 있으므로 관리하지 않는다. 전체 개수는 generated manifest의 `topic_count`, 개별 분류와 난이도는 각 Topic Pack source를 정본으로 사용한다.
 
 ## 6. Software Topic Pack: SW-01~SW-13
 

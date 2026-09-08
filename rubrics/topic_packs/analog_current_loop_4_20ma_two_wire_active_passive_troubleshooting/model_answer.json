@@ -1,0 +1,54 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+  "title_ko": "4–20 mA 아날로그 전류루프·2선식·4선식·Source/Sink·진단",
+  "question_type": "DIAGNOSIS_ACTION",
+  "expected_question_patterns": [
+    {
+      "pattern": "4–20 mA 전류루프의 원리와 live zero를 설명하시오.",
+      "intent": "전류 전송과 4 mA live zero의 의미를 설명한다.",
+      "required_anchor_ids": ["acl_current_loop_principle", "acl_live_zero_fault_discrimination", "acl_compliance_voltage_load_budget"]
+    },
+    {
+      "pattern": "2선식과 4선식 active/passive transmitter의 결선과 차이를 설명하시오.",
+      "intent": "전원 공급 주체와 source/sink 호환성을 비교한다.",
+      "required_anchor_ids": ["acl_two_wire_loop_powered", "acl_active_source_output", "acl_passive_sink_output", "acl_source_sink_compatibility"]
+    },
+    {
+      "pattern": "4–20 mA 계장 루프의 이상 증상을 진단하고 검증하는 절차를 설명하시오.",
+      "intent": "전원·부하 확인과 측정·주입으로 고장 구간을 분리한다.",
+      "required_anchor_ids": ["acl_source_sink_compatibility", "acl_compliance_voltage_load_budget", "acl_resistor_voltage_measurement", "acl_calibrator_isolation_workflow", "acl_closed_loop_verification"]
+    }
+  ],
+  "recommended_outline": [
+    {"section": "1. 전류루프와 live zero", "intent": "원거리 전류 전송과 고장 식별 원리를 정의한다.", "anchor_refs": ["acl_current_loop_principle", "acl_live_zero_fault_discrimination"]},
+    {"section": "2. 2선식·4선식·source/sink", "intent": "내부와 루프 전원 공급 주체를 비교한다.", "anchor_refs": ["acl_two_wire_loop_powered", "acl_active_source_output", "acl_passive_sink_output", "acl_source_sink_compatibility"]},
+    {"section": "3. Loop voltage/load budget", "intent": "공급전압과 각 부하의 전압강하를 검토한다.", "anchor_refs": ["acl_compliance_voltage_load_budget"]},
+    {"section": "4. 진단과 구간 분리", "intent": "수신저항 측정과 calibrator 주입으로 원인을 분리한다.", "anchor_refs": ["acl_resistor_voltage_measurement", "acl_calibrator_isolation_workflow"]},
+    {"section": "5. End-to-end 재검증", "intent": "low/mid/high 점과 alarm 방향을 확인한다.", "anchor_refs": ["acl_closed_loop_verification"]}
+  ],
+  "high_score_points": [
+    "전류루프의 장점을 compliance voltage/load budget 조건과 함께 설명한다.",
+    "4 mA live zero의 고장 식별과 2선식 전원 기능을 연결한다.",
+    "2선식·4선식과 active/source·passive/sink의 전원 공급 주체를 정확히 구분한다.",
+    "calibrator 모드와 루프 전원 중복을 확인하여 안전하게 구간을 분리한다.",
+    "4·12·20 mA와 engineering-unit·alarm을 end-to-end로 재검증한다."
+  ],
+  "common_missing_points": [
+    "선로저항에 무관하다고 절대화하고 loop voltage/load budget을 누락한다.",
+    "2선식과 4선식, source와 sink를 혼용한다.",
+    "0 mA를 정상 0% 공정값으로만 해석한다.",
+    "하나의 점만 주입하고 scaling·방향·alarm 검증을 누락한다."
+  ],
+  "routing_aliases": [
+    "4-20 mA current loop", "4–20 mA 전류루프", "2-wire transmitter loop powered",
+    "2선식 4선식 transmitter", "active passive current output", "source sink analog input",
+    "4-20 mA loop troubleshooting", "loop calibrator 4 12 20 mA"
+  ],
+  "routing_field_points": [
+    "live zero와 0 mA 고장 식별", "2선식 loop-powered transmitter",
+    "4선식 active/source·passive/sink", "loop compliance voltage와 load resistance",
+    "loop calibrator 주입 구간 분리"
+  ],
+  "revision_notes": ["Chapter 13 기반 신규 Topic으로 source/sink, compliance와 진단 경계를 구체화했다."]
+}
