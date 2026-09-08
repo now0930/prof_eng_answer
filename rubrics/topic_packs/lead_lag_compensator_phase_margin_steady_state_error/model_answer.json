@@ -4,11 +4,48 @@
   "title_ko": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
   "question_type": "CALC_DESIGN",
   "expected_question_patterns": [
-    "진상보상기와 지상보상기의 전달함수와 주파수응답 특성을 비교하여 설명하시오.",
-    "목표 위상여유를 만족하는 진상보상기의 α, T와 이득을 설계하시오.",
-    "정상상태 오차상수를 만족하는 지상보상기를 설계하시오.",
-    "진상·지상 결합보상기의 설계 절차와 성능 상충관계를 설명하시오.",
-    "보상 전후 Bode 선도와 시간응답을 비교하고 현장 적용 시 고려사항을 논하시오."
+    {
+      "pattern": "진상보상기와 지상보상기의 전달함수와 주파수응답 특성을 비교하여 설명하시오.",
+      "required_anchor_ids": [
+        "lead_lag_lead_pole_zero_geometry",
+        "lead_lag_lag_pole_zero_geometry",
+        "lead_lag_lead_maximum_phase_relation",
+        "lead_lag_lag_steady_state_error_improvement"
+      ]
+    },
+    {
+      "pattern": "목표 위상여유를 만족하는 진상보상기의 α, T와 이득을 설계하시오.",
+      "required_anchor_ids": [
+        "lead_lag_lead_maximum_phase_relation",
+        "lead_lag_lead_center_frequency_magnitude",
+        "lead_lag_lead_phase_margin_design_sequence"
+      ]
+    },
+    {
+      "pattern": "정상상태 오차상수를 만족하는 지상보상기를 설계하시오.",
+      "required_anchor_ids": [
+        "lead_lag_lag_pole_zero_geometry",
+        "lead_lag_lag_steady_state_error_improvement",
+        "lead_lag_lag_gain_ratio_error_constant"
+      ]
+    },
+    {
+      "pattern": "진상·지상 결합보상기의 설계 절차와 성능 상충관계를 설명하시오.",
+      "required_anchor_ids": [
+        "lead_lag_combined_design",
+        "lead_lag_design_objective",
+        "lead_lag_lead_bandwidth_noise_effort_tradeoff",
+        "lead_lag_lag_crossover_phase_loss"
+      ]
+    },
+    {
+      "pattern": "보상 전후 Bode 선도와 시간응답을 비교하고 현장 적용 시 고려사항을 논하시오.",
+      "required_anchor_ids": [
+        "lead_lag_root_locus_frequency_consistency",
+        "lead_lag_plant_robustness_limits",
+        "lead_lag_implementation_validation"
+      ]
+    }
   ],
   "recommended_outline": [
     {

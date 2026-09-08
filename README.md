@@ -717,6 +717,12 @@ Markdown 절차를 runtime이 파싱하지 않습니다. `add-topic`과 `approve
 4. 관련 없는 anchor가 평가되면 신규 Topic 생성보다 기존 Topic의 exact question contract와 routing boundary 수정을 우선합니다.
 5. 정답·부분답·오답·정정 문맥을 함께 회귀검증하고, 전체 Authority Gate가 `READY`인 경우에만 배포합니다.
 
+모든 Topic 변경은 `python3 scripts/audit_topic_pack_atomicity.py`를 통과해야 합니다.
+문자열 질문 패턴은 허용하지 않고 질문별 `required_anchor_ids`를 둡니다. 대형 anchor
+목록이나 분리된 질문 family는 경고로 추적하되 실제 기출·routing·Golden 증거 없이
+일괄 분리하지 않습니다. 상세 기준은
+[`docs/topic_pack_atomicity.md`](docs/topic_pack_atomicity.md)에 있습니다.
+
 현재 첫 유지보수 우선순위는 자주 출제되는 질문의 exact question contract 확대입니다. 예를 들어 V-Model 질문처럼 다수의 인접 anchor가 한꺼번에 평가되는 경우, 사람이 검토한 `required_anchor_ids`로 실제 문제 요구범위를 제한합니다. 단순히 점수를 맞추기 위한 anchor 삭제나 threshold 완화는 금지합니다.
 
 기본 validation 흐름:

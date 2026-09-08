@@ -4,9 +4,30 @@
   "title_ko": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
   "question_type": "DIAGNOSIS_ACTION",
   "expected_question_patterns": [
-    "온도 측정 시 열전달에 의한 측정오차의 발생 원인과 저감 대책에 대하여 설명하시오.",
-    "온도 측정에서 전도, 대류, 복사 및 담금 깊이가 측정오차에 미치는 영향을 설명하시오.",
-    "온도센서 설치 시 보호관, 담금 깊이, 주변 열환경이 측정오차에 미치는 영향과 개선 방안을 설명하시오."
+    {
+      "pattern": "온도 측정 시 열전달에 의한 측정오차의 발생 원인과 저감 대책에 대하여 설명하시오.",
+      "required_anchor_ids": [
+        "temperature_heat_transfer_error_paths",
+        "temperature_heat_resistance_model",
+        "temperature_error_reduction_measures"
+      ]
+    },
+    {
+      "pattern": "온도 측정에서 전도, 대류, 복사 및 담금 깊이가 측정오차에 미치는 영향을 설명하시오.",
+      "required_anchor_ids": [
+        "temperature_heat_transfer_error_paths",
+        "temperature_stem_conduction_immersion_error",
+        "temperature_heat_resistance_model"
+      ]
+    },
+    {
+      "pattern": "온도센서 설치 시 보호관, 담금 깊이, 주변 열환경이 측정오차에 미치는 영향과 개선 방안을 설명하시오.",
+      "required_anchor_ids": [
+        "temperature_stem_conduction_immersion_error",
+        "temperature_installation_selection_conditions",
+        "temperature_error_reduction_measures"
+      ]
+    }
   ],
   "recommended_outline": [
     {

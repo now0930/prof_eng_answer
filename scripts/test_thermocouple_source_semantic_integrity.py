@@ -102,7 +102,17 @@ def test_thermocouple_source_semantic_integrity() -> None:
     for label, value in positive_fields.items():
         assert_no_rtd_positive(label, value)
 
-    assert model["expected_question_patterns"] == model["question_examples"][:10]
+    contracted_patterns = [
+        item["pattern"] if isinstance(item, dict) else item
+        for item in model["expected_question_patterns"]
+    ]
+    assert contracted_patterns == model["question_examples"][:10]
+    anchor_ids = {item.get("id") for item in fact.get("anchors", [])}
+    for item in model["expected_question_patterns"]:
+        assert isinstance(item, dict), "question pattern must use the scoped contract form"
+        required = item.get("required_anchor_ids")
+        assert isinstance(required, list) and required
+        assert set(required) <= anchor_ids
     assert model["high_score_points"] == model["high_score_features"]
     assert model["common_missing_points"] == model["low_score_patterns"]
 
@@ -112,7 +122,6 @@ def test_thermocouple_source_semantic_integrity() -> None:
     for marker in ("열전대", "Seebeck", "기준접점", "냉접점 보상", "보상도선"):
         assert marker in combined, f"missing Thermocouple core marker: {marker}"
 
-    anchor_ids = {item.get("id") for item in fact.get("anchors", [])}
     fatal_ids = {item.get("id") for item in fact.get("fatal_wrong_claims", [])}
     assert REQUIRED_ANCHORS <= anchor_ids
     assert REQUIRED_FATALS <= fatal_ids

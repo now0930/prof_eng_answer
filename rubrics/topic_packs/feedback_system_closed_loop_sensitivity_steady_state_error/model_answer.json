@@ -4,11 +4,47 @@
   "title_ko": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "expected_question_patterns": [
-    "피드백 시스템의 폐루프 전달함수와 민감도 함수를 설명하시오.",
-    "음의 피드백 시스템의 민감도 S와 상보 민감도 T의 의미를 설명하시오.",
-    "피드백 시스템의 시스템 형과 정상상태 오차의 관계를 설명하시오.",
-    "폐루프 제어계에서 외란 억제, 측정 잡음 및 안정성의 상충관계를 설명하시오.",
-    "Feedback System의 추종성, 민감도 및 정상상태 오차 개선 방법을 설명하시오."
+    {
+      "pattern": "피드백 시스템의 폐루프 전달함수와 민감도 함수를 설명하시오.",
+      "required_anchor_ids": [
+        "feedback_negative_loop_structure",
+        "feedback_closed_loop_transfer",
+        "feedback_sensitivity_functions"
+      ]
+    },
+    {
+      "pattern": "음의 피드백 시스템의 민감도 S와 상보 민감도 T의 의미를 설명하시오.",
+      "required_anchor_ids": [
+        "feedback_negative_loop_structure",
+        "feedback_sensitivity_functions",
+        "feedback_parameter_sensitivity"
+      ]
+    },
+    {
+      "pattern": "피드백 시스템의 시스템 형과 정상상태 오차의 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "feedback_steady_state_error_final_value",
+        "feedback_system_type_error_constants",
+        "feedback_type_error_relationship"
+      ]
+    },
+    {
+      "pattern": "폐루프 제어계에서 외란 억제, 측정 잡음 및 안정성의 상충관계를 설명하시오.",
+      "required_anchor_ids": [
+        "feedback_disturbance_noise_paths",
+        "feedback_sensitivity_functions",
+        "feedback_stability_bandwidth_tradeoff"
+      ]
+    },
+    {
+      "pattern": "Feedback System의 추종성, 민감도 및 정상상태 오차 개선 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "feedback_parameter_sensitivity",
+        "feedback_type_error_relationship",
+        "feedback_integral_action_tradeoff",
+        "feedback_field_design_validation"
+      ]
+    }
   ],
   "recommended_outline": [
     {

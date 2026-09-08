@@ -4,9 +4,33 @@
   "title_ko": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "expected_question_patterns": [
-    "RTD 온도센서의 측정원리와 Pt100의 특성을 설명하시오.",
-    "Pt100의 2선식·3선식·4선식 결선 및 리드선 저항 보상을 설명하시오.",
-    "RTD의 측정전류, 자기발열 및 배선방식 선정기준을 설명하시오."
+    {
+      "pattern": "RTD 온도센서의 측정원리와 Pt100의 특성을 설명하시오.",
+      "required_anchor_ids": [
+        "rtd_temperature_measurement_chain",
+        "rtd_metal_resistance_temperature_principle",
+        "rtd_pt100_reference_resistance_alpha_standard",
+        "rtd_callendar_van_dusen_characteristic"
+      ]
+    },
+    {
+      "pattern": "Pt100의 2선식·3선식·4선식 결선 및 리드선 저항 보상을 설명하시오.",
+      "required_anchor_ids": [
+        "rtd_two_wire_lead_resistance_error",
+        "rtd_three_wire_bridge_compensation_assumptions",
+        "rtd_four_wire_kelvin_measurement",
+        "rtd_wiring_method_selection_tradeoff"
+      ]
+    },
+    {
+      "pattern": "RTD의 측정전류, 자기발열 및 배선방식 선정기준을 설명하시오.",
+      "required_anchor_ids": [
+        "rtd_excitation_voltage_measurement",
+        "rtd_self_heating_thermal_error",
+        "rtd_wiring_method_selection_tradeoff",
+        "rtd_fault_diagnostics_environment_validation"
+      ]
+    }
   ],
   "recommended_outline": [
     {

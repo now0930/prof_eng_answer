@@ -545,3 +545,34 @@ Topic Pack이 소유한다. 신규 Topic 생성은 기존 Topic으로 문제 요
 맞추기 위한 anchor 삭제, threshold 완화, fatal rule 제거는 금지한다.
 
 과거 대규모 확장의 상세 postmortem은 [`archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md`](archive/20260819_stage17e3_topic_pack_pipeline_postmortem.md)에만 보존한다.
+
+## 25. Topic Atomicity Gate
+
+Topic 추가·보강 후에는 source schema validation과 별도로 소유권 응집도를 점검한다.
+
+```bash
+python3 scripts/audit_topic_pack_atomicity.py
+```
+
+다음은 release를 차단한다.
+
+- foreign/duplicate model ID
+- 문자열 형태의 unscoped question pattern
+- question·alias·positive evidence mirror의 명백한 불일치
+- 다른 Topic의 긴 core fact 묶음 복제
+
+대형 anchor inventory, anchor-disconnected question family와 alias collision은 P1 검토
+경고다. 경고만으로 Pack을 일괄 분리하지 않는다. 실제 기출문제, routing 오판정과
+정상·오답·fatal Golden fixture가 독립 owner를 입증할 때 한 Topic씩 분리하고, 동일
+입력의 score·fatal·routing을 전후 비교한다.
+
+질문 계약은 문자열이 아니라 다음 구조를 사용한다.
+
+```json
+{
+  "pattern": "질문 문장",
+  "required_anchor_ids": ["question_specific_anchor"]
+}
+```
+
+상세 판정·경고 정책은 [`topic_pack_atomicity.md`](topic_pack_atomicity.md)를 따른다.

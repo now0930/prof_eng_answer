@@ -4,11 +4,53 @@
   "title_ko": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
   "question_type": "PRINCIPLE",
   "expected_question_patterns": [
-    "저항형, 정전용량형, 인덕턴스형 센서의 측정원리와 전기적 출력 변환방법을 설명하시오.",
-    "R, C, L 센서에서 재료 물성과 기하학적 변화가 감도에 미치는 영향을 설명하시오.",
-    "Young's modulus, 도전율, 유전율과 투자율을 센서 변환원리와 연계하여 설명하시오.",
-    "저항·정전용량·인덕턴스형 센서의 기본식과 신호조절회로를 비교하시오.",
-    "수동형 파라미터 센서의 감도, 오차요인과 교정방법을 설명하시오."
+    {
+      "pattern": "저항형, 정전용량형, 인덕턴스형 센서의 측정원리와 전기적 출력 변환방법을 설명하시오.",
+      "required_anchor_ids": [
+        "sensor_resistive_geometry_conductivity_relation",
+        "sensor_resistive_voltage_current_conversion",
+        "sensor_capacitive_geometry_permittivity_relation",
+        "sensor_capacitive_dynamic_current_readout",
+        "sensor_inductive_magnetic_circuit_permeability_relation",
+        "sensor_inductive_voltage_impedance_readout"
+      ]
+    },
+    {
+      "pattern": "R, C, L 센서에서 재료 물성과 기하학적 변화가 감도에 미치는 영향을 설명하시오.",
+      "required_anchor_ids": [
+        "sensor_material_property_geometry_separation",
+        "sensor_resistive_geometry_conductivity_relation",
+        "sensor_capacitive_geometry_permittivity_relation",
+        "sensor_inductive_gap_eddy_current_conductivity"
+      ]
+    },
+    {
+      "pattern": "Young's modulus, 도전율, 유전율과 투자율을 센서 변환원리와 연계하여 설명하시오.",
+      "required_anchor_ids": [
+        "sensor_mechanical_stress_strain_youngs_modulus",
+        "sensor_material_property_geometry_separation",
+        "sensor_resistive_geometry_conductivity_relation",
+        "sensor_capacitive_geometry_permittivity_relation",
+        "sensor_inductive_magnetic_circuit_permeability_relation"
+      ]
+    },
+    {
+      "pattern": "저항·정전용량·인덕턴스형 센서의 기본식과 신호조절회로를 비교하시오.",
+      "required_anchor_ids": [
+        "sensor_resistive_voltage_current_conversion",
+        "sensor_capacitive_dynamic_current_readout",
+        "sensor_inductive_voltage_impedance_readout",
+        "sensor_rcl_excitation_signal_conditioning"
+      ]
+    },
+    {
+      "pattern": "수동형 파라미터 센서의 감도, 오차요인과 교정방법을 설명하시오.",
+      "required_anchor_ids": [
+        "sensor_rcl_sensitivity_linearity_environment",
+        "sensor_rcl_calibration_implementation_validation",
+        "sensor_passive_transduction_chain"
+      ]
+    }
   ],
   "recommended_outline": [
     {

@@ -4,9 +4,29 @@
   "title_ko": "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "expected_question_patterns": [
-    "표준 2차 시스템의 주파수응답과 공진주파수를 설명하시오.",
-    "2차계에서 감쇠비와 공진주파수의 관계를 설명하시오.",
-    "시간응답 overshoot와 주파수응답 resonance의 차이를 설명하시오."
+    {
+      "pattern": "표준 2차 시스템의 주파수응답과 공진주파수를 설명하시오.",
+      "required_anchor_ids": [
+        "F1",
+        "F2",
+        "F3"
+      ]
+    },
+    {
+      "pattern": "2차계에서 감쇠비와 공진주파수의 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "F2",
+        "F3"
+      ]
+    },
+    {
+      "pattern": "시간응답 overshoot와 주파수응답 resonance의 차이를 설명하시오.",
+      "required_anchor_ids": [
+        "F3",
+        "F4",
+        "F5"
+      ]
+    }
   ],
   "recommended_outline": [
     {

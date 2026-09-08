@@ -4,11 +4,55 @@
   "title_ko": "Nyquist 안정도 판별과 이득·위상여유",
   "question_type": "CALC_DESIGN",
   "expected_question_patterns": [
-    "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
-    "주어진 특성방정식의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
-    "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
-    "Nyquist 궤적에서 -1점 선회 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
-    "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오."
+    {
+      "pattern": "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+      "required_anchor_ids": [
+        "closed_loop_characteristic_equation",
+        "nyquist_contour_and_mapping",
+        "argument_principle_pnz_relation",
+        "critical_point_minus_one",
+        "open_loop_rhp_poles_count",
+        "closed_loop_rhp_poles_count"
+      ]
+    },
+    {
+      "pattern": "주어진 개루프 전달함수의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
+      "required_anchor_ids": [
+        "nyquist_contour_and_mapping",
+        "argument_principle_pnz_relation",
+        "critical_point_minus_one",
+        "open_loop_rhp_poles_count",
+        "closed_loop_rhp_poles_count",
+        "conjugate_symmetry"
+      ]
+    },
+    {
+      "pattern": "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 Nyquist 선도로 구하시오.",
+      "required_anchor_ids": [
+        "closed_loop_characteristic_equation",
+        "critical_point_minus_one",
+        "argument_principle_pnz_relation",
+        "field_robustness_validation"
+      ]
+    },
+    {
+      "pattern": "Nyquist 판별에서 허수축 극점의 우회와 복수 crossover 처리 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "imaginary_axis_pole_indentation",
+        "multiple_crossover_interpretation",
+        "conjugate_symmetry"
+      ]
+    },
+    {
+      "pattern": "Nyquist 선도에서 이득·위상여유와 시간지연을 고려한 강인성 조건을 설명하시오.",
+      "required_anchor_ids": [
+        "gain_margin_definition",
+        "phase_margin_definition",
+        "multiple_crossover_interpretation",
+        "time_delay_phase_effect",
+        "field_robustness_validation"
+      ]
+    }
   ],
   "recommended_outline": [
     {
@@ -346,12 +390,9 @@
   "routing_aliases": [
     "Nyquist",
     "Nyquist",
-    "Routh criterion",
-    "Routh stability criterion",
     "Nyquist plot",
     "Nyquist plot",
     "라우스 후르비츠",
-    "루스 후르비츠",
     "Nyquist 안정도 판별",
     "Nyquist 안정도 판별",
     "Nyquist 궤적",
@@ -376,5 +417,12 @@
     "사람이 검토한 요구사항 Markdown을 기준으로 ChatGPT가 직접 작성함.",
     "CALC_DESIGN형 배열 작성, 부등식, 경계 검증과 해석을 함께 요구함.",
     "참조 Topic Pack의 라우팅·답안 필드를 복사하지 않고 전부 재작성함."
+  ],
+  "question_examples": [
+    "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+    "주어진 개루프 전달함수의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
+    "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 Nyquist 선도로 구하시오.",
+    "Nyquist 판별에서 허수축 극점의 우회와 복수 crossover 처리 방법을 설명하시오.",
+    "Nyquist 선도에서 이득·위상여유와 시간지연을 고려한 강인성 조건을 설명하시오."
   ]
 }

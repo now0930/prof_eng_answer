@@ -1,0 +1,189 @@
+{
+  "version": "topic_pack_atomicity_runtime_comparison_v1",
+  "cases": {
+    "thermistor_normal": {
+      "before": {
+        "total_score": 12.97,
+        "official_pass_met": false,
+        "verdict": "FAIL",
+        "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+        "logic_fatal": false,
+        "routing_source": "question_model_answer_router",
+        "routing_candidates": [
+          {
+            "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+            "score": 1.0
+          },
+          {
+            "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+            "score": 0.326923
+          },
+          {
+            "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+            "score": 0.3
+          }
+        ]
+      },
+      "after": {
+        "total_score": 16.72,
+        "official_pass_met": true,
+        "verdict": "PASS",
+        "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+        "logic_fatal": false,
+        "routing_source": "question_model_answer_router",
+        "routing_candidates": [
+          {
+            "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+            "score": 0.830189
+          },
+          {
+            "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+            "score": 0.326923
+          },
+          {
+            "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+            "score": 0.3
+          }
+        ]
+      }
+    },
+    "nyquist_normal": {
+      "before": {
+        "total_score": 12.47,
+        "official_pass_met": false,
+        "verdict": "FAIL",
+        "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+        "logic_fatal": false,
+        "routing_source": "specific_question_alias",
+        "routing_candidates": [
+          {
+            "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+            "score": 0.8
+          },
+          {
+            "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+            "score": 0.234043
+          },
+          {
+            "topic_id": "root_locus_stability_gain_design",
+            "score": 0.2
+          }
+        ]
+      },
+      "after": {
+        "total_score": 14.79,
+        "official_pass_met": false,
+        "verdict": "FAIL",
+        "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+        "logic_fatal": false,
+        "routing_source": "specific_question_alias",
+        "routing_candidates": [
+          {
+            "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+            "score": 0.8
+          },
+          {
+            "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+            "score": 0.234043
+          },
+          {
+            "topic_id": "root_locus_stability_gain_design",
+            "score": 0.2
+          }
+        ]
+      }
+    },
+    "piezo_normal": {
+      "before": {
+        "total_score": 12.65,
+        "official_pass_met": false,
+        "verdict": "FAIL",
+        "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+        "logic_fatal": false,
+        "routing_source": "question_model_answer_router",
+        "routing_candidates": [
+          {
+            "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+            "score": 0.428571
+          },
+          {
+            "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+            "score": 0.285714
+          },
+          {
+            "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+            "score": 0.222222
+          }
+        ]
+      },
+      "after": {
+        "total_score": 11.0,
+        "official_pass_met": false,
+        "verdict": "FAIL",
+        "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+        "logic_fatal": false,
+        "routing_source": "question_model_answer_router",
+        "routing_candidates": [
+          {
+            "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+            "score": 0.428571
+          },
+          {
+            "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+            "score": 0.285714
+          },
+          {
+            "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+            "score": 0.222222
+          }
+        ]
+      }
+    },
+    "maintenance_normal": {
+      "before": {
+        "total_score": 12.95,
+        "official_pass_met": false,
+        "verdict": "FAIL",
+        "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+        "logic_fatal": false,
+        "routing_source": "question_model_answer_router",
+        "routing_candidates": [
+          {
+            "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+            "score": 0.4
+          },
+          {
+            "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+            "score": 0.25
+          },
+          {
+            "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+            "score": 0.2
+          }
+        ]
+      },
+      "after": {
+        "total_score": 12.95,
+        "official_pass_met": false,
+        "verdict": "FAIL",
+        "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+        "logic_fatal": false,
+        "routing_source": "question_model_answer_router",
+        "routing_candidates": [
+          {
+            "topic_id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing",
+            "score": 0.4
+          },
+          {
+            "topic_id": "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+            "score": 0.25
+          },
+          {
+            "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+            "score": 0.2
+          }
+        ]
+      }
+    }
+  }
+}

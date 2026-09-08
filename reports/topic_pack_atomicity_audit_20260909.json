@@ -1,0 +1,252 @@
+{
+  "summary": {
+    "version": "topic_pack_atomicity_audit_v1",
+    "topic_count": 78,
+    "selected_topic_count": 78,
+    "error_count": 0,
+    "warning_count": 40,
+    "decision": "PASS"
+  },
+  "issues": [
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "message": "3 anchor-disconnected question families: 1, 8, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "message": "40 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "message": "3 anchor-disconnected question families: 7, 2, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance",
+      "message": "3 anchor-disconnected question families: 1, 8, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim",
+      "message": "3 anchor-disconnected question families: 1, 7, 2"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+      "message": "40 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+      "message": "48 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+      "message": "52 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "control_valve_severe_service_high_low_flow_temperature_cryogenic_particles",
+      "message": "48 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+      "message": "8 anchor-disconnected question families: 1, 1, 1, 1, 1, 1, 1, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "message": "48 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "hmi_scada_alarm_setpoint_trip_interlock_soe_operator_information_management",
+      "message": "5 anchor-disconnected question families: 3, 3, 2, 1, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "message": "6 anchor-disconnected question families: 1, 5, 1, 1, 1, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+      "message": "40 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "message": "6 anchor-disconnected question families: 2, 1, 1, 3, 2, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "message": "40 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+      "message": "3 anchor-disconnected question families: 8, 2, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+      "message": "3 anchor-disconnected question families: 4, 3, 3"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "message": "3 anchor-disconnected question families: 7, 2, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "CROSS_TOPIC_ALIAS_COLLISION",
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "message": "2 normalized aliases overlap with root_locus_stability_gain_design"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "message": "3 anchor-disconnected question families: 3, 1, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "message": "4 anchor-disconnected question families: 2, 1, 1, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "CROSS_TOPIC_ALIAS_COLLISION",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "message": "5 normalized aliases overlap with routh_hurwitz_stability_criterion_gain_range"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "message": "9 anchor-disconnected question families: 1, 1, 1, 1, 1, 1, 1, 1, 2"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "message": "40 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "CROSS_TOPIC_ALIAS_COLLISION",
+      "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+      "message": "2 normalized aliases overlap with strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+      "message": "3 anchor-disconnected question families: 8, 1, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+      "message": "4 anchor-disconnected question families: 4, 5, 1, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+      "message": "4 anchor-disconnected question families: 2, 7, 2, 3"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "message": "3 anchor-disconnected question families: 1, 8, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "CROSS_TOPIC_ALIAS_COLLISION",
+      "topic_id": "root_locus_stability_gain_design",
+      "message": "2 normalized aliases overlap with lead_lag_compensator_phase_margin_steady_state_error"
+    },
+    {
+      "severity": "WARN",
+      "code": "CROSS_TOPIC_ALIAS_COLLISION",
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "message": "5 normalized aliases overlap with nyquist_stability_criterion_gain_phase_margin"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "routh_hurwitz_stability_criterion_gain_range",
+      "message": "3 anchor-disconnected question families: 2, 2, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+      "message": "6 anchor-disconnected question families: 5, 1, 1, 2, 1, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+      "message": "4 anchor-disconnected question families: 2, 6, 4, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "LARGE_ANCHOR_INVENTORY",
+      "topic_id": "smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "message": "44 anchors require an ownership review"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "speed_rotation_measurement_encoder_proximity_tachometer_selection_error",
+      "message": "4 anchor-disconnected question families: 5, 1, 3, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "CROSS_TOPIC_ALIAS_COLLISION",
+      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+      "message": "2 normalized aliases overlap with passive_sensor_resistive_capacitive_inductive_transduction"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error",
+      "message": "4 anchor-disconnected question families: 10, 1, 1, 1"
+    },
+    {
+      "severity": "WARN",
+      "code": "DISCONNECTED_QUESTION_FAMILIES",
+      "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
+      "message": "3 anchor-disconnected question families: 1, 1, 1"
+    }
+  ]
+}

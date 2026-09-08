@@ -4,14 +4,74 @@
   "title_ko": "공정제어 Loop Architecture: Cascade·Ratio·Feedforward·Override·Split-Range",
   "question_type": "COMPARE_SELECTION",
   "expected_question_patterns": [
-    "단일루프와 다중루프 제어의 구조와 선정기준을 설명하시오.",
-    "Cascade 제어의 구성, 적용조건과 장단점을 설명하시오.",
-    "Ratio 제어와 Feedforward 제어의 원리 및 적용방법을 비교하시오.",
-    "Feedforward와 Feedback 결합제어의 필요성과 구현 시 고려사항을 설명하시오.",
-    "Override 또는 Selective Control의 구조와 적용 시 주의사항을 설명하시오.",
-    "Split-range Control의 원리, 적용사례와 전환부 문제점을 설명하시오.",
-    "Cascade, Ratio, Feedforward, Override, Split-range 제어방식을 비교하고 공정별 선정기준을 제시하시오.",
-    "공정제어의 단일·다중루프 제어설계와 현장 적용 시 고려사항을 설명하시오."
+    {
+      "pattern": "단일루프와 다중루프 제어의 구조와 선정기준을 설명하시오.",
+      "required_anchor_ids": [
+        "process_loop_signal_chain",
+        "single_loop_architecture",
+        "loop_interaction_coordination",
+        "architecture_selection_criteria"
+      ]
+    },
+    {
+      "pattern": "Cascade 제어의 구성, 적용조건과 장단점을 설명하시오.",
+      "required_anchor_ids": [
+        "cascade_structure",
+        "cascade_secondary_faster",
+        "cascade_disturbance_condition"
+      ]
+    },
+    {
+      "pattern": "Ratio 제어와 Feedforward 제어의 원리 및 적용방법을 비교하시오.",
+      "required_anchor_ids": [
+        "ratio_control_structure",
+        "ratio_scaling_and_low_flow",
+        "feedforward_principle",
+        "feedforward_feedback_combination"
+      ]
+    },
+    {
+      "pattern": "Feedforward와 Feedback 결합제어의 필요성과 구현 시 고려사항을 설명하시오.",
+      "required_anchor_ids": [
+        "feedforward_principle",
+        "feedforward_feedback_combination",
+        "field_implementation_validation"
+      ]
+    },
+    {
+      "pattern": "Override 또는 Selective Control의 구조와 적용 시 주의사항을 설명하시오.",
+      "required_anchor_ids": [
+        "override_selective_control",
+        "override_tracking_antiwindup"
+      ]
+    },
+    {
+      "pattern": "Split-range Control의 원리, 적용사례와 전환부 문제점을 설명하시오.",
+      "required_anchor_ids": [
+        "split_range_control",
+        "split_range_transition_design"
+      ]
+    },
+    {
+      "pattern": "Cascade, Ratio, Feedforward, Override, Split-range 제어방식을 비교하고 공정별 선정기준을 제시하시오.",
+      "required_anchor_ids": [
+        "cascade_structure",
+        "ratio_control_structure",
+        "feedforward_principle",
+        "override_selective_control",
+        "split_range_control",
+        "architecture_selection_criteria"
+      ]
+    },
+    {
+      "pattern": "공정제어의 단일·다중루프 제어설계와 현장 적용 시 고려사항을 설명하시오.",
+      "required_anchor_ids": [
+        "single_loop_architecture",
+        "loop_interaction_coordination",
+        "architecture_selection_criteria",
+        "field_implementation_validation"
+      ]
+    }
   ],
   "high_score_points": [
     "PV, SP, CO, MV와 transmitter-controller-final element-process의 기본 loop를 정확히 정의한다.",

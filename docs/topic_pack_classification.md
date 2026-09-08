@@ -2,7 +2,7 @@
 
 ## 1. 목적
 
-이 문서는 현재 52개 Topic Pack을 산업계측제어기술사
+이 문서는 현재 78개 Topic Pack을 산업계측제어기술사
 2027.01.01~2030.12.31 필기 공식 출제기준의 33개 세부항목에 매핑한다.
 
 공식 출제기준은 `docs/exam_scope/industrial_instrumentation_control_2027_2030_criteria.md`를
@@ -27,12 +27,12 @@ Stage 2B-2 semantic mapping review SHA-256: `b61c51218f66c520eef4c6949fe62dfab96
 
 | 항목 | 수량 |
 |---|---:|
-| Topic Pack | 52 |
+| Topic Pack | 78 |
 | 공식 세부항목 | 33 |
-| HIGH confidence | 40 |
-| MEDIUM confidence | 12 |
-| PRIMARY owner가 있는 공식 세부항목 | 22 |
-| PRIMARY owner가 없는 공식 세부항목 | 11 |
+| HIGH confidence | 65 |
+| MEDIUM confidence | 13 |
+| PRIMARY owner가 있는 공식 세부항목 | 33 |
+| PRIMARY owner가 없는 공식 세부항목 | 0 |
 
 PRIMARY owner가 없다는 사실만으로 coverage 부족을 의미하지 않는다.
 SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계에서 coverage를 판정한다.
@@ -210,20 +210,9 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 
 ## 7. PRIMARY owner가 없는 공식 세부항목
 
-다음 항목은 현재 52개 Topic Pack 중 PRIMARY owner가 없는 항목이다.
-이 목록은 coverage 부족 판정이 아니다.
-
-- `IC-2027-W-1-4` 전자기기의 오차 발생요인과 대책
-- `IC-2027-W-2-6` 계측제어기기의 전원 및 접지방식
-- `IC-2027-W-2-8` 계측제어기기 및 시스템 설계 규정
-- `IC-2027-W-3-7` 공정제어 계측(P&ID) 설계
-- `IC-2027-W-3-9` 계측제어시스템의 하드웨어 개발, 생산 및 검증
-- `IC-2027-W-3-10` 계측제어시스템의 환경 검증시험 및 대책(온도, 습도, 전자기파 등)
-- `IC-2027-W-4-1` 가용도(availability), 신뢰도(reliability)
-- `IC-2027-W-4-2` 가스, 정유, 철도, 발전, 건축 등 위험 환경에서 고려해야 할 제어요소 및 대책
-- `IC-2027-W-4-5` 생산관리(원가, 인력, 수행일정 등)
-- `IC-2027-W-4-9` 계측제어설비 설치 및 기술기준
-- `IC-2027-W-5-2` 계측제어 관련 동향
+현재 78개 inventory에는 33개 공식 세부항목 모두에 하나 이상의 PRIMARY owner가
+있다. 이는 Topic 존재 여부를 뜻하며, 개별 Topic의 답안 coverage 충분성을 자동으로
+보장하지 않는다.
 
 ## 8. Source 정합성 점검 결과
 
@@ -245,3 +234,37 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 
 다음 단계에서는 이 분류 문서를 read-only로 재감사한다.
 그 이후에만 commit 여부를 결정한다.
+
+## 10. 52개 기준선 이후 추가된 26개 Topic 매핑
+
+기존 1~52 표는 최초 의미 분류 기준선을 보존한다. 이후 추가된 Topic은 아래 표가
+동일한 권위를 가지며, 두 표의 합이 현재 78개 inventory의 정본이다.
+
+| # | Topic Pack | PRIMARY | SECONDARY | Confidence |
+|---:|---|---|---|:---:|
+| 53 | `analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting` | `IC-2027-W-2-1` | `IC-2027-W-2-3`, `IC-2027-W-2-6` | HIGH |
+| 54 | `control_hardware_lifecycle_panel_architecture_component_selection_production_verification` | `IC-2027-W-3-9` | `IC-2027-W-4-8` | HIGH |
+| 55 | `control_system_operations_maintenance_calibration_inspection_spares_kpi` | `IC-2027-W-4-6` | `IC-2027-W-4-8` | HIGH |
+| 56 | `control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing` | `IC-2027-W-4-6` | `IC-2027-W-2-4`, `IC-2027-W-4-9` | MEDIUM |
+| 57 | `electronics_error_noise_drift_tolerance_aging_power_mitigation` | `IC-2027-W-1-4` | `IC-2027-W-2-3` | HIGH |
+| 58 | `emerging_technology_quantum_computing_instrumentation_control_applications_readiness_limits` | `IC-2027-W-5-1` | `IC-2027-W-5-2` | HIGH |
+| 59 | `functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh` | `IC-2027-W-4-1` | `IC-2027-W-4-3` | HIGH |
+| 60 | `hazardous_area_explosion_protection_intrinsic_safety_equipment_selection` | `IC-2027-W-4-2` | `IC-2027-W-2-8` | HIGH |
+| 61 | `hazardous_environment_control_measures_rail_power_building_fail_safe_functional_hazards` | `IC-2027-W-4-2` | `IC-2027-W-4-3` | HIGH |
+| 62 | `hazop_lopa_ipl_risk_reduction_sil_target_allocation` | `IC-2027-W-4-3` | `IC-2027-W-4-1` | HIGH |
+| 63 | `hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture` | `IC-2027-W-4-3` | `IC-2027-W-4-1` | HIGH |
+| 64 | `humidity_measurement_capacitive_resistive_dew_point_selection_compensation` | `IC-2027-W-2-1` | `IC-2027-W-2-3` | HIGH |
+| 65 | `industrial_iot_smart_factory_edge_cloud_interoperability_digital_thread` | `IC-2027-W-5-1` | `IC-2027-W-3-2`, `IC-2027-W-3-3` | HIGH |
+| 66 | `instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification` | `IC-2027-W-3-10` | `IC-2027-W-2-3` | HIGH |
+| 67 | `instrumentation_installation_wiring_impulse_tubing_inspection_codes` | `IC-2027-W-4-9` | `IC-2027-W-2-8` | HIGH |
+| 68 | `instrumentation_power_grounding_shielding_ups_ground_loop_emc` | `IC-2027-W-2-6` | `IC-2027-W-3-10` | HIGH |
+| 69 | `instrumentation_production_management_planning_quality_cost_resources` | `IC-2027-W-4-5` | `IC-2027-W-4-4` | HIGH |
+| 70 | `instrumentation_project_management_basic_design_cost_schedule_documents_acceptance` | `IC-2027-W-4-4` | `IC-2027-W-4-9` | HIGH |
+| 71 | `instrumentation_system_design_basis_codes_standards_specification_deviation_management` | `IC-2027-W-2-8` | `IC-2027-W-4-4` | HIGH |
+| 72 | `optical_laser_photoelectric_noncontact_measurement_tof_triangulation` | `IC-2027-W-2-2` | `IC-2027-W-2-1`, `IC-2027-W-2-3` | HIGH |
+| 73 | `pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative` | `IC-2027-W-3-7` | `IC-2027-W-3-6` | HIGH |
+| 74 | `pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error` | `IC-2027-W-2-1` | `IC-2027-W-2-3` | HIGH |
+| 75 | `process_control_loop_architecture_cascade_ratio_feedforward_override_split_range` | `IC-2027-W-3-4` | `IC-2027-W-3-5` | HIGH |
+| 76 | `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis` | `IC-2027-W-3-8` | `IC-2027-W-4-3` | HIGH |
+| 77 | `sil_target_determination_risk_reduction_and_lifecycle` | `IC-2027-W-4-3` | `IC-2027-W-4-1`, `IC-2027-W-4-8` | HIGH |
+| 78 | `speed_rotation_measurement_encoder_proximity_tachometer_selection_error` | `IC-2027-W-2-1` | `IC-2027-W-2-3` | HIGH |

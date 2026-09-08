@@ -4,11 +4,48 @@
   "title_ko": "Routh-Hurwitz 안정도 판별과 제어기 이득 범위",
   "question_type": "CALC_DESIGN",
   "expected_question_patterns": [
-    "Routh-Hurwitz 안정도 판별법의 원리와 판별 절차를 설명하시오.",
-    "주어진 특성방정식의 Routh 배열을 작성하고 안정 여부를 판별하시오.",
-    "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
-    "Routh 배열에서 첫 열 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
-    "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오."
+    {
+      "pattern": "Routh-Hurwitz 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+      "required_anchor_ids": [
+        "asymptotic_stability_open_lhp",
+        "first_column_sign_changes_rhp_count",
+        "routh_first_two_rows_layout",
+        "routh_recursive_row_calculation"
+      ]
+    },
+    {
+      "pattern": "주어진 특성방정식의 Routh 배열을 작성하고 안정 여부를 판별하시오.",
+      "required_anchor_ids": [
+        "routh_first_two_rows_layout",
+        "routh_recursive_row_calculation",
+        "first_column_sign_changes_rhp_count",
+        "asymptotic_stability_open_lhp"
+      ]
+    },
+    {
+      "pattern": "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
+      "required_anchor_ids": [
+        "gain_range_first_column_inequalities",
+        "gain_boundary_requires_verification",
+        "field_gain_selection_requires_margin"
+      ]
+    },
+    {
+      "pattern": "Routh 배열에서 첫 열 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "zero_first_column_epsilon_limit",
+        "all_zero_row_auxiliary_polynomial",
+        "imaginary_axis_roots_stability_class"
+      ]
+    },
+    {
+      "pattern": "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오.",
+      "required_anchor_ids": [
+        "relative_stability_axis_shift",
+        "gain_range_first_column_inequalities",
+        "gain_boundary_requires_verification"
+      ]
+    }
   ],
   "recommended_outline": [
     {

@@ -4,10 +4,43 @@
   "title_ko": "PID 제어기 튜닝 순서와 P/I/D 게인 영향",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "expected_question_patterns": [
-    "PID 제어기의 P, I, D 게인 영향과 튜닝 순서를 설명하시오.",
-    "PID 튜닝에서 P, I, D 게인을 어떤 순서로 조정하는지 설명하시오.",
-    "PID 제어에서 I 게인과 D 게인의 역할 및 튜닝상 주의점을 설명하시오.",
-    "PID 제어기의 오버슈트, 정상상태 오차, 감쇠 특성과 게인 조정 관계를 설명하시오."
+    {
+      "pattern": "PID 제어기의 P, I, D 게인 영향과 튜닝 순서를 설명하시오.",
+      "required_anchor_ids": [
+        "pid_controller_definition",
+        "p_action_effect",
+        "i_action_effect",
+        "d_action_effect",
+        "general_tuning_sequence"
+      ]
+    },
+    {
+      "pattern": "PID 튜닝에서 P, I, D 게인을 어떤 순서로 조정하는지 설명하시오.",
+      "required_anchor_ids": [
+        "p_action_effect",
+        "i_action_effect",
+        "d_action_effect",
+        "general_tuning_sequence",
+        "field_constraints"
+      ]
+    },
+    {
+      "pattern": "PID 제어에서 I 게인과 D 게인의 역할 및 튜닝상 주의점을 설명하시오.",
+      "required_anchor_ids": [
+        "i_action_effect",
+        "d_action_effect",
+        "field_constraints"
+      ]
+    },
+    {
+      "pattern": "PID 제어기의 오버슈트, 정상상태 오차, 감쇠 특성과 게인 조정 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "p_action_effect",
+        "i_action_effect",
+        "d_action_effect",
+        "general_tuning_sequence"
+      ]
+    }
   ],
   "recommended_outline": [
     {

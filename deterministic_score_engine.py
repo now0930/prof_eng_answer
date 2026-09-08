@@ -13,6 +13,7 @@ MARKER = "DETERMINISTIC_SCORE_ENGINE_V1"
 _CREDIT = {"SATISFIED": 1.0, "PARTIAL": 0.5, "WRONG": 0.0, "MISSING": 0.0}
 MINIMUM_SATISFIED_RATIO_FOR_PASS = 0.15
 PASS_EVIDENCE_CEILING_RATIO = 0.58
+NO_SATISFIED_NONFATAL_CEILING_RATIO = 0.44
 
 
 def calculate_deterministic_score(
@@ -85,6 +86,14 @@ def calculate_deterministic_score(
     total = min([raw_score, *all_ceilings]) if all_ceilings else raw_score
     total = round(total, 2)
     fatal = bool(requirement_evaluation.get("fatal_or_core_error"))
+    no_satisfied_nonfatal_ceiling_applied = bool(not fatal and satisfied_ratio == 0.0)
+    if no_satisfied_nonfatal_ceiling_applied:
+        # A collection of partial lexical matches must not become a mid-band
+        # answer merely because an exact question contract has fewer anchors.
+        # Fatal/core-error scores retain their separately reviewed ceilings.
+        all_ceilings.append(float(max_score) * NO_SATISFIED_NONFATAL_CEILING_RATIO)
+        total = min([raw_score, *all_ceilings])
+        total = round(total, 2)
     if fatal:
         verdict = "NEEDS_CORRECTION"
     elif total >= max_score * 0.8:
@@ -106,6 +115,7 @@ def calculate_deterministic_score(
         "satisfied_requirement_ratio": round(satisfied_ratio, 6),
         "minimum_satisfied_ratio_for_pass": minimum_satisfied_ratio_for_pass,
         "pass_evidence_eligible": pass_evidence_eligible,
+        "no_satisfied_nonfatal_ceiling_applied": no_satisfied_nonfatal_ceiling_applied,
         "verdict": verdict,
         "external_llm_required_for_verdict": False,
         "official_pass_met": bool(not fatal and total >= max_score * 0.6),

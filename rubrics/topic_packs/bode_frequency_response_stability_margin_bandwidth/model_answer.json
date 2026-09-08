@@ -4,14 +4,75 @@
   "title_ko": "Bode 선도에 의한 안정여유·대역폭 해석과 주파수응답 설계",
   "question_type": "CALC_DESIGN",
   "expected_question_patterns": [
-    "Bode 선도의 원리와 작성 방법을 설명하고 안정여유를 구하시오.",
-    "주어진 개루프 전달함수의 Bode 선도에서 위상여유와 이득여유를 계산하시오.",
-    "이득교차주파수와 위상교차주파수의 차이를 설명하시오.",
-    "폐루프 대역폭과 개루프 이득교차주파수의 관계를 설명하시오.",
-    "Bode 선도를 이용하여 목표 위상여유를 만족하는 제어기 이득을 설계하시오.",
-    "lead 또는 lag 보상기를 이용한 주파수응답 설계 절차를 설명하시오.",
-    "시간지연이 위상여유와 폐루프 안정성에 미치는 영향을 설명하시오.",
-    "다중 crossover가 있는 시스템에서 고전적 PM·GM 판정의 한계를 설명하시오."
+    {
+      "pattern": "Bode 선도의 원리와 작성 방법을 설명하고 안정여유를 구하시오.",
+      "required_anchor_ids": [
+        "open_loop_closed_loop_roles",
+        "log_frequency_and_decibel",
+        "pole_zero_magnitude_slopes",
+        "gain_phase_crossover_frequencies",
+        "phase_margin_calculation",
+        "gain_margin_calculation"
+      ]
+    },
+    {
+      "pattern": "주어진 개루프 전달함수의 Bode 선도에서 위상여유와 이득여유를 계산하시오.",
+      "required_anchor_ids": [
+        "open_loop_closed_loop_roles",
+        "gain_phase_crossover_frequencies",
+        "phase_margin_calculation",
+        "gain_margin_calculation"
+      ]
+    },
+    {
+      "pattern": "이득교차주파수와 위상교차주파수의 차이를 설명하시오.",
+      "required_anchor_ids": [
+        "gain_phase_crossover_frequencies",
+        "phase_margin_calculation",
+        "gain_margin_calculation"
+      ]
+    },
+    {
+      "pattern": "폐루프 대역폭과 개루프 이득교차주파수의 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "open_loop_closed_loop_roles",
+        "gain_phase_crossover_frequencies",
+        "closed_loop_bandwidth"
+      ]
+    },
+    {
+      "pattern": "Bode 선도를 이용하여 목표 위상여유를 만족하는 제어기 이득을 설계하시오.",
+      "required_anchor_ids": [
+        "positive_gain_shift",
+        "gain_phase_crossover_frequencies",
+        "phase_margin_calculation",
+        "compensator_and_field_validation"
+      ]
+    },
+    {
+      "pattern": "lead 또는 lag 보상기를 이용한 주파수응답 설계 절차를 설명하시오.",
+      "required_anchor_ids": [
+        "compensator_and_field_validation",
+        "phase_margin_calculation",
+        "sensitivity_robustness_noise_tradeoff"
+      ]
+    },
+    {
+      "pattern": "시간지연이 위상여유와 폐루프 안정성에 미치는 영향을 설명하시오.",
+      "required_anchor_ids": [
+        "delay_and_nonminimum_phase_limits",
+        "phase_margin_calculation",
+        "compensator_and_field_validation"
+      ]
+    },
+    {
+      "pattern": "다중 crossover가 있는 시스템에서 고전적 PM·GM 판정의 한계를 설명하시오.",
+      "required_anchor_ids": [
+        "multiple_or_missing_crossovers",
+        "phase_margin_calculation",
+        "gain_margin_calculation"
+      ]
+    }
   ],
   "recommended_outline": [
     {

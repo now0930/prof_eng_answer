@@ -1,5 +1,5 @@
 {
-  "version": "sha256-c07c74a8723c9e11c1049c4ba2057e1df3f5ea93975f01a08479f74031fc9851-generated-topic-pack-model-answers",
+  "version": "sha256-0e053eaa4218df005896c4ec5ddce4195356f9bbc0416a3471a21b7ea28ec4d5-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -557,14 +557,75 @@
       "title_ko": "Bode 선도에 의한 안정여유·대역폭 해석과 주파수응답 설계",
       "question_type": "CALC_DESIGN",
       "expected_question_patterns": [
-        "Bode 선도의 원리와 작성 방법을 설명하고 안정여유를 구하시오.",
-        "주어진 개루프 전달함수의 Bode 선도에서 위상여유와 이득여유를 계산하시오.",
-        "이득교차주파수와 위상교차주파수의 차이를 설명하시오.",
-        "폐루프 대역폭과 개루프 이득교차주파수의 관계를 설명하시오.",
-        "Bode 선도를 이용하여 목표 위상여유를 만족하는 제어기 이득을 설계하시오.",
-        "lead 또는 lag 보상기를 이용한 주파수응답 설계 절차를 설명하시오.",
-        "시간지연이 위상여유와 폐루프 안정성에 미치는 영향을 설명하시오.",
-        "다중 crossover가 있는 시스템에서 고전적 PM·GM 판정의 한계를 설명하시오."
+        {
+          "pattern": "Bode 선도의 원리와 작성 방법을 설명하고 안정여유를 구하시오.",
+          "required_anchor_ids": [
+            "open_loop_closed_loop_roles",
+            "log_frequency_and_decibel",
+            "pole_zero_magnitude_slopes",
+            "gain_phase_crossover_frequencies",
+            "phase_margin_calculation",
+            "gain_margin_calculation"
+          ]
+        },
+        {
+          "pattern": "주어진 개루프 전달함수의 Bode 선도에서 위상여유와 이득여유를 계산하시오.",
+          "required_anchor_ids": [
+            "open_loop_closed_loop_roles",
+            "gain_phase_crossover_frequencies",
+            "phase_margin_calculation",
+            "gain_margin_calculation"
+          ]
+        },
+        {
+          "pattern": "이득교차주파수와 위상교차주파수의 차이를 설명하시오.",
+          "required_anchor_ids": [
+            "gain_phase_crossover_frequencies",
+            "phase_margin_calculation",
+            "gain_margin_calculation"
+          ]
+        },
+        {
+          "pattern": "폐루프 대역폭과 개루프 이득교차주파수의 관계를 설명하시오.",
+          "required_anchor_ids": [
+            "open_loop_closed_loop_roles",
+            "gain_phase_crossover_frequencies",
+            "closed_loop_bandwidth"
+          ]
+        },
+        {
+          "pattern": "Bode 선도를 이용하여 목표 위상여유를 만족하는 제어기 이득을 설계하시오.",
+          "required_anchor_ids": [
+            "positive_gain_shift",
+            "gain_phase_crossover_frequencies",
+            "phase_margin_calculation",
+            "compensator_and_field_validation"
+          ]
+        },
+        {
+          "pattern": "lead 또는 lag 보상기를 이용한 주파수응답 설계 절차를 설명하시오.",
+          "required_anchor_ids": [
+            "compensator_and_field_validation",
+            "phase_margin_calculation",
+            "sensitivity_robustness_noise_tradeoff"
+          ]
+        },
+        {
+          "pattern": "시간지연이 위상여유와 폐루프 안정성에 미치는 영향을 설명하시오.",
+          "required_anchor_ids": [
+            "delay_and_nonminimum_phase_limits",
+            "phase_margin_calculation",
+            "compensator_and_field_validation"
+          ]
+        },
+        {
+          "pattern": "다중 crossover가 있는 시스템에서 고전적 PM·GM 판정의 한계를 설명하시오.",
+          "required_anchor_ids": [
+            "multiple_or_missing_crossovers",
+            "phase_margin_calculation",
+            "gain_margin_calculation"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -918,16 +979,7 @@
       ],
       "id": "bode_frequency_response_stability_margin_bandwidth_COMPARE_v1",
       "title": "Bode 선도에 의한 안정여유·대역폭 해석과 주파수응답 설계",
-      "question_examples": [
-        "Bode 선도의 원리와 작성 방법을 설명하고 안정여유를 구하시오.",
-        "주어진 개루프 전달함수의 Bode 선도에서 위상여유와 이득여유를 계산하시오.",
-        "이득교차주파수와 위상교차주파수의 차이를 설명하시오.",
-        "폐루프 대역폭과 개루프 이득교차주파수의 관계를 설명하시오.",
-        "Bode 선도를 이용하여 목표 위상여유를 만족하는 제어기 이득을 설계하시오.",
-        "lead 또는 lag 보상기를 이용한 주파수응답 설계 절차를 설명하시오.",
-        "시간지연이 위상여유와 폐루프 안정성에 미치는 영향을 설명하시오.",
-        "다중 crossover가 있는 시스템에서 고전적 PM·GM 판정의 한계를 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "Bode",
         "Bode plot",
@@ -2235,16 +2287,95 @@
       "title_ko": "제어 소프트웨어 프로젝트, 설계문서, FAT·SAT·시운전 및 인수",
       "question_type": "PROCEDURE",
       "expected_question_patterns": [
-        "제어 소프트웨어 프로젝트의 Feasibility, Scope, Schedule과 Cost 관리 절차를 설명하시오.",
-        "URS, FRS, FDS와 SDS의 목적과 상호 추적관계를 설명하시오.",
-        "I/O list, Tag list, Alarm list, Interlock list와 Cause & Effect의 역할을 비교하시오.",
-        "제어시스템 FAT와 SAT의 목적, 시험환경, 시험항목과 한계를 비교하시오.",
-        "Loop test와 Site integration test의 대상, 절차와 판정기준을 설명하시오.",
-        "제어시스템 Commissioning 절차와 단계별 안전·품질 관리사항을 설명하시오.",
-        "Performance test와 Acceptance의 기준 및 증적 관리방안을 설명하시오.",
-        "Punch list, As-built document와 Handover 관리방안을 설명하시오.",
-        "FAT 이후 변경 발생 시 영향분석, baseline 갱신과 재시험 절차를 설명하시오.",
-        "제어 소프트웨어 프로젝트의 문서·시험·시운전·인수 전 과정을 연계하여 설명하시오."
+        {
+          "pattern": "제어 소프트웨어 프로젝트의 Feasibility, Scope, Schedule과 Cost 관리 절차를 설명하시오.",
+          "required_anchor_ids": [
+            "sw10_feasibility",
+            "sw10_scope_baseline",
+            "sw10_schedule_dependencies",
+            "sw10_cost_change_control"
+          ]
+        },
+        {
+          "pattern": "URS, FRS, FDS와 SDS의 목적과 상호 추적관계를 설명하시오.",
+          "required_anchor_ids": [
+            "sw10_urs",
+            "sw10_frs",
+            "sw10_fds",
+            "sw10_sds",
+            "sw10_document_hierarchy_traceability"
+          ]
+        },
+        {
+          "pattern": "I/O list, Tag list, Alarm list, Interlock list와 Cause & Effect의 역할을 비교하시오.",
+          "required_anchor_ids": [
+            "sw10_io_list",
+            "sw10_tag_list",
+            "sw10_alarm_list",
+            "sw10_interlock_list",
+            "sw10_cause_effect"
+          ]
+        },
+        {
+          "pattern": "제어시스템 FAT와 SAT의 목적, 시험환경, 시험항목과 한계를 비교하시오.",
+          "required_anchor_ids": [
+            "sw10_test_specification",
+            "sw10_fat",
+            "sw10_fat_limit",
+            "sw10_sat",
+            "sw10_fat_sat_relation"
+          ]
+        },
+        {
+          "pattern": "Loop test와 Site integration test의 대상, 절차와 판정기준을 설명하시오.",
+          "required_anchor_ids": [
+            "sw10_test_specification",
+            "sw10_loop_test",
+            "sw10_site_integration_test"
+          ]
+        },
+        {
+          "pattern": "제어시스템 Commissioning 절차와 단계별 안전·품질 관리사항을 설명하시오.",
+          "required_anchor_ids": [
+            "sw10_commissioning",
+            "sw10_test_specification",
+            "sw10_configuration_backup"
+          ]
+        },
+        {
+          "pattern": "Performance test와 Acceptance의 기준 및 증적 관리방안을 설명하시오.",
+          "required_anchor_ids": [
+            "sw10_performance_test",
+            "sw10_acceptance",
+            "sw10_test_specification"
+          ]
+        },
+        {
+          "pattern": "Punch list, As-built document와 Handover 관리방안을 설명하시오.",
+          "required_anchor_ids": [
+            "sw10_punch_list",
+            "sw10_as_built_handover"
+          ]
+        },
+        {
+          "pattern": "FAT 이후 변경 발생 시 영향분석, baseline 갱신과 재시험 절차를 설명하시오.",
+          "required_anchor_ids": [
+            "sw10_change_punch_closure",
+            "sw10_configuration_backup",
+            "sw10_test_specification"
+          ]
+        },
+        {
+          "pattern": "제어 소프트웨어 프로젝트의 문서·시험·시운전·인수 전 과정을 연계하여 설명하시오.",
+          "required_anchor_ids": [
+            "sw10_scope_project_execution",
+            "sw10_document_hierarchy_traceability",
+            "sw10_fat_sat_relation",
+            "sw10_commissioning",
+            "sw10_acceptance",
+            "sw10_as_built_handover"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -2425,18 +2556,7 @@
       ],
       "id": "control_software_project_engineering_documents_fat_sat_commissioning_acceptance_COMPARE_v1",
       "title": "제어 소프트웨어 프로젝트, 설계문서, FAT·SAT·시운전 및 인수",
-      "question_examples": [
-        "제어 소프트웨어 프로젝트의 Feasibility, Scope, Schedule과 Cost 관리 절차를 설명하시오.",
-        "URS, FRS, FDS와 SDS의 목적과 상호 추적관계를 설명하시오.",
-        "I/O list, Tag list, Alarm list, Interlock list와 Cause & Effect의 역할을 비교하시오.",
-        "제어시스템 FAT와 SAT의 목적, 시험환경, 시험항목과 한계를 비교하시오.",
-        "Loop test와 Site integration test의 대상, 절차와 판정기준을 설명하시오.",
-        "제어시스템 Commissioning 절차와 단계별 안전·품질 관리사항을 설명하시오.",
-        "Performance test와 Acceptance의 기준 및 증적 관리방안을 설명하시오.",
-        "Punch list, As-built document와 Handover 관리방안을 설명하시오.",
-        "FAT 이후 변경 발생 시 영향분석, baseline 갱신과 재시험 절차를 설명하시오.",
-        "제어 소프트웨어 프로젝트의 문서·시험·시운전·인수 전 과정을 연계하여 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "제어 소프트웨어 프로젝트 FAT SAT 시운전",
         "제어 시스템 설계문서 FAT SAT 인수",
@@ -5283,19 +5403,15 @@
         "Positioner 상세 교정, leakage class·packing 설계와 sizing·selection은 stable Topic ID hand-off로 제한했다.",
         "20개 Fact Anchor, 6개 Question Pattern, 8개 Recommended Outline과 16개 routing alias를 적용했다."
       ],
-      "id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
-      "title": "제어밸브 포지셔너·I/P 변환기·부스터·부속기기 및 교정",
+      "id": "control_valve_maintenance_inspection_troubleshooting_overhaul_reassembly_testing_IMPLEMENTATION_EVALUATION_v1",
+      "title": "제어밸브 정비·점검·고장진단·분해정비·재조립 및 시험",
       "question_examples": [
-        "4–20 mA command부터 I/P, positioner, actuator와 travel feedback까지 signal chain을 설명하시오.",
-        "Nozzle-flapper, force balance와 relay를 이용한 pneumatic positioner 원리를 설명하시오.",
-        "I/P converter의 4–20 mA·3–15 psi mapping과 supply-air dependency를 설명하시오.",
-        "Positioner direct·reverse action, actuator air action과 valve fail action을 비교하시오.",
-        "Volume booster의 pilot-pressure following, flow-capacity 기능과 bypass tradeoff를 설명하시오.",
-        "Filter regulator, lock-up relay, quick exhaust, solenoid valve와 volume tank를 비교하시오.",
-        "Zero·span·linkage·endpoint와 multipoint upstroke·downstroke calibration 절차를 설명하시오.",
-        "Split-range local mapping, gap·overlap와 calibration 방법을 설명하시오.",
-        "Loss of signal·air·power와 I/P·positioner·booster·accessory failure를 signal chain으로 진단하시오.",
-        "Command, current, pressure, travel, fail action과 calibration record를 통합 검증하시오."
+        "제어밸브의 안전격리부터 as-found 검사, 고장진단, 분해·정비·재조립, 시험 및 복구까지 절차를 설명하시오.",
+        "제어밸브의 stick-slip, deadband, hunting, 누설 및 응답지연의 원인과 점검순서를 설명하시오.",
+        "제어밸브 overhaul 시 분해, 세정, 부품검사, 수리·교체 판단 및 재조립 관리사항을 설명하시오.",
+        "제어밸브 정비 후 pressure, seat leakage, stroke, fail-action 시험과 복구 판정기준을 설명하시오.",
+        "제어밸브 현장정비와 정비관리, positioner 교정, 누설등급, 선정·설계 업무의 경계를 설명하시오.",
+        "제어밸브 반복고장의 현장 증거 확보, 원인분류, 재발방지 및 specialist hand-off 방법을 설명하시오."
       ],
       "topic_aliases": [
         "control valve maintenance inspection overhaul testing",
@@ -5316,20 +5432,41 @@
         "제어밸브 누설 stroke fail action 시험"
       ],
       "expected_structure": [
-        "Signal chain and feedback",
-        "Positioner and I/P principle",
-        "Action and fail chain",
-        "Mechanical feedback and calibration",
-        "Booster and pneumatic accessories",
-        "Failure, operating cases and records",
-        "Topic handoffs",
-        "Final integrated verification"
+        "현장정비 실행 범위와 O&M governance·교정·누설등급·선정업무 경계를 선언한다.",
+        "작업허가, 격리, 감압과 분해 전 상태기록을 수행한다.",
+        "증상별 failure mode를 분류하고 외부 원인을 먼저 배제한다.",
+        "표시·추적성을 유지하며 분해·세정하고 trim·stem·guide·body와 치수를 검사한다.",
+        "repair·replace·lapping 판단 후 seal 복원, 정렬·torque와 travel을 복구한다.",
+        "pressure boundary와 seat leakage를 목적·조건·허용기준에 따라 별도 검증한다.",
+        "up/down stroke, friction, hysteresis, deadband, response와 failure response를 검증한다.",
+        "보호장치 복구, 최종 walkdown, as-left 기록과 specialist hand-off를 완료한다."
       ],
       "high_score_features": [
-        "Signal chain, feedback, mapping, action, accessory, calibration, failure response와 records를 연결한다."
+        "작업허가·격리·감압·배출·세정과 zero-energy 확인을 정비의 선행조건으로 제시한다.",
+        "분해 전 as-found 상태와 증상·누설·travel·signal·air supply를 기록한다.",
+        "외부 원인을 먼저 배제한 뒤 내부 failure mode를 진단한다.",
+        "부품 순서·방향·orientation과 coupling 위치의 추적성을 유지한다.",
+        "trim·stem·guide·body의 손상형태와 치수 허용기준을 함께 평가한다.",
+        "repair·replace·lapping을 손상원인·수리한계·잔여수명·부품가용성으로 결정한다.",
+        "packing·gasket·seal의 재질·방향·preload와 friction trade-off를 설명한다.",
+        "재조립 시 정렬·체결 순서·torque·seat endpoint·rated travel을 복구한다.",
+        "pressure-boundary와 seat leakage 시험의 목적과 조건을 분리한다.",
+        "up/down multipoint stroke, friction, hysteresis, deadband와 response를 확인한다.",
+        "signal·air·power loss에서 fail position과 accessory 기능을 실제 시험한다.",
+        "as-found·as-left·교체부품·시험조건·허용기준·승인자를 추적 가능하게 기록한다.",
+        "정비관리·positioner 교정·누설등급·선정업무를 stable Topic ID로 hand-off한다."
       ],
       "low_score_patterns": [
-        "Device functions를 혼동하거나 fixed settings를 보편값으로 제시한다."
+        "작업허가·격리·감압 없이 바로 분해절차를 서술한다.",
+        "as-found 기록 없이 정비 후 결과만 제시한다.",
+        "air supply·signal·positioner·actuator·process disturbance 등 외부 원인을 생략한다.",
+        "세정과 오염관리 없이 육안검사만 수행한다.",
+        "치수 허용기준 없이 손상 여부를 주관적으로 판정한다.",
+        "repair·replace·lapping의 선택기준을 제시하지 않는다.",
+        "packing preload와 stem friction의 trade-off를 생략한다.",
+        "pressure test와 seat leakage test를 동일 시험으로 취급한다.",
+        "endpoint만 확인하고 multipoint up/down·fail-action 시험을 생략한다.",
+        "specialist hand-off 없이 sizing·교정·누설등급·선정 판단을 현장정비에서 종결한다."
       ],
       "field_connection_points": [
         "작업허가, LOTO, 감압·배출·세정과 zero-energy 상태 확인",
@@ -9148,11 +9285,47 @@
       "title_ko": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "expected_question_patterns": [
-        "피드백 시스템의 폐루프 전달함수와 민감도 함수를 설명하시오.",
-        "음의 피드백 시스템의 민감도 S와 상보 민감도 T의 의미를 설명하시오.",
-        "피드백 시스템의 시스템 형과 정상상태 오차의 관계를 설명하시오.",
-        "폐루프 제어계에서 외란 억제, 측정 잡음 및 안정성의 상충관계를 설명하시오.",
-        "Feedback System의 추종성, 민감도 및 정상상태 오차 개선 방법을 설명하시오."
+        {
+          "pattern": "피드백 시스템의 폐루프 전달함수와 민감도 함수를 설명하시오.",
+          "required_anchor_ids": [
+            "feedback_negative_loop_structure",
+            "feedback_closed_loop_transfer",
+            "feedback_sensitivity_functions"
+          ]
+        },
+        {
+          "pattern": "음의 피드백 시스템의 민감도 S와 상보 민감도 T의 의미를 설명하시오.",
+          "required_anchor_ids": [
+            "feedback_negative_loop_structure",
+            "feedback_sensitivity_functions",
+            "feedback_parameter_sensitivity"
+          ]
+        },
+        {
+          "pattern": "피드백 시스템의 시스템 형과 정상상태 오차의 관계를 설명하시오.",
+          "required_anchor_ids": [
+            "feedback_steady_state_error_final_value",
+            "feedback_system_type_error_constants",
+            "feedback_type_error_relationship"
+          ]
+        },
+        {
+          "pattern": "폐루프 제어계에서 외란 억제, 측정 잡음 및 안정성의 상충관계를 설명하시오.",
+          "required_anchor_ids": [
+            "feedback_disturbance_noise_paths",
+            "feedback_sensitivity_functions",
+            "feedback_stability_bandwidth_tradeoff"
+          ]
+        },
+        {
+          "pattern": "Feedback System의 추종성, 민감도 및 정상상태 오차 개선 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "feedback_parameter_sensitivity",
+            "feedback_type_error_relationship",
+            "feedback_integral_action_tradeoff",
+            "feedback_field_design_validation"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -9282,13 +9455,7 @@
       ],
       "id": "feedback_system_closed_loop_sensitivity_steady_state_error_COMPARE_v1",
       "title": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
-      "question_examples": [
-        "피드백 시스템의 폐루프 전달함수와 민감도 함수를 설명하시오.",
-        "음의 피드백 시스템의 민감도 S와 상보 민감도 T의 의미를 설명하시오.",
-        "피드백 시스템의 시스템 형과 정상상태 오차의 관계를 설명하시오.",
-        "폐루프 제어계에서 외란 억제, 측정 잡음 및 안정성의 상충관계를 설명하시오.",
-        "Feedback System의 추종성, 민감도 및 정상상태 오차 개선 방법을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "피드백 시스템",
         "feedback system",
@@ -14477,17 +14644,102 @@
       "title_ko": "계측제어 소프트웨어 수명주기, V-Model, 추적성, 검증 및 확인",
       "question_type": "PROCEDURE",
       "expected_question_patterns": [
-        "계측제어 소프트웨어 수명주기와 V-Model의 단계별 관계를 설명하시오.",
-        "Verification과 Validation의 차이와 적용방법을 설명하시오.",
-        "요구사항 추적성 매트릭스의 구성과 양방향 추적 방법을 설명하시오.",
-        "단위시험, 통합시험과 시스템시험을 비교하고 적용절차를 설명하시오.",
-        "정적분석, 동적분석과 회귀시험의 목적과 차이를 설명하시오.",
-        "계측제어 SW 요구사항 명세와 시험 가능한 수용기준 작성방법을 설명하시오.",
-        "Simulation, HIL과 Fault injection의 특징과 적용방안을 비교하시오.",
-        "제어 SW 결함관리, 변경영향 분석과 회귀시험의 관계를 설명하시오.",
-        "소프트웨어 아키텍처와 상세설계 산출물 및 검토항목을 설명하시오.",
-        "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오.",
-        "V-model이 검증·확인 활동을 체계화하지만 SIL 달성을 보장하지 않는 이유와 MC/DC의 별도 증거 역할을 설명"
+        {
+          "pattern": "계측제어 소프트웨어 수명주기와 V-Model의 단계별 관계를 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_scope_general_lifecycle",
+            "sw04_v_model_definition",
+            "sw04_requirements_specification",
+            "sw04_unit_test",
+            "sw04_integration_test",
+            "sw04_system_test"
+          ]
+        },
+        {
+          "pattern": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_verification_definition",
+            "sw04_validation_definition",
+            "sw04_verification_validation_relationship"
+          ]
+        },
+        {
+          "pattern": "요구사항 추적성 매트릭스의 구성과 양방향 추적 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_requirements_specification",
+            "sw04_rtm_bidirectional",
+            "sw04_evidence_and_auditability"
+          ]
+        },
+        {
+          "pattern": "단위시험, 통합시험과 시스템시험을 비교하고 적용절차를 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_unit_test",
+            "sw04_integration_test",
+            "sw04_system_test",
+            "sw04_test_specification"
+          ]
+        },
+        {
+          "pattern": "정적분석, 동적분석과 회귀시험의 목적과 차이를 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_static_analysis",
+            "sw04_dynamic_analysis",
+            "sw04_regression_test"
+          ]
+        },
+        {
+          "pattern": "계측제어 SW 요구사항 명세와 시험 가능한 수용기준 작성방법을 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_requirements_specification",
+            "sw04_test_specification",
+            "sw04_coverage_exit_criteria"
+          ]
+        },
+        {
+          "pattern": "Simulation, HIL과 Fault injection의 특징과 적용방안을 비교하시오.",
+          "required_anchor_ids": [
+            "sw04_simulation",
+            "sw04_hil",
+            "sw04_fault_injection",
+            "sw04_test_environment"
+          ]
+        },
+        {
+          "pattern": "제어 SW 결함관리, 변경영향 분석과 회귀시험의 관계를 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_defect_management",
+            "sw04_change_impact",
+            "sw04_regression_test",
+            "sw04_lifecycle_feedback"
+          ]
+        },
+        {
+          "pattern": "소프트웨어 아키텍처와 상세설계 산출물 및 검토항목을 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_software_architecture",
+            "sw04_detailed_design",
+            "sw04_review_approval"
+          ]
+        },
+        {
+          "pattern": "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_configuration_baseline",
+            "sw04_review_approval",
+            "sw04_evidence_and_auditability",
+            "sw04_verification_validation_relationship"
+          ]
+        },
+        {
+          "pattern": "V-model이 검증·확인 활동을 체계화하지만 SIL 달성을 보장하지 않는 이유와 MC/DC의 별도 증거 역할을 설명",
+          "required_anchor_ids": [
+            "sw04_v_model_definition",
+            "sw04_verification_validation_relationship",
+            "sw04_mcdc_detailed_coverage_boundary",
+            "vmodel_no_sil_guarantee__mcdc_adjacent_boundary"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -14695,19 +14947,7 @@
       ],
       "id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation_COMPARE_v1",
       "title": "계측제어 소프트웨어 수명주기, V-Model, 추적성, 검증 및 확인",
-      "question_examples": [
-        "계측제어 소프트웨어 수명주기와 V-Model의 단계별 관계를 설명하시오.",
-        "Verification과 Validation의 차이와 적용방법을 설명하시오.",
-        "요구사항 추적성 매트릭스의 구성과 양방향 추적 방법을 설명하시오.",
-        "단위시험, 통합시험과 시스템시험을 비교하고 적용절차를 설명하시오.",
-        "정적분석, 동적분석과 회귀시험의 목적과 차이를 설명하시오.",
-        "계측제어 SW 요구사항 명세와 시험 가능한 수용기준 작성방법을 설명하시오.",
-        "Simulation, HIL과 Fault injection의 특징과 적용방안을 비교하시오.",
-        "제어 SW 결함관리, 변경영향 분석과 회귀시험의 관계를 설명하시오.",
-        "소프트웨어 아키텍처와 상세설계 산출물 및 검토항목을 설명하시오.",
-        "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오.",
-        "V-model이 검증·확인 활동을 체계화하지만 SIL 달성을 보장하지 않는 이유와 MC/DC의 별도 증거 역할을 설명"
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "instrumentation control software lifecycle V-Model",
         "계측제어 소프트웨어 수명주기 V-Model",
@@ -17032,11 +17272,48 @@
       "title_ko": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
       "question_type": "CALC_DESIGN",
       "expected_question_patterns": [
-        "진상보상기와 지상보상기의 전달함수와 주파수응답 특성을 비교하여 설명하시오.",
-        "목표 위상여유를 만족하는 진상보상기의 α, T와 이득을 설계하시오.",
-        "정상상태 오차상수를 만족하는 지상보상기를 설계하시오.",
-        "진상·지상 결합보상기의 설계 절차와 성능 상충관계를 설명하시오.",
-        "보상 전후 Bode 선도와 시간응답을 비교하고 현장 적용 시 고려사항을 논하시오."
+        {
+          "pattern": "진상보상기와 지상보상기의 전달함수와 주파수응답 특성을 비교하여 설명하시오.",
+          "required_anchor_ids": [
+            "lead_lag_lead_pole_zero_geometry",
+            "lead_lag_lag_pole_zero_geometry",
+            "lead_lag_lead_maximum_phase_relation",
+            "lead_lag_lag_steady_state_error_improvement"
+          ]
+        },
+        {
+          "pattern": "목표 위상여유를 만족하는 진상보상기의 α, T와 이득을 설계하시오.",
+          "required_anchor_ids": [
+            "lead_lag_lead_maximum_phase_relation",
+            "lead_lag_lead_center_frequency_magnitude",
+            "lead_lag_lead_phase_margin_design_sequence"
+          ]
+        },
+        {
+          "pattern": "정상상태 오차상수를 만족하는 지상보상기를 설계하시오.",
+          "required_anchor_ids": [
+            "lead_lag_lag_pole_zero_geometry",
+            "lead_lag_lag_steady_state_error_improvement",
+            "lead_lag_lag_gain_ratio_error_constant"
+          ]
+        },
+        {
+          "pattern": "진상·지상 결합보상기의 설계 절차와 성능 상충관계를 설명하시오.",
+          "required_anchor_ids": [
+            "lead_lag_combined_design",
+            "lead_lag_design_objective",
+            "lead_lag_lead_bandwidth_noise_effort_tradeoff",
+            "lead_lag_lag_crossover_phase_loss"
+          ]
+        },
+        {
+          "pattern": "보상 전후 Bode 선도와 시간응답을 비교하고 현장 적용 시 고려사항을 논하시오.",
+          "required_anchor_ids": [
+            "lead_lag_root_locus_frequency_consistency",
+            "lead_lag_plant_robustness_limits",
+            "lead_lag_implementation_validation"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -17187,13 +17464,7 @@
       ],
       "id": "lead_lag_compensator_phase_margin_steady_state_error_COMPARE_v1",
       "title": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
-      "question_examples": [
-        "진상보상기와 지상보상기의 전달함수와 주파수응답 특성을 비교하여 설명하시오.",
-        "목표 위상여유를 만족하는 진상보상기의 α, T와 이득을 설계하시오.",
-        "정상상태 오차상수를 만족하는 지상보상기를 설계하시오.",
-        "진상·지상 결합보상기의 설계 절차와 성능 상충관계를 설명하시오.",
-        "보상 전후 Bode 선도와 시간응답을 비교하고 현장 적용 시 고려사항을 논하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "진상보상기",
         "진상 보상기",
@@ -17299,11 +17570,45 @@
       "title_ko": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
       "question_type": "CALC_DESIGN",
       "expected_question_patterns": [
-        "LQR 최적 상태피드백 제어기의 비용함수와 Riccati 방정식 및 설계절차를 설명하시오.",
-        "LQR에서 Q와 R 가중치가 상태응답과 제어입력에 미치는 영향을 설명하시오.",
-        "연속시간 LQR의 해 존재조건과 안정화 가능성 및 검출 가능성을 설명하시오.",
-        "LQR과 극점 배치의 차이 및 기준입력 추종을 위한 LQI 확장방법을 설명하시오.",
-        "CARE와 DARE를 비교하고 LQR 실제 구현 시 포화와 강인성 검증항목을 설명하시오."
+        {
+          "pattern": "LQR 최적 상태피드백 제어기의 비용함수와 Riccati 방정식 및 설계절차를 설명하시오.",
+          "required_anchor_ids": [
+            "state_lqr_design_objective_cost",
+            "state_lqr_weight_matrix_conditions",
+            "state_lqr_care_stabilizing_solution",
+            "state_lqr_optimal_gain_closed_loop"
+          ]
+        },
+        {
+          "pattern": "LQR에서 Q와 R 가중치가 상태응답과 제어입력에 미치는 영향을 설명하시오.",
+          "required_anchor_ids": [
+            "state_lqr_q_weight_state_tradeoff",
+            "state_lqr_r_weight_control_tradeoff",
+            "state_lqr_state_input_normalization_bryson"
+          ]
+        },
+        {
+          "pattern": "연속시간 LQR의 해 존재조건과 안정화 가능성 및 검출 가능성을 설명하시오.",
+          "required_anchor_ids": [
+            "state_lqr_existence_stabilizability_detectability",
+            "state_lqr_care_stabilizing_solution"
+          ]
+        },
+        {
+          "pattern": "LQR과 극점 배치의 차이 및 기준입력 추종을 위한 LQI 확장방법을 설명하시오.",
+          "required_anchor_ids": [
+            "state_lqr_pole_placement_distinction",
+            "state_lqr_tracking_prefilter_lqi"
+          ]
+        },
+        {
+          "pattern": "CARE와 DARE를 비교하고 LQR 실제 구현 시 포화와 강인성 검증항목을 설명하시오.",
+          "required_anchor_ids": [
+            "state_lqr_continuous_discrete_riccati_distinction",
+            "state_lqr_saturation_constraints_limit",
+            "state_lqr_robustness_observer_implementation_validation"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -17460,13 +17765,7 @@
       ],
       "id": "lqr_optimal_state_feedback_riccati_weighting_design_COMPARE_v1",
       "title": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
-      "question_examples": [
-        "LQR 최적 상태피드백 제어기의 비용함수와 Riccati 방정식 및 설계절차를 설명하시오.",
-        "LQR에서 Q와 R 가중치가 상태응답과 제어입력에 미치는 영향을 설명하시오.",
-        "연속시간 LQR의 해 존재조건과 안정화 가능성 및 검출 가능성을 설명하시오.",
-        "LQR과 극점 배치의 차이 및 기준입력 추종을 위한 LQI 확장방법을 설명하시오.",
-        "CARE와 DARE를 비교하고 LQR 실제 구현 시 포화와 강인성 검증항목을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "LQR",
         "linear quadratic regulator",
@@ -17942,11 +18241,55 @@
       "title_ko": "Nyquist 안정도 판별과 이득·위상여유",
       "question_type": "CALC_DESIGN",
       "expected_question_patterns": [
-        "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
-        "주어진 특성방정식의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
-        "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
-        "Nyquist 궤적에서 -1점 선회 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
-        "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오."
+        {
+          "pattern": "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+          "required_anchor_ids": [
+            "closed_loop_characteristic_equation",
+            "nyquist_contour_and_mapping",
+            "argument_principle_pnz_relation",
+            "critical_point_minus_one",
+            "open_loop_rhp_poles_count",
+            "closed_loop_rhp_poles_count"
+          ]
+        },
+        {
+          "pattern": "주어진 개루프 전달함수의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
+          "required_anchor_ids": [
+            "nyquist_contour_and_mapping",
+            "argument_principle_pnz_relation",
+            "critical_point_minus_one",
+            "open_loop_rhp_poles_count",
+            "closed_loop_rhp_poles_count",
+            "conjugate_symmetry"
+          ]
+        },
+        {
+          "pattern": "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 Nyquist 선도로 구하시오.",
+          "required_anchor_ids": [
+            "closed_loop_characteristic_equation",
+            "critical_point_minus_one",
+            "argument_principle_pnz_relation",
+            "field_robustness_validation"
+          ]
+        },
+        {
+          "pattern": "Nyquist 판별에서 허수축 극점의 우회와 복수 crossover 처리 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "imaginary_axis_pole_indentation",
+            "multiple_crossover_interpretation",
+            "conjugate_symmetry"
+          ]
+        },
+        {
+          "pattern": "Nyquist 선도에서 이득·위상여유와 시간지연을 고려한 강인성 조건을 설명하시오.",
+          "required_anchor_ids": [
+            "gain_margin_definition",
+            "phase_margin_definition",
+            "multiple_crossover_interpretation",
+            "time_delay_phase_effect",
+            "field_robustness_validation"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -18284,12 +18627,9 @@
       "routing_aliases": [
         "Nyquist",
         "Nyquist",
-        "Routh criterion",
-        "Routh stability criterion",
         "Nyquist plot",
         "Nyquist plot",
         "라우스 후르비츠",
-        "루스 후르비츠",
         "Nyquist 안정도 판별",
         "Nyquist 안정도 판별",
         "Nyquist 궤적",
@@ -18315,22 +18655,19 @@
         "CALC_DESIGN형 배열 작성, 부등식, 경계 검증과 해석을 함께 요구함.",
         "참조 Topic Pack의 라우팅·답안 필드를 복사하지 않고 전부 재작성함."
       ],
-      "id": "nyquist_stability_criterion_gain_phase_margin_COMPARE_v1",
-      "title": "Nyquist 안정도 판별과 이득·위상여유",
       "question_examples": [
         "Nyquist 안정도 판별법의 원리와 판별 절차를 설명하시오.",
-        "주어진 특성방정식의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
-        "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
-        "Nyquist 궤적에서 -1점 선회 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
-        "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오."
+        "주어진 개루프 전달함수의 Nyquist 궤적을 작성하고 안정 여부를 판별하시오.",
+        "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 Nyquist 선도로 구하시오.",
+        "Nyquist 판별에서 허수축 극점의 우회와 복수 crossover 처리 방법을 설명하시오.",
+        "Nyquist 선도에서 이득·위상여유와 시간지연을 고려한 강인성 조건을 설명하시오."
       ],
+      "id": "nyquist_stability_criterion_gain_phase_margin_COMPARE_v1",
+      "title": "Nyquist 안정도 판별과 이득·위상여유",
       "topic_aliases": [
         "Nyquist",
-        "Routh criterion",
-        "Routh stability criterion",
         "Nyquist plot",
         "라우스 후르비츠",
-        "루스 후르비츠",
         "Nyquist 안정도 판별",
         "Nyquist 궤적",
         "특성방정식 안정도",
@@ -19189,11 +19526,53 @@
       "title_ko": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
       "question_type": "PRINCIPLE",
       "expected_question_patterns": [
-        "저항형, 정전용량형, 인덕턴스형 센서의 측정원리와 전기적 출력 변환방법을 설명하시오.",
-        "R, C, L 센서에서 재료 물성과 기하학적 변화가 감도에 미치는 영향을 설명하시오.",
-        "Young's modulus, 도전율, 유전율과 투자율을 센서 변환원리와 연계하여 설명하시오.",
-        "저항·정전용량·인덕턴스형 센서의 기본식과 신호조절회로를 비교하시오.",
-        "수동형 파라미터 센서의 감도, 오차요인과 교정방법을 설명하시오."
+        {
+          "pattern": "저항형, 정전용량형, 인덕턴스형 센서의 측정원리와 전기적 출력 변환방법을 설명하시오.",
+          "required_anchor_ids": [
+            "sensor_resistive_geometry_conductivity_relation",
+            "sensor_resistive_voltage_current_conversion",
+            "sensor_capacitive_geometry_permittivity_relation",
+            "sensor_capacitive_dynamic_current_readout",
+            "sensor_inductive_magnetic_circuit_permeability_relation",
+            "sensor_inductive_voltage_impedance_readout"
+          ]
+        },
+        {
+          "pattern": "R, C, L 센서에서 재료 물성과 기하학적 변화가 감도에 미치는 영향을 설명하시오.",
+          "required_anchor_ids": [
+            "sensor_material_property_geometry_separation",
+            "sensor_resistive_geometry_conductivity_relation",
+            "sensor_capacitive_geometry_permittivity_relation",
+            "sensor_inductive_gap_eddy_current_conductivity"
+          ]
+        },
+        {
+          "pattern": "Young's modulus, 도전율, 유전율과 투자율을 센서 변환원리와 연계하여 설명하시오.",
+          "required_anchor_ids": [
+            "sensor_mechanical_stress_strain_youngs_modulus",
+            "sensor_material_property_geometry_separation",
+            "sensor_resistive_geometry_conductivity_relation",
+            "sensor_capacitive_geometry_permittivity_relation",
+            "sensor_inductive_magnetic_circuit_permeability_relation"
+          ]
+        },
+        {
+          "pattern": "저항·정전용량·인덕턴스형 센서의 기본식과 신호조절회로를 비교하시오.",
+          "required_anchor_ids": [
+            "sensor_resistive_voltage_current_conversion",
+            "sensor_capacitive_dynamic_current_readout",
+            "sensor_inductive_voltage_impedance_readout",
+            "sensor_rcl_excitation_signal_conditioning"
+          ]
+        },
+        {
+          "pattern": "수동형 파라미터 센서의 감도, 오차요인과 교정방법을 설명하시오.",
+          "required_anchor_ids": [
+            "sensor_rcl_sensitivity_linearity_environment",
+            "sensor_rcl_calibration_implementation_validation",
+            "sensor_passive_transduction_chain"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -19334,13 +19713,7 @@
       ],
       "id": "passive_sensor_resistive_capacitive_inductive_transduction_COMPARE_v1",
       "title": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
-      "question_examples": [
-        "저항형, 정전용량형, 인덕턴스형 센서의 측정원리와 전기적 출력 변환방법을 설명하시오.",
-        "R, C, L 센서에서 재료 물성과 기하학적 변화가 감도에 미치는 영향을 설명하시오.",
-        "Young's modulus, 도전율, 유전율과 투자율을 센서 변환원리와 연계하여 설명하시오.",
-        "저항·정전용량·인덕턴스형 센서의 기본식과 신호조절회로를 비교하시오.",
-        "수동형 파라미터 센서의 감도, 오차요인과 교정방법을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "저항형 센서",
         "정전용량형 센서",
@@ -19867,10 +20240,43 @@
       "title_ko": "PID 제어기 튜닝 순서와 P/I/D 게인 영향",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "expected_question_patterns": [
-        "PID 제어기의 P, I, D 게인 영향과 튜닝 순서를 설명하시오.",
-        "PID 튜닝에서 P, I, D 게인을 어떤 순서로 조정하는지 설명하시오.",
-        "PID 제어에서 I 게인과 D 게인의 역할 및 튜닝상 주의점을 설명하시오.",
-        "PID 제어기의 오버슈트, 정상상태 오차, 감쇠 특성과 게인 조정 관계를 설명하시오."
+        {
+          "pattern": "PID 제어기의 P, I, D 게인 영향과 튜닝 순서를 설명하시오.",
+          "required_anchor_ids": [
+            "pid_controller_definition",
+            "p_action_effect",
+            "i_action_effect",
+            "d_action_effect",
+            "general_tuning_sequence"
+          ]
+        },
+        {
+          "pattern": "PID 튜닝에서 P, I, D 게인을 어떤 순서로 조정하는지 설명하시오.",
+          "required_anchor_ids": [
+            "p_action_effect",
+            "i_action_effect",
+            "d_action_effect",
+            "general_tuning_sequence",
+            "field_constraints"
+          ]
+        },
+        {
+          "pattern": "PID 제어에서 I 게인과 D 게인의 역할 및 튜닝상 주의점을 설명하시오.",
+          "required_anchor_ids": [
+            "i_action_effect",
+            "d_action_effect",
+            "field_constraints"
+          ]
+        },
+        {
+          "pattern": "PID 제어기의 오버슈트, 정상상태 오차, 감쇠 특성과 게인 조정 관계를 설명하시오.",
+          "required_anchor_ids": [
+            "p_action_effect",
+            "i_action_effect",
+            "d_action_effect",
+            "general_tuning_sequence"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -19949,12 +20355,7 @@
       ],
       "id": "pid_controller_tuning_sequence_gain_effects_COMPARE_v1",
       "title": "PID 제어기 튜닝 순서와 P/I/D 게인 영향",
-      "question_examples": [
-        "PID 제어기의 P, I, D 게인 영향과 튜닝 순서를 설명하시오.",
-        "PID 튜닝에서 P, I, D 게인을 어떤 순서로 조정하는지 설명하시오.",
-        "PID 제어에서 I 게인과 D 게인의 역할 및 튜닝상 주의점을 설명하시오.",
-        "PID 제어기의 오버슈트, 정상상태 오차, 감쇠 특성과 게인 조정 관계를 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "pid 튜닝 순서",
         "pid gain tuning sequence",
@@ -20669,16 +21070,16 @@
         "스트레인 게이지식 로드셀과 정적·동적 선정기준을 비교한다."
       ],
       "low_score_patterns": [
-        "압전센서는 역압전효과만을 이용하여 힘을 측정한다.",
-        "Q=dF의 d는 힘을 시간으로 미분하는 연산자이다.",
-        "압전센서는 정하중을 시간 제한 없이 일정한 출력으로 측정할 수 있다.",
-        "이상적 전하증폭기의 출력은 센서와 케이블 정전용량에 직접 비례한다.",
-        "전하감도 pC/N와 전압감도 mV/N는 조건 없이 동일한 값이다.",
-        "압전센서의 공진주파수에서 측정 정확도가 항상 가장 높다.",
-        "IEPE 센서는 내장 전자회로가 있어도 정전류 여자전원이 필요하지 않다.",
-        "케이블 움직임과 커넥터 절연상태는 전하출력에 영향을 주지 않는다.",
-        "체결토크와 설치면 강성은 가속도계 주파수응답에 영향을 주지 않는다.",
-        "압전식 힘센서와 스트레인 게이지식 로드셀은 정적·동적 적용범위가 동일하다."
+        "직접효과와 역압전효과의 구분 누락",
+        "Q=dF의 d를 재료상수로 설명하지 않음",
+        "전기적 등가회로 누락",
+        "정적 측정 한계와 시정수 누락",
+        "전하증폭기와 전압증폭기 혼동",
+        "IEPE 정전류 여자 누락",
+        "감도 단위 구분 누락",
+        "공진과 평탄대역 구분 누락",
+        "설치·케이블·온도오차 누락",
+        "스트레인 게이지식 로드셀과의 선정경계 누락"
       ],
       "field_connection_points": [
         "정하중 유지시간, 최소 측정주파수와 동적범위를 기준으로 스트레인 게이지식 로드셀과 압전식 센서를 구분하여 선정한다.",
@@ -21433,14 +21834,74 @@
       "title_ko": "공정제어 Loop Architecture: Cascade·Ratio·Feedforward·Override·Split-Range",
       "question_type": "COMPARE_SELECTION",
       "expected_question_patterns": [
-        "단일루프와 다중루프 제어의 구조와 선정기준을 설명하시오.",
-        "Cascade 제어의 구성, 적용조건과 장단점을 설명하시오.",
-        "Ratio 제어와 Feedforward 제어의 원리 및 적용방법을 비교하시오.",
-        "Feedforward와 Feedback 결합제어의 필요성과 구현 시 고려사항을 설명하시오.",
-        "Override 또는 Selective Control의 구조와 적용 시 주의사항을 설명하시오.",
-        "Split-range Control의 원리, 적용사례와 전환부 문제점을 설명하시오.",
-        "Cascade, Ratio, Feedforward, Override, Split-range 제어방식을 비교하고 공정별 선정기준을 제시하시오.",
-        "공정제어의 단일·다중루프 제어설계와 현장 적용 시 고려사항을 설명하시오."
+        {
+          "pattern": "단일루프와 다중루프 제어의 구조와 선정기준을 설명하시오.",
+          "required_anchor_ids": [
+            "process_loop_signal_chain",
+            "single_loop_architecture",
+            "loop_interaction_coordination",
+            "architecture_selection_criteria"
+          ]
+        },
+        {
+          "pattern": "Cascade 제어의 구성, 적용조건과 장단점을 설명하시오.",
+          "required_anchor_ids": [
+            "cascade_structure",
+            "cascade_secondary_faster",
+            "cascade_disturbance_condition"
+          ]
+        },
+        {
+          "pattern": "Ratio 제어와 Feedforward 제어의 원리 및 적용방법을 비교하시오.",
+          "required_anchor_ids": [
+            "ratio_control_structure",
+            "ratio_scaling_and_low_flow",
+            "feedforward_principle",
+            "feedforward_feedback_combination"
+          ]
+        },
+        {
+          "pattern": "Feedforward와 Feedback 결합제어의 필요성과 구현 시 고려사항을 설명하시오.",
+          "required_anchor_ids": [
+            "feedforward_principle",
+            "feedforward_feedback_combination",
+            "field_implementation_validation"
+          ]
+        },
+        {
+          "pattern": "Override 또는 Selective Control의 구조와 적용 시 주의사항을 설명하시오.",
+          "required_anchor_ids": [
+            "override_selective_control",
+            "override_tracking_antiwindup"
+          ]
+        },
+        {
+          "pattern": "Split-range Control의 원리, 적용사례와 전환부 문제점을 설명하시오.",
+          "required_anchor_ids": [
+            "split_range_control",
+            "split_range_transition_design"
+          ]
+        },
+        {
+          "pattern": "Cascade, Ratio, Feedforward, Override, Split-range 제어방식을 비교하고 공정별 선정기준을 제시하시오.",
+          "required_anchor_ids": [
+            "cascade_structure",
+            "ratio_control_structure",
+            "feedforward_principle",
+            "override_selective_control",
+            "split_range_control",
+            "architecture_selection_criteria"
+          ]
+        },
+        {
+          "pattern": "공정제어의 단일·다중루프 제어설계와 현장 적용 시 고려사항을 설명하시오.",
+          "required_anchor_ids": [
+            "single_loop_architecture",
+            "loop_interaction_coordination",
+            "architecture_selection_criteria",
+            "field_implementation_validation"
+          ]
+        }
       ],
       "high_score_points": [
         "PV, SP, CO, MV와 transmitter-controller-final element-process의 기본 loop를 정확히 정의한다.",
@@ -21586,16 +22047,7 @@
       ],
       "id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range_COMPARE_v1",
       "title": "공정제어 Loop Architecture: Cascade·Ratio·Feedforward·Override·Split-Range",
-      "question_examples": [
-        "단일루프와 다중루프 제어의 구조와 선정기준을 설명하시오.",
-        "Cascade 제어의 구성, 적용조건과 장단점을 설명하시오.",
-        "Ratio 제어와 Feedforward 제어의 원리 및 적용방법을 비교하시오.",
-        "Feedforward와 Feedback 결합제어의 필요성과 구현 시 고려사항을 설명하시오.",
-        "Override 또는 Selective Control의 구조와 적용 시 주의사항을 설명하시오.",
-        "Split-range Control의 원리, 적용사례와 전환부 문제점을 설명하시오.",
-        "Cascade, Ratio, Feedforward, Override, Split-range 제어방식을 비교하고 공정별 선정기준을 제시하시오.",
-        "공정제어의 단일·다중루프 제어설계와 현장 적용 시 고려사항을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "공정제어 루프",
         "process control loop",
@@ -22023,11 +22475,54 @@
       "title_ko": "근궤적법에 의한 안정도 해석과 제어기 이득 설계",
       "question_type": "CALC_DESIGN",
       "expected_question_patterns": [
-        "근궤적법의 원리와 작성 규칙을 설명하고, 이득 변화에 따른 폐루프 안정성과 제어기 이득 설계 방법을 설명하시오.",
-        "주어진 개루프 전달함수의 근궤적을 작성하고 폐루프 시스템의 안정 이득 범위를 구하시오.",
-        "근궤적의 실축 구간, 점근선, 이탈점과 허수축 교차 이득을 계산하시오.",
-        "목표 감쇠비와 정착시간을 만족하는 우세극 및 제어기 이득을 근궤적법으로 설계하시오.",
-        "목표 극점이 기존 근궤적 위에 없을 때 lead, lag 또는 PID 보상기 설계 방법을 설명하시오."
+        {
+          "pattern": "근궤적법의 원리와 작성 규칙을 설명하고, 이득 변화에 따른 폐루프 안정성과 제어기 이득 설계 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "closed_loop_pole_gain_relationship",
+            "root_locus_definition",
+            "root_locus_start_end_points",
+            "real_axis_segment_rule",
+            "asymptote_count_and_angles",
+            "gain_from_magnitude_condition"
+          ]
+        },
+        {
+          "pattern": "주어진 개루프 전달함수의 근궤적을 작성하고 폐루프 시스템의 안정 이득 범위를 구하시오.",
+          "required_anchor_ids": [
+            "closed_loop_pole_gain_relationship",
+            "root_locus_start_end_points",
+            "real_axis_segment_rule",
+            "imaginary_axis_crossing",
+            "gain_from_magnitude_condition"
+          ]
+        },
+        {
+          "pattern": "근궤적의 실축 구간, 점근선, 이탈점과 허수축 교차 이득을 계산하시오.",
+          "required_anchor_ids": [
+            "real_axis_segment_rule",
+            "asymptote_count_and_angles",
+            "asymptote_centroid",
+            "breakaway_break_in_points",
+            "imaginary_axis_crossing"
+          ]
+        },
+        {
+          "pattern": "목표 감쇠비와 정착시간을 만족하는 우세극 및 제어기 이득을 근궤적법으로 설계하시오.",
+          "required_anchor_ids": [
+            "dominant_pole_design",
+            "transient_response_mapping",
+            "angle_condition",
+            "gain_from_magnitude_condition"
+          ]
+        },
+        {
+          "pattern": "목표 극점이 기존 근궤적 위에 없을 때 lead, lag 또는 PID 보상기 설계 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "compensator_design_application",
+            "angle_condition",
+            "gain_from_magnitude_condition"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -22398,13 +22893,7 @@
       ],
       "id": "root_locus_stability_gain_design_COMPARE_v1",
       "title": "근궤적법에 의한 안정도 해석과 제어기 이득 설계",
-      "question_examples": [
-        "근궤적법의 원리와 작성 규칙을 설명하고, 이득 변화에 따른 폐루프 안정성과 제어기 이득 설계 방법을 설명하시오.",
-        "주어진 개루프 전달함수의 근궤적을 작성하고 폐루프 시스템의 안정 이득 범위를 구하시오.",
-        "근궤적의 실축 구간, 점근선, 이탈점과 허수축 교차 이득을 계산하시오.",
-        "목표 감쇠비와 정착시간을 만족하는 우세극 및 제어기 이득을 근궤적법으로 설계하시오.",
-        "목표 극점이 기존 근궤적 위에 없을 때 lead, lag 또는 PID 보상기 설계 방법을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "근궤적",
         "근궤적법",
@@ -22481,11 +22970,48 @@
       "title_ko": "Routh-Hurwitz 안정도 판별과 제어기 이득 범위",
       "question_type": "CALC_DESIGN",
       "expected_question_patterns": [
-        "Routh-Hurwitz 안정도 판별법의 원리와 판별 절차를 설명하시오.",
-        "주어진 특성방정식의 Routh 배열을 작성하고 안정 여부를 판별하시오.",
-        "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
-        "Routh 배열에서 첫 열 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
-        "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오."
+        {
+          "pattern": "Routh-Hurwitz 안정도 판별법의 원리와 판별 절차를 설명하시오.",
+          "required_anchor_ids": [
+            "asymptotic_stability_open_lhp",
+            "first_column_sign_changes_rhp_count",
+            "routh_first_two_rows_layout",
+            "routh_recursive_row_calculation"
+          ]
+        },
+        {
+          "pattern": "주어진 특성방정식의 Routh 배열을 작성하고 안정 여부를 판별하시오.",
+          "required_anchor_ids": [
+            "routh_first_two_rows_layout",
+            "routh_recursive_row_calculation",
+            "first_column_sign_changes_rhp_count",
+            "asymptotic_stability_open_lhp"
+          ]
+        },
+        {
+          "pattern": "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
+          "required_anchor_ids": [
+            "gain_range_first_column_inequalities",
+            "gain_boundary_requires_verification",
+            "field_gain_selection_requires_margin"
+          ]
+        },
+        {
+          "pattern": "Routh 배열에서 첫 열 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "zero_first_column_epsilon_limit",
+            "all_zero_row_auxiliary_polynomial",
+            "imaginary_axis_roots_stability_class"
+          ]
+        },
+        {
+          "pattern": "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오.",
+          "required_anchor_ids": [
+            "relative_stability_axis_shift",
+            "gain_range_first_column_inequalities",
+            "gain_boundary_requires_verification"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -22597,13 +23123,7 @@
       ],
       "id": "routh_hurwitz_stability_criterion_gain_range_COMPARE_v1",
       "title": "Routh-Hurwitz 안정도 판별과 제어기 이득 범위",
-      "question_examples": [
-        "Routh-Hurwitz 안정도 판별법의 원리와 판별 절차를 설명하시오.",
-        "주어진 특성방정식의 Routh 배열을 작성하고 안정 여부를 판별하시오.",
-        "폐루프 특성방정식에 포함된 제어기 이득 K의 안정 범위를 구하시오.",
-        "Routh 배열에서 첫 열 원소가 0인 경우와 한 행 전체가 0인 경우의 처리 방법을 설명하시오.",
-        "모든 폐루프 극점의 실수부가 -α보다 작도록 하는 이득 조건을 구하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "Routh-Hurwitz",
         "Routh Hurwitz",
@@ -22701,9 +23221,33 @@
       "title_ko": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "expected_question_patterns": [
-        "RTD 온도센서의 측정원리와 Pt100의 특성을 설명하시오.",
-        "Pt100의 2선식·3선식·4선식 결선 및 리드선 저항 보상을 설명하시오.",
-        "RTD의 측정전류, 자기발열 및 배선방식 선정기준을 설명하시오."
+        {
+          "pattern": "RTD 온도센서의 측정원리와 Pt100의 특성을 설명하시오.",
+          "required_anchor_ids": [
+            "rtd_temperature_measurement_chain",
+            "rtd_metal_resistance_temperature_principle",
+            "rtd_pt100_reference_resistance_alpha_standard",
+            "rtd_callendar_van_dusen_characteristic"
+          ]
+        },
+        {
+          "pattern": "Pt100의 2선식·3선식·4선식 결선 및 리드선 저항 보상을 설명하시오.",
+          "required_anchor_ids": [
+            "rtd_two_wire_lead_resistance_error",
+            "rtd_three_wire_bridge_compensation_assumptions",
+            "rtd_four_wire_kelvin_measurement",
+            "rtd_wiring_method_selection_tradeoff"
+          ]
+        },
+        {
+          "pattern": "RTD의 측정전류, 자기발열 및 배선방식 선정기준을 설명하시오.",
+          "required_anchor_ids": [
+            "rtd_excitation_voltage_measurement",
+            "rtd_self_heating_thermal_error",
+            "rtd_wiring_method_selection_tradeoff",
+            "rtd_fault_diagnostics_environment_validation"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -22820,11 +23364,7 @@
       ],
       "id": "rtd_temperature_sensor_principle_pt100_wiring_compensation_COMPARE_v1",
       "title": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
-      "question_examples": [
-        "RTD 온도센서의 측정원리와 Pt100의 특성을 설명하시오.",
-        "Pt100의 2선식·3선식·4선식 결선 및 리드선 저항 보상을 설명하시오.",
-        "RTD의 측정전류, 자기발열 및 배선방식 선정기준을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "RTD",
         "Pt100",
@@ -23246,11 +23786,51 @@
       "title_ko": "감쇠비에 따른 2차 지연시스템 응답 특성 비교",
       "question_type": "COMPARE_SELECTION",
       "expected_question_patterns": [
-        "2차 지연시스템의 응답 특성을 감쇠비에 따라 구분하고, 그 특성을 비교하여 설명하시오.",
-        "감쇠비 ζ에 따른 2차 시스템의 과도응답 특성을 설명하시오.",
-        "2차 시스템에서 부족감쇠, 임계감쇠, 과대감쇠의 차이를 설명하시오.",
-        "2차 시스템의 극점 위치와 감쇠비의 관계를 설명하시오.",
-        "2차 시스템의 감쇠비가 오버슈트, 진동성, 정착시간에 미치는 영향을 설명하시오."
+        {
+          "pattern": "2차 지연시스템의 응답 특성을 감쇠비에 따라 구분하고, 그 특성을 비교하여 설명하시오.",
+          "required_anchor_ids": [
+            "so2_standard_transfer_function",
+            "so2_damping_ratio_definition",
+            "so2_pole_response_relationship",
+            "so2_underdamped_response",
+            "so2_critical_damping_response",
+            "so2_overdamped_response"
+          ]
+        },
+        {
+          "pattern": "감쇠비 ζ에 따른 2차 시스템의 과도응답 특성을 설명하시오.",
+          "required_anchor_ids": [
+            "so2_damping_ratio_definition",
+            "so2_pole_response_relationship",
+            "so2_underdamped_response",
+            "so2_critical_damping_response",
+            "so2_overdamped_response"
+          ]
+        },
+        {
+          "pattern": "2차 시스템에서 부족감쇠, 임계감쇠, 과대감쇠의 차이를 설명하시오.",
+          "required_anchor_ids": [
+            "so2_underdamped_response",
+            "so2_critical_damping_response",
+            "so2_overdamped_response"
+          ]
+        },
+        {
+          "pattern": "2차 시스템의 극점 위치와 감쇠비의 관계를 설명하시오.",
+          "required_anchor_ids": [
+            "so2_damping_ratio_definition",
+            "so2_pole_response_relationship",
+            "so2_zero_negative_damping"
+          ]
+        },
+        {
+          "pattern": "2차 시스템의 감쇠비가 오버슈트, 진동성, 정착시간에 미치는 영향을 설명하시오.",
+          "required_anchor_ids": [
+            "so2_underdamped_response",
+            "so2_design_tradeoff",
+            "so2_pole_response_relationship"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -23411,13 +23991,7 @@
       ],
       "id": "second_order_lag_response_by_damping_ratio_COMPARE_v1",
       "title": "감쇠비에 따른 2차 지연시스템 응답 특성 비교",
-      "question_examples": [
-        "2차 지연시스템의 응답 특성을 감쇠비에 따라 구분하고, 그 특성을 비교하여 설명하시오.",
-        "감쇠비 ζ에 따른 2차 시스템의 과도응답 특성을 설명하시오.",
-        "2차 시스템에서 부족감쇠, 임계감쇠, 과대감쇠의 차이를 설명하시오.",
-        "2차 시스템의 극점 위치와 감쇠비의 관계를 설명하시오.",
-        "2차 시스템의 감쇠비가 오버슈트, 진동성, 정착시간에 미치는 영향을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "감쇠비에 따른 2차 지연시스템 응답 특성 비교",
         "2차 지연시스템의 감쇠비에 따른 응답 특성을 구분하고 비교하시오.",
@@ -23555,9 +24129,29 @@
       "title_ko": "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "expected_question_patterns": [
-        "표준 2차 시스템의 주파수응답과 공진주파수를 설명하시오.",
-        "2차계에서 감쇠비와 공진주파수의 관계를 설명하시오.",
-        "시간응답 overshoot와 주파수응답 resonance의 차이를 설명하시오."
+        {
+          "pattern": "표준 2차 시스템의 주파수응답과 공진주파수를 설명하시오.",
+          "required_anchor_ids": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "pattern": "2차계에서 감쇠비와 공진주파수의 관계를 설명하시오.",
+          "required_anchor_ids": [
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "pattern": "시간응답 overshoot와 주파수응답 resonance의 차이를 설명하시오.",
+          "required_anchor_ids": [
+            "F3",
+            "F4",
+            "F5"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -23635,11 +24229,7 @@
       ],
       "id": "second_order_system_resonance_frequency_response_COMPARE_v1",
       "title": "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안",
-      "question_examples": [
-        "표준 2차 시스템의 주파수응답과 공진주파수를 설명하시오.",
-        "2차계에서 감쇠비와 공진주파수의 관계를 설명하시오.",
-        "시간응답 overshoot와 주파수응답 resonance의 차이를 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "2차 시스템 주파수응답과 공진주파수 해석형 모범 답안",
         "표준 2차 시스템의 주파수응답과 공진주파수를 설명하시오.",
@@ -25063,11 +25653,48 @@
       "title_ko": "상태피드백 기준입력 추종·프리필터·적분보상 설계",
       "question_type": "CALC_DESIGN",
       "expected_question_patterns": [
-        "상태피드백 제어에서 기준입력 추종과 정상상태 오차 보상 방법을 설명하시오.",
-        "상태피드백 프리필터 N_r을 정상상태 방정식으로 유도하고 적용조건을 설명하시오.",
-        "적분상태를 포함한 상태공간 서보시스템의 구성과 설계조건을 설명하시오.",
-        "프리필터와 적분보상의 차이, 장단점과 적용방법을 비교하시오.",
-        "관측기 기반 상태피드백 추종제어에서 포화와 anti-windup을 포함한 검증항목을 설명하시오."
+        {
+          "pattern": "상태피드백 제어에서 기준입력 추종과 정상상태 오차 보상 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "state_tracking_design_objective",
+            "state_tracking_prefilter_steady_state_derivation",
+            "state_tracking_integral_internal_model_principle",
+            "state_tracking_prefilter_integral_role_separation"
+          ]
+        },
+        {
+          "pattern": "상태피드백 프리필터 N_r을 정상상태 방정식으로 유도하고 적용조건을 설명하시오.",
+          "required_anchor_ids": [
+            "state_tracking_feedback_law_closed_loop",
+            "state_tracking_prefilter_steady_state_derivation",
+            "state_tracking_prefilter_existence_model_dependence"
+          ]
+        },
+        {
+          "pattern": "적분상태를 포함한 상태공간 서보시스템의 구성과 설계조건을 설명하시오.",
+          "required_anchor_ids": [
+            "state_tracking_integral_internal_model_principle",
+            "state_tracking_augmented_system_formulation",
+            "state_tracking_augmented_controllability_stabilizability"
+          ]
+        },
+        {
+          "pattern": "프리필터와 적분보상의 차이, 장단점과 적용방법을 비교하시오.",
+          "required_anchor_ids": [
+            "state_tracking_prefilter_steady_state_derivation",
+            "state_tracking_prefilter_existence_model_dependence",
+            "state_tracking_prefilter_integral_role_separation",
+            "state_tracking_disturbance_reference_performance"
+          ]
+        },
+        {
+          "pattern": "관측기 기반 상태피드백 추종제어에서 포화와 anti-windup을 포함한 검증항목을 설명하시오.",
+          "required_anchor_ids": [
+            "state_tracking_observer_separation_principle",
+            "state_tracking_saturation_anti_windup",
+            "state_tracking_implementation_validation"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -25211,13 +25838,7 @@
       ],
       "id": "state_feedback_reference_tracking_prefilter_integral_action_COMPARE_v1",
       "title": "상태피드백 기준입력 추종·프리필터·적분보상 설계",
-      "question_examples": [
-        "상태피드백 제어에서 기준입력 추종과 정상상태 오차 보상 방법을 설명하시오.",
-        "상태피드백 프리필터 N_r을 정상상태 방정식으로 유도하고 적용조건을 설명하시오.",
-        "적분상태를 포함한 상태공간 서보시스템의 구성과 설계조건을 설명하시오.",
-        "프리필터와 적분보상의 차이, 장단점과 적용방법을 비교하시오.",
-        "관측기 기반 상태피드백 추종제어에서 포화와 anti-windup을 포함한 검증항목을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "상태피드백 기준입력 추종",
         "상태 피드백 추종",
@@ -25319,14 +25940,69 @@
       "title_ko": "상태공간 모델의 제어가능성·관측가능성과 극점배치 설계",
       "question_type": "CALC_DESIGN",
       "expected_question_patterns": [
-        "상태공간 모델의 구성과 전달함수와의 관계를 설명하시오.",
-        "주어진 A, B 행렬의 제어가능성을 판정하고 그 의미를 설명하시오.",
-        "주어진 A, C 행렬의 관측가능성을 판정하고 그 의미를 설명하시오.",
-        "PBH test를 이용하여 제어가능성·관측가능성을 판정하시오.",
-        "상태피드백으로 목표 폐루프 극점을 만족하는 K를 설계하시오.",
-        "전상태 관측기의 원리와 observer gain L의 설계 절차를 설명하시오.",
-        "separation principle을 이용한 observer 기반 상태피드백 설계를 설명하시오.",
-        "상태피드백 시스템의 정상상태 오차 개선과 현장 구현 고려사항을 설명하시오."
+        {
+          "pattern": "상태공간 모델의 구성과 전달함수와의 관계를 설명하시오.",
+          "required_anchor_ids": [
+            "state_space_model_and_dimensions",
+            "transfer_function_realization_relation",
+            "eigenvalue_pole_minimal_realization"
+          ]
+        },
+        {
+          "pattern": "주어진 A, B 행렬의 제어가능성을 판정하고 그 의미를 설명하시오.",
+          "required_anchor_ids": [
+            "state_space_model_and_dimensions",
+            "controllability_matrix_rank",
+            "pbh_controllability_stabilizability"
+          ]
+        },
+        {
+          "pattern": "주어진 A, C 행렬의 관측가능성을 판정하고 그 의미를 설명하시오.",
+          "required_anchor_ids": [
+            "state_space_model_and_dimensions",
+            "observability_matrix_rank",
+            "pbh_observability_detectability"
+          ]
+        },
+        {
+          "pattern": "PBH test를 이용하여 제어가능성·관측가능성을 판정하시오.",
+          "required_anchor_ids": [
+            "pbh_controllability_stabilizability",
+            "pbh_observability_detectability"
+          ]
+        },
+        {
+          "pattern": "상태피드백으로 목표 폐루프 극점을 만족하는 K를 설계하시오.",
+          "required_anchor_ids": [
+            "state_feedback_closed_loop",
+            "pole_placement_conditions",
+            "ackermann_and_numerical_limits"
+          ]
+        },
+        {
+          "pattern": "전상태 관측기의 원리와 observer gain L의 설계 절차를 설명하시오.",
+          "required_anchor_ids": [
+            "observer_error_dynamics",
+            "pbh_observability_detectability",
+            "separation_principle_conditions"
+          ]
+        },
+        {
+          "pattern": "separation principle을 이용한 observer 기반 상태피드백 설계를 설명하시오.",
+          "required_anchor_ids": [
+            "state_feedback_closed_loop",
+            "observer_error_dynamics",
+            "separation_principle_conditions"
+          ]
+        },
+        {
+          "pattern": "상태피드백 시스템의 정상상태 오차 개선과 현장 구현 고려사항을 설명하시오.",
+          "required_anchor_ids": [
+            "reference_tracking_integral_action",
+            "implementation_tradeoffs_validation",
+            "separation_principle_conditions"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -25770,16 +26446,7 @@
       ],
       "id": "state_space_controllability_observability_pole_placement_COMPARE_v1",
       "title": "상태공간 모델의 제어가능성·관측가능성과 극점배치 설계",
-      "question_examples": [
-        "상태공간 모델의 구성과 전달함수와의 관계를 설명하시오.",
-        "주어진 A, B 행렬의 제어가능성을 판정하고 그 의미를 설명하시오.",
-        "주어진 A, C 행렬의 관측가능성을 판정하고 그 의미를 설명하시오.",
-        "PBH test를 이용하여 제어가능성·관측가능성을 판정하시오.",
-        "상태피드백으로 목표 폐루프 극점을 만족하는 K를 설계하시오.",
-        "전상태 관측기의 원리와 observer gain L의 설계 절차를 설명하시오.",
-        "separation principle을 이용한 observer 기반 상태피드백 설계를 설명하시오.",
-        "상태피드백 시스템의 정상상태 오차 개선과 현장 구현 고려사항을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "상태공간",
         "상태 공간",
@@ -26176,9 +26843,30 @@
       "title_ko": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
       "question_type": "DIAGNOSIS_ACTION",
       "expected_question_patterns": [
-        "온도 측정 시 열전달에 의한 측정오차의 발생 원인과 저감 대책에 대하여 설명하시오.",
-        "온도 측정에서 전도, 대류, 복사 및 담금 깊이가 측정오차에 미치는 영향을 설명하시오.",
-        "온도센서 설치 시 보호관, 담금 깊이, 주변 열환경이 측정오차에 미치는 영향과 개선 방안을 설명하시오."
+        {
+          "pattern": "온도 측정 시 열전달에 의한 측정오차의 발생 원인과 저감 대책에 대하여 설명하시오.",
+          "required_anchor_ids": [
+            "temperature_heat_transfer_error_paths",
+            "temperature_heat_resistance_model",
+            "temperature_error_reduction_measures"
+          ]
+        },
+        {
+          "pattern": "온도 측정에서 전도, 대류, 복사 및 담금 깊이가 측정오차에 미치는 영향을 설명하시오.",
+          "required_anchor_ids": [
+            "temperature_heat_transfer_error_paths",
+            "temperature_stem_conduction_immersion_error",
+            "temperature_heat_resistance_model"
+          ]
+        },
+        {
+          "pattern": "온도센서 설치 시 보호관, 담금 깊이, 주변 열환경이 측정오차에 미치는 영향과 개선 방안을 설명하시오.",
+          "required_anchor_ids": [
+            "temperature_stem_conduction_immersion_error",
+            "temperature_installation_selection_conditions",
+            "temperature_error_reduction_measures"
+          ]
+        }
       ],
       "recommended_outline": [
         {
@@ -26269,11 +26957,7 @@
       ],
       "id": "temperature_measurement_error_heat_transfer_COMPARE_v1",
       "title": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
-      "question_examples": [
-        "온도 측정 시 열전달에 의한 측정오차의 발생 원인과 저감 대책에 대하여 설명하시오.",
-        "온도 측정에서 전도, 대류, 복사 및 담금 깊이가 측정오차에 미치는 영향을 설명하시오.",
-        "온도센서 설치 시 보호관, 담금 깊이, 주변 열환경이 측정오차에 미치는 영향과 개선 방안을 설명하시오."
-      ],
+      "question_examples": [],
       "topic_aliases": [
         "온도 측정오차와 열전달",
         "온도 측정 오차",
@@ -26331,12 +27015,37 @@
     {
       "schema_version": "topic_pack.model_answer.v1",
       "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-      "title_ko": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+      "title_ko": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "expected_question_patterns": [
-        "RTD 온도센서의 측정원리와 Pt100의 특성을 설명하시오.",
-        "Pt100의 2선식·3선식·4선식 결선 및 리드선 저항 보상을 설명하시오.",
-        "RTD의 측정전류, 자기발열 및 배선방식 선정기준을 설명하시오."
+        {
+          "pattern": "Thermistor 온도센서의 측정원리와 NTC·PTC 특성을 설명하시오.",
+          "required_anchor_ids": [
+            "thermistor_temperature_measurement_chain",
+            "thermistor_semiconductor_resistance_temperature_principle",
+            "thermistor_ntc_negative_temperature_coefficient",
+            "thermistor_ptc_positive_temperature_coefficient_switching"
+          ]
+        },
+        {
+          "pattern": "NTC Thermistor의 B-상수 식과 Steinhart-Hart 선형화 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "thermistor_ntc_beta_equation",
+            "thermistor_steinhart_hart_linearization",
+            "thermistor_tolerance_interchangeability_calibration"
+          ]
+        },
+        {
+          "pattern": "Thermistor 측정회로의 자기발열, 열시정수, 배선오차 및 고장진단을 설명하시오.",
+          "required_anchor_ids": [
+            "thermistor_voltage_divider_bridge_current_measurement",
+            "thermistor_adc_reference_ratiometric_conversion",
+            "thermistor_self_heating_dissipation_constant",
+            "thermistor_thermal_time_constant_installation",
+            "thermistor_wiring_contact_moisture_noise_effects",
+            "thermistor_fault_diagnostics_open_short_range_fail_safe"
+          ]
+        }
       ],
       "recommended_outline": [
         "Thermistor의 정의와 반도체 저항형 온도센서라는 측정원리를 제시한다.",
@@ -26359,14 +27068,11 @@
         "단선·단락·범위이탈 진단과 안전상태 전환을 현장 적용 관점에서 제시한다."
       ],
       "common_missing_points": [
-        "RTD가 자체 전압을 발생하지 않고 외부 여기전류가 필요하다는 설명이 없음.",
-        "Pt100의 100을 0℃ 기준저항이 아닌 온도로 오해함.",
-        "저항-온도 관계를 전 온도범위에서 완전선형으로 단정함.",
-        "측정전류에 의한 자기발열을 누락함.",
-        "2선식의 두 리드선 저항 직렬오차를 누락함.",
-        "3선식 보상의 동일 리드저항 가정을 누락함.",
-        "4선식이 모든 오차를 제거한다고 과장함.",
-        "설치·응답·교정·현장 유지보수 조건을 누락함."
+        "NTC와 PTC의 저항-온도 방향 및 적용범위를 구분하지 않음",
+        "B-상수 식과 Steinhart-Hart 식의 적용범위를 구분하지 않음",
+        "전압분배기·기준저항·ADC의 변환사슬을 생략함",
+        "측정전력에 의한 자기발열과 방산정수를 생략함",
+        "열시정수, 설치, 배선·접촉·습기 및 단선·단락 진단을 생략함"
       ],
       "routing_aliases": [
         "서미스터",
@@ -26412,19 +27118,9 @@
       "id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization_PRINCIPLE_INTERPRETATION_v1",
       "title": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화",
       "question_examples": [
-        "Thermistor 온도센서의 원리와 NTC 및 PTC 특성을 설명하시오.",
-        "NTC Thermistor의 저항-온도 특성과 B-상수 식을 설명하시오.",
-        "Thermistor의 Steinhart-Hart 선형화 방법을 설명하시오.",
-        "NTC Thermistor 측정용 전압분배기와 ADC 변환을 설명하시오.",
-        "Thermistor 측정에서 자기발열 오차와 방산정수를 설명하시오.",
-        "Thermistor의 열시정수와 설치조건에 따른 동적오차를 설명하시오.",
-        "PTC Thermistor의 전이온도와 스위칭 보호 특성을 설명하시오.",
-        "Thermistor의 R25 공차, B 값 공차와 교정 방법을 설명하시오.",
-        "Thermistor 입력의 단선·단락 진단과 Fail-safe 설계를 설명하시오.",
-        "Thermistor 측정회로의 기준저항, ADC 기준전압 및 배선 오차를 설명하시오.",
-        "NTC와 PTC Thermistor를 비교하고 적용분야를 설명하시오.",
-        "Thermistor와 RTD를 비교하되 Thermistor의 비선형성과 자기발열을 중심으로 설명하시오.",
-        "Thermistor, RTD 및 열전대의 측정원리와 적용 특성을 비교하시오."
+        "Thermistor 온도센서의 측정원리와 NTC·PTC 특성을 설명하시오.",
+        "NTC Thermistor의 B-상수 식과 Steinhart-Hart 선형화 방법을 설명하시오.",
+        "Thermistor 측정회로의 자기발열, 열시정수, 배선오차 및 고장진단을 설명하시오."
       ],
       "topic_aliases": [
         "서미스터",
@@ -26451,34 +27147,31 @@
         "자기조절 히터"
       ],
       "expected_structure": [
-        "Thermistor의 정의와 전체 측정 체인",
-        "저항-온도 특성와 온도차 측정 원리",
-        "감온 소자·기준저항과 비선형 선형화",
-        "중간금속·Steinhart-Hart 관계",
-        "Thermistor 종류와 선정 기준",
-        "배선·기준저항·극성",
-        "비선형 선형화와 signal conditioning",
-        "설치·교정·오차·진단 및 결론"
+        "Thermistor의 정의와 반도체 저항형 온도센서라는 측정원리를 제시한다.",
+        "NTC의 온도 상승 시 저항 감소와 고감도·비선형 특성을 설명한다.",
+        "PTC의 온도 상승 시 저항 증가와 전이온도 부근 스위칭 특성을 설명한다.",
+        "B-상수 식과 Steinhart-Hart 식의 적용범위 차이를 설명한다.",
+        "전압분배기·브리지·정전류 회로와 ADC 저항 환산을 설명한다.",
+        "자기발열, 방산정수와 열시정수에 따른 정적·동적 오차를 설명한다.",
+        "공차·교정·배선·습기·설치와 장기 안정성 문제를 설명한다.",
+        "단선·단락 진단, Fail-safe 및 적용별 선정기준을 제시한다."
       ],
       "high_score_features": [
-        "Thermistor가 절대온도가 아니라 접점 온도차에 대응하는 저항 변화을 발생한다는 점을 설명한다.",
-        "저항-온도 특성와 서로 다른 도체의 역할을 설명한다.",
-        "감온 소자과 기준저항을 구분하고 비선형 선형화 절차를 설명한다.",
-        "B-상수 관계과 Steinhart-Hart 관계을 적용 조건과 함께 설명한다.",
-        "배선과 기준저항의 목적, 재질, 극성 및 허용온도를 설명한다.",
-        "Thermistor 종류별 비선형 특성과 종류별 표준 변환의 필요성을 설명한다.",
-        "접점 구조, 보호관과 설치조건을 응답속도·절연·노이즈와 연결한다.",
-        "교정, 불확도, drift, 단선·극성·선형화 오류 진단을 포함한다."
+        "NTC와 PTC를 단순 명칭이 아니라 저항-온도 곡선과 재료 특성으로 구분한다.",
+        "B-상수 식에서 온도를 kelvin으로 사용하고 근사 적용범위를 명시한다.",
+        "Steinhart-Hart 식의 계수가 소자 또는 교정 데이터에 종속됨을 설명한다.",
+        "기준저항과 ADC 기준전압을 포함한 비율측정 회로의 오차상쇄 원리를 설명한다.",
+        "P=I²R과 ΔT≈P/δ를 사용해 자기발열 오차를 정량적으로 연결한다.",
+        "열시정수 63.2% 정의와 보호관·열접촉의 동적 영향까지 설명한다.",
+        "R25·B 값 공차, ADC, 기준저항과 교정 불확도를 하나의 오차사슬로 연결한다.",
+        "단선·단락·범위이탈 진단과 안전상태 전환을 현장 적용 관점에서 제시한다."
       ],
       "low_score_patterns": [
-        "저항-온도 특성라는 용어만 제시하고 감온 소자·기준저항을 설명하지 않음",
-        "비선형 선형화을 단순한 영점조정으로 설명함",
-        "Thermistor 종류를 나열하지만 선정기준이 없음",
-        "기준저항을 단순한 저저항 배선으로 설명함",
-        "설치와 보호관에 따른 응답지연을 누락함",
-        "비선형성과 종류별 표준표를 누락함",
-        "단선만 진단하고 선형화·극성·절연·노이즈를 누락함",
-        "RTD 3선식 보상과 Thermistor 비선형 선형화을 혼동함"
+        "NTC와 PTC의 저항-온도 방향 및 적용범위를 구분하지 않음",
+        "B-상수 식과 Steinhart-Hart 식의 적용범위를 구분하지 않음",
+        "전압분배기·기준저항·ADC의 변환사슬을 생략함",
+        "측정전력에 의한 자기발열과 방산정수를 생략함",
+        "열시정수, 설치, 배선·접촉·습기 및 단선·단락 진단을 생략함"
       ],
       "field_connection_points": [
         "R25, B 값 또는 Steinhart-Hart 계수, 저항 공차, 사용온도와 패키지 조건을 확인하여 소자를 선정한다.",
@@ -26505,16 +27198,83 @@
       "title_ko": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
       "question_type": "PRINCIPLE_INTERPRETATION",
       "expected_question_patterns": [
-        "열전대의 측정원리와 기준접점 보상 방법을 설명하시오.",
-        "Seebeck 효과와 열전대 온도 측정의 관계를 설명하시오.",
-        "열전대의 측정접점과 기준접점의 역할을 설명하시오.",
-        "냉접점 보상의 필요성과 구현 방법을 설명하시오.",
-        "열전대의 중간금속 법칙과 중간온도 법칙을 설명하시오.",
-        "열전대 연장도선과 보상도선의 차이 및 사용상 주의사항을 설명하시오.",
-        "열전대 종류별 특성과 선정 기준을 설명하시오.",
-        "열전대 측정오차의 원인과 진단·개선 방법을 설명하시오.",
-        "접지형·비접지형·노출형 열전대 접점의 특성을 설명하시오.",
-        "열전대 transmitter의 신호처리와 선형화 과정을 설명하시오."
+        {
+          "pattern": "열전대의 측정원리와 기준접점 보상 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_temperature_measurement_chain",
+            "thermocouple_seebeck_effect_dissimilar_conductors",
+            "thermocouple_measures_temperature_difference",
+            "thermocouple_reference_junction_compensation",
+            "thermocouple_nonlinearity_reference_tables_polynomial_conversion"
+          ]
+        },
+        {
+          "pattern": "Seebeck 효과와 열전대 온도 측정의 관계를 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_seebeck_effect_dissimilar_conductors",
+            "thermocouple_measures_temperature_difference"
+          ]
+        },
+        {
+          "pattern": "열전대의 측정접점과 기준접점의 역할을 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_temperature_measurement_chain",
+            "thermocouple_measures_temperature_difference",
+            "thermocouple_reference_junction_compensation"
+          ]
+        },
+        {
+          "pattern": "냉접점 보상의 필요성과 구현 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_reference_junction_compensation",
+            "thermocouple_law_of_intermediate_temperatures"
+          ]
+        },
+        {
+          "pattern": "열전대의 중간금속 법칙과 중간온도 법칙을 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_law_of_intermediate_metals",
+            "thermocouple_law_of_intermediate_temperatures"
+          ]
+        },
+        {
+          "pattern": "열전대 연장도선과 보상도선의 차이 및 사용상 주의사항을 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_extension_compensating_wire_polarity",
+            "thermocouple_fault_diagnostics_open_polarity_cjc_validation"
+          ]
+        },
+        {
+          "pattern": "열전대 종류별 특성과 선정 기준을 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_type_material_range_atmosphere_selection",
+            "thermocouple_junction_construction_response_isolation"
+          ]
+        },
+        {
+          "pattern": "열전대 측정오차의 원인과 진단·개선 방법을 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_calibration_tolerance_uncertainty_drift",
+            "thermocouple_fault_diagnostics_open_polarity_cjc_validation",
+            "thermocouple_thermowell_installation_dynamic_error",
+            "thermocouple_signal_conditioning_noise_grounding"
+          ]
+        },
+        {
+          "pattern": "접지형·비접지형·노출형 열전대 접점의 특성을 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_junction_construction_response_isolation",
+            "thermocouple_thermowell_installation_dynamic_error"
+          ]
+        },
+        {
+          "pattern": "열전대 transmitter의 신호처리와 선형화 과정을 설명하시오.",
+          "required_anchor_ids": [
+            "thermocouple_signal_conditioning_noise_grounding",
+            "thermocouple_nonlinearity_reference_tables_polynomial_conversion",
+            "thermocouple_reference_junction_compensation"
+          ]
+        }
       ],
       "recommended_outline": [
         "열전대의 정의와 전체 측정 체인",

@@ -792,7 +792,6 @@
     "온도는 감도와 절연저항을 변화시키며 빠른 온도변화는 열팽창응력과 pyroelectric output에 의한 과도출력을 만들 수 있다.",
     "직각방향 입력은 횡감도, 설치면 변형은 base strain, 센서 질량은 구조물 동특성을 바꾸는 mass loading 오차를 만든다.",
     "측정시스템은 conditioner, 입력범위, high-pass와 low-pass filter, anti-aliasing filter, sampling rate와 ADC 동적범위를 함께 설계한다.",
-    "교정은 센서·conditioner·케이블·DAQ 전체 측정사슬을 대상으로 하며 감도, 주파수응답, 위상, 절연저항, IEPE bias와 불확도를 관리한다.",
-    "장시간 정하중은 스트레인 게이지식 로드셀을 우선 검토하고 충격·진동·빠른 동적 힘은 압전식 센서를 우선 검토한다."
+    "교정은 센서·conditioner·케이블·DAQ 전체 측정사슬을 대상으로 하며 감도, 주파수응답, 위상, 절연저항, IEPE bias와 불확도를 관리한다."
   ]
 }

@@ -4,14 +4,69 @@
   "title_ko": "상태공간 모델의 제어가능성·관측가능성과 극점배치 설계",
   "question_type": "CALC_DESIGN",
   "expected_question_patterns": [
-    "상태공간 모델의 구성과 전달함수와의 관계를 설명하시오.",
-    "주어진 A, B 행렬의 제어가능성을 판정하고 그 의미를 설명하시오.",
-    "주어진 A, C 행렬의 관측가능성을 판정하고 그 의미를 설명하시오.",
-    "PBH test를 이용하여 제어가능성·관측가능성을 판정하시오.",
-    "상태피드백으로 목표 폐루프 극점을 만족하는 K를 설계하시오.",
-    "전상태 관측기의 원리와 observer gain L의 설계 절차를 설명하시오.",
-    "separation principle을 이용한 observer 기반 상태피드백 설계를 설명하시오.",
-    "상태피드백 시스템의 정상상태 오차 개선과 현장 구현 고려사항을 설명하시오."
+    {
+      "pattern": "상태공간 모델의 구성과 전달함수와의 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "state_space_model_and_dimensions",
+        "transfer_function_realization_relation",
+        "eigenvalue_pole_minimal_realization"
+      ]
+    },
+    {
+      "pattern": "주어진 A, B 행렬의 제어가능성을 판정하고 그 의미를 설명하시오.",
+      "required_anchor_ids": [
+        "state_space_model_and_dimensions",
+        "controllability_matrix_rank",
+        "pbh_controllability_stabilizability"
+      ]
+    },
+    {
+      "pattern": "주어진 A, C 행렬의 관측가능성을 판정하고 그 의미를 설명하시오.",
+      "required_anchor_ids": [
+        "state_space_model_and_dimensions",
+        "observability_matrix_rank",
+        "pbh_observability_detectability"
+      ]
+    },
+    {
+      "pattern": "PBH test를 이용하여 제어가능성·관측가능성을 판정하시오.",
+      "required_anchor_ids": [
+        "pbh_controllability_stabilizability",
+        "pbh_observability_detectability"
+      ]
+    },
+    {
+      "pattern": "상태피드백으로 목표 폐루프 극점을 만족하는 K를 설계하시오.",
+      "required_anchor_ids": [
+        "state_feedback_closed_loop",
+        "pole_placement_conditions",
+        "ackermann_and_numerical_limits"
+      ]
+    },
+    {
+      "pattern": "전상태 관측기의 원리와 observer gain L의 설계 절차를 설명하시오.",
+      "required_anchor_ids": [
+        "observer_error_dynamics",
+        "pbh_observability_detectability",
+        "separation_principle_conditions"
+      ]
+    },
+    {
+      "pattern": "separation principle을 이용한 observer 기반 상태피드백 설계를 설명하시오.",
+      "required_anchor_ids": [
+        "state_feedback_closed_loop",
+        "observer_error_dynamics",
+        "separation_principle_conditions"
+      ]
+    },
+    {
+      "pattern": "상태피드백 시스템의 정상상태 오차 개선과 현장 구현 고려사항을 설명하시오.",
+      "required_anchor_ids": [
+        "reference_tracking_integral_action",
+        "implementation_tradeoffs_validation",
+        "separation_principle_conditions"
+      ]
+    }
   ],
   "recommended_outline": [
     {

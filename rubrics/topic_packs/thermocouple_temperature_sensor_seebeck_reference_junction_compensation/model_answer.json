@@ -4,16 +4,83 @@
   "title_ko": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
   "question_type": "PRINCIPLE_INTERPRETATION",
   "expected_question_patterns": [
-    "열전대의 측정원리와 기준접점 보상 방법을 설명하시오.",
-    "Seebeck 효과와 열전대 온도 측정의 관계를 설명하시오.",
-    "열전대의 측정접점과 기준접점의 역할을 설명하시오.",
-    "냉접점 보상의 필요성과 구현 방법을 설명하시오.",
-    "열전대의 중간금속 법칙과 중간온도 법칙을 설명하시오.",
-    "열전대 연장도선과 보상도선의 차이 및 사용상 주의사항을 설명하시오.",
-    "열전대 종류별 특성과 선정 기준을 설명하시오.",
-    "열전대 측정오차의 원인과 진단·개선 방법을 설명하시오.",
-    "접지형·비접지형·노출형 열전대 접점의 특성을 설명하시오.",
-    "열전대 transmitter의 신호처리와 선형화 과정을 설명하시오."
+    {
+      "pattern": "열전대의 측정원리와 기준접점 보상 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_temperature_measurement_chain",
+        "thermocouple_seebeck_effect_dissimilar_conductors",
+        "thermocouple_measures_temperature_difference",
+        "thermocouple_reference_junction_compensation",
+        "thermocouple_nonlinearity_reference_tables_polynomial_conversion"
+      ]
+    },
+    {
+      "pattern": "Seebeck 효과와 열전대 온도 측정의 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_seebeck_effect_dissimilar_conductors",
+        "thermocouple_measures_temperature_difference"
+      ]
+    },
+    {
+      "pattern": "열전대의 측정접점과 기준접점의 역할을 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_temperature_measurement_chain",
+        "thermocouple_measures_temperature_difference",
+        "thermocouple_reference_junction_compensation"
+      ]
+    },
+    {
+      "pattern": "냉접점 보상의 필요성과 구현 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_reference_junction_compensation",
+        "thermocouple_law_of_intermediate_temperatures"
+      ]
+    },
+    {
+      "pattern": "열전대의 중간금속 법칙과 중간온도 법칙을 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_law_of_intermediate_metals",
+        "thermocouple_law_of_intermediate_temperatures"
+      ]
+    },
+    {
+      "pattern": "열전대 연장도선과 보상도선의 차이 및 사용상 주의사항을 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_extension_compensating_wire_polarity",
+        "thermocouple_fault_diagnostics_open_polarity_cjc_validation"
+      ]
+    },
+    {
+      "pattern": "열전대 종류별 특성과 선정 기준을 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_type_material_range_atmosphere_selection",
+        "thermocouple_junction_construction_response_isolation"
+      ]
+    },
+    {
+      "pattern": "열전대 측정오차의 원인과 진단·개선 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_calibration_tolerance_uncertainty_drift",
+        "thermocouple_fault_diagnostics_open_polarity_cjc_validation",
+        "thermocouple_thermowell_installation_dynamic_error",
+        "thermocouple_signal_conditioning_noise_grounding"
+      ]
+    },
+    {
+      "pattern": "접지형·비접지형·노출형 열전대 접점의 특성을 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_junction_construction_response_isolation",
+        "thermocouple_thermowell_installation_dynamic_error"
+      ]
+    },
+    {
+      "pattern": "열전대 transmitter의 신호처리와 선형화 과정을 설명하시오.",
+      "required_anchor_ids": [
+        "thermocouple_signal_conditioning_noise_grounding",
+        "thermocouple_nonlinearity_reference_tables_polynomial_conversion",
+        "thermocouple_reference_junction_compensation"
+      ]
+    }
   ],
   "recommended_outline": [
     "열전대의 정의와 전체 측정 체인",

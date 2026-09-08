@@ -1,7 +1,7 @@
 {
   "schema_version": "fact_anchor.v1",
   "topic_id": "thermistor_temperature_sensor_ntc_ptc_characteristics_measurement_linearization",
-  "title_ko": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+  "title_ko": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화",
   "question_type_hint": "PRINCIPLE_INTERPRETATION",
   "anchors": [
     {
@@ -26,15 +26,14 @@
         "보정"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "Thermistor 온도 측정은 감온 소자의 저항 변화, 여기 및 측정회로, ADC 변환, 저항-온도 환산과 보정으로 구성된다.",
+        "Thermistor 자체의 저항만 읽는 것이 아니라 전압분배기, 브리지 또는 정전류 회로로 저항을 전기신호로 변환한다. 이후 ADC 코드에서 저항을 계산하고 소자별 곡선식이나 표준표를 사용하여 온도로 환산한다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "Thermistor 온도 측정은 감온 소자의 저항 변화, 여기 및 측정회로, ADC 변환, 저항-온도 환산과 보정으로 구성된다.",
       "description": "Thermistor 자체의 저항만 읽는 것이 아니라 전압분배기, 브리지 또는 정전류 회로로 저항을 전기신호로 변환한다. 이후 ADC 코드에서 저항을 계산하고 소자별 곡선식이나 표준표를 사용하여 온도로 환산한다."
     },
@@ -58,15 +57,14 @@
         "비선형"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "Thermistor는 반도체 세라믹 또는 고분자 재료의 전하 운반자와 전도 메커니즘이 온도에 따라 변하는 저항형 온도센서이다.",
+        "금속 RTD와 달리 Thermistor는 반도체 재료의 온도 의존성이 크다. 따라서 작은 온도 변화에도 저항이 크게 변하여 감도가 높지만 비선형성과 사용온도 범위의 제약을 함께 고려해야 한다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "Thermistor는 반도체 세라믹 또는 고분자 재료의 전하 운반자와 전도 메커니즘이 온도에 따라 변하는 저항형 온도센서이다.",
       "description": "금속 RTD와 달리 Thermistor는 반도체 재료의 온도 의존성이 크다. 따라서 작은 온도 변화에도 저항이 크게 변하여 감도가 높지만 비선형성과 사용온도 범위의 제약을 함께 고려해야 한다."
     },
@@ -90,15 +88,14 @@
         "전도도 증가"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "NTC Thermistor는 일반적으로 온도가 상승하면 저항이 감소하는 음의 온도계수 특성을 갖는다.",
+        "온도 상승으로 열적으로 활성화되는 전하 운반자가 증가하면서 전도도가 커지고 저항이 감소한다. NTC는 온도 측정, 온도 보상과 돌입전류 제한 등에 사용되지만 적용 목적에 따라 소자 구조와 정격이 다르다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "NTC Thermistor는 일반적으로 온도가 상승하면 저항이 감소하는 음의 온도계수 특성을 갖는다.",
       "description": "온도 상승으로 열적으로 활성화되는 전하 운반자가 증가하면서 전도도가 커지고 저항이 감소한다. NTC는 온도 측정, 온도 보상과 돌입전류 제한 등에 사용되지만 적용 목적에 따라 소자 구조와 정격이 다르다."
     },
@@ -124,15 +121,14 @@
         "R25"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "NTC의 제한된 온도범위에서는 B-상수 식으로 저항과 절대온도의 관계를 근사할 수 있다.",
+        "대표식은 R(T)=R0·exp[B·(1/T−1/T0)]이며 T와 T0는 kelvin 단위이다. B 값과 기준저항 R0는 소자별 사양값이므로 다른 형식의 Thermistor에 임의로 공통 적용하면 안 된다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "NTC의 제한된 온도범위에서는 B-상수 식으로 저항과 절대온도의 관계를 근사할 수 있다.",
       "description": "대표식은 R(T)=R0·exp[B·(1/T−1/T0)]이며 T와 T0는 kelvin 단위이다. B 값과 기준저항 R0는 소자별 사양값이므로 다른 형식의 Thermistor에 임의로 공통 적용하면 안 된다."
     },
@@ -156,15 +152,14 @@
         "표준 저항표"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "넓은 온도범위 또는 높은 정확도가 필요하면 Steinhart-Hart 식, 다항식, 표준표나 다점 보정을 사용하여 비선형성을 보상한다.",
+        "일반적인 Steinhart-Hart 식은 1/T=A+B·ln(R)+C·[ln(R)]³ 형태이다. 계수는 해당 소자 또는 교정 데이터에서 구해야 하며 B-상수 단일 근사보다 넓은 범위에서 정확도를 높일 수 있다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "넓은 온도범위 또는 높은 정확도가 필요하면 Steinhart-Hart 식, 다항식, 표준표나 다점 보정을 사용하여 비선형성을 보상한다.",
       "description": "일반적인 Steinhart-Hart 식은 1/T=A+B·ln(R)+C·[ln(R)]³ 형태이다. 계수는 해당 소자 또는 교정 데이터에서 구해야 하며 B-상수 단일 근사보다 넓은 범위에서 정확도를 높일 수 있다."
     },
@@ -190,15 +185,14 @@
         "자기조절 히터"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "PTC Thermistor는 온도가 상승하면 저항이 증가하며, 재료에 따라 특정 전이온도 부근에서 저항이 급격히 증가하는 스위칭 특성을 이용한다.",
+        "세라믹 PTC는 전이온도 부근의 급격한 저항 증가를 과전류 보호, 모터 보호와 자기조절 히터에 활용한다. PTC의 전 범위를 하나의 선형 온도계수로 취급해서는 안 된다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "PTC Thermistor는 온도가 상승하면 저항이 증가하며, 재료에 따라 특정 전이온도 부근에서 저항이 급격히 증가하는 스위칭 특성을 이용한다.",
       "description": "세라믹 PTC는 전이온도 부근의 급격한 저항 증가를 과전류 보호, 모터 보호와 자기조절 히터에 활용한다. PTC의 전 범위를 하나의 선형 온도계수로 취급해서는 안 된다."
     },
@@ -222,15 +216,14 @@
         "V=IR"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "Thermistor 저항은 전압분배기, 브리지 또는 정전류 여기회로를 이용하여 측정 가능한 전압으로 변환한다.",
+        "전압분배기의 기준저항은 관심 온도범위의 Thermistor 저항과 ADC 입력범위를 고려해 선정한다. 브리지는 작은 변화를 민감하게 검출할 수 있으며 정전류 방식은 V=IR로 저항을 구하지만 자기발열을 제한해야 한다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "Thermistor 저항은 전압분배기, 브리지 또는 정전류 여기회로를 이용하여 측정 가능한 전압으로 변환한다.",
       "description": "전압분배기의 기준저항은 관심 온도범위의 Thermistor 저항과 ADC 입력범위를 고려해 선정한다. 브리지는 작은 변화를 민감하게 검출할 수 있으며 정전류 방식은 V=IR로 저항을 구하지만 자기발열을 제한해야 한다."
     },
@@ -256,15 +249,14 @@
         "기준저항 공차"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "ADC 기준전압과 센서 여기전압을 함께 사용하는 비율측정 방식은 전원 변동의 영향을 줄일 수 있다.",
+        "분압회로의 공급전압을 ADC 기준전압으로 같이 사용하면 ADC 코드가 저항비에 주로 의존하므로 공급전압 변동이 상쇄된다. 다만 기준저항 공차, ADC 양자화, 입력 누설과 기준전압 잡음은 별도 오차로 관리해야 한다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "ADC 기준전압과 센서 여기전압을 함께 사용하는 비율측정 방식은 전원 변동의 영향을 줄일 수 있다.",
       "description": "분압회로의 공급전압을 ADC 기준전압으로 같이 사용하면 ADC 코드가 저항비에 주로 의존하므로 공급전압 변동이 상쇄된다. 다만 기준저항 공차, ADC 양자화, 입력 누설과 기준전압 잡음은 별도 오차로 관리해야 한다."
     },
@@ -290,15 +282,14 @@
         "여기전류"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "Thermistor에 인가한 측정전력은 자기발열을 발생시켜 소자온도를 공정온도보다 높이고 측정오차를 만들 수 있다.",
+        "소모전력은 P=I²R 또는 P=V²/R로 계산한다. 방산정수 δ가 온도를 1℃ 높이는 데 필요한 전력이라면 정상상태 자기발열은 대략 ΔT=P/δ로 평가한다. 여기전류, 듀티비와 열결합 조건을 제한해야 한다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "Thermistor에 인가한 측정전력은 자기발열을 발생시켜 소자온도를 공정온도보다 높이고 측정오차를 만들 수 있다.",
       "description": "소모전력은 P=I²R 또는 P=V²/R로 계산한다. 방산정수 δ가 온도를 1℃ 높이는 데 필요한 전력이라면 정상상태 자기발열은 대략 ΔT=P/δ로 평가한다. 여기전류, 듀티비와 열결합 조건을 제한해야 한다."
     },
@@ -324,15 +315,14 @@
         "동적오차"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "Thermistor의 열시정수와 설치조건은 온도 변화에 대한 동적 응답과 지연오차를 결정한다.",
+        "열시정수는 계단 온도 변화 후 최종 변화량의 약 63.2%에 도달하는 시간으로 표현한다. 소자 크기, 봉지재, 보호관, 유체속도, 삽입깊이와 접촉상태가 열전달과 응답속도를 바꾼다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "Thermistor의 열시정수와 설치조건은 온도 변화에 대한 동적 응답과 지연오차를 결정한다.",
       "description": "열시정수는 계단 온도 변화 후 최종 변화량의 약 63.2%에 도달하는 시간으로 표현한다. 소자 크기, 봉지재, 보호관, 유체속도, 삽입깊이와 접촉상태가 열전달과 응답속도를 바꾼다."
     },
@@ -356,15 +346,14 @@
         "불확도"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "Thermistor 정확도는 기준저항 공차, B 값 또는 곡선계수 공차, 회로 오차와 교정 불확도의 영향을 함께 받는다.",
+        "R25 공차만으로 전체 온도범위 정확도를 보장할 수 없다. B 값 또는 Steinhart-Hart 계수의 편차와 기준저항, ADC, 교정표준기의 불확도를 합성해야 한다. 고정밀 적용은 개별 소자 다점 교정 또는 교환성 등급을 사용한다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "Thermistor 정확도는 기준저항 공차, B 값 또는 곡선계수 공차, 회로 오차와 교정 불확도의 영향을 함께 받는다.",
       "description": "R25 공차만으로 전체 온도범위 정확도를 보장할 수 없다. B 값 또는 Steinhart-Hart 계수의 편차와 기준저항, ADC, 교정표준기의 불확도를 합성해야 한다. 고정밀 적용은 개별 소자 다점 교정 또는 교환성 등급을 사용한다."
     },
@@ -390,15 +379,14 @@
         "드리프트"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "Thermistor는 요구 온도범위, 감도, 장기 안정성, 사용분위기와 패키지에 맞춰 선정해야 한다.",
+        "NTC와 PTC는 재료 및 구조에 따라 저항값, 곡선, 허용온도, 정격전력과 안정성이 다르다. 고온, 습기, 열충격과 장기 사용은 저항 드리프트를 유발할 수 있으므로 데이터시트의 허용범위와 신뢰성 조건을 확인해야 한다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "Thermistor는 요구 온도범위, 감도, 장기 안정성, 사용분위기와 패키지에 맞춰 선정해야 한다.",
       "description": "NTC와 PTC는 재료 및 구조에 따라 저항값, 곡선, 허용온도, 정격전력과 안정성이 다르다. 고온, 습기, 열충격과 장기 사용은 저항 드리프트를 유발할 수 있으므로 데이터시트의 허용범위와 신뢰성 조건을 확인해야 한다."
     },
@@ -424,15 +412,14 @@
         "필터링"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "배선저항, 접촉저항, 누설, 습기와 전기잡음은 Thermistor 측정회로의 저항 및 전압 계산에 오차를 만든다.",
+        "고저항 NTC 회로는 누설전류와 PCB 오염에 민감할 수 있고, 저저항 PTC나 정밀 측정에서는 배선 및 접촉저항도 중요하다. 차폐, 필터링, 절연, 적절한 배선과 방습·세정 설계를 적용한다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "배선저항, 접촉저항, 누설, 습기와 전기잡음은 Thermistor 측정회로의 저항 및 전압 계산에 오차를 만든다.",
       "description": "고저항 NTC 회로는 누설전류와 PCB 오염에 민감할 수 있고, 저저항 PTC나 정밀 측정에서는 배선 및 접촉저항도 중요하다. 차폐, 필터링, 절연, 적절한 배선과 방습·세정 설계를 적용한다."
     },
@@ -458,15 +445,14 @@
         "진단"
       ],
       "accepted_explanations": [
-        "Thermistor 측정은 공정 온도를 감온 소자의 온도로 전달하고, 감온 소자과 기준저항의 온도차에 대응하는 저항 변화을 측정한 뒤, 기준저항 보상과 Thermistor 종류별 선형화를 수행하여 온도로 환산하는 과정이다. 답안은 센서, 접점, 배선, 기준저항 센서, 신호처리기와 지시값까지의 측정 체인을 연결해야 한다.",
-        "핵심 원리와 성립조건을 인과관계로 설명한다."
+        "Thermistor 입력은 단선, 단락, 범위이탈과 ADC 포화 상태를 구분하고 안전한 고장대응을 수행해야 한다.",
+        "분압회로에서 단선과 단락은 서로 다른 ADC 극한값으로 나타날 수 있다. 정상 저항범위와 변화율, 이중센서 비교, pull-up 또는 pull-down 진단을 이용하며 고장 시에는 설비를 안전상태로 전환하거나 대체값 사용을 제한한다."
       ],
       "rejected_explanations": [
-        "용어만 나열하고 측정원리와 적용조건을 연결하지 않는다.",
-        "RTD 또는 thermistor의 측정원리를 Thermistor 원리로 혼동한다."
+        "용어만 나열하고 Thermistor의 저항-온도 원리, 회로조건 또는 오차 인과관계를 설명하지 않는다."
       ],
       "grading_notes": "표현의 일치보다 원리, 조건, 인과관계와 현장 적용의 정확성을 평가한다.",
-      "source_basis": "reviewed thermocouple requirements Markdown",
+      "source_basis": "reviewed Thermistor NTC·PTC measurement, linearization, self-heating and diagnostics requirements",
       "claim": "Thermistor 입력은 단선, 단락, 범위이탈과 ADC 포화 상태를 구분하고 안전한 고장대응을 수행해야 한다.",
       "description": "분압회로에서 단선과 단락은 서로 다른 ADC 극한값으로 나타날 수 있다. 정상 저항범위와 변화율, 이중센서 비교, pull-up 또는 pull-down 진단을 이용하며 고장 시에는 설비를 안전상태로 전환하거나 대체값 사용을 제한한다."
     }
@@ -602,11 +588,20 @@
     }
   ],
   "safe_expressions": [
-    "Pt100은 0℃에서 공칭저항이 100 Ω인 백금 RTD이다.",
-    "RTD는 외부 여기전류를 사용하여 저항을 측정한다.",
-    "3선식은 동일 리드저항 가정에서 리드선 영향을 1차 보상한다.",
-    "4선식은 force lead와 sense lead를 분리하는 Kelvin 측정이다.",
-    "P=I²R은 RTD의 직접 측정원리가 아니라 자기발열 오차를 설명한다."
+    "Thermistor 온도 측정은 감온 소자의 저항 변화, 여기 및 측정회로, ADC 변환, 저항-온도 환산과 보정으로 구성된다.",
+    "Thermistor는 반도체 세라믹 또는 고분자 재료의 전하 운반자와 전도 메커니즘이 온도에 따라 변하는 저항형 온도센서이다.",
+    "NTC Thermistor는 일반적으로 온도가 상승하면 저항이 감소하는 음의 온도계수 특성을 갖는다.",
+    "NTC의 제한된 온도범위에서는 B-상수 식으로 저항과 절대온도의 관계를 근사할 수 있다.",
+    "넓은 온도범위 또는 높은 정확도가 필요하면 Steinhart-Hart 식, 다항식, 표준표나 다점 보정을 사용하여 비선형성을 보상한다.",
+    "PTC Thermistor는 온도가 상승하면 저항이 증가하며, 재료에 따라 특정 전이온도 부근에서 저항이 급격히 증가하는 스위칭 특성을 이용한다.",
+    "Thermistor 저항은 전압분배기, 브리지 또는 정전류 여기회로를 이용하여 측정 가능한 전압으로 변환한다.",
+    "ADC 기준전압과 센서 여기전압을 함께 사용하는 비율측정 방식은 전원 변동의 영향을 줄일 수 있다.",
+    "Thermistor에 인가한 측정전력은 자기발열을 발생시켜 소자온도를 공정온도보다 높이고 측정오차를 만들 수 있다.",
+    "Thermistor의 열시정수와 설치조건은 온도 변화에 대한 동적 응답과 지연오차를 결정한다.",
+    "Thermistor 정확도는 기준저항 공차, B 값 또는 곡선계수 공차, 회로 오차와 교정 불확도의 영향을 함께 받는다.",
+    "Thermistor는 요구 온도범위, 감도, 장기 안정성, 사용분위기와 패키지에 맞춰 선정해야 한다.",
+    "배선저항, 접촉저항, 누설, 습기와 전기잡음은 Thermistor 측정회로의 저항 및 전압 계산에 오차를 만든다.",
+    "Thermistor 입력은 단선, 단락, 범위이탈과 ADC 포화 상태를 구분하고 안전한 고장대응을 수행해야 한다."
   ],
   "revision_notes": [
     "created_from_reviewed_thermistor_requirements",
@@ -617,5 +612,21 @@
     "candidate_extraction_rules_empty",
     "added_data_driven_routing_aliases_and_field_points"
   ],
-  "topic_label": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화"
+  "topic_label": "Thermistor 온도센서의 NTC·PTC 특성, 측정회로 및 선형화",
+  "core_facts": [
+    "Thermistor 온도 측정은 감온 소자의 저항 변화, 여기 및 측정회로, ADC 변환, 저항-온도 환산과 보정으로 구성된다.",
+    "Thermistor는 반도체 세라믹 또는 고분자 재료의 전하 운반자와 전도 메커니즘이 온도에 따라 변하는 저항형 온도센서이다.",
+    "NTC Thermistor는 일반적으로 온도가 상승하면 저항이 감소하는 음의 온도계수 특성을 갖는다.",
+    "NTC의 제한된 온도범위에서는 B-상수 식으로 저항과 절대온도의 관계를 근사할 수 있다.",
+    "넓은 온도범위 또는 높은 정확도가 필요하면 Steinhart-Hart 식, 다항식, 표준표나 다점 보정을 사용하여 비선형성을 보상한다.",
+    "PTC Thermistor는 온도가 상승하면 저항이 증가하며, 재료에 따라 특정 전이온도 부근에서 저항이 급격히 증가하는 스위칭 특성을 이용한다.",
+    "Thermistor 저항은 전압분배기, 브리지 또는 정전류 여기회로를 이용하여 측정 가능한 전압으로 변환한다.",
+    "ADC 기준전압과 센서 여기전압을 함께 사용하는 비율측정 방식은 전원 변동의 영향을 줄일 수 있다.",
+    "Thermistor에 인가한 측정전력은 자기발열을 발생시켜 소자온도를 공정온도보다 높이고 측정오차를 만들 수 있다.",
+    "Thermistor의 열시정수와 설치조건은 온도 변화에 대한 동적 응답과 지연오차를 결정한다.",
+    "Thermistor 정확도는 기준저항 공차, B 값 또는 곡선계수 공차, 회로 오차와 교정 불확도의 영향을 함께 받는다.",
+    "Thermistor는 요구 온도범위, 감도, 장기 안정성, 사용분위기와 패키지에 맞춰 선정해야 한다.",
+    "배선저항, 접촉저항, 누설, 습기와 전기잡음은 Thermistor 측정회로의 저항 및 전압 계산에 오차를 만든다.",
+    "Thermistor 입력은 단선, 단락, 범위이탈과 ADC 포화 상태를 구분하고 안전한 고장대응을 수행해야 한다."
+  ]
 }

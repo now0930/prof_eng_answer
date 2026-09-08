@@ -1,0 +1,28 @@
+{
+  "version": "deterministic_authority_policy_v1",
+  "marker": "DETERMINISTIC_AUTHORITY_GATE_V1",
+  "decision": "READY",
+  "ready": true,
+  "requested_target": {
+    "EXTERNAL_LLM_REQUIRED_FOR_VERDICT": 0,
+    "LLM_VERDICT_AUTHORITY": 0,
+    "DETERMINISTIC_GRADING_PRIMARY": true
+  },
+  "blockers": [],
+  "policy": {
+    "version": "deterministic_authority_policy_v1",
+    "minimum_known_fatal_recall": 1.0,
+    "maximum_fatal_false_positive_count": 0,
+    "minimum_deterministic_repeatability": 1.0,
+    "minimum_deterministic_score_coverage": 1.0,
+    "minimum_deterministic_score_in_range_rate": 0.85,
+    "maximum_deterministic_score_mean_out_of_range_distance": 1.0,
+    "minimum_deterministic_topic_routing_recall": 1.0,
+    "maximum_deterministic_topic_routing_false_positive_count": 0,
+    "maximum_unexplained_verdict_diff_count": 0,
+    "require_known_overgrading_regression_pass": true,
+    "require_normal_answer_regression_pass": true,
+    "require_score_verdict_consistency_pass": true,
+    "require_external_llm_not_required": true
+  }
+}

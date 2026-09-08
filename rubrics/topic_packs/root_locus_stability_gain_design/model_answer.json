@@ -4,11 +4,54 @@
   "title_ko": "근궤적법에 의한 안정도 해석과 제어기 이득 설계",
   "question_type": "CALC_DESIGN",
   "expected_question_patterns": [
-    "근궤적법의 원리와 작성 규칙을 설명하고, 이득 변화에 따른 폐루프 안정성과 제어기 이득 설계 방법을 설명하시오.",
-    "주어진 개루프 전달함수의 근궤적을 작성하고 폐루프 시스템의 안정 이득 범위를 구하시오.",
-    "근궤적의 실축 구간, 점근선, 이탈점과 허수축 교차 이득을 계산하시오.",
-    "목표 감쇠비와 정착시간을 만족하는 우세극 및 제어기 이득을 근궤적법으로 설계하시오.",
-    "목표 극점이 기존 근궤적 위에 없을 때 lead, lag 또는 PID 보상기 설계 방법을 설명하시오."
+    {
+      "pattern": "근궤적법의 원리와 작성 규칙을 설명하고, 이득 변화에 따른 폐루프 안정성과 제어기 이득 설계 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "closed_loop_pole_gain_relationship",
+        "root_locus_definition",
+        "root_locus_start_end_points",
+        "real_axis_segment_rule",
+        "asymptote_count_and_angles",
+        "gain_from_magnitude_condition"
+      ]
+    },
+    {
+      "pattern": "주어진 개루프 전달함수의 근궤적을 작성하고 폐루프 시스템의 안정 이득 범위를 구하시오.",
+      "required_anchor_ids": [
+        "closed_loop_pole_gain_relationship",
+        "root_locus_start_end_points",
+        "real_axis_segment_rule",
+        "imaginary_axis_crossing",
+        "gain_from_magnitude_condition"
+      ]
+    },
+    {
+      "pattern": "근궤적의 실축 구간, 점근선, 이탈점과 허수축 교차 이득을 계산하시오.",
+      "required_anchor_ids": [
+        "real_axis_segment_rule",
+        "asymptote_count_and_angles",
+        "asymptote_centroid",
+        "breakaway_break_in_points",
+        "imaginary_axis_crossing"
+      ]
+    },
+    {
+      "pattern": "목표 감쇠비와 정착시간을 만족하는 우세극 및 제어기 이득을 근궤적법으로 설계하시오.",
+      "required_anchor_ids": [
+        "dominant_pole_design",
+        "transient_response_mapping",
+        "angle_condition",
+        "gain_from_magnitude_condition"
+      ]
+    },
+    {
+      "pattern": "목표 극점이 기존 근궤적 위에 없을 때 lead, lag 또는 PID 보상기 설계 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "compensator_design_application",
+        "angle_condition",
+        "gain_from_magnitude_condition"
+      ]
+    }
   ],
   "recommended_outline": [
     {

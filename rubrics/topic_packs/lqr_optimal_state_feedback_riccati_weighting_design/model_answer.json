@@ -4,11 +4,45 @@
   "title_ko": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
   "question_type": "CALC_DESIGN",
   "expected_question_patterns": [
-    "LQR 최적 상태피드백 제어기의 비용함수와 Riccati 방정식 및 설계절차를 설명하시오.",
-    "LQR에서 Q와 R 가중치가 상태응답과 제어입력에 미치는 영향을 설명하시오.",
-    "연속시간 LQR의 해 존재조건과 안정화 가능성 및 검출 가능성을 설명하시오.",
-    "LQR과 극점 배치의 차이 및 기준입력 추종을 위한 LQI 확장방법을 설명하시오.",
-    "CARE와 DARE를 비교하고 LQR 실제 구현 시 포화와 강인성 검증항목을 설명하시오."
+    {
+      "pattern": "LQR 최적 상태피드백 제어기의 비용함수와 Riccati 방정식 및 설계절차를 설명하시오.",
+      "required_anchor_ids": [
+        "state_lqr_design_objective_cost",
+        "state_lqr_weight_matrix_conditions",
+        "state_lqr_care_stabilizing_solution",
+        "state_lqr_optimal_gain_closed_loop"
+      ]
+    },
+    {
+      "pattern": "LQR에서 Q와 R 가중치가 상태응답과 제어입력에 미치는 영향을 설명하시오.",
+      "required_anchor_ids": [
+        "state_lqr_q_weight_state_tradeoff",
+        "state_lqr_r_weight_control_tradeoff",
+        "state_lqr_state_input_normalization_bryson"
+      ]
+    },
+    {
+      "pattern": "연속시간 LQR의 해 존재조건과 안정화 가능성 및 검출 가능성을 설명하시오.",
+      "required_anchor_ids": [
+        "state_lqr_existence_stabilizability_detectability",
+        "state_lqr_care_stabilizing_solution"
+      ]
+    },
+    {
+      "pattern": "LQR과 극점 배치의 차이 및 기준입력 추종을 위한 LQI 확장방법을 설명하시오.",
+      "required_anchor_ids": [
+        "state_lqr_pole_placement_distinction",
+        "state_lqr_tracking_prefilter_lqi"
+      ]
+    },
+    {
+      "pattern": "CARE와 DARE를 비교하고 LQR 실제 구현 시 포화와 강인성 검증항목을 설명하시오.",
+      "required_anchor_ids": [
+        "state_lqr_continuous_discrete_riccati_distinction",
+        "state_lqr_saturation_constraints_limit",
+        "state_lqr_robustness_observer_implementation_validation"
+      ]
+    }
   ],
   "recommended_outline": [
     {

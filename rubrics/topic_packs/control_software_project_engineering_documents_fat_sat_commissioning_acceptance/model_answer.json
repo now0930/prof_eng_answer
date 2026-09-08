@@ -4,16 +4,95 @@
   "title_ko": "제어 소프트웨어 프로젝트, 설계문서, FAT·SAT·시운전 및 인수",
   "question_type": "PROCEDURE",
   "expected_question_patterns": [
-    "제어 소프트웨어 프로젝트의 Feasibility, Scope, Schedule과 Cost 관리 절차를 설명하시오.",
-    "URS, FRS, FDS와 SDS의 목적과 상호 추적관계를 설명하시오.",
-    "I/O list, Tag list, Alarm list, Interlock list와 Cause & Effect의 역할을 비교하시오.",
-    "제어시스템 FAT와 SAT의 목적, 시험환경, 시험항목과 한계를 비교하시오.",
-    "Loop test와 Site integration test의 대상, 절차와 판정기준을 설명하시오.",
-    "제어시스템 Commissioning 절차와 단계별 안전·품질 관리사항을 설명하시오.",
-    "Performance test와 Acceptance의 기준 및 증적 관리방안을 설명하시오.",
-    "Punch list, As-built document와 Handover 관리방안을 설명하시오.",
-    "FAT 이후 변경 발생 시 영향분석, baseline 갱신과 재시험 절차를 설명하시오.",
-    "제어 소프트웨어 프로젝트의 문서·시험·시운전·인수 전 과정을 연계하여 설명하시오."
+    {
+      "pattern": "제어 소프트웨어 프로젝트의 Feasibility, Scope, Schedule과 Cost 관리 절차를 설명하시오.",
+      "required_anchor_ids": [
+        "sw10_feasibility",
+        "sw10_scope_baseline",
+        "sw10_schedule_dependencies",
+        "sw10_cost_change_control"
+      ]
+    },
+    {
+      "pattern": "URS, FRS, FDS와 SDS의 목적과 상호 추적관계를 설명하시오.",
+      "required_anchor_ids": [
+        "sw10_urs",
+        "sw10_frs",
+        "sw10_fds",
+        "sw10_sds",
+        "sw10_document_hierarchy_traceability"
+      ]
+    },
+    {
+      "pattern": "I/O list, Tag list, Alarm list, Interlock list와 Cause & Effect의 역할을 비교하시오.",
+      "required_anchor_ids": [
+        "sw10_io_list",
+        "sw10_tag_list",
+        "sw10_alarm_list",
+        "sw10_interlock_list",
+        "sw10_cause_effect"
+      ]
+    },
+    {
+      "pattern": "제어시스템 FAT와 SAT의 목적, 시험환경, 시험항목과 한계를 비교하시오.",
+      "required_anchor_ids": [
+        "sw10_test_specification",
+        "sw10_fat",
+        "sw10_fat_limit",
+        "sw10_sat",
+        "sw10_fat_sat_relation"
+      ]
+    },
+    {
+      "pattern": "Loop test와 Site integration test의 대상, 절차와 판정기준을 설명하시오.",
+      "required_anchor_ids": [
+        "sw10_test_specification",
+        "sw10_loop_test",
+        "sw10_site_integration_test"
+      ]
+    },
+    {
+      "pattern": "제어시스템 Commissioning 절차와 단계별 안전·품질 관리사항을 설명하시오.",
+      "required_anchor_ids": [
+        "sw10_commissioning",
+        "sw10_test_specification",
+        "sw10_configuration_backup"
+      ]
+    },
+    {
+      "pattern": "Performance test와 Acceptance의 기준 및 증적 관리방안을 설명하시오.",
+      "required_anchor_ids": [
+        "sw10_performance_test",
+        "sw10_acceptance",
+        "sw10_test_specification"
+      ]
+    },
+    {
+      "pattern": "Punch list, As-built document와 Handover 관리방안을 설명하시오.",
+      "required_anchor_ids": [
+        "sw10_punch_list",
+        "sw10_as_built_handover"
+      ]
+    },
+    {
+      "pattern": "FAT 이후 변경 발생 시 영향분석, baseline 갱신과 재시험 절차를 설명하시오.",
+      "required_anchor_ids": [
+        "sw10_change_punch_closure",
+        "sw10_configuration_backup",
+        "sw10_test_specification"
+      ]
+    },
+    {
+      "pattern": "제어 소프트웨어 프로젝트의 문서·시험·시운전·인수 전 과정을 연계하여 설명하시오.",
+      "required_anchor_ids": [
+        "sw10_scope_project_execution",
+        "sw10_document_hierarchy_traceability",
+        "sw10_fat_sat_relation",
+        "sw10_commissioning",
+        "sw10_acceptance",
+        "sw10_as_built_handover"
+      ]
+    }
   ],
   "recommended_outline": [
     {

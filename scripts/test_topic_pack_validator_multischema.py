@@ -157,7 +157,9 @@ def main() -> None:
             outline_objects += 1
 
     assert core_anchor_count > 0
-    assert pattern_strings > 0
+    # The validator remains backward-compatible with string entries, but
+    # repository-authored packs must use scoped question contracts.
+    assert pattern_strings == 0
     assert pattern_objects > 0
     assert outline_strings > 0
     assert outline_objects > 0

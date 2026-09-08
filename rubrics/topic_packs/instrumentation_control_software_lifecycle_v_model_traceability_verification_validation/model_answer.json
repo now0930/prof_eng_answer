@@ -4,17 +4,102 @@
   "title_ko": "계측제어 소프트웨어 수명주기, V-Model, 추적성, 검증 및 확인",
   "question_type": "PROCEDURE",
   "expected_question_patterns": [
-    "계측제어 소프트웨어 수명주기와 V-Model의 단계별 관계를 설명하시오.",
-    "Verification과 Validation의 차이와 적용방법을 설명하시오.",
-    "요구사항 추적성 매트릭스의 구성과 양방향 추적 방법을 설명하시오.",
-    "단위시험, 통합시험과 시스템시험을 비교하고 적용절차를 설명하시오.",
-    "정적분석, 동적분석과 회귀시험의 목적과 차이를 설명하시오.",
-    "계측제어 SW 요구사항 명세와 시험 가능한 수용기준 작성방법을 설명하시오.",
-    "Simulation, HIL과 Fault injection의 특징과 적용방안을 비교하시오.",
-    "제어 SW 결함관리, 변경영향 분석과 회귀시험의 관계를 설명하시오.",
-    "소프트웨어 아키텍처와 상세설계 산출물 및 검토항목을 설명하시오.",
-    "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오.",
-    "V-model이 검증·확인 활동을 체계화하지만 SIL 달성을 보장하지 않는 이유와 MC/DC의 별도 증거 역할을 설명"
+    {
+      "pattern": "계측제어 소프트웨어 수명주기와 V-Model의 단계별 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_scope_general_lifecycle",
+        "sw04_v_model_definition",
+        "sw04_requirements_specification",
+        "sw04_unit_test",
+        "sw04_integration_test",
+        "sw04_system_test"
+      ]
+    },
+    {
+      "pattern": "Verification과 Validation의 차이와 적용방법을 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_verification_definition",
+        "sw04_validation_definition",
+        "sw04_verification_validation_relationship"
+      ]
+    },
+    {
+      "pattern": "요구사항 추적성 매트릭스의 구성과 양방향 추적 방법을 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_requirements_specification",
+        "sw04_rtm_bidirectional",
+        "sw04_evidence_and_auditability"
+      ]
+    },
+    {
+      "pattern": "단위시험, 통합시험과 시스템시험을 비교하고 적용절차를 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_unit_test",
+        "sw04_integration_test",
+        "sw04_system_test",
+        "sw04_test_specification"
+      ]
+    },
+    {
+      "pattern": "정적분석, 동적분석과 회귀시험의 목적과 차이를 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_static_analysis",
+        "sw04_dynamic_analysis",
+        "sw04_regression_test"
+      ]
+    },
+    {
+      "pattern": "계측제어 SW 요구사항 명세와 시험 가능한 수용기준 작성방법을 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_requirements_specification",
+        "sw04_test_specification",
+        "sw04_coverage_exit_criteria"
+      ]
+    },
+    {
+      "pattern": "Simulation, HIL과 Fault injection의 특징과 적용방안을 비교하시오.",
+      "required_anchor_ids": [
+        "sw04_simulation",
+        "sw04_hil",
+        "sw04_fault_injection",
+        "sw04_test_environment"
+      ]
+    },
+    {
+      "pattern": "제어 SW 결함관리, 변경영향 분석과 회귀시험의 관계를 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_defect_management",
+        "sw04_change_impact",
+        "sw04_regression_test",
+        "sw04_lifecycle_feedback"
+      ]
+    },
+    {
+      "pattern": "소프트웨어 아키텍처와 상세설계 산출물 및 검토항목을 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_software_architecture",
+        "sw04_detailed_design",
+        "sw04_review_approval"
+      ]
+    },
+    {
+      "pattern": "계측제어 SW V&V 증적, review·approval와 baseline 관리방법을 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_configuration_baseline",
+        "sw04_review_approval",
+        "sw04_evidence_and_auditability",
+        "sw04_verification_validation_relationship"
+      ]
+    },
+    {
+      "pattern": "V-model이 검증·확인 활동을 체계화하지만 SIL 달성을 보장하지 않는 이유와 MC/DC의 별도 증거 역할을 설명",
+      "required_anchor_ids": [
+        "sw04_v_model_definition",
+        "sw04_verification_validation_relationship",
+        "sw04_mcdc_detailed_coverage_boundary",
+        "vmodel_no_sil_guarantee__mcdc_adjacent_boundary"
+      ]
+    }
   ],
   "recommended_outline": [
     {
