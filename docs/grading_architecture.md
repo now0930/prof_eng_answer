@@ -235,6 +235,35 @@ coverage와 검증된 defect를 그 행에 병합한다. 상태의 최종 source
 - 검증된 fatal: 최대 `medium`, `strong` 차단
 - 모든 원자 요구가 `correct`이고 hard defect가 없을 때만 `strong` 허용
 
+### 10.3 Canonical claim과 요구상태 판정 계약
+
+결정론적 정확도는 문자열 출현 횟수가 아니라 canonical claim의 관계 정합성으로
+판정한다. extractor는 다음 evidence만 만들며 상태·fatal·점수를 결정하지 않는다.
+
+```text
+subject · predicate · object · condition · polarity · source_span · extractor
+```
+
+Requirement evaluator는 이 evidence를 Question Demand, Topic contract와 global
+engineering ontology에 대조해 다음 상태를 소유한다.
+
+| 상태 | 결정 조건 |
+|---|---|
+| `SATISFIED` | 필수 개념·관계·조건이 정렬되고 직접 충돌이 없음 |
+| `PARTIAL` | 관련 개념과 일부 관계는 있으나 필수 관계 또는 조건이 부족함 |
+| `WRONG` | 관련된 명시적 주장이 contract 또는 불변조건과 충돌함 |
+| `MISSING` | 요구에 연결할 실질 evidence가 없음 |
+
+`UNKNOWN/ABSTAIN`은 extractor의 내부 상태다. 이를 임의로 `PARTIAL` 또는 `MISSING`으로
+바꾸어 점수화하지 않는다. legacy adapter가 `SATISFIED`를 `CORRECT` 또는 `present`로
+표시할 수는 있지만 의미와 credit을 변경할 수 없다.
+
+부정·인용·정정 문맥에서는 최종 채택 주장을 분리한다. 예를 들어 잘못된 식을 인용한
+뒤 명시적으로 정정한 답안은 인용된 식만으로 `WRONG`이 되지 않는다. 반대로 핵심
+오류를 최종 결론으로 채택하면 관련 요구는 `WRONG`이며 ontology invariant가 지정한
+경우에만 core/fatal로 전파한다. 하나의 일반 단어 또는 span을 관련 없는 여러 anchor의
+독립 evidence로 중복 계산하지 않는다.
+
 ## 11. Logic fatal과 Difficulty ceiling
 
 Logic fatal과 numeric cap은 같은 개념이 아니다.

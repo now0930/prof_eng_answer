@@ -11,6 +11,7 @@
 | 전문가 정확도 Gate | Deterministic 30건 `READY`: score in-range 86.67%, known-overgrading 0 | [`accuracy_release_gate.md`](accuracy_release_gate.md), deterministic replay artifact |
 | 요구상태 안정성 Gate | 30건 2회 exact replay `STABLE`, provider call 0 | `reports/deterministic_stability_stage38.json` |
 | Topic Pack authoring·검증 | `ab94b69`에서 범용·대상 기반 흐름 적용 | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
+| Topic Atomicity | 78 Topic, 차단 오류 0, scoped question contract 698개, 검토 경고 38 | [`topic_pack_atomicity.md`](topic_pack_atomicity.md) |
 | Runtime provenance | container parity·production replay·Telegram raw/final exact match 완료 | [`operation_runbook.md`](operation_runbook.md), `reports/deterministic_endpoint_consistency_stage41.json` |
 | 결정론적 채점 전환 | 운영 완료: routing 100%·fatal 9/9·score 30/30·LLM verdict authority 0 | [`deterministic_grading_transition.md`](deterministic_grading_transition.md) |
 
@@ -125,24 +126,52 @@ Issue 본문은 현재 상태만 유지한다. 긴 실행 로그는 comment 또�
 
 ## 9. 전환 완료 후 개발 방향
 
-### P0 — Question scope 정밀화
+Topic Pack의 일괄 정리·확장은 2026-09-09 기준으로 종료한다. 현재 기준선은 78 Topic,
+Atomicity 차단 오류 0, 문자열 질문 계약 0, 검토 경고 38이다. 경고만으로 Pack을
+분리하지 않으며 이후 Topic 수정은 실제 routing·scope·채점 오류가 재현된 경우에만
+수행한다. 다음 개발 owner는 Topic inventory가 아니라 canonical claim과 요구상태
+판정 정확도다.
 
-- 운영 빈도가 높은 질문부터 Topic Pack `expected_question_patterns`에 사람이 검토한 `required_anchor_ids`를 추가한다.
-- unrelated anchor count, 요구항목 수, primary/secondary Topic 선택 근거를 regression artifact에 저장한다.
-- V-Model처럼 인접 Topic까지 합쳐 과도한 요구항목이 생성되는 사례를 첫 대상으로 삼는다.
-- 특정 답안 점수를 목표로 scope를 줄이지 않고 문제문이 명시한 요구만 소유하게 한다.
+### 완료 — Question scope와 Topic Atomicity 기준선
 
-### P0 — 상태 판정 품질
+- 698개 질문을 객체형 `pattern + required_anchor_ids` 계약으로 통일했다.
+- P0 owner 오염 4건을 복구하고 Atomicity Gate를 release에 연결했다.
+- Nyquist/Routh alias 경계는 정상·비교·방법 미지정·답안 오염 fixture로 고정했다.
+- 남은 경고는 실제 기출·routing·Golden 증거가 생길 때만 개별 처리한다.
+
+### P0 — Canonical Claim Extractor
+
+답안 span을 단순 키워드 hit가 아니라 다음 provider-neutral evidence로 정규화한다.
+
+```text
+subject · predicate · object · condition · polarity · source_span · extractor
+```
+
+- 정의, 분류, 적용조건, 인과, 비교, 수식 관계를 canonical predicate로 분리한다.
+- 부정, 인용, 타인의 주장, 정정 전 문장과 최종 채택 주장을 구분한다.
+- 한 span을 관련 없는 여러 anchor에 중복 증거로 사용하지 않는다.
+- deterministic parser가 해석하지 못한 span은 `UNKNOWN/ABSTAIN`으로 남기며 추측해
+  정답 또는 오답으로 확정하지 않는다.
+
+### P0 — 요구상태 Evaluator
 
 - 단일 일반 단어가 여러 anchor의 `PARTIAL` 근거로 중복 사용되는 비율을 측정한다.
-- `SATISFIED`는 핵심 개념과 관계 evidence, `PARTIAL`은 식별 가능한 개념 언급, `MISSING`은 근거 없음으로 분리한다.
+- `SATISFIED`: 요구된 핵심 개념·관계·조건이 정렬되고 직접 충돌이 없다.
+- `PARTIAL`: 관련 개념과 일부 관계는 식별되지만 필수 관계 또는 조건이 부족하다.
+- `WRONG`: 요구와 관련된 명시적 주장이 Topic contract 또는 공학 불변조건과 충돌한다.
+- `MISSING`: 요구에 연결할 수 있는 실질적 evidence가 없다.
+- `UNKNOWN/ABSTAIN`은 내부 해석 상태이며 최종 요구상태로 점수화하지 않는다.
 - 최소 `SATISFIED` 합격 증거와 fatal ceiling은 유지하며 threshold 완화로 Golden Gate를 맞추지 않는다.
+- evaluator만 `SATISFIED/PARTIAL/WRONG/MISSING`을 결정하며 extractor, LLM 또는 formatter는
+  상태와 점수를 출력할 권한이 없다.
 
 ### P1 — 전체 Topic 위험 기반 Golden 확대
 
 - 모든 Topic에 동일 개수의 사례를 강제하지 않는다.
 - 안전·계산·법규·빈출 Topic부터 정답, 부분답, 핵심오답, 부정·인용·정정 문맥 mutation을 추가한다.
 - 목표는 Topic inventory coverage, fatal false-negative 0, false pass 0, 동일 입력 repeatability 100%다.
+- mutation은 개념, 관계 방향, 조건, 단위·차원, 극성, 부정·정정 문맥을 한 번에 하나씩
+  바꾸고 어떤 deterministic rule이 작동해야 하는지 명시한다.
 
 ### P1 — Ontology와 Topic contract 분리 강화
 
@@ -167,3 +196,15 @@ Issue 본문은 현재 상태만 유지한다. 긴 실행 로그는 comment 또�
 7. commit·CI·운영 evidence를 신규 Issue에 기록
 
 Topic Pack 변경의 완료 기준은 "파일이 생성됨"이 아니라 문제 요구범위가 정확하고 정답·부분답·오답 경계를 재현 가능하게 보호하는 것이다.
+
+### 정확도 완료 조건
+
+- known core/fatal error recall 100%, false pass 0
+- 정상 답안의 fatal/core-error false positive 0
+- reviewed requirement status confusion matrix에서 설명되지 않은 오분류 0
+- 동일 입력의 requirement status·score·verdict repeatability 100%
+- score/verdict/coverage/총평 간 consistency 위반 0
+- `EXTERNAL_LLM_REQUIRED_FOR_VERDICT=0`, `LLM_VERDICT_AUTHORITY=0` 유지
+
+평균 점수 차이만으로 정확도를 승인하지 않는다. 우선순위는 core error false negative,
+정상 답안 false positive, 명백한 오답의 `SATISFIED` 판정 순이다.

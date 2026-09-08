@@ -723,7 +723,17 @@ Markdown 절차를 runtime이 파싱하지 않습니다. `add-topic`과 `approve
 일괄 분리하지 않습니다. 상세 기준은
 [`docs/topic_pack_atomicity.md`](docs/topic_pack_atomicity.md)에 있습니다.
 
-현재 첫 유지보수 우선순위는 자주 출제되는 질문의 exact question contract 확대입니다. 예를 들어 V-Model 질문처럼 다수의 인접 anchor가 한꺼번에 평가되는 경우, 사람이 검토한 `required_anchor_ids`로 실제 문제 요구범위를 제한합니다. 단순히 점수를 맞추기 위한 anchor 삭제나 threshold 완화는 금지합니다.
+향후 Topic 수정이 필요한 경우에는 자주 출제되는 질문의 exact question contract를
+우선 검토합니다. V-Model 질문처럼 다수의 인접 anchor가 한꺼번에 평가되는 경우,
+사람이 검토한 `required_anchor_ids`로 실제 문제 요구범위를 제한합니다. 단순히 점수를
+맞추기 위한 anchor 삭제나 threshold 완화는 금지합니다.
+
+2026-09-09 기준 Topic Pack 일괄 정리는 완료했습니다. 이후 경고만으로 Topic을
+분리·확장하지 않으며 실제 오판정 fixture가 있을 때만 선택 수정합니다. 다음 개발
+우선순위는 canonical claim(`subject·predicate·object·condition·polarity`) 추출과
+`SATISFIED/PARTIAL/WRONG/MISSING` 요구상태 evaluator의 일반화입니다. 상세 계획과
+완료 지표는 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 판정
+소유권 계약은 [`docs/grading_architecture.md`](docs/grading_architecture.md)를 따릅니다.
 
 기본 validation 흐름:
 
