@@ -64,14 +64,43 @@
 | Runtime provenance scoring policy | `stage23_generic_grading_contract_v1` |
 | 결정론적 Authority Gate | `READY` (Gemini-off 48건) |
 | Topic routing recall / score coverage | 100% / 100% |
-| Known Fatal 재현율 / false positive | 100% (10/10) / 0건 |
+| Known Fatal 재현율 / false positive | 100% (16/16) / 0건 |
 | 점수 허용구간 적중률 / 평균 이탈 | 100% / 0점 |
+| Reviewed Golden / covered Topic | 48건 / 31개 |
+| normal·adverse·fatal 3-lane 완료 | 6 Topic |
 
 `runtime_grading_provenance_v1`은 실행 process 수준의 commit, 시작 시각, router/evaluator/verifier SHA와 scoring policy를 기록합니다. Stage39~41에서 Docker image·container parity, provider-zero production replay와 Telegram endpoint의 persisted raw/final exact match까지 검증했습니다. 운영 채점의 requirement·fatal·score·verdict authority는 deterministic primary가 소유하며 외부 LLM 호출은 필수가 아닙니다.
 
 결정론적 운영 후보는 Authority Gate와 동일 입력 2회 Stability Gate를 먼저 통과해야 합니다. 이후 같은 commit을 rebuild/recreate하고 container fingerprint·parity·production replay·endpoint smoke 증거를 저장합니다. 어느 Gate든 `HOLD` 또는 `FAIL`이면 배포를 중단합니다. 상세 절차는 [`docs/operation_runbook.md`](docs/operation_runbook.md)와 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md)를 따릅니다. `scripts/release_candidate.py` 기반 provider qualification은 legacy 비교 또는 optional semantic resolver 검증에만 사용하며 최종 판정권을 갖지 않습니다.
 
 Topic Pack 개수는 `rubrics/generated/topic_pack_manifest.generated.json`을 기준으로 확인합니다. Legacy 통합 bank는 호환 목적으로 유지되며, legacy 파일의 Model Answer·Fact Topic 개수를 현재 Topic Pack coverage 개수로 사용하지 않습니다. Runtime bank 선택의 기준은 `rubric_bank_paths.py`와 `RUBRIC_BANK_MODE`입니다.
+
+### Stage50~54 위험 기반 Golden 확대
+
+Stage49의 FSRM pilot 이후 다음 5개 우선위험 소유 Topic을 한 번에 확장했습니다.
+
+| Stage | 소유 Topic | 결정론적 보호 경계 |
+|---|---|---|
+| 50 | Nyquist | `-1+j0` 임계점, 개루프 극점·선회수·폐루프 극점 관계 |
+| 51 | Lead/Lag | 진상-위상여유, 지상-정상상태 정확도 역할 |
+| 52 | LQR | Riccati 이득 도출, Q-상태·R-제어입력 가중 관계 |
+| 53 | HIPPS | 과압 예방 차단과 PSV 사후 방출의 기능 경계 |
+| 54 | PLC·DCS·SCADA | 시퀀스·연속공정·감독제어의 주 적용 경계 |
+
+각 Topic에 normal, adverse, fatal mutation을 1건씩 추가했습니다. 관계 반전은 답안
+전체 문자열이나 LLM 판정으로 찾지 않고 `subject·predicate·object·polarity` 충돌로
+검출합니다. Topic machine contract의 requirement rule이 검증된 fatal ID와 ceiling을
+소유하며, replay audit은 전역 invariant와 contract-owned fatal을 함께 집계합니다.
+
+현재 확대 기준은 Topic Pack 전수 정리가 아닙니다. 다음 세 조건 중 하나가 있을 때만
+추가 3-lane을 만듭니다.
+
+1. 실제 운영에서 overgrading·fatal false negative가 재현됨
+2. 인접 Topic routing 또는 요구범위 충돌이 확인됨
+3. 위험 감사 상위 Topic이며 기존 공통 규칙으로 보호되지 않음
+
+확대 후에는 `scripts/audit_golden_risk_coverage.py`, 2회 Stability Gate, Authority Gate,
+`scripts/validate_release.sh`를 순서대로 통과해야 합니다.
 
 ---
 
