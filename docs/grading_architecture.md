@@ -292,6 +292,11 @@ subject의 evidence로 허용하되, 뒤에 등장한 더 가까운 compatible s
 일치하는 claim을 relation conflict로 소비하지 않아 fact 선언 순서가 판정을 바꾸지
 않게 한다.
 
+부정 극성은 predicate와 object 관계 구간에서만 판정한다. 예를 들어 “정적분석은
+실행하지 않고 결함을 분석한다”의 `실행하지 않고`는 정적분석의 실행 방식이지
+`분석한다`를 부정하는 표현이 아니다. `does_not_guarantee`처럼 부정 표면형 자체가
+정상 canonical predicate인 경우에도 positive 관계로 정규화한다.
+
 ## 11. Logic fatal과 Difficulty ceiling
 
 Logic fatal과 numeric cap은 같은 개념이 아니다.

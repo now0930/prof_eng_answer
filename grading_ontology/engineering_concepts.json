@@ -28,7 +28,7 @@
     {"id": "demand_frequency", "aliases": ["demand frequency", "요구빈도", "요구 빈도"]},
     {"id": "sif_calculation", "aliases": ["SIF 계산", "SIL 계산", "PFDavg 계산", "정량 계산"]},
     {"id": "v_model", "aliases": ["V-Model", "V Model", "V모델"]},
-    {"id": "development_test_correspondence", "aliases": ["개발단계와 시험단계의 대응", "좌측 개발", "우측 시험", "대응관계", "corresponding test"]},
+    {"id": "development_test_correspondence", "aliases": ["개발단계와 시험단계의 대응", "각 개발 단계에서 시험", "좌측 개발", "우측 시험", "대응관계", "corresponding test"]},
     {"id": "early_test_planning", "aliases": ["조기 시험계획", "개발 초기 시험계획", "시험기준을 개발 초기에", "early test planning"]},
     {"id": "software_unit", "aliases": ["소프트웨어 모듈", "단일 모듈", "모듈/유니트", "모듈", "유니트", "함수", "function block"]},
     {"id": "boundary_error_paths", "aliases": ["정상·경계·오류 경로", "경계값과 오류경로", "경계 조건과 오류 경로", "boundary and error paths"]},
@@ -78,7 +78,15 @@
     {"id": "safe_function_constraints", "aliases": ["trip setpoint, safe state, response time와 process safety time", "trip setpoint·safe state·response time·process safety time", "trip 설정점과 안전상태 및 응답시간"]},
     {"id": "lopa_result", "aliases": ["LOPA 결과", "목표 SIL 결정 결과", "위험분석 결과"]},
     {"id": "srs_inputs", "aliases": ["SRS 입력", "SRS 요구사항", "원인·감지변수·trip 조건·safe state·목표 SIL·응답시간·proof test·bypass·reset·운전모드"]},
-    {"id": "cause_occurrence_frequency", "aliases": ["원인 사건이 발생하는 빈도", "개시사건이 발생하는 빈도", "cause occurrence frequency"]}
+    {"id": "cause_occurrence_frequency", "aliases": ["원인 사건이 발생하는 빈도", "개시사건이 발생하는 빈도", "cause occurrence frequency"]},
+    {"id": "structural_coverage", "aliases": ["구조적 커버리지", "structural coverage"]},
+    {"id": "independent_condition_effect", "aliases": ["각 원자 조건의 독립 영향", "각 조건의 독립 영향", "Decision 결과에 독립적으로 영향", "independent condition effect"]},
+    {"id": "total_sil_assurance", "aliases": ["전체 SIL 달성", "전체 안전무결성 달성", "total SIL assurance"]},
+    {"id": "software_lifecycle_vv", "aliases": ["소프트웨어 수명주기 활동", "요구사항 추적성·독립성·검증·확인 활동", "software lifecycle V&V"]},
+    {"id": "static_analysis", "aliases": ["정적분석", "정적 분석", "static analysis"]},
+    {"id": "static_defect_scope", "aliases": ["규칙위반·데이터흐름·제어흐름과 잠재 결함", "규칙위반, 데이터흐름, 제어흐름, 복잡도와 잠재 결함", "static defect scope"]},
+    {"id": "dynamic_analysis", "aliases": ["동적분석", "동적 분석", "dynamic analysis"]},
+    {"id": "runtime_behavior_scope", "aliases": ["실행 중 경로·시간·자원·인터페이스와 실제 반응", "실행 경로, timing, resource와 반응", "runtime behavior scope"]}
   ],
   "cue_groups": {
     "multiplication": ["×", "*", "곱", "multiply", "product"],

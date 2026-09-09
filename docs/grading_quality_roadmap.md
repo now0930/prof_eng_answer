@@ -176,6 +176,13 @@ mapping·SRS 인계 누락은 canonical `MISSING`으로 구분한다. 차원 오
 복제하지 않고 FSRM global invariant가 단일 owner로 유지한다. 다음 확대 대상은 새
 운영 오분류 또는 reviewed mutation 증거가 생긴 Topic으로 제한한다.
 
+Stage46에서는 전문가 승인된 MC/DC–V-Model–SIL 복합 회귀를 사용한다. MC/DC를
+구조적 커버리지·조건 독립영향·100% 한계·수명주기 보완 관계로 판정하고, 정적·동적
+분석은 분석 대상이 서술된 경우에만 충족한다. `실행하지 않고`처럼 object의 성질을
+나타내는 부정은 뒤의 분석 관계를 반전시키지 않는다. 복합 질문의 exact scope 적용
+실험에서 총점이 10.83→8.35로 과도하게 낮아졌으므로, 다음 우선순위는 requirement 수에
+따른 WRONG/MISSING 정규화 편향을 제거한 뒤 질문 scope를 다시 적용하는 것이다.
+
 ### P0 — 요구상태 Evaluator
 
 - 단일 일반 단어가 여러 anchor의 `PARTIAL` 근거로 중복 사용되는 비율을 측정한다.

@@ -1025,7 +1025,9 @@
       {"fact_id": "rtm_traces_implementation", "subject": "traceability_matrix", "predicate": "traces", "object": "implementation_traceability", "polarity": "positive"},
       {"fact_id": "rtm_traces_bidirectionally", "subject": "traceability_matrix", "predicate": "traces", "object": "bidirectional_traceability", "polarity": "positive"},
       {"fact_id": "baseline_manages_versions", "subject": "configuration_baseline", "predicate": "manages", "object": "versioned_artifacts", "polarity": "positive"},
-      {"fact_id": "baseline_manages_revalidation", "subject": "configuration_baseline", "predicate": "manages", "object": "change_revalidation", "polarity": "positive"}
+      {"fact_id": "baseline_manages_revalidation", "subject": "configuration_baseline", "predicate": "manages", "object": "change_revalidation", "polarity": "positive"},
+      {"fact_id": "static_analysis_finds_static_defects", "subject": "static_analysis", "predicate": "analyzes", "object": "static_defect_scope", "polarity": "positive"},
+      {"fact_id": "dynamic_analysis_observes_runtime_behavior", "subject": "dynamic_analysis", "predicate": "analyzes", "object": "runtime_behavior_scope", "polarity": "positive"}
     ],
     "requirement_rules": [
       {"requirement_id": "unit_test_method_and_tools", "required_fact_ids": ["misra_is_coding_guideline"], "minimum_match_count": 1},
@@ -1036,10 +1038,12 @@
       {"requirement_id": "sw04_verification_definition", "required_fact_ids": ["verification_checks_specification"], "minimum_match_count": 1},
       {"requirement_id": "sw04_validation_definition", "required_fact_ids": ["validation_checks_intended_use"], "minimum_match_count": 1},
       {"requirement_id": "sw04_rtm_bidirectional", "required_fact_ids": ["rtm_traces_implementation", "rtm_traces_bidirectionally"], "minimum_match_count": 2},
-      {"requirement_id": "sw04_configuration_baseline", "required_fact_ids": ["baseline_manages_versions", "baseline_manages_revalidation"], "minimum_match_count": 2}
+      {"requirement_id": "sw04_configuration_baseline", "required_fact_ids": ["baseline_manages_versions", "baseline_manages_revalidation"], "minimum_match_count": 2},
+      {"requirement_id": "sw04_static_analysis", "required_fact_ids": ["static_analysis_finds_static_defects"], "minimum_match_count": 1},
+      {"requirement_id": "sw04_dynamic_analysis", "required_fact_ids": ["dynamic_analysis_observes_runtime_behavior"], "minimum_match_count": 1}
     ],
     "invariant_bindings": [
-      {"invariant_code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL", "rule_id": "sw04_fatal_misra_is_unit_test_tool", "classification": "fatal", "requirement_refs": ["unit_test_method_and_tools"], "recommended_ceiling": 14.5}
+      {"invariant_code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL", "rule_id": "sw04_fatal_misra_is_unit_test_tool", "classification": "fatal", "requirement_refs": ["unit_test_method_and_tools", "sw04_unit_test"], "recommended_ceiling": 14.5}
     ]
   },
   "revision_notes": [
@@ -1048,7 +1052,8 @@
     "SW-05 Safety lifecycle과 SW-10 프로젝트 인수 경계를 false-positive 기준에 반영했다.",
     "2026-08-07 LLM 의미 감사 수리: HIL Fatal correction과 SIL·Virtual Commissioning 경계를 일치시켰다.",
     "MC/DC detailed ownership handed off to safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
-    "2026-09-09 Stage43: V-Model·시험수준·V&V·RTM·baseline의 8개 Fact Anchor를 canonical relation machine contract로 승격했다."
+    "2026-09-09 Stage43: V-Model·시험수준·V&V·RTM·baseline의 8개 Fact Anchor를 canonical relation machine contract로 승격했다.",
+    "2026-09-09 Stage46: 정적·동적 분석을 canonical relation으로 승격하고 MISRA 범주 오류를 단위시험 anchor에도 전파한다."
   ],
   "topic_label": "SW-04 계측제어 SW 수명주기·V-Model·V&V"
 }

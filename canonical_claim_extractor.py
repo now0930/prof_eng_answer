@@ -131,12 +131,14 @@ def _polarity(
     ) or (
         predicate_id == "distinct_from"
         and any(token in predicate_text for token in ("동일하지", "distinct", "different"))
+    ) or (
+        predicate_id == "does_not_guarantee"
     )
     if encoded_negative_relation:
         return "positive"
     relation_start = min(predicate_span[0], object_span[0])
     relation_end = max(predicate_span[1], object_span[1]) + 12
-    window = normalized[max(0, relation_start - 8):relation_end]
+    window = normalized[relation_start:relation_end]
     # In "A가 아니라 B" the object B is the adopted correction.
     not_but = normalized.find("아니라")
     if not_but >= 0 and object_span[0] > not_but:

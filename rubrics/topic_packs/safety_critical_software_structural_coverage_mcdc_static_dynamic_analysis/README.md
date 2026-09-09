@@ -57,6 +57,13 @@
 
 Coverage 결과는 대상 Source·Object, Compiler·Option, Tool Version, Target 환경, Test Case와 Requirement Traceability를 함께 식별하여 형상관리한다.
 
+## 결정론적 machine contract
+
+MC/DC의 구조적 커버리지 목적, 원자 조건의 독립 영향, 100% coverage가 전체 SIL을
+단독 보장하지 않는 한계, 수명주기 V&V 보완관계를 canonical claim으로 판정한다.
+적용 표준·Safety Plan 조건 없는 보편적 100% 주장은 기존 global fatal owner가 계속
+판정하며 단순 `MC/DC`, `100%`, `SIL` 동시 출현은 정답 근거가 아니다.
+
 <!-- guard:M1_100_PERCENT_MCDC_DOES_NOT_GUARANTEE_SIL -->
 ## MC/DC·SIL·수명주기 경계
 

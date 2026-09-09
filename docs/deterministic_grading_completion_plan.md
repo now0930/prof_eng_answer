@@ -293,3 +293,20 @@ Stage45는 canonical 비교가 0이던 반응기 과압력 운영 fixture를 9�
 | Stage45C parser/evaluator | 완료 | OCR 줄바꿈·점 포함 식·주어 소유·다중 fact 순서 독립성 |
 | Stage45D regression | 완료 | 역사적 12.42점·정상 9/9·부분·오답·질문범위 회귀 |
 | Stage45E release | 완료 | Topic 생성물·30건 replay READY·stability STABLE·authority READY·전체 release PASS |
+
+## 11. Stage46 — MC/DC 복합 운영 회귀 canonical 승격
+
+전문가 승인된 MC/DC–V-Model–SIL 복합 회귀를 이용해 MC/DC의 목적·독립영향·100%
+한계·수명주기 경계와 일반 정적·동적 분석을 canonical 관계로 판정한다. 기존 네 fatal
+owner와 `10.5~14.5`점 승인 범위는 유지한다.
+
+| 단계 | 상태 | 완료 조건 |
+|---|---|---|
+| Stage46A audit | 완료 | 3개 Topic·4 fatal·기존 canonical 비교 8건 확인 |
+| Stage46B contract | 완료 | MC/DC 4관계와 정적·동적 분석 2관계 승격 |
+| Stage46C regression | 완료 | 역사적 10.83점·4 fatal·정상·부정·질문범위 mutation |
+| Stage46D release | 완료 | Topic 생성물·30건 replay READY·stability STABLE·authority READY·전체 release PASS |
+
+다음 Stage에서는 복합 질문을 원자 요구축으로 좁힐 때 `WRONG` 비율이 과도하게
+증폭되는 점수 정규화를 먼저 교정한다. 이 경계를 고치기 전에는 정확한 질문 scope
+계약을 추가해 승인 점수 범위를 깨뜨리지 않는다.

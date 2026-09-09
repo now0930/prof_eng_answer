@@ -10,7 +10,7 @@
     {"id": "supplements", "aliases": ["보완", "보조", "대체하지", "supplement"]},
     {"id": "derived_from", "aliases": ["산정", "도출", "계산 결과", "근거", "정한다", "derived from"]},
     {"id": "equivalent_to", "aliases": ["같", "동일", "이다", "아니", "equivalent", "equal", "not equal"]},
-    {"id": "corresponds_to", "aliases": ["대응", "연결", "correspond"]},
+    {"id": "corresponds_to", "aliases": ["대응", "연결", "각 개발 단계에서 시험", "correspond"]},
     {"id": "plans", "aliases": ["계획", "준비", "plan", "prepare"]},
     {"id": "verifies", "aliases": ["검증", "시험", "verify", "test"]},
     {"id": "validates", "aliases": ["만족", "확인", "평가", "validate"]},
@@ -28,6 +28,8 @@
     {"id": "qualifies_as", "aliases": ["인정", "credit", "충족", "qualifies as"]},
     {"id": "mapped_from", "aliases": ["매핑", "대응", "구간으로 정", "mapped from"]},
     {"id": "defines", "aliases": ["정의", "규정", "명시", "defines"]},
-    {"id": "handed_off_to", "aliases": ["인계", "전달", "handoff", "handed off"]}
+    {"id": "handed_off_to", "aliases": ["인계", "전달", "handoff", "handed off"]},
+    {"id": "analyzes", "aliases": ["분석", "검출", "찾", "analyzes", "detects"]},
+    {"id": "does_not_guarantee", "aliases": ["보장하지", "단독으로 보장하지", "does not guarantee"]}
   ]
 }

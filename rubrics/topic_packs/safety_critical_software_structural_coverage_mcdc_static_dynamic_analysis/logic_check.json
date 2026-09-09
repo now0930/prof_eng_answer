@@ -152,18 +152,27 @@
     "authority": "deterministic_topic_contract",
     "score_effect": "downstream_deterministic_only",
     "facts": [
-      {"fact_id": "mcdc_requirement_depends_on_applicability", "subject": "mcdc", "predicate": "qualified_by", "object": "applicability_qualifier", "polarity": "positive"}
+      {"fact_id": "mcdc_requirement_depends_on_applicability", "subject": "mcdc", "predicate": "qualified_by", "object": "applicability_qualifier", "polarity": "positive"},
+      {"fact_id": "mcdc_is_structural_coverage", "subject": "mcdc", "predicate": "equivalent_to", "object": "structural_coverage", "polarity": "positive"},
+      {"fact_id": "mcdc_verifies_independent_condition_effect", "subject": "mcdc", "predicate": "verifies", "object": "independent_condition_effect", "polarity": "positive"},
+      {"fact_id": "mcdc_does_not_guarantee_total_sil", "subject": "mcdc", "predicate": "does_not_guarantee", "object": "total_sil_assurance", "polarity": "positive"},
+      {"fact_id": "mcdc_supplements_lifecycle_vv", "subject": "mcdc", "predicate": "supplements", "object": "software_lifecycle_vv", "polarity": "positive"}
     ],
     "requirement_rules": [
-      {"requirement_id": "mcdc_normative_applicability", "required_fact_ids": ["mcdc_requirement_depends_on_applicability"], "minimum_match_count": 1}
+      {"requirement_id": "mcdc_normative_applicability", "required_fact_ids": ["mcdc_requirement_depends_on_applicability"], "minimum_match_count": 1},
+      {"requirement_id": "mcdc_purpose", "required_fact_ids": ["mcdc_is_structural_coverage"], "minimum_match_count": 1},
+      {"requirement_id": "mcdc_definition", "required_fact_ids": ["mcdc_verifies_independent_condition_effect"], "minimum_match_count": 1},
+      {"requirement_id": "mcdc_one_hundred_percent_limit", "required_fact_ids": ["mcdc_does_not_guarantee_total_sil"], "minimum_match_count": 1},
+      {"requirement_id": "mcdc_lifecycle_vv_boundary", "required_fact_ids": ["mcdc_supplements_lifecycle_vv"], "minimum_match_count": 1}
     ],
     "invariant_bindings": [
-      {"invariant_code": "UNQUALIFIED_UNIVERSAL_SIL4_MCDC_RULE", "rule_id": "sil_four_universal_rule", "classification": "fatal", "requirement_refs": ["mcdc_normative_applicability"], "recommended_ceiling": 14.5}
+      {"invariant_code": "UNQUALIFIED_UNIVERSAL_SIL4_MCDC_RULE", "rule_id": "sil_four_universal_rule", "classification": "fatal", "requirement_refs": ["mcdc_normative_applicability", "mcdc_one_hundred_percent_limit"], "recommended_ceiling": 14.5}
     ]
   },
   "revision_notes": [
     "deterministic keyword penalties disabled",
     "fatal conditions require explicit contextual contradiction",
-    "MC/DC is treated as structural evidence, not total safety proof"
+    "MC/DC is treated as structural evidence, not total safety proof",
+    "2026-09-09 Stage46: purpose, independent-effect, 100% limit and lifecycle boundary anchors use canonical relations."
   ]
 }
