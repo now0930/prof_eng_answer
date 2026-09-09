@@ -247,4 +247,4 @@ answer span
 | Stage42B extractor | 완료 | global ontology + routed contract, provider call 0 |
 | Stage42C evaluator | 완료 | 상태 precedence·claim 단일 배정·UNKNOWN 보존 |
 | Stage42D mutation | 완료 | 정상·부분·오답·인용·정정·교차절·반복성 회귀 |
-| Stage42E release | 로컬 완료 | 30건 replay `READY`·2회 `STABLE`·전체 release PASS; CI는 commit 후 확인 |
+| Stage42E release | 완료 | 30건 replay `READY`·2회 `STABLE`·전체 release·GitHub Actions PASS |
