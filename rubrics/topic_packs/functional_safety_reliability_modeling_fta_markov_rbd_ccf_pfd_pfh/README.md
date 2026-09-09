@@ -128,3 +128,10 @@ SIS/SIF의 정량적 신뢰도 모델링 방법을 설명하고, 모델 선택�
 - 신규 Topic 후보 C의 semantic ownership 판정 결과에 따라 생성한다.
 - A·B·D 기존 Topic 보강은 이 Topic과 분리하여 후속 commit에서 수행한다.
 - generated bank는 source JSON 검토와 focused validation 전에는 갱신하지 않는다.
+
+## Stage49 결정론적 Golden 경계
+
+- 정상·부분·fatal 3-lane Golden이 demand mode와 quantity dimension을 검증한다.
+- `저수요에는 PFDavg를 사용한다`와 같은 한국어 object-first 어순을 지원한다.
+- PFDavg의 무차원성과 PFH의 `1/h` 역시간 차원을 machine contract로 판정한다.
+- rate와 probability의 직접 비교는 기존 global invariant와 fatal ID가 계속 소유한다.

@@ -47,6 +47,21 @@ class CanonicalClaimExtractorTests(unittest.TestCase):
         self.assertEqual(rows["demand_mode_metric_selection"]["status"], "SATISFIED")
         self.assertEqual(extraction["provider_calls"], 0)
 
+    def test_korean_object_first_word_order_selects_nearest_metric(self):
+        extraction, rows, _ = evaluate(
+            "저수요에는 PFDavg를 사용한다. 고수요와 연속수요에는 PFH를 적용한다."
+        )
+        claims = extraction["canonical_evidence"]["claims"]
+        relations = {
+            (row["subject"], row["predicate"], row["object"])
+            for row in claims
+        }
+        self.assertIn(("pfdavg", "applies_to", "low_demand"), relations)
+        self.assertIn(("pfh", "applies_to", "high_demand"), relations)
+        self.assertIn(("pfh", "applies_to", "continuous_demand"), relations)
+        self.assertNotIn(("pfdavg", "applies_to", "high_demand"), relations)
+        self.assertEqual(rows["demand_mode_metric_selection"]["status"], "SATISFIED")
+
     def test_partial_relation_is_not_promoted_to_satisfied(self):
         _, rows, _ = evaluate("PFDavg는 저수요 모드에 적용한다.")
         self.assertEqual(rows["demand_mode_metric_selection"]["status"], "PARTIAL")

@@ -130,7 +130,8 @@ def test_complete_dataset_without_predictions_is_explicitly_hold() -> None:
         policy,
     )
     assert result["decision"] == "HOLD"
-    assert result["dataset"]["reviewed_case_count"] == 30
+    assert result["dataset"]["reviewed_case_count"] == len(gold)
+    assert len(gold) >= 30
     assert any(row["code"] == "EVALUATED_CASE_COUNT" for row in result["blockers"])
 
 

@@ -7,5 +7,7 @@
 - 개발 중 draft 포함: `--include-draft`
 - CI에서 평가 건수를 강제하려면 `--require-cases`를 사용한다.
 - 운영 배포 기준: `docs/accuracy_release_gate.md`
-- 현재 30건은 모두 `reviewed`이며 25개 주제와 4개 Question Type을 포함한다.
+- 현재 33건은 모두 `reviewed`이며 26개 주제와 4개 Question Type을 포함한다.
+- `python3 scripts/audit_golden_risk_coverage.py`로 Topic별 normal/adverse/fatal
+  lane 공백을 위험도 순으로 확인한다.
 - 사례 수 기준은 충족했지만 정확도·오류 재현율·점수 MAE 기준 미달 시 배포 gate는 계속 `HOLD`다.

@@ -82,7 +82,11 @@ def _find_alias(
     return min(matches, key=lambda row: (row[0], -(row[1] - row[0]))) if matches else None
 
 
-def _find_subject_alias(text: str, aliases: list[str]) -> tuple[int, int] | None:
+def _find_subject_alias(
+    text: str,
+    aliases: list[str],
+    predicate_id: str | None = None,
+) -> tuple[int, int] | None:
     """Prefer an occurrence carrying an explicit Korean subject/topic marker."""
     normalized = _normalized(text)
     matches: list[tuple[int, int]] = []
@@ -96,7 +100,10 @@ def _find_subject_alias(text: str, aliases: list[str]) -> tuple[int, int] | None
             start = index + max(1, len(alias))
     if not matches:
         return None
-    marked = [span for span in matches if _marked_as_subject(text, span)]
+    marked = [
+        span for span in matches
+        if _marked_as_subject(text, span, predicate_id=predicate_id)
+    ]
     return min(marked or matches, key=lambda row: (row[0], -(row[1] - row[0])))
 
 
@@ -169,10 +176,36 @@ def _same_clause(
     return not _CLAUSE_BOUNDARY.search(_normalized(text)[start:end])
 
 
-def _marked_as_subject(text: str, span: tuple[int, int]) -> bool:
+def _marked_as_subject(
+    text: str,
+    span: tuple[int, int],
+    *,
+    predicate_id: str | None = None,
+) -> bool:
     """Return whether an occurrence can own a following coordinated relation."""
     tail = _normalized(text)[span[1]:span[1] + 12]
-    return re.match(r"\s*(?:은|는|이(?!며)|가|:)", tail) is not None
+    markers = r"은|는|이(?!며)|가|:"
+    if predicate_id == "applies_to":
+        markers += r"|을|를"
+    return re.match(rf"\s*(?:{markers})", tail) is not None
+
+
+def _object_before_subject_allowed(
+    text: str,
+    subject_span: tuple[int, int],
+    object_span: tuple[int, int],
+    predicate_id: str,
+) -> bool:
+    """Recognize Korean ``object에는 subject를 적용`` word order."""
+    if predicate_id != "applies_to" or object_span[0] >= subject_span[0]:
+        return False
+    normalized = _normalized(text)
+    object_tail = normalized[object_span[1]:subject_span[0]]
+    subject_tail = normalized[subject_span[1]:subject_span[1] + 8]
+    return bool(
+        re.search(r"(?:에|에서)(?:는)?", object_tail)
+        and re.match(r"\s*(?:은|는|이|가|을|를)", subject_tail)
+    )
 
 
 def extract_canonical_claim_evidence(
@@ -214,7 +247,9 @@ def extract_canonical_claim_evidence(
             if _find_alias(sentence, values) is not None
         }
         for owner_topic_id, subject_id, predicate_id in relation_subjects:
-            subject_span = _find_subject_alias(sentence, aliases.get(subject_id, []))
+            subject_span = _find_subject_alias(
+                sentence, aliases.get(subject_id, []), predicate_id,
+            )
             if not subject_span:
                 continue
             predicate_span = _find_alias(
@@ -229,7 +264,13 @@ def extract_canonical_claim_evidence(
                 object_span = _find_alias(sentence, aliases.get(object_id, []))
                 if (
                     not object_span
-                    or subject_span[0] > min(predicate_span[0], object_span[0])
+                    or subject_span[0] > predicate_span[0]
+                    or (
+                        subject_span[0] > object_span[0]
+                        and not _object_before_subject_allowed(
+                            sentence, subject_span, object_span, predicate_id,
+                        )
+                    )
                     or not _same_clause(sentence, subject_span, object_span)
                 ):
                     continue
@@ -242,12 +283,14 @@ def extract_canonical_claim_evidence(
                     if candidate_predicate != predicate_id:
                         continue
                     candidate_span = _find_subject_alias(
-                        sentence, aliases.get(candidate_subject, [])
+                        sentence, aliases.get(candidate_subject, []), predicate_id,
                     )
                     if (
                         candidate_span
-                        and candidate_span[1] <= object_span[0]
-                        and _marked_as_subject(sentence, candidate_span)
+                        and candidate_span[1] <= predicate_span[0]
+                        and _marked_as_subject(
+                            sentence, candidate_span, predicate_id=predicate_id,
+                        )
                     ):
                         compatible_subjects.append((candidate_span[0], candidate_subject))
                 if compatible_subjects and max(compatible_subjects)[1] != subject_id:

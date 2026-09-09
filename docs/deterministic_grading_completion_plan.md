@@ -2,7 +2,7 @@
 
 ## 1. 목표와 기준선
 
-목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage48 offline full-chain은 Topic routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 Authority Gate `READY`다. production authority 이전과 provider-zero 운영 검증도 완료했다.
+목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage49 offline full-chain은 Topic routing recall 100%, known-fatal 10/10, score coverage 33/33, 허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 Authority Gate `READY`다. production authority 이전과 provider-zero 운영 검증도 완료했다.
 
 완료 목표:
 
@@ -340,3 +340,17 @@ Stage48은 30건 중 허용범위를 0.1~0.5점 초과한 4건을 분석했다. 
 | Stage48B policy | 완료 | 심화 미충족 18.5점·자동 최고점 24점 상한 |
 | Stage48C diagnostics | 완료 | replay에 원점수·상한·항목별 근거 기록 |
 | Stage48D regression | 완료 | 30/30 허용범위·평균 이탈 0·fatal/routing 회귀 유지 |
+
+## 14. Stage49 — 위험 기반 Golden 3-lane 확대
+
+전체 Topic을 동일 개수로 채우지 않고 `selection_importance`, 난이도, fatal rule,
+machine contract와 기존 normal/adverse/fatal coverage를 결합해 확대 우선순위를 계산한다.
+첫 대상은 machine contract가 이미 있고 독립 Golden이 없던 FSRM이다.
+
+| 단계 | 상태 | 완료 조건 |
+|---|---|---|
+| Stage49A inventory | 완료 | 78 Topic 위험·lane 공백 자동 순위화 |
+| Stage49B Golden | 완료 | FSRM 정상·부분·fatal 3건 reviewed 편입 |
+| Stage49C parser | 완료 | 한국어 object-first·`1/h`·중복 claim 회귀 |
+| Stage49D requirement | 완료 | 정상 SATISFIED, 부분 PARTIAL, 오류 WRONG/fatal |
+| Stage49E release | 완료 | 33건 READY·2회 STABLE·전체 release·CI PASS |

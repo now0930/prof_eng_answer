@@ -20,7 +20,13 @@ class DeterministicReplayAuditTests(unittest.TestCase):
 
     def test_replay_is_provider_free_and_repeatable(self):
         self.assertEqual(self.report["provider_calls"], 0)
-        self.assertEqual(self.report["case_count"], 30)
+        expected = sum(
+            bool(line.strip())
+            for line in (REPO / "calibration/expert_accuracy_golden.jsonl")
+            .read_text(encoding="utf-8").splitlines()
+        )
+        self.assertGreaterEqual(expected, 30)
+        self.assertEqual(self.report["case_count"], expected)
         self.assertEqual(self.report["deterministic_repeatability"], 1.0)
 
     def test_stage34c1_fatal_is_recalled(self):

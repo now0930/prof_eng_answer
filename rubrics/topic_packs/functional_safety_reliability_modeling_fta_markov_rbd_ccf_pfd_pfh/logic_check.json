@@ -60,6 +60,20 @@
         "predicate": "equivalent_to",
         "object": "failure_rate",
         "polarity": "negative"
+      },
+      {
+        "fact_id": "pfdavg_has_dimensionless_dimension",
+        "subject": "pfdavg",
+        "predicate": "has_dimension",
+        "object": "dimensionless",
+        "polarity": "positive"
+      },
+      {
+        "fact_id": "pfh_has_inverse_time_dimension",
+        "subject": "pfh",
+        "predicate": "has_dimension",
+        "object": "inverse_time",
+        "polarity": "positive"
       }
     ],
     "requirement_rules": [
@@ -70,14 +84,17 @@
           "pfh_applies_to_high_demand",
           "pfh_applies_to_continuous_demand"
         ],
-        "minimum_match_count": 2
+        "minimum_match_count": 2,
+        "allow_subject_mention_partial": true
       },
       {
         "requirement_id": "quantitative_verification_dimension",
         "required_fact_ids": [
-          "pfdavg_not_failure_rate"
+          "pfdavg_not_failure_rate",
+          "pfdavg_has_dimensionless_dimension",
+          "pfh_has_inverse_time_dimension"
         ],
-        "minimum_match_count": 1
+        "minimum_match_count": 2
       }
     ],
     "invariant_bindings": [

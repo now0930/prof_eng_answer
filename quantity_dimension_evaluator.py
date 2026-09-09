@@ -19,7 +19,7 @@ ONTOLOGY_DIR = Path(__file__).resolve().parent / "grading_ontology"
 _NEGATED_CONTEXT = re.compile(
     r"(?:비교할\s*수\s*없|비교하지\s*않|비교하면\s*안|"
     r"하면\s*안|해서는\s*안|잘못|틀린|오류|금지|반례|"
-    r"아니(?:다|며|고|라)|동일하지\s*않|"
+    r"아니(?:다|며|고|라)|동일하지\s*않|다르|달리|구분|"
     r"cannot\s+(?:be\s+)?compar|must\s+not\s+compar|invalid)",
     re.IGNORECASE,
 )
@@ -42,7 +42,7 @@ _SYMBOL_RELATIONS = {
 }
 _DIMENSION_PHRASES = {
     "inverse_time": re.compile(
-        r"(?:시간당\s*(?:고장률|빈도)|1\s*/\s*(?:time|시간)|"
+        r"(?:시간당\s*(?:고장률|빈도)|1\s*/\s*(?:h|hr|hour|time|시간)|"
         r"inverse[_\s-]*time|(?:h|hr|hour)\s*\^?\s*-?1)",
         re.IGNORECASE,
     ),
@@ -236,6 +236,19 @@ def extract_quantity_relation_evidence(
                         "extraction_confidence": 1.0,
                     })
                     break
+    # Overlapping aliases and adjacent quantity pairs can describe the same
+    # normalized relation within one sentence.  Collapse only exact parser
+    # duplicates; the same relation asserted in different spans remains
+    # separate evidence.
+    unique: dict[tuple[Any, ...], dict[str, Any]] = {}
+    for claim in claims:
+        key = (
+            claim["source_span"]["start"], claim["source_span"]["end"],
+            claim["subject"], claim["predicate"], claim["object"],
+            claim.get("polarity", "positive"),
+            claim.get("assertion_context", "asserted"),
+        )
+        unique.setdefault(key, claim)
     return build_canonical_grading_evidence(
         question_text=question_text,
         answer_text=answer_text,
@@ -244,7 +257,7 @@ def extract_quantity_relation_evidence(
             "resolver_id": "quantity_relation_parser",
             "resolver_version": "1",
         },
-        claims=claims,
+        claims=list(unique.values()),
     )
 
 

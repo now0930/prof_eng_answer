@@ -56,6 +56,7 @@ class QuantityDimensionEvaluatorTests(unittest.TestCase):
     def test_corrective_or_negated_examples_are_not_errors(self):
         variants = (
             "lambda와 PFDavg는 차원이 달라 직접 비교할 수 없다.",
+            "PFH는 PFDavg와 달리 시간 기준 고장 빈도이다.",
             "잘못된 예시: lambda < PFDavg.",
             "lambda가 PFD보다 작도록 설계하면 안 된다.",
         )
@@ -93,6 +94,16 @@ class QuantityDimensionEvaluatorTests(unittest.TestCase):
         first = analyze_quantity_dimensions(answer)
         for _ in range(10):
             self.assertEqual(first, analyze_quantity_dimensions(answer))
+
+    def test_overlapping_invalid_relations_do_not_duplicate_claim_ids(self):
+        answer = (
+            "PFDavg는 고수요에서 사용하는 시간당 고장률이다. "
+            "failure rate가 PFDavg보다 작도록 lambda < PFDavg로 설계한다."
+        )
+        result = analyze_quantity_dimensions(answer)
+        claim_ids = [row["claim_id"] for row in result["canonical_evidence"]["claims"]]
+        self.assertEqual(len(claim_ids), len(set(claim_ids)))
+        self.assertTrue(result["technical_error_detected"])
 
 
 if __name__ == "__main__":

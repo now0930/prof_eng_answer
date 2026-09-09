@@ -1,0 +1,20 @@
+{
+  "version": "deterministic_risk_golden_cases_v1",
+  "cases": [
+    {
+      "case_id": "risk_fsrm_demand_mode_normal_01",
+      "question": "SIS의 PFDavg와 PFH를 demand mode에 따라 구분하여 설명하시오.",
+      "answer": "1. 평가 기준\nSIF의 요구모드를 먼저 분류한 뒤 그 모드에 맞는 무결성 지표를 선택해야 한다. PFDavg와 PFH는 서로 단위가 다른 지표이므로 같은 수치축으로 직접 비교하지 않는다.\n\n2. 저수요 모드와 PFDavg\n저수요 모드에서는 보호기능에 작동 요구가 왔을 때 실패할 평균확률인 PFDavg를 사용한다. PFDavg는 무차원 확률이며 RRF는 1/PFDavg 관계로 해석한다. 단순 1oo1에서는 일정한 위험 미검출 고장률, 완전한 proof test, 즉시 복구와 작은 고장확률 같은 가정 아래 PFDavg를 λDU·T/2로 근사할 수 있다.\n\n3. 고수요·연속수요와 PFH\n고수요 모드와 연속수요 모드에서는 시간당 위험고장 빈도인 PFH를 사용하며 단위는 1/h이다. PFH는 요구 시 실패확률인 PFDavg와 달리 시간 기준 rate이므로 demand mode와 운전 조건을 명시해 평가한다.\n\n4. 검증과 적용\n실제 계산에서는 Sensor, Logic Solver, Final Element의 전체 SIF 경계를 정하고 λDU, 진단범위, proof test interval과 coverage, 수리·bypass 시간, CCF를 반영한다. 계산 결과는 선택한 demand mode, 데이터 출처와 근사 가정을 기록하고 SRS의 목표값과 비교한다.\n\n5. 결론\n따라서 요구모드 분류와 지표의 차원을 먼저 확인하고 각 지표의 허용범위로 검증한다."
+    },
+    {
+      "case_id": "risk_fsrm_demand_mode_partial_01",
+      "question": "SIS의 PFDavg와 PFH를 demand mode에 따라 구분하여 설명하시오.",
+      "answer": "PFDavg는 저수요 모드에서 요구 시 안전기능이 실패할 평균확률이며 무차원 값이다. Proof test interval이 길어지면 잠복 위험고장의 노출시간이 증가하여 PFDavg가 커질 수 있으므로 시험주기와 고장률 가정을 함께 확인한다. 다만 고수요 및 연속수요에서 사용할 지표와 PFH의 단위·평가방법은 설명하지 못했다."
+    },
+    {
+      "case_id": "risk_fsrm_demand_mode_fatal_01",
+      "question": "SIS의 PFDavg와 PFH를 demand mode에 따라 구분하여 설명하시오.",
+      "answer": "PFDavg는 고수요와 연속수요에서 사용하는 시간당 고장률이고 PFH는 저수요에서 요구 시 실패확률이다. 따라서 시스템의 failure rate가 PFDavg보다 작도록 λ < PFDavg를 설계기준으로 직접 비교하면 SIL을 만족할 수 있다."
+    }
+  ]
+}
