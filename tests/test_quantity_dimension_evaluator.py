@@ -78,6 +78,16 @@ class QuantityDimensionEvaluatorTests(unittest.TestCase):
         self.assertEqual(result["checked_claim_count"], 2)
         self.assertFalse(result["technical_error_detected"])
 
+    def test_explicit_negative_fact_remains_an_asserted_claim(self):
+        result = analyze_quantity_dimensions("PFDavg는 failure rate가 아니다.")
+        claim = next(
+            row for row in result["canonical_evidence"]["claims"]
+            if row["subject"] == "pfdavg" and row["object"] == "failure_rate"
+        )
+        self.assertEqual(claim["polarity"], "negative")
+        self.assertEqual(claim["assertion_context"], "asserted")
+        self.assertFalse(result["technical_error_detected"])
+
     def test_repeatability_is_exact(self):
         answer = "lambda_SIS 비율이 PFD 비율보다 작도록 시스템을 설계."
         first = analyze_quantity_dimensions(answer)

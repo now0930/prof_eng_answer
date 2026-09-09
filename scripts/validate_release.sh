@@ -4,7 +4,7 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 # STAGE17E2B_TOPIC_PACK_TEST_MANIFEST_V1
-python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow scripts.test_topic_pack_workflow_controller scripts.test_topic_pack_atomicity scripts.test_deterministic_score_engine scripts.test_nyquist_routh_routing_boundary
+python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow scripts.test_topic_pack_workflow_controller scripts.test_topic_pack_atomicity scripts.test_deterministic_score_engine scripts.test_nyquist_routh_routing_boundary tests.test_canonical_claim_extractor
 
 PROMOTE_GENERATED="${PROMOTE_GENERATED:-1}"
 RUN_SMOKE_TOPIC_PACKS="${RUN_SMOKE_TOPIC_PACKS:-0}"
@@ -102,6 +102,7 @@ python3 -m py_compile \
   expert_accuracy_benchmark.py \
   accuracy_release_gate.py \
   canonical_grading_evidence.py \
+  canonical_claim_extractor.py \
   quantity_dimension_evaluator.py \
   topic_machine_contract.py \
   deterministic_replay_audit.py \

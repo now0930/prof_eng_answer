@@ -1,4 +1,5 @@
 import json
+import copy
 import sys
 import unittest
 from pathlib import Path
@@ -65,9 +66,19 @@ class FsrmMachineContractTests(unittest.TestCase):
         self.assertIn(("pfh", "applies_to", "continuous_demand", "positive"), facts)
         self.assertIn(("pfdavg", "equivalent_to", "failure_rate", "negative"), facts)
 
-    def test_machine_contract_is_additive_and_not_yet_a_production_owner(self):
-        production = (REPO / "grading_agents.py").read_text(encoding="utf-8")
-        self.assertNotIn("topic_machine_contract", production)
+    def test_optional_fact_conditions_are_machine_readable(self):
+        contract = copy.deepcopy(self.contract)
+        contract["facts"][0]["conditions"] = ["low_demand"]
+        validated = validate_topic_machine_contract(
+            contract,
+            topic_id=TOPIC_ID,
+            known_rule_ids={"failure_rate_compared_directly_to_pfd"},
+        )
+        self.assertEqual(validated["facts"][0]["conditions"], ["low_demand"])
+
+    def test_machine_contract_is_additive_and_consumed_by_primary_extractor(self):
+        production = (REPO / "deterministic_primary_grader.py").read_text(encoding="utf-8")
+        self.assertIn("extract_canonical_claim_evidence", production)
         self.assertEqual(self.contract["score_effect"], "downstream_deterministic_only")
 
 

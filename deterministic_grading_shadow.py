@@ -114,6 +114,7 @@ def build_deterministic_grading_shadow(
         question_text=question_text,
         answer_text=answer_text,
         semantic_call=semantic_call,
+        topic_ids=[topic_id] if topic_id else None,
     )
     evidence_documents = resolver["evidence_documents"]
     claims = [

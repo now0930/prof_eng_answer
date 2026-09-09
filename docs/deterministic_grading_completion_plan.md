@@ -211,3 +211,40 @@ python3 scripts/check_deterministic_authority_gate.py
 | Stage39D | 완료 | container parity·production replay·rollback·실제 endpoint PASS |
 
 Stage39D 운영 증거까지 완료했다. commit `1e343fc` 운영 container에서 deterministic primary가 활성화됐고, Telegram 세션 `20260907_041003_5960502198`과 `20260907_041028_5960502198`의 persisted raw/final marker·score·verdict·pass flag가 exact match했다. 저장소 예제 기본값은 rollback을 위해 `false`로 유지하고 실제 운영 `.env`만 `true`를 사용한다.
+
+## 7. Stage42 — Canonical Claim 정확도 강화
+
+Stage42는 Topic 수를 늘리지 않고 machine contract가 있는 모든 Topic에 동일한 claim
+판정 경계를 적용한다.
+
+```text
+answer span
+  -> subject / predicate / object / conditions / polarity
+  -> asserted / quoted / rejected / corrected
+  -> deterministic requirement evaluator
+```
+
+- `canonical_claim_extractor.py`가 global concept·predicate ontology와 routed Topic의
+  machine contract를 결합한다. 특정 답안 전체 문자열은 규칙으로 사용하지 않는다.
+- 명시적 반대 polarity와 contract 밖 관계 object는 `WRONG`, 최소 사실 미달은
+  `PARTIAL`, evidence 부재는 `MISSING`으로 분리한다.
+- `quoted`와 `rejected` claim은 정답 credit과 오류 판정에서 제외하고, 최종 정정
+  claim만 `corrected` evidence로 채택한다.
+- claim 하나는 한 requirement에만 배정한다. 인접 절의 concept를 교차 결합하지
+  않으며 배정 결과에 `duplicate_credit_count=0`을 기록한다.
+- deterministic parser가 해석하지 못한 경우 `UNKNOWN`, score engine은 이를
+  `ABSTAIN`으로 유지한다. optional semantic resolver도 conditions와
+  assertion context를 명시해야 하며 score·status·fatal 권한은 계속 0이다.
+
+현재 정밀 relation coverage는 additive `machine_contract`가 있는 Topic부터 적용한다.
+나머지 Topic의 Fact Anchor lexical evidence는 기존 회귀를 유지하고, 실제 오분류가
+확인된 Topic부터 machine contract를 추가한다. Topic Pack 전체 일괄 migration은 하지
+않는다.
+
+| 단계 | 상태 | 완료 조건 |
+|---|---|---|
+| Stage42A schema/context | 완료 | condition·assertion context provider-neutral 계약 |
+| Stage42B extractor | 완료 | global ontology + routed contract, provider call 0 |
+| Stage42C evaluator | 완료 | 상태 precedence·claim 단일 배정·UNKNOWN 보존 |
+| Stage42D mutation | 완료 | 정상·부분·오답·인용·정정·교차절·반복성 회귀 |
+| Stage42E release | 로컬 완료 | 30건 replay `READY`·2회 `STABLE`·전체 release PASS; CI는 commit 후 확인 |

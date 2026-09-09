@@ -264,6 +264,15 @@ engineering ontology에 대조해 다음 상태를 소유한다.
 경우에만 core/fatal로 전파한다. 하나의 일반 단어 또는 span을 관련 없는 여러 anchor의
 독립 evidence로 중복 계산하지 않는다.
 
+구현 owner는 `canonical_claim_extractor.py`와
+`deterministic_requirement_evaluator.py`다. extractor는 global concept·predicate
+ontology와 routed Topic의 additive machine contract를 사용하며 provider call과
+grading authority가 모두 0이다. `assertion_context`는 `asserted`, `quoted`,
+`rejected`, `corrected`로 제한되고 evaluator는 앞뒤 두 상태만 채택한다. 동일
+claim ID는 최초로 정렬된 requirement 한 곳에만 배정한다. 현재 이 relation-level
+정밀 판정은 machine contract가 있는 Topic부터 적용하며, 다른 Topic은 검증된 실제
+오분류가 생길 때 contract를 점진적으로 추가한다.
+
 ## 11. Logic fatal과 Difficulty ceiling
 
 Logic fatal과 numeric cap은 같은 개념이 아니다.

@@ -53,6 +53,8 @@ class CanonicalGradingEvidenceTests(unittest.TestCase):
         self.assertEqual(evidence["authority"], "evidence_only")
         self.assertEqual(evidence["score_effect"], "none")
         self.assertEqual(evidence["claims"][0]["subject"], "pfdavg")
+        self.assertEqual(evidence["claims"][0]["conditions"], [])
+        self.assertEqual(evidence["claims"][0]["assertion_context"], "asserted")
         validate_canonical_grading_evidence(evidence, answer_text=ANSWER)
 
     def test_semantic_resolver_has_same_evidence_contract(self):

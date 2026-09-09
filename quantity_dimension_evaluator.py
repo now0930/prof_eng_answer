@@ -19,10 +19,19 @@ ONTOLOGY_DIR = Path(__file__).resolve().parent / "grading_ontology"
 _NEGATED_CONTEXT = re.compile(
     r"(?:비교할\s*수\s*없|비교하지\s*않|비교하면\s*안|"
     r"하면\s*안|해서는\s*안|잘못|틀린|오류|금지|반례|"
+    r"아니(?:다|며|고|라)|동일하지\s*않|"
     r"cannot\s+(?:be\s+)?compar|must\s+not\s+compar|invalid)",
     re.IGNORECASE,
 )
 _SENTENCE = re.compile(r"[^\n.!?。]+(?:[.!?。]|$)")
+_QUOTED_CONTEXT = re.compile(
+    r"(?:라고|이라는|라는)\s*(?:주장|말|설명|견해)|[\"“”‘’「」『』]",
+    re.IGNORECASE,
+)
+_REJECTED_CONTEXT = re.compile(
+    r"(?:잘못|틀린|오류|금지|반례|invalid|incorrect|wrong)",
+    re.IGNORECASE,
+)
 _SYMBOL_RELATIONS = {
     "<": "less_than",
     "<=": "less_than_or_equal",
@@ -155,6 +164,8 @@ def _relation_between(sentence: str, left: dict[str, Any], right: dict[str, Any]
         and re.search(r"^\s*(?:이|인|으로|라고)", after_right)
     ) or (
         re.search(r"\b(?:is|are)\s+(?:a\s+|an\s+)?$", between, re.I)
+    ) or (
+        re.search(r"^\s*(?:이|가)?\s*아니", after_right)
     ):
         return left, "equivalent_to", right
     return None
@@ -171,6 +182,11 @@ def extract_quantity_relation_evidence(
         sentence = sentence_match.group(0)
         mentions = _mentions(sentence, ontology)
         polarity = "negative" if _NEGATED_CONTEXT.search(sentence) else "positive"
+        assertion_context = (
+            "rejected" if _REJECTED_CONTEXT.search(sentence)
+            else "quoted" if _QUOTED_CONTEXT.search(sentence)
+            else "asserted"
+        )
         for left, right in zip(mentions, mentions[1:]):
             relation = _relation_between(sentence, left, right)
             if relation is None:
@@ -181,6 +197,8 @@ def extract_quantity_relation_evidence(
                 "predicate": predicate,
                 "object": object_["quantity_id"],
                 "polarity": polarity,
+                "conditions": [],
+                "assertion_context": assertion_context,
                 "source_text": sentence,
                 "source_span": {
                     "start": sentence_match.start(),
@@ -206,6 +224,8 @@ def extract_quantity_relation_evidence(
                         "predicate": "has_dimension",
                         "object": dimension_id,
                         "polarity": polarity,
+                        "conditions": [],
+                        "assertion_context": assertion_context,
                         "source_text": sentence,
                         "source_span": {
                             "start": sentence_match.start(),
@@ -264,7 +284,11 @@ def evaluate_quantity_dimension_consistency(
     violations: list[dict[str, Any]] = []
     checked = 0
     for claim in evidence.get("claims", []):
-        if not isinstance(claim, dict) or claim.get("polarity") != "positive":
+        if (
+            not isinstance(claim, dict)
+            or claim.get("polarity") != "positive"
+            or claim.get("assertion_context", "asserted") not in {"asserted", "corrected"}
+        ):
             continue
         subject = ontology["quantities"].get(claim.get("subject"))
         if subject is None:

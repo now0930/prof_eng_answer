@@ -23,7 +23,7 @@ class LocalSemanticResolverTests(unittest.TestCase):
         self.assertEqual(result["llm_verdict_authority"], 0)
 
     def test_unresolved_span_can_add_only_canonical_evidence(self):
-        answer = "PFDavg는 저수요 모드에 적용한다."
+        answer = "PFDavg는 저수요 모드와 관련된다."
         start, end = 0, len(answer)
 
         def fake_call(prompt):
@@ -32,6 +32,8 @@ class LocalSemanticResolverTests(unittest.TestCase):
                 "subject": "pfdavg",
                 "predicate": "applies_to",
                 "object": "low_demand",
+                "conditions": [],
+                "assertion_context": "asserted",
                 "source_text": answer,
                 "source_span": {"start": start, "end": end},
             }]}
@@ -48,7 +50,7 @@ class LocalSemanticResolverTests(unittest.TestCase):
         self.assertNotIn("verdict", semantic)
 
     def test_authority_fields_from_model_are_rejected_fail_closed(self):
-        answer = "PFDavg는 저수요 모드에 적용한다."
+        answer = "PFDavg는 저수요 모드와 관련된다."
         result = resolve_with_optional_local_semantics(
             question_text="요구모드별 지표를 설명하시오.",
             answer_text=answer,
@@ -57,6 +59,8 @@ class LocalSemanticResolverTests(unittest.TestCase):
                     "subject": "pfdavg",
                     "predicate": "applies_to",
                     "object": "low_demand",
+                    "conditions": [],
+                    "assertion_context": "asserted",
                     "source_text": answer,
                     "source_span": {"start": 0, "end": len(answer)},
                     "verdict": "satisfied",
@@ -84,6 +88,22 @@ class LocalSemanticResolverTests(unittest.TestCase):
             failed["evidence_documents"][0],
         )
         self.assertEqual(failed["status"], "semantic_resolver_failed")
+
+    def test_semantic_claim_without_discourse_context_is_rejected(self):
+        answer = "PFDavg는 저수요 모드와 관련된다."
+        result = resolve_with_optional_local_semantics(
+            question_text="요구모드별 지표를 설명하시오.",
+            answer_text=answer,
+            semantic_call=lambda _prompt: {"claims": [{
+                "subject": "pfdavg",
+                "predicate": "applies_to",
+                "object": "low_demand",
+                "source_text": answer,
+                "source_span": {"start": 0, "end": len(answer)},
+            }]},
+        )
+        self.assertEqual(result["status"], "semantic_resolver_failed")
+        self.assertEqual(result["provider_calls"], 1)
 
 
 if __name__ == "__main__":

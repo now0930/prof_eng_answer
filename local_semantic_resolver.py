@@ -9,10 +9,7 @@ from canonical_grading_evidence import (
     CanonicalEvidenceError,
     build_canonical_grading_evidence,
 )
-from quantity_dimension_evaluator import (
-    extract_quantity_relation_evidence,
-    find_unresolved_quantity_spans,
-)
+from canonical_claim_extractor import extract_canonical_claim_evidence
 
 
 VERSION = "local_semantic_resolver_v1"
@@ -25,6 +22,8 @@ def build_semantic_evidence_prompt(
     return "\n".join((
         "[CANONICAL_EVIDENCE_ONLY_V1]",
         "Extract only explicit canonical subject-predicate-object claims.",
+        "For every claim include conditions and assertion_context.",
+        "assertion_context must be asserted, quoted, rejected, or corrected.",
         "Do not output score, status, verdict, severity, fatal, cap, or grade.",
         "Use absolute source_span offsets and copy source_text exactly.",
         "Allowed top-level JSON: {\"claims\": [...]}",
@@ -41,12 +40,15 @@ def resolve_with_optional_local_semantics(
     semantic_call: Callable[[str], Any] | None = None,
     resolver_id: str = "local_k2_semantic_resolver",
     resolver_version: str = "pilot",
+    topic_ids: list[str] | None = None,
 ) -> dict[str, Any]:
-    deterministic = extract_quantity_relation_evidence(
+    extraction = extract_canonical_claim_evidence(
         answer_text,
         question_text=question_text,
+        topic_ids=topic_ids,
     )
-    unresolved = find_unresolved_quantity_spans(answer_text, deterministic)
+    deterministic = extraction["canonical_evidence"]
+    unresolved = extraction["unresolved_spans"]
     result = {
         "version": VERSION,
         "marker": MARKER,
@@ -66,6 +68,15 @@ def resolve_with_optional_local_semantics(
         if not isinstance(payload, dict) or set(payload) != {"claims"}:
             raise CanonicalEvidenceError(
                 "semantic resolver output must contain only claims"
+            )
+        if any(
+            not isinstance(claim, dict)
+            or "conditions" not in claim
+            or "assertion_context" not in claim
+            for claim in payload["claims"]
+        ):
+            raise CanonicalEvidenceError(
+                "semantic claims must declare conditions and assertion_context"
             )
         semantic = build_canonical_grading_evidence(
             question_text=question_text,

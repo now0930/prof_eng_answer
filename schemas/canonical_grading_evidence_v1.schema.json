@@ -33,13 +33,15 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["claim_id", "subject", "predicate", "object", "polarity", "source_text", "source_span", "requirement_refs", "qualifiers", "extraction_confidence"],
+        "required": ["claim_id", "subject", "predicate", "object", "polarity", "conditions", "assertion_context", "source_text", "source_span", "requirement_refs", "qualifiers", "extraction_confidence"],
         "properties": {
           "claim_id": {"type": "string", "minLength": 1},
           "subject": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
           "predicate": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
           "object": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"},
           "polarity": {"enum": ["positive", "negative"]},
+          "conditions": {"type": "array", "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}, "uniqueItems": true},
+          "assertion_context": {"enum": ["asserted", "quoted", "rejected", "corrected"]},
           "source_text": {"type": "string", "minLength": 1},
           "source_span": {
             "type": "object",

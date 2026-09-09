@@ -23,6 +23,7 @@ SOURCE_MODES = {
     "legacy_adapter",
 }
 POLARITIES = {"positive", "negative"}
+ASSERTION_CONTEXTS = {"asserted", "quoted", "rejected", "corrected"}
 
 # Evidence producers must never smuggle grading authority through metadata.
 FORBIDDEN_AUTHORITY_KEYS = {
@@ -146,6 +147,8 @@ def _normalize_claim(raw: Any, answer_text: str) -> dict[str, Any]:
         "predicate",
         "object",
         "polarity",
+        "conditions",
+        "assertion_context",
         "source_text",
         "source_span",
         "requirement_refs",
@@ -167,11 +170,25 @@ def _normalize_claim(raw: Any, answer_text: str) -> dict[str, Any]:
     qualifiers = raw.get("qualifiers") or {}
     if not isinstance(qualifiers, dict):
         raise CanonicalEvidenceError("qualifiers must be an object")
+    conditions = raw.get("conditions") or []
+    if not isinstance(conditions, list):
+        raise CanonicalEvidenceError("conditions must be an array")
+    assertion_context = str(
+        raw.get("assertion_context") or "asserted"
+    ).strip().casefold()
+    if assertion_context not in ASSERTION_CONTEXTS:
+        raise CanonicalEvidenceError(
+            f"unsupported assertion_context: {assertion_context!r}"
+        )
     row = {
         "subject": _canonical_id(raw.get("subject"), "subject"),
         "predicate": _canonical_id(raw.get("predicate"), "predicate"),
         "object": _canonical_id(raw.get("object"), "object"),
         "polarity": polarity,
+        "conditions": sorted({
+            _canonical_id(item, "condition") for item in conditions
+        }),
+        "assertion_context": assertion_context,
         "source_text": source_text,
         "source_span": _span(raw.get("source_span"), answer_text, source_text),
         "requirement_refs": sorted({

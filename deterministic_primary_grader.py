@@ -11,7 +11,8 @@ from deterministic_score_engine import calculate_deterministic_score
 from deterministic_topic_router import route_question_topics
 from engineering_invariant_evaluator import evaluate_engineering_invariants
 from fact_anchor_evidence_adapter import augment_requirement_evaluation, evaluate_fact_anchor_requirements
-from quantity_dimension_evaluator import analyze_quantity_dimensions
+from canonical_claim_extractor import extract_canonical_claim_evidence
+from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
 
 
 VERSION = "deterministic_primary_grader_v1"
@@ -26,11 +27,18 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
     route = route_question_topics(question_text)
     if route["status"] != "ROUTED":
         raise DeterministicPrimaryError("deterministic topic routing abstained")
-    quantity = analyze_quantity_dimensions(answer_text, question_text=question_text)
+    extraction = extract_canonical_claim_evidence(
+        answer_text,
+        question_text=question_text,
+        topic_ids=route["topic_ids"],
+    )
+    quantity = evaluate_quantity_dimension_consistency(
+        extraction["canonical_evidence"]
+    )
     engineering = evaluate_engineering_invariants(answer_text)
     violations = quantity["violations"] + engineering["violations"]
     requirements = evaluate_deterministic_requirements(
-        claims=quantity["canonical_evidence"]["claims"],
+        claims=extraction["canonical_evidence"]["claims"],
         invariant_codes=[row["code"] for row in violations],
         topic_ids=route["topic_ids"],
         extraction_complete=True,
@@ -88,6 +96,12 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         "topic_id": route["primary_topic_id"],
         "topic_ids": route["topic_ids"],
         "routing_evaluation": route,
+        "canonical_claim_extraction": {
+            "marker": extraction["marker"],
+            "claim_count": extraction["canonical_evidence"]["summary"]["claim_count"],
+            "unresolved_span_count": len(extraction["unresolved_spans"]),
+            "provider_calls": 0,
+        },
         "requirements": requirements["requirements"],
         "requirement_summary": requirements["summary"],
         "logic_check_evaluation": {

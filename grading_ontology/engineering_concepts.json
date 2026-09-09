@@ -19,7 +19,14 @@
     {"id": "hardware_fault_tolerance", "aliases": ["HFT", "hardware fault tolerance", "Architectural Constraints", "아키텍처 제약"]},
     {"id": "sil4_scope", "aliases": ["SIL 4", "SIL4", "SIL 3/4", "SIL3/4"]},
     {"id": "mcdc", "aliases": ["MC/DC", "MCDC", "modified condition decision coverage"]},
-    {"id": "applicability_qualifier", "aliases": ["적용 표준에 따라", "적용 표준과", "Safety Plan으로", "Safety Plan에 따라", "요구수준에 따라", "표준에서 요구하는 경우", "where required by the standard"]}
+    {"id": "applicability_qualifier", "aliases": ["적용 표준에 따라", "적용 표준과", "Safety Plan으로", "Safety Plan에 따라", "요구수준에 따라", "표준에서 요구하는 경우", "where required by the standard"]},
+    {"id": "low_demand", "aliases": ["low demand", "low-demand", "저수요", "저 요구"]},
+    {"id": "high_demand", "aliases": ["high demand", "high-demand", "고수요", "고 요구"]},
+    {"id": "continuous_demand", "aliases": ["continuous demand", "continuous-demand", "연속수요", "연속 요구"]},
+    {"id": "systematic_fault", "aliases": ["systematic fault", "systematic failure", "체계적 오류", "체계적 고장"]},
+    {"id": "event_frequencies", "aliases": ["event frequencies", "사건빈도 비", "빈도의 비", "주파수 비", "F_tolerable/F_residual", "F_H,max/F_D"]},
+    {"id": "demand_frequency", "aliases": ["demand frequency", "요구빈도", "요구 빈도"]},
+    {"id": "sif_calculation", "aliases": ["SIF 계산", "SIL 계산", "PFDavg 계산", "정량 계산"]}
   ],
   "cue_groups": {
     "multiplication": ["×", "*", "곱", "multiply", "product"],

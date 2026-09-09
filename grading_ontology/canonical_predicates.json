@@ -1,0 +1,14 @@
+{
+  "schema_version": "grading_ontology.canonical_predicates.v1",
+  "predicates": [
+    {"id": "applies_to", "aliases": ["적용", "사용", "use", "apply"]},
+    {"id": "controls", "aliases": ["통제", "제어", "예방", "억제", "control", "prevent"]},
+    {"id": "distinct_from", "aliases": ["구분", "다르", "별개", "동일하지 않", "distinct", "different"]},
+    {"id": "qualified_by", "aliases": ["따라", "조건", "한정", "depending on", "qualified by"]},
+    {"id": "derived_by_ratio", "aliases": ["비로", "나누", "분모", "분자", "ratio", "/"]},
+    {"id": "classified_by", "aliases": ["분류", "구분", "결정", "classified by"]},
+    {"id": "supplements", "aliases": ["보완", "보조", "대체하지", "supplement"]},
+    {"id": "derived_from", "aliases": ["산정", "도출", "계산 결과", "근거", "derived from"]},
+    {"id": "equivalent_to", "aliases": ["같", "동일", "이다", "아니", "equivalent", "equal", "not equal"]}
+  ]
+}

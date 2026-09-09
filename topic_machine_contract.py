@@ -71,9 +71,15 @@ def validate_topic_machine_contract(
         raise TopicMachineContractError("machine_contract facts must not be empty")
     fact_ids: set[str] = set()
     for index, fact in enumerate(facts):
-        if not isinstance(fact, dict) or set(fact) != {
+        required_fact_fields = {
             "fact_id", "subject", "predicate", "object", "polarity",
-        }:
+        }
+        optional_fact_fields = {"conditions"}
+        if (
+            not isinstance(fact, dict)
+            or not required_fact_fields <= set(fact)
+            or set(fact) - required_fact_fields - optional_fact_fields
+        ):
             raise TopicMachineContractError(f"facts[{index}] fields mismatch")
         fact_id = _identifier(fact.get("fact_id"), f"facts[{index}].fact_id")
         if fact_id in fact_ids:
@@ -83,6 +89,14 @@ def validate_topic_machine_contract(
             _identifier(fact.get(key), f"facts[{index}].{key}")
         if fact.get("polarity") not in {"positive", "negative"}:
             raise TopicMachineContractError(f"facts[{index}].polarity invalid")
+        conditions = fact.get("conditions") or []
+        if not isinstance(conditions, list) or len(conditions) != len(set(conditions)):
+            raise TopicMachineContractError(f"facts[{index}].conditions invalid")
+        for condition_index, condition in enumerate(conditions):
+            _identifier(
+                condition,
+                f"facts[{index}].conditions[{condition_index}]",
+            )
 
     requirement_ids: set[str] = set()
     rules = value.get("requirement_rules")

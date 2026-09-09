@@ -15,7 +15,8 @@ from fact_anchor_evidence_adapter import (
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
 )
-from quantity_dimension_evaluator import analyze_quantity_dimensions
+from canonical_claim_extractor import extract_canonical_claim_evidence
+from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
 from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
 
@@ -81,12 +82,17 @@ def run_deterministic_replay_audit(
     routing_false_positive = 0
     unexplained: list[dict[str, Any]] = []
 
-    def analyze(question: str, answer: str) -> dict[str, Any]:
-        quantity = analyze_quantity_dimensions(answer, question_text=question)
+    def analyze(question: str, answer: str, topic_ids: list[str]) -> dict[str, Any]:
+        extraction = extract_canonical_claim_evidence(
+            answer, question_text=question, topic_ids=topic_ids,
+        )
+        quantity = evaluate_quantity_dimension_consistency(
+            extraction["canonical_evidence"]
+        )
         engineering = evaluate_engineering_invariants(answer)
         return {
             "violations": quantity["violations"] + engineering["violations"],
-            "claims": quantity["canonical_evidence"]["claims"],
+            "claims": extraction["canonical_evidence"]["claims"],
             "provider_calls": engineering["provider_calls"],
         }
 
@@ -98,8 +104,8 @@ def run_deterministic_replay_audit(
         routing_true_positive += len(expected_topics & routed_topics)
         routing_expected_count += len(expected_topics)
         routing_false_positive += len(routed_topics - expected_topics)
-        first = analyze(question, answer)
-        second = analyze(question, answer)
+        first = analyze(question, answer, routed["topic_ids"])
+        second = analyze(question, answer, routed["topic_ids"])
         repeatable = first == second
         if not repeatable:
             repeatability_failures += 1

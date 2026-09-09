@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-07): Stage38 Gemini-off 30건 전체 체인은 question-only routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건, 2회 exact replay `STABLE`로 Authority Gate `READY`를 달성했습니다. Stage39~41에서 production entrypoint, provider-zero container replay, 실제 Telegram 두 세션과 persisted raw/final score·verdict·pass flag exact match까지 완료했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-09): Stage38 Gemini-off 30건 전체 체인은 question-only routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건, 2회 exact replay `STABLE`로 Authority Gate `READY`를 달성했습니다. Stage39~41에서 production provider-zero 전환을 완료했고, Stage42에서는 canonical claim의 조건·극성·인용·정정 문맥과 requirement 단일 evidence 배정을 production 입력에 연결했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 
@@ -892,6 +892,8 @@ git diff --check -- README.md docs
 | `grading_agents.py` | semantic grading orchestration과 최종 persistence |
 | `grading_identity.py` | 문제·제출 정규화와 재현성 identity |
 | `question_type_router.py` | 문제문 및 Topic Pack canonical contract 기반 deterministic lens |
+| `canonical_claim_extractor.py` | 답안 span을 조건·극성·인용/정정 문맥이 있는 provider-neutral relation evidence로 변환 |
+| `deterministic_requirement_evaluator.py` | canonical claim과 machine contract로 요구상태를 판정하고 evidence를 단일 배정 |
 | `question_type_coverage_adapter.py` | coverage 정규화·상태 집계와 canonical lens reconciliation |
 | `question_demand_contract.py` | 문제문 추출, Topic Pack 8축 bridge와 canonical lens contract |
 | `explicit_requirement_cap.py` | 명시적 핵심 요구의 실제 누락 hard cap |

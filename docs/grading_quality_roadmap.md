@@ -153,6 +153,11 @@ subject · predicate · object · condition · polarity · source_span · extrac
 - deterministic parser가 해석하지 못한 span은 `UNKNOWN/ABSTAIN`으로 남기며 추측해
   정답 또는 오답으로 확정하지 않는다.
 
+2026-09-09 Stage42에서 이 경계를 production deterministic-primary 입력에 연결했다.
+global predicate ontology, 부정·인용·정정 context, 절 경계, relation-object mutation과
+claim 단일 배정을 focused regression으로 고정했다. 확대 단위는 Topic 개수가 아니라
+검증된 오분류가 있는 machine contract이며 일괄 migration은 하지 않는다.
+
 ### P0 — 요구상태 Evaluator
 
 - 단일 일반 단어가 여러 anchor의 `PARTIAL` 근거로 중복 사용되는 비율을 측정한다.
