@@ -22,6 +22,7 @@ _JUDGMENT_GROUPS = (
 )
 _LINK_CUES = ("따라", "때문", "따라서", "결론", "연결", "영향", "반면", "그러므로", "인해", "하면")
 _FULL_DEPTH_ASCII_UNITS = 1800
+_HIGH_SCORE_INELIGIBLE_CEILING = 18.5
 
 
 def evaluate_score_evidence(answer_text: str) -> dict[str, Any]:
@@ -67,6 +68,6 @@ def evaluate_score_evidence(answer_text: str) -> dict[str, Any]:
         "high_score_eligibility": {
             "eligible": volume["ascii_equivalent_count"] >= _FULL_DEPTH_ASCII_UNITS,
             "minimum_ascii_equivalent_count": _FULL_DEPTH_ASCII_UNITS,
-            "ceiling_when_ineligible": 19.0,
+            "ceiling_when_ineligible": _HIGH_SCORE_INELIGIBLE_CEILING,
         },
     }

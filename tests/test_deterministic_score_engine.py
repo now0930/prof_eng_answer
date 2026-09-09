@@ -56,8 +56,37 @@ class DeterministicScoreEngineTests(unittest.TestCase):
             "A_structure", "B_requirement_completeness", "C_fact_correctness",
             "D_engineering_judgment", "E_linkage",
         })
-        self.assertLessEqual(result["total_score"], 19.0)
+        self.assertLessEqual(result["total_score"], 18.5)
         self.assertFalse(result["high_score_met"])
+
+    def test_generic_cues_cannot_award_exceptional_last_point(self):
+        evaluation = {
+            "requirements": [{"status": "SATISFIED"}] * 4,
+            "findings": [], "fatal_or_core_error": False,
+        }
+        answer = (
+            "1. 현장 선정 검증\n- 현장 설비 선정 조건과 시험 기록을 관리한다.\n"
+            "2. 공학 판단\n- 비용 영향 위험 한계와 수식 경계를 검증한다.\n"
+            "3. 결론\n- 조건에 따라 확인하면 결론으로 연결된다.\n" + "충분한 설명 " * 400
+        )
+        result = calculate_deterministic_score(evaluation, answer_text=answer)
+        self.assertEqual(result["total_score"], 24.0)
+        self.assertEqual(result["maximum_automatic_score"], 24.0)
+
+    def test_ineligible_depth_uses_practical_band_upper_ceiling(self):
+        evaluation = {
+            "requirements": [{"status": "SATISFIED"}] * 4,
+            "findings": [], "fatal_or_core_error": False,
+        }
+        result = calculate_deterministic_score(
+            evaluation,
+            answer_text=(
+                "1. 현장 선정 검증\n- 현장 설비 선정 조건과 시험 기록을 관리한다.\n"
+                "2. 결론\n- 위험과 비용 영향에 따라 확인한다."
+            ),
+        )
+        self.assertLessEqual(result["total_score"], 18.5)
+        self.assertEqual(result["high_score_ineligible_ceiling"], 18.5)
 
 
 if __name__ == "__main__":

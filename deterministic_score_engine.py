@@ -14,6 +14,7 @@ _CREDIT = {"SATISFIED": 1.0, "PARTIAL": 0.5, "WRONG": 0.0, "MISSING": 0.0}
 MINIMUM_SATISFIED_RATIO_FOR_PASS = 0.15
 PASS_EVIDENCE_CEILING_RATIO = 0.58
 NO_SATISFIED_NONFATAL_CEILING_RATIO = 0.44
+MAXIMUM_AUTOMATIC_SCORE_RATIO = 0.96
 
 
 def _scoring_groups(requirements: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
@@ -103,6 +104,11 @@ def calculate_deterministic_score(
         and isinstance(row.get("recommended_ceiling"), (int, float))
     ]
     all_ceilings = list(ceilings)
+    # The generic structure/judgment/linkage cues are necessary supporting
+    # evidence, but they cannot prove the exceptional depth needed for a
+    # perfect score.  Reserve the final point until a future deterministic
+    # exceptional-evidence contract owns that decision.
+    all_ceilings.append(float(max_score) * MAXIMUM_AUTOMATIC_SCORE_RATIO)
     minimum_satisfied_ratio_for_pass = MINIMUM_SATISFIED_RATIO_FOR_PASS
     pass_evidence_eligible = satisfied_ratio >= minimum_satisfied_ratio_for_pass
     if not pass_evidence_eligible:
@@ -148,6 +154,12 @@ def calculate_deterministic_score(
         "scoring_groups": scoring_groups,
         "satisfied_requirement_ratio": round(satisfied_ratio, 6),
         "minimum_satisfied_ratio_for_pass": minimum_satisfied_ratio_for_pass,
+        "maximum_automatic_score": round(
+            float(max_score) * MAXIMUM_AUTOMATIC_SCORE_RATIO, 2
+        ),
+        "high_score_ineligible_ceiling": round(
+            float(score_evidence["high_score_eligibility"]["ceiling_when_ineligible"]), 2
+        ) if score_evidence is not None else None,
         "pass_evidence_eligible": pass_evidence_eligible,
         "no_satisfied_nonfatal_ceiling_applied": no_satisfied_nonfatal_ceiling_applied,
         "verdict": verdict,

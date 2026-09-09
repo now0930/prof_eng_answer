@@ -4,7 +4,7 @@
 
 프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
 
-> 최신 상태(2026-09-09): Gemini-off 30건에서 topic routing recall 100%, known-fatal recall 100%(9/9), score coverage 100%, 점수 허용구간 적중률 86.67%로 Authority Gate `READY`를 달성했습니다. 2회 exact replay는 `STABLE`이며 Stage39~41의 provider-zero 운영 전환 뒤 Stage42 canonical claim context·단일 evidence 배정까지 연결했습니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
+> 최신 상태(2026-09-09): Gemini-off 30건에서 topic routing recall 100%, known-fatal recall 100%(9/9), score coverage 100%, 점수 허용구간 적중률 100%, 평균 범위 이탈 0점으로 Authority Gate `READY`를 달성했습니다. Stage48은 심화 증거가 부족한 답안과 자동 단서만으로 만점에 가까워지는 답안의 공통 과대평가 경계를 보정하고 replay 진단 근거를 확장했습니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
 ---
 

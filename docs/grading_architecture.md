@@ -287,6 +287,15 @@ canonical 결과가 lexical 결과를 대체한다. 이때 두 결과와 상태 
 범위를 제한한다. 반면 synthetic rule과 실제 invariant가 위반된 requirement는 질문
 scope 밖이라는 이유로 제거하지 않는다.
 
+### 10.4 자동 고득점 경계
+
+일반 구조·현장 판단·연결 단서는 고득점의 필요 근거지만 25점의 충분조건은 아니다.
+분량 기반 심화 자격을 충족하지 못하면 18.5점을 상한으로 하고, 현재의 일반 자동
+evidence만으로 산정할 수 있는 최고점은 24점으로 제한한다. 25점은 Topic별 임의 cap
+해제가 아니라 별도의 결정론적 exceptional-evidence contract가 심화된 계산·비교·검증
+근거를 확인할 때만 허용한다. 이 상한은 `deterministic_score_engine.py`가 단일
+소유하며 LLM 또는 출력 formatter가 변경할 수 없다.
+
 Canonical predicate 자체가 부정 표면형을 의미로 포함하는 경우도 분리한다. 예를 들어
 `PST가 full proof test를 대체하지 않는다`는 `supplements`의 positive claim이며,
 단순 부정 polarity로 뒤집지 않는다. 쉼표·대조 접속으로 이어진 공학 입력 목록은 같은

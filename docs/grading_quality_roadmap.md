@@ -8,7 +8,7 @@
 |---|---|---|
 | 채점 구조·점수 소유권 | 구현 완료, 지속 회귀 | [`grading_architecture.md`](grading_architecture.md) |
 | Canonical demand ledger와 공개 coverage summary | 구현 완료, 지속 회귀 | `evaluation_ledger.py`, SIL output/coverage tests |
-| 전문가 정확도 Gate | Deterministic 30건 `READY`: score in-range 86.67%, known-overgrading 0 | [`accuracy_release_gate.md`](accuracy_release_gate.md), deterministic replay artifact |
+| 전문가 정확도 Gate | Deterministic 30건 `READY`: score in-range 100%, 평균 이탈 0점, known-overgrading 0 | [`accuracy_release_gate.md`](accuracy_release_gate.md), deterministic replay artifact |
 | 요구상태 안정성 Gate | 30건 2회 exact replay `STABLE`, provider call 0 | `reports/deterministic_stability_stage38.json` |
 | Topic Pack authoring·검증 | `ab94b69`에서 범용·대상 기반 흐름 적용 | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
 | Topic Atomicity | 78 Topic, 차단 오류 0, scoped question contract 698개, 검토 경고 38 | [`topic_pack_atomicity.md`](topic_pack_atomicity.md) |
@@ -118,7 +118,7 @@ manifest의 `issue_close_eligible=true`는 기술 Gate가 모두 통과했다는
 
 외부 LLM 제거는 provider 교체가 아니라 판정 소유권 이전이다. canonical evidence, 전역 ontology, Topic Pack machine contract, deterministic evaluator, fatal 전파, 점수와 verdict consistency 순으로 이전한다. LLM은 미해결 자연어의 evidence 추출만 보조할 수 있다.
 
-현재 quantity/dimension과 engineering relation ontology, Topic Pack machine contract, 질문-only deterministic router, Fact Anchor evidence, A/B/C/D/E score evidence와 권한 제거 Gate가 구현됐다. Stage38 Gemini-off 30건은 Topic routing recall 100%, fatal 9/9, score coverage 100%, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건으로 offline Gate `READY`다. Stage39~41에서 production entrypoint, container parity/replay, 실제 Telegram endpoint와 persisted raw/final exact match까지 완료했다. 운영은 deterministic primary이며 외부 LLM은 requirement·fatal·score·verdict 판정권을 갖지 않는다.
+현재 quantity/dimension과 engineering relation ontology, Topic Pack machine contract, 질문-only deterministic router, Fact Anchor evidence, A/B/C/D/E score evidence와 권한 제거 Gate가 구현됐다. Stage48 Gemini-off 30건은 Topic routing recall 100%, fatal 9/9, score coverage 100%, 허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 offline Gate `READY`다. Stage39~41에서 production entrypoint, container parity/replay, 실제 Telegram endpoint와 persisted raw/final exact match까지 완료했다. 운영은 deterministic primary이며 외부 LLM은 requirement·fatal·score·verdict 판정권을 갖지 않는다.
 
 구현 순서, mutation 범위와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)가 소유한다.
 
@@ -188,6 +188,11 @@ feedback을 위해 모두 보존하되, 동일 공학 요구축에 속한 Topic 
 requirement는 한 번만 점수화한다. 그룹 우선순위는 `WRONG > SATISFIED > PARTIAL >
 MISSING`이며, 서로 다른 Topic의 동명 requirement는 명시적 group ID가 없으면 합치지
 않는다. 승인 복합 회귀는 exact scope 8축, raw evidence 13건, 12.60점으로 안정화됐다.
+
+Stage48에서는 잔여 점수 이탈 4건이 모두 경미한 과대평가임을 확인했다. Topic별 cap을
+추가하지 않고 심화 자격 미충족 답안의 상한을 18.5점으로 정렬했으며, 일반적인
+구조·판단·연결 키워드만으로는 24점을 초과하지 못하게 했다. 25점 부여는 향후 별도의
+결정론적 exceptional-evidence contract가 실제 심화 근거를 증명할 때만 허용한다.
 
 ### P0 — 요구상태 Evaluator
 

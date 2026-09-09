@@ -2,7 +2,7 @@
 
 ## 1. 목표와 기준선
 
-목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage38 offline full-chain은 Topic routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건으로 Authority Gate `READY`다. production authority는 entrypoint 연결·rollback·운영 증거 전까지 이전하지 않는다.
+목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage48 offline full-chain은 Topic routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 Authority Gate `READY`다. production authority 이전과 provider-zero 운영 검증도 완료했다.
 
 완료 목표:
 
@@ -323,3 +323,20 @@ Stage47에서 복합 질문을 원자 요구축으로 좁힐 때 `WRONG` 비율�
 | Stage47C mention boundary | 완료 | 계약이 허용한 concept mention만 PARTIAL, SATISFIED 금지 |
 | Stage47D exact scope | 완료 | 3개 Topic의 승인 복합 질문 required_anchor_ids 적용, 12.60점 |
 | Stage47E release | 완료 | 생성물·30건 replay READY·stability STABLE·authority READY·전체 release PASS |
+
+## 13. Stage48 — 잔여 점수 오차 보정
+
+Stage48은 30건 중 허용범위를 0.1~0.5점 초과한 4건을 분석했다. 개별 Topic이나
+답안 문자열 대신 점수 소유권의 공통 경계를 보완했다.
+
+- 분량 기반 심화 자격이 없는 답안의 상한은 18.5점이다.
+- 현재 일반 구조·판단·연결 단서만으로 자동 산정할 수 있는 최고점은 24점이다.
+- 25점은 별도의 결정론적 exceptional-evidence contract가 생기기 전까지 유보한다.
+- replay 결과에는 raw score, 적용 상한, A~E breakdown, 점수 evidence를 보존한다.
+
+| 단계 | 상태 | 완료 조건 |
+|---|---|---|
+| Stage48A audit | 완료 | 범위 이탈 4건과 두 공통 과대평가 경계 확인 |
+| Stage48B policy | 완료 | 심화 미충족 18.5점·자동 최고점 24점 상한 |
+| Stage48C diagnostics | 완료 | replay에 원점수·상한·항목별 근거 기록 |
+| Stage48D regression | 완료 | 30/30 허용범위·평균 이탈 0·fatal/routing 회귀 유지 |

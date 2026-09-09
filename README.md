@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-09): Stage38 Gemini-off 30건 전체 체인은 question-only routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건, 2회 exact replay `STABLE`로 Authority Gate `READY`를 달성했습니다. Stage39~41에서 production provider-zero 전환을 완료했고, Stage42에서는 canonical claim의 조건·극성·인용·정정 문맥과 requirement 단일 evidence 배정을 production 입력에 연결했습니다. Stage43~46에서는 V-Model/SW 검증, SIL 목표 결정, HAZOP/LOPA와 MC/DC 복합 운영 회귀의 핵심 Fact Anchor를 canonical relation contract로 승격했습니다. Stage47에서는 복합 질문의 정확한 요구범위와 중복 fatal evidence를 8개 공학 요구축으로 정규화했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-09): Gemini-off 30건 전체 체인은 question-only routing recall 100%, known-fatal 9/9, score coverage 30/30, 점수 허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 Authority Gate `READY`입니다. Stage39~41에서 production provider-zero 전환을 완료했고, Stage42~47에서 canonical claim과 주요 운영 회귀, 질문별 요구범위 및 요구축 점수 정규화를 연결했습니다. Stage48에서는 일반 단서만으로 고득점이 과대 산정되지 않도록 심화 증거 미충족 상한 18.5점과 자동 증거 최고점 24점을 명시하고 replay 진단 근거를 확장했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 
@@ -65,7 +65,7 @@
 | 결정론적 Authority Gate | `READY` (Gemini-off 30건) |
 | Topic routing recall / score coverage | 100% / 100% |
 | Known Fatal 재현율 / false positive | 100% (9/9) / 0건 |
-| 점수 허용구간 적중률 / 평균 이탈 | 86.67% / 0.045점 |
+| 점수 허용구간 적중률 / 평균 이탈 | 100% / 0점 |
 
 `runtime_grading_provenance_v1`은 실행 process 수준의 commit, 시작 시각, router/evaluator/verifier SHA와 scoring policy를 기록합니다. Stage39~41에서 Docker image·container parity, provider-zero production replay와 Telegram endpoint의 persisted raw/final exact match까지 검증했습니다. 운영 채점의 requirement·fatal·score·verdict authority는 deterministic primary가 소유하며 외부 LLM 호출은 필수가 아닙니다.
 
