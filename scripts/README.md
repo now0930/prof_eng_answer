@@ -51,6 +51,22 @@ python3 scripts/release_candidate.py deploy \
 `qualify`가 `READY`가 아니면 `deploy`는 Docker 명령을 실행하지 않는다. 배포는 clean
 worktree와 동일 commit을 요구하며 endpoint smoke를 추측하거나 생략하지 않는다.
 
+### `regrade_to_telegram.py`
+
+기존 session의 OCR 입력 또는 별도 UTF-8 파일을 현재 deterministic production
+entrypoint로 재채점하고 결과를 Telegram chat에 전송한다. 실행 중인 Bot의
+`state.json`은 변경하지 않으며 새 `regrade_*` session에 결과를 저장한다.
+
+```bash
+docker compose exec -T prof-eng-answer-bot \
+  python3 -B /workspace/prof_eng_answer/scripts/regrade_to_telegram.py \
+  --session-id 20260901_125506_5960502198
+```
+
+`--latest`, `--input <path>`, `--chat-id <id>`, `--dry-run`도 지원한다. Bot API는 Bot이
+자기 자신에게 수신 update를 만들 수 없으므로 이 도구는 입력을 위조하지 않고 채점
+entrypoint를 직접 호출한 뒤 결과만 `sendMessage`로 전송한다.
+
 ### `rubric_manager.py`
 
 Rubric content와 Topic Pack을 관리하는 통합 CLI이다.

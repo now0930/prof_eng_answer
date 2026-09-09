@@ -429,3 +429,31 @@ python3 scripts/release_candidate.py deploy \
 
 모든 항목이 통과해야 `deployment.status=PASS`와
 `issue_close_eligible=true`가 기록된다. 이 값은 Issue 자동 종료 명령이 아니다.
+
+## 20. 기존 Telegram 답안 재채점
+
+배포 후 기존 OCR 답안을 현재 deterministic primary로 다시 채점하여 동일한 Telegram
+chat으로 보낼 때 다음 명령을 사용한다. 원본 session은 변경하지 않고 새로운
+`regrade_*` session을 생성한다.
+
+```bash
+cd /home/now0930/hermes
+
+docker compose exec -T prof-eng-answer-bot \
+  python3 -B /workspace/prof_eng_answer/scripts/regrade_to_telegram.py \
+  --session-id 20260901_125506_5960502198
+```
+
+가장 최근 일반 session을 선택하려면 `--latest`, 전송 전 결과만 확인하려면
+`--dry-run`을 사용한다.
+
+```bash
+docker compose exec -T prof-eng-answer-bot \
+  python3 -B /workspace/prof_eng_answer/scripts/regrade_to_telegram.py \
+  --latest --dry-run
+```
+
+필수 조건은 `DETERMINISTIC_GRADING_PRIMARY=true`, Telegram token과
+`PROF_ENG_CHAT_ID`이다. 재채점은 저장된 OCR 텍스트만 사용하며 기존 사진을 다시 OCR
+처리하지 않는다. 성공 출력은 `TELEGRAM_DETERMINISTIC_REGRADE_V1`, `decision=PASS`,
+`provider_calls=0`을 포함한다.
