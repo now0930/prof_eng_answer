@@ -99,6 +99,17 @@
         "sw04_mcdc_detailed_coverage_boundary",
         "vmodel_no_sil_guarantee__mcdc_adjacent_boundary"
       ]
+    },
+    {
+      "pattern": "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+      "required_anchor_ids": [
+        "sw04_v_model_definition",
+        "sw04_unit_test",
+        "sw04_integration_test",
+        "sw04_system_test",
+        "sw04_static_analysis",
+        "sw04_dynamic_analysis"
+      ]
     }
   ],
   "recommended_outline": [

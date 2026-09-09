@@ -34,7 +34,7 @@
     {"id": "boundary_error_paths", "aliases": ["정상·경계·오류 경로", "경계값과 오류경로", "경계 조건과 오류 경로", "boundary and error paths"]},
     {"id": "module_interfaces", "aliases": ["모듈 간 인터페이스", "인터페이스 및 상호작용", "모듈 상호작용", "module interfaces"]},
     {"id": "timing_error_propagation", "aliases": ["타이밍과 오류전파", "순서·타이밍·오류전파", "timing and error propagation"]},
-    {"id": "system_test", "aliases": ["시스템시험", "시스템 시험", "system test"]},
+    {"id": "system_test", "aliases": ["시스템시험", "시스템 시험", "system test", "| 시스템 |"]},
     {"id": "system_requirements", "aliases": ["시스템 요구사항", "안전 요구사항", "전체 시스템 요구", "system requirements"]},
     {"id": "operating_modes_recovery", "aliases": ["운전모드와 장애복구", "성능·장애복구·외부 인터페이스", "operating modes and recovery"]},
     {"id": "verification", "aliases": ["Verification", "검증"]},
@@ -83,10 +83,11 @@
     {"id": "independent_condition_effect", "aliases": ["각 원자 조건의 독립 영향", "각 조건의 독립 영향", "Decision 결과에 독립적으로 영향", "independent condition effect"]},
     {"id": "total_sil_assurance", "aliases": ["전체 SIL 달성", "전체 안전무결성 달성", "total SIL assurance"]},
     {"id": "software_lifecycle_vv", "aliases": ["소프트웨어 수명주기 활동", "요구사항 추적성·독립성·검증·확인 활동", "software lifecycle V&V"]},
-    {"id": "static_analysis", "aliases": ["정적분석", "정적 분석", "static analysis"]},
+    {"id": "static_analysis", "aliases": ["정적분석", "정적 분석", "정적·동적 분석", "static analysis"]},
     {"id": "static_defect_scope", "aliases": ["규칙위반·데이터흐름·제어흐름과 잠재 결함", "규칙위반, 데이터흐름, 제어흐름, 복잡도와 잠재 결함", "static defect scope"]},
     {"id": "dynamic_analysis", "aliases": ["동적분석", "동적 분석", "dynamic analysis"]},
-    {"id": "runtime_behavior_scope", "aliases": ["실행 중 경로·시간·자원·인터페이스와 실제 반응", "실행 경로, timing, resource와 반응", "runtime behavior scope"]}
+    {"id": "runtime_behavior_scope", "aliases": ["실행 중 경로·시간·자원·인터페이스와 실제 반응", "실행 경로, timing, resource와 반응", "runtime behavior scope"]},
+    {"id": "unspecified_detail", "aliases": ["unspecified detail"]}
   ],
   "cue_groups": {
     "multiplication": ["×", "*", "곱", "multiply", "product"],

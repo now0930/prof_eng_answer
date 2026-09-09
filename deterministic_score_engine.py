@@ -16,6 +16,36 @@ PASS_EVIDENCE_CEILING_RATIO = 0.58
 NO_SATISFIED_NONFATAL_CEILING_RATIO = 0.44
 
 
+def _scoring_groups(requirements: list[Mapping[str, Any]]) -> list[dict[str, Any]]:
+    """Collapse multiple evidence rows that represent one engineering demand."""
+    grouped: dict[str, list[Mapping[str, Any]]] = {}
+    for index, row in enumerate(requirements):
+        group_id = str(
+            row.get("score_group_id")
+            or f"{row.get('owner_topic_id', '')}:{row.get('requirement_id', index)}"
+        ).strip()
+        grouped.setdefault(group_id, []).append(row)
+    output = []
+    for group_id, rows in grouped.items():
+        statuses = [str(row.get("status") or "") for row in rows]
+        if "WRONG" in statuses:
+            status = "WRONG"
+        elif "SATISFIED" in statuses:
+            status = "SATISFIED"
+        elif "PARTIAL" in statuses:
+            status = "PARTIAL"
+        elif "MISSING" in statuses:
+            status = "MISSING"
+        else:
+            status = statuses[0] if statuses else "UNKNOWN"
+        output.append({
+            "score_group_id": group_id,
+            "status": status,
+            "requirement_ids": [str(row.get("requirement_id") or "") for row in rows],
+        })
+    return output
+
+
 def calculate_deterministic_score(
     requirement_evaluation: Mapping[str, Any],
     *,
@@ -25,8 +55,9 @@ def calculate_deterministic_score(
     requirements = requirement_evaluation.get("requirements")
     if not isinstance(requirements, list):
         requirements = []
-    unknown = [row for row in requirements if row.get("status") not in _CREDIT]
-    coverage_complete = bool(requirements) and not unknown
+    scoring_groups = _scoring_groups(requirements)
+    unknown = [row for row in scoring_groups if row.get("status") not in _CREDIT]
+    coverage_complete = bool(scoring_groups) and not unknown
     base = {
         "version": VERSION,
         "marker": MARKER,
@@ -46,11 +77,11 @@ def calculate_deterministic_score(
         }
 
     requirement_ratio = sum(
-        _CREDIT[row["status"]] for row in requirements
-    ) / len(requirements)
+        _CREDIT[row["status"]] for row in scoring_groups
+    ) / len(scoring_groups)
     satisfied_ratio = sum(
-        row["status"] == "SATISFIED" for row in requirements
-    ) / len(requirements)
+        row["status"] == "SATISFIED" for row in scoring_groups
+    ) / len(scoring_groups)
     score_evidence = evaluate_score_evidence(answer_text) if answer_text is not None else None
     if score_evidence is None:
         raw_score = float(max_score) * requirement_ratio
@@ -112,6 +143,9 @@ def calculate_deterministic_score(
         "applied_ceiling": min(all_ceilings) if all_ceilings else None,
         "score_breakdown": breakdown,
         "score_evidence": score_evidence,
+        "raw_requirement_count": len(requirements),
+        "scoring_group_count": len(scoring_groups),
+        "scoring_groups": scoring_groups,
         "satisfied_requirement_ratio": round(satisfied_ratio, 6),
         "minimum_satisfied_ratio_for_pass": minimum_satisfied_ratio_for_pass,
         "pass_evidence_eligible": pass_evidence_eligible,

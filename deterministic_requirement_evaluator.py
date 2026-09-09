@@ -141,6 +141,9 @@ def evaluate_deterministic_requirements(
             required_fact_keys = {
                 _key(facts[fact_id]) for fact_id in rule["required_fact_ids"]
             }
+            allow_subject_mention_partial = bool(
+                rule.get("allow_subject_mention_partial", False)
+            )
             for fact_id in rule["required_fact_ids"]:
                 fact = facts[fact_id]
                 fact_key = _key(fact)
@@ -170,10 +173,16 @@ def evaluate_deterministic_requirements(
                     (index, claim) for index, claim in candidates
                     if _key(claim)[0] == fact_key[0]
                     and _key(claim) not in required_fact_keys
-                    and sum(
-                        left == right
-                        for left, right in zip(_key(claim)[:3], fact_key[:3])
-                    ) >= 2
+                    and (
+                        (
+                            allow_subject_mention_partial
+                            and _key(claim)[1] == "mentioned"
+                        )
+                        or sum(
+                            left == right
+                            for left, right in zip(_key(claim)[:3], fact_key[:3])
+                        ) >= 2
+                    )
                 ]
                 selected = opposite[:1] or exact[:1] or relation_conflict[:1] or partial[:1]
                 if opposite:
@@ -202,6 +211,10 @@ def evaluate_deterministic_requirements(
             results.append({
                 "owner_topic_id": contract["owner_topic_id"],
                 "requirement_id": requirement_id,
+                "score_group_id": (
+                    str(rule["score_group_id"])
+                    if rule.get("score_group_id") else None
+                ),
                 "status": status,
                 "evidence_mode": "canonical_claim",
                 "matched_fact_ids": matched,

@@ -159,10 +159,10 @@
       {"fact_id": "mcdc_supplements_lifecycle_vv", "subject": "mcdc", "predicate": "supplements", "object": "software_lifecycle_vv", "polarity": "positive"}
     ],
     "requirement_rules": [
-      {"requirement_id": "mcdc_normative_applicability", "required_fact_ids": ["mcdc_requirement_depends_on_applicability"], "minimum_match_count": 1},
+      {"requirement_id": "mcdc_normative_applicability", "required_fact_ids": ["mcdc_requirement_depends_on_applicability"], "minimum_match_count": 1, "score_group_id": "mcdc_verification"},
       {"requirement_id": "mcdc_purpose", "required_fact_ids": ["mcdc_is_structural_coverage"], "minimum_match_count": 1},
-      {"requirement_id": "mcdc_definition", "required_fact_ids": ["mcdc_verifies_independent_condition_effect"], "minimum_match_count": 1},
-      {"requirement_id": "mcdc_one_hundred_percent_limit", "required_fact_ids": ["mcdc_does_not_guarantee_total_sil"], "minimum_match_count": 1},
+      {"requirement_id": "mcdc_definition", "required_fact_ids": ["mcdc_verifies_independent_condition_effect"], "minimum_match_count": 1, "score_group_id": "mcdc_verification"},
+      {"requirement_id": "mcdc_one_hundred_percent_limit", "required_fact_ids": ["mcdc_does_not_guarantee_total_sil"], "minimum_match_count": 1, "score_group_id": "mcdc_verification"},
       {"requirement_id": "mcdc_lifecycle_vv_boundary", "required_fact_ids": ["mcdc_supplements_lifecycle_vv"], "minimum_match_count": 1}
     ],
     "invariant_bindings": [

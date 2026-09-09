@@ -200,6 +200,9 @@ def extract_canonical_claim_evidence(
         (owner_topic_id, fact["subject"], fact["predicate"])
         for owner_topic_id, fact in facts
     })
+    subject_owners: dict[str, str] = {}
+    for owner_topic_id, subject_id, _ in relation_subjects:
+        subject_owners.setdefault(subject_id, owner_topic_id)
     predicate_objects: dict[str, set[str]] = {}
     for _, fact in facts:
         predicate_objects.setdefault(fact["predicate"], set()).add(fact["object"])
@@ -288,6 +291,24 @@ def extract_canonical_claim_evidence(
                     "extraction_confidence": 1.0,
                 })
                 sentence_claim_count += 1
+        if concept_ids_present and sentence_claim_count == 0:
+            for subject_id in sorted(concept_ids_present & set(subject_owners)):
+                claims.append({
+                    "subject": subject_id,
+                    "predicate": "mentioned",
+                    "object": "unspecified_detail",
+                    "polarity": "positive",
+                    "conditions": [],
+                    "assertion_context": _assertion_context(sentence, len(sentence)),
+                    "source_text": sentence,
+                    "source_span": {
+                        "start": sentence_match.start(),
+                        "end": sentence_match.end(),
+                    },
+                    "requirement_refs": [],
+                    "qualifiers": {"owner_topic_id": subject_owners[subject_id]},
+                    "extraction_confidence": 1.0,
+                })
         if concept_ids_present and sentence_claim_count == 0 and not any(
             row["source_span"] == {
                 "start": sentence_match.start(), "end": sentence_match.end(),

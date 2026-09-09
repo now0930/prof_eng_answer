@@ -63,6 +63,10 @@ baseline의 8개 핵심 Fact Anchor는 단순 용어 출현이 아니라 canonic
 Stage46부터 정적분석은 비실행 결함 분석 대상, 동적분석은 실행 중 경로·시간·자원과
 반응 대상이 서술되어야 canonical 충족으로 인정한다.
 
+Stage47에서는 복합 MC/DC–SIL 질문의 6개 SW 요구만 활성화한다. MISRA와 Random
+Integrity 오류 evidence는 `sw04_unit_test`, HFT 오류 evidence는
+`sw04_integration_test` 점수 그룹으로 합쳐 중복 감점하지 않는다.
+
 ## 대표 오답
 
 - Verification과 Validation은 같은 활동이다.

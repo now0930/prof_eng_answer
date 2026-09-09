@@ -60,8 +60,32 @@ class McdcCrossTopicCanonicalPromotionTests(unittest.TestCase):
         rows = {row["requirement_id"]: row for row in grade["requirements"]}
         self.assertEqual(rows["sw04_v_model_definition"]["status"], "PARTIAL")
         self.assertEqual(rows["sw04_unit_test"]["status"], "WRONG")
+        self.assertEqual(rows["sw04_system_test"]["status"], "PARTIAL")
+        self.assertEqual(rows["sw04_static_analysis"]["status"], "PARTIAL")
+        self.assertEqual(rows["sw04_dynamic_analysis"]["status"], "PARTIAL")
         self.assertEqual(rows["mcdc_one_hundred_percent_limit"]["status"], "WRONG")
-        self.assertGreaterEqual(grade["canonical_promotion"]["comparison_count"], 14)
+        self.assertEqual(grade["canonical_promotion"]["comparison_count"], 8)
+        self.assertEqual(grade["deterministic_score"]["raw_requirement_count"], 13)
+        self.assertEqual(grade["deterministic_score"]["scoring_group_count"], 8)
+
+    def test_exact_cross_topic_scope_does_not_activate_all_topic_anchors(self):
+        case = self.fixture
+        grade = grade_deterministically(
+            question_text=case["question"], answer_text=case["answer"],
+        )
+        ids = {row["requirement_id"] for row in grade["requirements"]}
+        self.assertNotIn("mcdc_dead_code", ids)
+        self.assertNotIn("sw04_configuration_baseline", ids)
+        self.assertNotIn("proof_test_relation", ids)
+
+    def test_concept_mention_is_partial_never_satisfied(self):
+        rows = canonical_rows(
+            SW_TOPIC,
+            "정적분석, 동적분석과 회귀시험의 목적과 차이를 설명하시오.",
+            "정적분석과 동적분석을 수행한다.",
+        )
+        self.assertEqual(rows["sw04_static_analysis"]["status"], "PARTIAL")
+        self.assertEqual(rows["sw04_dynamic_analysis"]["status"], "PARTIAL")
 
     def test_complete_mcdc_relations_are_satisfied(self):
         question = "MC/DC의 개념, 목적과 충족조건을 설명하시오."

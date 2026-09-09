@@ -253,7 +253,7 @@ class ContentQualityTests(unittest.TestCase):
 
     def test_question_and_outline_counts(self) -> None:
         model = load_json(MODEL)
-        self.assertEqual(len(model["expected_question_patterns"]), 11)
+        self.assertEqual(len(model["expected_question_patterns"]), 12)
         self.assertEqual(len(model["recommended_outline"]), 8)
 
 

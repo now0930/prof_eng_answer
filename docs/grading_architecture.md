@@ -208,6 +208,13 @@ Coverage 표시 동기화 자체는 점수를 직접 변경하지 않는다.
 
 예를 들어 C에서 검증된 Fact 오류가 이미 score owner를 갖는다면, 동일 사실을 B completeness와 D/E에서 다시 직접 감점하지 않는다.
 
+동일한 공학 요구가 Topic anchor와 synthetic fatal requirement로 여러 번 표현될 때는
+machine contract의 선택적 `score_group_id`를 사용한다. 원시 requirement와 finding은
+모두 보존하지만 점수 계산은 group당 한 번 수행한다. 그룹 상태는 `WRONG`을 최우선으로
+하고, 모순이 없으면 `SATISFIED`, `PARTIAL`, `MISSING` 순으로 결정한다. 명시적 group이
+없는 requirement는 `<owner_topic_id>:<requirement_id>`로 격리해 우연한 동명 ID를
+합치지 않는다.
+
 D/E 제한은 별도의 field judgement 또는 connection evidence가 있을 때만 독립적으로 적용한다.
 
 ### 10.1 Canonical evaluation ledger

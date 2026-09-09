@@ -9,7 +9,11 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
+from topic_machine_contract import (
+    TopicMachineContractError,
+    extract_fatal_rule_ids,
+    validate_topic_machine_contract,
+)
 
 
 TOPIC_ID = "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
@@ -75,6 +79,34 @@ class FsrmMachineContractTests(unittest.TestCase):
             known_rule_ids={"failure_rate_compared_directly_to_pfd"},
         )
         self.assertEqual(validated["facts"][0]["conditions"], ["low_demand"])
+
+    def test_optional_scoring_group_and_mention_policy_are_validated(self):
+        contract = copy.deepcopy(self.contract)
+        rule = contract["requirement_rules"][0]
+        rule["score_group_id"] = "shared_engineering_demand"
+        rule["allow_subject_mention_partial"] = True
+        validated = validate_topic_machine_contract(
+            contract,
+            topic_id=TOPIC_ID,
+            known_rule_ids={"failure_rate_compared_directly_to_pfd"},
+        )
+        self.assertEqual(
+            validated["requirement_rules"][0]["score_group_id"],
+            "shared_engineering_demand",
+        )
+        self.assertTrue(
+            validated["requirement_rules"][0]["allow_subject_mention_partial"]
+        )
+
+    def test_mention_policy_rejects_non_boolean_value(self):
+        contract = copy.deepcopy(self.contract)
+        contract["requirement_rules"][0]["allow_subject_mention_partial"] = "yes"
+        with self.assertRaises(TopicMachineContractError):
+            validate_topic_machine_contract(
+                contract,
+                topic_id=TOPIC_ID,
+                known_rule_ids={"failure_rate_compared_directly_to_pfd"},
+            )
 
     def test_machine_contract_is_additive_and_consumed_by_primary_extractor(self):
         production = (REPO / "deterministic_primary_grader.py").read_text(encoding="utf-8")

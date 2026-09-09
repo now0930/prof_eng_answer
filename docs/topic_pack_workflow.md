@@ -182,6 +182,12 @@ Generator는 authoring 시간을 줄이는 도구이며 승인 주체가 아니�
 
 `scripts/validate_topic_packs.py`가 선택적 contract의 owner topic, fact reference, requirement reference와 fatal rule reference를 검사한다. contract 추가 후에는 정상 표현과 관계·극성·차원을 바꾼 mutation을 함께 회귀 fixture로 추가한다. 특정 답안 문장 전체를 조건으로 쓰거나 LLM 출력의 score/verdict를 contract 입력으로 사용하지 않는다.
 
+같은 공학 요구축을 여러 Topic 또는 fatal 보조 requirement가 표현할 때만 requirement
+rule에 `score_group_id`를 명시한다. 이는 evidence를 삭제하지 않고 점수 중복만 제거한다.
+단순 subject 언급을 `PARTIAL`로 허용해야 하는 원자 요구는
+`allow_subject_mention_partial: true`를 명시하며 기본값은 fail-closed `false`이다.
+언급 evidence는 절대 `SATISFIED`로 승격되지 않는다.
+
 ### 7.2 Topic Sheet 기반 보조 생성
 
 신규 Topic의 표준 시작 명령은 다음과 같다. `--generate`를 생략하면 관리되는 scaffold만 만들고 JSON은 직접 작성한다.

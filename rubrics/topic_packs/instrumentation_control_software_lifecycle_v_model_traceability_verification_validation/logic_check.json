@@ -1030,17 +1030,17 @@
       {"fact_id": "dynamic_analysis_observes_runtime_behavior", "subject": "dynamic_analysis", "predicate": "analyzes", "object": "runtime_behavior_scope", "polarity": "positive"}
     ],
     "requirement_rules": [
-      {"requirement_id": "unit_test_method_and_tools", "required_fact_ids": ["misra_is_coding_guideline"], "minimum_match_count": 1},
+      {"requirement_id": "unit_test_method_and_tools", "required_fact_ids": ["misra_is_coding_guideline"], "minimum_match_count": 1, "score_group_id": "sw04_unit_test"},
       {"requirement_id": "sw04_v_model_definition", "required_fact_ids": ["vmodel_pairs_development_and_test", "vmodel_plans_tests_early"], "minimum_match_count": 2},
-      {"requirement_id": "sw04_unit_test", "required_fact_ids": ["unit_test_verifies_unit", "unit_test_verifies_boundary_errors"], "minimum_match_count": 2},
-      {"requirement_id": "sw04_integration_test", "required_fact_ids": ["integration_test_verifies_interfaces", "integration_test_verifies_timing_errors"], "minimum_match_count": 2},
-      {"requirement_id": "sw04_system_test", "required_fact_ids": ["system_test_validates_requirements", "system_test_validates_operation_recovery"], "minimum_match_count": 2},
+      {"requirement_id": "sw04_unit_test", "required_fact_ids": ["unit_test_verifies_unit", "unit_test_verifies_boundary_errors"], "minimum_match_count": 2, "score_group_id": "sw04_unit_test"},
+      {"requirement_id": "sw04_integration_test", "required_fact_ids": ["integration_test_verifies_interfaces", "integration_test_verifies_timing_errors"], "minimum_match_count": 2, "score_group_id": "sw04_integration_test"},
+      {"requirement_id": "sw04_system_test", "required_fact_ids": ["system_test_validates_requirements", "system_test_validates_operation_recovery"], "minimum_match_count": 2, "allow_subject_mention_partial": true},
       {"requirement_id": "sw04_verification_definition", "required_fact_ids": ["verification_checks_specification"], "minimum_match_count": 1},
       {"requirement_id": "sw04_validation_definition", "required_fact_ids": ["validation_checks_intended_use"], "minimum_match_count": 1},
       {"requirement_id": "sw04_rtm_bidirectional", "required_fact_ids": ["rtm_traces_implementation", "rtm_traces_bidirectionally"], "minimum_match_count": 2},
       {"requirement_id": "sw04_configuration_baseline", "required_fact_ids": ["baseline_manages_versions", "baseline_manages_revalidation"], "minimum_match_count": 2},
-      {"requirement_id": "sw04_static_analysis", "required_fact_ids": ["static_analysis_finds_static_defects"], "minimum_match_count": 1},
-      {"requirement_id": "sw04_dynamic_analysis", "required_fact_ids": ["dynamic_analysis_observes_runtime_behavior"], "minimum_match_count": 1}
+      {"requirement_id": "sw04_static_analysis", "required_fact_ids": ["static_analysis_finds_static_defects"], "minimum_match_count": 1, "allow_subject_mention_partial": true},
+      {"requirement_id": "sw04_dynamic_analysis", "required_fact_ids": ["dynamic_analysis_observes_runtime_behavior"], "minimum_match_count": 1, "allow_subject_mention_partial": true}
     ],
     "invariant_bindings": [
       {"invariant_code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL", "rule_id": "sw04_fatal_misra_is_unit_test_tool", "classification": "fatal", "requirement_refs": ["unit_test_method_and_tools", "sw04_unit_test"], "recommended_ceiling": 14.5}

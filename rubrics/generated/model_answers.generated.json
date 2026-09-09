@@ -1,5 +1,5 @@
 {
-  "version": "sha256-00f03b0dfaa501b15f196920d29db830fb18a961ed11a1192715fb882f87e19f-generated-topic-pack-model-answers",
+  "version": "sha256-57ff75357fa3913f5d380aa341f68d4ce4c2ae0539a542cb083890416e91e45a-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -14739,6 +14739,17 @@
             "sw04_mcdc_detailed_coverage_boundary",
             "vmodel_no_sil_guarantee__mcdc_adjacent_boundary"
           ]
+        },
+        {
+          "pattern": "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+          "required_anchor_ids": [
+            "sw04_v_model_definition",
+            "sw04_unit_test",
+            "sw04_integration_test",
+            "sw04_system_test",
+            "sw04_static_analysis",
+            "sw04_dynamic_analysis"
+          ]
         }
       ],
       "recommended_outline": [
@@ -23521,6 +23532,14 @@
           "required_anchor_ids": [
             "mcdc_lifecycle_vv_boundary"
           ]
+        },
+        {
+          "pattern": "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+          "intent": "reviewed V-Model SIL MC/DC cross-topic regression",
+          "required_anchor_ids": [
+            "mcdc_definition",
+            "mcdc_one_hundred_percent_limit"
+          ]
         }
       ],
       "recommended_outline": [
@@ -23648,6 +23667,10 @@
         "요구사항 기반 시험 구조적 커버리지 분석",
         "Safety PLC application program MC/DC 적용"
       ],
+      "deterministic_routing_aliases": [
+        "MC/DC",
+        "MCDC"
+      ],
       "routing_field_points": [
         "Modified Condition/Decision Coverage",
         "각 원자 조건의 Decision 결과 독립 영향",
@@ -23683,7 +23706,8 @@
         "coverage instrumentation and tool evidence",
         "static dynamic and structural coverage relationship",
         "industrial safety software mcdc application",
-        "MC/DC가 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며 다른 수명주기 활동을 대체하지 않는 이유를 설명"
+        "MC/DC가 소프트웨어 수명주기 검증·확인에서 사용하는 구조적 커버리지 증거이며 다른 수명주기 활동을 대체하지 않는 이유를 설명",
+        "reviewed V-Model SIL MC/DC cross-topic regression"
       ],
       "topic_aliases": [
         "safety critical software MC/DC structural coverage",
@@ -24630,6 +24654,13 @@
           "required_anchor_ids": [
             "sis_mcdc_structural_coverage_boundary__vmodel_does_not_guarantee_sil",
             "sil_property_of_safety_function",
+            "software_safety_lifecycle"
+          ]
+        },
+        {
+          "pattern": "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+          "intent": "reviewed V-Model SIL MC/DC cross-topic regression",
+          "required_anchor_ids": [
             "software_safety_lifecycle"
           ]
         }

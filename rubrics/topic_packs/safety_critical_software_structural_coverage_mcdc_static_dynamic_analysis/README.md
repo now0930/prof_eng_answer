@@ -64,6 +64,9 @@ MC/DC의 구조적 커버리지 목적, 원자 조건의 독립 영향, 100% cov
 적용 표준·Safety Plan 조건 없는 보편적 100% 주장은 기존 global fatal owner가 계속
 판정하며 단순 `MC/DC`, `100%`, `SIL` 동시 출현은 정답 근거가 아니다.
 
+MC/DC 정의·적용조건·100% 한계가 같은 질문 요구를 평가할 때는
+`mcdc_verification` 점수 그룹으로 한 번만 계산하며 각 evidence row는 그대로 남긴다.
+
 <!-- guard:M1_100_PERCENT_MCDC_DOES_NOT_GUARANTEE_SIL -->
 ## MC/DC·SIL·수명주기 경계
 

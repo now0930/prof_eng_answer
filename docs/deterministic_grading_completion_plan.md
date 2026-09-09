@@ -307,6 +307,19 @@ owner와 `10.5~14.5`점 승인 범위는 유지한다.
 | Stage46C regression | 완료 | 역사적 10.83점·4 fatal·정상·부정·질문범위 mutation |
 | Stage46D release | 완료 | Topic 생성물·30건 replay READY·stability STABLE·authority READY·전체 release PASS |
 
-다음 Stage에서는 복합 질문을 원자 요구축으로 좁힐 때 `WRONG` 비율이 과도하게
-증폭되는 점수 정규화를 먼저 교정한다. 이 경계를 고치기 전에는 정확한 질문 scope
-계약을 추가해 승인 점수 범위를 깨뜨리지 않는다.
+Stage47에서 복합 질문을 원자 요구축으로 좁힐 때 `WRONG` 비율이 과도하게 증폭되는
+점수 정규화를 교정하고 exact question scope를 적용한다.
+
+## 12. Stage47 — 요구축 기반 점수 정규화
+
+동일 공학 오류가 Topic-local anchor와 synthetic fatal requirement에 반복되어도
+`score_group_id` 기준으로 한 번만 점수에 반영한다. 판정·finding·설명 evidence는
+삭제하지 않으며 그룹 내 `WRONG`이 다른 상태보다 우선한다.
+
+| 단계 | 상태 | 완료 조건 |
+|---|---|---|
+| Stage47A audit | 완료 | exact scope 적용 시 10.83→8.35 왜곡과 중복 요구축 확인 |
+| Stage47B normalization | 완료 | 13 evidence row를 8 engineering demand group으로 정규화 |
+| Stage47C mention boundary | 완료 | 계약이 허용한 concept mention만 PARTIAL, SATISFIED 금지 |
+| Stage47D exact scope | 완료 | 3개 Topic의 승인 복합 질문 required_anchor_ids 적용, 12.60점 |
+| Stage47E release | 완료 | 생성물·30건 replay READY·stability STABLE·authority READY·전체 release PASS |

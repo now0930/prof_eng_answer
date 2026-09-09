@@ -183,6 +183,12 @@ Stage46에서는 전문가 승인된 MC/DC–V-Model–SIL 복합 회귀를 사�
 실험에서 총점이 10.83→8.35로 과도하게 낮아졌으므로, 다음 우선순위는 requirement 수에
 따른 WRONG/MISSING 정규화 편향을 제거한 뒤 질문 scope를 다시 적용하는 것이다.
 
+Stage47에서는 위 편향을 `score_group_id`로 제거한다. requirement row는 추적성과
+feedback을 위해 모두 보존하되, 동일 공학 요구축에 속한 Topic anchor와 fatal 보조
+requirement는 한 번만 점수화한다. 그룹 우선순위는 `WRONG > SATISFIED > PARTIAL >
+MISSING`이며, 서로 다른 Topic의 동명 requirement는 명시적 group ID가 없으면 합치지
+않는다. 승인 복합 회귀는 exact scope 8축, raw evidence 13건, 12.60점으로 안정화됐다.
+
 ### P0 — 요구상태 Evaluator
 
 - 단일 일반 단어가 여러 anchor의 `PARTIAL` 근거로 중복 사용되는 비율을 측정한다.

@@ -107,6 +107,14 @@
       "required_anchor_ids": [
         "mcdc_lifecycle_vv_boundary"
       ]
+    },
+    {
+      "pattern": "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오.",
+      "intent": "reviewed V-Model SIL MC/DC cross-topic regression",
+      "required_anchor_ids": [
+        "mcdc_definition",
+        "mcdc_one_hundred_percent_limit"
+      ]
     }
   ],
   "recommended_outline": [
@@ -233,6 +241,10 @@
     "coverage instrumentation tool qualification safety software",
     "요구사항 기반 시험 구조적 커버리지 분석",
     "Safety PLC application program MC/DC 적용"
+  ],
+  "deterministic_routing_aliases": [
+    "MC/DC",
+    "MCDC"
   ],
   "routing_field_points": [
     "Modified Condition/Decision Coverage",

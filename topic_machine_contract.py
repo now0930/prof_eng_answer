@@ -103,9 +103,15 @@ def validate_topic_machine_contract(
     if not isinstance(rules, list) or not rules:
         raise TopicMachineContractError("requirement_rules must not be empty")
     for index, rule in enumerate(rules):
-        if not isinstance(rule, dict) or set(rule) != {
+        required_rule_fields = {
             "requirement_id", "required_fact_ids", "minimum_match_count",
-        }:
+        }
+        optional_rule_fields = {"score_group_id", "allow_subject_mention_partial"}
+        if (
+            not isinstance(rule, dict)
+            or not required_rule_fields <= set(rule)
+            or set(rule) - required_rule_fields - optional_rule_fields
+        ):
             raise TopicMachineContractError(
                 f"requirement_rules[{index}] fields mismatch"
             )
@@ -118,6 +124,18 @@ def validate_topic_machine_contract(
                 f"duplicate requirement_id: {requirement_id}"
             )
         requirement_ids.add(requirement_id)
+        if "score_group_id" in rule:
+            _identifier(
+                rule.get("score_group_id"),
+                f"requirement_rules[{index}].score_group_id",
+            )
+        if (
+            "allow_subject_mention_partial" in rule
+            and not isinstance(rule["allow_subject_mention_partial"], bool)
+        ):
+            raise TopicMachineContractError(
+                f"requirement_rules[{index}].allow_subject_mention_partial must be boolean"
+            )
         refs = rule.get("required_fact_ids")
         if not isinstance(refs, list) or not refs or not set(refs) <= fact_ids:
             raise TopicMachineContractError(

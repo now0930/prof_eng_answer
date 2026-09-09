@@ -3045,8 +3045,8 @@
       {"fact_id": "hft_is_hardware_architecture_constraint", "subject": "hardware_fault_tolerance", "predicate": "distinct_from", "object": "integration_test", "polarity": "positive"}
     ],
     "requirement_rules": [
-      {"requirement_id": "systematic_random_integrity_boundary", "required_fact_ids": ["software_test_controls_systematic_faults"], "minimum_match_count": 1},
-      {"requirement_id": "hardware_architecture_test_boundary", "required_fact_ids": ["hft_is_hardware_architecture_constraint"], "minimum_match_count": 1}
+      {"requirement_id": "systematic_random_integrity_boundary", "required_fact_ids": ["software_test_controls_systematic_faults"], "minimum_match_count": 1, "score_group_id": "sw04_unit_test"},
+      {"requirement_id": "hardware_architecture_test_boundary", "required_fact_ids": ["hft_is_hardware_architecture_constraint"], "minimum_match_count": 1, "score_group_id": "sw04_integration_test"}
     ],
     "invariant_bindings": [
       {"invariant_code": "SOFTWARE_TEST_AS_RANDOM_HARDWARE_INTEGRITY", "rule_id": "sw05_fatal_software_test_is_random_hardware_integrity", "classification": "fatal", "requirement_refs": ["systematic_random_integrity_boundary"], "recommended_ceiling": 14.5},

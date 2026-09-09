@@ -41,9 +41,13 @@
 - Routing alias: 14
 - Positive question: 10
 - Negative boundary question: 8
-- Deterministic checks: disabled
-- Generated Bank promotion: excluded
+- Deterministic checks: machine contract active
+- Generated Bank promotion: included through validated Topic source
 - Production Python/Common Router modification: excluded
+
+복합 V-Model–MC/DC 질문에서는 Random Integrity 범주 오류를 `sw04_unit_test`, HFT
+범주 오류를 `sw04_integration_test` 점수 그룹에 연결한다. fatal evidence와 feedback은
+모두 유지하면서 같은 공학 요구축의 중복 감점만 제거한다.
 
 ## Representative Question
 
