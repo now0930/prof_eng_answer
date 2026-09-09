@@ -248,3 +248,23 @@ answer span
 | Stage42C evaluator | 완료 | 상태 precedence·claim 단일 배정·UNKNOWN 보존 |
 | Stage42D mutation | 완료 | 정상·부분·오답·인용·정정·교차절·반복성 회귀 |
 | Stage42E release | 완료 | 30건 replay `READY`·2회 `STABLE`·전체 release·GitHub Actions PASS |
+
+## 8. Stage43 — V-Model Fact Anchor canonical 승격
+
+Stage43은 실제 과대평가 사례(과거 20.57점)를 첫 lexical-to-canonical 전환
+fixture로 고정한다. V-Model, 시험수준, V&V, RTM, baseline의 8개 핵심 anchor는
+관계와 필수 세부 사실을 machine contract로 판정한다.
+
+- 질문의 `required_anchor_ids`만 활성화해 좁은 질문에 불필요한 요구를 부과하지 않는다.
+- 동일 anchor에서는 canonical 상태가 lexical 상태보다 우선한다.
+- lexical/canonical 상태 차이는 promotion 비교 evidence로 보존한다.
+- 정상 완전답안, 역사적 과대평가 답안, 관계 부정 mutation, 인접 개념 교차결합을
+  focused regression으로 고정한다.
+- 특정 답안 문자열이나 V-Model 전용 점수 cap은 사용하지 않는다.
+
+| 단계 | 상태 | 완료 조건 |
+|---|---|---|
+| Stage43A contract | 완료 | 8개 anchor의 canonical fact·minimum 관계 정의 |
+| Stage43B scope/promotion | 완료 | question scope 제한·canonical 우선·비교 evidence |
+| Stage43C regression | 완료 | 과대평가·정상·오답·교차결합 회귀 |
+| Stage43D release | 완료 | 30건 `READY`·2회 `STABLE`·Authority `READY`·전체 release PASS |

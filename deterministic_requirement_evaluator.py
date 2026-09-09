@@ -14,6 +14,18 @@ MARKER = "DETERMINISTIC_REQUIREMENT_EVALUATION_V1"
 ROOT = Path(__file__).resolve().parent
 
 
+def _topic_anchor_ids(topic_id: str) -> set[str]:
+    path = ROOT / "rubrics" / "topic_packs" / topic_id / "fact_anchor.json"
+    if not path.is_file():
+        return set()
+    payload = json.loads(path.read_text(encoding="utf-8"))
+    return {
+        str(row.get("anchor_id") or row.get("id") or "").strip()
+        for row in payload.get("anchors", [])
+        if isinstance(row, dict)
+    }
+
+
 def load_machine_contracts(topic_ids: Iterable[str] | None = None) -> list[dict[str, Any]]:
     selected = {str(row).strip() for row in (topic_ids or []) if str(row).strip()}
     contracts: list[dict[str, Any]] = []
@@ -62,6 +74,7 @@ def evaluate_deterministic_requirements(
     invariant_codes: Iterable[str],
     topic_ids: Iterable[str] | None = None,
     extraction_complete: bool = False,
+    requirement_scope_by_topic: Mapping[str, Iterable[str]] | None = None,
 ) -> dict[str, Any]:
     """Apply fixed precedence; unresolved extraction never becomes MISSING."""
     codes = {str(row).strip() for row in invariant_codes if str(row).strip()}
@@ -107,6 +120,20 @@ def evaluate_deterministic_requirements(
                 "owner_topic_id": contract["owner_topic_id"],
             })
         for rule in contract["requirement_rules"]:
+            requirement_id = rule["requirement_id"]
+            scope = requirement_scope_by_topic or {}
+            scoped_ids = {
+                str(row).strip()
+                for row in scope.get(contract["owner_topic_id"], [])
+                if str(row).strip()
+            }
+            if (
+                requirement_scope_by_topic is not None
+                and requirement_id in _topic_anchor_ids(contract["owner_topic_id"])
+                and requirement_id not in scoped_ids
+                and requirement_id not in violated_refs
+            ):
+                continue
             matched: list[str] = []
             contradicted: list[str] = []
             related: list[str] = []
@@ -157,7 +184,6 @@ def evaluate_deterministic_requirements(
                     claim_id = _claim_id(claim, index)
                     allocated_claim_ids.add(claim_id)
                     evidence_claim_ids.append(claim_id)
-            requirement_id = rule["requirement_id"]
             if requirement_id in violated_refs or contradicted:
                 status = "WRONG"
             elif len(matched) >= rule["minimum_match_count"]:
@@ -172,6 +198,7 @@ def evaluate_deterministic_requirements(
                 "owner_topic_id": contract["owner_topic_id"],
                 "requirement_id": requirement_id,
                 "status": status,
+                "evidence_mode": "canonical_claim",
                 "matched_fact_ids": matched,
                 "contradicted_fact_ids": contradicted,
                 "related_fact_ids": related,

@@ -10,7 +10,11 @@ from deterministic_requirement_evaluator import evaluate_deterministic_requireme
 from deterministic_score_engine import calculate_deterministic_score
 from deterministic_topic_router import route_question_topics
 from engineering_invariant_evaluator import evaluate_engineering_invariants
-from fact_anchor_evidence_adapter import augment_requirement_evaluation, evaluate_fact_anchor_requirements
+from fact_anchor_evidence_adapter import (
+    augment_requirement_evaluation,
+    evaluate_fact_anchor_requirements,
+    requirement_scope_by_topic,
+)
 from canonical_claim_extractor import extract_canonical_claim_evidence
 from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
 
@@ -37,19 +41,21 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
     )
     engineering = evaluate_engineering_invariants(answer_text)
     violations = quantity["violations"] + engineering["violations"]
+    fact_anchors = evaluate_fact_anchor_requirements(
+        question_text=question_text,
+        answer_text=answer_text,
+        topic_ids=route["topic_ids"],
+    )
     requirements = evaluate_deterministic_requirements(
         claims=extraction["canonical_evidence"]["claims"],
         invariant_codes=[row["code"] for row in violations],
         topic_ids=route["topic_ids"],
         extraction_complete=True,
+        requirement_scope_by_topic=requirement_scope_by_topic(fact_anchors),
     )
     requirements = augment_requirement_evaluation(
         requirements,
-        evaluate_fact_anchor_requirements(
-            question_text=question_text,
-            answer_text=answer_text,
-            topic_ids=route["topic_ids"],
-        ),
+        fact_anchors,
     )
     score = calculate_deterministic_score(requirements, answer_text=answer_text)
     if score["decision"] != "SCORED":
@@ -104,6 +110,7 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         },
         "requirements": requirements["requirements"],
         "requirement_summary": requirements["summary"],
+        "canonical_promotion": requirements.get("canonical_promotion", {}),
         "logic_check_evaluation": {
             "fatal_error_detected": requirements["fatal_or_core_error"],
             "mode": "fatal" if requirements["fatal_or_core_error"] else "normal",

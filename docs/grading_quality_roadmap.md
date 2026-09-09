@@ -158,6 +158,12 @@ global predicate ontology, 부정·인용·정정 context, 절 경계, relation-
 claim 단일 배정을 focused regression으로 고정했다. 확대 단위는 Topic 개수가 아니라
 검증된 오분류가 있는 machine contract이며 일괄 migration은 하지 않는다.
 
+첫 확대 대상은 Stage43의 V-Model/SW 검증 과대평가 회귀다. 핵심 8개 Fact Anchor를
+canonical machine contract로 승격하고 같은 anchor의 lexical 상태와 canonical 상태를
+비교 기록한다. 질문 scope는 `required_anchor_ids`가 소유하며, 승격은 정상 완전답안과
+오답 mutation이 함께 통과할 때만 허용한다. 다음 Topic도 실제 오분류 fixture가 있는
+경우에만 같은 방식으로 한 owner씩 확대한다.
+
 ### P0 — 요구상태 Evaluator
 
 - 단일 일반 단어가 여러 anchor의 `PARTIAL` 근거로 중복 사용되는 비율을 측정한다.

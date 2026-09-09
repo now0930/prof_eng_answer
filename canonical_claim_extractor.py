@@ -24,7 +24,10 @@ ROOT = Path(__file__).resolve().parent
 _SENTENCE = re.compile(r"[^\n.!?。]+(?:[.!?。]|$)")
 _QUOTE = re.compile(r'["“”‘’「」『』](.*?)["“”‘’「」『』]')
 _QUOTED_REPORT = re.compile(r"(?:라고|이라는|라는)\s*(?:주장|말|설명|견해)")
-_REJECT = re.compile(r"(?:잘못|틀린|오류|부정확|성립하지\s*않|invalid|incorrect|wrong)", re.I)
+_REJECT = re.compile(
+    r"(?:잘못|틀린|부정확|오류(?:이|인|로|라는|라고)|성립하지\s*않|invalid|incorrect|wrong)",
+    re.I,
+)
 _CORRECT = re.compile(r"(?:정정|올바르게|실제로는|대신|correct(?:ly|ion)?)", re.I)
 _NEGATE = re.compile(r"(?:하지\s*않|아니(?:다|며|고|라)|할\s*수\s*없|불가능|not\b|never\b)", re.I)
 _CONDITION = re.compile(r"(?:경우|조건|에서는|일\s*때|when\b|if\b|under\b)", re.I)
@@ -64,11 +67,16 @@ def _load_predicates() -> dict[str, list[str]]:
     }
 
 
-def _find_alias(text: str, aliases: list[str]) -> tuple[int, int] | None:
+def _find_alias(
+    text: str,
+    aliases: list[str],
+    *,
+    start_at: int = 0,
+) -> tuple[int, int] | None:
     normalized = _normalized(text)
     matches: list[tuple[int, int]] = []
     for alias in aliases:
-        start = normalized.find(alias)
+        start = normalized.find(alias, start_at)
         if start >= 0:
             matches.append((start, start + len(alias)))
     return min(matches, key=lambda row: (row[0], -(row[1] - row[0]))) if matches else None
@@ -161,13 +169,55 @@ def extract_canonical_claim_evidence(
         }
         for owner_topic_id, subject_id, predicate_id in relation_subjects:
             subject_span = _find_alias(sentence, aliases.get(subject_id, []))
-            predicate_span = _find_alias(sentence, predicates.get(predicate_id, []))
-            if not subject_span or not predicate_span:
+            if not subject_span:
                 continue
+            predicate_span = _find_alias(
+                sentence,
+                predicates.get(predicate_id, []),
+                start_at=subject_span[1],
+            )
+            if not predicate_span:
+                continue
+            object_matches = []
             for object_id in sorted(predicate_objects.get(predicate_id, set())):
                 object_span = _find_alias(sentence, aliases.get(object_id, []))
-                if not object_span or not _same_clause(sentence, subject_span, object_span):
+                if (
+                    not object_span
+                    or subject_span[0] > min(predicate_span[0], object_span[0])
+                    or not _same_clause(sentence, subject_span, object_span)
+                ):
                     continue
+                # In a coordinated sentence ("Verification ... and Validation ..."),
+                # the nearest compatible subject owns the later object.  This
+                # prevents an earlier subject from stealing another clause's
+                # relation without relying on a language-specific conjunction.
+                compatible_subjects = []
+                for _, candidate_subject, candidate_predicate in relation_subjects:
+                    if candidate_predicate != predicate_id:
+                        continue
+                    candidate_span = _find_alias(
+                        sentence, aliases.get(candidate_subject, [])
+                    )
+                    if candidate_span and candidate_span[0] <= object_span[0]:
+                        compatible_subjects.append((candidate_span[0], candidate_subject))
+                if compatible_subjects and max(compatible_subjects)[1] != subject_id:
+                    continue
+                object_matches.append((object_id, object_span))
+            # One surface phrase owns one canonical object. Prefer the longest
+            # alias span ("module interface" over the nested word "module").
+            selected_objects: list[tuple[str, tuple[int, int]]] = []
+            for object_id, object_span in sorted(
+                object_matches,
+                key=lambda row: (-(row[1][1] - row[1][0]), row[1][0], row[0]),
+            ):
+                if any(
+                    object_span[0] < kept_span[1]
+                    and object_span[1] > kept_span[0]
+                    for _, kept_span in selected_objects
+                ):
+                    continue
+                selected_objects.append((object_id, object_span))
+            for object_id, object_span in sorted(selected_objects):
                 observed_polarity = _polarity(sentence, object_span, predicate_span)
                 context = _assertion_context(sentence, max(subject_span[1], object_span[1]))
                 claims.append({

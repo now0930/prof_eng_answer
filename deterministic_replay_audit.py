@@ -14,6 +14,7 @@ from deterministic_topic_router import route_question_topics
 from fact_anchor_evidence_adapter import (
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
+    requirement_scope_by_topic,
 )
 from canonical_claim_extractor import extract_canonical_claim_evidence
 from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
@@ -124,19 +125,21 @@ def run_deterministic_replay_audit(
         true_positive += len(gold_ids & detected_ids)
         false_positive += len(detected_ids - gold_ids)
         invariant_codes = {row["code"] for row in first["violations"]}
+        fact_anchors = evaluate_fact_anchor_requirements(
+            answer_text=answer,
+            topic_ids=routed["topic_ids"],
+            question_text=question,
+        )
         requirement_evaluation = evaluate_deterministic_requirements(
             claims=first["claims"],
             invariant_codes=invariant_codes,
             topic_ids=routed["topic_ids"],
             extraction_complete=True,
+            requirement_scope_by_topic=requirement_scope_by_topic(fact_anchors),
         )
         requirement_evaluation = augment_requirement_evaluation(
             requirement_evaluation,
-            evaluate_fact_anchor_requirements(
-                answer_text=answer,
-                topic_ids=routed["topic_ids"],
-                question_text=question,
-            ),
+            fact_anchors,
         )
         score = calculate_deterministic_score(requirement_evaluation, answer_text=answer)
         repeated_requirements = evaluate_deterministic_requirements(
@@ -144,14 +147,11 @@ def run_deterministic_replay_audit(
             invariant_codes={row["code"] for row in second["violations"]},
             topic_ids=routed["topic_ids"],
             extraction_complete=True,
+            requirement_scope_by_topic=requirement_scope_by_topic(fact_anchors),
         )
         repeated_requirements = augment_requirement_evaluation(
             repeated_requirements,
-            evaluate_fact_anchor_requirements(
-                answer_text=answer,
-                topic_ids=routed["topic_ids"],
-                question_text=question,
-            ),
+            fact_anchors,
         )
         repeated_score = calculate_deterministic_score(repeated_requirements, answer_text=answer)
         if score != repeated_score:

@@ -180,6 +180,7 @@ def evaluate_fact_anchor_requirements(
                 "owner_topic_id": topic_id,
                 "requirement_id": anchor_id,
                 "status": status,
+                "evidence_mode": "lexical_fact_anchor",
                 "importance": str(anchor.get("importance") or "normal"),
                 "matched_terms": matched,
                 "matched_concept_tokens": matched_tokens,
@@ -217,6 +218,25 @@ def augment_requirement_evaluation(
         (row.get("owner_topic_id"), row.get("requirement_id"))
         for row in base.get("requirements", [])
     }
+    lexical_rows = list(fact_anchor_evaluation.get("requirements", []))
+    base_by_key = {
+        (row.get("owner_topic_id"), row.get("requirement_id")): row
+        for row in base.get("requirements", [])
+    }
+    comparisons = []
+    for row in lexical_rows:
+        key = (row.get("owner_topic_id"), row.get("requirement_id"))
+        canonical = base_by_key.get(key)
+        if canonical is None:
+            continue
+        comparisons.append({
+            "owner_topic_id": key[0],
+            "requirement_id": key[1],
+            "lexical_status": row.get("status"),
+            "canonical_status": canonical.get("status"),
+            "selected_mode": "canonical_claim",
+            "status_changed": row.get("status") != canonical.get("status"),
+        })
     output["requirements"] = list(base.get("requirements", [])) + [
         row for row in fact_anchor_evaluation.get("requirements", [])
         if (row.get("owner_topic_id"), row.get("requirement_id")) not in existing
@@ -225,4 +245,24 @@ def augment_requirement_evaluation(
         status: sum(row.get("status") == status for row in output["requirements"])
         for status in ("SATISFIED", "PARTIAL", "WRONG", "MISSING", "UNKNOWN")
     }
+    output["canonical_promotion"] = {
+        "comparison_count": len(comparisons),
+        "status_change_count": sum(row["status_changed"] for row in comparisons),
+        "canonical_selected_count": len(comparisons),
+        "lexical_selected_count": 0,
+        "comparisons": comparisons,
+    }
     return output
+
+
+def requirement_scope_by_topic(
+    fact_anchor_evaluation: dict[str, Any],
+) -> dict[str, list[str]]:
+    """Project question-selected anchor IDs into machine-contract scope."""
+    output: dict[str, set[str]] = {}
+    for row in fact_anchor_evaluation.get("requirements", []):
+        topic_id = str(row.get("owner_topic_id") or "").strip()
+        requirement_id = str(row.get("requirement_id") or "").strip()
+        if topic_id and requirement_id:
+            output.setdefault(topic_id, set()).add(requirement_id)
+    return {key: sorted(value) for key, value in sorted(output.items())}

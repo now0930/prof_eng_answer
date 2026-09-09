@@ -14,6 +14,7 @@ from deterministic_score_engine import calculate_deterministic_score
 from fact_anchor_evidence_adapter import (
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
+    requirement_scope_by_topic,
 )
 from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
 from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
@@ -150,6 +151,11 @@ def build_deterministic_grading_shadow(
                 "requirement_refs": list(binding["requirement_refs"]),
                 "recommended_ceiling": binding["recommended_ceiling"],
             })
+    fact_anchors = evaluate_fact_anchor_requirements(
+        answer_text=answer_text,
+        topic_ids=[topic_id] if topic_id else [],
+        question_text=question_text,
+    )
     requirement_evaluation = evaluate_deterministic_requirements(
         claims=claims,
         invariant_codes=[
@@ -157,14 +163,11 @@ def build_deterministic_grading_shadow(
         ],
         topic_ids=[topic_id] if topic_id else None,
         extraction_complete=True,
+        requirement_scope_by_topic=requirement_scope_by_topic(fact_anchors),
     )
     requirement_evaluation = augment_requirement_evaluation(
         requirement_evaluation,
-        evaluate_fact_anchor_requirements(
-            answer_text=answer_text,
-            topic_ids=[topic_id] if topic_id else [],
-            question_text=question_text,
-        ),
+        fact_anchors,
     )
     if requirement_evaluation["requirements"]:
         requirements = requirement_evaluation["requirements"]

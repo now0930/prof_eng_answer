@@ -1,0 +1,31 @@
+{
+  "schema_version": "vmodel_sw_verification_overgrading_regression.v1",
+  "case_id": "VMODEL-SW-VERIFICATION-OVERGRADING-01",
+  "source_session_id": "20260903_035327_5960502198",
+  "historical_score": 20.57,
+  "question": "제어 소프트웨어 개발 수명 주기(V-Model)의 단위 시험, 통합 시험, 시스템 시험의 정의와 안전 무결성 기준(SIL) 달성을 위한 소프트웨어 검증 방안을 설명하시오.",
+  "answer": "1. 배경\nSW 복잡성이 증가함에 따라 Systematic 오류 발생이 증가하고 있으며 기존 하드웨어 검증만으로는 검증이 불가능하다. SIL은 시스템의 무결성을 정량적·정성적 관점에서 검증하며 V-Model은 정성적 검증을 위한 모델이다.\n\n2. V-Model 및 시험 정의\nV-Model은 소프트웨어 개발 방법론이다. Verification은 소프트웨어가 요구사항에 적합하게 작성되어 있는지 확인한다. Validation은 소프트웨어가 안전 요구사항을 만족하는지 검증한다. 안전 요구사항 작성, 시스템 요구사항, 아키텍처 요구사항, 단위 요구사항, 코딩, 단위 요구사항 검증, 아키텍처 요구사항 검증, 시스템 요구사항 검증 순으로 진행한다.\n단위 시험은 각 요소인 모듈과 유니트가 정해진 세부 요구항목을 만족하는지 평가하고 검증한다. 통합 시험은 모듈 간 인터페이스 및 상호작용이 세부 요구사항을 만족하는지 검증한다. 시스템 시험은 전체 시스템이 안전 요구사항을 최종적으로 만족하는지 평가한다.\n\n3. SIL 달성을 위한 SW 검증 방안\nTraceability Matrix를 작성하여 각 요구사항이 실제 코드로 구현되고 불필요한 기능이나 누락 기능이 없도록 관리한다. Verification으로 각 단계별 절차 적합성을 검증하고 Validation으로 구현 시스템이 최초 요구사항을 통과했는지 검증한다. Configuration Management와 문서화를 수행하고 인증 시점의 Baseline, 컴파일러, CPU, 라이브러리 버전을 모듈 단위로 관리하며 변경 시 재검증한다.\n\n4. 결론\n복잡도 증가에 따른 SW 오류를 관리하고 V-Model을 활용한다. 적정 SIL을 선정하여 ALARP 원칙에 따라 비용 대비 효과를 고려한다.",
+  "expected": {
+    "score_min": 12.5,
+    "score_max": 15.0,
+    "official_pass_met": false,
+    "provider_calls": 0,
+    "canonical_requirement_status": {
+      "sw04_v_model_definition": "MISSING",
+      "sw04_unit_test": "PARTIAL",
+      "sw04_integration_test": "PARTIAL",
+      "sw04_system_test": "PARTIAL",
+      "sw04_verification_definition": "SATISFIED",
+      "sw04_validation_definition": "MISSING",
+      "sw04_rtm_bidirectional": "MISSING",
+      "sw04_configuration_baseline": "MISSING"
+    },
+    "minimum_canonical_comparison_count": 8,
+    "minimum_status_change_count": 5,
+    "forbidden": [
+      "HIGH_SCORE",
+      "PRACTICAL_TARGET",
+      "requirements_100_percent"
+    ]
+  }
+}

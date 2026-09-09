@@ -273,6 +273,13 @@ claim ID는 최초로 정렬된 requirement 한 곳에만 배정한다. 현재 �
 정밀 판정은 machine contract가 있는 Topic부터 적용하며, 다른 Topic은 검증된 실제
 오분류가 생길 때 contract를 점진적으로 추가한다.
 
+Fact Anchor와 같은 `owner_topic_id + requirement_id`를 machine contract가 소유하면
+canonical 결과가 lexical 결과를 대체한다. 이때 두 결과와 상태 변화는
+`canonical_promotion.comparisons`에 남겨 과대평가 감소와 정상답안 회귀를 함께
+감사한다. Anchor ID 기반 machine rule은 질문에서 선택된 `required_anchor_ids`로
+범위를 제한한다. 반면 synthetic rule과 실제 invariant가 위반된 requirement는 질문
+scope 밖이라는 이유로 제거하지 않는다.
+
 ## 11. Logic fatal과 Difficulty ceiling
 
 Logic fatal과 numeric cap은 같은 개념이 아니다.

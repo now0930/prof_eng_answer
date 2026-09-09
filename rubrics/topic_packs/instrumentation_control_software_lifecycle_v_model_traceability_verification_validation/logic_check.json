@@ -1011,10 +1011,32 @@
     "authority": "deterministic_topic_contract",
     "score_effect": "downstream_deterministic_only",
     "facts": [
-      {"fact_id": "misra_is_coding_guideline", "subject": "coding_guideline", "predicate": "distinct_from", "object": "unit_test", "polarity": "positive"}
+      {"fact_id": "misra_is_coding_guideline", "subject": "coding_guideline", "predicate": "distinct_from", "object": "unit_test", "polarity": "positive"},
+      {"fact_id": "vmodel_pairs_development_and_test", "subject": "v_model", "predicate": "corresponds_to", "object": "development_test_correspondence", "polarity": "positive"},
+      {"fact_id": "vmodel_plans_tests_early", "subject": "v_model", "predicate": "plans", "object": "early_test_planning", "polarity": "positive"},
+      {"fact_id": "unit_test_verifies_unit", "subject": "unit_test", "predicate": "verifies", "object": "software_unit", "polarity": "positive"},
+      {"fact_id": "unit_test_verifies_boundary_errors", "subject": "unit_test", "predicate": "verifies", "object": "boundary_error_paths", "polarity": "positive"},
+      {"fact_id": "integration_test_verifies_interfaces", "subject": "integration_test", "predicate": "verifies", "object": "module_interfaces", "polarity": "positive"},
+      {"fact_id": "integration_test_verifies_timing_errors", "subject": "integration_test", "predicate": "verifies", "object": "timing_error_propagation", "polarity": "positive"},
+      {"fact_id": "system_test_validates_requirements", "subject": "system_test", "predicate": "validates", "object": "system_requirements", "polarity": "positive"},
+      {"fact_id": "system_test_validates_operation_recovery", "subject": "system_test", "predicate": "validates", "object": "operating_modes_recovery", "polarity": "positive"},
+      {"fact_id": "verification_checks_specification", "subject": "verification", "predicate": "checks", "object": "specification_conformance", "polarity": "positive"},
+      {"fact_id": "validation_checks_intended_use", "subject": "validation", "predicate": "checks", "object": "intended_use", "polarity": "positive"},
+      {"fact_id": "rtm_traces_implementation", "subject": "traceability_matrix", "predicate": "traces", "object": "implementation_traceability", "polarity": "positive"},
+      {"fact_id": "rtm_traces_bidirectionally", "subject": "traceability_matrix", "predicate": "traces", "object": "bidirectional_traceability", "polarity": "positive"},
+      {"fact_id": "baseline_manages_versions", "subject": "configuration_baseline", "predicate": "manages", "object": "versioned_artifacts", "polarity": "positive"},
+      {"fact_id": "baseline_manages_revalidation", "subject": "configuration_baseline", "predicate": "manages", "object": "change_revalidation", "polarity": "positive"}
     ],
     "requirement_rules": [
-      {"requirement_id": "unit_test_method_and_tools", "required_fact_ids": ["misra_is_coding_guideline"], "minimum_match_count": 1}
+      {"requirement_id": "unit_test_method_and_tools", "required_fact_ids": ["misra_is_coding_guideline"], "minimum_match_count": 1},
+      {"requirement_id": "sw04_v_model_definition", "required_fact_ids": ["vmodel_pairs_development_and_test", "vmodel_plans_tests_early"], "minimum_match_count": 2},
+      {"requirement_id": "sw04_unit_test", "required_fact_ids": ["unit_test_verifies_unit", "unit_test_verifies_boundary_errors"], "minimum_match_count": 2},
+      {"requirement_id": "sw04_integration_test", "required_fact_ids": ["integration_test_verifies_interfaces", "integration_test_verifies_timing_errors"], "minimum_match_count": 2},
+      {"requirement_id": "sw04_system_test", "required_fact_ids": ["system_test_validates_requirements", "system_test_validates_operation_recovery"], "minimum_match_count": 2},
+      {"requirement_id": "sw04_verification_definition", "required_fact_ids": ["verification_checks_specification"], "minimum_match_count": 1},
+      {"requirement_id": "sw04_validation_definition", "required_fact_ids": ["validation_checks_intended_use"], "minimum_match_count": 1},
+      {"requirement_id": "sw04_rtm_bidirectional", "required_fact_ids": ["rtm_traces_implementation", "rtm_traces_bidirectionally"], "minimum_match_count": 2},
+      {"requirement_id": "sw04_configuration_baseline", "required_fact_ids": ["baseline_manages_versions", "baseline_manages_revalidation"], "minimum_match_count": 2}
     ],
     "invariant_bindings": [
       {"invariant_code": "CODING_GUIDELINE_AS_UNIT_TEST_TOOL", "rule_id": "sw04_fatal_misra_is_unit_test_tool", "classification": "fatal", "requirement_refs": ["unit_test_method_and_tools"], "recommended_ceiling": 14.5}
@@ -1025,7 +1047,8 @@
     "직접 반대 주장만 deterministic fatal 후보가 되도록 full-line pattern을 사용했다.",
     "SW-05 Safety lifecycle과 SW-10 프로젝트 인수 경계를 false-positive 기준에 반영했다.",
     "2026-08-07 LLM 의미 감사 수리: HIL Fatal correction과 SIL·Virtual Commissioning 경계를 일치시켰다.",
-    "MC/DC detailed ownership handed off to safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis"
+    "MC/DC detailed ownership handed off to safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+    "2026-09-09 Stage43: V-Model·시험수준·V&V·RTM·baseline의 8개 Fact Anchor를 canonical relation machine contract로 승격했다."
   ],
   "topic_label": "SW-04 계측제어 SW 수명주기·V-Model·V&V"
 }

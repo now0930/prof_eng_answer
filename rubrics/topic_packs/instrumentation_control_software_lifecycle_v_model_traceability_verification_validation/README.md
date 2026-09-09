@@ -51,6 +51,15 @@ Detailed design / module   ↔ Unit test
 
 단위시험 통과는 통합시험과 시스템시험을 대체하지 않는다. 정적분석은 비실행 분석이고 동적분석은 실행기반 분석이다. 회귀시험은 변경된 기능뿐 아니라 영향받는 기존 기능과 인터페이스를 확인한다.
 
+## 결정론적 machine contract
+
+V-Model 정의, 단위·통합·시스템시험, Verification·Validation, RTM, Configuration
+baseline의 8개 핵심 Fact Anchor는 단순 용어 출현이 아니라 canonical
+`subject-predicate-object` 관계로 판정한다. 질문의 `required_anchor_ids`에 포함된
+항목만 활성화하며 같은 anchor ID에서는 canonical 판정이 lexical 판정보다 우선한다.
+따라서 시험 명칭만 나열하거나 고급 기법을 언급한 것만으로 핵심 시험 대상·목적을
+충족한 것으로 보지 않는다.
+
 ## 대표 오답
 
 - Verification과 Validation은 같은 활동이다.
@@ -67,7 +76,7 @@ Detailed design / module   ↔ Unit test
 ## 파일
 
 - `fact_anchor.json`: 31개 Fact Anchor와 16개 Fatal 오답
-- `logic_check.json`: deterministic aid, LLM truth schema, Major와 false-positive 기준
+- `logic_check.json`: deterministic canonical relation contract, Major와 false-positive 기준
 - `model_answer.json`: 대표 문제 10개, 답안구조 8개와 Routing 정보
 - `topic_importance.json`: 난이도와 선택 중요도
 - `docs/topic_sheets/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation.md`: 상세 Topic Sheet
