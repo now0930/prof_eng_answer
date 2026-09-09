@@ -35,6 +35,21 @@
     "next_practice_points": [],
     "de_claim_trust": {}
   },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {"fact_id": "lead_controls_phase_margin", "subject": "lead_compensator", "predicate": "controls", "object": "phase_margin", "polarity": "positive"},
+      {"fact_id": "lag_controls_steady_state_accuracy", "subject": "lag_compensator", "predicate": "controls", "object": "steady_state_accuracy", "polarity": "positive"}
+    ],
+    "requirement_rules": [
+      {"requirement_id": "lead_compensator_design", "required_fact_ids": ["lead_controls_phase_margin"], "minimum_match_count": 1, "contradiction_classification": "fatal", "contradiction_rule_id": "lead_lag_fatal_lead_only_changes_phase", "contradiction_recommended_ceiling": 10.0},
+      {"requirement_id": "lag_compensator_design", "required_fact_ids": ["lag_controls_steady_state_accuracy"], "minimum_match_count": 1, "contradiction_classification": "fatal", "contradiction_rule_id": "lead_lag_fatal_lag_always_improves_phase_margin", "contradiction_recommended_ceiling": 10.0}
+    ],
+    "invariant_bindings": []
+  },
   "llm_profile": {
     "display_name": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
     "difficulty": "THEORY_CORE",

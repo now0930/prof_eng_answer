@@ -1,5 +1,5 @@
 {
-  "version": "sha256-6b9218ba58989d6b3b2d46f3601f1ab54557aa34101bae5c84cd0aefc783d2fb-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-f633fce349ad980d2248d9b374dfab0434987fcf441ee1e87ab4ca34a2995c47-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -25007,6 +25007,15 @@
         "수용기준은 고장검출시간, 절체시간, 출력변동, 데이터손실, 복구시간, 가용도 목표와 정기시험 결과로 정량화해야 한다."
       ],
       "fatal_conditions": [
+        {
+          "id": "sw01_fatal_plc_dcs_role_reversal",
+          "wrong_claim": "PLC를 연속 공정제어 전용, DCS를 이산 시퀀스 제어 전용으로 서로 뒤바꾼다.",
+          "correct_rule": "PLC는 주로 논리·시퀀스 제어, DCS는 주로 연속 공정제어에 적용하되 공정 요구에 따라 경계를 정한다.",
+          "severity": "fatal",
+          "affected_layers": [
+            "C"
+          ]
+        },
         {
           "id": "sw01_fatal_redundancy_removes_all_ccf",
           "claim": "이중화 구성만 하면 공통원인고장이 제거된다.",

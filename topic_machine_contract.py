@@ -98,6 +98,7 @@ def validate_topic_machine_contract(
                 f"facts[{index}].conditions[{condition_index}]",
             )
 
+    known = known_rule_ids or set()
     requirement_ids: set[str] = set()
     rules = value.get("requirement_rules")
     if not isinstance(rules, list) or not rules:
@@ -106,7 +107,11 @@ def validate_topic_machine_contract(
         required_rule_fields = {
             "requirement_id", "required_fact_ids", "minimum_match_count",
         }
-        optional_rule_fields = {"score_group_id", "allow_subject_mention_partial"}
+        optional_rule_fields = {
+            "score_group_id", "allow_subject_mention_partial",
+            "contradiction_classification", "contradiction_rule_id",
+            "contradiction_recommended_ceiling",
+        }
         if (
             not isinstance(rule, dict)
             or not required_rule_fields <= set(rule)
@@ -136,6 +141,35 @@ def validate_topic_machine_contract(
             raise TopicMachineContractError(
                 f"requirement_rules[{index}].allow_subject_mention_partial must be boolean"
             )
+        classification = rule.get("contradiction_classification")
+        if classification is not None:
+            if classification not in _CLASSIFICATIONS:
+                raise TopicMachineContractError(
+                    f"requirement_rules[{index}].contradiction_classification invalid"
+                )
+            contradiction_rule_id = _identifier(
+                rule.get("contradiction_rule_id"),
+                f"requirement_rules[{index}].contradiction_rule_id",
+            )
+            if known and contradiction_rule_id not in known:
+                raise TopicMachineContractError(
+                    f"unknown contradiction_rule_id: {contradiction_rule_id}"
+                )
+            ceiling = rule.get("contradiction_recommended_ceiling")
+            if (
+                isinstance(ceiling, bool)
+                or not isinstance(ceiling, (int, float))
+                or not 0 <= float(ceiling) <= 25
+            ):
+                raise TopicMachineContractError(
+                    f"requirement_rules[{index}].contradiction_recommended_ceiling invalid"
+                )
+        elif any(key in rule for key in (
+            "contradiction_rule_id", "contradiction_recommended_ceiling",
+        )):
+            raise TopicMachineContractError(
+                f"requirement_rules[{index}] contradiction policy incomplete"
+            )
         refs = rule.get("required_fact_ids")
         if not isinstance(refs, list) or not refs or not set(refs) <= fact_ids:
             raise TopicMachineContractError(
@@ -154,7 +188,6 @@ def validate_topic_machine_contract(
     bindings = value.get("invariant_bindings")
     if not isinstance(bindings, list):
         raise TopicMachineContractError("invariant_bindings must be an array")
-    known = known_rule_ids or set()
     for index, binding in enumerate(bindings):
         if not isinstance(binding, dict) or set(binding) != {
             "invariant_code", "rule_id", "classification",

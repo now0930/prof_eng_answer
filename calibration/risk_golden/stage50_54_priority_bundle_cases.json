@@ -1,0 +1,110 @@
+{
+  "version": "deterministic_risk_golden_cases_v1",
+  "cases": [
+    {
+      "case_id": "risk_nyquist_normal_01",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "lane": "normal",
+      "question": "Nyquist 안정도 판별에서 임계점과 P, N, Z 관계를 설명하시오.",
+      "answer": "Nyquist 임계점은 -1+j0과 같다. 폐루프 우반평면 극점은 개루프 우반평면 극점에서 도출하고, 폐루프 우반평면 극점은 Nyquist 선회수에서도 도출한다. 선택한 선회 방향 부호를 명시하여 Z=0인지 판정한다."
+    },
+    {
+      "case_id": "risk_nyquist_partial_01",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "lane": "adverse",
+      "question": "Nyquist 안정도 판별에서 임계점과 P, N, Z 관계를 설명하시오.",
+      "answer": "Nyquist 임계점은 -1+j0과 같다. 다만 개루프 우반평면 극점과 선회수로 폐루프 극점을 산정하는 관계는 설명하지 못했다."
+    },
+    {
+      "case_id": "risk_nyquist_fatal_01",
+      "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+      "lane": "fatal",
+      "question": "Nyquist 안정도 판별에서 임계점과 P, N, Z 관계를 설명하시오.",
+      "answer": "Nyquist critical point is equivalent to origin point. 따라서 원점을 선회하지 않으면 언제나 폐루프가 안정하다."
+    },
+    {
+      "case_id": "risk_lead_lag_normal_01",
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "lane": "normal",
+      "question": "진상·지상 보상기의 설계 방법을 설명하시오.",
+      "answer": "진상 보상기는 위상여유를 제어하여 과도응답과 대역폭을 개선한다. 지상 보상기는 정상상태 오차 감소를 제어하도록 저주파 이득을 높인다. 실제 설계에서는 교차주파수와 안정여유를 다시 검증한다."
+    },
+    {
+      "case_id": "risk_lead_lag_partial_01",
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "lane": "adverse",
+      "question": "진상·지상 보상기의 설계 방법을 설명하시오.",
+      "answer": "진상 보상기는 위상여유를 제어한다. 지상 보상기의 정상상태 오차 개선 원리와 설계 절차는 설명하지 못했다."
+    },
+    {
+      "case_id": "risk_lead_lag_fatal_01",
+      "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+      "lane": "fatal",
+      "question": "진상·지상 보상기의 설계 방법을 설명하시오.",
+      "answer": "진상 보상기는 정상상태 정확도만 제어한다. 지상 보상기는 위상여유만 제어한다. 두 역할은 이 기준으로 고정된다."
+    },
+    {
+      "case_id": "risk_lqr_normal_01",
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "lane": "normal",
+      "question": "LQR의 Q와 R 가중치 및 Riccati 방정식을 설명하시오.",
+      "answer": "LQR 이득은 대수 Riccati 방정식에서 도출한다. Q 가중치는 상태 편차 페널티를 제어한다. R 가중치는 제어입력 크기를 제어한다. 단위 정규화와 포화 한계를 포함해 반복 조정한다."
+    },
+    {
+      "case_id": "risk_lqr_partial_01",
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "lane": "adverse",
+      "question": "LQR의 Q와 R 가중치 및 Riccati 방정식을 설명하시오.",
+      "answer": "LQR 이득은 대수 Riccati 방정식에서 도출한다. Q와 R의 물리적 역할 및 조정 trade-off는 설명하지 못했다."
+    },
+    {
+      "case_id": "risk_lqr_fatal_01",
+      "topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+      "lane": "fatal",
+      "question": "LQR의 Q와 R 가중치 및 Riccati 방정식을 설명하시오.",
+      "answer": "Q 가중치는 제어입력 크기를 제어한다. R 가중치는 상태 편차 페널티를 제어한다. 이처럼 두 역할을 서로 바꾸어 설계한다."
+    },
+    {
+      "case_id": "risk_hipps_normal_01",
+      "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+      "lane": "normal",
+      "question": "HIPPS 과압보호계층과 압력방출계층을 비교하시오.",
+      "answer": "HIPPS는 PSV와 구분된다. HIPPS는 과압원을 차단하여 과압 예방을 제어하고, PSV는 사고 후 압력을 방출하여 사후 방출을 제어한다. 두 계층의 독립성과 시험주기를 각각 검증한다."
+    },
+    {
+      "case_id": "risk_hipps_partial_01",
+      "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+      "lane": "adverse",
+      "question": "HIPPS 과압보호계층과 압력방출계층을 비교하시오.",
+      "answer": "HIPPS는 PSV와 구분되며 과압원을 차단한다. PSV의 사후 압력방출 역할과 두 계층의 검증 경계는 설명하지 못했다."
+    },
+    {
+      "case_id": "risk_hipps_fatal_01",
+      "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+      "lane": "fatal",
+      "question": "HIPPS 과압보호계층과 압력방출계층을 비교하시오.",
+      "answer": "HIPPS is equivalent to PSV and is a post-event relief device. 과압 발생 후 압력을 방출하므로 두 보호계층의 기능은 같다."
+    },
+    {
+      "case_id": "risk_control_arch_normal_01",
+      "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "lane": "normal",
+      "question": "PLC, DCS, SCADA의 제어 아키텍처별 역할을 비교하시오.",
+      "answer": "PLC는 이산 시퀀스 제어에 따라 선정한다. DCS는 연속 공정제어에 따라 선정한다. SCADA는 광역 원격 감시에 따라 선정한다. 공정 특성과 가용성 요구를 함께 검토한다."
+    },
+    {
+      "case_id": "risk_control_arch_partial_01",
+      "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "lane": "adverse",
+      "question": "PLC, DCS, SCADA의 제어 아키텍처별 역할을 비교하시오.",
+      "answer": "PLC는 이산 시퀀스 제어에 따라 선정한다. DCS와 SCADA의 주된 역할 및 선택 기준은 설명하지 못했다."
+    },
+    {
+      "case_id": "risk_control_arch_fatal_01",
+      "topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+      "lane": "fatal",
+      "question": "PLC, DCS, SCADA의 제어 아키텍처별 역할을 비교하시오.",
+      "answer": "PLC는 연속 공정제어에 따라 선정한다. DCS는 이산 시퀀스 제어에 따라 선정한다. 두 시스템의 주된 역할은 이처럼 서로 반대이다."
+    }
+  ]
+}

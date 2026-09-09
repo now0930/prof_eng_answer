@@ -222,6 +222,17 @@ def evaluate_deterministic_requirements(
                 "related_fact_ids": related,
                 "evidence_claim_ids": evidence_claim_ids,
             })
+            if contradicted and rule.get("contradiction_classification"):
+                findings.append({
+                    "finding_id": rule["contradiction_rule_id"],
+                    "classification": rule["contradiction_classification"],
+                    "invariant_code": "MACHINE_CONTRACT_RELATION_CONTRADICTION",
+                    "requirement_refs": [requirement_id],
+                    "recommended_ceiling": rule[
+                        "contradiction_recommended_ceiling"
+                    ],
+                    "owner_topic_id": contract["owner_topic_id"],
+                })
     fatal = any(row["classification"] in {"fatal", "core_error"} for row in findings)
     return {
         "version": VERSION,

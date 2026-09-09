@@ -116,14 +116,6 @@ def run_deterministic_replay_audit(
             for binding in bindings.get(violation["code"], [])
             if binding["classification"] == "fatal"
         }
-        gold_ids = {
-            finding["finding_id"]
-            for finding in case["labels"]["findings"]
-            if finding["severity"] == "fatal"
-        }
-        known_fatal_count += len(gold_ids)
-        true_positive += len(gold_ids & detected_ids)
-        false_positive += len(detected_ids - gold_ids)
         invariant_codes = {row["code"] for row in first["violations"]}
         fact_anchors = evaluate_fact_anchor_requirements(
             answer_text=answer,
@@ -141,6 +133,19 @@ def run_deterministic_replay_audit(
             requirement_evaluation,
             fact_anchors,
         )
+        detected_ids.update(
+            finding["finding_id"]
+            for finding in requirement_evaluation.get("findings", [])
+            if finding.get("classification") == "fatal"
+        )
+        gold_ids = {
+            finding["finding_id"]
+            for finding in case["labels"]["findings"]
+            if finding["severity"] == "fatal"
+        }
+        known_fatal_count += len(gold_ids)
+        true_positive += len(gold_ids & detected_ids)
+        false_positive += len(detected_ids - gold_ids)
         score = calculate_deterministic_score(requirement_evaluation, answer_text=answer)
         repeated_requirements = evaluate_deterministic_requirements(
             claims=second["claims"],

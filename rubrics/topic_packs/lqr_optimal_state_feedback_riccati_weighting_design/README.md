@@ -104,3 +104,7 @@ LQR 최적 상태피드백 제어기의 비용함수, Riccati 방정식, 가중�
 - MathWorks `lqi`
 - MathWorks `place`
 - MIT Underactuated Robotics LQR notes
+
+## Stage52 결정론 계약
+
+Riccati 이득 도출과 Q-상태, R-입력 가중 관계를 평가하고 Q/R 역할 반전을 보호한다.

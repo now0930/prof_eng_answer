@@ -35,6 +35,22 @@
     "next_practice_points": [],
     "de_claim_trust": {}
   },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "lqr_optimal_state_feedback_riccati_weighting_design",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {"fact_id": "lqr_gain_derived_from_riccati", "subject": "lqr_gain", "predicate": "derived_from", "object": "riccati_equation", "polarity": "positive"},
+      {"fact_id": "q_controls_state_penalty", "subject": "q_weight", "predicate": "controls", "object": "state_penalty", "polarity": "positive"},
+      {"fact_id": "r_controls_control_effort", "subject": "r_weight", "predicate": "controls", "object": "control_effort", "polarity": "positive"}
+    ],
+    "requirement_rules": [
+      {"requirement_id": "riccati_gain_derivation", "required_fact_ids": ["lqr_gain_derived_from_riccati"], "minimum_match_count": 1},
+      {"requirement_id": "qr_weight_interpretation", "required_fact_ids": ["q_controls_state_penalty", "r_controls_control_effort"], "minimum_match_count": 2, "allow_subject_mention_partial": true, "contradiction_classification": "fatal", "contradiction_rule_id": "state_lqr_fatal_arbitrary_q_r", "contradiction_recommended_ceiling": 10.0}
+    ],
+    "invariant_bindings": []
+  },
   "llm_profile": {
     "display_name": "LQR 최적 상태피드백·Riccati 방정식·가중치 설계",
     "difficulty": "THEORY_CORE",

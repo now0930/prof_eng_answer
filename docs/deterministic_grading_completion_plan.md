@@ -2,7 +2,7 @@
 
 ## 1. 목표와 기준선
 
-목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage49 offline full-chain은 Topic routing recall 100%, known-fatal 10/10, score coverage 33/33, 허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 Authority Gate `READY`다. production authority 이전과 provider-zero 운영 검증도 완료했다.
+목표는 Gemini 또는 다른 LLM 없이 requirement 상태, fatal/core error, 점수와 최종 verdict를 결정하는 것이다. Stage54 offline full-chain은 Topic routing recall 100%, known-fatal 16/16, score coverage 48/48, 허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 Authority Gate `READY`다. production authority 이전과 provider-zero 운영 검증도 완료했다.
 
 완료 목표:
 
@@ -354,3 +354,17 @@ machine contract와 기존 normal/adverse/fatal coverage를 결합해 확대 우
 | Stage49C parser | 완료 | 한국어 object-first·`1/h`·중복 claim 회귀 |
 | Stage49D requirement | 완료 | 정상 SATISFIED, 부분 PARTIAL, 오류 WRONG/fatal |
 | Stage49E release | 완료 | 33건 READY·2회 STABLE·전체 release·CI PASS |
+
+## 15. Stage50~54 — 우선위험 5개 묶음
+
+| Stage | 대상 | 상태 | 보호 관계 |
+|---|---|---|---|
+| 50 | Nyquist | 완료 | -1 임계점과 P/N/Z 관계 |
+| 51 | Lead/Lag | 완료 | 위상여유와 정상상태 정확도 역할 |
+| 52 | LQR | 완료 | Riccati 및 Q/R 가중치 역할 |
+| 53 | HIPPS | 완료 | 예방 차단과 PSV 사후 방출 경계 |
+| 54 | PLC·DCS·SCADA | 완료 | 시퀀스·연속공정·감독제어 경계 |
+
+각 Stage는 normal/adverse/fatal 3건으로 구성된다. 관계 반전은 문자열 패치가 아니라
+machine contract의 canonical relation contradiction으로 fatal rule에 연결한다. 완료 시점
+inventory는 reviewed 48건, covered 31 Topic, 3-lane 완료 6 Topic이다.

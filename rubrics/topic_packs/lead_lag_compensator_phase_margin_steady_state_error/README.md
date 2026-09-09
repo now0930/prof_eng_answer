@@ -68,3 +68,7 @@
 - MathWorks loop-shaping and robust-control guidance
 - MathWorks Control System Designer
 - MathWorks PID anti-windup guidance
+
+## Stage51 결정론 계약
+
+진상-위상여유와 지상-정상상태 정확도 관계를 평가하고 역할 반전을 fatal 회귀로 보호한다.

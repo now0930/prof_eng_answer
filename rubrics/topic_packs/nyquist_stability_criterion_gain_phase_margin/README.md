@@ -67,3 +67,8 @@ Routh-Hurwitz 결과와 일치한다.
 
 LLM은 candidate evidence의 실제 주장과 전체 문맥을 확인한다.
 오개념 인용 후 명확히 반박한 문장은 fatal로 판정하지 않는다.
+
+## Stage50 결정론 계약
+
+`critical point=-1+j0`와 P/N/Z 관계를 canonical evidence로 평가한다. 원점을
+임계점으로 채택한 관계 충돌은 검증된 fatal rule이 소유한다.

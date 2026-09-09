@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-10): Gemini-off 33건 전체 체인은 question-only routing recall 100%, known-fatal 10/10, score coverage·허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 Authority Gate `READY`입니다. Stage49는 78개 Topic의 위험 기반 Golden 공백을 자동 순위화하고 첫 대상으로 FSRM의 정상·부분·fatal 3-lane을 추가했습니다. 이 과정에서 한국어 object-first 어순, `1/h` 차원 표현과 중복 quantity claim을 범용 규칙으로 보강했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-10): Gemini-off 48건 전체 체인은 question-only routing recall 100%, known-fatal 16/16, score coverage·허용구간 적중률 100%, 평균 범위 이탈 0점, known-overgrading 0건으로 Authority Gate `READY`입니다. Stage50~54는 Nyquist, Lead/Lag, LQR, HIPPS, PLC·DCS·SCADA에 정상·부분·fatal 3-lane을 추가하고 관계 반전을 machine contract가 직접 소유하게 했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 
@@ -62,7 +62,7 @@
 | Generic scoring policy | `stage23.generic_scoring_policy.v1` |
 | Runtime provenance | `runtime_grading_provenance_v1` |
 | Runtime provenance scoring policy | `stage23_generic_grading_contract_v1` |
-| 결정론적 Authority Gate | `READY` (Gemini-off 33건) |
+| 결정론적 Authority Gate | `READY` (Gemini-off 48건) |
 | Topic routing recall / score coverage | 100% / 100% |
 | Known Fatal 재현율 / false positive | 100% (10/10) / 0건 |
 | 점수 허용구간 적중률 / 평균 이탈 | 100% / 0점 |

@@ -55,3 +55,7 @@ HIPPS가 과압원 유입을 차단하는 전체 SIF로 동작하는 원리, 2oo
 ## 관리 원칙
 
 Source 내용과 release 상태는 git history, validator 결과와 SRS 변경관리 기록으로 추적한다.
+
+## Stage53 결정론 계약
+
+HIPPS의 예방 차단과 PSV의 사후 방출 경계를 평가하고 두 계층의 동일시를 fatal로 보호한다.

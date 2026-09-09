@@ -29,6 +29,21 @@
     "next_practice_points": [],
     "de_claim_trust": {}
   },
+  "machine_contract": {
+    "schema_version": "topic_machine_contract_v1",
+    "owner_topic_id": "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability",
+    "authority": "deterministic_topic_contract",
+    "score_effect": "downstream_deterministic_only",
+    "facts": [
+      {"fact_id": "plc_qualified_by_sequence_control", "subject": "plc", "predicate": "qualified_by", "object": "discrete_sequence_control", "polarity": "positive"},
+      {"fact_id": "dcs_qualified_by_process_control", "subject": "dcs", "predicate": "qualified_by", "object": "continuous_process_control", "polarity": "positive"},
+      {"fact_id": "scada_qualified_by_supervision", "subject": "scada", "predicate": "qualified_by", "object": "supervisory_monitoring", "polarity": "positive"}
+    ],
+    "requirement_rules": [
+      {"requirement_id": "control_architecture_role_boundary", "required_fact_ids": ["plc_qualified_by_sequence_control", "dcs_qualified_by_process_control", "scada_qualified_by_supervision"], "minimum_match_count": 2, "allow_subject_mention_partial": true, "contradiction_classification": "fatal", "contradiction_rule_id": "sw01_fatal_plc_dcs_role_reversal", "contradiction_recommended_ceiling": 10.0}
+    ],
+    "invariant_bindings": []
+  },
   "llm_profile": {
     "display_name": "Process design basis, operating cases, Topic 1~15 hand-off, integrated package selection, vendor evaluation, acceptance와 lifecycle closure를 평가한다.",
     "difficulty": "FIELD_APPLICATION",
@@ -108,6 +123,13 @@
       "수용기준은 고장검출시간, 절체시간, 출력변동, 데이터손실, 복구시간, 가용도 목표와 정기시험 결과로 정량화해야 한다."
     ],
     "fatal_conditions": [
+      {
+        "id": "sw01_fatal_plc_dcs_role_reversal",
+        "wrong_claim": "PLC를 연속 공정제어 전용, DCS를 이산 시퀀스 제어 전용으로 서로 뒤바꾼다.",
+        "correct_rule": "PLC는 주로 논리·시퀀스 제어, DCS는 주로 연속 공정제어에 적용하되 공정 요구에 따라 경계를 정한다.",
+        "severity": "fatal",
+        "affected_layers": ["C"]
+      },
       {
         "id": "sw01_fatal_redundancy_removes_all_ccf",
         "claim": "이중화 구성만 하면 공통원인고장이 제거된다.",
