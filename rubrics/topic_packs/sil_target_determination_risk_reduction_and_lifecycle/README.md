@@ -84,6 +84,14 @@ Full proof test는 정상 diagnostics가 찾지 못한 위험고장을 정해진
 
 OT 보안과 AI 도구는 기능안전 lifecycle을 대체하지 않는다. 안전 관련 변경은 권한분리, 무결성, 독립 V&V, traceability와 승인된 배포경계를 유지하고 보안위협이 SIF availability·independence·systematic capability에 미치는 영향을 평가한다.
 
+## 결정론적 machine contract
+
+Issue #1의 원본·교정 답안 쌍을 기준으로 다음 7개 Fact Anchor를 canonical relation으로
+판정한다: SIS/SIF/SIL scope, 요구 RRF, 목표 PFDavg, demand mode, achieved SIL 검증,
+MOC 재검증, AI·OT 기능안전 경계. 같은 anchor의 lexical hit보다 canonical 관계가
+우선하며 원본의 fatal 4건은 `WRONG`, 교정 답안의 빈도비·PST·실제 SIF 계산 관계는
+정상 evidence로 유지한다. 특정 답안 전체 문자열이나 점수 예외는 사용하지 않는다.
+
 ## Handoffs
 
 - `hazop_lopa_ipl_risk_reduction_sil_target_allocation` — HAZOP에서 LOPA scenario 전환, IPL 적격성 및 상세 잔여빈도 계산이 요구될 때: HAZOP·LOPA·IPL 세부 절차와 계산을 인계한다.

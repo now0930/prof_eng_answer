@@ -8,7 +8,7 @@
     {"id": "derived_by_ratio", "aliases": ["비로", "나누", "분모", "분자", "ratio", "/"]},
     {"id": "classified_by", "aliases": ["분류", "구분", "결정", "classified by"]},
     {"id": "supplements", "aliases": ["보완", "보조", "대체하지", "supplement"]},
-    {"id": "derived_from", "aliases": ["산정", "도출", "계산 결과", "근거", "derived from"]},
+    {"id": "derived_from", "aliases": ["산정", "도출", "계산 결과", "근거", "정한다", "derived from"]},
     {"id": "equivalent_to", "aliases": ["같", "동일", "이다", "아니", "equivalent", "equal", "not equal"]},
     {"id": "corresponds_to", "aliases": ["대응", "연결", "correspond"]},
     {"id": "plans", "aliases": ["계획", "준비", "plan", "prepare"]},
@@ -17,6 +17,11 @@
     {"id": "checks", "aliases": ["적합", "맞도록", "확인", "check"]},
     {"id": "provides", "aliases": ["제공", "연결", "추적", "provide", "trace"]},
     {"id": "traces", "aliases": ["추적", "연결", "trace"]},
-    {"id": "manages", "aliases": ["관리", "통제", "baseline", "manage"]}
+    {"id": "manages", "aliases": ["관리", "통제", "baseline", "manage"]},
+    {"id": "composed_of", "aliases": ["구성", "이루어", "consists of", "composed of"]},
+    {"id": "allocated_to", "aliases": ["할당", "SIF별", "각 SIF의 요구", "allocated to"]},
+    {"id": "verified_by", "aliases": ["검증", "입증", "verified by"]},
+    {"id": "requires", "aliases": ["거친", "필요", "요구", "requires"]},
+    {"id": "co_assessed_with", "aliases": ["상호영향", "영향을 평가", "함께 검증", "co-assessed"]}
   ]
 }

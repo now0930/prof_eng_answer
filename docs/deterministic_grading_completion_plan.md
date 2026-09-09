@@ -268,3 +268,15 @@ fixture로 고정한다. V-Model, 시험수준, V&V, RTM, baseline의 8개 핵�
 | Stage43B scope/promotion | 완료 | question scope 제한·canonical 우선·비교 evidence |
 | Stage43C regression | 완료 | 과대평가·정상·오답·교차결합 회귀 |
 | Stage43D release | 완료 | 30건 `READY`·2회 `STABLE`·Authority `READY`·전체 release PASS |
+
+## 9. Stage44 — SIL 목표 결정 원본·교정 쌍 승격
+
+Stage44는 기존 fatal 검출만 보호하던 SIL 목표 결정 machine contract를 정상 교정
+관계까지 확장한다. 원본의 오류 판정과 교정 답안의 정상 판정을 동시에 고정한다.
+
+| 단계 | 상태 | 완료 조건 |
+|---|---|---|
+| Stage44A audit | 완료 | 원본 4 fatal·교정 PFD 비율 false negative 확인 |
+| Stage44B contract | 완료 | scope·RRF·achieved SIL·MOC·AI/OT 7 anchor canonical 승격 |
+| Stage44C mutations | 완료 | 원본/교정·비율 표기·PST 부정표면형·AI 통제 부정 회귀 |
+| Stage44D release | 완료 | Topic 생성물·30건 `READY`·2회 `STABLE`·Authority `READY`·전체 release PASS |

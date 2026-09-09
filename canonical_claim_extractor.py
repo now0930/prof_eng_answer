@@ -31,7 +31,7 @@ _REJECT = re.compile(
 _CORRECT = re.compile(r"(?:정정|올바르게|실제로는|대신|correct(?:ly|ion)?)", re.I)
 _NEGATE = re.compile(r"(?:하지\s*않|아니(?:다|며|고|라)|할\s*수\s*없|불가능|not\b|never\b)", re.I)
 _CONDITION = re.compile(r"(?:경우|조건|에서는|일\s*때|when\b|if\b|under\b)", re.I)
-_CLAUSE_BOUNDARY = re.compile(r"(?:이고|이며|하지만|그러나|반면|[,;])", re.I)
+_CLAUSE_BOUNDARY = re.compile(r";", re.I)
 
 
 def _normalized(value: str) -> str:
@@ -97,8 +97,25 @@ def _assertion_context(text: str, fact_end: int) -> str:
     return "asserted"
 
 
-def _polarity(text: str, object_span: tuple[int, int], predicate_span: tuple[int, int]) -> str:
+def _polarity(
+    text: str,
+    object_span: tuple[int, int],
+    predicate_span: tuple[int, int],
+    predicate_id: str,
+) -> str:
     normalized = _normalized(text)
+    predicate_text = normalized[predicate_span[0]:predicate_span[1]]
+    # These predicates encode a negative surface relation as a positive
+    # canonical fact ("does not replace" => supplements).  Do not invert the
+    # claim merely because the predicate phrase itself contains negation.
+    encoded_negative_relation = (
+        predicate_id == "supplements" and "대체하지" in predicate_text
+    ) or (
+        predicate_id == "distinct_from"
+        and any(token in predicate_text for token in ("동일하지", "distinct", "different"))
+    )
+    if encoded_negative_relation:
+        return "positive"
     relation_start = min(predicate_span[0], object_span[0])
     relation_end = max(predicate_span[1], object_span[1]) + 12
     window = normalized[max(0, relation_start - 8):relation_end]
@@ -218,7 +235,9 @@ def extract_canonical_claim_evidence(
                     continue
                 selected_objects.append((object_id, object_span))
             for object_id, object_span in sorted(selected_objects):
-                observed_polarity = _polarity(sentence, object_span, predicate_span)
+                observed_polarity = _polarity(
+                    sentence, object_span, predicate_span, predicate_id
+                )
                 context = _assertion_context(sentence, max(subject_span[1], object_span[1]))
                 claims.append({
                     "subject": subject_id,

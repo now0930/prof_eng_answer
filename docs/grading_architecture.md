@@ -280,6 +280,12 @@ canonical 결과가 lexical 결과를 대체한다. 이때 두 결과와 상태 
 범위를 제한한다. 반면 synthetic rule과 실제 invariant가 위반된 requirement는 질문
 scope 밖이라는 이유로 제거하지 않는다.
 
+Canonical predicate 자체가 부정 표면형을 의미로 포함하는 경우도 분리한다. 예를 들어
+`PST가 full proof test를 대체하지 않는다`는 `supplements`의 positive claim이며,
+단순 부정 polarity로 뒤집지 않는다. 쉼표·대조 접속으로 이어진 공학 입력 목록은 같은
+subject의 evidence로 허용하되, 뒤에 등장한 더 가까운 compatible subject가 있으면
+그 subject가 관계를 소유한다.
+
 ## 11. Logic fatal과 Difficulty ceiling
 
 Logic fatal과 numeric cap은 같은 개념이 아니다.

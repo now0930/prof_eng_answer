@@ -164,6 +164,12 @@ canonical machine contract로 승격하고 같은 anchor의 lexical 상태와 ca
 오답 mutation이 함께 통과할 때만 허용한다. 다음 Topic도 실제 오분류 fixture가 있는
 경우에만 같은 방식으로 한 owner씩 확대한다.
 
+Stage44에서는 Issue #1의 SIL 목표 결정 원본·교정 쌍을 두 번째 승격 대상으로 삼는다.
+원본의 fatal 4건과 13.0점 ceiling은 유지하면서, 교정 답안의 올바른
+`F_target/F_residual`, `1/PFDavg`, achieved SIL 입력, MOC, AI·OT 기능안전 관계가
+`MISSING`으로 떨어지던 false negative를 제거한다. 이후 대상은 canonical 비교가 0인
+HAZOP/LOPA 운영 fixture이며, 현재 Stage의 전체 Gate가 유지된 뒤 별도 변경한다.
+
 ### P0 — 요구상태 Evaluator
 
 - 단일 일반 단어가 여러 anchor의 `PARTIAL` 근거로 중복 사용되는 비율을 측정한다.

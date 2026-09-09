@@ -189,13 +189,25 @@
       {"fact_id": "target_pfd_uses_frequency_ratio", "subject": "target_probability", "predicate": "derived_by_ratio", "object": "event_frequencies", "polarity": "positive"},
       {"fact_id": "demand_mode_uses_demand_frequency", "subject": "demand_mode", "predicate": "classified_by", "object": "demand_frequency", "polarity": "positive"},
       {"fact_id": "pst_supplements_full_test", "subject": "partial_stroke_test", "predicate": "supplements", "object": "full_proof_test", "polarity": "positive"},
-      {"fact_id": "field_interval_uses_sif_calculation", "subject": "operating_test_interval", "predicate": "derived_from", "object": "sif_calculation", "polarity": "positive"}
+      {"fact_id": "field_interval_uses_sif_calculation", "subject": "operating_test_interval", "predicate": "derived_from", "object": "sif_calculation", "polarity": "positive"},
+      {"fact_id": "sis_contains_sifs", "subject": "safety_instrumented_system", "predicate": "composed_of", "object": "safety_instrumented_function", "polarity": "positive"},
+      {"fact_id": "sil_is_allocated_to_sif", "subject": "sil_requirement", "predicate": "allocated_to", "object": "safety_instrumented_function", "polarity": "positive"},
+      {"fact_id": "rrf_is_inverse_target_probability", "subject": "required_rrf", "predicate": "derived_by_ratio", "object": "inverse_target_probability", "polarity": "positive"},
+      {"fact_id": "achieved_sil_uses_complete_sif_inputs", "subject": "achieved_sil", "predicate": "verified_by", "object": "sif_verification_inputs", "polarity": "positive"},
+      {"fact_id": "safety_change_requires_moc_revalidation", "subject": "safety_change", "predicate": "requires", "object": "moc_revalidation", "polarity": "positive"},
+      {"fact_id": "ai_change_uses_safety_lifecycle_controls", "subject": "ai_generated_change", "predicate": "applies_to", "object": "safety_lifecycle_controls", "polarity": "positive"},
+      {"fact_id": "ot_security_checks_functional_safety_interaction", "subject": "ot_security", "predicate": "co_assessed_with", "object": "functional_safety_interaction", "polarity": "positive"}
     ],
     "requirement_rules": [
       {"requirement_id": "target_pfd_relation", "required_fact_ids": ["target_pfd_uses_frequency_ratio"], "minimum_match_count": 1},
       {"requirement_id": "demand_mode_metric_selection", "required_fact_ids": ["demand_mode_uses_demand_frequency"], "minimum_match_count": 1},
       {"requirement_id": "proof_test_diagnostics_reliability", "required_fact_ids": ["pst_supplements_full_test"], "minimum_match_count": 1},
-      {"requirement_id": "operations_moc_security_ai_lifecycle", "required_fact_ids": ["field_interval_uses_sif_calculation"], "minimum_match_count": 1}
+      {"requirement_id": "operations_moc_security_ai_lifecycle", "required_fact_ids": ["field_interval_uses_sif_calculation"], "minimum_match_count": 1},
+      {"requirement_id": "sis_sif_sil_scope", "required_fact_ids": ["sis_contains_sifs", "sil_is_allocated_to_sif"], "minimum_match_count": 1},
+      {"requirement_id": "required_rrf_relation", "required_fact_ids": ["rrf_is_inverse_target_probability"], "minimum_match_count": 1},
+      {"requirement_id": "achieved_sil_verification", "required_fact_ids": ["achieved_sil_uses_complete_sif_inputs"], "minimum_match_count": 1},
+      {"requirement_id": "operations_moc_revalidation", "required_fact_ids": ["safety_change_requires_moc_revalidation"], "minimum_match_count": 1},
+      {"requirement_id": "cyber_ai_safety_boundary", "required_fact_ids": ["ai_change_uses_safety_lifecycle_controls", "ot_security_checks_functional_safety_interaction"], "minimum_match_count": 2}
     ],
     "invariant_bindings": [
       {"invariant_code": "INVALID_TARGET_PROBABILITY_FREQUENCY_PRODUCT", "rule_id": "fatal_target_pfd_frequency_product", "classification": "fatal", "requirement_refs": ["target_pfd_relation"], "recommended_ceiling": 13.0},
@@ -206,7 +218,8 @@
   },
   "revision_notes": [
     "Deterministic regex는 P0-D 관계식 검증 단계 전까지 비활성화한다.",
-    "Fatal finding은 keyword hit가 아니라 문맥상 실제 오답 주장으로 검증한다."
+    "Fatal finding은 keyword hit가 아니라 문맥상 실제 오답 주장으로 검증한다.",
+    "2026-09-09 Stage44: 원본·교정 운영답안 쌍을 기준으로 scope, RRF, achieved SIL, MOC, AI·OT 경계 Fact Anchor를 canonical relation으로 승격했다."
   ],
   "topic_label": "목표 SIL 결정·위험감소·안전수명주기"
 }
