@@ -170,6 +170,12 @@ Stage44에서는 Issue #1의 SIL 목표 결정 원본·교정 쌍을 두 번째 
 `MISSING`으로 떨어지던 false negative를 제거한다. 이후 대상은 canonical 비교가 0인
 HAZOP/LOPA 운영 fixture이며, 현재 Stage의 전체 Gate가 유지된 뒤 별도 변경한다.
 
+Stage45에서는 HAZOP/LOPA 반응기 과압력 fixture의 9개 anchor를 승격한다. 기존 답안은
+PFD 빈도비와 SIF 구성요소만 부분 증거로 인정하고, scenario 경계·IPL 적격성·RRF·SIL
+mapping·SRS 인계 누락은 canonical `MISSING`으로 구분한다. 차원 오류는 Topic에
+복제하지 않고 FSRM global invariant가 단일 owner로 유지한다. 다음 확대 대상은 새
+운영 오분류 또는 reviewed mutation 증거가 생긴 Topic으로 제한한다.
+
 ### P0 — 요구상태 Evaluator
 
 - 단일 일반 단어가 여러 anchor의 `PARTIAL` 근거로 중복 사용되는 비율을 측정한다.

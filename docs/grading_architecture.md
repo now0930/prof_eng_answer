@@ -286,6 +286,12 @@ Canonical predicate 자체가 부정 표면형을 의미로 포함하는 경우�
 subject의 evidence로 허용하되, 뒤에 등장한 더 가까운 compatible subject가 있으면
 그 subject가 관계를 소유한다.
 
+수식의 점(`Fr.max`)과 줄바꿈은 canonical sentence 경계에서 보존한다. 줄 끝에 마침표가
+없는 OCR 텍스트도 하나의 evidence span으로 처리하고, 식 내부의 점은 문장 종결자로
+자르지 않는다. 다중 필수 fact를 가진 requirement에서는 다른 필수 fact와 정확히
+일치하는 claim을 relation conflict로 소비하지 않아 fact 선언 순서가 판정을 바꾸지
+않게 한다.
+
 ## 11. Logic fatal과 Difficulty ceiling
 
 Logic fatal과 numeric cap은 같은 개념이 아니다.

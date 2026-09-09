@@ -22,6 +22,12 @@
     {"id": "allocated_to", "aliases": ["할당", "SIF별", "각 SIF의 요구", "allocated to"]},
     {"id": "verified_by", "aliases": ["검증", "입증", "verified by"]},
     {"id": "requires", "aliases": ["거친", "필요", "요구", "requires"]},
-    {"id": "co_assessed_with", "aliases": ["상호영향", "영향을 평가", "함께 검증", "co-assessed"]}
+    {"id": "co_assessed_with", "aliases": ["상호영향", "영향을 평가", "함께 검증", "co-assessed"]},
+    {"id": "bounded_by", "aliases": ["경계", "단위", "포함", "bounded by"]},
+    {"id": "represents", "aliases": ["의미", "발생하는 빈도", "나타내", "represents"]},
+    {"id": "qualifies_as", "aliases": ["인정", "credit", "충족", "qualifies as"]},
+    {"id": "mapped_from", "aliases": ["매핑", "대응", "구간으로 정", "mapped from"]},
+    {"id": "defines", "aliases": ["정의", "규정", "명시", "defines"]},
+    {"id": "handed_off_to", "aliases": ["인계", "전달", "handoff", "handed off"]}
   ]
 }

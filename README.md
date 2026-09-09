@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-09): Stage38 Gemini-off 30건 전체 체인은 question-only routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건, 2회 exact replay `STABLE`로 Authority Gate `READY`를 달성했습니다. Stage39~41에서 production provider-zero 전환을 완료했고, Stage42에서는 canonical claim의 조건·극성·인용·정정 문맥과 requirement 단일 evidence 배정을 production 입력에 연결했습니다. Stage43~44에서는 V-Model/SW 검증과 SIL 목표 결정 운영 회귀의 핵심 Fact Anchor를 질문 범위형 canonical relation contract로 승격했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-09): Stage38 Gemini-off 30건 전체 체인은 question-only routing recall 100%, known-fatal 9/9, score coverage 30/30, 허용구간 적중률 86.67%, 평균 범위 이탈 0.045점, known-overgrading 0건, 2회 exact replay `STABLE`로 Authority Gate `READY`를 달성했습니다. Stage39~41에서 production provider-zero 전환을 완료했고, Stage42에서는 canonical claim의 조건·극성·인용·정정 문맥과 requirement 단일 evidence 배정을 production 입력에 연결했습니다. Stage43~45에서는 V-Model/SW 검증, SIL 목표 결정, HAZOP/LOPA 운영 회귀의 핵심 Fact Anchor를 질문 범위형 canonical relation contract로 승격했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 

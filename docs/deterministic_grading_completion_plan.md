@@ -280,3 +280,16 @@ Stage44는 기존 fatal 검출만 보호하던 SIL 목표 결정 machine contrac
 | Stage44B contract | 완료 | scope·RRF·achieved SIL·MOC·AI/OT 7 anchor canonical 승격 |
 | Stage44C mutations | 완료 | 원본/교정·비율 표기·PST 부정표면형·AI 통제 부정 회귀 |
 | Stage44D release | 완료 | Topic 생성물·30건 `READY`·2회 `STABLE`·Authority `READY`·전체 release PASS |
+
+## 10. Stage45 — HAZOP/LOPA 운영 회귀 canonical 승격
+
+Stage45는 canonical 비교가 0이던 반응기 과압력 운영 fixture를 9개 원자 requirement로
+전환한다. Global FSRM fatal owner는 유지하고 Topic-local coverage만 승격한다.
+
+| 단계 | 상태 | 완료 조건 |
+|---|---|---|
+| Stage45A audit | 완료 | 9개 lexical anchor·global fatal owner·0 comparison 확인 |
+| Stage45B contract | 완료 | scenario→IPL→RRF/PFD→SIF/SRS 9개 관계 정의 |
+| Stage45C parser/evaluator | 완료 | OCR 줄바꿈·점 포함 식·주어 소유·다중 fact 순서 독립성 |
+| Stage45D regression | 완료 | 역사적 12.42점·정상 9/9·부분·오답·질문범위 회귀 |
+| Stage45E release | 완료 | Topic 생성물·30건 replay READY·stability STABLE·authority READY·전체 release PASS |

@@ -138,6 +138,9 @@ def evaluate_deterministic_requirements(
             contradicted: list[str] = []
             related: list[str] = []
             evidence_claim_ids: list[str] = []
+            required_fact_keys = {
+                _key(facts[fact_id]) for fact_id in rule["required_fact_ids"]
+            }
             for fact_id in rule["required_fact_ids"]:
                 fact = facts[fact_id]
                 fact_key = _key(fact)
@@ -161,10 +164,12 @@ def evaluate_deterministic_requirements(
                     if _key(claim)[:2] == fact_key[:2]
                     and _key(claim)[2] != fact_key[2]
                     and _key(claim)[3] == fact_key[3]
+                    and _key(claim) not in required_fact_keys
                 ]
                 partial = [
                     (index, claim) for index, claim in candidates
                     if _key(claim)[0] == fact_key[0]
+                    and _key(claim) not in required_fact_keys
                     and sum(
                         left == right
                         for left, right in zip(_key(claim)[:3], fact_key[:3])

@@ -42,6 +42,15 @@ HAZOP에서 식별한 원인–결과를 LOPA scenario로 정규화하고, 적�
 - Target SIL과 achieved SIL을 분리한다.
 - LOPA 결과를 전체 SIF 경계와 검증 가능한 SRS 요구로 인계한다.
 
+## 결정론적 machine contract
+
+반응기 과압력 운영 회귀가 요구하는 9개 Fact Anchor를 canonical relation으로
+판정한다. Scenario의 initiating event·consequence 경계, initiating frequency의 의미와
+자료 근거, IPL 적격성, residual frequency, RRF, PFDavg, SIL band, 전체 SIF 경계,
+SRS 인계를 각각 독립 requirement로 유지한다. 단순 `SIL`, `PFD`, `Sensor` 나열은
+완전 충족이 아니며, 같은 anchor에서는 canonical 결과가 lexical hit보다 우선한다.
+차원 오류 fatal은 중복 정의하지 않고 global FSRM invariant가 계속 소유한다.
+
 ## Fatal 오류
 
 - Consequence severity 또는 HAZOP ranking만으로 SIL 자동 지정

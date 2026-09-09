@@ -21,7 +21,7 @@ from quantity_dimension_evaluator import extract_quantity_relation_evidence
 VERSION = "canonical_claim_extractor_v1"
 MARKER = "CANONICAL_CLAIM_EXTRACTOR_V1"
 ROOT = Path(__file__).resolve().parent
-_SENTENCE = re.compile(r"[^\n.!?。]+(?:[.!?。]|$)")
+_SENTENCE = re.compile(r"[^\n!?。]+?(?:\.(?![A-Za-z0-9])|[!?。]|\n|$)")
 _QUOTE = re.compile(r'["“”‘’「」『』](.*?)["“”‘’「」『』]')
 _QUOTED_REPORT = re.compile(r"(?:라고|이라는|라는)\s*(?:주장|말|설명|견해)")
 _REJECT = re.compile(
@@ -80,6 +80,24 @@ def _find_alias(
         if start >= 0:
             matches.append((start, start + len(alias)))
     return min(matches, key=lambda row: (row[0], -(row[1] - row[0]))) if matches else None
+
+
+def _find_subject_alias(text: str, aliases: list[str]) -> tuple[int, int] | None:
+    """Prefer an occurrence carrying an explicit Korean subject/topic marker."""
+    normalized = _normalized(text)
+    matches: list[tuple[int, int]] = []
+    for alias in aliases:
+        start = 0
+        while True:
+            index = normalized.find(alias, start)
+            if index < 0:
+                break
+            matches.append((index, index + len(alias)))
+            start = index + max(1, len(alias))
+    if not matches:
+        return None
+    marked = [span for span in matches if _marked_as_subject(text, span)]
+    return min(marked or matches, key=lambda row: (row[0], -(row[1] - row[0])))
 
 
 def _assertion_context(text: str, fact_end: int) -> str:
@@ -149,6 +167,12 @@ def _same_clause(
     return not _CLAUSE_BOUNDARY.search(_normalized(text)[start:end])
 
 
+def _marked_as_subject(text: str, span: tuple[int, int]) -> bool:
+    """Return whether an occurrence can own a following coordinated relation."""
+    tail = _normalized(text)[span[1]:span[1] + 12]
+    return re.match(r"\s*(?:은|는|이(?!며)|가|:)", tail) is not None
+
+
 def extract_canonical_claim_evidence(
     answer_text: str,
     *,
@@ -185,7 +209,7 @@ def extract_canonical_claim_evidence(
             if _find_alias(sentence, values) is not None
         }
         for owner_topic_id, subject_id, predicate_id in relation_subjects:
-            subject_span = _find_alias(sentence, aliases.get(subject_id, []))
+            subject_span = _find_subject_alias(sentence, aliases.get(subject_id, []))
             if not subject_span:
                 continue
             predicate_span = _find_alias(
@@ -212,10 +236,14 @@ def extract_canonical_claim_evidence(
                 for _, candidate_subject, candidate_predicate in relation_subjects:
                     if candidate_predicate != predicate_id:
                         continue
-                    candidate_span = _find_alias(
+                    candidate_span = _find_subject_alias(
                         sentence, aliases.get(candidate_subject, [])
                     )
-                    if candidate_span and candidate_span[0] <= object_span[0]:
+                    if (
+                        candidate_span
+                        and candidate_span[1] <= object_span[0]
+                        and _marked_as_subject(sentence, candidate_span)
+                    ):
                         compatible_subjects.append((candidate_span[0], candidate_subject))
                 if compatible_subjects and max(compatible_subjects)[1] != subject_id:
                     continue
