@@ -457,3 +457,8 @@ docker compose exec -T prof-eng-answer-bot \
 `PROF_ENG_CHAT_ID`이다. 재채점은 저장된 OCR 텍스트만 사용하며 기존 사진을 다시 OCR
 처리하지 않는다. 성공 출력은 `TELEGRAM_DETERMINISTIC_REGRADE_V1`, `decision=PASS`,
 `provider_calls=0`을 포함한다.
+
+기본적으로 결과 앞에 `[재채점 원문 — 복사용]`, `/grade`, 정규화된 문제·답안,
+`끝.`을 전송하므로 Telegram에서 그대로 복사해 다시 제출할 수 있다. 원문이 길면 Bot의
+메시지 길이 제한에 맞춰 자동 분할된다. 원문 표시가 필요 없으면 `--no-source-text`를
+지정한다.

@@ -3,6 +3,7 @@ import unittest
 from pathlib import Path
 
 from scripts.regrade_to_telegram import (
+    build_copyable_submission,
     create_regrade_session,
     latest_source_session,
     read_session_input,
@@ -11,6 +12,13 @@ from scripts.regrade_to_telegram import (
 
 
 class RegradeToTelegramTests(unittest.TestCase):
+    def test_copyable_submission_has_grade_and_end_markers(self):
+        rendered = build_copyable_submission("문제: 시험\n답안: 내용")
+        self.assertEqual(
+            rendered,
+            "[재채점 원문 — 복사용]\n/grade\n문제: 시험\n답안: 내용\n끝.",
+        )
+
     def test_resolves_only_safe_session_ids(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

@@ -63,7 +63,9 @@ docker compose exec -T prof-eng-answer-bot \
   --session-id 20260901_125506_5960502198
 ```
 
-`--latest`, `--input <path>`, `--chat-id <id>`, `--dry-run`도 지원한다. Bot API는 Bot이
+`--latest`, `--input <path>`, `--chat-id <id>`, `--dry-run`도 지원한다. 기본 전송은
+채점 결과 앞에 `/grade`와 `끝.`이 포함된 복사용 원문을 표시하며, 필요 없으면
+`--no-source-text`를 사용한다. Bot API는 Bot이
 자기 자신에게 수신 update를 만들 수 없으므로 이 도구는 입력을 위조하지 않고 채점
 entrypoint를 직접 호출한 뒤 결과만 `sendMessage`로 전송한다.
 

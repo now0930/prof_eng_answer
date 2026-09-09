@@ -70,6 +70,13 @@ def create_regrade_session(sessions_dir: Path, chat_id: str) -> Path:
     return candidate
 
 
+def build_copyable_submission(normalized_text: str) -> str:
+    value = str(normalized_text or "").strip()
+    if not value:
+        raise ValueError("normalized submission is empty")
+    return "[재채점 원문 — 복사용]\n/grade\n" + value + "\n끝."
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="현재 deterministic engine으로 OCR 답안을 재채점해 Telegram으로 전송"
@@ -86,6 +93,10 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument(
         "--dry-run", action="store_true",
         help="채점·저장만 하고 Telegram으로 전송하지 않음",
+    )
+    parser.add_argument(
+        "--no-source-text", action="store_true",
+        help="Telegram 결과에서 복사용 원문 답안 표시를 생략",
     )
     parser.add_argument(
         "--sessions-dir", type=Path, default=ROOT / "data" / "sessions",
@@ -172,7 +183,13 @@ def main() -> int:
     )
 
     rendered = bot.format_result(grade, raw_result)
+    copyable_submission = (
+        None if args.no_source_text else build_copyable_submission(normalized_text)
+    )
     if args.dry_run:
+        if copyable_submission:
+            print(copyable_submission)
+            print()
         print(rendered)
         print(f"저장 위치: {session_dir}")
     else:
@@ -182,6 +199,8 @@ def main() -> int:
             "채점 엔진: Deterministic Topic Pack + Engineering Ontology\n"
             f"원본 세션: {source_label}",
         )
+        if copyable_submission:
+            bot.send_message(args.chat_id, copyable_submission)
         bot.send_message(args.chat_id, rendered)
         bot.send_message(
             args.chat_id,
@@ -194,6 +213,7 @@ def main() -> int:
         "source": source_label,
         "session_id": sid,
         "telegram_sent": not args.dry_run,
+        "source_text_sent": bool(copyable_submission and not args.dry_run),
         "provider_calls": 0,
         "total_score": grade.get("total_score"),
     }, ensure_ascii=False))
