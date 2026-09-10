@@ -89,6 +89,27 @@ docker compose exec -T prof-eng-answer-bot \
 session을 `SKIPPED_DUPLICATE`와 `duplicate_of`로 기록하며
 `reports/telegram_regrade_batches/<timestamp>.json`에 저장된다.
 
+### `run_telegram_regrade.sh`
+
+서버의 Hermes Compose 프로젝트에서 `regrade_to_telegram.py`를 실행하는 운영용
+래퍼다. 기본 `all` 모드는 중복 답안을 한 번만 처리하고, 같은 엔진으로 완료한 원본은
+재개 시 건너뛰며, 기존 핵심 판정이 변경된 결과만 Telegram으로 전송한다.
+
+```bash
+cd /home/now0930/hermes
+bash workspace/prof_eng_answer/scripts/run_telegram_regrade.sh all
+```
+
+전체 결과 대신 집계만 받으려면 다음처럼 실행한다.
+
+```bash
+bash workspace/prof_eng_answer/scripts/run_telegram_regrade.sh all --send-summary
+```
+
+전송 없이 먼저 검증하려면 `latest --dry-run`, 특정 답안은
+`session <SESSION_ID>`를 사용한다. Compose 경로 또는 서비스명이 다른 환경은
+`PROF_ENG_COMPOSE_DIR`, `PROF_ENG_COMPOSE_SERVICE`로 덮어쓴다.
+
 ### `rubric_manager.py`
 
 Rubric content와 Topic Pack을 관리하는 통합 CLI이다.

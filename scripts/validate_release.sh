@@ -3,6 +3,8 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+bash -n scripts/run_telegram_regrade.sh
+
 # STAGE17E2B_TOPIC_PACK_TEST_MANIFEST_V1
 python3 -B -m unittest -v scripts.test_control_valve_maintenance_inspection_overhaul_testing_topic scripts.test_topic_pack_contract scripts.test_topic_pack_tool scripts.test_topic_pack_authoring_workflow scripts.test_topic_pack_workflow_controller scripts.test_topic_pack_atomicity scripts.test_deterministic_score_engine scripts.test_nyquist_routh_routing_boundary tests.test_canonical_claim_extractor tests.test_vmodel_canonical_promotion tests.test_sil_target_canonical_promotion tests.test_hazop_lopa_canonical_promotion tests.test_mcdc_cross_topic_canonical_promotion tests.test_golden_risk_coverage tests.test_fsrm_risk_golden tests.test_priority_bundle_risk_golden tests.test_machine_contract_contradiction_policy tests.test_regrade_to_telegram tests.test_telegram_export_grading_regression
 
