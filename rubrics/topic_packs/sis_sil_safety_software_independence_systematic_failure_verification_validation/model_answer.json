@@ -140,6 +140,17 @@
       "required_anchor_ids": [
         "software_safety_lifecycle"
       ]
+    },
+    {
+      "pattern": "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오.",
+      "intent": "V-Model 시험과 SIL 소프트웨어 보증의 교차 범위",
+      "required_anchor_ids": [
+        "sil_property_of_safety_function",
+        "software_safety_lifecycle",
+        "systematic_failure",
+        "bidirectional_traceability",
+        "modification_revalidation"
+      ]
     }
   ],
   "recommended_outline": [
@@ -276,7 +287,9 @@
   ],
   "deterministic_routing_aliases": [
     "안전필수 소프트웨어",
-    "SIL 관점 소프트웨어 검증"
+    "SIL 관점 소프트웨어 검증",
+    "SIL 달성을 위한 소프트웨어 검증",
+    "안전 무결성 기준(SIL) 달성"
   ],
   "routing_field_points": [
     "SIS가 하나 이상의 SIF를 구현하며 SIL은 SIF 요구 무결성 수준이라는 관계",

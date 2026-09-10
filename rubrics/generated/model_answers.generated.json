@@ -1,5 +1,5 @@
 {
-  "version": "sha256-f633fce349ad980d2248d9b374dfab0434987fcf441ee1e87ab4ca34a2995c47-generated-topic-pack-model-answers",
+  "version": "sha256-085ea998f7439845d04ed2ed1c5fa69db993ff6ad7463e58a7e1111d197530a0-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -8064,6 +8064,17 @@
             "electric_actuator_motor_gear_control",
             "body_actuator_selection_multi_criteria"
           ]
+        },
+        {
+          "pattern": "공압식, 전동식, 유압식 제어밸브 액추에이터의 구조와 동작원리, 장단점, 적용조건, 에너지원 상실 시 fail-safe 특성과 현장 선정기준을 비교하시오.",
+          "required_anchor_ids": [
+            "spring_diaphragm_actuator_force_and_fail_safe",
+            "piston_actuator_high_force_and_speed",
+            "electric_actuator_motor_gear_control",
+            "hydraulic_actuator_force_and_stored_energy_fail_safe",
+            "actuator_output_matches_valve_motion",
+            "body_actuator_selection_multi_criteria"
+          ]
         }
       ],
       "recommended_outline": [
@@ -8115,12 +8126,13 @@
           ]
         },
         {
-          "section": "5. 공압 액추에이터",
-          "intent": "Spring-diaphragm, piston과 rack-and-pinion을 비교한다.",
+          "section": "5. 공압·유압 액추에이터",
+          "intent": "Spring-diaphragm, piston, rack-and-pinion과 hydraulic actuator를 비교한다.",
           "anchor_refs": [
             "spring_diaphragm_actuator_force_and_fail_safe",
             "piston_actuator_high_force_and_speed",
-            "rack_pinion_rotary_torque_conversion"
+            "rack_pinion_rotary_torque_conversion",
+            "hydraulic_actuator_force_and_stored_energy_fail_safe"
           ]
         },
         {
@@ -8139,7 +8151,8 @@
             "spring_diaphragm_actuator_force_and_fail_safe",
             "piston_actuator_high_force_and_speed",
             "rack_pinion_rotary_torque_conversion",
-            "electric_actuator_motor_gear_control"
+            "electric_actuator_motor_gear_control",
+            "hydraulic_actuator_force_and_stored_energy_fail_safe"
           ]
         },
         {
@@ -8298,7 +8311,7 @@
         "Globe 계열과 특수 직선 운동 body를 비교한다.",
         "Disc·ball·plug 계열의 유로와 적용을 비교한다.",
         "끝단 연결, bonnet, guiding과 reduced trim을 설명한다.",
-        "Spring-diaphragm, piston과 rack-and-pinion을 비교한다.",
+        "Spring-diaphragm, piston, rack-and-pinion과 hydraulic actuator를 비교한다.",
         "Electric과 manual actuator의 역할과 한계를 설명한다.",
         "Valve motion, force·torque, stroke·angle과 fail-safe를 일치시킨다.",
         "공정조건, 설치, 정비와 lifecycle을 포함한 선정 절차를 제시한다."
@@ -14749,6 +14762,19 @@
             "sw04_system_test",
             "sw04_static_analysis",
             "sw04_dynamic_analysis"
+          ]
+        },
+        {
+          "pattern": "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오.",
+          "required_anchor_ids": [
+            "sw04_v_model_definition",
+            "sw04_unit_test",
+            "sw04_integration_test",
+            "sw04_system_test",
+            "sw04_verification_definition",
+            "sw04_validation_definition",
+            "sw04_rtm_bidirectional",
+            "sw04_configuration_baseline"
           ]
         }
       ],
@@ -23802,7 +23828,8 @@
             "so2_pole_response_relationship",
             "so2_underdamped_response",
             "so2_critical_damping_response",
-            "so2_overdamped_response"
+            "so2_overdamped_response",
+            "so2_zero_negative_damping"
           ]
         },
         {
@@ -24663,6 +24690,17 @@
           "required_anchor_ids": [
             "software_safety_lifecycle"
           ]
+        },
+        {
+          "pattern": "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오.",
+          "intent": "V-Model 시험과 SIL 소프트웨어 보증의 교차 범위",
+          "required_anchor_ids": [
+            "sil_property_of_safety_function",
+            "software_safety_lifecycle",
+            "systematic_failure",
+            "bidirectional_traceability",
+            "modification_revalidation"
+          ]
         }
       ],
       "recommended_outline": [
@@ -24799,7 +24837,9 @@
       ],
       "deterministic_routing_aliases": [
         "안전필수 소프트웨어",
-        "SIL 관점 소프트웨어 검증"
+        "SIL 관점 소프트웨어 검증",
+        "SIL 달성을 위한 소프트웨어 검증",
+        "안전 무결성 기준(SIL) 달성"
       ],
       "routing_field_points": [
         "SIS가 하나 이상의 SIF를 구현하며 SIL은 SIF 요구 무결성 수준이라는 관계",

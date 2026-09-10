@@ -57,6 +57,14 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         requirements,
         fact_anchors,
     )
+    scope_selections = fact_anchors.get("question_contract_selections", [])
+    scope_resolved = bool(scope_selections) and all(
+        row.get("mode") in {"explicit_question_contract", "derived_question_contract"}
+        for row in scope_selections
+    )
+    scope_exact = scope_resolved and all(
+        row.get("mode") == "explicit_question_contract" for row in scope_selections
+    )
     score = calculate_deterministic_score(requirements, answer_text=answer_text)
     if score["decision"] != "SCORED":
         raise DeterministicPrimaryError("deterministic score engine abstained")
@@ -102,6 +110,11 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         "topic_id": route["primary_topic_id"],
         "topic_ids": route["topic_ids"],
         "routing_evaluation": route,
+        "question_scope_evaluation": {
+            "resolved": scope_resolved,
+            "exact": scope_exact,
+            "selections": scope_selections,
+        },
         "canonical_claim_extraction": {
             "marker": extraction["marker"],
             "claim_count": extraction["canonical_evidence"]["summary"]["claim_count"],
@@ -126,7 +139,9 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         "high_score_met": score["high_score_met"],
         "confidence": (
             "high"
-            if requirements["fatal_or_core_error"] or score["pass_evidence_eligible"]
+            if requirements["fatal_or_core_error"] or (
+                scope_exact and score["pass_evidence_eligible"]
+            )
             else "medium"
         ),
         "summary": summary,

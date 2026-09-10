@@ -98,6 +98,19 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
         self.assertTrue(row["identity_term_matched"])
         self.assertEqual(row["status"], "PARTIAL")
 
+    def test_low_similarity_question_fails_closed_without_all_anchors(self):
+        result = evaluate_fact_anchor_requirements(
+            question_text="완전히 관계없는 질문 문장",
+            answer_text="많은 용어를 적어도 범위를 추측하지 않는다.",
+            topic_ids=[SW04],
+        )
+        self.assertEqual(
+            result["question_contract_selections"][0]["mode"],
+            "scope_unresolved",
+        )
+        self.assertEqual(len(result["requirements"]), 1)
+        self.assertEqual(result["requirements"][0]["requirement_id"], "__question_scope__")
+
 
 if __name__ == "__main__":
     unittest.main()

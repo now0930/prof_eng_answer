@@ -12,7 +12,8 @@
         "so2_pole_response_relationship",
         "so2_underdamped_response",
         "so2_critical_damping_response",
-        "so2_overdamped_response"
+        "so2_overdamped_response",
+        "so2_zero_negative_damping"
       ]
     },
     {

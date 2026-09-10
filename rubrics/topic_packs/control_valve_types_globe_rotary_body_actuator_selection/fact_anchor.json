@@ -871,6 +871,38 @@
       "source_basis": "docs/topic_sheets/control_valve_types_globe_rotary_body_actuator_selection.md; Control Valve Handbook Chapter 3; gemini_script/20260803_topic04_valve_body_actuator_selection_requirements.md.",
       "claim": "밸브와 액추에이터 조합은 유체, 압력·온도, 용량, 차단, force·torque, 속도, fail-safe, 동력원, 설치 공간, 유지보수와 lifecycle cost를 함께 고려해 선정해야 하며 하나의 형식이 모든 조건에서 최적일 수는 없다.",
       "description": "통합 선정 기준과 조건부 판단을 평가한다."
+    },
+    {
+      "id": "hydraulic_actuator_force_and_stored_energy_fail_safe",
+      "anchor_id": "hydraulic_actuator_force_and_stored_energy_fail_safe",
+      "statement": "Hydraulic actuator는 pump 또는 hydraulic power unit, control valve와 cylinder의 유압으로 큰 force와 높은 stiffness를 제공하지만 누유·오염·배관 유지관리가 필요하며, 에너지원 상실 시 accumulator와 dump 회로 등 저장에너지 경로로 안전 위치를 구현한다.",
+      "importance": "important",
+      "keywords": [
+        "hydraulic actuator",
+        "hydraulic power unit",
+        "accumulator",
+        "dump circuit",
+        "stored energy fail-safe"
+      ],
+      "core_terms": [
+        "유압식",
+        "실린더",
+        "큰 추력",
+        "축압기",
+        "dump 회로",
+        "누유"
+      ],
+      "accepted_explanations": [
+        "유압과 piston 면적으로 큰 추력을 만들며 오염과 누유 관리가 필요하다고 설명한다.",
+        "정전 또는 pump 상실 시 accumulator와 dump path로 지정 안전 위치에 이동한다고 설명한다."
+      ],
+      "rejected_explanations": [
+        "모든 hydraulic actuator가 accumulator나 별도 회로 없이 본질적으로 fail-safe라고 설명한다."
+      ],
+      "grading_notes": "큰 추력이라는 장점만이 아니라 유압원, 유지관리와 저장에너지 기반 fail-safe 조건을 함께 평가한다.",
+      "source_basis": "General control-valve actuator engineering practice; topic boundary expansion from reviewed Telegram regression.",
+      "claim": "Hydraulic actuator는 큰 추력에 유리하지만 에너지원 상실 시 안전 위치 이동에는 accumulator와 dump 회로 등 명시적 저장에너지 설계가 필요하다.",
+      "description": "유압식 액추에이터의 구조, 장단점과 조건부 fail-safe를 평가한다."
     }
   ],
   "fatal_wrong_claims": [
@@ -1024,5 +1056,6 @@
     "Manual actuator는 handwheel 또는 lever로 밸브를 조작하여 격리, 정비와 비상 현장 조작에 사용할 수 있으나 연속 원격 자동 제어의 기본 구동기로 간주하지 않는다.",
     "Sliding-stem valve에는 직선 force가 필요하고 rotary valve에는 회전 torque가 필요하므로 액추에이터와 linkage는 밸브 운동, stroke 또는 회전각과 일치해야 한다.",
     "밸브와 액추에이터 조합은 유체, 압력·온도, 용량, 차단, force·torque, 속도, fail-safe, 동력원, 설치 공간, 유지보수와 lifecycle cost를 함께 고려해 선정해야 하며 하나의 형식이 모든 조건에서 최적일 수는 없다."
+    ,"Hydraulic actuator는 pump 또는 hydraulic power unit, control valve와 cylinder의 유압으로 큰 force와 높은 stiffness를 제공하지만 누유·오염·배관 유지관리가 필요하며, 에너지원 상실 시 accumulator와 dump 회로 등 저장에너지 경로로 안전 위치를 구현한다."
   ]
 }

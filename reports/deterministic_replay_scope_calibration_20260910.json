@@ -1,0 +1,4231 @@
+{
+  "version": "deterministic_replay_audit_v1",
+  "marker": "DETERMINISTIC_REPLAY_AUDIT_V1",
+  "provider_calls": 0,
+  "case_count": 48,
+  "known_fatal_count": 16,
+  "known_fatal_true_positive": 16,
+  "known_fatal_recall": 1.0,
+  "fatal_false_positive_count": 0,
+  "fatal_invariants_ready": true,
+  "deterministic_repeatability": 1.0,
+  "unexplained_verdict_diff_count": 0,
+  "deterministic_scored_case_count": 48,
+  "deterministic_score_coverage": 1.0,
+  "score_verdict_consistency_pass": true,
+  "deterministic_score_mean_out_of_range_distance": 0.14125,
+  "deterministic_score_in_range_rate": 0.9375,
+  "deterministic_score_accuracy_ready": true,
+  "deterministic_topic_routing_recall": 1.0,
+  "deterministic_topic_routing_false_positive_count": 0,
+  "known_overgrading_regression_pass": true,
+  "known_overgrading_violation_count": 0,
+  "known_overgrading_violations": [],
+  "normal_answer_regression_pass": true,
+  "external_llm_required_for_verdict": false,
+  "llm_verdict_authority_removal_ready": true,
+  "decision": "READY",
+  "unexplained_differences": [],
+  "cases": [
+    {
+      "case_id": "sil_target_operations_issue1",
+      "gold_fatal_ids": [
+        "fatal_certificate_interval_as_operating_minimum",
+        "fatal_demand_mode_by_fault_detection",
+        "fatal_pst_replaces_full_test_or_reduces_mttr",
+        "fatal_target_pfd_frequency_product"
+      ],
+      "detected_fatal_ids": [
+        "fatal_certificate_interval_as_operating_minimum",
+        "fatal_demand_mode_by_fault_detection",
+        "fatal_pst_replaces_full_test_or_reduces_mttr",
+        "fatal_target_pfd_frequency_product"
+      ],
+      "deterministic_violation_codes": [
+        "CERTIFICATE_ASSUMPTION_AS_OPERATING_MINIMUM",
+        "DEMAND_MODE_DIAGNOSTIC_ROLE_CONFUSION",
+        "INVALID_TARGET_PROBABILITY_FREQUENCY_PRODUCT",
+        "PARTIAL_TEST_ROLE_OVERCLAIM"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 13.0,
+      "deterministic_raw_score": 13.0,
+      "deterministic_applied_ceiling": 13.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 0.48,
+        "C_fact_correctness": 1.6,
+        "D_engineering_judgment": 1.25,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 4,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 1.25,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [
+              "pfh는 high demand로 고장 즉시 고장을 확인할 수 있고, pfd는 low demand로 고장 후 점검 주기까지 고장 여부를 알 수 없다",
+              "단종 및 변경 부품의 버전과 인증 상태를 형상관리한다"
+            ],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 932,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.55,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 743,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 932자, 약 1.55쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 10.0,
+        "max": 14.5
+      },
+      "deterministic_routed_topic_ids": [
+        "sil_target_determination_risk_reduction_and_lifecycle"
+      ],
+      "gold_topic_ids": [
+        "sil_target_determination_risk_reduction_and_lifecycle"
+      ]
+    },
+    {
+      "case_id": "sis_lopa_architecture_issue1",
+      "gold_fatal_ids": [
+        "failure_rate_compared_directly_to_pfd"
+      ],
+      "detected_fatal_ids": [
+        "failure_rate_compared_directly_to_pfd"
+      ],
+      "deterministic_violation_codes": [
+        "DIMENSIONALLY_INVALID_COMPARISON"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 13.0,
+      "deterministic_raw_score": 13.0,
+      "deterministic_applied_ceiling": 13.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 0.6,
+        "C_fact_correctness": 2.666667,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 15,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1755,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 2.92,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1658,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 1755자, 약 2.92쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 9.5,
+        "max": 13.0
+      },
+      "deterministic_routed_topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ],
+      "gold_topic_ids": [
+        "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
+      ]
+    },
+    {
+      "case_id": "mcdc_vmodel_sil_issue1",
+      "gold_fatal_ids": [
+        "sil_four_universal_rule",
+        "sw04_fatal_misra_is_unit_test_tool",
+        "sw05_fatal_hft_is_integration_test",
+        "sw05_fatal_software_test_is_random_hardware_integrity"
+      ],
+      "detected_fatal_ids": [
+        "sil_four_universal_rule",
+        "sw04_fatal_misra_is_unit_test_tool",
+        "sw05_fatal_hft_is_integration_test",
+        "sw05_fatal_software_test_is_random_hardware_integrity"
+      ],
+      "deterministic_violation_codes": [
+        "CODING_GUIDELINE_AS_UNIT_TEST_TOOL",
+        "HARDWARE_ARCHITECTURE_AS_INTEGRATION_TEST",
+        "SOFTWARE_TEST_AS_RANDOM_HARDWARE_INTEGRITY",
+        "UNQUALIFIED_UNIVERSAL_SIL4_MCDC_RULE"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 13.0,
+      "deterministic_raw_score": 13.0,
+      "deterministic_applied_ceiling": 14.499999999999998,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 1.2,
+        "C_fact_correctness": 2.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 4,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 651,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.08,
+          "estimated_answer_sheet_pages": 1,
+          "estimated_answer_pages": 1,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 611,
+          "level": "one_page_text",
+          "cap": 13.0,
+          "reason": "ASCII 환산 651자, 약 1.08쪽으로 1쪽 수준의 부분 답안 상한 13.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 10.5,
+        "max": 14.5
+      },
+      "deterministic_routed_topic_ids": [
+        "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "sis_sil_safety_software_independence_systematic_failure_verification_validation"
+      ],
+      "gold_topic_ids": [
+        "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+        "sis_sil_safety_software_independence_systematic_failure_verification_validation"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-cs-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 9.0,
+      "deterministic_raw_score": 9.0,
+      "deterministic_applied_ceiling": 11.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 3.0,
+        "C_fact_correctness": 4.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 174,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.29,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 127,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 174자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 7.0,
+        "max": 11.0
+      },
+      "deterministic_routed_topic_ids": [
+        "balanced_trim_unbalanced_trim_structure_sealing_applications"
+      ],
+      "gold_topic_ids": [
+        "balanced_trim_unbalanced_trim_structure_sealing_applications"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-cs-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.5,
+      "deterministic_raw_score": 19.25,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 6.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 1.25,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 5,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 1.25,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "기기의 ex marking에서 epl만 보지 않고 가스그룹, 온도등급, 주위온도 범위, 인증서 번호와 special conditions를 실제 공정조건과 대조한다",
+              "가스그룹은 현장 가스와 인증 그룹의 호환성을 확인하고, 온도등급은 기기의 최대 표면온도가 점화위험을 만들지 않도록 선정한다"
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "먼저 폭발성 가스 분위기의 존재 빈도와 지속시간으로 zone을 정하고, 그 결과를 필요한 epl과 실제 기기의 ex 표시·가스그룹·온도조건·설치조건으로 연결해야 한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1543,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 2.57,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1134,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 1543자, 약 2.57쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 18.5
+      },
+      "deterministic_routed_topic_ids": [
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection"
+      ],
+      "gold_topic_ids": [
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-cs-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 21.5,
+      "deterministic_raw_score": 21.5,
+      "deterministic_applied_ceiling": 24.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 6.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 5,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "foundation fieldbus는 function block과 장치진단을 통합하며, profibus pa는 pa profile과 dp/pa coupling 조건을 확인한다",
+              "brownfield 선정",
+              "brownfield 통신 선정은 매체 속도가 아니라 계층별 호환성, 전환 가능성과 생애주기를 연결한 다기준 의사결정이어야 한다"
+            ],
+            [
+              "11a는 device, gateway, manager와 host integration을 확인하고 site survey로 차폐·반사·간섭·공존채널을 검증한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 4
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "hart는 4–20 ma 위에 디지털 통신을 중첩해 기존 신호를 유지하면서 설정·진단정보를 활용한다",
+            "brownfield 통신 선정은 매체 속도가 아니라 계층별 호환성, 전환 가능성과 생애주기를 연결한 다기준 의사결정이어야 한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 4
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 2077,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 3.46,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1699,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 2077자, 약 3.46쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": true,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 20.5,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+      ],
+      "gold_topic_ids": [
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-da-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 4.5,
+      "deterministic_raw_score": 4.5,
+      "deterministic_applied_ceiling": 11.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 0.0,
+        "C_fact_correctness": 0.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 133,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.22,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 88,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 133자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 4.0,
+        "max": 10.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "gold_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-da-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.5,
+      "deterministic_raw_score": 19.27,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 3.136364,
+        "C_fact_correctness": 6.133333,
+        "D_engineering_judgment": 5.0,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 5,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 5.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "공압 액추에이터 힘은 기본적으로 fair=pa·aa이고, 스프링은 fs=fpreload+kx처럼 스트로크에 따라 달라지므로 bench set만으로 운전 중 추력을 판단하지 않는다"
+            ],
+            [
+              "정·역방향 작은 step 시험으로 deadband와 stick-slip을 확인하고, 패킹 과조임·열화, 스템 표면, 가이드 편심·마모와 이물질을 점검한다",
+              "핵심은 원인 가설과 측정값을 연결한 뒤 그 원인에 맞는 조치를 시행하고 동일조건으로 재확인하는 것이다"
+            ],
+            [],
+            [
+              "정·역방향 작은 step 시험으로 deadband와 stick-slip을 확인하고, 패킹 과조임·열화, 스템 표면, 가이드 편심·마모와 이물질을 점검한다",
+              "정비 전과 같은 최대 운전차압에서 전 스트로크, 완전 닫힘, 방향전환 응답과 seat leakage를 다시 확인한다",
+              "결과가 기준 안으로 복귀했는지 비교하고 반복적인 마찰 증가가 확인되면 패킹·가이드 점검주기를 조정한다"
+            ],
+            [
+              "단순한 unbalanced trim의 차단조건에서는 fu≈δp·aeff로 근사할 수 있지만 aeff는 단순 포트면적이 아니라 trim 형상과 압력경계로 정해지는 유효면적이다"
+            ]
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "따라서 pressure-tends-to-open/close 방향을 확인하고 실제 최대 차압에서 제조사 자료의 요구추력과 가용추력을 비교한다",
+            "가용추력이 부족하면 최대 차압, 시트 하중, 마찰과 설계여유를 기준으로 액추에이터 크기·공급압·스프링 조건을 재검토한다",
+            "마찰이 원인이면 허용 누설조건을 유지하면서 패킹을 조정 또는 교체하고 스템·가이드 정렬과 마모를 정비한다",
+            "핵심은 원인 가설과 측정값을 연결한 뒤 그 원인에 맞는 조치를 시행하고 동일조건으로 재확인하는 것이다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1689,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 2.81,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1212,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 1689자, 약 2.81쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 19.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "gold_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-da-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 17.27,
+      "deterministic_raw_score": 17.27,
+      "deterministic_applied_ceiling": 24.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 5.045455,
+        "C_fact_correctness": 6.727273,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 5,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [
+              "정비 전과 같은 최대 차압에서 전 스트로크, 작은 step, 정·역방향 deadband, 완전 닫힘과 seat leakage를 재시험하고 압력-변위 관계를 비교한다",
+              "반복 이상은 패킹·가이드 정비주기, 오염관리, actuator margin과 trim 선정조건에 환류한다"
+            ],
+            [
+              "fu≈δp·aeff는 단순 unbalanced trim의 특정 차단조건에서만 쓰는 근사이며 aeff는 포트면적이 아니라 스템·balance seal을 포함한 압력경계와 형상으로 정한다"
+            ]
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1960,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 3.27,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1443,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 1960자, 약 3.27쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": true,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 20.0,
+        "max": 25.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ],
+      "gold_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+        "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-ie-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 4.5,
+      "deterministic_raw_score": 4.5,
+      "deterministic_applied_ceiling": 11.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 0.0,
+        "C_fact_correctness": 0.0,
+        "D_engineering_judgment": 1.25,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 1.25,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [
+              "변경 내용은 작업자가 기록한다"
+            ],
+            []
+          ],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 148,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.25,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 99,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 148자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 4.5,
+        "max": 10.5
+      },
+      "deterministic_routed_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ],
+      "gold_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-ie-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.5,
+      "deterministic_raw_score": 18.7,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 4.2,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 5,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [
+              "인수 후 저장소 승인형상, 현장 설치형상, backup과 관련 문서를 일치시켜 as-built를 갱신하고 버전·승인·설치대상·시험결과를 기록한다"
+            ],
+            [],
+            [
+              "변경 목적과 대상 ci를 식별하고 연동 로직, hmi, 통신, 알람·인터록, 운전절차와 복구계획에 미치는 영향을 확인한다",
+              "release package에는 승인된 실행물·source, 버전 또는 checksum, 변경목록, 의존성, 설치절차, 시험항목과 backup·rollback 절차를 포함한다",
+              "restore는 backup으로부터 데이터·설정·시스템을 재구성하는 복구 행위이고, rollback은 변경을 철회하여 이전 승인 release/baseline으로 되돌리는 변경관리 결정이다",
+              "적용 후에는 수정 기능만 시험하지 않고 영향분석에 따라 변경 기능, 인접 기능, 핵심 운전 시나리오를 risk-based regression으로 재시험한다",
+              "인터록·permissive, alarm, hmi 표시, sequence와 통신을 정상조건과 주요 이상조건에서 확인하고, 사전에 정한 인수기준을 만족해야 변경을 완료한다",
+              "정기점검에서는 backup 식별정보와 복구절차의 유효성을 확인하고 다음 변경도 동일한 baseline과 승인절차를 사용한다"
+            ],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "즉 baseline-영향분석-release-backup/rollback-regression-as-built가 연결되어야 연속운전 설비의 변경을 통제할 수 있다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1551,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 2.58,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1183,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 1551자, 약 2.58쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 19.0
+      },
+      "deterministic_routed_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ],
+      "gold_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-ie-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.95,
+      "deterministic_raw_score": 18.95,
+      "deterministic_applied_ceiling": 19.99,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 4.2,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 3.75,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 6,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 3.75,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "실행계획에는 작업순서, 담당자, tool/version, 운전조건, 정지창, backup, 시험, 중단기준, go/no-go와 rollback 책임자를 포함한다",
+              "적용 전 change freeze, 최종 동기화, backup, readiness checklist, 공정 안전조건과 go/no-go를 확인한다",
+              "영향분석으로 변경 기능, 인접 기능, 핵심 운전 시나리오를 정상·주요 이상조건에서 시험한다"
+            ],
+            [
+              "실행계획에는 작업순서, 담당자, tool/version, 운전조건, 정지창, backup, 시험, 중단기준, go/no-go와 rollback 책임자를 포함한다",
+              "release package는 승인 실행물과 source, version·checksum, 변경목록, 의존성, 설치절차, 시험결과, backup·rollback 절차와 승인기록을 manifest로 관리한다",
+              "무결성·원본 장애와 분리된 보관을 확인하고 restore 시험으로 실제 복구 가능성과 누락 의존성을 검증한다",
+              "regression은 운영 release가 기존 기능을 훼손하지 않았는지 확인하는 위험기반 재시험이다",
+              "승인 저장소, 현장 설치형상, backup, 도면·alarm list·network/i/o list를 갱신해 as-built consistency를 확보하고 승인·배포·설치·시험상태를 기록한다",
+              "정기 restore 시험과 configuration drift를 확인하고 hardware/os/application/firmware/driver/license compatibility matrix를 유지한다"
+            ],
+            [],
+            [
+              "release package는 승인 실행물과 source, version·checksum, 변경목록, 의존성, 설치절차, 시험결과, backup·rollback 절차와 승인기록을 manifest로 관리한다",
+              "영향분석으로 변경 기능, 인접 기능, 핵심 운전 시나리오를 정상·주요 이상조건에서 시험한다",
+              "종결·유지관리",
+              "정기 restore 시험과 configuration drift를 확인하고 hardware/os/application/firmware/driver/license compatibility matrix를 유지한다"
+            ],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 2075,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 3.46,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1703,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 2075자, 약 3.46쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": true,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 20.0,
+        "max": 25.0
+      },
+      "deterministic_routed_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ],
+      "gold_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-pi-low-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 7.0,
+      "deterministic_raw_score": 7.0,
+      "deterministic_applied_ceiling": 11.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 0.6,
+        "C_fact_correctness": 4.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 114,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.19,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 74,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 114자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 7.0,
+        "max": 11.0
+      },
+      "deterministic_routed_topic_ids": [
+        "thermocouple_temperature_sensor_seebeck_reference_junction_compensation"
+      ],
+      "gold_topic_ids": [
+        "thermocouple_temperature_sensor_seebeck_reference_junction_compensation"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-pi-pass-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.5,
+      "deterministic_raw_score": 22.75,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 6.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 3.75,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 5,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 3.75,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [
+              "따라서 정밀 기준측정에 유리하지만 배선과 단자 수가 증가한다"
+            ],
+            [],
+            [
+              "또한 3선식 transmitter는 실제 배선방식 설정이 맞는지와 리드선 불평형·접촉저항을 loop check로 확인해야 보상 가정이 유지된다"
+            ],
+            [
+              "저항-온도 관계는 전 범위에서 완전한 직선이 아니며 0℃ 이상에서는 rt=r0(1+at+bt²) 형태의 callendar-van dusen 관계로 선형화한다",
+              "3선식은 bridge 또는 차동측정에서 두 리드선 저항이 거의 같다는 조건 rl1≈rl2를 이용해 리드선 저항의 1차 영향을 상쇄한다"
+            ]
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "따라서 정밀 기준측정에 유리하지만 배선과 단자 수가 증가한다",
+            "또한 3선식 transmitter는 실제 배선방식 설정이 맞는지와 리드선 불평형·접촉저항을 loop check로 확인해야 보상 가정이 유지된다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1578,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 2.63,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1143,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 1578자, 약 2.63쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 18.5
+      },
+      "deterministic_routed_topic_ids": [
+        "rtd_temperature_sensor_principle_pt100_wiring_compensation"
+      ],
+      "gold_topic_ids": [
+        "rtd_temperature_sensor_principle_pt100_wiring_compensation"
+      ]
+    },
+    {
+      "case_id": "qtype_qg-pi-high-01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 21.75,
+      "deterministic_raw_score": 21.75,
+      "deterministic_applied_ceiling": 24.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 6.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 3.75,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 7,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 3.75,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [
+              "증가·감소 하중으로 hysteresis, 반복측정으로 repeatability, 일정하중 유지로 creep를 구분해 기록한다"
+            ],
+            [],
+            [
+              "증가·감소 하중으로 hysteresis, 반복측정으로 repeatability, 일정하중 유지로 creep를 구분해 기록한다"
+            ],
+            [
+              "평형조건 r1/r2=r3/r4에서는 차동출력이 0이고 저항변화가 생기면 불평형 vo가 발생한다"
+            ]
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "감도 2 mv/v 로드셀에 vex=10 v를 인가하면 정격하중 출력은 이상적으로 약 20 mv이다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 2094,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 3.49,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1504,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 2094자, 약 3.49쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": true,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 20.5,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error"
+      ],
+      "gold_topic_ids": [
+        "strain_gauge_load_cell_wheatstone_bridge_temperature_compensation_error"
+      ]
+    },
+    {
+      "case_id": "model_reference_01_piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 16.83,
+      "deterministic_raw_score": 16.83,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 4.0,
+        "C_fact_correctness": 5.333333,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 17
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 정하중 유지시간, 최소 측정주파수와 동적범위를 기준으로 스트레인 게이지식 로드셀과 압전식 센서를 구분하여 선정한다",
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- q=df에서 d가 재료상수임을 밝히고 pc/n 감도와 연결한다",
+            "- 전하누설과 τ=rc 때문에 무기한 정하중 측정이 제한됨을 설명한다",
+            "- vo≈-q/cf와 fc≈1/(2πrfcf)를 전하증폭기 설계에 연결한다",
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1085,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.81,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 794,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 1085자, 약 1.81쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration"
+      ],
+      "gold_topic_ids": [
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration"
+      ]
+    },
+    {
+      "case_id": "model_reference_02_radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 20.0,
+      "deterministic_raw_score": 20.0,
+      "deterministic_applied_ceiling": 24.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 5.25,
+        "C_fact_correctness": 7.0,
+        "D_engineering_judgment": 3.75,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 24
+        },
+        "engineering_judgment": {
+          "score": 3.75,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 기존설비 연계, 유지보수와 비용을 방식선정에 반영한다",
+              "- gwr은 자유공간 레이더보다 좁은 공간, 내부구조물, 난류와 일부 거품 조건에 유리할 수 있지만 공정 영향에 면역인 것은 아니다",
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            [
+              "- d=cτ/2와 d=cf_b/(2s)의 변수 및 적용조건을 설명한다",
+              "- 거리 d와 기준거리 e에서 l=e-d를 정확히 설명한다",
+              "- 펄스식 자유공간 레이더에서 기준점부터 표면까지의 편도거리는 d=v_g·τ/2로 계산한다",
+              "- gwr의 상부 액면 레벨은 기준점부터 표면까지의 기체·증기 구간 왕복시간으로 계산하므로 제품 액체의 √ε_r를 거리식 전체에 일률적으로 나누지 않는다"
+            ]
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 3053,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 5.09,
+          "estimated_answer_sheet_pages": 4,
+          "estimated_answer_pages": 4,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 2170,
+          "level": "four_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 3053자, 약 5.09쪽으로 4쪽 이상 충분한 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": true,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error"
+      ],
+      "gold_topic_ids": [
+        "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error"
+      ]
+    },
+    {
+      "case_id": "model_reference_03_control_valve_authority_rangeability_gain_installed_performance",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 14.5,
+      "deterministic_raw_score": 15.7,
+      "deterministic_applied_ceiling": 14.499999999999998,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 1.2,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 15
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 862,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.44,
+          "estimated_answer_sheet_pages": 1,
+          "estimated_answer_pages": 1,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 835,
+          "level": "one_page_text",
+          "cap": 13.0,
+          "reason": "ASCII 환산 862자, 약 1.44쪽으로 1쪽 수준의 부분 답안 상한 13.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_authority_rangeability_gain_installed_performance"
+      ],
+      "gold_topic_ids": [
+        "control_valve_authority_rangeability_gain_installed_performance"
+      ]
+    },
+    {
+      "case_id": "model_reference_04_control_valve_types_globe_rotary_body_actuator_selection",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 14.5,
+      "deterministic_raw_score": 16.55,
+      "deterministic_applied_ceiling": 14.499999999999998,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 1.8,
+        "C_fact_correctness": 6.0,
+        "D_engineering_judgment": 3.75,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 15
+        },
+        "engineering_judgment": {
+          "score": 3.75,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 보편적 우열 대신 공정조건별 trade-off를 제시한다",
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- globe 계열 guide·port 구조의 장점과 한계를 연결한다"
+            ],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- globe 계열 guide·port 구조의 장점과 한계를 연결한다",
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 890,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.48,
+          "estimated_answer_sheet_pages": 1,
+          "estimated_answer_pages": 1,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 820,
+          "level": "one_page_text",
+          "cap": 13.0,
+          "reason": "ASCII 환산 890자, 약 1.48쪽으로 1쪽 수준의 부분 답안 상한 13.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_types_globe_rotary_body_actuator_selection"
+      ],
+      "gold_topic_ids": [
+        "control_valve_types_globe_rotary_body_actuator_selection"
+      ]
+    },
+    {
+      "case_id": "model_reference_05_humidity_measurement_capacitive_resistive_dew_point_selection_compensation",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 17.92,
+      "deterministic_raw_score": 17.92,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 4.894737,
+        "C_fact_correctness": 6.526316,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 17
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 4
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 4
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1037,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.73,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1002,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 1037자, 약 1.73쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "humidity_measurement_capacitive_resistive_dew_point_selection_compensation"
+      ],
+      "gold_topic_ids": [
+        "humidity_measurement_capacitive_resistive_dew_point_selection_compensation"
+      ]
+    },
+    {
+      "case_id": "model_reference_06_industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.5,
+      "deterministic_raw_score": 20.75,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 4.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 3.75,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 20
+        },
+        "engineering_judgment": {
+          "score": 3.75,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- brownfield coexistence와 단계적 전환을 기존 자산·shutdown·교육·spare 관점에서 판단한다",
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            [
+              "- sw-08 정량적 실시간성·복구성능과 sw-09 보안통제의 ownership 경계를 명확히 한다"
+            ]
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- copper와 fiber의 장단점을 emi·접지·거리·시공·전원·유지보수와 연결한다",
+            "- ethernet/ip의 cip·eds, profinet의 profile·gsdml, ethercat의 master·esi를 상호운용성 조건으로 연결한다",
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1530,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 2.55,
+          "estimated_answer_sheet_pages": 3,
+          "estimated_answer_pages": 3,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1433,
+          "level": "three_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 1530자, 약 2.55쪽으로 3쪽 표준 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+      ],
+      "gold_topic_ids": [
+        "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection"
+      ]
+    },
+    {
+      "case_id": "model_reference_07_smart_positioner_diagnostics_valve_signature_predictive_maintenance",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.5,
+      "deterministic_raw_score": 20.5,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 6.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 21
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- online trend와 offline signature test mode 확인",
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1323,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 2.21,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1294,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 1323자, 약 2.21쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "smart_positioner_diagnostics_valve_signature_predictive_maintenance"
+      ],
+      "gold_topic_ids": [
+        "smart_positioner_diagnostics_valve_signature_predictive_maintenance"
+      ]
+    },
+    {
+      "case_id": "model_reference_08_instrumentation_power_grounding_shielding_ups_ground_loop_emc",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 17.7,
+      "deterministic_raw_score": 17.7,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 4.2,
+        "C_fact_correctness": 7.0,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 16
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 현장 evidence를 먼저 확보하고 한 변수씩 대책을 적용한 후 동일 조건에서 재검증한다",
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1118,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.86,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 989,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 1118자, 약 1.86쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+      ],
+      "gold_topic_ids": [
+        "instrumentation_power_grounding_shielding_ups_ground_loop_emc"
+      ]
+    },
+    {
+      "case_id": "model_reference_09_electronics_error_noise_drift_tolerance_aging_power_mitigation",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 15.1,
+      "deterministic_raw_score": 15.1,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 3.0,
+        "C_fact_correctness": 5.6,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 16
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 2
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 961,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.6,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 911,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 961자, 약 1.6쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "electronics_error_noise_drift_tolerance_aging_power_mitigation"
+      ],
+      "gold_topic_ids": [
+        "electronics_error_noise_drift_tolerance_aging_power_mitigation"
+      ]
+    },
+    {
+      "case_id": "model_reference_10_ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 22.75,
+      "deterministic_raw_score": 22.75,
+      "deterministic_applied_ceiling": 24.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 6.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 3.75,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 25
+        },
+        "engineering_judgment": {
+          "score": 3.75,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 자산은 공정안전, 생산영향, 복구시간, 외부연결, 취약성 및 대체가능성에 따라 criticality를 분류하여 보호우선순위와 대응수준을 결정해야 한다",
+              "- ot cyber risk assessment는 threat, vulnerability, consequence, existing safeguard와 residual risk를 공정 시나리오와 연결하고 허용기준 및 처리계획을 정해야 한다",
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [
+              "- firewall 정책은 default deny를 기반으로 source, destination, service, direction, purpose, owner와 expiry를 문서화하고 rule review와 로그검증으로 최소허용을 유지해야 한다",
+              "- authentication은 사용자·장치·서비스의 신원을 검증하는 과정이며 credential 보호, account lifecycle, lockout와 exception handling을 포함해야 한다",
+              "- 원격 접속은 암호화, 명시적 승인, 강한 인증, 최소권한, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용하고, 위험도·접속방식·대상 장치의 기술적 특성에 따라 화면 기록, 명령 기록, protocol transaction log, engineering change audit 또는 jump server session recording 중 적절한 수단이나 조합으로 모든 접속·변경행위를 사용자·시간·대상·결과와 연결하여 재구성 가능한 audit trail을 확보해야 한다"
+            ],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- 자산은 공정안전, 생산영향, 복구시간, 외부연결, 취약성 및 대체가능성에 따라 criticality를 분류하여 보호우선순위와 대응수준을 결정해야 한다",
+            "- ot cyber risk assessment는 threat, vulnerability, consequence, existing safeguard와 residual risk를 공정 시나리오와 연결하고 허용기준 및 처리계획을 정해야 한다",
+            "- 원격 접속은 암호화, 명시적 승인, 강한 인증, 최소권한, file transfer 통제, concurrent session 제한, inactivity timeout과 비상차단을 적용하고, 위험도·접속방식·대상 장치의 기술적 특성에 따라 화면 기록, 명령 기록, protocol transaction log, engineering change audit 또는 jump server session recording 중 적절한 수단이나 조합으로 모든 접속·변경행위를 사용자·시간·대상·결과와 연결하여 재구성 가능한 audit trail을 확보해야 한다",
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 3358,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 5.6,
+          "estimated_answer_sheet_pages": 4,
+          "estimated_answer_pages": 4,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 2992,
+          "level": "four_page_text",
+          "cap": null,
+          "reason": "ASCII 환산 3358자, 약 5.6쪽으로 4쪽 이상 충분한 답안 분량이므로 분량 상한을 적용하지 않는다."
+        },
+        "high_score_eligibility": {
+          "eligible": true,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response"
+      ],
+      "gold_topic_ids": [
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response"
+      ]
+    },
+    {
+      "case_id": "model_reference_11_configuration_change_release_backup_rollback_migration_obsolescence_management",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 11.0,
+      "deterministic_raw_score": 17.0,
+      "deterministic_applied_ceiling": 11.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 3.0,
+        "C_fact_correctness": 4.0,
+        "D_engineering_judgment": 5.0,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 20
+        },
+        "engineering_judgment": {
+          "score": 5.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- release package의 manifest, checksum, 의존성, 설치·시험·rollback과 승인기록을 제시한다",
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- moc를 변경요청-영향분석-위험기반 승인-실행-검증-종결의 폐루프로 설명한다"
+            ],
+            [
+              "- moc를 변경요청-영향분석-위험기반 승인-실행-검증-종결의 폐루프로 설명한다"
+            ],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- version control, 형상상태기록, release control과 as-built consistency의 역할을 연결한다",
+            "- vendor lock-in, license, firmware와 spare를 운전연속성 및 수명주기 위험으로 연결한다",
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1348,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 2.25,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1103,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 1348자, 약 2.25쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ],
+      "gold_topic_ids": [
+        "configuration_change_release_backup_rollback_migration_obsolescence_management"
+      ]
+    },
+    {
+      "case_id": "model_reference_12_control_hardware_lifecycle_panel_architecture_component_selection_production_verification",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.5,
+      "deterministic_raw_score": 21.5,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 6.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 16
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 4
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- requirement→architecture/interface→component selection→dv→production control/test→release evidence를 하나의 lifecycle로 연결한다",
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 4
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1235,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 2.06,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 1216,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 1235자, 약 2.06쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_hardware_lifecycle_panel_architecture_component_selection_production_verification"
+      ],
+      "gold_topic_ids": [
+        "control_hardware_lifecycle_panel_architecture_component_selection_production_verification"
+      ]
+    },
+    {
+      "case_id": "model_reference_13_hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.5,
+      "deterministic_raw_score": 24.0,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 6.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 5.0,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 18
+        },
+        "engineering_judgment": {
+          "score": 5.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- zener barrier와 galvanic isolator의 절연·접지·전원·유지보수 trade-off를 비교한다"
+            ],
+            [
+              "- 설계 문서와 검사·정비·변경 시 재확인을 lifecycle 흐름으로 연결한다"
+            ],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- 위험장소 분류를 단순 위치명이 아니라 폭발성 분위기의 존재 가능성·지속시간과 연결한다",
+            "- 설계 문서와 검사·정비·변경 시 재확인을 lifecycle 흐름으로 연결한다",
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1085,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.81,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 851,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 1085자, 약 1.81쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection"
+      ],
+      "gold_topic_ids": [
+        "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection"
+      ]
+    },
+    {
+      "case_id": "model_reference_14_control_valve_deadband_stiction_response_time_positioner_dynamic_performance",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 16.71,
+      "deterministic_raw_score": 16.71,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 2.210526,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 14
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 개선 후 동일 시험과 품질·에너지·air consumption으로 효과를 확인한다",
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 833,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.39,
+          "estimated_answer_sheet_pages": 1,
+          "estimated_answer_pages": 1,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 768,
+          "level": "one_page_text",
+          "cap": 13.0,
+          "reason": "ASCII 환산 833자, 약 1.39쪽으로 1쪽 수준의 부분 답안 상한 13.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+      ],
+      "gold_topic_ids": [
+        "control_valve_deadband_stiction_response_time_positioner_dynamic_performance"
+      ]
+    },
+    {
+      "case_id": "model_reference_15_final_control_element_sil_sis_esd_valve_partial_stroke_test",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 17.92,
+      "deterministic_raw_score": 17.92,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 3.75,
+        "C_fact_correctness": 6.666667,
+        "D_engineering_judgment": 2.5,
+        "E_linkage": 2.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 3,
+          "bullet_count": 17
+        },
+        "engineering_judgment": {
+          "score": 2.5,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [
+              "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "linkage": {
+          "score": 2.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "- fmeda·test record·moc·revalidation을 closed-loop lifecycle로 연결한다",
+            "- 요구조건, 적용경계, 검증기준과 운전 피드백을 연결하여 관리한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 3
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 1002,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.67,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 965,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 1002자, 약 1.67쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 24.0
+      },
+      "deterministic_routed_topic_ids": [
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test"
+      ],
+      "gold_topic_ids": [
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test"
+      ]
+    },
+    {
+      "case_id": "risk_fsrm_demand_mode_normal_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 18.5,
+      "deterministic_raw_score": 21.75,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 3.0,
+        "B_requirement_completeness": 6.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 3.75,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 3.0,
+          "max_score": 3.0,
+          "heading_count": 5,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 3.75,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "pfh는 요구 시 실패확률인 pfdavg와 달리 시간 기준 rate이므로 demand mode와 운전 조건을 명시해 평가한다"
+            ],
+            [
+              "따라서 요구모드 분류와 지표의 차원을 먼저 확인하고 각 지표의 허용범위로 검증한다"
+            ],
+            [],
+            [],
+            [
+              "실제 계산에서는 sensor, logic solver, final element의 전체 sif 경계를 정하고 λdu, 진단범위, proof test interval과 coverage, 수리·bypass 시간, ccf를 반영한다"
+            ]
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "따라서 요구모드 분류와 지표의 차원을 먼저 확인하고 각 지표의 허용범위로 검증한다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 903,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 1.5,
+          "estimated_answer_sheet_pages": 2,
+          "estimated_answer_pages": 2,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 702,
+          "level": "two_page_text",
+          "cap": 19.0,
+          "reason": "ASCII 환산 903자, 약 1.5쪽으로 2쪽 수준의 축약 답안 상한 19.0점을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 18.5
+      },
+      "deterministic_routed_topic_ids": [
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
+      ],
+      "gold_topic_ids": [
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
+      ]
+    },
+    {
+      "case_id": "risk_fsrm_demand_mode_partial_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 9.65,
+      "deterministic_raw_score": 9.65,
+      "deterministic_applied_ceiling": 11.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 2.4,
+        "C_fact_correctness": 4.0,
+        "D_engineering_judgment": 1.25,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 1.25,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [
+              "proof test interval이 길어지면 잠복 위험고장의 노출시간이 증가하여 pfdavg가 커질 수 있으므로 시험주기와 고장률 가정을 함께 확인한다"
+            ],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 257,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.43,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 182,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 257자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 7.0,
+        "max": 13.0
+      },
+      "deterministic_routed_topic_ids": [
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
+      ],
+      "gold_topic_ids": [
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
+      ]
+    },
+    {
+      "case_id": "risk_fsrm_demand_mode_fatal_01",
+      "gold_fatal_ids": [
+        "failure_rate_compared_directly_to_pfd"
+      ],
+      "detected_fatal_ids": [
+        "failure_rate_compared_directly_to_pfd"
+      ],
+      "deterministic_violation_codes": [
+        "DIMENSIONALLY_INVALID_COMPARISON"
+      ],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 7.8,
+      "deterministic_raw_score": 7.8,
+      "deterministic_applied_ceiling": 13.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 1.8,
+        "C_fact_correctness": 3.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 1.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 1.0,
+          "max_score": 2.0,
+          "matched_cues": [
+            "따라서 시스템의 failure rate가 pfdavg보다 작도록 λ < pfdavg를 설계기준으로 직접 비교하면 sil을 만족할 수 있다"
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 182,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.3,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 136,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 182자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 4.0,
+        "max": 13.0
+      },
+      "deterministic_routed_topic_ids": [
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
+      ],
+      "gold_topic_ids": [
+        "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"
+      ]
+    },
+    {
+      "case_id": "risk_nyquist_normal_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 15.0,
+      "deterministic_raw_score": 15.0,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 3.5,
+        "C_fact_correctness": 7.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 170,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.28,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 121,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 170자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 19.0
+      },
+      "deterministic_routed_topic_ids": [
+        "nyquist_stability_criterion_gain_phase_margin"
+      ],
+      "gold_topic_ids": [
+        "nyquist_stability_criterion_gain_phase_margin"
+      ]
+    },
+    {
+      "case_id": "risk_nyquist_partial_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 13.0,
+      "deterministic_raw_score": 13.0,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 3.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 100,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.17,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 71,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 100자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 9.0,
+        "max": 14.0
+      },
+      "deterministic_routed_topic_ids": [
+        "nyquist_stability_criterion_gain_phase_margin"
+      ],
+      "gold_topic_ids": [
+        "nyquist_stability_criterion_gain_phase_margin"
+      ]
+    },
+    {
+      "case_id": "risk_nyquist_fatal_01",
+      "gold_fatal_ids": [
+        "nyquist_encircles_origin_instead_of_minus_one"
+      ],
+      "detected_fatal_ids": [
+        "nyquist_encircles_origin_instead_of_minus_one"
+      ],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 4.5,
+      "deterministic_raw_score": 4.5,
+      "deterministic_applied_ceiling": 10.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 0.0,
+        "C_fact_correctness": 0.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 95,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.16,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 85,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 95자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 0.0,
+        "max": 10.0
+      },
+      "deterministic_routed_topic_ids": [
+        "nyquist_stability_criterion_gain_phase_margin"
+      ],
+      "gold_topic_ids": [
+        "nyquist_stability_criterion_gain_phase_margin"
+      ]
+    },
+    {
+      "case_id": "risk_lead_lag_normal_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 15.0,
+      "deterministic_raw_score": 15.0,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 3.5,
+        "C_fact_correctness": 7.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 165,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.28,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 105,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 165자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 15.0,
+        "max": 19.0
+      },
+      "deterministic_routed_topic_ids": [
+        "lead_lag_compensator_phase_margin_steady_state_error"
+      ],
+      "gold_topic_ids": [
+        "lead_lag_compensator_phase_margin_steady_state_error"
+      ]
+    },
+    {
+      "case_id": "risk_lead_lag_partial_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 11.0,
+      "deterministic_raw_score": 11.0,
+      "deterministic_applied_ceiling": 14.499999999999998,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 1.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 90,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.15,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 59,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 90자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 9.0,
+        "max": 14.0
+      },
+      "deterministic_routed_topic_ids": [
+        "lead_lag_compensator_phase_margin_steady_state_error"
+      ],
+      "gold_topic_ids": [
+        "lead_lag_compensator_phase_margin_steady_state_error"
+      ]
+    },
+    {
+      "case_id": "risk_lead_lag_fatal_01",
+      "gold_fatal_ids": [
+        "lead_lag_fatal_lag_always_improves_phase_margin",
+        "lead_lag_fatal_lead_only_changes_phase"
+      ],
+      "detected_fatal_ids": [
+        "lead_lag_fatal_lag_always_improves_phase_margin",
+        "lead_lag_fatal_lead_only_changes_phase"
+      ],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 4.5,
+      "deterministic_raw_score": 4.5,
+      "deterministic_applied_ceiling": 10.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 0.0,
+        "C_fact_correctness": 0.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": false,
+          "technical_evidence_span_count": 0
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 95,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.16,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 62,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 95자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 0.0,
+        "max": 10.0
+      },
+      "deterministic_routed_topic_ids": [
+        "lead_lag_compensator_phase_margin_steady_state_error"
+      ],
+      "gold_topic_ids": [
+        "lead_lag_compensator_phase_margin_steady_state_error"
+      ]
+    },
+    {
+      "case_id": "risk_lqr_normal_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 15.0,
+      "deterministic_raw_score": 15.0,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 3.0,
+        "C_fact_correctness": 8.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 146,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.24,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 104,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 146자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 14.0,
+        "max": 19.0
+      },
+      "deterministic_routed_topic_ids": [
+        "lqr_optimal_state_feedback_riccati_weighting_design"
+      ],
+      "gold_topic_ids": [
+        "lqr_optimal_state_feedback_riccati_weighting_design"
+      ]
+    },
+    {
+      "case_id": "risk_lqr_partial_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 9.5,
+      "deterministic_raw_score": 9.5,
+      "deterministic_applied_ceiling": 14.499999999999998,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 1.5,
+        "C_fact_correctness": 6.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 87,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.14,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 69,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 87자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 9.0,
+        "max": 14.0
+      },
+      "deterministic_routed_topic_ids": [
+        "lqr_optimal_state_feedback_riccati_weighting_design"
+      ],
+      "gold_topic_ids": [
+        "lqr_optimal_state_feedback_riccati_weighting_design"
+      ]
+    },
+    {
+      "case_id": "risk_lqr_fatal_01",
+      "gold_fatal_ids": [
+        "state_lqr_fatal_arbitrary_q_r"
+      ],
+      "detected_fatal_ids": [
+        "state_lqr_fatal_arbitrary_q_r"
+      ],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 4.5,
+      "deterministic_raw_score": 4.5,
+      "deterministic_applied_ceiling": 10.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 0.5,
+        "C_fact_correctness": 2.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 99,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.17,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 68,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 99자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 0.0,
+        "max": 10.0
+      },
+      "deterministic_routed_topic_ids": [
+        "lqr_optimal_state_feedback_riccati_weighting_design"
+      ],
+      "gold_topic_ids": [
+        "lqr_optimal_state_feedback_riccati_weighting_design"
+      ]
+    },
+    {
+      "case_id": "risk_hipps_normal_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 8.0,
+      "deterministic_raw_score": 8.0,
+      "deterministic_applied_ceiling": 14.499999999999998,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 1.2,
+        "C_fact_correctness": 4.8,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 146,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.24,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 105,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 146자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 7.0,
+        "max": 19.0
+      },
+      "deterministic_routed_topic_ids": [
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture"
+      ],
+      "gold_topic_ids": [
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture"
+      ]
+    },
+    {
+      "case_id": "risk_hipps_partial_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 7.0,
+      "deterministic_raw_score": 7.0,
+      "deterministic_applied_ceiling": 11.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 1.0,
+        "C_fact_correctness": 4.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 93,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.15,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 67,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 93자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 7.0,
+        "max": 13.0
+      },
+      "deterministic_routed_topic_ids": [
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture"
+      ],
+      "gold_topic_ids": [
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture"
+      ]
+    },
+    {
+      "case_id": "risk_hipps_fatal_01",
+      "gold_fatal_ids": [
+        "hipps_equals_relief_valve"
+      ],
+      "detected_fatal_ids": [
+        "hipps_equals_relief_valve"
+      ],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 6.0,
+      "deterministic_raw_score": 6.0,
+      "deterministic_applied_ceiling": 10.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 0.8,
+        "C_fact_correctness": 3.2,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 100,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.17,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 95,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 100자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 0.0,
+        "max": 10.0
+      },
+      "deterministic_routed_topic_ids": [
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture"
+      ],
+      "gold_topic_ids": [
+        "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture"
+      ]
+    },
+    {
+      "case_id": "risk_control_arch_normal_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 12.58,
+      "deterministic_raw_score": 12.58,
+      "deterministic_applied_ceiling": 18.5,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 4.0,
+        "C_fact_correctness": 5.333333,
+        "D_engineering_judgment": 1.25,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 1.25,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "dcs는 연속 공정제어에 따라 선정한다"
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 135,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.23,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 97,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 135자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 8.0,
+        "max": 20.0
+      },
+      "deterministic_routed_topic_ids": [
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability"
+      ],
+      "gold_topic_ids": [
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability"
+      ]
+    },
+    {
+      "case_id": "risk_control_arch_partial_01",
+      "gold_fatal_ids": [],
+      "detected_fatal_ids": [],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 9.0,
+      "deterministic_raw_score": 9.0,
+      "deterministic_applied_ceiling": 11.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 3.0,
+        "C_fact_correctness": 4.0,
+        "D_engineering_judgment": 0.0,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 0.0,
+          "max_score": 6.0,
+          "matched_groups": [
+            [],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 81,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.14,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 61,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 81자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 6.5,
+        "max": 13.0
+      },
+      "deterministic_routed_topic_ids": [
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability"
+      ],
+      "gold_topic_ids": [
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability"
+      ]
+    },
+    {
+      "case_id": "risk_control_arch_fatal_01",
+      "gold_fatal_ids": [
+        "sw01_fatal_plc_dcs_role_reversal"
+      ],
+      "detected_fatal_ids": [
+        "sw01_fatal_plc_dcs_role_reversal"
+      ],
+      "deterministic_violation_codes": [],
+      "repeatable": true,
+      "deterministic_score_decision": "SCORED",
+      "deterministic_score": 7.92,
+      "deterministic_raw_score": 7.92,
+      "deterministic_applied_ceiling": 10.0,
+      "deterministic_score_breakdown": {
+        "A_structure": 2.0,
+        "B_requirement_completeness": 2.0,
+        "C_fact_correctness": 2.666667,
+        "D_engineering_judgment": 1.25,
+        "E_linkage": 0.0
+      },
+      "deterministic_score_evidence": {
+        "version": "deterministic_score_evidence_v1",
+        "marker": "DETERMINISTIC_SCORE_EVIDENCE_V1",
+        "engine": "deterministic",
+        "provider_calls": 0,
+        "structure": {
+          "score": 2.0,
+          "max_score": 3.0,
+          "heading_count": 0,
+          "bullet_count": 0
+        },
+        "engineering_judgment": {
+          "score": 1.25,
+          "max_score": 6.0,
+          "matched_groups": [
+            [
+              "plc는 연속 공정제어에 따라 선정한다"
+            ],
+            [],
+            [],
+            [],
+            []
+          ],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "linkage": {
+          "score": 0.0,
+          "max_score": 2.0,
+          "matched_cues": [],
+          "evidence_bound": true,
+          "technical_evidence_span_count": 1
+        },
+        "volume": {
+          "measurement_method": "ascii_equivalent_only_v1",
+          "primary_signal": "ascii_equivalent_count",
+          "ascii_equivalent_count": 105,
+          "ascii_units_per_page": 600,
+          "page_equivalent": 0.17,
+          "estimated_answer_sheet_pages": 0,
+          "estimated_answer_pages": 0,
+          "image_count_used": false,
+          "pdf_page_count_used": false,
+          "line_count_used": false,
+          "normalized_text_char_count": 74,
+          "level": "text_only_short_answer",
+          "cap": 9.0,
+          "reason": "ASCII 환산 105자로 0.5쪽 미만의 요약 답안으로 판단되어 9.0점 상한을 적용한다."
+        },
+        "high_score_eligibility": {
+          "eligible": false,
+          "minimum_ascii_equivalent_count": 1800,
+          "ceiling_when_ineligible": 18.5
+        }
+      },
+      "gold_score_range": {
+        "min": 0.0,
+        "max": 10.0
+      },
+      "deterministic_routed_topic_ids": [
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability"
+      ],
+      "gold_topic_ids": [
+        "plc_dcs_scada_remote_io_architecture_redundancy_availability_reliability"
+      ]
+    }
+  ]
+}

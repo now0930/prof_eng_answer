@@ -12,23 +12,30 @@ VERSION = "deterministic_score_evidence_v1"
 MARKER = "DETERMINISTIC_SCORE_EVIDENCE_V1"
 _HEADING = re.compile(r"^\s*(?:#{1,4}\s*|\d+[.)]\s*|[ⅠⅡⅢⅣⅤⅥ]+[.)]?\s*)")
 _BULLET = re.compile(r"^\s*[-*•]\s*")
-_JUDGMENT_GROUPS = (
-    ("현장", "운전", "공정", "설비", "plant", "field"),
-    ("선정", "결정", "기준", "조건", "판단", "select"),
-    ("검증", "시험", "측정", "기록", "확인", "test"),
-    ("비용", "영향", "위험", "한계", "장점", "단점", "trade"),
-    ("절차", "유지", "점검", "변경", "관리", "정비", "lifecycle"),
-    ("=", "≈", "계산", "수식", "boundary", "경계"),
+_JUDGMENT_RELATIONS = (
+    (("현장", "운전", "공정", "설비", "plant", "field"), ("선정", "결정", "기준", "조건", "판단", "select")),
+    (("검증", "시험", "측정", "test"), ("기준", "결과", "기록", "확인", "판정", "수용")),
+    (("비용", "위험", "장점", "단점", "trade"), ("영향", "한계", "비교", "절충", "대안")),
+    (("변경", "점검", "정비", "유지", "lifecycle"), ("검증", "시험", "확인", "관리", "기록")),
+    (("=", "≈", "계산", "수식", "정량"), ("조건", "한계", "경계", "범위", "기준")),
 )
-_LINK_CUES = ("따라", "때문", "따라서", "결론", "연결", "영향", "반면", "그러므로", "인해", "하면")
+_LINK_CUES = ("때문", "따라서", "반면", "그러므로", "인해", "하면", "연결")
 _FULL_DEPTH_ASCII_UNITS = 1800
 _HIGH_SCORE_INELIGIBLE_CEILING = 18.5
 
 
-def evaluate_score_evidence(answer_text: str) -> dict[str, Any]:
+def evaluate_score_evidence(
+    answer_text: str, *, technical_evidence_texts: list[str] | None = None
+) -> dict[str, Any]:
     """Measure visible structure, engineering judgment and logical linkage."""
     text = str(answer_text or "")
-    folded = text.casefold()
+    bound_evidence = list(dict.fromkeys(
+        row.strip() for row in (technical_evidence_texts or []) if row.strip()
+    ))
+    # D/E 관계는 답안 전체에서 평가하되, 별도로 검출된 technical span의
+    # 존재를 기록해 단순 문장 형식과 공학 evidence를 구분한다.
+    evidence_text = text
+    folded = evidence_text.casefold()
     lines = text.splitlines()
     heading_count = sum(bool(_HEADING.match(line)) for line in lines)
     bullet_count = sum(bool(_BULLET.match(line)) for line in lines)
@@ -39,13 +46,22 @@ def evaluate_score_evidence(answer_text: str) -> dict[str, Any]:
     structure_score += 1.0 if bullet_count >= 3 else 0.5 if bullet_count else 0.0
     structure_score = min(3.0, structure_score)
 
-    judgment_groups = [
-        [cue for cue in group if cue.casefold() in folded]
-        for group in _JUDGMENT_GROUPS
+    clauses = [row.strip().casefold() for row in re.split(r"[.!?。;\n]+", evidence_text) if row.strip()]
+    judgment_groups = []
+    for context_cues, decision_cues in _JUDGMENT_RELATIONS:
+        matched = [
+            clause for clause in clauses
+            if any(cue.casefold() in clause for cue in context_cues)
+            and any(cue.casefold() in clause for cue in decision_cues)
+        ]
+        judgment_groups.append(matched)
+    judgment_score = min(6.0, 1.25 * sum(bool(row) for row in judgment_groups))
+    linkage_matches = [
+        clause for clause in clauses
+        if any(cue in clause for cue in _LINK_CUES)
+        and any(token in clause for pair in _JUDGMENT_RELATIONS for side in pair for token in side)
     ]
-    judgment_score = min(6.0, 1.05 * sum(bool(row) for row in judgment_groups))
-    linkage_matches = [cue for cue in _LINK_CUES if cue in text]
-    linkage_score = min(2.0, 0.5 * len(linkage_matches))
+    linkage_score = min(2.0, 1.0 * len(linkage_matches))
     volume = estimate_ascii_answer_volume(text)
     return {
         "version": VERSION,
@@ -59,10 +75,14 @@ def evaluate_score_evidence(answer_text: str) -> dict[str, Any]:
         "engineering_judgment": {
             "score": judgment_score, "max_score": 6.0,
             "matched_groups": judgment_groups,
+            "evidence_bound": bool(bound_evidence),
+            "technical_evidence_span_count": len(bound_evidence),
         },
         "linkage": {
             "score": linkage_score, "max_score": 2.0,
             "matched_cues": linkage_matches,
+            "evidence_bound": bool(bound_evidence),
+            "technical_evidence_span_count": len(bound_evidence),
         },
         "volume": volume,
         "high_score_eligibility": {

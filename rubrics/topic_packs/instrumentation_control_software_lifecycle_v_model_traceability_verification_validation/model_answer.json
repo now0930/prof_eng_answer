@@ -110,6 +110,19 @@
         "sw04_static_analysis",
         "sw04_dynamic_analysis"
       ]
+    },
+    {
+      "pattern": "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오.",
+      "required_anchor_ids": [
+        "sw04_v_model_definition",
+        "sw04_unit_test",
+        "sw04_integration_test",
+        "sw04_system_test",
+        "sw04_verification_definition",
+        "sw04_validation_definition",
+        "sw04_rtm_bidirectional",
+        "sw04_configuration_baseline"
+      ]
     }
   ],
   "recommended_outline": [

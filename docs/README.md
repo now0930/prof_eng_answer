@@ -4,7 +4,7 @@
 
 프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
 
-> 최신 상태(2026-09-10): Gemini-off 48건에서 topic routing recall 100%, known-fatal recall 100%(16/16), score coverage·점수 허용구간 적중률 100%, 평균 범위 이탈 0점으로 Authority Gate `READY`입니다. Stage50~54는 위험 상위 5개 묶음의 normal/adverse/fatal 관계 회귀를 추가했습니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
+> 최신 상태(2026-09-10): Gemini-off 48건에서 topic routing recall 100%, known-fatal recall 100%(16/16), score coverage 100%, 점수 허용구간 적중률 93.75%, 평균 범위 이탈 0.14125점으로 Authority Gate `READY`입니다. Stage55는 Telegram 운영 회귀에서 발견한 질문 범위·점수·D/E 근거 문제를 결정론적으로 보정했습니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
 ---
 

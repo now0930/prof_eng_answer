@@ -65,6 +65,7 @@ EXPECTED_ANCHOR_IDS = [
     "manual_actuator_local_operation_limit",
     "actuator_output_matches_valve_motion",
     "body_actuator_selection_multi_criteria",
+    "hydraulic_actuator_force_and_stored_energy_fail_safe",
 ]
 
 EXPECTED_FATAL_IDS = [
@@ -313,7 +314,7 @@ class GeneratedContractRegressionTests(unittest.TestCase):
         ]
         self.assertEqual(source_ids, EXPECTED_ANCHOR_IDS)
         self.assertEqual(generated_ids, EXPECTED_ANCHOR_IDS)
-        self.assertEqual(len(set(source_ids)), 28)
+        self.assertEqual(len(set(source_ids)), 29)
         self.assertEqual(
             self.source_fact["core_facts"],
             [
@@ -358,7 +359,7 @@ class GeneratedContractRegressionTests(unittest.TestCase):
     def test_model_patterns_and_outline_cover_all_anchors(self) -> None:
         patterns = self.source_model["expected_question_patterns"]
         outlines = self.source_model["recommended_outline"]
-        self.assertEqual(len(patterns), 10)
+        self.assertEqual(len(patterns), 11)
         self.assertEqual(len(outlines), 8)
 
         anchor_set = set(EXPECTED_ANCHOR_IDS)

@@ -88,11 +88,53 @@ def _question_similarity(left: str, right: str) -> float:
     return max(token_score, gram_score)
 
 
+def _derived_anchor_scope(topic_path: Path, question_text: str) -> tuple[set[str], dict[str, Any]]:
+    """Derive a bounded anchor set from question-owned concept terms."""
+    anchor_path = topic_path / "fact_anchor.json"
+    if not anchor_path.is_file():
+        return set(), {"mode": "scope_unresolved", "reason": "fact_anchor_unavailable"}
+    payload = json.loads(anchor_path.read_text(encoding="utf-8"))
+    normalized_question = _normalize(question_text)
+    question_tokens = _tokens(normalized_question) - STOP_TOKENS
+    ranked = []
+    for index, anchor in enumerate(payload.get("anchors", [])):
+        anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "").strip()
+        terms = _terms(anchor)
+        term_hits = [term for term in terms if _term_present(term, normalized_question)]
+        statement = str(anchor.get("statement") or anchor.get("claim") or "")
+        token_hits = question_tokens & (_tokens(statement) - STOP_TOKENS)
+        similarity = _question_similarity(question_text, statement)
+        strength = 2 * len(term_hits) + len(token_hits)
+        if strength == 0 and similarity < 0.12:
+            continue
+        ranked.append((strength, similarity, -index, anchor_id))
+    if not ranked:
+        return set(), {
+            "mode": "scope_unresolved",
+            "reason": "no_question_owned_anchor_evidence",
+        }
+    ranked.sort(reverse=True)
+    best_strength, best_similarity, _, _ = ranked[0]
+    selected = [
+        row for row in ranked
+        if row[0] >= max(1, best_strength - 1)
+        or row[1] >= max(0.12, best_similarity * 0.65)
+    ][:12]
+    return {row[3] for row in selected}, {
+        "mode": "derived_question_contract",
+        "reason": "bounded_anchor_term_projection",
+        "best_similarity": round(best_similarity, 6),
+        "selected_anchor_count": len(selected),
+    }
+
+
 def _required_anchor_ids(topic_path: Path, question_text: str) -> tuple[set[str] | None, dict[str, Any]]:
     """Select the closest explicit question contract, if the Topic Pack owns one."""
     model_answer_path = topic_path / "model_answer.json"
-    if not question_text or not model_answer_path.is_file():
+    if not question_text:
         return None, {"mode": "all_anchors", "reason": "question_contract_unavailable"}
+    if not model_answer_path.is_file():
+        return set(), {"mode": "scope_unresolved", "reason": "question_contract_unavailable"}
     payload = json.loads(model_answer_path.read_text(encoding="utf-8"))
     candidates: list[tuple[float, int, dict[str, Any]]] = []
     for index, row in enumerate(payload.get("expected_question_patterns", [])):
@@ -101,13 +143,13 @@ def _required_anchor_ids(topic_path: Path, question_text: str) -> tuple[set[str]
         pattern = str(row.get("pattern") or row.get("question") or "")
         candidates.append((_question_similarity(question_text, pattern), -index, row))
     if not candidates:
-        return None, {"mode": "all_anchors", "reason": "explicit_anchor_mapping_unavailable"}
+        return _derived_anchor_scope(topic_path, question_text)
     similarity, _, selected = max(candidates, key=lambda row: (row[0], row[1]))
     if similarity < 0.2:
-        return None, {
-            "mode": "all_anchors",
-            "reason": "question_contract_match_below_threshold",
-            "best_similarity": round(similarity, 6),
+        required, derived = _derived_anchor_scope(topic_path, question_text)
+        return required, {
+            **derived,
+            "best_pattern_similarity": round(similarity, 6),
         }
     return {
         str(anchor_id) for anchor_id in selected.get("required_anchor_ids", [])
@@ -150,6 +192,18 @@ def evaluate_fact_anchor_requirements(
         payload = json.loads(path.read_text(encoding="utf-8"))
         required_ids, selection = _required_anchor_ids(topic_path, question_text)
         selections.append({"owner_topic_id": topic_id, **selection})
+        if selection["mode"] == "scope_unresolved":
+            requirements.append({
+                "owner_topic_id": topic_id,
+                "requirement_id": "__question_scope__",
+                "status": "MISSING",
+                "evidence_mode": "question_scope_guard",
+                "importance": "core",
+                "source_span": None,
+                "evidence_text": "",
+                "scope_reason": selection["reason"],
+            })
+            continue
         for anchor in payload.get("anchors", []):
             anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "")
             if required_ids is not None and anchor_id not in required_ids:
@@ -170,7 +224,11 @@ def evaluate_fact_anchor_requirements(
                 or (len(matched_tokens) >= 3 and token_coverage >= 0.3)
             ):
                 status = "SATISFIED"
-            elif matched or (len(matched_tokens) >= 2 and token_coverage >= 0.12):
+            elif (
+                identity_term_matched
+                or len(matched) >= 2
+                or (len(matched_tokens) >= 3 and token_coverage >= 0.25)
+            ):
                 status = "PARTIAL"
             else:
                 status = "MISSING"
@@ -237,7 +295,25 @@ def augment_requirement_evaluation(
             "selected_mode": "canonical_claim",
             "status_changed": row.get("status") != canonical.get("status"),
         })
-    output["requirements"] = list(base.get("requirements", [])) + [
+    enriched_base = []
+    lexical_by_key = {
+        (row.get("owner_topic_id"), row.get("requirement_id")): row
+        for row in lexical_rows
+    }
+    for row in base.get("requirements", []):
+        lexical = lexical_by_key.get(
+            (row.get("owner_topic_id"), row.get("requirement_id"))
+        )
+        if lexical is None:
+            enriched_base.append(row)
+            continue
+        enriched_base.append({
+            **row,
+            "importance": lexical.get("importance", row.get("importance", "normal")),
+            "source_span": lexical.get("source_span"),
+            "evidence_text": lexical.get("evidence_text", ""),
+        })
+    output["requirements"] = enriched_base + [
         row for row in fact_anchor_evaluation.get("requirements", [])
         if (row.get("owner_topic_id"), row.get("requirement_id")) not in existing
     ]

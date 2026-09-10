@@ -111,6 +111,17 @@
         "electric_actuator_motor_gear_control",
         "body_actuator_selection_multi_criteria"
       ]
+    },
+    {
+      "pattern": "공압식, 전동식, 유압식 제어밸브 액추에이터의 구조와 동작원리, 장단점, 적용조건, 에너지원 상실 시 fail-safe 특성과 현장 선정기준을 비교하시오.",
+      "required_anchor_ids": [
+        "spring_diaphragm_actuator_force_and_fail_safe",
+        "piston_actuator_high_force_and_speed",
+        "electric_actuator_motor_gear_control",
+        "hydraulic_actuator_force_and_stored_energy_fail_safe",
+        "actuator_output_matches_valve_motion",
+        "body_actuator_selection_multi_criteria"
+      ]
     }
   ],
   "recommended_outline": [
@@ -162,12 +173,13 @@
       ]
     },
     {
-      "section": "5. 공압 액추에이터",
-      "intent": "Spring-diaphragm, piston과 rack-and-pinion을 비교한다.",
+      "section": "5. 공압·유압 액추에이터",
+      "intent": "Spring-diaphragm, piston, rack-and-pinion과 hydraulic actuator를 비교한다.",
       "anchor_refs": [
         "spring_diaphragm_actuator_force_and_fail_safe",
         "piston_actuator_high_force_and_speed",
-        "rack_pinion_rotary_torque_conversion"
+        "rack_pinion_rotary_torque_conversion",
+        "hydraulic_actuator_force_and_stored_energy_fail_safe"
       ]
     },
     {
@@ -187,6 +199,7 @@
         "piston_actuator_high_force_and_speed",
         "rack_pinion_rotary_torque_conversion",
         "electric_actuator_motor_gear_control"
+        ,"hydraulic_actuator_force_and_stored_energy_fail_safe"
       ]
     },
     {
