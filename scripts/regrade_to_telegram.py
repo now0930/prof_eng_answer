@@ -10,6 +10,7 @@ never read or written.
 from __future__ import annotations
 
 import argparse
+import hashlib
 import json
 import os
 import re
@@ -99,11 +100,36 @@ def eligible_source_sessions(sessions_dir: Path) -> list[Path]:
 
 
 def current_commit(root: Path) -> str:
-    result = subprocess.run(
-        ["git", "-C", str(root), "rev-parse", "HEAD"],
-        check=True, capture_output=True, text=True,
-    )
-    return result.stdout.strip()
+    configured = str(os.getenv("ENGINE_COMMIT") or "").strip()
+    if configured:
+        return configured
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "rev-parse", "HEAD"],
+            check=True, capture_output=True, text=True, timeout=3,
+        )
+        if result.stdout.strip():
+            return result.stdout.strip()
+    except (OSError, subprocess.SubprocessError):
+        pass
+
+    # Production containers intentionally omit .git.  A content fingerprint
+    # keeps --resume scoped to the deployed engine and Topic Pack revision.
+    digest = hashlib.sha256()
+    excluded = {".git", "__pycache__", "data", "reports", "backups", "tmp", "tests"}
+    for path in sorted(root.rglob("*")):
+        if not path.is_file() or path.suffix not in {".py", ".json", ".yaml", ".yml"}:
+            continue
+        if any(part in excluded for part in path.relative_to(root).parts):
+            continue
+        relative = path.relative_to(root).as_posix().encode("utf-8")
+        digest.update(len(relative).to_bytes(4, "big"))
+        digest.update(relative)
+        try:
+            digest.update(path.read_bytes())
+        except OSError:
+            continue
+    return "sha256:" + digest.hexdigest()
 
 
 def completed_sources(

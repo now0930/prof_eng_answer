@@ -1,11 +1,14 @@
+import subprocess
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 from scripts.regrade_to_telegram import (
     build_copyable_submission,
     completed_sources,
     create_regrade_session,
+    current_commit,
     eligible_source_sessions,
     grade_signature,
     latest_source_session,
@@ -15,6 +18,24 @@ from scripts.regrade_to_telegram import (
 
 
 class RegradeToTelegramTests(unittest.TestCase):
+    def test_commit_identity_works_without_git_metadata(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            (root / "engine.py").write_text("VERSION = 1\n", encoding="utf-8")
+            with mock.patch.dict("os.environ", {}, clear=True), mock.patch(
+                "scripts.regrade_to_telegram.subprocess.run",
+                side_effect=subprocess.CalledProcessError(128, "git"),
+            ):
+                first = current_commit(root)
+                self.assertTrue(first.startswith("sha256:"))
+                self.assertEqual(first, current_commit(root))
+                (root / "engine.py").write_text("VERSION = 2\n", encoding="utf-8")
+                self.assertNotEqual(first, current_commit(root))
+
+    def test_configured_commit_has_precedence(self):
+        with mock.patch.dict("os.environ", {"ENGINE_COMMIT": "deploy-123"}):
+            self.assertEqual(current_commit(Path("/missing")), "deploy-123")
+
     def test_copyable_submission_has_grade_and_end_markers(self):
         rendered = build_copyable_submission("문제: 시험\n답안: 내용")
         self.assertEqual(
