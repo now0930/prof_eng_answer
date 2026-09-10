@@ -4,7 +4,10 @@ from pathlib import Path
 
 from scripts.regrade_to_telegram import (
     build_copyable_submission,
+    completed_sources,
     create_regrade_session,
+    eligible_source_sessions,
+    grade_signature,
     latest_source_session,
     read_session_input,
     resolve_source_session,
@@ -53,6 +56,50 @@ class RegradeToTelegramTests(unittest.TestCase):
             self.assertNotEqual(first, second)
             self.assertTrue(first.is_dir())
             self.assertTrue(second.is_dir())
+
+    def test_all_selection_and_commit_scoped_resume(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            source = root / "20260910_120000_123"
+            source.mkdir()
+            (source / "input.raw.txt").write_text("answer", encoding="utf-8")
+            (source / "meta.json").write_text(
+                '{"status":"graded","chat_id":123}', encoding="utf-8"
+            )
+            draft = root / "20260910_120100_123"
+            draft.mkdir()
+            (draft / "input.txt").write_text("draft", encoding="utf-8")
+            (draft / "meta.json").write_text(
+                '{"status":"created","chat_id":123}', encoding="utf-8"
+            )
+            regrade = root / "regrade_20260910_123"
+            regrade.mkdir()
+            (regrade / "meta.json").write_text(
+                '{"status":"graded","provider_calls":0,'
+                '"engine_commit":"abc","regrade_source":"20260910_120000_123",'
+                '"dry_run":true}',
+                encoding="utf-8",
+            )
+            self.assertEqual(eligible_source_sessions(root), [source])
+            self.assertEqual(
+                completed_sources(root, "abc"), {"20260910_120000_123"}
+            )
+            self.assertEqual(
+                completed_sources(root, "abc", include_dry_runs=False), set()
+            )
+            self.assertEqual(completed_sources(root, "def"), set())
+
+    def test_changed_only_signature_uses_score_pass_and_fatal(self):
+        base = {
+            "total_score": 12.0,
+            "official_pass_met": False,
+            "high_score_met": False,
+            "logic_check_evaluation": {"findings": []},
+        }
+        same = dict(base)
+        changed = dict(base, total_score=13.0)
+        self.assertEqual(grade_signature(base), grade_signature(same))
+        self.assertNotEqual(grade_signature(base), grade_signature(changed))
 
 
 if __name__ == "__main__":

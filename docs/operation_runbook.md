@@ -462,3 +462,18 @@ docker compose exec -T prof-eng-answer-bot \
 `끝.`을 전송하므로 Telegram에서 그대로 복사해 다시 제출할 수 있다. 원문이 길면 Bot의
 메시지 길이 제한에 맞춰 자동 분할된다. 원문 표시가 필요 없으면 `--no-source-text`를
 지정한다.
+
+전체 과거 답안을 재채점하되 변경된 결과만 원문과 함께 받으려면 다음을 실행한다.
+
+```bash
+cd /home/now0930/hermes
+
+docker compose exec -T prof-eng-answer-bot \
+  python3 -B /workspace/prof_eng_answer/scripts/regrade_to_telegram.py \
+  --all --resume --changed-only --delay 5
+```
+
+대상과 엔진 실행만 먼저 확인하려면 `--dry-run --all --resume`을 사용하고, Telegram에는
+개별 답안 없이 총계만 보내려면 `--all --resume --send-summary`를 사용한다. Batch는
+한 session이 실패해도 다음 session을 계속 처리하지만 최종 exit code는 0이 아니며,
+성공·건너뜀·실패·변경 목록은 JSON 보고서에서 확인한다.

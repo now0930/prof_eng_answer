@@ -69,6 +69,24 @@ docker compose exec -T prof-eng-answer-bot \
 자기 자신에게 수신 update를 만들 수 없으므로 이 도구는 입력을 위조하지 않고 채점
 entrypoint를 직접 호출한 뒤 결과만 `sendMessage`로 전송한다.
 
+전체 실제 Telegram session을 재채점할 때는 다음 옵션을 사용한다.
+
+```bash
+docker compose exec -T prof-eng-answer-bot \
+  python3 -B /workspace/prof_eng_answer/scripts/regrade_to_telegram.py \
+  --all --resume --changed-only
+```
+
+- `--all`: `graded` 상태이며 chat ID와 OCR 입력이 있는 실제 session만 선택
+- `--resume`: 같은 engine commit으로 이미 성공한 원본은 건너뜀
+- `--changed-only`: 기존 점수·합격·고득점·fatal 서명이 달라진 건만 Telegram 전송
+- `--send-summary`: 개별 원문·결과 대신 전체 집계만 전송
+- `--delay`: 개별 전송 간격이며 기본값은 5초
+- `--report`: batch JSON 보고서 위치를 직접 지정
+
+`expert_accuracy_*`와 `regrade_*`는 `--all` 대상에서 제외된다. 기본 보고서는
+`reports/telegram_regrade_batches/<timestamp>.json`에 저장된다.
+
 ### `rubric_manager.py`
 
 Rubric content와 Topic Pack을 관리하는 통합 CLI이다.
