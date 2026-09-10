@@ -17,6 +17,7 @@ import re
 import subprocess
 import sys
 import time
+import unicodedata
 from datetime import datetime
 from pathlib import Path
 
@@ -170,6 +171,36 @@ def grade_signature(grade: dict | None) -> dict | None:
     }
 
 
+def answer_content_hash(text: str) -> str:
+    """Return a formatting-insensitive identity for one normalized answer."""
+    canonical = unicodedata.normalize("NFKC", str(text or ""))
+    canonical = " ".join(canonical.split()).casefold()
+    return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+
+def deduplicate_sources(
+    sources: list[tuple[str, str, Path | None]], normalize_fn
+) -> tuple[list[tuple[str, str, Path | None]], list[dict]]:
+    unique = []
+    duplicates = []
+    owners: dict[str, str] = {}
+    for source_label, raw_text, source_dir in sources:
+        normalized = normalize_fn(raw_text)["normalized_text"]
+        content_hash = answer_content_hash(normalized)
+        owner = owners.get(content_hash)
+        if owner is not None:
+            duplicates.append({
+                "source": source_label,
+                "status": "SKIPPED_DUPLICATE",
+                "duplicate_of": owner,
+                "content_sha256": content_hash,
+            })
+            continue
+        owners[content_hash] = source_label
+        unique.append((source_label, raw_text, source_dir))
+    return unique, duplicates
+
+
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="현재 deterministic engine으로 OCR 답안을 재채점해 Telegram으로 전송"
@@ -257,6 +288,13 @@ def main() -> int:
     from grading_agents import run_agent_pipeline
     import bot
 
+    duplicate_rows = []
+    originally_selected = len(sources)
+    if args.all:
+        sources, duplicate_rows = deduplicate_sources(
+            sources, normalize_grade_submission
+        )
+
     if not args.dry_run and not bot.TELEGRAM_TOKEN:
         raise SystemExit("TELEGRAM_TOKEN/TELEGRAM_BOT_TOKEN/BOT_TOKEN is required")
     if not bot.chat_allowed(args.chat_id):
@@ -272,7 +310,7 @@ def main() -> int:
         )
         if args.resume else set()
     )
-    rows = []
+    rows = list(duplicate_rows)
     for index, (source_label, raw_text, source_dir) in enumerate(sources):
         if source_label in already_done:
             rows.append({"source": source_label, "status": "SKIPPED_RESUME"})
@@ -346,14 +384,19 @@ def main() -> int:
             })
 
     passed = sum(row["status"] == "PASS" for row in rows)
-    skipped = sum(row["status"] == "SKIPPED_RESUME" for row in rows)
+    skipped_resume = sum(row["status"] == "SKIPPED_RESUME" for row in rows)
+    skipped_duplicate = sum(row["status"] == "SKIPPED_DUPLICATE" for row in rows)
+    skipped = skipped_resume + skipped_duplicate
     failed = sum(row["status"] == "FAIL" for row in rows)
     changed_count = sum(row.get("changed") is True for row in rows)
     report = {
         "marker": "TELEGRAM_DETERMINISTIC_REGRADE_BATCH_V1" if args.all else "TELEGRAM_DETERMINISTIC_REGRADE_V1",
         "decision": "PASS" if failed == 0 else "FAIL",
-        "engine_commit": engine_commit, "selected": len(sources),
+        "engine_commit": engine_commit, "selected": originally_selected,
+        "unique_selected": len(sources),
         "passed": passed, "skipped": skipped, "failed": failed,
+        "skipped_resume": skipped_resume,
+        "skipped_duplicate": skipped_duplicate,
         "changed": changed_count, "provider_calls": 0, "cases": rows,
     }
     report_path = args.report
@@ -369,7 +412,8 @@ def main() -> int:
         bot.send_message(
             args.chat_id,
             "전체 재채점 완료\n"
-            f"선택 {len(sources)} · 성공 {passed} · 재개건너뜀 {skipped} · 실패 {failed}\n"
+            f"선택 {originally_selected} · 고유답안 {len(sources)} · 성공 {passed} · 실패 {failed}\n"
+            f"중복건너뜀 {skipped_duplicate} · 재개건너뜀 {skipped_resume}\n"
             f"기존 판정 대비 변경 {changed_count} · provider 호출 0\n"
             f"보고서: {report.get('report_path', '미지정')}",
         )

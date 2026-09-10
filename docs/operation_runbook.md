@@ -473,6 +473,10 @@ docker compose exec -T prof-eng-answer-bot \
   --all --resume --changed-only --delay 5
 ```
 
+`--all`은 Unicode·대소문자·공백을 정규화한 답안 내용이 같은 session을 한 건으로
+처리한다. 첫 session만 채점하며 나머지는 보고서에 `SKIPPED_DUPLICATE`와 대표
+session(`duplicate_of`)을 기록한다.
+
 대상과 엔진 실행만 먼저 확인하려면 `--dry-run --all --resume`을 사용하고, Telegram에는
 개별 답안 없이 총계만 보내려면 `--all --resume --send-summary`를 사용한다. Batch는
 한 session이 실패해도 다음 session을 계속 처리하지만 최종 exit code는 0이 아니며,

@@ -6,9 +6,11 @@ from pathlib import Path
 
 from scripts.regrade_to_telegram import (
     build_copyable_submission,
+    answer_content_hash,
     completed_sources,
     create_regrade_session,
     current_commit,
+    deduplicate_sources,
     eligible_source_sessions,
     grade_signature,
     latest_source_session,
@@ -18,6 +20,26 @@ from scripts.regrade_to_telegram import (
 
 
 class RegradeToTelegramTests(unittest.TestCase):
+    def test_duplicate_answers_are_graded_only_once(self):
+        sources = [
+            ("session_1", "동일  답안\n내용", None),
+            ("session_2", "동일 답안 내용", None),
+            ("session_3", "다른 답안", None),
+        ]
+
+        def normalize(value):
+            return {"normalized_text": value}
+
+        unique, duplicates = deduplicate_sources(sources, normalize)
+        self.assertEqual([row[0] for row in unique], ["session_1", "session_3"])
+        self.assertEqual(duplicates[0]["source"], "session_2")
+        self.assertEqual(duplicates[0]["duplicate_of"], "session_1")
+        self.assertEqual(duplicates[0]["status"], "SKIPPED_DUPLICATE")
+        self.assertEqual(
+            duplicates[0]["content_sha256"],
+            answer_content_hash("동일 답안 내용"),
+        )
+
     def test_commit_identity_works_without_git_metadata(self):
         with tempfile.TemporaryDirectory() as temp:
             root = Path(temp)

@@ -78,13 +78,15 @@ docker compose exec -T prof-eng-answer-bot \
 ```
 
 - `--all`: `graded` 상태이며 chat ID와 OCR 입력이 있는 실제 session만 선택
+- `--all`은 정규화한 답안 내용의 SHA-256이 같은 session을 중복으로 판단하고 가장 이른 한 건만 채점
 - `--resume`: 같은 engine commit으로 이미 성공한 원본은 건너뜀
 - `--changed-only`: 기존 점수·합격·고득점·fatal 서명이 달라진 건만 Telegram 전송
 - `--send-summary`: 개별 원문·결과 대신 전체 집계만 전송
 - `--delay`: 개별 전송 간격이며 기본값은 5초
 - `--report`: batch JSON 보고서 위치를 직접 지정
 
-`expert_accuracy_*`와 `regrade_*`는 `--all` 대상에서 제외된다. 기본 보고서는
+`expert_accuracy_*`와 `regrade_*`는 `--all` 대상에서 제외된다. 보고서는 중복
+session을 `SKIPPED_DUPLICATE`와 `duplicate_of`로 기록하며
 `reports/telegram_regrade_batches/<timestamp>.json`에 저장된다.
 
 ### `rubric_manager.py`
