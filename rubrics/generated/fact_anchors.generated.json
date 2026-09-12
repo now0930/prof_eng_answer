@@ -1,5 +1,5 @@
 {
-  "version": "sha256-085ea998f7439845d04ed2ed1c5fa69db993ff6ad7463e58a7e1111d197530a0-generated-topic-pack-fact-anchors",
+  "version": "sha256-9834889848fb60b9ddec9a02468d6fe2859d643acf4efb5cda5f0870755912c3-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -45502,7 +45502,8 @@
             "공기압",
             "직선 force",
             "spring",
-            "stroke"
+            "fail-open",
+            "fail-close"
           ],
           "accepted_explanations": [
             "Diaphragm 면적과 압력으로 force를 만들고 spring이 반대 방향 힘을 제공한다고 설명한다.",
@@ -62778,6 +62779,17 @@
         "위한",
         "아키텍처를",
         "reactor overpressure target SIL determination and SIS architecture handoff",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오.",
+        "과압",
+        "위험이",
+        "있는",
+        "플랜트에서",
+        "보호장치가",
+        "부족할",
+        "과정과",
+        "구성을",
+        "plant overpressure target SIL determination and SIS architecture handoff",
+        "plant",
         "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당",
         "독립보호계층을",
         "이용한",
@@ -63225,6 +63237,8 @@
         "uncertainty management and revalidation",
         "화학 플랜트 반응기 과압력 시나리오의 목표 SIL 결정과정과 이를 만족하기 위한 SIS 아키텍처를 설명하시오.",
         "reactor overpressure target SIL determination and SIS architecture handoff",
+        "과압 위험이 있는 화학 플랜트에서 기존 보호장치가 부족할 때 요구 SIL 결정 과정과 이를 만족하는 SIS 아키텍처 구성을 설명하시오.",
+        "plant overpressure target SIL determination and SIS architecture handoff",
         "HAZOP·LOPA·독립보호계층을 이용한 목표 SIL 결정 및 SIF 할당"
       ],
       "priority": "CORE_MUST_PREPARE"

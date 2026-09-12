@@ -70,7 +70,9 @@ class DeterministicScoreEngineTests(unittest.TestCase):
             "3. 결론\n- 조건에 따라 확인하면 결론으로 연결된다.\n" + "충분한 설명 " * 400
         )
         result = calculate_deterministic_score(evaluation, answer_text=answer)
-        self.assertEqual(result["total_score"], 23.0)
+        self.assertEqual(result["total_score"], 17.0)
+        self.assertEqual(result["score_breakdown"]["D_engineering_judgment"], 0.0)
+        self.assertEqual(result["score_breakdown"]["E_linkage"], 0.0)
         self.assertEqual(result["maximum_automatic_score"], 24.0)
 
     def test_ineligible_depth_uses_practical_band_upper_ceiling(self):
@@ -119,6 +121,7 @@ class DeterministicScoreEngineTests(unittest.TestCase):
         }
         result = calculate_deterministic_score(evaluation)
         self.assertEqual(result["core_requirement_gap_count"], 1)
+        self.assertEqual(result["pass_required_gap_count"], 0)
         self.assertFalse(result["high_score_evidence_eligible"])
         self.assertEqual(result["satisfied_requirement_ratio"], 0.6)
 
@@ -151,7 +154,7 @@ class DeterministicScoreEngineTests(unittest.TestCase):
         self.assertEqual(adequate["total_score"], 15.0)
         self.assertTrue(adequate["technically_adequate_floor_applied"])
 
-    def test_substantive_fatal_answer_keeps_credit_but_never_passes(self):
+    def test_substantive_fatal_answer_keeps_earned_credit_but_has_no_floor(self):
         result = calculate_deterministic_score(
             {"requirements": [
                 {"status": "WRONG"}, {"status": "PARTIAL"},
@@ -160,8 +163,8 @@ class DeterministicScoreEngineTests(unittest.TestCase):
              "fatal_or_core_error": True},
             answer_text="1. 배경\n2. 본문\n3. 결론\n" + "기술적 검토 내용 " * 100,
         )
-        self.assertEqual(result["total_score"], 13.0)
-        self.assertTrue(result["substantive_fatal_floor_applied"])
+        self.assertLess(result["total_score"], 13.0)
+        self.assertFalse(result["substantive_fatal_floor_applied"])
         self.assertFalse(result["official_pass_met"])
 
         admitted_gap = calculate_deterministic_score(
@@ -171,6 +174,37 @@ class DeterministicScoreEngineTests(unittest.TestCase):
             answer_text="첫 관계는 맞지만 나머지 관계는 설명하지 못했다.",
         )
         self.assertFalse(admitted_gap["technically_adequate_floor_applied"])
+
+    def test_missing_explicit_pass_requirement_blocks_pass_even_with_good_form(self):
+        result = calculate_deterministic_score(
+            {"requirements": [
+                {"status": "SATISFIED", "importance": "core", "evidence_text": "현장 조건에 따라 선정한다."},
+                {"status": "SATISFIED", "importance": "core", "evidence_text": "시험 결과와 수용 기준을 기록한다."},
+                {"status": "MISSING", "importance": "core", "pass_required": True},
+            ], "findings": [], "fatal_or_core_error": False},
+            answer_text=(
+                "1. 현장 선정\n공정 조건에 따라 선정한다.\n"
+                "2. 검증\n시험 결과와 수용 기준을 기록한다.\n"
+                "3. 결론\n위험 때문에 대안을 비교한다.\n" + "상세 설명 " * 400
+            ),
+        )
+        self.assertEqual(result["core_requirement_gap_count"], 1)
+        self.assertEqual(result["pass_required_gap_count"], 1)
+        self.assertFalse(result["pass_evidence_eligible"])
+        self.assertFalse(result["official_pass_met"])
+        self.assertLess(result["total_score"], 15.0)
+
+    def test_unrelated_judgment_gets_no_d_or_e_without_requirement_evidence(self):
+        result = calculate_deterministic_score(
+            {"requirements": [{"status": "MISSING"}], "findings": [],
+             "fatal_or_core_error": False},
+            answer_text=(
+                "1. 현장 판단\n공정 조건에 따라 선정한다.\n"
+                "2. 검증\n시험 결과와 수용 기준을 기록한다."
+            ),
+        )
+        self.assertEqual(result["score_breakdown"]["D_engineering_judgment"], 0.0)
+        self.assertEqual(result["score_breakdown"]["E_linkage"], 0.0)
 
 
 if __name__ == "__main__":

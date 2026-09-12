@@ -29,12 +29,15 @@ def evaluate_score_evidence(
 ) -> dict[str, Any]:
     """Measure visible structure, engineering judgment and logical linkage."""
     text = str(answer_text or "")
+    evidence_binding_requested = technical_evidence_texts is not None
     bound_evidence = list(dict.fromkeys(
         row.strip() for row in (technical_evidence_texts or []) if row.strip()
     ))
-    # D/E 관계는 답안 전체에서 평가하되, 별도로 검출된 technical span의
-    # 존재를 기록해 단순 문장 형식과 공학 evidence를 구분한다.
-    evidence_text = text
+    # Production scoring passes requirement-owned spans. D/E therefore cannot
+    # be earned by an unrelated but professionally worded paragraph.
+    evidence_text = (
+        text if (not evidence_binding_requested or bound_evidence) else ""
+    )
     folded = evidence_text.casefold()
     lines = text.splitlines()
     heading_count = sum(bool(_HEADING.match(line)) for line in lines)
@@ -75,13 +78,13 @@ def evaluate_score_evidence(
         "engineering_judgment": {
             "score": judgment_score, "max_score": 6.0,
             "matched_groups": judgment_groups,
-            "evidence_bound": bool(bound_evidence),
+            "evidence_bound": evidence_binding_requested,
             "technical_evidence_span_count": len(bound_evidence),
         },
         "linkage": {
             "score": linkage_score, "max_score": 2.0,
             "matched_cues": linkage_matches,
-            "evidence_bound": bool(bound_evidence),
+            "evidence_bound": evidence_binding_requested,
             "technical_evidence_span_count": len(bound_evidence),
         },
         "volume": volume,

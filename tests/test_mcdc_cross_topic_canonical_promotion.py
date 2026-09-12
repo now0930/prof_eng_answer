@@ -48,8 +48,14 @@ class McdcCrossTopicCanonicalPromotionTests(unittest.TestCase):
             question_text=case["question"], answer_text=case["answer"],
         )
         expected = case["expected"]
-        self.assertGreaterEqual(grade["total_score"], expected["total_range"]["min"])
         self.assertLessEqual(grade["total_score"], expected["total_range"]["max"])
+        self.assertEqual(
+            grade["total_score"],
+            grade["deterministic_score"]["score_before_floors"],
+        )
+        self.assertFalse(
+            grade["deterministic_score"]["substantive_fatal_floor_applied"]
+        )
         self.assertFalse(grade["official_pass_met"])
         self.assertEqual(grade["provider_calls"], 0)
         self.assertEqual(set(grade["topic_ids"]), set(case["expected_topic_ids"]))

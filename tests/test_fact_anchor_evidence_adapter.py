@@ -46,6 +46,19 @@ class FactAnchorEvidenceAdapterTests(unittest.TestCase):
         )
         self.assertEqual(result["requirements"], [])
 
+    def test_anchor_id_identity_mention_is_partial_not_satisfied(self):
+        result = evaluate_fact_anchor_requirements(
+            question_text="Sliding-stem valve와 rotary valve의 구조, 장단점과 적용 조건을 비교하시오.",
+            answer_text="Butterfly 형식도 있다.",
+            topic_ids=["control_valve_types_globe_rotary_body_actuator_selection"],
+        )
+        row = next(
+            item for item in result["requirements"]
+            if item["requirement_id"] == "butterfly_compact_high_capacity"
+        )
+        self.assertEqual(row["status"], "PARTIAL")
+        self.assertIn("butterfly", row["matched_identity_tokens"])
+
     def test_augmentation_preserves_wrong_machine_requirement(self):
         base = {
             "requirements": [{

@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-10): Gemini-off 48건 전체 체인은 question-only routing recall 100%, known-fatal 16/16, score coverage 100%, 허용구간 적중률 93.75%, 평균 범위 이탈 0.14125점, known-overgrading 0건으로 Authority Gate `READY`입니다. Stage55는 Telegram 운영 회귀에서 확인한 전체-anchor 범위 확장, 제곱근 점수 부풀림과 키워드형 D/E를 질문 범위 fail-closed, 중요도 가중 점수 및 관계 evidence로 교체했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-12): Gemini-off 48건 전체 체인은 question-only routing recall 100%, known-fatal 16/16, score coverage 100%, 허용구간 적중률 85.42%, 평균 범위 이탈 0.392708점, known-overgrading 0건으로 Authority Gate `READY`입니다. Stage56은 Telegram 재채점 회귀에서 확인한 질문별 요구수 변동, 필수 요구 누락 합격, 근거 없는 D/E와 fatal 답안의 13점 강제 floor를 제거했습니다. 과거 점수 모양을 유지하기보다 실제 획득 evidence만 점수화해 적중률은 낮아졌지만 correctness Gate는 유지됩니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 
@@ -65,7 +65,7 @@
 | 결정론적 Authority Gate | `READY` (Gemini-off 48건) |
 | Topic routing recall / score coverage | 100% / 100% |
 | Known Fatal 재현율 / false positive | 100% (16/16) / 0건 |
-| 점수 허용구간 적중률 / 평균 이탈 | 93.75% / 0.14125점 |
+| 점수 허용구간 적중률 / 평균 이탈 | 85.42% / 0.392708점 |
 | Reviewed Golden / covered Topic | 48건 / 31개 |
 | normal·adverse·fatal 3-lane 완료 | 6 Topic |
 

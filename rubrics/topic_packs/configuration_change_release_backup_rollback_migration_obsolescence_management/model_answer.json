@@ -5,6 +5,23 @@
   "question_type": "IMPLEMENTATION_EVALUATION",
   "expected_question_patterns": [
     {
+      "id": "sw06_qp_configuration_and_change_management",
+      "pattern": "산업용 제어시스템의 형상관리와 변경관리 절차를 설명하시오.",
+      "required_anchor_ids": [
+        "sw06_configuration_item_scope",
+        "sw06_configuration_identification_relationship",
+        "sw06_baseline_approved_reference",
+        "sw06_version_control_status_accounting",
+        "sw06_as_built_consistency",
+        "sw06_moc_trigger_and_scope",
+        "sw06_change_request_problem_objective",
+        "sw06_impact_analysis_multidisciplinary",
+        "sw06_risk_based_approval_authority",
+        "sw06_change_implementation_plan",
+        "sw06_emergency_change_retrospective_control"
+      ]
+    },
+    {
       "id": "sw06_qp_configuration_management",
       "pattern": "형상관리, CI, Baseline, Version control과 As-built consistency를 묻는 문제",
       "required_anchor_ids": [

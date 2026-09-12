@@ -23,11 +23,18 @@ def _pack_candidates(question_text: str) -> list[dict[str, Any]]:
     for path in sorted((ROOT / "rubrics/topic_packs").glob("*/model_answer.json")):
         payload = json.loads(path.read_text(encoding="utf-8"))
         patterns = []
+        pattern_rows: list[dict[str, Any]] = []
         for value in payload.get("expected_question_patterns", []):
-            patterns.append(str(
+            pattern = str(
                 value.get("pattern") or value.get("question") or ""
                 if isinstance(value, dict) else value
-            ))
+            )
+            patterns.append(pattern)
+            if isinstance(value, dict):
+                pattern_rows.append({
+                    "pattern": pattern,
+                    "routing_exclusive": bool(value.get("routing_exclusive")),
+                })
         patterns.extend(str(value) for value in payload.get("question_examples", []))
         pattern_score = max(
             [_question_similarity(question_text, value) for value in patterns] or [0.0]
@@ -45,6 +52,12 @@ def _pack_candidates(question_text: str) -> list[dict[str, Any]]:
             "topic_id": path.parent.name,
             "score": round(max(pattern_score, title_score), 6),
             "alias_hits": alias_hits,
+            "exclusive_pattern_score": round(max(
+                [
+                    _question_similarity(question_text, row["pattern"])
+                    for row in pattern_rows if row["routing_exclusive"]
+                ] or [0.0]
+            ), 6),
         })
     return sorted(rows, key=lambda row: (-row["score"], row["topic_id"]))
 
@@ -55,6 +68,26 @@ def route_question_topics(question_text: str) -> dict[str, Any]:
         question_text, "", question_type_eval=detect_question_type(question_text),
     )
     candidates = _pack_candidates(question_text)
+    exclusive = [
+        row for row in candidates if row["exclusive_pattern_score"] >= 0.2
+    ]
+    if exclusive:
+        selected = max(
+            exclusive,
+            key=lambda row: (row["exclusive_pattern_score"], row["score"], row["topic_id"]),
+        )
+        return {
+            "version": VERSION,
+            "marker": MARKER,
+            "engine": "deterministic",
+            "provider_calls": 0,
+            "answer_text_used": False,
+            "status": "ROUTED",
+            "source": "exclusive_question_contract",
+            "primary_topic_id": selected["topic_id"],
+            "topic_ids": [selected["topic_id"]],
+            "candidates": candidates[:3],
+        }
     primary = str((legacy.get("primary_reference") or {}).get("topic_id") or "")
     source = "question_model_answer_router"
     fallback_primary = ""

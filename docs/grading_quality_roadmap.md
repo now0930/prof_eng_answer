@@ -8,10 +8,10 @@
 |---|---|---|
 | 채점 구조·점수 소유권 | 구현 완료, 지속 회귀 | [`grading_architecture.md`](grading_architecture.md) |
 | Canonical demand ledger와 공개 coverage summary | 구현 완료, 지속 회귀 | `evaluation_ledger.py`, SIL output/coverage tests |
-| 전문가 정확도 Gate | Deterministic 48건 `READY`: score in-range 93.75%, 평균 이탈 0.14125점, known-overgrading 0 | [`accuracy_release_gate.md`](accuracy_release_gate.md), Stage55 deterministic replay artifact |
+| 전문가 정확도 Gate | Deterministic 48건 `READY`: score in-range 85.42%, 평균 이탈 0.392708점, known-overgrading 0 | [`accuracy_release_gate.md`](accuracy_release_gate.md), Stage56 deterministic replay artifact |
 | 요구상태 안정성 Gate | 30건 2회 exact replay `STABLE`, provider call 0 | `reports/deterministic_stability_stage38.json` |
 | Topic Pack authoring·검증 | `ab94b69`에서 범용·대상 기반 흐름 적용 | [`topic_pack_workflow.md`](topic_pack_workflow.md) |
-| Topic Atomicity | 78 Topic, 차단 오류 0, scoped question contract 698개, 검토 경고 38 | [`topic_pack_atomicity.md`](topic_pack_atomicity.md) |
+| Topic Atomicity | 78 Topic, 차단 오류 0, scoped question contract 706개, 검토 경고 28 | [`topic_pack_atomicity.md`](topic_pack_atomicity.md) |
 | Runtime provenance | container parity·production replay·Telegram raw/final exact match 완료 | [`operation_runbook.md`](operation_runbook.md), `reports/deterministic_endpoint_consistency_stage41.json` |
 | 결정론적 채점 전환 | 운영 완료: routing 100%·fatal 9/9·score 30/30·LLM verdict authority 0 | [`deterministic_grading_transition.md`](deterministic_grading_transition.md) |
 
@@ -118,7 +118,7 @@ manifest의 `issue_close_eligible=true`는 기술 Gate가 모두 통과했다는
 
 외부 LLM 제거는 provider 교체가 아니라 판정 소유권 이전이다. canonical evidence, 전역 ontology, Topic Pack machine contract, deterministic evaluator, fatal 전파, 점수와 verdict consistency 순으로 이전한다. LLM은 미해결 자연어의 evidence 추출만 보조할 수 있다.
 
-현재 quantity/dimension과 engineering relation ontology, Topic Pack machine contract, 질문-only deterministic router, Fact Anchor evidence, A/B/C/D/E score evidence와 권한 제거 Gate가 구현됐다. Stage55 Gemini-off 48건은 Topic routing recall 100%, fatal 16/16, score coverage 100%, 허용구간 적중률 93.75%, 평균 이탈 0.14125점, known-overgrading 0건으로 offline Gate `READY`다. 질문 패턴 매칭 실패 시 전체 anchor를 활성화하지 않고 bounded derived scope 또는 `scope_unresolved`로 닫으며, B/C는 중요도 가중 coverage·correctness를 분리하고 D/E는 같은 절 안의 공학 관계를 근거로 계산한다. Stage39~41에서 production entrypoint, container parity/replay, 실제 Telegram endpoint와 persisted raw/final exact match까지 완료했다. 운영은 deterministic primary이며 외부 LLM은 requirement·fatal·score·verdict 판정권을 갖지 않는다.
+현재 quantity/dimension과 engineering relation ontology, Topic Pack machine contract, 질문-only deterministic router, Fact Anchor evidence, A/B/C/D/E score evidence와 권한 제거 Gate가 구현됐다. Stage56 Gemini-off 48건은 Topic routing recall 100%, fatal 16/16, score coverage 100%, 허용구간 적중률 85.42%, 평균 이탈 0.392708점, known-overgrading 0건으로 offline Gate `READY`다. 질문 패턴 매칭 실패 시 전체 anchor를 활성화하지 않고 bounded derived scope 또는 `scope_unresolved`로 닫으며, B/C는 중요도 가중 coverage·correctness를 분리하고 D/E는 요구사항에 연결된 기술 evidence가 있을 때만 계산한다. 질문이 명시한 합격 필수 요소는 `pass_required_anchor_ids`가 소유하고, fatal은 점수를 올리는 floor 없이 획득점에 ceiling만 적용한다. Stage39~41에서 production entrypoint, container parity/replay, 실제 Telegram endpoint와 persisted raw/final exact match까지 완료했다. 운영은 deterministic primary이며 외부 LLM은 requirement·fatal·score·verdict 판정권을 갖지 않는다.
 
 구현 순서, mutation 범위와 단계별 완료 조건은 [`deterministic_grading_completion_plan.md`](deterministic_grading_completion_plan.md)가 소유한다.
 
@@ -127,14 +127,14 @@ Issue 본문은 현재 상태만 유지한다. 긴 실행 로그는 comment 또�
 ## 9. 전환 완료 후 개발 방향
 
 Topic Pack의 일괄 정리·확장은 2026-09-09 기준으로 종료한다. 현재 기준선은 78 Topic,
-Atomicity 차단 오류 0, 문자열 질문 계약 0, 검토 경고 38이다. 경고만으로 Pack을
+Atomicity 차단 오류 0, 문자열 질문 계약 0, 검토 경고 28이다. 경고만으로 Pack을
 분리하지 않으며 이후 Topic 수정은 실제 routing·scope·채점 오류가 재현된 경우에만
 수행한다. 다음 개발 owner는 Topic inventory가 아니라 canonical claim과 요구상태
 판정 정확도다.
 
 ### 완료 — Question scope와 Topic Atomicity 기준선
 
-- 698개 질문을 객체형 `pattern + required_anchor_ids` 계약으로 통일했다.
+- 706개 질문을 객체형 `pattern + required_anchor_ids` 계약으로 통일했다.
 - P0 owner 오염 4건을 복구하고 Atomicity Gate를 release에 연결했다.
 - Nyquist/Routh alias 경계는 정상·비교·방법 미지정·답안 오염 fixture로 고정했다.
 - 남은 경고는 실제 기출·routing·Golden 증거가 생길 때만 개별 처리한다.
@@ -193,6 +193,23 @@ Stage48에서는 잔여 점수 이탈 4건이 모두 경미한 과대평가임�
 추가하지 않고 심화 자격 미충족 답안의 상한을 18.5점으로 정렬했으며, 일반적인
 구조·판단·연결 키워드만으로는 24점을 초과하지 못하게 했다. 25점 부여는 향후 별도의
 결정론적 exceptional-evidence contract가 실제 심화 근거를 증명할 때만 허용한다.
+
+Stage56에서는 Telegram 전체 재채점에서 드러난 범용 회귀를 고정했다. 동등한 문제
+표현이 1·3·9개 요구로 흔들리던 경우는 `routing_exclusive` 질문 계약으로 단일 owner와
+동일 scope를 보장한다. 문제에서 반드시 요구한 요소는 `pass_required_anchor_ids`가
+하나라도 비면 15점 합격을 차단한다. D/E는 인식된 요구 evidence가 전혀 없으면 0점이며,
+요구 충족률을 넘어서 점수를 만들 수 없다. Fatal 답안을 일정한 13점으로 올리던
+`SUBSTANTIVE_FATAL_SCORE_FLOOR`는 제거하고 ceiling·no-pass 불변조건만 유지한다.
+
+Legacy gate migration 기록은 다음과 같다.
+
+- `OLD_GATE`: fatal 답안의 고정 13점 또는 과거 최소 점수구간 유지
+- `GATE_CLASSIFICATION`: `LEGACY_LLM_IMPLEMENTATION_GATE`
+- `PROTECTED_INVARIANT`: fatal 검출, 합격 차단, 최대점 ceiling
+- `WHY_OLD_GATE_IS_OBSOLETE`: 구조와 분량만으로 fatal 답안을 상향해 실제 획득 evidence를 왜곡
+- `REPLACEMENT_GATE`: 획득점 계산 후 fatal ceiling과 verdict consistency만 적용
+- `EVIDENCE_OF_EQUIVALENT_OR_STRONGER_PROTECTION`: fatal 16/16, false positive 0,
+  known-overgrading 위반 0, 반복성 100%, score/verdict consistency PASS
 
 ### P0 — 요구상태 Evaluator
 

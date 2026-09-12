@@ -22,7 +22,6 @@ HIGH_SCORE_EVIDENCE_CEILING_RATIO = 0.7996
 MINIMUM_NONEMPTY_ATTEMPT_SCORE = 4.5
 MINIMUM_EVIDENCED_ATTEMPT_SCORE = 7.0
 TECHNICALLY_ADEQUATE_SCORE_FLOOR = 15.0
-SUBSTANTIVE_FATAL_SCORE_FLOOR = 13.0
 _SELF_DECLARED_GAP = re.compile(
     r"(?:설명|제시|검토|작성|포함)(?:하|되)?지\s*못|누락(?:했|되|함)|모르(?:겠|는)"
 )
@@ -58,6 +57,7 @@ def _scoring_groups(requirements: list[Mapping[str, Any]]) -> list[dict[str, Any
                 (str(row.get("importance") or "normal").casefold() for row in rows),
                 key=lambda value: _IMPORTANCE_WEIGHT.get(value, 1.0),
             ),
+            "pass_required": any(bool(row.get("pass_required")) for row in rows),
         })
     return output
 
@@ -111,7 +111,7 @@ def calculate_deterministic_score(
     score_evidence = (
         evaluate_score_evidence(
             answer_text,
-            technical_evidence_texts=(technical_evidence_texts or None),
+            technical_evidence_texts=technical_evidence_texts,
         ) if answer_text is not None else None
     )
     if score_evidence is None:
@@ -129,8 +129,14 @@ def calculate_deterministic_score(
             "A_structure": score_evidence["structure"]["score"],
             "B_requirement_completeness": round(6.0 * requirement_ratio, 6),
             "C_fact_correctness": round(8.0 * correctness_ratio, 6),
-            "D_engineering_judgment": score_evidence["engineering_judgment"]["score"],
-            "E_linkage": score_evidence["linkage"]["score"],
+            "D_engineering_judgment": min(
+                score_evidence["engineering_judgment"]["score"],
+                round(6.0 * requirement_ratio, 6),
+            ),
+            "E_linkage": min(
+                score_evidence["linkage"]["score"],
+                round(2.0 * requirement_ratio, 6),
+            ),
         }
         raw_score = sum(breakdown.values())
     score_before_floors = raw_score
@@ -154,15 +160,8 @@ def calculate_deterministic_score(
     )
     if technically_adequate_floor_applied:
         raw_score = TECHNICALLY_ADEQUATE_SCORE_FLOOR
-    substantive_fatal_floor_applied = bool(
-        requirement_evaluation.get("fatal_or_core_error")
-        and score_evidence is not None
-        and score_evidence["structure"]["score"] >= 3.0
-        and score_evidence["volume"]["ascii_equivalent_count"] >= 600
-        and raw_score < SUBSTANTIVE_FATAL_SCORE_FLOOR
-    )
-    if substantive_fatal_floor_applied:
-        raw_score = SUBSTANTIVE_FATAL_SCORE_FLOOR
+    # Fatal findings cap a score; they never create credit or a minimum score.
+    substantive_fatal_floor_applied = False
     ceilings = [
         float(row["recommended_ceiling"])
         for row in requirement_evaluation.get("findings", [])
@@ -175,10 +174,6 @@ def calculate_deterministic_score(
     # perfect score.  Reserve the final point until a future deterministic
     # exceptional-evidence contract owns that decision.
     all_ceilings.append(float(max_score) * MAXIMUM_AUTOMATIC_SCORE_RATIO)
-    minimum_satisfied_ratio_for_pass = MINIMUM_SATISFIED_RATIO_FOR_PASS
-    pass_evidence_eligible = satisfied_ratio >= minimum_satisfied_ratio_for_pass
-    if not pass_evidence_eligible:
-        all_ceilings.append(float(max_score) * PASS_EVIDENCE_CEILING_RATIO)
     missing_ratio = sum(
         weight(row) for row in scoring_groups if row["status"] == "MISSING"
     ) / total_weight
@@ -187,6 +182,18 @@ def calculate_deterministic_score(
         row["importance"] == "core" and row["status"] in {"WRONG", "MISSING"}
         for row in scoring_groups
     )
+    pass_required_gap_count = sum(
+        row["pass_required"] and row["status"] != "SATISFIED"
+        for row in scoring_groups
+    )
+    minimum_satisfied_ratio_for_pass = MINIMUM_SATISFIED_RATIO_FOR_PASS
+    pass_evidence_eligible = bool(
+        satisfied_ratio >= minimum_satisfied_ratio_for_pass
+        and wrong_count == 0
+        and pass_required_gap_count == 0
+    )
+    if not pass_evidence_eligible:
+        all_ceilings.append(float(max_score) * PASS_EVIDENCE_CEILING_RATIO)
     high_score_evidence_eligible = bool(
         satisfied_ratio >= HIGH_SCORE_MINIMUM_SATISFIED_RATIO
         and missing_ratio <= HIGH_SCORE_MAXIMUM_MISSING_RATIO
@@ -252,9 +259,12 @@ def calculate_deterministic_score(
         "missing_requirement_ratio": round(missing_ratio, 6),
         "wrong_requirement_count": wrong_count,
         "core_requirement_gap_count": core_requirement_gap_count,
+        "pass_required_gap_count": pass_required_gap_count,
         "no_satisfied_nonfatal_ceiling_applied": no_satisfied_nonfatal_ceiling_applied,
         "verdict": verdict,
         "external_llm_required_for_verdict": False,
-        "official_pass_met": bool(not fatal and total >= max_score * 0.6),
+        "official_pass_met": bool(
+            not fatal and pass_evidence_eligible and total >= max_score * 0.6
+        ),
         "high_score_met": bool(not fatal and total >= max_score * 0.8),
     }

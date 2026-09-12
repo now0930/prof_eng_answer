@@ -44,7 +44,10 @@ class SilTargetCanonicalPromotionTests(unittest.TestCase):
             answer_text=self.fixture["original_answer"],
         )
         rows = topic_rows(grade)
-        self.assertEqual(grade["total_score"], 13.0)
+        self.assertLess(grade["total_score"], 13.0)
+        self.assertFalse(
+            grade["deterministic_score"]["substantive_fatal_floor_applied"]
+        )
         self.assertFalse(grade["official_pass_met"])
         self.assertEqual(
             {key: rows[key]["status"] for key in (

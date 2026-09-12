@@ -672,7 +672,8 @@
         "공기압",
         "직선 force",
         "spring",
-        "stroke"
+        "fail-open",
+        "fail-close"
       ],
       "accepted_explanations": [
         "Diaphragm 면적과 압력으로 force를 만들고 spring이 반대 방향 힘을 제공한다고 설명한다.",

@@ -121,6 +121,11 @@
         "hydraulic_actuator_force_and_stored_energy_fail_safe",
         "actuator_output_matches_valve_motion",
         "body_actuator_selection_multi_criteria"
+      ],
+      "pass_required_anchor_ids": [
+        "spring_diaphragm_actuator_force_and_fail_safe",
+        "electric_actuator_motor_gear_control",
+        "hydraulic_actuator_force_and_stored_energy_fail_safe"
       ]
     }
   ],

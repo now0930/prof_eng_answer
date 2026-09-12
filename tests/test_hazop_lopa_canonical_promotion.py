@@ -68,8 +68,14 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
             if row["requirement_id"] in CANONICAL_IDS
         }
         expected_range = case["expected"]["total_range"]
-        self.assertGreaterEqual(grade["total_score"], expected_range["min"])
         self.assertLessEqual(grade["total_score"], expected_range["max"])
+        self.assertEqual(
+            grade["total_score"],
+            grade["deterministic_score"]["score_before_floors"],
+        )
+        self.assertFalse(
+            grade["deterministic_score"]["substantive_fatal_floor_applied"]
+        )
         self.assertFalse(grade["official_pass_met"])
         self.assertEqual(grade["provider_calls"], 0)
         self.assertEqual(grade["canonical_promotion"]["comparison_count"], 9)

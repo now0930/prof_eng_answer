@@ -18,6 +18,12 @@ STOP_TOKENS = {
     "설명", "정의", "적용", "확인", "포함", "구분", "평가", "검증", "필요",
     "the", "and", "for", "with", "from", "that", "this", "into", "shall",
 }
+GENERIC_ANCHOR_ID_TOKENS = {
+    "anchor", "control", "valve", "system", "definition", "relationship",
+    "selection", "requirement", "management", "process", "scope", "and",
+    "with", "from", "into", "sw01", "sw02", "sw03", "sw04", "sw05",
+    "sw06", "sw07", "sw08", "sw09", "sw10",
+}
 
 
 def _normalize(value: str) -> str:
@@ -45,6 +51,15 @@ def _anchor_tokens(anchor: dict[str, Any]) -> list[str]:
         if len(token) >= 2 and token not in STOP_TOKENS and token not in result:
             result.append(token)
     return result
+
+
+def _anchor_identity_tokens(anchor: dict[str, Any]) -> list[str]:
+    """Return topic-local identity hints; a hit proves mention, not correctness."""
+    anchor_id = str(anchor.get("anchor_id") or anchor.get("id") or "").casefold()
+    return [
+        token for token in re.findall(r"[0-9a-z]+", anchor_id)
+        if len(token) >= 3 and token not in GENERIC_ANCHOR_ID_TOKENS
+    ]
 
 
 def _tokens(value: str) -> set[str]:
@@ -158,6 +173,10 @@ def _required_anchor_ids(topic_path: Path, question_text: str) -> tuple[set[str]
         "mode": "explicit_question_contract",
         "pattern": str(selected.get("pattern") or selected.get("question") or ""),
         "similarity": round(similarity, 6),
+        "pass_required_anchor_ids": [
+            str(anchor_id) for anchor_id in selected.get("pass_required_anchor_ids", [])
+            if str(anchor_id).strip()
+        ],
     }
 
 
@@ -191,6 +210,7 @@ def evaluate_fact_anchor_requirements(
             continue
         payload = json.loads(path.read_text(encoding="utf-8"))
         required_ids, selection = _required_anchor_ids(topic_path, question_text)
+        pass_required_ids = set(selection.get("pass_required_anchor_ids") or [])
         selections.append({"owner_topic_id": topic_id, **selection})
         if selection["mode"] == "scope_unresolved":
             requirements.append({
@@ -215,6 +235,10 @@ def evaluate_fact_anchor_requirements(
             matched_tokens = [
                 token for token in anchor_tokens if token in normalized_answer
             ]
+            matched_identity_tokens = [
+                token for token in _anchor_identity_tokens(anchor)
+                if token in normalized_answer
+            ]
             token_coverage = (
                 len(matched_tokens) / len(anchor_tokens) if anchor_tokens else 0.0
             )
@@ -227,6 +251,7 @@ def evaluate_fact_anchor_requirements(
             elif (
                 identity_term_matched
                 or len(matched) >= 2
+                or bool(matched_identity_tokens)
                 or (len(matched_tokens) >= 3 and token_coverage >= 0.25)
             ):
                 status = "PARTIAL"
@@ -240,8 +265,10 @@ def evaluate_fact_anchor_requirements(
                 "status": status,
                 "evidence_mode": "lexical_fact_anchor",
                 "importance": str(anchor.get("importance") or "normal"),
+                "pass_required": anchor_id in pass_required_ids,
                 "matched_terms": matched,
                 "matched_concept_tokens": matched_tokens,
+                "matched_identity_tokens": matched_identity_tokens,
                 "concept_token_coverage": round(token_coverage, 6),
                 "required_term_count": len(terms),
                 "match_threshold": threshold,
@@ -310,6 +337,7 @@ def augment_requirement_evaluation(
         enriched_base.append({
             **row,
             "importance": lexical.get("importance", row.get("importance", "normal")),
+            "pass_required": lexical.get("pass_required", row.get("pass_required", False)),
             "source_span": lexical.get("source_span"),
             "evidence_text": lexical.get("evidence_text", ""),
         })
