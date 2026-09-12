@@ -35,12 +35,12 @@ class DeterministicTopicRouterTests(unittest.TestCase):
             result["topic_ids"],
         )
 
-    def test_specific_v_model_alias_owns_fallback_route(self):
+    def test_specific_v_model_question_uses_exclusive_contract(self):
         result = route_question_topics(
             "제어 소프트웨어 개발 수명 주기(V-Model)의 단위 시험, 통합 시험, "
             "시스템 시험과 SIL 달성을 위한 검증 방안을 설명하시오."
         )
-        self.assertEqual(result["source"], "specific_question_alias")
+        self.assertEqual(result["source"], "exclusive_question_contract")
         self.assertEqual(
             result["primary_topic_id"],
             "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",

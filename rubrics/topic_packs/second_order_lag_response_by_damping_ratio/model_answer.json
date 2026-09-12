@@ -14,6 +14,9 @@
         "so2_critical_damping_response",
         "so2_overdamped_response",
         "so2_zero_negative_damping"
+      ],
+      "pass_required_anchor_ids": [
+        "so2_zero_negative_damping"
       ]
     },
     {

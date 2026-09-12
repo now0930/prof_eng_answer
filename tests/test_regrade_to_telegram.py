@@ -7,6 +7,7 @@ from pathlib import Path
 from scripts.regrade_to_telegram import (
     build_copyable_submission,
     answer_content_hash,
+    canonical_identity_text,
     completed_sources,
     create_regrade_session,
     current_commit,
@@ -39,6 +40,32 @@ class RegradeToTelegramTests(unittest.TestCase):
             duplicates[0]["content_sha256"],
             answer_content_hash("동일 답안 내용"),
         )
+
+    def test_canonical_dedupe_ignores_transport_markers_and_terminal_punctuation(self):
+        first = "문제: 시험\n답안: Fub = ΔP * A.[span_0](start_span)"
+        second = "문제 시험 답안 Fub = ΔP * A [span_0](end_span)"
+        self.assertEqual(canonical_identity_text(first), canonical_identity_text(second))
+        self.assertEqual(answer_content_hash(first), answer_content_hash(second))
+
+    def test_canonical_dedupe_ignores_markdown_emphasis_and_bullets(self):
+        first = "- **PFDavg**는 저수요 모드이다."
+        second = "PFDavg는 저수요 모드이다"
+        self.assertEqual(canonical_identity_text(first), canonical_identity_text(second))
+        self.assertEqual(answer_content_hash(first), answer_content_hash(second))
+
+    def test_canonical_dedupe_preserves_formula_direction(self):
+        self.assertNotEqual(
+            answer_content_hash("PFD = 1/RRF"),
+            answer_content_hash("PFD = RRF/1"),
+        )
+
+    def test_dedupe_can_be_disabled(self):
+        sources = [("a", "same", None), ("b", "same", None)]
+        unique, duplicates = deduplicate_sources(
+            sources, lambda value: {"normalized_text": value}, mode="none",
+        )
+        self.assertEqual(unique, sources)
+        self.assertEqual(duplicates, [])
 
     def test_commit_identity_works_without_git_metadata(self):
         with tempfile.TemporaryDirectory() as temp:

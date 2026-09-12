@@ -197,11 +197,28 @@ def _object_before_subject_allowed(
     predicate_id: str,
 ) -> bool:
     """Recognize Korean ``object에는 subject를 적용`` word order."""
-    if predicate_id != "applies_to" or object_span[0] >= subject_span[0]:
+    if object_span[0] >= subject_span[0]:
         return False
     normalized = _normalized(text)
     object_tail = normalized[object_span[1]:subject_span[0]]
     subject_tail = normalized[subject_span[1]:subject_span[1] + 8]
+    if predicate_id == "mapped_from":
+        return bool(
+            re.search(r"(?:구간)?(?:으)?로", object_tail)
+            and re.match(r"\s*(?:은|는|이|가|을|를)", subject_tail)
+        )
+    if predicate_id == "derived_from":
+        return bool(
+            re.search(r"(?:적용\s*후|로부터|기반|이용)", object_tail)
+            and re.match(r"\s*(?:은|는|이|가|을|를)", subject_tail)
+        )
+    if predicate_id == "allocated_to":
+        return bool(
+            re.search(r"(?:에|에게)(?:는)?", object_tail)
+            and re.match(r"\s*(?:목표)?\s*(?:은|는|이|가|을|를)", subject_tail)
+        )
+    if predicate_id != "applies_to":
+        return False
     return bool(
         re.search(r"(?:에|에서)(?:는)?", object_tail)
         and re.match(r"\s*(?:은|는|이|가|을|를)", subject_tail)

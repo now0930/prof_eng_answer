@@ -127,11 +127,13 @@
       {"fact_id": "initiating_frequency_uses_reliability_data", "subject": "initiating_event_frequency", "predicate": "derived_from", "object": "operating_reliability_data", "polarity": "positive"},
       {"fact_id": "ipl_requires_independent_verifiable_protection", "subject": "independent_protection_layer", "predicate": "qualifies_as", "object": "independent_verifiable_protection", "polarity": "positive"},
       {"fact_id": "residual_frequency_uses_initiator_modifiers_ipls", "subject": "residual_frequency", "predicate": "derived_from", "object": "initiating_modifiers_ipls", "polarity": "positive"},
+      {"fact_id": "residual_frequency_uses_existing_ipls", "subject": "residual_frequency", "predicate": "derived_from", "object": "independent_protection_layer", "polarity": "positive"},
       {"fact_id": "required_rrf_uses_residual_tolerable_ratio", "subject": "required_rrf", "predicate": "derived_by_ratio", "object": "residual_tolerable_frequency_ratio", "polarity": "positive"},
       {"fact_id": "target_pfd_uses_inverse_rrf", "subject": "target_probability", "predicate": "derived_by_ratio", "object": "inverse_required_rrf", "polarity": "positive"},
       {"fact_id": "target_pfd_uses_event_frequency_ratio", "subject": "target_probability", "predicate": "derived_by_ratio", "object": "event_frequencies", "polarity": "positive"},
       {"fact_id": "target_sil_maps_integrity_band", "subject": "target_sil", "predicate": "mapped_from", "object": "sil_integrity_band", "polarity": "positive"},
       {"fact_id": "sif_failure_contains_sensor_logic_final", "subject": "overall_sif_failure", "predicate": "composed_of", "object": "sensor_logic_final_element", "polarity": "positive"},
+      {"fact_id": "sis_architecture_contains_sensor_logic_final", "subject": "safety_instrumented_system", "predicate": "composed_of", "object": "sensor_logic_final_element", "polarity": "positive"},
       {"fact_id": "sif_boundary_defines_safe_constraints", "subject": "sif_functional_boundary", "predicate": "defines", "object": "safe_function_constraints", "polarity": "positive"},
       {"fact_id": "lopa_result_handed_to_srs", "subject": "lopa_result", "predicate": "handed_off_to", "object": "srs_inputs", "polarity": "positive"}
     ],
@@ -139,11 +141,11 @@
       {"requirement_id": "hazop_lopa_lopa_scenario_boundary", "required_fact_ids": ["scenario_has_initiating_event", "scenario_has_consequence_endpoint"], "minimum_match_count": 2},
       {"requirement_id": "hazop_lopa_initiating_event_frequency", "required_fact_ids": ["initiating_frequency_represents_cause_occurrence", "initiating_frequency_uses_reliability_data"], "minimum_match_count": 2},
       {"requirement_id": "hazop_lopa_ipl_definition", "required_fact_ids": ["ipl_requires_independent_verifiable_protection"], "minimum_match_count": 1},
-      {"requirement_id": "hazop_lopa_residual_frequency_after_existing_ipls", "required_fact_ids": ["residual_frequency_uses_initiator_modifiers_ipls"], "minimum_match_count": 1},
+      {"requirement_id": "hazop_lopa_residual_frequency_after_existing_ipls", "required_fact_ids": ["residual_frequency_uses_initiator_modifiers_ipls", "residual_frequency_uses_existing_ipls"], "minimum_match_count": 1},
       {"requirement_id": "hazop_lopa_required_rrf", "required_fact_ids": ["required_rrf_uses_residual_tolerable_ratio"], "minimum_match_count": 1},
-      {"requirement_id": "hazop_lopa_pfdavg_rrf_relation", "required_fact_ids": ["target_pfd_uses_inverse_rrf", "target_pfd_uses_event_frequency_ratio"], "minimum_match_count": 2},
+      {"requirement_id": "hazop_lopa_pfdavg_rrf_relation", "required_fact_ids": ["target_pfd_uses_inverse_rrf", "target_pfd_uses_event_frequency_ratio"], "minimum_match_count": 1},
       {"requirement_id": "hazop_lopa_sil_band_mapping", "required_fact_ids": ["target_sil_maps_integrity_band"], "minimum_match_count": 1},
-      {"requirement_id": "hazop_lopa_sif_allocation_boundary", "required_fact_ids": ["sif_failure_contains_sensor_logic_final", "sif_boundary_defines_safe_constraints"], "minimum_match_count": 2},
+      {"requirement_id": "hazop_lopa_sif_allocation_boundary", "required_fact_ids": ["sif_failure_contains_sensor_logic_final", "sis_architecture_contains_sensor_logic_final", "sif_boundary_defines_safe_constraints"], "minimum_match_count": 2},
       {"requirement_id": "hazop_lopa_srs_handoff", "required_fact_ids": ["lopa_result_handed_to_srs"], "minimum_match_count": 1}
     ],
     "invariant_bindings": []

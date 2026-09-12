@@ -104,6 +104,17 @@
         "control_valve_unbalance_force_effective_area_approximation",
         "control_valve_rotary_valve_torque_boundary"
       ]
+    },
+    {
+      "pattern": "공압식 구동기 선정 시 밸브의 불평형력과 마찰력 개념 및 Fail-Safe 스프링 설계기준을 설명하시오.",
+      "intent": "불평형력·마찰력·Fail-Safe 스프링 힘의 통합 선정",
+      "routing_exclusive": true,
+      "required_anchor_ids": [
+        "control_valve_unbalance_force_effective_area_approximation",
+        "control_valve_packing_friction",
+        "control_valve_fail_close_force_balance",
+        "control_valve_fail_open_force_balance"
+      ]
     }
   ],
   "recommended_outline": [

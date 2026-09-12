@@ -5,6 +5,26 @@ from topic_machine_contract import TopicMachineContractError, validate_topic_mac
 
 
 class MachineContractContradictionPolicyTests(unittest.TestCase):
+    def test_open_world_alternate_source_is_not_automatically_wrong(self):
+        result = evaluate_deterministic_requirements(
+            claims=[{
+                "claim_id": "combined_sil_inputs",
+                "subject": "initiating_event_frequency",
+                "predicate": "derived_from",
+                "object": "independent_protection_layer",
+                "polarity": "positive",
+                "assertion_context": "asserted",
+            }],
+            invariant_codes=[],
+            topic_ids=["hazop_lopa_ipl_risk_reduction_sil_target_allocation"],
+            extraction_complete=True,
+        )
+        row = next(
+            item for item in result["requirements"]
+            if item["requirement_id"] == "hazop_lopa_initiating_event_frequency"
+        )
+        self.assertEqual(row["status"], "PARTIAL")
+
     def test_relation_conflict_can_own_deterministic_fatal(self):
         result = evaluate_deterministic_requirements(
             claims=[{

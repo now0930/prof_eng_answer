@@ -12,6 +12,7 @@ from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machin
 VERSION = "deterministic_requirement_evaluator_v1"
 MARKER = "DETERMINISTIC_REQUIREMENT_EVALUATION_V1"
 ROOT = Path(__file__).resolve().parent
+CLOSED_WORLD_RELATION_PREDICATES = {"applies_to", "equivalent_to"}
 
 
 def _topic_anchor_ids(topic_id: str) -> set[str]:
@@ -162,13 +163,20 @@ def evaluate_deterministic_requirements(
                     if _key(claim)[:3] == fact_key[:3]
                     and _key(claim)[3] != fact_key[3]
                 ]
-                relation_conflict = [
-                    (index, claim) for index, claim in candidates
-                    if _key(claim)[:2] == fact_key[:2]
-                    and _key(claim)[2] != fact_key[2]
-                    and _key(claim)[3] == fact_key[3]
-                    and _key(claim) not in required_fact_keys
-                ]
+                relation_conflict = (
+                    [
+                        (index, claim) for index, claim in candidates
+                        if _key(claim)[:2] == fact_key[:2]
+                        and _key(claim)[2] != fact_key[2]
+                        and _key(claim)[3] == fact_key[3]
+                        and _key(claim) not in required_fact_keys
+                    ]
+                    if (
+                        rule.get("contradiction_classification")
+                        or fact_key[1] in CLOSED_WORLD_RELATION_PREDICATES
+                    )
+                    else []
+                )
                 partial = [
                     (index, claim) for index, claim in candidates
                     if _key(claim)[0] == fact_key[0]

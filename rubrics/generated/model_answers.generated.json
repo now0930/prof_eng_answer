@@ -1,5 +1,5 @@
 {
-  "version": "sha256-9834889848fb60b9ddec9a02468d6fe2859d643acf4efb5cda5f0870755912c3-generated-topic-pack-model-answers",
+  "version": "sha256-c23672ada937a92678c25ca9bbffe39df8db6f6afc800751ad9586089594e55f-generated-topic-pack-model-answers",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.model_answers.v1",
   "source": "rubrics/topic_packs/*/model_answer.json",
@@ -4567,6 +4567,17 @@
             "control_valve_unbalance_force_effective_area_approximation",
             "control_valve_rotary_valve_torque_boundary"
           ]
+        },
+        {
+          "pattern": "공압식 구동기 선정 시 밸브의 불평형력과 마찰력 개념 및 Fail-Safe 스프링 설계기준을 설명하시오.",
+          "intent": "불평형력·마찰력·Fail-Safe 스프링 힘의 통합 선정",
+          "routing_exclusive": true,
+          "required_anchor_ids": [
+            "control_valve_unbalance_force_effective_area_approximation",
+            "control_valve_packing_friction",
+            "control_valve_fail_close_force_balance",
+            "control_valve_fail_open_force_balance"
+          ]
         }
       ],
       "recommended_outline": [
@@ -4723,7 +4734,8 @@
         "공압 액추에이터 힘과 선정",
         "Fail-Safe 스프링 힘 조건",
         "Bench set과 operating range",
-        "직동식 힘과 회전식 토크"
+        "직동식 힘과 회전식 토크",
+        "불평형력·마찰력·Fail-Safe 스프링 힘의 통합 선정"
       ],
       "topic_aliases": [
         "제어밸브 유체력",
@@ -14806,6 +14818,14 @@
         },
         {
           "pattern": "제어 소프트웨어 개발 수명 주기(V-Model)의 단위시험, 통합시험, 시스템시험을 정의하고 SIL 달성을 위한 소프트웨어 검증방안을 설명하시오.",
+          "routing_exclusive": true,
+          "routing_exclusive_block_terms": [
+            "MC/DC",
+            "정적 분석",
+            "정적·동적 분석",
+            "동적 분석",
+            "구조적 커버리지"
+          ],
           "required_anchor_ids": [
             "sw04_v_model_definition",
             "sw04_unit_test",
@@ -23869,6 +23889,9 @@
             "so2_underdamped_response",
             "so2_critical_damping_response",
             "so2_overdamped_response",
+            "so2_zero_negative_damping"
+          ],
+          "pass_required_anchor_ids": [
             "so2_zero_negative_damping"
           ]
         },

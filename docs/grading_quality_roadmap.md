@@ -201,6 +201,21 @@ Stage56에서는 Telegram 전체 재채점에서 드러난 범용 회귀를 고�
 요구 충족률을 넘어서 점수를 만들 수 없다. Fatal 답안을 일정한 13점으로 올리던
 `SUBSTANTIVE_FATAL_SCORE_FLOOR`는 제거하고 ceiling·no-pass 불변조건만 유지한다.
 
+Stage57에서는 Telegram 수출본을 운영 회귀 자료로 승격했다. SIL/SIS 정상답안이 전부
+`MISSING`으로 붕괴하지 않도록 전역 ontology의 자연어 별칭과 한국어 목적어-주어 관계
+추출을 확장했다. `derived_from` 같은 open-world 관계는 다른 유효 source가 있다는 이유만으로
+`WRONG` 처리하지 않고, `applies_to`·`equivalent_to`처럼 닫힌 관계만 자동 충돌 판정을
+유지한다. 2차계 문제의 `ζ=0`, `ζ<0` 요구는 `pass_required_anchor_ids`로 합격 필수화했다.
+V-Model 전용 질문은 단일 owner로 고정하되 MC/DC·정적·동적 분석처럼 명시적인 추가 요구가
+있으면 `routing_exclusive_block_terms`에 의해 관련 owner를 함께 활성화한다. 제어밸브
+unbalance·friction·fail-safe spring 복합 질문은 네 원자 요구로 고정했다.
+
+운영 도구는 동일 답안의 span 표식·구분선·표현용 문장부호 차이를 제거하는 canonical
+중복키를 기본으로 사용하되 수식 연산자와 비교 방향은 보존한다. Telegram 표시 점수는
+저장 정밀도를 바꾸지 않고 최대 소수 둘째 자리로 줄이며, 누락 요구와 합격 필수 보완을
+직접 표시한다. 완료 증거는 48건 replay `READY`, Authority `READY`, 2회 Stability
+`STABLE`, provider call 0이다.
+
 Legacy gate migration 기록은 다음과 같다.
 
 - `OLD_GATE`: fatal 답안의 고정 13점 또는 과거 최소 점수구간 유지

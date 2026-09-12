@@ -8,17 +8,17 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-12): Gemini-off 48건 전체 체인은 question-only routing recall 100%, known-fatal 16/16, score coverage 100%, 허용구간 적중률 85.42%, 평균 범위 이탈 0.392708점, known-overgrading 0건으로 Authority Gate `READY`입니다. Stage56은 Telegram 재채점 회귀에서 확인한 질문별 요구수 변동, 필수 요구 누락 합격, 근거 없는 D/E와 fatal 답안의 13점 강제 floor를 제거했습니다. 과거 점수 모양을 유지하기보다 실제 획득 evidence만 점수화해 적중률은 낮아졌지만 correctness Gate는 유지됩니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-12): Stage57 Gemini-off 48건 전체 체인은 question-only routing recall 100%, known-fatal 16/16, score coverage 100%, 허용구간 적중률 85.42%, 평균 범위 이탈 0.35875점, known-overgrading 0건으로 Authority Gate `READY`, 2회 Stability Gate `STABLE`입니다. Telegram 수출본에서 발견한 SIL/SIS 정상답안의 전부 누락, 2차계 필수 감쇠구간 누락 합격, 복합 질문 scope 변동을 회귀로 고정했고, 재채점 중복 제거와 사용자 출력도 보완했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 
 ## 1. 주요 기능
 
 - Telegram `/grade` 명령 기반 답안 채점
-- Gemini semantic grader와 CLOVA fallback
-- Ollama 기반 보조 분석과 점수 조정 지원
+- legacy 비교용 Gemini/CLOVA provider와 선택적 semantic resolver 호환
+- 외부 LLM 없이 동작하는 deterministic verdict·score primary
 - A/B/C/D/E 25점 계층형 채점
-- A·D·E semantic 평가와 B·C native evidence projection을 결합한 하이브리드 채점
+- A~E 전 계층의 deterministic evidence-bound 점수 계산
 - 교수·기술사·기업 임원 관점의 3인 평가와 진단 정보
 - 문제문만 사용하는 deterministic Question Type lens
 - Topic Pack이 소유하는 canonical primary lens와 답안 비의존형 routing
@@ -65,7 +65,7 @@
 | 결정론적 Authority Gate | `READY` (Gemini-off 48건) |
 | Topic routing recall / score coverage | 100% / 100% |
 | Known Fatal 재현율 / false positive | 100% (16/16) / 0건 |
-| 점수 허용구간 적중률 / 평균 이탈 | 85.42% / 0.392708점 |
+| 점수 허용구간 적중률 / 평균 이탈 | 85.42% / 0.35875점 |
 | Reviewed Golden / covered Topic | 48건 / 31개 |
 | normal·adverse·fatal 3-lane 완료 | 6 Topic |
 
@@ -124,17 +124,17 @@ Stage49의 FSRM pilot 이후 다음 5개 우선위험 소유 Topic을 한 번에
 
 Question Type, Fact Anchor, Model Answer, Logic Check, deterministic checker와 Difficulty Strategy는 A/B/C/D/E 체계를 대체하지 않습니다. 이들은 평가 근거를 제공하고 최종 결과의 정합성을 보완합니다.
 
-### 2.1 하이브리드 점수 소유권
+### 2.1 결정론적 점수 소유권
 
 A/B/C/D/E 체계는 유지하지만 최종 점수의 주된 근거는 Layer별로 다릅니다.
 
 | Layer | 최종 점수의 주된 근거 |
 |---|---|
-| A | Gemini semantic 평가: 문제 진입, 구조, 범위 통제 |
-| B | Question Demand별 충족 상태를 0~3으로 평가한 native projection |
-| C | Question Demand에 연결된 Fact Anchor의 정확성·연결 상태를 0~3으로 평가한 native projection |
-| D | Gemini semantic 평가: 적용성, 제약·trade-off, 검증·실행 |
-| E | Gemini semantic 평가: 영역 간 연결성과 면접 방어 가능성 |
+| A | 제목·목차·전개 표지의 deterministic 구조 근거 |
+| B | Question Demand별 충족 상태의 deterministic 평가 |
+| C | Question Demand에 연결된 canonical Fact·관계의 정확성 평가 |
+| D | 인식된 요구 evidence에 묶인 적용 조건·trade-off·검증 근거 |
+| E | 인식된 요구 evidence에 묶인 인과·결론 연결 근거 |
 
 상세 Question Demand 행이 있으면 B는 다음과 같이 계산합니다.
 
@@ -153,7 +153,7 @@ C = 8 × (Fact Anchor 상태 평균 ÷ 3)
 
 Fact Anchor의 내부 상태는 `0=없음`, `1=언급`, `2=정확`, `3=정확한 Fact를 Question Demand와 연결`입니다. Native projection을 만들 수 없을 때는 `fact_eval.c_score`를 우선하고, 그 값도 없으면 `accuracy + core_concept + problem_link + compactness`를 호환 경로로 사용합니다.
 
-Question Type과 Model Answer는 평가 범위와 기대 구조를 제공합니다. Logic Check와 deterministic checker는 검증된 오류와 cap 근거를 제공합니다. 이들은 25점 Layer 체계를 유지하면서 B·C native projection과 A·D·E semantic 평가의 정합성을 보완합니다.
+Question Type과 Model Answer는 평가 범위와 기대 구조를 제공합니다. Logic Check와 deterministic checker는 검증된 오류와 cap 근거를 제공합니다. LLM이 생성한 설명은 이 점수·fatal·verdict를 변경할 수 없습니다.
 
 ---
 

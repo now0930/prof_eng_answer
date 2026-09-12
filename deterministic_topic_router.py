@@ -34,6 +34,10 @@ def _pack_candidates(question_text: str) -> list[dict[str, Any]]:
                 pattern_rows.append({
                     "pattern": pattern,
                     "routing_exclusive": bool(value.get("routing_exclusive")),
+                    "routing_exclusive_block_terms": [
+                        str(term) for term in value.get("routing_exclusive_block_terms", [])
+                        if str(term).strip()
+                    ],
                 })
         patterns.extend(str(value) for value in payload.get("question_examples", []))
         pattern_score = max(
@@ -55,7 +59,12 @@ def _pack_candidates(question_text: str) -> list[dict[str, Any]]:
             "exclusive_pattern_score": round(max(
                 [
                     _question_similarity(question_text, row["pattern"])
-                    for row in pattern_rows if row["routing_exclusive"]
+                    for row in pattern_rows
+                    if row["routing_exclusive"]
+                    and not any(
+                        normalize_text(term) in normalized_question
+                        for term in row["routing_exclusive_block_terms"]
+                    )
                 ] or [0.0]
             ), 6),
         })

@@ -934,6 +934,13 @@ def normalize_grade_for_display(parsed):
 
     return parsed
 
+def _display_score(value):
+    """Keep stored precision while making Telegram scores readable."""
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return str(value)
+    return f"{number:.2f}".rstrip("0").rstrip(".")
 
 
 def format_result(parsed, sid=None):
@@ -1030,7 +1037,7 @@ def format_result(parsed, sid=None):
     )
 
     lines = []
-    lines.append(f"채점 완료: {total}/{max_score:g}")
+    lines.append(f"채점 완료: {_display_score(total)}/{max_score:g}")
     lines.append(f"예상 점수대: {score_range}")
     lines.append(f"신뢰도: {confidence}")
     lines.append(f"공식 합격선: {official:g}점 ({yn(official_met)})")
@@ -1092,6 +1099,27 @@ def format_result(parsed, sid=None):
             message = str(finding.get("message") or "").strip()
             if message:
                 lines.append(f"- [{finding.get('severity', 'error')}] {message}")
+        requirement_rows = parsed.get("requirements") or []
+        pass_gaps = [
+            str(row.get("requirement_id") or "").strip()
+            for row in requirement_rows
+            if isinstance(row, dict)
+            and row.get("pass_required")
+            and row.get("status") != "SATISFIED"
+            and str(row.get("requirement_id") or "").strip()
+        ]
+        missing_ids = [
+            str(row.get("requirement_id") or "").strip()
+            for row in requirement_rows
+            if isinstance(row, dict)
+            and row.get("status") == "MISSING"
+            and str(row.get("requirement_id") or "").strip()
+        ]
+        if pass_gaps:
+            lines.append("- 합격 필수 보완: " + ", ".join(pass_gaps[:5]))
+        if missing_ids:
+            suffix = f" 외 {len(missing_ids) - 5}개" if len(missing_ids) > 5 else ""
+            lines.append("- 누락 요구: " + ", ".join(missing_ids[:5]) + suffix)
         lines.append("")
 
     rater_results = parsed.get("rater_results") or parsed.get("raters") or []
@@ -1150,11 +1178,11 @@ def format_result(parsed, sid=None):
 
             if bmax != "":
                 try:
-                    lines.append(f"- {item}: {score}/{float(bmax):g}")
+                    lines.append(f"- {item}: {_display_score(score)}/{float(bmax):g}")
                 except Exception:
                     lines.append(f"- {item}: {score}/{bmax}")
             else:
-                lines.append(f"- {item}: {score}")
+                lines.append(f"- {item}: {_display_score(score)}")
 
             if reason:
                 lines.append(f"  사유: {reason}")

@@ -79,7 +79,8 @@ class HazopLopaCanonicalPromotionTests(unittest.TestCase):
         self.assertFalse(grade["official_pass_met"])
         self.assertEqual(grade["provider_calls"], 0)
         self.assertEqual(grade["canonical_promotion"]["comparison_count"], 9)
-        self.assertEqual(rows["hazop_lopa_pfdavg_rrf_relation"]["status"], "PARTIAL")
+        # 두 식은 동치이므로 빈도비 또는 1/RRF 중 하나를 정확히 제시하면 충족이다.
+        self.assertEqual(rows["hazop_lopa_pfdavg_rrf_relation"]["status"], "SATISFIED")
         self.assertEqual(rows["hazop_lopa_sif_allocation_boundary"]["status"], "PARTIAL")
         for requirement_id in CANONICAL_IDS - {
             "hazop_lopa_pfdavg_rrf_relation",

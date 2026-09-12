@@ -104,6 +104,20 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         self.assertIn("[결정론적 요구 판정]", rendered)
         self.assertEqual(grade["verdict"], grade["deterministic_score"]["verdict"])
 
+    def test_telegram_breakdown_rounds_display_only_and_lists_missing_ids(self):
+        import bot
+
+        grade = grade_deterministically(
+            question_text="열전대 온도센서의 측정 원리를 설명하시오.",
+            answer_text="열전대를 언급한다.",
+        )
+        grade["breakdown"][1]["score"] = 4.434783
+        rendered = bot.format_result(grade)
+        self.assertIn("4.43/6", rendered)
+        self.assertNotIn("4.434783/6", rendered)
+        self.assertIn("누락 요구:", rendered)
+        self.assertEqual(grade["breakdown"][1]["score"], 4.434783)
+
     def test_partial_mentions_alone_cannot_reach_passing_score(self):
         grade = grade_deterministically(
             question_text=(

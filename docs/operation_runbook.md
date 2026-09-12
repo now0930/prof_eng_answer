@@ -473,9 +473,11 @@ docker compose exec -T prof-eng-answer-bot \
   --all --resume --changed-only --delay 5
 ```
 
-`--all`은 Unicode·대소문자·공백을 정규화한 답안 내용이 같은 session을 한 건으로
-처리한다. 첫 session만 채점하며 나머지는 보고서에 `SKIPPED_DUPLICATE`와 대표
-session(`duplicate_of`)을 기록한다.
+`--all`은 기본 `--dedupe-mode canonical`로 Unicode·대소문자·공백뿐 아니라 전송
+span 표식, 구분선과 표현용 문장부호를 제거한 공학 내용이 같은 session을 한 건으로
+처리한다. 비교 방향과 수식 연산자는 보존한다. 첫 session만 채점하며 나머지는 보고서에
+`SKIPPED_DUPLICATE`와 대표 session(`duplicate_of`)을 기록한다. 엄격한 기존 비교는
+`--dedupe-mode exact`, 중복을 포함한 전수 실행은 `--dedupe-mode none`을 사용한다.
 
 대상과 엔진 실행만 먼저 확인하려면 `--dry-run --all --resume`을 사용하고, Telegram에는
 개별 답안 없이 총계만 보내려면 `--all --resume --send-summary`를 사용한다. Batch는

@@ -6,6 +6,26 @@ from fact_anchor_evidence_adapter import evaluate_fact_anchor_requirements
 
 
 class TelegramExportGradingRegressionTests(unittest.TestCase):
+    def test_reviewed_korean_sis_answer_does_not_collapse_to_all_missing(self):
+        question = (
+            "과압 위험이 존재하는 화학 플랜트에서 기존 보호장치로는 위험 저감이 "
+            "부족하여 SIS 도입을 검토한다. 요구 SIL 결정 과정과 이를 만족하는 "
+            "SIS 아키텍처 구성을 설명하시오."
+        )
+        answer = """
+HAZID와 HAZOP으로 과압 원인, 사고 시나리오와 결과 심각도를 식별한다.
+개시사건 빈도와 BPCS, 경보·운전자 조치, PSV 등 기존 IPL의 독립성과 PFD를 평가한다.
+기존 IPL 적용 후 잔여 위험을 계산하고 허용 위험과 비교한다.
+필요 RRF = 잔여 위험 / 허용 위험이며 목표 PFDavg = 1 / 필요 RRF이다.
+목표 PFDavg 또는 PFH가 해당하는 구간으로 요구 SIL을 결정한다.
+SIS는 센서, 로직 솔버와 최종 요소로 구성하고 subsystem별 PFDavg를 배분한다.
+HFT, 진단범위, proof test interval과 CCF를 반영하고 FAT·SAT·validation을 수행한다.
+"""
+        grade = grade_deterministically(question_text=question, answer_text=answer)
+        self.assertFalse(grade["logic_check_evaluation"]["fatal_error_detected"])
+        self.assertGreaterEqual(grade["requirement_summary"]["SATISFIED"], 4)
+        self.assertGreater(grade["total_score"], 10.0)
+
     def test_overpressure_question_paraphrases_keep_one_owner_and_nine_demands(self):
         questions = [
             "과압 위험이 존재하는 화학 플랜트에서 기존 보호장치로는 위험 저감이 부족하여 SIS 도입을 검토한다. (1) 요구 SIL 결정 과정 (2) 요구 SIL을 만족하는 SIS 아키텍처 구성",
@@ -49,7 +69,34 @@ Compiler, CPU, library와 시험환경의 version을 baseline으로 형상관리
 """
         grade = grade_deterministically(question_text=question, answer_text=answer)
         self.assertTrue(grade["question_scope_evaluation"]["resolved"])
-        self.assertLessEqual(grade["deterministic_score"]["raw_requirement_count"], 16)
+        self.assertEqual(
+            grade["topic_ids"],
+            ["instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"],
+        )
+        self.assertLessEqual(grade["deterministic_score"]["raw_requirement_count"], 9)
+
+    def test_vmodel_exclusive_scope_yields_to_explicit_mcdc_static_dynamic_demands(self):
+        question = (
+            "안전필수 소프트웨어의 V-Model과 단위·통합·시스템시험을 설명하고, "
+            "SIL 관점의 정적·동적 분석, MC/DC 및 검증방안을 제시하시오."
+        )
+        grade = grade_deterministically(
+            question_text=question,
+            answer_text="V-Model과 MC/DC를 설명한다.",
+        )
+        topic_ids = set(grade["topic_ids"])
+        self.assertIn(
+            "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+            topic_ids,
+        )
+        self.assertIn(
+            "safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis",
+            topic_ids,
+        )
+        self.assertIn(
+            "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+            topic_ids,
+        )
 
     def test_second_order_answer_missing_zero_and_negative_damping_is_not_high_score(self):
         question = (
@@ -69,11 +116,32 @@ G(s)=Kωn²/(s²+2ζωns+ωn²)이며 감쇠비는 진동성과 오버슈트를 
         grade = grade_deterministically(question_text=question, answer_text=answer)
         self.assertTrue(grade["question_scope_evaluation"]["resolved"])
         self.assertFalse(grade["high_score_met"])
+        self.assertFalse(grade["official_pass_met"])
         self.assertLess(grade["total_score"], 20.0)
+        self.assertGreater(
+            grade["deterministic_score"]["pass_required_gap_count"], 0,
+        )
         statuses = {
             row["requirement_id"]: row["status"] for row in grade["requirements"]
         }
         self.assertIn(statuses["so2_zero_negative_damping"], {"PARTIAL", "MISSING"})
+
+    def test_unbalance_friction_spring_question_has_stable_explicit_scope(self):
+        questions = [
+            "공압식 구동기 선정 시 고려해야 할 밸브의 불평형력과 마찰력의 개념을 설명하고 Fail-Safe 동작 구현을 위한 스프링 설계 기준을 설명하시오.",
+            "공압식 Actuator 선정에서 Unbalanced Force, Friction Force 및 Fail-Safe 스프링 설계기준을 설명하시오.",
+        ]
+        for question in questions:
+            grade = grade_deterministically(
+                question_text=question,
+                answer_text="불평형력, 패킹 마찰과 Fail-Close 및 Fail-Open 힘 평형을 검토한다.",
+            )
+            self.assertEqual(
+                grade["topic_ids"],
+                ["control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"],
+            )
+            self.assertEqual(grade["deterministic_score"]["raw_requirement_count"], 4)
+            self.assertTrue(grade["question_scope_evaluation"]["exact"])
 
     def test_actuator_comparison_does_not_activate_unrelated_entire_pack(self):
         question = (

@@ -171,22 +171,53 @@ def grade_signature(grade: dict | None) -> dict | None:
     }
 
 
-def answer_content_hash(text: str) -> str:
-    """Return a formatting-insensitive identity for one normalized answer."""
+def canonical_identity_text(text: str) -> str:
+    """Remove transport-only variation without erasing engineering operators."""
     canonical = unicodedata.normalize("NFKC", str(text or ""))
-    canonical = " ".join(canonical.split()).casefold()
+    canonical = re.sub(
+        r"\[span_\d+\]\((?:start|end)_span\)", " ", canonical,
+        flags=re.IGNORECASE,
+    )
+    canonical = re.sub(r"(?m)^\s*[=_]{8,}\s*$", " ", canonical)
+    canonical = re.sub(r"(?m)^\s*(?:[-*•]+|\d+[.)])\s+", " ", canonical)
+    canonical = canonical.replace("**", "").replace("`", "")
+    canonical = canonical.casefold()
+    output = []
+    for index, char in enumerate(canonical):
+        if char == ".":
+            previous_is_digit = index > 0 and canonical[index - 1].isdigit()
+            next_is_digit = index + 1 < len(canonical) and canonical[index + 1].isdigit()
+            output.append(char if previous_is_digit and next_is_digit else " ")
+        elif unicodedata.category(char).startswith("P") and char not in "/<>+-*=^":
+            output.append(" ")
+        else:
+            output.append(char)
+    return " ".join("".join(output).split())
+
+
+def answer_content_hash(text: str, *, mode: str = "canonical") -> str:
+    """Return a stable identity for one normalized submission."""
+    canonical = unicodedata.normalize("NFKC", str(text or "")).casefold()
+    if mode == "canonical":
+        canonical = canonical_identity_text(canonical)
+    elif mode == "exact":
+        canonical = " ".join(canonical.split())
+    elif mode != "none":
+        raise ValueError(f"unsupported dedupe mode: {mode}")
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()
 
 
 def deduplicate_sources(
-    sources: list[tuple[str, str, Path | None]], normalize_fn
+    sources: list[tuple[str, str, Path | None]], normalize_fn, *, mode: str = "canonical",
 ) -> tuple[list[tuple[str, str, Path | None]], list[dict]]:
+    if mode == "none":
+        return list(sources), []
     unique = []
     duplicates = []
     owners: dict[str, str] = {}
     for source_label, raw_text, source_dir in sources:
         normalized = normalize_fn(raw_text)["normalized_text"]
-        content_hash = answer_content_hash(normalized)
+        content_hash = answer_content_hash(normalized, mode=mode)
         owner = owners.get(content_hash)
         if owner is not None:
             duplicates.append({
@@ -239,6 +270,11 @@ def parse_args() -> argparse.Namespace:
         "--delay", type=float, default=5.0,
         help="batch 개별 전송 사이 대기 초(기본 5초)",
     )
+    parser.add_argument(
+        "--dedupe-mode", choices=("canonical", "exact", "none"),
+        default="canonical",
+        help="중복 판정 방식(--all 전용, 기본 canonical)",
+    )
     parser.add_argument("--report", type=Path, help="batch JSON report 경로")
     parser.add_argument(
         "--sessions-dir", type=Path, default=ROOT / "data" / "sessions",
@@ -258,6 +294,8 @@ def main() -> int:
         raise SystemExit("--delay must be zero or positive")
     if not args.all and (args.resume or args.changed_only or args.send_summary):
         raise SystemExit("--resume/--changed-only/--send-summary require --all")
+    if not args.all and args.dedupe_mode != "canonical":
+        raise SystemExit("--dedupe-mode requires --all")
 
     sessions_dir = args.sessions_dir.expanduser().resolve()
     sessions_dir.mkdir(parents=True, exist_ok=True)
@@ -292,7 +330,7 @@ def main() -> int:
     originally_selected = len(sources)
     if args.all:
         sources, duplicate_rows = deduplicate_sources(
-            sources, normalize_grade_submission
+            sources, normalize_grade_submission, mode=args.dedupe_mode,
         )
 
     if not args.dry_run and not bot.TELEGRAM_TOKEN:
@@ -397,6 +435,7 @@ def main() -> int:
         "passed": passed, "skipped": skipped, "failed": failed,
         "skipped_resume": skipped_resume,
         "skipped_duplicate": skipped_duplicate,
+        "dedupe_mode": args.dedupe_mode if args.all else None,
         "changed": changed_count, "provider_calls": 0, "cases": rows,
     }
     report_path = args.report
