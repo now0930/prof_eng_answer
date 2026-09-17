@@ -91,6 +91,12 @@ docker compose exec -T prof-eng-answer-bot \
 session을 `SKIPPED_DUPLICATE`와 `duplicate_of`로 기록하며
 `reports/telegram_regrade_batches/<timestamp>.json`에 저장된다.
 
+과거 session에 `문제:`/`답안:` 표식이 없어도 첫 줄의 명시적 질문문, 독립 `문제`
+표식 뒤의 범위, `1. 배경/개요` 앞의 문제 범위, 저장된 `pattern`, 명시적 `[답안]`
+제목이 있으면 bounded boundary recovery를 적용한다. 복원 근거가 없는 답안-only 입력은
+추측하여 채점하지 않는다. 콘솔에는 집계와 최대 10개 실패 예시만 표시하고 전체 case는
+JSON 보고서에만 저장한다.
+
 ### `run_telegram_regrade.sh`
 
 서버의 Hermes Compose 프로젝트에서 `regrade_to_telegram.py`를 실행하는 운영용

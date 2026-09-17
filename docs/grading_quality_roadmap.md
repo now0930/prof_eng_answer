@@ -216,6 +216,15 @@ unbalance·friction·fail-safe spring 복합 질문은 네 원자 요구로 고�
 직접 표시한다. 완료 증거는 48건 replay `READY`, Authority `READY`, 2회 Stability
 `STABLE`, provider call 0이다.
 
+Stage58에서는 실제 전체 재채점이 40건의 `deterministic topic routing abstained`로
+종료된 원인을 Topic 부족이 아닌 과거 입력 경계 손실로 분리했다. 레거시 세션에서
+완결된 첫 문제문, 독립 `문제` 표식, 첫 본문 heading 전 문제범위, 직렬화된 question
+pattern과 명시적 `[답안]` 제목만 bounded recovery 대상으로 인정한다. 일반 답안-only
+본문은 계속 `unknown_answer_only`로 처리해 질문을 추측하지 않는다. 실제 저장 세션을
+복제한 provider-zero dry-run은 선택 198건, canonical 고유답안 60건, 성공 60건,
+중복 건너뜀 138건, 실패 0건이다. Batch 콘솔은 전체 case 배열을 출력하지 않고 집계와
+실패 예시 10건만 표시하며 전체 증거는 JSON 보고서에 보존한다.
+
 Legacy gate migration 기록은 다음과 같다.
 
 - `OLD_GATE`: fatal 답안의 고정 13점 또는 과거 최소 점수구간 유지

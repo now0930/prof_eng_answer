@@ -8,7 +8,7 @@
 
 > 장기 채점 품질 정책은 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 현재 진행 상태와 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
-> 최신 개발 상태(2026-09-12): Stage57 Gemini-off 48건 전체 체인은 question-only routing recall 100%, known-fatal 16/16, score coverage 100%, 허용구간 적중률 85.42%, 평균 범위 이탈 0.35875점, known-overgrading 0건으로 Authority Gate `READY`, 2회 Stability Gate `STABLE`입니다. Telegram 수출본에서 발견한 SIL/SIS 정상답안의 전부 누락, 2차계 필수 감쇠구간 누락 합격, 복합 질문 scope 변동을 회귀로 고정했고, 재채점 중복 제거와 사용자 출력도 보완했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
+> 최신 개발 상태(2026-09-17): Stage58 Gemini-off 48건 전체 체인은 question-only routing recall 100%, known-fatal 16/16, score coverage 100%, 허용구간 적중률 85.42%, 평균 범위 이탈 0.35875점, known-overgrading 0건으로 Authority Gate `READY`, 2회 Stability Gate `STABLE`입니다. 과거 Telegram 세션의 문제/답안 경계 형식을 결정론적으로 복원해 실제 저장 세션 198건 중 고유답안 60건을 전송 없이 재생한 결과 60/60 PASS, 중복 138건 건너뜀을 확인했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---
 

@@ -171,6 +171,20 @@ def grade_signature(grade: dict | None) -> dict | None:
     }
 
 
+def compact_console_report(report: dict, *, failure_limit: int = 10) -> dict:
+    """Keep the terminal readable while the complete case list stays on disk."""
+    summary = {key: value for key, value in report.items() if key != "cases"}
+    failures = [
+        {"source": row.get("source"), "error": row.get("error")}
+        for row in report.get("cases", [])
+        if isinstance(row, dict) and row.get("status") == "FAIL"
+    ]
+    if failures:
+        summary["failure_examples"] = failures[:failure_limit]
+        summary["additional_failure_count"] = max(0, len(failures) - failure_limit)
+    return summary
+
+
 def canonical_identity_text(text: str) -> str:
     """Remove transport-only variation without erasing engineering operators."""
     canonical = unicodedata.normalize("NFKC", str(text or ""))
@@ -456,7 +470,7 @@ def main() -> int:
             f"기존 판정 대비 변경 {changed_count} · provider 호출 0\n"
             f"보고서: {report.get('report_path', '미지정')}",
         )
-    print(json.dumps(report, ensure_ascii=False))
+    print(json.dumps(compact_console_report(report), ensure_ascii=False))
     return 0 if failed == 0 else 2
 
 

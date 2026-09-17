@@ -8,6 +8,7 @@ from scripts.regrade_to_telegram import (
     build_copyable_submission,
     answer_content_hash,
     canonical_identity_text,
+    compact_console_report,
     completed_sources,
     create_regrade_session,
     current_commit,
@@ -21,6 +22,21 @@ from scripts.regrade_to_telegram import (
 
 
 class RegradeToTelegramTests(unittest.TestCase):
+    def test_console_report_omits_full_case_inventory(self):
+        report = {
+            "decision": "FAIL",
+            "failed": 12,
+            "report_path": "/tmp/report.json",
+            "cases": [
+                {"source": f"s{index}", "status": "FAIL", "error": "routing abstained"}
+                for index in range(12)
+            ],
+        }
+        compact = compact_console_report(report)
+        self.assertNotIn("cases", compact)
+        self.assertEqual(len(compact["failure_examples"]), 10)
+        self.assertEqual(compact["additional_failure_count"], 2)
+
     def test_duplicate_answers_are_graded_only_once(self):
         sources = [
             ("session_1", "동일  답안\n내용", None),

@@ -219,6 +219,39 @@ def _strip_question_marker(value: str) -> str:
     ).strip()
 
 
+_STANDALONE_QUESTION_MARKER = re.compile(
+    r"^\s*(?:#{1,6}\s*)?(?:\[문제\]|문제)\s*:?\s*$",
+    flags=re.IGNORECASE,
+)
+_ANSWER_BODY_HEADING = re.compile(
+    r"^\s*(?:#{1,6}\s*)?(?:[-*•]\s*)?1\s*[.)]\s*"
+    r"(?:배경|개요|서론)\b",
+    flags=re.IGNORECASE,
+)
+_LEADING_QUESTION_SENTENCE = re.compile(
+    r"(?:하시오|설명하라|설명하세요|제시하시오|논하시오|기술하시오|"
+    r"비교하시오|구하시오|작성하시오)[.。]?\s*$",
+    flags=re.IGNORECASE,
+)
+_QUESTION_DEMAND_CUE = re.compile(
+    r"(?:설명|비교|제시|논하|기술|구하|작성|선정|설계\s*기준)",
+    flags=re.IGNORECASE,
+)
+_SERIALIZED_PATTERN = re.compile(
+    r"['\"]pattern['\"]\s*:\s*(['\"])(.+?)\1",
+    flags=re.IGNORECASE,
+)
+
+
+def _strip_scope_heading(value: str) -> str:
+    return re.sub(
+        r"^\s*(?:#{1,6}\s*|[-*•]\s*)",
+        "",
+        value,
+        count=1,
+    ).strip()
+
+
 def _extract_submission_envelope(
     normalized_text: str,
 ) -> dict[str, Any]:
@@ -276,6 +309,91 @@ def _extract_submission_envelope(
                 status=(
                     "problem_definition_body_marker"
                 ),
+                confidence="high",
+            )
+
+    standalone_marker = next(
+        (
+            index for index, line in enumerate(lines)
+            if _STANDALONE_QUESTION_MARKER.match(line)
+        ),
+        None,
+    )
+    if standalone_marker is not None:
+        body_start = next(
+            (
+                index for index in range(standalone_marker + 1, len(lines))
+                if _ANSWER_BODY_HEADING.match(lines[index])
+            ),
+            None,
+        )
+        if body_start is not None and body_start > standalone_marker + 1:
+            return _boundary_result(
+                question_text="\n".join(lines[standalone_marker + 1:body_start]),
+                answer_text="\n".join(lines[body_start:]),
+                status="standalone_question_marker_body_heading",
+                confidence="high",
+            )
+
+    if (
+        len(lines) >= 2
+        and lines[0].strip()
+        and _LEADING_QUESTION_SENTENCE.search(lines[0])
+    ):
+        return _boundary_result(
+            question_text=lines[0],
+            answer_text="\n".join(lines[1:]),
+            status="leading_question_sentence",
+            confidence="high",
+        )
+
+    early_body_start = next(
+        (
+            index for index in range(1, min(len(lines), 9))
+            if _ANSWER_BODY_HEADING.match(lines[index])
+        ),
+        None,
+    )
+    if early_body_start is not None:
+        prefix_lines = [line for line in lines[:early_body_start] if line.strip()]
+        prefix = "\n".join(prefix_lines).strip()
+        serialized = _SERIALIZED_PATTERN.search(prefix_lines[0]) if prefix_lines else None
+        if serialized:
+            return _boundary_result(
+                question_text=serialized.group(2),
+                answer_text="\n".join(lines[early_body_start:]),
+                status="serialized_question_pattern_body_heading",
+                confidence="high",
+            )
+        answer_title = next(
+            (
+                re.sub(r"^\s*\[답안\]\s*", "", line, count=1).strip()
+                for line in prefix_lines
+                if re.match(r"^\s*\[답안\]\s*\S", line)
+            ),
+            "",
+        )
+        if answer_title and _QUESTION_DEMAND_CUE.search(answer_title):
+            return _boundary_result(
+                question_text=answer_title,
+                answer_text="\n".join(lines[early_body_start:]),
+                status="answer_title_scope_body_heading",
+                confidence="medium",
+            )
+        if (
+            prefix
+            and "[답안]" not in prefix
+            and (
+                _QUESTION_DEMAND_CUE.search(prefix)
+                or re.match(r"^\s*#{1,6}\s+\S", prefix_lines[0])
+            )
+        ):
+            return _boundary_result(
+                question_text="\n".join(
+                    _strip_scope_heading(line) for line in prefix_lines
+                ),
+                answer_text="\n".join(lines[early_body_start:]),
+                status="leading_question_scope_body_heading",
                 confidence="high",
             )
 

@@ -4,7 +4,7 @@
 
 프로젝트 소개, 빠른 실행과 현재 runtime 계약은 루트 [`README.md`](../README.md)에서 확인합니다. 이 문서는 **문서 탐색, 정책 소유권과 source of truth**를 담당합니다.
 
-> 최신 상태(2026-09-12): Stage57 Gemini-off 48건에서 topic routing recall 100%, known-fatal recall 100%(16/16), score coverage 100%, 점수 허용구간 적중률 85.42%, 평균 범위 이탈 0.35875점으로 Authority Gate `READY`, 2회 Stability Gate `STABLE`입니다. SIL/SIS 자연어 관계 인식, 복합 질문의 독점 routing 경계, 명시적 합격 필수 anchor, Telegram 재채점의 canonical 중복 제거와 출력 가독성을 회귀로 보호합니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
+> 최신 상태(2026-09-17): Stage58 Gemini-off 48건에서 topic routing recall 100%, known-fatal recall 100%(16/16), score coverage 100%, 점수 허용구간 적중률 85.42%, 평균 범위 이탈 0.35875점으로 Authority Gate `READY`, 2회 Stability Gate `STABLE`입니다. 과거 Telegram 입력의 첫 문제문, 독립 `문제` 표식, 본문 전 다중 문제범위, 직렬화된 pattern과 명시적 `[답안]` 제목을 제한적으로 복원하며 일반 답안-only 입력은 계속 fail-closed입니다. 실제 저장 세션 dry-run은 고유답안 60/60 PASS입니다. 전환 정본은 [`deterministic_grading_transition.md`](deterministic_grading_transition.md), 장기 품질 정책은 [`grading_quality_roadmap.md`](grading_quality_roadmap.md), 실행 증거는 [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1)에서 관리합니다.
 
 ---
 

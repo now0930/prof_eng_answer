@@ -66,6 +66,84 @@ def test_unknown_boundary_is_answer_only_and_fail_closed() -> None:
     assert boundary["confidence_ceiling"] == "medium"
 
 
+def test_legacy_leading_question_sentence_is_separated() -> None:
+    source = (
+        "PID 제어기의 튜닝 순서와 각 게인의 영향을 설명하시오.\n\n"
+        "PID 튜닝은 P, I, D의 영향을 함께 확인한다."
+    )
+    result = normalize_grade_submission(source)
+
+    assert result["question_text"].startswith("PID 제어기의 튜닝 순서")
+    assert result["answer_text"].startswith("PID 튜닝은")
+    assert result["question_answer_boundary"]["status"] == "leading_question_sentence"
+
+
+def test_legacy_standalone_problem_marker_uses_first_body_heading() -> None:
+    source = """## 문제
+레이더 액위계의 FMCW와 펄스 방식을 비교하고 신뢰성 확보방안을 설명
+## 1. 배경: Radar
+레이더는 반사파로 거리를 측정한다.
+"""
+    result = normalize_grade_submission(source)
+
+    assert result["question_text"].startswith("레이더 액위계")
+    assert result["answer_text"].startswith("## 1. 배경")
+    assert result["question_answer_boundary"]["status"] == (
+        "standalone_question_marker_body_heading"
+    )
+
+
+def test_legacy_multiline_scope_before_body_heading_is_separated() -> None:
+    source = """공압식 밸브의 불평형력과 마찰력 개념 설명.
+Fail Safe 동작을 위한 Spring 설계 기준 제시
+## 1. 배경
+밸브에는 여러 힘이 작용한다.
+"""
+    result = normalize_grade_submission(source)
+
+    assert "불평형력" in result["question_text"]
+    assert "Spring 설계 기준" in result["question_text"]
+    assert result["answer_text"].startswith("## 1. 배경")
+    assert result["question_answer_boundary"]["status"] == (
+        "leading_question_scope_body_heading"
+    )
+
+
+def test_legacy_serialized_pattern_before_body_heading_is_separated() -> None:
+    source = """{'pattern': '가동부에 작용하는 힘을 설명하시오.', 'intent': '힘 평형'}
+
+## 1. 개요
+가동부 자유물체도를 작성한다.
+"""
+    result = normalize_grade_submission(source)
+
+    assert result["question_text"] == "가동부에 작용하는 힘을 설명하시오."
+    assert result["answer_text"].startswith("## 1. 개요")
+    assert result["question_answer_boundary"]["status"] == (
+        "serialized_question_pattern_body_heading"
+    )
+
+
+def test_legacy_answer_title_recovers_only_explicit_scope() -> None:
+    source = """Telegram 길이에 맞춰 정리한 모범 답안입니다.
+
+---
+
+[답안] 밸브 불평형력, 마찰력 및 Fail-Safe 스프링 설계 기준
+
+1. 개요
+밸브는 힘의 평형으로 동작한다.
+"""
+    result = normalize_grade_submission(source)
+
+    assert result["question_text"].startswith("밸브 불평형력")
+    assert result["answer_text"].startswith("1. 개요")
+    assert result["question_answer_boundary"]["status"] == (
+        "answer_title_scope_body_heading"
+    )
+    assert result["question_answer_boundary"]["confidence"] == "medium"
+
+
 def test_phase2_has_no_legacy_question_equals_answer_fallback() -> None:
     source = "배경과 원리를 설명한다.\n현장 대책을 제안한다."
     question, answer = _phase2_extract_submission_context(source)
