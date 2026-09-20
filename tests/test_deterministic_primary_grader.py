@@ -1,4 +1,5 @@
 import sys
+import json
 import tempfile
 import unittest
 from unittest.mock import patch
@@ -132,6 +133,22 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         score = grade["deterministic_score"]
         self.assertFalse(score["pass_evidence_eligible"])
         self.assertLess(grade["total_score"], 15.0)
+
+    def test_many_missing_with_unresolved_spans_exposes_recall_warning(self):
+        import bot
+
+        fixture = json.loads(
+            (REPO / "calibration/sis_lopa_architecture_overgrading_regression.json")
+            .read_text(encoding="utf-8")
+        )
+        grade = grade_deterministically(
+            question_text=fixture["question"], answer_text=fixture["answer"],
+        )
+        diagnostic = grade["evidence_recall_diagnostic"]
+        self.assertEqual(diagnostic["code"], "LOW_EVIDENCE_RECALL")
+        self.assertTrue(diagnostic["warning"])
+        self.assertEqual(diagnostic["score_effect"], "none")
+        self.assertIn("LOW_EVIDENCE_RECALL", bot.format_result(grade))
 
 
 if __name__ == "__main__":

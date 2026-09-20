@@ -153,6 +153,25 @@ def completed_sources(
     return completed
 
 
+def completed_delivery_hashes(sessions_dir: Path, engine_commit: str) -> set[str]:
+    """Return content already delivered by this exact deterministic engine."""
+    completed = set()
+    for path in sessions_dir.glob("regrade_*/meta.json"):
+        try:
+            meta = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, ValueError, TypeError):
+            continue
+        if (
+            meta.get("status") == "graded"
+            and meta.get("provider_calls") == 0
+            and meta.get("engine_commit") == engine_commit
+            and meta.get("telegram_sent") is True
+            and meta.get("content_sha256")
+        ):
+            completed.add(str(meta["content_sha256"]))
+    return completed
+
+
 def grade_signature(grade: dict | None) -> dict | None:
     if not isinstance(grade, dict):
         return None
@@ -273,6 +292,10 @@ def parse_args() -> argparse.Namespace:
         help="현재 commit으로 이미 성공한 session을 건너뜀(--all 전용)",
     )
     parser.add_argument(
+        "--force-resend", action="store_true",
+        help="같은 engine·답안의 기존 Telegram 전송을 무시하고 다시 전송(--all 전용)",
+    )
+    parser.add_argument(
         "--changed-only", action="store_true",
         help="기존 grade와 핵심 판정이 달라진 결과만 Telegram 전송(--all 전용)",
     )
@@ -306,8 +329,12 @@ def main() -> int:
 
     if args.delay < 0:
         raise SystemExit("--delay must be zero or positive")
-    if not args.all and (args.resume or args.changed_only or args.send_summary):
-        raise SystemExit("--resume/--changed-only/--send-summary require --all")
+    if not args.all and (
+        args.resume or args.force_resend or args.changed_only or args.send_summary
+    ):
+        raise SystemExit(
+            "--resume/--force-resend/--changed-only/--send-summary require --all"
+        )
     if not args.all and args.dedupe_mode != "canonical":
         raise SystemExit("--dedupe-mode requires --all")
 
@@ -356,6 +383,11 @@ def main() -> int:
         raise RuntimeError("external provider call is forbidden during deterministic regrade")
 
     engine_commit = current_commit(ROOT)
+    delivered_hashes = (
+        set()
+        if args.dry_run or args.force_resend
+        else completed_delivery_hashes(sessions_dir, engine_commit)
+    )
     already_done = (
         completed_sources(
             sessions_dir, engine_commit, include_dry_runs=args.dry_run
@@ -367,10 +399,19 @@ def main() -> int:
         if source_label in already_done:
             rows.append({"source": source_label, "status": "SKIPPED_RESUME"})
             continue
+        normalized_preview = normalize_grade_submission(raw_text)["normalized_text"]
+        content_hash = answer_content_hash(normalized_preview, mode="canonical")
+        if content_hash in delivered_hashes:
+            rows.append({
+                "source": source_label,
+                "status": "SKIPPED_ALREADY_DELIVERED",
+                "content_sha256": content_hash,
+            })
+            continue
         try:
             session_dir = create_regrade_session(sessions_dir, args.chat_id)
             sid = session_dir.name
-            normalized_text = normalize_grade_submission(raw_text)["normalized_text"]
+            normalized_text = normalized_preview
             for name, value in (
                 ("input.raw.txt", raw_text),
                 ("input.normalized.txt", normalized_text),
@@ -400,6 +441,7 @@ def main() -> int:
                 "session_id": sid, "chat_id": args.chat_id, "status": "graded",
                 "regrade_source": source_label, "provider_calls": 0,
                 "engine_commit": engine_commit, "changed": changed,
+                "content_sha256": content_hash,
                 "dry_run": args.dry_run, "telegram_sent": should_send,
                 "graded_at": datetime.now().isoformat(timespec="seconds"),
             }
@@ -419,6 +461,7 @@ def main() -> int:
                 )
                 if index + 1 < len(sources) and args.delay:
                     time.sleep(args.delay)
+                delivered_hashes.add(content_hash)
             elif args.dry_run and not args.all:
                 if copyable:
                     print(copyable + "\n")
@@ -438,7 +481,10 @@ def main() -> int:
     passed = sum(row["status"] == "PASS" for row in rows)
     skipped_resume = sum(row["status"] == "SKIPPED_RESUME" for row in rows)
     skipped_duplicate = sum(row["status"] == "SKIPPED_DUPLICATE" for row in rows)
-    skipped = skipped_resume + skipped_duplicate
+    skipped_delivered = sum(
+        row["status"] == "SKIPPED_ALREADY_DELIVERED" for row in rows
+    )
+    skipped = skipped_resume + skipped_duplicate + skipped_delivered
     failed = sum(row["status"] == "FAIL" for row in rows)
     changed_count = sum(row.get("changed") is True for row in rows)
     report = {
@@ -449,6 +495,7 @@ def main() -> int:
         "passed": passed, "skipped": skipped, "failed": failed,
         "skipped_resume": skipped_resume,
         "skipped_duplicate": skipped_duplicate,
+        "skipped_already_delivered": skipped_delivered,
         "dedupe_mode": args.dedupe_mode if args.all else None,
         "changed": changed_count, "provider_calls": 0, "cases": rows,
     }
@@ -466,7 +513,8 @@ def main() -> int:
             args.chat_id,
             "전체 재채점 완료\n"
             f"선택 {originally_selected} · 고유답안 {len(sources)} · 성공 {passed} · 실패 {failed}\n"
-            f"중복건너뜀 {skipped_duplicate} · 재개건너뜀 {skipped_resume}\n"
+            f"중복건너뜀 {skipped_duplicate} · 기전송건너뜀 {skipped_delivered} "
+            f"· 재개건너뜀 {skipped_resume}\n"
             f"기존 판정 대비 변경 {changed_count} · provider 호출 0\n"
             f"보고서: {report.get('report_path', '미지정')}",
         )

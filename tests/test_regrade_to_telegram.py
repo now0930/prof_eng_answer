@@ -9,6 +9,7 @@ from scripts.regrade_to_telegram import (
     answer_content_hash,
     canonical_identity_text,
     compact_console_report,
+    completed_delivery_hashes,
     completed_sources,
     create_regrade_session,
     current_commit,
@@ -100,6 +101,27 @@ class RegradeToTelegramTests(unittest.TestCase):
     def test_configured_commit_has_precedence(self):
         with mock.patch.dict("os.environ", {"ENGINE_COMMIT": "deploy-123"}):
             self.assertEqual(current_commit(Path("/missing")), "deploy-123")
+
+    def test_completed_delivery_hashes_require_actual_telegram_delivery(self):
+        with tempfile.TemporaryDirectory() as temp:
+            root = Path(temp)
+            for index, sent in enumerate((True, False)):
+                session = root / f"regrade_{index}"
+                session.mkdir()
+                (session / "meta.json").write_text(
+                    __import__("json").dumps({
+                        "status": "graded",
+                        "provider_calls": 0,
+                        "engine_commit": "engine-1",
+                        "telegram_sent": sent,
+                        "content_sha256": f"hash-{index}",
+                    }),
+                    encoding="utf-8",
+                )
+            self.assertEqual(
+                completed_delivery_hashes(root, "engine-1"), {"hash-0"},
+            )
+            self.assertEqual(completed_delivery_hashes(root, "engine-2"), set())
 
     def test_copyable_submission_has_grade_and_end_markers(self):
         rendered = build_copyable_submission("문제: 시험\n답안: 내용")

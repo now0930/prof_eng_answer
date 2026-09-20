@@ -11,7 +11,7 @@
     "official_pass_met": false,
     "provider_calls": 0,
     "canonical_requirement_status": {
-      "sw04_v_model_definition": "MISSING",
+      "sw04_v_model_definition": "PARTIAL",
       "sw04_unit_test": "PARTIAL",
       "sw04_integration_test": "PARTIAL",
       "sw04_system_test": "PARTIAL",

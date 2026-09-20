@@ -764,6 +764,12 @@ Markdown 절차를 runtime이 파싱하지 않습니다. `add-topic`과 `approve
 완료 지표는 [`docs/grading_quality_roadmap.md`](docs/grading_quality_roadmap.md), 판정
 소유권 계약은 [`docs/grading_architecture.md`](docs/grading_architecture.md)를 따릅니다.
 
+Canonical relation extractor가 세부 관계를 확정하지 못했더라도 Topic Pack의
+소유 anchor와 강한 lexical evidence가 일치하면 `MISSING`을 `PARTIAL`까지만
+복구합니다. 이 recall floor는 `SATISFIED`·`WRONG`·fatal을 바꾸지 않으며,
+다수 누락과 미해결 span이 동시에 발생하면 `LOW_EVIDENCE_RECALL`을 출력해
+감점 사유와 parser 제한을 구분합니다.
+
 기본 validation 흐름:
 
 ```text

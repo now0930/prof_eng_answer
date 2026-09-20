@@ -478,6 +478,9 @@ span 표식, 구분선과 표현용 문장부호를 제거한 공학 내용이 �
 처리한다. 비교 방향과 수식 연산자는 보존한다. 첫 session만 채점하며 나머지는 보고서에
 `SKIPPED_DUPLICATE`와 대표 session(`duplicate_of`)을 기록한다. 엄격한 기존 비교는
 `--dedupe-mode exact`, 중복을 포함한 전수 실행은 `--dedupe-mode none`을 사용한다.
+같은 engine commit으로 이미 Telegram에 전송한 canonical 답안은 다음 실행에서
+`SKIPPED_ALREADY_DELIVERED`로 자동 차단된다. 의도적으로 다시 보내야 할 때만
+`--force-resend`를 사용한다.
 
 대상과 엔진 실행만 먼저 확인하려면 `--dry-run --all --resume`을 사용하고, Telegram에는
 개별 답안 없이 총계만 보내려면 `--all --resume --send-summary`를 사용한다. Batch는

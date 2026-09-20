@@ -107,6 +107,32 @@ class VModelCanonicalPromotionTests(unittest.TestCase):
         )
         self.assertEqual(rows["sw04_integration_test"]["status"], "WRONG")
 
+    def test_strong_lexical_mention_recovers_only_partial_from_missing(self):
+        rows, merged, _ = canonical_rows(
+            self.fixture["question"],
+            self.fixture["answer"],
+        )
+        row = rows["sw04_v_model_definition"]
+        self.assertEqual(row["status"], "PARTIAL")
+        self.assertTrue(row["lexical_recall_floor_applied"])
+        self.assertEqual(
+            row["evidence_mode"], "canonical_claim+lexical_recall_floor",
+        )
+        self.assertEqual(
+            merged["canonical_promotion"]["lexical_recall_floor_count"], 1,
+        )
+
+    def test_lexical_fallback_never_weakens_wrong_relation(self):
+        rows, _, _ = canonical_rows(
+            "단위시험, 통합시험과 시스템시험을 비교하고 적용절차를 설명하시오.",
+            "통합시험은 모듈 간 인터페이스를 검증하지 않는다. "
+            "통합시험은 인터페이스, 순서, 타이밍, 오류전파를 다룬다.",
+        )
+        self.assertEqual(rows["sw04_integration_test"]["status"], "WRONG")
+        self.assertFalse(
+            rows["sw04_integration_test"].get("lexical_recall_floor_applied")
+        )
+
     def test_nested_module_word_does_not_create_unrelated_unit_claim(self):
         extraction = extract_canonical_claim_evidence(
             "통합시험은 모듈 간 인터페이스를 검증한다.", topic_ids=[TOPIC],

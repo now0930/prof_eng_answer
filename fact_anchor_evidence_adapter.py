@@ -314,13 +314,20 @@ def augment_requirement_evaluation(
         canonical = base_by_key.get(key)
         if canonical is None:
             continue
+        recall_floor_applied = bool(
+            canonical.get("status") == "MISSING"
+            and row.get("status") == "SATISFIED"
+        )
         comparisons.append({
             "owner_topic_id": key[0],
             "requirement_id": key[1],
             "lexical_status": row.get("status"),
             "canonical_status": canonical.get("status"),
-            "selected_mode": "canonical_claim",
+            "selected_mode": (
+                "lexical_recall_floor" if recall_floor_applied else "canonical_claim"
+            ),
             "status_changed": row.get("status") != canonical.get("status"),
+            "recall_floor_applied": recall_floor_applied,
         })
     enriched_base = []
     lexical_by_key = {
@@ -334,12 +341,26 @@ def augment_requirement_evaluation(
         if lexical is None:
             enriched_base.append(row)
             continue
+        recall_floor_applied = bool(
+            row.get("status") == "MISSING"
+            and lexical.get("status") == "SATISFIED"
+        )
         enriched_base.append({
             **row,
+            # A strong source-owned lexical match proves that the requirement
+            # was addressed, but not that every canonical relation is correct.
+            # Recover only PARTIAL; WRONG and SATISFIED remain exclusively
+            # owned by deterministic relation/invariant evaluation.
+            "status": "PARTIAL" if recall_floor_applied else row.get("status"),
             "importance": lexical.get("importance", row.get("importance", "normal")),
             "pass_required": lexical.get("pass_required", row.get("pass_required", False)),
             "source_span": lexical.get("source_span"),
             "evidence_text": lexical.get("evidence_text", ""),
+            "evidence_mode": (
+                "canonical_claim+lexical_recall_floor"
+                if recall_floor_applied else row.get("evidence_mode")
+            ),
+            "lexical_recall_floor_applied": recall_floor_applied,
         })
     output["requirements"] = enriched_base + [
         row for row in fact_anchor_evaluation.get("requirements", [])
@@ -352,8 +373,15 @@ def augment_requirement_evaluation(
     output["canonical_promotion"] = {
         "comparison_count": len(comparisons),
         "status_change_count": sum(row["status_changed"] for row in comparisons),
-        "canonical_selected_count": len(comparisons),
-        "lexical_selected_count": 0,
+        "canonical_selected_count": sum(
+            not row["recall_floor_applied"] for row in comparisons
+        ),
+        "lexical_selected_count": sum(
+            row["recall_floor_applied"] for row in comparisons
+        ),
+        "lexical_recall_floor_count": sum(
+            row["recall_floor_applied"] for row in comparisons
+        ),
         "comparisons": comparisons,
     }
     return output

@@ -81,6 +81,8 @@ docker compose exec -T prof-eng-answer-bot \
 - `--all`은 기본 `--dedupe-mode canonical`로 전송 span 표식, 구분선, 표현용 문장부호 차이를 제거한 공학 내용이 같은 session을 한 번만 채점
 - `--dedupe-mode exact`는 기존 Unicode·대소문자·공백 정규화만 사용하고, `none`은 중복 제거 없이 전부 채점
 - `--resume`: 같은 engine commit으로 이미 성공한 원본은 건너뜀
+- 대량 전송은 `--resume` 여부와 관계없이 같은 engine·canonical 답안을 이미 Telegram으로 보냈으면 `SKIPPED_ALREADY_DELIVERED`로 차단
+- `--force-resend`: 위 재전송 차단을 명시적으로 해제
 - `--changed-only`: 기존 점수·합격·고득점·fatal 서명이 달라진 건만 Telegram 전송
 - `--send-summary`: 개별 원문·결과 대신 전체 집계만 전송
 - `--delay`: 개별 전송 간격이며 기본값은 5초

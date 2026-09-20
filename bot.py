@@ -1120,6 +1120,12 @@ def format_result(parsed, sid=None):
         if missing_ids:
             suffix = f" 외 {len(missing_ids) - 5}개" if len(missing_ids) > 5 else ""
             lines.append("- 누락 요구: " + ", ".join(missing_ids[:5]) + suffix)
+        recall_diagnostic = parsed.get("evidence_recall_diagnostic") or {}
+        if recall_diagnostic.get("warning"):
+            lines.append(
+                "- [점검 필요] LOW_EVIDENCE_RECALL: 표현 해석 미해결과 "
+                "다수 누락이 동시에 검출되어 evidence recall 점검이 필요합니다."
+            )
         lines.append("")
 
     rater_results = parsed.get("rater_results") or parsed.get("raters") or []

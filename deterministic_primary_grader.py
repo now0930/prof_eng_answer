@@ -57,6 +57,19 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         requirements,
         fact_anchors,
     )
+    missing_count = int(requirements.get("summary", {}).get("MISSING", 0))
+    recall_floor_ids = [
+        str(row.get("requirement_id") or "")
+        for row in requirements.get("requirements", [])
+        if row.get("lexical_recall_floor_applied")
+    ]
+    low_evidence_recall = bool(
+        missing_count >= 4
+        and (
+            recall_floor_ids
+            or extraction.get("unresolved_spans")
+        )
+    )
     scope_selections = fact_anchors.get("question_contract_selections", [])
     scope_resolved = bool(scope_selections) and all(
         row.get("mode") in {"explicit_question_contract", "derived_question_contract"}
@@ -124,6 +137,14 @@ def grade_deterministically(*, question_text: str, answer_text: str) -> dict[str
         "requirements": requirements["requirements"],
         "requirement_summary": requirements["summary"],
         "canonical_promotion": requirements.get("canonical_promotion", {}),
+        "evidence_recall_diagnostic": {
+            "code": "LOW_EVIDENCE_RECALL" if low_evidence_recall else "OK",
+            "warning": low_evidence_recall,
+            "missing_requirement_count": missing_count,
+            "lexical_recall_floor_requirement_ids": recall_floor_ids,
+            "unresolved_span_count": len(extraction["unresolved_spans"]),
+            "score_effect": "none",
+        },
         "logic_check_evaluation": {
             "fatal_error_detected": requirements["fatal_or_core_error"],
             "mode": "fatal" if requirements["fatal_or_core_error"] else "normal",
