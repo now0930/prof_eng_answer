@@ -1,0 +1,18 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "CORE_MUST_PREPARE",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "high_band_unlock_conditions": [
+    "정상·격리·복귀의 valve 상태와 순서를 정확히 구분한다.",
+    "조작순서를 differential pressure와 잔압 안전에 연결한다.",
+    "DP pressure test의 H 입력·L reference 조건을 설명한다.",
+    "vent/drain·damping·isolation의 service별 trade-off를 평가한다."
+  ],
+  "note": "현장 조작순서가 안전과 측정 정확도에 직접 영향을 주는 핵심 실무 Topic이다.",
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "Chapter 19 DP transmitter 현장 운전·정비 문제군을 독립 분류했다."
+  ]
+}

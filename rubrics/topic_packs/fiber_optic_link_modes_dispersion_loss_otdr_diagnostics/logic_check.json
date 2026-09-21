@@ -1,0 +1,10 @@
+{
+  "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+  "title": "광섬유 링크 모드·분산·손실·OTDR 진단",
+  "deterministic_checks": {"enabled": false, "difficulty_profile": "FIELD_APPLICATION", "topic_name": "광섬유 링크 진단", "topic_aliases": ["광섬유 OTDR", "fiber optic link diagnostics"], "question_type": "DIAGNOSIS_ACTION", "fatal_checks": [], "major_checks": [], "question_type_checks": [], "next_practice_points": ["모드와 분산 구분", "loss와 event 위치 구분", "OTDR 한계"], "de_claim_trust": {}},
+  "llm_profile": {"enabled": true, "focus": ["모드·분산 관계", "insertion-loss 시험", "OTDR 거리·event·한계"], "fatal_conditions": [
+    {"id": "fiber_fatal_single_mode_no_dispersion", "description": "single-mode에는 어떤 분산도 없다고 단정", "severity": "fatal", "recommended_ceiling": 13.0},
+    {"id": "fiber_fatal_power_meter_locates_fault", "description": "입출력 power 비교만으로 결함 위치를 항상 결정한다고 주장", "severity": "fatal", "recommended_ceiling": 13.0}
+  ]},
+  "revision_notes": ["명시적인 물리관계 오정의만 fatal 후보로 제한했다."]
+}

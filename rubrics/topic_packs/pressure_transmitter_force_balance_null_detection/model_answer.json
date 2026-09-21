@@ -1,0 +1,21 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "pressure_transmitter_force_balance_null_detection",
+  "title_ko": "Force-balance 압력변환기와 null detection",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "expected_question_patterns": [
+    {"pattern": "Force-balance 압력변환기의 pneumatic 및 electronic 동작원리를 설명하시오.", "required_anchor_ids": ["force_balance_equilibrium", "null_position_error_detection", "pneumatic_force_balance_chain", "electronic_force_balance_chain"]},
+    {"pattern": "Null-balance 압력변환기의 특징, 장단점과 현장 적용 시 고려사항을 설명하시오.", "required_anchor_ids": ["force_balance_equilibrium", "null_position_error_detection", "force_balance_tradeoffs"]}
+  ],
+  "recommended_outline": [
+    {"section": "1. 힘 변환", "intent": "차압과 면적으로 sensing force를 정의한다.", "anchor_refs": ["force_balance_equilibrium"]},
+    {"section": "2. Null 원리", "intent": "position error 검출과 feedback 평형을 설명한다.", "anchor_refs": ["null_position_error_detection"]},
+    {"section": "3. 구현 비교", "intent": "pneumatic과 electronic chain을 비교한다.", "anchor_refs": ["pneumatic_force_balance_chain", "electronic_force_balance_chain"]},
+    {"section": "4. 적용 판단", "intent": "선형성·피로·진동·전력 trade-off를 평가한다.", "anchor_refs": ["force_balance_tradeoffs"]}
+  ],
+  "high_score_points": ["Fsensed=ΔP·A와 force equilibrium을 제시한다.", "force가 아니라 position error를 검출함을 설명한다.", "baffle-nozzle와 force-coil feedback을 비교한다.", "진동·전력·intrinsic-safety 조건을 평가한다."],
+  "common_missing_points": ["open-loop displacement 방식으로 오해", "null detector 역할 누락", "pneumatic/electronic feedback chain 혼동", "진동과 power trade-off 누락"],
+  "routing_aliases": ["force balance pressure transmitter", "null balance pressure measurement", "baffle nozzle bellows feedback", "force coil 압력변환기", "position error counter force"],
+  "routing_field_points": ["Fsensed delta P area", "null detector position error", "pneumatic force balance", "electronic force coil", "vibration power tradeoff"],
+  "revision_notes": ["Chapter 19의 force-balance/null detector owner를 추가했다."]
+}

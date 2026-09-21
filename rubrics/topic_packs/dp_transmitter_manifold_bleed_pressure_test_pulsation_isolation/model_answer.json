@@ -1,0 +1,21 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+  "title_ko": "DP transmitter manifold·bleed·압력시험·pulsation isolation",
+  "question_type": "IMPLEMENTATION_EVALUATION",
+  "expected_question_patterns": [
+    {"pattern": "DP transmitter 3-valve manifold의 정상·격리·복귀 조작절차와 안전상 유의점을 설명하시오.", "required_anchor_ids": ["manifold_normal_state", "manifold_isolation_sequence", "manifold_return_sequence"]},
+    {"pattern": "DP transmitter의 bleed, 압력시험, pulsation damping 및 process isolation 방안을 설명하시오.", "required_anchor_ids": ["dp_pressure_test_reference", "bleed_vent_service_location", "pulsation_damping_tradeoff", "process_isolation_fill_fluid"]}
+  ],
+  "recommended_outline": [
+    {"section": "1. 구성과 정상상태", "intent": "H/L block과 equalizing·bleed 역할을 정의한다.", "anchor_refs": ["manifold_normal_state"]},
+    {"section": "2. 격리와 복귀", "intent": "압력차·잔압을 고려한 순서를 설명한다.", "anchor_refs": ["manifold_isolation_sequence", "manifold_return_sequence"]},
+    {"section": "3. 시험과 vent/drain", "intent": "H test·L reference와 service별 trapped fluid 제거를 제시한다.", "anchor_refs": ["dp_pressure_test_reference", "bleed_vent_service_location"]},
+    {"section": "4. 동특성과 격리", "intent": "pulsation trade-off와 isolating diaphragm 영향을 평가한다.", "anchor_refs": ["pulsation_damping_tradeoff", "process_isolation_fill_fluid"]}
+  ],
+  "high_score_points": ["정상·격리·복귀 valve 상태를 구분한다.", "순서의 압력·안전 의미를 설명한다.", "equalizing open에서 DP 시험이 안 됨을 제시한다.", "damping-response trade-off와 현장 절차 우선을 포함한다."],
+  "common_missing_points": ["최종 상태만 쓰고 조작순서가 없음", "bleed를 3-valve 본체 구성으로 고정", "equalizing open에서 span test 수행", "damper의 응답지연 누락"],
+  "routing_aliases": ["DP transmitter 3 valve manifold", "manifold isolation equalizing bleed", "DP 압력시험 hand pump", "pressure pulsation snubber damper", "isolating diaphragm fill fluid"],
+  "routing_field_points": ["high low block equalizing", "HC EO LC BO", "BC LO EC HO", "DP pressure test reference", "vent drain pulsation isolation"],
+  "revision_notes": ["Chapter 19의 현장 DP transmitter accessory·procedure owner를 추가했다."]
+}

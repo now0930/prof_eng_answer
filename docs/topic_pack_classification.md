@@ -2,7 +2,7 @@
 
 ## 1. 목적
 
-이 문서는 현재 78개 Topic Pack을 산업계측제어기술사
+이 문서는 현재 82개 Topic Pack을 산업계측제어기술사
 2027.01.01~2030.12.31 필기 공식 출제기준의 33개 세부항목에 매핑한다.
 
 공식 출제기준은 `docs/exam_scope/industrial_instrumentation_control_2027_2030_criteria.md`를
@@ -27,9 +27,9 @@ Stage 2B-2 semantic mapping review SHA-256: `b61c51218f66c520eef4c6949fe62dfab96
 
 | 항목 | 수량 |
 |---|---:|
-| Topic Pack | 78 |
+| Topic Pack | 82 |
 | 공식 세부항목 | 33 |
-| HIGH confidence | 65 |
+| HIGH confidence | 69 |
 | MEDIUM confidence | 13 |
 | PRIMARY owner가 있는 공식 세부항목 | 33 |
 | PRIMARY owner가 없는 공식 세부항목 | 0 |
@@ -210,7 +210,7 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 
 ## 7. PRIMARY owner가 없는 공식 세부항목
 
-현재 78개 inventory에는 33개 공식 세부항목 모두에 하나 이상의 PRIMARY owner가
+현재 82개 inventory에는 33개 공식 세부항목 모두에 하나 이상의 PRIMARY owner가
 있다. 이는 Topic 존재 여부를 뜻하며, 개별 Topic의 답안 coverage 충분성을 자동으로
 보장하지 않는다.
 
@@ -235,10 +235,10 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 다음 단계에서는 이 분류 문서를 read-only로 재감사한다.
 그 이후에만 commit 여부를 결정한다.
 
-## 10. 52개 기준선 이후 추가된 26개 Topic 매핑
+## 10. 52개 기준선 이후 추가된 30개 Topic 매핑
 
 기존 1~52 표는 최초 의미 분류 기준선을 보존한다. 이후 추가된 Topic은 아래 표가
-동일한 권위를 가지며, 두 표의 합이 현재 78개 inventory의 정본이다.
+동일한 권위를 가지며, 두 표의 합이 현재 82개 inventory의 정본이다.
 
 | # | Topic Pack | PRIMARY | SECONDARY | Confidence |
 |---:|---|---|---|:---:|
@@ -268,3 +268,7 @@ SECONDARY 관계와 Topic의 실제 내용까지 역집계한 뒤 별도 단계�
 | 76 | `safety_critical_software_structural_coverage_mcdc_static_dynamic_analysis` | `IC-2027-W-3-8` | `IC-2027-W-4-3` | HIGH |
 | 77 | `sil_target_determination_risk_reduction_and_lifecycle` | `IC-2027-W-4-3` | `IC-2027-W-4-1`, `IC-2027-W-4-8` | HIGH |
 | 78 | `speed_rotation_measurement_encoder_proximity_tachometer_selection_error` | `IC-2027-W-2-1` | `IC-2027-W-2-3` | HIGH |
+| 79 | `instrument_signal_transmission_line_reflection_termination` | `IC-2027-W-2-7` | `IC-2027-W-2-6`, `IC-2027-W-3-3` | HIGH |
+| 80 | `fiber_optic_link_modes_dispersion_loss_otdr_diagnostics` | `IC-2027-W-2-7` | `IC-2027-W-2-3`, `IC-2027-W-3-3` | HIGH |
+| 81 | `pressure_transmitter_force_balance_null_detection` | `IC-2027-W-2-1` | `IC-2027-W-2-3` | HIGH |
+| 82 | `dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation` | `IC-2027-W-4-9` | `IC-2027-W-2-1`, `IC-2027-W-4-6` | HIGH |

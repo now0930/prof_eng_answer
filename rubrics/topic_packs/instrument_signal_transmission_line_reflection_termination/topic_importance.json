@@ -1,0 +1,18 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "instrument_signal_transmission_line_reflection_termination",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "DIAGNOSIS_ACTION",
+  "high_band_unlock_conditions": [
+    "상승시간과 왕복 전파지연으로 전송선로 적용 여부를 판단한다.",
+    "반사계수와 ringing·overshoot 인과관계를 설명한다.",
+    "physical-layer 조건에 맞는 종단과 topology를 제시한다.",
+    "파형 기반 변경 전후 검증을 포함한다."
+  ],
+  "note": "고속 신호의 물리계층 진단과 현장 개선을 함께 요구한다.",
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "Chapter 8 전송선로·반사·종단 문제군을 독립 분류했다."
+  ]
+}

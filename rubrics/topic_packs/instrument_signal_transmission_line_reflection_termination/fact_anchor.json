@@ -1,0 +1,14 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "instrument_signal_transmission_line_reflection_termination",
+  "title_ko": "계장 신호 전송선로·반사·종단",
+  "question_type_hint": "DIAGNOSIS_ACTION",
+  "anchors": [
+    {"anchor_id": "transmission_line_applicability", "statement": "신호 상승시간이 선로의 왕복 전파지연과 비슷하거나 더 짧으면 선로 위치별 전압·전류 차이를 무시할 수 없어 전송선로로 다룬다.", "keywords": ["상승시간", "전파지연", "전송선로", "왕복시간"], "core_terms": ["상승시간", "전파지연", "전송선로"], "accepted_explanations": ["빠른 edge와 긴 cable에서는 lumped 회로 가정이 성립하지 않을 수 있다."], "rejected_explanations": ["모든 계장 신호는 길이와 상승시간에 무관하게 lumped 회로이다."], "importance": "must"},
+    {"anchor_id": "reflection_coefficient_relation", "statement": "부하 임피던스 ZL과 특성임피던스 Z0의 불연속에서 반사가 생기며 반사계수는 Γ=(ZL-Z0)/(ZL+Z0)이다.", "keywords": ["반사계수", "특성임피던스", "부하임피던스", "임피던스 불연속"], "core_terms": ["반사계수", "특성임피던스", "임피던스 불연속"], "accepted_explanations": ["ZL=Z0이면 이상적인 부하 반사는 0이다."], "rejected_explanations": ["불연속이 커질수록 반사가 감소한다."], "importance": "must"},
+    {"anchor_id": "reflection_waveform_effects", "statement": "반사파는 원 신호와 중첩되어 ringing, overshoot, undershoot, threshold 재통과와 오검출을 일으킬 수 있다.", "keywords": ["ringing", "overshoot", "undershoot", "오검출"], "core_terms": ["ringing", "overshoot", "오검출"], "accepted_explanations": ["수신단 threshold를 여러 번 통과하면 false transition이 생길 수 있다."], "rejected_explanations": ["반사는 신호 파형과 판정에 영향을 주지 않는다."], "importance": "must"},
+    {"anchor_id": "termination_and_topology", "statement": "정합 종단과 연속된 topology는 반사를 줄이며 종단 값·위치·부하는 해당 physical-layer와 driver 허용조건으로 결정한다.", "keywords": ["정합 종단", "termination", "topology", "stub", "driver"], "core_terms": ["정합 종단", "termination", "stub"], "accepted_explanations": ["star·긴 stub는 추가 불연속과 반사 경로가 될 수 있다."], "rejected_explanations": ["아무 저항이나 연결하면 항상 반사가 제거된다."], "importance": "must"},
+    {"anchor_id": "waveform_diagnostic_procedure", "statement": "진단은 cable·connector·termination·branch를 확인하고 적절한 probe와 측정 위치에서 파형을 비교한 뒤 변경 전후를 재검증한다.", "keywords": ["파형 측정", "connector", "termination", "측정 위치", "재검증"], "core_terms": ["파형 측정", "termination", "재검증"], "accepted_explanations": ["한 번에 한 요소를 바꾸고 ringing과 threshold margin 변화를 확인한다."], "rejected_explanations": ["파형 확인 없이 종단저항을 임의 추가한다."], "importance": "important"}
+  ],
+  "revision_notes": ["Chapter 8 전송선로·반사·종단 범위를 원자 Topic으로 구성했다."]
+}

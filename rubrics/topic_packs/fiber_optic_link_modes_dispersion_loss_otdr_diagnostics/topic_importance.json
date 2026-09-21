@@ -1,0 +1,18 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "DIAGNOSIS_ACTION",
+  "high_band_unlock_conditions": [
+    "single/multimode와 modal·chromatic·PMD를 구분한다.",
+    "insertion-loss와 OTDR event-location 역할을 구분한다.",
+    "OTDR 거리식과 dead zone·분해능 한계를 설명한다.",
+    "시험 결과를 결합하여 링크 acceptance를 판단한다."
+  ],
+  "note": "광 링크의 물리 원리와 현장 시험 판정을 함께 요구한다.",
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "Chapter 8 광섬유 링크 시험·진단 문제군을 독립 분류했다."
+  ]
+}

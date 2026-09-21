@@ -1,0 +1,11 @@
+{
+  "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+  "title": "DP transmitter manifold·bleed·압력시험·pulsation isolation",
+  "deterministic_checks": {"enabled": false, "difficulty_profile": "FIELD_APPLICATION", "topic_name": "DP transmitter manifold 정비", "topic_aliases": ["DP manifold bleed", "3 valve manifold"], "question_type": "IMPLEMENTATION_EVALUATION", "fatal_checks": [], "major_checks": [], "question_type_checks": [], "next_practice_points": ["정상·격리·복귀 순서", "DP test reference", "damping trade-off"], "de_claim_trust": {}},
+  "llm_profile": {"enabled": true, "focus": ["valve 상태와 조작순서", "pressure-test reference", "vent/drain·damping·isolation"], "fatal_conditions": [
+    {"id": "dp_manifold_fatal_bleed_under_process", "description": "H/L process block가 열린 상태에서 bleed를 열어 안전하게 zero energy가 된다고 주장", "severity": "fatal", "recommended_ceiling": 12.0},
+    {"id": "dp_manifold_fatal_equalized_span_test", "description": "equalizing valve를 연 상태에서 DP span pressure test를 수행한다고 주장", "severity": "fatal", "recommended_ceiling": 13.0},
+    {"id": "dp_manifold_fatal_equalizer_normal_open", "description": "정상 DP 측정 중 equalizing valve를 열어 둔다고 주장", "severity": "fatal", "recommended_ceiling": 12.0}
+  ]},
+  "revision_notes": ["직접 위험 또는 측정 원리 반대 주장만 fatal 후보로 정의했다."]
+}

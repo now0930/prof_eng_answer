@@ -1,5 +1,5 @@
 {
-  "version": "sha256-c23672ada937a92678c25ca9bbffe39df8db6f6afc800751ad9586089594e55f-generated-topic-pack-fact-anchors",
+  "version": "sha256-e7970dc08deb64d2327b0f7bcca1f891b471a623abf836229c87eed898570c84-generated-topic-pack-fact-anchors",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.fact_anchors.v1",
   "source": "rubrics/topic_packs/*/fact_anchor.json+model_answer.json",
@@ -48256,6 +48256,373 @@
       "priority": "NORMAL"
     },
     {
+      "schema_version": "topic_pack.fact_anchor.v1",
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "title_ko": "DP transmitter manifold·bleed·압력시험·pulsation isolation",
+      "question_type_hint": "IMPLEMENTATION_EVALUATION",
+      "anchors": [
+        {
+          "anchor_id": "manifold_normal_state",
+          "statement": "표준 3-valve manifold의 정상운전은 H/L block open, equalizing closed이며 bleed는 transmitter flange의 별도 fitting일 수 있다.",
+          "keywords": [
+            "3-valve manifold",
+            "H block open",
+            "L block open",
+            "equalizing closed",
+            "bleed fitting"
+          ],
+          "core_terms": [
+            "H/L block open",
+            "equalizing closed",
+            "bleed fitting"
+          ],
+          "accepted_explanations": [
+            "정상상태에서 H와 L pressure가 분리되어 실제 ΔP가 형성된다."
+          ],
+          "rejected_explanations": [
+            "정상운전에서 equalizing valve를 연다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "표준 3-valve manifold의 정상운전은 H/L block open, equalizing closed이며 bleed는 transmitter flange의 별도 fitting일 수 있다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "manifold_isolation_sequence",
+          "statement": "3-valve 격리는 H close, equalizing open, L close, bleed open 순으로 differential pressure와 잔압을 제어한다.",
+          "keywords": [
+            "H close",
+            "equalizing open",
+            "L close",
+            "bleed open",
+            "격리"
+          ],
+          "core_terms": [
+            "H close",
+            "equalizing open",
+            "L close",
+            "bleed open"
+          ],
+          "accepted_explanations": [
+            "HC→EO→LC→BO로 제거 상태를 만든다."
+          ],
+          "rejected_explanations": [
+            "H/L block가 열린 상태에서 bleed를 열어 zero energy를 확보한다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "3-valve 격리는 H close, equalizing open, L close, bleed open 순으로 differential pressure와 잔압을 제어한다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "manifold_return_sequence",
+          "statement": "정상 복귀는 bleed close, L open, equalizing close, H open 순으로 대기 개방 경로를 닫고 정상 ΔP를 회복한다.",
+          "keywords": [
+            "bleed close",
+            "L open",
+            "equalizing close",
+            "H open",
+            "복귀"
+          ],
+          "core_terms": [
+            "bleed close",
+            "equalizing close",
+            "H open"
+          ],
+          "accepted_explanations": [
+            "BC→LO→EC→HO로 복귀한다."
+          ],
+          "rejected_explanations": [
+            "bleed가 열린 채 H block를 먼저 연다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "정상 복귀는 bleed close, L open, equalizing close, H open 순으로 대기 개방 경로를 닫고 정상 ΔP를 회복한다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "dp_pressure_test_reference",
+          "statement": "DP pressure test는 process를 격리하고 H에 시험압, L에 reference를 두며 equalizing open 상태에서는 PH=PL이 되어 span 시험이 되지 않는다.",
+          "keywords": [
+            "hand pump",
+            "test gauge",
+            "H side",
+            "L vent",
+            "equalizing closed"
+          ],
+          "core_terms": [
+            "H 시험압",
+            "L reference",
+            "equalizing closed"
+          ],
+          "accepted_explanations": [
+            "equalizing valve를 닫아 H와 L의 시험 차압을 만든다."
+          ],
+          "rejected_explanations": [
+            "equalizing open 상태로 DP span을 시험한다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "DP pressure test는 process를 격리하고 H에 시험압, L에 reference를 두며 equalizing open 상태에서는 PH=PL이 되어 span 시험이 되지 않는다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "bleed_vent_service_location",
+          "statement": "Liquid service의 trapped gas는 상부에서, gas service의 condensed liquid는 하부에서 vent 또는 drain한다.",
+          "keywords": [
+            "liquid service",
+            "trapped gas",
+            "upper bleed",
+            "gas service",
+            "condensate",
+            "lower drain"
+          ],
+          "core_terms": [
+            "trapped gas",
+            "upper bleed",
+            "condensate",
+            "lower drain"
+          ],
+          "accepted_explanations": [
+            "유체 상태와 중력 분리를 고려해 vent/drain 위치를 정한다."
+          ],
+          "rejected_explanations": [
+            "모든 service에서 bleed 위치는 동일하다."
+          ],
+          "importance": "important",
+          "name": "Fact Anchor",
+          "expected": "Liquid service의 trapped gas는 상부에서, gas service의 condensed liquid는 하부에서 vent 또는 drain한다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "pulsation_damping_tradeoff",
+          "statement": "Snubber 또는 damper의 restriction은 빠른 pressure pulsation을 줄이지만 damping과 response speed 사이 trade-off가 있다.",
+          "keywords": [
+            "snubber",
+            "damper",
+            "pulsation",
+            "restriction",
+            "response speed"
+          ],
+          "core_terms": [
+            "pulsation",
+            "damping",
+            "response speed"
+          ],
+          "accepted_explanations": [
+            "low-pass filter와 유사하지만 과도한 damping은 실제 응답을 늦춘다."
+          ],
+          "rejected_explanations": [
+            "damping을 크게 해도 응답 지연은 없다."
+          ],
+          "importance": "important",
+          "name": "Fact Anchor",
+          "expected": "Snubber 또는 damper의 restriction은 빠른 pressure pulsation을 줄이지만 damping과 response speed 사이 trade-off가 있다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "process_isolation_fill_fluid",
+          "statement": "Isolating diaphragm은 process fluid의 직접 접촉을 막고 fill fluid로 pressure를 전달하므로 호환성·온도·응답 영향을 평가한다.",
+          "keywords": [
+            "isolating diaphragm",
+            "fill fluid",
+            "process isolation",
+            "compatibility",
+            "temperature"
+          ],
+          "core_terms": [
+            "isolating diaphragm",
+            "fill fluid",
+            "호환성"
+          ],
+          "accepted_explanations": [
+            "fluid는 차단하되 pressure는 전달한다."
+          ],
+          "rejected_explanations": [
+            "isolation diaphragm은 pressure 전달도 완전히 차단한다."
+          ],
+          "importance": "important",
+          "name": "Fact Anchor",
+          "expected": "Isolating diaphragm은 process fluid의 직접 접촉을 막고 fill fluid로 pressure를 전달하므로 호환성·온도·응답 영향을 평가한다.",
+          "support_terms": []
+        }
+      ],
+      "revision_notes": [
+        "Chapter 19의 manifold·bleed·시험·pulsation 정비 경계를 원자화했다."
+      ],
+      "triggers": [
+        "DP transmitter 3 valve manifold",
+        "DP",
+        "transmitter",
+        "valve",
+        "manifold",
+        "manifold isolation equalizing bleed",
+        "isolation",
+        "equalizing",
+        "bleed",
+        "DP 압력시험 hand pump",
+        "압력시험",
+        "hand",
+        "pump",
+        "pressure pulsation snubber damper",
+        "pressure",
+        "pulsation",
+        "snubber",
+        "damper",
+        "isolating diaphragm fill fluid",
+        "isolating",
+        "diaphragm",
+        "fill",
+        "fluid",
+        "high low block equalizing",
+        "high",
+        "low",
+        "block",
+        "HC EO LC BO",
+        "HC",
+        "EO",
+        "LC",
+        "BO",
+        "BC LO EC HO",
+        "BC",
+        "LO",
+        "EC",
+        "HO",
+        "DP pressure test reference",
+        "test",
+        "reference",
+        "vent drain pulsation isolation",
+        "vent",
+        "drain",
+        "DP transmitter 3-valve manifold의 정상·격리·복귀 조작절차와 안전상 유의점을 설명하시오.",
+        "정상",
+        "격리",
+        "복귀",
+        "조작절차와",
+        "안전상",
+        "유의점을",
+        "DP transmitter의 bleed, 압력시험, pulsation damping 및 process isolation 방안을 설명하시오.",
+        "damping",
+        "process",
+        "방안을",
+        "DP transmitter manifold·bleed·압력시험·pulsation isolation",
+        "3-valve manifold",
+        "H block open",
+        "H",
+        "open",
+        "L block open",
+        "L",
+        "equalizing closed",
+        "closed",
+        "bleed fitting",
+        "fitting",
+        "표준 3-valve manifold의 정상운전은 H/L block open, equalizing closed이며 bleed는 transmitter flange의 별도 fitting일 수 있다.",
+        "표준",
+        "정상운전은",
+        "이며",
+        "flange",
+        "별도",
+        "있다",
+        "H close",
+        "close",
+        "equalizing open",
+        "L close",
+        "bleed open",
+        "3-valve 격리는 H close, equalizing open, L close, bleed open 순으로 differential pressure와 잔압을 제어한다.",
+        "격리는",
+        "순으로",
+        "differential",
+        "잔압을",
+        "제어한다",
+        "bleed close",
+        "L open",
+        "equalizing close",
+        "H open",
+        "정상 복귀는 bleed close, L open, equalizing close, H open 순으로 대기 개방 경로를 닫고 정상 ΔP를 회복한다.",
+        "복귀는",
+        "대기",
+        "개방",
+        "경로를",
+        "닫고",
+        "P",
+        "회복한다",
+        "hand pump",
+        "test gauge",
+        "gauge",
+        "H side",
+        "side",
+        "L vent",
+        "DP pressure test는 process를 격리하고 H에 시험압, L에 reference를 두며 equalizing open 상태에서는 PH=PL이 되어 span 시험이 되지 않는다.",
+        "격리하고",
+        "시험압",
+        "두며",
+        "상태에서는",
+        "PH",
+        "PL",
+        "되어",
+        "span",
+        "시험이",
+        "되지",
+        "않는다",
+        "liquid service",
+        "liquid",
+        "service",
+        "trapped gas",
+        "trapped",
+        "gas",
+        "upper bleed",
+        "upper",
+        "gas service",
+        "condensate",
+        "lower drain",
+        "lower",
+        "Liquid service의 trapped gas는 상부에서, gas service의 condensed liquid는 하부에서 vent 또는 drain한다.",
+        "Liquid",
+        "상부에서",
+        "condensed",
+        "하부에서",
+        "또는",
+        "한다",
+        "restriction",
+        "response speed",
+        "response",
+        "speed",
+        "Snubber 또는 damper의 restriction은 빠른 pressure pulsation을 줄이지만 damping과 response speed 사이 trade-off가 있다.",
+        "Snubber",
+        "빠른",
+        "줄이지만",
+        "사이",
+        "trade-off",
+        "isolating diaphragm",
+        "fill fluid",
+        "process isolation",
+        "compatibility",
+        "temperature",
+        "Isolating diaphragm은 process fluid의 직접 접촉을 막고 fill fluid로 pressure를 전달하므로 호환성·온도·응답 영향을 평가한다.",
+        "Isolating",
+        "직접",
+        "접촉을",
+        "막고",
+        "전달하므로",
+        "호환성",
+        "온도",
+        "응답",
+        "영향을",
+        "평가한다"
+      ],
+      "aliases": [
+        "DP transmitter 3 valve manifold",
+        "manifold isolation equalizing bleed",
+        "DP 압력시험 hand pump",
+        "pressure pulsation snubber damper",
+        "isolating diaphragm fill fluid",
+        "DP transmitter 3-valve manifold의 정상·격리·복귀 조작절차와 안전상 유의점을 설명하시오.",
+        "DP transmitter의 bleed, 압력시험, pulsation damping 및 process isolation 방안을 설명하시오.",
+        "DP transmitter manifold·bleed·압력시험·pulsation isolation"
+      ],
+      "priority": "CORE_MUST_PREPARE"
+    },
+    {
       "schema_version": "fact_anchor.v1",
       "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
       "title_ko": "전자기기 오차·Noise·Drift·Tolerance·Aging·Power 영향 및 대책",
@@ -53193,6 +53560,320 @@
         "피드백 시스템의 폐루프 구조·민감도·정상상태 오차"
       ],
       "priority": "CORE_MUST_PREPARE"
+    },
+    {
+      "schema_version": "topic_pack.fact_anchor.v1",
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+      "title_ko": "광섬유 링크 모드·분산·손실·OTDR 진단",
+      "question_type_hint": "DIAGNOSIS_ACTION",
+      "anchors": [
+        {
+          "anchor_id": "fiber_total_internal_reflection",
+          "statement": "Core와 cladding의 굴절률 조건과 임계각에 의해 광섬유의 전반사 전파 경로가 형성된다.",
+          "keywords": [
+            "core",
+            "cladding",
+            "굴절률",
+            "임계각",
+            "전반사"
+          ],
+          "core_terms": [
+            "core",
+            "cladding",
+            "전반사"
+          ],
+          "accepted_explanations": [
+            "core 굴절률이 cladding보다 큰 구조에서 수용각과 개구수 조건을 만족한다."
+          ],
+          "rejected_explanations": [
+            "빛은 금속 도체의 전류처럼 전파된다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "Core와 cladding의 굴절률 조건과 임계각에 의해 광섬유의 전반사 전파 경로가 형성된다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "fiber_mode_dispersion_relation",
+          "statement": "Multimode modal dispersion은 모드별 경로와 도착시간 차이이며 graded-index는 굴절률 분포로 그 차이를 줄인다.",
+          "keywords": [
+            "multimode",
+            "modal dispersion",
+            "graded-index",
+            "도착시간"
+          ],
+          "core_terms": [
+            "multimode",
+            "modal dispersion",
+            "graded-index"
+          ],
+          "accepted_explanations": [
+            "step-index multimode보다 graded-index multimode의 modal dispersion이 작다."
+          ],
+          "rejected_explanations": [
+            "graded-index는 모드별 지연 차이를 늘린다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "Multimode modal dispersion은 모드별 경로와 도착시간 차이이며 graded-index는 굴절률 분포로 그 차이를 줄인다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "single_mode_residual_dispersion",
+          "statement": "Single-mode는 modal dispersion을 크게 줄이지만 chromatic dispersion과 polarization-mode dispersion까지 0으로 만들지는 않는다.",
+          "keywords": [
+            "single-mode",
+            "chromatic dispersion",
+            "polarization-mode dispersion",
+            "PMD"
+          ],
+          "core_terms": [
+            "single-mode",
+            "chromatic dispersion",
+            "PMD"
+          ],
+          "accepted_explanations": [
+            "단일모드에도 파장·편광 관련 분산이 남을 수 있다."
+          ],
+          "rejected_explanations": [
+            "single-mode에는 어떤 분산도 존재하지 않는다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "Single-mode는 modal dispersion을 크게 줄이지만 chromatic dispersion과 polarization-mode dispersion까지 0으로 만들지는 않는다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "insertion_loss_test_role",
+          "statement": "안정된 광원과 power meter는 입력·출력 power를 비교하여 링크 전체 insertion loss를 측정한다.",
+          "keywords": [
+            "광원",
+            "power meter",
+            "insertion loss",
+            "입출력 전력"
+          ],
+          "core_terms": [
+            "광원",
+            "power meter",
+            "insertion loss"
+          ],
+          "accepted_explanations": [
+            "A_dB=10log10(Pin/Pout)로 양의 손실을 나타낼 수 있다."
+          ],
+          "rejected_explanations": [
+            "입출력 전력 비교만으로 모든 손실 위치를 찾는다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "안정된 광원과 power meter는 입력·출력 power를 비교하여 링크 전체 insertion loss를 측정한다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "otdr_distance_and_event_role",
+          "statement": "OTDR은 짧은 pulse의 반사·후방산란과 왕복시간으로 event 위치를 추정하며 d=cΔt/(2ng)를 사용한다.",
+          "keywords": [
+            "OTDR",
+            "후방산란",
+            "왕복시간",
+            "event",
+            "군굴절률"
+          ],
+          "core_terms": [
+            "OTDR",
+            "후방산란",
+            "왕복시간"
+          ],
+          "accepted_explanations": [
+            "반사 peak, loss step와 종단 event를 위치 축에서 해석한다."
+          ],
+          "rejected_explanations": [
+            "OTDR은 입출력 power만 비교하므로 위치를 찾을 수 없다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "OTDR은 짧은 pulse의 반사·후방산란과 왕복시간으로 event 위치를 추정하며 d=cΔt/(2ng)를 사용한다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "otdr_limit_and_acceptance",
+          "statement": "OTDR 결과는 launch/receive cable, dead zone, 공간분해능과 설정을 고려하고 insertion-loss 결과와 함께 판정한다.",
+          "keywords": [
+            "dead zone",
+            "공간분해능",
+            "launch cable",
+            "receive cable",
+            "판정"
+          ],
+          "core_terms": [
+            "dead zone",
+            "공간분해능",
+            "launch cable"
+          ],
+          "accepted_explanations": [
+            "OTDR event만으로 결함의 물리적 원인을 단정하지 않는다."
+          ],
+          "rejected_explanations": [
+            "OTDR trace 하나가 모든 결함 원인을 확정한다."
+          ],
+          "importance": "important",
+          "name": "Fact Anchor",
+          "expected": "OTDR 결과는 launch/receive cable, dead zone, 공간분해능과 설정을 고려하고 insertion-loss 결과와 함께 판정한다.",
+          "support_terms": []
+        }
+      ],
+      "revision_notes": [
+        "Chapter 8 광섬유 전송·시험·진단 범위를 원자화했다."
+      ],
+      "triggers": [
+        "광섬유 모드 분산 OTDR",
+        "광섬유",
+        "모드",
+        "분산",
+        "OTDR",
+        "fiber optic insertion loss diagnostics",
+        "fiber",
+        "optic",
+        "insertion",
+        "loss",
+        "diagnostics",
+        "single multimode graded index",
+        "single",
+        "multimode",
+        "graded",
+        "index",
+        "OTDR 후방산란 거리",
+        "후방산란",
+        "거리",
+        "광원 power meter 링크손실",
+        "광원",
+        "power",
+        "meter",
+        "링크손실",
+        "total internal reflection",
+        "total",
+        "internal",
+        "reflection",
+        "modal chromatic PMD",
+        "modal",
+        "chromatic",
+        "PMD",
+        "single mode multimode",
+        "mode",
+        "insertion loss",
+        "OTDR dead zone backscatter",
+        "dead",
+        "zone",
+        "backscatter",
+        "광섬유의 single mode와 multimode 및 분산을 비교하고 계장 링크 선정기준을 설명하시오.",
+        "광섬유의",
+        "분산을",
+        "비교하고",
+        "계장",
+        "링크",
+        "선정기준을",
+        "광원·power meter와 OTDR 시험의 목적, 원리와 한계를 비교하시오.",
+        "시험의",
+        "목적",
+        "원리와",
+        "한계를",
+        "비교하시오",
+        "광섬유 링크 모드·분산·손실·OTDR 진단",
+        "손실",
+        "진단",
+        "core",
+        "cladding",
+        "굴절률",
+        "임계각",
+        "전반사",
+        "Core와 cladding의 굴절률 조건과 임계각에 의해 광섬유의 전반사 전파 경로가 형성된다.",
+        "Core",
+        "조건과",
+        "임계각에",
+        "의해",
+        "전파",
+        "경로가",
+        "형성된다",
+        "modal dispersion",
+        "dispersion",
+        "graded-index",
+        "도착시간",
+        "Multimode modal dispersion은 모드별 경로와 도착시간 차이이며 graded-index는 굴절률 분포로 그 차이를 줄인다.",
+        "Multimode",
+        "모드별",
+        "경로와",
+        "차이이며",
+        "분포로",
+        "차이를",
+        "줄인다",
+        "single-mode",
+        "chromatic dispersion",
+        "polarization-mode dispersion",
+        "polarization-mode",
+        "Single-mode는 modal dispersion을 크게 줄이지만 chromatic dispersion과 polarization-mode dispersion까지 0으로 만들지는 않는다.",
+        "Single-mode",
+        "크게",
+        "줄이지만",
+        "까지",
+        "으로",
+        "만들지는",
+        "않는다",
+        "power meter",
+        "입출력 전력",
+        "입출력",
+        "전력",
+        "안정된 광원과 power meter는 입력·출력 power를 비교하여 링크 전체 insertion loss를 측정한다.",
+        "안정된",
+        "광원과",
+        "입력",
+        "출력",
+        "비교하여",
+        "전체",
+        "측정한다",
+        "왕복시간",
+        "event",
+        "군굴절률",
+        "OTDR은 짧은 pulse의 반사·후방산란과 왕복시간으로 event 위치를 추정하며 d=cΔt/(2ng)를 사용한다.",
+        "짧은",
+        "pulse",
+        "반사",
+        "후방산란과",
+        "왕복시간으로",
+        "위치를",
+        "추정하며",
+        "d",
+        "c",
+        "t",
+        "ng",
+        "사용한다",
+        "dead zone",
+        "공간분해능",
+        "launch cable",
+        "launch",
+        "cable",
+        "receive cable",
+        "receive",
+        "판정",
+        "OTDR 결과는 launch/receive cable, dead zone, 공간분해능과 설정을 고려하고 insertion-loss 결과와 함께 판정한다.",
+        "결과는",
+        "공간분해능과",
+        "설정을",
+        "고려하고",
+        "insertion-loss",
+        "결과와",
+        "함께",
+        "판정한다"
+      ],
+      "aliases": [
+        "광섬유 모드 분산 OTDR",
+        "fiber optic insertion loss diagnostics",
+        "single multimode graded index",
+        "OTDR 후방산란 거리",
+        "광원 power meter 링크손실",
+        "광섬유의 single mode와 multimode 및 분산을 비교하고 계장 링크 선정기준을 설명하시오.",
+        "광원·power meter와 OTDR 시험의 목적, 원리와 한계를 비교하시오.",
+        "광섬유 링크 모드·분산·손실·OTDR 진단"
+      ],
+      "priority": "NORMAL"
     },
     {
       "schema_version": "fact_anchor.v1",
@@ -79728,6 +80409,282 @@
         "계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성"
       ],
       "priority": "HIGH"
+    },
+    {
+      "schema_version": "topic_pack.fact_anchor.v1",
+      "topic_id": "instrument_signal_transmission_line_reflection_termination",
+      "title_ko": "계장 신호 전송선로·반사·종단",
+      "question_type_hint": "DIAGNOSIS_ACTION",
+      "anchors": [
+        {
+          "anchor_id": "transmission_line_applicability",
+          "statement": "신호 상승시간이 선로의 왕복 전파지연과 비슷하거나 더 짧으면 선로 위치별 전압·전류 차이를 무시할 수 없어 전송선로로 다룬다.",
+          "keywords": [
+            "상승시간",
+            "전파지연",
+            "전송선로",
+            "왕복시간"
+          ],
+          "core_terms": [
+            "상승시간",
+            "전파지연",
+            "전송선로"
+          ],
+          "accepted_explanations": [
+            "빠른 edge와 긴 cable에서는 lumped 회로 가정이 성립하지 않을 수 있다."
+          ],
+          "rejected_explanations": [
+            "모든 계장 신호는 길이와 상승시간에 무관하게 lumped 회로이다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "신호 상승시간이 선로의 왕복 전파지연과 비슷하거나 더 짧으면 선로 위치별 전압·전류 차이를 무시할 수 없어 전송선로로 다룬다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "reflection_coefficient_relation",
+          "statement": "부하 임피던스 ZL과 특성임피던스 Z0의 불연속에서 반사가 생기며 반사계수는 Γ=(ZL-Z0)/(ZL+Z0)이다.",
+          "keywords": [
+            "반사계수",
+            "특성임피던스",
+            "부하임피던스",
+            "임피던스 불연속"
+          ],
+          "core_terms": [
+            "반사계수",
+            "특성임피던스",
+            "임피던스 불연속"
+          ],
+          "accepted_explanations": [
+            "ZL=Z0이면 이상적인 부하 반사는 0이다."
+          ],
+          "rejected_explanations": [
+            "불연속이 커질수록 반사가 감소한다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "부하 임피던스 ZL과 특성임피던스 Z0의 불연속에서 반사가 생기며 반사계수는 Γ=(ZL-Z0)/(ZL+Z0)이다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "reflection_waveform_effects",
+          "statement": "반사파는 원 신호와 중첩되어 ringing, overshoot, undershoot, threshold 재통과와 오검출을 일으킬 수 있다.",
+          "keywords": [
+            "ringing",
+            "overshoot",
+            "undershoot",
+            "오검출"
+          ],
+          "core_terms": [
+            "ringing",
+            "overshoot",
+            "오검출"
+          ],
+          "accepted_explanations": [
+            "수신단 threshold를 여러 번 통과하면 false transition이 생길 수 있다."
+          ],
+          "rejected_explanations": [
+            "반사는 신호 파형과 판정에 영향을 주지 않는다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "반사파는 원 신호와 중첩되어 ringing, overshoot, undershoot, threshold 재통과와 오검출을 일으킬 수 있다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "termination_and_topology",
+          "statement": "정합 종단과 연속된 topology는 반사를 줄이며 종단 값·위치·부하는 해당 physical-layer와 driver 허용조건으로 결정한다.",
+          "keywords": [
+            "정합 종단",
+            "termination",
+            "topology",
+            "stub",
+            "driver"
+          ],
+          "core_terms": [
+            "정합 종단",
+            "termination",
+            "stub"
+          ],
+          "accepted_explanations": [
+            "star·긴 stub는 추가 불연속과 반사 경로가 될 수 있다."
+          ],
+          "rejected_explanations": [
+            "아무 저항이나 연결하면 항상 반사가 제거된다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "정합 종단과 연속된 topology는 반사를 줄이며 종단 값·위치·부하는 해당 physical-layer와 driver 허용조건으로 결정한다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "waveform_diagnostic_procedure",
+          "statement": "진단은 cable·connector·termination·branch를 확인하고 적절한 probe와 측정 위치에서 파형을 비교한 뒤 변경 전후를 재검증한다.",
+          "keywords": [
+            "파형 측정",
+            "connector",
+            "termination",
+            "측정 위치",
+            "재검증"
+          ],
+          "core_terms": [
+            "파형 측정",
+            "termination",
+            "재검증"
+          ],
+          "accepted_explanations": [
+            "한 번에 한 요소를 바꾸고 ringing과 threshold margin 변화를 확인한다."
+          ],
+          "rejected_explanations": [
+            "파형 확인 없이 종단저항을 임의 추가한다."
+          ],
+          "importance": "important",
+          "name": "Fact Anchor",
+          "expected": "진단은 cable·connector·termination·branch를 확인하고 적절한 probe와 측정 위치에서 파형을 비교한 뒤 변경 전후를 재검증한다.",
+          "support_terms": []
+        }
+      ],
+      "revision_notes": [
+        "Chapter 8 전송선로·반사·종단 범위를 원자 Topic으로 구성했다."
+      ],
+      "triggers": [
+        "계장 전송선로 반사 종단",
+        "계장",
+        "전송선로",
+        "반사",
+        "종단",
+        "signal reflection termination ringing",
+        "signal",
+        "reflection",
+        "termination",
+        "ringing",
+        "임피던스 불연속 오버슈트",
+        "임피던스",
+        "불연속",
+        "오버슈트",
+        "고속 계장신호 waveform integrity",
+        "고속",
+        "계장신호",
+        "waveform",
+        "integrity",
+        "특성임피던스 stub 정합",
+        "특성임피던스",
+        "stub",
+        "정합",
+        "rise time propagation delay",
+        "rise",
+        "time",
+        "propagation",
+        "delay",
+        "characteristic impedance",
+        "characteristic",
+        "impedance",
+        "reflection coefficient",
+        "coefficient",
+        "ringing overshoot",
+        "overshoot",
+        "termination stub topology",
+        "topology",
+        "계장 고속신호에서 전송선로 효과, 반사 원인과 종단 대책을 설명하시오.",
+        "고속신호에서",
+        "효과",
+        "원인과",
+        "대책을",
+        "디지털 계장 신호의 ringing과 overshoot를 진단하고 개선하는 절차를 설명하시오.",
+        "디지털",
+        "신호의",
+        "진단하고",
+        "개선하는",
+        "절차를",
+        "계장 신호 전송선로·반사·종단",
+        "신호",
+        "상승시간",
+        "전파지연",
+        "왕복시간",
+        "신호 상승시간이 선로의 왕복 전파지연과 비슷하거나 더 짧으면 선로 위치별 전압·전류 차이를 무시할 수 없어 전송선로로 다룬다.",
+        "상승시간이",
+        "선로의",
+        "왕복",
+        "전파지연과",
+        "비슷하거나",
+        "짧으면",
+        "선로",
+        "위치별",
+        "전압",
+        "전류",
+        "차이를",
+        "무시할",
+        "없어",
+        "전송선로로",
+        "다룬다",
+        "반사계수",
+        "부하임피던스",
+        "임피던스 불연속",
+        "부하 임피던스 ZL과 특성임피던스 Z0의 불연속에서 반사가 생기며 반사계수는 Γ=(ZL-Z0)/(ZL+Z0)이다.",
+        "부하",
+        "ZL",
+        "Z0",
+        "불연속에서",
+        "반사가",
+        "생기며",
+        "반사계수는",
+        "ZL-Z0",
+        "이다",
+        "undershoot",
+        "오검출",
+        "반사파는 원 신호와 중첩되어 ringing, overshoot, undershoot, threshold 재통과와 오검출을 일으킬 수 있다.",
+        "반사파는",
+        "신호와",
+        "중첩되어",
+        "threshold",
+        "재통과와",
+        "오검출을",
+        "일으킬",
+        "있다",
+        "정합 종단",
+        "driver",
+        "정합 종단과 연속된 topology는 반사를 줄이며 종단 값·위치·부하는 해당 physical-layer와 driver 허용조건으로 결정한다.",
+        "종단과",
+        "연속된",
+        "반사를",
+        "줄이며",
+        "위치",
+        "부하는",
+        "해당",
+        "physical-layer",
+        "허용조건으로",
+        "결정한다",
+        "파형 측정",
+        "파형",
+        "측정",
+        "connector",
+        "측정 위치",
+        "재검증",
+        "진단은 cable·connector·termination·branch를 확인하고 적절한 probe와 측정 위치에서 파형을 비교한 뒤 변경 전후를 재검증한다.",
+        "진단은",
+        "cable",
+        "branch",
+        "확인하고",
+        "적절한",
+        "probe",
+        "위치에서",
+        "파형을",
+        "비교한",
+        "변경",
+        "전후를",
+        "재검증한다"
+      ],
+      "aliases": [
+        "계장 전송선로 반사 종단",
+        "signal reflection termination ringing",
+        "임피던스 불연속 오버슈트",
+        "고속 계장신호 waveform integrity",
+        "특성임피던스 stub 정합",
+        "계장 고속신호에서 전송선로 효과, 반사 원인과 종단 대책을 설명하시오.",
+        "디지털 계장 신호의 ringing과 overshoot를 진단하고 개선하는 절차를 설명하시오.",
+        "계장 신호 전송선로·반사·종단"
+      ],
+      "priority": "NORMAL"
     },
     {
       "schema_version": "topic_pack.fact_anchor.v1",
@@ -113054,6 +114011,261 @@
         "전달계의 누설·막힘·액주·vent/drain 문제를 진단한다.",
         "process compatibility, interface, shutdown, calibration, lifecycle cost를 평가한다.",
         "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP"
+      ],
+      "priority": "NORMAL"
+    },
+    {
+      "schema_version": "topic_pack.fact_anchor.v1",
+      "topic_id": "pressure_transmitter_force_balance_null_detection",
+      "title_ko": "Force-balance 압력변환기와 null detection",
+      "question_type_hint": "PRINCIPLE_INTERPRETATION",
+      "anchors": [
+        {
+          "anchor_id": "force_balance_equilibrium",
+          "statement": "Sensing force는 Fsensed=ΔP·A이며 equilibrium에서는 feedback counter-force와 같아 Fsensed=Fbalance가 된다.",
+          "keywords": [
+            "Fsensed",
+            "ΔP A",
+            "counter-force",
+            "equilibrium"
+          ],
+          "core_terms": [
+            "sensing force",
+            "counter-force",
+            "equilibrium"
+          ],
+          "accepted_explanations": [
+            "입력 차압이 만든 힘과 조절 가능한 반대 힘을 평형시킨다."
+          ],
+          "rejected_explanations": [
+            "평형에서 두 힘은 의도적으로 다르다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "Sensing force는 Fsensed=ΔP·A이며 equilibrium에서는 feedback counter-force와 같아 Fsensed=Fbalance가 된다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "null_position_error_detection",
+          "statement": "Force-balance 장치는 force를 직접 비교하기보다 force bar의 작은 position error를 null detector로 검출하고 0으로 되돌린다.",
+          "keywords": [
+            "position error",
+            "null detector",
+            "force bar",
+            "zero"
+          ],
+          "core_terms": [
+            "position error",
+            "null detector",
+            "force bar"
+          ],
+          "accepted_explanations": [
+            "위치 편차가 feedback 생성의 error signal이다."
+          ],
+          "rejected_explanations": [
+            "큰 position error를 유지할수록 정확하다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "Force-balance 장치는 force를 직접 비교하기보다 force bar의 작은 position error를 null detector로 검출하고 0으로 되돌린다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "pneumatic_force_balance_chain",
+          "statement": "Pneumatic 방식은 force bar displacement를 baffle-nozzle이 검출하고 relay와 bellows pressure가 counter-force를 만든다.",
+          "keywords": [
+            "baffle-nozzle",
+            "relay",
+            "bellows",
+            "pneumatic",
+            "counter-force"
+          ],
+          "core_terms": [
+            "baffle-nozzle",
+            "relay",
+            "bellows"
+          ],
+          "accepted_explanations": [
+            "baffle-nozzle은 balance position의 편차를 감지한다."
+          ],
+          "rejected_explanations": [
+            "nozzle pressure가 process pressure와 항상 직접 같다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "Pneumatic 방식은 force bar displacement를 baffle-nozzle이 검출하고 relay와 bellows pressure가 counter-force를 만든다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "electronic_force_balance_chain",
+          "statement": "Electronic 방식은 balance sensor와 amplifier가 error를 검출하고 force coil current로 counter-force를 만든다.",
+          "keywords": [
+            "balance sensor",
+            "amplifier",
+            "force coil",
+            "current"
+          ],
+          "core_terms": [
+            "amplifier",
+            "force coil",
+            "current"
+          ],
+          "accepted_explanations": [
+            "평형에서 force-coil current가 입력 pressure를 나타낸다."
+          ],
+          "rejected_explanations": [
+            "force coil은 feedback과 무관한 표시부이다."
+          ],
+          "importance": "must",
+          "name": "Fact Anchor",
+          "expected": "Electronic 방식은 balance sensor와 amplifier가 error를 검출하고 force coil current로 counter-force를 만든다.",
+          "support_terms": []
+        },
+        {
+          "anchor_id": "force_balance_tradeoffs",
+          "statement": "작은 sensing-element motion은 선형성과 피로 측면에 유리하지만 구조 복잡성, 외부 진동 민감도와 power 요구를 함께 평가한다.",
+          "keywords": [
+            "small motion",
+            "선형성",
+            "피로",
+            "진동",
+            "power"
+          ],
+          "core_terms": [
+            "선형성",
+            "진동",
+            "power"
+          ],
+          "accepted_explanations": [
+            "진동의 inertial force가 output noise가 될 수 있다."
+          ],
+          "rejected_explanations": [
+            "force-balance는 진동과 전원 조건에 무관하다."
+          ],
+          "importance": "important",
+          "name": "Fact Anchor",
+          "expected": "작은 sensing-element motion은 선형성과 피로 측면에 유리하지만 구조 복잡성, 외부 진동 민감도와 power 요구를 함께 평가한다.",
+          "support_terms": []
+        }
+      ],
+      "revision_notes": [
+        "Chapter 19 force-balance 원리를 압력센서 일반론에서 분리했다."
+      ],
+      "triggers": [
+        "force balance pressure transmitter",
+        "force",
+        "balance",
+        "pressure",
+        "transmitter",
+        "null balance pressure measurement",
+        "null",
+        "measurement",
+        "baffle nozzle bellows feedback",
+        "baffle",
+        "nozzle",
+        "bellows",
+        "feedback",
+        "force coil 압력변환기",
+        "coil",
+        "압력변환기",
+        "position error counter force",
+        "position",
+        "error",
+        "counter",
+        "Fsensed delta P area",
+        "Fsensed",
+        "delta",
+        "P",
+        "area",
+        "null detector position error",
+        "detector",
+        "pneumatic force balance",
+        "pneumatic",
+        "electronic force coil",
+        "electronic",
+        "vibration power tradeoff",
+        "vibration",
+        "power",
+        "tradeoff",
+        "Force-balance 압력변환기의 pneumatic 및 electronic 동작원리를 설명하시오.",
+        "Force-balance",
+        "압력변환기의",
+        "동작원리를",
+        "Null-balance 압력변환기의 특징, 장단점과 현장 적용 시 고려사항을 설명하시오.",
+        "Null-balance",
+        "특징",
+        "장단점과",
+        "현장",
+        "고려사항을",
+        "Force-balance 압력변환기와 null detection",
+        "압력변환기와",
+        "detection",
+        "ΔP A",
+        "A",
+        "counter-force",
+        "equilibrium",
+        "Sensing force는 Fsensed=ΔP·A이며 equilibrium에서는 feedback counter-force와 같아 Fsensed=Fbalance가 된다.",
+        "Sensing",
+        "이며",
+        "에서는",
+        "같아",
+        "Fbalance",
+        "된다",
+        "position error",
+        "null detector",
+        "force bar",
+        "bar",
+        "zero",
+        "Force-balance 장치는 force를 직접 비교하기보다 force bar의 작은 position error를 null detector로 검출하고 0으로 되돌린다.",
+        "장치는",
+        "직접",
+        "비교하기보다",
+        "작은",
+        "검출하고",
+        "으로",
+        "되돌린다",
+        "baffle-nozzle",
+        "relay",
+        "Pneumatic 방식은 force bar displacement를 baffle-nozzle이 검출하고 relay와 bellows pressure가 counter-force를 만든다.",
+        "Pneumatic",
+        "방식은",
+        "displacement",
+        "만든다",
+        "balance sensor",
+        "sensor",
+        "amplifier",
+        "force coil",
+        "current",
+        "Electronic 방식은 balance sensor와 amplifier가 error를 검출하고 force coil current로 counter-force를 만든다.",
+        "Electronic",
+        "small motion",
+        "small",
+        "motion",
+        "선형성",
+        "피로",
+        "진동",
+        "작은 sensing-element motion은 선형성과 피로 측면에 유리하지만 구조 복잡성, 외부 진동 민감도와 power 요구를 함께 평가한다.",
+        "sensing-element",
+        "선형성과",
+        "측면에",
+        "유리하지만",
+        "구조",
+        "복잡성",
+        "외부",
+        "민감도와",
+        "요구를",
+        "함께",
+        "평가한다"
+      ],
+      "aliases": [
+        "force balance pressure transmitter",
+        "null balance pressure measurement",
+        "baffle nozzle bellows feedback",
+        "force coil 압력변환기",
+        "position error counter force",
+        "Force-balance 압력변환기의 pneumatic 및 electronic 동작원리를 설명하시오.",
+        "Null-balance 압력변환기의 특징, 장단점과 현장 적용 시 고려사항을 설명하시오.",
+        "Force-balance 압력변환기와 null detection"
       ],
       "priority": "NORMAL"
     },

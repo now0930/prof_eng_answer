@@ -1,10 +1,10 @@
 {
-  "version": "sha256-c23672ada937a92678c25ca9bbffe39df8db6f6afc800751ad9586089594e55f-generated-topic-pack-manifest",
+  "version": "sha256-e7970dc08deb64d2327b0f7bcca1f891b471a623abf836229c87eed898570c84-generated-topic-pack-manifest",
   "schema_version": "generated.topic_pack_manifest.v1",
   "subject": "industrial_instrumentation_control",
   "source": "rubrics/topic_packs",
   "runtime_status": "generated_candidate_not_yet_runtime_default",
-  "topic_count": 78,
+  "topic_count": 82,
   "topics": [
     {
       "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
@@ -237,6 +237,16 @@
       ]
     },
     {
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
       "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
       "files": [
         "fact_anchor.json",
@@ -258,6 +268,16 @@
     },
     {
       "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -388,6 +408,16 @@
     },
     {
       "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "instrument_signal_transmission_line_reflection_termination",
       "files": [
         "fact_anchor.json",
         "model_answer.json",
@@ -588,6 +618,16 @@
     },
     {
       "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+      "files": [
+        "fact_anchor.json",
+        "model_answer.json",
+        "topic_importance.json",
+        "logic_check.json",
+        "README.md"
+      ]
+    },
+    {
+      "topic_id": "pressure_transmitter_force_balance_null_detection",
       "files": [
         "fact_anchor.json",
         "model_answer.json",

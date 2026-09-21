@@ -1,5 +1,5 @@
 {
-  "version": "sha256-c23672ada937a92678c25ca9bbffe39df8db6f6afc800751ad9586089594e55f-generated-topic-pack-logic-check-profiles",
+  "version": "sha256-e7970dc08deb64d2327b0f7bcca1f891b471a623abf836229c87eed898570c84-generated-topic-pack-logic-check-profiles",
   "description": "Generated LLM logic verifier profile bank from topic_packs. Do not edit manually.",
   "schema_version": "generated.logic_check_profiles.v1",
   "subject": "industrial_instrumentation_control",
@@ -12529,6 +12529,35 @@
       "enabled": true
     },
     {
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "enabled": true,
+      "focus": [
+        "valve 상태와 조작순서",
+        "pressure-test reference",
+        "vent/drain·damping·isolation"
+      ],
+      "fatal_conditions": [
+        {
+          "id": "dp_manifold_fatal_bleed_under_process",
+          "description": "H/L process block가 열린 상태에서 bleed를 열어 안전하게 zero energy가 된다고 주장",
+          "severity": "fatal",
+          "recommended_ceiling": 12.0
+        },
+        {
+          "id": "dp_manifold_fatal_equalized_span_test",
+          "description": "equalizing valve를 연 상태에서 DP span pressure test를 수행한다고 주장",
+          "severity": "fatal",
+          "recommended_ceiling": 13.0
+        },
+        {
+          "id": "dp_manifold_fatal_equalizer_normal_open",
+          "description": "정상 DP 측정 중 equalizing valve를 열어 둔다고 주장",
+          "severity": "fatal",
+          "recommended_ceiling": 12.0
+        }
+      ]
+    },
+    {
       "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
       "display_name": "전자오차 source-chain, noise/drift/tolerance/aging 구분, power/reference/ADC 영향과 mitigation을 평가한다.",
       "difficulty": "FIELD_APPLICATION",
@@ -13205,6 +13234,29 @@
         "최종값 정리의 sE(s) 극 조건과 Type 0·1·2의 입력별 오차를 표로 정리한다.",
         "루프 이득과 대역폭을 위상여유, 지연, 잡음, 포화 및 강인 안정성과 함께 판단한다.",
         "오답 인용과 실제 오개념 주장을 문맥으로 구분한다."
+      ]
+    },
+    {
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+      "enabled": true,
+      "focus": [
+        "모드·분산 관계",
+        "insertion-loss 시험",
+        "OTDR 거리·event·한계"
+      ],
+      "fatal_conditions": [
+        {
+          "id": "fiber_fatal_single_mode_no_dispersion",
+          "description": "single-mode에는 어떤 분산도 없다고 단정",
+          "severity": "fatal",
+          "recommended_ceiling": 13.0
+        },
+        {
+          "id": "fiber_fatal_power_meter_locates_fault",
+          "description": "입출력 power 비교만으로 결함 위치를 항상 결정한다고 주장",
+          "severity": "fatal",
+          "recommended_ceiling": 13.0
+        }
       ]
     },
     {
@@ -19470,6 +19522,29 @@
       ]
     },
     {
+      "topic_id": "instrument_signal_transmission_line_reflection_termination",
+      "enabled": true,
+      "focus": [
+        "전송선로 적용조건",
+        "반사계수와 파형 영향",
+        "종단·topology·진단"
+      ],
+      "fatal_conditions": [
+        {
+          "id": "transmission_line_fatal_mismatch_reduces_reflection",
+          "description": "임피던스 불일치가 커질수록 반사가 감소한다고 주장",
+          "severity": "fatal",
+          "recommended_ceiling": 13.0
+        },
+        {
+          "id": "transmission_line_fatal_arbitrary_termination",
+          "description": "종단 값·위치와 회로조건 무관하게 임의 저항이 항상 반사를 제거한다고 주장",
+          "severity": "fatal",
+          "recommended_ceiling": 13.0
+        }
+      ]
+    },
+    {
       "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
       "display_name": "계측제어 소프트웨어 수명주기, V-Model, 추적성, 검증 및 확인",
       "difficulty": "DESIGN_EVALUATION",
@@ -25723,6 +25798,29 @@
         "major": "압력 reference→센서 원리→선정조건→오차원인→보정·보호의 연결이 부족한 부분을 지적한다.",
         "fatal": "압력 기준, sensing mechanism, mechanical limit 또는 calibration/error의 방향을 뒤집는 중대한 오개념을 명확히 지적한다."
       }
+    },
+    {
+      "topic_id": "pressure_transmitter_force_balance_null_detection",
+      "enabled": true,
+      "focus": [
+        "sensing-force와 balance-force 관계",
+        "null detector",
+        "feedback 구현과 trade-off"
+      ],
+      "fatal_conditions": [
+        {
+          "id": "force_balance_fatal_open_loop_displacement",
+          "description": "force-balance를 feedback 없는 open-loop displacement 증폭으로 정의",
+          "severity": "fatal",
+          "recommended_ceiling": 13.0
+        },
+        {
+          "id": "force_balance_fatal_large_error_equilibrium",
+          "description": "큰 position error 유지가 balance 정확도를 높인다고 주장",
+          "severity": "fatal",
+          "recommended_ceiling": 13.0
+        }
+      ]
     },
     {
       "topic_id": "process_control_loop_architecture_cascade_ratio_feedforward_override_split_range",

@@ -1,5 +1,5 @@
 {
-  "version": "sha256-c23672ada937a92678c25ca9bbffe39df8db6f6afc800751ad9586089594e55f-generated-topic-pack-importance",
+  "version": "sha256-e7970dc08deb64d2327b0f7bcca1f891b471a623abf836229c87eed898570c84-generated-topic-pack-importance",
   "subject": "industrial_instrumentation_control",
   "schema_version": "generated.topic_importance.v1",
   "source": "rubrics/topic_packs/*/topic_importance.json",
@@ -543,6 +543,24 @@
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "dp_transmitter_manifold_bleed_pressure_test_pulsation_isolation",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "CORE_MUST_PREPARE",
+      "question_type": "IMPLEMENTATION_EVALUATION",
+      "high_band_unlock_conditions": [
+        "정상·격리·복귀의 valve 상태와 순서를 정확히 구분한다.",
+        "조작순서를 differential pressure와 잔압 안전에 연결한다.",
+        "DP pressure test의 H 입력·L reference 조건을 설명한다.",
+        "vent/drain·damping·isolation의 service별 trade-off를 평가한다."
+      ],
+      "note": "현장 조작순서가 안전과 측정 정확도에 직접 영향을 주는 핵심 실무 Topic이다.",
+      "revision_notes": [
+        "created_by=scripts/create_topic_pack.py",
+        "Chapter 19 DP transmitter 현장 운전·정비 문제군을 독립 분류했다."
+      ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
       "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
       "difficulty": "FIELD_APPLICATION",
       "selection_importance": "HIGH",
@@ -616,6 +634,24 @@
         "단순 누락만으로 fatal cap을 적용하지 않는 정책을 명시함.",
         "최종값 정리의 극 조건과 상쇄를 반영한 시스템 형 정의를 고득점 조건에 반영했다.",
         "안정성 제한과 센서 잡음·제어입력·포화의 성능 제한 구분을 고득점 조건에 반영했다."
+      ]
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "DIAGNOSIS_ACTION",
+      "high_band_unlock_conditions": [
+        "single/multimode와 modal·chromatic·PMD를 구분한다.",
+        "insertion-loss와 OTDR event-location 역할을 구분한다.",
+        "OTDR 거리식과 dead zone·분해능 한계를 설명한다.",
+        "시험 결과를 결합하여 링크 acceptance를 판단한다."
+      ],
+      "note": "광 링크의 물리 원리와 현장 시험 판정을 함께 요구한다.",
+      "revision_notes": [
+        "created_by=scripts/create_topic_pack.py",
+        "Chapter 8 광섬유 링크 시험·진단 문제군을 독립 분류했다."
       ]
     },
     {
@@ -947,6 +983,24 @@
         "high_band_requires_explicit_SW_08_and_SW_09_boundaries"
       ],
       "topic_label": "계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "instrument_signal_transmission_line_reflection_termination",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "DIAGNOSIS_ACTION",
+      "high_band_unlock_conditions": [
+        "상승시간과 왕복 전파지연으로 전송선로 적용 여부를 판단한다.",
+        "반사계수와 ringing·overshoot 인과관계를 설명한다.",
+        "physical-layer 조건에 맞는 종단과 topology를 제시한다.",
+        "파형 기반 변경 전후 검증을 포함한다."
+      ],
+      "note": "고속 신호의 물리계층 진단과 현장 개선을 함께 요구한다.",
+      "revision_notes": [
+        "created_by=scripts/create_topic_pack.py",
+        "Chapter 8 전송선로·반사·종단 문제군을 독립 분류했다."
+      ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",
@@ -1468,6 +1522,24 @@
         "dp_level_topic_ownership_separated"
       ],
       "topic_label": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP"
+    },
+    {
+      "schema_version": "topic_pack.topic_importance.v1",
+      "topic_id": "pressure_transmitter_force_balance_null_detection",
+      "difficulty": "FIELD_APPLICATION",
+      "selection_importance": "NORMAL",
+      "question_type": "PRINCIPLE_INTERPRETATION",
+      "high_band_unlock_conditions": [
+        "ΔP·A의 sensing force와 counter-force 평형을 제시한다.",
+        "position error와 null detector의 의미를 설명한다.",
+        "pneumatic과 electronic feedback chain을 비교한다.",
+        "진동·복잡성·전력 trade-off를 평가한다."
+      ],
+      "note": "압력변환 원리와 feedback 구현의 물리적 해석을 요구한다.",
+      "revision_notes": [
+        "created_by=scripts/create_topic_pack.py",
+        "Chapter 19 force-balance 문제군을 독립 분류했다."
+      ]
     },
     {
       "schema_version": "topic_pack.topic_importance.v1",

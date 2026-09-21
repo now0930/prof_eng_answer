@@ -1,0 +1,21 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "instrument_signal_transmission_line_reflection_termination",
+  "title_ko": "계장 신호 전송선로·반사·종단",
+  "question_type": "DIAGNOSIS_ACTION",
+  "expected_question_patterns": [
+    {"pattern": "계장 고속신호에서 전송선로 효과, 반사 원인과 종단 대책을 설명하시오.", "required_anchor_ids": ["transmission_line_applicability", "reflection_coefficient_relation", "reflection_waveform_effects", "termination_and_topology"]},
+    {"pattern": "디지털 계장 신호의 ringing과 overshoot를 진단하고 개선하는 절차를 설명하시오.", "required_anchor_ids": ["reflection_coefficient_relation", "reflection_waveform_effects", "termination_and_topology", "waveform_diagnostic_procedure"]}
+  ],
+  "recommended_outline": [
+    {"section": "1. 적용 조건", "intent": "상승시간과 전파지연으로 전송선로 적용 여부를 판단한다.", "anchor_refs": ["transmission_line_applicability"]},
+    {"section": "2. 반사 원리", "intent": "임피던스 불연속과 반사계수를 설명한다.", "anchor_refs": ["reflection_coefficient_relation"]},
+    {"section": "3. 영향", "intent": "파형 왜곡과 오검출을 연결한다.", "anchor_refs": ["reflection_waveform_effects"]},
+    {"section": "4. 대책과 검증", "intent": "종단·topology·측정에 의한 개선을 제시한다.", "anchor_refs": ["termination_and_topology", "waveform_diagnostic_procedure"]}
+  ],
+  "high_score_points": ["상승시간과 왕복 전파지연을 연결한다.", "반사계수의 부호와 크기를 해석한다.", "종단의 부하·전력 trade-off를 제시한다.", "수정 전후 파형을 검증한다."],
+  "common_missing_points": ["모든 케이블을 전송선로로 일반화함", "반사 원인을 EMI와 혼동함", "종단 값과 위치의 선정조건이 없음", "파형 재측정이 없음"],
+  "routing_aliases": ["계장 전송선로 반사 종단", "signal reflection termination ringing", "임피던스 불연속 오버슈트", "고속 계장신호 waveform integrity", "특성임피던스 stub 정합"],
+  "routing_field_points": ["rise time propagation delay", "characteristic impedance", "reflection coefficient", "ringing overshoot", "termination stub topology"],
+  "revision_notes": ["Chapter 8 기반의 독립 전송선로 진단 owner를 추가했다."]
+}

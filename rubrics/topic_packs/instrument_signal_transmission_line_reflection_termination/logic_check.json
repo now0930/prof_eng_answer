@@ -1,0 +1,10 @@
+{
+  "topic_id": "instrument_signal_transmission_line_reflection_termination",
+  "title": "계장 신호 전송선로·반사·종단",
+  "deterministic_checks": {"enabled": false, "difficulty_profile": "FIELD_APPLICATION", "topic_name": "계장 신호 전송선로·반사·종단", "topic_aliases": ["전송선로 반사 종단", "signal reflection termination"], "question_type": "DIAGNOSIS_ACTION", "fatal_checks": [], "major_checks": [], "question_type_checks": [], "next_practice_points": ["상승시간과 전파지연 판단", "반사계수 해석", "종단 후 파형 재검증"], "de_claim_trust": {}},
+  "llm_profile": {"enabled": true, "focus": ["전송선로 적용조건", "반사계수와 파형 영향", "종단·topology·진단"], "fatal_conditions": [
+    {"id": "transmission_line_fatal_mismatch_reduces_reflection", "description": "임피던스 불일치가 커질수록 반사가 감소한다고 주장", "severity": "fatal", "recommended_ceiling": 13.0},
+    {"id": "transmission_line_fatal_arbitrary_termination", "description": "종단 값·위치와 회로조건 무관하게 임의 저항이 항상 반사를 제거한다고 주장", "severity": "fatal", "recommended_ceiling": 13.0}
+  ]},
+  "revision_notes": ["정답 부정 또는 절대화만 fatal 후보로 한정했다."]
+}

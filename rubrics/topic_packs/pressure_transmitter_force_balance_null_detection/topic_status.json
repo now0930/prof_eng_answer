@@ -1,0 +1,27 @@
+{
+  "topic_id": "pressure_transmitter_force_balance_null_detection",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:193db7da65774879838fd78044eed1de00d864c10188bd5c0475103376382bda",
+  "last_validated_at": "2026-09-21T23:40:44",
+  "last_reviewed_at": "2026-09-21T23:40:43",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-09-21T23:40:43",
+  "frozen_at": "",
+  "notes": [
+    "2026-09-21T23:34:07: managed Topic Pack workflow started",
+    "2026-09-21T23:40:43: human approval by now0930"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "now0930",
+  "review_method": "human",
+  "source_sheet": "docs/topic_sheets/pressure_transmitter_force_balance_null_detection.md",
+  "source_sheet_hash": "sha256:5f0718ed3b2ffd08fadb36579f409d22f68e53b5ecd6e9191f1c93f67eb47fe2",
+  "approved_source_hash": "sha256:193db7da65774879838fd78044eed1de00d864c10188bd5c0475103376382bda",
+  "created_at": "2026-09-21T23:34:07",
+  "generated_from_sheet": false,
+  "next_action": "Run integration validation before merge.",
+  "reviewed_sheet_hash": "sha256:5f0718ed3b2ffd08fadb36579f409d22f68e53b5ecd6e9191f1c93f67eb47fe2"
+}

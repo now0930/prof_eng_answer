@@ -1,0 +1,14 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "pressure_transmitter_force_balance_null_detection",
+  "title_ko": "Force-balance 압력변환기와 null detection",
+  "question_type_hint": "PRINCIPLE_INTERPRETATION",
+  "anchors": [
+    {"anchor_id": "force_balance_equilibrium", "statement": "Sensing force는 Fsensed=ΔP·A이며 equilibrium에서는 feedback counter-force와 같아 Fsensed=Fbalance가 된다.", "keywords": ["Fsensed", "ΔP A", "counter-force", "equilibrium"], "core_terms": ["sensing force", "counter-force", "equilibrium"], "accepted_explanations": ["입력 차압이 만든 힘과 조절 가능한 반대 힘을 평형시킨다."], "rejected_explanations": ["평형에서 두 힘은 의도적으로 다르다."], "importance": "must"},
+    {"anchor_id": "null_position_error_detection", "statement": "Force-balance 장치는 force를 직접 비교하기보다 force bar의 작은 position error를 null detector로 검출하고 0으로 되돌린다.", "keywords": ["position error", "null detector", "force bar", "zero"], "core_terms": ["position error", "null detector", "force bar"], "accepted_explanations": ["위치 편차가 feedback 생성의 error signal이다."], "rejected_explanations": ["큰 position error를 유지할수록 정확하다."], "importance": "must"},
+    {"anchor_id": "pneumatic_force_balance_chain", "statement": "Pneumatic 방식은 force bar displacement를 baffle-nozzle이 검출하고 relay와 bellows pressure가 counter-force를 만든다.", "keywords": ["baffle-nozzle", "relay", "bellows", "pneumatic", "counter-force"], "core_terms": ["baffle-nozzle", "relay", "bellows"], "accepted_explanations": ["baffle-nozzle은 balance position의 편차를 감지한다."], "rejected_explanations": ["nozzle pressure가 process pressure와 항상 직접 같다."], "importance": "must"},
+    {"anchor_id": "electronic_force_balance_chain", "statement": "Electronic 방식은 balance sensor와 amplifier가 error를 검출하고 force coil current로 counter-force를 만든다.", "keywords": ["balance sensor", "amplifier", "force coil", "current"], "core_terms": ["amplifier", "force coil", "current"], "accepted_explanations": ["평형에서 force-coil current가 입력 pressure를 나타낸다."], "rejected_explanations": ["force coil은 feedback과 무관한 표시부이다."], "importance": "must"},
+    {"anchor_id": "force_balance_tradeoffs", "statement": "작은 sensing-element motion은 선형성과 피로 측면에 유리하지만 구조 복잡성, 외부 진동 민감도와 power 요구를 함께 평가한다.", "keywords": ["small motion", "선형성", "피로", "진동", "power"], "core_terms": ["선형성", "진동", "power"], "accepted_explanations": ["진동의 inertial force가 output noise가 될 수 있다."], "rejected_explanations": ["force-balance는 진동과 전원 조건에 무관하다."], "importance": "important"}
+  ],
+  "revision_notes": ["Chapter 19 force-balance 원리를 압력센서 일반론에서 분리했다."]
+}

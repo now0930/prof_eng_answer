@@ -1,0 +1,21 @@
+{
+  "schema_version": "topic_pack.model_answer.v1",
+  "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+  "title_ko": "광섬유 링크 모드·분산·손실·OTDR 진단",
+  "question_type": "DIAGNOSIS_ACTION",
+  "expected_question_patterns": [
+    {"pattern": "광섬유의 single mode와 multimode 및 분산을 비교하고 계장 링크 선정기준을 설명하시오.", "required_anchor_ids": ["fiber_total_internal_reflection", "fiber_mode_dispersion_relation", "single_mode_residual_dispersion"]},
+    {"pattern": "광원·power meter와 OTDR 시험의 목적, 원리와 한계를 비교하시오.", "required_anchor_ids": ["insertion_loss_test_role", "otdr_distance_and_event_role", "otdr_limit_and_acceptance"]}
+  ],
+  "recommended_outline": [
+    {"section": "1. 전파 원리", "intent": "core/cladding과 전반사를 설명한다.", "anchor_refs": ["fiber_total_internal_reflection"]},
+    {"section": "2. 모드와 분산", "intent": "multimode·graded-index·single-mode를 비교한다.", "anchor_refs": ["fiber_mode_dispersion_relation", "single_mode_residual_dispersion"]},
+    {"section": "3. 링크 손실", "intent": "광원과 power meter의 전체 손실 측정을 설명한다.", "anchor_refs": ["insertion_loss_test_role"]},
+    {"section": "4. 위치 진단", "intent": "OTDR 거리식과 event 해석·한계를 제시한다.", "anchor_refs": ["otdr_distance_and_event_role", "otdr_limit_and_acceptance"]}
+  ],
+  "high_score_points": ["modal·chromatic·PMD를 구분한다.", "군굴절률과 왕복시간의 1/2를 설명한다.", "insertion loss와 event location을 분리한다.", "dead zone과 launch cable을 포함한다."],
+  "common_missing_points": ["single-mode의 모든 분산이 0이라고 단정", "OTDR과 power meter 역할 혼동", "OTDR 거리식의 1/2 누락", "dead zone·분해능 한계 누락"],
+  "routing_aliases": ["광섬유 모드 분산 OTDR", "fiber optic insertion loss diagnostics", "single multimode graded index", "OTDR 후방산란 거리", "광원 power meter 링크손실"],
+  "routing_field_points": ["total internal reflection", "modal chromatic PMD", "single mode multimode", "insertion loss", "OTDR dead zone backscatter"],
+  "revision_notes": ["광센서 원리와 구분되는 광 링크 진단 owner를 추가했다."]
+}

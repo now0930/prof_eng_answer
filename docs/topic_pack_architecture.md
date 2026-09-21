@@ -10,7 +10,7 @@
 
 | 항목 | 현재 상태 |
 |---|---:|
-| Topic Pack | 78 |
+| Topic Pack | 82 |
 | Generated bank | 6 |
 | Software Topic | 13 |
 | 기본 Rubric Bank mode | `generated` |

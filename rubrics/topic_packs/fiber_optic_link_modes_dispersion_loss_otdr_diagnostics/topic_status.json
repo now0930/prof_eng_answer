@@ -1,0 +1,27 @@
+{
+  "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:8ec45b3b268f3e582738bc951ff835b6d45a7aa247a303660c8037bf86738120",
+  "last_validated_at": "2026-09-21T23:40:42",
+  "last_reviewed_at": "2026-09-21T23:40:41",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-09-21T23:40:41",
+  "frozen_at": "",
+  "notes": [
+    "2026-09-21T23:34:07: managed Topic Pack workflow started",
+    "2026-09-21T23:40:41: human approval by now0930"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "now0930",
+  "review_method": "human",
+  "source_sheet": "docs/topic_sheets/fiber_optic_link_modes_dispersion_loss_otdr_diagnostics.md",
+  "source_sheet_hash": "sha256:584c1699cb431543450d5debf4a4a09f93966d07c59acab35a6fe0bf3eda88cf",
+  "approved_source_hash": "sha256:8ec45b3b268f3e582738bc951ff835b6d45a7aa247a303660c8037bf86738120",
+  "created_at": "2026-09-21T23:34:07",
+  "generated_from_sheet": false,
+  "next_action": "Run integration validation before merge.",
+  "reviewed_sheet_hash": "sha256:584c1699cb431543450d5debf4a4a09f93966d07c59acab35a6fe0bf3eda88cf"
+}

@@ -1,0 +1,27 @@
+{
+  "topic_id": "instrument_signal_transmission_line_reflection_termination",
+  "status": "approved",
+  "review_state": "reviewed",
+  "content_hash": "sha256:ef615d19487eb1079d2d345ea2b6eb21798c2193d47d37274a2149f6157642b1",
+  "last_validated_at": "2026-09-21T23:40:40",
+  "last_reviewed_at": "2026-09-21T23:40:40",
+  "last_review_model": "",
+  "last_review_report": "",
+  "approved_at": "2026-09-21T23:40:40",
+  "frozen_at": "",
+  "notes": [
+    "2026-09-21T23:34:07: managed Topic Pack workflow started",
+    "2026-09-21T23:40:40: human approval by now0930"
+  ],
+  "schema_version": "topic_status.v2",
+  "workflow_contract": "topic_pack_workflow.v1",
+  "reviewer": "now0930",
+  "review_method": "human",
+  "source_sheet": "docs/topic_sheets/instrument_signal_transmission_line_reflection_termination.md",
+  "source_sheet_hash": "sha256:a12353dcd5e540c1538f89f8247aa2bb344939eb706140a8d653d0b379bd1db6",
+  "approved_source_hash": "sha256:ef615d19487eb1079d2d345ea2b6eb21798c2193d47d37274a2149f6157642b1",
+  "created_at": "2026-09-21T23:34:07",
+  "generated_from_sheet": false,
+  "next_action": "Run integration validation before merge.",
+  "reviewed_sheet_hash": "sha256:a12353dcd5e540c1538f89f8247aa2bb344939eb706140a8d653d0b379bd1db6"
+}

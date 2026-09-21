@@ -1,0 +1,15 @@
+{
+  "schema_version": "topic_pack.fact_anchor.v1",
+  "topic_id": "fiber_optic_link_modes_dispersion_loss_otdr_diagnostics",
+  "title_ko": "광섬유 링크 모드·분산·손실·OTDR 진단",
+  "question_type_hint": "DIAGNOSIS_ACTION",
+  "anchors": [
+    {"anchor_id": "fiber_total_internal_reflection", "statement": "Core와 cladding의 굴절률 조건과 임계각에 의해 광섬유의 전반사 전파 경로가 형성된다.", "keywords": ["core", "cladding", "굴절률", "임계각", "전반사"], "core_terms": ["core", "cladding", "전반사"], "accepted_explanations": ["core 굴절률이 cladding보다 큰 구조에서 수용각과 개구수 조건을 만족한다."], "rejected_explanations": ["빛은 금속 도체의 전류처럼 전파된다."], "importance": "must"},
+    {"anchor_id": "fiber_mode_dispersion_relation", "statement": "Multimode modal dispersion은 모드별 경로와 도착시간 차이이며 graded-index는 굴절률 분포로 그 차이를 줄인다.", "keywords": ["multimode", "modal dispersion", "graded-index", "도착시간"], "core_terms": ["multimode", "modal dispersion", "graded-index"], "accepted_explanations": ["step-index multimode보다 graded-index multimode의 modal dispersion이 작다."], "rejected_explanations": ["graded-index는 모드별 지연 차이를 늘린다."], "importance": "must"},
+    {"anchor_id": "single_mode_residual_dispersion", "statement": "Single-mode는 modal dispersion을 크게 줄이지만 chromatic dispersion과 polarization-mode dispersion까지 0으로 만들지는 않는다.", "keywords": ["single-mode", "chromatic dispersion", "polarization-mode dispersion", "PMD"], "core_terms": ["single-mode", "chromatic dispersion", "PMD"], "accepted_explanations": ["단일모드에도 파장·편광 관련 분산이 남을 수 있다."], "rejected_explanations": ["single-mode에는 어떤 분산도 존재하지 않는다."], "importance": "must"},
+    {"anchor_id": "insertion_loss_test_role", "statement": "안정된 광원과 power meter는 입력·출력 power를 비교하여 링크 전체 insertion loss를 측정한다.", "keywords": ["광원", "power meter", "insertion loss", "입출력 전력"], "core_terms": ["광원", "power meter", "insertion loss"], "accepted_explanations": ["A_dB=10log10(Pin/Pout)로 양의 손실을 나타낼 수 있다."], "rejected_explanations": ["입출력 전력 비교만으로 모든 손실 위치를 찾는다."], "importance": "must"},
+    {"anchor_id": "otdr_distance_and_event_role", "statement": "OTDR은 짧은 pulse의 반사·후방산란과 왕복시간으로 event 위치를 추정하며 d=cΔt/(2ng)를 사용한다.", "keywords": ["OTDR", "후방산란", "왕복시간", "event", "군굴절률"], "core_terms": ["OTDR", "후방산란", "왕복시간"], "accepted_explanations": ["반사 peak, loss step와 종단 event를 위치 축에서 해석한다."], "rejected_explanations": ["OTDR은 입출력 power만 비교하므로 위치를 찾을 수 없다."], "importance": "must"},
+    {"anchor_id": "otdr_limit_and_acceptance", "statement": "OTDR 결과는 launch/receive cable, dead zone, 공간분해능과 설정을 고려하고 insertion-loss 결과와 함께 판정한다.", "keywords": ["dead zone", "공간분해능", "launch cable", "receive cable", "판정"], "core_terms": ["dead zone", "공간분해능", "launch cable"], "accepted_explanations": ["OTDR event만으로 결함의 물리적 원인을 단정하지 않는다."], "rejected_explanations": ["OTDR trace 하나가 모든 결함 원인을 확정한다."], "importance": "important"}
+  ],
+  "revision_notes": ["Chapter 8 광섬유 전송·시험·진단 범위를 원자화했다."]
+}

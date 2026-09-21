@@ -1,0 +1,18 @@
+{
+  "schema_version": "topic_pack.topic_importance.v1",
+  "topic_id": "pressure_transmitter_force_balance_null_detection",
+  "difficulty": "FIELD_APPLICATION",
+  "selection_importance": "NORMAL",
+  "question_type": "PRINCIPLE_INTERPRETATION",
+  "high_band_unlock_conditions": [
+    "ΔP·A의 sensing force와 counter-force 평형을 제시한다.",
+    "position error와 null detector의 의미를 설명한다.",
+    "pneumatic과 electronic feedback chain을 비교한다.",
+    "진동·복잡성·전력 trade-off를 평가한다."
+  ],
+  "note": "압력변환 원리와 feedback 구현의 물리적 해석을 요구한다.",
+  "revision_notes": [
+    "created_by=scripts/create_topic_pack.py",
+    "Chapter 19 force-balance 문제군을 독립 분류했다."
+  ]
+}
