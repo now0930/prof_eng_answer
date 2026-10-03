@@ -1,0 +1,129 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+  "title_ko": "기능안전 신뢰도 모델링: FTA·Markov·RBD·CCF·PFDavg·PFH",
+  "revision": 7,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh/logic_check.json",
+      "model_answer": "rubrics/topic_packs/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9383",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-overview-chapter1/",
+      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-overview-chapter1/",
+      "title": "The Safety Critical Systems, Overview & Chapter1",
+      "version": "9bd2bfff3512c2f12467f808624e57c503100fc76242d44cf7c9bb75530e08ef",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-23T07:18:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9403",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-system-chapter5/",
+      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-system-chapter5/",
+      "title": "The Safety Critical System, Chapter5",
+      "version": "aef83f2814ca8c22fbd03b8e8723162464a1dd3b97395f727b0a8173cc596169",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-26T10:28:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9420",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-%ec%a0%95%eb%a6%ac/",
+      "title": "The Safety Critical Systems 정리",
+      "version": "d4e9c41ef7a6ed87010f00ca17a9f37b426bff2b9017b85fc2f891aaa44d0a25",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-28T02:19:32+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:2232a7505f8040e703fd8cd657895687",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-overview-chapter1/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/TheSafetyCriticlaSystem-2.pdf",
+      "title": "TheSafetyCriticlaSystem-2",
+      "version": "2026-08-23T07:14:59",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-23T07:14:59+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:29c0df88549585db729c73048e9864aa",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-system-chapter5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/TheSafetyCriticlaSystem-3-1.pdf",
+      "title": "TheSafetyCriticlaSystem-3",
+      "version": "2026-08-26T10:27:32",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-26T10:27:32+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:b8f347b12d87268295bd11a0ec164114",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/TheSafetyCriticlaSystem-5.pdf",
+      "title": "TheSafetyCriticlaSystem",
+      "version": "2026-08-28T02:18:09",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-28T02:18:09+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
