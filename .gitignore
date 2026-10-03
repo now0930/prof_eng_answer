@@ -40,6 +40,7 @@ reports/*_context.md
 reports/*_candidates.csv
 reports/*_candidates_strict.csv
 reports/*_manual_review.csv
+reports/wordpress_topic_link_manual_review_*.csv
 reports/*_manual_review.md
 reports/*_manual_review_applied.csv
 reports/*_manual_review_resolved.csv
