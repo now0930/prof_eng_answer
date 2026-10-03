@@ -2,9 +2,9 @@
 """Build a local searchable catalog of one WordPress category and its sources.
 
 The catalog stores public post text and source metadata in SQLite. First-party
-PDFs are downloaded to a temporary directory, digitally extracted page by
-page, then locally OCRed with Tesseract (Korean and English) where needed.
-Binary assets are never copied into the database. Topic links are suggestions
+PDFs are digitally extracted or locally OCRed page by page. First-party raster
+images use local Korean/English Tesseract OCR. Binary assets are never copied
+into the database. Topic links are suggestions
 that require review before a Master Topic Pack update proposal is created.
 """
 
@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS sync_runs (
     posts_seen INTEGER NOT NULL DEFAULT 0,
     sources_seen INTEGER NOT NULL DEFAULT 0,
     pdfs_ocred INTEGER NOT NULL DEFAULT 0,
+    images_ocred INTEGER NOT NULL DEFAULT 0,
     errors INTEGER NOT NULL DEFAULT 0
 );
 CREATE TABLE IF NOT EXISTS posts (
@@ -253,9 +254,15 @@ class PageParser(HTMLParser):
                 self._active_link[1] += " " + value
 
 
-def _request(url: str, *, max_bytes: int | None = None) -> tuple[bytes, Any]:
+def _request(
+    url: str, *, max_bytes: int | None = None, first_party_only: bool = False,
+) -> tuple[bytes, Any]:
+    if first_party_only and not is_first_party_source(url):
+        raise ValueError("OCR source URL is not first-party")
     request = Request(url, headers={"User-Agent": USER_AGENT})
     with urlopen(request, timeout=50) as response:
+        if first_party_only and not is_first_party_source(response.geturl()):
+            raise ValueError("first-party OCR URL redirected to an external host")
         length = response.headers.get("Content-Length")
         if max_bytes is not None and length and int(length) > max_bytes:
             raise ValueError(f"download exceeds {max_bytes} bytes")
@@ -483,6 +490,9 @@ def initialize_database(database: Path) -> sqlite3.Connection:
     columns = {row[1] for row in connection.execute("PRAGMA table_info(sources)")}
     if "media_id" not in columns:
         connection.execute("ALTER TABLE sources ADD COLUMN media_id INTEGER")
+    sync_columns = {row[1] for row in connection.execute("PRAGMA table_info(sync_runs)")}
+    if "images_ocred" not in sync_columns:
+        connection.execute("ALTER TABLE sync_runs ADD COLUMN images_ocred INTEGER NOT NULL DEFAULT 0")
     topic_columns = {row[1] for row in connection.execute("PRAGMA table_info(topic_links)")}
     for column in ("reviewed_by", "reviewed_at"):
         if column not in topic_columns:
@@ -520,7 +530,7 @@ def initialize_database(database: Path) -> sqlite3.Connection:
         connection.execute("ALTER TABLE content_update_proposals_new RENAME TO content_update_proposals")
     elif "candidate_path" not in content_proposal_columns:
         connection.execute("ALTER TABLE content_update_proposals ADD COLUMN candidate_path TEXT")
-    connection.execute("PRAGMA user_version=2")
+    connection.execute("PRAGMA user_version=3")
     return connection
 
 
@@ -1624,7 +1634,7 @@ def index_first_party_pdfs(
     completed = errors = 0
     for source_id, url, title in candidates:
         try:
-            data, headers = _request(url, max_bytes=MAX_DOWNLOAD_BYTES)
+            data, headers = _request(url, max_bytes=MAX_DOWNLOAD_BYTES, first_party_only=True)
             if not data.startswith(b"%PDF-"):
                 raise ValueError("response content is not a PDF")
             digest = hashlib.sha256(data).hexdigest()
@@ -1701,6 +1711,117 @@ def first_party_pdf_ocr_candidates(
     return connection.execute(query).fetchall()
 
 
+def first_party_image_ocr_candidates(
+    connection: sqlite3.Connection, *, limit: int | None = None,
+    refresh_changed: bool = False,
+) -> list[tuple[str, str, str]]:
+    """Select WordPress-hosted images only; external image URLs stay metadata-only."""
+    statuses = "'metadata_only','pending','error','stale','extracted'" if refresh_changed else "'metadata_only','pending','error','stale'"
+    query = (
+        "SELECT source_id,source_url,title FROM sources "
+        f"WHERE source_type='image' AND first_party=1 AND extraction_status IN ({statuses}) "
+        "ORDER BY source_url"
+    )
+    if limit is not None:
+        query += " LIMIT ?"
+        return connection.execute(query, (limit,)).fetchall()
+    return connection.execute(query).fetchall()
+
+
+def image_text(
+    image_data: bytes, *, tesseract: str, language: str,
+    tessdata: Path | None = None, timeout: int = 180,
+) -> str:
+    """Run local OCR on a supported raster payload supplied on stdin."""
+    signatures = (
+        image_data.startswith(b"\x89PNG\r\n\x1a\n"),
+        image_data.startswith(b"\xff\xd8\xff"),
+        image_data.startswith((b"GIF87a", b"GIF89a")),
+        image_data.startswith(b"RIFF") and image_data[8:12] == b"WEBP",
+    )
+    if not any(signatures):
+        raise ValueError("response content is not a supported raster image")
+    command = [tesseract, "stdin", "stdout", "-l", language, "--psm", "3"]
+    if tessdata:
+        command.extend(["--tessdata-dir", str(tessdata)])
+    environment = os.environ.copy()
+    environment["OMP_THREAD_LIMIT"] = "1"
+    result = subprocess.run(
+        command, input=image_data, capture_output=True, timeout=timeout,
+        env=environment, check=False,
+    )
+    if result.returncode:
+        raise RuntimeError((result.stderr.decode("utf-8", errors="replace") or "Tesseract OCR failed").strip()[:500])
+    return result.stdout.decode("utf-8", errors="replace").strip()
+
+
+def index_first_party_images(
+    connection: sqlite3.Connection, run_id: int, *, tesseract: str,
+    tessdata: Path | None, language: str, delay: float,
+    limit: int | None = None, refresh_changed: bool = False,
+) -> tuple[int, int]:
+    """OCR WordPress-hosted raster images and index text with source provenance."""
+    candidates = first_party_image_ocr_candidates(
+        connection, limit=limit, refresh_changed=refresh_changed
+    )
+    completed = errors = 0
+    for source_id, url, title in candidates:
+        try:
+            data, headers = _request(url, max_bytes=MAX_DOWNLOAD_BYTES, first_party_only=True)
+            digest = hashlib.sha256(data).hexdigest()
+            prior = connection.execute(
+                "SELECT content_sha256,extraction_status,version FROM sources WHERE source_id=?",
+                (source_id,),
+            ).fetchone()
+            if prior and prior[0] == digest and prior[1] == "extracted":
+                completed += 1
+                continue
+            text = image_text(data, tesseract=tesseract, language=language, tessdata=tessdata)
+            method = "tesseract_ocr" if text else "tesseract_ocr_empty"
+            version = headers.get("ETag") or headers.get("Last-Modified") or digest
+            connection.execute("DELETE FROM source_search WHERE source_id=?", (source_id,))
+            connection.execute(
+                """UPDATE sources SET content_sha256=?,byte_size=?,version=?,updated_at=?,
+                   fetch_status='available',extraction_status='extracted',extraction_method=?,
+                   page_count=1,extracted_text=?,indexed_at=datetime('now') WHERE source_id=?""",
+                (digest, len(data), version, headers.get("Last-Modified"), method, text, source_id),
+            )
+            if prior and prior[0] and prior[0] != digest:
+                event = connection.execute(
+                    """INSERT INTO source_change_events(source_id,detected_at,old_sha256,new_sha256,
+                       old_version,new_version,status)
+                       VALUES(?,datetime('now'),?,?,?,?,'pending_topic_review')""",
+                    (source_id, prior[0], digest, prior[2], version),
+                )
+                event_id = int(event.lastrowid)
+                if queue_proposals_for_approved_links(connection, source_id, event_id):
+                    connection.execute(
+                        "UPDATE source_change_events SET status='pending_approval' WHERE event_id=?",
+                        (event_id,),
+                    )
+            connection.execute(
+                "INSERT INTO source_search(source_id,title,text) VALUES(?,?,?)",
+                (source_id, title, text),
+            )
+            connection.commit()
+            completed += 1
+            print(f"IMAGE_OK {completed}/{len(candidates)} chars={len(text)} method={method} title={title[:72]}")
+        except Exception as exc:
+            connection.execute(
+                "UPDATE sources SET fetch_status='error',extraction_status='error',indexed_at=datetime('now') WHERE source_id=?",
+                (source_id,),
+            )
+            connection.execute(
+                "INSERT INTO sync_errors(run_id,source_url,stage,error) VALUES(?,?,?,?)",
+                (run_id, url, "image_ocr", f"{type(exc).__name__}: {exc}"[:1000]),
+            )
+            connection.commit()
+            errors += 1
+            print(f"IMAGE_ERROR {url}: {type(exc).__name__}: {str(exc)[:180]}")
+        time.sleep(delay)
+    return completed, errors
+
+
 def sync(args: argparse.Namespace) -> int:
     category_id = discover_category_id(args.category_url)
     posts, expected = fetch_category_posts(args.category_url, category_id)
@@ -1740,20 +1861,29 @@ def sync(args: argparse.Namespace) -> int:
             refresh_changed=not args.skip_pdf_refresh,
             ocr_workers=args.ocr_workers, ocr_dpi=args.ocr_dpi,
         )
+    image_count = image_errors = 0
+    if args.ocr_images:
+        if not tesseract:
+            raise RuntimeError("Tesseract not found; install it or pass --tesseract /path/to/tesseract")
+        image_count, image_errors = index_first_party_images(
+            connection, run_id, tesseract=tesseract, tessdata=tessdata,
+            language=args.language, delay=args.delay, limit=args.limit_images,
+            refresh_changed=args.refresh_image_ocr,
+        )
     pending = connection.execute("SELECT count(*) FROM topic_links WHERE status='pending_review'").fetchone()[0]
     unresolved = connection.execute(
         "SELECT count(*) FROM posts p WHERE NOT EXISTS(SELECT 1 FROM topic_links t WHERE t.post_id=p.post_id)"
     ).fetchone()[0]
     source_count = connection.execute("SELECT count(*) FROM sources").fetchone()[0]
     connection.execute(
-            "UPDATE sync_runs SET finished_at=?,posts_seen=?,sources_seen=?,pdfs_ocred=?,errors=? WHERE run_id=?",
-        (time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), len(posts), source_count, pdf_count, pdf_errors, run_id),
+        "UPDATE sync_runs SET finished_at=?,posts_seen=?,sources_seen=?,pdfs_ocred=?,images_ocred=?,errors=? WHERE run_id=?",
+        (time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()), len(posts), source_count, pdf_count, image_count, pdf_errors + image_errors, run_id),
     )
     connection.commit()
     connection.close()
     print(f"SOURCES_TOTAL={source_count} TOPIC_LINKS_PENDING_REVIEW={pending} POSTS_WITHOUT_CANDIDATE={unresolved}")
-    print(f"PDFS_PROCESSED={pdf_count} PDF_ERRORS={pdf_errors} DATABASE={args.database}")
-    return 0 if pdf_errors == 0 else 2
+    print(f"PDFS_PROCESSED={pdf_count} PDF_ERRORS={pdf_errors} IMAGES_PROCESSED={image_count} IMAGE_ERRORS={image_errors} DATABASE={args.database}")
+    return 0 if pdf_errors + image_errors == 0 else 2
 
 
 def main() -> int:
@@ -1761,12 +1891,16 @@ def main() -> int:
     parser.add_argument("--category-url", default=DEFAULT_CATEGORY_URL)
     parser.add_argument("--database", type=Path, default=DEFAULT_DB)
     parser.add_argument("--ocr", action="store_true", help="Download and index linked first-party PDFs")
+    parser.add_argument("--ocr-images", action="store_true", help="OCR linked first-party raster images during a category sync")
+    parser.add_argument("--ocr-images-only", action="store_true", help="OCR images in the existing catalog without a WordPress re-sync")
     parser.add_argument("--tesseract", help="Local Tesseract executable; defaults to TESSERACT_CMD or PATH")
     parser.add_argument("--tessdata", type=Path, help="Tesseract language-data directory")
     parser.add_argument("--language", default="kor+eng")
     parser.add_argument("--delay", type=float, default=0.15, help="Pause between PDF downloads")
     parser.add_argument("--limit-pdfs", type=int, help="Limit PDFs for an initial OCR check; omit to process all")
+    parser.add_argument("--limit-images", type=int, help="Limit first-party image OCR; omit to process all")
     parser.add_argument("--skip-pdf-refresh", action="store_true", help="Process pending PDFs only; do not re-fetch extracted PDFs")
+    parser.add_argument("--refresh-image-ocr", action="store_true", help="Re-fetch extracted images; re-OCR only when their digest changes")
     parser.add_argument("--ocr-workers", type=int, default=3, help="Parallel local OCR page workers")
     parser.add_argument("--ocr-dpi", type=int, default=180, help="Rendered page resolution for OCR")
     parser.add_argument("--review-topic-link", nargs=3, metavar=("POST_ID", "TOPIC_ID", "approve|reject"))
@@ -1787,6 +1921,35 @@ def main() -> int:
     parser.add_argument("--list-pending", action="store_true", help="List candidate links and Master proposals")
     parser.add_argument("--limit", type=int, default=50, help="Maximum pending rows to display")
     args = parser.parse_args()
+    if args.ocr_images_only:
+        tesseract = args.tesseract or os.environ.get("TESSERACT_CMD") or shutil.which("tesseract")
+        if not tesseract:
+            parser.error("Tesseract not found; install it or pass --tesseract /path/to/tesseract")
+        connection = initialize_database(args.database)
+        category_id = connection.execute("SELECT category_id FROM posts ORDER BY post_id LIMIT 1").fetchone()
+        if category_id is None:
+            connection.close()
+            parser.error("existing catalog contains no posts")
+        started = datetime.now(timezone.utc).isoformat()
+        run_id = connection.execute(
+            "INSERT INTO sync_runs(started_at,category_url,category_id) VALUES(?,?,?)",
+            (started, args.category_url, category_id[0]),
+        ).lastrowid
+        connection.commit()
+        tessdata = args.tessdata or (Path(os.environ["TESSDATA_PREFIX"]) if os.environ.get("TESSDATA_PREFIX") else None)
+        completed, errors = index_first_party_images(
+            connection, int(run_id), tesseract=tesseract, tessdata=tessdata,
+            language=args.language, delay=args.delay, limit=args.limit_images,
+            refresh_changed=args.refresh_image_ocr,
+        )
+        connection.execute(
+            "UPDATE sync_runs SET finished_at=?,sources_seen=(SELECT count(*) FROM sources),images_ocred=?,errors=? WHERE run_id=?",
+            (datetime.now(timezone.utc).isoformat(), completed, errors, run_id),
+        )
+        connection.commit()
+        connection.close()
+        print(f"IMAGES_PROCESSED={completed} IMAGE_ERRORS={errors} DATABASE={args.database}")
+        return 0 if errors == 0 else 2
     if args.review_topic_link:
         post_id, topic_id, decision = args.review_topic_link
         queued = review_topic_link(args.database, int(post_id), topic_id, decision)

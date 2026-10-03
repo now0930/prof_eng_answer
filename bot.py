@@ -1901,6 +1901,23 @@ def _handle_review_command(chat_id, command_text):
         if high_score:
             lines.append("   고득점 포인트: " + " / ".join(high_score))
 
+        wordpress_pack = material.get("wordpress_topic_pack")
+        if isinstance(wordpress_pack, dict):
+            indexed = [
+                source for source in wordpress_pack.get("sources", [])
+                if isinstance(source, dict) and source.get("source_type") in {"pdf", "image"}
+                and isinstance(source.get("extracted_text"), str) and source["extracted_text"].strip()
+            ]
+            for source in indexed[:2]:
+                method = source.get("extraction_method") or "OCR"
+                excerpt = " ".join(source["extracted_text"].split())[:220]
+                if len(source["extracted_text"].split()) > 38:
+                    excerpt = excerpt.rsplit(" ", 1)[0].rstrip() + "…"
+                lines.append(
+                    f"   출처 OCR ({source['source_type']}, {method}, 미검증): "
+                    f"{source.get('title') or source.get('source_url')} — {excerpt}"
+                )
+
         feedback = material.get("feedback")
         if isinstance(feedback, dict) and feedback.get("score_effect") == "none":
             missing = [display_item(value) for value in feedback.get("common_missing_points", [])]

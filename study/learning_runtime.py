@@ -17,6 +17,7 @@ from .master_topic_pack import (
 )
 from .review_queue import build_review_queue
 from .training_history import TrainingAttempt, TrainingHistoryStore
+from .wordpress_topic_pack import load_wordpress_topic_pack
 
 
 WEAK_SCORE_THRESHOLD = 15.0
@@ -109,16 +110,18 @@ def review_material_for_topic(
     topic_id: str,
     master_directory: str | Path,
 ) -> dict[str, Any]:
-    """Load read-only Training View content and the learner's latest feedback."""
+    """Load read-only Training View, private OCR pack, and latest feedback."""
     master_path = Path(master_directory) / f"{topic_id}.json"
     master = load_master_topic_pack(master_path)
     repository_root = Path(master_directory).resolve().parent
     training_view = project_training(repository_root, master)
+    wordpress_pack = load_wordpress_topic_pack(repository_root, topic_id)
     attempts = history.list_attempts(learner_id=learner_id, topic_id=topic_id)
     latest = attempts[-1] if attempts else None
     diagnosis = latest.get("diagnosis", {}) if isinstance(latest, dict) else {}
     return {
         "training": training_view,
+        "wordpress_topic_pack": wordpress_pack,
         "feedback": diagnosis.get("topic_guidance") if isinstance(diagnosis, dict) else None,
         "prior_diagnosis": diagnosis if isinstance(diagnosis, dict) else {},
     }

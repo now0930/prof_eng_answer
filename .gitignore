@@ -15,6 +15,7 @@ data/state.json
 data/sessions/
 data/user_settings/
 data/wordpress_sources.sqlite3*
+data/wordpress_topic_packs/
 
 # Temporary working directories
 tmp/
