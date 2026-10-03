@@ -17,6 +17,7 @@ from study.learning_runtime import (
     complete_topic_review,
     create_daily_review_queue,
     record_completed_grade,
+    review_material_for_topic,
 )
 from study.master_topic_pack import load_legacy_topic_sources, load_master_topic_pack
 from study.training_history import TrainingAttempt, TrainingHistoryStore
@@ -232,6 +233,30 @@ def test_missing_master_keeps_grade_diagnosis_persistable() -> None:
         assert row["score"] == 14.0
         assert row["diagnosis"]["weaknesses"] == ["application"]
         assert "topic_guidance" not in row["diagnosis"]
+
+
+def test_review_material_supports_legacy_history_without_view_feedback() -> None:
+    master_path = sorted((ROOT / "master_topic_packs").glob("*.json"))[0]
+    topic_id = master_path.stem
+    with tempfile.TemporaryDirectory(prefix="review-material-legacy-history-") as directory:
+        history = TrainingHistoryStore(Path(directory) / "history.sqlite3")
+        history.save(TrainingAttempt(
+            learner_id="legacy-learner",
+            question_id="legacy-question",
+            topic_id=topic_id,
+            attempted_at="2026-09-01T10:00:00+09:00",
+            score=16,
+            diagnosis={"weaknesses": ["legacy weakness"]},
+        ))
+        material = review_material_for_topic(
+            history,
+            learner_id="legacy-learner",
+            topic_id=topic_id,
+            master_directory=ROOT / "master_topic_packs",
+        )
+        assert material["training"]["topic_id"] == topic_id
+        assert material["feedback"] is None
+        assert material["prior_diagnosis"]["weaknesses"] == ["legacy weakness"]
 
 
 if __name__ == "__main__":
