@@ -35,6 +35,12 @@ ROOT = Path(__file__).resolve().parents[1]
 import sys
 sys.path.insert(0, str(ROOT))
 from study.master_topic_pack import validate_master_topic_pack
+from study.content_update import (
+    approve_content_update,
+    reject_content_update,
+    validate_content_update_against_master,
+    validate_content_update_proposal,
+)
 from study.source_update import apply_approved_source_update, propose_source_update
 
 
@@ -159,6 +165,16 @@ CREATE TABLE IF NOT EXISTS source_update_proposals (
     created_at TEXT NOT NULL,
     approved_by TEXT,
     approved_at TEXT
+);
+CREATE TABLE IF NOT EXISTS content_update_proposals (
+    proposal_id TEXT PRIMARY KEY,
+    topic_id TEXT NOT NULL,
+    base_revision INTEGER NOT NULL,
+    proposal_json TEXT NOT NULL,
+    status TEXT NOT NULL CHECK(status IN ('pending_approval','approved','rejected','candidate_ready')),
+    created_at TEXT NOT NULL,
+    resolved_by TEXT,
+    resolved_at TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_posts_modified ON posts(modified_at);
 CREATE INDEX IF NOT EXISTS idx_sources_type_status ON sources(source_type, extraction_status);
@@ -687,6 +703,118 @@ def approve_master_proposal(database: Path, proposal_id: str, approved_by: str) 
     connection.close()
 
 
+def save_content_update_proposal(database: Path, proposal: dict[str, Any]) -> None:
+    """Persist a validated content proposal without changing Topic files."""
+    validate_content_update_proposal(proposal)
+    if proposal["status"] != "pending_approval":
+        raise ValueError("only pending content proposals may be submitted")
+    master_path = ROOT / "master_topic_packs" / f"{proposal['topic_id']}.json"
+    if not master_path.is_file():
+        raise ValueError(f"Master Topic Pack does not exist: {proposal['topic_id']}")
+    master = json.loads(master_path.read_text(encoding="utf-8"))
+    validate_master_topic_pack(master)
+    if master["revision"] != proposal["base_revision"]:
+        raise ValueError("content proposal base revision does not match the current Master")
+    validate_content_update_against_master(master, proposal)
+    connection = initialize_database(database)
+    try:
+        connection.execute(
+            """INSERT INTO content_update_proposals
+               (proposal_id,topic_id,base_revision,proposal_json,status,created_at)
+               VALUES(?,?,?,?,?,?)""",
+            (
+                proposal["proposal_id"], proposal["topic_id"], proposal["base_revision"],
+                json.dumps(proposal, ensure_ascii=False, sort_keys=True), proposal["status"],
+                proposal["proposed_at"],
+            ),
+        )
+        connection.commit()
+    finally:
+        connection.close()
+
+
+def resolve_content_update_proposal(
+    database: Path,
+    proposal_id: str,
+    *,
+    decision: str,
+    reviewed_by: str,
+) -> dict[str, Any]:
+    """Approve/reject one proposal record; approval does not apply content."""
+    if decision not in {"approve", "reject"}:
+        raise ValueError("decision must be approve or reject")
+    if not isinstance(reviewed_by, str) or not reviewed_by.strip():
+        raise ValueError("an explicit reviewer identity is required")
+    connection = initialize_database(database)
+    try:
+        connection.execute("BEGIN IMMEDIATE")
+        row = connection.execute(
+            "SELECT proposal_json,status FROM content_update_proposals WHERE proposal_id=?",
+            (proposal_id,),
+        ).fetchone()
+        if not row:
+            raise ValueError(f"content proposal not found: {proposal_id}")
+        proposal_json, status = row
+        if status != "pending_approval":
+            raise ValueError(f"content proposal is not pending approval: {status}")
+        proposal = json.loads(proposal_json)
+        now = datetime.now(timezone.utc).isoformat()
+        if decision == "approve":
+            master_path = ROOT / "master_topic_packs" / f"{proposal['topic_id']}.json"
+            if not master_path.is_file():
+                raise ValueError("Master Topic Pack disappeared before proposal review")
+            master = json.loads(master_path.read_text(encoding="utf-8"))
+            validate_master_topic_pack(master)
+            if master["revision"] != proposal["base_revision"]:
+                raise ValueError("content proposal became stale before approval")
+            resolved = approve_content_update(
+                master, proposal, approved_by=reviewed_by, approved_at=now
+            )
+        else:
+            resolved = reject_content_update(proposal, rejected_by=reviewed_by, rejected_at=now)
+        connection.execute(
+            """UPDATE content_update_proposals SET proposal_json=?,status=?,resolved_by=?,resolved_at=?
+               WHERE proposal_id=? AND status='pending_approval'""",
+            (
+                json.dumps(resolved, ensure_ascii=False, sort_keys=True), resolved["status"],
+                reviewed_by.strip(), now, proposal_id,
+            ),
+        )
+        connection.commit()
+        return resolved
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
+        connection.close()
+
+
+def list_content_update_proposals(database: Path, limit: int = 50) -> list[dict[str, Any]]:
+    connection = initialize_database(database)
+    try:
+        rows = connection.execute(
+            """SELECT proposal_json FROM content_update_proposals
+               ORDER BY created_at,proposal_id LIMIT ?""",
+            (limit,),
+        ).fetchall()
+        return [json.loads(row[0]) for row in rows]
+    finally:
+        connection.close()
+
+
+def show_content_update_proposals(database: Path, limit: int = 50) -> None:
+    proposals = list_content_update_proposals(database, limit)
+    print("CONTENT_UPDATE_PROPOSALS")
+    for proposal in proposals:
+        target = proposal["target"]
+        print(
+            f"{proposal['proposal_id']}\t{proposal['status']}\t{proposal['topic_id']}\t"
+            f"{target['source_key']}:{target['record_id']}.{'.'.join(target['field_path'])}\t"
+            f"views={','.join(proposal['affected_views'])}"
+        )
+    print(f"CONTENT_UPDATE_PROPOSALS_TOTAL={len(proposals)}")
+
+
 def list_pending(database: Path, limit: int = 50) -> None:
     connection = initialize_database(database)
     rows = connection.execute(
@@ -1072,6 +1200,10 @@ def main() -> int:
     parser.add_argument("--review-topic-link", nargs=3, metavar=("POST_ID", "TOPIC_ID", "approve|reject"))
     parser.add_argument("--approve-proposal", help="Apply one pending Master update proposal by ID")
     parser.add_argument("--approved-by", help="Required explicit approver identity for --approve-proposal")
+    parser.add_argument("--list-content-proposals", action="store_true", help="List curated Topic-content proposals")
+    parser.add_argument("--approve-content-proposal", help="Approve a content proposal for candidate preparation; does not write Topic files")
+    parser.add_argument("--reject-content-proposal", help="Reject a pending content proposal")
+    parser.add_argument("--reviewed-by", help="Required reviewer identity for content proposal decisions")
     parser.add_argument("--list-pending", action="store_true", help="List candidate links and Master proposals")
     parser.add_argument("--limit", type=int, default=50, help="Maximum pending rows to display")
     args = parser.parse_args()
@@ -1085,6 +1217,31 @@ def main() -> int:
             parser.error("--approved-by is required with --approve-proposal")
         approve_master_proposal(args.database, args.approve_proposal, args.approved_by)
         print(f"MASTER_PROPOSAL_APPLIED={args.approve_proposal}")
+        return 0
+    if args.approve_content_proposal:
+        if not args.reviewed_by:
+            parser.error("--reviewed-by is required with --approve-content-proposal")
+        proposal = resolve_content_update_proposal(
+            args.database,
+            args.approve_content_proposal,
+            decision="approve",
+            reviewed_by=args.reviewed_by,
+        )
+        print(f"CONTENT_PROPOSAL_APPROVED={proposal['proposal_id']} CONTENT_WRITTEN=false")
+        return 0
+    if args.reject_content_proposal:
+        if not args.reviewed_by:
+            parser.error("--reviewed-by is required with --reject-content-proposal")
+        proposal = resolve_content_update_proposal(
+            args.database,
+            args.reject_content_proposal,
+            decision="reject",
+            reviewed_by=args.reviewed_by,
+        )
+        print(f"CONTENT_PROPOSAL_REJECTED={proposal['proposal_id']}")
+        return 0
+    if args.list_content_proposals:
+        show_content_update_proposals(args.database, args.limit)
         return 0
     if args.list_pending:
         list_pending(args.database, args.limit)

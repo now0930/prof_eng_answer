@@ -39,6 +39,29 @@ def _affected_views(master: dict[str, Any], source_key: str) -> list[str]:
     return [view for view, keys in projection_sources.items() if source_key in keys]
 
 
+def validate_content_update_against_master(master: dict[str, Any], proposal: dict[str, Any]) -> None:
+    try:
+        validate_master_topic_pack(master)
+    except MasterTopicPackError as exc:
+        raise ContentUpdateError(str(exc)) from exc
+    if proposal["topic_id"] != master["topic_id"] or proposal["base_revision"] != master["revision"]:
+        raise ContentUpdateError("proposal does not match the current Master revision")
+    target = proposal["target"]
+    source_key = target["source_key"]
+    if source_key not in master["legacy_topic_pack"]["source_files"]:
+        raise ContentUpdateError("target source_key is not part of this Topic Pack")
+    if proposal["affected_views"] != _affected_views(master, source_key):
+        raise ContentUpdateError("affected_views do not match current Master projections")
+    linked_sources = {source["source_id"]: source for source in master["sources"]}
+    for item in proposal["evidence"]:
+        source = linked_sources.get(item["source_id"])
+        if source is None:
+            raise ContentUpdateError("proposal evidence is no longer linked to this Topic")
+        allowed_urls = {source.get("wordpress_url"), source.get("source_url", source.get("wordpress_url"))}
+        if item["source_url"] not in allowed_urls:
+            raise ContentUpdateError("proposal evidence URL does not match the linked source")
+
+
 def validate_content_update_proposal(value: Any) -> dict[str, Any]:
     """Validate a proposal lifecycle record without applying its diff."""
     _expect(isinstance(value, dict), "content update proposal must be an object")
@@ -132,10 +155,15 @@ def _validate_timestamp(value: Any, field: str) -> None:
 
 
 def approve_content_update(
-    proposal: dict[str, Any], *, approved_by: str | None, approved_at: str
+    master: dict[str, Any],
+    proposal: dict[str, Any],
+    *,
+    approved_by: str | None,
+    approved_at: str,
 ) -> dict[str, Any]:
     """Record explicit approval without applying the proposed field change."""
     validate_content_update_proposal(proposal)
+    validate_content_update_against_master(master, proposal)
     if proposal["status"] != "pending_approval":
         raise ContentUpdateError("proposal is not awaiting approval")
     _expect(isinstance(approved_by, str) and bool(approved_by.strip()), "an explicit approver identity is required")
@@ -178,20 +206,13 @@ def apply_approved_content_update(
     candidate_ready_at: str,
 ) -> dict[str, Any]:
     """Return a candidate transformation; never writes files or the Master."""
-    try:
-        validate_master_topic_pack(master)
-    except MasterTopicPackError as exc:
-        raise ContentUpdateError(str(exc)) from exc
+    validate_content_update_against_master(master, proposal)
     validate_content_update_proposal(proposal)
     if proposal["status"] != "approved":
         raise ContentUpdateError("content proposal must be explicitly approved before apply")
-    if proposal["topic_id"] != master["topic_id"] or proposal["base_revision"] != master["revision"]:
-        raise ContentUpdateError("proposal does not match the current Master revision")
     _validate_timestamp(candidate_ready_at, "candidate_ready_at")
     target = proposal["target"]
     key = target["source_key"]
-    if key not in master["legacy_topic_pack"]["source_files"]:
-        raise ContentUpdateError("target source_key is not part of this Topic Pack")
     if key not in source_payloads or not isinstance(source_payloads[key], dict):
         raise ContentUpdateError("target source payload is unavailable")
     current_source = source_payloads[key]
@@ -213,17 +234,6 @@ def apply_approved_content_update(
         raise ContentUpdateError("target field path does not exist")
     if parent[field] != proposal["before_value"]:
         raise ContentUpdateError("target before_value no longer matches current content")
-    expected_impacts = _affected_views(master, key)
-    if proposal["affected_views"] != expected_impacts:
-        raise ContentUpdateError("affected_views do not match current Master projections")
-    linked_sources = {source["source_id"]: source for source in master["sources"]}
-    for item in proposal["evidence"]:
-        source = linked_sources.get(item["source_id"])
-        if source is None:
-            raise ContentUpdateError("proposal evidence is no longer linked to this Topic")
-        allowed_urls = {source.get("wordpress_url"), source.get("source_url", source.get("wordpress_url"))}
-        if item["source_url"] not in allowed_urls:
-            raise ContentUpdateError("proposal evidence URL does not match the linked source")
 
     updated_master = copy.deepcopy(master)
     updated_master["revision"] += 1

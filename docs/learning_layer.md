@@ -44,6 +44,8 @@ change the finalized score or verdict.
 - WordPress references and approval proposals: `study/source_update.py`
 - Curated Topic-content change proposal contract:
   `study/content_update.py` and `schemas/content_update_proposal.schema.json`
+- Curated content proposal persistence/review: the separate
+  `content_update_proposals` table in the WordPress catalog database
 - WordPress category ingestion, source catalog, media-version tracking, local
   PDF text extraction/OCR, and review commands: `scripts/wordpress_catalog.py`
 - Local generated catalog: `data/wordpress_sources.sqlite3` (ignored runtime
@@ -149,6 +151,13 @@ time. An approved change can be transformed into an in-memory candidate only
 when its base revision, linked evidence, target uniqueness, and before-value
 still match. No Topic file is written by this adapter; durable application and
 release validation remain a later stage.
+
+Pending proposals can be persisted and reviewed independently from source
+reference proposals. `--list-content-proposals` lists them;
+`--approve-content-proposal ID --reviewed-by NAME` records approval only, and
+`--reject-content-proposal ID --reviewed-by NAME` records rejection. Approval
+checks the current Master revision and linked source identity/URL. It does not
+write any Topic file or alter a View.
 
 The history database path is supplied by the caller. Each attempt stores its
 question and topic identity, attempt time, final score, structured diagnosis,

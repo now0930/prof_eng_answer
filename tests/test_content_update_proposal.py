@@ -124,7 +124,10 @@ def test_approval_and_pure_apply_are_revision_and_before_value_guarded() -> None
         proposed_at="2026-10-05T10:00:00+09:00",
     )
     approved = approve_content_update(
-        pending, approved_by="owner", approved_at="2026-10-05T11:00:00+09:00"
+        master,
+        pending,
+        approved_by="owner",
+        approved_at="2026-10-05T11:00:00+09:00",
     )
     candidate = apply_approved_content_update(
         master,
