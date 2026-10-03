@@ -665,45 +665,64 @@ def materialize_waiting_proposals(connection: sqlite3.Connection) -> int:
     return updated
 
 
-def review_topic_link(database: Path, post_id: int, topic_id: str, decision: str) -> int:
+def review_topic_link(
+    database: Path, post_id: int, topic_id: str, decision: str,
+    *, reviewed_by: str | None = None, evidence: str | None = None,
+) -> int:
     if decision not in {"approve", "reject"}:
         raise ValueError("decision must be approve or reject")
+    reviewer = reviewed_by if reviewed_by is not None else os.environ.get("USER") or "local-user"
+    if not reviewer.strip():
+        raise ValueError("reviewer identity must not be blank")
+    if evidence is not None and not evidence.strip():
+        raise ValueError("review evidence must not be blank")
+    if topic_id not in {topic["topic_id"] for topic in topic_catalog()}:
+        raise ValueError(f"unknown Topic ID: {topic_id}")
     connection = initialize_database(database)
     status = "approved" if decision == "approve" else "rejected"
-    reviewer = os.environ.get("USER") or "local-user"
     reviewed_at = datetime.now(timezone.utc).isoformat()
-    cursor = connection.execute(
-        "UPDATE topic_links SET status=?,reviewed_by=?,reviewed_at=? WHERE post_id=? AND topic_id=? AND status='pending_review'",
-        (status, reviewer, reviewed_at, post_id, topic_id),
-    )
-    if cursor.rowcount == 0 and decision == "approve":
-        if topic_id not in {topic["topic_id"] for topic in topic_catalog()}:
-            connection.close()
-            raise ValueError(f"unknown Topic ID: {topic_id}")
-        post_exists = connection.execute("SELECT 1 FROM posts WHERE post_id=?", (post_id,)).fetchone()
-        if not post_exists:
-            connection.close()
+    try:
+        connection.execute("BEGIN IMMEDIATE")
+        existing = connection.execute(
+            "SELECT status FROM topic_links WHERE post_id=? AND topic_id=?", (post_id, topic_id)
+        ).fetchone()
+        if existing and existing[0] == status:
+            return 0  # Retry must not rewrite provenance or regenerate proposals.
+        if existing and existing[0] != "pending_review":
+            raise ValueError("resolved topic link cannot be overwritten by a review")
+        if not connection.execute("SELECT 1 FROM posts WHERE post_id=?", (post_id,)).fetchone():
             raise ValueError(f"post not found: {post_id}")
-        connection.execute(
-            """INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence,reviewed_by,reviewed_at)
-               VALUES(?,?,'approved',1.0,'[]','manual human topic mapping',?,?)""",
-            (post_id, topic_id, reviewer, reviewed_at),
-        )
-    elif cursor.rowcount != 1:
+        if existing:
+            connection.execute(
+                """UPDATE topic_links SET status=?,reviewed_by=?,reviewed_at=?,
+                   evidence=CASE WHEN ? IS NULL THEN evidence ELSE evidence || char(10) || ? END
+                   WHERE post_id=? AND topic_id=?""",
+                (status, reviewer, reviewed_at, evidence, evidence, post_id, topic_id),
+            )
+        elif decision == "approve":
+            connection.execute(
+                """INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence,reviewed_by,reviewed_at)
+                   VALUES(?,?,'approved',1.0,'[]',?,?,?)""",
+                (post_id, topic_id, evidence or "explicit reviewed topic mapping", reviewer, reviewed_at),
+            )
+        else:
+            raise ValueError("no pending topic-link candidate matched the post/topic pair")
+        queued = 0
+        if decision == "approve":
+            sources = connection.execute(
+                "SELECT DISTINCT source_id FROM post_sources WHERE post_id=? ORDER BY source_id", (post_id,)
+            ).fetchall()
+            for (source_id,) in sources:
+                queue_source_proposal(connection, source_id, topic_id)
+                queued += 1
+        materialize_waiting_proposals(connection)
+        connection.commit()
+        return queued
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
         connection.close()
-        raise ValueError("no pending topic-link candidate matched the post/topic pair")
-    queued = 0
-    if decision == "approve":
-        sources = connection.execute(
-            "SELECT source_id FROM post_sources WHERE post_id=? ORDER BY position", (post_id,)
-        ).fetchall()
-        for (source_id,) in sources:
-            queue_source_proposal(connection, source_id, topic_id)
-            queued += 1
-    materialize_waiting_proposals(connection)
-    connection.commit()
-    connection.close()
-    return queued
 
 
 def approve_master_proposal(database: Path, proposal_id: str, approved_by: str) -> None:

@@ -121,3 +121,19 @@ Return the output path and a short count of each recommendation/confidence.
 The owner makes the final decision and applies accepted mappings one at a time
 with the existing `--review-topic-link POST_ID TOPIC_ID approve|reject`
 command. No LLM output is imported automatically.
+
+## Explicitly delegated resolution
+
+If the owner separately delegates final relationship decisions to an agent,
+that agent may resolve links after checking the stored post and Topic scope.
+The CSV remains recommendation data; a `high` label alone is not approval.
+Record the delegation, CSV hashes, decisions, reasons and deferred row keys in
+a separate resolution report. Pass the real agent identity and review evidence
+to `review_topic_link(..., reviewed_by=..., evidence=...)`; do not impersonate
+a human reviewer. Resolved decisions are preserved on retries, and a failed
+proposal-queue write rolls back the link decision.
+
+Source-reference approval records provenance only. Keep references unverified
+until their technical content and locators have been checked. Content changes
+still follow the separate Topic-content proposal contract. Defer ambiguous
+recommendations with reasons rather than treating the remainder as rejected.
