@@ -157,7 +157,7 @@ def enforce_requested_authority_mode(
 @lru_cache(maxsize=1)
 def evaluate_current_authority_gate() -> dict[str, Any]:
     """Recompute the offline Gate from the running code before activation."""
-    from deterministic_replay_audit import run_deterministic_replay_audit
+    from grading.scoring.deterministic_replay_audit import run_deterministic_replay_audit
 
     replay = run_deterministic_replay_audit(
         root=ROOT,

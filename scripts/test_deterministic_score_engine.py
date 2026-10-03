@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-from deterministic_score_engine import calculate_deterministic_score
+from grading.scoring.deterministic_score_engine import calculate_deterministic_score
 
 
 def _evaluation(statuses: list[str], *, fatal: bool = False) -> dict:

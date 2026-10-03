@@ -9,8 +9,8 @@ from typing import Any, Mapping
 
 from grading.routing.local_semantic_resolver import resolve_with_optional_local_semantics
 from grading.evidence.engineering_invariant_evaluator import evaluate_engineering_invariants
-from deterministic_requirement_evaluator import evaluate_deterministic_requirements
-from deterministic_score_engine import calculate_deterministic_score
+from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
+from grading.scoring.deterministic_score_engine import calculate_deterministic_score
 from grading.evidence.fact_anchor_evidence_adapter import (
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
@@ -22,7 +22,7 @@ from grading.evidence.topic_machine_contract import extract_fatal_rule_ids, vali
 
 VERSION = "deterministic_grading_shadow_v1"
 MARKER = "DETERMINISTIC_GRADING_SHADOW_V1"
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 
 
 def _topic_id(grade: Mapping[str, Any]) -> str:

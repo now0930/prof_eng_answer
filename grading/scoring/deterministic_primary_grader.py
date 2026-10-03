@@ -6,8 +6,8 @@ import json
 from pathlib import Path
 from typing import Any
 
-from deterministic_requirement_evaluator import evaluate_deterministic_requirements
-from deterministic_score_engine import calculate_deterministic_score
+from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
+from grading.scoring.deterministic_score_engine import calculate_deterministic_score
 from grading.routing.deterministic_topic_router import route_question_topics
 from grading.evidence.engineering_invariant_evaluator import evaluate_engineering_invariants
 from grading.evidence.fact_anchor_evidence_adapter import (

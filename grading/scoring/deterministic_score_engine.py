@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from typing import Any, Mapping
 
-from deterministic_score_evidence import evaluate_score_evidence
+from grading.scoring.deterministic_score_evidence import evaluate_score_evidence
 
 
 VERSION = "deterministic_score_engine_v1"

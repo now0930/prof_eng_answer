@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Any, Iterable
 
 from grading.evidence.canonical_grading_evidence import build_canonical_grading_evidence
-from deterministic_requirement_evaluator import load_machine_contracts
+from grading.scoring.deterministic_requirement_evaluator import load_machine_contracts
 from grading.evidence.quantity_dimension_evaluator import extract_quantity_relation_evidence
 
 

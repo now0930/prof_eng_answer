@@ -9,8 +9,8 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
-from deterministic_primary_grader import grade_deterministically
-from deterministic_requirement_evaluator import evaluate_deterministic_requirements
+from grading.scoring.deterministic_primary_grader import grade_deterministically
+from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from grading.evidence.fact_anchor_evidence_adapter import (
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,

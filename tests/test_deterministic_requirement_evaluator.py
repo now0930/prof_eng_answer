@@ -7,7 +7,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from deterministic_requirement_evaluator import evaluate_deterministic_requirements
+from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
 
 
 SIL_TOPIC = "sil_target_determination_risk_reduction_and_lifecycle"

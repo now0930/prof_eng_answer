@@ -11,7 +11,7 @@ from grading.evidence.topic_machine_contract import extract_fatal_rule_ids, vali
 
 VERSION = "deterministic_requirement_evaluator_v1"
 MARKER = "DETERMINISTIC_REQUIREMENT_EVALUATION_V1"
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 CLOSED_WORLD_RELATION_PREDICATES = {"applies_to", "equivalent_to"}
 
 

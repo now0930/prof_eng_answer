@@ -8,7 +8,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from deterministic_replay_audit import run_deterministic_replay_audit
+from grading.scoring.deterministic_replay_audit import run_deterministic_replay_audit
 from grading.evidence.fatal_taxonomy import load_fatal_taxonomy
 
 

@@ -10910,7 +10910,7 @@ def run_agent_pipeline(*args, **kwargs):
     # STAGE39_DETERMINISTIC_PRIMARY_ENTRYPOINT_V1
     authority_mode = enforce_requested_authority_mode()
     if authority_mode["DETERMINISTIC_GRADING_PRIMARY"]:
-        from deterministic_primary_grader import (
+        from grading.scoring.deterministic_primary_grader import (
             grade_deterministically,
             persist_deterministic_grade,
         )
@@ -10955,7 +10955,7 @@ def run_agent_pipeline(*args, **kwargs):
     # STAGE35G_DETERMINISTIC_PRIMARY_SHADOW_V1
     # Diagnostic only: no production score/verdict mutation or provider call.
     try:
-        from deterministic_grading_shadow import attach_deterministic_grading_shadow
+        from grading.scoring.deterministic_grading_shadow import attach_deterministic_grading_shadow
         finalized_result = attach_deterministic_grading_shadow(
             finalized_result,
             question_text=str(submission_normalization.get("question_text") or ""),

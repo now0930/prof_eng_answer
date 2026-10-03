@@ -107,17 +107,17 @@ python3 -m py_compile \
   grading/evidence/canonical_claim_extractor.py \
   grading/evidence/quantity_dimension_evaluator.py \
   grading/evidence/topic_machine_contract.py \
-  deterministic_replay_audit.py \
+  grading/scoring/deterministic_replay_audit.py \
   grading/routing/local_semantic_resolver.py \
-  deterministic_grading_shadow.py \
+  grading/scoring/deterministic_grading_shadow.py \
   grading_authority_policy.py \
   grading/evidence/fatal_taxonomy.py \
   grading/evidence/engineering_invariant_evaluator.py \
-  deterministic_requirement_evaluator.py \
-  deterministic_score_engine.py \
-  deterministic_score_evidence.py \
+  grading/scoring/deterministic_requirement_evaluator.py \
+  grading/scoring/deterministic_score_engine.py \
+  grading/scoring/deterministic_score_evidence.py \
   grading/routing/deterministic_topic_router.py \
-  deterministic_primary_grader.py \
+  grading/scoring/deterministic_primary_grader.py \
   grading/evidence/fact_anchor_evidence_adapter.py \
   scripts/check_deterministic_authority_gate.py \
   scripts/run_deterministic_stability_gate.py \

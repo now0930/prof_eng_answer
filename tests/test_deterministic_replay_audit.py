@@ -7,7 +7,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from deterministic_replay_audit import run_deterministic_replay_audit
+from grading.scoring.deterministic_replay_audit import run_deterministic_replay_audit
 
 
 class DeterministicReplayAuditTests(unittest.TestCase):
@@ -58,7 +58,7 @@ class DeterministicReplayAuditTests(unittest.TestCase):
         self.assertFalse(self.report["external_llm_required_for_verdict"])
 
     def test_runtime_has_no_llm_imports(self):
-        source = (REPO / "deterministic_replay_audit.py").read_text(encoding="utf-8")
+        source = (REPO / "grading/scoring/deterministic_replay_audit.py").read_text(encoding="utf-8")
         for forbidden in ("gemini_grader", "logic_llm_verifier", "clova_grader"):
             self.assertNotIn(forbidden, source)
 

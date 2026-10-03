@@ -10,7 +10,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from deterministic_primary_grader import grade_deterministically, persist_deterministic_grade
+from grading.scoring.deterministic_primary_grader import grade_deterministically, persist_deterministic_grade
 from grading_agents import finalize_grade_after_score_reconciliation, run_agent_pipeline
 
 
