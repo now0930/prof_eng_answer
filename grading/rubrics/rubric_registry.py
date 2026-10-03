@@ -6,10 +6,10 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Dict, Iterable, List, Optional, Tuple
 
-from rubric_bank_paths import resolve_rubric_bank_path
+from grading.rubrics.rubric_bank_paths import resolve_rubric_bank_path
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
 QUESTION_TYPE_PROFILE = BASE_DIR / "rubrics" / "question_types" / "default.json"
 MODEL_ANSWER_BANK = BASE_DIR / "rubrics" / "model_answers" / "industrial_instrumentation_control.json"

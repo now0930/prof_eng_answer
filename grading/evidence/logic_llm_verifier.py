@@ -6,7 +6,7 @@ import re
 import time
 import urllib.request
 from pathlib import Path
-from rubric_bank_paths import resolve_rubric_bank_path
+from grading.rubrics.rubric_bank_paths import resolve_rubric_bank_path
 from typing import Any
 import math
 

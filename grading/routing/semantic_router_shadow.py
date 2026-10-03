@@ -533,7 +533,7 @@ def build_question_demand_aware_rule_candidates(
     # Student answer, fact_eval, grading scores, and coverage
     # are intentionally absent from this API and result.
     if bank is None:
-        from rubric_registry import (
+        from grading.rubrics.rubric_registry import (
             load_model_answer_bank,
         )
 
@@ -988,7 +988,7 @@ def augment_rule_candidates_for_shadow(
         existing = []
 
     if bank is None:
-        from rubric_registry import (
+        from grading.rubrics.rubric_registry import (
             load_model_answer_bank,
         )
         bank = load_model_answer_bank()

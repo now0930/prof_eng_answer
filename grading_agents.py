@@ -1,5 +1,5 @@
 import math
-from rubric_registry import load_fact_anchor_bank
+from grading.rubrics.rubric_registry import load_fact_anchor_bank
 #!/usr/bin/env python3
 import json
 import re

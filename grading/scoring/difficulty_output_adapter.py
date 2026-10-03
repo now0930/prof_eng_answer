@@ -190,7 +190,7 @@ def _topic_importance_strategy_from_topic_id(topic_id: str | None, question_text
         return None
 
     try:
-        from rubric_registry import load_topic_importance_bank
+        from grading.rubrics.rubric_registry import load_topic_importance_bank
 
         bank = load_topic_importance_bank()
         topics = bank.get("topics", []) if isinstance(bank, dict) else []

@@ -40,6 +40,8 @@ the deterministic primary authority.
 - `grading/scoring/`: deterministic requirement evaluation, score evidence,
   score engine, primary grade, score policy, output, calibration, and
   replay/shadow checks.
+- `grading/rubrics/`: Topic Pack bank paths and registry access; both retain
+  repository-root-relative path resolution.
 - `scripts/`: release gates, commands, audit tools, and historical regression
   scripts. Existing script paths are part of the release contract.
 - `tests/`: focused contracts, integration checks, and historical stage

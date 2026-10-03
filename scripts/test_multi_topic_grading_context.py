@@ -7,7 +7,7 @@ import unittest
 from unittest.mock import patch
 
 from grading.routing.model_answer_router import find_model_answer_reference
-from rubric_registry import load_model_answer_bank
+from grading.rubrics.rubric_registry import load_model_answer_bank
 from grading.routing.semantic_router_shadow import (
     augment_rule_candidates_for_shadow,
 )

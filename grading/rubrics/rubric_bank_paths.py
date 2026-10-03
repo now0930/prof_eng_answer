@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Literal
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
 RubricBankMode = Literal["legacy", "generated"]
 

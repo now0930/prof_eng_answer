@@ -44,7 +44,7 @@ def cmd_validate_all(_args: argparse.Namespace) -> int:
 
     print("RUN: py_compile")
     files = [
-        "rubric_registry.py",
+        "grading/rubrics/rubric_registry.py",
         "grading/routing/question_type_router.py",
         "grading/routing/model_answer_router.py",
         "grading/scoring/originality_grader.py",

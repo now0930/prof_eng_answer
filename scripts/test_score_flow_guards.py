@@ -1888,7 +1888,7 @@ class TopicImportanceFallbackRegressionTest(
         self,
     ) -> None:
         import grading.scoring.difficulty_output_adapter as adapter
-        import rubric_registry
+        import grading.rubrics.rubric_registry as rubric_registry
 
         function = (
             adapter
@@ -1954,7 +1954,7 @@ class TopicImportanceFallbackRegressionTest(
         self,
     ) -> None:
         import grading.scoring.difficulty_output_adapter as adapter
-        import rubric_registry
+        import grading.rubrics.rubric_registry as rubric_registry
 
         function = (
             adapter
@@ -4279,7 +4279,7 @@ class MigrationCompatibilityImportRegressionTest(
                     ast.ImportFrom,
                 )
                 and statement.module
-                == "rubric_registry"
+                == "grading.rubrics.rubric_registry"
                 for alias in statement.names
             }
 
@@ -4327,7 +4327,7 @@ class MigrationCompatibilityImportRegressionTest(
             fromlist=(),
             level=0,
         ):
-            if name == "rubric_registry":
+            if name == "grading.rubrics.rubric_registry":
                 raise ModuleNotFoundError(
                     "simulated legacy repository"
                 )
@@ -4377,7 +4377,7 @@ class MigrationCompatibilityImportRegressionTest(
             fromlist=(),
             level=0,
         ):
-            if name == "rubric_registry":
+            if name == "grading.rubrics.rubric_registry":
                 raise RuntimeError(
                     "simulated registry initialization bug"
                 )

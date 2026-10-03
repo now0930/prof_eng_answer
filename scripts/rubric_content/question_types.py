@@ -3,7 +3,7 @@ from __future__ import annotations
 import argparse
 from typing import Any
 
-from rubric_registry import load_question_type_profile
+from grading.rubrics.rubric_registry import load_question_type_profile
 
 
 def _coerce_question_type_row(key: Any, item: Any) -> dict[str, Any]:

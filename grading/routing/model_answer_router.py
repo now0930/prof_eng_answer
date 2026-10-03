@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict
 
-from rubric_registry import (
+from grading.rubrics.rubric_registry import (
     collect_topic_ids,
     load_model_answer_bank,
     normalize_text,

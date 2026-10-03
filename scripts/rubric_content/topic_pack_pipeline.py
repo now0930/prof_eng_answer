@@ -120,7 +120,7 @@ def cmd_audit_rubric_path_usage(_args: argparse.Namespace) -> int:
 
 def cmd_check_rubric_bank_paths(_args: argparse.Namespace) -> int:
     path = OPTIONAL_AUDIT_SCRIPTS["check-rubric-bank-paths"]
-    rc = py_compile_existing_scripts(["rubric_bank_paths.py", path])
+    rc = py_compile_existing_scripts(["grading/rubrics/rubric_bank_paths.py", path])
     rc = max(rc, run_script(path))
     return rc
 

@@ -48,7 +48,7 @@ CODE_BACKED_DOCS = {
         "grading/providers/clova.py",
     ],
     "rubric_authoring_guide.md": [
-        "rubric_registry.py",
+        "grading/rubrics/rubric_registry.py",
         "scripts/rubric_manager.py",
         "rubrics/model_answers/industrial_instrumentation_control.json",
         "rubrics/fact_anchors/industrial_instrumentation_control.json",

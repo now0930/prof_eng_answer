@@ -89,8 +89,8 @@ python3 -m py_compile \
   grading/scoring/grade_score_reconciler.py \
   grading_agents.py \
   grading/scoring/originality_grader.py \
-  rubric_registry.py \
-  rubric_bank_paths.py \
+  grading/rubrics/rubric_registry.py \
+  grading/rubrics/rubric_bank_paths.py \
   scripts/rubric_manager.py \
   scripts/topic_pack_workflow_controller.py \
   scripts/audit_topic_pack_atomicity.py \

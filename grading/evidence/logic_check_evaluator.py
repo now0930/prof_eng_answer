@@ -6,7 +6,7 @@ import re
 from pathlib import Path
 from typing import Any
 
-from rubric_bank_paths import resolve_rubric_bank_path
+from grading.rubrics.rubric_bank_paths import resolve_rubric_bank_path
 
 from grading.scoring.generic_grading_contract import (
     AlignmentStatus,

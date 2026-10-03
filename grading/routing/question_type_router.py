@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import Any, Dict, List
 
-from rubric_registry import load_question_type_profile, normalize_text, text_hits
+from grading.rubrics.rubric_registry import load_question_type_profile, normalize_text, text_hits
 
 
 # 문제문에서 강하게 보아야 하는 유형별 trigger.

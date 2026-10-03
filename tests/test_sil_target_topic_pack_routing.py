@@ -10,7 +10,7 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from grading.routing.model_answer_router import find_model_answer_reference
-from rubric_registry import load_model_answer_bank
+from grading.rubrics.rubric_registry import load_model_answer_bank
 from grading.routing.semantic_router_shadow import (
     build_question_demand_aware_rule_candidates,
 )
