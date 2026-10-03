@@ -858,8 +858,8 @@ def grade_answer(chat_id, raw_text, state):
         topic_id = parsed.get("topic_id") or parsed.get("inferred_topic_id")
         if topic_id:
             try:
-                from learning_runtime import record_completed_grade
-                from training_history import TrainingHistoryStore
+                from study.learning_runtime import record_completed_grade
+                from study.training_history import TrainingHistoryStore
 
                 history_path = Path(
                     os.getenv("TRAINING_HISTORY_DB")
@@ -1780,12 +1780,12 @@ def _finalize_pending_grade(chat_id, state):
 
 
 def _handle_review_command(chat_id, command_text):
-    from learning_runtime import (
+    from study.learning_runtime import (
         LearningRuntimeError,
         complete_topic_review,
         create_daily_review_queue,
     )
-    from training_history import TrainingHistoryStore
+    from study.training_history import TrainingHistoryStore
 
     history_path = Path(
         os.getenv("TRAINING_HISTORY_DB")

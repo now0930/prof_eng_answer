@@ -11,7 +11,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import bot
-from training_history import TrainingHistoryStore
+from study.training_history import TrainingHistoryStore
 
 
 def test_grade_answer_records_learning_history_after_grade_file() -> None:

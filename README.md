@@ -10,6 +10,8 @@
 
 > 기존 채점 구조 위에 추가한 Master Topic Pack, 학습 이력, 하루 2문제 Review Queue, WordPress source reference는 [`docs/learning_layer.md`](docs/learning_layer.md)를 참조합니다.
 
+> Python 모듈 위치와 새 코드의 import 규칙은 [`docs/python_layout.md`](docs/python_layout.md)에 정리했습니다.
+
 > 최신 개발 상태(2026-09-17): Stage58 Gemini-off 48건 전체 체인은 question-only routing recall 100%, known-fatal 16/16, score coverage 100%, 허용구간 적중률 85.42%, 평균 범위 이탈 0.35875점, known-overgrading 0건으로 Authority Gate `READY`, 2회 Stability Gate `STABLE`입니다. 과거 Telegram 세션의 문제/답안 경계 형식을 결정론적으로 복원해 실제 저장 세션 198건 중 고유답안 60건을 전송 없이 재생한 결과 60/60 PASS, 중복 138건 건너뜀을 확인했습니다. 운영은 deterministic primary이며 legacy LLM grader와 score adjudicator는 판정 경로에서 차단됩니다. 상세 상태는 [`docs/deterministic_grading_transition.md`](docs/deterministic_grading_transition.md)를 따릅니다.
 
 ---

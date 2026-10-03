@@ -23,13 +23,13 @@ answer ─► existing grade ─► diagnosis ─► SQLite training history
 
 - Master records: `master_topic_packs/<topic_id>.json`
 - Master schema: `schemas/master_topic_pack.schema.json`
-- Projection adapters: `master_topic_pack.py`
-- Training history: `training_history.py` and `schemas/training_history.schema.json`
-- Queue selection contract: `review_queue.py` and `schemas/review_queue.schema.json`
-- Graded result bridge: `learning_workflow.py`
-- Production persistence and queue integration: `learning_runtime.py`, called
+- Projection adapters: `study/master_topic_pack.py`
+- Training history: `study/training_history.py` and `schemas/training_history.schema.json`
+- Queue selection contract: `study/review_queue.py` and `schemas/review_queue.schema.json`
+- Graded result bridge: `study/learning_workflow.py`
+- Production persistence and queue integration: `study/learning_runtime.py`, called
   after `grade.json` is finalized by `bot.py`
-- WordPress references and approval proposals: `source_update.py`
+- WordPress references and approval proposals: `study/source_update.py`
 
 The history database path is supplied by the caller. Each attempt stores its
 question and topic identity, attempt time, final score, structured diagnosis,
@@ -52,7 +52,7 @@ shows up to two Topics; `/review done <topic_id>` records completion and sets
 the next review to 30 days later as a starter interval. A weak score is below
 15/25, a source update newer than the latest attempt is a recently changed
 candidate, and unseen Master Topics are new-topic candidates. These starter
-selection rules are isolated in `learning_runtime.py` for future replacement.
+selection rules are isolated in `study/learning_runtime.py` for future replacement.
 
 WordPress synchronization is not implemented here. The Master preserves
 WordPress URLs and source metadata. A source change produces a

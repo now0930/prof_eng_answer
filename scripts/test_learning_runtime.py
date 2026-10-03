@@ -9,12 +9,12 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from learning_runtime import (
+from study.learning_runtime import (
     complete_topic_review,
     create_daily_review_queue,
     record_completed_grade,
 )
-from training_history import TrainingAttempt, TrainingHistoryStore
+from study.training_history import TrainingAttempt, TrainingHistoryStore
 
 
 def test_grade_history_queue_and_completion_cycle() -> None:
