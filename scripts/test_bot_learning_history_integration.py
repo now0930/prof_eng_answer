@@ -3,6 +3,7 @@ from __future__ import annotations
 import json
 import sys
 import tempfile
+from datetime import datetime
 from pathlib import Path
 from unittest.mock import patch
 
@@ -18,6 +19,7 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
     topic_id = "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration"
     user_id = 8675309
     sid = "20261003_120000_8675309"
+    queue_date = datetime.now().astimezone().date().isoformat()
     with tempfile.TemporaryDirectory(prefix="bot-learning-integration-") as directory:
         base = Path(directory)
         sessions = base / "sessions"
@@ -64,7 +66,7 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
             assert "복습 완료" in messages[-1]
             new_topic = next(
                 item["topic_id"] for item in TrainingHistoryStore(base / "training_history.sqlite3")
-                .get_daily_queue(str(user_id), "2026-10-03")["items"]
+                .get_daily_queue(str(user_id), queue_date)["items"]
                 if item["reason"] == "new_topic"
             )
             bot.handle_text({"text": f"/review done {new_topic}"}, user_id, state)
@@ -83,7 +85,7 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
         assert rows[0]["diagnosis"]["weaknesses"] == ["현장 검증 근거 부족"]
         assert rows[0]["session_id"] == sid
         daily_queue = TrainingHistoryStore(base / "training_history.sqlite3").get_daily_queue(
-            str(user_id), "2026-10-03"
+            str(user_id), queue_date
         )
         assert daily_queue is not None
         assert next(item for item in daily_queue["items"] if item["topic_id"] == topic_id)["status"] == "completed"

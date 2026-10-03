@@ -223,6 +223,36 @@ def test_approved_catalog_change_flows_to_master_and_review_queue() -> None:
             connection.close()
 
 
+def test_pdf_ocr_scope_is_strictly_first_party() -> None:
+    assert wordpress_catalog.is_first_party_source("https://now0930.pe.kr/a.pdf")
+    assert wordpress_catalog.is_first_party_source("https://cdn.now0930.pe.kr/a.pdf")
+    assert not wordpress_catalog.is_first_party_source("https://evilnow0930.pe.kr/a.pdf")
+    assert not wordpress_catalog.is_first_party_source("https://www.emerson.com/a.pdf")
+
+    connection = sqlite3.connect(":memory:")
+    connection.execute(
+        "CREATE TABLE sources(source_id TEXT, source_type TEXT, source_url TEXT, title TEXT, first_party INTEGER, extraction_status TEXT)"
+    )
+    connection.executemany(
+        "INSERT INTO sources VALUES(?,?,?,?,?,?)",
+        [
+            ("owned", "pdf", "https://now0930.pe.kr/owned.pdf", "Owned", 1, "pending"),
+            ("external", "pdf", "https://www.emerson.com/external.pdf", "External", 0, "pending"),
+            ("owned-extracted", "pdf", "https://now0930.pe.kr/done.pdf", "Done", 1, "extracted"),
+        ],
+    )
+    pending = wordpress_catalog.first_party_pdf_ocr_candidates(
+        connection, limit=None, refresh_changed=False
+    )
+    assert [row[0] for row in pending] == ["owned"]
+    refreshed = wordpress_catalog.first_party_pdf_ocr_candidates(
+        connection, limit=None, refresh_changed=True
+    )
+    assert {row[0] for row in refreshed} == {"owned", "owned-extracted"}
+    connection.close()
+
+
 if __name__ == "__main__":
     test_approved_catalog_change_flows_to_master_and_review_queue()
-    print("WORDPRESS_REVIEW_INTEGRATION_TESTS=1_PASS")
+    test_pdf_ocr_scope_is_strictly_first_party()
+    print("WORDPRESS_REVIEW_INTEGRATION_TESTS=2_PASS")

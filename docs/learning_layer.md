@@ -221,10 +221,12 @@ as `waiting_for_master`.
 
 The catalog stores source URLs, WordPress media identifiers and modification
 times, post text, content hashes, and extracted PDF text; it does not store
-media binaries. For first-party PDFs, digitally embedded text is extracted
+media binaries. Here, first-party means `now0930.pe.kr` or one of its
+subdomains. Only those PDFs are download/OCR candidates. For first-party PDFs,
+digitally embedded text is extracted
 page by page. Pages without usable embedded text are rendered locally and
 recognized with Tesseract using Korean and English language data. External
-PDF links are retained as metadata and are not downloaded. Run
+PDF links are retained as metadata and are not downloaded or OCRed. Run
 `python3 scripts/wordpress_catalog.py --ocr` to synchronize and process pending
 first-party PDFs. On Debian/Ubuntu, install `tesseract-ocr`,
 `tesseract-ocr-kor`, `tesseract-ocr-eng`, and `poppler-utils` first. Use

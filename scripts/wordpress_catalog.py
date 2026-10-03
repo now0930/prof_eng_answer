@@ -402,6 +402,12 @@ def classify_source(url: str) -> str:
     return "other"
 
 
+def is_first_party_source(url: str) -> bool:
+    """Treat the WordPress site and its subdomains as first-party assets."""
+    host = urlparse(url).netloc.lower().split(":", 1)[0].rstrip(".")
+    return host == ALLOWED_HOST or host.endswith("." + ALLOWED_HOST)
+
+
 def source_identifier(url: str) -> str:
     return "wpurl:" + hashlib.sha256(url.encode("utf-8")).hexdigest()[:32]
 
@@ -1395,8 +1401,7 @@ def _store_post(
             continue
         source_id = source_identifier(url)
         parsed = urlparse(url)
-        host = parsed.netloc.lower().split(":", 1)[0]
-        first_party = host == ALLOWED_HOST or host.endswith("." + ALLOWED_HOST)
+        first_party = is_first_party_source(url)
         file_name = unquote(Path(parsed.path).name) or title
         connection.execute(
             """INSERT INTO sources(source_id,source_type,source_url,title,file_name,first_party,
@@ -1518,17 +1523,7 @@ def index_first_party_pdfs(
     ocr_workers: int = 3,
     ocr_dpi: int = 180,
 ) -> tuple[int, int]:
-    statuses = "'pending','error','stale','extracted'" if refresh_changed else "'pending','error','stale'"
-    query = (
-        """SELECT source_id,source_url,title FROM sources
-           WHERE source_type='pdf' AND first_party=1
-             AND extraction_status IN (""" + statuses + ") ORDER BY source_url"
-    )
-    if limit is not None:
-        query += " LIMIT ?"
-        candidates = connection.execute(query, (limit,)).fetchall()
-    else:
-        candidates = connection.execute(query).fetchall()
+    candidates = first_party_pdf_ocr_candidates(connection, limit=limit, refresh_changed=refresh_changed)
     completed = errors = 0
     for source_id, url, title in candidates:
         try:
@@ -1588,6 +1583,25 @@ def index_first_party_pdfs(
             print(f"PDF_ERROR {url}: {type(exc).__name__}: {str(exc)[:180]}")
         time.sleep(delay)
     return completed, errors
+
+
+def first_party_pdf_ocr_candidates(
+    connection: sqlite3.Connection,
+    *,
+    limit: int | None,
+    refresh_changed: bool,
+) -> list[tuple[str, str, str]]:
+    """Select only first-party PDFs for OCR; third-party PDFs remain metadata-only."""
+    statuses = "'pending','error','stale','extracted'" if refresh_changed else "'pending','error','stale'"
+    query = (
+        """SELECT source_id,source_url,title FROM sources
+           WHERE source_type='pdf' AND first_party=1
+             AND extraction_status IN (""" + statuses + ") ORDER BY source_url"
+    )
+    if limit is not None:
+        query += " LIMIT ?"
+        return connection.execute(query, (limit,)).fetchall()
+    return connection.execute(query).fetchall()
 
 
 def sync(args: argparse.Namespace) -> int:
