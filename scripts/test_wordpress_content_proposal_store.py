@@ -95,6 +95,22 @@ def test_catalog_persists_decisions_without_writing_master_content() -> None:
                 if item["proposal_id"] == proposal["proposal_id"]
             )
             assert candidate_row["status"] == "candidate_ready"
+            proposal_artifact = candidate_path / "proposals" / f"{proposal['proposal_id']}.json"
+            proposal_artifact_bytes = proposal_artifact.read_bytes()
+            proposal_artifact.write_bytes(proposal_artifact_bytes + b" ")
+            try:
+                wordpress_catalog.apply_content_update_candidate(
+                    database,
+                    proposal["proposal_id"],
+                    applied_by="owner",
+                )
+            except ValueError as exc:
+                assert "hash mismatch" in str(exc)
+            else:
+                raise AssertionError("tampered candidate artifact must be rejected")
+            finally:
+                proposal_artifact.write_bytes(proposal_artifact_bytes)
+
             try:
                 wordpress_catalog.prepare_content_update_candidate(
                     database,
@@ -116,6 +132,37 @@ def test_catalog_persists_decisions_without_writing_master_content() -> None:
                 assert "explicit apply identity" in str(exc)
             else:
                 raise AssertionError("canonical apply must require an explicit identity")
+
+            source_path = repo / master["legacy_topic_pack"]["source_files"]["fact_anchor"]
+            source_before_failed_apply = source_path.read_bytes()
+            write_atomically = wordpress_catalog._write_bytes_atomically
+            write_calls = 0
+
+            def fail_second_write(path, content, mode):
+                nonlocal write_calls
+                write_calls += 1
+                if write_calls == 2:
+                    raise OSError("simulated Master replacement failure")
+                write_atomically(path, content, mode)
+
+            with patch.object(wordpress_catalog, "_write_bytes_atomically", side_effect=fail_second_write):
+                try:
+                    wordpress_catalog.apply_content_update_candidate(
+                        database,
+                        proposal["proposal_id"],
+                        applied_by="owner",
+                    )
+                except OSError as exc:
+                    assert "simulated" in str(exc)
+                else:
+                    raise AssertionError("simulated second-file failure should abort apply")
+            assert write_calls == 3  # source write, failed Master write, source rollback
+            assert source_path.read_bytes() == source_before_failed_apply
+            assert master_path.read_text(encoding="utf-8") == original_text
+            assert next(
+                item for item in wordpress_catalog.list_content_update_proposals(database)
+                if item["proposal_id"] == proposal["proposal_id"]
+            )["status"] == "candidate_ready"
 
             applied = wordpress_catalog.apply_content_update_candidate(
                 database,
