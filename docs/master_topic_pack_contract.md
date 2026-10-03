@@ -87,3 +87,10 @@ selection are separate learner state and must not be written into a Topic Pack.
 
 Relative paths must stay inside the repository. Master updates do not directly
 edit generated banks or user history.
+
+Training and Diagnosis Views expose deep-copied `source_references` from the
+Master, including exact asset URL and verification status. The feedback adapter
+preserves these references alongside guidance; the review-material consumer can
+read the current references from Training View. References are navigation and
+provenance, not additional fact anchors. Grading Projection remains unchanged.
+Older feedback snapshots may omit this additive field.

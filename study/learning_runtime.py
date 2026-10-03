@@ -88,6 +88,7 @@ def feedback_from_view(grade: dict[str, Any], diagnosis_view: dict[str, Any]) ->
         "deterministic_checks": copy.deepcopy(diagnosis_view.get("deterministic_checks", [])),
         "diagnostic_guidance": copy.deepcopy(diagnosis_view.get("diagnostic_guidance", {})),
         "common_missing_points": copy.deepcopy(diagnosis_view.get("common_missing_points", [])),
+        "source_references": copy.deepcopy(diagnosis_view.get("source_references", [])),
         "score_effect": "none",
     }
 

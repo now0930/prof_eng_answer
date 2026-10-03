@@ -10,7 +10,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from study.learning_runtime import LearningRuntimeError, feedback_from_view
-from study.master_topic_pack import project_diagnosis, project_training
+from study.master_topic_pack import project_diagnosis, project_training, project_grading
 from test_master_topic_pack_schema import _valid_record
 
 
@@ -88,6 +88,33 @@ def test_feedback_adapter_is_separate_and_rejects_scoring_or_wrong_topic_views()
         pass
     else:
         raise AssertionError("mismatched Topic diagnosis view must be rejected")
+
+
+def test_wordpress_references_reach_learning_views_without_becoming_grading_content() -> None:
+    master = _valid_record()
+    reference = {
+        "source_id": "wp-post:42", "source_type": "wordpress_post",
+        "wordpress_url": "https://now0930.pe.kr/wordpress/example/",
+        "source_url": "https://now0930.pe.kr/wordpress/example/",
+        "title": "Reference only", "version": "v1", "page": None,
+        "section": None, "updated_at": None, "verification_status": "unverified",
+    }
+    with tempfile.TemporaryDirectory() as directory:
+        root = Path(directory)
+        _write_sources(root, master)
+        original_grade_view = project_grading(root, master)
+        master["sources"] = [reference]
+        training = project_training(root, master)
+        diagnosis = project_diagnosis(root, master)
+        grade = {"topic_id": master["topic_id"], "final_total_score": 12.5}
+        feedback = feedback_from_view(grade, diagnosis)
+        assert training["source_references"] == diagnosis["source_references"] == feedback["source_references"] == [reference]
+        assert project_grading(root, master) == original_grade_view
+        assert feedback["score_effect"] == "none" and grade["final_total_score"] == 12.5
+        feedback["source_references"][0]["title"] = "local change"
+        training["source_references"][0]["verification_status"] = "verified"
+        assert master["sources"][0] == reference
+        assert diagnosis["source_references"][0] == reference
 
 
 if __name__ == "__main__":
