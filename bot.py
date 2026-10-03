@@ -1784,6 +1784,7 @@ def _handle_review_command(chat_id, command_text):
         LearningRuntimeError,
         complete_topic_review,
         create_daily_review_queue,
+        review_material_for_topic,
     )
     from study.training_history import TrainingHistoryStore
 
@@ -1848,6 +1849,25 @@ def _handle_review_command(chat_id, command_text):
         "new_topic": "새 Topic",
     }
     lines = ["오늘의 복습 Queue (최대 2문제)"]
+
+    def display_item(value):
+        if isinstance(value, str):
+            text = value.strip()
+            return text if len(text) <= 180 else text[:177].rstrip() + "..."
+        if not isinstance(value, dict):
+            return ""
+        main = next(
+            (
+                value.get(key)
+                for key in ("section", "statement", "claim", "description", "pattern", "text")
+                if isinstance(value.get(key), str) and value.get(key).strip()
+            ),
+            "",
+        )
+        intent = value.get("intent")
+        text = f"{main} — {intent}" if main and isinstance(intent, str) and intent.strip() else main
+        return text if len(text) <= 180 else text[:177].rstrip() + "..."
+
     for index, item in enumerate(queue["items"], start=1):
         title = titles.get(item["topic_id"], item["topic_id"])
         lines.append(
@@ -1856,6 +1876,49 @@ def _handle_review_command(chat_id, command_text):
         )
         if item.get("question_text"):
             lines.append(f"   문제: {item['question_text']}")
+        try:
+            material = review_material_for_topic(
+                history,
+                learner_id=str(chat_id),
+                topic_id=item["topic_id"],
+                master_directory=BASE_DIR / "master_topic_packs",
+            )
+        except Exception as exc:
+            log(f"review material unavailable for {item['topic_id']}: {exc}")
+            continue
+
+        training = material["training"]
+        outline = [display_item(value) for value in training.get("recommended_outline", [])]
+        outline = [value for value in outline if value][:2]
+        if outline:
+            lines.append("   학습 개요: " + " / ".join(outline))
+        facts = [display_item(value) for value in training.get("fact_anchors", [])]
+        facts = [value for value in facts if value][:2]
+        if facts:
+            lines.append("   핵심 사실: " + " / ".join(facts))
+        high_score = [display_item(value) for value in training.get("high_score_points", [])]
+        high_score = [value for value in high_score if value][:2]
+        if high_score:
+            lines.append("   고득점 포인트: " + " / ".join(high_score))
+
+        feedback = material.get("feedback")
+        if isinstance(feedback, dict) and feedback.get("score_effect") == "none":
+            missing = [display_item(value) for value in feedback.get("common_missing_points", [])]
+            missing = [value for value in missing if value][:2]
+            guidance = feedback.get("diagnostic_guidance", {})
+            focus = guidance.get("focus", []) if isinstance(guidance, dict) else []
+            focus = [display_item(value) for value in focus]
+            focus = [value for value in focus if value][:2]
+            advice = missing or focus
+            if advice:
+                lines.append("   Topic 피드백 가이드: " + " / ".join(advice))
+
+        prior = material.get("prior_diagnosis", {})
+        if isinstance(prior, dict):
+            weaknesses = [display_item(value) for value in prior.get("weaknesses", [])]
+            weaknesses = [value for value in weaknesses if value][:2]
+            if weaknesses:
+                lines.append("   이전 진단 약점: " + " / ".join(weaknesses))
     lines.append("복습 후 /review done <topic_id> 로 기록하세요.")
     send_message(chat_id, "\n".join(lines))
 

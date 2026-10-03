@@ -56,6 +56,10 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
             bot.handle_text({"text": "/review"}, user_id, state)
             assert "오늘의 복습 Queue" in messages[-1]
             assert "문제:" in messages[-1]
+            assert "학습 개요:" in messages[-1]
+            assert "핵심 사실:" in messages[-1]
+            assert "고득점 포인트:" in messages[-1]
+            assert "이전 진단 약점: 현장 검증 근거 부족" in messages[-1]
             bot.handle_text({"text": f"/review done {topic_id}"}, user_id, state)
             assert "복습 완료" in messages[-1]
             new_topic = next(

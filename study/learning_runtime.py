@@ -101,6 +101,28 @@ def _topic_masters(master_directory: str | Path) -> dict[str, dict[str, Any]]:
     return result
 
 
+def review_material_for_topic(
+    history: TrainingHistoryStore,
+    *,
+    learner_id: str,
+    topic_id: str,
+    master_directory: str | Path,
+) -> dict[str, Any]:
+    """Load read-only Training View content and the learner's latest feedback."""
+    master_path = Path(master_directory) / f"{topic_id}.json"
+    master = load_master_topic_pack(master_path)
+    repository_root = Path(master_directory).resolve().parent
+    training_view = project_training(repository_root, master)
+    attempts = history.list_attempts(learner_id=learner_id, topic_id=topic_id)
+    latest = attempts[-1] if attempts else None
+    diagnosis = latest.get("diagnosis", {}) if isinstance(latest, dict) else {}
+    return {
+        "training": training_view,
+        "feedback": diagnosis.get("topic_guidance") if isinstance(diagnosis, dict) else None,
+        "prior_diagnosis": diagnosis if isinstance(diagnosis, dict) else {},
+    }
+
+
 def _master_question(
     master: dict[str, Any],
     repository_root: str | Path,
