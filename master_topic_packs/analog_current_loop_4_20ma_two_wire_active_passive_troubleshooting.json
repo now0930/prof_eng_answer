@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+  "title_ko": "4–20 mA 아날로그 전류루프·2선식·4선식·Source/Sink·진단",
+  "revision": 3,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting/logic_check.json",
+      "model_answer": "rubrics/topic_packs/analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/analog_current_loop_4_20ma_two_wire_active_passive_troubleshooting/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9457",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-13/",
+      "source_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-13/",
+      "title": "Lessons In Industrial Instrumentation, Chapter 13",
+      "version": "d03aad753410968e0b165a5d2ca78916342840bdaa9c01d0c68d4d305294ef41",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-09-21T14:27:38+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:7075761fd370629b60c11f064d7947bd",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-13/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/09/Lessons_In_Industrial_Instrumentation-2.pdf",
+      "title": "Lessons_In_Industrial_Instrumentation-2",
+      "version": "2026-09-06T12:20:38",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-09-06T12:20:38+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
