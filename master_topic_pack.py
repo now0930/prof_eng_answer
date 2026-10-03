@@ -190,6 +190,15 @@ def grading_compatibility_payload(repository_root: str | Path, master: dict[str,
     return project_grading(repository_root, master)["sources"]
 
 
+def load_master_topic_pack(path: str | Path) -> dict[str, Any]:
+    """Read and validate one versioned Master record."""
+    try:
+        value = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise MasterTopicPackError(f"could not read Master Topic Pack: {path}") from exc
+    return validate_master_topic_pack(value)
+
+
 def _as_list(value: Any) -> list[Any]:
     return copy.deepcopy(value) if isinstance(value, list) else []
 
