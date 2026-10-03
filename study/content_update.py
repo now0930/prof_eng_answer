@@ -40,14 +40,15 @@ def _affected_views(master: dict[str, Any], source_key: str) -> list[str]:
 
 
 def validate_content_update_proposal(value: Any) -> dict[str, Any]:
-    """Validate a pending proposal. This validator never applies its diff."""
+    """Validate a proposal lifecycle record without applying its diff."""
     _expect(isinstance(value, dict), "content update proposal must be an object")
     required = {
         "schema_version", "proposal_id", "topic_id", "base_revision", "proposed_at",
         "target", "before_value", "proposed_value", "change_reason", "evidence",
         "affected_views", "status", "approval_required",
     }
-    _expect(set(value) == required, "content update proposal fields do not match the contract")
+    optional = {"approved_by", "approved_at", "rejected_by", "rejected_at", "candidate_ready_at", "candidate_revision"}
+    _expect(required <= set(value) <= required | optional, "content update proposal fields do not match the contract")
     _expect(value["schema_version"] == CONTENT_UPDATE_SCHEMA_VERSION, "unsupported content update proposal schema")
     _expect(isinstance(value["proposal_id"], str) and bool(value["proposal_id"].strip()), "proposal_id is required")
     _expect(
@@ -99,9 +100,153 @@ def validate_content_update_proposal(value: Any) -> dict[str, Any]:
         and set(impacts) <= {"grading", "training", "diagnosis"},
         "affected_views is invalid",
     )
-    _expect(value["status"] == "pending_approval", "content proposals must remain pending approval")
+    status = value["status"]
+    _expect(status in {"pending_approval", "approved", "rejected", "candidate_ready"}, "content proposal status is invalid")
     _expect(value["approval_required"] is True, "content proposals require explicit approval")
+    if status in {"approved", "candidate_ready"}:
+        _expect(isinstance(value.get("approved_by"), str) and bool(value["approved_by"].strip()), "approved_by is required")
+        _validate_timestamp(value.get("approved_at"), "approved_at")
+    if status == "rejected":
+        _expect(isinstance(value.get("rejected_by"), str) and bool(value["rejected_by"].strip()), "rejected_by is required")
+        _validate_timestamp(value.get("rejected_at"), "rejected_at")
+    if status == "candidate_ready":
+        _validate_timestamp(value.get("candidate_ready_at"), "candidate_ready_at")
+        _expect(isinstance(value.get("candidate_revision"), int) and value["candidate_revision"] >= 2, "candidate_revision is invalid")
+    expected_optional = {
+        "pending_approval": set(),
+        "approved": {"approved_by", "approved_at"},
+        "rejected": {"rejected_by", "rejected_at"},
+        "candidate_ready": {"approved_by", "approved_at", "candidate_ready_at", "candidate_revision"},
+    }[status]
+    _expect(set(value) == required | expected_optional, "proposal lifecycle fields do not match its status")
     return value
+
+
+def _validate_timestamp(value: Any, field: str) -> None:
+    _expect(isinstance(value, str), f"{field} must be ISO-8601")
+    try:
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except ValueError as exc:
+        raise ContentUpdateError(f"{field} must be ISO-8601") from exc
+    _expect(parsed.tzinfo is not None, f"{field} must include a timezone")
+
+
+def approve_content_update(
+    proposal: dict[str, Any], *, approved_by: str | None, approved_at: str
+) -> dict[str, Any]:
+    """Record explicit approval without applying the proposed field change."""
+    validate_content_update_proposal(proposal)
+    if proposal["status"] != "pending_approval":
+        raise ContentUpdateError("proposal is not awaiting approval")
+    _expect(isinstance(approved_by, str) and bool(approved_by.strip()), "an explicit approver identity is required")
+    _validate_timestamp(approved_at, "approved_at")
+    approved = copy.deepcopy(proposal)
+    approved.update(status="approved", approved_by=approved_by.strip(), approved_at=approved_at)
+    return validate_content_update_proposal(approved)
+
+
+def reject_content_update(
+    proposal: dict[str, Any], *, rejected_by: str | None, rejected_at: str
+) -> dict[str, Any]:
+    """Record explicit rejection without changing Topic content."""
+    validate_content_update_proposal(proposal)
+    if proposal["status"] != "pending_approval":
+        raise ContentUpdateError("proposal is not awaiting approval")
+    _expect(isinstance(rejected_by, str) and bool(rejected_by.strip()), "an explicit reviewer identity is required")
+    _validate_timestamp(rejected_at, "rejected_at")
+    rejected = copy.deepcopy(proposal)
+    rejected.update(status="rejected", rejected_by=rejected_by.strip(), rejected_at=rejected_at)
+    return validate_content_update_proposal(rejected)
+
+
+def _find_target_record(value: Any, record_id: str, matches: list[dict[str, Any]]) -> None:
+    if isinstance(value, dict):
+        if any(value.get(key) == record_id for key in ("id", "anchor_id", "check_id", "pattern_id", "point_id")):
+            matches.append(value)
+        for child in value.values():
+            _find_target_record(child, record_id, matches)
+    elif isinstance(value, list):
+        for child in value:
+            _find_target_record(child, record_id, matches)
+
+
+def apply_approved_content_update(
+    master: dict[str, Any],
+    source_payloads: dict[str, dict[str, Any]],
+    proposal: dict[str, Any],
+    *,
+    candidate_ready_at: str,
+) -> dict[str, Any]:
+    """Return a candidate transformation; never writes files or the Master."""
+    try:
+        validate_master_topic_pack(master)
+    except MasterTopicPackError as exc:
+        raise ContentUpdateError(str(exc)) from exc
+    validate_content_update_proposal(proposal)
+    if proposal["status"] != "approved":
+        raise ContentUpdateError("content proposal must be explicitly approved before apply")
+    if proposal["topic_id"] != master["topic_id"] or proposal["base_revision"] != master["revision"]:
+        raise ContentUpdateError("proposal does not match the current Master revision")
+    _validate_timestamp(candidate_ready_at, "candidate_ready_at")
+    target = proposal["target"]
+    key = target["source_key"]
+    if key not in master["legacy_topic_pack"]["source_files"]:
+        raise ContentUpdateError("target source_key is not part of this Topic Pack")
+    if key not in source_payloads or not isinstance(source_payloads[key], dict):
+        raise ContentUpdateError("target source payload is unavailable")
+    current_source = source_payloads[key]
+    if current_source.get("topic_id") != master["topic_id"]:
+        raise ContentUpdateError("target source payload belongs to another Topic")
+    records: list[dict[str, Any]] = []
+    _find_target_record(current_source, target["record_id"], records)
+    if len(records) != 1:
+        raise ContentUpdateError("target record must resolve to exactly one source record")
+    record = records[0]
+    field_path = target["field_path"]
+    parent: Any = record
+    for part in field_path[:-1]:
+        if not isinstance(parent, dict) or part not in parent:
+            raise ContentUpdateError("target field path does not exist")
+        parent = parent[part]
+    field = field_path[-1]
+    if not isinstance(parent, dict) or field not in parent:
+        raise ContentUpdateError("target field path does not exist")
+    if parent[field] != proposal["before_value"]:
+        raise ContentUpdateError("target before_value no longer matches current content")
+    expected_impacts = _affected_views(master, key)
+    if proposal["affected_views"] != expected_impacts:
+        raise ContentUpdateError("affected_views do not match current Master projections")
+    linked_sources = {source["source_id"]: source for source in master["sources"]}
+    for item in proposal["evidence"]:
+        source = linked_sources.get(item["source_id"])
+        if source is None:
+            raise ContentUpdateError("proposal evidence is no longer linked to this Topic")
+        allowed_urls = {source.get("wordpress_url"), source.get("source_url", source.get("wordpress_url"))}
+        if item["source_url"] not in allowed_urls:
+            raise ContentUpdateError("proposal evidence URL does not match the linked source")
+
+    updated_master = copy.deepcopy(master)
+    updated_master["revision"] += 1
+    updated_sources = copy.deepcopy(source_payloads)
+    updated_sources[key]["topic_id"] = master["topic_id"]
+    updated_record_matches: list[dict[str, Any]] = []
+    _find_target_record(updated_sources[key], target["record_id"], updated_record_matches)
+    updated_parent: Any = updated_record_matches[0]
+    for part in field_path[:-1]:
+        updated_parent = updated_parent[part]
+    updated_parent[field] = proposal["proposed_value"]
+    applied = copy.deepcopy(proposal)
+    applied.update(
+        status="candidate_ready",
+        candidate_ready_at=candidate_ready_at,
+        candidate_revision=updated_master["revision"],
+    )
+    validate_content_update_proposal(applied)
+    return {
+        "master": updated_master,
+        "source_payloads": updated_sources,
+        "proposal": applied,
+    }
 
 
 def propose_content_update(

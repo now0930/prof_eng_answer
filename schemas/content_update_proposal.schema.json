@@ -48,7 +48,27 @@
       "uniqueItems": true,
       "items": { "enum": ["grading", "training", "diagnosis"] }
     },
-    "status": { "const": "pending_approval" },
+    "status": { "enum": ["pending_approval", "approved", "rejected", "candidate_ready"] },
+    "approved_by": { "type": "string", "minLength": 1 },
+    "approved_at": { "type": "string", "format": "date-time" },
+    "rejected_by": { "type": "string", "minLength": 1 },
+    "rejected_at": { "type": "string", "format": "date-time" },
+    "candidate_ready_at": { "type": "string", "format": "date-time" },
+    "candidate_revision": { "type": "integer", "minimum": 2 },
     "approval_required": { "const": true }
-  }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "enum": ["approved", "candidate_ready"] } } },
+      "then": { "required": ["approved_by", "approved_at"] }
+    },
+    {
+      "if": { "properties": { "status": { "const": "rejected" } } },
+      "then": { "required": ["rejected_by", "rejected_at"] }
+    },
+    {
+      "if": { "properties": { "status": { "const": "candidate_ready" } } },
+      "then": { "required": ["candidate_ready_at", "candidate_revision"] }
+    }
+  ]
 }

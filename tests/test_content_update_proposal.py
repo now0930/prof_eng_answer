@@ -11,7 +11,10 @@ sys.path.insert(0, str(ROOT / "tests"))
 
 from study.content_update import (
     ContentUpdateError,
+    approve_content_update,
+    apply_approved_content_update,
     propose_content_update,
+    reject_content_update,
     validate_content_update_proposal,
 )
 from test_master_topic_pack_schema import _valid_record
@@ -99,6 +102,83 @@ def test_content_update_is_pending_only_and_requires_a_target_view() -> None:
         pass
     else:
         raise AssertionError("approved status must not be forged into a pending proposal")
+
+
+def test_approval_and_pure_apply_are_revision_and_before_value_guarded() -> None:
+    master = _valid_record()
+    original_master = copy.deepcopy(master)
+    source_payloads = {
+        "fact_anchor": {
+            "topic_id": master["topic_id"],
+            "anchors": [{"id": "fact-1", "statement": "old statement"}],
+        },
+    }
+    original_sources = copy.deepcopy(source_payloads)
+    pending = propose_content_update(
+        master,
+        target={"source_key": "fact_anchor", "record_id": "fact-1", "field_path": ["statement"]},
+        before_value="old statement",
+        proposed_value="reviewed statement",
+        change_reason="corrected against the cited source revision",
+        evidence=[_evidence()],
+        proposed_at="2026-10-05T10:00:00+09:00",
+    )
+    approved = approve_content_update(
+        pending, approved_by="owner", approved_at="2026-10-05T11:00:00+09:00"
+    )
+    candidate = apply_approved_content_update(
+        master,
+        source_payloads,
+        approved,
+        candidate_ready_at="2026-10-05T11:01:00+09:00",
+    )
+    assert candidate["source_payloads"]["fact_anchor"]["anchors"][0]["statement"] == "reviewed statement"
+    assert candidate["master"]["revision"] == master["revision"] + 1
+    assert candidate["proposal"]["status"] == "candidate_ready"
+    assert candidate["proposal"]["candidate_revision"] == candidate["master"]["revision"]
+    assert master == original_master
+    assert source_payloads == original_sources
+
+    stale_master = copy.deepcopy(master)
+    stale_master["revision"] += 1
+    try:
+        apply_approved_content_update(
+            stale_master, source_payloads, approved, candidate_ready_at="2026-10-05T11:01:00+09:00"
+        )
+    except ContentUpdateError as exc:
+        assert "revision" in str(exc)
+    else:
+        raise AssertionError("stale content proposal was applied")
+
+    changed_source = copy.deepcopy(source_payloads)
+    changed_source["fact_anchor"]["anchors"][0]["statement"] = "intervening edit"
+    try:
+        apply_approved_content_update(
+            master, changed_source, approved, candidate_ready_at="2026-10-05T11:01:00+09:00"
+        )
+    except ContentUpdateError as exc:
+        assert "before_value" in str(exc)
+    else:
+        raise AssertionError("proposal overwrote an intervening content edit")
+
+
+def test_pending_content_proposal_can_be_rejected_without_mutation() -> None:
+    master = _valid_record()
+    proposal = propose_content_update(
+        master,
+        target={"source_key": "fact_anchor", "record_id": "fact-1", "field_path": ["statement"]},
+        before_value="old",
+        proposed_value="new",
+        change_reason="reviewed correction",
+        evidence=[_evidence()],
+        proposed_at="2026-10-05T10:00:00+09:00",
+    )
+    rejected = reject_content_update(
+        proposal, rejected_by="owner", rejected_at="2026-10-05T11:00:00+09:00"
+    )
+    assert rejected["status"] == "rejected"
+    assert rejected["rejected_by"] == "owner"
+    assert master["revision"] == 1
 
 
 if __name__ == "__main__":

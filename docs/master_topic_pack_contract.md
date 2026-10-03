@@ -29,9 +29,12 @@ the base Master revision, identifies one source-file record and field path,
 records before/proposed text, and carries a linked source ID/URL/version/hash,
 locator, and excerpt. `affected_views` is derived from the Master projection
 configuration so reviewers can see the blast radius. Creation and validation
-do not edit Topic files or Master records; applying an approved content diff is
-outside this stage and must be implemented behind a separate approval and
-stale-revision check.
+do not edit Topic files or Master records. Approval/rejection transitions
+require an identity and timestamp. Applying an approved diff is currently a
+pure candidate transformation: it checks the Master revision, linked evidence,
+unique target record, and exact `before_value`, then returns proposed source
+payloads and an incremented Master revision in memory. It does not write files;
+durable application and its release-gate workflow remain a separate stage.
 
 The initial compatibility adapter may project existing packs without requiring
 Master files for all existing topics. Representative Master records are added

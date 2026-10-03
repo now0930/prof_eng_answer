@@ -141,12 +141,14 @@ the affected Fact/section, show the source diff and evidence, and require
 approval before curated Topic content changes. This separates provenance
 maintenance from knowledge-content changes.
 
-The proposal-only content contract is now defined separately from the source
-reference proposal. It pins the Master revision, target source key/record/field,
-before and proposed text, source ID/URL/version/hash, locator and supporting
-excerpt, and derives the impacted Views. Proposal creation does not apply the
-diff; explicit approval and a stale-revision-safe apply operation remain a
-later stage.
+The proposal-only content contract is separate from source-reference updates.
+It pins the Master revision, target source key/record/field, before and proposed
+text, source ID/URL/version/hash, locator and supporting excerpt, and derives
+the impacted Views. Explicit approval/rejection is recorded with identity and
+time. An approved change can be transformed into an in-memory candidate only
+when its base revision, linked evidence, target uniqueness, and before-value
+still match. No Topic file is written by this adapter; durable application and
+release validation remain a later stage.
 
 The history database path is supplied by the caller. Each attempt stores its
 question and topic identity, attempt time, final score, structured diagnosis,
