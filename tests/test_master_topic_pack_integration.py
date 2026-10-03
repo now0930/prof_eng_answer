@@ -16,7 +16,13 @@ from study.training_history import TrainingHistoryStore
 
 def test_representative_topics_project_and_complete_learning_cycle() -> None:
     master_paths = sorted((ROOT / "master_topic_packs").glob("*.json"))
-    assert len(master_paths) == 3
+    master_topic_ids = {path.stem for path in master_paths}
+    assert {
+        "control_valve_authority_rangeability_gain_installed_performance",
+        "ot_cybersecurity_defense_in_depth_allowlisting_supply_chain_incident_response",
+        "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration",
+        "final_control_element_sil_sis_esd_valve_partial_stroke_test",
+    } <= master_topic_ids
     for index, path in enumerate(master_paths):
         master = load_master_topic_pack(path)
         before = copy.deepcopy(master)
