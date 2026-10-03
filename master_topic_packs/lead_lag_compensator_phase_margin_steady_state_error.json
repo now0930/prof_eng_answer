@@ -1,0 +1,129 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
+  "title_ko": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
+  "revision": 7,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/lead_lag_compensator_phase_margin_steady_state_error",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/lead_lag_compensator_phase_margin_steady_state_error/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/lead_lag_compensator_phase_margin_steady_state_error/logic_check.json",
+      "model_answer": "rubrics/topic_packs/lead_lag_compensator_phase_margin_steady_state_error/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/lead_lag_compensator_phase_margin_steady_state_error/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:6199",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "title": "112회 Lag compensator 문제풀이",
+      "version": "caafa125fc902925e38b545c21ebf78a01c6ee7a496a154698f01177fdd42420",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-13T13:49:40+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6870",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lead-lag-compensator/",
+      "source_url": "https://now0930.pe.kr/wordpress/lead-lag-compensator/",
+      "title": "lead, lag compensator",
+      "version": "016cd217097b745d8ceecd17dc741d75f83982019fb01008cee0b7a1cf56130b",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-13T11:58:01+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:3126600cf22e50930d4d32af4ce5ce9f",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/05/NeoStudio_20240509_183523.pdf",
+      "title": "NeoStudio_20240509_183523",
+      "version": "2024-05-09T09:36:19",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-05-09T09:36:19+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:46530e58a6a0b55b7507a1e96eb6e7d7",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/05/NeoStudio_20240509_183749.pdf",
+      "title": "NeoStudio_20240509_183749",
+      "version": "2024-05-09T09:38:27",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-05-09T09:38:27+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:55ada6521bdd03154675936bb595d928",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/05/notes-ess-non-unity.pdf",
+      "title": "notes-ess-non-unity",
+      "version": "2024-05-08T14:11:43",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-05-08T14:11:43+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:c41c60e0ee96185dc3ca802f25b99b47",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/05/Section-4-Steady-State-Error.pdf",
+      "title": "Section-4-Steady-State-Error",
+      "version": "2024-05-08T14:22:14",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-05-08T14:22:14+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
