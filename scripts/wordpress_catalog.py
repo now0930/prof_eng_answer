@@ -34,9 +34,13 @@ from urllib.request import Request, urlopen
 ROOT = Path(__file__).resolve().parents[1]
 import sys
 sys.path.insert(0, str(ROOT))
-from study.master_topic_pack import validate_master_topic_pack
+from study.master_topic_pack import (
+    load_legacy_topic_sources,
+    validate_master_topic_pack,
+)
 from study.content_update import (
     approve_content_update,
+    apply_approved_content_update,
     reject_content_update,
     validate_content_update_against_master,
     validate_content_update_proposal,
@@ -174,7 +178,8 @@ CREATE TABLE IF NOT EXISTS content_update_proposals (
     status TEXT NOT NULL CHECK(status IN ('pending_approval','approved','rejected','candidate_ready')),
     created_at TEXT NOT NULL,
     resolved_by TEXT,
-    resolved_at TEXT
+    resolved_at TEXT,
+    candidate_path TEXT
 );
 CREATE INDEX IF NOT EXISTS idx_posts_modified ON posts(modified_at);
 CREATE INDEX IF NOT EXISTS idx_sources_type_status ON sources(source_type, extraction_status);
@@ -476,6 +481,9 @@ def initialize_database(database: Path) -> sqlite3.Connection:
     for column in ("approved_by", "approved_at"):
         if column not in proposal_columns:
             connection.execute(f"ALTER TABLE source_update_proposals ADD COLUMN {column} TEXT")
+    content_proposal_columns = {row[1] for row in connection.execute("PRAGMA table_info(content_update_proposals)")}
+    if "candidate_path" not in content_proposal_columns:
+        connection.execute("ALTER TABLE content_update_proposals ADD COLUMN candidate_path TEXT")
     connection.execute("PRAGMA user_version=2")
     return connection
 
@@ -799,6 +807,105 @@ def list_content_update_proposals(database: Path, limit: int = 50) -> list[dict[
         ).fetchall()
         return [json.loads(row[0]) for row in rows]
     finally:
+        connection.close()
+
+
+def prepare_content_update_candidate(
+    database: Path,
+    proposal_id: str,
+    *,
+    candidate_root: Path | None = None,
+) -> Path:
+    """Write an isolated review bundle; never modifies canonical Topic files."""
+    if not re.fullmatch(r"[A-Za-z0-9._-]+", proposal_id):
+        raise ValueError("proposal_id contains unsafe path characters")
+    repo_root = ROOT.resolve()
+    output_root = (candidate_root or (repo_root / "data" / "content_update_candidates")).resolve()
+    if output_root == repo_root or not output_root.is_relative_to(repo_root):
+        raise ValueError("candidate_root must be a child of the repository")
+    output_root.mkdir(parents=True, exist_ok=True)
+    candidate_path = output_root / proposal_id
+    if candidate_path.exists():
+        raise ValueError(f"candidate bundle already exists: {candidate_path}")
+
+    connection = initialize_database(database)
+    temporary_path: Path | None = None
+    try:
+        connection.execute("BEGIN IMMEDIATE")
+        row = connection.execute(
+            "SELECT topic_id,proposal_json,status FROM content_update_proposals WHERE proposal_id=?",
+            (proposal_id,),
+        ).fetchone()
+        if not row:
+            raise ValueError(f"content proposal not found: {proposal_id}")
+        topic_id, proposal_json, status = row
+        if status != "approved":
+            raise ValueError(f"content proposal must be approved first: {status}")
+        proposal = json.loads(proposal_json)
+        if proposal.get("topic_id") != topic_id:
+            raise ValueError("stored proposal topic_id does not match its catalog row")
+        master_path = repo_root / "master_topic_packs" / f"{topic_id}.json"
+        master = json.loads(master_path.read_text(encoding="utf-8"))
+        validate_master_topic_pack(master)
+        source_payloads = load_legacy_topic_sources(repo_root, master)
+        candidate = apply_approved_content_update(
+            master,
+            source_payloads,
+            proposal,
+            candidate_ready_at=datetime.now(timezone.utc).isoformat(),
+        )
+
+        temporary_path = Path(tempfile.mkdtemp(prefix=".content-candidate-", dir=output_root))
+        artifact_hashes: dict[str, str] = {}
+
+        def write_artifact(relative_path: str, value: dict[str, Any]) -> None:
+            target_path = temporary_path / relative_path
+            resolved_target = target_path.resolve()
+            if not resolved_target.is_relative_to(temporary_path.resolve()):
+                raise ValueError("candidate artifact path escapes bundle")
+            target_path.parent.mkdir(parents=True, exist_ok=True)
+            content = (json.dumps(value, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
+            target_path.write_bytes(content)
+            artifact_hashes[relative_path] = hashlib.sha256(content).hexdigest()
+
+        write_artifact(f"master_topic_packs/{topic_id}.json", candidate["master"])
+        for source_key, relative_path in candidate["master"]["legacy_topic_pack"]["source_files"].items():
+            write_artifact(relative_path, candidate["source_payloads"][source_key])
+        write_artifact(f"proposals/{proposal_id}.json", candidate["proposal"])
+        manifest = {
+            "bundle_version": "content-update-candidate-v1",
+            "proposal_id": proposal_id,
+            "topic_id": topic_id,
+            "base_revision": master["revision"],
+            "candidate_revision": candidate["master"]["revision"],
+            "affected_views": candidate["proposal"]["affected_views"],
+            "application_status": "candidate_only_not_applied",
+            "files_sha256": artifact_hashes,
+        }
+        manifest_path = temporary_path / "manifest.json"
+        manifest_bytes = (json.dumps(manifest, ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")
+        manifest_path.write_bytes(manifest_bytes)
+        os.replace(temporary_path, candidate_path)
+        temporary_path = None
+
+        connection.execute(
+            """UPDATE content_update_proposals
+               SET proposal_json=?,status='candidate_ready',candidate_path=?
+               WHERE proposal_id=? AND status='approved'""",
+            (
+                json.dumps(candidate["proposal"], ensure_ascii=False, sort_keys=True),
+                str(candidate_path.relative_to(repo_root)),
+                proposal_id,
+            ),
+        )
+        connection.commit()
+        return candidate_path
+    except Exception:
+        connection.rollback()
+        raise
+    finally:
+        if temporary_path is not None:
+            shutil.rmtree(temporary_path, ignore_errors=True)
         connection.close()
 
 
@@ -1204,6 +1311,8 @@ def main() -> int:
     parser.add_argument("--approve-content-proposal", help="Approve a content proposal for candidate preparation; does not write Topic files")
     parser.add_argument("--reject-content-proposal", help="Reject a pending content proposal")
     parser.add_argument("--reviewed-by", help="Required reviewer identity for content proposal decisions")
+    parser.add_argument("--prepare-content-candidate", help="Build an isolated candidate bundle from an approved proposal")
+    parser.add_argument("--candidate-root", type=Path, help="Repository-local directory for candidate bundles")
     parser.add_argument("--list-pending", action="store_true", help="List candidate links and Master proposals")
     parser.add_argument("--limit", type=int, default=50, help="Maximum pending rows to display")
     args = parser.parse_args()
@@ -1239,6 +1348,15 @@ def main() -> int:
             reviewed_by=args.reviewed_by,
         )
         print(f"CONTENT_PROPOSAL_REJECTED={proposal['proposal_id']}")
+        return 0
+    if args.prepare_content_candidate:
+        candidate_path = prepare_content_update_candidate(
+            args.database,
+            args.prepare_content_candidate,
+            candidate_root=args.candidate_root,
+        )
+        print(f"CONTENT_CANDIDATE_READY={candidate_path}")
+        print("CANONICAL_TOPIC_FILES_CHANGED=false")
         return 0
     if args.list_content_proposals:
         show_content_update_proposals(args.database, args.limit)

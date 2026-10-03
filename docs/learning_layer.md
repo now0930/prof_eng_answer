@@ -149,15 +149,19 @@ text, source ID/URL/version/hash, locator and supporting excerpt, and derives
 the impacted Views. Explicit approval/rejection is recorded with identity and
 time. An approved change can be transformed into an in-memory candidate only
 when its base revision, linked evidence, target uniqueness, and before-value
-still match. No Topic file is written by this adapter; durable application and
-release validation remain a later stage.
+still match. `--prepare-content-candidate ID` writes the result to an isolated
+repository-local candidate bundle with a hash manifest. It does not overwrite
+Master or canonical Topic files; durable application and release validation
+remain a later stage.
 
 Pending proposals can be persisted and reviewed independently from source
 reference proposals. `--list-content-proposals` lists them;
 `--approve-content-proposal ID --reviewed-by NAME` records approval only, and
 `--reject-content-proposal ID --reviewed-by NAME` records rejection. Approval
 checks the current Master revision and linked source identity/URL. It does not
-write any Topic file or alter a View.
+write canonical Topic files or alter a live View. Candidate bundles can be
+created only for approved proposals and are marked `candidate_ready` in the
+catalog after generation.
 
 The history database path is supplied by the caller. Each attempt stores its
 question and topic identity, attempt time, final score, structured diagnosis,

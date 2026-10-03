@@ -13,6 +13,7 @@ sys.path.insert(0, str(ROOT / "tests"))
 
 import wordpress_catalog
 from study.content_update import propose_content_update
+from study.master_topic_pack import load_master_topic_pack, project_training
 from test_master_topic_pack_schema import _valid_record
 
 
@@ -45,6 +46,15 @@ def test_catalog_persists_decisions_without_writing_master_content() -> None:
         master_path = master_dir / f"{topic_id}.json"
         master_path.write_text(json.dumps(master), encoding="utf-8")
         original_text = master_path.read_text(encoding="utf-8")
+        for source_key, relative_path in master["legacy_topic_pack"]["source_files"].items():
+            source_path = repo / relative_path
+            source_path.parent.mkdir(parents=True, exist_ok=True)
+            payload = {"topic_id": topic_id}
+            if source_key == "fact_anchor":
+                payload["anchors"] = [{"id": "fact-1", "statement": "old"}]
+            elif source_key == "model_answer":
+                payload["question_examples"] = ["Example question"]
+            source_path.write_text(json.dumps(payload), encoding="utf-8")
         database = repo / "catalog.sqlite3"
         with patch.object(wordpress_catalog, "ROOT", repo):
             proposal = _proposal(master)
@@ -62,6 +72,39 @@ def test_catalog_persists_decisions_without_writing_master_content() -> None:
             assert approved["status"] == "approved"
             assert approved["approved_by"] == "owner"
             assert master_path.read_text(encoding="utf-8") == original_text
+
+            candidate_path = wordpress_catalog.prepare_content_update_candidate(
+                database,
+                proposal["proposal_id"],
+                candidate_root=repo / "candidates",
+            )
+            manifest = json.loads((candidate_path / "manifest.json").read_text(encoding="utf-8"))
+            candidate_master = load_master_topic_pack(
+                candidate_path / "master_topic_packs" / f"{topic_id}.json"
+            )
+            assert manifest["application_status"] == "candidate_only_not_applied"
+            assert manifest["affected_views"] == ["grading", "training", "diagnosis"]
+            assert candidate_master["revision"] == master["revision"] + 1
+            candidate_training = project_training(candidate_path, candidate_master)
+            assert candidate_training["fact_anchors"][0]["statement"] == "new-a"
+            assert json.loads(
+                (repo / master["legacy_topic_pack"]["source_files"]["fact_anchor"]).read_text(encoding="utf-8")
+            )["anchors"][0]["statement"] == "old"
+            candidate_row = next(
+                item for item in wordpress_catalog.list_content_update_proposals(database)
+                if item["proposal_id"] == proposal["proposal_id"]
+            )
+            assert candidate_row["status"] == "candidate_ready"
+            try:
+                wordpress_catalog.prepare_content_update_candidate(
+                    database,
+                    proposal["proposal_id"],
+                    candidate_root=repo / "candidates",
+                )
+            except ValueError as exc:
+                assert "already exists" in str(exc)
+            else:
+                raise AssertionError("candidate generation must not overwrite an existing bundle")
 
             stale = _proposal(master, "stale")
             wordpress_catalog.save_content_update_proposal(database, stale)

@@ -33,8 +33,13 @@ do not edit Topic files or Master records. Approval/rejection transitions
 require an identity and timestamp. Applying an approved diff is currently a
 pure candidate transformation: it checks the Master revision, linked evidence,
 unique target record, and exact `before_value`, then returns proposed source
-payloads and an incremented Master revision in memory. It does not write files;
-durable application and its release-gate workflow remain a separate stage.
+payloads and an incremented Master revision in memory. The candidate transform
+does not write files; canonical application and its release-gate workflow
+remain a separate stage.
+The catalog can package that result as a review bundle under
+`data/content_update_candidates/<proposal_id>/`, including candidate Master,
+Topic source payloads, proposal, and a hash manifest. This copies files only to
+the isolated bundle; original Topic files and Master remain unchanged.
 
 The initial compatibility adapter may project existing packs without requiring
 Master files for all existing topics. Representative Master records are added
