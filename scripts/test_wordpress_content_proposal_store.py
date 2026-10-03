@@ -103,6 +103,13 @@ def test_catalog_persists_decisions_without_writing_master_content() -> None:
             )
             assert validation["application_status"] == "validated_not_applied"
             assert validation["master"]["revision"] == master["revision"] + 1
+            review_report = wordpress_catalog.content_candidate_review_report(validation)
+            assert review_report["before_value"] == "old"
+            assert review_report["proposed_value"] == "new-a"
+            assert review_report["change_reason"] == "source revision reviewed"
+            assert review_report["evidence"][0]["locator"] == "PDF p. 4"
+            assert review_report["affected_views"] == ["grading", "training", "diagnosis"]
+            assert len(review_report["would_apply_files"]) == 2
             assert (master_path.read_bytes(), source_path.read_bytes()) == canonical_before_validation
             assert next(
                 item for item in wordpress_catalog.list_content_update_proposals(database)

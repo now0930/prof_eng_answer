@@ -1127,6 +1127,25 @@ def validate_content_update_candidate(database: Path, proposal_id: str) -> dict[
     return apply_content_update_candidate(database, proposal_id, applied_by=None, dry_run=True)
 
 
+def content_candidate_review_report(result: dict[str, Any]) -> dict[str, Any]:
+    """Build a concise human-review report from a fully validated candidate."""
+    proposal = result["proposal"]
+    return {
+        "proposal_id": proposal["proposal_id"],
+        "topic_id": proposal["topic_id"],
+        "status": result.get("application_status", proposal["status"]),
+        "base_revision": proposal["base_revision"],
+        "candidate_revision": result["master"]["revision"],
+        "target": proposal["target"],
+        "before_value": proposal["before_value"],
+        "proposed_value": proposal["proposed_value"],
+        "change_reason": proposal["change_reason"],
+        "affected_views": proposal["affected_views"],
+        "evidence": proposal["evidence"],
+        "would_apply_files": result.get("would_apply_files", []),
+    }
+
+
 def show_content_update_proposals(database: Path, limit: int = 50) -> None:
     proposals = list_content_update_proposals(database, limit)
     print("CONTENT_UPDATE_PROPOSALS")
@@ -1594,11 +1613,9 @@ def main() -> int:
         return 0
     if args.validate_content_candidate:
         result = validate_content_update_candidate(args.database, args.validate_content_candidate)
-        print(f"CONTENT_CANDIDATE_VALID={result['proposal']['proposal_id']}")
-        print(f"MASTER_REVISION={result['master']['revision']}")
+        print("CONTENT_CANDIDATE_VALID=true")
         print("CANONICAL_FILES_CHANGED=false")
-        for path in result["would_apply_files"]:
-            print(f"WOULD_APPLY_FILE={path}")
+        print(json.dumps(content_candidate_review_report(result), ensure_ascii=False, indent=2, sort_keys=True))
         return 0
     if args.list_content_proposals:
         show_content_update_proposals(args.database, args.limit)

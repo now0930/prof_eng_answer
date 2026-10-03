@@ -156,7 +156,8 @@ Master or canonical Topic files. Canonical application uses
 catalog record and rechecks the candidate bundle, current revision, and target
 before-value, then records the apply identity/time. `--validate-content-candidate ID`
 runs this preflight without changing canonical files or proposal status, and
-lists the files a later apply would replace. Apply attempts rollback if a file
+prints the target, before/after values, rationale, affected Views, source
+evidence, and files a later apply would replace. Apply attempts rollback if a file
 replacement fails. Neither command runs regression/release gates:
 run those before and after applying a real proposal, and do not apply a content
 proposal without its specific user approval.

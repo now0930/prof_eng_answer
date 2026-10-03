@@ -48,7 +48,8 @@ the isolated bundle; original Topic files and Master remain unchanged until an
 explicit `--apply-content-candidate ID --applied-by NAME` operation.
 `--validate-content-candidate ID` runs the same integrity and revision
 preflight without changing canonical files or proposal status, and reports the
-files that a later explicit apply would replace.
+files that a later explicit apply would replace, together with the before/after
+value, reason, affected Views, and source evidence needed for human review.
 
 The initial compatibility adapter may project existing packs without requiring
 Master files for all existing topics. Representative Master records are added
