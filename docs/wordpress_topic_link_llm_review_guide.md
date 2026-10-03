@@ -105,6 +105,18 @@ Before returning the result, verify:
    approved.
 5. No project database or canonical file changed during the review.
 
+Run the deterministic contract check before handing back the file:
+
+```bash
+python3 scripts/validate_wordpress_topic_link_review.py \
+  --source reports/wordpress_topic_link_manual_review_YYYYMMDD.csv \
+  --review reports/wordpress_topic_link_manual_review_YYYYMMDD_llm.csv
+```
+
+A passing check confirms row/field integrity and recommendation shape; it does
+not confirm the semantic correctness of recommendations or authorize applying
+them.
+
 Return the output path and a short count of each recommendation/confidence.
 The owner makes the final decision and applies accepted mappings one at a time
 with the existing `--review-topic-link POST_ID TOPIC_ID approve|reject`

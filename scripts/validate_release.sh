@@ -237,6 +237,7 @@ PYTHONPATH=. python3 -B scripts/test_question_only_routing_candidates.py
 echo "===== release test coverage validation ====="
 python3 -B scripts/test_wordpress_content_proposal_store.py
 python3 -B scripts/test_wordpress_review_integration.py
+python3 -B scripts/test_wordpress_topic_link_review_validator.py
 python3 scripts/validate_release_test_coverage.py
 
 echo
