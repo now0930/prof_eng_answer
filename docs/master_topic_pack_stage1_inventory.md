@@ -1,7 +1,9 @@
 # Master Topic Pack Integration: Stage 1 Inventory
 
-Status: `PASS`  
-Repository baseline: `1f541e7`  
+Status: `PASS`
+
+Repository baseline: `1f541e7`
+
 Scope: additive learning and diagnosis structures; existing grading authority remains unchanged.
 
 ## Existing source of truth
