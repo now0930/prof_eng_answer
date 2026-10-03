@@ -5,7 +5,7 @@ import argparse
 import json
 from pathlib import Path
 
-from coverage_feedback_retention import (
+from grading.coverage_feedback.retention import (
     DEFAULT_MAX_AGE_DAYS,
     apply_coverage_retention_plan,
     build_coverage_retention_plan,

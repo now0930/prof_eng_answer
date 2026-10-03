@@ -5,10 +5,10 @@ import argparse
 import json
 from pathlib import Path
 
-from coverage_feedback_aggregator import (
+from grading.coverage_feedback.aggregator import (
     aggregate_coverage_feedback,
 )
-from coverage_feedback_report import (
+from grading.coverage_feedback.report import (
     build_coverage_review_report,
     render_coverage_review_markdown,
 )

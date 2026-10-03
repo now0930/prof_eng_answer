@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-from coverage_feedback_persistence import (
+from grading.coverage_feedback.persistence import (
     COVERAGE_FEEDBACK_EVENT_FILENAME,
     persist_session_coverage_feedback_event,
 )

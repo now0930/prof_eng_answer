@@ -5,7 +5,7 @@ import logging
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from coverage_feedback_event import (
+from .event import (
     build_coverage_feedback_event,
 )
 

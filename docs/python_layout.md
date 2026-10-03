@@ -27,6 +27,9 @@ the deterministic primary authority.
 
 ## Existing operational layout
 
+- `grading/coverage_feedback/`: post-grade coverage event, persistence,
+  aggregation, report, and retention modules. These five modules moved from
+  the repository root; runtime and script imports now use this package.
 - `scripts/`: release gates, commands, audit tools, and historical regression
   scripts. Existing script paths are part of the release contract.
 - `tests/`: focused contracts and integration checks.
@@ -34,7 +37,7 @@ the deterministic primary authority.
 - `master_topic_packs/`: representative Master records.
 - `rubrics/`: existing Topic Pack and grading data.
 
-Further root-module moves should be made by domain, with old import entry
-points retained until callers and release gates are updated. A move must
+Further root-module moves should be made by domain. Compatibility imports are
+needed only when callers still depend on an old import name. A move must
 preserve `python3 bot.py`, script paths, test discovery, and the persisted
 grading output.

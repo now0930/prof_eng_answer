@@ -7892,7 +7892,7 @@ def _phase10_run_semantic_router_shadow(
     ):
         try:
             try:
-                from coverage_feedback_persistence import (
+                from grading.coverage_feedback.persistence import (
                     persist_session_coverage_feedback_event,
                 )
                 persist_session_coverage_feedback_event(

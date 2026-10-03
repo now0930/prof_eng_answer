@@ -3,7 +3,7 @@ from __future__ import annotations
 import inspect
 import unittest
 
-from coverage_feedback_event import (
+from grading.coverage_feedback.event import (
     build_coverage_feedback_event,
 )
 
