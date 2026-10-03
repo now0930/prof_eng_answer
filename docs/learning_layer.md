@@ -121,7 +121,9 @@ Topic Pack or deterministic primary authority in this stage.
 3. For each approved Topic/source pair, queue a source-reference proposal. If
    the Topic has no Master yet, keep it as `waiting_for_master`; otherwise use
    `pending_approval` with the current Master revision as its base.
-4. On explicit approval, append or replace the source reference and increment
+4. `--preview-proposal ID` checks the pending proposal against the current
+   Master and displays the old/new reference without writes. On explicit
+   approval, append or replace the source reference and increment
    the Master revision. The catalog approval and atomic Master replacement are
    protected with rollback and ambiguous-commit reconciliation. Other pending
    proposals are rebased, but still need individual approval. An applied

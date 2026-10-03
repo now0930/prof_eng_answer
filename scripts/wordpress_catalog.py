@@ -48,7 +48,7 @@ from study.content_update import (
     validate_content_update_against_master,
     validate_content_update_proposal,
 )
-from study.source_update import apply_approved_source_update, propose_source_update
+from study.source_update import apply_approved_source_update, preview_source_update, propose_source_update
 
 
 DEFAULT_CATEGORY_URL = (
@@ -790,6 +790,48 @@ def approve_master_proposal(database: Path, proposal_id: str, approved_by: str) 
                     f"source proposal approval failed and Master rollback was incomplete: {rollback_error}"
                 )
         raise
+    finally:
+        connection.close()
+
+
+def preview_master_proposal(database: Path, proposal_id: str) -> dict[str, Any]:
+    """Validate and show a source-reference proposal without writing files or DB state."""
+    connection = initialize_database(database)
+    try:
+        row = connection.execute(
+            "SELECT topic_id,proposal_json,status FROM source_update_proposals WHERE proposal_id=?",
+            (proposal_id,),
+        ).fetchone()
+        if not row:
+            raise ValueError(f"proposal not found: {proposal_id}")
+        topic_id, proposal_json, status = row
+        if status != "pending_approval":
+            raise ValueError(f"proposal is not ready for approval: {status}")
+        proposal = json.loads(proposal_json)
+        if proposal.get("topic_id") != topic_id or proposal.get("proposal_id") != proposal_id:
+            raise ValueError("proposal identity does not match its catalog row")
+        master_unresolved = ROOT / "master_topic_packs" / f"{topic_id}.json"
+        if master_unresolved.is_symlink():
+            raise ValueError("canonical Master path must not be a symlink")
+        repo_root = ROOT.resolve()
+        master_path = master_unresolved.resolve()
+        if not master_path.is_relative_to(repo_root):
+            raise ValueError("canonical Master path escapes the repository")
+        master = json.loads(master_path.read_text(encoding="utf-8"))
+        updated = preview_source_update(master, proposal)
+        previous = next(
+            (item for item in master["sources"] if item["source_id"] == proposal["source_id"]),
+            None,
+        )
+        return {
+            "proposal_id": proposal_id,
+            "topic_id": topic_id,
+            "status": status,
+            "base_revision": master["revision"],
+            "candidate_revision": updated["revision"],
+            "previous_source_reference": previous,
+            "proposed_source_reference": proposal["source_reference"],
+        }
     finally:
         connection.close()
 
@@ -1598,6 +1640,7 @@ def main() -> int:
     parser.add_argument("--review-topic-link", nargs=3, metavar=("POST_ID", "TOPIC_ID", "approve|reject"))
     parser.add_argument("--approve-proposal", help="Apply one pending Master update proposal by ID")
     parser.add_argument("--approved-by", help="Required explicit approver identity for --approve-proposal")
+    parser.add_argument("--preview-proposal", help="Validate and preview a source-reference proposal without applying it")
     parser.add_argument("--list-content-proposals", action="store_true", help="List curated Topic-content proposals")
     parser.add_argument("--approve-content-proposal", help="Approve a content proposal for candidate preparation; does not write Topic files")
     parser.add_argument("--reject-content-proposal", help="Reject a pending content proposal")
@@ -1620,6 +1663,12 @@ def main() -> int:
             parser.error("--approved-by is required with --approve-proposal")
         approve_master_proposal(args.database, args.approve_proposal, args.approved_by)
         print(f"MASTER_PROPOSAL_APPLIED={args.approve_proposal}")
+        return 0
+    if args.preview_proposal:
+        preview = preview_master_proposal(args.database, args.preview_proposal)
+        print("SOURCE_PROPOSAL_VALID=true")
+        print("CANONICAL_MASTER_CHANGED=false")
+        print(json.dumps(preview, ensure_ascii=False, indent=2, sort_keys=True))
         return 0
     if args.approve_content_proposal:
         if not args.reviewed_by:

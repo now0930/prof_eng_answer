@@ -105,6 +105,19 @@ def test_approved_catalog_change_flows_to_master_and_review_queue() -> None:
             assert not any(item["reason"] == "recently_changed_topic" for item in before)
 
             master_before_failed_approval = (master_dir / f"{topic_id}.json").read_bytes()
+            preview = wordpress_catalog.preview_master_proposal(database, proposal_id)
+            assert preview["status"] == "pending_approval"
+            assert preview["base_revision"] == master["revision"]
+            assert preview["candidate_revision"] == master["revision"] + 1
+            assert preview["previous_source_reference"] is None
+            assert preview["proposed_source_reference"]["source_id"] == "wp-post:101"
+            assert (master_dir / f"{topic_id}.json").read_bytes() == master_before_failed_approval
+            connection = sqlite3.connect(database)
+            assert connection.execute(
+                "SELECT status FROM source_update_proposals WHERE proposal_id=?", (proposal_id,)
+            ).fetchone()[0] == "pending_approval"
+            connection.close()
+
             real_connect = sqlite3.connect
 
             class FailingCommitConnection(sqlite3.Connection):

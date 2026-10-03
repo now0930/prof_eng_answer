@@ -30,6 +30,9 @@ restored. If commit acknowledgement is ambiguous, the code checks the durable
 proposal status and retains the matching Master state; if it cannot determine
 the outcome, it stops with an explicit manual-reconciliation error rather than
 silently retrying.
+`--preview-proposal ID` validates a pending source-reference proposal against
+the current Master and shows the prior and proposed references plus candidate
+revision without changing catalog state or canonical files.
 
 `schemas/content_update_proposal.schema.json` and
 `study/content_update.py` define that proposal-only contract. A proposal pins

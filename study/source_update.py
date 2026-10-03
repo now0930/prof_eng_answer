@@ -68,9 +68,14 @@ def apply_approved_source_update(
     approved_by: str | None,
 ) -> dict[str, Any]:
     """Apply a proposal only when an explicit approval identity is supplied."""
-    validate_master_topic_pack(master)
     if not approved_by or not approved_by.strip():
         raise SourceUpdateError("an explicit approver identity is required")
+    return preview_source_update(master, proposal)
+
+
+def preview_source_update(master: dict[str, Any], proposal: dict[str, Any]) -> dict[str, Any]:
+    """Validate a pending source-reference change and return its Master preview."""
+    validate_master_topic_pack(master)
     if proposal.get("status") != "pending_approval" or proposal.get("approval_required") is not True:
         raise SourceUpdateError("proposal is not awaiting approval")
     if proposal.get("topic_id") != master["topic_id"] or proposal.get("base_revision") != master["revision"]:

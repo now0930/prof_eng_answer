@@ -17,7 +17,7 @@ from study.master_topic_pack import (
     validate_source_reference,
 )
 from study.learning_runtime import _review_candidates
-from study.source_update import SourceUpdateError, apply_approved_source_update, find_topics_for_source, propose_source_update
+from study.source_update import SourceUpdateError, apply_approved_source_update, find_topics_for_source, preview_source_update, propose_source_update
 from test_master_topic_pack_schema import _valid_record
 
 
@@ -54,6 +54,9 @@ def test_source_update_requires_approval_and_revision_match() -> None:
     original = copy.deepcopy(master)
     proposal = propose_source_update(master, _reference(title="Updated title"), proposed_at="2026-10-04T10:00:00+09:00")
     assert proposal["status"] == "pending_approval"
+    assert master == original
+    previewed = preview_source_update(master, proposal)
+    assert previewed["revision"] == master["revision"] + 1
     assert master == original
     try:
         apply_approved_source_update(master, proposal, approved_by=None)
