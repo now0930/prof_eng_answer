@@ -836,6 +836,27 @@ def preview_master_proposal(database: Path, proposal_id: str) -> dict[str, Any]:
         connection.close()
 
 
+def preview_pending_master_proposals(database: Path) -> list[dict[str, Any]]:
+    """Validate every pending source proposal independently without applying any."""
+    connection = initialize_database(database)
+    try:
+        proposal_ids = [
+            row[0] for row in connection.execute(
+                "SELECT proposal_id FROM source_update_proposals "
+                "WHERE status='pending_approval' ORDER BY created_at,proposal_id"
+            )
+        ]
+    finally:
+        connection.close()
+    previews: list[dict[str, Any]] = []
+    for proposal_id in proposal_ids:
+        try:
+            previews.append({"valid": True, **preview_master_proposal(database, proposal_id)})
+        except Exception as exc:
+            previews.append({"valid": False, "proposal_id": proposal_id, "error": str(exc)})
+    return previews
+
+
 def save_content_update_proposal(database: Path, proposal: dict[str, Any]) -> None:
     """Persist a validated content proposal without changing Topic files."""
     validate_content_update_proposal(proposal)
@@ -1641,6 +1662,7 @@ def main() -> int:
     parser.add_argument("--approve-proposal", help="Apply one pending Master update proposal by ID")
     parser.add_argument("--approved-by", help="Required explicit approver identity for --approve-proposal")
     parser.add_argument("--preview-proposal", help="Validate and preview a source-reference proposal without applying it")
+    parser.add_argument("--preview-pending-proposals", action="store_true", help="Validate and preview all pending source-reference proposals without applying them")
     parser.add_argument("--list-content-proposals", action="store_true", help="List curated Topic-content proposals")
     parser.add_argument("--approve-content-proposal", help="Approve a content proposal for candidate preparation; does not write Topic files")
     parser.add_argument("--reject-content-proposal", help="Reject a pending content proposal")
@@ -1670,6 +1692,12 @@ def main() -> int:
         print("CANONICAL_MASTER_CHANGED=false")
         print(json.dumps(preview, ensure_ascii=False, indent=2, sort_keys=True))
         return 0
+    if args.preview_pending_proposals:
+        previews = preview_pending_master_proposals(args.database)
+        invalid = sum(not item["valid"] for item in previews)
+        print(f"SOURCE_PROPOSAL_PREVIEWS={len(previews)} INVALID={invalid}")
+        print(json.dumps(previews, ensure_ascii=False, indent=2, sort_keys=True))
+        return 1 if invalid else 0
     if args.approve_content_proposal:
         if not args.reviewed_by:
             parser.error("--reviewed-by is required with --approve-content-proposal")

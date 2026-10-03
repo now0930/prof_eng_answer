@@ -112,6 +112,11 @@ def test_approved_catalog_change_flows_to_master_and_review_queue() -> None:
             assert preview["previous_source_reference"] is None
             assert preview["proposed_source_reference"]["source_id"] == "wp-post:101"
             assert (master_dir / f"{topic_id}.json").read_bytes() == master_before_failed_approval
+            batch_previews = wordpress_catalog.preview_pending_master_proposals(database)
+            assert len(batch_previews) == 1
+            assert batch_previews[0]["valid"] is True
+            assert batch_previews[0]["proposal_id"] == proposal_id
+            assert batch_previews[0]["proposed_source_reference"]["source_id"] == "wp-post:101"
             connection = sqlite3.connect(database)
             assert connection.execute(
                 "SELECT status FROM source_update_proposals WHERE proposal_id=?", (proposal_id,)

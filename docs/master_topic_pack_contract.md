@@ -33,6 +33,8 @@ silently retrying.
 `--preview-proposal ID` validates a pending source-reference proposal against
 the current Master and shows the prior and proposed references plus candidate
 revision without changing catalog state or canonical files.
+`--preview-pending-proposals` runs the same check across the pending queue and
+reports each item as valid or invalid without applying any proposal.
 
 `schemas/content_update_proposal.schema.json` and
 `study/content_update.py` define that proposal-only contract. A proposal pins
