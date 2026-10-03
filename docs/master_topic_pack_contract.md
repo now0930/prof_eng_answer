@@ -30,16 +30,22 @@ records before/proposed text, and carries a linked source ID/URL/version/hash,
 locator, and excerpt. `affected_views` is derived from the Master projection
 configuration so reviewers can see the blast radius. Creation and validation
 do not edit Topic files or Master records. Approval/rejection transitions
-require an identity and timestamp. Applying an approved diff is currently a
-pure candidate transformation: it checks the Master revision, linked evidence,
-unique target record, and exact `before_value`, then returns proposed source
-payloads and an incremented Master revision in memory. The candidate transform
-does not write files; canonical application and its release-gate workflow
-remain a separate stage.
-The catalog can package that result as a review bundle under
+require an identity and timestamp. The pure candidate transformation checks
+the Master revision, linked evidence, unique target record, and exact
+`before_value`, then returns proposed source payloads and an incremented Master
+revision in memory. Canonical application is a separate, explicit operation
+requiring an apply identity. It revalidates catalog state, candidate manifest
+and hashes, regenerated diff, current Master revision, and target before-value.
+It replaces only the targeted legacy Topic source and Master record, records
+`applied_by` / `applied_at`, and attempts to restore the original files if a
+write fails. Applying a real proposal still requires the user's specific
+approval; the normal regression suite must pass before and afterward because
+the apply command does not itself run release gates.
+The catalog packages that result as a review bundle under
 `data/content_update_candidates/<proposal_id>/`, including candidate Master,
 Topic source payloads, proposal, and a hash manifest. This copies files only to
-the isolated bundle; original Topic files and Master remain unchanged.
+the isolated bundle; original Topic files and Master remain unchanged until an
+explicit `--apply-content-candidate ID --applied-by NAME` operation.
 
 The initial compatibility adapter may project existing packs without requiring
 Master files for all existing topics. Representative Master records are added

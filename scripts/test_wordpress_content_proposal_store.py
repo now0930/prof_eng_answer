@@ -106,9 +106,39 @@ def test_catalog_persists_decisions_without_writing_master_content() -> None:
             else:
                 raise AssertionError("candidate generation must not overwrite an existing bundle")
 
-            stale = _proposal(master, "stale")
+            try:
+                wordpress_catalog.apply_content_update_candidate(
+                    database,
+                    proposal["proposal_id"],
+                    applied_by="",
+                )
+            except ValueError as exc:
+                assert "explicit apply identity" in str(exc)
+            else:
+                raise AssertionError("canonical apply must require an explicit identity")
+
+            applied = wordpress_catalog.apply_content_update_candidate(
+                database,
+                proposal["proposal_id"],
+                applied_by="owner",
+            )
+            assert applied["proposal"]["status"] == "applied"
+            assert applied["proposal"]["applied_by"] == "owner"
+            assert applied["master"]["revision"] == master["revision"] + 1
+            assert master_path.read_text(encoding="utf-8") != original_text
+            source_after_apply = json.loads(
+                (repo / master["legacy_topic_pack"]["source_files"]["fact_anchor"]).read_text(encoding="utf-8")
+            )
+            assert source_after_apply["anchors"][0]["statement"] == "new-a"
+            applied_row = next(
+                item for item in wordpress_catalog.list_content_update_proposals(database)
+                if item["proposal_id"] == proposal["proposal_id"]
+            )
+            assert applied_row["status"] == "applied"
+
+            stale = _proposal(applied["master"], "stale")
             wordpress_catalog.save_content_update_proposal(database, stale)
-            changed_master = dict(master, revision=master["revision"] + 1)
+            changed_master = dict(applied["master"], revision=applied["master"]["revision"] + 1)
             master_path.write_text(json.dumps(changed_master), encoding="utf-8")
             try:
                 wordpress_catalog.resolve_content_update_proposal(
@@ -137,6 +167,40 @@ def test_catalog_persists_decisions_without_writing_master_content() -> None:
             assert result["status"] == "rejected"
 
 
+def test_catalog_migrates_proposal_status_for_applied_candidates() -> None:
+    import sqlite3
+
+    with tempfile.TemporaryDirectory(prefix="wp-content-proposal-migration-") as directory:
+        database = Path(directory) / "catalog.sqlite3"
+        connection = sqlite3.connect(database)
+        connection.execute(
+            """CREATE TABLE content_update_proposals (
+                proposal_id TEXT PRIMARY KEY, topic_id TEXT NOT NULL,
+                base_revision INTEGER NOT NULL, proposal_json TEXT NOT NULL,
+                status TEXT NOT NULL CHECK(status IN ('pending_approval','approved','rejected','candidate_ready')),
+                created_at TEXT NOT NULL, resolved_by TEXT, resolved_at TEXT, candidate_path TEXT
+            )"""
+        )
+        connection.execute(
+            "INSERT INTO content_update_proposals VALUES (?,?,?,?,?,?,?,?,?)",
+            ("proposal-1", "topic_example_id", 1, "{}", "candidate_ready", "2026-10-05", None, None, "candidates/proposal-1"),
+        )
+        connection.commit()
+        connection.close()
+
+        migrated = wordpress_catalog.initialize_database(database)
+        try:
+            migrated.execute(
+                "UPDATE content_update_proposals SET status='applied' WHERE proposal_id='proposal-1'"
+            )
+            assert migrated.execute(
+                "SELECT status,candidate_path FROM content_update_proposals WHERE proposal_id='proposal-1'"
+            ).fetchone() == ("applied", "candidates/proposal-1")
+        finally:
+            migrated.close()
+
+
 if __name__ == "__main__":
     test_catalog_persists_decisions_without_writing_master_content()
-    print("WORDPRESS_CONTENT_PROPOSAL_STORE_TESTS=1_PASS")
+    test_catalog_migrates_proposal_status_for_applied_candidates()
+    print("WORDPRESS_CONTENT_PROPOSAL_STORE_TESTS=2_PASS")

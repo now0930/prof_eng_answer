@@ -11,6 +11,7 @@ that require review before a Master Topic Pack update proposal is created.
 from __future__ import annotations
 
 import argparse
+import copy
 import hashlib
 import html
 from html.parser import HTMLParser
@@ -20,6 +21,7 @@ from pathlib import Path
 import re
 import shutil
 import sqlite3
+import stat
 import subprocess
 import tempfile
 import time
@@ -41,6 +43,7 @@ from study.master_topic_pack import (
 from study.content_update import (
     approve_content_update,
     apply_approved_content_update,
+    mark_content_update_applied,
     reject_content_update,
     validate_content_update_against_master,
     validate_content_update_proposal,
@@ -175,7 +178,7 @@ CREATE TABLE IF NOT EXISTS content_update_proposals (
     topic_id TEXT NOT NULL,
     base_revision INTEGER NOT NULL,
     proposal_json TEXT NOT NULL,
-    status TEXT NOT NULL CHECK(status IN ('pending_approval','approved','rejected','candidate_ready')),
+    status TEXT NOT NULL CHECK(status IN ('pending_approval','approved','rejected','candidate_ready','applied')),
     created_at TEXT NOT NULL,
     resolved_by TEXT,
     resolved_at TEXT,
@@ -482,7 +485,33 @@ def initialize_database(database: Path) -> sqlite3.Connection:
         if column not in proposal_columns:
             connection.execute(f"ALTER TABLE source_update_proposals ADD COLUMN {column} TEXT")
     content_proposal_columns = {row[1] for row in connection.execute("PRAGMA table_info(content_update_proposals)")}
-    if "candidate_path" not in content_proposal_columns:
+    content_proposal_sql = connection.execute(
+        "SELECT sql FROM sqlite_master WHERE type='table' AND name='content_update_proposals'"
+    ).fetchone()[0]
+    if "'applied'" not in content_proposal_sql:
+        connection.execute(
+            """CREATE TABLE content_update_proposals_new (
+                proposal_id TEXT PRIMARY KEY,
+                topic_id TEXT NOT NULL,
+                base_revision INTEGER NOT NULL,
+                proposal_json TEXT NOT NULL,
+                status TEXT NOT NULL CHECK(status IN ('pending_approval','approved','rejected','candidate_ready','applied')),
+                created_at TEXT NOT NULL,
+                resolved_by TEXT,
+                resolved_at TEXT,
+                candidate_path TEXT
+            )"""
+        )
+        candidate_column = "candidate_path" if "candidate_path" in content_proposal_columns else "NULL"
+        connection.execute(
+            f"""INSERT INTO content_update_proposals_new
+                (proposal_id,topic_id,base_revision,proposal_json,status,created_at,resolved_by,resolved_at,candidate_path)
+                SELECT proposal_id,topic_id,base_revision,proposal_json,status,created_at,resolved_by,resolved_at,{candidate_column}
+                FROM content_update_proposals"""
+        )
+        connection.execute("DROP TABLE content_update_proposals")
+        connection.execute("ALTER TABLE content_update_proposals_new RENAME TO content_update_proposals")
+    elif "candidate_path" not in content_proposal_columns:
         connection.execute("ALTER TABLE content_update_proposals ADD COLUMN candidate_path TEXT")
     connection.execute("PRAGMA user_version=2")
     return connection
@@ -909,6 +938,181 @@ def prepare_content_update_candidate(
         connection.close()
 
 
+def _write_bytes_atomically(path: Path, content: bytes, mode: int) -> None:
+    descriptor, temporary_name = tempfile.mkstemp(prefix=f".{path.name}.content-update-", dir=path.parent)
+    temporary = Path(temporary_name)
+    try:
+        with os.fdopen(descriptor, "wb") as stream:
+            stream.write(content)
+            stream.flush()
+            os.fsync(stream.fileno())
+        os.chmod(temporary, mode)
+        os.replace(temporary, path)
+    except Exception:
+        try:
+            temporary.unlink(missing_ok=True)
+        except OSError:
+            pass
+        raise
+
+
+def apply_content_update_candidate(
+    database: Path,
+    proposal_id: str,
+    *,
+    applied_by: str,
+) -> dict[str, Any]:
+    """Apply one reviewed candidate after full provenance and revision checks."""
+    if not isinstance(applied_by, str) or not applied_by.strip():
+        raise ValueError("an explicit apply identity is required")
+    if not re.fullmatch(r"[A-Za-z0-9._-]+", proposal_id):
+        raise ValueError("proposal_id contains unsafe path characters")
+    repo_root = ROOT.resolve()
+    connection = initialize_database(database)
+    replaced: list[tuple[Path, bytes, int]] = []
+    try:
+        connection.execute("BEGIN IMMEDIATE")
+        row = connection.execute(
+            """SELECT topic_id,proposal_json,status,candidate_path
+               FROM content_update_proposals WHERE proposal_id=?""",
+            (proposal_id,),
+        ).fetchone()
+        if not row:
+            raise ValueError(f"content proposal not found: {proposal_id}")
+        topic_id, proposal_json, status, relative_candidate_path = row
+        if status != "candidate_ready" or not relative_candidate_path:
+            raise ValueError("content proposal must have a reviewed candidate bundle")
+        proposal = json.loads(proposal_json)
+        if proposal.get("topic_id") != topic_id or proposal.get("proposal_id") != proposal_id:
+            raise ValueError("stored candidate identity does not match its catalog row")
+        candidate_unresolved = repo_root / relative_candidate_path
+        if candidate_unresolved.is_symlink():
+            raise ValueError("candidate bundle must not be a symlink")
+        candidate_path = candidate_unresolved.resolve()
+        if not candidate_path.is_relative_to(repo_root) or candidate_path.name != proposal_id:
+            raise ValueError("candidate bundle path is outside the repository or has an invalid name")
+        manifest_path = candidate_path / "manifest.json"
+        if manifest_path.is_symlink():
+            raise ValueError("candidate manifest must not be a symlink")
+        manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
+        if (
+            manifest.get("bundle_version") != "content-update-candidate-v1"
+            or manifest.get("proposal_id") != proposal_id
+            or manifest.get("application_status") != "candidate_only_not_applied"
+        ):
+            raise ValueError("candidate manifest identity/status is invalid")
+
+        master_unresolved = repo_root / "master_topic_packs" / f"{topic_id}.json"
+        if master_unresolved.is_symlink():
+            raise ValueError("canonical Master path must not be a symlink")
+        master_path = master_unresolved.resolve()
+        if not master_path.is_relative_to(repo_root):
+            raise ValueError("canonical Master path escapes the repository")
+        master_bytes = master_path.read_bytes()
+        master = json.loads(master_bytes)
+        validate_master_topic_pack(master)
+        source_payloads = load_legacy_topic_sources(repo_root, master)
+        if manifest.get("base_revision") != master["revision"]:
+            raise ValueError("candidate is stale against the current Master revision")
+        if manifest.get("affected_views") != proposal.get("affected_views"):
+            raise ValueError("candidate manifest affected_views do not match the proposal")
+
+        approved_proposal = copy.deepcopy(proposal)
+        approved_proposal["status"] = "approved"
+        approved_proposal.pop("candidate_ready_at", None)
+        approved_proposal.pop("candidate_revision", None)
+        expected = apply_approved_content_update(
+            master,
+            source_payloads,
+            approved_proposal,
+            candidate_ready_at=proposal["candidate_ready_at"],
+        )
+        if expected["master"]["revision"] != manifest.get("candidate_revision"):
+            raise ValueError("candidate revision does not match regenerated result")
+        if expected["proposal"] != proposal:
+            raise ValueError("stored proposal differs from regenerated candidate")
+
+        expected_files = {
+            f"master_topic_packs/{topic_id}.json": expected["master"],
+            f"proposals/{proposal_id}.json": expected["proposal"],
+        }
+        for source_key, relative_path in expected["master"]["legacy_topic_pack"]["source_files"].items():
+            expected_files[relative_path] = expected["source_payloads"][source_key]
+        listed_files = manifest.get("files_sha256")
+        if not isinstance(listed_files, dict) or set(listed_files) != set(expected_files):
+            raise ValueError("candidate manifest file inventory is incomplete or unexpected")
+        for relative_path, expected_payload in expected_files.items():
+            bundle_file_unresolved = candidate_path / relative_path
+            if bundle_file_unresolved.is_symlink():
+                raise ValueError(f"candidate artifact must not be a symlink: {relative_path}")
+            bundle_file = bundle_file_unresolved.resolve()
+            if not bundle_file.is_relative_to(candidate_path):
+                raise ValueError("candidate file path escapes its bundle")
+            content = bundle_file.read_bytes()
+            if hashlib.sha256(content).hexdigest() != listed_files[relative_path]:
+                raise ValueError(f"candidate artifact hash mismatch: {relative_path}")
+            if json.loads(content) != expected_payload:
+                raise ValueError(f"candidate artifact differs from regenerated result: {relative_path}")
+
+        target_key = proposal["target"]["source_key"]
+        source_unresolved = repo_root / master["legacy_topic_pack"]["source_files"][target_key]
+        if source_unresolved.is_symlink():
+            raise ValueError("canonical Topic source path must not be a symlink")
+        source_path = source_unresolved.resolve()
+        if not source_path.is_relative_to(repo_root):
+            raise ValueError("canonical Topic/Master paths must be regular repository files")
+        original_source_bytes = source_path.read_bytes()
+        original_source = json.loads(original_source_bytes)
+        if original_source != source_payloads[target_key]:
+            raise ValueError("canonical Topic source changed during candidate validation")
+        writes = [
+            (source_path, (json.dumps(expected["source_payloads"][target_key], ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")),
+            (master_path, (json.dumps(expected["master"], ensure_ascii=False, indent=2, sort_keys=True) + "\n").encode("utf-8")),
+        ]
+        originals = {
+            source_path: (original_source_bytes, stat.S_IMODE(source_path.stat().st_mode)),
+            master_path: (master_bytes, stat.S_IMODE(master_path.stat().st_mode)),
+        }
+        # Recheck both originals immediately before the first replacement.
+        if any(path.read_bytes() != originals[path][0] for path, _ in writes):
+            raise ValueError("canonical Topic/Master changed during apply preflight")
+        for path, content in writes:
+            _write_bytes_atomically(path, content, originals[path][1])
+            replaced.append((path, originals[path][0], originals[path][1]))
+
+        applied = mark_content_update_applied(
+            proposal,
+            applied_by=applied_by,
+            applied_at=datetime.now(timezone.utc).isoformat(),
+        )
+        cursor = connection.execute(
+            """UPDATE content_update_proposals
+               SET proposal_json=?,status='applied',resolved_by=?,resolved_at=?
+               WHERE proposal_id=? AND status='candidate_ready'""",
+            (
+                json.dumps(applied, ensure_ascii=False, sort_keys=True),
+                applied_by.strip(), applied["applied_at"], proposal_id,
+            ),
+        )
+        if cursor.rowcount != 1:
+            raise ValueError("candidate status changed during apply")
+        connection.commit()
+        return {"proposal": applied, "master": expected["master"], "applied_files": [str(path) for path, _ in writes]}
+    except Exception:
+        connection.rollback()
+        rollback_errors = []
+        for path, content, mode in reversed(replaced):
+            try:
+                _write_bytes_atomically(path, content, mode)
+            except Exception as exc:
+                rollback_errors.append(f"{path}: {exc}")
+        if rollback_errors:
+            raise RuntimeError("content update failed and rollback was incomplete: " + "; ".join(rollback_errors))
+        raise
+    finally:
+        connection.close()
+
+
 def show_content_update_proposals(database: Path, limit: int = 50) -> None:
     proposals = list_content_update_proposals(database, limit)
     print("CONTENT_UPDATE_PROPOSALS")
@@ -1312,6 +1516,8 @@ def main() -> int:
     parser.add_argument("--reject-content-proposal", help="Reject a pending content proposal")
     parser.add_argument("--reviewed-by", help="Required reviewer identity for content proposal decisions")
     parser.add_argument("--prepare-content-candidate", help="Build an isolated candidate bundle from an approved proposal")
+    parser.add_argument("--apply-content-candidate", help="Apply a reviewed candidate to canonical Topic/Master files")
+    parser.add_argument("--applied-by", help="Required explicit identity for --apply-content-candidate")
     parser.add_argument("--candidate-root", type=Path, help="Repository-local directory for candidate bundles")
     parser.add_argument("--list-pending", action="store_true", help="List candidate links and Master proposals")
     parser.add_argument("--limit", type=int, default=50, help="Maximum pending rows to display")
@@ -1357,6 +1563,19 @@ def main() -> int:
         )
         print(f"CONTENT_CANDIDATE_READY={candidate_path}")
         print("CANONICAL_TOPIC_FILES_CHANGED=false")
+        return 0
+    if args.apply_content_candidate:
+        if not args.applied_by:
+            parser.error("--applied-by is required with --apply-content-candidate")
+        result = apply_content_update_candidate(
+            args.database,
+            args.apply_content_candidate,
+            applied_by=args.applied_by,
+        )
+        print(f"CONTENT_CANDIDATE_APPLIED={result['proposal']['proposal_id']}")
+        print(f"MASTER_REVISION={result['master']['revision']}")
+        for path in result["applied_files"]:
+            print(f"APPLIED_FILE={path}")
         return 0
     if args.list_content_proposals:
         show_content_update_proposals(args.database, args.limit)

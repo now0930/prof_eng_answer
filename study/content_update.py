@@ -70,7 +70,10 @@ def validate_content_update_proposal(value: Any) -> dict[str, Any]:
         "target", "before_value", "proposed_value", "change_reason", "evidence",
         "affected_views", "status", "approval_required",
     }
-    optional = {"approved_by", "approved_at", "rejected_by", "rejected_at", "candidate_ready_at", "candidate_revision"}
+    optional = {
+        "approved_by", "approved_at", "rejected_by", "rejected_at",
+        "candidate_ready_at", "candidate_revision", "applied_by", "applied_at",
+    }
     _expect(required <= set(value) <= required | optional, "content update proposal fields do not match the contract")
     _expect(value["schema_version"] == CONTENT_UPDATE_SCHEMA_VERSION, "unsupported content update proposal schema")
     _expect(isinstance(value["proposal_id"], str) and bool(value["proposal_id"].strip()), "proposal_id is required")
@@ -124,22 +127,26 @@ def validate_content_update_proposal(value: Any) -> dict[str, Any]:
         "affected_views is invalid",
     )
     status = value["status"]
-    _expect(status in {"pending_approval", "approved", "rejected", "candidate_ready"}, "content proposal status is invalid")
+    _expect(status in {"pending_approval", "approved", "rejected", "candidate_ready", "applied"}, "content proposal status is invalid")
     _expect(value["approval_required"] is True, "content proposals require explicit approval")
-    if status in {"approved", "candidate_ready"}:
+    if status in {"approved", "candidate_ready", "applied"}:
         _expect(isinstance(value.get("approved_by"), str) and bool(value["approved_by"].strip()), "approved_by is required")
         _validate_timestamp(value.get("approved_at"), "approved_at")
     if status == "rejected":
         _expect(isinstance(value.get("rejected_by"), str) and bool(value["rejected_by"].strip()), "rejected_by is required")
         _validate_timestamp(value.get("rejected_at"), "rejected_at")
-    if status == "candidate_ready":
+    if status in {"candidate_ready", "applied"}:
         _validate_timestamp(value.get("candidate_ready_at"), "candidate_ready_at")
         _expect(isinstance(value.get("candidate_revision"), int) and value["candidate_revision"] >= 2, "candidate_revision is invalid")
+    if status == "applied":
+        _expect(isinstance(value.get("applied_by"), str) and bool(value["applied_by"].strip()), "applied_by is required")
+        _validate_timestamp(value.get("applied_at"), "applied_at")
     expected_optional = {
         "pending_approval": set(),
         "approved": {"approved_by", "approved_at"},
         "rejected": {"rejected_by", "rejected_at"},
         "candidate_ready": {"approved_by", "approved_at", "candidate_ready_at", "candidate_revision"},
+        "applied": {"approved_by", "approved_at", "candidate_ready_at", "candidate_revision", "applied_by", "applied_at"},
     }[status]
     _expect(set(value) == required | expected_optional, "proposal lifecycle fields do not match its status")
     return value
@@ -185,6 +192,20 @@ def reject_content_update(
     rejected = copy.deepcopy(proposal)
     rejected.update(status="rejected", rejected_by=rejected_by.strip(), rejected_at=rejected_at)
     return validate_content_update_proposal(rejected)
+
+
+def mark_content_update_applied(
+    proposal: dict[str, Any], *, applied_by: str | None, applied_at: str
+) -> dict[str, Any]:
+    """Record the final canonical-apply identity after a successful write."""
+    validate_content_update_proposal(proposal)
+    if proposal["status"] != "candidate_ready":
+        raise ContentUpdateError("only a ready candidate can be marked applied")
+    _expect(isinstance(applied_by, str) and bool(applied_by.strip()), "an explicit apply identity is required")
+    _validate_timestamp(applied_at, "applied_at")
+    applied = copy.deepcopy(proposal)
+    applied.update(status="applied", applied_by=applied_by.strip(), applied_at=applied_at)
+    return validate_content_update_proposal(applied)
 
 
 def _find_target_record(value: Any, record_id: str, matches: list[dict[str, Any]]) -> None:

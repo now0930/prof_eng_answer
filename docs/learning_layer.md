@@ -151,8 +151,13 @@ time. An approved change can be transformed into an in-memory candidate only
 when its base revision, linked evidence, target uniqueness, and before-value
 still match. `--prepare-content-candidate ID` writes the result to an isolated
 repository-local candidate bundle with a hash manifest. It does not overwrite
-Master or canonical Topic files; durable application and release validation
-remain a later stage.
+Master or canonical Topic files. Canonical application uses
+`--apply-content-candidate ID --applied-by NAME`; it requires a `candidate_ready`
+catalog record and rechecks the candidate bundle, current revision, and target
+before-value, then records the apply identity/time. It attempts rollback if a
+file replacement fails. This command does not run regression/release gates:
+run those before and after applying a real proposal, and do not apply a content
+proposal without its specific user approval.
 
 Pending proposals can be persisted and reviewed independently from source
 reference proposals. `--list-content-proposals` lists them;

@@ -48,18 +48,20 @@
       "uniqueItems": true,
       "items": { "enum": ["grading", "training", "diagnosis"] }
     },
-    "status": { "enum": ["pending_approval", "approved", "rejected", "candidate_ready"] },
+    "status": { "enum": ["pending_approval", "approved", "rejected", "candidate_ready", "applied"] },
     "approved_by": { "type": "string", "minLength": 1 },
     "approved_at": { "type": "string", "format": "date-time" },
     "rejected_by": { "type": "string", "minLength": 1 },
     "rejected_at": { "type": "string", "format": "date-time" },
     "candidate_ready_at": { "type": "string", "format": "date-time" },
     "candidate_revision": { "type": "integer", "minimum": 2 },
+    "applied_by": { "type": "string", "minLength": 1 },
+    "applied_at": { "type": "string", "format": "date-time" },
     "approval_required": { "const": true }
   },
   "allOf": [
     {
-      "if": { "properties": { "status": { "enum": ["approved", "candidate_ready"] } } },
+      "if": { "properties": { "status": { "enum": ["approved", "candidate_ready", "applied"] } } },
       "then": { "required": ["approved_by", "approved_at"] }
     },
     {
@@ -69,6 +71,10 @@
     {
       "if": { "properties": { "status": { "const": "candidate_ready" } } },
       "then": { "required": ["candidate_ready_at", "candidate_revision"] }
+    },
+    {
+      "if": { "properties": { "status": { "const": "applied" } } },
+      "then": { "required": ["candidate_ready_at", "candidate_revision", "applied_by", "applied_at"] }
     }
   ]
 }
