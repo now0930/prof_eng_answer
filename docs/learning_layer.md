@@ -146,6 +146,9 @@ candidate links, and unmatched posts. Rows include post title/URL/excerpt/tags,
 candidate Topic and lexical evidence, plus linked asset metadata. The export
 does not update the catalog; each mapping is still applied individually with
 `--review-topic-link POST_ID TOPIC_ID approve|reject` after review.
+The LLM-assisted, recommendation-only review procedure is documented in
+`docs/wordpress_topic_link_llm_review_guide.md`; it explicitly prohibits
+automatic approval or Master/Topic edits.
 
 This lifecycle currently updates **source references**, not the actual facts,
 grading rules, or learning content. A material WordPress content change must
