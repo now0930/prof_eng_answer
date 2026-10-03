@@ -85,6 +85,12 @@ def _validate_source_reference(source: Any, index: int) -> None:
             raise MasterTopicPackError(f"{prefix}.updated_at must be ISO-8601") from exc
 
 
+def validate_source_reference(source: Any) -> dict[str, Any]:
+    """Validate a standalone WordPress/knowledge-source reference."""
+    _validate_source_reference(source, 0)
+    return source
+
+
 def validate_master_topic_pack(value: Any) -> dict[str, Any]:
     """Validate and return a Master Topic Pack mapping without mutating it."""
     _expect(isinstance(value, dict), "Master Topic Pack must be an object")

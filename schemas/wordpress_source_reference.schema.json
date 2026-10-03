@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/wordpress_source_reference.schema.json",
+  "title": "WordPress Knowledge Source Reference",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["source_id", "source_type", "wordpress_url", "title", "version", "page", "section", "updated_at", "verification_status"],
+  "properties": {
+    "source_id": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$" },
+    "source_type": { "enum": ["wordpress_post", "wordpress_page", "pdf", "overleaf", "html", "other"] },
+    "wordpress_url": { "type": ["string", "null"], "format": "uri" },
+    "title": { "type": "string", "minLength": 1 },
+    "version": { "type": ["string", "integer"] },
+    "page": { "type": ["string", "integer", "null"] },
+    "section": { "type": ["string", "null"] },
+    "updated_at": { "type": ["string", "null"], "format": "date-time" },
+    "verification_status": { "enum": ["unverified", "verified", "stale", "unavailable"] }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "source_type": { "enum": ["wordpress_post", "wordpress_page"] } } },
+      "then": { "properties": { "wordpress_url": { "type": "string", "format": "uri" } } }
+    }
+  ]
+}
