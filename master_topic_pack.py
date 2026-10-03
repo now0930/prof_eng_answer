@@ -182,3 +182,58 @@ def project_grading(repository_root: str | Path, master: dict[str, Any]) -> dict
 def grading_compatibility_payload(repository_root: str | Path, master: dict[str, Any]) -> dict[str, Any]:
     """Expose the source-key mapping expected by legacy grading adapters."""
     return project_grading(repository_root, master)["sources"]
+
+
+def _as_list(value: Any) -> list[Any]:
+    return copy.deepcopy(value) if isinstance(value, list) else []
+
+
+def _first_list(payload: dict[str, Any], *keys: str) -> list[Any]:
+    for key in keys:
+        value = payload.get(key)
+        if isinstance(value, list):
+            return copy.deepcopy(value)
+    return []
+
+
+def project_training(repository_root: str | Path, master: dict[str, Any]) -> dict[str, Any]:
+    """Build a learner-facing content view without generating or grading answers."""
+    sources = load_legacy_topic_sources(repository_root, master)
+    config = master["projections"]["training"]
+    fact_anchor = sources.get("fact_anchor", {})
+    model_answer = sources.get("model_answer", {})
+    topic_importance = sources.get("topic_importance", {})
+    return {
+        "projection_id": config["projection_id"],
+        "topic_id": master["topic_id"],
+        "title_ko": master["title_ko"],
+        "daily_target": config["daily_target"],
+        "question_patterns": _first_list(model_answer, "expected_question_patterns", "question_patterns"),
+        "recommended_outline": _first_list(model_answer, "recommended_outline", "expected_structure"),
+        "fact_anchors": _first_list(fact_anchor, "anchors", "core_facts"),
+        "high_score_points": _first_list(model_answer, "high_score_points", "high_score_features"),
+        "common_missing_points": _first_list(model_answer, "common_missing_points"),
+        "high_band_unlock_conditions": _as_list(topic_importance.get("high_band_unlock_conditions")),
+    }
+
+
+def project_diagnosis(repository_root: str | Path, master: dict[str, Any]) -> dict[str, Any]:
+    """Expose structured diagnosis inputs without scoring or changing grader output."""
+    sources = load_legacy_topic_sources(repository_root, master)
+    config = master["projections"]["diagnosis"]
+    fact_anchor = sources.get("fact_anchor", {})
+    logic_check = sources.get("logic_check", {})
+    model_answer = sources.get("model_answer", {})
+    return {
+        "projection_id": config["projection_id"],
+        "topic_id": master["topic_id"],
+        "title_ko": master["title_ko"],
+        "dimensions": list(config["dimensions"]),
+        "fact_anchors": _first_list(fact_anchor, "anchors", "core_facts"),
+        "fatal_wrong_claims": _first_list(fact_anchor, "fatal_wrong_claims"),
+        "deterministic_checks": _first_list(logic_check, "deterministic_checks"),
+        "diagnostic_guidance": copy.deepcopy(logic_check.get("llm_profile", {}))
+        if isinstance(logic_check.get("llm_profile"), dict) else {},
+        "common_missing_points": _first_list(model_answer, "common_missing_points"),
+        "score_effect": "none",
+    }

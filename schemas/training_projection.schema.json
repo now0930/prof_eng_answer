@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/training_projection.schema.json",
+  "title": "Training Projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["projection_id", "topic_id", "title_ko", "daily_target", "question_patterns", "recommended_outline", "fact_anchors", "high_score_points", "common_missing_points", "high_band_unlock_conditions"],
+  "properties": {
+    "projection_id": { "const": "training-projection-v1" },
+    "topic_id": { "type": "string", "minLength": 8 },
+    "title_ko": { "type": "string", "minLength": 1 },
+    "daily_target": { "type": "integer", "minimum": 1 },
+    "question_patterns": { "type": "array" },
+    "recommended_outline": { "type": "array" },
+    "fact_anchors": { "type": "array" },
+    "high_score_points": { "type": "array" },
+    "common_missing_points": { "type": "array" },
+    "high_band_unlock_conditions": { "type": "array" }
+  }
+}
