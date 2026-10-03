@@ -128,8 +128,9 @@
       "required": ["source_id", "source_type", "wordpress_url", "title", "version", "page", "section", "updated_at", "verification_status"],
       "properties": {
         "source_id": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$" },
-        "source_type": { "enum": ["wordpress_post", "wordpress_page", "pdf", "overleaf", "html", "other"] },
+        "source_type": { "enum": ["wordpress_post", "wordpress_page", "pdf", "image", "overleaf", "html", "other"] },
         "wordpress_url": { "type": ["string", "null"], "format": "uri" },
+        "source_url": { "type": "string", "format": "uri" },
         "title": { "type": "string", "minLength": 1 },
         "version": { "type": ["string", "integer"] },
         "page": { "type": ["string", "integer", "null"] },

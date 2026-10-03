@@ -18,6 +18,7 @@ def _reference(**overrides):
         "source_id": "wp-post-101",
         "source_type": "wordpress_post",
         "wordpress_url": "https://example.org/pressure-sensor/",
+        "source_url": "https://example.org/wp-content/uploads/pressure-sensor.pdf",
         "title": "압전식 센서 정리",
         "version": "2026-10-03",
         "page": 4,

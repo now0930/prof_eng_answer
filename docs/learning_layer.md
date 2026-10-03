@@ -17,6 +17,16 @@ answer ─► existing grade ─► diagnosis ─► SQLite training history
                                                   │
                                                   ▼
                                        daily two-item review queue
+
+WordPress category posts and linked media
+        │
+        ▼
+SQLite source catalog ──► reviewed post/topic link ──► update proposal
+                                                       │
+                                                user approval
+                                                       │
+                                                       ▼
+                                         Master Topic Pack source reference
 ```
 
 ## Contracts and code
@@ -30,6 +40,10 @@ answer ─► existing grade ─► diagnosis ─► SQLite training history
 - Production persistence and queue integration: `study/learning_runtime.py`, called
   after `grade.json` is finalized by `bot.py`
 - WordPress references and approval proposals: `study/source_update.py`
+- WordPress category ingestion, source catalog, media-version tracking, local
+  PDF text extraction/OCR, and review commands: `scripts/wordpress_catalog.py`
+- Local generated catalog: `data/wordpress_sources.sqlite3` (ignored runtime
+  data; regenerate from the configured category URL)
 
 The history database path is supplied by the caller. Each attempt stores its
 question and topic identity, attempt time, final score, structured diagnosis,
@@ -60,10 +74,39 @@ the next review to 30 days later as a starter interval. A weak score is below
 candidate, and unseen Master Topics are new-topic candidates. These starter
 selection rules are isolated in `study/learning_runtime.py` for future replacement.
 
-WordPress synchronization is not implemented here. The Master preserves
-WordPress URLs and source metadata. A source change produces a
-`pending_approval` proposal; applying it requires an approver identity and a
-matching Master revision.
+Catalog synchronization and source-change detection are implemented, while
+automatic writes into Master records are disabled. A change tied to an
+approved Topic mapping creates a `pending_approval` proposal; applying it
+requires an approver identity and a matching Master revision.
+
+The first catalog pass covers the Industrial Instrumentation/Control Engineer
+category configured in `scripts/wordpress_catalog.py`. It indexes every
+category post and its PDF, image, HTML, and Overleaf links. Candidate topic
+links are generated from title, excerpt, and tags and remain `pending_review`;
+their lexical scores are ranking aids, not calibrated probabilities. They are
+not copied into any Master automatically. Approving a candidate link
+queues a separate source update proposal. Applying that proposal requires an
+explicit approver identity. Posts with no existing Master record remain queued
+as `waiting_for_master`.
+
+The catalog stores source URLs, WordPress media identifiers and modification
+times, post text, content hashes, and extracted PDF text; it does not store
+media binaries. For first-party PDFs, digitally embedded text is extracted
+page by page. Pages without usable embedded text are rendered locally and
+recognized with Tesseract using Korean and English language data. External
+PDF links are retained as metadata and are not downloaded. Run
+`python3 scripts/wordpress_catalog.py --ocr` to synchronize and process pending
+first-party PDFs. On Debian/Ubuntu, install `tesseract-ocr`,
+`tesseract-ocr-kor`, `tesseract-ocr-eng`, and `poppler-utils` first. Use
+`--list-pending`, `--review-topic-link POST_ID TOPIC_ID approve|reject`, and
+`--approve-proposal ID --approved-by NAME` to manage the review and approval
+flow. A manually selected Topic ID can be approved for an unmatched post with
+the same `--review-topic-link` command.
+
+In a Master source reference, `wordpress_url` identifies the parent blog post
+and `source_url` identifies the exact PDF/image/HTML/Overleaf asset. The
+catalog database keeps both ends of this relationship, along with `source_id`
+and the WordPress media version.
 
 ## Validation
 

@@ -9,9 +9,12 @@ rules. Grading projection authority remains the existing Topic Pack and runtime
 routing. Training history is learner data and must be persisted separately.
 
 The `sources` array preserves WordPress references and other source metadata.
-An empty array is valid while references are being collected. A WordPress
-source must include a URL. Any future WordPress change is proposal-only and
-requires user approval before the Master record changes.
+An empty array is valid while references are being collected. A source
+reference records both `wordpress_url` (the parent blog post) and `source_url`
+(the exact PDF, image, HTML, or Overleaf asset); legacy records may omit
+`source_url`, in which case it is treated as `wordpress_url`. A WordPress
+change creates a proposal and requires explicit user approval before the
+Master record changes.
 
 The initial compatibility adapter may project existing packs without requiring
 Master files for all existing topics. Representative Master records are added
