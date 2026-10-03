@@ -8,7 +8,7 @@ if str(PROJECT_ROOT) not in sys.path:
     sys.path.insert(0, str(PROJECT_ROOT))
 
 
-from difficulty_strategy import (
+from grading.scoring.difficulty_strategy import (
     classify_question_difficulty,
     evaluate_exam_selection,
     load_difficulty_profiles,

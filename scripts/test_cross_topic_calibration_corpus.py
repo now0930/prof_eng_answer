@@ -12,7 +12,7 @@ from grading.evidence.generic_formula_integrity import (
 from grading.routing.question_demand_contract import (
     build_question_demand_contract,
 )
-from verdict_consistency import (
+from grading.scoring.verdict_consistency import (
     reconcile_verdict_summary,
 )
 

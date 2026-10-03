@@ -121,9 +121,9 @@ def _compile_targets(root: Path) -> list[str]:
         "grading_agents.py",
         "grading/evidence/logic_check_evaluator.py",
         "grading/evidence/logic_llm_verifier.py",
-        "difficulty_strategy.py",
-        "difficulty_output_adapter.py",
-        "grade_score_reconciler.py",
+        "grading/scoring/difficulty_strategy.py",
+        "grading/scoring/difficulty_output_adapter.py",
+        "grading/scoring/grade_score_reconciler.py",
     ]
     return [p for p in candidates if (root / p).exists()]
 

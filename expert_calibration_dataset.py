@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable
 
-from grading_identity import build_grading_identity
+from grading.scoring.grading_identity import build_grading_identity
 
 
 RECORD_VERSION = "expert_calibration_record_v1"

@@ -14,7 +14,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import grading_agents
-from persisted_grade_replay import restore_retired_volume_policy_for_replay
+from grading.scoring.persisted_grade_replay import restore_retired_volume_policy_for_replay
 
 
 def main() -> None:

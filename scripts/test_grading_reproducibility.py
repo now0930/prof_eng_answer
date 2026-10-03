@@ -15,10 +15,10 @@ from typing import Any
 
 import bot
 import grading_agents
-from grade_score_reconciler import (
+from grading.scoring.grade_score_reconciler import (
     reconcile_grade_score,
 )
-from grading_identity import (
+from grading.scoring.grading_identity import (
     build_grading_identity,
 )
 

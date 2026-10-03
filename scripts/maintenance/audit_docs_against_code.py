@@ -23,7 +23,7 @@ CODE_BACKED_DOCS = {
     ],
     "grading_architecture.md": [
         "grading_agents.py",
-        "grading_config.py",
+        "grading/scoring/grading_config.py",
         "rubrics/scoring_model/default.json",
         "rubrics/raters/layered_default.json",
     ],
@@ -34,9 +34,9 @@ CODE_BACKED_DOCS = {
         "rubrics/question_types/default.json",
     ],
     "difficulty_and_selection_strategy.md": [
-        "difficulty_strategy.py",
-        "difficulty_output_adapter.py",
-        "difficulty_score_ceiling.py",
+        "grading/scoring/difficulty_strategy.py",
+        "grading/scoring/difficulty_output_adapter.py",
+        "grading/scoring/difficulty_score_ceiling.py",
         "rubrics/difficulty_profiles/default.json",
         "rubrics/topic_importance/industrial_instrumentation_control.json",
         "rubrics/exam_selection/default.json",

@@ -3,8 +3,8 @@ from __future__ import annotations
 import copy
 import unittest
 
-import grade_output_summarizer
-from verdict_consistency import (
+import grading.scoring.grade_output_summarizer as grade_output_summarizer
+from grading.scoring.verdict_consistency import (
     VERDICT_CONSISTENCY_MARKER,
     reconcile_verdict_summary,
 )

@@ -10,10 +10,10 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from explicit_requirement_cap import (
+from grading.scoring.explicit_requirement_cap import (
     apply_explicit_requirement_hard_cap,
 )
-from grade_score_reconciler import _apply_numeric_flags
+from grading.scoring.grade_score_reconciler import _apply_numeric_flags
 from grading.routing.question_type_coverage_score_adjuster import (
     evaluate_question_type_coverage_score_adjustment,
 )
@@ -92,7 +92,7 @@ class ExplicitRequirementPipelineTest(unittest.TestCase):
     def test_actual_pipeline_applies_hard_cap_before_weak_adjustment(
         self,
     ) -> None:
-        path = ROOT / "difficulty_output_adapter.py"
+        path = ROOT / "grading/scoring/difficulty_output_adapter.py"
         source = path.read_text(encoding="utf-8")
 
         function_start = source.index(
@@ -380,7 +380,7 @@ class IncorrectRequirementStatusRegressionTests(
     def test_incorrect_requirement_is_not_missing_cap(
         self,
     ) -> None:
-        from explicit_requirement_cap import (
+        from grading.scoring.explicit_requirement_cap import (
             apply_explicit_requirement_hard_cap,
         )
 
@@ -458,7 +458,7 @@ class IncorrectRequirementStatusRegressionTests(
     def test_true_missing_requirement_still_caps(
         self,
     ) -> None:
-        from explicit_requirement_cap import (
+        from grading.scoring.explicit_requirement_cap import (
             apply_explicit_requirement_hard_cap,
         )
 

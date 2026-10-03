@@ -6,7 +6,7 @@ import re
 import traceback
 from datetime import datetime
 from pathlib import Path
-from grading_config import load_active_config, save_active_config_snapshots
+from grading.scoring.grading_config import load_active_config, save_active_config_snapshots
 
 
 def _call_difficulty_strategy_to_grade_compat(
@@ -72,7 +72,7 @@ def _call_difficulty_strategy_to_grade_compat(
 BASE_DIR = Path(__file__).resolve().parent
 
 # STAGE23J_RUNTIME_PROVENANCE_IMPORT_V4
-from runtime_grading_provenance import (
+from grading.scoring.runtime_grading_provenance import (
     attach_runtime_provenance_to_pipeline_result
     as _stage23j_attach_runtime_provenance,
 )
@@ -4736,7 +4736,7 @@ def _stage7_semantic_exact_projection_validation(gemini_eval):
         else None
     )
 
-    from evaluation_ledger import _demand_link_phrase
+    from grading.scoring.evaluation_ledger import _demand_link_phrase
 
     typed_requirements = bool(
         isinstance(requirements, list)
@@ -5317,7 +5317,7 @@ def _phase2_extract_submission_context_canonical(input_text):
     # Phase2에서도 canonical submission parser를 재사용한다.
     # 경계를 확정하지 못한 입력은 질문을 비워 둔다. 전체 입력을
     # 질문으로 복제하는 legacy fallback은 Fact/요구사항 오염을 만든다.
-    from grade_submission_normalizer import (
+    from grading.scoring.grade_submission_normalizer import (
         normalize_grade_submission,
     )
 
@@ -5363,7 +5363,7 @@ def _phase2_build_canonical_submission_text(
 def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
     import time as _phase20_time
-    from grading_config import load_active_config, save_active_config_snapshots
+    from grading.scoring.grading_config import load_active_config, save_active_config_snapshots
 
     def report(message):
         try:
@@ -5476,7 +5476,7 @@ def _phase2_postprocess_grade(legacy_result):
         )
     )
 
-    from grading_identity import (
+    from grading.scoring.grading_identity import (
         build_grading_identity,
     )
 
@@ -6215,7 +6215,7 @@ def _phase2_postprocess_grade(legacy_result):
 
     # PHASE20_DIFFICULTY_SELECTION_OUTPUT_FINAL
     try:
-        from difficulty_output_adapter import attach_difficulty_strategy_to_grade
+        from grading.scoring.difficulty_output_adapter import attach_difficulty_strategy_to_grade
         _question_for_difficulty_final = (
             locals().get("question")
             or locals().get("question_text")
@@ -6287,7 +6287,7 @@ def _phase2_postprocess_grade(legacy_result):
 
     # PHASE21_DIFFICULTY_SCORE_CEILING_FINAL_ORDERED
     try:
-        from difficulty_score_ceiling import apply_difficulty_score_ceiling
+        from grading.scoring.difficulty_score_ceiling import apply_difficulty_score_ceiling
         _answer_for_difficulty_final = (
             locals().get("answer")
             or locals().get("answer_text")
@@ -7138,7 +7138,7 @@ def _phase8_run_originality_evaluator(
         )
 
     try:
-        from originality_grader import (
+        from grading.scoring.originality_grader import (
             gemini_originality_evaluate,
         )
 
@@ -9598,7 +9598,7 @@ def _phase2_finalize_verified_coverage_for_persistence(
             "changed numeric score state"
         )
 
-    from evaluation_ledger import (
+    from grading.scoring.evaluation_ledger import (
         attach_canonical_evaluation_ledger,
     )
     output = attach_canonical_evaluation_ledger(
@@ -10772,11 +10772,11 @@ def finalize_grade_after_score_reconciliation(value):
     if value.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1":
         return value
 
-    from evidence_calibration import apply_evidence_based_calibration
-    from high_score_eligibility import apply_high_score_eligibility_cap
-    from verified_correctness_score_cap import apply_verified_correctness_score_cap
-    from verified_evidence_score_calibration import apply_verified_evidence_score_calibration
-    from verdict_consistency import (
+    from grading.scoring.evidence_calibration import apply_evidence_based_calibration
+    from grading.scoring.high_score_eligibility import apply_high_score_eligibility_cap
+    from grading.scoring.verified_correctness_score_cap import apply_verified_correctness_score_cap
+    from grading.scoring.verified_evidence_score_calibration import apply_verified_evidence_score_calibration
+    from grading.scoring.verdict_consistency import (
         enforce_final_decision_consistency,
         enforce_final_score_status_narrative_consistency,
     )
@@ -10810,26 +10810,26 @@ def _stage17e5_finalize_pipeline_result(
     value,
     submission_normalization,
 ):
-    from evidence_calibration import (
+    from grading.scoring.evidence_calibration import (
         apply_evidence_based_calibration,
     )
-    from evaluation_ledger import (
+    from grading.scoring.evaluation_ledger import (
         attach_canonical_evaluation_ledger,
     )
-    from grade_submission_normalizer import (
+    from grading.scoring.grade_submission_normalizer import (
         attach_submission_normalization,
     )
-    from verdict_consistency import (
+    from grading.scoring.verdict_consistency import (
         enforce_final_decision_consistency,
         enforce_final_score_status_narrative_consistency,
     )
-    from verified_evidence_score_calibration import (
+    from grading.scoring.verified_evidence_score_calibration import (
         apply_verified_evidence_score_calibration,
     )
-    from high_score_eligibility import (
+    from grading.scoring.high_score_eligibility import (
         apply_high_score_eligibility_cap,
     )
-    from verified_correctness_score_cap import (
+    from grading.scoring.verified_correctness_score_cap import (
         apply_verified_correctness_score_cap,
     )
 
@@ -10889,10 +10889,10 @@ def _stage17e5_finalize_pipeline_result(
 
 
 def run_agent_pipeline(*args, **kwargs):
-    from grade_submission_normalizer import (
+    from grading.scoring.grade_submission_normalizer import (
         normalize_pipeline_call,
     )
-    from grading_authority_policy import (
+    from grading.scoring.grading_authority_policy import (
         enforce_requested_authority_mode,
     )
 
@@ -10914,7 +10914,7 @@ def run_agent_pipeline(*args, **kwargs):
             grade_deterministically,
             persist_deterministic_grade,
         )
-        from grade_submission_normalizer import normalize_grade_submission
+        from grading.scoring.grade_submission_normalizer import normalize_grade_submission
         normalized_text = str(normalized_kwargs.get("raw_text") or "")
         if not normalized_text and len(normalized_args) > 1:
             normalized_text = str(normalized_args[1] or "")
@@ -10927,7 +10927,7 @@ def run_agent_pipeline(*args, **kwargs):
         if session_dir is None and len(normalized_args) > 5:
             session_dir = normalized_args[5]
         raw_result = persist_deterministic_grade(session_dir, grade)
-        from grade_submission_normalizer import attach_submission_normalization
+        from grading.scoring.grade_submission_normalizer import attach_submission_normalization
         finalized_result = (
             raw_result,
             attach_submission_normalization(grade, submission_normalization),

@@ -12,7 +12,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from grade_submission_normalizer import (
+from grading.scoring.grade_submission_normalizer import (
     normalize_grade_submission,
     normalize_pipeline_call,
 )
@@ -133,7 +133,7 @@ class FinalGradeReuseTest(
         self,
         root: Path,
     ):
-        from grading_identity import (
+        from grading.scoring.grading_identity import (
             build_grading_identity,
         )
         from grading.routing.question_contract import (

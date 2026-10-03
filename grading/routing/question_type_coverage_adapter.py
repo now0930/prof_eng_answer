@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import Any
 
-from generic_grading_contract import (
+from grading.scoring.generic_grading_contract import (
     DemandAssessment,
     DemandState,
     demand_matrix_summary,

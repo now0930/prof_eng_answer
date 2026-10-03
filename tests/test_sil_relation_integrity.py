@@ -15,7 +15,7 @@ from grading.evidence.sil_relation_integrity import (
     SIL_TARGET_TOPIC_ID,
     evaluate_sil_relation_integrity,
 )
-from verdict_consistency import (
+from grading.scoring.verdict_consistency import (
     enforce_final_decision_consistency,
 )
 

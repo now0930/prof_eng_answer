@@ -20,7 +20,7 @@ from grading.routing.question_type_router import (
     detect_question_type,
     load_question_type_profile,
 )
-from grading_identity import (
+from grading.scoring.grading_identity import (
     NORMALIZATION_VERSION,
     build_grading_identity,
     normalize_grading_text,

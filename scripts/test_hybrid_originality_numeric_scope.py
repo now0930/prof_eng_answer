@@ -12,7 +12,7 @@ from grading.evidence.hybrid_demand_scope_guard import (
     project_hybrid_originality_pre_normalization,
     sanitize_hybrid_originality_evaluation,
 )
-from originality_grader import (
+from grading.scoring.originality_grader import (
     build_originality_prompt,
 )
 from scripts.test_hybrid_demand_scope_guard import (

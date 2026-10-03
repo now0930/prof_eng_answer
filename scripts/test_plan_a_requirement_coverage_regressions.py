@@ -17,7 +17,7 @@ FIXTURE = (
 )
 sys.path.insert(0, str(REPO))
 
-from explicit_requirement_cap import (
+from grading.scoring.explicit_requirement_cap import (
     evaluate_explicit_requirement_hard_cap,
 )
 from grading.routing.question_type_coverage_adapter import (

@@ -9,7 +9,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 DEFAULT_PROMPT_PATH = BASE_DIR / "rubrics" / "output_prompts" / "compact_grade_summary.json"
 
 
@@ -780,7 +780,7 @@ def _normalise_summary(llm_obj, payload):
         payload,
     )
 
-    from verdict_consistency import (
+    from grading.scoring.verdict_consistency import (
         reconcile_verdict_summary,
     )
 
@@ -1318,7 +1318,7 @@ def _find_verified_defect_reconciliation(
 def _build_payload(
     grade: dict[str, Any],
 ) -> dict[str, Any]:
-    from verdict_consistency import (
+    from grading.scoring.verdict_consistency import (
         enforce_final_decision_consistency,
     )
 
@@ -1376,7 +1376,7 @@ def _render(
     summary: dict[str, Any],
     payload: dict[str, Any],
 ) -> str:
-    from verdict_consistency import (
+    from grading.scoring.verdict_consistency import (
         reconcile_verdict_summary,
     )
 

@@ -585,7 +585,7 @@ def _run_stage19z_v3_submission_context_tests():
     import textwrap
 
     import grading_agents
-    from grading_identity import (
+    from grading.scoring.grading_identity import (
         build_grading_identity,
     )
     from grading.routing.question_contract import (

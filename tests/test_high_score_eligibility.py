@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from high_score_eligibility import apply_high_score_eligibility_cap
+from grading.scoring.high_score_eligibility import apply_high_score_eligibility_cap
 from grading_agents import finalize_grade_after_score_reconciliation
 
 

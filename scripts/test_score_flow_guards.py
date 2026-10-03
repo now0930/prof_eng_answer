@@ -15,8 +15,8 @@ if str(ROOT) not in sys.path:
 
 from grading_agents import _phase6_limit_gemini_score
 from grading_agents import _stage7_semantic_exact_projection_validation
-from grade_score_reconciler import _apply_numeric_flags
-from difficulty_score_ceiling import (
+from grading.scoring.grade_score_reconciler import _apply_numeric_flags
+from grading.scoring.difficulty_score_ceiling import (
     _prefer_question_type_adjusted_score,
 )
 import grading.routing.question_type_coverage_score_adjuster as coverage_adjuster
@@ -652,7 +652,7 @@ class ExplicitRequirementCapEnforcementRegressionTest(
             return updated
 
         with patch(
-            "explicit_requirement_cap."
+            "grading.scoring.explicit_requirement_cap."
             "enforce_existing_explicit_requirement_cap",
             side_effect=enforce_cap,
         ):
@@ -679,7 +679,7 @@ class ExplicitRequirementCapEnforcementRegressionTest(
         self,
     ) -> None:
         with patch(
-            "explicit_requirement_cap."
+            "grading.scoring.explicit_requirement_cap."
             "enforce_existing_explicit_requirement_cap",
             side_effect=RuntimeError(
                 "simulated cap enforcement failure"
@@ -1887,7 +1887,7 @@ class TopicImportanceFallbackRegressionTest(
     def test_topic_importance_profile_failure_preserves_topic_match(
         self,
     ) -> None:
-        import difficulty_output_adapter as adapter
+        import grading.scoring.difficulty_output_adapter as adapter
         import rubric_registry
 
         function = (
@@ -1953,7 +1953,7 @@ class TopicImportanceFallbackRegressionTest(
     def test_topic_importance_bank_failure_returns_unmatched_diagnostic(
         self,
     ) -> None:
-        import difficulty_output_adapter as adapter
+        import grading.scoring.difficulty_output_adapter as adapter
         import rubric_registry
 
         function = (
@@ -2222,9 +2222,9 @@ class DifficultyCeilingFallbackRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import difficulty_score_ceiling
+        import grading.scoring.difficulty_score_ceiling as difficulty_score_ceiling
         import grading_agents
-        from grading_config import (
+        from grading.scoring.grading_config import (
             load_active_config,
             save_active_config_snapshots,
         )
@@ -2736,7 +2736,7 @@ class OriginalityPersistenceRegressionTest(
         from tempfile import TemporaryDirectory
 
         import grading_agents
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         writes = []
         stdout_buffer = io.StringIO()
@@ -2812,7 +2812,7 @@ class OriginalityPersistenceRegressionTest(
         from tempfile import TemporaryDirectory
 
         import grading_agents
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         writes = []
         stdout_buffer = io.StringIO()
@@ -2899,7 +2899,7 @@ class OriginalityPersistenceRegressionTest(
         from tempfile import TemporaryDirectory
 
         import grading_agents
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         write_attempts = []
         stdout_buffer = io.StringIO()
@@ -2987,7 +2987,7 @@ class OriginalityPersistenceRegressionTest(
         from tempfile import TemporaryDirectory
 
         import grading_agents
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         write_attempts = []
         stdout_buffer = io.StringIO()
@@ -3080,7 +3080,7 @@ class LlmJsonParserRegressionTest(unittest.TestCase):
     def test_llm_json_parser_parses_fenced_object(
         self,
     ) -> None:
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         result = grade_output_summarizer._parse_llm_json(
             """```json
@@ -3102,7 +3102,7 @@ class LlmJsonParserRegressionTest(unittest.TestCase):
     def test_llm_json_parser_falls_back_after_truncated_fence_match(
         self,
     ) -> None:
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         result = grade_output_summarizer._parse_llm_json(
             """```json
@@ -3130,7 +3130,7 @@ class LlmJsonParserRegressionTest(unittest.TestCase):
     def test_llm_json_parser_parses_embedded_object(
         self,
     ) -> None:
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         result = grade_output_summarizer._parse_llm_json(
             (
@@ -3151,7 +3151,7 @@ class LlmJsonParserRegressionTest(unittest.TestCase):
     def test_llm_json_parser_rejects_malformed_or_non_object_response(
         self,
     ) -> None:
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         invalid_inputs = (
             "",
@@ -3179,7 +3179,7 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         grading_agents,
         input_text,
     ) -> None:
-        from grading_config import (
+        from grading.scoring.grading_config import (
             load_active_config,
             save_active_config_snapshots,
         )
@@ -3226,8 +3226,8 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import difficulty_output_adapter
-        import difficulty_score_ceiling
+        import grading.scoring.difficulty_output_adapter as difficulty_output_adapter
+        import grading.scoring.difficulty_score_ceiling as difficulty_score_ceiling
         import grading_agents
         import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
@@ -3355,8 +3355,8 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import difficulty_output_adapter
-        import difficulty_score_ceiling
+        import grading.scoring.difficulty_output_adapter as difficulty_output_adapter
+        import grading.scoring.difficulty_score_ceiling as difficulty_score_ceiling
         import grading_agents
         import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
@@ -3477,8 +3477,8 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import difficulty_output_adapter
-        import difficulty_score_ceiling
+        import grading.scoring.difficulty_output_adapter as difficulty_output_adapter
+        import grading.scoring.difficulty_score_ceiling as difficulty_score_ceiling
         import grading_agents
         import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
@@ -3612,7 +3612,7 @@ class OriginalityGraderJsonContractRegressionTest(
     def test_originality_extract_json_parses_fenced_and_embedded_objects(
         self,
     ) -> None:
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         cases = (
             (
@@ -3669,7 +3669,7 @@ class OriginalityGraderJsonContractRegressionTest(
     def test_originality_extract_json_rejects_malformed_and_non_object_payloads(
         self,
     ) -> None:
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         invalid_payloads = (
             "",
@@ -3697,7 +3697,7 @@ class OriginalityGraderJsonContractRegressionTest(
         import os
         import urllib.error
 
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         class BrokenBody:
             def read(self):
@@ -6032,7 +6032,7 @@ class TelegramSummaryFallbackRegressionTest(
     ) -> None:
         import os
 
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         with patch.dict(
             os.environ,
@@ -6058,7 +6058,7 @@ class TelegramSummaryFallbackRegressionTest(
     ) -> None:
         import os
 
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         with patch.dict(
             os.environ,
@@ -6084,7 +6084,7 @@ class TelegramSummaryFallbackRegressionTest(
     ) -> None:
         import os
 
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         def fail_summary(
             prompt,
@@ -6136,7 +6136,7 @@ class TelegramSummaryFallbackRegressionTest(
     ) -> None:
         import os
 
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         with patch.dict(
             os.environ,
@@ -6239,7 +6239,7 @@ class CoverageWarnModeScoreFlowRegressionTest(
     def test_ceiling_ignores_warn_candidate(
         self,
     ) -> None:
-        from difficulty_score_ceiling import (
+        from grading.scoring.difficulty_score_ceiling import (
             _prefer_question_type_adjusted_score,
         )
 
@@ -6270,7 +6270,7 @@ class CoverageWarnModeScoreFlowRegressionTest(
     def test_fatal_without_numeric_cap_has_normal_range(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             _apply_numeric_flags,
         )
 
@@ -6318,7 +6318,7 @@ class FinalBindingCapRegressionTest(
     def test_logic_fatal_without_applied_cap_is_not_binding(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             _apply_numeric_flags,
         )
 
@@ -6363,7 +6363,7 @@ class FinalBindingCapRegressionTest(
     def test_applied_difficulty_cap_is_binding(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             _apply_numeric_flags,
         )
 
@@ -6388,7 +6388,7 @@ class FinalBindingCapRegressionTest(
     def test_applied_nonbinding_upper_cap_uses_normal_range(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             _apply_numeric_flags,
         )
 

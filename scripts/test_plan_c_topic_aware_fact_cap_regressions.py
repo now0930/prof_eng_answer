@@ -12,7 +12,7 @@ if str(REPO_ROOT) not in sys.path:
 
 from grading.providers import gemini as gemini_grader
 import grading_agents
-import grade_output_summarizer
+import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
 
 def strong_semantic_eval():

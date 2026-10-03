@@ -7,7 +7,7 @@ from grading_agents import (
     _phase8_build_question_type_originality_scope_contract,
     _phase8_project_question_type_originality_scope,
 )
-from originality_grader import build_originality_prompt
+from grading.scoring.originality_grader import build_originality_prompt
 
 
 def qtype(qid: str) -> dict:

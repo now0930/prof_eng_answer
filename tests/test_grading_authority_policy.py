@@ -8,7 +8,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from grading_authority_policy import (
+from grading.scoring.grading_authority_policy import (
     GradingAuthorityError,
     enforce_requested_authority_mode,
     evaluate_authority_removal_gate,

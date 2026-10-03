@@ -11,7 +11,7 @@ from typing import Any, Mapping
 
 VERSION = "deterministic_authority_policy_v1"
 MARKER = "DETERMINISTIC_AUTHORITY_GATE_V1"
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_POLICY = ROOT / "calibration" / "deterministic_authority_policy.json"
 
 

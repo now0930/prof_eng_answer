@@ -67,7 +67,7 @@ def _git_head(root: Path) -> str:
     )
 
 
-_MODULE_ROOT = Path(__file__).resolve().parent
+_MODULE_ROOT = Path(__file__).resolve().parents[2]
 _ENGINE_PROCESS_STARTED_AT = _utc_now_iso()
 _ENGINE_COMMIT = _git_head(_MODULE_ROOT)
 _ROUTER_VERSION = (

@@ -9,8 +9,8 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from grade_output_summarizer import _build_payload
-from verdict_consistency import (
+from grading.scoring.grade_output_summarizer import _build_payload
+from grading.scoring.verdict_consistency import (
     enforce_final_decision_consistency,
 )
 
@@ -284,7 +284,7 @@ class CanonicalQuestionTypeAndScoreSourceV2Test(
     def test_complete_abcde_breakdown_is_authoritative(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             authoritative_abcde_breakdown_score,
             best_uncapped_numeric_score,
         )
@@ -333,7 +333,7 @@ class CanonicalQuestionTypeAndScoreSourceV2Test(
     def test_incomplete_breakdown_uses_legacy_fallback(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             authoritative_abcde_breakdown_score,
             best_uncapped_numeric_score,
         )

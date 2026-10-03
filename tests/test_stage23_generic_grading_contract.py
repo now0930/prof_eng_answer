@@ -16,7 +16,7 @@ import unittest
 from pathlib import Path
 from typing import Any
 
-from generic_grading_contract import (
+from grading.scoring.generic_grading_contract import (
     AlignmentStatus,
     ClaimRelationType,
     DERequirementClass,
@@ -252,10 +252,10 @@ class GenericEngineFixtureRedTests(unittest.TestCase):
         self.assertTrue(_source_has_function("grading/evidence/logic_check_evaluator.py", "normalize_generic_claim_relations"))
 
     def test_red_07_score_reconciler_exposes_generic_de_policy(self) -> None:
-        self.assertTrue(_source_has_function("grade_score_reconciler.py", "apply_generic_de_policy"))
+        self.assertTrue(_source_has_function("grading/scoring/grade_score_reconciler.py", "apply_generic_de_policy"))
 
     def test_red_08_final_consistency_gate_exists(self) -> None:
-        self.assertTrue(_source_has_function("verdict_consistency.py", "enforce_generic_contract_consistency"))
+        self.assertTrue(_source_has_function("grading/scoring/verdict_consistency.py", "enforce_generic_contract_consistency"))
 
     def test_red_09_runtime_provenance_process_snapshot_exists(self) -> None:
         try:
@@ -290,7 +290,7 @@ class Stage23TEngineCommitSafeDirectoryRegression(_s23t_unittest.TestCase):
 
     @classmethod
     def _module_path(cls):
-        return _s23t_pathlib.Path(__file__).resolve().parents[1] / "runtime_grading_provenance.py"
+        return _s23t_pathlib.Path(__file__).resolve().parents[1] / "grading/scoring/runtime_grading_provenance.py"
 
     @classmethod
     def _find_payload(cls, value, depth=0):

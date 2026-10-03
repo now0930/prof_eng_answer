@@ -15,7 +15,7 @@ if str(PROJECT_ROOT) not in sys.path:
         str(PROJECT_ROOT),
     )
 
-from grade_output_summarizer import _build_payload, _render
+from grading.scoring.grade_output_summarizer import _build_payload, _render
 
 
 def render_without_llm(grade: dict) -> str:
@@ -122,7 +122,7 @@ class GradeOutputFormatterRegressionTest(unittest.TestCase):
 
 class CompactFormatterCorrectRuleRegressionTest(unittest.TestCase):
     def test_fatal_correct_rule_is_used_for_compact_improvements(self):
-        from grade_output_summarizer import _build_payload, _normalise_summary, _render
+        from grading.scoring.grade_output_summarizer import _build_payload, _normalise_summary, _render
 
         grade = {
             "total_score": 1.56,

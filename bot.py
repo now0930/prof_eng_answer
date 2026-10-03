@@ -9,10 +9,10 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 from grading_agents import run_agent_pipeline
-from grade_output_summarizer import summarize_grade_for_telegram
+from grading.scoring.grade_output_summarizer import summarize_grade_for_telegram
 from grading.providers.settings import get_chat_provider, set_chat_provider, reset_chat_provider, provider_label
-from grade_score_reconciler import reconcile_grade_score
-from grade_submission_normalizer import (
+from grading.scoring.grade_score_reconciler import reconcile_grade_score
+from grading.scoring.grade_submission_normalizer import (
     attach_submission_normalization,
     normalize_grade_submission,
 )
@@ -836,7 +836,7 @@ def grade_answer(chat_id, raw_text, state):
             normalization_evidence,
         )
         if parsed.get("marker") != "DETERMINISTIC_GRADING_PRIMARY_V1":
-            from verdict_consistency import (
+            from grading.scoring.verdict_consistency import (
                 enforce_final_decision_consistency,
             )
             parsed = enforce_final_decision_consistency(
@@ -991,7 +991,7 @@ def format_result(parsed, sid=None):
         parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1"
     )
     if not deterministic_grade:
-        from verdict_consistency import (
+        from grading.scoring.verdict_consistency import (
             enforce_final_decision_consistency,
         )
 
@@ -1334,7 +1334,7 @@ def _format_question_type_coverage_display(grade):
     if not isinstance(grade, dict):
         return ""
 
-    from verdict_consistency import (
+    from grading.scoring.verdict_consistency import (
         enforce_final_decision_consistency,
     )
 

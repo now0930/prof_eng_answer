@@ -11,8 +11,8 @@ MODULES = (
     ROOT / "grading/routing/question_type_coverage_adapter.py",
     ROOT / "grading/evidence/verified_defect_reconciliation.py",
     ROOT / "grading_agents.py",
-    ROOT / "grade_output_summarizer.py",
-    ROOT / "verdict_consistency.py",
+    ROOT / "grading/scoring/grade_output_summarizer.py",
+    ROOT / "grading/scoring/verdict_consistency.py",
 )
 
 

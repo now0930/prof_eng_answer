@@ -14,7 +14,7 @@ def write_json(path, data):
 
 
 def load_active_config(base_dir=None):
-    base = Path(base_dir) if base_dir else Path(__file__).resolve().parent
+    base = Path(base_dir) if base_dir else Path(__file__).resolve().parents[2]
     profile_path = base / "rubrics" / "active_profile.json"
 
     if not profile_path.exists():

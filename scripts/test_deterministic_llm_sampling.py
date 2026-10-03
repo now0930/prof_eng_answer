@@ -9,7 +9,7 @@ from unittest import mock
 
 from grading.providers import clova as clova_grader
 from grading.providers import gemini as gemini_grader
-import originality_grader
+import grading.scoring.originality_grader as originality_grader
 from grading.providers.sampling import (
     SAMPLING_CONTRACT_VERSION,
     build_llm_request_contract,
@@ -304,7 +304,7 @@ class DeterministicSamplingTests(
             },
             clear=False,
         ), mock.patch(
-            "originality_grader."
+            "grading.scoring.originality_grader."
             "urllib.request.urlopen",
             side_effect=fake_urlopen,
         ):
@@ -557,7 +557,7 @@ class OllamaCapAdjudicationTests(
     def test_cap_adjudicator_keeps_metadata(
         self,
     ):
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             call_llm_cap_adjudicator,
         )
 
@@ -609,7 +609,7 @@ class OllamaCapAdjudicationTests(
     def test_schema_repair_records_requests(
         self,
     ):
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             call_llm_cap_adjudicator,
         )
 

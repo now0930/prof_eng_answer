@@ -84,11 +84,11 @@ trap restore_transient_reports EXIT
 echo "===== py_compile: core entrypoints ====="
 python3 -m py_compile \
   bot.py \
-  grade_output_summarizer.py \
+  grading/scoring/grade_output_summarizer.py \
   grading/evidence/logic_check_evaluator.py \
-  grade_score_reconciler.py \
+  grading/scoring/grade_score_reconciler.py \
   grading_agents.py \
-  originality_grader.py \
+  grading/scoring/originality_grader.py \
   rubric_registry.py \
   rubric_bank_paths.py \
   scripts/rubric_manager.py \
@@ -110,7 +110,7 @@ python3 -m py_compile \
   grading/scoring/deterministic_replay_audit.py \
   grading/routing/local_semantic_resolver.py \
   grading/scoring/deterministic_grading_shadow.py \
-  grading_authority_policy.py \
+  grading/scoring/grading_authority_policy.py \
   grading/evidence/fatal_taxonomy.py \
   grading/evidence/engineering_invariant_evaluator.py \
   grading/scoring/deterministic_requirement_evaluator.py \
@@ -121,12 +121,12 @@ python3 -m py_compile \
   grading/evidence/fact_anchor_evidence_adapter.py \
   scripts/check_deterministic_authority_gate.py \
   scripts/run_deterministic_stability_gate.py \
-  evaluation_ledger.py \
-  evidence_calibration.py \
-  verified_evidence_score_calibration.py \
-  verified_correctness_score_cap.py \
-  high_score_eligibility.py \
-  persisted_grade_replay.py \
+  grading/scoring/evaluation_ledger.py \
+  grading/scoring/evidence_calibration.py \
+  grading/scoring/verified_evidence_score_calibration.py \
+  grading/scoring/verified_correctness_score_cap.py \
+  grading/scoring/high_score_eligibility.py \
+  grading/scoring/persisted_grade_replay.py \
   scripts/replay_persisted_grade.py \
   scripts/replay_sil_issue1_session.py \
   scripts/release_candidate.py \
@@ -682,7 +682,7 @@ _stage7_repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 grep -Fq 'NATIVE_SEMANTIC_EVIDENCE_SCORING_V1_RUNTIME' \
   "$_stage7_repo_root/grading_agents.py"
 grep -Fq 'NATIVE_SEMANTIC_OBSERVABILITY_PROJECTION_V2' \
-  "$_stage7_repo_root/grade_output_summarizer.py"
+  "$_stage7_repo_root/grading/scoring/grade_output_summarizer.py"
 grep -Fq 'QTYPE_PHASE8_CONSTRAINT_ONLY_V1' \
   "$_stage7_repo_root/grading_agents.py"
 # STAGE7_PRODUCTION_EVIDENCE_SHAPE_V2_RELEASE_GUARD
@@ -690,4 +690,4 @@ _stage7_v2_repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 grep -Fq 'STAGE7_PRODUCTION_EVIDENCE_SHAPE_V2' \
   "$_stage7_v2_repo_root/grading_agents.py"
 grep -Fq 'STAGE7_BUILD_PAYLOAD_NATIVE_OBSERVABILITY_V2' \
-  "$_stage7_v2_repo_root/grade_output_summarizer.py"
+  "$_stage7_v2_repo_root/grading/scoring/grade_output_summarizer.py"

@@ -59,7 +59,7 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         self.assertGreater(grade["total_score"], 0.0)
 
     def test_reconciler_cannot_call_llm_or_change_deterministic_grade(self):
-        from grade_score_reconciler import reconcile_grade_score
+        from grading.scoring.grade_score_reconciler import reconcile_grade_score
 
         grade = {
             "marker": "DETERMINISTIC_GRADING_PRIMARY_V1",

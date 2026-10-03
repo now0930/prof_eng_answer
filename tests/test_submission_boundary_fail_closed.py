@@ -8,7 +8,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from grade_submission_normalizer import (
+from grading.scoring.grade_submission_normalizer import (
     attach_submission_normalization,
     normalize_grade_submission,
 )
@@ -19,7 +19,7 @@ from grading_agents import (
     _phase3_extract_question_text,
     _phase8_run_originality_evaluator,
 )
-from grading_identity import build_grading_identity
+from grading.scoring.grading_identity import build_grading_identity
 
 
 SIL_SUBMISSION = """/grade

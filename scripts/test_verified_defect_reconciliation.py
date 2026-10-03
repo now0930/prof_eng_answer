@@ -5,7 +5,7 @@ import json
 import unittest
 from pathlib import Path
 
-import grade_output_summarizer
+import grading.scoring.grade_output_summarizer as grade_output_summarizer
 from grading.evidence.control_valve_correctness_bridge import (
     merge_control_valve_findings_into_evidence,
 )

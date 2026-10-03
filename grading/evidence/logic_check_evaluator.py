@@ -8,7 +8,7 @@ from typing import Any
 
 from rubric_bank_paths import resolve_rubric_bank_path
 
-from generic_grading_contract import (
+from grading.scoring.generic_grading_contract import (
     AlignmentStatus,
     ClaimRelationAssessment,
     ClaimRelationType,
@@ -6434,7 +6434,7 @@ def _logic_apply_fatal_bc_score_policy(
 
     # Canonical final writer synchronizes total_score, final_total_score,
     # score_range and every threshold flag.
-    from grade_score_reconciler import (
+    from grading.scoring.grade_score_reconciler import (
         _apply_numeric_flags,
     )
 

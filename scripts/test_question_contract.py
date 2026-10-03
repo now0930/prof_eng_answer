@@ -8,7 +8,7 @@ from pathlib import Path
 from unittest import mock
 
 import grading_agents
-from grading_identity import (
+from grading.scoring.grading_identity import (
     build_grading_identity,
 )
 from grading.routing.question_contract import (

@@ -4,7 +4,7 @@ from __future__ import annotations
 import copy
 import unittest
 
-from grade_score_reconciler import _apply_numeric_flags
+from grading.scoring.grade_score_reconciler import _apply_numeric_flags
 from grading_agents import (
     _phase8_normalize_originality_evaluation,
 )

@@ -350,7 +350,7 @@ class StructuredDefectFinalProjectionPriorityTest(
     def test_existing_reconciled_defect_controls_public_projection(
         self,
     ) -> None:
-        from verdict_consistency import (
+        from grading.scoring.verdict_consistency import (
             enforce_final_decision_consistency,
         )
 

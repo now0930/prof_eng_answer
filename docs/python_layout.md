@@ -38,7 +38,8 @@ the deterministic primary authority.
 - `grading/evidence/`: extracted claims, facts, formulas, engineering
   invariants, logic checks, and verified defect evidence.
 - `grading/scoring/`: deterministic requirement evaluation, score evidence,
-  score engine, primary grade, and replay/shadow checks.
+  score engine, primary grade, score policy, output, calibration, and
+  replay/shadow checks.
 - `scripts/`: release gates, commands, audit tools, and historical regression
   scripts. Existing script paths are part of the release contract.
 - `tests/`: focused contracts, integration checks, and historical stage

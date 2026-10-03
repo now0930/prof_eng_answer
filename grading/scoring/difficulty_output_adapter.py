@@ -9,7 +9,7 @@ from grading.routing.question_type_output_adapter import attach_question_type_v2
 #!/usr/bin/env python3
 from typing import Any, Dict, List, Optional
 
-from difficulty_strategy import summarize_question_strategy, get_profile_policy
+from grading.scoring.difficulty_strategy import summarize_question_strategy, get_profile_policy
 
 
 def _as_list(value) -> List[str]:
@@ -256,7 +256,7 @@ def _topic_importance_strategy_from_topic_id(topic_id: str | None, question_text
 
     return None
 
-from explicit_requirement_cap import apply_explicit_requirement_hard_cap
+from grading.scoring.explicit_requirement_cap import apply_explicit_requirement_hard_cap
 
 
 def attach_difficulty_strategy_to_grade(

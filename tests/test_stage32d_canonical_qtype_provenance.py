@@ -4,10 +4,10 @@ from __future__ import annotations
 from copy import deepcopy
 from pathlib import Path
 
-from difficulty_output_adapter import (
+from grading.scoring.difficulty_output_adapter import (
     attach_difficulty_strategy_to_grade,
 )
-from explicit_requirement_cap import (
+from grading.scoring.explicit_requirement_cap import (
     _walk_find_question_type_coverage
     as cap_walk,
     evaluate_explicit_requirement_hard_cap,

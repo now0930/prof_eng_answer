@@ -28,7 +28,7 @@ PARITY_FILES = (
     "grading/routing/question_type_router.py",
     "grading/evidence/logic_check_evaluator.py",
     "grading/evidence/logic_llm_verifier.py",
-    "grade_score_reconciler.py",
+    "grading/scoring/grade_score_reconciler.py",
     "grading/evidence/verified_defect_reconciliation.py",
 )
 VALIDATION_ENV_KEYS = (

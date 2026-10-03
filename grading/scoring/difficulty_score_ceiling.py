@@ -3,7 +3,7 @@ import os
 import re
 from typing import Any, Dict, List, Optional
 
-from difficulty_strategy import summarize_question_strategy
+from grading.scoring.difficulty_strategy import summarize_question_strategy
 
 
 def _to_float(value, default=None):

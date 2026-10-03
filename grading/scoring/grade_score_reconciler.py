@@ -19,7 +19,7 @@ from __future__ import annotations
 import json
 from typing import Any, Callable
 
-from generic_grading_contract import (
+from grading.scoring.generic_grading_contract import (
     DERequirementClass,
     classify_de_requirement,
     de_penalty_allowed,
@@ -1276,7 +1276,7 @@ def _apply_numeric_flags(parsed: JsonDict) -> JsonDict:
     canonical final writer for final_total_score, score_range, and threshold
     flags.
     """
-    from explicit_requirement_cap import (
+    from grading.scoring.explicit_requirement_cap import (
         enforce_existing_explicit_requirement_cap,
     )
 

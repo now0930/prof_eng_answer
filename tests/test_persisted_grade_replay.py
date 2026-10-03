@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from persisted_grade_replay import restore_retired_volume_policy_for_replay
+from grading.scoring.persisted_grade_replay import restore_retired_volume_policy_for_replay
 
 
 def test_legacy_volume_replay_recovers_recorded_base_score_only_from_metadata() -> None:
