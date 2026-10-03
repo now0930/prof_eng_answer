@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
   "title_ko": "조절밸브 유량특성과 밸브 권한도",
-  "revision": 2,
+  "revision": 6,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_authority_rangeability_gain_installed_performance",
     "source_files": {
@@ -59,6 +59,54 @@
       "page": null,
       "section": null,
       "updated_at": "2026-08-03T02:59:35+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:7517",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
+      "source_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
+      "title": "inherent, installed flow characteristic",
+      "version": "7ddc0baef5f974b57e123e8bf62426aded4619e5f6eedf1225f1b2e5b8666624",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-22T13:36:10+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:7531",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "title": "butterfly valve",
+      "version": "f024ef30d922f4a8ea5674b199a0fb33f23ae766b222f2244e1eeab9b8bac755",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-24T21:03:58+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:46d21b8fd13db9db84ee82c547a47c36",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/butterfly_valve.pdf",
+      "title": "butterfly_valve",
+      "version": "2025-04-24T21:03:36",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-24T21:03:36+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e191ce9a91f9ad90bfe51d3586b6492a",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/Butterfly-Valve-Types-Wafer-Lug-Double-Offset-and-Triple-Offset-Types.pdf",
+      "title": "Butterfly Valve Types – Wafer, Lug, Double Offset and Triple Offset Types",
+      "version": "2024-08-26T15:21:29",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-26T15:21:29+00:00",
       "verification_status": "unverified"
     }
   ],
