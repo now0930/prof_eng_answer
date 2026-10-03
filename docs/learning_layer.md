@@ -45,6 +45,12 @@ accepts a pending item in that day's queue and marks it completed; the next
 day gets a newly selected queue. This keeps the daily target bounded even if
 the learner reopens the command repeatedly.
 
+A new Topic can be marked reviewed before the learner has submitted a graded
+answer. Its next due date is stored separately from scored attempts, so
+reviewing it does not invent a score or diagnosis. Once due, it returns as a
+long-unreviewed Topic. A source change is treated as new only when it happened
+after the latest attempt or completed review.
+
 The Telegram adapter uses `chat_id` as the learner scope. Every successful
 grade with a routed Topic is recorded after `grade.json` has been written. A
 history write failure is logged and does not change or block the grade. `/review`

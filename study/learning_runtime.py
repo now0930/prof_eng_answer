@@ -69,9 +69,27 @@ def _topic_masters(master_directory: str | Path) -> dict[str, dict[str, Any]]:
     return result
 
 
+def _master_question(
+    master: dict[str, Any],
+    repository_root: str | Path,
+) -> tuple[str | None, str]:
+    sources = load_legacy_topic_sources(repository_root, master)
+    model_answer = sources.get("model_answer", {})
+    examples = model_answer.get("question_examples")
+    if not isinstance(examples, list) or not examples:
+        patterns = model_answer.get("expected_question_patterns")
+        examples = [
+            row.get("pattern") for row in patterns
+            if isinstance(row, dict) and isinstance(row.get("pattern"), str)
+        ] if isinstance(patterns, list) else []
+    question_text = next((item.strip() for item in examples if isinstance(item, str) and item.strip()), "")
+    return (_question_id(question_text, "") if question_text else None), question_text
+
+
 def _review_candidates(
     attempts: list[dict[str, Any]],
     masters: dict[str, dict[str, Any]],
+    unattempted_reviews: dict[str, dict[str, str]],
     *,
     now: datetime,
     repository_root: str | Path,
@@ -101,6 +119,8 @@ def _review_candidates(
         master = masters.get(topic_id)
         if master is not None:
             attempt_at = _parse_time(row["attempted_at"])
+            last_review = row.get("last_reviewed_at")
+            baseline = max(attempt_at, _parse_time(last_review)) if last_review else attempt_at
             changed_after_attempt = []
             for source in master.get("sources", []):
                 updated_at = source.get("updated_at") if isinstance(source, dict) else None
@@ -109,7 +129,7 @@ def _review_candidates(
                         source_time = _parse_time(updated_at)
                     except ValueError:
                         continue
-                    if source_time > attempt_at:
+                    if baseline < source_time <= now:
                         changed_after_attempt.append(source_time)
             if changed_after_attempt:
                 recently_changed.append((max(changed_after_attempt), topic_id, row))
@@ -129,18 +149,12 @@ def _review_candidates(
 
     for topic_id in sorted(set(masters) - set(by_topic)):
         master = masters[topic_id]
-        sources = load_legacy_topic_sources(repository_root, master)
-        model_answer = sources.get("model_answer", {})
-        examples = model_answer.get("question_examples")
-        if not isinstance(examples, list) or not examples:
-            patterns = model_answer.get("expected_question_patterns")
-            examples = [
-                row.get("pattern") for row in patterns
-                if isinstance(row, dict) and isinstance(row.get("pattern"), str)
-            ] if isinstance(patterns, list) else []
-        question_text = next((item.strip() for item in examples if isinstance(item, str) and item.strip()), "")
-        question_id = _question_id(question_text, "") if question_text else None
-        candidates.append({"topic_id": topic_id, "reason": "new_topic", "question_id": question_id, "question_text": question_text})
+        review = unattempted_reviews.get(topic_id)
+        if review is not None and _parse_time(review["next_review_at"]) > now:
+            continue
+        question_id, question_text = _master_question(master, repository_root)
+        reason = "long_unreviewed_topic" if review is not None else "new_topic"
+        candidates.append({"topic_id": topic_id, "reason": reason, "question_id": question_id, "question_text": question_text})
     return candidates
 
 
@@ -160,8 +174,11 @@ def create_daily_review_queue(
     if existing_queue is not None:
         return existing_queue, titles
     attempts = history.list_attempts(learner_id=learner_id)
+    unattempted_reviews = history.list_unattempted_topic_reviews(learner_id)
     repository_root = Path(master_directory).resolve().parent
-    candidates = _review_candidates(attempts, masters, now=now, repository_root=repository_root)
+    candidates = _review_candidates(
+        attempts, masters, unattempted_reviews, now=now, repository_root=repository_root
+    )
     queue = build_review_queue(candidates, generated_at=generated_at)
     queue = history.save_daily_queue(learner_id, queue_date, queue)
     return queue, titles
@@ -237,7 +254,14 @@ def complete_topic_review(
     except ValueError as exc:
         raise LearningRuntimeError(str(exc)) from exc
     try:
-        return history.review_latest_for_topic(
+        if history.list_attempts(learner_id=learner_id, topic_id=topic_id):
+            return history.review_latest_for_topic(
+                learner_id,
+                topic_id,
+                last_reviewed_at=timestamp,
+                next_review_at=next_review_at,
+            )
+        return history.schedule_unattempted_topic_review(
             learner_id,
             topic_id,
             last_reviewed_at=timestamp,

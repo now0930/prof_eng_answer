@@ -58,6 +58,13 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
             assert "문제:" in messages[-1]
             bot.handle_text({"text": f"/review done {topic_id}"}, user_id, state)
             assert "복습 완료" in messages[-1]
+            new_topic = next(
+                item["topic_id"] for item in TrainingHistoryStore(base / "training_history.sqlite3")
+                .get_daily_queue(str(user_id), "2026-10-03")["items"]
+                if item["reason"] == "new_topic"
+            )
+            bot.handle_text({"text": f"/review done {new_topic}"}, user_id, state)
+            assert "복습 완료" in messages[-1]
 
         assert returned_sid == sid
         assert returned_grade["final_total_score"] == 13.5
@@ -76,6 +83,8 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
         )
         assert daily_queue is not None
         assert next(item for item in daily_queue["items"] if item["topic_id"] == topic_id)["status"] == "completed"
+        assert all(item["status"] == "completed" for item in daily_queue["items"])
+        assert len(rows) == 1
 
 
 

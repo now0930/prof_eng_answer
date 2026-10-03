@@ -124,6 +124,15 @@ class TrainingHistoryStore:
                     PRIMARY KEY (learner_id, queue_date)
                 )"""
             )
+            connection.execute(
+                """CREATE TABLE IF NOT EXISTS unattempted_topic_reviews (
+                    learner_id TEXT NOT NULL,
+                    topic_id TEXT NOT NULL,
+                    last_reviewed_at TEXT NOT NULL,
+                    next_review_at TEXT NOT NULL,
+                    PRIMARY KEY (learner_id, topic_id)
+                )"""
+            )
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database_path)
@@ -229,6 +238,49 @@ class TrainingHistoryStore:
                 (row["attempt_id"],),
             ).fetchone()
         return self._row_to_dict(updated)
+
+    def list_unattempted_topic_reviews(self, learner_id: str) -> dict[str, dict[str, str]]:
+        with self._connect() as connection:
+            rows = connection.execute(
+                "SELECT topic_id, last_reviewed_at, next_review_at FROM unattempted_topic_reviews WHERE learner_id = ?",
+                (learner_id,),
+            ).fetchall()
+        return {
+            row["topic_id"]: {
+                "last_reviewed_at": row["last_reviewed_at"],
+                "next_review_at": row["next_review_at"],
+            }
+            for row in rows
+        }
+
+    def schedule_unattempted_topic_review(
+        self,
+        learner_id: str,
+        topic_id: str,
+        *,
+        last_reviewed_at: str,
+        next_review_at: str,
+    ) -> dict[str, str]:
+        if not learner_id.strip() or not topic_id.strip():
+            raise TrainingHistoryError("learner_id and topic_id are required")
+        last_reviewed = _timestamp(last_reviewed_at, "last_reviewed_at")
+        next_review = _timestamp(next_review_at, "next_review_at")
+        with self._connect() as connection:
+            connection.execute(
+                """INSERT INTO unattempted_topic_reviews
+                   (learner_id, topic_id, last_reviewed_at, next_review_at)
+                   VALUES (?, ?, ?, ?)
+                   ON CONFLICT (learner_id, topic_id) DO UPDATE SET
+                     last_reviewed_at = excluded.last_reviewed_at,
+                     next_review_at = excluded.next_review_at""",
+                (learner_id, topic_id, last_reviewed, next_review),
+            )
+        return {
+            "learner_id": learner_id,
+            "topic_id": topic_id,
+            "last_reviewed_at": last_reviewed or "",
+            "next_review_at": next_review or "",
+        }
 
     def get_daily_queue(self, learner_id: str, queue_date: str) -> dict[str, Any] | None:
         with self._connect() as connection:
