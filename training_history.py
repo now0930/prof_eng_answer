@@ -116,6 +116,14 @@ class TrainingHistoryStore:
                 connection.execute("ALTER TABLE training_history ADD COLUMN session_id TEXT NOT NULL DEFAULT ''")
             connection.execute("CREATE INDEX IF NOT EXISTS idx_training_history_due ON training_history(next_review_at, review_status)")
             connection.execute("CREATE INDEX IF NOT EXISTS idx_training_history_learner_topic_v1 ON training_history(learner_id, topic_id, attempted_at)")
+            connection.execute(
+                """CREATE TABLE IF NOT EXISTS daily_review_queues (
+                    learner_id TEXT NOT NULL,
+                    queue_date TEXT NOT NULL,
+                    queue_json TEXT NOT NULL,
+                    PRIMARY KEY (learner_id, queue_date)
+                )"""
+            )
 
     def _connect(self) -> sqlite3.Connection:
         connection = sqlite3.connect(self.database_path)
@@ -221,3 +229,43 @@ class TrainingHistoryStore:
                 (row["attempt_id"],),
             ).fetchone()
         return self._row_to_dict(updated)
+
+    def get_daily_queue(self, learner_id: str, queue_date: str) -> dict[str, Any] | None:
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT queue_json FROM daily_review_queues WHERE learner_id = ? AND queue_date = ?",
+                (learner_id, queue_date),
+            ).fetchone()
+        return json.loads(row["queue_json"]) if row else None
+
+    def save_daily_queue(self, learner_id: str, queue_date: str, queue: dict[str, Any]) -> dict[str, Any]:
+        payload = json.dumps(queue, ensure_ascii=False, sort_keys=True)
+        with self._connect() as connection:
+            connection.execute(
+                "INSERT OR IGNORE INTO daily_review_queues (learner_id, queue_date, queue_json) VALUES (?, ?, ?)",
+                (learner_id, queue_date, payload),
+            )
+            row = connection.execute(
+                "SELECT queue_json FROM daily_review_queues WHERE learner_id = ? AND queue_date = ?",
+                (learner_id, queue_date),
+            ).fetchone()
+        return json.loads(row["queue_json"])
+
+    def complete_daily_queue_item(self, learner_id: str, queue_date: str, topic_id: str) -> dict[str, Any]:
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT queue_json FROM daily_review_queues WHERE learner_id = ? AND queue_date = ?",
+                (learner_id, queue_date),
+            ).fetchone()
+            if row is None:
+                raise TrainingHistoryError("no daily review queue exists")
+            queue = json.loads(row["queue_json"])
+            match = next((item for item in queue["items"] if item["topic_id"] == topic_id), None)
+            if match is None:
+                raise TrainingHistoryError("topic is not in today's review queue")
+            match["status"] = "completed"
+            connection.execute(
+                "UPDATE daily_review_queues SET queue_json = ? WHERE learner_id = ? AND queue_date = ?",
+                (json.dumps(queue, ensure_ascii=False, sort_keys=True), learner_id, queue_date),
+            )
+        return queue

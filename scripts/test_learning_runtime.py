@@ -39,10 +39,20 @@ def test_grade_history_queue_and_completion_cycle() -> None:
         assert len(output["queue"]["items"]) == 2
         assert output["queue"]["items"][0]["reason"] == "weak_topic"
         assert output["queue"]["items"][1]["question_text"]
+        assert all(item["status"] == "pending" for item in output["queue"]["items"])
         assert len(history.list_attempts(learner_id="telegram-chat-100")) == 1
         assert history.list_attempts(learner_id="telegram-chat-100")[0]["question_text"] == "Define the topic and give an application."
         assert len(history.list_attempts(learner_id="another-chat")) == 0
         assert (base / "session-1" / "learning_history.json").is_file()
+
+        # Reopening the queue on the same local date must not replenish it.
+        same_day_queue, _ = create_daily_review_queue(
+            history,
+            learner_id="telegram-chat-100",
+            master_directory=ROOT / "master_topic_packs",
+            generated_at="2026-10-03T23:00:00+09:00",
+        )
+        assert same_day_queue == output["queue"]
 
         completion_time = "2026-10-04T10:00:00+09:00"
         reviewed = complete_topic_review(

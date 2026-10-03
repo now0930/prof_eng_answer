@@ -71,6 +71,11 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
         assert rows[0]["score"] == 13.5
         assert rows[0]["diagnosis"]["weaknesses"] == ["현장 검증 근거 부족"]
         assert rows[0]["session_id"] == sid
+        daily_queue = TrainingHistoryStore(base / "training_history.sqlite3").get_daily_queue(
+            str(user_id), "2026-10-03"
+        )
+        assert daily_queue is not None
+        assert next(item for item in daily_queue["items"] if item["topic_id"] == topic_id)["status"] == "completed"
 
 
 

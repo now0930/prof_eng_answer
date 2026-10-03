@@ -154,11 +154,16 @@ def create_daily_review_queue(
     """Return the current two-item queue and its topic-title lookup."""
     now = _parse_time(generated_at)
     masters = _topic_masters(master_directory)
+    queue_date = now.date().isoformat()
+    existing_queue = history.get_daily_queue(learner_id, queue_date)
+    titles = {topic_id: master["title_ko"] for topic_id, master in masters.items()}
+    if existing_queue is not None:
+        return existing_queue, titles
     attempts = history.list_attempts(learner_id=learner_id)
     repository_root = Path(master_directory).resolve().parent
     candidates = _review_candidates(attempts, masters, now=now, repository_root=repository_root)
     queue = build_review_queue(candidates, generated_at=generated_at)
-    titles = {topic_id: master["title_ko"] for topic_id, master in masters.items()}
+    queue = history.save_daily_queue(learner_id, queue_date, queue)
     return queue, titles
 
 

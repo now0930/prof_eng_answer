@@ -92,6 +92,7 @@ def build_review_queue(
                 "slot": slot,
                 "question_id": item["question_id"],
                 "question_text": item["question_text"],
+                "status": "pending",
             }
             for item, slot in chosen
         ],

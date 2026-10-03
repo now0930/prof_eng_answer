@@ -38,6 +38,13 @@ defaults to a weakness item and a retention item, each from a distinct Topic.
 Selection candidates are supplied by the caller so ranking policy can evolve
 independently from persistence.
 
+The first `/review` request for a learner on a local calendar day persists a
+daily queue snapshot in SQLite. Subsequent requests that day return the same
+maximum-two items rather than replenishing the queue. `/review done` only
+accepts a pending item in that day's queue and marks it completed; the next
+day gets a newly selected queue. This keeps the daily target bounded even if
+the learner reopens the command repeatedly.
+
 The Telegram adapter uses `chat_id` as the learner scope. Every successful
 grade with a routed Topic is recorded after `grade.json` has been written. A
 history write failure is logged and does not change or block the grade. `/review`

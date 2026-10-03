@@ -15,13 +15,14 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["topic_id", "reason", "slot", "question_id"],
+        "required": ["topic_id", "reason", "slot", "question_id", "status"],
         "properties": {
           "topic_id": { "type": "string", "minLength": 8 },
           "reason": { "enum": ["weak_topic", "long_unreviewed_topic", "recently_changed_topic", "new_topic"] },
           "slot": { "enum": ["weakness", "retention"] },
           "question_id": { "type": ["string", "null"] },
-          "question_text": { "type": "string" }
+          "question_text": { "type": "string" },
+          "status": { "enum": ["pending", "completed"] }
         }
       }
     }

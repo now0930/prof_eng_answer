@@ -1799,11 +1799,20 @@ def _handle_review_command(chat_id, command_text):
     if len(arguments) == 3 and arguments[1].lower() == "done":
         topic_id = arguments[2]
         try:
+            queue_date = datetime.now().astimezone().date().isoformat()
+            queue = history.get_daily_queue(str(chat_id), queue_date)
+            if queue is None or not any(
+                item["topic_id"] == topic_id and item.get("status") == "pending"
+                for item in queue["items"]
+            ):
+                send_message(chat_id, "해당 Topic은 오늘 복습 Queue에 없거나 이미 완료되었습니다. /review 로 확인해 주세요.")
+                return
             record = complete_topic_review(
                 history,
                 learner_id=str(chat_id),
                 topic_id=topic_id,
             )
+            history.complete_daily_queue_item(str(chat_id), queue_date, topic_id)
         except LearningRuntimeError as exc:
             send_message(chat_id, f"복습 완료를 기록하지 못했습니다: {exc}")
             return
@@ -1843,7 +1852,7 @@ def _handle_review_command(chat_id, command_text):
         title = titles.get(item["topic_id"], item["topic_id"])
         lines.append(
             f"{index}. [{labels[item['reason']]}] {title}\n"
-            f"   topic_id: {item['topic_id']}"
+            f"   topic_id: {item['topic_id']} ({'완료' if item.get('status') == 'completed' else '대기'})"
         )
         if item.get("question_text"):
             lines.append(f"   문제: {item['question_text']}")
