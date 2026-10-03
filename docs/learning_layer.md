@@ -42,6 +42,8 @@ change the finalized score or verdict.
 - Production persistence and queue integration: `study/learning_runtime.py`, called
   after `grade.json` is finalized by `bot.py`
 - WordPress references and approval proposals: `study/source_update.py`
+- Curated Topic-content change proposal contract:
+  `study/content_update.py` and `schemas/content_update_proposal.schema.json`
 - WordPress category ingestion, source catalog, media-version tracking, local
   PDF text extraction/OCR, and review commands: `scripts/wordpress_catalog.py`
 - Local generated catalog: `data/wordpress_sources.sqlite3` (ignored runtime
@@ -138,6 +140,13 @@ not silently enter any View: a later content-curation proposal should identify
 the affected Fact/section, show the source diff and evidence, and require
 approval before curated Topic content changes. This separates provenance
 maintenance from knowledge-content changes.
+
+The proposal-only content contract is now defined separately from the source
+reference proposal. It pins the Master revision, target source key/record/field,
+before and proposed text, source ID/URL/version/hash, locator and supporting
+excerpt, and derives the impacted Views. Proposal creation does not apply the
+diff; explicit approval and a stale-revision-safe apply operation remain a
+later stage.
 
 The history database path is supplied by the caller. Each attempt stores its
 question and topic identity, attempt time, final score, structured diagnosis,
