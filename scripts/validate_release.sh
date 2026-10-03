@@ -546,6 +546,7 @@ python3 -B scripts/test_pid_piping_instrumentation_diagram_symbols_tags_loops_co
 
 echo "----- host regression: module relocation rewrite safety -----"
 python3 -B scripts/test_module_rewrite_safety.py
+python3 -B scripts/test_python_layout_contract.py
 
 echo "----- host regression: learning runtime and bot history integration -----"
 python3 -B scripts/test_learning_runtime.py

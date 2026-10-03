@@ -1,9 +1,11 @@
 # Python module layout
 
-The Telegram entry point is `bot.py`; `grading_agents.py` remains the public
-grading pipeline entry point. Implementation modules live in domain packages
-under `grading/`, and their import paths are updated across runtime and tests.
-The deterministic grading authority is unchanged.
+The only repository-root Python files are the Telegram entry point `bot.py`
+and the public grading pipeline entry point `grading_agents.py`.
+Implementation modules live in domain packages under `grading/`, and their
+import paths are updated across runtime and tests. The deterministic grading
+authority is unchanged. `scripts/test_python_layout_contract.py` guards this
+boundary in the release gate.
 
 ## Study package
 
@@ -46,14 +48,16 @@ the deterministic primary authority.
 - `grading/quality/`: expert accuracy benchmark, calibration dataset,
   Golden-risk audit, and accuracy release policy.
 - `scripts/`: release gates, commands, audit tools, and historical regression
-  scripts. Existing script paths are part of the release contract.
+  scripts. One-off README and encoding utilities live in
+  `scripts/maintenance/`. Existing script paths are part of the release
+  contract.
 - `tests/`: focused contracts, integration checks, and historical stage
   regressions previously kept at the repository root.
 - `schemas/`: JSON contracts for the study layer and other data.
 - `master_topic_packs/`: representative Master records.
 - `rubrics/`: existing Topic Pack and grading data.
 
-Further root-module moves should be made by domain. Compatibility imports are
-needed only when callers still depend on an old import name. A move must
+Further implementation moves should be made by domain. Compatibility imports
+are needed only when callers still depend on an old import name. A move must
 preserve `python3 bot.py`, script paths, test discovery, and the persisted
 grading output.
