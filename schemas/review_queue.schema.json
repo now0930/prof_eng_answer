@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/review_queue.schema.json",
+  "title": "Daily Review Queue",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["queue_id", "generated_at", "daily_target", "items"],
+  "properties": {
+    "queue_id": { "type": "string", "minLength": 1 },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "daily_target": { "const": 2 },
+    "items": {
+      "type": "array",
+      "maxItems": 2,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["topic_id", "reason", "slot", "question_id"],
+        "properties": {
+          "topic_id": { "type": "string", "minLength": 8 },
+          "reason": { "enum": ["weak_topic", "long_unreviewed_topic", "recently_changed_topic", "new_topic"] },
+          "slot": { "enum": ["weakness", "retention"] },
+          "question_id": { "type": ["string", "null"] }
+        }
+      }
+    }
+  }
+}
