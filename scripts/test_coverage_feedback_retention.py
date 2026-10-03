@@ -38,7 +38,7 @@ def _write_session(
         '{"score": 17}',
         encoding="utf-8",
     )
-    (session / "grading.routing.semantic_router_shadow.json").write_text(
+    (session / "semantic_router_shadow.json").write_text(
         '{"ok": true}',
         encoding="utf-8",
     )
@@ -132,7 +132,7 @@ class CoverageFeedbackRetentionTest(unittest.TestCase):
             self.assertTrue(
                 (
                     session
-                    / "grading.routing.semantic_router_shadow.json"
+                    / "semantic_router_shadow.json"
                 ).is_file()
             )
             self.assertTrue(session.is_dir())

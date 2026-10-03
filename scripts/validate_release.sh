@@ -85,7 +85,7 @@ echo "===== py_compile: core entrypoints ====="
 python3 -m py_compile \
   bot.py \
   grade_output_summarizer.py \
-  logic_check_evaluator.py \
+  grading/evidence/logic_check_evaluator.py \
   grade_score_reconciler.py \
   grading_agents.py \
   originality_grader.py \
@@ -103,22 +103,22 @@ python3 -m py_compile \
   scripts/regrade_expert_accuracy_seed.py \
   expert_accuracy_benchmark.py \
   accuracy_release_gate.py \
-  canonical_grading_evidence.py \
-  canonical_claim_extractor.py \
-  quantity_dimension_evaluator.py \
-  topic_machine_contract.py \
+  grading/evidence/canonical_grading_evidence.py \
+  grading/evidence/canonical_claim_extractor.py \
+  grading/evidence/quantity_dimension_evaluator.py \
+  grading/evidence/topic_machine_contract.py \
   deterministic_replay_audit.py \
   grading/routing/local_semantic_resolver.py \
   deterministic_grading_shadow.py \
   grading_authority_policy.py \
-  fatal_taxonomy.py \
-  engineering_invariant_evaluator.py \
+  grading/evidence/fatal_taxonomy.py \
+  grading/evidence/engineering_invariant_evaluator.py \
   deterministic_requirement_evaluator.py \
   deterministic_score_engine.py \
   deterministic_score_evidence.py \
   grading/routing/deterministic_topic_router.py \
   deterministic_primary_grader.py \
-  fact_anchor_evidence_adapter.py \
+  grading/evidence/fact_anchor_evidence_adapter.py \
   scripts/check_deterministic_authority_gate.py \
   scripts/run_deterministic_stability_gate.py \
   evaluation_ledger.py \
@@ -543,6 +543,9 @@ python3 -B scripts/test_physical_ai_robot_sensor_fusion_safety_topic.py
 
 echo "----- host regression: pid piping instrumentation diagram symbols tags loops control narrative -----"
 python3 -B scripts/test_pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative.py
+
+echo "----- host regression: module relocation rewrite safety -----"
+python3 -B scripts/test_module_rewrite_safety.py
 
 echo "----- host regression: learning runtime and bot history integration -----"
 python3 -B scripts/test_learning_runtime.py

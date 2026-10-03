@@ -8,7 +8,7 @@ import unittest
 from grading.providers import gemini as gemini_grader
 import grade_output_summarizer
 import grading_agents
-from general_evidence_contract import attach_general_evidence_contract
+from grading.evidence.general_evidence_contract import attach_general_evidence_contract
 from grading.routing.question_demand_contract import attach_question_demand_contract
 
 

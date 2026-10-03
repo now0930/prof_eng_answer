@@ -8,7 +8,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from engineering_invariant_evaluator import evaluate_engineering_invariants
+from grading.evidence.engineering_invariant_evaluator import evaluate_engineering_invariants
 
 
 class SoftwareEngineeringInvariantTests(unittest.TestCase):

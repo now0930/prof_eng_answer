@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import logic_check_evaluator as evaluator
+import grading.evidence.logic_check_evaluator as evaluator
 
 PRIMARY = (
     "instrumentation_control_software_lifecycle_"
@@ -153,10 +153,10 @@ class Stage25G3Test(unittest.TestCase):
 
     def evaluate(self, text: str) -> dict:
         with patch(
-            "logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH",
+            "grading.evidence.logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH",
             self.profile_bank,
         ), patch(
-            "logic_llm_verifier.verify_logic_with_llm",
+            "grading.evidence.logic_llm_verifier.verify_logic_with_llm",
             side_effect=self.fake_verify,
         ):
             return evaluator.evaluate_logic_checks(
@@ -222,7 +222,7 @@ class Stage25G3Test(unittest.TestCase):
         )
 
         with patch(
-            "logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH",
+            "grading.evidence.logic_llm_verifier.LOGIC_CHECK_PROFILE_PATH",
             self.profile_bank,
         ):
             selected = (

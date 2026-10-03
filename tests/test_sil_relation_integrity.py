@@ -9,8 +9,8 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from logic_check_evaluator import evaluate_logic_checks
-from sil_relation_integrity import (
+from grading.evidence.logic_check_evaluator import evaluate_logic_checks
+from grading.evidence.sil_relation_integrity import (
     SIL_RELATION_INTEGRITY_MARKER,
     SIL_TARGET_TOPIC_ID,
     evaluate_sil_relation_integrity,

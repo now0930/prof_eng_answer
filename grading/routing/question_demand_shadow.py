@@ -10,7 +10,7 @@ from typing import Any, Callable
 
 
 QUESTION_DEMAND_SHADOW_VERSION = "question_demand_shadow_v1"
-QUESTION_DEMAND_SHADOW_FILE = "grading.routing.question_demand_shadow.json"
+QUESTION_DEMAND_SHADOW_FILE = "question_demand_shadow.json"
 DEFAULT_MAX_DEMANDS = 12
 QUESTION_DEMAND_CACHE_VERSION = "question_demand_authoritative_cache_v1"
 QUESTION_DEMAND_PROMPT_CONTRACT_VERSION = "question_demand_prompt_v1"
@@ -415,7 +415,7 @@ def extract_question_demands(
     if llm_call is None:
         # Reuse the already-tested deterministic Ollama JSON transport.
         # Import lazily so disabled shadow mode has zero LLM dependency.
-        from logic_llm_verifier import _call_ollama_json
+        from grading.evidence.logic_llm_verifier import _call_ollama_json
 
         llm_call = _call_ollama_json
 

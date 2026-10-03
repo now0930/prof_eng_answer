@@ -11,7 +11,7 @@ from typing import Any
 
 VERSION = "engineering_invariant_evaluator_v1"
 MARKER = "ENGINEERING_INVARIANT_EVALUATION_V1"
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 ONTOLOGY = ROOT / "grading_ontology"
 _UNIT = re.compile(r"[^\n.!?。]+(?:\n|[.!?。]|$)")
 _CORRECTION = re.compile(

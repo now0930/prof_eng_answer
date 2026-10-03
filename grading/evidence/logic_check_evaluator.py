@@ -20,7 +20,7 @@ from generic_grading_contract import (
 )
 
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 DEFAULT_BANK = resolve_rubric_bank_path("logic_checks")
 
 
@@ -476,7 +476,7 @@ def _apply_second_order_claim_evaluator(text: str, findings: list[dict[str, Any]
     filtered = _filter_second_order_legacy_fatal_findings(findings)
 
     try:
-        from logic_llm_verifier import verify_logic_with_llm
+        from grading.evidence.logic_llm_verifier import verify_logic_with_llm
 
         llm_eval = verify_logic_with_llm(
             text,
@@ -1791,7 +1791,7 @@ def _select_claim_triggered_secondary_profiles(
         return []
 
     try:
-        from logic_llm_verifier import LOGIC_CHECK_PROFILE_PATH
+        from grading.evidence.logic_llm_verifier import LOGIC_CHECK_PROFILE_PATH
 
         profile_bank = _load_json(Path(LOGIC_CHECK_PROFILE_PATH))
     except Exception:
@@ -2153,7 +2153,7 @@ def _stage25g3e_compact_profile_v2(
         return None
 
     try:
-        from logic_llm_verifier import (
+        from grading.evidence.logic_llm_verifier import (
             load_logic_check_profile,
         )
 
@@ -2709,7 +2709,7 @@ def evaluate_logic_checks(
         # deterministic major checks, or question-type pattern checks.
         llm_profile_enabled = False
         try:
-            from logic_llm_verifier import (
+            from grading.evidence.logic_llm_verifier import (
                 load_logic_check_profile,
                 verify_logic_with_llm,
             )
@@ -2762,7 +2762,7 @@ def evaluate_logic_checks(
                 )
 
                 if _stage25g3e_multi_topic_ids:
-                    from logic_llm_verifier import (
+                    from grading.evidence.logic_llm_verifier import (
                         verify_logic_topics_with_llm,
                     )
 
@@ -2982,7 +2982,7 @@ def evaluate_logic_checks(
             # LLM call.  Merge them independently of the LLM branch.
             if isinstance(profile, dict):
                 try:
-                    from logic_llm_verifier import (
+                    from grading.evidence.logic_llm_verifier import (
                         _authoritative_structured_findings,
                     )
                     cap_policy = profile.get("cap_policy")
@@ -3050,7 +3050,7 @@ def evaluate_logic_checks(
             str(topic_id or "").strip()
             == "sil_target_determination_risk_reduction_and_lifecycle"
         ):
-            from sil_relation_integrity import (
+            from grading.evidence.sil_relation_integrity import (
                 evaluate_sil_relation_integrity,
             )
 
@@ -3953,7 +3953,7 @@ def _repair_topic_fatal_semantic_schema_once(
         return normalized
 
     import json
-    from logic_llm_verifier import (
+    from grading.evidence.logic_llm_verifier import (
         _call_ollama_json,
     )
 
@@ -4286,7 +4286,7 @@ Return JSON only:
 """.strip()
 
     try:
-        from logic_llm_verifier import _call_ollama_json
+        from grading.evidence.logic_llm_verifier import _call_ollama_json
 
         verdict = _call_ollama_json(prompt)
     except Exception as error:
@@ -4799,7 +4799,7 @@ def _stage25g3c_compact_batch_secondary_once(
     eligible_checks: list[Any],
     local_values: dict[str, Any],
 ) -> dict[str, Any] | None:
-    from logic_llm_verifier import (
+    from grading.evidence.logic_llm_verifier import (
         _call_ollama_json,
     )
 
@@ -5223,7 +5223,7 @@ def _evaluate_topic_fatal_checks_with_llm_stage19_contract(
     text: str,
     topic_check: dict[str, Any],
 ) -> list[dict[str, Any]]:
-    from logic_llm_verifier import (
+    from grading.evidence.logic_llm_verifier import (
         _call_ollama_json,
     )
 
@@ -5724,7 +5724,7 @@ def _evaluate_topic_fatal_checks_with_llm(
     topic_check: dict[str, Any],
 ) -> list[dict[str, Any]]:
     try:
-        import logic_llm_verifier as verifier_module
+        import grading.evidence.logic_llm_verifier as verifier_module
     except Exception:
         return _evaluate_topic_fatal_checks_with_llm_legacy_contract(
             text,

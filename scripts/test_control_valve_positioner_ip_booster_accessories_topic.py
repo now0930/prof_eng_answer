@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from logic_llm_verifier import extract_logic_evidence_candidates, verify_logic_with_llm
+from grading.evidence.logic_llm_verifier import extract_logic_evidence_candidates, verify_logic_with_llm
 from grading.routing.model_answer_router import find_model_answer_reference
 
 TOPIC = 'control_valve_positioner_ip_converter_booster_accessories_calibration'
@@ -545,7 +545,7 @@ class PositionerAccessorySemanticRegressionTests(unittest.TestCase):
                 "correct_rule": "Booster는 pilot pressure를 추종하면서 fill·vent flow capacity를 높이는 장치이다.",
             }],
         }
-        with patch("logic_llm_verifier._call_ollama_json", return_value=mocked_fatal):
+        with patch("grading.evidence.logic_llm_verifier._call_ollama_json", return_value=mocked_fatal):
             fatal_result = verify_logic_with_llm(answer_text, TOPIC)
         self.assertTrue(fatal_result["fatal_error_detected"], msg=fatal_result)
         self.assertEqual(fatal_result["mode"], "fatal")
@@ -560,7 +560,7 @@ class PositionerAccessorySemanticRegressionTests(unittest.TestCase):
             "reason": "Positioner·I/P·booster 기능과 action·calibration 경계를 정확히 구분하였다.",
             "findings": [],
         }
-        with patch("logic_llm_verifier._call_ollama_json", return_value=mocked_safe):
+        with patch("grading.evidence.logic_llm_verifier._call_ollama_json", return_value=mocked_safe):
             safe_result = verify_logic_with_llm(SAFE_ANSWER, TOPIC)
         self.assertFalse(safe_result["fatal_error_detected"], msg=safe_result)
         self.assertEqual(safe_result["mode"], "pass")

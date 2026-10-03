@@ -22,7 +22,7 @@ EXPECTED_ARTIFACTS = {
     "input.raw.txt",
     "input.txt",
     "logic_check_evaluation.json",
-    "grading.routing.question_demand_contract.json",
+    "question_demand_contract.json",
     "replay_manifest.json",
     "submission_normalization.json",
     "telegram.txt",

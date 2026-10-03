@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from fact_anchor_evidence_adapter import _question_similarity
+from grading.evidence.fact_anchor_evidence_adapter import _question_similarity
 from grading.routing.model_answer_router import find_model_answer_reference
 from grading.routing.question_type_router import detect_question_type
 from rubric_registry import normalize_text

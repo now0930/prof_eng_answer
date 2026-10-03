@@ -550,7 +550,7 @@ def attach_general_evidence_contract(result: Any) -> Any:
         )
     )
 
-    from generic_formula_integrity import (
+    from grading.evidence.generic_formula_integrity import (
         apply_formula_integrity_to_result,
     )
 

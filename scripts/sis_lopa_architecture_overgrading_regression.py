@@ -180,13 +180,13 @@ def main() -> None:
     )
     assert secondary_rule["score_effect_requirement"] == "diagnostic_only"
 
-    import logic_check_evaluator
-    from logic_check_evaluator import (
+    import grading.evidence.logic_check_evaluator as logic_check_evaluator
+    from grading.evidence.logic_check_evaluator import (
         _secondary_profile_rule_match,
         _select_claim_triggered_secondary_profiles,
         _stage25g3e_preselect_compact_secondary,
     )
-    import logic_llm_verifier
+    import grading.evidence.logic_llm_verifier as logic_llm_verifier
 
     activation_match = _secondary_profile_rule_match(
         fixture["answer"],

@@ -8,7 +8,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from canonical_claim_extractor import extract_canonical_claim_evidence
+from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
 from deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from deterministic_score_engine import calculate_deterministic_score
 from grading.routing.deterministic_topic_router import route_question_topics

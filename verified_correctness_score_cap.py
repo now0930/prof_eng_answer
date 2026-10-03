@@ -143,7 +143,7 @@ def _structured_defect_events(
         if severity not in {"fatal", "major"}:
             continue
         events.append({
-            "source": "general_evidence_contract.defects",
+            "source": "grading.evidence.general_evidence_contract.defects",
             "id": str(defect.get("id") or defect.get("defect_id") or f"defect-{index}"),
             "severity": severity,
             "core_related": (

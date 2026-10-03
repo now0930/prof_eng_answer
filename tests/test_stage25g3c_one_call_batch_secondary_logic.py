@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from unittest.mock import patch
 
-import logic_check_evaluator as evaluator
-import logic_llm_verifier as verifier_module
-from logic_llm_verifier import load_logic_check_profile
+import grading.evidence.logic_check_evaluator as evaluator
+import grading.evidence.logic_llm_verifier as verifier_module
+from grading.evidence.logic_llm_verifier import load_logic_check_profile
 
 
 TOPIC_ID = "sis_sil_safety_software_independence_systematic_failure_verification_validation"

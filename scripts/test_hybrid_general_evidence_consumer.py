@@ -3,7 +3,7 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-from hybrid_general_evidence_consumer import (
+from grading.evidence.hybrid_general_evidence_consumer import (
     attach_hybrid_general_evidence_to_subject_rubric,
     attach_hybrid_general_summary_to_question_contract,
     build_hybrid_general_question_contract_summary,

@@ -10,7 +10,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-from logic_check_evaluator import (
+from grading.evidence.logic_check_evaluator import (
     _evaluate_topic_fatal_checks_with_llm,
 )
 
@@ -61,7 +61,7 @@ class Stage20LogicBatchContractTests(unittest.TestCase):
             }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=fake_call,
         ) as mocked:
             findings = (
@@ -125,7 +125,7 @@ class Stage20LogicBatchContractTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=[invalid, repaired],
         ) as mocked:
             findings = (
@@ -161,7 +161,7 @@ class Stage20LogicBatchContractTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=response,
         ) as mocked:
             findings = (
@@ -198,7 +198,7 @@ class Stage20LogicBatchContractTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=response,
         ) as mocked:
             findings = (
@@ -236,7 +236,7 @@ class Stage20LogicBatchContractTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=response,
         ) as mocked:
             findings = (

@@ -13,14 +13,14 @@ import unicodedata
 from pathlib import Path
 from typing import Any, Iterable
 
-from canonical_grading_evidence import build_canonical_grading_evidence
+from grading.evidence.canonical_grading_evidence import build_canonical_grading_evidence
 from deterministic_requirement_evaluator import load_machine_contracts
-from quantity_dimension_evaluator import extract_quantity_relation_evidence
+from grading.evidence.quantity_dimension_evaluator import extract_quantity_relation_evidence
 
 
 VERSION = "canonical_claim_extractor_v1"
 MARKER = "CANONICAL_CLAIM_EXTRACTOR_V1"
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 _SENTENCE = re.compile(r"[^\n!?。]+?(?:\.(?![A-Za-z0-9])|[!?。]|\n|$)")
 _QUOTE = re.compile(r'["“”‘’「」『』](.*?)["“”‘’「」『』]')
 _QUOTED_REPORT = re.compile(r"(?:라고|이라는|라는)\s*(?:주장|말|설명|견해)")

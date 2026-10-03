@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import copy
 
-import verified_defect_reconciliation as owner
+import grading.evidence.verified_defect_reconciliation as owner
 
 
 SYNC = (

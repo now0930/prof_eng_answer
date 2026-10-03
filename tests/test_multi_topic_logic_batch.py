@@ -10,8 +10,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-import logic_check_evaluator as evaluator
-import logic_llm_verifier as verifier
+import grading.evidence.logic_check_evaluator as evaluator
+import grading.evidence.logic_llm_verifier as verifier
 
 
 SW04 = "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation"

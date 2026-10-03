@@ -10,7 +10,7 @@ from typing import Any, Callable
 
 
 SEMANTIC_ROUTER_SHADOW_VERSION = "semantic_router_shadow_v1"
-SEMANTIC_ROUTER_SHADOW_FILE = "grading.routing.semantic_router_shadow.json"
+SEMANTIC_ROUTER_SHADOW_FILE = "semantic_router_shadow.json"
 
 VALID_ROUTING_MODES = {
     "SINGLE_TOPIC",

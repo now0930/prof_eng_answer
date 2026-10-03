@@ -104,7 +104,7 @@ class QuestionDemandEvidenceShadowTests(unittest.TestCase):
             session = Path(tmp)
 
             (
-                session / "grading.routing.semantic_router_shadow.json"
+                session / "semantic_router_shadow.json"
             ).write_text(
                 json.dumps(
                     {
@@ -126,7 +126,7 @@ class QuestionDemandEvidenceShadowTests(unittest.TestCase):
     def test_general_route_is_valid_and_has_no_topic_links(self):
         with tempfile.TemporaryDirectory() as tmp:
             session = Path(tmp)
-            (session / "grading.routing.semantic_router_shadow.json").write_text(
+            (session / "semantic_router_shadow.json").write_text(
                 json.dumps({
                     "routing_mode": "GENERAL",
                     "primary_topic_ids": [],

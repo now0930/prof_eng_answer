@@ -2002,7 +2002,7 @@ class LogicLlmVerifierFallbackRegressionTest(
     def test_logic_llm_failure_returns_safe_warn_fallback(
         self,
     ) -> None:
-        import logic_llm_verifier as verifier
+        import grading.evidence.logic_llm_verifier as verifier
 
         function = verifier.verify_logic_with_llm
         prompts = []
@@ -3229,7 +3229,7 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         import difficulty_output_adapter
         import difficulty_score_ceiling
         import grading_agents
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         input_text = """문제:
 피드백 제어계의 안정성을 설명하시오.
@@ -3358,7 +3358,7 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         import difficulty_output_adapter
         import difficulty_score_ceiling
         import grading_agents
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         input_text = """문제:
 제어밸브 액추에이터를 비교하시오.
@@ -3480,7 +3480,7 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         import difficulty_output_adapter
         import difficulty_score_ceiling
         import grading_agents
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         input_text = """문제:
 2차 시스템의 감쇠비를 설명하시오.
@@ -3803,7 +3803,7 @@ class LogicTopicRoutingFailureRegressionTest(
     ) -> None:
         from tempfile import TemporaryDirectory
 
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         class ExplodingGrade(dict):
             def get(
@@ -3873,7 +3873,7 @@ class LogicTopicRoutingFailureRegressionTest(
     ) -> None:
         from tempfile import TemporaryDirectory
 
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         grade = {
             "model_answer_reference": {
@@ -5223,21 +5223,26 @@ class LogicLlmFatalCheckDiagnosticRegressionTest(
         import sys
         import types
 
-        import logic_check_evaluator
+        import grading.evidence as evidence_package
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         fake_module = types.ModuleType(
-            "logic_llm_verifier"
+            "grading.evidence.logic_llm_verifier"
         )
         fake_module._call_ollama_json = verifier
 
         original_module = sys.modules.get(
-            "logic_llm_verifier"
+            "grading.evidence.logic_llm_verifier"
+        )
+        original_attribute = getattr(
+            evidence_package, "logic_llm_verifier", None
         )
 
         try:
             sys.modules[
-                "logic_llm_verifier"
+                "grading.evidence.logic_llm_verifier"
             ] = fake_module
+            evidence_package.logic_llm_verifier = fake_module
 
             return (
                 logic_check_evaluator
@@ -5251,13 +5256,17 @@ class LogicLlmFatalCheckDiagnosticRegressionTest(
         finally:
             if original_module is None:
                 sys.modules.pop(
-                    "logic_llm_verifier",
+                    "grading.evidence.logic_llm_verifier",
                     None,
                 )
             else:
                 sys.modules[
-                    "logic_llm_verifier"
+                    "grading.evidence.logic_llm_verifier"
                 ] = original_module
+            if original_attribute is None:
+                delattr(evidence_package, "logic_llm_verifier")
+            else:
+                evidence_package.logic_llm_verifier = original_attribute
 
     def _assert_diagnostic(
         self,
@@ -5568,7 +5577,7 @@ class LogicVerifierConfidenceRegressionTest(
     def _run_with_verdict(
         verdict,
     ):
-        import logic_llm_verifier as verifier
+        import grading.evidence.logic_llm_verifier as verifier
 
         function = (
             verifier.verify_logic_with_llm

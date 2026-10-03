@@ -6,7 +6,7 @@ import unittest
 from pathlib import Path
 
 import grading_agents
-from generic_formula_integrity import (
+from grading.evidence.generic_formula_integrity import (
     analyze_formula_text,
 )
 from grading.routing.question_demand_contract import (

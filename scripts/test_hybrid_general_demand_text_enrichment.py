@@ -1,11 +1,11 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import hybrid_general_grading_context as hgc
-from hybrid_general_evidence_consumer import (
+import grading.evidence.hybrid_general_grading_context as hgc
+from grading.evidence.hybrid_general_evidence_consumer import (
     build_hybrid_general_subject_evidence,
 )
-from hybrid_general_prompt import (
+from grading.evidence.hybrid_general_prompt import (
     build_hybrid_general_prompt_section,
 )
 

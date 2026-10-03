@@ -9,7 +9,7 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 from deterministic_replay_audit import run_deterministic_replay_audit
-from fatal_taxonomy import load_fatal_taxonomy
+from grading.evidence.fatal_taxonomy import load_fatal_taxonomy
 
 
 class FatalTaxonomyTests(unittest.TestCase):

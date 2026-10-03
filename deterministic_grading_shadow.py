@@ -8,16 +8,16 @@ from pathlib import Path
 from typing import Any, Mapping
 
 from grading.routing.local_semantic_resolver import resolve_with_optional_local_semantics
-from engineering_invariant_evaluator import evaluate_engineering_invariants
+from grading.evidence.engineering_invariant_evaluator import evaluate_engineering_invariants
 from deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from deterministic_score_engine import calculate_deterministic_score
-from fact_anchor_evidence_adapter import (
+from grading.evidence.fact_anchor_evidence_adapter import (
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,
     requirement_scope_by_topic,
 )
-from quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
-from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
+from grading.evidence.quantity_dimension_evaluator import evaluate_quantity_dimension_consistency
+from grading.evidence.topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
 
 VERSION = "deterministic_grading_shadow_v1"

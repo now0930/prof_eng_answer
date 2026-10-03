@@ -4,7 +4,7 @@ import copy
 import unittest
 from pathlib import Path
 
-from control_valve_formula_checker import (
+from grading.evidence.control_valve_formula_checker import (
     TARGET_TOPIC_ID,
     attach_control_valve_formula_check,
     evaluate_control_valve_formula_check,
@@ -329,7 +329,7 @@ class ControlValveFormulaCheckerTests(
         )
 
         checker_source = Path(
-            "control_valve_formula_checker.py"
+            "grading/evidence/control_valve_formula_checker.py"
         ).read_text(
             encoding="utf-8"
         )

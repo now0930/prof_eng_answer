@@ -12,7 +12,7 @@ from grading.routing.semantic_router_shadow import (
     augment_rule_candidates_for_shadow,
 )
 
-from multi_topic_grading_context import (
+from grading.evidence.multi_topic_grading_context import (
     MULTI_TOPIC_GRADING_CONTEXT_VERSION,
     MULTI_TOPIC_GRADING_ENV,
     build_multi_topic_grading_context,

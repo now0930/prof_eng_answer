@@ -6,7 +6,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VERIFIER = ROOT / "logic_llm_verifier.py"
+VERIFIER = ROOT / "grading/evidence/logic_llm_verifier.py"
 
 
 def _key(node: ast.AST) -> str | None:

@@ -5,11 +5,11 @@ from __future__ import annotations
 import json
 from typing import Any, Callable
 
-from canonical_grading_evidence import (
+from grading.evidence.canonical_grading_evidence import (
     CanonicalEvidenceError,
     build_canonical_grading_evidence,
 )
-from canonical_claim_extractor import extract_canonical_claim_evidence
+from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
 
 
 VERSION = "local_semantic_resolver_v1"

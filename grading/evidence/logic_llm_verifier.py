@@ -11,7 +11,7 @@ from typing import Any
 import math
 
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 
 DEFAULT_PROFILE_PATH = resolve_rubric_bank_path("logic_check_profiles")
 # LOGIC_CHECK_PROFILE_PATH remains a manual override; otherwise follow RUBRIC_BANK_MODE.

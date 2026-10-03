@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
+from grading.evidence.topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
 PACK_ROOT = ROOT / "rubrics" / "topic_packs"
 

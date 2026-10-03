@@ -9,12 +9,12 @@ import unicodedata
 from pathlib import Path
 from typing import Any
 
-from canonical_grading_evidence import build_canonical_grading_evidence
+from grading.evidence.canonical_grading_evidence import build_canonical_grading_evidence
 
 
 VERSION = "quantity_dimension_evaluation_v1"
 MARKER = "QUANTITY_DIMENSION_EVALUATION_V1"
-ONTOLOGY_DIR = Path(__file__).resolve().parent / "grading_ontology"
+ONTOLOGY_DIR = Path(__file__).resolve().parents[2] / "grading_ontology"
 
 _NEGATED_CONTEXT = re.compile(
     r"(?:비교할\s*수\s*없|비교하지\s*않|비교하면\s*안|"

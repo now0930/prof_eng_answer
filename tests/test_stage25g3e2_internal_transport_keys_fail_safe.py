@@ -4,7 +4,7 @@ import ast
 import inspect
 from pathlib import Path
 
-import logic_check_evaluator as evaluator
+import grading.evidence.logic_check_evaluator as evaluator
 
 
 COMPACT_KEY = (

@@ -5,12 +5,12 @@ from unittest.mock import patch
 
 import json
 
-from logic_check_evaluator import (
+from grading.evidence.logic_check_evaluator import (
     _evaluate_topic_fatal_checks_with_llm,
     _normalize_topic_fatal_semantic_response,
     _topic_fatal_semantic_json_schema,
 )
-from logic_llm_verifier import _call_ollama_json
+from grading.evidence.logic_llm_verifier import _call_ollama_json
 
 
 RULE_ID = "sw04_fatal_misra_is_unit_test_tool"
@@ -136,7 +136,7 @@ class Stage19SemanticResponseNormalizationTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=response,
         ):
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -166,7 +166,7 @@ class Stage19SemanticSchemaRepairTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=valid,
         ) as mocked:
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -199,7 +199,7 @@ class Stage19SemanticSchemaRepairTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=[invalid, repaired],
         ) as mocked:
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -224,7 +224,7 @@ class Stage19SemanticSchemaRepairTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=[invalid_first, invalid_second],
         ) as mocked:
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -261,7 +261,7 @@ class Stage19SemanticSchemaRepairTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=[invalid, repaired],
         ) as mocked:
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -375,7 +375,7 @@ class Stage19OllamaStructuredOutputTests(unittest.TestCase):
             }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=fake_call,
         ):
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -423,7 +423,7 @@ class Stage19PerRuleEvaluationTests(unittest.TestCase):
             }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=fake_call,
         ) as mocked:
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -462,7 +462,7 @@ class Stage19PerRuleEvaluationTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=response,
         ):
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -502,7 +502,7 @@ class Stage19PerRuleEvaluationTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=response,
         ):
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -534,7 +534,7 @@ class Stage19PerRuleEvaluationTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=response,
         ):
             findings = _evaluate_topic_fatal_checks_with_llm(
@@ -562,7 +562,7 @@ class Stage19PerRuleEvaluationTests(unittest.TestCase):
         }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=response,
         ):
             findings = _evaluate_topic_fatal_checks_with_llm(

@@ -9,7 +9,7 @@ from typing import Any
 
 
 VERSION = "fatal_taxonomy_v1"
-PATH = Path(__file__).resolve().parent / "grading_ontology" / "fatal_taxonomy.json"
+PATH = Path(__file__).resolve().parents[2] / "grading_ontology" / "fatal_taxonomy.json"
 _ID = re.compile(r"^[A-Za-z][A-Za-z0-9_]*$")
 
 

@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from logic_llm_verifier import (
+from grading.evidence.logic_llm_verifier import (
     extract_logic_evidence_candidates,
     verify_logic_with_llm,
 )
@@ -1111,7 +1111,7 @@ class SmartPositionerDiagnosticSemanticRegressionTests(unittest.TestCase):
             }],
         }
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=mocked_fatal,
         ):
             result = verify_logic_with_llm(answer_text, TOPIC)
@@ -1138,7 +1138,7 @@ class SmartPositionerDiagnosticSemanticRegressionTests(unittest.TestCase):
             "findings": [],
         }
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=mocked_safe,
         ):
             result = verify_logic_with_llm(SAFE_ANSWER, TOPIC)

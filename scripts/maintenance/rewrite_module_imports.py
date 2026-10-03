@@ -34,7 +34,12 @@ def rewrite(text: str, old: str, new: str) -> str:
             f"{quote}{old}.py{quote}",
             f"{quote}{new.replace('.', '/')}.py{quote}",
         )
-        text = text.replace(f"{quote}{old}.", f"{quote}{new}.")
+        data_suffixes = "json|md|csv|txt|log|yaml|yml|sqlite3|db"
+        text = re.sub(
+            rf"{re.escape(quote)}{re.escape(old)}\.(?!({data_suffixes}){re.escape(quote)})",
+            f"{quote}{new}.",
+            text,
+        )
     return text
 
 

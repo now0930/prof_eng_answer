@@ -5,7 +5,7 @@ import copy
 from pathlib import Path
 import unittest
 
-from multi_topic_evidence_consumer import (
+from grading.evidence.multi_topic_evidence_consumer import (
     MULTI_TOPIC_QUESTION_CONTRACT_VERSION,
     MULTI_TOPIC_SUBJECT_EVIDENCE_VERSION,
     attach_multi_topic_evidence_to_subject_rubric,

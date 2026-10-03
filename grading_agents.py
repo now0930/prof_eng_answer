@@ -2642,7 +2642,7 @@ def _phase3_load_question_only_routing_contract(session_dir):
     # Consume only the already-computed question-only Topic Router v2 result.
     # This helper never routes, scores, or inspects the student answer.
     try:
-        contract_path = Path(session_dir) / "grading.routing.semantic_router_shadow.json"
+        contract_path = Path(session_dir) / "semantic_router_shadow.json"
         if not contract_path.exists():
             return None
 
@@ -2674,7 +2674,7 @@ def _phase3_load_question_only_routing_contract(session_dir):
         return {
             "routing_mode": mode,
             "primary_topic_ids": topic_ids,
-            "source": "grading.routing.semantic_router_shadow.json",
+            "source": "semantic_router_shadow.json",
             "routing_effect": "consume_existing_question_only_result",
         }
     except Exception:
@@ -2759,7 +2759,7 @@ def _phase3_select_fact_anchors_from_bank(
                     routing_contract={
                         "routing_mode": "SINGLE_TOPIC",
                         "primary_topic_ids": [topic_id],
-                        "source": "grading.routing.semantic_router_shadow.json",
+                        "source": "semantic_router_shadow.json",
                     },
                 )
                 if not isinstance(one, dict):
@@ -3492,7 +3492,7 @@ def _phase3_evaluate_fact_anchors(
                         "question_only_primary_topic_ids": routed_ids,
                         "routing_contract_source": (
                             routing_contract.get("source")
-                            or "grading.routing.semantic_router_shadow.json"
+                            or "semantic_router_shadow.json"
                         ),
                         "routing_identity_policy": (
                             "consume_existing_question_only_result"
@@ -5104,7 +5104,7 @@ def _phase6_run_gemini_semantic_grader(
             connection_eval=connection_eval,
         )
 
-        from hybrid_demand_scope_guard import (
+        from grading.evidence.hybrid_demand_scope_guard import (
             sanitize_hybrid_semantic_evaluation,
         )
         result = sanitize_hybrid_semantic_evaluation(
@@ -5581,12 +5581,12 @@ def _phase2_postprocess_grade(legacy_result):
         resolve_question_contract_cache,
     )
 
-    from multi_topic_evidence_consumer import (
+    from grading.evidence.multi_topic_evidence_consumer import (
         attach_multi_topic_evidence_to_subject_rubric,
         attach_multi_topic_summary_to_question_contract,
         enrich_multi_topic_model_reference_with_contract,
     )
-    from hybrid_general_evidence_consumer import (
+    from grading.evidence.hybrid_general_evidence_consumer import (
         attach_hybrid_general_evidence_to_subject_rubric,
         attach_hybrid_general_summary_to_question_contract,
         enrich_hybrid_general_model_reference_with_contract,
@@ -5811,7 +5811,7 @@ def _phase2_postprocess_grade(legacy_result):
         )
     )
 
-    from hybrid_demand_scope_guard import (
+    from grading.evidence.hybrid_demand_scope_guard import (
         restore_blocked_semantic_layer_scores,
     )
     (
@@ -6022,7 +6022,7 @@ def _phase2_postprocess_grade(legacy_result):
         input_text=canonical_input_text,
     )
     try:
-        from logic_check_evaluator import attach_logic_check_to_grade
+        from grading.evidence.logic_check_evaluator import attach_logic_check_to_grade
 
 
         # PHASE3B_LOGIC_CHECK_TOPIC_ROUTING_PATCH
@@ -6123,7 +6123,7 @@ def _phase2_postprocess_grade(legacy_result):
     # Diagnostic-only formula validation runs
     # after precise Logic Check topic routing.
     try:
-        from control_valve_formula_checker import (
+        from grading.evidence.control_valve_formula_checker import (
             attach_control_valve_formula_check,
         )
 
@@ -6133,7 +6133,7 @@ def _phase2_postprocess_grade(legacy_result):
         )
 
         # CONTROL_VALVE_CORRECTNESS_BRIDGE_V1
-        from control_valve_correctness_bridge import (
+        from grading.evidence.control_valve_correctness_bridge import (
             merge_control_valve_findings_into_evidence,
         )
 
@@ -6144,7 +6144,7 @@ def _phase2_postprocess_grade(legacy_result):
         )
 
         # VERIFIED_DEFECT_RECONCILIATION_V1
-        from verified_defect_reconciliation import (
+        from grading.evidence.verified_defect_reconciliation import (
             reconcile_verified_defects_with_coverage,
         )
 
@@ -7054,7 +7054,7 @@ def _phase8_run_originality_evaluator(
                 f"{write_error!r}"
             )
 
-    from hybrid_demand_scope_guard import (
+    from grading.evidence.hybrid_demand_scope_guard import (
         build_hybrid_originality_scope_contract,
         project_hybrid_originality_pre_normalization,
         sanitize_hybrid_originality_evaluation,
@@ -7883,7 +7883,7 @@ def _phase10_run_semantic_router_shadow(
             "legacy_router_authoritative": True,
         }
         SEMANTIC_ROUTER_SHADOW_FILE = (
-            "grading.routing.semantic_router_shadow.json"
+            "semantic_router_shadow.json"
         )
 
     if (
@@ -7964,7 +7964,7 @@ def _phase10_run_question_demand_shadow(
             "topic_selection_performed": False,
         }
         QUESTION_DEMAND_SHADOW_FILE = (
-            "grading.routing.question_demand_shadow.json"
+            "question_demand_shadow.json"
         )
 
     # Default-OFF must be behaviorally identical to the legacy phase10:
@@ -8170,13 +8170,13 @@ def _phase10_run_model_answer_reference(
         )
 
         model_answer_reference_result = result
-        from multi_topic_grading_context import (
+        from grading.evidence.multi_topic_grading_context import (
             multi_topic_grading_enabled,
         )
 
         if multi_topic_grading_enabled():
             from pathlib import Path
-            from multi_topic_grading_context import (
+            from grading.evidence.multi_topic_grading_context import (
                 build_multi_topic_grading_context,
                 load_generated_multi_topic_sources,
             )
@@ -8216,13 +8216,13 @@ def _phase10_run_model_answer_reference(
                     "multi_topic_grading_context"
                 ] = multi_topic_context
 
-        from hybrid_general_grading_context import (
+        from grading.evidence.hybrid_general_grading_context import (
             hybrid_general_grading_enabled,
         )
 
         if hybrid_general_grading_enabled():
             from pathlib import Path
-            from hybrid_general_grading_context import (
+            from grading.evidence.hybrid_general_grading_context import (
                 build_hybrid_general_grading_context,
                 load_generated_hybrid_general_sources,
             )
@@ -8332,7 +8332,7 @@ def _phase10_merge_model_answer_feedback(grade, model_answer_ref):
 
     ref = model_answer_ref.get("primary_reference") or {}
 
-    from hybrid_demand_scope_guard import (
+    from grading.evidence.hybrid_demand_scope_guard import (
         project_hybrid_model_answer_feedback,
     )
     (
@@ -9511,7 +9511,7 @@ def _phase6_apply_semantic_downward_guard(
     gemini_eval,
     scoring_model,
 ):
-    from layer_evidence_guard import (
+    from grading.evidence.layer_evidence_guard import (
         apply_layer_specific_evidence_guard,
         has_general_evidence_contract,
     )
@@ -9579,7 +9579,7 @@ def _phase2_finalize_verified_coverage_for_persistence(
         )
     )
 
-    from verified_defect_reconciliation import (
+    from grading.evidence.verified_defect_reconciliation import (
         reconcile_verified_defects_with_coverage,
     )
 

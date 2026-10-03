@@ -27,12 +27,12 @@ from grade_submission_normalizer import (
     attach_submission_normalization,
     normalize_grade_submission,
 )
-from logic_check_evaluator import evaluate_logic_checks
+from grading.evidence.logic_check_evaluator import evaluate_logic_checks
 from grading.routing.question_demand_contract import build_question_demand_contract
 from grading.routing.question_type_coverage_adapter import (
     attach_question_type_coverage_feedback,
 )
-from sil_relation_integrity import SIL_TARGET_TOPIC_ID
+from grading.evidence.sil_relation_integrity import SIL_TARGET_TOPIC_ID
 from verdict_consistency import enforce_final_decision_consistency
 
 
@@ -304,7 +304,7 @@ def write_replay(
             ensure_ascii=False,
             indent=2,
         ) + "\n",
-        "grading.routing.question_demand_contract.json": json.dumps(
+        "question_demand_contract.json": json.dumps(
             contract,
             ensure_ascii=False,
             indent=2,

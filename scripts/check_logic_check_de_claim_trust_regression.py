@@ -6,7 +6,7 @@ from unittest.mock import patch
 REPO_ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(REPO_ROOT))
 
-from logic_check_evaluator import evaluate_logic_checks
+from grading.evidence.logic_check_evaluator import evaluate_logic_checks
 
 CASES = {
     "normal_second_order": """
@@ -35,14 +35,14 @@ for name, answer in CASES.items():
     # Regression must be deterministic in CI.
     # Do not depend on Ollama or any external LLM verifier.
     with patch(
-        "logic_llm_verifier.verify_logic_with_llm",
+        "grading.evidence.logic_llm_verifier.verify_logic_with_llm",
         return_value={
             "fatal_error_detected": False,
             "mode": "mocked",
             "findings": [],
         },
     ), patch(
-        "logic_llm_verifier._call_ollama_json",
+        "grading.evidence.logic_llm_verifier._call_ollama_json",
         return_value=None,
     ):
         result = evaluate_logic_checks(answer_text=answer, grade={})

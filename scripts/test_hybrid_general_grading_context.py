@@ -8,9 +8,9 @@ import unittest
 from unittest.mock import patch
 
 import grading_agents as ga
-import hybrid_general_grading_context as hg
+import grading.evidence.hybrid_general_grading_context as hg
 import grading.routing.semantic_router_shadow as srs
-from hybrid_general_grading_context import (
+from grading.evidence.hybrid_general_grading_context import (
     HYBRID_GENERAL_GRADING_ENV,
     build_hybrid_general_grading_context,
     hybrid_general_grading_enabled,

@@ -11,7 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-import logic_check_evaluator as evaluator
+import grading.evidence.logic_check_evaluator as evaluator
 from grading.routing.question_demand_evidence import project_logic_relationship_conflicts
 
 TOPIC_ID = (
@@ -274,7 +274,7 @@ class Stage22CanonicalAxisRuntimeIntegrationTests(unittest.TestCase):
             }
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=fake_call,
         ) as mocked:
             result = evaluator.evaluate_logic_checks(ANSWER, grade=_grade())
@@ -391,7 +391,7 @@ class Stage22CanonicalAxisRuntimeIntegrationTests(unittest.TestCase):
         evidence = grade["question_demand_evidence_for_score"]
         snapshot = copy.deepcopy(evidence)
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             side_effect=fake_call,
         ):
             result = evaluator.evaluate_logic_checks(ANSWER, grade=grade)
@@ -776,7 +776,7 @@ class Stage22ProfileEmptyCandidateFallbackTests(
     def test_global_axes_preserve_one_call_when_profile_candidates_empty(
         self,
     ) -> None:
-        from logic_llm_verifier import verify_logic_with_llm
+        from grading.evidence.logic_llm_verifier import verify_logic_with_llm
 
         profile = {
             "topic_id": "stage22_empty_candidate_profile",
@@ -844,16 +844,16 @@ class Stage22ProfileEmptyCandidateFallbackTests(
 
         with (
             patch(
-                "logic_llm_verifier.load_logic_check_profile",
+                "grading.evidence.logic_llm_verifier.load_logic_check_profile",
                 return_value=profile,
             ),
             patch(
-                "logic_llm_verifier."
+                "grading.evidence.logic_llm_verifier."
                 "extract_logic_evidence_candidates",
                 return_value=[],
             ),
             patch(
-                "logic_llm_verifier._call_ollama_json",
+                "grading.evidence.logic_llm_verifier._call_ollama_json",
                 return_value=response,
             ) as mocked_call,
         ):

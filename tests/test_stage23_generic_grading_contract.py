@@ -249,7 +249,7 @@ class GenericEngineFixtureRedTests(unittest.TestCase):
         self.assertEqual(summary.get("sub_criteria_wrong"), 1)
 
     def test_red_06_logic_evaluator_exposes_generic_relation_normalizer(self) -> None:
-        self.assertTrue(_source_has_function("logic_check_evaluator.py", "normalize_generic_claim_relations"))
+        self.assertTrue(_source_has_function("grading/evidence/logic_check_evaluator.py", "normalize_generic_claim_relations"))
 
     def test_red_07_score_reconciler_exposes_generic_de_policy(self) -> None:
         self.assertTrue(_source_has_function("grade_score_reconciler.py", "apply_generic_de_policy"))

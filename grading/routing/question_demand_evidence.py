@@ -334,7 +334,7 @@ def _load_canonical_demands(
 
 
 def _load_routing(session_dir: Path) -> dict[str, Any]:
-    path = session_dir / "grading.routing.semantic_router_shadow.json"
+    path = session_dir / "semantic_router_shadow.json"
 
     if not path.exists():
         raise FileNotFoundError(

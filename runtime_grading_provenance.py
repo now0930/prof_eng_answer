@@ -77,10 +77,10 @@ _ROUTER_VERSION = (
     )
 )
 _EVALUATOR_SHA = _sha256_file(
-    _MODULE_ROOT / "logic_check_evaluator.py"
+    _MODULE_ROOT / "grading/evidence/logic_check_evaluator.py"
 )
 _VERIFIER_SHA = _sha256_file(
-    _MODULE_ROOT / "logic_llm_verifier.py"
+    _MODULE_ROOT / "grading/evidence/logic_llm_verifier.py"
 )
 
 

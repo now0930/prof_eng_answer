@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from logic_llm_verifier import extract_logic_evidence_candidates, verify_logic_with_llm
+from grading.evidence.logic_llm_verifier import extract_logic_evidence_candidates, verify_logic_with_llm
 from grading.routing.model_answer_router import find_model_answer_reference
 
 TOPIC = 'control_valve_cavitation_flashing_choked_flow_damage_prevention'
@@ -1012,7 +1012,7 @@ class FormulaSemanticRegressionTests(unittest.TestCase):
             }],
         }
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=mocked_fatal,
         ):
             fatal_result = verify_logic_with_llm(
@@ -1045,7 +1045,7 @@ class FormulaSemanticRegressionTests(unittest.TestCase):
             "findings": [],
         }
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=mocked_safe,
         ):
             safe_result = verify_logic_with_llm(

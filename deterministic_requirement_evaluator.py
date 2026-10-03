@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Any, Iterable, Mapping
 
-from topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
+from grading.evidence.topic_machine_contract import extract_fatal_rule_ids, validate_topic_machine_contract
 
 
 VERSION = "deterministic_requirement_evaluator_v1"

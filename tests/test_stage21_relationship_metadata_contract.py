@@ -11,7 +11,7 @@ REPO_ROOT = Path(__file__).resolve().parents[1]
 if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
-import logic_check_evaluator as evaluator
+import grading.evidence.logic_check_evaluator as evaluator
 from scripts.topic_pack_contract import validate_against_schema
 from scripts.topic_pack_tool import render_topic
 

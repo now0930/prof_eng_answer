@@ -5,10 +5,10 @@ import unittest
 from pathlib import Path
 
 import grading_agents
-from control_valve_correctness_bridge import (
+from grading.evidence.control_valve_correctness_bridge import (
     merge_control_valve_findings_into_evidence,
 )
-from control_valve_formula_checker import (
+from grading.evidence.control_valve_formula_checker import (
     TARGET_TOPIC_ID,
     evaluate_control_valve_formula_check,
 )

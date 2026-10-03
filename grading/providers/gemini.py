@@ -1204,7 +1204,7 @@ def _grade_with_general_evidence(*args, **kwargs):
         **kwargs,
     )
 
-    from general_evidence_contract import (
+    from grading.evidence.general_evidence_contract import (
         attach_general_evidence_contract,
     )
 
@@ -1677,7 +1677,7 @@ def _build_hybrid_general_prompt(*args, **kwargs):
     if subject_rubric is None and len(args) >= 4:
         subject_rubric = args[3]
 
-    from hybrid_general_prompt import (
+    from grading.evidence.hybrid_general_prompt import (
         HYBRID_GENERAL_PROMPT_MARKER,
         build_hybrid_general_prompt_section,
     )

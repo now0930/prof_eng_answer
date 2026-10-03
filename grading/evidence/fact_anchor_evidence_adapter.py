@@ -12,7 +12,7 @@ from typing import Any, Iterable
 
 VERSION = "fact_anchor_evidence_adapter_v1"
 MARKER = "FACT_ANCHOR_EVIDENCE_ADAPTER_V1"
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 STOP_TOKENS = {
     "그리고", "그러나", "대한", "또는", "따라", "위한", "으로", "에서", "한다",
     "설명", "정의", "적용", "확인", "포함", "구분", "평가", "검증", "필요",

@@ -35,6 +35,8 @@ the deterministic primary authority.
 - `grading/routing/`: Question Type, Question Demand, Topic selection, and
   semantic routing contracts. Repository data paths are resolved from the
   package location.
+- `grading/evidence/`: extracted claims, facts, formulas, engineering
+  invariants, logic checks, and verified defect evidence.
 - `scripts/`: release gates, commands, audit tools, and historical regression
   scripts. Existing script paths are part of the release contract.
 - `tests/`: focused contracts, integration checks, and historical stage
