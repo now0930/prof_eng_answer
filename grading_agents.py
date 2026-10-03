@@ -5089,7 +5089,7 @@ def _phase6_run_gemini_semantic_grader(
     session_dir
 ):
     try:
-        from gemini_grader import gemini_semantic_grade
+        from grading.providers.gemini import gemini_semantic_grade
 
         question_text = _phase3_extract_question_text(input_text)
 

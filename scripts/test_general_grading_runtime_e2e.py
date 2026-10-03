@@ -5,7 +5,7 @@ import inspect
 import json
 import unittest
 
-import gemini_grader
+from grading.providers import gemini as gemini_grader
 import grade_output_summarizer
 import grading_agents
 from general_evidence_contract import attach_general_evidence_contract

@@ -31,8 +31,8 @@ the deterministic primary authority.
   aggregation, report, and retention modules. These five modules moved from
   the repository root; runtime and script imports now use this package.
 - `grading/providers/`: optional provider selection, per-chat settings, and
-  deterministic request sampling contracts. These three modules also moved
-  from the repository root.
+  deterministic request sampling contracts, plus the Gemini and CLOVA legacy
+  provider implementations. These five modules moved from the repository root.
 - `scripts/`: release gates, commands, audit tools, and historical regression
   scripts. Existing script paths are part of the release contract.
 - `tests/`: focused contracts and integration checks.

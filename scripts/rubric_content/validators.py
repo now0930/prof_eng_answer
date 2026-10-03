@@ -48,7 +48,7 @@ def cmd_validate_all(_args: argparse.Namespace) -> int:
         "question_type_router.py",
         "model_answer_router.py",
         "originality_grader.py",
-        "gemini_grader.py",
+        "grading/providers/gemini.py",
         "grading_config.py",
         "grading_agents.py",
         "difficulty_strategy.py",

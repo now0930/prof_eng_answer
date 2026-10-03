@@ -4,8 +4,8 @@ import os
 from pathlib import Path
 from typing import Any, Dict, Optional
 
-from gemini_grader import gemini_semantic_grade as _gemini_semantic_grade
-from clova_grader import clova_semantic_grade as _clova_semantic_grade
+from .gemini import gemini_semantic_grade as _gemini_semantic_grade
+from .clova import clova_semantic_grade as _clova_semantic_grade
 from .settings import get_chat_provider, get_default_provider, normalize_provider
 
 

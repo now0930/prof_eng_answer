@@ -7,8 +7,8 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-import clova_grader
-import gemini_grader
+from grading.providers import clova as clova_grader
+from grading.providers import gemini as gemini_grader
 import originality_grader
 from grading.providers.sampling import (
     SAMPLING_CONTRACT_VERSION,
@@ -172,7 +172,7 @@ class DeterministicSamplingTests(
             },
             clear=False,
         ), mock.patch(
-            "gemini_grader."
+            "grading.providers.gemini."
             "urllib.request.urlopen",
             side_effect=fake_urlopen,
         ):
@@ -249,7 +249,7 @@ class DeterministicSamplingTests(
             },
             clear=False,
         ), mock.patch(
-            "gemini_grader."
+            "grading.providers.gemini."
             "urllib.request.urlopen",
             side_effect=fake_urlopen,
         ), mock.patch(
@@ -346,7 +346,7 @@ class DeterministicSamplingTests(
 
     def test_clova_exact_impl_and_retry(self):
         source = Path(
-            "clova_grader.py"
+            "grading/providers/clova.py"
         ).read_text(
             encoding="utf-8"
         )
@@ -418,11 +418,11 @@ class DeterministicSamplingTests(
             },
             clear=False,
         ), mock.patch(
-            "clova_grader."
+            "grading.providers.clova."
             "urllib.request.urlopen",
             side_effect=fake_urlopen,
         ), mock.patch(
-            "clova_grader.time.sleep",
+            "grading.providers.clova.time.sleep",
             return_value=None,
         ):
             result = (

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import copy
 
-import gemini_grader
+from grading.providers import gemini as gemini_grader
 from question_demand_contract import (
     build_question_demand_contract,
     extract_explicit_question_scope,

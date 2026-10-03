@@ -44,8 +44,8 @@ CODE_BACKED_DOCS = {
     "llm_provider.md": [
         "grading/providers/router.py",
         "grading/providers/settings.py",
-        "gemini_grader.py",
-        "clova_grader.py",
+        "grading/providers/gemini.py",
+        "grading/providers/clova.py",
     ],
     "rubric_authoring_guide.md": [
         "rubric_registry.py",

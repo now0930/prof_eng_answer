@@ -255,7 +255,7 @@ class CanonicalQuestionTypeProductionBoundaryV2Test(
 
         root = Path(__file__).resolve().parents[1]
         source = (
-            root / "gemini_grader.py"
+            root / "grading/providers/gemini.py"
         ).read_text(encoding="utf-8")
         tree = ast.parse(source)
 
@@ -324,7 +324,7 @@ class CanonicalQuestionTypeProductionBoundaryV2Test(
 
         root = Path(__file__).resolve().parents[1]
         source = (
-            root / "gemini_grader.py"
+            root / "grading/providers/gemini.py"
         ).read_text(encoding="utf-8")
 
         self.assertIn(

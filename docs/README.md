@@ -32,7 +32,7 @@
 | 제출문 정규화와 원문·정규화 증적 확인 | [`grading_architecture.md`](grading_architecture.md) | `grade_submission_normalizer.py`, `bot.py` |
 | Fatal·Major 오류의 최종 판정 일관성 확인 | [`grading_architecture.md`](grading_architecture.md) | `verdict_consistency.py`, `grade_output_summarizer.py` |
 | Active Question Type과 deterministic lens 확인 | [`question_type_taxonomy.md`](question_type_taxonomy.md) | [`grading_architecture.md`](grading_architecture.md), [`루트 README §4.10`](../README.md#410-topic-pack-exact-question-demand-projection) |
-| Topic Pack 8축 Question Demand·canonical lens·provider projection 확인 | [`루트 README §4.10`](../README.md#410-topic-pack-exact-question-demand-projection) | [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1), `question_demand_contract.py`, `gemini_grader.py` |
+| Topic Pack 8축 Question Demand·canonical lens·provider projection 확인 | [`루트 README §4.10`](../README.md#410-topic-pack-exact-question-demand-projection) | [GitHub Issue #1](https://github.com/now0930/prof_eng_answer/issues/1), `question_demand_contract.py`, `grading/providers/gemini.py` |
 | `incorrect`, `missing`과 hard cap 확인 | [`grading_architecture.md`](grading_architecture.md) | [`question_type_taxonomy.md`](question_type_taxonomy.md) |
 | Verified defect와 single-owner 정책 확인 | [`grading_architecture.md`](grading_architecture.md) | [`logic_check_profiles_readme.md`](logic_check_profiles_readme.md) |
 | Difficulty Profile과 ceiling 확인 | [`difficulty_and_selection_strategy.md`](difficulty_and_selection_strategy.md) | [`grading_architecture.md`](grading_architecture.md) |
@@ -107,8 +107,8 @@ Generator prompt는 source of truth가 아닙니다. 사람이 검토한 Topic P
 | Software Topic | SW-01~SW-13, 13개 | `docs/topic_pack_architecture.md`, generated manifest |
 | 기본 Rubric Bank | `generated` | `rubric_bank_paths.py` |
 | Lens 입력 | 문제문만 사용; 일치하는 Topic Pack canonical lens가 owner | `question_type_router.py`, `question_demand_contract.py`, `rubrics/topic_packs/<topic_id>/question_demand_axes.json` |
-| Explicit Question Demand projection | Topic Pack 요구축의 exact ID·순서·cardinality 검증 | `question_demand_contract.py`, `gemini_grader.py` |
-| Projection mismatch | strict contract로 1회 retry 후에도 불일치하면 fail-closed | `gemini_grader.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
+| Explicit Question Demand projection | Topic Pack 요구축의 exact ID·순서·cardinality 검증 | `question_demand_contract.py`, `grading/providers/gemini.py` |
+| Projection mismatch | strict contract로 1회 retry 후에도 불일치하면 fail-closed | `grading/providers/gemini.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
 | Demand-state authority | provider는 제안만 하며 canonical ID·답안 원문 인용·verified defect로 최종 합성 | `demand_evidence_resolution.py`, `evaluation_ledger.py` |
 | 제출문 정규화 | topic-neutral·idempotent, 원문·정규화문 증적 보존 | `grade_submission_normalizer.py`, `bot.py`, `grading_agents.py` |
 | 최종 판정 일관성 | Fatal은 Full Credit·strong·합격 차단, Major는 Full Credit·strong 차단, 숫자 점수 유지 | `verdict_consistency.py`, `grade_output_summarizer.py` |
@@ -155,7 +155,7 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | Deterministic grading identity | `grading_architecture.md` | `grading_identity.py` |
 | Question-only type lens | `question_type_taxonomy.md`, 루트 `README.md` §4.10 | `question_type_router.py`, `question_type_taxonomy.py`, `question_demand_contract.py` |
 | Topic Pack explicit demand·canonical lens contract | 루트 `README.md` §4.10 | `rubrics/topic_packs/<topic_id>/question_demand_axes.json`, `question_demand_contract.py` |
-| Provider exact projection·retry·fail-closed | 루트 `README.md` §4.10 | `gemini_grader.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
+| Provider exact projection·retry·fail-closed | 루트 `README.md` §4.10 | `grading/providers/gemini.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
 | `present`, `partial`, `incorrect`, `missing` | `question_type_taxonomy.md` | `question_type_coverage_adapter.py` |
 | 명시적 핵심 요구 누락 hard cap | `grading_architecture.md` | `explicit_requirement_cap.py` |
 | Coverage `warn`, `strict`, `off` | `grading_architecture.md` | `question_type_coverage_score_adjuster.py` |
@@ -189,7 +189,7 @@ Verified defect가 explicit requirement에 연결되면 표시 상태는 `incorr
 | A/B/C/D/E | `rubrics/scoring_model/default.json`과 runtime scoring code |
 | Question Type | `rubrics/question_types/default.json`, `question_type_router.py`; 활성화된 Topic Pack canonical owner는 `question_demand_axes.json` |
 | Explicit Question Demand contract | `rubrics/topic_packs/<topic_id>/question_demand_axes.json`, `question_demand_contract.py` |
-| Provider projection validation | `gemini_grader.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
+| Provider projection validation | `grading/providers/gemini.py`, `tests/test_stage35e2_provider_eight_axis_canonical_lens.py` |
 | Explicit coverage | `question_type_coverage_adapter.py` |
 | 명시적 요구 hard cap | `explicit_requirement_cap.py` |
 | Verified defect mapping | `verified_defect_reconciliation.py` |

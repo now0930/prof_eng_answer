@@ -10,7 +10,7 @@ if str(REPO_ROOT) not in sys.path:
 
 import unittest
 
-import gemini_grader
+from grading.providers import gemini as gemini_grader
 import grading_agents
 import originality_grader
 

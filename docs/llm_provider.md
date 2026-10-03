@@ -116,6 +116,6 @@ docker logs --tail=120 prof_eng_answer_bot | grep -E 'Provider|Gemini|CLOVA|sema
 | `grading/providers/settings.py` | chat별 provider 설정 |
 | `grading/providers/router.py` | provider routing |
 | `grading/providers/sampling.py` | 요청 파라미터 및 재현성 계약 |
-| `gemini_grader.py` | Gemini semantic grader |
-| `clova_grader.py` | CLOVA semantic grader |
+| `grading/providers/gemini.py` | Gemini semantic grader |
+| `grading/providers/clova.py` | CLOVA semantic grader |
 | `grading_agents.py` | provider 결과를 phase2 pipeline에 결합 |

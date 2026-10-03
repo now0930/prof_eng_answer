@@ -100,7 +100,7 @@ def _build_prompt(*args, **kwargs) -> str:
 
     # 1) 먼저 기존 Gemini prompt를 만들어보고, 충분히 짧으면 그대로 사용
     try:
-        from gemini_grader import build_gemini_grading_prompt
+        from .gemini import build_gemini_grading_prompt
         prompt = build_gemini_grading_prompt(*args, **kwargs)
         if len(prompt) <= max_chars:
             return prompt

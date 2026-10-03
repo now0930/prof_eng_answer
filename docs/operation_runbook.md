@@ -251,8 +251,8 @@ cd ~/hermes/workspace/prof_eng_answer
 python3 -m py_compile \
   bot.py \
   grading_agents.py \
-  gemini_grader.py \
-  clova_grader.py \
+  grading/providers/gemini.py \
+  grading/providers/clova.py \
   difficulty_strategy.py \
   difficulty_output_adapter.py \
   difficulty_score_ceiling.py \

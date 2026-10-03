@@ -7,7 +7,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = (
-    ROOT / "gemini_grader.py",
+    ROOT / "grading/providers/gemini.py",
     ROOT / "question_type_coverage_adapter.py",
     ROOT / "verified_defect_reconciliation.py",
     ROOT / "grading_agents.py",
@@ -34,7 +34,7 @@ def test_grading_pipeline_modules_have_no_function_redefinition_chain() -> None:
 
 def test_public_finalization_entrypoints_remain_explicit() -> None:
     required = {
-        "gemini_grader.py": {
+        "gemini.py": {
             "build_gemini_grading_prompt",
             "gemini_semantic_grade",
         },

@@ -2104,7 +2104,7 @@ class GeminiMandatoryPromptBootstrapRegressionTest(
     def test_gemini_mandatory_prompt_steps_are_explicit(
         self,
     ) -> None:
-        import gemini_grader
+        from grading.providers import gemini as gemini_grader
 
         self.assertTrue(
             callable(
@@ -2460,7 +2460,7 @@ class GeminiSemanticPersistenceRegressionTest(
     ) -> None:
         from tempfile import TemporaryDirectory
 
-        import gemini_grader
+        from grading.providers import gemini as gemini_grader
         import grading_agents
 
         valid_result = self._valid_result()
@@ -2519,7 +2519,7 @@ class GeminiSemanticPersistenceRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import gemini_grader
+        from grading.providers import gemini as gemini_grader
         import grading_agents
 
         writes = []
@@ -2589,7 +2589,7 @@ class GeminiSemanticPersistenceRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import gemini_grader
+        from grading.providers import gemini as gemini_grader
         import grading_agents
 
         valid_result = self._valid_result()
@@ -4155,7 +4155,7 @@ class GeminiGraderJsonContractRegressionTest(
     def test_gemini_grader_extract_json_parses_object_variants(
         self,
     ) -> None:
-        from gemini_grader import _extract_json
+        from grading.providers.gemini import _extract_json
 
         cases = {
             "plain": (
@@ -4221,7 +4221,7 @@ class GeminiGraderJsonContractRegressionTest(
     def test_gemini_grader_extract_json_rejects_non_object_and_malformed_payloads(
         self,
     ) -> None:
-        from gemini_grader import _extract_json
+        from grading.providers.gemini import _extract_json
 
         payloads = {
             "plain_array": '[{"score": 1}]',
