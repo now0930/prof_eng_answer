@@ -35,7 +35,8 @@ the deterministic primary authority.
   provider implementations. These five modules moved from the repository root.
 - `scripts/`: release gates, commands, audit tools, and historical regression
   scripts. Existing script paths are part of the release contract.
-- `tests/`: focused contracts and integration checks.
+- `tests/`: focused contracts, integration checks, and historical stage
+  regressions previously kept at the repository root.
 - `schemas/`: JSON contracts for the study layer and other data.
 - `master_topic_packs/`: representative Master records.
 - `rubrics/`: existing Topic Pack and grading data.

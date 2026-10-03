@@ -286,7 +286,7 @@ class Stage25G3Test(unittest.TestCase):
     def test_source_contract(self) -> None:
         source = json.loads(
             (
-                Path(__file__).resolve().parent
+                Path(__file__).resolve().parents[1]
                 / "rubrics"
                 / "topic_packs"
                 / SECONDARY

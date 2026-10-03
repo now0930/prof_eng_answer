@@ -29,7 +29,7 @@ ACTUAL_RAW_RESPONSE = {
 
 
 def _repo() -> Path:
-    return Path(__file__).resolve().parent
+    return Path(__file__).resolve().parents[1]
 
 
 def _actual_session():

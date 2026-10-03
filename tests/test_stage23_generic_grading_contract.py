@@ -31,7 +31,7 @@ from generic_grading_contract import (
     structured_consistency_issues,
 )
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 FIXTURES: dict[str, dict[str, Any]] = {'A': {'label': 'A',
        'session_id': '20260822_003132_5960502198',
        'question': '제어 소프트웨어 개발 수명 주기(V-model)에 따른 단위 시험, 통합 시험, 시스템 시험의 정의와 SIL 달성을 위한 소프트웨어 검증 '
@@ -290,7 +290,7 @@ class Stage23TEngineCommitSafeDirectoryRegression(_s23t_unittest.TestCase):
 
     @classmethod
     def _module_path(cls):
-        return _s23t_pathlib.Path(__file__).resolve().parent / "runtime_grading_provenance.py"
+        return _s23t_pathlib.Path(__file__).resolve().parents[1] / "runtime_grading_provenance.py"
 
     @classmethod
     def _find_payload(cls, value, depth=0):
