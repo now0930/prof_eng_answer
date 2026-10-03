@@ -95,6 +95,20 @@ def test_catalog_persists_decisions_without_writing_master_content() -> None:
                 if item["proposal_id"] == proposal["proposal_id"]
             )
             assert candidate_row["status"] == "candidate_ready"
+            source_path = repo / master["legacy_topic_pack"]["source_files"]["fact_anchor"]
+            canonical_before_validation = (master_path.read_bytes(), source_path.read_bytes())
+            validation = wordpress_catalog.validate_content_update_candidate(
+                database,
+                proposal["proposal_id"],
+            )
+            assert validation["application_status"] == "validated_not_applied"
+            assert validation["master"]["revision"] == master["revision"] + 1
+            assert (master_path.read_bytes(), source_path.read_bytes()) == canonical_before_validation
+            assert next(
+                item for item in wordpress_catalog.list_content_update_proposals(database)
+                if item["proposal_id"] == proposal["proposal_id"]
+            )["status"] == "candidate_ready"
+
             proposal_artifact = candidate_path / "proposals" / f"{proposal['proposal_id']}.json"
             proposal_artifact_bytes = proposal_artifact.read_bytes()
             proposal_artifact.write_bytes(proposal_artifact_bytes + b" ")
@@ -133,7 +147,6 @@ def test_catalog_persists_decisions_without_writing_master_content() -> None:
             else:
                 raise AssertionError("canonical apply must require an explicit identity")
 
-            source_path = repo / master["legacy_topic_pack"]["source_files"]["fact_anchor"]
             source_before_failed_apply = source_path.read_bytes()
             write_atomically = wordpress_catalog._write_bytes_atomically
             write_calls = 0

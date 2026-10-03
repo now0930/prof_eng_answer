@@ -154,8 +154,10 @@ repository-local candidate bundle with a hash manifest. It does not overwrite
 Master or canonical Topic files. Canonical application uses
 `--apply-content-candidate ID --applied-by NAME`; it requires a `candidate_ready`
 catalog record and rechecks the candidate bundle, current revision, and target
-before-value, then records the apply identity/time. It attempts rollback if a
-file replacement fails. This command does not run regression/release gates:
+before-value, then records the apply identity/time. `--validate-content-candidate ID`
+runs this preflight without changing canonical files or proposal status, and
+lists the files a later apply would replace. Apply attempts rollback if a file
+replacement fails. Neither command runs regression/release gates:
 run those before and after applying a real proposal, and do not apply a content
 proposal without its specific user approval.
 

@@ -960,10 +960,11 @@ def apply_content_update_candidate(
     database: Path,
     proposal_id: str,
     *,
-    applied_by: str,
+    applied_by: str | None,
+    dry_run: bool = False,
 ) -> dict[str, Any]:
-    """Apply one reviewed candidate after full provenance and revision checks."""
-    if not isinstance(applied_by, str) or not applied_by.strip():
+    """Validate, or explicitly apply, one candidate after provenance checks."""
+    if not dry_run and (not isinstance(applied_by, str) or not applied_by.strip()):
         raise ValueError("an explicit apply identity is required")
     if not re.fullmatch(r"[A-Za-z0-9._-]+", proposal_id):
         raise ValueError("proposal_id contains unsafe path characters")
@@ -1076,6 +1077,14 @@ def apply_content_update_candidate(
         # Recheck both originals immediately before the first replacement.
         if any(path.read_bytes() != originals[path][0] for path, _ in writes):
             raise ValueError("canonical Topic/Master changed during apply preflight")
+        if dry_run:
+            connection.rollback()
+            return {
+                "proposal": proposal,
+                "master": expected["master"],
+                "would_apply_files": [str(path) for path, _ in writes],
+                "application_status": "validated_not_applied",
+            }
         for path, content in writes:
             _write_bytes_atomically(path, content, originals[path][1])
             replaced.append((path, originals[path][0], originals[path][1]))
@@ -1111,6 +1120,11 @@ def apply_content_update_candidate(
         raise
     finally:
         connection.close()
+
+
+def validate_content_update_candidate(database: Path, proposal_id: str) -> dict[str, Any]:
+    """Perform apply's full preflight without writing canonical files or status."""
+    return apply_content_update_candidate(database, proposal_id, applied_by=None, dry_run=True)
 
 
 def show_content_update_proposals(database: Path, limit: int = 50) -> None:
@@ -1518,6 +1532,7 @@ def main() -> int:
     parser.add_argument("--prepare-content-candidate", help="Build an isolated candidate bundle from an approved proposal")
     parser.add_argument("--apply-content-candidate", help="Apply a reviewed candidate to canonical Topic/Master files")
     parser.add_argument("--applied-by", help="Required explicit identity for --apply-content-candidate")
+    parser.add_argument("--validate-content-candidate", help="Validate a candidate without writing canonical files")
     parser.add_argument("--candidate-root", type=Path, help="Repository-local directory for candidate bundles")
     parser.add_argument("--list-pending", action="store_true", help="List candidate links and Master proposals")
     parser.add_argument("--limit", type=int, default=50, help="Maximum pending rows to display")
@@ -1576,6 +1591,14 @@ def main() -> int:
         print(f"MASTER_REVISION={result['master']['revision']}")
         for path in result["applied_files"]:
             print(f"APPLIED_FILE={path}")
+        return 0
+    if args.validate_content_candidate:
+        result = validate_content_update_candidate(args.database, args.validate_content_candidate)
+        print(f"CONTENT_CANDIDATE_VALID={result['proposal']['proposal_id']}")
+        print(f"MASTER_REVISION={result['master']['revision']}")
+        print("CANONICAL_FILES_CHANGED=false")
+        for path in result["would_apply_files"]:
+            print(f"WOULD_APPLY_FILE={path}")
         return 0
     if args.list_content_proposals:
         show_content_update_proposals(args.database, args.limit)
