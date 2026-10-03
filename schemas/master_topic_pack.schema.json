@@ -1,0 +1,148 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/master_topic_pack.schema.json",
+  "title": "Master Topic Pack",
+  "description": "Versioned, additive topic envelope that references existing grading source and defines learner projections.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "topic_id",
+    "title_ko",
+    "revision",
+    "legacy_topic_pack",
+    "projections",
+    "sources",
+    "source_update_policy"
+  ],
+  "properties": {
+    "$schema": { "type": "string" },
+    "schema_version": { "const": "master-topic-pack-v1" },
+    "topic_id": {
+      "type": "string",
+      "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$",
+      "minLength": 8
+    },
+    "title_ko": { "type": "string", "minLength": 1 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "legacy_topic_pack": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_root", "source_files"],
+      "properties": {
+        "source_root": { "$ref": "#/$defs/relativePath" },
+        "source_files": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["fact_anchor", "logic_check", "model_answer", "topic_importance"],
+          "properties": {
+            "fact_anchor": { "$ref": "#/$defs/relativePath" },
+            "logic_check": { "$ref": "#/$defs/relativePath" },
+            "model_answer": { "$ref": "#/$defs/relativePath" },
+            "topic_importance": { "$ref": "#/$defs/relativePath" },
+            "question_demand_axes": { "$ref": "#/$defs/relativePath" }
+          }
+        }
+      }
+    },
+    "projections": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["grading", "training", "diagnosis"],
+      "properties": {
+        "grading": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["projection_id", "authority", "source_keys"],
+          "properties": {
+            "projection_id": { "const": "grading-projection-v1" },
+            "authority": { "const": "existing_topic_pack" },
+            "source_keys": {
+              "type": "array",
+              "minItems": 4,
+              "uniqueItems": true,
+              "items": { "enum": ["fact_anchor", "logic_check", "model_answer", "topic_importance", "question_demand_axes"] }
+            }
+          }
+        },
+        "training": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["projection_id", "content_sources", "daily_target"],
+          "properties": {
+            "projection_id": { "const": "training-projection-v1" },
+            "content_sources": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "enum": ["fact_anchor", "model_answer", "topic_importance"] }
+            },
+            "daily_target": { "type": "integer", "minimum": 1 }
+          }
+        },
+        "diagnosis": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["projection_id", "content_sources", "dimensions"],
+          "properties": {
+            "projection_id": { "const": "diagnosis-projection-v1" },
+            "content_sources": {
+              "type": "array",
+              "minItems": 1,
+              "uniqueItems": true,
+              "items": { "enum": ["fact_anchor", "logic_check", "model_answer", "topic_importance"] }
+            },
+            "dimensions": {
+              "type": "array",
+              "minItems": 2,
+              "uniqueItems": true,
+              "items": { "enum": ["format", "content", "reasoning", "application", "verification"] }
+            }
+          }
+        }
+      }
+    },
+    "sources": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/sourceReference" }
+    },
+    "source_update_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mode", "approval_required"],
+      "properties": {
+        "mode": { "const": "proposal_only" },
+        "approval_required": { "const": true }
+      }
+    }
+  },
+  "$defs": {
+    "relativePath": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^(?!/)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\\\]+$"
+    },
+    "sourceReference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_id", "source_type", "wordpress_url", "title", "version", "page", "section", "updated_at", "verification_status"],
+      "properties": {
+        "source_id": { "type": "string", "pattern": "^[a-zA-Z0-9][a-zA-Z0-9._:-]*$" },
+        "source_type": { "enum": ["wordpress_post", "wordpress_page", "pdf", "overleaf", "html", "other"] },
+        "wordpress_url": { "type": ["string", "null"], "format": "uri" },
+        "title": { "type": "string", "minLength": 1 },
+        "version": { "type": ["string", "integer"] },
+        "page": { "type": ["string", "integer", "null"] },
+        "section": { "type": ["string", "null"] },
+        "updated_at": { "type": ["string", "null"], "format": "date-time" },
+        "verification_status": { "enum": ["unverified", "verified", "stale", "unavailable"] }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "source_type": { "enum": ["wordpress_post", "wordpress_page"] } } },
+          "then": { "properties": { "wordpress_url": { "type": "string", "format": "uri" } } }
+        }
+      ]
+    }
+  }
+}
