@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
   "title_ko": "제어밸브 본체 형식과 액추에이터 종류 및 선정",
-  "revision": 5,
+  "revision": 8,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_types_globe_rotary_body_actuator_selection",
     "source_files": {
@@ -95,6 +95,42 @@
       "page": null,
       "section": null,
       "updated_at": "2026-08-03T08:40:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6716",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "title": "제어 밸브 종류",
+      "version": "3eb06595b1da24362f271878f3c760d234fcb211ad1f1d5dfdefe297cece056e",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-24T22:29:59+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:64b19d1748a547e216f4c0eec31d0338",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/NeoStudio_20250425_002858_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC15.pdf",
+      "title": "NeoStudio_20250425_002858_산업계측제어 기술사15",
+      "version": "2025-04-24T22:29:42",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-24T22:29:42+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:9fb826c3efdcb01362e2cff119a979ac",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240428_171314.pdf",
+      "title": "NeoStudio_20240428_171314",
+      "version": "2024-04-28T08:15:06",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-28T08:15:06+00:00",
       "verification_status": "unverified"
     }
   ],
