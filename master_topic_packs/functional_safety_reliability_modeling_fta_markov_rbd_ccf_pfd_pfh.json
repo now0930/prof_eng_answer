@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
   "title_ko": "기능안전 신뢰도 모델링: FTA·Markov·RBD·CCF·PFDavg·PFH",
-  "revision": 7,
+  "revision": 9,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh",
     "source_files": {
@@ -119,6 +119,30 @@
       "page": null,
       "section": null,
       "updated_at": "2026-08-28T02:18:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8a84af068d79ee3e6713b6bf99059742",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter-1-2-5%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/TheSafetyCriticlaSystem-9.pdf",
+      "title": "TheSafetyCriticlaSystem-9",
+      "version": "2026-08-29T07:18:46",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-29T07:18:46+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9428",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter-1-2-5%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter-1-2-5%ec%a0%95%eb%a6%ac/",
+      "title": "The Safety Critical Systems, Chapter 1, 2, 5정리",
+      "version": "a7a3ee334ec57a7ba65fded765fde96bec96302014c4c3d2564b3ac0f6b0a90e",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-29T07:19:01+00:00",
       "verification_status": "unverified"
     }
   ],

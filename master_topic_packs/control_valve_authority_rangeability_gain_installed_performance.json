@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
   "title_ko": "조절밸브 유량특성과 밸브 권한도",
-  "revision": 10,
+  "revision": 11,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_authority_rangeability_gain_installed_performance",
     "source_files": {
@@ -155,6 +155,18 @@
       "page": null,
       "section": null,
       "updated_at": "2024-08-29T12:53:14+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d009f835bd41d6fe9f5820739e183273",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/image-3.png",
+      "title": "image",
+      "version": "2025-03-05T12:38:28",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-05T12:38:28+00:00",
       "verification_status": "unverified"
     }
   ],

@@ -1,0 +1,153 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+  "title_ko": "Physical AI, 로봇, 센서융합, Digital Twin, 자율제조 및 안전제어",
+  "revision": 9,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control/logic_check.json",
+      "model_answer": "rubrics/topic_packs/physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/physical_ai_robot_sensor_fusion_digital_twin_autonomous_manufacturing_safety_control/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:0bb53f820ce709b3cf40bc8f870556b5",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%84%ed%86%b5-%ec%a7%80%eb%8a%a5%ed%98%95-%eb%a1%9c%eb%b4%87/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EB%AF%B8%EB%9E%98%EB%A1%9C%EB%B4%87%EC%82%B0%EC%97%85%EB%B0%9C%EC%A0%84%EC%9D%84%EC%9C%84%ED%95%9C5%EB%8C%80%EC%9D%B4%EC%8A%88%EC%99%80%EC%A0%95%EC%B1%85%EC%A0%9C%EC%95%88%EB%B3%B4%EA%B3%A0%EC%84%9C.pdf",
+      "title": "미래로봇산업발전을위한5대이슈와정책제안보고서",
+      "version": "2024-03-02T11:14:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T11:14:53+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:95d6e845ee66f1b823a73baeed104c2f",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%84%ed%86%b5-%ec%a7%80%eb%8a%a5%ed%98%95-%eb%a1%9c%eb%b4%87/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A7%80%EB%8A%A5%ED%98%95%EB%A1%9C%EB%B4%87%EC%A0%9C%EC%96%B4%EB%A5%BC%EC%9C%84%ED%95%9C%EC%8B%9C%EC%8A%A4%ED%85%9C%ED%86%B5%ED%95%A9%EB%B0%A9%EB%B2%95%EB%A1%A0.pdf",
+      "title": "지능형로봇제어를위한시스템통합방법론",
+      "version": "2024-03-02T11:14:18",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T11:14:18+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:436fb6cfc1e0a725cea83e252556db3b",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%84%ed%86%b5-%ec%a7%80%eb%8a%a5%ed%98%95-%eb%a1%9c%eb%b4%87/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-2.jpg",
+      "title": "제목-없음-2",
+      "version": "2024-03-02T11:27:39",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T11:27:39+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4dd497de3e141b450f1f2d9c7305078f",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%84%ed%86%b5-%ec%a7%80%eb%8a%a5%ed%98%95-%eb%a1%9c%eb%b4%87/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1-1.jpg",
+      "title": "제목-없음-1-1",
+      "version": "2024-03-02T11:27:51",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T11:27:51+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8f6cc9655c9e4d76aa8515057ef6566c",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%84%ed%86%b5-%ec%a7%80%eb%8a%a5%ed%98%95-%eb%a1%9c%eb%b4%87/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A7%80%EB%8A%A5%ED%98%95%EB%A1%9C%EB%B4%87_%EC%9A%B0%EC%84%A0%EA%B3%A0%EB%A0%A4%ED%95%B4%EC%95%BC%ED%95%A03%EA%B0%80%EC%A7%80%EC%A0%81%EC%9A%A9%EC%98%81%EC%97%AD.pdf",
+      "title": "지능형로봇_우선고려해야할3가지적용영역",
+      "version": "2024-03-02T08:48:40",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T08:48:40+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:57bf69c6f82b40f3d8c76dbeeaf9fac2",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%84%ed%86%b5-%ec%a7%80%eb%8a%a5%ed%98%95-%eb%a1%9c%eb%b4%87/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1-2.jpg",
+      "title": "제목-없음-1-2",
+      "version": "2024-03-02T11:28:15",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T11:28:15+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6659",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%84%ed%86%b5-%ec%a7%80%eb%8a%a5%ed%98%95-%eb%a1%9c%eb%b4%87/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%a0%84%ed%86%b5-%ec%a7%80%eb%8a%a5%ed%98%95-%eb%a1%9c%eb%b4%87/",
+      "title": "전통, 지능형 로봇",
+      "version": "adc147ba5481de913c652567041c131a8e74747fbbd7feb05f761811636d5ad6",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T11:28:33+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:2b62abcc13000232fcbd5b7afa0744dc",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%84%ed%86%b5-%ec%a7%80%eb%8a%a5%ed%98%95-%eb%a1%9c%eb%b4%87/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-3.jpg",
+      "title": "제목-없음-3",
+      "version": "2024-03-02T11:28:03",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T11:28:03+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

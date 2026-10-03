@@ -1,0 +1,105 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "pid_controller_tuning_sequence_gain_effects",
+  "title_ko": "PID 제어기 튜닝 순서와 P/I/D 게인 영향",
+  "revision": 5,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/pid_controller_tuning_sequence_gain_effects",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/pid_controller_tuning_sequence_gain_effects/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/pid_controller_tuning_sequence_gain_effects/logic_check.json",
+      "model_answer": "rubrics/topic_packs/pid_controller_tuning_sequence_gain_effects/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/pid_controller_tuning_sequence_gain_effects/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:2f22f974728a5618b645fb5f2fdc38ef",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pid-%ec%a0%9c%ec%96%b4%ea%b8%b0-%ea%b0%81-%ec%a0%9c%ec%96%b4%ec%9d%b8%ec%9e%90/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-20.jpg",
+      "title": "제목-없음-20",
+      "version": "2024-03-08T21:55:44",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-08T21:55:44+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:b3c6e5143ca009f3fcb4722cf5975ae2",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pid-%ec%a0%9c%ec%96%b4%ea%b8%b0-%ea%b0%81-%ec%a0%9c%ec%96%b4%ec%9d%b8%ec%9e%90/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/pid_controller.pdf",
+      "title": "pid_controller",
+      "version": "2024-04-30T00:24:15",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-30T00:24:15+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6754",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pid-%ec%a0%9c%ec%96%b4%ea%b8%b0-%ea%b0%81-%ec%a0%9c%ec%96%b4%ec%9d%b8%ec%9e%90/",
+      "source_url": "https://now0930.pe.kr/wordpress/pid-%ec%a0%9c%ec%96%b4%ea%b8%b0-%ea%b0%81-%ec%a0%9c%ec%96%b4%ec%9d%b8%ec%9e%90/",
+      "title": "PID 제어기 각 제어인자",
+      "version": "a07fab3dadb743fe00d9c7fac59ac7f790aec5c0c8ff230dbd4b20956ae2d75b",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-30T00:47:45+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:b3843666f2e166d0e85e0c5226b77016",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pid-%ec%a0%9c%ec%96%b4%ea%b8%b0-%ea%b0%81-%ec%a0%9c%ec%96%b4%ec%9d%b8%ec%9e%90/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240430_094405.pdf",
+      "title": "NeoStudio_20240430_094405",
+      "version": "2024-04-30T00:47:03",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-30T00:47:03+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

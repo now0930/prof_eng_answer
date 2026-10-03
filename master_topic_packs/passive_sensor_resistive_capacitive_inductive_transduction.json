@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "passive_sensor_resistive_capacitive_inductive_transduction",
+  "title_ko": "저항·정전용량·인덕턴스형 센서의 물성·기하 변환 원리",
+  "revision": 3,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/passive_sensor_resistive_capacitive_inductive_transduction",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/passive_sensor_resistive_capacitive_inductive_transduction/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/passive_sensor_resistive_capacitive_inductive_transduction/logic_check.json",
+      "model_answer": "rubrics/topic_packs/passive_sensor_resistive_capacitive_inductive_transduction/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/passive_sensor_resistive_capacitive_inductive_transduction/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:e68f54df8a90cdca5975ca356ae37dd5",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/133%ed%9a%8c-2%ea%b5%90%ec%8b%9c-1%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2025/03/NeoStudio_20250327_052424_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC14.pdf",
+      "title": "NeoStudio_20250327_052424_산업계측제어 기술사14",
+      "version": "2025-03-27T04:27:58",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-27T04:27:58+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:7871",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/133%ed%9a%8c-2%ea%b5%90%ec%8b%9c-1%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/133%ed%9a%8c-2%ea%b5%90%ec%8b%9c-1%eb%b2%88/",
+      "title": "133회 2교시 1번",
+      "version": "b900d0cc6dce4d17cd4a9b0418501241bf656a21c7e22845628bf251ad17282d",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-27T04:28:20+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

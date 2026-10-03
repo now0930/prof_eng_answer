@@ -1,0 +1,165 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+  "title_ko": "P&ID 배관계장도 기호·태그·제어루프·관련 문서와 설계 검토",
+  "revision": 10,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative/logic_check.json",
+      "model_answer": "rubrics/topic_packs/pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:7e31a52b80f59c58684ea0a592f6cfde",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/instrument-line-symbol/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/Instrumentation_Symbols_and_Identification.pdf",
+      "title": "Instrumentation_Symbols_and_Identification",
+      "version": "2024-03-02T03:05:30",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T03:05:30+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6746",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pid/",
+      "source_url": "https://now0930.pe.kr/wordpress/pid/",
+      "title": "P&ID",
+      "version": "dad18a211b24747f86f1882920d8231133dc65dfb91d7f404b86e3769e1e94a0",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-29T13:05:48+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9443",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-7/",
+      "source_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-7/",
+      "title": "Lessons In Industrial Instrumentation, Chapter 7",
+      "version": "4f31595fcb420c103fe4c7508132388d25ef68ac1b65fd4b348f2ee12311d602",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-09-21T14:32:33+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:3e95b27d96f21f1166958f35d952dfd2",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/instrument-line-symbol/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/image.png",
+      "title": "image",
+      "version": "2024-03-02T02:58:39",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T02:58:39+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:7e2953fa27bfc1a63897ee3609f17051",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/instrument-line-symbol/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/Instrument-Line-Symbols.pdf",
+      "title": "Instrument Line Symbols",
+      "version": "2024-03-02T02:51:42",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T02:51:42+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:b04998535ede803c621973a095b36547",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pid/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/image-7.png",
+      "title": "image-7",
+      "version": "2024-04-29T13:05:10",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-29T13:05:10+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6654",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/instrument-line-symbol/",
+      "source_url": "https://now0930.pe.kr/wordpress/instrument-line-symbol/",
+      "title": "Instrument Line symbol",
+      "version": "ea52f9167d0733fe7220ae5b27386660b1c1ae55da8de2ef9c1f5ddbe4713d6d",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T03:11:21+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a22c7f37984358e2a1d7537b74c5f006",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-7/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/09/Lessons_In_Industrial_Instrumentation.pdf",
+      "title": "Lessons_In_Industrial_Instrumentation",
+      "version": "2026-09-02T12:44:41",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-09-02T12:44:41+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d099d00b08930f80bfcc01cb25b9e883",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pid/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/image-8.png",
+      "title": "image-8",
+      "version": "2024-04-29T13:05:40",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-29T13:05:40+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

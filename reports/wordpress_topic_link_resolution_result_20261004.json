@@ -1,0 +1,146 @@
+{
+  "batch_id": "wordpress-topic-resolution-20261004",
+  "link_application": {
+    "backup": "/home/now0930/chatgpt_project/prof_eng_answer/backups/wordpress-before-resolution-20261003T163644Z.sqlite3",
+    "accepted_links": 66,
+    "queued_source_references": 299,
+    "links_before": {
+      "approved": 29,
+      "pending_review": 534
+    },
+    "links_after": {
+      "approved": 95,
+      "pending_review": 478
+    },
+    "pdf_extractions_unchanged": true,
+    "proposal_statuses": {
+      "applied": 74,
+      "pending_approval": 329
+    }
+  },
+  "source_application": {
+    "source_proposals_applied": 316,
+    "master_count": 49,
+    "master_reference_count": 390,
+    "all_master_projections_verified": true,
+    "grading_projection_unchanged": true,
+    "database_integrity": "ok",
+    "remaining_proposals": [
+      {
+        "proposal_id": "catalog-1148f035baa31743c597cf98",
+        "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+        "source_id": "wpurl:b90624abb0003fb6397e19b3ee2597b6",
+        "source_type": "html",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-3277f13a9a01eb8f1d944040",
+        "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+        "source_id": "wpurl:005860e63b8f699647783dc1e51d013e",
+        "source_type": "pdf",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-43ba5bf8cc43a126b98de2f9",
+        "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+        "source_id": "wpurl:ed1c41450168371783557828835a6017",
+        "source_type": "pdf",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-7a79a855c045fe2ba8ec6ef4",
+        "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+        "source_id": "wpurl:4398c51b71111297d1af1188f641435b",
+        "source_type": "pdf",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-915eb62aac461497f6b2481a",
+        "topic_id": "state_feedback_reference_tracking_prefilter_integral_action",
+        "source_id": "wpurl:5d57b50e21f73980187c1bda3409a588",
+        "source_type": "html",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-936e49f04c1d8f1d27ac16cc",
+        "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+        "source_id": "wpurl:69776f4a92931e644ada31c3cffd730e",
+        "source_type": "pdf",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-9e0094a9e927b50ff1c4e091",
+        "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+        "source_id": "wpurl:aa834952cdde90258d3d93f71447e09c",
+        "source_type": "html",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-bb90736959f46c04133124eb",
+        "topic_id": "second_order_system_resonance_frequency_response",
+        "source_id": "wpurl:35ad32502be2c8abba6883c7da8b298f",
+        "source_type": "pdf",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-bf520cf8dcd29c2eb202018b",
+        "topic_id": "pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative",
+        "source_id": "wpurl:72d586c945f979d9a9d8109702b3fd6a",
+        "source_type": "pdf",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-d636edd1cbba4f621a6cff5c",
+        "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+        "source_id": "wpurl:b90624abb0003fb6397e19b3ee2597b6",
+        "source_type": "html",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-dfbb47ccb963e88125e02fad",
+        "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+        "source_id": "wpurl:57ae3a68aa5ee9aa87afa952f62a23bb",
+        "source_type": "pdf",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-f5c92a1eff143cd064947945",
+        "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+        "source_id": "wpurl:313d3d2c0c5a7dbe9303404fe220fd66",
+        "source_type": "html",
+        "first_party": 0
+      },
+      {
+        "proposal_id": "catalog-f5d32d6d023fc4ead70e5542",
+        "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+        "source_id": "wpurl:a70cc4e16d167eb4912544c17babc5ba",
+        "source_type": "html",
+        "first_party": 0
+      }
+    ],
+    "proposal_statuses": {
+      "applied": 390,
+      "pending_approval": 13
+    }
+  },
+  "verification": {
+    "release_suite": "PASS",
+    "topic_pack_release_all": "PASS",
+    "master_schema_count": 49,
+    "approved_link_to_master_count": 95,
+    "review_queue_training_reference_count": 2,
+    "first_party_pdfs_extracted": 368,
+    "external_pdf_download_or_ocr_performed": false,
+    "legacy_topic_pack_or_generated_bank_changed": false,
+    "live_llm_smoke": "not run (no model transport changes)",
+    "dedicated_10_run_reproducibility": "not run (no scoring changes)",
+    "release_log": "/tmp/wordpress-resolution-release-20261004.log",
+    "topic_release_log": "/tmp/wordpress-resolution-topic-release-20261004.log"
+  },
+  "deferred": {
+    "csv_rows": 591,
+    "pending_existing_candidates": 478,
+    "unmatched_rows": 113,
+    "reason": "See row_dispositions and reason_definitions in wordpress_topic_link_resolution_20261004.json."
+  }
+}

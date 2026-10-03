@@ -1,0 +1,189 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "second_order_system_resonance_frequency_response",
+  "title_ko": "2차 시스템 주파수응답과 공진주파수 Topic Pack",
+  "revision": 12,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/second_order_system_resonance_frequency_response",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/second_order_system_resonance_frequency_response/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/second_order_system_resonance_frequency_response/logic_check.json",
+      "model_answer": "rubrics/topic_packs/second_order_system_resonance_frequency_response/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/second_order_system_resonance_frequency_response/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:a3594ce7da4fd58171cd0dd72aed4597",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-76.png",
+      "title": "image",
+      "version": "2025-04-11T19:01:36",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-11T19:01:36+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4f6cc4589b4929d6892f7f091ba4b9fd",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-74.png",
+      "title": "image",
+      "version": "2025-04-11T19:00:01",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-11T19:00:01+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:46028537bc1fab49803b7d057bee0547",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-12.png",
+      "title": "image-12",
+      "version": "2024-01-18T13:21:56",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-18T13:21:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:f89739c711cb949250d9410c92836433",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-11-edited.png",
+      "title": "image-11",
+      "version": "2024-01-18T13:21:40",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-18T13:21:40+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:69dc1a4772750c28bb8d4fbc96aa2521",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-10.png",
+      "title": "image-10",
+      "version": "2024-01-18T13:19:47",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-18T13:19:47+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6106",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "title": "2차 시스템 공진 주파수 유도",
+      "version": "83d28b99ddb865623b87d7d4b70b3b3d7ab06bf929e0e43aaa5170f72420ecbd",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-05-15T07:12:15+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:68755c128160e6169cf0ca554d46322c",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-63.png",
+      "title": "image-63",
+      "version": "2024-01-29T09:02:38",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-29T09:02:38+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:9f00f89b381a792ebf052365e7ec90e5",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2025/04/image-75-edited.png",
+      "title": "image",
+      "version": "2025-04-11T19:01:02",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-11T19:01:02+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:f98b281bdc39318605ab45e69346c50f",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/Kuo10e_10v02.pdf",
+      "title": "Kuo10e_10v02",
+      "version": "2026-04-15T06:58:16",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-15T06:58:16+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:c107cf9b57e84ace2da7d98514b8bdd2",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-62.png",
+      "title": "image-62",
+      "version": "2024-01-29T09:00:31",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-29T09:00:31+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:410396a8ce95b81b367971fd45ce299c",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%b5%ec%a7%84-%ec%a3%bc%ed%8c%8c%ec%88%98-%ec%9c%a0%eb%8f%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-77.png",
+      "title": "image",
+      "version": "2025-04-11T20:59:30",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-11T20:59:30+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

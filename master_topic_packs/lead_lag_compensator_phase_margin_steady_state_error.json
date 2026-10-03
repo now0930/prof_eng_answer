@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "lead_lag_compensator_phase_margin_steady_state_error",
   "title_ko": "진상·지상 보상기의 위상여유·정상상태 오차 설계",
-  "revision": 7,
+  "revision": 14,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/lead_lag_compensator_phase_margin_steady_state_error",
     "source_files": {
@@ -119,6 +119,90 @@
       "page": null,
       "section": null,
       "updated_at": "2024-05-08T14:22:14+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d738870b08f6611fd3f805ff29a6f657",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-51.png",
+      "title": "image-51",
+      "version": "2024-01-24T14:03:11",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-24T14:03:11+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:7fde5916512353791ea4efc224b50e0c",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lead-lag-compensator/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-42.jpg",
+      "title": "제목-없음-42",
+      "version": "2024-03-15T13:15:14",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-15T13:15:14+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:9a4be08178d5195f5c2e21a9cf285605",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-79.png",
+      "title": "image",
+      "version": "2026-04-13T13:48:20",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-13T13:48:20+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e68378a4a5b5ca84e87f93dcfdacaad8",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-53.png",
+      "title": "image-53",
+      "version": "2024-01-24T14:28:12",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-24T14:28:12+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:50df7925c155225c94be03cd3daefc0f",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-54.png",
+      "title": "image-54",
+      "version": "2024-01-24T14:28:20",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-24T14:28:20+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:7e288c3ddb968cf455244e820ca3b8e6",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lead-lag-compensator/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/image-41.png",
+      "title": "image",
+      "version": "2026-04-13T11:57:49",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-13T11:57:49+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a66febfeeacada1844113df06e1beee1",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lag-compensator-%eb%ac%b8%ec%a0%9c%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-80.png",
+      "title": "image",
+      "version": "2026-04-13T13:48:30",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-13T13:48:30+00:00",
       "verification_status": "unverified"
     }
   ],

@@ -1,0 +1,105 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "feedback_system_closed_loop_sensitivity_steady_state_error",
+  "title_ko": "피드백 시스템의 폐루프 구조·민감도·정상상태 오차",
+  "revision": 5,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/feedback_system_closed_loop_sensitivity_steady_state_error",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/feedback_system_closed_loop_sensitivity_steady_state_error/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/feedback_system_closed_loop_sensitivity_steady_state_error/logic_check.json",
+      "model_answer": "rubrics/topic_packs/feedback_system_closed_loop_sensitivity_steady_state_error/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/feedback_system_closed_loop_sensitivity_steady_state_error/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:ae6323489a29b899a1529ba323e9c5ed",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/feedback-system/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2025/04/NeoStudio_20250416_010008_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC15.pdf",
+      "title": "NeoStudio_20250416_010008_산업계측제어 기술사15",
+      "version": "2025-04-15T23:28:18",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-15T23:28:18+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6047",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/oltf-cltf-in-feedback-system/",
+      "source_url": "https://now0930.pe.kr/wordpress/oltf-cltf-in-feedback-system/",
+      "title": "OLTF, CLTF in feedback system",
+      "version": "df0a3a9bcb995741e8a71eadcfa8e2daa9478fdc8dc5cc43d29205d7ba2247c1",
+      "page": null,
+      "section": null,
+      "updated_at": "2023-12-21T03:08:34+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:7945",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/feedback-system/",
+      "source_url": "https://now0930.pe.kr/wordpress/feedback-system/",
+      "title": "feedback system",
+      "version": "2f3b66761f50c5ad665b332c9428e3161597091045ff6e795d02e42fc880cea6",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-15T23:29:38+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:77495f17fe6bb6c198b9d79dac6a113b",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/oltf-cltf-in-feedback-system/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2023/12/image.png",
+      "title": "image",
+      "version": "2023-12-21T03:05:41",
+      "page": null,
+      "section": null,
+      "updated_at": "2023-12-21T03:05:41+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

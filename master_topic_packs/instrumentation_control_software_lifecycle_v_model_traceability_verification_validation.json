@@ -1,15 +1,15 @@
 {
   "schema_version": "master-topic-pack-v1",
-  "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
-  "title_ko": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
-  "revision": 7,
+  "topic_id": "instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
+  "title_ko": "계측제어 소프트웨어 수명주기, V-Model, 추적성, 검증 및 확인",
+  "revision": 5,
   "legacy_topic_pack": {
-    "source_root": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation",
+    "source_root": "rubrics/topic_packs/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation",
     "source_files": {
-      "fact_anchor": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation/fact_anchor.json",
-      "logic_check": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation/logic_check.json",
-      "model_answer": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation/model_answer.json",
-      "topic_importance": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation/topic_importance.json"
+      "fact_anchor": "rubrics/topic_packs/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation/logic_check.json",
+      "model_answer": "rubrics/topic_packs/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/instrumentation_control_software_lifecycle_v_model_traceability_verification_validation/topic_importance.json"
     }
   },
   "projections": {
@@ -50,18 +50,6 @@
   },
   "sources": [
     {
-      "source_id": "wp-post:9416",
-      "source_type": "wordpress_post",
-      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter4/",
-      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter4/",
-      "title": "The Safety Critical Systems, Chapter4",
-      "version": "ccbdfa2b50548ee862c057cda3321d76e710b486b3022e03f96907596bd05c37",
-      "page": null,
-      "section": null,
-      "updated_at": "2026-08-27T12:27:35+00:00",
-      "verification_status": "unverified"
-    },
-    {
       "source_id": "wpurl:d2843b63b84a65e8da934229b772389c",
       "source_type": "pdf",
       "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter4/",
@@ -98,27 +86,15 @@
       "verification_status": "unverified"
     },
     {
-      "source_id": "wpurl:b8f347b12d87268295bd11a0ec164114",
-      "source_type": "pdf",
-      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-%ec%a0%95%eb%a6%ac/",
-      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/TheSafetyCriticlaSystem-5.pdf",
-      "title": "TheSafetyCriticlaSystem",
-      "version": "2026-08-28T02:18:09",
-      "page": null,
-      "section": null,
-      "updated_at": "2026-08-28T02:18:09+00:00",
-      "verification_status": "unverified"
-    },
-    {
-      "source_id": "wp-post:9420",
+      "source_id": "wp-post:9416",
       "source_type": "wordpress_post",
-      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-%ec%a0%95%eb%a6%ac/",
-      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-%ec%a0%95%eb%a6%ac/",
-      "title": "The Safety Critical Systems 정리",
-      "version": "d4e9c41ef7a6ed87010f00ca17a9f37b426bff2b9017b85fc2f891aaa44d0a25",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter4/",
+      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter4/",
+      "title": "The Safety Critical Systems, Chapter4",
+      "version": "ccbdfa2b50548ee862c057cda3321d76e710b486b3022e03f96907596bd05c37",
       "page": null,
       "section": null,
-      "updated_at": "2026-08-28T02:19:32+00:00",
+      "updated_at": "2026-08-27T12:27:35+00:00",
       "verification_status": "unverified"
     }
   ],

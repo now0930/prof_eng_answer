@@ -1,0 +1,106 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "sil_target_determination_risk_reduction_and_lifecycle",
+  "title_ko": "목표 SIL 결정·요구 위험감소·플랜트 안전수명주기",
+  "revision": 5,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/sil_target_determination_risk_reduction_and_lifecycle",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/sil_target_determination_risk_reduction_and_lifecycle/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/sil_target_determination_risk_reduction_and_lifecycle/logic_check.json",
+      "model_answer": "rubrics/topic_packs/sil_target_determination_risk_reduction_and_lifecycle/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/sil_target_determination_risk_reduction_and_lifecycle/topic_importance.json",
+      "question_demand_axes": "rubrics/topic_packs/sil_target_determination_risk_reduction_and_lifecycle/question_demand_axes.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9428",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter-1-2-5%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter-1-2-5%ec%a0%95%eb%a6%ac/",
+      "title": "The Safety Critical Systems, Chapter 1, 2, 5정리",
+      "version": "a7a3ee334ec57a7ba65fded765fde96bec96302014c4c3d2564b3ac0f6b0a90e",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-29T07:19:01+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8a84af068d79ee3e6713b6bf99059742",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter-1-2-5%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/TheSafetyCriticlaSystem-9.pdf",
+      "title": "TheSafetyCriticlaSystem-9",
+      "version": "2026-08-29T07:18:46",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-29T07:18:46+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:56c88e24a4156a05846a616545a7e466",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-system-chapter2/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/TheSafetyCriticlaSystem-1-1.pdf",
+      "title": "TheSafetyCriticlaSystem-1",
+      "version": "2026-08-28T02:35:56",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-28T02:35:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9398",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-system-chapter2/",
+      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-system-chapter2/",
+      "title": "The Safety Critical System, Chapter2",
+      "version": "01f5794c25ca02b4662784351e1f6a1e9c8d30fd5c7e4dfcfcd314211e2deb26",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-28T02:40:02+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

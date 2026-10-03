@@ -1,0 +1,297 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+  "title_ko": "Nyquist 안정도 판별과 이득·위상여유",
+  "revision": 21,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/nyquist_stability_criterion_gain_phase_margin",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/nyquist_stability_criterion_gain_phase_margin/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/nyquist_stability_criterion_gain_phase_margin/logic_check.json",
+      "model_answer": "rubrics/topic_packs/nyquist_stability_criterion_gain_phase_margin/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/nyquist_stability_criterion_gain_phase_margin/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:f40c4923f2be30ee8a5bea4dad3c38f7",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-36.png",
+      "title": "image-36",
+      "version": "2024-01-22T05:13:48",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-22T05:13:48+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:02997be0cd28388c5c46f3f3aee3ea38",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-39.png",
+      "title": "image-39",
+      "version": "2024-01-22T09:29:19",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-22T09:29:19+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:14f30472894695bc278b335159bd8dda",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-27.png",
+      "title": "image-27",
+      "version": "2024-01-21T06:48:39",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-21T06:48:39+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:01bccf0a5e912f825964c5746d193111",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-31.png",
+      "title": "image-31",
+      "version": "2024-01-21T08:30:09",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-21T08:30:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:89c71a9d9f41dc05677118183f8af006",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-41.png",
+      "title": "image-41",
+      "version": "2024-01-22T09:29:35",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-22T09:29:35+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:06460e52f8a9debe4fa1261fe19785be",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-38.png",
+      "title": "image-38",
+      "version": "2024-01-22T09:29:07",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-22T09:29:07+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8cf2f1c705dd0a6692222b25fa93e426",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-42.png",
+      "title": "image-42",
+      "version": "2024-01-22T09:29:41",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-22T09:29:41+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d1f1addaf298ddff0f464ed05a2be529",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-33.png",
+      "title": "image-33",
+      "version": "2024-01-21T08:31:00",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-21T08:31:00+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4897867d0740e93567a5709e16777a84",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-37.png",
+      "title": "image-37",
+      "version": "2024-01-22T05:23:55",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-22T05:23:55+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:f1a45122cb4581f2f87c6fd5d2b4cd41",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-34.png",
+      "title": "image-34",
+      "version": "2024-01-21T08:31:04",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-21T08:31:04+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6156",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "title": "Nyquist Plot Time Dealy",
+      "version": "175aa64efa4236271cd046155d17f992c90bbd59a01212f965097f69487ed3c6",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-05-17T20:49:45+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:12498d7be58985728c87e1390e77b63b",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-30.png",
+      "title": "image-30",
+      "version": "2024-01-21T08:29:08",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-21T08:29:08+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:0f838d6576ee1ad38eb6bedd1b635890",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/05/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C.jpg",
+      "title": "제목-없음",
+      "version": "2024-05-05T02:30:09",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-05-05T02:30:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:6c123c8133402454c8de7826c070a6ee",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-28.png",
+      "title": "image-28",
+      "version": "2024-01-21T07:43:59",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-21T07:43:59+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:eb2c2c47f045f87c8105f396e34247bc",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-40.png",
+      "title": "image-40",
+      "version": "2024-01-22T09:29:27",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-22T09:29:27+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6134",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "source_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "title": "Nyquist Plot",
+      "version": "e14805808222b2273ca3ab7f5ebfe258be2cd2017896f5962fb30722036df79f",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-22T09:32:30+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:427f79044e583ff6ef86b80d781146d1",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/05/PM_GM.pdf",
+      "title": "PM_GM",
+      "version": "2024-05-04T08:14:33",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-05-04T08:14:33+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:7a48c72223610296a6ceac47a3b1ec8c",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-32.png",
+      "title": "image-32",
+      "version": "2024-01-21T08:30:14",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-21T08:30:14+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e4e52a6778799ac4110af1bd2c7d900c",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-35.png",
+      "title": "image-35",
+      "version": "2024-01-21T08:31:45",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-21T08:31:45+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:1b53660ea6e9b9ac3d14beeb10c8ae28",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/nyquist-plot/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-29.png",
+      "title": "image-29",
+      "version": "2024-01-21T08:28:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-21T08:28:53+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
