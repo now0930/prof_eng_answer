@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
   "title_ko": "조절밸브 유량특성과 밸브 권한도",
-  "revision": 6,
+  "revision": 10,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_authority_rangeability_gain_installed_performance",
     "source_files": {
@@ -107,6 +107,54 @@
       "page": null,
       "section": null,
       "updated_at": "2024-08-26T15:21:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:062c45fd4bdf5160de44d6d785a91578",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/pressure-recovery-factor.pdf",
+      "title": "pressure recovery factor",
+      "version": "2024-08-29T09:34:09",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-29T09:34:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:69f300cdb098854535f2b5e24ef1d22f",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/pressure-recovery-factor2.pdf",
+      "title": "pressure recovery factor2",
+      "version": "2024-08-29T09:34:29",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-29T09:34:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ce8961cfd8764a7e2828756412f2bdca",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/NeoStudio_20240822_223315.pdf",
+      "title": "NeoStudio_20240822_223315",
+      "version": "2024-08-22T13:35:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-22T13:35:53+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:f7338e955a3d3f8f193173ac1bdb2e2d",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/NeoStudio_20240829_215120.pdf",
+      "title": "NeoStudio_20240829_215120",
+      "version": "2024-08-29T12:53:14",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-29T12:53:14+00:00",
       "verification_status": "unverified"
     }
   ],
