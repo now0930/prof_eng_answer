@@ -49,17 +49,20 @@ def build_review_queue(
         topic_id = candidate.get("topic_id")
         reason = candidate.get("reason")
         question_id = candidate.get("question_id")
+        question_text = candidate.get("question_text")
         if not isinstance(topic_id, str) or len(topic_id) < 8:
             raise ReviewQueueError("candidate topic_id is invalid")
         if reason not in QUEUE_REASONS:
             raise ReviewQueueError("candidate reason is invalid")
         if question_id is not None and (not isinstance(question_id, str) or not question_id.strip()):
             raise ReviewQueueError("question_id must be a non-empty string or null")
+        if question_text is not None and not isinstance(question_text, str):
+            raise ReviewQueueError("question_text must be a string")
         identity = (topic_id, reason)
         if identity in seen:
             continue
         seen.add(identity)
-        normalized.append({"topic_id": topic_id, "reason": reason, "question_id": question_id})
+        normalized.append({"topic_id": topic_id, "reason": reason, "question_id": question_id, "question_text": question_text or ""})
 
     weak = next((item for item in normalized if item["reason"] == "weak_topic"), None)
     retention = next((item for item in normalized if item["reason"] in _RETENTION_REASONS and (weak is None or item["topic_id"] != weak["topic_id"])), None)
@@ -88,6 +91,7 @@ def build_review_queue(
                 "reason": item["reason"],
                 "slot": slot,
                 "question_id": item["question_id"],
+                "question_text": item["question_text"],
             }
             for item, slot in chosen
         ],

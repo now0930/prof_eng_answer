@@ -63,9 +63,11 @@ HELP_TEXT = """
 기타 명령:
 /status  현재 세션 상태
 /rubric  현재 채점 기준 보기
+/review  오늘 복습 Queue 확인
 /help    도움말
 /provider 현재 LLM Provider 확인
 /provider auto|gemini|clova|reset
+/review done <topic_id>  복습 완료와 다음 일정 기록
 """.strip()
 
 
@@ -852,6 +854,40 @@ def grade_answer(chat_id, raw_text, state):
             json.dumps(parsed, ensure_ascii=False, indent=2),
             encoding="utf-8"
         )
+
+        topic_id = parsed.get("topic_id") or parsed.get("inferred_topic_id")
+        if topic_id:
+            try:
+                from learning_runtime import record_completed_grade
+                from training_history import TrainingHistoryStore
+
+                history_path = Path(
+                    os.getenv("TRAINING_HISTORY_DB")
+                    or (DATA_DIR / "training_history.sqlite3")
+                )
+                if not history_path.is_absolute():
+                    history_path = BASE_DIR / history_path
+                snapshot = record_completed_grade(
+                    TrainingHistoryStore(history_path),
+                    learner_id=str(chat_id),
+                    sid=sid,
+                    grade=parsed,
+                    submission_normalization=submission_normalization,
+                    master_directory=BASE_DIR / "master_topic_packs",
+                    session_directory=session_dir,
+                )
+                log(
+                    "learning history saved: "
+                    f"session={sid} attempt={snapshot['attempt_id']} "
+                    f"queue_items={len(snapshot['queue']['items'])}"
+                )
+            except Exception as exc:
+                # Learning history is a secondary write. It must never alter
+                # the already finalized grade or block the grading response.
+                try:
+                    log(f"learning history write failed for {sid}: {exc}")
+                except Exception:
+                    pass
 
     meta["status"] = "graded"
     meta["graded_at"] = datetime.now().isoformat(timespec="seconds")
@@ -1735,6 +1771,84 @@ def _finalize_pending_grade(chat_id, state):
         )
     send_message(chat_id, format_result(parsed, raw_result))
     send_message(chat_id, f"저장 위치: /workspace/prof_eng_answer/data/sessions/{sid}")
+    if (SESSIONS_DIR / sid / "learning_history.json").exists():
+        send_message(
+            chat_id,
+            "학습 이력을 저장했습니다. /review 로 오늘 복습할 2문제를 확인하고, "
+            "/review done <topic_id> 로 복습 완료를 기록할 수 있습니다.",
+        )
+
+
+def _handle_review_command(chat_id, command_text):
+    from learning_runtime import (
+        LearningRuntimeError,
+        complete_topic_review,
+        create_daily_review_queue,
+    )
+    from training_history import TrainingHistoryStore
+
+    history_path = Path(
+        os.getenv("TRAINING_HISTORY_DB")
+        or (DATA_DIR / "training_history.sqlite3")
+    )
+    if not history_path.is_absolute():
+        history_path = BASE_DIR / history_path
+    history = TrainingHistoryStore(history_path)
+    arguments = command_text.split()
+
+    if len(arguments) == 3 and arguments[1].lower() == "done":
+        topic_id = arguments[2]
+        try:
+            record = complete_topic_review(
+                history,
+                learner_id=str(chat_id),
+                topic_id=topic_id,
+            )
+        except LearningRuntimeError as exc:
+            send_message(chat_id, f"복습 완료를 기록하지 못했습니다: {exc}")
+            return
+        send_message(
+            chat_id,
+            f"복습 완료: {topic_id}\n다음 복습 예정: {record['next_review_at']}",
+        )
+        return
+
+    if len(arguments) != 1:
+        send_message(chat_id, "사용법: /review 또는 /review done <topic_id>")
+        return
+    try:
+        generated_at = datetime.now().astimezone().isoformat(timespec="seconds")
+        queue, titles = create_daily_review_queue(
+            history,
+            learner_id=str(chat_id),
+            master_directory=BASE_DIR / "master_topic_packs",
+            generated_at=generated_at,
+        )
+    except Exception as exc:
+        log(f"review queue generation failed for chat {chat_id}: {exc}")
+        send_message(chat_id, "복습 목록을 만들지 못했습니다. 잠시 후 다시 시도해 주세요.")
+        return
+    if not queue["items"]:
+        send_message(chat_id, "오늘 복습할 항목이 없습니다. 새 Topic Pack이 등록되면 여기에 표시됩니다.")
+        return
+
+    labels = {
+        "weak_topic": "약점 보완",
+        "long_unreviewed_topic": "장기 기억",
+        "recently_changed_topic": "최근 변경",
+        "new_topic": "새 Topic",
+    }
+    lines = ["오늘의 복습 Queue (최대 2문제)"]
+    for index, item in enumerate(queue["items"], start=1):
+        title = titles.get(item["topic_id"], item["topic_id"])
+        lines.append(
+            f"{index}. [{labels[item['reason']]}] {title}\n"
+            f"   topic_id: {item['topic_id']}"
+        )
+        if item.get("question_text"):
+            lines.append(f"   문제: {item['question_text']}")
+    lines.append("복습 후 /review done <topic_id> 로 기록하세요.")
+    send_message(chat_id, "\n".join(lines))
 
 
 def handle_text(message, chat_id, state):
@@ -1742,6 +1856,10 @@ def handle_text(message, chat_id, state):
 
     if text.startswith("/start") or text.startswith("/help"):
         send_message(chat_id, HELP_TEXT)
+        return
+
+    if text.strip() == "/review" or text.startswith("/review "):
+        _handle_review_command(chat_id, text.strip())
         return
 
     if text.startswith("/new"):

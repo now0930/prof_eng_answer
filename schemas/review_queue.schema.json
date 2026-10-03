@@ -20,7 +20,8 @@
           "topic_id": { "type": "string", "minLength": 8 },
           "reason": { "enum": ["weak_topic", "long_unreviewed_topic", "recently_changed_topic", "new_topic"] },
           "slot": { "enum": ["weakness", "retention"] },
-          "question_id": { "type": ["string", "null"] }
+          "question_id": { "type": ["string", "null"] },
+          "question_text": { "type": "string" }
         }
       }
     }

@@ -544,6 +544,10 @@ python3 -B scripts/test_physical_ai_robot_sensor_fusion_safety_topic.py
 echo "----- host regression: pid piping instrumentation diagram symbols tags loops control narrative -----"
 python3 -B scripts/test_pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative.py
 
+echo "----- host regression: learning runtime and bot history integration -----"
+python3 -B scripts/test_learning_runtime.py
+python3 -B scripts/test_bot_learning_history_integration.py
+
 echo "----- host regression: plan a requirement coverage regressions -----"
 # Parallel Topic expansion focused regressions (15)
 python3 -B scripts/test_instrumentation_power_grounding_shielding_ups_ground_loop_emc_topic.py

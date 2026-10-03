@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import sys
+import sqlite3
 import tempfile
 from pathlib import Path
 
@@ -51,6 +52,70 @@ def test_training_history_rejects_naive_time_and_out_of_range_score() -> None:
             pass
         else:
             raise AssertionError("invalid training attempt was accepted")
+
+
+def test_history_isolated_by_learner_and_latest_review_updates_schedule() -> None:
+    with tempfile.TemporaryDirectory(prefix="training-history-learners-") as directory:
+        store = TrainingHistoryStore(Path(directory) / "history.sqlite3")
+        attempt = TrainingAttempt(
+            learner_id="chat-100",
+            question_id="question-1",
+            topic_id="valid_topic_id",
+            attempted_at="2026-10-01T09:00:00+09:00",
+            score=12,
+            diagnosis={"content": ["needs work"]},
+        )
+        store.save(attempt)
+        assert len(store.list_attempts(learner_id="chat-100")) == 1
+        assert store.list_attempts(learner_id="chat-200") == []
+        reviewed = store.review_latest_for_topic(
+            "chat-100",
+            "valid_topic_id",
+            last_reviewed_at="2026-10-03T09:00:00+09:00",
+            next_review_at="2026-11-02T09:00:00+09:00",
+        )
+        assert reviewed["review_status"] == "scheduled"
+        assert reviewed["last_reviewed_at"].startswith("2026-10-03")
+
+
+def test_training_history_migrates_pre_learner_columns() -> None:
+    with tempfile.TemporaryDirectory(prefix="training-history-migration-") as directory:
+        database = Path(directory) / "history.sqlite3"
+        connection = sqlite3.connect(database)
+        connection.execute(
+            """CREATE TABLE training_history (
+                attempt_id TEXT PRIMARY KEY,
+                question_id TEXT NOT NULL,
+                topic_id TEXT NOT NULL,
+                attempted_at TEXT NOT NULL,
+                score REAL NOT NULL,
+                diagnosis_json TEXT NOT NULL,
+                review_status TEXT NOT NULL,
+                last_reviewed_at TEXT,
+                next_review_at TEXT
+            )"""
+        )
+        connection.execute(
+            "INSERT INTO training_history VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            ("old-attempt", "old-question", "valid_topic_id", "2026-10-01T09:00:00+09:00", 10, "{}", "new", None, None),
+        )
+        connection.commit()
+        connection.close()
+
+        store = TrainingHistoryStore(database)
+        old_row = store.list_attempts()[0]
+        assert old_row["learner_id"] == "default"
+        assert old_row["question_text"] == ""
+        assert old_row["session_id"] == ""
+        saved = store.save(TrainingAttempt(
+            learner_id="chat-1",
+            question_id="new-question",
+            topic_id="valid_topic_id",
+            attempted_at="2026-10-03T09:00:00+09:00",
+            score=17,
+            diagnosis={},
+        ))
+        assert saved["learner_id"] == "chat-1"
 
 
 def test_review_queue_selects_weakness_and_retention_slots() -> None:
