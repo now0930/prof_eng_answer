@@ -12,7 +12,7 @@ from itertools import combinations
 from pathlib import Path
 from typing import Any, Iterable
 
-from expert_accuracy_benchmark import (
+from grading.quality.expert_accuracy_benchmark import (
     FINAL_REVIEW_STATUSES,
     _match_demand_rows,
     load_jsonl,

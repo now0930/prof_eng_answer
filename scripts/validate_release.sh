@@ -101,8 +101,8 @@ python3 -m py_compile \
   scripts/measure_expert_accuracy.py \
   scripts/check_accuracy_release_gate.py \
   scripts/regrade_expert_accuracy_seed.py \
-  expert_accuracy_benchmark.py \
-  accuracy_release_gate.py \
+  grading/quality/expert_accuracy_benchmark.py \
+  grading/quality/accuracy_release_gate.py \
   grading/evidence/canonical_grading_evidence.py \
   grading/evidence/canonical_claim_extractor.py \
   grading/evidence/quantity_dimension_evaluator.py \

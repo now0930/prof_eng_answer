@@ -6,7 +6,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from expert_calibration_dataset import (
+from grading.quality.expert_calibration_dataset import (
     CalibrationContractError,
     load_jsonl,
     validate_record,

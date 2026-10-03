@@ -1444,7 +1444,7 @@ def _phase2_text_stats(text):
 
 def _phase2_estimate_volume_level(answer_text, image_count=0):
     """Compatibility wrapper for ASCII-only volume estimation."""
-    from answer_volume import estimate_ascii_answer_volume
+    from grading.scoring.answer_volume import estimate_ascii_answer_volume
 
     _ = image_count
     return estimate_ascii_answer_volume(answer_text)

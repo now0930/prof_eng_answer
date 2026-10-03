@@ -11,7 +11,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from answer_volume import estimate_ascii_answer_volume, normalize_volume_text
+from grading.scoring.answer_volume import estimate_ascii_answer_volume, normalize_volume_text
 
 HAZOP = "hazop_lopa_ipl_risk_reduction_sil_target_allocation"
 FSRM = "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"

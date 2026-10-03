@@ -12,7 +12,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
-from expert_calibration_dataset import (
+from grading.quality.expert_calibration_dataset import (
     CalibrationContractError,
     DIRECT_SCORE_APPLICATION,
     PRODUCTION_CALIBRATION_ENABLED,

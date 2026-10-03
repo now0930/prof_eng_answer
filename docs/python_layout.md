@@ -1,8 +1,9 @@
 # Python module layout
 
-The Telegram entry point is `bot.py`. Existing grading modules at the repository
-root retain their import names because release scripts, replay tools, and tests
-use them directly. The grading authority remains in those modules.
+The Telegram entry point is `bot.py`; `grading_agents.py` remains the public
+grading pipeline entry point. Implementation modules live in domain packages
+under `grading/`, and their import paths are updated across runtime and tests.
+The deterministic grading authority is unchanged.
 
 ## Study package
 
@@ -42,6 +43,8 @@ the deterministic primary authority.
   replay/shadow checks.
 - `grading/rubrics/`: Topic Pack bank paths and registry access; both retain
   repository-root-relative path resolution.
+- `grading/quality/`: expert accuracy benchmark, calibration dataset,
+  Golden-risk audit, and accuracy release policy.
 - `scripts/`: release gates, commands, audit tools, and historical regression
   scripts. Existing script paths are part of the release contract.
 - `tests/`: focused contracts, integration checks, and historical stage

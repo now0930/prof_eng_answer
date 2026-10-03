@@ -7,7 +7,7 @@ import sys
 from pathlib import Path
 from typing import Any, Iterable
 
-from expert_calibration_dataset import (
+from grading.quality.expert_calibration_dataset import (
     CalibrationContractError,
     build_draft_record,
     load_jsonl,

@@ -17,7 +17,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from bot import call_ollama, call_ollama_score_adjudicator
-from expert_accuracy_benchmark import (
+from grading.quality.expert_accuracy_benchmark import (
     load_jsonl,
     prediction_from_grade,
     validate_gold_case,

@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from expert_accuracy_benchmark import load_jsonl, validate_gold_case
+from grading.quality.expert_accuracy_benchmark import load_jsonl, validate_gold_case
 
 
 VERSION = "golden_risk_coverage_v1"

@@ -5,7 +5,7 @@ from __future__ import annotations
 from collections import Counter
 from typing import Any, Iterable
 
-from expert_accuracy_benchmark import FINAL_REVIEW_STATUSES, validate_gold_case
+from grading.quality.expert_accuracy_benchmark import FINAL_REVIEW_STATUSES, validate_gold_case
 
 
 POLICY_VERSION = "expert_accuracy_release_policy_v1"

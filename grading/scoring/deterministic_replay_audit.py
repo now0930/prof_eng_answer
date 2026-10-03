@@ -6,7 +6,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from expert_accuracy_benchmark import load_jsonl, validate_gold_case
+from grading.quality.expert_accuracy_benchmark import load_jsonl, validate_gold_case
 from grading.evidence.engineering_invariant_evaluator import evaluate_engineering_invariants
 from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from grading.scoring.deterministic_score_engine import calculate_deterministic_score

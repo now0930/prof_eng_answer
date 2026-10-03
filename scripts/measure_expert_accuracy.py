@@ -13,7 +13,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from expert_accuracy_benchmark import (
+from grading.quality.expert_accuracy_benchmark import (
     load_jsonl,
     measure_accuracy,
     prediction_from_grade,

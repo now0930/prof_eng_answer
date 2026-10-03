@@ -5,7 +5,7 @@ from __future__ import annotations
 import re
 from typing import Any
 
-from answer_volume import estimate_ascii_answer_volume
+from grading.scoring.answer_volume import estimate_ascii_answer_volume
 
 
 VERSION = "deterministic_score_evidence_v1"
