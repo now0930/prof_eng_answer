@@ -2,7 +2,7 @@
   "schema_version": "master-topic-pack-v1",
   "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
   "title_ko": "제어밸브에 작용하는 유체력, 불평형력, 마찰력과 액추에이터·Fail-Safe 설계",
-  "revision": 3,
+  "revision": 4,
   "legacy_topic_pack": {
     "source_root": "rubrics/topic_packs/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
     "source_files": {
@@ -71,6 +71,18 @@
       "page": null,
       "section": null,
       "updated_at": "2026-08-04T08:18:23+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9260",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%b0%b8%eb%b8%8c%ec%97%90-%ec%9e%91%ec%9a%a9%ed%95%98%eb%8a%94-%ed%9e%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/%eb%b0%b8%eb%b8%8c%ec%97%90-%ec%9e%91%ec%9a%a9%ed%95%98%eb%8a%94-%ed%9e%98/",
+      "title": "밸브에 작용하는 힘",
+      "version": "b37c4b2830f30d74f9df1d2aa65f074c882dcf226114282f38a3b8c535f6b09a",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-06T11:13:43+00:00",
       "verification_status": "unverified"
     }
   ],
