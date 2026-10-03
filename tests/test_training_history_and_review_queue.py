@@ -9,8 +9,8 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from review_queue import ReviewQueueError, build_review_queue
-from training_history import TrainingAttempt, TrainingHistoryError, TrainingHistoryStore
+from study.review_queue import ReviewQueueError, build_review_queue
+from study.training_history import TrainingAttempt, TrainingHistoryError, TrainingHistoryStore
 
 
 def test_training_history_persists_attempt_and_review_state() -> None:

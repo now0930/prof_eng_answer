@@ -9,9 +9,9 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from learning_workflow import record_result_and_build_queue
-from master_topic_pack import grading_compatibility_payload, load_master_topic_pack, project_diagnosis, project_training
-from training_history import TrainingHistoryStore
+from study.learning_workflow import record_result_and_build_queue
+from study.master_topic_pack import grading_compatibility_payload, load_master_topic_pack, project_diagnosis, project_training
+from study.training_history import TrainingHistoryStore
 
 
 def test_representative_topics_project_and_complete_learning_cycle() -> None:

@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from master_topic_pack import MasterTopicPackError, load_master_topic_pack, load_legacy_topic_sources
+from study.master_topic_pack import MasterTopicPackError, load_master_topic_pack, load_legacy_topic_sources
 
 
 def validate_directory(root: Path) -> int:

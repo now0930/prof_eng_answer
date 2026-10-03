@@ -17,9 +17,8 @@ use them directly. The grading authority remains in those modules.
 | `learning_workflow.py` | Contract-level grade-to-history bridge |
 | `learning_runtime.py` | Bot-facing persistence and daily selection |
 
-New code imports these as `study.<module>`. The six matching root files are
-compatibility imports for existing callers. Keep those imports until their
-callers have migrated and the full release gate passes without them.
+Code imports these as `study.<module>`. The old root compatibility imports
+were removed after their remaining callers migrated and the release gate passed.
 
 The package may read a finalized grade and the existing Topic Pack sources.
 It does not own scoring, routing, Question Type taxonomy, fatal checks, or

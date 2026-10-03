@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from master_topic_pack import MasterTopicPackError, validate_master_topic_pack
+from study.master_topic_pack import MasterTopicPackError, validate_master_topic_pack
 
 
 def _valid_record() -> dict:

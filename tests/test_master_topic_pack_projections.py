@@ -10,7 +10,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from master_topic_pack import grading_compatibility_payload, project_grading
+from study.master_topic_pack import grading_compatibility_payload, project_grading
 from test_master_topic_pack_schema import _valid_record
 
 

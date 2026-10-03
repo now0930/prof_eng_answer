@@ -8,8 +8,8 @@ ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tests"))
 
-from master_topic_pack import MasterTopicPackError, validate_source_reference
-from source_update import SourceUpdateError, apply_approved_source_update, find_topics_for_source, propose_source_update
+from study.master_topic_pack import MasterTopicPackError, validate_source_reference
+from study.source_update import SourceUpdateError, apply_approved_source_update, find_topics_for_source, propose_source_update
 from test_master_topic_pack_schema import _valid_record
 
 
