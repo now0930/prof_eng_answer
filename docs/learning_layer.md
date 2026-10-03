@@ -125,6 +125,11 @@ Topic Pack or deterministic primary authority in this stage.
    `source_change_events` and create proposals for Topics with approved links.
    An event with no approved Topic association remains `pending_topic_review`.
 
+Only after the source-reference proposal is approved and its new `updated_at`
+is present in Master can the Topic qualify for `recently_changed_topic` review.
+An unapproved catalog event/proposal does not change a learner's queue or
+Training/Feedback View.
+
 This lifecycle currently updates **source references**, not the actual facts,
 grading rules, or learning content. A material WordPress content change must
 not silently enter any View: a later content-curation proposal should identify

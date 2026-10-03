@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import copy
 import sys
+from datetime import datetime
 
 
 ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
@@ -9,6 +10,7 @@ sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tests"))
 
 from study.master_topic_pack import MasterTopicPackError, validate_source_reference
+from study.learning_runtime import _review_candidates
 from study.source_update import SourceUpdateError, apply_approved_source_update, find_topics_for_source, propose_source_update
 from test_master_topic_pack_schema import _valid_record
 
@@ -70,6 +72,41 @@ def test_source_to_topic_lookup_supports_change_discovery() -> None:
     master = _valid_record()
     assert find_topics_for_source([master], "wp-post-101") == [master["topic_id"]]
     assert find_topics_for_source([master], "missing-source") == []
+
+
+def test_only_approved_wordpress_source_change_enters_review_candidates() -> None:
+    master = _valid_record()
+    master["sources"] = []
+    attempt = {
+        "topic_id": master["topic_id"],
+        "question_id": "question-1",
+        "question_text": "Explain the topic.",
+        "attempted_at": "2026-10-01T10:00:00+09:00",
+        "last_reviewed_at": "2026-10-02T10:00:00+09:00",
+        "next_review_at": "2026-10-30T10:00:00+09:00",
+        "score": 19.0,
+    }
+    now = datetime.fromisoformat("2026-10-06T10:00:00+09:00")
+    pending = propose_source_update(
+        master,
+        _reference(version="v2", updated_at="2026-10-05T10:00:00+09:00"),
+        proposed_at="2026-10-05T10:01:00+09:00",
+    )
+    assert not master["sources"]
+    before_approval = _review_candidates(
+        [attempt], {master["topic_id"]: master}, {}, now=now, repository_root=ROOT
+    )
+    assert not any(item["reason"] == "recently_changed_topic" for item in before_approval)
+
+    approved_master = apply_approved_source_update(master, pending, approved_by="owner")
+    after_approval = _review_candidates(
+        [attempt], {approved_master["topic_id"]: approved_master}, {}, now=now, repository_root=ROOT
+    )
+    assert any(
+        item["topic_id"] == master["topic_id"] and item["reason"] == "recently_changed_topic"
+        for item in after_approval
+    )
+    assert not master["sources"]
 
 
 if __name__ == "__main__":
