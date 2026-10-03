@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import csv
 import sqlite3
 import sys
 import tempfile
@@ -252,7 +253,61 @@ def test_pdf_ocr_scope_is_strictly_first_party() -> None:
     connection.close()
 
 
+def test_topic_link_review_export_includes_candidates_and_unmatched_without_overwrite() -> None:
+    with tempfile.TemporaryDirectory(prefix="wordpress-topic-review-export-") as directory:
+        repo = Path(directory)
+        database = repo / "catalog.sqlite3"
+        output = repo / "reports" / "topic_link_review.csv"
+        output.parent.mkdir()
+        with patch.object(wordpress_catalog, "ROOT", repo):
+            connection = wordpress_catalog.initialize_database(database)
+            run_id = connection.execute(
+                "INSERT INTO sync_runs(started_at,category_url,category_id) VALUES(?,?,?)",
+                ("2026-10-04T10:00:00Z", "https://example.org/category", 1),
+            ).lastrowid
+            for post_id, slug, title in ((1, "linked", "Candidate post"), (2, "unmatched", "Unmatched post")):
+                connection.execute(
+                    """INSERT INTO posts(post_id,category_id,slug,url,title,excerpt,content_html,
+                       content_text,published_at,modified_at,featured_media_id,tags_json,
+                       categories_json,content_sha256,last_seen_run)
+                       VALUES(?,1,?,?,?,'Useful excerpt','','','','',NULL,'[\"safety\"]','[]',?,?)""",
+                    (post_id, slug, f"https://example.org/{slug}", title, f"hash-{post_id}", run_id),
+                )
+            connection.execute("INSERT INTO topics(topic_id,title,terms_json) VALUES(?,?,?)", ("example_topic", "Example Topic", "[]"))
+            connection.execute(
+                """INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence)
+                   VALUES(1,'example_topic','pending_review',0.5,'[\"safety\"]','title/excerpt')"""
+            )
+            connection.execute(
+                """INSERT INTO sources(source_id,source_type,source_url,title,first_party,fetch_status,extraction_status)
+                   VALUES('asset-1','pdf','https://now0930.pe.kr/manual.pdf','Manual',1,'available','extracted')"""
+            )
+            connection.execute(
+                "INSERT INTO post_sources(post_id,source_id,link_text,position) VALUES(1,'asset-1','Manual',1)"
+            )
+            connection.commit()
+            connection.close()
+
+            counts = wordpress_catalog.export_topic_link_review(database, output)
+            assert counts == {"approved": 0, "pending_review": 1, "unmatched": 1, "rows": 2}
+            with output.open(encoding="utf-8-sig", newline="") as stream:
+                rows = list(csv.DictReader(stream))
+            assert [row["link_status"] for row in rows] == ["pending_review", "unmatched"]
+            assert rows[0]["candidate_topic_id"] == "example_topic"
+            assert json.loads(rows[0]["assets_json"])[0]["source_url"] == "https://now0930.pe.kr/manual.pdf"
+            assert rows[1]["post_title"] == "Unmatched post"
+            before = output.read_bytes()
+            try:
+                wordpress_catalog.export_topic_link_review(database, output)
+            except FileExistsError:
+                pass
+            else:
+                raise AssertionError("review export must never overwrite a possibly edited file")
+            assert output.read_bytes() == before
+
+
 if __name__ == "__main__":
     test_approved_catalog_change_flows_to_master_and_review_queue()
     test_pdf_ocr_scope_is_strictly_first_party()
-    print("WORDPRESS_REVIEW_INTEGRATION_TESTS=2_PASS")
+    test_topic_link_review_export_includes_candidates_and_unmatched_without_overwrite()
+    print("WORDPRESS_REVIEW_INTEGRATION_TESTS=3_PASS")

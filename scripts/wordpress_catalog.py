@@ -12,6 +12,7 @@ from __future__ import annotations
 
 import argparse
 import copy
+import csv
 import hashlib
 import html
 from html.parser import HTMLParser
@@ -1315,6 +1316,83 @@ def list_pending(database: Path, limit: int = 50) -> None:
         print(json.dumps({"post_id": post_id, "title": title, "url": url}, ensure_ascii=False))
 
 
+def export_topic_link_review(database: Path, output: Path) -> dict[str, int]:
+    """Export all approved, pending, and unmatched posts for human review only."""
+    repo_root = ROOT.resolve()
+    output_unresolved = output if output.is_absolute() else repo_root / output
+    if output_unresolved.exists() or output_unresolved.is_symlink():
+        raise FileExistsError(f"review export already exists: {output_unresolved}")
+    output_path = output_unresolved.parent.resolve() / output_unresolved.name
+    if not output_path.is_relative_to(repo_root):
+        raise ValueError("review export path must stay inside the repository")
+
+    connection = initialize_database(database)
+    try:
+        posts = connection.execute(
+            """SELECT p.post_id,p.title,p.url,p.excerpt,p.tags_json,t.topic_id,t.title,
+                      tl.status,tl.score,tl.matched_terms_json
+               FROM posts p
+               LEFT JOIN topic_links tl ON tl.post_id=p.post_id AND tl.status IN ('approved','pending_review')
+               LEFT JOIN topics t ON t.topic_id=tl.topic_id
+               ORDER BY p.post_id,CASE tl.status WHEN 'approved' THEN 0 ELSE 1 END,tl.score DESC,tl.topic_id"""
+        ).fetchall()
+        assets_by_post: dict[int, list[dict[str, Any]]] = {}
+        for post_id, source_id, source_type, source_url, title, first_party, fetch_status, extraction_status in connection.execute(
+            """SELECT ps.post_id,s.source_id,s.source_type,s.source_url,s.title,s.first_party,
+                      s.fetch_status,s.extraction_status
+               FROM post_sources ps JOIN sources s USING(source_id)
+               ORDER BY ps.post_id,ps.position"""
+        ):
+            assets_by_post.setdefault(post_id, []).append({
+                "source_id": source_id,
+                "source_type": source_type,
+                "source_url": source_url,
+                "title": title,
+                "first_party": bool(first_party),
+                "fetch_status": fetch_status,
+                "extraction_status": extraction_status,
+            })
+    finally:
+        connection.close()
+
+    fields = [
+        "post_id", "post_title", "wordpress_url", "excerpt", "tags",
+        "link_status", "candidate_topic_id", "candidate_topic_title",
+        "lexical_score", "matched_terms", "assets_json",
+        "review_action", "review_topic_id", "reviewer_notes",
+    ]
+    counts = {"approved": 0, "pending_review": 0, "unmatched": 0, "rows": 0}
+    # Exclusive creation protects a prior human-edited review sheet.
+    with output_path.open("x", encoding="utf-8-sig", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=fields)
+        writer.writeheader()
+        for row in posts:
+            post_id, post_title, wordpress_url, excerpt, tags_json, topic_id, topic_title, status, score, terms_json = row
+            if status is None:
+                status = "unmatched"
+                counts[status] += 1
+            else:
+                counts[status] += 1
+            writer.writerow({
+                "post_id": post_id,
+                "post_title": post_title,
+                "wordpress_url": wordpress_url,
+                "excerpt": excerpt,
+                "tags": "; ".join(json.loads(tags_json or "[]")),
+                "link_status": status,
+                "candidate_topic_id": topic_id or "",
+                "candidate_topic_title": topic_title or "",
+                "lexical_score": score if score is not None else "",
+                "matched_terms": "; ".join(json.loads(terms_json or "[]")),
+                "assets_json": json.dumps(assets_by_post.get(post_id, []), ensure_ascii=False, sort_keys=True),
+                "review_action": "",
+                "review_topic_id": "",
+                "reviewer_notes": "",
+            })
+            counts["rows"] += 1
+    return counts
+
+
 def _store_post(
     connection: sqlite3.Connection,
     post: dict[str, Any],
@@ -1677,6 +1755,7 @@ def main() -> int:
     parser.add_argument("--approved-by", help="Required explicit approver identity for --approve-proposal")
     parser.add_argument("--preview-proposal", help="Validate and preview a source-reference proposal without applying it")
     parser.add_argument("--preview-pending-proposals", action="store_true", help="Validate and preview all pending source-reference proposals without applying them")
+    parser.add_argument("--export-topic-link-review", type=Path, help="Create a non-overwriting CSV snapshot for human review of Topic links")
     parser.add_argument("--list-content-proposals", action="store_true", help="List curated Topic-content proposals")
     parser.add_argument("--approve-content-proposal", help="Approve a content proposal for candidate preparation; does not write Topic files")
     parser.add_argument("--reject-content-proposal", help="Reject a pending content proposal")
@@ -1712,6 +1791,12 @@ def main() -> int:
         print(f"SOURCE_PROPOSAL_PREVIEWS={len(previews)} INVALID={invalid}")
         print(json.dumps(previews, ensure_ascii=False, indent=2, sort_keys=True))
         return 1 if invalid else 0
+    if args.export_topic_link_review:
+        counts = export_topic_link_review(args.database, args.export_topic_link_review)
+        print(f"TOPIC_LINK_REVIEW_EXPORT={args.export_topic_link_review}")
+        print("CATALOG_CHANGED=false MASTER_CHANGED=false")
+        print(" ".join(f"{key.upper()}={value}" for key, value in counts.items()))
+        return 0
     if args.approve_content_proposal:
         if not args.reviewed_by:
             parser.error("--reviewed-by is required with --approve-content-proposal")

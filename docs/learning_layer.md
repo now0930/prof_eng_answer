@@ -140,6 +140,13 @@ Training/Feedback View.
 The catalog-to-Master approval boundary and the resulting review-candidate
 signal are covered by `scripts/test_wordpress_review_integration.py`.
 
+For human mapping review, `--export-topic-link-review PATH` creates a
+repository-local, non-overwriting CSV snapshot of approved links, pending
+candidate links, and unmatched posts. Rows include post title/URL/excerpt/tags,
+candidate Topic and lexical evidence, plus linked asset metadata. The export
+does not update the catalog; each mapping is still applied individually with
+`--review-topic-link POST_ID TOPIC_ID approve|reject` after review.
+
 This lifecycle currently updates **source references**, not the actual facts,
 grading rules, or learning content. A material WordPress content change must
 not silently enter any View: a later content-curation proposal should identify
