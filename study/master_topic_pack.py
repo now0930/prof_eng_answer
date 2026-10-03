@@ -235,6 +235,7 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
         "topic_id": master["topic_id"],
         "title_ko": master["title_ko"],
         "daily_target": config["daily_target"],
+        "question_examples": _first_list(model_answer, "question_examples"),
         "question_patterns": _first_list(model_answer, "expected_question_patterns", "question_patterns"),
         "recommended_outline": _first_list(model_answer, "recommended_outline", "expected_structure"),
         "fact_anchors": _first_list(fact_anchor, "anchors", "core_facts"),

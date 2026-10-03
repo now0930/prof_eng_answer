@@ -11,19 +11,38 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from study.learning_runtime import (
+    _master_question,
+    _question_id,
     _review_candidates,
     complete_topic_review,
     create_daily_review_queue,
     record_completed_grade,
 )
-from study.master_topic_pack import load_master_topic_pack
+from study.master_topic_pack import load_legacy_topic_sources, load_master_topic_pack
 from study.training_history import TrainingAttempt, TrainingHistoryStore
 
 
 def test_grade_history_queue_and_completion_cycle() -> None:
     topics = sorted((ROOT / "master_topic_packs").glob("*.json"))
-    assert len(topics) == 3
+    assert len(topics) >= 3
     master_one_topic = topics[0].stem
+    # Projection-backed question selection must preserve the legacy source
+    # precedence and selected text for every available Master fixture.
+    for topic_path in topics:
+        master = load_master_topic_pack(topic_path)
+        model_answer = load_legacy_topic_sources(ROOT, master).get("model_answer", {})
+        legacy_examples = model_answer.get("question_examples")
+        if not isinstance(legacy_examples, list) or not legacy_examples:
+            patterns = model_answer.get("expected_question_patterns")
+            legacy_examples = [
+                row.get("pattern") for row in patterns
+                if isinstance(row, dict) and isinstance(row.get("pattern"), str)
+            ] if isinstance(patterns, list) else []
+        legacy_text = next((item.strip() for item in legacy_examples if isinstance(item, str) and item.strip()), "")
+        assert _master_question(master, ROOT) == (
+            _question_id(legacy_text, "") if legacy_text else None,
+            legacy_text,
+        )
     attempted_at = "2026-10-03T10:00:00+09:00"
     with tempfile.TemporaryDirectory(prefix="learning-runtime-") as directory:
         base = Path(directory)
@@ -45,6 +64,9 @@ def test_grade_history_queue_and_completion_cycle() -> None:
         assert all(item["status"] == "pending" for item in output["queue"]["items"])
         assert len(history.list_attempts(learner_id="telegram-chat-100")) == 1
         assert history.list_attempts(learner_id="telegram-chat-100")[0]["question_text"] == "Define the topic and give an application."
+        stored_diagnosis = history.list_attempts(learner_id="telegram-chat-100")[0]["diagnosis"]
+        assert stored_diagnosis["topic_guidance"]["score_effect"] == "none"
+        assert stored_diagnosis["topic_guidance"]["topic_id"] == master_one_topic
         assert len(history.list_attempts(learner_id="another-chat")) == 0
         assert (base / "session-1" / "learning_history.json").is_file()
 
@@ -103,7 +125,18 @@ def test_review_queue_uses_due_history_and_keeps_learners_separate() -> None:
             master_directory=ROOT / "master_topic_packs",
             generated_at="2026-10-03T10:00:00+09:00",
         )
-        assert any(item["reason"] == "long_unreviewed_topic" for item in queue_alice["items"])
+        assert any(item["topic_id"] == topic_id for item in queue_alice["items"])
+        alice_candidates = _review_candidates(
+            history.list_attempts(learner_id="alice"),
+            {master["topic_id"]: master for master in (load_master_topic_pack(path) for path in topics)},
+            history.list_unattempted_topic_reviews("alice"),
+            now=datetime.fromisoformat("2026-10-03T10:00:00+09:00"),
+            repository_root=ROOT,
+        )
+        assert any(
+            item["topic_id"] == topic_id and item["reason"] == "long_unreviewed_topic"
+            for item in alice_candidates
+        )
         bob_topic = next(item for item in queue_bob["items"] if item["topic_id"] == topic_id)
         assert bob_topic["reason"] == "new_topic"
 
@@ -170,6 +203,35 @@ def test_source_change_is_acknowledged_after_review() -> None:
         repository_root=ROOT,
     )
     assert any(item["reason"] == "recently_changed_topic" for item in after)
+
+
+def test_missing_master_keeps_grade_diagnosis_persistable() -> None:
+    topic_id = "missing_master_topic"
+    with tempfile.TemporaryDirectory(prefix="learning-runtime-no-master-") as directory:
+        base = Path(directory)
+        master_directory = base / "master_topic_packs"
+        master_directory.mkdir()
+        history = TrainingHistoryStore(base / "history.sqlite3")
+        snapshot = record_completed_grade(
+            history,
+            learner_id="learner-without-master",
+            sid="session-no-master",
+            grade={
+                "topic_id": topic_id,
+                "final_total_score": 14.0,
+                "verdict": "below",
+                "weaknesses": ["application"],
+            },
+            submission_normalization={"question_text": "Explain the topic."},
+            master_directory=master_directory,
+            session_directory=base / "session",
+            attempted_at="2026-10-03T10:00:00+09:00",
+        )
+        row = history.list_attempts(learner_id="learner-without-master")[0]
+        assert snapshot["history_status"] == "saved"
+        assert row["score"] == 14.0
+        assert row["diagnosis"]["weaknesses"] == ["application"]
+        assert "topic_guidance" not in row["diagnosis"]
 
 
 if __name__ == "__main__":

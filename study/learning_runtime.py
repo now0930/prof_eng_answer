@@ -2,13 +2,19 @@
 
 from __future__ import annotations
 
+import copy
 from datetime import datetime, timedelta
 import json
 from pathlib import Path
 from typing import Any
 
 from grading.scoring.grading_identity import build_grading_identity
-from .master_topic_pack import load_legacy_topic_sources, load_master_topic_pack
+from .master_topic_pack import (
+    load_legacy_topic_sources,
+    load_master_topic_pack,
+    project_diagnosis,
+    project_training,
+)
 from .review_queue import build_review_queue
 from .training_history import TrainingAttempt, TrainingHistoryStore
 
@@ -60,6 +66,32 @@ def diagnosis_from_grade(grade: dict[str, Any]) -> dict[str, Any]:
     }
 
 
+def feedback_from_view(grade: dict[str, Any], diagnosis_view: dict[str, Any]) -> dict[str, Any]:
+    """Pair final-grade feedback with read-only Topic guidance, never scoring."""
+    topic_id = grade.get("topic_id") or grade.get("inferred_topic_id")
+    if not isinstance(diagnosis_view, dict) or diagnosis_view.get("score_effect") != "none":
+        raise LearningRuntimeError("diagnosis view must declare score_effect=none")
+    if diagnosis_view.get("topic_id") != topic_id:
+        raise LearningRuntimeError("diagnosis view topic_id does not match grade")
+    return {
+        "projection_id": diagnosis_view.get("projection_id"),
+        "topic_id": topic_id,
+        "title_ko": diagnosis_view.get("title_ko", ""),
+        "dimensions": copy.deepcopy(diagnosis_view.get("dimensions", [])),
+        "grade_summary": str(
+            grade.get("overall_summary")
+            or grade.get("summary")
+            or grade.get("overall_comment")
+            or ""
+        ),
+        "fact_anchors": copy.deepcopy(diagnosis_view.get("fact_anchors", [])),
+        "deterministic_checks": copy.deepcopy(diagnosis_view.get("deterministic_checks", [])),
+        "diagnostic_guidance": copy.deepcopy(diagnosis_view.get("diagnostic_guidance", {})),
+        "common_missing_points": copy.deepcopy(diagnosis_view.get("common_missing_points", [])),
+        "score_effect": "none",
+    }
+
+
 def _topic_masters(master_directory: str | Path) -> dict[str, dict[str, Any]]:
     directory = Path(master_directory)
     result = {}
@@ -73,15 +105,25 @@ def _master_question(
     master: dict[str, Any],
     repository_root: str | Path,
 ) -> tuple[str | None, str]:
-    sources = load_legacy_topic_sources(repository_root, master)
-    model_answer = sources.get("model_answer", {})
-    examples = model_answer.get("question_examples")
-    if not isinstance(examples, list) or not examples:
-        patterns = model_answer.get("expected_question_patterns")
-        examples = [
-            row.get("pattern") for row in patterns
-            if isinstance(row, dict) and isinstance(row.get("pattern"), str)
-        ] if isinstance(patterns, list) else []
+    try:
+        training_view = project_training(repository_root, master)
+        examples = training_view.get("question_examples")
+        if not isinstance(examples, list) or not examples:
+            examples = [
+                row.get("pattern") for row in training_view.get("question_patterns", [])
+                if isinstance(row, dict) and isinstance(row.get("pattern"), str)
+            ]
+    except Exception:
+        # Preserve the old review-prompt behavior if a projection cannot be read.
+        sources = load_legacy_topic_sources(repository_root, master)
+        model_answer = sources.get("model_answer", {})
+        examples = model_answer.get("question_examples")
+        if not isinstance(examples, list) or not examples:
+            patterns = model_answer.get("expected_question_patterns")
+            examples = [
+                row.get("pattern") for row in patterns
+                if isinstance(row, dict) and isinstance(row.get("pattern"), str)
+            ] if isinstance(patterns, list) else []
     question_text = next((item.strip() for item in examples if isinstance(item, str) and item.strip()), "")
     return (_question_id(question_text, "") if question_text else None), question_text
 
@@ -209,13 +251,23 @@ def record_completed_grade(
     question_text = str(submission_normalization.get("question_text") or "")
     timestamp = attempted_at or datetime.now().astimezone().isoformat(timespec="seconds")
     question_id = _question_id(question_text, sid)
+    diagnosis = diagnosis_from_grade(grade)
+    try:
+        master_path = Path(master_directory) / f"{topic_id}.json"
+        master = load_master_topic_pack(master_path)
+        view = project_diagnosis(Path(master_directory).resolve().parent, master)
+        diagnosis["topic_guidance"] = feedback_from_view(grade, view)
+    except Exception:
+        # View guidance is additive; missing/stale Master data cannot affect
+        # the finalized score or prevent persistence of the grade diagnosis.
+        pass
     attempt = history.save(TrainingAttempt(
         learner_id=str(learner_id),
         question_id=question_id,
         topic_id=topic_id,
         attempted_at=timestamp,
         score=score,
-        diagnosis=diagnosis_from_grade(grade),
+        diagnosis=diagnosis,
         question_text=question_text,
         session_id=sid,
     ))
