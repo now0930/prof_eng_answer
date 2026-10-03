@@ -10,7 +10,7 @@ from datetime import datetime
 from pathlib import Path
 from grading_agents import run_agent_pipeline
 from grade_output_summarizer import summarize_grade_for_telegram
-from llm_provider_settings import get_chat_provider, set_chat_provider, reset_chat_provider, provider_label
+from grading.providers.settings import get_chat_provider, set_chat_provider, reset_chat_provider, provider_label
 from grade_score_reconciler import reconcile_grade_score
 from grade_submission_normalizer import (
     attach_submission_normalization,
@@ -602,7 +602,7 @@ def _clean_display_list(items):
 
 
 def _build_ollama_request(prompt):
-    from llm_sampling import (
+    from grading.providers.sampling import (
         build_llm_request_contract,
     )
 

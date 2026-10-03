@@ -248,7 +248,7 @@ def gemini_originality_evaluate(question_text, answer_text, layer_scores=None, v
         }
     }
 
-    from llm_sampling import (
+    from grading.providers.sampling import (
         build_llm_request_contract,
     )
 

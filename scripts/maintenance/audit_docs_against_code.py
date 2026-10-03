@@ -42,8 +42,8 @@ CODE_BACKED_DOCS = {
         "rubrics/exam_selection/default.json",
     ],
     "llm_provider.md": [
-        "llm_provider_router.py",
-        "llm_provider_settings.py",
+        "grading/providers/router.py",
+        "grading/providers/settings.py",
         "gemini_grader.py",
         "clova_grader.py",
     ],

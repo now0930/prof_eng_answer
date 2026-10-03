@@ -10,7 +10,7 @@ from unittest import mock
 import clova_grader
 import gemini_grader
 import originality_grader
-from llm_sampling import (
+from grading.providers.sampling import (
     SAMPLING_CONTRACT_VERSION,
     build_llm_request_contract,
 )

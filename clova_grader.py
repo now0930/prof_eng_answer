@@ -291,7 +291,7 @@ def clova_semantic_grade(
         )
     )
 
-    from llm_sampling import (
+    from grading.providers.sampling import (
         build_llm_request_contract,
     )
 

@@ -113,8 +113,9 @@ docker logs --tail=120 prof_eng_answer_bot | grep -E 'Provider|Gemini|CLOVA|sema
 | 파일 | 역할 |
 |---|---|
 | `bot.py` | `/provider` 명령 처리, `call_ollama()`, Telegram 출력 |
-| `llm_provider_settings.py` | chat별 provider 설정 |
-| `llm_provider_router.py` | provider routing |
+| `grading/providers/settings.py` | chat별 provider 설정 |
+| `grading/providers/router.py` | provider routing |
+| `grading/providers/sampling.py` | 요청 파라미터 및 재현성 계약 |
 | `gemini_grader.py` | Gemini semantic grader |
 | `clova_grader.py` | CLOVA semantic grader |
 | `grading_agents.py` | provider 결과를 phase2 pipeline에 결합 |
