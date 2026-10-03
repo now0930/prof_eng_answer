@@ -9,7 +9,7 @@ import unittest
 from multi_topic_evidence_consumer import (
     attach_multi_topic_summary_to_question_contract,
 )
-from question_contract import (
+from grading.routing.question_contract import (
     build_question_contract,
     rehash_question_contract,
     validate_question_contract,

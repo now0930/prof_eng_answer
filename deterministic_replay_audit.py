@@ -10,7 +10,7 @@ from expert_accuracy_benchmark import load_jsonl, validate_gold_case
 from engineering_invariant_evaluator import evaluate_engineering_invariants
 from deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from deterministic_score_engine import calculate_deterministic_score
-from deterministic_topic_router import route_question_topics
+from grading.routing.deterministic_topic_router import route_question_topics
 from fact_anchor_evidence_adapter import (
     augment_requirement_evaluation,
     evaluate_fact_anchor_requirements,

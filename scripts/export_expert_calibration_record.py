@@ -510,7 +510,7 @@ def resolve_topic_id(
         "grade.json",
         "fact_anchor_evaluation.json",
         "model_answer_reference.json",
-        "question_contract.json",
+        "grading.routing.question_contract.json",
     ):
         path = session_dir / name
 

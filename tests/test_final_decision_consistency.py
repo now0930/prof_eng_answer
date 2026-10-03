@@ -188,7 +188,7 @@ class CanonicalQuestionTypeAndScoreSourceV2Test(
     def test_final_attach_reuses_canonical_question_type(
         self,
     ) -> None:
-        from question_demand_contract import (
+        from grading.routing.question_demand_contract import (
             attach_question_demand_contract,
         )
 
@@ -242,7 +242,7 @@ class CanonicalQuestionTypeAndScoreSourceV2Test(
     def test_pregrade_contract_remains_question_only_fallback(
         self,
     ) -> None:
-        from question_demand_contract import (
+        from grading.routing.question_demand_contract import (
             build_question_demand_contract,
         )
 

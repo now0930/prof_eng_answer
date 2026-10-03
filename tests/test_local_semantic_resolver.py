@@ -7,7 +7,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from local_semantic_resolver import resolve_with_optional_local_semantics
+from grading.routing.local_semantic_resolver import resolve_with_optional_local_semantics
 
 
 class LocalSemanticResolverTests(unittest.TestCase):

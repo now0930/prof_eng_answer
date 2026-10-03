@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import unittest
 
-from question_type_taxonomy import (
+from grading.routing.question_type_taxonomy import (
     normalize_question_type,
     question_type_de_policy,
     resolve_question_type_de_policy,

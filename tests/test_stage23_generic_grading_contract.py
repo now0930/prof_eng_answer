@@ -189,21 +189,21 @@ class GenericContractModuleGreenTests(unittest.TestCase):
 
 class GenericEngineFixtureRedTests(unittest.TestCase):
     def test_red_01_router_primary_is_implementation_evaluation(self) -> None:
-        from question_type_router import detect_question_type
+        from grading.routing.question_type_router import detect_question_type
         for fixture in FIXTURES.values():
             result = detect_question_type(fixture["question"], fixture["answer"])
             self.assertEqual(result.get("question_type"), "IMPLEMENTATION_EVALUATION")
             self.assertNotEqual(result.get("question_type"), "COMPARE_SELECTION")
 
     def test_red_02_router_preserves_definition_as_secondary_evidence(self) -> None:
-        from question_type_router import detect_question_type
+        from grading.routing.question_type_router import detect_question_type
         result = detect_question_type(FIXTURES["A"]["question"], FIXTURES["A"]["answer"])
         secondary = result.get("secondary_types") or result.get("secondary_demands") or []
         normalized = {str(item.get("id") if isinstance(item, dict) else item).upper() for item in secondary}
         self.assertIn("DEFINITION_EXPLANATION", normalized)
 
     def test_red_03_semantic_coverage_cannot_overwrite_canonical_router_type(self) -> None:
-        from semantic_question_type_postprocess import ensure_question_type_coverage
+        from grading.routing.semantic_question_type_postprocess import ensure_question_type_coverage
         payload = {
             "question_type": "COMPARE_SELECTION",
             "question_type_coverage": {
@@ -221,7 +221,7 @@ class GenericEngineFixtureRedTests(unittest.TestCase):
         self.assertEqual(result["question_type_coverage"].get("question_type"), "IMPLEMENTATION_EVALUATION")
 
     def test_red_04_coverage_adapter_preserves_wrong_state(self) -> None:
-        from question_type_coverage_adapter import _criteria_details
+        from grading.routing.question_type_coverage_adapter import _criteria_details
         details = _criteria_details({
             "sub_criteria_coverage": [
                 {"criterion": "mapped relationship", "status": "WRONG", "evidence": "mentioned but contradicted"}
@@ -231,7 +231,7 @@ class GenericEngineFixtureRedTests(unittest.TestCase):
         self.assertEqual(details.get("wrong"), 1)
 
     def test_red_05_coverage_adapter_separates_mention_from_correctness(self) -> None:
-        from question_type_coverage_adapter import attach_question_type_coverage_feedback
+        from grading.routing.question_type_coverage_adapter import attach_question_type_coverage_feedback
         grade = {
             "question_type": "IMPLEMENTATION_EVALUATION",
             "question_type_coverage": {

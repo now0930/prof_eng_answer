@@ -28,8 +28,8 @@ from grade_submission_normalizer import (
     normalize_grade_submission,
 )
 from logic_check_evaluator import evaluate_logic_checks
-from question_demand_contract import build_question_demand_contract
-from question_type_coverage_adapter import (
+from grading.routing.question_demand_contract import build_question_demand_contract
+from grading.routing.question_type_coverage_adapter import (
     attach_question_type_coverage_feedback,
 )
 from sil_relation_integrity import SIL_TARGET_TOPIC_ID
@@ -304,7 +304,7 @@ def write_replay(
             ensure_ascii=False,
             indent=2,
         ) + "\n",
-        "question_demand_contract.json": json.dumps(
+        "grading.routing.question_demand_contract.json": json.dumps(
             contract,
             ensure_ascii=False,
             indent=2,

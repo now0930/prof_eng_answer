@@ -6,7 +6,7 @@ import copy
 import re
 from typing import Any
 
-from demand_state_contract import normalize_internal_state
+from grading.routing.demand_state_contract import normalize_internal_state
 
 
 SCHEMA_VERSION = "demand_evidence_resolution_v1"

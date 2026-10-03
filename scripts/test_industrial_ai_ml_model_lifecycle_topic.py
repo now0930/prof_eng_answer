@@ -249,7 +249,7 @@ class SW12SourceContractTests(unittest.TestCase):
         self.assertIn("Generated Bank", combined)
         self.assertIn("Production Python", combined)
         self.assertNotIn("rubrics/generated/", self.readme)
-        self.assertNotIn("model_answer_router.py", self.readme)
+        self.assertNotIn("grading/routing/model_answer_router.py", self.readme)
 
 
 if __name__ == "__main__":

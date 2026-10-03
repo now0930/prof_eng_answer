@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import copy
 
-from semantic_question_type_postprocess import (
+from grading.routing.semantic_question_type_postprocess import (
     ensure_question_type_coverage,
 )
 

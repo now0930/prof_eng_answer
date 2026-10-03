@@ -27,10 +27,10 @@ CODE_BACKED_DOCS = {
         "rubrics/scoring_model/default.json",
         "rubrics/raters/layered_default.json",
     ],
-    "question_type_taxonomy.md": [
-        "question_type_taxonomy.py",
-        "question_type_output_adapter.py",
-        "question_type_coverage_adapter.py",
+    "grading.routing.question_type_taxonomy.md": [
+        "grading/routing/question_type_taxonomy.py",
+        "grading/routing/question_type_output_adapter.py",
+        "grading/routing/question_type_coverage_adapter.py",
         "rubrics/question_types/default.json",
     ],
     "difficulty_and_selection_strategy.md": [

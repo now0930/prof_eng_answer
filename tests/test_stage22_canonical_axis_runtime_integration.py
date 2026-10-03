@@ -12,7 +12,7 @@ if str(REPO_ROOT) not in sys.path:
     sys.path.insert(0, str(REPO_ROOT))
 
 import logic_check_evaluator as evaluator
-from question_demand_evidence import project_logic_relationship_conflicts
+from grading.routing.question_demand_evidence import project_logic_relationship_conflicts
 
 TOPIC_ID = (
     "instrumentation_control_software_lifecycle_"

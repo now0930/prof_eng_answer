@@ -17,7 +17,7 @@ from logic_llm_verifier import (
     extract_logic_evidence_candidates,
     verify_logic_with_llm,
 )
-from model_answer_router import find_model_answer_reference
+from grading.routing.model_answer_router import find_model_answer_reference
 
 TOPIC = 'control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim'
 TOPIC_2 = 'control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening'

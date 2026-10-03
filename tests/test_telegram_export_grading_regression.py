@@ -1,7 +1,7 @@
 import unittest
 
 from deterministic_primary_grader import grade_deterministically
-from deterministic_topic_router import route_question_topics
+from grading.routing.deterministic_topic_router import route_question_topics
 from fact_anchor_evidence_adapter import evaluate_fact_anchor_requirements
 
 

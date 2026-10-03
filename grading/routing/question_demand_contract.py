@@ -758,7 +758,7 @@ def _question_contains_activation_term(
 
 @lru_cache(maxsize=1)
 def _load_topic_pack_demand_axis_contracts() -> tuple[dict[str, Any], ...]:
-    topic_root = Path(__file__).resolve().parent / "rubrics" / "topic_packs"
+    topic_root = Path(__file__).resolve().parents[2] / "rubrics" / "topic_packs"
     contracts: list[dict[str, Any]] = []
     if not topic_root.is_dir():
         return ()
@@ -770,7 +770,7 @@ def _load_topic_pack_demand_axis_contracts() -> tuple[dict[str, Any], ...]:
         if not isinstance(payload, dict):
             continue
         payload = copy.deepcopy(payload)
-        payload["_source_file"] = path.relative_to(Path(__file__).resolve().parent).as_posix()
+        payload["_source_file"] = path.relative_to(Path(__file__).resolve().parents[2]).as_posix()
         contracts.append(payload)
     return tuple(contracts)
 

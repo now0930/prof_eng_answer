@@ -12,7 +12,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import bot
-from question_type_coverage_adapter import (
+from grading.routing.question_type_coverage_adapter import (
     attach_question_type_coverage_feedback,
 )
 
@@ -133,7 +133,7 @@ class IncorrectRequirementCoverageRegressionTests(
         self,
     ) -> None:
         import bot
-        from question_type_coverage_adapter import (
+        from grading.routing.question_type_coverage_adapter import (
             attach_question_type_coverage_feedback,
         )
 
@@ -274,7 +274,7 @@ class IncorrectRequirementCoverageRegressionTests(
     def test_final_question_type_name_matches_v2(
         self,
     ) -> None:
-        from question_type_output_adapter import (
+        from grading.routing.question_type_output_adapter import (
             attach_question_type_v2_to_grade,
         )
 

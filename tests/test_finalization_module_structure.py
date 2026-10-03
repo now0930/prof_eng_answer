@@ -8,7 +8,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 MODULES = (
     ROOT / "grading/providers/gemini.py",
-    ROOT / "question_type_coverage_adapter.py",
+    ROOT / "grading/routing/question_type_coverage_adapter.py",
     ROOT / "verified_defect_reconciliation.py",
     ROOT / "grading_agents.py",
     ROOT / "grade_output_summarizer.py",

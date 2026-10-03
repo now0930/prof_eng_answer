@@ -8,7 +8,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     ATOMIC_QUESTION_DEMAND_VERSION,
     build_question_demand_contract,
 )

@@ -8,10 +8,10 @@ from __future__ import annotations
 
 from typing import Any
 
-from question_type_router import (
+from grading.routing.question_type_router import (
     detect_question_type as detect_canonical_question_type,
 )
-from question_type_taxonomy import (
+from grading.routing.question_type_taxonomy import (
     get_question_type_profile,
     normalize_question_type,
     valid_question_types,
@@ -120,7 +120,7 @@ def attach_question_type_v2_to_grade(
     if contract_question_type:
         question_type = contract_question_type
         canonical_owner = (
-            "question_contract.question_type.id"
+            "grading.routing.question_contract.question_type.id"
         )
         contract_block = (
             effective_contract.get("question_type")
@@ -158,7 +158,7 @@ def attach_question_type_v2_to_grade(
                 "canonical_owner"
             )
             or (
-                "question_type_router."
+                "grading.routing.question_type_router."
                 "detect_question_type"
             )
         )

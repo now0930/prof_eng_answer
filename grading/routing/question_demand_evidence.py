@@ -276,7 +276,7 @@ def _question_demand_cache_path(
     repo_dir: Path,
     question_text: str,
 ) -> Path:
-    import question_demand_shadow as qds
+    import grading.routing.question_demand_shadow as qds
 
     key = qds.question_demand_cache_key(question_text)
 
@@ -310,7 +310,7 @@ def _load_canonical_demands(
     # questions, use the same question-only deterministic contract already
     # consumed by the canonical evaluation ledger instead of dropping every
     # demand from evidence generation.
-    from question_demand_contract import build_question_demand_contract
+    from grading.routing.question_demand_contract import build_question_demand_contract
 
     contract = build_question_demand_contract(question_text)
     requirements = contract.get("requirements")
@@ -334,7 +334,7 @@ def _load_canonical_demands(
 
 
 def _load_routing(session_dir: Path) -> dict[str, Any]:
-    path = session_dir / "semantic_router_shadow.json"
+    path = session_dir / "grading.routing.semantic_router_shadow.json"
 
     if not path.exists():
         raise FileNotFoundError(
@@ -664,7 +664,7 @@ def build_question_demand_evidence_shadow(
     repo = (
         Path(repo_dir)
         if repo_dir is not None
-        else Path(__file__).resolve().parent
+        else Path(__file__).resolve().parents[2]
     )
     session = Path(session_dir)
 

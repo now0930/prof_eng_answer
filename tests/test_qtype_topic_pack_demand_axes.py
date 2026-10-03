@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     _load_topic_pack_demand_axis_contracts,
     build_question_demand_contract,
 )

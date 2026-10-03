@@ -531,7 +531,7 @@ def detect_question_type(
         ),
         "secondary_types": secondary_types,
         "canonical_owner": (
-            "question_type_router.detect_question_type"
+            "grading.routing.question_type_router.detect_question_type"
         ),
         "authority": "question_only_deterministic",
         "warning": warning,
@@ -563,7 +563,7 @@ _stage35e2_previous_detect_question_type = detect_question_type
 
 @_stage35e2_wraps(_stage35e2_previous_detect_question_type)
 def detect_question_type(*args, **kwargs):
-    from question_demand_contract import (
+    from grading.routing.question_demand_contract import (
         build_question_demand_contract,
         extract_explicit_question_scope,
     )

@@ -15,7 +15,7 @@ from datetime import datetime
 from pathlib import Path
 from typing import Any, Iterable
 
-from demand_state_contract import (
+from grading.routing.demand_state_contract import (
     CANONICAL_STATES,
     PREDICTION_STATES,
     normalize_state,

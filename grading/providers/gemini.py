@@ -1,4 +1,4 @@
-from semantic_question_type_prompt import (
+from grading.routing.semantic_question_type_prompt import (
     build_question_type_json_contract,
     build_question_type_semantic_guidance,
 )
@@ -787,7 +787,7 @@ def _grade_with_retry(*args, **kwargs):
 
 # === qtype semantic result postprocess wrapper v2 ===
 def _grade_with_question_type_postprocess(*args, **kwargs):
-    from semantic_question_type_postprocess import ensure_question_type_coverage
+    from grading.routing.semantic_question_type_postprocess import ensure_question_type_coverage
 
     result = _grade_with_retry(*args, **kwargs)
 
@@ -811,7 +811,7 @@ def _grade_with_question_type_postprocess(*args, **kwargs):
 # === final qtype semantic prompt wrapper v4 EOF ===
 # This wrapper must stay near the end of this file because build_gemini_grading_prompt
 # is redefined multiple times by phase wrappers.
-from semantic_question_type_prompt import (
+from grading.routing.semantic_question_type_prompt import (
     build_question_type_json_contract,
     build_question_type_semantic_guidance,
 )
@@ -1220,7 +1220,7 @@ def _build_question_demand_prompt(*args, **kwargs):
         **kwargs,
     )
 
-    from question_demand_contract import (
+    from grading.routing.question_demand_contract import (
         build_question_demand_contract,
         extract_question_text_from_call,
     )
@@ -1595,7 +1595,7 @@ def _stage35e2_fail_closed_projection(result, contract, attempts):
 
 
 def gemini_semantic_grade(*args, **kwargs):
-    from question_demand_contract import (
+    from grading.routing.question_demand_contract import (
         attach_question_demand_contract,
         build_question_demand_contract,
         extract_question_text_from_call,
@@ -1660,7 +1660,7 @@ def gemini_semantic_grade(*args, **kwargs):
             contract,
             attempts,
         )
-    from demand_evidence_resolution import resolve_semantic_demand_evidence
+    from grading.routing.demand_evidence_resolution import resolve_semantic_demand_evidence
     answer_text = kwargs.get("answer_text")
     if answer_text is None and len(args) >= 2:
         answer_text = args[1]

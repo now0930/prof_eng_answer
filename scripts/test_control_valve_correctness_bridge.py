@@ -12,7 +12,7 @@ from control_valve_formula_checker import (
     TARGET_TOPIC_ID,
     evaluate_control_valve_formula_check,
 )
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     build_question_demand_contract,
 )
 

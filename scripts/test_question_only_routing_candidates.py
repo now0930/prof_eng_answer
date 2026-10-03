@@ -7,7 +7,7 @@ from pathlib import Path
 import unittest
 
 import grading_agents
-from semantic_router_shadow import (
+from grading.routing.semantic_router_shadow import (
     augment_rule_candidates_for_shadow,
     build_question_demand_aware_rule_candidates,
 )

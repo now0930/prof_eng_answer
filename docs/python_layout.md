@@ -32,6 +32,9 @@ the deterministic primary authority.
 - `grading/providers/`: optional provider selection, per-chat settings, and
   deterministic request sampling contracts, plus the Gemini and CLOVA legacy
   provider implementations. These five modules moved from the repository root.
+- `grading/routing/`: Question Type, Question Demand, Topic selection, and
+  semantic routing contracts. Repository data paths are resolved from the
+  package location.
 - `scripts/`: release gates, commands, audit tools, and historical regression
   scripts. Existing script paths are part of the release contract.
 - `tests/`: focused contracts, integration checks, and historical stage

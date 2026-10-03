@@ -7,7 +7,7 @@ import json
 from pathlib import Path
 from typing import Any, Mapping
 
-from local_semantic_resolver import resolve_with_optional_local_semantics
+from grading.routing.local_semantic_resolver import resolve_with_optional_local_semantics
 from engineering_invariant_evaluator import evaluate_engineering_invariants
 from deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from deterministic_score_engine import calculate_deterministic_score

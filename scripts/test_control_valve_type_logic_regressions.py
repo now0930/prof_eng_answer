@@ -15,8 +15,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 
-from question_type_taxonomy import detect_question_type_from_text
-from question_type_router import (
+from grading.routing.question_type_taxonomy import detect_question_type_from_text
+from grading.routing.question_type_router import (
     detect_question_type,
     load_question_type_profile,
 )
@@ -40,7 +40,7 @@ from logic_llm_verifier import (
     extract_logic_evidence_candidates,
     load_logic_check_profile,
 )
-from semantic_question_type_postprocess import ensure_question_type_coverage
+from grading.routing.semantic_question_type_postprocess import ensure_question_type_coverage
 
 
 TARGET_TOPIC_ID = (

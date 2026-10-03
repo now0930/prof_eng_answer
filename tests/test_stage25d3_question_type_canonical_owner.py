@@ -3,15 +3,15 @@ from __future__ import annotations
 import copy
 import unittest
 
-from question_type_coverage_adapter import (
+from grading.routing.question_type_coverage_adapter import (
     _apply_incorrect_requirement_status_contract_v3,
     _promote_question_type_coverage_to_root_v1,
     attach_question_type_coverage_feedback,
 )
-from question_type_output_adapter import (
+from grading.routing.question_type_output_adapter import (
     attach_question_type_v2_to_grade,
 )
-from question_type_taxonomy import (
+from grading.routing.question_type_taxonomy import (
     detect_question_type_from_text,
 )
 

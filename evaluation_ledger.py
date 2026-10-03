@@ -13,7 +13,7 @@ import json
 import re
 from typing import Any
 
-from demand_state_contract import STATE_PRECEDENCE, normalize_internal_state
+from grading.routing.demand_state_contract import STATE_PRECEDENCE, normalize_internal_state
 
 
 EVALUATION_LEDGER_SCHEMA_VERSION = "1.0"
@@ -750,7 +750,7 @@ def attach_canonical_evaluation_ledger(
     output = copy.deepcopy(grade)
     before = _score_snapshot(output)
     if not _nested(output, "question_demand_contract") and question_text.strip():
-        from question_demand_contract import build_question_demand_contract
+        from grading.routing.question_demand_contract import build_question_demand_contract
 
         contract = build_question_demand_contract(question_text)
         output["question_demand_contract"] = contract

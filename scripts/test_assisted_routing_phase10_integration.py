@@ -56,7 +56,7 @@ class AssistedRoutingPhase10StaticContractTest(unittest.TestCase):
         grading = Path("grading_agents.py").read_text(
             encoding="utf-8"
         )
-        legacy = Path("model_answer_router.py").read_text(
+        legacy = Path("grading/routing/model_answer_router.py").read_text(
             encoding="utf-8"
         )
 

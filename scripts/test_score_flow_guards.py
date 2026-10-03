@@ -19,8 +19,8 @@ from grade_score_reconciler import _apply_numeric_flags
 from difficulty_score_ceiling import (
     _prefer_question_type_adjusted_score,
 )
-import question_type_coverage_score_adjuster as coverage_adjuster
-import question_type_coverage_adapter as qtype_coverage_adapter
+import grading.routing.question_type_coverage_score_adjuster as coverage_adjuster
+import grading.routing.question_type_coverage_adapter as qtype_coverage_adapter
 from grading_agents import (
     _phase10_apply_generated_single_topic_overrides,
     _phase2_resolve_difficulty_topic_id,
@@ -960,7 +960,7 @@ class QuestionTypeFallbackRecoveryRegressionTest(
         }
 
         with patch(
-            "semantic_question_type_prompt."
+            "grading.routing.semantic_question_type_prompt."
             "empty_question_type_coverage",
             side_effect=RuntimeError(
                 "simulated fallback failure"
@@ -1003,7 +1003,7 @@ class QuestionTypeFallbackRecoveryRegressionTest(
         }
 
         with patch(
-            "semantic_question_type_prompt."
+            "grading.routing.semantic_question_type_prompt."
             "empty_question_type_coverage",
             return_value=[],
         ):
@@ -1047,7 +1047,7 @@ class ModelAnswerReferenceResultContractRegressionTest(
         from contextlib import ExitStack
 
         import grading_agents as grading_agents_module
-        import model_answer_router as model_answer_router_module
+        import grading.routing.model_answer_router as model_answer_router_module
 
         function = (
             grading_agents_module
@@ -1166,12 +1166,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="원리를 설명하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     return_value=reference_result,
                 ),
@@ -1244,12 +1244,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="두 방식을 비교하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     return_value=reference_result,
                 ),
@@ -1318,12 +1318,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="구성을 설명하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     side_effect=RuntimeError(
                         "simulated phase10 router failure"
@@ -1401,12 +1401,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="절차를 설명하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     return_value=reference_result,
                 ),
@@ -1481,12 +1481,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="원리를 설명하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     side_effect=RuntimeError(
                         "simulated phase10 fallback trigger"
@@ -1621,12 +1621,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="두 방식을 비교하시오.",
                 ),
                 patch(
-                    "question_type_router."
+                    "grading.routing.question_type_router."
                     "load_question_type_profile",
                     return_value={"types": []},
                 ),
                 patch(
-                    "question_type_router.detect_question_type",
+                    "grading.routing.question_type_router.detect_question_type",
                     return_value=evaluation,
                 ),
                 patch.object(
@@ -1668,12 +1668,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="원리를 설명하시오.",
                 ),
                 patch(
-                    "question_type_router."
+                    "grading.routing.question_type_router."
                     "load_question_type_profile",
                     return_value={"types": []},
                 ),
                 patch(
-                    "question_type_router.detect_question_type",
+                    "grading.routing.question_type_router.detect_question_type",
                     side_effect=RuntimeError(
                         "simulated phase9 router failure"
                     ),
@@ -1741,12 +1741,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="절차를 설명하시오.",
                 ),
                 patch(
-                    "question_type_router."
+                    "grading.routing.question_type_router."
                     "load_question_type_profile",
                     return_value={"types": []},
                 ),
                 patch(
-                    "question_type_router.detect_question_type",
+                    "grading.routing.question_type_router.detect_question_type",
                     return_value=evaluation,
                 ),
                 patch.object(
@@ -1807,12 +1807,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="구성을 설명하시오.",
                 ),
                 patch(
-                    "question_type_router."
+                    "grading.routing.question_type_router."
                     "load_question_type_profile",
                     return_value={"types": []},
                 ),
                 patch(
-                    "question_type_router.detect_question_type",
+                    "grading.routing.question_type_router.detect_question_type",
                     side_effect=RuntimeError(
                         "simulated phase9 fallback trigger"
                     ),
@@ -6162,7 +6162,7 @@ class CoverageWarnModeScoreFlowRegressionTest(
     ) -> None:
         from unittest.mock import patch
 
-        import question_type_coverage_score_adjuster as adjuster
+        import grading.routing.question_type_coverage_score_adjuster as adjuster
 
         grade = {
             "total_score": 1.02,

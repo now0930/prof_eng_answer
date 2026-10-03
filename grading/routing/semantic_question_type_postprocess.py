@@ -17,8 +17,8 @@ from __future__ import annotations
 import copy
 from typing import Any
 
-from question_type_taxonomy import normalize_question_type
-from semantic_question_type_prompt import empty_question_type_coverage
+from grading.routing.question_type_taxonomy import normalize_question_type
+from grading.routing.semantic_question_type_prompt import empty_question_type_coverage
 
 
 def _mark_semantic_coverage(coverage: dict[str, Any]) -> dict[str, Any]:
@@ -69,7 +69,7 @@ def _canonicalize_semantic_question_type(
         return coverage
 
     try:
-        from question_type_taxonomy import (
+        from grading.routing.question_type_taxonomy import (
             detect_question_type_from_text,
             normalize_question_type,
         )

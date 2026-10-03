@@ -12,20 +12,20 @@ from explicit_requirement_cap import (
     as cap_walk,
     evaluate_explicit_requirement_hard_cap,
 )
-from question_type_coverage_adapter import (
+from grading.routing.question_type_coverage_adapter import (
     _walk_find_question_type_coverage
     as adapter_walk,
     attach_question_type_coverage_feedback,
 )
-from question_type_coverage_score_adjuster import (
+from grading.routing.question_type_coverage_score_adjuster import (
     _walk_find_question_type_coverage
     as adjustment_walk,
     evaluate_question_type_coverage_score_adjustment,
 )
-from question_type_output_adapter import (
+from grading.routing.question_type_output_adapter import (
     attach_question_type_v2_to_grade,
 )
-from question_type_router import (
+from grading.routing.question_type_router import (
     detect_question_type,
 )
 
@@ -141,7 +141,7 @@ def test_router_delegation_matrix():
             result["question_type_v2"][
                 "canonical_owner"
             ],
-            "question_type_router.detect_question_type",
+            "grading.routing.question_type_router.detect_question_type",
             "router owner",
         )
         assert_equal(
@@ -200,7 +200,7 @@ def test_contract_precedes_redetection_and_legacy():
         result["question_type_v2"][
             "canonical_owner"
         ],
-        "question_contract.question_type.id",
+        "grading.routing.question_contract.question_type.id",
         "contract owner",
     )
     assert_equal(
@@ -234,7 +234,7 @@ def test_difficulty_adapter_contract_handoff():
         result["question_type_v2"][
             "canonical_owner"
         ],
-        "question_contract.question_type.id",
+        "grading.routing.question_contract.question_type.id",
         "final pipeline canonical owner preservation",
     )
     assert_equal(

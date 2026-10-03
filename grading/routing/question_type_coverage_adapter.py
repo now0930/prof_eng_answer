@@ -474,7 +474,7 @@ def _ensure_base_question_type_coverage(
         return grade
 
     try:
-        from semantic_question_type_prompt import empty_question_type_coverage
+        from grading.routing.semantic_question_type_prompt import empty_question_type_coverage
 
         qtype_v2 = grade.get("question_type_v2")
         existing_question_type = None
@@ -521,7 +521,7 @@ def _ensure_base_question_type_coverage(
 # === qtype coverage root promotion wrapper v1 EOF ===
 # Keep this near the end of the file. It promotes nested semantic coverage
 # to grade root so grade.json remains self-contained and consistent.
-from question_type_taxonomy import (
+from grading.routing.question_type_taxonomy import (
     get_question_type_profile,
     normalize_question_type,
     question_type_c_focus,

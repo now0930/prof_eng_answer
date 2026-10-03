@@ -12,7 +12,7 @@ QUESTION_CONTRACT_VERSION = (
     "question_contract_v1"
 )
 QUESTION_CONTRACT_FILENAME = (
-    "question_contract.json"
+    "grading.routing.question_contract.json"
 )
 
 _CONFIRMATION_STATUSES = {

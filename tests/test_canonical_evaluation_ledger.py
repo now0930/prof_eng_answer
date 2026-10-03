@@ -13,7 +13,7 @@ from evaluation_ledger import (
     attach_canonical_evaluation_ledger,
     build_canonical_evaluation_ledger,
 )
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     build_question_demand_contract,
 )
 

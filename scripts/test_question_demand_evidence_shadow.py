@@ -5,7 +5,7 @@ import tempfile
 import json
 import unittest
 
-import question_demand_evidence as qde
+import grading.routing.question_demand_evidence as qde
 
 
 class QuestionDemandEvidenceShadowTests(unittest.TestCase):
@@ -104,7 +104,7 @@ class QuestionDemandEvidenceShadowTests(unittest.TestCase):
             session = Path(tmp)
 
             (
-                session / "semantic_router_shadow.json"
+                session / "grading.routing.semantic_router_shadow.json"
             ).write_text(
                 json.dumps(
                     {
@@ -126,7 +126,7 @@ class QuestionDemandEvidenceShadowTests(unittest.TestCase):
     def test_general_route_is_valid_and_has_no_topic_links(self):
         with tempfile.TemporaryDirectory() as tmp:
             session = Path(tmp)
-            (session / "semantic_router_shadow.json").write_text(
+            (session / "grading.routing.semantic_router_shadow.json").write_text(
                 json.dumps({
                     "routing_mode": "GENERAL",
                     "primary_topic_ids": [],

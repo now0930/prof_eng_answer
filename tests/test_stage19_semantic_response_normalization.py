@@ -588,7 +588,7 @@ def _run_stage19z_v3_submission_context_tests():
     from grading_identity import (
         build_grading_identity,
     )
-    from question_contract import (
+    from grading.routing.question_contract import (
         build_question_contract,
     )
 

@@ -29,7 +29,7 @@ def _coerce_question_type_row(key: Any, item: Any) -> dict[str, Any]:
     qid = str(key if key is not None else item)
     row = {"id": qid, "name": "", "c_lens": ""}
     try:
-        from question_type_taxonomy import get_question_type_profile
+        from grading.routing.question_type_taxonomy import get_question_type_profile
 
         profile = get_question_type_profile(qid) or {}
         row["name"] = profile.get("name") or profile.get("name_ko") or profile.get("title") or ""

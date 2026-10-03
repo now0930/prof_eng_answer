@@ -5,7 +5,7 @@ import json
 import os
 from unittest.mock import patch
 
-import semantic_router_shadow as sr
+import grading.routing.semantic_router_shadow as sr
 
 
 RTD = "rtd_temperature_sensor_principle_pt100_wiring_compensation"

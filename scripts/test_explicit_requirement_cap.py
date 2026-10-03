@@ -14,7 +14,7 @@ from explicit_requirement_cap import (
     apply_explicit_requirement_hard_cap,
 )
 from grade_score_reconciler import _apply_numeric_flags
-from question_type_coverage_score_adjuster import (
+from grading.routing.question_type_coverage_score_adjuster import (
     evaluate_question_type_coverage_score_adjustment,
 )
 

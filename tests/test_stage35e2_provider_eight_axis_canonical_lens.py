@@ -3,11 +3,11 @@ from __future__ import annotations
 import copy
 
 from grading.providers import gemini as gemini_grader
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     build_question_demand_contract,
     extract_explicit_question_scope,
 )
-from question_type_router import detect_question_type
+from grading.routing.question_type_router import detect_question_type
 
 
 QUESTION = (

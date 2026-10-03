@@ -20,14 +20,14 @@ sys.path.insert(0, str(REPO))
 from explicit_requirement_cap import (
     evaluate_explicit_requirement_hard_cap,
 )
-from question_type_coverage_adapter import (
+from grading.routing.question_type_coverage_adapter import (
     attach_question_type_coverage_feedback,
     ensure_grade_question_type_coverage,
 )
-from question_type_coverage_score_adjuster import (
+from grading.routing.question_type_coverage_score_adjuster import (
     apply_question_type_coverage_score_adjustment,
 )
-from semantic_question_type_prompt import (
+from grading.routing.semantic_question_type_prompt import (
     build_question_type_semantic_guidance,
 )
 

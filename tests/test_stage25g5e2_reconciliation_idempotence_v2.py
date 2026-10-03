@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import copy
 
-import question_type_coverage_adapter as adapter
+import grading.routing.question_type_coverage_adapter as adapter
 import verified_defect_reconciliation as owner
 
 

@@ -7,7 +7,7 @@ from unittest.mock import patch
 
 import logic_check_evaluator as evaluator
 import logic_llm_verifier as verifier_module
-import question_type_coverage_adapter as coverage_adapter
+import grading.routing.question_type_coverage_adapter as coverage_adapter
 from grade_score_reconciler import (
     reconcile_grade_score,
 )

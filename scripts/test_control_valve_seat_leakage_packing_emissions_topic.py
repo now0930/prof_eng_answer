@@ -17,7 +17,7 @@ from logic_llm_verifier import (
     extract_logic_evidence_candidates,
     verify_logic_with_llm,
 )
-from model_answer_router import find_model_answer_reference
+from grading.routing.model_answer_router import find_model_answer_reference
 
 TOPIC = 'control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions'
 TOPIC_1 = "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"

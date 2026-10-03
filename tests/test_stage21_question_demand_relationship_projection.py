@@ -4,7 +4,7 @@ import copy
 import unittest
 from pathlib import Path
 
-from question_demand_evidence import (
+from grading.routing.question_demand_evidence import (
     project_logic_relationship_conflicts,
 )
 

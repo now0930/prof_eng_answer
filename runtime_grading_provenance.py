@@ -73,7 +73,7 @@ _ENGINE_COMMIT = _git_head(_MODULE_ROOT)
 _ROUTER_VERSION = (
     "sha256:"
     + _sha256_file(
-        _MODULE_ROOT / "question_type_router.py"
+        _MODULE_ROOT / "grading/routing/question_type_router.py"
     )
 )
 _EVALUATOR_SHA = _sha256_file(

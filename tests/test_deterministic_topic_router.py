@@ -7,7 +7,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from deterministic_topic_router import route_question_topics
+from grading.routing.deterministic_topic_router import route_question_topics
 
 
 class DeterministicTopicRouterTests(unittest.TestCase):

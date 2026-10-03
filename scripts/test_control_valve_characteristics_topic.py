@@ -16,7 +16,7 @@ from logic_llm_verifier import (  # noqa: E402
     extract_logic_evidence_candidates,
     verify_logic_with_llm,
 )
-from model_answer_router import find_model_answer_reference  # noqa: E402
+from grading.routing.model_answer_router import find_model_answer_reference  # noqa: E402
 
 
 TOPIC = (

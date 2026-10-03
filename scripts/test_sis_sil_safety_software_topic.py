@@ -199,7 +199,7 @@ class SW05SourceContractTests(unittest.TestCase):
         self.assertGreaterEqual(len(self.logic["llm_profile"]["false_positive_cautions"]), 10)
 
     def test_16_no_forbidden_runtime_output_contract(self) -> None:
-        for forbidden in ("rubrics/generated/","model_answer_router.py","validate-all","git commit","git push"):
+        for forbidden in ("rubrics/generated/","grading/routing/model_answer_router.py","validate-all","git commit","git push"):
             self.assertNotIn(forbidden, self.readme)
 
 if __name__ == "__main__":

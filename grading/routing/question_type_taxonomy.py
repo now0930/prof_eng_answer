@@ -12,7 +12,7 @@ from functools import lru_cache
 from pathlib import Path
 from typing import Any
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[2]
 TAXONOMY_PATH = ROOT / "rubrics" / "question_types" / "v2_professional_engineer.json"
 
 

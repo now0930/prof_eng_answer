@@ -10,7 +10,7 @@ from typing import Any, Callable
 
 
 SEMANTIC_ROUTER_SHADOW_VERSION = "semantic_router_shadow_v1"
-SEMANTIC_ROUTER_SHADOW_FILE = "semantic_router_shadow.json"
+SEMANTIC_ROUTER_SHADOW_FILE = "grading.routing.semantic_router_shadow.json"
 
 VALID_ROUTING_MODES = {
     "SINGLE_TOPIC",
@@ -27,7 +27,7 @@ VALID_RUNTIME_ROLES = {
 DEFAULT_MAX_CANDIDATES = 5
 DEFAULT_MAX_TOPIC_EXCERPT_CHARS = 6000
 
-BASE_DIR = Path(__file__).resolve().parent
+BASE_DIR = Path(__file__).resolve().parents[2]
 DEFAULT_TOPIC_SHEET_DIR = BASE_DIR / "docs" / "topic_sheets"
 
 _SEMANTIC_SECTION_TERMS = (
@@ -821,7 +821,7 @@ def build_question_demand_aware_rule_candidates(
         #   1) neutral legacy rule match (question only),
         #   2) existing question-only shadow recall augmentation,
         #   3) freeze the resulting candidate catalog as authoritative.
-        from model_answer_router import (
+        from grading.routing.model_answer_router import (
             find_model_answer_reference,
         )
 

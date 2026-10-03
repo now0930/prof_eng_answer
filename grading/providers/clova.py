@@ -1,4 +1,4 @@
-from semantic_question_type_prompt import (
+from grading.routing.semantic_question_type_prompt import (
     build_question_type_json_contract,
     build_question_type_semantic_guidance,
 )
@@ -401,7 +401,7 @@ def clova_semantic_grade(
 _ORIGINAL_CLOVA_SEMANTIC_GRADE_QTYPE_V2 = clova_semantic_grade
 
 def clova_semantic_grade(*args, **kwargs):
-    from semantic_question_type_postprocess import ensure_question_type_coverage
+    from grading.routing.semantic_question_type_postprocess import ensure_question_type_coverage
 
     result = _ORIGINAL_CLOVA_SEMANTIC_GRADE_QTYPE_V2(*args, **kwargs)
 

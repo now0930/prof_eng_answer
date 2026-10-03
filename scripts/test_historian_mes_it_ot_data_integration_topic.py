@@ -245,7 +245,7 @@ class SW11SourceContractTests(unittest.TestCase):
             combined,
         )
         self.assertNotIn("rubrics/generated/", combined)
-        self.assertNotIn("model_answer_router.py", combined)
+        self.assertNotIn("grading/routing/model_answer_router.py", combined)
 
 
 if __name__ == "__main__":

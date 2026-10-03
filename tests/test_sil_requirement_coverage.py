@@ -11,8 +11,8 @@ if str(REPO) not in sys.path:
 
 from logic_check_evaluator import evaluate_logic_checks
 from grading.providers import gemini as gemini_grader
-from question_demand_contract import build_question_demand_contract
-from question_type_coverage_adapter import (
+from grading.routing.question_demand_contract import build_question_demand_contract
+from grading.routing.question_type_coverage_adapter import (
     attach_question_type_coverage_feedback,
 )
 from sil_relation_integrity import SIL_TARGET_TOPIC_ID

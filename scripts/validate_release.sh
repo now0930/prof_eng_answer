@@ -108,7 +108,7 @@ python3 -m py_compile \
   quantity_dimension_evaluator.py \
   topic_machine_contract.py \
   deterministic_replay_audit.py \
-  local_semantic_resolver.py \
+  grading/routing/local_semantic_resolver.py \
   deterministic_grading_shadow.py \
   grading_authority_policy.py \
   fatal_taxonomy.py \
@@ -116,7 +116,7 @@ python3 -m py_compile \
   deterministic_requirement_evaluator.py \
   deterministic_score_engine.py \
   deterministic_score_evidence.py \
-  deterministic_topic_router.py \
+  grading/routing/deterministic_topic_router.py \
   deterministic_primary_grader.py \
   fact_anchor_evidence_adapter.py \
   scripts/check_deterministic_authority_gate.py \

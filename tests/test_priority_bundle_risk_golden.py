@@ -11,7 +11,7 @@ if str(REPO) not in sys.path:
 from canonical_claim_extractor import extract_canonical_claim_evidence
 from deterministic_requirement_evaluator import evaluate_deterministic_requirements
 from deterministic_score_engine import calculate_deterministic_score
-from deterministic_topic_router import route_question_topics
+from grading.routing.deterministic_topic_router import route_question_topics
 
 
 class PriorityBundleRiskGoldenTests(unittest.TestCase):

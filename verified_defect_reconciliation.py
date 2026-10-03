@@ -1048,7 +1048,7 @@ def _reconcile_verified_defects_with_display_summary(
 
     before = _score_snapshot(output)
 
-    from question_type_coverage_adapter import (
+    from grading.routing.question_type_coverage_adapter import (
         attach_question_type_coverage_feedback,
     )
 
@@ -1227,7 +1227,7 @@ def _stage25g5e2_finalize_feedback_fixed_point(
     ):
         return output
 
-    from question_type_coverage_adapter import (
+    from grading.routing.question_type_coverage_adapter import (
         attach_question_type_coverage_feedback,
     )
 

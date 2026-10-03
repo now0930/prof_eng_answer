@@ -1,10 +1,10 @@
-from question_type_coverage_adapter import ensure_grade_question_type_coverage
+from grading.routing.question_type_coverage_adapter import ensure_grade_question_type_coverage
 
-from question_type_coverage_score_adjuster import apply_question_type_coverage_score_adjustment
+from grading.routing.question_type_coverage_score_adjuster import apply_question_type_coverage_score_adjustment
 
-from question_type_coverage_adapter import attach_question_type_coverage_feedback
+from grading.routing.question_type_coverage_adapter import attach_question_type_coverage_feedback
 
-from question_type_output_adapter import attach_question_type_v2_to_grade
+from grading.routing.question_type_output_adapter import attach_question_type_v2_to_grade
 
 #!/usr/bin/env python3
 from typing import Any, Dict, List, Optional

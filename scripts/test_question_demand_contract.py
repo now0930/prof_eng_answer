@@ -4,7 +4,7 @@ import copy
 import unittest
 
 from grading.providers import gemini as gemini_grader
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     QUESTION_DEMAND_CONTRACT_MARKER,
     attach_question_demand_contract,
     build_question_demand_contract,

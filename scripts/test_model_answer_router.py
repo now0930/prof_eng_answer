@@ -13,7 +13,7 @@ ROOT_DIR = Path(__file__).resolve().parents[1]
 if str(ROOT_DIR) not in sys.path:
     sys.path.insert(0, str(ROOT_DIR))
 
-from model_answer_router import find_model_answer_reference
+from grading.routing.model_answer_router import find_model_answer_reference
 
 
 PT100_TOPIC = "rtd_temperature_sensor_principle_pt100_wiring_compensation"
@@ -429,7 +429,7 @@ import json as _strain_router_json
 import unittest as _strain_router_unittest
 from pathlib import Path as _StrainRouterPath
 
-from model_answer_router import (
+from grading.routing.model_answer_router import (
     find_model_answer_reference as _strain_find_model_answer_reference,
 )
 
@@ -882,7 +882,7 @@ class ThermocoupleRoutingRegressionTest(unittest.TestCase):
         question_text,
         answer_text="",
     ):
-        from model_answer_router import (
+        from grading.routing.model_answer_router import (
             find_model_answer_reference,
         )
 

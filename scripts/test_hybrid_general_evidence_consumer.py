@@ -120,7 +120,7 @@ class HybridGeneralEvidenceConsumerTest(unittest.TestCase):
             return output
 
         with patch(
-            "question_contract.rehash_question_contract",
+            "grading.routing.question_contract.rehash_question_contract",
             side_effect=fake_rehash,
         ) as mocked:
             result = (

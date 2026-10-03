@@ -10,12 +10,12 @@ from typing import Any, Callable
 
 
 QUESTION_DEMAND_SHADOW_VERSION = "question_demand_shadow_v1"
-QUESTION_DEMAND_SHADOW_FILE = "question_demand_shadow.json"
+QUESTION_DEMAND_SHADOW_FILE = "grading.routing.question_demand_shadow.json"
 DEFAULT_MAX_DEMANDS = 12
 QUESTION_DEMAND_CACHE_VERSION = "question_demand_authoritative_cache_v1"
 QUESTION_DEMAND_PROMPT_CONTRACT_VERSION = "question_demand_prompt_v1"
-QUESTION_DEMAND_CANONICAL_DIR = Path(__file__).resolve().parent / "calibration" / "question_demand_contracts"
-QUESTION_DEMAND_RUNTIME_CACHE_DIR = Path(__file__).resolve().parent / "data" / "question_contract_cache" / "question_demand"
+QUESTION_DEMAND_CANONICAL_DIR = Path(__file__).resolve().parents[2] / "calibration" / "question_demand_contracts"
+QUESTION_DEMAND_RUNTIME_CACHE_DIR = Path(__file__).resolve().parents[2] / "data" / "question_contract_cache" / "question_demand"
 
 
 def _env_flag(name: str, default: bool = False) -> bool:

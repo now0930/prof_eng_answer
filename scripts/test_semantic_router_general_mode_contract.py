@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import unittest
 
-import semantic_router_shadow as srs
+import grading.routing.semantic_router_shadow as srs
 
 
 TOPIC_ID = "topic_a"

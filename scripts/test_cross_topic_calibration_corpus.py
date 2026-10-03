@@ -9,7 +9,7 @@ import grading_agents
 from generic_formula_integrity import (
     analyze_formula_text,
 )
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     build_question_demand_contract,
 )
 from verdict_consistency import (

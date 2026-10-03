@@ -136,7 +136,7 @@ class FinalGradeReuseTest(
         from grading_identity import (
             build_grading_identity,
         )
-        from question_contract import (
+        from grading.routing.question_contract import (
             build_question_contract,
         )
 

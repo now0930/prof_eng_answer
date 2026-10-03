@@ -2642,7 +2642,7 @@ def _phase3_load_question_only_routing_contract(session_dir):
     # Consume only the already-computed question-only Topic Router v2 result.
     # This helper never routes, scores, or inspects the student answer.
     try:
-        contract_path = Path(session_dir) / "semantic_router_shadow.json"
+        contract_path = Path(session_dir) / "grading.routing.semantic_router_shadow.json"
         if not contract_path.exists():
             return None
 
@@ -2674,7 +2674,7 @@ def _phase3_load_question_only_routing_contract(session_dir):
         return {
             "routing_mode": mode,
             "primary_topic_ids": topic_ids,
-            "source": "semantic_router_shadow.json",
+            "source": "grading.routing.semantic_router_shadow.json",
             "routing_effect": "consume_existing_question_only_result",
         }
     except Exception:
@@ -2759,7 +2759,7 @@ def _phase3_select_fact_anchors_from_bank(
                     routing_contract={
                         "routing_mode": "SINGLE_TOPIC",
                         "primary_topic_ids": [topic_id],
-                        "source": "semantic_router_shadow.json",
+                        "source": "grading.routing.semantic_router_shadow.json",
                     },
                 )
                 if not isinstance(one, dict):
@@ -3492,7 +3492,7 @@ def _phase3_evaluate_fact_anchors(
                         "question_only_primary_topic_ids": routed_ids,
                         "routing_contract_source": (
                             routing_contract.get("source")
-                            or "semantic_router_shadow.json"
+                            or "grading.routing.semantic_router_shadow.json"
                         ),
                         "routing_identity_policy": (
                             "consume_existing_question_only_result"
@@ -5571,7 +5571,7 @@ def _phase2_postprocess_grade(legacy_result):
         session_dir=session_dir,
     )
 
-    from question_contract import (
+    from grading.routing.question_contract import (
         apply_question_contract_to_fact_evaluation,
         apply_question_contract_to_model_reference,
         apply_question_contract_to_question_type,
@@ -5666,7 +5666,7 @@ def _phase2_postprocess_grade(legacy_result):
     # QUESTION_DEMAND_B_CAPTURE_DEFAULT_V2: preserve fallback paths without QD evidence
     question_demand_evidence_for_score = None
     try:
-        from question_demand_evidence import (
+        from grading.routing.question_demand_evidence import (
             write_question_demand_evidence_shadow,
         )
 
@@ -6084,7 +6084,7 @@ def _phase2_postprocess_grade(legacy_result):
             # STAGE21_RELATIONSHIP_QUESTION_DEMAND_PROJECTION_V1
             # Runs after all score-affecting Question Demand consumers.
             try:
-                from question_demand_evidence import (
+                from grading.routing.question_demand_evidence import (
                     project_logic_relationship_conflicts,
                 )
 
@@ -7467,7 +7467,7 @@ def _phase9_run_question_type_lens(
             )
 
     try:
-        from question_type_router import (
+        from grading.routing.question_type_router import (
             detect_question_type,
             load_question_type_profile,
         )
@@ -7836,7 +7836,7 @@ def _phase10_run_semantic_router_shadow(
 ):
     "Run semantic routing as a non-authoritative shadow side effect."
     try:
-        from semantic_router_shadow import (
+        from grading.routing.semantic_router_shadow import (
             SEMANTIC_ROUTER_SHADOW_FILE,
             augment_rule_candidates_for_shadow,
             semantic_route_shadow,
@@ -7883,7 +7883,7 @@ def _phase10_run_semantic_router_shadow(
             "legacy_router_authoritative": True,
         }
         SEMANTIC_ROUTER_SHADOW_FILE = (
-            "semantic_router_shadow.json"
+            "grading.routing.semantic_router_shadow.json"
         )
 
     if (
@@ -7932,7 +7932,7 @@ def _phase10_run_question_demand_shadow(
 ):
     """Run demand decomposition as a non-authoritative shadow side effect."""
     try:
-        from question_demand_shadow import (
+        from grading.routing.question_demand_shadow import (
             QUESTION_DEMAND_SHADOW_FILE,
             extract_question_demands,
         )
@@ -7964,7 +7964,7 @@ def _phase10_run_question_demand_shadow(
             "topic_selection_performed": False,
         }
         QUESTION_DEMAND_SHADOW_FILE = (
-            "question_demand_shadow.json"
+            "grading.routing.question_demand_shadow.json"
         )
 
     # Default-OFF must be behaviorally identical to the legacy phase10:
@@ -8029,7 +8029,7 @@ def _phase10_run_model_answer_reference(
             )
 
     try:
-        from model_answer_router import (
+        from grading.routing.model_answer_router import (
             find_model_answer_reference,
             load_model_answer_bank,
         )
@@ -8112,7 +8112,7 @@ def _phase10_run_model_answer_reference(
         # Semantic Router candidates are derived from the question
         # and Question Demand only.  The legacy reference result
         # remains downstream for grading compatibility, not routing.
-        from semantic_router_shadow import (
+        from grading.routing.semantic_router_shadow import (
             build_question_demand_aware_rule_candidates,
         )
 
@@ -8164,7 +8164,7 @@ def _phase10_run_model_answer_reference(
                 "not matched."
             )
 
-        from assisted_routing import (
+        from grading.routing.assisted_routing import (
             assisted_routing_enabled,
             build_assisted_model_answer_reference,
         )
@@ -8180,7 +8180,7 @@ def _phase10_run_model_answer_reference(
                 build_multi_topic_grading_context,
                 load_generated_multi_topic_sources,
             )
-            from semantic_router_shadow import (
+            from grading.routing.semantic_router_shadow import (
                 augment_rule_candidates_for_shadow,
             )
 
@@ -8226,7 +8226,7 @@ def _phase10_run_model_answer_reference(
                 build_hybrid_general_grading_context,
                 load_generated_hybrid_general_sources,
             )
-            from semantic_router_shadow import (
+            from grading.routing.semantic_router_shadow import (
                 augment_rule_candidates_for_shadow,
             )
 
@@ -8264,7 +8264,7 @@ def _phase10_run_model_answer_reference(
                 ] = hybrid_general_context
 
         if assisted_routing_enabled():
-            from semantic_router_shadow import (
+            from grading.routing.semantic_router_shadow import (
                 augment_rule_candidates_for_shadow,
             )
 
@@ -10466,7 +10466,7 @@ def _stage18b1_stable_question_contract_hash(
 ):
     import copy
 
-    from question_contract import (
+    from grading.routing.question_contract import (
         rehash_question_contract,
     )
 

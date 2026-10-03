@@ -14,7 +14,7 @@ if str(REPO) not in sys.path:
 import bot
 from grade_output_summarizer import summarize_grade_for_telegram
 from logic_check_evaluator import evaluate_logic_checks
-from question_type_coverage_adapter import (
+from grading.routing.question_type_coverage_adapter import (
     attach_question_type_coverage_feedback,
 )
 from sil_relation_integrity import SIL_TARGET_TOPIC_ID

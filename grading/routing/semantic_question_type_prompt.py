@@ -10,7 +10,7 @@ from __future__ import annotations
 import json
 from typing import Any
 
-from question_type_taxonomy import (
+from grading.routing.question_type_taxonomy import (
     detect_question_type_from_text,
     get_question_type_profile,
     normalize_question_type,
