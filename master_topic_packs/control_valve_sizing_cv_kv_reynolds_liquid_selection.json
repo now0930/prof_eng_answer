@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_valve_sizing_cv_kv_reynolds_liquid_selection",
+  "title_ko": "제어밸브의 Cv·Kv, 액체 사이징, Reynolds 보정 및 선정",
+  "revision": 3,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_valve_sizing_cv_kv_reynolds_liquid_selection",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_valve_sizing_cv_kv_reynolds_liquid_selection/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_valve_sizing_cv_kv_reynolds_liquid_selection/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_valve_sizing_cv_kv_reynolds_liquid_selection/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_valve_sizing_cv_kv_reynolds_liquid_selection/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9315",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-coefficient-control-valve-handbook-5%ec%9e%a5/",
+      "source_url": "https://now0930.pe.kr/wordpress/valve-coefficient-control-valve-handbook-5%ec%9e%a5/",
+      "title": "Valve Coefficient, control Valve Handbook 5장",
+      "version": "649707dd8f3b57a7ae5b141c2024cb456378dca623f4ea48efeb9bdde4cbc965",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-06T00:41:40+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:9ef2daf1893b353a8a8688904869a08d",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-coefficient-control-valve-handbook-5%ec%9e%a5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/valve.pdf",
+      "title": "valve",
+      "version": "2026-08-04T07:27:58",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-04T07:27:58+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
