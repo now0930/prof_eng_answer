@@ -7,6 +7,9 @@ the versioned envelope and will expose read-only projections in later stages.
 from __future__ import annotations
 
 from datetime import datetime
+import copy
+import json
+from pathlib import Path
 from typing import Any
 from urllib.parse import urlparse
 
@@ -138,3 +141,44 @@ def validate_master_topic_pack(value: Any) -> dict[str, Any]:
     policy = value["source_update_policy"]
     _expect(policy == {"mode": "proposal_only", "approval_required": True}, "source updates must require approval")
     return value
+
+
+def load_legacy_topic_sources(repository_root: str | Path, master: dict[str, Any]) -> dict[str, dict[str, Any]]:
+    """Load referenced legacy Topic Pack files and verify their ownership."""
+    validate_master_topic_pack(master)
+    root = Path(repository_root).resolve()
+    files = master["legacy_topic_pack"]["source_files"]
+    sources: dict[str, dict[str, Any]] = {}
+    for key, relative_path in files.items():
+        path = (root / relative_path).resolve()
+        _expect(path.is_relative_to(root), f"legacy source escapes repository root: {relative_path}")
+        _expect(path.is_file(), f"legacy source does not exist: {relative_path}")
+        try:
+            payload = json.loads(path.read_text(encoding="utf-8"))
+        except (OSError, json.JSONDecodeError) as exc:
+            raise MasterTopicPackError(f"could not read legacy source: {relative_path}") from exc
+        _expect(isinstance(payload, dict), f"legacy source must contain a JSON object: {relative_path}")
+        _expect(payload.get("topic_id") == master["topic_id"], f"legacy source topic_id mismatch: {relative_path}")
+        sources[key] = payload
+    return sources
+
+
+def project_grading(repository_root: str | Path, master: dict[str, Any]) -> dict[str, Any]:
+    """Return a read-only projection over existing grading source artifacts."""
+    sources = load_legacy_topic_sources(repository_root, master)
+    projection = master["projections"]["grading"]
+    selected = {
+        key: copy.deepcopy(sources[key])
+        for key in projection["source_keys"]
+    }
+    return {
+        "projection_id": projection["projection_id"],
+        "authority": projection["authority"],
+        "topic_id": master["topic_id"],
+        "sources": selected,
+    }
+
+
+def grading_compatibility_payload(repository_root: str | Path, master: dict[str, Any]) -> dict[str, Any]:
+    """Expose the source-key mapping expected by legacy grading adapters."""
+    return project_grading(repository_root, master)["sources"]
