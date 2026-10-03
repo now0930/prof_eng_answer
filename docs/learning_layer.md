@@ -61,6 +61,51 @@ structured feedback; select the next queue from history. The Grading View must
 not become a second scoring implementation. Any future grader adapter switch
 requires a separate parity and regression stage.
 
+### Next adapter stage: bounded implementation and regression gates
+
+The first production adapter stage should be limited to the learning runtime;
+it must not touch `bot.py`'s grading or score-finalization path.
+
+1. Change `_master_question()` to obtain the question pattern/examples through
+   the Training View. Preserve today's question-selection precedence and output
+   exactly; if the view lacks a usable prompt, retain the current legacy-source
+   fallback. This avoids changing the review queue while making the consumer
+   boundary explicit. If the Training View needs an additive `question_examples`
+   field to preserve precedence, version or test that projection contract first.
+2. Add a feedback adapter that accepts the finalized grade and the
+   topic's Diagnosis View and returns a separate learner-feedback payload.
+   Keep `diagnosis_from_grade()` as the persisted-grade compatibility baseline;
+   attach projection guidance separately rather than allowing it to overwrite
+   grade-derived findings. The adapter may explain findings and suggest study
+   actions, but cannot calculate scores, change verdicts, or promote a
+   projection signal into a fatal finding on its own.
+3. In `record_completed_grade()`, call these adapters only after the grade is
+   final. Persist the same score/verdict and existing diagnosis fields; any new
+   feedback fields are additive. If a Master/View is unavailable or malformed,
+   preserve the existing history behavior and do not block delivery of the
+   finalized grade.
+
+Required regression gates for that implementation stage:
+
+- Training adapter parity: for representative Master Topics, selected
+  question ID/text and daily queue remain identical to the pre-adapter legacy
+  behavior; test empty examples/patterns and fallback behavior.
+- Feedback isolation: snapshot the grade before/after adapter use and assert
+  `final_total_score`, `total_score`, `verdict`, `score_status`, and all existing
+  grade fields are unchanged; assert `score_effect == "none"` on guidance.
+- Persistence compatibility: existing history fields and SQLite schema remain
+  readable; feedback additions are optional and old rows still load.
+- Integration failure isolation: missing/invalid View data cannot prevent the
+  finalized grade response or corrupt an already-saved grade.
+- Run Master schema/projection/training-diagnosis/history/queue/integration
+  tests, the bot learning-history integration test, and the existing Grader
+  deterministic, fatal, canonical-routing, Golden, and release-gate suites.
+  No existing gate may be edited or weakened to accommodate the adapters.
+
+This is a scope and gate definition, not a grader integration approval: the
+grading projection remains test-only, and no adapter may replace the existing
+Topic Pack or deterministic primary authority in this stage.
+
 ## WordPress change-proposal lifecycle
 
 1. Sync WordPress posts and first-party media into the source catalog. Record
