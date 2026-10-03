@@ -35,6 +35,7 @@ def record_result_and_build_queue(
     if score is None:
         raise LearningWorkflowError("grade_result has no finalized score")
     try:
+        queue = build_review_queue(queue_candidates, generated_at=generated_at)
         saved = history.save(TrainingAttempt(
             question_id=question_id,
             topic_id=topic_id,
@@ -46,5 +47,4 @@ def record_result_and_build_queue(
         ))
     except (TypeError, ValueError) as exc:
         raise LearningWorkflowError(str(exc)) from exc
-    queue = build_review_queue(queue_candidates, generated_at=generated_at)
     return {"training_attempt": saved, "review_queue": queue}

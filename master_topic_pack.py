@@ -10,6 +10,7 @@ from datetime import datetime
 import copy
 import json
 from pathlib import Path
+import re
 from typing import Any
 from urllib.parse import urlparse
 
@@ -57,6 +58,12 @@ def _valid_uri(value: Any) -> bool:
     return parsed.scheme in {"http", "https"} and bool(parsed.netloc)
 
 
+def _valid_topic_id(value: Any) -> bool:
+    return isinstance(value, str) and len(value) >= 8 and re.fullmatch(
+        r"[a-z][a-z0-9]*(?:_[a-z0-9]+)+", value
+    ) is not None
+
+
 def _validate_source_reference(source: Any, index: int) -> None:
     prefix = f"sources[{index}]"
     _expect(isinstance(source, dict), f"{prefix} must be an object")
@@ -65,7 +72,7 @@ def _validate_source_reference(source: Any, index: int) -> None:
         "page", "section", "updated_at", "verification_status",
     }
     _expect(set(source) == required, f"{prefix} must contain exactly the source reference fields")
-    _expect(isinstance(source["source_id"], str) and bool(source["source_id"].strip()), f"{prefix}.source_id is required")
+    _expect(isinstance(source["source_id"], str) and re.fullmatch(r"[A-Za-z0-9][A-Za-z0-9._:-]*", source["source_id"]) is not None, f"{prefix}.source_id is invalid")
     _expect(source["source_type"] in _SOURCE_TYPES, f"{prefix}.source_type is invalid")
     _expect(isinstance(source["title"], str) and bool(source["title"].strip()), f"{prefix}.title is required")
     _expect(isinstance(source["version"], (str, int)) and not isinstance(source["version"], bool), f"{prefix}.version is invalid")
@@ -80,9 +87,10 @@ def _validate_source_reference(source: Any, index: int) -> None:
     _expect(updated_at is None or isinstance(updated_at, str), f"{prefix}.updated_at is invalid")
     if updated_at is not None:
         try:
-            datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
+            parsed = datetime.fromisoformat(updated_at.replace("Z", "+00:00"))
         except ValueError as exc:
             raise MasterTopicPackError(f"{prefix}.updated_at must be ISO-8601") from exc
+        _expect(parsed.tzinfo is not None, f"{prefix}.updated_at must include a timezone")
 
 
 def validate_source_reference(source: Any) -> dict[str, Any]:
@@ -102,8 +110,7 @@ def validate_master_topic_pack(value: Any) -> dict[str, Any]:
     _expect(required <= set(value) and set(value) <= allowed, "Master Topic Pack fields do not match the contract")
     _expect(value["schema_version"] == SCHEMA_VERSION, "unsupported Master Topic Pack schema_version")
     topic_id = value["topic_id"]
-    _expect(isinstance(topic_id, str) and len(topic_id) >= 8 and topic_id == topic_id.lower(), "topic_id is invalid")
-    _expect(all(part and part.isalnum() for part in topic_id.split("_")), "topic_id must use lowercase alphanumeric segments")
+    _expect(_valid_topic_id(topic_id), "topic_id is invalid")
     _expect(isinstance(value["title_ko"], str) and bool(value["title_ko"].strip()), "title_ko is required")
     _expect(isinstance(value["revision"], int) and not isinstance(value["revision"], bool) and value["revision"] >= 1, "revision must be a positive integer")
 
@@ -215,6 +222,7 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
     """Build a learner-facing content view without generating or grading answers."""
     sources = load_legacy_topic_sources(repository_root, master)
     config = master["projections"]["training"]
+    sources = {key: sources[key] for key in config["content_sources"]}
     fact_anchor = sources.get("fact_anchor", {})
     model_answer = sources.get("model_answer", {})
     topic_importance = sources.get("topic_importance", {})
@@ -236,6 +244,7 @@ def project_diagnosis(repository_root: str | Path, master: dict[str, Any]) -> di
     """Expose structured diagnosis inputs without scoring or changing grader output."""
     sources = load_legacy_topic_sources(repository_root, master)
     config = master["projections"]["diagnosis"]
+    sources = {key: sources[key] for key in config["content_sources"]}
     fact_anchor = sources.get("fact_anchor", {})
     logic_check = sources.get("logic_check", {})
     model_answer = sources.get("model_answer", {})
