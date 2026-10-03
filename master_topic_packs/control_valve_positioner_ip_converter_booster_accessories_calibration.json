@@ -1,0 +1,69 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_valve_positioner_ip_converter_booster_accessories_calibration",
+  "title_ko": "제어밸브 포지셔너·I/P 변환기·부스터·부속기기 및 교정",
+  "revision": 2,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_valve_positioner_ip_converter_booster_accessories_calibration",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_valve_positioner_ip_converter_booster_accessories_calibration/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_valve_positioner_ip_converter_booster_accessories_calibration/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_valve_positioner_ip_converter_booster_accessories_calibration/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_valve_positioner_ip_converter_booster_accessories_calibration/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9307",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-4%ec%9e%a5-%ec%9a%94%ec%95%bd-%ec%a0%9c%ec%96%b4%eb%b0%b8%eb%b8%8c-%eb%b6%80%ec%86%8d%ed%92%88%ea%b3%bc-%ed%8f%ac%ec%a7%80%ec%85%94%eb%84%88-%ea%b5%ac%ec%a1%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-4%ec%9e%a5-%ec%9a%94%ec%95%bd-%ec%a0%9c%ec%96%b4%eb%b0%b8%eb%b8%8c-%eb%b6%80%ec%86%8d%ed%92%88%ea%b3%bc-%ed%8f%ac%ec%a7%80%ec%85%94%eb%84%88-%ea%b5%ac%ec%a1%b0/",
+      "title": "Valve Handbook 4장 요약: 제어밸브 부속품과 포지셔너 구조",
+      "version": "024e12e01ad34b2993969b98e35f9163460fc17c44b14fe21a643569334fe695",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-04T02:19:54+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
