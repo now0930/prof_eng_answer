@@ -9,7 +9,13 @@ ROOT = __import__("pathlib").Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "tests"))
 
-from study.master_topic_pack import MasterTopicPackError, validate_source_reference
+from study.master_topic_pack import (
+    MasterTopicPackError,
+    load_master_topic_pack,
+    project_diagnosis,
+    project_training,
+    validate_source_reference,
+)
 from study.learning_runtime import _review_candidates
 from study.source_update import SourceUpdateError, apply_approved_source_update, find_topics_for_source, propose_source_update
 from test_master_topic_pack_schema import _valid_record
@@ -107,6 +113,30 @@ def test_only_approved_wordpress_source_change_enters_review_candidates() -> Non
         for item in after_approval
     )
     assert not master["sources"]
+
+
+def test_source_reference_approval_does_not_rewrite_any_view_content() -> None:
+    topic_id = "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration"
+    master = load_master_topic_pack(ROOT / "master_topic_packs" / f"{topic_id}.json")
+    before = {
+        "training": project_training(ROOT, master),
+        "diagnosis": project_diagnosis(ROOT, master),
+    }
+    reference = _reference(
+        source_id="wp-contract-provenance-only",
+        wordpress_url="https://example.org/approved-reference/",
+        source_url="https://example.org/approved-reference.pdf",
+        updated_at="2026-10-05T10:00:00+09:00",
+    )
+    proposal = propose_source_update(
+        master, reference, proposed_at="2026-10-05T10:01:00+09:00"
+    )
+    updated = apply_approved_source_update(master, proposal, approved_by="owner")
+    after = {
+        "training": project_training(ROOT, updated),
+        "diagnosis": project_diagnosis(ROOT, updated),
+    }
+    assert after == before
 
 
 if __name__ == "__main__":
