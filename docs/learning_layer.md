@@ -5,29 +5,31 @@ change the grader's A/B/C/D/E contract, deterministic checks, routing, fatal
 handling, canonical Question Types, Golden cases, or release gates.
 
 ```text
-existing Topic Pack
-        │
+WordPress post / PDF / image / HTML
+        │ sync, version, OCR/text extraction
         ▼
-Master Topic Pack (versioned references and projection contracts)
-        ├── grading projection ──► existing grader source files
-        ├── training projection ─► prompts, outline, facts, practice targets
-        └── diagnosis projection ► facts, deterministic checks, topic guidance
-                                      │
-answer ─► existing grade ─► diagnosis ─► SQLite training history
-                                                  │
-                                                  ▼
-                                       daily two-item review queue
-
-WordPress category posts and linked media
-        │
-        ▼
-SQLite source catalog ──► reviewed post/topic link ──► update proposal
-                                                       │
-                                                user approval
-                                                       │
-                                                       ▼
-                                         Master Topic Pack source reference
+SQLite source catalog ── candidate post↔topic links ── human review
+                                                        │
+                                             source-reference proposal
+                                                        │
+                                                  user approval
+                                                        ▼
+Master Topic Pack (Topic identity, legacy references, approved sources)
+        ├── Grading View ──► existing Topic Pack ──► deterministic/semantic grader
+        ├── Training View ─► practice prompt, outline, facts, study targets
+        └── Feedback View ─► final grade + diagnosis guidance ─► learner feedback
+                                                                  │
+                                                  SQLite training history
+                                                                  │
+                                                                  ▼
+                                                       daily 2-item queue
 ```
+
+The three Views are separate read-only projections over the current Topic Pack
+content. The Master owns Topic identity, projection contracts, and approved
+source references; it is not a second grading-rule database. The feedback
+View is the learner-facing use of the `diagnosis` projection and must not
+change the finalized score or verdict.
 
 ## Contracts and code
 
@@ -44,6 +46,46 @@ SQLite source catalog ──► reviewed post/topic link ──► update propos
   PDF text extraction/OCR, and review commands: `scripts/wordpress_catalog.py`
 - Local generated catalog: `data/wordpress_sources.sqlite3` (ignored runtime
   data; regenerate from the configured category URL)
+
+## View consumers and ownership
+
+| View | Contract and intended consumer | Current wiring |
+| --- | --- | --- |
+| Grading | `project_grading()` / `grading_compatibility_payload()` exposes the existing grading source files without editing or translating them. The existing Topic Pack and routing remain authoritative. | Projection is currently exercised by contract/integration tests, not called from the production grading path. This is intentional until compatibility is proven at the real adapter boundary. |
+| Training | `project_training()` provides question patterns, outline, fact anchors, high-score points, and study targets. A trainer or `/review` presentation layer may consume it; it must not write grade fields. | `/review` builds its queue from Master metadata, but its question text is currently read directly from legacy `model_answer` in `learning_runtime._master_question()`. It does not yet consume `project_training()`. |
+| Feedback | `project_diagnosis()` provides anchors, fatal misconceptions, deterministic checks, and guidance with `score_effect: none`. Combine it with the already-finalized grade to explain misses and next actions. | Production history currently stores a compact diagnosis extracted from the final grade via `diagnosis_from_grade()`. It does not yet combine the diagnosis projection with that result. |
+
+The intended production sequence is: finalize grade exactly as today; build the
+Training and Feedback Views as read-only payloads; persist the final score and
+structured feedback; select the next queue from history. The Grading View must
+not become a second scoring implementation. Any future grader adapter switch
+requires a separate parity and regression stage.
+
+## WordPress change-proposal lifecycle
+
+1. Sync WordPress posts and first-party media into the source catalog. Record
+   parent post URL, exact asset URL, source ID, version/hash, timestamps, and
+   extracted text. PDF binaries remain outside the catalog; OCR text is stored
+   locally.
+2. Generate candidate post-to-Topic links from title, excerpt, and tags. Scores
+   are ranking hints only. A person approves or rejects each mapping.
+3. For each approved Topic/source pair, queue a source-reference proposal. If
+   the Topic has no Master yet, keep it as `waiting_for_master`; otherwise use
+   `pending_approval` with the current Master revision as its base.
+4. On explicit approval, append or replace the source reference and increment
+   the Master revision. Other pending proposals are rebased, but still need
+   individual approval. An applied reference remains `unverified` until its
+   contents and location are checked.
+5. When the source changes, record old/new version or hash in
+   `source_change_events` and create proposals for Topics with approved links.
+   An event with no approved Topic association remains `pending_topic_review`.
+
+This lifecycle currently updates **source references**, not the actual facts,
+grading rules, or learning content. A material WordPress content change must
+not silently enter any View: a later content-curation proposal should identify
+the affected Fact/section, show the source diff and evidence, and require
+approval before curated Topic content changes. This separates provenance
+maintenance from knowledge-content changes.
 
 The history database path is supplied by the caller. Each attempt stores its
 question and topic identity, attempt time, final score, structured diagnosis,
@@ -76,8 +118,8 @@ selection rules are isolated in `study/learning_runtime.py` for future replaceme
 
 Catalog synchronization and source-change detection are implemented, while
 automatic writes into Master records are disabled. A change tied to an
-approved Topic mapping creates a `pending_approval` proposal; applying it
-requires an approver identity and a matching Master revision.
+approved Topic mapping creates a `pending_approval` source-reference proposal;
+applying it requires an approver identity and a matching Master revision.
 
 The first catalog pass covers the Industrial Instrumentation/Control Engineer
 category configured in `scripts/wordpress_catalog.py`. It indexes every
