@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+  "title_ko": "제어밸브에 작용하는 유체력, 불평형력, 마찰력과 액추에이터·Fail-Safe 설계",
+  "revision": 3,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9318",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/actuator%ea%b0%80-%ed%95%84%ec%9a%94%ed%95%9c-%ed%9e%98-control-valve-handbook-5-11/",
+      "source_url": "https://now0930.pe.kr/wordpress/actuator%ea%b0%80-%ed%95%84%ec%9a%94%ed%95%9c-%ed%9e%98-control-valve-handbook-5-11/",
+      "title": "actuator가 필요한 힘 Control Valve handbook 5.11",
+      "version": "bf9a383f4d6a3acb7e8f22e869e319877c52230df12d34e754e3c53ca31c06dc",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-05T14:56:04+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:08c851a3e8e218db98e4098bfe3f371a",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/actuator%ea%b0%80-%ed%95%84%ec%9a%94%ed%95%9c-%ed%9e%98-control-valve-handbook-5-11/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/valve-1.pdf",
+      "title": "valve-1",
+      "version": "2026-08-04T08:18:23",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-04T08:18:23+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
