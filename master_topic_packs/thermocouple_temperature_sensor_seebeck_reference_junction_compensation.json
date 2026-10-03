@@ -1,0 +1,117 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+  "title_ko": "열전대 온도센서의 원리, 기준접점 보상 및 보상도선",
+  "revision": 6,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/thermocouple_temperature_sensor_seebeck_reference_junction_compensation",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/thermocouple_temperature_sensor_seebeck_reference_junction_compensation/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/thermocouple_temperature_sensor_seebeck_reference_junction_compensation/logic_check.json",
+      "model_answer": "rubrics/topic_packs/thermocouple_temperature_sensor_seebeck_reference_junction_compensation/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/thermocouple_temperature_sensor_seebeck_reference_junction_compensation/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:6305",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%97%b4%ec%a0%84%eb%8c%80-%eb%83%89%ec%a0%91%ec%a0%90-%eb%b3%b4%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%97%b4%ec%a0%84%eb%8c%80-%eb%83%89%ec%a0%91%ec%a0%90-%eb%b3%b4%ec%83%81/",
+      "title": "열전대, 냉접점 보상",
+      "version": "6472ed2379a0a51d78bda2d3ad78574fcd746f555f1e2785071708d3787cea04",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-05-10T04:25:19+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:2386333feef2ada3c6590232ef791076",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%97%b4%ec%a0%84%eb%8c%80-%eb%83%89%ec%a0%91%ec%a0%90-%eb%b3%b4%ec%83%81/",
+      "source_url": "http://woojinmni.com/catalog_files/%EB%B3%B4%EC%83%81%EB%8F%84%EC%84%A0_1411271194.pdf",
+      "title": "또한, 보상도선을 사용하여 기준접점과 측온접점 사이의 온도 변동을 보상할 수 있습니다",
+      "version": "unversioned",
+      "page": null,
+      "section": null,
+      "updated_at": null,
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:602ed0d0ebc851f20fe1022066b9f3ae",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%97%b4%ec%a0%84%eb%8c%80-%eb%83%89%ec%a0%91%ec%a0%90-%eb%b3%b4%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A7%80%EB%8A%A5%ED%98%95-%EC%A0%84%EB%A0%A5-%EB%B3%80%ED%99%98-%EC%8B%A4%ED%97%98%EC%8B%A4_%EC%84%BC%EC%84%9C%EB%B0%8F%EA%B3%84%EC%B8%A1.pdf",
+      "title": "지능형-전력-변환-실험실_센서및계측",
+      "version": "2024-03-25T11:38:04",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-25T11:38:04+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:897513d27ebb297eb8c108e21321a712",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%97%b4%ec%a0%84%eb%8c%80-%eb%83%89%ec%a0%91%ec%a0%90-%eb%b3%b4%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/temp0619.pdf",
+      "title": "temp0619",
+      "version": "2024-03-25T08:08:11",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-25T08:08:11+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:bf437c94c51a2a5c7ff9c59906541738",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%97%b4%ec%a0%84%eb%8c%80-%eb%83%89%ec%a0%91%ec%a0%90-%eb%b3%b4%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%B8%A1%EC%A0%95%EC%84%BC%EC%84%9C%ED%95%84%EC%88%98%EA%B8%B8%EB%9D%BC%EC%9E%A1%EC%9D%B4.pdf",
+      "title": "측정센서필수길라잡이",
+      "version": "2024-03-09T11:02:26",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-09T11:02:26+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
