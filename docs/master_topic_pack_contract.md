@@ -23,6 +23,14 @@ or other View input requires a separate reviewed content proposal. Source
 references remain `unverified` until the referenced material and page/section
 are checked.
 
+Source-reference proposal approval uses a SQLite write transaction and an
+atomic Master-file replacement. If a database operation fails before commit,
+the catalog transaction is rolled back and the previous Master bytes are
+restored. If commit acknowledgement is ambiguous, the code checks the durable
+proposal status and retains the matching Master state; if it cannot determine
+the outcome, it stops with an explicit manual-reconciliation error rather than
+silently retrying.
+
 `schemas/content_update_proposal.schema.json` and
 `study/content_update.py` define that proposal-only contract. A proposal pins
 the base Master revision, identifies one source-file record and field path,

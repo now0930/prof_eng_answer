@@ -122,9 +122,10 @@ Topic Pack or deterministic primary authority in this stage.
    the Topic has no Master yet, keep it as `waiting_for_master`; otherwise use
    `pending_approval` with the current Master revision as its base.
 4. On explicit approval, append or replace the source reference and increment
-   the Master revision. Other pending proposals are rebased, but still need
-   individual approval. An applied reference remains `unverified` until its
-   contents and location are checked.
+   the Master revision. The catalog approval and atomic Master replacement are
+   protected with rollback and ambiguous-commit reconciliation. Other pending
+   proposals are rebased, but still need individual approval. An applied
+   reference remains `unverified` until its contents and location are checked.
 5. When the source changes, record old/new version or hash in
    `source_change_events` and create proposals for Topics with approved links.
    An event with no approved Topic association remains `pending_topic_review`.

@@ -701,43 +701,97 @@ def review_topic_link(database: Path, post_id: int, topic_id: str, decision: str
 
 def approve_master_proposal(database: Path, proposal_id: str, approved_by: str) -> None:
     connection = initialize_database(database)
-    row = connection.execute(
-        "SELECT topic_id,proposal_json,status FROM source_update_proposals WHERE proposal_id=?",
-        (proposal_id,),
-    ).fetchone()
-    if not row:
+    master_path: Path | None = None
+    original_master: bytes | None = None
+    original_mode: int | None = None
+    master_replaced = False
+    updated: dict[str, Any] | None = None
+    topic_id: str | None = None
+    try:
+        connection.execute("BEGIN IMMEDIATE")
+        row = connection.execute(
+            "SELECT topic_id,proposal_json,status FROM source_update_proposals WHERE proposal_id=?",
+            (proposal_id,),
+        ).fetchone()
+        if not row:
+            raise ValueError(f"proposal not found: {proposal_id}")
+        topic_id, proposal_json, status = row
+        if status != "pending_approval":
+            raise ValueError(f"proposal is not ready for approval: {status}")
+        unresolved_master_path = ROOT / "master_topic_packs" / f"{topic_id}.json"
+        if unresolved_master_path.is_symlink():
+            raise ValueError("canonical Master path must not be a symlink")
+        repo_root = ROOT.resolve()
+        master_path = unresolved_master_path.resolve()
+        if not master_path.is_relative_to(repo_root):
+            raise ValueError("canonical Master path escapes the repository")
+        original_master = master_path.read_bytes()
+        original_mode = stat.S_IMODE(master_path.stat().st_mode)
+        master = json.loads(original_master)
+        updated = apply_approved_source_update(master, json.loads(proposal_json), approved_by=approved_by)
+        # Detect external edits between reading the baseline and replacement.
+        if master_path.read_bytes() != original_master:
+            raise ValueError("canonical Master changed during approval preflight")
+        _write_bytes_atomically(
+            master_path,
+            (json.dumps(updated, ensure_ascii=False, indent=2) + "\n").encode("utf-8"),
+            original_mode,
+        )
+        master_replaced = True
+        connection.execute(
+            "UPDATE source_update_proposals SET status='applied',approved_by=?,approved_at=? WHERE proposal_id=?",
+            (approved_by, datetime.now(timezone.utc).isoformat(), proposal_id),
+        )
+        event_id = connection.execute(
+            "SELECT event_id FROM source_update_proposals WHERE proposal_id=?", (proposal_id,)
+        ).fetchone()[0]
+        if event_id is not None:
+            refresh_change_event_status(connection, event_id)
+        # Applying one reference advances the Master revision. Rebase the remaining
+        # still-pending references to the new revision; each still needs approval.
+        remaining = connection.execute(
+            """SELECT source_id,event_id FROM source_update_proposals
+               WHERE topic_id=? AND status='pending_approval' AND base_revision<>?""",
+            (topic_id, updated["revision"]),
+        ).fetchall()
+        for source_id, pending_event_id in remaining:
+            queue_source_proposal(connection, source_id, topic_id, event_id=pending_event_id)
+        connection.commit()
+    except Exception:
+        try:
+            connection.rollback()
+        except Exception as rollback_error:
+            if master_replaced:
+                raise RuntimeError(
+                    "source proposal approval failed and SQLite rollback could not be confirmed; "
+                    "inspect both proposal status and Master revision before retrying"
+                ) from rollback_error
+            raise
+        if master_replaced and master_path is not None and original_master is not None and original_mode is not None:
+            # A commit error can be ambiguous. Preserve the new Master if SQLite
+            # confirms the approval is durable; otherwise restore the old bytes.
+            try:
+                persisted_status = connection.execute(
+                    "SELECT status FROM source_update_proposals WHERE proposal_id=?", (proposal_id,)
+                ).fetchone()
+            except Exception as status_check_error:
+                raise RuntimeError(
+                    "source approval outcome is ambiguous and the Master was retained; "
+                    "inspect proposal status and Master revision before retrying"
+                ) from status_check_error
+            if persisted_status and persisted_status[0] == "applied":
+                raise RuntimeError(
+                    "approval reported an error after SQLite persisted it; the updated Master was retained"
+                )
+            try:
+                _write_bytes_atomically(master_path, original_master, original_mode)
+            except Exception as rollback_error:
+                raise RuntimeError(
+                    f"source proposal approval failed and Master rollback was incomplete: {rollback_error}"
+                )
+        raise
+    finally:
         connection.close()
-        raise ValueError(f"proposal not found: {proposal_id}")
-    topic_id, proposal_json, status = row
-    if status != "pending_approval":
-        connection.close()
-        raise ValueError(f"proposal is not ready for approval: {status}")
-    master_path = ROOT / "master_topic_packs" / f"{topic_id}.json"
-    master = json.loads(master_path.read_text(encoding="utf-8"))
-    updated = apply_approved_source_update(master, json.loads(proposal_json), approved_by=approved_by)
-    temporary = master_path.with_suffix(master_path.suffix + ".tmp")
-    temporary.write_text(json.dumps(updated, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
-    temporary.replace(master_path)
-    connection.execute(
-        "UPDATE source_update_proposals SET status='applied',approved_by=?,approved_at=? WHERE proposal_id=?",
-        (approved_by, datetime.now(timezone.utc).isoformat(), proposal_id),
-    )
-    event_id = connection.execute(
-        "SELECT event_id FROM source_update_proposals WHERE proposal_id=?", (proposal_id,)
-    ).fetchone()[0]
-    if event_id is not None:
-        refresh_change_event_status(connection, event_id)
-    # Applying one reference advances the Master revision. Rebase the remaining
-    # still-pending references to the new revision; each still needs approval.
-    remaining = connection.execute(
-        """SELECT source_id,event_id FROM source_update_proposals
-           WHERE topic_id=? AND status='pending_approval' AND base_revision<>?""",
-        (topic_id, updated["revision"]),
-    ).fetchall()
-    for source_id, pending_event_id in remaining:
-        queue_source_proposal(connection, source_id, topic_id, event_id=pending_event_id)
-    connection.commit()
-    connection.close()
 
 
 def save_content_update_proposal(database: Path, proposal: dict[str, Any]) -> None:

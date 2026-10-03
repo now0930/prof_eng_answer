@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import sqlite3
 import sys
 import tempfile
 from datetime import datetime
@@ -15,6 +16,7 @@ sys.path.insert(0, str(ROOT / "tests"))
 import wordpress_catalog
 from study.learning_runtime import _review_candidates
 from study.master_topic_pack import load_master_topic_pack
+from study.source_update import propose_source_update
 from test_master_topic_pack_schema import _valid_record
 
 
@@ -102,6 +104,34 @@ def test_approved_catalog_change_flows_to_master_and_review_queue() -> None:
             )
             assert not any(item["reason"] == "recently_changed_topic" for item in before)
 
+            master_before_failed_approval = (master_dir / f"{topic_id}.json").read_bytes()
+            real_connect = sqlite3.connect
+
+            class FailingCommitConnection(sqlite3.Connection):
+                def commit(self):
+                    raise sqlite3.OperationalError("simulated commit failure")
+
+            def failing_connect(*args, **kwargs):
+                kwargs["factory"] = FailingCommitConnection
+                return real_connect(*args, **kwargs)
+
+            with patch.object(wordpress_catalog.sqlite3, "connect", side_effect=failing_connect):
+                try:
+                    wordpress_catalog.approve_master_proposal(database, proposal_id, "owner")
+                except sqlite3.OperationalError as exc:
+                    assert "simulated commit failure" in str(exc)
+                else:
+                    raise AssertionError("simulated catalog commit failure should abort approval")
+            assert (master_dir / f"{topic_id}.json").read_bytes() == master_before_failed_approval
+            connection = real_connect(database)
+            assert connection.execute(
+                "SELECT status FROM source_update_proposals WHERE proposal_id=?", (proposal_id,)
+            ).fetchone()[0] == "pending_approval"
+            assert connection.execute(
+                "SELECT status FROM source_change_events WHERE event_id=?", (event_id,)
+            ).fetchone()[0] == "pending_approval"
+            connection.close()
+
             wordpress_catalog.approve_master_proposal(database, proposal_id, "owner")
             approved = load_master_topic_pack(master_dir / f"{topic_id}.json")
             assert approved["revision"] == master["revision"] + 1
@@ -116,6 +146,61 @@ def test_approved_catalog_change_flows_to_master_and_review_queue() -> None:
             connection = wordpress_catalog.initialize_database(database)
             assert connection.execute(
                 "SELECT status FROM source_change_events WHERE event_id=?", (event_id,)
+            ).fetchone()[0] == "applied"
+            connection.close()
+
+            current_reference = approved["sources"][0]
+            changed_reference = dict(
+                current_reference,
+                version="v3",
+                updated_at="2026-10-06T10:00:00+09:00",
+            )
+            ambiguous_proposal = propose_source_update(
+                approved,
+                changed_reference,
+                proposed_at="2026-10-06T10:01:00+09:00",
+            )
+            ambiguous_proposal["proposal_id"] = "ambiguous-commit-proposal"
+            connection = real_connect(database)
+            connection.execute(
+                """INSERT INTO source_update_proposals
+                   (proposal_id,event_id,topic_id,source_id,base_revision,proposal_json,status,created_at)
+                   VALUES(?,NULL,?,?,?,?, 'pending_approval',?)""",
+                (
+                    ambiguous_proposal["proposal_id"], topic_id,
+                    ambiguous_proposal["source_id"], ambiguous_proposal["base_revision"],
+                    json.dumps(ambiguous_proposal, ensure_ascii=False),
+                    "2026-10-06T10:01:00+00:00",
+                ),
+            )
+            connection.commit()
+            connection.close()
+
+            class CommitThenRaiseConnection(sqlite3.Connection):
+                def commit(self):
+                    super().commit()
+                    raise sqlite3.OperationalError("simulated lost commit acknowledgment")
+
+            def commit_then_raise_connect(*args, **kwargs):
+                kwargs["factory"] = CommitThenRaiseConnection
+                return real_connect(*args, **kwargs)
+
+            with patch.object(wordpress_catalog.sqlite3, "connect", side_effect=commit_then_raise_connect):
+                try:
+                    wordpress_catalog.approve_master_proposal(
+                        database, ambiguous_proposal["proposal_id"], "owner"
+                    )
+                except RuntimeError as exc:
+                    assert "SQLite persisted it" in str(exc)
+                else:
+                    raise AssertionError("lost commit acknowledgment should be reported as ambiguous")
+            final_master = load_master_topic_pack(master_dir / f"{topic_id}.json")
+            assert final_master["revision"] == approved["revision"] + 1
+            assert final_master["sources"][0]["version"] == "v3"
+            connection = real_connect(database)
+            assert connection.execute(
+                "SELECT status FROM source_update_proposals WHERE proposal_id=?",
+                (ambiguous_proposal["proposal_id"],),
             ).fetchone()[0] == "applied"
             connection.close()
 
