@@ -1,0 +1,189 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "state_space_controllability_observability_pole_placement",
+  "title_ko": "상태공간 모델의 제어가능성·관측가능성과 극점배치 설계",
+  "revision": 12,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/state_space_controllability_observability_pole_placement",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/state_space_controllability_observability_pole_placement/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/state_space_controllability_observability_pole_placement/logic_check.json",
+      "model_answer": "rubrics/topic_packs/state_space_controllability_observability_pole_placement/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/state_space_controllability_observability_pole_placement/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:6096",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "title": "pole placement 예제 풀이",
+      "version": "5f770ca83d30bde86e903ed7ecf37633a40f7ad19a8da501dace6f8b23e7886b",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-27T23:44:05+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6254",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "title": "full state feedback pole placement",
+      "version": "595d758d856be4dfb65ee02c22daf19326895e1c2d88f6ec6d20f71eae5bca7e",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-23T12:33:33+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:7238",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "title": "state space 암기 항목",
+      "version": "9067840b548be694834f4dd24729e98f8736e69bbc8306629b2420a111090547",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-20T21:27:54+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:0d8ead2ea6314c03e295bd67fbd7d7d0",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/05/feedback_same_order.pdf",
+      "title": "feedback_same_order",
+      "version": "2024-05-12T03:10:37",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-05-12T03:10:37+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:220eb60e562620aabbc3ec3129002dcb",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/NeoStudio_20250423_142953_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC15.pdf",
+      "title": "NeoStudio_20250423_142953_산업계측제어 기술사15",
+      "version": "2025-04-23T12:32:10",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-23T12:32:10+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4816b3818fa6c6903d9a59d3b47eba59",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20250420_232415_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC15.pdf",
+      "title": "NeoStudio_20250420_232415_산업계측제어 기술사15",
+      "version": "2025-04-20T21:27:12",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-20T21:27:12+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:800bdcdbc802de258f13efc0a16b43b5",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240423_225046.pdf",
+      "title": "NeoStudio_20240423_225046",
+      "version": "2024-04-23T13:51:36",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-23T13:51:36+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a1d943ebcbffc79f283ea752d0ef10d6",
+      "source_type": "html",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://lpsa.swarthmore.edu/Representations/SysRepTransformations/TF2SS_CCF_OCF_hard.html",
+      "title": "https://lpsa.swarthmore.edu/Representations/SysRepTransformations/TF2SS_CCF_OCF_hard.html",
+      "version": "unversioned",
+      "page": null,
+      "section": null,
+      "updated_at": null,
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a5394bb5d486f1951bf73193e034798a",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240428_085806.pdf",
+      "title": "NeoStudio_20240428_085806",
+      "version": "2024-04-28T00:01:31",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-28T00:01:31+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:aad9303c2765128b289236f56f4f647c",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240428_121246-1.pdf",
+      "title": "NeoStudio_20240428_121246-1",
+      "version": "2024-04-28T03:14:57",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-28T03:14:57+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:af85e6e22a4107346bd03626e7d8d477",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/State-Space-Design-34-%EA%B3%B5%EB%8C%80%EC%83%9D-%EC%9D%B4%EC%95%BC%EA%B8%B0.pdf",
+      "title": "State-Space-Design-34-공대생-이야기",
+      "version": "2024-04-28T00:00:33",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-28T00:00:33+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
