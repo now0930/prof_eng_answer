@@ -1,0 +1,56 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "instrumentation_production_management_planning_quality_cost_resources",
+  "title_ko": "계측·제어 생산관리: 생산계획, 능력·일정, 품질·원가, 자원 및 성과관리",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/instrumentation_production_management_planning_quality_cost_resources",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/instrumentation_production_management_planning_quality_cost_resources/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/instrumentation_production_management_planning_quality_cost_resources/logic_check.json",
+      "model_answer": "rubrics/topic_packs/instrumentation_production_management_planning_quality_cost_resources/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/instrumentation_production_management_planning_quality_cost_resources/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

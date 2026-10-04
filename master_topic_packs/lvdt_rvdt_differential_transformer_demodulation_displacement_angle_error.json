@@ -1,0 +1,56 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+  "title_ko": "LVDT·RVDT의 차동변압기 원리, 위상민감 복조, 변위·각도 측정 및 오차",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error/logic_check.json",
+      "model_answer": "rubrics/topic_packs/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/lvdt_rvdt_differential_transformer_demodulation_displacement_angle_error/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

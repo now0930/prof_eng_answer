@@ -1,0 +1,56 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "electronics_error_noise_drift_tolerance_aging_power_mitigation",
+  "title_ko": "전자기기 오차·Noise·Drift·Tolerance·Aging·Power 영향 및 대책",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/electronics_error_noise_drift_tolerance_aging_power_mitigation",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/electronics_error_noise_drift_tolerance_aging_power_mitigation/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/electronics_error_noise_drift_tolerance_aging_power_mitigation/logic_check.json",
+      "model_answer": "rubrics/topic_packs/electronics_error_noise_drift_tolerance_aging_power_mitigation/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/electronics_error_noise_drift_tolerance_aging_power_mitigation/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

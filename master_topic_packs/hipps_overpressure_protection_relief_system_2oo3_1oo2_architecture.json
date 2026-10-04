@@ -1,0 +1,56 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+  "title_ko": "HIPPS 과압보호시스템의 구조, Voting Architecture 및 Relief System 비교",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture/logic_check.json",
+      "model_answer": "rubrics/topic_packs/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/hipps_overpressure_protection_relief_system_2oo3_1oo2_architecture/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

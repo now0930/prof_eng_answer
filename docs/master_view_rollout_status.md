@@ -1,6 +1,6 @@
 # Master / View 작업 상태와 운영 반영 조건
 
-기준일: 2026-10-04. 작업 브랜치: `codex/study-structure-learning-layer`.
+기준일: 2026-10-05. 현재 작업 브랜치: `codex/master-envelope-expansion-20261005`.
 
 | 단계 | 결과 | 확인 방법 |
 | --- | --- | --- |
@@ -80,3 +80,22 @@ Queue를 생성하지 않으며, `review_queue` 구조는 향후 선택 가능�
 통과했다. 기존 운영 이력 DB는 수정하지 않았고 Telegram 시험 메시지도 보내지 않았다.
 실제 사용자 기기의 채팅 화면 표시는 별도로 확인하지 않았다. 따라서 다음 날 Queue
 갱신 확인은 더 이상 사용자 흐름 완료 조건이 아니다.
+
+## Master envelope 전체 Topic 확장 (2026-10-05)
+
+기존 legacy Topic Pack 82개 중 Master envelope가 없던 33개를 확인했다.
+WordPress 카탈로그 무결성은 `ok`였으며, 이 33개에 승인된 Topic 링크가
+없었다. 승인되지 않은 후보나 OCR 원문을 출처처럼 연결하지 않도록 새
+envelope의 `sources`는 비워 두고, 기존 Topic의 README 제목과 4개
+채점 source 경로만 참조시켰다. 선택 항목인
+`question_demand_axes.json`은 파일이 있을 때만 경로에 포함했다.
+
+현재 작업 브랜치에는 Master 82개가 있다. Master schema/legacy source
+validation과 Grading·Training·Diagnosis projection 확인이 82개 모두
+통과했다. legacy Topic Pack, generated grading bank, 기존 Grader 및 운영
+데이터는 수정하지 않았다. 기존 승인 WordPress source reference를 가진
+Master는 48개이며, source가 없는 기존 envelope 하나와 이번에 만든 33개는
+아직 출처가 연결되지 않은 상태다.
+
+이 확장은 아직 운영 배포 전이다. 운영 bot에서 82개 Topic을 선택할 수
+있게 하려면 이 브랜치의 검토·병합 후 운영 Master 파일 배포가 필요하다.
