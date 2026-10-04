@@ -22,7 +22,7 @@ WordPress 원문은 보존하며 변경 제안과 주석은 분리한다.
 | 5 | Training View와 /review 소비 경로 확장 | 학습 목표부터 자가 점검까지 순서대로 표시, 기존 v1 fallback | 완료 |
 | 6 | 기존 채점 ID 및 Feedback 연결 | 미충족 요구사항→지식→학습 절 연결, 점수·판정 동일 | 완료 |
 | 7 | 대표 Topic 1~3개 통합 검증 | 여러 글 종합·출처 추적·stale 처리·이력 격리 E2E | 완료 (1개) |
-| 8 | 전체 회귀·release gate·문서·전달 | 필요한 gate PASS, 비공개 자료 제외, 단계별 commit | 진행 중 |
+| 8 | 전체 회귀·release gate·문서·전달 | 필요한 gate PASS, 비공개 자료 제외, 단계별 commit | 검증 실행 완료 / 전체 pytest 11건 실패로 미완료 |
 
 각 단계 PASS 후 해당 변경만 commit한다. 실패는 원인과 재현 명령을 기록하며
 테스트 제외나 기대값 완화로 PASS 처리하지 않는다. push 시 실제 remote를
@@ -77,6 +77,12 @@ v2가 필요하면 v1 adapter를 함께 정의한다. 이 문서의 필드는 �
 schema로 취급하지 않는다.
 
 ## 검증과 알려진 제약
+
+Stage 8: 전체 pytest 723 passed / 11 failed / 1 warning. Stage 3 로그와 실패
+node ID 집합이 동일하며 신규 실패는 0개다. non-promote release 스크립트는
+exit 0이다. opt-in 재현성 검사와 live smoke는 실행하지 않았다. 전체 회귀 PASS
+조건은 미충족이며 [실패 분류와 전달 상태](topic_learning_synthesis_validation.md)에
+후속 작업을 기록했다. 실제 운영 반영·최종 push는 하지 않았다.
 
 Stage 7: Nyquist의 WordPress 글 2개를 6개 지식·6절·5개 선수관계로 종합했다.
 기존 계산 예제 material ID를 재사용하고 작성본·후보·검토 메모는 비공개
