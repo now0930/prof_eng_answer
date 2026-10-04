@@ -205,7 +205,7 @@ def test_revision_replacement_failure_keeps_previous_master(tmp_path):
     assert old_path.read_bytes() == old_bytes
 
 
-def test_revision_does_not_silently_drop_existing_grading_links(tmp_path):
+def mapped_revision_packet(tmp_path):
     from study.synthesis_authoring import prepare_sources, sha
     current, old_path, old_bytes, _, _, _ = prepare_revision(tmp_path)
     doc = json.loads(old_bytes)
@@ -216,5 +216,67 @@ def test_revision_does_not_silently_drop_existing_grading_links(tmp_path):
     old_path.write_bytes(encoded(doc))
     current['learning_synthesis']['content_sha256'] = sha(old_path.read_bytes())
     (tmp_path / 'master_topic_packs' / f'{current["topic_id"]}.json').write_bytes(encoded(current))
-    with pytest.raises(ValueError, match='mapping migration'):
-        prepare_sources(tmp_path, current['topic_id'])
+    packet = prepare_sources(tmp_path, current['topic_id'])
+    doc['revision'] = packet['target_synthesis_revision']
+    return current, packet, doc
+
+
+def mapping_workspace(tmp_path, change=False):
+    current, packet, doc = mapped_revision_packet(tmp_path)
+    if change:
+        doc['grading_links'][0]['knowledge_ids'] = ['K1']
+        doc['grading_links'][0]['section_ids'] = ['S1']
+    draft, report = build_candidate(tmp_path, packet, doc)
+    workspace = tmp_path / 'data/topic_learning_authoring' / current['topic_id'] / 'mapped'
+    write_new_bundle(workspace, {'sources.json': encoded(packet)})
+    write_new_bundle(workspace / 'candidate', {'draft.json': encoded(draft),
+        'report.json': encoded(report), 'authored.json': encoded(doc)})
+    decision = llm_approve(decision_template(tmp_path, workspace))
+    decision['reviews'][-1].update(status='human_review_required', note='Mapping needs a separate decision.')
+    return current, workspace, decision, report
+
+
+@pytest.mark.parametrize('change', [False, True])
+def test_mapping_revision_preserves_ids_and_resets_approval(tmp_path, change):
+    current, workspace, decision, report = mapping_workspace(tmp_path, change)
+    assert report['mapping_changes'][0]['change'] == ('modified' if change else 'unchanged')
+    template = decision_template(tmp_path, workspace)
+    assert template['reviews'][-1]['target'] == 'grading_links:L1'
+    assert template['reviews'][-1]['status'] == 'draft'
+    preview = preview_application(tmp_path, workspace, decision)
+    assert preview['can_apply']
+    assert 'grading_links:L1' in preview['human_review_targets']
+    apply_application(tmp_path, workspace, decision, applied_by='test-model')
+    updated = json.loads((tmp_path/'master_topic_packs'/f'{current["topic_id"]}.json').read_text())
+    assert project_grading(tmp_path, updated) == project_grading(tmp_path, current)
+    assert project_training(tmp_path, updated)['learning_synthesis']['document']['grading_links'][0]['review']['status'] == 'human_review_required'
+
+
+@pytest.mark.parametrize('change', ['remove','add','broken_reference','stale_canonical','forged_packet'])
+def test_mapping_migration_rejects_invalid_changes(tmp_path, change):
+    _, packet, doc = mapped_revision_packet(tmp_path)
+    if change == 'remove': doc['grading_links'] = []
+    if change == 'add': doc['grading_links'].append({**doc['grading_links'][0], 'link_id':'L2'})
+    if change == 'broken_reference': doc['grading_links'][0]['knowledge_ids'] = ['absent']
+    if change == 'forged_packet': packet['previous_grading_links'] = []
+    if change == 'stale_canonical':
+        _, workspace, decision, _ = mapping_workspace(tmp_path / 'stale')
+        master = json.loads(next((tmp_path/'stale/master_topic_packs').glob('*.json')).read_text())
+        canonical = tmp_path/'stale'/master['legacy_topic_pack']['source_files']['fact_anchor']
+        canonical.write_text(canonical.read_text() + '\n')
+        with pytest.raises(ValueError, match='canonical hash'):
+            preview_application(tmp_path/'stale', workspace, decision)
+        return
+    with pytest.raises(ValueError): build_candidate(tmp_path, packet, doc)
+
+
+@pytest.mark.parametrize('status,actor,valid', [('human_verified','human',True), ('rejected','human',True),
+    ('llm_verified','llm',False), ('human_verified','llm',False), ('rejected','llm',False)])
+def test_mapping_decisions_require_separate_human_identity(tmp_path, status, actor, valid):
+    _, workspace, decision, _ = mapping_workspace(tmp_path)
+    decision['reviews'][-1].update(status=status, actor_type=actor, actor='test-reviewer', note='Explicit mapping decision.')
+    if valid:
+        preview = preview_application(tmp_path, workspace, decision)
+        assert preview['reviewed_document']['grading_links'][0]['review']['status'] == status
+    else:
+        with pytest.raises(ValueError): preview_application(tmp_path, workspace, decision)

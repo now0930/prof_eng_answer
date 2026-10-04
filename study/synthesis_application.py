@@ -42,7 +42,7 @@ def _candidate(root, workspace):
 
 def _review_targets(doc):
     result = {'learning_path:' + doc['learning_path']['path_id']: doc['learning_path']}
-    for group, field in [('knowledge','knowledge_id'), ('relations','relation_id'), ('conflicts','conflict_id')]:
+    for group, field in [('knowledge','knowledge_id'), ('relations','relation_id'), ('conflicts','conflict_id'), ('grading_links','link_id')]:
         for row in doc[group]:
             result[group + ':' + row[field]] = row
     return result
@@ -105,6 +105,12 @@ def preview_application(root, workspace, decision):
             require(review['actor_type'] == 'llm', 'LLM review requires LLM identity')
         if review['status'] in {'llm_verified', 'human_review_required'}:
             require(bool(review['note'].strip()), 'review rationale required')
+        if key.startswith('grading_links:'):
+            require(review['status'] in {'draft', 'human_review_required', 'human_verified', 'rejected'},
+                    'mapping activation requires separate human review')
+            if review['status'] in {'human_verified', 'rejected'}:
+                require(review['actor_type'] == 'human' and bool(review['note'].strip()),
+                        'mapping approval or retirement requires human rationale')
         targets[key]['review'] = dict(status=review['status'], reviewed_by=review['actor'],
             reviewed_at=review['decided_at'], note=review['note'])
     require(seen == set(targets), 'review targets incomplete')
@@ -133,6 +139,7 @@ def preview_application(root, workspace, decision):
         base_master_sha256=sha(before), base_master_revision=master['revision'],
         candidate_sha256=report['draft_sha256'], decision_sha256=sha(encoded(decision)),
         before_master=master, after_master=after, reviewed_document=draft,
+        mapping_changes=report.get('mapping_changes', []),
         human_review_targets=[r['target'] for r in decision['reviews'] if r['status'] in {'human_review_required', 'llm_reviewed_human_pending'}],
         eligible_section_ids=projected['eligible_section_ids'], score_effect='none')
 

@@ -64,6 +64,20 @@ def test_pending_mapping_or_stale_source_not_recommended(tmp_path):
     assert navigation_view(tmp_path,master,raw,[])['targets'] == []
 
 
+@pytest.mark.parametrize('status', ['draft', 'human_review_required', 'llm_verified', 'rejected'])
+def test_unapproved_or_retired_mapping_never_recommends(tmp_path, status):
+    master, doc, raw, _, grade = setup(tmp_path)
+    review = doc['grading_links'][0]['review']
+    review['status'] = status
+    if status == 'draft':
+        review.update(reviewed_by=None, reviewed_at=None)
+    save(tmp_path, master, doc)
+    nav = navigation_view(tmp_path, master, raw, [])
+    assert nav['status'] == 'loaded'
+    assert nav['targets'] == []
+    assert feedback_navigation(grade, nav)['recommendations'] == []
+
+
 def test_nested_rule_and_no_id_source_fail_closed():
     doc = {'deterministic_checks':{'fatal_checks':[{'rule_id':'R1'}]}}
     assert canonical_record(doc,'logic_check','R1')['rule_id'] == 'R1'

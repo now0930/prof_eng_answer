@@ -35,6 +35,22 @@ human_verified 상태를 부여하지 않으며 원문·채점 기준 승격과 
 초기 Stage 8에서는 전체 회귀가 실패했으나 아래 후속 수정으로 pytest가 통과했다.
 운영 배포·Master 후보 연결은 하지 않았다.
 
+## 평가 매핑 보존 개정 검증 (2026-10-05)
+
+기존 매핑을 가진 개정 후보의 ID 보존·변경 전후 비교·모든 승인 초기화와
+별도 사람 검토를 합성 fixture로 검증했다. 실제 Topic·Master·채점 코드는
+변경하지 않았다. 최초 매핑 생성과 새 ID 추가는 이번 범위가 아니다.
+
+검증 항목: 유지/수정, ID 누락·추가 거부, 불량 참조·위조 패킷·canonical 해시
+변경 거부, LLM의 매핑 승인·중단 거부, 사람의 승인·중단 기록, 보류된 매핑의
+Feedback 추천 제외, 학습만 반영할 때 Grading payload 불변.
+
+전체 pytest 775 passed / 기존 warning 1개. 로그는
+`/tmp/mapping_revision_full_final.log`, 집중 테스트는
+`/tmp/mapping_revision_final_focused.log`에 보관한다.
+release와 Topic gate 로그는 `/tmp/mapping_revision_release.log`,
+`/tmp/mapping_revision_gate.log`이며 live smoke·opt-in 재현성 검사는 제외한다.
+
 ## 최신 개정 경로 검증 (2026-10-05)
 
 실제 Topic 내용·Master를 수정하지 않고 합성 fixture로 개정 경로를 검증했다.

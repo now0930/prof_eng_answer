@@ -174,6 +174,29 @@ review-template/preview/apply 명령을 **새 run-id**로 실행한다. 이전 r
 
 출처가 준비 이후 바뀌면 재준비해야 한다. 이 경로는 WordPress 수집이나 Master
 source reference 변경을 대신하지 않는다. 기존 파일이 없거나 변조됐으면 차단한다.
-기존 grading_links가 있으면 조용히 삭제하거나 승인을 승계하지 않고 개정을
-차단한다. 평가 매핑 이관은 별도 후속 계약으로 남긴다. 실제 사용자 콘텐츠의
+기존 grading_links가 있으면 아래 매핑 이관 계약을 적용한다. 실제 사용자 콘텐츠의
 개정·승인은 이번 구조 구현 과정에서 수행하지 않는다.
+
+## 8. 기존 평가 매핑 이관
+
+prepare는 해시가 고정된 이전 문서의 grading_links를 previous_grading_links로
+제공한다. 새 문서는 모든 기존 link_id를 유지해야 한다. 누락·새 ID 삽입은 거부한다.
+기존 ID의 target/knowledge_ids/section_ids 변경은 허용하지만 현재 canonical의
+해시·record ID와 문서 참조 검증을 통과해야 한다. 지식 중복 병합 시 참조도 갱신한다.
+
+build report와 preview의 mapping_changes는 ID별 unchanged/modified 및 before/
+after를 제공한다. unchanged도 학습 본문이 달라질 수 있으므로 승인을 승계하지
+않고 draft로 초기화한다. 모든 grading_links 항목이 review-template에 포함된다.
+
+- 유지·변경 후 사용: 별도 사람 검토로 human_verified, 검토 근거 필수.
+- 사용 중단: 사람의 rejected 결정과 사유를 기록한다. 물리적으로 삭제하지 않는다.
+- 불확실: human_review_required로 보존하고 Feedback 추천에서 제외한다.
+- 미검토: draft로 보존하고 Feedback 추천에서 제외한다.
+
+LLM의 학습 본문 승인만으로 매핑을 활성화하거나 사용 중단하지 않는다. 매핑을
+보류한 채 검증된 학습 절만 반영할 수 있다. 기존 Feedback 소비자의 사람 승인
+검사와 canonical provenance 확인은 그대로다. 기존 매핑 참조는 보류·중단 시에도
+유효해야 하며, 대상 ID가 없어졌을 때 자동 추측으로 이관하지 않는다.
+
+이는 진단→학습 절 안내의 개정 계약이다. 채점 기준이나 배점을 수정하지 않으며
+최초 매핑 생성·새 매핑 ID 추가 UI는 이번 구현 범위가 아니다.
