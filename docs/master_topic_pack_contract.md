@@ -2,6 +2,10 @@
 
 Status: additive interface, schema version `master-topic-pack-v1`.
 
+See [Master / View architecture](master_view_architecture.md) for the Korean
+ownership map and public `study.topic_views` interfaces. User-facing Feedback
+View retains the existing diagnosis projection contract for compatibility.
+
 `schemas/master_topic_pack.schema.json` defines the Master envelope. Each record
 points to the existing Topic Pack source files and declares three versioned
 projection interfaces. It does not copy or reinterpret deterministic grading

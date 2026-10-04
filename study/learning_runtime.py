@@ -12,8 +12,10 @@ from grading.scoring.grading_identity import build_grading_identity
 from .master_topic_pack import (
     load_legacy_topic_sources,
     load_master_topic_pack,
-    project_diagnosis,
-    project_training,
+)
+from .topic_views import (
+    feedback_view as project_diagnosis,
+    training_view as project_training,
 )
 from .review_queue import build_review_queue
 from .training_history import TrainingAttempt, TrainingHistoryStore
