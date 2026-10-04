@@ -61,7 +61,11 @@ Python 캐시 같은 재생성 가능한 파일은 포함하지 않았다.
   DB·WAL·SHM 파일이 모두 Git에서 제외된다. 생성된 DB는 저장소 밖에
   `training_history_after_first_review.sqlite3`로 백업했다.
 - 모의 채점 후의 최신 학습 DB 사본은 아직 별도 백업하지 않았다. 기존
-  최초 `/review` 후 백업은 보존되어 있으나 모의 attempt는 포함하지 않는다.
+  최초 `/review` 후 백업은 모의 attempt를 포함하지 않는다. 모의 채점 후
+  최신 사본은 `private_backups/2026-10-04_prod_premerge/`
+  `training_history_after_synthetic_grade.sqlite3`로 별도 보관했다. 파일
+  권한은 `0600`, SQLite 무결성은 `ok`, 학습 이력 1건·Queue 1건이며 운영
+  임시 사본과 SHA-256이 일치한다.
 
 ## 다음 운영 점검
 
