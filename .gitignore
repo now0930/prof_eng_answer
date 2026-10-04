@@ -14,6 +14,7 @@ logs/
 data/state.json
 data/sessions/
 data/user_settings/
+data/training_history.sqlite3*
 data/wordpress_sources.sqlite3*
 data/wordpress_topic_packs/
 
