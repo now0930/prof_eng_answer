@@ -29,9 +29,14 @@ Python 캐시 같은 재생성 가능한 파일은 포함하지 않았다.
 - 운영 체크아웃에는 추적되지 않은 파일이 다수 있어 덮어쓰기나 강제 reset은
   허용되지 않는다.
 - 컨테이너의 `/workspace/prof_eng_answer`에는 Master JSON, WordPress OCR
-  묶음, 학습 이력 DB, `study/topic_views.py`가 현재 없다. 정확도 Gate의
-  `reports/expert_accuracy_report.json`도 작업 체크아웃에는 없다. 포함된
-  `expert_accuracy_seed_current.json`을 Gate에 적용하면 `HOLD`다.
+  묶음, 학습 이력 DB, `study/topic_views.py`가 현재 없다.
+- 운영 채점 모드는 `DETERMINISTIC_GRADING_PRIMARY=true`다. 현재 커밋의
+  결정론적 Authority Gate는 `READY`다. Provider 정확도 Gate에 저장된
+  `expert_accuracy_seed_current.json`을 적용하면 `HOLD`이지만, 이 Gate는
+  provider 기반 운영 후보를 별도로 검증한다. 두 Gate를 혼동해 결정론적
+  운영 모드를 바꾸거나 provider Gate를 통과했다고 주장하지 않는다.
+- `main` 대비 이 브랜치는 수백 개 파일을 변경하며 채점 모듈의 구조 이동을
+  포함한다. 단순한 학습 화면 배포로 취급할 수 없다.
 - 이 차이 때문에 코드 push만으로 운영 `/review`가 바뀌지 않는다. 저장소
   브랜치를 `main`에 반영하고, 비공개 자료를 별도 절차로 운영 볼륨에 설치하고,
   release gate와 endpoint 검증을 마친 뒤 재기동해야 한다.
@@ -45,9 +50,11 @@ Python 캐시 같은 재생성 가능한 파일은 포함하지 않았다.
    업데이트되지 않는다.
 3. 비공개 WordPress catalog 및 OCR 묶음을 운영 데이터 경로로 이전한다.
    Master가 가리키는 출처 ID·URL·버전·본문 해시를 이전 뒤 검증한다.
-4. `docs/operation_runbook.md`의 정확도 Gate, release qualification 및
-   deployment proof를 충족한다. 현재 seed 보고서가 `HOLD`이므로 새 실행의
-   정확도 검증 결과가 `READY`가 되기 전에는 배포하지 않는다.
+4. 운영 모드에 맞는 Gate를 적용한다. 현재의 결정론적 운영 경로는
+   `scripts/update_and_run_deterministic_primary.sh`의 Authority Gate와
+   container smoke를 사용한다. Provider 기반 release candidate 경로를
+   선택한다면 별도로 provider Accuracy 및 Stability Gate가 `READY/STABLE`
+   이어야 한다. 어느 쪽도 생략하거나 다른 Gate의 결과로 대체하지 않는다.
 5. 컨테이너 재생성 후 `engine_commit`, Master 수, OCR 묶음 수, View 로딩,
    `/review`의 원문·검토 대기 주석·점수 불변을 확인한다. 실제 Telegram
    전송은 운영 대상 사용자와 감시 방식을 확인한 뒤 endpoint smoke로 수행한다.
