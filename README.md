@@ -244,6 +244,10 @@ CI는 `main` push와 pull request에서 release validation을 실행하고, gene
 차단합니다. LLM 승인과 사람 승인은 구분하며, 채점 기준·fatal·배점 및 채점용
 Topic Pack 승인 절차에는 적용하지 않습니다. [승인 계약](docs/topic_learning_authoring.md#6-llm-승인과-사람-검토-분리)을 참고하세요.
 
+기존 학습 문서는 새 run에서 revision을 올려 재검토할 수 있습니다. 이전 문서와
+승인 이력은 보존하며 기존 평가 매핑이 있는 문서의 개정은 아직 차단합니다.
+현재 실제 Topic 내용 검토·확대는 보류하고 구조 검증을 진행합니다.
+
 1. 최상위 README에는 현재 사용자 관점의 개요와 진입 경로만 둡니다. 단계별 작업일지와 상세 정책은 `docs/` 또는 검증 report에 둡니다.
 2. A/B/C/D/E, deterministic primary, 기존 Golden tests와 release gates를 임의 변경하지 않습니다.
 3. Topic Pack은 `docs/topic_pack_workflow.md`의 승인·해시·검증 흐름을 따릅니다. Generated bank를 직접 수정하지 않습니다.

@@ -141,3 +141,80 @@ def test_llm_approval_requires_rationale_and_identity(tmp_path, mutation):
     if mutation == 'wrong_actor': decision['reviews'][0]['actor_type'] = 'human'
     if mutation == 'pending_path': decision['reviews'][0]['status'] = 'human_review_required'
     with pytest.raises(ValueError): preview_application(tmp_path, workspace, decision)
+
+
+def prepare_revision(tmp_path):
+    from study.synthesis_authoring import prepare_sources
+    master, workspace, decision = setup(tmp_path)
+    apply_application(tmp_path, workspace, llm_approve(decision), applied_by='test-model')
+    current = json.loads((tmp_path / 'master_topic_packs' / f'{master["topic_id"]}.json').read_text())
+    old_path = tmp_path / current['learning_synthesis']['path']
+    old_bytes = old_path.read_bytes()
+    authored = json.loads(old_bytes)
+    authored['revision'] += 1
+    authored['learning_path']['sections'][0]['body'] = 'Revised synthetic explanation.'
+    packet = prepare_sources(tmp_path, master['topic_id'])
+    draft, report = build_candidate(tmp_path, packet, authored)
+    revised = workspace.parent / 'revision-2'
+    write_new_bundle(revised, {'sources.json': encoded(packet)})
+    write_new_bundle(revised / 'candidate', {'draft.json':encoded(draft), 'report.json':encoded(report), 'authored.json':encoded(authored)})
+    return current, old_path, old_bytes, revised, packet, authored
+
+
+def test_revision_resets_approval_and_preserves_previous_artifact(tmp_path):
+    current, old_path, old_bytes, workspace, _, _ = prepare_revision(tmp_path)
+    decision = decision_template(tmp_path, workspace)
+    assert all(r['status'] == 'draft' for r in decision['reviews'])
+    assert not preview_application(tmp_path, workspace, decision)['can_apply']
+    preview = preview_application(tmp_path, workspace, llm_approve(decision))
+    assert preview['reviewed_document']['revision'] == 2
+    result = apply_application(tmp_path, workspace, llm_approve(decision), applied_by='test-model')
+    updated = json.loads((tmp_path / 'master_topic_packs' / f'{current["topic_id"]}.json').read_text())
+    assert updated['revision'] == current['revision'] + 1
+    assert old_path.read_bytes() == old_bytes
+    assert project_grading(tmp_path, updated) == project_grading(tmp_path, current)
+    assert project_training(tmp_path, updated)['learning_synthesis']['document']['revision'] == 2
+    from pathlib import Path
+    assert json.loads((Path(result['audit_path']) / 'master.before.json').read_text()) == current
+
+
+@pytest.mark.parametrize('mutation', ['old_artifact','wrong_revision','old_decision','source_changed'])
+def test_revision_rejects_stale_inputs(tmp_path, mutation):
+    _, old_path, _, workspace, packet, authored = prepare_revision(tmp_path)
+    decision = llm_approve(decision_template(tmp_path, workspace))
+    if mutation == 'old_artifact': old_path.write_text('{}')
+    if mutation == 'wrong_revision': authored['revision'] = 1
+    if mutation == 'old_decision': decision['base_master_sha256'] = '0' * 64
+    if mutation == 'source_changed':
+        path = tmp_path / 'data/wordpress_topic_packs' / f'{packet["topic_id"]}.json'
+        path.write_text('{}')
+    with pytest.raises(ValueError):
+        if mutation == 'wrong_revision': build_candidate(tmp_path, packet, authored)
+        else: preview_application(tmp_path, workspace, decision)
+
+
+def test_revision_replacement_failure_keeps_previous_master(tmp_path):
+    current, old_path, old_bytes, workspace, _, _ = prepare_revision(tmp_path)
+    path = tmp_path / 'master_topic_packs' / f'{current["topic_id"]}.json'
+    before = path.read_bytes()
+    decision = llm_approve(decision_template(tmp_path, workspace))
+    with patch('study.synthesis_application.os.replace', side_effect=OSError('revision failure')):
+        with pytest.raises(OSError):
+            apply_application(tmp_path, workspace, decision, applied_by='test-model')
+    assert path.read_bytes() == before
+    assert old_path.read_bytes() == old_bytes
+
+
+def test_revision_does_not_silently_drop_existing_grading_links(tmp_path):
+    from study.synthesis_authoring import prepare_sources, sha
+    current, old_path, old_bytes, _, _, _ = prepare_revision(tmp_path)
+    doc = json.loads(old_bytes)
+    canonical = tmp_path / current['legacy_topic_pack']['source_files']['fact_anchor']
+    doc['grading_links'] = [dict(link_id='L1', target=dict(source_key='fact_anchor', record_id='f1',
+        source_content_sha256=sha(canonical.read_bytes())), knowledge_ids=['K0'], section_ids=['S0'],
+        review=doc['learning_path']['review'])]
+    old_path.write_bytes(encoded(doc))
+    current['learning_synthesis']['content_sha256'] = sha(old_path.read_bytes())
+    (tmp_path / 'master_topic_packs' / f'{current["topic_id"]}.json').write_bytes(encoded(current))
+    with pytest.raises(ValueError, match='mapping migration'):
+        prepare_sources(tmp_path, current['topic_id'])

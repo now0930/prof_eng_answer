@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Private authoring, explicit review preview and first-link application."""
+"""Private authoring, review preview and versioned learning application."""
 import argparse
 import json
 from pathlib import Path

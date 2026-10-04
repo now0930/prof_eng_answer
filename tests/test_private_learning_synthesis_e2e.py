@@ -24,11 +24,15 @@ def test_private_nyquist_synthesis_flow(tmp_path):
         pytest.skip('private authored candidate absent')
     packet = json.loads((WORK / 'sources.json').read_text())
     authored = json.loads((WORK / 'authored.json').read_text())
-    draft, report = build_candidate(ROOT, packet, authored)
-    assert draft == json.loads((WORK / 'candidate/draft.json').read_text())
-    assert report['source_count'] == 2
     master_path = Path('master_topic_packs') / f'{TOPIC}.json'
-    master = json.loads((ROOT / master_path).read_text())
+    baseline = (ROOT / master_path).read_bytes()
+    if hashlib.sha256(baseline).hexdigest() != packet['base_master_sha256']:
+        backups = (ROOT / 'data/topic_learning_synthesis' / TOPIC / 'applications').glob('*/master.before.json')
+        matches = [p.read_bytes() for p in backups
+                   if hashlib.sha256(p.read_bytes()).hexdigest() == packet['base_master_sha256']]
+        assert matches, 'exact historical Master backup required for private rehearsal'
+        baseline = matches[0]
+    master = json.loads(baseline)
     bundle_path = Path('data/wordpress_topic_packs') / f'{TOPIC}.json'
     paths = [master_path, bundle_path, *map(Path, master['legacy_topic_pack']['source_files'].values()),
              *map(Path, master.get('learning_materials', []))]
@@ -40,6 +44,12 @@ def test_private_nyquist_synthesis_flow(tmp_path):
         destination = tmp_path / relative
         destination.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(ROOT / relative, destination)
+    # Reproduce the original candidate against its exact baseline in isolation.
+    # Never weaken the live stale-Master gate or modify the installed Master.
+    (tmp_path / master_path).write_bytes(baseline)
+    draft, report = build_candidate(tmp_path, packet, authored)
+    assert draft == json.loads((WORK / 'candidate/draft.json').read_text())
+    assert report['source_count'] == 2
     grade_before = project_grading(tmp_path, master)
 
     def install_in_sandbox(doc):

@@ -1,4 +1,4 @@
-"""Explicit, local review decisions and first-link application of learning drafts.
+"""Explicit review decisions and versioned application of learning drafts.
 
 Review identities are operator attestations, not authentication credentials.
 No decision is inferred from model-generated content or from running preview.
@@ -117,7 +117,7 @@ def preview_application(root, workspace, decision):
     before = master_path.read_bytes()
     require(sha(before) == packet['base_master_sha256'], 'Master changed')
     master = json.loads(before)
-    require('learning_synthesis' not in master, 'first-link only; existing synthesis update requires a new workflow')
+    require(master.get('learning_synthesis') == packet.get('previous_synthesis'), 'previous synthesis reference changed')
     training = project_training(root, master)
     projected = project_synthesis(root, master, draft, training['source_materials'], training['curated_learning_materials'])
     require(all(s == 'matching' for s in projected['evidence_states'].values()), 'candidate evidence stale or unavailable')

@@ -35,6 +35,23 @@ human_verified 상태를 부여하지 않으며 원문·채점 기준 승격과 
 초기 Stage 8에서는 전체 회귀가 실패했으나 아래 후속 수정으로 pytest가 통과했다.
 운영 배포·Master 후보 연결은 하지 않았다.
 
+## 최신 개정 경로 검증 (2026-10-05)
+
+실제 Topic 내용·Master를 수정하지 않고 합성 fixture로 개정 경로를 검증했다.
+전체 pytest **760 passed / 1 existing warning**, non-promote release 및
+validate-topic-pack-release --all exit 0. live smoke와 opt-in 재현성 검사는 제외했다.
+로그: `/tmp/synthesis_revision_full_final.log`, `/tmp/synthesis_revision_release.log`,
+`/tmp/synthesis_revision_gate.log`.
+
+최초 전체 검사에서 비공개 Nyquist E2E 1건이 실패했다. 과거 후보가 적용 전
+Master에 묶여 있으므로 현재 Master로 재생성하면 stale 차단이 정상 동작한다.
+테스트는 정확한 해시의 감사 백업을 임시 디렉터리에 복원하여 재현하도록 수정했다.
+원본 해시 불변 검사를 유지하며 운영 stale gate는 완화하지 않았다.
+
+개정 테스트는 revision 증가, 모든 승인 초기화, 과거 문서 보존, 채점 동일성,
+변조·출처 변경·이전 승인 거부, 교체 실패 시 원본 유지, 평가 매핑 유실 방지
+차단을 포함한다. 아래 수치는 이전 단계의 이력이다.
+
 ## 후속 회귀 정리
 
 전체 pytest 재실행: **734 passed / 1 warning**, 실패 0건.

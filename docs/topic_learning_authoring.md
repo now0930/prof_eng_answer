@@ -47,8 +47,8 @@ python3 scripts/author_topic_learning_synthesis.py build \
 
 출처 패킷을 현재 Master와 다시 비교한다. 원문·연결·버전이 달라졌거나
 패킷이 편집됐으면 중단한다. 각 인용문은 실제 원문 부분 문자열이어야 하며
-URL·버전·해시도 일치해야 한다. revision=1의 신규 초안만 지원하며 채점 연결은
-비워 둔다. 기존 종합 문서의 갱신·승인은 후속 적용 경로에서 담당한다.
+URL·버전·해시도 일치해야 한다. 신규 초안은 revision=1, 개정은 패킷의 지정
+revision을 사용하며 채점 연결은 비워 둔다. 개정 제한과 재승인은 7절을 따른다.
 
 정확히 같은 지식 필드만 합쳐 근거 목록을 보존하고 ID 참조를 다시 연결한다.
 원문 충돌에 연결된 항목은 자동 병합하지 않는다. 병합 후 선수관계 순환이나
@@ -66,8 +66,7 @@ URL·버전·해시도 일치해야 한다. revision=1의 신규 초안만 지�
 자료 2개로 prepare를 실행했다. 실제 자료의 authored.json 작성과 Topic별
 의미 검토는 Stage 7 대표 Topic 검증에서 진행한다.
 
-후속 구현으로 아래 최초 연결 미리보기·적용 기능을 제공한다. 기존 연결의
-교체/개정은 아직 지원하지 않는다.
+아래 최초 연결 미리보기·적용 기능을 제공한다. 기존 연결의 개정은 7절을 따른다.
 
 ## 4. 검토 템플릿과 미리보기
 
@@ -110,7 +109,7 @@ python3 scripts/author_topic_learning_synthesis.py apply \
 적용은 Linux flock으로 동일 Topic의 이 도구 실행을 직렬화하고, immutable
 자료·검토 기록·원래 Master 바이트를 비공개 디렉터리에 먼저 저장한다. 마지막에
 Master를 원자적으로 교체한다. 기존 Grading payload 동일성을 적용 전에 검사한다.
-직전 source/Master가 변경되면 중단하며 기존 synthesis가 있으면 덮어쓰지 않는다.
+직전 source/Master가 변경되면 중단한다. 개정은 새 run에서 기존 참조를 고정한다.
 
 쓰기 오류가 교체 전에 나면 원래 Master는 그대로 유지된다. 준비된 자료와
 backup은 남을 수 있다. audit의 `receipt.json`은 prepared 상태이며 실제 적용
@@ -149,7 +148,7 @@ human_review_targets에 표시된다. 선행 항목이 보류되면 의존 절�
 LLM 승인은 채점 기준 변경, grading_links 사람 승인, 신규 채점용 Topic의
 approve-topic을 대체하지 않는다. 블로그 원문은 수정하지 않으며 모든 적용은
 기존 해시 검증·Grading 동일성 확인·원본 백업·감사 기록 절차를 사용한다.
-기존 synthesis의 교체/개정은 여전히 별도 후속 구현 범위이다.
+기존 synthesis의 개정은 아래 제한된 절차를 따른다.
 
 ### 최초 LLM 적용 결과
 
@@ -159,3 +158,22 @@ S0~S4는 LLM 승인, K5/S5의 안정 경계 표현은 사람 검토 대상으로
 승인 결정·원본 Master 백업·종합 문서는 비공개 data 경로에 보관한다.
 공개 checkout에는 원문을 포함하지 않으며 비공개 파일이 없으면 기존 계약대로
 학습 종합 자료 unavailable로 표시하고 기존 View로 동작한다.
+
+## 7. 학습 문서 개정·재승인
+
+실제 Topic 내용 검토는 보류하고 합성 자료로 검증한 구조다. 기존 prepare/build/
+review-template/preview/apply 명령을 **새 run-id**로 실행한다. 이전 run은 보존한다.
+
+1. prepare는 현재 Master 해시와 이전 synthesis의 경로·revision·해시를 고정한다.
+2. 이전 파일의 해시·문서 identity를 검사하고 target_synthesis_revision=이전+1을 제공한다.
+3. 작성자는 현재 sources.json을 기준으로 새 문서를 작성한다. 원문을 수정하지 않는다.
+4. build는 revision을 확인하고 모든 검토를 draft로 초기화한다. 과거 승인은 승계하지 않는다.
+5. 새 후보의 항목별 검토·승인 후 preview/apply한다. Grading 동일성은 계속 강제한다.
+6. 새 immutable 문서와 감사 백업을 먼저 저장하고 Master 참조만 원자적으로 교체한다.
+   이전 문서는 삭제하지 않는다. 구버전 진단 링크는 기존 revision 검사로 구별된다.
+
+출처가 준비 이후 바뀌면 재준비해야 한다. 이 경로는 WordPress 수집이나 Master
+source reference 변경을 대신하지 않는다. 기존 파일이 없거나 변조됐으면 차단한다.
+기존 grading_links가 있으면 조용히 삭제하거나 승인을 승계하지 않고 개정을
+차단한다. 평가 매핑 이관은 별도 후속 계약으로 남긴다. 실제 사용자 콘텐츠의
+개정·승인은 이번 구조 구현 과정에서 수행하지 않는다.
