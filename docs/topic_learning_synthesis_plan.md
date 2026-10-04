@@ -21,8 +21,8 @@ WordPress 원문은 보존하며 변경 제안과 주석은 분리한다.
 | 4 | 여러 WordPress 글을 종합하는 초안 생성 경로 | 다중 출처·중복 통합·충돌·추론 표시, 원문 보존 | 완료 |
 | 5 | Training View와 /review 소비 경로 확장 | 학습 목표부터 자가 점검까지 순서대로 표시, 기존 v1 fallback | 완료 |
 | 6 | 기존 채점 ID 및 Feedback 연결 | 미충족 요구사항→지식→학습 절 연결, 점수·판정 동일 | 완료 |
-| 7 | 대표 Topic 1~3개 통합 검증 | 여러 글 종합·출처 추적·stale 처리·이력 격리 E2E | 다음 작업 |
-| 8 | 전체 회귀·release gate·문서·전달 | 필요한 gate PASS, 비공개 자료 제외, 단계별 commit | 대기 |
+| 7 | 대표 Topic 1~3개 통합 검증 | 여러 글 종합·출처 추적·stale 처리·이력 격리 E2E | 완료 (1개) |
+| 8 | 전체 회귀·release gate·문서·전달 | 필요한 gate PASS, 비공개 자료 제외, 단계별 commit | 진행 중 |
 
 각 단계 PASS 후 해당 변경만 commit한다. 실패는 원인과 재현 명령을 기록하며
 테스트 제외나 기대값 완화로 PASS 처리하지 않는다. push 시 실제 remote를
@@ -77,6 +77,19 @@ v2가 필요하면 v1 adapter를 함께 정의한다. 이 문서의 필드는 �
 schema로 취급하지 않는다.
 
 ## 검증과 알려진 제약
+
+Stage 7: Nyquist의 WordPress 글 2개를 6개 지식·6절·5개 선수관계로 종합했다.
+기존 계산 예제 material ID를 재사용하고 작성본·후보·검토 메모는 비공개
+`data/topic_learning_authoring/`에 저장했다. 운영 Master는 변경하지 않았다.
+실제 자료 E2E는 임시 복사본에서 draft 보류→LLM 검토 상태 표시→History 저장→
+/review→복습 완료→출처 변경 감지를 확인했다. 원문·Master·canonical 파일 해시와
+Grading payload 불변을 검사했다. 사람 검토 완료 상태는 부여하지 않았다.
+question_demand_axes가 없는 Topic이므로 실제 요구사항 매핑은 비워 두었고,
+무매핑 fallback을 확인했다. 정확한 매핑은 Stage 6의 합성 fixture에서 검증했다.
+공개 checkout에 비공개 후보가 없으면 이 E2E는 skip한다.
+실제 E2E 1 passed, 관련 합계 53 passed, release validation PASS.
+로그: `/tmp/synthesis_stage7_e2e.log`, `/tmp/synthesis_stage7_tests.log`,
+`/tmp/synthesis_stage7_release.log`.
 
 Stage 6: `study/learning_feedback.py`를 Diagnosis projection과 확정 grade
 feedback adapter, /review에 연결했다. `question_demand_axes.requirements`의
