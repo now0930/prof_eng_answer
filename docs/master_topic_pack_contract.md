@@ -116,3 +116,20 @@ recommendation. A source/hash mismatch prevents the aid from loading. Adding
 one does not edit legacy Topic JSON, generated grading banks, or any scoring
 projection. The first example is a Nyquist delay-margin worked problem marked
 `llm_reviewed_human_pending` rather than as a human-verified fact.
+
+## Unresolved source comments
+
+`study/source_review_annotations/<topic_id>.json` preserves editorial comments
+separately from WordPress text. Each comment pins source ID, version, text hash,
+locator and an exact quote. `status: pending_review`, `decision: null`, and
+`score_effect: none` mean the user and another LLM have not decided a correction.
+Training, Diagnosis and saved feedback expose `source_review_annotations`;
+comments are never converted into facts, penalties, or automatic source edits.
+`source_state` reports `matching`, `stale`, or `text_unavailable`. Old comments
+remain visible after source changes with their original quote and hash.
+
+The WordPress material loader compares the bundle version and exact source URL
+with the Master reference before exposing any text. A mismatch raises an explicit
+projection error rather than labelling new text with the old approved version.
+The existing runtime fallback preserves review question selection and finalized
+grade persistence; failed supplemental guidance is omitted from that snapshot.

@@ -253,6 +253,7 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
         # from the legacy source JSONs used by the Grading Projection.
         "source_materials": source_materials,
         "curated_learning_materials": copy.deepcopy(learning_materials),
+        "source_review_annotations": _load_source_review_annotations(repository_root, master, source_materials),
         "question_examples": _first_list(model_answer, "question_examples"),
         "question_patterns": _first_list(model_answer, "expected_question_patterns", "question_patterns"),
         "recommended_outline": _first_list(model_answer, "recommended_outline", "expected_structure"),
@@ -378,6 +379,12 @@ def _load_linked_wordpress_materials(
         reference = linked[source_id]
         _expect(item.get("topic_id", master["topic_id"]) == master["topic_id"], "WordPress source topic_id mismatch")
         _expect(item.get("wordpress_url") == reference["wordpress_url"], "WordPress source URL does not match Master reference")
+        _expect(item.get("version") == reference["version"], "WordPress source version does not match Master reference")
+        _expect(
+            item.get("source_url", item.get("wordpress_url"))
+            == reference.get("source_url", reference["wordpress_url"]),
+            "WordPress exact source URL does not match Master reference",
+        )
         text = item.get("extracted_text")
         if item.get("extraction_status") != "extracted" or not isinstance(text, str) or not text.strip():
             continue
@@ -405,6 +412,46 @@ def _load_linked_wordpress_materials(
     return result
 
 
+def _load_source_review_annotations(repository_root, master, source_materials):
+    """Keep unresolved editorial comments separate from source text and facts."""
+    root = Path(repository_root).resolve()
+    path = (root / "study/source_review_annotations" / f"{master['topic_id']}.json").resolve()
+    _expect(path.is_relative_to(root), "annotation path escapes repository root")
+    if not path.is_file():
+        return []
+    try:
+        pack = json.loads(path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        raise MasterTopicPackError("could not read source review annotations") from exc
+    _expect(isinstance(pack, dict) and set(pack) == {"schema_version", "topic_id", "annotations"}, "annotation pack fields are invalid")
+    _expect(pack["schema_version"] == "source-review-annotations-v1" and pack["topic_id"] == master["topic_id"], "annotation pack identity mismatch")
+    _expect(isinstance(pack["annotations"], list), "annotations must be an array")
+    references = {row["source_id"]: row for row in master["sources"]}
+    materials = {row["source_id"]: row for row in source_materials}
+    result, seen = [], set()
+    for note in pack["annotations"]:
+        fields = {"annotation_id", "source_id", "source_version", "source_text_sha256", "locator", "quote", "review_note", "status", "decision", "score_effect"}
+        _expect(isinstance(note, dict) and set(note) == fields, "annotation fields are invalid")
+        for key in fields - {"decision"}:
+            _expect(isinstance(note[key], str) and bool(note[key].strip()), f"annotation {key} is required")
+        _expect(note["annotation_id"] not in seen, "duplicate annotation ID")
+        seen.add(note["annotation_id"])
+        _expect(note["status"] == "pending_review" and note["decision"] is None and note["score_effect"] == "none", "annotations must remain undecided and score-neutral")
+        _expect(re.fullmatch(r"[a-f0-9]{64}", note["source_text_sha256"]) is not None, "invalid annotation text hash")
+        reference = references.get(note["source_id"])
+        _expect(reference is not None, "annotation source is not linked to Master")
+        material = materials.get(note["source_id"])
+        state = "text_unavailable"
+        if reference["version"] != note["source_version"]:
+            state = "stale"
+        elif material is not None:
+            state = "matching" if material["content_sha256"] == note["source_text_sha256"] else "stale"
+            if state == "matching":
+                _expect(note["quote"] in material["text"], "annotation quote does not match source text")
+        result.append({**copy.deepcopy(note), "source_url": reference.get("source_url", reference["wordpress_url"]), "source_state": state})
+    return result
+
+
 def project_diagnosis(repository_root: str | Path, master: dict[str, Any]) -> dict[str, Any]:
     """Expose structured diagnosis inputs without scoring or changing grader output."""
     sources = load_legacy_topic_sources(repository_root, master)
@@ -420,6 +467,7 @@ def project_diagnosis(repository_root: str | Path, master: dict[str, Any]) -> di
         "topic_id": master["topic_id"],
         "title_ko": master["title_ko"],
         "dimensions": list(config["dimensions"]),
+        "source_review_annotations": _load_source_review_annotations(repository_root, master, source_materials),
         "source_references": copy.deepcopy(master["sources"]),
         "fact_anchors": _first_list(fact_anchor, "anchors", "core_facts"),
         "fatal_wrong_claims": _first_list(fact_anchor, "fatal_wrong_claims"),

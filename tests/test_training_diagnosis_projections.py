@@ -173,6 +173,7 @@ def test_extracted_wordpress_material_requires_matching_hash_and_reference() -> 
                 "source_id": "wp-post:42", "wordpress_url": reference["wordpress_url"],
                 "extraction_status": "extracted", "extraction_method": "wordpress_wxr_html",
                 "extracted_text": "content", "extracted_text_sha256": "0" * 64,
+                "version": "v1",
             }],
         }), encoding="utf-8")
         try:
