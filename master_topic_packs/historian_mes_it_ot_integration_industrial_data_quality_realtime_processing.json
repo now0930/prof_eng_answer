@@ -1,0 +1,56 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+  "title_ko": "Historian·MES·IT/OT 통합, 산업데이터 품질 및 실시간 처리",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/historian_mes_it_ot_integration_industrial_data_quality_realtime_processing",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/historian_mes_it_ot_integration_industrial_data_quality_realtime_processing/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/historian_mes_it_ot_integration_industrial_data_quality_realtime_processing/logic_check.json",
+      "model_answer": "rubrics/topic_packs/historian_mes_it_ot_integration_industrial_data_quality_realtime_processing/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/historian_mes_it_ot_integration_industrial_data_quality_realtime_processing/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

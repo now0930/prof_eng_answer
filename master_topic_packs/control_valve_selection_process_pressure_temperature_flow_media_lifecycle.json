@@ -1,0 +1,56 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+  "title_ko": "공정 압력·온도·유량·유체 및 수명주기를 고려한 제어밸브 선정 절차",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_valve_selection_process_pressure_temperature_flow_media_lifecycle",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_valve_selection_process_pressure_temperature_flow_media_lifecycle/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_valve_selection_process_pressure_temperature_flow_media_lifecycle/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_valve_selection_process_pressure_temperature_flow_media_lifecycle/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_valve_selection_process_pressure_temperature_flow_media_lifecycle/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+  "title_ko": "광전·레이저 비접촉 측정의 검출원리, ToF·삼각측량 알고리즘 및 오차·선정",
+  "revision": 1,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/optical_laser_photoelectric_noncontact_measurement_tof_triangulation",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/optical_laser_photoelectric_noncontact_measurement_tof_triangulation/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/optical_laser_photoelectric_noncontact_measurement_tof_triangulation/logic_check.json",
+      "model_answer": "rubrics/topic_packs/optical_laser_photoelectric_noncontact_measurement_tof_triangulation/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/optical_laser_photoelectric_noncontact_measurement_tof_triangulation/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}
