@@ -1,6 +1,6 @@
 # Master / View 작업 상태와 운영 반영 조건
 
-기준일: 2026-10-04. 작업 브랜치: `codex/study-structure-learning-layer`.
+기준일: 2026-10-04. 작업 브랜치: `codex/record-live-review-verification`.
 
 | 단계 | 결과 | 확인 방법 |
 | --- | --- | --- |
@@ -15,6 +15,8 @@
 | Telegram 연결 | 완료 | 메시지 전송 없는 `getMe` 검사 PASS |
 | 실제 사용자 채팅 전송 | 완료 | `/review` 응답 1건, Telegram `ok=true`, message ID 2575 |
 | 주석의 실제 채팅 표시 | 미확인 | 오늘 선정된 두 Topic에는 미확정 주석이 없음 |
+| 운영 채점 → 이력 저장 | 모의 답안으로 확인 | V-Model 기존 이력에서 작성한 모의 답안 10.12/25, 결정론적 marker, 진단·Feedback View 저장 |
+| 다음 날짜 약점 Queue | 읽기 전용 미리보기 확인 | 2026-10-05 후보 2개 중 V-Model 약점이 첫 항목; 내일 Queue는 미리 저장하지 않음 |
 
 별도 백업 위치는
 `/home/now0930/chatgpt_project/private_backups/2026-10-04_master_view_before_rollout`이다.
@@ -46,19 +48,29 @@ Python 캐시 같은 재생성 가능한 파일은 포함하지 않았다.
   `ok=true`와 message ID 2575를 반환했다. 응답에는 2문제 Queue와 연결된
   HTML 원문 발췌가 있었다. 기기의 실제 표시 모습은 직접 관찰하지 않았다.
 - 최초 `/review`로 운영 `data/training_history.sqlite3`가 생성되었다.
-  SQLite 무결성 검사 `ok`, 일일 Queue 1개에 정확히 2문제, 채점 이력 0건이다.
-  재요청 시 Queue가 바뀌지 않는 것을 메시지 전송 mock으로 검증했다.
+  SQLite 무결성 검사 `ok`, 일일 Queue 1개에 정확히 2문제였다. 이후 기존
+  V-Model 답안 이력을 기반으로 만든 모의 답안 1건을 운영 결정론적 채점
+  경로에 통과시켜 10.12/25, Master topic routing, 진단 및 Feedback View
+  저장을 확인했다. 세션에는 `synthetic_validation`을 기록해 실제 사용자
+  작성 답안과 구분했다. 당일 Queue 스냅샷은 기존 2문제를 유지했다.
+- 2026-10-05 시각을 사용한 읽기 전용 선정 계산에서 해당 시도가
+  `weak_topic` 후보로 분류되고 다음 날 미리보기 2문제 안에 포함됐다.
+  내일 Queue를 DB에 미리 생성하지 않았으므로 실제 일일 Queue 갱신은
+  해당 날짜의 첫 `/review` 때 확인해야 한다.
 - 실사용으로 발견한 `.gitignore` 누락은 PR #5에서 수정했다.
   DB·WAL·SHM 파일이 모두 Git에서 제외된다. 생성된 DB는 저장소 밖에
   `training_history_after_first_review.sqlite3`로 백업했다.
+- 모의 채점 후의 최신 학습 DB 사본은 아직 별도 백업하지 않았다. 기존
+  최초 `/review` 후 백업은 보존되어 있으나 모의 attempt는 포함하지 않는다.
 
 ## 다음 운영 점검
 
 1. 사용자의 Telegram 화면에서 전달된 `/review` 메시지의 표시를 확인한다.
    API 전달은 검증했지만 기기의 실제 렌더링은 직접 관찰하지 않았다.
-2. 최초 실사용 채점 뒤 기존 DB에 답안·점수·진단이 저장되는지 확인한다.
-   다음날 Queue 갱신은 시간이 지나야 확인할 수 있다.
-3. WordPress 원문과 미확정 주석은 이후 사용자 또는 다른 LLM이 검토한다.
+2. 실제 사용자가 작성한 답안도 학습 이력에 저장되는지 확인한다. 현재
+   운영 DB의 1건은 모의 검증 데이터다.
+3. 2026-10-05 첫 `/review`에서 미리보기와 동일한 2문제가 선택되는지 확인한다.
+4. WordPress 원문과 미확정 주석은 이후 사용자 또는 다른 LLM이 검토한다.
    검토 전에는 canonical 채점 기준으로 승격하지 않는다.
 
 현재 WordPress 원문과 미확정 주석의 기술적 검토는 보류 중이다. 이 상태를
