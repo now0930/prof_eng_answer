@@ -1,0 +1,153 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+  "title_ko": "SW-08 Topic Pack — 산업 네트워크 실시간성, 결정성, 시간동기화, 장애복구 및 복원력",
+  "revision": 11,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience/logic_check.json",
+      "model_answer": "rubrics/topic_packs/industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/industrial_network_realtime_determinism_time_synchronization_fault_recovery_resilience/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:6729",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
+      "title": "산업용 이더넷",
+      "version": "66ad05d02bfa4a0e7156eb5951572e720ba620a2c0556a8f5df80957a3fd0e13",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T00:51:24+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8ca3325a82408ce67d77c5d1f687c408",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/image-8.png",
+      "title": "image-8",
+      "version": "2024-03-06T15:11:04",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-06T15:11:04+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e53e05d833a76bd9de58a8c1379ac092",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/image-7.png",
+      "title": "image-7",
+      "version": "2024-03-06T15:10:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-06T15:10:53+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d004b25aded0d39ff914b410dc8c0418",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240429_193003.pdf",
+      "title": "NeoStudio_20240429_193003",
+      "version": "2024-04-29T10:32:01",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-29T10:32:01+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4639ea953e591e652301b724e47460aa",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/image-5.png",
+      "title": "image-5",
+      "version": "2024-04-29T09:12:25",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-29T09:12:25+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:53f557bcf69f533d2a40f2aa1c96ecee",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/real-time-system.pdf",
+      "title": "real-time-system",
+      "version": "2024-04-29T09:55:51",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-29T09:55:51+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:8767",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/industrial-communications-systems-18%ec%9e%a5-22%ec%9e%a5-%ec%9a%94%ec%95%bd/",
+      "source_url": "https://now0930.pe.kr/wordpress/industrial-communications-systems-18%ec%9e%a5-22%ec%9e%a5-%ec%9a%94%ec%95%bd/",
+      "title": "Industrial Communications Systems 18장 ~ 22장 요약",
+      "version": "73a422b65e4575d0f42be9ee9854bafb7389880f25631a75d8b51e503ca6f2e2",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-03-30T13:52:08+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ef77eba86485ece4e3b0d7f1cb02cd29",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%82%b0%ec%97%85%ec%9a%a9-%ec%9d%b4%eb%8d%94%eb%84%b7/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/image-6.png",
+      "title": "image-6",
+      "version": "2024-04-29T09:13:36",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-29T09:13:36+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

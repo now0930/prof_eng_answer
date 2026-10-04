@@ -8,8 +8,8 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from canonical_claim_extractor import extract_canonical_claim_evidence
-from deterministic_primary_grader import grade_deterministically
+from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
+from grading.scoring.deterministic_primary_grader import grade_deterministically
 
 
 TOPIC = "sil_target_determination_risk_reduction_and_lifecycle"

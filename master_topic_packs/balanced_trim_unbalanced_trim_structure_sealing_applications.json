@@ -1,0 +1,142 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "balanced_trim_unbalanced_trim_structure_sealing_applications",
+  "title_ko": "Balanced·Unbalanced Trim의 구조, 밀봉 및 적용",
+  "revision": 9,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/balanced_trim_unbalanced_trim_structure_sealing_applications",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/balanced_trim_unbalanced_trim_structure_sealing_applications/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/balanced_trim_unbalanced_trim_structure_sealing_applications/logic_check.json",
+      "model_answer": "rubrics/topic_packs/balanced_trim_unbalanced_trim_structure_sealing_applications/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/balanced_trim_unbalanced_trim_structure_sealing_applications/topic_importance.json",
+      "question_demand_axes": "rubrics/topic_packs/balanced_trim_unbalanced_trim_structure_sealing_applications/question_demand_axes.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:7611",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-globe-valve-trim/",
+      "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-globe-valve-trim/",
+      "title": "valve handbook, globe valve trim",
+      "version": "f0461faae5a7805796fdad041eda5d51770cac20fb9d0eea65f6c1818b7bb7bd",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-05T12:06:36+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a6de1a5e3535f30b7941aecde7816538",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/cage_guided_balanced_valve.png",
+      "title": "cage_guided_balanced_valve",
+      "version": "2026-08-03T08:41:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-03T08:41:53+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:dfeafe39798c70c3cbe5117b15155945",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/post_port_guide_methods.png",
+      "title": "post_port_guide_methods",
+      "version": "2026-08-03T08:40:29",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-03T08:40:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9294",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "title": "Valve Handbook 3장 요약: 밸브 및 액추에이터 종류",
+      "version": "8aa1e70f68d4240c056f7e76c4942f6c0782ec13e7bb908cd33dbf13b4e355a7",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-03T08:44:26+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:461c4c46d330e82ecb979d430ab9a5d8",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-globe-valve-trim/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/10/NeoStudio_20241012_124520_Blossom-Pink.pdf",
+      "title": "NeoStudio_20241012_124520_Blossom Pink",
+      "version": "2024-10-28T12:59:33",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-10-28T12:59:33+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e4a3d76c1d0b558b935cef8bc6f8567c",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-globe-valve-trim/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/10/8-Trim.pdf",
+      "title": "8-Trim",
+      "version": "2025-03-05T12:06:26",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-05T12:06:26+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:1c70e07d3172064a5c863d91c1dd8d89",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/single_port_globe_valve.png",
+      "title": "single_port_globe_valve",
+      "version": "2026-08-03T08:39:03",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-03T08:39:03+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

@@ -5,7 +5,7 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-VERIFIER = ROOT / "logic_llm_verifier.py"
+VERIFIER = ROOT / "grading/evidence/logic_llm_verifier.py"
 
 
 def _load_stage22_compact_output_verifier_module():
@@ -139,7 +139,7 @@ class Stage22CompactOutputContractTests(unittest.TestCase):
 
         module_path = (
             Path(__file__).resolve().parents[1]
-            / "logic_llm_verifier.py"
+            / "grading/evidence/logic_llm_verifier.py"
         )
         spec = importlib.util.spec_from_file_location(
             "stage22_compact_output_contract_verifier",

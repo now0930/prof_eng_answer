@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+  "title_ko": "위험장소 방폭 방식, 본질안전 회로 및 계측기기 선정",
+  "revision": 3,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection/logic_check.json",
+      "model_answer": "rubrics/topic_packs/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/hazardous_area_explosion_protection_intrinsic_safety_equipment_selection/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9328",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%91%9c%ec%a4%80-%eb%b0%8f-%ec%8a%b9%ec%9d%b8-9%ec%9e%a5/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ed%91%9c%ec%a4%80-%eb%b0%8f-%ec%8a%b9%ec%9d%b8-9%ec%9e%a5/",
+      "title": "표준 및 승인, control valve handbook, 9장",
+      "version": "c783ad0d9a5aa2a91244ff3b00347d9e4637fa19afcd3331e4b3dda2efbea36b",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-05T14:35:26+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:36948fc216c4683b62482c174484c8dd",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%91%9c%ec%a4%80-%eb%b0%8f-%ec%8a%b9%ec%9d%b8-9%ec%9e%a5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/valve-2-1.pdf",
+      "title": "valve-2",
+      "version": "2026-08-05T02:17:11",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-05T02:17:11+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

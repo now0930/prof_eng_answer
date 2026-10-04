@@ -12,8 +12,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from model_answer_router import find_model_answer_reference
-from rubric_registry import load_model_answer_bank
+from grading.routing.model_answer_router import find_model_answer_reference
+from grading.rubrics.rubric_registry import load_model_answer_bank
 
 
 NYQUIST = "nyquist_stability_criterion_gain_phase_margin"

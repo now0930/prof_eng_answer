@@ -1,0 +1,117 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+  "title_ko": "계측설비 설치·배선·도압배관·시공검사 및 기술기준",
+  "revision": 6,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/instrumentation_installation_wiring_impulse_tubing_inspection_codes",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/instrumentation_installation_wiring_impulse_tubing_inspection_codes/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/instrumentation_installation_wiring_impulse_tubing_inspection_codes/logic_check.json",
+      "model_answer": "rubrics/topic_packs/instrumentation_installation_wiring_impulse_tubing_inspection_codes/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/instrumentation_installation_wiring_impulse_tubing_inspection_codes/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:6e1e676a5be794d9452780036f9cad79",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%8f%84%ec%95%95%eb%b0%b0%ea%b4%80-impulse-piping-tubing/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-16.jpg",
+      "title": "제목-없음-16",
+      "version": "2024-02-15T12:52:25",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-15T12:52:25+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6454",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%8f%84%ec%95%95%eb%b0%b0%ea%b4%80-impulse-piping-tubing/",
+      "source_url": "https://now0930.pe.kr/wordpress/%eb%8f%84%ec%95%95%eb%b0%b0%ea%b4%80-impulse-piping-tubing/",
+      "title": "도압배관 Impulse Piping, Tubing",
+      "version": "aa13fb531ac299d4f0cb7e33955807e823b4d3136a08b0040fbcc328ae59fd6e",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-22T13:40:43+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ca6139028a339adcd9a471e451577b48",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%8f%84%ec%95%95%eb%b0%b0%ea%b4%80-impulse-piping-tubing/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/%EA%B3%84%EC%9E%A5_%EC%84%A4%EA%B3%84_%EB%B0%8F_%EC%8B%9C%EA%B3%B5.pdf",
+      "title": "계장_설계_및_시공",
+      "version": "2024-04-22T13:40:37",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-22T13:40:37+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:9177ef74d9c62ed0f5c5b9bd0261c28d",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%8f%84%ec%95%95%eb%b0%b0%ea%b4%80-impulse-piping-tubing/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/%EC%9C%A0%EB%9F%89%EC%B8%A1%EC%A0%95%EB%82%9C%EC%A0%9C%EA%B7%B9%EB%B3%B5%EB%B0%A9%EB%B2%951_%EC%97%90%EB%A8%B8%EC%8A%A8_%EB%B2%88%EC%97%AD.pdf",
+      "title": "유량측정난제극복방법1_에머슨_번역",
+      "version": "2024-02-15T12:08:14",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-15T12:08:14+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:fd862fb45aa515e94f7749031bdfc5ac",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%8f%84%ec%95%95%eb%b0%b0%ea%b4%80-impulse-piping-tubing/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/%EC%9E%84%ED%8E%84%EC%8A%A4-%ED%8C%8C%EC%9D%B4%ED%95%91%EA%B3%BC-%ED%8A%9C%EB%B9%99-%EC%B0%A8%EC%9D%B4_%EB%B2%88%EC%97%AD.pdf",
+      "title": "임펄스 파이핑과 튜빙 차이_번역",
+      "version": "2024-02-15T12:23:35",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-15T12:23:35+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

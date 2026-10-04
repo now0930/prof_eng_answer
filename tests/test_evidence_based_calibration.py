@@ -9,9 +9,9 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from evaluation_ledger import attach_canonical_evaluation_ledger
-from evidence_calibration import apply_evidence_based_calibration
-from question_demand_contract import build_question_demand_contract
+from grading.scoring.evaluation_ledger import attach_canonical_evaluation_ledger
+from grading.scoring.evidence_calibration import apply_evidence_based_calibration
+from grading.routing.question_demand_contract import build_question_demand_contract
 
 
 QUESTION = "PID 제어의 동작 원리를 설명하고 현장 튜닝 절차를 제시하시오."

@@ -1,0 +1,1744 @@
+from grading.routing.semantic_question_type_prompt import (
+    build_question_type_json_contract,
+    build_question_type_semantic_guidance,
+)
+
+import os
+import re
+import json
+import urllib.request
+import urllib.error
+from pathlib import Path
+
+
+def _extract_json(text: str) -> dict:
+    normalized = str(text or "").strip()
+
+    if not normalized:
+        raise ValueError(
+            "Gemini 응답에서 JSON 객체를 찾지 못했습니다."
+        )
+
+    def parse_object(candidate: str):
+        try:
+            parsed = json.loads(candidate)
+        except json.JSONDecodeError:
+            return None
+
+        if not isinstance(parsed, dict):
+            raise ValueError(
+                "Gemini 응답 JSON root는 object여야 합니다."
+            )
+
+        return parsed
+
+    direct_result = parse_object(normalized)
+
+    if direct_result is not None:
+        return direct_result
+
+    fence_match = re.fullmatch(
+        r"\s*```(?:json)?\s*(.*?)\s*```\s*",
+        normalized,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+
+    if fence_match:
+        fenced_result = parse_object(
+            fence_match.group(1).strip()
+        )
+
+        if fenced_result is not None:
+            return fenced_result
+
+    decoder = json.JSONDecoder()
+    search_index = 0
+
+    while True:
+        object_start = normalized.find(
+            "{",
+            search_index,
+        )
+
+        if object_start < 0:
+            break
+
+        try:
+            parsed, _end = decoder.raw_decode(
+                normalized[object_start:]
+            )
+        except json.JSONDecodeError:
+            search_index = object_start + 1
+            continue
+
+        if isinstance(parsed, dict):
+            return parsed
+
+        search_index = object_start + 1
+
+    raise ValueError(
+        "Gemini 응답에서 JSON 객체를 찾지 못했습니다."
+    )
+
+
+def _compact(obj, max_chars=16000):
+    s = json.dumps(obj, ensure_ascii=False, indent=2)
+    if len(s) > max_chars:
+        return s[:max_chars] + "\n...[TRUNCATED]..."
+    return s
+
+
+def _build_base_prompt(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval,
+):
+    layers = scoring_model.get("layers", [])
+    raters = rater_profile.get("raters", []) if rater_profile else []
+
+    return f"""
+너는 산업계측제어기술사 답안 채점위원이다.
+
+너의 역할:
+- 답안을 단순 키워드가 아니라 의미와 논리로 평가한다.
+- 최종 cap 적용은 Python이 하므로, 너는 cap 적용 전 원점수(raw layer score)를 평가한다.
+- 답안이 짧으면 짧다는 사실은 반영하되, Python의 volume cap과 중복으로 과도하게 깎지는 않는다.
+- 하지만 키워드만 있고 설명이 없으면 높은 점수를 주면 안 된다.
+- fact가 틀리면 대책 점수도 보수적으로 본다.
+- 기술사 답안은 배경 → 문제점 → fact 설명 → 현장 적용·제언 → 연결성/면접 방어 가능성이 중요하다.
+
+채점 철학:
+1. 문제 의도 파악이 중요하다.
+2. 문제 요구 파악이 정확해야 한다.
+3. fact 기반 설명은 핵심 개념을 정확하고 간결하게 설명하는지 본다.
+4. 대책은 현실적이어야 한다. 비용, 시간, 적용 가능성, 기존 설비 영향, 운전 리스크를 고려한다.
+5. 개인 의견은 문제점과 fact에서 논리적으로 도출되어야 한다.
+6. 기술사 답안지 25점 문항은 약 3쪽 전개가 평균이다.
+7. 사진 3장과 OCR이 함께 들어오면 OCR 누락 가능성을 고려한다.
+
+점수 항목:
+{_compact(layers)}
+
+채점자 역할:
+{_compact(raters)}
+
+현재 volume 판단:
+{_compact(volume)}
+
+현재 Python fact anchor 평가:
+{_compact(fact_eval)}
+
+현재 Python connection 평가:
+{_compact(connection_eval)}
+
+문제:
+{question_text}
+
+답안:
+{answer_text}
+
+반드시 아래 JSON만 출력하라. 설명 문장, markdown, 코드블록을 붙이지 마라.
+
+{{
+  "version": "gemini_semantic_grader_v1",
+  "confidence": "low|medium|high",
+  "overall_comment": "총평",
+  "layers": [
+    {{
+      "layer_id": "A",
+      "score": 0.0,
+      "max": 3.0,
+      "reason": "문제 진입·답안 구조 평가 사유",
+      "evidence": ["답안에서 확인한 근거"]
+    }},
+    {{
+      "layer_id": "B",
+      "score": 0.0,
+      "max": 6.0,
+      "reason": "문제 요구 해석·완전성 평가 사유",
+      "evidence": []
+    }},
+    {{
+      "layer_id": "C",
+      "score": 0.0,
+      "max": 8.0,
+      "reason": "fact 기반 설명 평가 사유",
+      "evidence": []
+    }},
+    {{
+      "layer_id": "D",
+      "score": 0.0,
+      "max": 6.0,
+      "reason": "현장 적용·제언 평가 사유",
+      "evidence": []
+    }},
+    {{
+      "layer_id": "E",
+      "score": 0.0,
+      "max": 2.0,
+      "reason": "연결성/면접 방어 가능성 평가 사유",
+      "evidence": []
+    }}
+  ],
+  "fact_anchor_review": [
+    {{
+      "id": "F1",
+      "level": 0.0,
+      "reason": "fact anchor 평가"
+    }}
+  ],
+  "connection_review": {{
+    "background_to_problem": "평가",
+    "problem_to_fact": "평가",
+    "fact_to_solution": "평가",
+    "solution_to_problem": "평가"
+  }},
+  "rater_comments": [
+    {{
+      "rater_id": "professor",
+      "comment": "교수 관점 평가"
+    }},
+    {{
+      "rater_id": "professional_engineer",
+      "comment": "기술사 관점 평가"
+    }},
+    {{
+      "rater_id": "executive",
+      "comment": "기업 임원 관점 평가"
+    }}
+  ],
+  "risks": ["과대평가 또는 과소평가 위험"],
+  "improvement_advice": ["보완 조언"]
+}}
+"""
+
+
+def _request_gemini_grade(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval,
+    timeout=180,
+):
+    api_key = (
+        os.getenv("GEMINI_API_KEY")
+        or os.getenv("GOOGLE_API_KEY")
+        or os.getenv("GOOGLE_GENERATIVE_AI_API_KEY")
+    )
+    model = os.getenv("GEMINI_MODEL", "gemini-2.5-flash")
+
+    if not api_key:
+        return {
+            "ok": False,
+            "error": "GEMINI_API_KEY 환경변수가 없습니다.",
+            "parsed": None,
+            "raw_text": ""
+        }
+
+    prompt = build_gemini_grading_prompt(
+        question_text=question_text,
+        answer_text=answer_text,
+        scoring_model=scoring_model,
+        subject_rubric=subject_rubric,
+        rater_profile=rater_profile,
+        volume=volume,
+        fact_eval=fact_eval,
+        connection_eval=connection_eval,
+    )
+
+    payload = {
+        "contents": [
+            {
+                "role": "user",
+                "parts": [{"text": prompt}]
+            }
+        ],
+        "generationConfig": {
+            "temperature": 0.0,
+            "topP": 1.0,
+            "candidateCount": 1,
+            "maxOutputTokens": 8192
+        }
+    }
+
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent"
+
+    req = urllib.request.Request(
+        url,
+        data=json.dumps(payload).encode("utf-8"),
+        headers={
+            "Content-Type": "application/json",
+            "x-goog-api-key": api_key
+        },
+        method="POST"
+    )
+
+    try:
+        with urllib.request.urlopen(req, timeout=timeout) as r:
+            data = json.loads(r.read().decode("utf-8"))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode("utf-8", errors="replace")
+        return {
+            "ok": False,
+            "error": f"Gemini HTTPError {e.code}: {body}",
+            "parsed": None,
+            "raw_text": ""
+        }
+    except Exception as e:
+        return {
+            "ok": False,
+            "error": f"Gemini request failed: {e!r}",
+            "parsed": None,
+            "raw_text": ""
+        }
+
+    text_parts = []
+    for cand in data.get("candidates", []):
+        content = cand.get("content", {})
+        for part in content.get("parts", []):
+            if "text" in part:
+                text_parts.append(part["text"])
+
+    raw_text = "\n\n".join(text_parts).strip()
+
+    try:
+        parsed = _extract_json(raw_text)
+    except Exception as e:
+        return {
+            "ok": False,
+            "error": f"Gemini JSON parse failed: {e!r}",
+            "parsed": None,
+            "raw_text": raw_text,
+            "raw_response": data
+        }
+
+    return {
+        "ok": True,
+        "error": "",
+        "model": model,
+        "parsed": parsed,
+        "raw_text": raw_text,
+        "raw_response": data
+    }
+
+
+# ============================================================
+# PHASE9_QUESTION_TYPE_LENS_PROMPT_WRAPPER
+# question_type은 C항목의 Fact 설명 방식 렌즈로만 사용한다.
+# ============================================================
+
+def _build_question_type_lens_prompt(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval
+):
+    base_prompt = _build_base_prompt(
+        question_text,
+        answer_text,
+        scoring_model,
+        subject_rubric,
+        rater_profile,
+        volume,
+        fact_eval,
+        connection_eval
+    )
+
+    qte = {}
+    if isinstance(subject_rubric, dict):
+        qte = subject_rubric.get("question_type_evaluation") or {}
+
+    if not qte:
+        return base_prompt
+
+    primary = qte.get("primary_type") or {}
+    policy = qte.get("policy") or {}
+
+    lens_text = f"""
+
+[문제 유형 기반 C항목 평가 렌즈]
+
+중요 원칙:
+- 문제 유형은 별도 채점 체계가 아니다.
+- 기존 A/B/C/D/E 25점 구조는 유지한다.
+- question_type은 C항목의 Fact 기반 설명 방식을 결정하는 렌즈로만 사용한다.
+- A/B/D/E는 모든 문제 유형에 공통 적용한다.
+- 특히 D/E에서는 모든 유형에 대해 현실 적용성, 현장 문제 연결, 개선 제언, 기술사적 판단성을 평가한다.
+
+선택된 문제 유형:
+- ID: {primary.get("id")}
+- 이름: {primary.get("name")}
+- 신뢰도: {qte.get("confidence")}
+
+C항목 평가 렌즈:
+{primary.get("c_lens")}
+
+C항목에서 확인할 필수 요소:
+{primary.get("c_required_elements")}
+
+낮은 답안 패턴:
+{primary.get("weak_answer_pattern")}
+
+높은 답안 패턴:
+{primary.get("high_score_pattern")}
+
+채점 지시:
+- C항목은 위 문제 유형 렌즈에 따라 평가하라.
+- 단순 키워드 나열은 낮게 평가하라.
+- 유형별 Fact 설명이 충분하더라도 D/E에서 현실 적용성, 해결 제언, 기술사적 판단이 부족하면 고득점으로 보지 마라.
+- 계산·설계형도 별도 예외가 아니라 C항목 렌즈 중 하나로만 본다.
+- 평가형, 절차형, 비교형도 마찬가지로 C항목의 설명 방식 차이로만 본다.
+""".strip()
+
+    return base_prompt + "\n\n" + lens_text
+
+
+# ============================================================
+# PHASE10_MODEL_ANSWER_REFERENCE_PROMPT_WRAPPER
+# 모범 답안은 정답 매칭용이 아니라 구조·깊이·현장 적용성 기준으로만 사용
+# ============================================================
+
+def _build_model_answer_prompt(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval
+):
+    base_prompt = _build_question_type_lens_prompt(
+        question_text,
+        answer_text,
+        scoring_model,
+        subject_rubric,
+        rater_profile,
+        volume,
+        fact_eval,
+        connection_eval
+    )
+
+    model_ref = {}
+    if isinstance(subject_rubric, dict):
+        model_ref = subject_rubric.get("model_answer_reference") or {}
+
+    if not model_ref or not model_ref.get("matched"):
+        return base_prompt
+
+    ref = model_ref.get("primary_reference") or {}
+    policy = model_ref.get("policy") or {}
+
+    ref_text = f"""
+
+[모범 답안 Bank 참조 기준]
+
+중요 원칙:
+- 모범 답안은 정답 문장 매칭용이 아니다.
+- 동일 문장을 요구하지 마라.
+- 표현이나 순서가 달라도 핵심 fact, 논리, 구조, 현장 적용성, 제언이 충분하면 인정하라.
+- 모범 답안보다 더 나은 현장 판단, 적용 조건, 비용·운전·안전 고려가 있으면 긍정적으로 평가하라.
+- 모범 답안은 부족 요소 탐지와 보완 방향 제시를 위한 기준 답안이다.
+- 기존 A/B/C/D/E 25점 구조와 답안 분량 cap을 유지하라.
+
+선택된 모범 답안:
+- ID: {ref.get("id")}
+- topic_id: {ref.get("topic_id")}
+- question_type: {ref.get("question_type")}
+- title: {ref.get("title")}
+- match_confidence: {model_ref.get("confidence")}
+- match_reasons: {model_ref.get("match_reasons")}
+
+모범 답안 사용 정책:
+{policy}
+
+기대 답안 구조:
+{ref.get("expected_structure")}
+
+모범 답안 outline:
+{ref.get("model_answer_outline")}
+
+고득점 특징:
+{ref.get("high_score_features")}
+
+저득점 패턴:
+{ref.get("low_score_patterns")}
+
+현장 연결 포인트:
+{ref.get("field_connection_points")}
+
+채점 지시:
+- C항목에서는 위 모범 답안을 참고하여 Fact 설명의 구조와 깊이를 평가하라.
+- D/E항목에서는 현장 적용성, 문제 해결, 제언, 기술사적 판단성을 평가하라.
+- 모범 답안에 없는 문장이라도 기술적으로 타당하고 현장성이 높으면 인정하라.
+- 모범 답안과 문장이 비슷하더라도 현장 적용성이나 논리 연결이 부족하면 고득점으로 보지 마라.
+- 피드백에는 모범 답안 기준에서 부족한 구조, fact, 현장 연결 포인트를 구체적으로 제시하라.
+""".strip()
+
+    return base_prompt + "\n\n" + ref_text
+
+
+# ============================================================
+# PHASE11_REQUIREMENT_AND_TYPE_FACT_PROMPT_WRAPPER
+# B/C 항목 의미 정리:
+# B = 문제 요구 해석·완전성
+# C = 유형별 Fact 기반 내용 설명
+# ============================================================
+
+def _build_bc_semantics_prompt(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval
+):
+    base_prompt = _build_model_answer_prompt(
+        question_text,
+        answer_text,
+        scoring_model,
+        subject_rubric,
+        rater_profile,
+        volume,
+        fact_eval,
+        connection_eval
+    )
+
+    phase11_text = """
+
+[B/C 항목 평가 의미 정리]
+
+중요:
+- B항목은 '문제점 정의'가 아니라 '문제 요구 해석·완전성'이다.
+- C항목은 'Fact 기반 문제점 설명'이 아니라 '유형별 Fact 기반 내용 설명'이다.
+- DEFINE, PRINCIPLE, STRUCTURE, COMPARE, PROCEDURE, CALC_DESIGN, APPLICATION, EVALUATION 문제에서 억지로 문제점을 찾지 마라.
+- 문제 유형에 따라 C항목의 Fact 전개 방식이 달라진다.
+- 다만 모든 기술사 답안은 D/E에서 현실 적용성, 현장 문제 연결, 제언, 기술사적 판단성을 평가한다.
+
+B. 문제 요구 해석·완전성 평가 기준:
+- 답안자가 문제에서 요구한 설명 방향을 정확히 잡았는가?
+- 문제문의 요구동사와 세부 요구항목을 모두 식별했는가?
+- 각 요구항목에 답안의 목차 또는 본문이 1:1로 대응하는가?
+- 핵심 요구항목을 누락하거나 일부만 답하지 않았는가?
+- DEFINE이면 정의와 개념 설명 요구를 파악했는가?
+- COMPARE이면 비교 대상과 선정 기준 요구를 파악했는가?
+- PROCEDURE이면 절차와 판정 기준 요구를 파악했는가?
+- CALC_DESIGN이면 공식, 변수, 계산 과정, 설계 기준 설명 요구를 파악했는가?
+- EVALUATION이면 평가 지표, 효과 분석, 한계 분석 요구를 파악했는가?
+
+C. 유형별 Fact 기반 내용 설명 평가 기준:
+- 선택된 question_type lens에 맞게 Fact를 전개했는가?
+- 단순 키워드 나열이 아니라 구조, 인과관계, 절차, 비교축, 계산 의미, 평가 지표 등을 설명했는가?
+- Fact Anchor와 Model Answer Bank가 제공된 경우, 동일 문장을 요구하지 말고 구조·깊이·현장 적용성 기준으로 참고하라.
+
+채점 표현 지시:
+- DEFINE 문제에서 '문제점 정의가 부족하다'라고 쓰지 말고 '문제 요구에 따른 표준 정의 조건과 실무 의미 설명이 부족하다'라고 써라.
+- STRUCTURE 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '구성요소, 분류 기준, 역할 관계 설명이 부족하다'라고 써라.
+- COMPARE 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '비교축, 적용 조건, 선정 기준 설명이 부족하다'라고 써라.
+- PROCEDURE 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '절차 순서, 입력 자료, 판정 기준, 산출물 설명이 부족하다'라고 써라.
+- CALC_DESIGN 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '공식, 변수, 단위, 계산 결과 해석, 설계 기준 설명이 부족하다'라고 써라.
+- EVALUATION 문제에서 '문제점 정의가 없다'라고 쓰지 말고 '평가 지표, 전후 비교, 정량·정성 효과, 한계 분석이 부족하다'라고 써라.
+""".strip()
+
+    return base_prompt + "\n\n" + phase11_text
+
+
+# ============================================================
+# PHASE12_FIELD_APPLICATION_LABEL_PROMPT_WRAPPER
+# D항목을 '대책' 중심이 아니라 현장 적용·설계 판단·제언으로 표현
+# ============================================================
+
+def _build_field_application_prompt(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval
+):
+    base_prompt = _build_bc_semantics_prompt(
+        question_text,
+        answer_text,
+        scoring_model,
+        subject_rubric,
+        rater_profile,
+        volume,
+        fact_eval,
+        connection_eval
+    )
+
+    phase12_text = """
+
+[D/E 항목 표현 원칙]
+
+- D항목은 '현실적 대책'만을 의미하지 않는다.
+- D항목은 모든 문제 유형에서 '현장 적용성, 설계 판단, 운영 조건, 비용·안전·유지보수 고려, 제언'을 평가한다.
+- DEFINE 문제에서는 대책이 없다고 쓰기보다 '정의가 현장 적용 의미, 선정 기준, 운전 리스크, 제언으로 확장되지 않았다'라고 평가하라.
+- COMPARE 문제에서는 '선정 기준과 적용 조건이 부족하다'라고 평가하라.
+- PROCEDURE 문제에서는 '절차의 판정 기준, 산출물, 기록·검증이 부족하다'라고 평가하라.
+- CALC_DESIGN 문제에서는 '계산 결과 해석과 설계 기준, 현장 적용 의미가 부족하다'라고 평가하라.
+- EVALUATION 문제에서는 '평가 지표, 전후 비교, 효과와 한계, 후속 조치가 부족하다'라고 평가하라.
+
+연결성 표현:
+- 배경→문제 요구
+- 문제 요구→유형별 Fact 설명
+- Fact→현장 적용·제언
+- 제언→문제 요구 충족
+""".strip()
+
+    return base_prompt + "\n\n" + phase12_text
+
+
+
+# ============================================================
+
+
+# ============================================================
+
+# P0_C_DETERMINISTIC_SAMPLING_WRAPPER
+def _grade_with_sampling_metadata(
+    question_text,
+    answer_text,
+    scoring_model,
+    subject_rubric,
+    rater_profile,
+    volume,
+    fact_eval,
+    connection_eval,
+    timeout=180,
+):
+    prompt = build_gemini_grading_prompt(
+        question_text=question_text,
+        answer_text=answer_text,
+        scoring_model=scoring_model,
+        subject_rubric=subject_rubric,
+        rater_profile=rater_profile,
+        volume=volume,
+        fact_eval=fact_eval,
+        connection_eval=connection_eval,
+    )
+
+    result = (
+        _request_gemini_grade(
+            question_text=question_text,
+            answer_text=answer_text,
+            scoring_model=scoring_model,
+            subject_rubric=subject_rubric,
+            rater_profile=rater_profile,
+            volume=volume,
+            fact_eval=fact_eval,
+            connection_eval=connection_eval,
+            timeout=timeout,
+        )
+    )
+
+    from grading.providers.sampling import (
+        build_llm_request_contract,
+    )
+
+    sampling_contract = (
+        build_llm_request_contract(
+            provider="gemini",
+            model=os.getenv(
+                "GEMINI_MODEL",
+                "gemini-2.5-flash",
+            ),
+            prompt=prompt,
+            requested_sampling={
+                "temperature": 0.0,
+                "top_p": 1.0,
+                "candidate_count": 1,
+            },
+            applied_sampling={
+                "temperature": 0.0,
+                "top_p": 1.0,
+                "candidate_count": 1,
+                "max_output_tokens": 8192,
+            },
+            unsupported_settings=[
+                "top_k",
+                "seed",
+            ],
+        )
+    )
+
+    if isinstance(result, dict):
+        result["llm_request"] = (
+            sampling_contract
+        )
+
+    return result
+
+
+# PHASE18_GEMINI_SEMANTIC_RETRY_WRAPPER
+# Gemini 503, timeout, connection reset 등 일시 장애 시 재시도
+# 점수 계산 로직은 바꾸지 않고 Gemini 호출 안정성만 높인다.
+# ============================================================
+
+def _phase18_is_retryable_gemini_error(err_text):
+    text = str(err_text or "").lower()
+    retryable_markers = [
+        "503",
+        "service unavailable",
+        "temporarily unavailable",
+        "timeout",
+        "timed out",
+        "connection reset",
+        "connectionreseterror",
+        "ssl",
+        "handshake",
+        "rate limit",
+        "resource exhausted",
+        "deadline",
+        "unavailable",
+    ]
+    return any(m in text for m in retryable_markers)
+
+
+def _grade_with_retry(*args, **kwargs):
+    import json
+    import time
+
+    delays = [2, 5, 10]
+    last_result = None
+    last_error = None
+
+    total_attempts = len(delays) + 1
+
+    for attempt_idx, delay in enumerate([0] + delays, start=1):
+        if delay:
+            time.sleep(delay)
+
+        try:
+            result = _grade_with_sampling_metadata(*args, **kwargs)
+            last_result = result
+
+            # dict가 아니면 기존 동작 유지
+            if not isinstance(result, dict):
+                return result
+
+            # ok가 없거나 ok=True이면 성공으로 간주
+            if result.get("ok", True) is not False:
+                if attempt_idx > 1:
+                    result.setdefault("retry_info", {})
+                    result["retry_info"].update({
+                        "retried": True,
+                        "attempts": attempt_idx
+                    })
+                return result
+
+            # ok=False인 경우 retry 가능한 에러인지 확인
+            err_text = json.dumps(result, ensure_ascii=False)
+            last_error = err_text
+
+            if _phase18_is_retryable_gemini_error(err_text) and attempt_idx < total_attempts:
+                print(f"[agent] Gemini semantic grader retry {attempt_idx}/{total_attempts}: {err_text[:300]}")
+                continue
+
+            return result
+
+        except Exception as e:
+            last_error = repr(e)
+
+            if _phase18_is_retryable_gemini_error(last_error) and attempt_idx < total_attempts:
+                print(f"[agent] Gemini semantic grader retry {attempt_idx}/{total_attempts}: {last_error[:300]}")
+                continue
+
+            raise
+
+    # 재시도 후에도 실패한 경우 기존 pipeline fallback을 타도록 ok=False 반환
+    if isinstance(last_result, dict):
+        last_result.setdefault("retry_info", {})
+        last_result["retry_info"].update({
+            "retried": True,
+            "attempts": total_attempts,
+            "final_error": last_error,
+            "exhausted": True
+        })
+        return last_result
+
+    return {
+        "ok": False,
+        "error": f"Gemini semantic grader failed after retries: {last_error}",
+        "retry_info": {
+            "retried": True,
+            "attempts": total_attempts,
+            "exhausted": True
+        }
+    }
+
+
+# === qtype semantic result postprocess wrapper v2 ===
+def _grade_with_question_type_postprocess(*args, **kwargs):
+    from grading.routing.semantic_question_type_postprocess import ensure_question_type_coverage
+
+    result = _grade_with_retry(*args, **kwargs)
+
+    question_text = (
+        kwargs.get("question_text")
+        or kwargs.get("question")
+        or (args[0] if args else None)
+    )
+    existing_question_type = (
+        kwargs.get("question_type")
+        or kwargs.get("detected_question_type")
+        or kwargs.get("legacy_question_type")
+    )
+
+    return ensure_question_type_coverage(
+        result,
+        question_text=question_text,
+        existing_question_type=existing_question_type,
+    )
+
+# === final qtype semantic prompt wrapper v4 EOF ===
+# This wrapper must stay near the end of this file because build_gemini_grading_prompt
+# is redefined multiple times by phase wrappers.
+from grading.routing.semantic_question_type_prompt import (
+    build_question_type_json_contract,
+    build_question_type_semantic_guidance,
+)
+
+def _build_question_type_contract_prompt(question_text, answer_text, *args, **kwargs):
+    base_prompt = _build_field_application_prompt(
+        question_text,
+        answer_text,
+        *args,
+        **kwargs,
+    )
+
+    if not isinstance(base_prompt, str):
+        return base_prompt
+
+    if (
+        "Question Type v2 평가 지침" in base_prompt
+        and "MANDATORY QUESTION_TYPE_COVERAGE OUTPUT CONTRACT" in base_prompt
+        and "QTYPE_HARD_JSON_TEMPLATE_V4" in base_prompt
+    ):
+        return base_prompt
+
+    existing_question_type = (
+        kwargs.get("question_type")
+        or kwargs.get("detected_question_type")
+        or kwargs.get("legacy_question_type")
+    )
+
+    try:
+        qtype_guidance = build_question_type_semantic_guidance(
+            question_text,
+            existing_question_type=existing_question_type,
+        )
+        qtype_contract = build_question_type_json_contract(
+            question_text,
+            existing_question_type=existing_question_type,
+        )
+    except Exception as exc:
+        qtype_guidance = (
+            "[Question Type v2 평가 지침]\n"
+                "question_type 세부 평가 지침 생성에 실패했습니다. "
+                f"기존 A/B/C/D/E 기준으로 평가하세요. error={exc}"
+        )
+        qtype_contract = (
+            "[MANDATORY QUESTION_TYPE_COVERAGE OUTPUT CONTRACT]\n"
+                "최종 JSON root object에 question_type_coverage 필드를 반드시 포함하세요."
+        )
+
+    qtype_template = """
+[QTYPE_HARD_JSON_TEMPLATE_V4]
+
+너는 반드시 JSON object 하나만 반환해야 한다.
+최상위 JSON에는 반드시 다음 key가 있어야 한다.
+
+- version
+- confidence
+- overall_comment
+- layers
+- fact_anchor_review
+- connection_review
+- rater_comments
+- risks
+- improvement_advice
+- question_type_coverage
+
+question_type_coverage는 절대 생략하지 마라.
+question_type_coverage는 raw_text 문자열 내부가 아니라 최상위 JSON field여야 한다.
+coverage_source는 반드시 "semantic_grader"로 둔다.
+overall_coverage에는 unknown, fallback, not_evaluated를 쓰지 마라.
+
+반드시 다음 구조를 포함하라.
+
+"question_type_coverage": {
+  "question_type": "문제 유형",
+  "name_ko": "한글 유형명",
+  "coverage_source": "semantic_grader",
+  "sub_criteria_coverage": [
+    {
+      "criterion": "sub_criteria 이름",
+      "status": "present | partial | incorrect | missing",
+      "evidence": "답안 근거 또는 누락 설명",
+      "impact": "C 또는 D 점수 판단 영향"
+    }
+  ],
+  "c_fact_focus_coverage": {
+    "covered": [],
+    "missing": []
+  },
+  "d_field_judgement_focus_coverage": {
+    "covered": [],
+    "missing": []
+  },
+  "missing_sub_criteria": [],
+  "overall_coverage": "strong | adequate | weak | poor",
+  "scoring_hint": "C/D 항목을 어떻게 보수적으로 볼지 설명"
+}
+
+금지:
+- question_type_coverage 생략 금지
+- coverage_source를 fallback으로 쓰기 금지
+- overall_coverage를 unknown으로 쓰기 금지
+- markdown 코드블록 출력 금지
+"""
+
+    return (
+        qtype_template
+        + "\n\n"
+        + base_prompt
+        + "\n\n"
+        + qtype_guidance
+        + "\n\n"
+        + qtype_contract
+        + "\n\n"
+        + qtype_template
+    )
+
+
+
+# === explicit question requirement final prompt wrapper v1 ===
+def _build_explicit_requirement_prompt(*args, **kwargs):
+    base = _build_question_type_contract_prompt(
+        *args,
+        **kwargs,
+    )
+
+    question_text = (
+        args[0]
+        if args
+        else kwargs.get("question_text")
+    )
+
+    explicit_contract = f"""
+[FINAL MANDATORY EXPLICIT REQUIREMENT CONTRACT]
+
+문제문:
+{question_text or ""}
+
+최종 JSON의 question_type_coverage 내부에 반드시
+explicit_requirement_coverage를 포함하라.
+
+"explicit_requirement_coverage": {{
+  "source": "question_text",
+  "extraction_confidence": "high | medium | low",
+  "requirements": [
+    {{
+      "requirement": "문제문이 직접 요구한 독립 항목",
+      "status": "present | partial | incorrect | missing",
+      "evidence": "답안 근거 또는 누락 설명",
+      "evidence_quote": "답안 원문에서 그대로 복사한 연속 구절; 누락이면 빈 문자열",
+      "state_confidence": "high | medium | low",
+      "is_core": true
+    }}
+  ]
+}}
+
+유형별 권장 전개와 문제문 직접 요구를 혼동하지 마라.
+문제문에 직접 없는 background, 현장 판단, trade-off를
+명시적 요구사항으로 만들지 마라.
+답안이 요구 항목을 직접 다뤘지만 핵심 사실이 틀리면
+incorrect로 평가하라.
+답안이 해당 요구 항목을 전혀 다루지 않았을 때만
+missing으로 평가하라.
+""".strip()
+
+    return base + "\n\n" + explicit_contract
+# === PLAN_B_GENERAL_LAYER_OWNERSHIP_PROMPT_V1 ===
+def _plan_b_general_layer_ownership_prompt_v1():
+    return """
+[PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]
+
+A/B/C/D/E 계층의 역할과 감점 소유권을 다음과 같이 고정한다.
+
+1. A는 문제 진입과 답안 구조만 평가한다. 기술 Fact 정확성, 현장 설계 깊이, 독창성을 A에서 다시 감점하지 않는다.
+2. B는 문제문이 명시적으로 요구한 항목에 직접 응답했는지 평가한다.
+   - missing: 요구항목을 전혀 다루지 않음
+   - partial/shallow: 요구항목을 다뤘으나 일부 범위나 조건이 빠짐
+   - addressed: 요구항목에 직접 대응함
+   Fact 정확성, 공식, 부호, 방향, 물리적 타당성, 기술 깊이는 C의 주된 책임이다.
+   명시적 요구를 다뤘다면 기술 오류나 깊이 부족만으로 B를 누락처럼 감점하지 않는다.
+   explicit_requirement_coverage의 incorrect 진단은 유지할 수 있으나 그 기술 오류의 주된 점수 감점은 C에 한 번만 귀속한다.
+3. C는 기술 Fact, 공식, 부호와 방향, 전제조건, 물리 모델의 정확성을 평가한다.
+   핵심 원리가 틀리면 incorrect, 결론을 반대로 만들거나 안전을 훼손하면 fatal로 본다.
+4. D는 실제 선정·설계·운전 판단을 평가한다. 적용 조건, worst-case, 검증 절차, 비용, 안전, 유지보수, 기존 설비 영향, 실행 가능성과 trade-off를 본다.
+   C의 Fact 부족만을 이유로 D를 다시 감점하지 않는다. C 오류가 D의 현장 결론을 무효화하면 보조 영향으로 기록하되 같은 오류의 전체 감점을 반복하지 않는다.
+5. E는 배경→요구→Fact→판단→결론의 논리 연결, 우선순위, 주장 일관성과 면접 방어 가능성을 평가한다.
+   C의 Fact 누락 또는 D의 현장 깊이 부족을 그대로 반복 감점하지 않는다. E 감점은 연결 단절, 모순, 근거 없는 결론처럼 E 자체 결함이 있을 때만 적용한다.
+6. 동일한 기술 issue는 하나의 primary_owner_layer에만 점수 감점을 귀속한다. 다른 계층은 secondary_context_layers로만 기록하며 deduction_applied=false로 둔다.
+7. 점수 목표, 특정 Topic, 특정 세션, 특정 답안 문자열에 따른 보정을 금지한다.
+
+최종 JSON root에 다음 진단 필드를 포함하라.
+
+"layer_issue_ownership": [
+  {
+    "issue_id": "일반화 가능한 snake_case 식별자",
+    "severity": "missing | partial | incorrect | fatal",
+    "primary_owner_layer": "A | B | C | D | E",
+    "secondary_context_layers": [],
+    "deduction_applied_layers": ["대표 감점 계층 하나"],
+    "reason": "대표 계층과 보조 영향의 구분"
+  }
+]
+
+layer_issue_ownership는 별도 점수체계가 아니라 같은 issue의 중복 감점을 방지하는 진단 계약이다.
+""".strip()
+
+
+_PLAN_C_DEPTH_VS_ERROR_CONTRACT_V1 = "\n".join(
+    (
+        "[PLAN_C_DEPTH_VS_ERROR_CALIBRATION_V1]",
+        "",
+        "C 계층의 correctness와 depth를 반드시 분리한다.",
+        "",
+        "1. correctness_error",
+        "- 정의, 부호, 공식, 단위, 인과관계 또는 물리 모델이 틀린 경우이다.",
+        "- 실제 오류 문장과 올바른 기준을 evidence에 제시한다.",
+        "- major/fatal은 핵심 결론을 무효화할 때만 사용한다.",
+        "",
+        "2. depth_gap",
+        "- 핵심 정의·원리·변수·방향·해석은 정확하지만 상세 유도,",
+        "  고급 모델, 추가 도식 또는 수치 예시가 부족한 경우이다.",
+        "- depth_gap은 incorrect가 아니며 severity는 partial 또는 minor이다.",
+        "",
+        "3. advanced_detail_missing",
+        "- 명시적으로 요구되지 않은 고급 유도식·정량 예시는",
+        "  고득점 보강 요소이며 핵심 오류의 근거가 아니다.",
+        "",
+        "layer_issue_ownership 각 항목에 다음 필드를 추가한다.",
+        '"issue_type": "correctness_error | depth_gap | advanced_detail_missing",',
+        '"severity": "none | partial | minor | major | fatal",',
+        '"invalidates_core_conclusion": false',
+        "",
+        "'핵심 이론 오류' 표현은 evidence가 있는 major/fatal",
+        "correctness_error에서만 허용한다.",
+    )
+)
+
+_PLAN_C_SEMANTIC_SCORING_CALIBRATION_V2 = "\n".join(
+    (
+        "[PLAN_C_SEMANTIC_SCORING_CALIBRATION_V2]",
+        "",
+        "동일한 결함을 A/B/C/D/E 여러 계층에서 반복 감점하지 않는다.",
+        "각 계층은 아래의 고유 평가 대상만 채점한다.",
+        "",
+        "A 구조:",
+        "- 제목, 번호, 소제목, 도식, 결론과 전개 순서를 평가한다.",
+        "- 배경 문장이 일반적이라는 이유만으로 구조 점수를 크게 낮추지 않는다.",
+        "- 배경→원리→설계→현장 적용→결론 흐름이 있으면 구조는 strong이다.",
+        "",
+        "B 명시 요구 대응:",
+        "- 문제에서 요구한 항목을 직접 다뤘는지만 평가한다.",
+        "- 요구 항목이 존재하고 핵심 의미가 맞으면 present로 판정한다.",
+        "- 상세 유도, 정량 예시, 고급 모델의 부족은 B가 아니라 C 또는 D의 depth_gap이다.",
+        "",
+        "C 기술 정확성과 해석:",
+        "- 정의, 부호, 공식, 단위, 물리 방향, 인과관계의 정확성을 평가한다.",
+        "- 핵심 개념이 맞고 상세 모델만 부족하면 depth_gap 또는 advanced_detail_missing이다.",
+        "- depth_gap은 incorrect가 아니며 다른 계층의 감점 근거로 재사용하지 않는다.",
+        "",
+        "D 현장 적용·설계 판단:",
+        "- fail 방향 선정, worst-case, 안전, 비용, 정비, 검증, 운전 리스크,",
+        "  CBM/TBM, 상태감시, 스마트 계기 활용을 현장 판단 근거로 인정한다.",
+        "- 정량 예시가 없더라도 설계 방향과 검증 항목이 있으면 field_judgement는 present이다.",
+        "- 수치 예시 부족은 D의 minor depth_gap이며 D 전체 부재로 판정하지 않는다.",
+        "",
+        "E 연결성과 방어 가능성:",
+        "- 원리→설계 기준→현장 운영의 인과 연결과 일관성을 평가한다.",
+        "- C 또는 D의 동일한 깊이 부족을 E에서 다시 감점하지 않는다.",
+        "",
+        "coverage status 계약:",
+        "- present: 요구 범주를 직접 다루고 핵심 의미가 맞음.",
+        "- partial: 요구 범주의 핵심 일부가 실제로 빠졌거나 의미가 불완전함.",
+        "- missing: 해당 범주를 전혀 다루지 않음.",
+        "- incorrect: 명시적 기술 오류가 있음.",
+        "- 단순히 더 깊게 쓸 수 있다는 이유로 present를 partial로 낮추지 않는다.",
+        "",
+        "원리·해석형 세부 판정:",
+        "- principle_mechanism은 핵심 작용 원리와 힘 방향을 설명하면 present이다.",
+        "- calculation_or_interpretation은 식과 변수 의미가 있으면 present,",
+        "  식 없이 정성 설명만 있으면 partial이다.",
+        "- result_meaning은 계산 결과 또는 설계식의 공학적 의미를 설명하면 present이다.",
+        "- field_judgement는 안전 위치, 선정 기준, 유지관리, 검증 또는 비용 판단 중",
+        "  두 가지 이상을 제시하면 present이다.",
+        "",
+        "점수 안정성:",
+        "- incorrect=0, missing=0, core requirement 누락=0인 depth-only 답안은",
+        "  A/B/D/E를 중간 이하 band로 동시에 낮추지 않는다.",
+        "- 핵심 오류가 없는 경우 각 계층의 reason은 정확한 강점과 하나의 보완점으로 작성한다.",
+    )
+)
+
+
+def _build_layer_ownership_prompt(*args, **kwargs):
+    base_prompt = _build_explicit_requirement_prompt(
+        *args,
+        **kwargs,
+    )
+
+    contracts = (
+        (
+            "[PLAN_B_GENERAL_LAYER_OWNERSHIP_V1]",
+            _plan_b_general_layer_ownership_prompt_v1(),
+        ),
+        (
+            "[PLAN_C_DEPTH_VS_ERROR_CALIBRATION_V1]",
+            _PLAN_C_DEPTH_VS_ERROR_CONTRACT_V1,
+        ),
+        (
+            "[PLAN_C_SEMANTIC_SCORING_CALIBRATION_V2]",
+            _PLAN_C_SEMANTIC_SCORING_CALIBRATION_V2,
+        ),
+    )
+
+    for marker, contract in contracts:
+        if marker not in base_prompt:
+            base_prompt = (
+                base_prompt
+                + "\n\n"
+                + contract
+            )
+
+    return base_prompt
+
+# GENERAL_EVIDENCE_CONTRACT_PROMPT_V1
+_GENERAL_EVIDENCE_CONTRACT_PROMPT_V1 = """
+[GENERAL_EVIDENCE_CONTRACT_V1]
+
+기존 question_type_coverage와 layer_issue_ownership 계약을 유지하면서,
+최종 JSON root object에 다음 진단 필드를 추가한다.
+
+"general_evidence_contract": {
+  "schema_version": "1.0",
+  "mode": "diagnostic_only",
+  "score_effect": "none",
+  "claims": [],
+  "formulas": [],
+  "defects": [],
+  "field_judgements": []
+}
+
+claims에는 requirement_id, claim_text, evidence_text, evidence_type,
+status, owner_layer, conditions를 포함한다.
+
+formulas에는 requirement_id, formula_text, variables, conditions,
+interpretation, integrity_status, integrity_notes, owner_layer를 포함한다.
+
+defects에는 defect_type, severity, owner_layer, requirement_id,
+evidence_text, explanation, affected_claim_ids, diagnostic_only를 포함한다.
+
+defect_type은 다음 네 값만 사용한다.
+- correctness_error
+- core_depth_gap
+- advanced_detail_missing
+- presentation_issue
+
+판정 규칙:
+1. 이 필드는 진단 전용이다. 이 단계에서 점수·상한·하드캡을 직접 변경하지 않는다.
+2. claim은 답안에 직접 근거가 있을 때만 supported로 판정한다.
+3. correctness_error는 명백한 정의·원리·수식·단위·부호·인과 오류에만 사용한다.
+4. core_depth_gap은 문제의 핵심 해석·설계·선정·검증 요소가 부족한 경우다.
+5. advanced_detail_missing은 핵심 결론은 성립하지만 고득점 세부사항이 부족한 경우다.
+6. presentation_issue는 연산자 유실, 변수 정의 불명확, 문장 중단 등 표현 무결성 문제다.
+7. presentation_issue를 근거 없이 correctness_error로 승격하지 않는다.
+8. 하나의 결함에는 primary owner layer 하나만 지정한다.
+9. 같은 결함을 여러 계층의 감점 사유로 복제하지 않는다.
+10. 기존 depth_gap은 general_evidence_contract에서 core_depth_gap으로 정규화한다.
+11. 답안에 없는 고급 내용을 단순 미기재했다는 이유로 correctness_error를 만들지 않는다.
+12. 출력은 반드시 valid JSON이어야 한다.
+""".strip()
+
+def _build_general_evidence_prompt(*args, **kwargs):
+    prompt = _build_layer_ownership_prompt(
+        *args,
+        **kwargs,
+    )
+
+    if "[GENERAL_EVIDENCE_CONTRACT_V1]" in prompt:
+        return prompt
+
+    return (
+        prompt.rstrip()
+        + "\n\n"
+        + _GENERAL_EVIDENCE_CONTRACT_PROMPT_V1
+        + "\n"
+    )
+
+
+def _grade_with_general_evidence(*args, **kwargs):
+    result = _grade_with_question_type_postprocess(
+        *args,
+        **kwargs,
+    )
+
+    from grading.evidence.general_evidence_contract import (
+        attach_general_evidence_contract,
+    )
+
+    return attach_general_evidence_contract(result)
+
+# QUESTION_DEMAND_CONTRACT_PROMPT_V1
+import json as _question_demand_json
+
+
+def _build_question_demand_prompt(*args, **kwargs):
+    prompt = _build_general_evidence_prompt(
+        *args,
+        **kwargs,
+    )
+
+    from grading.routing.question_demand_contract import (
+        build_question_demand_contract,
+        extract_question_text_from_call,
+    )
+
+    question_text = extract_question_text_from_call(
+        _build_general_evidence_prompt,
+        args,
+        kwargs,
+    )
+    contract = build_question_demand_contract(
+        question_text
+    )
+    contract_json = _question_demand_json.dumps(
+        contract,
+        ensure_ascii=False,
+        sort_keys=True,
+    )
+
+    guidance = """
+[QUESTION_DEMAND_CONTRACT_V1]
+
+다음 question_demand_contract는 질문 문장만으로 생성한 사전 요구 snapshot이다.
+requirements와 secondary_demands는 질문 전용이며 답안 내용으로 추가하지 않는다.
+이 snapshot의 primary_lens는 canonical Question Type이 생성되기 전의 fallback이다.
+최종 primary_lens는 기존 canonical Question Type router 결과만 소유한다.
+
+question_demand_contract:
+{contract_json}
+
+적용 규칙:
+1. requirements는 문제문의 명시 요구를 고정하며 답안 기반 요구 추가를 허용하지 않는다.
+2. secondary_demands는 primary_lens를 대체하지 않고 추가 요구로 평가한다.
+3. requirements의 각 requirement_id를 question_type_coverage 및
+   general_evidence_contract의 requirement_id와 연결한다.
+4. 답안에 특정 유형의 표현이 많더라도 질문에 없는 요구를 새로 만들지 않는다.
+5. 비교 표현이 답안에 있다는 이유만으로 COMPARE_SELECTION으로 바꾸지 않는다.
+6. 설계·계산·검증 요구가 secondary_demands에 있으면 해당 요구를 별도로 평가한다.
+7. final attach에서는 기존 canonical Question Type router 결과로 primary_lens를 다시 고정하며 이 snapshot은 이를 덮어쓰지 않는다.
+8. 이 계약 자체는 Python 점수·상한·하드캡을 직접 변경하지 않는다.
+9. explicit_requirement_coverage.requirements는 contract requirements와 정확히 같은 개수·순서·requirement_id를 사용한다.
+10. 두 개 이상의 requirement를 하나의 행으로 합치거나 requirement_id를 생략하지 않는다.
+11. 각 행은 requirement_id, requirement, status, mentioned, evidence, evidence_quote, state_confidence, is_core를 포함한다.
+12. mentioned는 답안이 해당 요구를 실제로 다뤘는지만 나타낸다. 언급했지만 틀린 경우에도 true이다.
+13. status는 present, partial, wrong, missing 중 하나이며, present는 단순 언급이 아니라 요구를 정확하고 충분히 충족한 경우에만 사용한다.
+14. 언급했지만 핵심 관계·정의·조건이 틀리면 mentioned=true, status=wrong으로 판정한다. 근거가 없으면 mentioned=false, status=missing으로 판정한다.
+15. mention coverage와 correctness coverage를 혼동하지 말고, wrong·partial·missing이 하나라도 있으면 완전 충족 또는 100% 정확 충족으로 판정하지 않는다.
+16. evidence_quote는 판단을 지지하는 답안 원문의 연속 구절을 그대로 복사한다. missing이면 빈 문자열을 쓴다. 요약·의역·평가문을 쓰지 않는다.
+17. state_confidence는 그 요구상태 판정 자체의 확신도이다. 근거가 경계적이면 medium 또는 low로 표시하고 high를 남용하지 않는다.
+""".strip().format(
+        contract_json=contract_json,
+    )
+
+    retry_contract = _stage35e2_projection_retry_contract.get()
+    if isinstance(retry_contract, dict):
+        retry_ids = _question_demand_json.dumps(
+            _stage35e2_contract_requirement_ids(retry_contract),
+            ensure_ascii=False,
+        )
+        guidance += (
+            "\n\n[EXACT_EXPLICIT_REQUIREMENT_REPAIR_V1]\n"
+            "이전 provider projection은 개수 또는 requirement_id가 계약과 불일치하여 폐기됐다.\n"
+            f"이번 응답은 다음 ID를 정확히 같은 순서로 한 번씩만 반환한다: {retry_ids}\n"
+            "행 병합, ID 생략, 자유문장 requirement 대체를 금지한다.\n"
+            "[/EXACT_EXPLICIT_REQUIREMENT_REPAIR_V1]"
+        )
+
+    if "[QUESTION_DEMAND_CONTRACT_V1]" in prompt:
+        return prompt
+
+    return prompt.rstrip() + "\n\n" + guidance + "\n"
+
+
+# STAGE35E2_EXACT_PROVIDER_PROJECTION_RETRY_V1
+from contextvars import ContextVar as _stage35e2_ContextVar
+import copy as _stage35e2_copy
+
+_stage35e2_projection_retry_contract = _stage35e2_ContextVar(
+    "stage35e2_projection_retry_contract",
+    default=None,
+)
+
+
+def _stage35e2_contract_requirement_ids(contract):
+    rows = contract.get("requirements") if isinstance(contract, dict) else None
+    if not isinstance(rows, list):
+        return []
+    return [
+        str(row.get("requirement_id") or "").strip()
+        for row in rows
+        if isinstance(row, dict)
+    ]
+
+
+def _stage35e2_explicit_requirement_lists(value):
+    found = []
+    seen = set()
+
+    def walk(node):
+        if isinstance(node, dict):
+            explicit = node.get("explicit_requirement_coverage")
+            if isinstance(explicit, dict):
+                rows = explicit.get("requirements")
+                if isinstance(rows, list) and id(rows) not in seen:
+                    seen.add(id(rows))
+                    found.append(rows)
+            for child in node.values():
+                walk(child)
+        elif isinstance(node, list):
+            for child in node:
+                walk(child)
+
+    walk(value)
+    return found
+
+
+def _stage35e2_projection_matches_contract(result, contract):
+    expected = _stage35e2_contract_requirement_ids(contract)
+    if not expected:
+        return True
+    if len(expected) != len(set(expected)) or any(not item for item in expected):
+        return False
+    for rows in _stage35e2_explicit_requirement_lists(result):
+        actual = [
+            str(row.get("requirement_id") or "").strip()
+            for row in rows
+            if isinstance(row, dict)
+        ]
+        valid_state_rows = all(
+            isinstance(row, dict)
+            and str(row.get("status") or "").strip().lower()
+            in {
+                "present",
+                "partial",
+                "wrong",
+                "incorrect",
+                "missing",
+            }
+            and isinstance(row.get("mentioned"), bool)
+            and (
+                row["mentioned"]
+                is (
+                    str(row.get("status") or "").strip().lower()
+                    != "missing"
+                )
+            )
+            for row in rows
+        )
+        if (
+            actual == expected
+            and len(rows) == len(expected)
+            and valid_state_rows
+        ):
+            return True
+    return False
+
+
+def _stage35e2_identity_tokens(value):
+    tokens = set()
+    for raw in re.findall(
+        r"[0-9a-zA-Z가-힣]+",
+        str(value or "").casefold(),
+    ):
+        token = re.sub(
+            r"(?:으로|에서|의|을|를|이|가|은|는|에|로|과|와)$",
+            "",
+            raw,
+        )
+        if token and token not in {"및"}:
+            tokens.add(token)
+    return tokens
+
+
+def _stage35e2_normalize_projection_state_fields(result, contract=None):
+    """Repair schema-only fields; restore IDs only on exact contract text."""
+    if not isinstance(result, dict):
+        return result
+    normalized = _stage35e2_copy.deepcopy(result)
+    aliases = {
+        "incorrect": "wrong",
+        "absent": "missing",
+        "correct": "present",
+        "fulfilled": "present",
+        "shallow": "partial",
+    }
+    text_to_id = {}
+    label_to_id = {}
+    expected_ids = set()
+    if isinstance(contract, dict):
+        for item in contract.get("requirements") or []:
+            if not isinstance(item, dict):
+                continue
+            requirement_id = str(item.get("requirement_id") or "").strip()
+            requirement_text = re.sub(
+                r"\s+", " ", str(item.get("requirement_text") or "")
+            ).strip().casefold()
+            if requirement_id and requirement_text:
+                text_to_id.setdefault(requirement_text, []).append(requirement_id)
+                expected_ids.add(requirement_id)
+                demand_label = re.sub(
+                    r"\s+", " ", str(item.get("demand_label") or "")
+                ).strip().casefold()
+                if demand_label:
+                    label_to_id.setdefault(demand_label, []).append(requirement_id)
+    for rows in _stage35e2_explicit_requirement_lists(normalized):
+        for row in rows:
+            if not isinstance(row, dict):
+                continue
+            status = str(row.get("status") or "").strip().lower()
+            status = aliases.get(status, status)
+            if status not in {"present", "partial", "wrong", "missing"}:
+                continue
+            row["status"] = status
+            row["mentioned"] = status != "missing"
+            if not str(row.get("requirement_id") or "").strip():
+                row_text = re.sub(
+                    r"\s+",
+                    " ",
+                    str(
+                        row.get("requirement")
+                        or row.get("requirement_text")
+                        or ""
+                    ),
+                ).strip().casefold()
+                matched_ids = text_to_id.get(row_text) or []
+                if not matched_ids:
+                    matched_ids = label_to_id.get(row_text) or []
+                if len(matched_ids) == 1:
+                    row["requirement_id"] = matched_ids[0]
+                else:
+                    raw_requirement = str(
+                        row.get("requirement")
+                        or row.get("requirement_text")
+                        or ""
+                    ).strip()
+                    if raw_requirement in expected_ids:
+                        row["requirement_id"] = raw_requirement
+        if expected_ids:
+            expected_order = _stage35e2_contract_requirement_ids(contract)
+            if len(rows) == len(expected_order):
+                missing_indexes = [
+                    index for index, row in enumerate(rows)
+                    if isinstance(row, dict)
+                    and not str(row.get("requirement_id") or "").strip()
+                ]
+                # Bounded schema repair: one omitted ID is recoverable only
+                # when every other row already proves the canonical position.
+                if len(missing_indexes) == 1 and all(
+                    index in missing_indexes
+                    or (
+                        isinstance(row, dict)
+                        and str(row.get("requirement_id") or "").strip()
+                        == expected_order[index]
+                    )
+                    for index, row in enumerate(rows)
+                ):
+                    missing_index = missing_indexes[0]
+                    missing_row = rows[missing_index]
+                    missing_text = str(
+                        missing_row.get("requirement")
+                        or missing_row.get("requirement_text")
+                        or ""
+                    ).strip()
+                    canonical_text = str(
+                        contract["requirements"][missing_index].get(
+                            "requirement_text"
+                        ) or ""
+                    ).strip()
+                    if (
+                        missing_text
+                        and _stage35e2_identity_tokens(missing_text)
+                        == _stage35e2_identity_tokens(canonical_text)
+                    ):
+                        missing_row["requirement_id"] = expected_order[missing_index]
+            canonical_rows = [
+                row
+                for row in rows
+                if isinstance(row, dict)
+                and str(row.get("requirement_id") or "").strip()
+                in expected_ids
+            ]
+            canonical_ids = [
+                str(row.get("requirement_id") or "").strip()
+                for row in canonical_rows
+            ]
+            if canonical_ids == expected_order:
+                rows[:] = canonical_rows
+    return normalized
+
+
+def _stage35e2_attach_projection_validation(result, contract, attempts):
+    if not isinstance(result, dict):
+        return result
+    result["explicit_requirement_projection_validation"] = {
+        "schema_version": "stage35e2_exact_projection_v1",
+        "valid": True,
+        "expected_requirement_ids": _stage35e2_contract_requirement_ids(contract),
+        "provider_attempts": attempts,
+        "repair_retry_used": attempts > 1,
+    }
+    parsed = result.get("parsed")
+    if isinstance(parsed, dict):
+        parsed["explicit_requirement_projection_validation"] = dict(
+            result["explicit_requirement_projection_validation"]
+        )
+    return result
+
+
+def _stage35e2_projection_diagnostic(result, contract):
+    expected = _stage35e2_contract_requirement_ids(contract)
+    lists = _stage35e2_explicit_requirement_lists(result)
+    return {
+        "expected_count": len(expected),
+        "projection_count": len(lists),
+        "rows": [
+            {
+                "row_count": len(rows),
+                "requirement_ids": [
+                    str(row.get("requirement_id") or "").strip()
+                    if isinstance(row, dict)
+                    else ""
+                    for row in rows
+                ],
+                "requirements": [
+                    str(
+                        row.get("requirement")
+                        or row.get("requirement_text")
+                        or ""
+                    ).strip()[:120]
+                    if isinstance(row, dict)
+                    else ""
+                    for row in rows
+                ],
+            }
+            for rows in lists[:3]
+        ],
+    }
+
+
+def _stage35e2_fail_closed_projection(result, contract, attempts):
+    if not isinstance(result, dict):
+        return result
+    output = _stage35e2_copy.deepcopy(result)
+
+    def clear(node):
+        if isinstance(node, dict):
+            explicit = node.get("explicit_requirement_coverage")
+            if isinstance(explicit, dict):
+                explicit["requirements"] = []
+                explicit["projection_status"] = "invalid_fail_closed"
+            for child in node.values():
+                clear(child)
+        elif isinstance(node, list):
+            for child in node:
+                clear(child)
+
+    clear(output)
+    validation = {
+        "schema_version": "stage35e2_exact_projection_v1",
+        "valid": False,
+        "fail_closed": True,
+        "reason": "provider_projection_mismatch_after_retry",
+        "expected_requirement_ids": _stage35e2_contract_requirement_ids(contract),
+        "provider_attempts": attempts,
+        "repair_retry_used": attempts > 1,
+        "diagnostic": _stage35e2_projection_diagnostic(result, contract),
+    }
+    output["explicit_requirement_projection_validation"] = validation
+    parsed = output.get("parsed")
+    if isinstance(parsed, dict):
+        parsed["explicit_requirement_projection_validation"] = dict(validation)
+    return output
+
+
+def gemini_semantic_grade(*args, **kwargs):
+    from grading.routing.question_demand_contract import (
+        attach_question_demand_contract,
+        build_question_demand_contract,
+        extract_question_text_from_call,
+    )
+
+    question_text = extract_question_text_from_call(
+        _grade_with_general_evidence,
+        args,
+        kwargs,
+    )
+    contract = build_question_demand_contract(question_text)
+    enforce_exact = bool(contract.get("topic_pack_demand_axes_applied"))
+
+    result = _grade_with_general_evidence(
+        *args,
+        **kwargs,
+    )
+    result = _stage35e2_normalize_projection_state_fields(result, contract)
+    attempts = 1
+    while (
+        enforce_exact
+        and attempts < 3
+        and not _stage35e2_projection_matches_contract(result, contract)
+    ):
+        token = _stage35e2_projection_retry_contract.set(contract)
+        try:
+            result = _grade_with_general_evidence(
+                *args,
+                **kwargs,
+            )
+            result = _stage35e2_normalize_projection_state_fields(result, contract)
+            attempts += 1
+        finally:
+            _stage35e2_projection_retry_contract.reset(token)
+
+    if enforce_exact and not _stage35e2_projection_matches_contract(
+        result,
+        contract,
+    ):
+        result = _stage35e2_fail_closed_projection(
+            result,
+            contract,
+            attempts,
+        )
+        return attach_question_demand_contract(
+            result,
+            question_text,
+            canonical_primary_lens=contract.get("primary_lens"),
+        )
+
+    attached = attach_question_demand_contract(
+        result,
+        question_text,
+        canonical_primary_lens=contract.get("primary_lens"),
+    )
+    if (
+        _stage35e2_contract_requirement_ids(contract)
+        and _stage35e2_projection_matches_contract(attached, contract)
+    ):
+        attached = _stage35e2_attach_projection_validation(
+            attached,
+            contract,
+            attempts,
+        )
+    from grading.routing.demand_evidence_resolution import resolve_semantic_demand_evidence
+    answer_text = kwargs.get("answer_text")
+    if answer_text is None and len(args) >= 2:
+        answer_text = args[1]
+    return resolve_semantic_demand_evidence(attached, str(answer_text or ""))
+
+# HYBRID_GENERAL_GRADING_PROMPT_V1
+def _build_hybrid_general_prompt(*args, **kwargs):
+    prompt = _build_question_demand_prompt(
+        *args,
+        **kwargs,
+    )
+
+    subject_rubric = kwargs.get("subject_rubric")
+    if subject_rubric is None and len(args) >= 4:
+        subject_rubric = args[3]
+
+    from grading.evidence.hybrid_general_prompt import (
+        HYBRID_GENERAL_PROMPT_MARKER,
+        build_hybrid_general_prompt_section,
+    )
+
+    section = build_hybrid_general_prompt_section(
+        subject_rubric
+    )
+    if not section:
+        return prompt
+    if HYBRID_GENERAL_PROMPT_MARKER in prompt:
+        return prompt
+
+    return prompt.rstrip() + "\n\n" + section + "\n"
+
+
+def _multi_topic_demand_scope_prompt_v1() -> str:
+    return "[MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]\nWhen Topic Router evidence is MULTI_TOPIC or HYBRID_TOPIC_GENERAL, each\nTopic's model_answer and fact_anchor are knowledge references, not a checklist\nof every item that the student must write. In Hybrid mode, General evidence is\nlimited to uncovered Question Demands and must not cause Topic evidence to\nexpand beyond the Demands owned by that Topic.\n\nScope rules:\n1. Use semantic demand_mappings to identify the Question Demand(s) owned by each Topic.\n2. For omission, completeness, layer scoring, and improvement advice, require only\n   details that directly support those mapped Demand(s).\n3. Do not penalize, lower a layer score, or recommend adding a Topic anchor,\n   high_score_feature, expected_structure item, common_missing_point, or\n   field_connection_point merely because it exists in Topic evidence when the\n   mapped Demand(s) do not ask for it.\n4. Do not transfer requirements between Topics, from Topic evidence into\n   uncovered General Demands, or between unrelated Demands.\n   Example: load-cell eccentric-load, overload, adhesion, wiring, shielding, or\n   grounding criteria must not become missing record-retention or disposal\n   requirements unless the question explicitly asks for those items.\n5. If several Demands map to one Topic, use the union of those mapped Demands\n   as that Topic's grading scope. In Hybrid mode, role=NONE / uncovered Demands\n   are not owned by that Topic even if the routing payload carries a topic_id\n   placeholder for provenance.\n6. Topic evidence may explain or verify an in-scope Demand, but it must not silently expand the question scope.\n7. General Engineering evidence in Hybrid mode applies only to uncovered\n   Question Demands and must not be used to re-score Topic-covered Demands.\n8. This scope rule limits omission and completeness expectations only. It\n   does not excuse an explicit factual error that the student actually wrote.\n9. Preserve one-question-one-score. Do not score Topics separately, sum Topic\n   scores, average Topic scores, or create a separate General score.\n\nBefore finalizing feedback, verify that every claimed missing point can be\ntraced to an explicit Question Demand, or is necessary to correctly explain\nthat Demand. Otherwise remove that missing-point criticism.\n[/MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]"
+
+
+def _multi_topic_demand_scope_applicable_v1(subject_rubric) -> bool:
+    if not isinstance(subject_rubric, dict):
+        return False
+
+    multi_topic = subject_rubric.get("multi_topic_grading_evidence")
+    if (
+        isinstance(multi_topic, dict)
+        and multi_topic.get("routing_mode") == "MULTI_TOPIC"
+    ):
+        return True
+
+    hybrid = subject_rubric.get("hybrid_general_grading_evidence")
+    if not isinstance(hybrid, dict):
+        return False
+
+    return (
+        hybrid.get("coverage_kind") == "HYBRID_TOPIC_GENERAL"
+        and hybrid.get("routing_mode") == "SINGLE_TOPIC"
+    )
+
+
+def build_gemini_grading_prompt(*args, **kwargs):
+    """Build the complete Gemini prompt through an explicit composition chain."""
+    prompt = _build_hybrid_general_prompt(
+        *args,
+        **kwargs,
+    )
+    if not isinstance(prompt, str):
+        raise TypeError(
+            "build_gemini_grading_prompt must return str"
+        )
+    subject_rubric = kwargs.get("subject_rubric")
+    if subject_rubric is None and len(args) >= 4:
+        subject_rubric = args[3]
+    if not _multi_topic_demand_scope_applicable_v1(subject_rubric):
+        return prompt
+    marker = "[MULTI_TOPIC_DEMAND_SCOPE_CONTRACT_V1]"
+    if marker in prompt:
+        return prompt
+    return (
+        prompt.rstrip()
+        + "\n\n"
+        + _multi_topic_demand_scope_prompt_v1()
+        + "\n"
+    )

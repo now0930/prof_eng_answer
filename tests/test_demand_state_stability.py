@@ -6,7 +6,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from demand_state_stability import analyze_stability
+from grading.routing.demand_state_stability import analyze_stability
 
 
 def _gold():

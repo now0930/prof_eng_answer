@@ -17,13 +17,13 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from bot import call_ollama, call_ollama_score_adjudicator
-from expert_accuracy_benchmark import (
+from grading.quality.expert_accuracy_benchmark import (
     load_jsonl,
     prediction_from_grade,
     validate_gold_case,
 )
-from grade_score_reconciler import reconcile_grade_score
-from grade_submission_normalizer import (
+from grading.scoring.grade_score_reconciler import reconcile_grade_score
+from grading.scoring.grade_submission_normalizer import (
     attach_submission_normalization,
     normalize_grade_submission,
 )
@@ -31,7 +31,7 @@ from grading_agents import (
     finalize_grade_after_score_reconciliation,
     run_agent_pipeline,
 )
-from verdict_consistency import enforce_final_decision_consistency
+from grading.scoring.verdict_consistency import enforce_final_decision_consistency
 
 
 DEFAULT_GOLDEN = ROOT / "calibration" / "expert_accuracy_golden.jsonl"

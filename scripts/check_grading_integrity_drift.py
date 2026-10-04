@@ -16,9 +16,9 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from question_demand_contract import build_question_demand_contract
+from grading.routing.question_demand_contract import build_question_demand_contract
 from scripts.replay_sil_issue1_session import run as replay_issue1
-from sil_relation_integrity import evaluate_sil_relation_integrity
+from grading.evidence.sil_relation_integrity import evaluate_sil_relation_integrity
 
 
 DEFAULT_BASELINE = REPO / "calibration" / "grading_integrity_drift_baseline.json"

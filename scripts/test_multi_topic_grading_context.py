@@ -6,13 +6,13 @@ from pathlib import Path
 import unittest
 from unittest.mock import patch
 
-from model_answer_router import find_model_answer_reference
-from rubric_registry import load_model_answer_bank
-from semantic_router_shadow import (
+from grading.routing.model_answer_router import find_model_answer_reference
+from grading.rubrics.rubric_registry import load_model_answer_bank
+from grading.routing.semantic_router_shadow import (
     augment_rule_candidates_for_shadow,
 )
 
-from multi_topic_grading_context import (
+from grading.evidence.multi_topic_grading_context import (
     MULTI_TOPIC_GRADING_CONTEXT_VERSION,
     MULTI_TOPIC_GRADING_ENV,
     build_multi_topic_grading_context,

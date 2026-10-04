@@ -9,10 +9,10 @@ import urllib.request
 from datetime import datetime
 from pathlib import Path
 from grading_agents import run_agent_pipeline
-from grade_output_summarizer import summarize_grade_for_telegram
-from llm_provider_settings import get_chat_provider, set_chat_provider, reset_chat_provider, provider_label
-from grade_score_reconciler import reconcile_grade_score
-from grade_submission_normalizer import (
+from grading.scoring.grade_output_summarizer import summarize_grade_for_telegram
+from grading.providers.settings import get_chat_provider, set_chat_provider, reset_chat_provider, provider_label
+from grading.scoring.grade_score_reconciler import reconcile_grade_score
+from grading.scoring.grade_submission_normalizer import (
     attach_submission_normalization,
     normalize_grade_submission,
 )
@@ -63,9 +63,11 @@ HELP_TEXT = """
 기타 명령:
 /status  현재 세션 상태
 /rubric  현재 채점 기준 보기
+/review  오늘 복습 Queue 확인
 /help    도움말
 /provider 현재 LLM Provider 확인
 /provider auto|gemini|clova|reset
+/review done <topic_id>  복습 완료와 다음 일정 기록
 """.strip()
 
 
@@ -600,7 +602,7 @@ def _clean_display_list(items):
 
 
 def _build_ollama_request(prompt):
-    from llm_sampling import (
+    from grading.providers.sampling import (
         build_llm_request_contract,
     )
 
@@ -834,7 +836,7 @@ def grade_answer(chat_id, raw_text, state):
             normalization_evidence,
         )
         if parsed.get("marker") != "DETERMINISTIC_GRADING_PRIMARY_V1":
-            from verdict_consistency import (
+            from grading.scoring.verdict_consistency import (
                 enforce_final_decision_consistency,
             )
             parsed = enforce_final_decision_consistency(
@@ -852,6 +854,40 @@ def grade_answer(chat_id, raw_text, state):
             json.dumps(parsed, ensure_ascii=False, indent=2),
             encoding="utf-8"
         )
+
+        topic_id = parsed.get("topic_id") or parsed.get("inferred_topic_id")
+        if topic_id:
+            try:
+                from study.learning_runtime import record_completed_grade
+                from study.training_history import TrainingHistoryStore
+
+                history_path = Path(
+                    os.getenv("TRAINING_HISTORY_DB")
+                    or (DATA_DIR / "training_history.sqlite3")
+                )
+                if not history_path.is_absolute():
+                    history_path = BASE_DIR / history_path
+                snapshot = record_completed_grade(
+                    TrainingHistoryStore(history_path),
+                    learner_id=str(chat_id),
+                    sid=sid,
+                    grade=parsed,
+                    submission_normalization=submission_normalization,
+                    master_directory=BASE_DIR / "master_topic_packs",
+                    session_directory=session_dir,
+                )
+                log(
+                    "learning history saved: "
+                    f"session={sid} attempt={snapshot['attempt_id']} "
+                    f"queue_items={len(snapshot['queue']['items'])}"
+                )
+            except Exception as exc:
+                # Learning history is a secondary write. It must never alter
+                # the already finalized grade or block the grading response.
+                try:
+                    log(f"learning history write failed for {sid}: {exc}")
+                except Exception:
+                    pass
 
     meta["status"] = "graded"
     meta["graded_at"] = datetime.now().isoformat(timespec="seconds")
@@ -955,7 +991,7 @@ def format_result(parsed, sid=None):
         parsed.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1"
     )
     if not deterministic_grade:
-        from verdict_consistency import (
+        from grading.scoring.verdict_consistency import (
             enforce_final_decision_consistency,
         )
 
@@ -1298,7 +1334,7 @@ def _format_question_type_coverage_display(grade):
     if not isinstance(grade, dict):
         return ""
 
-    from verdict_consistency import (
+    from grading.scoring.verdict_consistency import (
         enforce_final_decision_consistency,
     )
 
@@ -1735,6 +1771,159 @@ def _finalize_pending_grade(chat_id, state):
         )
     send_message(chat_id, format_result(parsed, raw_result))
     send_message(chat_id, f"저장 위치: /workspace/prof_eng_answer/data/sessions/{sid}")
+    if (SESSIONS_DIR / sid / "learning_history.json").exists():
+        send_message(
+            chat_id,
+            "학습 이력을 저장했습니다. /review 로 오늘 복습할 2문제를 확인하고, "
+            "/review done <topic_id> 로 복습 완료를 기록할 수 있습니다.",
+        )
+
+
+def _handle_review_command(chat_id, command_text):
+    from study.learning_runtime import (
+        LearningRuntimeError,
+        complete_topic_review,
+        create_daily_review_queue,
+        review_material_for_topic,
+    )
+    from study.training_history import TrainingHistoryStore
+
+    history_path = Path(
+        os.getenv("TRAINING_HISTORY_DB")
+        or (DATA_DIR / "training_history.sqlite3")
+    )
+    if not history_path.is_absolute():
+        history_path = BASE_DIR / history_path
+    history = TrainingHistoryStore(history_path)
+    arguments = command_text.split()
+
+    if len(arguments) == 3 and arguments[1].lower() == "done":
+        topic_id = arguments[2]
+        try:
+            queue_date = datetime.now().astimezone().date().isoformat()
+            queue = history.get_daily_queue(str(chat_id), queue_date)
+            if queue is None or not any(
+                item["topic_id"] == topic_id and item.get("status") == "pending"
+                for item in queue["items"]
+            ):
+                send_message(chat_id, "해당 Topic은 오늘 복습 Queue에 없거나 이미 완료되었습니다. /review 로 확인해 주세요.")
+                return
+            record = complete_topic_review(
+                history,
+                learner_id=str(chat_id),
+                topic_id=topic_id,
+            )
+            history.complete_daily_queue_item(str(chat_id), queue_date, topic_id)
+        except LearningRuntimeError as exc:
+            send_message(chat_id, f"복습 완료를 기록하지 못했습니다: {exc}")
+            return
+        send_message(
+            chat_id,
+            f"복습 완료: {topic_id}\n다음 복습 예정: {record['next_review_at']}",
+        )
+        return
+
+    if len(arguments) != 1:
+        send_message(chat_id, "사용법: /review 또는 /review done <topic_id>")
+        return
+    try:
+        generated_at = datetime.now().astimezone().isoformat(timespec="seconds")
+        queue, titles = create_daily_review_queue(
+            history,
+            learner_id=str(chat_id),
+            master_directory=BASE_DIR / "master_topic_packs",
+            generated_at=generated_at,
+        )
+    except Exception as exc:
+        log(f"review queue generation failed for chat {chat_id}: {exc}")
+        send_message(chat_id, "복습 목록을 만들지 못했습니다. 잠시 후 다시 시도해 주세요.")
+        return
+    if not queue["items"]:
+        send_message(chat_id, "오늘 복습할 항목이 없습니다. 새 Topic Pack이 등록되면 여기에 표시됩니다.")
+        return
+
+    labels = {
+        "weak_topic": "약점 보완",
+        "long_unreviewed_topic": "장기 기억",
+        "recently_changed_topic": "최근 변경",
+        "new_topic": "새 Topic",
+    }
+    lines = ["오늘의 복습 Queue (최대 2문제)"]
+
+    def display_item(value):
+        if isinstance(value, str):
+            text = value.strip()
+            return text if len(text) <= 180 else text[:177].rstrip() + "..."
+        if not isinstance(value, dict):
+            return ""
+        main = next(
+            (
+                value.get(key)
+                for key in ("section", "statement", "claim", "description", "pattern", "text")
+                if isinstance(value.get(key), str) and value.get(key).strip()
+            ),
+            "",
+        )
+        intent = value.get("intent")
+        text = f"{main} — {intent}" if main and isinstance(intent, str) and intent.strip() else main
+        return text if len(text) <= 180 else text[:177].rstrip() + "..."
+
+    for index, item in enumerate(queue["items"], start=1):
+        title = titles.get(item["topic_id"], item["topic_id"])
+        lines.append(
+            f"{index}. [{labels[item['reason']]}] {title}\n"
+            f"   topic_id: {item['topic_id']} ({'완료' if item.get('status') == 'completed' else '대기'})"
+        )
+        if item.get("question_text"):
+            lines.append(f"   문제: {item['question_text']}")
+        try:
+            material = review_material_for_topic(
+                history,
+                learner_id=str(chat_id),
+                topic_id=item["topic_id"],
+                master_directory=BASE_DIR / "master_topic_packs",
+            )
+        except Exception as exc:
+            log(f"review material unavailable for {item['topic_id']}: {exc}")
+            continue
+
+        training = material["training"]
+        outline = [display_item(value) for value in training.get("recommended_outline", [])]
+        outline = [value for value in outline if value][:2]
+        if outline:
+            lines.append("   학습 개요: " + " / ".join(outline))
+        facts = [display_item(value) for value in training.get("fact_anchors", [])]
+        facts = [value for value in facts if value][:2]
+        if facts:
+            lines.append("   핵심 사실: " + " / ".join(facts))
+        high_score = [display_item(value) for value in training.get("high_score_points", [])]
+        high_score = [value for value in high_score if value][:2]
+        if high_score:
+            lines.append("   고득점 포인트: " + " / ".join(high_score))
+
+        from study.review_presentation import source_review_lines
+        lines.extend(source_review_lines(training))
+
+        feedback = material.get("feedback")
+        if isinstance(feedback, dict) and feedback.get("score_effect") == "none":
+            missing = [display_item(value) for value in feedback.get("common_missing_points", [])]
+            missing = [value for value in missing if value][:2]
+            guidance = feedback.get("diagnostic_guidance", {})
+            focus = guidance.get("focus", []) if isinstance(guidance, dict) else []
+            focus = [display_item(value) for value in focus]
+            focus = [value for value in focus if value][:2]
+            advice = missing or focus
+            if advice:
+                lines.append("   이전 채점 시점의 피드백 가이드 (점수 영향 없음): " + " / ".join(advice))
+
+        prior = material.get("prior_diagnosis", {})
+        if isinstance(prior, dict):
+            weaknesses = [display_item(value) for value in prior.get("weaknesses", [])]
+            weaknesses = [value for value in weaknesses if value][:2]
+            if weaknesses:
+                lines.append("   이전 진단 약점: " + " / ".join(weaknesses))
+    lines.append("복습 후 /review done <topic_id> 로 기록하세요.")
+    send_message(chat_id, "\n".join(lines))
 
 
 def handle_text(message, chat_id, state):
@@ -1742,6 +1931,10 @@ def handle_text(message, chat_id, state):
 
     if text.startswith("/start") or text.startswith("/help"):
         send_message(chat_id, HELP_TEXT)
+        return
+
+    if text.strip() == "/review" or text.startswith("/review "):
+        _handle_review_command(chat_id, text.strip())
         return
 
     if text.startswith("/new"):

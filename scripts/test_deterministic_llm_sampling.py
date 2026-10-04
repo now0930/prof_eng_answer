@@ -7,10 +7,10 @@ import unittest
 from pathlib import Path
 from unittest import mock
 
-import clova_grader
-import gemini_grader
-import originality_grader
-from llm_sampling import (
+from grading.providers import clova as clova_grader
+from grading.providers import gemini as gemini_grader
+import grading.scoring.originality_grader as originality_grader
+from grading.providers.sampling import (
     SAMPLING_CONTRACT_VERSION,
     build_llm_request_contract,
 )
@@ -172,7 +172,7 @@ class DeterministicSamplingTests(
             },
             clear=False,
         ), mock.patch(
-            "gemini_grader."
+            "grading.providers.gemini."
             "urllib.request.urlopen",
             side_effect=fake_urlopen,
         ):
@@ -249,7 +249,7 @@ class DeterministicSamplingTests(
             },
             clear=False,
         ), mock.patch(
-            "gemini_grader."
+            "grading.providers.gemini."
             "urllib.request.urlopen",
             side_effect=fake_urlopen,
         ), mock.patch(
@@ -304,7 +304,7 @@ class DeterministicSamplingTests(
             },
             clear=False,
         ), mock.patch(
-            "originality_grader."
+            "grading.scoring.originality_grader."
             "urllib.request.urlopen",
             side_effect=fake_urlopen,
         ):
@@ -346,7 +346,7 @@ class DeterministicSamplingTests(
 
     def test_clova_exact_impl_and_retry(self):
         source = Path(
-            "clova_grader.py"
+            "grading/providers/clova.py"
         ).read_text(
             encoding="utf-8"
         )
@@ -418,11 +418,11 @@ class DeterministicSamplingTests(
             },
             clear=False,
         ), mock.patch(
-            "clova_grader."
+            "grading.providers.clova."
             "urllib.request.urlopen",
             side_effect=fake_urlopen,
         ), mock.patch(
-            "clova_grader.time.sleep",
+            "grading.providers.clova.time.sleep",
             return_value=None,
         ):
             result = (
@@ -557,7 +557,7 @@ class OllamaCapAdjudicationTests(
     def test_cap_adjudicator_keeps_metadata(
         self,
     ):
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             call_llm_cap_adjudicator,
         )
 
@@ -609,7 +609,7 @@ class OllamaCapAdjudicationTests(
     def test_schema_repair_records_requests(
         self,
     ):
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             call_llm_cap_adjudicator,
         )
 

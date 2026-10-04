@@ -12,13 +12,13 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 import bot
-from grade_output_summarizer import summarize_grade_for_telegram
-from logic_check_evaluator import evaluate_logic_checks
-from question_type_coverage_adapter import (
+from grading.scoring.grade_output_summarizer import summarize_grade_for_telegram
+from grading.evidence.logic_check_evaluator import evaluate_logic_checks
+from grading.routing.question_type_coverage_adapter import (
     attach_question_type_coverage_feedback,
 )
-from sil_relation_integrity import SIL_TARGET_TOPIC_ID
-from verdict_consistency import enforce_final_decision_consistency
+from grading.evidence.sil_relation_integrity import SIL_TARGET_TOPIC_ID
+from grading.scoring.verdict_consistency import enforce_final_decision_consistency
 
 
 FIXTURE = REPO / "calibration" / (

@@ -84,13 +84,13 @@ trap restore_transient_reports EXIT
 echo "===== py_compile: core entrypoints ====="
 python3 -m py_compile \
   bot.py \
-  grade_output_summarizer.py \
-  logic_check_evaluator.py \
-  grade_score_reconciler.py \
+  grading/scoring/grade_output_summarizer.py \
+  grading/evidence/logic_check_evaluator.py \
+  grading/scoring/grade_score_reconciler.py \
   grading_agents.py \
-  originality_grader.py \
-  rubric_registry.py \
-  rubric_bank_paths.py \
+  grading/scoring/originality_grader.py \
+  grading/rubrics/rubric_registry.py \
+  grading/rubrics/rubric_bank_paths.py \
   scripts/rubric_manager.py \
   scripts/topic_pack_workflow_controller.py \
   scripts/audit_topic_pack_atomicity.py \
@@ -101,32 +101,32 @@ python3 -m py_compile \
   scripts/measure_expert_accuracy.py \
   scripts/check_accuracy_release_gate.py \
   scripts/regrade_expert_accuracy_seed.py \
-  expert_accuracy_benchmark.py \
-  accuracy_release_gate.py \
-  canonical_grading_evidence.py \
-  canonical_claim_extractor.py \
-  quantity_dimension_evaluator.py \
-  topic_machine_contract.py \
-  deterministic_replay_audit.py \
-  local_semantic_resolver.py \
-  deterministic_grading_shadow.py \
-  grading_authority_policy.py \
-  fatal_taxonomy.py \
-  engineering_invariant_evaluator.py \
-  deterministic_requirement_evaluator.py \
-  deterministic_score_engine.py \
-  deterministic_score_evidence.py \
-  deterministic_topic_router.py \
-  deterministic_primary_grader.py \
-  fact_anchor_evidence_adapter.py \
+  grading/quality/expert_accuracy_benchmark.py \
+  grading/quality/accuracy_release_gate.py \
+  grading/evidence/canonical_grading_evidence.py \
+  grading/evidence/canonical_claim_extractor.py \
+  grading/evidence/quantity_dimension_evaluator.py \
+  grading/evidence/topic_machine_contract.py \
+  grading/scoring/deterministic_replay_audit.py \
+  grading/routing/local_semantic_resolver.py \
+  grading/scoring/deterministic_grading_shadow.py \
+  grading/scoring/grading_authority_policy.py \
+  grading/evidence/fatal_taxonomy.py \
+  grading/evidence/engineering_invariant_evaluator.py \
+  grading/scoring/deterministic_requirement_evaluator.py \
+  grading/scoring/deterministic_score_engine.py \
+  grading/scoring/deterministic_score_evidence.py \
+  grading/routing/deterministic_topic_router.py \
+  grading/scoring/deterministic_primary_grader.py \
+  grading/evidence/fact_anchor_evidence_adapter.py \
   scripts/check_deterministic_authority_gate.py \
   scripts/run_deterministic_stability_gate.py \
-  evaluation_ledger.py \
-  evidence_calibration.py \
-  verified_evidence_score_calibration.py \
-  verified_correctness_score_cap.py \
-  high_score_eligibility.py \
-  persisted_grade_replay.py \
+  grading/scoring/evaluation_ledger.py \
+  grading/scoring/evidence_calibration.py \
+  grading/scoring/verified_evidence_score_calibration.py \
+  grading/scoring/verified_correctness_score_cap.py \
+  grading/scoring/high_score_eligibility.py \
+  grading/scoring/persisted_grade_replay.py \
   scripts/replay_persisted_grade.py \
   scripts/replay_sil_issue1_session.py \
   scripts/release_candidate.py \
@@ -235,6 +235,11 @@ echo "----- host regression: question-only routing candidates -----"
 PYTHONPATH=. python3 -B scripts/test_question_only_routing_candidates.py
 
 echo "===== release test coverage validation ====="
+python3 -B scripts/test_wordpress_content_proposal_store.py
+python3 -B scripts/test_wordpress_review_integration.py
+python3 -B scripts/test_wordpress_topic_link_review_validator.py
+python3 -B scripts/test_wordpress_topic_link_review_application.py
+python3 -B scripts/test_wordpress_topic_pack_ocr.py
 python3 scripts/validate_release_test_coverage.py
 
 echo
@@ -544,6 +549,14 @@ python3 -B scripts/test_physical_ai_robot_sensor_fusion_safety_topic.py
 echo "----- host regression: pid piping instrumentation diagram symbols tags loops control narrative -----"
 python3 -B scripts/test_pid_piping_instrumentation_diagram_symbols_tags_loops_control_narrative.py
 
+echo "----- host regression: module relocation rewrite safety -----"
+python3 -B scripts/test_module_rewrite_safety.py
+python3 -B scripts/test_python_layout_contract.py
+
+echo "----- host regression: learning runtime and bot history integration -----"
+python3 -B scripts/test_learning_runtime.py
+python3 -B scripts/test_bot_learning_history_integration.py
+
 echo "----- host regression: plan a requirement coverage regressions -----"
 # Parallel Topic expansion focused regressions (15)
 python3 -B scripts/test_instrumentation_power_grounding_shielding_ups_ground_loop_emc_topic.py
@@ -675,7 +688,7 @@ _stage7_repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 grep -Fq 'NATIVE_SEMANTIC_EVIDENCE_SCORING_V1_RUNTIME' \
   "$_stage7_repo_root/grading_agents.py"
 grep -Fq 'NATIVE_SEMANTIC_OBSERVABILITY_PROJECTION_V2' \
-  "$_stage7_repo_root/grade_output_summarizer.py"
+  "$_stage7_repo_root/grading/scoring/grade_output_summarizer.py"
 grep -Fq 'QTYPE_PHASE8_CONSTRAINT_ONLY_V1' \
   "$_stage7_repo_root/grading_agents.py"
 # STAGE7_PRODUCTION_EVIDENCE_SHAPE_V2_RELEASE_GUARD
@@ -683,4 +696,4 @@ _stage7_v2_repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 grep -Fq 'STAGE7_PRODUCTION_EVIDENCE_SHAPE_V2' \
   "$_stage7_v2_repo_root/grading_agents.py"
 grep -Fq 'STAGE7_BUILD_PAYLOAD_NATIVE_OBSERVABILITY_V2' \
-  "$_stage7_v2_repo_root/grade_output_summarizer.py"
+  "$_stage7_v2_repo_root/grading/scoring/grade_output_summarizer.py"

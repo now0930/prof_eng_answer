@@ -7,7 +7,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from coverage_feedback_report import (
+from grading.coverage_feedback.report import (
     build_coverage_review_report,
     render_coverage_review_markdown,
 )

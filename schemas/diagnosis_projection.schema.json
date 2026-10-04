@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/diagnosis_projection.schema.json",
+  "title": "Diagnosis Projection",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["projection_id", "topic_id", "title_ko", "dimensions", "fact_anchors", "fatal_wrong_claims", "deterministic_checks", "diagnostic_guidance", "common_missing_points", "score_effect"],
+  "properties": {
+    "projection_id": { "const": "diagnosis-projection-v1" },
+    "topic_id": { "type": "string", "minLength": 8 },
+    "title_ko": { "type": "string", "minLength": 1 },
+    "dimensions": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "enum": ["format", "content", "reasoning", "application", "verification"] }
+    },
+    "fact_anchors": { "type": "array" },
+    "fatal_wrong_claims": { "type": "array" },
+    "deterministic_checks": { "type": "array" },
+    "diagnostic_guidance": { "type": "object" },
+    "common_missing_points": { "type": "array" },
+    "score_effect": { "const": "none" }
+  }
+}

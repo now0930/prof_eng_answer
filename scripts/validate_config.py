@@ -4,7 +4,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from grading_config import load_active_config
+from grading.scoring.grading_config import load_active_config
 
 cfg = load_active_config(ROOT)
 

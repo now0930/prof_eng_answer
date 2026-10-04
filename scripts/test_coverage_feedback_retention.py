@@ -8,7 +8,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from coverage_feedback_retention import (
+from grading.coverage_feedback.retention import (
     COVERAGE_FEEDBACK_EVENT_FILENAME,
     apply_coverage_retention_plan,
     build_coverage_retention_plan,

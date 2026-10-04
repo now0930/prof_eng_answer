@@ -10,9 +10,9 @@ if str(REPO_ROOT) not in sys.path:
 
 import unittest
 
-import gemini_grader
+from grading.providers import gemini as gemini_grader
 import grading_agents
-import originality_grader
+import grading.scoring.originality_grader as originality_grader
 
 
 def _layers(c_score=1.0, d_score=1.0):

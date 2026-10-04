@@ -9,7 +9,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from topic_machine_contract import (
+from grading.evidence.topic_machine_contract import (
     TopicMachineContractError,
     extract_fatal_rule_ids,
     validate_topic_machine_contract,
@@ -109,7 +109,7 @@ class FsrmMachineContractTests(unittest.TestCase):
             )
 
     def test_machine_contract_is_additive_and_consumed_by_primary_extractor(self):
-        production = (REPO / "deterministic_primary_grader.py").read_text(encoding="utf-8")
+        production = (REPO / "grading/scoring/deterministic_primary_grader.py").read_text(encoding="utf-8")
         self.assertIn("extract_canonical_claim_evidence", production)
         self.assertEqual(self.contract["score_effect"], "downstream_deterministic_only")
 

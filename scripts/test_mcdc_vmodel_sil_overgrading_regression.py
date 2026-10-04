@@ -122,7 +122,7 @@ def main() -> None:
 
     expected = fixture["expected"]
 
-    from logic_check_evaluator import _find_wrong_pattern
+    from grading.evidence.logic_check_evaluator import _find_wrong_pattern
     logic_bank = load_json(
         REPO / "rubrics" / "generated" / "logic_checks.generated.json"
     )

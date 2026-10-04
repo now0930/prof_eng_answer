@@ -3,7 +3,7 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-import gemini_grader
+from grading.providers import gemini as gemini_grader
 
 
 class MultiTopicDemandScopePromptTest(unittest.TestCase):

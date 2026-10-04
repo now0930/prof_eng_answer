@@ -6,7 +6,7 @@ import sys
 from pathlib import Path
 from typing import Any
 
-from expert_calibration_dataset import (
+from grading.quality.expert_calibration_dataset import (
     CalibrationContractError,
     finalize_record,
     load_jsonl,

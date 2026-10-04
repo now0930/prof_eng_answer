@@ -23,7 +23,7 @@ import json
 from pathlib import Path
 
 import bot as bot_module
-from rubric_bank_paths import get_rubric_bank_report
+from grading.rubrics.rubric_bank_paths import get_rubric_bank_report
 
 ROOT = Path(__ROOT__)
 session_dir = Path(__SESSION_DIR__)

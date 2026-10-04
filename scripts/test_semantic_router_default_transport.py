@@ -4,7 +4,7 @@ import json
 import unittest
 from unittest.mock import patch
 
-import semantic_router_shadow as sr
+import grading.routing.semantic_router_shadow as sr
 
 
 TOPIC = "topic_fixture"

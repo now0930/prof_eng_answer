@@ -1,0 +1,80 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/content_update_proposal.schema.json",
+  "title": "Master Topic Content Update Proposal",
+  "description": "Reviewed proposal for changing a Topic Pack content field using versioned WordPress evidence. This contract does not apply changes.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema_version", "proposal_id", "topic_id", "base_revision", "proposed_at", "target", "before_value", "proposed_value", "change_reason", "evidence", "affected_views", "status", "approval_required"],
+  "properties": {
+    "schema_version": { "const": "content-update-proposal-v1" },
+    "proposal_id": { "type": "string", "minLength": 1 },
+    "topic_id": { "type": "string", "pattern": "^[a-z][a-z0-9]*(?:_[a-z0-9]+)+$", "minLength": 8 },
+    "base_revision": { "type": "integer", "minimum": 1 },
+    "proposed_at": { "type": "string", "format": "date-time" },
+    "target": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_key", "record_id", "field_path"],
+      "properties": {
+        "source_key": { "enum": ["fact_anchor", "logic_check", "model_answer", "topic_importance", "question_demand_axes"] },
+        "record_id": { "type": "string", "minLength": 1 },
+        "field_path": { "type": "array", "minItems": 1, "maxItems": 5, "items": { "type": "string", "minLength": 1 } }
+      }
+    },
+    "before_value": { "type": ["string", "null"] },
+    "proposed_value": { "type": "string", "minLength": 1 },
+    "change_reason": { "type": "string", "minLength": 1 },
+    "evidence": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_id", "source_url", "source_version", "source_content_sha256", "locator", "excerpt"],
+        "properties": {
+          "source_id": { "type": "string", "minLength": 1 },
+          "source_url": { "type": "string", "format": "uri" },
+          "source_version": { "type": "string", "minLength": 1 },
+          "source_content_sha256": { "type": "string", "pattern": "^[a-fA-F0-9]{64}$" },
+          "locator": { "type": "string", "minLength": 1 },
+          "excerpt": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "affected_views": {
+      "type": "array",
+      "minItems": 1,
+      "uniqueItems": true,
+      "items": { "enum": ["grading", "training", "diagnosis"] }
+    },
+    "status": { "enum": ["pending_approval", "approved", "rejected", "candidate_ready", "applied"] },
+    "approved_by": { "type": "string", "minLength": 1 },
+    "approved_at": { "type": "string", "format": "date-time" },
+    "rejected_by": { "type": "string", "minLength": 1 },
+    "rejected_at": { "type": "string", "format": "date-time" },
+    "candidate_ready_at": { "type": "string", "format": "date-time" },
+    "candidate_revision": { "type": "integer", "minimum": 2 },
+    "applied_by": { "type": "string", "minLength": 1 },
+    "applied_at": { "type": "string", "format": "date-time" },
+    "approval_required": { "const": true }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "status": { "enum": ["approved", "candidate_ready", "applied"] } } },
+      "then": { "required": ["approved_by", "approved_at"] }
+    },
+    {
+      "if": { "properties": { "status": { "const": "rejected" } } },
+      "then": { "required": ["rejected_by", "rejected_at"] }
+    },
+    {
+      "if": { "properties": { "status": { "const": "candidate_ready" } } },
+      "then": { "required": ["candidate_ready_at", "candidate_revision"] }
+    },
+    {
+      "if": { "properties": { "status": { "const": "applied" } } },
+      "then": { "required": ["candidate_ready_at", "candidate_revision", "applied_by", "applied_at"] }
+    }
+  ]
+}

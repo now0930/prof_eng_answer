@@ -1,0 +1,129 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "sis_sil_safety_software_independence_systematic_failure_verification_validation",
+  "title_ko": "SIS·SIL 안전 소프트웨어, 독립성, 체계적 고장 및 검증·확인",
+  "revision": 8,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation/logic_check.json",
+      "model_answer": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/sis_sil_safety_software_independence_systematic_failure_verification_validation/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9416",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter4/",
+      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter4/",
+      "title": "The Safety Critical Systems, Chapter4",
+      "version": "ccbdfa2b50548ee862c057cda3321d76e710b486b3022e03f96907596bd05c37",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-27T12:27:35+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d2843b63b84a65e8da934229b772389c",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-chapter4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/TheSafetyCriticlaSystem-7.pdf",
+      "title": "TheSafetyCriticlaSystem-7",
+      "version": "2026-08-27T12:24:45",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-27T12:24:45+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9364",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%86%8c%ed%94%84%ed%8a%b8%ec%9b%a8%ec%96%b4-%ea%b0%9c%eb%b0%9c-%ed%94%84%eb%a0%88%ec%9e%84%ec%9b%8c%ed%81%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%86%8c%ed%94%84%ed%8a%b8%ec%9b%a8%ec%96%b4-%ea%b0%9c%eb%b0%9c-%ed%94%84%eb%a0%88%ec%9e%84%ec%9b%8c%ed%81%ac/",
+      "title": "소프트웨어 개발 프레임워크",
+      "version": "d6e2cb18058ab43c09722a04fb7bc0bdfe547b0d42298d0f65878564b8a7c70a",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-15T11:50:15+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:76f5138ab56845dc5a148c07c7746e97",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%86%8c%ed%94%84%ed%8a%b8%ec%9b%a8%ec%96%b4-%ea%b0%9c%eb%b0%9c-%ed%94%84%eb%a0%88%ec%9e%84%ec%9b%8c%ed%81%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/InstrumentAndControl_SW.pdf",
+      "title": "InstrumentAndControl_SW",
+      "version": "2026-08-15T11:48:43",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-15T11:48:43+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:b8f347b12d87268295bd11a0ec164114",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/TheSafetyCriticlaSystem-5.pdf",
+      "title": "TheSafetyCriticlaSystem",
+      "version": "2026-08-28T02:18:09",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-28T02:18:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9420",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/the-safety-critical-systems-%ec%a0%95%eb%a6%ac/",
+      "title": "The Safety Critical Systems 정리",
+      "version": "d4e9c41ef7a6ed87010f00ca17a9f37b426bff2b9017b85fc2f891aaa44d0a25",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-28T02:19:32+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

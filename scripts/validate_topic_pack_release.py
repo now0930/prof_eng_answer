@@ -116,14 +116,14 @@ def _compile_targets(root: Path) -> list[str]:
         "scripts/validate_topic_packs.py",
         "scripts/build_generated_rubrics.py",
         "scripts/validate_generated_rubrics.py",
-        "rubric_bank_paths.py",
-        "rubric_registry.py",
+        "grading/rubrics/rubric_bank_paths.py",
+        "grading/rubrics/rubric_registry.py",
         "grading_agents.py",
-        "logic_check_evaluator.py",
-        "logic_llm_verifier.py",
-        "difficulty_strategy.py",
-        "difficulty_output_adapter.py",
-        "grade_score_reconciler.py",
+        "grading/evidence/logic_check_evaluator.py",
+        "grading/evidence/logic_llm_verifier.py",
+        "grading/scoring/difficulty_strategy.py",
+        "grading/scoring/difficulty_output_adapter.py",
+        "grading/scoring/grade_score_reconciler.py",
     ]
     return [p for p in candidates if (root / p).exists()]
 

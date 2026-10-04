@@ -4,15 +4,15 @@ import copy
 import unittest
 
 import bot
-from control_valve_correctness_bridge import (
+from grading.evidence.control_valve_correctness_bridge import (
     merge_control_valve_findings_into_evidence,
 )
-from control_valve_formula_checker import (
+from grading.evidence.control_valve_formula_checker import (
     TARGET_TOPIC_ID,
     attach_control_valve_formula_check,
     evaluate_control_valve_formula_check,
 )
-from verified_defect_reconciliation import (
+from grading.evidence.verified_defect_reconciliation import (
     reconcile_verified_defects_with_coverage,
 )
 

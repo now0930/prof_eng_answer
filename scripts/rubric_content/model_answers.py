@@ -4,7 +4,7 @@ import argparse
 import sys
 from pathlib import Path
 
-from rubric_registry import (
+from grading.rubrics.rubric_registry import (
     build_model_answer_template,
     load_model_answer_bank,
     model_answer_key,

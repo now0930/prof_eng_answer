@@ -1,0 +1,105 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+  "title_ko": "제어밸브 고유·설치 유량특성과 Linear·Equal Percentage·Quick Opening",
+  "revision": 6,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:7517",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
+      "source_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
+      "title": "inherent, installed flow characteristic",
+      "version": "2337ffe42c7fb23cdf764d814f987c76c96d990d31c19db1b3b10b44ea66a93c",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T01:32:25+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:7614",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/vavle-handbook-valve-%ed%8a%b9%ec%84%b1/",
+      "source_url": "https://now0930.pe.kr/wordpress/vavle-handbook-valve-%ed%8a%b9%ec%84%b1/",
+      "title": "vavle handbook, valve 특성",
+      "version": "26d764ad9e9bbfb2d68378c43656a9d45d45f9bd70df0d3fe5b6364e84b0bf6b",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-10-28T13:20:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:1a19af2f813d5c965a2f7a8014896f40",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/vavle-handbook-valve-%ed%8a%b9%ec%84%b1/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/10/NeoStudio_20241011_153520_Blossom-Pink.pdf",
+      "title": "NeoStudio_20241011_153520_Blossom Pink",
+      "version": "2024-10-28T13:00:50",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-10-28T13:00:50+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ce8961cfd8764a7e2828756412f2bdca",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/NeoStudio_20240822_223315.pdf",
+      "title": "NeoStudio_20240822_223315",
+      "version": "2024-08-22T13:35:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-22T13:35:53+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

@@ -6,7 +6,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from demand_evidence_resolution import resolve_semantic_demand_evidence
+from grading.routing.demand_evidence_resolution import resolve_semantic_demand_evidence
 
 
 class DemandEvidenceResolutionTests(unittest.TestCase):

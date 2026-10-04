@@ -8,7 +8,7 @@ import unittest
 from unittest import mock
 
 import grading_agents
-import question_demand_shadow as qds
+import grading.routing.question_demand_shadow as qds
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -127,7 +127,7 @@ class QuestionDemandShadowUnitTest(unittest.TestCase):
 class QuestionDemandShadowPersistenceTest(unittest.TestCase):
     def test_phase10_shadow_disabled_has_zero_persistence_side_effect(self):
         with mock.patch(
-            "question_demand_shadow.extract_question_demands",
+            "grading.routing.question_demand_shadow.extract_question_demands",
             return_value={
                 "version": qds.QUESTION_DEMAND_SHADOW_VERSION,
                 "shadow": True,
@@ -180,7 +180,7 @@ class QuestionDemandShadowPersistenceTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             session_dir = Path(tmp)
             with mock.patch(
-                "question_demand_shadow.extract_question_demands",
+                "grading.routing.question_demand_shadow.extract_question_demands",
                 return_value=fake,
             ):
                 result = (
@@ -204,7 +204,7 @@ class QuestionDemandShadowPersistenceTest(unittest.TestCase):
 
     def test_persistence_failure_does_not_raise(self):
         with mock.patch(
-            "question_demand_shadow.extract_question_demands",
+            "grading.routing.question_demand_shadow.extract_question_demands",
             return_value={
                 "version": qds.QUESTION_DEMAND_SHADOW_VERSION,
                 "shadow": True,
@@ -347,7 +347,7 @@ class Phase10IsolationStaticContractTest(unittest.TestCase):
 
     def test_shadow_module_has_no_answer_text_parameter(self):
         tree = ast.parse(
-            (BASE_DIR / "question_demand_shadow.py")
+            (BASE_DIR / "grading/routing/question_demand_shadow.py")
             .read_text(encoding="utf-8")
         )
 
@@ -384,7 +384,7 @@ from pathlib import Path as _QdCachePath
 import tempfile as _qd_cache_tempfile
 import unittest as _qd_cache_unittest
 from unittest.mock import patch as _qd_cache_patch
-import question_demand_shadow as _qd_cache_qd
+import grading.routing.question_demand_shadow as _qd_cache_qd
 
 
 class QuestionDemandAuthoritativeCacheRegression(

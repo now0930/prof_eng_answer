@@ -1,0 +1,177 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_valve_cavitation_flashing_choked_flow_damage_prevention",
+  "title_ko": "제어밸브의 캐비테이션·플래싱·액체 초크 유동 및 손상 방지",
+  "revision": 11,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_valve_cavitation_flashing_choked_flow_damage_prevention",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_valve_cavitation_flashing_choked_flow_damage_prevention/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_valve_cavitation_flashing_choked_flow_damage_prevention/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_valve_cavitation_flashing_choked_flow_damage_prevention/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_valve_cavitation_flashing_choked_flow_damage_prevention/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:6526",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c%ec%9d%98-%ec%ba%90%eb%b9%84%ed%85%8c%ec%9d%b4%ec%85%98-%ed%98%84%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c%ec%9d%98-%ec%ba%90%eb%b9%84%ed%85%8c%ec%9d%b4%ec%85%98-%ed%98%84%ec%83%81/",
+      "title": "127회 3교시 6번",
+      "version": "3ca596bd16693850bb184f48033f90de77176362476c967da1c643a1f15a5461",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-14T05:18:13+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9321",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/cavitation-flashing-control-valve-handbook-5-11/",
+      "source_url": "https://now0930.pe.kr/wordpress/cavitation-flashing-control-valve-handbook-5-11/",
+      "title": "Cavitation, Flashing control valve handbook 5.12",
+      "version": "7dbffa7788ad6cdfc097f98e6bc0c39440630f682ba541f49a30a1247fafdf22",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-05T14:49:15+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:b7e8abc0376ad3f5fe999f1459965647",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c%ec%9d%98-%ec%ba%90%eb%b9%84%ed%85%8c%ec%9d%b4%ec%85%98-%ed%98%84%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/%EC%BA%90%EB%B9%84%ED%85%8C%EC%9D%B4%EC%85%98.pdf",
+      "title": "캐비테이션",
+      "version": "2024-02-19T08:50:44",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-19T08:50:44+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:f83a86342cca24f093ec05ff946aadc1",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/cavitation-flashing-control-valve-handbook-5-11/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/valve-2.pdf",
+      "title": "valve",
+      "version": "2026-08-04T12:43:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-04T12:43:53+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:89dae9783014a969cbfdf02b0658b93f",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c%ec%9d%98-%ec%ba%90%eb%b9%84%ed%85%8c%ec%9d%b4%ec%85%98-%ed%98%84%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-29.jpg",
+      "title": "제목-없음-29",
+      "version": "2024-02-19T08:50:23",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-19T08:50:23+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:f85a9a43c058cf94fd17b99cdebae202",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c%ec%9d%98-%ec%ba%90%eb%b9%84%ed%85%8c%ec%9d%b4%ec%85%98-%ed%98%84%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-57.png",
+      "title": "image",
+      "version": "2025-03-14T05:17:36",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-14T05:17:36+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:97b75ab9b15ad5ce712092c17aefdca2",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c%ec%9d%98-%ec%ba%90%eb%b9%84%ed%85%8c%ec%9d%b4%ec%85%98-%ed%98%84%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-54.png",
+      "title": "image",
+      "version": "2025-03-14T04:27:18",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-14T04:27:18+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d47d9c124060723f3cd9f0477519a4a4",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c%ec%9d%98-%ec%ba%90%eb%b9%84%ed%85%8c%ec%9d%b4%ec%85%98-%ed%98%84%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-56.png",
+      "title": "image",
+      "version": "2025-03-14T05:17:29",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-14T05:17:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:36166b65f8b25e055c18db29fbebfbfc",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c%ec%9d%98-%ec%ba%90%eb%b9%84%ed%85%8c%ec%9d%b4%ec%85%98-%ed%98%84%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-55.png",
+      "title": "image",
+      "version": "2025-03-14T05:17:13",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-14T05:17:13+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:1981f5e14e9a271a51e23ca43b789593",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c%ec%9d%98-%ec%ba%90%eb%b9%84%ed%85%8c%ec%9d%b4%ec%85%98-%ed%98%84%ec%83%81/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-58.png",
+      "title": "image",
+      "version": "2025-03-14T05:17:42",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-14T05:17:42+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

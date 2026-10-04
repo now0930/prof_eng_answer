@@ -7,12 +7,12 @@ from grading_agents import (
     _phase8_normalize_originality_evaluation,
     _phase8_run_originality_evaluator,
 )
-from hybrid_demand_scope_guard import (
+from grading.evidence.hybrid_demand_scope_guard import (
     build_hybrid_originality_scope_contract,
     project_hybrid_originality_pre_normalization,
     sanitize_hybrid_originality_evaluation,
 )
-from originality_grader import (
+from grading.scoring.originality_grader import (
     build_originality_prompt,
 )
 from scripts.test_hybrid_demand_scope_guard import (

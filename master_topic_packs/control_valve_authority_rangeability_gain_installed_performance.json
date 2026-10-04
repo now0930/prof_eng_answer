@@ -1,0 +1,177 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_valve_authority_rangeability_gain_installed_performance",
+  "title_ko": "조절밸브 유량특성과 밸브 권한도",
+  "revision": 14,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_valve_authority_rangeability_gain_installed_performance",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_valve_authority_rangeability_gain_installed_performance/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_valve_authority_rangeability_gain_installed_performance/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_valve_authority_rangeability_gain_installed_performance/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_valve_authority_rangeability_gain_installed_performance/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9287",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-2%ec%9e%a5-%ec%9a%94%ec%95%bd/",
+      "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-2%ec%9e%a5-%ec%9a%94%ec%95%bd/",
+      "title": "제어 밸브 성능 핸드북 요약: 고유/설치 특성 수식 및 포지셔너 동특성 분석",
+      "version": "f002baf2fe5ee9f97fd5dfba81a932085a345fe5b3569e3016f1dc2255ec0f68",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-03T02:59:35+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:7517",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
+      "source_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
+      "title": "inherent, installed flow characteristic",
+      "version": "2337ffe42c7fb23cdf764d814f987c76c96d990d31c19db1b3b10b44ea66a93c",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T01:32:25+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:7531",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "title": "butterfly valve",
+      "version": "04e0e1f77f44c9884ddea4b265d353a1ae6700c57ee6b1c0e3a419d92a528066",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-24T21:03:58+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:46d21b8fd13db9db84ee82c547a47c36",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/butterfly_valve.pdf",
+      "title": "butterfly_valve",
+      "version": "2025-04-24T21:03:36",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-24T21:03:36+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e191ce9a91f9ad90bfe51d3586b6492a",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/Butterfly-Valve-Types-Wafer-Lug-Double-Offset-and-Triple-Offset-Types.pdf",
+      "title": "Butterfly Valve Types – Wafer, Lug, Double Offset and Triple Offset Types",
+      "version": "2024-08-26T15:21:29",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-26T15:21:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:062c45fd4bdf5160de44d6d785a91578",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/pressure-recovery-factor.pdf",
+      "title": "pressure recovery factor",
+      "version": "2024-08-29T09:34:09",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-29T09:34:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:69f300cdb098854535f2b5e24ef1d22f",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/pressure-recovery-factor2.pdf",
+      "title": "pressure recovery factor2",
+      "version": "2024-08-29T09:34:29",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-29T09:34:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ce8961cfd8764a7e2828756412f2bdca",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/inherent-installed-flow-characteristic/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/NeoStudio_20240822_223315.pdf",
+      "title": "NeoStudio_20240822_223315",
+      "version": "2024-08-22T13:35:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-22T13:35:53+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:f7338e955a3d3f8f193173ac1bdb2e2d",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/NeoStudio_20240829_215120.pdf",
+      "title": "NeoStudio_20240829_215120",
+      "version": "2024-08-29T12:53:14",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-08-29T12:53:14+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d009f835bd41d6fe9f5820739e183273",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/butterfly-valve/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/08/image-3.png",
+      "title": "image",
+      "version": "2025-03-05T12:38:28",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-05T12:38:28+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

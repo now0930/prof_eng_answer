@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 from __future__ import annotations
 
-import gemini_grader
+from grading.providers import gemini as gemini_grader
 
 
 def build_without_network(subject_rubric):

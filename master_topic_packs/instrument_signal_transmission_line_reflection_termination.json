@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "instrument_signal_transmission_line_reflection_termination",
+  "title_ko": "계장 신호 전송선로·반사·종단",
+  "revision": 3,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/instrument_signal_transmission_line_reflection_termination",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/instrument_signal_transmission_line_reflection_termination/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/instrument_signal_transmission_line_reflection_termination/logic_check.json",
+      "model_answer": "rubrics/topic_packs/instrument_signal_transmission_line_reflection_termination/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/instrument_signal_transmission_line_reflection_termination/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:3543794d556d8d6d6c0cfff376794ee0",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-8/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/09/Lessons_In_Industrial_Instrumentation-1.pdf",
+      "title": "Lessons_In_Industrial_Instrumentation-1",
+      "version": "2026-09-06T06:59:00",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-09-06T06:59:00+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9454",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-8/",
+      "source_url": "https://now0930.pe.kr/wordpress/lessons-in-industrial-instrumentation-chapter-8/",
+      "title": "Lessons In Industrial Instrumentation, Chapter 8",
+      "version": "e3060567e5952f67f28d97098b48528014c06bb2a30f9f911dcced605cff302a",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-09-06T07:04:39+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

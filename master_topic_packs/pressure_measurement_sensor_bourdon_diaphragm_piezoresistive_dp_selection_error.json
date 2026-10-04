@@ -1,0 +1,249 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+  "title_ko": "압력계측 센서의 원리, 선정 및 오차 — Bourdon·Diaphragm·Piezoresistive·DP",
+  "revision": 18,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error/logic_check.json",
+      "model_answer": "rubrics/topic_packs/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/pressure_measurement_sensor_bourdon_diaphragm_piezoresistive_dp_selection_error/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:6520",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5-%ec%a0%84%ec%86%a1%ea%b8%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%8b%9c%ed%8a%b8/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5-%ec%a0%84%ec%86%a1%ea%b8%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%8b%9c%ed%8a%b8/",
+      "title": "압력 전송기 데이터 시트",
+      "version": "51ac71e2ab2846dfe72df113ec6dbfca52ff6d51575a3ffa97201b169bfabaf4",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-28T13:18:13+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:fa4160f5f12eef53e3e9565167aedc1f",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1-5.jpg",
+      "title": "제목-없음-1-5",
+      "version": "2024-03-03T03:52:57",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-03T03:52:57+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:41abb679cf0910a4d43f87fa36929a6c",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/image-4.png",
+      "title": "image-4",
+      "version": "2024-04-25T14:12:55",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-25T14:12:55+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:df700a41cd34b7a5915244ce2a2801e2",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/2004-4-te-1.pdf",
+      "title": "2004-4-te-1",
+      "version": "2024-04-25T13:53:35",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-25T13:53:35+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:07f27355e256db41927fbf519a296be6",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240425_234700.pdf",
+      "title": "NeoStudio_20240425_234700",
+      "version": "2024-04-25T14:47:50",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-25T14:47:50+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:9c626729b68639d2f0ac6efafe88979f",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-7.jpg",
+      "title": "제목-없음-7",
+      "version": "2024-03-03T03:52:40",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-03T03:52:40+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a210b15bafe2b46de8367d553e06b3bf",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5-%ec%a0%84%ec%86%a1%ea%b8%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%8b%9c%ed%8a%b8/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-46.png",
+      "title": "image-46",
+      "version": "2024-02-18T13:50:30",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-18T13:50:30+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:c7f366330764bb1682234562ab46896d",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1-4.jpg",
+      "title": "제목-없음-1-4",
+      "version": "2024-03-03T03:52:31",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-03T03:52:31+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6682",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "title": "압력센서 선정",
+      "version": "87cee98ab4ea38eb1e70901a5ae8db449cf87c7dfc1d143fb52a2669900c4ff5",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T00:45:10+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:3cedee808cba01a5d734d882c0f3e46f",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/112-114-04%EC%9B%94-%EA%B8%B0%ED%9A%8D%ED%8A%B9%EC%A7%91_%EC%95%95%EB%A0%A5%EC%84%BC%EC%84%9C-%EC%9D%B4%ED%95%B4.pdf",
+      "title": "112-114-04월-기획특집_압력센서-이해",
+      "version": "2024-03-03T03:15:17",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-03T03:15:17+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a4cf00c132bb6db43c6a2500ff6a69c7",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/2004-2-te-1.pdf",
+      "title": "2004-2-te-1",
+      "version": "2024-04-25T13:53:04",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-25T13:53:04+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:682510f51beeb5481f97d9a7b8991bd3",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/2004-3-te-1.pdf",
+      "title": "2004-3-te-1",
+      "version": "2024-04-25T13:53:20",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-25T13:53:20+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:69216b14e5980d0da8dca4288c2aa5c5",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/image-3.png",
+      "title": "image-3",
+      "version": "2024-04-25T13:41:30",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-25T13:41:30+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:041486b12344e79d230edb2b61966d0f",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5-%ec%a0%84%ec%86%a1%ea%b8%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%8b%9c%ed%8a%b8/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/ENG_DS_D5601_A2-3355704.pdf",
+      "title": "ENG_DS_D5601_A2-3355704",
+      "version": "2024-02-18T13:24:38",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-18T13:24:38+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:f89bba0fc525d5a112f67a614c92d663",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5%ec%84%bc%ec%84%9c-%ec%84%a0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-6.jpg",
+      "title": "제목-없음-6",
+      "version": "2024-03-03T03:52:14",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-03T03:52:14+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:182ab0bf4cc348a94cb1ee16ec6a595f",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%95%95%eb%a0%a5-%ec%a0%84%ec%86%a1%ea%b8%b0-%eb%8d%b0%ec%9d%b4%ed%84%b0-%ec%8b%9c%ed%8a%b8/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-45.png",
+      "title": "image-45",
+      "version": "2024-02-18T13:50:22",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-18T13:50:22+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

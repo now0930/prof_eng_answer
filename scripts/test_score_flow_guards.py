@@ -15,12 +15,12 @@ if str(ROOT) not in sys.path:
 
 from grading_agents import _phase6_limit_gemini_score
 from grading_agents import _stage7_semantic_exact_projection_validation
-from grade_score_reconciler import _apply_numeric_flags
-from difficulty_score_ceiling import (
+from grading.scoring.grade_score_reconciler import _apply_numeric_flags
+from grading.scoring.difficulty_score_ceiling import (
     _prefer_question_type_adjusted_score,
 )
-import question_type_coverage_score_adjuster as coverage_adjuster
-import question_type_coverage_adapter as qtype_coverage_adapter
+import grading.routing.question_type_coverage_score_adjuster as coverage_adjuster
+import grading.routing.question_type_coverage_adapter as qtype_coverage_adapter
 from grading_agents import (
     _phase10_apply_generated_single_topic_overrides,
     _phase2_resolve_difficulty_topic_id,
@@ -652,7 +652,7 @@ class ExplicitRequirementCapEnforcementRegressionTest(
             return updated
 
         with patch(
-            "explicit_requirement_cap."
+            "grading.scoring.explicit_requirement_cap."
             "enforce_existing_explicit_requirement_cap",
             side_effect=enforce_cap,
         ):
@@ -679,7 +679,7 @@ class ExplicitRequirementCapEnforcementRegressionTest(
         self,
     ) -> None:
         with patch(
-            "explicit_requirement_cap."
+            "grading.scoring.explicit_requirement_cap."
             "enforce_existing_explicit_requirement_cap",
             side_effect=RuntimeError(
                 "simulated cap enforcement failure"
@@ -960,7 +960,7 @@ class QuestionTypeFallbackRecoveryRegressionTest(
         }
 
         with patch(
-            "semantic_question_type_prompt."
+            "grading.routing.semantic_question_type_prompt."
             "empty_question_type_coverage",
             side_effect=RuntimeError(
                 "simulated fallback failure"
@@ -1003,7 +1003,7 @@ class QuestionTypeFallbackRecoveryRegressionTest(
         }
 
         with patch(
-            "semantic_question_type_prompt."
+            "grading.routing.semantic_question_type_prompt."
             "empty_question_type_coverage",
             return_value=[],
         ):
@@ -1047,7 +1047,7 @@ class ModelAnswerReferenceResultContractRegressionTest(
         from contextlib import ExitStack
 
         import grading_agents as grading_agents_module
-        import model_answer_router as model_answer_router_module
+        import grading.routing.model_answer_router as model_answer_router_module
 
         function = (
             grading_agents_module
@@ -1166,12 +1166,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="원리를 설명하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     return_value=reference_result,
                 ),
@@ -1244,12 +1244,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="두 방식을 비교하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     return_value=reference_result,
                 ),
@@ -1318,12 +1318,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="구성을 설명하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     side_effect=RuntimeError(
                         "simulated phase10 router failure"
@@ -1401,12 +1401,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="절차를 설명하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     return_value=reference_result,
                 ),
@@ -1481,12 +1481,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="원리를 설명하시오.",
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "load_model_answer_bank",
                     return_value={"model_answers": []},
                 ),
                 patch(
-                    "model_answer_router."
+                    "grading.routing.model_answer_router."
                     "find_model_answer_reference",
                     side_effect=RuntimeError(
                         "simulated phase10 fallback trigger"
@@ -1621,12 +1621,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="두 방식을 비교하시오.",
                 ),
                 patch(
-                    "question_type_router."
+                    "grading.routing.question_type_router."
                     "load_question_type_profile",
                     return_value={"types": []},
                 ),
                 patch(
-                    "question_type_router.detect_question_type",
+                    "grading.routing.question_type_router.detect_question_type",
                     return_value=evaluation,
                 ),
                 patch.object(
@@ -1668,12 +1668,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="원리를 설명하시오.",
                 ),
                 patch(
-                    "question_type_router."
+                    "grading.routing.question_type_router."
                     "load_question_type_profile",
                     return_value={"types": []},
                 ),
                 patch(
-                    "question_type_router.detect_question_type",
+                    "grading.routing.question_type_router.detect_question_type",
                     side_effect=RuntimeError(
                         "simulated phase9 router failure"
                     ),
@@ -1741,12 +1741,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="절차를 설명하시오.",
                 ),
                 patch(
-                    "question_type_router."
+                    "grading.routing.question_type_router."
                     "load_question_type_profile",
                     return_value={"types": []},
                 ),
                 patch(
-                    "question_type_router.detect_question_type",
+                    "grading.routing.question_type_router.detect_question_type",
                     return_value=evaluation,
                 ),
                 patch.object(
@@ -1807,12 +1807,12 @@ class ModelAnswerReferenceResultContractRegressionTest(
                     return_value="구성을 설명하시오.",
                 ),
                 patch(
-                    "question_type_router."
+                    "grading.routing.question_type_router."
                     "load_question_type_profile",
                     return_value={"types": []},
                 ),
                 patch(
-                    "question_type_router.detect_question_type",
+                    "grading.routing.question_type_router.detect_question_type",
                     side_effect=RuntimeError(
                         "simulated phase9 fallback trigger"
                     ),
@@ -1887,8 +1887,8 @@ class TopicImportanceFallbackRegressionTest(
     def test_topic_importance_profile_failure_preserves_topic_match(
         self,
     ) -> None:
-        import difficulty_output_adapter as adapter
-        import rubric_registry
+        import grading.scoring.difficulty_output_adapter as adapter
+        import grading.rubrics.rubric_registry as rubric_registry
 
         function = (
             adapter
@@ -1953,8 +1953,8 @@ class TopicImportanceFallbackRegressionTest(
     def test_topic_importance_bank_failure_returns_unmatched_diagnostic(
         self,
     ) -> None:
-        import difficulty_output_adapter as adapter
-        import rubric_registry
+        import grading.scoring.difficulty_output_adapter as adapter
+        import grading.rubrics.rubric_registry as rubric_registry
 
         function = (
             adapter
@@ -2002,7 +2002,7 @@ class LogicLlmVerifierFallbackRegressionTest(
     def test_logic_llm_failure_returns_safe_warn_fallback(
         self,
     ) -> None:
-        import logic_llm_verifier as verifier
+        import grading.evidence.logic_llm_verifier as verifier
 
         function = verifier.verify_logic_with_llm
         prompts = []
@@ -2104,7 +2104,7 @@ class GeminiMandatoryPromptBootstrapRegressionTest(
     def test_gemini_mandatory_prompt_steps_are_explicit(
         self,
     ) -> None:
-        import gemini_grader
+        from grading.providers import gemini as gemini_grader
 
         self.assertTrue(
             callable(
@@ -2222,9 +2222,9 @@ class DifficultyCeilingFallbackRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import difficulty_score_ceiling
+        import grading.scoring.difficulty_score_ceiling as difficulty_score_ceiling
         import grading_agents
-        from grading_config import (
+        from grading.scoring.grading_config import (
             load_active_config,
             save_active_config_snapshots,
         )
@@ -2460,7 +2460,7 @@ class GeminiSemanticPersistenceRegressionTest(
     ) -> None:
         from tempfile import TemporaryDirectory
 
-        import gemini_grader
+        from grading.providers import gemini as gemini_grader
         import grading_agents
 
         valid_result = self._valid_result()
@@ -2519,7 +2519,7 @@ class GeminiSemanticPersistenceRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import gemini_grader
+        from grading.providers import gemini as gemini_grader
         import grading_agents
 
         writes = []
@@ -2589,7 +2589,7 @@ class GeminiSemanticPersistenceRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import gemini_grader
+        from grading.providers import gemini as gemini_grader
         import grading_agents
 
         valid_result = self._valid_result()
@@ -2736,7 +2736,7 @@ class OriginalityPersistenceRegressionTest(
         from tempfile import TemporaryDirectory
 
         import grading_agents
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         writes = []
         stdout_buffer = io.StringIO()
@@ -2812,7 +2812,7 @@ class OriginalityPersistenceRegressionTest(
         from tempfile import TemporaryDirectory
 
         import grading_agents
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         writes = []
         stdout_buffer = io.StringIO()
@@ -2899,7 +2899,7 @@ class OriginalityPersistenceRegressionTest(
         from tempfile import TemporaryDirectory
 
         import grading_agents
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         write_attempts = []
         stdout_buffer = io.StringIO()
@@ -2987,7 +2987,7 @@ class OriginalityPersistenceRegressionTest(
         from tempfile import TemporaryDirectory
 
         import grading_agents
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         write_attempts = []
         stdout_buffer = io.StringIO()
@@ -3080,7 +3080,7 @@ class LlmJsonParserRegressionTest(unittest.TestCase):
     def test_llm_json_parser_parses_fenced_object(
         self,
     ) -> None:
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         result = grade_output_summarizer._parse_llm_json(
             """```json
@@ -3102,7 +3102,7 @@ class LlmJsonParserRegressionTest(unittest.TestCase):
     def test_llm_json_parser_falls_back_after_truncated_fence_match(
         self,
     ) -> None:
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         result = grade_output_summarizer._parse_llm_json(
             """```json
@@ -3130,7 +3130,7 @@ class LlmJsonParserRegressionTest(unittest.TestCase):
     def test_llm_json_parser_parses_embedded_object(
         self,
     ) -> None:
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         result = grade_output_summarizer._parse_llm_json(
             (
@@ -3151,7 +3151,7 @@ class LlmJsonParserRegressionTest(unittest.TestCase):
     def test_llm_json_parser_rejects_malformed_or_non_object_response(
         self,
     ) -> None:
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         invalid_inputs = (
             "",
@@ -3179,7 +3179,7 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         grading_agents,
         input_text,
     ) -> None:
-        from grading_config import (
+        from grading.scoring.grading_config import (
             load_active_config,
             save_active_config_snapshots,
         )
@@ -3226,10 +3226,10 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import difficulty_output_adapter
-        import difficulty_score_ceiling
+        import grading.scoring.difficulty_output_adapter as difficulty_output_adapter
+        import grading.scoring.difficulty_score_ceiling as difficulty_score_ceiling
         import grading_agents
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         input_text = """문제:
 피드백 제어계의 안정성을 설명하시오.
@@ -3355,10 +3355,10 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import difficulty_output_adapter
-        import difficulty_score_ceiling
+        import grading.scoring.difficulty_output_adapter as difficulty_output_adapter
+        import grading.scoring.difficulty_score_ceiling as difficulty_score_ceiling
         import grading_agents
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         input_text = """문제:
 제어밸브 액추에이터를 비교하시오.
@@ -3477,10 +3477,10 @@ class Phase2PostprocessDiagnosticsRegressionTest(
         from contextlib import redirect_stdout
         from tempfile import TemporaryDirectory
 
-        import difficulty_output_adapter
-        import difficulty_score_ceiling
+        import grading.scoring.difficulty_output_adapter as difficulty_output_adapter
+        import grading.scoring.difficulty_score_ceiling as difficulty_score_ceiling
         import grading_agents
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         input_text = """문제:
 2차 시스템의 감쇠비를 설명하시오.
@@ -3612,7 +3612,7 @@ class OriginalityGraderJsonContractRegressionTest(
     def test_originality_extract_json_parses_fenced_and_embedded_objects(
         self,
     ) -> None:
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         cases = (
             (
@@ -3669,7 +3669,7 @@ class OriginalityGraderJsonContractRegressionTest(
     def test_originality_extract_json_rejects_malformed_and_non_object_payloads(
         self,
     ) -> None:
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         invalid_payloads = (
             "",
@@ -3697,7 +3697,7 @@ class OriginalityGraderJsonContractRegressionTest(
         import os
         import urllib.error
 
-        import originality_grader
+        import grading.scoring.originality_grader as originality_grader
 
         class BrokenBody:
             def read(self):
@@ -3803,7 +3803,7 @@ class LogicTopicRoutingFailureRegressionTest(
     ) -> None:
         from tempfile import TemporaryDirectory
 
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         class ExplodingGrade(dict):
             def get(
@@ -3873,7 +3873,7 @@ class LogicTopicRoutingFailureRegressionTest(
     ) -> None:
         from tempfile import TemporaryDirectory
 
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         grade = {
             "model_answer_reference": {
@@ -4155,7 +4155,7 @@ class GeminiGraderJsonContractRegressionTest(
     def test_gemini_grader_extract_json_parses_object_variants(
         self,
     ) -> None:
-        from gemini_grader import _extract_json
+        from grading.providers.gemini import _extract_json
 
         cases = {
             "plain": (
@@ -4221,7 +4221,7 @@ class GeminiGraderJsonContractRegressionTest(
     def test_gemini_grader_extract_json_rejects_non_object_and_malformed_payloads(
         self,
     ) -> None:
-        from gemini_grader import _extract_json
+        from grading.providers.gemini import _extract_json
 
         payloads = {
             "plain_array": '[{"score": 1}]',
@@ -4279,7 +4279,7 @@ class MigrationCompatibilityImportRegressionTest(
                     ast.ImportFrom,
                 )
                 and statement.module
-                == "rubric_registry"
+                == "grading.rubrics.rubric_registry"
                 for alias in statement.names
             }
 
@@ -4327,7 +4327,7 @@ class MigrationCompatibilityImportRegressionTest(
             fromlist=(),
             level=0,
         ):
-            if name == "rubric_registry":
+            if name == "grading.rubrics.rubric_registry":
                 raise ModuleNotFoundError(
                     "simulated legacy repository"
                 )
@@ -4377,7 +4377,7 @@ class MigrationCompatibilityImportRegressionTest(
             fromlist=(),
             level=0,
         ):
-            if name == "rubric_registry":
+            if name == "grading.rubrics.rubric_registry":
                 raise RuntimeError(
                     "simulated registry initialization bug"
                 )
@@ -5223,21 +5223,26 @@ class LogicLlmFatalCheckDiagnosticRegressionTest(
         import sys
         import types
 
-        import logic_check_evaluator
+        import grading.evidence as evidence_package
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         fake_module = types.ModuleType(
-            "logic_llm_verifier"
+            "grading.evidence.logic_llm_verifier"
         )
         fake_module._call_ollama_json = verifier
 
         original_module = sys.modules.get(
-            "logic_llm_verifier"
+            "grading.evidence.logic_llm_verifier"
+        )
+        original_attribute = getattr(
+            evidence_package, "logic_llm_verifier", None
         )
 
         try:
             sys.modules[
-                "logic_llm_verifier"
+                "grading.evidence.logic_llm_verifier"
             ] = fake_module
+            evidence_package.logic_llm_verifier = fake_module
 
             return (
                 logic_check_evaluator
@@ -5251,13 +5256,17 @@ class LogicLlmFatalCheckDiagnosticRegressionTest(
         finally:
             if original_module is None:
                 sys.modules.pop(
-                    "logic_llm_verifier",
+                    "grading.evidence.logic_llm_verifier",
                     None,
                 )
             else:
                 sys.modules[
-                    "logic_llm_verifier"
+                    "grading.evidence.logic_llm_verifier"
                 ] = original_module
+            if original_attribute is None:
+                delattr(evidence_package, "logic_llm_verifier")
+            else:
+                evidence_package.logic_llm_verifier = original_attribute
 
     def _assert_diagnostic(
         self,
@@ -5568,7 +5577,7 @@ class LogicVerifierConfidenceRegressionTest(
     def _run_with_verdict(
         verdict,
     ):
-        import logic_llm_verifier as verifier
+        import grading.evidence.logic_llm_verifier as verifier
 
         function = (
             verifier.verify_logic_with_llm
@@ -6023,7 +6032,7 @@ class TelegramSummaryFallbackRegressionTest(
     ) -> None:
         import os
 
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         with patch.dict(
             os.environ,
@@ -6049,7 +6058,7 @@ class TelegramSummaryFallbackRegressionTest(
     ) -> None:
         import os
 
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         with patch.dict(
             os.environ,
@@ -6075,7 +6084,7 @@ class TelegramSummaryFallbackRegressionTest(
     ) -> None:
         import os
 
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         def fail_summary(
             prompt,
@@ -6127,7 +6136,7 @@ class TelegramSummaryFallbackRegressionTest(
     ) -> None:
         import os
 
-        import grade_output_summarizer
+        import grading.scoring.grade_output_summarizer as grade_output_summarizer
 
         with patch.dict(
             os.environ,
@@ -6162,7 +6171,7 @@ class CoverageWarnModeScoreFlowRegressionTest(
     ) -> None:
         from unittest.mock import patch
 
-        import question_type_coverage_score_adjuster as adjuster
+        import grading.routing.question_type_coverage_score_adjuster as adjuster
 
         grade = {
             "total_score": 1.02,
@@ -6230,7 +6239,7 @@ class CoverageWarnModeScoreFlowRegressionTest(
     def test_ceiling_ignores_warn_candidate(
         self,
     ) -> None:
-        from difficulty_score_ceiling import (
+        from grading.scoring.difficulty_score_ceiling import (
             _prefer_question_type_adjusted_score,
         )
 
@@ -6261,7 +6270,7 @@ class CoverageWarnModeScoreFlowRegressionTest(
     def test_fatal_without_numeric_cap_has_normal_range(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             _apply_numeric_flags,
         )
 
@@ -6309,7 +6318,7 @@ class FinalBindingCapRegressionTest(
     def test_logic_fatal_without_applied_cap_is_not_binding(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             _apply_numeric_flags,
         )
 
@@ -6354,7 +6363,7 @@ class FinalBindingCapRegressionTest(
     def test_applied_difficulty_cap_is_binding(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             _apply_numeric_flags,
         )
 
@@ -6379,7 +6388,7 @@ class FinalBindingCapRegressionTest(
     def test_applied_nonbinding_upper_cap_uses_normal_range(
         self,
     ) -> None:
-        from grade_score_reconciler import (
+        from grading.scoring.grade_score_reconciler import (
             _apply_numeric_flags,
         )
 

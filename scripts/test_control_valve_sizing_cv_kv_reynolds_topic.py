@@ -13,11 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from logic_llm_verifier import (  # noqa: E402
+from grading.evidence.logic_llm_verifier import (  # noqa: E402
     extract_logic_evidence_candidates,
     verify_logic_with_llm,
 )
-from model_answer_router import find_model_answer_reference  # noqa: E402
+from grading.routing.model_answer_router import find_model_answer_reference  # noqa: E402
 
 
 TOPIC = "control_valve_sizing_cv_kv_reynolds_liquid_selection"
@@ -948,7 +948,7 @@ class FormulaSemanticRegressionTests(unittest.TestCase):
             ],
         }
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=mocked,
         ):
             result = verify_logic_with_llm(
@@ -972,7 +972,7 @@ class FormulaSemanticRegressionTests(unittest.TestCase):
             "findings": [],
         }
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=mocked,
         ):
             result = verify_logic_with_llm(

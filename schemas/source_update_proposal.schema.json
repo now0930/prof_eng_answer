@@ -1,0 +1,18 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/source_update_proposal.schema.json",
+  "title": "Master Topic Source Update Proposal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["proposal_id", "topic_id", "source_id", "base_revision", "proposed_at", "source_reference", "status", "approval_required"],
+  "properties": {
+    "proposal_id": { "type": "string", "minLength": 1 },
+    "topic_id": { "type": "string", "minLength": 8 },
+    "source_id": { "type": "string", "minLength": 1 },
+    "base_revision": { "type": "integer", "minimum": 1 },
+    "proposed_at": { "type": "string", "format": "date-time" },
+    "source_reference": { "$ref": "wordpress_source_reference.schema.json" },
+    "status": { "const": "pending_approval" },
+    "approval_required": { "const": true }
+  }
+}

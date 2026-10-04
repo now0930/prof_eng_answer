@@ -1,0 +1,129 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+  "title_ko": "레이더식 레벨계의 FMCW·펄스 방식, 거리·레벨 측정원리, 유전율 영향 및 허위에코·설치오차",
+  "revision": 9,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error/logic_check.json",
+      "model_answer": "rubrics/topic_packs/radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/radar_level_gauge_fmcw_pulse_distance_level_dielectric_constant_false_echo_installation_error/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:6925",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/gwr-%eb%a0%88%eb%b2%a8-%ec%b8%a1%ec%a0%95%ea%b8%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/gwr-%eb%a0%88%eb%b2%a8-%ec%b8%a1%ec%a0%95%ea%b8%b0/",
+      "title": "GWR 레벨 측정기",
+      "version": "1bc9b42de201d52530fb9caf494d67a5219fa8a2faa82d291f10a4a86c7a6ae9",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T01:07:20+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:bb77720883d49a477d573f1145aae274",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/gwr-%eb%a0%88%eb%b2%a8-%ec%b8%a1%ec%a0%95%ea%b8%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-52.jpg",
+      "title": "제목-없음-52",
+      "version": "2024-03-17T12:06:07",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-17T12:06:07+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a42de877cfebab9c332edaf09c546ab3",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/gwr-%eb%a0%88%eb%b2%a8-%ec%b8%a1%ec%a0%95%ea%b8%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-51.jpg",
+      "title": "제목-없음-51",
+      "version": "2024-03-17T12:05:57",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-17T12:05:57+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:66c2019076b04a2c4620a0ff4d4410fe",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/gwr-%eb%a0%88%eb%b2%a8-%ec%b8%a1%ec%a0%95%ea%b8%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/GWR%EC%9E%A5%EB%8B%A8%EC%A0%90.pdf",
+      "title": "GWR장단점",
+      "version": "2024-03-17T11:29:07",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-17T11:29:07+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:b309a640db8e1855271a34fce254eb1a",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/gwr-%eb%a0%88%eb%b2%a8-%ec%b8%a1%ec%a0%95%ea%b8%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-53.jpg",
+      "title": "제목-없음-53",
+      "version": "2024-03-17T12:06:17",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-17T12:06:17+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9251",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%ac%b8%ec%a0%9c-%ed%92%80%ec%9d%b4-radar/",
+      "source_url": "https://now0930.pe.kr/wordpress/%eb%ac%b8%ec%a0%9c-%ed%92%80%ec%9d%b4-radar/",
+      "title": "문제 풀이: Radar",
+      "version": "159e02952f56d655202902b6368ebcd0f0d01196fc52d80b9d0bb2b369ec1ab1",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-07-16T08:28:03+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

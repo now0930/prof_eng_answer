@@ -1,0 +1,201 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+  "title_ko": "계측 프로젝트 관리: 기본설계, 원가·일정, 설계문서, 조달·시공 및 인수",
+  "revision": 15,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/instrumentation_project_management_basic_design_cost_schedule_documents_acceptance",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/instrumentation_project_management_basic_design_cost_schedule_documents_acceptance/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/instrumentation_project_management_basic_design_cost_schedule_documents_acceptance/logic_check.json",
+      "model_answer": "rubrics/topic_packs/instrumentation_project_management_basic_design_cost_schedule_documents_acceptance/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/instrumentation_project_management_basic_design_cost_schedule_documents_acceptance/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:7abdc1c89c79b511bd1d7db9d5747d0c",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/4.%EA%B3%84%EC%9E%A5%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88-1.pdf",
+      "title": "4.계장설계기초-1",
+      "version": "2024-04-22T13:43:37",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-22T13:43:37+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:18a2f24aa4f54aab469a0a295892ecd1",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/%EA%B3%84%EC%9E%A5%EC%84%A4%EA%B3%84.pdf",
+      "title": "계장설계",
+      "version": "2024-02-28T13:27:19",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-28T13:27:19+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8ede7aff21fee47056b51e5901d4f372",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%94%8c%eb%9e%9c%ed%8a%b8-%ec%84%a4%ea%b3%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-43.png",
+      "title": "image-43",
+      "version": "2024-02-18T13:20:56",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-18T13:20:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e34effabf2a081571aa56dcbfacefd5b",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%94%8c%eb%9e%9c%ed%8a%b8-%ec%84%a4%ea%b3%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/V06N02_12-17.pdf",
+      "title": "V06N02_12-17",
+      "version": "2024-02-18T11:52:01",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-18T11:52:01+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6647",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
+      "title": "계장설계, 계장시공",
+      "version": "6c60e58a72b71f6636aa8d0279891f5437fc2f353f67d38f278123df29559cb2",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T00:41:37+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6511",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%94%8c%eb%9e%9c%ed%8a%b8-%ec%84%a4%ea%b3%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ed%94%8c%eb%9e%9c%ed%8a%b8-%ec%84%a4%ea%b3%84/",
+      "title": "플랜트 설계",
+      "version": "c98c5a166d8e6bdfeb1ee11e731c28640d5898b1938332aa45d7214a91d48e2f",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T00:22:04+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:1027dd60dfe2b342d9b79e320624a146",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%94%8c%eb%9e%9c%ed%8a%b8-%ec%84%a4%ea%b3%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/%EA%B3%84%EC%9E%A5%EC%83%81%EC%84%B8%EC%84%A4%EA%B3%84.pdf",
+      "title": "계장상세설계",
+      "version": "2024-02-18T12:02:41",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-18T12:02:41+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:564723cc4ea470d28b56de205a32985f",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C.jpg",
+      "title": "제목-없음",
+      "version": "2024-03-02T01:50:24",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T01:50:24+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4ca40352ee36da208f96f8b74e8bad0b",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ed%94%8c%eb%9e%9c%ed%8a%b8-%ec%84%a4%ea%b3%84/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-44.png",
+      "title": "image-44",
+      "version": "2024-02-18T13:21:09",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-18T13:21:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:fdbd5bc91bbc43a73c24380a867b666a",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240423_174207.pdf",
+      "title": "NeoStudio_20240423_174207",
+      "version": "2024-04-23T08:43:29",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-23T08:43:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:cb135402e8429aac5da4732fbf5443fe",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/4.%EA%B3%84%EC%9E%A5%EC%84%A4%EA%B3%84%EA%B8%B0%EC%B4%88.pdf",
+      "title": "4.계장설계기초",
+      "version": "2024-04-22T13:29:16",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-22T13:29:16+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:b3ec67c020ca2103d8152fb8b4bc0e73",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ea%b3%84%ec%9e%a5%ec%84%a4%ea%b3%84-%ea%b3%84%ec%9e%a5%ec%8b%9c%ea%b3%b5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1.jpg",
+      "title": "제목-없음-1",
+      "version": "2024-03-02T01:50:41",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-02T01:50:41+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

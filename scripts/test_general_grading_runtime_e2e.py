@@ -5,11 +5,11 @@ import inspect
 import json
 import unittest
 
-import gemini_grader
-import grade_output_summarizer
+from grading.providers import gemini as gemini_grader
+import grading.scoring.grade_output_summarizer as grade_output_summarizer
 import grading_agents
-from general_evidence_contract import attach_general_evidence_contract
-from question_demand_contract import attach_question_demand_contract
+from grading.evidence.general_evidence_contract import attach_general_evidence_contract
+from grading.routing.question_demand_contract import attach_question_demand_contract
 
 
 # GENERAL_GRADING_RUNTIME_E2E_RELEASE_GATE_V1

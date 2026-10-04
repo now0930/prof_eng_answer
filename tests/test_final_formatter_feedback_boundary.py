@@ -6,7 +6,7 @@ import inspect
 import unittest
 
 import grading_agents as ga
-from grade_output_summarizer import (
+from grading.scoring.grade_output_summarizer import (
     _build_payload,
     _normalise_summary,
     _render,
@@ -192,7 +192,7 @@ class FinalFormatterFeedbackBoundaryTest(unittest.TestCase):
 
     def test_formatter_sources_are_not_feedback_policy_owners(self) -> None:
         import bot
-        import grade_output_summarizer as gos
+        import grading.scoring.grade_output_summarizer as gos
 
         functions = (
             ga._phase16_polish_final_output,

@@ -5,7 +5,7 @@ import os
 import unittest
 from unittest.mock import patch
 
-from assisted_routing import (
+from grading.routing.assisted_routing import (
     ASSISTED_ROUTING_ENV,
     ASSISTED_ROUTING_VERSION,
     assisted_routing_enabled,

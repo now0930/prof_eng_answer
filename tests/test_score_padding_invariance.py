@@ -11,7 +11,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from verified_evidence_score_calibration import apply_verified_evidence_score_calibration
+from grading.scoring.verified_evidence_score_calibration import apply_verified_evidence_score_calibration
 
 
 def _grade(answer_text: str, *, c_score: float = 4.0) -> dict:

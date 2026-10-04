@@ -9,8 +9,8 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 from grading_agents import _stage17e5_finalize_pipeline_result
-from verified_correctness_score_cap import apply_verified_correctness_score_cap
-from verdict_consistency import enforce_final_score_status_narrative_consistency
+from grading.scoring.verified_correctness_score_cap import apply_verified_correctness_score_cap
+from grading.scoring.verdict_consistency import enforce_final_score_status_narrative_consistency
 
 
 QUESTION_TYPES = (
@@ -152,7 +152,7 @@ def test_unresolved_ledger_rewrites_global_accuracy_praise() -> None:
 
 
 def test_formatter_reports_an_applied_verified_cap() -> None:
-    from grade_output_summarizer import _build_payload, _normalise_summary, _render
+    from grading.scoring.grade_output_summarizer import _build_payload, _normalise_summary, _render
 
     grade = _grade()
     grade["logic_check_evaluation"] = {

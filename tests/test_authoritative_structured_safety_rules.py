@@ -8,7 +8,7 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from logic_llm_verifier import (
+from grading.evidence.logic_llm_verifier import (
     _authoritative_structured_findings,
     load_logic_check_profile,
 )

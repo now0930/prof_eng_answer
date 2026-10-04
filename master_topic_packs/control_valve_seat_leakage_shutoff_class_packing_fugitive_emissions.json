@@ -1,0 +1,93 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+  "title_ko": "제어밸브 시트 누설, 차단 등급, 패킹 및 비산배출",
+  "revision": 4,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_valve_seat_leakage_shutoff_class_packing_fugitive_emissions/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:7793",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/115%ed%9a%8c-4%ea%b5%90%ec%8b%9c-5%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/115%ed%9a%8c-4%ea%b5%90%ec%8b%9c-5%eb%b2%88/",
+      "title": "115회 4교시 5번",
+      "version": "e8d3a7ed714b50aa2ac4a46c7574e3fa5f0f7a1a933a50d811f6110caf231a24",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-04T12:43:04+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:dd48bf4aae2ea9ec4384dcdddc19d7ae",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/115%ed%9a%8c-4%ea%b5%90%ec%8b%9c-5%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2025/03/NeoStudio_20250304_214031_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC14.pdf",
+      "title": "NeoStudio_20250304_214031_산업계측제어 기술사14",
+      "version": "2025-03-04T12:41:25",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-04T12:41:25+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4b018646fb3ee0dbeb6117d35379821f",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/115%ed%9a%8c-4%ea%b5%90%ec%8b%9c-5%eb%b2%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2025/03/image-1.png",
+      "title": "image",
+      "version": "2025-03-04T12:39:10",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-04T12:39:10+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

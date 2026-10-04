@@ -9,11 +9,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from evaluation_ledger import (
+from grading.scoring.evaluation_ledger import (
     attach_canonical_evaluation_ledger,
     build_canonical_evaluation_ledger,
 )
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     build_question_demand_contract,
 )
 

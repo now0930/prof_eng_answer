@@ -42,7 +42,7 @@ def should_scan(path: Path) -> bool:
 
 
 def classify(file: str, pattern: str, text: str) -> str:
-    if file == "rubric_registry.py":
+    if file == "grading/rubrics/rubric_registry.py":
         return "registry_loader"
 
     if pattern in {

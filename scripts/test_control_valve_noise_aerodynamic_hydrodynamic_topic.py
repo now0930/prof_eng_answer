@@ -13,11 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from logic_llm_verifier import (
+from grading.evidence.logic_llm_verifier import (
     extract_logic_evidence_candidates,
     verify_logic_with_llm,
 )
-from model_answer_router import find_model_answer_reference
+from grading.routing.model_answer_router import find_model_answer_reference
 
 TOPIC = 'control_valve_noise_aerodynamic_hydrodynamic_low_noise_trim'
 TOPIC_2 = 'control_valve_characteristics_inherent_installed_equal_percentage_linear_quick_opening'
@@ -1437,7 +1437,7 @@ class AcousticFormulaSemanticRegressionTests(
             }],
         }
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=mocked_fatal,
         ):
             fatal_result = (
@@ -1480,7 +1480,7 @@ class AcousticFormulaSemanticRegressionTests(
             "findings": [],
         }
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=mocked_safe,
         ):
             safe_result = (

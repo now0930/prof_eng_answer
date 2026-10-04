@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+  "title_ko": "차압식 레벨계의 원리, 밀도 보정, Dry/Wet Leg, Remote Seal 및 설치 오차",
+  "revision": 4,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error/logic_check.json",
+      "model_answer": "rubrics/topic_packs/differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/differential_pressure_level_measurement_density_compensation_wet_leg_dry_leg_remote_seal_error/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:5dc781e9b8e174a754c90c7dc438ab09",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/chapter-20/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/09/Lessons_In_Industrial_Instrumentation-3-1.pdf",
+      "title": "Lessons_In_Industrial_Instrumentation-3",
+      "version": "2026-09-30T13:20:55",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-09-30T13:20:55+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9529",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/chapter-20/",
+      "source_url": "https://now0930.pe.kr/wordpress/chapter-20/",
+      "title": "Lessons In Industrial Instrumentation, Chapter 20",
+      "version": "48dd8401bf6199ab58108ede2ef2c2876a3f342aed399489c976952218192fe1",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-09-30T13:27:28+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

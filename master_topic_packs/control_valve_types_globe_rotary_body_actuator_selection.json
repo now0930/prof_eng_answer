@@ -1,0 +1,213 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_valve_types_globe_rotary_body_actuator_selection",
+  "title_ko": "제어밸브 본체 형식과 액추에이터 종류 및 선정",
+  "revision": 15,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_valve_types_globe_rotary_body_actuator_selection",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_valve_types_globe_rotary_body_actuator_selection/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_valve_types_globe_rotary_body_actuator_selection/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_valve_types_globe_rotary_body_actuator_selection/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_valve_types_globe_rotary_body_actuator_selection/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9294",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "title": "Valve Handbook 3장 요약: 밸브 및 액추에이터 종류",
+      "version": "8aa1e70f68d4240c056f7e76c4942f6c0782ec13e7bb908cd33dbf13b4e355a7",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-03T08:44:26+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:1c70e07d3172064a5c863d91c1dd8d89",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/single_port_globe_valve.png",
+      "title": "single_port_globe_valve",
+      "version": "2026-08-03T08:39:03",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-03T08:39:03+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a6de1a5e3535f30b7941aecde7816538",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/cage_guided_balanced_valve.png",
+      "title": "cage_guided_balanced_valve",
+      "version": "2026-08-03T08:41:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-03T08:41:53+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:dfeafe39798c70c3cbe5117b15155945",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/valve-handbook-3%ec%9e%a5-%ec%9a%94%ec%95%bd-%eb%b0%b8%eb%b8%8c-%eb%b0%8f-%ec%95%a1%ec%b6%94%ec%97%90%ec%9d%b4%ed%84%b0-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/post_port_guide_methods.png",
+      "title": "post_port_guide_methods",
+      "version": "2026-08-03T08:40:29",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-03T08:40:29+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6716",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "title": "제어 밸브 종류",
+      "version": "15cb770be4dd75fd321908e02a8bb145a1721f78f4e1fa2a43e868e20fb1cf28",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T00:48:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:64b19d1748a547e216f4c0eec31d0338",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/NeoStudio_20250425_002858_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC15.pdf",
+      "title": "NeoStudio_20250425_002858_산업계측제어 기술사15",
+      "version": "2025-04-24T22:29:42",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-24T22:29:42+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:9fb826c3efdcb01362e2cff119a979ac",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240428_171314.pdf",
+      "title": "NeoStudio_20240428_171314",
+      "version": "2024-04-28T08:15:06",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-28T08:15:06+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:248cc47c4e966d8a3c34bc6d9e649ca8",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-13.jpg",
+      "title": "제목-없음-13",
+      "version": "2024-03-06T12:16:00",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-06T12:16:00+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:66a3c0c836a827d5dddfdfb978d8cd98",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%b0%b8%eb%b8%8c-%ec%95%a1%ec%b8%84%ec%97%90%ec%9d%b4%ed%84%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-33.jpg",
+      "title": "제목-없음-33",
+      "version": "2024-03-12T12:40:08",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-12T12:40:08+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a3890cc4b45541c5e4c5954e22329ce2",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1-7.jpg",
+      "title": "제목-없음-1-7",
+      "version": "2024-03-06T12:16:09",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-06T12:16:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6815",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%b0%b8%eb%b8%8c-%ec%95%a1%ec%b8%84%ec%97%90%ec%9d%b4%ed%84%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/%eb%b0%b8%eb%b8%8c-%ec%95%a1%ec%b8%84%ec%97%90%ec%9d%b4%ed%84%b0/",
+      "title": "밸브 액츄에이터",
+      "version": "503c2e02e31ab2d7a8ab8d43b16e660af1528fb2f6cd84a16e79d618ed510949",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-12T12:40:31+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:0e04aaed239eda229974606cc914ff46",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%a0%9c%ec%96%b4-%eb%b0%b8%eb%b8%8c-%ec%a2%85%eb%a5%98/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-14.jpg",
+      "title": "제목-없음-14",
+      "version": "2024-03-06T12:16:20",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-06T12:16:20+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d4f8198fbf3ea1b0e486a06009db41bd",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%eb%b0%b8%eb%b8%8c-%ec%95%a1%ec%b8%84%ec%97%90%ec%9d%b4%ed%84%b0/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1-13.jpg",
+      "title": "제목-없음-1-13",
+      "version": "2024-03-12T12:40:21",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-12T12:40:21+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

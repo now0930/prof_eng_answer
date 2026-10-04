@@ -8,10 +8,10 @@ from pathlib import Path
 from unittest import mock
 
 import grading_agents
-from grading_identity import (
+from grading.scoring.grading_identity import (
     build_grading_identity,
 )
-from question_contract import (
+from grading.routing.question_contract import (
     apply_question_contract_to_fact_evaluation,
     apply_question_contract_to_model_reference,
     apply_question_contract_to_question_type,
@@ -698,7 +698,7 @@ class QuestionContractCacheTests(
             "deterministic_question_router"
         ),
     ) -> dict:
-        from question_contract import (
+        from grading.routing.question_contract import (
             build_question_contract,
         )
 
@@ -757,7 +757,7 @@ class QuestionContractCacheTests(
     def test_cache_key_ignores_answer_and_tracks_rubric(
         self,
     ):
-        from question_contract import (
+        from grading.routing.question_contract import (
             question_contract_cache_key,
         )
 
@@ -819,7 +819,7 @@ class QuestionContractCacheTests(
         import os
         from unittest import mock
 
-        from question_contract import (
+        from grading.routing.question_contract import (
             build_question_contract,
             question_contract_cache_key,
             resolve_question_contract_cache,
@@ -954,7 +954,7 @@ class QuestionContractCacheTests(
     def test_cache_miss_writes_confirmed_candidate(
         self,
     ):
-        from question_contract import (
+        from grading.routing.question_contract import (
             question_contract_cache_key,
             resolve_question_contract_cache,
         )
@@ -1005,7 +1005,7 @@ class QuestionContractCacheTests(
     def test_cache_hit_reuses_confirmed_contract(
         self,
     ):
-        from question_contract import (
+        from grading.routing.question_contract import (
             resolve_question_contract_cache,
         )
 
@@ -1059,7 +1059,7 @@ class QuestionContractCacheTests(
     def test_confirmed_cache_wins_on_routing_deviation(
         self,
     ):
-        from question_contract import (
+        from grading.routing.question_contract import (
             resolve_question_contract_cache,
         )
 
@@ -1132,7 +1132,7 @@ class QuestionContractCacheTests(
     def test_pending_cache_is_not_authoritative(
         self,
     ):
-        from question_contract import (
+        from grading.routing.question_contract import (
             question_contract_cache_key,
             resolve_question_contract_cache,
         )
@@ -1203,7 +1203,7 @@ class QuestionContractCacheTests(
     def test_manual_confirmed_cache_is_authoritative(
         self,
     ):
-        from question_contract import (
+        from grading.routing.question_contract import (
             confirm_question_contract,
             resolve_question_contract_cache,
         )

@@ -1,10 +1,10 @@
 from __future__ import annotations
 
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     attach_question_demand_contract,
     build_question_demand_contract,
 )
-from question_type_coverage_adapter import (
+from grading.routing.question_type_coverage_adapter import (
     _criteria_counts,
     _criteria_details,
 )

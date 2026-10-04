@@ -1,0 +1,154 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "rtd_temperature_sensor_principle_pt100_wiring_compensation",
+  "title_ko": "RTD 온도센서의 측정원리와 Pt100·측정전류·2선식·3선식·4선식 배선보상",
+  "revision": 10,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/rtd_temperature_sensor_principle_pt100_wiring_compensation",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/rtd_temperature_sensor_principle_pt100_wiring_compensation/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/rtd_temperature_sensor_principle_pt100_wiring_compensation/logic_check.json",
+      "model_answer": "rubrics/topic_packs/rtd_temperature_sensor_principle_pt100_wiring_compensation/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/rtd_temperature_sensor_principle_pt100_wiring_compensation/topic_importance.json",
+      "question_demand_axes": "rubrics/topic_packs/rtd_temperature_sensor_principle_pt100_wiring_compensation/question_demand_axes.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:34aa11f635a3bc1e93c3c1140c3d23a9",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%b8%a1%ec%98%a8%ec%a0%80%ed%95%ad%ec%b2%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-19.png",
+      "title": "image-19",
+      "version": "2024-02-09T00:46:13",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-09T00:46:13+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a9b72fdabc3dd7c4984f14ccb2f34515",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/rtd-%ec%84%b1%ec%a7%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/NeoStudio_20250319_080220_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC14.pdf",
+      "title": "NeoStudio_20250319_080220_산업계측제어 기술사14",
+      "version": "2025-03-19T07:09:40",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-19T07:09:40+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ae61faf0f2538114be0721ee43a82a32",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%b8%a1%ec%98%a8%ec%a0%80%ed%95%ad%ec%b2%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-60.png",
+      "title": "image",
+      "version": "2026-05-11T13:30:35",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-05-11T13:30:35+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6331",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%b8%a1%ec%98%a8%ec%a0%80%ed%95%ad%ec%b2%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%b8%a1%ec%98%a8%ec%a0%80%ed%95%ad%ec%b2%b4/",
+      "title": "측온 저항계 온도 측정",
+      "version": "5e33dde234408bfe7a14ea3c696e1b43d14b1904c42354a7fa8e738021539e64",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T00:02:16+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:1abd13269ee877b41882d574a08dc06e",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%b8%a1%ec%98%a8%ec%a0%80%ed%95%ad%ec%b2%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-18.png",
+      "title": "image-18",
+      "version": "2024-02-09T00:46:02",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-09T00:46:02+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ffbea8ca0b3417f673cdf2101bceb4ef",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%b8%a1%ec%98%a8%ec%a0%80%ed%95%ad%ec%b2%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-20.png",
+      "title": "image-20",
+      "version": "2024-02-09T00:49:28",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-09T00:49:28+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6426",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/rtd-%ec%84%b1%ec%a7%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/rtd-%ec%84%b1%ec%a7%88/",
+      "title": "127회 1교시 1번",
+      "version": "13237e83483c3863f104a9e75488e6a4ba069f7b8d28a561b431220d41949c83",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-03-19T07:09:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a56c07aa56c1feac43a85bceeeb24838",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/rtd-%ec%84%b1%ec%a7%88/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240411_165721-1.pdf",
+      "title": "NeoStudio_20240411_165721-1",
+      "version": "2024-04-11T07:59:08",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-11T07:59:08+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

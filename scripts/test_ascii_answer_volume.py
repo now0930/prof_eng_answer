@@ -11,7 +11,7 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 import grading_agents
-from answer_volume import (
+from grading.scoring.answer_volume import (
     ASCII_UNITS_PER_PAGE,
     VOLUME_METHOD,
     ascii_equivalent_count,

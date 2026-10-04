@@ -5,7 +5,7 @@ import tempfile
 import json
 import unittest
 
-import question_demand_evidence as qde
+import grading.routing.question_demand_evidence as qde
 
 
 class QuestionDemandEvidenceShadowTests(unittest.TestCase):

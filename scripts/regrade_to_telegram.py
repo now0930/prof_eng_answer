@@ -363,7 +363,7 @@ def main() -> int:
         if not sources:
             raise SystemExit("no eligible graded Telegram sessions were found")
 
-    from grade_submission_normalizer import normalize_grade_submission
+    from grading.scoring.grade_submission_normalizer import normalize_grade_submission
     from grading_agents import run_agent_pipeline
     import bot
 

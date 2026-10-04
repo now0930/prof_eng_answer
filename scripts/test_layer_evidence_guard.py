@@ -4,7 +4,7 @@ import copy
 import unittest
 
 import grading_agents
-from layer_evidence_guard import (
+from grading.evidence.layer_evidence_guard import (
     LAYER_EVIDENCE_GUARD_MARKER,
     build_layer_evidence_policy,
 )

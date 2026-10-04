@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+  "title_ko": "계측기 환경·EMC/EMI·온도·습도·진동 Qualification 및 검증",
+  "revision": 3,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification/logic_check.json",
+      "model_answer": "rubrics/topic_packs/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/instrumentation_environmental_emc_emi_temperature_humidity_vibration_qualification/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:6436",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%84%b1%eb%8a%a5%ea%b2%80%ec%82%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%84%b1%eb%8a%a5%ea%b2%80%ec%82%ac/",
+      "title": "성능검사",
+      "version": "b06a0ba0aa70539d84a77192d01527bbd915e5ea2483a2b5d1e5d270bcedc5a0",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-11T12:28:12+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:7c327adc2fc3259b08621f2aac4dec43",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%84%b1%eb%8a%a5%ea%b2%80%ec%82%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240411_212646.pdf",
+      "title": "NeoStudio_20240411_212646",
+      "version": "2024-04-11T12:28:02",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-11T12:28:02+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

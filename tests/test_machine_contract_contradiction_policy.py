@@ -1,7 +1,7 @@
 import unittest
 
-from deterministic_requirement_evaluator import evaluate_deterministic_requirements
-from topic_machine_contract import TopicMachineContractError, validate_topic_machine_contract
+from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
+from grading.evidence.topic_machine_contract import TopicMachineContractError, validate_topic_machine_contract
 
 
 class MachineContractContradictionPolicyTests(unittest.TestCase):

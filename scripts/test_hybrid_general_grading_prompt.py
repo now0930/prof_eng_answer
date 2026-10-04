@@ -3,8 +3,8 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-import gemini_grader
-from hybrid_general_prompt import (
+from grading.providers import gemini as gemini_grader
+from grading.evidence.hybrid_general_prompt import (
     HYBRID_GENERAL_PROMPT_MARKER,
     build_hybrid_general_prompt_section,
 )

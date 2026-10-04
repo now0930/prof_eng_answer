@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://prof-eng-answer.local/schemas/training_history.schema.json",
+  "title": "Training History Attempt",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["attempt_id", "learner_id", "question_id", "topic_id", "attempted_at", "score", "diagnosis", "review_status", "last_reviewed_at", "next_review_at"],
+  "properties": {
+    "attempt_id": { "type": "string", "minLength": 1 },
+    "learner_id": { "type": "string", "minLength": 1 },
+    "question_id": { "type": "string", "minLength": 1 },
+    "question_text": { "type": "string" },
+    "session_id": { "type": "string" },
+    "topic_id": { "type": "string", "minLength": 8 },
+    "attempted_at": { "type": "string", "format": "date-time" },
+    "score": { "type": "number", "minimum": 0, "maximum": 25 },
+    "diagnosis": { "type": "object" },
+    "review_status": { "enum": ["new", "scheduled", "due", "completed", "skipped"] },
+    "last_reviewed_at": { "type": ["string", "null"], "format": "date-time" },
+    "next_review_at": { "type": ["string", "null"], "format": "date-time" }
+  }
+}

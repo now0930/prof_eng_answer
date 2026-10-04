@@ -1,0 +1,54 @@
+{
+  "schema_version": "topic-learning-material-v1",
+  "topic_id": "nyquist_stability_criterion_gain_phase_margin",
+  "materials": [
+    {
+      "material_id": "nyquist_time_delay_margin_worked_example",
+      "material_type": "worked_example",
+      "title": "위상여유에서 시간지연 여유 계산",
+      "review_status": "llm_reviewed_human_pending",
+      "source": {
+        "source_id": "wp-post:6156",
+        "source_url": "https://now0930.pe.kr/wordpress/nyquist-plot-time-dealy/",
+        "source_version": "ce9be3234a2fbee1a324699e741ab4e41e35e05f3f878191e573bcd36a270fbc",
+        "source_content_sha256": "37a5066e2de192ef5164094745abca01da64a1ede47ef2ce5c6a1738f7cb6ed9",
+        "locator": "sections 8-15: delay-system worked problem",
+        "excerpt": "시간지연을 추가해도 Gain Crossover Frequency 자체는 변하지 않는다."
+      },
+      "learning_objective": "단일 gain-crossover 예제에서 PM과 시간지연 여유를 계산하고 각 주파수 교차점의 역할을 구분한다.",
+      "assumptions": [
+        "문제에서 T=0일 때 안정하다고 주어진다.",
+        "계산 예제에서는 양의 주파수의 관련 crossover가 하나씩 존재한다고 본다.",
+        "시간지연은 순수 지연 e^(-sT)이며, PM은 시간지연이 없는 plant-loop 전달함수에서 계산한다."
+      ],
+      "steps": [
+        "L(s)=e^(-sT)·2√2/(s+1)^3에서 |e^(-jωT)|=1이므로 지연은 magnitude와 gain-crossover 주파수를 바꾸지 않는다.",
+        "|G(jω)|=2√2/(1+ω²)^(3/2)=1을 풀어 ω_gc=1 rad/s를 얻는다.",
+        "∠G(jω_gc)=-3tan^(-1)(1)=-135°이므로 PM=180°-135°=45°=π/4 rad이다.",
+        "T_delay=PM(rad)/ω_gc=(π/4)/(1 rad/s)=π/4 s≈0.785 s이다.",
+        "교차점 구분 확인: ω_pc=√3 rad/s에서 |G(jω_pc)|=√2/4이므로 GM=2√2≈2.828, 즉 약 9.03 dB이다."
+      ],
+      "result": "예제의 시간지연 여유는 약 0.785 s이다. PM은 ω_gc에서, GM은 ω_pc에서 구하며, T_delay 식의 PM은 rad 단위로 넣는다.",
+      "self_check": [
+        {
+          "question": "PM을 45°로 둔 채 ω_gc=1 rad/s에 그대로 나누면 시간지연 여유가 얼마인가?",
+          "answer": "각도를 rad로 바꾸지 않았으므로 단위가 일치하지 않는다. 45°=π/4 rad로 변환하여 약 0.785 s로 계산한다."
+        },
+        {
+          "question": "순수 시간지연이 이 예제의 gain-crossover frequency를 바꾸는가?",
+          "answer": "아니다. |e^(-jωT)|=1이므로 magnitude는 유지되고 위상만 -ωT만큼 추가 지연된다."
+        },
+        {
+          "question": "GM과 PM은 같은 crossover frequency에서 계산하는가?",
+          "answer": "아니다. GM은 phase crossover ω_pc에서 magnitude로, PM은 gain crossover ω_gc에서 phase로 계산한다."
+        }
+      ],
+      "diagnostic_cues": [
+        "시간지연을 magnitude 변화로 설명하면 순수 지연의 주파수응답 성질을 다시 확인한다.",
+        "PM의 도(degree)를 rad 변환 없이 시간으로 계산하면 단위 변환을 보완한다.",
+        "GM과 PM을 교차 주파수에 반대로 연결하면 ω_pc와 ω_gc의 정의부터 재검토한다."
+      ],
+      "score_effect": "none"
+    }
+  ]
+}

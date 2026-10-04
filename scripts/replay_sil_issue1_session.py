@@ -23,17 +23,17 @@ if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
 import bot
-from grade_submission_normalizer import (
+from grading.scoring.grade_submission_normalizer import (
     attach_submission_normalization,
     normalize_grade_submission,
 )
-from logic_check_evaluator import evaluate_logic_checks
-from question_demand_contract import build_question_demand_contract
-from question_type_coverage_adapter import (
+from grading.evidence.logic_check_evaluator import evaluate_logic_checks
+from grading.routing.question_demand_contract import build_question_demand_contract
+from grading.routing.question_type_coverage_adapter import (
     attach_question_type_coverage_feedback,
 )
-from sil_relation_integrity import SIL_TARGET_TOPIC_ID
-from verdict_consistency import enforce_final_decision_consistency
+from grading.evidence.sil_relation_integrity import SIL_TARGET_TOPIC_ID
+from grading.scoring.verdict_consistency import enforce_final_decision_consistency
 
 
 VERSION = "sil_issue1_runtime_replay_v1"

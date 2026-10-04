@@ -1,0 +1,117 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "temperature_measurement_error_heat_transfer",
+  "title_ko": "온도 측정 시 열전달에 의한 오차 원인과 저감 대책",
+  "revision": 8,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/temperature_measurement_error_heat_transfer",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/temperature_measurement_error_heat_transfer/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/temperature_measurement_error_heat_transfer/logic_check.json",
+      "model_answer": "rubrics/topic_packs/temperature_measurement_error_heat_transfer/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/temperature_measurement_error_heat_transfer/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:fa98decfdc995b50398ec364ddbfe311",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84-%ec%b8%a1%ec%a0%95%ec%97%90%ec%84%9c-%eb%8b%b4%ea%b8%88-%ea%b9%8a%ec%9d%b4-%ea%b2%b0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/05/image-11.png",
+      "title": "image",
+      "version": "2026-05-10T07:56:34",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-05-10T07:56:34+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:35f24f5941df024a418e3547e06c903b",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84%ec%b8%a1%ec%a0%95-%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/05/NeoStudio_20260513_201622_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4_%EA%B8%B0%EC%88%A0%EC%82%AC_16_001.pdf",
+      "title": "NeoStudio_20260513_201622_산업계측제어_기술사_16_001",
+      "version": "2026-05-13T11:19:56",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-05-13T11:19:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9123",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84-%ec%b8%a1%ec%a0%95%ec%97%90%ec%84%9c-%eb%8b%b4%ea%b8%88-%ea%b9%8a%ec%9d%b4-%ea%b2%b0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84-%ec%b8%a1%ec%a0%95%ec%97%90%ec%84%9c-%eb%8b%b4%ea%b8%88-%ea%b9%8a%ec%9d%b4-%ea%b2%b0%ec%a0%95/",
+      "title": "온도 측정에서 담금 깊이 결정",
+      "version": "34396ce92239daf698c9208b778d3c5d2a24c3288e7c014629e69d4458a235c8",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-05-10T07:57:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:79be9b9676be8faf795b6a794f0bbb55",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84-%ec%b8%a1%ec%a0%95%ec%97%90%ec%84%9c-%eb%8b%b4%ea%b8%88-%ea%b9%8a%ec%9d%b4-%ea%b2%b0%ec%a0%95/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/05/image-10.png",
+      "title": "image",
+      "version": "2026-05-10T07:56:13",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-05-10T07:56:13+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:9161",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84%ec%b8%a1%ec%a0%95-%ec%a0%95%eb%a6%ac/",
+      "source_url": "https://now0930.pe.kr/wordpress/%ec%98%a8%eb%8f%84%ec%b8%a1%ec%a0%95-%ec%a0%95%eb%a6%ac/",
+      "title": "온도측정 정리",
+      "version": "b4dccd9b1837eff1fa7e94d82f6c0b87dce22c4beb2f2f1c4a7890f27ca25060",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-05-13T11:23:51+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

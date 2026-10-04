@@ -8,7 +8,7 @@ import unittest
 from unittest import mock
 
 import grading_agents
-import semantic_router_shadow as srs
+import grading.routing.semantic_router_shadow as srs
 
 
 BASE_DIR = Path(__file__).resolve().parents[1]
@@ -702,7 +702,7 @@ class Phase10SemanticShadowIsolationTest(unittest.TestCase):
         }
 
         with mock.patch(
-            "semantic_router_shadow.semantic_route_shadow",
+            "grading.routing.semantic_router_shadow.semantic_route_shadow",
             return_value=fake,
         ), mock.patch.object(
             grading_agents,
@@ -743,7 +743,7 @@ class Phase10SemanticShadowIsolationTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             session_dir = Path(tmp)
             with mock.patch(
-                "semantic_router_shadow.semantic_route_shadow",
+                "grading.routing.semantic_router_shadow.semantic_route_shadow",
                 return_value=fake,
             ):
                 result = grading_agents._phase10_run_semantic_router_shadow(
@@ -766,7 +766,7 @@ class Phase10SemanticShadowIsolationTest(unittest.TestCase):
 class StaticIsolationContractTest(unittest.TestCase):
     def test_semantic_module_api_has_no_answer_text(self):
         tree = ast.parse(
-            (BASE_DIR / "semantic_router_shadow.py").read_text(
+            (BASE_DIR / "grading/routing/semantic_router_shadow.py").read_text(
                 encoding="utf-8"
             )
         )

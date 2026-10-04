@@ -1,12 +1,12 @@
 import math
-from rubric_registry import load_fact_anchor_bank
+from grading.rubrics.rubric_registry import load_fact_anchor_bank
 #!/usr/bin/env python3
 import json
 import re
 import traceback
 from datetime import datetime
 from pathlib import Path
-from grading_config import load_active_config, save_active_config_snapshots
+from grading.scoring.grading_config import load_active_config, save_active_config_snapshots
 
 
 def _call_difficulty_strategy_to_grade_compat(
@@ -72,7 +72,7 @@ def _call_difficulty_strategy_to_grade_compat(
 BASE_DIR = Path(__file__).resolve().parent
 
 # STAGE23J_RUNTIME_PROVENANCE_IMPORT_V4
-from runtime_grading_provenance import (
+from grading.scoring.runtime_grading_provenance import (
     attach_runtime_provenance_to_pipeline_result
     as _stage23j_attach_runtime_provenance,
 )
@@ -1444,7 +1444,7 @@ def _phase2_text_stats(text):
 
 def _phase2_estimate_volume_level(answer_text, image_count=0):
     """Compatibility wrapper for ASCII-only volume estimation."""
-    from answer_volume import estimate_ascii_answer_volume
+    from grading.scoring.answer_volume import estimate_ascii_answer_volume
 
     _ = image_count
     return estimate_ascii_answer_volume(answer_text)
@@ -4736,7 +4736,7 @@ def _stage7_semantic_exact_projection_validation(gemini_eval):
         else None
     )
 
-    from evaluation_ledger import _demand_link_phrase
+    from grading.scoring.evaluation_ledger import _demand_link_phrase
 
     typed_requirements = bool(
         isinstance(requirements, list)
@@ -5089,7 +5089,7 @@ def _phase6_run_gemini_semantic_grader(
     session_dir
 ):
     try:
-        from gemini_grader import gemini_semantic_grade
+        from grading.providers.gemini import gemini_semantic_grade
 
         question_text = _phase3_extract_question_text(input_text)
 
@@ -5104,7 +5104,7 @@ def _phase6_run_gemini_semantic_grader(
             connection_eval=connection_eval,
         )
 
-        from hybrid_demand_scope_guard import (
+        from grading.evidence.hybrid_demand_scope_guard import (
             sanitize_hybrid_semantic_evaluation,
         )
         result = sanitize_hybrid_semantic_evaluation(
@@ -5317,7 +5317,7 @@ def _phase2_extract_submission_context_canonical(input_text):
     # Phase2에서도 canonical submission parser를 재사용한다.
     # 경계를 확정하지 못한 입력은 질문을 비워 둔다. 전체 입력을
     # 질문으로 복제하는 legacy fallback은 Fact/요구사항 오염을 만든다.
-    from grade_submission_normalizer import (
+    from grading.scoring.grade_submission_normalizer import (
         normalize_grade_submission,
     )
 
@@ -5363,7 +5363,7 @@ def _phase2_build_canonical_submission_text(
 def _phase2_postprocess_grade(legacy_result):
     from pathlib import Path
     import time as _phase20_time
-    from grading_config import load_active_config, save_active_config_snapshots
+    from grading.scoring.grading_config import load_active_config, save_active_config_snapshots
 
     def report(message):
         try:
@@ -5476,7 +5476,7 @@ def _phase2_postprocess_grade(legacy_result):
         )
     )
 
-    from grading_identity import (
+    from grading.scoring.grading_identity import (
         build_grading_identity,
     )
 
@@ -5571,7 +5571,7 @@ def _phase2_postprocess_grade(legacy_result):
         session_dir=session_dir,
     )
 
-    from question_contract import (
+    from grading.routing.question_contract import (
         apply_question_contract_to_fact_evaluation,
         apply_question_contract_to_model_reference,
         apply_question_contract_to_question_type,
@@ -5581,12 +5581,12 @@ def _phase2_postprocess_grade(legacy_result):
         resolve_question_contract_cache,
     )
 
-    from multi_topic_evidence_consumer import (
+    from grading.evidence.multi_topic_evidence_consumer import (
         attach_multi_topic_evidence_to_subject_rubric,
         attach_multi_topic_summary_to_question_contract,
         enrich_multi_topic_model_reference_with_contract,
     )
-    from hybrid_general_evidence_consumer import (
+    from grading.evidence.hybrid_general_evidence_consumer import (
         attach_hybrid_general_evidence_to_subject_rubric,
         attach_hybrid_general_summary_to_question_contract,
         enrich_hybrid_general_model_reference_with_contract,
@@ -5666,7 +5666,7 @@ def _phase2_postprocess_grade(legacy_result):
     # QUESTION_DEMAND_B_CAPTURE_DEFAULT_V2: preserve fallback paths without QD evidence
     question_demand_evidence_for_score = None
     try:
-        from question_demand_evidence import (
+        from grading.routing.question_demand_evidence import (
             write_question_demand_evidence_shadow,
         )
 
@@ -5811,7 +5811,7 @@ def _phase2_postprocess_grade(legacy_result):
         )
     )
 
-    from hybrid_demand_scope_guard import (
+    from grading.evidence.hybrid_demand_scope_guard import (
         restore_blocked_semantic_layer_scores,
     )
     (
@@ -6022,7 +6022,7 @@ def _phase2_postprocess_grade(legacy_result):
         input_text=canonical_input_text,
     )
     try:
-        from logic_check_evaluator import attach_logic_check_to_grade
+        from grading.evidence.logic_check_evaluator import attach_logic_check_to_grade
 
 
         # PHASE3B_LOGIC_CHECK_TOPIC_ROUTING_PATCH
@@ -6084,7 +6084,7 @@ def _phase2_postprocess_grade(legacy_result):
             # STAGE21_RELATIONSHIP_QUESTION_DEMAND_PROJECTION_V1
             # Runs after all score-affecting Question Demand consumers.
             try:
-                from question_demand_evidence import (
+                from grading.routing.question_demand_evidence import (
                     project_logic_relationship_conflicts,
                 )
 
@@ -6123,7 +6123,7 @@ def _phase2_postprocess_grade(legacy_result):
     # Diagnostic-only formula validation runs
     # after precise Logic Check topic routing.
     try:
-        from control_valve_formula_checker import (
+        from grading.evidence.control_valve_formula_checker import (
             attach_control_valve_formula_check,
         )
 
@@ -6133,7 +6133,7 @@ def _phase2_postprocess_grade(legacy_result):
         )
 
         # CONTROL_VALVE_CORRECTNESS_BRIDGE_V1
-        from control_valve_correctness_bridge import (
+        from grading.evidence.control_valve_correctness_bridge import (
             merge_control_valve_findings_into_evidence,
         )
 
@@ -6144,7 +6144,7 @@ def _phase2_postprocess_grade(legacy_result):
         )
 
         # VERIFIED_DEFECT_RECONCILIATION_V1
-        from verified_defect_reconciliation import (
+        from grading.evidence.verified_defect_reconciliation import (
             reconcile_verified_defects_with_coverage,
         )
 
@@ -6215,7 +6215,7 @@ def _phase2_postprocess_grade(legacy_result):
 
     # PHASE20_DIFFICULTY_SELECTION_OUTPUT_FINAL
     try:
-        from difficulty_output_adapter import attach_difficulty_strategy_to_grade
+        from grading.scoring.difficulty_output_adapter import attach_difficulty_strategy_to_grade
         _question_for_difficulty_final = (
             locals().get("question")
             or locals().get("question_text")
@@ -6287,7 +6287,7 @@ def _phase2_postprocess_grade(legacy_result):
 
     # PHASE21_DIFFICULTY_SCORE_CEILING_FINAL_ORDERED
     try:
-        from difficulty_score_ceiling import apply_difficulty_score_ceiling
+        from grading.scoring.difficulty_score_ceiling import apply_difficulty_score_ceiling
         _answer_for_difficulty_final = (
             locals().get("answer")
             or locals().get("answer_text")
@@ -7054,7 +7054,7 @@ def _phase8_run_originality_evaluator(
                 f"{write_error!r}"
             )
 
-    from hybrid_demand_scope_guard import (
+    from grading.evidence.hybrid_demand_scope_guard import (
         build_hybrid_originality_scope_contract,
         project_hybrid_originality_pre_normalization,
         sanitize_hybrid_originality_evaluation,
@@ -7138,7 +7138,7 @@ def _phase8_run_originality_evaluator(
         )
 
     try:
-        from originality_grader import (
+        from grading.scoring.originality_grader import (
             gemini_originality_evaluate,
         )
 
@@ -7467,7 +7467,7 @@ def _phase9_run_question_type_lens(
             )
 
     try:
-        from question_type_router import (
+        from grading.routing.question_type_router import (
             detect_question_type,
             load_question_type_profile,
         )
@@ -7836,7 +7836,7 @@ def _phase10_run_semantic_router_shadow(
 ):
     "Run semantic routing as a non-authoritative shadow side effect."
     try:
-        from semantic_router_shadow import (
+        from grading.routing.semantic_router_shadow import (
             SEMANTIC_ROUTER_SHADOW_FILE,
             augment_rule_candidates_for_shadow,
             semantic_route_shadow,
@@ -7892,7 +7892,7 @@ def _phase10_run_semantic_router_shadow(
     ):
         try:
             try:
-                from coverage_feedback_persistence import (
+                from grading.coverage_feedback.persistence import (
                     persist_session_coverage_feedback_event,
                 )
                 persist_session_coverage_feedback_event(
@@ -7932,7 +7932,7 @@ def _phase10_run_question_demand_shadow(
 ):
     """Run demand decomposition as a non-authoritative shadow side effect."""
     try:
-        from question_demand_shadow import (
+        from grading.routing.question_demand_shadow import (
             QUESTION_DEMAND_SHADOW_FILE,
             extract_question_demands,
         )
@@ -8029,7 +8029,7 @@ def _phase10_run_model_answer_reference(
             )
 
     try:
-        from model_answer_router import (
+        from grading.routing.model_answer_router import (
             find_model_answer_reference,
             load_model_answer_bank,
         )
@@ -8112,7 +8112,7 @@ def _phase10_run_model_answer_reference(
         # Semantic Router candidates are derived from the question
         # and Question Demand only.  The legacy reference result
         # remains downstream for grading compatibility, not routing.
-        from semantic_router_shadow import (
+        from grading.routing.semantic_router_shadow import (
             build_question_demand_aware_rule_candidates,
         )
 
@@ -8164,23 +8164,23 @@ def _phase10_run_model_answer_reference(
                 "not matched."
             )
 
-        from assisted_routing import (
+        from grading.routing.assisted_routing import (
             assisted_routing_enabled,
             build_assisted_model_answer_reference,
         )
 
         model_answer_reference_result = result
-        from multi_topic_grading_context import (
+        from grading.evidence.multi_topic_grading_context import (
             multi_topic_grading_enabled,
         )
 
         if multi_topic_grading_enabled():
             from pathlib import Path
-            from multi_topic_grading_context import (
+            from grading.evidence.multi_topic_grading_context import (
                 build_multi_topic_grading_context,
                 load_generated_multi_topic_sources,
             )
-            from semantic_router_shadow import (
+            from grading.routing.semantic_router_shadow import (
                 augment_rule_candidates_for_shadow,
             )
 
@@ -8216,17 +8216,17 @@ def _phase10_run_model_answer_reference(
                     "multi_topic_grading_context"
                 ] = multi_topic_context
 
-        from hybrid_general_grading_context import (
+        from grading.evidence.hybrid_general_grading_context import (
             hybrid_general_grading_enabled,
         )
 
         if hybrid_general_grading_enabled():
             from pathlib import Path
-            from hybrid_general_grading_context import (
+            from grading.evidence.hybrid_general_grading_context import (
                 build_hybrid_general_grading_context,
                 load_generated_hybrid_general_sources,
             )
-            from semantic_router_shadow import (
+            from grading.routing.semantic_router_shadow import (
                 augment_rule_candidates_for_shadow,
             )
 
@@ -8264,7 +8264,7 @@ def _phase10_run_model_answer_reference(
                 ] = hybrid_general_context
 
         if assisted_routing_enabled():
-            from semantic_router_shadow import (
+            from grading.routing.semantic_router_shadow import (
                 augment_rule_candidates_for_shadow,
             )
 
@@ -8332,7 +8332,7 @@ def _phase10_merge_model_answer_feedback(grade, model_answer_ref):
 
     ref = model_answer_ref.get("primary_reference") or {}
 
-    from hybrid_demand_scope_guard import (
+    from grading.evidence.hybrid_demand_scope_guard import (
         project_hybrid_model_answer_feedback,
     )
     (
@@ -9511,7 +9511,7 @@ def _phase6_apply_semantic_downward_guard(
     gemini_eval,
     scoring_model,
 ):
-    from layer_evidence_guard import (
+    from grading.evidence.layer_evidence_guard import (
         apply_layer_specific_evidence_guard,
         has_general_evidence_contract,
     )
@@ -9579,7 +9579,7 @@ def _phase2_finalize_verified_coverage_for_persistence(
         )
     )
 
-    from verified_defect_reconciliation import (
+    from grading.evidence.verified_defect_reconciliation import (
         reconcile_verified_defects_with_coverage,
     )
 
@@ -9598,7 +9598,7 @@ def _phase2_finalize_verified_coverage_for_persistence(
             "changed numeric score state"
         )
 
-    from evaluation_ledger import (
+    from grading.scoring.evaluation_ledger import (
         attach_canonical_evaluation_ledger,
     )
     output = attach_canonical_evaluation_ledger(
@@ -10466,7 +10466,7 @@ def _stage18b1_stable_question_contract_hash(
 ):
     import copy
 
-    from question_contract import (
+    from grading.routing.question_contract import (
         rehash_question_contract,
     )
 
@@ -10772,11 +10772,11 @@ def finalize_grade_after_score_reconciliation(value):
     if value.get("marker") == "DETERMINISTIC_GRADING_PRIMARY_V1":
         return value
 
-    from evidence_calibration import apply_evidence_based_calibration
-    from high_score_eligibility import apply_high_score_eligibility_cap
-    from verified_correctness_score_cap import apply_verified_correctness_score_cap
-    from verified_evidence_score_calibration import apply_verified_evidence_score_calibration
-    from verdict_consistency import (
+    from grading.scoring.evidence_calibration import apply_evidence_based_calibration
+    from grading.scoring.high_score_eligibility import apply_high_score_eligibility_cap
+    from grading.scoring.verified_correctness_score_cap import apply_verified_correctness_score_cap
+    from grading.scoring.verified_evidence_score_calibration import apply_verified_evidence_score_calibration
+    from grading.scoring.verdict_consistency import (
         enforce_final_decision_consistency,
         enforce_final_score_status_narrative_consistency,
     )
@@ -10810,26 +10810,26 @@ def _stage17e5_finalize_pipeline_result(
     value,
     submission_normalization,
 ):
-    from evidence_calibration import (
+    from grading.scoring.evidence_calibration import (
         apply_evidence_based_calibration,
     )
-    from evaluation_ledger import (
+    from grading.scoring.evaluation_ledger import (
         attach_canonical_evaluation_ledger,
     )
-    from grade_submission_normalizer import (
+    from grading.scoring.grade_submission_normalizer import (
         attach_submission_normalization,
     )
-    from verdict_consistency import (
+    from grading.scoring.verdict_consistency import (
         enforce_final_decision_consistency,
         enforce_final_score_status_narrative_consistency,
     )
-    from verified_evidence_score_calibration import (
+    from grading.scoring.verified_evidence_score_calibration import (
         apply_verified_evidence_score_calibration,
     )
-    from high_score_eligibility import (
+    from grading.scoring.high_score_eligibility import (
         apply_high_score_eligibility_cap,
     )
-    from verified_correctness_score_cap import (
+    from grading.scoring.verified_correctness_score_cap import (
         apply_verified_correctness_score_cap,
     )
 
@@ -10889,10 +10889,10 @@ def _stage17e5_finalize_pipeline_result(
 
 
 def run_agent_pipeline(*args, **kwargs):
-    from grade_submission_normalizer import (
+    from grading.scoring.grade_submission_normalizer import (
         normalize_pipeline_call,
     )
-    from grading_authority_policy import (
+    from grading.scoring.grading_authority_policy import (
         enforce_requested_authority_mode,
     )
 
@@ -10910,11 +10910,11 @@ def run_agent_pipeline(*args, **kwargs):
     # STAGE39_DETERMINISTIC_PRIMARY_ENTRYPOINT_V1
     authority_mode = enforce_requested_authority_mode()
     if authority_mode["DETERMINISTIC_GRADING_PRIMARY"]:
-        from deterministic_primary_grader import (
+        from grading.scoring.deterministic_primary_grader import (
             grade_deterministically,
             persist_deterministic_grade,
         )
-        from grade_submission_normalizer import normalize_grade_submission
+        from grading.scoring.grade_submission_normalizer import normalize_grade_submission
         normalized_text = str(normalized_kwargs.get("raw_text") or "")
         if not normalized_text and len(normalized_args) > 1:
             normalized_text = str(normalized_args[1] or "")
@@ -10927,7 +10927,7 @@ def run_agent_pipeline(*args, **kwargs):
         if session_dir is None and len(normalized_args) > 5:
             session_dir = normalized_args[5]
         raw_result = persist_deterministic_grade(session_dir, grade)
-        from grade_submission_normalizer import attach_submission_normalization
+        from grading.scoring.grade_submission_normalizer import attach_submission_normalization
         finalized_result = (
             raw_result,
             attach_submission_normalization(grade, submission_normalization),
@@ -10955,7 +10955,7 @@ def run_agent_pipeline(*args, **kwargs):
     # STAGE35G_DETERMINISTIC_PRIMARY_SHADOW_V1
     # Diagnostic only: no production score/verdict mutation or provider call.
     try:
-        from deterministic_grading_shadow import attach_deterministic_grading_shadow
+        from grading.scoring.deterministic_grading_shadow import attach_deterministic_grading_shadow
         finalized_result = attach_deterministic_grading_shadow(
             finalized_result,
             question_text=str(submission_normalization.get("question_text") or ""),

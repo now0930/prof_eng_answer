@@ -15,12 +15,12 @@ if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
 
-from question_type_taxonomy import detect_question_type_from_text
-from question_type_router import (
+from grading.routing.question_type_taxonomy import detect_question_type_from_text
+from grading.routing.question_type_router import (
     detect_question_type,
     load_question_type_profile,
 )
-from grading_identity import (
+from grading.scoring.grading_identity import (
     NORMALIZATION_VERSION,
     build_grading_identity,
     normalize_grading_text,
@@ -31,16 +31,16 @@ from grading_agents import (
     _phase3_load_fact_anchor_bank,
     _phase3_select_fact_anchors,
 )
-from logic_check_evaluator import (
+from grading.evidence.logic_check_evaluator import (
     _logic_layer_score_snapshot,
     attach_logic_check_to_grade,
 )
-from logic_llm_verifier import (
+from grading.evidence.logic_llm_verifier import (
     _build_logic_prompt,
     extract_logic_evidence_candidates,
     load_logic_check_profile,
 )
-from semantic_question_type_postprocess import ensure_question_type_coverage
+from grading.routing.semantic_question_type_postprocess import ensure_question_type_coverage
 
 
 TARGET_TOPIC_ID = (
@@ -454,7 +454,7 @@ class ControlValveLogicScoreRegressionTests(
         }
 
         with mock.patch(
-            "logic_check_evaluator."
+            "grading.evidence.logic_check_evaluator."
             "evaluate_logic_checks",
             return_value=self._fatal_logic_result(),
         ):
@@ -541,7 +541,7 @@ class ControlValveLogicScoreRegressionTests(
         }
 
         with mock.patch(
-            "logic_check_evaluator."
+            "grading.evidence.logic_check_evaluator."
             "evaluate_logic_checks",
             return_value=nonfatal,
         ):
@@ -611,7 +611,7 @@ class ControlValveLogicScoreRegressionTests(
         }
 
         with mock.patch(
-            "logic_check_evaluator."
+            "grading.evidence.logic_check_evaluator."
             "evaluate_logic_checks",
             return_value=unscoped,
         ):
@@ -702,7 +702,7 @@ class ControlValveLogicScoreRegressionTests(
         )
 
         with mock.patch(
-            "logic_check_evaluator."
+            "grading.evidence.logic_check_evaluator."
             "evaluate_logic_checks",
             return_value=self._fatal_logic_result(),
         ):

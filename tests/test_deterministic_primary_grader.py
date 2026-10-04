@@ -10,7 +10,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from deterministic_primary_grader import grade_deterministically, persist_deterministic_grade
+from grading.scoring.deterministic_primary_grader import grade_deterministically, persist_deterministic_grade
 from grading_agents import finalize_grade_after_score_reconciliation, run_agent_pipeline
 
 
@@ -59,7 +59,7 @@ class DeterministicPrimaryGraderTests(unittest.TestCase):
         self.assertGreater(grade["total_score"], 0.0)
 
     def test_reconciler_cannot_call_llm_or_change_deterministic_grade(self):
-        from grade_score_reconciler import reconcile_grade_score
+        from grading.scoring.grade_score_reconciler import reconcile_grade_score
 
         grade = {
             "marker": "DETERMINISTIC_GRADING_PRIMARY_V1",

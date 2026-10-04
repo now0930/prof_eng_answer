@@ -1,0 +1,274 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+  "title_ko": "계측제어 유·무선 통신, Fieldbus, Industrial Ethernet 및 상호운용성",
+  "revision": 21,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection/logic_check.json",
+      "model_answer": "rubrics/topic_packs/industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection/topic_importance.json",
+      "question_demand_axes": "rubrics/topic_packs/industrial_wired_wireless_communication_fieldbus_ethernet_interoperability_selection/question_demand_axes.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:c4a9c92edd63b4b4f051f6cc7998faf3",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/iot_protocols_you_need_to_know_isa100.11a.pdf",
+      "title": "iot_protocols_you_need_to_know_isa100.11a",
+      "version": "2024-02-21T11:59:32",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-21T11:59:32+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:20cef9532dcaedf52d0e6bf41f03f518",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1.jpg",
+      "title": "제목-없음-1",
+      "version": "2024-04-18T12:04:45",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-18T12:04:45+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:f0e0059c6899ecf9b6e77d995df0d85c",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/WirelessHART-vs.-ISA100.11a-Whats-the-Difference-Control-Global.pdf",
+      "title": "WirelessHART vs. ISA100.11a — What’s the Difference Control Global",
+      "version": "2024-02-20T14:21:34",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-20T14:21:34+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:b86c4cb2d944dbf4d414c7d575aa0a54",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-34.jpg",
+      "title": "제목-없음-34",
+      "version": "2024-02-21T11:57:07",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-21T11:57:07+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:47087e96c2b5897b390db518cb0392fc",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/white-paper-a-comparison-of-wirelesshart-isa100-11a-en-42598-1.pdf",
+      "title": "white-paper-a-comparison-of-wirelesshart-isa100-11a-en-42598",
+      "version": "2024-02-21T11:59:16",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-21T11:59:16+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ac7408177a0b3a165f1bb5ce78ef1ccf",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/092-102_%EA%B0%95%ED%98%B8%EC%9A%A9_192%ED%98%B8.pdf",
+      "title": "092-102_강호용_192호",
+      "version": "2024-02-21T12:00:16",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-21T12:00:16+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:952216e9b74c5b5450a8eb224e533b6c",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-66.jpg",
+      "title": "제목-없음-66",
+      "version": "2024-03-27T09:58:16",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-27T09:58:16+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:206c63135fe9725402071a0fa09d15cf",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-65.jpg",
+      "title": "제목-없음-65",
+      "version": "2024-03-27T09:58:01",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-27T09:58:01+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8f1751c56e0933e0245aaa48d4a32061",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/An-Adaptive-GTS-Allocation-Scheme-to-Increase-Bandwidth-Utilization-in-IEEE-802.15.4.pdf",
+      "title": "An-Adaptive-GTS-Allocation-Scheme-to-Increase-Bandwidth-Utilization-in-IEEE-802.15.4",
+      "version": "2024-04-18T08:27:30",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-18T08:27:30+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:6f1141ecf027991a59c9a852c5b4aba2",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-64.jpg",
+      "title": "제목-없음-64",
+      "version": "2024-03-27T09:57:49",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-27T09:57:49+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:2887c3fa63b5178f9ff92c6a0fe60bba",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1-13.jpg",
+      "title": "제목-없음-1-13",
+      "version": "2024-02-21T11:57:18",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-21T11:57:18+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:0a8e03d1a0248c879184db07159ecfd4",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/ISA-100_11a-protocol-stack.webp",
+      "title": "ISA-100_11a-protocol-stack",
+      "version": "2024-02-21T08:25:46",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-21T08:25:46+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:db75f77862a9735214c3745587815906",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/Energy-Efficient-Graph-Setup-in-ISA100.11a.pdf",
+      "title": "Energy Efficient Graph Setup in ISA100.11a",
+      "version": "2024-02-21T11:59:48",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-21T11:59:48+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6560",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "title": "WirelessHART, ISA100.11a",
+      "version": "bc0938cfd4fe684673ee9e5a6ffce94b060c411967ae13d860751d3cf0e2e2aa",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T00:23:46+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:8752",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/industrial-communications-systems-5%ec%9e%a5-17%ec%9e%a5-%ec%9a%94%ec%95%bd/",
+      "source_url": "https://now0930.pe.kr/wordpress/industrial-communications-systems-5%ec%9e%a5-17%ec%9e%a5-%ec%9a%94%ec%95%bd/",
+      "title": "Industrial Communications Systems 5장 ~ 17장 요약",
+      "version": "5c78939a41acf587a19cda626dd2054b835cd6e0c9e9c3fef2f4b19661b66dea",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-03-24T13:36:15+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a2b55312345ce1089474752d5918684b",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-47.png",
+      "title": "image-47",
+      "version": "2024-02-20T13:13:18",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-20T13:13:18+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:92363dc5d06bb5378ef445f977e2838e",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/AnalysisOfWirelessIndustrialAutomationStandards_isa100a_wirelessHART.pdf",
+      "title": "AnalysisOfWirelessIndustrialAutomationStandards_isa100a_wirelessHART",
+      "version": "2024-02-21T12:00:03",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-21T12:00:03+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:104944017db8cae5c543ed5279b72274",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/wirelesshart-isa100-11a/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/HART-protocol-stack_output.webp",
+      "title": "HART-protocol-stack_output",
+      "version": "2024-02-21T08:26:04",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-21T08:26:04+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

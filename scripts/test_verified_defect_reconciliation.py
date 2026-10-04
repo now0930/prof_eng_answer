@@ -5,18 +5,18 @@ import json
 import unittest
 from pathlib import Path
 
-import grade_output_summarizer
-from control_valve_correctness_bridge import (
+import grading.scoring.grade_output_summarizer as grade_output_summarizer
+from grading.evidence.control_valve_correctness_bridge import (
     merge_control_valve_findings_into_evidence,
 )
-from control_valve_formula_checker import (
+from grading.evidence.control_valve_formula_checker import (
     TARGET_TOPIC_ID,
     evaluate_control_valve_formula_check,
 )
-from question_demand_contract import (
+from grading.routing.question_demand_contract import (
     build_question_demand_contract,
 )
-from verified_defect_reconciliation import (
+from grading.evidence.verified_defect_reconciliation import (
     reconcile_verified_defects_with_coverage,
 )
 

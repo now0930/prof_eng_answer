@@ -1,0 +1,313 @@
+from __future__ import annotations
+
+import json
+import csv
+import sqlite3
+import sys
+import tempfile
+from datetime import datetime
+from pathlib import Path
+from unittest.mock import patch
+
+ROOT = Path(__file__).resolve().parents[1]
+if str(ROOT) not in sys.path:
+    sys.path.insert(0, str(ROOT))
+sys.path.insert(0, str(ROOT / "tests"))
+
+import wordpress_catalog
+from study.learning_runtime import _review_candidates
+from study.master_topic_pack import load_master_topic_pack
+from study.source_update import propose_source_update
+from test_master_topic_pack_schema import _valid_record
+
+
+def test_approved_catalog_change_flows_to_master_and_review_queue() -> None:
+    topic_id = "piezoelectric_sensor_charge_amplifier_dynamic_force_pressure_acceleration"
+    master = _valid_record()
+    master["sources"] = []
+    master["topic_id"] = topic_id
+    master["legacy_topic_pack"]["source_root"] = f"rubrics/topic_packs/{topic_id}"
+    for key in master["legacy_topic_pack"]["source_files"]:
+        master["legacy_topic_pack"]["source_files"][key] = f"rubrics/topic_packs/{topic_id}/{key}.json"
+
+    with tempfile.TemporaryDirectory(prefix="wordpress-review-integration-") as directory:
+        repo = Path(directory)
+        master_dir = repo / "master_topic_packs"
+        master_dir.mkdir()
+        (master_dir / f"{topic_id}.json").write_text(
+            json.dumps(master), encoding="utf-8"
+        )
+        database = repo / "wordpress.sqlite3"
+        with patch.object(wordpress_catalog, "ROOT", repo):
+            connection = wordpress_catalog.initialize_database(database)
+            cursor = connection.execute(
+                "INSERT INTO sync_runs(started_at,category_url,category_id) VALUES(?,?,?)",
+                ("2026-10-05T10:00:00+00:00", "https://example.org/category", 1),
+            )
+            run_id = cursor.lastrowid
+            connection.execute(
+                """INSERT INTO posts(post_id,category_id,slug,url,title,excerpt,content_html,
+                   content_text,published_at,modified_at,featured_media_id,tags_json,
+                   categories_json,content_sha256,last_seen_run)
+                   VALUES(101,1,'sensor','https://example.org/sensor/','Sensor','','','','',
+                   '',NULL,'[]','[]','post-hash',?)""",
+                (run_id,),
+            )
+            connection.execute(
+                """INSERT INTO sources(source_id,source_type,source_url,title,first_party,
+                   version,updated_at,content_sha256) VALUES(?,?,?,?,1,?,?,?)""",
+                (
+                    "wp-post:101", "wordpress_post", "https://example.org/sensor/",
+                    "Sensor v2", "v2", "2026-10-05T10:00:00+09:00", "hash-v2",
+                ),
+            )
+            connection.execute(
+                "INSERT INTO post_sources(post_id,source_id,link_text,position) VALUES(101,?,?,0)",
+                ("wp-post:101", "Sensor"),
+            )
+            connection.execute(
+                """INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence)
+                   VALUES(101,?,'approved',1.0,'[]','human approved')""",
+                (topic_id,),
+            )
+            event_id = connection.execute(
+                """INSERT INTO source_change_events(source_id,detected_at,old_sha256,new_sha256,
+                   old_version,new_version,status) VALUES(?,?,?,?,?,?,'pending_topic_review')""",
+                ("wp-post:101", "2026-10-05T10:00:00+00:00", "hash-v1", "hash-v2", "v1", "v2"),
+            ).lastrowid
+            assert wordpress_catalog.queue_proposals_for_approved_links(
+                connection, "wp-post:101", event_id=event_id
+            ) == 1
+            connection.commit()
+            proposal_id, status = connection.execute(
+                "SELECT proposal_id,status FROM source_update_proposals WHERE event_id=?",
+                (event_id,),
+            ).fetchone()
+            event_status = connection.execute(
+                "SELECT status FROM source_change_events WHERE event_id=?", (event_id,)
+            ).fetchone()[0]
+            connection.close()
+            assert status == "pending_approval"
+            assert event_status == "pending_approval"
+
+            attempt = {
+                "topic_id": topic_id,
+                "question_id": "q1",
+                "question_text": "Explain the sensor.",
+                "attempted_at": "2026-10-01T10:00:00+09:00",
+                "last_reviewed_at": "2026-10-02T10:00:00+09:00",
+                "next_review_at": "2026-10-30T10:00:00+09:00",
+                "score": 19.0,
+            }
+            now = datetime.fromisoformat("2026-10-06T10:00:00+09:00")
+            before = _review_candidates(
+                [attempt], {topic_id: master}, {}, now=now, repository_root=repo
+            )
+            assert not any(item["reason"] == "recently_changed_topic" for item in before)
+
+            master_before_failed_approval = (master_dir / f"{topic_id}.json").read_bytes()
+            preview = wordpress_catalog.preview_master_proposal(database, proposal_id)
+            assert preview["status"] == "pending_approval"
+            assert preview["base_revision"] == master["revision"]
+            assert preview["candidate_revision"] == master["revision"] + 1
+            assert preview["previous_source_reference"] is None
+            assert preview["proposed_source_reference"]["source_id"] == "wp-post:101"
+            assert (master_dir / f"{topic_id}.json").read_bytes() == master_before_failed_approval
+            batch_previews = wordpress_catalog.preview_pending_master_proposals(database)
+            assert len(batch_previews) == 1
+            assert batch_previews[0]["valid"] is True
+            assert batch_previews[0]["proposal_id"] == proposal_id
+            assert batch_previews[0]["proposed_source_reference"]["source_id"] == "wp-post:101"
+            connection = sqlite3.connect(database)
+            assert connection.execute(
+                "SELECT status FROM source_update_proposals WHERE proposal_id=?", (proposal_id,)
+            ).fetchone()[0] == "pending_approval"
+            connection.close()
+
+            real_connect = sqlite3.connect
+
+            class FailingCommitConnection(sqlite3.Connection):
+                def commit(self):
+                    raise sqlite3.OperationalError("simulated commit failure")
+
+            def failing_connect(*args, **kwargs):
+                kwargs["factory"] = FailingCommitConnection
+                return real_connect(*args, **kwargs)
+
+            with patch.object(wordpress_catalog.sqlite3, "connect", side_effect=failing_connect):
+                try:
+                    wordpress_catalog.approve_master_proposal(database, proposal_id, "owner")
+                except sqlite3.OperationalError as exc:
+                    assert "simulated commit failure" in str(exc)
+                else:
+                    raise AssertionError("simulated catalog commit failure should abort approval")
+            assert (master_dir / f"{topic_id}.json").read_bytes() == master_before_failed_approval
+            connection = real_connect(database)
+            assert connection.execute(
+                "SELECT status FROM source_update_proposals WHERE proposal_id=?", (proposal_id,)
+            ).fetchone()[0] == "pending_approval"
+            assert connection.execute(
+                "SELECT status FROM source_change_events WHERE event_id=?", (event_id,)
+            ).fetchone()[0] == "pending_approval"
+            connection.close()
+
+            wordpress_catalog.approve_master_proposal(database, proposal_id, "owner")
+            approved = load_master_topic_pack(master_dir / f"{topic_id}.json")
+            assert approved["revision"] == master["revision"] + 1
+            assert approved["sources"][0]["updated_at"] == "2026-10-05T10:00:00+09:00"
+            approved_candidates = _review_candidates(
+                [attempt], {topic_id: approved}, {}, now=now, repository_root=repo
+            )
+            assert any(
+                item["topic_id"] == topic_id and item["reason"] == "recently_changed_topic"
+                for item in approved_candidates
+            )
+            connection = wordpress_catalog.initialize_database(database)
+            assert connection.execute(
+                "SELECT status FROM source_change_events WHERE event_id=?", (event_id,)
+            ).fetchone()[0] == "applied"
+            connection.close()
+
+            current_reference = approved["sources"][0]
+            changed_reference = dict(
+                current_reference,
+                version="v3",
+                updated_at="2026-10-06T10:00:00+09:00",
+            )
+            ambiguous_proposal = propose_source_update(
+                approved,
+                changed_reference,
+                proposed_at="2026-10-06T10:01:00+09:00",
+            )
+            ambiguous_proposal["proposal_id"] = "ambiguous-commit-proposal"
+            connection = real_connect(database)
+            connection.execute(
+                """INSERT INTO source_update_proposals
+                   (proposal_id,event_id,topic_id,source_id,base_revision,proposal_json,status,created_at)
+                   VALUES(?,NULL,?,?,?,?, 'pending_approval',?)""",
+                (
+                    ambiguous_proposal["proposal_id"], topic_id,
+                    ambiguous_proposal["source_id"], ambiguous_proposal["base_revision"],
+                    json.dumps(ambiguous_proposal, ensure_ascii=False),
+                    "2026-10-06T10:01:00+00:00",
+                ),
+            )
+            connection.commit()
+            connection.close()
+
+            class CommitThenRaiseConnection(sqlite3.Connection):
+                def commit(self):
+                    super().commit()
+                    raise sqlite3.OperationalError("simulated lost commit acknowledgment")
+
+            def commit_then_raise_connect(*args, **kwargs):
+                kwargs["factory"] = CommitThenRaiseConnection
+                return real_connect(*args, **kwargs)
+
+            with patch.object(wordpress_catalog.sqlite3, "connect", side_effect=commit_then_raise_connect):
+                try:
+                    wordpress_catalog.approve_master_proposal(
+                        database, ambiguous_proposal["proposal_id"], "owner"
+                    )
+                except RuntimeError as exc:
+                    assert "SQLite persisted it" in str(exc)
+                else:
+                    raise AssertionError("lost commit acknowledgment should be reported as ambiguous")
+            final_master = load_master_topic_pack(master_dir / f"{topic_id}.json")
+            assert final_master["revision"] == approved["revision"] + 1
+            assert final_master["sources"][0]["version"] == "v3"
+            connection = real_connect(database)
+            assert connection.execute(
+                "SELECT status FROM source_update_proposals WHERE proposal_id=?",
+                (ambiguous_proposal["proposal_id"],),
+            ).fetchone()[0] == "applied"
+            connection.close()
+
+
+def test_pdf_ocr_scope_is_strictly_first_party() -> None:
+    assert wordpress_catalog.is_first_party_source("https://now0930.pe.kr/a.pdf")
+    assert wordpress_catalog.is_first_party_source("https://cdn.now0930.pe.kr/a.pdf")
+    assert not wordpress_catalog.is_first_party_source("https://evilnow0930.pe.kr/a.pdf")
+    assert not wordpress_catalog.is_first_party_source("https://www.emerson.com/a.pdf")
+
+    connection = sqlite3.connect(":memory:")
+    connection.execute(
+        "CREATE TABLE sources(source_id TEXT, source_type TEXT, source_url TEXT, title TEXT, first_party INTEGER, extraction_status TEXT)"
+    )
+    connection.executemany(
+        "INSERT INTO sources VALUES(?,?,?,?,?,?)",
+        [
+            ("owned", "pdf", "https://now0930.pe.kr/owned.pdf", "Owned", 1, "pending"),
+            ("external", "pdf", "https://www.emerson.com/external.pdf", "External", 0, "pending"),
+            ("owned-extracted", "pdf", "https://now0930.pe.kr/done.pdf", "Done", 1, "extracted"),
+        ],
+    )
+    pending = wordpress_catalog.first_party_pdf_ocr_candidates(
+        connection, limit=None, refresh_changed=False
+    )
+    assert [row[0] for row in pending] == ["owned"]
+    refreshed = wordpress_catalog.first_party_pdf_ocr_candidates(
+        connection, limit=None, refresh_changed=True
+    )
+    assert {row[0] for row in refreshed} == {"owned", "owned-extracted"}
+    connection.close()
+
+
+def test_topic_link_review_export_includes_candidates_and_unmatched_without_overwrite() -> None:
+    with tempfile.TemporaryDirectory(prefix="wordpress-topic-review-export-") as directory:
+        repo = Path(directory)
+        database = repo / "catalog.sqlite3"
+        output = repo / "reports" / "topic_link_review.csv"
+        output.parent.mkdir()
+        with patch.object(wordpress_catalog, "ROOT", repo):
+            connection = wordpress_catalog.initialize_database(database)
+            run_id = connection.execute(
+                "INSERT INTO sync_runs(started_at,category_url,category_id) VALUES(?,?,?)",
+                ("2026-10-04T10:00:00Z", "https://example.org/category", 1),
+            ).lastrowid
+            for post_id, slug, title in ((1, "linked", "Candidate post"), (2, "unmatched", "Unmatched post")):
+                connection.execute(
+                    """INSERT INTO posts(post_id,category_id,slug,url,title,excerpt,content_html,
+                       content_text,published_at,modified_at,featured_media_id,tags_json,
+                       categories_json,content_sha256,last_seen_run)
+                       VALUES(?,1,?,?,?,'Useful excerpt','','','','',NULL,'[\"safety\"]','[]',?,?)""",
+                    (post_id, slug, f"https://example.org/{slug}", title, f"hash-{post_id}", run_id),
+                )
+            connection.execute("INSERT INTO topics(topic_id,title,terms_json) VALUES(?,?,?)", ("example_topic", "Example Topic", "[]"))
+            connection.execute(
+                """INSERT INTO topic_links(post_id,topic_id,status,score,matched_terms_json,evidence)
+                   VALUES(1,'example_topic','pending_review',0.5,'[\"safety\"]','title/excerpt')"""
+            )
+            connection.execute(
+                """INSERT INTO sources(source_id,source_type,source_url,title,first_party,fetch_status,extraction_status)
+                   VALUES('asset-1','pdf','https://now0930.pe.kr/manual.pdf','Manual',1,'available','extracted')"""
+            )
+            connection.execute(
+                "INSERT INTO post_sources(post_id,source_id,link_text,position) VALUES(1,'asset-1','Manual',1)"
+            )
+            connection.commit()
+            connection.close()
+
+            counts = wordpress_catalog.export_topic_link_review(database, output)
+            assert counts == {"approved": 0, "pending_review": 1, "unmatched": 1, "rows": 2}
+            with output.open(encoding="utf-8-sig", newline="") as stream:
+                rows = list(csv.DictReader(stream))
+            assert [row["link_status"] for row in rows] == ["pending_review", "unmatched"]
+            assert rows[0]["candidate_topic_id"] == "example_topic"
+            assert json.loads(rows[0]["assets_json"])[0]["source_url"] == "https://now0930.pe.kr/manual.pdf"
+            assert rows[1]["post_title"] == "Unmatched post"
+            before = output.read_bytes()
+            try:
+                wordpress_catalog.export_topic_link_review(database, output)
+            except FileExistsError:
+                pass
+            else:
+                raise AssertionError("review export must never overwrite a possibly edited file")
+            assert output.read_bytes() == before
+
+
+if __name__ == "__main__":
+    test_approved_catalog_change_flows_to_master_and_review_queue()
+    test_pdf_ocr_scope_is_strictly_first_party()
+    test_topic_link_review_export_includes_candidates_and_unmatched_without_overwrite()
+    print("WORDPRESS_REVIEW_INTEGRATION_TESTS=3_PASS")

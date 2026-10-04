@@ -3,14 +3,14 @@ from __future__ import annotations
 
 import copy
 
-from hybrid_demand_scope_guard import (
+from grading.evidence.hybrid_demand_scope_guard import (
     HYBRID_DEMAND_SCOPE_GUARD_MARKER,
     restore_blocked_semantic_layer_scores,
     sanitize_hybrid_originality_evaluation,
     sanitize_hybrid_semantic_evaluation,
 )
-from hybrid_demand_scope_guard import _demand_token_rows, _hybrid_evidence, _traceable
-from hybrid_demand_scope_guard import project_hybrid_model_answer_feedback
+from grading.evidence.hybrid_demand_scope_guard import _demand_token_rows, _hybrid_evidence, _traceable
+from grading.evidence.hybrid_demand_scope_guard import project_hybrid_model_answer_feedback
 
 TOPIC = (
     "strain_gauge_load_cell_"

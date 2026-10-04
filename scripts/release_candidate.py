@@ -25,11 +25,11 @@ import urllib.request
 ROOT = Path(__file__).resolve().parents[1]
 DEFAULT_ARTIFACT_ROOT = ROOT / "reports" / "release_candidates"
 PARITY_FILES = (
-    "question_type_router.py",
-    "logic_check_evaluator.py",
-    "logic_llm_verifier.py",
-    "grade_score_reconciler.py",
-    "verified_defect_reconciliation.py",
+    "grading/routing/question_type_router.py",
+    "grading/evidence/logic_check_evaluator.py",
+    "grading/evidence/logic_llm_verifier.py",
+    "grading/scoring/grade_score_reconciler.py",
+    "grading/evidence/verified_defect_reconciliation.py",
 )
 VALIDATION_ENV_KEYS = (
     "GEMINI_API_KEY",

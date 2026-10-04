@@ -4,7 +4,7 @@ from copy import deepcopy
 import unittest
 from unittest.mock import patch
 
-import difficulty_output_adapter as difficulty_adapter
+import grading.scoring.difficulty_output_adapter as difficulty_adapter
 import grading_agents as ga
 
 

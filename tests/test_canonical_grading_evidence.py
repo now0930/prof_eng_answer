@@ -9,7 +9,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from canonical_grading_evidence import (
+from grading.evidence.canonical_grading_evidence import (
     CanonicalEvidenceError,
     build_canonical_grading_evidence,
     validate_canonical_grading_evidence,

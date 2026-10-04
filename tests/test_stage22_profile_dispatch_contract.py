@@ -7,7 +7,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import logic_check_evaluator
+import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
 
 BASELINE_SHA = "c526f2cb64f2f794df9195cd622949f17f6842e0"
@@ -190,7 +190,7 @@ class Stage22ProfileDispatchContractTest(
             )
 
             with patch(
-                "logic_llm_verifier."
+                "grading.evidence.logic_llm_verifier."
                 "load_logic_check_profile",
                 return_value={
                     "topic_id": DETERMINISTIC_TOPIC_ID,
@@ -199,7 +199,7 @@ class Stage22ProfileDispatchContractTest(
                     "next_practice_points": [],
                 },
             ) as profile_loader, patch(
-                "logic_llm_verifier."
+                "grading.evidence.logic_llm_verifier."
                 "verify_logic_with_llm",
                 return_value=_profile_result(
                     DETERMINISTIC_TOPIC_ID,
@@ -296,7 +296,7 @@ class Stage22ProfileDispatchContractTest(
             )
 
             with patch(
-                "logic_llm_verifier."
+                "grading.evidence.logic_llm_verifier."
                 "load_logic_check_profile",
                 return_value={
                     "topic_id": PROFILE_ONLY_TOPIC_ID,
@@ -305,7 +305,7 @@ class Stage22ProfileDispatchContractTest(
                     "next_practice_points": [],
                 },
             ) as profile_loader, patch(
-                "logic_llm_verifier."
+                "grading.evidence.logic_llm_verifier."
                 "verify_logic_with_llm",
                 return_value=_profile_result(
                     PROFILE_ONLY_TOPIC_ID,

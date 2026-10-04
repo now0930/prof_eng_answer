@@ -5,7 +5,7 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from expert_calibration_dataset import (
+from grading.quality.expert_calibration_dataset import (
     build_draft_record,
     deterministic_dataset_split,
     finalize_record,

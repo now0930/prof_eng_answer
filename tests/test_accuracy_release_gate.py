@@ -9,8 +9,8 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from accuracy_release_gate import evaluate_accuracy_release_gate
-from expert_accuracy_benchmark import load_jsonl, validate_gold_case
+from grading.quality.accuracy_release_gate import evaluate_accuracy_release_gate
+from grading.quality.expert_accuracy_benchmark import load_jsonl, validate_gold_case
 
 
 def _policy() -> dict:

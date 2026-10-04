@@ -39,7 +39,7 @@ from rubric_content.fact_anchors import (  # noqa: E402
 )
 
 try:
-    from rubric_registry import (  # type: ignore  # noqa: E402
+    from grading.rubrics.rubric_registry import (  # type: ignore  # noqa: E402
         load_model_answer_bank,
         save_model_answer_bank,
         validate_model_answer_bank,

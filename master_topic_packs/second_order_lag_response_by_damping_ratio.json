@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "second_order_lag_response_by_damping_ratio",
+  "title_ko": "second_order_lag_response_by_damping_ratio",
+  "revision": 4,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio/logic_check.json",
+      "model_answer": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/second_order_lag_response_by_damping_ratio/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:7176",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%bc%eb%8f%84-%ec%9d%91%eb%8b%b5/",
+      "source_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%bc%eb%8f%84-%ec%9d%91%eb%8b%b5/",
+      "title": "2차 시스템 과도 응답",
+      "version": "32a5dfd164ef1fa9b69fc57fbd0400f4db6b0025cc5adc8e06012b274599ad34",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T01:18:16+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ada006ec0de018364878d492084721bc",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/2%ec%b0%a8-%ec%8b%9c%ec%8a%a4%ed%85%9c-%ea%b3%bc%eb%8f%84-%ec%9d%91%eb%8b%b5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240420_201053.pdf",
+      "title": "NeoStudio_20240420_201053",
+      "version": "2024-04-20T11:12:41",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-20T11:12:41+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

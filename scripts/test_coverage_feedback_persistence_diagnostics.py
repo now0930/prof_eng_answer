@@ -5,7 +5,7 @@ import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-import coverage_feedback_persistence as cfp
+from grading.coverage_feedback import persistence as cfp
 
 
 def _demands() -> dict:
@@ -112,7 +112,7 @@ class CoverageFeedbackPersistenceDiagnosticsTest(
 
     def test_diagnostic_has_no_retry_or_network(self):
         source = Path(
-            "coverage_feedback_persistence.py"
+            "grading/coverage_feedback/persistence.py"
         ).read_text(encoding="utf-8")
 
         self.assertNotIn("requests.", source)

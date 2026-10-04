@@ -1,0 +1,42 @@
+{
+  "schema_version": "source-review-annotations-v1",
+  "topic_id": "second_order_lag_response_by_damping_ratio",
+  "annotations": [
+    {
+      "annotation_id": "wp7176_frequency_terminology",
+      "source_id": "wp-post:7176",
+      "source_version": "32a5dfd164ef1fa9b69fc57fbd0400f4db6b0025cc5adc8e06012b274599ad34",
+      "source_text_sha256": "27925feb9e8182d403e51ad38b2fc4162ca4fcab3f09ac3e92a661fdfbe4793b",
+      "locator": "3. 복소극점",
+      "quote": "Undamped natural freq",
+      "review_note": "미확정 검토 의견: HTML은 이 표현이 원본 필기의 표기임을 명시하고, 채택한 설명은 극점의 허수부로 제한한다. 기존 Topic의 so2_pole_response_relationship은 ωn과 ωd를 구분한다. 원본 필기 및 문맥을 사용자와 다른 LLM이 대조하여 용어 수정 필요성을 판단할 것. 현재 원문은 수정하지 않는다.",
+      "status": "pending_review",
+      "decision": null,
+      "score_effect": "none"
+    },
+    {
+      "annotation_id": "wp7176_critical_system_context",
+      "source_id": "wp-post:7176",
+      "source_version": "32a5dfd164ef1fa9b69fc57fbd0400f4db6b0025cc5adc8e06012b274599ad34",
+      "source_text_sha256": "27925feb9e8182d403e51ad38b2fc4162ca4fcab3f09ac3e92a661fdfbe4793b",
+      "locator": "10. σ = 0 — 허수축 위의 Pole / 13. Pole 위치에 따른 응답 정리",
+      "quote": "Critical System",
+      "review_note": "미확정 검토 의견: 원문이 보존한 Critical System의 문맥이 임계안정인지 확인할 필요가 있다. 기존 Topic은 so2_critical_damping_response와 so2_zero_negative_damping에서 임계감쇠와 무감쇠 지속진동을 구분한다. 현재 표현을 자동으로 오답 판정하거나 치환하지 않고 사용자와 다른 LLM의 판단을 기다린다.",
+      "status": "pending_review",
+      "decision": null,
+      "score_effect": "none"
+    },
+    {
+      "annotation_id": "wp7176_unclear_numerator",
+      "source_id": "wp-post:7176",
+      "source_version": "32a5dfd164ef1fa9b69fc57fbd0400f4db6b0025cc5adc8e06012b274599ad34",
+      "source_text_sha256": "27925feb9e8182d403e51ad38b2fc4162ca4fcab3f09ac3e92a661fdfbe4793b",
+      "locator": "18. NeoStudio PDF 핵심 정리 다음 OCR 작성 범위 설명",
+      "quote": "분자는 손글씨 판독이 명확하지 않아",
+      "review_note": "미확정 검토 의견: HTML은 전달함수 분자가 판독 불명확하므로 보완하지 않았다고 명시한다. 향후 원본 PDF를 확인하기 전에는 표준형을 근거로 분자를 추정하여 원문에 삽입하지 않는다. 사용자와 다른 LLM이 원본 확인 후 결정할 사항이다.",
+      "status": "pending_review",
+      "decision": null,
+      "score_effect": "none"
+    }
+  ]
+}

@@ -4,7 +4,7 @@ import sys
 from pathlib import Path
 
 JSON_PATH = Path("rubrics/logic_checks/industrial_instrumentation_control.json")
-EVALUATOR_PATH = Path("logic_check_evaluator.py")
+EVALUATOR_PATH = Path("grading/evidence/logic_check_evaluator.py")
 PROMPT_PATH = Path("docs/logic_check_json_generator_prompt.md")
 PROFILE_PROMPT_PATH = Path("docs/logic_check_profile_generator_prompt.md")
 
@@ -69,10 +69,10 @@ for topic in data.get("topic_logic_checks", []):
 evaluator_text = EVALUATOR_PATH.read_text(encoding="utf-8")
 
 if "advanced_tradeoff_checks" in evaluator_text:
-    errors.append("logic_check_evaluator.py still references advanced_tradeoff_checks")
+    errors.append("grading.evidence.logic_check_evaluator.py still references advanced_tradeoff_checks")
 
 if 'layers=["C", "E"]' in evaluator_text or 'layers=["C","E"]' in evaluator_text:
-    errors.append("logic_check_evaluator.py still contains layers=['C', 'E']")
+    errors.append("grading.evidence.logic_check_evaluator.py still contains layers=['C', 'E']")
 
 prompt_text = PROMPT_PATH.read_text(encoding="utf-8")
 profile_prompt_text = PROFILE_PROMPT_PATH.read_text(encoding="utf-8")

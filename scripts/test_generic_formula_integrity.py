@@ -3,10 +3,10 @@ from __future__ import annotations
 import copy
 import unittest
 
-from general_evidence_contract import (
+from grading.evidence.general_evidence_contract import (
     attach_general_evidence_contract,
 )
-from generic_formula_integrity import (
+from grading.evidence.generic_formula_integrity import (
     GENERIC_FORMULA_INTEGRITY_MARKER,
     analyze_formula_text,
     apply_formula_integrity_to_contract,

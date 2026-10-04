@@ -13,11 +13,11 @@ ROOT = Path(__file__).resolve().parents[1]
 if str(ROOT) not in sys.path:
     sys.path.insert(0, str(ROOT))
 
-from logic_llm_verifier import (
+from grading.evidence.logic_llm_verifier import (
     extract_logic_evidence_candidates,
     verify_logic_with_llm,
 )
-from model_answer_router import find_model_answer_reference
+from grading.routing.model_answer_router import find_model_answer_reference
 
 TOPIC = 'control_valve_severe_service_high_low_flow_temperature_cryogenic_particles'
 TOPIC_1 = "control_valve_fluid_forces_unbalance_friction_actuator_sizing_fail_safe"
@@ -537,7 +537,7 @@ class SevereServiceSemanticRegressionTests(unittest.TestCase):
         candidates = extract_logic_evidence_candidates(answer_text, self.profile)
         self.assertTrue(candidates)
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value={
                 "verdict": "fatal",
                 "confidence": 0.99,
@@ -560,7 +560,7 @@ class SevereServiceSemanticRegressionTests(unittest.TestCase):
         candidates = extract_logic_evidence_candidates(SAFE_ANSWER, self.profile)
         self.assertTrue(candidates)
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value={
                 "verdict": "pass",
                 "confidence": 1.0,

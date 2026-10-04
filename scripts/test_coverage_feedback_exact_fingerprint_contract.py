@@ -5,14 +5,14 @@ import tempfile
 import unittest
 from pathlib import Path
 
-from coverage_feedback_aggregator import (
+from grading.coverage_feedback.aggregator import (
     COVERAGE_FEEDBACK_EVENT_FILENAME,
     aggregate_coverage_feedback,
 )
-from coverage_feedback_event import (
+from grading.coverage_feedback.event import (
     build_coverage_feedback_event,
 )
-from coverage_feedback_report import (
+from grading.coverage_feedback.report import (
     build_coverage_review_report,
     render_coverage_review_markdown,
 )

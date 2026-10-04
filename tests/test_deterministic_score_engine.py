@@ -7,7 +7,7 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from deterministic_score_engine import calculate_deterministic_score
+from grading.scoring.deterministic_score_engine import calculate_deterministic_score
 
 
 class DeterministicScoreEngineTests(unittest.TestCase):

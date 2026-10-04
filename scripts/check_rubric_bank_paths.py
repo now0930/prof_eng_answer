@@ -9,7 +9,7 @@ from pathlib import Path
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
-from rubric_bank_paths import get_rubric_bank_report, require_rubric_bank_paths  # noqa: E402
+from grading.rubrics.rubric_bank_paths import get_rubric_bank_report, require_rubric_bank_paths  # noqa: E402
 
 
 def main() -> int:

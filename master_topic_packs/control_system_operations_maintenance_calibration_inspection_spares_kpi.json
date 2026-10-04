@@ -1,0 +1,81 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "control_system_operations_maintenance_calibration_inspection_spares_kpi",
+  "title_ko": "계측제어시스템 운영·유지보수, 검교정·점검, 예비품 및 KPI 관리",
+  "revision": 3,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/control_system_operations_maintenance_calibration_inspection_spares_kpi",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/control_system_operations_maintenance_calibration_inspection_spares_kpi/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/control_system_operations_maintenance_calibration_inspection_spares_kpi/logic_check.json",
+      "model_answer": "rubrics/topic_packs/control_system_operations_maintenance_calibration_inspection_spares_kpi/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/control_system_operations_maintenance_calibration_inspection_spares_kpi/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:9324",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/mainternance-control-valve-handbook-8%ec%9e%a5/",
+      "source_url": "https://now0930.pe.kr/wordpress/mainternance-control-valve-handbook-8%ec%9e%a5/",
+      "title": "Mainternance Control Valve Handbook, 8장",
+      "version": "30b8211de32e0f5d4744b318b7f8617aed62914dfb444e769382e50d2741348f",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-05T14:41:13+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4df0219430a2c8bbe1a90ff53135eab4",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/mainternance-control-valve-handbook-8%ec%9e%a5/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2026/08/valve-1-1.pdf",
+      "title": "valve-1",
+      "version": "2026-08-04T13:17:56",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-08-04T13:17:56+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

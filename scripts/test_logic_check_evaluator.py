@@ -4,7 +4,7 @@ from __future__ import annotations
 import unittest
 from unittest.mock import patch
 
-import logic_check_evaluator
+import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
 
 TOPIC_ID = "second_order_lag_response_by_damping_ratio"
@@ -28,14 +28,14 @@ def evaluate(answer_text: str, semantic_findings: list[dict] | None = None) -> d
         "_evaluate_topic_fatal_checks_with_llm",
         return_value=semantic_findings or [],
     ), patch(
-        "logic_llm_verifier.verify_logic_with_llm",
+        "grading.evidence.logic_llm_verifier.verify_logic_with_llm",
         return_value={
             "fatal_error_detected": False,
             "mode": "mocked",
             "findings": [],
         },
     ), patch(
-        "logic_llm_verifier._call_ollama_json",
+        "grading.evidence.logic_llm_verifier._call_ollama_json",
         return_value=None,
     ):
         out = logic_check_evaluator.attach_logic_check_to_grade(grade, answer_text)
@@ -154,7 +154,7 @@ class SemanticCorrectiveContextRegressionTest(
     ) -> None:
         from unittest.mock import patch
 
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         evidence = (
             "루프 이득을 높이면 항상 안정해진다고"
@@ -167,7 +167,7 @@ class SemanticCorrectiveContextRegressionTest(
         )
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=self._verdict(evidence),
         ):
             findings = (
@@ -188,7 +188,7 @@ class SemanticCorrectiveContextRegressionTest(
     ) -> None:
         from unittest.mock import patch
 
-        import logic_check_evaluator
+        import grading.evidence.logic_check_evaluator as logic_check_evaluator
 
         evidence = (
             "루프 이득을 높이면 항상 안정해진다"
@@ -199,7 +199,7 @@ class SemanticCorrectiveContextRegressionTest(
         )
 
         with patch(
-            "logic_llm_verifier._call_ollama_json",
+            "grading.evidence.logic_llm_verifier._call_ollama_json",
             return_value=self._verdict(evidence),
         ):
             findings = (
@@ -313,7 +313,7 @@ class SystemTypeClosedLoopOrderRegressionTest(
         }
 
         with patch(
-            "logic_llm_verifier."
+            "grading.evidence.logic_llm_verifier."
             "verify_logic_with_llm",
             return_value=profile_result,
         ) as verifier, patch.object(
@@ -444,7 +444,7 @@ class SystemTypeClosedLoopOrderRegressionTest(
         }
 
         with patch(
-            "logic_llm_verifier."
+            "grading.evidence.logic_llm_verifier."
             "verify_logic_with_llm",
             return_value=profile_result,
         ) as verifier, patch.object(
@@ -496,7 +496,7 @@ class LogicCandidateKeyTermFallbackRegressionTest(
     def test_empty_rules_extract_key_term_context(
         self,
     ) -> None:
-        import logic_llm_verifier as verifier
+        import grading.evidence.logic_llm_verifier as verifier
 
         profile = {
             "candidate_extraction": {
@@ -549,7 +549,7 @@ Routh 배열 첫 열의 부호 변화 횟수는
     def test_empty_rules_without_key_term_match_is_empty(
         self,
     ) -> None:
-        import logic_llm_verifier as verifier
+        import grading.evidence.logic_llm_verifier as verifier
 
         profile = {
             "candidate_extraction": {
@@ -579,7 +579,7 @@ Routh 배열 첫 열의 부호 변화 횟수는
     def test_explicit_rules_preserve_rule_only_behavior(
         self,
     ) -> None:
-        import logic_llm_verifier as verifier
+        import grading.evidence.logic_llm_verifier as verifier
 
         profile = {
             "candidate_extraction": {

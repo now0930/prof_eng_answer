@@ -20,7 +20,7 @@ FILES_TO_REVIEW = [
     "rubrics/scoring_model/default.json",
     "rubrics/subjects/industrial_instrumentation_control.json",
     "rubrics/raters/layered_default.json",
-    "grading_config.py",
+    "grading/scoring/grading_config.py",
     "grading_agents.py",
     "bot.py",
 ]

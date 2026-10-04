@@ -7,8 +7,8 @@ REPO = Path(__file__).resolve().parents[1]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from canonical_claim_extractor import extract_canonical_claim_evidence
-from deterministic_requirement_evaluator import evaluate_deterministic_requirements
+from grading.evidence.canonical_claim_extractor import extract_canonical_claim_evidence
+from grading.scoring.deterministic_requirement_evaluator import evaluate_deterministic_requirements
 
 
 TOPIC = "functional_safety_reliability_modeling_fta_markov_rbd_ccf_pfd_pfh"

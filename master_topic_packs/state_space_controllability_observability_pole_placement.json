@@ -1,0 +1,453 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "state_space_controllability_observability_pole_placement",
+  "title_ko": "상태공간 모델의 제어가능성·관측가능성과 극점배치 설계",
+  "revision": 38,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/state_space_controllability_observability_pole_placement",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/state_space_controllability_observability_pole_placement/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/state_space_controllability_observability_pole_placement/logic_check.json",
+      "model_answer": "rubrics/topic_packs/state_space_controllability_observability_pole_placement/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/state_space_controllability_observability_pole_placement/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wp-post:6096",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "title": "pole placement 예제 풀이",
+      "version": "33fd1bad07100a24dfc6f4b8e253651517baa0b0f143a3036dcba2a6bc28490e",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-27T23:44:05+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6254",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "title": "full state feedback pole placement",
+      "version": "595d758d856be4dfb65ee02c22daf19326895e1c2d88f6ec6d20f71eae5bca7e",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-23T12:33:33+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:7238",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "title": "state space 암기 항목",
+      "version": "7e29a2b83e9c40a91710c98a321e3820cae06103c68d1fffbb597b645dba2e74",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T01:21:17+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:0d8ead2ea6314c03e295bd67fbd7d7d0",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/05/feedback_same_order.pdf",
+      "title": "feedback_same_order",
+      "version": "2024-05-12T03:10:37",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-05-12T03:10:37+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:220eb60e562620aabbc3ec3129002dcb",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/NeoStudio_20250423_142953_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC15.pdf",
+      "title": "NeoStudio_20250423_142953_산업계측제어 기술사15",
+      "version": "2025-04-23T12:32:10",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-23T12:32:10+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4816b3818fa6c6903d9a59d3b47eba59",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20250420_232415_%EC%82%B0%EC%97%85%EA%B3%84%EC%B8%A1%EC%A0%9C%EC%96%B4-%EA%B8%B0%EC%88%A0%EC%82%AC15.pdf",
+      "title": "NeoStudio_20250420_232415_산업계측제어 기술사15",
+      "version": "2025-04-20T21:27:12",
+      "page": null,
+      "section": null,
+      "updated_at": "2025-04-20T21:27:12+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:800bdcdbc802de258f13efc0a16b43b5",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240423_225046.pdf",
+      "title": "NeoStudio_20240423_225046",
+      "version": "2024-04-23T13:51:36",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-23T13:51:36+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a1d943ebcbffc79f283ea752d0ef10d6",
+      "source_type": "html",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://lpsa.swarthmore.edu/Representations/SysRepTransformations/TF2SS_CCF_OCF_hard.html",
+      "title": "https://lpsa.swarthmore.edu/Representations/SysRepTransformations/TF2SS_CCF_OCF_hard.html",
+      "version": "unversioned",
+      "page": null,
+      "section": null,
+      "updated_at": null,
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:a5394bb5d486f1951bf73193e034798a",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240428_085806.pdf",
+      "title": "NeoStudio_20240428_085806",
+      "version": "2024-04-28T00:01:31",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-28T00:01:31+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:aad9303c2765128b289236f56f4f647c",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/NeoStudio_20240428_121246-1.pdf",
+      "title": "NeoStudio_20240428_121246-1",
+      "version": "2024-04-28T03:14:57",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-28T03:14:57+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:af85e6e22a4107346bd03626e7d8d477",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/canonical-form-transfer-function/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/04/State-Space-Design-34-%EA%B3%B5%EB%8C%80%EC%83%9D-%EC%9D%B4%EC%95%BC%EA%B8%B0.pdf",
+      "title": "State-Space-Design-34-공대생-이야기",
+      "version": "2024-04-28T00:00:33",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-04-28T00:00:33+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6085",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/state-space-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/state-space-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "title": "state space 예제 풀이",
+      "version": "f11aaa981ff1a98f018eb9082560554632f1c5b5ab8b7eb9a90aa6b47b146a0e",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-19T03:37:10+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:1f6679f279619469ae3fbbf9c5f40670",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/state-space-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-83.png",
+      "title": "image",
+      "version": "2026-04-19T03:36:32",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-19T03:36:32+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:c52a41b24e046e1ca2688a929d1b06dd",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/state-space-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-6.png",
+      "title": "image-6",
+      "version": "2024-01-16T14:35:43",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-16T14:35:43+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:c02be28a40398f0117da9642228ba099",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-1-23.jpg",
+      "title": "제목-없음-1-23",
+      "version": "2024-03-24T08:31:02",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-24T08:31:02+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:2a31cf5cfc770d71750d73d3aee24b40",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-70.png",
+      "title": "image-70",
+      "version": "2024-01-31T08:24:39",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-31T08:24:39+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e3ecd3de22880d90a756dcf64fb2b437",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-8-edited.png",
+      "title": "image-8",
+      "version": "2024-01-18T09:51:24",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-18T09:51:24+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ba3570047be4ae913705579fadca2d31",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-58.jpg",
+      "title": "제목-없음-58",
+      "version": "2024-03-24T08:30:44",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-24T08:30:44+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:8285b2449c7081e67629902341be6ecf",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/state-space-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-82.png",
+      "title": "image",
+      "version": "2026-04-18T11:51:53",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-18T11:51:53+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:ecb5d8f0cdba7ac26e37226efe1a98d1",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-62.jpg",
+      "title": "제목-없음-62",
+      "version": "2024-03-24T12:12:30",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-24T12:12:30+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:092c57a43b84d9febc38ad092faf05f6",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/image-28.png",
+      "title": "image-28",
+      "version": "2024-03-24T11:50:35",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-24T11:50:35+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:49afbc2e6a462506756bcf24bb833a3c",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-observer/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-2.png",
+      "title": "image-2",
+      "version": "2024-02-01T11:55:34",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-01T11:55:34+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6966",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
+      "source_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
+      "title": "Matrix Exponential",
+      "version": "b5f90df1078c46f01f5118991785b50fb59c2d36a0888caa1135f8aa2bc9a41f",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-04T01:11:37+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:7188f81c359e68d9a5659e675414149d",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-61.jpg",
+      "title": "제목-없음-61",
+      "version": "2024-03-24T11:50:06",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-24T11:50:06+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:e35c8ad9995f2a6baf9870eff5a5c85b",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-observer/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image-1.png",
+      "title": "image-1",
+      "version": "2024-02-01T11:55:25",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-01T11:55:25+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:cf36d8b2e665f113c24f6fbacb732ae2",
+      "source_type": "pdf",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/state-space-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/fourier_Transform-2-1.pdf",
+      "title": "fourier_Transform-2",
+      "version": "2026-04-18T11:57:33",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-04-18T11:57:33+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:71548190ca505c1f9a6c7e7208d2d0f9",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-9.png",
+      "title": "image-9",
+      "version": "2024-01-18T09:51:47",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-18T09:51:47+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:d83876cf5fc26bf49c47e08b44748285",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/state-space-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-5.png",
+      "title": "image-5",
+      "version": "2024-01-16T14:35:24",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-16T14:35:24+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:fdaf7d0d47b485fdb8779b8e1e940eef",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/pole-placement-%ec%98%88%ec%a0%9c-%ed%92%80%ec%9d%b4/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-7.png",
+      "title": "image-7",
+      "version": "2024-01-18T08:59:31",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-18T08:59:31+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:df08d9e214147aac15018ba70c76bd80",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-feedback-pole-placement/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-71.png",
+      "title": "image-71",
+      "version": "2024-01-31T08:30:45",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-31T08:30:45+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:4a76a8ca02753700e40ab3bcd2a5007b",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-observer/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/02/image.png",
+      "title": "image",
+      "version": "2024-02-01T11:53:48",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-01T11:53:48+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6269",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/full-state-observer/",
+      "source_url": "https://now0930.pe.kr/wordpress/full-state-observer/",
+      "title": "full state observer",
+      "version": "909a5cbcd12ed5adecdac7d8b3b37d39a194a6484e99e726ba540f294ddefa26",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-02-01T11:55:56+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:c3e913664ae5834f3eaf083a5c6008e5",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/matrix-exponential/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/03/%EC%A0%9C%EB%AA%A9-%EC%97%86%EC%9D%8C-60.jpg",
+      "title": "제목-없음-60",
+      "version": "2024-03-24T11:49:49",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-03-24T11:49:49+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

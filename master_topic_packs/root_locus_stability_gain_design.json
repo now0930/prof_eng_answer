@@ -1,0 +1,117 @@
+{
+  "schema_version": "master-topic-pack-v1",
+  "topic_id": "root_locus_stability_gain_design",
+  "title_ko": "근궤적법에 의한 안정도 해석과 제어기 이득 설계",
+  "revision": 7,
+  "legacy_topic_pack": {
+    "source_root": "rubrics/topic_packs/root_locus_stability_gain_design",
+    "source_files": {
+      "fact_anchor": "rubrics/topic_packs/root_locus_stability_gain_design/fact_anchor.json",
+      "logic_check": "rubrics/topic_packs/root_locus_stability_gain_design/logic_check.json",
+      "model_answer": "rubrics/topic_packs/root_locus_stability_gain_design/model_answer.json",
+      "topic_importance": "rubrics/topic_packs/root_locus_stability_gain_design/topic_importance.json"
+    }
+  },
+  "projections": {
+    "grading": {
+      "projection_id": "grading-projection-v1",
+      "authority": "existing_topic_pack",
+      "source_keys": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer",
+        "topic_importance"
+      ]
+    },
+    "training": {
+      "projection_id": "training-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "model_answer",
+        "topic_importance"
+      ],
+      "daily_target": 2
+    },
+    "diagnosis": {
+      "projection_id": "diagnosis-projection-v1",
+      "content_sources": [
+        "fact_anchor",
+        "logic_check",
+        "model_answer"
+      ],
+      "dimensions": [
+        "format",
+        "content",
+        "reasoning",
+        "application",
+        "verification"
+      ]
+    }
+  },
+  "sources": [
+    {
+      "source_id": "wpurl:77abf5921b8989a18e88d569d9522b06",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/root-locus-design/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-58.png",
+      "title": "image-58",
+      "version": "2024-01-28T01:05:15",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-28T01:05:15+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:249371acd3f9255497cf12898d8458d9",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/root-locus-design/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-55.png",
+      "title": "image-55",
+      "version": "2024-01-26T11:50:09",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-26T11:50:09+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wp-post:6206",
+      "source_type": "wordpress_post",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/root-locus-design/",
+      "source_url": "https://now0930.pe.kr/wordpress/root-locus-design/",
+      "title": "lag compensator 설계 root locus design",
+      "version": "69930a9200b470410159b9de9ea09093c5c7287195f9cbb5a41c6241f365594c",
+      "page": null,
+      "section": null,
+      "updated_at": "2026-10-03T23:49:34+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:86d2a5eff7f536389fb7d94e2136793c",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/root-locus-design/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-57.png",
+      "title": "image-57",
+      "version": "2024-01-28T01:05:06",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-28T01:05:06+00:00",
+      "verification_status": "unverified"
+    },
+    {
+      "source_id": "wpurl:5d90f8950eac0d2519ed4aa147e3bbbe",
+      "source_type": "image",
+      "wordpress_url": "https://now0930.pe.kr/wordpress/root-locus-design/",
+      "source_url": "https://now0930.pe.kr/wordpress/wp-content/uploads/2024/01/image-56.png",
+      "title": "image-56",
+      "version": "2024-01-28T01:04:36",
+      "page": null,
+      "section": null,
+      "updated_at": "2024-01-28T01:04:36+00:00",
+      "verification_status": "unverified"
+    }
+  ],
+  "source_update_policy": {
+    "mode": "proposal_only",
+    "approval_required": true
+  }
+}

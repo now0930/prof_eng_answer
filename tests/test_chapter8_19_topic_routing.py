@@ -1,6 +1,6 @@
 import unittest
 
-from deterministic_topic_router import route_question_topics
+from grading.routing.deterministic_topic_router import route_question_topics
 
 
 class Chapter8And19TopicRoutingTests(unittest.TestCase):

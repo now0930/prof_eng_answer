@@ -3,8 +3,8 @@ from __future__ import annotations
 import copy
 import unittest
 
-import gemini_grader
-from general_evidence_contract import (
+from grading.providers import gemini as gemini_grader
+from grading.evidence.general_evidence_contract import (
     GENERAL_EVIDENCE_CONTRACT_MARKER,
     attach_general_evidence_contract,
     empty_general_evidence_contract,
