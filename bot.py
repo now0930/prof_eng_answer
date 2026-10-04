@@ -1901,22 +1901,8 @@ def _handle_review_command(chat_id, command_text):
         if high_score:
             lines.append("   고득점 포인트: " + " / ".join(high_score))
 
-        wordpress_pack = material.get("wordpress_topic_pack")
-        if isinstance(wordpress_pack, dict):
-            indexed = [
-                source for source in wordpress_pack.get("sources", [])
-                if isinstance(source, dict) and source.get("source_type") in {"pdf", "image"}
-                and isinstance(source.get("extracted_text"), str) and source["extracted_text"].strip()
-            ]
-            for source in indexed[:2]:
-                method = source.get("extraction_method") or "OCR"
-                excerpt = " ".join(source["extracted_text"].split())[:220]
-                if len(source["extracted_text"].split()) > 38:
-                    excerpt = excerpt.rsplit(" ", 1)[0].rstrip() + "…"
-                lines.append(
-                    f"   출처 OCR ({source['source_type']}, {method}, 미검증): "
-                    f"{source.get('title') or source.get('source_url')} — {excerpt}"
-                )
+        from study.review_presentation import source_review_lines
+        lines.extend(source_review_lines(training))
 
         feedback = material.get("feedback")
         if isinstance(feedback, dict) and feedback.get("score_effect") == "none":
@@ -1928,7 +1914,7 @@ def _handle_review_command(chat_id, command_text):
             focus = [value for value in focus if value][:2]
             advice = missing or focus
             if advice:
-                lines.append("   Topic 피드백 가이드: " + " / ".join(advice))
+                lines.append("   이전 채점 시점의 피드백 가이드 (점수 영향 없음): " + " / ".join(advice))
 
         prior = material.get("prior_diagnosis", {})
         if isinstance(prior, dict):

@@ -62,6 +62,20 @@ def test_grade_answer_records_learning_history_after_grade_file() -> None:
             assert "핵심 사실:" in messages[-1]
             assert "고득점 포인트:" in messages[-1]
             assert "이전 진단 약점: 현장 검증 근거 부족" in messages[-1]
+            with patch("study.learning_runtime.review_material_for_topic", return_value={
+                "training": {
+                    "source_materials": [{"title": "연결된 HTML", "text": "검증된 View 원문"}],
+                    "source_review_annotations": [{"status": "pending_review", "score_effect": "none",
+                        "source_state": "stale", "quote": "기존 인용", "review_note": "나중에 판단"}],
+                },
+                "wordpress_topic_pack": {"sources": [{"source_type": "pdf",
+                    "extracted_text": "UNLINKED_RAW_MUST_NOT_APPEAR"}]},
+            }):
+                bot.handle_text({"text": "/review"}, user_id, state)
+                assert "검증된 View 원문" in messages[-1]
+                assert "검토 대기" in messages[-1]
+                assert "이전 원문 기준" in messages[-1]
+                assert "UNLINKED_RAW_MUST_NOT_APPEAR" not in messages[-1]
             bot.handle_text({"text": f"/review done {topic_id}"}, user_id, state)
             assert "복습 완료" in messages[-1]
             new_topic = next(
