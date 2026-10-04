@@ -68,3 +68,6 @@ runtime의 보조 안내 실패 처리는 확정 점수 저장을 보호한다.
 
 공개 진입점 테스트는 기존 projection과의 동일성, 독립 호출, 반환값 격리를
 확인한다. 기존 릴리스 회귀 검증과 Topic release gate는 그대로 유지한다.
+
+현재 운영 반영 조건과 백업·로컬 통합 검증 상태는
+[Master / View rollout status](master_view_rollout_status.md)에 기록한다.
