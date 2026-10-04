@@ -122,7 +122,7 @@ WordPress의 단편적인 글·HTML을 종합하여 하나의 Topic을 이해하
 
 전체 계획과 단계별 통과 기준은
 [Topic 지식·학습 구성 작업 계획](docs/topic_learning_synthesis_plan.md)에 기록합니다.
-현재 위치: **Stage 2 계약 설계 완료 → Stage 3 schema·validator·adapter 구현 대기**.
+현재 위치: **Stage 3 schema·validator·읽기 adapter 구현 완료 → Stage 4 종합 초안 생성 대기**.
 필드·검토 상태·버전 정책은 [공통 지식·학습 구성 계약](docs/topic_learning_synthesis_contract.md)에 정의합니다.
 
 현재 WordPress Topic 링크 검토 기준:

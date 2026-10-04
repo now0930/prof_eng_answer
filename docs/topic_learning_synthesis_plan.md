@@ -17,8 +17,8 @@ WordPress 원문은 보존하며 변경 제안과 주석은 분리한다.
 |---|---|---|---|
 | 1 | 현재 Master/View·학습자료·승인 흐름 조사 | 실제 구현과 미구현 사항 기록 | 완료 |
 | 2 | 공통 지식·학습 경로·채점 연결 계약 설계 | ID·revision·출처·검토 상태·호환 정책 명시 | 완료 |
-| 3 | schema·validator·호환 adapter 구현 | 참조 무결성, 중복 ID, 순환 선수관계, 버전 불일치 테스트 | 다음 작업 |
-| 4 | 여러 WordPress 글을 종합하는 초안 생성 경로 | 다중 출처·중복 통합·충돌·추론 표시, 원문 보존 | 대기 |
+| 3 | schema·validator·호환 adapter 구현 | 참조 무결성, 중복 ID, 순환 선수관계, 버전 불일치 테스트 | 완료 |
+| 4 | 여러 WordPress 글을 종합하는 초안 생성 경로 | 다중 출처·중복 통합·충돌·추론 표시, 원문 보존 | 다음 작업 |
 | 5 | Training View와 /review 소비 경로 확장 | 학습 목표부터 자가 점검까지 순서대로 표시, 기존 v1 fallback | 대기 |
 | 6 | 기존 채점 ID 및 Feedback 연결 | 미충족 요구사항→지식→학습 절 연결, 점수·판정 동일 | 대기 |
 | 7 | 대표 Topic 1~3개 통합 검증 | 여러 글 종합·출처 추적·stale 처리·이력 격리 E2E | 대기 |
@@ -77,6 +77,28 @@ v2가 필요하면 v1 adapter를 함께 정의한다. 이 문서의 필드는 �
 schema로 취급하지 않는다.
 
 ## 검증과 알려진 제약
+
+Stage 3 구현: `schemas/topic_learning_synthesis.schema.json`,
+`study/learning_synthesis.py`, Master 선택적 참조와 Training의 선택적 출력.
+기존 Master 파일과 실제 학습·채점 콘텐츠는 변경하지 않았다. 새 자료의 오류는
+`unavailable`로 반환하고 기존 Training 필드를 유지한다. 원문 확인 결과와
+`eligible_section_ids`를 별도로 반환하며 전체 문서는 검토용이다. 일반 화면이
+전체 document를 그대로 표시하면 안 된다. 화면 적용은 Stage 5 작업이다.
+
+추가 의존성 없이 bundled schema에 사용한 키워드를 검사한다. 지원하지 않는
+키워드 추가는 명시적으로 거부한다. schema는 구조를, Python은 참조·순환·근거
+일치 검증을 추가로 담당한다. 검토자 문자열만으로 사람 신원을 인증할 수는
+없으므로 human_verified 권한 확인은 향후 명시적 적용 경로가 담당해야 한다.
+
+Canonical 연결은 현재 알려진 배열의 `id`를 엄격하게 찾는다. 기존 source가
+중첩 객체이거나 안정적인 ID가 없으면 unsupported 오류를 반환한다. 전 source
+종류의 실제 ID resolver 확대와 Feedback 소비는 Stage 6에서 수행한다.
+
+검증: focused 59 passed, release validation PASS. 전체 pytest 첫 실행은
+688 passed / 기존과 같은 11 failed / 1 warning이었다. 이후 경로·snapshot·순환
+테스트 6개를 추가하여 focused 결과에 포함했다. 전체 회귀 PASS로 간주하지 않는다.
+로그: `/tmp/synthesis_stage3_focused.log`, `/tmp/synthesis_stage3_full_pytest.log`,
+`/tmp/synthesis_stage3_release.log` (로컬 임시 로그, Git 미포함).
 
 구조 검증은 다중 출처, 끊어진 참조, 중복 지식 ID, 잘못된 Topic 연결,
 선수관계 순환, stale 자료, 반환값 격리, 보조 자료 실패 시 채점 보존을 포함한다.

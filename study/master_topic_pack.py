@@ -111,7 +111,7 @@ def validate_master_topic_pack(value: Any) -> dict[str, Any]:
         "schema_version", "topic_id", "title_ko", "revision", "legacy_topic_pack",
         "projections", "sources", "source_update_policy",
     }
-    optional = {"$schema", "learning_materials"}
+    optional = {"$schema", "learning_materials", "learning_synthesis"}
     allowed = required | optional
     _expect(required <= set(value) and set(value) <= allowed, "Master Topic Pack fields do not match the contract")
     _expect(value["schema_version"] == SCHEMA_VERSION, "unsupported Master Topic Pack schema_version")
@@ -119,6 +119,12 @@ def validate_master_topic_pack(value: Any) -> dict[str, Any]:
     _expect(_valid_topic_id(topic_id), "topic_id is invalid")
     _expect(isinstance(value["title_ko"], str) and bool(value["title_ko"].strip()), "title_ko is required")
     _expect(isinstance(value["revision"], int) and not isinstance(value["revision"], bool) and value["revision"] >= 1, "revision must be a positive integer")
+    if "learning_synthesis" in value:
+        from .learning_synthesis import validate_reference, SynthesisError
+        try:
+            validate_reference(value["learning_synthesis"])
+        except SynthesisError as exc:
+            raise MasterTopicPackError(str(exc)) from exc
     if "learning_materials" in value:
         material_paths = value["learning_materials"]
         _expect(
@@ -242,7 +248,10 @@ def project_training(repository_root: str | Path, master: dict[str, Any]) -> dic
     topic_importance = sources.get("topic_importance", {})
     source_materials = _load_linked_wordpress_materials(repository_root, master)
     learning_materials = _load_curated_learning_materials(repository_root, master, source_materials)
+    from .learning_synthesis import synthesis_for_training
+    synthesis = synthesis_for_training(repository_root, master, source_materials, learning_materials)
     return {
+        **({"learning_synthesis": synthesis} if synthesis is not None else {}),
         "projection_id": config["projection_id"],
         "topic_id": master["topic_id"],
         "title_ko": master["title_ko"],

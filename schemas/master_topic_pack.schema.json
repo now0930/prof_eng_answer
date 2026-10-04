@@ -31,6 +31,16 @@
       "uniqueItems": true,
       "items": { "$ref": "#/$defs/relativeJsonPath" }
     },
+    "learning_synthesis": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "revision", "content_sha256"],
+      "properties": {
+        "path": {"type": "string", "pattern": "^(?!/)(?!.*(?:^|/)(?:\\.\\.?|)(?:/|$))[^\\\\]+\\.json$"},
+        "revision": {"type": "integer", "minimum": 1},
+        "content_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
     "legacy_topic_pack": {
       "type": "object",
       "additionalProperties": false,
