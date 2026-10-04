@@ -111,6 +111,35 @@ docker compose logs --tail=100 -f prof-eng-answer-bot
 
 ## 검증
 
+### WordPress Source Pack·결정 계약 검증
+
+| 계약 | 구현 | 상태 |
+|---|---|---|
+| WordPress Source Pack 읽기 전용 무결성·URL·first-party/OCR 검증 | `scripts/validate_wordpress_source_pack.py` | 완료 |
+| Master → Grading/Training/Feedback projection | `study/master_topic_pack.py`, `study/topic_views.py` | 완료 |
+| 사람 결정 CSV의 후보 키·Topic ID·근거 검증 | `scripts/validate_wordpress_decisions.py` | 완료 |
+| 승인 전 dry-run | `validate_wordpress_decisions.py` 기본 실행 | 완료 |
+| 실제 링크 적용 | 기존 `wordpress_catalog.py --review-topic-link` 단건 명령 | 명시적 승인 후 |
+| WordPress 내용의 canonical 채점 기준 승격 | content proposal·Topic Pack 승인 workflow | 검토 후 적용 |
+
+읽기 전용 Source Pack 검증:
+
+```bash
+python3 scripts/validate_wordpress_source_pack.py \
+  --database data/wordpress_sources.sqlite3 \
+  --master-root master_topic_packs
+```
+
+사람이 입력한 결정표 검증:
+
+```bash
+python3 scripts/validate_wordpress_decisions.py \
+  --source reports/wordpress_topic_link_manual_review_20261005_confirmed_only.csv \
+  --decisions reports/wordpress_topic_link_manual_review_20261005_decision_template.csv
+```
+
+검증기는 DB나 Master를 변경하지 않는다. `final_decision`이 비어 있는 행은 보류로 표시되며, 실제 적용은 기존 단건 승인 명령으로만 수행한다.
+
 문서만 변경한 경우:
 
 ```bash
