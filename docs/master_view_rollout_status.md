@@ -13,7 +13,8 @@
 | 운영 배포 | 완료 | `d7d08ee`, 결정론적 권한·채점 smoke·최종 스크립트 `RESULT=PASS` |
 | 운영 컨테이너 복습 흐름 | 완료 | 실제 비공개 HTML, 임시 학습 이력 DB를 이용한 end-to-end PASS |
 | Telegram 연결 | 완료 | 메시지 전송 없는 `getMe` 검사 PASS |
-| 실제 사용자 채팅 화면 | 미확인 | 사용자 채팅에 시험 메시지를 보내지 않음 |
+| 실제 사용자 채팅 전송 | 완료 | `/review` 응답 1건, Telegram `ok=true`, message ID 2575 |
+| 주석의 실제 채팅 표시 | 미확인 | 오늘 선정된 두 Topic에는 미확정 주석이 없음 |
 
 별도 백업 위치는
 `/home/now0930/chatgpt_project/private_backups/2026-10-04_master_view_before_rollout`이다.
@@ -41,14 +42,22 @@ Python 캐시 같은 재생성 가능한 파일은 포함하지 않았다.
   백업했다. 데이터 중 호스트 사용자가 읽을 수 없던 캐시 파일은 Docker를
   통해 보완했으며, 세션·환경설정은 사본을 대조했다.
 - 테스트는 운영 컨테이너에서 임시 DB와 메시지 전송 mock을 사용했다.
-  실제 사용자 채팅에 `/review`를 전송해 화면을 확인하지는 않았다.
+  이후 확인된 개인 채팅으로 실제 `/review` 응답을 1건 보냈고 Telegram API가
+  `ok=true`와 message ID 2575를 반환했다. 응답에는 2문제 Queue와 연결된
+  HTML 원문 발췌가 있었다. 기기의 실제 표시 모습은 직접 관찰하지 않았다.
+- 최초 `/review`로 운영 `data/training_history.sqlite3`가 생성되었다.
+  SQLite 무결성 검사 `ok`, 일일 Queue 1개에 정확히 2문제, 채점 이력 0건이다.
+  재요청 시 Queue가 바뀌지 않는 것을 메시지 전송 mock으로 검증했다.
+- 실사용으로 발견한 `.gitignore` 누락은 PR #5에서 수정했다.
+  DB·WAL·SHM 파일이 모두 Git에서 제외된다. 생성된 DB는 저장소 밖에
+  `training_history_after_first_review.sqlite3`로 백업했다.
 
 ## 다음 운영 점검
 
-1. 실제 사용자 채팅에서 `/review`를 열어 표시를 확인한다. 운영 컨테이너의
-   프로그램·데이터·API 연결은 이미 검증되었지만 이 화면 확인은 남아 있다.
-2. 최초 실사용 채점 뒤 `data/training_history.sqlite3` 생성과 다음날 Queue
-   유지·갱신을 확인한다. 통합 시험은 임시 DB로 수행했다.
+1. 사용자의 Telegram 화면에서 전달된 `/review` 메시지의 표시를 확인한다.
+   API 전달은 검증했지만 기기의 실제 렌더링은 직접 관찰하지 않았다.
+2. 최초 실사용 채점 뒤 기존 DB에 답안·점수·진단이 저장되는지 확인한다.
+   다음날 Queue 갱신은 시간이 지나야 확인할 수 있다.
 3. WordPress 원문과 미확정 주석은 이후 사용자 또는 다른 LLM이 검토한다.
    검토 전에는 canonical 채점 기준으로 승격하지 않는다.
 
