@@ -48,7 +48,8 @@ python3 scripts/author_topic_learning_synthesis.py build \
 출처 패킷을 현재 Master와 다시 비교한다. 원문·연결·버전이 달라졌거나
 패킷이 편집됐으면 중단한다. 각 인용문은 실제 원문 부분 문자열이어야 하며
 URL·버전·해시도 일치해야 한다. 신규 초안은 revision=1, 개정은 패킷의 지정
-revision을 사용하며 채점 연결은 비워 둔다. 개정 제한과 재승인은 7절을 따른다.
+revision을 사용한다. 매핑은 기본적으로 비워 두며 8~9절 계약으로 작성한다.
+개정 제한과 재승인은 7절을 따른다.
 
 정확히 같은 지식 필드만 합쳐 근거 목록을 보존하고 ID 참조를 다시 연결한다.
 원문 충돌에 연결된 항목은 자동 병합하지 않는다. 병합 후 선수관계 순환이나
@@ -180,7 +181,8 @@ source reference 변경을 대신하지 않는다. 기존 파일이 없거나 �
 ## 8. 기존 평가 매핑 이관
 
 prepare는 해시가 고정된 이전 문서의 grading_links를 previous_grading_links로
-제공한다. 새 문서는 모든 기존 link_id를 유지해야 한다. 누락·새 ID 삽입은 거부한다.
+제공한다. 새 문서는 모든 기존 link_id를 유지해야 한다. 누락은 거부하며,
+새 ID는 9절의 명시적으로 준비된 canonical target이 있을 때만 허용한다.
 기존 ID의 target/knowledge_ids/section_ids 변경은 허용하지만 현재 canonical의
 해시·record ID와 문서 참조 검증을 통과해야 한다. 지식 중복 병합 시 참조도 갱신한다.
 
@@ -199,4 +201,37 @@ LLM의 학습 본문 승인만으로 매핑을 활성화하거나 사용 중단�
 유효해야 하며, 대상 ID가 없어졌을 때 자동 추측으로 이관하지 않는다.
 
 이는 진단→학습 절 안내의 개정 계약이다. 채점 기준이나 배점을 수정하지 않으며
-최초 매핑 생성·새 매핑 ID 추가 UI는 이번 구현 범위가 아니다.
+최초 매핑 생성·새 매핑 ID 추가는 아래 CLI 절차를 따른다.
+
+## 9. 새 요구사항→학습 절 매핑 작성
+
+실제 콘텐츠는 보류하고 합성 fixture로 검증한 인터페이스다.
+
+```bash
+python3 scripts/author_topic_learning_synthesis.py prepare \
+  --topic-id <topic_id> --run-id <new_run> --include-mapping-targets
+python3 scripts/author_topic_learning_synthesis.py add-mapping \
+  --topic-id <topic_id> --run-id <new_run> --authored <authored.json> \
+  --link-id <new_link_id> --requirement-id <canonical_requirement_id> \
+  --knowledge-id <knowledge_id> --section-id <section_id>
+```
+
+sources.json의 mapping_targets는 현재 Master가 참조하는 question_demand_axes의
+requirement_id, requirement_text, source_file, 파일 해시를 제공한다. 해당 파일이
+없으면 빈 목록이며 이름·문장 유사도로 ID를 추측하지 않는다. 중복 ID·잘못된
+Topic·빈 요구사항은 거부한다. 기존 prepare의 기본 동작은 유지된다.
+
+add-mapping은 정확한 ID를 선택해 authored.mapping.json을 별도로 저장한다.
+입력은 수정하지 않고 기존 출력이 있으면 덮어쓰지 않는다. knowledge-id와
+section-id는 반복 지정할 수 있으며 선택한 절에 해당 지식이 실제 연결되어야
+한다. 여러 매핑은 이 파일의 grading_links에 추가하거나 새 run에서 작성한다.
+직접 편집해도 같은 canonical target·참조·build 검증을 적용한다.
+
+이후 build의 --authored에 authored.mapping.json을 지정하고 기존 review-template,
+preview, apply 절차를 따른다. 신규 매핑은 mapping_changes에서 added로 표시되며
+모든 승인은 draft로 초기화된다. 별도 사람이 human_verified로 검토하기 전에는
+Feedback에서 사용하지 않는다. 학습 콘텐츠의 LLM 승인과 채점 규칙은 변경하지 않는다.
+
+준비 후 canonical 파일이 바뀌면 packet 재비교에서 차단하고 새 run을 요구한다.
+지원하는 신규 매핑은 현재 Feedback 소비자가 사용하는 question_demand_axes에
+한정한다. 다른 canonical 종류의 기존 매핑 이관은 앞 절의 기존 계약을 유지한다.

@@ -249,6 +249,10 @@ Topic Pack 승인 절차에는 적용하지 않습니다. [승인 계약](docs/t
 있고, 매핑의 재활성화·사용 중단에는 별도 사람 검토가 필요합니다.
 현재 실제 Topic 내용 검토·확대는 보류하고 구조 검증을 진행합니다.
 
+새 진단→학습 매핑은 `prepare --include-mapping-targets`로 현재 Topic의 정식
+요구사항 목록을 고정한 후 `add-mapping`으로 초안을 작성합니다. 출처 없는 ID를
+추측하지 않으며, 매핑 활성화는 별도 사람 검토를 거칩니다.
+
 1. 최상위 README에는 현재 사용자 관점의 개요와 진입 경로만 둡니다. 단계별 작업일지와 상세 정책은 `docs/` 또는 검증 report에 둡니다.
 2. A/B/C/D/E, deterministic primary, 기존 Golden tests와 release gates를 임의 변경하지 않습니다.
 3. Topic Pack은 `docs/topic_pack_workflow.md`의 승인·해시·검증 흐름을 따릅니다. Generated bank를 직접 수정하지 않습니다.

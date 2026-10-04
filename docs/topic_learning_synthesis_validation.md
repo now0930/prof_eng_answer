@@ -35,6 +35,19 @@ human_verified 상태를 부여하지 않으며 원문·채점 기준 승격과 
 초기 Stage 8에서는 전체 회귀가 실패했으나 아래 후속 수정으로 pytest가 통과했다.
 운영 배포·Master 후보 연결은 하지 않았다.
 
+## 새 매핑 작성 인터페이스 검증 (2026-10-05)
+
+실제 Topic 내용은 변경하지 않았다. 합성 자료로 canonical 요구사항 목록 준비,
+정확한 ID 선택, 신규 draft 생성, build→별도 검토→apply→Diagnosis 연결과
+Grading 불변을 검증했다. 사람 미검토 매핑은 추천되지 않음을 확인했다.
+
+전체 pytest **792 passed / 기존 warning 1개**. 신규 회귀는 알 수 없는 ID,
+관계없는 지식/절, 중복 link ID, canonical 변경·위조, 잘못된 Topic, 중복 요구사항,
+빈 요구사항, canonical 부재, 수동 JSON 우회 거부 및 CLI 출력 덮어쓰기 차단을 포함한다.
+
+로그: `/tmp/new_mapping_full.log`, `/tmp/new_mapping_gate.log`,
+`/tmp/new_mapping_release.log`. live smoke·opt-in 10회 재현성 검사는 실행하지 않았다.
+
 ## 평가 매핑 보존 개정 검증 (2026-10-05)
 
 기존 매핑을 가진 개정 후보의 ID 보존·변경 전후 비교·모든 승인 초기화와
