@@ -1,5 +1,28 @@
 # Topic 학습 구성 Stage 8 검증 결과
 
+## 최종 전달 대상과 다음 작업
+
+전달 대상은 `https://github.com/now0930/prof_eng_answer.git`의
+`codex/record-master-expansion-deployment-20261005` 브랜치다. workspace의 origin은
+로컬 중계 저장소이므로 실제 GitHub URL을 확인한 뒤 명시적으로 push한다.
+GitHub에서 확인한 기준 커밋 `fb5f6b7`은 현재 작업의 조상이므로 force push나
+main 병합 없이 작업 브랜치를 갱신할 수 있다. 실제 push 결과는 작업 응답에서
+원격 SHA 일치 여부와 함께 보고한다.
+
+이번 8단계 완료 범위는 초안 작성·검증·View·격리된 통합 검증이다.
+다음 개발 범위는 **검토 결과를 받아 학습 후보를 Master에 연결하는 적용 경로**다.
+현재 CLI에는 prepare/build만 있으며 실제 적용 명령은 없다.
+
+1. 검토 결정에 후보 해시·검토자·시각·지식/학습 경로별 상태를 고정한다.
+2. 변경된 후보에 이전 승인을 재사용하지 못하도록 검증한다.
+3. Master revision·before hash·source hash를 다시 검사하는 미리보기를 제공한다.
+4. 별도 명시적 적용으로 학습자료와 Master 참조만 변경하고 실패 시 복구한다.
+5. 적용 전후 채점 payload 불변과 복습 표시를 검증한다.
+
+위 적용 기능은 이번에 추가하지 않았다. 실제 인간 검토 기록이 없는 자료에
+human_verified 상태를 부여하지 않으며 원문·채점 기준 승격과 구분한다.
+운영 재시작과 GitHub main 병합도 이번 전달에 포함하지 않는다.
+
 검증일: 2026-10-05 (Asia/Seoul). 구현·대표 Topic 검증은 Stage 7까지 완료했다.
 초기 Stage 8에서는 전체 회귀가 실패했으나 아래 후속 수정으로 pytest가 통과했다.
 운영 배포·Master 후보 연결은 하지 않았다.
